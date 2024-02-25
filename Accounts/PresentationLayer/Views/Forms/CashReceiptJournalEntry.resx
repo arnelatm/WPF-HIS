@@ -118,16 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <metadata name="StoreCaptions1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>170, 17</value>
+    <value>146, 17</value>
   </metadata>
   <metadata name="TranslatorDAC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>327, 17</value>
+    <value>281, 17</value>
   </metadata>
   <metadata name="AppDataDAC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>478, 17</value>
+    <value>411, 17</value>
   </metadata>
   <metadata name="MyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>621, 17</value>
+    <value>535, 17</value>
   </metadata>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="floFullEntryArea.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
@@ -229,13 +229,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblInvoiceNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>623, 118</value>
+    <value>614, 118</value>
   </data>
   <data name="lblInvoiceNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblInvoiceNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 27</value>
+    <value>54, 27</value>
   </data>
   <data name="lblInvoiceNo.TabIndex" type="System.Int32, mscorlib">
     <value>254</value>
@@ -259,13 +259,13 @@
     <value>3</value>
   </data>
   <data name="txtORNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>694, 118</value>
+    <value>670, 118</value>
   </data>
   <data name="txtORNumber.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtORNumber.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 26</value>
+    <value>148, 23</value>
   </data>
   <data name="txtORNumber.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -295,7 +295,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="dtpCheckDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>118, 27</value>
+    <value>118, 23</value>
   </data>
   <data name="dtpCheckDate.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -541,13 +541,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblTransactionDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>649, 1</value>
+    <value>635, 1</value>
   </data>
   <data name="lblTransactionDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblTransactionDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>43, 27</value>
+    <value>33, 27</value>
   </data>
   <data name="lblTransactionDate.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -622,7 +622,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtReferenceNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 26</value>
+    <value>148, 23</value>
   </data>
   <data name="txtReferenceNo.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -685,7 +685,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="TxtIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>78, 26</value>
+    <value>78, 23</value>
   </data>
   <data name="TxtIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -715,7 +715,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtJournalCode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 26</value>
+    <value>25, 23</value>
   </data>
   <data name="txtJournalCode.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -742,13 +742,13 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="dtpTransactionDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>694, 1</value>
+    <value>670, 1</value>
   </data>
   <data name="dtpTransactionDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="dtpTransactionDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>118, 27</value>
+    <value>118, 23</value>
   </data>
   <data name="dtpTransactionDate.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -853,7 +853,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblAmount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 28</value>
+    <value>87, 28</value>
   </data>
   <data name="lblAmount.TabIndex" type="System.Int32, mscorlib">
     <value>264</value>
@@ -877,13 +877,13 @@
     <value>22</value>
   </data>
   <data name="txtAmount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>694, 58</value>
+    <value>670, 58</value>
   </data>
   <data name="txtAmount.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtAmount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 26</value>
+    <value>148, 23</value>
   </data>
   <data name="txtAmount.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -907,13 +907,13 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtVatNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>694, 88</value>
+    <value>670, 88</value>
   </data>
   <data name="txtVatNumber.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtVatNumber.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 26</value>
+    <value>148, 23</value>
   </data>
   <data name="txtVatNumber.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -946,13 +946,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblVatNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>606, 88</value>
+    <value>602, 88</value>
   </data>
   <data name="lblVatNumber.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblVatNumber.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 28</value>
+    <value>66, 28</value>
   </data>
   <data name="lblVatNumber.TabIndex" type="System.Int32, mscorlib">
     <value>282</value>
@@ -985,7 +985,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtCheckNumber.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 26</value>
+    <value>105, 23</value>
   </data>
   <data name="txtCheckNumber.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -1081,7 +1081,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="txtPayorName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>27, 26</value>
+    <value>27, 23</value>
   </data>
   <data name="txtPayorName.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1171,7 +1171,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtApplied.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 26</value>
+    <value>92, 23</value>
   </data>
   <data name="txtApplied.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1198,7 +1198,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblUnapplied.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 29</value>
+    <value>1, 26</value>
   </data>
   <data name="lblUnapplied.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1231,13 +1231,13 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtUnapplied.Location" type="System.Drawing.Point, System.Drawing">
-    <value>134, 29</value>
+    <value>134, 26</value>
   </data>
   <data name="txtUnapplied.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtUnapplied.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 26</value>
+    <value>92, 23</value>
   </data>
   <data name="txtUnapplied.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1264,7 +1264,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblDiscountTaken.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 57</value>
+    <value>1, 51</value>
   </data>
   <data name="lblDiscountTaken.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1297,13 +1297,13 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtDiscountTaken.Location" type="System.Drawing.Point, System.Drawing">
-    <value>134, 57</value>
+    <value>134, 51</value>
   </data>
   <data name="txtDiscountTaken.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtDiscountTaken.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 26</value>
+    <value>92, 23</value>
   </data>
   <data name="txtDiscountTaken.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1330,7 +1330,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblVatAmount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 85</value>
+    <value>1, 76</value>
   </data>
   <data name="lblVatAmount.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1363,13 +1363,13 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtVatAmount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>134, 85</value>
+    <value>134, 76</value>
   </data>
   <data name="txtVatAmount.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtVatAmount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 26</value>
+    <value>92, 23</value>
   </data>
   <data name="txtVatAmount.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1396,7 +1396,7 @@
     <value>Arial Narrow, 10.2pt</value>
   </data>
   <data name="chkCancelled.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 116</value>
+    <value>4, 104</value>
   </data>
   <data name="chkCancelled.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1432,7 +1432,7 @@
     <value>Arial Narrow, 10.2pt</value>
   </data>
   <data name="chkPosted.Location" type="System.Drawing.Point, System.Drawing">
-    <value>126, 116</value>
+    <value>126, 104</value>
   </data>
   <data name="chkPosted.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1468,7 +1468,7 @@
     <value>Arial Narrow, 10.2pt</value>
   </data>
   <data name="chkApproved.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 145</value>
+    <value>4, 133</value>
   </data>
   <data name="chkApproved.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1504,7 +1504,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblDateCreated.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 171</value>
+    <value>1, 159</value>
   </data>
   <data name="lblDateCreated.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1537,13 +1537,13 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtDateCreated.Location" type="System.Drawing.Point, System.Drawing">
-    <value>93, 171</value>
+    <value>93, 159</value>
   </data>
   <data name="txtDateCreated.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtDateCreated.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 26</value>
+    <value>133, 23</value>
   </data>
   <data name="txtDateCreated.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -1810,7 +1810,7 @@
     <value>125</value>
   </data>
   <metadata name="bsJournalItems.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>931, 17</value>
+    <value>798, 17</value>
   </metadata>
   <data name="DataGridViewJournalItems.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Left</value>
@@ -1822,7 +1822,7 @@
     <value>51</value>
   </data>
   <data name="DataGridViewJournalItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1090, 300</value>
+    <value>1090, 285</value>
   </data>
   <data name="DataGridViewJournalItems.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1870,7 +1870,7 @@
     <value>6</value>
   </data>
   <data name="dgvTransactionDate.Width" type="System.Int32, mscorlib">
-    <value>96</value>
+    <value>86</value>
   </data>
   <metadata name="dgvJournalCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1882,7 +1882,7 @@
     <value>6</value>
   </data>
   <data name="dgvJournalCode.Width" type="System.Int32, mscorlib">
-    <value>78</value>
+    <value>68</value>
   </data>
   <metadata name="dgvJournalIdNoAp.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1894,7 +1894,7 @@
     <value>6</value>
   </data>
   <data name="dgvJournalIdNoAp.Width" type="System.Int32, mscorlib">
-    <value>86</value>
+    <value>75</value>
   </data>
   <metadata name="dgvPreviousBalance.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1944,9 +1944,6 @@
   <data name="AccountIdNoDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="AccountIdNoDataGridViewTextBoxColumn.Width" type="System.Int32, mscorlib">
-    <value>125</value>
-  </data>
   <data name="IdNoDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
     <value>IdNo</value>
   </data>
@@ -1960,7 +1957,7 @@
     <value>125</value>
   </data>
   <metadata name="bsCsrOiItems.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>785, 17</value>
+    <value>675, 17</value>
   </metadata>
   <data name="DataGridViewCsrOiItems.Location" type="System.Drawing.Point, System.Drawing">
     <value>1099, 3</value>
@@ -1993,7 +1990,7 @@
     <value>3, 228</value>
   </data>
   <data name="floPurchaseJournalItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1104, 310</value>
+    <value>1104, 296</value>
   </data>
   <data name="floPurchaseJournalItems.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -2038,7 +2035,7 @@
     <value>0</value>
   </data>
   <data name="floFooter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 544</value>
+    <value>3, 530</value>
   </data>
   <data name="floFooter.Size" type="System.Drawing.Size, System.Drawing">
     <value>159, 31</value>
@@ -2065,7 +2062,7 @@
     <value>Tahoma, 8pt</value>
   </data>
   <data name="btnAutoApply.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 544</value>
+    <value>168, 530</value>
   </data>
   <data name="btnAutoApply.Size" type="System.Drawing.Size, System.Drawing">
     <value>150, 31</value>
@@ -2092,13 +2089,13 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtTotalDebits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>322, 542</value>
+    <value>322, 528</value>
   </data>
   <data name="txtTotalDebits.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtTotalDebits.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 26</value>
+    <value>100, 23</value>
   </data>
   <data name="txtTotalDebits.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2122,13 +2119,13 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtTotalCredits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>424, 542</value>
+    <value>424, 528</value>
   </data>
   <data name="txtTotalCredits.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtTotalCredits.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 26</value>
+    <value>100, 23</value>
   </data>
   <data name="txtTotalCredits.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
