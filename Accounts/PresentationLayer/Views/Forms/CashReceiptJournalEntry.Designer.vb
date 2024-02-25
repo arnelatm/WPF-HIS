@@ -322,7 +322,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayorType.DataValue = Nothing
             Me.cboPayorType.DefaultValue = "0"
             Me.cboPayorType.DisplayMember = "Name"
-            Me.cboPayorType.DropDownHeight = 23
+            Me.cboPayorType.DropDownHeight = 21
             Me.cboPayorType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboPayorType.Editable = True
             Me.cboPayorType.EditingMode = False

@@ -318,6 +318,7 @@ Public Class DgvFooter
     ''' </remarks>
     Private Sub OnParentRowsAdded(ByVal sender As Object, ByVal e As DataGridViewRowsAddedEventArgs) Handles _parentDgv.RowsAdded
 
+
         If _parentDgv.Rows.Count < 1 Then Exit Sub
 
         Dim rowY As Integer = (_parentDgv.Rows.Count + 1) * _parentDgv.Rows(0).Height
@@ -325,69 +326,66 @@ Public Class DgvFooter
 
         If _parentDgv.Rows.Count = 1 Then
             SetColumns(_parentDgv)
-            'Rows.Add()
         End If
 
-        If rowY >= footY Then ' And Not _killParentRowAddedEvent Then
-            '_killParentRowAddedEvent = True
+        If _parentDgv.DataSource Is Nothing Then
 
-            'For Each dgvr As DataGridViewRow In _parentDgv.Rows
-            '    If dgvr.Tag Is Nothing Then Continue For
-            '    If dgvr.Tag.ToString = "spacer" Then _parentDgv.Rows.Remove(dgvr)
-            'Next
+            If _parentDgv.Rows.Count = 1 Then
+                Rows.Add()
+            End If
 
+            If rowY >= footY And Not _killParentRowAddedEvent Then
+                _killParentRowAddedEvent = True
 
-            'If _parentDgv.CurrentRow IsNot Nothing Then
-            '    Dim nIndex = _parentDgv.CurrentRow.Index
-            '    If _parentDgv.DataSource IsNot Nothing Then
-            '        If _parentDgv.DataSource.[GetType]() Is GetType(BindingSource) Then
-            '            'AssignEvent()
-            '            Dim myBindingSource = CType(_parentDgv.DataSource, BindingSource)
-            '            Dim nDataCount = _parentDgv.DataSource().Count()
-            '            If _parentDgv.CurrentRow.Index + 1 = _parentDgv.NewRowIndex Then
-            '                Try
-            '                    myBindingSource.AddNew()
-            '                    ' adding a new row to the bindingsource adds a new empty row at the end with null values
-            '                    ' therefore there is a need to remove that row because it causes errors when moving to that empty row
-            '                    myBindingSource.RemoveAt(myBindingSource.Count - 1)
-            '                    _parentDgv.FirstDisplayedScrollingRowIndex = _parentDgv.FirstDisplayedScrollingRowIndex + 1
-            '                Catch
+                For Each dgvr As DataGridViewRow In _parentDgv.Rows
+                    If dgvr.Tag Is Nothing Then Continue For
+                    If dgvr.Tag.ToString = "spacer" Then _parentDgv.Rows.Remove(dgvr)
+                Next
 
-            '                End Try
+                _parentDgv.Rows.Add(SpacerRow)
+
+                _killParentRowAddedEvent = True
+
+                For Each dgvr As DataGridViewRow In _parentDgv.Rows
+                    If dgvr.Tag Is Nothing Then Continue For
+                    If dgvr.Tag.ToString = "spacer" Then _parentDgv.Rows.Remove(dgvr)
+                Next
+
+                _parentDgv.FirstDisplayedScrollingRowIndex = _parentDgv.Rows.Count - 2
+
+            End If
+
+        Else
+
+            If rowY + _parentDgv.ColumnHeadersHeight >= footY Then
+                _parentDgv.FirstDisplayedScrollingRowIndex = _parentDgv.Rows.Count - 1
+            End If
+
+            'If rowY >= footY Then
+            '    If _parentDgv.CurrentRow IsNot Nothing Then
+            '        Dim nIndex = _parentDgv.CurrentRow.Index
+            '        If _parentDgv.DataSource IsNot Nothing Then
+            '            If _parentDgv.DataSource.[GetType]() Is GetType(BindingSource) Then
+            '                'AssignEvent()
+            '                Dim myBindingSource = CType(_parentDgv.DataSource, BindingSource)
+            '                Dim nDataCount = _parentDgv.DataSource().Count()
+            '                If _parentDgv.CurrentRow.Index + 1 = _parentDgv.NewRowIndex Then
+            '                    Try
+            '                        myBindingSource.AddNew()
+            '                        ' adding a new row to the bindingsource adds a new empty row at the end with null values
+            '                        ' therefore there is a need to remove that row because it causes errors when moving to that empty row
+            '                        myBindingSource.RemoveAt(myBindingSource.Count - 1)
+            '                        _parentDgv.FirstDisplayedScrollingRowIndex = _parentDgv.FirstDisplayedScrollingRowIndex + 1
+            '                    Catch
+
+            '                    End Try
+            '                End If
             '            End If
             '        End If
             '    End If
             'End If
-
-            _parentDgv.FirstDisplayedScrollingRowIndex = _parentDgv.Rows.Count - 1
-
-            '_killParentRowAddedEvent = False
+            CheckParentVScrollBar()
         End If
-
-        'If rowY >= footY Then
-        '    If _parentDgv.CurrentRow IsNot Nothing Then
-        '        Dim nIndex = _parentDgv.CurrentRow.Index
-        '        If _parentDgv.DataSource IsNot Nothing Then
-        '            If _parentDgv.DataSource.[GetType]() Is GetType(BindingSource) Then
-        '                'AssignEvent()
-        '                Dim myBindingSource = CType(_parentDgv.DataSource, BindingSource)
-        '                Dim nDataCount = _parentDgv.DataSource().Count()
-        '                If _parentDgv.CurrentRow.Index + 1 = _parentDgv.NewRowIndex Then
-        '                    Try
-        '                        myBindingSource.AddNew()
-        '                        ' adding a new row to the bindingsource adds a new empty row at the end with null values
-        '                        ' therefore there is a need to remove that row because it causes errors when moving to that empty row
-        '                        myBindingSource.RemoveAt(myBindingSource.Count - 1)
-        '                        _parentDgv.FirstDisplayedScrollingRowIndex = _parentDgv.FirstDisplayedScrollingRowIndex + 1
-        '                    Catch
-
-        '                    End Try
-        '                End If
-        '            End If
-        '        End If
-        '    End If
-        'End If
-        CheckParentVScrollBar()
     End Sub
 
     ''' <summary>
