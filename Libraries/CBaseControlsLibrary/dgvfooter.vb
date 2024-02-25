@@ -328,9 +328,8 @@ Public Class DgvFooter
             'Rows.Add()
         End If
 
-        If rowY >= footY And Not _killParentRowAddedEvent Then
-
-            _killParentRowAddedEvent = True
+        If rowY >= footY Then ' And Not _killParentRowAddedEvent Then
+            '_killParentRowAddedEvent = True
 
             'For Each dgvr As DataGridViewRow In _parentDgv.Rows
             '    If dgvr.Tag Is Nothing Then Continue For
@@ -362,7 +361,7 @@ Public Class DgvFooter
 
             _parentDgv.FirstDisplayedScrollingRowIndex = _parentDgv.Rows.Count - 1
 
-            _killParentRowAddedEvent = False
+            '_killParentRowAddedEvent = False
         End If
 
         'If rowY >= footY Then

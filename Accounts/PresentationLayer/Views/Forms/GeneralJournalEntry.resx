@@ -1115,7 +1115,7 @@
     <value>51</value>
   </data>
   <data name="DataGridViewJournalItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>966, 258</value>
+    <value>966, 255</value>
   </data>
   <data name="DataGridViewJournalItems.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1136,7 +1136,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtTotalCredits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 403</value>
+    <value>1, 395</value>
   </data>
   <data name="txtTotalCredits.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1166,7 +1166,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtTotalDebits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>103, 403</value>
+    <value>103, 395</value>
   </data>
   <data name="txtTotalDebits.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
