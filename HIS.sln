@@ -143,6 +143,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UsefulQueries", "UsefulQuer
 		Find all object references for a specific object.sql = Find all object references for a specific object.sql
 		Find all objects with a specific name.sql = Find all objects with a specific name.sql
 		Find All Tables without Primary KEy.sql = Find All Tables without Primary KEy.sql
+		Find all tables with a specific column name.sql = Find all tables with a specific column name.sql
 		Find duplicate fields in a table.sql = Find duplicate fields in a table.sql
 		FindDuplicateValuesInACustomObject = FindDuplicateValuesInACustomObject
 		FindItemInComboboxControlDataSource = FindItemInComboboxControlDataSource

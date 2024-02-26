@@ -1,12 +1,16 @@
-﻿CREATE VIEW dbo.LatestApproval_View
+﻿
+
+CREATE VIEW [dbo].[LatestApproval_View]
 AS
-SELECT a.IdNo, a.EmployeeLeaveApprovalIdNo, a.EmployeeLeaveIdNo, a.Status AS Status, e.DateCreated, e.ApprovedBy
-FROM     dbo.EmployeeLeaveApprovalItem AS a INNER JOIN
-                  dbo.EmployeeLeaveApproval AS e ON a.EmployeeLeaveApprovalIdNo = e.IdNo INNER JOIN
-                      (SELECT b.EmployeeLeaveIdNo, MAX(c.DateCreated) AS MaxDate
-                       FROM      dbo.EmployeeLeaveApprovalItem AS b INNER JOIN
-                                         dbo.EmployeeLeaveApproval AS c ON b.EmployeeLeaveApprovalIdNo = c.IdNo
-                       GROUP BY b.EmployeeLeaveIdNo) AS d ON a.EmployeeLeaveIdNo = d.EmployeeLeaveIdNo AND e.DateCreated = d.MaxDate
+SELECT	a.IdNo, a.EmployeeLeaveApprovalIdNo, a.EmployeeLeaveIdNo, a.Status AS Status, a.Status AS 'LeaveStatus',e.DateCreated, e.ApprovedBy
+FROM	dbo.EmployeeLeaveApprovalItem AS a 
+		INNER JOIN dbo.EmployeeLeaveApproval AS e 
+		ON a.EmployeeLeaveApprovalIdNo = e.IdNo 
+		INNER JOIN (SELECT b.EmployeeLeaveIdNo, MAX(c.DateCreated) AS MaxDate
+                     FROM  dbo.EmployeeLeaveApprovalItem AS b 
+					 INNER JOIN dbo.EmployeeLeaveApproval AS c 
+					 ON b.EmployeeLeaveApprovalIdNo = c.IdNo 
+                     GROUP BY b.EmployeeLeaveIdNo) AS d ON a.EmployeeLeaveIdNo = d.EmployeeLeaveIdNo AND e.DateCreated = d.MaxDate
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'LatestApproval_View';
 

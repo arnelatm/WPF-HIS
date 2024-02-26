@@ -7,10 +7,13 @@
     [Reason]        VARCHAR (50)   NOT NULL,
     [DaysEarned]    DECIMAL (9, 4) CONSTRAINT [DF_EmployeeLeaveEarned_DaysEarned] DEFAULT ((0)) NOT NULL,
     [EnteredBy]     INT            NOT NULL,
-    [DateCreated]   DATETIME       CONSTRAINT [DF_EmployeeLeaveEarned_DateCreated] DEFAULT (getdate()) NULL,
+    [Posted]        BIT            CONSTRAINT [DF_EmployeeLeaveEarned_Posted] DEFAULT ((0)) NOT NULL,
+    [DateCreated]   DATE           CONSTRAINT [DF_EmployeeLeaveEarned_DateCreated] DEFAULT (getdate()) NULL,
     [DateTimeStamp] ROWVERSION     NOT NULL,
     CONSTRAINT [PK_EmployeeLeaveEarned] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 

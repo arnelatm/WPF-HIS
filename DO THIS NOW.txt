@@ -1,4 +1,11 @@
-﻿Revise Statement of AP to include enddate in the report, it currently is not adding the end date in the report.
+﻿Check field LatestApproval_VIew.LeaveStatus for changiing to Status
+Check field EmployeeLeave.LeaveReason for changing to Reason
+Check for EmployeeLeave_View.LeaveDate - can be removed?
+Check for EmployeeLeave_View.LeaveStatus - change to Status
+
+
+
+Revise Statement of AP to include enddate in the report, it currently is not adding the end date in the report.
 Check for IsNot Nothing or 
 Edit 'MsgNoAccessToSecurity' parameter to securityKey from securityMessage
 
@@ -9,10 +16,7 @@ add rptForTheDay Message
 Check error for absences entry in payroll (sample employee with only 3 days present, system is 
 automatically entering 4 days in days off).
 
-Edit size of grid on general journal entry problem on last line not being accepted line to small
-
 Reprocessing payroll for employee for newly added in attendance not working right away need to save and close
 and reprocess to work.
 
 
-EDIT CASH DISBURSEMENT TO UPDATE PAYEE NAME (DOES NOT UPDATE FOR AP TRANSACTION)

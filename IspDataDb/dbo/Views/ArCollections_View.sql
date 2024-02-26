@@ -1,6 +1,7 @@
 ﻿
+
 CREATE VIEW [dbo].[ArCollections_View] as
-SELECT TOP (1000) a.[IdNo]
+SELECT a.[IdNo]
       ,[JournalCode]
       ,[JournalIdNo]
       ,[JournalItemIdNo]

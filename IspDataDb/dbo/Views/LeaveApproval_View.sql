@@ -1,14 +1,34 @@
-﻿CREATE VIEW dbo.LeaveApproval_View
+
+CREATE VIEW [dbo].[LeaveApproval_View]
 AS
-SELECT dbo.EmployeeLeave.EmployeeIdNo, dbo.EmployeeLeave.LeaveIdNo, dbo.EmployeeLeave.StartDate, dbo.EmployeeLeave.EndDate, dbo.EmployeeLeave.FullDay, dbo.EmployeeLeave.EnteredBy, dbo.EmployeeLeave.Reason, 
-                  dbo.EmployeeLeave.DateCreated, dbo.EmployeeLeaveApproval.ApprovedBy, ISNULL(dbo.EmployeeLeaveApprovalItem.Status, '0') AS Status, dbo.EmployeeLeaveApprovalItem.ApprovalNote, 
-                  dbo.EmployeeLeaveApproval.DateCreated AS ApprovalDate, dbo.Employee.SupervisorIdNo, dbo.EmployeeLeave.DateTimeStamp, dbo.EmployeeLeaveApprovalItem.EmployeeLeaveApprovalIdNo, 
-                  dbo.EmployeeLeaveApprovalItem.EmployeeLeaveIdNo, dbo.EmployeeLeaveApprovalItem.IdNo, dbo.[User].UserName AS ApprovedByName
-FROM     dbo.EmployeeLeaveApproval INNER JOIN
-                  dbo.[User] ON dbo.EmployeeLeaveApproval.ApprovedBy = dbo.[User].IdNo RIGHT OUTER JOIN
-                  dbo.EmployeeLeaveApprovalItem ON dbo.EmployeeLeaveApproval.IdNo = dbo.EmployeeLeaveApprovalItem.EmployeeLeaveApprovalIdNo LEFT OUTER JOIN
-                  dbo.EmployeeLeave LEFT OUTER JOIN
-                  dbo.Employee ON dbo.EmployeeLeave.EmployeeIdNo = dbo.Employee.IdNo ON dbo.EmployeeLeaveApprovalItem.EmployeeLeaveIdNo = dbo.EmployeeLeave.IdNo
+SELECT	dbo.EmployeeLeave.EmployeeIdNo, 
+		dbo.EmployeeLeave.LeaveIdNo, 
+		dbo.EmployeeLeave.StartDate, 
+		dbo.EmployeeLeave.EndDate, 
+		dbo.EmployeeLeave.FullDay, 
+		dbo.EmployeeLeave.EnteredBy, 
+		dbo.EmployeeLeave.Reason, 
+        dbo.EmployeeLeave.DateCreated, 
+		ISNULL(dbo.EmployeeLeaveApprovalItem.Status, '0') AS 'Status', 
+		ISNULL(dbo.EmployeeLeaveApprovalItem.Status, '0') AS 'LeaveStatus', 
+		dbo.EmployeeLeaveApprovalItem.ApprovalNote, 
+		dbo.Employee.SupervisorIdNo, 
+		dbo.EmployeeLeave.DateTimeStamp, 
+        dbo.EmployeeLeaveApprovalItem.EmployeeLeaveApprovalIdNo, 
+		dbo.EmployeeLeaveApprovalItem.EmployeeLeaveIdNo, 
+		dbo.EmployeeLeaveApprovalItem.IdNo, 
+		dbo.[User].UserName, 
+        dbo.EmployeeLeaveApproval.ApprovedBy, 
+		dbo.EmployeeLeaveApproval.DateCreated as 'DateApproved'
+FROM    dbo.EmployeeLeaveApproval RIGHT OUTER JOIN
+		dbo.EmployeeLeaveApprovalItem 
+		ON dbo.EmployeeLeaveApproval.IdNo = dbo.EmployeeLeaveApprovalItem.EmployeeLeaveApprovalIdNo 
+		LEFT OUTER JOIN dbo.EmployeeLeave 
+		ON dbo.EmployeeLeaveApprovalItem.EmployeeLeaveIdNo = dbo.EmployeeLeave.IdNo 
+		LEFT OUTER JOIN dbo.Employee 
+		ON dbo.EmployeeLeave.EmployeeIdNo = dbo.Employee.IdNo 
+		LEFT OUTER JOIN dbo.[User] 
+		ON dbo.EmployeeLeaveApproval.ApprovedBy = dbo.[User].IdNo
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 2, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'LeaveApproval_View';
 
@@ -21,7 +41,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[41] 4[33] 2[8] 3) )"
+         Configuration = "(H (1[71] 4[5] 2[8] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -89,10 +109,10 @@ Begin DesignProperties =
       Begin Tables = 
          Begin Table = "EmployeeLeaveApproval"
             Begin Extent = 
-               Top = 15
-               Left = 321
-               Bottom = 145
-               Right = 554
+               Top = 7
+               Left = 335
+               Bottom = 170
+               Right = 538
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -102,37 +122,37 @@ Begin DesignProperties =
                Top = 23
                Left = 6
                Bottom = 289
-               Right = 251
+               Right = 287
             End
             DisplayFlags = 280
             TopColumn = 0
          End
          Begin Table = "EmployeeLeave"
             Begin Extent = 
-               Top = 161
-               Left = 318
-               Bottom = 291
-               Right = 491
+               Top = 216
+               Left = 366
+               Bottom = 558
+               Right = 601
             End
             DisplayFlags = 280
-            TopColumn = 3
+            TopColumn = 0
          End
          Begin Table = "Employee"
             Begin Extent = 
-               Top = 178
-               Left = 561
-               Bottom = 308
-               Right = 759
+               Top = 193
+               Left = 756
+               Bottom = 448
+               Right = 954
             End
             DisplayFlags = 280
             TopColumn = 0
          End
          Begin Table = "User"
             Begin Extent = 
-               Top = 6
-               Left = 849
-               Bottom = 169
-               Right = 1072
+               Top = 0
+               Left = 633
+               Bottom = 163
+               Right = 856
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -158,7 +178,9 @@ Begin DesignProperties =
          GroupBy = 1350
          Filter = 1356
          Or = 1350
-', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'LeaveApproval_View';
+   ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'LeaveApproval_View';
+
+
 
 
 
@@ -166,7 +188,7 @@ Begin DesignProperties =
 
 
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'         Or = 1350
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'      Or = 1350
          Or = 1350
       End
    End
