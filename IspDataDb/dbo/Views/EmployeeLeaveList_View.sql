@@ -1,12 +1,31 @@
-CREATE VIEW dbo.EmployeeLeaveList_View
+﻿
+
+CREATE VIEW [dbo].[EmployeeLeaveList_View]
 AS
-SELECT        dbo.EmployeeLeave.EmployeeIdNo, dbo.EmployeeLeave.IdNo, dbo.EmployeeLeave.LeaveIdNo, dbo.EmployeeLeave.StartDate, dbo.EmployeeLeave.EndDate, dbo.EmployeeLeave.FullDay, dbo.EmployeeLeave.EnteredBy, 
-                         dbo.EmployeeLeave.Reason, dbo.EmployeeLeave.DateCreated, dbo.EmployeeLeaveApproval.ApprovedBy, dbo.EmployeeLeaveApprovalItem.Status AS Status, dbo.EmployeeLeaveApprovalItem.ApprovalNote, 
-                         dbo.EmployeeLeaveApproval.DateCreated AS LeaveStatusDate, dbo.Employee.SupervisorIdNo, dbo.EmployeeLeave.DateTimeStamp, dbo.EmployeeLeaveApprovalItem.EmployeeLeaveApprovalIdNo
-FROM            dbo.EmployeeLeave INNER JOIN
-                         dbo.Employee ON dbo.EmployeeLeave.EmployeeIdNo = dbo.Employee.IdNo LEFT OUTER JOIN
-                         dbo.EmployeeLeaveApprovalItem ON dbo.EmployeeLeave.IdNo = dbo.EmployeeLeaveApprovalItem.EmployeeLeaveIdNo LEFT OUTER JOIN
-                         dbo.EmployeeLeaveApproval ON dbo.EmployeeLeaveApprovalItem.EmployeeLeaveApprovalIdNo = dbo.EmployeeLeaveApproval.IdNo
+SELECT	dbo.EmployeeLeave.EmployeeIdNo, 
+		dbo.EmployeeLeave.IdNo, 
+		dbo.EmployeeLeave.LeaveIdNo, 
+		dbo.EmployeeLeave.StartDate, 
+		dbo.EmployeeLeave.EndDate, 
+		dbo.EmployeeLeave.FullDay, 
+		dbo.EmployeeLeave.EnteredBy, 
+        dbo.EmployeeLeave.Reason, 
+		dbo.EmployeeLeave.DateCreated, 
+		dbo.EmployeeLeaveApproval.ApprovedBy, 
+		dbo.EmployeeLeaveApprovalItem.Status, 
+		dbo.EmployeeLeaveApprovalItem.Status as 'LeaveStatus', 
+		dbo.EmployeeLeaveApprovalItem.ApprovalNote, 
+		dbo.EmployeeLeaveApproval.DateCreated AS LeaveStatusDate, 
+		dbo.Employee.SupervisorIdNo, 
+		dbo.EmployeeLeave.DateTimeStamp, 
+		dbo.EmployeeLeaveApprovalItem.EmployeeLeaveApprovalIdNo
+FROM    dbo.EmployeeLeave 
+		INNER JOIN dbo.Employee 
+		ON dbo.EmployeeLeave.EmployeeIdNo = dbo.Employee.IdNo 
+		LEFT OUTER JOIN dbo.EmployeeLeaveApprovalItem 
+		ON dbo.EmployeeLeave.IdNo = dbo.EmployeeLeaveApprovalItem.EmployeeLeaveIdNo 
+		LEFT OUTER JOIN dbo.EmployeeLeaveApproval 
+		ON dbo.EmployeeLeaveApprovalItem.EmployeeLeaveApprovalIdNo = dbo.EmployeeLeaveApproval.IdNo
 GO
 
 
@@ -21,7 +40,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
+         Configuration = "(H (1[50] 4[11] 2[20] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -92,10 +111,10 @@ Begin DesignProperties =
                Top = 6
                Left = 38
                Bottom = 325
-               Right = 211
+               Right = 291
             End
             DisplayFlags = 280
-            TopColumn = 0
+            TopColumn = 1
          End
          Begin Table = "Employee"
             Begin Extent = 
@@ -139,14 +158,14 @@ Begin DesignProperties =
       Begin ColumnWidths = 11
          Column = 1440
          Alias = 900
-         Table = 1170
+         Table = 1176
          Output = 720
          Append = 1400
          NewValue = 1170
-         SortType = 1350
-         SortOrder = 1410
+         SortType = 1356
+         SortOrder = 1416
          GroupBy = 1350
-         Filter = 1350
+         Filter = 1356
          Or = 1350
          Or = 1350
          Or = 1350
@@ -154,4 +173,6 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeaveList_View';
+
+
 

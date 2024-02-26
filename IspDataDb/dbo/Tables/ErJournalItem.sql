@@ -21,3 +21,10 @@
 
 
 
+
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_ErJournalItemAcIdNo]
+    ON [dbo].[ErJournalItem]([AccountIdNo] ASC);
+

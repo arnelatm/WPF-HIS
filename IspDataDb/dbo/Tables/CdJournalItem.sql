@@ -18,3 +18,10 @@
 
 
 
+
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_CdJournalItemAcIdNo]
+    ON [dbo].[CdJournalItem]([AccountIdNo] ASC);
+

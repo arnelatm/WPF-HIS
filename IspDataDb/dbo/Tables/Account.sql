@@ -7,6 +7,7 @@
     [Notes]              VARCHAR (255) NULL,
     [DetailAccount]      BIT           NULL,
     [AccountGroup]       CHAR (1)      NULL,
+    [AccountGroupNew]    CHAR (1)      NULL,
     [BYDebit]            MONEY         NULL,
     [BYCredit]           MONEY         NULL,
     [Debit]              MONEY         NULL,
@@ -29,6 +30,8 @@
     CONSTRAINT [IX_AccountName] UNIQUE NONCLUSTERED ([AccountName] ASC),
     CONSTRAINT [IX_AccountNameAra] UNIQUE NONCLUSTERED ([AccountNameAra] ASC)
 );
+
+
 
 
 

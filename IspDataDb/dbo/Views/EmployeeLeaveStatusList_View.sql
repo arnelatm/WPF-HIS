@@ -1,10 +1,28 @@
-﻿CREATE VIEW dbo.EmployeeLeaveApprovalList_View
+﻿
+
+CREATE VIEW [dbo].[EmployeeLeaveApprovalList_View]
 AS
-SELECT        b.IdNo, b.EnteredBy, b.LeaveIdNo, b.StartDate, b.EndDate, b.FullDay, a.Status, a.EmployeeLeaveApprovalIdNo, b.EmployeeIdNo, b.DateCreated, c.ApprovedBy, b.Reason, a.ApprovalNote, c.DateCreated AS ApprovalDate, 
-                         a.EmployeeLeaveIdNo
-FROM            dbo.EmployeeLeave AS b INNER JOIN
-                         dbo.EmployeeLeaveApprovalItem AS a ON b.IdNo = a.EmployeeLeaveIdNo INNER JOIN
-                         dbo.EmployeeLeaveApproval AS c ON a.EmployeeLeaveApprovalIdNo = c.IdNo
+SELECT  b.IdNo, 
+		b.EnteredBy, 
+		b.LeaveIdNo, 
+		b.StartDate, 
+		b.EndDate, 
+		b.FullDay, 
+		a.Status as 'LeaveStatus', 
+		a.Status, 
+		a.EmployeeLeaveApprovalIdNo, 
+		b.EmployeeIdNo, 
+		b.DateCreated as 'LeaveDate', 
+		c.ApprovedBy, 
+		b.Reason, 
+		a.ApprovalNote, 
+		c.DateCreated AS ApprovalDate, 
+		a.EmployeeLeaveIdNo
+FROM    dbo.EmployeeLeave AS b 
+		INNER JOIN dbo.EmployeeLeaveApprovalItem AS a 
+		ON b.IdNo = a.EmployeeLeaveIdNo 
+		INNER JOIN dbo.EmployeeLeaveApproval AS c 
+		ON a.EmployeeLeaveApprovalIdNo = c.IdNo
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeaveApprovalList_View';
 
