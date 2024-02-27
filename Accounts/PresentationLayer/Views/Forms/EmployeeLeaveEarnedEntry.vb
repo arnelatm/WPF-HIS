@@ -53,7 +53,7 @@ Public Class EmployeeLeaveEarnedEntry
         End Set
     End Property
 
-    Public Property EndDate As DateTime Implements IEmployeeLeaveEarnedView.EndDate
+    Public Property EndDate As Date? Implements IEmployeeLeaveEarnedView.EndDate
         Get
             Return dtpEndDate.Value
         End Get
@@ -80,7 +80,7 @@ Public Class EmployeeLeaveEarnedEntry
         End Set
     End Property
 
-    Public Property StartDate As DateTime Implements IEmployeeLeaveEarnedView.StartDate
+    Public Property StartDate As Date? Implements IEmployeeLeaveEarnedView.StartDate
         Get
             Return dtpStartDate.Value
         End Get

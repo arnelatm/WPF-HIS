@@ -161,7 +161,10 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgNoApprovedQtySpecified", "Approved quantity not specified for this request! Nothing to Approve.", "Error")
         Messaging.AddMessage("MsgNegativeValNotAllowed", "Negative values not allowed for field '<{fieldName}>'. See line number '<{lineNumber}>'. Please correct the error before saving.", "Error")
         Messaging.AddMessage("MsgMultiResultCBCFound", "Multiple results found on file, please manually select the record you want to transfer", "Error")
-        Messaging.AddMessage("MsgApplLvExceedAllowLv", "Sorry, the number of days applied exceeds the number of allowed leave days '<{noOfDaysAllowed}>' days", "error")
+        Messaging.AddMessage("MsgApplLvExceedAllowLv", "Sorry, the applied days of '<{noOfDaysApplied} day(s)>', exceeds the maximum allowed leave of '<{noOfDaysAllowed} days(s)>' for the leave '<{leaveName}>'.", "error")
+        Messaging.AddMessage("MsgOneTimeLeaveOnly", "Sorry, you have already used or have an existing applicaton for the leave '<{leaveName}>'. This leave can only be used once. See leave number '<{leaveNumber}>.'", "error")
+        Messaging.AddMessage("MsgValueMustBeLessThan", "Sorry the entered value in field '<{fieldName1} of {fieldValue1}>' must be less than '<{fieldName2} of {fieldValue2}>.'", "Error")
+        Messaging.AddMessage("MsgValueMustBeGreaterThan", "Sorry the entered value in field '<{fieldName1} of {fieldValue1}>' must be greater than '<{fieldName2} of {fieldValue2}>.'", "Error")
     End Sub
 
     'Public Shared Sub CreateEnums()

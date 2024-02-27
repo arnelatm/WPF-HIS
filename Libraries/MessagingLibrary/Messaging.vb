@@ -413,6 +413,15 @@ Public Class Messaging
     '    Return retValue
     'End Function
 
+    Public Shared Function IsArabic()
+        Dim textInformation As TextInfo = CultureInfo.CurrentCulture.TextInfo
+        If textInformation.IsRightToLeft Then
+            Return True
+        End If
+        Return False
+    End Function
+
+
 End Class
 
 Public Class WaitMessageParameters

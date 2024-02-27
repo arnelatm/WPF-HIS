@@ -47,7 +47,7 @@ Public Interface IBaseDao
 
     Function GetFieldType(tableName As String, fieldName As String) As Object
 
-    Function GetFieldValue(Of TType)(sqlStatement As String, tableName As String, condition As String) As TType
+    Function GetFieldValue(Of TType)(returnFieldName As String, tableName As String, condition As String) As TType
 
     Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String) As Object
 

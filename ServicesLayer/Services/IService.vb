@@ -31,7 +31,7 @@ Namespace Services
         Function GetFieldOnMaxField(searchFieldName As String, tableName As String, returnFieldName As String, Optional filter As String = Nothing) As Object
         Function GetFieldsWithIdNo(idNo As Object, tableName As String, fields As String, Optional primaryFieldName As String = Nothing) As Object
         Function GetFieldType(tableName As String, fieldName As String) As Object
-        Function GetFieldValue(Of TType)(ByVal sqlStatement As String, tableName As String, condition As String) As TType
+        Function GetFieldValue(Of TType)(ByVal returnFieldName As String, tableName As String, condition As String) As TType
         Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String) As Object
         Function GetIcIdNoWithName(groupCode As CodeGroupSelection, itemName As String) As Integer
         Function GetIcNameWithIdNo(groupCode As CodeGroupSelection, idNo As Int32) As String
