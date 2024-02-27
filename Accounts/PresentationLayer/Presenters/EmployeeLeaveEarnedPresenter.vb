@@ -92,7 +92,6 @@ Namespace PresentationLayer.Presenters
                 Messaging.ShowPmMessage(True, "MsgValueMustBeLessThan", {"fieldName1", "End Date", "fieldValue1", ed, "fieldName2", "employee released date or today's date", "fieldValue2", rd})
                 Return False
             End If
-            View.DaysEarned = ComputeDaysEarned(View.StartDate, View.EndDate)
             Return True
         End Function
 
