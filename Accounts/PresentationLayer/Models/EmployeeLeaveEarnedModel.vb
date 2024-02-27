@@ -9,12 +9,12 @@
         Public Property DateCreated As DateTime?
         Public Property DaysEarned As Decimal
         Public Property EmployeeIdNo As Int32
-        Public Property EndDate As DateTime
+        Public Property EndDate As Date?
         Public Property EnteredBy As Int32
         Public Property IdNo As Int32
         Public Property LeaveIdNo As Int16
         Public Property Reason As String
-        Public Property StartDate As Date
+        Public Property StartDate As Date?
         Public Property Posted As Boolean
 
 

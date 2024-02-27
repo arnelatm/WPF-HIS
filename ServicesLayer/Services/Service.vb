@@ -483,8 +483,8 @@ Namespace Services
             Return DataDao.GetFieldType(tableName, fieldName)
         End Function
 
-        Public Function GetFieldValue(Of TType)(sqlStatement As String, tableName As String, condition As String) As TType Implements IService.GetFieldValue
-            Return DataDao.GetFieldValue(Of TType)(sqlStatement, tableName, condition)
+        Public Function GetFieldValue(Of TType)(returnFieldName As String, tableName As String, condition As String) As TType Implements IService.GetFieldValue
+            Return DataDao.GetFieldValue(Of TType)(returnFieldName, tableName, condition)
         End Function
 
         Public Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String) As Object Implements IService.GetFieldWithIdNo

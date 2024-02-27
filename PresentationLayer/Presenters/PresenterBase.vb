@@ -661,9 +661,9 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         End Try
     End Function
 
-    Public Function GetFieldValue(Of TType)(sqlStatement As String, cTableName As String, condition As String) As TType
+    Public Function GetFieldValue(Of TType)(returnFieldName As String, cTableName As String, condition As String) As TType
         Try
-            Return Service.GetFieldValue(Of TType)(sqlStatement, cTableName, condition)
+            Return Service.GetFieldValue(Of TType)(returnFieldName, cTableName, condition)
         Catch ex As Exception
             Return Nothing
         End Try

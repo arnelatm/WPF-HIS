@@ -61,12 +61,12 @@ Namespace DataLayer.AdoNet
             .DateCreated = AATM.DataLayer.AdoNet.Extensions.AsNullableDateTime(reader("DateCreated")),
             .DaysEarned = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("DaysEarned")),
             .EmployeeIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("EmployeeIdNo")),
-            .EndDate = AATM.DataLayer.AdoNet.Extensions.AsDateTime(reader("EndDate")),
+            .EndDate = AATM.DataLayer.AdoNet.Extensions.AsNullableDate(reader("EndDate")),
             .EnteredBy = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("EnteredBy")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .LeaveIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("LeaveIdNo")),
             .Reason = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Reason")),
-            .StartDate = AATM.DataLayer.AdoNet.Extensions.AsDateTime(reader("StartDate"))
+            .StartDate = AATM.DataLayer.AdoNet.Extensions.AsNullableDate(reader("StartDate"))
             }
 
         Private Function Take(EmployeeLeaveEarned As EmployeeLeaveEarned) As Object()

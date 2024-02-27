@@ -10,6 +10,7 @@ Public Class EmployeeLeaveEarnedApprovalEntry
 
     Public Event ApprovalCheckedEvent(sender As Object) Implements IEmployeeLeaveEarnedApprovalView.ApprovalCheckedEvent
 
+
     Public Sub New()
         ' This call is required by the designer.
         InitializeComponent()

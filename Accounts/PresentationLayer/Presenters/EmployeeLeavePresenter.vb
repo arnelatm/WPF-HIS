@@ -1,8 +1,10 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
+Imports AATM.Common.BusinessLayer
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
+Imports CrystalDecisions.ReportAppServer.DataDefModel
 
 Namespace PresentationLayer.Presenters
 
@@ -165,7 +167,7 @@ Namespace PresentationLayer.Presenters
                                 Else
                                     MessageBox.Show("Sorry either this employee has already consumed the allotted leave days for this holiday or the applied days leave plus the existing leaves will exceed the allotted days for this holiday.")
                                 End If
-                                retValue = false
+                                retValue = False
                             End If
                         End If
                     End If
@@ -178,75 +180,98 @@ Namespace PresentationLayer.Presenters
 
         Private Function IsLeaveValid() As Boolean
             Dim retValue As Boolean = True
+            Dim noOfDaysApplied As Long = DateDiff(DateInterval.Day, View.StartDate, View.EndDate) + 1
             If NoOverlappingDates() Then
                 Dim leaveModel As LeaveModel = _leaveService.GetRecordByIdNo(Of LeaveModel)(View.LeaveIdNo)
-                Dim employeeLeaveCreditModel As EmployeeLeaveCreditModel
-                employeeLeaveCreditModel = _employeeLeaveCreditService.GetLeaveCredit(View.EmployeeIdNo, View.LeaveIdNo)
-                Dim noOfRequestedDays As Long = DateDiff(DateInterval.Day, View.StartDate, View.EndDate) + 1
-                Dim records As New List(Of EmployeeLeaveModel)
-                Dim noOfAppliedDays As Int16 = 0
-                If employeeLeaveCreditModel Is Nothing Then
-                    ' use default values
-                    Dim noOfDaysAllowed As Long = leaveModel.LeaveAllowed
-                    If RequestedLeaveDaysOk(noOfDaysAllowed, noOfRequestedDays) Then
-                        If leaveModel.LeaveCycle = LeaveCycleSelection.ResetsYearly Then
-                            ' check if no. of days for leave is not yet exceeded
-                            Dim leaveYear As Int16 = Year(View.StartDate)
-                            records = _employeeLeaveService.GetEmployeeLeaves(View.EmployeeIdNo, View.LeaveIdNo, "ActiveYear", Year(View.EndDate))
-                            For Each item As EmployeeLeaveModel In records
-                                noOfAppliedDays += DateDiff(DateInterval.Day, item.StartDate, item.EndDate) + 1
-                            Next
-                            If (noOfAppliedDays + noOfRequestedDays) > noOfDaysAllowed Then
-                                retValue = False
-                                MessageBox.Show("Sorry either this employee has already consumed the allotted leave days for this Leave or the applied days leave plus the existing leaves will exceed the allotted days for this leave.")
-                            End If
-                        ElseIf leaveModel.LeaveCycle = LeaveCycleSelection.AsNeeded Then
-                            ' always allow as long as leave days doesn't exceed Allowed Days
-                            ' unless there are other mitigating circumstances that should be programmed.
-                        ElseIf leaveModel.LeaveCycle = LeaveCycleSelection.OnceOnly Then
-                            records = _employeeLeaveService.GetEmployeeLeaves(View.EmployeeIdNo, View.LeaveIdNo, "All")
-                            If Not OnceOnlyLeaveOk(records) Then
-                                retValue = False
-                            End If
+                If leaveModel.PaidPercent = 0 Then
+                    ' unpaid leaves are always allowed if approved by supervisor subject to maximum allowed leave for this specific leave
+                    If leaveModel.NoMaxLimit Then
+                        'allowed
+                    ElseIf noOfDaysApplied > leaveModel.LeaveAllowed Then
+                        retValue = False
+                        Dim leaveName As String = If(Messaging.IsArabic, leaveModel.LeaveNameAra, leaveModel.LeaveName)
+                        Messaging.ShowPmMessage(True, "MsgApplLvExceedAllowLv", {"leaveName", leaveName,
+                                                                                 "noOfDaysApplied", Format(noOfDaysApplied, "0"),
+                                                                                 "noOfDaysAllowed", Format(leaveModel.LeaveAllowed, "0")})
+                    ElseIf leaveModel.LeaveCycle = LeaveCycleSelection.OnceOnly Then
+                        Dim leaveName As String = If(Messaging.IsArabic, leaveModel.LeaveNameAra, leaveModel.LeaveName)
+                        If Not OnceOnlyLeaveOk(leaveModel) Then
+                            retValue = False
                         End If
+                        'ok 
                     End If
                 Else
-                    Dim noOfDaysAllowed As Long = employeeLeaveCreditModel.LeaveAllowed
-                    If RequestedLeaveDaysOk(noOfDaysAllowed, noOfRequestedDays) Then
-                        If leaveModel.LeaveCycle = LeaveCycleSelection.ResetsYearly Then
-                            ' check if no. of days for leave is not yet exceeded
-                            Dim leaveYear As Int16 = Year(View.StartDate)
-                            If employeeLeaveCreditModel.Cumulative Then
-                                records = _employeeLeaveService.GetEmployeeLeaves(View.EmployeeIdNo, View.LeaveIdNo, "All")
+                    Dim employeeLeaveCreditModel As EmployeeLeaveCreditModel
+                    employeeLeaveCreditModel = _employeeLeaveCreditService.GetLeaveCredit(View.EmployeeIdNo, View.LeaveIdNo)
+                    Dim noOfRequestedDays As Long = DateDiff(DateInterval.Day, View.StartDate, View.EndDate) + 1
+                    Dim records As New List(Of EmployeeLeaveModel)
+                    Dim noOfAppliedDays As Int16 = 0
+                    If employeeLeaveCreditModel Is Nothing Then
+                        ' use default values
+                        Dim noOfDaysAllowed As Long = leaveModel.LeaveAllowed
+                        If RequestedLeaveDaysOk(noOfDaysAllowed, noOfRequestedDays) Then
+                            If leaveModel.LeaveCycle = LeaveCycleSelection.ResetsYearly Then
+                                ' check if no. of days for leave is not yet exceeded
+                                Dim leaveYear As Int16 = Year(View.StartDate)
+                                records = _employeeLeaveService.GetEmployeeLeaves(View.EmployeeIdNo, View.LeaveIdNo, "ActiveYear", Year(View.EndDate))
                                 For Each item As EmployeeLeaveModel In records
-                                    If item.Status <> EnumToCode(LeaveStatusSelection.Used) Then
-                                        noOfAppliedDays += DateDiff(DateInterval.Day, item.StartDate, item.EndDate) + 1
-                                    End If
+                                    noOfAppliedDays += DateDiff(DateInterval.Day, item.StartDate, item.EndDate) + 1
                                 Next
-                            Else
-                                records = _employeeLeaveService.GetEmployeeLeaves(View.EmployeeIdNo, View.LeaveIdNo, "ActiveYear")
-                                For Each item As EmployeeLeaveModel In records
-                                    If Year(View.StartDate) = leaveYear Then
-                                        noOfAppliedDays += DateDiff(DateInterval.Day, item.StartDate, item.EndDate) + 1
-                                    End If
-                                Next
-                            End If
-                            If (noOfAppliedDays + noOfRequestedDays) > noOfDaysAllowed Then
-                                retValue = False
-                                MessageBox.Show("Sorry either this employee has already consumed the allotted leave days for this Leave or the applied days leave plus the existing leaves will exceed the allotted days for this leave.")
-                            End If
-                        ElseIf leaveModel.LeaveCycle = LeaveCycleSelection.AsNeeded Then
-                            ' always allow as long as leave days doesn't exceed Allowed Days
-                            ' unless there are other mitigating circumstances that should be programmed.
-                        ElseIf leaveModel.LeaveCycle = LeaveCycleSelection.OnceOnly Then
-                            records = _employeeLeaveService.GetEmployeeLeaves(View.EmployeeIdNo, View.LeaveIdNo, "All")
-                            If Not OnceOnlyLeaveOk(records) Then
-                                retValue = False
+                                If (noOfAppliedDays + noOfRequestedDays) > noOfDaysAllowed Then
+                                    retValue = False
+                                    MessageBox.Show("Sorry either this employee has already consumed the allotted leave days for this Leave or the applied days leave plus the existing leaves will exceed the allotted days for this leave.")
+                                End If
+                            ElseIf leaveModel.LeaveCycle = LeaveCycleSelection.AsNeeded Then
+                                ' always allow as long as leave days doesn't exceed Allowed Days
+                                ' unless there are other mitigating circumstances that should be programmed.
+                            ElseIf leaveModel.LeaveCycle = LeaveCycleSelection.OnceOnly Then
+                                If Not OnceOnlyLeaveOk(leaveModel) Then
+                                    retValue = False
+                                End If
                             End If
                         End If
                     Else
-                        retValue = False
+                        If leaveModel.PaidPercent = 0 Then
+                            ' unpaid leaves are always allowed if approved by supervisor
+                        Else
+                            Dim noOfDaysAllowed As Long = employeeLeaveCreditModel.LeaveAllowed
+                            If RequestedLeaveDaysOk(noOfDaysAllowed, noOfRequestedDays) Then
+                                If leaveModel.LeaveCycle = LeaveCycleSelection.ResetsYearly Then
+                                    ' check if no. of days for leave is not yet exceeded
+                                    Dim leaveYear As Int16 = Year(View.StartDate)
+                                    If employeeLeaveCreditModel.Cumulative Then
+                                        records = _employeeLeaveService.GetEmployeeLeaves(View.EmployeeIdNo, View.LeaveIdNo, "All")
+                                        For Each item As EmployeeLeaveModel In records
+                                            If item.Status <> EnumToCode(LeaveStatusSelection.Used) Then
+                                                noOfAppliedDays += DateDiff(DateInterval.Day, item.StartDate, item.EndDate) + 1
+                                            End If
+                                        Next
+                                    Else
+                                        records = _employeeLeaveService.GetEmployeeLeaves(View.EmployeeIdNo, View.LeaveIdNo, "ActiveYear")
+                                        For Each item As EmployeeLeaveModel In records
+                                            If Year(View.StartDate) = leaveYear Then
+                                                noOfAppliedDays += DateDiff(DateInterval.Day, item.StartDate, item.EndDate) + 1
+                                            End If
+                                        Next
+                                    End If
+                                    If (noOfAppliedDays + noOfRequestedDays) > noOfDaysAllowed Then
+                                        retValue = False
+                                        MessageBox.Show("Sorry either this employee has already consumed the allotted leave days for this Leave or the applied days leave plus the existing leaves will exceed the allotted days for this leave.")
+                                    End If
+                                ElseIf leaveModel.LeaveCycle = LeaveCycleSelection.AsNeeded Then
+                                    ' always allow as long as leave days doesn't exceed Allowed Days
+                                    ' unless there are other mitigating circumstances that should be programmed.
+                                ElseIf leaveModel.LeaveCycle = LeaveCycleSelection.OnceOnly Then
+                                    If Not OnceOnlyLeaveOk(leaveModel) Then
+                                        retValue = False
+                                    End If
+                                End If
+                            Else
+                                retValue = False
+                            End If
+                        End If
                     End If
+                    retValue = False
                 End If
             Else
                 retValue = False
@@ -254,12 +279,17 @@ Namespace PresentationLayer.Presenters
             Return retValue
         End Function
 
-        Private Function OnceOnlyLeaveOk(records As List(Of EmployeeLeaveModel))
+        Private Function OnceOnlyLeaveOk(leaveModel As LeaveModel)
+            Dim records As New List(Of EmployeeLeaveModel)
             Dim retValue As Boolean = True
-            If Not (records Is Nothing OrElse records.Count = 0) Then
-                ' check if no. of days for leave is not yet exceeded
-                retValue = False
-                MessageBox.Show("Sorry, you have alredy used this leave.  You can only use this leave once!")
+            records = _employeeLeaveService.GetEmployeeLeaves(View.EmployeeIdNo, View.LeaveIdNo, "All")
+            Dim leaveName As String = If(Messaging.IsArabic, leaveModel.LeaveNameAra, leaveModel.LeaveName)
+            If records.Count <> 0 Then
+                Dim leaveIdNo As Int16 = Format(records(0).IdNo, "0")
+                If Not (records Is Nothing OrElse records.Count = 0) Then
+                    retValue = False
+                    Messaging.ShowPmMessage(True, "MsgOneTimeLeaveOnly", {"leaveName", leaveName, "leaveNumber", Format(records(0).IdNo, "0")})
+                End If
             End If
             Return retValue
         End Function
