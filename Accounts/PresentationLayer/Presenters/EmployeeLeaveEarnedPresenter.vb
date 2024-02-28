@@ -20,6 +20,7 @@ Namespace PresentationLayer.Presenters
             TableName = "EmployeeLeaveEarned"
             SortOrderKey = "IdNo"
             WithTreeView = False
+            AddHandler View.DateValuesChanged, AddressOf onDateValuesChanged
         End Sub
 
         Protected Overrides Sub CreateDataSources()
@@ -61,7 +62,7 @@ Namespace PresentationLayer.Presenters
             Dim releasedDate As Object
             Dim dateHired As Date?
             Dim dateReleased As Date?
-            hiredDate = Service.GetFieldWithIdNo(View.EmployeeIdNo, "Employee", "HiredDate")
+            hiredDate = GetHiredDate()
             releasedDate = Service.GetFieldWithIdNo(View.EmployeeIdNo, "Employee", "ReleasedDate")
             If hiredDate Is DBNull.Value Or hiredDate Is Nothing Then
                 dateHired = Nothing
@@ -95,34 +96,78 @@ Namespace PresentationLayer.Presenters
             Return True
         End Function
 
+
+        Private _hiredDate As Date
+        Private _yearsOfService As Int16
+        Private _daysAllowedPerYear As Int16
+
+        Private Function ComputeEmployeeServiceDetails()
+            Dim daysOfService As Int16
+            _hiredDate = GetHiredDate()
+            daysOfService = GetDaysOfService()
+            _yearsOfService = ConvertDaysToYearsService(daysOfService)
+            _daysAllowedPerYear = GetLeaveDaysAllowedPerYear()
+        End Function
+
         Private Function ComputeDaysEarned(startDate, EndDate)
-            Dim daysEarned As Int16
-            Dim yearsOfService As Int16
-            Dim hiredDate As Date = Service.GetFieldWithIdNo(View.IdNo, "HiredDate")
-            Dim daysOfService As Decimal = CType(DateAndTime.DateDiff(DateInterval.Day, hiredDate, CDate(View.EndDate)), Decimal)
-            yearsOfService = Math.Floor(daysOfService / 365.25 + 1 / 365.25)
-            Dim daysAllowedPerYear As Decimal = Service.GetFieldValue("DaysAllowedPerYear", "EarnableLEave", yearsOfService.ToString() + " > YearsOfServiceStart and " + yearsOfService.ToString() + " < YearsOfServiceEnd ")
-            daysEarned = Math.Floor(daysOfService / 365.25 * daysAllowedPerYear)
-            Return daysEarned
+            ComputeEmployeeServiceDetails()
+            Dim daysWorked As Int16
+            daysWorked = GetNoOfDays()
+            Return GetDaysEarned(daysWorked)
+        End Function
+
+        Private Function GetDaysEarned(noOfDays As Int16)
+            Return CType(Math.Floor(noOfDays / 365.25 * _daysAllowedPerYear), Int16)
         End Function
 
         Private Function LeaveAllowed()
-            Dim retVal As Boolean
-            Dim yearsOfService As Int16
-            Dim hiredDate As Date = Service.GetFieldWithIdNo(View.IdNo, "HiredDate")
-            Dim daysOfService As Decimal = CType(DateAndTime.DateDiff(DateInterval.Day, hiredDate, CDate(View.EndDate)), Decimal)
-            yearsOfService = Math.Floor(daysOfService / 365.25 + 1 / 365.25)
-            Dim minimumDaysWorked As Int16 = Service.GetFieldValue("MinimumDaysWorked", "EarnableLEave", yearsOfService.ToString() + " > YearsOfServiceStart and " + yearsOfService.ToString() + " < YearsOfServiceEnd ")
-            Dim minimumDaysLeave As Int16 = Service.GetFieldValue("MinimumDaysLeave", "EarnableLEave", yearsOfService.ToString() + " > YearsOfServiceStart and " + yearsOfService.ToString() + " < YearsOfServiceEnd ")
-            Dim daysEarned = DateAndTime.DateDiff(DateInterval.Day, CDate(View.StartDate), CDate(View.EndDate))
-            If daysEarned < minimumDaysWorked Then
-                MessageBox.Show("Sorry, days worked is not enough for to avail of the leave. The minimum days worked should be at least " + minimumDaysWorked.ToString("0"))
+            ComputeEmployeeServiceDetails()
+            Dim noOfDays As Int16 = GetNoOfDays()
+            Dim retVal As Boolean = True
+            Dim minimumDays As Int16 = GetMinimumDays()
+            Dim minDaysForLeaves As Int16 = GetMinimumDaysForLeave()
+            If noOfDays < minimumDays Then
+                MessageBox.Show("Sorry, days between the 'Start Date' and 'End Date' is not enough to avail for earned leaves. There are only " + noOfDays.ToString() + " day(s) between the start and end date. The minimum days in the selected date range should be at least " + minimumDays.ToString("0") + " day(s).")
                 retVal = False
-            Else
-                retVal = True
+            ElseIf View.DaysEarned < minDaysForLeaves Then
+                MessageBox.Show("Sorry, 'Leave Days Earned' of " + View.DaysEarned.ToString() + " day(s) is not enough to avail of earned leaves. The minimum days for earned leaves should be at least " + minDaysForLeaves.ToString("0"))
+                retVal = False
             End If
             Return retVal
         End Function
+
+        Private Shared Function ConvertDaysToYearsService(daysOfService As Decimal) As Double
+            Return Math.Floor(daysOfService / 365.25 + 1 / 365.25)
+        End Function
+
+        Private Function GetDaysOfService() As Int16
+            If _hiredDate = Date.MinValue Then
+                Return 0
+            End If
+            Return CType(DateAndTime.DateDiff(DateInterval.Day, _hiredDate, CDate(View.EndDate)), Int16)
+        End Function
+
+        Private Function GetNoOfDays() As Int16
+            Return CType(DateAndTime.DateDiff(DateInterval.Day, CDate(View.StartDate), CDate(View.EndDate)), Decimal)
+        End Function
+
+        Private Function GetHiredDate()
+            Return CDate(Service.GetFieldWithIdNo(View.EmployeeIdNo, "Employee", "HiredDate"))
+        End Function
+
+        Private Function GetMinimumDays()
+            Return Service.GetFieldValue(Of Int16)("MinimumDays", "EarnableLeave", _yearsOfService.ToString() + " > YearsOfServiceStart and " + _yearsOfService.ToString() + " < YearsOfServiceEnd ")
+        End Function
+
+        Private Function GetMinimumDaysForLeave()
+            Return Service.GetFieldValue(Of Int16)("MinimumDaysForLeave", "EarnableLEave", _yearsOfService.ToString() + " > YearsOfServiceStart and " + _yearsOfService.ToString() + " < YearsOfServiceEnd ")
+        End Function
+
+
+        Private Function GetLeaveDaysAllowedPerYear()
+            Return Service.GetFieldValue(Of Int16)("LeaveDaysAllowedPerYear", "EarnableLEave", _yearsOfService.ToString() + " > YearsOfServiceStart and " + _yearsOfService.ToString() + " < YearsOfServiceEnd ")
+        End Function
+
 
         Private Function NoOverlappingDates() As Boolean
             Dim noOverlap As Boolean = True
@@ -137,6 +182,11 @@ Namespace PresentationLayer.Presenters
             Return noOverlap
         End Function
 
+        Public Sub OnDateValuesChanged(idNo As Int16)
+            If idNo <> 0 Then
+                View.DaysEarned = ComputeDaysEarned(View.StartDate, View.EndDate)
+            End If
+        End Sub
 
     End Class
 

@@ -7,6 +7,8 @@ Public Class EmployeeLeaveEarnedEntry
 
     Private ReadOnly _nfi As NumberFormatInfo
     Private _humanResourceUser As Boolean
+    Public Event DateValuesChanged(itemIdNo As Int16) Implements IEmployeeLeaveEarnedView.DateValuesChanged
+
 
     Public Sub New()
 
@@ -128,12 +130,14 @@ Public Class EmployeeLeaveEarnedEntry
         If dtpEndDate.Value Is Nothing OrElse dtpEndDate.Value < dtpStartDate.Value Then
             dtpEndDate.Value = dtpStartDate.Value
         End If
+        RaiseEvent DateValuesChanged(IdNo)
     End Sub
 
     Private Sub dtpEndDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpEndDate.Validated
         If dtpStartDate.Value Is Nothing OrElse dtpStartDate.Value > dtpEndDate.Value Then
             dtpStartDate.Value = dtpEndDate.Value
         End If
+        RaiseEvent DateValuesChanged(IdNo)
     End Sub
 
 
