@@ -356,7 +356,7 @@ Partial Class EmployeeLeaveEarnedEntry
         Me.lblDaysEarned.Name = "lblDaysEarned"
         Me.lblDaysEarned.Size = New System.Drawing.Size(190, 23)
         Me.lblDaysEarned.TabIndex = 323
-        Me.lblDaysEarned.Text = "Days Earned"
+        Me.lblDaysEarned.Text = "Leave Days Earned"
         Me.lblDaysEarned.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.lblDaysEarned.Translatable = True
         '
