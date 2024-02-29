@@ -15,6 +15,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property Reason As String
         Property StartDate As Date?
         Event DateValuesChanged(itemIdNo As Short)
+        Event LeaveIdNoChanged(itemIdNo As Short)
     End Interface
 
 End Namespace

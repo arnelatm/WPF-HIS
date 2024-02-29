@@ -347,6 +347,12 @@ Namespace PresentationLayer.Presenters
                         End If
                     End If
                 End If
+                If retValue Then
+                    If View.ReleasedDate IsNot Nothing And View.ReleasedDate < View.HiredDate Then
+                        MessageBox.Show("Released Date should be empty or greater than the hired date!")
+                        retValue = False
+                    End If
+                End If
             End If
             Return retValue
         End Function

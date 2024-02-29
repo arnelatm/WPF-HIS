@@ -122,6 +122,38 @@ Public Module GlobalFunctions
         Return retValue
     End Function
 
+    Public Function GetFloorIntYearDifference(beginningDate As Date, endingDate As Date) As Int16
+        Dim year1 As Int16 = Year(beginningDate) ' 1994/12/31 
+        Dim year2 As Int16 = Year(endingDate)   ' 2024/01/01
+        Dim yearDifference As Int16 = year2 - year1
+        ' for accuracy check wee need to get actual values not just the year
+        ' we can do it this way :
+        ' years = DateAndTime.DateDiff(DateInterval.Year, CDate(View.StartDate), CDate(View.EndDate))
+        ' but this would not result to an exact value where say for 2024/12/31 & 2025/01/01 would 
+        ' give a result of 1 year for in fact there is only one day in between those days not a year
+        ' the DateDiff function only considers the years of the date
+        Dim testDate = DateAndTime.DateAdd(DateInterval.Year, yearDifference, beginningDate)
+        Dim difference As Int16 = DateAndTime.DateDiff(DateInterval.Day, testDate, endingDate)
+        Dim exactYearDifference As Int16
+        If difference < -1 Then
+            exactYearDifference = yearDifference - 1
+        Else
+            exactYearDifference = yearDifference
+        End If
+        Return exactYearDifference
+    End Function
+
+    Public Function GetDecimalYearDifference(startDate As Date?, endDate As Date?) As Decimal
+        If startDate Is Nothing Then
+            Return 0
+        End If
+        Dim NoOfYears As Int16 = GetFloorIntYearDifference(startDate, endDate)
+        Dim tempDate As Date = DateAndTime.DateAdd(DateInterval.Year, NoOfYears, CDate(startDate))
+        tempDate = DateAndTime.DateAdd(DateInterval.Year, -1, tempDate)
+        Return NoOfYears - 1 + (DateDiff(DateInterval.Day, tempDate, CDate(endDate)) + 1) / 365
+    End Function
+
+
     Public Function FindControlRecursive(list As List(Of Control), parent As Control) As List(Of Control)
         If parent Is Nothing Then Return list
         list.Add(parent)
