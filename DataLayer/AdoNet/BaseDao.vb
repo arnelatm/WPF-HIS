@@ -382,7 +382,7 @@ Namespace AdoNet
                 sql = sql & " and (" & filter & ")"
             End If
             Dim retVal = GetDb().Scalar(sql, params)
-            If retVal Is Nothing Or IsDBNull(retVal) Then
+            If IsDBNull(retVal) Then
                 Return Nothing
             End If
             Return retVal
@@ -401,7 +401,7 @@ Namespace AdoNet
                 sql = sql & " and (" & filter & ")"
             End If
             Dim retVal = GetDb().Scalar(sql, params)
-            If retVal Is Nothing Or IsDBNull(retVal) Then
+            If IsDBNull(retVal) Then
                 Return Nothing
             End If
             Return retVal
@@ -424,7 +424,7 @@ Namespace AdoNet
                 sql = sql & " and (" & filter & ")"
             End If
             Dim retVal = GetDb().Scalar(sql, params)
-            If retVal Is Nothing Or IsDBNull(retVal) Then
+            If IsDBNull(retVal) Then
                 Return Nothing
             End If
             Return retVal
@@ -489,7 +489,11 @@ Namespace AdoNet
                     " Select " & returnFieldName & " FROM [" & tableName & "] " &
                     " Where " & GetPrimaryFieldName() & " = @IdNo "
             Dim params() As Object = {"@IdNo", idNo}
-            Return GetDb().Scalar(sql, params)
+            Dim retVal = GetDb().Scalar(sql, params)
+            If IsDBNull(retVal) Then
+                Return Nothing
+            End If
+            Return retVal
         End Function
 
         Public Function GetFieldsWithIdNo(idNo As Object, tableName As String, fieldsList As String, Optional primaryFieldName As String = Nothing) As ExpandoObject Implements IBaseDao.GetFieldsWithIdNo
@@ -679,7 +683,11 @@ Namespace AdoNet
             Dim name As String = propertyName.Replace(" ", "")
             name = name.Replace("[", "")
             name = name.Replace("]", "")
-            CType(obj, IDictionary(Of String, Object))(name) = propertyValue
+            If IsDBNull(propertyValue) Then
+                CType(obj, IDictionary(Of String, Object))(name) = Nothing
+            Else
+                CType(obj, IDictionary(Of String, Object))(name) = propertyValue
+            End If
         End Sub
 
         Public Function GetIdNoOfSortedPositionNumber(recordNo As Integer, tableName As String, sortOrder As String, Optional filter As String = Nothing) As Integer Implements IBaseDao.GetIdNoOfSortedPositionNumber
@@ -790,6 +798,9 @@ Namespace AdoNet
         Public Function GetRecordField(tableName As String, returnFieldName As String) As Object Implements IBaseDao.GetRecordField
             Dim sql As String = " Select Top 1 " & returnFieldName & " FROM [" & tableName & "] "
             Dim retVal = GetDb().Scalar(sql)
+            If IsDBNull(retVal) Then
+                Return Nothing
+            End If
             Return retVal
         End Function
 
@@ -847,7 +858,7 @@ Namespace AdoNet
                     " Where " & searchFieldName1 & " = @SearchVal1 and " & searchFieldName2 & " = @SearchVal2 and " & searchFieldName3 & " = @SearchVal3 "
             Dim params() As Object = {"@searchVal1", searchVal1, "@searchVal2", searchVal2, "@searchVal3", searchVal3}
             Dim retVal = GetDb().Scalar(sql, params)
-            If retVal Is Nothing Or IsDBNull(retVal) Then
+            If IsDBNull(retVal) Then
                 Return Nothing
             End If
             Return retVal
@@ -891,7 +902,7 @@ Namespace AdoNet
                     " Where " & searchFieldName & " = @SearchValue "
             Dim params() As Object = {"@SearchValue", searchValue}
             Dim retVal = GetDb().Scalar(sql, params)
-            If retVal Is Nothing Or IsDBNull(retVal) Then
+            If IsDBNull(retVal) Then
                 Return Nothing
             End If
             Return retVal

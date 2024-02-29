@@ -165,6 +165,8 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgOneTimeLeaveOnly", "Sorry, you have already used or have an existing applicaton for the leave '<{leaveName}>'. This leave can only be used once. See leave number '<{leaveNumber}>.'", "error")
         Messaging.AddMessage("MsgValueMustBeLessThan", "Sorry the entered value in field '<{fieldName1} of {fieldValue1}>' must be less than '<{fieldName2} of {fieldValue2}>.'", "Error")
         Messaging.AddMessage("MsgValueMustBeGreaterThan", "Sorry the entered value in field '<{fieldName1} of {fieldValue1}>' must be greater than '<{fieldName2} of {fieldValue2}>.'", "Error")
+        Messaging.AddMessage("MsgValueMustBeLessThanOrEqual", "Sorry the entered value in field '<{fieldName1} of {fieldValue1}>' must be less than or equal to '<{fieldName2} of {fieldValue2}>.'", "Error")
+        Messaging.AddMessage("MsgValueMustBeGreaterThanOrEqual", "Sorry the entered value in field '<{fieldName1} of {fieldValue1}>' must be greater than or equal to '<{fieldName2} of {fieldValue2}>.'", "Error")
     End Sub
 
     'Public Shared Sub CreateEnums()
