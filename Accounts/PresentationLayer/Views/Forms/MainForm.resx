@@ -121,23 +121,23 @@
     <value>17, 17</value>
   </metadata>
   <metadata name="TranslatorDAC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>174, 17</value>
+    <value>152, 17</value>
   </metadata>
   <metadata name="AppDataDAC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>325, 17</value>
+    <value>282, 17</value>
   </metadata>
   <metadata name="MyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>468, 17</value>
+    <value>406, 17</value>
   </metadata>
   <metadata name="imageListMember.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1145, 17</value>
+    <value>975, 17</value>
   </metadata>
   <data name="imageListMember.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACg
-        CQAAAk1TRnQBSQFMAgEBAgEAATgBDQE4AQ0BEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CQAAAk1TRnQBSQFMAgEBAgEAAUABDQFAAQ0BEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -182,7 +182,7 @@
 </value>
   </data>
   <metadata name="ToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>791, 17</value>
+    <value>679, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ToolStrip.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -3044,7 +3044,7 @@
   <data name="ToolStripButtonLogin.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAI/SURBVDhPrZFdSFNhGMdPQ1vLrFmjSS5ITzOraZRlIFEL
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAI/SURBVDhPrZFdSFNhGMdPQ1vLrFmjSS5ITzOraZRlIFEL
         ldVNUBGV0KBSQwMJo1ldtNDog8ZykDkjootpQalt7UMcbrWaMpaV1jbZViw/7rrS6KaLf77vds46rKCL
         /vDcvOf5/Z6H5zC/JzYTwP1wB9Q+dUaR9+hsAKnWzAQTbux1q7E/qIEpeg29cQNMH5ugDx7ASW8pKqxy
         aBxVCE65MyUcfDXSir6EGeaIDtff1eK8vxJnfWV8aYdLUPwwXyghaxO4PXwBj6JtME408IDja5dAQKrO
@@ -3065,7 +3065,7 @@
     <value>True</value>
   </data>
   <data name="ToolStripButtonLogin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>54, 48</value>
+    <value>45, 43</value>
   </data>
   <data name="ToolStripButtonLogin.Text" xml:space="preserve">
     <value>Login</value>
@@ -3079,7 +3079,7 @@
   <data name="ToolStripButtonLogout.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAJZSURBVDhPrZBdTJJhGIa/mEZkFiqFU9pS0qzAMsqaukUD
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAJZSURBVDhPrZBdTJJhGIa/mEZkFiqFU9pS0qzAMsqaukUD
         h520ZQc1D9haatM2a/1gtSZNW6tJFG0YumqV6ImoQfwNJhQGRrRqOtH4WZTWOq1VJx7c9X38R+uoe3tO
         3r3X9dx7iNQEF70Y8N+C0CXMGPI98MmL2NfM+CJ26uN+nwSqwBUMhxRQzbRD7juAo04+qvVsSEwi+D7a
         MyVx+PJcJ0YjGmjmZLj6ugln3DU44apMjHSiAuX3C9MlZG0S7vGfw4NAN5TTrbjwQgxtQI6fS9+gC19P
@@ -3099,7 +3099,7 @@
     <value>True</value>
   </data>
   <data name="ToolStripButtonLogout.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 48</value>
+    <value>51, 43</value>
   </data>
   <data name="ToolStripButtonLogout.Text" xml:space="preserve">
     <value>Logout</value>
@@ -3113,7 +3113,7 @@
   <data name="ToolStripButtonExit.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAALlSURBVDhPfZNrSNNRHIaPJmOioGhJKkvLjIpIsixLTdtc
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAALlSURBVDhPfZNrSNNRHIaPJmOioGhJKkvLjIpIsixLTdtc
         bcpMcyHDkIJFNk0WZKtlNxIKiiIC++CHMJIyLMu0UqGSLlSsNDNLu1LeUUvUbIo+bX/90M1eeA8cznkf
         3sOPI0wmEyqVSrIuUcOunSYO7s/l+LHDWPeY6evr438SzqCLi4tktSqG2poyXr98QG93Cw9rb9DR0TF5
         9d8SarUaNzc3XF1dWecA3Ku5SlPDfbrbm7hTc0UC3L9+nd7e3snI7xIajQa5XI5MJkMZu5LKsiIant3l
@@ -3133,7 +3133,7 @@
     <value>Magenta</value>
   </data>
   <data name="ToolStripButtonExit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 48</value>
+    <value>34, 43</value>
   </data>
   <data name="ToolStripButtonExit.Text" xml:space="preserve">
     <value>Exit</value>
@@ -3145,12 +3145,12 @@
     <value>Change User Interface to English</value>
   </data>
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 51</value>
+    <value>6, 46</value>
   </data>
   <data name="ToolStripButtonArabic.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABEAAAATCAYAAAB2pebxAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAACySURBVDhPY/hPBTASDNl0EyjRAMHLL0MF8QAMQy48RxgA
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACySURBVDhPY/hPBTASDNl0EyjRAMHLL0MF8QAMQy48RxgA
         w7POQiVxAAxDeo5BDHr5BSpABMAwBGbzh+8Qg44/hvBr9kIVYAFYXYLuHRAGGYYLYBjy8AOqZlDAEvIa
         zoAFuQjkJWIAhiEg/4MMIAVgGOK7jHgXwACGISCvkAqwGoIvJrABDENA6QEWK6CYIgZgGHLzDcQQbBiU
         p7ABDENAAGQQzEUgDIotfGkFqyGkgf//Aaafz/0ARzX+AAAAAElFTkSuQmCC
@@ -3160,7 +3160,7 @@
     <value>Magenta</value>
   </data>
   <data name="ToolStripButtonArabic.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 48</value>
+    <value>41, 43</value>
   </data>
   <data name="ToolStripButtonArabic.Text" xml:space="preserve">
     <value>عربى</value>
@@ -3174,7 +3174,7 @@
   <data name="ToolStripButtonEnglish.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABMAAAAUCAYAAABvVQZ0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAABbSURBVDhP5dBRCgAhCEBBj+7NDaPALNMo/OmBEAsOtUAP
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABbSURBVDhP5dBRCgAhCEBBj+7NDaPALNMo/OmBEAsOtUAP
         +xkD9GeVebPV0g7ijjDuGNPQDpDlYXIiTZhejkJcLibz4AGzoP49jMkFa7ymZ970AVb/aztfB0hUAE7c
         nMSG6Z/MAAAAAElFTkSuQmCC
 </value>
@@ -3183,7 +3183,7 @@
     <value>Magenta</value>
   </data>
   <data name="ToolStripButtonEnglish.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 48</value>
+    <value>53, 43</value>
   </data>
   <data name="ToolStripButtonEnglish.Text" xml:space="preserve">
     <value>English</value>
@@ -3197,7 +3197,7 @@
   <data name="ToolStripButtonTranslate.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAEEAAABBCAYAAACO98lFAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAjhSURBVHhe7ZkLUFV1HscP8lRZBERAfJs105LrJGs7yuO6
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAjhSURBVHhe7ZkLUFV1HscP8lRZBERAfJs105LrJGs7yuO6
         JbPjY0lMQ0BiUzLkImnio8eKreKkLGEqiptJ4gubyCHv64jSymbWtNNuM207bWNpWqarPBYRNOi7v9//
         PlbhQPecC63I/c1853g5/3M9v8/5vf7nSnAb3BDI3BDI3BDI3BDI3BDI3BDI3BDI3BDIBISCL/6KRR8f
         w+K/V/1flfG3Y8j+pBpnmxrEzf1UJi2i/7hfZRECjcV3hAKM2yEdKUD9zRbbLfa8SeHmEkRYdmGY/Kc7
@@ -3242,7 +3242,7 @@
     <value>Magenta</value>
   </data>
   <data name="ToolStripButtonTranslate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 48</value>
+    <value>61, 43</value>
   </data>
   <data name="ToolStripButtonTranslate.Text" xml:space="preserve">
     <value>Translate</value>
@@ -3259,7 +3259,7 @@
   <data name="ToolStripButtonDebug.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAYAAAA+s9J6AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAACOoSURBVHhe7Z3t72Rlecf3j+ibNukLE9fYkNhWg5BKkajB
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAACOoSURBVHhe7Z3t72Rlecf3j+ibNukLE9fYkNhWg5BKkajB
         Gt0oiTykgIiaJUFYLKi0C7RZwQoCa10QUGRBgaw2IVrdRotP2FUiaTfbpolNiklbGuQNsbYJLzDI6XwO
         c/16/+65ztP9dO77zP1NvpmZM2dmzpm5PnNd98M5Z09TVVU1qyqEVVUzq0IYQS+99NL6Xl7Kdbu2XRXC
         lczg5L79WNQVxF3LkfbcmGU87ntfpK1jL9PWQa7Lut4Pac8Nvd5+fhu11RBKANhBoQWJdmsvE3U91l4z
@@ -3418,7 +3418,7 @@
     <value>Magenta</value>
   </data>
   <data name="ToolStripButtonDebug.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 48</value>
+    <value>46, 43</value>
   </data>
   <data name="ToolStripButtonDebug.Text" xml:space="preserve">
     <value>Debug</value>
@@ -3432,223 +3432,223 @@
   <data name="ToolStripButtonDrugSale.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         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
-        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
+        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
-        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
+        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
 </value>
   </data>
   <data name="ToolStripButtonDrugSale.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="ToolStripButtonDrugSale.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 48</value>
+    <value>57, 43</value>
   </data>
   <data name="ToolStripButtonDrugSale.Text" xml:space="preserve">
     <value>FDA Sale</value>
@@ -3663,7 +3663,7 @@
     <value>Magenta</value>
   </data>
   <data name="ToolStripButtonPrescription.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 48</value>
+    <value>74, 43</value>
   </data>
   <data name="ToolStripButtonPrescription.Text" xml:space="preserve">
     <value>Prescription</value>
@@ -3677,7 +3677,7 @@
   <data name="ToolStripButtonDoseLabel.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAC0AAAAtCAYAAAA6GuKaAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAPtSURBVGhD7ZjPS1RRFMedccYoMyIiqkV/QEWbaBNGUIgR
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAPtSURBVGhD7ZjPS1RRFMedccYoMyIiqkV/QEWbaBNGUIgR
         GcmMITq1sLCMrISgX6siomhd0aZVUK1aREWbolD75c/SSiW0RKR2leWPrNs59717ufe+c997M+OjhL7w
         YXz3nPM93xnm4dOC/8pOEwCzMAn8U5oGeLhf7Ts9TAOiDvwE/rq0sOPP0mpAzsTztKwr539NPACGmXpR
         pQZi7Z1drK29UzvLNvhvQG3Oli2AKf6VwBDrVi3ifSOjn9jYjwlOefkWlkpXyevhkVHeU75+qRp8CrBK
@@ -3701,7 +3701,7 @@
     <value>Magenta</value>
   </data>
   <data name="ToolStripButtonDoseLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 48</value>
+    <value>68, 43</value>
   </data>
   <data name="ToolStripButtonDoseLabel.Text" xml:space="preserve">
     <value>Dose Label</value>
@@ -3710,10 +3710,10 @@
     <value>ImageAboveText</value>
   </data>
   <data name="ToolStrip.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 28</value>
+    <value>0, 24</value>
   </data>
   <data name="ToolStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1052, 51</value>
+    <value>1052, 46</value>
   </data>
   <data name="ToolStrip.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -3734,7 +3734,7 @@
     <value>2</value>
   </data>
   <metadata name="AccountsMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>632, 17</value>
+    <value>546, 17</value>
   </metadata>
   <data name="ToolStripMenuItemLogin.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -3754,7 +3754,7 @@
 </value>
   </data>
   <data name="ToolStripMenuItemLogin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 26</value>
+    <value>168, 22</value>
   </data>
   <data name="ToolStripMenuItemLogin.Text" xml:space="preserve">
     <value>&amp;Login...</value>
@@ -3777,34 +3777,34 @@
 </value>
   </data>
   <data name="ToolStripMenuItemLogout.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 26</value>
+    <value>168, 22</value>
   </data>
   <data name="ToolStripMenuItemLogout.Text" xml:space="preserve">
     <value>Lo&amp;gout</value>
   </data>
   <data name="toolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 6</value>
+    <value>165, 6</value>
   </data>
   <data name="ToolStripMenuItemChangePassword.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 26</value>
+    <value>168, 22</value>
   </data>
   <data name="ToolStripMenuItemChangePassword.Text" xml:space="preserve">
     <value>Change Password</value>
   </data>
   <data name="ToolStripMenuItemSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 26</value>
+    <value>168, 22</value>
   </data>
   <data name="ToolStripMenuItemSettings.Text" xml:space="preserve">
     <value>Settings</value>
   </data>
   <data name="ToolStripMenuItemExit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 26</value>
+    <value>168, 22</value>
   </data>
   <data name="ToolStripMenuItemExit.Text" xml:space="preserve">
     <value>E&amp;xit</value>
   </data>
   <data name="ToolStripMenuItemFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 24</value>
+    <value>37, 20</value>
   </data>
   <data name="ToolStripMenuItemFile.Text" xml:space="preserve">
     <value>&amp;File</value>
@@ -3826,7 +3826,7 @@
     <value>Ctrl+X</value>
   </data>
   <data name="ToolStripMenuItemCut.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 26</value>
+    <value>144, 22</value>
   </data>
   <data name="ToolStripMenuItemCut.Text" xml:space="preserve">
     <value>Cu&amp;t</value>
@@ -3850,7 +3850,7 @@
     <value>Ctrl+C</value>
   </data>
   <data name="ToolStripMenuItemCopy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 26</value>
+    <value>144, 22</value>
   </data>
   <data name="ToolStripMenuItemCopy.Text" xml:space="preserve">
     <value>&amp;Copy</value>
@@ -3875,526 +3875,526 @@
     <value>Ctrl+V</value>
   </data>
   <data name="ToolStripMenuItemPaste.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 26</value>
+    <value>144, 22</value>
   </data>
   <data name="ToolStripMenuItemPaste.Text" xml:space="preserve">
     <value>Paste</value>
   </data>
   <data name="ToolStripMenuItemEdit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 24</value>
+    <value>39, 20</value>
   </data>
   <data name="ToolStripMenuItemEdit.Text" xml:space="preserve">
     <value>&amp;Edit</value>
   </data>
   <data name="ToolStripMenuItemBranches.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 26</value>
+    <value>191, 22</value>
   </data>
   <data name="ToolStripMenuItemBranches.Text" xml:space="preserve">
     <value>Branches</value>
   </data>
   <data name="ToolStripMenuItemChartOfAccounts.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 26</value>
+    <value>191, 22</value>
   </data>
   <data name="ToolStripMenuItemChartOfAccounts.Text" xml:space="preserve">
     <value>Chart Of Accounts</value>
   </data>
   <data name="ToolStripMenuItemDepartments.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 26</value>
+    <value>191, 22</value>
   </data>
   <data name="ToolStripMenuItemDepartments.Text" xml:space="preserve">
     <value>Departments</value>
   </data>
   <data name="ToolStripMenuItemRevCostCenters.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 26</value>
+    <value>191, 22</value>
   </data>
   <data name="ToolStripMenuItemRevCostCenters.Text" xml:space="preserve">
     <value>Revenue/Cost Centers</value>
   </data>
   <data name="ToolStripMenuItemRevenueGroups.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 26</value>
+    <value>191, 22</value>
   </data>
   <data name="ToolStripMenuItemRevenueGroups.Text" xml:space="preserve">
     <value>Revenue Groups</value>
   </data>
   <data name="ToolStripMenuItemDistributionSchemes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 26</value>
+    <value>191, 22</value>
   </data>
   <data name="ToolStripMenuItemDistributionSchemes.Text" xml:space="preserve">
     <value>Distribution Schemes</value>
   </data>
   <data name="ToolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>233, 6</value>
+    <value>188, 6</value>
   </data>
   <data name="ToolStripMenuItemCountries.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 26</value>
+    <value>191, 22</value>
   </data>
   <data name="ToolStripMenuItemCountries.Text" xml:space="preserve">
     <value>Countries</value>
   </data>
   <data name="ToolStripMenuItemDocuments.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 26</value>
+    <value>191, 22</value>
   </data>
   <data name="ToolStripMenuItemDocuments.Text" xml:space="preserve">
     <value>Documents</value>
   </data>
   <data name="ToolStripMenuItemPhoneTypes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 26</value>
+    <value>191, 22</value>
   </data>
   <data name="ToolStripMenuItemPhoneTypes.Text" xml:space="preserve">
     <value>Phone Types</value>
   </data>
   <data name="ToolStripMenuItemReligions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 26</value>
+    <value>191, 22</value>
   </data>
   <data name="ToolStripMenuItemReligions.Text" xml:space="preserve">
     <value>Religions</value>
   </data>
   <data name="ToolStripMenuItemBanks.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 26</value>
+    <value>191, 22</value>
   </data>
   <data name="ToolStripMenuItemBanks.Text" xml:space="preserve">
     <value>Banks</value>
   </data>
   <data name="ToolStripMenuItemItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 26</value>
+    <value>191, 22</value>
   </data>
   <data name="ToolStripMenuItemItems.Text" xml:space="preserve">
     <value>Items </value>
   </data>
   <data name="ToolStripMenuItemDefaultFieldValues.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 26</value>
+    <value>191, 22</value>
   </data>
   <data name="ToolStripMenuItemDefaultFieldValues.Text" xml:space="preserve">
     <value>Default Field Values</value>
   </data>
   <data name="ToolStripMenuItemSalesDepositTypes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 26</value>
+    <value>191, 22</value>
   </data>
   <data name="ToolStripMenuItemSalesDepositTypes.Text" xml:space="preserve">
     <value>Sales Deposit Types</value>
   </data>
   <data name="ToolStripMenuItemPrinters.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 26</value>
+    <value>137, 22</value>
   </data>
   <data name="ToolStripMenuItemPrinters.Text" xml:space="preserve">
     <value>Printers</value>
   </data>
   <data name="ToolStripMenuItemPrintJobs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 26</value>
+    <value>137, 22</value>
   </data>
   <data name="ToolStripMenuItemPrintJobs.Text" xml:space="preserve">
     <value>Print Jobs</value>
   </data>
   <data name="ToolStripMenuItemPrintSetups.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 26</value>
+    <value>137, 22</value>
   </data>
   <data name="ToolStripMenuItemPrintSetups.Text" xml:space="preserve">
     <value>Print Setups</value>
   </data>
   <data name="ToolStripMenuItemPrinting.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 26</value>
+    <value>191, 22</value>
   </data>
   <data name="ToolStripMenuItemPrinting.Text" xml:space="preserve">
     <value>Printing</value>
   </data>
   <data name="ToolStripMenuItemGeneral.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 26</value>
+    <value>180, 22</value>
   </data>
   <data name="ToolStripMenuItemGeneral.Text" xml:space="preserve">
     <value>General</value>
   </data>
   <data name="ToolStripMenuItemSecurityGroups.Size" type="System.Drawing.Size, System.Drawing">
-    <value>220, 26</value>
+    <value>175, 22</value>
   </data>
   <data name="ToolStripMenuItemSecurityGroups.Text" xml:space="preserve">
     <value>Security Groups</value>
   </data>
   <data name="ToolStripMenuItemSecurityObjects.Size" type="System.Drawing.Size, System.Drawing">
-    <value>220, 26</value>
+    <value>175, 22</value>
   </data>
   <data name="ToolStripMenuItemSecurityObjects.Text" xml:space="preserve">
     <value>Security Objects</value>
   </data>
   <data name="ToolStripMenuItemUsers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>220, 26</value>
+    <value>175, 22</value>
   </data>
   <data name="ToolStripMenuItemUsers.Text" xml:space="preserve">
     <value>Users</value>
   </data>
   <data name="ToolStripMenuItemApplicationSetting.Size" type="System.Drawing.Size, System.Drawing">
-    <value>220, 26</value>
+    <value>175, 22</value>
   </data>
   <data name="ToolStripMenuItemApplicationSetting.Text" xml:space="preserve">
     <value>Application Setting</value>
   </data>
   <data name="ToolStripMenuItemSecurity.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 26</value>
+    <value>180, 22</value>
   </data>
   <data name="ToolStripMenuItemSecurity.Text" xml:space="preserve">
     <value>Security</value>
   </data>
   <data name="ToolStripMenuItemEmployees.Size" type="System.Drawing.Size, System.Drawing">
-    <value>178, 26</value>
+    <value>142, 22</value>
   </data>
   <data name="ToolStripMenuItemEmployees.Text" xml:space="preserve">
     <value>Employees</value>
   </data>
   <data name="ToolStripMenuItemDesignations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>178, 26</value>
+    <value>142, 22</value>
   </data>
   <data name="ToolStripMenuItemDesignations.Text" xml:space="preserve">
     <value>Designations</value>
   </data>
   <data name="ToolStripMenuItemEmployee.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 26</value>
+    <value>180, 22</value>
   </data>
   <data name="ToolStripMenuItemEmployee.Text" xml:space="preserve">
     <value>Employee</value>
   </data>
   <data name="ToolStripMenuItemMessages.Size" type="System.Drawing.Size, System.Drawing">
-    <value>263, 26</value>
+    <value>211, 22</value>
   </data>
   <data name="ToolStripMenuItemMessages.Text" xml:space="preserve">
     <value>System Messages</value>
   </data>
   <data name="ToolStripMenuItemCaptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>263, 26</value>
+    <value>211, 22</value>
   </data>
   <data name="ToolStripMenuItemCaptions.Text" xml:space="preserve">
     <value>Captions</value>
   </data>
   <data name="ToolStripMenuItemCaptionsBatchEdit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>263, 26</value>
+    <value>211, 22</value>
   </data>
   <data name="ToolStripMenuItemCaptionsBatchEdit.Text" xml:space="preserve">
     <value>Captions Batch Edit</value>
   </data>
   <data name="ToolStripMenuItemCreateAllMessages.Size" type="System.Drawing.Size, System.Drawing">
-    <value>263, 26</value>
+    <value>211, 22</value>
   </data>
   <data name="ToolStripMenuItemCreateAllMessages.Text" xml:space="preserve">
     <value>Create All Messages</value>
   </data>
   <data name="ToolStripMenuItemTransactionJournalCodes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>263, 26</value>
+    <value>211, 22</value>
   </data>
   <data name="ToolStripMenuItemTransactionJournalCodes.Text" xml:space="preserve">
     <value>Transaction Journal Codes</value>
   </data>
   <data name="ToolStripMenuItemTranslations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 26</value>
+    <value>180, 22</value>
   </data>
   <data name="ToolStripMenuItemTranslations.Text" xml:space="preserve">
     <value>Translations</value>
   </data>
   <data name="ToolStripMenuItemPayElement.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 26</value>
+    <value>168, 22</value>
   </data>
   <data name="ToolStripMenuItemPayElement.Text" xml:space="preserve">
     <value>Pay Elements</value>
   </data>
   <data name="ToolStripMenuItemLeaves.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 26</value>
+    <value>168, 22</value>
   </data>
   <data name="ToolStripMenuItemLeaves.Text" xml:space="preserve">
     <value>Leaves</value>
   </data>
   <data name="ToolStripMenuItemPayGroups.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 26</value>
+    <value>168, 22</value>
   </data>
   <data name="ToolStripMenuItemPayGroups.Text" xml:space="preserve">
     <value>Pay Groups</value>
   </data>
   <data name="ToolStripMenuItemPayCycles.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 26</value>
+    <value>168, 22</value>
   </data>
   <data name="ToolStripMenuItemPayCycles.Text" xml:space="preserve">
     <value>Pay Cycles</value>
   </data>
   <data name="ToolStripMenuItemPensionProviders.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 26</value>
+    <value>168, 22</value>
   </data>
   <data name="ToolStripMenuItemPensionProviders.Text" xml:space="preserve">
     <value>Pension Providers</value>
   </data>
   <data name="ToolStripMenuItemPensionSchemes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 26</value>
+    <value>168, 22</value>
   </data>
   <data name="ToolStripMenuItemPensionSchemes.Text" xml:space="preserve">
     <value>Pension Schemes</value>
   </data>
   <data name="ToolStripMenuItemPayroll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 26</value>
+    <value>180, 22</value>
   </data>
   <data name="ToolStripMenuItemPayroll.Text" xml:space="preserve">
     <value>Payroll</value>
   </data>
   <data name="ToolStripMenuItemDoctor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 26</value>
+    <value>180, 22</value>
   </data>
   <data name="ToolStripMenuItemDoctor.Text" xml:space="preserve">
     <value>Doctor</value>
   </data>
   <data name="ToolStripMenuItemSupplierVendors.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 26</value>
+    <value>180, 22</value>
   </data>
   <data name="ToolStripMenuItemSupplierVendors.Text" xml:space="preserve">
     <value>Supplier/Vendors</value>
   </data>
   <data name="ToolStripMenuItemCustomerClients.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 26</value>
+    <value>180, 22</value>
   </data>
   <data name="ToolStripMenuItemCustomerClients.Text" xml:space="preserve">
     <value>Customer/Clients</value>
   </data>
   <data name="ToolStripMenuItemItemCode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 26</value>
+    <value>180, 22</value>
   </data>
   <data name="ToolStripMenuItemItemCode.Text" xml:space="preserve">
     <value>ItemCode</value>
   </data>
   <data name="ToolStripMenuItemCodeGroup.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 26</value>
+    <value>180, 22</value>
   </data>
   <data name="ToolStripMenuItemCodeGroup.Text" xml:space="preserve">
     <value>CodeGroup</value>
   </data>
   <data name="ToolStripMenuItemPharmacyItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>197, 26</value>
+    <value>159, 22</value>
   </data>
   <data name="ToolStripMenuItemPharmacyItem.Text" xml:space="preserve">
     <value>Pharmacy Items</value>
   </data>
   <data name="ToolStripMenuItemStockInventory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>197, 26</value>
+    <value>159, 22</value>
   </data>
   <data name="ToolStripMenuItemStockInventory.Text" xml:space="preserve">
     <value>Stock Inventory </value>
   </data>
   <data name="ToolStripMenuItemIGroup.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 26</value>
+    <value>180, 22</value>
   </data>
   <data name="ToolStripMenuItemIGroup.Text" xml:space="preserve">
     <value>IGroup</value>
   </data>
   <data name="ToolStripMenuItemDosage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>247, 26</value>
+    <value>195, 22</value>
   </data>
   <data name="ToolStripMenuItemDosage.Text" xml:space="preserve">
     <value>Dosage</value>
   </data>
   <data name="ToolStripMenuItemOldDosageTranslation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>247, 26</value>
+    <value>195, 22</value>
   </data>
   <data name="ToolStripMenuItemOldDosageTranslation.Text" xml:space="preserve">
     <value>Old Dosage Translation</value>
   </data>
   <data name="ToolStripMenuItemDurationTranslation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>247, 26</value>
+    <value>195, 22</value>
   </data>
   <data name="ToolStripMenuItemDurationTranslation.Text" xml:space="preserve">
     <value>Duration Translation</value>
   </data>
   <data name="ToolStripMenuItemPMR.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 26</value>
+    <value>180, 22</value>
   </data>
   <data name="ToolStripMenuItemPMR.Text" xml:space="preserve">
     <value>PMR</value>
   </data>
   <data name="ToolStripMenuItemProduct.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 26</value>
+    <value>214, 22</value>
   </data>
   <data name="ToolStripMenuItemProduct.Text" xml:space="preserve">
     <value>Product</value>
   </data>
   <data name="ToolStripMenuItemCategory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 26</value>
+    <value>214, 22</value>
   </data>
   <data name="ToolStripMenuItemCategory.Text" xml:space="preserve">
     <value>Category</value>
   </data>
   <data name="ToolStripMenuItemUnit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 26</value>
+    <value>214, 22</value>
   </data>
   <data name="ToolStripMenuItemUnit.Text" xml:space="preserve">
     <value>Unit</value>
   </data>
   <data name="ToolStripMenuItemWarehouse.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 26</value>
+    <value>214, 22</value>
   </data>
   <data name="ToolStripMenuItemWarehouse.Text" xml:space="preserve">
     <value>Warehouse</value>
   </data>
   <data name="ToolStripMenuItemInventoryTransactionType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 26</value>
+    <value>214, 22</value>
   </data>
   <data name="ToolStripMenuItemInventoryTransactionType.Text" xml:space="preserve">
     <value>Inventory Transaction Type</value>
   </data>
   <data name="ToolStripMenuItemInventory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 26</value>
+    <value>180, 22</value>
   </data>
   <data name="ToolStripMenuItemInventory.Text" xml:space="preserve">
     <value>Inventory</value>
   </data>
   <data name="ToolStripMenuItemReportMaster.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 26</value>
+    <value>180, 22</value>
   </data>
   <data name="ToolStripMenuItemReportMaster.Text" xml:space="preserve">
     <value>Report Master</value>
   </data>
   <data name="ToolStripMenuItemMasters.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 24</value>
+    <value>60, 20</value>
   </data>
   <data name="ToolStripMenuItemMasters.Text" xml:space="preserve">
     <value>&amp;Masters</value>
   </data>
   <data name="ToolStripMenuItemPettyCash.Size" type="System.Drawing.Size, System.Drawing">
-    <value>253, 26</value>
+    <value>204, 22</value>
   </data>
   <data name="ToolStripMenuItemPettyCash.Text" xml:space="preserve">
     <value>Petty Cash</value>
   </data>
   <data name="ToolStripMenuItemCashDisbursementEntry.Size" type="System.Drawing.Size, System.Drawing">
-    <value>253, 26</value>
+    <value>204, 22</value>
   </data>
   <data name="ToolStripMenuItemCashDisbursementEntry.Text" xml:space="preserve">
     <value>Cash Disbursement</value>
   </data>
   <data name="ToolStripMenuItemAccountsPayableEntry.Size" type="System.Drawing.Size, System.Drawing">
-    <value>253, 26</value>
+    <value>204, 22</value>
   </data>
   <data name="ToolStripMenuItemAccountsPayableEntry.Text" xml:space="preserve">
     <value>Accounts Payable</value>
   </data>
   <data name="ToolStripMenuItemAccountsReceivableEntry.Size" type="System.Drawing.Size, System.Drawing">
-    <value>253, 26</value>
+    <value>204, 22</value>
   </data>
   <data name="ToolStripMenuItemAccountsReceivableEntry.Text" xml:space="preserve">
     <value>Accounts Receivable</value>
   </data>
   <data name="ToolStripMenuItemCashReceiptEntry.Size" type="System.Drawing.Size, System.Drawing">
-    <value>253, 26</value>
+    <value>204, 22</value>
   </data>
   <data name="ToolStripMenuItemCashReceiptEntry.Text" xml:space="preserve">
     <value>Cash Receipt</value>
   </data>
   <data name="ToolStripMenuItemEmployeeReceivable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>253, 26</value>
+    <value>204, 22</value>
   </data>
   <data name="ToolStripMenuItemEmployeeReceivable.Text" xml:space="preserve">
     <value>Employee Receivable</value>
   </data>
   <data name="ToolStripMenuItemGeneralJournalEntry.Size" type="System.Drawing.Size, System.Drawing">
-    <value>253, 26</value>
+    <value>204, 22</value>
   </data>
   <data name="ToolStripMenuItemGeneralJournalEntry.Text" xml:space="preserve">
     <value>General Journal Entry</value>
   </data>
   <data name="ToolStripMenuItemSalesEntry.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 26</value>
+    <value>138, 22</value>
   </data>
   <data name="ToolStripMenuItemSalesEntry.Text" xml:space="preserve">
     <value>Sales Entry</value>
   </data>
   <data name="ToolStripMenuItemSalesReturn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 26</value>
+    <value>138, 22</value>
   </data>
   <data name="ToolStripMenuItemSalesReturn.Text" xml:space="preserve">
     <value>Sales Return</value>
   </data>
   <data name="ToolStripMenuItemSales.Size" type="System.Drawing.Size, System.Drawing">
-    <value>253, 26</value>
+    <value>204, 22</value>
   </data>
   <data name="ToolStripMenuItemSales.Text" xml:space="preserve">
     <value>Sales</value>
   </data>
   <data name="ToolStripMenuItemPurchase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>257, 26</value>
+    <value>206, 22</value>
   </data>
   <data name="ToolStripMenuItemPurchase.Text" xml:space="preserve">
     <value>Purchase </value>
   </data>
   <data name="ToolStripMenuItemPurchaseReturn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>257, 26</value>
+    <value>206, 22</value>
   </data>
   <data name="ToolStripMenuItemPurchaseReturn.Text" xml:space="preserve">
     <value>Purchase Return</value>
   </data>
   <data name="ToolStripMenuItemPurchaseOrder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>257, 26</value>
+    <value>206, 22</value>
   </data>
   <data name="ToolStripMenuItemPurchaseOrder.Text" xml:space="preserve">
     <value>Purchase Order</value>
   </data>
   <data name="ToolStripMenuItemPurchaseOrderApproval.Size" type="System.Drawing.Size, System.Drawing">
-    <value>257, 26</value>
+    <value>206, 22</value>
   </data>
   <data name="ToolStripMenuItemPurchaseOrderApproval.Text" xml:space="preserve">
     <value>Purchase Order Approval</value>
   </data>
   <data name="ToolStripMenuItemPurchases.Size" type="System.Drawing.Size, System.Drawing">
-    <value>253, 26</value>
+    <value>204, 22</value>
   </data>
   <data name="ToolStripMenuItemPurchases.Text" xml:space="preserve">
     <value>Purchases</value>
   </data>
   <data name="ToolStripMenuItemSalesJournalEntry.Size" type="System.Drawing.Size, System.Drawing">
-    <value>253, 26</value>
+    <value>204, 22</value>
   </data>
   <data name="ToolStripMenuItemSalesJournalEntry.Text" xml:space="preserve">
     <value>Sales Journal Entry</value>
   </data>
   <data name="ToolStripMenuItemInventoryTransactions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>253, 26</value>
+    <value>204, 22</value>
   </data>
   <data name="ToolStripMenuItemInventoryTransactions.Text" xml:space="preserve">
     <value>Inventory Transactions</value>
   </data>
   <data name="ToolStripMenuItemAccountReconciliation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>253, 26</value>
+    <value>204, 22</value>
   </data>
   <data name="ToolStripMenuItemAccountReconciliation.Text" xml:space="preserve">
     <value>Account Reconciliation</value>
   </data>
   <data name="ToolStripMenuItemPostPettyCashAccount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>253, 26</value>
+    <value>204, 22</value>
   </data>
   <data name="ToolStripMenuItemPostPettyCashAccount.Text" xml:space="preserve">
     <value>Post Petty Cash Account</value>
   </data>
   <data name="ToolStripMenuItemEmployeeLeaveNonHoliday.Size" type="System.Drawing.Size, System.Drawing">
-    <value>321, 26</value>
+    <value>254, 22</value>
   </data>
   <data name="ToolStripMenuItemEmployeeLeaveNonHoliday.Text" xml:space="preserve">
     <value>Employee Non-Holiday Leave</value>
   </data>
   <data name="ToolStripMenuItemEmployeeLeaveHoliday.Size" type="System.Drawing.Size, System.Drawing">
-    <value>321, 26</value>
+    <value>254, 22</value>
   </data>
   <data name="ToolStripMenuItemEmployeeLeaveHoliday.Text" xml:space="preserve">
     <value>Employee Holiday Leave</value>
   </data>
   <data name="ToolStripMenuItemEmployeeAbsenceLate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>321, 26</value>
+    <value>254, 22</value>
   </data>
   <data name="ToolStripMenuItemEmployeeAbsenceLate.Text" xml:space="preserve">
     <value>Employee Absences/Late</value>
   </data>
   <data name="ToolStripMenuItemHolidayEntry.Size" type="System.Drawing.Size, System.Drawing">
-    <value>321, 26</value>
+    <value>254, 22</value>
   </data>
   <data name="ToolStripMenuItemHolidayEntry.Text" xml:space="preserve">
     <value>Holiday Entry</value>
   </data>
   <data name="ToolStripMenuItemEmployeeLeaveApproval.Size" type="System.Drawing.Size, System.Drawing">
-    <value>321, 26</value>
+    <value>254, 22</value>
   </data>
   <data name="ToolStripMenuItemEmployeeLeaveApproval.Text" xml:space="preserve">
     <value>Employee Leave Approval</value>
   </data>
   <data name="ToolStripMenuItemEmployeeHolidayTransfer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>321, 26</value>
+    <value>254, 22</value>
   </data>
   <data name="ToolStripMenuItemEmployeeHolidayTransfer.Text" xml:space="preserve">
     <value>Bulk Employee Holiday Transfer</value>
@@ -4406,418 +4406,418 @@
     <value>False</value>
   </data>
   <data name="ToolStripMenuItemEmployeeLeaveEarned.Size" type="System.Drawing.Size, System.Drawing">
-    <value>321, 26</value>
+    <value>254, 22</value>
   </data>
   <data name="ToolStripMenuItemEmployeeLeaveEarned.Text" xml:space="preserve">
     <value>Employee Leaves Earned</value>
   </data>
   <data name="ToolStripMenuItemEmployeeLeavesEarnedApproval.Size" type="System.Drawing.Size, System.Drawing">
-    <value>321, 26</value>
+    <value>254, 22</value>
   </data>
   <data name="ToolStripMenuItemEmployeeLeavesEarnedApproval.Text" xml:space="preserve">
     <value>Employee Leaves Earned Approval</value>
   </data>
   <data name="ToolStripMenuItemHR.Size" type="System.Drawing.Size, System.Drawing">
-    <value>253, 26</value>
+    <value>204, 22</value>
   </data>
   <data name="ToolStripMenuItemHR.Text" xml:space="preserve">
     <value>H.R.</value>
   </data>
   <data name="ToolStripMenuItemClosing.Size" type="System.Drawing.Size, System.Drawing">
-    <value>253, 26</value>
+    <value>204, 22</value>
   </data>
   <data name="ToolStripMenuItemClosing.Text" xml:space="preserve">
     <value>Closing Entry</value>
   </data>
   <data name="ToolStripMenuItemPayrollEntry.Size" type="System.Drawing.Size, System.Drawing">
-    <value>240, 26</value>
+    <value>194, 22</value>
   </data>
   <data name="ToolStripMenuItemPayrollEntry.Text" xml:space="preserve">
     <value>Payroll Entry</value>
   </data>
   <data name="ToolStripMenuItemRecurringPayrollEntry.Size" type="System.Drawing.Size, System.Drawing">
-    <value>240, 26</value>
+    <value>194, 22</value>
   </data>
   <data name="ToolStripMenuItemRecurringPayrollEntry.Text" xml:space="preserve">
     <value>Recurring Payroll Entry</value>
   </data>
   <data name="ToolStripMenuItemPayrollTransaction.Size" type="System.Drawing.Size, System.Drawing">
-    <value>253, 26</value>
+    <value>204, 22</value>
   </data>
   <data name="ToolStripMenuItemPayrollTransaction.Text" xml:space="preserve">
     <value>Payroll</value>
   </data>
   <data name="ToolStripMenuItemShiftSummaryEntry.Size" type="System.Drawing.Size, System.Drawing">
-    <value>253, 26</value>
+    <value>204, 22</value>
   </data>
   <data name="ToolStripMenuItemShiftSummaryEntry.Text" xml:space="preserve">
     <value>Shift Summary Entry</value>
   </data>
   <data name="ToolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>250, 6</value>
+    <value>201, 6</value>
   </data>
   <data name="ToolStripMenuItemClosePettyCashFund.Size" type="System.Drawing.Size, System.Drawing">
-    <value>253, 26</value>
+    <value>204, 22</value>
   </data>
   <data name="ToolStripMenuItemClosePettyCashFund.Text" xml:space="preserve">
     <value>Close Petty Cash Fund</value>
   </data>
   <data name="ToolStripMenuItemCbcResultRetrieval.Size" type="System.Drawing.Size, System.Drawing">
-    <value>223, 26</value>
+    <value>178, 22</value>
   </data>
   <data name="ToolStripMenuItemCbcResultRetrieval.Text" xml:space="preserve">
     <value>Cbc Result Retrieval</value>
   </data>
   <data name="ToolStripMenuItemDiagnosticSamples.Size" type="System.Drawing.Size, System.Drawing">
-    <value>223, 26</value>
+    <value>178, 22</value>
   </data>
   <data name="ToolStripMenuItemDiagnosticSamples.Text" xml:space="preserve">
     <value>Diagnostic Samples</value>
   </data>
   <data name="ToolStripMenuItemClinicSamples.Size" type="System.Drawing.Size, System.Drawing">
-    <value>223, 26</value>
+    <value>178, 22</value>
   </data>
   <data name="ToolStripMenuItemClinicSamples.Text" xml:space="preserve">
     <value>Clinic Samples</value>
   </data>
   <data name="ToolStripMenuItemLaboratory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>253, 26</value>
+    <value>204, 22</value>
   </data>
   <data name="ToolStripMenuItemLaboratory.Text" xml:space="preserve">
     <value>Laboratory</value>
   </data>
   <data name="ToolStripMenuItemDrugSale.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 26</value>
+    <value>165, 22</value>
   </data>
   <data name="ToolStripMenuItemDrugSale.Text" xml:space="preserve">
     <value>Drug Sale</value>
   </data>
   <data name="ToolStripMenuItemDrugAcceptance.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 26</value>
+    <value>165, 22</value>
   </data>
   <data name="ToolStripMenuItemDrugAcceptance.Text" xml:space="preserve">
     <value>Drug Acceptance</value>
   </data>
   <data name="ToolStripMenuItemItemMatcher.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 26</value>
+    <value>165, 22</value>
   </data>
   <data name="ToolStripMenuItemItemMatcher.Text" xml:space="preserve">
     <value>Item Matcher</value>
   </data>
   <data name="ToolStripMenuItemDosagePrinting.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 26</value>
+    <value>165, 22</value>
   </data>
   <data name="ToolStripMenuItemDosagePrinting.Text" xml:space="preserve">
     <value>Dosage Printing</value>
   </data>
   <data name="ToolStripMenuItemPharmacy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>253, 26</value>
+    <value>204, 22</value>
   </data>
   <data name="ToolStripMenuItemPharmacy.Text" xml:space="preserve">
     <value>Pharmacy</value>
   </data>
   <data name="ToolStripMenuItemDocManagement.Size" type="System.Drawing.Size, System.Drawing">
-    <value>253, 26</value>
+    <value>204, 22</value>
   </data>
   <data name="ToolStripMenuItemDocManagement.Text" xml:space="preserve">
     <value>Document Management</value>
   </data>
   <data name="ToolStripMenuItemTransactions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>104, 24</value>
+    <value>84, 20</value>
   </data>
   <data name="ToolStripMenuItemTransactions.Text" xml:space="preserve">
     <value>&amp;Transactions</value>
   </data>
   <data name="ToolStripMenuItemStatementOfAccountsPayable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 26</value>
+    <value>254, 22</value>
   </data>
   <data name="ToolStripMenuItemStatementOfAccountsPayable.Text" xml:space="preserve">
     <value>Statement of Accounts Payable</value>
   </data>
   <data name="ToolStripMenuItemStatementOfAccountsReceivable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 26</value>
+    <value>254, 22</value>
   </data>
   <data name="ToolStripMenuItemStatementOfAccountsReceivable.Text" xml:space="preserve">
     <value>Statement of Accounts Receivable</value>
   </data>
   <data name="ToolStripMenuItemStatementOfEmployeeLoans.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 26</value>
+    <value>254, 22</value>
   </data>
   <data name="ToolStripMenuItemStatementOfEmployeeLoans.Text" xml:space="preserve">
     <value>Statement of Employee Loans</value>
   </data>
   <data name="ToolStripMenuItemSummaryOfEmployeeLoans.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 26</value>
+    <value>254, 22</value>
   </data>
   <data name="ToolStripMenuItemSummaryOfEmployeeLoans.Text" xml:space="preserve">
     <value>Summary of Employee Loans</value>
   </data>
   <data name="ToolStripMenuItemSummaryOfAccountsPayable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 26</value>
+    <value>254, 22</value>
   </data>
   <data name="ToolStripMenuItemSummaryOfAccountsPayable.Text" xml:space="preserve">
     <value>Summary of Accounts Payable</value>
   </data>
   <data name="ToolStripMenuItemSummaryOfAccountsReceivable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 26</value>
+    <value>254, 22</value>
   </data>
   <data name="ToolStripMenuItemSummaryOfAccountsReceivable.Text" xml:space="preserve">
     <value>Summary of Accounts Receivable</value>
   </data>
   <data name="ToolStripMenuItemTBMonthly.Size" type="System.Drawing.Size, System.Drawing">
-    <value>157, 26</value>
+    <value>125, 22</value>
   </data>
   <data name="ToolStripMenuItemTBMonthly.Text" xml:space="preserve">
     <value>Monthly</value>
   </data>
   <data name="ToolStripMenuItemTBQuarterly.Size" type="System.Drawing.Size, System.Drawing">
-    <value>157, 26</value>
+    <value>125, 22</value>
   </data>
   <data name="ToolStripMenuItemTBQuarterly.Text" xml:space="preserve">
     <value>Quarterly</value>
   </data>
   <data name="ToolStripMenuItemTBSemestral.Size" type="System.Drawing.Size, System.Drawing">
-    <value>157, 26</value>
+    <value>125, 22</value>
   </data>
   <data name="ToolStripMenuItemTBSemestral.Text" xml:space="preserve">
     <value>Semestral</value>
   </data>
   <data name="ToolStripMenuItemTBYearly.Size" type="System.Drawing.Size, System.Drawing">
-    <value>157, 26</value>
+    <value>125, 22</value>
   </data>
   <data name="ToolStripMenuItemTBYearly.Text" xml:space="preserve">
     <value>Yearly</value>
   </data>
   <data name="ToolStripMenuItemTBCustom.Size" type="System.Drawing.Size, System.Drawing">
-    <value>157, 26</value>
+    <value>125, 22</value>
   </data>
   <data name="ToolStripMenuItemTBCustom.Text" xml:space="preserve">
     <value>Custom</value>
   </data>
   <data name="ToolStripMenuItemTrialBalance.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 26</value>
+    <value>254, 22</value>
   </data>
   <data name="ToolStripMenuItemTrialBalance.Text" xml:space="preserve">
     <value>Trial Balance</value>
   </data>
   <data name="ToolStripMenuItemBSYearly.Size" type="System.Drawing.Size, System.Drawing">
-    <value>157, 26</value>
+    <value>125, 22</value>
   </data>
   <data name="ToolStripMenuItemBSYearly.Text" xml:space="preserve">
     <value>Yearly</value>
   </data>
   <data name="ToolStripMenuItemBSMonthly.Size" type="System.Drawing.Size, System.Drawing">
-    <value>157, 26</value>
+    <value>125, 22</value>
   </data>
   <data name="ToolStripMenuItemBSMonthly.Text" xml:space="preserve">
     <value>Monthly</value>
   </data>
   <data name="ToolStripMenuItemBSQuarterly.Size" type="System.Drawing.Size, System.Drawing">
-    <value>157, 26</value>
+    <value>125, 22</value>
   </data>
   <data name="ToolStripMenuItemBSQuarterly.Text" xml:space="preserve">
     <value>Quarterly</value>
   </data>
   <data name="ToolStripMenuItemBSSemestral.Size" type="System.Drawing.Size, System.Drawing">
-    <value>157, 26</value>
+    <value>125, 22</value>
   </data>
   <data name="ToolStripMenuItemBSSemestral.Text" xml:space="preserve">
     <value>Semestral</value>
   </data>
   <data name="ToolStripMenuItemBSCustom.Size" type="System.Drawing.Size, System.Drawing">
-    <value>157, 26</value>
+    <value>125, 22</value>
   </data>
   <data name="ToolStripMenuItemBSCustom.Text" xml:space="preserve">
     <value>Custom</value>
   </data>
   <data name="ToolStripMenuItemBalanceSheet.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 26</value>
+    <value>254, 22</value>
   </data>
   <data name="ToolStripMenuItemBalanceSheet.Text" xml:space="preserve">
     <value>Balance Sheet</value>
   </data>
   <data name="ToolStripMenuItemISYearly.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 26</value>
+    <value>152, 22</value>
   </data>
   <data name="ToolStripMenuItemISYearly.Text" xml:space="preserve">
     <value>Yearly</value>
   </data>
   <data name="ToolStripMenuItemISMonthly.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 26</value>
+    <value>152, 22</value>
   </data>
   <data name="ToolStripMenuItemISMonthly.Text" xml:space="preserve">
     <value>Monthly</value>
   </data>
   <data name="ToolStripMenuItemISQuarterly.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 26</value>
+    <value>152, 22</value>
   </data>
   <data name="ToolStripMenuItemISQuarterly.Text" xml:space="preserve">
     <value>Quarterly</value>
   </data>
   <data name="ToolStripMenuItemISSemiAnnually.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 26</value>
+    <value>152, 22</value>
   </data>
   <data name="ToolStripMenuItemISSemiAnnually.Text" xml:space="preserve">
     <value>Semi-Annually</value>
   </data>
   <data name="ToolStripMenuItemISCustomRange.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 26</value>
+    <value>152, 22</value>
   </data>
   <data name="ToolStripMenuItemISCustomRange.Text" xml:space="preserve">
     <value>Custom Range</value>
   </data>
   <data name="ToolStripMenuItemIncomeStatement.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 26</value>
+    <value>254, 22</value>
   </data>
   <data name="ToolStripMenuItemIncomeStatement.Text" xml:space="preserve">
     <value>Income Statement </value>
   </data>
   <data name="ToolStripMenuItemAccountActivity.Size" type="System.Drawing.Size, System.Drawing">
-    <value>233, 26</value>
+    <value>188, 22</value>
   </data>
   <data name="ToolStripMenuItemAccountActivity.Text" xml:space="preserve">
     <value>Account Activity</value>
   </data>
   <data name="ToolStripMenuItemJournalTransactionSummary.Size" type="System.Drawing.Size, System.Drawing">
-    <value>233, 26</value>
+    <value>188, 22</value>
   </data>
   <data name="ToolStripMenuItemJournalTransactionSummary.Text" xml:space="preserve">
     <value>Transaction Summary</value>
   </data>
   <data name="ToolStripMenuItemAccountingtLists.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 26</value>
+    <value>254, 22</value>
   </data>
   <data name="ToolStripMenuItemAccountingtLists.Text" xml:space="preserve">
     <value>Accounting Lists</value>
   </data>
   <data name="ToolStripMenuItemARAging.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 26</value>
+    <value>254, 22</value>
   </data>
   <data name="ToolStripMenuItemARAging.Text" xml:space="preserve">
     <value>Aging of Accounts Receivable</value>
   </data>
   <data name="ToolStripMenuItemAPAging.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 26</value>
+    <value>254, 22</value>
   </data>
   <data name="ToolStripMenuItemAPAging.Text" xml:space="preserve">
     <value>Aging of Accounts Payable</value>
   </data>
   <data name="ToolStripMenuItemCheckPrinting.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 26</value>
+    <value>254, 22</value>
   </data>
   <data name="ToolStripMenuItemCheckPrinting.Text" xml:space="preserve">
     <value>Check Printing</value>
   </data>
   <data name="ToolStripMenuItemPeriodicPayroll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 26</value>
+    <value>182, 22</value>
   </data>
   <data name="ToolStripMenuItemPeriodicPayroll.Text" xml:space="preserve">
     <value>Periodic Payroll</value>
   </data>
   <data name="ToolStripMenuItemBankTransferReport.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 26</value>
+    <value>182, 22</value>
   </data>
   <data name="ToolStripMenuItemBankTransferReport.Text" xml:space="preserve">
     <value>Bank Transfer Report</value>
   </data>
   <data name="ToolStripMenuItemPayrollReport.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 26</value>
+    <value>254, 22</value>
   </data>
   <data name="ToolStripMenuItemPayrollReport.Text" xml:space="preserve">
     <value>Payroll </value>
   </data>
   <data name="ToolStripMenuItemEmployeeIDPrinting.Size" type="System.Drawing.Size, System.Drawing">
-    <value>264, 26</value>
+    <value>209, 22</value>
   </data>
   <data name="ToolStripMenuItemEmployeeIDPrinting.Text" xml:space="preserve">
     <value>Employee ID Printing</value>
   </data>
   <data name="ToolStripMenuItemEmployeeLeaveReport.Size" type="System.Drawing.Size, System.Drawing">
-    <value>264, 26</value>
+    <value>209, 22</value>
   </data>
   <data name="ToolStripMenuItemEmployeeLeaveReport.Text" xml:space="preserve">
     <value>Employee Leave Report</value>
   </data>
   <data name="ToolStripMenuItemEmployeeInformation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>264, 26</value>
+    <value>209, 22</value>
   </data>
   <data name="ToolStripMenuItemEmployeeInformation.Text" xml:space="preserve">
     <value>Employee Information</value>
   </data>
   <data name="ToolStripMenuItemEmployeeMedicalReport.Size" type="System.Drawing.Size, System.Drawing">
-    <value>264, 26</value>
+    <value>209, 22</value>
   </data>
   <data name="ToolStripMenuItemEmployeeMedicalReport.Text" xml:space="preserve">
     <value>Employee Medical Report</value>
   </data>
-  <data name="ListToolStripMenuItemDocumentExpiry.Size" type="System.Drawing.Size, System.Drawing">
-    <value>264, 26</value>
+  <data name="ToolStripMenuItemDocumentExpiryList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 22</value>
   </data>
-  <data name="ListToolStripMenuItemDocumentExpiry.Text" xml:space="preserve">
+  <data name="ToolStripMenuItemDocumentExpiryList.Text" xml:space="preserve">
     <value>Document Expiry List</value>
   </data>
   <data name="ToolStripMenuItemDocumentReportList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>264, 26</value>
+    <value>209, 22</value>
   </data>
   <data name="ToolStripMenuItemDocumentReportList.Text" xml:space="preserve">
     <value>Document Report List</value>
   </data>
   <data name="ToolStripMenuItemHRReports.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 26</value>
+    <value>254, 22</value>
   </data>
   <data name="ToolStripMenuItemHRReports.Text" xml:space="preserve">
     <value>H.R. Reports</value>
   </data>
   <data name="ToolStripMenuItemShiftDailySummary.Size" type="System.Drawing.Size, System.Drawing">
-    <value>226, 26</value>
+    <value>181, 22</value>
   </data>
   <data name="ToolStripMenuItemShiftDailySummary.Text" xml:space="preserve">
     <value>Shift Daily Summary</value>
   </data>
   <data name="ToolStripMenuItemReceptionReports.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 26</value>
+    <value>254, 22</value>
   </data>
   <data name="ToolStripMenuItemReceptionReports.Text" xml:space="preserve">
     <value>Reception Reports</value>
   </data>
   <data name="ToolStripMenuItemAccountingReports.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 26</value>
+    <value>254, 22</value>
   </data>
   <data name="ToolStripMenuItemAccountingReports.Text" xml:space="preserve">
     <value>Accounting Reports</value>
   </data>
   <data name="ToolStripMenuItemIqamaCBCResultBySampleNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>307, 26</value>
+    <value>245, 22</value>
   </data>
   <data name="ToolStripMenuItemIqamaCBCResultBySampleNo.Text" xml:space="preserve">
     <value>Iqama CBC Result By Sample No</value>
   </data>
   <data name="ToolStripMenuItemIqamaCBCResultByInvoiceNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>307, 26</value>
+    <value>245, 22</value>
   </data>
   <data name="ToolStripMenuItemIqamaCBCResultByInvoiceNo.Text" xml:space="preserve">
     <value>Iqama CBC Result By Invoice No</value>
   </data>
   <data name="ToolStripMenuItemOtherLab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>307, 26</value>
+    <value>245, 22</value>
   </data>
   <data name="ToolStripMenuItemOtherLab.Text" xml:space="preserve">
     <value>Other Laboratory Reports</value>
   </data>
   <data name="ToolStripMenuItemLaboratoryReports.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 26</value>
+    <value>254, 22</value>
   </data>
   <data name="ToolStripMenuItemLaboratoryReports.Text" xml:space="preserve">
     <value>Laboratory Reports</value>
   </data>
   <data name="ToolStripMenuItemSalesReports.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 26</value>
+    <value>254, 22</value>
   </data>
   <data name="ToolStripMenuItemSalesReports.Text" xml:space="preserve">
     <value>Sales Reports</value>
   </data>
   <data name="ToolStripMenuItemPrescription.Size" type="System.Drawing.Size, System.Drawing">
-    <value>320, 26</value>
+    <value>257, 22</value>
   </data>
   <data name="ToolStripMenuItemPrescription.Text" xml:space="preserve">
     <value>Prescription</value>
@@ -4826,127 +4826,127 @@
     <value>False</value>
   </data>
   <data name="ToolStripMenuItemDrInvestigationsPrescriptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>320, 26</value>
+    <value>257, 22</value>
   </data>
   <data name="ToolStripMenuItemDrInvestigationsPrescriptions.Text" xml:space="preserve">
     <value>Doctors Investigations/Prescriptions</value>
   </data>
   <data name="ToolStripMenuItemPMRReports.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 26</value>
+    <value>254, 22</value>
   </data>
   <data name="ToolStripMenuItemPMRReports.Text" xml:space="preserve">
     <value>PMR Reports</value>
   </data>
   <data name="ToolStripMenuItemPharmacyBarcodePrinting.Size" type="System.Drawing.Size, System.Drawing">
-    <value>310, 26</value>
+    <value>244, 22</value>
   </data>
   <data name="ToolStripMenuItemPharmacyBarcodePrinting.Text" xml:space="preserve">
     <value>Pharmacy Barcode Printing</value>
   </data>
   <data name="ToolStripMenuItemGenerateDailyDrugTransferFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>310, 26</value>
+    <value>244, 22</value>
   </data>
   <data name="ToolStripMenuItemGenerateDailyDrugTransferFile.Text" xml:space="preserve">
     <value>Generate Daily Drug Transfer File</value>
   </data>
   <data name="ToolStripMenuItemGenerateDrugAcceptanceFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>310, 26</value>
+    <value>244, 22</value>
   </data>
   <data name="ToolStripMenuItemGenerateDrugAcceptanceFile.Text" xml:space="preserve">
     <value>Generate Drug Acceptance File</value>
   </data>
   <data name="ToolStripMenuItemDoctorsPrescriptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>310, 26</value>
+    <value>244, 22</value>
   </data>
   <data name="ToolStripMenuItemDoctorsPrescriptions.Text" xml:space="preserve">
     <value>Doctor's Prescriptions</value>
   </data>
   <data name="ToolStripMenuItemPharmacyReports.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 26</value>
+    <value>254, 22</value>
   </data>
   <data name="ToolStripMenuItemPharmacyReports.Text" xml:space="preserve">
     <value>Pharmacy Reports</value>
   </data>
   <data name="ToolStripMenuItemSterilizationLabels.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>171, 22</value>
   </data>
   <data name="ToolStripMenuItemSterilizationLabels.Text" xml:space="preserve">
     <value>Sterilization Labels</value>
   </data>
   <data name="ToolStripMenuItemClinicReports.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 26</value>
+    <value>254, 22</value>
   </data>
   <data name="ToolStripMenuItemClinicReports.Text" xml:space="preserve">
     <value>Clinic Reports</value>
   </data>
   <data name="ToolStripMenuItemInventoryReport.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 26</value>
+    <value>189, 22</value>
   </data>
   <data name="ToolStripMenuItemInventoryReport.Text" xml:space="preserve">
     <value>Inventory Report</value>
   </data>
   <data name="ToolStripMenuItemProductExpiryReport.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 26</value>
+    <value>189, 22</value>
   </data>
   <data name="ToolStripMenuItemProductExpiryReport.Text" xml:space="preserve">
     <value>Product Expiry Report</value>
   </data>
   <data name="ToolStripMenuItemRequestApproval.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 26</value>
+    <value>189, 22</value>
   </data>
   <data name="ToolStripMenuItemRequestApproval.Text" xml:space="preserve">
     <value>Request Approval</value>
   </data>
   <data name="ToolStripMenuItemProductMovement.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 26</value>
+    <value>189, 22</value>
   </data>
   <data name="ToolStripMenuItemProductMovement.Text" xml:space="preserve">
     <value>Product Movement</value>
   </data>
   <data name="ToolStripMenuItemInventoryReports.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 26</value>
+    <value>254, 22</value>
   </data>
   <data name="ToolStripMenuItemInventoryReports.Text" xml:space="preserve">
     <value>Inventory Reports</value>
   </data>
   <data name="ToolStripMenuItemReports.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 24</value>
+    <value>59, 20</value>
   </data>
   <data name="ToolStripMenuItemReports.Text" xml:space="preserve">
     <value>Reports</value>
   </data>
   <data name="ToolStripMenuItemUpdateMenuSecurityObjects.Size" type="System.Drawing.Size, System.Drawing">
-    <value>296, 26</value>
+    <value>237, 22</value>
   </data>
   <data name="ToolStripMenuItemUpdateMenuSecurityObjects.Text" xml:space="preserve">
     <value>Update Menu Security Objects </value>
   </data>
   <data name="ToolStripMenuItemRecreateSecurityObjectMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>296, 26</value>
+    <value>237, 22</value>
   </data>
   <data name="ToolStripMenuItemRecreateSecurityObjectMenu.Text" xml:space="preserve">
     <value>Recreate Security Object Menu</value>
   </data>
   <data name="ToolStripMenuItemTransactionNotesTranslator.Size" type="System.Drawing.Size, System.Drawing">
-    <value>296, 26</value>
+    <value>237, 22</value>
   </data>
   <data name="ToolStripMenuItemTransactionNotesTranslator.Text" xml:space="preserve">
     <value>Transaction Notes Translator</value>
   </data>
   <data name="ToolStripMenuItemSimplePasswordGenerator.Size" type="System.Drawing.Size, System.Drawing">
-    <value>296, 26</value>
+    <value>237, 22</value>
   </data>
   <data name="ToolStripMenuItemSimplePasswordGenerator.Text" xml:space="preserve">
     <value>Simple Password Generator</value>
   </data>
   <data name="ToolStripMenuItemTestForm.Size" type="System.Drawing.Size, System.Drawing">
-    <value>296, 26</value>
+    <value>237, 22</value>
   </data>
   <data name="ToolStripMenuItemTestForm.Text" xml:space="preserve">
     <value>Test Form</value>
   </data>
   <data name="ToolStripMenuItemUtilities.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 24</value>
+    <value>58, 20</value>
   </data>
   <data name="ToolStripMenuItemUtilities.Text" xml:space="preserve">
     <value>Utilities</value>
@@ -4967,22 +4967,22 @@
 </value>
   </data>
   <data name="ToolStripMenuItemIndex.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 26</value>
+    <value>107, 22</value>
   </data>
   <data name="ToolStripMenuItemIndex.Text" xml:space="preserve">
     <value>Index</value>
   </data>
   <data name="toolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 6</value>
+    <value>104, 6</value>
   </data>
   <data name="ToolStripMenuItemAbout.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 26</value>
+    <value>107, 22</value>
   </data>
   <data name="ToolStripMenuItemAbout.Text" xml:space="preserve">
     <value>&amp;About</value>
   </data>
   <data name="ToolStripMenuItemHelp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 24</value>
+    <value>44, 20</value>
   </data>
   <data name="ToolStripMenuItemHelp.Text" xml:space="preserve">
     <value>&amp;Help</value>
@@ -4991,7 +4991,7 @@
     <value>0, 0</value>
   </data>
   <data name="AccountsMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1052, 28</value>
+    <value>1052, 24</value>
   </data>
   <data name="AccountsMenu.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -5009,7 +5009,7 @@
     <value>3</value>
   </data>
   <metadata name="contextMenuStripMember.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>909, 17</value>
+    <value>780, 17</value>
   </metadata>
   <data name="addNewMemberToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -5023,7 +5023,7 @@
 </value>
   </data>
   <data name="addNewMemberToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>217, 30</value>
+    <value>188, 30</value>
   </data>
   <data name="addNewMemberToolStripMenuItem.Text" xml:space="preserve">
     <value>Add New Member...</value>
@@ -5045,7 +5045,7 @@
 </value>
   </data>
   <data name="editMemberToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>217, 30</value>
+    <value>188, 30</value>
   </data>
   <data name="editMemberToolStripMenuItem.Text" xml:space="preserve">
     <value>Edit Member...</value>
@@ -5067,13 +5067,13 @@
 </value>
   </data>
   <data name="deleteMemberToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>217, 30</value>
+    <value>188, 30</value>
   </data>
   <data name="deleteMemberToolStripMenuItem.Text" xml:space="preserve">
     <value>Delete Member</value>
   </data>
   <data name="contextMenuStripMember.Size" type="System.Drawing.Size, System.Drawing">
-    <value>218, 94</value>
+    <value>189, 94</value>
   </data>
   <data name="&gt;&gt;contextMenuStripMember.Name" xml:space="preserve">
     <value>contextMenuStripMember</value>
@@ -5082,14 +5082,14 @@
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <metadata name="imageList1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 60</value>
+    <value>1125, 17</value>
   </metadata>
   <data name="imageList1.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACg
-        CQAAAk1TRnQBSQFMAgEBAgEAATgBDQE4AQ0BEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CQAAAk1TRnQBSQFMAgEBAgEAAUABDQFAAQ0BEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -5134,7 +5134,7 @@
 </value>
   </data>
   <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>147, 60</value>
+    <value>17, 56</value>
   </metadata>
   <data name="toolStripMenuItem3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -5148,7 +5148,7 @@
 </value>
   </data>
   <data name="toolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>217, 30</value>
+    <value>188, 30</value>
   </data>
   <data name="toolStripMenuItem3.Text" xml:space="preserve">
     <value>Add New Member...</value>
@@ -5170,7 +5170,7 @@
 </value>
   </data>
   <data name="toolStripMenuItem4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>217, 30</value>
+    <value>188, 30</value>
   </data>
   <data name="toolStripMenuItem4.Text" xml:space="preserve">
     <value>Edit Member...</value>
@@ -5192,13 +5192,13 @@
 </value>
   </data>
   <data name="toolStripMenuItem5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>217, 30</value>
+    <value>188, 30</value>
   </data>
   <data name="toolStripMenuItem5.Text" xml:space="preserve">
     <value>Delete Member</value>
   </data>
   <data name="contextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>218, 94</value>
+    <value>189, 94</value>
   </data>
   <data name="&gt;&gt;contextMenuStrip1.Name" xml:space="preserve">
     <value>contextMenuStrip1</value>
@@ -7642,10 +7642,10 @@
   <data name="&gt;&gt;ToolStripMenuItemEmployeeMedicalReport.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ListToolStripMenuItemDocumentExpiry.Name" xml:space="preserve">
-    <value>ListToolStripMenuItemDocumentExpiry</value>
+  <data name="&gt;&gt;ToolStripMenuItemDocumentExpiryList.Name" xml:space="preserve">
+    <value>ToolStripMenuItemDocumentExpiryList</value>
   </data>
-  <data name="&gt;&gt;ListToolStripMenuItemDocumentExpiry.Type" xml:space="preserve">
+  <data name="&gt;&gt;ToolStripMenuItemDocumentExpiryList.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ToolStripMenuItemDocumentReportList.Name" xml:space="preserve">

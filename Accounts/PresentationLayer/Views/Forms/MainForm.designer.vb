@@ -200,7 +200,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemEmployeeLeaveReport = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemEmployeeInformation = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemEmployeeMedicalReport = New System.Windows.Forms.ToolStripMenuItem()
-            Me.ListToolStripMenuItemDocumentExpiry = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemDocumentExpiryList = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemDocumentReportList = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemReceptionReports = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemShiftDailySummary = New System.Windows.Forms.ToolStripMenuItem()
@@ -1134,7 +1134,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemHRReports
             '
-            Me.ToolStripMenuItemHRReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemEmployeeIDPrinting, Me.ToolStripMenuItemEmployeeLeaveReport, Me.ToolStripMenuItemEmployeeInformation, Me.ToolStripMenuItemEmployeeMedicalReport, Me.ListToolStripMenuItemDocumentExpiry, Me.ToolStripMenuItemDocumentReportList})
+            Me.ToolStripMenuItemHRReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemEmployeeIDPrinting, Me.ToolStripMenuItemEmployeeLeaveReport, Me.ToolStripMenuItemEmployeeInformation, Me.ToolStripMenuItemEmployeeMedicalReport, Me.ToolStripMenuItemDocumentExpiryList, Me.ToolStripMenuItemDocumentReportList})
             Me.ToolStripMenuItemHRReports.Name = "ToolStripMenuItemHRReports"
             resources.ApplyResources(Me.ToolStripMenuItemHRReports, "ToolStripMenuItemHRReports")
             '
@@ -1158,10 +1158,10 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemEmployeeMedicalReport.Name = "ToolStripMenuItemEmployeeMedicalReport"
             resources.ApplyResources(Me.ToolStripMenuItemEmployeeMedicalReport, "ToolStripMenuItemEmployeeMedicalReport")
             '
-            'ListToolStripMenuItemDocumentExpiry
+            'ToolStripMenuItemDocumentExpiryList
             '
-            Me.ListToolStripMenuItemDocumentExpiry.Name = "ListToolStripMenuItemDocumentExpiry"
-            resources.ApplyResources(Me.ListToolStripMenuItemDocumentExpiry, "ListToolStripMenuItemDocumentExpiry")
+            Me.ToolStripMenuItemDocumentExpiryList.Name = "ToolStripMenuItemDocumentExpiryList"
+            resources.ApplyResources(Me.ToolStripMenuItemDocumentExpiryList, "ToolStripMenuItemDocumentExpiryList")
             '
             'ToolStripMenuItemDocumentReportList
             '
@@ -1703,7 +1703,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ToolStripMenuItemPurchaseOrder As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemRequestApproval As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemProductMovement As ToolStripMenuItem
-        Friend WithEvents ListToolStripMenuItemDocumentExpiry As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemDocumentExpiryList As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemDocumentReportList As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemPurchaseOrderApproval As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemDiagnosticSamples As ToolStripMenuItem

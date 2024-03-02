@@ -1,6 +1,5 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class EmployeeLeaveApprovalEntry
@@ -107,22 +106,12 @@ Public Class EmployeeLeaveApprovalEntry
         ResumeLayout()
     End Sub
 
-    'Private Sub EmployeeLeaveApproval_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-    '    DataGridViewEmployeeLeave.Refresh()
-    '    If EmployeeLeaveApprovalItems.Count() = 0 Then
-    '        Messaging.Show(True, "MsgNoLeavesToApprove")
-    '    Else
-    '        BindEmployeeLeaveList()
-    '    End If
-    '    btnEdit.Visible = False
-    'End Sub
-
-    'Private Sub EmployeeLeaveApproval_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
-    '    bsEmployeeLeave.ResetBindings(True)
-    '    'PublishClickedButton(ButtonClicked.Edit)
-    '    'cboApprovedBy.SelectedValue = GlobalVariables.UserIdNo
-    '    'dtpDateCreated.Value = Now()
-    'End Sub
+    Private Sub EmployeeLeaveApproval_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        If UserIsASuperAdministrator() Then
+            cboApprovedBy.DisplayOnly = False
+        End If
+        btnAdd.PerformClick()
+    End Sub
 
     Private Sub DgvEarning_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEmployeeLeave.CellEndEdit
         ProcessCellEndEdit(DataGridViewEmployeeLeave, bsEmployeeLeave)
@@ -158,9 +147,15 @@ Public Class EmployeeLeaveApprovalEntry
     End Sub
 
     Private Sub EmployeeLeaveApprovalEntry_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
-        btnEdit.Enabled = False
-        btnEdit.Visible = False
-        btnDelete.Enabled = False
-        btnDelete.Visible = False
+        If UserIsASuperAdministrator() Then
+            cboApprovedBy.DisplayOnly = False
+        End If
+        btnAdd.PerformClick()
     End Sub
+
+    Private Sub OnAfterSave() Handles MyBase.AfterSave
+        bsEmployeeLeave.ResetBindings(False)
+        btnAdd.PerformClick()
+    End Sub
+
 End Class

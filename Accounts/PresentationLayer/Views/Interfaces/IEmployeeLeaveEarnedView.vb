@@ -14,6 +14,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property LeaveIdNo As Int16
         Property Reason As String
         Property StartDate As Date?
+        Property UserIsASupervisor As Boolean
         Event DateValuesChanged(itemIdNo As Short)
         Event LeaveIdNoChanged(itemIdNo As Short)
     End Interface

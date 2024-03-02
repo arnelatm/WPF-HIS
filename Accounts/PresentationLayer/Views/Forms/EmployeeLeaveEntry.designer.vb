@@ -61,8 +61,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cboenteredBy = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.DataGridViewApprovalHistory = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
-            Me.bsEmployeeLeaveApproval = New System.Windows.Forms.BindingSource(Me.components)
             Me.bsEmployeeLeaveApprovalHistory = New System.Windows.Forms.BindingSource(Me.components)
+            Me.bsEmployeeLeaveApproval = New System.Windows.Forms.BindingSource(Me.components)
             Me.dgvApprovalIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvApprovalDate = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvItemIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -73,8 +73,8 @@ Namespace PresentationLayer.Views.Forms
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout2.SuspendLayout()
             CType(Me.DataGridViewApprovalHistory, System.ComponentModel.ISupportInitialize).BeginInit()
-            CType(Me.bsEmployeeLeaveApproval, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.bsEmployeeLeaveApprovalHistory, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.bsEmployeeLeaveApproval, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SuspendLayout()
             '
             'lblIdNo
@@ -134,6 +134,9 @@ Namespace PresentationLayer.Views.Forms
             Me.cboEmployeeIdNo.DataValue = Nothing
             Me.cboEmployeeIdNo.DefaultValue = Nothing
             Me.cboEmployeeIdNo.DisplayMember = "Name"
+            Me.cboEmployeeIdNo.DisplayOnly = True
+            Me.cboEmployeeIdNo.DropDownHeight = 21
+            Me.cboEmployeeIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboEmployeeIdNo.Editable = True
             Me.cboEmployeeIdNo.EditingMode = True
             Me.cboEmployeeIdNo.EndFindValue = Nothing
@@ -492,7 +495,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboStatus.DefaultValue = Nothing
             Me.cboStatus.DisplayMember = "Name"
             Me.cboStatus.DisplayOnly = True
-            Me.cboStatus.DropDownHeight = 24
+            Me.cboStatus.DropDownHeight = 21
             Me.cboStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboStatus.Editable = True
             Me.cboStatus.EditingMode = True
@@ -546,7 +549,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboenteredBy.DefaultValue = Nothing
             Me.cboenteredBy.DisplayMember = "Name"
             Me.cboenteredBy.DisplayOnly = True
-            Me.cboenteredBy.DropDownHeight = 24
+            Me.cboenteredBy.DropDownHeight = 21
             Me.cboenteredBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboenteredBy.Editable = True
             Me.cboenteredBy.EditingMode = True
@@ -602,7 +605,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewApprovalHistory.DataFilter = Nothing
             Me.DataGridViewApprovalHistory.DataSource = Me.bsEmployeeLeaveApprovalHistory
             DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle8.BackColor = System.Drawing.Color.Black
+            DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
             DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
@@ -627,6 +630,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewApprovalHistory.IsDirty = False
             resources.ApplyResources(Me.DataGridViewApprovalHistory, "DataGridViewApprovalHistory")
             Me.DataGridViewApprovalHistory.Name = "DataGridViewApprovalHistory"
+            Me.DataGridViewApprovalHistory.OldCellValue = Nothing
             Me.DataGridViewApprovalHistory.ReadOnly = True
             Me.DataGridViewApprovalHistory.Searchable = True
             Me.DataGridViewApprovalHistory.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
@@ -673,6 +677,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvApprovalDate.EndFindValue = Nothing
             Me.dgvApprovalDate.FieldDescription = Nothing
             Me.dgvApprovalDate.FieldName = Nothing
+            Me.dgvApprovalDate.FillWeight = 50.0!
             Me.dgvApprovalDate.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.dgvApprovalDate.FindEnabled = False
             Me.dgvApprovalDate.Frozen = True
@@ -787,8 +792,8 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout2.ResumeLayout(False)
             Me.CFlowLayout2.PerformLayout()
             CType(Me.DataGridViewApprovalHistory, System.ComponentModel.ISupportInitialize).EndInit()
-            CType(Me.bsEmployeeLeaveApproval, System.ComponentModel.ISupportInitialize).EndInit()
             CType(Me.bsEmployeeLeaveApprovalHistory, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.bsEmployeeLeaveApproval, System.ComponentModel.ISupportInitialize).EndInit()
             Me.ResumeLayout(False)
             Me.PerformLayout()
 

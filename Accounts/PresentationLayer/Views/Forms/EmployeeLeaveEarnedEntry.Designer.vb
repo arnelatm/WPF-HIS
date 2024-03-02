@@ -153,6 +153,7 @@ Partial Class EmployeeLeaveEarnedEntry
         Me.cboEmployeeIdNo.DataValue = Nothing
         Me.cboEmployeeIdNo.DefaultValue = Nothing
         Me.cboEmployeeIdNo.DisplayMember = "Name"
+        Me.cboEmployeeIdNo.DisplayOnly = True
         Me.cboEmployeeIdNo.Editable = True
         Me.cboEmployeeIdNo.EditingMode = True
         Me.cboEmployeeIdNo.EndFindValue = Nothing
@@ -617,7 +618,7 @@ Partial Class EmployeeLeaveEarnedEntry
         Me.ClientSize = New System.Drawing.Size(743, 382)
         Me.Controls.Add(Me.CFlowLayout1)
         Me.Name = "EmployeeLeaveEarnedEntry"
-        Me.Text = "Employee Leave Earned Entry"
+        Me.Text = "Employee Earned Leave Entry"
         Me.Controls.SetChildIndex(Me.CFlowLayout1, 0)
         CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
         Me.CFlowLayout1.ResumeLayout(False)

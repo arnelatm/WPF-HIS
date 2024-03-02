@@ -7,6 +7,7 @@ Public Class EmployeeLeaveEarnedEntry
 
     Private ReadOnly _nfi As NumberFormatInfo
     Private _humanResourceUser As Boolean
+    Private _userIsASupervisor As Boolean
     Public Event DateValuesChanged(itemIdNo As Int16) Implements IEmployeeLeaveEarnedView.DateValuesChanged
     Public Event LeaveIdNoChanged(itemIdNo As Int16) Implements IEmployeeLeaveEarnedView.LeaveIdNoChanged
 
@@ -16,7 +17,7 @@ Public Class EmployeeLeaveEarnedEntry
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        FirstControl = cboEmployeeIdNo
+        FirstControl = cboLeaveIdNo
         _nfi = GlobalVariables.DefaultNumberFormatInfo
 
     End Sub
@@ -109,6 +110,15 @@ Public Class EmployeeLeaveEarnedEntry
         End Set
     End Property
 
+    Public Property UserIsASupervisor As Boolean Implements IEmployeeLeaveEarnedView.UserIsASupervisor
+        Get
+            Return _userIsASupervisor
+        End Get
+        Set(value As Boolean)
+            _userIsASupervisor = value
+        End Set
+    End Property
+
 
 #End Region
 
@@ -144,5 +154,11 @@ Public Class EmployeeLeaveEarnedEntry
         RaiseEvent LeaveIdNoChanged(LeaveIdNo)
     End Sub
 
+    Private Sub OnFormShown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        If UserIsASuperAdministrator() Or UserIsASupervisor Then
+            cboEmployeeIdNo.DisplayOnly = False
+            FirstControl = cboEmployeeIdNo
+        End If
+    End Sub
 
 End Class

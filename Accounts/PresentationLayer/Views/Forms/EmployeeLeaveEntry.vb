@@ -12,11 +12,12 @@ Namespace PresentationLayer.Views.Forms
         Private _humanResourceUser As Boolean
         Private _approvalHistory As List(Of EmployeeLeaveApprovalHistoryView)
         Private _holidayLeave As Boolean
+        Private _isASupervisor As Boolean
 
         Public Sub New(ByVal holidayLeave As Boolean)
             ' This call is required by the designer.
             InitializeComponent()
-            FirstControl = cboEmployeeIdNo
+            FirstControl = cboLeaveIdNo
             _nfi = GlobalVariables.DefaultNumberFormatInfo
             _holidayLeave = holidayLeave
             If holidayLeave Then
@@ -160,6 +161,15 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property Holiday As Boolean Implements IEmployeeLeaveView.Holiday
 
+        Public Property UserIsASupervisor As Boolean Implements IEmployeeLeaveView.UserIsASupervisor
+            Get
+                Return _isASupervisor
+            End Get
+            Set(value As Boolean)
+                _isASupervisor = value
+            End Set
+        End Property
+
 #End Region
 
         Protected Overrides Sub CreateMainFieldsDictionary()
@@ -241,6 +251,13 @@ Namespace PresentationLayer.Views.Forms
         Protected Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
             bsEmployeeLeaveApprovalHistory.ResetBindings(False)
             bsEmployeeLeaveApproval.ResetBindings(False)
+        End Sub
+
+        Private Sub OnFormShown(sender As Object, e As EventArgs) Handles MyBase.Shown
+            If UserIsASuperAdministrator() Or UserIsASupervisor Then
+                cboEmployeeIdNo.DisplayOnly = False
+                FirstControl = cboEmployeeIdNo
+            End If
         End Sub
 
     End Class

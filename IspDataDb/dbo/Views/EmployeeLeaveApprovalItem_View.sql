@@ -1,6 +1,8 @@
 ﻿
 
 
+
+
 CREATE VIEW [dbo].[EmployeeLeaveApprovalItem_View]
 AS
 SELECT	b.EnteredBy, 
@@ -13,7 +15,7 @@ SELECT	b.EnteredBy,
 		a.ApprovalNote, 
 		a.EmployeeLeaveApprovalIdNo, 
 		b.EmployeeIdNo, 
-		b.DateCreated as 'LeaveDate', 
+		b.DateCreated, 
 		b.Reason, 
 		c.SupervisorIdNo, 
 		c.EmployeeName, 

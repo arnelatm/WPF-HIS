@@ -13,7 +13,6 @@ Namespace PresentationLayer.Presenters
         'Implements ISubscriber(Of EntryFormLoaded)
 
         Private _userHasAccess As Boolean = False
-        Private _userIsASupervisor As Boolean = False
         Private _holidayModel As New HolidayModel
         Private ReadOnly _holidayLeave As Boolean
         Private ReadOnly _holidayService As New AccountsService("Holiday")
@@ -54,7 +53,7 @@ Namespace PresentationLayer.Presenters
             Else
                 Dim employeeIdNo As Int32 = Service.GetUserEmployeeIdNo()
                 If Not IsUserASupervisor() Then
-                    _userIsASupervisor = False
+                    View.UserIsASupervisor = False
                     Dim control As Control = Nothing
                     Dim x = MainFieldsDictionary
                     If MainFieldsDictionary.TryGetValue("EmployeeIdNo", control) Then
@@ -62,6 +61,7 @@ Namespace PresentationLayer.Presenters
                     End If
                     DataFilter += " and EmployeeIdNo = " & employeeIdNo.ToString()
                 Else
+                    View.UserIsASupervisor = True
                     DataFilter += " and (SupervisorIdNo = " & employeeIdNo.ToString() + " or EmployeeIdNo = " & employeeIdNo.ToString() & ")"
                 End If
             End If
@@ -77,7 +77,7 @@ Namespace PresentationLayer.Presenters
                 MakeControlDataSources({New String() {"Employee", "EmployeeIdNo", Nothing, filter}})
             Else
                 Dim employeeIdNo As Int32 = Service.GetUserEmployeeIdNo()
-                MakeControlDataSourcesT({New String() {"Employee", "EmployeeIdNo", Nothing, "IdNo = " + employeeIdNo.ToString(), "EmployeeIdNo"}})
+                MakeControlDataSources({New String() {"Employee", "EmployeeIdNo", Nothing, "IdNo = " + employeeIdNo.ToString(), "EmployeeIdNo"}})
             End If
             MakeControlDataSources({New String() {"User", "EnteredBy", "IdNo,UserName", Nothing}})
             If _holidayLeave Then
