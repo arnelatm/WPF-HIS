@@ -2816,11 +2816,11 @@
       <Link>.editorconfig</Link>
     </None>
     <None Include="app - Copy.config" />
+    <None Include="app.config" />
     <None Include="app-IBNSINAP2 - Copy.config" />
     <None Include="app-ISP-SERVERNEW.config" />
     <None Include="app-ibn-server-test.config" />
     <None Include="app-IBNSINAP2.config" />
-    <None Include="app.config" />
     <None Include="app-ISPADMIN2.config" />
     <None Include="app-Marcelo-Dell.config" />
     <None Include="app-Isp-Server.config" />

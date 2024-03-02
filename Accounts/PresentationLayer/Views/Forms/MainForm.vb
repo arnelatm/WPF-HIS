@@ -1282,7 +1282,7 @@ Namespace PresentationLayer.Views.Forms
             formToRun.Show()
         End Sub
 
-        Private Sub ListToolStripMenuItemDocumentExpiry_Click(sender As Object, e As EventArgs) Handles ListToolStripMenuItemDocumentExpiry.Click
+        Private Sub ListToolStripMenuItemDocumentExpiry_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDocumentExpiryList.Click
             RunReportNew(Of DocumentExpiryList)()
         End Sub
 

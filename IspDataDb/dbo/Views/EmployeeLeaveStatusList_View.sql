@@ -15,6 +15,7 @@ SELECT  b.IdNo,
 		b.DateCreated as 'LeaveDate', 
 		c.ApprovedBy, 
 		b.Reason, 
+		b.Reason as 'LeaveReason', 
 		a.ApprovalNote, 
 		c.DateCreated AS ApprovalDate, 
 		a.EmployeeLeaveIdNo

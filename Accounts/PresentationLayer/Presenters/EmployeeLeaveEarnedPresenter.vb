@@ -65,19 +65,6 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Private Function StartAndEndDateIsValid() As Boolean
-            'Dim dateReleased As Date?
-            'hiredDate = GetHiredDate()
-            'releasedDate = Service.GetFieldWithIdNo(View.EmployeeIdNo, "Employee", "ReleasedDate")
-            'If _hiredDate Is Nothing Then
-            '    dateHired = Nothing
-            'Else
-            '    dateHired = hiredDate
-            'End If
-            'If releasedDate Is DBNull.Value Or releasedDate Is Nothing Then
-            '    dateReleased = Nothing
-            'Else
-            '    dateReleased = releasedDate
-            'End If
             If View.StartDate > View.EndDate Then
                 Messaging.Show(True, "MsgBegDateMustBeLessThanEndDate")
                 Return False
@@ -102,39 +89,16 @@ Namespace PresentationLayer.Presenters
 
 
         Private Function ComputeEmployeeServiceDetails()
-            'Dim daysOfService As Int16
             Dim obj As Object = Service.GetFieldsWithIdNo(View.EmployeeIdNo, "Employee", "HiredDate,ReleasedDate")
             _hiredDate = obj.HiredDate
             _releasedDate = obj.ReleasedDate
-            'daysOfService = GetDaysOfService()
-            'Dim noOfDays As Int16 = GetNumberOfDaysBetweenDateRange()
-            'Dim retVal As Boolean = True
-            'Dim minimumDays As Int16 = GetMinimumDays()
-            'If noOfDays < minimumDays Then
-            '    MessageBox.Show("Sorry you must have a minimum of 180 days of service to be able to enjoy this leave.")
-            'End If
-            '_yearsOfService = GetYearsOfService()
-            '_daysAllowedPerYear = GetLeaveDaysAllowedPerYear()
         End Function
-
-        'Private Function ComputeDaysEarned(startDate, EndDate)
-        '    ComputeEmployeeServiceDetails()
-        '    Dim noOfServiceYearsFromStartDate As Int16 = GetExactYearsBetweenDates()
-
-        '    Dim noOfYears As Decimal = GetExactYearsBetweenDates(startDate, EndDate)
-        '    Dim earnedDays As Int16
-
-
-
-        '    earnedDays = noOfYears * _daysAllowedPerYear
-        '    Return earnedDays
-        '    'Dim daysWorked As Int16
-        '    'daysWorked = GetNumberOfDaysBetweenDateRange()
-        '    'Return GetDaysEarned(daysWorked)
-        'End Function
 
         Private Function GetDaysEarned()
             ComputeEmployeeServiceDetails()
+            If View.StartDate Is Nothing Or View.EndDate Is Nothing Then
+                Return 0
+            End If
             Dim yearsOfServiceFromStartDate As Int16 = GetFloorIntYearDifference(CDate(_hiredDate), CDate(View.StartDate))
             Dim yearsOfServiceFromEndDate As Int16 = GetFloorIntYearDifference(CDate(_hiredDate), CDate(View.EndDate))
             Dim daysAllowedPerYearFromStartDate = GetLeaveDaysAllowedPerYear(yearsOfServiceFromStartDate)
@@ -167,6 +131,9 @@ Namespace PresentationLayer.Presenters
 
         Private Function LeaveAllowed()
             ComputeEmployeeServiceDetails()
+            If View.StartDate Is Nothing Or View.EndDate Is Nothing Then
+                Return 0
+            End If
             Dim noOfDays As Int16 = DateDiff(DateInterval.Day, CDate(View.StartDate), CDate(View.EndDate))
             Dim retVal As Boolean = True
             Dim minimumDays As Int16 = GetMinimumDays()
@@ -182,84 +149,9 @@ Namespace PresentationLayer.Presenters
             Return retVal
         End Function
 
-        'Private Function ConvertDaysToYearsService(daysOfService As Decimal) As Int16
-        '    Dim x = GetYearsOfService()
-
-        '    Return Math.Floor(daysOfService / 365.25 + 1 / 365.25)
-        'End Function
-
         Private Function GetYearsOfService() As Int16
             Return GetFloorIntYearDifference(_hiredDate, View.EndDate)
         End Function
-
-        'Private Function GetYearsFromHiredDate(endDate As Date) As Int16
-        '    Return GetFloorYearDifference(_hiredDate, endDate)
-        'End Function
-
-
-        'Private Function GetDaysOfService() As Int16
-        '    If _hiredDate Is Nothing Or View.EndDate Is Nothing Then
-        '        Return 0
-        '    End If
-        '    If View.EndDate < _hiredDate Then
-        '        MessageBox.Show("Sorry End Date must be more than employee hire date of <" + _hiredDate.ToString() + ">.")
-        '        Return 0
-        '    End If
-        '    Return CType(DateAndTime.DateDiff(DateInterval.Day, CDate(_hiredDate), CDate(View.EndDate)) + 1, Int16)
-        'End Function
-
-        'Private Function GetExactYearsBetweenDates(startDate As Date?, endDate As Date?) As Decimal
-        '    If startDate Is Nothing Then
-        '        Return 0
-        '    End If
-        '    If startDate < _hiredDate Then
-        '        MessageBox.Show("Sorry start date must be more than or equal to the employee's hire date.")
-        '        Return 0
-        '    End If
-        '    Dim NoOfYears As Int16 = GetFloorYearDifference(startDate, endDate)
-        '    Dim tempDate As Date = DateAndTime.DateAdd(DateInterval.Year, NoOfYears, startDate)
-        '    Return NoOfYears + DateDiff(DateInterval.Day, tempDate, endDate) / 365
-
-        '    '            If ((Year() Mod 4 = 0) AndAlso (Year() Mod 100 <> 0)) OrElse
-        '    '((Year() Mod 4 = 0) AndAlso (Year() Mod 100 = 0) AndAlso (Year() Mod 400 = 0)) Then
-        '    '                Console.WriteLine("Entered year is leap year")
-        '    '            Else
-        '    '                Console.WriteLine("Entered year is not leap year")
-        '    '            End If
-
-
-        '    'If IsLeapYear Then
-
-        '    'End If
-        '    'Dim earnedDays As Int16 = 0
-        '    'If endDate >= tempDate Then
-        '    '    Dim partialDays As Int16 = DateAndTime.DateDiff(DateInterval.Day, tempDate, endDate)
-        '    '    If _daysAllowedPerYear > 0 Then
-        '    '        earnedDays = (NoOfYears + partialDays / _daysAllowedPerYear) * _daysAllowedPerYear
-        '    '    Else
-        '    '        earnedDays = 0
-        '    '    End If
-        '    'End If
-        '    'Return earnedDays
-        'End Function
-
-        ''Private Function GetHiredDate() As Date?
-        ''    Dim hiredDate As Object
-        ''    hiredDate = Service.GetFieldWithIdNo(View.EmployeeIdNo, "Employee", "HiredDate")
-        ''    If hiredDate Is Nothing Then
-        ''        Return Nothing
-        ''    End If
-        ''    Return CDate(hiredDate)
-        ''End Function
-
-        ''Private Function GetReleasedDate() As Date?
-        ''    Dim releasedDate As Object
-        ''    releasedDate = Service.GetFieldWithIdNo(View.EmployeeIdNo, "Employee", "ReleasedDate")
-        ''    If releasedDate Is Nothing Then
-        ''        Return Nothing
-        ''    End If
-        ''    Return CDate(releasedDate)
-        ''End Function
 
         Private Function GetMinimumDays()
             Return Service.GetFieldValue(Of Int16)("MinimumDays", "EarnableLeave", _yearsOfService.ToString() + " >= YearsOfServiceStart and " + _yearsOfService.ToString() + " < YearsOfServiceEnd ")
@@ -311,6 +203,16 @@ Namespace PresentationLayer.Presenters
                 View.DaysEarned = GetDaysEarned()
             End If
         End Sub
+
+        Public Overrides Sub EntryFormLoaded()
+            Dim employeeIdNo As Int32 = Service.GetUserEmployeeIdNo()
+            If Not IsUserASupervisor() Then
+                DataFilter += IIf(DataFilter Is Nothing Or DataFilter = "", "", " and ") + " EmployeeIdNo = " & employeeIdNo.ToString()
+            Else
+                DataFilter += IIf(DataFilter Is Nothing Or DataFilter = "", "", " and ") + IIf(DataFilter Is Nothing Or DataFilter = "", "", " and ") + " and (SupervisorIdNo = " & employeeIdNo.ToString() + " or EmployeeIdNo = " & employeeIdNo.ToString() & ")"
+            End If
+        End Sub
+
 
     End Class
 

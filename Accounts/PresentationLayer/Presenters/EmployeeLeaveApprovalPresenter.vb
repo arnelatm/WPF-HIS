@@ -49,6 +49,15 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
+        Public Overrides Sub EntryFormLoaded()
+            Dim employeeIdNo As Int32 = Service.GetUserEmployeeIdNo()
+            If Not IsUserASupervisor() Then
+                DataFilter += " and EmployeeIdNo = " & employeeIdNo.ToString()
+            Else
+                DataFilter += " and (SupervisorIdNo = " & employeeIdNo.ToString() + " or EmployeeIdNo = " & employeeIdNo.ToString() & ")"
+            End If
+        End Sub
+
         Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
             View.ApprovedBy = GlobalVariables.UserIdNo
             View.DateCreated = Now()
@@ -56,7 +65,7 @@ Namespace PresentationLayer.Presenters
                          "Status <> '" + EnumToCode(LeaveStatusSelection.Disapproved) + "' and " &
                          "Status <> '" + EnumToCode(LeaveStatusSelection.Used) + "' and " &
                          "Status <> '" + EnumToCode(LeaveStatusSelection.Cancelled) + "'"
-            If IsUserASupervisor() Then
+            If IsUserASupervisor() Or UserHasHrManagerAccess() Then
                 Dim employeeIdNo As Int32
                 employeeIdNo = Service.GetUserEmployeeIdNo()
                 filter += " and Status <> '" + EnumToCode(LeaveStatusSelection.SupervisorApproved) + "' and EmployeeIdNo <> " & employeeIdNo.ToString()

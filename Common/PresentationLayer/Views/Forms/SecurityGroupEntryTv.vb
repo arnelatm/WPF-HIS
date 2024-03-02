@@ -180,6 +180,11 @@ Namespace PresentationLayer.Views.Forms
             SecurityGroupView.bsGroupAccesses.ResetBindings(False)
         End Sub
 
+
+        Private Sub SecurityGroupEntryTv_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+            BindGroupAccess()
+        End Sub
+
     End Class
 
 End Namespace

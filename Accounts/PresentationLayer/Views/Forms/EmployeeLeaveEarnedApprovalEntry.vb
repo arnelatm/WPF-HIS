@@ -1,4 +1,5 @@
-﻿Imports AATM.Accounts.PresentationLayer.Views
+﻿Imports AATM.Accounts.BusinessLayer
+Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
@@ -162,4 +163,17 @@ Public Class EmployeeLeaveEarnedApprovalEntry
         btnDelete.Enabled = False
         btnDelete.Visible = False
     End Sub
+
+    Private Sub EmployeeLeaveEarnedApproval_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        If UserIsASuperAdministrator() Then
+            cboApprovedBy.DisplayOnly = False
+        End If
+        btnAdd.PerformClick()
+    End Sub
+
+    Private Sub OnAfterSave() Handles MyBase.AfterSave
+        bsEmployeeLeaveEarned.ResetBindings(False)
+        btnAdd.PerformClick()
+    End Sub
+
 End Class

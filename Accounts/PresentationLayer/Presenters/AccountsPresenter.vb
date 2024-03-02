@@ -142,10 +142,9 @@ Namespace PresentationLayer.Presenters
         End Function
 
 
-        Public Function IsUserAnHrManager()
-            Dim employeeIdNo As Int32 = GetUserEmployeeIdNo()
-            If employeeIdNo > 0 Then
-                Return Service.GetField(Of Boolean, Int32)(employeeIdNo, "Employee", "IdNo", "Supervisor")
+        Public Function UserHasHrManagerAccess()
+            If UserHasAccess("HumanResourcesManager") Then
+                Return True
             End If
             Return False
         End Function
