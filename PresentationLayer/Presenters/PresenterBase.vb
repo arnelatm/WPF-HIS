@@ -1114,6 +1114,19 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Return translatedField
     End Function
 
+    Protected Function TranslateFieldName(fieldToTranslate As String, tableName As String) As String
+        Dim translatedField As String = fieldToTranslate
+        If LicenseManager.UsageMode <> LicenseUsageMode.Designtime Then
+            If GlobalVariables.RightToLeftLayout Then
+                If Service.FieldExistInTable(fieldToTranslate + "ara", tableName) Then
+                    translatedField = fieldToTranslate + "Ara"
+                End If
+            End If
+        End If
+        Return translatedField
+    End Function
+
+
     Protected Function UpdateChildData(ByRef childDataService As Service, updateTable As DataTable, insertTable As DataTable, passedValue As Integer, parentIdFieldName As String) As Integer
         Dim retVal As Integer
         Dim updateReturnValue As Object
@@ -2549,6 +2562,14 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         End If
         Return retValue
     End Function
+
+    Public Function CurrentLanguage() As String
+        If GlobalFunctions.IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
+            Return "arabic"
+        End If
+        Return CultureInfo.CurrentCulture.ToString()
+    End Function
+
 
     Private Function LookupDataTableCreator(dtl As DataLookup) As DataTable
         Dim cd As New DataCreator(Service)

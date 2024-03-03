@@ -150,7 +150,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Function GetUserEmployeeIdNo() As Int32
-            Return Service.GetField(Of Integer, Integer)(GlobalVariables.UserIdNo, "User", "IdNo", "EmployeeIdNo")
+            Return Service.GetUserEmployeeIdNo()
         End Function
 
         'Public Sub AddNewItemOnBindingSource(Of TS As New)(ByVal e As System.ComponentModel.AddingNewEventArgs, bindingSource As BindingSource, dataGridView As DataGridView) Implements IAccountsPresenter.AddNewItemOnBindingSource

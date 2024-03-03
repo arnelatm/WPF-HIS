@@ -49,11 +49,12 @@ Namespace PresentationLayer.Views.Forms
             Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DisbursementJournalEntry))
             Me.tlpDisbursement = New System.Windows.Forms.TableLayoutPanel()
+            Me.cboPayeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.lblPaymentType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.chkPcClosed = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
             Me.chkPosted = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
             Me.cboPayType = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
-            Me.lblPaymentType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.lblDiscountAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -132,7 +133,6 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvBalance = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
             Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.bsDjOiItems = New System.Windows.Forms.BindingSource(Me.components)
-            Me.cboPayeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.tlpDisbursement.SuspendLayout()
             CType(Me.DataGridViewJournalItems, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -160,6 +160,7 @@ Namespace PresentationLayer.Views.Forms
             Me.tlpDisbursement.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
             Me.tlpDisbursement.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
             Me.tlpDisbursement.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 15.0!))
+            Me.tlpDisbursement.Controls.Add(Me.cboPayeeIdNo, 1, 2)
             Me.tlpDisbursement.Controls.Add(Me.txtDateCreated, 10, 5)
             Me.tlpDisbursement.Controls.Add(Me.chkPcClosed, 10, 6)
             Me.tlpDisbursement.Controls.Add(Me.chkPosted, 9, 6)
@@ -190,7 +191,6 @@ Namespace PresentationLayer.Views.Forms
             Me.tlpDisbursement.Controls.Add(Me.lblVatAmount, 9, 0)
             Me.tlpDisbursement.Controls.Add(Me.cboPaymentType, 1, 1)
             Me.tlpDisbursement.Controls.Add(Me.TxtIdNo, 2, 0)
-            Me.tlpDisbursement.Controls.Add(Me.cboPayeeIdNo, 1, 2)
             Me.tlpDisbursement.Controls.Add(Me.lblVatNo, 3, 4)
             Me.tlpDisbursement.Controls.Add(Me.lblReferenceNo, 3, 0)
             Me.tlpDisbursement.Controls.Add(Me.lblSupplierIdNo, 0, 2)
@@ -225,6 +225,73 @@ Namespace PresentationLayer.Views.Forms
             Me.tlpDisbursement.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.tlpDisbursement.Size = New System.Drawing.Size(1000, 565)
             Me.tlpDisbursement.TabIndex = 5
+            '
+            'cboPayeeIdNo
+            '
+            Me.cboPayeeIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+            Me.cboPayeeIdNo.BackColor = System.Drawing.Color.White
+            Me.cboPayeeIdNo.BegFindValue = Nothing
+            Me.cboPayeeIdNo.ChangingSearchValueOnly = False
+            Me.tlpDisbursement.SetColumnSpan(Me.cboPayeeIdNo, 5)
+            Me.cboPayeeIdNo.CurrentSearchTerm = ""
+            Me.cboPayeeIdNo.DataValue = Nothing
+            Me.cboPayeeIdNo.DefaultValue = "0"
+            Me.cboPayeeIdNo.DisplayMember = "Name"
+            Me.cboPayeeIdNo.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.cboPayeeIdNo.DropDownHeight = 25
+            Me.cboPayeeIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
+            Me.cboPayeeIdNo.Editable = True
+            Me.cboPayeeIdNo.EditingMode = False
+            Me.cboPayeeIdNo.EndFindValue = Nothing
+            Me.cboPayeeIdNo.FieldDescription = Nothing
+            Me.cboPayeeIdNo.FieldName = Nothing
+            Me.cboPayeeIdNo.FilterRule = Nothing
+            Me.cboPayeeIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboPayeeIdNo.FindEnabled = False
+            Me.cboPayeeIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.cboPayeeIdNo.ForeColor = System.Drawing.Color.Black
+            Me.cboPayeeIdNo.HideWhenNotEditingOrAdding = False
+            Me.cboPayeeIdNo.IgnoreCase = False
+            Me.cboPayeeIdNo.IntegralHeight = False
+            Me.cboPayeeIdNo.LimitToList = False
+            Me.cboPayeeIdNo.LinkedLabel = Me.lblPaymentType
+            Me.cboPayeeIdNo.Location = New System.Drawing.Point(128, 68)
+            Me.cboPayeeIdNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.cboPayeeIdNo.MaxDropDownItems = 1
+            Me.cboPayeeIdNo.Name = "cboPayeeIdNo"
+            Me.cboPayeeIdNo.OldValue = 0
+            Me.cboPayeeIdNo.OriginalDataSource = Nothing
+            Me.cboPayeeIdNo.OriginalList = Nothing
+            Me.cboPayeeIdNo.OverrideDropDownStyleList = False
+            Me.cboPayeeIdNo.PreviousSearchTerm = Nothing
+            Me.cboPayeeIdNo.PropertySelector = Nothing
+            Me.cboPayeeIdNo.Size = New System.Drawing.Size(350, 25)
+            Me.cboPayeeIdNo.SuggestBoxHeight = 200
+            Me.cboPayeeIdNo.SuggestCharCount = 0
+            Me.cboPayeeIdNo.SuggestListOrderRule = Nothing
+            Me.cboPayeeIdNo.TabIndex = 299
+            Me.cboPayeeIdNo.TextToSearch = Nothing
+            Me.cboPayeeIdNo.Translatable = False
+            Me.cboPayeeIdNo.ValueIsMandatory = False
+            Me.cboPayeeIdNo.ValueIsNullable = False
+            Me.cboPayeeIdNo.ValueIsNumeric = False
+            Me.cboPayeeIdNo.ValueMember = "Code"
+            '
+            'lblPaymentType
+            '
+            Me.lblPaymentType.BackColor = System.Drawing.Color.Transparent
+            Me.lblPaymentType.DisplayOnly = True
+            Me.lblPaymentType.EditingMode = False
+            Me.lblPaymentType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblPaymentType.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblPaymentType.Location = New System.Drawing.Point(11, 40)
+            Me.lblPaymentType.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblPaymentType.Name = "lblPaymentType"
+            Me.lblPaymentType.Size = New System.Drawing.Size(115, 23)
+            Me.lblPaymentType.TabIndex = 257
+            Me.lblPaymentType.Text = "Payee Type:"
+            Me.lblPaymentType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblPaymentType.Translatable = True
             '
             'txtDateCreated
             '
@@ -361,22 +428,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayType.ValueIsNullable = False
             Me.cboPayType.ValueIsNumeric = False
             Me.cboPayType.ValueMember = "Code"
-            '
-            'lblPaymentType
-            '
-            Me.lblPaymentType.BackColor = System.Drawing.Color.Transparent
-            Me.lblPaymentType.DisplayOnly = True
-            Me.lblPaymentType.EditingMode = False
-            Me.lblPaymentType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblPaymentType.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblPaymentType.Location = New System.Drawing.Point(11, 40)
-            Me.lblPaymentType.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblPaymentType.Name = "lblPaymentType"
-            Me.lblPaymentType.Size = New System.Drawing.Size(115, 23)
-            Me.lblPaymentType.TabIndex = 257
-            Me.lblPaymentType.Text = "Payee Type:"
-            Me.lblPaymentType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.lblPaymentType.Translatable = True
             '
             'DataGridViewJournalItems
             '
@@ -1586,9 +1637,9 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout1.Controls.Add(Me.txtTotalCredits)
             Me.CFlowLayout1.Controls.Add(Me.txtTotalDebits)
             Me.CFlowLayout1.Dock = System.Windows.Forms.DockStyle.Bottom
-            Me.CFlowLayout1.Location = New System.Drawing.Point(0, 663)
+            Me.CFlowLayout1.Location = New System.Drawing.Point(0, 667)
             Me.CFlowLayout1.Name = "CFlowLayout1"
-            Me.CFlowLayout1.Size = New System.Drawing.Size(738, 6)
+            Me.CFlowLayout1.Size = New System.Drawing.Size(738, 2)
             Me.CFlowLayout1.TabIndex = 6
             '
             'btnPrintPcReplenishment
@@ -2168,56 +2219,6 @@ Namespace PresentationLayer.Views.Forms
             'bsDjOiItems
             '
             Me.bsDjOiItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.DjOiItemModel)
-            '
-            'cboPayeeIdNo
-            '
-            Me.cboPayeeIdNo.BackColor = System.Drawing.Color.White
-            Me.cboPayeeIdNo.BegFindValue = Nothing
-            Me.cboPayeeIdNo.ChangingSearchValueOnly = False
-            Me.tlpDisbursement.SetColumnSpan(Me.cboPayeeIdNo, 5)
-            Me.cboPayeeIdNo.CurrentSearchTerm = ""
-            Me.cboPayeeIdNo.DataValue = Nothing
-            Me.cboPayeeIdNo.DefaultValue = Nothing
-            Me.cboPayeeIdNo.DisplayMember = "Name"
-            Me.cboPayeeIdNo.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.cboPayeeIdNo.DropDownHeight = 21
-            Me.cboPayeeIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
-            Me.cboPayeeIdNo.Editable = True
-            Me.cboPayeeIdNo.EditingMode = False
-            Me.cboPayeeIdNo.EndFindValue = Nothing
-            Me.cboPayeeIdNo.FieldDescription = Nothing
-            Me.cboPayeeIdNo.FieldName = Nothing
-            Me.cboPayeeIdNo.FilterRule = Nothing
-            Me.cboPayeeIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.cboPayeeIdNo.FindEnabled = False
-            Me.cboPayeeIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.cboPayeeIdNo.ForeColor = System.Drawing.Color.Black
-            Me.cboPayeeIdNo.FormattingEnabled = True
-            Me.cboPayeeIdNo.HideWhenNotEditingOrAdding = False
-            Me.cboPayeeIdNo.IgnoreCase = False
-            Me.cboPayeeIdNo.LimitToList = False
-            Me.cboPayeeIdNo.LinkedLabel = Me.lblSupplierIdNo
-            Me.cboPayeeIdNo.Location = New System.Drawing.Point(128, 68)
-            Me.cboPayeeIdNo.Margin = New System.Windows.Forms.Padding(1)
-            Me.cboPayeeIdNo.MaxDropDownItems = 1
-            Me.cboPayeeIdNo.Name = "cboPayeeIdNo"
-            Me.cboPayeeIdNo.OldValue = 0
-            Me.cboPayeeIdNo.OriginalDataSource = Nothing
-            Me.cboPayeeIdNo.OriginalList = Nothing
-            Me.cboPayeeIdNo.OverrideDropDownStyleList = False
-            Me.cboPayeeIdNo.PreviousSearchTerm = Nothing
-            Me.cboPayeeIdNo.PropertySelector = Nothing
-            Me.cboPayeeIdNo.Size = New System.Drawing.Size(350, 25)
-            Me.cboPayeeIdNo.SuggestBoxHeight = 200
-            Me.cboPayeeIdNo.SuggestCharCount = 0
-            Me.cboPayeeIdNo.SuggestListOrderRule = Nothing
-            Me.cboPayeeIdNo.TabIndex = 7
-            Me.cboPayeeIdNo.TextToSearch = Nothing
-            Me.cboPayeeIdNo.Translatable = False
-            Me.cboPayeeIdNo.ValueIsMandatory = False
-            Me.cboPayeeIdNo.ValueIsNullable = False
-            Me.cboPayeeIdNo.ValueIsNumeric = False
-            Me.cboPayeeIdNo.ValueMember = "IdNo"
             '
             'DisbursementJournalEntry
             '

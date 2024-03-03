@@ -98,12 +98,13 @@ Namespace PresentationLayer.Presenters
             AddHandler view.FirstLineUpdateNeeded, AddressOf OnFirstLineUpdateNeeded
             AddHandler view.PaymentTypeChanged, AddressOf OnPaymentTypeChanged
             AddHandler view.PayeeIdNoChanged, AddressOf OnPayeeIdNoChanged
+
+            view.CdAccountCount = CdAccountCount
+            view.DefaultAccount = DefaultDisbursementAccount
             ' needed the next line for the payeeidno to be displayed
             ' don't know why but without this the EmployeeNames if "E" won't display in the
             ' cboPayeeIdNo control, leave this until you find a fix.
-            view.CdAccountCount = CdAccountCount
-            view.DefaultAccount = DefaultDisbursementAccount
-            CreatePayeeDataSource(CodeToEnum(Of PaymentTypeSelection)(view.PaymentType))
+            'CreatePayeeDataSource(CodeToEnum(Of PaymentTypeSelection)(PaymentTypeSelection.AccountsPayable))
         End Sub
 
         Protected Overrides Sub CreateDataSources()
@@ -1172,6 +1173,8 @@ Namespace PresentationLayer.Presenters
 
         Private Sub CreatePayeeDataSource(paymentType As PaymentTypeSelection)
             Select Case paymentType
+                Case PaymentTypeSelection.AccountsPayable
+                    MakeVarDataSources({New String() {"Supplier", "PayeeDataSource", Nothing, Nothing}})
                 Case PaymentTypeSelection.Employee
                     MakeVarDataSources({New String() {"Employee", "PayeeDataSource", Nothing, Nothing}})
                 Case PaymentTypeSelection.Supplier, PaymentTypeSelection.AccountsPayable
@@ -1179,7 +1182,8 @@ Namespace PresentationLayer.Presenters
                 Case PaymentTypeSelection.CustomerRefund
                     MakeVarDataSources({New String() {"Customer", "PayeeDataSource", Nothing, Nothing}})
                 Case Else
-                    View.PayeeDataSource = Nothing
+                    MakeVarDataSources({New String() {"Supplier", "PayeeDataSource", Nothing, Nothing}})
+                    'View.PayeeDataSource = Nothing
             End Select
         End Sub
 

@@ -493,7 +493,7 @@ Namespace PresentationLayer.Views.Forms
             UpdateFirstLine()
         End Sub
 
-        Private Sub CboPayeeIdNo_ValueChanged(sender As Object, e As EventArgs) Handles cboPayeeIdNo.SelectionChangeCommitted, cboPayeeIdNo.Validated ',  cboPayeeIdNo.SelectedValueChanged
+        Private Sub CboPayeeIdNo_ValueChanged(sender As Object, e As EventArgs)  ',  cboPayeeIdNo.SelectedValueChanged
             RaiseEvent PayeeIdNoChanged()
             If OpenInvoiceMode Then
                 UpdateOpenInvoiceDisplay()
@@ -514,6 +514,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub CboPayType_ValueChanged(sender As Object, e As EventArgs) Handles cboPayType.SelectionChangeCommitted '  ,cboPayType.Validated, cboPayType.SelectedValueChanged 
             If FormShown Then
+
                 DisplayPrintCheckButton(cboPayType.SelectedValue)
                 DisplayCheckInfo()
             End If

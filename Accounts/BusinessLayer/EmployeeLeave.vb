@@ -25,7 +25,7 @@ Namespace BusinessLayer
         Public Property EnteredBy As Int32
         Public Property DateCreated As DateTime?
         Public Property EmployeeIdNo As Int32
-        Public Property EndDate As DateTime
+        Public Property EndDate As Date?
         Public Property FullDay As Boolean
         Public Property Holiday As Boolean
         Public Property HolidayIdNo As Int16
@@ -33,7 +33,7 @@ Namespace BusinessLayer
         Public Property LeaveIdNo As Int16
         Public Property Reason As String
         Public Property Status As String
-        Public Property StartDate As DateTime
+        Public Property StartDate As Date?
         Public Property SupervisorIdNo As Int32?
         Public Property ApprovalHistory As List(Of EmployeeLeaveApprovalHistory)
 

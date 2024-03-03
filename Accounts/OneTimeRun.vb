@@ -167,6 +167,10 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgValueMustBeGreaterThan", "Sorry the entered value in field '<{fieldName1} of {fieldValue1}>' must be greater than '<{fieldName2} of {fieldValue2}>.'", "Error")
         Messaging.AddMessage("MsgValueMustBeLessThanOrEqual", "Sorry the entered value in field '<{fieldName1} of {fieldValue1}>' must be less than or equal to '<{fieldName2} of {fieldValue2}>.'", "Error")
         Messaging.AddMessage("MsgValueMustBeGreaterThanOrEqual", "Sorry the entered value in field '<{fieldName1} of {fieldValue1}>' must be greater than or equal to '<{fieldName2} of {fieldValue2}>.'", "Error")
+        Messaging.AddMessage("MsgNotEnoughLeave", "Sorry, either you have no more leave credits for this type of leave or the <{noOfDaysApplied} days> applied exceeds the <{daysAllowed} day(s)> of allowed leave days for <{leaveName}>.", "Error")
+        Messaging.AddMessage("MsgNoEarnedLeaves", "You have no earned <{leaveName}> at present.  You must first file an earned leave and have it approved before applying for this leave.", "Error")
+        Messaging.AddMessage("MsgNotEnoughEarnedLeave", "Sorry the requested <{leaveName}> leave of <{requestedLeave} day(s)> is more than the leave credits of <{earnedLeaveDays} day(s)> for this employee.", "Error")
+
     End Sub
 
     'Public Shared Sub CreateEnums()

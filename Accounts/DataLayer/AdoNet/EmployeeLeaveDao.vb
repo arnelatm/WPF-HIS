@@ -71,7 +71,7 @@ Namespace DataLayer.AdoNet
             .EnteredBy = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("EnteredBy")),
             .DateCreated = AATM.DataLayer.AdoNet.Extensions.AsNullableDateTime(reader("DateCreated")),
             .EmployeeIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("EmployeeIdNo")),
-            .EndDate = AATM.DataLayer.AdoNet.Extensions.AsDateTime(reader("EndDate")),
+            .EndDate = AATM.DataLayer.AdoNet.Extensions.AsNullableDate(reader("EndDate")),
             .FullDay = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("FullDay")),
             .Holiday = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Holiday")),
             .HolidayIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("HolidayIdNo")),
@@ -79,7 +79,7 @@ Namespace DataLayer.AdoNet
             .LeaveIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("LeaveIdNo")),
             .Reason = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Reason")),
             .Status = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Status")),
-            .StartDate = AATM.DataLayer.AdoNet.Extensions.AsDateTime(reader("StartDate")),
+            .StartDate = AATM.DataLayer.AdoNet.Extensions.AsNullableDate(reader("StartDate")),
             .SupervisorIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32?)(reader("SupervisorIdNo"))
             }
 

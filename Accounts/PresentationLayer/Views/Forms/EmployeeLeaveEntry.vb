@@ -13,6 +13,8 @@ Namespace PresentationLayer.Views.Forms
         Private _approvalHistory As List(Of EmployeeLeaveApprovalHistoryView)
         Private _holidayLeave As Boolean
         Private _isASupervisor As Boolean
+        Public Event DateValuesChanged() Implements IEmployeeLeaveView.DateValuesChanged
+        Public Event EmployeeIdChanged() Implements IEmployeeLeaveView.EmployeeIdChanged
 
         Public Sub New(ByVal holidayLeave As Boolean)
             ' This call is required by the designer.
@@ -65,7 +67,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property EndDate As DateTime Implements IEmployeeLeaveView.EndDate
+        Public Property EndDate As Date? Implements IEmployeeLeaveView.EndDate
             Get
                 Return dtpEndDate.Value
             End Get
@@ -107,6 +109,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 cboStatus.SetValue(Value)
+
                 'Dim status As String = value
                 'If status Is Nothing Then
                 '    status = "0"
@@ -115,7 +118,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property StartDate As DateTime Implements IEmployeeLeaveView.StartDate
+        Public Property StartDate As Date? Implements IEmployeeLeaveView.StartDate
             Get
                 Return dtpStartDate.Value
             End Get
@@ -170,6 +173,19 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property NumberOfDays As Short Implements IEmployeeLeaveView.NumberOfDays
+            Get
+                Try
+                    Return DateDiff(DateInterval.Day, CDate(StartDate), CDate(EndDate)) + 1
+                Catch ex As Exception
+                    Return 0
+                End Try
+            End Get
+            Set(value As Int16)
+                txtNoOfDays.Text = value.ToString("0")
+            End Set
+        End Property
+
 #End Region
 
         Protected Overrides Sub CreateMainFieldsDictionary()
@@ -189,15 +205,29 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub dtpStartDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpStartDate.Validated
-            If dtpEndDate.Value Is Nothing OrElse dtpEndDate.Value < dtpStartDate.Value Then
-                dtpEndDate.Value = dtpStartDate.Value
+            GlobalSubs.AdjustForMinimumDate(sender.Value, #1901-01-01#)
+            If dtpEndDate.Value Is Nothing AndAlso dtpEndDate.Value < dtpStartDate.Value Then
+                dtpEndDate.Value = StartDate
             End If
+            Try
+                NumberOfDays = DateDiff(DateInterval.Day, CDate(dtpStartDate.Value), CDate(dtpEndDate.Value)) + 1
+            Catch ex As Exception
+                MessageBox.Show("Number of days overflow, value too large or too low, setting value to zero(0).")
+                NumberOfDays = 0
+            End Try
         End Sub
 
         Private Sub dtpEndDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpEndDate.Validated
-            If dtpStartDate.Value Is Nothing OrElse dtpStartDate.Value > dtpEndDate.Value Then
-                dtpStartDate.Value = dtpEndDate.Value
+            GlobalSubs.AdjustForMaximumDate(EndDate, #2999-12-31#)
+            If dtpStartDate.Value Is Nothing AndAlso dtpStartDate.Value > dtpEndDate.Value Then
+                dtpStartDate.Value = StartDate
             End If
+            Try
+                NumberOfDays = DateDiff(DateInterval.Day, CDate(dtpStartDate.Value), CDate(dtpEndDate.Value)) + 1
+            Catch ex As Exception
+                MessageBox.Show("Number of days overflow, value too large or too low, setting value to zero(0).")
+                NumberOfDays = 0
+            End Try
         End Sub
 
         Private Sub chkFullDay_CheckedChanged(sender As Object, e As EventArgs) Handles chkFullDay.CheckedChanged
