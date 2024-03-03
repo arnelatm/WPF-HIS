@@ -153,7 +153,6 @@ Public Module GlobalFunctions
         Return NoOfYears - 1 + (DateDiff(DateInterval.Day, tempDate, CDate(endDate)) + 1) / 365
     End Function
 
-
     Public Function FindControlRecursive(list As List(Of Control), parent As Control) As List(Of Control)
         If parent Is Nothing Then Return list
         list.Add(parent)

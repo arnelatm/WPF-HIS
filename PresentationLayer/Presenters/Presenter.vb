@@ -50,7 +50,7 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
     Public Sub New(itemView As IView)
         MyBase.New(itemView)
         InitializeTreeViewIfPresent()
-        WithTreeView = True
+        'WithTreeView = True
     End Sub
 
     Private Sub InitializeTreeViewIfPresent()
@@ -58,6 +58,8 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
         If pi IsNot Nothing Then
             _WithTreeView = True
             FormTreeView = pi.GetValue(View)
+        Else
+            _WithTreeView = False
         End If
     End Sub
 
@@ -148,7 +150,7 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
     Protected NodeToDelete As TreeNode
 
     Public Sub DisplayTree(Optional IdNo As Int64 = 0)
-        If WithTreeView Then
+        If WithTreeView And FormTreeView IsNot Nothing Then
             Dim root As TreeNode = FormTreeView.Nodes(0)
             root.Nodes.Clear()
             Dim treeViewData As Object = GetTreeViewData()

@@ -1039,6 +1039,8 @@ Namespace PresentationLayer.Presenters
         Private Sub MakePayorIdNoDataSource(payorType As String)
             Dim x As ReceiptTypeSelection = CodeToEnum(Of ReceiptTypeSelection)(payorType)
             Select Case x
+                Case ReceiptTypeSelection.AccountsReceivable
+                    MakeVarDataSources({New String() {"Customer", "PayorDataSource", Nothing, Nothing}})
                 Case ReceiptTypeSelection.Employee
                     MakeVarDataSources({New String() {"Employee", "PayorDataSource", Nothing, Nothing}})
                 Case ReceiptTypeSelection.Customer, ReceiptTypeSelection.AccountsReceivable
@@ -1046,6 +1048,7 @@ Namespace PresentationLayer.Presenters
                 Case ReceiptTypeSelection.SupplierRefund
                     MakeVarDataSources({New String() {"Supplier", "PayorDataSource", Nothing, Nothing}})
                 Case Else
+                    MakeVarDataSources({New String() {"Customer", "PayorDataSource", Nothing, Nothing}})
                     View.PayorDataSource = Nothing
             End Select
         End Sub

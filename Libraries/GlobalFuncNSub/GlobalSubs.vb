@@ -154,6 +154,23 @@ Public Module GlobalSubs
         Next
     End Sub
 
+    Public Sub AdjustForMinimumDate(ByRef dateVar As Date?, Optional dDate As Date? = #0001-01-01#)
+        If dateVar Is Nothing OrElse dateVar < dDate Then
+            MessageBox.Show("Date can't be less than " + CDate(dDate).ToLongDateString())
+            dateVar = CDate(dDate)
+            Beep()
+        End If
+    End Sub
+
+    Public Sub AdjustForMaximumDate(ByRef dateVar As Date?, Optional dDate As Date? = #2999-12-31#)
+        If dateVar Is Nothing OrElse dateVar > dDate Then
+            MessageBox.Show("Date can't be more than " + CDate(dDate).ToLongDateString())
+            dateVar = CDate(dDate)
+            Beep()
+        End If
+    End Sub
+
+
     Public Enum CalendarToUse
         Gregorian = 0
         Hijri = 1

@@ -342,6 +342,21 @@ Public Class Messaging
         Shell.Run("mshta.exe vbscript:close(CreateObject(""WScript.shell"").Popup(""" & messageParam.Message & """," & messageParam.Seconds & ",""" & messageParam.Title & """))")
     End Sub
 
+
+    Public Shared Sub MinimumDateError(dDate As Date)
+        If dDate < dDate Then
+            MessageBox.Show("Date can't be less than " + dDate.ToLongDateString())
+            Beep()
+        End If
+    End Sub
+
+    Public Shared Sub MaximumDateError(dDate As Date)
+        If dDate < dDate Then
+            MessageBox.Show("Date can't be more than " + dDate.ToLongDateString())
+            Beep()
+        End If
+    End Sub
+
     'Public Shared Function SelectPeriodCaption(ByVal originalCaption As String, ByVal FormCulture As Globalization.CultureInfo, ByVal periodCode As String)
     '    Dim curCulture = CultureInfo.CurrentCulture
     '    If periodCode = "Y" Then
