@@ -329,11 +329,9 @@ Namespace PresentationLayer.Presenters
             End If
             If retVal Then
                 If leaveModel.Earnable Then
-                    If EarnableLeaveOk(leaveModel) Then
-
+                    If Not EarnableLeaveOk(leaveModel) Then
+                        retVal = False
                     End If
-                Else
-                    retVal = True
                 End If
             End If
             Return retVal
@@ -463,17 +461,17 @@ Namespace PresentationLayer.Presenters
             Dim retVal As Boolean = True
             Dim employeeLeaveCreditModel As EmployeeLeaveCreditModel
             employeeLeaveCreditModel = _employeeLeaveCreditService.GetLeaveCredit(View.EmployeeIdNo, View.LeaveIdNo)
-            If employeeLeaveCreditModel IsNot Nothing Then
+            If employeeLeaveCreditModel.IdNo <> 0 Then
                 Dim earnedLeaveDays As Long = employeeLeaveCreditModel.AccumulatedLeave
                 Dim noOfDaysRequested = DateDiff(DateInterval.Day, CDate(View.StartDate), CDate(View.EndDate)) + 1
                 If noOfDaysRequested > earnedLeaveDays Then
                     retVal = False
-                    Dim leaveName As String = TranslateFieldName("LeaveName", "Leave")
+                    Dim leaveName As String = GetLeaveName(leaveModel)
                     Messaging.ShowPmMessage(True, "MsgNotEnoughEarnedLeave", {"leaveName", leaveName, "noOfDaysRequested", noOfDaysRequested.ToString("0"), "earnedLeaveDays", earnedLeaveDays.ToString("0")}, "", "Error")
                 End If
             Else
                 retVal = False
-                Messaging.Show(True, "MsgNoEarnedLeaves", {"leaveName", TranslateFieldName("LeaveName", "Leave")})
+                Messaging.Show(True, "MsgNoEarnedLeaves", {"leaveName", GetLeaveName(leaveModel)})
             End If
             Return retVal
         End Function

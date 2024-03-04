@@ -44,10 +44,11 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DoctorCode As String Implements IPmrInvestigationRequestView.DoctorCode
             Get
-                Return cboDoctorName.GetValue()
+                Return _doctorCode
             End Get
             Set(value As String)
-                cboDoctorName.SetValue(value)
+                _doctorCode = value
+                txtDoctorCode.Text = value
             End Set
         End Property
 
@@ -212,8 +213,9 @@ Namespace PresentationLayer.Views.Forms
             If String.IsNullOrEmpty(cboDoctorName.SelectedValue) Then
                 PmrPatientsDisplay = Nothing
                 txtDoctorCode.Text = ""
+                DoctorCode = ""
             Else
-                txtDoctorCode.Text = cboDoctorName.SelectedValue
+                DoctorCode = cboDoctorName.SelectedItem("Code")
                 RaiseEvent GetDoctorPatientsRequested()
             End If
         End Sub
