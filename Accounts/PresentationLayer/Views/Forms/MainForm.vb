@@ -1092,9 +1092,9 @@ Namespace PresentationLayer.Views.Forms
             'formToRun.Show()
         End Sub
 
-        Private Sub ToolStripMenuItemPMRReports_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPMRReports.Click
-            RunForm(Of PmrInvestigationRequestForm, PmrInvestigationRequestPresenter(Of PmrInvestigationRequestModel))()
-        End Sub
+        'Private Sub ToolStripMenuItemPMRReports_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPMRReports.Click
+        '    RunForm(Of PmrInvestigationRequestForm, PmrInvestigationRequestPresenter(Of PmrInvestigationRequestModel))()
+        'End Sub
 
         Private Sub ToolStripMenuItemCodeGroup_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCodeGroup.Click
             RunForm(Of CodeGroupEntryTv, CodeGroupPresenter(Of CodeGroupModel))()

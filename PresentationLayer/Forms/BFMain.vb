@@ -565,7 +565,12 @@ Public Class BfMain
 
     Private Sub UseOriginalDataGridView(ByRef CtDataGridView As DataGridView)
         For Each col As DataGridViewColumn In CtDataGridView.Columns
-            col.HeaderText = col.Tag
+            If col.Tag Is Nothing Then
+                col.Tag = col.HeaderText
+            Else
+                col.HeaderText = col.Tag
+            End If
+
         Next
     End Sub
 
