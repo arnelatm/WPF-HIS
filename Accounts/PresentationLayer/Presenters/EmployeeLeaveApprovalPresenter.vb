@@ -51,10 +51,15 @@ Namespace PresentationLayer.Presenters
 
         Public Overrides Sub EntryFormLoaded()
             Dim employeeIdNo As Int32 = Service.GetUserEmployeeIdNo()
-            If Not IsUserASupervisor() Then
-                DataFilter += " and EmployeeIdNo = " & employeeIdNo.ToString()
+            If UserIsASuperAdministrator() Then
+                ' include all records
+            ElseIf UserHasHrManagerAccess() Then
+                ' include all records
+            ElseIf Not IsUserASupervisor() Then
+                DataFilter += " ApprovedBy = " & employeeIdNo.ToString()
             Else
-                DataFilter += " and (SupervisorIdNo = " & employeeIdNo.ToString() + " or EmployeeIdNo = " & employeeIdNo.ToString() & ")"
+                ' meaning don't show any data
+                DataFilter = " IdNo < 0 "
             End If
         End Sub
 

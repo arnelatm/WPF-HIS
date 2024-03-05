@@ -1,4 +1,5 @@
-﻿Imports AATM.Accounts.PresentationLayer.Models
+﻿Imports System.Globalization
+Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.BusinessLayer
@@ -37,6 +38,12 @@ Namespace PresentationLayer.Presenters
             _holidayLeave = holidayLeave
             AddHandler View.DateValuesChanged, AddressOf OnDateValuesChanged
             AddHandler View.EmployeeIdChanged, AddressOf OnEmployeeIdChanged
+            AddHandler View.ComputeNumberOfDays, AddressOf OnComputeNumberOfDays
+        End Sub
+
+        Private Sub OnComputeNumberOfDays()
+            ComputeEmployeeServiceDetails()
+            RecomputeLeaveDays()
         End Sub
 
         Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
@@ -45,6 +52,7 @@ Namespace PresentationLayer.Presenters
             View.EnteredBy = GlobalVariables.UserIdNo
             View.StartDate = Today()
             View.EndDate = Today()
+            View.NoOfDays = 1
         End Sub
 
         Public Overrides Sub EntryFormLoaded()
@@ -159,7 +167,7 @@ Namespace PresentationLayer.Presenters
                             End If
                         Else
                             ' check if no. of days for leave is not yet exceeded
-                            Dim noOfAppliedDays As Int16 = 0
+                            Dim noOfAppliedDays As Int32 = 0
                             For Each item In records
                                 noOfAppliedDays += DateDiff(DateInterval.Day, CDate(item.StartDate), CDate(item.EndDate)) + 1
                             Next
@@ -292,7 +300,7 @@ Namespace PresentationLayer.Presenters
             Dim records As New List(Of EmployeeLeaveModel)
             Dim retValue As Boolean = True
             records = _employeeLeaveService.GetEmployeeLeaves(View.EmployeeIdNo, View.LeaveIdNo, "All")
-            If records.Count <> 0 Then
+            If records.Count <> 0 And records(0).IdNo <> View.IdNo Then
                 Dim leaveName As String = If(Messaging.IsArabic, leaveModel.LeaveNameAra, leaveModel.LeaveName)
                 Dim leaveIdNo As Int16 = Format(records(0).IdNo, "0")
                 If Not (records Is Nothing OrElse records.Count = 0) Then
@@ -461,9 +469,9 @@ Namespace PresentationLayer.Presenters
             Dim retVal As Boolean = True
             Dim employeeLeaveCreditModel As EmployeeLeaveCreditModel
             employeeLeaveCreditModel = _employeeLeaveCreditService.GetLeaveCredit(View.EmployeeIdNo, View.LeaveIdNo)
+            Dim earnedLeaveDays As Long = employeeLeaveCreditModel.AccumulatedLeave
+            Dim noOfDaysRequested = DateDiff(DateInterval.Day, CDate(View.StartDate), CDate(View.EndDate)) + 1
             If employeeLeaveCreditModel.IdNo <> 0 Then
-                Dim earnedLeaveDays As Long = employeeLeaveCreditModel.AccumulatedLeave
-                Dim noOfDaysRequested = DateDiff(DateInterval.Day, CDate(View.StartDate), CDate(View.EndDate)) + 1
                 If noOfDaysRequested > earnedLeaveDays Then
                     retVal = False
                     Dim leaveName As String = GetLeaveName(leaveModel)
@@ -472,6 +480,15 @@ Namespace PresentationLayer.Presenters
             Else
                 retVal = False
                 Messaging.Show(True, "MsgNoEarnedLeaves", {"leaveName", GetLeaveName(leaveModel)})
+            End If
+            If retVal Then
+                Dim pendingLeaves As Int32 = GetTotalPendingLeaves(leaveModel, earnedLeaveDays)
+                If pendingLeaves > 0 Then
+                    If pendingLeaves + noOfDaysRequested > earnedLeaveDays Then
+                        retVal = False
+                        Messaging.ShowPmMessage(True, "MsgLeavePlusPendingExcess", {"noOfDaysRequested", noOfDaysRequested.ToString("0"), "pendingLeaves", pendingLeaves.ToString("0"), "leaveName", GetLeaveName(leaveModel), "earnedLeaveDays", earnedLeaveDays.ToString("0")})
+                    End If
+                End If
             End If
             Return retVal
         End Function
@@ -525,45 +542,93 @@ Namespace PresentationLayer.Presenters
 
         Protected Sub OnAfterChangedRecord() Handles MyBase.AfterChangeRecord
             ComputeEmployeeServiceDetails()
-            OnDateValuesChanged()
+            RecomputeLeaveDays()
         End Sub
 
         Protected Function ComputeEmployeeServiceDetails()
-            Dim obj As Object = Service.GetFieldsWithIdNo(View.EmployeeIdNo, "Employee", "HiredDate,ReleasedDate")
-            _hiredDate = obj.HiredDate
-            _releasedDate = obj.ReleasedDate
+            If View.EmployeeIdNo > 0 Then
+                Dim obj As Object = Service.GetFieldsWithIdNo(View.EmployeeIdNo, "Employee", "HiredDate,ReleasedDate")
+                If obj IsNot Nothing Then
+                    _hiredDate = obj.HiredDate
+                    _releasedDate = obj.ReleasedDate
+                End If
+            End If
         End Function
 
         Private Sub OnDateValuesChanged()
-            If View.StartDate Is Nothing Or View.EndDate Is Nothing Then
-                View.NumberOfDays = 0
+            If View.EmployeeIdNo = 0 Then
+                If View.StartDate = Date.MinValue Then
+                    View.StartDate = Today()
+                End If
+                If View.EndDate = Date.MinValue Then
+                    View.EndDate = Today()
+                End If
             Else
-                Try
-                    View.NumberOfDays = DateDiff(DateInterval.Day, CDate(View.StartDate), CDate(View.EndDate)) + 1
-                Catch ex As Exception
-                    MessageBox.Show("Numeric overflow, maximum number of days is only " + Int16.MaxValue.ToString())
-                    View.NumberOfDays = Int16.MaxValue
-                End Try
+                If View.StartDate < _hiredDate Then
+                    Messaging.Show(True, "MsgValueMustBeGreaterThanOrEqual", {"fieldName1", "Start Date", "fieldValue1", View.StartDate.ToShortDateString, "fieldName2", "Hire Date", "fieldValue2", CDate(_hiredDate).ToShortDateString()})
+                    View.StartDate = _hiredDate
+                End If
+                If _releasedDate IsNot Nothing Then
+                    If View.EndDate > _releasedDate Then
+                        Messaging.Show(True, "MsgValueMustBeLessThanOrEqual", {"fieldName1", "End Date", "fieldValue1", View.EndDate.ToShortDateString(), "fieldName2", "Released Date", "fieldValue2", CDate(_releasedDate).ToShortDateString()})
+                        View.EndDate = _releasedDate
+                    Else
+                        If View.EndDate < _hiredDate Then
+                            View.EndDate = _releasedDate
+                        End If
+                    End If
+                Else
+                    If View.EndDate < _hiredDate Or View.EndDate < View.StartDate Then
+                        View.EndDate = Today()
+                    End If
+                End If
+                If View.EndDate < View.StartDate Then
+                    View.EndDate = View.StartDate
+                End If
             End If
+            RecomputeLeaveDays()
         End Sub
 
+        Private Sub RecomputeLeaveDays()
+            Try
+                View.NoOfDays = DateDiff(DateInterval.Day, CDate(View.StartDate), CDate(View.EndDate)) + 1
+            Catch ex As Exception
+                MessageBox.Show("Numeric overflow, maximum number of days is only " + Int16.MaxValue.ToString())
+                View.NoOfDays = Int16.MaxValue
+            End Try
+        End Sub
 
         Private Sub OnEmployeeIdChanged()
             If View.EmployeeIdNo <> 0 Then
                 ComputeEmployeeServiceDetails()
-                If View.StartDate Is Nothing OrElse View.StartDate < _hiredDate Then
+                If View.StartDate = Date.MinValue OrElse View.StartDate < _hiredDate Then
                     View.StartDate = _hiredDate
                 End If
-                If View.EndDate IsNot Nothing Then
-                    If View.EndDate > _releasedDate Then
-                        View.EndDate = _releasedDate
-                        MessageBox.Show("End Date can't be more than the employee release date!")
-                        Beep()
-                    End If
+                If View.EndDate = Date.MinValue OrElse View.EndDate > _releasedDate Then
+                    View.EndDate = _releasedDate
+                    MessageBox.Show("End Date can't be more than the employee release date!")
+                    Beep()
                 End If
             End If
         End Sub
 
+        Private Function GetTotalPendingLeaves(leaveModel As LeaveModel, noOfDaysApplied As Int32) As Int32
+            ' check all applied leaves not only the currently shown leave, possibly multiple leaves applied for earnable leaves.
+            Dim retVal As Boolean = True
+            Dim records As New List(Of EmployeeLeaveModel)
+            Dim retValue As Boolean = True
+            records = _employeeLeaveService.GetEmployeeLeaves(View.EmployeeIdNo, View.LeaveIdNo, "Pending")
+            Dim noOfDays As Int32 = 0
+            For Each record As EmployeeLeaveModel In records
+                If record.IdNo = View.IdNo Then
+                    ' do not include the currently shown record
+                Else
+                    noOfDays += DateDiff(DateInterval.Day, CDate(record.StartDate), CDate(record.EndDate)) + 1
+                End If
+            Next
+            Return noOfDays
+
+        End Function
 
     End Class
 

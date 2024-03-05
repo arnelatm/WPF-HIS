@@ -15,6 +15,7 @@ Namespace PresentationLayer.Views.Forms
         Private _isASupervisor As Boolean
         Public Event DateValuesChanged() Implements IEmployeeLeaveView.DateValuesChanged
         Public Event EmployeeIdChanged() Implements IEmployeeLeaveView.EmployeeIdChanged
+        Public Event ComputeNumberOfDays() Implements IEmployeeLeaveView.ComputeNumberOfDays
 
         Public Sub New(ByVal holidayLeave As Boolean)
             ' This call is required by the designer.
@@ -67,8 +68,9 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property EndDate As Date? Implements IEmployeeLeaveView.EndDate
+        Public Property EndDate As Date Implements IEmployeeLeaveView.EndDate
             Get
+                GlobalSubs.AdjustForMinimumDate(dtpEndDate.Value)
                 Return dtpEndDate.Value
             End Get
             Set
@@ -118,12 +120,14 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property StartDate As Date? Implements IEmployeeLeaveView.StartDate
+        Public Property StartDate As Date Implements IEmployeeLeaveView.StartDate
             Get
+                GlobalSubs.AdjustForMinimumDate(dtpStartDate.Value)
                 Return dtpStartDate.Value
             End Get
             Set
                 dtpStartDate.Value = Value
+                RaiseEvent ComputeNumberOfDays()
             End Set
         End Property
 
@@ -173,18 +177,19 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property NumberOfDays As Short Implements IEmployeeLeaveView.NumberOfDays
+        Public Property NoOfDays As Int32 Implements IEmployeeLeaveView.NoOfDays
             Get
                 Try
-                    Return DateDiff(DateInterval.Day, CDate(StartDate), CDate(EndDate)) + 1
+                    Return CInt(txtNoOfDays.Text)
                 Catch ex As Exception
                     Return 0
                 End Try
             End Get
-            Set(value As Int16)
+            Set(value As Int32)
                 txtNoOfDays.Text = value.ToString("0")
             End Set
         End Property
+
 
 #End Region
 
@@ -198,6 +203,7 @@ Namespace PresentationLayer.Views.Forms
                 {"HolidayIdNo", cboHolidayIdNo},
                 {"IdNo", TxtIdNo},
                 {"LeaveIdNo", cboLeaveIdNo},
+                {"NoOfDays", txtNoOfDays},
                 {"Reason", txtReason},
                 {"Status", cboStatus},
                 {"StartDate", dtpStartDate}
@@ -205,29 +211,31 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub dtpStartDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpStartDate.Validated
-            GlobalSubs.AdjustForMinimumDate(sender.Value, #1901-01-01#)
-            If dtpEndDate.Value Is Nothing AndAlso dtpEndDate.Value < dtpStartDate.Value Then
-                dtpEndDate.Value = StartDate
-            End If
-            Try
-                NumberOfDays = DateDiff(DateInterval.Day, CDate(dtpStartDate.Value), CDate(dtpEndDate.Value)) + 1
-            Catch ex As Exception
-                MessageBox.Show("Number of days overflow, value too large or too low, setting value to zero(0).")
-                NumberOfDays = 0
-            End Try
+            RaiseEvent DateValuesChanged()
+            'GlobalSubs.AdjustForMinimumDate(sender.Value, #1901-01-01#)
+            'If dtpEndDate.Value Is Nothing AndAlso dtpEndDate.Value < dtpStartDate.Value Then
+            '    dtpEndDate.Value = StartDate
+            'End If
+            'Try
+            '    NoOfDays = DateDiff(DateInterval.Day, CDate(dtpStartDate.Value), CDate(dtpEndDate.Value)) + 1
+            'Catch ex As Exception
+            '    MessageBox.Show("Number of days overflow, value too large or too low, setting value to zero(0).")
+            '    NoOfDays = 0
+            'End Try
         End Sub
 
         Private Sub dtpEndDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpEndDate.Validated
-            GlobalSubs.AdjustForMaximumDate(EndDate, #2999-12-31#)
-            If dtpStartDate.Value Is Nothing AndAlso dtpStartDate.Value > dtpEndDate.Value Then
-                dtpStartDate.Value = StartDate
-            End If
-            Try
-                NumberOfDays = DateDiff(DateInterval.Day, CDate(dtpStartDate.Value), CDate(dtpEndDate.Value)) + 1
-            Catch ex As Exception
-                MessageBox.Show("Number of days overflow, value too large or too low, setting value to zero(0).")
-                NumberOfDays = 0
-            End Try
+            RaiseEvent DateValuesChanged()
+            'GlobalSubs.AdjustForMaximumDate(EndDate, #2999-12-31#)
+            'If dtpStartDate.Value Is Nothing AndAlso dtpStartDate.Value > dtpEndDate.Value Then
+            '    dtpStartDate.Value = StartDate
+            'End If
+            'Try
+            '    NoOfDays = DateDiff(DateInterval.Day, CDate(dtpStartDate.Value), CDate(dtpEndDate.Value)) + 1
+            'Catch ex As Exception
+            '    MessageBox.Show("Number of days overflow, value too large or too low, setting value to zero(0).")
+            '    NoOfDays = 0
+            'End Try
         End Sub
 
         Private Sub chkFullDay_CheckedChanged(sender As Object, e As EventArgs) Handles chkFullDay.CheckedChanged

@@ -556,7 +556,9 @@ Public Class Dac
                 End If
             End If
         Else
-            AddMessage(key, message, caption)
+            If message IsNot Nothing AndAlso message <> "" Then
+                AddMessage(key, message, caption)
+            End If
         End If
         Return message
     End Function
