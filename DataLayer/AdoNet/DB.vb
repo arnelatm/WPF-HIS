@@ -113,6 +113,8 @@ Namespace AdoNet
                                 tryAgain = True
                                 '_waitForm.Show()
                             Case Else
+                                'ADDEDHERE'
+                                Debugger.Break()
                                 MessageBox.Show(ex.Message)
                                 Throw
                         End Select
@@ -152,6 +154,8 @@ Namespace AdoNet
                                 tryAgain = True
                                 '_waitForm.Show()
                             Case Else
+                                'ADDEDHERE'
+                                Debugger.Break()
                                 MessageBox.Show(ex.Message)
                                 Throw
                         End Select
@@ -480,6 +484,8 @@ Namespace AdoNet
                                 tryAgain = True
                                 '_waitForm.Show()
                             Case Else
+                                'ADDEDHERE'
+                                Debugger.Break()
                                 MessageBox.Show(ex.Message)
                                 'Throw
                         End Select
@@ -1662,6 +1668,8 @@ Namespace AdoNet
                         Case DialogResult.Retry
                             tryAgain = True
                         Case Else
+                            'ADDEDHERE'
+                            Debugger.Break()
                             MessageBox.Show(ex.Message)
                             Throw
                     End Select

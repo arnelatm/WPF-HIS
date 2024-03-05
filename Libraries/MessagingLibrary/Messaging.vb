@@ -54,7 +54,11 @@ Public Class Messaging
         Dim caption As String = ""
         DataAccessControl.GetMessage(translate, key, message, caption)
         MessageCaption = caption + " [" + MessageKey + "]"
+        If message Is Nothing Or message = "" Then
+            Return MessagingForm.Show(MessageCaption, MessageCaption)
+        End If
         Return MessagingForm.Show(message, MessageCaption)
+
     End Function
 
     Public Overloads Shared Function Show(ByVal translate As Boolean, ByVal key As String, ByVal variables As String())

@@ -10,7 +10,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property EnteredBy As Int32
         Property DateCreated As DateTime?
         Property EmployeeIdNo As Integer
-        Property EndDate As Date?
+        Property EndDate As Date
         Property FullDay As Boolean
         Property Holiday As Boolean
         Property HolidayIdNo As Int16
@@ -18,7 +18,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property LeaveIdNo As Int16
         Property Reason As String
         Property Status As String
-        Property StartDate As Date?
+        Property StartDate As Date
         Property SupervisorIdNo As Int32?
         Property Approve As Boolean
         Property Disapprove As Boolean
@@ -27,10 +27,10 @@ Namespace PresentationLayer.Views.Interfaces
         Property Users As DataTable
         Property StatusList As DataTable
         Property UserIsASupervisor As Boolean
-        Property NumberOfDays As Int16
+        Property NoOfDays As Int32
         Event DateValuesChanged()
         Event EmployeeIdChanged()
-
+        Event ComputeNumberOfDays()
     End Interface
 
 End Namespace
