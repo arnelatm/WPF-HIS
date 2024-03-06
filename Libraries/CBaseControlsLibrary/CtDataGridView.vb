@@ -117,11 +117,11 @@ Public Class CtDataGridView
         If _editingMode And Not DisplayOnly Then
             DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
             DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-            [ReadOnly] = False
+            Me.ReadOnly = False
         Else
             DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
             DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-            [ReadOnly] = True
+            Me.ReadOnly = True
         End If
     End Sub
 

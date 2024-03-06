@@ -64,16 +64,19 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
+            Dim employeeIdNo As Int32
             View.ApprovedBy = GlobalVariables.UserIdNo
             View.DateCreated = Now()
+            employeeIdNo = Service.GetUserEmployeeIdNo()
             Dim filter As String = "Status <> '" + EnumToCode(LeaveStatusSelection.Approved) + "' and " &
                          "Status <> '" + EnumToCode(LeaveStatusSelection.Disapproved) + "' and " &
                          "Status <> '" + EnumToCode(LeaveStatusSelection.Used) + "' and " &
                          "Status <> '" + EnumToCode(LeaveStatusSelection.Cancelled) + "'"
-            If IsUserASupervisor() Or UserHasHrManagerAccess() Then
-                Dim employeeIdNo As Int32
-                employeeIdNo = Service.GetUserEmployeeIdNo()
-                filter += " and Status <> '" + EnumToCode(LeaveStatusSelection.SupervisorApproved) + "' and EmployeeIdNo <> " & employeeIdNo.ToString()
+            If UserIsASuperAdministrator() Or UserHasHrManagerAccess() Then
+                ' cannot approve own leave
+                filter += " " + " And EmployeeIdNo <> " & employeeIdNo.ToString()
+            ElseIf IsUserASupervisor() Then
+                filter += " And Status <> '" + EnumToCode(LeaveStatusSelection.SupervisorApproved) + "' and EmployeeIdNo <> " & employeeIdNo.ToString()
                 filter += " and SuperVisorIdNo = " + employeeIdNo.ToString()
             End If
             Dim employeeLeaveApprovalItemsModel As List(Of EmployeeLeaveApprovalItemModel)
@@ -92,10 +95,10 @@ Namespace PresentationLayer.Presenters
                         workRow("ApprovalNote") = leave.ApprovalNote
                         workRow("EmployeeLeaveIdNo") = leave.IdNo
                         If leave.Approve Then
-                            If IsUserASupervisor() Then
-                                workRow("Status") = EnumToCode(LeaveStatusSelection.SupervisorApproved)
-                            Else
+                            If UserHasHrManagerAccess() Then
                                 workRow("Status") = EnumToCode(LeaveStatusSelection.Approved)
+                            Else
+                                workRow("Status") = EnumToCode(LeaveStatusSelection.SupervisorApproved)
                             End If
                         Else
                             workRow("Status") = EnumToCode(LeaveStatusSelection.Disapproved)

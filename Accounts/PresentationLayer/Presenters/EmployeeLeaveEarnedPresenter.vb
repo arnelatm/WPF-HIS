@@ -206,10 +206,14 @@ Namespace PresentationLayer.Presenters
 
         Public Overrides Sub EntryFormLoaded()
             Dim employeeIdNo As Int32 = Service.GetUserEmployeeIdNo()
-            If Not IsUserASupervisor() Then
-                DataFilter += IIf(DataFilter Is Nothing Or DataFilter = "", "", " and ") + " EmployeeIdNo = " & employeeIdNo.ToString()
+            If UserHasHrManagerAccess() Then
+                ' no filter HrManagerAccess has no restrictions for viewing all leaves
+            ElseIf IsUserASupervisor() Then
+                ' only supervised employees can be shown
+                DataFilter += IIf(DataFilter Is Nothing Or DataFilter = "", "", " and ") + " (SupervisorIdNo = " & employeeIdNo.ToString() + " or EmployeeIdNo = " & employeeIdNo.ToString() & ")"
             Else
-                DataFilter += IIf(DataFilter Is Nothing Or DataFilter = "", "", " and ") + IIf(DataFilter Is Nothing Or DataFilter = "", "", " and ") + " and (SupervisorIdNo = " & employeeIdNo.ToString() + " or EmployeeIdNo = " & employeeIdNo.ToString() & ")"
+                ' only employee own leaves can be shown
+                DataFilter += IIf(DataFilter Is Nothing Or DataFilter = "", "", " and ") + " EmployeeIdNo = " & employeeIdNo.ToString()
             End If
         End Sub
 

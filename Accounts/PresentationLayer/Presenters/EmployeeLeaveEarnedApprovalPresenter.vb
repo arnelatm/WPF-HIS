@@ -94,7 +94,7 @@ Namespace PresentationLayer.Presenters
             Dim record As New EmployeeLeaveEarnedApprovalModel
             GlobalVariables.Mapper.Map(Of IEmployeeLeaveEarnedApprovalView, EmployeeLeaveEarnedApprovalModel)(View, record)
             Dim _userHasHrManagerAccess As Boolean = False
-            If UserHasAccess("HumanResourcesManager") Then
+            If UserHasAccess("HumanResources") Then
                 _userHasHrManagerAccess = True
             End If
             NewlyAddedRecordIdNo = Service.AddRecord(record)
