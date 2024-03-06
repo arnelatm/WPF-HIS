@@ -25,16 +25,16 @@ Partial Class EmployeeLeaveApprovalEntry
         Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -46,16 +46,16 @@ Partial Class EmployeeLeaveApprovalEntry
         Me.DataGridViewEmployeeLeave = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
         Me.dgvEmployeeLeaveIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.dgvDateCreated = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+        Me.dgvEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn()
+        Me.dgvFullDay = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
+        Me.dgvStartDate = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+        Me.dgvEndDate = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.dgvLeaveIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn()
         Me.dgvStatus = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn()
         Me.dgvReason = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.dgvApprove = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
         Me.dgvDisapprove = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
         Me.dgvApprovalNote = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.dgvEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn()
-        Me.dgvFullDay = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
-        Me.dgvStartDate = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.dgvEndDate = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.enteredByDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.SupervisorIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgvIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -76,9 +76,10 @@ Partial Class EmployeeLeaveApprovalEntry
         Me.CFlowLayout1.Controls.Add(Me.CLabel1)
         Me.CFlowLayout1.Controls.Add(Me.dtpDateCreated)
         Me.CFlowLayout1.Controls.Add(Me.DataGridViewEmployeeLeave)
-        Me.CFlowLayout1.Location = New System.Drawing.Point(4, 70)
+        Me.CFlowLayout1.Location = New System.Drawing.Point(5, 86)
+        Me.CFlowLayout1.Margin = New System.Windows.Forms.Padding(4)
         Me.CFlowLayout1.Name = "CFlowLayout1"
-        Me.CFlowLayout1.Size = New System.Drawing.Size(1067, 542)
+        Me.CFlowLayout1.Size = New System.Drawing.Size(1423, 667)
         Me.CFlowLayout1.TabIndex = 5
         '
         'lblIdNo
@@ -91,7 +92,7 @@ Partial Class EmployeeLeaveApprovalEntry
         Me.lblIdNo.Location = New System.Drawing.Point(1, 1)
         Me.lblIdNo.Margin = New System.Windows.Forms.Padding(1)
         Me.lblIdNo.Name = "lblIdNo"
-        Me.lblIdNo.Size = New System.Drawing.Size(47, 17)
+        Me.lblIdNo.Size = New System.Drawing.Size(56, 20)
         Me.lblIdNo.TabIndex = 7
         Me.lblIdNo.Text = "ID No."
         Me.lblIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -114,7 +115,7 @@ Partial Class EmployeeLeaveApprovalEntry
         Me.txtIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
         Me.txtIdNo.ForeColor = System.Drawing.Color.Black
         Me.txtIdNo.LinkedLabel = Nothing
-        Me.txtIdNo.Location = New System.Drawing.Point(50, 1)
+        Me.txtIdNo.Location = New System.Drawing.Point(59, 1)
         Me.txtIdNo.Margin = New System.Windows.Forms.Padding(1)
         Me.txtIdNo.MaximumValue = Nothing
         Me.txtIdNo.MinimumValue = Nothing
@@ -122,7 +123,7 @@ Partial Class EmployeeLeaveApprovalEntry
         Me.txtIdNo.OldValue = ""
         Me.txtIdNo.OverrideMaxLength = 0
         Me.txtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtIdNo.Size = New System.Drawing.Size(100, 23)
+        Me.txtIdNo.Size = New System.Drawing.Size(133, 26)
         Me.txtIdNo.TabIndex = 0
         Me.txtIdNo.Translatable = False
         '
@@ -132,10 +133,10 @@ Partial Class EmployeeLeaveApprovalEntry
         Me.lblEnteredBy.DisplayOnly = True
         Me.lblEnteredBy.EditingMode = False
         Me.lblEnteredBy.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.lblEnteredBy.Location = New System.Drawing.Point(152, 1)
+        Me.lblEnteredBy.Location = New System.Drawing.Point(194, 1)
         Me.lblEnteredBy.Margin = New System.Windows.Forms.Padding(1)
         Me.lblEnteredBy.Name = "lblEnteredBy"
-        Me.lblEnteredBy.Size = New System.Drawing.Size(135, 24)
+        Me.lblEnteredBy.Size = New System.Drawing.Size(180, 30)
         Me.lblEnteredBy.TabIndex = 8
         Me.lblEnteredBy.Text = "Approved by:"
         Me.lblEnteredBy.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -151,6 +152,8 @@ Partial Class EmployeeLeaveApprovalEntry
         Me.cboApprovedBy.DefaultValue = Nothing
         Me.cboApprovedBy.DisplayMember = "Name"
         Me.cboApprovedBy.DisplayOnly = True
+        Me.cboApprovedBy.DropDownHeight = 24
+        Me.cboApprovedBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
         Me.cboApprovedBy.Editable = True
         Me.cboApprovedBy.EditingMode = True
         Me.cboApprovedBy.EndFindValue = Nothing
@@ -167,8 +170,9 @@ Partial Class EmployeeLeaveApprovalEntry
         Me.cboApprovedBy.IntegralHeight = False
         Me.cboApprovedBy.LimitToList = False
         Me.cboApprovedBy.LinkedLabel = Nothing
-        Me.cboApprovedBy.Location = New System.Drawing.Point(289, 1)
+        Me.cboApprovedBy.Location = New System.Drawing.Point(376, 1)
         Me.cboApprovedBy.Margin = New System.Windows.Forms.Padding(1)
+        Me.cboApprovedBy.MaxDropDownItems = 1
         Me.cboApprovedBy.Name = "cboApprovedBy"
         Me.cboApprovedBy.OldValue = 0
         Me.cboApprovedBy.OriginalDataSource = Nothing
@@ -176,7 +180,7 @@ Partial Class EmployeeLeaveApprovalEntry
         Me.cboApprovedBy.OverrideDropDownStyleList = False
         Me.cboApprovedBy.PreviousSearchTerm = Nothing
         Me.cboApprovedBy.PropertySelector = Nothing
-        Me.cboApprovedBy.Size = New System.Drawing.Size(350, 24)
+        Me.cboApprovedBy.Size = New System.Drawing.Size(465, 29)
         Me.cboApprovedBy.SuggestBoxHeight = 200
         Me.cboApprovedBy.SuggestCharCount = 0
         Me.cboApprovedBy.SuggestListOrderRule = Nothing
@@ -194,10 +198,10 @@ Partial Class EmployeeLeaveApprovalEntry
         Me.CLabel1.DisplayOnly = True
         Me.CLabel1.EditingMode = False
         Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.CLabel1.Location = New System.Drawing.Point(641, 1)
+        Me.CLabel1.Location = New System.Drawing.Point(843, 1)
         Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
         Me.CLabel1.Name = "CLabel1"
-        Me.CLabel1.Size = New System.Drawing.Size(200, 24)
+        Me.CLabel1.Size = New System.Drawing.Size(267, 30)
         Me.CLabel1.TabIndex = 11
         Me.CLabel1.Text = "Date/Time Approved"
         Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -216,14 +220,14 @@ Partial Class EmployeeLeaveApprovalEntry
         Me.dtpDateCreated.EditsAllowed = False
         Me.dtpDateCreated.ForeColor = System.Drawing.Color.Black
         Me.dtpDateCreated.LinkedLabel = Nothing
-        Me.dtpDateCreated.Location = New System.Drawing.Point(843, 1)
+        Me.dtpDateCreated.Location = New System.Drawing.Point(1112, 1)
         Me.dtpDateCreated.Margin = New System.Windows.Forms.Padding(1)
         Me.dtpDateCreated.Name = "dtpDateCreated"
         Me.dtpDateCreated.ReadOnlyDp = False
         Me.dtpDateCreated.SecurityKey = Nothing
         Me.dtpDateCreated.ShowLongDate = False
         Me.dtpDateCreated.ShowTime = True
-        Me.dtpDateCreated.Size = New System.Drawing.Size(195, 23)
+        Me.dtpDateCreated.Size = New System.Drawing.Size(206, 27)
         Me.dtpDateCreated.TabIndex = 2
         Me.dtpDateCreated.TargetCalendar = CType(resources.GetObject("dtpDateCreated.TargetCalendar"), System.Globalization.Calendar)
         Me.dtpDateCreated.Translatable = False
@@ -251,7 +255,7 @@ Partial Class EmployeeLeaveApprovalEntry
         DataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.DataGridViewEmployeeLeave.DefaultCellStyle = DataGridViewCellStyle15
         Me.DataGridViewEmployeeLeave.DgvFooter = Nothing
-        Me.DataGridViewEmployeeLeave.DisplayOnly = True
+        Me.DataGridViewEmployeeLeave.DisplayOnly = False
         Me.DataGridViewEmployeeLeave.Ea = Nothing
         Me.DataGridViewEmployeeLeave.EditingMode = False
         Me.DataGridViewEmployeeLeave.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
@@ -266,7 +270,8 @@ Partial Class EmployeeLeaveApprovalEntry
         Me.DataGridViewEmployeeLeave.FirstRowInsertionEnabled = True
         Me.DataGridViewEmployeeLeave.IgnoreCase = False
         Me.DataGridViewEmployeeLeave.IsDirty = False
-        Me.DataGridViewEmployeeLeave.Location = New System.Drawing.Point(3, 30)
+        Me.DataGridViewEmployeeLeave.Location = New System.Drawing.Point(4, 36)
+        Me.DataGridViewEmployeeLeave.Margin = New System.Windows.Forms.Padding(4)
         Me.DataGridViewEmployeeLeave.Name = "DataGridViewEmployeeLeave"
         Me.DataGridViewEmployeeLeave.OldCellValue = Nothing
         Me.DataGridViewEmployeeLeave.ReadOnly = True
@@ -277,7 +282,7 @@ Partial Class EmployeeLeaveApprovalEntry
         Me.DataGridViewEmployeeLeave.SequenceColumn = "dgvSequence"
         Me.DataGridViewEmployeeLeave.SequenceFieldName = "Sequence"
         Me.DataGridViewEmployeeLeave.ShowFooter = False
-        Me.DataGridViewEmployeeLeave.Size = New System.Drawing.Size(1055, 482)
+        Me.DataGridViewEmployeeLeave.Size = New System.Drawing.Size(1407, 593)
         Me.DataGridViewEmployeeLeave.TabIndex = 3
         Me.DataGridViewEmployeeLeave.Translatable = True
         '
@@ -326,6 +331,95 @@ Partial Class EmployeeLeaveApprovalEntry
         Me.dgvDateCreated.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.dgvDateCreated.Translatable = False
         Me.dgvDateCreated.Width = 125
+        '
+        'dgvEmployeeIdNo
+        '
+        Me.dgvEmployeeIdNo.AutoComplete = False
+        Me.dgvEmployeeIdNo.DataPropertyName = "EmployeeIdNo"
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
+        Me.dgvEmployeeIdNo.DefaultCellStyle = DataGridViewCellStyle4
+        Me.dgvEmployeeIdNo.EditingMode = False
+        Me.dgvEmployeeIdNo.HeaderText = "Employee Name"
+        Me.dgvEmployeeIdNo.MinimumWidth = 6
+        Me.dgvEmployeeIdNo.Name = "dgvEmployeeIdNo"
+        Me.dgvEmployeeIdNo.ReadOnly = True
+        Me.dgvEmployeeIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvEmployeeIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.dgvEmployeeIdNo.SuggestCharCount = 0
+        Me.dgvEmployeeIdNo.Translatable = False
+        Me.dgvEmployeeIdNo.Width = 175
+        '
+        'dgvFullDay
+        '
+        Me.dgvFullDay.BegFindValue = Nothing
+        Me.dgvFullDay.DataPropertyName = "FullDay"
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Orange
+        DataGridViewCellStyle5.NullValue = False
+        Me.dgvFullDay.DefaultCellStyle = DataGridViewCellStyle5
+        Me.dgvFullDay.EditingMode = False
+        Me.dgvFullDay.EndFindValue = Nothing
+        Me.dgvFullDay.FieldDescription = Nothing
+        Me.dgvFullDay.FieldName = Nothing
+        Me.dgvFullDay.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.dgvFullDay.FindEnabled = False
+        Me.dgvFullDay.HeaderText = "Full Day"
+        Me.dgvFullDay.IgnoreCase = False
+        Me.dgvFullDay.MinimumWidth = 6
+        Me.dgvFullDay.Name = "dgvFullDay"
+        Me.dgvFullDay.ReadOnly = True
+        Me.dgvFullDay.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvFullDay.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.dgvFullDay.Translatable = False
+        Me.dgvFullDay.Width = 30
+        '
+        'dgvStartDate
+        '
+        Me.dgvStartDate.BegFindValue = Nothing
+        Me.dgvStartDate.DataPropertyName = "StartDate"
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
+        Me.dgvStartDate.DefaultCellStyle = DataGridViewCellStyle6
+        Me.dgvStartDate.EditingMode = False
+        Me.dgvStartDate.EndFindValue = Nothing
+        Me.dgvStartDate.FieldDescription = Nothing
+        Me.dgvStartDate.FieldName = Nothing
+        Me.dgvStartDate.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.dgvStartDate.FindEnabled = False
+        Me.dgvStartDate.HeaderText = "Start Date"
+        Me.dgvStartDate.IgnoreCase = False
+        Me.dgvStartDate.MinimumWidth = 6
+        Me.dgvStartDate.Name = "dgvStartDate"
+        Me.dgvStartDate.ReadOnly = True
+        Me.dgvStartDate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvStartDate.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.dgvStartDate.Translatable = False
+        Me.dgvStartDate.Width = 70
+        '
+        'dgvEndDate
+        '
+        Me.dgvEndDate.BegFindValue = Nothing
+        Me.dgvEndDate.DataPropertyName = "EndDate"
+        DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
+        Me.dgvEndDate.DefaultCellStyle = DataGridViewCellStyle7
+        Me.dgvEndDate.EditingMode = False
+        Me.dgvEndDate.EndFindValue = Nothing
+        Me.dgvEndDate.FieldDescription = Nothing
+        Me.dgvEndDate.FieldName = Nothing
+        Me.dgvEndDate.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.dgvEndDate.FindEnabled = False
+        Me.dgvEndDate.HeaderText = "End Date"
+        Me.dgvEndDate.IgnoreCase = False
+        Me.dgvEndDate.MinimumWidth = 6
+        Me.dgvEndDate.Name = "dgvEndDate"
+        Me.dgvEndDate.ReadOnly = True
+        Me.dgvEndDate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvEndDate.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.dgvEndDate.Translatable = False
+        Me.dgvEndDate.Width = 70
         '
         'dgvLeaveIdNo
         '
@@ -456,95 +550,6 @@ Partial Class EmployeeLeaveApprovalEntry
         Me.dgvApprovalNote.Translatable = False
         Me.dgvApprovalNote.Width = 125
         '
-        'dgvEmployeeIdNo
-        '
-        Me.dgvEmployeeIdNo.AutoComplete = False
-        Me.dgvEmployeeIdNo.DataPropertyName = "EmployeeIdNo"
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
-        Me.dgvEmployeeIdNo.DefaultCellStyle = DataGridViewCellStyle4
-        Me.dgvEmployeeIdNo.EditingMode = False
-        Me.dgvEmployeeIdNo.HeaderText = "Employee Name"
-        Me.dgvEmployeeIdNo.MinimumWidth = 6
-        Me.dgvEmployeeIdNo.Name = "dgvEmployeeIdNo"
-        Me.dgvEmployeeIdNo.ReadOnly = True
-        Me.dgvEmployeeIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvEmployeeIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.dgvEmployeeIdNo.SuggestCharCount = 0
-        Me.dgvEmployeeIdNo.Translatable = False
-        Me.dgvEmployeeIdNo.Width = 175
-        '
-        'dgvFullDay
-        '
-        Me.dgvFullDay.BegFindValue = Nothing
-        Me.dgvFullDay.DataPropertyName = "FullDay"
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Orange
-        DataGridViewCellStyle5.NullValue = False
-        Me.dgvFullDay.DefaultCellStyle = DataGridViewCellStyle5
-        Me.dgvFullDay.EditingMode = False
-        Me.dgvFullDay.EndFindValue = Nothing
-        Me.dgvFullDay.FieldDescription = Nothing
-        Me.dgvFullDay.FieldName = Nothing
-        Me.dgvFullDay.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.dgvFullDay.FindEnabled = False
-        Me.dgvFullDay.HeaderText = "Full Day"
-        Me.dgvFullDay.IgnoreCase = False
-        Me.dgvFullDay.MinimumWidth = 6
-        Me.dgvFullDay.Name = "dgvFullDay"
-        Me.dgvFullDay.ReadOnly = True
-        Me.dgvFullDay.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvFullDay.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.dgvFullDay.Translatable = False
-        Me.dgvFullDay.Width = 30
-        '
-        'dgvStartDate
-        '
-        Me.dgvStartDate.BegFindValue = Nothing
-        Me.dgvStartDate.DataPropertyName = "StartDate"
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
-        Me.dgvStartDate.DefaultCellStyle = DataGridViewCellStyle6
-        Me.dgvStartDate.EditingMode = False
-        Me.dgvStartDate.EndFindValue = Nothing
-        Me.dgvStartDate.FieldDescription = Nothing
-        Me.dgvStartDate.FieldName = Nothing
-        Me.dgvStartDate.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.dgvStartDate.FindEnabled = False
-        Me.dgvStartDate.HeaderText = "Start Date"
-        Me.dgvStartDate.IgnoreCase = False
-        Me.dgvStartDate.MinimumWidth = 6
-        Me.dgvStartDate.Name = "dgvStartDate"
-        Me.dgvStartDate.ReadOnly = True
-        Me.dgvStartDate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvStartDate.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.dgvStartDate.Translatable = False
-        Me.dgvStartDate.Width = 70
-        '
-        'dgvEndDate
-        '
-        Me.dgvEndDate.BegFindValue = Nothing
-        Me.dgvEndDate.DataPropertyName = "EndDate"
-        DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
-        Me.dgvEndDate.DefaultCellStyle = DataGridViewCellStyle7
-        Me.dgvEndDate.EditingMode = False
-        Me.dgvEndDate.EndFindValue = Nothing
-        Me.dgvEndDate.FieldDescription = Nothing
-        Me.dgvEndDate.FieldName = Nothing
-        Me.dgvEndDate.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.dgvEndDate.FindEnabled = False
-        Me.dgvEndDate.HeaderText = "End Date"
-        Me.dgvEndDate.IgnoreCase = False
-        Me.dgvEndDate.MinimumWidth = 6
-        Me.dgvEndDate.Name = "dgvEndDate"
-        Me.dgvEndDate.ReadOnly = True
-        Me.dgvEndDate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvEndDate.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.dgvEndDate.Translatable = False
-        Me.dgvEndDate.Width = 70
-        '
         'enteredByDataGridViewTextBoxColumn
         '
         Me.enteredByDataGridViewTextBoxColumn.DataPropertyName = "EnteredBy"
@@ -597,9 +602,10 @@ Partial Class EmployeeLeaveApprovalEntry
         '
         'EmployeeLeaveApprovalEntry
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.ClientSize = New System.Drawing.Size(1073, 615)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.ClientSize = New System.Drawing.Size(1431, 757)
         Me.Controls.Add(Me.CFlowLayout1)
+        Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "EmployeeLeaveApprovalEntry"
         Me.Text = "Employee Leave Approval"
         Me.Controls.SetChildIndex(Me.CFlowLayout1, 0)

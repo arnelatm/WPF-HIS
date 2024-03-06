@@ -13,7 +13,7 @@ Imports AATM.PresentationLayer.Events
 Namespace PresentationLayer.Presenters
 
     Public Class EmployeePresenter(Of TM As New)
-        Inherits CommonPresenter(Of IEmployeeView, TM)
+        Inherits AccountsPresenter(Of IEmployeeView, TM)
         Implements ISubscriber(Of PayCycleIdNoChanged),
                    ISubscriber(Of DgvItemsChanged)
 
@@ -38,6 +38,7 @@ Namespace PresentationLayer.Presenters
             'TreeViewSecondaryField = "EmployeeCode"
             SortOrderKey = "EmployeeName"
             CreateDataTables()
+            GoFilter()
         End Sub
 
         Private Sub CreateDataTables()
@@ -404,6 +405,16 @@ Namespace PresentationLayer.Presenters
                 DataFilter = "Active = 1"
             Else
                 DataFilter = ""
+            End If
+            Dim employeeIdNo As Int32 = Service.GetUserEmployeeIdNo()
+            Dim userEmployeeIdNo As Int32 = GetUserEmployeeIdNo()
+            If GlobalFunctions.UserIsASuperAdministrator() Or UserHasHrManagerAccess() Then
+                ' include all records
+            ElseIf IsUserASupervisor() Then
+                DataFilter += IIf(DataFilter Is Nothing OrElse DataFilter = "", "", " and ") + " (SupervisorIdNo = " & userEmployeeIdNo.ToString() + " or IdNo = " & userEmployeeIdNo.ToString() + ")"
+            Else
+                ' meaning don't show any data
+                DataFilter += IIf(DataFilter Is Nothing OrElse DataFilter = "", "", " and ") + " IdNo = " & GetUserEmployeeIdNo().ToString()
             End If
             DisplayTree()
             GoFirstRecord()

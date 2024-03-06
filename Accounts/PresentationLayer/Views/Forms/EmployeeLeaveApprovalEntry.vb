@@ -95,6 +95,9 @@ Public Class EmployeeLeaveApprovalEntry
             dgvStatus.DisplayMember = "Name"
             dgvStatus.DisplayStyleForCurrentCellOnly = True
             dgvApprove.DisplayOnly = False
+            dgvApprove.ReadOnly = False
+            dgvDisapprove.DisplayOnly = False
+            dgvDisapprove.ReadOnly = False
             dgvFullDay.DisplayOnly = True
             dgvEndDate.DisplayOnly = True
             dgvReason.DisplayOnly = True
@@ -104,13 +107,6 @@ Public Class EmployeeLeaveApprovalEntry
             dgvEmployeeLeaveIdNo.DisplayOnly = True
         End With
         ResumeLayout()
-    End Sub
-
-    Private Sub EmployeeLeaveApproval_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
-        If UserIsASuperAdministrator() Then
-            cboApprovedBy.DisplayOnly = False
-        End If
-        btnAdd.PerformClick()
     End Sub
 
     Private Sub DgvEarning_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEmployeeLeave.CellEndEdit
@@ -140,6 +136,10 @@ Public Class EmployeeLeaveApprovalEntry
         If AddingMode Then
             dgvApprove.Visible = True
             dgvDisapprove.Visible = True
+            dgvApprove.ReadOnly = False
+            dgvDisapprove.ReadOnly = False
+            dgvApprove.DisplayOnly = False
+            dgvDisapprove.DisplayOnly = False
         Else
             dgvApprove.Visible = False
             dgvDisapprove.Visible = False
@@ -158,4 +158,7 @@ Public Class EmployeeLeaveApprovalEntry
         btnAdd.PerformClick()
     End Sub
 
+    'Private Sub DataGridViewEmployeeLeave_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEmployeeLeave.CellContentClick
+    '    Debugger.Break()
+    'End Sub
 End Class
