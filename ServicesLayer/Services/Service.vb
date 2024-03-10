@@ -199,6 +199,28 @@ Namespace Services
             Return retVal
         End Function
 
+
+        Public Function GetListLookupDT(lookupObj As LookupTable) As DataTable
+            If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
+                Dim nameFieldArabic = lookupObj.NameField + "Ara"
+                If FieldExistInTable(lookupObj.TableName, nameFieldArabic) Then
+                    If lookupObj.SortKey = lookupObj.NameField Then
+                        lookupObj.SortKey = nameFieldArabic
+                        Dim i As Integer = 0
+                        For Each field In lookupObj.FieldsToShow
+                            If field = lookupObj.NameField Then
+                                lookupObj.FieldsToShow(i) = nameFieldArabic
+                            End If
+                            i = i + 1
+                        Next
+                        lookupObj.NameField = nameFieldArabic
+                    End If
+                End If
+            End If
+            Dim retVal As DataTable = GetRecords(lookupObj.TableName, lookupObj.SortKey, lookupObj.FieldsToShow, lookupObj.FilterKey)
+            Return retVal
+        End Function
+
         Public Function GetLookupT(lookupObj As LookupTable, Optional hierarchical As Boolean = False) As List(Of LookupTable.LookupData)
             If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
                 Dim nameFieldArabic = lookupObj.NameField + "Ara"
@@ -231,12 +253,53 @@ Namespace Services
             End If
         End Function
 
+        Public Function GetLookupDT(lookupObj As LookupTable, Optional hierarchical As Boolean = False) As DataTable
+            If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
+                Dim nameFieldArabic = lookupObj.NameField + "Ara"
+                If FieldExistInTable(lookupObj.TableName, nameFieldArabic) Then
+                    If lookupObj.SortKey = lookupObj.NameField Then
+                        lookupObj.SortKey = nameFieldArabic
+                        Dim i As Integer = 0
+                        For Each field In lookupObj.FieldsToShow
+                            If field = lookupObj.NameField Then
+                                lookupObj.FieldsToShow(i) = nameFieldArabic
+                            End If
+                            i = i + 1
+                        Next
+                        lookupObj.NameField = nameFieldArabic
+                    End If
+                End If
+            End If
+            If Not hierarchical Then
+                Dim data = GetRecords(lookupObj.TableName, lookupObj.SortKey, lookupObj.FieldsToShow, lookupObj.FilterKey)
+                Dim lookupSetting = GlobalVariables.LookupSetting()
+                If lookupSetting = "NameAndCode" Then
+                    Return ProcessLookupByNameCodeDt(data, lookupObj.FieldsToShow.Count())
+                    'ElseIf lookupSetting = "CodeAndName" Then
+                    '    Return ProcessLookupByCodeName(data, lookupObj.FieldsToShow.Count())
+                    'ElseIf lookupSetting = "Name" Then
+                    '    Return ProcessLookupByName(data, lookupObj.FieldsToShow.Count())
+                    'Else
+                    '    Return ProcessLookupByNameCode(data, lookupObj.FieldsToShow.Count())
+                End If
+            End If
+        End Function
+
         Public Function GetLookupT(tableName As String, Optional filter As String = Nothing) As List(Of LookupTable.LookupData)
             Dim lookupObj As New LookupTable(tableName, filter)
             If tableName = "List" Then
                 Return GetListLookupT(lookupObj)
             End If
             Return GetLookupT(lookupObj)
+        End Function
+
+
+        Public Function GetLookupDT(tableName As String, Optional filter As String = Nothing) As DataTable
+            Dim lookupObj As New LookupTable(tableName, filter)
+            If tableName = "List" Then
+                Return GetListLookupDT(lookupObj)
+            End If
+            Return GetLookupDT(lookupObj)
         End Function
 
         Public Function GetLookupT(tableName As String, sortKey As String, Optional filter As String = Nothing) As List(Of LookupTable.LookupData)
@@ -377,6 +440,62 @@ Namespace Services
                     dbLookup.Index = i
                     tlData.Add(dbLookup)
                 Next
+            End If
+            Return tlData
+        End Function
+
+
+        Private Function ProcessLookupByNameCodeDt(data As Object, fieldCount As UInt16) As DataTable
+            Dim tlData = New DataTable
+            If fieldCount = 4 Then
+                'Dim data = GetRecords(lookupObj.TableName, lookupObj.SortKey, lookupObj.FieldsToShow, lookupObj.FilterKey)
+                'Dim tlHData = New List(Of LookupTable.HLookupData)
+                'For i = 1 To Int(data.Count / 4)
+                '    Dim tData As New LookupTable.HLookupData With {
+                '            .IdNo = data(i * 4 - 4),
+                '            .Name = data(i * 4 - 3),
+                '            .ParentIdNo = CInt(If(data(i * 4 - 2) Is DBNull.Value, Nothing, data(i * 4 - 2))),
+                '            .Code = If(data(i * 4 - 1) Is DBNull.Value, "", data(i * 4 - 1))
+                '            }
+                '    tlHData.Add(tData)
+                '    Return tlHData
+                'Next
+            ElseIf fieldCount = 3 Then
+                Dim column1 As DataColumn = New DataColumn("IdNo")
+                column1.DataType = System.Type.GetType("System.Int32")
+                Dim column2 As DataColumn = New DataColumn("Name")
+                column2.DataType = System.Type.GetType("System.String")
+                Dim column3 As DataColumn = New DataColumn("Code")
+                column3.DataType = System.Type.GetType("System.String")
+                tlData.Columns.Add(column1)
+                tlData.Columns.Add(column2)
+                tlData.Columns.Add(column3)
+
+
+                For i = 1 To Int(data.Count / 3)
+                    Dim Row1 As DataRow
+                    Row1 = tlData.NewRow()
+                    Row1.Item("IdNo") = data(i * 3 - 3)
+                    Row1.Item("Name") = data(i * 3 - 2) + data(i * 3 - 2) & " | " & If(IsDBNull(data(i * 3 - 1)), "", data(i * 3 - 1))
+                    Row1.Item("Code") = data(i * 3 - 1)
+                    tlData.Rows.Add(Row1)
+                Next
+            ElseIf fieldCount = 2 Then
+                'For i = 1 To Int(data.Count / 2)
+                '    Dim tData As New LookupTable.LookupData With {.IdNo = data(i * 2 - 2),
+                '            .Name = data(i * 2 - 1) & " | " & data(i * 2 - 2)
+                '            }
+                '    tlData.Add(tData)
+                'Next
+            Else
+                'For i As Integer = 0 To data.Count - 1
+                '    Dim dbLookup = New LookupTable.LookupData
+                '    dbLookup.IdNo = i
+                '    dbLookup.Name = data(i)
+                '    dbLookup.Code = ""
+                '    dbLookup.Index = i
+                '    tlData.Add(dbLookup)
+                'Next
             End If
             Return tlData
         End Function

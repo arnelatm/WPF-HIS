@@ -154,7 +154,7 @@ Public Class ApArEmReportPresenter(Of TM As New)
         View.BeginningDate = GlobalFunctions.GregorianDateSerial(Today.Year, 1, 1)
         View.EndingDate = GlobalFunctions.GregorianDateSerial(Today.Year, Today.Month, Today.Day)
         View.Title = Libraries.MessagingLibrary.Messaging.TranslateCaption(_reportName)
-        SetDataSourceT(_tableName, View.PersonSelectorControl,,, _filter)
+        MakeControlDtDataSource(_tableName, View.PersonSelectorControl,,, _filter)
         Select Case View.ReportCode
             Case "LeaveStatement", "ErStatement", "EmployeeInfo"
                 View.PersonSelectorLabel = "Employee Name"

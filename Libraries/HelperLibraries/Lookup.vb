@@ -1,4 +1,5 @@
 ﻿Imports System.Globalization
+Imports System.Reflection
 
 Public Class LookupTable
 
@@ -25,6 +26,8 @@ Public Class LookupTable
     End Class
 
     Public Class LookupData
+        Inherits DataTable
+
         Public Property IdNo
         Public Property Name As String
         Public Property Code As String
@@ -55,4 +58,24 @@ Public Class LookupTable
         Ascending = ascendingOrder
     End Sub
 
+    Public Shared Function ToDataTable(Of T)(ByVal items As List(Of T)) As DataTable
+        Dim dataTable As DataTable = New DataTable(GetType(T).Name)
+        Dim Props As PropertyInfo() = GetType(T).GetProperties(BindingFlags.[Public] Or BindingFlags.Instance)
+
+        For Each prop As PropertyInfo In Props
+            dataTable.Columns.Add(prop.Name)
+        Next
+
+        For Each item As T In items
+            Dim values = New Object(Props.Length - 1) {}
+
+            For i As Integer = 0 To Props.Length - 1
+                values(i) = Props(i).GetValue(item, Nothing)
+            Next
+
+            dataTable.Rows.Add(values)
+        Next
+
+        Return dataTable
+    End Function
 End Class

@@ -27,7 +27,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblEndingDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblBeginningDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.cboIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.dtpEndingDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.dtpBeginningDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
@@ -43,10 +43,11 @@ Namespace PresentationLayer.Views.Forms.Reports
             '
             'lblIdNo
             '
+            Me.lblIdNo.BackColor = System.Drawing.Color.Transparent
             Me.lblIdNo.DisplayOnly = True
             Me.lblIdNo.EditingMode = False
             Me.lblIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblIdNo.Location = New System.Drawing.Point(1, 28)
+            Me.lblIdNo.Location = New System.Drawing.Point(1, 30)
             Me.lblIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.lblIdNo.Name = "lblIdNo"
             Me.lblIdNo.Size = New System.Drawing.Size(132, 24)
@@ -57,6 +58,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             '
             'lblEndingDate
             '
+            Me.lblEndingDate.BackColor = System.Drawing.Color.Transparent
             Me.lblEndingDate.DisplayOnly = True
             Me.lblEndingDate.EditingMode = False
             Me.lblEndingDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -71,6 +73,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             '
             'lblBeginningDate
             '
+            Me.lblBeginningDate.BackColor = System.Drawing.Color.Transparent
             Me.lblBeginningDate.DisplayOnly = True
             Me.lblBeginningDate.EditingMode = False
             Me.lblBeginningDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -93,7 +96,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.cboIdNo.DataValue = Nothing
             Me.cboIdNo.DefaultValue = Nothing
             Me.cboIdNo.DisplayMember = "Name"
-            Me.cboIdNo.DropDownHeight = 21
+            Me.cboIdNo.DropDownHeight = 24
             Me.cboIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboIdNo.Editable = True
             Me.cboIdNo.EditingMode = False
@@ -110,7 +113,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.cboIdNo.IgnoreCase = False
             Me.cboIdNo.LimitToList = False
             Me.cboIdNo.LinkedLabel = Nothing
-            Me.cboIdNo.Location = New System.Drawing.Point(135, 28)
+            Me.cboIdNo.Location = New System.Drawing.Point(135, 30)
             Me.cboIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.cboIdNo.MaxDropDownItems = 1
             Me.cboIdNo.Name = "cboIdNo"
@@ -122,6 +125,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.cboIdNo.PropertySelector = Nothing
             Me.cboIdNo.Size = New System.Drawing.Size(399, 24)
             Me.cboIdNo.SuggestBoxHeight = 200
+            Me.cboIdNo.SuggestCharCount = 0
             Me.cboIdNo.SuggestListOrderRule = Nothing
             Me.cboIdNo.TabIndex = 25
             Me.cboIdNo.TextToSearch = Nothing
@@ -145,14 +149,14 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.dtpEndingDate.EditsAllowed = False
             Me.dtpEndingDate.ForeColor = System.Drawing.Color.Black
             Me.dtpEndingDate.LinkedLabel = Nothing
-            Me.dtpEndingDate.Location = New System.Drawing.Point(403, 2)
+            Me.dtpEndingDate.Location = New System.Drawing.Point(403, 1)
             Me.dtpEndingDate.Margin = New System.Windows.Forms.Padding(1)
             Me.dtpEndingDate.Name = "dtpEndingDate"
             Me.dtpEndingDate.ReadOnlyDp = False
             Me.dtpEndingDate.SecurityKey = Nothing
             Me.dtpEndingDate.ShowLongDate = False
             Me.dtpEndingDate.ShowTime = False
-            Me.dtpEndingDate.Size = New System.Drawing.Size(118, 23)
+            Me.dtpEndingDate.Size = New System.Drawing.Size(119, 27)
             Me.dtpEndingDate.TabIndex = 24
             Me.dtpEndingDate.TargetCalendar = CType(resources.GetObject("dtpEndingDate.TargetCalendar"), System.Globalization.Calendar)
             Me.dtpEndingDate.Translatable = False
@@ -174,14 +178,14 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.dtpBeginningDate.EditsAllowed = False
             Me.dtpBeginningDate.ForeColor = System.Drawing.Color.Black
             Me.dtpBeginningDate.LinkedLabel = Nothing
-            Me.dtpBeginningDate.Location = New System.Drawing.Point(135, 2)
+            Me.dtpBeginningDate.Location = New System.Drawing.Point(135, 1)
             Me.dtpBeginningDate.Margin = New System.Windows.Forms.Padding(1)
             Me.dtpBeginningDate.Name = "dtpBeginningDate"
             Me.dtpBeginningDate.ReadOnlyDp = False
             Me.dtpBeginningDate.SecurityKey = Nothing
             Me.dtpBeginningDate.ShowLongDate = False
             Me.dtpBeginningDate.ShowTime = False
-            Me.dtpBeginningDate.Size = New System.Drawing.Size(118, 23)
+            Me.dtpBeginningDate.Size = New System.Drawing.Size(119, 27)
             Me.dtpBeginningDate.TabIndex = 23
             Me.dtpBeginningDate.TargetCalendar = CType(resources.GetObject("dtpBeginningDate.TargetCalendar"), System.Globalization.Calendar)
             Me.dtpBeginningDate.Translatable = False
@@ -241,7 +245,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 15.0!))
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
-            Me.TableLayoutPanel1.Size = New System.Drawing.Size(537, 98)
+            Me.TableLayoutPanel1.Size = New System.Drawing.Size(537, 100)
             Me.TableLayoutPanel1.TabIndex = 30
             '
             'btnCancel
@@ -249,7 +253,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.None
             Me.btnCancel.DesignerSelected = False
             Me.btnCancel.ImageIndex = 0
-            Me.btnCancel.Location = New System.Drawing.Point(290, 71)
+            Me.btnCancel.Location = New System.Drawing.Point(290, 73)
             Me.btnCancel.Name = "btnCancel"
             Me.btnCancel.OriginalImageName = Nothing
             Me.btnCancel.SecurityKey = ""
@@ -262,7 +266,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.btnOk.Anchor = System.Windows.Forms.AnchorStyles.None
             Me.btnOk.DesignerSelected = False
             Me.btnOk.ImageIndex = 0
-            Me.btnOk.Location = New System.Drawing.Point(156, 71)
+            Me.btnOk.Location = New System.Drawing.Point(156, 73)
             Me.btnOk.Name = "btnOk"
             Me.btnOk.OriginalImageName = Nothing
             Me.btnOk.SecurityKey = ""
@@ -272,6 +276,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             '
             'CLabel1
             '
+            Me.CLabel1.BackColor = System.Drawing.Color.Transparent
             Me.CLabel1.DisplayOnly = True
             Me.CLabel1.EditingMode = False
             Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
