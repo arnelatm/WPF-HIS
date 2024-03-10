@@ -423,15 +423,32 @@ Public Class CtComboBox
     End Sub
 
     Private Overloads Sub OnBindingContextChanged(sender As Object, e As EventArgs) Handles MyBase.BindingContextChanged
-        Dim nCol As Int32 = 0
+        Dim nCol As Int32 = 1
         If DataSource IsNot Nothing Then
             Dim data As DataTable = DirectCast(DataSource, DataTable)
-            nCol = Math.Max(data.Columns.Count - 1, 0)
+            Dim colCount As Int16 = 0
+            colCount = data.Columns.Count()
+            If colCount = 1 Then
+                nCol = 0
+            Else
+                nCol = 1
+            End If
+            'nCol = Math.Max(data.Columns.Count - 1, 0)
+            'PropertySelectorCompiled = Function(collection) collection.Cast(Of DataRowView)().[Select](Function(p) p.Row.ItemArray(nCol).ToString())
             PropertySelectorCompiled = Function(collection) collection.Cast(Of DataRowView)().[Select](Function(p) p.Row.ItemArray(nCol).ToString())
         End If
 
     End Sub
 
+    'Private Sub SurroundingSub()
+    '    Dim data As IEnumerable(Of SomeType) =
+    '   Dim table As DataTable = New DataTable()
+
+    '   Using reader = ObjectReader.Create(data, "Id", "Name", "Description")
+    '   table.Load(reader)
+    '    End Using
+
+    'End Sub
     Private Shadows Sub OnParentChanged(ByVal sender As Object, ByVal e As EventArgs)
         SetListBoxFormLocation(SuggestListForm)
         SuggestListForm.SuggestListBox.Font = New Font("Segoe UI", 9)

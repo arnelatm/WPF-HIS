@@ -85,6 +85,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Private Sub Form_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             cboIdNo.EditingMode = False
             RaiseEvent ReportLoaded()
+
             cboIdNo.EditingMode = True
             Text = Title
             lblTitle.Text = Title

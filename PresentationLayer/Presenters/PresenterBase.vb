@@ -524,6 +524,10 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Return Service.GetLookupT(lookupObj)
     End Function
 
+    Public Overloads Function GetLookupDT(lookupObj As LookupTable) As DataTable
+        Return Service.GetLookupDT(lookupObj)
+    End Function
+
     Public Overloads Function GetLookupT(pTableName As String, Optional pFilter As String = Nothing) As List(Of LookupTable.LookupData)
         Dim lookupObj As New LookupTable(pTableName, pFilter)
         Return Service.GetLookupT(lookupObj)
@@ -1967,7 +1971,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     '    SetListDataSource(sourceTableName, GetControlName(fieldName), listName)
     'End Sub
 
-    Public Sub CreateListDataSourceT(ByVal sourceTableName As String, ByVal fieldName As String, ByVal listName As String)
+    Public Sub CreateListDataSource(ByVal sourceTableName As String, ByVal fieldName As String, ByVal listName As String)
         SetListDataSourceT(sourceTableName, GetControlName(fieldName), listName)
     End Sub
 
@@ -2035,14 +2039,14 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Return control
     End Function
 
-    Public Sub SetDataSourceT(dataTableName As String, control As Control, Optional dataFields As String() = Nothing, Optional sortKey As String = Nothing, Optional filter As String = Nothing, Optional ascending As Boolean = True)
-        Dim data As List(Of LookupTable.LookupData)
-        Dim lookupObj
-        lookupObj = SetLookupObjectT(dataTableName, control, dataFields, sortKey, filter, ascending)
-        data = GetLookupT(lookupObj)
+    Public Sub MakeControlDtDataSource(dataTableName As String, control As Control, Optional dataFields As String() = Nothing, Optional sortKey As String = Nothing, Optional filter As String = Nothing, Optional ascending As Boolean = True)
+        Dim data As DataTable
+        Dim lookupObj As LookupTable
+        lookupObj = SetLookupObjectT(dataTableName, control,,, filter)
+        data = GetLookupDT(lookupObj)
         Dim Task1
         Task1 = Task.Factory.StartNew(Sub() GetLookupT(lookupObj))
-        Task.WaitAll(Task1) ' ,Task2)
+        Task.WaitAll(Task1)
         Invoker.SetProperty(control, "DataSource", {data})
     End Sub
 
