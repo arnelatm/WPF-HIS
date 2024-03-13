@@ -2086,18 +2086,18 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Dim control As CtComboBox = Nothing
         Dim x = MainFieldsDictionary
         If MainFieldsDictionary.TryGetValue(fieldName, control) Then
-            control.DataSource = GetEnumDataT(Of TE)()
+            control.DataSource = GetEnumData(Of TE)()
         Else
             Debugger.Break()
             MessageBox.Show($"Field '" & fieldName & $"' is not valid!")
         End If
     End Sub
 
-    Public Sub CreateEnumDataT(Of TE)(ByRef dataTarget As Object)
-        dataTarget = GetEnumDataT(Of TE)()
+    Public Sub CreateEnumData(Of TE)(ByRef dataTarget As Object)
+        dataTarget = GetEnumData(Of TE)()
     End Sub
 
-    Private Function GetEnumDataT(Of TE)()
+    Private Function GetEnumData(Of TE)()
         Dim dt As New DataTable
         CreateDataTable(dt, {{"IdNo", GetType(Int16)},
                              {"Code", GetType(String)},

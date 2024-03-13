@@ -99,8 +99,6 @@ Namespace PresentationLayer.Views.Forms.Reports
             End If
         End Sub
 
-
-
     End Class
 
 End Namespace

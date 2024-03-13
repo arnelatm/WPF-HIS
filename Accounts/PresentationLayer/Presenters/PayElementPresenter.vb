@@ -40,8 +40,8 @@ Namespace PresentationLayer.Presenters
             CreateEnumDataSource(Of PayElementTypeSelection)("PayElementType")
             MakeControlDataSources({New String() {"PayElement", "BasePaymentIdNo", Nothing, Nothing},
                                     New String() {"Account", "AccountIdNo", Nothing, "DetailAccount=1", "AccountName"}})
-            CreateEnumDataT(Of FactorTypeSelection)("FactorTypeByCode")
-            CreateEnumDataT(Of CalculationTypeSelection)("CalculationTypeByCode")
+            CreateEnumData(Of FactorTypeSelection)("FactorTypeByCode")
+            CreateEnumData(Of CalculationTypeSelection)("CalculationTypeByCode")
             MakeVarDataSources({New String() {"PayElementGroup", "EarnReportGroupsByCode", Nothing, "PayElementKind = '" & GlobalFunctions.EnumToCode(PayElementKindSelection.Earning) & "'"},
                                 New String() {"PayElementGroup", "DedReportGroupsByCode", Nothing, "PayElementKind = '" & GlobalFunctions.EnumToCode(PayElementKindSelection.Deduction) & "'"},
                                 New String() {"PayElement", "PayElementsByCode", Nothing, Nothing},

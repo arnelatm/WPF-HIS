@@ -493,7 +493,7 @@ Namespace PresentationLayer.Views.Forms
             UpdateFirstLine()
         End Sub
 
-        Private Sub CboPayeeIdNo_ValueChanged(sender As Object, e As EventArgs)  ',  cboPayeeIdNo.SelectedValueChanged
+        Private Sub CboPayeeIdNo_ValueChanged(sender As Object, e As EventArgs) Handles cboPayeeIdNo.SelectedValueChanged
             RaiseEvent PayeeIdNoChanged()
             If OpenInvoiceMode Then
                 UpdateOpenInvoiceDisplay()
