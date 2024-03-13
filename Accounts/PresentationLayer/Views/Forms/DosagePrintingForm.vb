@@ -208,7 +208,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 cboItemIdNo.SetValue(Value)
-                txtItemName.Text = DirectCast(cboItemIdNo.DataSource.Rows(cboItemIdNo.SelectedIndex()), System.Data.DataRow).ItemArray(1)
+                txtItemName.Text = DirectCast(cboItemIdNo.DataSource.Rows(cboItemIdNo.SelectedIndex()), System.Data.DataRow).Item(1)
                 txtItemName.Text = Value
             End Set
         End Property

@@ -60,7 +60,7 @@ Namespace PresentationLayer.Presenters
             MakeControlDataSources({New String() {"User", "EnteredBy", "IdNo,UserName", Nothing},
                                     New String() {"Holiday", "HolidayTransferIdNo", Nothing, Nothing}})
             CreateEnumDataSource(Of LeaveStatusSelection)("Status")
-            CreateEnumDataT(Of LeaveStatusSelection)(View.HolidayStatusList)
+            CreateEnumData(Of LeaveStatusSelection)(View.HolidayStatusList)
             MakeVarDataSources({New String() {"User", "Users", "IdNo,UserName", Nothing}})
             'CreateEnumDataSource(Of LeaveApprovalSelection)("Approval")
         End Sub

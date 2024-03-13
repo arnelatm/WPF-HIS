@@ -265,6 +265,7 @@ Public Class CtDataGridView
         End Try
     End Sub
 
+    <DebuggerStepThrough>
     Protected Overrides Function ProcessDialogKey(ByVal keyData As Keys) As Boolean
         ' handles
         ' Extract the key code from the key value.

@@ -38,11 +38,11 @@ Namespace PresentationLayer.Presenters
 
             MakeControlDataSources({New String() {"User", "ApprovedBy", "IdNo,UserName", Nothing, Nothing}})
 
-            CreateEnumDataT(Of LeaveStatusSelection)(View.StatusList)
+            CreateEnumData(Of LeaveStatusSelection)(View.StatusList)
             If IsUserASupervisor() Then
-                CreateEnumDataT(Of SupervisorApprovalSelection)(View.ApprovalStatusList)
+                CreateEnumData(Of SupervisorApprovalSelection)(View.ApprovalStatusList)
             Else
-                CreateEnumDataT(Of LeaveApprovalSelection)(View.ApprovalStatusList)
+                CreateEnumData(Of LeaveApprovalSelection)(View.ApprovalStatusList)
             End If
         End Sub
 

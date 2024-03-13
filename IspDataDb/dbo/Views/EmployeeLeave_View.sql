@@ -1,7 +1,7 @@
 ﻿
 CREATE VIEW [dbo].[EmployeeLeave_View]
 AS
-SELECT	dbo.EmployeeLeave.EmployeeIdNo, 
+SELECT	dbo.EmployeeLeave.EmployeeIdNo,
 		dbo.EmployeeLeave.IdNo, 
 		dbo.EmployeeLeave.LeaveIdNo, 
 		dbo.EmployeeLeave.StartDate, 
@@ -16,12 +16,13 @@ SELECT	dbo.EmployeeLeave.EmployeeIdNo,
 		dbo.EmployeeLeave.DateCreated AS LeaveDate, 
 		dbo.EmployeeLeave.IdNo AS EmployeeLeaveIdNo, 
 		dbo.Employee.SupervisorIdNo, 
-		ISNULL(dbo.LatestApproval_View.Status, '0') AS 'Status', 
-		ISNULL(dbo.LatestApproval_View.LeaveStatus, '0') AS 'LeaveStatus',
-		dbo.LatestApproval_View.DateCreated AS LatestStatusUpdate, 
+		ISNULL(dbo.LatestApproval_View.Status, '0') AS Status, 
+		ISNULL(dbo.LatestApproval_View.LeaveStatus, '0') AS LeaveStatus, 
+        dbo.LatestApproval_View.DateCreated AS LatestStatusUpdate, 
 		dbo.LatestApproval_View.ApprovedBy, 
 		dbo.LatestApproval_View.EmployeeLeaveApprovalIdNo, 
-		dbo.Leave.Holiday 
+		dbo.Leave.Holiday, 
+		dbo.EmployeeLeave.NoOfDays
 FROM    dbo.EmployeeLeave 
 		INNER JOIN dbo.Employee 
 		ON dbo.EmployeeLeave.EmployeeIdNo = dbo.Employee.IdNo 
@@ -41,7 +42,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[18] 4[71] 2[6] 3) )"
+         Configuration = "(H (1[82] 4[9] 2[6] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -180,7 +181,9 @@ Begin DesignProperties =
          Column = 4044
          Alias = 2916
          Table = 4272
-         Output = 147', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeave_View';
+         Output = 1476', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeave_View';
+
+
 
 
 
@@ -206,7 +209,7 @@ Begin DesignProperties =
 
 
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'6
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'
          Append = 1400
          NewValue = 1170
          SortType = 1356
@@ -220,6 +223,8 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'6
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeave_View';
+
+
 
 
 

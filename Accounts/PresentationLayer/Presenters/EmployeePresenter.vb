@@ -128,8 +128,7 @@ Namespace PresentationLayer.Presenters
             CreateEnumDataSource(Of PayrollPaymentMethodSelection)("PaymentMethod")
             CreateEnumDataSource(Of SponsorTypeSelection)("SponsorType")
             CreateEnumDataSource(Of BloodTypeSelection)("BloodType")
-            'CreateListDataSourceT("List", "Title", "NameTitle")
-            CreateEnumDataT(Of PayRateUnitSelection)(View.Unit)
+            CreateEnumData(Of PayRateUnitSelection)(View.Unit)
             MakeControlDataSources({New String() {"Bank", "BankIdNo", Nothing, Nothing},
                              New String() {"Country", "CountryCode", "CountryCode,CountryName", Nothing},
                              New String() {"Department", "DepartmentIdNo", Nothing, Nothing},

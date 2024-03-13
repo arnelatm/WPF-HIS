@@ -77,7 +77,7 @@ Public Class CtDgvComboBoxEditingControl
             DisplayMember = "Name"
             Dim nCol As Int16 = DirectCast(Me.DataSource, System.Data.DataTable).Columns.Count - 1
             If nCol >= 0 Then
-                PropertySelectorCompiled = Function(collection) collection.Cast(Of DataRowView)().[Select](Function(p) p.Row.ItemArray(nCol).ToString())
+                PropertySelectorCompiled = Function(collection) collection.Cast(Of DataRowView)().[Select](Function(p) p.Row.Item(nCol).ToString())
             End If
         End If
     End Sub

@@ -5,6 +5,7 @@
     [HolidayIdNo]   SMALLINT       NULL,
     [StartDate]     DATETIME       NOT NULL,
     [EndDate]       DATETIME       NOT NULL,
+    [NoOfDays]      INT            NULL,
     [FullDay]       BIT            NULL,
     [EnteredBy]     INT            NOT NULL,
     [LeaveReason]   NVARCHAR (200) NULL,
@@ -13,6 +14,8 @@
     [DateTimeStamp] ROWVERSION     NULL,
     CONSTRAINT [PK_EmployeeLeave] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 
