@@ -22,16 +22,29 @@ Partial Class TestForm3
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.cComboBox1 = New System.Windows.Forms.ComboBox()
         Me.SuspendLayout()
+        '
+        'cComboBox1
+        '
+        Me.cComboBox1.FormattingEnabled = True
+        Me.cComboBox1.Location = New System.Drawing.Point(0, 0)
+        Me.cComboBox1.Name = "cComboBox1"
+        Me.cComboBox1.Size = New System.Drawing.Size(121, 24)
+        Me.cComboBox1.TabIndex = 0
         '
         'TestForm3
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.ClientSize = New System.Drawing.Size(1067, 554)
+        Me.Controls.Add(Me.cComboBox1)
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "TestForm3"
         Me.Text = "Form3"
         Me.ResumeLayout(False)
 
     End Sub
+
+    Friend WithEvents cComboBox1 As ComboBox
 End Class

@@ -435,7 +435,7 @@ End Class
 
 Public Class GetControlDataSource
 
-    Public Sub New(tableName As String, control As Control, Optional filter As String = Nothing, Optional sortOrder As String = Nothing, Optional ascending As Boolean = True, Optional displayMember As String = Nothing, Optional valueMember As String = Nothing)
+    Public Sub New(tableName As String, control As Control, Optional fieldNames As String = Nothing, Optional filter As String = Nothing, Optional sortOrder As String = Nothing, Optional ascending As Boolean = True, Optional displayMember As String = Nothing, Optional valueMember As String = Nothing)
         Me.TableName = tableName
         Me.Control = control
         Me.Filter = filter
@@ -446,6 +446,7 @@ Public Class GetControlDataSource
     End Sub
 
     Public Property TableName As String
+    Public Property FieldNames As String
     Public Property Control As Control
     Public Property Filter As String
     Public Property SortOrder As String

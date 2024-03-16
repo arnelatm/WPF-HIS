@@ -20,9 +20,9 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            MakeControlDataSources({New String() {"Printer", "PrinterIdNo", Nothing, Nothing},
-                                    New String() {"PrintJob", "PrintJobIdNo", Nothing, Nothing},
-                                    New String() {"Computer", "ComputerIdNo", Nothing, Nothing}})
+            MakeControlDataSources({New Object() {"Printer", "PrinterIdNo", Nothing, Nothing},
+                                    New Object() {"PrintJob", "PrintJobIdNo", Nothing, Nothing},
+                                    New Object() {"Computer", "ComputerIdNo", Nothing, Nothing}})
         End Sub
 
 

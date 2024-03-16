@@ -115,11 +115,11 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            'MakeControlDataSources({New String() {"Warehouse", "WarehouseIdNo", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "WarehouseName"}})
-            MakeVarDataSources({New String() {"User", "UserList", "IdNo,UserName", Nothing, "UserName"},
-                                New String() {"Unit", "UnitList", Nothing, Nothing, "UnitName"},
-                                New String() {"Supplier", "SupplierList", Nothing, Nothing, "SupplierName"},
-                                New String() {"Warehouse", "WarehouseList", Nothing, Nothing, "WarehouseName"}})
+            'MakeControlDataSources({New Object() {"Warehouse", "WarehouseIdNo", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "WarehouseName"}})
+            MakeVarDataSources({New Object() {"User", "UserList", "IdNo,UserName", Nothing, "UserName"},
+                                New Object() {"Unit", "UnitList", Nothing, Nothing, "UnitName"},
+                                New Object() {"Supplier", "SupplierList", Nothing, Nothing, "SupplierName"},
+                                New Object() {"Warehouse", "WarehouseList", Nothing, Nothing, "WarehouseName"}})
         End Sub
 
         Private Sub GetUnPostedPo()

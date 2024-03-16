@@ -24,13 +24,13 @@ Namespace PresentationLayer.Presenters
         Public Sub CreateSpecialAccountDataSourceT(fieldName As String, specialAccountArray As String())
             Dim filter As String
             filter = Accounts.AccountHelpers.CreateSpecialAccountFilterKey(specialAccountArray)
-            MakeControlDataSources({New String() {"Account", fieldName, Nothing, filter}})
+            MakeControlDataSources({New Object() {"Account", fieldName, Nothing, filter}})
         End Sub
 
         Public Sub CreateSpecialAccountDataSource(fieldName As String, specialAccountArray As String())
             Dim filter As String
             filter = Accounts.AccountHelpers.CreateSpecialAccountFilterKey(specialAccountArray)
-            MakeControlDataSources({New String() {"Account", fieldName, Nothing, filter}})
+            MakeControlDataSources({New Object() {"Account", fieldName, Nothing, filter}})
         End Sub
 
         Public Function GetDepositTypeModel() As List(Of DepositTypeModel)

@@ -52,9 +52,9 @@ Namespace PresentationLayer.Presenters
         
         Protected Overrides Sub CreateDataSources()
             'RaiseEvent UpdateDataFilterEvent(PayrollIdNo)
-            MakeVarDataSources({New String() {"PayElement", "PayEarningsByCode", Nothing, "PayElementKind = '" & EnumToCode(PayElementKindSelection.Earning) & "' and Summary = 0"},
-                                New String() {"PayElement", "PayDeductionsByCode", Nothing, "PayElementKind = '" & EnumToCode(PayElementKindSelection.Deduction) & "' and Summary = 0"}})
-            MakeControlDataSources({New String() {"Employee", "EmployeeIdNo", Nothing, Nothing}})
+            MakeVarDataSources({New Object() {"PayElement", "PayEarningsByCode", Nothing, "PayElementKind = '" & EnumToCode(PayElementKindSelection.Earning) & "' and Summary = 0"},
+                                New Object() {"PayElement", "PayDeductionsByCode", Nothing, "PayElementKind = '" & EnumToCode(PayElementKindSelection.Deduction) & "' and Summary = 0"}})
+            MakeControlDataSources({New Object() {"Employee", "EmployeeIdNo", Nothing, Nothing}})
         End Sub
 
 

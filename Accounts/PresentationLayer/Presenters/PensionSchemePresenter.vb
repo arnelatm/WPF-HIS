@@ -39,8 +39,8 @@ Namespace PresentationLayer.Presenters
 
         
         Protected Overrides Sub CreateDataSources()
-            MakeControlDataSources({New String() {"PensionProvider", "PensionProviderIdNo", Nothing, Nothing},
-                                    New String() {"Account", "AccountIdNo", Nothing, "DetailAccount=1"}})
+            MakeControlDataSources({New Object() {"PensionProvider", "PensionProviderIdNo", Nothing, Nothing},
+                                    New Object() {"Account", "AccountIdNo", Nothing, "DetailAccount=1"}})
         End Sub
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave

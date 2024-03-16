@@ -24,10 +24,10 @@ Namespace PresentationLayer.Presenters
         Protected Overrides Sub CreateDataSources()
             CreateEnumDataSource(Of PaymentMethodSelection)("PaymentMethod")
             CreateEnumDataSource(Of AccountStatusSelection)("AccountStatus")
-            MakeControlDataSources({New String() {"Bank", "BankIdNo", Nothing, Nothing},
-                             New String() {"Country", "CountryCode", "CountryCode,CountryName", Nothing},
-                             New String() {"DiscountScheme", "DiscountSchemeIdNo", Nothing, Nothing},
-                             New String() {"Account", "RevAccountIdNo", Nothing, "DetailAccount=1"}})
+            MakeControlDataSources({New Object() {"Bank", "BankIdNo", Nothing, Nothing},
+                             New Object() {"Country", "CountryCode", "CountryCode,CountryName", Nothing},
+                             New Object() {"DiscountScheme", "DiscountSchemeIdNo", Nothing, Nothing},
+                             New Object() {"Account", "RevAccountIdNo", Nothing, "DetailAccount=1"}})
             CreateSpecialAccountDataSourceT("ArAccountIdNo", {EnumToCode(SpecialAccountSelection.AccountsReceivable)})
         End Sub
 

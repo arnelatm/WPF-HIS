@@ -45,7 +45,7 @@ Public Class SecurityGroupPresenter(Of TM As New)
     End Sub
 
     Protected Overrides Sub CreateDataSources()
-        MakeControlDataSources({New String() {"SecurityGroup", "ParentIdNo", Nothing, Nothing}})
+        MakeControlDataSources({New Object() {"SecurityGroup", "ParentIdNo", Nothing, Nothing}})
         Dim control = GetControlName("ParentIdNo")
         control.Refresh()
     End Sub

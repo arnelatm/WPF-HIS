@@ -2109,7 +2109,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
             workRow("Name") = Messaging.TranslateCaption(c.ToString().SplitCamelCase())
             dt.Rows.Add(workRow)
         Next
-        Return dt
+        Return dt  '.DefaultView
     End Function
 
     Public Function GetService()
@@ -2132,9 +2132,9 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     End Function
 
     Protected Sub CreateDataSourceThread(dataSourceNames As ArrayList)
-        Dim luItems As List(Of DataLookup)
+        Dim luItems As List(Of DataLookupSpecs)
         luItems = CreateDataLookups(dataSourceNames)
-        For Each luItem As DataLookup In luItems
+        For Each luItem As DataLookupSpecs In luItems
             Dim displayColumnNo As Integer = Nothing
             Dim valueColumnNo As Integer = Nothing
             MakeLookupItem(luItem, displayColumnNo, valueColumnNo)
@@ -2143,21 +2143,24 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Next
     End Sub
 
-    Protected Sub CreateDataSourceThreadT(dataSourceNames As ArrayList)
-        Dim luItems As List(Of DataLookup)
-        luItems = CreateDataLookupsT(dataSourceNames)
-        For Each luItem As DataLookup In luItems
-            Dim displayColumnNo As Integer = Nothing
-            Dim valueColumnNo As Integer = Nothing
-            MakeLookupItemT(luItem, displayColumnNo, valueColumnNo)
-            Invoker.SetPropertyR(luItem.PropertyControl, "DisplayMember", luItem.Data.Columns(displayColumnNo).ColumnName)
-            Invoker.SetPropertyR(luItem.PropertyControl, "ValueMember", luItem.Data.Columns(valueColumnNo).ColumnName)
-        Next
-    End Sub
+    'Protected Sub CreateDataSourceThreadT(dataSourceNames As ArrayList)
+    '    Dim luItems As List(Of DataLookupSpecs)
+    '    luItems = CreateDataLookupsT(dataSourceNames)
+    '    For Each luItem As DataLookupSpecs In luItems
+    '        Dim displayColumnNo As Integer = Nothing
+    '        Dim valueColumnNo As Integer = Nothing
+    '        MakeLookupItemT(luItem, displayColumnNo, valueColumnNo)
+    '        Invoker.SetPropertyR(luItem.PropertyControl, "DisplayMember", luItem.Data.Columns(displayColumnNo).ColumnName)
+    '        Invoker.SetPropertyR(luItem.PropertyControl, "ValueMember", luItem.Data.Columns(valueColumnNo).ColumnName)
+    '    Next
+    'End Sub
 
-    Private Sub MakeLookupItem(ByRef luItem As DataLookup, ByRef displayColumnNo As Integer, ByRef valueColumnNo As Integer)
-        luItem.PropertyControl = GetFieldControlName(luItem.PropertyName)
+    Private Sub MakeLookupItem(ByRef luItem As DataLookupSpecs, ByRef displayColumnNo As Integer, ByRef valueColumnNo As Integer)
+        If TypeOf luItem.PropertyName Is String Then
+            luItem.PropertyControl = GetFieldControlName(luItem.PropertyName)
+        End If
         luItem.Data = luItem.LookUpTask.Result
+        luItem.DataView = luItem.Data.DefaultView
         Invoker.SetPropertyR(luItem.PropertyControl, "DataSource", luItem.Data)
         displayColumnNo = 0
         valueColumnNo = 0
@@ -2203,9 +2206,10 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         End If
     End Sub
 
-    Private Sub MakeLookupItemT(ByRef luItem As DataLookup, ByRef displayColumnNo As Integer, ByRef valueColumnNo As Integer)
+    Private Sub MakeLookupItemT(ByRef luItem As DataLookupSpecs, ByRef displayColumnNo As Integer, ByRef valueColumnNo As Integer)
         luItem.PropertyControl = luItem.PropertyControl
         luItem.Data = luItem.LookUpTask.Result
+        luItem.DataView = luItem.Data.DefaultView
         Invoker.SetPropertyR(luItem.PropertyControl, "DataSource", luItem.Data)
         displayColumnNo = 0
         valueColumnNo = 0
@@ -2252,11 +2256,12 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     End Sub
 
     Protected Sub CreateDataSourceLookup(dataSourceNames As ArrayList)
-        Dim luItems As List(Of DataLookup)
+        Dim luItems As List(Of DataLookupSpecs)
         luItems = CreateDataLookups(dataSourceNames)
-        For Each luItem As DataLookup In luItems
+        For Each luItem As DataLookupSpecs In luItems
             luItem.PropertyControl = GetFieldControlName(luItem.PropertyName)
             luItem.Data = luItem.LookUpTask.Result
+            luItem.DataView = luItem.Data.DefaultView
             Invoker.SetPropertyR(luItem.PropertyControl, "DataSource", luItem.Data)
             Dim displayColumnNo As Integer = 0
             Dim valueColumnNo As Integer = 0
@@ -2307,11 +2312,22 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     End Sub
 
     Protected Sub CreateLookupDataThread(dataSourceNames As ArrayList)
-        Dim luItems As List(Of DataLookup)
+        Dim luItems As List(Of DataLookupSpecs)
         luItems = CreateDataLookups(dataSourceNames)
-        For Each luItem As DataLookup In luItems
+        For Each luItem As DataLookupSpecs In luItems
             luItem.Data = luItem.LookUpTask.Result
+            luItem.DataView = luItem.Data.DefaultView
             Invoker.SetProperty(Me.View, luItem.PropertyName, luItem.Data)
+        Next
+    End Sub
+
+    Protected Sub CreateDvLookupDataThread(dataSourceNames As ArrayList)
+        Dim luItems As List(Of DataLookupSpecs)
+        luItems = CreateDataLookups(dataSourceNames)
+        For Each luItem As DataLookupSpecs In luItems
+            luItem.Data = luItem.LookUpTask.Result
+            luItem.DataView = luItem.Data.DefaultView
+            Invoker.SetProperty(Me.View, luItem.PropertyName, luItem.DataView)
         Next
     End Sub
 
@@ -2328,14 +2344,14 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
 
     Public Sub MakeVarDataSources(dataObject As Object)
         Dim data As New ArrayList
-        For Each item As String() In dataObject
+        For Each item As Object() In dataObject
             data.Add(item)
         Next
         CreateLookupDataThread(data)
     End Sub
 
     Public Function MakeVarDataSource(item As Object) As DataTable
-        Dim dtl As New DataLookup
+        Dim dtl As New DataLookupSpecs
         Const LookupTableName As Int32 = 0
         Const PropertyFieldName As Int32 = 1
         Const LookupFieldNames As Int32 = 2
@@ -2371,18 +2387,10 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
 
     Public Sub MakeControlDataSources(dataObject As Object)
         Dim data As New ArrayList
-        For Each aItem As String() In dataObject
-            data.Add(aItem)
-        Next
-        CreateDataSourceThread(data)
-    End Sub
-
-    Public Sub MakeControlDataSourcesT(dataObject As Object)
-        Dim data As New ArrayList
         For Each aItem As Object In dataObject
             data.Add(aItem)
         Next
-        CreateDataSourceThreadT(data)
+        CreateDataSourceThread(data)
     End Sub
 
     Public Sub MakeControlDataSource(dataObject As ArrayList)
@@ -2393,39 +2401,32 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     End Sub
 
 
-    Private Function CreateDataLookups(dataSourceNames As ArrayList) As List(Of DataLookup)
-        Dim lookups As New List(Of DataLookup)
+    Private Function CreateDataLookups(dataSourceNames As ArrayList) As List(Of DataLookupSpecs)
+        Dim lookups As New List(Of DataLookupSpecs)
         For Each item In dataSourceNames
-            Dim dtl As DataLookup
+            Dim dtl As DataLookupSpecs
             dtl = CreateDataLookUp(item)
             lookups.Add(dtl)
         Next
         Return lookups
     End Function
 
-    Private Function CreateDataLookupsT(dataSourceNames As ArrayList) As List(Of DataLookup)
-        Dim lookups As New List(Of DataLookup)
-        For Each item In dataSourceNames
-            Dim dtl As DataLookup
-            dtl = CreateDataLookUpT(item)
-            lookups.Add(dtl)
-        Next
-        Return lookups
-    End Function
-
-
-    Private Function CreateDataLookUp(item As Object) As DataLookup
+    Private Function CreateDataLookUp(item As Object) As DataLookupSpecs
         Const LookupTableName As Int32 = 0
-        Const PropertyFieldName As Int32 = 1
+        Const LookupControl As Int32 = 1
         Const LookupFieldNames As Int32 = 2
         Const LookupFilter As Int32 = 3
         Const LookupSortKey As Int32 = 4
         Const ValueMember As Int32 = 5
         Const DisplayMember As Int32 = 6
         Const Ascending As Int32 = 7
-        Dim dtl As New DataLookup
+        Dim dtl As New DataLookupSpecs
         dtl.TableName = item(LookupTableName)
-        dtl.PropertyName = item(PropertyFieldName)
+        If TypeOf item(LookupControl) Is String Then
+            dtl.PropertyName = item(LookupControl)
+        Else
+            dtl.PropertyControl = item(LookupControl)
+        End If
         dtl.Ascending = True
         If item.Length - 1 > 1 Then
             dtl.LuFields = item(LookupFieldNames)
@@ -2450,45 +2451,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Return dtl
     End Function
 
-
-
-    Private Function CreateDataLookUpT(item As Object) As DataLookup
-        Const LookupTableName As Int32 = 0
-        Const PropertyControl As Int32 = 1
-        Const LookupFieldNames As Int32 = 2
-        Const LookupFilter As Int32 = 3
-        Const LookupSortKey As Int32 = 4
-        Const ValueMember As Int32 = 5
-        Const DisplayMember As Int32 = 6
-        Const Ascending As Int32 = 7
-        Dim dtl As New DataLookup
-        dtl.TableName = item(LookupTableName)
-        dtl.PropertyControl = item(PropertyControl)
-        dtl.Ascending = True
-        If item.Length - 1 > 1 Then
-            dtl.LuFields = item(LookupFieldNames)
-        End If
-        If item.Length - 1 > 2 Then
-            dtl.Filter = item(LookupFilter)
-        End If
-        If item.Length - 1 > 3 Then
-            dtl.SortKey = item(LookupSortKey)
-        End If
-        If item.Length - 1 > 4 Then
-            dtl.ValueMember = item(ValueMember)
-        End If
-        If item.Length - 1 > 5 Then
-            dtl.DisplayMember = item(DisplayMember)
-        End If
-        If item.Length - 1 > 6 Then
-            dtl.Ascending = item(Ascending)
-        End If
-        ComposeLookupProperties(dtl)
-        dtl.LookUpTask = Task(Of DataTable).Factory.StartNew(Function() LookupDataTableCreator(dtl))
-        Return dtl
-    End Function
-
-    Private Sub ComposeLookupProperties(dtl As DataLookup)
+    Private Sub ComposeLookupProperties(dtl As DataLookupSpecs)
         Dim RightToLeftFormat = GlobalFunctions.IsRightToLeft(CultureInfo.CurrentCulture.ToString())
         If dtl.LuFields Is Nothing Then
             dtl.NameFieldOrig = dtl.TableName + "Name"
@@ -2563,9 +2526,16 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     End Function
 
 
-    Private Function LookupDataTableCreator(dtl As DataLookup) As DataTable
+    Private Function LookupDataTableCreator(dtl As DataLookupSpecs) As DataTable
         Dim cd As New DataCreator(Service)
         Dim data As DataTable = cd.CreateDataTable(dtl)
+        cd = Nothing
+        Return data
+    End Function
+
+    Private Function LookupDataViewCreator(dtl As DataLookupSpecs) As DataView
+        Dim cd As New DataViewCreator(Service)
+        Dim data As DataView = cd.CreateDataView(dtl)
         cd = Nothing
         Return data
     End Function
@@ -2660,7 +2630,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
 
 End Class
 
-Public Class DataLookup
+Public Class DataLookupSpecs
     Public Property TableName As String
     Public Property PropertyName As String
     Public Property PropertyControl As CtComboBox
@@ -2669,11 +2639,13 @@ Public Class DataLookup
     Public Property Filter As String
     Public Property ValueMember As String
     Public Property DisplayMember As String
-    Public Property Data As DataTable
+    Public Property DataView As DataView
     Public Property NameField As String
     Public Property NameFieldOrig As String
     Public Property NameDisplayValue As String
     Public Property LookUpTask As Task(Of DataTable)
+    Public Property DvLookUpTask As Task(Of DataView)
+    Public Property Data As DataTable
     Public Property NameFieldToUse As String
     Public Property Ascending As Boolean
 End Class
@@ -2686,8 +2658,25 @@ Public Class DataCreator
         _sv = svc
     End Sub
 
-    Public Function CreateDataTable(dtl As DataLookup) As DataTable
+    Public Function CreateDataTable(dtl As DataLookupSpecs) As DataTable
         Return _sv.GetDtRecords(dtl.TableName, dtl.LuFields, dtl.Filter, dtl.SortKey, dtl.Ascending)
+    End Function
+
+End Class
+
+Public Class DataViewCreator
+
+    Private Shared _sv As Service
+
+    Public Sub New(svc As Service)
+        _sv = svc
+    End Sub
+
+    Public Function CreateDataView(dtl As DataLookupSpecs) As DataView
+        Dim dt As DataTable = _sv.GetDtRecords(dtl.TableName, dtl.LuFields, dtl.Filter, dtl.SortKey, dtl.Ascending)
+        Dim dv As DataView
+        dv = dt.DefaultView
+        Return dv
     End Function
 
 End Class

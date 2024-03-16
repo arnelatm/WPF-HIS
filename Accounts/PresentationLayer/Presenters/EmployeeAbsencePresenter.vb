@@ -33,7 +33,7 @@ Namespace PresentationLayer.Presenters
 
         Protected Overrides Sub CreateDataSources()
             CreateEnumDataSource(Of AbsenceTypeSelection)("AbsenceType")
-            MakeControlDataSources({New String() {"Employee", "EmployeeIdNo", Nothing, Nothing}})
+            MakeControlDataSources({New Object() {"Employee", "EmployeeIdNo", Nothing, Nothing}})
         End Sub
 
         Protected Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized

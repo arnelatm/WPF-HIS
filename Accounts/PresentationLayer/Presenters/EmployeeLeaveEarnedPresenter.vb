@@ -18,6 +18,8 @@ Namespace PresentationLayer.Presenters
         Private _releasedDate As Date?
         Private _yearsOfService As Int16
         Private _daysAllowedPerYear As Int16
+        Private _earliestEarnedLeaveDate As Date
+
 
         Public Sub New(itemView As IEmployeeLeaveEarnedView)
             MyBase.New(itemView)
@@ -29,17 +31,23 @@ Namespace PresentationLayer.Presenters
             AddHandler View.LeaveIdNoChanged, AddressOf OnLeaveIdNoChanged
         End Sub
 
+
         Protected Overrides Sub CreateDataSources()
-            MakeControlDataSources({New String() {"User", "EnteredBy", "IdNo,UserName", Nothing},
-                             New String() {"Employee", "EmployeeIdNo", Nothing, Nothing},
-                             New String() {"Leave", "LeaveIdNo", Nothing, "Earnable = 1"}
+            MakeControlDataSources({New Object() {"User", "EnteredBy", "IdNo,UserName", Nothing},
+                             New Object() {"Employee", "EmployeeIdNo", Nothing, Nothing},
+                             New Object() {"Leave", "LeaveIdNo", Nothing, "Earnable = 1"}
                              })
         End Sub
 
         Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
             View.EnteredBy = GlobalVariables.UserIdNo
+            View.StartDate = GetEarliestLeaveDate()
         End Sub
 
+        Private Function GetEarliestLeaveDate() As Date
+            Dim earliestLeaveDate As String = Service.GetRecordFieldWithKey("ERLD", "Setting", "SettingCode", "Value")
+            Return CType(earliestLeaveDate, Date)
+        End Function
 
         Protected Overrides Function IsBizDataValid() As Boolean
             Dim retValue = False
@@ -72,6 +80,12 @@ Namespace PresentationLayer.Presenters
             If _hiredDate Is Nothing Then
                 MessageBox.Show("Hired Date for this employee is not entered, please update this employee information before proceeding with this transaction.")
                 Return False
+            ElseIf View.StartDate < _earliestEarnedLeaveDate Then
+                Dim ed As String = Format(_earliestEarnedLeaveDate, "dd/MM/yyyy")
+                Dim sd As String = Format(View.StartDate, "dd/MM/yyyy")
+                Messaging.ShowPmMessage(True, "MsgValueMustBeGreaterThanOrEqual", {"fieldName1", "Start Date", "fieldValue1", sd, "fieldName2", "'Earliest Earned Leave Date'", "fieldValue2", ed})
+                Return False
+
             ElseIf View.StartDate < _hiredDate Then
                 Dim hd As String = Format(CType(_hiredDate, Date), "dd/MM/yyyy")
                 Dim sd As String = Format(View.StartDate, "dd/MM/yyyy")
@@ -101,7 +115,7 @@ Namespace PresentationLayer.Presenters
             End If
             Dim yearsOfServiceFromStartDate As Int16 = GetFloorIntYearDifference(CDate(_hiredDate), CDate(View.StartDate))
             Dim yearsOfServiceFromEndDate As Int16 = GetFloorIntYearDifference(CDate(_hiredDate), CDate(View.EndDate))
-            Dim daysAllowedPerYearFromStartDate = GetLeaveDaysAllowedPerYear(yearsOfServiceFromStartDate)
+            Dim daysAllowedPerYearFromStartDate As Int16 = GetLeaveDaysAllowedPerYear(yearsOfServiceFromStartDate)
             Dim daysAllowedPerYearFromEndDate = GetLeaveDaysAllowedPerYear(yearsOfServiceFromEndDate)
             Dim totalDaysEarned As Int16 = 0
             Dim noOfYearsInDecimal As Decimal = 0D
@@ -153,16 +167,16 @@ Namespace PresentationLayer.Presenters
             Return GetFloorIntYearDifference(_hiredDate, View.EndDate)
         End Function
 
-        Private Function GetMinimumDays()
+        Private Function GetMinimumDays() As Int16
             Return Service.GetFieldValue(Of Int16)("MinimumDays", "EarnableLeave", _yearsOfService.ToString() + " >= YearsOfServiceStart and " + _yearsOfService.ToString() + " < YearsOfServiceEnd ")
         End Function
 
-        Private Function GetMinimumDaysForLeave()
+        Private Function GetMinimumDaysForLeave() As Int16
             Return Service.GetFieldValue(Of Int16)("MinimumDaysForLeave", "EarnableLEave", _yearsOfService.ToString() + " >= YearsOfServiceStart and " + _yearsOfService.ToString() + " < YearsOfServiceEnd ")
         End Function
 
 
-        Private Function GetLeaveDaysAllowedPerYear(yearsOfService As Int16)
+        Private Function GetLeaveDaysAllowedPerYear(yearsOfService As Int16) As Int16
             Return Service.GetFieldValue(Of Int16)("LeaveDaysAllowedPerYear", "EarnableLEave", yearsOfService.ToString() + " >= YearsOfServiceStart and " + yearsOfService.ToString() + " < YearsOfServiceEnd ")
         End Function
 
@@ -180,9 +194,12 @@ Namespace PresentationLayer.Presenters
             Return noOverlap
         End Function
 
-        Public Sub OnDateValuesChanged(idNo As Int16)
-            If idNo <> 0 Then
-                View.DaysEarned = GetDaysEarned()
+        Public Sub OnDateValuesChanged()
+            ComputeEmployeeServiceDetails()
+            If StartAndEndDateIsValid() Then
+                If View.EmployeeIdNo <> 0 Then
+                    View.DaysEarned = GetDaysEarned()
+                End If
             End If
         End Sub
 
@@ -215,6 +232,7 @@ Namespace PresentationLayer.Presenters
                 ' only employee own leaves can be shown
                 DataFilter += IIf(DataFilter Is Nothing Or DataFilter = "", "", " and ") + " EmployeeIdNo = " & employeeIdNo.ToString()
             End If
+            _earliestEarnedLeaveDate = GetEarliestLeaveDate()
         End Sub
 
 

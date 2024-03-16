@@ -5,7 +5,7 @@ Imports System.Threading
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 
-Public Class CtDgvComboBoxEditingControl
+Public Class CfDgvComboBoxEditingControl
     Inherits DataGridViewComboBoxEditingControl
 
     Public SuggestListForm As CListBoxForm = New CListBoxForm
@@ -16,6 +16,8 @@ Public Class CtDgvComboBoxEditingControl
     Private _filterRuleCompiled As Func(Of String, Boolean)
     Private _suggestListOrderRule As Expression(Of Func(Of String, String))
     Private _suggestListOrderRuleCompiled As Func(Of String, String)
+    Public dataT As DataTable
+    Public dataV As DataView
 
     Public Sub New()
         _filterRuleCompiled = Function(s) s.ToLower().Contains(Text.Trim().ToLower())
@@ -74,7 +76,7 @@ Public Class CtDgvComboBoxEditingControl
 
     Private Overloads Sub OnBindingContextChanged(sender As Object, e As EventArgs) Handles MyBase.BindingContextChanged
         If DataSource IsNot Nothing Then
-            Dim colCount As Int32 = DataSource.Columns.Count()
+            Dim colCount As Int32 = DataSource.Columns.Count()  ' dataT.Columns.Count - 1 ' DirectCast(Me.DataSource, System.Data.DataTable).Columns.Count - 1
             Dim nCol As Int32
             If colCount > 0 Then
                 If colCount = 1 Then
@@ -89,23 +91,19 @@ Public Class CtDgvComboBoxEditingControl
                     End If
                 End If
                 'PropertySelectorCompiled = Function(collection) collection  (Function(p) p.Row.Item(nCol).ToString())
-                Dim x = DataSource.Rows(0).Item(nCol).ToString()
                 PropertySelectorCompiled = Function(collection) collection.Cast(Of DataRowView)().[Select](Function(p) p.Row.Item(nCol).ToString())
             End If
         End If
     End Sub
 
     Protected Overrides Sub OnTextChanged(ByVal e As EventArgs)
-        BeginUpdate()
-        'If Strings.Left(Text, 6) = "System" Then
-        '    Debugger.Break()
-        'End If
         If Text.Length < SuggestCharCount Then
             _suggestBindingList.Clear()
             _suggestBindingList.RaiseListChangedEvents = True
             _suggestBindingList.ResetBindings()
             SuggestListForm.Hide()
         Else
+            BeginUpdate()
             MyBase.OnTextChanged(e)
             If Not Focused Then Return
             _suggestBindingList.Clear()
@@ -128,8 +126,8 @@ Public Class CtDgvComboBoxEditingControl
                 [Select](0, Text.Length)
                 HideSuggBox()
             End If
+            EndUpdate()
         End If
-        EndUpdate()
     End Sub
 
     Private Shadows Sub OnParentChanged(ByVal sender As Object, ByVal e As EventArgs)

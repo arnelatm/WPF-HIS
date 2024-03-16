@@ -52,12 +52,12 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            MakeVarDataSources({New String() {"Account", "AccountsByCode", Nothing, "DetailAccount=1"},
-            New String() {"RevCostCenter", "RevCostCentersByCode", Nothing, Nothing},
-            New String() {"Payee_View", "PayeeByCode", "PayeeIdNo,PayeeName,PayeeCode", Nothing, Nothing},
-            New String() {"Payee_View", "CustomerByCode", "PayeeIdNo,PayeeName,PayeeCode", "PayeeType = 'C'"},
-            New String() {"Payee_View", "SupplierByCode", "PayeeIdNo,PayeeName,PayeeCode", "PayeeType = 'S'"},
-            New String() {"Payee_View", "EmployeeByCode", "PayeeIdNo,PayeeName,PayeeCode", "PayeeType = 'E'"}})
+            MakeVarDataSources({New Object() {"Account", "AccountsByCode", Nothing, "DetailAccount=1"},
+            New Object() {"RevCostCenter", "RevCostCentersByCode", Nothing, Nothing},
+            New Object() {"Payee_View", "PayeeByCode", "PayeeIdNo,PayeeName,PayeeCode", Nothing, Nothing},
+            New Object() {"Payee_View", "CustomerByCode", "PayeeIdNo,PayeeName,PayeeCode", "PayeeType = 'C'"},
+            New Object() {"Payee_View", "SupplierByCode", "PayeeIdNo,PayeeName,PayeeCode", "PayeeType = 'S'"},
+            New Object() {"Payee_View", "EmployeeByCode", "PayeeIdNo,PayeeName,PayeeCode", "PayeeType = 'E'"}})
         End Sub
 
 
