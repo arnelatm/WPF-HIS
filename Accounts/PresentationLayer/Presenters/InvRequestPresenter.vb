@@ -130,10 +130,10 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            MakeControlDataSources({New String() {"Warehouse", "WarehouseIdNo", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "WarehouseName"}})
-            MakeVarDataSources({New String() {"User", "UserList", "IdNo,UserName", Nothing, "UserName"},
-                                New String() {"Unit", "UnitList", Nothing, Nothing, "UnitName"},
-                                New String() {"Warehouse", "WarehouseList", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "WarehouseName"}})
+            MakeControlDataSources({New Object() {"Warehouse", "WarehouseIdNo", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "WarehouseName"}})
+            MakeVarDataSources({New Object() {"User", "UserList", "IdNo,UserName", Nothing, "UserName"},
+                                New Object() {"Unit", "UnitList", Nothing, Nothing, "UnitName"},
+                                New Object() {"Warehouse", "WarehouseList", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "WarehouseName"}})
         End Sub
 
         Private Sub GetInvTransactions()

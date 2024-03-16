@@ -129,23 +129,23 @@ Namespace PresentationLayer.Presenters
             CreateEnumDataSource(Of SponsorTypeSelection)("SponsorType")
             CreateEnumDataSource(Of BloodTypeSelection)("BloodType")
             CreateEnumData(Of PayRateUnitSelection)(View.Unit)
-            MakeControlDataSources({New String() {"Bank", "BankIdNo", Nothing, Nothing},
-                             New String() {"Country", "CountryCode", "CountryCode,CountryName", Nothing},
-                             New String() {"Department", "DepartmentIdNo", Nothing, Nothing},
-                             New String() {"Designation", "DesignationIdNo", Nothing, Nothing},
-                             New String() {"Country", "NationalityCode", "CountryCode,CountryName", Nothing},
-                             New String() {"Religion", "ReligionIdNo", Nothing, Nothing},
-                             New String() {"PayCycle", "PayCycleIdNo", Nothing, Nothing},
-                             New String() {"PayGroup", "PayGroupIdNo", Nothing, Nothing},
-                             New String() {"List", "Title", "IdNo,ListName", Nothing},
-                             New String() {"Employee", "SupervisorIdNo", Nothing, "Supervisor=1"}})
-            'New String() {"List", "Title", "ListCode,ListName", Nothing},
-            MakeVarDataSources({New String() {"PayElement", "DeductionsByName", Nothing, "PayElementKind = '" + EnumToCode(PayElementKindSelection.Deduction) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'"},
-                               New String() {"PayElement", "EarningsByName", Nothing, "PayElementKind = '" + EnumToCode(PayElementKindSelection.Earning) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'"},
-                               New String() {"PhoneType", "PhoneTypes", Nothing, Nothing},
-                               New String() {"Country", "CountryTelCodes", "IdNo,CountryName,CountryTelCode", Nothing},
-                               New String() {"Document", "Documents", Nothing, "DocumentType = '" + EnumToCode(DocumentTypeSelection.Employee) + "'"},
-                               New String() {"Leave", "Leaves", Nothing, Nothing}})
+            MakeControlDataSources({New Object() {"Bank", "BankIdNo", Nothing, Nothing},
+                             New Object() {"Country", "CountryCode", "CountryCode,CountryName", Nothing},
+                             New Object() {"Department", "DepartmentIdNo", Nothing, Nothing},
+                             New Object() {"Designation", "DesignationIdNo", Nothing, Nothing},
+                             New Object() {"Country", "NationalityCode", "CountryCode,CountryName", Nothing},
+                             New Object() {"Religion", "ReligionIdNo", Nothing, Nothing},
+                             New Object() {"PayCycle", "PayCycleIdNo", Nothing, Nothing},
+                             New Object() {"PayGroup", "PayGroupIdNo", Nothing, Nothing},
+                             New Object() {"List", "Title", "IdNo,ListName", Nothing},
+                             New Object() {"Employee", "SupervisorIdNo", Nothing, "Supervisor=1"}})
+            'New Object() {"List", "Title", "ListCode,ListName", Nothing},
+            MakeVarDataSources({New Object() {"PayElement", "DeductionsByName", Nothing, "PayElementKind = '" + EnumToCode(PayElementKindSelection.Deduction) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'"},
+                               New Object() {"PayElement", "EarningsByName", Nothing, "PayElementKind = '" + EnumToCode(PayElementKindSelection.Earning) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'"},
+                               New Object() {"PhoneType", "PhoneTypes", Nothing, Nothing},
+                               New Object() {"Country", "CountryTelCodes", "IdNo,CountryName,CountryTelCode", Nothing},
+                               New Object() {"Document", "Documents", Nothing, "DocumentType = '" + EnumToCode(DocumentTypeSelection.Employee) + "'"},
+                               New Object() {"Leave", "Leaves", Nothing, Nothing}})
 
         End Sub
 

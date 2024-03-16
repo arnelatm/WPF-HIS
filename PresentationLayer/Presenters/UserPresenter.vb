@@ -23,13 +23,13 @@ Public Class UserPresenter(Of TM As New)
     End Sub
 
     Protected Overrides Sub CreateDataSources()
-        MakeControlDataSources({New String() {"SecurityGroup", "SecurityGroupIdNo", Nothing, Nothing},
-                             New String() {"Employee", "EmployeeIdNo", Nothing, Nothing}})
+        MakeControlDataSources({New Object() {"SecurityGroup", "SecurityGroupIdNo", Nothing, Nothing},
+                             New Object() {"Employee", "EmployeeIdNo", Nothing, Nothing}})
         CreateEnumDataSource(Of SecurityLevelSelection)("SecurityLevel")
     End Sub
 
     Public Sub CreateBranchSource()
-        MakeControlDataSources({New String() {"Branch", "BranchIdNo", Nothing, Nothing}})
+        MakeControlDataSources({New Object() {"Branch", "BranchIdNo", Nothing, Nothing}})
     End Sub
 
     Private Sub OnBeforeSave() Handles MyBase.BeforeSave

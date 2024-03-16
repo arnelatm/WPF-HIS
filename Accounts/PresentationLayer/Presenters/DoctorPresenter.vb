@@ -17,7 +17,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            MakeControlDataSources({New String() {"Employee", "EmployeeIdNo", Nothing, Nothing}})
+            MakeControlDataSources({New Object() {"Employee", "EmployeeIdNo", Nothing, Nothing}})
             CreateDataSourceGroupCodeThread({"SpecialtyIdNo"})
             'CreateDataSourceGroupCodeThread("SpecialtyIdNo", $"DRSP")
         End Sub

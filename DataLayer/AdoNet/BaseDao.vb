@@ -1079,7 +1079,7 @@ Namespace AdoNet
             As TType _
             Implements IBaseDao.GetFieldValue
             Dim sql As String =
-                    " Select " & returnFieldName & " FROM [" & tableName & "] " &
+                    " Select Top 1 " & returnFieldName & " FROM [" & tableName & "] " &
                     " Where " & condition
             Dim x = GetDb().Scalar(sql)
             If IsDBNull(x) Or x Is Nothing Then

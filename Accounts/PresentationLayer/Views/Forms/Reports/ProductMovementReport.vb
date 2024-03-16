@@ -60,8 +60,8 @@ Namespace PresentationLayer.Views.Forms.Reports
 
 
         Private Sub ProductMovementReport_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            Ea.PublishEvent(New GetControlDataSource("Warehouse", cboWarehouseIdNo, "BranchIdNo = " & GlobalVariables.BranchIdNo.ToString()))
-            Ea.PublishEvent(New GetControlDataSource("Product", cboProductIdNo, "BranchIdNo = " & GlobalVariables.BranchIdNo.ToString()))
+            Ea.PublishEvent(New GetControlDataSource("Warehouse", cboWarehouseIdNo, Nothing, "BranchIdNo = " & GlobalVariables.BranchIdNo.ToString()))
+            Ea.PublishEvent(New GetControlDataSource("Product", cboProductIdNo, Nothing, "BranchIdNo = " & GlobalVariables.BranchIdNo.ToString()))
             cboWarehouseIdNo.EditingMode = True
             cboProductIdNo.EditingMode = True
         End Sub

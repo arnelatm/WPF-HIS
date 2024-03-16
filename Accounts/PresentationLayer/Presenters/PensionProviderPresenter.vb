@@ -17,8 +17,8 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            MakeControlDataSources({New String() {"Country", "CountryCode", Nothing, Nothing},
-                                    New String() {"Bank", "BankIdNo", Nothing, Nothing}})
+            MakeControlDataSources({New Object() {"Country", "CountryCode", Nothing, Nothing},
+                                    New Object() {"Bank", "BankIdNo", Nothing, Nothing}})
             CreateEnumDataSource(Of PaymentMethodSelection)("PaymentMethod")
         End Sub
 

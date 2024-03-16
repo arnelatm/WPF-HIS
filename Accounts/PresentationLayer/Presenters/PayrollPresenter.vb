@@ -179,8 +179,8 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            MakeControlDataSources({New String() {"PayCycle", "PayCycleIdNo", Nothing, Nothing}})
-            MakeVarDataSources({New String() {"Employee", "Employees", Nothing, Nothing}})
+            MakeControlDataSources({New Object() {"PayCycle", "PayCycleIdNo", Nothing, Nothing}})
+            MakeVarDataSources({New Object() {"Employee", "Employees", Nothing, Nothing}})
         End Sub
 
         Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized

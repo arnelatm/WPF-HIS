@@ -20,7 +20,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            MakeControlDataSources({New String() {"RevenueGroup", "ParentIdNo"}})
+            MakeControlDataSources({New Object() {"RevenueGroup", "ParentIdNo"}})
         End Sub
 
         Public Function GetLastSortKey(ByVal searchValue As String) As String

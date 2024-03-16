@@ -75,11 +75,11 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            MakeVarDataSources({New String() {"Account", "AccountsByCode", Nothing, Nothing},
-            New String() {"RevCostCenter", "RevCostCentersByCode", Nothing, Nothing},
-            New String() {"Employee", "EmployeesByName", Nothing, Nothing},
-            New String() {"Customer", "CustomersByName", Nothing, Nothing},
-            New String() {"Supplier", "SuppliersByName", Nothing, Nothing}})
+            MakeVarDataSources({New Object() {"Account", "AccountsByCode", Nothing, Nothing},
+            New Object() {"RevCostCenter", "RevCostCentersByCode", Nothing, Nothing},
+            New Object() {"Employee", "EmployeesByName", Nothing, Nothing},
+            New Object() {"Customer", "CustomersByName", Nothing, Nothing},
+            New Object() {"Supplier", "SuppliersByName", Nothing, Nothing}})
             CreateEnumDataSource(Of ReceiptTypeSelection)("PayorType")
             CreateSpecialAccountDataSource("AccountIdNo", {EnumToCode(SpecialAccountSelection.Bank), EnumToCode(SpecialAccountSelection.Cash), EnumToCode(SpecialAccountSelection.CheckingAccount)})
             CreateSpecialAccountDataSource("DiscountAccountIdNo", {EnumToCode(SpecialAccountSelection.AccountsReceivableDiscount)})
@@ -1040,15 +1040,15 @@ Namespace PresentationLayer.Presenters
             Dim x As ReceiptTypeSelection = CodeToEnum(Of ReceiptTypeSelection)(payorType)
             Select Case x
                 Case ReceiptTypeSelection.AccountsReceivable
-                    MakeVarDataSources({New String() {"Customer", "PayorDataSource", Nothing, Nothing}})
+                    MakeVarDataSources({New Object() {"Customer", "PayorDataSource", Nothing, Nothing}})
                 Case ReceiptTypeSelection.Employee
-                    MakeVarDataSources({New String() {"Employee", "PayorDataSource", Nothing, Nothing}})
+                    MakeVarDataSources({New Object() {"Employee", "PayorDataSource", Nothing, Nothing}})
                 Case ReceiptTypeSelection.Customer, ReceiptTypeSelection.AccountsReceivable
-                    MakeVarDataSources({New String() {"Customer", "PayorDataSource", Nothing, Nothing}})
+                    MakeVarDataSources({New Object() {"Customer", "PayorDataSource", Nothing, Nothing}})
                 Case ReceiptTypeSelection.SupplierRefund
-                    MakeVarDataSources({New String() {"Supplier", "PayorDataSource", Nothing, Nothing}})
+                    MakeVarDataSources({New Object() {"Supplier", "PayorDataSource", Nothing, Nothing}})
                 Case Else
-                    MakeVarDataSources({New String() {"Customer", "PayorDataSource", Nothing, Nothing}})
+                    MakeVarDataSources({New Object() {"Customer", "PayorDataSource", Nothing, Nothing}})
                     View.PayorDataSource = Nothing
             End Select
         End Sub

@@ -39,9 +39,9 @@ Namespace PresentationLayer.Presenters
         Public Property ChangesMadeInHolidayTransfer As Boolean = False
 
         Protected Overrides Sub CreateDataSources()
-            MakeControlDataSources({New String() {"Holiday_View", "HolidayIdNo", "IdNo,HolidayName,HolidayCode", Nothing, "HolidayName"},
-                                    New String() {"User", "EnteredBy", Nothing, Nothing, "UserName"}})
-            MakeVarDataSources({New String() {"Employee", "EmployeeList", Nothing, "Active=1"}})
+            MakeControlDataSources({New Object() {"Holiday_View", "HolidayIdNo", "IdNo,HolidayName,HolidayCode", Nothing, "HolidayName"},
+                                    New Object() {"User", "EnteredBy", Nothing, Nothing, "UserName"}})
+            MakeVarDataSources({New Object() {"Employee", "EmployeeList", Nothing, "Active=1"}})
         End Sub
 
         ''' <summary>

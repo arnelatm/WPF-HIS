@@ -38,15 +38,15 @@ Namespace PresentationLayer.Presenters
             CreateEnumDataSource(Of PayRateUnitSelection)("Unit")
             CreateEnumDataSource(Of QuantityTypeSelection)("QuantityType")
             CreateEnumDataSource(Of PayElementTypeSelection)("PayElementType")
-            MakeControlDataSources({New String() {"PayElement", "BasePaymentIdNo", Nothing, Nothing},
-                                    New String() {"Account", "AccountIdNo", Nothing, "DetailAccount=1", "AccountName"}})
+            MakeControlDataSources({New Object() {"PayElement", "BasePaymentIdNo", Nothing, Nothing},
+                                    New Object() {"Account", "AccountIdNo", Nothing, "DetailAccount=1", "AccountName"}})
             CreateEnumData(Of FactorTypeSelection)("FactorTypeByCode")
             CreateEnumData(Of CalculationTypeSelection)("CalculationTypeByCode")
-            MakeVarDataSources({New String() {"PayElementGroup", "EarnReportGroupsByCode", Nothing, "PayElementKind = '" & GlobalFunctions.EnumToCode(PayElementKindSelection.Earning) & "'"},
-                                New String() {"PayElementGroup", "DedReportGroupsByCode", Nothing, "PayElementKind = '" & GlobalFunctions.EnumToCode(PayElementKindSelection.Deduction) & "'"},
-                                New String() {"PayElement", "PayElementsByCode", Nothing, Nothing},
-                                New String() {"PayGroup", "PayGroupsByCode", Nothing, Nothing},
-                                New String() {"Account", "AccountsByCode", Nothing, "DetailAccount=1"}})
+            MakeVarDataSources({New Object() {"PayElementGroup", "EarnReportGroupsByCode", Nothing, "PayElementKind = '" & GlobalFunctions.EnumToCode(PayElementKindSelection.Earning) & "'"},
+                                New Object() {"PayElementGroup", "DedReportGroupsByCode", Nothing, "PayElementKind = '" & GlobalFunctions.EnumToCode(PayElementKindSelection.Deduction) & "'"},
+                                New Object() {"PayElement", "PayElementsByCode", Nothing, Nothing},
+                                New Object() {"PayGroup", "PayGroupsByCode", Nothing, Nothing},
+                                New Object() {"Account", "AccountsByCode", Nothing, "DetailAccount=1"}})
         End Sub
 
         Private Sub CreateDataTables()

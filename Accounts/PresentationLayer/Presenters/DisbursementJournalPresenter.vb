@@ -108,11 +108,11 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            MakeVarDataSources({New String() {"Account", "AccountsByCode", Nothing, Nothing},
-            New String() {"RevCostCenter", "RevCostCentersByCode", Nothing, Nothing},
-            New String() {"Employee", "EmployeesByName", Nothing, Nothing},
-            New String() {"Customer", "CustomersByName", Nothing, Nothing},
-            New String() {"Supplier", "SuppliersByName", Nothing, Nothing}})
+            MakeVarDataSources({New Object() {"Account", "AccountsByCode", Nothing, Nothing},
+            New Object() {"RevCostCenter", "RevCostCentersByCode", Nothing, Nothing},
+            New Object() {"Employee", "EmployeesByName", Nothing, Nothing},
+            New Object() {"Customer", "CustomersByName", Nothing, Nothing},
+            New Object() {"Supplier", "SuppliersByName", Nothing, Nothing}})
             CreateEnumDataSource(Of PaymentTypeSelection)("PaymentType")
             CreateEnumDataSource(Of PayTypeSelection)("PayType")
             If TableName = "CdJournal" Then
@@ -1174,15 +1174,15 @@ Namespace PresentationLayer.Presenters
         Private Sub CreatePayeeDataSource(paymentType As PaymentTypeSelection)
             Select Case paymentType
                 Case PaymentTypeSelection.AccountsPayable
-                    MakeVarDataSources({New String() {"Supplier", "PayeeDataSource", Nothing, Nothing}})
+                    MakeVarDataSources({New Object() {"Supplier", "PayeeDataSource", Nothing, Nothing}})
                 Case PaymentTypeSelection.Employee
-                    MakeVarDataSources({New String() {"Employee", "PayeeDataSource", Nothing, Nothing}})
+                    MakeVarDataSources({New Object() {"Employee", "PayeeDataSource", Nothing, Nothing}})
                 Case PaymentTypeSelection.Supplier, PaymentTypeSelection.AccountsPayable
-                    MakeVarDataSources({New String() {"Supplier", "PayeeDataSource", Nothing, Nothing}})
+                    MakeVarDataSources({New Object() {"Supplier", "PayeeDataSource", Nothing, Nothing}})
                 Case PaymentTypeSelection.CustomerRefund
-                    MakeVarDataSources({New String() {"Customer", "PayeeDataSource", Nothing, Nothing}})
+                    MakeVarDataSources({New Object() {"Customer", "PayeeDataSource", Nothing, Nothing}})
                 Case Else
-                    MakeVarDataSources({New String() {"Supplier", "PayeeDataSource", Nothing, Nothing}})
+                    MakeVarDataSources({New Object() {"Supplier", "PayeeDataSource", Nothing, Nothing}})
                     'View.PayeeDataSource = Nothing
             End Select
         End Sub

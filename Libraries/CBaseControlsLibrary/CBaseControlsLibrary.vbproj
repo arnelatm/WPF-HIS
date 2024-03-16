@@ -136,10 +136,21 @@
     <Compile Include="BlendTypeEditor.vb" />
     <Compile Include="CDgvExpiryColumn.vb" />
     <Compile Include="CDgvExpiryCell.vb" />
+    <Compile Include="CfComboBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CFindGridForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="CfDgvComboBoxCell.vb" />
+    <Compile Include="CfDgvComboBoxColumn.vb" />
+    <Compile Include="cxComboBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CtDgvComboBoxColumn.vb" />
+    <Compile Include="CfDgvComboBoxEditingControl.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CtDgvDtpColumn.vb" />
     <Compile Include="CtDataGridView.vb">
       <SubType>Component</SubType>

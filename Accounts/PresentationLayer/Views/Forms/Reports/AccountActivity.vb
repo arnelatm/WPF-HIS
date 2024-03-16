@@ -93,13 +93,6 @@ Namespace PresentationLayer.Views.Forms.Reports
                                                cboStartAccountCode.SelectedValue, "BegAccountCode",
                                                cboEndAccountCode.SelectedValue, "EndAccountCode"}
                 RaiseEvent PrintReport(reportFileName, reportArgs, False)
-
-
-                'Dim reportTitle As String
-                'reportTitle = Messaging.TranslateCaption("Account Activity Report")
-                'Dim currentCulture As CultureInfo = CultureInfo.CurrentUICulture
-                'Dim cForm As New ReportFormNew("Account Activity Report.Rpt", reportTitle, currentCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", cboStartAccountCode.SelectedValue, "BegAccountCode", cboEndAccountCode.SelectedValue, "EndAccountCode")
-                'cForm.Show()
             End If
             CultureInfo.CurrentCulture = curCulture
 
@@ -114,8 +107,8 @@ Namespace PresentationLayer.Views.Forms.Reports
         End Sub
 
         Private Sub AccountActivity_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            Ea.PublishEvent(New GetControlDataSource("Account", cboStartAccountCode, "DetailAccount=1"))
-            Ea.PublishEvent(New GetControlDataSource("Account", cboEndAccountCode, "DetailAccount=1"))
+            Ea.PublishEvent(New GetControlDataSource("Account", cboStartAccountCode, Nothing, "DetailAccount=1"))
+            Ea.PublishEvent(New GetControlDataSource("Account", cboEndAccountCode, Nothing, "DetailAccount=1"))
             cboStartAccountCode.EditingMode = True
             cboEndAccountCode.EditingMode = True
         End Sub

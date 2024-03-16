@@ -32,11 +32,11 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            MakeVarDataSources({New String() {"Employee", "EmployeeList", Nothing, Nothing},
-                                New String() {"Leave", "LeaveList", Nothing, Nothing}
+            MakeVarDataSources({New Object() {"Employee", "EmployeeList", Nothing, Nothing},
+                                New Object() {"Leave", "LeaveList", Nothing, Nothing}
                                })
 
-            MakeControlDataSources({New String() {"User", "ApprovedBy", "IdNo,UserName", Nothing, Nothing}})
+            MakeControlDataSources({New Object() {"User", "ApprovedBy", "IdNo,UserName", Nothing, Nothing}})
 
             CreateEnumData(Of LeaveStatusSelection)(View.StatusList)
             If IsUserASupervisor() Then

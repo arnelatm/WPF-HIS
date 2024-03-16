@@ -186,7 +186,7 @@ Public Class ContactDateRangePresenter(Of TM As New)
             Service.SaveConnectionString()
             Service.SetConnectionString(_reportModel.DatabaseName)
             If contactName = "InsuranceDetails" Then
-                MakeVarDataSources({New String() {"InsuranceDetails", "ContactDataSource", "InsuranceId,NameEnglish", Nothing}})
+                MakeVarDataSources({New Object() {"InsuranceDetails", "ContactDataSource", "InsuranceId,NameEnglish", Nothing}})
             Else
                 Debugger.Break()
                 MessageBox.Show("Missing ContactName <" & contactName & ">")
@@ -194,7 +194,7 @@ Public Class ContactDateRangePresenter(Of TM As New)
             Service.RestoreConnectionString()
         Else
             If contactName = "Customer" Then
-                MakeVarDataSources({New String() {"Customer", "ContactDataSource", Nothing, Nothing}})
+                MakeVarDataSources({New Object() {"Customer", "ContactDataSource", Nothing, Nothing}})
             End If
         End If
     End Sub

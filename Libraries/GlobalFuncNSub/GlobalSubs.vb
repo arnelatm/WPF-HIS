@@ -8,6 +8,9 @@ Public Module GlobalSubs
 #Region "Old Subs"
 
     Public Sub SetPropertyValue(obj As Object, propName As String, propValue As Object, Optional ByVal ignoreException As Boolean = False)
+        'If propName = "EditingMode" Then
+        '    Debugger.Break()
+        'End If
         Dim objType As Type = obj.GetType()
         Dim pInfo As PropertyInfo = objType.GetProperty(propName,
                                                         BindingFlags.IgnoreCase Or BindingFlags.IgnoreCase Or
@@ -18,8 +21,9 @@ Public Module GlobalSubs
                 'If  objType.FullName = "AATM.CCustomControls.CCustomDateTimePicker" Then
                 '   Debugger.Break
                 'End If
-                pInfo.SetValue(obj, propValue, BindingFlags.GetProperty, Nothing, Nothing, Nothing)
+                pInfo.SetValue(obj, propValue) ', BindingFlags.GetProperty, Nothing, Nothing, Nothing)
             Catch ex As Exception
+                Debugger.Break()
                 If Not ignoreException Then
                     MessageBox.Show("Invalid property " & propName & " in object " & obj.Name)
                     Throw
