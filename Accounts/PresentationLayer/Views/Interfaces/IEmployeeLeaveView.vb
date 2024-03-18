@@ -27,10 +27,12 @@ Namespace PresentationLayer.Views.Interfaces
         Property Users As DataTable
         Property StatusList As DataTable
         Property UserIsASupervisor As Boolean
+        Property UserHasHrManagerAccess As Boolean
         Property NoOfDays As Int32
         Event DateValuesChanged()
         Event EmployeeIdChanged()
         Event ComputeNumberOfDays()
+
     End Interface
 
 End Namespace

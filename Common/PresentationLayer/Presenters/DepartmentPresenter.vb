@@ -25,10 +25,8 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            Dim data As New ArrayList
-            data.Add({"Department", "ParentIdNo"})
-            data.Add({"RevCostCenter", "RevCostCenterIdNo"})
-            CreateDataSourceThread(data)
+            MakeControlDataSources({New Object() {"Department", "ParentIdNo"},
+                                    New Object() {"RevCostCenter", "RevCostCenterIdNo"}})
         End Sub
 
         Public Function GetAccountNameOfChild(idNoToSearch As Integer) As String

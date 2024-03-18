@@ -93,10 +93,14 @@ Namespace PresentationLayer.Presenters
 
         Public ReadOnly Property CrAccountCount As Int16
             Get
-                Dim accounts = EnumToCode(SpecialAccountSelection.Bank) + "," + EnumToCode(SpecialAccountSelection.Cash) +
-                               "," + EnumToCode(SpecialAccountSelection.CheckingAccount)
-                Dim cdAccounts = GetAccountTypesList(accounts)
-                Return cdAccounts.Count()
+                Dim specialAccountList As String = EnumToCode(SpecialAccountSelection.Bank) + "," + EnumToCode(SpecialAccountSelection.Cash) +
+                                                   "," + EnumToCode(SpecialAccountSelection.CheckingAccount)
+                'Dim accounts = EnumToCode(SpecialAccountSelection.Bank) + "," + EnumToCode(SpecialAccountSelection.Cash) +
+                '               "," + EnumToCode(SpecialAccountSelection.CheckingAccount)
+                'Dim cdAccounts = GetAccountTypesList(accounts)
+                'Return cdAccounts.Count()
+                Dim filter As String = ConvertSpecialAccountsToFilter(specialAccountList)
+                Return Service.GetRecordCount("Account", filter)
             End Get
         End Property
 

@@ -43,7 +43,7 @@ Namespace PresentationLayer.Presenters
         Protected Overrides Sub CreateDataSources()
             Dim data As New ArrayList
             data.Add({"PrintJob", "PrintJobIdNo", Nothing, Nothing})
-            CreateDataSourceThread(data)
+            CreateControlDataSources(data)
         End Sub
 
         'Protected Sub GetRecordFieldWithKeyG(Of T)(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As T 

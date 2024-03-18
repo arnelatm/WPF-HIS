@@ -72,20 +72,15 @@ Namespace PresentationLayer.Presenters
             view.DefaultSecGroupInvWarehouseIdNo = Service.GetField(Of Int16, Int16, Int16)(AppSettingGroupSelector.SecurityGroupDefaultInventoryWarehouse, GlobalVariables.SecurityGroupIdNo, "AppSetting", "AppSettingGroupIdNo", "Selector1IdNo", "selector2IdNo")
         End Sub
 
-
         Protected Overrides Sub CreateDataSources()
-            Dim data As New ArrayList
-            data.Add({"Warehouse", "WarehouseIdNo", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "WarehouseName"})
-            data.Add({"Warehouse", "WarehouseToIdNo", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "WarehouseName"})
-            data.Add({"InvTransType", "InvTransTypeIdNo", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "InvTransTypeCode"})
-            data.Add({"User", "UserIdNo", "IdNo,UserName", Nothing})
-            CreateDataSourceThread(data)
 
-            data.Clear()
-            data.Add({"Unit", "UnitsByCode", Nothing, Nothing})
-            data.Add({"Product", "ProductsByCode", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "ProductName"})
-            CreateLookupDataThread(data)
-            data.Clear()
+            MakeControlDataSources({New Object() {"Warehouse", "WarehouseIdNo", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "WarehouseName"},
+                                    New Object() {"Warehouse", "WarehouseToIdNo", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "WarehouseName"},
+                                    New Object() {"InvTransType", "InvTransTypeIdNo", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "InvTransTypeCode"},
+                                    New Object() {"User", "UserIdNo", "IdNo,UserName", Nothing}})
+
+            MakeVarDataSources({New Object() {"Unit", "UnitsByCode", Nothing, Nothing},
+                                New Object() {"Product", "ProductsByCode", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "ProductName"}})
 
         End Sub
 
@@ -744,7 +739,7 @@ Namespace PresentationLayer.Presenters
         Private Sub SetProductUnits(productIdNo As Int32)
             Dim data As New ArrayList
             data.Add({"ProductUnit_View", "UnitsByProduct", "UnitIdNo,UnitName,UnitCode", "ProductIdNo = " + productIdNo.ToString()})
-            CreateLookupDataThread(data)
+            CreateVarDataSources(data)
         End Sub
 
         Private Function GetLastInvTransactionInfo(pModel As ProductModel) As ExpandoObject

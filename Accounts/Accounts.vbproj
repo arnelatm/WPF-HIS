@@ -1406,12 +1406,6 @@
     <Compile Include="PresentationLayer\Views\Forms\ErJournalEntry.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\PostPettyCash.Designer.vb">
-      <DependentUpon>PostPettyCash.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\PostPettyCash.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\ReportForm.Designer.vb">
       <DependentUpon>ReportForm.vb</DependentUpon>
     </Compile>
@@ -2444,9 +2438,6 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\ErJournalEntry.resx">
       <DependentUpon>ErJournalEntry.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\PostPettyCash.resx">
-      <DependentUpon>PostPettyCash.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\ArJournalReport.resx">
       <DependentUpon>ArJournalReport.vb</DependentUpon>
     </EmbeddedResource>
@@ -2816,10 +2807,10 @@
       <Link>.editorconfig</Link>
     </None>
     <None Include="app - Copy.config" />
-    <None Include="app.config" />
     <None Include="app-ISP-SERVERNEW.config" />
     <None Include="app-ibn-server-test.config" />
     <None Include="app-IBNSINAP.config" />
+    <None Include="app.config" />
     <None Include="app-ISPADMIN2.config" />
     <None Include="app-Marcelo-Dell.config" />
     <None Include="app-Isp-Server.config" />

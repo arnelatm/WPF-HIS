@@ -267,11 +267,14 @@ Namespace PresentationLayer.Views.Forms
             cboPayeeIdNo.DataSource = cbDataSource
             Dim paymentTypeEnum = CodeToEnum(Of PaymentTypeSelection)(cPaymentType)
             If paymentTypeEnum = PaymentTypeSelection.Supplier Or paymentTypeEnum = PaymentTypeSelection.AccountsPayable Then
-                cbDataSource = Presenter.GetLookup("Supplier")
+                Presenter.MakeControlDataSources({New Object() {"Supplier", cboPayeeIdNo, Nothing, Nothing}})
+                'cbDataSource = Presenter.GetLookup("Supplier")
             ElseIf paymentTypeEnum = PaymentTypeSelection.Employee Then
-                cbDataSource = Presenter.GetLookup("Employee")
+                Presenter.MakeControlDataSources({New Object() {"Employee", cboPayeeIdNo, Nothing, Nothing}})
+                'cbDataSource = Presenter.GetLookup("Employee")
             ElseIf paymentTypeEnum = PaymentTypeSelection.CustomerRefund Then
-                cbDataSource = Presenter.GetLookup("Customer")
+                Presenter.MakeControlDataSources({New Object() {"Customer", cboPayeeIdNo, Nothing, Nothing}})
+                'cbDataSource = Presenter.GetLookup("Customer")
             End If
             cboPayeeIdNo.DataSource = cbDataSource
             If curValue IsNot Nothing Then
@@ -294,7 +297,8 @@ Namespace PresentationLayer.Views.Forms
             dtpCheckDate.Value = Today
             TurnOnInputs()
             ShowPayee()
-            Presenter.MakeEnumComboList(Of PaymentTypeSelection)("PaymentType")
+            Presenter.CreateEnumDataSource(Of PaymentTypeSelection)("PaymentType")
+            'Presenter.MakeEnumComboList(Of PaymentTypeSelection)("PaymentType")
         End Sub
     End Class
 

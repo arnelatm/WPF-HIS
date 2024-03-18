@@ -58,7 +58,7 @@ Namespace PresentationLayer.Presenters
                 data.Add({"Supplier", View.ContactIdDataName})
                 View.ContactDescription = Libraries.MessagingLibrary.Messaging.TranslateCaption("Supplier")
             End If
-            CreateLookupDataThread(data)
+            CreateVarDataSources(data)
         End Sub
 
         Private Sub OnAddNewDocumentType()
@@ -83,10 +83,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Protected Overrides Sub CreateDataSources()
-            Dim data As New ArrayList
-            data.Add({"Document", "DocumentIdNo", Nothing, Nothing})
-            CreateDataSourceThread(data)
-
+            MakeControlDataSources({New Object() {"Document", "DocumentIdNo"}})
         End Sub
 
         Private Function CreateFileFromDataImage(imageIdNo As Short) As String

@@ -95,7 +95,7 @@ Namespace PresentationLayer.Presenters
             data.Add({"DrugUnitOfStrength_View", "UnitOfStrength", "UnitOfStrength"})
             data.Add({"DrugPackageType_View", "PackageType", "PackageType"})
             data.Add({"DrugRouteOfAdministration_View", "RouteOfAdministration", "RouteOfAdministration"})
-            CreateDataSourceThread(data)
+            CreateControlDataSources(data)
         End Sub
 
         Public Overrides Sub GoFilter()

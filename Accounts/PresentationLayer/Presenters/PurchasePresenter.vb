@@ -127,18 +127,11 @@ Namespace PresentationLayer.Presenters
 
 
         Protected Overrides Sub CreateDataSources()
-            Dim data As New ArrayList
-            data.Add({"Supplier", "SupplierIdNo", Nothing, Nothing})
-            data.Add({"Warehouse", "WarehouseIdNo", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "WarehouseName"})
-            data.Add({"User", "UserIdNo", "IdNo,UserName", Nothing})
-            CreateDataSourceThread(data)
-
-            data.Clear()
-            data.Add({"Unit", "UnitsByCode", Nothing, Nothing})
-            data.Add({"Product", "ProductsByCode", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "ProductName"})
-            CreateLookupDataThread(data)
-            data.Clear()
-
+            MakeControlDataSources({New Object() {"Supplier", "SupplierIdNo", Nothing, Nothing},
+                                    New Object() {"Warehouse", "WarehouseIdNo", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "WarehouseName"},
+                                    New Object() {"User", "UserIdNo", "IdNo,UserName", Nothing}})
+            MakeVarDataSources({New Object() {"Unit", "UnitsByCode", Nothing, Nothing},
+                                New Object() {"Product", "ProductsByCode", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "ProductName"}})
         End Sub
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
@@ -614,7 +607,7 @@ Namespace PresentationLayer.Presenters
         Private Sub SetProductUnits(productIdNo As Int16)
             Dim data As New ArrayList
             data.Add({"ProductUnit_View", "UnitsByProduct", "UnitIdNo,UnitName,UnitCode", "ProductIdNo = " + productIdNo.ToString()})
-            CreateLookupDataThread(data)
+            CreateVarDataSources(data)
         End Sub
 
         Private Function GetLastPurchaseInfo(pModel As ProductModel) As ExpandoObject
