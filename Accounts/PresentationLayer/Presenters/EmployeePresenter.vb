@@ -129,22 +129,22 @@ Namespace PresentationLayer.Presenters
             CreateEnumDataSource(Of SponsorTypeSelection)("SponsorType")
             CreateEnumDataSource(Of BloodTypeSelection)("BloodType")
             CreateEnumData(Of PayRateUnitSelection)(View.Unit)
-            MakeControlDataSources({New Object() {"Bank", "BankIdNo", Nothing, Nothing},
-                             New Object() {"Country", "CountryCode", "CountryCode,CountryName", Nothing},
-                             New Object() {"Department", "DepartmentIdNo", Nothing, Nothing},
-                             New Object() {"Designation", "DesignationIdNo", Nothing, Nothing},
-                             New Object() {"Country", "NationalityCode", "CountryCode,CountryName", Nothing},
-                             New Object() {"Religion", "ReligionIdNo", Nothing, Nothing},
-                             New Object() {"PayCycle", "PayCycleIdNo", Nothing, Nothing},
-                             New Object() {"PayGroup", "PayGroupIdNo", Nothing, Nothing},
-                             New Object() {"List", "Title", "IdNo,ListName", Nothing},
+            MakeControlDataSources({New Object() {"Country", "CountryCode", "CountryCode"},
+                             New Object() {"Bank", "BankIdNo"},
+                             New Object() {"Department", "DepartmentIdNo"},
+                             New Object() {"Designation", "DesignationIdNo"},
+                             New Object() {"Country", "NationalityCode", "CountryCode,CountryName"},
+                             New Object() {"Religion", "ReligionIdNo"},
+                             New Object() {"PayCycle", "PayCycleIdNo"},
+                             New Object() {"PayGroup", "PayGroupIdNo"},
+                             New Object() {"List", "Title", "IdNo,ListName"},
                              New Object() {"Employee", "SupervisorIdNo", Nothing, "Supervisor=1"}})
             MakeVarDataSources({New Object() {"PayElement", "DeductionsByName", Nothing, "PayElementKind = '" + EnumToCode(PayElementKindSelection.Deduction) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'"},
                                New Object() {"PayElement", "EarningsByName", Nothing, "PayElementKind = '" + EnumToCode(PayElementKindSelection.Earning) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'"},
-                               New Object() {"PhoneType", "PhoneTypes", Nothing, Nothing},
-                               New Object() {"Country", "CountryTelCodes", "IdNo,CountryName,CountryTelCode", Nothing},
+                               New Object() {"PhoneType", "PhoneTypes"},
+                               New Object() {"Country", "CountryTelCodes", "IdNo,CountryName,CountryTelCode"},
                                New Object() {"Document", "Documents", Nothing, "DocumentType = '" + EnumToCode(DocumentTypeSelection.Employee) + "'"},
-                               New Object() {"Leave", "Leaves", Nothing, Nothing}})
+                               New Object() {"Leave", "Leaves"}})
 
         End Sub
 

@@ -94,8 +94,8 @@ Namespace PresentationLayer.Views.Forms
             Me.lblUsePayGroups = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.DataGridViewPayElementAccounts = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvPayGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboboxColumn()
-            Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboboxColumn()
+            Me.dgvPayGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBoxColumn()
+            Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBoxColumn()
             Me.AccountNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.PayElementIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.IdNoDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -104,9 +104,9 @@ Namespace PresentationLayer.Views.Forms
             Me.tbpSummaryDetail = New System.Windows.Forms.TabPage()
             Me.DataGridViewPayElementItems = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.dgvSequenceSummary = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvPayElementIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboboxColumn()
+            Me.dgvPayElementIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBoxColumn()
             Me.dgvFactorValue = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvFactorType = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboboxColumn()
+            Me.dgvFactorType = New AATM.Libraries.CBaseControlsLibrary.CtComboBoxColumn()
             Me.ParentIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.bsPayElementItems = New System.Windows.Forms.BindingSource(Me.components)
@@ -1563,14 +1563,14 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblSummary As CLabel
         Friend WithEvents lblActive As CLabel
         Friend WithEvents dgvSequenceSummary As CDgvTextColumn
-        Friend WithEvents dgvPayElementIdNo As CtDgvComboboxColumn
+        Friend WithEvents dgvPayElementIdNo As CtComboBoxColumn
         Friend WithEvents dgvFactorValue As CDgvTextColumn
-        Friend WithEvents dgvFactorType As CtDgvComboboxColumn
+        Friend WithEvents dgvFactorType As CtComboBoxColumn
         Friend WithEvents ParentIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents dgvSequence As CDgvTextColumn
-        Friend WithEvents dgvPayGroupIdNo As CtDgvComboboxColumn
-        Friend WithEvents dgvAccountIdNo As CtDgvComboboxColumn
+        Friend WithEvents dgvPayGroupIdNo As CtComboBoxColumn
+        Friend WithEvents dgvAccountIdNo As CtComboBoxColumn
         Friend WithEvents AccountNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents PayElementIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn

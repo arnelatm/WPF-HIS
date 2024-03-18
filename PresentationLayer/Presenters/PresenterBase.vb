@@ -2116,9 +2116,6 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Dim dataLookupSpecs As List(Of DataLookupSpecs)
         dataLookupSpecs = CreateDataLookups(dataSourceSpecs)
         For Each dataLookupSpec As DataLookupSpecs In dataLookupSpecs
-            'If dataLookupSpec.PropertyName = "DepartmentIdNo" Then
-            '    Debugger.Break()
-            'End If
             If TypeOf dataLookupSpec.PropertyName Is String Then
                 dataLookupSpec.PropertyControl = GetFieldControlName(dataLookupSpec.PropertyName)
             End If
@@ -2450,7 +2447,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
                 dtl.NameDisplayValue = dtl.NameField
                 dtl.ValueMember = "Name"
                 dtl.DisplayMember = "Name"
-                dtl.LuFields = dtl.NameField
+                dtl.LuFields = dtl.NameField + " as Name"
                 dtl.SortKey = fieldNames(0)
             ElseIf fieldNames.Count() = 2 Then
                 ' assumed the first field is the value member and the second field as the display Value

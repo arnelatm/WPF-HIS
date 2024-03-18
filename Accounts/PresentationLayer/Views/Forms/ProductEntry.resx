@@ -2247,7 +2247,7 @@
     <value>dgvUnitIdNo</value>
   </data>
   <data name="&gt;&gt;dgvUnitIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CtComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvUnitQty.Name" xml:space="preserve">
     <value>dgvUnitQty</value>

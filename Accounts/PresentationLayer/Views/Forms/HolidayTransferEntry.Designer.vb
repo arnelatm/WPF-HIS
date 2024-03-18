@@ -39,7 +39,7 @@
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboenteredBy = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.DataGridViewHolidayTransferitems = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
-            Me.dgvEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn()
+            Me.dgvEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBoxColumn()
             Me.HolidayTransferIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.dgvTransfer = New System.Windows.Forms.DataGridViewCheckBoxColumn()
@@ -496,7 +496,7 @@ End Sub
         Friend WithEvents dtpDateCreated As Libraries.CBaseControlsLibrary.CCustomDateTimePicker
         Friend WithEvents CLabel2 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents cboHolidayIdNo As Libraries.CBaseControlsLibrary.CtCombobox
-        Friend WithEvents dgvEmployeeIdNo As Libraries.CBaseControlsLibrary.CtDgvComboboxColumn
+        Friend WithEvents dgvEmployeeIdNo As Libraries.CBaseControlsLibrary.CtComboBoxColumn
         Friend WithEvents HolidayTransferIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents dgvTransfer As DataGridViewCheckBoxColumn

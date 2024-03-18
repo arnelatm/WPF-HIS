@@ -2,7 +2,7 @@
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 
-Public Class CtDgvComboBoxColumn
+Public Class CtComboBoxColumn
     Inherits DataGridViewComboBoxColumn
     Implements IEntryControl
 
@@ -12,7 +12,7 @@ Public Class CtDgvComboBoxColumn
 
     Public Sub New()
         '' Specify the column to use your custom cell class...
-        CellTemplate = New CtDgvComboBoxCell()
+        CellTemplate = New CtComboBoxCell()
         AutoComplete = False
     End Sub
 
@@ -22,11 +22,11 @@ Public Class CtDgvComboBoxColumn
         End Get
         Set(ByVal value As DataGridViewCell)
 
-            ' Ensure that the cell used for the template is a CtDgvComboboxCell.
+            ' Ensure that the cell used for the template is a CtComboboxCell.
             If (value IsNot Nothing) AndAlso
-               Not value.GetType().IsAssignableFrom(GetType(CtDgvComboBoxCell)) _
+               Not value.GetType().IsAssignableFrom(GetType(CtComboBoxCell)) _
                 Then
-                Throw New InvalidCastException("Must be a CtDgvComboBoxCell")
+                Throw New InvalidCastException("Must be a CtComboBoxCell")
             End If
             MyBase.CellTemplate = value
 

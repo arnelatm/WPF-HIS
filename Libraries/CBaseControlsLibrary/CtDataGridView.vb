@@ -428,19 +428,19 @@ Public Class CtDataGridView
 
     Public Function GetEditingValue(Optional field As String = "")
         If CurrentCell IsNot Nothing Then
-            Dim dgvControl As Libraries.CBaseControlsLibrary.CtDgvComboBoxCell
-            dgvControl = TryCast(CurrentCell, Libraries.CBaseControlsLibrary.CtDgvComboBoxCell)
+            Dim dgvControl As Libraries.CBaseControlsLibrary.CtComboBoxCell
+            dgvControl = TryCast(CurrentCell, Libraries.CBaseControlsLibrary.CtComboBoxCell)
             If dgvControl IsNot Nothing Then
                 If dgvControl.CellEditingControl.SelectedItem IsNot Nothing Then
                     Select Case field.ToLower()
                         Case $"code"
-                            Dim x = DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CtDgvComboBoxCell).CellEditingControl.SelectedItem, DataRowView).Row("Code")
+                            Dim x = DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CtComboBoxCell).CellEditingControl.SelectedItem, DataRowView).Row("Code")
                             Return x
                         Case $"name"
-                            Dim x = DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CtDgvComboBoxCell).CellEditingControl.SelectedItem, DataRowView).Row("Name")
+                            Dim x = DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CtComboBoxCell).CellEditingControl.SelectedItem, DataRowView).Row("Name")
                             Return x
                         Case $"idno"
-                            Dim x = DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CtDgvComboBoxCell).CellEditingControl.SelectedItem, DataRowView).Row("IdNo")
+                            Dim x = DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CtComboBoxCell).CellEditingControl.SelectedItem, DataRowView).Row("IdNo")
                             Return x
                         Case Else
                             Return CurrentCell.Value
@@ -454,9 +454,9 @@ Public Class CtDataGridView
     End Function
 
     Private Sub DataGridView1_EditingControlShowing(ByVal sender As Object, ByVal e As DataGridViewEditingControlShowingEventArgs) Handles MyBase.EditingControlShowing
-        If TypeOf e.Control Is CtDgvComboBoxEditingControl Then
+        If TypeOf e.Control Is CtComboBoxEditingControl Then
             'declare variable(cb) as a CtCombobox
-            Dim cb As CtDgvComboBoxEditingControl
+            Dim cb As CtComboBoxEditingControl
             cb = e.Control
             'set the dropdown style of a combobox
             cb.DropDownStyle = ComboBoxStyle.DropDown
@@ -465,9 +465,21 @@ Public Class CtDataGridView
             ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
             BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             If CurrentCell IsNot Nothing Then
-                cb.SuggestCharCount = DirectCast(CurrentCell.OwningColumn, AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn).SuggestCharCount
+                cb.SuggestCharCount = DirectCast(CurrentCell.OwningColumn, AATM.Libraries.CBaseControlsLibrary.CtComboBoxColumn).SuggestCharCount
             End If
-
+        ElseIf TypeOf e.Control Is CtComboBoxEditingControl Then
+            'declare variable(cb) as a CtCombobox
+            Dim cb As CtComboBoxEditingControl
+            cb = e.Control
+            'set the dropdown style of a combobox
+            cb.DropDownStyle = ComboBoxStyle.DropDown
+            'set the property of a combobox to autocomplete mode.
+            cb.AutoCompleteMode = AutoCompleteMode.SuggestAppend
+            ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+            BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            If CurrentCell IsNot Nothing Then
+                cb.SuggestCharCount = DirectCast(CurrentCell.OwningColumn, AATM.Libraries.CBaseControlsLibrary.CtComboBoxColumn).SuggestCharCount
+            End If
         ElseIf TypeOf e.Control Is CCustomDateTimePicker Then
             Dim cDtp As CCustomDateTimePicker
             cDtp = e.Control
