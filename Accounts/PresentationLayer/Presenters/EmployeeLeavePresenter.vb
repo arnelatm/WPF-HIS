@@ -36,6 +36,7 @@ Namespace PresentationLayer.Presenters
             SortOrderKey = "IdNo"
             WithTreeView = False
             _holidayLeave = holidayLeave
+            View.UserHasHrManagerAccess = UserHasHrManagerAccess()
             AddHandler View.DateValuesChanged, AddressOf OnDateValuesChanged
             AddHandler View.EmployeeIdChanged, AddressOf OnEmployeeIdChanged
             AddHandler View.ComputeNumberOfDays, AddressOf OnComputeNumberOfDays
@@ -61,22 +62,20 @@ Namespace PresentationLayer.Presenters
             Else
                 DataFilter = "Holiday = 0"
             End If
-            If UserHasAccess("HumanResources") Then
-                _userHasAccess = True
+            Dim employeeIdNo As Int32 = GetUserEmployeeIdNo()
+            If UserIsASuperAdministrator() Or UserHasHrManagerAccess() Then
+                ' no filter
+            ElseIf IsUserASupervisor() Then
+                View.UserIsASupervisor = True
+                DataFilter += " and (SupervisorIdNo = " & employeeIdNo.ToString() + " or EmployeeIdNo = " & employeeIdNo.ToString() & ")"
             Else
-                Dim employeeIdNo As Int32 = GetUserEmployeeIdNo()
-                If Not IsUserASupervisor() Then
-                    View.UserIsASupervisor = False
-                    Dim control As Control = Nothing
-                    Dim x = MainFieldsDictionary
-                    If MainFieldsDictionary.TryGetValue("EmployeeIdNo", control) Then
-                        CallByName(control, "DisplayOnly", CallType.Set, True)
-                    End If
-                    DataFilter += " and EmployeeIdNo = " & employeeIdNo.ToString()
-                Else
-                    View.UserIsASupervisor = True
-                    DataFilter += " and (SupervisorIdNo = " & employeeIdNo.ToString() + " or EmployeeIdNo = " & employeeIdNo.ToString() & ")"
+                View.UserIsASupervisor = False
+                Dim control As Control = Nothing
+                Dim x = MainFieldsDictionary
+                If MainFieldsDictionary.TryGetValue("EmployeeIdNo", control) Then
+                    CallByName(control, "DisplayOnly", CallType.Set, True)
                 End If
+                DataFilter += " and EmployeeIdNo = " & employeeIdNo.ToString()
             End If
         End Sub
 

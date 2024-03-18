@@ -32,7 +32,7 @@ Namespace PresentationLayer.Presenters
             data.Add({"Account", "SaleAccountIdNo", Nothing, Nothing})
             data.Add({"Account", "VatPurchaseAccountIdNo", Nothing, Nothing})
             data.Add({"Account", "VatSaleAccountIdNo", Nothing, Nothing})
-            CreateDataSourceThread(data)
+            CreateControlDataSources(data)
         End Sub
 
         Protected Overrides Function DependentRecordExist(Optional ByVal warn As Boolean = True) As Boolean

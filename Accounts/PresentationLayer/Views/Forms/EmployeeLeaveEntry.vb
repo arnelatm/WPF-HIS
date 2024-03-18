@@ -190,6 +190,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property UserHasHrManagerAccess As Boolean Implements IEmployeeLeaveView.UserHasHrManagerAccess
 
 #End Region
 
@@ -292,9 +293,15 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub OnFormShown(sender As Object, e As EventArgs) Handles MyBase.Shown
-            If UserIsASuperAdministrator() Or UserIsASupervisor Then
+            If UserIsASuperAdministrator() Or UserHasHrManagerAccess Then
                 cboEmployeeIdNo.DisplayOnly = False
                 FirstControl = cboEmployeeIdNo
+            ElseIf UserIsASupervisor Then
+                cboEmployeeIdNo.DisplayOnly = False
+                FirstControl = cboEmployeeIdNo
+            Else
+                cboEmployeeIdNo.DisplayOnly = True
+                FirstControl = cboLeaveIdNo
             End If
         End Sub
 

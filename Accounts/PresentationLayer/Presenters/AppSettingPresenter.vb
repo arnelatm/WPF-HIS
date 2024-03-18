@@ -36,7 +36,7 @@ Namespace PresentationLayer.Presenters
                     View.Selector2Text = appSettingGroup.SelectorText2
                     data.Add({appSettingGroup.SelectorTable2, "Selector2IdNo", Nothing, Nothing})
                 End If
-                CreateDataSourceThread(data)
+                CreateControlDataSources(data)
             End If
             FilterRecords()
         End Sub
@@ -44,7 +44,7 @@ Namespace PresentationLayer.Presenters
         Protected Overrides Sub CreateDataSources()
             Dim data As New ArrayList
             data.Add({"AppSettingGroup", "AppSettingGroupSelector", "IdNo,AppSettingGroupName,AppSettingCode", Nothing})
-            CreateDataSourceThread(data)
+            CreateControlDataSources(data)
         End Sub
 
         Protected Overrides Function DependentRecordExist(Optional ByVal warn As Boolean = True) As Boolean

@@ -143,7 +143,6 @@
             Me.tbpPayroll = New AATM.Libraries.CBaseControlsLibrary.CTabPage()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
-            Me.lblPaymentMethod = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtActualDutyHours = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblActualDutyHours = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtDutyHours = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -160,8 +159,10 @@
             Me.txtBankAccountNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblBankAccountNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblBankIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblPaymentMethod = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboPaymentMethod = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.cboPayGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cacBankIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.tbpEarnings = New AATM.Libraries.CBaseControlsLibrary.CTabPage()
             Me.DataGridViewEarnings = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.dgvSequenceEarning = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -237,7 +238,6 @@
             Me.lblReleasedDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpHiredDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.lblHiredDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacBankIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
             Me.SplitContainer1.Panel2.SuspendLayout()
@@ -276,13 +276,12 @@
             '
             'SplitContainer1
             '
-            Me.SplitContainer1.Location = New System.Drawing.Point(0, 59)
             Me.SplitContainer1.Margin = New System.Windows.Forms.Padding(5)
             '
             'SplitContainer1.Panel2
             '
             Me.SplitContainer1.Panel2.Controls.Add(Me.floMainData)
-            Me.SplitContainer1.Size = New System.Drawing.Size(1365, 584)
+            Me.SplitContainer1.Size = New System.Drawing.Size(1365, 588)
             Me.SplitContainer1.SplitterDistance = 415
             Me.SplitContainer1.SplitterWidth = 17
             '
@@ -291,7 +290,7 @@
             Me.FormTreeView.LineColor = System.Drawing.Color.Black
             Me.FormTreeView.Margin = New System.Windows.Forms.Padding(5)
             Me.FormTreeView.RightToLeft = System.Windows.Forms.RightToLeft.No
-            Me.FormTreeView.Size = New System.Drawing.Size(415, 584)
+            Me.FormTreeView.Size = New System.Drawing.Size(415, 588)
             '
             'ImageListTreeView
             '
@@ -338,7 +337,7 @@
             Me.floMainData.Location = New System.Drawing.Point(0, 12)
             Me.floMainData.Margin = New System.Windows.Forms.Padding(4)
             Me.floMainData.Name = "floMainData"
-            Me.floMainData.Size = New System.Drawing.Size(925, 552)
+            Me.floMainData.Size = New System.Drawing.Size(1132, 552)
             Me.floMainData.TabIndex = 9
             '
             'lblIdNo
@@ -1949,23 +1948,6 @@
             Me.TableLayoutPanel3.Size = New System.Drawing.Size(883, 301)
             Me.TableLayoutPanel3.TabIndex = 10
             '
-            'lblPaymentMethod
-            '
-            Me.lblPaymentMethod.BackColor = System.Drawing.Color.Transparent
-            Me.lblPaymentMethod.DisplayOnly = True
-            Me.lblPaymentMethod.EditingMode = False
-            Me.lblPaymentMethod.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblPaymentMethod.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblPaymentMethod.Location = New System.Drawing.Point(1, 1)
-            Me.lblPaymentMethod.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblPaymentMethod.Name = "lblPaymentMethod"
-            Me.lblPaymentMethod.SecurityKey = "EmployeePayInfo"
-            Me.lblPaymentMethod.Size = New System.Drawing.Size(193, 23)
-            Me.lblPaymentMethod.TabIndex = 0
-            Me.lblPaymentMethod.Text = "Payment Method"
-            Me.lblPaymentMethod.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.lblPaymentMethod.Translatable = True
-            '
             'txtActualDutyHours
             '
             Me.txtActualDutyHours.BackColor = System.Drawing.Color.White
@@ -2365,6 +2347,23 @@
             Me.lblBankIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             Me.lblBankIdNo.Translatable = True
             '
+            'lblPaymentMethod
+            '
+            Me.lblPaymentMethod.BackColor = System.Drawing.Color.Transparent
+            Me.lblPaymentMethod.DisplayOnly = True
+            Me.lblPaymentMethod.EditingMode = False
+            Me.lblPaymentMethod.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblPaymentMethod.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblPaymentMethod.Location = New System.Drawing.Point(1, 1)
+            Me.lblPaymentMethod.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblPaymentMethod.Name = "lblPaymentMethod"
+            Me.lblPaymentMethod.SecurityKey = "EmployeePayInfo"
+            Me.lblPaymentMethod.Size = New System.Drawing.Size(193, 23)
+            Me.lblPaymentMethod.TabIndex = 0
+            Me.lblPaymentMethod.Text = "Payment Method"
+            Me.lblPaymentMethod.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblPaymentMethod.Translatable = True
+            '
             'cboPaymentMethod
             '
             Me.cboPaymentMethod.BackColor = System.Drawing.Color.White
@@ -2458,6 +2457,55 @@
             Me.cboPayGroupIdNo.ValueIsNullable = True
             Me.cboPayGroupIdNo.ValueIsNumeric = False
             Me.cboPayGroupIdNo.ValueMember = "IdNo"
+            '
+            'cacBankIdNo
+            '
+            Me.cacBankIdNo.BackColor = System.Drawing.Color.White
+            Me.cacBankIdNo.BegFindValue = Nothing
+            Me.cacBankIdNo.ChangingSearchValueOnly = False
+            Me.cacBankIdNo.CurrentSearchTerm = ""
+            Me.cacBankIdNo.DataValue = Nothing
+            Me.cacBankIdNo.DefaultValue = Nothing
+            Me.cacBankIdNo.DisplayMember = "Name"
+            Me.cacBankIdNo.DropDownHeight = 24
+            Me.cacBankIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
+            Me.cacBankIdNo.Editable = True
+            Me.cacBankIdNo.EditingMode = False
+            Me.cacBankIdNo.EndFindValue = Nothing
+            Me.cacBankIdNo.FieldDescription = Nothing
+            Me.cacBankIdNo.FieldName = Nothing
+            Me.cacBankIdNo.FilterRule = Nothing
+            Me.cacBankIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cacBankIdNo.FindEnabled = False
+            Me.cacBankIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.cacBankIdNo.ForeColor = System.Drawing.Color.Black
+            Me.cacBankIdNo.FormattingEnabled = True
+            Me.cacBankIdNo.HideWhenNotEditingOrAdding = False
+            Me.cacBankIdNo.IgnoreCase = False
+            Me.cacBankIdNo.LimitToList = False
+            Me.cacBankIdNo.LinkedLabel = Nothing
+            Me.cacBankIdNo.Location = New System.Drawing.Point(196, 31)
+            Me.cacBankIdNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.cacBankIdNo.MaxDropDownItems = 1
+            Me.cacBankIdNo.Name = "cacBankIdNo"
+            Me.cacBankIdNo.OldValue = 0
+            Me.cacBankIdNo.OriginalDataSource = Nothing
+            Me.cacBankIdNo.OriginalList = Nothing
+            Me.cacBankIdNo.OverrideDropDownStyleList = False
+            Me.cacBankIdNo.PreviousSearchTerm = Nothing
+            Me.cacBankIdNo.PropertySelector = Nothing
+            Me.cacBankIdNo.SecurityKey = "EmployeePayInfo"
+            Me.cacBankIdNo.Size = New System.Drawing.Size(534, 24)
+            Me.cacBankIdNo.SuggestBoxHeight = 246
+            Me.cacBankIdNo.SuggestCharCount = 0
+            Me.cacBankIdNo.SuggestListOrderRule = Nothing
+            Me.cacBankIdNo.TabIndex = 1
+            Me.cacBankIdNo.TextToSearch = Nothing
+            Me.cacBankIdNo.Translatable = False
+            Me.cacBankIdNo.ValueIsMandatory = False
+            Me.cacBankIdNo.ValueIsNullable = False
+            Me.cacBankIdNo.ValueIsNumeric = False
+            Me.cacBankIdNo.ValueMember = "IdNo"
             '
             'tbpEarnings
             '
@@ -4048,54 +4096,6 @@
             Me.lblHiredDate.Text = "Hired Date"
             Me.lblHiredDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             Me.lblHiredDate.Translatable = True
-            '
-            'cacBankIdNo
-            '
-            Me.cacBankIdNo.BackColor = System.Drawing.Color.White
-            Me.cacBankIdNo.BegFindValue = Nothing
-            Me.cacBankIdNo.ChangingSearchValueOnly = False
-            Me.cacBankIdNo.CurrentSearchTerm = ""
-            Me.cacBankIdNo.DataValue = Nothing
-            Me.cacBankIdNo.DefaultValue = Nothing
-            Me.cacBankIdNo.DisplayMember = "Name"
-            Me.cacBankIdNo.DropDownHeight = 24
-            Me.cacBankIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
-            Me.cacBankIdNo.Editable = True
-            Me.cacBankIdNo.EditingMode = False
-            Me.cacBankIdNo.EndFindValue = Nothing
-            Me.cacBankIdNo.FieldDescription = Nothing
-            Me.cacBankIdNo.FieldName = Nothing
-            Me.cacBankIdNo.FilterRule = Nothing
-            Me.cacBankIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.cacBankIdNo.FindEnabled = False
-            Me.cacBankIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.cacBankIdNo.ForeColor = System.Drawing.Color.Black
-            Me.cacBankIdNo.FormattingEnabled = True
-            Me.cacBankIdNo.HideWhenNotEditingOrAdding = False
-            Me.cacBankIdNo.IgnoreCase = False
-            Me.cacBankIdNo.LimitToList = False
-            Me.cacBankIdNo.LinkedLabel = Nothing
-            Me.cacBankIdNo.Location = New System.Drawing.Point(196, 31)
-            Me.cacBankIdNo.Margin = New System.Windows.Forms.Padding(1)
-            Me.cacBankIdNo.MaxDropDownItems = 1
-            Me.cacBankIdNo.Name = "cacBankIdNo"
-            Me.cacBankIdNo.OldValue = 0
-            Me.cacBankIdNo.OriginalDataSource = Nothing
-            Me.cacBankIdNo.OriginalList = Nothing
-            Me.cacBankIdNo.OverrideDropDownStyleList = False
-            Me.cacBankIdNo.PreviousSearchTerm = Nothing
-            Me.cacBankIdNo.PropertySelector = Nothing
-            Me.cacBankIdNo.Size = New System.Drawing.Size(534, 24)
-            Me.cacBankIdNo.SuggestBoxHeight = 246
-            Me.cacBankIdNo.SuggestCharCount = 0
-            Me.cacBankIdNo.SuggestListOrderRule = Nothing
-            Me.cacBankIdNo.TabIndex = 1
-            Me.cacBankIdNo.TextToSearch = Nothing
-            Me.cacBankIdNo.Translatable = False
-            Me.cacBankIdNo.ValueIsMandatory = False
-            Me.cacBankIdNo.ValueIsNullable = False
-            Me.cacBankIdNo.ValueIsNumeric = False
-            Me.cacBankIdNo.ValueMember = "IdNo"
             '
             'EmployeeEntryTv
             '

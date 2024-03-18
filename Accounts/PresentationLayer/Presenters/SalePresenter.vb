@@ -64,22 +64,14 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            Dim data As New ArrayList
-            data.Add({"Customer", "CustomerIdNo", Nothing, Nothing})
-            data.Add({"Warehouse", "WarehouseIdNo", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "WarehouseName"})
-            data.Add({"User", "UserIdNo", "IdNo,UserName", Nothing})
-            data.Add({"Country", "NationalityCode", "IdNo,CountryName,CountryCode", Nothing})
-            CreateDataSourceThread(data)
-
-            data.Clear()
-            data.Add({"Unit", "UnitsByCode", Nothing, Nothing})
-            data.Add({"Product", "ProductsByCode", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "ProductName"})
-            CreateLookupDataThread(data)
-            Service.SetConnectionString("ISPDATA")
+            MakeControlDataSources({New Object() {"Customer", "CustomerIdNo", Nothing, Nothing},
+                                    New Object() {"Warehouse", "WarehouseIdNo", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "WarehouseName"},
+                                    New Object() {"User", "UserIdNo", "IdNo,UserName", Nothing},
+                                    New Object() {"Country", "NationalityCode", "IdNo,CountryName,CountryCode", Nothing}})
+            MakeVarDataSources({New Object() {"Unit", "UnitsByCode", Nothing, Nothing},
+                                New Object() {"Product", "ProductsByCode", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "ProductName"}})
             CreateEnumDataSource(Of MaleFemaleSelection)("Gender")
             CreateEnumDataSource(Of YearMonthDaySelection)("AgeYmd")
-            data.Clear()
-
         End Sub
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
@@ -472,7 +464,7 @@ Namespace PresentationLayer.Presenters
         Private Sub SetProductUnits(productIdNo As Int16)
             Dim data As New ArrayList
             data.Add({"ProductUnit_View", "UnitsByProduct", "IdNo,UnitName,UnitCode", "ProductIdNo = " + productIdNo.ToString()})
-            CreateLookupDataThread(data)
+            CreateVarDataSources(data)
         End Sub
 
         Private Function GetLastSaleInfo(pModel As ProductModel) As ExpandoObject

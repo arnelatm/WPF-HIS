@@ -136,12 +136,12 @@ Namespace PresentationLayer.Presenters
             data.Add({"ItemCode", "DoseUnit", Nothing, "CodeGroupIdNo=7"})
             data.Add({"ItemCode", "PatientType", Nothing, "CodeGroupIdNo=15"})
             Service.SetConnectionString("ISPDATA")
-            CreateDataSourceThread(data)
+            CreateControlDataSources(data)
             Dim data2 As New ArrayList
             'data2.Add({"Medicines_View", "ItemName", "IdNo,ItemName,ItemCode", Nothing, "ItemName"})
             data2.Add({"ItemDetails", "ItemIdNo", "Primary_Key,ItemNameEnglish,Item_Code", Nothing, "ItemNameEnglish"})
             Service.SetConnectionString("IGroupClinic")
-            CreateDataSourceThread(data2)
+            CreateControlDataSources(data2)
             'Restore connection String
             Service.SetConnectionString("ISPDATA")
             CreateEnumDataSource(Of MaleFemaleSelection)("Gender")

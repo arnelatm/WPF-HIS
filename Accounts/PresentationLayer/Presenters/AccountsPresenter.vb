@@ -1,4 +1,5 @@
-﻿Imports AATM.Accounts.BusinessLayer
+﻿Imports System.Windows.Navigation
+Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
@@ -261,16 +262,28 @@ Namespace PresentationLayer.Presenters
         '    Return GetRecordFieldWithKey(EnumToCode(SpecialAccountSelection.AdvancesToSupplier), "Account", "SpecialAccount", "IdNo")
         'End Function
 
-        Public Function GetAccountTypesList(accountType As String, Optional ByVal sortKey As String = "AccountName")
+        'Public Function GetAccountTypesList(accountType As String, Optional ByVal sortKey As String = "AccountName")
+        '    Dim values = accountType.Split(",")
+        '    Dim lookupFilterKey = ""
+        '    For Each account In values
+        '        If lookupFilterKey <> "" Then
+        '            lookupFilterKey = lookupFilterKey + " Or "
+        '        End If
+        '        lookupFilterKey = lookupFilterKey + "SpecialAccount = '" & account & "'"
+        '    Next
+        '    Return GetLookupT("Account", sortKey, lookupFilterKey)
+        'End Function
+
+        Public Function ConvertSpecialAccountsToFilter(accountType As String)
             Dim values = accountType.Split(",")
-            Dim lookupFilterKey = ""
+            Dim lookupFilter = ""
             For Each account In values
-                If lookupFilterKey <> "" Then
-                    lookupFilterKey = lookupFilterKey + " Or "
+                If lookupFilter <> "" Then
+                    lookupFilter = lookupFilter + " Or "
                 End If
-                lookupFilterKey = lookupFilterKey + "SpecialAccount = '" & account & "'"
+                lookupFilter = lookupFilter + "SpecialAccount = '" & account & "'"
             Next
-            Return GetLookupT("Account", sortKey, lookupFilterKey)
+            Return lookupFilter
         End Function
 
         Public Function GetApOpenInvoiceNumber(journalItemIdNo As Int32) As Int32

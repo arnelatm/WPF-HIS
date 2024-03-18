@@ -21,7 +21,7 @@ Namespace PresentationLayer.Presenters
         Protected Overrides Sub CreateDataSources()
             Dim data As New ArrayList
             data.Add({"CodeGroup", "CodeGroupSelector", Nothing, Nothing})
-            CreateDataSourceThread(data)
+            CreateControlDataSources(data)
 
             'CreateDataSource("CodeGroup", "CodeGroupSelector")
         End Sub

@@ -23,7 +23,7 @@ Namespace PresentationLayer.Presenters
             CreateEnumDataSource(Of InventoryActionSelection)("InventoryAction")
             Dim data As New ArrayList
             data.Add({"Account", "AccountIdNo", Nothing, Nothing})
-            CreateDataSourceThread(data)
+            CreateControlDataSources(data)
 
         End Sub
 

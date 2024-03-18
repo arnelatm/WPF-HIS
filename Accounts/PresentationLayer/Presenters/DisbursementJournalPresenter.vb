@@ -162,9 +162,12 @@ Namespace PresentationLayer.Presenters
                 ElseIf JournalCode = "CK" Then
                     specialAccount = EnumToCode(SpecialAccountSelection.CheckingAccount)
                 Else
-                    Dim accounts = EnumToCode(SpecialAccountSelection.Bank) + "," + EnumToCode(SpecialAccountSelection.Cash) + "," + EnumToCode(SpecialAccountSelection.CheckingAccount)
-                    Dim cdAccounts = GetAccountTypesList(accounts)
-                    Return cdAccounts.Count()
+                    'Dim accounts = EnumToCode(SpecialAccountSelection.Bank) + "," + EnumToCode(SpecialAccountSelection.Cash) + "," + EnumToCode(SpecialAccountSelection.CheckingAccount)
+                    'Dim cdAccounts = GetAccountTypesList(accounts)
+                    'Return cdAccounts.Count()
+                    Dim accounts As String = EnumToCode(SpecialAccountSelection.Bank) + "," + EnumToCode(SpecialAccountSelection.Cash) + "," + EnumToCode(SpecialAccountSelection.CheckingAccount)
+                    Dim filter As String = ConvertSpecialAccountsToFilter(accounts)
+                    Return Service.GetRecordCount("Account", filter)
                 End If
                 Return Service.CountRecordWithKey(Of String)("Account", "SpecialAccount", specialAccount)
             End Get

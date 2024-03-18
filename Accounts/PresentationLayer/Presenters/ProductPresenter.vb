@@ -48,17 +48,9 @@ Namespace PresentationLayer.Presenters
         'End Function
 
         Protected Overrides Sub CreateDataSources()
-            Dim data1 As New ArrayList
-            data1.Add({"Unit", "BaseUnitIdNo", Nothing, Nothing})
-            data1.Add({"Category", "CategoryIdNo", Nothing, Nothing})
-            'data1.Add({"Branch", "BranchIdNo", Nothing, Nothing})
-            Dim data2 As New ArrayList
-            CreateDataSourceThread(data1)
-
-            data2.Clear()
-            data2.Add({"Unit", "UnitsByCode", Nothing, Nothing})
-            CreateLookupDataThread(data2)
-
+            MakeControlDataSources({New Object() {"Unit", "BaseUnitIdNo", Nothing, Nothing},
+                                    New Object() {"Category", "CategoryIdNo", Nothing, Nothing}})
+            MakeVarDataSources({New Object() {"Unit", "UnitsByCode", Nothing, Nothing}})
             CreateDataTable(DtProductUnitInsertTable, {{"BaseQty", GetType(Int16)},
                                  {"ProductIdNo", GetType(Int32)},
                                  {"Sequence", GetType(Int16)},
