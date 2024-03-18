@@ -1391,9 +1391,9 @@ Namespace AdoNet
 
         Public Function GetMasterList(tableName As String, sortKey As String, fieldNames As String(), Optional filterKey As String = Nothing) As Object Implements IBaseDao.GetMasterList
             Dim fields As String
-            If Len(fieldNames) <> 3 Then
-                Debugger.Break()
-            End If
+            'If Len(fieldNames) <> 3 Then
+            '    Debugger.Break()
+            'End If
             fields = fieldNames(1) & " As Name" + ", " & fieldNames(2) & " As Code" & fieldNames(3) & " As IdNo"
             Dim sql As String
             If filterKey Is Nothing Or filterKey = "" Then

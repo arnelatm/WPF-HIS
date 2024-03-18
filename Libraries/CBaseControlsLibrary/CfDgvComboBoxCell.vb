@@ -26,13 +26,13 @@ Public Class CfDgvComboBoxCell
     Public Overrides Sub InitializeEditingControl(ByVal pRowIndex As Integer, ByVal pFormattedValue As Object, ByVal cellStyle As DataGridViewCellStyle)
 
         MyBase.InitializeEditingControl(pRowIndex, pFormattedValue, cellStyle)
-        CellEditingControl = CType(DataGridView.EditingControl, CtDgvComboBoxEditingControl)
+        CellEditingControl = CType(DataGridView.EditingControl, CtComboBoxEditingControl)
         CellEditingControl.DropDownStyle = ComboBoxStyle.DropDown
         CellEditingControl.AutoCompleteMode = AutoCompleteMode.SuggestAppend
 
     End Sub
 
-    Public Property CellEditingControl As CtDgvComboBoxEditingControl
+    Public Property CellEditingControl As CtComboBoxEditingControl
 
 
 End Class

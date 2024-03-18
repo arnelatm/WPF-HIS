@@ -95,10 +95,10 @@ Namespace PresentationLayer.Views.Forms
             Me.floPurchaseJournalItems = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn()
+            Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBoxColumn()
             Me.dgvDebit = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
             Me.dgvCredit = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
-            Me.dgvRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn()
+            Me.dgvRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBoxColumn()
             Me.dgvNotesDescription = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.AccountNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.CancelledDataGridViewCheckBoxColumn1 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
@@ -1749,10 +1749,10 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents txtPayorName As CTextBox
         Friend WithEvents txtDateCreated As CTextBox
         Friend dgvSequence As CDgvTextColumn
-        Friend WithEvents dgvAccountIdNo As CtDgvComboboxColumn
+        Friend WithEvents dgvAccountIdNo As CtComboBoxColumn
         Friend dgvDebit As CdgvMoneyColumn
         Friend dgvCredit As CdgvMoneyColumn
-        Friend WithEvents dgvRevCostCenterIdNo As CtDgvComboboxColumn
+        Friend WithEvents dgvRevCostCenterIdNo As CtComboBoxColumn
         Friend dgvNotesDescription As CDgvTextColumn
         Friend WithEvents AccountNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents CancelledDataGridViewCheckBoxColumn1 As DataGridViewCheckBoxColumn

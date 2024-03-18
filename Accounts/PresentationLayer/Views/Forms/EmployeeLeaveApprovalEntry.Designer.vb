@@ -46,12 +46,12 @@ Partial Class EmployeeLeaveApprovalEntry
         Me.DataGridViewEmployeeLeave = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
         Me.dgvEmployeeLeaveIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.dgvDateCreated = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.dgvEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn()
+        Me.dgvEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBoxColumn()
         Me.dgvFullDay = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
         Me.dgvStartDate = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.dgvEndDate = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.dgvLeaveIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn()
-        Me.dgvStatus = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn()
+        Me.dgvLeaveIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBoxColumn()
+        Me.dgvStatus = New AATM.Libraries.CBaseControlsLibrary.CtComboBoxColumn()
         Me.dgvReason = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.dgvApprove = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
         Me.dgvDisapprove = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
@@ -629,12 +629,12 @@ Partial Class EmployeeLeaveApprovalEntry
     Friend WithEvents DataGridViewEmployeeLeave As Libraries.CBaseControlsLibrary.CtDataGridView
     Friend WithEvents dgvEmployeeLeaveIdNo As Libraries.CBaseControlsLibrary.CDgvTextColumn
     Friend WithEvents dgvDateCreated As Libraries.CBaseControlsLibrary.CDgvTextColumn
-    Friend WithEvents dgvEmployeeIdNo As Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn
+    Friend WithEvents dgvEmployeeIdNo As Libraries.CBaseControlsLibrary.CtComboBoxColumn
     Friend WithEvents dgvFullDay As Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn
     Friend WithEvents dgvStartDate As Libraries.CBaseControlsLibrary.CDgvTextColumn
     Friend WithEvents dgvEndDate As Libraries.CBaseControlsLibrary.CDgvTextColumn
-    Friend WithEvents dgvLeaveIdNo As Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn
-    Friend WithEvents dgvStatus As Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn
+    Friend WithEvents dgvLeaveIdNo As Libraries.CBaseControlsLibrary.CtComboBoxColumn
+    Friend WithEvents dgvStatus As Libraries.CBaseControlsLibrary.CtComboBoxColumn
     Friend WithEvents dgvReason As Libraries.CBaseControlsLibrary.CDgvTextColumn
     Friend WithEvents dgvApprove As Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn
     Friend WithEvents dgvDisapprove As Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn

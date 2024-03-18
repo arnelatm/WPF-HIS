@@ -65,7 +65,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPayrollAttendance = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvSelected = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
-            Me.dgvEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboboxColumn()
+            Me.dgvEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBoxColumn()
             Me.dgvDaysAbsentWoPay = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
             Me.dgvDaysAbsentWithPay = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
             Me.dgvDaysVacationLeave = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
@@ -77,7 +77,7 @@ Namespace PresentationLayer.Views.Forms
             Me.tbpOvertime = New System.Windows.Forms.TabPage()
             Me.DataGridViewPayrollOvertime = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.dgvSequenceOvertime = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvEmployeeIdNoOt = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboboxColumn()
+            Me.dgvEmployeeIdNoOt = New AATM.Libraries.CBaseControlsLibrary.CtComboBoxColumn()
             Me.OvertimeRegularDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
             Me.OvertimeHolidayDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
             Me.OvertimeSpecialDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
@@ -1211,7 +1211,7 @@ End Sub
         Friend WithEvents btnGenerateRegularPayElements As CButton
         Friend WithEvents ProgressBar As ProgressBar
         Friend WithEvents dgvSequenceOvertime As CDgvTextColumn
-        Friend WithEvents dgvEmployeeIdNoOt As CtDgvComboboxColumn
+        Friend WithEvents dgvEmployeeIdNoOt As CtComboBoxColumn
         Friend WithEvents OvertimeRegularDataGridViewTextBoxColumn As CdgvDecimalColumn
         Friend WithEvents OvertimeHolidayDataGridViewTextBoxColumn As CdgvDecimalColumn
         Friend WithEvents OvertimeSpecialDataGridViewTextBoxColumn As CdgvDecimalColumn
@@ -1222,7 +1222,7 @@ End Sub
         Friend WithEvents btnHolidayLeave As CButton
         Friend WithEvents dgvSequence As CDgvTextColumn
         Friend WithEvents dgvSelected As CDgvCheckBoxColumn
-        Friend WithEvents dgvEmployeeIdNo As CtDgvComboboxColumn
+        Friend WithEvents dgvEmployeeIdNo As CtComboBoxColumn
         Friend WithEvents dgvDaysAbsentWoPay As CDgvDecimalColumn
         Friend WithEvents dgvDaysAbsentWithPay As CDgvDecimalColumn
         Friend WithEvents dgvDaysVacationLeave As CDgvDecimalColumn

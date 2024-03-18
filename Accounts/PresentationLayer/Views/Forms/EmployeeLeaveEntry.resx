@@ -1171,7 +1171,7 @@
     <value>dgvStatus</value>
   </data>
   <data name="&gt;&gt;dgvStatus.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CtComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvApprovedBy.Name" xml:space="preserve">
     <value>dgvApprovedBy</value>

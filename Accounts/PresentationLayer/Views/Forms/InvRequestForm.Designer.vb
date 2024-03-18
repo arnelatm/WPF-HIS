@@ -68,10 +68,10 @@
             Me.txtDoctorCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.dgvIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvWarehouseToIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn()
+            Me.dgvWarehouseToIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBoxColumn()
             Me.dgvTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
-            Me.dgvUserIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn()
+            Me.dgvUserIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBoxColumn()
             Me.dgvNotes = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.bsInvTransactionRequest = New System.Windows.Forms.BindingSource(Me.components)
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -950,11 +950,11 @@
         Friend WithEvents bsInvTranItems As BindingSource
         Friend WithEvents dgvIdNo As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents dgvReferenceNo As Libraries.CBaseControlsLibrary.CDgvTextColumn
-        Friend WithEvents dgvWarehouseToIdNo As Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn
+        Friend WithEvents dgvWarehouseToIdNo As Libraries.CBaseControlsLibrary.CtComboBoxColumn
         Friend WithEvents dgvDateCreated As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents dgvTransactionDate As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents dgvAmount As Libraries.CBaseControlsLibrary.CdgvMoneyColumn
-        Friend WithEvents dgvUserIdNo As Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn
+        Friend WithEvents dgvUserIdNo As Libraries.CBaseControlsLibrary.CtComboBoxColumn
         Friend WithEvents dgvNotes As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents CButton1 As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents btnSupplyQuantity As Libraries.CBaseControlsLibrary.CButton

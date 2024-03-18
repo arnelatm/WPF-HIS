@@ -42,13 +42,13 @@ Namespace PresentationLayer.Views.Forms
             Me.tpgEarnings = New System.Windows.Forms.TabPage()
             Me.DataGridViewEarnings = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.dgvEarningGenerated = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
-            Me.dgvEarningIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboboxColumn()
+            Me.dgvEarningIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBoxColumn()
             Me.dgvEarningAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
             Me.bsEarnings = New System.Windows.Forms.BindingSource(Me.components)
             Me.tpgDeductions = New System.Windows.Forms.TabPage()
             Me.DataGridViewDeductions = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.dgvDeductionGenerated = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
-            Me.dgvDeductionIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboboxColumn()
+            Me.dgvDeductionIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBoxColumn()
             Me.dgvDeductionAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
             Me.bsDeductions = New System.Windows.Forms.BindingSource(Me.components)
             Me.txtPayrollIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -1033,10 +1033,10 @@ End Sub
         Friend WithEvents lblBankTransfer As CLabel
         Friend WithEvents chkBankTransfer As CCheckBox
         Friend WithEvents dgvEarningGenerated As CDgvCheckBoxColumn
-        Friend WithEvents dgvEarningIdNo As CtDgvComboboxColumn
+        Friend WithEvents dgvEarningIdNo As CtComboBoxColumn
         Friend WithEvents dgvEarningAmount As CdgvMoneyColumn
         Friend WithEvents dgvDeductionGenerated As CDgvCheckBoxColumn
-        Friend WithEvents dgvDeductionIdNo As CtDgvComboboxColumn
+        Friend WithEvents dgvDeductionIdNo As CtComboBoxColumn
         Friend WithEvents dgvDeductionAmount As CdgvMoneyColumn
     End Class
 End Namespace

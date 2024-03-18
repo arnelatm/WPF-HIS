@@ -556,9 +556,9 @@ End Sub
         Friend WithEvents dgvApprovalIdNo As CDgvTextColumn
         Friend WithEvents dgvItemIdNo As CDgvTextColumn
         Friend WithEvents dgvDateCreated As CDgvTextColumn
-        Friend WithEvents dgvEnteredBy As CtDgvComboboxColumn
+        Friend WithEvents dgvEnteredBy As CtComboBoxColumn
         Friend WithEvents dgvNote As CDgvTextColumn
-        Friend WithEvents dgvStatus As CtDgvComboboxColumn
+        Friend WithEvents dgvStatus As CtComboBoxColumn
         Friend WithEvents HolidayAvailmentIdNo As DataGridViewTextBoxColumn
         Friend WithEvents CLabel2 As CLabel
         Public WithEvents cboHolidayTransferIdNo As CtCombobox

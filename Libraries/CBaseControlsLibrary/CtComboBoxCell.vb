@@ -3,7 +3,7 @@ Imports System.ComponentModel
 Imports System.Drawing
 Imports System.Windows.Forms
 
-Public Class CtDgvComboBoxCell
+Public Class CtComboBoxCell
     Inherits DataGridViewComboBoxCell
 
     Public Sub New()
@@ -16,7 +16,7 @@ Public Class CtDgvComboBoxCell
     ' editing control type, which is your custom ComboBox class...
     Public Overrides ReadOnly Property EditType() As Type
         Get
-            Return GetType(CtDgvComboBoxEditingControl)
+            Return GetType(CtComboBoxEditingControl)
         End Get
     End Property
 
@@ -29,7 +29,7 @@ Public Class CtDgvComboBoxCell
         MyBase.InitializeEditingControl(RowIndex, initialFormattedValue, dataGridViewCellStyle)
 
         ''MyBase.InitializeEditingControl(pRowIndex, pFormattedValue, cellStyle)
-        CellEditingControl = CType(DataGridView.EditingControl, CtDgvComboBoxEditingControl)
+        CellEditingControl = CType(DataGridView.EditingControl, CtComboBoxEditingControl)
         'CellEditingControl.DropDownStyle = ComboBoxStyle.DropDown
         'CellEditingControl.AutoCompleteMode = AutoCompleteMode.SuggestAppend
 
@@ -42,13 +42,11 @@ Public Class CtDgvComboBoxCell
     '<Browsable(True)>
     'Public Property SuggestCharCount As Integer
 
-
-    'Private _cellEditingControl As CtDgvComboBoxEditingControl
-    Public Property CellEditingControl As CtDgvComboBoxEditingControl
+    Public Property CellEditingControl As CtComboBoxEditingControl
     '    Get
     '        Return _cellEditingControl
     '    End Get
-    '    Set(value As CtDgvComboBoxEditingControl)
+    '    Set(value As CtComboBoxEditingControl)
     '        _cellEditingControl = value
     '    End Set
     'End Property

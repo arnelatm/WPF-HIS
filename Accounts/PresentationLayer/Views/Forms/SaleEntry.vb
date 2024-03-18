@@ -689,7 +689,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub ValidateUnit(ByRef dgv As CtDataGridView, ByRef e As DataGridViewCellValidatingEventArgs)
             Dim oldUnitIdNo As Int16 = dgv.CurrentRow.Cells("dgvUnitIdNo").Value
-            Dim newUnitIdNo = DirectCast(dgv.CurrentCell, AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxCell).CellEditingControl.SelectedValue
+            Dim newUnitIdNo = DirectCast(dgv.CurrentCell, AATM.Libraries.CBaseControlsLibrary.CtComboBoxCell).CellEditingControl.SelectedValue
             If oldUnitIdNo <> newUnitIdNo Then
                 RaiseEvent UnitChanged(oldUnitIdNo, newUnitIdNo, bsSaleDetails, e.FormattedValue)
             End If
