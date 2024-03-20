@@ -1,261 +1,243 @@
 ﻿Imports System.ComponentModel
 Imports System.Drawing
+Imports System.Globalization
 Imports System.Linq.Expressions
 Imports System.Threading
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
+Imports System.Runtime.InteropServices
 
 Public Class CDgvComboBoxEditingControl
-    Inherits DataGridViewComboBoxEditingControl
+    Inherits CtComboBox
+    Implements IDataGridViewEditingControl
 
-    Public SuggestListForm As CListBoxForm = New CListBoxForm
-    Private ReadOnly _suggestBindingList As BindingList(Of String) = New BindingList(Of String)()
-    Private _propertySelector As Expression(Of Func(Of ObjectCollection, IEnumerable(Of String)))
-    Protected PropertySelectorCompiled As Func(Of ObjectCollection, IEnumerable(Of String))
-    Private _filterRule As Expression(Of Func(Of String, String, Boolean))
-    Private _filterRuleCompiled As Func(Of String, Boolean)
-    Private _suggestListOrderRule As Expression(Of Func(Of String, String))
-    Private _suggestListOrderRuleCompiled As Func(Of String, String)
-    Public Sub New()
-        _filterRuleCompiled = Function(s) s.ToLower().Contains(Text.Trim().ToLower())
-        _suggestListOrderRuleCompiled = Function(s) s
-        PropertySelectorCompiled = Function(collection) collection.Cast(Of String)()
+    Private dataGridView As DataGridView
+    Private rowIndex As Integer
+    Private _valueChanged As Boolean
 
-        SuggestListForm.SuggestListBox.DataSource = _suggestBindingList
-        AddHandler SuggestListForm.SuggestListBox.Click, AddressOf SuggestListBoxOnClick
-        AddHandler ParentChanged, AddressOf OnParentChanged
-
-    End Sub
-
-    Public Property SuggestBoxHeight As Integer
+    Public Property EditingControlDataGridView As DataGridView Implements IDataGridViewEditingControl.EditingControlDataGridView
         Get
-            Return SuggestListForm.Height
+            Return dataGridView
+        End Get
+        Set(value As DataGridView)
+            dataGridView = value
+        End Set
+    End Property
+
+    Public Property EditingControlFormattedValue As Object Implements IDataGridViewEditingControl.EditingControlFormattedValue
+        Get
+            Return GetEditingControlFormattedValue(DataGridViewDataErrorContexts.Formatting)
+        End Get
+        Set(ByVal value As Object)
+            Dim text As String = TryCast(value, String)
+            If Not Equals(text, Nothing) Then
+                MyBase.Text = text
+                If String.Compare(text, MyBase.Text, ignoreCase:=True, CultureInfo.CurrentCulture) <> 0 Then
+                    SelectedIndex = -1
+                End If
+            End If
+        End Set
+    End Property
+
+
+
+    '
+    ' Summary:
+    '     Gets or sets the index of the owning cell's parent row.
+    '
+    ' Returns:
+    '     The index of the row that contains the owning cell; -1 if there is no owning
+    '     row.
+    Public Property EditingControlRowIndex As Integer Implements IDataGridViewEditingControl.EditingControlRowIndex
+        Get
+            Return rowIndex
         End Get
         Set(ByVal value As Integer)
-            If value > 0 Then SuggestListForm.Height = value
+            rowIndex = value
         End Set
     End Property
 
-    Public Property PropertySelector As Expression(Of Func(Of ObjectCollection, IEnumerable(Of String)))
+    '
+    ' Summary:
+    '     Retrieves the formatted value of the cell.
+    '
+    ' Parameters:
+    '   context:
+    '     A bitwise combination of System.Windows.Forms.DataGridViewDataErrorContexts values
+    '     that specifies the data error context.
+    '
+    ' Returns:
+    '     An System.Object that represents the formatted version of the cell contents.
+    Public Function GetEditingControlFormattedValue(ByVal context As DataGridViewDataErrorContexts) As Object Implements IDataGridViewEditingControl.GetEditingControlFormattedValue
+        Return Text
+    End Function
+
+    '
+    ' Summary:
+    '     Gets or sets a value indicating whether the current value of the control has
+    '     changed.
+    '
+    ' Returns:
+    '     true if the value of the control has changed; otherwise, false.
+    Public Property EditingControlValueChanged As Boolean Implements IDataGridViewEditingControl.EditingControlValueChanged
         Get
-            Return _propertySelector
+            Return _valueChanged
         End Get
-        Set(ByVal value As Expression(Of Func(Of ObjectCollection, IEnumerable(Of String))))
-            If value Is Nothing Then Return
-            _propertySelector = value
-            PropertySelectorCompiled = value.Compile()
+        Set(ByVal value As Boolean)
+            _valueChanged = value
         End Set
     End Property
 
-    Public Property FilterRule As Expression(Of Func(Of String, String, Boolean))
+
+    '
+    ' Summary:
+    '     Gets the cursor used during editing.
+    '
+    ' Returns:
+    '     A System.Windows.Forms.Cursor that represents the cursor image used by the mouse
+    '     pointer during editing.
+    Public ReadOnly Property EditingPanelCursor As Cursor Implements IDataGridViewEditingControl.EditingPanelCursor
         Get
-            Return _filterRule
+            Return Cursors.Default
         End Get
-        Set(ByVal value As Expression(Of Func(Of String, String, Boolean)))
-            If value Is Nothing Then Return
-            _filterRule = value
-            _filterRuleCompiled = Function(item) value.Compile()(item, Text)
-        End Set
     End Property
 
-    Public Property SuggestListOrderRule As Expression(Of Func(Of String, String))
+    '
+    ' Summary:
+    '     Gets a value indicating whether the cell contents need to be repositioned whenever
+    '     the value changes.
+    '
+    ' Returns:
+    '     false in all cases.
+    Public ReadOnly Property RepositionEditingControlOnValueChange As Boolean Implements IDataGridViewEditingControl.RepositionEditingControlOnValueChange
         Get
-            Return _suggestListOrderRule
+            Return False
         End Get
-        Set(ByVal value As Expression(Of Func(Of String, String)))
-            If value Is Nothing Then Return
-            _suggestListOrderRule = value
-            _suggestListOrderRuleCompiled = value.Compile()
-        End Set
     End Property
 
-
-    Private Overloads Sub OnBindingContextChanged(sender As Object, e As EventArgs) Handles MyBase.BindingContextChanged
-        DisplayMember = "Name"
-
-        'DirectCast((New System.Linq.SystemCore_EnumerableDebugView(collection).Items(3)), System.Data.DataRowView)._row.ItemArray(1), raw
-        PropertySelectorCompiled = Function(collection) collection.Cast(Of DataRowView)().[Select](Function(p) p.Row.Item(1).ToString())
-        'PropertySelectorCompiled = Function(collection) collection.Cast(Of DataTable)() Function(p) p.Rows.ItemArray(1))
-
+    '
+    ' Summary:
+    '     Initializes a new instance of the System.Windows.Forms.DataGridViewComboBoxEditingControl
+    '     class.
+    Public Sub New()
+        TabStop = False
     End Sub
 
-    Protected Overrides Sub OnTextChanged(ByVal e As EventArgs)
-        MyBase.OnTextChanged(e)
-        If Not Focused Then Return
-        _suggestBindingList.Clear()
-        _suggestBindingList.RaiseListChangedEvents = False
-        PropertySelectorCompiled(Items).Where(_filterRuleCompiled).OrderBy(_suggestListOrderRuleCompiled).ToList().ForEach(AddressOf _suggestBindingList.Add)
-        _suggestBindingList.RaiseListChangedEvents = True
-        _suggestBindingList.ResetBindings()
-        Dim showForm As Boolean
-        showForm = _suggestBindingList.Any()
-        SuggestListForm.Visible = showForm
-        If showForm Then
-            SetListBoxFormLocation(SuggestListForm)
-            SuggestListForm.Visible = True
+    'Protected Overrides Function CreateAccessibilityInstance() As AccessibleObject
+    '    If AccessibilityImprovements.Level3 Then
+    '        Return New DataGridViewComboBoxEditingControlAccessibleObject(Me)
+    '    End If
+
+    '    If AccessibilityImprovements.Level2 Then
+    '        Return New DataGridViewEditingControlAccessibleObject(Me)
+    '    End If
+
+    '    Return MyBase.CreateAccessibilityInstance()
+    'End Function
+
+    '
+    ' Summary:
+    '     Changes the control's user interface (UI) to be consistent with the specified
+    '     cell style.
+    '
+    ' Parameters:
+    '   dataGridViewCellStyle:
+    '     The System.Windows.Forms.DataGridViewCellStyle to use as a pattern for the UI.
+    Public Sub ApplyCellStyleToEditingControl(ByVal dataGridViewCellStyle As DataGridViewCellStyle) Implements IDataGridViewEditingControl.ApplyCellStyleToEditingControl
+        MyBase.Font = dataGridViewCellStyle.Font
+        If dataGridViewCellStyle.BackColor.A < Byte.MaxValue Then
+
+            MyBase.BackColor = Color.FromArgb(255, dataGridViewCellStyle.BackColor)
+            BackColor = MyBase.BackColor
+            dataGridView.EditingPanel.BackColor = BackColor
         Else
-            SuggestListForm.Hide()
+            BackColor = dataGridViewCellStyle.BackColor
         End If
 
-        If _suggestBindingList.Count = 1 AndAlso _suggestBindingList.Single().Length = Text.Trim().Length Then
-            Text = _suggestBindingList.Single()
-            [Select](0, Text.Length)
-            HideSuggBox()
-        End If
+        ForeColor = dataGridViewCellStyle.ForeColor
     End Sub
 
-    Private Shadows Sub OnParentChanged(ByVal sender As Object, ByVal e As EventArgs)
-        SetListBoxFormLocation(SuggestListForm)
-        SuggestListForm.SuggestListBox.Font = New Font("Segoe UI", 9)
-    End Sub
 
-    Protected Overrides Sub OnLocationChanged(ByVal e As EventArgs)
-        MyBase.OnLocationChanged(e)
-        SetListBoxFormLocation(SuggestListForm)
-    End Sub
-
-    Protected Overrides Sub OnSizeChanged(ByVal e As EventArgs)
-        MyBase.OnSizeChanged(e)
-        SuggestListForm.Width = Width - 20
-        SuggestListForm.SuggestListBox.Width = SuggestListForm.Width
-    End Sub
-
-    Protected Overloads Overrides Sub OnLostFocus(e As EventArgs)
-        If Not SuggestListForm.SuggestListBox.Focused Then
-            HideSuggBox()
-        End If
-        MyBase.OnLostFocus(e)
-    End Sub
-
-    Private Sub SuggestListBoxOnClick()
-        Text = SuggestListForm.SuggestListBox.Text
-        Focus()
-    End Sub
-
-    Private Sub HideSuggBox()
-        SuggestListForm.Hide()
-        SuggestListForm.Visible = False
-    End Sub
-
-    Protected Overloads Overrides Sub OnDropDown(e As EventArgs)
-        HideSuggBox()
-        MyBase.OnDropDown(e)
-    End Sub
-
-    Protected Overloads Overrides Sub OnPreviewKeyDown(e As PreviewKeyDownEventArgs)
-        If Not SuggestListForm.Visible Then
-            MyBase.OnPreviewKeyDown(e)
-            Return
-        End If
-        Select Case e.KeyCode
-            Case Keys.Down
-                If SuggestListForm.SuggestListBox.SelectedIndex < _suggestBindingList.Count - 1 Then
-                    Math.Max(Interlocked.Increment(SuggestListForm.SuggestListBox.SelectedIndex), SuggestListForm.SuggestListBox.SelectedIndex - 1)
-                End If
-                Return
-            Case Keys.Up
-                If SuggestListForm.SuggestListBox.SelectedIndex > 0 Then
-                    Math.Max(Interlocked.Decrement(SuggestListForm.SuggestListBox.SelectedIndex), SuggestListForm.SuggestListBox.SelectedIndex + 1)
-                End If
-                Return
-            Case Keys.Enter
-                Text = SuggestListForm.SuggestListBox.Text
-                [Select](0, Text.Length)
-                SuggestListForm.Hide()
-                SuggestListForm.Visible = False
-                Return
-            Case Keys.Escape
-                HideSuggBox()
-                Return
-        End Select
-        MyBase.OnPreviewKeyDown(e)
-    End Sub
-
-    Private Shared ReadOnly KeysToHandle As Keys() = {Keys.Down, Keys.Up, Keys.Enter, Keys.Escape}
-
-    Protected Overloads Overrides Function ProcessCmdKey(ByRef msg As Message, keyData As Keys) As Boolean
-        If SuggestListForm.Visible AndAlso KeysToHandle.Contains(keyData) Then
+    '
+    ' Summary:
+    '     Determines whether the specified key is a regular input key that the editing
+    '     control should process or a special key that the System.Windows.Forms.DataGridView
+    '     should process.
+    '
+    ' Parameters:
+    '   keyData:
+    '     A bitwise combination of System.Windows.Forms.Keys values that represents the
+    '     key that was pressed.
+    '
+    '   dataGridViewWantsInputKey:
+    '     true to indicate that the System.Windows.Forms.DataGridView control can process
+    '     the key; otherwise, false.
+    '
+    ' Returns:
+    '     true if the specified key is a regular input key that should be handled by the
+    '     editing control; otherwise, false.
+    Public Function EditingControlWantsInputKey(ByVal keyData As Keys, ByVal dataGridViewWantsInputKey As Boolean) As Boolean Implements IDataGridViewEditingControl.EditingControlWantsInputKey
+        If (keyData And Keys.KeyCode) = Keys.Down OrElse (keyData And Keys.KeyCode) = Keys.Up OrElse DroppedDown AndAlso (keyData And Keys.KeyCode) = Keys.Escape OrElse (keyData And Keys.KeyCode) = Keys.Return Then
             Return True
         End If
-        Return MyBase.ProcessCmdKey(msg, keyData)
+        Return Not dataGridViewWantsInputKey
+        'Select Case keyData And Keys.KeyCode
+
+        '    Case Keys.Return, Keys.Escape
+        '        If DroppedDown Then
+        '            Return True
+        '        Else
+        '            Return dataGridViewWantsInputKey
+        '        End If
+
+        '    'Case Keys.Left, Keys.Right, Keys.Home, Keys.End
+        '    '    '    Keys.Home, Keys.End, Keys.PageDown, Keys.PageUp
+        '    '    Return True
+
+        '    Case Keys.PageDown, Keys.PageUp, Keys.Up, Keys.Down
+        '        If DroppedDown Then
+        '            Return True
+        '        Else
+        '            Return False
+        '        End If
+
+        '    Case Else
+        '        Return Not dataGridViewWantsInputKey
+        '    End Select
     End Function
 
-    Private Sub SetListBoxFormLocation(ByRef suggestLbForm As CListBoxForm)
-        Dim pnt As Point
-        Dim formLocation As Point
-        Dim screenRectangle As Rectangle
-        Dim myform = FindForm()
-        If myform Is Nothing Then
-            Return
+
+    '
+    ' Summary:
+    '     Prepares the currently selected cell for editing.
+    '
+    ' Parameters:
+    '   selectAll:
+    '     true to select all of the cell's content; otherwise, false.
+    Public Sub PrepareEditingControlForEdit(ByVal selectAll As Boolean) Implements IDataGridViewEditingControl.PrepareEditingControlForEdit
+        If selectAll Then
+            MyBase.SelectAll()
         End If
-        screenRectangle = Screen.PrimaryScreen.WorkingArea
-        suggestLbForm.Width = Width + 2
-        suggestLbForm.StartPosition = FormStartPosition.Manual
-        pnt = Parent.PointToScreen(Location)
-        'If GlobalVariables.RightToLeftLayout Then
-        '    formLocation = New Point(pnt.X - suggestLbForm.Width)
-        '    If formLocation.X < 0 Then
-        '        formLocation.X = pnt.X - suggestLbForm.Width
-        '    End If
-        'Else
-            formLocation = New Point(pnt.X, pnt.Y + Height)
-        'End If
-        suggestLbForm.Location = formLocation
     End Sub
 
-    Private Function Offset(ByRef controlObj As Control, ByVal x As Integer, ByVal y As Integer) As Point
+    Private Sub NotifyDataGridViewOfValueChange()
+        _valueChanged = True
+        dataGridView.NotifyCurrentCellDirty(dirty:=True)
+    End Sub
 
-        Dim pt As Point
-        Dim parentObj As Control = controlObj.Parent
-
-        Do While parentObj IsNot controlObj.FindForm
-            x += parentObj.Location.X
-            y += parentObj.Location.Y
-            parentObj = parentObj.Parent
-        Loop
-
-        pt = PointToScreen(controlObj.Location)
-        pt.Offset(x, y)
-        Return pt
-
-    End Function
+    '
+    ' Parameters:
+    '   e:
+    '     An System.EventArgs that contains the event data.
+    Protected Overrides Sub OnSelectedIndexChanged(ByVal e As EventArgs)
+        'MyBase.OnSelectedIndexChanged(e)
+        If SelectedIndex <> -1 Then
+            NotifyDataGridViewOfValueChange()
+        End If
+    End Sub
 
     Public Function GetValue()
         Return SelectedValue
-    End Function
-
-    'Public Overrides Function EditingControlWantsInputKey(ByVal keyData As Keys, ByVal dataGridViewWantsInputKey As Boolean) As Boolean
-    '    Return (keyData And Keys.KeyCode) = Keys.Down OrElse (keyData And Keys.KeyCode) = Keys.Up OrElse Me.DroppedDown AndAlso (keyData And Keys.KeyCode) = Keys.Escape OrElse (keyData And Keys.KeyCode) = Keys.[Return] OrElse Not dataGridViewWantsInputKey
-    'End Function
-
-
-    Public Overrides Function EditingControlWantsInputKey(ByVal key As Keys, ByVal dataGridViewWantsInputKey As Boolean) As Boolean
-
-        ' Let the DateTimePicker handle the keys listed.
-        Select Case key And Keys.KeyCode
-
-            Case Keys.Return, Keys.Escape
-                If DroppedDown Then
-                    Return True
-                Else
-                    Return dataGridViewWantsInputKey
-                End If
-
-            'Case Keys.Left, Keys.Right, Keys.Home, Keys.End
-            '    '    Keys.Home, Keys.End, Keys.PageDown, Keys.PageUp
-            '    Return True
-
-            Case Keys.PageDown, Keys.PageUp, Keys.Up, Keys.Down
-                If DroppedDown Then
-                    Return True
-                Else
-                    Return False
-                End If
-
-            Case Else
-                Return Not dataGridViewWantsInputKey
-        End Select
-
     End Function
 
 End Class
