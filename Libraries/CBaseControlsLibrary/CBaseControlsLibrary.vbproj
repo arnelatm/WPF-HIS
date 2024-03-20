@@ -134,6 +134,11 @@
     </Compile>
     <Compile Include="BlendItemsConverter.vb" />
     <Compile Include="BlendTypeEditor.vb" />
+    <Compile Include="CDgvComboBoxCell.vb" />
+    <Compile Include="CDgvComboBoxColumn.vb" />
+    <Compile Include="CDgvComboBoxEditingControl.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CDgvExpiryColumn.vb" />
     <Compile Include="CDgvExpiryCell.vb" />
     <Compile Include="CfComboBox.vb">
@@ -377,6 +382,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CustomComboBox.vb" />
+    <Compile Include="CxComboBoxColumn.vb" />
     <Compile Include="DateRangeControl.Designer.vb">
       <DependentUpon>DateRangeControl.vb</DependentUpon>
     </Compile>

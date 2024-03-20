@@ -467,9 +467,9 @@ Public Class CtDataGridView
             If CurrentCell IsNot Nothing Then
                 cb.SuggestCharCount = DirectCast(CurrentCell.OwningColumn, AATM.Libraries.CBaseControlsLibrary.CtComboBoxColumn).SuggestCharCount
             End If
-        ElseIf TypeOf e.Control Is CtComboBoxEditingControl Then
+        ElseIf TypeOf e.Control Is CDgvComboBoxEditingControl Then
             'declare variable(cb) as a CtCombobox
-            Dim cb As CtComboBoxEditingControl
+            Dim cb As CDgvComboBoxEditingControl
             cb = e.Control
             'set the dropdown style of a combobox
             cb.DropDownStyle = ComboBoxStyle.DropDown
@@ -477,9 +477,9 @@ Public Class CtDataGridView
             cb.AutoCompleteMode = AutoCompleteMode.SuggestAppend
             ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
             BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-            If CurrentCell IsNot Nothing Then
-                cb.SuggestCharCount = DirectCast(CurrentCell.OwningColumn, AATM.Libraries.CBaseControlsLibrary.CtComboBoxColumn).SuggestCharCount
-            End If
+            'If CurrentCell IsNot Nothing Then
+            '    cb.SuggestCharCount = DirectCast(CurrentCell.OwningColumn, CComboBoxColumn).SuggestCharCount
+            'End If
         ElseIf TypeOf e.Control Is CCustomDateTimePicker Then
             Dim cDtp As CCustomDateTimePicker
             cDtp = e.Control
@@ -496,6 +496,7 @@ Public Class CtDataGridView
                     'AssignEvent()
                     Dim myBindingSource = CType(DataSource, BindingSource)
                     Dim nDataCount = DataSource().Count()
+                    Dim editingControl = Me.GetEditingValue()
                     If CurrentRow.Index = NewRowIndex Then
                         Try
                             myBindingSource.AddNew()

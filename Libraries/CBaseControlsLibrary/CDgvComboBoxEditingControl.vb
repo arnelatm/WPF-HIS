@@ -72,7 +72,11 @@ Public Class CDgvComboBoxEditingControl
 
     Private Overloads Sub OnBindingContextChanged(sender As Object, e As EventArgs) Handles MyBase.BindingContextChanged
         DisplayMember = "Name"
-        PropertySelectorCompiled = Function(collection) collection.Cast(Of Lookup.LookupData)().[Select](Function(p) p.Name)
+
+        'DirectCast((New System.Linq.SystemCore_EnumerableDebugView(collection).Items(3)), System.Data.DataRowView)._row.ItemArray(1), raw
+        PropertySelectorCompiled = Function(collection) collection.Cast(Of DataRowView)().[Select](Function(p) p.Row.Item(1).ToString())
+        'PropertySelectorCompiled = Function(collection) collection.Cast(Of DataTable)() Function(p) p.Rows.ItemArray(1))
+
     End Sub
 
     Protected Overrides Sub OnTextChanged(ByVal e As EventArgs)
