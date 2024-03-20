@@ -30,6 +30,10 @@ Public Class CtComboBoxCell
 
         ''MyBase.InitializeEditingControl(pRowIndex, pFormattedValue, cellStyle)
         CellEditingControl = CType(DataGridView.EditingControl, CtComboBoxEditingControl)
+        CellEditingControl.DataSource = DataSource
+        CellEditingControl.ValueMember = ValueMember
+        CellEditingControl.DisplayMember = DisplayMember
+        CellEditingControl.SelectedValue = Value
         'CellEditingControl.DropDownStyle = ComboBoxStyle.DropDown
         'CellEditingControl.AutoCompleteMode = AutoCompleteMode.SuggestAppend
 
