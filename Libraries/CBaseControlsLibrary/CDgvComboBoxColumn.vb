@@ -22,12 +22,11 @@ Public Class CDgvComboBoxColumn
         End Get
         Set(ByVal value As DataGridViewCell)
 
-            ' Ensure that the cell used for the template is a CDgvComboboxCell.
-            If (value IsNot Nothing) AndAlso
-               Not value.GetType().IsAssignableFrom(GetType(CDgvComboBoxCell)) _
-                Then
+            Dim dataGridViewComboBoxCell As CDgvComboBoxCell = TryCast(value, CDgvComboBoxCell)
+            If value IsNot Nothing AndAlso dataGridViewComboBoxCell Is Nothing Then
                 Throw New InvalidCastException("Must be a CDgvComboBoxCell")
             End If
+
             MyBase.CellTemplate = value
 
         End Set
