@@ -22,12 +22,11 @@ Public Class CtComboBoxColumn
         End Get
         Set(ByVal value As DataGridViewCell)
 
-            ' Ensure that the cell used for the template is a CtComboboxCell.
-            If (value IsNot Nothing) AndAlso
-               Not value.GetType().IsAssignableFrom(GetType(CtComboBoxCell)) _
-                Then
+            Dim dataGridViewComboBoxCell As CtComboBoxCell = TryCast(value, CtComboBoxCell)
+            If value IsNot Nothing AndAlso dataGridViewComboBoxCell Is Nothing Then
                 Throw New InvalidCastException("Must be a CtComboBoxCell")
             End If
+
             MyBase.CellTemplate = value
 
         End Set
@@ -44,12 +43,9 @@ Public Class CtComboBoxColumn
         End Get
         Set(value As Boolean)
             _displayOnly = value
-            If _editingMode Then
-
+            If value Then
+                _editingMode = True
             End If
-            'If value Then
-            '    _editingMode = True
-            'End If
         End Set
     End Property
 
@@ -70,8 +66,8 @@ Public Class CtComboBoxColumn
             DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
         Else
             [ReadOnly] = False
-            DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+            DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             [ReadOnly] = True
         End If
     End Sub

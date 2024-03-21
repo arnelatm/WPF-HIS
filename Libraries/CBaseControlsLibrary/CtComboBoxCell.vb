@@ -1,15 +1,13 @@
 ﻿' This is the class that represents your cell which can use your ComboBox class
-Imports System.ComponentModel
-Imports System.Drawing
 Imports System.Windows.Forms
+Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class CtComboBoxCell
     Inherits DataGridViewComboBoxCell
 
     Public Sub New()
         MyBase.New()
-        AutoComplete = True
-        'CellEditingControl.AutoCompleteMode = AutoCompleteMode.SuggestAppend
+        AutoComplete = False
     End Sub
 
     ' You must override the EditType property to return the cell's
@@ -20,55 +18,32 @@ Public Class CtComboBoxCell
         End Get
     End Property
 
-    'You must also override this method To initialize the ComboBox instance...
-    'This method will be called Each time a cell In the column enters edit-mode,
-    'so you can fill the ComboBox instance based On the value Of the edited cell
-    Public Overrides Sub InitializeEditingControl(ByVal initialFormattedValue As Integer, ByVal pFormattedValue As Object, ByVal dataGridViewCellStyle As DataGridViewCellStyle)
 
+    ' You must also override this method to initialize the ComboBox instance...
+    ' This method will be called each time a cell in the column enters edit-mode,
+    ' so you can fill the ComboBox instance based on the value of the edited cell
+    Public Overrides Sub InitializeEditingControl(ByVal pRowIndex As Integer, ByVal pFormattedValue As Object, ByVal cellStyle As DataGridViewCellStyle)
 
-        MyBase.InitializeEditingControl(RowIndex, initialFormattedValue, dataGridViewCellStyle)
+        'Dim lastOpenedForm As Form = Application.OpenForms.Cast(Of Form)
+        'lastOpenedForm.SuspendDrawing()
+        'lastOpenedForm.SuspendLayout()
+        If DataGridView.EditingControl IsNot Nothing Then
+            'SuspendLayout(DataGridView.EditingControl)
 
-        ''MyBase.InitializeEditingControl(pRowIndex, pFormattedValue, cellStyle)
-        CellEditingControl = CType(DataGridView.EditingControl, CtComboBoxEditingControl)
-        CellEditingControl.DataSource = DataSource
-        CellEditingControl.ValueMember = ValueMember
-        CellEditingControl.DisplayMember = DisplayMember
-        CellEditingControl.SelectedValue = Value
-        'CellEditingControl.DropDownStyle = ComboBoxStyle.DropDown
-        'CellEditingControl.AutoCompleteMode = AutoCompleteMode.SuggestAppend
+            ' Call base...
+            MyBase.InitializeEditingControl(pRowIndex, pFormattedValue, cellStyle)
+            If DataGridView.EditingControl IsNot Nothing Then
+                CellEditingControl = CType(DataGridView.EditingControl, CtComboBoxEditingControl)
+                'CellEditingControl.DropDownStyle = ComboBoxStyle.DropDown
+                'CellEditingControl.AutoCompleteMode = AutoCompleteMode.SuggestAppend
+            End If
+        End If
+        'astOpenedForm.ResumeDrawing()
+        'lastOpenedForm.SuspendLayout()
 
     End Sub
 
-    '<Bindable(True)>
-    '<Category("Custom Properties")>
-    '<DefaultValue(False)>
-    '<Description("Set to an integer to specify the this will only suggestappend when more than this specified number of characters is typed in.")>
-    '<Browsable(True)>
-    'Public Property SuggestCharCount As Integer
-
     Public Property CellEditingControl As CtComboBoxEditingControl
-    '    Get
-    '        Return _cellEditingControl
-    '    End Get
-    '    Set(value As CtComboBoxEditingControl)
-    '        _cellEditingControl = value
-    '    End Set
-    'End Property
-
-    'Protected Overrides Sub OnMouseClick(ByVal e As DataGridViewCellMouseEventArgs)
-
-    '    MyBase.OnMouseClick(e)
-
-    '    If MyBase.DataGridView Is Nothing Then
-    '        Return
-    '    End If
-
-    '    Dim currentCellAddress As Point = MyBase.DataGridView.CurrentCellAddress
-
-    '    If currentCellAddress.X = e.ColumnIndex AndAlso currentCellAddress.Y = e.RowIndex Then
-
-
-    '    End If
-    'End Sub
 
 End Class
+

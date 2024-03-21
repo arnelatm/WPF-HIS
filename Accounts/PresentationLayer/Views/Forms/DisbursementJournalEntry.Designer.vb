@@ -117,7 +117,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.bsDjOiItems = New System.Windows.Forms.BindingSource(Me.components)
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+            Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBoxColumn()
             Me.dgvDebit = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
             Me.dgvCredit = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
             Me.dgvRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBoxColumn()
@@ -2342,7 +2342,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents txtDateCreated As CTextBox
         Friend WithEvents cboPayeeIdNo As CtComboBox
         Friend WithEvents dgvSequence As CDgvTextColumn
-        Friend WithEvents dgvAccountIdNo As CDgvComboBoxColumn
+        Friend WithEvents dgvAccountIdNo As CtComboBoxColumn
         Friend WithEvents dgvDebit As CdgvMoneyColumn
         Friend WithEvents dgvCredit As CdgvMoneyColumn
         Friend WithEvents dgvRevCostCenterIdNo As CtComboBoxColumn

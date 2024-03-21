@@ -467,9 +467,9 @@ Public Class CtDataGridView
             If CurrentCell IsNot Nothing Then
                 cb.SuggestCharCount = DirectCast(CurrentCell.OwningColumn, AATM.Libraries.CBaseControlsLibrary.CtComboBoxColumn).SuggestCharCount
             End If
-        ElseIf TypeOf e.Control Is CDgvComboBoxEditingControl Then
+        ElseIf TypeOf e.Control Is CtComboBoxEditingControl Then
             'declare variable(cb) as a CtCombobox
-            Dim cb As CDgvComboBoxEditingControl
+            Dim cb As CtComboBoxEditingControl
             cb = e.Control
             'set the dropdown style of a combobox
             cb.DropDownStyle = ComboBoxStyle.DropDown
@@ -495,8 +495,8 @@ Public Class CtDataGridView
                 If DataSource.[GetType]() Is GetType(BindingSource) Then
                     'AssignEvent()
                     Dim myBindingSource = CType(DataSource, BindingSource)
-                    Dim nDataCount = DataSource().Count()
-                    Dim editingControl = Me.GetEditingValue()
+                    'Dim nDataCount = DataSource().Count()
+                    'Dim editingControl = Me.GetEditingValue()
                     If CurrentRow.Index = NewRowIndex Then
                         Try
                             myBindingSource.AddNew()

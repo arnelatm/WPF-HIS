@@ -30,12 +30,13 @@ Public Class CDgvComboBoxEditingControl
         End Get
         Set(ByVal value As Object)
             Dim text As String = TryCast(value, String)
-            If Not Equals(text, Nothing) Then
-                MyBase.Text = text
-                If String.Compare(text, MyBase.Text, ignoreCase:=True, CultureInfo.CurrentCulture) <> 0 Then
-                    SelectedIndex = -1
-                End If
-            End If
+            MyBase.Text = text
+            'If Not Equals(text, Nothing) Then
+            '    MyBase.Text = text
+            '    If String.Compare(text, MyBase.Text, ignoreCase:=True, CultureInfo.CurrentCulture) <> 0 Then
+            '        SelectedIndex = -1
+            '    End If
+            'End If
         End Set
     End Property
 

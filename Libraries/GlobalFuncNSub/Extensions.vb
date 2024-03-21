@@ -208,13 +208,13 @@ Public Module Extensions
     Private Function SendMessage(ByVal hWnd As IntPtr, ByVal msg As Integer, ByVal wParam As Boolean, ByVal lParam As IntPtr) As Integer
     End Function
 
-    Private Const WmSetRedraw As Integer = 11
+    Private Const WM_SETREDRAW As Integer = 11
 
     ' Extension methods for Control
     <Extension()>
     Public Sub ResumeDrawing(ByVal target As Control, ByVal redraw As Boolean)
         If target IsNot Nothing Then
-            SendMessage(target.Handle, WmSetRedraw, True, 0)
+            SendMessage(target.Handle, WM_SETREDRAW, True, 0)
             If redraw Then
                 target.Refresh()
             End If
@@ -231,7 +231,7 @@ Public Module Extensions
             End If
         End If
         If target IsNot Nothing Then
-            SendMessage(target.Handle, WmSetRedraw, False, 0)
+            SendMessage(target.Handle, WM_SETREDRAW, False, 0)
         End If
         If target IsNot Nothing Then
             If isVisible Then
@@ -247,6 +247,24 @@ Public Module Extensions
         End If
     End Sub
 
+    ' Extension methods for Control
+    <Extension()>
+    Public Sub ResumeDrawingNew(ByVal Target As Control, ByVal Redraw As Boolean)
+        SendMessage(Target.Handle, WM_SETREDRAW, True, IntPtr.Zero)
+        If Redraw Then
+            Target.Refresh()
+        End If
+    End Sub
+
+    <Extension()>
+    Public Sub SuspendDrawingNew(ByVal Target As Control)
+        SendMessage(Target.Handle, WM_SETREDRAW, False, IntPtr.Zero)
+    End Sub
+
+    <Extension()>
+    Public Sub ResumeDrawingNew(ByVal Target As Control)
+        ResumeDrawing(Target, True)
+    End Sub
 
     <Extension()>
     Public Sub Add(Of T)(ByRef arr As T(), item As T)
