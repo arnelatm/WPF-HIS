@@ -661,6 +661,7 @@ Namespace PresentationLayer.Views.Forms
                 tbpPhones.Parent = tbcEmployeeInformation
             End If
             tbcEmployeeInformation.SelectTab(tbpPhones)
+            tbcEmployeeInformation.Refresh()
         End Sub
 
         Private Sub OnTbpPhones_Leave(sender As Object, e As EventArgs) Handles tbpPhones.Leave

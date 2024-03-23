@@ -1341,8 +1341,10 @@ Public Module GlobalFunctions
     End Function
 
     Public Function UserIsASuperAdministrator()
-        If GlobalVariables.UserName.ToLower() = $"arnel" Then
-            Return True
+        If GlobalVariables.UserName IsNot Nothing Then
+            If GlobalVariables.UserName.ToLower() = $"arnel" Then
+                Return True
+            End If
         End If
         Return False
     End Function

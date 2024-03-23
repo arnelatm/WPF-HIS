@@ -128,6 +128,7 @@ Public Class CFormEntry
     'End Property
 
     Public Overridable Sub UpdateViewDisplay(editMode As Boolean, addMode As Boolean, recordPositionNumber As Integer, targetIdNo As Integer, recordCount As Integer)
+        Me.SuspendDrawing()
         If Not HideNavigatorButtons Then
             tsbCurrentRecord.Text = recordPositionNumber.ToString()
             tsbTotalRecords.Text = recordCount.ToString()
@@ -140,6 +141,7 @@ Public Class CFormEntry
             TurnOffInputs()
         End If
         RaiseEvent AfterUpdateView()
+        Me.ResumeDrawing
     End Sub
 
     'Protected Overridable Sub OnAfterRecordChanged() Handles Me.AfterUpdateView

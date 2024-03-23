@@ -1,4 +1,5 @@
 ﻿' This is the class that represents your cell which can use your ComboBox class
+Imports System.Drawing
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 
@@ -18,32 +19,21 @@ Public Class CtComboBoxCell
         End Get
     End Property
 
+    Public Property PausePaint As Boolean
+
 
     ' You must also override this method to initialize the ComboBox instance...
     ' This method will be called each time a cell in the column enters edit-mode,
     ' so you can fill the ComboBox instance based on the value of the edited cell
     Public Overrides Sub InitializeEditingControl(ByVal pRowIndex As Integer, ByVal pFormattedValue As Object, ByVal cellStyle As DataGridViewCellStyle)
-
-        'Dim lastOpenedForm As Form = Application.OpenForms.Cast(Of Form)
-        'lastOpenedForm.SuspendDrawing()
-        'lastOpenedForm.SuspendLayout()
-        If DataGridView.EditingControl IsNot Nothing Then
-            'SuspendLayout(DataGridView.EditingControl)
-
-            ' Call base...
-            MyBase.InitializeEditingControl(pRowIndex, pFormattedValue, cellStyle)
-            If DataGridView.EditingControl IsNot Nothing Then
-                CellEditingControl = CType(DataGridView.EditingControl, CtComboBoxEditingControl)
-                'CellEditingControl.DropDownStyle = ComboBoxStyle.DropDown
-                'CellEditingControl.AutoCompleteMode = AutoCompleteMode.SuggestAppend
-            End If
-        End If
-        'astOpenedForm.ResumeDrawing()
-        'lastOpenedForm.SuspendLayout()
-
+        DataGridView.SuspendDrawingNew()
+        MyBase.InitializeEditingControl(pRowIndex, pFormattedValue, cellStyle)
+        CellEditingControl = CType(DataGridView.EditingControl, CtComboBoxEditingControl)
+        DataGridView.ResumeDrawingNew()
     End Sub
 
     Public Property CellEditingControl As CtComboBoxEditingControl
+
 
 End Class
 

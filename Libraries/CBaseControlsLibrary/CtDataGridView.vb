@@ -462,8 +462,8 @@ Public Class CtDataGridView
             cb.DropDownStyle = ComboBoxStyle.DropDown
             'set the property of a combobox to autocomplete mode.
             cb.AutoCompleteMode = AutoCompleteMode.SuggestAppend
-            ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-            BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            cb.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+            cb.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             If CurrentCell IsNot Nothing Then
                 cb.SuggestCharCount = DirectCast(CurrentCell.OwningColumn, AATM.Libraries.CBaseControlsLibrary.CtComboBoxColumn).SuggestCharCount
             End If
