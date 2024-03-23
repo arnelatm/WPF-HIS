@@ -1,4 +1,5 @@
 ﻿Imports System.ComponentModel
+Imports System.Drawing
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 
@@ -26,9 +27,7 @@ Public Class CtComboBoxColumn
             If value IsNot Nothing AndAlso dataGridViewComboBoxCell Is Nothing Then
                 Throw New InvalidCastException("Must be a CtComboBoxCell")
             End If
-
             MyBase.CellTemplate = value
-
         End Set
     End Property
 

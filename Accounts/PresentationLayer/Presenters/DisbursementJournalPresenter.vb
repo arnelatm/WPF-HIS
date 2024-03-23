@@ -108,7 +108,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            MakeVarDataSources({New Object() {"Account", "AccountsByCode", Nothing, Nothing},
+            MakeVarDataSources({New Object() {"Account", "AccountsByCode", Nothing, "DetailAccount=1"},
             New Object() {"RevCostCenter", "RevCostCentersByCode", Nothing, Nothing},
             New Object() {"Employee", "EmployeesByName", Nothing, Nothing},
             New Object() {"Customer", "CustomersByName", Nothing, Nothing},

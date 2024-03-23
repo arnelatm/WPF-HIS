@@ -247,24 +247,28 @@ Public Module Extensions
         End If
     End Sub
 
-    ' Extension methods for Control
+    '' Extension methods for Control
     <Extension()>
-    Public Sub ResumeDrawingNew(ByVal Target As Control, ByVal Redraw As Boolean)
-        SendMessage(Target.Handle, WM_SETREDRAW, True, IntPtr.Zero)
-        If Redraw Then
-            Target.Refresh()
+    Public Sub ResumeDrawingNew(ByVal Target As Control)
+        If Target IsNot Nothing Then
+            SendMessage(Target.Handle, WM_SETREDRAW, True, IntPtr.Zero)
         End If
+        'If Redraw Then
+        '    Target.Refresh()
+        'End If
     End Sub
 
     <Extension()>
     Public Sub SuspendDrawingNew(ByVal Target As Control)
-        SendMessage(Target.Handle, WM_SETREDRAW, False, IntPtr.Zero)
+        If Target IsNot Nothing Then
+            SendMessage(Target.Handle, WM_SETREDRAW, False, IntPtr.Zero)
+        End If
     End Sub
 
-    <Extension()>
-    Public Sub ResumeDrawingNew(ByVal Target As Control)
-        ResumeDrawing(Target, True)
-    End Sub
+    '<Extension()>
+    'Public Sub ResumeDrawing(ByVal Target As Control)
+    '    ResumeDrawing(Target, True)
+    'End Sub
 
     <Extension()>
     Public Sub Add(Of T)(ByRef arr As T(), item As T)

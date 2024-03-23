@@ -42,6 +42,7 @@ Public Class CtComboBoxEditingControl
 
 
 
+
     '
     ' Summary:
     '     Gets or sets the index of the owning cell's parent row.
@@ -219,6 +220,8 @@ Public Class CtComboBoxEditingControl
         If selectAll Then
             MyBase.SelectAll()
         End If
+        BackColor = GlobalVariables.DefaultFormBackgroundColor
+        ForeColor = GlobalVariables.DefaultFormForegroundColor
     End Sub
 
     Private Sub NotifyDataGridViewOfValueChange()
@@ -236,9 +239,5 @@ Public Class CtComboBoxEditingControl
             NotifyDataGridViewOfValueChange()
         End If
     End Sub
-
-    Public Function GetValue()
-        Return SelectedValue
-    End Function
 
 End Class
