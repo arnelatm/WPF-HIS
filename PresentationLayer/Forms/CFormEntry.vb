@@ -77,7 +77,7 @@ Public Class CFormEntry
     Protected Property FormTitleCaption As String = ""
 
     Private Sub OnCFormEntryNewShown() Handles MyBase.Shown
-        Parent.SuspendDrawing()
+        SuspendDrawing()
         If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
             If btnArabic.Enabled Then
                 'btnArabic.PerformClick()
@@ -102,7 +102,7 @@ Public Class CFormEntry
         FormShown = True
         PublishClickedButton(ButtonClicked.Last)
         SetFormTitleCaption()
-        Parent.ResumeDrawing()
+        ResumeDrawing()
     End Sub
 
     'Public Property RecordCount As Integer Implements IViewDataEntry.RecordCount
