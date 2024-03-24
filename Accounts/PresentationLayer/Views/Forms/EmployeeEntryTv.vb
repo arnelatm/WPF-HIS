@@ -2,6 +2,7 @@
 Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Common.BusinessLayer
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
@@ -115,10 +116,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DesignationIdNo As Int16? Implements IEmployeeView.DesignationIdNo
             Get
-                Return cacDesignationIdNo.GetValue(Of Int16)
+                Return cboDesignationIdNo.GetValue(Of Int16)
             End Get
             Set
-                cacDesignationIdNo.SetValue(Value)
+                cboDesignationIdNo.SetValue(Value)
             End Set
         End Property
 
@@ -482,14 +483,14 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub BindEmployeeDeduction()
             bsDeductions.DataSource = Nothing
-            DataGridViewDeductions.Refresh()
+            'DataGridViewDeductions.Refresh()
             bsDeductions.DataSource = RegularEmployeeDeductions
             bsDeductions.AllowNew = True
             With DataGridViewDeductions
-                .Refresh()
+                '.Refresh()
                 .AutoGenerateColumns = False
                 .DataSource = bsDeductions
-                .Refresh()
+                '.Refresh()
             End With
             With DataGridViewDeductions.Columns
                 dgvDeductionIdNo.DataSource = DeductionsByName
@@ -508,14 +509,14 @@ Namespace PresentationLayer.Views.Forms
         Private Sub BindEmployeeEarning()
             'SuspendLayout()
             bsEarnings.DataSource = Nothing
-            DataGridViewEarnings.Refresh()
+            'DataGridViewEarnings.Refresh()
             bsEarnings.DataSource = RegularEmployeeEarnings
             bsEarnings.AllowNew = True
             With DataGridViewEarnings
-                .Refresh()
+                '.Refresh()
                 .AutoGenerateColumns = False
                 .DataSource = bsEarnings
-                .Refresh()
+                '.Refresh()
             End With
             With DataGridViewEarnings.Columns
                 dgvEarningIdNo.DataSource = EarningsByName
@@ -535,14 +536,14 @@ Namespace PresentationLayer.Views.Forms
         Private Sub BindEmployeePhone()
             'SuspendLayout()
             bsPhones.DataSource = Nothing
-            DataGridViewPhones.Refresh()
+            'DataGridViewPhones.Refresh()
             bsPhones.DataSource = EmployeePhones
             bsPhones.AllowNew = True
             With DataGridViewPhones
-                .Refresh()
+                '.Refresh()
                 .AutoGenerateColumns = False
                 .DataSource = bsPhones
-                .Refresh()
+                '.Refresh()
             End With
             With DataGridViewPhones.Columns
                 dgvPhoneTypeIdNo.DisplayStyleForCurrentCellOnly = True
@@ -568,14 +569,14 @@ Namespace PresentationLayer.Views.Forms
         Private Sub BindEmployeeDocument()
             'SuspendLayout()
             bsDocuments.DataSource = Nothing
-            DataGridViewDocuments.Refresh()
+            'DataGridViewDocuments.Refresh()
             bsDocuments.DataSource = EmployeeDocuments
             bsDocuments.AllowNew = True
             With DataGridViewDocuments
-                .Refresh()
+                '.Refresh()
                 .AutoGenerateColumns = False
                 .DataSource = bsDocuments
-                .Refresh()
+                '.Refresh()
             End With
             With DataGridViewDocuments.Columns
                 dgvDocumentIdNo.DisplayStyleForCurrentCellOnly = True
@@ -589,7 +590,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub BindEmployeeLeaveCredits()
             bsLeaveCredits.DataSource = Nothing
-            DataGridViewLeaveCredits.Refresh()
+            'DataGridViewLeaveCredits.Refresh()
             bsLeaveCredits.DataSource = EmployeeLeaveCredits
             bsLeaveCredits.AllowNew = True
             With DataGridViewLeaveCredits
@@ -618,7 +619,7 @@ Namespace PresentationLayer.Views.Forms
          {"BloodType", cboBloodType},
          {"CountryCode", cacCountryCode},
          {"DepartmentIdNo", cacDepartmentIdNo},
-         {"DesignationIdNo", cacDesignationIdNo},
+         {"DesignationIdNo", cboDesignationIdNo},
          {"District", txtDistrict},
          {"DutyHours", txtDutyHours},
          {"Email", txtEmail},
@@ -817,15 +818,16 @@ Namespace PresentationLayer.Views.Forms
             Try
                 bsDeductions.ResetBindings(False)
                 bsEarnings.ResetBindings(False)
-                DataGridViewPhones.Refresh()
                 'bsPhones.ResetBindings(False)
                 bsDocuments.ResetBindings(False)
                 bsLeaveCredits.ResetBindings(False)
+                DataGridViewPhones.Refresh()
             Catch ex As Exception
 
             End Try
 
         End Sub
+
 
     End Class
 

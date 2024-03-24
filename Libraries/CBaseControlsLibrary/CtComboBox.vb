@@ -67,7 +67,7 @@ Public Class CtComboBox
     <Category("Custom Properties")>
     <DefaultValue(False)>
     <Description("Set to True to specify that this control value is hidden (used for secured controls)")>
-    Public Property Hidden As Boolean
+    Public Property Hidden As Boolean = False
 
     Public Property EditingMode As Boolean Implements IEntryControl.EditingMode
         Get
@@ -98,6 +98,13 @@ Public Class CtComboBox
             IntegralHeight = True
             ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
             BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            'Else
+            '    DropDownStyle = ComboBoxStyle.Simple
+            '    DropDownHeight = Height
+            '    MaxDropDownItems = 1
+            '    IntegralHeight = True
+            '    ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+            '    BackColor = GlobalVariables.DefaultFormControlBackgroundColor
         End If
 
     End Sub
@@ -211,7 +218,7 @@ Public Class CtComboBox
     Public Property LimitToList As Boolean = False
 
     Public Sub OnKeyDownPressed(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
-        If DisplayOnly Then
+        If DisplayOnly Or Not EditingMode Then
             e.SuppressKeyPress = True
         Else
             If e.KeyCode = Keys.Enter Then
@@ -256,8 +263,8 @@ Public Class CtComboBox
                 ForeColor = GlobalVariables.DefaultFormControlEditingForegroundColor
                 BackColor = GlobalVariables.DefaultFormControlEditingBackgroundColor
             Else
-                ForeColor = GlobalVariables.DefaultFormForegroundColor
-                BackColor = GlobalVariables.DefaultFormBackgroundColor
+                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             End If
         End If
     End Sub
@@ -270,9 +277,12 @@ Public Class CtComboBox
             If DisplayOnly Or (Not Editable) Or (Not EditingMode) Then
                 ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                 BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-            Else
+            ElseIf EditingMode Then
                 ForeColor = GlobalVariables.DefaultFormControlForegroundColor
                 BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+            Else
+                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             End If
         End If
         If SelectedIndex < 0 Then
@@ -359,9 +369,12 @@ Public Class CtComboBox
             If Hidden Then
                 ForeColor = Color.Black
                 BackColor = Color.Black
-            Else
+            ElseIf DisplayOnly Then
                 ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                 BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            Else
+                ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlBackgroundColor
             End If
             DropDownHeight = Height
         Else
@@ -370,6 +383,9 @@ Public Class CtComboBox
             If Hidden Then
                 ForeColor = Color.Black
                 BackColor = Color.Black
+            ElseIf DisplayOnly Then
+                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             Else
                 ForeColor = GlobalVariables.DefaultFormControlForegroundColor
                 BackColor = GlobalVariables.DefaultFormControlBackgroundColor
@@ -484,6 +500,7 @@ Public Class CtComboBox
         SetStyle(ControlStyles.EnableNotifyMessage, True)
         SuggestListForm.SuggestListBox.DataSource = _suggestBindingList
         SuggestListForm.SuggestListBox.ForeColor = Color.Green
+        SuggestListForm.SuggestListBox.BackColor = Color.White
         EditingMode = False
         AddHandler SuggestListForm.SuggestListBox.Click, AddressOf SuggestListBoxOnClick
         AddHandler ParentChanged, AddressOf OnParentChanged
@@ -903,6 +920,7 @@ Public Class CtComboBox
         End If
         Return description
     End Function
+
 
 End Class
 
