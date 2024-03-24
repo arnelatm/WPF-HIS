@@ -254,7 +254,7 @@ Public Module Extensions
             SendMessage(Target.Handle, WM_SETREDRAW, True, IntPtr.Zero)
         End If
         'If Redraw Then
-        '    Target.Refresh()
+        Target.Refresh()
         'End If
     End Sub
 

@@ -925,7 +925,12 @@ Namespace PresentationLayer.Views.Forms
             Dim formToRun = Activator.CreateInstance(GetType(TV))
             Dim pType As Type = GetType(TP)
             formToRun.Presenter = Activator.CreateInstance(pType, {formToRun})
+            Dim form As Form = formToRun
+            'form.SuspendLayout()
+            'form.SuspendDrawingNew()
             Invoker.InvokeFunction(formToRun, "Show")
+            'form.ResumeDrawingNew()
+            'form.ResumeLayout()
         End Sub
 
         Private Overloads Sub RunForm(Of TV, TP, TX)(param As TX)

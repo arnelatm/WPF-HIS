@@ -77,7 +77,7 @@ Public Class CFormEntry
     Protected Property FormTitleCaption As String = ""
 
     Private Sub OnCFormEntryNewShown() Handles MyBase.Shown
-        SuspendDrawing()
+        'SuspendDrawing()
         If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
             If btnArabic.Enabled Then
                 'btnArabic.PerformClick()
@@ -102,7 +102,7 @@ Public Class CFormEntry
         FormShown = True
         PublishClickedButton(ButtonClicked.Last)
         SetFormTitleCaption()
-        ResumeDrawing()
+        'ResumeDrawing()
     End Sub
 
     'Public Property RecordCount As Integer Implements IViewDataEntry.RecordCount
@@ -128,7 +128,7 @@ Public Class CFormEntry
     'End Property
 
     Public Overridable Sub UpdateViewDisplay(editMode As Boolean, addMode As Boolean, recordPositionNumber As Integer, targetIdNo As Integer, recordCount As Integer)
-        Me.SuspendDrawing()
+        'Me.SuspendDrawingNew()
         If Not HideNavigatorButtons Then
             tsbCurrentRecord.Text = recordPositionNumber.ToString()
             tsbTotalRecords.Text = recordCount.ToString()
@@ -141,7 +141,7 @@ Public Class CFormEntry
             TurnOffInputs()
         End If
         RaiseEvent AfterUpdateView()
-        Me.ResumeDrawing
+        'Me.ResumeDrawingNew
     End Sub
 
     'Protected Overridable Sub OnAfterRecordChanged() Handles Me.AfterUpdateView
@@ -481,11 +481,13 @@ Public Class CFormEntry
     End Sub
 
     Protected Overridable Sub PublishClickedButton(buttonClicked As ButtonClicked)
+        Me.SuspendDrawingNew()
         'RaiseEvent BeforeChangeRecord()
         If Ea IsNot Nothing Then
             Ea.PublishEvent(New ViewButtonClicked(buttonClicked))
         End If
         'RaiseEvent AfterChangeRecord()
+        Me.ResumeDrawingNew()
     End Sub
 
     Protected Overridable Sub GridValidator()
@@ -617,7 +619,7 @@ Public Class CFormEntry
             'CenterForm(Me)
             'UpdateViewDisplay(editMode, addMode:=, recordPositionNumber:=, targetIdNo, recordCount)
         End If
-        Refresh()
+        'Refresh()
     End Sub
 
     Public Shared Sub CenterForm(ByVal frm As Form, Optional ByVal parent As Form = Nothing)
@@ -700,10 +702,11 @@ Public Class CFormEntry
     End Sub
 
     Protected Overrides Sub SwitchUiLanguage(originalUi As Boolean)
+        'Me.SuspendDrawingNew()
         If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
             'SuspendLayout()
             'SuspendDrawing()
-            Visible = False
+            'Visible = False
             Dim sw As Integer = 0
             If originalUi Then
                 If TextDisplayLanguage <> GlobalVariables.DefaultUnmirroredCultureInfoStr Then
@@ -737,10 +740,11 @@ Public Class CFormEntry
                     Ea.PublishEvent(New LanguageChanged(Me))
                 End If
             End If
-            Visible = True
+            'Visible = True
         End If
         'ResumeDrawing()
         'ResumeLayout()
+        'Me.ResumeDrawingNew()
     End Sub
 
     'Private Sub tsbCurrentRecord_VisibleChanged(sender As Object, e As EventArgs) Handles tsbCurrentRecord.VisibleChanged
