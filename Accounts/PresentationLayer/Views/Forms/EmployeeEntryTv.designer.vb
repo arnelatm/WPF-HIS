@@ -126,7 +126,6 @@
             Me.lblZipCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtPoBox = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblPoBox = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacCountryCode = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.lblCountryCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtProvinceState = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblProvinceState = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -140,6 +139,7 @@
             Me.lblEmail = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblStreet = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cacCountryCode = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.tbpPayroll = New AATM.Libraries.CBaseControlsLibrary.CTabPage()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
@@ -226,18 +226,18 @@
             Me.chkSupervisor = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.CLabel5 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkActive = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
-            Me.cboSupervisorIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.lblSupervisorIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboSponsorType = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.lblSponsorType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacDesignationIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacDepartmentIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.lblDepartmentIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpReleasedDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.lblReleasedDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpHiredDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.lblHiredDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboDesignationIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboSponsorType = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboSupervisorIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cacDepartmentIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
             Me.SplitContainer1.Panel2.SuspendLayout()
@@ -464,8 +464,10 @@
             Me.cboTitle.DataValue = Nothing
             Me.cboTitle.DefaultValue = Nothing
             Me.cboTitle.DisplayMember = "Name"
+            Me.cboTitle.DropDownHeight = 24
+            Me.cboTitle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboTitle.Editable = True
-            Me.cboTitle.EditingMode = True
+            Me.cboTitle.EditingMode = False
             Me.cboTitle.EndFindValue = Nothing
             Me.cboTitle.FieldDescription = Nothing
             Me.cboTitle.FieldName = Nothing
@@ -477,11 +479,11 @@
             Me.cboTitle.FormattingEnabled = True
             Me.cboTitle.HideWhenNotEditingOrAdding = False
             Me.cboTitle.IgnoreCase = False
-            Me.cboTitle.IntegralHeight = False
             Me.cboTitle.LimitToList = False
             Me.cboTitle.LinkedLabel = Nothing
             Me.cboTitle.Location = New System.Drawing.Point(246, 31)
             Me.cboTitle.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
+            Me.cboTitle.MaxDropDownItems = 1
             Me.cboTitle.Name = "cboTitle"
             Me.cboTitle.OldValue = 0
             Me.cboTitle.OriginalDataSource = Nothing
@@ -648,7 +650,7 @@
             Me.floPersonal.Margin = New System.Windows.Forms.Padding(0)
             Me.floPersonal.MinimumSize = New System.Drawing.Size(573, 222)
             Me.floPersonal.Name = "floPersonal"
-            Me.floPersonal.Size = New System.Drawing.Size(834, 402)
+            Me.floPersonal.Size = New System.Drawing.Size(834, 400)
             Me.floPersonal.TabIndex = 4
             '
             'lblPicture
@@ -741,7 +743,7 @@
             Me.cacGender.SuggestBoxHeight = 200
             Me.cacGender.SuggestCharCount = 0
             Me.cacGender.SuggestListOrderRule = Nothing
-            Me.cacGender.TabIndex = 1
+            Me.cacGender.TabIndex = 0
             Me.cacGender.TextToSearch = Nothing
             Me.cacGender.Translatable = False
             Me.cacGender.ValueIsMandatory = False
@@ -803,11 +805,11 @@
             Me.cacMaritalStatus.OverrideDropDownStyleList = False
             Me.cacMaritalStatus.PreviousSearchTerm = Nothing
             Me.cacMaritalStatus.PropertySelector = Nothing
-            Me.cacMaritalStatus.Size = New System.Drawing.Size(369, 29)
+            Me.cacMaritalStatus.Size = New System.Drawing.Size(369, 28)
             Me.cacMaritalStatus.SuggestBoxHeight = 200
             Me.cacMaritalStatus.SuggestCharCount = 0
             Me.cacMaritalStatus.SuggestListOrderRule = Nothing
-            Me.cacMaritalStatus.TabIndex = 2
+            Me.cacMaritalStatus.TabIndex = 1
             Me.cacMaritalStatus.TextToSearch = Nothing
             Me.cacMaritalStatus.Translatable = False
             Me.cacMaritalStatus.ValueIsMandatory = False
@@ -822,7 +824,7 @@
             Me.lblNationalityCode.EditingMode = False
             Me.lblNationalityCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblNationalityCode.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblNationalityCode.Location = New System.Drawing.Point(1, 173)
+            Me.lblNationalityCode.Location = New System.Drawing.Point(1, 172)
             Me.lblNationalityCode.Margin = New System.Windows.Forms.Padding(1)
             Me.lblNationalityCode.Name = "lblNationalityCode"
             Me.lblNationalityCode.Size = New System.Drawing.Size(232, 30)
@@ -840,8 +842,10 @@
             Me.cacNationalityCode.DataValue = Nothing
             Me.cacNationalityCode.DefaultValue = Nothing
             Me.cacNationalityCode.DisplayMember = "Name"
+            Me.cacNationalityCode.DropDownHeight = 24
+            Me.cacNationalityCode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cacNationalityCode.Editable = True
-            Me.cacNationalityCode.EditingMode = True
+            Me.cacNationalityCode.EditingMode = False
             Me.cacNationalityCode.EndFindValue = Nothing
             Me.cacNationalityCode.FieldDescription = Nothing
             Me.cacNationalityCode.FieldName = Nothing
@@ -856,9 +860,10 @@
             Me.cacNationalityCode.IgnoreCase = False
             Me.cacNationalityCode.IntegralHeight = False
             Me.cacNationalityCode.LimitToList = False
-            Me.cacNationalityCode.LinkedLabel = Me.lblNationalityCode
-            Me.cacNationalityCode.Location = New System.Drawing.Point(234, 173)
-            Me.cacNationalityCode.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
+            Me.cacNationalityCode.LinkedLabel = Nothing
+            Me.cacNationalityCode.Location = New System.Drawing.Point(235, 172)
+            Me.cacNationalityCode.Margin = New System.Windows.Forms.Padding(1)
+            Me.cacNationalityCode.MaxDropDownItems = 1
             Me.cacNationalityCode.Name = "cacNationalityCode"
             Me.cacNationalityCode.OldValue = 0
             Me.cacNationalityCode.OriginalDataSource = Nothing
@@ -866,17 +871,17 @@
             Me.cacNationalityCode.OverrideDropDownStyleList = False
             Me.cacNationalityCode.PreviousSearchTerm = Nothing
             Me.cacNationalityCode.PropertySelector = Nothing
-            Me.cacNationalityCode.Size = New System.Drawing.Size(369, 28)
-            Me.cacNationalityCode.SuggestBoxHeight = 200
+            Me.cacNationalityCode.Size = New System.Drawing.Size(368, 28)
+            Me.cacNationalityCode.SuggestBoxHeight = 246
             Me.cacNationalityCode.SuggestCharCount = 0
             Me.cacNationalityCode.SuggestListOrderRule = Nothing
-            Me.cacNationalityCode.TabIndex = 4
+            Me.cacNationalityCode.TabIndex = 2
             Me.cacNationalityCode.TextToSearch = Nothing
             Me.cacNationalityCode.Translatable = False
             Me.cacNationalityCode.ValueIsMandatory = False
             Me.cacNationalityCode.ValueIsNullable = False
             Me.cacNationalityCode.ValueIsNumeric = False
-            Me.cacNationalityCode.ValueMember = "Code"
+            Me.cacNationalityCode.ValueMember = "IdNo"
             '
             'lblReligion
             '
@@ -885,7 +890,7 @@
             Me.lblReligion.EditingMode = False
             Me.lblReligion.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblReligion.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblReligion.Location = New System.Drawing.Point(1, 205)
+            Me.lblReligion.Location = New System.Drawing.Point(1, 204)
             Me.lblReligion.Margin = New System.Windows.Forms.Padding(1)
             Me.lblReligion.Name = "lblReligion"
             Me.lblReligion.Size = New System.Drawing.Size(233, 30)
@@ -903,8 +908,10 @@
             Me.cacReligionIdNo.DataValue = Nothing
             Me.cacReligionIdNo.DefaultValue = Nothing
             Me.cacReligionIdNo.DisplayMember = "Name"
+            Me.cacReligionIdNo.DropDownHeight = 24
+            Me.cacReligionIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cacReligionIdNo.Editable = True
-            Me.cacReligionIdNo.EditingMode = True
+            Me.cacReligionIdNo.EditingMode = False
             Me.cacReligionIdNo.EndFindValue = Nothing
             Me.cacReligionIdNo.FieldDescription = Nothing
             Me.cacReligionIdNo.FieldName = Nothing
@@ -919,9 +926,10 @@
             Me.cacReligionIdNo.IgnoreCase = False
             Me.cacReligionIdNo.IntegralHeight = False
             Me.cacReligionIdNo.LimitToList = False
-            Me.cacReligionIdNo.LinkedLabel = Me.lblNationalityCode
-            Me.cacReligionIdNo.Location = New System.Drawing.Point(235, 205)
-            Me.cacReligionIdNo.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
+            Me.cacReligionIdNo.LinkedLabel = Nothing
+            Me.cacReligionIdNo.Location = New System.Drawing.Point(236, 204)
+            Me.cacReligionIdNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.cacReligionIdNo.MaxDropDownItems = 1
             Me.cacReligionIdNo.Name = "cacReligionIdNo"
             Me.cacReligionIdNo.OldValue = 0
             Me.cacReligionIdNo.OriginalDataSource = Nothing
@@ -929,11 +937,11 @@
             Me.cacReligionIdNo.OverrideDropDownStyleList = False
             Me.cacReligionIdNo.PreviousSearchTerm = Nothing
             Me.cacReligionIdNo.PropertySelector = Nothing
-            Me.cacReligionIdNo.Size = New System.Drawing.Size(369, 28)
-            Me.cacReligionIdNo.SuggestBoxHeight = 200
+            Me.cacReligionIdNo.Size = New System.Drawing.Size(368, 28)
+            Me.cacReligionIdNo.SuggestBoxHeight = 246
             Me.cacReligionIdNo.SuggestCharCount = 0
             Me.cacReligionIdNo.SuggestListOrderRule = Nothing
-            Me.cacReligionIdNo.TabIndex = 5
+            Me.cacReligionIdNo.TabIndex = 3
             Me.cacReligionIdNo.TextToSearch = Nothing
             Me.cacReligionIdNo.Translatable = False
             Me.cacReligionIdNo.ValueIsMandatory = False
@@ -948,7 +956,7 @@
             Me.lblBirthDate.EditingMode = False
             Me.lblBirthDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblBirthDate.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblBirthDate.Location = New System.Drawing.Point(1, 237)
+            Me.lblBirthDate.Location = New System.Drawing.Point(1, 236)
             Me.lblBirthDate.Margin = New System.Windows.Forms.Padding(1)
             Me.lblBirthDate.Name = "lblBirthDate"
             Me.lblBirthDate.Size = New System.Drawing.Size(232, 28)
@@ -972,7 +980,7 @@
             Me.dtpBirthDate.Font = New System.Drawing.Font("Tahoma", 9.75!)
             Me.dtpBirthDate.ForeColor = System.Drawing.Color.Black
             Me.dtpBirthDate.LinkedLabel = Nothing
-            Me.dtpBirthDate.Location = New System.Drawing.Point(234, 236)
+            Me.dtpBirthDate.Location = New System.Drawing.Point(234, 235)
             Me.dtpBirthDate.Margin = New System.Windows.Forms.Padding(0)
             Me.dtpBirthDate.Name = "dtpBirthDate"
             Me.dtpBirthDate.ReadOnlyDp = False
@@ -980,7 +988,7 @@
             Me.dtpBirthDate.ShowLongDate = False
             Me.dtpBirthDate.ShowTime = False
             Me.dtpBirthDate.Size = New System.Drawing.Size(124, 27)
-            Me.dtpBirthDate.TabIndex = 5
+            Me.dtpBirthDate.TabIndex = 4
             Me.dtpBirthDate.TargetCalendar = CType(resources.GetObject("dtpBirthDate.TargetCalendar"), System.Globalization.Calendar)
             Me.dtpBirthDate.Translatable = False
             Me.dtpBirthDate.Value = Nothing
@@ -994,7 +1002,7 @@
             Me.lblNationalIdNo.EditingMode = False
             Me.lblNationalIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblNationalIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblNationalIdNo.Location = New System.Drawing.Point(1, 267)
+            Me.lblNationalIdNo.Location = New System.Drawing.Point(1, 266)
             Me.lblNationalIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.lblNationalIdNo.Name = "lblNationalIdNo"
             Me.lblNationalIdNo.Size = New System.Drawing.Size(232, 28)
@@ -1021,7 +1029,7 @@
             Me.txtNationalIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtNationalIdNo.ForeColor = System.Drawing.Color.Black
             Me.txtNationalIdNo.LinkedLabel = Me.lblNationalIdNo
-            Me.txtNationalIdNo.Location = New System.Drawing.Point(235, 267)
+            Me.txtNationalIdNo.Location = New System.Drawing.Point(235, 266)
             Me.txtNationalIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.txtNationalIdNo.MaximumValue = Nothing
             Me.txtNationalIdNo.MinimumValue = Nothing
@@ -1030,7 +1038,7 @@
             Me.txtNationalIdNo.OverrideMaxLength = 0
             Me.txtNationalIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtNationalIdNo.Size = New System.Drawing.Size(266, 26)
-            Me.txtNationalIdNo.TabIndex = 6
+            Me.txtNationalIdNo.TabIndex = 5
             Me.txtNationalIdNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             Me.txtNationalIdNo.Translatable = False
             Me.txtNationalIdNo.ValueIsNumeric = True
@@ -1043,7 +1051,7 @@
             Me.CLabel4.EditingMode = False
             Me.CLabel4.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.CLabel4.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.CLabel4.Location = New System.Drawing.Point(1, 297)
+            Me.CLabel4.Location = New System.Drawing.Point(1, 296)
             Me.CLabel4.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel4.Name = "CLabel4"
             Me.CLabel4.Size = New System.Drawing.Size(232, 28)
@@ -1080,7 +1088,7 @@
             Me.cboBloodType.IntegralHeight = False
             Me.cboBloodType.LimitToList = False
             Me.cboBloodType.LinkedLabel = Me.lblMaritalStatus
-            Me.cboBloodType.Location = New System.Drawing.Point(234, 297)
+            Me.cboBloodType.Location = New System.Drawing.Point(234, 296)
             Me.cboBloodType.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
             Me.cboBloodType.MaxDropDownItems = 1
             Me.cboBloodType.Name = "cboBloodType"
@@ -1090,11 +1098,11 @@
             Me.cboBloodType.OverrideDropDownStyleList = False
             Me.cboBloodType.PreviousSearchTerm = Nothing
             Me.cboBloodType.PropertySelector = Nothing
-            Me.cboBloodType.Size = New System.Drawing.Size(369, 29)
+            Me.cboBloodType.Size = New System.Drawing.Size(369, 28)
             Me.cboBloodType.SuggestBoxHeight = 200
             Me.cboBloodType.SuggestCharCount = 0
             Me.cboBloodType.SuggestListOrderRule = Nothing
-            Me.cboBloodType.TabIndex = 275
+            Me.cboBloodType.TabIndex = 6
             Me.cboBloodType.TextToSearch = Nothing
             Me.cboBloodType.Translatable = False
             Me.cboBloodType.ValueIsMandatory = False
@@ -1109,7 +1117,7 @@
             Me.lblNotes.EditingMode = False
             Me.lblNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblNotes.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblNotes.Location = New System.Drawing.Point(1, 328)
+            Me.lblNotes.Location = New System.Drawing.Point(1, 326)
             Me.lblNotes.Margin = New System.Windows.Forms.Padding(1)
             Me.lblNotes.Name = "lblNotes"
             Me.lblNotes.Size = New System.Drawing.Size(232, 28)
@@ -1136,7 +1144,7 @@
             Me.txtNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtNotes.ForeColor = System.Drawing.Color.Black
             Me.txtNotes.LinkedLabel = Me.lblNotes
-            Me.txtNotes.Location = New System.Drawing.Point(235, 328)
+            Me.txtNotes.Location = New System.Drawing.Point(235, 326)
             Me.txtNotes.Margin = New System.Windows.Forms.Padding(1)
             Me.txtNotes.MaximumValue = Nothing
             Me.txtNotes.MinimumValue = Nothing
@@ -1188,7 +1196,6 @@
             Me.TableLayoutPanel1.Controls.Add(Me.lblZipCode, 2, 5)
             Me.TableLayoutPanel1.Controls.Add(Me.txtPoBox, 1, 5)
             Me.TableLayoutPanel1.Controls.Add(Me.lblPoBox, 0, 5)
-            Me.TableLayoutPanel1.Controls.Add(Me.cacCountryCode, 3, 4)
             Me.TableLayoutPanel1.Controls.Add(Me.lblCountryCode, 2, 4)
             Me.TableLayoutPanel1.Controls.Add(Me.txtProvinceState, 1, 4)
             Me.TableLayoutPanel1.Controls.Add(Me.lblProvinceState, 0, 4)
@@ -1202,6 +1209,7 @@
             Me.TableLayoutPanel1.Controls.Add(Me.lblEmail, 0, 0)
             Me.TableLayoutPanel1.Controls.Add(Me.lblStreet, 0, 2)
             Me.TableLayoutPanel1.Controls.Add(Me.CLabel3, 0, 6)
+            Me.TableLayoutPanel1.Controls.Add(Me.cacCountryCode, 3, 4)
             Me.TableLayoutPanel1.Location = New System.Drawing.Point(4, 4)
             Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4)
             Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
@@ -1274,7 +1282,7 @@
             Me.DataGridViewPhoneDisplay.SequenceFieldName = "Sequence"
             Me.DataGridViewPhoneDisplay.ShowFooter = False
             Me.DataGridViewPhoneDisplay.Size = New System.Drawing.Size(484, 172)
-            Me.DataGridViewPhoneDisplay.TabIndex = 291
+            Me.DataGridViewPhoneDisplay.TabIndex = 8
             Me.DataGridViewPhoneDisplay.Translatable = True
             '
             'dgvSequencePhoneDisplay
@@ -1487,8 +1495,8 @@
             Me.txtZipCode.OverrideMaxLength = 0
             Me.txtZipCode.ReadOnly = True
             Me.txtZipCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtZipCode.Size = New System.Drawing.Size(257, 26)
-            Me.txtZipCode.TabIndex = 290
+            Me.txtZipCode.Size = New System.Drawing.Size(317, 26)
+            Me.txtZipCode.TabIndex = 7
             Me.txtZipCode.Translatable = False
             '
             'lblZipCode
@@ -1534,7 +1542,7 @@
             Me.txtPoBox.ReadOnly = True
             Me.txtPoBox.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtPoBox.Size = New System.Drawing.Size(247, 26)
-            Me.txtPoBox.TabIndex = 288
+            Me.txtPoBox.TabIndex = 6
             Me.txtPoBox.Translatable = False
             '
             'lblPoBox
@@ -1552,52 +1560,6 @@
             Me.lblPoBox.Text = "P.O. Box No."
             Me.lblPoBox.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             Me.lblPoBox.Translatable = True
-            '
-            'cacCountryCode
-            '
-            Me.cacCountryCode.BackColor = System.Drawing.Color.White
-            Me.cacCountryCode.BegFindValue = Nothing
-            Me.cacCountryCode.ChangingSearchValueOnly = False
-            Me.cacCountryCode.CurrentSearchTerm = ""
-            Me.cacCountryCode.DataValue = Nothing
-            Me.cacCountryCode.DefaultValue = Nothing
-            Me.cacCountryCode.DisplayMember = "Name"
-            Me.cacCountryCode.Editable = True
-            Me.cacCountryCode.EditingMode = True
-            Me.cacCountryCode.EndFindValue = Nothing
-            Me.cacCountryCode.FieldDescription = Nothing
-            Me.cacCountryCode.FieldName = Nothing
-            Me.cacCountryCode.FilterRule = Nothing
-            Me.cacCountryCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.cacCountryCode.FindEnabled = False
-            Me.cacCountryCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.cacCountryCode.ForeColor = System.Drawing.Color.Black
-            Me.cacCountryCode.FormattingEnabled = True
-            Me.cacCountryCode.HideWhenNotEditingOrAdding = False
-            Me.cacCountryCode.IgnoreCase = False
-            Me.cacCountryCode.IntegralHeight = False
-            Me.cacCountryCode.LimitToList = False
-            Me.cacCountryCode.LinkedLabel = Nothing
-            Me.cacCountryCode.Location = New System.Drawing.Point(531, 117)
-            Me.cacCountryCode.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
-            Me.cacCountryCode.Name = "cacCountryCode"
-            Me.cacCountryCode.OldValue = 0
-            Me.cacCountryCode.OriginalDataSource = Nothing
-            Me.cacCountryCode.OriginalList = Nothing
-            Me.cacCountryCode.OverrideDropDownStyleList = False
-            Me.cacCountryCode.PreviousSearchTerm = Nothing
-            Me.cacCountryCode.PropertySelector = Nothing
-            Me.cacCountryCode.Size = New System.Drawing.Size(259, 28)
-            Me.cacCountryCode.SuggestBoxHeight = 200
-            Me.cacCountryCode.SuggestCharCount = 0
-            Me.cacCountryCode.SuggestListOrderRule = Nothing
-            Me.cacCountryCode.TabIndex = 286
-            Me.cacCountryCode.TextToSearch = Nothing
-            Me.cacCountryCode.Translatable = False
-            Me.cacCountryCode.ValueIsMandatory = False
-            Me.cacCountryCode.ValueIsNullable = False
-            Me.cacCountryCode.ValueIsNumeric = False
-            Me.cacCountryCode.ValueMember = "Code"
             '
             'lblCountryCode
             '
@@ -1642,7 +1604,7 @@
             Me.txtProvinceState.ReadOnly = True
             Me.txtProvinceState.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtProvinceState.Size = New System.Drawing.Size(247, 26)
-            Me.txtProvinceState.TabIndex = 284
+            Me.txtProvinceState.TabIndex = 4
             Me.txtProvinceState.Translatable = False
             '
             'lblProvinceState
@@ -1687,8 +1649,8 @@
             Me.txtTownCity.OverrideMaxLength = 0
             Me.txtTownCity.ReadOnly = True
             Me.txtTownCity.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtTownCity.Size = New System.Drawing.Size(257, 26)
-            Me.txtTownCity.TabIndex = 282
+            Me.txtTownCity.Size = New System.Drawing.Size(319, 26)
+            Me.txtTownCity.TabIndex = 3
             Me.txtTownCity.Translatable = False
             '
             'lblTownCity
@@ -1734,7 +1696,7 @@
             Me.txtDistrict.ReadOnly = True
             Me.txtDistrict.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtDistrict.Size = New System.Drawing.Size(247, 26)
-            Me.txtDistrict.TabIndex = 280
+            Me.txtDistrict.TabIndex = 2
             Me.txtDistrict.Translatable = False
             '
             'lblDistrict
@@ -1781,7 +1743,7 @@
             Me.txtStreet.ReadOnly = True
             Me.txtStreet.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtStreet.Size = New System.Drawing.Size(679, 26)
-            Me.txtStreet.TabIndex = 278
+            Me.txtStreet.TabIndex = 1
             Me.txtStreet.Translatable = False
             '
             'txtEmail
@@ -1812,7 +1774,7 @@
             Me.txtEmail.ReadOnly = True
             Me.txtEmail.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtEmail.Size = New System.Drawing.Size(679, 26)
-            Me.txtEmail.TabIndex = 274
+            Me.txtEmail.TabIndex = 0
             Me.txtEmail.Translatable = False
             '
             'CLabel1
@@ -1827,7 +1789,7 @@
             Me.CLabel1.Location = New System.Drawing.Point(1, 31)
             Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel1.Name = "CLabel1"
-            Me.CLabel1.Size = New System.Drawing.Size(849, 28)
+            Me.CLabel1.Size = New System.Drawing.Size(850, 28)
             Me.CLabel1.TabIndex = 213
             Me.CLabel1.Text = "Home Address"
             Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -1880,6 +1842,54 @@
             Me.CLabel3.Text = "Phones:"
             Me.CLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             Me.CLabel3.Translatable = True
+            '
+            'cacCountryCode
+            '
+            Me.cacCountryCode.BackColor = System.Drawing.Color.White
+            Me.cacCountryCode.BegFindValue = Nothing
+            Me.cacCountryCode.ChangingSearchValueOnly = False
+            Me.cacCountryCode.CurrentSearchTerm = ""
+            Me.cacCountryCode.DataValue = Nothing
+            Me.cacCountryCode.DefaultValue = Nothing
+            Me.cacCountryCode.DisplayMember = "Name"
+            Me.cacCountryCode.DropDownHeight = 24
+            Me.cacCountryCode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
+            Me.cacCountryCode.Editable = True
+            Me.cacCountryCode.EditingMode = False
+            Me.cacCountryCode.EndFindValue = Nothing
+            Me.cacCountryCode.FieldDescription = Nothing
+            Me.cacCountryCode.FieldName = Nothing
+            Me.cacCountryCode.FilterRule = Nothing
+            Me.cacCountryCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cacCountryCode.FindEnabled = False
+            Me.cacCountryCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.cacCountryCode.ForeColor = System.Drawing.Color.Black
+            Me.cacCountryCode.FormattingEnabled = True
+            Me.cacCountryCode.HideWhenNotEditingOrAdding = False
+            Me.cacCountryCode.IgnoreCase = False
+            Me.cacCountryCode.LimitToList = False
+            Me.cacCountryCode.LinkedLabel = Nothing
+            Me.cacCountryCode.Location = New System.Drawing.Point(532, 117)
+            Me.cacCountryCode.Margin = New System.Windows.Forms.Padding(1)
+            Me.cacCountryCode.MaxDropDownItems = 1
+            Me.cacCountryCode.Name = "cacCountryCode"
+            Me.cacCountryCode.OldValue = 0
+            Me.cacCountryCode.OriginalDataSource = Nothing
+            Me.cacCountryCode.OriginalList = Nothing
+            Me.cacCountryCode.OverrideDropDownStyleList = False
+            Me.cacCountryCode.PreviousSearchTerm = Nothing
+            Me.cacCountryCode.PropertySelector = Nothing
+            Me.cacCountryCode.Size = New System.Drawing.Size(317, 28)
+            Me.cacCountryCode.SuggestBoxHeight = 246
+            Me.cacCountryCode.SuggestCharCount = 0
+            Me.cacCountryCode.SuggestListOrderRule = Nothing
+            Me.cacCountryCode.TabIndex = 5
+            Me.cacCountryCode.TextToSearch = Nothing
+            Me.cacCountryCode.Translatable = False
+            Me.cacCountryCode.ValueIsMandatory = False
+            Me.cacCountryCode.ValueIsNullable = False
+            Me.cacCountryCode.ValueIsNumeric = False
+            Me.cacCountryCode.ValueMember = "IdNo"
             '
             'tbpPayroll
             '
@@ -2159,8 +2169,10 @@
             Me.cboPayCycleIdNo.DataValue = Nothing
             Me.cboPayCycleIdNo.DefaultValue = Nothing
             Me.cboPayCycleIdNo.DisplayMember = "PayCycleName"
+            Me.cboPayCycleIdNo.DropDownHeight = 24
+            Me.cboPayCycleIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboPayCycleIdNo.Editable = True
-            Me.cboPayCycleIdNo.EditingMode = True
+            Me.cboPayCycleIdNo.EditingMode = False
             Me.cboPayCycleIdNo.EndFindValue = Nothing
             Me.cboPayCycleIdNo.FieldDescription = Nothing
             Me.cboPayCycleIdNo.FieldName = Nothing
@@ -2172,11 +2184,11 @@
             Me.cboPayCycleIdNo.FormattingEnabled = True
             Me.cboPayCycleIdNo.HideWhenNotEditingOrAdding = False
             Me.cboPayCycleIdNo.IgnoreCase = False
-            Me.cboPayCycleIdNo.IntegralHeight = False
             Me.cboPayCycleIdNo.LimitToList = False
             Me.cboPayCycleIdNo.LinkedLabel = Me.lblPayCycleIdNo
             Me.cboPayCycleIdNo.Location = New System.Drawing.Point(195, 151)
             Me.cboPayCycleIdNo.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
+            Me.cboPayCycleIdNo.MaxDropDownItems = 1
             Me.cboPayCycleIdNo.Name = "cboPayCycleIdNo"
             Me.cboPayCycleIdNo.OldValue = 0
             Me.cboPayCycleIdNo.OriginalDataSource = Nothing
@@ -2373,8 +2385,10 @@
             Me.cboPaymentMethod.DataValue = Nothing
             Me.cboPaymentMethod.DefaultValue = Nothing
             Me.cboPaymentMethod.DisplayMember = "Name"
+            Me.cboPaymentMethod.DropDownHeight = 24
+            Me.cboPaymentMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboPaymentMethod.Editable = True
-            Me.cboPaymentMethod.EditingMode = True
+            Me.cboPaymentMethod.EditingMode = False
             Me.cboPaymentMethod.EndFindValue = Nothing
             Me.cboPaymentMethod.FieldDescription = Nothing
             Me.cboPaymentMethod.FieldName = Nothing
@@ -2386,11 +2400,11 @@
             Me.cboPaymentMethod.FormattingEnabled = True
             Me.cboPaymentMethod.HideWhenNotEditingOrAdding = False
             Me.cboPaymentMethod.IgnoreCase = False
-            Me.cboPaymentMethod.IntegralHeight = False
             Me.cboPaymentMethod.LimitToList = False
             Me.cboPaymentMethod.LinkedLabel = Me.lblPaymentMethod
             Me.cboPaymentMethod.Location = New System.Drawing.Point(195, 1)
             Me.cboPaymentMethod.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
+            Me.cboPaymentMethod.MaxDropDownItems = 1
             Me.cboPaymentMethod.Name = "cboPaymentMethod"
             Me.cboPaymentMethod.OldValue = 0
             Me.cboPaymentMethod.OriginalDataSource = Nothing
@@ -2420,8 +2434,10 @@
             Me.cboPayGroupIdNo.DataValue = Nothing
             Me.cboPayGroupIdNo.DefaultValue = Nothing
             Me.cboPayGroupIdNo.DisplayMember = "PayGroupName"
+            Me.cboPayGroupIdNo.DropDownHeight = 24
+            Me.cboPayGroupIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboPayGroupIdNo.Editable = True
-            Me.cboPayGroupIdNo.EditingMode = True
+            Me.cboPayGroupIdNo.EditingMode = False
             Me.cboPayGroupIdNo.EndFindValue = Nothing
             Me.cboPayGroupIdNo.FieldDescription = Nothing
             Me.cboPayGroupIdNo.FieldName = Nothing
@@ -2433,11 +2449,11 @@
             Me.cboPayGroupIdNo.FormattingEnabled = True
             Me.cboPayGroupIdNo.HideWhenNotEditingOrAdding = False
             Me.cboPayGroupIdNo.IgnoreCase = False
-            Me.cboPayGroupIdNo.IntegralHeight = False
             Me.cboPayGroupIdNo.LimitToList = False
             Me.cboPayGroupIdNo.LinkedLabel = Me.lblPayGroupIdNo
             Me.cboPayGroupIdNo.Location = New System.Drawing.Point(195, 91)
             Me.cboPayGroupIdNo.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
+            Me.cboPayGroupIdNo.MaxDropDownItems = 1
             Me.cboPayGroupIdNo.Name = "cboPayGroupIdNo"
             Me.cboPayGroupIdNo.OldValue = 0
             Me.cboPayGroupIdNo.OriginalDataSource = Nothing
@@ -2482,6 +2498,7 @@
             Me.cacBankIdNo.FormattingEnabled = True
             Me.cacBankIdNo.HideWhenNotEditingOrAdding = False
             Me.cacBankIdNo.IgnoreCase = False
+            Me.cacBankIdNo.IntegralHeight = False
             Me.cacBankIdNo.LimitToList = False
             Me.cacBankIdNo.LinkedLabel = Nothing
             Me.cacBankIdNo.Location = New System.Drawing.Point(196, 31)
@@ -2495,7 +2512,7 @@
             Me.cacBankIdNo.PreviousSearchTerm = Nothing
             Me.cacBankIdNo.PropertySelector = Nothing
             Me.cacBankIdNo.SecurityKey = "EmployeePayInfo"
-            Me.cacBankIdNo.Size = New System.Drawing.Size(534, 24)
+            Me.cacBankIdNo.Size = New System.Drawing.Size(534, 28)
             Me.cacBankIdNo.SuggestBoxHeight = 246
             Me.cacBankIdNo.SuggestCharCount = 0
             Me.cacBankIdNo.SuggestListOrderRule = Nothing
@@ -3634,18 +3651,18 @@
             Me.TableLayoutPanel2.Controls.Add(Me.chkSupervisor, 1, 6)
             Me.TableLayoutPanel2.Controls.Add(Me.chkActive, 1, 7)
             Me.TableLayoutPanel2.Controls.Add(Me.CLabel5, 0, 6)
-            Me.TableLayoutPanel2.Controls.Add(Me.cboSupervisorIdNo, 1, 5)
             Me.TableLayoutPanel2.Controls.Add(Me.lblSupervisorIdNo, 0, 5)
-            Me.TableLayoutPanel2.Controls.Add(Me.cboSponsorType, 1, 4)
             Me.TableLayoutPanel2.Controls.Add(Me.lblSponsorType, 0, 4)
-            Me.TableLayoutPanel2.Controls.Add(Me.cacDesignationIdNo, 1, 3)
             Me.TableLayoutPanel2.Controls.Add(Me.CLabel2, 0, 3)
-            Me.TableLayoutPanel2.Controls.Add(Me.cacDepartmentIdNo, 1, 2)
             Me.TableLayoutPanel2.Controls.Add(Me.lblDepartmentIdNo, 0, 2)
             Me.TableLayoutPanel2.Controls.Add(Me.dtpReleasedDate, 1, 1)
             Me.TableLayoutPanel2.Controls.Add(Me.lblReleasedDate, 0, 1)
             Me.TableLayoutPanel2.Controls.Add(Me.dtpHiredDate, 1, 0)
             Me.TableLayoutPanel2.Controls.Add(Me.lblHiredDate, 0, 0)
+            Me.TableLayoutPanel2.Controls.Add(Me.cboDesignationIdNo, 1, 3)
+            Me.TableLayoutPanel2.Controls.Add(Me.cboSponsorType, 1, 4)
+            Me.TableLayoutPanel2.Controls.Add(Me.cboSupervisorIdNo, 1, 5)
+            Me.TableLayoutPanel2.Controls.Add(Me.cacDepartmentIdNo, 1, 2)
             Me.TableLayoutPanel2.Location = New System.Drawing.Point(22, 36)
             Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
             Me.TableLayoutPanel2.RowCount = 8
@@ -3758,52 +3775,6 @@
             Me.chkActive.Translatable = False
             Me.chkActive.UseVisualStyleBackColor = False
             '
-            'cboSupervisorIdNo
-            '
-            Me.cboSupervisorIdNo.BackColor = System.Drawing.Color.White
-            Me.cboSupervisorIdNo.BegFindValue = Nothing
-            Me.cboSupervisorIdNo.ChangingSearchValueOnly = False
-            Me.cboSupervisorIdNo.CurrentSearchTerm = ""
-            Me.cboSupervisorIdNo.DataValue = Nothing
-            Me.cboSupervisorIdNo.DefaultValue = Nothing
-            Me.cboSupervisorIdNo.DisplayMember = "EmployeeName"
-            Me.cboSupervisorIdNo.Editable = True
-            Me.cboSupervisorIdNo.EditingMode = True
-            Me.cboSupervisorIdNo.EndFindValue = Nothing
-            Me.cboSupervisorIdNo.FieldDescription = Nothing
-            Me.cboSupervisorIdNo.FieldName = Nothing
-            Me.cboSupervisorIdNo.FilterRule = Nothing
-            Me.cboSupervisorIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.cboSupervisorIdNo.FindEnabled = False
-            Me.cboSupervisorIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.cboSupervisorIdNo.ForeColor = System.Drawing.Color.Black
-            Me.cboSupervisorIdNo.FormattingEnabled = True
-            Me.cboSupervisorIdNo.HideWhenNotEditingOrAdding = False
-            Me.cboSupervisorIdNo.IgnoreCase = False
-            Me.cboSupervisorIdNo.IntegralHeight = False
-            Me.cboSupervisorIdNo.LimitToList = False
-            Me.cboSupervisorIdNo.LinkedLabel = Nothing
-            Me.cboSupervisorIdNo.Location = New System.Drawing.Point(232, 159)
-            Me.cboSupervisorIdNo.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
-            Me.cboSupervisorIdNo.Name = "cboSupervisorIdNo"
-            Me.cboSupervisorIdNo.OldValue = 0
-            Me.cboSupervisorIdNo.OriginalDataSource = Nothing
-            Me.cboSupervisorIdNo.OriginalList = Nothing
-            Me.cboSupervisorIdNo.OverrideDropDownStyleList = False
-            Me.cboSupervisorIdNo.PreviousSearchTerm = Nothing
-            Me.cboSupervisorIdNo.PropertySelector = Nothing
-            Me.cboSupervisorIdNo.Size = New System.Drawing.Size(369, 28)
-            Me.cboSupervisorIdNo.SuggestBoxHeight = 200
-            Me.cboSupervisorIdNo.SuggestCharCount = 0
-            Me.cboSupervisorIdNo.SuggestListOrderRule = Nothing
-            Me.cboSupervisorIdNo.TabIndex = 5
-            Me.cboSupervisorIdNo.TextToSearch = Nothing
-            Me.cboSupervisorIdNo.Translatable = False
-            Me.cboSupervisorIdNo.ValueIsMandatory = False
-            Me.cboSupervisorIdNo.ValueIsNullable = False
-            Me.cboSupervisorIdNo.ValueIsNumeric = False
-            Me.cboSupervisorIdNo.ValueMember = "IdNo"
-            '
             'lblSupervisorIdNo
             '
             Me.lblSupervisorIdNo.BackColor = System.Drawing.Color.Transparent
@@ -3819,52 +3790,6 @@
             Me.lblSupervisorIdNo.Text = "Immediate Supervisor"
             Me.lblSupervisorIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             Me.lblSupervisorIdNo.Translatable = True
-            '
-            'cboSponsorType
-            '
-            Me.cboSponsorType.BackColor = System.Drawing.Color.White
-            Me.cboSponsorType.BegFindValue = Nothing
-            Me.cboSponsorType.ChangingSearchValueOnly = False
-            Me.cboSponsorType.CurrentSearchTerm = ""
-            Me.cboSponsorType.DataValue = Nothing
-            Me.cboSponsorType.DefaultValue = Nothing
-            Me.cboSponsorType.DisplayMember = "Name"
-            Me.cboSponsorType.Editable = True
-            Me.cboSponsorType.EditingMode = True
-            Me.cboSponsorType.EndFindValue = Nothing
-            Me.cboSponsorType.FieldDescription = Nothing
-            Me.cboSponsorType.FieldName = Nothing
-            Me.cboSponsorType.FilterRule = Nothing
-            Me.cboSponsorType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.cboSponsorType.FindEnabled = True
-            Me.cboSponsorType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.cboSponsorType.ForeColor = System.Drawing.Color.Black
-            Me.cboSponsorType.FormattingEnabled = True
-            Me.cboSponsorType.HideWhenNotEditingOrAdding = False
-            Me.cboSponsorType.IgnoreCase = False
-            Me.cboSponsorType.IntegralHeight = False
-            Me.cboSponsorType.LimitToList = False
-            Me.cboSponsorType.LinkedLabel = Me.lblSponsorType
-            Me.cboSponsorType.Location = New System.Drawing.Point(232, 129)
-            Me.cboSponsorType.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
-            Me.cboSponsorType.Name = "cboSponsorType"
-            Me.cboSponsorType.OldValue = 0
-            Me.cboSponsorType.OriginalDataSource = Nothing
-            Me.cboSponsorType.OriginalList = Nothing
-            Me.cboSponsorType.OverrideDropDownStyleList = False
-            Me.cboSponsorType.PreviousSearchTerm = Nothing
-            Me.cboSponsorType.PropertySelector = Nothing
-            Me.cboSponsorType.Size = New System.Drawing.Size(369, 28)
-            Me.cboSponsorType.SuggestBoxHeight = 200
-            Me.cboSponsorType.SuggestCharCount = 0
-            Me.cboSponsorType.SuggestListOrderRule = Nothing
-            Me.cboSponsorType.TabIndex = 4
-            Me.cboSponsorType.TextToSearch = Nothing
-            Me.cboSponsorType.Translatable = False
-            Me.cboSponsorType.ValueIsMandatory = False
-            Me.cboSponsorType.ValueIsNullable = False
-            Me.cboSponsorType.ValueIsNumeric = False
-            Me.cboSponsorType.ValueMember = "Code"
             '
             'lblSponsorType
             '
@@ -3883,52 +3808,6 @@
             Me.lblSponsorType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             Me.lblSponsorType.Translatable = True
             '
-            'cacDesignationIdNo
-            '
-            Me.cacDesignationIdNo.BackColor = System.Drawing.Color.White
-            Me.cacDesignationIdNo.BegFindValue = Nothing
-            Me.cacDesignationIdNo.ChangingSearchValueOnly = False
-            Me.cacDesignationIdNo.CurrentSearchTerm = ""
-            Me.cacDesignationIdNo.DataValue = Nothing
-            Me.cacDesignationIdNo.DefaultValue = Nothing
-            Me.cacDesignationIdNo.DisplayMember = "DesignationName"
-            Me.cacDesignationIdNo.Editable = True
-            Me.cacDesignationIdNo.EditingMode = True
-            Me.cacDesignationIdNo.EndFindValue = Nothing
-            Me.cacDesignationIdNo.FieldDescription = Nothing
-            Me.cacDesignationIdNo.FieldName = Nothing
-            Me.cacDesignationIdNo.FilterRule = Nothing
-            Me.cacDesignationIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.cacDesignationIdNo.FindEnabled = False
-            Me.cacDesignationIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.cacDesignationIdNo.ForeColor = System.Drawing.Color.Black
-            Me.cacDesignationIdNo.FormattingEnabled = True
-            Me.cacDesignationIdNo.HideWhenNotEditingOrAdding = False
-            Me.cacDesignationIdNo.IgnoreCase = False
-            Me.cacDesignationIdNo.IntegralHeight = False
-            Me.cacDesignationIdNo.LimitToList = False
-            Me.cacDesignationIdNo.LinkedLabel = Nothing
-            Me.cacDesignationIdNo.Location = New System.Drawing.Point(232, 97)
-            Me.cacDesignationIdNo.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
-            Me.cacDesignationIdNo.Name = "cacDesignationIdNo"
-            Me.cacDesignationIdNo.OldValue = 0
-            Me.cacDesignationIdNo.OriginalDataSource = Nothing
-            Me.cacDesignationIdNo.OriginalList = Nothing
-            Me.cacDesignationIdNo.OverrideDropDownStyleList = False
-            Me.cacDesignationIdNo.PreviousSearchTerm = Nothing
-            Me.cacDesignationIdNo.PropertySelector = Nothing
-            Me.cacDesignationIdNo.Size = New System.Drawing.Size(369, 28)
-            Me.cacDesignationIdNo.SuggestBoxHeight = 200
-            Me.cacDesignationIdNo.SuggestCharCount = 0
-            Me.cacDesignationIdNo.SuggestListOrderRule = Nothing
-            Me.cacDesignationIdNo.TabIndex = 3
-            Me.cacDesignationIdNo.TextToSearch = Nothing
-            Me.cacDesignationIdNo.Translatable = False
-            Me.cacDesignationIdNo.ValueIsMandatory = False
-            Me.cacDesignationIdNo.ValueIsNullable = False
-            Me.cacDesignationIdNo.ValueIsNumeric = False
-            Me.cacDesignationIdNo.ValueMember = "IdNo"
-            '
             'CLabel2
             '
             Me.CLabel2.BackColor = System.Drawing.Color.Transparent
@@ -3944,52 +3823,6 @@
             Me.CLabel2.Text = "Designation"
             Me.CLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             Me.CLabel2.Translatable = True
-            '
-            'cacDepartmentIdNo
-            '
-            Me.cacDepartmentIdNo.BackColor = System.Drawing.Color.White
-            Me.cacDepartmentIdNo.BegFindValue = Nothing
-            Me.cacDepartmentIdNo.ChangingSearchValueOnly = False
-            Me.cacDepartmentIdNo.CurrentSearchTerm = ""
-            Me.cacDepartmentIdNo.DataValue = Nothing
-            Me.cacDepartmentIdNo.DefaultValue = Nothing
-            Me.cacDepartmentIdNo.DisplayMember = "DepartmentName"
-            Me.cacDepartmentIdNo.Editable = True
-            Me.cacDepartmentIdNo.EditingMode = True
-            Me.cacDepartmentIdNo.EndFindValue = Nothing
-            Me.cacDepartmentIdNo.FieldDescription = Nothing
-            Me.cacDepartmentIdNo.FieldName = Nothing
-            Me.cacDepartmentIdNo.FilterRule = Nothing
-            Me.cacDepartmentIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.cacDepartmentIdNo.FindEnabled = False
-            Me.cacDepartmentIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.cacDepartmentIdNo.ForeColor = System.Drawing.Color.Black
-            Me.cacDepartmentIdNo.FormattingEnabled = True
-            Me.cacDepartmentIdNo.HideWhenNotEditingOrAdding = False
-            Me.cacDepartmentIdNo.IgnoreCase = False
-            Me.cacDepartmentIdNo.IntegralHeight = False
-            Me.cacDepartmentIdNo.LimitToList = False
-            Me.cacDepartmentIdNo.LinkedLabel = Me.lblDepartmentIdNo
-            Me.cacDepartmentIdNo.Location = New System.Drawing.Point(232, 65)
-            Me.cacDepartmentIdNo.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
-            Me.cacDepartmentIdNo.Name = "cacDepartmentIdNo"
-            Me.cacDepartmentIdNo.OldValue = 0
-            Me.cacDepartmentIdNo.OriginalDataSource = Nothing
-            Me.cacDepartmentIdNo.OriginalList = Nothing
-            Me.cacDepartmentIdNo.OverrideDropDownStyleList = False
-            Me.cacDepartmentIdNo.PreviousSearchTerm = Nothing
-            Me.cacDepartmentIdNo.PropertySelector = Nothing
-            Me.cacDepartmentIdNo.Size = New System.Drawing.Size(371, 28)
-            Me.cacDepartmentIdNo.SuggestBoxHeight = 200
-            Me.cacDepartmentIdNo.SuggestCharCount = 0
-            Me.cacDepartmentIdNo.SuggestListOrderRule = Nothing
-            Me.cacDepartmentIdNo.TabIndex = 2
-            Me.cacDepartmentIdNo.TextToSearch = Nothing
-            Me.cacDepartmentIdNo.Translatable = False
-            Me.cacDepartmentIdNo.ValueIsMandatory = False
-            Me.cacDepartmentIdNo.ValueIsNullable = False
-            Me.cacDepartmentIdNo.ValueIsNumeric = False
-            Me.cacDepartmentIdNo.ValueMember = "IdNo"
             '
             'lblDepartmentIdNo
             '
@@ -4097,6 +3930,198 @@
             Me.lblHiredDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             Me.lblHiredDate.Translatable = True
             '
+            'cboDesignationIdNo
+            '
+            Me.cboDesignationIdNo.BackColor = System.Drawing.Color.White
+            Me.cboDesignationIdNo.BegFindValue = Nothing
+            Me.cboDesignationIdNo.ChangingSearchValueOnly = False
+            Me.cboDesignationIdNo.CurrentSearchTerm = ""
+            Me.cboDesignationIdNo.DataValue = Nothing
+            Me.cboDesignationIdNo.DefaultValue = Nothing
+            Me.cboDesignationIdNo.DisplayMember = "Name"
+            Me.cboDesignationIdNo.DropDownHeight = 24
+            Me.cboDesignationIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
+            Me.cboDesignationIdNo.Editable = True
+            Me.cboDesignationIdNo.EditingMode = False
+            Me.cboDesignationIdNo.EndFindValue = Nothing
+            Me.cboDesignationIdNo.FieldDescription = Nothing
+            Me.cboDesignationIdNo.FieldName = Nothing
+            Me.cboDesignationIdNo.FilterRule = Nothing
+            Me.cboDesignationIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboDesignationIdNo.FindEnabled = False
+            Me.cboDesignationIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.cboDesignationIdNo.ForeColor = System.Drawing.Color.Black
+            Me.cboDesignationIdNo.FormattingEnabled = True
+            Me.cboDesignationIdNo.HideWhenNotEditingOrAdding = False
+            Me.cboDesignationIdNo.IgnoreCase = False
+            Me.cboDesignationIdNo.LimitToList = False
+            Me.cboDesignationIdNo.LinkedLabel = Nothing
+            Me.cboDesignationIdNo.Location = New System.Drawing.Point(233, 97)
+            Me.cboDesignationIdNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.cboDesignationIdNo.MaxDropDownItems = 1
+            Me.cboDesignationIdNo.Name = "cboDesignationIdNo"
+            Me.cboDesignationIdNo.OldValue = 0
+            Me.cboDesignationIdNo.OriginalDataSource = Nothing
+            Me.cboDesignationIdNo.OriginalList = Nothing
+            Me.cboDesignationIdNo.OverrideDropDownStyleList = False
+            Me.cboDesignationIdNo.PreviousSearchTerm = Nothing
+            Me.cboDesignationIdNo.PropertySelector = Nothing
+            Me.cboDesignationIdNo.Size = New System.Drawing.Size(574, 28)
+            Me.cboDesignationIdNo.SuggestBoxHeight = 246
+            Me.cboDesignationIdNo.SuggestCharCount = 0
+            Me.cboDesignationIdNo.SuggestListOrderRule = Nothing
+            Me.cboDesignationIdNo.TabIndex = 3
+            Me.cboDesignationIdNo.TextToSearch = Nothing
+            Me.cboDesignationIdNo.Translatable = False
+            Me.cboDesignationIdNo.ValueIsMandatory = False
+            Me.cboDesignationIdNo.ValueIsNullable = False
+            Me.cboDesignationIdNo.ValueIsNumeric = False
+            Me.cboDesignationIdNo.ValueMember = "IdNo"
+            '
+            'cboSponsorType
+            '
+            Me.cboSponsorType.BackColor = System.Drawing.Color.White
+            Me.cboSponsorType.BegFindValue = Nothing
+            Me.cboSponsorType.ChangingSearchValueOnly = False
+            Me.cboSponsorType.CurrentSearchTerm = ""
+            Me.cboSponsorType.DataValue = Nothing
+            Me.cboSponsorType.DefaultValue = Nothing
+            Me.cboSponsorType.DisplayMember = "Name"
+            Me.cboSponsorType.DropDownHeight = 24
+            Me.cboSponsorType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
+            Me.cboSponsorType.Editable = True
+            Me.cboSponsorType.EditingMode = False
+            Me.cboSponsorType.EndFindValue = Nothing
+            Me.cboSponsorType.FieldDescription = Nothing
+            Me.cboSponsorType.FieldName = Nothing
+            Me.cboSponsorType.FilterRule = Nothing
+            Me.cboSponsorType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboSponsorType.FindEnabled = False
+            Me.cboSponsorType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.cboSponsorType.ForeColor = System.Drawing.Color.Black
+            Me.cboSponsorType.FormattingEnabled = True
+            Me.cboSponsorType.HideWhenNotEditingOrAdding = False
+            Me.cboSponsorType.IgnoreCase = False
+            Me.cboSponsorType.LimitToList = False
+            Me.cboSponsorType.LinkedLabel = Nothing
+            Me.cboSponsorType.Location = New System.Drawing.Point(233, 129)
+            Me.cboSponsorType.Margin = New System.Windows.Forms.Padding(1)
+            Me.cboSponsorType.MaxDropDownItems = 1
+            Me.cboSponsorType.Name = "cboSponsorType"
+            Me.cboSponsorType.OldValue = 0
+            Me.cboSponsorType.OriginalDataSource = Nothing
+            Me.cboSponsorType.OriginalList = Nothing
+            Me.cboSponsorType.OverrideDropDownStyleList = False
+            Me.cboSponsorType.PreviousSearchTerm = Nothing
+            Me.cboSponsorType.PropertySelector = Nothing
+            Me.cboSponsorType.Size = New System.Drawing.Size(368, 28)
+            Me.cboSponsorType.SuggestBoxHeight = 246
+            Me.cboSponsorType.SuggestCharCount = 0
+            Me.cboSponsorType.SuggestListOrderRule = Nothing
+            Me.cboSponsorType.TabIndex = 4
+            Me.cboSponsorType.TextToSearch = Nothing
+            Me.cboSponsorType.Translatable = False
+            Me.cboSponsorType.ValueIsMandatory = False
+            Me.cboSponsorType.ValueIsNullable = False
+            Me.cboSponsorType.ValueIsNumeric = False
+            Me.cboSponsorType.ValueMember = "IdNo"
+            '
+            'cboSupervisorIdNo
+            '
+            Me.cboSupervisorIdNo.BackColor = System.Drawing.Color.White
+            Me.cboSupervisorIdNo.BegFindValue = Nothing
+            Me.cboSupervisorIdNo.ChangingSearchValueOnly = False
+            Me.cboSupervisorIdNo.CurrentSearchTerm = ""
+            Me.cboSupervisorIdNo.DataValue = Nothing
+            Me.cboSupervisorIdNo.DefaultValue = Nothing
+            Me.cboSupervisorIdNo.DisplayMember = "Name"
+            Me.cboSupervisorIdNo.DropDownHeight = 24
+            Me.cboSupervisorIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
+            Me.cboSupervisorIdNo.Editable = True
+            Me.cboSupervisorIdNo.EditingMode = False
+            Me.cboSupervisorIdNo.EndFindValue = Nothing
+            Me.cboSupervisorIdNo.FieldDescription = Nothing
+            Me.cboSupervisorIdNo.FieldName = Nothing
+            Me.cboSupervisorIdNo.FilterRule = Nothing
+            Me.cboSupervisorIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboSupervisorIdNo.FindEnabled = False
+            Me.cboSupervisorIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.cboSupervisorIdNo.ForeColor = System.Drawing.Color.Black
+            Me.cboSupervisorIdNo.FormattingEnabled = True
+            Me.cboSupervisorIdNo.HideWhenNotEditingOrAdding = False
+            Me.cboSupervisorIdNo.IgnoreCase = False
+            Me.cboSupervisorIdNo.LimitToList = False
+            Me.cboSupervisorIdNo.LinkedLabel = Nothing
+            Me.cboSupervisorIdNo.Location = New System.Drawing.Point(233, 159)
+            Me.cboSupervisorIdNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.cboSupervisorIdNo.MaxDropDownItems = 1
+            Me.cboSupervisorIdNo.Name = "cboSupervisorIdNo"
+            Me.cboSupervisorIdNo.OldValue = 0
+            Me.cboSupervisorIdNo.OriginalDataSource = Nothing
+            Me.cboSupervisorIdNo.OriginalList = Nothing
+            Me.cboSupervisorIdNo.OverrideDropDownStyleList = False
+            Me.cboSupervisorIdNo.PreviousSearchTerm = Nothing
+            Me.cboSupervisorIdNo.PropertySelector = Nothing
+            Me.cboSupervisorIdNo.Size = New System.Drawing.Size(368, 28)
+            Me.cboSupervisorIdNo.SuggestBoxHeight = 246
+            Me.cboSupervisorIdNo.SuggestCharCount = 0
+            Me.cboSupervisorIdNo.SuggestListOrderRule = Nothing
+            Me.cboSupervisorIdNo.TabIndex = 5
+            Me.cboSupervisorIdNo.TextToSearch = Nothing
+            Me.cboSupervisorIdNo.Translatable = False
+            Me.cboSupervisorIdNo.ValueIsMandatory = False
+            Me.cboSupervisorIdNo.ValueIsNullable = False
+            Me.cboSupervisorIdNo.ValueIsNumeric = False
+            Me.cboSupervisorIdNo.ValueMember = "IdNo"
+            '
+            'cacDepartmentIdNo
+            '
+            Me.cacDepartmentIdNo.BackColor = System.Drawing.Color.White
+            Me.cacDepartmentIdNo.BegFindValue = Nothing
+            Me.cacDepartmentIdNo.ChangingSearchValueOnly = False
+            Me.cacDepartmentIdNo.CurrentSearchTerm = ""
+            Me.cacDepartmentIdNo.DataValue = Nothing
+            Me.cacDepartmentIdNo.DefaultValue = Nothing
+            Me.cacDepartmentIdNo.DisplayMember = "Name"
+            Me.cacDepartmentIdNo.DropDownHeight = 24
+            Me.cacDepartmentIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
+            Me.cacDepartmentIdNo.Editable = True
+            Me.cacDepartmentIdNo.EditingMode = False
+            Me.cacDepartmentIdNo.EndFindValue = Nothing
+            Me.cacDepartmentIdNo.FieldDescription = Nothing
+            Me.cacDepartmentIdNo.FieldName = Nothing
+            Me.cacDepartmentIdNo.FilterRule = Nothing
+            Me.cacDepartmentIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cacDepartmentIdNo.FindEnabled = False
+            Me.cacDepartmentIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.cacDepartmentIdNo.ForeColor = System.Drawing.Color.Black
+            Me.cacDepartmentIdNo.FormattingEnabled = True
+            Me.cacDepartmentIdNo.HideWhenNotEditingOrAdding = False
+            Me.cacDepartmentIdNo.IgnoreCase = False
+            Me.cacDepartmentIdNo.LimitToList = False
+            Me.cacDepartmentIdNo.LinkedLabel = Nothing
+            Me.cacDepartmentIdNo.Location = New System.Drawing.Point(233, 65)
+            Me.cacDepartmentIdNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.cacDepartmentIdNo.MaxDropDownItems = 1
+            Me.cacDepartmentIdNo.Name = "cacDepartmentIdNo"
+            Me.cacDepartmentIdNo.OldValue = 0
+            Me.cacDepartmentIdNo.OriginalDataSource = Nothing
+            Me.cacDepartmentIdNo.OriginalList = Nothing
+            Me.cacDepartmentIdNo.OverrideDropDownStyleList = False
+            Me.cacDepartmentIdNo.PreviousSearchTerm = Nothing
+            Me.cacDepartmentIdNo.PropertySelector = Nothing
+            Me.cacDepartmentIdNo.Size = New System.Drawing.Size(574, 28)
+            Me.cacDepartmentIdNo.SuggestBoxHeight = 246
+            Me.cacDepartmentIdNo.SuggestCharCount = 0
+            Me.cacDepartmentIdNo.SuggestListOrderRule = Nothing
+            Me.cacDepartmentIdNo.TabIndex = 2
+            Me.cacDepartmentIdNo.TextToSearch = Nothing
+            Me.cacDepartmentIdNo.Translatable = False
+            Me.cacDepartmentIdNo.ValueIsMandatory = False
+            Me.cacDepartmentIdNo.ValueIsNullable = False
+            Me.cacDepartmentIdNo.ValueIsNumeric = False
+            Me.cacDepartmentIdNo.ValueMember = "IdNo"
+            '
             'EmployeeEntryTv
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -4164,25 +4189,20 @@
         Friend WithEvents lblEmployeeNameAra As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtEmployeeNameAra As Libraries.CBaseControlsLibrary.CTextBoxArabic
         Friend WithEvents lblHiredDate As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents dtpHiredDate As Libraries.CBaseControlsLibrary.CCustomDateTimePicker
         Friend WithEvents lblReleasedDate As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents dtpReleasedDate As Libraries.CBaseControlsLibrary.CCustomDateTimePicker
         Friend WithEvents lblDepartmentIdNo As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cacDepartmentIdNo As Libraries.CBaseControlsLibrary.CtComboBox
-        Friend WithEvents cacDesignationIdNo As Libraries.CBaseControlsLibrary.CtComboBox
         Friend WithEvents lblActive As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents chkActive As Libraries.CBaseControlsLibrary.CCheckBox
         Friend WithEvents CLabel2 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblSponsorType As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents bsLeaveCredits As BindingSource
         Friend WithEvents lblSupervisorIdNo As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboSupervisorIdNo As Libraries.CBaseControlsLibrary.CtComboBox
         Friend WithEvents CLabel5 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents chkSupervisor As Libraries.CBaseControlsLibrary.CCheckBox
         Friend WithEvents bsDocuments As BindingSource
         Friend WithEvents dgvEmployeeDocumentIdNo As DataGridViewTextBoxColumn
         Friend WithEvents dgvDocumentNote As Libraries.CBaseControlsLibrary.CDgvTextColumn
-        Friend WithEvents cboSponsorType As Libraries.CBaseControlsLibrary.CtComboBox
         Friend WithEvents cboTitle As Libraries.CBaseControlsLibrary.CtComboBox
         Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
         Friend WithEvents tbcEmployeeInformation As Libraries.CBaseControlsLibrary.CTabControl
@@ -4195,9 +4215,7 @@
         Friend WithEvents lblMaritalStatus As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents cacMaritalStatus As Libraries.CBaseControlsLibrary.CtComboBox
         Friend WithEvents lblNationalityCode As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cacNationalityCode As Libraries.CBaseControlsLibrary.CtComboBox
         Friend WithEvents lblReligion As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cacReligionIdNo As Libraries.CBaseControlsLibrary.CtComboBox
         Friend WithEvents lblBirthDate As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents dtpBirthDate As Libraries.CBaseControlsLibrary.CCustomDateTimePicker
         Friend WithEvents lblNationalIdNo As Libraries.CBaseControlsLibrary.CLabel
@@ -4223,7 +4241,6 @@
         Friend WithEvents lblZipCode As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtPoBox As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblPoBox As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cacCountryCode As Libraries.CBaseControlsLibrary.CtComboBox
         Friend WithEvents lblCountryCode As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtProvinceState As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblProvinceState As Libraries.CBaseControlsLibrary.CLabel
@@ -4316,5 +4333,13 @@
         Friend WithEvents IdNoDataGridViewTextBoxColumn1 As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents tbpEmployeInformation As TabPage
         Friend WithEvents cacBankIdNo As Libraries.CBaseControlsLibrary.CtComboBox
+        Friend WithEvents dtpHiredDate As Libraries.CBaseControlsLibrary.CCustomDateTimePicker
+        Friend WithEvents cboDesignationIdNo As Libraries.CBaseControlsLibrary.CtComboBox
+        Friend WithEvents cboSponsorType As Libraries.CBaseControlsLibrary.CtComboBox
+        Friend WithEvents cboSupervisorIdNo As Libraries.CBaseControlsLibrary.CtComboBox
+        Friend WithEvents cacDepartmentIdNo As Libraries.CBaseControlsLibrary.CtComboBox
+        Friend WithEvents cacCountryCode As Libraries.CBaseControlsLibrary.CtComboBox
+        Friend WithEvents cacNationalityCode As Libraries.CBaseControlsLibrary.CtComboBox
+        Friend WithEvents cacReligionIdNo As Libraries.CBaseControlsLibrary.CtComboBox
     End Class
 End NameSpace

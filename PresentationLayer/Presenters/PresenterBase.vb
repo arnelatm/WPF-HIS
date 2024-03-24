@@ -2068,6 +2068,8 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Dim x = MainFieldsDictionary
         If MainFieldsDictionary.TryGetValue(fieldName, control) Then
             control.DataSource = GetEnumData(Of TE)()
+            control.DisplayMember = "Name"
+            control.ValueMember = "Code"
         Else
             Debugger.Break()
             MessageBox.Show($"Field '" & fieldName & $"' is not valid!")
@@ -2081,13 +2083,13 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     Private Function GetEnumData(Of TE)()
         Dim dt As New DataTable
         CreateDataTable(dt, {{"IdNo", GetType(Int16)},
-                             {"Code", GetType(String)},
-                             {"Name", GetType(String)}})
+                             {"Name", GetType(String)},
+                             {"Code", GetType(String)}})
         For Each c In [Enum].GetValues(GetType(TE))
             Dim workRow As DataRow = dt.NewRow()
             workRow("IdNo") = CInt(c)
-            workRow("Code") = EnumToCode(c)
             workRow("Name") = Messaging.TranslateCaption(c.ToString().SplitCamelCase())
+            workRow("Code") = EnumToCode(c)
             dt.Rows.Add(workRow)
         Next
         Return dt  '.DefaultView
