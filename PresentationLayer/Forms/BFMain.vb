@@ -173,7 +173,7 @@ Public Class BfMain
     End Function
 
     Private Sub OnCFormEntryNewShown() Handles MyBase.Shown
-        SuspendDrawing()
+        'SuspendDrawing()
         If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
             SwitchUiLanguage(False)
         Else
@@ -182,7 +182,7 @@ Public Class BfMain
         Me.Activate()
         Dim allCtrl As New List(Of Control)
         allCtrl = FindControlRecursive(allCtrl, Me)
-        ResumeDrawing()
+        'ResumeDrawing()
         FormShown = True
     End Sub
 
@@ -216,7 +216,7 @@ Public Class BfMain
 
     Public Sub TranslateForm()
         If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
-            SuspendDrawing()
+            'SuspendDrawing()
             Dim settings As New SettingsSaver
             Dim allCtrl As New List(Of Control)
             allCtrl = FindControlRecursive(allCtrl, Me)
@@ -227,7 +227,7 @@ Public Class BfMain
             TranslateCaptions(allCtrl, TextDisplayLanguage)
             SetControlLayout(allCtrl)
             settings.RestoreSetting(Me)
-            ResumeDrawing()
+            'ResumeDrawing()
             If GlobalVariables.TranslationMode Then
                 RaiseEvent AfterTranslateForm()
             End If
