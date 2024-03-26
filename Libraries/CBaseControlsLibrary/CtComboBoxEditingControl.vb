@@ -222,7 +222,7 @@ Public Class CtComboBoxEditingControl
         End If
         BackColor = GlobalVariables.DefaultFormControlEditingBackgroundColor
         ForeColor = GlobalVariables.DefaultFormControlEditingForegroundColor
-        'Me.EditingMode = True
+        Me.EditingMode = True
     End Sub
 
     Private Sub NotifyDataGridViewOfValueChange()
