@@ -1,10 +1,16 @@
 ﻿' This is the class that represents your cell which can use your ComboBox class
+Imports System.ComponentModel
 Imports System.Drawing
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class CtComboBoxCell
     Inherits DataGridViewComboBoxCell
+    Implements IEntryControl
+
+    Private _displayOnly As Boolean
+    Private _editingMode As Boolean
+    Private _translatable As Boolean = False
 
     Public Sub New()
         MyBase.New()
@@ -18,8 +24,43 @@ Public Class CtComboBoxCell
             Return GetType(CtComboBoxEditingControl)
         End Get
     End Property
+    <DisplayName("DisplayOnly")>
+    <Category("Custom Properties")>
+    <DefaultValue(False)>
+    <DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)>
+    <EditorBrowsable(EditorBrowsableState.Always), Bindable(True)>
+    <Description("Set to True to specify that this control's value cannot be edited or changed.")>
+    <Browsable(True)>
+    Public Property DisplayOnly As Boolean
+        Get
+            Return _displayOnly
+        End Get
+        Set(value As Boolean)
+            _displayOnly = value
+            If value Then
+                _editingMode = False
+            End If
+        End Set
+    End Property
 
-    Public Property PausePaint As Boolean
+    Public Property EditingMode As Boolean Implements IEntryControl.EditingMode
+        Get
+            Return _editingMode
+        End Get
+        Set(value As Boolean)
+            _editingMode = value
+        End Set
+    End Property
+
+    Public Property Translatable As Boolean Implements IEntryControl.Translatable
+        Get
+            Return False
+        End Get
+        Set(value As Boolean)
+            _translatable = value
+        End Set
+    End Property
+
 
 
     ' You must also override this method to initialize the ComboBox instance...
@@ -29,8 +70,20 @@ Public Class CtComboBoxCell
         DataGridView.SuspendDrawingNew()
         MyBase.InitializeEditingControl(pRowIndex, pFormattedValue, cellStyle)
         CellEditingControl = CType(DataGridView.EditingControl, CtComboBoxEditingControl)
+        CellEditingControl.EditingMode = True
         DataGridView.ResumeDrawingNew()
     End Sub
+
+    Public Overrides Function Clone() As Object
+
+        Dim copy As CtComboBoxCell = TryCast(MyBase.Clone(), CtComboBoxCell)
+        'copy.DisplayOnly = CellEditingControl.DisplayOnly
+        'copy.EditingMode = CellEditingControl.EditingMode
+        'copy.Translatable = CellEditingControl.Translatable
+        'copy.DisplayMember = CellEditingControl.DisplayMember
+        'copy.ValueMember = CellEditingControl.ValueMember
+        Return copy
+    End Function
 
     Public Property CellEditingControl As CtComboBoxEditingControl
 

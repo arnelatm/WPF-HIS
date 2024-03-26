@@ -43,7 +43,7 @@ Public Class CtComboBoxColumn
         Set(value As Boolean)
             _displayOnly = value
             If value Then
-                _editingMode = True
+                _editingMode = False
             End If
         End Set
     End Property
@@ -53,7 +53,11 @@ Public Class CtComboBoxColumn
             Return _editingMode
         End Get
         Set(value As Boolean)
-            _editingMode = value
+            If _displayOnly Then
+                _editingMode = False
+            Else
+                _editingMode = value
+            End If
             UpdateDisplayOnlyControl()
         End Set
     End Property
@@ -81,5 +85,13 @@ Public Class CtComboBoxColumn
     End Property
 
     Public Property SuggestCharCount As Integer
+
+    Public Overrides Function Clone() As Object
+        Dim copy As CtComboBoxColumn = TryCast(MyBase.Clone(), CtComboBoxColumn)
+        'copy.DisplayOnly = DisplayOnly
+        'copy.EditingMode = EditingMode
+        'copy.Translatable = Translatable
+        Return copy
+    End Function
 
 End Class

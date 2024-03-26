@@ -1,4 +1,4 @@
-﻿-- Drop function if exists
+﻿tep-- Drop function if exists
 --
 --IF EXISTS (SELECT *
 --             FROM dbo.sysobjects

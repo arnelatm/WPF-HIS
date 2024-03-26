@@ -25,11 +25,11 @@ Namespace PresentationLayer.Views.Forms
         Me.lblPayrollName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblStartDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.cboIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
-        Me.lblPayFrequency = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboPayCycleIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
-        Me.lblPayrollCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtPayrollCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.cboIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.lblPayFrequency = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboPayCycleIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.lblPayrollCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtPayrollCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.dtpStartDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.lblEndDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpEndDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
@@ -83,7 +83,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout1.Controls.Add(Me.lblEndDate)
             Me.CFlowLayout1.Controls.Add(Me.dtpEndDate)
             Me.CFlowLayout1.Location = New System.Drawing.Point(16, 70)
-            Me.CFlowLayout1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.CFlowLayout1.Margin = New System.Windows.Forms.Padding(4)
             Me.CFlowLayout1.Name = "CFlowLayout1"
             Me.CFlowLayout1.Size = New System.Drawing.Size(669, 174)
             Me.CFlowLayout1.TabIndex = 4
@@ -125,6 +125,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboIdNo.PropertySelector = Nothing
             Me.cboIdNo.Size = New System.Drawing.Size(481, 28)
             Me.cboIdNo.SuggestBoxHeight = 200
+            Me.cboIdNo.SuggestCharCount = 0
             Me.cboIdNo.SuggestListOrderRule = Nothing
             Me.cboIdNo.TabIndex = 0
             Me.cboIdNo.TextToSearch = Nothing
@@ -162,7 +163,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayCycleIdNo.DropDownHeight = 24
             Me.cboPayCycleIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboPayCycleIdNo.Editable = True
-            Me.cboPayCycleIdNo.EditingMode = True
+            Me.cboPayCycleIdNo.EditingMode = False
             Me.cboPayCycleIdNo.EndFindValue = Nothing
             Me.cboPayCycleIdNo.FieldDescription = Nothing
             Me.cboPayCycleIdNo.FieldName = Nothing
@@ -190,6 +191,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayCycleIdNo.PropertySelector = Nothing
             Me.cboPayCycleIdNo.Size = New System.Drawing.Size(481, 30)
             Me.cboPayCycleIdNo.SuggestBoxHeight = 200
+            Me.cboPayCycleIdNo.SuggestCharCount = 0
             Me.cboPayCycleIdNo.SuggestListOrderRule = Nothing
             Me.cboPayCycleIdNo.TabIndex = 1
             Me.cboPayCycleIdNo.TextToSearch = Nothing
@@ -323,7 +325,7 @@ Namespace PresentationLayer.Views.Forms
             Me.btnOk.DesignerSelected = False
             Me.btnOk.ImageIndex = 0
             Me.btnOk.Location = New System.Drawing.Point(196, 251)
-            Me.btnOk.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.btnOk.Margin = New System.Windows.Forms.Padding(4)
             Me.btnOk.Name = "btnOk"
             Me.btnOk.OriginalImageName = Nothing
             Me.btnOk.SecurityKey = ""
@@ -337,7 +339,7 @@ Namespace PresentationLayer.Views.Forms
             Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
             Me.btnCancel.ImageIndex = 0
             Me.btnCancel.Location = New System.Drawing.Point(324, 251)
-            Me.btnCancel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.btnCancel.Margin = New System.Windows.Forms.Padding(4)
             Me.btnCancel.Name = "btnCancel"
             Me.btnCancel.OriginalImageName = Nothing
             Me.btnCancel.SecurityKey = ""
@@ -357,10 +359,10 @@ Namespace PresentationLayer.Views.Forms
             Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
             Me.Name = "GeneratePayrollBankCsv"
             Me.Text = "Generate Payroll CSV File"
-        Me.Controls.SetChildIndex(Me.btnOk, 0)
-        Me.Controls.SetChildIndex(Me.btnCancel, 0)
-        Me.Controls.SetChildIndex(Me.CFlowLayout1, 0)
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
+            Me.Controls.SetChildIndex(Me.btnOk, 0)
+            Me.Controls.SetChildIndex(Me.btnCancel, 0)
+            Me.Controls.SetChildIndex(Me.CFlowLayout1, 0)
+            CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.CFlowLayout1.ResumeLayout(false)
         Me.CFlowLayout1.PerformLayout
         Me.ResumeLayout(false)

@@ -2397,9 +2397,10 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Const LookupFieldNames As Int32 = 2
         Const LookupFilter As Int32 = 3
         Const LookupSortKey As Int32 = 4
-        Const ValueMember As Int32 = 5
-        Const DisplayMember As Int32 = 6
-        Const Ascending As Int32 = 7
+        Const Ascending As Int32 = 5
+        Const ValueMember As Int32 = 6
+        Const DisplayMember As Int32 = 7
+
         Dim dtl As New DataLookupSpecs
         dtl.TableName = item(LookupTableName)
         If TypeOf item(LookupControl) Is String Then
@@ -2418,13 +2419,13 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
             dtl.SortKey = item(LookupSortKey)
         End If
         If item.Length - 1 > 4 Then
-            dtl.ValueMember = item(ValueMember)
+            dtl.Ascending = item(Ascending)
         End If
         If item.Length - 1 > 5 Then
-            dtl.DisplayMember = item(DisplayMember)
+            dtl.ValueMember = item(ValueMember)
         End If
         If item.Length - 1 > 6 Then
-            dtl.Ascending = item(Ascending)
+            dtl.DisplayMember = item(DisplayMember)
         End If
         ComposeLookupProperties(dtl)
         dtl.LookUpTask = Task(Of DataTable).Factory.StartNew(Function() LookupDataTableCreator(dtl))
@@ -2437,10 +2438,16 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
             dtl.NameFieldOrig = dtl.TableName + "Name"
             dtl.NameField = TranslateNameField(dtl.TableName, dtl.NameFieldOrig)
             dtl.NameDisplayValue = dtl.NameField + "+'-'+" + dtl.TableName + "Code"
-            dtl.ValueMember = "IdNo"
+            If dtl.ValueMember Is Nothing Then
+                dtl.ValueMember = "IdNo"
+            End If
+            If dtl.DisplayMember Is Nothing Then
+                dtl.DisplayMember = "Name"
+            End If
             dtl.LuFields = "IdNo, " + dtl.NameDisplayValue + " COLLATE SQL_Latin1_General_CP1_CI_AS As Name"
-            dtl.SortKey = dtl.NameField
-            dtl.DisplayMember = "Name"
+            If dtl.SortKey Is Nothing Then
+                dtl.SortKey = dtl.NameField
+            End If
         Else
             Dim fieldNames = dtl.LuFields.Split(",")
             If fieldNames.Count() = 1 Then
@@ -2450,7 +2457,9 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
                 dtl.ValueMember = "Name"
                 dtl.DisplayMember = "Name"
                 dtl.LuFields = dtl.NameField + " as Name"
-                dtl.SortKey = fieldNames(0)
+                If dtl.SortKey Is Nothing Then
+                    dtl.SortKey = fieldNames(0)
+                End If
             ElseIf fieldNames.Count() = 2 Then
                 ' assumed the first field is the value member and the second field as the display Value
                 dtl.NameFieldOrig = fieldNames(1)
