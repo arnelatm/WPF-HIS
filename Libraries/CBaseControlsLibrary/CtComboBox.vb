@@ -926,11 +926,6 @@ Public Class CtComboBox
         Return description
     End Function
 
-    'Private Sub cacParentIdNo_BackColorChanged(sender As Object, e As EventArgs) Handles MyBase.BackColorChanged
-    '    Dim x = 1
-    '    x = x + 1
-    'End Sub
-
 End Class
 
 'Public Class CSuggestListForm
