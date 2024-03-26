@@ -75,7 +75,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvBatchNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvExpiryDate = New AATM.Libraries.CBaseControlsLibrary.CDgvExpiryColumn()
             Me.dgvQuantity = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
-            Me.dgvUnitIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBoxColumn()
+            Me.dgvUnitIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
             Me.dgvUnitCost = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
             Me.dgvNetAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
             Me.dgvCategoryIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -1253,7 +1253,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents dgvBatchNo As CDgvTextColumn
         Friend WithEvents dgvExpiryDate As CDgvExpiryColumn
         Friend WithEvents dgvQuantity As CDgvDecimalColumn
-        Friend WithEvents dgvUnitIdNo As CtComboBoxColumn
+        Friend WithEvents dgvUnitIdNo As CDgvComboBoxColumn
         Friend WithEvents dgvUnitCost As CDgvDecimalColumn
         Friend WithEvents dgvNetAmount As CdgvMoneyColumn
         Friend WithEvents dgvCategoryIdNo As DataGridViewTextBoxColumn

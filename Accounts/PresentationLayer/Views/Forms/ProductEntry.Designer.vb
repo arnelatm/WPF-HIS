@@ -59,7 +59,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewProductUnits = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.dgvUnitIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBoxColumn()
+            Me.dgvUnitIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
             Me.dgvUnitQty = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.BaseQtyDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.dgvProductIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -737,7 +737,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents DataGridViewProductUnits As CtDataGridView
         Friend WithEvents txtDateCreated As CTextBox
         Friend WithEvents dgvSequence As CDgvTextColumn
-        Friend WithEvents dgvUnitIdNo As CtComboBoxColumn
+        Friend WithEvents dgvUnitIdNo As CDgvComboBoxColumn
         Friend WithEvents dgvUnitQty As DataGridViewTextBoxColumn
         Friend WithEvents BaseQtyDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents dgvProductIdNo As DataGridViewTextBoxColumn

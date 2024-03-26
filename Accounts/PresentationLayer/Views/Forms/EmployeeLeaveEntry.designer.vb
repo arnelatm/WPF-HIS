@@ -66,7 +66,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvApprovalIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvApprovalDate = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvItemIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvStatus = New AATM.Libraries.CBaseControlsLibrary.CtComboBoxColumn()
+            Me.dgvStatus = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
             Me.dgvApprovedBy = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvApprovalNote = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.EmployeeLeaveIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -874,7 +874,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents dgvApprovalIdNo As CDgvTextColumn
         Friend WithEvents dgvApprovalDate As CDgvTextColumn
         Friend WithEvents dgvItemIdNo As CDgvTextColumn
-        Friend WithEvents dgvStatus As CtComboBoxColumn
+        Friend WithEvents dgvStatus As CDgvComboBoxColumn
         Friend WithEvents dgvApprovedBy As CDgvTextColumn
         Friend WithEvents dgvApprovalNote As CDgvTextColumn
         Friend WithEvents EmployeeLeaveIdNo As DataGridViewTextBoxColumn
