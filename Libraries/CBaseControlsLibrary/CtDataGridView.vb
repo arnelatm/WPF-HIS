@@ -99,7 +99,11 @@ Public Class CtDataGridView
             UpdateDisplayOnlyControl()
             For Each col In Columns
                 If TypeOf col Is IEntryControl Then
-                    col.EditingMode = value
+                    If col.DisplayOnly Then
+                        col.EditingMode = False
+                    Else
+                        col.EditingMode = value
+                    End If
                 End If
             Next
             If ShowFooter Then
@@ -117,11 +121,12 @@ Public Class CtDataGridView
         If _editingMode And Not DisplayOnly Then
             DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
             DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-            Me.ReadOnly = False
+            Me.[ReadOnly] = False
         Else
+            'Me.[ReadOnly] = False
             DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
             DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-            Me.ReadOnly = True
+            'Me.[ReadOnly] = True
         End If
     End Sub
 
@@ -455,6 +460,8 @@ Public Class CtDataGridView
 
     Private Sub DataGridView1_EditingControlShowing(ByVal sender As Object, ByVal e As DataGridViewEditingControlShowingEventArgs) Handles MyBase.EditingControlShowing
         If TypeOf e.Control Is CtComboBoxEditingControl Then
+            'Me.EditingMode = True
+            Me.SuspendDrawingNew()
             'declare variable(cb) as a CtCombobox
             Dim cb As CtComboBoxEditingControl
             cb = e.Control
@@ -462,24 +469,12 @@ Public Class CtDataGridView
             cb.DropDownStyle = ComboBoxStyle.DropDown
             'set the property of a combobox to autocomplete mode.
             cb.AutoCompleteMode = AutoCompleteMode.SuggestAppend
-            cb.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-            cb.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            'cb.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+            'cb.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             If CurrentCell IsNot Nothing Then
                 cb.SuggestCharCount = DirectCast(CurrentCell.OwningColumn, AATM.Libraries.CBaseControlsLibrary.CtComboBoxColumn).SuggestCharCount
             End If
-        ElseIf TypeOf e.Control Is CtComboBoxEditingControl Then
-            'declare variable(cb) as a CtCombobox
-            Dim cb As CtComboBoxEditingControl
-            cb = e.Control
-            'set the dropdown style of a combobox
-            cb.DropDownStyle = ComboBoxStyle.DropDown
-            'set the property of a combobox to autocomplete mode.
-            cb.AutoCompleteMode = AutoCompleteMode.SuggestAppend
-            ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-            BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-            'If CurrentCell IsNot Nothing Then
-            '    cb.SuggestCharCount = DirectCast(CurrentCell.OwningColumn, CComboBoxColumn).SuggestCharCount
-            'End If
+            Me.ResumeDrawingNew()
         ElseIf TypeOf e.Control Is CCustomDateTimePicker Then
             Dim cDtp As CCustomDateTimePicker
             cDtp = e.Control

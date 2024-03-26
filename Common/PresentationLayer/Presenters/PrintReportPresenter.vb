@@ -150,7 +150,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Sub OnGetControlDataSourceHandler(ByRef eventType As GetControlDataSource) Implements ISubscriber(Of GetControlDataSource).OnEventHandler
-            MakeControlDataSources({New Object() {eventType.TableName, eventType.Control, eventType.FieldNames, eventType.Filter, eventType.SortOrder, eventType.DisplayMember, eventType.ValueMember, eventType.Ascending}})
+            MakeControlDataSources({New Object() {eventType.TableName, eventType.Control, eventType.FieldNames, eventType.Filter, eventType.SortOrder, eventType.Ascending, eventType.DisplayMember, eventType.ValueMember}})
         End Sub
 
         Public Sub OnOtherDataHandler(ByRef eventType As OtherData) Implements ISubscriber(Of OtherData).OnEventHandler

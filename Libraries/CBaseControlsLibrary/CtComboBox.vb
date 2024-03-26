@@ -74,10 +74,15 @@ Public Class CtComboBox
             Return _editingMode
         End Get
         Set(value As Boolean)
-            _editingMode = value
+            If DisplayOnly Then
+                _editingMode = False
+            Else
+                _editingMode = value
+            End If
             UpdateDisplayOnlyControl()
         End Set
     End Property
+
 
     Public Sub UpdateDisplayOnlyControl()
         If _editingMode AndAlso Editable AndAlso Not DisplayOnly Then
@@ -921,6 +926,10 @@ Public Class CtComboBox
         Return description
     End Function
 
+    'Private Sub cacParentIdNo_BackColorChanged(sender As Object, e As EventArgs) Handles MyBase.BackColorChanged
+    '    Dim x = 1
+    '    x = x + 1
+    'End Sub
 
 End Class
 

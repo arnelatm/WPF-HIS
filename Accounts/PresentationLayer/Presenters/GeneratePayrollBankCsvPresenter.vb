@@ -26,8 +26,9 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            MakeControlDataSources({New Object() {"Payroll", "IdNo", "IdNo,StartDate", Nothing},
-                                    New Object() {"PayCycle", "PayCycleIdNo", Nothing, Nothing}})
+
+            MakeControlDataSources({New Object() {"PayrollDate_View", "IdNo", "IdNo,PayCharDate,PayrollCode", Nothing, "PayCharDate", False, Nothing, Nothing, False},
+                                    New Object() {"PayCycle", "PayCycleIdNo"}})
         End Sub
 
         Public Sub OnGenerateCsvFile(idNo As Int32)

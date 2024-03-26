@@ -55,7 +55,7 @@ Namespace PresentationLayer.Views.Forms.Reports
 
 
         Private Sub PayrollPrinting_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            Ea.PublishEvent(New GetControlDataSource("Payroll", cboPayroll, Nothing, "IdNo", False))
+            Ea.PublishEvent(New GetControlDataSource("Payroll", cboPayroll, Nothing, Nothing, "IdNo", False))
             cboPayroll.EditingMode = True
         End Sub
 

@@ -1,4 +1,5 @@
 ﻿Imports System.ComponentModel
+Imports System.Drawing
 Imports System.Globalization
 Imports System.Linq.Expressions
 Imports System.Reflection
@@ -253,6 +254,12 @@ Public Module Extensions
         If Target IsNot Nothing Then
             SendMessage(Target.Handle, WM_SETREDRAW, True, IntPtr.Zero)
         End If
+        'If TypeOf Target Is DataGridView Then
+        '    Dim t As DataGridView
+        '    t = Target
+        '    t.CurrentCell.Style.BackColor = Color.FromArgb(255, 255, 255)
+        '    t.Refresh()
+        'End If
         'If Redraw Then
         Target.Refresh()
         'End If

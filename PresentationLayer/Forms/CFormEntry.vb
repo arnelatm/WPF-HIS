@@ -661,7 +661,16 @@ Public Class CFormEntry
         Dim ctrl As Control
         For Each ctrl In FindControlRecursive(allCtrl, Me)
             If TypeOf ctrl Is IEntryControl Then
-                'If TypeOf ctrl Is CtComboBox Then ' = "cboAccountIdNo" Then
+                'If TypeOf ctrl Is CtDataGridView Then 'And ctrl.Name = "dgvAccountIdNo" Then ' = "cboAccountIdNo" Then
+                '    Dim cx As CtComboBoxColumn
+                '    For Each column In ctrl
+
+                '    Next
+                'End If
+                'If TypeOf ctrl Is CtComboBoxEditingControl Then 'And ctrl.Name = "dgvAccountIdNo" Then ' = "cboAccountIdNo" Then
+                '    Debugger.Break()
+                'End If
+                'If ctrl.Name.ToLower() = "dgvaccountidno" Then ' = "cboAccountIdNo" Then
                 '    Debugger.Break()
                 'End If
                 If TypeOf ctrl Is DataGridView Then

@@ -220,8 +220,9 @@ Public Class CtComboBoxEditingControl
         If selectAll Then
             MyBase.SelectAll()
         End If
-        BackColor = GlobalVariables.DefaultFormBackgroundColor
-        ForeColor = GlobalVariables.DefaultFormForegroundColor
+        BackColor = GlobalVariables.DefaultFormControlEditingBackgroundColor
+        ForeColor = GlobalVariables.DefaultFormControlEditingForegroundColor
+        'Me.EditingMode = True
     End Sub
 
     Private Sub NotifyDataGridViewOfValueChange()

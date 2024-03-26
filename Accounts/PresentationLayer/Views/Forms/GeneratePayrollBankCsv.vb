@@ -18,7 +18,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property IdNo As Int16 Implements IPayrollView.IdNo
+        Public Property PayrollIdNo As Int16 Implements IPayrollView.IdNo
             Get
                 Return cboIdNo.GetValue()
             End Get
@@ -98,8 +98,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub cboIdNo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboIdNo.SelectedValueChanged
-            Dim idNo As Int16 = DirectCast(cboIdNo.SelectedValue, System.Data.DataRowView).Row(0)
-            RaiseEvent SelectedPayrollChanged(idNo)
+            RaiseEvent SelectedPayrollChanged(cboIdNo.SelectedValue)
         End Sub
 
         Private Sub btnCancel_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnCancel.ClickButtonArea
