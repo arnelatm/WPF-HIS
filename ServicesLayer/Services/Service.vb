@@ -2,10 +2,8 @@
 Imports System.Dynamic
 Imports System.Globalization
 Imports System.Reflection
-Imports System.Security.AccessControl
 Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.DataLayer
-Imports AATM.DataLayer.AdoNet
 Imports AATM.Libraries
 Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.GlobalFuncNSub
@@ -19,13 +17,13 @@ Namespace Services
 
     Public Class Service
         Implements IService
+
         Protected Shared ReadOnly Provider As String = ConfigurationManager.AppSettings.Get("DataProvider")
         Protected Shared ReadOnly Factory As IDaoFactory = DaoFactories.GetFactory(Provider)
-        Protected Shared ReadOnly BaseDao As IBaseDao = Factory.BaseDao
-        Protected Shared ReadOnly DataRetriever As IDataPageRetriever = Factory.DataRetriever
 
-        'Protected Shared ReadOnly DefaultFieldValueDao As IDefaultFieldValueDao = Factory.DefaultFieldValueDao
+        Protected Shared ReadOnly BaseDao As IBaseDao = Factory.BaseDao
         Protected Shared ReadOnly TblColPropDao As ITblColPropDao = Factory.TblColPropDao
+        Protected Shared ReadOnly DataRetriever As IDataPageRetriever = Factory.DataRetriever
 
         Public Sub New(objectName As String, Optional bizParam As Object = Nothing, Optional daoParam As Object = Nothing)
             If objectName Is Nothing Or objectName = "" Then
@@ -178,28 +176,6 @@ Namespace Services
         End Function
 
 
-        Public Function GetListLookupT(lookupObj As LookupTable) As List(Of LookupTable.LookupData)
-            If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
-                Dim nameFieldArabic = lookupObj.NameField + "Ara"
-                If FieldExistInTable(lookupObj.TableName, nameFieldArabic) Then
-                    If lookupObj.SortKey = lookupObj.NameField Then
-                        lookupObj.SortKey = nameFieldArabic
-                        Dim i As Integer = 0
-                        For Each field In lookupObj.FieldsToShow
-                            If field = lookupObj.NameField Then
-                                lookupObj.FieldsToShow(i) = nameFieldArabic
-                            End If
-                            i = i + 1
-                        Next
-                        lookupObj.NameField = nameFieldArabic
-                    End If
-                End If
-            End If
-            Dim retVal As List(Of LookupTable.LookupData) = GetRecords(lookupObj.TableName, lookupObj.SortKey, lookupObj.FieldsToShow, lookupObj.FilterKey)
-            Return retVal
-        End Function
-
-
         Public Function GetListLookupDT(lookupObj As LookupTable) As DataTable
             If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
                 Dim nameFieldArabic = lookupObj.NameField + "Ara"
@@ -221,6 +197,26 @@ Namespace Services
             Return retVal
         End Function
 
+        Public Function GetListLookupT(lookupObj As LookupTable) As List(Of LookupTable.LookupData)
+            If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
+                Dim nameFieldArabic = lookupObj.NameField + "Ara"
+                If FieldExistInTable(lookupObj.TableName, nameFieldArabic) Then
+                    If lookupObj.SortKey = lookupObj.NameField Then
+                        lookupObj.SortKey = nameFieldArabic
+                        Dim i As Integer = 0
+                        For Each field In lookupObj.FieldsToShow
+                            If field = lookupObj.NameField Then
+                                lookupObj.FieldsToShow(i) = nameFieldArabic
+                            End If
+                            i = i + 1
+                        Next
+                        lookupObj.NameField = nameFieldArabic
+                    End If
+                End If
+            End If
+            Dim retVal As List(Of LookupTable.LookupData) = GetRecords(lookupObj.TableName, lookupObj.SortKey, lookupObj.FieldsToShow, lookupObj.FilterKey)
+            Return retVal
+        End Function
         Public Function GetLookupT(lookupObj As LookupTable, Optional hierarchical As Boolean = False) As List(Of LookupTable.LookupData)
             If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
                 Dim nameFieldArabic = lookupObj.NameField + "Ara"
@@ -567,6 +563,15 @@ Namespace Services
             Return DataDao.GenericUpdateRecordWithIdNo(Of T)(idNo, tableName, fieldName, value)
         End Function
 
+        Public Function GetAll(Of TM As New)(sortKey As String) As List(Of TM) Implements IService.GetAll
+            Dim modelOfPresenter As New List(Of TM)
+            Dim record = DataDao.GetAll(Of TM)(sortKey)
+            If record IsNot Nothing Then
+                GlobalVariables.Mapper.Map(record, modelOfPresenter)
+            End If
+            Return modelOfPresenter
+        End Function
+
         Public Function GetDaoRecords(Optional filter As String = Nothing)
             Return DataDao.GetDaoRecords(filter)
         End Function
@@ -588,6 +593,10 @@ Namespace Services
 
         Public Function GetDataTable(sqlCommand As String) As DataTable
             Return DataDao.GetDataTable(sqlCommand)
+        End Function
+
+        Public Function GetDtRecords(ByVal tableName As String, ByVal Optional fields As String = Nothing, Optional filterKey As String = Nothing, Optional ByVal sortKey As String = Nothing, Optional ascending As Boolean = True) As Object Implements IService.GetDtRecords
+            Return DataDao.GetDtRecords(tableName, fields, filterKey, sortKey, ascending)
         End Function
 
         Public Function GetFieldOnMaxField(searchFieldName As String, tableName As String, returnFieldName As String, Optional filter As String = Nothing) As Object Implements IService.GetFieldOnMaxField
@@ -643,17 +652,6 @@ Namespace Services
         Public Function GetPrintJobIdNo(reportName As String) As Integer Implements IService.GetPrintJobIdNo
             Return DataDao.GetPrintJobIdNo(reportName)
         End Function
-
-
-        Public Function GetAll(Of TM As New)(sortKey As String) As List(Of TM) Implements IService.GetAll
-            Dim modelOfPresenter As New List(Of TM)
-            Dim record = DataDao.GetAll(Of TM)(sortKey)
-            If record IsNot Nothing Then
-                GlobalVariables.Mapper.Map(record, modelOfPresenter)
-            End If
-            Return modelOfPresenter
-        End Function
-
         Public Function GetRecordByIdNo(Of TM As New)(idNo As Int32) As TM Implements IService.GetRecordByIdNo
             Dim modelOfPresenter As New TM
             Dim record = DataDao.GetRecordByIdNo(Convert.ToInt32(idNo))
@@ -681,10 +679,6 @@ Namespace Services
 
         Public Function GetRecordFieldsFiltered(tableName As String, fieldList As String, filter As String, parameter As Object) As ExpandoObject Implements IService.GetRecordFieldsFiltered
             Return DataDao.GetRecordFieldsFiltered(tableName, fieldList, filter, parameter)
-        End Function
-
-        Public Function GetTopOneFields(tableName As String, fieldList As String, filter As String, order As String, orderAscending As Boolean) As ExpandoObject Implements IService.GetTopOneFields
-            Return DataDao.GetTopOneFields(tableName, fieldList, filter, order, orderAscending)
         End Function
 
         Public Function GetRecordFieldWith2Key(searchValue1 As String, searchValue2 As String, tableName As String, searchFieldName1 As String, searchFieldName2 As String, returnFieldName As String) As String Implements IService.GetRecordFieldWith2Key
@@ -729,11 +723,6 @@ Namespace Services
         '    GlobalVariables.Mapper.Map(bizData, dataModel)
         '    Return dataModel
         'End Function
-
-        Public Function GetDtRecords(ByVal tableName As String, ByVal Optional fields As String = Nothing, Optional filterKey As String = Nothing, Optional ByVal sortKey As String = Nothing, Optional ascending As Boolean = True) As Object Implements IService.GetDtRecords
-            Return DataDao.GetDtRecords(tableName, fields, filterKey, sortKey, ascending)
-        End Function
-
         Public Function GetRecordsWithGroupIdNo(Of TM)(idNo, Optional ByRef sortKey = Nothing) As List(Of TM) Implements IService.GetRecordsWithGroupIdNo
             Dim bizData = DataDao.GetRecordsWithGroupIdNo(idNo, sortKey)
             Dim dataModel As New List(Of TM)
@@ -756,6 +745,9 @@ Namespace Services
             Return DataDao.GetSpRecords(spName, fields, sortKey, filter)
         End Function
 
+        Public Function GetTopOneFields(tableName As String, fieldList As String, filter As String, order As String, orderAscending As Boolean) As ExpandoObject Implements IService.GetTopOneFields
+            Return DataDao.GetTopOneFields(tableName, fieldList, filter, order, orderAscending)
+        End Function
         Public Function HasRecordChanged(idNo As Int32, tableName As String, timeStampedValue As Object, Optional ByVal timeStampField As String = "DateTimeStamp") As Boolean Implements IService.HasRecordChanged
             Return DataDao.HasRecordChanged(idNo, tableName, timeStampedValue, timeStampField)
         End Function
@@ -774,9 +766,17 @@ Namespace Services
             Return DataBo.IsValid()
         End Function
 
+        Public Function PostData(idNo As Int32) As Boolean Implements IService.PostData
+            Return DataDao.PostData(idNo)
+        End Function
+
         Public Sub RestoreConnectionString()
             DataDao.RestoreConnectionString()
         End Sub
+
+        Public Function RunSpWithRollBack(storeProcedureName As String, parameters As Object) As Object Implements IService.RunSpWithRollBack
+            Return DataDao.RunSpWithRollBack(storeProcedureName, parameters)
+        End Function
 
         Public Sub SaveConnectionString()
             DataDao.SaveConnectionString()
@@ -806,11 +806,6 @@ Namespace Services
         Public Function UpdateTable(ByRef data As DataTable, ByVal groupIdNo As Integer) As Integer Implements IService.UpdateTable
             Return DataDao.UpdateRecord(data, groupIdNo)
         End Function
-
-        Public Function PostData(idNo As Int32) As Boolean Implements IService.PostData
-            Return DataDao.PostData(idNo)
-        End Function
-
         Public Function UpdateTvp(dtTable As DataTable) As Integer Implements IService.UpdateTvp
             Return DataDao.UpdateTvp(dtTable)
         End Function
@@ -829,12 +824,6 @@ Namespace Services
                 Return False
             End If
         End Function
-
-        Public Function RunSpWithRollBack(storeProcedureName As String, parameters As Object) As Object Implements IService.RunSpWithRollBack
-            Return DataDao.RunSpWithRollBack(storeProcedureName, parameters)
-        End Function
-
-
 #End Region
 
 #Region "BaseDao Functions"
@@ -851,6 +840,10 @@ Namespace Services
             Return BaseDao.GetNextSeries(seriesName)
         End Function
 
+        Public Function GetRecordWithIdNo(tableName As String, fieldList As String, IdNo As Integer) As ExpandoObject Implements IService.GetRecordWithIdNo
+            Return BaseDao.GetRecordWithIdNo(tableName, fieldList, IdNo)
+        End Function
+
         Public Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int16) As ArrayList Implements IService.GetUserSecurity
             Return BaseDao.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)
         End Function
@@ -862,11 +855,6 @@ Namespace Services
         Public Function InitializeSecurityObject() As Integer Implements IService.InitializeSecurityObject
             Return BaseDao.InitializeSecurityObject()
         End Function
-
-        Public Function GetRecordWithIdNo(tableName As String, fieldList As String, IdNo As Integer) As ExpandoObject Implements IService.GetRecordWithIdNo
-            Return BaseDao.GetRecordWithIdNo(tableName, fieldList, IdNo)
-        End Function
-
 #End Region
 
     End Class

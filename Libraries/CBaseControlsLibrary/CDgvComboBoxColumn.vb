@@ -1,5 +1,4 @@
 ﻿Imports System.ComponentModel
-Imports System.Drawing
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 
