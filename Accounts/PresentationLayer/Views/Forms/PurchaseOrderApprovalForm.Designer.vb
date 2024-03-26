@@ -51,8 +51,8 @@
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
             Me.DataGridViewPoUnposted = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
-            Me.dgvWarehouseIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBoxColumn()
-            Me.dgvSupplierIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBoxColumn()
+            Me.dgvWarehouseIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+            Me.dgvSupplierIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
             Me.DataGridViewPoItems = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.dgvUnitName = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvQtyOnHand = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
@@ -69,7 +69,7 @@
             Me.dgvReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
-            Me.dgvUserIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBoxColumn()
+            Me.dgvUserIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
             Me.dgvNotes = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.bsPurchaseOrders = New System.Windows.Forms.BindingSource(Me.components)
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -889,10 +889,10 @@
         Friend WithEvents dgvIdNo As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents dgvReferenceNo As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents dgvTransactionDate As Libraries.CBaseControlsLibrary.CDgvTextColumn
-        Friend WithEvents dgvWarehouseIdNo As Libraries.CBaseControlsLibrary.CtComboBoxColumn
-        Friend WithEvents dgvSupplierIdNo As Libraries.CBaseControlsLibrary.CtComboBoxColumn
+        Friend WithEvents dgvWarehouseIdNo As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
+        Friend WithEvents dgvSupplierIdNo As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
         Friend WithEvents dgvAmount As Libraries.CBaseControlsLibrary.CdgvMoneyColumn
-        Friend WithEvents dgvUserIdNo As Libraries.CBaseControlsLibrary.CtComboBoxColumn
+        Friend WithEvents dgvUserIdNo As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
         Friend WithEvents dgvNotes As Libraries.CBaseControlsLibrary.CDgvTextColumn
     End Class
 End Namespace

@@ -50,8 +50,8 @@ Namespace PresentationLayer.Views.Forms
         Me.lblAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.DataGridViewDistributionSchemeItems = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBoxColumn()
-            Me.dgvRevCostCenterName = New AATM.Libraries.CBaseControlsLibrary.CtComboBoxColumn()
+            Me.dgvRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+            Me.dgvRevCostCenterName = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
             Me.Percentage = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.dgvIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvDistributionSchemeIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -545,8 +545,8 @@ End Sub
         Friend WithEvents lblValidityEndDate As CLabel
         Friend WithEvents dtpValidityEndDate As CCustomDateTimePicker
         Friend WithEvents dgvSequence As CDgvTextColumn
-        Friend WithEvents dgvRevCostCenterIdNo As CtComboBoxColumn
-        Friend WithEvents dgvRevCostCenterName As CtComboBoxColumn
+        Friend WithEvents dgvRevCostCenterIdNo As CDgvComboBoxColumn
+        Friend WithEvents dgvRevCostCenterName As CDgvComboBoxColumn
         Friend WithEvents Percentage As DataGridViewTextBoxColumn
         Friend WithEvents dgvIdNo As CDgvTextColumn
         Friend WithEvents dgvDistributionSchemeIdNo As CDgvTextColumn

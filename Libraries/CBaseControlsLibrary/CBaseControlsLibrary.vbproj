@@ -147,8 +147,8 @@
     <Compile Include="CtComboBoxEditingControl.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CtComboBoxCell.vb" />
-    <Compile Include="CtComboBoxColumn.vb" />
+    <Compile Include="CDgvComboBoxCell.vb" />
+    <Compile Include="CDgvComboBoxColumn.vb" />
     <Compile Include="cxComboBox.vb">
       <SubType>Component</SubType>
     </Compile>
