@@ -70,20 +70,19 @@ Public Class CtComboBoxCell
         DataGridView.SuspendDrawingNew()
         MyBase.InitializeEditingControl(pRowIndex, pFormattedValue, cellStyle)
         CellEditingControl = CType(DataGridView.EditingControl, CtComboBoxEditingControl)
-        CellEditingControl.EditingMode = True
         DataGridView.ResumeDrawingNew()
     End Sub
 
-    Public Overrides Function Clone() As Object
+    'Public Overrides Function Clone() As Object
 
-        Dim copy As CtComboBoxCell = TryCast(MyBase.Clone(), CtComboBoxCell)
-        'copy.DisplayOnly = CellEditingControl.DisplayOnly
-        'copy.EditingMode = CellEditingControl.EditingMode
-        'copy.Translatable = CellEditingControl.Translatable
-        'copy.DisplayMember = CellEditingControl.DisplayMember
-        'copy.ValueMember = CellEditingControl.ValueMember
-        Return copy
-    End Function
+    '    Dim copy As CtComboBoxCell = TryCast(MyBase.Clone(), CtComboBoxCell)
+    '    'copy.DisplayOnly = CellEditingControl.DisplayOnly
+    '    'copy.EditingMode = CellEditingControl.EditingMode
+    '    'copy.Translatable = CellEditingControl.Translatable
+    '    'copy.DisplayMember = CellEditingControl.DisplayMember
+    '    'copy.ValueMember = CellEditingControl.ValueMember
+    '    Return copy
+    'End Function
 
     Public Property CellEditingControl As CtComboBoxEditingControl
 

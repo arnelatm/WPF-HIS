@@ -86,12 +86,12 @@ Public Class CtComboBoxColumn
 
     Public Property SuggestCharCount As Integer
 
-    Public Overrides Function Clone() As Object
-        Dim copy As CtComboBoxColumn = TryCast(MyBase.Clone(), CtComboBoxColumn)
-        'copy.DisplayOnly = DisplayOnly
-        'copy.EditingMode = EditingMode
-        'copy.Translatable = Translatable
-        Return copy
-    End Function
+    'Public Overrides Function Clone() As Object
+    '    Dim copy As CtComboBoxColumn = TryCast(MyBase.Clone(), CtComboBoxColumn)
+    '    'copy.DisplayOnly = DisplayOnly
+    '    'copy.EditingMode = EditingMode
+    '    'copy.Translatable = Translatable
+    '    Return copy
+    'End Function
 
 End Class
