@@ -276,12 +276,13 @@
             '
             'SplitContainer1
             '
+            Me.SplitContainer1.Location = New System.Drawing.Point(0, 59)
             Me.SplitContainer1.Margin = New System.Windows.Forms.Padding(5)
             '
             'SplitContainer1.Panel2
             '
             Me.SplitContainer1.Panel2.Controls.Add(Me.floMainData)
-            Me.SplitContainer1.Size = New System.Drawing.Size(1365, 588)
+            Me.SplitContainer1.Size = New System.Drawing.Size(1365, 584)
             Me.SplitContainer1.SplitterDistance = 415
             Me.SplitContainer1.SplitterWidth = 17
             '
@@ -290,7 +291,7 @@
             Me.FormTreeView.LineColor = System.Drawing.Color.Black
             Me.FormTreeView.Margin = New System.Windows.Forms.Padding(5)
             Me.FormTreeView.RightToLeft = System.Windows.Forms.RightToLeft.No
-            Me.FormTreeView.Size = New System.Drawing.Size(415, 588)
+            Me.FormTreeView.Size = New System.Drawing.Size(415, 584)
             '
             'ImageListTreeView
             '
@@ -603,7 +604,6 @@
             Me.tbcEmployeeInformation.Margin = New System.Windows.Forms.Padding(4)
             Me.tbcEmployeeInformation.Name = "tbcEmployeeInformation"
             Me.tbcEmployeeInformation.RightToLeft = System.Windows.Forms.RightToLeft.No
-            Me.tbcEmployeeInformation.SecurityKey = ""
             Me.tbcEmployeeInformation.SelectedIndex = 0
             Me.tbcEmployeeInformation.Size = New System.Drawing.Size(917, 454)
             Me.tbcEmployeeInformation.TabIndex = 3
@@ -984,7 +984,6 @@
             Me.dtpBirthDate.Margin = New System.Windows.Forms.Padding(0)
             Me.dtpBirthDate.Name = "dtpBirthDate"
             Me.dtpBirthDate.ReadOnlyDp = False
-            Me.dtpBirthDate.SecurityKey = Nothing
             Me.dtpBirthDate.ShowLongDate = False
             Me.dtpBirthDate.ShowTime = False
             Me.dtpBirthDate.Size = New System.Drawing.Size(124, 27)
@@ -2970,7 +2969,6 @@
             Me.DataGridViewPhones.RowHeadersWidth = 51
             Me.DataGridViewPhones.Searchable = True
             Me.DataGridViewPhones.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.DataGridViewPhones.SecurityKey = ""
             Me.DataGridViewPhones.SequenceColumn = "dgvSequence"
             Me.DataGridViewPhones.SequenceFieldName = "Sequence"
             Me.DataGridViewPhones.ShowFooter = False
@@ -3428,7 +3426,6 @@
             Me.DataGridViewDocuments.RowHeadersWidth = 51
             Me.DataGridViewDocuments.Searchable = True
             Me.DataGridViewDocuments.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.DataGridViewDocuments.SecurityKey = ""
             Me.DataGridViewDocuments.SequenceColumn = "dgvSequenceDocument"
             Me.DataGridViewDocuments.SequenceFieldName = "Sequence"
             Me.DataGridViewDocuments.ShowCellErrors = False
@@ -3858,7 +3855,6 @@
             Me.dtpReleasedDate.Margin = New System.Windows.Forms.Padding(0)
             Me.dtpReleasedDate.Name = "dtpReleasedDate"
             Me.dtpReleasedDate.ReadOnlyDp = False
-            Me.dtpReleasedDate.SecurityKey = Nothing
             Me.dtpReleasedDate.ShowLongDate = False
             Me.dtpReleasedDate.ShowTime = False
             Me.dtpReleasedDate.Size = New System.Drawing.Size(124, 27)
@@ -3903,7 +3899,6 @@
             Me.dtpHiredDate.Margin = New System.Windows.Forms.Padding(0)
             Me.dtpHiredDate.Name = "dtpHiredDate"
             Me.dtpHiredDate.ReadOnlyDp = False
-            Me.dtpHiredDate.SecurityKey = Nothing
             Me.dtpHiredDate.ShowLongDate = False
             Me.dtpHiredDate.ShowTime = False
             Me.dtpHiredDate.Size = New System.Drawing.Size(124, 27)

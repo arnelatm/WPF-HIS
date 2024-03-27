@@ -384,6 +384,9 @@ Public Class EntryFormLoaded
     End Sub
 
     Public Property ViewControl As Control
+    Public Property AddingAllowed As Boolean
+    Public Property EditingAllowed As Boolean
+    Public Property DeletingAllowed As Boolean
 
 End Class
 

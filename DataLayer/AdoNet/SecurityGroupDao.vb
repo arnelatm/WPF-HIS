@@ -6,7 +6,7 @@ Namespace AdoNet
 
     Public Class SecurityGroupDao
         Inherits BaseDao
-        Implements IDao(Of SecurityGroup), IDaoChild(Of GroupAccess)
+        Implements IDao(Of SecurityGroup), IDaoChild(Of GroupAccess), IAutoCodeDao
 
         Private ReadOnly Db As New Db()
 
@@ -93,6 +93,10 @@ Namespace AdoNet
 
         Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of GroupAccess).InsertTvp
             Return Db.InsertTvp("dbo.InsertGroupAccessTVP", tvpTable)
+        End Function
+
+        Public Function GenerateCode(idNo As Integer) As String Implements IAutoCodeDao.GenerateCode
+            Return UpdateCode("SecurityGroup", "SecurityGroup" + "Code", "IdNo", idNo)
         End Function
 
         Private Shared ReadOnly MakeGroupAccess As Func(Of IDataReader, GroupAccess) =

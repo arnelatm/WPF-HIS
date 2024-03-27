@@ -33,6 +33,11 @@ Public Class LookupTable
         Public Property Code As String
         Public Property Index
 
+        'Public Sub New()
+        '    Dim x = 0
+        '    x = x + 1
+        'End Sub
+
         Public Overrides Function ToString() As String
             Return Name.ToString()
         End Function

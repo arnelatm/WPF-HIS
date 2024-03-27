@@ -1,4 +1,5 @@
-﻿Imports AATM.Libraries.MessagingLibrary
+﻿Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Views.Interfaces
 Imports AATM.ServicesLayer.Services
 
@@ -32,5 +33,14 @@ Public Class SecurityObjectPresenter(Of TM As New)
         End If
         Return retValue
     End Function
+
+    Public Sub UpdateCode(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
+        'Dim passedValue As Integer = retVal
+        If retVal >= 0 And GlobalFunctions.IsEmpty(View.SecurityObjectCode) Then
+            retVal = Service.GenerateCode(View.IdNo)
+            View.SecurityObjectCode = Service.GetFieldWithIdNo(View.IdNo, "SecurityObject", "SecurityObjectCode")
+        End If
+    End Sub
+
 
 End Class

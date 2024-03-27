@@ -119,10 +119,6 @@ Namespace ServiceLayer.ActionService
             Return DataDao.UpdateOpeningBalance(DataBo)
         End Function
 
-        Public Function GenerateCode(ByVal idNo As Integer) As String Implements IServiceAccounts.GenerateCode
-            Return DataDao.GenerateCode(idNo)
-        End Function
-
         Public Function UpdateVatNumber(vatNumber As String, idNo As Integer) As Integer Implements IServiceAccounts.UpdateVatNumber
             Return DataDao.UpdateVatNumber(vatNumber, idNo)
         End Function

@@ -250,30 +250,6 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        'Public Function IsAccountsReceivableAccount(ByVal accountIdNo As Int16)
-        '    Return GetRecordFieldWithKey(accountIdNo, "Account", "IdNo", "SpecialAccount") = "AR"
-        'End Function
-
-        'Public Function IsInputVatAccount(ByVal accountIdNo As Int16)
-        '    Return GetRecordFieldWithKey(accountIdNo, "Account", "IdNo", "SpecialAccount") = "VI"
-        'End Function
-
-        'Public Function GetAdvancesToSupplierAccountIdNo()
-        '    Return GetRecordFieldWithKey(EnumToCode(SpecialAccountSelection.AdvancesToSupplier), "Account", "SpecialAccount", "IdNo")
-        'End Function
-
-        'Public Function GetAccountTypesList(accountType As String, Optional ByVal sortKey As String = "AccountName")
-        '    Dim values = accountType.Split(",")
-        '    Dim lookupFilterKey = ""
-        '    For Each account In values
-        '        If lookupFilterKey <> "" Then
-        '            lookupFilterKey = lookupFilterKey + " Or "
-        '        End If
-        '        lookupFilterKey = lookupFilterKey + "SpecialAccount = '" & account & "'"
-        '    Next
-        '    Return GetLookupT("Account", sortKey, lookupFilterKey)
-        'End Function
-
         Public Function ConvertSpecialAccountsToFilter(accountType As String)
             Dim values = accountType.Split(",")
             Dim lookupFilter = ""

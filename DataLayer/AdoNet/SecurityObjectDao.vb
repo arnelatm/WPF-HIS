@@ -6,7 +6,7 @@ Namespace AdoNet
 
     Public Class SecurityObjectDao
         Inherits BaseDao
-        Implements IDao(Of SecurityObject)
+        Implements IDao(Of SecurityObject), IAutoCodeDao
 
         Private ReadOnly _db As New Db()
 
@@ -67,6 +67,11 @@ Namespace AdoNet
 
             Return _db.Update(sql, Take(recordData))
         End Function
+
+        Public Function GenerateCode(idNo As Integer) As String Implements IAutoCodeDao.GenerateCode
+            Return UpdateCode("SecurityObject", "SecurityObjectCode", "IdNo", idNo)
+        End Function
+
 
     End Class
 

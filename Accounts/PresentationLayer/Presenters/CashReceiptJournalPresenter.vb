@@ -1115,52 +1115,6 @@ Namespace PresentationLayer.Presenters
             Return retValue
         End Function
 
-        'Public Sub SetPayorDataSource()
-        '    Dim cPayorType As String = View.PayorType
-        '    Dim cbDataSource = Nothing
-        '    Dim curValue As Int32? = cboPayorIdNo.SelectedValue
-        '    cboPayorIdNo.DataSource = cbDataSource
-        '    If OpenInvoiceMode Then
-        '        cbDataSource = Presenter.GetLookup("Customer")
-        '    Else
-        '        Dim payorTypeEnum = CodeToEnum(Of ReceiptTypeSelection)(cPayorType)
-        '        If payorTypeEnum = ReceiptTypeSelection.Customer Then
-        '            cbDataSource = Presenter.GetLookup("Customer")
-        '        ElseIf payorTypeEnum = ReceiptTypeSelection.Employee Then
-        '            cbDataSource = Presenter.GetLookup("Employee")
-        '        ElseIf payorTypeEnum = ReceiptTypeSelection.SupplierRefund Then
-        '            cbDataSource = Presenter.GetLookup("Supplier")
-        '        End If
-        '    End If
-        '    cboPayorIdNo.DisplayMember = "Name"
-        '    cboPayorIdNo.ValueMember = "IdNo"
-        '    cboPayorIdNo.DataSource = cbDataSource
-        '    If curValue IsNot Nothing Then
-        '        cboPayorIdNo.SelectedValue = curValue
-        '    Else
-        '        cboPayorIdNo.SelectedValue = -1
-        '    End If
-        'End Sub
-
-        'Protected Overrides Function DependentRecordExist(Optional ByVal warn As Boolean = True) As Boolean
-        '    Dim returnValue As Boolean = False
-        '    For Each item In View.JournalItems
-        '        If IsAccountsReceivableAccount(item.AccountIdNo) Then
-        '            Dim apOpenInvoiceNumber As Int32 = GetApOpenInvoiceNumber(item.IdNo)
-        '            If CheckDependentRecords(Of Int32)(apOpenInvoiceNumber, "CdOiItem", "ApOpenInvoiceIdNo") Then
-        '                Return True
-        '            End If
-        '        End If
-        '        If IsAccountsPayableAccount(View.AccountIdNo) Then
-        '            Dim apOpenInvoiceNumber As Int32 = GetApOpenInvoiceNumber(item.IdNo)
-        '            If CheckDependentRecords(Of Int32)(apOpenInvoiceNumber, "CdOiItem", "ApOpenInvoiceIdNo") Then
-        '                Return True
-        '            End If
-        '        End If
-        '    Next
-        '    Return False
-        'End Function
-
     End Class
 
 End Namespace

@@ -19,8 +19,6 @@ Namespace ServiceLayer.ActionService
 
         Function GetOpenInvoices(Of TM)(idNo As Int32) As List(Of TM)
 
-        Function GenerateCode(idNo As Integer) As String
-
         Function UpdateVatNumber(vatNumber As String, idNo As Integer) As Integer
 
         Function GetOpenPettyCash()

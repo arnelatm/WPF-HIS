@@ -45,9 +45,8 @@ Namespace PresentationLayer.Views.Forms
             DtUpdateTable.Columns.Add("RevCostCenterIdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("Percentage", GetType(Decimal))
 
-            RevCostCentersByCode = Presenter.GetLookup("RevCostCenter")
-
         End Sub
+
 
 #Region "DistributionSchemeView"
 
