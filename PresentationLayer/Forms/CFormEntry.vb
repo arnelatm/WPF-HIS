@@ -24,6 +24,9 @@ Public Class CFormEntry
     Protected RecordDateTimeStampValue As Object
     Protected SingleData As Boolean = False
     Protected AutoAddOnSave As Boolean = False
+    Protected EditingAllowed As Boolean = False
+    Protected AddingAllowed As Boolean = False
+    Protected DeletingAllowed As Boolean = False
     Private _debugSwitch As Byte = 0
 
     'Private _addMode As Boolean = False
@@ -251,7 +254,11 @@ Public Class CFormEntry
                 End If
                 btnUndo.Enabled = True
             Else
-                btnEdit.Enabled = True
+                If EditingAllowed Then
+                    btnEdit.Enabled = True
+                Else
+                    btnEdit.Enabled = True
+                End If
                 btnQuit.Enabled = True
                 btnSave.Enabled = False
                 btnUndo.Enabled = False
@@ -319,6 +326,19 @@ Public Class CFormEntry
                 btnLast.Enabled = False
             End If
         End If
+        If EditingAllowed Then
+            btnEdit.Visible = True
+        Else
+            btnEdit.Visible = False
+        End If
+        If AddingAllowed Then
+            btnAdd.Visible = True
+        Else
+            btnAdd.Visible = False
+        End If
+
+
+
     End Sub
 
     'Private Shared Sub SetControlVisibility(ByRef cCtrl As Control, controlVisible As Boolean)
@@ -578,8 +598,19 @@ Public Class CFormEntry
             TextDisplayLanguage = CultureInfo.CurrentCulture.Name
             'CreateDataSources()
             CreateMainFieldsDictionary()
+            Dim formLoaded As New EntryFormLoaded(Me)
             If Ea IsNot Nothing Then
-                Ea.PublishEvent(New EntryFormLoaded(Me))
+                Ea.PublishEvent(formLoaded)
+            End If
+            If formLoaded.EditingAllowed Then
+                EditingAllowed = True
+            Else
+                EditingAllowed = False
+            End If
+            If formLoaded.AddingAllowed Then
+                AddingAllowed = True
+            Else
+                AddingAllowed = False
             End If
             'Debugger.Break()
             'PublishClickedButton(ButtonClicked.First)

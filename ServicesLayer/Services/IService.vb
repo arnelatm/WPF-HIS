@@ -79,6 +79,8 @@ Namespace Services
         Function GetField(Of TR, TS1, TS2, TS3)(searchValue1 As TS1, searchValue2 As TS2, searchValue3 As TS3, tableName As String, searchFieldName1 As String, searchFieldName2 As String, searchFieldName3 As String, returnFieldName As String, Optional filter As String = Nothing) As TR
         Function GetRecordFieldsFiltered(tableName As String, fieldList As String, filter As String, parameter As Object) As ExpandoObject
         Function GetRecordWithIdNo(tableName As String, fieldList As String, IdNo As Integer) As ExpandoObject
+        Function GenerateCode(ByVal idNo As Integer) As String
+
     End Interface
 
 End Namespace

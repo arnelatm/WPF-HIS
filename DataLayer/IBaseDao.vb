@@ -92,7 +92,7 @@ Public Interface IBaseDao
 
     Function GetRecordFieldWithKeyG(Of TR, TS)(searchValue As TS, tableName As String, searchFieldName As String, returnFieldName As String) As TR
 
-    Function GetRecordPosition(tableName As String, idNo As Int32, optional IdFieldName As String = Nothing) As Integer
+    Function GetRecordPosition(tableName As String, idNo As Int32, Optional IdFieldName As String = Nothing) As Integer
     Function GetRecordPositionByKey(Of T)(keyValue As T, tableName As String, sortKey As String, keyFieldName As String) As Integer
 
     Function GetRecordPositionByName(tableName As String, sortField As String, nameValue As String) As Integer
@@ -128,4 +128,13 @@ Public Interface IBaseDao
     Function GetRecordFieldsFiltered(tableName As String, fieldList As String, filter As String, parameter As Object) As ExpandoObject
     Function GetRecordFieldsFiltered(tableName As String, fieldList As String, filter As String, parameter As Object, sortKey As String) As ExpandoObject
     Function GetRecordWithIdNo(tableName As String, fieldList As String, IdNo As Integer) As ExpandoObject
+
+
 End Interface
+
+Public Interface IAutoCodeDao
+
+    Function GenerateCode(idNo As Integer) As String
+
+End Interface
+

@@ -34,7 +34,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            MakeVarDataSources({New Object() {"RevCostCenter", "RevCostCentersByCode", Nothing, Nothing}})
+            MakeVarDataSources({New Object() {"RevCostCenter", "RevCostCentersByCode"}})
         End Sub
 
         Private Sub OnBeforeSave() Handles MyBase.BeforeSave

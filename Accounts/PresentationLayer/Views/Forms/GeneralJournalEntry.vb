@@ -1,12 +1,7 @@
-﻿
-Imports System.Globalization
-Imports AATM.Accounts.DataLayer.AdoNet
+﻿Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.Libraries
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Presenters
-Imports AATM.ServicesLayer.Services
 
 Namespace PresentationLayer.Views.Forms
 
@@ -74,8 +69,6 @@ Namespace PresentationLayer.Views.Forms
                 End If
             End Set
         End Property
-
-        'Public Property GeneralJournalItemsDataSource As List(Of JournalItemModel)
 
         Public Property IdNo As Int32 Implements IGeneralJournalView.IdNo
             Get
@@ -185,7 +178,6 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub BindJournalItem()
-            'SuspendLayout()
             bsJournalItems.DataSource = Nothing
             DataGridViewJournalItems.Refresh()
             bsJournalItems.DataSource = JournalItems
@@ -206,12 +198,7 @@ Namespace PresentationLayer.Views.Forms
                 dgvRevCostCenterIdNo.DisplayMember = "Name"
                 dgvRevCostCenterIdNo.ValueMember = "idNo"
                 dgvRevCostCenterIdNo.DisplayStyleForCurrentCellOnly = True
-                'dgvPayIdNo.DataSource = PayeeByCode
-                'dgvPayIdNo.DisplayMember = "Name"
-                'dgvPayIdNo.ValueMember = "idNo"
-                'dgvPayIdNo.DisplayStyleForCurrentCellOnly = True
             End With
-            'ResumeLayout()
         End Sub
 
         Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewJournalItems.UserDeletedRow
@@ -275,142 +262,8 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        'Private Sub dataGridView1_CellClick(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles DataGridViewJournalItems.CellClick
-        '    If e.ColumnIndex <> 0 AndAlso DataGridViewJournalItems.Columns(e.ColumnIndex).Name = "dgvPayIdNo" Then
-        '        Dim r As Int16 = e.RowIndex
-        '        Dim specialAccount As String = DataGridViewJournalItems.Rows(e.RowIndex).Cells("SpecialAccount").Value
-        '        If specialAccount = "AP" Then
-        '            dgvPayIdNo.DataSource = SupplierByCode
-        '        ElseIf specialAccount = "AR" Then
-        '            dgvPayIdNo.DataSource = CustomerByCode
-        '        ElseIf specialAccount = "EL" Then
-        '            dgvPayIdNo.DataSource = EmployeeByCode
-        '        Else
-        '            dgvPayIdNo.DataSource = PayeeByCode
-        '        End If
-        '    End If
-        '    '    Dim combo As DataGridViewComboBoxCell = TryCast(Me.dataGridView1(0, e.RowIndex), DataGridViewComboBoxCell)
-
-        '    '    If e.RowIndex = 0 Then
-        '    '        Dim data As String() = {"item A1", "item B1", "item C1"}
-        '    '        combo.DataSource = data
-        '    '    End If
-
-        '    '    If e.RowIndex = 1 Then
-        '    '        Dim data As String() = {"item A2", "item B2", "item C2"}
-        '    '        combo.DataSource = data
-        '    '    End If
-
-        '    '    If e.RowIndex = 2 Then
-        '    '        Dim data As String() = {"item A3", "item B3", "item C3"}
-        '    '        combo.DataSource = data
-        '    '    End If
-        '    'End If
-        'End Sub
-
 #End Region
 
     End Class
-
-    'Public Class OptionalDropdownColumn
-    '    Inherits DataGridViewColumn
-
-    '    Public Sub New()
-    '        MyBase.New(New OptionalDropdownCell())
-    '    End Sub
-
-    '    Public Overrides Property CellTemplate As DataGridViewCell
-    '        Get
-    '            Return MyBase.CellTemplate
-    '        End Get
-    '        Set(ByVal value As DataGridViewCell)
-
-    '            If value IsNot Nothing AndAlso Not value.[GetType]().IsAssignableFrom(GetType(OptionalDropdownCell)) Then
-    '                Throw New InvalidCastException("Must be a PropertyCell")
-    '            End If
-
-    '            MyBase.CellTemplate = value
-    '        End Set
-    '    End Property
-    'End Class
-
-    'Public Class OptionalDropdownCell
-    '    Inherits CDgvComboBoxCell
-
-    '    Public Sub New()
-    '        MyBase.New()
-    '    End Sub
-
-    '    'Private _customerByCode As List(Of Lookup.LookupData)
-
-    '    'Public ReadOnly Property CustomerByCOde
-    '    '    Get
-    '    '        Dim service As New Service
-    '    '        service.DataDao = New JournalItemDao
-    '    '        Return service.GetLookup("Payee_View", "PayeeType = 'C'")
-    '    '    End Get
-    '    'End Property
-
-    '    'Public Overrides Sub InitializeEditingControl(ByVal rowIndex As Integer, ByVal initialFormattedValue As Object, ByVal dataGridViewCellStyle As DataGridViewCellStyle)
-    '    '    MyBase.InitializeEditingControl(rowIndex, initialFormattedValue, dataGridViewCellStyle)
-    '    '    Dim dataItem As IJournalItemView = CType(Me.OwningRow.DataBoundItem, IJournalItemView)
-
-    '    '    If dataItem.SpecialAccount = "AR" Then
-    '    '        Dim ctl As DataGridViewComboBoxEditingControl = CType(DataGridView.EditingControl, DataGridViewComboBoxEditingControl)
-    '    '        ctl.DataSource = CustomerByCOde
-    '    '        ctl.DropDownStyle = ComboBoxStyle.DropDownList
-    '    '    Else
-    '    '        Dim ctl As DataGridViewTextBoxEditingControl = CType(DataGridView.EditingControl, DataGridViewTextBoxEditingControl)
-    '    '        ctl.Text = Me.Value.ToString()
-    '    '    End If
-    '    'End Sub
-
-
-    '    ' You must also override this method to initialize the ComboBox instance...
-    '    ' This method will be called each time a cell in the column enters edit-mode,
-    '    ' so you can fill the ComboBox instance based on the value of the edited cell
-    '    Public Overrides Sub InitializeEditingControl(ByVal rowIndex As Integer, ByVal formattedValue As Object, ByVal cellStyle As DataGridViewCellStyle)
-
-    '        ' Call base...
-    '        MyBase.InitializeEditingControl(rowIndex, formattedValue, cellStyle)
-
-    '        ' Convert the cell's EditingControl to your custom ComboBox type...
-    '        CellEditingControl = CType(DataGridView.EditingControl, CDgvComboBoxEditingControl)
-
-    '        ' Make sure you have an instance...
-    '        If CellEditingControl IsNot Nothing Then
-    '            ' Populate the ComboBox, passing the instance as a parameter
-
-    '            ' Set the value of the editing control instance to the current cell value.
-    '            If Value Is Nothing Then
-    '                CellEditingControl.SelectedIndex = -1
-    '            Else
-    '                CellEditingControl.SelectedValue = Value
-    '            End If
-    '            CellEditingControl.DropDownStyle = ComboBoxStyle.DropDown
-    '            CellEditingControl.AutoCompleteMode = AutoCompleteMode.SuggestAppend
-    '        End If
-    '    End Sub
-
-    '    Public Overrides ReadOnly Property EditType() As Type
-    '        Get
-    '            Return GetType(CDgvComboBoxEditingControl)
-    '        End Get
-    '    End Property
-
-    '    'Public Overrides ReadOnly Property EditType As Type
-    '    '    Get
-    '    '        Dim dataItem As IJournalItemView = CType(Me.OwningRow.DataBoundItem, IJournalItemView)
-
-    '    '        If dataItem.SpecialAccount = "AR" Then
-    '    '            Return GetType(DataGridViewComboBoxEditingControl)
-    '    '        Else
-    '    '            Return GetType(DataGridViewTextBoxEditingControl)
-    '    '        End If
-    '    '    End Get
-    '    'End Property
-
-    'End Class
-
 
 End Namespace

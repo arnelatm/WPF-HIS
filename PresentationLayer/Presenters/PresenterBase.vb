@@ -516,40 +516,40 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         End Try
     End Function
 
-    Public Overloads Function GetListLookupT(lookupObj As LookupTable) As DataTable
-        Return Service.GetListLookupT(lookupObj)
+    Public Overloads Function GetListLookup(lookupObj As LookupTable) As DataTable
+        Return Service.GetListLookup(lookupObj)
     End Function
 
-    Public Overloads Function GetLookupT(lookupObj As LookupTable) As List(Of LookupTable.LookupData)
-        Return Service.GetLookupT(lookupObj)
+    Public Overloads Function GetLookup(lookupObj As LookupTable) As List(Of LookupTable.LookupData)
+        Return Service.GetLookup(lookupObj)
     End Function
 
-    Public Overloads Function GetLookupT(pTableName As String, Optional pFilter As String = Nothing) As List(Of LookupTable.LookupData)
+    Public Overloads Function GetLookup(pTableName As String, Optional pFilter As String = Nothing) As List(Of LookupTable.LookupData)
         Dim lookupObj As New LookupTable(pTableName, pFilter)
-        Return Service.GetLookupT(lookupObj)
+        Return Service.GetLookup(lookupObj)
     End Function
 
-    Public Overloads Function GetLookupT(pTableName As String, pSortKey As String, Optional pFilter As String = Nothing) As List(Of LookupTable.LookupData)
+    Public Overloads Function GetLookup(pTableName As String, pSortKey As String, Optional pFilter As String = Nothing) As List(Of LookupTable.LookupData)
         Dim lookupObj As New LookupTable(pTableName, pFilter)
         lookupObj.SortKey = pSortKey
         lookupObj.FilterKey = pFilter
-        Return Service.GetLookupT(lookupObj)
+        Return Service.GetLookup(lookupObj)
     End Function
 
-    Public Overloads Function GetLookupT(pTableName As String, pFieldsToShow As String(), Optional pFilter As String = Nothing) As List(Of LookupTable.LookupData)
+    Public Overloads Function GetLookup(pTableName As String, pFieldsToShow As String(), Optional pFilter As String = Nothing) As List(Of LookupTable.LookupData)
         Dim lookupObj As New LookupTable(pTableName, pFilter)
         lookupObj.FieldsToShow = pFieldsToShow
         lookupObj.FilterKey = pFilter
         lookupObj.SortKey = pFieldsToShow(1)
-        Return Service.GetLookupT(lookupObj)
+        Return Service.GetLookup(lookupObj)
     End Function
 
-    Public Overloads Function GetLookupT(pTableName As String, pFieldsToShow As String(), pSortKey As String, Optional pFilter As String = Nothing) As List(Of LookupTable.LookupData)
+    Public Overloads Function GetLookup(pTableName As String, pFieldsToShow As String(), pSortKey As String, Optional pFilter As String = Nothing) As List(Of LookupTable.LookupData)
         Dim lookupObj As New LookupTable(pTableName, pFilter)
         lookupObj.FieldsToShow = pFieldsToShow
         lookupObj.SortKey = pSortKey
         lookupObj.FilterKey = pFilter
-        Return Service.GetLookupT(lookupObj)
+        Return Service.GetLookup(lookupObj)
     End Function
 
     Public Function GetOriginalModel() As TM
@@ -1360,6 +1360,9 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         SetAllControlsDynamicProperties(eventType.ViewControl)
         CreateDataSources()
         EntryFormLoaded()
+        eventType.AddingAllowed = UserHasAccess("Table" + TableName + "Adding")
+        eventType.EditingAllowed = UserHasAccess("Table" + TableName + "Editing")
+        eventType.DeletingAllowed = UserHasAccess("Table" + TableName + "Deleting")
         'GoFirstRecord()
         'GoLastRecord()
     End Sub
@@ -1938,11 +1941,15 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
             Dim controlSecurityValues As ArrayList
             Dim controlSecurityObjectIdNo As Int32
             controlSecurityObjectIdNo = GetControlSecurityIdNo(securityKey)
-            controlSecurityValues = GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo)
-            If controlSecurityValues.Count > 0 Then
-                hasAccess = controlSecurityValues(1)
+            If controlSecurityObjectIdNo = 0 Then
+                hasAccess = True
             Else
-                hasAccess = False
+                controlSecurityValues = GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo)
+                If controlSecurityValues.Count > 0 Then
+                    hasAccess = controlSecurityValues(1)
+                Else
+                    hasAccess = False
+                End If
             End If
             If inform Then
                 Dim securityKeyMessage = Messaging.TranslateCaption(securityKey)
@@ -2041,7 +2048,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     '    lookupObj = SetLookupObjectT(dataTableName, control,,, filter)
     '    data = GetLookupDT(lookupObj)
     '    Dim Task1
-    '    Task1 = Task.Factory.StartNew(Sub() GetLookupT(lookupObj))
+    '    Task1 = Task.Factory.StartNew(Sub() GetLookup(lookupObj))
     '    Task.WaitAll(Task1)
     '    Invoker.SetProperty(control, "DataSource", {data})
     'End Sub
@@ -2050,7 +2057,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Dim data As DataTable
         Dim lookupObj As LookupTable
         lookupObj = SetLookupListObjectT(dataTableName, control, listName)
-        data = GetListLookupT(lookupObj)
+        data = GetListLookup(lookupObj)
         Invoker.SetProperty(control, "DataSource", {data})
     End Sub
 

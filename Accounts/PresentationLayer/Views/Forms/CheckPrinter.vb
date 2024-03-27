@@ -268,13 +268,10 @@ Namespace PresentationLayer.Views.Forms
             Dim paymentTypeEnum = CodeToEnum(Of PaymentTypeSelection)(cPaymentType)
             If paymentTypeEnum = PaymentTypeSelection.Supplier Or paymentTypeEnum = PaymentTypeSelection.AccountsPayable Then
                 Presenter.MakeControlDataSources({New Object() {"Supplier", cboPayeeIdNo, Nothing, Nothing}})
-                'cbDataSource = Presenter.GetLookup("Supplier")
             ElseIf paymentTypeEnum = PaymentTypeSelection.Employee Then
                 Presenter.MakeControlDataSources({New Object() {"Employee", cboPayeeIdNo, Nothing, Nothing}})
-                'cbDataSource = Presenter.GetLookup("Employee")
             ElseIf paymentTypeEnum = PaymentTypeSelection.CustomerRefund Then
                 Presenter.MakeControlDataSources({New Object() {"Customer", cboPayeeIdNo, Nothing, Nothing}})
-                'cbDataSource = Presenter.GetLookup("Customer")
             End If
             cboPayeeIdNo.DataSource = cbDataSource
             If curValue IsNot Nothing Then

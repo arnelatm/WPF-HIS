@@ -187,7 +187,7 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
             Else
                 lookupObj.FieldsToShow = {IdFieldName, TreeViewMainField, TreeViewSecondaryField}
             End If
-            Return Service.GetLookupT(lookupObj)
+            Return Service.GetLookup(lookupObj)
         Else
             lookupObj.SortKey = "SortKey"
             If String.IsNullOrEmpty(TreeViewSecondaryField) Then
@@ -428,6 +428,28 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
     Public ReadOnly Property EstablishmentNameAra As String
         Get
             Return GetRecordField("Establishment", "EstablishmentNameAra")
+        End Get
+    End Property
+
+    Public ReadOnly Property EditingAllowed As Boolean
+        Get
+            Dim accessName = "Table" + TableName + "Editing"
+            If UserHasAccess(accessName) Then
+                Return True
+            Else
+                Return False
+            End If
+        End Get
+    End Property
+
+    Public ReadOnly Property AddingAllowed As Boolean
+        Get
+            Dim accessName = "Table" + TableName + "Editing"
+            If UserHasAccess(accessName) Then
+                Return True
+            Else
+                Return False
+            End If
         End Get
     End Property
 

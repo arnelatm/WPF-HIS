@@ -1216,11 +1216,13 @@ Public Class BfMain
 
     Protected Sub ProcessCellEndEdit(dataGridView As DataGridView, bindingSource As BindingSource)
         Dim firstDisplayedRow = dataGridView.FirstDisplayedScrollingRowIndex
-        Ea.PublishEvent(New DgvItemsChanged(bindingSource,
+        If bindingSource.Current IsNot Nothing Then
+            Ea.PublishEvent(New DgvItemsChanged(bindingSource,
                                                 dataGridView.CurrentRow.Index,
                                                 dataGridView.CurrentCell.OwningColumn.DataPropertyName,
                                                 dataGridView.CurrentCell.OwningColumn.Name,
                                                 dataGridView.CurrentCell.Value))
+        End If
         bindingSource.ResetBindings(False)
     End Sub
 
