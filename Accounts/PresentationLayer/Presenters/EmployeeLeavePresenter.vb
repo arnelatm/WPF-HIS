@@ -89,7 +89,7 @@ Namespace PresentationLayer.Presenters
                 MakeControlDataSources({New Object() {"Employee", "EmployeeIdNo", Nothing, filter}})
             Else
                 Dim employeeIdNo As Int32 = Service.GetUserEmployeeIdNo()
-                MakeControlDataSources({New Object() {"Employee", "EmployeeIdNo", Nothing, "IdNo = " + employeeIdNo.ToString(), "EmployeeIdNo"}})
+                MakeControlDataSources({New Object() {"Employee", "EmployeeIdNo", Nothing, "IdNo = " + employeeIdNo.ToString(), "IdNo"}})
             End If
             MakeControlDataSources({New Object() {"User", "EnteredBy", "IdNo,UserName", Nothing}})
             If _holidayLeave Then
