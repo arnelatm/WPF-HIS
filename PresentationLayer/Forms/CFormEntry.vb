@@ -336,6 +336,11 @@ Public Class CFormEntry
         Else
             btnAdd.Visible = False
         End If
+        If DeletingAllowed Then
+            btnDelete.Visible = True
+        Else
+            btnDelete.Visible = False
+        End If
 
 
 

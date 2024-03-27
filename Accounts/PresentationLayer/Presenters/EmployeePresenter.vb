@@ -406,7 +406,7 @@ Namespace PresentationLayer.Presenters
             End If
             Dim employeeIdNo As Int32 = Service.GetUserEmployeeIdNo()
             Dim userEmployeeIdNo As Int32 = GetUserEmployeeIdNo()
-            If GlobalFunctions.UserIsASuperAdministrator() Or UserHasHrManagerAccess() Then
+            If GlobalFunctions.UserIsASuperAdministrator() Or UserHasHrManagerAccess() Or UserHasAccess("HumanResources") Then
                 ' include all records
             ElseIf IsUserASupervisor() Then
                 DataFilter += IIf(DataFilter Is Nothing OrElse DataFilter = "", "", " and ") + " (SupervisorIdNo = " & userEmployeeIdNo.ToString() + " or IdNo = " & userEmployeeIdNo.ToString() + ")"
