@@ -374,7 +374,7 @@ Public Class CFormBase
             If FirstControl IsNot Nothing Then
                 FirstControl.Focus()
             End If
-            If Not UserIsASuperAdministrator() Then
+            If Not UserIsASuperAdmin() Then
                 HideButton(btnDebug)
             End If
             'CenterForm(Me)

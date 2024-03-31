@@ -13,7 +13,7 @@ Namespace PresentationLayer.Views.Forms
             FormTitleCaption = "System Messages Maintenance Form"
             FirstControl = txtMessageKey
             ' Add any initialization after the InitializeComponent() call.
-            If UserIsASuperAdministrator() Then
+            If UserIsASuperAdmin() Then
                 txtMessageKey.DisplayOnly = False
                 txtCaption.DisplayOnly = False
                 txtMessage.DisplayOnly = False
@@ -109,7 +109,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub OriginalMessagesEntryTv_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
-            If UserIsASuperAdministrator() Then
+            If UserIsASuperAdmin() Then
                 HideButton(btnDelete)
             End If
         End Sub

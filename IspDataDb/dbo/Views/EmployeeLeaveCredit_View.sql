@@ -3,7 +3,7 @@ AS
 SELECT        dbo.EmployeeLeaveCredit.LeaveIdNo, dbo.EmployeeLeaveCredit.IdNo, dbo.EmployeeLeaveCredit.EmployeeIdNo, dbo.EmployeeLeaveCredit.LeaveAllowed, dbo.EmployeeLeaveCredit.PaidPercent, 
                          dbo.EmployeeLeaveCredit.MaxCarryOver, dbo.EmployeeLeaveCredit.Cumulative, dbo.EmployeeLeaveCredit.MaxLimit, dbo.EmployeeLeaveCredit.AccumulatedLeave, dbo.Leave.LeaveCode, dbo.Leave.LeaveNameAra, 
                          dbo.Leave.LeaveName, dbo.Leave.LeaveAllowed AS DefaultLeaveAllowed, dbo.Leave.PaidPercent AS DefaultPaidPercent, dbo.Leave.MaxCarryOver AS DefaultMaxCarryOver, dbo.Leave.Cumulative AS DefaultCumulative, 
-                         dbo.Leave.MaxLimit AS DefaultMaxLimit, dbo.EmployeeLeaveCredit.Sequence, dbo.EmployeeLeaveCredit.NoMaxLimit, dbo.Leave.NoMaxLimit AS DefaultNoMaxLimit, dbo.Leave.Holiday, dbo.Leave.LeaveCycle
+                         dbo.Leave.MaxLimit AS DefaultMaxLimit, dbo.EmployeeLeaveCredit.Sequence, dbo.EmployeeLeaveCredit.NoMaxLimit, dbo.Leave.NoMaxLimit AS DefaultNoMaxLimit, dbo.Leave.Holiday, dbo.Leave.LeaveType
 FROM            dbo.EmployeeLeaveCredit INNER JOIN
                          dbo.Leave ON dbo.EmployeeLeaveCredit.LeaveIdNo = dbo.Leave.IdNo
 GO

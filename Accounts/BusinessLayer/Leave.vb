@@ -19,7 +19,7 @@ Namespace BusinessLayer
         Public Property Earnable As Boolean
         Public Property IdNo As Int16
         Public Property LeaveCode As String
-        Public Property LeaveCycle As String
+        Public Property LeaveType As String
         Public Property LeaveName As String
         Public Property LeaveNameAra As String
         Public Property LeaveAllowed As Decimal

@@ -58,6 +58,11 @@ Namespace PresentationLayer.Views.Interfaces
         Property DeductionsByName As DataTable
         Property EarningsByName As DataTable
         Property Unit As DataTable
+        Property UserIsASuperAdministrator As Boolean
+        Property UserIsASupervisor As Boolean
+        Property UserHasHrAccess As Boolean
+        Property UserHasHrManagerAccess As Boolean
+
     End Interface
 
 End Namespace

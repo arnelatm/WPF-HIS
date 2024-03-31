@@ -90,7 +90,7 @@ Namespace PresentationLayer.Presenters
                                 errors += errorNumber.ToString() + ". Missing National ID Number for line number " + lineNumber.ToString() + "." + Environment.NewLine
                             ElseIf Trim(item.ToString()).Length <> 10 Then
                                 errorNumber += 1
-                                errors += errorNumber.ToString() + ". Invalid National ID number <" + item.ToText() + "> for line number " + lineNumber.ToString() + "." + Environment.NewLine
+                                errors += errorNumber.ToString() + ". Invalid National ID number <" + item.ToString() + "> for line number " + lineNumber.ToString() + "." + Environment.NewLine
                             End If
                     End Select
                     i += 1

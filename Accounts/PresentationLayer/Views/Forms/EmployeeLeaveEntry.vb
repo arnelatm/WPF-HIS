@@ -168,15 +168,6 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property Holiday As Boolean Implements IEmployeeLeaveView.Holiday
 
-        Public Property UserIsASupervisor As Boolean Implements IEmployeeLeaveView.UserIsASupervisor
-            Get
-                Return _isASupervisor
-            End Get
-            Set(value As Boolean)
-                _isASupervisor = value
-            End Set
-        End Property
-
         Public Property NoOfDays As Int32 Implements IEmployeeLeaveView.NoOfDays
             Get
                 Try
@@ -190,7 +181,11 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property UserHasHrAccess As Boolean Implements IEmployeeLeaveView.UserHasHrAccess
         Public Property UserHasHrManagerAccess As Boolean Implements IEmployeeLeaveView.UserHasHrManagerAccess
+        Public Property UserIsASupervisor As Boolean Implements IEmployeeLeaveView.UserIsASupervisor
+        Public Property UserIsASuperAdministrator As Boolean Implements IEmployeeLeaveView.UserIsASuperAdministrator
+
 
 #End Region
 
@@ -292,8 +287,12 @@ Namespace PresentationLayer.Views.Forms
             bsEmployeeLeaveApproval.ResetBindings(False)
         End Sub
 
-        Private Sub OnFormShown(sender As Object, e As EventArgs) Handles MyBase.Shown
-            If UserIsASuperAdministrator() Or UserHasHrManagerAccess Then
+        Private Sub OnInputsTurnedOn() Handles MyBase.InputsTurnedOn
+            SetFirstControl()
+        End Sub
+
+        Private Sub SetFirstControl()
+            If UserIsASuperAdministrator() OrElse UserHasHrAccess OrElse UserHasHrManagerAccess Then
                 cboEmployeeIdNo.DisplayOnly = False
                 FirstControl = cboEmployeeIdNo
             ElseIf UserIsASupervisor Then

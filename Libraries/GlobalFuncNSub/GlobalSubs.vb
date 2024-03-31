@@ -8,7 +8,7 @@ Public Module GlobalSubs
 #Region "Old Subs"
 
     Public Sub SetPropertyValue(obj As Object, propName As String, propValue As Object, Optional ByVal ignoreException As Boolean = False)
-        'If propName = "EditingMode" Then
+        'If TypeOf obj Is DataGridView Then
         '    Debugger.Break()
         'End If
         Dim objType As Type = obj.GetType()
@@ -18,12 +18,12 @@ Public Module GlobalSubs
         If pInfo IsNot Nothing Then
             'Dim pInfo As System.Reflection.PropertyInfo = objType.GetProperty(PropName, Reflection.BindingFlags.GetProperty)
             Try
-                'If  objType.FullName = "AATM.CCustomControls.CCustomDateTimePicker" Then
-                '   Debugger.Break
+                'If objType.FullName = "AATM.Libraries.CBaseControlsLibrary.CtDataGridView" Then
+                '    Debugger.Break()
                 'End If
                 pInfo.SetValue(obj, propValue) ', BindingFlags.GetProperty, Nothing, Nothing, Nothing)
             Catch ex As Exception
-                Debugger.Break()
+                'Debugger.Break()
                 If Not ignoreException Then
                     MessageBox.Show("Invalid property " & propName & " in object " & obj.Name)
                     Throw

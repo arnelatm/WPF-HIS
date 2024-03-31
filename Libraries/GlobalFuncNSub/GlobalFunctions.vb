@@ -1340,7 +1340,7 @@ Public Module GlobalFunctions
         Return firstDayOfMonth.AddMonths(1).AddDays(-1)
     End Function
 
-    Public Function UserIsASuperAdministrator()
+    Public Function UserIsASuperAdmin()
         If GlobalVariables.UserName IsNot Nothing Then
             If GlobalVariables.UserName.ToLower() = $"arnel" Then
                 Return True

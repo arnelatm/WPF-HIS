@@ -1728,7 +1728,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
                     isVisible = controlSecurityValues(0)
                     isEditable = controlSecurityValues(1)
                 Else
-                    If UserIsASuperAdministrator() Then
+                    If UserIsASuperAdmin() Then
                         isVisible = True
                         isEditable = True
                     Else
@@ -1778,7 +1778,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     End Function
 
     Private Sub SetMenuSecurity(cControl As Object, controlSecurityKey As String)
-        If UserIsASuperAdministrator() Then
+        If UserIsASuperAdmin() Then
             ' make all editable and visible regardless of security values
             cControl.Enabled = True
             cControl.Visible = True
@@ -1935,7 +1935,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
 
     Public Function UserHasAccess(securityKey As String, Optional inform As Boolean = False) As Boolean
         Dim hasAccess As Boolean
-        If UserIsASuperAdministrator() Then
+        If UserIsASuperAdmin() Then
             hasAccess = True
         Else
             Dim controlSecurityValues As ArrayList

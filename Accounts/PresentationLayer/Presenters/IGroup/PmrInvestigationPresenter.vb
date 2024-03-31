@@ -69,7 +69,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Function CanUserViewSecurity(securityKey As String) As String
-            If UserIsASuperAdministrator() Then
+            If UserIsASuperAdmin() Then
                 Return True
             End If
             Dim securityIdNo As Int16 = GetControlSecurityIdNo(securityKey)
@@ -308,7 +308,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Function CanUserViewSecurity(securityKey As String) As String
-            If UserIsASuperAdministrator() Then
+            If UserIsASuperAdmin() Then
                 Return True
             End If
             Dim securityIdNo As Int16 = GetControlSecurityIdNo(securityKey)

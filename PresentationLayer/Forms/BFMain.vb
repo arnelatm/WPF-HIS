@@ -672,7 +672,7 @@ Public Class BfMain
 
     Private Shared Sub SetControlVisibility(ByRef cCtrl As Control, controlVisible As Boolean)
         ' if Visible is false, Don't show the controls content by masking content with '*' asterisk
-        If UserIsASuperAdministrator() Then
+        If UserIsASuperAdmin() Then
             SetPropertyValue(cCtrl, "Visible", True)
         ElseIf controlVisible Then
             SetPropertyValue(cCtrl, "Visible", True)
@@ -718,7 +718,7 @@ Public Class BfMain
     'End Function
 
     Private Sub SetMenuSecurity(cControl As Object, controlSecurityKey As String)
-        If UserIsASuperAdministrator() Then
+        If UserIsASuperAdmin() Then
             ' make all editable and visible regardless of security values
             cControl.Enabled = True
             cControl.Visible = True

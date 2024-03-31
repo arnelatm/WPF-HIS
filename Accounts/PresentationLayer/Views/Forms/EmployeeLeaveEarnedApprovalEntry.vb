@@ -69,6 +69,14 @@ Public Class EmployeeLeaveEarnedApprovalEntry
         End Set
     End Property
 
+    Public Property UserIsASuperAdministrator As Boolean Implements IEmployeeLeaveEarnedApprovalView.UserIsASuperAdministrator
+
+    Public Property UserIsASupervisor As Boolean Implements IEmployeeLeaveEarnedApprovalView.UserIsASupervisor
+
+    Public Property UserHasHrAccess As Boolean Implements IEmployeeLeaveEarnedApprovalView.UserHasHrAccess
+
+    Public Property UserHasHrManagerAccess As Boolean Implements IEmployeeLeaveEarnedApprovalView.UserHasHrManagerAccess
+
 #End Region
 
     Public Sub BindEmployeeLeaveList()
@@ -165,7 +173,7 @@ Public Class EmployeeLeaveEarnedApprovalEntry
     End Sub
 
     Private Sub EmployeeLeaveEarnedApproval_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
-        If UserIsASuperAdministrator() Then
+        If UserIsASuperAdministrator Then
             cboApprovedBy.DisplayOnly = False
         End If
         btnAdd.PerformClick()

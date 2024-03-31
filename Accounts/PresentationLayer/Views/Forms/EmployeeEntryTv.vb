@@ -476,6 +476,13 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property ArAccountIdNo As Short? Implements IEmployeeView.ArAccountIdNo
 
+        Public Property UserIsASuperAdministrator As Boolean Implements IEmployeeView.UserIsASuperAdministrator
+
+        Public Property UserIsASupervisor As Boolean Implements IEmployeeView.UserIsASupervisor
+        Public Property UserHasHrAccess As Boolean Implements IEmployeeView.UserHasHrAccess
+
+        Public Property UserHasHrManagerAccess As Boolean Implements IEmployeeView.UserHasHrManagerAccess
+
 
 #End Region
 

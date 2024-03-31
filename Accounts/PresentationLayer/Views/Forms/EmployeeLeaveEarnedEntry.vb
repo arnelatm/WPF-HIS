@@ -119,6 +119,10 @@ Public Class EmployeeLeaveEarnedEntry
         End Set
     End Property
 
+    Public Property UserIsASuperAdministrator As Boolean Implements IEmployeeLeaveEarnedView.UserIsASuperAdministrator
+    Public Property UserHasHrAccess As Boolean Implements IEmployeeLeaveEarnedView.UserHasHrAccess
+    Public Property UserHasHrManagerAccess As Boolean Implements IEmployeeLeaveEarnedView.UserHasHrManagerAccess
+
 
 #End Region
 
@@ -154,10 +158,20 @@ Public Class EmployeeLeaveEarnedEntry
         RaiseEvent LeaveIdNoChanged(LeaveIdNo)
     End Sub
 
-    Private Sub OnFormShown(sender As Object, e As EventArgs) Handles MyBase.Shown
-        If UserIsASuperAdministrator() Or UserIsASupervisor Then
+    Private Sub OnInputsTurnedOn() Handles MyBase.InputsTurnedOn
+        SetFirstControl()
+    End Sub
+
+    Private Sub SetFirstControl()
+        If UserIsASuperAdministrator() Or UserHasHrManagerAccess() Then
             cboEmployeeIdNo.DisplayOnly = False
             FirstControl = cboEmployeeIdNo
+        ElseIf UserIsASupervisor Then
+            cboEmployeeIdNo.DisplayOnly = False
+            FirstControl = cboEmployeeIdNo
+        Else
+            cboEmployeeIdNo.DisplayOnly = True
+            FirstControl = cboLeaveIdNo
         End If
     End Sub
 

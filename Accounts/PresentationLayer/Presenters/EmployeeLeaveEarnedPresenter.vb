@@ -40,6 +40,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
+            View.EmployeeIdNo = GetUserEmployeeIdNo()
             View.EnteredBy = GlobalVariables.UserIdNo
             View.StartDate = GetEarliestLeaveDate()
         End Sub
@@ -223,9 +224,9 @@ Namespace PresentationLayer.Presenters
 
         Public Overrides Sub EntryFormLoaded()
             Dim employeeIdNo As Int32 = Service.GetUserEmployeeIdNo()
-            If UserHasHrManagerAccess() Then
-                ' no filter HrManagerAccess has no restrictions for viewing all leaves
-            ElseIf IsUserASupervisor() Then
+            If UserHasHrAccess() OrElse UserHasHrManagerAccess() OrElse UserIsASuperAdministrator() Then
+                ' no filter these users has no restrictions for viewing all leaves
+            ElseIf UserIsASupervisor() Then
                 ' only supervised employees can be shown
                 DataFilter += IIf(DataFilter Is Nothing Or DataFilter = "", "", " and ") + " (SupervisorIdNo = " & employeeIdNo.ToString() + " or EmployeeIdNo = " & employeeIdNo.ToString() & ")"
             Else

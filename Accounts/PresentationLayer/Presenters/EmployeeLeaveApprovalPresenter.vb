@@ -42,7 +42,7 @@ Namespace PresentationLayer.Presenters
             MakeControlDataSources({New Object() {"User", "ApprovedBy", "IdNo,UserName", Nothing, Nothing}})
 
             CreateEnumData(Of LeaveStatusSelection)(View.StatusList)
-            If IsUserASupervisor() Then
+            If UserIsASupervisor() Then
                 CreateEnumData(Of SupervisorApprovalSelection)(View.ApprovalStatusList)
             Else
                 CreateEnumData(Of LeaveApprovalSelection)(View.ApprovalStatusList)
@@ -51,15 +51,13 @@ Namespace PresentationLayer.Presenters
 
         Public Overrides Sub EntryFormLoaded()
             Dim employeeIdNo As Int32 = Service.GetUserEmployeeIdNo()
-            If UserIsASuperAdministrator() Then
+            If UserHasHrAccess() OrElse UserHasHrManagerAccess() OrElse UserIsASuperAdministrator() Then
                 ' include all records
-            ElseIf UserHasHrManagerAccess() Then
-                ' include all records
-            ElseIf Not IsUserASupervisor() Then
-                DataFilter += " ApprovedBy = " & employeeIdNo.ToString()
+            ElseIf Not UserIsASupervisor() Then
+                DataFilter += " ApprovedBy = " & employeeIdNo.ToString() + " or EmployeeIdNo = " & employeeIdNo.ToString()
             Else
-                ' meaning don't show any data
-                DataFilter = " IdNo < 0 "
+                ' meaning show only the employee's own data
+                DataFilter += " and EmployeeIdNo = " & employeeIdNo.ToString()
             End If
         End Sub
 
@@ -72,10 +70,9 @@ Namespace PresentationLayer.Presenters
                          "Status <> '" + EnumToCode(LeaveStatusSelection.Disapproved) + "' and " &
                          "Status <> '" + EnumToCode(LeaveStatusSelection.Used) + "' and " &
                          "Status <> '" + EnumToCode(LeaveStatusSelection.Cancelled) + "'"
-            If UserIsASuperAdministrator() Or UserHasHrManagerAccess() Then
-                ' cannot approve own leave
-                filter += " " + " And EmployeeIdNo <> " & employeeIdNo.ToString()
-            ElseIf IsUserASupervisor() Then
+            If UserHasHrAccess() OrElse UserHasHrManagerAccess() OrElse UserIsASuperAdministrator() Then
+                'can see all data
+            ElseIf UserIsASupervisor() Then
                 filter += " And Status <> '" + EnumToCode(LeaveStatusSelection.SupervisorApproved) + "' and EmployeeIdNo <> " & employeeIdNo.ToString()
                 filter += " and SuperVisorIdNo = " + employeeIdNo.ToString()
             End If
@@ -95,7 +92,7 @@ Namespace PresentationLayer.Presenters
                         workRow("ApprovalNote") = leave.ApprovalNote
                         workRow("EmployeeLeaveIdNo") = leave.IdNo
                         If leave.Approve Then
-                            If UserHasHrManagerAccess() Then
+                            If UserHasHrAccess() OrElse UserHasHrManagerAccess() OrElse UserIsASuperAdministrator() Then
                                 workRow("Status") = EnumToCode(LeaveStatusSelection.Approved)
                             Else
                                 workRow("Status") = EnumToCode(LeaveStatusSelection.SupervisorApproved)

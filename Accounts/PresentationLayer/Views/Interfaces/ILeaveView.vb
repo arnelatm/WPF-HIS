@@ -8,7 +8,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property Earnable As Boolean
         Property IdNo As Int16
         Property LeaveCode As String
-        Property LeaveCycle As String
+        Property LeaveType As String
         Property LeaveName As String
         Property LeaveNameAra As String
         Property LeaveAllowed As Decimal
