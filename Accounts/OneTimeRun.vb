@@ -171,7 +171,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgNoEarnedLeaves", "Sorry, this employee has no earned <{leaveName}> at present.  You must first file {leaveName} - Earned Leave and have it approved before applying for this leave.", "Error")
         Messaging.AddMessage("MsgNotEnoughEarnedLeave", "Sorry the requested <{leaveName}> leave of <{noOfDaysRequested} day(s)> is more than the leave credits of <{earnedLeaveDays} day(s)> for this employee." + Environment.NewLine + "Either reduce the number of leave days or earn more leave credits.", "Error")
         Messaging.AddMessage("MsgLeavePlusPendingExcess", "Total applied <{leaveName}> leaves of <{noOfDaysRequested} day(s)> plus the pending leaves of <{pendingLeaves} day(s)> exceed the <{earnedLeaveDays} day(s)> earned leaves for this employee.", "error")
-
+        Messaging.AddMessage("MsgApprovedOrUsedLeave", "Approved, Supervisor Approved or Used leave cannot be deleted anymore.", "Error")
     End Sub
 
     'Public Shared Sub CreateEnums()

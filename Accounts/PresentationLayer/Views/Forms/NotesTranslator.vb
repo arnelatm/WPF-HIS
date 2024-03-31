@@ -75,7 +75,7 @@ Namespace PresentationLayer.Views.Forms
             If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
                 LoadColumn()
             End If
-            If UserIsASuperAdministrator() Then
+            If UserIsASuperAdmin() Then
                 btnTranslateWord.Enabled = True
             End If
         End Sub

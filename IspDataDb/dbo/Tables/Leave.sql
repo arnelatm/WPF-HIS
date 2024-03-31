@@ -4,7 +4,7 @@
     [LeaveName]     VARCHAR (100)  NOT NULL,
     [LeaveNameAra]  NVARCHAR (100) NOT NULL,
     [LeaveAllowed]  DECIMAL (6, 2) NULL,
-    [LeaveCycle]    CHAR (1)       NULL,
+    [LeaveType]    CHAR (1)       NULL,
     [PaidPercent]   DECIMAL (6, 2) NULL,
     [MaxCarryOver]  DECIMAL (6, 2) NULL,
     [Holiday]       BIT            NULL,

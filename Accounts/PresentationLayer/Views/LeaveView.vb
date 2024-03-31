@@ -113,7 +113,7 @@ Namespace PresentationLayer.Views
 
         Public Property Holiday As Boolean Implements ILeaveView.Holiday
 
-        Public Property LeaveCycle As String Implements ILeaveView.LeaveCycle
+        Public Property LeaveType As String Implements ILeaveView.LeaveType
 
         Public Property DataFilter As String Implements IView.DataFilter
 

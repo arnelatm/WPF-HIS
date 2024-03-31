@@ -26,7 +26,9 @@ Namespace PresentationLayer.Views.Interfaces
         Property ApprovalHistory As List(Of EmployeeLeaveApprovalHistoryView)
         Property Users As DataTable
         Property StatusList As DataTable
+        Property UserIsASuperAdministrator As Boolean
         Property UserIsASupervisor As Boolean
+        Property UserHasHrAccess As Boolean
         Property UserHasHrManagerAccess As Boolean
         Property NoOfDays As Int32
         Event DateValuesChanged()

@@ -35,7 +35,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Protected Overrides Sub CreateDataSources()
-            CreateEnumDataSource(Of LeaveCycleSelection)("LeaveCycle")
+            CreateEnumDataSource(Of LeaveTypeSelection)("LeaveType")
         End Sub
 
         Public Sub OnLeavedgvItemsChangedEventHandler(ByRef eventType As DgvItemsChanged) Implements ISubscriber(Of DgvItemsChanged).OnEventHandler

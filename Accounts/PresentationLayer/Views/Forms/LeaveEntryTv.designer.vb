@@ -32,7 +32,7 @@ Namespace PresentationLayer.Views.Forms
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkEarnable = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
-            Me.lblLeaveCycle = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblLeaveType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblHoliday = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkHoliday = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -57,7 +57,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblNoMaxLimit = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkNoMaxLimit = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
-            Me.cboLeaveCycle = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.cboLeaveType = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
             Me.SplitContainer1.Panel2.SuspendLayout()
@@ -103,7 +103,7 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.TableLayoutPanel1, "TableLayoutPanel1")
             Me.TableLayoutPanel1.Controls.Add(Me.CLabel1, 1, 12)
             Me.TableLayoutPanel1.Controls.Add(Me.chkEarnable, 1, 13)
-            Me.TableLayoutPanel1.Controls.Add(Me.lblLeaveCycle, 0, 10)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblLeaveType, 0, 10)
             Me.TableLayoutPanel1.Controls.Add(Me.lblHoliday, 2, 0)
             Me.TableLayoutPanel1.Controls.Add(Me.chkHoliday, 2, 1)
             Me.TableLayoutPanel1.Controls.Add(Me.lblNotes, 0, 14)
@@ -128,7 +128,7 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.Controls.Add(Me.lblCode, 1, 0)
             Me.TableLayoutPanel1.Controls.Add(Me.lblNoMaxLimit, 0, 12)
             Me.TableLayoutPanel1.Controls.Add(Me.chkNoMaxLimit, 0, 13)
-            Me.TableLayoutPanel1.Controls.Add(Me.cboLeaveCycle, 0, 11)
+            Me.TableLayoutPanel1.Controls.Add(Me.cboLeaveType, 0, 11)
             Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
             '
             'CLabel1
@@ -164,14 +164,14 @@ Namespace PresentationLayer.Views.Forms
             Me.chkEarnable.Translatable = False
             Me.chkEarnable.UseVisualStyleBackColor = False
             '
-            'lblLeaveCycle
+            'lblLeaveType
             '
-            resources.ApplyResources(Me.lblLeaveCycle, "lblLeaveCycle")
-            Me.lblLeaveCycle.BackColor = System.Drawing.Color.Transparent
-            Me.lblLeaveCycle.DisplayOnly = True
-            Me.lblLeaveCycle.EditingMode = False
-            Me.lblLeaveCycle.Name = "lblLeaveCycle"
-            Me.lblLeaveCycle.Translatable = True
+            resources.ApplyResources(Me.lblLeaveType, "lblLeaveType")
+            Me.lblLeaveType.BackColor = System.Drawing.Color.Transparent
+            Me.lblLeaveType.DisplayOnly = True
+            Me.lblLeaveType.EditingMode = False
+            Me.lblLeaveType.Name = "lblLeaveType"
+            Me.lblLeaveType.Translatable = True
             '
             'lblHoliday
             '
@@ -604,45 +604,45 @@ Namespace PresentationLayer.Views.Forms
             Me.chkNoMaxLimit.Translatable = False
             Me.chkNoMaxLimit.UseVisualStyleBackColor = False
             '
-            'cboLeaveCycle
+            'cboLeaveType
             '
-            Me.cboLeaveCycle.BackColor = System.Drawing.Color.White
-            Me.cboLeaveCycle.BegFindValue = Nothing
-            Me.cboLeaveCycle.ChangingSearchValueOnly = False
-            Me.cboLeaveCycle.CurrentSearchTerm = ""
-            Me.cboLeaveCycle.DataValue = Nothing
-            Me.cboLeaveCycle.DefaultValue = Nothing
-            Me.cboLeaveCycle.DisplayMember = "Name"
-            resources.ApplyResources(Me.cboLeaveCycle, "cboLeaveCycle")
-            Me.cboLeaveCycle.Editable = True
-            Me.cboLeaveCycle.EditingMode = True
-            Me.cboLeaveCycle.EndFindValue = Nothing
-            Me.cboLeaveCycle.FieldDescription = Nothing
-            Me.cboLeaveCycle.FieldName = Nothing
-            Me.cboLeaveCycle.FilterRule = Nothing
-            Me.cboLeaveCycle.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.cboLeaveCycle.FindEnabled = False
-            Me.cboLeaveCycle.ForeColor = System.Drawing.Color.Black
-            Me.cboLeaveCycle.FormattingEnabled = True
-            Me.cboLeaveCycle.HideWhenNotEditingOrAdding = False
-            Me.cboLeaveCycle.IgnoreCase = False
-            Me.cboLeaveCycle.LimitToList = False
-            Me.cboLeaveCycle.LinkedLabel = Nothing
-            Me.cboLeaveCycle.Name = "cboLeaveCycle"
-            Me.cboLeaveCycle.OldValue = 0
-            Me.cboLeaveCycle.OriginalDataSource = Nothing
-            Me.cboLeaveCycle.OriginalList = Nothing
-            Me.cboLeaveCycle.OverrideDropDownStyleList = False
-            Me.cboLeaveCycle.PreviousSearchTerm = Nothing
-            Me.cboLeaveCycle.PropertySelector = Nothing
-            Me.cboLeaveCycle.SuggestBoxHeight = 200
-            Me.cboLeaveCycle.SuggestListOrderRule = Nothing
-            Me.cboLeaveCycle.TextToSearch = Nothing
-            Me.cboLeaveCycle.Translatable = False
-            Me.cboLeaveCycle.ValueIsMandatory = False
-            Me.cboLeaveCycle.ValueIsNullable = False
-            Me.cboLeaveCycle.ValueIsNumeric = False
-            Me.cboLeaveCycle.ValueMember = "IdNo"
+            Me.cboLeaveType.BackColor = System.Drawing.Color.White
+            Me.cboLeaveType.BegFindValue = Nothing
+            Me.cboLeaveType.ChangingSearchValueOnly = False
+            Me.cboLeaveType.CurrentSearchTerm = ""
+            Me.cboLeaveType.DataValue = Nothing
+            Me.cboLeaveType.DefaultValue = Nothing
+            Me.cboLeaveType.DisplayMember = "Name"
+            resources.ApplyResources(Me.cboLeaveType, "cboLeaveType")
+            Me.cboLeaveType.Editable = True
+            Me.cboLeaveType.EditingMode = True
+            Me.cboLeaveType.EndFindValue = Nothing
+            Me.cboLeaveType.FieldDescription = Nothing
+            Me.cboLeaveType.FieldName = Nothing
+            Me.cboLeaveType.FilterRule = Nothing
+            Me.cboLeaveType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboLeaveType.FindEnabled = False
+            Me.cboLeaveType.ForeColor = System.Drawing.Color.Black
+            Me.cboLeaveType.FormattingEnabled = True
+            Me.cboLeaveType.HideWhenNotEditingOrAdding = False
+            Me.cboLeaveType.IgnoreCase = False
+            Me.cboLeaveType.LimitToList = False
+            Me.cboLeaveType.LinkedLabel = Nothing
+            Me.cboLeaveType.Name = "cboLeaveType"
+            Me.cboLeaveType.OldValue = 0
+            Me.cboLeaveType.OriginalDataSource = Nothing
+            Me.cboLeaveType.OriginalList = Nothing
+            Me.cboLeaveType.OverrideDropDownStyleList = False
+            Me.cboLeaveType.PreviousSearchTerm = Nothing
+            Me.cboLeaveType.PropertySelector = Nothing
+            Me.cboLeaveType.SuggestBoxHeight = 200
+            Me.cboLeaveType.SuggestListOrderRule = Nothing
+            Me.cboLeaveType.TextToSearch = Nothing
+            Me.cboLeaveType.Translatable = False
+            Me.cboLeaveType.ValueIsMandatory = False
+            Me.cboLeaveType.ValueIsNullable = False
+            Me.cboLeaveType.ValueIsNumeric = False
+            Me.cboLeaveType.ValueMember = "IdNo"
             '
             'LeaveEntryTv
             '
@@ -687,8 +687,8 @@ End Sub
         Friend WithEvents chkHoliday As CCheckBox
         Friend WithEvents lblNoMaxLimit As CLabel
         Friend WithEvents chkNoMaxLimit As CCheckBox
-        Friend WithEvents lblLeaveCycle As CLabel
-        Friend WithEvents cboLeaveCycle As CtCombobox
+        Friend WithEvents lblLeaveType As CLabel
+        Friend WithEvents cboLeaveType As CtCombobox
         Friend WithEvents chkEarnable As CCheckBox
         Friend WithEvents CLabel1 As CLabel
     End Class

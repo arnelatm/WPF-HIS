@@ -66,6 +66,11 @@ Public Class EmployeeLeaveApprovalEntry
         End Set
     End Property
 
+    Public Property UserIsASuperAdministrator As Boolean Implements IEmployeeLeaveApprovalView.UserIsASuperAdministrator
+    Public Property UserIsASupervisor As Boolean Implements IEmployeeLeaveApprovalView.UserIsASupervisor
+    Public Property UserHasHrAccess As Boolean Implements IEmployeeLeaveApprovalView.UserHasHrAccess
+    Public Property UserHasHrManagerAccess As Boolean Implements IEmployeeLeaveApprovalView.UserHasHrManagerAccess
+
 #End Region
 
     Public Sub BindEmployeeLeaveList()

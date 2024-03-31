@@ -134,7 +134,7 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Public Function IsUserASupervisor()
+        Public Function UserIsASupervisor()
             Dim employeeIdNo As Int32 = GetUserEmployeeIdNo()
             If employeeIdNo > 0 Then
                 Return Service.GetField(Of Boolean, Int32)(employeeIdNo, "Employee", "IdNo", "Supervisor")
@@ -143,12 +143,24 @@ Namespace PresentationLayer.Presenters
         End Function
 
 
+        Public Function UserIsASuperAdministrator()
+            Return GlobalFunctions.UserIsASuperAdmin
+        End Function
+
         Public Function UserHasHrManagerAccess()
             If UserHasAccess("HumanResourcesManager") Then
                 Return True
             End If
             Return False
         End Function
+
+        Public Function UserHasHrAccess()
+            If UserHasAccess("HumanResources") Then
+                Return True
+            End If
+            Return False
+        End Function
+
 
         Public Function GetUserEmployeeIdNo() As Int32
             Return Service.GetUserEmployeeIdNo()

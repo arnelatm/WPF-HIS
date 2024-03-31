@@ -32,7 +32,7 @@ Namespace PresentationLayer.Presenters
                 _userHasAccess = True
             Else
                 Dim employeeIdNo As Int32 = Service.GetUserEmployeeIdNo()
-                If Not IsUserASupervisor() Then
+                If Not UserIsASupervisor() Then
                     _userIsASupervisor = False
                     Dim control As Control = Nothing
                     Dim x = MainFieldsDictionary
@@ -49,7 +49,7 @@ Namespace PresentationLayer.Presenters
         Protected Overrides Sub CreateDataSources()
             If UserHasAccess("HumanResources") Then
                 MakeControlDataSources({New Object() {"Employee", "EmployeeIdNo", Nothing, Nothing}})
-            ElseIf IsUserASupervisor() Then
+            ElseIf UserIsASupervisor() Then
                 Dim employeeIdNo As Int32 = Service.GetUserEmployeeIdNo()
                 Dim filter As String = "IdNo = " + employeeIdNo.ToString() + " or SupervisorIdNo = " + employeeIdNo.ToString()
                 MakeControlDataSources({New Object() {"Employee", "EmployeeIdNo", Nothing, filter}})

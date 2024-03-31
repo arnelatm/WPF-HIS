@@ -74,7 +74,6 @@ Public Class CFormEntry
     <Description("Type here the Child Table name if any, otherwise leave it blank.")>
     <Browsable(True)>
     Public Property ChildTableName As String = ""
-
     Public Property TableProperties As Array
 
     Protected Property FormTitleCaption As String = ""
@@ -254,11 +253,7 @@ Public Class CFormEntry
                 End If
                 btnUndo.Enabled = True
             Else
-                If EditingAllowed Then
-                    btnEdit.Enabled = True
-                Else
-                    btnEdit.Enabled = True
-                End If
+                btnEdit.Enabled = True
                 btnQuit.Enabled = True
                 btnSave.Enabled = False
                 btnUndo.Enabled = False
@@ -326,19 +321,13 @@ Public Class CFormEntry
                 btnLast.Enabled = False
             End If
         End If
-        If EditingAllowed Then
-            btnEdit.Visible = True
-        Else
+        If Not EditingAllowed Then
             btnEdit.Visible = False
         End If
-        If AddingAllowed Then
-            btnAdd.Visible = True
-        Else
+        If Not AddingAllowed Then
             btnAdd.Visible = False
         End If
-        If DeletingAllowed Then
-            btnDelete.Visible = True
-        Else
+        If Not DeletingAllowed Then
             btnDelete.Visible = False
         End If
 
@@ -506,13 +495,13 @@ Public Class CFormEntry
     End Sub
 
     Protected Overridable Sub PublishClickedButton(buttonClicked As ButtonClicked)
-        Me.SuspendDrawingNew()
+        'Me.SuspendDrawingNew()
         'RaiseEvent BeforeChangeRecord()
         If Ea IsNot Nothing Then
             Ea.PublishEvent(New ViewButtonClicked(buttonClicked))
         End If
         'RaiseEvent AfterChangeRecord()
-        Me.ResumeDrawingNew()
+        'Me.ResumeDrawingNew()
     End Sub
 
     Protected Overridable Sub GridValidator()
@@ -617,6 +606,11 @@ Public Class CFormEntry
             Else
                 AddingAllowed = False
             End If
+            If formLoaded.DeletingAllowed Then
+                DeletingAllowed = True
+            Else
+                DeletingAllowed = False
+            End If
             'Debugger.Break()
             'PublishClickedButton(ButtonClicked.First)
             Inputs(False)
@@ -643,7 +637,7 @@ Public Class CFormEntry
             If FirstControl IsNot Nothing Then
                 FirstControl.Focus()
             End If
-            If Not UserIsASuperAdministrator() Then
+            If Not UserIsASuperAdmin() Then
                 HideButton(btnDebug)
             End If
             If AddOnOpen Then
@@ -710,9 +704,10 @@ Public Class CFormEntry
                 '    Debugger.Break()
                 'End If
                 If TypeOf ctrl Is DataGridView Then
-                    DirectCast(ctrl, DataGridView).EndEdit()
+                    Dim x As DataGridView = ctrl
+                    DirectCast(x, DataGridView).EndEdit()
                 End If
-                SetPropertyValue(ctrl, "EditingMode", onOff)
+                SetPropertyValue(ctrl, "EditingMode", onOff, True)
             End If
         Next
         If onOff Then

@@ -20,7 +20,7 @@ Namespace DataLayer.AdoNet
                     "IdNo," &
                     "LeaveAllowed," &
                     "LeaveCode," &
-                    "LeaveCycle," &
+                    "LeaveType," &
                     "LeaveName," &
                     "LeaveNameAra," &
                     "MaxCarryOver," &
@@ -46,7 +46,7 @@ Namespace DataLayer.AdoNet
                     " Holiday = @Holiday," &
                     " LeaveAllowed = @LeaveAllowed," &
                     " LeaveCode = @LeaveCode," &
-                    " LeaveCycle = @LeaveCycle," &
+                    " LeaveType = @LeaveType," &
                     " LeaveName = @LeaveName," &
                     " LeaveNameAra = @LeaveNameAra," &
                     " MaxCarryOver = @MaxCarryOver," &
@@ -61,8 +61,8 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef leave As Leave) As Integer Implements iDao(Of Leave).AddRecord
             Dim sql As String =
                     " INSERT INTO [Leave] " &
-                    " (Cumulative,Earnable,Holiday,LeaveAllowed,LeaveCode,LeaveCycle,LeaveName,LeaveNameAra,MaxCarryOver,MaxLimit,NoMaxLimit,Notes,PaidPercent)" &
-                    " VALUES (@Cumulative,@Earnable,@Holiday,@LeaveAllowed,@LeaveCode,@LeaveCycle,@LeaveName,@LeaveNameAra,@MaxCarryOver,@MaxLimit,@NoMaxLimit,@Notes,@PaidPercent)"
+                    " (Cumulative,Earnable,Holiday,LeaveAllowed,LeaveCode,LeaveType,LeaveName,LeaveNameAra,MaxCarryOver,MaxLimit,NoMaxLimit,Notes,PaidPercent)" &
+                    " VALUES (@Cumulative,@Earnable,@Holiday,@LeaveAllowed,@LeaveCode,@LeaveType,@LeaveName,@LeaveNameAra,@MaxCarryOver,@MaxLimit,@NoMaxLimit,@Notes,@PaidPercent)"
             Return Db.Insert(sql, Take(leave))
         End Function
 
@@ -75,7 +75,7 @@ Namespace DataLayer.AdoNet
             .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
             .LeaveAllowed = Extensions.AsDecimal(reader("LeaveAllowed")),
             .LeaveCode = Extensions.AsString(reader("LeaveCode")),
-            .LeaveCycle = Extensions.AsString(reader("LeaveCycle")),
+            .LeaveType = Extensions.AsString(reader("LeaveType")),
             .LeaveName = Extensions.AsString(reader("LeaveName")),
             .LeaveNameAra = Extensions.AsString(reader("LeaveNameAra")),
             .MaxCarryOver = Extensions.AsDecimal(reader("MaxCarryOver")),
@@ -93,7 +93,7 @@ Namespace DataLayer.AdoNet
                                     "@IdNo", leave.IdNo,
                                     "@LeaveAllowed", leave.LeaveAllowed,
                                     "@LeaveCode", leave.LeaveCode,
-                                    "@LeaveCycle", leave.LeaveCycle,
+                                    "@LeaveType", leave.LeaveType,
                                     "@LeaveName", leave.LeaveName,
                                     "@LeaveNameAra", leave.LeaveNameAra,
                                     "@MaxCarryOver", leave.MaxCarryOver,

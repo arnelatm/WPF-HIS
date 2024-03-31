@@ -77,6 +77,14 @@ Public Class SecurityGroupPresenter(Of TM As New)
         retVal = UpdateChildData(_groupAccessService, DtUpdateTable, DtInsertTable, passedValue, "SecurityGroupIdNo")
     End Sub
 
+    Public Sub UpdateCode(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
+        'Dim passedValue As Integer = retVal
+        If retVal >= 0 And GlobalFunctions.IsEmpty(View.SecurityGroupCode) Then
+            retVal = Service.GenerateCode(View.IdNo)
+            View.SecurityGroupCode = Service.GetFieldWithIdNo(View.IdNo, "SecurityGroup", "SecurityGroupCode")
+        End If
+    End Sub
+
     Protected Overrides Function IsBizDataValid() As Boolean
         Dim retValue = False
         If MyBase.IsBizDataValid() Then

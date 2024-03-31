@@ -14,6 +14,10 @@ Namespace PresentationLayer.Views.Interfaces
         Property LeaveList As DataTable
         Property StatusList As DataTable
         Property ApprovalStatusList As DataTable
+        Property UserIsASuperAdministrator As Boolean
+        Property UserIsASupervisor As Boolean
+        Property UserHasHrAccess As Boolean
+        Property UserHasHrManagerAccess As Boolean
 
         Event ApprovalCheckedEvent(sender As Object)
 
@@ -30,6 +34,10 @@ Namespace PresentationLayer.Views.Interfaces
         Property LeaveList As DataTable
         Property StatusList As DataTable
         Property ApprovalStatusList As DataTable
+        Property UserIsASuperAdministrator As Boolean
+        Property UserIsASupervisor As Boolean
+        Property UserHasHrAccess As Boolean
+        Property UserHasHrManagerAccess As Boolean
 
         Event ApprovalCheckedEvent(sender As Object)
 

@@ -39,7 +39,7 @@ Namespace PresentationLayer.Presenters
             MakeControlDataSources({New Object() {"User", "ApprovedBy", "IdNo,UserName", Nothing, Nothing}})
 
             CreateEnumData(Of LeaveStatusSelection)(View.StatusList)
-            If IsUserASupervisor() Then
+            If UserIsASupervisor() Then
                 CreateEnumData(Of SupervisorApprovalSelection)(View.ApprovalStatusList)
             Else
                 CreateEnumData(Of LeaveApprovalSelection)(View.ApprovalStatusList)
@@ -53,7 +53,9 @@ Namespace PresentationLayer.Presenters
                          "Status <> '" + EnumToCode(LeaveStatusSelection.Disapproved) + "' and " &
                          "Status <> '" + EnumToCode(LeaveStatusSelection.Used) + "' and " &
                          "Status <> '" + EnumToCode(LeaveStatusSelection.Cancelled) + "'"
-            If IsUserASupervisor() Or UserHasHrManagerAccess() Then
+            If UserHasHrAccess() OrElse UserHasHrManagerAccess() OrElse UserIsASuperAdministrator() Then
+                'can see all data
+            ElseIf UserIsASupervisor() Then
                 Dim employeeIdNo As Int32
                 employeeIdNo = Service.GetUserEmployeeIdNo()
                 filter += " and Status <> '" + EnumToCode(LeaveStatusSelection.SupervisorApproved) + "' and EmployeeIdNo <> " & employeeIdNo.ToString()
@@ -75,11 +77,7 @@ Namespace PresentationLayer.Presenters
                         workRow("ApprovalNote") = leave.ApprovalNote
                         workRow("EmployeeLeaveIdNo") = leave.IdNo
                         If leave.Approve Then
-                            If IsUserASupervisor() Then
-                                workRow("Status") = EnumToCode(LeaveStatusSelection.SupervisorApproved)
-                            Else
-                                workRow("Status") = EnumToCode(LeaveStatusSelection.Approved)
-                            End If
+                            workRow("Status") = EnumToCode(LeaveStatusSelection.Approved)
                         Else
                             workRow("Status") = EnumToCode(LeaveStatusSelection.Disapproved)
                         End If
@@ -93,10 +91,6 @@ Namespace PresentationLayer.Presenters
             Dim retVal As Integer
             Dim record As New EmployeeLeaveEarnedApprovalModel
             GlobalVariables.Mapper.Map(Of IEmployeeLeaveEarnedApprovalView, EmployeeLeaveEarnedApprovalModel)(View, record)
-            Dim _userHasHrManagerAccess As Boolean = False
-            If UserHasAccess("HumanResources") Then
-                _userHasHrManagerAccess = True
-            End If
             NewlyAddedRecordIdNo = Service.AddRecord(record)
             If NewlyAddedRecordIdNo > 0 Then
                 CreateApprovalData()
@@ -104,7 +98,7 @@ Namespace PresentationLayer.Presenters
                     row.Item("EmployeeLeaveEarnedApprovalIdNo") = NewlyAddedRecordIdNo
                 Next row
                 retVal = Service.ExecuteTvpSp("InsertEmployeeLeaveEarnedApprovalItemTvp", _dtEmployeeLeaveEarnedApproval)
-                If retVal >= 0 And _userHasHrManagerAccess Then
+                If retVal >= 0 Then
                     Dim leaveCreditDao As New EmployeeLeaveCreditDao
                     Dim leaveDao As New LeaveDao
                     Dim leaveCredit As New EmployeeLeaveCredit

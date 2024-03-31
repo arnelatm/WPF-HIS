@@ -453,4 +453,15 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
         End Get
     End Property
 
+    Public ReadOnly Property DeletingAllowed As Boolean
+        Get
+            Dim accessName = "Table" + TableName + "Deleting"
+            If UserHasAccess(accessName) Then
+                Return True
+            Else
+                Return False
+            End If
+        End Get
+    End Property
+
 End Class

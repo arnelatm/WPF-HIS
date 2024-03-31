@@ -403,9 +403,9 @@ Public Enum AbsenceTypeSelection
     <EnumCode("2")> Late
 End Enum
 
-Public Enum LeaveCycleSelection
+Public Enum LeaveTypeSelection
     <EnumCode("")> NotSpecified
-    <EnumCode("1")> ResetsYearly
+    <EnumCode("1")> Earnable
     <EnumCode("2")> OnceOnly
     <EnumCode("3")> AsNeeded
 End Enum

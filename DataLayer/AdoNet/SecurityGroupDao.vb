@@ -96,7 +96,7 @@ Namespace AdoNet
         End Function
 
         Public Function GenerateCode(idNo As Integer) As String Implements IAutoCodeDao.GenerateCode
-            Return UpdateCode("SecurityGroup", "SecurityGroup" + "Code", "IdNo", idNo)
+            Return UpdateCode("SecurityGroup", "SecurityGroupCode", "IdNo", idNo)
         End Function
 
         Private Shared ReadOnly MakeGroupAccess As Func(Of IDataReader, GroupAccess) =

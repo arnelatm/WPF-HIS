@@ -36,12 +36,12 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property LeaveCycle As String Implements ILeaveView.LeaveCycle
+        Public Property LeaveType As String Implements ILeaveView.LeaveType
             Get
-                Return cboLeaveCycle.GetValue()
+                Return cboLeaveType.GetValue()
             End Get
             Set(value As String)
-                cboLeaveCycle.SetValue(value)
+                cboLeaveType.SetValue(value)
             End Set
         End Property
 
@@ -150,7 +150,7 @@ Namespace PresentationLayer.Views.Forms
             MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {
                 {"LeaveCode", txtLeaveCode},
-                {"LeaveCycle", cboLeaveCycle},
+                {"LeaveType", cboLeaveType},
                 {"LeaveName", txtLeaveName},
                 {"LeaveNameAra", txtLeaveNameAra},
                 {"LeaveAllowed", txtLeaveAllowed},
@@ -200,8 +200,8 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub CbLeaveCycleSelectedIndexChanged(sender As Object, e As EventArgs) Handles cboLeaveCycle.SelectedIndexChanged
-            If cboLeaveCycle.SelectedValue = EnumToCode(LeaveCycleSelection.OnceOnly) or cboLeaveCycle.SelectedValue = EnumToCode(LeaveCycleSelection.AsNeeded) Then
+        Private Sub CbLeaveTypeSelectedIndexChanged(sender As Object, e As EventArgs) Handles cboLeaveType.SelectedIndexChanged
+            If cboLeaveType.SelectedValue = EnumToCode(LeaveTypeSelection.OnceOnly) or cboLeaveType.SelectedValue = EnumToCode(LeaveTypeSelection.AsNeeded) Then
                 If Not btnEdit.Enabled Then
                     chkCumulative.Checked = False
                     NoMaxLimit = False

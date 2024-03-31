@@ -406,9 +406,9 @@ Namespace PresentationLayer.Presenters
             End If
             Dim employeeIdNo As Int32 = Service.GetUserEmployeeIdNo()
             Dim userEmployeeIdNo As Int32 = GetUserEmployeeIdNo()
-            If GlobalFunctions.UserIsASuperAdministrator() Or UserHasHrManagerAccess() Or UserHasAccess("HumanResources") Then
+            If UserHasHrAccess() OrElse UserHasHrManagerAccess() OrElse UserIsASuperAdministrator() Then
                 ' include all records
-            ElseIf IsUserASupervisor() Then
+            ElseIf UserIsASupervisor() Then
                 DataFilter += IIf(DataFilter Is Nothing OrElse DataFilter = "", "", " and ") + " (SupervisorIdNo = " & userEmployeeIdNo.ToString() + " or IdNo = " & userEmployeeIdNo.ToString() + ")"
             Else
                 ' meaning don't show any data
@@ -468,11 +468,11 @@ Namespace PresentationLayer.Presenters
                             Dim employeePayElement As EmployeePayElementView = eventType.BindingSource.Current
                             amount = ComputePayAmount(View.PayFrequency, employeePayElement.Rate, eventType.EnteredValue)
                             employeePayElement.Amount = amount
-                        'Case $"LeaveCycle"
+                        'Case $"LeaveType"
                         '    Dim empLeaveCredit As EmployeeLeaveCreditView = eventType.BindingSource.Current
                         '    Dim leaveDao As New LeaveDao
                         '    Dim leave As Leave = leaveDao.GetRecordByIdNo(empLeaveCredit.IdNo)
-                        '    If leave.LeaveCycle = EnumToCode(LeaveCycleSelection.OnceOnly) Or leave.LeaveCycle = EnumToCode(LeaveCycleSelection.AsNeeded) then
+                        '    If leave.LeaveType = EnumToCode(LeaveTypeSelection.OnceOnly) Or leave.LeaveType = EnumToCode(LeaveTypeSelection.AsNeeded) then
                         '        empLeaveCredit.MaxCarryOver = 0
                         '        empLeaveCredit.MaxLimit = 0
                         '        empLeaveCredit.NoMaxLimit = False
@@ -492,7 +492,7 @@ Namespace PresentationLayer.Presenters
                             empLeaveCredit.Cumulative = leave.Cumulative
                             empLeaveCredit.PaidPercent = leave.PaidPercent
                             'End If
-                            'If leave.LeaveCycle = EnumToCode(LeaveCycleSelection.OnceOnly) Or leave.LeaveCycle = EnumToCode(LeaveCycleSelection.AsNeeded) Then
+                            'If leave.LeaveType = EnumToCode(LeaveTypeSelection.OnceOnly) Or leave.LeaveType = EnumToCode(LeaveTypeSelection.AsNeeded) Then
                             '    empLeaveCredit.MaxCarryOver = 0
                             '    empLeaveCredit.MaxLimit = 0
                             '    empLeaveCredit.NoMaxLimit = False
@@ -512,7 +512,7 @@ Namespace PresentationLayer.Presenters
                             Dim empLeaveCredit As EmployeeLeaveCreditView = eventType.BindingSource.Current
                             Dim leaveDao As New LeaveDao
                             Dim leave As Leave = leaveDao.GetRecordByIdNo(empLeaveCredit.LeaveIdNo)
-                            If leave.LeaveCycle = EnumToCode(LeaveCycleSelection.OnceOnly) Or leave.LeaveCycle = EnumToCode(LeaveCycleSelection.AsNeeded) Then
+                            If leave.LeaveType = EnumToCode(LeaveTypeSelection.OnceOnly) Or leave.LeaveType = EnumToCode(LeaveTypeSelection.AsNeeded) Then
                                 empLeaveCredit.MaxCarryOver = 0
                                 empLeaveCredit.MaxLimit = 0
                                 empLeaveCredit.NoMaxLimit = False
