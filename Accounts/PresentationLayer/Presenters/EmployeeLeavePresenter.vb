@@ -22,26 +22,36 @@ Namespace PresentationLayer.Presenters
         Private ReadOnly _leaveService As New AccountsService("Leave")
         Private ReadOnly _employeeLeaveCreditService = New AccountsService("EmployeeLeaveCredit")
         Private ReadOnly _employeeLeaveService = New AccountsService("EmployeeLeave")
+        Private ReadOnly _userHasHrManagerAccess As Boolean
+        Private ReadOnly _userHasHrAccess As Boolean
+        Private ReadOnly _userIsASupervisor As Boolean
+        Private ReadOnly _userIsASuperAdministrator As Boolean
 
 
         Public Sub New()
             MyBase.New()
         End Sub
 
-        Public Sub New(itemView As IEmployeeLeaveView, holidayLeave As Boolean)
-            MyBase.New(itemView)
+        Public Sub New(view As IEmployeeLeaveView, holidayLeave As Boolean)
+            MyBase.New(view)
             Service = New AccountsService("EmployeeLeave")
             TableBaseName = "EmployeeLeave"
             TableName = "EmployeeLeave_View"
             SortOrderKey = "IdNo"
             WithTreeView = False
             _holidayLeave = holidayLeave
-            View.UserHasHrManagerAccess = UserHasHrManagerAccess()
-            View.UserHasHrAccess = UserHasHrAccess()
-            View.UserIsASupervisor = UserIsASupervisor()
-            AddHandler View.DateValuesChanged, AddressOf OnDateValuesChanged
-            AddHandler View.EmployeeIdChanged, AddressOf OnEmployeeIdChanged
-            AddHandler View.ComputeNumberOfDays, AddressOf OnComputeNumberOfDays
+            _userHasHrManagerAccess = UserHasHrManagerAccess()
+            _userHasHrAccess = UserHasHrAccess()
+            _userIsASupervisor = UserIsASupervisor()
+            _userIsASuperAdministrator = UserIsASuperAdministrator()
+
+            view.UserHasHrManagerAccess = _userHasHrManagerAccess
+            view.UserHasHrAccess = _userHasHrAccess
+            view.UserIsASupervisor = _userIsASupervisor
+            view.UserIsASuperAdministrator = _userIsASuperAdministrator
+            AddHandler view.DateValuesChanged, AddressOf OnDateValuesChanged
+            AddHandler view.EmployeeIdChanged, AddressOf OnEmployeeIdChanged
+            AddHandler view.ComputeNumberOfDays, AddressOf OnComputeNumberOfDays
         End Sub
 
         Private Sub OnComputeNumberOfDays()
@@ -65,13 +75,11 @@ Namespace PresentationLayer.Presenters
                 DataFilter = "Holiday = 0"
             End If
             Dim employeeIdNo As Int32 = GetUserEmployeeIdNo()
-            If UserHasHrAccess() OrElse UserHasHrManagerAccess() OrElse UserIsASuperAdministrator() Then
+            If _userHasHrAccess OrElse _userHasHrManagerAccess OrElse _userIsASuperAdministrator Then
                 ' no filter
-            ElseIf UserIsASupervisor() Then
-                View.UserIsASupervisor = True
+            ElseIf _userIsASupervisor Then
                 DataFilter += " and (SupervisorIdNo = " & employeeIdNo.ToString() + " or EmployeeIdNo = " & employeeIdNo.ToString() & ")"
             Else
-                View.UserIsASupervisor = False
                 Dim control As Control = Nothing
                 Dim x = MainFieldsDictionary
                 If MainFieldsDictionary.TryGetValue("EmployeeIdNo", control) Then
@@ -83,9 +91,9 @@ Namespace PresentationLayer.Presenters
 
         Protected Overrides Sub CreateDataSources()
 
-            If UserHasAccess("HumanResources") Then
+            If _userHasHrAccess OrElse _userHasHrManagerAccess OrElse _userIsASuperAdministrator Then
                 MakeControlDataSources({New Object() {"Employee", "EmployeeIdNo", Nothing, Nothing}})
-            ElseIf UserIsASupervisor() Then
+            ElseIf _userIsASupervisor Then
                 Dim employeeIdNo As Int32 = Service.GetUserEmployeeIdNo()
                 Dim filter As String = "IdNo = " + employeeIdNo.ToString() + " or SupervisorIdNo = " + employeeIdNo.ToString()
                 MakeControlDataSources({New Object() {"Employee", "EmployeeIdNo", Nothing, filter}})
@@ -93,7 +101,8 @@ Namespace PresentationLayer.Presenters
                 Dim employeeIdNo As Int32 = Service.GetUserEmployeeIdNo()
                 MakeControlDataSources({New Object() {"Employee", "EmployeeIdNo", Nothing, "IdNo = " + employeeIdNo.ToString(), "IdNo"}})
             End If
-            MakeControlDataSources({New Object() {"User", "EnteredBy", "IdNo,UserName", Nothing}})
+            MakeControlDataSources({{New Object() {"User", "EnteredBy", "IdNo,UserName", Nothing}},
+                                    {New Object() {"User", "ApprovedBy", "IdNo,UserName", Nothing}}})
             If _holidayLeave Then
                 MakeControlDataSources({New Object() {"Leave", "LeaveIdNo", Nothing, " Holiday = 1"},
                                         New Object() {"Holiday_View", "HolidayIdNo", "IdNo,HolidayName,DateStart", Nothing}})
@@ -110,14 +119,13 @@ Namespace PresentationLayer.Presenters
             If View.Status <> EnumToCode(LeaveStatusSelection.Submitted) Then
                 Messaging.Show(True, "MsgLeaveAlreadyActed", {"approvalAction", CodeToEnum(Of LeaveStatusSelection)(View.Status).ToString()})
                 CancelEdit = True
-            ElseIf View.EnteredBy <> GlobalVariables.UserIdNo Then
-                If Not UserHasAccess("HumanResources") Then
+            ElseIf View.EnteredBy = GlobalVariables.UserIdNo Then
 
-                    Dim securityKeyMessage = Messaging.TranslateCaption("HumanResources")
-                    Dim message = Messaging.GetParametrizedMessage(True, "MsgNoAccessToSecurity", {"securityKey", securityKeyMessage})
-                    Messaging.Show(message)
-                    CancelEdit = True
-                End If
+            ElseIf Not (View.UserHasHrAccess OrElse _userHasHrManagerAccess OrElse View.UserIsASuperAdministrator) Then
+                Dim securityKeyMessage = Messaging.TranslateCaption("HumanResources")
+                Dim message = Messaging.GetParametrizedMessage(True, "MsgNoAccessToSecurity", {"securityKey", securityKeyMessage})
+                Messaging.Show(message)
+                CancelEdit = True
             End If
         End Sub
 

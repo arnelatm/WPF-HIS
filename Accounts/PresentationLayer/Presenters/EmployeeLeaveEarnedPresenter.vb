@@ -14,6 +14,11 @@ Namespace PresentationLayer.Presenters
         Inherits AccountsPresenter(Of IEmployeeLeaveEarnedView, TM)
 
         Private ReadOnly _employeeLeaveEarnedService = New AccountsService("EmployeeLeaveEarned")
+        Private ReadOnly _userHasHrManagerAccess As Boolean
+        Private ReadOnly _userHasHrAccess As Boolean
+        Private ReadOnly _userIsASupervisor As Boolean
+        Private ReadOnly _userIsASuperAdministrator As Boolean
+
         Private _hiredDate As Date?
         Private _releasedDate As Date?
         Private _yearsOfService As Int16
@@ -21,19 +26,28 @@ Namespace PresentationLayer.Presenters
         Private _earliestEarnedLeaveDate As Date
 
 
-        Public Sub New(itemView As IEmployeeLeaveEarnedView)
-            MyBase.New(itemView)
+        Public Sub New(view As IEmployeeLeaveEarnedView)
+            MyBase.New(view)
             Service = New AccountsService("EmployeeLeaveEarned")
             TableName = "EmployeeLeaveEarned"
             SortOrderKey = "IdNo"
             WithTreeView = False
-            AddHandler View.DateValuesChanged, AddressOf OnDateValuesChanged
-            AddHandler View.LeaveIdNoChanged, AddressOf OnLeaveIdNoChanged
+            _userHasHrManagerAccess = UserHasHrManagerAccess()
+            _userHasHrAccess = UserHasHrAccess()
+            _userIsASupervisor = UserIsASupervisor()
+            _userIsASuperAdministrator = UserIsASuperAdministrator()
+            view.UserHasHrManagerAccess = _userHasHrManagerAccess
+            view.UserHasHrAccess = _userHasHrAccess
+            view.UserIsASupervisor = _userIsASupervisor
+            view.UserIsASuperAdministrator = _userIsASuperAdministrator
+            AddHandler view.DateValuesChanged, AddressOf OnDateValuesChanged
+            AddHandler view.LeaveIdNoChanged, AddressOf OnLeaveIdNoChanged
         End Sub
 
 
         Protected Overrides Sub CreateDataSources()
             MakeControlDataSources({New Object() {"User", "EnteredBy", "IdNo,UserName", Nothing},
+                             New Object() {"User", "ApprovedBy", "IdNo,UserName", Nothing},
                              New Object() {"Employee", "EmployeeIdNo", Nothing, Nothing},
                              New Object() {"Leave", "LeaveIdNo", Nothing, "Earnable = 1"}
                              })
@@ -224,9 +238,9 @@ Namespace PresentationLayer.Presenters
 
         Public Overrides Sub EntryFormLoaded()
             Dim employeeIdNo As Int32 = Service.GetUserEmployeeIdNo()
-            If UserHasHrAccess() OrElse UserHasHrManagerAccess() OrElse UserIsASuperAdministrator() Then
+            If _userHasHrAccess OrElse _userHasHrManagerAccess OrElse _userIsASuperAdministrator Then
                 ' no filter these users has no restrictions for viewing all leaves
-            ElseIf UserIsASupervisor() Then
+            ElseIf _userIsASupervisor Then
                 ' only supervised employees can be shown
                 DataFilter += IIf(DataFilter Is Nothing Or DataFilter = "", "", " and ") + " (SupervisorIdNo = " & employeeIdNo.ToString() + " or EmployeeIdNo = " & employeeIdNo.ToString() & ")"
             Else
@@ -234,6 +248,19 @@ Namespace PresentationLayer.Presenters
                 DataFilter += IIf(DataFilter Is Nothing Or DataFilter = "", "", " and ") + " EmployeeIdNo = " & employeeIdNo.ToString()
             End If
             _earliestEarnedLeaveDate = GetEarliestLeaveDate()
+        End Sub
+
+        Private Sub OnBeforeEdit() Handles MyBase.BeforeEdit
+            Dim type As Type = View.GetType
+            If View.ApprovedBy <> 0 Then
+                If View.Approved Then
+                    Messaging.Show(True, "MsgLeaveAlreadyActed", {"approvalAction", CodeToEnum(Of LeaveStatusSelection)(LeaveStatusSelection.Approved).ToString()})
+                    CancelEdit = True
+                ElseIf View.Disapproved Then
+                    Messaging.Show(True, "MsgLeaveAlreadyActed", {"approvalAction", CodeToEnum(Of LeaveStatusSelection)(LeaveStatusSelection.Disapproved).ToString()})
+                    CancelEdit = True
+                End If
+            End If
         End Sub
 
 

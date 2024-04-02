@@ -23,8 +23,13 @@ Namespace BusinessLayer
 
         End Sub
 
+        Public Property ApprovalNote As String
+        Public Property Approved As Boolean
+        Public Property ApprovedBy As Int32?
+        Public Property EmployeeLeaveApprovedBy As Boolean?
         Public Property DateCreated As DateTime?
         Public Property DaysEarned As Decimal
+        Public Property Disapproved As Boolean
         Public Property EmployeeIdNo As Int32
         Public Property EndDate As Date?
         Public Property EnteredBy As Int32

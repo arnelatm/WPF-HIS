@@ -6,6 +6,9 @@
     ''' </summary>
     Public Class EmployeeLeaveEarnedModel
 
+        Public Property ApprovalNote As String
+        Public Property Approved As Boolean
+        Public Property ApprovedBy As Int32?
         Public Property DateCreated As DateTime?
         Public Property DaysEarned As Decimal
         Public Property EmployeeIdNo As Int32

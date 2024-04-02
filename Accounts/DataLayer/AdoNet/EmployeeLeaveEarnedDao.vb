@@ -15,7 +15,10 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly Db As New Db()
 
-        Private Const FieldList = "DateCreated," &
+        Private Const FieldList = "ApprovalNote," &
+                                  "Approved," &
+                                  "ApprovedBy," &
+                                  "DateCreated," &
                                   "DaysEarned," &
                                   "EmployeeIdNo," &
                                   "EndDate," &
@@ -26,7 +29,7 @@ Namespace DataLayer.AdoNet
                                   "StartDate"
         Public Function GetRecordByIdNo(idNo) As EmployeeLeaveEarned Implements IDao(Of EmployeeLeaveEarned).GetRecordByIdNo
             Dim sql As String = "SELECT " & FieldList &
-                    " FROM EmployeeLeaveEarned" &
+                    " FROM EmployeeLeaveEarned_View" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Dim data = Db.Read(sql, Make, params).FirstOrDefault()
@@ -35,8 +38,8 @@ Namespace DataLayer.AdoNet
 
         Public Function UpdateRecord(ByRef EmployeeLeaveEarned As EmployeeLeaveEarned) As Integer Implements IDao(Of EmployeeLeaveEarned).UpdateRecord
             Dim sql As String =
-                    "UPDATE [EmployeeLeaveEarned]" &
-                    "SET DaysEarned = @DaysEarned, " &
+                    "UPDATE [EmployeeLeaveEarned] " &
+                    "SET DaysEarned = @DaysEarned," &
                     "EmployeeIdNo = @EmployeeIdNo," &
                     "EndDate = @EndDate," &
                     "EnteredBy = @EnteredBy," &
@@ -58,6 +61,9 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, EmployeeLeaveEarned) =
                                     Function(reader) _
             New EmployeeLeaveEarned() With {
+            .ApprovalNote = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ApprovalNote")),
+            .Approved = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Approved")),
+            .ApprovedBy = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Int32)(reader("ApprovedBy")),
             .DateCreated = AATM.DataLayer.AdoNet.Extensions.AsNullableDateTime(reader("DateCreated")),
             .DaysEarned = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("DaysEarned")),
             .EmployeeIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("EmployeeIdNo")),

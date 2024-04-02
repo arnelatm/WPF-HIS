@@ -48,11 +48,9 @@
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
-            Me.cboDoctorName = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.cboDoctorName = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.CGroupBox1 = New AATM.Libraries.CBaseControlsLibrary.CGroupBox()
             Me.DataGridViewPrescriptionDetails = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
-            Me.ItemNameEnglishDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.DosageEnglishDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.DurationDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.chkPrint = New System.Windows.Forms.DataGridViewCheckBoxColumn()
             Me.bsPrescriptionDetails = New System.Windows.Forms.BindingSource(Me.components)
@@ -74,11 +72,12 @@
             '
             Me.btnRefresh.DesignerSelected = False
             Me.btnRefresh.ImageIndex = 0
-            Me.btnRefresh.Location = New System.Drawing.Point(687, 3)
+            Me.btnRefresh.Location = New System.Drawing.Point(913, 4)
+            Me.btnRefresh.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
             Me.btnRefresh.Name = "btnRefresh"
             Me.btnRefresh.OriginalImageName = Nothing
             Me.btnRefresh.SecurityKey = ""
-            Me.btnRefresh.Size = New System.Drawing.Size(90, 25)
+            Me.btnRefresh.Size = New System.Drawing.Size(120, 31)
             Me.btnRefresh.TabIndex = 11
             Me.btnRefresh.Text = "Refresh"
             '
@@ -97,9 +96,10 @@
             Me.CFlowLayout2.Controls.Add(Me.CButton1)
             Me.CFlowLayout2.Controls.Add(Me.btnPrintLabels)
             Me.CFlowLayout2.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.CFlowLayout2.Location = New System.Drawing.Point(0, 53)
+            Me.CFlowLayout2.Location = New System.Drawing.Point(0, 59)
+            Me.CFlowLayout2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
             Me.CFlowLayout2.Name = "CFlowLayout2"
-            Me.CFlowLayout2.Size = New System.Drawing.Size(797, 716)
+            Me.CFlowLayout2.Size = New System.Drawing.Size(1063, 887)
             Me.CFlowLayout2.TabIndex = 5
             '
             'TableLayoutPanel1
@@ -117,13 +117,14 @@
             Me.TableLayoutPanel1.Controls.Add(Me.dtpTransactionDate, 1, 1)
             Me.TableLayoutPanel1.Controls.Add(Me.cboDoctorName, 1, 0)
             Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.TableLayoutPanel1.Location = New System.Drawing.Point(3, 3)
+            Me.TableLayoutPanel1.Location = New System.Drawing.Point(4, 4)
+            Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
             Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
             Me.TableLayoutPanel1.RowCount = 3
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-            Me.TableLayoutPanel1.Size = New System.Drawing.Size(783, 412)
+            Me.TableLayoutPanel1.Size = New System.Drawing.Size(1044, 508)
             Me.TableLayoutPanel1.TabIndex = 17
             '
             'DataGridViewDoctorsPatient
@@ -151,25 +152,31 @@
             Me.DataGridViewDoctorsPatient.Dock = System.Windows.Forms.DockStyle.Fill
             Me.DataGridViewDoctorsPatient.Ea = Nothing
             Me.DataGridViewDoctorsPatient.EditingMode = False
+            Me.DataGridViewDoctorsPatient.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
             Me.DataGridViewDoctorsPatient.EndFindValue = Nothing
             Me.DataGridViewDoctorsPatient.FieldDescription = Nothing
             Me.DataGridViewDoctorsPatient.FieldName = Nothing
             Me.DataGridViewDoctorsPatient.FieldsDictionary = Nothing
+            Me.DataGridViewDoctorsPatient.FindColumnNo = CType(0, Short)
             Me.DataGridViewDoctorsPatient.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.DataGridViewDoctorsPatient.FindEnabled = False
             Me.DataGridViewDoctorsPatient.FirstRowDeletionEnabled = True
             Me.DataGridViewDoctorsPatient.FirstRowInsertionEnabled = True
             Me.DataGridViewDoctorsPatient.IgnoreCase = False
             Me.DataGridViewDoctorsPatient.IsDirty = False
-            Me.DataGridViewDoctorsPatient.Location = New System.Drawing.Point(3, 59)
+            Me.DataGridViewDoctorsPatient.Location = New System.Drawing.Point(4, 73)
+            Me.DataGridViewDoctorsPatient.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
             Me.DataGridViewDoctorsPatient.Name = "DataGridViewDoctorsPatient"
+            Me.DataGridViewDoctorsPatient.OldCellValue = Nothing
             Me.DataGridViewDoctorsPatient.ReadOnly = True
+            Me.DataGridViewDoctorsPatient.RowHeadersWidth = 51
+            Me.DataGridViewDoctorsPatient.Searchable = True
             Me.DataGridViewDoctorsPatient.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewDoctorsPatient.SecurityKey = ""
             Me.DataGridViewDoctorsPatient.SequenceColumn = "dgvSequence"
             Me.DataGridViewDoctorsPatient.SequenceFieldName = "Sequence"
             Me.DataGridViewDoctorsPatient.ShowFooter = False
-            Me.DataGridViewDoctorsPatient.Size = New System.Drawing.Size(777, 350)
+            Me.DataGridViewDoctorsPatient.Size = New System.Drawing.Size(1036, 431)
             Me.DataGridViewDoctorsPatient.TabIndex = 11
             Me.DataGridViewDoctorsPatient.Translatable = True
             '
@@ -188,6 +195,7 @@
             Me.dgvFileNo.FindEnabled = False
             Me.dgvFileNo.HeaderText = "FileNo"
             Me.dgvFileNo.IgnoreCase = False
+            Me.dgvFileNo.MinimumWidth = 6
             Me.dgvFileNo.Name = "dgvFileNo"
             Me.dgvFileNo.ReadOnly = True
             Me.dgvFileNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
@@ -211,6 +219,7 @@
             Me.dgvPatientName.FindEnabled = False
             Me.dgvPatientName.HeaderText = "Name"
             Me.dgvPatientName.IgnoreCase = False
+            Me.dgvPatientName.MinimumWidth = 6
             Me.dgvPatientName.Name = "dgvPatientName"
             Me.dgvPatientName.ReadOnly = True
             Me.dgvPatientName.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
@@ -233,6 +242,7 @@
             Me.dgvFileType.FindEnabled = False
             Me.dgvFileType.HeaderText = "Patient Type"
             Me.dgvFileType.IgnoreCase = False
+            Me.dgvFileType.MinimumWidth = 6
             Me.dgvFileType.Name = "dgvFileType"
             Me.dgvFileType.ReadOnly = True
             Me.dgvFileType.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
@@ -254,6 +264,7 @@
             Me.InvTypeDataGridViewTextBoxColumn.FindEnabled = False
             Me.InvTypeDataGridViewTextBoxColumn.HeaderText = "Invoice Type"
             Me.InvTypeDataGridViewTextBoxColumn.IgnoreCase = False
+            Me.InvTypeDataGridViewTextBoxColumn.MinimumWidth = 6
             Me.InvTypeDataGridViewTextBoxColumn.Name = "InvTypeDataGridViewTextBoxColumn"
             Me.InvTypeDataGridViewTextBoxColumn.ReadOnly = True
             Me.InvTypeDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
@@ -268,24 +279,30 @@
             DataGridViewCellStyle6.NullValue = Nothing
             Me.dgvTime.DefaultCellStyle = DataGridViewCellStyle6
             Me.dgvTime.HeaderText = "Time"
+            Me.dgvTime.MinimumWidth = 6
             Me.dgvTime.Name = "dgvTime"
             Me.dgvTime.ReadOnly = True
+            Me.dgvTime.Width = 125
             '
             'dgvPatientIdNo
             '
             Me.dgvPatientIdNo.DataPropertyName = "PatientIdNo"
             Me.dgvPatientIdNo.HeaderText = "PatientIdNo"
+            Me.dgvPatientIdNo.MinimumWidth = 6
             Me.dgvPatientIdNo.Name = "dgvPatientIdNo"
             Me.dgvPatientIdNo.ReadOnly = True
             Me.dgvPatientIdNo.Visible = False
+            Me.dgvPatientIdNo.Width = 125
             '
             'dgvTransKey
             '
             Me.dgvTransKey.DataPropertyName = "TransKey"
             Me.dgvTransKey.HeaderText = "TransKey"
+            Me.dgvTransKey.MinimumWidth = 6
             Me.dgvTransKey.Name = "dgvTransKey"
             Me.dgvTransKey.ReadOnly = True
             Me.dgvTransKey.Visible = False
+            Me.dgvTransKey.Width = 125
             '
             'bsDoctorsPatient
             '
@@ -293,13 +310,14 @@
             '
             'CLabel1
             '
+            Me.CLabel1.BackColor = System.Drawing.Color.Transparent
             Me.CLabel1.DisplayOnly = True
             Me.CLabel1.EditingMode = False
             Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel1.Location = New System.Drawing.Point(1, 32)
+            Me.CLabel1.Location = New System.Drawing.Point(1, 40)
             Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel1.Name = "CLabel1"
-            Me.CLabel1.Size = New System.Drawing.Size(156, 23)
+            Me.CLabel1.Size = New System.Drawing.Size(208, 28)
             Me.CLabel1.TabIndex = 13
             Me.CLabel1.Text = "Transaction Date:"
             Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -307,13 +325,14 @@
             '
             'CLabel2
             '
+            Me.CLabel2.BackColor = System.Drawing.Color.Transparent
             Me.CLabel2.DisplayOnly = True
             Me.CLabel2.EditingMode = False
             Me.CLabel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.CLabel2.Location = New System.Drawing.Point(1, 1)
             Me.CLabel2.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel2.Name = "CLabel2"
-            Me.CLabel2.Size = New System.Drawing.Size(171, 23)
+            Me.CLabel2.Size = New System.Drawing.Size(228, 28)
             Me.CLabel2.TabIndex = 14
             Me.CLabel2.Text = "Doctors Code - Name:"
             Me.CLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -333,14 +352,14 @@
             Me.dtpTransactionDate.EditsAllowed = False
             Me.dtpTransactionDate.ForeColor = System.Drawing.Color.Black
             Me.dtpTransactionDate.LinkedLabel = Nothing
-            Me.dtpTransactionDate.Location = New System.Drawing.Point(174, 32)
+            Me.dtpTransactionDate.Location = New System.Drawing.Point(231, 40)
             Me.dtpTransactionDate.Margin = New System.Windows.Forms.Padding(1)
             Me.dtpTransactionDate.Name = "dtpTransactionDate"
             Me.dtpTransactionDate.ReadOnlyDp = False
             Me.dtpTransactionDate.SecurityKey = Nothing
             Me.dtpTransactionDate.ShowLongDate = False
             Me.dtpTransactionDate.ShowTime = False
-            Me.dtpTransactionDate.Size = New System.Drawing.Size(118, 23)
+            Me.dtpTransactionDate.Size = New System.Drawing.Size(119, 27)
             Me.dtpTransactionDate.TabIndex = 12
             Me.dtpTransactionDate.TargetCalendar = CType(resources.GetObject("dtpTransactionDate.TargetCalendar"), System.Globalization.Calendar)
             Me.dtpTransactionDate.Translatable = False
@@ -350,7 +369,6 @@
             '
             'cboDoctorName
             '
-            Me.cboDoctorName.AlwaysEditable = False
             Me.cboDoctorName.BackColor = System.Drawing.Color.White
             Me.cboDoctorName.BegFindValue = Nothing
             Me.cboDoctorName.ChangingSearchValueOnly = False
@@ -359,6 +377,7 @@
             Me.cboDoctorName.DataValue = Nothing
             Me.cboDoctorName.DefaultValue = Nothing
             Me.cboDoctorName.DisplayMember = "Name"
+            Me.cboDoctorName.Editable = True
             Me.cboDoctorName.EditingMode = True
             Me.cboDoctorName.EndFindValue = Nothing
             Me.cboDoctorName.FieldDescription = Nothing
@@ -374,7 +393,7 @@
             Me.cboDoctorName.IntegralHeight = False
             Me.cboDoctorName.LimitToList = False
             Me.cboDoctorName.LinkedLabel = Nothing
-            Me.cboDoctorName.Location = New System.Drawing.Point(174, 1)
+            Me.cboDoctorName.Location = New System.Drawing.Point(231, 1)
             Me.cboDoctorName.Margin = New System.Windows.Forms.Padding(1)
             Me.cboDoctorName.Name = "cboDoctorName"
             Me.cboDoctorName.OldValue = 0
@@ -383,8 +402,9 @@
             Me.cboDoctorName.OverrideDropDownStyleList = False
             Me.cboDoctorName.PreviousSearchTerm = Nothing
             Me.cboDoctorName.PropertySelector = Nothing
-            Me.cboDoctorName.Size = New System.Drawing.Size(509, 24)
+            Me.cboDoctorName.Size = New System.Drawing.Size(677, 28)
             Me.cboDoctorName.SuggestBoxHeight = 200
+            Me.cboDoctorName.SuggestCharCount = 0
             Me.cboDoctorName.SuggestListOrderRule = Nothing
             Me.cboDoctorName.TabIndex = 15
             Me.cboDoctorName.TextToSearch = Nothing
@@ -401,9 +421,11 @@
             Me.CGroupBox1.Controls.Add(Me.DataGridViewPrescriptionDetails)
             Me.CGroupBox1.DisplayOnly = True
             Me.CGroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.CGroupBox1.Location = New System.Drawing.Point(3, 421)
+            Me.CGroupBox1.Location = New System.Drawing.Point(4, 520)
+            Me.CGroupBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
             Me.CGroupBox1.Name = "CGroupBox1"
-            Me.CGroupBox1.Size = New System.Drawing.Size(783, 208)
+            Me.CGroupBox1.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.CGroupBox1.Size = New System.Drawing.Size(1044, 256)
             Me.CGroupBox1.TabIndex = 19
             Me.CGroupBox1.TabStop = False
             Me.CGroupBox1.Text = "Prescription for :"
@@ -416,7 +438,7 @@
             Me.DataGridViewPrescriptionDetails.BegFindValue = Nothing
             Me.DataGridViewPrescriptionDetails.Cached = False
             Me.DataGridViewPrescriptionDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DataGridViewPrescriptionDetails.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ItemNameEnglishDataGridViewTextBoxColumn, Me.DosageEnglishDataGridViewTextBoxColumn, Me.DurationDataGridViewTextBoxColumn, Me.chkPrint})
+            Me.DataGridViewPrescriptionDetails.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DurationDataGridViewTextBoxColumn, Me.chkPrint})
             Me.DataGridViewPrescriptionDetails.DataFilter = Nothing
             Me.DataGridViewPrescriptionDetails.DataSource = Me.bsPrescriptionDetails
             DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -431,51 +453,46 @@
             Me.DataGridViewPrescriptionDetails.DisplayOnly = False
             Me.DataGridViewPrescriptionDetails.Ea = Nothing
             Me.DataGridViewPrescriptionDetails.EditingMode = False
+            Me.DataGridViewPrescriptionDetails.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
             Me.DataGridViewPrescriptionDetails.EndFindValue = Nothing
             Me.DataGridViewPrescriptionDetails.FieldDescription = Nothing
             Me.DataGridViewPrescriptionDetails.FieldName = Nothing
             Me.DataGridViewPrescriptionDetails.FieldsDictionary = Nothing
+            Me.DataGridViewPrescriptionDetails.FindColumnNo = CType(0, Short)
             Me.DataGridViewPrescriptionDetails.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.DataGridViewPrescriptionDetails.FindEnabled = False
             Me.DataGridViewPrescriptionDetails.FirstRowDeletionEnabled = True
             Me.DataGridViewPrescriptionDetails.FirstRowInsertionEnabled = True
             Me.DataGridViewPrescriptionDetails.IgnoreCase = False
             Me.DataGridViewPrescriptionDetails.IsDirty = False
-            Me.DataGridViewPrescriptionDetails.Location = New System.Drawing.Point(9, 19)
+            Me.DataGridViewPrescriptionDetails.Location = New System.Drawing.Point(12, 23)
+            Me.DataGridViewPrescriptionDetails.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
             Me.DataGridViewPrescriptionDetails.Name = "DataGridViewPrescriptionDetails"
+            Me.DataGridViewPrescriptionDetails.OldCellValue = Nothing
+            Me.DataGridViewPrescriptionDetails.RowHeadersWidth = 51
+            Me.DataGridViewPrescriptionDetails.Searchable = True
             Me.DataGridViewPrescriptionDetails.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewPrescriptionDetails.SecurityKey = ""
             Me.DataGridViewPrescriptionDetails.SequenceColumn = "dgvSequence"
             Me.DataGridViewPrescriptionDetails.SequenceFieldName = "Sequence"
             Me.DataGridViewPrescriptionDetails.ShowFooter = False
-            Me.DataGridViewPrescriptionDetails.Size = New System.Drawing.Size(768, 170)
+            Me.DataGridViewPrescriptionDetails.Size = New System.Drawing.Size(1024, 209)
             Me.DataGridViewPrescriptionDetails.TabIndex = 18
             Me.DataGridViewPrescriptionDetails.Translatable = True
-            '
-            'ItemNameEnglishDataGridViewTextBoxColumn
-            '
-            Me.ItemNameEnglishDataGridViewTextBoxColumn.DataPropertyName = "ItemNameEnglish"
-            Me.ItemNameEnglishDataGridViewTextBoxColumn.HeaderText = "Medicine Name"
-            Me.ItemNameEnglishDataGridViewTextBoxColumn.Name = "ItemNameEnglishDataGridViewTextBoxColumn"
-            Me.ItemNameEnglishDataGridViewTextBoxColumn.Width = 300
-            '
-            'DosageEnglishDataGridViewTextBoxColumn
-            '
-            Me.DosageEnglishDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-            Me.DosageEnglishDataGridViewTextBoxColumn.DataPropertyName = "DosageEnglish"
-            Me.DosageEnglishDataGridViewTextBoxColumn.HeaderText = "Dosage "
-            Me.DosageEnglishDataGridViewTextBoxColumn.Name = "DosageEnglishDataGridViewTextBoxColumn"
             '
             'DurationDataGridViewTextBoxColumn
             '
             Me.DurationDataGridViewTextBoxColumn.DataPropertyName = "Duration"
             Me.DurationDataGridViewTextBoxColumn.HeaderText = "Duration"
+            Me.DurationDataGridViewTextBoxColumn.MinimumWidth = 6
             Me.DurationDataGridViewTextBoxColumn.Name = "DurationDataGridViewTextBoxColumn"
+            Me.DurationDataGridViewTextBoxColumn.Width = 125
             '
             'chkPrint
             '
             Me.chkPrint.DataPropertyName = "Print"
             Me.chkPrint.HeaderText = "Print"
+            Me.chkPrint.MinimumWidth = 6
             Me.chkPrint.Name = "chkPrint"
             Me.chkPrint.Width = 60
             '
@@ -487,11 +504,12 @@
             '
             Me.btnSelectAll.DesignerSelected = False
             Me.btnSelectAll.ImageIndex = 0
-            Me.btnSelectAll.Location = New System.Drawing.Point(3, 635)
+            Me.btnSelectAll.Location = New System.Drawing.Point(4, 784)
+            Me.btnSelectAll.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
             Me.btnSelectAll.Name = "btnSelectAll"
             Me.btnSelectAll.OriginalImageName = Nothing
             Me.btnSelectAll.SecurityKey = ""
-            Me.btnSelectAll.Size = New System.Drawing.Size(90, 25)
+            Me.btnSelectAll.Size = New System.Drawing.Size(120, 31)
             Me.btnSelectAll.TabIndex = 20
             Me.btnSelectAll.Text = "Select All"
             '
@@ -499,23 +517,25 @@
             '
             Me.CButton1.DesignerSelected = False
             Me.CButton1.ImageIndex = 0
-            Me.CButton1.Location = New System.Drawing.Point(99, 635)
+            Me.CButton1.Location = New System.Drawing.Point(132, 784)
+            Me.CButton1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
             Me.CButton1.Name = "CButton1"
             Me.CButton1.OriginalImageName = Nothing
             Me.CButton1.SecurityKey = ""
-            Me.CButton1.Size = New System.Drawing.Size(106, 25)
+            Me.CButton1.Size = New System.Drawing.Size(141, 31)
             Me.CButton1.TabIndex = 22
             Me.CButton1.Text = "Unselect All"
             '
             'btnPrintLabels
             '
-            Me.btnPrintLabels.DesignerSelected = True
+            Me.btnPrintLabels.DesignerSelected = False
             Me.btnPrintLabels.ImageIndex = 0
-            Me.btnPrintLabels.Location = New System.Drawing.Point(211, 635)
+            Me.btnPrintLabels.Location = New System.Drawing.Point(281, 784)
+            Me.btnPrintLabels.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
             Me.btnPrintLabels.Name = "btnPrintLabels"
             Me.btnPrintLabels.OriginalImageName = Nothing
             Me.btnPrintLabels.SecurityKey = ""
-            Me.btnPrintLabels.Size = New System.Drawing.Size(318, 25)
+            Me.btnPrintLabels.Size = New System.Drawing.Size(424, 31)
             Me.btnPrintLabels.TabIndex = 21
             Me.btnPrintLabels.Text = "Print Dosage Labels for Selected Medicines"
             '
@@ -536,7 +556,7 @@
             Me.txtDoctorCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtDoctorCode.ForeColor = System.Drawing.Color.Black
             Me.txtDoctorCode.LinkedLabel = Nothing
-            Me.txtDoctorCode.Location = New System.Drawing.Point(693, 89)
+            Me.txtDoctorCode.Location = New System.Drawing.Point(924, 110)
             Me.txtDoctorCode.Margin = New System.Windows.Forms.Padding(1)
             Me.txtDoctorCode.MaximumValue = Nothing
             Me.txtDoctorCode.MinimumValue = Nothing
@@ -544,19 +564,20 @@
             Me.txtDoctorCode.OldValue = Nothing
             Me.txtDoctorCode.OverrideMaxLength = 0
             Me.txtDoctorCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtDoctorCode.Size = New System.Drawing.Size(80, 23)
+            Me.txtDoctorCode.Size = New System.Drawing.Size(106, 26)
             Me.txtDoctorCode.TabIndex = 16
             Me.txtDoctorCode.Translatable = False
             Me.txtDoctorCode.Visible = False
             '
             'DoctorsPrescriptionForm
             '
-            Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+            Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
             Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
             Me.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.GreenGradientBackgroundLarge
-            Me.ClientSize = New System.Drawing.Size(797, 769)
+            Me.ClientSize = New System.Drawing.Size(1063, 946)
             Me.Controls.Add(Me.CFlowLayout2)
             Me.Controls.Add(Me.txtDoctorCode)
+            Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
             Me.Name = "DoctorsPrescriptionForm"
             Me.Text = "Doctor's Patients Viewer"
             Me.Controls.SetChildIndex(Me.txtDoctorCode, 0)

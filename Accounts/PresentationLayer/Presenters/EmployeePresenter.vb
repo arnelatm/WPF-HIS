@@ -29,6 +29,10 @@ Namespace PresentationLayer.Presenters
         Private ReadOnly _employeeDocumentService As New AccountsService("EmployeeDocument")
         Private ReadOnly _EmployeeLeaveCreditService As New AccountsService("EmployeeLeaveCredit")
         Private ReadOnly _employeePhoneService As New AccountsService("EmployeePhone")
+        Private ReadOnly _userHasHrManagerAccess As Boolean
+        Private ReadOnly _userHasHrAccess As Boolean
+        Private ReadOnly _userIsASupervisor As Boolean
+        Private ReadOnly _userIsASuperAdministrator As Boolean
 
         Public Sub New(itemView As IEmployeeView)
             MyBase.New(itemView)
@@ -37,6 +41,15 @@ Namespace PresentationLayer.Presenters
             TreeViewMainField = "EmployeeName"
             'TreeViewSecondaryField = "EmployeeCode"
             SortOrderKey = "EmployeeName"
+            _userHasHrManagerAccess = UserHasHrManagerAccess()
+            _userHasHrAccess = UserHasHrAccess()
+            _userIsASupervisor = UserIsASupervisor()
+            _userIsASuperAdministrator = UserIsASuperAdministrator()
+
+            View.UserHasHrManagerAccess = _userHasHrManagerAccess
+            View.UserHasHrAccess = _userHasHrAccess
+            View.UserIsASupervisor = _userIsASupervisor
+            View.UserIsASuperAdministrator = _userIsASuperAdministrator
             CreateDataTables()
             GoFilter()
         End Sub

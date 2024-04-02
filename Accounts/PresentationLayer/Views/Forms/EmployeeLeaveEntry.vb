@@ -292,7 +292,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub SetFirstControl()
-            If UserIsASuperAdministrator() OrElse UserHasHrAccess OrElse UserHasHrManagerAccess Then
+            If UserIsASuperAdministrator OrElse UserHasHrAccess OrElse UserHasHrManagerAccess Then
                 cboEmployeeIdNo.DisplayOnly = False
                 FirstControl = cboEmployeeIdNo
             ElseIf UserIsASupervisor Then
