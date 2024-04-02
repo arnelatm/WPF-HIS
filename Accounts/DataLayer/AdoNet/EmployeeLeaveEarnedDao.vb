@@ -90,7 +90,7 @@ Namespace DataLayer.AdoNet
 
         Public Function GetOverlappingEarnedLeave(employeeIdNo As Int32, beginningDate As Date, endingDate As Date, leaveIdNo As Int16) As EmployeeLeaveEarned
             Dim sql As String
-            sql = "Select " & FieldList & " From EmployeeLeaveEarned " &
+            sql = "Select " & FieldList & " From EmployeeLeaveEarned_View " &
                   "where EmployeeIdNo = @employeeIdNo and " &
                   "(@BeginningDate <= EndDate) and (@EndingDate >= StartDate) and LeaveIdNo = @leaveIdNo"
             Dim params() As Object = {"@employeeIdNo", employeeIdNo, "@BeginningDate", beginningDate, "@EndingDate", endingDate, "@LeaveIdNo", leaveIdNo}
