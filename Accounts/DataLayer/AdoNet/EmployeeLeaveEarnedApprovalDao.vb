@@ -72,7 +72,6 @@ Namespace DataLayer.AdoNet
                                 "IdNo," &
                                 "LeaveIdNo," &
                                 "Reason," &
-                                "Status," &
                                 "StartDate," &
                                 "SupervisorIdNo" &
                                 " FROM [EmployeeLeaveEarned_View]" &

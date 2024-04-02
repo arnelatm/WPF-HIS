@@ -251,18 +251,34 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub OnBeforeEdit() Handles MyBase.BeforeEdit
-            Dim type As Type = View.GetType
             If View.ApprovedBy <> 0 Then
                 If View.Approved Then
-                    Messaging.Show(True, "MsgLeaveAlreadyActed", {"approvalAction", CodeToEnum(Of LeaveStatusSelection)(LeaveStatusSelection.Approved).ToString()})
+                    Messaging.Show(True, "MsgLeaveAlreadyActed", {"approvalAction", Messaging.TranslateCaption(LeaveStatusSelection.Approved.ToString())})
                     CancelEdit = True
                 ElseIf View.Disapproved Then
-                    Messaging.Show(True, "MsgLeaveAlreadyActed", {"approvalAction", CodeToEnum(Of LeaveStatusSelection)(LeaveStatusSelection.Disapproved).ToString()})
+                    Messaging.Show(True, "MsgLeaveAlreadyActed", {"approvalAction", Messaging.TranslateCaption(LeaveStatusSelection.Disapproved.ToString())})
                     CancelEdit = True
                 End If
             End If
         End Sub
 
+        Public Overrides Function IsOkToDeleteRecord() As Boolean
+            Dim retVal As Boolean = True
+            If MyBase.IsOkToDeleteRecord() Then
+                If View.ApprovedBy <> 0 Then
+                    If View.Approved Then
+                        Messaging.Show(True, "MsgLeaveAlreadyActed", {"approvalAction", Messaging.TranslateCaption(LeaveStatusSelection.Approved.ToString())})
+                        retVal = False
+                    ElseIf View.Disapproved Then
+                        Messaging.Show(True, "MsgLeaveAlreadyActed", {"approvalAction", Messaging.TranslateCaption(LeaveStatusSelection.Disapproved.ToString())})
+                        retVal = False
+                    End If
+                End If
+            Else
+                retVal = False
+            End If
+            Return retVal
+        End Function
 
     End Class
 

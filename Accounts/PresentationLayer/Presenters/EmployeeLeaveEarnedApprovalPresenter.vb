@@ -63,16 +63,13 @@ Namespace PresentationLayer.Presenters
         Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
             View.ApprovedBy = GlobalVariables.UserIdNo
             View.DateCreated = Now()
-            Dim filter As String = "Status <> '" + EnumToCode(LeaveStatusSelection.Approved) + "' and " &
-                         "Status <> '" + EnumToCode(LeaveStatusSelection.Disapproved) + "' and " &
-                         "Status <> '" + EnumToCode(LeaveStatusSelection.Used) + "' and " &
-                         "Status <> '" + EnumToCode(LeaveStatusSelection.Cancelled) + "'"
+            Dim filter As String = "Approvedby <> 0"
             If _userHasHrAccess OrElse _userHasHrManagerAccess OrElse _userIsASuperAdministrator Then
                 'can see all data
             ElseIf _userIsASupervisor Then
                 Dim employeeIdNo As Int32
                 employeeIdNo = Service.GetUserEmployeeIdNo()
-                filter += " and Status <> '" + EnumToCode(LeaveStatusSelection.SupervisorApproved) + "' and EmployeeIdNo <> " & employeeIdNo.ToString()
+                filter += "ApprovedBy <> 0 and EmployeeIdNo <> " & employeeIdNo.ToString()
                 filter += " and SuperVisorIdNo = " + employeeIdNo.ToString()
             End If
             Dim EmployeeLeaveEarnedApprovalItemsModel As List(Of EmployeeLeaveEarnedApprovalItemModel)
