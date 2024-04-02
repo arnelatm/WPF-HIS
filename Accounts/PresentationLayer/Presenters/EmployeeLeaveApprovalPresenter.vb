@@ -1,7 +1,10 @@
-﻿Imports AATM.Accounts.PresentationLayer.Models
+﻿Imports System.Dynamic
+Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
+Imports AATM.DataLayer
+Imports AATM.DataLayer.AdoNet
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 
@@ -12,9 +15,13 @@ Namespace PresentationLayer.Presenters
 
         Private ReadOnly _journalItemService
         Private ReadOnly _EmployeeIdsService
+        Private ReadOnly _userHasHrManagerAccess As Boolean
+        Private ReadOnly _userHasHrAccess As Boolean
+        Private ReadOnly _userIsASupervisor As Boolean
+        Private ReadOnly _userIsASuperAdministrator As Boolean
 
         'Private _holiday As Boolean
-        Private _dtEmployeeLeaveApproval As New DataTable
+        Private _dtEmployeeLeaveApprovalItem As New DataTable
 
         Public Sub New(view As IEmployeeLeaveApprovalView)
             MyBase.New(view)
@@ -22,12 +29,21 @@ Namespace PresentationLayer.Presenters
             Service = New AccountsService("EmployeeLeaveApproval")
             TableName = "EmployeeLeaveApproval"
             SortOrderKey = "IdNo"
+            _userHasHrManagerAccess = UserHasHrManagerAccess()
+            _userHasHrAccess = UserHasHrAccess()
+            _userIsASupervisor = UserIsASupervisor()
+            _userIsASuperAdministrator = UserIsASuperAdministrator()
+
+            view.UserHasHrManagerAccess = _userHasHrManagerAccess
+            view.UserHasHrAccess = _userHasHrAccess
+            view.UserIsASupervisor = _userIsASupervisor
+            view.UserIsASuperAdministrator = _userIsASuperAdministrator
             'AskBeforeSave = True
             'DisableSaveMemento = True
             '_holiday = holiday
             'AddHandler view.ClearAllEmployee, AddressOf OnClearAllEmployeeId
             'AddHandler view.ApprovalCheckedEvent, AddressOf OnApprovalCheckedEvent
-            CreateDataTable(_dtEmployeeLeaveApproval, {{"ApprovalNote", GetType(String)},
+            CreateDataTable(_dtEmployeeLeaveApprovalItem, {{"ApprovalNote", GetType(String)},
                                           {"EmployeeLeaveApprovalIdNo", GetType(Int32)},
                                           {"EmployeeLeaveIdNo", GetType(Int32)},
                                           {"Status", GetType(Int32)}
@@ -42,7 +58,7 @@ Namespace PresentationLayer.Presenters
             MakeControlDataSources({New Object() {"User", "ApprovedBy", "IdNo,UserName", Nothing, Nothing}})
 
             CreateEnumData(Of LeaveStatusSelection)(View.StatusList)
-            If UserIsASupervisor() Then
+            If _userIsASupervisor Then
                 CreateEnumData(Of SupervisorApprovalSelection)(View.ApprovalStatusList)
             Else
                 CreateEnumData(Of LeaveApprovalSelection)(View.ApprovalStatusList)
@@ -51,9 +67,9 @@ Namespace PresentationLayer.Presenters
 
         Public Overrides Sub EntryFormLoaded()
             Dim employeeIdNo As Int32 = Service.GetUserEmployeeIdNo()
-            If UserHasHrAccess() OrElse UserHasHrManagerAccess() OrElse UserIsASuperAdministrator() Then
+            If _userHasHrAccess OrElse _userHasHrManagerAccess OrElse _userIsASuperAdministrator Then
                 ' include all records
-            ElseIf Not UserIsASupervisor() Then
+            ElseIf Not _userIsASupervisor Then
                 DataFilter += " ApprovedBy = " & employeeIdNo.ToString() + " or EmployeeIdNo = " & employeeIdNo.ToString()
             Else
                 ' meaning show only the employee's own data
@@ -70,9 +86,9 @@ Namespace PresentationLayer.Presenters
                          "Status <> '" + EnumToCode(LeaveStatusSelection.Disapproved) + "' and " &
                          "Status <> '" + EnumToCode(LeaveStatusSelection.Used) + "' and " &
                          "Status <> '" + EnumToCode(LeaveStatusSelection.Cancelled) + "'"
-            If UserHasHrAccess() OrElse UserHasHrManagerAccess() OrElse UserIsASuperAdministrator() Then
+            If _userHasHrAccess OrElse _userHasHrManagerAccess OrElse _userIsASuperAdministrator Then
                 'can see all data
-            ElseIf UserIsASupervisor() Then
+            ElseIf _userIsASupervisor Then
                 filter += " And Status <> '" + EnumToCode(LeaveStatusSelection.SupervisorApproved) + "' and EmployeeIdNo <> " & employeeIdNo.ToString()
                 filter += " and SuperVisorIdNo = " + employeeIdNo.ToString()
             End If
@@ -84,15 +100,15 @@ Namespace PresentationLayer.Presenters
 
         Public Sub CreateApprovalData()
             If Not CancelSave Then
-                _dtEmployeeLeaveApproval.Clear()
+                _dtEmployeeLeaveApprovalItem.Clear()
                 For Each leave As IEmployeeLeaveApprovalItemView In View.EmployeeLeaveApprovalItems
                     If leave.Approve Or leave.Disapprove Then
                         Dim workRow As DataRow
-                        workRow = _dtEmployeeLeaveApproval.NewRow()
+                        workRow = _dtEmployeeLeaveApprovalItem.NewRow()
                         workRow("ApprovalNote") = leave.ApprovalNote
                         workRow("EmployeeLeaveIdNo") = leave.IdNo
                         If leave.Approve Then
-                            If UserHasHrAccess() OrElse UserHasHrManagerAccess() OrElse UserIsASuperAdministrator() Then
+                            If _userHasHrAccess OrElse _userHasHrManagerAccess OrElse _userIsASuperAdministrator Then
                                 workRow("Status") = EnumToCode(LeaveStatusSelection.Approved)
                             Else
                                 workRow("Status") = EnumToCode(LeaveStatusSelection.SupervisorApproved)
@@ -100,7 +116,7 @@ Namespace PresentationLayer.Presenters
                         Else
                             workRow("Status") = EnumToCode(LeaveStatusSelection.Disapproved)
                         End If
-                        _dtEmployeeLeaveApproval.Rows.Add(workRow)
+                        _dtEmployeeLeaveApprovalItem.Rows.Add(workRow)
                     End If
                 Next
             End If
@@ -113,14 +129,15 @@ Namespace PresentationLayer.Presenters
             NewlyAddedRecordIdNo = Service.AddRecord(record)
             If NewlyAddedRecordIdNo > 0 Then
                 CreateApprovalData()
-                For Each row As DataRow In _dtEmployeeLeaveApproval.Rows
+                For Each row As DataRow In _dtEmployeeLeaveApprovalItem.Rows
                     row.Item("EmployeeLeaveApprovalIdNo") = NewlyAddedRecordIdNo
                 Next row
-                retVal = Service.ExecuteTvpSp("InsertEmployeeLeaveApprovalItemTvp", _dtEmployeeLeaveApproval)
+                retVal = Service.ExecuteTvpSp("InsertEmployeeLeaveApprovalItemTvp", _dtEmployeeLeaveApprovalItem)
             End If
             If retVal < 0 Then
                 Messaging.Show(True, "MsgSaveRecordFailed", "Something went wrong during saving, saving record failed", "Saving Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Else
+                ApplyEarnedLeaves()
                 Messaging.Show(True, "MsgRecordSuccessfullySaved")
                 If AddMode Then
                     RecordPositionNumber = GetSortedRecordPosition(NewlyAddedRecordIdNo)
@@ -132,8 +149,20 @@ Namespace PresentationLayer.Presenters
                 UpdateViewData(TargetIdNo)
                 ClearAllErrorMessages()
             End If
+
             Return retVal < 0
         End Function
+
+
+        Private Sub ApplyEarnedLeaves()
+            For Each row As DataRow In _dtEmployeeLeaveApprovalItem.Rows
+                Dim employeeLeaveIdNo As Int32 = row.Item("EmployeeLeaveIdNo")
+                Dim elm As Object = Service.GetFieldsWithIdNo(employeeLeaveIdNo, "EmployeeLeave", "EmployeeIdNo,LeaveIdNo,NoOfDays")
+                Dim elcIdNo As Int32 = Service.GetField(Of Int32, Int32, Int32)(elm.EmployeeIdNo, elm.LeaveIdNo, "EmployeeLeaveCredit", "EmployeeIdNo", "LeaveIdNo", "IdNo")
+                Dim accumulatedLeave As Int32 = DirectCast(Service.GetFieldWithIdNo(elcIdNo, "EmployeeLeaveCredit", "AccumulatedLeave"), Decimal)
+                Service.GenericUpdateRecordWithIdNo(Of Decimal)(elcIdNo, "EmployeeLeaveCredit", "AccumulatedLeave", accumulatedLeave - elm.NoOfDays)
+            Next row
+        End Sub
 
         Public Overrides Function ChangesMade() As Boolean
             Dim retVal As Boolean = False

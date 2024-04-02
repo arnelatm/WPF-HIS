@@ -6,8 +6,6 @@ Public Class EmployeeLeaveEarnedEntry
     Implements IEmployeeLeaveEarnedView
 
     Private ReadOnly _nfi As NumberFormatInfo
-    Private _humanResourceUser As Boolean
-    Private _userIsASupervisor As Boolean
     Public Event DateValuesChanged() Implements IEmployeeLeaveEarnedView.DateValuesChanged
     Public Event LeaveIdNoChanged(itemIdNo As Int16) Implements IEmployeeLeaveEarnedView.LeaveIdNoChanged
 
@@ -24,6 +22,46 @@ Public Class EmployeeLeaveEarnedEntry
 
 
 #Region "Fields"
+
+
+
+    Public Property ApprovalNote As String Implements IEmployeeLeaveEarnedView.ApprovalNote
+        Get
+            Return txtApprovalNote.Text
+        End Get
+        Set(value As String)
+            txtApprovalNote.Text = value
+        End Set
+    End Property
+
+
+    Public Property Approved As Boolean Implements IEmployeeLeaveEarnedView.Approved
+        Get
+            Return chkApproved.Checked
+        End Get
+        Set(value As Boolean)
+            chkApproved.Checked = value
+        End Set
+    End Property
+
+    Public Property Disapproved As Boolean Implements IEmployeeLeaveEarnedView.Disapproved
+        Get
+            Return chkDisapproved.Checked
+        End Get
+        Set(value As Boolean)
+            chkDisapproved.Checked = value
+        End Set
+    End Property
+
+
+    Public Property ApprovedBy As Int32? Implements IEmployeeLeaveEarnedView.ApprovedBy
+        Get
+            Return cboApprovedBy.GetNullableValue(Of Int32)
+        End Get
+        Set
+            cboApprovedBy.SetValue(Value)
+        End Set
+    End Property
 
     Public Property EnteredBy As Integer Implements IEmployeeLeaveEarnedView.EnteredBy
         Get
@@ -111,14 +149,6 @@ Public Class EmployeeLeaveEarnedEntry
     End Property
 
     Public Property UserIsASupervisor As Boolean Implements IEmployeeLeaveEarnedView.UserIsASupervisor
-        Get
-            Return _userIsASupervisor
-        End Get
-        Set(value As Boolean)
-            _userIsASupervisor = value
-        End Set
-    End Property
-
     Public Property UserIsASuperAdministrator As Boolean Implements IEmployeeLeaveEarnedView.UserIsASuperAdministrator
     Public Property UserHasHrAccess As Boolean Implements IEmployeeLeaveEarnedView.UserHasHrAccess
     Public Property UserHasHrManagerAccess As Boolean Implements IEmployeeLeaveEarnedView.UserHasHrManagerAccess
@@ -129,6 +159,8 @@ Public Class EmployeeLeaveEarnedEntry
     Protected Overrides Sub CreateMainFieldsDictionary()
         MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {
+                {"Approved", chkApproved},
+                {"ApprovedBy", cboApprovedBy},
                 {"DaysEarned", txtDaysEarned},
                 {"EnteredBy", cboenteredBy},
                 {"EmployeeIdNo", cboEmployeeIdNo},
@@ -163,7 +195,7 @@ Public Class EmployeeLeaveEarnedEntry
     End Sub
 
     Private Sub SetFirstControl()
-        If UserIsASuperAdministrator() Or UserHasHrManagerAccess() Then
+        If UserIsASuperAdministrator Or UserHasHrManagerAccess OrElse UserHasHrAccess Then
             cboEmployeeIdNo.DisplayOnly = False
             FirstControl = cboEmployeeIdNo
         ElseIf UserIsASupervisor Then
@@ -174,5 +206,6 @@ Public Class EmployeeLeaveEarnedEntry
             FirstControl = cboLeaveIdNo
         End If
     End Sub
+
 
 End Class

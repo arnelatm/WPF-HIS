@@ -6,6 +6,7 @@ Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
+Imports Telerik.WinControls.VirtualKeyboard
 
 Namespace PresentationLayer.Presenters
 
@@ -14,6 +15,10 @@ Namespace PresentationLayer.Presenters
 
         Private ReadOnly _journalItemService
         Private ReadOnly _EmployeeIdsService
+        Private ReadOnly _userHasHrManagerAccess As Boolean
+        Private ReadOnly _userHasHrAccess As Boolean
+        Private ReadOnly _userIsASupervisor As Boolean
+        Private ReadOnly _userIsASuperAdministrator As Boolean
 
         'Private _holiday As Boolean
         Private _dtEmployeeLeaveEarnedApproval As New DataTable
@@ -24,6 +29,15 @@ Namespace PresentationLayer.Presenters
             Service = New AccountsService("EmployeeLeaveEarnedApproval")
             TableName = "EmployeeLeaveEarnedApproval"
             SortOrderKey = "IdNo"
+            _userHasHrManagerAccess = UserHasHrManagerAccess()
+            _userHasHrAccess = UserHasHrAccess()
+            _userIsASupervisor = UserIsASupervisor()
+            _userIsASuperAdministrator = UserIsASuperAdministrator()
+
+            view.UserHasHrManagerAccess = _userHasHrManagerAccess
+            view.UserHasHrAccess = _userHasHrAccess
+            view.UserIsASupervisor = _userIsASupervisor
+            view.UserIsASuperAdministrator = _userIsASuperAdministrator
             CreateDataTable(_dtEmployeeLeaveEarnedApproval, {{"ApprovalNote", GetType(String)},
                                           {"EmployeeLeaveEarnedApprovalIdNo", GetType(Int32)},
                                           {"EmployeeLeaveIdNo", GetType(Int32)},
@@ -53,9 +67,9 @@ Namespace PresentationLayer.Presenters
                          "Status <> '" + EnumToCode(LeaveStatusSelection.Disapproved) + "' and " &
                          "Status <> '" + EnumToCode(LeaveStatusSelection.Used) + "' and " &
                          "Status <> '" + EnumToCode(LeaveStatusSelection.Cancelled) + "'"
-            If UserHasHrAccess() OrElse UserHasHrManagerAccess() OrElse UserIsASuperAdministrator() Then
+            If _userHasHrAccess OrElse _userHasHrManagerAccess OrElse _userIsASuperAdministrator Then
                 'can see all data
-            ElseIf UserIsASupervisor() Then
+            ElseIf _userIsASupervisor Then
                 Dim employeeIdNo As Int32
                 employeeIdNo = Service.GetUserEmployeeIdNo()
                 filter += " and Status <> '" + EnumToCode(LeaveStatusSelection.SupervisorApproved) + "' and EmployeeIdNo <> " & employeeIdNo.ToString()
@@ -108,13 +122,8 @@ Namespace PresentationLayer.Presenters
                             If idNo > 0 Then
                                 leaveCredit = leaveCreditDao.GetRecordByIdNo(idNo)
                                 Dim accumulatedLeave As Decimal = leaveCredit.AccumulatedLeave
-                                If leaveCredit.Cumulative Then
-                                    Dim earnableDays As Decimal = IIf(employeeLeave.DaysEarned > leaveCredit.MaxCarryOver, leaveCredit.MaxCarryOver, employeeLeave.DaysEarned)
-                                    earnableDays = IIf(leaveCredit.NoMaxLimit, earnableDays, IIf(earnableDays + accumulatedLeave > leaveCredit.MaxLimit, leaveCredit.MaxLimit - accumulatedLeave, earnableDays))
-                                    Service.UpdateRecordWithIdNo(Of Decimal)(idNo, "EmployeeLeaveCredit", "AccumulatedLeave", accumulatedLeave + earnableDays)
-                                Else
-                                    Service.UpdateRecordWithIdNo(Of Decimal)(idNo, "EmployeeLeaveCredit", "AccumulatedLeave", employeeLeave.DaysEarned)
-                                End If
+                                Dim earnableDays As Decimal = employeeLeave.DaysEarned + leaveCredit.AccumulatedLeave
+                                Service.UpdateRecordWithIdNo(Of Decimal)(idNo, "EmployeeLeaveCredit", "AccumulatedLeave", leaveCredit.AccumulatedLeave + earnableDays)
                             Else
                                 Dim seq As Int16 = GetFieldOnMaxField("Sequence", "EmployeeLeaveCredit", "Sequence", "EmployeeIdNo = " & employeeLeave.IdNo.ToString() & " and LeaveidNo = " & employeeLeave.LeaveIdNo.ToString())
                                 Dim leave As Leave = leaveDao.GetRecordByIdNo(employeeLeave.LeaveIdNo)
