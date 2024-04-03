@@ -1,4 +1,6 @@
 ﻿Imports System.Dynamic
+Imports AATM.Accounts.BusinessLayer
+Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
@@ -158,9 +160,38 @@ Namespace PresentationLayer.Presenters
             For Each row As DataRow In _dtEmployeeLeaveApprovalItem.Rows
                 Dim employeeLeaveIdNo As Int32 = row.Item("EmployeeLeaveIdNo")
                 Dim elm As Object = Service.GetFieldsWithIdNo(employeeLeaveIdNo, "EmployeeLeave", "EmployeeIdNo,LeaveIdNo,NoOfDays")
-                Dim elcIdNo As Int32 = Service.GetField(Of Int32, Int32, Int32)(elm.EmployeeIdNo, elm.LeaveIdNo, "EmployeeLeaveCredit", "EmployeeIdNo", "LeaveIdNo", "IdNo")
-                Dim accumulatedLeave As Int32 = DirectCast(Service.GetFieldWithIdNo(elcIdNo, "EmployeeLeaveCredit", "AccumulatedLeave"), Decimal)
-                Service.GenericUpdateRecordWithIdNo(Of Decimal)(elcIdNo, "EmployeeLeaveCredit", "AccumulatedLeave", accumulatedLeave - elm.NoOfDays)
+                Dim lm As Object = Service.GetFieldsWithIdNo(elm.LeaveIdNo, "Leave", "Earnable")
+                If lm.Earnable Then
+                    Dim elcIdNo As Int32 = Service.GetField(Of Int32, Int32, Int32)(elm.EmployeeIdNo, elm.LeaveIdNo, "EmployeeLeaveCredit", "EmployeeIdNo", "LeaveIdNo", "IdNo")
+                    Dim leaveCreditDao As New EmployeeLeaveCreditDao
+                    Dim leaveDao As New LeaveDao
+                    Dim leaveCredit As New EmployeeLeaveCredit
+                    Dim accumulatedLeave As Decimal = 0
+                    If elcIdNo > 0 Then
+                        leaveCredit = leaveCreditDao.GetRecordByIdNo(elcIdNo)
+                        accumulatedLeave = leaveCredit.AccumulatedLeave
+                        Dim leaveDays As Int32 = elm.NoOfDays
+                        Service.UpdateRecordWithIdNo(Of Decimal)(elcIdNo, "EmployeeLeaveCredit", "AccumulatedLeave", leaveCredit.AccumulatedLeave - leaveDays)
+                        'accumulatedLeave As Int32 = DirectCast(Service.GetFieldWithIdNo(elcIdNo, "EmployeeLeaveCredit", "AccumulatedLeave"), Decimal)
+                        Service.GenericUpdateRecordWithIdNo(Of Decimal)(elcIdNo, "EmployeeLeaveCredit", "AccumulatedLeave", accumulatedLeave - elm.NoOfDays)
+                    Else
+                        Dim seq As Int16 = GetFieldOnMaxField("Sequence", "EmployeeLeaveCredit", "Sequence", "EmployeeIdNo = " & elm.LeaveIdNo.ToString() & " and LeaveidNo = " & elm.LeaveIdNo.ToString())
+                        Dim leave As Leave = leaveDao.GetRecordByIdNo(elm.LeaveIdNo)
+                        leaveCredit.Cumulative = leave.Cumulative
+                        leaveCredit.LeaveIdNo = elm.LeaveIdNo
+                        leaveCredit.EmployeeIdNo = elm.EmployeeIdNo
+                        leaveCredit.LeaveAllowed = leave.LeaveAllowed
+                        leaveCredit.PaidPercent = leave.PaidPercent
+                        leaveCredit.MaxCarryOver = leave.MaxCarryOver
+                        leaveCredit.Cumulative = leave.Cumulative
+                        leaveCredit.MaxLimit = leave.MaxLimit
+                        leaveCredit.NoMaxLimit = leave.NoMaxLimit
+                        leaveCredit.Sequence = seq + 1
+                        leaveCredit.AccumulatedLeave = elm.NoOfDays * -1
+                        leaveCreditDao.AddRecord(leaveCredit)
+                    End If
+
+                End If
             Next row
         End Sub
 

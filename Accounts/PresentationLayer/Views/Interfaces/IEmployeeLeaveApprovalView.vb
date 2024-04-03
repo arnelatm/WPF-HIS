@@ -31,9 +31,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property DateCreated As DateTime?
         Property EmployeeLeaveEarnedApprovalItems As List(Of EmployeeLeaveEarnedApprovalItemView)
         Property EmployeeList As DataTable
-        Property LeaveList As DataTable
-        Property StatusList As DataTable
-        Property ApprovalStatusList As DataTable
+        Property LeaveEarnedList As DataTable
         Property UserIsASuperAdministrator As Boolean
         Property UserIsASupervisor As Boolean
         Property UserHasHrAccess As Boolean

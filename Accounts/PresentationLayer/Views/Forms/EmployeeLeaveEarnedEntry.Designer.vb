@@ -84,10 +84,10 @@ Partial Class EmployeeLeaveEarnedEntry
         Me.CFlowLayout1.Controls.Add(Me.lblDateCreated)
         Me.CFlowLayout1.Controls.Add(Me.txtDateCreated)
         Me.CFlowLayout1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.CFlowLayout1.Location = New System.Drawing.Point(0, 55)
+        Me.CFlowLayout1.Location = New System.Drawing.Point(0, 59)
         Me.CFlowLayout1.Margin = New System.Windows.Forms.Padding(4)
         Me.CFlowLayout1.Name = "CFlowLayout1"
-        Me.CFlowLayout1.Size = New System.Drawing.Size(991, 488)
+        Me.CFlowLayout1.Size = New System.Drawing.Size(991, 484)
         Me.CFlowLayout1.TabIndex = 4
         '
         'lblIdNo

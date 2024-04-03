@@ -1,7 +1,5 @@
-﻿Imports AATM.Accounts.BusinessLayer
-Imports AATM.Accounts.PresentationLayer.Views
+﻿Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class EmployeeLeaveEarnedApprovalEntry
@@ -19,11 +17,7 @@ Public Class EmployeeLeaveEarnedApprovalEntry
     End Sub
 
     Public Property EmployeeList As DataTable Implements IEmployeeLeaveEarnedApprovalView.EmployeeList
-
-    Public Property LeaveList As DataTable Implements IEmployeeLeaveEarnedApprovalView.LeaveList
-
-    Public Property StatusList As DataTable Implements IEmployeeLeaveEarnedApprovalView.StatusList
-    Public Property ApprovalStatusList As DataTable Implements IEmployeeLeaveEarnedApprovalView.ApprovalStatusList
+    Public Property LeaveEarnedList As DataTable Implements IEmployeeLeaveEarnedApprovalView.LeaveEarnedList
 
 
 #Region "Fields"
@@ -65,7 +59,7 @@ Public Class EmployeeLeaveEarnedApprovalEntry
         End Get
         Set
             _EmployeeLeaveEarnedApprovalItems = Value
-            BindEmployeeLeaveList()
+            BindEmployeeLeaveEarnedList()
         End Set
     End Property
 
@@ -79,70 +73,53 @@ Public Class EmployeeLeaveEarnedApprovalEntry
 
 #End Region
 
-    Public Sub BindEmployeeLeaveList()
+    Public Sub BindEmployeeLeaveEarnedList()
         SuspendLayout()
         bsEmployeeLeaveEarned.DataSource = Nothing
-        DataGridViewEmployeeLeave.Refresh()
+        DataGridViewEmployeeLeaveEarned.Refresh()
         bsEmployeeLeaveEarned.DataSource = EmployeeLeaveEarnedApprovalItems
         bsEmployeeLeaveEarned.AllowNew = True
-        With DataGridViewEmployeeLeave
+        With DataGridViewEmployeeLeaveEarned
             .AutoGenerateColumns = False
             .DataSource = bsEmployeeLeaveEarned
         End With
-        With DataGridViewEmployeeLeave.Columns
-            dgvEmployeeIdNo.DisplayOnly = True
+        With DataGridViewEmployeeLeaveEarned.Columns
+            dgvApproved.DisplayOnly = False
+            dgvApproved.ReadOnly = False
+            dgvDisapproved.DisplayOnly = False
+            dgvDisapproved.ReadOnly = False
+            dgvDateCreated.DisplayOnly = True
+            dgvDisapproved.DisplayOnly = False
+            dgvDisapproved.ReadOnly = False
             dgvEmployeeIdNo.DataSource = EmployeeList
             dgvEmployeeIdNo.DisplayMember = "Name"
-            dgvEmployeeIdNo.ValueMember = "IdNo"
+            dgvEmployeeIdNo.DisplayOnly = True
             dgvEmployeeIdNo.DisplayStyleForCurrentCellOnly = True
-            dgvLeaveIdNo.DataSource = LeaveList
-            dgvLeaveIdNo.DisplayMember = "Name"
-            dgvLeaveIdNo.ValueMember = "IdNo"
-            dgvLeaveIdNo.DisplayStyleForCurrentCellOnly = True
-            dgvLeaveIdNo.DisplayOnly = True
-            dgvStatus.DisplayOnly = True
-            dgvStatus.DataSource = StatusList
-            dgvStatus.ValueMember = "Code"
-            dgvStatus.DisplayMember = "Name"
-            dgvStatus.DisplayStyleForCurrentCellOnly = True
-            dgvDateCreated.DisplayOnly = True
-            dgvApprove.DisplayOnly = False
+            dgvEmployeeIdNo.ValueMember = "IdNo"
+            dgvEmployeeLeaveEarnedIdNo.DisplayOnly = True
             dgvEndDate.DisplayOnly = True
+            dgvLeaveIdNo.DataSource = LeaveEarnedList
+            dgvLeaveIdNo.DisplayMember = "Name"
+            dgvLeaveIdNo.DisplayOnly = True
+            dgvLeaveIdNo.DisplayStyleForCurrentCellOnly = True
+            dgvLeaveIdNo.ValueMember = "IdNo"
             dgvReason.DisplayOnly = True
             dgvStartDate.DisplayOnly = True
-            dgvEmployeeLeaveIdNo.DisplayOnly = True
         End With
         ResumeLayout()
     End Sub
 
-    'Private Sub EmployeeLeaveEarnedApproval_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-    '    DataGridViewEmployeeLeave.Refresh()
-    '    If EmployeeLeaveEarnedApprovalItems.Count() = 0 Then
-    '        Messaging.Show(True, "MsgNoLeavesToApprove")
-    '    Else
-    '        BindEmployeeLeaveList()
-    '    End If
-    '    btnEdit.Visible = False
+    'Private Sub DgvEarning_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEmployeeLeave.CellEndEdit
+    '    ProcessCellEndEdit(DataGridViewEmployeeLeave, bsEmployeeLeaveEarned)
+    '    'bsEmployeeLeaveEarned.ResetBindings(False)
     'End Sub
 
-    'Private Sub EmployeeLeaveEarnedApproval_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
-    '    bsEmployeeLeave.ResetBindings(True)
-    '    'PublishClickedButton(ButtonClicked.Edit)
-    '    'cboApprovedBy.SelectedValue = GlobalVariables.UserIdNo
-    '    'dtpDateCreated.Value = Now()
-    'End Sub
-
-    Private Sub DgvEarning_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEmployeeLeave.CellEndEdit
-        ProcessCellEndEdit(DataGridViewEmployeeLeave, bsEmployeeLeaveEarned)
-        bsEmployeeLeaveEarned.ResetBindings(False)
-    End Sub
-
-    Private Sub CheckBoxValueChanged() Handles DataGridViewEmployeeLeave.CellValueChanged
-        If TypeOf DataGridViewEmployeeLeave.CurrentCell Is DataGridViewCheckBoxCell Then
-            If DataGridViewEmployeeLeave.CurrentCell.OwningColumn.Name = "dgvApprove" Then
-                DataGridViewEmployeeLeave.CurrentRow.Cells("dgvDisapprove").Value = False
-            ElseIf DataGridViewEmployeeLeave.CurrentCell.OwningColumn.Name = "dgvDisapprove" Then
-                DataGridViewEmployeeLeave.CurrentRow.Cells("dgvApprove").Value = False
+    Private Sub CheckBoxValueChanged() Handles DataGridViewEmployeeLeaveEarned.CellValueChanged
+        If TypeOf DataGridViewEmployeeLeaveEarned.CurrentCell Is DataGridViewCheckBoxCell Then
+            If DataGridViewEmployeeLeaveEarned.CurrentCell.OwningColumn.Name = "dgvApproved" Then
+                DataGridViewEmployeeLeaveEarned.CurrentRow.Cells("dgvDisapproved").Value = False
+            ElseIf DataGridViewEmployeeLeaveEarned.CurrentCell.OwningColumn.Name = "dgvDisapproved" Then
+                DataGridViewEmployeeLeaveEarned.CurrentRow.Cells("dgvApproved").Value = False
             End If
         End If
     End Sub
@@ -157,11 +134,15 @@ Public Class EmployeeLeaveEarnedApprovalEntry
     End Sub
     Protected Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
         If AddingMode Then
-            dgvApprove.Visible = True
-            dgvDisapprove.Visible = True
+            dgvApproved.DisplayOnly = False
+            dgvApproved.ReadOnly = False
+            dgvApproved.Visible = True
+            dgvDisapproved.DisplayOnly = False
+            dgvDisapproved.ReadOnly = False
+            dgvDisapproved.Visible = True
         Else
-            dgvApprove.Visible = False
-            dgvDisapprove.Visible = False
+            dgvApproved.Visible = False
+            dgvDisapproved.Visible = False
         End If
     End Sub
 
