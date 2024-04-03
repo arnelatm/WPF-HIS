@@ -31,7 +31,6 @@ Namespace DataLayer.AdoNet
                     "LeaveName," &
                     "LeaveNameAra," &
                     "Reason," &
-                    "Status," &
                     "StartDate," &
                     "SupervisorIdNo" &
                     " FROM [EmployeeLeaveEarnedApprovalItem_View]" &
@@ -65,7 +64,6 @@ Namespace DataLayer.AdoNet
             .LeaveName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("LeaveName")),
             .LeaveNameAra = AATM.DataLayer.AdoNet.Extensions.AsString(reader("LeaveNameAra")),
             .Reason = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Reason")),
-            .Status = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Status")),
             .StartDate = AATM.DataLayer.AdoNet.Extensions.AsDateTime(reader("StartDate")),
             .SupervisorIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("SupervisorIdNo"))
            }

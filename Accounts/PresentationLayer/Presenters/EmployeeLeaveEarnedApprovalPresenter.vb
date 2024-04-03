@@ -39,9 +39,10 @@ Namespace PresentationLayer.Presenters
             view.UserIsASupervisor = _userIsASupervisor
             view.UserIsASuperAdministrator = _userIsASuperAdministrator
             CreateDataTable(_dtEmployeeLeaveEarnedApproval, {{"ApprovalNote", GetType(String)},
+                                          {"Approved", GetType(Boolean)},
+                                          {"Disapproved", GetType(Boolean)},
                                           {"EmployeeLeaveEarnedApprovalIdNo", GetType(Int32)},
-                                          {"EmployeeLeaveIdNo", GetType(Int32)},
-                                          {"Status", GetType(Int32)}
+                                          {"EmployeeLeaveEarnedIdNo", GetType(Int32)}
                                           })
         End Sub
 
@@ -51,31 +52,24 @@ Namespace PresentationLayer.Presenters
                                })
 
             MakeControlDataSources({New Object() {"User", "ApprovedBy", "IdNo,UserName", Nothing, Nothing}})
-
-            CreateEnumData(Of LeaveStatusSelection)(View.StatusList)
-            If UserIsASupervisor() Then
-                CreateEnumData(Of SupervisorApprovalSelection)(View.ApprovalStatusList)
-            Else
-                CreateEnumData(Of LeaveApprovalSelection)(View.ApprovalStatusList)
-            End If
         End Sub
 
         Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
             View.ApprovedBy = GlobalVariables.UserIdNo
             View.DateCreated = Now()
-            Dim filter As String = "Approvedby <> 0"
+            Dim filter As String = "Approvedby Is Null"
             If _userHasHrAccess OrElse _userHasHrManagerAccess OrElse _userIsASuperAdministrator Then
                 'can see all data
             ElseIf _userIsASupervisor Then
                 Dim employeeIdNo As Int32
                 employeeIdNo = Service.GetUserEmployeeIdNo()
-                filter += "ApprovedBy <> 0 and EmployeeIdNo <> " & employeeIdNo.ToString()
+                filter += "ApprovedBy Is Null and EmployeeIdNo <> " & employeeIdNo.ToString()
                 filter += " and SuperVisorIdNo = " + employeeIdNo.ToString()
             End If
             Dim EmployeeLeaveEarnedApprovalItemsModel As List(Of EmployeeLeaveEarnedApprovalItemModel)
             EmployeeLeaveEarnedApprovalItemsModel = Service.GetDaoRecords(Of EmployeeLeaveEarnedApprovalItemModel)(filter)
             GlobalVariables.Mapper.Map(EmployeeLeaveEarnedApprovalItemsModel, View.EmployeeLeaveEarnedApprovalItems)
-            CallByName(View, "BindEmployeeLeaveList", CallType.Method)
+            CallByName(View, "BindEmployeeLeaveEarnedList", CallType.Method)
         End Sub
 
         Public Sub CreateApprovalData()
@@ -86,11 +80,16 @@ Namespace PresentationLayer.Presenters
                         Dim workRow As DataRow
                         workRow = _dtEmployeeLeaveEarnedApproval.NewRow()
                         workRow("ApprovalNote") = leave.ApprovalNote
-                        workRow("EmployeeLeaveIdNo") = leave.IdNo
+                        workRow("EmployeeLeaveEarnedIdNo") = leave.IdNo
                         If leave.Approve Then
-                            workRow("Status") = EnumToCode(LeaveStatusSelection.Approved)
+                            workRow("Approved") = True
                         Else
-                            workRow("Status") = EnumToCode(LeaveStatusSelection.Disapproved)
+                            workRow("Approved") = False
+                        End If
+                        If leave.Disapprove Then
+                            workRow("Disapproved") = True
+                        Else
+                            workRow("Disapproved") = False
                         End If
                         _dtEmployeeLeaveEarnedApproval.Rows.Add(workRow)
                     End If
