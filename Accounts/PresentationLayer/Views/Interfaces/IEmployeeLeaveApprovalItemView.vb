@@ -6,6 +6,8 @@ Namespace PresentationLayer.Views.Interfaces
         Inherits IView
 
         Property ApprovalNote As String
+        Property Approved As Boolean
+        Property Disapproved As Boolean
         Property DateCreated As DateTime?
         Property EmployeeLeaveIdNo As Int32
         Property EmployeeIdNo As Int32
@@ -23,8 +25,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property Status As String
         Property StartDate As Date
         Property SupervisorIdNo As Int32
-        Property Approve As Boolean
-        Property Disapprove As Boolean
+
 
     End Interface
 
@@ -33,6 +34,8 @@ Namespace PresentationLayer.Views.Interfaces
         Inherits IView
 
         Property ApprovalNote As String
+        Property Approved As Boolean
+        Property Disapproved As Boolean
         Property DateCreated As DateTime?
         Property DaysEarned As Decimal
         Property EmployeeLeaveEarnedIdNo As Int32
@@ -50,8 +53,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property Status As String
         Property StartDate As Date
         Property SupervisorIdNo As Int32
-        Property Approve As Boolean
-        Property Disapprove As Boolean
+
 
     End Interface
 

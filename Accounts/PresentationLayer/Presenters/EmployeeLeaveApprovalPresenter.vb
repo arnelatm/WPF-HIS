@@ -104,12 +104,12 @@ Namespace PresentationLayer.Presenters
             If Not CancelSave Then
                 _dtEmployeeLeaveApprovalItem.Clear()
                 For Each leave As IEmployeeLeaveApprovalItemView In View.EmployeeLeaveApprovalItems
-                    If leave.Approve Or leave.Disapprove Then
+                    If leave.Approved Or leave.Disapproved Then
                         Dim workRow As DataRow
                         workRow = _dtEmployeeLeaveApprovalItem.NewRow()
                         workRow("ApprovalNote") = leave.ApprovalNote
                         workRow("EmployeeLeaveIdNo") = leave.IdNo
-                        If leave.Approve Then
+                        If leave.Approved Then
                             If _userHasHrAccess OrElse _userHasHrManagerAccess OrElse _userIsASuperAdministrator Then
                                 workRow("Status") = EnumToCode(LeaveStatusSelection.Approved)
                             Else
@@ -198,7 +198,7 @@ Namespace PresentationLayer.Presenters
         Public Overrides Function ChangesMade() As Boolean
             Dim retVal As Boolean = False
             For Each item In View.EmployeeLeaveApprovalItems
-                If item.Approve Or item.Disapprove Then
+                If item.Approved Or item.Disapproved Then
                     retVal = True
                     Exit For
                 End If
@@ -209,7 +209,7 @@ Namespace PresentationLayer.Presenters
         Protected Overrides Function IsBizDataValid() As Boolean
             Dim valid As Boolean = True
             For Each leave As EmployeeLeaveApprovalItemView In View.EmployeeLeaveApprovalItems
-                If leave.Disapprove Then
+                If leave.Disapproved Then
                     If leave.ApprovalNote Is Nothing OrElse leave.ApprovalNote.Trim() = "" Then
                         Messaging.Show(True, "MsgEmptyApprovalNote", {"leaveNumber", leave.IdNo.ToString()})
                         valid = False

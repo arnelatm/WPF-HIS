@@ -17,9 +17,11 @@ Namespace DataLayer.AdoNet
                 sortExpression = "Sequence"
             End If
             Dim sql As String = "SELECT " &
+                    "ApprovalNote," &
+                    "Approved," &
                     "DateCreated," &
                     "DaysEarned," &
-                    "ApprovalNote," &
+                    "Disapproved," &
                     "EmployeeLeaveEarnedIdNo," &
                     "EmployeeIdNo," &
                     "EmployeeName," &
@@ -52,7 +54,10 @@ Namespace DataLayer.AdoNet
                                     Function(reader) _
             New EmployeeLeaveEarnedApprovalItem() With {
             .ApprovalNote = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ApprovalNote")),
+            .Approved = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Approved")),
+            .DateCreated = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("DateCreated")),
             .DaysEarned = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("DaysEarned")),
+            .Disapproved = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Disapproved")),
             .EmployeeLeaveEarnedIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("EmployeeLeaveEarnedIdNo")),
             .EmployeeIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("EmployeeIdNo")),
             .EmployeeName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("EmployeeName")),
