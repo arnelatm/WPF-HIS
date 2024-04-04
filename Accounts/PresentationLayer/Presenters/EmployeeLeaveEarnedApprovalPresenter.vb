@@ -6,7 +6,6 @@ Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
-Imports Telerik.WinControls.VirtualKeyboard
 
 Namespace PresentationLayer.Presenters
 
@@ -69,24 +68,24 @@ Namespace PresentationLayer.Presenters
             Dim EmployeeLeaveEarnedApprovalItemsModel As List(Of EmployeeLeaveEarnedApprovalItemModel)
             EmployeeLeaveEarnedApprovalItemsModel = Service.GetDaoRecords(Of EmployeeLeaveEarnedApprovalItemModel)(filter)
             GlobalVariables.Mapper.Map(EmployeeLeaveEarnedApprovalItemsModel, View.EmployeeLeaveEarnedApprovalItems)
-            CallByName(View, "BindEmployeeLeaveEarnedList", CallType.Method)
+            CallByName(View, "BindEmployeeLeaveList", CallType.Method)
         End Sub
 
         Public Sub CreateApprovalData()
             If Not CancelSave Then
                 _dtEmployeeLeaveEarnedApproval.Clear()
                 For Each leave As IEmployeeLeaveEarnedApprovalItemView In View.EmployeeLeaveEarnedApprovalItems
-                    If leave.Approve Or leave.Disapprove Then
+                    If leave.Approved Or leave.Disapproved Then
                         Dim workRow As DataRow
                         workRow = _dtEmployeeLeaveEarnedApproval.NewRow()
                         workRow("ApprovalNote") = leave.ApprovalNote
                         workRow("EmployeeLeaveEarnedIdNo") = leave.IdNo
-                        If leave.Approve Then
+                        If leave.Approved Then
                             workRow("Approved") = True
                         Else
                             workRow("Approved") = False
                         End If
-                        If leave.Disapprove Then
+                        If leave.Disapproved Then
                             workRow("Disapproved") = True
                         Else
                             workRow("Disapproved") = False
@@ -113,7 +112,7 @@ Namespace PresentationLayer.Presenters
                     Dim leaveDao As New LeaveDao
                     Dim leaveCredit As New EmployeeLeaveCredit
                     For Each employeeLeave As IEmployeeLeaveEarnedApprovalItemView In View.EmployeeLeaveEarnedApprovalItems
-                        If employeeLeave.Approve Then
+                        If employeeLeave.Approved Then
                             Dim idNo As Int32 = Service.GetField(Of Int32, Int32, Int32)(employeeLeave.EmployeeIdNo, employeeLeave.LeaveIdNo, "EmployeeLeaveCredit", "EmployeeIdNo", "LeaveIdNo", "IdNo")
                             If idNo > 0 Then
                                 leaveCredit = leaveCreditDao.GetRecordByIdNo(idNo)
@@ -160,7 +159,7 @@ Namespace PresentationLayer.Presenters
         Public Overrides Function ChangesMade() As Boolean
             Dim retVal As Boolean = False
             For Each item In View.EmployeeLeaveEarnedApprovalItems
-                If item.Approve Or item.Disapprove Then
+                If item.Approved Or item.Disapproved Then
                     retVal = True
                     Exit For
                 End If
@@ -171,7 +170,7 @@ Namespace PresentationLayer.Presenters
         Protected Overrides Function IsBizDataValid() As Boolean
             Dim valid As Boolean = True
             For Each leave As EmployeeLeaveEarnedApprovalItemView In View.EmployeeLeaveEarnedApprovalItems
-                If leave.Disapprove Then
+                If leave.Disapproved Then
                     If leave.ApprovalNote Is Nothing OrElse leave.ApprovalNote.Trim() = "" Then
                         Messaging.Show(True, "MsgEmptyApprovalNote", {"leaveNumber", leave.IdNo.ToString()})
                         valid = False

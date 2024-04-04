@@ -33,10 +33,10 @@ Namespace PresentationLayer.Models
     Public Class EmployeeLeaveEarnedApprovalItemModel
 
         Public Property ApprovalNote As String
-        Public Property Appproved As Boolean
+        Public Property Approved As Boolean
         Public Property DateCreated As DateTime?
         Public Property DaysEarned As Decimal
-        Public Property Disappproved As Boolean
+        Public Property Disapproved As Boolean
         Public Property EmployeeLeaveIdNo As Int32
         Public Property EmployeeIdNo As Int32
         Public Property EmployeeName As String

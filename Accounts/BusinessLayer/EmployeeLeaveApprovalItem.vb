@@ -50,8 +50,10 @@ Namespace BusinessLayer
         End Sub
 
         Public Property ApprovalNote As String
+        Public Property Approved As Boolean
         Public Property DateCreated As DateTime?
         Public Property DaysEarned As Decimal
+        Public Property Disapproved As Boolean
         Public Property EmployeeLeaveEarnedIdNo As Int32
         Public Property EmployeeIdNo As Int32
         Public Property EmployeeName As String
@@ -64,7 +66,6 @@ Namespace BusinessLayer
         Public Property LeaveName As String
         Public Property LeaveNameAra As String
         Public Property Reason As String
-        Public Property Status As String
         Public Property StartDate As Date
         Public Property SupervisorIdNo As Int32
 
