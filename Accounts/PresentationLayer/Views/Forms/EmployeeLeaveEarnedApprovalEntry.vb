@@ -91,7 +91,6 @@ Public Class EmployeeLeaveEarnedApprovalEntry
             dgvLeaveIdNo.ValueMember = "IdNo"
             dgvLeaveIdNo.DisplayStyleForCurrentCellOnly = True
             dgvLeaveIdNo.DisplayOnly = True
-            dgvApprove.DisplayOnly = False
             dgvApprove.ReadOnly = False
             dgvDisapprove.DisplayOnly = False
             dgvDisapprove.ReadOnly = False
@@ -130,13 +129,11 @@ Public Class EmployeeLeaveEarnedApprovalEntry
         If AddingMode Then
             dgvApprove.ReadOnly = False
             dgvDisapprove.ReadOnly = False
-            dgvApprove.DisplayOnly = False
             dgvDisapprove.DisplayOnly = False
         Else
-            dgvApprove.ReadOnly = True
-            dgvDisapprove.ReadOnly = True
-            dgvApprove.DisplayOnly = True
-            dgvDisapprove.DisplayOnly = True
+            dgvApprove.ReadOnly = False
+            dgvDisapprove.ReadOnly = False
+            dgvDisapprove.DisplayOnly = False
         End If
     End Sub
 
@@ -152,7 +149,11 @@ Public Class EmployeeLeaveEarnedApprovalEntry
         btnAdd.PerformClick()
     End Sub
 
-    'Private Sub DataGridViewEmployeeLeave_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEmployeeLeave.CellContentClick
-    '    Debugger.Break()
-    'End Sub
+    Private Sub DataGridViewEmployeeLeave_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEmployeeLeave.CellContentClick
+        If e.ColumnIndex < 0 OrElse e.RowIndex < 0 Then Exit Sub
+        Dim x = DataGridViewEmployeeLeave.CurrentCell.Value
+        DataGridViewEmployeeLeave.CurrentCell.Value = Not DataGridViewEmployeeLeave.CurrentCell.Value
+        DataGridViewEmployeeLeave.CommitEdit(DataGridViewDataErrorContexts.Commit)
+    End Sub
+
 End Class

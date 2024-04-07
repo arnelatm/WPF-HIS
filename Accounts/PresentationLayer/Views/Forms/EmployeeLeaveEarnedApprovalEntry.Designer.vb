@@ -74,9 +74,10 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         Me.CFlowLayout1.Controls.Add(Me.CLabel1)
         Me.CFlowLayout1.Controls.Add(Me.dtpDateCreated)
         Me.CFlowLayout1.Controls.Add(Me.DataGridViewEmployeeLeave)
-        Me.CFlowLayout1.Location = New System.Drawing.Point(4, 70)
+        Me.CFlowLayout1.Location = New System.Drawing.Point(5, 86)
+        Me.CFlowLayout1.Margin = New System.Windows.Forms.Padding(4)
         Me.CFlowLayout1.Name = "CFlowLayout1"
-        Me.CFlowLayout1.Size = New System.Drawing.Size(980, 542)
+        Me.CFlowLayout1.Size = New System.Drawing.Size(1307, 667)
         Me.CFlowLayout1.TabIndex = 5
         '
         'lblIdNo
@@ -89,7 +90,7 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         Me.lblIdNo.Location = New System.Drawing.Point(1, 1)
         Me.lblIdNo.Margin = New System.Windows.Forms.Padding(1)
         Me.lblIdNo.Name = "lblIdNo"
-        Me.lblIdNo.Size = New System.Drawing.Size(47, 17)
+        Me.lblIdNo.Size = New System.Drawing.Size(56, 20)
         Me.lblIdNo.TabIndex = 7
         Me.lblIdNo.Text = "ID No."
         Me.lblIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -112,7 +113,7 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         Me.txtIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
         Me.txtIdNo.ForeColor = System.Drawing.Color.Black
         Me.txtIdNo.LinkedLabel = Nothing
-        Me.txtIdNo.Location = New System.Drawing.Point(50, 1)
+        Me.txtIdNo.Location = New System.Drawing.Point(59, 1)
         Me.txtIdNo.Margin = New System.Windows.Forms.Padding(1)
         Me.txtIdNo.MaximumValue = Nothing
         Me.txtIdNo.MinimumValue = Nothing
@@ -120,7 +121,7 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         Me.txtIdNo.OldValue = ""
         Me.txtIdNo.OverrideMaxLength = 0
         Me.txtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtIdNo.Size = New System.Drawing.Size(100, 23)
+        Me.txtIdNo.Size = New System.Drawing.Size(133, 26)
         Me.txtIdNo.TabIndex = 0
         Me.txtIdNo.Translatable = False
         '
@@ -130,10 +131,10 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         Me.lblEnteredBy.DisplayOnly = True
         Me.lblEnteredBy.EditingMode = False
         Me.lblEnteredBy.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.lblEnteredBy.Location = New System.Drawing.Point(152, 1)
+        Me.lblEnteredBy.Location = New System.Drawing.Point(194, 1)
         Me.lblEnteredBy.Margin = New System.Windows.Forms.Padding(1)
         Me.lblEnteredBy.Name = "lblEnteredBy"
-        Me.lblEnteredBy.Size = New System.Drawing.Size(135, 24)
+        Me.lblEnteredBy.Size = New System.Drawing.Size(180, 30)
         Me.lblEnteredBy.TabIndex = 8
         Me.lblEnteredBy.Text = "Approved by:"
         Me.lblEnteredBy.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -167,7 +168,7 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         Me.cboApprovedBy.IntegralHeight = False
         Me.cboApprovedBy.LimitToList = False
         Me.cboApprovedBy.LinkedLabel = Nothing
-        Me.cboApprovedBy.Location = New System.Drawing.Point(289, 1)
+        Me.cboApprovedBy.Location = New System.Drawing.Point(376, 1)
         Me.cboApprovedBy.Margin = New System.Windows.Forms.Padding(1)
         Me.cboApprovedBy.MaxDropDownItems = 1
         Me.cboApprovedBy.Name = "cboApprovedBy"
@@ -177,7 +178,7 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         Me.cboApprovedBy.OverrideDropDownStyleList = False
         Me.cboApprovedBy.PreviousSearchTerm = Nothing
         Me.cboApprovedBy.PropertySelector = Nothing
-        Me.cboApprovedBy.Size = New System.Drawing.Size(255, 24)
+        Me.cboApprovedBy.Size = New System.Drawing.Size(339, 29)
         Me.cboApprovedBy.SuggestBoxHeight = 200
         Me.cboApprovedBy.SuggestCharCount = 0
         Me.cboApprovedBy.SuggestListOrderRule = Nothing
@@ -195,10 +196,10 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         Me.CLabel1.DisplayOnly = True
         Me.CLabel1.EditingMode = False
         Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.CLabel1.Location = New System.Drawing.Point(546, 1)
+        Me.CLabel1.Location = New System.Drawing.Point(717, 1)
         Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
         Me.CLabel1.Name = "CLabel1"
-        Me.CLabel1.Size = New System.Drawing.Size(200, 24)
+        Me.CLabel1.Size = New System.Drawing.Size(267, 30)
         Me.CLabel1.TabIndex = 11
         Me.CLabel1.Text = "Date/Time Approved"
         Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -217,14 +218,14 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         Me.dtpDateCreated.EditsAllowed = False
         Me.dtpDateCreated.ForeColor = System.Drawing.Color.Black
         Me.dtpDateCreated.LinkedLabel = Nothing
-        Me.dtpDateCreated.Location = New System.Drawing.Point(748, 1)
+        Me.dtpDateCreated.Location = New System.Drawing.Point(986, 1)
         Me.dtpDateCreated.Margin = New System.Windows.Forms.Padding(1)
         Me.dtpDateCreated.Name = "dtpDateCreated"
         Me.dtpDateCreated.ReadOnlyDp = False
         Me.dtpDateCreated.SecurityKey = Nothing
         Me.dtpDateCreated.ShowLongDate = False
         Me.dtpDateCreated.ShowTime = True
-        Me.dtpDateCreated.Size = New System.Drawing.Size(195, 23)
+        Me.dtpDateCreated.Size = New System.Drawing.Size(206, 27)
         Me.dtpDateCreated.TabIndex = 2
         Me.dtpDateCreated.TargetCalendar = CType(resources.GetObject("dtpDateCreated.TargetCalendar"), System.Globalization.Calendar)
         Me.dtpDateCreated.Translatable = False
@@ -267,7 +268,8 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         Me.DataGridViewEmployeeLeave.FirstRowInsertionEnabled = True
         Me.DataGridViewEmployeeLeave.IgnoreCase = False
         Me.DataGridViewEmployeeLeave.IsDirty = False
-        Me.DataGridViewEmployeeLeave.Location = New System.Drawing.Point(3, 29)
+        Me.DataGridViewEmployeeLeave.Location = New System.Drawing.Point(4, 36)
+        Me.DataGridViewEmployeeLeave.Margin = New System.Windows.Forms.Padding(4)
         Me.DataGridViewEmployeeLeave.Name = "DataGridViewEmployeeLeave"
         Me.DataGridViewEmployeeLeave.OldCellValue = Nothing
         Me.DataGridViewEmployeeLeave.ReadOnly = True
@@ -278,7 +280,7 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         Me.DataGridViewEmployeeLeave.SequenceColumn = "dgvSequence"
         Me.DataGridViewEmployeeLeave.SequenceFieldName = "Sequence"
         Me.DataGridViewEmployeeLeave.ShowFooter = False
-        Me.DataGridViewEmployeeLeave.Size = New System.Drawing.Size(965, 482)
+        Me.DataGridViewEmployeeLeave.Size = New System.Drawing.Size(1287, 593)
         Me.DataGridViewEmployeeLeave.TabIndex = 3
         Me.DataGridViewEmployeeLeave.Translatable = True
         '
@@ -325,6 +327,7 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         Me.DaysEarned.FindEnabled = False
         Me.DaysEarned.HeaderText = "Days Earned"
         Me.DaysEarned.IgnoreCase = False
+        Me.DaysEarned.MinimumWidth = 6
         Me.DaysEarned.Name = "DaysEarned"
         Me.DaysEarned.ReadOnly = True
         Me.DaysEarned.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
@@ -462,7 +465,7 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         '
         Me.dgvApprove.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
         Me.dgvApprove.BegFindValue = Nothing
-        Me.dgvApprove.DataPropertyName = "Appproved"
+        Me.dgvApprove.DataPropertyName = "Approved"
         DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle10.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Orange
@@ -470,7 +473,6 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         Me.dgvApprove.DefaultCellStyle = DataGridViewCellStyle10
         Me.dgvApprove.EditingMode = False
         Me.dgvApprove.EndFindValue = Nothing
-        Me.dgvApprove.FalseValue = ""
         Me.dgvApprove.FieldDescription = Nothing
         Me.dgvApprove.FieldName = Nothing
         Me.dgvApprove.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
@@ -483,14 +485,13 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         Me.dgvApprove.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         Me.dgvApprove.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.dgvApprove.Translatable = False
-        Me.dgvApprove.TrueValue = ""
         Me.dgvApprove.Width = 55
         '
         'dgvDisapprove
         '
         Me.dgvDisapprove.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
         Me.dgvDisapprove.BegFindValue = Nothing
-        Me.dgvDisapprove.DataPropertyName = "Disappproved"
+        Me.dgvDisapprove.DataPropertyName = "Disapproved"
         DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle11.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Orange
@@ -585,9 +586,10 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         '
         'EmployeeLeaveEarnedApprovalEntry
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.ClientSize = New System.Drawing.Size(984, 615)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.ClientSize = New System.Drawing.Size(1312, 757)
         Me.Controls.Add(Me.CFlowLayout1)
+        Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "EmployeeLeaveEarnedApprovalEntry"
         Me.Text = "Employee Leave Earned Approval"
         Me.Controls.SetChildIndex(Me.CFlowLayout1, 0)

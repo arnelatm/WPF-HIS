@@ -163,7 +163,11 @@ Public Class EmployeeLeaveApprovalEntry
         btnAdd.PerformClick()
     End Sub
 
-    'Private Sub DataGridViewEmployeeLeave_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEmployeeLeave.CellContentClick
-    '    Debugger.Break()
-    'End Sub
+    Private Sub DataGridViewEmployeeLeave_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEmployeeLeave.CellContentClick
+        If e.ColumnIndex < 0 OrElse e.RowIndex < 0 Then Exit Sub
+        If DataGridViewEmployeeLeave.CurrentCell.Value Then
+            DataGridViewEmployeeLeave.CommitEdit(DataGridViewDataErrorContexts.Commit)
+        End If
+        Debugger.Break()
+    End Sub
 End Class

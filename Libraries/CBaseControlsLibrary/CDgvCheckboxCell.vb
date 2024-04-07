@@ -6,16 +6,57 @@ Public Class CDgvCheckboxCell
     Inherits DataGridViewCheckBoxCell
     Implements IEntryControl
 
-    Private _displayOnly As Boolean
-    Private _editingMode As Boolean
+    Public Sub New()
+        MyBase.New()
 
-    'Public Overrides Function Clone() As Object
-    '    Dim copy As CDgvCheckboxCell = TryCast(MyBase.Clone(), CDgvCheckboxCell)
-    '    copy.DisplayOnly = DisplayOnly
-    '    copy.EditingMode = EditingMode
-    '    copy.Translatable = Translatable
-    '    Return copy
-    'End Function
+    End Sub
+
+    Private _editingMode As Boolean
+    Private _translatable As Boolean = False
+
+    <Category("Custom Properties")>
+    <DefaultValue(False)>
+    <Description("Set to True to specify that this control is Read Only .")>
+    <Browsable(True)>
+    Public Property DisplayOnly As Boolean = False
+
+    Public Property Translatable As Boolean Implements IEntryControl.Translatable
+        Get
+            Return False
+        End Get
+        Set(value As Boolean)
+            _translatable = value
+        End Set
+    End Property
+
+
+    Public Overrides Function Clone() As Object
+        Dim copy As CDgvCheckboxCell = TryCast(MyBase.Clone(), CDgvCheckboxCell)
+        copy.DisplayOnly = DisplayOnly
+        copy.EditingMode = EditingMode
+        copy.Translatable = Translatable
+        Return copy
+    End Function
+
+
+    Public Property EditingMode As Boolean Implements IEntryControl.EditingMode
+        Get
+            Return _editingMode
+        End Get
+        Set
+            _editingMode = Value
+        End Set
+    End Property
+
+
+
+    ' You must override the EditType property to return the cell's
+    ' editing control type, which is your custom Checkbox class...
+    Public Overrides ReadOnly Property EditType() As Type
+        Get
+            Return GetType(CDgvCheckBoxEditingControl)
+        End Get
+    End Property
 
 
     <Category("Custom Properties")>
@@ -24,45 +65,18 @@ Public Class CDgvCheckboxCell
     Public Property AlwaysEditable As Boolean = False
 
 
-    ' ReSharper disable once LocalizableElement
-    <DisplayName("DisplayOnly")>
-    <Category("Custom Properties")>
-    <DefaultValue(False)>
-    <DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)>
-    <EditorBrowsable(EditorBrowsableState.Always), Bindable(True)>
-    <Description("Set to True to specify that this control's value cannot be edited or changed.")>
-    <Browsable(True)>
-    Public Property DisplayOnly As Boolean
-        Get
-            Return _displayOnly
-        End Get
-        Set
-            If Not AlwaysEditable Then
-                _displayOnly = Value
-                If Value Or DisplayOnly Then
-                    Style.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                    Style.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                    [ReadOnly] = True
-                Else
-                    Style.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                    Style.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                    [ReadOnly] = False
-                End If
-            End If
-        End Set
-    End Property
+    ' You must also override this method to initialize the ComboBox instance...
+    ' This method will be called each time a cell in the column enters edit-mode,
+    ' so you can fill the ComboBox instance based on the value of the edited cell
+    Public Overrides Sub InitializeEditingControl(ByVal pRowIndex As Integer, ByVal pFormattedValue As Object, ByVal cellStyle As DataGridViewCellStyle)
+        'DataGridView.SuspendDrawingNew()
+        MyBase.InitializeEditingControl(pRowIndex, pFormattedValue, cellStyle)
+        CellEditingControl = CType(DataGridView.EditingControl, CDgvCheckBoxEditingControl)
+        'DataGridView.ResumeDrawingNew()
+    End Sub
 
-    Public Property EditingMode As Boolean Implements IEntryControl.EditingMode
-        Get
-            Return _editingMode
-        End Get
-        Set(val As Boolean)
-            If Not AlwaysEditable Then
-                _editingMode = val
-                UpdateDisplayOnlyControl()
-            End If
-        End Set
-    End Property
+
+    Public Property CellEditingControl As CDgvCheckBoxEditingControl
 
     Public Sub UpdateDisplayOnlyControl()
         If _editingMode And Not DisplayOnly Then
@@ -73,17 +87,14 @@ Public Class CDgvCheckboxCell
             [ReadOnly] = False
             Style.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             Style.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-            [ReadOnly] = True
+            Try
+                [ReadOnly] = True
+            Catch ex As Exception
+
+            End Try
+
         End If
     End Sub
 
-    Public Property Translatable As Boolean Implements IEntryControl.Translatable
-        Get
-            Return False
-        End Get
-        Set(value As Boolean)
-
-        End Set
-    End Property
 
 End Class

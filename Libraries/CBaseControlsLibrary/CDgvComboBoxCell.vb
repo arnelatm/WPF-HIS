@@ -24,6 +24,7 @@ Public Class CDgvComboBoxCell
             Return GetType(CtComboBoxEditingControl)
         End Get
     End Property
+
     <DisplayName("DisplayOnly")>
     <Category("Custom Properties")>
     <DefaultValue(False)>
