@@ -479,9 +479,8 @@ Public Class CFormEntry
         If Ea IsNot Nothing Then
             Ea.PublishEvent(saveData)
         End If
-        RaiseEvent AfterSave()
-
         If saveData.ValidData Then
+            RaiseEvent AfterSave()
             If QuitOnSave Then
                 Close()
             Else

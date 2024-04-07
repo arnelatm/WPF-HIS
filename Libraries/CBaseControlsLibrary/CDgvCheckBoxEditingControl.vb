@@ -24,14 +24,7 @@ Public Class CDgvCheckBoxEditingControl
             Return GetEditingControlFormattedValue(DataGridViewDataErrorContexts.Formatting)
         End Get
         Set(ByVal value As Object)
-            'Dim text As Boolean = TryCast(value, Boolean)
             MyBase.Checked = value
-            'If Not Equals(text, Nothing) Then
-            '    MyBase.Text = text
-            '    If String.Compare(text, MyBase.Text, ignoreCase:=True, CultureInfo.CurrentCulture) <> 0 Then
-            '        SelectedIndex = -1
-            '    End If
-            'End If
         End Set
     End Property
 

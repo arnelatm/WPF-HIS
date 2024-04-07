@@ -99,10 +99,9 @@ Public Class EmployeeLeaveApprovalEntry
             dgvStatus.ValueMember = "Code"
             dgvStatus.DisplayMember = "Name"
             dgvStatus.DisplayStyleForCurrentCellOnly = True
-            dgvApprove.DisplayOnly = False
-            dgvApprove.ReadOnly = False
-            dgvDisapprove.DisplayOnly = False
-            dgvDisapprove.ReadOnly = False
+            dgvApproved.DisplayOnly = False
+            dgvDisapproved.DisplayOnly = False
+            dgvDisapproved.ReadOnly = False
             dgvFullDay.DisplayOnly = True
             dgvEndDate.DisplayOnly = True
             dgvReason.DisplayOnly = True
@@ -121,10 +120,10 @@ Public Class EmployeeLeaveApprovalEntry
 
     Private Sub CheckBoxValueChanged() Handles DataGridViewEmployeeLeave.CellValueChanged
         If TypeOf DataGridViewEmployeeLeave.CurrentCell Is DataGridViewCheckBoxCell Then
-            If DataGridViewEmployeeLeave.CurrentCell.OwningColumn.Name = "dgvApprove" Then
-                DataGridViewEmployeeLeave.CurrentRow.Cells("dgvDisapprove").Value = False
-            ElseIf DataGridViewEmployeeLeave.CurrentCell.OwningColumn.Name = "dgvDisapprove" Then
-                DataGridViewEmployeeLeave.CurrentRow.Cells("dgvApprove").Value = False
+            If DataGridViewEmployeeLeave.CurrentCell.OwningColumn.Name = "dgvApproved" Then
+                DataGridViewEmployeeLeave.CurrentRow.Cells("dgvDisapproved").Value = False
+            ElseIf DataGridViewEmployeeLeave.CurrentCell.OwningColumn.Name = "dgvDisapproved" Then
+                DataGridViewEmployeeLeave.CurrentRow.Cells("dgvApproved").Value = False
             End If
         End If
     End Sub
@@ -139,15 +138,15 @@ Public Class EmployeeLeaveApprovalEntry
     End Sub
     Protected Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
         If AddingMode Then
-            dgvApprove.Visible = True
-            dgvDisapprove.Visible = True
-            dgvApprove.ReadOnly = False
-            dgvDisapprove.ReadOnly = False
-            dgvApprove.DisplayOnly = False
-            dgvDisapprove.DisplayOnly = False
+            dgvApproved.Visible = True
+            dgvDisapproved.Visible = True
+            dgvApproved.ReadOnly = False
+            dgvDisapproved.ReadOnly = False
+            dgvApproved.DisplayOnly = False
+            dgvDisapproved.DisplayOnly = False
         Else
-            dgvApprove.Visible = False
-            dgvDisapprove.Visible = False
+            dgvApproved.Visible = False
+            dgvDisapproved.Visible = False
         End If
     End Sub
 
@@ -163,11 +162,5 @@ Public Class EmployeeLeaveApprovalEntry
         btnAdd.PerformClick()
     End Sub
 
-    Private Sub DataGridViewEmployeeLeave_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEmployeeLeave.CellContentClick
-        If e.ColumnIndex < 0 OrElse e.RowIndex < 0 Then Exit Sub
-        If DataGridViewEmployeeLeave.CurrentCell.Value Then
-            DataGridViewEmployeeLeave.CommitEdit(DataGridViewDataErrorContexts.Commit)
-        End If
-        Debugger.Break()
-    End Sub
+
 End Class

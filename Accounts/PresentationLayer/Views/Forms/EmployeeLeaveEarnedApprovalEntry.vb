@@ -82,18 +82,16 @@ Public Class EmployeeLeaveEarnedApprovalEntry
         End With
         With DataGridViewEmployeeLeave.Columns
             dgvEmployeeIdNo.DisplayOnly = True
+            dgvDateCreated.DisplayOnly = True
             dgvEmployeeIdNo.DataSource = EmployeeList
             dgvEmployeeIdNo.DisplayMember = "Name"
             dgvEmployeeIdNo.ValueMember = "IdNo"
-            dgvEmployeeIdNo.DisplayStyleForCurrentCellOnly = True
             dgvLeaveIdNo.DataSource = LeaveList
             dgvLeaveIdNo.DisplayMember = "Name"
             dgvLeaveIdNo.ValueMember = "IdNo"
-            dgvLeaveIdNo.DisplayStyleForCurrentCellOnly = True
             dgvLeaveIdNo.DisplayOnly = True
-            dgvApprove.ReadOnly = False
-            dgvDisapprove.DisplayOnly = False
-            dgvDisapprove.ReadOnly = False
+            dgvApproved.DisplayOnly = False
+            dgvDisapproved.DisplayOnly = False
             dgvEndDate.DisplayOnly = True
             dgvReason.DisplayOnly = True
             dgvStartDate.DisplayOnly = True
@@ -102,19 +100,21 @@ Public Class EmployeeLeaveEarnedApprovalEntry
         ResumeLayout()
     End Sub
 
-    Private Sub DgvEarning_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEmployeeLeave.CellEndEdit
-        ProcessCellEndEdit(DataGridViewEmployeeLeave, bsEmployeeLeaveEarnedApprovalItem)
-        bsEmployeeLeaveEarnedApprovalItem.ResetBindings(False)
-    End Sub
-
     Private Sub CheckBoxValueChanged() Handles DataGridViewEmployeeLeave.CellValueChanged
-        If TypeOf DataGridViewEmployeeLeave.CurrentCell Is DataGridViewCheckBoxCell Then
-            If DataGridViewEmployeeLeave.CurrentCell.OwningColumn.Name = "dgvApprove" Then
-                DataGridViewEmployeeLeave.CurrentRow.Cells("dgvDisapprove").Value = False
-            ElseIf DataGridViewEmployeeLeave.CurrentCell.OwningColumn.Name = "dgvDisapprove" Then
-                DataGridViewEmployeeLeave.CurrentRow.Cells("dgvApprove").Value = False
+        With DataGridViewEmployeeLeave
+            If TypeOf .CurrentCell Is Libraries.CBaseControlsLibrary.CDgvCheckboxCell Then
+                If .CurrentCell.OwningColumn.Name.ToLower = "dgvapproved" Then
+                    If .CurrentCell.Value Then
+                        .CurrentRow.Cells("dgvDisapproved").Value = False
+                    End If
+                ElseIf .CurrentCell.OwningColumn.Name.ToLower = "dgvdisapproved" Then
+                    If .CurrentCell.Value Then
+                        .CurrentRow.Cells("dgvApproved").Value = False
+                    End If
+                End If
             End If
-        End If
+        End With
+
     End Sub
 
     Protected Overrides Sub CreateMainFieldsDictionary()
@@ -125,17 +125,16 @@ Public Class EmployeeLeaveEarnedApprovalEntry
             {"ApprovedBy", cboApprovedBy}
             }
     End Sub
-    Protected Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
-        If AddingMode Then
-            dgvApprove.ReadOnly = False
-            dgvDisapprove.ReadOnly = False
-            dgvDisapprove.DisplayOnly = False
-        Else
-            dgvApprove.ReadOnly = False
-            dgvDisapprove.ReadOnly = False
-            dgvDisapprove.DisplayOnly = False
-        End If
-    End Sub
+
+    'Protected Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
+    '    If AddingMode Then
+    '        dgvDisapproved.DisplayOnly = False
+    '        dgvApproved.DisplayOnly = False
+    '    Else
+    '        dgvApproved.DisplayOnly = True
+    '        dgvDisapproved.DisplayOnly = True
+    '    End If
+    'End Sub
 
     Private Sub EmployeeLeaveEarnedApprovalEntry_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         If UserIsASuperAdministrator() Then
@@ -147,13 +146,6 @@ Public Class EmployeeLeaveEarnedApprovalEntry
     Private Sub OnAfterSave() Handles MyBase.AfterSave
         bsEmployeeLeaveEarnedApprovalItem.ResetBindings(False)
         btnAdd.PerformClick()
-    End Sub
-
-    Private Sub DataGridViewEmployeeLeave_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEmployeeLeave.CellContentClick
-        If e.ColumnIndex < 0 OrElse e.RowIndex < 0 Then Exit Sub
-        Dim x = DataGridViewEmployeeLeave.CurrentCell.Value
-        DataGridViewEmployeeLeave.CurrentCell.Value = Not DataGridViewEmployeeLeave.CurrentCell.Value
-        DataGridViewEmployeeLeave.CommitEdit(DataGridViewDataErrorContexts.Commit)
     End Sub
 
 End Class
