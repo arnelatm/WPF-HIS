@@ -105,7 +105,7 @@ Public Class CtDataGridView
                     If col.DisplayOnly Then
                         col.EditingMode = False
                     Else
-                        col.EditingMode = True ' TRIALONLY value
+                        col.EditingMode = value
                     End If
                 End If
             Next

@@ -274,8 +274,9 @@ Public Class CCheckBox
                 _editingMode = True
             Else
                 _editingMode = value
-                UpdateDisplayOnlyControl()
+
             End If
+	    UpdateDisplayOnlyControl()
         End Set
     End Property
 
