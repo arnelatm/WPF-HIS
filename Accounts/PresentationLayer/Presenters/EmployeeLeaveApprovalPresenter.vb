@@ -40,11 +40,6 @@ Namespace PresentationLayer.Presenters
             view.UserHasHrAccess = _userHasHrAccess
             view.UserIsASupervisor = _userIsASupervisor
             view.UserIsASuperAdministrator = _userIsASuperAdministrator
-            'AskBeforeSave = True
-            'DisableSaveMemento = True
-            '_holiday = holiday
-            'AddHandler view.ClearAllEmployee, AddressOf OnClearAllEmployeeId
-            'AddHandler view.ApprovalCheckedEvent, AddressOf OnApprovalCheckedEvent
             CreateDataTable(_dtEmployeeLeaveApprovalItem, {{"ApprovalNote", GetType(String)},
                                           {"EmployeeLeaveApprovalIdNo", GetType(Int32)},
                                           {"EmployeeLeaveIdNo", GetType(Int32)},
