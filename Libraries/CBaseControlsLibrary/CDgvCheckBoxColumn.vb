@@ -1,4 +1,5 @@
 ﻿Imports System.ComponentModel
+Imports System.Drawing
 Imports System.Windows.Forms
 Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.GlobalFuncNSub
@@ -13,7 +14,31 @@ Public Class CDgvCheckBoxColumn
 
     Public Sub New()
         CellTemplate = New CDgvCheckboxCell
+        AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells
+        FlatStyle = FlatStyle.Standard
     End Sub
+
+    Public Overrides Function Clone() As Object
+        Dim copy As CDgvCheckBoxColumn = TryCast(MyBase.Clone(), CDgvCheckBoxColumn)
+        copy.DisplayOnly = DisplayOnly
+        copy.EditingMode = EditingMode
+        copy.Translatable = Translatable
+        Return copy
+    End Function
+
+    Public Overrides Property CellTemplate() As DataGridViewCell
+        Get
+            Return MyBase.CellTemplate
+        End Get
+        Set(ByVal value As DataGridViewCell)
+
+            Dim dataGridViewCheckBoxCell As CDgvCheckboxCell = TryCast(value, CDgvCheckboxCell)
+            If value IsNot Nothing AndAlso dataGridViewCheckBoxCell Is Nothing Then
+                Throw New InvalidCastException("Must be a CDgvCheckBoxCell")
+            End If
+            MyBase.CellTemplate = value
+        End Set
+    End Property
 
 
     <Category("Custom Properties")>
@@ -33,19 +58,9 @@ Public Class CDgvCheckBoxColumn
             Return _displayOnly
         End Get
         Set(value As Boolean)
-            If Not AlwaysEditable Then
-                _editingMode = value
-                If value Then
-                    [ReadOnly] = True
-                    DefaultCellStyle.BackColor = System.Drawing.Color.Orange 'GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                    DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                    _displayOnly = True
-                Else
-                    [ReadOnly] = False
-                    DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                    DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                    _displayOnly = False
-                End If
+            _displayOnly = value
+            If value Then
+                _editingMode = True
             End If
         End Set
     End Property
@@ -57,19 +72,21 @@ Public Class CDgvCheckBoxColumn
         Set(value As Boolean)
             If Not AlwaysEditable Then
                 _editingMode = value
-                UpdateDisplayOnlyControl()
             End If
+            UpdateDisplayOnlyControl()
         End Set
     End Property
 
     Public Sub UpdateDisplayOnlyControl()
         If _editingMode And Not DisplayOnly Then
-            [ReadOnly] = False
             DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
             DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+            If [ReadOnly] Then
+                [ReadOnly] = False
+            End If
         Else
             [ReadOnly] = False
-            DefaultCellStyle.ForeColor = System.Drawing.Color.Orange
+            DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
             DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             [ReadOnly] = True
         End If

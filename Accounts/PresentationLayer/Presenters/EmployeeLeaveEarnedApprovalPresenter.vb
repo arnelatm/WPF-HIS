@@ -4,13 +4,16 @@ Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
+Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
+Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Presenters
 
     Public Class EmployeeLeaveEarnedApprovalPresenter(Of TM As New)
         Inherits AccountsPresenter(Of IEmployeeLeaveEarnedApprovalView, TM)
+        Implements ISubscriber(Of DgvItemsChanged)
 
         Private ReadOnly _journalItemService
         Private ReadOnly _EmployeeIdsService
@@ -157,13 +160,15 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Overrides Function ChangesMade() As Boolean
-            Dim retVal As Boolean = False
-            For Each item In View.EmployeeLeaveEarnedApprovalItems
-                If item.Approved Or item.Disapproved Then
-                    retVal = True
-                    Exit For
-                End If
-            Next
+            Dim retVal As Boolean = MyBase.ChangesMade()
+            If Not retVal Then
+                For Each item In View.EmployeeLeaveEarnedApprovalItems
+                    If item.Approved Or item.Disapproved Then
+                        retVal = True
+                        Exit For
+                    End If
+                Next
+            End If
             Return retVal
         End Function
 
@@ -179,6 +184,18 @@ Namespace PresentationLayer.Presenters
             Next
             Return valid
         End Function
+
+        Public Sub OnPayElementdgvItemsChangedEventHandler(ByRef eventType As DgvItemsChanged) Implements ISubscriber(Of DgvItemsChanged).OnEventHandler
+            With eventType.BindingSource
+                If eventType.Row >= 0 And eventType.Row < eventType.BindingSource.Count() Then
+                    Select Case eventType.PropertyName
+                        Case $"Approved"
+                            Dim employeeLeaveApprovalItem As EmployeeLeaveApprovalItemView = eventType.BindingSource.Current
+                            employeeLeaveApprovalItem.Approved = eventType.EnteredValue
+                    End Select
+                End If
+            End With
+        End Sub
 
     End Class
 

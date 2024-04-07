@@ -697,7 +697,7 @@ Public Class CFormEntry
 
                 '    Next
                 'End If
-                'If TypeOf ctrl Is CtComboBoxEditingControl Then 'And ctrl.Name = "dgvAccountIdNo" Then ' = "cboAccountIdNo" Then
+                'If TypeOf ctrl Is CheckBox Then 'And ctrl.Name = "dgvAccountIdNo" Then ' = "cboAccountIdNo" Then
                 '    Debugger.Break()
                 'End If
                 'If ctrl.Name.ToLower() = "dgvaccountidno" Then ' = "cboAccountIdNo" Then
@@ -705,8 +705,12 @@ Public Class CFormEntry
                 'End If
                 If TypeOf ctrl Is DataGridView Then
                     Dim x As DataGridView = ctrl
+                    'If onOff Then
+                    '    Debugger.Break()
+                    'End If
                     DirectCast(x, DataGridView).EndEdit()
                 End If
+
                 SetPropertyValue(ctrl, "EditingMode", onOff, True)
             End If
         Next

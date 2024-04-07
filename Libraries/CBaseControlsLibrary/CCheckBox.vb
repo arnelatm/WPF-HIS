@@ -229,7 +229,11 @@ Public Class CCheckBox
         End Get
         Set(value As Boolean)
             'If _displayOnly = value Then Exit Property
-            If Not AlwaysEditable Then
+            If AlwaysEditable Then
+                Enabled = True
+                ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+            Else
                 _displayOnly = value
                 If value Then
                     Enabled = False
@@ -266,7 +270,9 @@ Public Class CCheckBox
             Return _editingMode
         End Get
         Set(value As Boolean)
-            If Not AlwaysEditable Then
+            If AlwaysEditable Then
+                _editingMode = True
+            Else
                 _editingMode = value
                 UpdateDisplayOnlyControl()
             End If
@@ -318,7 +324,10 @@ Public Class CCheckBox
     '    MyBase.OnPaint(e)
     Public Sub EnterHandler(sender As Object, e As EventArgs) Handles MyBase.Enter
         _oldValue = Text
-        If Not AlwaysEditable Then
+        If AlwaysEditable Then
+            ForeColor = GlobalVariables.DefaultFormControlEditingForegroundColor
+            BackColor = GlobalVariables.DefaultFormControlEditingBackgroundColor
+        Else
             If EditingMode And Not DisplayOnly Then
                 ForeColor = GlobalVariables.DefaultFormControlEditingForegroundColor
                 BackColor = GlobalVariables.DefaultFormControlEditingBackgroundColor
@@ -358,7 +367,10 @@ Public Class CCheckBox
     'Protected Overrides Sub OnPaint(ByVal e As System.Windows.Forms.PaintEventArgs)
     '    Dim checkRegion As New Rectangle(2, 3, 9, 9)
     Public Sub LeaveHandler(sender As Object, e As EventArgs) Handles MyBase.Leave
-        If Not AlwaysEditable Then
+        If AlwaysEditable Then
+            ForeColor = GlobalVariables.DefaultFormControlEditingForegroundColor
+            BackColor = GlobalVariables.DefaultFormControlEditingBackgroundColor
+        Else
             If EditingMode And Not DisplayOnly Then
                 ForeColor = GlobalVariables.DefaultFormControlForegroundColor
                 BackColor = GlobalVariables.DefaultFormControlBackgroundColor

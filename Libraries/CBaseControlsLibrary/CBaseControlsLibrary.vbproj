@@ -134,6 +134,15 @@
     </Compile>
     <Compile Include="BlendItemsConverter.vb" />
     <Compile Include="BlendTypeEditor.vb" />
+    <Compile Include="CDgvCheckBoxEditingControl.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CDgvComboBoxEditingControl.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CDgvDtComboBoxEditingControl.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CDgvExpiryColumn.vb" />
     <Compile Include="CDgvExpiryCell.vb" />
     <Compile Include="CfComboBox.vb">

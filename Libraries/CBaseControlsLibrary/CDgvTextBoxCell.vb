@@ -9,20 +9,20 @@ Public Class CDgvTextBoxCell
     Private _editingMode As Boolean
     Private _translatable As Boolean = False
 
-    'Public Overrides Function Clone() As Object
-    '    Dim copy As CDgvTextBoxCell = TryCast(MyBase.Clone(), CDgvTextBoxCell)
-    '    copy.DisplayOnly = DisplayOnly
-    '    copy.Translatable = Translatable
-    '    copy.EditingMode = EditingMode
-    '    Return copy
-    'End Function
-
-
     <Category("Custom Properties")>
     <DefaultValue(False)>
     <Description("Set to True to specify that this control is Read Only .")>
     <Browsable(True)>
     Public Property DisplayOnly As Boolean = False
+
+    Public Property Translatable As Boolean Implements IEntryControl.Translatable
+        Get
+            Return False
+        End Get
+        Set(value As Boolean)
+            _translatable = value
+        End Set
+    End Property
 
     <Bindable(True)>
     <Category("Properties")>
@@ -30,6 +30,14 @@ Public Class CDgvTextBoxCell
     <Description("Set to True to specify that this control will only accept numeric values.")>
     <Browsable(True)>
     Public Property ValueIsNumeric As Boolean = False
+
+    'Public Overrides Function Clone() As Object
+    '    Dim copy As CDgvTextBoxCell = TryCast(MyBase.Clone(), CDgvTextBoxCell)
+    '    copy.DisplayOnly = DisplayOnly
+    '    copy.Translatable = Translatable
+    '    copy.EditingMode = EditingMode
+    '    Return copy
+    'End Function
 
     Public Property EditingMode As Boolean Implements IEntryControl.EditingMode
         Get
@@ -56,14 +64,6 @@ Public Class CDgvTextBoxCell
         End If
     End Sub
 
-    Public Property Translatable As Boolean Implements IEntryControl.Translatable
-        Get
-            Return False
-        End Get
-        Set(value As Boolean)
-            _translatable = value
-        End Set
-    End Property
 
     'Public Sub MakeEditable(editableControl As Boolean) Implements IEntryControl.MakeEditable
     '    Me.ReadOnly = editableControl
