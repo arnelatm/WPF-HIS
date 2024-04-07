@@ -8,7 +8,6 @@ Public Class CDgvCheckboxCell
 
     Public Sub New()
         MyBase.New()
-
     End Sub
 
     Private _editingMode As Boolean
@@ -50,13 +49,13 @@ Public Class CDgvCheckboxCell
 
 
 
-    ' You must override the EditType property to return the cell's
-    ' editing control type, which is your custom Checkbox class...
-    Public Overrides ReadOnly Property EditType() As Type
-        Get
-            Return GetType(CDgvCheckBoxEditingControl)
-        End Get
-    End Property
+    '' You must override the EditType property to return the cell's
+    '' editing control type, which is your custom Checkbox class...
+    'Public Overrides ReadOnly Property EditType() As Type
+    '    Get
+    '        Return GetType(CDgvCheckBoxEditingControl)
+    '    End Get
+    'End Property
 
 
     <Category("Custom Properties")>
@@ -65,18 +64,16 @@ Public Class CDgvCheckboxCell
     Public Property AlwaysEditable As Boolean = False
 
 
-    ' You must also override this method to initialize the ComboBox instance...
-    ' This method will be called each time a cell in the column enters edit-mode,
-    ' so you can fill the ComboBox instance based on the value of the edited cell
-    Public Overrides Sub InitializeEditingControl(ByVal pRowIndex As Integer, ByVal pFormattedValue As Object, ByVal cellStyle As DataGridViewCellStyle)
-        'DataGridView.SuspendDrawingNew()
-        MyBase.InitializeEditingControl(pRowIndex, pFormattedValue, cellStyle)
-        CellEditingControl = CType(DataGridView.EditingControl, CDgvCheckBoxEditingControl)
-        'DataGridView.ResumeDrawingNew()
-    End Sub
+    '' You must also override this method to initialize the ComboBox instance...
+    '' This method will be called each time a cell in the column enters edit-mode,
+    '' so you can fill the ComboBox instance based on the value of the edited cell
+    'Public Overrides Sub InitializeEditingControl(ByVal pRowIndex As Integer, ByVal pFormattedValue As Object, ByVal cellStyle As DataGridViewCellStyle)
+    '    MyBase.InitializeEditingControl(pRowIndex, pFormattedValue, cellStyle)
+    '    CellEditingControl = CType(DataGridView.EditingControl, CDgvCheckBoxEditingControl)
+    'End Sub
 
 
-    Public Property CellEditingControl As CDgvCheckBoxEditingControl
+    'Public Property CellEditingControl As CDgvCheckBoxEditingControl
 
     Public Sub UpdateDisplayOnlyControl()
         If _editingMode And Not DisplayOnly Then

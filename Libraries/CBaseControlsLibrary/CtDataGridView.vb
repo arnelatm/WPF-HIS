@@ -483,8 +483,8 @@ Public Class CtDataGridView
             cDtp = e.Control
             e.CellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
             e.CellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-        ElseIf TypeOf e.Control Is CDgvCheckBoxEditingControl Then
-            Debugger.Break()
+            'ElseIf TypeOf e.Control Is CDgvCheckBoxEditingControl Then
+            '    Debugger.Break()
 
         End If
     End Sub
@@ -540,11 +540,11 @@ Public Class CtDataGridView
 
     Private Sub EndEditMode(sender As System.Object, e As EventArgs) Handles MyBase.CurrentCellDirtyStateChanged
         'if current cell of grid is dirty, commits edit
-        'If Me.IsCurrentCellDirty Then
-        '    If TypeOf CurrentCell Is CDgvCheckboxCell Then
-        '        CommitEdit(DataGridViewDataErrorContexts.Commit)
-        '    End If
-        'End If
+        If Me.IsCurrentCellDirty Then
+            If TypeOf CurrentCell Is CDgvCheckboxCell Then
+                CommitEdit(DataGridViewDataErrorContexts.Commit)
+            End If
+        End If
     End Sub
 
     Public Property IsDirty As Boolean = False
@@ -961,8 +961,18 @@ Public Class CtDataGridView
 
     Private Sub MyCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles MyBase.CellBeginEdit
         OldCellValue = Me.CurrentCell.Value
-        'CurrentCell.Value = 1
     End Sub
+
+    Private Sub OnCtDataGridView_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles MyBase.CellContentClick
+        If CurrentCell IsNot Nothing AndAlso TypeOf CurrentCell Is IEntryControl Then
+            If TypeOf CurrentCell Is CDgvCheckboxCell Then
+                If e.ColumnIndex < 0 OrElse e.RowIndex < 0 Then Exit Sub
+                'CurrentCell.Value = Not CurrentCell.Value
+                CommitEdit(DataGridViewDataErrorContexts.Commit)
+            End If
+        End If
+    End Sub
+
 
     'Public Sub ResetDisplayOnly(lDisplayOnly As Boolean, control As Control)
     '    If control.GetType().GetProperty("DisplayOnly") IsNot Nothing Then
