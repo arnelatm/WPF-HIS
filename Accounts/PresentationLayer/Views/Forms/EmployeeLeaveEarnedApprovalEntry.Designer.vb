@@ -150,7 +150,7 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         Me.cboApprovedBy.DefaultValue = Nothing
         Me.cboApprovedBy.DisplayMember = "Name"
         Me.cboApprovedBy.DisplayOnly = True
-        Me.cboApprovedBy.DropDownHeight = 29
+        Me.cboApprovedBy.DropDownHeight = 24
         Me.cboApprovedBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
         Me.cboApprovedBy.Editable = True
         Me.cboApprovedBy.EditingMode = False
@@ -296,7 +296,7 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
         Me.dgvEmployeeLeaveEarnedIdNo.DefaultCellStyle = DataGridViewCellStyle2
-        Me.dgvEmployeeLeaveEarnedIdNo.EditingMode = True
+        Me.dgvEmployeeLeaveEarnedIdNo.EditingMode = False
         Me.dgvEmployeeLeaveEarnedIdNo.EndFindValue = Nothing
         Me.dgvEmployeeLeaveEarnedIdNo.FieldDescription = Nothing
         Me.dgvEmployeeLeaveEarnedIdNo.FieldName = Nothing
@@ -319,7 +319,7 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
         Me.DaysEarned.DefaultCellStyle = DataGridViewCellStyle3
-        Me.DaysEarned.EditingMode = True
+        Me.DaysEarned.EditingMode = False
         Me.DaysEarned.EndFindValue = Nothing
         Me.DaysEarned.FieldDescription = Nothing
         Me.DaysEarned.FieldName = Nothing
@@ -341,7 +341,7 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
         Me.dgvDateCreated.DefaultCellStyle = DataGridViewCellStyle4
-        Me.dgvDateCreated.EditingMode = True
+        Me.dgvDateCreated.EditingMode = False
         Me.dgvDateCreated.EndFindValue = Nothing
         Me.dgvDateCreated.FieldDescription = Nothing
         Me.dgvDateCreated.FieldName = Nothing
@@ -364,6 +364,7 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
         Me.dgvEmployeeIdNo.DefaultCellStyle = DataGridViewCellStyle5
+        Me.dgvEmployeeIdNo.DisplayStyleForCurrentCellOnly = True
         Me.dgvEmployeeIdNo.EditingMode = False
         Me.dgvEmployeeIdNo.HeaderText = "Employee Name"
         Me.dgvEmployeeIdNo.MinimumWidth = 6
@@ -382,7 +383,7 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
         Me.dgvStartDate.DefaultCellStyle = DataGridViewCellStyle6
-        Me.dgvStartDate.EditingMode = True
+        Me.dgvStartDate.EditingMode = False
         Me.dgvStartDate.EndFindValue = Nothing
         Me.dgvStartDate.FieldDescription = Nothing
         Me.dgvStartDate.FieldName = Nothing
@@ -405,7 +406,7 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
         Me.dgvEndDate.DefaultCellStyle = DataGridViewCellStyle7
-        Me.dgvEndDate.EditingMode = True
+        Me.dgvEndDate.EditingMode = False
         Me.dgvEndDate.EndFindValue = Nothing
         Me.dgvEndDate.FieldDescription = Nothing
         Me.dgvEndDate.FieldName = Nothing
@@ -428,6 +429,7 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
         Me.dgvLeaveIdNo.DefaultCellStyle = DataGridViewCellStyle8
+        Me.dgvLeaveIdNo.DisplayStyleForCurrentCellOnly = True
         Me.dgvLeaveIdNo.EditingMode = False
         Me.dgvLeaveIdNo.HeaderText = "Leave Name"
         Me.dgvLeaveIdNo.MinimumWidth = 6
@@ -446,7 +448,7 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
         Me.dgvReason.DefaultCellStyle = DataGridViewCellStyle9
-        Me.dgvReason.EditingMode = True
+        Me.dgvReason.EditingMode = False
         Me.dgvReason.EndFindValue = Nothing
         Me.dgvReason.FieldDescription = Nothing
         Me.dgvReason.FieldName = Nothing
@@ -471,7 +473,7 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle10.NullValue = False
         Me.dgvApproved.DefaultCellStyle = DataGridViewCellStyle10
-        Me.dgvApproved.EditingMode = True
+        Me.dgvApproved.EditingMode = False
         Me.dgvApproved.EndFindValue = Nothing
         Me.dgvApproved.FieldDescription = Nothing
         Me.dgvApproved.FieldName = Nothing
@@ -523,7 +525,7 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         DataGridViewCellStyle12.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black
         Me.dgvApprovalNote.DefaultCellStyle = DataGridViewCellStyle12
-        Me.dgvApprovalNote.EditingMode = True
+        Me.dgvApprovalNote.EditingMode = False
         Me.dgvApprovalNote.EndFindValue = Nothing
         Me.dgvApprovalNote.FieldDescription = Nothing
         Me.dgvApprovalNote.FieldName = Nothing

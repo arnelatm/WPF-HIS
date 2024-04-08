@@ -1,14 +1,9 @@
-﻿
-CREATE VIEW [dbo].[EmployeeLeaveEarnedApprovalItem_View]
+﻿CREATE VIEW dbo.PayrollDate_View
 AS
-SELECT b.EnteredBy, b.LeaveIdNo, b.StartDate, b.EndDate, b.DaysEarned, a.ApprovalNote, a.EmployeeLeaveEarnedApprovalIdNo, b.EmployeeIdNo, b.DateCreated, b.Reason, c.SupervisorIdNo, c.EmployeeName, c.EmployeeNameAra, 
-                  d.LeaveName, d.LeaveNameAra, a.EmployeeLeaveEarnedIdNo, a.IdNo, IsNull(a.Approved,0) as Approved , IsNull(a.Disapproved,0) as Disapproved
-FROM     dbo.EmployeeLeaveEarned AS b INNER JOIN
-                  dbo.EmployeeLeaveEarnedApprovalItem AS a ON b.IdNo = a.EmployeeLeaveEarnedIdNo LEFT OUTER JOIN
-                  dbo.Leave AS d ON b.LeaveIdNo = d.IdNo LEFT OUTER JOIN
-                  dbo.Employee AS c ON b.EmployeeIdNo = c.IdNo
+SELECT IdNo, CONVERT(VarChar, StartDate, 102) AS PayCharDate, PayrollCode
+FROM     dbo.Payroll
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeaveEarnedApprovalItem_View';
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'PayrollDate_View';
 
 
 GO
@@ -17,7 +12,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[70] 4[15] 2[11] 3) )"
+         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -83,45 +78,15 @@ Begin DesignProperties =
          Left = 0
       End
       Begin Tables = 
-         Begin Table = "b"
+         Begin Table = "Payroll"
             Begin Extent = 
                Top = 7
                Left = 48
-               Bottom = 588
+               Bottom = 170
                Right = 251
             End
             DisplayFlags = 280
-            TopColumn = 0
-         End
-         Begin Table = "a"
-            Begin Extent = 
-               Top = 16
-               Left = 445
-               Bottom = 211
-               Right = 784
-            End
-            DisplayFlags = 280
-            TopColumn = 0
-         End
-         Begin Table = "d"
-            Begin Extent = 
-               Top = 209
-               Left = 769
-               Bottom = 630
-               Right = 972
-            End
-            DisplayFlags = 280
-            TopColumn = 0
-         End
-         Begin Table = "c"
-            Begin Extent = 
-               Top = 252
-               Left = 274
-               Bottom = 590
-               Right = 506
-            End
-            DisplayFlags = 280
-            TopColumn = 0
+            TopColumn = 4
          End
       End
    End
@@ -135,21 +100,19 @@ Begin DesignProperties =
       Begin ColumnWidths = 11
          Column = 1440
          Alias = 900
-         Table = 1176
+         Table = 1170
          Output = 720
          Append = 1400
          NewValue = 1170
-         SortType = 1356
-         SortOrder = 1416
+         SortType = 1350
+         SortOrder = 1410
          GroupBy = 1350
-         Filter = 1356
+         Filter = 1350
          Or = 1350
          Or = 1350
          Or = 1350
       End
    End
 End
-', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeaveEarnedApprovalItem_View';
-
-
+', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'PayrollDate_View';
 

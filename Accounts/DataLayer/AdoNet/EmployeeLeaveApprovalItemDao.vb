@@ -30,6 +30,7 @@ Namespace DataLayer.AdoNet
                     "LeaveIdNo," &
                     "LeaveName," &
                     "LeaveNameAra," &
+                    "NoOfDays," &
                     "Reason," &
                     "Status," &
                     "StartDate," &
@@ -65,6 +66,7 @@ Namespace DataLayer.AdoNet
             .LeaveIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("LeaveIdNo")),
             .LeaveName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("LeaveName")),
             .LeaveNameAra = AATM.DataLayer.AdoNet.Extensions.AsString(reader("LeaveNameAra")),
+            .NoOfDays = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("NoOfDays")),
             .Reason = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Reason")),
             .Status = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Status")),
             .StartDate = AATM.DataLayer.AdoNet.Extensions.AsDateTime(reader("StartDate")),

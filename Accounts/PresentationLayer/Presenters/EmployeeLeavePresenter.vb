@@ -101,8 +101,7 @@ Namespace PresentationLayer.Presenters
                 Dim employeeIdNo As Int32 = Service.GetUserEmployeeIdNo()
                 MakeControlDataSources({New Object() {"Employee", "EmployeeIdNo", Nothing, "IdNo = " + employeeIdNo.ToString(), "IdNo"}})
             End If
-            MakeControlDataSources({{New Object() {"User", "EnteredBy", "IdNo,UserName", Nothing}},
-                                    {New Object() {"User", "ApprovedBy", "IdNo,UserName", Nothing}}})
+            MakeControlDataSources({{New Object() {"User", "EnteredBy", "IdNo,UserName", Nothing}}})
             If _holidayLeave Then
                 MakeControlDataSources({New Object() {"Leave", "LeaveIdNo", Nothing, " Holiday = 1"},
                                         New Object() {"Holiday_View", "HolidayIdNo", "IdNo,HolidayName,DateStart", Nothing}})

@@ -21,6 +21,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property LeaveIdNo As Int16
         Property LeaveName As String
         Property LeaveNameAra As String
+        Property NoOfDays As Int32
         Property Reason As String
         Property Status As String
         Property StartDate As Date

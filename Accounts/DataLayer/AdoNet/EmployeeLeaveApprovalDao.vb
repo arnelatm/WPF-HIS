@@ -71,6 +71,7 @@ Namespace DataLayer.AdoNet
                                 "FullDay," &
                                 "IdNo," &
                                 "LeaveIdNo," &
+                                "NoOfDays," &
                                 "Reason," &
                                 "Status," &
                                 "StartDate," &
@@ -91,6 +92,7 @@ Namespace DataLayer.AdoNet
             .FullDay = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("FullDay")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .LeaveIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("LeaveIdNo")),
+            .NoOfDays = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("NoOfDays")),
             .Reason = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Reason")),
             .Status = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Status")),
             .StartDate = AATM.DataLayer.AdoNet.Extensions.AsDateTime(reader("StartDate")),
