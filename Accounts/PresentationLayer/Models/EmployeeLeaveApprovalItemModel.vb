@@ -22,6 +22,7 @@ Namespace PresentationLayer.Models
         Public Property LeaveIdNo As Int16
         Public Property LeaveName As String
         Public Property LeaveNameAra As String
+        Public Property NoOfDays As Int32
         Public Property Reason As String
         Public Property StartDate As Date
         Public Property Status As String

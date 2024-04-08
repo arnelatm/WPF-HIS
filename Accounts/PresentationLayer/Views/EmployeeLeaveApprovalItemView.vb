@@ -25,6 +25,7 @@ Namespace PresentationLayer.Views
         Public Property LeaveIdNo As Short Implements IEmployeeLeaveApprovalItemView.LeaveIdNo
         Public Property LeaveName As String Implements IEmployeeLeaveApprovalItemView.LeaveName
         Public Property LeaveNameAra As String Implements IEmployeeLeaveApprovalItemView.LeaveNameAra
+        Public Property NoOfDays As Int32 Implements IEmployeeLeaveApprovalItemView.NoOfDays
         Public Property Reason As String Implements IEmployeeLeaveApprovalItemView.Reason
         Public Property Status As String Implements IEmployeeLeaveApprovalItemView.Status
         Public Property StartDate As Date Implements IEmployeeLeaveApprovalItemView.StartDate
