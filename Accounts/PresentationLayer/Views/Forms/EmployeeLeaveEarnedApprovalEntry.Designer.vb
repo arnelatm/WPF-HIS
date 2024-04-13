@@ -74,8 +74,7 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         Me.CFlowLayout1.Controls.Add(Me.CLabel1)
         Me.CFlowLayout1.Controls.Add(Me.dtpDateCreated)
         Me.CFlowLayout1.Controls.Add(Me.DataGridViewEmployeeLeave)
-        Me.CFlowLayout1.Location = New System.Drawing.Point(5, 86)
-        Me.CFlowLayout1.Margin = New System.Windows.Forms.Padding(4)
+        Me.CFlowLayout1.Location = New System.Drawing.Point(4, 70)
         Me.CFlowLayout1.Name = "CFlowLayout1"
         Me.CFlowLayout1.Size = New System.Drawing.Size(1307, 667)
         Me.CFlowLayout1.TabIndex = 5
