@@ -130,8 +130,8 @@ Namespace PresentationLayer.Presenters
             End If
             Dim yearsOfServiceFromStartDate As Int16 = GetFloorIntYearDifference(CDate(_hiredDate), CDate(View.StartDate))
             Dim yearsOfServiceFromEndDate As Int16 = GetFloorIntYearDifference(CDate(_hiredDate), CDate(View.EndDate))
-            Dim daysAllowedPerYearFromStartDate As Int16 = GetLeaveDaysAllowedPerYear(yearsOfServiceFromStartDate)
-            Dim daysAllowedPerYearFromEndDate = GetLeaveDaysAllowedPerYear(yearsOfServiceFromEndDate)
+            Dim daysAllowedPerYearFromStartDate As Int16 = GetLeaveDaysAllowedPerYear(View.LeaveIdNo, yearsOfServiceFromStartDate)
+            Dim daysAllowedPerYearFromEndDate = GetLeaveDaysAllowedPerYear(View.LeaveIdNo, yearsOfServiceFromEndDate)
             Dim totalDaysEarned As Int16 = 0
             Dim noOfYearsInDecimal As Decimal = 0D
             If daysAllowedPerYearFromStartDate = daysAllowedPerYearFromEndDate Then
@@ -150,7 +150,7 @@ Namespace PresentationLayer.Presenters
                     Else
                         noOfYearsInDecimal = GetDecimalYearDifference(begDate, View.EndDate)
                     End If
-                    leavesAllowedPerYear = GetLeaveDaysAllowedPerYear(i)
+                    leavesAllowedPerYear = GetLeaveDaysAllowedPerYear(View.LeaveIdNo, i)
                     totalDaysEarned += Math.Floor(noOfYearsInDecimal * leavesAllowedPerYear)
                     begDate = DateAdd(DateInterval.Day, 1, anniversaryHireDate)
                 Next
@@ -191,8 +191,9 @@ Namespace PresentationLayer.Presenters
         End Function
 
 
-        Private Function GetLeaveDaysAllowedPerYear(yearsOfService As Int16) As Int16
-            Return Service.GetFieldValue(Of Int16)("LeaveDaysAllowedPerYear", "EarnableLEave", yearsOfService.ToString() + " >= YearsOfServiceStart and " + yearsOfService.ToString() + " < YearsOfServiceEnd ")
+        Private Function GetLeaveDaysAllowedPerYear(leaveIdNo As Int16, yearsOfService As Int16) As Int16
+            Dim condition As String = yearsOfService.ToString() + " >= YearsOfServiceStart and " + yearsOfService.ToString() + " < YearsOfServiceEnd " + " and leaveIdNo = " & leaveIdNo.ToString()
+            Return Service.GetFieldValue(Of Int16)("LeaveDaysAllowedPerYear", "EarnableLEave", condition)
         End Function
 
 
