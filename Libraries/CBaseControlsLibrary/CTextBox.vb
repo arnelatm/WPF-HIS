@@ -208,6 +208,9 @@ Public Class CTextBox
                     ForeColor = GlobalVariables.DefaultFormControlForegroundColor
                     BackColor = GlobalVariables.DefaultFormControlBackgroundColor
                 End If
+            Else
+                _displayOnly = False
+                Me.ReadOnly = False
             End If
         End Set
     End Property
