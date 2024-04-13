@@ -1,35 +1,11 @@
-﻿
-
-
-
-
-CREATE VIEW [dbo].[EmployeeLeaveApprovalItem_View]
+﻿CREATE VIEW dbo.EmployeeLeaveApprovalItem_View
 AS
-SELECT	b.EnteredBy, 
-		b.LeaveIdNo, 
-		b.StartDate, 
-		b.EndDate, 
-		b.FullDay, 
-		a.Status, 
-		a.Status as 'LeaveStatus', 
-		a.ApprovalNote, 
-		a.EmployeeLeaveApprovalIdNo, 
-		b.EmployeeIdNo, 
-		b.DateCreated, 
-		b.Reason, 
-		c.SupervisorIdNo, 
-		c.EmployeeName, 
-		c.EmployeeNameAra, 
-        d.LeaveName, 
-		d.LeaveNameAra, 
-		a.EmployeeLeaveIdNo, a.IdNo
-FROM    dbo.EmployeeLeave AS b 
-		INNER JOIN dbo.EmployeeLeaveApprovalItem AS a 
-		ON b.IdNo = a.EmployeeLeaveIdNo 
-		LEFT OUTER JOIN dbo.Leave AS d 
-		ON b.LeaveIdNo = d.IdNo 
-		LEFT OUTER JOIN dbo.Employee AS c 
-		ON b.EmployeeIdNo = c.IdNo
+SELECT b.EnteredBy, b.LeaveIdNo, b.StartDate, b.EndDate, b.FullDay, a.Status, a.Status AS LeaveStatus, a.ApprovalNote, a.EmployeeLeaveApprovalIdNo, b.EmployeeIdNo, b.DateCreated, b.Reason, c.SupervisorIdNo, c.EmployeeName, 
+                  c.EmployeeNameAra, d.LeaveName, d.LeaveNameAra, a.EmployeeLeaveIdNo, a.IdNo, b.NoOfDays
+FROM     dbo.EmployeeLeave AS b INNER JOIN
+                  dbo.EmployeeLeaveApprovalItem AS a ON b.IdNo = a.EmployeeLeaveIdNo LEFT OUTER JOIN
+                  dbo.Leave AS d ON b.LeaveIdNo = d.IdNo LEFT OUTER JOIN
+                  dbo.Employee AS c ON b.EmployeeIdNo = c.IdNo
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeaveApprovalItem_View';
 
@@ -156,16 +132,16 @@ Begin DesignProperties =
    End
    Begin CriteriaPane = 
       Begin ColumnWidths = 11
-         Column = 3375
-         Alias = 2655
+         Column = 3372
+         Alias = 2652
          Table = 2220
          Output = 720
          Append = 1400
          NewValue = 1170
-         SortType = 1350
-         SortOrder = 1410
+         SortType = 1356
+         SortOrder = 1416
          GroupBy = 1350
-         Filter = 1350
+         Filter = 1356
          Or = 1350
          Or = 1350
          Or = 1350
@@ -173,6 +149,8 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeaveApprovalItem_View';
+
+
 
 
 

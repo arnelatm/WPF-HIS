@@ -656,7 +656,6 @@
     <Build Include="dbo\Stored Procedures\UpdateEmployeeLeaveEarnedApprovalItemTVP.sql" />
     <Build Include="dbo\User Defined Types\EmployeeLeaveEarnedApprovalItemUpdate.sql" />
     <Build Include="dbo\Views\EmployeeLeaveEarnedApprovalItem_View.sql" />
-    <Build Include="dbo\Views\EmployeeLeaveEarnedApproval_View.sql" />
     <Build Include="dbo\Tables\DoctorDepartment.sql" />
     <Build Include="dbo\Views\GlLedgersSummmary_View.sql" />
     <Build Include="dbo\Tables\EarnableLeave.sql" />
