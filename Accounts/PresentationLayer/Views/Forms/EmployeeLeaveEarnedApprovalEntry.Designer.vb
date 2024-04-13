@@ -43,7 +43,6 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.dtpDateCreated = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.DataGridViewEmployeeLeave = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
-        Me.bsEmployeeLeaveEarnedApprovalItem = New System.Windows.Forms.BindingSource(Me.components)
         Me.dgvEmployeeLeaveEarnedIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.DaysEarned = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.dgvDateCreated = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -58,6 +57,7 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         Me.enteredByDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.SupervisorIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgvIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+        Me.bsEmployeeLeaveEarnedApprovalItem = New System.Windows.Forms.BindingSource(Me.components)
         CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.CFlowLayout1.SuspendLayout()
         CType(Me.DataGridViewEmployeeLeave, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -283,10 +283,6 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         Me.DataGridViewEmployeeLeave.Size = New System.Drawing.Size(1287, 593)
         Me.DataGridViewEmployeeLeave.TabIndex = 3
         Me.DataGridViewEmployeeLeave.Translatable = True
-        '
-        'bsEmployeeLeaveEarnedApprovalItem
-        '
-        Me.bsEmployeeLeaveEarnedApprovalItem.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeeLeaveEarnedApprovalItemModel)
         '
         'dgvEmployeeLeaveEarnedIdNo
         '
@@ -585,6 +581,10 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         Me.dgvIdNo.Translatable = False
         Me.dgvIdNo.Visible = False
         Me.dgvIdNo.Width = 40
+        '
+        'bsEmployeeLeaveEarnedApprovalItem
+        '
+        Me.bsEmployeeLeaveEarnedApprovalItem.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeeLeaveEarnedApprovalItemModel)
         '
         'EmployeeLeaveEarnedApprovalEntry
         '

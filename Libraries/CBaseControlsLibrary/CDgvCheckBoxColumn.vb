@@ -58,9 +58,19 @@ Public Class CDgvCheckBoxColumn
             Return _displayOnly
         End Get
         Set(value As Boolean)
-            _displayOnly = value
-            If value Then
-                _editingMode = True
+            If Not AlwaysEditable Then
+                _editingMode = value
+                If value Then
+                    [ReadOnly] = True
+                    DefaultCellStyle.BackColor = System.Drawing.Color.Orange 'GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                    DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                    _displayOnly = True
+                Else
+                    [ReadOnly] = False
+                    DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                    DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                    _displayOnly = False
+                End If
             End If
         End Set
     End Property
@@ -88,7 +98,8 @@ Public Class CDgvCheckBoxColumn
             [ReadOnly] = False
             DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
             DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-            [ReadOnly] = True
+            'TRIALONLY
+            [ReadOnly] = False
         End If
     End Sub
 
