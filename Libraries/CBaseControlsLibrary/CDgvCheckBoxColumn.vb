@@ -18,7 +18,24 @@ Public Class CDgvCheckBoxColumn
         FlatStyle = FlatStyle.Standard
     End Sub
 
+    Public Overrides Property CellTemplate() As DataGridViewCell
+        Get
+            Return MyBase.CellTemplate
+        End Get
+        Set(ByVal value As DataGridViewCell)
 
+            Dim dataGridViewCheckBoxCell As CDgvCheckboxCell = TryCast(value, CDgvCheckboxCell)
+            If value IsNot Nothing AndAlso dataGridViewCheckBoxCell Is Nothing Then
+                Throw New InvalidCastException("Must be a CDgvCheckBoxCell")
+            End If
+            MyBase.CellTemplate = value
+        End Set
+    End Property
+
+<<<<<<< Updated upstream
+
+=======
+>>>>>>> Stashed changes
 
     <Category("Custom Properties")>
     <DefaultValue(False)>

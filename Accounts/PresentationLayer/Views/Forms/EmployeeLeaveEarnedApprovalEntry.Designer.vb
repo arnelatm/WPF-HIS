@@ -74,7 +74,8 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         Me.CFlowLayout1.Controls.Add(Me.CLabel1)
         Me.CFlowLayout1.Controls.Add(Me.dtpDateCreated)
         Me.CFlowLayout1.Controls.Add(Me.DataGridViewEmployeeLeave)
-        Me.CFlowLayout1.Location = New System.Drawing.Point(4, 70)
+        Me.CFlowLayout1.Location = New System.Drawing.Point(5, 86)
+        Me.CFlowLayout1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.CFlowLayout1.Name = "CFlowLayout1"
         Me.CFlowLayout1.Size = New System.Drawing.Size(1307, 667)
         Me.CFlowLayout1.TabIndex = 5
@@ -460,9 +461,15 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         '
         'dgvApproved
         '
+<<<<<<< Updated upstream
         Me.dgvApproved.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
         Me.dgvApproved.BegFindValue = Nothing
         Me.dgvApproved.DataPropertyName = "Approved"
+=======
+        Me.dgvApprove.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.dgvApprove.BegFindValue = Nothing
+        Me.dgvApprove.DataPropertyName = "Approved"
+>>>>>>> Stashed changes
         DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle10.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
@@ -487,9 +494,9 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         '
         'dgvDisapproved
         '
-        Me.dgvDisapproved.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.dgvDisapproved.BegFindValue = Nothing
-        Me.dgvDisapproved.DataPropertyName = "Disapproved"
+        Me.dgvDisapprove.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.dgvDisapprove.BegFindValue = Nothing
+        Me.dgvDisapprove.DataPropertyName = "Disapproved"
         DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle11.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black
