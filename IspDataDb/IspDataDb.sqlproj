@@ -646,7 +646,6 @@
     <Build Include="dbo\Tables\EmployeeLeaveEarnedApprovalItem.sql" />
     <Build Include="dbo\Tables\EmployeeLeaveEarnedApproval.sql" />
     <Build Include="dbo\Views\LeaveEarnedLatestApproval_View_1.sql" />
-    <Build Include="dbo\Views\EmployeeLeaveEarnedLatestApproval_View.sql" />
     <Build Include="dbo\Views\EmployeeLeaveEarned_View.sql" />
     <Build Include="dbo\Tables\LabTest.sql" />
     <Build Include="dbo\Tables\LabResultTypeDetails.sql" />
