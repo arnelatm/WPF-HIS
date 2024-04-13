@@ -127,16 +127,6 @@ Public Class EmployeeLeaveEarnedApprovalEntry
             }
     End Sub
 
-    'Protected Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
-    '    If AddingMode Then
-    '        dgvDisapproved.DisplayOnly = False
-    '        dgvApproved.DisplayOnly = False
-    '    Else
-    '        dgvApproved.DisplayOnly = True
-    '        dgvDisapproved.DisplayOnly = True
-    '    End If
-    'End Sub
-
     Private Sub EmployeeLeaveEarnedApprovalEntry_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         If UserIsASuperAdministrator() Then
             cboApprovedBy.DisplayOnly = False
@@ -149,23 +139,4 @@ Public Class EmployeeLeaveEarnedApprovalEntry
         btnAdd.PerformClick()
     End Sub
 
-<<<<<<< Updated upstream
-=======
-    Private Sub DataGridViewEmployeeLeave_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEmployeeLeave.CellContentClick
-        Debugger.Break()
-        'DataGridViewEmployeeLeave.EditingMode = True
-        'If e.ColumnIndex =
-        DataGridViewEmployeeLeave.CurrentRow.Cells(8).Value = True
-        'DataGridViewEmployeeLeave.BeginEdit(True)
-        'DataGridViewEmployeeLeave.CurrentCell.Value = True
-        'DataGridViewEmployeeLeave.NotifyCurrentCellDirty(True)
-        'DataGridViewEmployeeLeave.EndEdit()
-        'DataGridViewEmployeeLeave.Refresh()
-        'End If
-    End Sub
-
-    'Private Sub DataGridViewEmployeeLeave_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEmployeeLeave.CellContentClick
-    '    Debugger.Break()
-    'End Sub
->>>>>>> Stashed changes
 End Class

@@ -461,15 +461,9 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         '
         'dgvApproved
         '
-<<<<<<< Updated upstream
         Me.dgvApproved.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
         Me.dgvApproved.BegFindValue = Nothing
         Me.dgvApproved.DataPropertyName = "Approved"
-=======
-        Me.dgvApprove.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.dgvApprove.BegFindValue = Nothing
-        Me.dgvApprove.DataPropertyName = "Approved"
->>>>>>> Stashed changes
         DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle10.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
@@ -494,9 +488,9 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         '
         'dgvDisapproved
         '
-        Me.dgvDisapprove.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.dgvDisapprove.BegFindValue = Nothing
-        Me.dgvDisapprove.DataPropertyName = "Disapproved"
+        Me.dgvDisapproved.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.dgvDisapproved.BegFindValue = Nothing
+        Me.dgvDisapproved.DataPropertyName = "Disapproved"
         DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle11.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black

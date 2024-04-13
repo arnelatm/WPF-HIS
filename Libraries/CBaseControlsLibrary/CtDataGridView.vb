@@ -99,15 +99,9 @@ Public Class CtDataGridView
             UpdateDisplayOnlyControl()
             For Each col In Columns
                 If TypeOf col Is IEntryControl Then
-<<<<<<< Updated upstream
                     'If TypeOf col Is CDgvCheckBoxColumn And value Then
                     '    Debugger.Break()
                     'End If
-=======
-                    If TypeOf col Is CDgvCheckBoxColumn And value Then
-                        Debugger.Break()
-                    End If
->>>>>>> Stashed changes
                     If col.DisplayOnly Then
                         col.EditingMode = False
                     Else
@@ -135,7 +129,12 @@ Public Class CtDataGridView
             'Me.[ReadOnly] = False
             DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
             DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-            'Me.[ReadOnly] = True
+            Try
+                Me.[ReadOnly] = True
+            Catch ex As Exception
+
+            End Try
+
         End If
     End Sub
 
@@ -973,7 +972,7 @@ Public Class CtDataGridView
         If CurrentCell IsNot Nothing AndAlso TypeOf CurrentCell Is IEntryControl Then
             If TypeOf CurrentCell Is CDgvCheckboxCell Then
                 If e.ColumnIndex < 0 OrElse e.RowIndex < 0 Then Exit Sub
-                'CurrentCell.Value = Not CurrentCell.Value
+                CurrentCell.Value = Not CurrentCell.Value
                 CommitEdit(DataGridViewDataErrorContexts.Commit)
             End If
         End If

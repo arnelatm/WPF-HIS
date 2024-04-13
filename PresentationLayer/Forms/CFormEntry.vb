@@ -704,15 +704,6 @@ Public Class CFormEntry
                 'End If
                 If TypeOf ctrl Is DataGridView Then
                     Dim x As DataGridView = ctrl
-<<<<<<< Updated upstream
-                    'If onOff Then
-                    '    Debugger.Break()
-                    'End If
-=======
-                    If onOff Then
-                        Debugger.Break()
-                    End If
->>>>>>> Stashed changes
                     DirectCast(x, DataGridView).EndEdit()
                 End If
 
