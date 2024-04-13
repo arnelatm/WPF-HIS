@@ -41,6 +41,7 @@ Public Class CDgvCheckBoxColumn
     End Property
 
 
+
     <Category("Custom Properties")>
     <DefaultValue(False)>
     <Description("Set to True to specify that this control is always editable.")>
@@ -61,7 +62,8 @@ Public Class CDgvCheckBoxColumn
             If Not AlwaysEditable Then
                 _editingMode = value
                 If value Then
-                    [ReadOnly] = True
+                    'TRIALONLY
+                    [ReadOnly] = False
                     DefaultCellStyle.BackColor = System.Drawing.Color.Orange 'GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
                     DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                     _displayOnly = True
