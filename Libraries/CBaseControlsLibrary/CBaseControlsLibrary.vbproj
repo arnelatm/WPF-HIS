@@ -142,6 +142,9 @@
     </Compile>
     <Compile Include="CDgvExpiryColumn.vb" />
     <Compile Include="CDgvExpiryCell.vb" />
+    <Compile Include="CDvCheckBoxEditingControl.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CfComboBox.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -383,6 +386,11 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CustomComboBox.vb" />
+    <Compile Include="DataGridViewNumericUpDownCell.vb" />
+    <Compile Include="DataGridViewNumericUpDownColumn.vb" />
+    <Compile Include="DataGridViewNumericUpDownEditingControl.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="DateRangeControl.Designer.vb">
       <DependentUpon>DateRangeControl.vb</DependentUpon>
     </Compile>
@@ -496,6 +504,7 @@
     <Compile Include="tdpGregorian.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="TestEditingControl.vb" />
     <Compile Include="TimeColors.vb" />
     <Compile Include="TimeColorsUIEditor.vb" />
     <Compile Include="TimeUIEditor.vb" />

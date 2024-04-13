@@ -539,7 +539,7 @@ Public Class CtDataGridView
     Public Property SecurityKey As String = ""
 
     Private Sub EndEditMode(sender As System.Object, e As EventArgs) Handles MyBase.CurrentCellDirtyStateChanged
-        'if current cell of grid is dirty, commits edit
+        'If current Then cell Of grid Is dirty, commits edit
         If Me.IsCurrentCellDirty Then
             If TypeOf CurrentCell Is CDgvCheckboxCell Then
                 CommitEdit(DataGridViewDataErrorContexts.Commit)

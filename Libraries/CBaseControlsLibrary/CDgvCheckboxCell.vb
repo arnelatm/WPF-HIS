@@ -13,6 +13,7 @@ Public Class CDgvCheckboxCell
     Private _editingMode As Boolean
     Private _translatable As Boolean = False
 
+
     <Category("Custom Properties")>
     <DefaultValue(False)>
     <Description("Set to True to specify that this control is Read Only .")>
@@ -23,8 +24,19 @@ Public Class CDgvCheckboxCell
         Get
             Return False
         End Get
-        Set(value As Boolean)
-            _translatable = value
+        Set
+            If Not AlwaysEditable Then
+                _DisplayOnly = Value
+                If Value Or DisplayOnly Then
+                    Style.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                    Style.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                    [ReadOnly] = True
+                Else
+                    Style.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                    Style.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+                    [ReadOnly] = False
+                End If
+            End If
         End Set
     End Property
 
@@ -42,38 +54,13 @@ Public Class CDgvCheckboxCell
         Get
             Return _editingMode
         End Get
-        Set
-            _editingMode = Value
+        Set(val As Boolean)
+            If Not AlwaysEditable Then
+                _editingMode = val
+                UpdateDisplayOnlyControl()
+            End If
         End Set
     End Property
-
-
-
-    '' You must override the EditType property to return the cell's
-    '' editing control type, which is your custom Checkbox class...
-    'Public Overrides ReadOnly Property EditType() As Type
-    '    Get
-    '        Return GetType(CDgvCheckBoxEditingControl)
-    '    End Get
-    'End Property
-
-
-    <Category("Custom Properties")>
-    <DefaultValue(False)>
-    <Description("Set to True to specify that this control is always editable.")>
-    Public Property AlwaysEditable As Boolean = False
-
-
-    '' You must also override this method to initialize the ComboBox instance...
-    '' This method will be called each time a cell in the column enters edit-mode,
-    '' so you can fill the ComboBox instance based on the value of the edited cell
-    'Public Overrides Sub InitializeEditingControl(ByVal pRowIndex As Integer, ByVal pFormattedValue As Object, ByVal cellStyle As DataGridViewCellStyle)
-    '    MyBase.InitializeEditingControl(pRowIndex, pFormattedValue, cellStyle)
-    '    CellEditingControl = CType(DataGridView.EditingControl, CDgvCheckBoxEditingControl)
-    'End Sub
-
-
-    'Public Property CellEditingControl As CDgvCheckBoxEditingControl
 
     Public Sub UpdateDisplayOnlyControl()
         If _editingMode And Not DisplayOnly Then
@@ -84,12 +71,7 @@ Public Class CDgvCheckboxCell
             [ReadOnly] = False
             Style.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             Style.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-            Try
-                [ReadOnly] = True
-            Catch ex As Exception
-
-            End Try
-
+            [ReadOnly] = True
         End If
     End Sub
 
