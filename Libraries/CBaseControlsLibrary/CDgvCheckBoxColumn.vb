@@ -32,11 +32,6 @@ Public Class CDgvCheckBoxColumn
         End Set
     End Property
 
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
-
     <Category("Custom Properties")>
     <DefaultValue(False)>
     <Description("Set to True to specify that this control is always editable.")>
@@ -95,8 +90,11 @@ Public Class CDgvCheckBoxColumn
             [ReadOnly] = False
             DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
             DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-            'TRIALONLY
-            [ReadOnly] = False
+            Try
+                [ReadOnly] = True
+            Catch ex As Exception
+
+            End Try
         End If
     End Sub
 
