@@ -121,7 +121,7 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         Me.txtIdNo.OldValue = ""
         Me.txtIdNo.OverrideMaxLength = 0
         Me.txtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtIdNo.Size = New System.Drawing.Size(133, 26)
+        Me.txtIdNo.Size = New System.Drawing.Size(133, 23)
         Me.txtIdNo.TabIndex = 0
         Me.txtIdNo.Translatable = False
         '
@@ -131,7 +131,7 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         Me.lblEnteredBy.DisplayOnly = True
         Me.lblEnteredBy.EditingMode = False
         Me.lblEnteredBy.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.lblEnteredBy.Location = New System.Drawing.Point(194, 1)
+        Me.lblEnteredBy.Location = New System.Drawing.Point(185, 1)
         Me.lblEnteredBy.Margin = New System.Windows.Forms.Padding(1)
         Me.lblEnteredBy.Name = "lblEnteredBy"
         Me.lblEnteredBy.Size = New System.Drawing.Size(180, 30)
@@ -168,7 +168,7 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         Me.cboApprovedBy.IntegralHeight = False
         Me.cboApprovedBy.LimitToList = False
         Me.cboApprovedBy.LinkedLabel = Nothing
-        Me.cboApprovedBy.Location = New System.Drawing.Point(376, 1)
+        Me.cboApprovedBy.Location = New System.Drawing.Point(367, 1)
         Me.cboApprovedBy.Margin = New System.Windows.Forms.Padding(1)
         Me.cboApprovedBy.MaxDropDownItems = 1
         Me.cboApprovedBy.Name = "cboApprovedBy"
@@ -196,7 +196,7 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         Me.CLabel1.DisplayOnly = True
         Me.CLabel1.EditingMode = False
         Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.CLabel1.Location = New System.Drawing.Point(717, 1)
+        Me.CLabel1.Location = New System.Drawing.Point(708, 1)
         Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
         Me.CLabel1.Name = "CLabel1"
         Me.CLabel1.Size = New System.Drawing.Size(267, 30)
@@ -218,14 +218,14 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         Me.dtpDateCreated.EditsAllowed = False
         Me.dtpDateCreated.ForeColor = System.Drawing.Color.Black
         Me.dtpDateCreated.LinkedLabel = Nothing
-        Me.dtpDateCreated.Location = New System.Drawing.Point(986, 1)
+        Me.dtpDateCreated.Location = New System.Drawing.Point(977, 1)
         Me.dtpDateCreated.Margin = New System.Windows.Forms.Padding(1)
         Me.dtpDateCreated.Name = "dtpDateCreated"
         Me.dtpDateCreated.ReadOnlyDp = False
         Me.dtpDateCreated.SecurityKey = Nothing
         Me.dtpDateCreated.ShowLongDate = False
         Me.dtpDateCreated.ShowTime = True
-        Me.dtpDateCreated.Size = New System.Drawing.Size(206, 27)
+        Me.dtpDateCreated.Size = New System.Drawing.Size(196, 23)
         Me.dtpDateCreated.TabIndex = 2
         Me.dtpDateCreated.TargetCalendar = CType(resources.GetObject("dtpDateCreated.TargetCalendar"), System.Globalization.Calendar)
         Me.dtpDateCreated.Translatable = False
@@ -269,7 +269,7 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         Me.DataGridViewEmployeeLeave.IgnoreCase = False
         Me.DataGridViewEmployeeLeave.IsDirty = False
         Me.DataGridViewEmployeeLeave.Location = New System.Drawing.Point(4, 36)
-        Me.DataGridViewEmployeeLeave.Margin = New System.Windows.Forms.Padding(4)
+        Me.DataGridViewEmployeeLeave.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.DataGridViewEmployeeLeave.Name = "DataGridViewEmployeeLeave"
         Me.DataGridViewEmployeeLeave.OldCellValue = Nothing
         Me.DataGridViewEmployeeLeave.ReadOnly = True
@@ -461,9 +461,9 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         '
         'dgvApproved
         '
-        Me.dgvApproved.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
-        Me.dgvApproved.BegFindValue = Nothing
-        Me.dgvApproved.DataPropertyName = "Approved"
+        Me.dgvApprove.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.dgvApprove.BegFindValue = Nothing
+        Me.dgvApprove.DataPropertyName = "Approved"
         DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle10.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
@@ -488,9 +488,9 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         '
         'dgvDisapproved
         '
-        Me.dgvDisapproved.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
-        Me.dgvDisapproved.BegFindValue = Nothing
-        Me.dgvDisapproved.DataPropertyName = "Disapproved"
+        Me.dgvDisapprove.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.dgvDisapprove.BegFindValue = Nothing
+        Me.dgvDisapprove.DataPropertyName = "Disapproved"
         DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle11.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black
