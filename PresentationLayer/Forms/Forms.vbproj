@@ -225,16 +225,16 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="CrViewer.vb">
-      <SubType>Form</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="CrReportViewer.Designer.vb">
       <DependentUpon>CrReportViewer.vb</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="CrReportViewer.vb">
-      <SubType>Form</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="CrystalDecisions\ReportAppServer\CommonControls.vb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
