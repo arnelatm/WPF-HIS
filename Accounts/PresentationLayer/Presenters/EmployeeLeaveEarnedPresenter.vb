@@ -1,5 +1,6 @@
 ﻿Imports System.Data.SqlTypes
 Imports System.Dynamic
+Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
@@ -134,26 +135,32 @@ Namespace PresentationLayer.Presenters
             Dim daysAllowedPerYearFromEndDate = GetLeaveDaysAllowedPerYear(View.LeaveIdNo, yearsOfServiceFromEndDate)
             Dim totalDaysEarned As Int16 = 0
             Dim noOfYearsInDecimal As Decimal = 0D
-            If daysAllowedPerYearFromStartDate = daysAllowedPerYearFromEndDate Then
-                noOfYearsInDecimal = GetDecimalYearDifference(View.StartDate, View.EndDate)
-                totalDaysEarned = Math.Floor(noOfYearsInDecimal * daysAllowedPerYearFromStartDate)
+            Dim ratio As Decimal = GetLeaveDaysRatio(View.LeaveIdNo, yearsOfServiceFromStartDate)
+            If ratio = 0 Then
+                If daysAllowedPerYearFromStartDate = daysAllowedPerYearFromEndDate Then
+                    noOfYearsInDecimal = GetDecimalYearDifference(View.StartDate, View.EndDate)
+
+                    totalDaysEarned = Math.Floor(noOfYearsInDecimal * daysAllowedPerYearFromStartDate)
+                Else
+                    Dim anniversaryHireDate As Date
+                    Dim leavesAllowedPerYear As Int16 = 0
+                    Dim begDate As Date = View.StartDate
+                    Dim daysAllowed As Int16 = 0
+                    ' compute days earned for each year 
+                    For i = yearsOfServiceFromStartDate To yearsOfServiceFromEndDate
+                        anniversaryHireDate = DateAdd(DateInterval.Day, -1, DateAdd(DateInterval.Year, 1, begDate))
+                        If anniversaryHireDate < View.EndDate Then
+                            noOfYearsInDecimal = GetDecimalYearDifference(begDate, anniversaryHireDate)
+                        Else
+                            noOfYearsInDecimal = GetDecimalYearDifference(begDate, View.EndDate)
+                        End If
+                        leavesAllowedPerYear = GetLeaveDaysAllowedPerYear(View.LeaveIdNo, i)
+                        totalDaysEarned += Math.Floor(noOfYearsInDecimal * leavesAllowedPerYear)
+                        begDate = DateAdd(DateInterval.Day, 1, anniversaryHireDate)
+                    Next
+                End If
             Else
-                Dim anniversaryHireDate As Date
-                Dim leavesAllowedPerYear As Int16 = 0
-                Dim begDate As Date = View.StartDate
-                Dim daysAllowed As Int16 = 0
-                ' compute days earned for each year 
-                For i = yearsOfServiceFromStartDate To yearsOfServiceFromEndDate
-                    anniversaryHireDate = DateAdd(DateInterval.Day, -1, DateAdd(DateInterval.Year, 1, begDate))
-                    If anniversaryHireDate < View.EndDate Then
-                        noOfYearsInDecimal = GetDecimalYearDifference(begDate, anniversaryHireDate)
-                    Else
-                        noOfYearsInDecimal = GetDecimalYearDifference(begDate, View.EndDate)
-                    End If
-                    leavesAllowedPerYear = GetLeaveDaysAllowedPerYear(View.LeaveIdNo, i)
-                    totalDaysEarned += Math.Floor(noOfYearsInDecimal * leavesAllowedPerYear)
-                    begDate = DateAdd(DateInterval.Day, 1, anniversaryHireDate)
-                Next
+                totalDaysEarned = ratio * (DateDiff(DateInterval.Day, CDate(View.StartDate), CDate(View.EndDate)) + 1)
             End If
             Return totalDaysEarned
         End Function
@@ -163,7 +170,7 @@ Namespace PresentationLayer.Presenters
             If View.StartDate Is Nothing Or View.EndDate Is Nothing Then
                 Return 0
             End If
-            Dim noOfDays As Int16 = DateDiff(DateInterval.Day, CDate(View.StartDate), CDate(View.EndDate))
+            Dim noOfDays As Int16 = DateDiff(DateInterval.Day, CDate(View.StartDate), CDate(View.EndDate)) + 1
             Dim retVal As Boolean = True
             Dim minimumDays As Int16 = GetMinimumDays()
             Dim minDaysForLeaves As Int16 = GetMinimumDaysForLeave()
@@ -183,19 +190,23 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Private Function GetMinimumDays() As Int16
-            Return Service.GetFieldValue(Of Int16)("MinimumDays", "EarnableLeave", _yearsOfService.ToString() + " >= YearsOfServiceStart and " + _yearsOfService.ToString() + " < YearsOfServiceEnd ")
+            Return Service.GetFieldValue(Of Int16)("MinimumDays", "EarnableLeave", _yearsOfService.ToString() + " >= YearsOfServiceStart and " + _yearsOfService.ToString() + " < YearsOfServiceEnd and LeaveIdNo = " & View.LeaveIdNo.ToString())
         End Function
 
         Private Function GetMinimumDaysForLeave() As Int16
-            Return Service.GetFieldValue(Of Int16)("MinimumDaysForLeave", "EarnableLEave", _yearsOfService.ToString() + " >= YearsOfServiceStart and " + _yearsOfService.ToString() + " < YearsOfServiceEnd ")
+            Return Service.GetFieldValue(Of Int16)("MinimumDaysForLeave", "EarnableLEave", _yearsOfService.ToString() + " >= YearsOfServiceStart and " + _yearsOfService.ToString() + " < YearsOfServiceEnd and LeaveIdNo = " & View.LeaveIdNo.ToString())
         End Function
 
 
         Private Function GetLeaveDaysAllowedPerYear(leaveIdNo As Int16, yearsOfService As Int16) As Int16
-            Dim condition As String = yearsOfService.ToString() + " >= YearsOfServiceStart and " + yearsOfService.ToString() + " < YearsOfServiceEnd " + " and leaveIdNo = " & leaveIdNo.ToString()
-            Return Service.GetFieldValue(Of Int16)("LeaveDaysAllowedPerYear", "EarnableLEave", condition)
+            Dim condition As String = yearsOfService.ToString() + " >= YearsOfServiceStart and " + yearsOfService.ToString() + " < YearsOfServiceEnd and leaveIdNo = " & leaveIdNo.ToString()
+            Return Service.GetFieldValue(Of Int16)("LeaveDaysAllowedPerYear", "EarnableLeave", condition)
         End Function
 
+        Private Function GetLeaveDaysRatio(leaveIdNo As Int16, yearsOfService As Int16) As Int16
+            Dim condition As String = yearsOfService.ToString() + " >= YearsOfServiceStart and " + yearsOfService.ToString() + " < YearsOfServiceEnd and leaveIdNo = " & leaveIdNo.ToString()
+            Return Service.GetFieldValue(Of Int16)("DaysRatio", "EarnableLEave", condition)
+        End Function
 
         Private Function NoOverlappingDates() As Boolean
             Dim noOverlap As Boolean = True

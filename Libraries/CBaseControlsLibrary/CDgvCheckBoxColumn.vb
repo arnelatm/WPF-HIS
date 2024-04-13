@@ -52,7 +52,6 @@ Public Class CDgvCheckBoxColumn
             If Not AlwaysEditable Then
                 _editingMode = value
                 If value Then
-                    'TRIALONLY
                     [ReadOnly] = False
                     DefaultCellStyle.BackColor = System.Drawing.Color.Orange 'GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
                     DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
@@ -63,6 +62,9 @@ Public Class CDgvCheckBoxColumn
                     DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
                     _displayOnly = False
                 End If
+            Else
+                _displayOnly = False
+                Me.ReadOnly = False
             End If
         End Set
     End Property
