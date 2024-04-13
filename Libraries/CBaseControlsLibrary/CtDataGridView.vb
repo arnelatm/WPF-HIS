@@ -99,9 +99,15 @@ Public Class CtDataGridView
             UpdateDisplayOnlyControl()
             For Each col In Columns
                 If TypeOf col Is IEntryControl Then
+<<<<<<< Updated upstream
                     'If TypeOf col Is CDgvCheckBoxColumn And value Then
                     '    Debugger.Break()
                     'End If
+=======
+                    If TypeOf col Is CDgvCheckBoxColumn And value Then
+                        Debugger.Break()
+                    End If
+>>>>>>> Stashed changes
                     If col.DisplayOnly Then
                         col.EditingMode = False
                     Else
