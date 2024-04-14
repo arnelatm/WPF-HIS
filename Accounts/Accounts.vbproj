@@ -243,6 +243,7 @@
     <Compile Include="BusinessLayer\IGroup\Prescription.vb" />
     <Compile Include="BusinessLayer\IGroup\PrescriptionItem.vb" />
     <Compile Include="BusinessLayer\IGroup\StockInventory.vb" />
+    <Compile Include="BusinessLayer\SupplierProduct.vb" />
     <Compile Include="BusinessLayer\PurchaseOrderDetail.vb" />
     <Compile Include="BusinessLayer\InvTransaction.vb" />
     <Compile Include="BusinessLayer\ItemCode.vb" />
@@ -346,6 +347,7 @@
     <Compile Include="DataLayer\AdoNet\IGroup\DosageMasterDao.vb" />
     <Compile Include="DataLayer\AdoNet\IGroup\PrescriptionDao.vb" />
     <Compile Include="DataLayer\AdoNet\IGroup\PrescriptionItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\SupplierProductDao.vb" />
     <Compile Include="DataLayer\AdoNet\PurchaseOrderApprovalDetailDao.vb" />
     <Compile Include="DataLayer\AdoNet\InvRequestDetailDao.vb" />
     <Compile Include="DataLayer\AdoNet\PurchaseOrderDetailDao.vb" />
@@ -498,6 +500,7 @@
     <Compile Include="PresentationLayer\Models\IGroup\PrescriptionModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\StockInventoryModel.vb" />
     <Compile Include="PresentationLayer\Models\InventoryModel.vb" />
+    <Compile Include="PresentationLayer\Models\SupplierProductModel.vb" />
     <Compile Include="PresentationLayer\Models\PurchaseOrderDetailModel.vb" />
     <Compile Include="PresentationLayer\Models\InvTransactionModel.vb" />
     <Compile Include="PresentationLayer\Models\InvTransTypeModel.vb" />
@@ -569,6 +572,7 @@
     <Compile Include="PresentationLayer\Presenters\EmployeeLeaveEarnedPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\IGroup\ClinicLabSamplePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\IGroup\IbLabSamplePresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\SupplierProductPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PurchaseOrderApprovalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\UtilityPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\InvRequestPresenter.vb" />
@@ -692,6 +696,12 @@
     <Compile Include="PresentationLayer\Views\Forms\ProductBaseUnitChanger.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\SupplierProductEntry.Designer.vb">
+      <DependentUpon>SupplierProductEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\SupplierProductEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\PurchaseOrderApprovalForm.Designer.vb">
       <DependentUpon>PurchaseOrderApprovalForm.vb</DependentUpon>
     </Compile>
@@ -734,6 +744,7 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeLeaveEarnedView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IClinicLabSampleView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IIbLabSampleView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\ISupplierProductView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IUtilityView.vb" />
     <Compile Include="PresentationLayer\Views\EmployeeLeaveApprovalItemView.vb" />
     <Compile Include="PresentationLayer\Views\EmployeeLeaveCreditView.vb" />
@@ -2123,6 +2134,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\ProductBaseUnitChanger.resx">
       <DependentUpon>ProductBaseUnitChanger.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\SupplierProductEntry.resx">
+      <DependentUpon>SupplierProductEntry.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\PurchaseOrderApprovalForm.resx">
       <DependentUpon>PurchaseOrderApprovalForm.vb</DependentUpon>

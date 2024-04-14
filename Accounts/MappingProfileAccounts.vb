@@ -273,6 +273,9 @@ Public Class MappingProfileAccounts
         CreateMap(Of Duration, DurationModel)().ReverseMap()
         CreateMap(Of DurationModel, IDurationView)().ReverseMap()
 
+        CreateMap(Of SupplierProduct, SupplierProductModel)().ReverseMap()
+        CreateMap(Of SupplierProductModel, ISupplierProductView)().ReverseMap()
+
         CreateMap(Of InvTransType, InvTransTypeModel)().ReverseMap()
         CreateMap(Of InvTransTypeModel, IInvTransTypeView)().ReverseMap()
 
