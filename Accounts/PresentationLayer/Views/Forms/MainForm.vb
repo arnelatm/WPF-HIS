@@ -1331,6 +1331,10 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of PmrInvestigationRequestForm, PmrInvestigationRequestPresenter(Of PmrInvestigationRequestModel))()
             'RunForm(Of DoctorsPrescriptionForm, PMRInvestigationPresenter(Of PmrInvestigationModel))()
         End Sub
+
+        Private Sub ToolStripMenuItemSupplierProductLink_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSupplierProductLink.Click
+            RunForm(Of SupplierProductEntry, SupplierProductPresenter(Of SupplierProductModel))()
+        End Sub
     End Class
 
 End Namespace

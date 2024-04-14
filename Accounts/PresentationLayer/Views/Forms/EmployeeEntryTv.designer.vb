@@ -984,6 +984,7 @@
             Me.dtpBirthDate.Margin = New System.Windows.Forms.Padding(0)
             Me.dtpBirthDate.Name = "dtpBirthDate"
             Me.dtpBirthDate.ReadOnlyDp = False
+            Me.dtpBirthDate.SecurityKey = Nothing
             Me.dtpBirthDate.ShowLongDate = False
             Me.dtpBirthDate.ShowTime = False
             Me.dtpBirthDate.Size = New System.Drawing.Size(124, 27)
@@ -2969,6 +2970,7 @@
             Me.DataGridViewPhones.RowHeadersWidth = 51
             Me.DataGridViewPhones.Searchable = True
             Me.DataGridViewPhones.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.DataGridViewPhones.SecurityKey = ""
             Me.DataGridViewPhones.SequenceColumn = "dgvSequence"
             Me.DataGridViewPhones.SequenceFieldName = "Sequence"
             Me.DataGridViewPhones.ShowFooter = False
@@ -3288,11 +3290,12 @@
             '
             'NoMaxLimit
             '
+            Me.NoMaxLimit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
             Me.NoMaxLimit.BegFindValue = Nothing
             Me.NoMaxLimit.DataPropertyName = "NoMaxLimit"
             DataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
             DataGridViewCellStyle38.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle38.ForeColor = System.Drawing.Color.Orange
+            DataGridViewCellStyle38.ForeColor = System.Drawing.Color.Black
             DataGridViewCellStyle38.NullValue = False
             Me.NoMaxLimit.DefaultCellStyle = DataGridViewCellStyle38
             Me.NoMaxLimit.EditingMode = False
@@ -3308,7 +3311,7 @@
             Me.NoMaxLimit.ReadOnly = True
             Me.NoMaxLimit.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.NoMaxLimit.Translatable = False
-            Me.NoMaxLimit.Width = 40
+            Me.NoMaxLimit.Width = 83
             '
             'dgvMaxLimit
             '
@@ -3426,6 +3429,7 @@
             Me.DataGridViewDocuments.RowHeadersWidth = 51
             Me.DataGridViewDocuments.Searchable = True
             Me.DataGridViewDocuments.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.DataGridViewDocuments.SecurityKey = ""
             Me.DataGridViewDocuments.SequenceColumn = "dgvSequenceDocument"
             Me.DataGridViewDocuments.SequenceFieldName = "Sequence"
             Me.DataGridViewDocuments.ShowCellErrors = False
@@ -3855,6 +3859,7 @@
             Me.dtpReleasedDate.Margin = New System.Windows.Forms.Padding(0)
             Me.dtpReleasedDate.Name = "dtpReleasedDate"
             Me.dtpReleasedDate.ReadOnlyDp = False
+            Me.dtpReleasedDate.SecurityKey = Nothing
             Me.dtpReleasedDate.ShowLongDate = False
             Me.dtpReleasedDate.ShowTime = False
             Me.dtpReleasedDate.Size = New System.Drawing.Size(124, 27)
@@ -3899,6 +3904,7 @@
             Me.dtpHiredDate.Margin = New System.Windows.Forms.Padding(0)
             Me.dtpHiredDate.Name = "dtpHiredDate"
             Me.dtpHiredDate.ReadOnlyDp = False
+            Me.dtpHiredDate.SecurityKey = Nothing
             Me.dtpHiredDate.ShowLongDate = False
             Me.dtpHiredDate.ShowTime = False
             Me.dtpHiredDate.Size = New System.Drawing.Size(124, 27)
