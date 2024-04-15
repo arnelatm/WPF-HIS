@@ -18,7 +18,7 @@ Namespace PresentationLayer.Presenters
 
         Protected Overrides Sub CreateDataSources()
             MakeControlDataSources({New Object() {"Supplier", "SupplierIdNo", Nothing, Nothing},
-                                    New Object() {"Product", "ProductIdNo", Nothing, Nothing}})
+                                    New Object() {"Product", "ProductIdNo", Nothing, "BranchIdNo=" & GlobalVariables.BranchIdNo.ToString()}})
         End Sub
 
         Protected Overrides Function DependentRecordExist(Optional ByVal warn As Boolean = True) As Boolean
