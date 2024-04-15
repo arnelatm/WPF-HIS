@@ -2802,7 +2802,6 @@
       <Link>.editorconfig</Link>
     </None>
     <None Include="app - Copy.config" />
-    <None Include="app-Ibn-Server - Copy.config" />
     <None Include="app-Isp-Server - Copy.config" />
     <None Include="app-ISP-SERVERNEW.config" />
     <None Include="app-ibn-server-test.config" />

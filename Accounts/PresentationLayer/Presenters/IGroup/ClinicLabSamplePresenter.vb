@@ -1,16 +1,11 @@
-﻿Imports System.Globalization
-Imports AATM.Accounts.BusinessLayer
-Imports AATM.Accounts.DataLayer.AdoNet
+﻿Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
-Imports AATM.Common
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Presenters
-Imports AATM.Libraries
 Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Presenters
 
@@ -34,10 +29,6 @@ Namespace PresentationLayer.Presenters
             WithTreeView = False
             AddHandler View.ClinicLabSamplesRequested, AddressOf GetClinicLabSamples
             AddHandler View.ClinicLabSampleChanged, AddressOf UpdateLabSample
-
-
-            'AddHandler View.DataChanged, AddressOf UpdateData
-            'AddHandler View.GetPmrDataAccessRequested, AddressOf GetPMRDataAccess
         End Sub
 
         Public Sub UpdateLabSample(bindingSource As BindingSource)
@@ -48,26 +39,16 @@ Namespace PresentationLayer.Presenters
 
         Private Sub GetClinicLabSamples(transactionDate As Date?)
             UpdateData()
-            'Dim ClinicLabSamples As New ClinicLabSampleModel
-            'Dim transactionDateString As String = View.TransactionDate
-            'If String.IsNullOrEmpty(View.DoctorCode) Then
-            '    pmrPatients = Nothing
-            'Else
-            '    pmrPatients = Service.GetParametrized(Of PmrInvestigationRequestModel)({View.DoctorCode, View.TransactionDate})
-            'End If
-            'GlobalVariables.Mapper.Map(pmrPatients, View)
         End Sub
 
         Protected Overrides Sub CreateDataSources()
             Service.SaveConnectionString()
             Service.SetConnectionString($"ISPDATA")
-            'CreateDataSource(None)
             Service.RestoreConnectionString()
         End Sub
 
         Private Sub UpdateData()
             Dim ClinicLabSampleModel As New ClinicLabSampleModel
-            'Dim transactionDateString As String = View.TransactionDate
             If String.IsNullOrEmpty(View.TransactionDate) Then
                 ClinicLabSampleModel = Nothing
             Else

@@ -48,26 +48,16 @@ Namespace PresentationLayer.Presenters
 
         Private Sub GetIbLabSamples(transactionDate As Date?)
             UpdateData()
-            'Dim ibLabSamples As New IbLabSampleModel
-            'Dim transactionDateString As String = View.TransactionDate
-            'If String.IsNullOrEmpty(View.DoctorCode) Then
-            '    pmrPatients = Nothing
-            'Else
-            '    pmrPatients = Service.GetParametrized(Of PmrInvestigationRequestModel)({View.DoctorCode, View.TransactionDate})
-            'End If
-            'GlobalVariables.Mapper.Map(pmrPatients, View)
         End Sub
 
         Protected Overrides Sub CreateDataSources()
             Service.SaveConnectionString()
             Service.SetConnectionString($"ISPDATA")
-            'CreateDataSource(None)
             Service.RestoreConnectionString()
         End Sub
 
         Private Sub UpdateData()
             Dim IbLabSampleModel As New IbLabSampleModel
-            'Dim transactionDateString As String = View.TransactionDate
             If String.IsNullOrEmpty(View.TransactionDate) Then
                 IbLabSampleModel = Nothing
             Else
