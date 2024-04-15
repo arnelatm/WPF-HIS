@@ -132,17 +132,16 @@ Namespace PresentationLayer.Views.Forms
             'End If
         End Sub
 
-        'Private Sub DataGridViewIbLabSampleDetails_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewIbLabSampleDetails.CellEndEdit
-
-        'End Sub
+        Private Sub DataGridViewIbLabSampleDetails_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewIbLabSampleDetails.CellEndEdit
+            RaiseEvent IbLabSampleChanged(bsIbLabSampleDetails)
+        End Sub
 
         Private Sub CheckBoxValueChanged() Handles DataGridViewIbLabSampleDetails.CellValueChanged
-            'With DataGridViewIbLabSampleDetails
-            '    If TypeOf .CurrentCell Is DataGridViewCheckBoxCell Then
-            '        RaiseEvent IbLabSampleChanged(bsIbLabSampleDetails)
-            '    End If
-            'End With
-            RaiseEvent IbLabSampleChanged(bsIbLabSampleDetails)
+            With DataGridViewIbLabSampleDetails
+                If TypeOf .CurrentCell Is DataGridViewCheckBoxCell Then
+                    RaiseEvent IbLabSampleChanged(bsIbLabSampleDetails)
+                End If
+            End With
         End Sub
 
     End Class
