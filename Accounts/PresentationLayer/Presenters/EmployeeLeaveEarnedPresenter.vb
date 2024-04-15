@@ -253,9 +253,6 @@ Namespace PresentationLayer.Presenters
             If _userHasHrAccess OrElse _userHasHrManagerAccess OrElse _userIsASuperAdministrator Then
                 ' no filter these users has no restrictions for viewing all leaves
             ElseIf _userIsASupervisor Then
-                ' only supervised employees can be shown
-                DataFilter += IIf(DataFilter Is Nothing Or DataFilter = "", "", " and ") + " (SupervisorIdNo = " & employeeIdNo.ToString() + " or EmployeeIdNo = " & employeeIdNo.ToString() & ")"
-            Else
                 ' only employee own leaves can be shown
                 DataFilter += IIf(DataFilter Is Nothing Or DataFilter = "", "", " and ") + " EmployeeIdNo = " & employeeIdNo.ToString()
             End If
