@@ -13,6 +13,7 @@ Namespace PresentationLayer.Views.Forms
         Private ReadOnly _sReportGroup As String
 
         Public Event ReportDoubleClickEvent(reportIdNo As Int16) Implements IReportSelectorView.ReportDoubleClickEvent
+        Public Event ReportGroupDoubleClickEvent(reportIdNo As Int16) Implements IReportSelectorView.ReportGroupDoubleClickEvent
 
         Public Sub New(reportGroupParam As String)
             MyBase.New()
@@ -83,9 +84,6 @@ Namespace PresentationLayer.Views.Forms
             End With
             With DataGridViewReportList.Columns
                 dgvIdNo.DisplayOnly = True
-                'dgvEmployeeName.DisplayOnly = True
-                'dgvNationalIdNo.DisplayOnly = True
-                'dgvPicture.ImageLayout = DataGridViewImageCellLayout.Stretch
             End With
             ResumeLayout()
         End Sub
@@ -116,22 +114,18 @@ Namespace PresentationLayer.Views.Forms
             PublishClickedButton(ButtonClicked.Edit)
         End Sub
 
-        'Private Sub DataGridViewReportList_CellContentDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewReportList.CellContentDoubleClick
-        '    Debugger.Break()
-        'End Sub
-
         Private Sub DataGridViewReportList_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewReportList.CellDoubleClick
             IdNo = DataGridViewReportList.Rows(e.RowIndex).Cells("dgvIdNo").Value
             RaiseEvent ReportDoubleClickEvent(IdNo)
         End Sub
 
-        Private Sub DataGridViewReportGroupList_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewReportGroupList.CellContentClick
-
+        Private Sub DataGridViewReportGroupList_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewReportGroupList.CellClick
+            ReportGroupIdNo = DataGridViewReportGroupList.Rows(e.RowIndex).Cells("dgvReportGroupIdNo").Value
+            RaiseEvent ReportGroupDoubleClickEvent(ReportGroupIdNo)
+            '.ResetBindings(True)
+            BindReportList()
         End Sub
 
-        Private Sub bsReportGroupList_CurrentChanged(sender As Object, e As EventArgs) Handles bsReportGroupList.CurrentChanged
-
-        End Sub
     End Class
 
 End Namespace

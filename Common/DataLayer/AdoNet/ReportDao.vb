@@ -114,17 +114,16 @@ Namespace DataLayer.AdoNet
             Return _db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetListParametrized(parameter As Object, Optional sortExpression As String = Nothing) As List(Of Report) Implements IDaoListParametrized(Of Report).GetListParametrized
-            Dim reportGroup As String = parameter
-            Dim params() As Object = {"@Parameter", reportGroup}
+        Public Function GetListParametrized(reportGroupIdNo As Object, Optional sortExpression As String = Nothing) As List(Of Report) Implements IDaoListParametrized(Of Report).GetListParametrized
             Dim sql As String
+            Dim params() As Object = {"@Parameter", CInt(reportGroupIdNo)}
             If sortExpression Is Nothing Or sortExpression = "" Then
                 sql = " SELECT IdNo, ReportName" &
-                      " FROM [Report] where Active = 1 and ReportGroup = @Parameter order by ReportOrder"
+                      " FROM [Report] where Active = 1 and ReportGroupIdNo = @Parameter order by ReportOrder"
                 Return _db.Read(sql, MakeList, params).ToList()
             Else
                 sql = " SELECT IdNo, ReportName" &
-                      " FROM [Report] where Active = 1 and ReportGroup = @Parameter order by " & sortExpression
+                      " FROM [Report] where Active = 1 and ReportGroupIdNo = @Parameter order by " & sortExpression
             End If
             Return _db.Read(sql, MakeList, params).ToList()
         End Function

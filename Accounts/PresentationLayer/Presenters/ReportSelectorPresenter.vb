@@ -1,4 +1,5 @@
 ﻿Imports AATM.Accounts.Accounts.PresentationLayer.Views.Forms
+Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters.Views.Forms
 Imports AATM.Accounts.PresentationLayer.Views
@@ -19,9 +20,9 @@ Namespace PresentationLayer.Presenters
     Public Class ReportSelectorPresenter(Of TM As New)
         Inherits CommonPresenter(Of IReportSelectorView, TM)
 
-        Private ReadOnly _reportGroup As String
+        Private _reportGroupCode As String
 
-        Public Sub New(view As IReportSelectorView, reportGroup As String)
+        Public Sub New(view As IReportSelectorView, reportGroupCode As String)
             MyBase.New(view)
             WithTreeView = False
             Service = New CommonService("Report")
@@ -29,15 +30,20 @@ Namespace PresentationLayer.Presenters
             SortOrderKey = "ReportName"
             AskBeforeSave = True
             DisableSaveMemento = True
-            _reportGroup = reportGroup
+            _reportGroupCode = reportGroupCode
             AddHandler view.ReportDoubleClickEvent, AddressOf OnReportDoubleClickEvent
+            AddHandler view.ReportGroupDoubleClickEvent, AddressOf OnReportGroupDoubleClickEvent
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            Dim reportList As List(Of ReportModel) = Service.GetListParametrized(Of ReportModel)(_reportGroup)
             Dim reportGroupList As List(Of ReportGroupModel) = Service.GetList(Of ReportGroupModel)
-            GlobalVariables.Mapper.Map(reportList, View.ReportList)
             GlobalVariables.Mapper.Map(reportGroupList, View.ReportGroupList)
+            UpdateReportList(View.ReportGroupList(0).IdNo)
+        End Sub
+
+        Private Sub UpdateReportList(reportGroupIdNo As Int16)
+            Dim reportList As List(Of ReportModel) = Service.GetListParametrized(Of ReportModel)(reportGroupIdNo)
+            GlobalVariables.Mapper.Map(reportList, View.ReportList)
         End Sub
 
         Public Overrides Sub GoPrintRecord()
@@ -48,6 +54,12 @@ Namespace PresentationLayer.Presenters
             Dim cForm
             cForm = New ReportForm(View.ReportFileName)
             cForm.Show()
+        End Sub
+
+        Public Sub OnReportGroupDoubleClickEvent(reportGroupIdNo As Int16)
+            Dim reportList As List(Of ReportModel) = Service.GetListParametrized(Of ReportModel)(reportGroupIdNo)
+            'Dim reportGroupList As List(Of ReportGroupModel) = Service.GetList(Of ReportGroupModel)
+            GlobalVariables.Mapper.Map(reportList, View.ReportList)
         End Sub
 
         Public Sub OnReportDoubleClickEvent(reportIdNo As Int16)

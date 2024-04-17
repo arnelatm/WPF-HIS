@@ -37,7 +37,7 @@ Namespace PresentationLayer.Views.Forms
             Me.bsReportList = New System.Windows.Forms.BindingSource(Me.components)
             Me.DataGridViewReportGroupList = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.bsReportGroupList = New System.Windows.Forms.BindingSource(Me.components)
-            Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.dgvReportGroupIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.DataGridViewTextBoxColumn9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.DataGridViewTextBoxColumn10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.DataGridViewTextBoxColumn11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -87,7 +87,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewReportList.IgnoreCase = False
             Me.DataGridViewReportList.IsDirty = False
             Me.DataGridViewReportList.Location = New System.Drawing.Point(16, 364)
-            Me.DataGridViewReportList.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.DataGridViewReportList.Margin = New System.Windows.Forms.Padding(4)
             Me.DataGridViewReportList.Name = "DataGridViewReportList"
             Me.DataGridViewReportList.OldCellValue = Nothing
             Me.DataGridViewReportList.ReadOnly = True
@@ -151,7 +151,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewReportGroupList.Cached = False
             Me.DataGridViewReportGroupList.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
             Me.DataGridViewReportGroupList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DataGridViewReportGroupList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdNoDataGridViewTextBoxColumn, Me.DataGridViewTextBoxColumn9, Me.DataGridViewTextBoxColumn10, Me.DataGridViewTextBoxColumn11})
+            Me.DataGridViewReportGroupList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvReportGroupIdNo, Me.DataGridViewTextBoxColumn9, Me.DataGridViewTextBoxColumn10, Me.DataGridViewTextBoxColumn11})
             Me.DataGridViewReportGroupList.DataFilter = Nothing
             Me.DataGridViewReportGroupList.DataSource = Me.bsReportGroupList
             DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -179,7 +179,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewReportGroupList.IgnoreCase = False
             Me.DataGridViewReportGroupList.IsDirty = False
             Me.DataGridViewReportGroupList.Location = New System.Drawing.Point(16, 69)
-            Me.DataGridViewReportGroupList.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.DataGridViewReportGroupList.Margin = New System.Windows.Forms.Padding(4)
             Me.DataGridViewReportGroupList.Name = "DataGridViewReportGroupList"
             Me.DataGridViewReportGroupList.OldCellValue = Nothing
             Me.DataGridViewReportGroupList.ReadOnly = True
@@ -199,15 +199,15 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.bsReportGroupList.DataSource = GetType(AATM.Common.PresentationLayer.Models.ReportGroupModel)
             '
-            'IdNoDataGridViewTextBoxColumn
+            'dgvReportGroupIdNo
             '
-            Me.IdNoDataGridViewTextBoxColumn.DataPropertyName = "IdNo"
-            Me.IdNoDataGridViewTextBoxColumn.HeaderText = "IdNo"
-            Me.IdNoDataGridViewTextBoxColumn.MinimumWidth = 6
-            Me.IdNoDataGridViewTextBoxColumn.Name = "IdNoDataGridViewTextBoxColumn"
-            Me.IdNoDataGridViewTextBoxColumn.ReadOnly = True
-            Me.IdNoDataGridViewTextBoxColumn.Visible = False
-            Me.IdNoDataGridViewTextBoxColumn.Width = 125
+            Me.dgvReportGroupIdNo.DataPropertyName = "IdNo"
+            Me.dgvReportGroupIdNo.HeaderText = "IdNo"
+            Me.dgvReportGroupIdNo.MinimumWidth = 6
+            Me.dgvReportGroupIdNo.Name = "dgvReportGroupIdNo"
+            Me.dgvReportGroupIdNo.ReadOnly = True
+            Me.dgvReportGroupIdNo.Visible = False
+            Me.dgvReportGroupIdNo.Width = 125
             '
             'DataGridViewTextBoxColumn9
             '
@@ -285,11 +285,10 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents dgvIdNo As CDgvTextColumn
         Friend WithEvents DataGridViewReportGroupList As CtDataGridView
         Friend WithEvents bsReportGroupList As BindingSource
-        Friend WithEvents dgvReportGroupIdNo As DataGridViewTextBoxColumn
         Friend WithEvents ReportGroupCodeDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents ReportGroupNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents ReportGroupNameAraDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents dgvReportGroupIdNo As DataGridViewTextBoxColumn
         Friend WithEvents DataGridViewTextBoxColumn9 As DataGridViewTextBoxColumn
         Friend WithEvents DataGridViewTextBoxColumn10 As DataGridViewTextBoxColumn
         Friend WithEvents DataGridViewTextBoxColumn11 As DataGridViewTextBoxColumn
