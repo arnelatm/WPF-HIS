@@ -1335,6 +1335,10 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ToolStripMenuItemSupplierProductLink_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSupplierProductLink.Click
             RunForm(Of SupplierProductEntry, SupplierProductPresenter(Of SupplierProductModel))()
         End Sub
+
+        Private Sub ToolStripMenuItemReportGroup_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemReportGroup.Click
+            RunForm(Of ReportGroupEntry, ReportGroupPresenter(Of ReportGroupModel))()
+        End Sub
     End Class
 
 End Namespace

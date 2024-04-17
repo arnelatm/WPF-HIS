@@ -4,6 +4,7 @@ Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Views.Interfaces
 Imports AATM.Common.ServiceLayer
 Imports AATM.Libraries
+Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Forms
 Imports AATM.PresentationLayer.Views
 
@@ -41,10 +42,17 @@ Namespace PresentationLayer.Presenters
 
 
         Protected Overrides Sub CreateDataSources()
-            Dim data As New ArrayList
-            data.Add({"PrintJob", "PrintJobIdNo", Nothing, Nothing})
-            CreateControlDataSources(data)
+            MakeControlDataSources({New Object() {"PrintJob", "PrintJobIdNo", Nothing, Nothing},
+                                    New Object() {"ReportGroup", "ReportGroupIdNo", Nothing}})
         End Sub
+
+
+        'Protected Overrides Sub CreateDataSources()
+        '    Dim data As New ArrayList
+        '    data.Add({"PrintJob", "PrintJobIdNo", Nothing, Nothing})
+        '    data.Add({"PrintJob", "PrintJobIdNo", Nothing, Nothing})
+        '    CreateControlDataSources(data)
+        'End Sub
 
         'Protected Sub GetRecordFieldWithKeyG(Of T)(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As T 
         '    Service.Presenter.GetRecordFieldWithKeyG(Of Date)("LastFiscalYearEnd", "LastPosting", "TransactionName", "lastPostingDate")

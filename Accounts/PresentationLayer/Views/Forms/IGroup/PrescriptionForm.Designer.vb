@@ -87,7 +87,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout2.Controls.Add(Me.btnPrintDosageLabels)
             Me.CFlowLayout2.Dock = System.Windows.Forms.DockStyle.Fill
             Me.CFlowLayout2.Location = New System.Drawing.Point(0, 55)
-            Me.CFlowLayout2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.CFlowLayout2.Margin = New System.Windows.Forms.Padding(4)
             Me.CFlowLayout2.Name = "CFlowLayout2"
             Me.CFlowLayout2.Size = New System.Drawing.Size(1311, 624)
             Me.CFlowLayout2.TabIndex = 5
@@ -122,7 +122,7 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.Controls.Add(Me.txtDob, 3, 2)
             Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
             Me.TableLayoutPanel1.Location = New System.Drawing.Point(4, 4)
-            Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4)
             Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
             Me.TableLayoutPanel1.RowCount = 5
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
@@ -413,7 +413,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPrescriptionItems.IgnoreCase = False
             Me.DataGridViewPrescriptionItems.IsDirty = False
             Me.DataGridViewPrescriptionItems.Location = New System.Drawing.Point(4, 131)
-            Me.DataGridViewPrescriptionItems.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.DataGridViewPrescriptionItems.Margin = New System.Windows.Forms.Padding(4)
             Me.DataGridViewPrescriptionItems.Name = "DataGridViewPrescriptionItems"
             Me.DataGridViewPrescriptionItems.OldCellValue = Nothing
             Me.DataGridViewPrescriptionItems.ReadOnly = True
@@ -577,11 +577,12 @@ Namespace PresentationLayer.Views.Forms
             '
             'dgvLabelPrinted
             '
+            Me.dgvLabelPrinted.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
             Me.dgvLabelPrinted.BegFindValue = Nothing
             Me.dgvLabelPrinted.DataPropertyName = "LabelPrinted"
             DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
             DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Orange
+            DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
             DataGridViewCellStyle8.NullValue = False
             Me.dgvLabelPrinted.DefaultCellStyle = DataGridViewCellStyle8
             Me.dgvLabelPrinted.EditingMode = False
@@ -598,15 +599,16 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvLabelPrinted.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.dgvLabelPrinted.Translatable = False
             Me.dgvLabelPrinted.Visible = False
-            Me.dgvLabelPrinted.Width = 50
+            Me.dgvLabelPrinted.Width = 125
             '
             'dgvPrintLabel
             '
+            Me.dgvPrintLabel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
             Me.dgvPrintLabel.BegFindValue = Nothing
             Me.dgvPrintLabel.DataPropertyName = "PrintLabel"
             DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
             DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Orange
+            DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
             DataGridViewCellStyle9.NullValue = False
             Me.dgvPrintLabel.DefaultCellStyle = DataGridViewCellStyle9
             Me.dgvPrintLabel.EditingMode = False
@@ -623,7 +625,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvPrintLabel.ReadOnly = True
             Me.dgvPrintLabel.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.dgvPrintLabel.Translatable = False
-            Me.dgvPrintLabel.Width = 40
+            Me.dgvPrintLabel.Width = 69
             '
             'bsPrescriptionDetails
             '
@@ -800,7 +802,7 @@ Namespace PresentationLayer.Views.Forms
             Me.btnPrintDosageLabels.DesignerSelected = False
             Me.btnPrintDosageLabels.ImageIndex = 0
             Me.btnPrintDosageLabels.Location = New System.Drawing.Point(4, 578)
-            Me.btnPrintDosageLabels.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.btnPrintDosageLabels.Margin = New System.Windows.Forms.Padding(4)
             Me.btnPrintDosageLabels.Name = "btnPrintDosageLabels"
             Me.btnPrintDosageLabels.OriginalImageName = Nothing
             Me.btnPrintDosageLabels.SecurityKey = ""

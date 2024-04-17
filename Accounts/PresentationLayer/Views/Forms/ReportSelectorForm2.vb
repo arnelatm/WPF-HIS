@@ -39,14 +39,22 @@ Namespace PresentationLayer.Views.Forms
         Public Property QueryForm As String Implements IReportSelectorView.QueryForm
         Public Property ReportCode As String Implements IReportSelectorView.ReportCode
         Public Property ReportFileName As String Implements IReportSelectorView.ReportFileName
-        Public Property ReportGroup As String Implements IReportSelectorView.ReportGroup
+        Public Property ReportGroupIdNo As Int16 Implements IReportSelectorView.ReportGroupIdNo
         Private Property IReportSelectorView_ReportName As String Implements IReportSelectorView.ReportName
         Public Property ReportNameAra As String Implements IReportSelectorView.ReportNameAra
         Public Property ReportTitle As String Implements IReportSelectorView.ReportTitle
         Public Property ReportTitleAra As String Implements IReportSelectorView.ReportTitleAra
         Public Property QueryFormParameters As String Implements IReportView.QueryFormParameters
         Public Property QueryParameters As String Implements IReportView.QueryParameters
+
         Public Property PrintJobIdNo As Short Implements IReportView.PrintJobIdNo
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As Short)
+                Throw New NotImplementedException()
+            End Set
+        End Property
 
         Public Property Active As Boolean Implements IReportView.Active
             Get
@@ -83,7 +91,6 @@ Namespace PresentationLayer.Views.Forms
                 Throw New NotImplementedException()
             End Set
         End Property
-
 
 #End Region
 
@@ -130,7 +137,7 @@ Namespace PresentationLayer.Views.Forms
             RaiseEvent ReportDoubleClickEvent(IdNo)
         End Sub
 
-        Private Sub CLabel3_Click(sender As Object, e As EventArgs) Handles CLabel3.Click
+        Private Sub DataGridViewReportList_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewReportList.CellContentClick
 
         End Sub
 

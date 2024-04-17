@@ -543,15 +543,15 @@ Public Class CtDataGridView
     <Browsable(True)>
     Public Property SecurityKey As String = ""
 
-    'Private Sub EndEditMode(sender As System.Object, e As EventArgs) Handles MyBase.CurrentCellDirtyStateChanged
-    '    Debugger.Break()
-    '    'If current Then cell Of grid Is dirty, commits edit
-    '    If Me.IsCurrentCellDirty Then
-    '        If TypeOf CurrentCell Is CDgvCheckboxCell Then
-    '            CommitEdit(DataGridViewDataErrorContexts.Commit)
-    '        End If
-    '    End If
-    'End Sub
+    Private Sub EndEditMode(sender As System.Object, e As EventArgs) Handles MyBase.CurrentCellDirtyStateChanged
+        'If current Then cell Of grid Is dirty, commits edit
+        If Me.IsCurrentCellDirty Then
+            If TypeOf CurrentCell Is CDgvCheckboxCell Then
+                Debugger.Break()
+                CommitEdit(DataGridViewDataErrorContexts.Commit)
+            End If
+        End If
+    End Sub
 
     Public Property IsDirty As Boolean = False
     Private _previousColumnSearch As Short
