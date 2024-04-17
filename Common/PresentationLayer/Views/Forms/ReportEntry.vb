@@ -92,12 +92,12 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property ReportGroup As String Implements IReportView.ReportGroup
+        Public Property ReportGroupIdNo As Int16 Implements IReportView.ReportGroupIdNo
             Get
-                Return txtReportGroup.Text
+                Return cboReportGroupIdNo.GetValue(Of Int32)
             End Get
-            Set
-                txtReportGroup.Text = Value
+            Set(value As Int16)
+                cboReportGroupIdNo.SetValue(value)
             End Set
         End Property
 
@@ -170,6 +170,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+
 #End Region
 
         Protected Overrides Sub CreateMainFieldsDictionary()
@@ -178,6 +179,7 @@ Namespace PresentationLayer.Views.Forms
                 {"Active", chkActive},
                 {"BranchIdNo", txtBranchIdNo},
                 {"DateCreated", txtDateCreated},
+                {"ReportGroupIdNo", cboReportGroupIdNo},
                 {"IdNo", txtIdNo},
                 {"PrintJobIdNo", cboPrintJobIdNo},
                 {"QueryForm", txtQueryForm},

@@ -16,7 +16,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property QueryParameters As String
         Property ReportCode As String
         Property ReportFileName As String
-        Property ReportGroup As String
+        Property ReportGroupIdNo As Int16
         Property ReportName As String
         Property ReportNameAra As String
         Property ReportTitle As String

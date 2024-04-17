@@ -276,6 +276,9 @@ Public Class MappingProfileAccounts
         CreateMap(Of SupplierProduct, SupplierProductModel)().ReverseMap()
         CreateMap(Of SupplierProductModel, ISupplierProductView)().ReverseMap()
 
+        CreateMap(Of ReportGroup, ReportGroupModel)().ReverseMap()
+        CreateMap(Of ReportGroupModel, IReportGroupView)().ReverseMap()
+
         CreateMap(Of InvTransType, InvTransTypeModel)().ReverseMap()
         CreateMap(Of InvTransTypeModel, IInvTransTypeView)().ReverseMap()
 

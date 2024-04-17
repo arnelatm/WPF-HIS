@@ -114,6 +114,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemUnit = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemWarehouse = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemInventoryTransactionType = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemSupplierProductLink = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemReportMaster = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemTransactions = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPettyCash = New System.Windows.Forms.ToolStripMenuItem()
@@ -257,7 +258,7 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-            Me.ToolStripMenuItemSupplierProductLink = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemReportGroup = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.AccountsMenu.SuspendLayout()
@@ -413,7 +414,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemGeneral
             '
-            Me.ToolStripMenuItemGeneral.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemBranches, Me.ToolStripMenuItemChartOfAccounts, Me.ToolStripMenuItemDepartments, Me.ToolStripMenuItemRevCostCenters, Me.ToolStripMenuItemRevenueGroups, Me.ToolStripMenuItemDistributionSchemes, Me.ToolStripSeparator4, Me.ToolStripMenuItemCountries, Me.ToolStripMenuItemDocuments, Me.ToolStripMenuItemPhoneTypes, Me.ToolStripMenuItemReligions, Me.ToolStripMenuItemBanks, Me.ToolStripMenuItemItems, Me.ToolStripMenuItemDefaultFieldValues, Me.ToolStripMenuItemSalesDepositTypes, Me.ToolStripMenuItemPrinting})
+            Me.ToolStripMenuItemGeneral.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemBranches, Me.ToolStripMenuItemChartOfAccounts, Me.ToolStripMenuItemDepartments, Me.ToolStripMenuItemRevCostCenters, Me.ToolStripMenuItemRevenueGroups, Me.ToolStripMenuItemDistributionSchemes, Me.ToolStripSeparator4, Me.ToolStripMenuItemCountries, Me.ToolStripMenuItemDocuments, Me.ToolStripMenuItemPhoneTypes, Me.ToolStripMenuItemReligions, Me.ToolStripMenuItemBanks, Me.ToolStripMenuItemItems, Me.ToolStripMenuItemDefaultFieldValues, Me.ToolStripMenuItemSalesDepositTypes, Me.ToolStripMenuItemPrinting, Me.ToolStripMenuItemReportGroup})
             Me.ToolStripMenuItemGeneral.Name = "ToolStripMenuItemGeneral"
             resources.ApplyResources(Me.ToolStripMenuItemGeneral, "ToolStripMenuItemGeneral")
             '
@@ -714,6 +715,11 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.ToolStripMenuItemInventoryTransactionType.Name = "ToolStripMenuItemInventoryTransactionType"
             resources.ApplyResources(Me.ToolStripMenuItemInventoryTransactionType, "ToolStripMenuItemInventoryTransactionType")
+            '
+            'ToolStripMenuItemSupplierProductLink
+            '
+            Me.ToolStripMenuItemSupplierProductLink.Name = "ToolStripMenuItemSupplierProductLink"
+            resources.ApplyResources(Me.ToolStripMenuItemSupplierProductLink, "ToolStripMenuItemSupplierProductLink")
             '
             'ToolStripMenuItemReportMaster
             '
@@ -1458,10 +1464,10 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
             '
-            'ToolStripMenuItemSupplierProductLink
+            'ToolStripMenuItemReportGroup
             '
-            Me.ToolStripMenuItemSupplierProductLink.Name = "ToolStripMenuItemSupplierProductLink"
-            resources.ApplyResources(Me.ToolStripMenuItemSupplierProductLink, "ToolStripMenuItemSupplierProductLink")
+            Me.ToolStripMenuItemReportGroup.Name = "ToolStripMenuItemReportGroup"
+            resources.ApplyResources(Me.ToolStripMenuItemReportGroup, "ToolStripMenuItemReportGroup")
             '
             'MainForm
             '
@@ -1718,5 +1724,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ToolStripMenuItemEmployeeLeaveEarned As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemEmployeeLeavesEarnedApproval As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemSupplierProductLink As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemReportGroup As ToolStripMenuItem
     End Class
 End NameSpace
