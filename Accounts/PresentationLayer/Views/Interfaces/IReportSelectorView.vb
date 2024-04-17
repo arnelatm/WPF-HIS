@@ -10,6 +10,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property ReportGroupList As List(Of IReportGroupView)
 
         Event ReportDoubleClickEvent(reportIdNo As Int16)
+        Event ReportGroupDoubleClickEvent(reportGroupIdNo As Int16)
 
     End Interface
 
