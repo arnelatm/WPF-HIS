@@ -9,6 +9,7 @@ Namespace PresentationLayer.Views.Forms
         Implements IReportSelectorView
 
         Private _reportList As New List(Of IReportView)
+        Private _reportGroupList As New List(Of IReportGroupView)
         Private ReadOnly _sReportGroup As String
 
         Public Event ReportDoubleClickEvent(reportIdNo As Int16) Implements IReportSelectorView.ReportDoubleClickEvent
@@ -35,6 +36,16 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property ReportGroupList As List(Of IReportGroupView) Implements IReportSelectorView.ReportGroupList
+            Get
+                Return _reportGroupList
+            End Get
+            Set
+                _reportGroupList = Value
+                BindReportGroupList()
+            End Set
+        End Property
+
         Public Property IdNo As Int16 Implements IReportSelectorView.IdNo
         Public Property QueryForm As String Implements IReportSelectorView.QueryForm
         Public Property ReportCode As String Implements IReportSelectorView.ReportCode
@@ -46,51 +57,12 @@ Namespace PresentationLayer.Views.Forms
         Public Property ReportTitleAra As String Implements IReportSelectorView.ReportTitleAra
         Public Property QueryFormParameters As String Implements IReportView.QueryFormParameters
         Public Property QueryParameters As String Implements IReportView.QueryParameters
-
         Public Property PrintJobIdNo As Short Implements IReportView.PrintJobIdNo
-            Get
-                Throw New NotImplementedException()
-            End Get
-            Set(value As Short)
-                Throw New NotImplementedException()
-            End Set
-        End Property
-
         Public Property Active As Boolean Implements IReportView.Active
-            Get
-                Throw New NotImplementedException()
-            End Get
-            Set(value As Boolean)
-                Throw New NotImplementedException()
-            End Set
-        End Property
-
         Public Property BranchIdNo As Short Implements IReportView.BranchIdNo
-            Get
-                Throw New NotImplementedException()
-            End Get
-            Set(value As Short)
-                Throw New NotImplementedException()
-            End Set
-        End Property
-
         Public Property DateCreated As Date Implements IReportView.DateCreated
-            Get
-                Throw New NotImplementedException()
-            End Get
-            Set(value As Date)
-                Throw New NotImplementedException()
-            End Set
-        End Property
-
         Public Property DatabaseName As String Implements IReportView.DatabaseName
-            Get
-                Throw New NotImplementedException()
-            End Get
-            Set(value As String)
-                Throw New NotImplementedException()
-            End Set
-        End Property
+
 
 #End Region
 
@@ -118,13 +90,29 @@ Namespace PresentationLayer.Views.Forms
             ResumeLayout()
         End Sub
 
+        Private Sub BindReportGroupList()
+            SuspendLayout()
+            bsReportGroupList.DataSource = Nothing
+            DataGridViewReportGroupList.Refresh()
+            bsReportGroupList.DataSource = ReportGroupList
+            bsReportGroupList.AllowNew = True
+            With DataGridViewReportGroupList
+                .AutoGenerateColumns = False
+                .DataSource = bsReportGroupList
+            End With
+            ResumeLayout()
+        End Sub
+
         Private Sub ReportSelector_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             DataGridViewReportList.Refresh()
+            DataGridViewReportGroupList.Refresh()
             BindReportList()
+            BindReportGroupList()
         End Sub
 
         Private Sub ReportSelector_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
             bsReportList.ResetBindings(True)
+            bsReportGroupList.ResetBindings(True)
             PublishClickedButton(ButtonClicked.Edit)
         End Sub
 
@@ -137,13 +125,13 @@ Namespace PresentationLayer.Views.Forms
             RaiseEvent ReportDoubleClickEvent(IdNo)
         End Sub
 
-        Private Sub DataGridViewReportList_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewReportList.CellContentClick
+        Private Sub DataGridViewReportGroupList_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewReportGroupList.CellContentClick
 
         End Sub
 
-        'Private Sub DataGridViewReportList_CellMouseDoubleClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DataGridViewReportList.CellMouseDoubleClick
-        '    Debugger.Break()
-        'End Sub
+        Private Sub bsReportGroupList_CurrentChanged(sender As Object, e As EventArgs) Handles bsReportGroupList.CurrentChanged
+
+        End Sub
     End Class
 
 End Namespace

@@ -7,6 +7,7 @@ Namespace PresentationLayer.Views.Interfaces
         Inherits IReportView
 
         Property ReportList As List(Of IReportView)
+        Property ReportGroupList As List(Of IReportGroupView)
 
         Event ReportDoubleClickEvent(reportIdNo As Int16)
 

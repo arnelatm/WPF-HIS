@@ -165,6 +165,7 @@
     <Compile Include="BusinessLayer\Printer.vb" />
     <Compile Include="BusinessLayer\Report.vb" />
     <Compile Include="BusinessLayer\PrintSetup.vb" />
+    <Compile Include="BusinessLayer\ReportGroup.vb" />
     <Compile Include="BusinessLayer\RevCostCenter.vb" />
     <Compile Include="BusinessLayer\Country.vb" />
     <Compile Include="BusinessLayer\Department.vb" />
@@ -180,6 +181,7 @@
     <Compile Include="DataLayer\AdoNet\PrintSetupDao.vb" />
     <Compile Include="DataLayer\AdoNet\DaoFactoryCommon.vb" />
     <Compile Include="DataLayer\AdoNet\ReportDao.vb" />
+    <Compile Include="DataLayer\AdoNet\ReportGroupDao.vb" />
     <Compile Include="DataLayer\AdoNet\RevCostCenterDao.vb" />
     <Compile Include="DataLayer\AdoNet\CountryDao.vb" />
     <Compile Include="DataLayer\AdoNet\DepartmentDao.vb" />
@@ -200,12 +202,14 @@
     <Compile Include="PresentationLayer\Models\PrintJobModel.vb" />
     <Compile Include="PresentationLayer\Models\PrinterModel.vb" />
     <Compile Include="PresentationLayer\Models\PrintSetupModel.vb" />
+    <Compile Include="PresentationLayer\Models\ReportGroupModel.vb" />
     <Compile Include="PresentationLayer\Models\ReportModel.vb" />
     <Compile Include="PresentationLayer\Presenters\PrinterPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PrintJobPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PrintSetupPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PrintReportPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CommonPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\ReportGroupPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ReportPresenter.vb" />
     <Compile Include="PresentationLayer\Views\Forms\PrinterEntryTv.Designer.vb">
       <DependentUpon>PrinterEntryTv.vb</DependentUpon>
@@ -247,6 +251,12 @@
       <DependentUpon>CommonForm.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\CommonForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\ReportGroupEntry.Designer.vb">
+      <DependentUpon>ReportGroupEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\ReportGroupEntry.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\ReportPrinting.designer.vb">
@@ -308,6 +318,7 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IPrintJobVIew.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPrintSetupView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPrintReportView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IReportGroupView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IReportView.vb" />
     <Compile Include="PresentationLayer\Views\SecurityGroupView.Designer.vb">
       <DependentUpon>SecurityGroupView.vb</DependentUpon>
@@ -411,6 +422,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\BranchEntryTV.resx">
       <DependentUpon>BranchEntryTv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\ReportGroupEntry.resx">
+      <DependentUpon>ReportGroupEntry.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\ReportPrinting.resx">
       <DependentUpon>ReportPrinting.vb</DependentUpon>
