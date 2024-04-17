@@ -26,12 +26,21 @@ Namespace ServiceLayer
         End Sub
 
 
+        Public Function GetList(Of TM)(Optional sortOrder As String = "")
+            Dim model As New List(Of TM)
+            Dim records = DataDao.GetList(sortOrder)
+            GlobalVariables.Mapper.Map(records, model)
+            Return model
+        End Function
+
+
         Public Function GetListParametrized(Of TM)(parameter As Object, Optional sortOrder As String = "")
             Dim model As New List(Of TM)
             Dim records = DataDao.GetListParametrized(parameter, sortOrder)
             GlobalVariables.Mapper.Map(records, model)
             Return model
         End Function
+
 
         Protected Overrides Sub CreateDao(objectName As String, Optional daoParam As Object = Nothing, Optional connection As String = Nothing)
             If objectName IsNot Nothing Then

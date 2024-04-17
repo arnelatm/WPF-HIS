@@ -37,22 +37,10 @@ Namespace PresentationLayer.Views.Forms
             Me.bsReportList = New System.Windows.Forms.BindingSource(Me.components)
             Me.DataGridViewReportGroupList = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.bsReportGroupList = New System.Windows.Forms.BindingSource(Me.components)
-            Me.ActiveDataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-            Me.BranchIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.DatabaseNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.DateCreatedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.PrintJobIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.QueryFormDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.QueryFormParametersDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.QueryParametersDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.ReportCodeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.ReportFileNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.ReportGroupIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.ReportNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.ReportNameAraDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.ReportTitleDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.ReportTitleAraDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.DataGridViewTextBoxColumn9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.DataGridViewTextBoxColumn10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.DataGridViewTextBoxColumn11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.DataGridViewReportList, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.bsReportList, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -163,7 +151,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewReportGroupList.Cached = False
             Me.DataGridViewReportGroupList.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
             Me.DataGridViewReportGroupList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DataGridViewReportGroupList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ActiveDataGridViewCheckBoxColumn, Me.BranchIdNoDataGridViewTextBoxColumn, Me.DatabaseNameDataGridViewTextBoxColumn, Me.DateCreatedDataGridViewTextBoxColumn, Me.IdNoDataGridViewTextBoxColumn, Me.PrintJobIdNoDataGridViewTextBoxColumn, Me.QueryFormDataGridViewTextBoxColumn, Me.QueryFormParametersDataGridViewTextBoxColumn, Me.QueryParametersDataGridViewTextBoxColumn, Me.ReportCodeDataGridViewTextBoxColumn, Me.ReportFileNameDataGridViewTextBoxColumn, Me.ReportGroupIdNoDataGridViewTextBoxColumn, Me.ReportNameDataGridViewTextBoxColumn, Me.ReportNameAraDataGridViewTextBoxColumn, Me.ReportTitleDataGridViewTextBoxColumn, Me.ReportTitleAraDataGridViewTextBoxColumn})
+            Me.DataGridViewReportGroupList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdNoDataGridViewTextBoxColumn, Me.DataGridViewTextBoxColumn9, Me.DataGridViewTextBoxColumn10, Me.DataGridViewTextBoxColumn11})
             Me.DataGridViewReportGroupList.DataFilter = Nothing
             Me.DataGridViewReportGroupList.DataSource = Me.bsReportGroupList
             DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -209,43 +197,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'bsReportGroupList
             '
-            Me.bsReportGroupList.DataSource = Me.bsReportList
-            '
-            'ActiveDataGridViewCheckBoxColumn
-            '
-            Me.ActiveDataGridViewCheckBoxColumn.DataPropertyName = "Active"
-            Me.ActiveDataGridViewCheckBoxColumn.HeaderText = "Active"
-            Me.ActiveDataGridViewCheckBoxColumn.MinimumWidth = 6
-            Me.ActiveDataGridViewCheckBoxColumn.Name = "ActiveDataGridViewCheckBoxColumn"
-            Me.ActiveDataGridViewCheckBoxColumn.ReadOnly = True
-            Me.ActiveDataGridViewCheckBoxColumn.Width = 125
-            '
-            'BranchIdNoDataGridViewTextBoxColumn
-            '
-            Me.BranchIdNoDataGridViewTextBoxColumn.DataPropertyName = "BranchIdNo"
-            Me.BranchIdNoDataGridViewTextBoxColumn.HeaderText = "BranchIdNo"
-            Me.BranchIdNoDataGridViewTextBoxColumn.MinimumWidth = 6
-            Me.BranchIdNoDataGridViewTextBoxColumn.Name = "BranchIdNoDataGridViewTextBoxColumn"
-            Me.BranchIdNoDataGridViewTextBoxColumn.ReadOnly = True
-            Me.BranchIdNoDataGridViewTextBoxColumn.Width = 125
-            '
-            'DatabaseNameDataGridViewTextBoxColumn
-            '
-            Me.DatabaseNameDataGridViewTextBoxColumn.DataPropertyName = "DatabaseName"
-            Me.DatabaseNameDataGridViewTextBoxColumn.HeaderText = "DatabaseName"
-            Me.DatabaseNameDataGridViewTextBoxColumn.MinimumWidth = 6
-            Me.DatabaseNameDataGridViewTextBoxColumn.Name = "DatabaseNameDataGridViewTextBoxColumn"
-            Me.DatabaseNameDataGridViewTextBoxColumn.ReadOnly = True
-            Me.DatabaseNameDataGridViewTextBoxColumn.Width = 125
-            '
-            'DateCreatedDataGridViewTextBoxColumn
-            '
-            Me.DateCreatedDataGridViewTextBoxColumn.DataPropertyName = "DateCreated"
-            Me.DateCreatedDataGridViewTextBoxColumn.HeaderText = "DateCreated"
-            Me.DateCreatedDataGridViewTextBoxColumn.MinimumWidth = 6
-            Me.DateCreatedDataGridViewTextBoxColumn.Name = "DateCreatedDataGridViewTextBoxColumn"
-            Me.DateCreatedDataGridViewTextBoxColumn.ReadOnly = True
-            Me.DateCreatedDataGridViewTextBoxColumn.Width = 125
+            Me.bsReportGroupList.DataSource = GetType(AATM.Common.PresentationLayer.Models.ReportGroupModel)
             '
             'IdNoDataGridViewTextBoxColumn
             '
@@ -254,106 +206,37 @@ Namespace PresentationLayer.Views.Forms
             Me.IdNoDataGridViewTextBoxColumn.MinimumWidth = 6
             Me.IdNoDataGridViewTextBoxColumn.Name = "IdNoDataGridViewTextBoxColumn"
             Me.IdNoDataGridViewTextBoxColumn.ReadOnly = True
+            Me.IdNoDataGridViewTextBoxColumn.Visible = False
             Me.IdNoDataGridViewTextBoxColumn.Width = 125
             '
-            'PrintJobIdNoDataGridViewTextBoxColumn
+            'DataGridViewTextBoxColumn9
             '
-            Me.PrintJobIdNoDataGridViewTextBoxColumn.DataPropertyName = "PrintJobIdNo"
-            Me.PrintJobIdNoDataGridViewTextBoxColumn.HeaderText = "PrintJobIdNo"
-            Me.PrintJobIdNoDataGridViewTextBoxColumn.MinimumWidth = 6
-            Me.PrintJobIdNoDataGridViewTextBoxColumn.Name = "PrintJobIdNoDataGridViewTextBoxColumn"
-            Me.PrintJobIdNoDataGridViewTextBoxColumn.ReadOnly = True
-            Me.PrintJobIdNoDataGridViewTextBoxColumn.Width = 125
+            Me.DataGridViewTextBoxColumn9.DataPropertyName = "ReportGroupCode"
+            Me.DataGridViewTextBoxColumn9.HeaderText = "ReportGroupCode"
+            Me.DataGridViewTextBoxColumn9.MinimumWidth = 6
+            Me.DataGridViewTextBoxColumn9.Name = "DataGridViewTextBoxColumn9"
+            Me.DataGridViewTextBoxColumn9.ReadOnly = True
+            Me.DataGridViewTextBoxColumn9.Visible = False
+            Me.DataGridViewTextBoxColumn9.Width = 125
             '
-            'QueryFormDataGridViewTextBoxColumn
+            'DataGridViewTextBoxColumn10
             '
-            Me.QueryFormDataGridViewTextBoxColumn.DataPropertyName = "QueryForm"
-            Me.QueryFormDataGridViewTextBoxColumn.HeaderText = "QueryForm"
-            Me.QueryFormDataGridViewTextBoxColumn.MinimumWidth = 6
-            Me.QueryFormDataGridViewTextBoxColumn.Name = "QueryFormDataGridViewTextBoxColumn"
-            Me.QueryFormDataGridViewTextBoxColumn.ReadOnly = True
-            Me.QueryFormDataGridViewTextBoxColumn.Width = 125
+            Me.DataGridViewTextBoxColumn10.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+            Me.DataGridViewTextBoxColumn10.DataPropertyName = "ReportGroupName"
+            Me.DataGridViewTextBoxColumn10.HeaderText = "ReportGroupName"
+            Me.DataGridViewTextBoxColumn10.MinimumWidth = 6
+            Me.DataGridViewTextBoxColumn10.Name = "DataGridViewTextBoxColumn10"
+            Me.DataGridViewTextBoxColumn10.ReadOnly = True
             '
-            'QueryFormParametersDataGridViewTextBoxColumn
+            'DataGridViewTextBoxColumn11
             '
-            Me.QueryFormParametersDataGridViewTextBoxColumn.DataPropertyName = "QueryFormParameters"
-            Me.QueryFormParametersDataGridViewTextBoxColumn.HeaderText = "QueryFormParameters"
-            Me.QueryFormParametersDataGridViewTextBoxColumn.MinimumWidth = 6
-            Me.QueryFormParametersDataGridViewTextBoxColumn.Name = "QueryFormParametersDataGridViewTextBoxColumn"
-            Me.QueryFormParametersDataGridViewTextBoxColumn.ReadOnly = True
-            Me.QueryFormParametersDataGridViewTextBoxColumn.Width = 125
-            '
-            'QueryParametersDataGridViewTextBoxColumn
-            '
-            Me.QueryParametersDataGridViewTextBoxColumn.DataPropertyName = "QueryParameters"
-            Me.QueryParametersDataGridViewTextBoxColumn.HeaderText = "QueryParameters"
-            Me.QueryParametersDataGridViewTextBoxColumn.MinimumWidth = 6
-            Me.QueryParametersDataGridViewTextBoxColumn.Name = "QueryParametersDataGridViewTextBoxColumn"
-            Me.QueryParametersDataGridViewTextBoxColumn.ReadOnly = True
-            Me.QueryParametersDataGridViewTextBoxColumn.Width = 125
-            '
-            'ReportCodeDataGridViewTextBoxColumn
-            '
-            Me.ReportCodeDataGridViewTextBoxColumn.DataPropertyName = "ReportCode"
-            Me.ReportCodeDataGridViewTextBoxColumn.HeaderText = "ReportCode"
-            Me.ReportCodeDataGridViewTextBoxColumn.MinimumWidth = 6
-            Me.ReportCodeDataGridViewTextBoxColumn.Name = "ReportCodeDataGridViewTextBoxColumn"
-            Me.ReportCodeDataGridViewTextBoxColumn.ReadOnly = True
-            Me.ReportCodeDataGridViewTextBoxColumn.Width = 125
-            '
-            'ReportFileNameDataGridViewTextBoxColumn
-            '
-            Me.ReportFileNameDataGridViewTextBoxColumn.DataPropertyName = "ReportFileName"
-            Me.ReportFileNameDataGridViewTextBoxColumn.HeaderText = "ReportFileName"
-            Me.ReportFileNameDataGridViewTextBoxColumn.MinimumWidth = 6
-            Me.ReportFileNameDataGridViewTextBoxColumn.Name = "ReportFileNameDataGridViewTextBoxColumn"
-            Me.ReportFileNameDataGridViewTextBoxColumn.ReadOnly = True
-            Me.ReportFileNameDataGridViewTextBoxColumn.Width = 125
-            '
-            'ReportGroupIdNoDataGridViewTextBoxColumn
-            '
-            Me.ReportGroupIdNoDataGridViewTextBoxColumn.DataPropertyName = "ReportGroupIdNo"
-            Me.ReportGroupIdNoDataGridViewTextBoxColumn.HeaderText = "ReportGroupIdNo"
-            Me.ReportGroupIdNoDataGridViewTextBoxColumn.MinimumWidth = 6
-            Me.ReportGroupIdNoDataGridViewTextBoxColumn.Name = "ReportGroupIdNoDataGridViewTextBoxColumn"
-            Me.ReportGroupIdNoDataGridViewTextBoxColumn.ReadOnly = True
-            Me.ReportGroupIdNoDataGridViewTextBoxColumn.Width = 125
-            '
-            'ReportNameDataGridViewTextBoxColumn
-            '
-            Me.ReportNameDataGridViewTextBoxColumn.DataPropertyName = "ReportName"
-            Me.ReportNameDataGridViewTextBoxColumn.HeaderText = "ReportName"
-            Me.ReportNameDataGridViewTextBoxColumn.MinimumWidth = 6
-            Me.ReportNameDataGridViewTextBoxColumn.Name = "ReportNameDataGridViewTextBoxColumn"
-            Me.ReportNameDataGridViewTextBoxColumn.ReadOnly = True
-            Me.ReportNameDataGridViewTextBoxColumn.Width = 125
-            '
-            'ReportNameAraDataGridViewTextBoxColumn
-            '
-            Me.ReportNameAraDataGridViewTextBoxColumn.DataPropertyName = "ReportNameAra"
-            Me.ReportNameAraDataGridViewTextBoxColumn.HeaderText = "ReportNameAra"
-            Me.ReportNameAraDataGridViewTextBoxColumn.MinimumWidth = 6
-            Me.ReportNameAraDataGridViewTextBoxColumn.Name = "ReportNameAraDataGridViewTextBoxColumn"
-            Me.ReportNameAraDataGridViewTextBoxColumn.ReadOnly = True
-            Me.ReportNameAraDataGridViewTextBoxColumn.Width = 125
-            '
-            'ReportTitleDataGridViewTextBoxColumn
-            '
-            Me.ReportTitleDataGridViewTextBoxColumn.DataPropertyName = "ReportTitle"
-            Me.ReportTitleDataGridViewTextBoxColumn.HeaderText = "ReportTitle"
-            Me.ReportTitleDataGridViewTextBoxColumn.MinimumWidth = 6
-            Me.ReportTitleDataGridViewTextBoxColumn.Name = "ReportTitleDataGridViewTextBoxColumn"
-            Me.ReportTitleDataGridViewTextBoxColumn.ReadOnly = True
-            Me.ReportTitleDataGridViewTextBoxColumn.Width = 125
-            '
-            'ReportTitleAraDataGridViewTextBoxColumn
-            '
-            Me.ReportTitleAraDataGridViewTextBoxColumn.DataPropertyName = "ReportTitleAra"
-            Me.ReportTitleAraDataGridViewTextBoxColumn.HeaderText = "ReportTitleAra"
-            Me.ReportTitleAraDataGridViewTextBoxColumn.MinimumWidth = 6
-            Me.ReportTitleAraDataGridViewTextBoxColumn.Name = "ReportTitleAraDataGridViewTextBoxColumn"
-            Me.ReportTitleAraDataGridViewTextBoxColumn.ReadOnly = True
-            Me.ReportTitleAraDataGridViewTextBoxColumn.Width = 125
+            Me.DataGridViewTextBoxColumn11.DataPropertyName = "ReportGroupNameAra"
+            Me.DataGridViewTextBoxColumn11.HeaderText = "ReportGroupNameAra"
+            Me.DataGridViewTextBoxColumn11.MinimumWidth = 6
+            Me.DataGridViewTextBoxColumn11.Name = "DataGridViewTextBoxColumn11"
+            Me.DataGridViewTextBoxColumn11.ReadOnly = True
+            Me.DataGridViewTextBoxColumn11.Visible = False
+            Me.DataGridViewTextBoxColumn11.Width = 125
             '
             'ReportSelectorForm
             '
@@ -406,21 +289,9 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ReportGroupCodeDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents ReportGroupNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents ReportGroupNameAraDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents ActiveDataGridViewCheckBoxColumn As DataGridViewCheckBoxColumn
-        Friend WithEvents BranchIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents DatabaseNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents DateCreatedDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents PrintJobIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents QueryFormDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents QueryFormParametersDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents QueryParametersDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents ReportCodeDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents ReportFileNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents ReportGroupIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents ReportNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents ReportNameAraDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents ReportTitleDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents ReportTitleAraDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents DataGridViewTextBoxColumn9 As DataGridViewTextBoxColumn
+        Friend WithEvents DataGridViewTextBoxColumn10 As DataGridViewTextBoxColumn
+        Friend WithEvents DataGridViewTextBoxColumn11 As DataGridViewTextBoxColumn
     End Class
 End Namespace
