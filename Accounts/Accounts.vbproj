@@ -2877,6 +2877,7 @@
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PurchaseOrderModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.TransactionNotesModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Views.SalesDepositView.datasource" />
+    <None Include="My Project\DataSources\AATM.Common.PresentationLayer.Models.ReportGroupModel.datasource" />
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <CustomToolNamespace>My</CustomToolNamespace>

@@ -35,7 +35,9 @@ Namespace PresentationLayer.Presenters
 
         Protected Overrides Sub CreateDataSources()
             Dim reportList As List(Of ReportModel) = Service.GetListParametrized(Of ReportModel)(_reportGroup)
+            Dim reportGroupList As List(Of ReportGroupModel) = Service.GetList(Of ReportGroupModel)
             GlobalVariables.Mapper.Map(reportList, View.ReportList)
+            GlobalVariables.Mapper.Map(reportGroupList, View.ReportGroupList)
         End Sub
 
         Public Overrides Sub GoPrintRecord()

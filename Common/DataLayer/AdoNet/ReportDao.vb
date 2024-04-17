@@ -1,4 +1,5 @@
-﻿Imports AATM.Common.BusinessLayer
+﻿Imports System.Web.UI.WebControls
+Imports AATM.Common.BusinessLayer
 Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
@@ -10,7 +11,7 @@ Namespace DataLayer.AdoNet
 
     Public Class ReportDao
         Inherits CommonDao
-        Implements IDao(Of Report), IDaoListParametrized(Of Report)
+        Implements IDao(Of Report), IDaoListParametrized(Of Report), IDaoList(Of ReportGroup)
 
         Private ReadOnly _db As New Db()
 
@@ -128,10 +129,30 @@ Namespace DataLayer.AdoNet
             Return _db.Read(sql, MakeList, params).ToList()
         End Function
 
+        Public Function GetList(Optional sortExpression As String = Nothing) As List(Of ReportGroup) Implements IDaoList(Of ReportGroup).GetList
+            Dim sql As String
+            If sortExpression Is Nothing Or sortExpression = "" Then
+                sql = " SELECT IdNo, ReportGroupName, ReportGroupCode, ReportGroupNameAra" &
+                      " FROM [ReportGroup] order by ReportGroupName"
+                Return _db.Read(sql, MakeList2).ToList()
+            Else
+                sql = " SELECT IdNo, ReportGroupName, ReportGroupCode, ReportGroupNameAra" &
+                      " FROM [ReportGroup] order by " & sortExpression
+                Return _db.Read(sql, MakeList2).ToList()
+            End If
+            Return _db.Read(sql, MakeList2).ToList()
+        End Function
+
         Private Shared ReadOnly MakeList As Func(Of IDataReader, Report) = Function(reader) New Report() With {
             .ReportName = Extensions.AsString(reader("ReportName")),
             .IdNo = Extensions.AsId(Of Int16)(reader("IdNo"))
         }
+
+        Private Shared ReadOnly MakeList2 As Func(Of IDataReader, ReportGroup) = Function(reader) New ReportGroup() With {
+            .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
+            .ReportGroupCode = Extensions.AsString(reader("ReportGroupCode")),
+            .ReportGroupName = Extensions.AsString(reader("ReportGroupName")),
+            .ReportGroupNameAra = Extensions.AsString(reader("ReportGroupNameAra"))}
 
     End Class
 
