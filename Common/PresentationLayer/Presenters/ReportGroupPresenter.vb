@@ -1,6 +1,12 @@
-﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.Accounts.ServiceLayer.ActionService
-Imports AATM.Common.PresentationLayer.Presenters
+﻿Imports System.Globalization
+Imports AATM.Common.BusinessLayer
+Imports AATM.Common.PresentationLayer.Models
+Imports AATM.Common.PresentationLayer.Views.Interfaces
+Imports AATM.Common.ServiceLayer
+Imports AATM.Libraries
+Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.PresentationLayer.Forms
+Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Presenters
 
@@ -9,7 +15,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IReportGroupView)
             MyBase.New(view)
-            Service = New AccountsService("ReportGroup")
+            Service = New CommonService("ReportGroup")
             TableName = "ReportGroup"
             WithTreeView = False
             SortOrderKey = "ReportGroupName"

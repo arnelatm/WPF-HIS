@@ -1,5 +1,4 @@
 ﻿Imports AATM.Common.PresentationLayer.Models
-Imports AATM.PresentationLayer.Models
 
 Namespace PresentationLayer.Models
 
@@ -11,6 +10,7 @@ Namespace PresentationLayer.Models
         Inherits ReportModel
 
         Public Property ReportList As List(Of ReportModel)
+        Public Property ReportGroupList As List(Of ReportGroupModel)
 
     End Class
 
