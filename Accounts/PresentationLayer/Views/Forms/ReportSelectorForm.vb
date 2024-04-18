@@ -120,10 +120,14 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub DataGridViewReportGroupList_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewReportGroupList.CellClick
-            ReportGroupIdNo = DataGridViewReportGroupList.Rows(e.RowIndex).Cells("dgvReportGroupIdNo").Value
-            RaiseEvent ReportGroupDoubleClickEvent(ReportGroupIdNo)
-            '.ResetBindings(True)
-            BindReportList()
+            If e.RowIndex <= 0 Then
+                ' do nothing
+            Else
+                ReportGroupIdNo = DataGridViewReportGroupList.Rows(e.RowIndex).Cells("dgvReportGroupIdNo").Value
+                RaiseEvent ReportGroupDoubleClickEvent(ReportGroupIdNo)
+                BindReportList()
+            End If
+
         End Sub
 
     End Class
