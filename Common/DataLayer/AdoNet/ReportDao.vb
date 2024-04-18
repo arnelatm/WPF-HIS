@@ -137,7 +137,7 @@ Namespace DataLayer.AdoNet
                     sql = " SELECT IdNo, ReportGroupName, ReportGroupCode, ReportGroupNameAra" &
                       " FROM ReportGroup order by ReportGroupName"
                 Else
-                    sql = " SELECT IdNo, ReportGroupName, ReportGroupCode, ReportGroupNameAra" &
+                    sql = " SELECT Distinct IdNo, ReportGroupName, ReportGroupCode, ReportGroupNameAra" &
                           " FROM ReportGroup_View where SecuritygroupIdNo = " & GlobalVariables.SecurityGroupIdNo.ToString() & " or UserIdNo = " & GlobalVariables.UserIdNo.ToString() + " order by ReportGroupName "
                 End If
 
@@ -147,7 +147,7 @@ Namespace DataLayer.AdoNet
                     sql = " SELECT IdNo, ReportGroupName, ReportGroupCode, ReportGroupNameAra" &
                       " FROM ReportGroup order by " & sortExpression
                 Else
-                    sql = " SELECT IdNo, ReportGroupName, ReportGroupCode, ReportGroupNameAra" &
+                    sql = " SELECT Distinct IdNo, ReportGroupName, ReportGroupCode, ReportGroupNameAra" &
                       " FROM ReportGroup_View  " & GlobalVariables.SecurityGroupIdNo.ToString() & " or UserIdNo = " & GlobalVariables.UserIdNo.ToString() & " order by " & sortExpression
                 End If
 
