@@ -1069,7 +1069,7 @@ Namespace PresentationLayer.Views.Forms
         '    RunForm(Of ReportSelectorForm, ReportSelectorPresenter(Of ReportSelectorModel), String)($"IGLAB")
         'End Sub
 
-        Private Sub SalesReportsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSalesReports.Click
+        Private Sub SalesReportsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemOtherReports.Click
             RunForm(Of ReportSelectorForm, ReportSelectorPresenter(Of ReportSelectorModel), String)($"IGSALES")
         End Sub
 
