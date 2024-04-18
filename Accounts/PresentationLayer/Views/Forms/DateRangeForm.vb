@@ -95,6 +95,7 @@ Namespace Accounts.PresentationLayer.Views.Forms
                 cboContactIdNo.Visible = True
                 Height = 240
             End If
+            RaiseEvent FormLoaded()
         End Sub
 
         Private Sub CLabel2_Click(sender As Object, e As EventArgs) Handles CLabel2.Click

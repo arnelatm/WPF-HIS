@@ -662,6 +662,10 @@
     <Build Include="dbo\Views\PayrollDate_View.sql" />
     <Build Include="dbo\Functions\generate_series.sql" />
     <Build Include="dbo\Tables\SupplierProduct.sql" />
+    <Build Include="dbo\Tables\SecurityReportAccess.sql" />
+    <Build Include="dbo\Tables\ReportGroup.sql" />
+    <Build Include="dbo\Views\SecurityReportAccess_View.sql" />
+    <Build Include="dbo\Views\EmployeeLeaveEarnedLatestApproval_View.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />
