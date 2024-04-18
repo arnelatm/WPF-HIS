@@ -1,18 +1,11 @@
 ﻿Imports AATM.Accounts.Accounts.PresentationLayer.Views.Forms
-Imports AATM.Accounts.BusinessLayer
-Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters.Views.Forms
-Imports AATM.Accounts.PresentationLayer.Views
-Imports AATM.Accounts.PresentationLayer.Views.Forms
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Common.ServiceLayer
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
-Imports System.Globalization
 Imports System.Reflection
 
 Namespace PresentationLayer.Presenters
@@ -67,6 +60,7 @@ Namespace PresentationLayer.Presenters
             Dim queryForm As String = report.QueryForm
             report.ReportFileName = IIf(Strings.Right(report.ReportFileName, 4).ToLower() = $".rpt", report.ReportFileName, report.ReportFileName + ".rpt")
             If queryForm Is Nothing Then
+                MessageBox.Show("Missing QueryForm Parameter on Report")
                 'Dim cForm = New ReportFormIGroup(report.ReportFileName + ".rpt", CultureInfo.CurrentCulture, If(parameters.Count() = 0, Nothing, parameters))
                 'cForm.Show()
             Else

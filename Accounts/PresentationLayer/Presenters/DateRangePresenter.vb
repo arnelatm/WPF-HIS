@@ -92,9 +92,9 @@ Public Class DateRangePresenter(Of TM As New)
             End If
             reportArgs.DataBaseConnectionName = _reportModel.DatabaseName
             Dim p As New PrintReportPresenter(Of AccountModel)
-                p.ViewReport(_reportModel.ReportFileName, reportArgs, False)
-            End If
-            CultureInfo.CurrentCulture = curCulture
+            p.ViewReport(_reportModel.ReportFileName, reportArgs, False)
+        End If
+        CultureInfo.CurrentCulture = curCulture
 
     End Sub
 
@@ -187,6 +187,8 @@ Public Class ContactDateRangePresenter(Of TM As New)
             Service.SetConnectionString(_reportModel.DatabaseName)
             If contactName = "InsuranceDetails" Then
                 MakeVarDataSources({New Object() {"InsuranceDetails", "ContactDataSource", "InsuranceId,NameEnglish", Nothing}})
+            ElseIf contactName = "Employee" Then
+                MakeVarDataSources({New Object() {"Employee", "ContactDataSource", "IdNo,EmployeeName,EmployeeCode", Nothing}})
             Else
                 Debugger.Break()
                 MessageBox.Show("Missing ContactName <" & contactName & ">")
@@ -195,6 +197,10 @@ Public Class ContactDateRangePresenter(Of TM As New)
         Else
             If contactName = "Customer" Then
                 MakeVarDataSources({New Object() {"Customer", "ContactDataSource", Nothing, Nothing}})
+            ElseIf contactName = "Supplier" Then
+                MakeVarDataSources({New Object() {"Supplier", "ContactDataSource", Nothing, Nothing}})
+            ElseIf contactName = "Employee" Then
+                MakeVarDataSources({New Object() {"Employee", "ContactDataSource", Nothing, Nothing}})
             End If
         End If
     End Sub
@@ -227,6 +233,18 @@ Friend Module DateRangeModule
                 value = GlobalFunctions.GregorianDateSerial(now.Year, 1, 1).AddYears(-1)
             Case = "NY"
                 value = GlobalFunctions.GregorianDateSerial(now.Year, 1, 1).AddYears(1)
+            Case "PQ"
+                value = GlobalFunctions.GregorianDateSerial(now.Year, now.Month, now.Day).AddMonths(-3)
+            Case "CQ"
+                value = GlobalFunctions.GregorianDateSerial(now.Year, now.Month, now.Day)
+            Case "NQ"
+                value = GlobalFunctions.GregorianDateSerial(now.Year, now.Month, now.Day).AddMonths(3)
+            Case "PS"
+                value = GlobalFunctions.GregorianDateSerial(now.Year, now.Month, now.Day).AddMonths(-6)
+            Case "CS"
+                value = GlobalFunctions.GregorianDateSerial(now.Year, now.Month, now.Day)
+            Case "NS"
+                value = GlobalFunctions.GregorianDateSerial(now.Year, now.Month, now.Day).AddMonths(6)
             Case Else
                 value = now
         End Select
@@ -239,6 +257,9 @@ Friend Module DateRangeModule
         Dim dStart As Date = GetCodedDate(defStart)
         Dim dEnd As Date = GetCodedDate(defEnd)
         Select Case period
+            Case "D"
+                begValue = GregorianDateSerial(Year(dStart), Month(dStart), dStart.Day)
+                endValue = GregorianDateSerial(Year(dEnd), Month(dEnd), dEnd.Day)
             Case "M"
                 begValue = GregorianDateSerial(Year(dStart), Month(dStart), 1)
                 endValue = AsMonthEndDate(dEnd)
@@ -246,9 +267,11 @@ Friend Module DateRangeModule
                 begValue = GregorianDateSerial(Year(dStart), 1, 1)
                 endValue = GregorianDateSerial(Year(dEnd), 12, 31)
             Case "Q"
-                Dim monthNumber As Int16 = Month(dEnd)
+                Dim monthNumber As Int16 = Month(dStart)
                 Dim quarter = IIf(monthNumber < 4, 1, IIf(monthNumber < 7, 2, IIf(monthNumber < 10, 3, 4)))
                 begValue = GregorianDateSerial(Year(dStart), quarter * 3 - 2, 1)
+                monthNumber = Month(dEnd)
+                quarter = IIf(monthNumber < 4, 1, IIf(monthNumber < 7, 2, IIf(monthNumber < 10, 3, 4)))
                 endValue = AsMonthEndDate(GregorianDateSerial(Year(dEnd), quarter * 3, 1))
             Case "S"
                 Dim monthNumber As Int16 = Month(dEnd)

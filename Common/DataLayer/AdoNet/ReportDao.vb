@@ -3,7 +3,9 @@ Imports AATM.Common.BusinessLayer
 Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
+Imports AATM.Libraries.GlobalFuncNSub
 Imports CrystalDecisions.Shared
+Imports Extensions = AATM.DataLayer.AdoNet.Extensions
 
 Namespace DataLayer.AdoNet
     ' Data access object for ReportSelector
@@ -60,7 +62,7 @@ Namespace DataLayer.AdoNet
             '        " (QueryForm,QueryFormParameters,QueryParameters,ReportCode,ReportFileName,ReportName,ReportNameAra,ReportTitle,ReportTitleAra) " &
             '        " VALUES (@QueryForm,@QueryFormParameters,@QueryParameters,@ReportCode,@ReportFileName,@ReportName,@ReportNameAra,@ReportTitle,@ReportTitleAra)"
             Dim sql As String =
-                    " INSERT INTO [PrintSetup] " &
+                    " INSERT INTO Report " &
                     " (Active,BranchIdNo,DatabaseName,PrintJobIdNo,QueryForm,QueryFormParameters,QueryParameters,ReportCode,ReportFileName,ReportGroupIdNo,ReportName,ReportNameAra,ReportTitle,ReportTitleAra) " &
                     " VALUES (@Active,@BranchIdNo,@DatabaseName,@PrintJobIdNo,@QueryForm,@QueryFormParameters,@QueryParameters,@ReportCode,@ReportFileName,@ReportGroupIdNo,@ReportName,@ReportNameAra,@ReportTitle,@ReportTitleAra)"
             Return _db.Insert(sql, Take(report))
@@ -131,12 +133,24 @@ Namespace DataLayer.AdoNet
         Public Function GetList(Optional sortExpression As String = Nothing) As List(Of ReportGroup) Implements IDaoList(Of ReportGroup).GetList
             Dim sql As String
             If sortExpression Is Nothing Or sortExpression = "" Then
-                sql = " SELECT IdNo, ReportGroupName, ReportGroupCode, ReportGroupNameAra" &
-                      " FROM [ReportGroup] order by ReportGroupName"
+                If UserIsASuperAdmin() Then
+                    sql = " SELECT IdNo, ReportGroupName, ReportGroupCode, ReportGroupNameAra" &
+                      " FROM ReportGroup order by ReportGroupName"
+                Else
+                    sql = " SELECT IdNo, ReportGroupName, ReportGroupCode, ReportGroupNameAra" &
+                          " FROM ReportGroup_View where SecuritygroupIdNo = " & GlobalVariables.SecurityGroupIdNo.ToString() & " or UserIdNo = " & GlobalVariables.UserIdNo.ToString() + " order by ReportGroupName "
+                End If
+
                 Return _db.Read(sql, MakeList2).ToList()
             Else
-                sql = " SELECT IdNo, ReportGroupName, ReportGroupCode, ReportGroupNameAra" &
-                      " FROM [ReportGroup] order by " & sortExpression
+                If UserIsASuperAdmin() Then
+                    sql = " SELECT IdNo, ReportGroupName, ReportGroupCode, ReportGroupNameAra" &
+                      " FROM ReportGroup order by " & sortExpression
+                Else
+                    sql = " SELECT IdNo, ReportGroupName, ReportGroupCode, ReportGroupNameAra" &
+                      " FROM ReportGroup_View  " & GlobalVariables.SecurityGroupIdNo.ToString() & " or UserIdNo = " & GlobalVariables.UserIdNo.ToString() & " order by " & sortExpression
+                End If
+
                 Return _db.Read(sql, MakeList2).ToList()
             End If
             Return _db.Read(sql, MakeList2).ToList()
