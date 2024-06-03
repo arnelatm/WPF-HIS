@@ -49,6 +49,8 @@ Namespace PresentationLayer.Presenters
             DtUpdateTable.Columns.Add("RevCostCenterIdNo", GetType(Int16))
             DtUpdateTable.Columns.Add("Sequence", GetType(Int16))
 
+            AddHandler view.AccountIdChanged, AddressOf OnPayeeIdNoChanged
+
         End Sub
 
         Protected Overrides Sub CreateDataSources()

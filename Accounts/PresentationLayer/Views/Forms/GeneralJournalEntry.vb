@@ -12,6 +12,7 @@ Namespace PresentationLayer.Views.Forms
         Private _footer As DgvFooter
         Private _journalItems As List(Of JournalItemView)
         Private ReadOnly _closingEntry As Boolean
+        Public Event AccountIdChanged() Implements IGeneralJournalView.AccountIdChanged
 
         Public Sub New(closingEntry As Boolean)
             ' This call is required by the designer.
@@ -198,6 +199,10 @@ Namespace PresentationLayer.Views.Forms
                 dgvRevCostCenterIdNo.DisplayMember = "Name"
                 dgvRevCostCenterIdNo.ValueMember = "idNo"
                 dgvRevCostCenterIdNo.DisplayStyleForCurrentCellOnly = True
+                dgvPayIdNo.DataSource = PayeeByCode
+                dgvPayIdNo.DisplayMember = "Name"
+                dgvPayIdNo.ValueMember = "idNo"
+                dgvPayIdNo.DisplayStyleForCurrentCellOnly = True
             End With
         End Sub
 
@@ -230,7 +235,7 @@ Namespace PresentationLayer.Views.Forms
                 If .CurrentRow IsNot Nothing Then
                     Select Case .CurrentCell.OwningColumn.Name.ToLower()
                         Case $"dgvaccountidno"
-                        'SendKeys.Send("{TAB}")
+                            RaiseEvent AccountIdChanged()
                         Case $"dgvdebit"
                             UpdateTotals()
                             SendKeys.Send("{TAB}")
@@ -261,7 +266,6 @@ Namespace PresentationLayer.Views.Forms
                 txtTotalCredits.Text = _footer.Value("dgvCredit")
             End If
         End Sub
-
 
 #End Region
 
