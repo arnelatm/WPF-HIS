@@ -58,11 +58,16 @@ Namespace PresentationLayer.Views.Forms
             Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpDateCreated = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
+            Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
+            Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.txtTotalCredits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtTotalDebits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
             Me.dgvDebit = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
             Me.dgvCredit = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
             Me.dgvRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+            Me.dgvPayIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
             Me.dgvNotes = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.SpecialAccount = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -75,11 +80,6 @@ Namespace PresentationLayer.Views.Forms
             Me.OriginalAmountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.PaidAmountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.PayeeTypeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.PayIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
-            Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.txtTotalCredits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.txtTotalDebits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floJournalHeader.SuspendLayout()
             Me.CFlowLayout1.SuspendLayout()
@@ -482,7 +482,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewJournalItems.BegFindValue = Nothing
             Me.DataGridViewJournalItems.Cached = False
             Me.DataGridViewJournalItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DataGridViewJournalItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvAccountIdNo, Me.dgvDebit, Me.dgvCredit, Me.dgvRevCostCenterIdNo, Me.dgvNotes, Me.dgvIdNo, Me.SpecialAccount, Me.AccountIdNoDataGridViewTextBoxColumn, Me.AccountNameDataGridViewTextBoxColumn, Me.CancelledDataGridViewCheckBoxColumn, Me.DiscountTakenDataGridViewTextBoxColumn, Me.JournalIdNoDataGridViewTextBoxColumn, Me.OpenInvoiceIdNoDataGridViewTextBoxColumn, Me.OriginalAmountDataGridViewTextBoxColumn, Me.PaidAmountDataGridViewTextBoxColumn, Me.PayeeTypeDataGridViewTextBoxColumn, Me.PayIdNoDataGridViewTextBoxColumn})
+            Me.DataGridViewJournalItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvAccountIdNo, Me.dgvDebit, Me.dgvCredit, Me.dgvRevCostCenterIdNo, Me.dgvPayIdNo, Me.dgvNotes, Me.dgvIdNo, Me.SpecialAccount, Me.AccountIdNoDataGridViewTextBoxColumn, Me.AccountNameDataGridViewTextBoxColumn, Me.CancelledDataGridViewCheckBoxColumn, Me.DiscountTakenDataGridViewTextBoxColumn, Me.JournalIdNoDataGridViewTextBoxColumn, Me.OpenInvoiceIdNoDataGridViewTextBoxColumn, Me.OriginalAmountDataGridViewTextBoxColumn, Me.PaidAmountDataGridViewTextBoxColumn, Me.PayeeTypeDataGridViewTextBoxColumn})
             Me.DataGridViewJournalItems.DataFilter = Nothing
             Me.DataGridViewJournalItems.DataSource = Me.bsJournalItems
             DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -520,6 +520,70 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewJournalItems.SequenceFieldName = "Sequence"
             Me.DataGridViewJournalItems.ShowFooter = False
             Me.DataGridViewJournalItems.Translatable = True
+            '
+            'bsJournalItems
+            '
+            Me.bsJournalItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.JournalItemModel)
+            '
+            'CFlowLayout4
+            '
+            resources.ApplyResources(Me.CFlowLayout4, "CFlowLayout4")
+            Me.CFlowLayout4.BackColor = System.Drawing.Color.Transparent
+            Me.CFlowLayout4.Controls.Add(Me.floJournalHeader)
+            Me.CFlowLayout4.Controls.Add(Me.DataGridViewJournalItems)
+            Me.CFlowLayout4.Controls.Add(Me.txtTotalCredits)
+            Me.CFlowLayout4.Controls.Add(Me.txtTotalDebits)
+            Me.CFlowLayout4.Name = "CFlowLayout4"
+            '
+            'txtTotalCredits
+            '
+            Me.txtTotalCredits.BackColor = System.Drawing.Color.White
+            Me.txtTotalCredits.BegFindValue = Nothing
+            Me.txtTotalCredits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtTotalCredits.ComputedValue = False
+            Me.txtTotalCredits.CustomFormat = Nothing
+            Me.txtTotalCredits.DataBoundControl = True
+            Me.txtTotalCredits.EditingMode = True
+            Me.txtTotalCredits.EndFindValue = Nothing
+            Me.txtTotalCredits.FieldDescription = Nothing
+            Me.txtTotalCredits.FieldName = Nothing
+            Me.txtTotalCredits.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtTotalCredits.FindEnabled = False
+            resources.ApplyResources(Me.txtTotalCredits, "txtTotalCredits")
+            Me.txtTotalCredits.ForeColor = System.Drawing.Color.Black
+            Me.txtTotalCredits.LinkedLabel = Nothing
+            Me.txtTotalCredits.MaximumValue = Nothing
+            Me.txtTotalCredits.MinimumValue = Nothing
+            Me.txtTotalCredits.Name = "txtTotalCredits"
+            Me.txtTotalCredits.OldValue = Nothing
+            Me.txtTotalCredits.OverrideMaxLength = 0
+            Me.txtTotalCredits.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtTotalCredits.Translatable = False
+            '
+            'txtTotalDebits
+            '
+            Me.txtTotalDebits.BackColor = System.Drawing.Color.White
+            Me.txtTotalDebits.BegFindValue = Nothing
+            Me.txtTotalDebits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtTotalDebits.ComputedValue = False
+            Me.txtTotalDebits.CustomFormat = Nothing
+            Me.txtTotalDebits.DataBoundControl = True
+            Me.txtTotalDebits.EditingMode = True
+            Me.txtTotalDebits.EndFindValue = Nothing
+            Me.txtTotalDebits.FieldDescription = Nothing
+            Me.txtTotalDebits.FieldName = Nothing
+            Me.txtTotalDebits.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtTotalDebits.FindEnabled = False
+            resources.ApplyResources(Me.txtTotalDebits, "txtTotalDebits")
+            Me.txtTotalDebits.ForeColor = System.Drawing.Color.Black
+            Me.txtTotalDebits.LinkedLabel = Nothing
+            Me.txtTotalDebits.MaximumValue = Nothing
+            Me.txtTotalDebits.MinimumValue = Nothing
+            Me.txtTotalDebits.Name = "txtTotalDebits"
+            Me.txtTotalDebits.OldValue = Nothing
+            Me.txtTotalDebits.OverrideMaxLength = 0
+            Me.txtTotalDebits.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtTotalDebits.Translatable = False
             '
             'dgvSequence
             '
@@ -623,6 +687,19 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvRevCostCenterIdNo.SuggestCharCount = 0
             Me.dgvRevCostCenterIdNo.Translatable = False
             '
+            'dgvPayIdNo
+            '
+            Me.dgvPayIdNo.AutoComplete = False
+            Me.dgvPayIdNo.DataPropertyName = "PayIdNo"
+            Me.dgvPayIdNo.EditingMode = False
+            resources.ApplyResources(Me.dgvPayIdNo, "dgvPayIdNo")
+            Me.dgvPayIdNo.Name = "dgvPayIdNo"
+            Me.dgvPayIdNo.ReadOnly = True
+            Me.dgvPayIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvPayIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvPayIdNo.SuggestCharCount = 0
+            Me.dgvPayIdNo.Translatable = False
+            '
             'dgvNotes
             '
             Me.dgvNotes.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
@@ -722,77 +799,6 @@ Namespace PresentationLayer.Views.Forms
             Me.PayeeTypeDataGridViewTextBoxColumn.Name = "PayeeTypeDataGridViewTextBoxColumn"
             Me.PayeeTypeDataGridViewTextBoxColumn.ReadOnly = True
             '
-            'PayIdNoDataGridViewTextBoxColumn
-            '
-            Me.PayIdNoDataGridViewTextBoxColumn.DataPropertyName = "PayIdNo"
-            resources.ApplyResources(Me.PayIdNoDataGridViewTextBoxColumn, "PayIdNoDataGridViewTextBoxColumn")
-            Me.PayIdNoDataGridViewTextBoxColumn.Name = "PayIdNoDataGridViewTextBoxColumn"
-            Me.PayIdNoDataGridViewTextBoxColumn.ReadOnly = True
-            '
-            'bsJournalItems
-            '
-            Me.bsJournalItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.JournalItemModel)
-            '
-            'CFlowLayout4
-            '
-            Me.CFlowLayout4.BackColor = System.Drawing.Color.Transparent
-            Me.CFlowLayout4.Controls.Add(Me.floJournalHeader)
-            Me.CFlowLayout4.Controls.Add(Me.DataGridViewJournalItems)
-            Me.CFlowLayout4.Controls.Add(Me.txtTotalCredits)
-            Me.CFlowLayout4.Controls.Add(Me.txtTotalDebits)
-            resources.ApplyResources(Me.CFlowLayout4, "CFlowLayout4")
-            Me.CFlowLayout4.Name = "CFlowLayout4"
-            '
-            'txtTotalCredits
-            '
-            Me.txtTotalCredits.BackColor = System.Drawing.Color.White
-            Me.txtTotalCredits.BegFindValue = Nothing
-            Me.txtTotalCredits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtTotalCredits.ComputedValue = False
-            Me.txtTotalCredits.CustomFormat = Nothing
-            Me.txtTotalCredits.DataBoundControl = True
-            Me.txtTotalCredits.EditingMode = True
-            Me.txtTotalCredits.EndFindValue = Nothing
-            Me.txtTotalCredits.FieldDescription = Nothing
-            Me.txtTotalCredits.FieldName = Nothing
-            Me.txtTotalCredits.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtTotalCredits.FindEnabled = False
-            resources.ApplyResources(Me.txtTotalCredits, "txtTotalCredits")
-            Me.txtTotalCredits.ForeColor = System.Drawing.Color.Black
-            Me.txtTotalCredits.LinkedLabel = Nothing
-            Me.txtTotalCredits.MaximumValue = Nothing
-            Me.txtTotalCredits.MinimumValue = Nothing
-            Me.txtTotalCredits.Name = "txtTotalCredits"
-            Me.txtTotalCredits.OldValue = Nothing
-            Me.txtTotalCredits.OverrideMaxLength = 0
-            Me.txtTotalCredits.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtTotalCredits.Translatable = False
-            '
-            'txtTotalDebits
-            '
-            Me.txtTotalDebits.BackColor = System.Drawing.Color.White
-            Me.txtTotalDebits.BegFindValue = Nothing
-            Me.txtTotalDebits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtTotalDebits.ComputedValue = False
-            Me.txtTotalDebits.CustomFormat = Nothing
-            Me.txtTotalDebits.DataBoundControl = True
-            Me.txtTotalDebits.EditingMode = True
-            Me.txtTotalDebits.EndFindValue = Nothing
-            Me.txtTotalDebits.FieldDescription = Nothing
-            Me.txtTotalDebits.FieldName = Nothing
-            Me.txtTotalDebits.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtTotalDebits.FindEnabled = False
-            resources.ApplyResources(Me.txtTotalDebits, "txtTotalDebits")
-            Me.txtTotalDebits.ForeColor = System.Drawing.Color.Black
-            Me.txtTotalDebits.LinkedLabel = Nothing
-            Me.txtTotalDebits.MaximumValue = Nothing
-            Me.txtTotalDebits.MinimumValue = Nothing
-            Me.txtTotalDebits.Name = "txtTotalDebits"
-            Me.txtTotalDebits.OldValue = Nothing
-            Me.txtTotalDebits.OverrideMaxLength = 0
-            Me.txtTotalDebits.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtTotalDebits.Translatable = False
-            '
             'GeneralJournalEntry
             '
             resources.ApplyResources(Me, "$this")
@@ -847,6 +853,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents dgvDebit As CdgvMoneyColumn
         Friend WithEvents dgvCredit As CdgvMoneyColumn
         Friend WithEvents dgvRevCostCenterIdNo As CDgvComboBoxColumn
+        Friend WithEvents dgvPayIdNo As CDgvComboBoxColumn
         Friend WithEvents dgvNotes As CDgvTextColumn
         Friend WithEvents dgvIdNo As DataGridViewTextBoxColumn
         Friend WithEvents SpecialAccount As DataGridViewTextBoxColumn
@@ -859,6 +866,5 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents OriginalAmountDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents PaidAmountDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents PayeeTypeDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents PayIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     End Class
 End NameSpace
