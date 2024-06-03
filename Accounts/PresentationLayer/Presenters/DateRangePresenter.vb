@@ -31,16 +31,21 @@ Public Class DateRangePresenter(Of TM As New)
 
     Private Sub OnFormLoaded()
         Dim qParameters As String = _reportModel.QueryFormParameters
-        Dim lParameters As String() = qParameters.Split(","c)
-        Dim period As String
-        period = lParameters(0) ' D for daily, M for monthly, Y for yearly etc.
-        Dim defStart = lParameters(1) ' default start date
-        Dim defEnd = lParameters(2) ' default end date
+        Dim lParameters As String()
+        Dim period As String = Nothing
+        Dim defStart = Nothing ' default start date
+        Dim defEnd = Nothing  ' default end date
         Dim contactName As String
-        If lParameters.Count() = 4 Then
-            contactName = lParameters(3)
-        Else
-            contactName = ""
+        If qParameters IsNot Nothing Then
+            lParameters = qParameters.Split(","c)
+            period = lParameters(0) ' D for daily, M for monthly, Y for yearly etc.
+            defStart = lParameters(1) ' default start date
+            defEnd = lParameters(2) ' default end date
+            If lParameters.Count() = 4 Then
+                contactName = lParameters(3)
+            Else
+                contactName = ""
+            End If
         End If
         SetInitialDates(period, defStart, defEnd, View.BeginningDate, View.EndingDate)
     End Sub
