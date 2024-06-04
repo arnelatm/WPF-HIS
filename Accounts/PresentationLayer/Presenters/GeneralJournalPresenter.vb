@@ -53,6 +53,18 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
+        Private Sub OnPayeeIdNoChanged(accountIdNo As Integer)
+            Dim specialAccount As String
+            specialAccount = Service.GetFieldWithIdNo(accountIdNo, "Account", "SpecialAccount")
+            If specialAccount = EnumToCode(SpecialAccountSelection.AccountsPayable) Then
+                MakeVarDataSources({New Object() {"Payee_View", "PayeeByCode", "PayeeIdNo,PayeeName,PayeeCode", "PayeeType = 'S'"}})
+            ElseIf specialAccount = EnumToCode(SpecialAccountSelection.AccountsReceivable) Then
+                MakeVarDataSources({New Object() {"Payee_View", "PayeeByCode", "PayeeIdNo,PayeeName,PayeeCode", "PayeeType = 'C'"}})
+            ElseIf specialAccount = EnumToCode(SpecialAccountSelection.EmployeeLoan) Then
+                MakeVarDataSources({New Object() {"Payee_View", "PayeeByCode", "PayeeIdNo,PayeeName,PayeeCode", "PayeeType = 'E'"}})
+            End If
+        End Sub
+
         Protected Overrides Sub CreateDataSources()
             MakeVarDataSources({New Object() {"Account", "AccountsByCode", Nothing, "DetailAccount=1"},
             New Object() {"RevCostCenter", "RevCostCentersByCode", Nothing, Nothing},

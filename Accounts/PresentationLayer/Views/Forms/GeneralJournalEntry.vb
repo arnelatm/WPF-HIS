@@ -12,7 +12,7 @@ Namespace PresentationLayer.Views.Forms
         Private _footer As DgvFooter
         Private _journalItems As List(Of JournalItemView)
         Private ReadOnly _closingEntry As Boolean
-        Public Event AccountIdChanged() Implements IGeneralJournalView.AccountIdChanged
+        Public Event AccountIdChanged(accountIdNo As Int32) Implements IGeneralJournalView.AccountIdChanged
 
         Public Sub New(closingEntry As Boolean)
             ' This call is required by the designer.
@@ -235,7 +235,7 @@ Namespace PresentationLayer.Views.Forms
                 If .CurrentRow IsNot Nothing Then
                     Select Case .CurrentCell.OwningColumn.Name.ToLower()
                         Case $"dgvaccountidno"
-                            RaiseEvent AccountIdChanged()
+                            RaiseEvent AccountIdChanged(DataGridViewJournalItems.CurrentCell.Value)
                         Case $"dgvdebit"
                             UpdateTotals()
                             SendKeys.Send("{TAB}")
