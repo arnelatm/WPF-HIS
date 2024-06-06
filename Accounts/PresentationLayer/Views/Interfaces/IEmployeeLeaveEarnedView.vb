@@ -24,6 +24,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property UserHasHrManagerAccess As Boolean
         Event DateValuesChanged()
         Event LeaveIdNoChanged(itemIdNo As Short)
+        Event EmployeeIdNoChanged(itemIdNo As Short)
     End Interface
 
 End Namespace

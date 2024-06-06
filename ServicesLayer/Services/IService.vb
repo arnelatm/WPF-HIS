@@ -43,6 +43,9 @@ Namespace Services
         Function GetPrintJobIdNo(reportName As String) As Integer
         Function GetRecordByIdNo(Of TM As New)(idNo As Int32) As TM
         Function GetRecordCount(tableName As String, Optional filter As String = Nothing) As Integer
+        Function GetRecordCount(Of TS1)(tableName As String, fieldName1 As String, fieldValue1 As TS1, Optional Filter As String = Nothing) As Integer
+        Function GetRecordCount(Of TS1, TS2)(tableName As String, fieldName1 As String, fieldName2 As String, fieldValue1 As TS1, fieldValue2 As TS2, Optional Filter As String = Nothing) As Integer
+        Function GetRecordCount(Of TS1, TS2, TS3)(tableName As String, fieldName1 As String, fieldName2 As String, fieldName3 As String, fieldValue1 As TS1, fieldValue2 As TS2, fieldValue3 As TS3, Optional Filter As String = Nothing) As Integer
         Function GetRecordDateTimeStamp(idNo As Int32, tableName As String, Optional ByVal dateTimeStampField As String = "DateTimeStamp") As Object
         Function GetRecordField(tableName As String, returnFieldName As String) As Object
         Function GetRecordFieldsFiltered(tableName As String, fieldList As String, filter As String) As ExpandoObject

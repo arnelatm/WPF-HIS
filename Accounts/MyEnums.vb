@@ -366,8 +366,8 @@ Public Enum LeaveStatusSelection
     <EnumCode("")> NotSpecified
     <EnumCode("0")> Submitted
     <EnumCode("1")> Cancelled
-    <EnumCode("2")> SupervisorApproved
-    <EnumCode("3")> Disapproved
+    <EnumCode("2")> Disapproved
+    <EnumCode("3")> SupervisorApproved
     <EnumCode("4")> Approved
     <EnumCode("5")> Used
 End Enum

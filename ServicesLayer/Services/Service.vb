@@ -119,6 +119,22 @@ Namespace Services
             Return DataDao.GetField(Of TR, TS1, TS2, TS3)(searchValue1, searchValue2, searchValue3, tableName, searchFieldName1, searchFieldName2, searchFieldName3, returnFieldName, filter)
         End Function
 
+        Public Function GetRecordCount(tableName As String, Optional filter As String = Nothing) As Integer Implements IService.GetRecordCount
+            Return DataDao.GetRecordCount(tableName, filter)
+        End Function
+
+        Public Function GetRecordCount(Of TS1)(tableName As String, fieldName1 As String, fieldValue1 As TS1, Optional Filter As String = Nothing) As Integer Implements IService.GetRecordCount
+            Return DataDao.GetRecordCount(Of TS1)(tableName, fieldName1, fieldValue1, Filter)
+        End Function
+
+        Public Function GetRecordCount(Of TS1, TS2)(tableName As String, fieldName1 As String, fieldName2 As String, fieldValue1 As TS1, fieldValue2 As TS2, Optional filter As String = Nothing) As Integer Implements IService.GetRecordCount
+            Return DataDao.GetRecordCount(Of TS1)(tableName, fieldName1, fieldName2, fieldValue1, fieldValue2, filter)
+        End Function
+        Public Function GetRecordCount(Of TS1, TS2, TS3)(tableName As String, fieldName1 As String, fieldName2 As String, fieldName3 As String, fieldValue1 As TS1, fieldValue2 As TS2, fieldValue3 As TS3, Optional filter As String = Nothing) As Integer Implements IService.GetRecordCount
+            Return DataDao.GetRecordCount(Of TS1, TS2)(tableName, fieldName1, fieldName2, fieldName3, fieldValue1, fieldValue2, fieldValue3, filter)
+        End Function
+
+
         Public Function GetHLookup(lookupObj As LookupTable) As List(Of LookupTable.HLookupData)
             If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
                 Dim nameFieldArabic = lookupObj.NameField + "Ara"
@@ -575,10 +591,6 @@ Namespace Services
                 GlobalVariables.Mapper.Map(record, modelOfPresenter)
             End If
             Return modelOfPresenter
-        End Function
-
-        Public Function GetRecordCount(tableName As String, Optional filter As String = Nothing) As Integer Implements IService.GetRecordCount
-            Return DataDao.GetRecordCount(tableName, filter)
         End Function
 
         Public Function GetRecordDateTimeStamp(idNo As Int32, tableName As String, Optional ByVal dateTimeStampField As String = "DateTimeStamp") As Object Implements IService.GetRecordDateTimeStamp

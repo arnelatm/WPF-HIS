@@ -7,6 +7,7 @@ Public Class EmployeeLeaveEarnedEntry
 
     Private ReadOnly _nfi As NumberFormatInfo
     Public Event DateValuesChanged() Implements IEmployeeLeaveEarnedView.DateValuesChanged
+    Public Event EmployeeIdNoChanged(itemIdNo As Int16) Implements IEmployeeLeaveEarnedView.EmployeeIdNoChanged
     Public Event LeaveIdNoChanged(itemIdNo As Int16) Implements IEmployeeLeaveEarnedView.LeaveIdNoChanged
 
     Public Sub New()
@@ -186,9 +187,14 @@ Public Class EmployeeLeaveEarnedEntry
         RaiseEvent DateValuesChanged()
     End Sub
 
-    Private Sub cboLeaveidNo_ValueChanged(sender As Object, e As EventArgs) Handles cboEmployeeIdNo.Validated, cboLeaveIdNo.Validated
+    Private Sub cboEmployeeIdNo_ValueChanged(sender As Object, e As EventArgs) Handles cboEmployeeIdNo.Validated
+        RaiseEvent EmployeeIdNoChanged(EmployeeIdNo)
+    End Sub
+
+    Private Sub cboLeaveidNo_ValueChanged(sender As Object, e As EventArgs) Handles cboLeaveIdNo.Validated
         RaiseEvent LeaveIdNoChanged(LeaveIdNo)
     End Sub
+
 
     Private Sub OnInputsTurnedOn() Handles MyBase.InputsTurnedOn
         SetFirstControl()
