@@ -250,7 +250,7 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Public Sub OnEmployeeIdNoChanged(employeeIdNo As Int16)
+        Public Sub OnEmployeeIdNoChanged(employeeIdNo As Int32)
             If employeeIdNo <> 0 Then
                 View.StartDate = GetDefaultStartDate(employeeIdNo)
                 View.EndDate = GetDefaultEndDate()
@@ -258,7 +258,7 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Private Function GetDefaultStartDate(employeeIdNo As Short) As Date?
+        Private Function GetDefaultStartDate(employeeIdNo As Int32) As Date?
             Dim lastEarnedDate As Date?
             Dim startDate As Date?
             If View.StartDate Is Nothing Then
