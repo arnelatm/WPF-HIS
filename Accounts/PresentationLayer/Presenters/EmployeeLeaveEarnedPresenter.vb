@@ -1,13 +1,9 @@
 ﻿Imports System.Data.SqlTypes
-Imports System.Dynamic
-Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
-Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
-Imports Microsoft.Office.Interop.Excel
 
 Namespace PresentationLayer.Presenters
 
@@ -42,6 +38,7 @@ Namespace PresentationLayer.Presenters
             view.UserIsASupervisor = _userIsASupervisor
             view.UserIsASuperAdministrator = _userIsASuperAdministrator
             AddHandler view.DateValuesChanged, AddressOf OnDateValuesChanged
+            AddHandler view.EmployeeIdNoChanged, AddressOf OnEmployeeIdNoChanged
             AddHandler view.LeaveIdNoChanged, AddressOf OnLeaveIdNoChanged
         End Sub
 
@@ -57,7 +54,7 @@ Namespace PresentationLayer.Presenters
         Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
             View.EmployeeIdNo = GetUserEmployeeIdNo()
             View.EnteredBy = GlobalVariables.UserIdNo
-            View.StartDate = GetEarliestLeaveDate()
+            'View.StartDate = GetEarliestLeaveDate()
         End Sub
 
         Private Function GetEarliestLeaveDate() As Date
@@ -181,6 +178,29 @@ Namespace PresentationLayer.Presenters
             ElseIf View.DaysEarned < minDaysForLeaves Then
                 MessageBox.Show("Sorry, 'Leave Days Earned' of " + View.DaysEarned.ToString() + " day(s) is not enough to avail of earned leaves. The minimum days for earned leaves should be at least " + minDaysForLeaves.ToString("0"))
                 retVal = False
+            Else
+                Dim employeeLeaveEarnedIdNo = Service.GetField(View.EmployeeIdNo, False, False, "EmployeeLeaveEarned_View", "EmployeeIdNo", "Approved", "Disapproved")
+                If employeeLeaveEarnedIdNo > 0 Then
+                    If View.IdNo = employeeLeaveEarnedIdNo Then
+                        ' this is the record being edited no need to check
+                    Else
+                        MessageBox.Show("Sorry, there is already an open employeeLeaveEarnedEntry for this employee, you can have only one open employee leave earned entry.")
+                        retVal = False
+                    End If
+                End If
+                If retVal Then
+                    Dim lastApprovedEarnedLeaveDate As Date?
+                    Dim lastApprovedEarnedLeaveidNo As Int32
+                    lastApprovedEarnedLeaveDate = Service.GetField(Of Date, Int32, Int32)(View.EmployeeIdNo, View.LeaveIdNo, "EmployeeApprovedLastEarnedLeave_View", "EmployeeIdNo", "LeaveIdNo", "LastLeaveApplied")
+                    If lastApprovedEarnedLeaveDate IsNot Nothing Then
+                        lastApprovedEarnedLeaveidNo = Service.GetField(Of Int32, Int32, Int32, Date)(View.EmployeeIdNo, View.LeaveIdNo, CDate(lastApprovedEarnedLeaveDate), "EmployeeLeaveEarned", "EmployeeIdNo", "LeaveIdNo", "EndDate", "IdNo")
+                        If lastApprovedEarnedLeaveDate IsNot Nothing And View.StartDate < lastApprovedEarnedLeaveDate Then
+                            Dim dateString As String = FormatDateTime(lastApprovedEarnedLeaveDate, DateFormat.ShortDate)
+                            MessageBox.Show("Sorry, leave start date cannot be less than the last applied leave of <" & dateString & ">. See leave Number <" & lastApprovedEarnedLeaveidNo.ToString() & ">.")
+                            retVal = False
+                        End If
+                    End If
+                End If
             End If
             Return retVal
         End Function
@@ -230,23 +250,43 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Public Sub OnLeaveIdNoChanged(leaveIdNo As Int16)
-            Dim lastEarnedDate As Date?
-            If leaveIdNo <> 0 Then
-                If View.StartDate Is Nothing Then
-                    lastEarnedDate = Service.GetFieldOnMaxField("EndDate", "EmployeeLeaveEarned", "EndDate", "LeaveIdNo = " & leaveIdNo.ToString() + " and EmployeeIdNo = " + View.EmployeeIdNo.ToString())
-                    If lastEarnedDate Is Nothing Then
-                        View.StartDate = _hiredDate
-                    Else
-                        View.StartDate = lastEarnedDate
-                    End If
-                End If
-                If View.EndDate Is Nothing Then
-                    View.EndDate = IIf(_releasedDate Is Nothing, Today(), _releasedDate)
-                End If
+        Public Sub OnEmployeeIdNoChanged(employeeIdNo As Int16)
+            If employeeIdNo <> 0 Then
+                View.StartDate = GetDefaultStartDate(employeeIdNo)
+                View.EndDate = GetDefaultEndDate()
                 View.DaysEarned = GetDaysEarned()
             End If
         End Sub
+
+        Private Function GetDefaultStartDate(employeeIdNo As Short) As Date?
+            Dim lastEarnedDate As Date?
+            Dim startDate As Date?
+            If View.StartDate Is Nothing Then
+                lastEarnedDate = Service.GetField(View.EmployeeIdNo, True, "EmployeeLastEarnedLeave_View", "EmployeeIdNo", "Approved")
+                If lastEarnedDate Is Nothing Then
+                    startDate = _hiredDate
+                Else
+                    startDate = DateAndTime.DateAdd(DateInterval.Day, 1, lastEarnedDate.Value)
+                End If
+            End If
+            Return startDate
+        End Function
+
+        Private Sub OnLeaveIdNoChanged(leaveIdNo As Int16)
+            If leaveIdNo <> 0 Then
+                View.StartDate = GetDefaultStartDate(View.EmployeeIdNo)
+                View.EndDate = GetDefaultEndDate()
+                View.DaysEarned = GetDaysEarned()
+            End If
+        End Sub
+
+        Private Function GetDefaultEndDate() As Date?
+            Dim endDate As Date?
+            If View.EndDate Is Nothing Then
+                endDate = IIf(_releasedDate Is Nothing, Today(), _releasedDate)
+            End If
+            Return endDate
+        End Function
 
         Public Overrides Sub EntryFormLoaded()
             Dim employeeIdNo As Int32 = Service.GetUserEmployeeIdNo()
