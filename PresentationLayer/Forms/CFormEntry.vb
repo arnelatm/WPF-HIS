@@ -503,10 +503,6 @@ Public Class CFormEntry
         'Me.ResumeDrawingNew()
     End Sub
 
-    Protected Overridable Sub GridValidator()
-        '
-    End Sub
-
     Protected Sub RunAfterChangeRecord()
         RaiseEvent AfterChangeRecord()
     End Sub
