@@ -183,6 +183,12 @@ Public Class MappingProfileAccounts
         CreateMap(Of IbLabSampleDetail, IbLabSampleDetailModel)().ReverseMap()
         CreateMap(Of IbLabSampleDetailModel, IbLabSampleDetailView)().ReverseMap()
 
+        CreateMap(Of IbLabResult, IbLabResultModel)().ReverseMap()
+        CreateMap(Of IbLabResultModel, IIbLabResultView)().ReverseMap()
+        CreateMap(Of IbLabResultDetail, IbLabResultDetailModel)().ReverseMap()
+        CreateMap(Of IbLabResultDetailModel, IbLabResultDetailView)().ReverseMap()
+
+
         CreateMap(Of ClinicLabSample, ClinicLabSampleModel)().ReverseMap()
         CreateMap(Of ClinicLabSampleModel, IClinicLabSampleView)().ReverseMap()
         CreateMap(Of ClinicLabSampleDetail, ClinicLabSampleDetailModel)().ReverseMap()

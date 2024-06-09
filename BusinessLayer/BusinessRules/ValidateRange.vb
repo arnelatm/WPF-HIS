@@ -1,4 +1,5 @@
-﻿Imports AATM.Libraries.GlobalFuncNSub
+﻿Imports System.Globalization
+Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 
 Namespace BusinessRules
@@ -16,11 +17,11 @@ Namespace BusinessRules
         Public Sub New(propertyName As String, min As Object, max As Object, dataType As ValidationDataType)
             MyBase.New(propertyName)
             Dim fieldName = Messaging.TranslateCaption(propertyName.SplitCamelCase)
-            Dim minFieldValue As String
-            Dim maxFieldValue As String
+            Dim minFieldValue As String = min.ToString()
+            Dim maxFieldValue As String = max.ToString()
             If TypeOf min Is DateTime Or TypeOf max Is DateTime Then
-                minFieldValue = FormatDateTime(min, DateFormat.ShortDate)
-                maxFieldValue = FormatDateTime(max, DateFormat.ShortDate)
+                minFieldValue = GregorianShortDateString(min)
+                maxFieldValue = GregorianShortDateString(max)
             Else
                 minFieldValue = min.ToString()
                 maxFieldValue = max.ToString()
@@ -32,6 +33,8 @@ Namespace BusinessRules
             Me.DataType = dataType
             [Error] = errorMessage
         End Sub
+
+
 
         Public Sub New(propertyName As String, errorMessage As String, min As Object, max As Object,
                        [operator] As ValidationOperator, dataType As ValidationDataType)
