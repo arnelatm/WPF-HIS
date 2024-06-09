@@ -389,6 +389,26 @@ Public Module GlobalFunctions
         Return value
     End Function
 
+    Public Function GregorianShortDateString(dateToFormat As Object) As String
+        Dim value As String
+        Dim curCulture = CultureInfo.CurrentCulture
+        CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
+        value = FormatDateTime(dateToFormat, DateFormat.ShortDate)
+        CultureInfo.CurrentCulture = curCulture
+        Return value
+    End Function
+
+
+    Public Function GregorianLongDateString(dateToFormat As Object) As String
+        Dim value As String
+        Dim curCulture = CultureInfo.CurrentCulture
+        CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
+        value = FormatDateTime(dateToFormat, DateFormat.LongDate)
+        CultureInfo.CurrentCulture = curCulture
+        Return value
+    End Function
+
+
     '''<summary>
     '''Returns the month name for the gregorian calendar for a given month number
     '''</summary>

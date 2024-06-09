@@ -1,16 +1,12 @@
-﻿Imports System.Globalization
-Imports AATM.Accounts.BusinessLayer
-Imports AATM.Accounts.DataLayer.AdoNet
+﻿Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
-Imports AATM.Common
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Presenters
-Imports AATM.Libraries
+Imports AATM.DataLayer
 Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Presenters
 
@@ -81,6 +77,85 @@ Namespace PresentationLayer.Presenters
                                                reportTitle, "ReportTitle"}
                 reportArgs.DataBaseConnectionName = "IGroupClinic"
                 Dim reportFileName As String = "IB Lab Sample Daily Report.Rpt"
+                Dim rpPresenter = New PrintReportPresenter(Of ReportModel)
+                rpPresenter.ViewReport(reportFileName, reportArgs, False)
+
+            End If
+
+        End Sub
+
+
+    End Class
+
+    Public Class IbLabResultPresenter(Of TM As New)
+        Inherits CommonPresenter(Of IIbLabResultView, TM)
+
+        Private _ibLabResultDetailDao As New IbLabResultDetailDao
+
+        Public Sub New()
+
+        End Sub
+
+        Public Sub New(itemView As IIbLabResultView)
+            MyBase.New(itemView)
+            Service = New AccountsService("IbLabResult")
+            Service.SaveConnectionString()
+            Service.SetConnectionString($"IGROUPCLINIC")
+            TableName = "IbLabResultList_View"
+            SortOrderKey = ""
+            Service.RestoreConnectionString()
+            WithTreeView = False
+            AddHandler View.IbLabResultRequested, AddressOf GetIbLabResults
+            AddHandler View.IbLabResultChanged, AddressOf UpdateLabResult
+
+
+            'AddHandler View.DataChanged, AddressOf UpdateData
+            'AddHandler View.GetPmrDataAccessRequested, AddressOf GetPMRDataAccess
+        End Sub
+
+        Public Sub UpdateLabResult(bindingSource As BindingSource)
+            With bindingSource.Current
+                _ibLabResultDetailDao.UpdateRecord(.IdNo, .passportNumber, .clinical, .Xray, .TBSputum, .hivEliza,
+                                                   .hovEliza, .hbsagEliza, .malaria, .vdrl, .Widal, .pregnancy,
+                                                   .bilharziasisUrine, .bilharziasisStool, .shigella, .cholera)
+            End With
+        End Sub
+
+        Private Sub GetIbLabResults(transactionDate As Date?)
+            UpdateData()
+        End Sub
+
+        Protected Overrides Sub CreateDataSources()
+            Service.SaveConnectionString()
+            Service.SetConnectionString($"ISPDATA")
+            Service.RestoreConnectionString()
+        End Sub
+
+        Private Sub UpdateData()
+            Dim IbLabResultModel As New IbLabResultModel
+            If String.IsNullOrEmpty(View.TransactionDate) Then
+                IbLabResultModel = Nothing
+            Else
+                IbLabResultModel = Service.GetParametrized(Of IbLabResultModel)({View.TransactionDate})
+            End If
+            GlobalVariables.Mapper.Map(IbLabResultModel, View)
+        End Sub
+
+        Public Overrides Sub GoPrintRecord()
+            If View.TransactionDate Is Nothing Then
+                AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgDateCannotBeBlank")
+            Else
+                Dim reportArgs As New CrPrintableArgs
+                Dim reportParameters As New Object
+                Dim dateString As String
+                Dim tempDate As DateTime = View.TransactionDate.Value
+                dateString = tempDate.ToString("yyyy/MM/dd")
+                Dim reportTitle As String = AATM.Libraries.MessagingLibrary.Messaging.TranslateCaption("Diagnostic Test Samples Taken Report for ") + dateString
+                reportArgs.ReportParameters = {dateString, "TransactionDate",
+                                               GlobalVariables.EstablishmentName, "EstablishmentName",
+                                               reportTitle, "ReportTitle"}
+                reportArgs.DataBaseConnectionName = "IGroupClinic"
+                Dim reportFileName As String = "IB Lab Result Daily Report.Rpt"
                 Dim rpPresenter = New PrintReportPresenter(Of ReportModel)
                 rpPresenter.ViewReport(reportFileName, reportArgs, False)
 

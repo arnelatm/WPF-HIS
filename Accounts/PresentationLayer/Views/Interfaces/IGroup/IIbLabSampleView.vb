@@ -31,4 +31,43 @@ Namespace PresentationLayer.Views.Interfaces
         Property Urine As Boolean
     End Interface
 
+    Public Interface IIbLabResultView
+        Inherits IView
+
+        Property TransactionDate As Date?
+        Property IbLabResultDetails As List(Of IbLabResultDetailView)
+        Event IbLabResultRequested(transactionDate As Date?)
+        Event IbLabResultChanged(bindingSource As BindingSource)
+
+    End Interface
+
+    Public Interface IIbLabResultDetailView
+        Inherits IView
+
+        Property BilharziasisStool As Boolean
+        Property BilharziasisUrine As Boolean
+        Property Cholera As Boolean
+        Property Clinical As Boolean
+        Property HBSAgEliza As Boolean
+        Property HIVEliza As Boolean
+        Property HOVEliza As Boolean
+        Property IdNo As Int32
+        Property IqamaNo As String
+        Property LabNo As String
+        Property Malaria As Boolean
+        Property Nationality As String
+        Property PassportNumber As String
+        Property PatientName As String
+        Property Pregnancy As Boolean
+        Property Profession As Boolean
+        Property Sequence As Int32
+        Property Shigella As Boolean
+        Property TBSputum As Boolean
+        Property TransKey As Int32
+        Property VDRL As Boolean
+        Property Widal As Boolean
+        Property XRay As Boolean
+
+    End Interface
+
 End Namespace

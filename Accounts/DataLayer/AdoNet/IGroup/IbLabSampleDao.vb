@@ -50,20 +50,20 @@ Namespace DataLayer.AdoNet
             Return 0
         End Function
 
-        Public Function UpdateIbLabSampleDetail(IdNo As Int32, urine As Boolean, stool As Boolean, rbs As Decimal)
-            Dim sql As String =
-                    " UPDATE [IbLabSampleTaken] Set" &
-                    " Urine = @Urine," &
-                    " Stool = @Stool," &
-                    " Rbs = @Rbs" &
-                    " WHERE IdNo = @IdNo"
-            Return _db.Update(sql, {"@Urine", urine, "@Stool", stool, "@Rbs", rbs})
-        End Function
-
         Private Shared ReadOnly Make As Func(Of IDataReader, IbLabSample) = Function(reader) New IbLabSample() With
         {
         .TransactionDate = AATM.DataLayer.AdoNet.Extensions.AsString(reader("TransDateEnglish"))
         }
+
+        'Public Function UpdateIbLabSampleDetail(IdNo As Int32, urine As Boolean, stool As Boolean, rbs As Decimal)
+        '    Dim sql As String =
+        '            " UPDATE [IbLabSampleTaken] Set" &
+        '            " Urine = @Urine," &
+        '            " Stool = @Stool," &
+        '            " Rbs = @Rbs" &
+        '            " WHERE IdNo = @IdNo"
+        '    Return _db.Update(sql, {"@Urine", urine, "@Stool", stool, "@Rbs", rbs})
+        'End Function
 
         Private Shared ReadOnly MakeIbLabSampleDetails As Func(Of IDataReader, IbLabSampleDetail) = Function(reader) New IbLabSampleDetail() With
             {
@@ -80,6 +80,105 @@ Namespace DataLayer.AdoNet
             .Urine = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Urine")),
             .Stool = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Stool")),
             .Rbs = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("RBS"))
+            }
+
+    End Class
+
+    Public Class IbLabResultDao
+        Inherits CommonDao
+        Implements IDaoParametrized(Of IbLabResult), IDao(Of IbLabResult)
+
+        Private ReadOnly _db As New Db("IGROUPCLINIC")
+
+        Public Overrides Function GetDB()
+            Return _db
+        End Function
+
+        Public Function GetRecordByIdNo(idNo) As IbLabResult Implements IDao(Of IbLabResult).GetRecordByIdNo
+            Return Nothing
+        End Function
+
+        Public Function GetParametrized(Of IbLabResultModel)(parameter As Object, Optional sortExpression As String = Nothing) As IbLabResult Implements IDaoParametrized(Of IbLabResult).GetParametrized
+            If parameter(0) Is Nothing Then
+                AATM.Libraries.MessagingLibrary.Messaging.Show("MsgDateCannotBeBlank")
+                Return Nothing
+            End If
+            Dim transactionDate As Date = parameter(0)
+            Dim sql As String
+            Dim data As New IbLabResult
+            Dim transactionDateString As String = transactionDate.ToString("yyyy/MM/dd")
+            data.TransactionDate = transactionDate
+            Dim params() As Object = {"@TransactionDate", transactionDateString}
+            sql = $"SELECT Row_Number() Over (Order by Trans_key) as 'Sequence',IdNo,TransactionDate,LabNo,Border_Iqama,PatientName,CountryNameEng,Clinical,XRay,TBSputum,HIVEliza,HOVEliza,HBSAgEliza,Malaria,VDRL,WIdal,Pregnancy,BilharziasisUrine,BilharziasisStool,SHigella,Cholera,IdNo from IbLabResultList_View where TransactionDate = @TransactionDate order by Trans_key"
+            data.IbLabResultDetails = _db.Read(sql, MakeIbLabResultDetails, params).ToList()
+            Return data
+        End Function
+
+
+        Public Function AddRecord(ByRef recordData As IbLabResult) As Integer Implements IDao(Of IbLabResult).AddRecord
+            Return 0
+        End Function
+
+        Public Function UpdateRecord(ByRef recordData As IbLabResult) As Integer Implements IDao(Of IbLabResult).UpdateRecord
+            Return 0
+        End Function
+
+
+
+        Private Shared ReadOnly Make As Func(Of IDataReader, IbLabResult) = Function(reader) New IbLabResult() With
+        {
+        .TransactionDate = AATM.DataLayer.AdoNet.Extensions.AsString(reader("TransDateEnglish"))
+        }
+
+        'Public Function UpdateIbLabResultDetail(IdNo As Int32, passport As String, clinical As Boolean, Xray As Boolean, TBSputum As Boolean,
+        '                                        hivEliza As Boolean, hovEliza As Boolean, hbsagEliza As Boolean, malaria As Boolean, vdrl As Boolean,
+        '                                        Widal As Boolean, pregnancy As Boolean, bilharziasisUrine As Boolean,
+        '                                        bilharziasisStool As Boolean, shigella As Boolean, cholera As Boolean)
+        '    Dim sql As String =
+        '            " UPDATE [IbLabResultTaken] Set" &
+        '            " Passport = @Passport," &
+        '            " Clinical = @Clinical," &
+        '            " Xray = @Xray," &
+        '            " TBSputum = @TBSputum," &
+        '            " HIVEliza = @HIVEliza," &
+        '            " HOVEliza = @HOVEliza," &
+        '            " HBSAgEliza = @HBSAgEliza," &
+        '            " Malaria = @Malaria," &
+        '            " VDRL = @VDRL," &
+        '            " Widal = @Widal," &
+        '            " Pregnancy = @Pregnancy," &
+        '            " BilharziasisUrine = @BilharziasisUrine," &
+        '            " BilharziasisStool = @BilharziasisUrStool," &
+        '            " Shigella = @Shigella," &
+        '            " Cholera = @Cholera" &
+        '            " WHERE IdNo = @IdNo "
+        '    Return _db.Update(sql, {"@Passport", passport, "@Clinical", clinical, "@Xray", Xray, "@TBSputum", TBSputum, "@HIVEliza", hivEliza,
+        '            "@HOVEliza", hovEliza, "@HBSAgEliza", hbsagEliza, "@Malaria", malaria, "@VDRL", vdrl, "@Widal", Widal, "@Pregnancy", pregnancy,
+        '            "@BilharzizsisUrine", bilharziasisUrine, "@BilharzizsisStool", bilharziasisStool, "@Shigella", shigella, "@Cholera", cholera})
+        'End Function
+
+        Private Shared ReadOnly MakeIbLabResultDetails As Func(Of IDataReader, IbLabResultDetail) = Function(reader) New IbLabResultDetail() With
+            {
+            .Sequence = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("Sequence")),
+            .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
+            .IqamaNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Border_Iqama")),
+            .PatientName = AATM.DataLayer.AdoNet.Extensions.AsTimeString(reader("PatientName")),
+            .LabNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("LabNo")),
+            .Nationality = AATM.DataLayer.AdoNet.Extensions.AsString(reader("CountryNameEng")),
+            .Clinical = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Clinical")),
+            .XRay = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Xray")),
+            .TBSputum = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("TBSputum")),
+            .HIVEliza = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("HIVEliza")),
+            .HOVEliza = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("HOVEliza")),
+            .HBSAgEliza = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("HBSAgEliza")),
+            .Malaria = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Malaria")),
+            .VDRL = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("VDRL")),
+            .Widal = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Widal")),
+            .Pregnancy = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Pregnancy")),
+            .BilharziasisUrine = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("BilharziasisUrine")),
+            .BilharziasisStool = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("BilharziasisStool")),
+            .Shigella = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Shigella")),
+            .Cholera = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Cholera"))
             }
 
     End Class

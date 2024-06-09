@@ -1339,6 +1339,10 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ToolStripMenuItemReportGroup_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemReportGroup.Click
             RunForm(Of ReportGroupEntry, ReportGroupPresenter(Of ReportGroupModel))()
         End Sub
+
+        Private Sub DiagnosticResultEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDiagnosticResultEntry.Click
+            RunForm(Of IbLabResultForm, IbLabResultPresenter(Of IbLabResultModel))()
+        End Sub
     End Class
 
 End Namespace
