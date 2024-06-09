@@ -1270,6 +1270,28 @@ Public Class BfMain
         childMdiForm.Show()
     End Sub
 
+    Public Sub ForceLooseFocusOnCurrentControl()
+        Dim currentActiveControl As Control = ActiveControl
+        If currentActiveControl IsNot Nothing Then
+            SelectNextControl(currentActiveControl, True, True, True, True)
+        End If
+        Refresh()
+        If currentActiveControl IsNot Nothing Then
+            ActiveControl = currentActiveControl
+        End If
+    End Sub
+
+    Public Sub ForceEndEditForAllGridControls()
+        Dim allControls As New List(Of Control)
+        FindControlRecursive(allControls, Me)
+        For Each cCtrl As Control In allControls
+            If TypeOf cCtrl Is DataGridView Then
+                Dim cGrid As DataGridView = cCtrl
+                cGrid.EndEdit()
+            End If
+        Next
+    End Sub
+
 End Class
 
 Public Class SettingsSaver
@@ -1294,5 +1316,7 @@ Public Class SettingsSaver
         control.Height = _height
         control.Visible = _visible
     End Sub
+
+
 
 End Class

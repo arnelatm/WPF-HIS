@@ -49,6 +49,8 @@
 
 
 
+
+
 GO
 CREATE UNIQUE NONCLUSTERED INDEX [IX_CustomerCode]
     ON [dbo].[Customer]([CustomerCode] ASC);
@@ -63,3 +65,14 @@ GO
 CREATE UNIQUE NONCLUSTERED INDEX [IX_CustomerName]
     ON [dbo].[Customer]([CustomerName] ASC);
 
+
+GO
+CREATE TRIGGER [dbo].[TR_Customer_Add] ON [dbo].[Customer]
+FOR INSERT
+AS
+
+INSERT INTO Contact
+        (PayeeIdNo, PayeeType)
+    SELECT
+        IdNo, 'C'
+        FROM inserted

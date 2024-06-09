@@ -1,8 +1,9 @@
-﻿CREATE VIEW dbo.EmployeeLeaveEarned_View
+﻿
+CREATE VIEW [dbo].[EmployeeLeaveEarned_View]
 AS
 SELECT dbo.EmployeeLeaveEarned.EmployeeIdNo, dbo.EmployeeLeaveEarned.IdNo, dbo.EmployeeLeaveEarned.LeaveIdNo, dbo.EmployeeLeaveEarned.StartDate, dbo.EmployeeLeaveEarned.EndDate, dbo.EmployeeLeaveEarned.DaysEarned, 
                   dbo.EmployeeLeaveEarned.EnteredBy, dbo.EmployeeLeaveEarned.Reason, dbo.EmployeeLeaveEarned.DateCreated, dbo.EmployeeLeaveEarned.DateTimeStamp, dbo.EmployeeLeaveEarned.IdNo AS EmployeeLeaveEarnedIdNo, 
-                  dbo.EmployeeLeaveEarnedApprovalItem.Approved, dbo.EmployeeLeaveEarnedApprovalItem.Disapproved, dbo.EmployeeLeaveEarnedApproval.ApprovedBy, dbo.EmployeeLeaveEarnedApprovalItem.ApprovalNote, 
+                  IsNull(dbo.EmployeeLeaveEarnedApprovalItem.Approved,0) as Approved, IsNull(dbo.EmployeeLeaveEarnedApprovalItem.Disapproved,0) Disapproved, dbo.EmployeeLeaveEarnedApproval.ApprovedBy, dbo.EmployeeLeaveEarnedApprovalItem.ApprovalNote, 
                   dbo.Employee.SupervisorIdNo
 FROM     dbo.EmployeeLeaveEarned LEFT OUTER JOIN
                   dbo.EmployeeLeaveEarnedApprovalItem ON dbo.EmployeeLeaveEarned.IdNo = dbo.EmployeeLeaveEarnedApprovalItem.EmployeeLeaveEarnedIdNo LEFT OUTER JOIN

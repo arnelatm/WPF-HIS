@@ -11,6 +11,7 @@
     [PaperOrientation]      TINYINT        NULL,
     [PaperSize]             SMALLINT       NULL,
     [ReportGroup]           VARCHAR (10)   NULL,
+    [ReportGroupIdNo]       SMALLINT       NULL,
     [ReportNo]              NUMERIC (5)    NOT NULL,
     [ReportOrder]           NUMERIC (5)    NULL,
     [ReportFileName]        VARCHAR (200)  NULL,
@@ -41,6 +42,8 @@
     [Active]                BIT            NULL,
     CONSTRAINT [PK_ReportCreator] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 

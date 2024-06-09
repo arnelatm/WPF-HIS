@@ -179,19 +179,19 @@ Namespace PresentationLayer.Presenters
                 MessageBox.Show("Sorry, 'Leave Days Earned' of " + View.DaysEarned.ToString() + " day(s) is not enough to avail of earned leaves. The minimum days for earned leaves should be at least " + minDaysForLeaves.ToString("0"))
                 retVal = False
             Else
-                Dim employeeLeaveEarnedIdNo = Service.GetField(View.EmployeeIdNo, False, False, "EmployeeLeaveEarned_View", "EmployeeIdNo", "Approved", "Disapproved")
+                Dim employeeLeaveEarnedIdNo = Service.GetField(Of Int32, Int32, Boolean, Boolean)(View.EmployeeIdNo, False, False, "EmployeeLeaveEarned_View", "EmployeeIdNo", "Approved", "Disapproved", "IdNo")
                 If employeeLeaveEarnedIdNo > 0 Then
                     If View.IdNo = employeeLeaveEarnedIdNo Then
                         ' this is the record being edited no need to check
                     Else
-                        MessageBox.Show("Sorry, there is already an open employeeLeaveEarnedEntry for this employee, you can have only one open employee leave earned entry.")
+                        MessageBox.Show("Sorry, there is already an open employeeLeaveEarnedEntry for this employee, you can have only one open employee leave earned entry. See Employee LEave Earned Entry Number <" + employeeLeaveEarnedIdNo.ToString() + ">.")
                         retVal = False
                     End If
                 End If
                 If retVal Then
                     Dim lastApprovedEarnedLeaveDate As Date?
                     Dim lastApprovedEarnedLeaveidNo As Int32
-                    lastApprovedEarnedLeaveDate = Service.GetField(Of Date, Int32, Int32)(View.EmployeeIdNo, View.LeaveIdNo, "EmployeeApprovedLastEarnedLeave_View", "EmployeeIdNo", "LeaveIdNo", "LastLeaveApplied")
+                    lastApprovedEarnedLeaveDate = Service.GetField(Of Date?, Int32, Int32)(View.EmployeeIdNo, View.LeaveIdNo, "EmployeeApprovedLastEarnedLeave_View", "EmployeeIdNo", "LeaveIdNo", "LastLeaveApplied")
                     If lastApprovedEarnedLeaveDate IsNot Nothing Then
                         lastApprovedEarnedLeaveidNo = Service.GetField(Of Int32, Int32, Int32, Date)(View.EmployeeIdNo, View.LeaveIdNo, CDate(lastApprovedEarnedLeaveDate), "EmployeeLeaveEarned", "EmployeeIdNo", "LeaveIdNo", "EndDate", "IdNo")
                         If lastApprovedEarnedLeaveDate IsNot Nothing And View.StartDate < lastApprovedEarnedLeaveDate Then
@@ -252,6 +252,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub OnEmployeeIdNoChanged(employeeIdNo As Int32)
             If employeeIdNo <> 0 Then
+                ComputeEmployeeServiceDetails()
                 View.StartDate = GetDefaultStartDate(employeeIdNo)
                 View.EndDate = GetDefaultEndDate()
                 View.DaysEarned = GetDaysEarned()
@@ -261,15 +262,39 @@ Namespace PresentationLayer.Presenters
         Private Function GetDefaultStartDate(employeeIdNo As Int32) As Date?
             Dim lastEarnedDate As Date?
             Dim startDate As Date?
-            If View.StartDate Is Nothing Then
-                lastEarnedDate = Service.GetField(View.EmployeeIdNo, True, "EmployeeLastEarnedLeave_View", "EmployeeIdNo", "Approved")
-                If lastEarnedDate Is Nothing Then
-                    startDate = _hiredDate
+            Dim todaysDate As Date = Now()
+            lastEarnedDate = Service.GetField(Of Date?, Int32)(View.EmployeeIdNo, "EmployeeLastEarnedLeave_View", "EmployeeIdNo", "LastApprovedEarnedEndLeaveDate")
+            'If lastEarnedDate Is Nothing Then
+            '    startDate = _hiredDate
+            'End If
+            Dim lastYearDate As Date = DateAndTime.DateAdd(DateInterval.Year, -1, Now())
+            If lastEarnedDate Is Nothing Then
+                Dim lastYearHiredDateAnniversary As Date = New DateTime(DateAndTime.Year(todaysDate) - 1, DateAndTime.Month(_hiredDate), DateAndTime.Day(_hiredDate))
+                If lastYearHiredDateAnniversary > lastYearDate Then
+                    startDate = New DateTime(DateAndTime.Year(lastYearHiredDateAnniversary) - 1, DateAndTime.Month(_hiredDate), DateAndTime.Day(_hiredDate))
                 Else
-                    startDate = DateAndTime.DateAdd(DateInterval.Day, 1, lastEarnedDate.Value)
+                    startDate = lastYearHiredDateAnniversary
                 End If
+            Else
+                startDate = DateAndTime.DateAdd(DateInterval.Day, 1, lastEarnedDate.Value)
             End If
             Return startDate
+        End Function
+
+        Private Function GetDefaultEndDate() As Date?
+            Dim endDate As Date
+            Dim startDate As Date = View.StartDate.Value
+            endDate = DateAndTime.DateAdd(DateInterval.Year, 1, startDate)
+            endDate = DateAndTime.DateAdd(DateInterval.Day, -1, endDate)
+            If endDate > Today() Then
+                endDate = Today()
+            End If
+            If _releasedDate IsNot Nothing Then
+                If endDate > _releasedDate Is Nothing Then
+                    endDate = _releasedDate.Value
+                End If
+            End If
+            Return endDate
         End Function
 
         Private Sub OnLeaveIdNoChanged(leaveIdNo As Int16)
@@ -280,13 +305,7 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Private Function GetDefaultEndDate() As Date?
-            Dim endDate As Date?
-            If View.EndDate Is Nothing Then
-                endDate = IIf(_releasedDate Is Nothing, Today(), _releasedDate)
-            End If
-            Return endDate
-        End Function
+
 
         Public Overrides Sub EntryFormLoaded()
             Dim employeeIdNo As Int32 = Service.GetUserEmployeeIdNo()

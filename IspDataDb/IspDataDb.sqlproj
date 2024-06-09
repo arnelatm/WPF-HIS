@@ -666,6 +666,9 @@
     <Build Include="dbo\Tables\ReportGroup.sql" />
     <Build Include="dbo\Views\SecurityReportAccess_View.sql" />
     <Build Include="dbo\Views\EmployeeLeaveEarnedLatestApproval_View.sql" />
+    <Build Include="dbo\Tables\Contact.sql" />
+    <Build Include="dbo\Views\EmployeeLastEarnedLeave_View.sql" />
+    <Build Include="dbo\Views\EmployeeApprovedLastEarnedLeave_View.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />

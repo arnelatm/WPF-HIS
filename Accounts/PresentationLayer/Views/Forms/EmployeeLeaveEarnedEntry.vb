@@ -187,7 +187,7 @@ Public Class EmployeeLeaveEarnedEntry
         RaiseEvent DateValuesChanged()
     End Sub
 
-    Private Sub cboEmployeeIdNo_ValueChanged(sender As Object, e As EventArgs) Handles cboEmployeeIdNo.Validated
+    Private Sub cboEmployeeIdNo_ValueChanged(sender As Object, e As EventArgs) Handles cboEmployeeIdNo.Validated, cboEmployeeIdNo.LostFocus
         RaiseEvent EmployeeIdNoChanged(EmployeeIdNo)
     End Sub
 
