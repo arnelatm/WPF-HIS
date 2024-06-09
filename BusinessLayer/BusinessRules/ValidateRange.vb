@@ -16,7 +16,16 @@ Namespace BusinessRules
         Public Sub New(propertyName As String, min As Object, max As Object, dataType As ValidationDataType)
             MyBase.New(propertyName)
             Dim fieldName = Messaging.TranslateCaption(propertyName.SplitCamelCase)
-            Dim errorMessage = Messaging.GetParametrizedMessage(True, "MsgInvalidRange", {"fieldName", fieldName, "minimumValue", min.ToString(), "maximumValue", max.ToString()})
+            Dim minFieldValue As String
+            Dim maxFieldValue As String
+            If TypeOf min Is DateTime Or TypeOf max Is DateTime Then
+                minFieldValue = FormatDateTime(min, DateFormat.ShortDate)
+                maxFieldValue = FormatDateTime(max, DateFormat.ShortDate)
+            Else
+                minFieldValue = min.ToString()
+                maxFieldValue = max.ToString()
+            End If
+            Dim errorMessage = Messaging.GetParametrizedMessage(True, "MsgInvalidRange", {"fieldName", fieldName, "minimumValue", minFieldValue, "maximumValue", maxFieldValue})
             Me.Min = min
             Me.Max = max
             Me.Operator = [Operator]

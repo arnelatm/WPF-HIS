@@ -104,6 +104,8 @@
 
 
 
+
+
 GO
 CREATE UNIQUE NONCLUSTERED INDEX [IX_EmployeeNameAra]
     ON [dbo].[Employee]([EmployeeNameAra] ASC);
@@ -118,3 +120,14 @@ GO
 CREATE UNIQUE NONCLUSTERED INDEX [IX_EmployeeCode]
     ON [dbo].[Employee]([EmployeeCode] ASC);
 
+
+GO
+CREATE TRIGGER [dbo].[TR_Employee_Add] ON [dbo].[Employee]
+FOR INSERT
+AS
+
+INSERT INTO Contact
+        (PayeeIdNo, PayeeType)
+    SELECT
+        IdNo, 'E'
+        FROM inserted

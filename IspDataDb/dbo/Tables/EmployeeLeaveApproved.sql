@@ -1,7 +1,10 @@
 ﻿CREATE TABLE [dbo].[EmployeeLeaveApproved] (
-    [IdNo]                      INT      NULL,
+    [IdNo]                      INT      IDENTITY (1, 1) NOT NULL,
     [EmployeeLeaveApprovalIdNo] INT      NULL,
-    [EmployeeLeaveIdNo]         INT      IDENTITY (1, 1) NOT NULL,
-    [Status]                    CHAR (1) NULL
+    [EmployeeLeaveIdNo]         INT      NOT NULL,
+    [Status]                    CHAR (1) NULL,
+    CONSTRAINT [PK_EmployeeLeaveApproved] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
