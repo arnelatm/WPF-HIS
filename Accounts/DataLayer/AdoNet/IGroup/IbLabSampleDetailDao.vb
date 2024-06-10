@@ -1,4 +1,6 @@
-﻿Imports AATM.DataLayer.AdoNet
+﻿Imports AATM.Accounts.BusinessLayer
+Imports AATM.DataLayer
+Imports AATM.DataLayer.AdoNet
 
 Namespace DataLayer.AdoNet
     ' Data access object for CbcRetrieval
@@ -34,10 +36,10 @@ Namespace DataLayer.AdoNet
             Return _db
         End Function
 
-        Public Function UpdateRecord(IdNo As Int32, passportNumber As String, clinical As Boolean, Xray As Boolean, TBSputum As Boolean,
-                                                hivEliza As Boolean, hovEliza As Boolean, hbsagEliza As Boolean, malaria As Boolean, vdrl As Boolean,
-                                                Widal As Boolean, pregnancy As Boolean, bilharziasisUrine As Boolean,
-                                                bilharziasisStool As Boolean, shigella As Boolean, cholera As Boolean)
+        Public Function UpdateRecord(IdNo As Int32, passportNumber As String, clinical As Boolean?, Xray As Boolean?, TBSputum As Boolean?,
+                                                hivEliza As Boolean?, hovEliza As Boolean?, hbsagEliza As Boolean?, malaria As Boolean?, vdrl As Boolean?,
+                                                Widal As Boolean?, pregnancy As Boolean?, bilharziasisUrine As Boolean?,
+                                                bilharziasisStool As Boolean?, shigella As Boolean?, cholera As Boolean?)
             Dim sql As String =
                     " UPDATE [IbLabResult] Set" &
                     " PassportNumber = @PassportNumber," &
@@ -59,6 +61,20 @@ Namespace DataLayer.AdoNet
             Return _db.Update(sql, {"@PassportNumber", passportNumber, "@Clinical", clinical, "@Xray", Xray, "@TBSputum", TBSputum, "@HIVEliza", hivEliza,
                     "@HOVEliza", hovEliza, "@HBSAgEliza", hbsagEliza, "@Malaria", malaria, "@VDRL", vdrl, "@Widal", Widal, "@Pregnancy", pregnancy,
                     "@BilharziasisUrine", bilharziasisUrine, "@BilharziasisStool", bilharziasisStool, "@Shigella", shigella, "@Cholera", cholera, "@IdNo", IdNo})
+        End Function
+
+        Public Function AddRecord(primaryKey As Int32, passportNumber As String, clinical As Boolean?, Xray As Boolean?, TBSputum As Boolean?,
+                                  hivEliza As Boolean?, hovEliza As Boolean?, hbsagEliza As Boolean?, malaria As Boolean?, vdrl As Boolean?,
+                                  Widal As Boolean?, pregnancy As Boolean?, bilharziasisUrine As Boolean?,
+                                  bilharziasisStool As Boolean?, shigella As Boolean?, cholera As Boolean?)
+            Dim sql As String = " Insert Into [IbLabResult] " &
+                    " (Trans_Key, PassportNumber, Clinical, Xray, TBSputum, HIVEliza, HOVEliza, HBSAgEliza, Malaria, VDRL, Widal, Pregnancy, BilharziasisUrine, BilharziasisStool, Shigella, Cholera) " &
+                    " Values " &
+                    " (@PrimaryKey, @PassportNumber, @Clinical, @Xray, @TBSputum, @HIVEliza, @HOVEliza, @HBSAgEliza, @Malaria, @VDRL, @Widal, @Pregnancy, @BilharziasisUrine, @BilharziasisStool, @Shigella, @Cholera)"
+            Return _db.Insert(sql, {"@PrimaryKey", primaryKey, "@PassportNumber", passportNumber, "@Clinical", clinical, "@Xray", Xray, "@TBSputum", TBSputum, "@HIVEliza", hivEliza,
+                    "@HOVEliza", hovEliza, "@HBSAgEliza", hbsagEliza, "@Malaria", malaria, "@VDRL", vdrl, "@Widal", Widal, "@Pregnancy", pregnancy,
+                    "@BilharziasisUrine", bilharziasisUrine, "@BilharziasisStool", bilharziasisStool, "@Shigella", shigella, "@Cholera", cholera})
+
         End Function
 
     End Class

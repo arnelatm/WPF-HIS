@@ -59,7 +59,7 @@ Namespace AdoNet
         End Function
 
         <Extension>
-        Public Function AsNullable(Of T)(ByVal obj As IConvertible) As T
+        Public Function AsNullable(Of T)(ByVal obj As IConvertible)
             If obj.Equals(DBNull.Value) Or obj Is Nothing Then
                 Return Nothing
             End If

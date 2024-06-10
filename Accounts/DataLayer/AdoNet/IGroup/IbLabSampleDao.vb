@@ -109,7 +109,7 @@ Namespace DataLayer.AdoNet
             Dim transactionDateString As String = transactionDate.ToString("yyyy/MM/dd")
             data.TransactionDate = transactionDate
             Dim params() As Object = {"@TransactionDate", transactionDateString}
-            sql = $"SELECT Row_Number() Over (Order by Trans_key) as 'Sequence',IdNo,TransactionDate,LabNo,Border_Iqama,PatientName,CountryNameEng,Clinical,XRay,TBSputum,HIVEliza,HOVEliza,HBSAgEliza,Malaria,VDRL,WIdal,Pregnancy,BilharziasisUrine,BilharziasisStool,SHigella,Cholera,IdNo from IbLabResultList_View where TransactionDate = @TransactionDate order by Trans_key"
+            sql = $"SELECT Row_Number() Over (Order by Trans_key) as 'Sequence',IdNo,Trans_Key,Sex,TransactionDate,LabNo,PatientName,CountryNameEng,PassportNumber,Profession,Border_Iqama,Clinical,XRay,TBSputum,HIVEliza,HOVEliza,HBSAgEliza,Malaria,VDRL,WIdal,Pregnancy,BilharziasisUrine,BilharziasisStool,SHigella,Cholera from IbLabResultList_View where TransactionDate = @TransactionDate order by Trans_key"
             data.IbLabResultDetails = _db.Read(sql, MakeIbLabResultDetails, params).ToList()
             Return data
         End Function
@@ -161,24 +161,28 @@ Namespace DataLayer.AdoNet
             {
             .Sequence = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("Sequence")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
-            .IqamaNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Border_Iqama")),
-            .PatientName = AATM.DataLayer.AdoNet.Extensions.AsTimeString(reader("PatientName")),
+            .TransKey = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("Trans_key")),
+            .Gender = AATM.DataLayer.AdoNet.Extensions.AsChar(reader("Sex")),
             .LabNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("LabNo")),
+            .PatientName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("PatientName")),
             .Nationality = AATM.DataLayer.AdoNet.Extensions.AsString(reader("CountryNameEng")),
-            .Clinical = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Clinical")),
-            .XRay = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Xray")),
-            .TBSputum = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("TBSputum")),
-            .HIVEliza = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("HIVEliza")),
-            .HOVEliza = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("HOVEliza")),
-            .HBSAgEliza = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("HBSAgEliza")),
-            .Malaria = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Malaria")),
-            .VDRL = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("VDRL")),
-            .Widal = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Widal")),
-            .Pregnancy = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Pregnancy")),
-            .BilharziasisUrine = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("BilharziasisUrine")),
-            .BilharziasisStool = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("BilharziasisStool")),
-            .Shigella = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Shigella")),
-            .Cholera = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Cholera"))
+            .Profession = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Profession")),
+            .PassportNumber = AATM.DataLayer.AdoNet.Extensions.AsString(reader("PassportNumber")),
+            .IqamaNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Border_Iqama")),
+            .Clinical = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean)(reader("Clinical")),
+            .XRay = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean)(reader("Xray")),
+            .TBSputum = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean)(reader("TBSputum")),
+            .HIVEliza = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean)(reader("HIVEliza")),
+            .HOVEliza = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean)(reader("HOVEliza")),
+            .HBSAgEliza = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean)(reader("HBSAgEliza")),
+            .Malaria = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean)(reader("Malaria")),
+            .VDRL = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean)(reader("VDRL")),
+            .Widal = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean)(reader("Widal")),
+            .Pregnancy = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean)(reader("Pregnancy")),
+            .BilharziasisUrine = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean)(reader("BilharziasisUrine")),
+            .BilharziasisStool = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean)(reader("BilharziasisStool")),
+            .Shigella = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean)(reader("Shigella")),
+            .Cholera = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean)(reader("Cholera"))
             }
 
     End Class
