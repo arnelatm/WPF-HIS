@@ -1,5 +1,7 @@
-﻿Imports AATM.Accounts.DataLayer.AdoNet
+﻿Imports AATM.Accounts.BusinessLayer
+Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
+Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Models
@@ -107,11 +109,40 @@ Namespace PresentationLayer.Presenters
             WithTreeView = False
             AddHandler View.IbLabResultRequested, AddressOf GetIbLabResults
             AddHandler View.IbLabResultChanged, AddressOf UpdateLabResult
+            AddHandler View.FillUpButtonClicked, AddressOf OnFillUpButtonClicked
 
 
             'AddHandler View.DataChanged, AddressOf UpdateData
             'AddHandler View.GetPmrDataAccessRequested, AddressOf GetPMRDataAccess
         End Sub
+
+        Private Sub OnFillUpButtonClicked()
+            For Each item As IbLabResultDetailView In View.IbLabResultDetails
+                If item.IdNo <= 0 Then
+                    Dim pregnancy As Boolean?
+                    If item.Gender = "F" Then
+                        pregnancy = False
+                    ElseIf item.Gender = "M" Then
+                        pregnancy = Nothing
+                    Else
+                        pregnancy = False
+                    End If
+                    _ibLabResultDetailDao.AddRecord(item.TransKey, item.PassportNumber, Approve(item.Clinical), Approve(item.XRay), Approve(item.TBSputum),
+                                  Approve(item.HIVEliza), Approve(item.HOVEliza), Approve(item.HBSAgEliza), Approve(item.Malaria), Approve(item.VDRL), Approve(item.Widal), pregnancy,
+                                  Approve(item.BilharziasisUrine), Approve(item.BilharziasisStool), Approve(item.Shigella), Approve(item.Cholera))
+                End If
+            Next
+            UpdateData()
+        End Sub
+
+        Private Function Approve(value As Boolean?) As Boolean?
+            If value.HasValue = True Then
+                Return value
+            Else
+                Return True
+            End If
+        End Function
+
 
         Public Sub UpdateLabResult(bindingSource As BindingSource)
             With bindingSource.Current

@@ -17,6 +17,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Event IbLabResultRequested(transactionDate As Date?) Implements IIbLabResultView.IbLabResultRequested
         Public Event IbLabResultChanged(bindingSource As BindingSource) Implements IIbLabResultView.IbLabResultChanged
+        Public Event FillUpButtonClicked() Implements IIbLabResultView.FillUpButtonClicked
 
         Public Sub New()
             'MyBase.New()
@@ -69,7 +70,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub IbLabResultCollectionForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             RaiseEvent IbLabResultRequested(TransactionDate)
-            'dgvAge.SetFormat(3, 0)
+            'dgvClinical.ThreeState = True
             'dgvAge.DisplayOnly = True
         End Sub
 
@@ -144,6 +145,9 @@ Namespace PresentationLayer.Views.Forms
             End With
         End Sub
 
+        Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles CButton1.ClickButtonArea
+            RaiseEvent FillUpButtonClicked()
+        End Sub
     End Class
 
 End Namespace
