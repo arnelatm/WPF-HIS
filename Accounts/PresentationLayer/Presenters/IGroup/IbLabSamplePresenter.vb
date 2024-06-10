@@ -7,8 +7,10 @@ Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.DataLayer
+Imports AATM.Libraries
 Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Presenters
 
@@ -91,6 +93,7 @@ Namespace PresentationLayer.Presenters
 
     Public Class IbLabResultPresenter(Of TM As New)
         Inherits CommonPresenter(Of IIbLabResultView, TM)
+        'Implements ISubscriber(Of DgvItemsChanged)
 
         Private _ibLabResultDetailDao As New IbLabResultDetailDao
 
@@ -139,7 +142,7 @@ Namespace PresentationLayer.Presenters
             If value.HasValue = True Then
                 Return value
             Else
-                Return True
+                Return False
             End If
         End Function
 
@@ -194,6 +197,38 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
+        'Public Sub OndgvItemsChangedEventHandler(ByRef eventType As DgvItemsChanged) Implements ISubscriber(Of DgvItemsChanged).OnEventHandler
+        '    With eventType.BindingSource
+        '        If eventType.Row >= 0 And eventType.Row < eventType.BindingSource.Count() Then
+        '            Dim gender = eventType.BindingSource.Current.Gender
+        '            Select Case eventType.PropertyName
+        '                Case $"Pregnancy"
+        '                    If gender = "M" Then
+        '                        Beep()
+        '                        eventType.BindingSource.Current.Pregnancy = Nothing
+        '                        'eventType.BindingSource.ResetItem(eventType.Row)
+        '                    End If
+        '                    'If bsIbLabResultDetails.Current.Gender = "M" Then
+        '                    '        Beep()
+        '                    '        e.Cancel = True
+        '                    '        DataGridViewIbLabResultDetails.EndEdit()
+        '                    '    End If
+        '                    'End If
+        '                    '    MakePayTypeAndSpecialAccount(eventType.BindingSource.Current, accountId)
+        '                    '    View.VatAmount = UpdateInputVatAmount(View.JournalItems)
+        '                    '    eventType.BindingSource.ResetItem(eventType.Row)
+        '                    'Case $"Debit"
+        '                    '    MakeDebitAmount(eventType.BindingSource.Current, eventType.BindingSource.Current.Debit)
+        '                    '    eventType.BindingSource.ResetItem(eventType.Row)
+        '                    '    View.VatAmount = UpdateInputVatAmount(View.JournalItems)
+        '                    'Case $"Credit"
+        '                    '    MakeCreditAmount(eventType.BindingSource.Current, eventType.BindingSource.Current.Credit)
+        '                    '    eventType.BindingSource.ResetItem(eventType.Row)
+        '                    '    View.VatAmount = UpdateInputVatAmount(View.JournalItems)
+        '            End Select
+        '        End If
+        '    End With
+        'End Sub
 
     End Class
 

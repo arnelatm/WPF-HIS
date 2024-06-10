@@ -24,7 +24,7 @@
             Me.components = New System.ComponentModel.Container()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(IbLabResultForm))
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -46,6 +46,7 @@
             Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Me.btnRefresh = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.imgList = New System.Windows.Forms.ImageList(Me.components)
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
@@ -54,34 +55,41 @@
             Me.dtpTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.DataGridViewIbLabResultDetails = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.bsIbLabResultDetails = New System.Windows.Forms.BindingSource(Me.components)
+            Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.chkIndeterminate = New System.Windows.Forms.CheckBox()
+            Me.chkNegative = New System.Windows.Forms.CheckBox()
+            Me.CheckBox1 = New System.Windows.Forms.CheckBox()
             Me.CButton1 = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.txtDoctorCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.Sequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvLabNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvPatientName = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvIqamaNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvNationality = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvProfession = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvClinical = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
+            Me.dgvIqamaNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvPassportNumber = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvXRay = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
-            Me.dgvTBSputum = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
-            Me.dgvHIVEliza = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
-            Me.dgvHOVEliza = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
-            Me.dgvHBSAgEliza = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
-            Me.dgvMalaria = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
-            Me.dgvVDRL = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
-            Me.dgvWidal = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
-            Me.dgvPregnancy = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
-            Me.dgvBilharziasisUrine = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
-            Me.dgvBilharziasisStool = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
-            Me.dgvShigella = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
-            Me.dgvCholera = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
+            Me.dgvGender = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvClinical = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+            Me.dgvXRay = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+            Me.dgvTBSputum = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+            Me.dgvHIVEliza = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+            Me.dgvHOVEliza = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+            Me.dgvHBSAgEliza = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+            Me.dgvMalaria = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+            Me.dgvVDRL = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+            Me.dgvWidal = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+            Me.dgvPregnancy = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+            Me.dgvBilharziasisUrine = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+            Me.dgvBilharziasisStool = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+            Me.dgvShigella = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+            Me.dgvCholera = New System.Windows.Forms.DataGridViewCheckBoxColumn()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout2.SuspendLayout()
             Me.TableLayoutPanel1.SuspendLayout()
             CType(Me.DataGridViewIbLabResultDetails, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.bsIbLabResultDetails, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.CFlowLayout1.SuspendLayout()
             Me.SuspendLayout()
             '
             'btnRefresh
@@ -109,12 +117,13 @@
             Me.CFlowLayout2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
             Me.CFlowLayout2.BackColor = System.Drawing.Color.Transparent
             Me.CFlowLayout2.Controls.Add(Me.TableLayoutPanel1)
+            Me.CFlowLayout2.Controls.Add(Me.CFlowLayout1)
             Me.CFlowLayout2.Controls.Add(Me.CButton1)
             Me.CFlowLayout2.Dock = System.Windows.Forms.DockStyle.Fill
             Me.CFlowLayout2.Location = New System.Drawing.Point(0, 55)
             Me.CFlowLayout2.Margin = New System.Windows.Forms.Padding(4)
             Me.CFlowLayout2.Name = "CFlowLayout2"
-            Me.CFlowLayout2.Size = New System.Drawing.Size(1636, 638)
+            Me.CFlowLayout2.Size = New System.Drawing.Size(1636, 645)
             Me.CFlowLayout2.TabIndex = 5
             '
             'TableLayoutPanel1
@@ -193,18 +202,18 @@
             Me.DataGridViewIbLabResultDetails.BegFindValue = Nothing
             Me.DataGridViewIbLabResultDetails.Cached = False
             Me.DataGridViewIbLabResultDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DataGridViewIbLabResultDetails.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Sequence, Me.dgvLabNo, Me.dgvPatientName, Me.dgvIqamaNo, Me.dgvNationality, Me.dgvProfession, Me.dgvClinical, Me.dgvPassportNumber, Me.dgvXRay, Me.dgvTBSputum, Me.dgvHIVEliza, Me.dgvHOVEliza, Me.dgvHBSAgEliza, Me.dgvMalaria, Me.dgvVDRL, Me.dgvWidal, Me.dgvPregnancy, Me.dgvBilharziasisUrine, Me.dgvBilharziasisStool, Me.dgvShigella, Me.dgvCholera})
+            Me.DataGridViewIbLabResultDetails.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Sequence, Me.dgvLabNo, Me.dgvPatientName, Me.dgvNationality, Me.dgvProfession, Me.dgvIqamaNo, Me.dgvPassportNumber, Me.dgvGender, Me.dgvClinical, Me.dgvXRay, Me.dgvTBSputum, Me.dgvHIVEliza, Me.dgvHOVEliza, Me.dgvHBSAgEliza, Me.dgvMalaria, Me.dgvVDRL, Me.dgvWidal, Me.dgvPregnancy, Me.dgvBilharziasisUrine, Me.dgvBilharziasisStool, Me.dgvShigella, Me.dgvCholera})
             Me.TableLayoutPanel1.SetColumnSpan(Me.DataGridViewIbLabResultDetails, 4)
             Me.DataGridViewIbLabResultDetails.DataFilter = Nothing
             Me.DataGridViewIbLabResultDetails.DataSource = Me.bsIbLabResultDetails
-            DataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle23.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle23.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle23.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle23.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewIbLabResultDetails.DefaultCellStyle = DataGridViewCellStyle23
+            DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle24.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle24.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle24.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle24.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle24.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewIbLabResultDetails.DefaultCellStyle = DataGridViewCellStyle24
             Me.DataGridViewIbLabResultDetails.DgvFooter = Nothing
             Me.DataGridViewIbLabResultDetails.DisplayOnly = False
             Me.DataGridViewIbLabResultDetails.Ea = Nothing
@@ -241,11 +250,82 @@
             '
             Me.bsIbLabResultDetails.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.IbLabResultDetailModel)
             '
+            'CFlowLayout1
+            '
+            Me.CFlowLayout1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+            Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
+            Me.CFlowLayout1.Controls.Add(Me.CLabel2)
+            Me.CFlowLayout1.Controls.Add(Me.chkIndeterminate)
+            Me.CFlowLayout1.Controls.Add(Me.chkNegative)
+            Me.CFlowLayout1.Controls.Add(Me.CheckBox1)
+            Me.CFlowLayout1.Location = New System.Drawing.Point(3, 583)
+            Me.CFlowLayout1.Name = "CFlowLayout1"
+            Me.CFlowLayout1.Size = New System.Drawing.Size(456, 58)
+            Me.CFlowLayout1.TabIndex = 18
+            '
+            'CLabel2
+            '
+            Me.CLabel2.AutoSize = True
+            Me.CLabel2.BackColor = System.Drawing.Color.Transparent
+            Me.CLabel2.DisplayOnly = True
+            Me.CLabel2.EditingMode = False
+            Me.CFlowLayout1.SetFlowBreak(Me.CLabel2, True)
+            Me.CLabel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.CLabel2.Location = New System.Drawing.Point(1, 1)
+            Me.CLabel2.Margin = New System.Windows.Forms.Padding(1)
+            Me.CLabel2.Name = "CLabel2"
+            Me.CLabel2.Size = New System.Drawing.Size(76, 20)
+            Me.CLabel2.TabIndex = 3
+            Me.CLabel2.Tag = "Positive"
+            Me.CLabel2.Text = "Legend:"
+            Me.CLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.CLabel2.Translatable = True
+            '
+            'chkIndeterminate
+            '
+            Me.chkIndeterminate.AutoCheck = False
+            Me.chkIndeterminate.AutoSize = True
+            Me.chkIndeterminate.Checked = True
+            Me.chkIndeterminate.CheckState = System.Windows.Forms.CheckState.Indeterminate
+            Me.chkIndeterminate.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.chkIndeterminate.Location = New System.Drawing.Point(3, 29)
+            Me.chkIndeterminate.Name = "chkIndeterminate"
+            Me.chkIndeterminate.Size = New System.Drawing.Size(86, 20)
+            Me.chkIndeterminate.TabIndex = 6
+            Me.chkIndeterminate.Text = "No Data"
+            Me.chkIndeterminate.UseVisualStyleBackColor = True
+            '
+            'chkNegative
+            '
+            Me.chkNegative.AutoCheck = False
+            Me.chkNegative.AutoSize = True
+            Me.chkNegative.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.chkNegative.Location = New System.Drawing.Point(95, 29)
+            Me.chkNegative.Name = "chkNegative"
+            Me.chkNegative.Size = New System.Drawing.Size(150, 20)
+            Me.chkNegative.TabIndex = 5
+            Me.chkNegative.Text = "Negative/Passed"
+            Me.chkNegative.UseVisualStyleBackColor = True
+            '
+            'CheckBox1
+            '
+            Me.CheckBox1.AutoCheck = False
+            Me.CheckBox1.AutoSize = True
+            Me.CheckBox1.Checked = True
+            Me.CheckBox1.CheckState = System.Windows.Forms.CheckState.Checked
+            Me.CheckBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.CheckBox1.Location = New System.Drawing.Point(251, 29)
+            Me.CheckBox1.Name = "CheckBox1"
+            Me.CheckBox1.Size = New System.Drawing.Size(134, 20)
+            Me.CheckBox1.TabIndex = 4
+            Me.CheckBox1.Text = "Positive/Failed"
+            Me.CheckBox1.UseVisualStyleBackColor = True
+            '
             'CButton1
             '
             Me.CButton1.DesignerSelected = False
             Me.CButton1.ImageIndex = 0
-            Me.CButton1.Location = New System.Drawing.Point(4, 584)
+            Me.CButton1.Location = New System.Drawing.Point(466, 584)
             Me.CButton1.Margin = New System.Windows.Forms.Padding(4)
             Me.CButton1.Name = "CButton1"
             Me.CButton1.OriginalImageName = Nothing
@@ -362,40 +442,14 @@
             Me.dgvPatientName.Translatable = False
             Me.dgvPatientName.Width = 117
             '
-            'dgvIqamaNo
-            '
-            Me.dgvIqamaNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-            Me.dgvIqamaNo.BegFindValue = Nothing
-            Me.dgvIqamaNo.DataPropertyName = "IqamaNo"
-            DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
-            Me.dgvIqamaNo.DefaultCellStyle = DataGridViewCellStyle5
-            Me.dgvIqamaNo.DisplayOnly = True
-            Me.dgvIqamaNo.EditingMode = False
-            Me.dgvIqamaNo.EndFindValue = Nothing
-            Me.dgvIqamaNo.FieldDescription = Nothing
-            Me.dgvIqamaNo.FieldName = Nothing
-            Me.dgvIqamaNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.dgvIqamaNo.FindEnabled = False
-            Me.dgvIqamaNo.Frozen = True
-            Me.dgvIqamaNo.HeaderText = "ID/Iqama/ Border No."
-            Me.dgvIqamaNo.IgnoreCase = False
-            Me.dgvIqamaNo.MinimumWidth = 6
-            Me.dgvIqamaNo.Name = "dgvIqamaNo"
-            Me.dgvIqamaNo.ReadOnly = True
-            Me.dgvIqamaNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvIqamaNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.dgvIqamaNo.Translatable = False
-            Me.dgvIqamaNo.Width = 80
-            '
             'dgvNationality
             '
             Me.dgvNationality.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
             Me.dgvNationality.BegFindValue = Nothing
             Me.dgvNationality.DataPropertyName = "Nationality"
-            DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
-            Me.dgvNationality.DefaultCellStyle = DataGridViewCellStyle6
+            DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
+            Me.dgvNationality.DefaultCellStyle = DataGridViewCellStyle5
             Me.dgvNationality.DisplayOnly = True
             Me.dgvNationality.EditingMode = False
             Me.dgvNationality.EndFindValue = Nothing
@@ -403,7 +457,6 @@
             Me.dgvNationality.FieldName = Nothing
             Me.dgvNationality.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.dgvNationality.FindEnabled = False
-            Me.dgvNationality.Frozen = True
             Me.dgvNationality.HeaderText = "Nationality"
             Me.dgvNationality.IgnoreCase = False
             Me.dgvNationality.MinimumWidth = 6
@@ -418,16 +471,15 @@
             '
             Me.dgvProfession.BegFindValue = Nothing
             Me.dgvProfession.DataPropertyName = "Profession"
-            DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
-            Me.dgvProfession.DefaultCellStyle = DataGridViewCellStyle7
+            DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
+            Me.dgvProfession.DefaultCellStyle = DataGridViewCellStyle6
             Me.dgvProfession.EditingMode = False
             Me.dgvProfession.EndFindValue = Nothing
             Me.dgvProfession.FieldDescription = Nothing
             Me.dgvProfession.FieldName = Nothing
             Me.dgvProfession.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.dgvProfession.FindEnabled = False
-            Me.dgvProfession.Frozen = True
             Me.dgvProfession.HeaderText = "Profession"
             Me.dgvProfession.IgnoreCase = False
             Me.dgvProfession.MinimumWidth = 6
@@ -437,39 +489,38 @@
             Me.dgvProfession.Translatable = False
             Me.dgvProfession.Width = 125
             '
-            'dgvClinical
+            'dgvIqamaNo
             '
-            Me.dgvClinical.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-            Me.dgvClinical.BegFindValue = Nothing
-            Me.dgvClinical.DataPropertyName = "Clinical"
-            DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-            DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle8.NullValue = False
-            Me.dgvClinical.DefaultCellStyle = DataGridViewCellStyle8
-            Me.dgvClinical.EditingMode = False
-            Me.dgvClinical.EndFindValue = Nothing
-            Me.dgvClinical.FieldDescription = Nothing
-            Me.dgvClinical.FieldName = Nothing
-            Me.dgvClinical.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.dgvClinical.FindEnabled = False
-            Me.dgvClinical.HeaderText = "Clinical"
-            Me.dgvClinical.IgnoreCase = False
-            Me.dgvClinical.MinimumWidth = 6
-            Me.dgvClinical.Name = "dgvClinical"
-            Me.dgvClinical.ReadOnly = True
-            Me.dgvClinical.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvClinical.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.dgvClinical.Translatable = False
-            Me.dgvClinical.Width = 56
+            Me.dgvIqamaNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+            Me.dgvIqamaNo.BegFindValue = Nothing
+            Me.dgvIqamaNo.DataPropertyName = "IqamaNo"
+            DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
+            Me.dgvIqamaNo.DefaultCellStyle = DataGridViewCellStyle7
+            Me.dgvIqamaNo.DisplayOnly = True
+            Me.dgvIqamaNo.EditingMode = False
+            Me.dgvIqamaNo.EndFindValue = Nothing
+            Me.dgvIqamaNo.FieldDescription = Nothing
+            Me.dgvIqamaNo.FieldName = Nothing
+            Me.dgvIqamaNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvIqamaNo.FindEnabled = False
+            Me.dgvIqamaNo.HeaderText = "ID/Iqama/ Border No."
+            Me.dgvIqamaNo.IgnoreCase = False
+            Me.dgvIqamaNo.MinimumWidth = 6
+            Me.dgvIqamaNo.Name = "dgvIqamaNo"
+            Me.dgvIqamaNo.ReadOnly = True
+            Me.dgvIqamaNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvIqamaNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.dgvIqamaNo.Translatable = False
+            Me.dgvIqamaNo.Width = 80
             '
             'dgvPassportNumber
             '
             Me.dgvPassportNumber.BegFindValue = Nothing
             Me.dgvPassportNumber.DataPropertyName = "PassportNumber"
-            DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
-            Me.dgvPassportNumber.DefaultCellStyle = DataGridViewCellStyle9
+            DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
+            Me.dgvPassportNumber.DefaultCellStyle = DataGridViewCellStyle8
             Me.dgvPassportNumber.EditingMode = False
             Me.dgvPassportNumber.EndFindValue = Nothing
             Me.dgvPassportNumber.FieldDescription = Nothing
@@ -485,337 +536,271 @@
             Me.dgvPassportNumber.Translatable = False
             Me.dgvPassportNumber.Width = 80
             '
-            'dgvXRay
+            'dgvGender
             '
-            Me.dgvXRay.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-            Me.dgvXRay.BegFindValue = Nothing
-            Me.dgvXRay.DataPropertyName = "XRay"
+            Me.dgvGender.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+            Me.dgvGender.BegFindValue = Nothing
+            Me.dgvGender.DataPropertyName = "Gender"
+            DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
+            Me.dgvGender.DefaultCellStyle = DataGridViewCellStyle9
+            Me.dgvGender.EditingMode = False
+            Me.dgvGender.EndFindValue = Nothing
+            Me.dgvGender.FieldDescription = Nothing
+            Me.dgvGender.FieldName = Nothing
+            Me.dgvGender.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvGender.FindEnabled = False
+            Me.dgvGender.HeaderText = "Sex"
+            Me.dgvGender.IgnoreCase = False
+            Me.dgvGender.MinimumWidth = 6
+            Me.dgvGender.Name = "dgvGender"
+            Me.dgvGender.ReadOnly = True
+            Me.dgvGender.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvGender.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.dgvGender.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+            Me.dgvGender.Translatable = False
+            Me.dgvGender.Width = 36
+            '
+            'dgvClinical
+            '
+            Me.dgvClinical.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+            Me.dgvClinical.DataPropertyName = "Clinical"
             DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
             DataGridViewCellStyle10.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle10.NullValue = False
-            Me.dgvXRay.DefaultCellStyle = DataGridViewCellStyle10
-            Me.dgvXRay.EditingMode = False
-            Me.dgvXRay.EndFindValue = Nothing
-            Me.dgvXRay.FieldDescription = Nothing
-            Me.dgvXRay.FieldName = Nothing
-            Me.dgvXRay.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.dgvXRay.FindEnabled = False
-            Me.dgvXRay.HeaderText = "XRay"
-            Me.dgvXRay.IgnoreCase = False
+            DataGridViewCellStyle10.NullValue = System.Windows.Forms.CheckState.Indeterminate
+            Me.dgvClinical.DefaultCellStyle = DataGridViewCellStyle10
+            Me.dgvClinical.HeaderText = "Clinical"
+            Me.dgvClinical.MinimumWidth = 6
+            Me.dgvClinical.Name = "dgvClinical"
+            Me.dgvClinical.ReadOnly = True
+            Me.dgvClinical.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvClinical.ThreeState = True
+            Me.dgvClinical.Width = 56
+            '
+            'dgvXRay
+            '
+            Me.dgvXRay.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+            Me.dgvXRay.DataPropertyName = "XRay"
+            DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+            DataGridViewCellStyle11.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle11.NullValue = System.Windows.Forms.CheckState.Indeterminate
+            Me.dgvXRay.DefaultCellStyle = DataGridViewCellStyle11
+            Me.dgvXRay.HeaderText = "XRay TB"
             Me.dgvXRay.MinimumWidth = 6
             Me.dgvXRay.Name = "dgvXRay"
             Me.dgvXRay.ReadOnly = True
-            Me.dgvXRay.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.dgvXRay.Translatable = False
-            Me.dgvXRay.Visible = False
-            Me.dgvXRay.Width = 46
+            Me.dgvXRay.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvXRay.ThreeState = True
+            Me.dgvXRay.Width = 60
             '
             'dgvTBSputum
             '
             Me.dgvTBSputum.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader
-            Me.dgvTBSputum.BegFindValue = Nothing
             Me.dgvTBSputum.DataPropertyName = "TBSputum"
-            DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-            DataGridViewCellStyle11.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle11.NullValue = False
-            Me.dgvTBSputum.DefaultCellStyle = DataGridViewCellStyle11
-            Me.dgvTBSputum.EditingMode = False
-            Me.dgvTBSputum.EndFindValue = Nothing
-            Me.dgvTBSputum.FieldDescription = Nothing
-            Me.dgvTBSputum.FieldName = Nothing
-            Me.dgvTBSputum.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.dgvTBSputum.FindEnabled = False
-            Me.dgvTBSputum.HeaderText = "TB Sputum"
-            Me.dgvTBSputum.IgnoreCase = False
+            DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+            DataGridViewCellStyle12.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle12.NullValue = System.Windows.Forms.CheckState.Indeterminate
+            Me.dgvTBSputum.DefaultCellStyle = DataGridViewCellStyle12
+            Me.dgvTBSputum.HeaderText = "Sputum TB "
             Me.dgvTBSputum.MinimumWidth = 50
             Me.dgvTBSputum.Name = "dgvTBSputum"
             Me.dgvTBSputum.ReadOnly = True
-            Me.dgvTBSputum.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.dgvTBSputum.Translatable = False
+            Me.dgvTBSputum.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvTBSputum.ThreeState = True
             Me.dgvTBSputum.Width = 50
             '
             'dgvHIVEliza
             '
             Me.dgvHIVEliza.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-            Me.dgvHIVEliza.BegFindValue = Nothing
             Me.dgvHIVEliza.DataPropertyName = "HIVEliza"
-            DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-            DataGridViewCellStyle12.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle12.NullValue = False
-            Me.dgvHIVEliza.DefaultCellStyle = DataGridViewCellStyle12
-            Me.dgvHIVEliza.EditingMode = False
-            Me.dgvHIVEliza.EndFindValue = Nothing
-            Me.dgvHIVEliza.FieldDescription = Nothing
-            Me.dgvHIVEliza.FieldName = Nothing
-            Me.dgvHIVEliza.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.dgvHIVEliza.FindEnabled = False
+            DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+            DataGridViewCellStyle13.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle13.NullValue = System.Windows.Forms.CheckState.Indeterminate
+            Me.dgvHIVEliza.DefaultCellStyle = DataGridViewCellStyle13
             Me.dgvHIVEliza.HeaderText = "HIV Eliza"
-            Me.dgvHIVEliza.IgnoreCase = False
             Me.dgvHIVEliza.MinimumWidth = 6
             Me.dgvHIVEliza.Name = "dgvHIVEliza"
             Me.dgvHIVEliza.ReadOnly = True
-            Me.dgvHIVEliza.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.dgvHIVEliza.Translatable = False
+            Me.dgvHIVEliza.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvHIVEliza.ThreeState = True
             Me.dgvHIVEliza.Width = 60
             '
             'dgvHOVEliza
             '
             Me.dgvHOVEliza.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-            Me.dgvHOVEliza.BegFindValue = Nothing
             Me.dgvHOVEliza.DataPropertyName = "HOVEliza"
-            DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-            DataGridViewCellStyle13.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle13.NullValue = False
-            Me.dgvHOVEliza.DefaultCellStyle = DataGridViewCellStyle13
-            Me.dgvHOVEliza.EditingMode = False
-            Me.dgvHOVEliza.EndFindValue = Nothing
-            Me.dgvHOVEliza.FieldDescription = Nothing
-            Me.dgvHOVEliza.FieldName = Nothing
-            Me.dgvHOVEliza.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.dgvHOVEliza.FindEnabled = False
+            DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+            DataGridViewCellStyle14.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle14.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle14.NullValue = System.Windows.Forms.CheckState.Indeterminate
+            Me.dgvHOVEliza.DefaultCellStyle = DataGridViewCellStyle14
             Me.dgvHOVEliza.HeaderText = "HOV Eliza"
-            Me.dgvHOVEliza.IgnoreCase = False
             Me.dgvHOVEliza.MinimumWidth = 6
             Me.dgvHOVEliza.Name = "dgvHOVEliza"
             Me.dgvHOVEliza.ReadOnly = True
-            Me.dgvHOVEliza.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.dgvHOVEliza.Translatable = False
+            Me.dgvHOVEliza.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvHOVEliza.ThreeState = True
             Me.dgvHOVEliza.Width = 67
             '
             'dgvHBSAgEliza
             '
             Me.dgvHBSAgEliza.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader
-            Me.dgvHBSAgEliza.BegFindValue = Nothing
             Me.dgvHBSAgEliza.DataPropertyName = "HBSAgEliza"
-            DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-            DataGridViewCellStyle14.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle14.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle14.NullValue = False
-            Me.dgvHBSAgEliza.DefaultCellStyle = DataGridViewCellStyle14
-            Me.dgvHBSAgEliza.EditingMode = False
-            Me.dgvHBSAgEliza.EndFindValue = Nothing
-            Me.dgvHBSAgEliza.FieldDescription = Nothing
-            Me.dgvHBSAgEliza.FieldName = Nothing
-            Me.dgvHBSAgEliza.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.dgvHBSAgEliza.FindEnabled = False
+            DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+            DataGridViewCellStyle15.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle15.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle15.NullValue = System.Windows.Forms.CheckState.Indeterminate
+            Me.dgvHBSAgEliza.DefaultCellStyle = DataGridViewCellStyle15
             Me.dgvHBSAgEliza.HeaderText = "HBSAg Eliza"
-            Me.dgvHBSAgEliza.IgnoreCase = False
             Me.dgvHBSAgEliza.MinimumWidth = 50
             Me.dgvHBSAgEliza.Name = "dgvHBSAgEliza"
             Me.dgvHBSAgEliza.ReadOnly = True
-            Me.dgvHBSAgEliza.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.dgvHBSAgEliza.Translatable = False
+            Me.dgvHBSAgEliza.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvHBSAgEliza.ThreeState = True
             Me.dgvHBSAgEliza.Width = 50
             '
             'dgvMalaria
             '
             Me.dgvMalaria.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-            Me.dgvMalaria.BegFindValue = Nothing
             Me.dgvMalaria.DataPropertyName = "Malaria"
-            DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-            DataGridViewCellStyle15.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle15.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle15.NullValue = False
-            Me.dgvMalaria.DefaultCellStyle = DataGridViewCellStyle15
-            Me.dgvMalaria.EditingMode = False
-            Me.dgvMalaria.EndFindValue = Nothing
-            Me.dgvMalaria.FieldDescription = Nothing
-            Me.dgvMalaria.FieldName = Nothing
-            Me.dgvMalaria.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.dgvMalaria.FindEnabled = False
+            DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+            DataGridViewCellStyle16.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle16.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle16.NullValue = System.Windows.Forms.CheckState.Indeterminate
+            Me.dgvMalaria.DefaultCellStyle = DataGridViewCellStyle16
             Me.dgvMalaria.HeaderText = "Malaria"
-            Me.dgvMalaria.IgnoreCase = False
             Me.dgvMalaria.MinimumWidth = 6
             Me.dgvMalaria.Name = "dgvMalaria"
             Me.dgvMalaria.ReadOnly = True
-            Me.dgvMalaria.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.dgvMalaria.Translatable = False
+            Me.dgvMalaria.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvMalaria.ThreeState = True
             Me.dgvMalaria.Width = 58
             '
             'dgvVDRL
             '
             Me.dgvVDRL.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-            Me.dgvVDRL.BegFindValue = Nothing
             Me.dgvVDRL.DataPropertyName = "VDRL"
-            DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-            DataGridViewCellStyle16.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle16.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle16.NullValue = False
-            Me.dgvVDRL.DefaultCellStyle = DataGridViewCellStyle16
-            Me.dgvVDRL.EditingMode = False
-            Me.dgvVDRL.EndFindValue = Nothing
-            Me.dgvVDRL.FieldDescription = Nothing
-            Me.dgvVDRL.FieldName = Nothing
-            Me.dgvVDRL.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.dgvVDRL.FindEnabled = False
+            DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+            DataGridViewCellStyle17.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle17.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle17.NullValue = System.Windows.Forms.CheckState.Indeterminate
+            Me.dgvVDRL.DefaultCellStyle = DataGridViewCellStyle17
             Me.dgvVDRL.HeaderText = "VDRL"
-            Me.dgvVDRL.IgnoreCase = False
             Me.dgvVDRL.MinimumWidth = 6
             Me.dgvVDRL.Name = "dgvVDRL"
             Me.dgvVDRL.ReadOnly = True
-            Me.dgvVDRL.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.dgvVDRL.Translatable = False
+            Me.dgvVDRL.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvVDRL.ThreeState = True
             Me.dgvVDRL.Width = 49
             '
             'dgvWidal
             '
             Me.dgvWidal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-            Me.dgvWidal.BegFindValue = Nothing
             Me.dgvWidal.DataPropertyName = "Widal"
-            DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-            DataGridViewCellStyle17.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle17.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle17.NullValue = False
-            Me.dgvWidal.DefaultCellStyle = DataGridViewCellStyle17
-            Me.dgvWidal.EditingMode = False
-            Me.dgvWidal.EndFindValue = Nothing
-            Me.dgvWidal.FieldDescription = Nothing
-            Me.dgvWidal.FieldName = Nothing
-            Me.dgvWidal.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.dgvWidal.FindEnabled = False
+            DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+            DataGridViewCellStyle18.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle18.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle18.NullValue = System.Windows.Forms.CheckState.Indeterminate
+            Me.dgvWidal.DefaultCellStyle = DataGridViewCellStyle18
             Me.dgvWidal.HeaderText = "Widal"
-            Me.dgvWidal.IgnoreCase = False
             Me.dgvWidal.MinimumWidth = 6
             Me.dgvWidal.Name = "dgvWidal"
             Me.dgvWidal.ReadOnly = True
             Me.dgvWidal.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvWidal.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.dgvWidal.Translatable = False
+            Me.dgvWidal.ThreeState = True
             Me.dgvWidal.Width = 48
             '
             'dgvPregnancy
             '
             Me.dgvPregnancy.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader
-            Me.dgvPregnancy.BegFindValue = Nothing
             Me.dgvPregnancy.DataPropertyName = "Pregnancy"
-            DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-            DataGridViewCellStyle18.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle18.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle18.NullValue = False
-            Me.dgvPregnancy.DefaultCellStyle = DataGridViewCellStyle18
-            Me.dgvPregnancy.EditingMode = False
-            Me.dgvPregnancy.EndFindValue = Nothing
-            Me.dgvPregnancy.FieldDescription = Nothing
-            Me.dgvPregnancy.FieldName = Nothing
-            Me.dgvPregnancy.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.dgvPregnancy.FindEnabled = False
+            DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+            DataGridViewCellStyle19.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle19.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle19.NullValue = System.Windows.Forms.CheckState.Indeterminate
+            Me.dgvPregnancy.DefaultCellStyle = DataGridViewCellStyle19
             Me.dgvPregnancy.HeaderText = "Preg- nancy"
-            Me.dgvPregnancy.IgnoreCase = False
             Me.dgvPregnancy.MinimumWidth = 50
             Me.dgvPregnancy.Name = "dgvPregnancy"
             Me.dgvPregnancy.ReadOnly = True
-            Me.dgvPregnancy.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.dgvPregnancy.Translatable = False
+            Me.dgvPregnancy.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvPregnancy.ThreeState = True
             Me.dgvPregnancy.Width = 50
             '
             'dgvBilharziasisUrine
             '
             Me.dgvBilharziasisUrine.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader
-            Me.dgvBilharziasisUrine.BegFindValue = Nothing
             Me.dgvBilharziasisUrine.DataPropertyName = "BilharziasisUrine"
-            DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-            DataGridViewCellStyle19.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle19.Font = New System.Drawing.Font("Arial Unicode MS", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle19.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle19.NullValue = False
-            Me.dgvBilharziasisUrine.DefaultCellStyle = DataGridViewCellStyle19
-            Me.dgvBilharziasisUrine.EditingMode = False
-            Me.dgvBilharziasisUrine.EndFindValue = Nothing
-            Me.dgvBilharziasisUrine.FieldDescription = Nothing
-            Me.dgvBilharziasisUrine.FieldName = Nothing
+            DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+            DataGridViewCellStyle20.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle20.Font = New System.Drawing.Font("Arial Unicode MS", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle20.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle20.NullValue = System.Windows.Forms.CheckState.Indeterminate
+            Me.dgvBilharziasisUrine.DefaultCellStyle = DataGridViewCellStyle20
             Me.dgvBilharziasisUrine.FillWeight = 1.0!
-            Me.dgvBilharziasisUrine.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.dgvBilharziasisUrine.FindEnabled = False
             Me.dgvBilharziasisUrine.HeaderText = "Bilharziasis Urine"
-            Me.dgvBilharziasisUrine.IgnoreCase = False
             Me.dgvBilharziasisUrine.MinimumWidth = 50
             Me.dgvBilharziasisUrine.Name = "dgvBilharziasisUrine"
             Me.dgvBilharziasisUrine.ReadOnly = True
             Me.dgvBilharziasisUrine.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.dgvBilharziasisUrine.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.dgvBilharziasisUrine.Translatable = False
+            Me.dgvBilharziasisUrine.ThreeState = True
             Me.dgvBilharziasisUrine.Width = 50
             '
             'dgvBilharziasisStool
             '
             Me.dgvBilharziasisStool.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader
-            Me.dgvBilharziasisStool.BegFindValue = Nothing
             Me.dgvBilharziasisStool.DataPropertyName = "BilharziasisStool"
-            DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-            DataGridViewCellStyle20.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle20.Font = New System.Drawing.Font("Arial Unicode MS", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle20.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle20.NullValue = False
-            Me.dgvBilharziasisStool.DefaultCellStyle = DataGridViewCellStyle20
-            Me.dgvBilharziasisStool.EditingMode = False
-            Me.dgvBilharziasisStool.EndFindValue = Nothing
-            Me.dgvBilharziasisStool.FieldDescription = Nothing
-            Me.dgvBilharziasisStool.FieldName = Nothing
+            DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+            DataGridViewCellStyle21.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle21.Font = New System.Drawing.Font("Arial Unicode MS", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle21.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle21.NullValue = System.Windows.Forms.CheckState.Indeterminate
+            Me.dgvBilharziasisStool.DefaultCellStyle = DataGridViewCellStyle21
             Me.dgvBilharziasisStool.FillWeight = 1.0!
-            Me.dgvBilharziasisStool.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.dgvBilharziasisStool.FindEnabled = False
             Me.dgvBilharziasisStool.HeaderText = "Bilharziasis Stool"
-            Me.dgvBilharziasisStool.IgnoreCase = False
             Me.dgvBilharziasisStool.MinimumWidth = 50
             Me.dgvBilharziasisStool.Name = "dgvBilharziasisStool"
             Me.dgvBilharziasisStool.ReadOnly = True
             Me.dgvBilharziasisStool.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.dgvBilharziasisStool.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.dgvBilharziasisStool.Translatable = False
+            Me.dgvBilharziasisStool.ThreeState = True
             Me.dgvBilharziasisStool.Width = 50
             '
             'dgvShigella
             '
             Me.dgvShigella.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-            Me.dgvShigella.BegFindValue = Nothing
             Me.dgvShigella.DataPropertyName = "Shigella"
-            DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-            DataGridViewCellStyle21.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle21.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle21.NullValue = False
-            Me.dgvShigella.DefaultCellStyle = DataGridViewCellStyle21
-            Me.dgvShigella.EditingMode = False
-            Me.dgvShigella.EndFindValue = Nothing
-            Me.dgvShigella.FieldDescription = Nothing
-            Me.dgvShigella.FieldName = Nothing
-            Me.dgvShigella.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.dgvShigella.FindEnabled = False
+            DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+            DataGridViewCellStyle22.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle22.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle22.NullValue = System.Windows.Forms.CheckState.Indeterminate
+            Me.dgvShigella.DefaultCellStyle = DataGridViewCellStyle22
             Me.dgvShigella.HeaderText = "Shigella"
-            Me.dgvShigella.IgnoreCase = False
             Me.dgvShigella.MinimumWidth = 6
             Me.dgvShigella.Name = "dgvShigella"
             Me.dgvShigella.ReadOnly = True
-            Me.dgvShigella.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.dgvShigella.Translatable = False
+            Me.dgvShigella.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvShigella.ThreeState = True
             Me.dgvShigella.Width = 62
             '
             'dgvCholera
             '
             Me.dgvCholera.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-            Me.dgvCholera.BegFindValue = Nothing
             Me.dgvCholera.DataPropertyName = "Cholera"
-            DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-            DataGridViewCellStyle22.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle22.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle22.NullValue = False
-            Me.dgvCholera.DefaultCellStyle = DataGridViewCellStyle22
-            Me.dgvCholera.EditingMode = False
-            Me.dgvCholera.EndFindValue = Nothing
-            Me.dgvCholera.FieldDescription = Nothing
-            Me.dgvCholera.FieldName = Nothing
-            Me.dgvCholera.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.dgvCholera.FindEnabled = False
+            DataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+            DataGridViewCellStyle23.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle23.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle23.NullValue = System.Windows.Forms.CheckState.Indeterminate
+            Me.dgvCholera.DefaultCellStyle = DataGridViewCellStyle23
             Me.dgvCholera.HeaderText = "Cholera"
-            Me.dgvCholera.IgnoreCase = False
             Me.dgvCholera.MinimumWidth = 6
             Me.dgvCholera.Name = "dgvCholera"
             Me.dgvCholera.ReadOnly = True
-            Me.dgvCholera.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.dgvCholera.Translatable = False
+            Me.dgvCholera.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvCholera.ThreeState = True
             Me.dgvCholera.Width = 60
             '
             'IbLabResultForm
@@ -823,7 +808,7 @@
             Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
             Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
             Me.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.GreenGradientBackgroundLarge
-            Me.ClientSize = New System.Drawing.Size(1636, 693)
+            Me.ClientSize = New System.Drawing.Size(1636, 700)
             Me.Controls.Add(Me.CFlowLayout2)
             Me.Controls.Add(Me.txtDoctorCode)
             Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -837,6 +822,8 @@
             Me.TableLayoutPanel1.PerformLayout()
             CType(Me.DataGridViewIbLabResultDetails, System.ComponentModel.ISupportInitialize).EndInit()
             CType(Me.bsIbLabResultDetails, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.CFlowLayout1.ResumeLayout(False)
+            Me.CFlowLayout1.PerformLayout()
             Me.ResumeLayout(False)
             Me.PerformLayout()
 
@@ -876,26 +863,32 @@
         Friend WithEvents dgvRBS As Libraries.CBaseControlsLibrary.CDgvDecimalColumn
         Friend WithEvents DataGridViewTextBoxColumn8 As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents CButton1 As Libraries.CBaseControlsLibrary.CButton
+        Friend WithEvents CFlowLayout1 As Libraries.CBaseControlsLibrary.CFlowLayout
+        Friend WithEvents CLabel2 As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents chkIndeterminate As CheckBox
+        Friend WithEvents chkNegative As CheckBox
+        Friend WithEvents CheckBox1 As CheckBox
         Friend WithEvents Sequence As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents dgvLabNo As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents dgvPatientName As Libraries.CBaseControlsLibrary.CDgvTextColumn
-        Friend WithEvents dgvIqamaNo As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents dgvNationality As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents dgvProfession As Libraries.CBaseControlsLibrary.CDgvTextColumn
-        Friend WithEvents dgvClinical As Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn
+        Friend WithEvents dgvIqamaNo As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents dgvPassportNumber As Libraries.CBaseControlsLibrary.CDgvTextColumn
-        Friend WithEvents dgvXRay As Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn
-        Friend WithEvents dgvTBSputum As Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn
-        Friend WithEvents dgvHIVEliza As Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn
-        Friend WithEvents dgvHOVEliza As Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn
-        Friend WithEvents dgvHBSAgEliza As Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn
-        Friend WithEvents dgvMalaria As Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn
-        Friend WithEvents dgvVDRL As Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn
-        Friend WithEvents dgvWidal As Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn
-        Friend WithEvents dgvPregnancy As Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn
-        Friend WithEvents dgvBilharziasisUrine As Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn
-        Friend WithEvents dgvBilharziasisStool As Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn
-        Friend WithEvents dgvShigella As Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn
-        Friend WithEvents dgvCholera As Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn
+        Friend WithEvents dgvGender As Libraries.CBaseControlsLibrary.CDgvTextColumn
+        Friend WithEvents dgvClinical As DataGridViewCheckBoxColumn
+        Friend WithEvents dgvXRay As DataGridViewCheckBoxColumn
+        Friend WithEvents dgvTBSputum As DataGridViewCheckBoxColumn
+        Friend WithEvents dgvHIVEliza As DataGridViewCheckBoxColumn
+        Friend WithEvents dgvHOVEliza As DataGridViewCheckBoxColumn
+        Friend WithEvents dgvHBSAgEliza As DataGridViewCheckBoxColumn
+        Friend WithEvents dgvMalaria As DataGridViewCheckBoxColumn
+        Friend WithEvents dgvVDRL As DataGridViewCheckBoxColumn
+        Friend WithEvents dgvWidal As DataGridViewCheckBoxColumn
+        Friend WithEvents dgvPregnancy As DataGridViewCheckBoxColumn
+        Friend WithEvents dgvBilharziasisUrine As DataGridViewCheckBoxColumn
+        Friend WithEvents dgvBilharziasisStool As DataGridViewCheckBoxColumn
+        Friend WithEvents dgvShigella As DataGridViewCheckBoxColumn
+        Friend WithEvents dgvCholera As DataGridViewCheckBoxColumn
     End Class
 End Namespace

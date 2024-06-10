@@ -1,4 +1,5 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports Telerik.WinControls.VirtualKeyboard
 
 Namespace PresentationLayer.Views.Forms
 
@@ -148,6 +149,26 @@ Namespace PresentationLayer.Views.Forms
         Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles CButton1.ClickButtonArea
             RaiseEvent FillUpButtonClicked()
         End Sub
+
+        'Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewIbLabResultDetails.CellEndEdit
+        '    ProcessCellEndEdit(DataGridViewIbLabResultDetails, bsIbLabResultDetails)
+        'End Sub
+
+        Private Sub Grid_OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewIbLabResultDetails.CellBeginEdit
+            With DataGridViewIbLabResultDetails.CurrentCell
+                Dim cColumnName = .OwningColumn.Name.ToLower()
+                If cColumnName = $"dgvpregnancy" Then
+                    If bsIbLabResultDetails.Current.Gender = "M" Then
+                        Beep()
+                        e.Cancel = True
+                    End If
+                End If
+                If DataGridViewIbLabResultDetails.CurrentCell.OwningColumn.CellType.Name = "DataGridViewCheckBoxCell" Then
+                    DataGridViewIbLabResultDetails.EndEdit()
+                End If
+            End With
+        End Sub
+
     End Class
 
 End Namespace
