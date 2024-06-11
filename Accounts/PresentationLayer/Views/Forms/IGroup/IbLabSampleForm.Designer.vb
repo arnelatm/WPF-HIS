@@ -68,12 +68,11 @@
             '
             Me.btnRefresh.DesignerSelected = False
             Me.btnRefresh.ImageIndex = 0
-            Me.btnRefresh.Location = New System.Drawing.Point(335, 4)
-            Me.btnRefresh.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.btnRefresh.Location = New System.Drawing.Point(281, 3)
             Me.btnRefresh.Name = "btnRefresh"
             Me.btnRefresh.OriginalImageName = Nothing
             Me.btnRefresh.SecurityKey = ""
-            Me.btnRefresh.Size = New System.Drawing.Size(120, 31)
+            Me.btnRefresh.Size = New System.Drawing.Size(90, 25)
             Me.btnRefresh.TabIndex = 11
             Me.btnRefresh.Text = "Refresh"
             '
@@ -91,9 +90,8 @@
             Me.CFlowLayout2.Controls.Add(Me.TableLayoutPanel1)
             Me.CFlowLayout2.Dock = System.Windows.Forms.DockStyle.Fill
             Me.CFlowLayout2.Location = New System.Drawing.Point(0, 55)
-            Me.CFlowLayout2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
             Me.CFlowLayout2.Name = "CFlowLayout2"
-            Me.CFlowLayout2.Size = New System.Drawing.Size(1284, 603)
+            Me.CFlowLayout2.Size = New System.Drawing.Size(963, 480)
             Me.CFlowLayout2.TabIndex = 5
             '
             'TableLayoutPanel1
@@ -108,15 +106,14 @@
             Me.TableLayoutPanel1.Controls.Add(Me.dtpTransactionDate, 1, 1)
             Me.TableLayoutPanel1.Controls.Add(Me.btnRefresh, 3, 1)
             Me.TableLayoutPanel1.Controls.Add(Me.DataGridViewIbLabSampleDetails, 1, 2)
-            Me.TableLayoutPanel1.Location = New System.Drawing.Point(4, 4)
-            Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.TableLayoutPanel1.Location = New System.Drawing.Point(3, 3)
             Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
             Me.TableLayoutPanel1.RowCount = 3
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25.0!))
-            Me.TableLayoutPanel1.Size = New System.Drawing.Size(1287, 572)
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+            Me.TableLayoutPanel1.Size = New System.Drawing.Size(965, 465)
             Me.TableLayoutPanel1.TabIndex = 17
             '
             'CLabel1
@@ -128,7 +125,7 @@
             Me.CLabel1.Location = New System.Drawing.Point(1, 1)
             Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel1.Name = "CLabel1"
-            Me.CLabel1.Size = New System.Drawing.Size(208, 28)
+            Me.CLabel1.Size = New System.Drawing.Size(156, 23)
             Me.CLabel1.TabIndex = 13
             Me.CLabel1.Text = "Transaction Date:"
             Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -148,14 +145,14 @@
             Me.dtpTransactionDate.EditsAllowed = False
             Me.dtpTransactionDate.ForeColor = System.Drawing.Color.Black
             Me.dtpTransactionDate.LinkedLabel = Nothing
-            Me.dtpTransactionDate.Location = New System.Drawing.Point(211, 1)
+            Me.dtpTransactionDate.Location = New System.Drawing.Point(159, 1)
             Me.dtpTransactionDate.Margin = New System.Windows.Forms.Padding(1)
             Me.dtpTransactionDate.Name = "dtpTransactionDate"
             Me.dtpTransactionDate.ReadOnlyDp = False
             Me.dtpTransactionDate.SecurityKey = Nothing
             Me.dtpTransactionDate.ShowLongDate = False
             Me.dtpTransactionDate.ShowTime = False
-            Me.dtpTransactionDate.Size = New System.Drawing.Size(119, 27)
+            Me.dtpTransactionDate.Size = New System.Drawing.Size(118, 23)
             Me.dtpTransactionDate.TabIndex = 12
             Me.dtpTransactionDate.TargetCalendar = CType(resources.GetObject("dtpTransactionDate.TargetCalendar"), System.Globalization.Calendar)
             Me.dtpTransactionDate.Translatable = False
@@ -199,8 +196,7 @@
             Me.DataGridViewIbLabSampleDetails.FirstRowInsertionEnabled = True
             Me.DataGridViewIbLabSampleDetails.IgnoreCase = False
             Me.DataGridViewIbLabSampleDetails.IsDirty = False
-            Me.DataGridViewIbLabSampleDetails.Location = New System.Drawing.Point(4, 43)
-            Me.DataGridViewIbLabSampleDetails.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.DataGridViewIbLabSampleDetails.Location = New System.Drawing.Point(3, 34)
             Me.DataGridViewIbLabSampleDetails.Name = "DataGridViewIbLabSampleDetails"
             Me.DataGridViewIbLabSampleDetails.OldCellValue = Nothing
             Me.DataGridViewIbLabSampleDetails.ReadOnly = True
@@ -211,7 +207,7 @@
             Me.DataGridViewIbLabSampleDetails.SequenceColumn = "dgvSequence"
             Me.DataGridViewIbLabSampleDetails.SequenceFieldName = "Sequence"
             Me.DataGridViewIbLabSampleDetails.ShowFooter = False
-            Me.DataGridViewIbLabSampleDetails.Size = New System.Drawing.Size(1283, 518)
+            Me.DataGridViewIbLabSampleDetails.Size = New System.Drawing.Size(962, 421)
             Me.DataGridViewIbLabSampleDetails.TabIndex = 14
             Me.DataGridViewIbLabSampleDetails.Translatable = True
             '
@@ -237,7 +233,7 @@
             Me.Sequence.ReadOnly = True
             Me.Sequence.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.Sequence.Translatable = False
-            Me.Sequence.Width = 61
+            Me.Sequence.Width = 51
             '
             'DataGridViewTextBoxColumn9
             '
@@ -262,7 +258,7 @@
             Me.DataGridViewTextBoxColumn9.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.DataGridViewTextBoxColumn9.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewTextBoxColumn9.Translatable = False
-            Me.DataGridViewTextBoxColumn9.Width = 101
+            Me.DataGridViewTextBoxColumn9.Width = 82
             '
             'DataGridViewTextBoxColumn4
             '
@@ -287,7 +283,7 @@
             Me.DataGridViewTextBoxColumn4.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.DataGridViewTextBoxColumn4.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewTextBoxColumn4.Translatable = False
-            Me.DataGridViewTextBoxColumn4.Width = 77
+            Me.DataGridViewTextBoxColumn4.Width = 50
             '
             'DataGridViewTextBoxColumn6
             '
@@ -336,7 +332,7 @@
             Me.IqamaNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.IqamaNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.IqamaNo.Translatable = False
-            Me.IqamaNo.Width = 130
+            Me.IqamaNo.Width = 109
             '
             'DataGridViewTextBoxColumn5
             '
@@ -361,7 +357,7 @@
             Me.DataGridViewTextBoxColumn5.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.DataGridViewTextBoxColumn5.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewTextBoxColumn5.Translatable = False
-            Me.DataGridViewTextBoxColumn5.Width = 99
+            Me.DataGridViewTextBoxColumn5.Width = 81
             '
             'dgvAge
             '
@@ -378,7 +374,7 @@
             Me.dgvAge.Name = "dgvAge"
             Me.dgvAge.ReadOnly = True
             Me.dgvAge.Translatable = False
-            Me.dgvAge.Width = 38
+            Me.dgvAge.Width = 32
             '
             'dgvUrine
             '
@@ -404,7 +400,7 @@
             Me.dgvUrine.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvUrine.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.dgvUrine.Translatable = False
-            Me.dgvUrine.Width = 45
+            Me.dgvUrine.Width = 38
             '
             'dgvStool
             '
@@ -430,7 +426,7 @@
             Me.dgvStool.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvStool.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.dgvStool.Translatable = False
-            Me.dgvStool.Width = 44
+            Me.dgvStool.Width = 37
             '
             'dgvRBS
             '
@@ -449,7 +445,7 @@
             Me.dgvRBS.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvRBS.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
             Me.dgvRBS.Translatable = False
-            Me.dgvRBS.Width = 61
+            Me.dgvRBS.Width = 51
             '
             'DataGridViewTextBoxColumn8
             '
@@ -474,7 +470,7 @@
             Me.DataGridViewTextBoxColumn8.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.DataGridViewTextBoxColumn8.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewTextBoxColumn8.Translatable = False
-            Me.DataGridViewTextBoxColumn8.Width = 87
+            Me.DataGridViewTextBoxColumn8.Width = 72
             '
             'DataGridViewTextBoxColumn2
             '
@@ -507,7 +503,7 @@
             Me.txtDoctorCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtDoctorCode.ForeColor = System.Drawing.Color.Black
             Me.txtDoctorCode.LinkedLabel = Nothing
-            Me.txtDoctorCode.Location = New System.Drawing.Point(924, 110)
+            Me.txtDoctorCode.Location = New System.Drawing.Point(693, 89)
             Me.txtDoctorCode.Margin = New System.Windows.Forms.Padding(1)
             Me.txtDoctorCode.MaximumValue = Nothing
             Me.txtDoctorCode.MinimumValue = Nothing
@@ -515,20 +511,19 @@
             Me.txtDoctorCode.OldValue = Nothing
             Me.txtDoctorCode.OverrideMaxLength = 0
             Me.txtDoctorCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtDoctorCode.Size = New System.Drawing.Size(106, 26)
+            Me.txtDoctorCode.Size = New System.Drawing.Size(80, 23)
             Me.txtDoctorCode.TabIndex = 16
             Me.txtDoctorCode.Translatable = False
             Me.txtDoctorCode.Visible = False
             '
             'IbLabSampleForm
             '
-            Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+            Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
             Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
             Me.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.GreenGradientBackgroundLarge
-            Me.ClientSize = New System.Drawing.Size(1284, 658)
+            Me.ClientSize = New System.Drawing.Size(963, 535)
             Me.Controls.Add(Me.CFlowLayout2)
             Me.Controls.Add(Me.txtDoctorCode)
-            Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
             Me.Name = "IbLabSampleForm"
             Me.Text = "Diagnostic Sample Entry Form"
             Me.Controls.SetChildIndex(Me.txtDoctorCode, 0)

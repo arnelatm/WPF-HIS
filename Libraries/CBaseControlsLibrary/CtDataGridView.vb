@@ -39,7 +39,7 @@ Public Class CtDataGridView
         ShowCellErrors = True
         ShowRowErrors = True
         _origEditMode = EditMode
-
+        MakeHeaderToolTips()
     End Sub
 
     Public Property Cached As Boolean = False
@@ -977,6 +977,14 @@ Public Class CtDataGridView
                 CommitEdit(DataGridViewDataErrorContexts.Commit)
             End If
         End If
+    End Sub
+
+    Public Sub MakeHeaderToolTips()
+        'dgvAge.DisplayOnly = True
+        For Each col In Columns
+            Dim headerCell As DataGridViewColumnHeaderCell = headerCell
+            headerCell.ToolTipText = col.HeaderText
+        Next
     End Sub
 
     'Sub dataGridView1_CurrentCellDirtyStateChanged(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.CurrentCellDirtyStateChanged
