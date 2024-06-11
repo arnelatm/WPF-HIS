@@ -1,4 +1,5 @@
-﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+﻿Imports System.Data.Common
+Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports Telerik.WinControls.VirtualKeyboard
 
 Namespace PresentationLayer.Views.Forms
@@ -72,7 +73,11 @@ Namespace PresentationLayer.Views.Forms
         Private Sub IbLabResultCollectionForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             RaiseEvent IbLabResultRequested(TransactionDate)
             'dgvClinical.ThreeState = True
-            'dgvAge.DisplayOnly = True
+            ''dgvAge.DisplayOnly = True
+            'For Each col In DataGridViewIbLabResultDetails.Columns
+            '    Dim headerCell As DataGridViewColumnHeaderCell = col.HeaderCell
+            '    headerCell.ToolTipText = col.HeaderText
+            'Next
         End Sub
 
         Private Sub dataGridView1_CellFormatting(ByVal sender As Object, ByVal e As DataGridViewCellFormattingEventArgs)
@@ -87,7 +92,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub dtpTransactionDate_Validated(sender As Object, e As EventArgs) Handles dtpTransactionDate.Validated
-            'RaiseEvent GetDoctorPatientsRequested()
+            RaiseEvent IbLabResultRequested(TransactionDate)
         End Sub
 
         Private Sub DataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs)
