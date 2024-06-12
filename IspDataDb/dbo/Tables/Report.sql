@@ -12,14 +12,14 @@
     [PaperSize]             SMALLINT       NULL,
     [ReportGroup]           VARCHAR (10)   NULL,
     [ReportGroupIdNo]       SMALLINT       NULL,
-    [ReportNo]              NUMERIC (5)    NOT NULL,
+    [ReportNo]              NUMERIC (5)    NULL,
     [ReportOrder]           NUMERIC (5)    NULL,
     [ReportFileName]        VARCHAR (200)  NULL,
     [ReportTitle]           VARCHAR (200)  NULL,
     [ReportTitleAra]        NVARCHAR (200) NULL,
-    [ReportHeadingEnglish1] VARCHAR (75)   NOT NULL,
+    [ReportHeadingEnglish1] VARCHAR (75)   NULL,
     [ReportHeadingEnglish2] VARCHAR (75)   NULL,
-    [ReportHeadingArabic1]  NVARCHAR (75)  NOT NULL,
+    [ReportHeadingArabic1]  NVARCHAR (75)  NULL,
     [ReportHeadingArabic2]  NVARCHAR (75)  NULL,
     [QueryColumns]          VARCHAR (1000) NULL,
     [QueryFrom]             VARCHAR (500)  NULL,
@@ -42,6 +42,8 @@
     [Active]                BIT            NULL,
     CONSTRAINT [PK_ReportCreator] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 

@@ -28,9 +28,6 @@ Namespace PresentationLayer.Views.Interfaces
 
         Event UpdateDrugDisplay(itemIdNo As Int32)
         Event UpdateItemDisplay(gTinIdNo As Integer)
-
-        Event UpdateItemDisplay(gTinIdNo As Integer)
-
         Event MatchGTinRequested(gTinNumber As String, itemDetailIdNo As Integer)
 
 
