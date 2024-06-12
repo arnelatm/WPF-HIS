@@ -556,38 +556,6 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Return OriginalModel
     End Function
 
-    Public Overloads Function GetLookupDataTable(lookupObj As DataTable) As DataTable
-        Return Service.GetLookupDataTable(lookupObj)
-    End Function
-
-    Public Overloads Function GetLookupDataTable(pTableName As String, Optional pFilter As String = Nothing) As DataTable
-        Dim lookupObj As New LookupTable(pTableName, pFilter)
-        Return Service.GetLookupDataTable(lookupObj)
-    End Function
-
-    Public Overloads Function GetLookupDataTable(pTableName As String, pSortKey As String, Optional pFilter As String = Nothing) As DataTable
-        Dim lookupObj As New LookupTable(pTableName, pFilter)
-        lookupObj.SortKey = pSortKey
-        lookupObj.FilterKey = pFilter
-        Return Service.GetLookupDataTable(lookupObj)
-    End Function
-
-    Public Overloads Function GetLookupDataTable(pTableName As String, pFieldsToShow As String(), Optional pFilter As String = Nothing) As DataTable
-        Dim lookupObj As New LookupTable(pTableName, pFilter)
-        lookupObj.FieldsToShow = pFieldsToShow
-        lookupObj.FilterKey = pFilter
-        lookupObj.SortKey = pFieldsToShow(1)
-        Return Service.GetLookupDataTable(lookupObj)
-    End Function
-
-    Public Overloads Function GetLookupDataTable(pTableName As String, pFieldsToShow As String(), pSortKey As String, Optional pFilter As String = Nothing) As DataTable
-        Dim lookupObj As New LookupTable(pTableName, pFilter)
-        lookupObj.FieldsToShow = pFieldsToShow
-        lookupObj.SortKey = pSortKey
-        lookupObj.FilterKey = pFilter
-        Return Service.GetLookupDataTable(lookupObj)
-    End Function
-
     Public Function GetOriginalValue(ByRef control As Object) As String
         Dim retVal = ""
         Dim type As Type = OriginalModel.GetType()

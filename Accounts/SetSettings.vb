@@ -22,10 +22,13 @@ Public Class SetSettings
         'PropertyGrid.BrowsableAttributes = attrs
     End Sub
 
-    Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles CButton1.ClickButtonArea
+    Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) 
         _appSettings.Save()
     End Sub
 
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        _appSettings.Save()
+    End Sub
 End Class
 
 <Serializable()>
@@ -118,6 +121,7 @@ Public Class AppSettings
         writer = New StreamWriter("AccountSettings.xml")
         serializer.Serialize(writer, Me)
         writer.Close()
+        MessageBox.Show("Settings Saved")
     End Sub
 
 End Class

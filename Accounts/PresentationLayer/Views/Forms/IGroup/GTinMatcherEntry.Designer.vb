@@ -20,8 +20,8 @@
         'Do not modify it using the code editor.
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(GTinMatcherEntry))
+            Me.components = New System.ComponentModel.Container()
+            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(GTinMatcherEntry))
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -2125,23 +2125,32 @@
             Me.Controls.SetChildIndex(Me.CFlowLayout3, 0)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             CType(Me.EventLog1, System.ComponentModel.ISupportInitialize).EndInit()
-            Me.CFlowLayout1.ResumeLayout(false)
-        Me.CFlowLayout1.PerformLayout
-        CType(Me.BnItems,System.ComponentModel.ISupportInitialize).EndInit
-        Me.BnItems.ResumeLayout(false)
-        Me.BnItems.PerformLayout
-        Me.CFlowLayout2.ResumeLayout(false)
-        Me.CFlowLayout2.PerformLayout
-        CType(Me.BnDrugs,System.ComponentModel.ISupportInitialize).EndInit
-        Me.BnDrugs.ResumeLayout(false)
-        Me.BnDrugs.PerformLayout
-        Me.CFlowLayout3.ResumeLayout(false)
-        CType(Me.DataGridViewItems,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.DataGridViewDrugs,System.ComponentModel.ISupportInitialize).EndInit
-        Me.ResumeLayout(false)
-        Me.PerformLayout
+            Me.CFlowLayout1.ResumeLayout(False)
+            Me.CFlowLayout1.PerformLayout
+            CType(Me.BnItems, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.BnItems.ResumeLayout(False)
+            Me.BnItems.PerformLayout
+            Me.CFlowLayout2.ResumeLayout(False)
+            Me.CFlowLayout2.PerformLayout
+            CType(Me.BnDrugs, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.BnDrugs.ResumeLayout(False)
+            Me.BnDrugs.PerformLayout
+            Me.CFlowLayout3.ResumeLayout(False)
+            CType(Me.DataGridViewItems, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.DataGridViewDrugs, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.ResumeLayout(False)
+            Me.PerformLayout
+            Me.CFlowLayout2.PerformLayout
+            CType(Me.BnDrugs, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.BnDrugs.ResumeLayout(False)
+            Me.BnDrugs.PerformLayout
+            Me.CFlowLayout3.ResumeLayout(False)
+            CType(Me.DataGridViewItems, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.DataGridViewDrugs, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.ResumeLayout(False)
+            Me.PerformLayout
 
-End Sub
+        End Sub
         Friend WithEvents TxtIdNo As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblIdNo As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblGTIN As Libraries.CBaseControlsLibrary.CLabel

@@ -23,57 +23,71 @@ Namespace PresentationLayer.Views.Forms
         'Do not modify it using the code editor.
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PettyCashClosingEntry))
-        Me.DataGridViewPcJournals = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
-        Me.dgvPcClosed = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
-        Me.dgvTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.dgvIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.dgvReference = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.dgvPayeeType = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.dgvPayeeName = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.dgvAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
-        Me.dgvNotes = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.dgvPayeeNameAra = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.bsPcJournals = New System.Windows.Forms.BindingSource(Me.components)
-        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.btnUnselectAll = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.txtPayeeName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblPayee = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.dtpTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
-        Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
-        Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblCheckNumber = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtCheckNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.btnSelectAll = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboPayType = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
-        Me.CLabel4 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboPcAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
-        Me.txtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.DataGridViewPcJournals,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.bsPcJournals,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.TableLayoutPanel1.SuspendLayout
-        Me.SuspendLayout
+            Me.components = New System.ComponentModel.Container()
+            Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PettyCashClosingEntry))
+            Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PettyCashClosingEntry))
+            Me.DataGridViewPcJournals = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
+            Me.dgvPcClosed = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
+            Me.dgvTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvReference = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvPayeeType = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvPayeeName = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
+            Me.dgvNotes = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvPayeeNameAra = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+            Me.btnUnselectAll = New AATM.Libraries.CBaseControlsLibrary.CButton()
+            Me.txtPayeeName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblPayee = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.dtpTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
+            Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblCheckNumber = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtCheckNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.btnSelectAll = New AATM.Libraries.CBaseControlsLibrary.CButton()
+            Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboPayType = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.CLabel4 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboPcAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.txtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.dgvPcClosed = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
+            Me.dgvTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvReference = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvPayeeType = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvPayeeName = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
+            Me.dgvNotes = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.bsPcJournals = New System.Windows.Forms.BindingSource(Me.components)
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.DataGridViewPcJournals, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.TableLayoutPanel1.SuspendLayout
+            CType(Me.bsPcJournals, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.SuspendLayout
+            '
+            'TranslatorDAC
+            '
+            Me.TranslatorDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
             '
             'AppDataDAC
             '
@@ -86,14 +100,12 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPcJournals.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
             Me.DataGridViewPcJournals.AutoGenerateColumns = False
             Me.DataGridViewPcJournals.BegFindValue = Nothing
-            Me.DataGridViewPcJournals.Cached = False
             Me.DataGridViewPcJournals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
             Me.DataGridViewPcJournals.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvPcClosed, Me.dgvTransactionDate, Me.dgvIdNo, Me.dgvReference, Me.dgvPayeeType, Me.dgvPayeeName, Me.dgvAmount, Me.dgvNotes, Me.dgvPayeeNameAra})
             Me.TableLayoutPanel1.SetColumnSpan(Me.DataGridViewPcJournals, 8)
-            Me.DataGridViewPcJournals.DataFilter = Nothing
             Me.DataGridViewPcJournals.DataSource = Me.bsPcJournals
             DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle11.BackColor = System.Drawing.Color.Black
+            DataGridViewCellStyle11.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black
             DataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight
@@ -110,7 +122,6 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPcJournals.FieldDescription = Nothing
             Me.DataGridViewPcJournals.FieldName = Nothing
             Me.DataGridViewPcJournals.FieldsDictionary = Nothing
-            Me.DataGridViewPcJournals.FindColumnNo = CType(0, Short)
             Me.DataGridViewPcJournals.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.DataGridViewPcJournals.FindEnabled = False
             Me.DataGridViewPcJournals.FirstRowDeletionEnabled = True
@@ -120,13 +131,13 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPcJournals.Location = New System.Drawing.Point(3, 107)
             Me.DataGridViewPcJournals.Name = "DataGridViewPcJournals"
             Me.DataGridViewPcJournals.ReadOnly = True
-            Me.DataGridViewPcJournals.Searchable = True
             Me.DataGridViewPcJournals.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewPcJournals.SecurityKey = "ClosePettyCash"
             Me.DataGridViewPcJournals.SequenceColumn = "dgvSequence"
             Me.DataGridViewPcJournals.SequenceFieldName = "Sequence"
             Me.DataGridViewPcJournals.ShowFooter = False
-            Me.DataGridViewPcJournals.Size = New System.Drawing.Size(983, 450)
+            Me.DataGridViewPcJournals.ShowInsertColumnWhenEditing = False
+            Me.DataGridViewPcJournals.Size = New System.Drawing.Size(977, 450)
             Me.DataGridViewPcJournals.TabIndex = 10
             Me.DataGridViewPcJournals.Translatable = True
             '
@@ -418,13 +429,12 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayeeName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtPayeeName.ForeColor = System.Drawing.Color.Black
             Me.txtPayeeName.LinkedLabel = Nothing
-            Me.txtPayeeName.Location = New System.Drawing.Point(647, 53)
+            Me.txtPayeeName.Location = New System.Drawing.Point(641, 54)
             Me.txtPayeeName.Margin = New System.Windows.Forms.Padding(1)
             Me.txtPayeeName.MaximumValue = Nothing
             Me.txtPayeeName.MinimumValue = Nothing
             Me.txtPayeeName.Name = "txtPayeeName"
             Me.txtPayeeName.OldValue = Nothing
-            Me.txtPayeeName.OverrideMaxLength = 0
             Me.txtPayeeName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtPayeeName.SecurityKey = "ClosePettyCash"
             Me.txtPayeeName.Size = New System.Drawing.Size(341, 23)
@@ -437,7 +447,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPayee.DisplayOnly = True
             Me.lblPayee.EditingMode = False
             Me.lblPayee.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblPayee.Location = New System.Drawing.Point(533, 53)
+            Me.lblPayee.Location = New System.Drawing.Point(527, 54)
             Me.lblPayee.Margin = New System.Windows.Forms.Padding(1)
             Me.lblPayee.Name = "lblPayee"
             Me.lblPayee.Size = New System.Drawing.Size(48, 17)
@@ -463,9 +473,6 @@ Namespace PresentationLayer.Views.Forms
             '
             'dtpTransactionDate
             '
-            Me.dtpTransactionDate.AutoSize = True
-            Me.dtpTransactionDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-            Me.dtpTransactionDate.CalendarCulture = New System.Globalization.CultureInfo("en-GB")
             Me.dtpTransactionDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
             Me.dtpTransactionDate.DefaultValue = Nothing
             Me.dtpTransactionDate.DisplayOnly = False
@@ -481,7 +488,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpTransactionDate.SecurityKey = "ClosePettyCash"
             Me.dtpTransactionDate.ShowLongDate = False
             Me.dtpTransactionDate.ShowTime = False
-            Me.dtpTransactionDate.Size = New System.Drawing.Size(118, 23)
+            Me.dtpTransactionDate.Size = New System.Drawing.Size(112, 25)
             Me.dtpTransactionDate.TabIndex = 0
             Me.dtpTransactionDate.TargetCalendar = CType(resources.GetObject("dtpTransactionDate.TargetCalendar"), System.Globalization.Calendar)
             Me.dtpTransactionDate.Translatable = False
@@ -495,7 +502,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblAccountIdNo.DisplayOnly = True
             Me.lblAccountIdNo.EditingMode = False
             Me.lblAccountIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblAccountIdNo.Location = New System.Drawing.Point(1, 26)
+            Me.lblAccountIdNo.Location = New System.Drawing.Point(1, 28)
             Me.lblAccountIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.lblAccountIdNo.Name = "lblAccountIdNo"
             Me.lblAccountIdNo.Size = New System.Drawing.Size(109, 17)
@@ -515,7 +522,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.DefaultValue = Nothing
             Me.cboAccountIdNo.DisplayMember = "Name"
             Me.cboAccountIdNo.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.cboAccountIdNo.Editable = True
             Me.cboAccountIdNo.EditingMode = True
             Me.cboAccountIdNo.EndFindValue = Nothing
             Me.cboAccountIdNo.FieldDescription = Nothing
@@ -529,9 +535,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.HideWhenNotEditingOrAdding = False
             Me.cboAccountIdNo.IgnoreCase = False
             Me.cboAccountIdNo.IntegralHeight = False
-            Me.cboAccountIdNo.LimitToList = False
             Me.cboAccountIdNo.LinkedLabel = Nothing
-            Me.cboAccountIdNo.Location = New System.Drawing.Point(120, 26)
+            Me.cboAccountIdNo.Location = New System.Drawing.Point(120, 28)
             Me.cboAccountIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.cboAccountIdNo.Name = "cboAccountIdNo"
             Me.cboAccountIdNo.OldValue = 0
@@ -540,8 +545,9 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.OverrideDropDownStyleList = False
             Me.cboAccountIdNo.PreviousSearchTerm = Nothing
             Me.cboAccountIdNo.PropertySelector = Nothing
+            Me.cboAccountIdNo.ReadOnlyCombo = False
             Me.cboAccountIdNo.SecurityKey = "ClosePettyCash"
-            Me.cboAccountIdNo.Size = New System.Drawing.Size(411, 24)
+            Me.cboAccountIdNo.Size = New System.Drawing.Size(405, 24)
             Me.cboAccountIdNo.SuggestBoxHeight = 200
             Me.cboAccountIdNo.SuggestListOrderRule = Nothing
             Me.cboAccountIdNo.TabIndex = 5
@@ -577,10 +583,9 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.MinimumValue = Nothing
             Me.txtNotes.Name = "txtNotes"
             Me.txtNotes.OldValue = Nothing
-            Me.txtNotes.OverrideMaxLength = 0
             Me.txtNotes.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtNotes.SecurityKey = "ClosePettyCash"
-            Me.txtNotes.Size = New System.Drawing.Size(868, 23)
+            Me.txtNotes.Size = New System.Drawing.Size(862, 23)
             Me.txtNotes.TabIndex = 9
             Me.txtNotes.Translatable = False
             '
@@ -590,7 +595,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel2.DisplayOnly = True
             Me.CLabel2.EditingMode = False
             Me.CLabel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel2.Location = New System.Drawing.Point(240, 1)
+            Me.CLabel2.Location = New System.Drawing.Point(234, 1)
             Me.CLabel2.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel2.Name = "CLabel2"
             Me.CLabel2.Size = New System.Drawing.Size(100, 17)
@@ -616,13 +621,12 @@ Namespace PresentationLayer.Views.Forms
             Me.txtReferenceNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtReferenceNo.ForeColor = System.Drawing.Color.Black
             Me.txtReferenceNo.LinkedLabel = Nothing
-            Me.txtReferenceNo.Location = New System.Drawing.Point(342, 1)
+            Me.txtReferenceNo.Location = New System.Drawing.Point(336, 1)
             Me.txtReferenceNo.Margin = New System.Windows.Forms.Padding(1)
             Me.txtReferenceNo.MaximumValue = Nothing
             Me.txtReferenceNo.MinimumValue = Nothing
             Me.txtReferenceNo.Name = "txtReferenceNo"
             Me.txtReferenceNo.OldValue = Nothing
-            Me.txtReferenceNo.OverrideMaxLength = 0
             Me.txtReferenceNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtReferenceNo.SecurityKey = "ClosePettyCash"
             Me.txtReferenceNo.Size = New System.Drawing.Size(86, 23)
@@ -635,7 +639,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblCheckNumber.DisplayOnly = True
             Me.lblCheckNumber.EditingMode = False
             Me.lblCheckNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblCheckNumber.Location = New System.Drawing.Point(430, 1)
+            Me.lblCheckNumber.Location = New System.Drawing.Point(424, 1)
             Me.lblCheckNumber.Margin = New System.Windows.Forms.Padding(1)
             Me.lblCheckNumber.Name = "lblCheckNumber"
             Me.lblCheckNumber.Size = New System.Drawing.Size(101, 17)
@@ -661,13 +665,12 @@ Namespace PresentationLayer.Views.Forms
             Me.txtCheckNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtCheckNumber.ForeColor = System.Drawing.Color.Black
             Me.txtCheckNumber.LinkedLabel = Nothing
-            Me.txtCheckNumber.Location = New System.Drawing.Point(533, 1)
+            Me.txtCheckNumber.Location = New System.Drawing.Point(527, 1)
             Me.txtCheckNumber.Margin = New System.Windows.Forms.Padding(1)
             Me.txtCheckNumber.MaximumValue = Nothing
             Me.txtCheckNumber.MinimumValue = Nothing
             Me.txtCheckNumber.Name = "txtCheckNumber"
             Me.txtCheckNumber.OldValue = Nothing
-            Me.txtCheckNumber.OverrideMaxLength = 0
             Me.txtCheckNumber.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtCheckNumber.SecurityKey = "ClosePettyCash"
             Me.txtCheckNumber.Size = New System.Drawing.Size(112, 23)
@@ -680,7 +683,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblAmount.DisplayOnly = True
             Me.lblAmount.EditingMode = False
             Me.lblAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblAmount.Location = New System.Drawing.Point(647, 1)
+            Me.lblAmount.Location = New System.Drawing.Point(641, 1)
             Me.lblAmount.Margin = New System.Windows.Forms.Padding(1)
             Me.lblAmount.Name = "lblAmount"
             Me.lblAmount.Size = New System.Drawing.Size(56, 17)
@@ -707,13 +710,12 @@ Namespace PresentationLayer.Views.Forms
             Me.txtAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtAmount.ForeColor = System.Drawing.Color.Black
             Me.txtAmount.LinkedLabel = Nothing
-            Me.txtAmount.Location = New System.Drawing.Point(705, 1)
+            Me.txtAmount.Location = New System.Drawing.Point(699, 1)
             Me.txtAmount.Margin = New System.Windows.Forms.Padding(1)
             Me.txtAmount.MaximumValue = Nothing
             Me.txtAmount.MinimumValue = Nothing
             Me.txtAmount.Name = "txtAmount"
             Me.txtAmount.OldValue = Nothing
-            Me.txtAmount.OverrideMaxLength = 0
             Me.txtAmount.ReadOnly = True
             Me.txtAmount.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtAmount.SecurityKey = "ClosePettyCash"
@@ -756,7 +758,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel3.DisplayOnly = True
             Me.CLabel3.EditingMode = False
             Me.CLabel3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel3.Location = New System.Drawing.Point(533, 26)
+            Me.CLabel3.Location = New System.Drawing.Point(527, 28)
             Me.CLabel3.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel3.Name = "CLabel3"
             Me.CLabel3.Size = New System.Drawing.Size(68, 17)
@@ -776,7 +778,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayType.DefaultValue = Nothing
             Me.cboPayType.DisplayMember = "Name"
             Me.cboPayType.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.cboPayType.Editable = True
             Me.cboPayType.EditingMode = True
             Me.cboPayType.EndFindValue = Nothing
             Me.cboPayType.FieldDescription = Nothing
@@ -790,9 +791,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayType.HideWhenNotEditingOrAdding = False
             Me.cboPayType.IgnoreCase = False
             Me.cboPayType.IntegralHeight = False
-            Me.cboPayType.LimitToList = False
             Me.cboPayType.LinkedLabel = Nothing
-            Me.cboPayType.Location = New System.Drawing.Point(647, 26)
+            Me.cboPayType.Location = New System.Drawing.Point(641, 28)
             Me.cboPayType.Margin = New System.Windows.Forms.Padding(1)
             Me.cboPayType.Name = "cboPayType"
             Me.cboPayType.OldValue = 0
@@ -801,6 +801,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayType.OverrideDropDownStyleList = False
             Me.cboPayType.PreviousSearchTerm = Nothing
             Me.cboPayType.PropertySelector = Nothing
+            Me.cboPayType.ReadOnlyCombo = False
             Me.cboPayType.SecurityKey = "ClosePettyCash"
             Me.cboPayType.Size = New System.Drawing.Size(341, 24)
             Me.cboPayType.SuggestBoxHeight = 200
@@ -819,7 +820,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel4.DisplayOnly = True
             Me.CLabel4.EditingMode = False
             Me.CLabel4.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel4.Location = New System.Drawing.Point(1, 53)
+            Me.CLabel4.Location = New System.Drawing.Point(1, 54)
             Me.CLabel4.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel4.Name = "CLabel4"
             Me.CLabel4.Size = New System.Drawing.Size(111, 17)
@@ -839,7 +840,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPcAccountIdNo.DefaultValue = Nothing
             Me.cboPcAccountIdNo.DisplayMember = "Name"
             Me.cboPcAccountIdNo.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.cboPcAccountIdNo.Editable = True
             Me.cboPcAccountIdNo.EditingMode = True
             Me.cboPcAccountIdNo.EndFindValue = Nothing
             Me.cboPcAccountIdNo.FieldDescription = Nothing
@@ -853,9 +853,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPcAccountIdNo.HideWhenNotEditingOrAdding = False
             Me.cboPcAccountIdNo.IgnoreCase = False
             Me.cboPcAccountIdNo.IntegralHeight = False
-            Me.cboPcAccountIdNo.LimitToList = False
             Me.cboPcAccountIdNo.LinkedLabel = Nothing
-            Me.cboPcAccountIdNo.Location = New System.Drawing.Point(120, 53)
+            Me.cboPcAccountIdNo.Location = New System.Drawing.Point(120, 54)
             Me.cboPcAccountIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.cboPcAccountIdNo.Name = "cboPcAccountIdNo"
             Me.cboPcAccountIdNo.OldValue = 0
@@ -864,8 +863,9 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPcAccountIdNo.OverrideDropDownStyleList = False
             Me.cboPcAccountIdNo.PreviousSearchTerm = Nothing
             Me.cboPcAccountIdNo.PropertySelector = Nothing
+            Me.cboPcAccountIdNo.ReadOnlyCombo = False
             Me.cboPcAccountIdNo.SecurityKey = "ClosePettyCash"
-            Me.cboPcAccountIdNo.Size = New System.Drawing.Size(411, 24)
+            Me.cboPcAccountIdNo.Size = New System.Drawing.Size(405, 24)
             Me.cboPcAccountIdNo.SuggestBoxHeight = 200
             Me.cboPcAccountIdNo.SuggestListOrderRule = Nothing
             Me.cboPcAccountIdNo.TabIndex = 7
@@ -893,39 +893,224 @@ Namespace PresentationLayer.Views.Forms
             Me.txtIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtIdNo.ForeColor = System.Drawing.Color.Black
             Me.txtIdNo.LinkedLabel = Nothing
-            Me.txtIdNo.Location = New System.Drawing.Point(430, 561)
+            Me.txtIdNo.Location = New System.Drawing.Point(424, 561)
             Me.txtIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.txtIdNo.MaximumValue = Nothing
             Me.txtIdNo.MinimumValue = Nothing
             Me.txtIdNo.Name = "txtIdNo"
             Me.txtIdNo.OldValue = Nothing
-            Me.txtIdNo.OverrideMaxLength = 0
             Me.txtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtIdNo.Size = New System.Drawing.Size(100, 23)
-        Me.txtIdNo.TabIndex = 295
-        Me.txtIdNo.Translatable = false
-        Me.txtIdNo.Visible = false
-        '
-        'PettyCashClosingEntry
-        '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
-        Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"),System.Drawing.Image)
-        Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile
-        Me.ClientSize = New System.Drawing.Size(1008, 659)
-        Me.Controls.Add(Me.TableLayoutPanel1)
-        Me.MinimumSize = New System.Drawing.Size(945, 590)
-        Me.Name = "PettyCashClosingEntry"
-        Me.Text = "Petty Cash Closing"
-        Me.Controls.SetChildIndex(Me.TableLayoutPanel1, 0)
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.DataGridViewPcJournals,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.bsPcJournals,System.ComponentModel.ISupportInitialize).EndInit
-        Me.TableLayoutPanel1.ResumeLayout(false)
-        Me.TableLayoutPanel1.PerformLayout
-        Me.ResumeLayout(false)
-        Me.PerformLayout
+            Me.txtIdNo.TabIndex = 295
+            Me.txtIdNo.Translatable = False
+            Me.txtIdNo.Visible = False
+            '
+            'dgvPcClosed
+            '
+            Me.dgvPcClosed.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+            Me.dgvPcClosed.BegFindValue = Nothing
+            Me.dgvPcClosed.DataPropertyName = "PcClosed"
+            DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Orange
+            DataGridViewCellStyle2.NullValue = False
+            Me.dgvPcClosed.DefaultCellStyle = DataGridViewCellStyle2
+            Me.dgvPcClosed.EditingMode = False
+            Me.dgvPcClosed.EndFindValue = Nothing
+            Me.dgvPcClosed.FieldDescription = Nothing
+            Me.dgvPcClosed.FieldName = Nothing
+            Me.dgvPcClosed.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvPcClosed.FindEnabled = False
+            Me.dgvPcClosed.HeaderText = "Close?"
+            Me.dgvPcClosed.IgnoreCase = False
+            Me.dgvPcClosed.MinimumWidth = 50
+            Me.dgvPcClosed.Name = "dgvPcClosed"
+            Me.dgvPcClosed.ReadOnly = True
+            Me.dgvPcClosed.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvPcClosed.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.dgvPcClosed.Translatable = False
+            Me.dgvPcClosed.Width = 50
+            '
+            'dgvTransactionDate
+            '
+            Me.dgvTransactionDate.BegFindValue = Nothing
+            Me.dgvTransactionDate.DataPropertyName = "TransactionDate"
+            DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
+            Me.dgvTransactionDate.DefaultCellStyle = DataGridViewCellStyle3
+            Me.dgvTransactionDate.DisplayOnly = True
+            Me.dgvTransactionDate.EditingMode = False
+            Me.dgvTransactionDate.EndFindValue = Nothing
+            Me.dgvTransactionDate.FieldDescription = Nothing
+            Me.dgvTransactionDate.FieldName = Nothing
+            Me.dgvTransactionDate.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvTransactionDate.FindEnabled = False
+            Me.dgvTransactionDate.HeaderText = "Date"
+            Me.dgvTransactionDate.IgnoreCase = False
+            Me.dgvTransactionDate.Name = "dgvTransactionDate"
+            Me.dgvTransactionDate.ReadOnly = True
+            Me.dgvTransactionDate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvTransactionDate.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.dgvTransactionDate.Translatable = False
+            Me.dgvTransactionDate.Width = 80
+            '
+            'dgvIdNo
+            '
+            Me.dgvIdNo.BegFindValue = Nothing
+            Me.dgvIdNo.DataPropertyName = "IdNo"
+            DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
+            Me.dgvIdNo.DefaultCellStyle = DataGridViewCellStyle4
+            Me.dgvIdNo.EditingMode = False
+            Me.dgvIdNo.EndFindValue = Nothing
+            Me.dgvIdNo.FieldDescription = Nothing
+            Me.dgvIdNo.FieldName = Nothing
+            Me.dgvIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvIdNo.FindEnabled = False
+            Me.dgvIdNo.HeaderText = "IdNo"
+            Me.dgvIdNo.IgnoreCase = False
+            Me.dgvIdNo.Name = "dgvIdNo"
+            Me.dgvIdNo.ReadOnly = True
+            Me.dgvIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.dgvIdNo.Translatable = False
+            Me.dgvIdNo.Width = 50
+            '
+            'dgvReference
+            '
+            Me.dgvReference.BegFindValue = Nothing
+            Me.dgvReference.DataPropertyName = "ReferenceNo"
+            DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
+            Me.dgvReference.DefaultCellStyle = DataGridViewCellStyle5
+            Me.dgvReference.EditingMode = False
+            Me.dgvReference.EndFindValue = Nothing
+            Me.dgvReference.FieldDescription = Nothing
+            Me.dgvReference.FieldName = Nothing
+            Me.dgvReference.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvReference.FindEnabled = False
+            Me.dgvReference.HeaderText = "Reference No"
+            Me.dgvReference.IgnoreCase = False
+            Me.dgvReference.Name = "dgvReference"
+            Me.dgvReference.ReadOnly = True
+            Me.dgvReference.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvReference.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.dgvReference.Translatable = False
+            Me.dgvReference.Width = 80
+            '
+            'dgvPayeeType
+            '
+            Me.dgvPayeeType.BegFindValue = Nothing
+            Me.dgvPayeeType.DataPropertyName = "PaymentType"
+            DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
+            Me.dgvPayeeType.DefaultCellStyle = DataGridViewCellStyle6
+            Me.dgvPayeeType.EditingMode = False
+            Me.dgvPayeeType.EndFindValue = Nothing
+            Me.dgvPayeeType.FieldDescription = Nothing
+            Me.dgvPayeeType.FieldName = Nothing
+            Me.dgvPayeeType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvPayeeType.FindEnabled = False
+            Me.dgvPayeeType.HeaderText = "Payee Type"
+            Me.dgvPayeeType.IgnoreCase = False
+            Me.dgvPayeeType.Name = "dgvPayeeType"
+            Me.dgvPayeeType.ReadOnly = True
+            Me.dgvPayeeType.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvPayeeType.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.dgvPayeeType.Translatable = False
+            Me.dgvPayeeType.Width = 40
+            '
+            'dgvPayeeName
+            '
+            Me.dgvPayeeName.BegFindValue = Nothing
+            Me.dgvPayeeName.DataPropertyName = "PayeeName"
+            DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
+            Me.dgvPayeeName.DefaultCellStyle = DataGridViewCellStyle7
+            Me.dgvPayeeName.EditingMode = False
+            Me.dgvPayeeName.EndFindValue = Nothing
+            Me.dgvPayeeName.FieldDescription = Nothing
+            Me.dgvPayeeName.FieldName = Nothing
+            Me.dgvPayeeName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvPayeeName.FindEnabled = False
+            Me.dgvPayeeName.HeaderText = "PayeeName"
+            Me.dgvPayeeName.IgnoreCase = False
+            Me.dgvPayeeName.Name = "dgvPayeeName"
+            Me.dgvPayeeName.ReadOnly = True
+            Me.dgvPayeeName.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvPayeeName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.dgvPayeeName.Translatable = False
+            Me.dgvPayeeName.Width = 150
+            '
+            'dgvAmount
+            '
+            Me.dgvAmount.BegFindValue = Nothing
+            Me.dgvAmount.DataPropertyName = "Amount"
+            DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle8.Format = "###,##0.00"
+            Me.dgvAmount.DefaultCellStyle = DataGridViewCellStyle8
+            Me.dgvAmount.EditingMode = False
+            Me.dgvAmount.EndFindValue = Nothing
+            Me.dgvAmount.FieldDescription = Nothing
+            Me.dgvAmount.FieldName = Nothing
+            Me.dgvAmount.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvAmount.FindEnabled = False
+            Me.dgvAmount.HeaderText = "Amount"
+            Me.dgvAmount.Name = "dgvAmount"
+            Me.dgvAmount.ReadOnly = True
+            Me.dgvAmount.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvAmount.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.dgvAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvAmount.Translatable = False
+            '
+            'dgvNotes
+            '
+            Me.dgvNotes.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+            Me.dgvNotes.BegFindValue = Nothing
+            Me.dgvNotes.DataPropertyName = "Notes"
+            DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
+            Me.dgvNotes.DefaultCellStyle = DataGridViewCellStyle9
+            Me.dgvNotes.EditingMode = False
+            Me.dgvNotes.EndFindValue = Nothing
+            Me.dgvNotes.FieldDescription = Nothing
+            Me.dgvNotes.FieldName = Nothing
+            Me.dgvNotes.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvNotes.FindEnabled = False
+            Me.dgvNotes.HeaderText = "Notes"
+            Me.dgvNotes.IgnoreCase = False
+            Me.dgvNotes.Name = "dgvNotes"
+            Me.dgvNotes.ReadOnly = True
+            Me.dgvNotes.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvNotes.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.dgvNotes.Translatable = False
+            '
+            'bsPcJournals
+            '
+            Me.bsPcJournals.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PcClosingJournalModel)
+            '
+            'PettyCashClosingEntry
+            '
+            Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+            Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
+            Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile
+            Me.ClientSize = New System.Drawing.Size(1008, 659)
+            Me.Controls.Add(Me.TableLayoutPanel1)
+            Me.MinimumSize = New System.Drawing.Size(945, 590)
+            Me.Name = "PettyCashClosingEntry"
+            Me.Text = "Petty Cash Closing"
+            Me.Controls.SetChildIndex(Me.TableLayoutPanel1, 0)
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.DataGridViewPcJournals, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.TableLayoutPanel1.ResumeLayout(False)
+            Me.TableLayoutPanel1.PerformLayout
+            CType(Me.bsPcJournals, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.ResumeLayout(False)
+            Me.PerformLayout
 
-End Sub
+        End Sub
         Friend WithEvents bsPcJournals As Windows.Forms.BindingSource
         Friend WithEvents dgvIdNocadOi As Windows.Forms.DataGridViewTextBoxColumn
         Friend WithEvents dgvJournalItemIdNo As CDgvTextColumn

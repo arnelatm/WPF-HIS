@@ -59,7 +59,7 @@ Namespace Services
         End Property
 
         Public Function CreateInstance(ByVal strFullyQualifiedName As String, Optional instanceParameters As Object = Nothing) As Object
-            Dim type As Type = Type.[GetType](strFullyQualifiedName)
+            Dim type As Type = type.[GetType](strFullyQualifiedName)
             If type IsNot Nothing Then Return Activator.CreateInstance(type)
             For Each asm In AppDomain.CurrentDomain.GetAssemblies()
                 type = asm.[GetType](strFullyQualifiedName)
