@@ -17,6 +17,7 @@ Namespace PresentationLayer.Views
         Public Property Result1 As String Implements ILab_InvoiceDetailsView.Result1
 
         Public Property Suffix1 As String Implements ILab_InvoiceDetailsView.Suffix1
+        Public Property DataFilter As String Implements IView.DataFilter
 
     End Class
 

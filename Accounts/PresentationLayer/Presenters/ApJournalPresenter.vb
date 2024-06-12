@@ -139,8 +139,8 @@ Namespace PresentationLayer.Presenters
             Dim retVal As Integer = 0
             If idNo <> 0 Then
                 Dim apOpenInvoiceService As New AccountsService("ApOpenInvoice")
-                If apOpenInvoiceService.CountRecordWithKey(idNo, "CdOiItem", "ApOpenInvoiceIdNo") = 0 And
-                   apOpenInvoiceService.CountRecordWithKey(idNo, "PcOiItem", "ApOpenInvoiceIdNo") = 0 Then
+                If apOpenInvoiceService.CountRecordWithKey(Of Integer)("CdOiItem", "ApOpenInvoiceIdNo", idNo) = 0 And
+                apOpenInvoiceService.CountRecordWithKey(Of Integer)("PcOiItem", "ApOpenInvoiceIdNo", idNo) = 0 Then
                     retVal = apOpenInvoiceService.DeleteRecord(idNo, "ApOpenInvoice")
                 End If
             End If
@@ -352,11 +352,11 @@ Namespace PresentationLayer.Presenters
             Dim apOpenInvoiceIdNo As Integer
             apOpenInvoiceIdNo = Service.GetRecordFieldWith2Key(journalCode, idNo, "ArOpenInvoice", "JournalCode",
                                                                "JournalItemIdNo", "IdNo")
-            If Service.CountRecordWithKey(apOpenInvoiceIdNo, "CdOiItem", "ApOpenInvoiceIdNo") > 0 Then
+            If Service.CountRecordWithKey(Of Integer)("CdOiItem", "ApOpenInvoiceIdNo", apOpenInvoiceIdNo) > 0 Then
                 Return True
-            ElseIf Service.CountRecordWithKey(apOpenInvoiceIdNo, "CkOiItem", "ApOpenInvoiceIdNo") > 0 Then
+            ElseIf Service.CountRecordWithKey(Of Integer)("CkOiItem", "ApOpenInvoiceIdNo", apOpenInvoiceIdNo) > 0 Then
                 Return True
-            ElseIf Service.CountRecordWithKey(apOpenInvoiceIdNo, "PcOiItem", "ApOpenInvoiceIdNo") > 0 Then
+            ElseIf Service.CountRecordWithKey(Of Integer)("PcOiItem", "ApOpenInvoiceIdNo", apOpenInvoiceIdNo) > 0 Then
                 Return True
             End If
             Return False
@@ -418,7 +418,6 @@ Namespace PresentationLayer.Presenters
             Next
             Return False
         End Function
-
 
     End Class
 

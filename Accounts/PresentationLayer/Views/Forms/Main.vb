@@ -995,10 +995,6 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of ShiftDailyReport)()
         End Sub
 
-        Private Sub ToolStripMenuItemLaboratory_Click(sender As Object, e As EventArgs)
-            RunForm(Of DiagnosticTestSummary)()
-        End Sub
-
         Private Sub ToolStripMenuItemEmployeeLeaveReport_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeLeaveReport.Click
             RunForm(Of StatementOfLeave)()
         End Sub
@@ -1011,9 +1007,9 @@ Namespace PresentationLayer.Views.Forms
             PasswordGenerator.Show()
         End Sub
 
-        Private Sub LaboratoryReportsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemLaboratoryReports.Click
-            RunForm(Of ReportSelectorForm, ReportSelectorPresenter(Of ReportSelectorModel), String)($"IGLAB")
-        End Sub
+        'Private Sub LaboratoryReportsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemLaboratoryReports.Click
+        '    RunForm(Of ReportSelectorForm, ReportSelectorPresenter(Of ReportSelectorModel), String)($"IGLAB")
+        'End Sub
 
         Private Sub SalesReportsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSalesReports.Click
             RunForm(Of ReportSelectorForm, ReportSelectorPresenter(Of ReportSelectorModel), String)($"IGSALE")
@@ -1110,6 +1106,17 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of GTinMatcherEntry, GTinMatcherPresenter(Of GTinMatcherModel))()
         End Sub
 
+        Private Sub ToolStripMenuItemIqamaCBCResult_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemIqamaCBCResultByInvoiceNo.Click
+            RunForm(Of IqamaCbcReport, String)("InvoiceNo")
+        End Sub
+
+        Private Sub ToolStripMenuItemDiagnosticTestSummary_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDiagnosticTestSummary.Click
+            RunForm(Of DiagnosticTestSummary)()
+        End Sub
+
+        Private Sub ToolStripMenuItemIqamaCBCResultBySampleNo_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemIqamaCBCResultBySampleNo.Click
+            RunForm(Of IqamaCbcReport, String)("SampleNo")
+        End Sub
     End Class
 
 End Namespace

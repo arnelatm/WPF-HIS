@@ -15,6 +15,7 @@ Namespace PresentationLayer.Views
         Public Property MaxAmount As Decimal Implements IPensionRateView.MaxAmount
         Public Property PensionSchemeIdNo As Int16 Implements IPensionRateView.PensionSchemeIdNo
         Public Property Sequence As Int16 Implements IPensionRateView.Sequence
+        Public Property DataFilter As String Implements IView.DataFilter
 
     End Class
 

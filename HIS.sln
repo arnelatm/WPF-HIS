@@ -66,6 +66,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{
 		Installation Steps.txt = Installation Steps.txt
 		OldSecurityObjects.sql = OldSecurityObjects.sql
 		Sample Timer.txt = Sample Timer.txt
+		SampleHL7Message.txt = SampleHL7Message.txt
 		TextFile2.txt = TextFile2.txt
 		ToDo.txt = ToDo.txt
 		Translations.txt = Translations.txt
@@ -902,6 +903,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ToDos", "ToDos", "{E4F0E91F
 		Sample Data.txt = Sample Data.txt
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HL7Listener", "Libraries\HelperLibraries\HL7Listener\HL7Listener.csproj", "{ED2DB897-5B39-4574-84C6-2F40F112BE99}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1006,6 +1009,10 @@ Global
 		{8F2BB05A-C065-4E1B-9B1A-D4F600C0DB62}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F2BB05A-C065-4E1B-9B1A-D4F600C0DB62}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F2BB05A-C065-4E1B-9B1A-D4F600C0DB62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED2DB897-5B39-4574-84C6-2F40F112BE99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED2DB897-5B39-4574-84C6-2F40F112BE99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED2DB897-5B39-4574-84C6-2F40F112BE99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED2DB897-5B39-4574-84C6-2F40F112BE99}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1047,6 +1054,7 @@ Global
 		{2CC5D6D4-CEA0-4991-8859-559BDF3FC1C4} = {C90D3B3E-01F4-401D-8649-0563028668C7}
 		{B721D695-0745-49EA-9FED-FF713FBE7792} = {549000D0-E128-4B80-AEDA-C6AF4FCC2989}
 		{E4F0E91F-DE65-4117-B6A5-99AFD8AF8DC3} = {0598D101-4147-476C-98FF-8C78D96B971E}
+		{ED2DB897-5B39-4574-84C6-2F40F112BE99} = {A6C79BF6-2C34-4AEA-9845-360F48976962}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {433E9001-0D97-4552-9BF4-6FED04B194AE}

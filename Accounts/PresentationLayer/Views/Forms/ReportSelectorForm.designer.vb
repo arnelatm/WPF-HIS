@@ -53,9 +53,11 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewReportList.AutoGenerateColumns = false
         Me.DataGridViewReportList.BegFindValue = Nothing
         Me.DataGridViewReportList.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.DataGridViewReportList.Cached = false
         Me.DataGridViewReportList.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
         Me.DataGridViewReportList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridViewReportList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ReportName, Me.dgvIdNo})
+        Me.DataGridViewReportList.DataFilter = Nothing
         Me.DataGridViewReportList.DataSource = Me.bsReportList
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle3.BackColor = System.Drawing.Color.White

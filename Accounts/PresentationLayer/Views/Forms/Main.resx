@@ -137,7 +137,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACg
-        CQAAAk1TRnQBSQFMAgEBAgEAAQgBCwEIAQsBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CQAAAk1TRnQBSQFMAgEBAgEAASgBCwEoAQsBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -4036,19 +4036,19 @@
     <value>Laboratory</value>
   </data>
   <data name="ToolStripMenuItemDrugSale.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>165, 22</value>
   </data>
   <data name="ToolStripMenuItemDrugSale.Text" xml:space="preserve">
     <value>Drug Sale</value>
   </data>
   <data name="ToolStripMenuItemDrugAcceptance.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>165, 22</value>
   </data>
   <data name="ToolStripMenuItemDrugAcceptance.Text" xml:space="preserve">
     <value>Drug Acceptance</value>
   </data>
   <data name="ToolStripMenuItemItemMatcher.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>165, 22</value>
   </data>
   <data name="ToolStripMenuItemItemMatcher.Text" xml:space="preserve">
     <value>Item Matcher</value>
@@ -4311,6 +4311,24 @@
   <data name="ToolStripMenuItemAccountingReports.Text" xml:space="preserve">
     <value>Accounting Reports</value>
   </data>
+  <data name="ToolStripMenuItemIqamaCBCResultBySampleNo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 22</value>
+  </data>
+  <data name="ToolStripMenuItemIqamaCBCResultBySampleNo.Text" xml:space="preserve">
+    <value>Iqama CBC Result By Sample No</value>
+  </data>
+  <data name="ToolStripMenuItemIqamaCBCResultByInvoiceNo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 22</value>
+  </data>
+  <data name="ToolStripMenuItemIqamaCBCResultByInvoiceNo.Text" xml:space="preserve">
+    <value>Iqama CBC Result By Invoice No</value>
+  </data>
+  <data name="ToolStripMenuItemDiagnosticTestSummary.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 22</value>
+  </data>
+  <data name="ToolStripMenuItemDiagnosticTestSummary.Text" xml:space="preserve">
+    <value>Diagnostic Test Summary</value>
+  </data>
   <data name="ToolStripMenuItemLaboratoryReports.Size" type="System.Drawing.Size, System.Drawing">
     <value>254, 22</value>
   </data>
@@ -4533,7 +4551,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACg
-        CQAAAk1TRnQBSQFMAgEBAgEAAQgBCwEIAQsBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CQAAAk1TRnQBSQFMAgEBAgEAASgBCwEoAQsBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -4578,7 +4596,7 @@
 </value>
   </data>
   <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1235, 17</value>
+    <value>17, 56</value>
   </metadata>
   <data name="toolStripMenuItem3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -5500,6 +5518,12 @@
   <data name="&gt;&gt;ToolStripMenuItemDrugAcceptance.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;ToolStripMenuItemItemMatcher.Name" xml:space="preserve">
+    <value>ToolStripMenuItemItemMatcher</value>
+  </data>
+  <data name="&gt;&gt;ToolStripMenuItemItemMatcher.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;ToolStripMenuItemReports.Name" xml:space="preserve">
     <value>ToolStripMenuItemReports</value>
   </data>
@@ -5758,6 +5782,18 @@
   <data name="&gt;&gt;ToolStripMenuItemLaboratoryReports.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;ToolStripMenuItemIqamaCBCResultByInvoiceNo.Name" xml:space="preserve">
+    <value>ToolStripMenuItemIqamaCBCResultByInvoiceNo</value>
+  </data>
+  <data name="&gt;&gt;ToolStripMenuItemIqamaCBCResultByInvoiceNo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolStripMenuItemDiagnosticTestSummary.Name" xml:space="preserve">
+    <value>ToolStripMenuItemDiagnosticTestSummary</value>
+  </data>
+  <data name="&gt;&gt;ToolStripMenuItemDiagnosticTestSummary.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;ToolStripMenuItemSalesReports.Name" xml:space="preserve">
     <value>ToolStripMenuItemSalesReports</value>
   </data>
@@ -5974,10 +6010,10 @@
   <data name="&gt;&gt;toolStripMenuItem19.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItemItemMatcher.Name" xml:space="preserve">
-    <value>ToolStripMenuItemItemMatcher</value>
+  <data name="&gt;&gt;ToolStripMenuItemIqamaCBCResultBySampleNo.Name" xml:space="preserve">
+    <value>ToolStripMenuItemIqamaCBCResultBySampleNo</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItemItemMatcher.Type" xml:space="preserve">
+  <data name="&gt;&gt;ToolStripMenuItemIqamaCBCResultBySampleNo.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

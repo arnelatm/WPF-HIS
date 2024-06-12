@@ -456,6 +456,7 @@
     </Compile>
     <Compile Include="ValidationControl.vb" />
     <Compile Include="ValidationControlCollection.vb" />
+    <Compile Include="VirtualDataGridView.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ATabPage.resx">
@@ -599,6 +600,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\DataLayer\DataLayer.vbproj">
+      <Project>{440C4740-2584-4050-9086-543018EAC766}</Project>
+      <Name>DataLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AatmInterfaces\AatmInterfaces.vbproj">
       <Project>{DA82FB86-4F87-4E6E-B460-6141FE79AC23}</Project>
       <Name>AatmInterfaces</Name>

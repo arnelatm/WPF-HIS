@@ -53,7 +53,6 @@ Namespace PresentationLayer.Presenters
             CreateEnumDataSource(Of PayTypeSelection)("PayType")
         End Sub
 
-
         Private Sub OnPcJournalCheckedEvent(sender As Object, all As Boolean, clear As Boolean, dataBindingSource As BindingSource)
             If EditMode Or AddMode Then
                 ProcessPettyCashRequest(sender, all, clear, dataBindingSource)
@@ -184,7 +183,7 @@ Namespace PresentationLayer.Presenters
             Get
                 Dim specialAccount As String
                 specialAccount = EnumToCode(SpecialAccountSelection.PettyCashAccount)
-                Return Service.CountRecordWithKey(specialAccount, "Account", "SpecialAccount")
+                Return Service.CountRecordWithKey(Of String)("Account", "SpecialAccount", specialAccount)
             End Get
         End Property
 

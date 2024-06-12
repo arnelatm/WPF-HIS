@@ -19,6 +19,7 @@ Namespace PresentationLayer.Views
         Public Property Sequence As Int16 Implements ICsrOiItemView.Sequence
         Public Property TransactionDate As Date? Implements ICsrOiItemView.TransactionDate
         Public Property Errors As List(Of String) Implements IView.Errors
+        Public Property DataFilter As String Implements IView.DataFilter
 
     End Class
 

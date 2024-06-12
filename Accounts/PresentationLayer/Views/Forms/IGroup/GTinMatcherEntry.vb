@@ -1,9 +1,10 @@
 ﻿Imports System.Configuration
-Imports System.Data.SqlClient
 Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.Libraries
+Imports AATM.DataLayer.AdoNet
+Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views.Forms
 
@@ -14,13 +15,6 @@ Namespace PresentationLayer.Views.Forms
         Private _drugList As Object
 
         Public Event FinderValueChanged(itemIdNo As Int16) Implements IItemDetailsView.FinderValueChanged
-
-        'Public Event GTinMatcherValueChanged(sender As Object, gTinIdNo As Int32) Implements IGTinMatcherView.GTinMatcherValueChanged
-
-        Public Event GetDrugDataTable(ByRef drugListDataTable As DataTable) Implements IGTinMatcherView.GetDrugDataTable
-
-        Public Event GetItemDataTable(ByRef drugListDataTable As DataTable) Implements IGTinMatcherView.GetItemDataTable
-
         Public Event UpdateDrugDisplay(gTinIdNo As Int32) Implements IGTinMatcherView.UpdateDrugDisplay
         Public Event UpdateItemDisplay(gTinIdNo As Int32) Implements IGTinMatcherView.UpdateItemDisplay
 
@@ -47,43 +41,36 @@ Namespace PresentationLayer.Views.Forms
             Else
                 _nfi.NumberGroupSeparator = numberGroupSeparator
             End If
+            HideNavigatorButtons = True
         End Sub
 
-        'Public Property ItemDetailsByName As DataTable
-
         Private Sub InitializeDataGridView()
-            ' Set up the DataGridView.
-            With Me.DataGridViewDrugs
-                ' Automatically generate the DataGridView columns.
-                .AutoGenerateColumns = True
-                Dim drugListDataTable As New DataTable
-                RaiseEvent GetDrugDataTable(drugListDataTable)
-                ' Set up the data source.
-                bsDrugList.DataSource = drugListDataTable
-                .DataSource = bsDrugList
-                ' Automatically resize the visible rows.
-                '.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells
-                '.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells
-                ' Set the DataGridView control's border.
-                .BorderStyle = BorderStyle.Fixed3D
-                ' Put the cells in edit mode when user enters them.
-                DataGridViewDrugs.ReadOnly = True
-            End With
             With Me.DataGridViewItems
-                ' Automatically generate the DataGridView columns.
-                .AutoGenerateColumns = True
-                Dim itemDetailsDataTable As New DataTable
-                RaiseEvent GetItemDataTable(itemDetailsDataTable)
-                ' Set up the data source.
-                bsItemDetails.DataSource = itemDetailsDataTable
-                .DataSource = bsItemDetails
-                ' Automatically resize the visible rows.
-                '.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders
-                ' Set the DataGridView control's border.
-                .BorderStyle = BorderStyle.Fixed3D
-                ' Put the cells in edit mode when user enters them.
-                DataGridViewItems.ReadOnly = True
+                .Dock = DockStyle.None
+                .VirtualMode = True
+                .ReadOnly = True
+                .AllowUserToAddRows = False
+                .AllowUserToOrderColumns = False
+                .SelectionMode = DataGridViewSelectionMode.FullRowSelect
             End With
+            With Me.DataGridViewDrugs
+                .Dock = DockStyle.None
+                .VirtualMode = True
+                .ReadOnly = True
+                .AllowUserToAddRows = False
+                .AllowUserToOrderColumns = False
+                .SelectionMode = DataGridViewSelectionMode.FullRowSelect
+            End With
+            ' Create a DataRetriever and use it to create a Cache object
+            ' and to initialize the DataGridView columns and rows.
+
+            MakeDataGridViews()
+            BnItems.Refresh()
+        End Sub
+
+        Private Sub MakeDataGridViews()
+            DataGridViewItems.MakeDataRetrieverCache("ItemDetailsQty_View", "ItemNameEnglish,Primary_Key,Item_Code,GTin,Price_Cash,Pack1,Pack2,Pack3,QtyOnHand", "IGroupClinic")
+            DataGridViewDrugs.MakeDataRetrieverCache("DrugList", "[Trade Name],[Strength Value],[Unit Of Strength],[Unit Of Volume],Volume,IdNo,GTin,[Package Size],[Package Type],[Public Price],[Dosage Form],[Generic Name],[RegistrationNo],[Route Of Administration]", "IGroupClinic")
         End Sub
 
 #Region "Field Items"
@@ -99,23 +86,20 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property IdNo As Int32 Implements IItemDetailsView.IdNo
             Get
-                If TxtIdNo.Text <> "" Then
-                    Return Convert.ToInt32(TxtIdNo.Text)
-                Else
-                    Return 0
-                End If
+                Return TxtIdNo.GetValue(Of Int32)
             End Get
             Set
-                TxtIdNo.Text = Convert.ToString(Value)
+                TxtIdNo.SetValue(Value)
             End Set
         End Property
 
         Public Property ItemDetailsCode As String Implements IItemDetailsView.ItemDetailsCode
             Get
-                Return TxtItemDetailsCode.Text
+                Return TxtItemDetailsCode.GetValue(Of String)
             End Get
             Set
-                TxtItemDetailsCode.Text = NoDbNull(Value)
+                TxtItemDetailsCode.Text = If(Value, "")
+                SelectRecordOnItemGrid(Value)
             End Set
         End Property
 
@@ -124,7 +108,7 @@ Namespace PresentationLayer.Views.Forms
                 Return TxtItemDetailsName.Text
             End Get
             Set
-                TxtItemDetailsName.Text = Value
+                TxtItemDetailsName.SetValue(Value)
             End Set
         End Property
 
@@ -144,7 +128,7 @@ Namespace PresentationLayer.Views.Forms
                 Return txtGenericName.Text
             End Get
             Set
-                txtGenericName.Text = Value
+                txtGenericName.SetValue(Value)
             End Set
         End Property
 
@@ -155,7 +139,7 @@ Namespace PresentationLayer.Views.Forms
                 Return txtPack1.Text
             End Get
             Set(value As Short)
-                txtPack1.Text = value
+                txtPack1.SetValue(value)
             End Set
         End Property
 
@@ -166,7 +150,7 @@ Namespace PresentationLayer.Views.Forms
                 Return txtpack2.Text
             End Get
             Set(value As Short)
-                txtpack2.Text = value
+                txtpack2.SetValue(value)
             End Set
         End Property
 
@@ -177,7 +161,7 @@ Namespace PresentationLayer.Views.Forms
                 Return txtpack3.Text
             End Get
             Set(value As Short)
-                txtpack3.Text = value
+                txtpack3.SetValue(value)
             End Set
         End Property
 
@@ -197,7 +181,7 @@ Namespace PresentationLayer.Views.Forms
                 Return txtRegistrationNo.Text
             End Get
             Set
-                txtRegistrationNo.Text = Value
+                txtRegistrationNo.SetValue(Value)
             End Set
         End Property
 
@@ -248,18 +232,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property Volume As Double? Implements IItemDetailsView.Volume
             Get
-                If txtVolume.Text Is Nothing Then
-                    Return Nothing
-                Else
-                    Return txtVolume.Text.ToDoubleNumber(_nfi)
-                End If
+                Return txtVolume.GetValue(Of Double?)
             End Get
             Set
-                If Value Is Nothing Then
-                    txtVolume.Text = ""
-                Else
-                    txtVolume.Text = Value
-                End If
+                txtVolume.SetValue(Value)
             End Set
         End Property
 
@@ -268,24 +244,16 @@ Namespace PresentationLayer.Views.Forms
                 Return txtStrengthValue.Text
             End Get
             Set(value As String)
-                txtStrengthValue.Text = value
+                txtStrengthValue.SetValue(value)
             End Set
         End Property
 
         Public Property PackageSize As Double? Implements IItemDetailsView.PackageSize
             Get
-                If txtPackageSize.Text Is Nothing Then
-                    Return Nothing
-                Else
-                    Return txtPackageSize.Text.ToDoubleNumber(_nfi)
-                End If
+                Return txtPackageSize.GetValue(Of Double?)
             End Get
             Set
-                If Value Is Nothing Then
-                    txtPackageSize.Text = ""
-                Else
-                    txtPackageSize.Text = Value
-                End If
+                txtPackageSize.SetValue(Value)
             End Set
         End Property
 
@@ -294,25 +262,19 @@ Namespace PresentationLayer.Views.Forms
                 Return txtGTIN.Text
             End Get
             Set(value As String)
-                txtGTIN.Text = value
-                If Not (value Is DBNull.Value Or value Is Nothing Or value = "") Then
-                    RaiseEvent GTinValueChanged(DataGridViewDrugs, value)
-                    SelectRecordOnDrugGrid(value)
-                End If
+                txtGTIN.SetValue(value)
             End Set
         End Property
 
         Private Sub SelectRecordOnDrugGrid(gTinValue As String)
-            If gTinValue IsNot DBNull.Value OrElse gTinValue IsNot Nothing OrElse gTinValue = "" Then
+            If gTinValue IsNot DBNull.Value Or gTinValue IsNot Nothing Or gTinValue = "" Then
                 DataGridViewDrugs.SearchGrid(gTinValue, "GTin")
             End If
         End Sub
 
-        Private Sub SelectRecordOnItemGrid(idNo As Int32?)
-            If Not _startedByItemGrid Then
-                If Not (idNo Is Nothing OrElse idNo = 0) Then
-                    DataGridViewItems.SearchGrid(idNo, "Primary_Key")
-                End If
+        Private Sub SelectRecordOnItemGrid(itemCode As String)
+            If itemCode IsNot DBNull.Value Or itemCode IsNot Nothing Or itemCode = "" Then
+                DataGridViewItems.SearchGrid(itemCode, "Item_Code")
             End If
         End Sub
 
@@ -320,103 +282,91 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DrugIdNo As Int32 Implements IGTinMatcherView.DrugIdNo
             Get
-                If txtDrugIdNo.Text Is Nothing Then
-                    Return 0
-                Else
-                    Return Convert.ToInt32(txtDrugIdNo.Text)
-                End If
+                Return txtDrugIdNo.GetValue(Of Int32)
             End Get
             Set
-                txtDrugIdNo.Text = Convert.ToInt32(Value)
+                txtDrugIdNo.SetValue(Value)
             End Set
         End Property
 
         Public Property DrugTradeName As String Implements IGTinMatcherView.DrugTradeName
             Get
-                Return txtDrugTradeName.Text
+                Return txtDrugTradeName.GetValue(Of Int32)
             End Get
             Set(value As String)
-                txtDrugTradeName.Text = value
+                txtDrugTradeName.SetValue(value)
             End Set
         End Property
 
         Public Overloads Property DrugGenericName As String Implements IGTinMatcherView.DrugGenericName
             Get
-                Return txtDrugGenericName.Text
+                Return txtDrugGenericName.GetValue(Of Int32)
             End Get
             Set
-                txtDrugGenericName.Text = Value
+                txtDrugGenericName.SetValue(Value)
             End Set
         End Property
 
         Public Property DrugRegistrationNo As String Implements IGTinMatcherView.DrugRegistrationNo
             Get
-                Return txtDrugRegistrationNo.Text
+                Return txtDrugRegistrationNo.GetValue(Of Int32)
             End Get
             Set
-                txtDrugRegistrationNo.Text = Value
+                txtDrugRegistrationNo.SetValue(Value)
             End Set
         End Property
 
         Public Property DrugUnitOfStrength As String Implements IGTinMatcherView.DrugUnitOfStrength
             Get
-                Return txtDrugUnitOfStrength.Text
+                Return txtDrugUnitOfStrength.GetValue(Of Int32)
             End Get
             Set(value As String)
-                txtDrugUnitOfStrength.Text = value
+                txtDrugUnitOfStrength.SetValue(value)
             End Set
         End Property
 
         Public Property DrugUnitOfVolume As String Implements IGTinMatcherView.DrugUnitOfVolume
             Get
-                Return txtDrugUnitOfVolume.Text
+                Return txtDrugUnitOfVolume.GetValue(Of Int32)
             End Get
             Set(value As String)
-                txtDrugUnitOfVolume.Text = value
+                txtDrugUnitOfVolume.SetValue(value)
             End Set
         End Property
 
         Public Property DrugPackageType As String Implements IGTinMatcherView.DrugPackageType
             Get
-                Return txtDrugPackageType.Text
+                Return txtDrugPackageType.GetValue(Of Int32)
             End Get
             Set(value As String)
-                txtDrugPackageType.Text = value
+                txtDrugPackageType.SetValue(value)
             End Set
         End Property
 
         Public Property DrugDosageForm As String Implements IGTinMatcherView.DrugDosageForm
             Get
-                Return txtDrugDosageForm.Text
+                Return txtDrugDosageForm.GetValue(Of Int32)
             End Get
             Set(value As String)
-                txtDrugDosageForm.Text = value
+                txtDrugDosageForm.SetValue(value)
             End Set
         End Property
 
         Public Property DrugRouteOfAdministration As String Implements IGTinMatcherView.DrugRouteOfAdministration
             Get
-                Return txtDrugRouteOfAdministration.Text
+                Return txtDrugRouteOfAdministration.GetValue(Of Int32)
             End Get
             Set(value As String)
-                txtDrugRouteOfAdministration.Text = value
+                txtDrugRouteOfAdministration.SetValue(value)
             End Set
         End Property
 
         Public Property DrugVolume As Double? Implements IGTinMatcherView.DrugVolume
             Get
-                If txtDrugVolume.Text Is Nothing Then
-                    Return Nothing
-                Else
-                    Return txtDrugVolume.Text.ToDoubleNumber(_nfi)
-                End If
+                txtDrugVolume.GetValue(Of Int32)()
             End Get
             Set
-                If Value Is Nothing Then
-                    txtDrugVolume.Text = ""
-                Else
-                    txtDrugVolume.Text = Value
-                End If
+                txtDrugVolume.SetValue(Value)
             End Set
         End Property
 
@@ -425,81 +375,52 @@ Namespace PresentationLayer.Views.Forms
                 Return txtDrugStrengthValue.Text
             End Get
             Set(value As String)
-                txtDrugStrengthValue.Text = value
+                txtDrugStrengthValue.SetValue(value)
             End Set
         End Property
 
         Public Property DrugPackageSize As Double? Implements IGTinMatcherView.DrugPackageSize
             Get
-                If txtDrugPackageSize.Text Is Nothing Then
-                    Return Nothing
-                Else
-                    Return txtDrugPackageSize.Text.ToDoubleNumber(_nfi)
-                End If
+                txtDrugPackageSize.GetValue(Of Double?)()
             End Get
             Set
-                If Value Is Nothing Then
-                    txtDrugPackageSize.Text = ""
-                Else
-                    txtDrugPackageSize.Text = Value
-                End If
+                txtDrugPackageSize.SetValue(Value)
             End Set
         End Property
 
         Public Property DrugGTin As String Implements IGTinMatcherView.DrugGTin
             Get
-                Return txtDrugGTin.Text
+                Return txtDrugGTin.GetValue(Of Int32)
             End Get
             Set(value As String)
-                txtDrugGTin.Text = value
+                txtDrugGTin.SetValue(value)
             End Set
         End Property
 
         Public Property DrugPublicPrice As Decimal Implements IGTinMatcherView.DrugPublicPrice
             Get
-                Return txtDrugPublicPrice.Text
+                Return txtDrugPublicPrice.GetValue(Of Int32)
             End Get
             Set
-                txtDrugPublicPrice.Text = Value
+                txtDrugPublicPrice.SetValue(Value)
             End Set
         End Property
 
         Public Property Price_Cash As Decimal? Implements IItemDetailsView.Price_Cash
             Get
-                If txtDrugPackageSize.Text Is Nothing Then
-                    Return 0
-                Else
-                    Return txtPrice_Cash.Text
-                End If
+                Return txtPrice_Cash.GetValue(Of Decimal?)
             End Get
             Set
-                txtPrice_Cash.Text = IIf(Value Is Nothing, "", Value)
+                txtPrice_Cash.SetValue(Value)
             End Set
         End Property
 
-        'Public Property QtyOnHand As Decimal? Implements IGTinMatcherView.QtyOnHand
-        '    Get
-        '        Return txtQtyOnHand.Text
-        '    End Get
-        '    Set
-        '        txtQtyOnHand.Text = IIf(Value Is Nothing, "", Value)
-        '    End Set
-        'End Property
-
         Private Property QtyOnHand As Decimal? Implements IItemDetailsView.QtyOnHand
             Get
-                If txtQtyOnHand.Text Is Nothing Then
-                    Return Nothing
-                Else
-                    Return ToDecimalNumber(txtQtyOnHand.Text, _nfi)
-                End If
+                Return txtQtyOnHand.Text
             End Get
             Set
-                If Value Is Nothing Then
-                    txtQtyOnHand.Text = Nothing
-                Else
-                    txtQtyOnHand.Text = NoDbNull(Value)
-                End If
+                txtQtyOnHand.Text = NoDbNull(Value)
             End Set
         End Property
 
@@ -559,14 +480,16 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub GTinMatcher_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            DataGridViewDrugs.Cached = True
+            DataGridViewItems.Cached = True
             InitializeDataGridView()
-            bnDrugList.DeleteItem.Visible = False
-            bnDrugList.AddNewItem.Visible = False
+            btnDrugBnDeleteItem.Visible = False
+            btnDrugBnAddNewItem.Visible = False
+            btnItemsBnDeleteItem.Visible = False
+            btnItemsBnAddNewItem.Visible = False
+            BnRefresh(DataGridViewItems)
+            BnRefresh(DataGridViewDrugs)
         End Sub
-
-        'Private Sub cboItemFinder_SelectedIndexChanged(sender As Object, e As EventArgs)
-        '    RaiseEvent FinderValueChanged(cboItemFinder.SelectedItem(1))
-        'End Sub
 
         Private Sub btnScanQrCode_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnScanQrCode.ClickButtonArea
             Dim gTinScanner As New GTinScanner
@@ -575,19 +498,30 @@ Namespace PresentationLayer.Views.Forms
             gTinScanner.Close()
         End Sub
 
-        Private Sub DataGridView1_CellContentDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewDrugs.CellContentDoubleClick
-            Dim dgvIdNo As Int32
-            Dim curRow = DataGridViewDrugs.CurrentRow()
-            dgvIdNo = curRow.Cells("IdNo").Value
-            RaiseEvent UpdateDrugDisplay(dgvIdNo)
-        End Sub
-
         Private Sub DataGridViewDrugs_CellEnter(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewDrugs.CellEnter
             Dim dgvIdNo As Int32
             Dim curRow = DataGridViewDrugs.CurrentRow()
             If curRow IsNot Nothing Then
                 dgvIdNo = curRow.Cells("IdNo").Value
                 RaiseEvent UpdateDrugDisplay(dgvIdNo)
+                tsDrugsCurrentRecord.Text = curRow.Index() + 1
+            End If
+        End Sub
+
+        Private _startedByItemGrid As Boolean = False
+
+        Private Sub DataGridViewItems_CellEnter(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewItems.CellEnter
+            Dim dgvIdNo As Int32
+            Dim curRow = DataGridViewItems.CurrentRow()
+            If curRow IsNot Nothing Then
+                dgvIdNo = curRow.Cells("Primary_Key").Value
+                _startedByItemGrid = True
+                RaiseEvent UpdateItemDisplay(dgvIdNo)
+                If GTin IsNot Nothing AndAlso GTin <> "" Then
+                    SelectRecordOnDrugGrid(GTin)
+                End If
+                _startedByItemGrid = False
+                tsItemsCurrentRecord.Text = curRow.Index() + 1
             End If
         End Sub
 
@@ -606,15 +540,9 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub btnOk_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
             If DrugGTin IsNot Nothing Then
-                btnEdit.PerformClick()
-                txtGTIN.Text = txtDrugGTin.Text
-                txtGTIN.Refresh()
-                btnSave.PerformClick()
+                RaiseEvent MatchGTinRequested(DrugGTin, IdNo)
+                RaiseEvent UpdateItemDisplay(IdNo)
             End If
-        End Sub
-
-        Protected Overridable Sub OnAfterRecordChanged() Handles Me.AfterUpdateView
-            SelectRecordOnItemGrid(IdNo)
         End Sub
 
         'Protected Overrides Sub cboItemFinder.OnTextUpdate(ByVal e As EventArgs)
@@ -629,50 +557,69 @@ Namespace PresentationLayer.Views.Forms
 
     End Class
 
-    'Public Class CeComboBox
-    '    Inherits ComboBox
+    Private Sub MoveToRow(dataGridView As CDataGridView, rowCount As Integer)
+        Dim nRow As Integer = dataGridView.CurrentRow.Index
+        With dataGridView
+            Dim col = .CurrentCell.ColumnIndex
+            Dim row = .CurrentCell.RowIndex
+            Dim nRows = .Rows.Count
+            Dim nCol = .Columns.Count
+            Dim nextRow = row + rowCount
+            If nextRow + 1 <= .RowCount() AndAlso nextRow > 0 Then
+                .CurrentCell = dataGridView(col, nextRow)
+                BnRefresh(dataGridView)
+            End If
+        End With
+    End Sub
 
-    '    Private collectionList As DataTable
+    Private Sub BindingNavigatorMoveFirstItem_Click(sender As Object, e As EventArgs) Handles BindingNavigatorMoveFirstItem.Click
+        DataGridViewDrugs.CurrentCell = DataGridViewDrugs(0, 0)
+        BnRefresh(DataGridViewDrugs)
+    End Sub
 
-    '    'Public Sub New()
-    '    '    collectionList = New List(Of Object)()
-    '    'End Sub
+    Private Sub BindingNavigatorMovePreviousItem_Click(sender As Object, e As EventArgs) Handles BindingNavigatorMovePreviousItem.Click
+        MoveToRow(DataGridViewDrugs, -1)
+    End Sub
 
-    '    'Public Sub New(ByVal container As System.ComponentModel.IContainer)
-    '    '    Me.New()
-    '    '    container.Add(Me)
-    '    'End Sub
+    Private Sub BindingNavigatorMoveNextItem_Click(sender As Object, e As EventArgs) Handles BindingNavigatorMoveNextItem.Click
+        MoveToRow(DataGridViewDrugs, +1)
+    End Sub
 
-    '    Protected Overrides Sub OnTextUpdate(ByVal e As EventArgs)
-    '        Try
-    '            collectionList = DataSource
+    Private Sub BindingNavigatorMoveLastItem_Click(sender As Object, e As EventArgs) Handles BindingNavigatorMoveLastItem.Click
+        DataGridViewDrugs.CurrentCell = DataGridViewDrugs(0, DataGridViewDrugs.RowCount() - 1)
+        BnRefresh(DataGridViewDrugs)
+    End Sub
 
-    '            Dim values As IList(Of Object) = collectionList.Where(Function(x) x.ToString().ToLower().Contains(Text.ToLower())).ToList()
+    Private Sub btnFirstItem_Click(sender As Object, e As EventArgs) Handles btnFirstItem.Click
+        DataGridViewItems.CurrentCell = DataGridViewItems(0, 0)
+        BnRefresh(DataGridViewItems)
+    End Sub
 
-    '            While Items.Count > 0
-    '                Items.RemoveAt(0)
-    '            End While
+    Private Sub btnPrevItem_Click(sender As Object, e As EventArgs) Handles btnPrevItem.Click
+        MoveToRow(DataGridViewItems, -1)
+    End Sub
 
-    '            Me.Items.AddRange(values.ToArray())
-    '            Me.DroppedDown = True
-    '            Cursor.Current = Cursors.[Default]
-    '        Catch ex As Exception
-    '            SelectedIndex = -1
-    '        End Try
-    '    End Sub
+    Private Sub btnNextItem_Click(sender As Object, e As EventArgs) Handles btnNextItem.Click
+        MoveToRow(DataGridViewItems, +1)
+    End Sub
 
-    '    Protected Overrides Sub OnTextChanged(ByVal e As EventArgs)
-    '        If Me.Text = String.Empty Then
-    '            Items.Clear()
-    '            Me.Items.AddRange(collectionList.ToArray())
-    '        End If
-    '    End Sub
+    Private Sub btnLastItem_Click(sender As Object, e As EventArgs) Handles btnLastItem.Click
+        DataGridViewItems.CurrentCell = DataGridViewItems(0, DataGridViewItems.RowCount() - 1)
+        BnRefresh(DataGridViewItems)
+    End Sub
 
-    '    Protected Overrides Sub OnBindingContextChanged(ByVal e As EventArgs)
-    '        MyBase.OnBindingContextChanged(e)
-    '        collectionList = Me.Items.OfType(Of Object)().ToList()
-    '    End Sub
+    Private Sub BnRefresh(dataGridView As CDataGridView)
+        If dataGridView.CurrentRow() IsNot Nothing Then
+            If dataGridView.Name = "DataGridViewItems" Then
+                tsItemsCount.Text = "of " + (dataGridView.RowCount()).ToString()
+                tsItemsCurrentRecord.Text = (dataGridView.CurrentRow.Index + 1).ToString()
+            Else
+                tsDrugsCount.Text = "of " + (dataGridView.RowCount()).ToString()
+                tsDrugsCurrentRecord.Text = (dataGridView.CurrentRow.Index + 1).ToString()
+            End If
+        End If
+    End Sub
 
-    'End Class
+    End Class
 
 End Namespace

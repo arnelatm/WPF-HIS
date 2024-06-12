@@ -38,6 +38,12 @@ Namespace AdoNet
             End Get
         End Property
 
+        Public ReadOnly Property DataRetriever As IDataPageRetriever Implements IDaoFactory.DataRetriever
+            Get
+                Return New DataRetriever()
+            End Get
+        End Property
+
         'Public ReadOnly Property SecurityGroupDao As IDaoAll(Of SecurityGroup) Implements IDaoFactory.SecurityGroupDao
         '    Get
         '        Return New SecurityGroupDao()

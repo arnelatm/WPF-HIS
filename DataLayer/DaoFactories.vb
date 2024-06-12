@@ -11,17 +11,18 @@ Public Class DaoFactories
     Public Shared Function GetFactory(dataProvider As String) As IDaoFactory
         ' return the requested DaoFactory
 
-        'Select Case dataProvider.ToLower()
-        '    Case "ado.net"
-        Return New DaoFactory()
-        'Case "linq2sql"
-        'Return New Linq2Sql.DaoFactory()
-        'Case "entityframework"
-        'Return New EntityFramework.DaoFactory()
+        Select Case dataProvider.ToLower()
+            Case "ado.net"
+                Return New AdoNet.DaoFactory()
+                'Case "linq2sql"
+                'Return New Linq2Sql.DaoFactory()
+                'Case "entityframework"
+                'Return New EntityFramework.DaoFactory()
 
-        '    Case Else
-        '        Return New DaoFactory()
-        'End Select
+            Case Else
+                Return New DaoFactory()
+        End Select
+
     End Function
 
 End Class

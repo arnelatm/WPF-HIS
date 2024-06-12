@@ -537,6 +537,18 @@
     <Compile Include="PresentationLayer\Views\Forms\DoctorEntry.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\IqamaCbcReport2.designer.vb">
+      <DependentUpon>IqamaCbcReport2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\IqamaCbcReport2.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\IqamaCbcReport.designer.vb">
+      <DependentUpon>IqamaCbcReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\IqamaCbcReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\TestForm3.Designer.vb">
       <DependentUpon>TestForm3.vb</DependentUpon>
     </Compile>
@@ -1810,6 +1822,12 @@
       <DependentUpon>DoctorEntry.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\IGroup\IqamaCbcReport2.resx">
+      <DependentUpon>IqamaCbcReport2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\IGroup\IqamaCbcReport.resx">
+      <DependentUpon>IqamaCbcReport.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\TestForm3.resx">
       <DependentUpon>TestForm3.vb</DependentUpon>
     </EmbeddedResource>
@@ -2494,7 +2512,6 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="Accounts_TemporaryKey.pfx" />
     <None Include="app.config" />
     <None Include="app-Marcelo-Dell.config" />
     <None Include="app-Ispadmin2.config" />
@@ -2559,6 +2576,7 @@
     </None>
     <None Include="packages.config" />
     <None Include="PresentationLayer\Views\app-Ibn-Server.config" />
+    <None Include="ServiceLayer\app-Ibn-Server.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
