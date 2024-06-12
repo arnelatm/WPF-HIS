@@ -70,6 +70,7 @@ Public Class BfMain
     Public Property CancelClose As Boolean
 
     Public Property Errors As List(Of String) Implements IView.Errors
+    Public Property DataFilter As String Implements IView.DataFilter
 
     Protected Property TextDisplayLanguage As String
         Get
@@ -1194,6 +1195,7 @@ Public Class BfMain
     Protected Overloads Sub CreateLookupDataTable(tableName As String, targetProperty As String, sortField As String, fields As String(), Optional filter As String = Nothing)
         Ea.PublishEvent(New GetLookupDataTableRequested(tableName, Me, targetProperty, sortField, fields, filter))
     End Sub
+
     Public Sub CreateEnumDataSource(Of TE)(ByRef comboControl As CaComboBox)
         comboControl.DataSource = GetEnumData(Of TE)()
     End Sub

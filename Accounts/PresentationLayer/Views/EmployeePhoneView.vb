@@ -41,6 +41,7 @@ Namespace PresentationLayer.Views
         Public Property PhoneTypeIdNo As Int16 Implements IEmployeePhoneView.PhoneTypeIdNo
         Public Property PhoneTypeName As String Implements IEmployeePhoneView.PhoneTypeName
         Public Property PhoneTypeNameAra As String Implements IEmployeePhoneView.PhoneTypeNameAra
+        Public Property DataFilter As String Implements IView.DataFilter
 
     End Class
 

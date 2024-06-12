@@ -5,7 +5,12 @@ Namespace PresentationLayer.Views.Interfaces
     Public Interface IItemDetailsView
         Inherits IView
 
+        Event FinderValueChanged(itemIdNo As Int16)
+
+        Event GTinValueChanged(sender As DataGridView, gTinValue As String)
+
         Property BranchID As String
+        Property Created_By_Branch As String
         Property DosageForm As String
         Property GenericName As String
         Property GTIN As String
@@ -18,19 +23,15 @@ Namespace PresentationLayer.Views.Interfaces
         Property Pack3 As Int16
         Property PackageSize As Double?
         Property PackageType As String
+        Property PrescriptionDrug As Boolean
         Property Price_Cash As Decimal?
         Property QtyOnHand As Decimal?
         Property RegistrationNo As String
+        Property RouteOfAdministration As String
         Property StrengthValue As String
         Property UnitOfStrength As String
         Property UnitOfVolume As String
         Property Volume As Double?
-        Property PrescriptionDrug As Boolean
-        Property RouteOfAdministration As String
-
-        Event FinderValueChanged(itemIdNo As Int16)
-
-        Event GTinValueChanged(sender As DataGridView, gTinValue As String)
 
     End Interface
 

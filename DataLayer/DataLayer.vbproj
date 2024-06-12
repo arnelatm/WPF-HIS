@@ -73,6 +73,7 @@
   <ItemGroup>
     <Compile Include="AdoNet\BaseDao.vb" />
     <Compile Include="AdoNet\DaoFactory.vb" />
+    <Compile Include="AdoNet\DataRetriever.vb" />
     <Compile Include="AdoNet\DB.vb" />
     <Compile Include="AdoNet\DefaultFieldValueDao.vb" />
     <Compile Include="AdoNet\Extensions.vb" />
@@ -82,6 +83,7 @@
     <Compile Include="AdoNet\SecurityObjectDao.vb" />
     <Compile Include="AdoNet\UserDao.vb" />
     <Compile Include="IDao.vb" />
+    <Compile Include="IDataPageRetriever.vb" />
     <Compile Include="ISecurityObjectDao.vb" />
     <Compile Include="DaoFactories.vb" />
     <Compile Include="IBaseDao.vb" />

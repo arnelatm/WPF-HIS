@@ -579,7 +579,7 @@ Namespace PresentationLayer.Presenters
 
         Private Function DeleteAdvanceCollectionOpenInvoice(ByRef idNo As Int32) As String
             Dim arOpenInvoiceService As New AccountsService("ArOpenInvoice")
-            If Service.CountRecordWithKey(idNo, "ArOpenInvoice", "IdNo") > 0 Then
+            If Service.CountRecordWithKey(Of Integer)("ArOpenInvoice", "IdNo", idNo) > 0 Then
                 Return arOpenInvoiceService.DeleteRecord(idNo, "ArOpenInvoice")
             End If
             Return 0

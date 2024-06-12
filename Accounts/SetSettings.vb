@@ -22,10 +22,13 @@ Public Class SetSettings
         'PropertyGrid.BrowsableAttributes = attrs
     End Sub
 
-    Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles CButton1.ClickButtonArea
+    Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) 
         _appSettings.Save()
     End Sub
 
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        _appSettings.Save()
+    End Sub
 End Class
 
 <Serializable()>
@@ -72,6 +75,21 @@ Public Class AppSettings
         End Set
     End Property
 
+    Private _laboratoryResultDirectory As String
+
+    <TypeConverter(GetType(LaboratoryResultDirectory)),
+    CategoryAttribute("Laboratory Result Directory"), DefaultValueAttribute(""),
+    DescriptionAttribute("Select a directory from the list")>
+    Public Property LaboratoryResultDirectory() As String
+        Get
+            Return _laboratoryResultDirectory
+        End Get
+        Set(ByVal Value As String)
+            _laboratoryResultDirectory = Value
+        End Set
+    End Property
+
+
     Public Shared Function Load() As AppSettings
         Dim serializer As XmlSerializer = New XmlSerializer(GetType(AppSettings))
         Dim retVal As AppSettings
@@ -103,6 +121,7 @@ Public Class AppSettings
         writer = New StreamWriter("AccountSettings.xml")
         serializer.Serialize(writer, Me)
         writer.Close()
+        MessageBox.Show("Settings Saved")
     End Sub
 
 End Class
@@ -175,6 +194,25 @@ Public Class PreferredLanguage : Inherits System.ComponentModel.StringConverter
 
     Public Overloads Overrides Function GetStandardValues(ByVal context As ITypeDescriptorContext) As StandardValuesCollection
         Return New StandardValuesCollection(_preferredLanguage)
+    End Function
+
+    Public Overloads Overrides Function GetStandardValuesSupported(ByVal context As ITypeDescriptorContext) As Boolean
+        Return True
+    End Function
+
+    Public Overloads Overrides Function GetStandardValuesExclusive(ByVal context As ITypeDescriptorContext) As Boolean
+        Return True
+    End Function
+
+End Class
+
+Public Class LaboratoryResultDirectory : Inherits System.ComponentModel.StringConverter
+
+    '''
+    ReadOnly _laboratoryResultDirectory As String() = New String() {"\\laboratory5\drivec\NihonKohden", "c:\LabResults"}
+
+    Public Overloads Overrides Function GetStandardValues(ByVal context As ITypeDescriptorContext) As StandardValuesCollection
+        Return New StandardValuesCollection(_laboratoryResultDirectory)
     End Function
 
     Public Overloads Overrides Function GetStandardValuesSupported(ByVal context As ITypeDescriptorContext) As Boolean

@@ -538,7 +538,7 @@ Public Class CaComboBox
     End Function
 
     Public Sub SetValue(ByRef value)
-        If value Is Nothing Then
+        If value Is DBNull.Value OrElse value Is Nothing Then
             Text = Nothing
         Else
             If ValueMember.ToLower() = "idno" Then

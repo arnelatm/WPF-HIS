@@ -275,6 +275,15 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property Created_By_Branch As String Implements IItemDetailsView.Created_By_Branch
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As String)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
 #End Region
 
         Protected Overrides Sub CreateMainFieldsDictionary()

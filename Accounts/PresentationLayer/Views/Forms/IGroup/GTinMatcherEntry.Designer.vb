@@ -2032,7 +2032,6 @@
         Friend WithEvents txtPackageSize As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents CLabel3 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtGenericName As Libraries.CBaseControlsLibrary.CTextBox
-        Friend WithEvents DataGridViewDrugs As Libraries.CBaseControlsLibrary.CDataGridView
         Friend WithEvents CFlowLayout2 As Libraries.CBaseControlsLibrary.CFlowLayout
         Friend WithEvents CLabel4 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtDrugIdNo As Libraries.CBaseControlsLibrary.CTextBox
@@ -2065,20 +2064,6 @@
         Friend WithEvents txtpack2 As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents txtpack3 As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents btnOk As Libraries.CBaseControlsLibrary.CButton
-        Friend WithEvents bnDrugList As BindingNavigator
-        Friend WithEvents BindingNavigatorAddNewItem As ToolStripButton
-        Friend WithEvents BindingNavigatorCountItem As ToolStripLabel
-        Friend WithEvents BindingNavigatorDeleteItem As ToolStripButton
-        Friend WithEvents BindingNavigatorMoveFirstItem As ToolStripButton
-        Friend WithEvents BindingNavigatorMovePreviousItem As ToolStripButton
-        Friend WithEvents BindingNavigatorSeparator As ToolStripSeparator
-        Friend WithEvents BindingNavigatorPositionItem As ToolStripTextBox
-        Friend WithEvents BindingNavigatorSeparator1 As ToolStripSeparator
-        Friend WithEvents BindingNavigatorMoveNextItem As ToolStripButton
-        Friend WithEvents BindingNavigatorMoveLastItem As ToolStripButton
-        Friend WithEvents BindingNavigatorSeparator2 As ToolStripSeparator
-        Friend WithEvents CLabel2 As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents bsDrugList As BindingSource
         Friend WithEvents lblPrice_Cash As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtPrice_Cash As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblPublicPrice As Libraries.CBaseControlsLibrary.CLabel
@@ -2088,6 +2073,30 @@
         Friend WithEvents CLabel9 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents CFlowLayout3 As Libraries.CBaseControlsLibrary.CFlowLayout
         Friend WithEvents DataGridViewItems As Libraries.CBaseControlsLibrary.CDataGridView
-        Friend WithEvents bsItemDetails As BindingSource
+        Friend WithEvents DataGridViewDrugs As Libraries.CBaseControlsLibrary.CDataGridView
+        Friend WithEvents BnDrugs As BindingNavigator
+        Friend WithEvents btnDrugBnAddNewItem As ToolStripButton
+        Friend WithEvents tsDrugsCount As ToolStripLabel
+        Friend WithEvents btnDrugBnDeleteItem As ToolStripButton
+        Friend WithEvents BindingNavigatorMoveFirstItem As ToolStripButton
+        Friend WithEvents BindingNavigatorMovePreviousItem As ToolStripButton
+        Friend WithEvents BindingNavigatorSeparator As ToolStripSeparator
+        Friend WithEvents tsDrugsCurrentRecord As ToolStripTextBox
+        Friend WithEvents BindingNavigatorSeparator1 As ToolStripSeparator
+        Friend WithEvents BindingNavigatorMoveNextItem As ToolStripButton
+        Friend WithEvents BindingNavigatorMoveLastItem As ToolStripButton
+        Friend WithEvents BindingNavigatorSeparator2 As ToolStripSeparator
+        Friend WithEvents BnItems As BindingNavigator
+        Friend WithEvents btnItemsBnAddNewItem As ToolStripButton
+        Friend WithEvents tsItemsCount As ToolStripLabel
+        Friend WithEvents btnItemsBnDeleteItem As ToolStripButton
+        Friend WithEvents btnFirstItem As ToolStripButton
+        Friend WithEvents btnPrevItem As ToolStripButton
+        Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
+        Friend WithEvents tsItemsCurrentRecord As ToolStripTextBox
+        Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
+        Friend WithEvents btnNextItem As ToolStripButton
+        Friend WithEvents btnLastItem As ToolStripButton
+        Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
     End Class
 End Namespace

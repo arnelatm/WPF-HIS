@@ -27,7 +27,7 @@ Namespace PresentationLayer.Views.Forms
             _nfi.NumberDecimalDigits = 2
             FirstControl = dtpTransactionDate
             SingleData = True
-            QuitOnSave = True
+            QuitOnSave = True            
         End Sub
 
 #Region "Field Items"
@@ -277,7 +277,7 @@ Namespace PresentationLayer.Views.Forms
             btnNew.Visible = False
             btnOpen.Visible = False
             TurnOnInputs()
-
+            btnSave.Enabled = True
         End Sub
 
         Private Sub btnSelectAll_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnSelectAll.ClickButtonArea

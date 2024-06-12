@@ -211,8 +211,6 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     Public Property Ea As EventAggregator
         Get
             Return CallByName(View, "Ea", CallType.Get)
-            'Return Invoker.GetField(View, "Ea")
-
         End Get
         Set(value As EventAggregator)
             _ea = value
@@ -398,13 +396,13 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Return False
     End Function
 
-    Public Function CountRecordWithKey(searchValue As String, searchFieldName As String) As Integer
-        Try
-            Return Service.CountRecordWithKey(searchValue, TableName, searchFieldName)
-        Catch ex As Exception
-            Return Nothing
-        End Try
-    End Function
+    'Public Function CountRecordWithKey(searchValue As String, searchFieldName As String) As Integer
+    '    Try
+    '        Return Service.CountRecordWithKey(searchValue, TableName, searchFieldName)
+    '    Catch ex As Exception
+    '        Return Nothing
+    '    End Try
+    'End Function
 
     Public Sub CreateDataTable(ByRef dataTable As DataTable, rowColumns As Object)
         For i = 0 To rowColumns.GetLength(0) - 1
@@ -656,7 +654,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     End Function
 
     Public Function UpdateSecurityObject(securityObject As SecurityObject) As Int32
-        If Service.CountRecordWithKey(securityObject.SecurityObjectName, "SecurityObject", "SecurityObjectName") = 0 Then
+        If Service.CountRecordWithKey(Of String)("SecurityObject", "SecurityObjectName", securityObject.SecurityObjectName) = 0 Then
             Return Service.AddSecurityObject(securityObject)
         Else
             Return Service.GetRecordFieldWithKeyG(Of Int32)(securityObject.SecurityObjectName, "SecurityObject", "SecurityObjectName", "IdNo")

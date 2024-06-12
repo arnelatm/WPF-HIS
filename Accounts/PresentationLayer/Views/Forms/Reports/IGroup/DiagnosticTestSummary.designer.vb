@@ -77,6 +77,9 @@ Namespace PresentationLayer.Views.Forms.Reports
         '
         'dtpEndingDate
         '
+        Me.dtpEndingDate.AutoSize = true
+        Me.dtpEndingDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.dtpEndingDate.CalendarCulture = New System.Globalization.CultureInfo("en-GB")
         Me.dtpEndingDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
         Me.dtpEndingDate.DefaultValue = Nothing
         Me.dtpEndingDate.DisplayOnly = false
@@ -93,7 +96,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.dtpEndingDate.SecurityKey = Nothing
         Me.dtpEndingDate.ShowLongDate = false
         Me.dtpEndingDate.ShowTime = false
-        Me.dtpEndingDate.Size = New System.Drawing.Size(112, 25)
+        Me.dtpEndingDate.Size = New System.Drawing.Size(118, 23)
         Me.dtpEndingDate.TabIndex = 24
         Me.dtpEndingDate.TargetCalendar = CType(resources.GetObject("dtpEndingDate.TargetCalendar"),System.Globalization.Calendar)
         Me.dtpEndingDate.Translatable = false
@@ -103,6 +106,9 @@ Namespace PresentationLayer.Views.Forms.Reports
         '
         'dtpBeginningDate
         '
+        Me.dtpBeginningDate.AutoSize = true
+        Me.dtpBeginningDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.dtpBeginningDate.CalendarCulture = New System.Globalization.CultureInfo("en-GB")
         Me.dtpBeginningDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
         Me.dtpBeginningDate.DefaultValue = Nothing
         Me.dtpBeginningDate.DisplayOnly = false
@@ -119,7 +125,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.dtpBeginningDate.SecurityKey = Nothing
         Me.dtpBeginningDate.ShowLongDate = false
         Me.dtpBeginningDate.ShowTime = false
-        Me.dtpBeginningDate.Size = New System.Drawing.Size(112, 25)
+        Me.dtpBeginningDate.Size = New System.Drawing.Size(118, 23)
         Me.dtpBeginningDate.TabIndex = 23
         Me.dtpBeginningDate.TargetCalendar = CType(resources.GetObject("dtpBeginningDate.TargetCalendar"),System.Globalization.Calendar)
         Me.dtpBeginningDate.Translatable = false
@@ -253,6 +259,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.Text = "Diagnostic Test Summary"
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.CFlowLayout1.ResumeLayout(false)
+        Me.CFlowLayout1.PerformLayout
         Me.ResumeLayout(false)
 
 End Sub
