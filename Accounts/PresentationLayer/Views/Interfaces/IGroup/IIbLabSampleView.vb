@@ -51,7 +51,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property Gender As Char
         Property HBSAgEliza As Boolean?
         Property HIVEliza As Boolean?
-        Property HOVEliza As Boolean?
+        Property HCVEliza As Boolean?
         Property IdNo As Int32
         Property IqamaNo As String
         Property LabNo As String
