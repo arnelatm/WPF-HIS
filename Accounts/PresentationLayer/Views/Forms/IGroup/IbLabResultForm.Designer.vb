@@ -74,7 +74,7 @@
             Me.dgvXRay = New System.Windows.Forms.DataGridViewCheckBoxColumn()
             Me.dgvTBSputum = New System.Windows.Forms.DataGridViewCheckBoxColumn()
             Me.dgvHIVEliza = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-            Me.dgvHOVEliza = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+            Me.dgvHCVEliza = New System.Windows.Forms.DataGridViewCheckBoxColumn()
             Me.dgvHBSAgEliza = New System.Windows.Forms.DataGridViewCheckBoxColumn()
             Me.dgvMalaria = New System.Windows.Forms.DataGridViewCheckBoxColumn()
             Me.dgvVDRL = New System.Windows.Forms.DataGridViewCheckBoxColumn()
@@ -202,7 +202,7 @@
             Me.DataGridViewIbLabResultDetails.BegFindValue = Nothing
             Me.DataGridViewIbLabResultDetails.Cached = False
             Me.DataGridViewIbLabResultDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DataGridViewIbLabResultDetails.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Sequence, Me.dgvLabNo, Me.dgvPatientName, Me.dgvNationality, Me.dgvProfession, Me.dgvIqamaNo, Me.dgvPassportNumber, Me.dgvGender, Me.dgvClinical, Me.dgvXRay, Me.dgvTBSputum, Me.dgvHIVEliza, Me.dgvHOVEliza, Me.dgvHBSAgEliza, Me.dgvMalaria, Me.dgvVDRL, Me.dgvWidal, Me.dgvPregnancy, Me.dgvBilharziasisUrine, Me.dgvBilharziasisStool, Me.dgvShigella, Me.dgvCholera})
+            Me.DataGridViewIbLabResultDetails.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Sequence, Me.dgvLabNo, Me.dgvPatientName, Me.dgvNationality, Me.dgvProfession, Me.dgvIqamaNo, Me.dgvPassportNumber, Me.dgvGender, Me.dgvClinical, Me.dgvXRay, Me.dgvTBSputum, Me.dgvHIVEliza, Me.dgvHCVEliza, Me.dgvHBSAgEliza, Me.dgvMalaria, Me.dgvVDRL, Me.dgvWidal, Me.dgvPregnancy, Me.dgvBilharziasisUrine, Me.dgvBilharziasisStool, Me.dgvShigella, Me.dgvCholera})
             Me.TableLayoutPanel1.SetColumnSpan(Me.DataGridViewIbLabResultDetails, 4)
             Me.DataGridViewIbLabResultDetails.DataFilter = Nothing
             Me.DataGridViewIbLabResultDetails.DataSource = Me.bsIbLabResultDetails
@@ -636,22 +636,22 @@
             Me.dgvHIVEliza.ThreeState = True
             Me.dgvHIVEliza.Width = 35
             '
-            'dgvHOVEliza
+            'dgvHCVEliza
             '
-            Me.dgvHOVEliza.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader
-            Me.dgvHOVEliza.DataPropertyName = "HOVEliza"
+            Me.dgvHCVEliza.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader
+            Me.dgvHCVEliza.DataPropertyName = "HCVEliza"
             DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
             DataGridViewCellStyle14.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle14.ForeColor = System.Drawing.Color.Black
             DataGridViewCellStyle14.NullValue = System.Windows.Forms.CheckState.Indeterminate
-            Me.dgvHOVEliza.DefaultCellStyle = DataGridViewCellStyle14
-            Me.dgvHOVEliza.HeaderText = "HCV Eliza"
-            Me.dgvHOVEliza.MinimumWidth = 35
-            Me.dgvHOVEliza.Name = "dgvHOVEliza"
-            Me.dgvHOVEliza.ReadOnly = True
-            Me.dgvHOVEliza.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvHOVEliza.ThreeState = True
-            Me.dgvHOVEliza.Width = 35
+            Me.dgvHCVEliza.DefaultCellStyle = DataGridViewCellStyle14
+            Me.dgvHCVEliza.HeaderText = "HCV Eliza"
+            Me.dgvHCVEliza.MinimumWidth = 35
+            Me.dgvHCVEliza.Name = "dgvHCVEliza"
+            Me.dgvHCVEliza.ReadOnly = True
+            Me.dgvHCVEliza.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvHCVEliza.ThreeState = True
+            Me.dgvHCVEliza.Width = 35
             '
             'dgvHBSAgEliza
             '
@@ -888,7 +888,7 @@
         Friend WithEvents dgvXRay As DataGridViewCheckBoxColumn
         Friend WithEvents dgvTBSputum As DataGridViewCheckBoxColumn
         Friend WithEvents dgvHIVEliza As DataGridViewCheckBoxColumn
-        Friend WithEvents dgvHOVEliza As DataGridViewCheckBoxColumn
+        Friend WithEvents dgvHCVEliza As DataGridViewCheckBoxColumn
         Friend WithEvents dgvHBSAgEliza As DataGridViewCheckBoxColumn
         Friend WithEvents dgvMalaria As DataGridViewCheckBoxColumn
         Friend WithEvents dgvVDRL As DataGridViewCheckBoxColumn

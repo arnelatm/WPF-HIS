@@ -32,7 +32,7 @@ Namespace PresentationLayer.Views
         Public Property Gender As Char Implements IIbLabResultDetailView.Gender
         Public Property HBSAgEliza As Boolean? Implements IIbLabResultDetailView.HBSAgEliza
         Public Property HIVEliza As Boolean? Implements IIbLabResultDetailView.HIVEliza
-        Public Property HOVEliza As Boolean? Implements IIbLabResultDetailView.HOVEliza
+        Public Property HCVEliza As Boolean? Implements IIbLabResultDetailView.HCVEliza
         Public Property IdNo As Integer Implements IIbLabResultDetailView.IdNo
         Public Property IqamaNo As String Implements IIbLabResultDetailView.IqamaNo
         Public Property LabNo As String Implements IIbLabResultDetailView.LabNo

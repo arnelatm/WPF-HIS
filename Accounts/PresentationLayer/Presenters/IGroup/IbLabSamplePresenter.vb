@@ -131,7 +131,7 @@ Namespace PresentationLayer.Presenters
                         pregnancy = False
                     End If
                     _ibLabResultDetailDao.AddRecord(item.TransKey, item.PassportNumber, Approve(item.Clinical), Approve(item.XRay), Approve(item.TBSputum),
-                                  Approve(item.HIVEliza), Approve(item.HOVEliza), Approve(item.HBSAgEliza), Approve(item.Malaria), Approve(item.VDRL), Approve(item.Widal), pregnancy,
+                                  Approve(item.HIVEliza), Approve(item.HCVEliza), Approve(item.HBSAgEliza), Approve(item.Malaria), Approve(item.VDRL), Approve(item.Widal), pregnancy,
                                   Approve(item.BilharziasisUrine), Approve(item.BilharziasisStool), Approve(item.Shigella), Approve(item.Cholera))
                 End If
             Next
@@ -140,21 +140,39 @@ Namespace PresentationLayer.Presenters
 
         Private Function Approve(value As Boolean?) As Boolean?
             If value.HasValue = True Then
-                Return value
+                If value Then
+                    value = Nothing
+                Else
+                    value = True
+                End If
             Else
                 Return False
             End If
+            Return value
         End Function
 
 
         Public Sub UpdateLabResult(bindingSource As BindingSource)
             With bindingSource.Current
-                _ibLabResultDetailDao.UpdateRecord(.IdNo, .passportNumber, .clinical, .Xray, .TBSputum, .hivEliza,
-                                                   .hovEliza, .hbsagEliza, .malaria, .vdrl, .Widal, .pregnancy,
-                                                   .bilharziasisUrine, .bilharziasisStool, .shigella, .cholera)
+                _ibLabResultDetailDao.UpdateRecord(.IdNo, .passportNumber, SetActualValue(.clinical), SetActualValue(.Xray), SetActualValue(.TBSputum),
+                                                   SetActualValue(.hivEliza), SetActualValue(.hcvEliza), SetActualValue(.hbsagEliza),
+                                                   SetActualValue(.malaria), SetActualValue(.vdrl), SetActualValue(.Widal), SetActualValue(.pregnancy),
+                                                   SetActualValue(.bilharziasisUrine), SetActualValue(.bilharziasisStool), SetActualValue(.shigella), SetActualValue(.cholera))
             End With
         End Sub
 
+        Public Function SetActualValue(displayValue As Boolean?) As Boolean?
+            If displayValue.HasValue Then
+                If displayValue Then
+                    Return True
+                Else
+                    Return Nothing
+                End If
+            Else
+                Return False
+            End If
+        End Function
+	
         Private Sub GetIbLabResults(transactionDate As Date?)
             UpdateData()
         End Sub

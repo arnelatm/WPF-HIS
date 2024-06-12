@@ -109,7 +109,7 @@ Namespace DataLayer.AdoNet
             Dim transactionDateString As String = transactionDate.ToString("yyyy/MM/dd")
             data.TransactionDate = transactionDate
             Dim params() As Object = {"@TransactionDate", transactionDateString}
-            sql = $"SELECT Row_Number() Over (Order by Trans_key) as 'Sequence',IdNo,Trans_Key,Sex,TransactionDate,LabNo,PatientName,CountryNameEng,PassportNumber,Profession,Border_Iqama,Clinical,XRay,TBSputum,HIVEliza,HOVEliza,HBSAgEliza,Malaria,VDRL,WIdal,Pregnancy,BilharziasisUrine,BilharziasisStool,SHigella,Cholera from IbLabResultList_View where TransactionDate = @TransactionDate order by Trans_key"
+            sql = $"SELECT Row_Number() Over (Order by Trans_key) as 'Sequence',IdNo,Trans_Key,Sex,TransactionDate,LabNo,PatientName,CountryNameEng,PassportNumber,Profession,Border_Iqama,Clinical,XRay,TBSputum,HIVEliza,HCVEliza,HBSAgEliza,Malaria,VDRL,WIdal,Pregnancy,BilharziasisUrine,BilharziasisStool,SHigella,Cholera from IbLabResultList_View where TransactionDate = @TransactionDate order by Trans_key"
             data.IbLabResultDetails = _db.Read(sql, MakeIbLabResultDetails, params).ToList()
             Return data
         End Function
@@ -131,7 +131,7 @@ Namespace DataLayer.AdoNet
         }
 
         'Public Function UpdateIbLabResultDetail(IdNo As Int32, passport As String, clinical As Boolean, Xray As Boolean, TBSputum As Boolean,
-        '                                        hivEliza As Boolean, hovEliza As Boolean, hbsagEliza As Boolean, malaria As Boolean, vdrl As Boolean,
+        '                                        hivEliza As Boolean, HCVEliza As Boolean, hbsagEliza As Boolean, malaria As Boolean, vdrl As Boolean,
         '                                        Widal As Boolean, pregnancy As Boolean, bilharziasisUrine As Boolean,
         '                                        bilharziasisStool As Boolean, shigella As Boolean, cholera As Boolean)
         '    Dim sql As String =
@@ -141,7 +141,7 @@ Namespace DataLayer.AdoNet
         '            " Xray = @Xray," &
         '            " TBSputum = @TBSputum," &
         '            " HIVEliza = @HIVEliza," &
-        '            " HOVEliza = @HOVEliza," &
+        '            " HCVEliza = @HCVEliza," &
         '            " HBSAgEliza = @HBSAgEliza," &
         '            " Malaria = @Malaria," &
         '            " VDRL = @VDRL," &
@@ -153,7 +153,7 @@ Namespace DataLayer.AdoNet
         '            " Cholera = @Cholera" &
         '            " WHERE IdNo = @IdNo "
         '    Return _db.Update(sql, {"@Passport", passport, "@Clinical", clinical, "@Xray", Xray, "@TBSputum", TBSputum, "@HIVEliza", hivEliza,
-        '            "@HOVEliza", hovEliza, "@HBSAgEliza", hbsagEliza, "@Malaria", malaria, "@VDRL", vdrl, "@Widal", Widal, "@Pregnancy", pregnancy,
+        '            "@HCVEliza", HCVEliza, "@HBSAgEliza", hbsagEliza, "@Malaria", malaria, "@VDRL", vdrl, "@Widal", Widal, "@Pregnancy", pregnancy,
         '            "@BilharzizsisUrine", bilharziasisUrine, "@BilharzizsisStool", bilharziasisStool, "@Shigella", shigella, "@Cholera", cholera})
         'End Function
 
@@ -173,7 +173,7 @@ Namespace DataLayer.AdoNet
             .XRay = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean)(reader("Xray")),
             .TBSputum = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean)(reader("TBSputum")),
             .HIVEliza = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean)(reader("HIVEliza")),
-            .HOVEliza = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean)(reader("HOVEliza")),
+            .HCVEliza = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean)(reader("HCVEliza")),
             .HBSAgEliza = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean)(reader("HBSAgEliza")),
             .Malaria = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean)(reader("Malaria")),
             .VDRL = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean)(reader("VDRL")),
