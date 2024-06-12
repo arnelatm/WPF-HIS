@@ -190,6 +190,18 @@ Namespace PresentationLayer.Presenters
             End With
         End Sub
 
+        Public Function SetActualValue(displayValue As Boolean?) As Boolean?
+            If displayValue.HasValue Then
+                If displayValue Then
+                    Return True
+                Else
+                    Return Nothing
+                End If
+            Else
+                Return False
+            End If
+        End Function
+
         Private Sub GetIbLabResults(transactionDate As Date?)
             UpdateData()
         End Sub
