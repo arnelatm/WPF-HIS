@@ -29,7 +29,7 @@ Namespace PresentationLayer.Views
         Public Property BilharziasisUrine As Boolean? Implements IIbLabResultDetailView.BilharziasisUrine
         Public Property Cholera As Boolean? Implements IIbLabResultDetailView.Cholera
         Public Property Clinical As Boolean? Implements IIbLabResultDetailView.Clinical
-        Public Property Gender As Char Implements IIbLabResultDetailView.Gender
+        Public Property Gender As Char? Implements IIbLabResultDetailView.Gender
         Public Property HBSAgEliza As Boolean? Implements IIbLabResultDetailView.HBSAgEliza
         Public Property HIVEliza As Boolean? Implements IIbLabResultDetailView.HIVEliza
         Public Property HCVEliza As Boolean? Implements IIbLabResultDetailView.HCVEliza

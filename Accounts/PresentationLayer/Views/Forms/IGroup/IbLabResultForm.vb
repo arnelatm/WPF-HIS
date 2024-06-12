@@ -155,9 +155,9 @@ Namespace PresentationLayer.Views.Forms
             RaiseEvent FillUpButtonClicked()
         End Sub
 
-        'Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewIbLabResultDetails.CellEndEdit
-        '    ProcessCellEndEdit(DataGridViewIbLabResultDetails, bsIbLabResultDetails)
-        'End Sub
+        Private Sub oncellendedit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewIbLabResultDetails.CellEndEdit
+            ProcessCellEndEdit(DataGridViewIbLabResultDetails, bsIbLabResultDetails)
+        End Sub
 
         Private Sub Grid_OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewIbLabResultDetails.CellBeginEdit
             With DataGridViewIbLabResultDetails.CurrentCell
