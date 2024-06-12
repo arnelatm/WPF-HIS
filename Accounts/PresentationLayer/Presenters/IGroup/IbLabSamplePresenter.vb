@@ -131,7 +131,7 @@ Namespace PresentationLayer.Presenters
                         pregnancy = False
                     End If
                     _ibLabResultDetailDao.AddRecord(item.TransKey, item.PassportNumber, Approve(item.Clinical), Approve(item.XRay), Approve(item.TBSputum),
-                                  Approve(item.HIVEliza), Approve(item.HOVEliza), Approve(item.HBSAgEliza), Approve(item.Malaria), Approve(item.VDRL), Approve(item.Widal), pregnancy,
+                                  Approve(item.HIVEliza), Approve(item.HCVEliza), Approve(item.HBSAgEliza), Approve(item.Malaria), Approve(item.VDRL), Approve(item.Widal), pregnancy,
                                   Approve(item.BilharziasisUrine), Approve(item.BilharziasisStool), Approve(item.Shigella), Approve(item.Cholera))
                 End If
             Next
@@ -150,7 +150,7 @@ Namespace PresentationLayer.Presenters
         Public Sub UpdateLabResult(bindingSource As BindingSource)
             With bindingSource.Current
                 _ibLabResultDetailDao.UpdateRecord(.IdNo, .passportNumber, .clinical, .Xray, .TBSputum, .hivEliza,
-                                                   .hovEliza, .hbsagEliza, .malaria, .vdrl, .Widal, .pregnancy,
+                                                   .HCVEliza, .hbsagEliza, .malaria, .vdrl, .Widal, .pregnancy,
                                                    .bilharziasisUrine, .bilharziasisStool, .shigella, .cholera)
             End With
         End Sub
