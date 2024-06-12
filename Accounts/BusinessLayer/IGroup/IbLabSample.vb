@@ -56,7 +56,7 @@ Namespace BusinessLayer
         Public Property BilharziasisUrine As Boolean?
         Public Property Cholera As Boolean?
         Public Property Clinical As Boolean?
-        Public Property Gender As Char
+        Public Property Gender As Char?
         Public Property HBSAgEliza As Boolean?
         Public Property HIVEliza As Boolean?
         Public Property HCVEliza As Boolean?

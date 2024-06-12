@@ -121,43 +121,90 @@ Namespace PresentationLayer.Presenters
 
         Private Sub OnFillUpButtonClicked()
             For Each item As IbLabResultDetailView In View.IbLabResultDetails
-                If item.IdNo <= 0 Then
-                    Dim pregnancy As Boolean?
-                    If item.Gender = "F" Then
-                        pregnancy = False
-                    ElseIf item.Gender = "M" Then
-                        pregnancy = Nothing
-                    Else
-                        pregnancy = False
-                    End If
-                    _ibLabResultDetailDao.AddRecord(item.TransKey, item.PassportNumber, Approve(item.Clinical), Approve(item.XRay), Approve(item.TBSputum),
-                                  Approve(item.HIVEliza), Approve(item.HCVEliza), Approve(item.HBSAgEliza), Approve(item.Malaria), Approve(item.VDRL), Approve(item.Widal), pregnancy,
-                                  Approve(item.BilharziasisUrine), Approve(item.BilharziasisStool), Approve(item.Shigella), Approve(item.Cholera))
-                End If
+                Dim pregnancy As Boolean? = SetDefaultPregnancyValue(item.Gender)
+                item.Clinical = True
+                item.XRay = True
+                item.TBSputum = True
+                item.HIVEliza = True
+                item.HCVEliza = True
+                item.HBSAgEliza = True
+                item.Malaria = True
+                item.VDRL = True
+                item.Widal = True
+                item.BilharziasisStool = True
+                item.BilharziasisUrine = True
+                item.Shigella = True
+                item.Cholera = True
+                item.Pregnancy = pregnancy
+                AddNewRecord(item)
             Next
             UpdateData()
         End Sub
 
-        Private Function Approve(value As Boolean?) As Boolean?
-            If value.HasValue = True Then
-                Return value
-            Else
-                Return False
+        Private Sub AddNewRecord(item As IbLabResultDetailView)
+            If item.IdNo <= 0 Then
+
+                Dim newIdNo As Int32 = _ibLabResultDetailDao.AddRecord(item.TransKey, item.PassportNumber, item.Clinical, item.XRay, item.TBSputum,
+                              item.HIVEliza, item.HCVEliza, item.HBSAgEliza, item.Malaria, item.VDRL, item.Widal, item.Pregnancy, item.BilharziasisUrine,
+                              item.BilharziasisStool, item.Shigella, item.Cholera)
+                item.IdNo = newIdNo
             End If
+        End Sub
+
+        Private Shared Function SetDefaultPregnancyValue(gender As Char?) As Boolean?
+            Dim pregnant As Boolean?
+            If gender = "F" Then
+                pregnant = True
+            ElseIf gender = "M" Then
+                pregnant = Nothing
+            Else
+                pregnant = False
+            End If
+            Return pregnant
         End Function
 
+        Private Function Approve(value As Boolean?) As Boolean?
+            If value.HasValue = True Then
+                If value Then
+                    value = True
+                Else
+                    value = Nothing
+                End If
+            Else
+                value = False
+            End If
+            Return value
+        End Function
 
         Public Sub UpdateLabResult(bindingSource As BindingSource)
             With bindingSource.Current
-                _ibLabResultDetailDao.UpdateRecord(.IdNo, .passportNumber, .clinical, .Xray, .TBSputum, .hivEliza,
-                                                   .HCVEliza, .hbsagEliza, .malaria, .vdrl, .Widal, .pregnancy,
-                                                   .bilharziasisUrine, .bilharziasisStool, .shigella, .cholera)
+                If .IdNo < 0 Then
+                    AddNewRecord(bindingSource.Current)
+                Else
+                    _ibLabResultDetailDao.UpdateRecord(.IdNo, .passportNumber, ActualValue(.clinical), ActualValue(.Xray), ActualValue(.TBSputum),
+                                                   ActualValue(.hivEliza), ActualValue(.HCVEliza), ActualValue(.hbsagEliza), ActualValue(.malaria),
+                                                   ActualValue(.vdrl), ActualValue(.Widal), ActualValue(.pregnancy), ActualValue(.bilharziasisUrine),
+                                                   ActualValue(.bilharziasisStool), ActualValue(.shigella), ActualValue(.cholera))
+
+                End If
             End With
         End Sub
 
         Private Sub GetIbLabResults(transactionDate As Date?)
             UpdateData()
         End Sub
+
+        Private Function ActualValue(value As Boolean?) As Boolean?
+            If value.HasValue Then
+                If value Then
+                    Return True
+                Else
+                    Return Nothing
+                End If
+            Else
+                Return False
+            End If
+        End Function
 
         Protected Overrides Sub CreateDataSources()
             Service.SaveConnectionString()

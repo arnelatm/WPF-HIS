@@ -48,7 +48,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property BilharziasisUrine As Boolean?
         Property Cholera As Boolean?
         Property Clinical As Boolean?
-        Property Gender As Char
+        Property Gender As Char?
         Property HBSAgEliza As Boolean?
         Property HIVEliza As Boolean?
         Property HCVEliza As Boolean?
