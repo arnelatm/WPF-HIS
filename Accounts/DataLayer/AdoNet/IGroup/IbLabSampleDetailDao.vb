@@ -37,7 +37,7 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function UpdateRecord(IdNo As Int32, passportNumber As String, clinical As Boolean?, Xray As Boolean?, TBSputum As Boolean?,
-                                                hivEliza As Boolean?, hovEliza As Boolean?, hbsagEliza As Boolean?, malaria As Boolean?, vdrl As Boolean?,
+                                                hivEliza As Boolean?, HCVEliza As Boolean?, hbsagEliza As Boolean?, malaria As Boolean?, vdrl As Boolean?,
                                                 Widal As Boolean?, pregnancy As Boolean?, bilharziasisUrine As Boolean?,
                                                 bilharziasisStool As Boolean?, shigella As Boolean?, cholera As Boolean?)
             Dim sql As String =
@@ -47,7 +47,7 @@ Namespace DataLayer.AdoNet
                     " Xray = @Xray," &
                     " TBSputum = @TBSputum," &
                     " HIVEliza = @HIVEliza," &
-                    " HOVEliza = @HOVEliza," &
+                    " HCVEliza = @HCVEliza," &
                     " HBSAgEliza = @HBSAgEliza," &
                     " Malaria = @Malaria," &
                     " VDRL = @VDRL," &
@@ -59,20 +59,20 @@ Namespace DataLayer.AdoNet
                     " Cholera = @Cholera" &
                     " WHERE IdNo = @IdNo "
             Return _db.Update(sql, {"@PassportNumber", passportNumber, "@Clinical", clinical, "@Xray", Xray, "@TBSputum", TBSputum, "@HIVEliza", hivEliza,
-                    "@HOVEliza", hovEliza, "@HBSAgEliza", hbsagEliza, "@Malaria", malaria, "@VDRL", vdrl, "@Widal", Widal, "@Pregnancy", pregnancy,
+                    "@HCVEliza", HCVEliza, "@HBSAgEliza", hbsagEliza, "@Malaria", malaria, "@VDRL", vdrl, "@Widal", Widal, "@Pregnancy", pregnancy,
                     "@BilharziasisUrine", bilharziasisUrine, "@BilharziasisStool", bilharziasisStool, "@Shigella", shigella, "@Cholera", cholera, "@IdNo", IdNo})
         End Function
 
         Public Function AddRecord(primaryKey As Int32, passportNumber As String, clinical As Boolean?, Xray As Boolean?, TBSputum As Boolean?,
-                                  hivEliza As Boolean?, hovEliza As Boolean?, hbsagEliza As Boolean?, malaria As Boolean?, vdrl As Boolean?,
+                                  hivEliza As Boolean?, HCVEliza As Boolean?, hbsagEliza As Boolean?, malaria As Boolean?, vdrl As Boolean?,
                                   Widal As Boolean?, pregnancy As Boolean?, bilharziasisUrine As Boolean?,
                                   bilharziasisStool As Boolean?, shigella As Boolean?, cholera As Boolean?)
             Dim sql As String = " Insert Into [IbLabResult] " &
-                    " (Trans_Key, PassportNumber, Clinical, Xray, TBSputum, HIVEliza, HOVEliza, HBSAgEliza, Malaria, VDRL, Widal, Pregnancy, BilharziasisUrine, BilharziasisStool, Shigella, Cholera) " &
+                    " (Trans_Key, PassportNumber, Clinical, Xray, TBSputum, HIVEliza, HCVEliza, HBSAgEliza, Malaria, VDRL, Widal, Pregnancy, BilharziasisUrine, BilharziasisStool, Shigella, Cholera) " &
                     " Values " &
-                    " (@PrimaryKey, @PassportNumber, @Clinical, @Xray, @TBSputum, @HIVEliza, @HOVEliza, @HBSAgEliza, @Malaria, @VDRL, @Widal, @Pregnancy, @BilharziasisUrine, @BilharziasisStool, @Shigella, @Cholera)"
+                    " (@PrimaryKey, @PassportNumber, @Clinical, @Xray, @TBSputum, @HIVEliza, @HCVEliza, @HBSAgEliza, @Malaria, @VDRL, @Widal, @Pregnancy, @BilharziasisUrine, @BilharziasisStool, @Shigella, @Cholera)"
             Return _db.Insert(sql, {"@PrimaryKey", primaryKey, "@PassportNumber", passportNumber, "@Clinical", clinical, "@Xray", Xray, "@TBSputum", TBSputum, "@HIVEliza", hivEliza,
-                    "@HOVEliza", hovEliza, "@HBSAgEliza", hbsagEliza, "@Malaria", malaria, "@VDRL", vdrl, "@Widal", Widal, "@Pregnancy", pregnancy,
+                    "@HCVEliza", HCVEliza, "@HBSAgEliza", hbsagEliza, "@Malaria", malaria, "@VDRL", vdrl, "@Widal", Widal, "@Pregnancy", pregnancy,
                     "@BilharziasisUrine", bilharziasisUrine, "@BilharziasisStool", bilharziasisStool, "@Shigella", shigella, "@Cholera", cholera})
 
         End Function
