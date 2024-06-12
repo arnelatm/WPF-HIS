@@ -1,7 +1,8 @@
 ﻿
+
 CREATE VIEW [dbo].[EmployeeLeaveEarnedLatestApproval_View]
 AS
-SELECT a.IdNo, a.EmployeeLeaveEarnedApprovalIdNo, a.EmployeeLeaveEarnedIdNo, a.[Status] AS Status, e.DateCreated, e.ApprovedBy
+SELECT a.IdNo, a.EmployeeLeaveEarnedApprovalIdNo, a.EmployeeLeaveEarnedIdNo, e.DateCreated, e.ApprovedBy
 FROM     dbo.EmployeeLeaveEarnedApprovalItem AS a INNER JOIN
                   dbo.EmployeeLeaveEarnedApproval AS e ON a.EmployeeLeaveEarnedApprovalIdNo = e.IdNo INNER JOIN
                       (SELECT b.EmployeeLeaveEarnedIdNo, MAX(c.DateCreated) AS MaxDate
