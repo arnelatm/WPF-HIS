@@ -273,16 +273,16 @@ Namespace PresentationLayer.Views.Forms
             btnFilter.Visible = False
             btnDelete.Visible = False
             btnNew.Visible = False
-            btnOpen.Visible = False
+            btnOpen.Visible = False       
             btnEdit.Visible = False
         End Sub
 
         Private Sub btnSelectAll_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnSelectAll.ClickButtonArea
-            RaiseEvent PcJournalCheckedEvent(Sender, True, True, bsPcJournals)
+            RaiseEvent PcJournalCheckedEvent(sender, True, True, bsPcJournals)
         End Sub
 
         Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnUnselectAll.ClickButtonArea
-            RaiseEvent PcJournalCheckedEvent(Sender, True, False, bsPcJournals)
+            RaiseEvent PcJournalCheckedEvent(sender, True, False, bsPcJournals)        
         End Sub
 
         Private Sub PettyCashClosingEntry_Shown(sender As Object, e As EventArgs) Handles Me.Shown

@@ -26,7 +26,6 @@ Namespace PresentationLayer.Views.Forms
             Me.components = New System.ComponentModel.Container()
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PettyCashClosingEntry))
             Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -37,7 +36,6 @@ Namespace PresentationLayer.Views.Forms
             Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PettyCashClosingEntry))
             Me.DataGridViewPcJournals = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.dgvPcClosed = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
             Me.dgvTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -136,7 +134,6 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPcJournals.SequenceColumn = "dgvSequence"
             Me.DataGridViewPcJournals.SequenceFieldName = "Sequence"
             Me.DataGridViewPcJournals.ShowFooter = False
-            Me.DataGridViewPcJournals.ShowInsertColumnWhenEditing = False
             Me.DataGridViewPcJournals.Size = New System.Drawing.Size(977, 450)
             Me.DataGridViewPcJournals.TabIndex = 10
             Me.DataGridViewPcJournals.Translatable = True
@@ -545,7 +542,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.OverrideDropDownStyleList = False
             Me.cboAccountIdNo.PreviousSearchTerm = Nothing
             Me.cboAccountIdNo.PropertySelector = Nothing
-            Me.cboAccountIdNo.ReadOnlyCombo = False
             Me.cboAccountIdNo.SecurityKey = "ClosePettyCash"
             Me.cboAccountIdNo.Size = New System.Drawing.Size(405, 24)
             Me.cboAccountIdNo.SuggestBoxHeight = 200
@@ -801,7 +797,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayType.OverrideDropDownStyleList = False
             Me.cboPayType.PreviousSearchTerm = Nothing
             Me.cboPayType.PropertySelector = Nothing
-            Me.cboPayType.ReadOnlyCombo = False
             Me.cboPayType.SecurityKey = "ClosePettyCash"
             Me.cboPayType.Size = New System.Drawing.Size(341, 24)
             Me.cboPayType.SuggestBoxHeight = 200
@@ -863,7 +858,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPcAccountIdNo.OverrideDropDownStyleList = False
             Me.cboPcAccountIdNo.PreviousSearchTerm = Nothing
             Me.cboPcAccountIdNo.PropertySelector = Nothing
-            Me.cboPcAccountIdNo.ReadOnlyCombo = False
             Me.cboPcAccountIdNo.SecurityKey = "ClosePettyCash"
             Me.cboPcAccountIdNo.Size = New System.Drawing.Size(405, 24)
             Me.cboPcAccountIdNo.SuggestBoxHeight = 200
