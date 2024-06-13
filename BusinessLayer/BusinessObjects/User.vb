@@ -25,4 +25,11 @@ Namespace BusinessObjects
         Public Property SecurityGroupIdNo As Int16
     End Class
 
+    Public Class UserSecurity
+        Inherits User
+
+        Public Property UserAccesses As List(Of UserAccess)
+
+    End Class
+
 End Namespace

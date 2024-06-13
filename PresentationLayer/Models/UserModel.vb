@@ -18,3 +18,10 @@ Public Class UserModel
     Public Property SecurityGroupIdNo As Int16
 
 End Class
+
+Public Class UserSecurityModel
+    Inherits UserModel
+
+    Public UserAccesses As List(Of UserAccessModel)
+
+End Class

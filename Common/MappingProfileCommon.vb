@@ -47,6 +47,8 @@ Public Class MappingProfileCommon
         CreateMap(Of TranslatedMessagesModel, ITranslatedMessagesView)().ForMember(Function(dest) dest.IdNo, Sub(opt) opt.MapFrom(Function(src) src.IdNo))
         CreateMap(Of User, UserModel)().ReverseMap()
         CreateMap(Of UserModel, IUserView).ReverseMap()
+        CreateMap(Of UserSecurity, UserSecurityModel)().ReverseMap()
+        CreateMap(Of UserSecurityModel, IUserSecurityView).ReverseMap()
         CreateMap(Of DefaultFieldValue, DefaultFieldValueModel).ReverseMap()
         CreateMap(Of DefaultFieldValueModel, IDefaultFieldValueView).ReverseMap()
         CreateMap(Of Printer, PrinterModel).ReverseMap()

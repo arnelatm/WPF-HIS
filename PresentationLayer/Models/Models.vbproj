@@ -105,6 +105,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DefaultFieldValueModel.vb" />
+    <Compile Include="UserAccessModel.vb" />
     <Compile Include="GroupAccessModel.vb" />
     <Compile Include="IModelTblColProp.vb" />
     <Compile Include="ModelTblColProp.vb" />

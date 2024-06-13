@@ -127,6 +127,7 @@
     </Compile>
     <Compile Include="PresenterBase.vb" />
     <Compile Include="Presenter.vb" />
+    <Compile Include="UserSecurityPresenter.vb" />
     <Compile Include="SecurityGroupPresenter.vb" />
     <Compile Include="SecurityObjectPresenter.vb" />
     <Compile Include="UserPresenter.vb" />

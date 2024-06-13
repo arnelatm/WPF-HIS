@@ -1343,6 +1343,10 @@ Namespace PresentationLayer.Views.Forms
         Private Sub DiagnosticResultEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDiagnosticResultEntry.Click
             RunForm(Of IbLabResultForm, IbLabResultPresenter(Of IbLabResultModel))()
         End Sub
+
+        Private Sub ToolStripMenuItemUsersSecurity_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemUsersSecurity.Click
+            RunForm(Of UserSecurityEntryTv, UserSecurityPresenter(Of UserSecurityModel))()
+        End Sub
     End Class
 
 End Namespace

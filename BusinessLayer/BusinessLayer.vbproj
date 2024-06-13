@@ -110,6 +110,7 @@
     <Compile Include="BusinessObject.vb" />
     <Compile Include="BusinessObjects\DefaultFieldValue.vb" />
     <Compile Include="BusinessObjects\GenericData.vb" />
+    <Compile Include="BusinessObjects\UserAccess.vb" />
     <Compile Include="BusinessObjects\GroupAccess.vb" />
     <Compile Include="BusinessObjects\Salt.vb" />
     <Compile Include="BusinessObjects\SecurityGroup.vb" />

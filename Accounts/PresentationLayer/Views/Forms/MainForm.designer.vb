@@ -156,6 +156,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemLaboratory = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemCbcResultRetrieval = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemDiagnosticSamples = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemDiagnosticResultEntry = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemClinicSamples = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPharmacy = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemDrugSale = New System.Windows.Forms.ToolStripMenuItem()
@@ -259,7 +260,7 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-            Me.ToolStripMenuItemDiagnosticResultEntry = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemUsersSecurity = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.AccountsMenu.SuspendLayout()
@@ -522,7 +523,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemSecurity
             '
-            Me.ToolStripMenuItemSecurity.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemSecurityGroups, Me.ToolStripMenuItemSecurityObjects, Me.ToolStripMenuItemUsers, Me.ToolStripMenuItemApplicationSetting})
+            Me.ToolStripMenuItemSecurity.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemSecurityGroups, Me.ToolStripMenuItemSecurityObjects, Me.ToolStripMenuItemUsers, Me.ToolStripMenuItemUsersSecurity, Me.ToolStripMenuItemApplicationSetting})
             Me.ToolStripMenuItemSecurity.Name = "ToolStripMenuItemSecurity"
             resources.ApplyResources(Me.ToolStripMenuItemSecurity, "ToolStripMenuItemSecurity")
             '
@@ -932,6 +933,11 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.ToolStripMenuItemDiagnosticSamples.Name = "ToolStripMenuItemDiagnosticSamples"
             resources.ApplyResources(Me.ToolStripMenuItemDiagnosticSamples, "ToolStripMenuItemDiagnosticSamples")
+            '
+            'ToolStripMenuItemDiagnosticResultEntry
+            '
+            Me.ToolStripMenuItemDiagnosticResultEntry.Name = "ToolStripMenuItemDiagnosticResultEntry"
+            resources.ApplyResources(Me.ToolStripMenuItemDiagnosticResultEntry, "ToolStripMenuItemDiagnosticResultEntry")
             '
             'ToolStripMenuItemClinicSamples
             '
@@ -1470,10 +1476,10 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
             '
-            'ToolStripMenuItemDiagnosticResultEntry
+            'ToolStripMenuItemUsersSecurity
             '
-            Me.ToolStripMenuItemDiagnosticResultEntry.Name = "ToolStripMenuItemDiagnosticResultEntry"
-            resources.ApplyResources(Me.ToolStripMenuItemDiagnosticResultEntry, "ToolStripMenuItemDiagnosticResultEntry")
+            Me.ToolStripMenuItemUsersSecurity.Name = "ToolStripMenuItemUsersSecurity"
+            resources.ApplyResources(Me.ToolStripMenuItemUsersSecurity, "ToolStripMenuItemUsersSecurity")
             '
             'MainForm
             '
@@ -1732,5 +1738,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ToolStripMenuItemSupplierProductLink As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemReportGroup As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemDiagnosticResultEntry As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemUsersSecurity As ToolStripMenuItem
     End Class
 End NameSpace

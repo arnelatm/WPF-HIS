@@ -102,6 +102,8 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IUserAccessView.vb" />
+    <Compile Include="UserAccessView.vb" />
     <Compile Include="GroupAccessView.vb" />
     <Compile Include="IDefaultFieldValueView.vb" />
     <Compile Include="Interfaces\IGroupAccessView.vb" />
