@@ -70,7 +70,7 @@ Namespace ServiceLayer.ActionService
             Return model
         End Function
 
-        Public FunctionGetList(Of TM)(Optional sortOrder As String = "")
+        Public Function GetList(Of TM)(Optional sortOrder As String = "")
             Dim model As New List(Of TM)
             Dim records = DataDao.GetList(sortOrder)
             GlobalVariables.Mapper.Map(records, model)
