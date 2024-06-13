@@ -22,9 +22,6 @@ Public Class SetSettings
         'PropertyGrid.BrowsableAttributes = attrs
     End Sub
 
-    Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) 
-        _appSettings.Save()
-    End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         _appSettings.Save()

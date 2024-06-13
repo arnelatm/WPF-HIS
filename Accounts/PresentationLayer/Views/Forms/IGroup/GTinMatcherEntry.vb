@@ -21,6 +21,7 @@ Namespace PresentationLayer.Views.Forms
         Public Event UpdateItemDisplay(gTinIdNo As Int32) Implements IGTinMatcherView.UpdateItemDisplay
 
         Public Event GTinValueChanged(sender As DataGridView, gTinValue As String) Implements IItemDetailsView.GTinValueChanged
+        Public Event MatchGTinRequested(gTinNumber As String, itemDetailIdNo As Integer) Implements IGTinMatcherView.MatchGTinRequested
 
         Public Sub New()
 
@@ -437,6 +438,17 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Private _created_By_Branch As String
+
+        Public Property Created_By_Branch As String Implements IItemDetailsView.Created_By_Branch
+            Get
+                Return "01"
+            End Get
+            Set(value As String)
+                _created_By_Branch = value
+            End Set
+        End Property
+
 #End Region
 
         Protected Overrides Sub CreateMainFieldsDictionary()
@@ -539,19 +551,6 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private _startedByItemGrid As Boolean = False
-
-        Private Sub DataGridViewItems_CellEnter(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewItems.CellEnter
-            Dim dgvIdNo As Int32
-            Dim curRow = DataGridViewItems.CurrentRow()
-            If curRow IsNot Nothing Then
-                dgvIdNo = curRow.Cells("Primary_Key").Value
-                _startedByItemGrid = True
-                RaiseEvent UpdateItemDisplay(dgvIdNo)
-                _startedByItemGrid = False
-            End If
-        End Sub
-
         Private Sub btnOk_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
             If DrugGTin IsNot Nothing Then
                 RaiseEvent MatchGTinRequested(DrugGTin, IdNo)
@@ -569,24 +568,22 @@ Namespace PresentationLayer.Views.Forms
         '    End If
         'End Sub
 
-    End Class
+        Private Sub MoveToRow(dataGridView As CtDataGridView, rowCount As Integer)
+            Dim nRow As Integer = dataGridView.CurrentRow.Index
+            With dataGridView
+                Dim col = .CurrentCell.ColumnIndex
+                Dim row = .CurrentCell.RowIndex
+                Dim nRows = .Rows.Count
+                Dim nCol = .Columns.Count
+                Dim nextRow = row + rowCount
+                If nextRow + 1 <= .RowCount() AndAlso nextRow > 0 Then
+                    .CurrentCell = dataGridView(col, nextRow)
+                    BnRefresh(dataGridView)
+                End If
+            End With
+        End Sub
 
-    Private Sub MoveToRow(dataGridView As CDataGridView, rowCount As Integer)
-        Dim nRow As Integer = dataGridView.CurrentRow.Index
-        With dataGridView
-            Dim col = .CurrentCell.ColumnIndex
-            Dim row = .CurrentCell.RowIndex
-            Dim nRows = .Rows.Count
-            Dim nCol = .Columns.Count
-            Dim nextRow = row + rowCount
-            If nextRow + 1 <= .RowCount() AndAlso nextRow > 0 Then
-                .CurrentCell = dataGridView(col, nextRow)
-                BnRefresh(dataGridView)
-            End If
-        End With
-    End Sub
-
-    Private Sub BindingNavigatorMoveFirstItem_Click(sender As Object, e As EventArgs) Handles BindingNavigatorMoveFirstItem.Click
+        Private Sub BindingNavigatorMoveFirstItem_Click(sender As Object, e As EventArgs) Handles BindingNavigatorMoveFirstItem.Click
         DataGridViewDrugs.CurrentCell = DataGridViewDrugs(0, 0)
         BnRefresh(DataGridViewDrugs)
     End Sub
@@ -622,17 +619,17 @@ Namespace PresentationLayer.Views.Forms
         BnRefresh(DataGridViewItems)
     End Sub
 
-    Private Sub BnRefresh(dataGridView As CDataGridView)
-        If dataGridView.CurrentRow() IsNot Nothing Then
-            If dataGridView.Name = "DataGridViewItems" Then
-                tsItemsCount.Text = "of " + (dataGridView.RowCount()).ToString()
-                tsItemsCurrentRecord.Text = (dataGridView.CurrentRow.Index + 1).ToString()
-            Else
-                tsDrugsCount.Text = "of " + (dataGridView.RowCount()).ToString()
-                tsDrugsCurrentRecord.Text = (dataGridView.CurrentRow.Index + 1).ToString()
+        Private Sub BnRefresh(dataGridView As CtDataGridView)
+            If dataGridView.CurrentRow() IsNot Nothing Then
+                If dataGridView.Name = "DataGridViewItems" Then
+                    tsItemsCount.Text = "of " + (dataGridView.RowCount()).ToString()
+                    tsItemsCurrentRecord.Text = (dataGridView.CurrentRow.Index + 1).ToString()
+                Else
+                    tsDrugsCount.Text = "of " + (dataGridView.RowCount()).ToString()
+                    tsDrugsCurrentRecord.Text = (dataGridView.CurrentRow.Index + 1).ToString()
+                End If
             End If
-        End If
-    End Sub
+        End Sub
 
     End Class
 
