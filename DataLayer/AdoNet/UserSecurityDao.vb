@@ -13,7 +13,7 @@ Namespace AdoNet
         Public Function GetRecordByIdNo(idNo) As UserSecurity Implements IDao(Of UserSecurity).GetRecordByIdNo
             Dim sql As String =
                     " SELECT IdNo, UserName" &
-                    "   FROM [UserSecurity]" &
+                    "   FROM [User]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Dim data = Db.Read(sql, Make, params).FirstOrDefault()

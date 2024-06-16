@@ -1,7 +1,6 @@
 ﻿Imports AATM.Libraries
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
 Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Views
@@ -19,11 +18,11 @@ Public Class UserSecurityPresenter(Of TM As New)
 
     Public Sub New(itemView As IUserSecurityView)
         MyBase.New(itemView)
-        Service = New Service("User")
+        Service = New Service("UserSecurity")
         TableName = "User"
         SortOrderKey = "UserName"
         TreeViewMainField = "UserName"
-        TreeViewSecondaryField = ""
+        TreeViewSecondaryField = Nothing
 
         DtInsertTable.Columns.Add("Editable", GetType(Boolean))
         DtInsertTable.Columns.Add("UserIdNo", GetType(Int16))

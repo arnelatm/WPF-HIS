@@ -17,7 +17,7 @@ Namespace BusinessObjects
         End Sub
 
         Public Property Active As Boolean
-        Public Property IdNo As Int32
+        Public Property IdNo As Int16
         Public Property EmployeeIdNo As Int32?
         Public Property UserName As String
         Public Property Password As String

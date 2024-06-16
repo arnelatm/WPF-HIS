@@ -122,7 +122,7 @@ Public Class LoginEntry
         End Set
     End Property
 
-    Public Property IdNo As Int32 Implements IUserView.IdNo
+    Public Property IdNo As Int16 Implements IUserView.IdNo
 
     Public Property SecurityLevel As Short Implements IUserView.SecurityLevel
 

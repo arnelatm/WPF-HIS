@@ -4,7 +4,7 @@
         Inherits IView
 
         Property Active As Boolean
-        Property IdNo As Int32
+        Property IdNo As Int16
         Property UserName As String
         Property EmployeeIdNo As Int32?
         Property Password As String

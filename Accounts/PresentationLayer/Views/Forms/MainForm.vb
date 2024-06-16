@@ -88,7 +88,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public MainFieldsDictionary As New Dictionary(Of String, Object)
 
-        Public Property IdNo As Int32 Implements IUserView.IdNo
+        Public Property IdNo As Int16 Implements IUserView.IdNo
         Public Property SecurityGroupIdNo As Int16 Implements IUserView.SecurityGroupIdNo
         Public Property EmployeeIdNo As Int32? Implements IUserView.EmployeeIdNo
         Public Property UserName As String Implements IUserView.UserName
