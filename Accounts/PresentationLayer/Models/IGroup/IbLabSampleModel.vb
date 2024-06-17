@@ -30,8 +30,8 @@ Namespace PresentationLayer.Models
 
 
     Public Class IbLabResultModel
-        Property TransactionDate As Date
-        Property IbLabResultDetails As List(Of IbLabResultDetailModel)
+        Public Property TransactionDate As Date
+        Public Property IbLabResultDetails As List(Of IbLabResultDetailModel)
     End Class
 
     Public Class IbLabResultDetailModel

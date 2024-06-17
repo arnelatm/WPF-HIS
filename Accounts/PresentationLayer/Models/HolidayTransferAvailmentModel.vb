@@ -6,10 +6,10 @@
     ''' </summary>
     Public Class HolidayTransferAvailmentModel
 
-        Property DateCreated As DateTime?
-        Property EmployeeIdNo As Int32
-        Property EnteredBy As Int16
-        Property IdNo As Int32
+        Public Property DateCreated As DateTime?
+        Public Property EmployeeIdNo As Int32
+        Public Property EnteredBy As Int16
+        Public Property IdNo As Int32
 
     End Class
 

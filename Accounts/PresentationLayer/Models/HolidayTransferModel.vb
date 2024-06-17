@@ -6,13 +6,13 @@
     ''' </summary>
     Public Class HolidayTransferModel
 
-        Property EnteredBy As Int32
-        Property DateCreated As DateTime?
-        Property DateEnd As DateTime?
-        Property DateStart As DateTime?
-        Property HolidayIdNo As Int16
-        Property IdNo As Int32
-        Property HolidayTransferItems As List(Of HolidayTransferItemModel)
+        Public Property EnteredBy As Int32
+        Public Property DateCreated As DateTime?
+        Public Property DateEnd As DateTime?
+        Public Property DateStart As DateTime?
+        Public Property HolidayIdNo As Int16
+        Public Property IdNo As Int32
+        Public Property HolidayTransferItems As List(Of HolidayTransferItemModel)
     End Class
 
 End Namespace

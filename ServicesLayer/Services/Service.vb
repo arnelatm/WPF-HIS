@@ -26,6 +26,9 @@ Namespace Services
         Protected Shared ReadOnly DataRetriever As IDataPageRetriever = Factory.DataRetriever
 
         Public Sub New(objectName As String, Optional bizParam As Object = Nothing, Optional daoParam As Object = Nothing)
+            'If objectName = "UserSecurity" Then
+            '    Debugger.Break()
+            'End If
             If objectName Is Nothing Or objectName = "" Then
                 objectName = "User"
             End If

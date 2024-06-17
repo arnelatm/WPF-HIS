@@ -14,6 +14,7 @@ Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
 Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Views
+Imports AATM.PresentationLayer.Views.Interfaces
 Imports AATM.ServicesLayer.Services
 Imports AutoMapper
 Imports KellermanSoftware.CompareNetObjects
@@ -392,6 +393,9 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         compareLogic.Config.MembersToIgnore.Add("DateCreated")
         compareLogic.Config.MembersToIgnore.Add("Errors")
         Dim result As ComparisonResult = compareLogic.Compare(OriginalModel, View)
+        ' note - if you encounter problems with comparison failure
+        ' make sure that your model/view are 'Properties' and not 'Fields' because this
+        ' comparison only compare 'Properties' excluding 'field' values
         If Not result.AreEqual Then
             CompareDifferences = result.DifferencesString
             retVal = True

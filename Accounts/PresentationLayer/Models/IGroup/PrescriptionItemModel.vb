@@ -6,17 +6,17 @@
     ''' </summary>
     Public Class PrescriptionItemModel
 
-        Property Dosage As String
-        Property Duration As String
-        Property GenericName As String
-        Property ItemCode As String
-        Property ItemIdNo As Int32
-        Property ItemName As String
-        Property LabelPrinted As Boolean
-        Property PrescriptionItemIdNo As Int32
-        Property PrintLabel As Boolean
-        Property RowNbr As Int32
-        Property TransKey As Int32
+        Public Property Dosage As String
+        Public Property Duration As String
+        Public Property GenericName As String
+        Public Property ItemCode As String
+        Public Property ItemIdNo As Int32
+        Public Property ItemName As String
+        Public Property LabelPrinted As Boolean
+        Public Property PrescriptionItemIdNo As Int32
+        Public Property PrintLabel As Boolean
+        Public Property RowNbr As Int32
+        Public Property TransKey As Int32
 
     End Class
 

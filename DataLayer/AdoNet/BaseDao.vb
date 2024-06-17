@@ -1140,8 +1140,7 @@ Namespace AdoNet
             Implements IBaseDao.GetUserSecurity
             Dim params() As Object =
                     {"@SecurityObjectIdNo", securityObjectIdNo, "@SecurityGroupIdNo", securityGroupIdNo}
-            Dim sql =
-                    " SELECT top 1 Visible, Editable FROM GroupAccess where SecurityObjectIdNo = @SecurityObjectIdNo and SecurityGroupIdNo = @SecurityGroupIdNo"
+            Dim sql = " SELECT top 1 Visible, Editable FROM GroupAccess where SecurityObjectIdNo = @SecurityObjectIdNo and SecurityGroupIdNo = @SecurityGroupIdNo"
             Return _db.SqlReadSecurity(sql, params)
         End Function
 
@@ -1149,8 +1148,7 @@ Namespace AdoNet
         '            Console.WriteLine("Commit Exception Type: {0}", ex.GetType())
         '            Console.WriteLine("  Message: {0}", ex.Message)
         Public Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Int16) As ArrayList Implements IBaseDao.GetUserSecurityForKey
-            Dim params() As Object =
-                    {"@SecurityObjectName", securityObjectName, "@SecurityGroupIdNo", securityGroupIdNo}
+            Dim params() As Object = {"@SecurityObjectName", securityObjectName, "@SecurityGroupIdNo", securityGroupIdNo}
             Dim sql = "SELECT top 1 Visible, Editable FROM GroupAccess " &
                       "Left Join SecurityObject " &
                       "on GroupAccess.SecurityObjectIdNo = SecurityObject.IdNo " &

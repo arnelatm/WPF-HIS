@@ -11,15 +11,14 @@ Namespace BusinessObjects
             ' establish business rules
         End Sub
 
+        Public Property Editable As Boolean
         Public Property IdNo As Int32
-        Public Property UserIdNo As Int16
         Public Property SecurityObjectIdNo As Int32
         Public Property SecurityObjectName As String
-        Public Property Visible As Boolean
-
         'Public Property Selectable As Boolean
+        Public Property UserIdNo As Int16
         'Public Property Viewable As Boolean
-        Public Property Editable As Boolean
+        Public Property Visible As Boolean
 
         ' ** Enterprise Design Pattern: Foreign Key Mapping. SecurityGroup is the parent
     End Class

@@ -6,7 +6,7 @@ Namespace AdoNet
 
     Public Class UserSecurityDao
         Inherits BaseDao
-        Implements IDao(Of UserSecurity), IDaoChild(Of UserAccess), IAutoCodeDao
+        Implements IDao(Of UserSecurity), IDaoChild(Of UserAccess)
 
         Private ReadOnly Db As New Db()
 
@@ -26,8 +26,8 @@ Namespace AdoNet
         Public Function UpdateRecord(ByRef UserSecurity As UserSecurity) As Integer _
             Implements IDao(Of UserSecurity).UpdateRecord
             Dim sql As String =
-                    " UPDATE [UserSecurity]" &
-                    " Set UserName = @UserName," &
+                    " UPDATE [User]" &
+                    " Set UserName = @UserName " &
                     " WHERE IdNo = @IdNo"
             Return Db.Update(sql, Take(UserSecurity))
         End Function
@@ -64,7 +64,7 @@ Namespace AdoNet
         Public Function GetRecordsWithGroupIdNo(idNo, Optional sortExpression = Nothing) _
             As List(Of UserAccess) Implements IDaoChild(Of UserAccess).GetRecordsWithGroupIdNo
             If sortExpression Is Nothing Then
-                sortExpression = "UserName"
+                sortExpression = "IdNo"
             End If
             Dim sql As String =
                     "select b.IdNo , b.UserIdNo, a.IdNo as 'SecurityObjectIdNo', a.FullPathName as 'SecurityObjectName', b.Visible, b.Editable from SecurityObjectHierarchy_View a " &
@@ -82,10 +82,6 @@ Namespace AdoNet
 
         Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of UserAccess).InsertTvp
             Return Db.InsertTvp("dbo.InsertUserAccessTVP", tvpTable)
-        End Function
-
-        Public Function GenerateCode(idNo As Integer) As String Implements IAutoCodeDao.GenerateCode
-            Return UpdateCode("UserSecurity", "UserCode", "IdNo", idNo)
         End Function
 
         Private Shared ReadOnly MakeUserAccess As Func(Of IDataReader, UserAccess) =

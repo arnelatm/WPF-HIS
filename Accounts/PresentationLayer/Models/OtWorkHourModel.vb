@@ -16,7 +16,7 @@
         Public Property OvertimeSpecial As Decimal
         Public Property PayrollIdNo As Int16
         Public Property Sequence As Int16
-        Property Errors As List(Of String)
+        Public Property Errors As List(Of String)
 
     End Class
 

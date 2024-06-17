@@ -25,14 +25,14 @@ Public Class UserSecurityPresenter(Of TM As New)
         TreeViewSecondaryField = Nothing
 
         DtInsertTable.Columns.Add("Editable", GetType(Boolean))
-        DtInsertTable.Columns.Add("UserIdNo", GetType(Int16))
         DtInsertTable.Columns.Add("SecurityObjectIdNo", GetType(Int16))
+        DtInsertTable.Columns.Add("UserIdNo", GetType(Int16))
         DtInsertTable.Columns.Add("Visible", GetType(Boolean))
 
         DtUpdateTable.Columns.Add("Editable", GetType(Boolean))
         DtUpdateTable.Columns.Add("IdNo", GetType(Int32))
-        DtUpdateTable.Columns.Add("UserIdNo", GetType(Int16))
         DtUpdateTable.Columns.Add("SecurityObjectIdNo", GetType(Int16))
+        DtUpdateTable.Columns.Add("UserIdNo", GetType(Int16))
         DtUpdateTable.Columns.Add("Visible", GetType(Boolean))
 
         _UserAccessService = New Service("UserAccess")
@@ -58,10 +58,10 @@ Public Class UserSecurityPresenter(Of TM As New)
             For Each UserAccess In View.UserAccesses
                 If UserAccess.IdNo <= 0 Then
                     If UserAccess.Visible OrElse UserAccess.Editable Then
-                        DtInsertTable.Rows.Add(UserAccess.Editable, View.IdNo, UserAccess.SecurityObjectIdNo, UserAccess.Visible)
+                        DtInsertTable.Rows.Add(UserAccess.Editable, UserAccess.SecurityObjectIdNo, View.IdNo, UserAccess.Visible)
                     End If
                 Else
-                    DtUpdateTable.Rows.Add(UserAccess.Editable, UserAccess.IdNo, View.IdNo, UserAccess.SecurityObjectIdNo, UserAccess.Visible)
+                    DtUpdateTable.Rows.Add(UserAccess.Editable, UserAccess.IdNo, UserAccess.SecurityObjectIdNo, View.IdNo, UserAccess.Visible)
                 End If
             Next
         End If

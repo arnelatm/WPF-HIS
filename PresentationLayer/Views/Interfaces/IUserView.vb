@@ -13,13 +13,4 @@
 
     End Interface
 
-    Public Interface IUserSecurityView
-        Inherits IUserView
-
-        Property UserAccesses As List(Of UserAccessView)
-        Event CheckAllEvent(propertyName As String)
-        Event UncheckAllEvent(propertyName As String)
-
-    End Interface
-
 End Namespace

@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6A8692E0-9B9B-4F31-8BA6-0C3DE257F9A4}</ProjectGuid>
+    <ProjectGuid>{021A8A1A-B69A-4254-9081-12357F20C01B}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>AATM.PresentationLayer.Models</RootNamespace>
-    <AssemblyName>Models</AssemblyName>
+    <RootNamespace>AATM.PresentationLayer.Presenters</RootNamespace>
+    <AssemblyName>Presenters</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -21,7 +21,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>Models.xml</DocumentationFile>
+    <DocumentationFile>Presenters.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -30,7 +30,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>Models.xml</DocumentationFile>
+    <DocumentationFile>Presenters.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
@@ -46,17 +46,14 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper, Version=9.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\..\..\HIS\packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
+    <Reference Include="AutoMapper">
+      <HintPath>..\..\packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
     </Reference>
     <Reference Include="DiffEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c7a34512ecd69090, processorArchitecture=MSIL">
       <HintPath>..\..\packages\DiffEngine.11.3.0\lib\net461\DiffEngine.dll</HintPath>
     </Reference>
     <Reference Include="EmptyFiles, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c7a34512ecd69090, processorArchitecture=MSIL">
       <HintPath>..\..\packages\EmptyFiles.4.4.0\lib\net461\EmptyFiles.dll</HintPath>
-    </Reference>
-    <Reference Include="KellermanSoftware.Compare-NET-Objects, Version=4.79.0.0, Culture=neutral, PublicKeyToken=d970ace04cc85217, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CompareNETObjects.4.79.0\lib\net472\KellermanSoftware.Compare-NET-Objects.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
@@ -66,7 +63,9 @@
     <Reference Include="System.CodeDom, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.CodeDom.6.0.0\lib\net461\System.CodeDom.dll</HintPath>
     </Reference>
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
     <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
@@ -83,6 +82,7 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Transactions" />
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
@@ -104,11 +104,9 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DefaultFieldValueModel.vb" />
-    <Compile Include="UserAccessModel.vb" />
-    <Compile Include="GroupAccessModel.vb" />
-    <Compile Include="IModelTblColProp.vb" />
-    <Compile Include="ModelTblColProp.vb" />
+    <Compile Include="DefaultFieldValuePresenter.vb" />
+    <Compile Include="IViewDataEntry.vb" />
+    <Compile Include="LoginPresenter.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -124,12 +122,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="SaltModel.vb" />
-    <Compile Include="SecurityGroupModel.vb" />
-    <Compile Include="SecurityObjectModel.vb" />
-    <Compile Include="TblColPropModel.vb" />
-    <Compile Include="UserModel.vb" />
-    <Compile Include="UserSecurityModel.vb" />
+    <Compile Include="PresenterBase.vb" />
+    <Compile Include="Presenter.vb" />
+    <Compile Include="UserSecurityPresenter.vb" />
+    <Compile Include="SecurityGroupPresenter.vb" />
+    <Compile Include="SecurityObjectPresenter.vb" />
+    <Compile Include="UserPresenter.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -157,6 +155,18 @@
       <Project>{F1004885-D468-41ED-8572-5BA952B9C39E}</Project>
       <Name>BusinessLayer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\AatmInterfaces\AatmInterfaces.vbproj">
+      <Project>{da82fb86-4f87-4e6e-b460-6141fe79ac23}</Project>
+      <Name>AatmInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\BaseControlsLibrary\BaseControlsLibrary.vbproj">
+      <Project>{58f5ec33-2974-4823-ab62-1d4e5b3ef152}</Project>
+      <Name>BaseControlsLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\CBaseControlsLibrary\CBaseControlsLibrary.vbproj">
+      <Project>{F991561A-78F8-487C-A873-E6436B41D801}</Project>
+      <Name>CBaseControlsLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Libraries\GlobalFuncNSub\GlobalFuncNSub.vbproj">
       <Project>{3F360FF6-9EFF-4F94-9C21-38D9667646AC}</Project>
       <Name>GlobalFuncNSub</Name>
@@ -166,12 +176,24 @@
       <Name>HelperLibraries</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Libraries\MessagingLibrary\MessagingLibrary.vbproj">
-      <Project>{84437202-3e38-4f75-b8c1-4125852fc4ff}</Project>
+      <Project>{84437202-3E38-4F75-B8C1-4125852FC4FF}</Project>
       <Name>MessagingLibrary</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\ServicesLayer\ServicesLayer.vbproj">
       <Project>{4B7A1168-E9FA-4360-9607-A2C98255E4C0}</Project>
       <Name>ServicesLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Events\Events.vbproj">
+      <Project>{5F7FCA73-07BA-444A-BE5D-6117B973AA3D}</Project>
+      <Name>Events</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Models\Models.vbproj">
+      <Project>{6A8692E0-9B9B-4F31-8BA6-0C3DE257F9A4}</Project>
+      <Name>Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Views\Views.vbproj">
+      <Project>{4EEDC5F0-DCA9-4CFB-8926-07D7E5B37FA0}</Project>
+      <Name>Views</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
