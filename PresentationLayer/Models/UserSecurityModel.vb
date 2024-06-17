@@ -9,6 +9,6 @@ Imports AATM.ServicesLayer.Services
 Public Class UserSecurityModel
     Inherits UserModel
 
-    Public UserAccesses As List(Of UserAccessModel)
+    Public Property UserAccesses As List(Of UserAccessModel)
 
 End Class

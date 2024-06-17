@@ -392,13 +392,30 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         compareLogic.Config.CompareChildren = True
         compareLogic.Config.MembersToIgnore.Add("DateCreated")
         compareLogic.Config.MembersToIgnore.Add("Errors")
-        Dim result As ComparisonResult = compareLogic.Compare(OriginalModel, View)
-        ' note - if you encounter problems with comparison failure
-        ' make sure that your model/view are 'Properties' and not 'Fields' because this
-        ' comparison only compare 'Properties' excluding 'field' values
-        If Not result.AreEqual Then
-            CompareDifferences = result.DifferencesString
-            retVal = True
+        Dim result As ComparisonResult
+        If TypeOf OriginalModel Is UserSecurityModel Then
+            Debugger.Break()
+            If TypeOf View Is AATM.PresentationLayer.Views.Interfaces.IUserSecurityView Then
+                Dim x As IUserSecurityView = View
+                result = compareLogic.Compare(OriginalModel.UserAccesses, x.UserAccesses)
+                ' note - if you encounter problems with comparison failure
+                ' make sure that your model/view are 'Properties' and not 'Fields' because this
+                ' comparison only compare 'Properties' excluding 'field' values
+                If Not result.AreEqual Then
+                    CompareDifferences = result.DifferencesString
+                    retVal = True
+                End If
+            End If
+        Else
+            'Dim result As ComparisonResult = compareLogic.Compare(OriginalModel, View)
+            result = compareLogic.Compare(OriginalModel, View)
+            ' note - if you encounter problems with comparison failure
+            ' make sure that your model/view are 'Properties' and not 'Fields' because this
+            ' comparison only compare 'Properties' excluding 'field' values
+            If Not result.AreEqual Then
+                CompareDifferences = result.DifferencesString
+                retVal = True
+            End If
         End If
         Return retVal
     End Function
