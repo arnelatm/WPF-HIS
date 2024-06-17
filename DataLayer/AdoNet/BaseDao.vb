@@ -1136,17 +1136,15 @@ Namespace AdoNet
         '            ' Attempt to roll back the transaction.
         '            Try
         '                transaction.Rollback()
-        Public Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int16) As ArrayList _
+        Public Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int16, userIdNo As Int16) As ArrayList _
             Implements IBaseDao.GetUserSecurity
-            Dim params() As Object =
-                    {"@SecurityObjectIdNo", securityObjectIdNo, "@SecurityGroupIdNo", securityGroupIdNo}
-            Dim sql = " SELECT top 1 Visible, Editable FROM GroupAccess where SecurityObjectIdNo = @SecurityObjectIdNo and SecurityGroupIdNo = @SecurityGroupIdNo"
+            Dim params() As Object = {"@SecurityObjectIdNo", securityObjectIdNo, "@SecurityGroupIdNo", securityGroupIdNo, "@UserIdNo", userIdNo}
+            Dim sql = "SELECT a.securityObjectIdNo,  Cast(Max(Cast(a.Visible as Int)) as Bit) as Visible, Cast(Max(CAST(a.Editable AS iNT)) as Bit) as Editable " &
+                      "FROM UserAccessResultant_View a WHERE securityObjectIdNo = @securityObjectIdNo and (useridno = @UserIdNo or securityGroupIdNo = @SecurityGroupIdNo) " &
+                      "group by securityObjectIdNo"
             Return _db.SqlReadSecurity(sql, params)
         End Function
 
-        '        Catch ex As Exception
-        '            Console.WriteLine("Commit Exception Type: {0}", ex.GetType())
-        '            Console.WriteLine("  Message: {0}", ex.Message)
         Public Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Int16) As ArrayList Implements IBaseDao.GetUserSecurityForKey
             Dim params() As Object = {"@SecurityObjectName", securityObjectName, "@SecurityGroupIdNo", securityGroupIdNo}
             Dim sql = "SELECT top 1 Visible, Editable FROM GroupAccess " &

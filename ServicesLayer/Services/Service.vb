@@ -775,8 +775,8 @@ Namespace Services
             Return BaseDao.GetRecordWithIdNo(tableName, fieldList, IdNo)
         End Function
 
-        Public Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int16) As ArrayList Implements IService.GetUserSecurity
-            Return BaseDao.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)
+        Public Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int16, userIdNo As Int16) As ArrayList Implements IService.GetUserSecurity
+            Return BaseDao.GetUserSecurity(securityObjectIdNo, securityGroupIdNo, userIdNo)
         End Function
 
         Public Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Int16) As ArrayList Implements IService.GetUserSecurityForKey

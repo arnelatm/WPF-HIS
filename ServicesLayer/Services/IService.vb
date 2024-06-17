@@ -62,7 +62,7 @@ Namespace Services
         Function GetSortedRecordPosition(idNo As Int32, tableName As String, sortOrder As String, Optional filter As String = Nothing) As Integer
         Function GetSpRecords(spName As String, fields As String, sortKey As String, filter As String) As Object
         Function GetTopOneFields(tableName As String, fieldList As String, filter As String, order As String, orderAscending As Boolean) As ExpandoObject
-        Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int16) As ArrayList
+        Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int16, userIdNo As Int16) As ArrayList
         Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Int16) As ArrayList
         Function HasRecordChanged(idNo As Int32, tableName As String, timeStampedValue As Object, Optional ByVal timeStampField As String = "DateTimeStamp") As Boolean
         Function InitializeSecurityObject() As Integer

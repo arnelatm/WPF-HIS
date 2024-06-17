@@ -704,8 +704,8 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Return Service.GetRecords(pTableName, sortOrder, fieldNames, filter)
     End Function
 
-    Public Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int16) As ArrayList
-        Return Service.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)
+    Public Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int16, userIdNo As Int16) As ArrayList
+        Return Service.GetUserSecurity(securityObjectIdNo, securityGroupIdNo, userIdNo)
     End Function
 
     Public Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Int16) As ArrayList
@@ -1778,13 +1778,13 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     Private Function GetControlSecurityValues(ByRef controlSecurityKey As String, Optional menu As Boolean = False) As ArrayList
         Dim controlSecurityObjectIdNo As Int32
         controlSecurityObjectIdNo = GetControlSecurityIdNo(controlSecurityKey, menu)
-        Return GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo)
+        Return GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo, GlobalVariables.UserIdNo)
     End Function
 
     Private Function GetCdControlSecurityValues(ByRef controlSecurityKey As String, Optional menu As Boolean = False) As ArrayList
         Dim controlSecurityObjectIdNo As Int32
         controlSecurityObjectIdNo = GetControlSecurityIdNo(controlSecurityKey, menu)
-        Return GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo)
+        Return GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo, GlobalVariables.UserIdNo)
     End Function
 
     Private Function GetControlSecurityKey(ByRef cCtrl As Control)
@@ -1809,7 +1809,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
 
             securityIdNo = GetControlSecurityIdNo(controlSecurityKey, True)
             If securityIdNo <> 0 Then
-                controlSecurityValues = GetUserSecurity(Convert.ToInt16(securityIdNo), GlobalVariables.SecurityGroupIdNo)
+                controlSecurityValues = GetUserSecurity(Convert.ToInt16(securityIdNo), GlobalVariables.SecurityGroupIdNo, GlobalVariables.UserIdNo)
                 If controlSecurityValues.Count > 0 Then
                     ' Visible property stored in first element of the array
                     isVisible = controlSecurityValues(0)
@@ -1868,7 +1868,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
                     Dim securityIdNo As Int32 = GetControlSecurityIdNo(subMenuName + " > " + controlSecurityKey, True)
                     If securityIdNo <> 0 Then
                         If GlobalVariables.SecurityGroupIdNo <> 0 Then
-                            controlSecurityValues = GetUserSecurity(securityIdNo, GlobalVariables.SecurityGroupIdNo)
+                            controlSecurityValues = GetUserSecurity(securityIdNo, GlobalVariables.SecurityGroupIdNo, GlobalVariables.UserIdNo)
                             If controlSecurityValues.Count > 0 Then
                                 ' Visible property stored in first element of the array
                                 isVisible = controlSecurityValues(0)
@@ -1963,7 +1963,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
             If controlSecurityObjectIdNo = 0 Then
                 hasAccess = True
             Else
-                controlSecurityValues = GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo)
+                controlSecurityValues = GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo, GlobalVariables.UserIdNo)
                 If controlSecurityValues.Count > 0 Then
                     hasAccess = controlSecurityValues(1)
                 Else

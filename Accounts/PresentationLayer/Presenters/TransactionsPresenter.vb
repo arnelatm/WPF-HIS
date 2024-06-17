@@ -59,7 +59,7 @@ Namespace PresentationLayer.Presenters
                         Dim isEditable As Boolean
                         Dim controlSecurityObjectIdNo As Int32
                         controlSecurityObjectIdNo = GetControlSecurityIdNo("ApproveTransactions")
-                        controlSecurityValues = GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo)
+                        controlSecurityValues = GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo, GlobalVariables.UserIdNo)
                         If controlSecurityValues.Count > 0 Then
                             isEditable = controlSecurityValues(1)
                         Else

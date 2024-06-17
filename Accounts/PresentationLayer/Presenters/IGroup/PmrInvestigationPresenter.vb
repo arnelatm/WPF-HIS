@@ -76,7 +76,7 @@ Namespace PresentationLayer.Presenters
             Dim controlSecurityValues As ArrayList
             Dim viewBit As Boolean
             If securityIdNo <> 0 Then
-                controlSecurityValues = GetUserSecurity(Convert.ToInt16(securityIdNo), GlobalVariables.SecurityGroupIdNo)
+                controlSecurityValues = GetUserSecurity(Convert.ToInt16(securityIdNo), GlobalVariables.SecurityGroupIdNo, GlobalVariables.UserIdNo)
                 If controlSecurityValues.Count > 0 Then
                     ' Visible property stored in first element of the array
                     viewBit = controlSecurityValues(0)
@@ -315,7 +315,7 @@ Namespace PresentationLayer.Presenters
             Dim controlSecurityValues As ArrayList
             Dim viewBit As Boolean
             If securityIdNo <> 0 Then
-                controlSecurityValues = GetUserSecurity(Convert.ToInt16(securityIdNo), GlobalVariables.SecurityGroupIdNo)
+                controlSecurityValues = GetUserSecurity(Convert.ToInt16(securityIdNo), GlobalVariables.SecurityGroupIdNo, GlobalVariables.UserIdNo)
                 If controlSecurityValues.Count > 0 Then
                     ' Visible property stored in first element of the array
                     viewBit = controlSecurityValues(0)

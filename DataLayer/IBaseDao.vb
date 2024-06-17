@@ -108,7 +108,7 @@ Public Interface IBaseDao
 
     Function GetSpRecords(spName As String, fieldList As String, sortKey As String, filter As String, ParamArray parameters As Array()) As Object
 
-    Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int16) As ArrayList
+    Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int16, userIdNo As Int16) As ArrayList
 
     Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Int16) As ArrayList
 

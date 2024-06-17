@@ -64,7 +64,7 @@ Namespace AdoNet
         Public Function GetRecordsWithGroupIdNo(idNo, Optional sortExpression = Nothing) _
             As List(Of UserAccess) Implements IDaoChild(Of UserAccess).GetRecordsWithGroupIdNo
             If sortExpression Is Nothing Then
-                sortExpression = "IdNo"
+                sortExpression = "FullPathName"
             End If
             Dim sql As String =
                     "select b.IdNo , b.UserIdNo, a.IdNo as 'SecurityObjectIdNo', a.FullPathName as 'SecurityObjectName', b.Visible, b.Editable from SecurityObjectHierarchy_View a " &

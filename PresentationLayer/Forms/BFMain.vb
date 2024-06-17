@@ -752,9 +752,7 @@ Public Class BfMain
 
     Private Function SetControlSecurityValue(securityIdNo As Integer) As ArrayList
         Dim controlSecurityValues As ArrayList
-
-        controlSecurityValues = Presenter.GetUserSecurity(Convert.ToInt16(securityIdNo),
-                                                             GlobalVariables.SecurityGroupIdNo)
+        controlSecurityValues = Presenter.GetUserSecurity(Convert.ToInt16(securityIdNo), GlobalVariables.SecurityGroupIdNo, GlobalVariables.UserIdNo)
         Return controlSecurityValues
     End Function
 
@@ -880,7 +878,7 @@ Public Class BfMain
     Private Function GetControlSecurityValues(ByRef controlSecurityKey As String) As ArrayList
         Dim controlSecurityObjectIdNo As Int32
         controlSecurityObjectIdNo = Presenter.GetControlSecurityIdNo(controlSecurityKey)
-        Return Presenter.GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo)
+        Return Presenter.GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo, GlobalVariables.UserIdNo)
     End Function
 
     Private Sub SetControlEditability(ByRef cCtrl As Control, ByRef editable As Boolean)
@@ -933,8 +931,7 @@ Public Class BfMain
                     Dim securityIdNo As Int32 = GetControlSecurityIdNo(subMenuName + " > " + controlSecurityKey, True)
                     If securityIdNo <> 0 Then
                         If GlobalVariables.SecurityGroupIdNo <> 0 Then
-                            controlSecurityValues = Presenter.GetUserSecurity(securityIdNo,
-                                                                            GlobalVariables.SecurityGroupIdNo)
+                            controlSecurityValues = Presenter.GetUserSecurity(securityIdNo, GlobalVariables.SecurityGroupIdNo, GlobalVariables.UserIdNo)
                             If controlSecurityValues.Count > 0 Then
                                 ' Visible property stored in first element of the array
                                 isVisible = controlSecurityValues(0)
