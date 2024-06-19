@@ -63,6 +63,46 @@ Namespace DataLayer.AdoNet
                     "@BilharziasisUrine", bilharziasisUrine, "@BilharziasisStool", bilharziasisStool, "@Shigella", shigella, "@Cholera", cholera, "@IdNo", IdNo})
         End Function
 
+        Public Function UpdateGender(transKey As Int32, gender As String)
+            Dim sql As String =
+                    " UPDATE IbInvoiceGroup Set" &
+                    " Sex = @Gender" &
+                    " WHERE Trans_key = @TransKey"
+            Return _db.Update(sql, {"@TransKey", transKey, "@Gender", gender})
+        End Function
+
+        Public Function UpdatePatientName(transKey As Int32, patientName As String)
+            Dim sql As String =
+                    " UPDATE IbInvoiceGroup Set" &
+                    " PatientName = @PatientName" &
+                    " WHERE Trans_key = @TransKey"
+            Return _db.Update(sql, {"@TransKey", transKey, "@PatientName", patientName})
+        End Function
+
+        Public Function UpdateNationality(transKey As Int32, nationality As String)
+            Dim sql As String =
+                    " UPDATE IbInvoiceGroup Set" &
+                    " CountryIOTA = @Nationality" &
+                    " WHERE Trans_key = @TransKey"
+            Return _db.Update(sql, {"@TransKey", transKey, "@Nationality", nationality})
+        End Function
+
+        Public Function UpdateIqamaNo(transKey As Int32, iqamaNo As String)
+            Dim sql As String =
+                    " UPDATE IbInvoiceGroup Set" &
+                    " Border_Iqama = @IqamaNo" &
+                    " WHERE Trans_key = @TransKey"
+            Return _db.Update(sql, {"@TransKey", transKey, "@IqamaNo", iqamaNo})
+        End Function
+
+        Public Function UpdateProfession(transKey As Int32, profession As String)
+            Dim sql As String =
+                    " UPDATE IbInvoiceGroup Set" &
+                    " Profession = @Profession" &
+                    " WHERE Trans_key = @TransKey"
+            Return _db.Update(sql, {"@TransKey", transKey, "@Profession", profession})
+        End Function
+
         Public Function AddRecord(primaryKey As Int32, passportNumber As String, clinical As Boolean?, Xray As Boolean?, TBSputum As Boolean?,
                                   hivEliza As Boolean?, HCVEliza As Boolean?, hbsagEliza As Boolean?, malaria As Boolean?, vdrl As Boolean?,
                                   Widal As Boolean?, pregnancy As Boolean?, bilharziasisUrine As Boolean?,

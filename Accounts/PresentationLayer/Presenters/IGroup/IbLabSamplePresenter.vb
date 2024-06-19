@@ -1,9 +1,11 @@
-﻿Imports AATM.Accounts.BusinessLayer
+﻿Imports System.Text.RegularExpressions
+Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
+Imports AATM.Common
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.DataLayer
@@ -88,12 +90,11 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
-
     End Class
 
     Public Class IbLabResultPresenter(Of TM As New)
         Inherits CommonPresenter(Of IIbLabResultView, TM)
-        'Implements ISubscriber(Of DgvItemsChanged)
+        Implements ISubscriber(Of DgvItemsChanged)
 
         Private _ibLabResultDetailDao As New IbLabResultDetailDao
 
@@ -113,10 +114,19 @@ Namespace PresentationLayer.Presenters
             AddHandler View.IbLabResultRequested, AddressOf GetIbLabResults
             AddHandler View.IbLabResultChanged, AddressOf UpdateLabResult
             AddHandler View.FillUpButtonClicked, AddressOf OnFillUpButtonClicked
+            AddHandler View.SetupEditableFields, AddressOf OnSetupEditableFields
 
 
             'AddHandler View.DataChanged, AddressOf UpdateData
             'AddHandler View.GetPmrDataAccessRequested, AddressOf GetPMRDataAccess
+        End Sub
+
+        Private Sub OnSetupEditableFields(bindingSource As BindingSource)
+            If UserHasAccess("IbInvoiceDetailEditing") Then
+                View.IbInvoiceDetailEditingAllowed = True
+            Else
+                View.IbInvoiceDetailEditingAllowed = False
+            End If
         End Sub
 
         Private Sub OnFillUpButtonClicked()
@@ -221,6 +231,10 @@ Namespace PresentationLayer.Presenters
         Protected Overrides Sub CreateDataSources()
             Service.SaveConnectionString()
             Service.SetConnectionString($"ISPDATA")
+            CreateEnumData(Of MaleFemaleSelection)(View.Genders)
+            'Service.SetConnectionString($"IGROUPCLINIC")
+            'MakeVarDataSources({New Object() {"CountryMaster", "Nationalities", "Primary_Key,CountryNameEng,CountryIOTA"}})
+            MakeVarDataSources({New Object() {"Country", "Nationalities", "IdNo,CountryName,ISOA3"}})
             Service.RestoreConnectionString()
         End Sub
 
@@ -256,38 +270,58 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
-        'Public Sub OndgvItemsChangedEventHandler(ByRef eventType As DgvItemsChanged) Implements ISubscriber(Of DgvItemsChanged).OnEventHandler
-        '    With eventType.BindingSource
-        '        If eventType.Row >= 0 And eventType.Row < eventType.BindingSource.Count() Then
-        '            Dim gender = eventType.BindingSource.Current.Gender
-        '            Select Case eventType.PropertyName
-        '                Case $"Pregnancy"
-        '                    If gender = "M" Then
-        '                        Beep()
-        '                        eventType.BindingSource.Current.Pregnancy = Nothing
-        '                        'eventType.BindingSource.ResetItem(eventType.Row)
-        '                    End If
-        '                    'If bsIbLabResultDetails.Current.Gender = "M" Then
-        '                    '        Beep()
-        '                    '        e.Cancel = True
-        '                    '        DataGridViewIbLabResultDetails.EndEdit()
-        '                    '    End If
-        '                    'End If
-        '                    '    MakePayTypeAndSpecialAccount(eventType.BindingSource.Current, accountId)
-        '                    '    View.VatAmount = UpdateInputVatAmount(View.JournalItems)
-        '                    '    eventType.BindingSource.ResetItem(eventType.Row)
-        '                    'Case $"Debit"
-        '                    '    MakeDebitAmount(eventType.BindingSource.Current, eventType.BindingSource.Current.Debit)
-        '                    '    eventType.BindingSource.ResetItem(eventType.Row)
-        '                    '    View.VatAmount = UpdateInputVatAmount(View.JournalItems)
-        '                    'Case $"Credit"
-        '                    '    MakeCreditAmount(eventType.BindingSource.Current, eventType.BindingSource.Current.Credit)
-        '                    '    eventType.BindingSource.ResetItem(eventType.Row)
-        '                    '    View.VatAmount = UpdateInputVatAmount(View.JournalItems)
-        '            End Select
-        '        End If
-        '    End With
-        'End Sub
+        Public Sub OndgvItemsChangedEventHandler(ByRef eventType As DgvItemsChanged) Implements ISubscriber(Of DgvItemsChanged).OnEventHandler
+            With eventType.BindingSource
+                If eventType.Row >= 0 And eventType.Row < eventType.BindingSource.Count() Then
+                    Dim transKey = eventType.BindingSource.Current.TransKey
+                    Select Case eventType.PropertyName
+                        Case $"Gender"
+                            Dim gender = eventType.BindingSource.Current.Gender.ToString().ToUpper()
+                            _ibLabResultDetailDao.UpdateGender(transKey, gender)
+                            'Dim gender = eventType.BindingSource.Current.Gender.ToString().ToUpper()
+                            'gender = IIf(gender = "M", "M", IIf(gender = "F", "F", ""))
+                            'If gender <> "M" Or gender <> "F" Then
+                            '    MessageBox.Show("Invalid Gender Entered, value must be 'M' for Male or 'F' for Female")
+                            'Else
+                            '    _ibLabResultDetailDao.UpdateGender(transKey, gender)
+                            'End If
+                        Case $"PatientName"
+                            Dim patientName As String = eventType.BindingSource.Current.PatientName
+                            _ibLabResultDetailDao.UpdatePatientName(transKey, patientName)
+                        Case $"Nationality"
+                            Dim nationality As String = eventType.BindingSource.Current.Nationality
+                            _ibLabResultDetailDao.UpdateNationality(transKey, nationality)
+                        Case $"Profession"
+                            Dim profession As String = eventType.BindingSource.Current.Profession
+                            _ibLabResultDetailDao.UpdateProfession(transKey, profession)
+                        Case $"IqamaNo"
+                            Dim iqamaNo As String = eventType.BindingSource.Current.IqamaNo
+                            If Regex.IsMatch(iqamaNo, "\A[0-9]{10}\z") Then
+                                _ibLabResultDetailDao.UpdateIqamaNo(transKey, iqamaNo)
+                            Else
+                                MessageBox.Show("Invalid border/iqama/resident Id No Entered, must be exactly 10 digits.")
+                            End If
+                            'If bsIbLabResultDetails.Current.Gender = "M" Then
+                            '        Beep()
+                            '        e.Cancel = True
+                            '        DataGridViewIbLabResultDetails.EndEdit()
+                            '    End If
+                            'End If
+                            '    MakePayTypeAndSpecialAccount(eventType.BindingSource.Current, accountId)
+                            '    View.VatAmount = UpdateInputVatAmount(View.JournalItems)
+                            '    eventType.BindingSource.ResetItem(eventType.Row)
+                            'Case $"Debit"
+                            '    MakeDebitAmount(eventType.BindingSource.Current, eventType.BindingSource.Current.Debit)
+                            '    eventType.BindingSource.ResetItem(eventType.Row)
+                            '    View.VatAmount = UpdateInputVatAmount(View.JournalItems)
+                            'Case $"Credit"
+                            '    MakeCreditAmount(eventType.BindingSource.Current, eventType.BindingSource.Current.Credit)
+                            '    eventType.BindingSource.ResetItem(eventType.Row)
+                            '    View.VatAmount = UpdateInputVatAmount(View.JournalItems)
+                    End Select
+                End If
+            End With
+        End Sub
 
     End Class
 

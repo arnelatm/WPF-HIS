@@ -109,7 +109,7 @@ Namespace DataLayer.AdoNet
             Dim transactionDateString As String = transactionDate.ToString("yyyy/MM/dd")
             data.TransactionDate = transactionDate
             Dim params() As Object = {"@TransactionDate", transactionDateString}
-            sql = $"SELECT Row_Number() Over (Order by Trans_key) as 'Sequence',IdNo,Trans_Key,Sex,TransactionDate,LabNo,PatientName,CountryNameEng,PassportNumber,Profession,Border_Iqama,Clinical,XRay,TBSputum,HIVEliza,HCVEliza,HBSAgEliza,Malaria,VDRL,WIdal,Pregnancy,BilharziasisUrine,BilharziasisStool,SHigella,Cholera from IbLabResultList_View where TransactionDate = @TransactionDate order by Trans_key"
+            sql = $"SELECT Row_Number() Over (Order by Trans_key) as 'Sequence',IdNo,Trans_Key,Sex,TransactionDate,LabNo,PatientName,CountryIOTA,PassportNumber,Profession,Border_Iqama,Clinical,XRay,TBSputum,HIVEliza,HCVEliza,HBSAgEliza,Malaria,VDRL,WIdal,Pregnancy,BilharziasisUrine,BilharziasisStool,SHigella,Cholera from IbLabResultList_View where TransactionDate = @TransactionDate order by Trans_key"
             data.IbLabResultDetails = _db.Read(sql, MakeIbLabResultDetails, params).ToList()
             Return data
         End Function
@@ -165,7 +165,7 @@ Namespace DataLayer.AdoNet
             .Gender = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Char)(reader("Sex")),
             .LabNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("LabNo")),
             .PatientName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("PatientName")),
-            .Nationality = AATM.DataLayer.AdoNet.Extensions.AsString(reader("CountryNameEng")),
+            .Nationality = AATM.DataLayer.AdoNet.Extensions.AsString(reader("CountryIOTA")),
             .Profession = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Profession")),
             .PassportNumber = AATM.DataLayer.AdoNet.Extensions.AsString(reader("PassportNumber")),
             .IqamaNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Border_Iqama")),

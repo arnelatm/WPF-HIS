@@ -26,6 +26,9 @@
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -44,9 +47,6 @@
             Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Me.btnRefresh = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.imgList = New System.Windows.Forms.ImageList(Me.components)
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
@@ -54,11 +54,22 @@
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.DataGridViewIbLabResultDetails = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
+            Me.bsIbLabResultDetails = New System.Windows.Forms.BindingSource(Me.components)
+            Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.chkIndeterminate = New System.Windows.Forms.CheckBox()
+            Me.chkNegative = New System.Windows.Forms.CheckBox()
+            Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+            Me.CButton1 = New AATM.Libraries.CBaseControlsLibrary.CButton()
+            Me.txtDoctorCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.Sequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvLabNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvPatientName = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvNationality = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
             Me.dgvProfession = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvIqamaNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvPassportNumber = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvGender = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvGender = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
             Me.dgvClinical = New System.Windows.Forms.DataGridViewCheckBoxColumn()
             Me.dgvXRay = New System.Windows.Forms.DataGridViewCheckBoxColumn()
             Me.dgvTBSputum = New System.Windows.Forms.DataGridViewCheckBoxColumn()
@@ -73,35 +84,24 @@
             Me.dgvBilharziasisStool = New System.Windows.Forms.DataGridViewCheckBoxColumn()
             Me.dgvShigella = New System.Windows.Forms.DataGridViewCheckBoxColumn()
             Me.dgvCholera = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-            Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.chkIndeterminate = New System.Windows.Forms.CheckBox()
-            Me.chkNegative = New System.Windows.Forms.CheckBox()
-            Me.CheckBox1 = New System.Windows.Forms.CheckBox()
-            Me.CButton1 = New AATM.Libraries.CBaseControlsLibrary.CButton()
-            Me.txtDoctorCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.dgvLabNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvPatientName = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvNationality = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.bsIbLabResultDetails = New System.Windows.Forms.BindingSource(Me.components)
+            Me.dgvTransKey = New System.Windows.Forms.DataGridViewTextBoxColumn()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout2.SuspendLayout()
             Me.TableLayoutPanel1.SuspendLayout()
             CType(Me.DataGridViewIbLabResultDetails, System.ComponentModel.ISupportInitialize).BeginInit()
-            Me.CFlowLayout1.SuspendLayout()
             CType(Me.bsIbLabResultDetails, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.CFlowLayout1.SuspendLayout()
             Me.SuspendLayout()
             '
             'btnRefresh
             '
             Me.btnRefresh.DesignerSelected = False
             Me.btnRefresh.ImageIndex = 0
-            Me.btnRefresh.Location = New System.Drawing.Point(335, 4)
-            Me.btnRefresh.Margin = New System.Windows.Forms.Padding(4)
+            Me.btnRefresh.Location = New System.Drawing.Point(281, 3)
             Me.btnRefresh.Name = "btnRefresh"
             Me.btnRefresh.OriginalImageName = Nothing
             Me.btnRefresh.SecurityKey = ""
-            Me.btnRefresh.Size = New System.Drawing.Size(120, 31)
+            Me.btnRefresh.Size = New System.Drawing.Size(90, 25)
             Me.btnRefresh.TabIndex = 11
             Me.btnRefresh.Text = "Refresh"
             '
@@ -121,9 +121,8 @@
             Me.CFlowLayout2.Controls.Add(Me.CButton1)
             Me.CFlowLayout2.Dock = System.Windows.Forms.DockStyle.Fill
             Me.CFlowLayout2.Location = New System.Drawing.Point(0, 55)
-            Me.CFlowLayout2.Margin = New System.Windows.Forms.Padding(4)
             Me.CFlowLayout2.Name = "CFlowLayout2"
-            Me.CFlowLayout2.Size = New System.Drawing.Size(1370, 645)
+            Me.CFlowLayout2.Size = New System.Drawing.Size(1168, 531)
             Me.CFlowLayout2.TabIndex = 5
             '
             'TableLayoutPanel1
@@ -138,16 +137,15 @@
             Me.TableLayoutPanel1.Controls.Add(Me.dtpTransactionDate, 1, 1)
             Me.TableLayoutPanel1.Controls.Add(Me.btnRefresh, 3, 1)
             Me.TableLayoutPanel1.Controls.Add(Me.DataGridViewIbLabResultDetails, 1, 2)
-            Me.TableLayoutPanel1.Location = New System.Drawing.Point(4, 4)
-            Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4)
+            Me.TableLayoutPanel1.Location = New System.Drawing.Point(3, 3)
             Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
             Me.TableLayoutPanel1.RowCount = 4
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25.0!))
-            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25.0!))
-            Me.TableLayoutPanel1.Size = New System.Drawing.Size(1431, 572)
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+            Me.TableLayoutPanel1.Size = New System.Drawing.Size(1153, 465)
             Me.TableLayoutPanel1.TabIndex = 17
             '
             'CLabel1
@@ -159,7 +157,7 @@
             Me.CLabel1.Location = New System.Drawing.Point(1, 1)
             Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel1.Name = "CLabel1"
-            Me.CLabel1.Size = New System.Drawing.Size(208, 28)
+            Me.CLabel1.Size = New System.Drawing.Size(156, 23)
             Me.CLabel1.TabIndex = 13
             Me.CLabel1.Text = "Transaction Date:"
             Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -179,14 +177,14 @@
             Me.dtpTransactionDate.EditsAllowed = False
             Me.dtpTransactionDate.ForeColor = System.Drawing.Color.Black
             Me.dtpTransactionDate.LinkedLabel = Nothing
-            Me.dtpTransactionDate.Location = New System.Drawing.Point(211, 1)
+            Me.dtpTransactionDate.Location = New System.Drawing.Point(159, 1)
             Me.dtpTransactionDate.Margin = New System.Windows.Forms.Padding(1)
             Me.dtpTransactionDate.Name = "dtpTransactionDate"
             Me.dtpTransactionDate.ReadOnlyDp = False
             Me.dtpTransactionDate.SecurityKey = Nothing
             Me.dtpTransactionDate.ShowLongDate = False
             Me.dtpTransactionDate.ShowTime = False
-            Me.dtpTransactionDate.Size = New System.Drawing.Size(119, 27)
+            Me.dtpTransactionDate.Size = New System.Drawing.Size(118, 23)
             Me.dtpTransactionDate.TabIndex = 12
             Me.dtpTransactionDate.TargetCalendar = CType(resources.GetObject("dtpTransactionDate.TargetCalendar"), System.Globalization.Calendar)
             Me.dtpTransactionDate.Translatable = False
@@ -204,7 +202,7 @@
             Me.DataGridViewIbLabResultDetails.BegFindValue = Nothing
             Me.DataGridViewIbLabResultDetails.Cached = False
             Me.DataGridViewIbLabResultDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DataGridViewIbLabResultDetails.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Sequence, Me.dgvLabNo, Me.dgvPatientName, Me.dgvNationality, Me.dgvProfession, Me.dgvIqamaNo, Me.dgvPassportNumber, Me.dgvGender, Me.dgvClinical, Me.dgvXRay, Me.dgvTBSputum, Me.dgvHIVEliza, Me.dgvHCVEliza, Me.dgvHBSAgEliza, Me.dgvMalaria, Me.dgvVDRL, Me.dgvWidal, Me.dgvPregnancy, Me.dgvBilharziasisUrine, Me.dgvBilharziasisStool, Me.dgvShigella, Me.dgvCholera})
+            Me.DataGridViewIbLabResultDetails.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Sequence, Me.dgvLabNo, Me.dgvPatientName, Me.dgvNationality, Me.dgvProfession, Me.dgvIqamaNo, Me.dgvPassportNumber, Me.dgvGender, Me.dgvClinical, Me.dgvXRay, Me.dgvTBSputum, Me.dgvHIVEliza, Me.dgvHCVEliza, Me.dgvHBSAgEliza, Me.dgvMalaria, Me.dgvVDRL, Me.dgvWidal, Me.dgvPregnancy, Me.dgvBilharziasisUrine, Me.dgvBilharziasisStool, Me.dgvShigella, Me.dgvCholera, Me.dgvTransKey})
             Me.TableLayoutPanel1.SetColumnSpan(Me.DataGridViewIbLabResultDetails, 4)
             Me.DataGridViewIbLabResultDetails.DataFilter = Nothing
             Me.DataGridViewIbLabResultDetails.DataSource = Me.bsIbLabResultDetails
@@ -232,8 +230,7 @@
             Me.DataGridViewIbLabResultDetails.FirstRowInsertionEnabled = True
             Me.DataGridViewIbLabResultDetails.IgnoreCase = False
             Me.DataGridViewIbLabResultDetails.IsDirty = False
-            Me.DataGridViewIbLabResultDetails.Location = New System.Drawing.Point(4, 43)
-            Me.DataGridViewIbLabResultDetails.Margin = New System.Windows.Forms.Padding(4)
+            Me.DataGridViewIbLabResultDetails.Location = New System.Drawing.Point(3, 34)
             Me.DataGridViewIbLabResultDetails.Name = "DataGridViewIbLabResultDetails"
             Me.DataGridViewIbLabResultDetails.OldCellValue = Nothing
             Me.DataGridViewIbLabResultDetails.ReadOnly = True
@@ -244,9 +241,130 @@
             Me.DataGridViewIbLabResultDetails.SequenceColumn = "dgvSequence"
             Me.DataGridViewIbLabResultDetails.SequenceFieldName = "Sequence"
             Me.DataGridViewIbLabResultDetails.ShowFooter = False
-            Me.DataGridViewIbLabResultDetails.Size = New System.Drawing.Size(1421, 518)
+            Me.DataGridViewIbLabResultDetails.Size = New System.Drawing.Size(1150, 421)
             Me.DataGridViewIbLabResultDetails.TabIndex = 14
             Me.DataGridViewIbLabResultDetails.Translatable = True
+            '
+            'bsIbLabResultDetails
+            '
+            Me.bsIbLabResultDetails.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.IbLabResultDetailModel)
+            '
+            'CFlowLayout1
+            '
+            Me.CFlowLayout1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+            Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
+            Me.CFlowLayout1.Controls.Add(Me.CLabel2)
+            Me.CFlowLayout1.Controls.Add(Me.chkIndeterminate)
+            Me.CFlowLayout1.Controls.Add(Me.chkNegative)
+            Me.CFlowLayout1.Controls.Add(Me.CheckBox1)
+            Me.CFlowLayout1.Location = New System.Drawing.Point(2, 473)
+            Me.CFlowLayout1.Margin = New System.Windows.Forms.Padding(2)
+            Me.CFlowLayout1.Name = "CFlowLayout1"
+            Me.CFlowLayout1.Size = New System.Drawing.Size(494, 47)
+            Me.CFlowLayout1.TabIndex = 18
+            '
+            'CLabel2
+            '
+            Me.CLabel2.AutoSize = True
+            Me.CLabel2.BackColor = System.Drawing.Color.Transparent
+            Me.CLabel2.DisplayOnly = True
+            Me.CLabel2.EditingMode = False
+            Me.CFlowLayout1.SetFlowBreak(Me.CLabel2, True)
+            Me.CLabel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.CLabel2.Location = New System.Drawing.Point(1, 1)
+            Me.CLabel2.Margin = New System.Windows.Forms.Padding(1)
+            Me.CLabel2.Name = "CLabel2"
+            Me.CLabel2.Size = New System.Drawing.Size(67, 17)
+            Me.CLabel2.TabIndex = 3
+            Me.CLabel2.Tag = "Positive"
+            Me.CLabel2.Text = "Legend:"
+            Me.CLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.CLabel2.Translatable = True
+            '
+            'chkIndeterminate
+            '
+            Me.chkIndeterminate.AutoCheck = False
+            Me.chkIndeterminate.AutoSize = True
+            Me.chkIndeterminate.Checked = True
+            Me.chkIndeterminate.CheckState = System.Windows.Forms.CheckState.Indeterminate
+            Me.chkIndeterminate.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.chkIndeterminate.Location = New System.Drawing.Point(2, 23)
+            Me.chkIndeterminate.Margin = New System.Windows.Forms.Padding(2)
+            Me.chkIndeterminate.Name = "chkIndeterminate"
+            Me.chkIndeterminate.Size = New System.Drawing.Size(119, 17)
+            Me.chkIndeterminate.TabIndex = 6
+            Me.chkIndeterminate.Text = "Failed / Positive"
+            Me.chkIndeterminate.UseVisualStyleBackColor = True
+            '
+            'chkNegative
+            '
+            Me.chkNegative.AutoCheck = False
+            Me.chkNegative.AutoSize = True
+            Me.chkNegative.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.chkNegative.Location = New System.Drawing.Point(125, 23)
+            Me.chkNegative.Margin = New System.Windows.Forms.Padding(2)
+            Me.chkNegative.Name = "chkNegative"
+            Me.chkNegative.Size = New System.Drawing.Size(141, 17)
+            Me.chkNegative.TabIndex = 5
+            Me.chkNegative.Text = "No Data / Not Done"
+            Me.chkNegative.UseVisualStyleBackColor = True
+            '
+            'CheckBox1
+            '
+            Me.CheckBox1.AutoCheck = False
+            Me.CheckBox1.AutoSize = True
+            Me.CheckBox1.Checked = True
+            Me.CheckBox1.CheckState = System.Windows.Forms.CheckState.Checked
+            Me.CheckBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.CheckBox1.Location = New System.Drawing.Point(270, 23)
+            Me.CheckBox1.Margin = New System.Windows.Forms.Padding(2)
+            Me.CheckBox1.Name = "CheckBox1"
+            Me.CheckBox1.Size = New System.Drawing.Size(124, 17)
+            Me.CheckBox1.TabIndex = 4
+            Me.CheckBox1.Text = "Negative/Passed"
+            Me.CheckBox1.UseVisualStyleBackColor = True
+            '
+            'CButton1
+            '
+            Me.CButton1.DesignerSelected = False
+            Me.CButton1.ImageIndex = 0
+            Me.CButton1.Location = New System.Drawing.Point(501, 474)
+            Me.CButton1.Name = "CButton1"
+            Me.CButton1.OriginalImageName = Nothing
+            Me.CButton1.SecurityKey = ""
+            Me.CButton1.Size = New System.Drawing.Size(214, 25)
+            Me.CButton1.TabIndex = 15
+            Me.CButton1.Text = "Auto Fillup unfilled Items"
+            '
+            'txtDoctorCode
+            '
+            Me.txtDoctorCode.BackColor = System.Drawing.Color.White
+            Me.txtDoctorCode.BegFindValue = Nothing
+            Me.txtDoctorCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtDoctorCode.ComputedValue = False
+            Me.txtDoctorCode.CustomFormat = Nothing
+            Me.txtDoctorCode.DataBoundControl = True
+            Me.txtDoctorCode.EditingMode = True
+            Me.txtDoctorCode.EndFindValue = Nothing
+            Me.txtDoctorCode.FieldDescription = Nothing
+            Me.txtDoctorCode.FieldName = Nothing
+            Me.txtDoctorCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtDoctorCode.FindEnabled = False
+            Me.txtDoctorCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtDoctorCode.ForeColor = System.Drawing.Color.Black
+            Me.txtDoctorCode.LinkedLabel = Nothing
+            Me.txtDoctorCode.Location = New System.Drawing.Point(693, 89)
+            Me.txtDoctorCode.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtDoctorCode.MaximumValue = Nothing
+            Me.txtDoctorCode.MinimumValue = Nothing
+            Me.txtDoctorCode.Name = "txtDoctorCode"
+            Me.txtDoctorCode.OldValue = Nothing
+            Me.txtDoctorCode.OverrideMaxLength = 0
+            Me.txtDoctorCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtDoctorCode.Size = New System.Drawing.Size(80, 23)
+            Me.txtDoctorCode.TabIndex = 16
+            Me.txtDoctorCode.Translatable = False
+            Me.txtDoctorCode.Visible = False
             '
             'Sequence
             '
@@ -263,7 +381,6 @@
             Me.Sequence.FieldName = Nothing
             Me.Sequence.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.Sequence.FindEnabled = False
-            Me.Sequence.Frozen = True
             Me.Sequence.HeaderText = "Seq"
             Me.Sequence.IgnoreCase = False
             Me.Sequence.MinimumWidth = 6
@@ -273,6 +390,74 @@
             Me.Sequence.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.Sequence.Translatable = False
             Me.Sequence.Width = 30
+            '
+            'dgvLabNo
+            '
+            Me.dgvLabNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+            Me.dgvLabNo.BegFindValue = Nothing
+            Me.dgvLabNo.DataPropertyName = "LabNo"
+            DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
+            Me.dgvLabNo.DefaultCellStyle = DataGridViewCellStyle3
+            Me.dgvLabNo.DisplayOnly = True
+            Me.dgvLabNo.EditingMode = False
+            Me.dgvLabNo.EndFindValue = Nothing
+            Me.dgvLabNo.FieldDescription = Nothing
+            Me.dgvLabNo.FieldName = Nothing
+            Me.dgvLabNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvLabNo.FindEnabled = False
+            Me.dgvLabNo.HeaderText = "File No."
+            Me.dgvLabNo.IgnoreCase = False
+            Me.dgvLabNo.MinimumWidth = 6
+            Me.dgvLabNo.Name = "dgvLabNo"
+            Me.dgvLabNo.ReadOnly = True
+            Me.dgvLabNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvLabNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.dgvLabNo.Translatable = False
+            Me.dgvLabNo.Width = 68
+            '
+            'dgvPatientName
+            '
+            Me.dgvPatientName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+            Me.dgvPatientName.BegFindValue = Nothing
+            Me.dgvPatientName.DataPropertyName = "PatientName"
+            DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
+            Me.dgvPatientName.DefaultCellStyle = DataGridViewCellStyle4
+            Me.dgvPatientName.DisplayOnly = True
+            Me.dgvPatientName.EditingMode = False
+            Me.dgvPatientName.EndFindValue = Nothing
+            Me.dgvPatientName.FieldDescription = Nothing
+            Me.dgvPatientName.FieldName = Nothing
+            Me.dgvPatientName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvPatientName.FindEnabled = False
+            Me.dgvPatientName.HeaderText = "Patient Name"
+            Me.dgvPatientName.IgnoreCase = False
+            Me.dgvPatientName.MinimumWidth = 6
+            Me.dgvPatientName.Name = "dgvPatientName"
+            Me.dgvPatientName.ReadOnly = True
+            Me.dgvPatientName.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvPatientName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.dgvPatientName.Translatable = False
+            '
+            'dgvNationality
+            '
+            Me.dgvNationality.AutoComplete = False
+            Me.dgvNationality.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+            Me.dgvNationality.DataPropertyName = "Nationality"
+            DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
+            Me.dgvNationality.DefaultCellStyle = DataGridViewCellStyle5
+            Me.dgvNationality.EditingMode = False
+            Me.dgvNationality.HeaderText = "Nationality"
+            Me.dgvNationality.MinimumWidth = 6
+            Me.dgvNationality.Name = "dgvNationality"
+            Me.dgvNationality.ReadOnly = True
+            Me.dgvNationality.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvNationality.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvNationality.SuggestCharCount = 0
+            Me.dgvNationality.Translatable = False
+            Me.dgvNationality.Width = 81
             '
             'dgvProfession
             '
@@ -347,28 +532,21 @@
             '
             'dgvGender
             '
+            Me.dgvGender.AutoComplete = False
             Me.dgvGender.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-            Me.dgvGender.BegFindValue = Nothing
             Me.dgvGender.DataPropertyName = "Gender"
             DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
             Me.dgvGender.DefaultCellStyle = DataGridViewCellStyle9
             Me.dgvGender.EditingMode = False
-            Me.dgvGender.EndFindValue = Nothing
-            Me.dgvGender.FieldDescription = Nothing
-            Me.dgvGender.FieldName = Nothing
-            Me.dgvGender.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.dgvGender.FindEnabled = False
             Me.dgvGender.HeaderText = "Sex"
-            Me.dgvGender.IgnoreCase = False
             Me.dgvGender.MinimumWidth = 10
             Me.dgvGender.Name = "dgvGender"
             Me.dgvGender.ReadOnly = True
             Me.dgvGender.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvGender.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.dgvGender.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+            Me.dgvGender.SuggestCharCount = 0
             Me.dgvGender.Translatable = False
-            Me.dgvGender.Width = 36
+            Me.dgvGender.Width = 31
             '
             'dgvClinical
             '
@@ -614,214 +792,22 @@
             Me.dgvCholera.ThreeState = True
             Me.dgvCholera.Width = 35
             '
-            'CFlowLayout1
+            'dgvTransKey
             '
-            Me.CFlowLayout1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-            Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
-            Me.CFlowLayout1.Controls.Add(Me.CLabel2)
-            Me.CFlowLayout1.Controls.Add(Me.chkIndeterminate)
-            Me.CFlowLayout1.Controls.Add(Me.chkNegative)
-            Me.CFlowLayout1.Controls.Add(Me.CheckBox1)
-            Me.CFlowLayout1.Location = New System.Drawing.Point(3, 582)
-            Me.CFlowLayout1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-            Me.CFlowLayout1.Name = "CFlowLayout1"
-            Me.CFlowLayout1.Size = New System.Drawing.Size(659, 58)
-            Me.CFlowLayout1.TabIndex = 18
-            '
-            'CLabel2
-            '
-            Me.CLabel2.AutoSize = True
-            Me.CLabel2.BackColor = System.Drawing.Color.Transparent
-            Me.CLabel2.DisplayOnly = True
-            Me.CLabel2.EditingMode = False
-            Me.CFlowLayout1.SetFlowBreak(Me.CLabel2, True)
-            Me.CLabel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.CLabel2.Location = New System.Drawing.Point(1, 1)
-            Me.CLabel2.Margin = New System.Windows.Forms.Padding(1)
-            Me.CLabel2.Name = "CLabel2"
-            Me.CLabel2.Size = New System.Drawing.Size(76, 20)
-            Me.CLabel2.TabIndex = 3
-            Me.CLabel2.Tag = "Positive"
-            Me.CLabel2.Text = "Legend:"
-            Me.CLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.CLabel2.Translatable = True
-            '
-            'chkIndeterminate
-            '
-            Me.chkIndeterminate.AutoCheck = False
-            Me.chkIndeterminate.AutoSize = True
-            Me.chkIndeterminate.Checked = True
-            Me.chkIndeterminate.CheckState = System.Windows.Forms.CheckState.Indeterminate
-            Me.chkIndeterminate.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.chkIndeterminate.Location = New System.Drawing.Point(3, 26)
-            Me.chkIndeterminate.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-            Me.chkIndeterminate.Name = "chkIndeterminate"
-            Me.chkIndeterminate.Size = New System.Drawing.Size(142, 20)
-            Me.chkIndeterminate.TabIndex = 6
-            Me.chkIndeterminate.Text = "Failed / Positive"
-            Me.chkIndeterminate.UseVisualStyleBackColor = True
-            '
-            'chkNegative
-            '
-            Me.chkNegative.AutoCheck = False
-            Me.chkNegative.AutoSize = True
-            Me.chkNegative.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.chkNegative.Location = New System.Drawing.Point(151, 26)
-            Me.chkNegative.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-            Me.chkNegative.Name = "chkNegative"
-            Me.chkNegative.Size = New System.Drawing.Size(164, 20)
-            Me.chkNegative.TabIndex = 5
-            Me.chkNegative.Text = "No Data / Not Done"
-            Me.chkNegative.UseVisualStyleBackColor = True
-            '
-            'CheckBox1
-            '
-            Me.CheckBox1.AutoCheck = False
-            Me.CheckBox1.AutoSize = True
-            Me.CheckBox1.Checked = True
-            Me.CheckBox1.CheckState = System.Windows.Forms.CheckState.Checked
-            Me.CheckBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.CheckBox1.Location = New System.Drawing.Point(321, 26)
-            Me.CheckBox1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-            Me.CheckBox1.Name = "CheckBox1"
-            Me.CheckBox1.Size = New System.Drawing.Size(150, 20)
-            Me.CheckBox1.TabIndex = 4
-            Me.CheckBox1.Text = "Negative/Passed"
-            Me.CheckBox1.UseVisualStyleBackColor = True
-            '
-            'CButton1
-            '
-            Me.CButton1.DesignerSelected = False
-            Me.CButton1.ImageIndex = 0
-            Me.CButton1.Location = New System.Drawing.Point(669, 584)
-            Me.CButton1.Margin = New System.Windows.Forms.Padding(4)
-            Me.CButton1.Name = "CButton1"
-            Me.CButton1.OriginalImageName = Nothing
-            Me.CButton1.SecurityKey = ""
-            Me.CButton1.Size = New System.Drawing.Size(285, 31)
-            Me.CButton1.TabIndex = 15
-            Me.CButton1.Text = "Auto Fillup unfilled Items"
-            '
-            'txtDoctorCode
-            '
-            Me.txtDoctorCode.BackColor = System.Drawing.Color.White
-            Me.txtDoctorCode.BegFindValue = Nothing
-            Me.txtDoctorCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtDoctorCode.ComputedValue = False
-            Me.txtDoctorCode.CustomFormat = Nothing
-            Me.txtDoctorCode.DataBoundControl = True
-            Me.txtDoctorCode.EditingMode = True
-            Me.txtDoctorCode.EndFindValue = Nothing
-            Me.txtDoctorCode.FieldDescription = Nothing
-            Me.txtDoctorCode.FieldName = Nothing
-            Me.txtDoctorCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtDoctorCode.FindEnabled = False
-            Me.txtDoctorCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtDoctorCode.ForeColor = System.Drawing.Color.Black
-            Me.txtDoctorCode.LinkedLabel = Nothing
-            Me.txtDoctorCode.Location = New System.Drawing.Point(924, 110)
-            Me.txtDoctorCode.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtDoctorCode.MaximumValue = Nothing
-            Me.txtDoctorCode.MinimumValue = Nothing
-            Me.txtDoctorCode.Name = "txtDoctorCode"
-            Me.txtDoctorCode.OldValue = Nothing
-            Me.txtDoctorCode.OverrideMaxLength = 0
-            Me.txtDoctorCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtDoctorCode.Size = New System.Drawing.Size(106, 26)
-            Me.txtDoctorCode.TabIndex = 16
-            Me.txtDoctorCode.Translatable = False
-            Me.txtDoctorCode.Visible = False
-            '
-            'dgvLabNo
-            '
-            Me.dgvLabNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-            Me.dgvLabNo.BegFindValue = Nothing
-            Me.dgvLabNo.DataPropertyName = "LabNo"
-            DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
-            Me.dgvLabNo.DefaultCellStyle = DataGridViewCellStyle3
-            Me.dgvLabNo.DisplayOnly = True
-            Me.dgvLabNo.EditingMode = False
-            Me.dgvLabNo.EndFindValue = Nothing
-            Me.dgvLabNo.FieldDescription = Nothing
-            Me.dgvLabNo.FieldName = Nothing
-            Me.dgvLabNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.dgvLabNo.FindEnabled = False
-            Me.dgvLabNo.Frozen = True
-            Me.dgvLabNo.HeaderText = "File No."
-            Me.dgvLabNo.IgnoreCase = False
-            Me.dgvLabNo.MinimumWidth = 6
-            Me.dgvLabNo.Name = "dgvLabNo"
-            Me.dgvLabNo.ReadOnly = True
-            Me.dgvLabNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvLabNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.dgvLabNo.Translatable = False
-            Me.dgvLabNo.Width = 76
-            '
-            'dgvPatientName
-            '
-            Me.dgvPatientName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-            Me.dgvPatientName.BegFindValue = Nothing
-            Me.dgvPatientName.DataPropertyName = "PatientName"
-            DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
-            Me.dgvPatientName.DefaultCellStyle = DataGridViewCellStyle4
-            Me.dgvPatientName.DisplayOnly = True
-            Me.dgvPatientName.EditingMode = False
-            Me.dgvPatientName.EndFindValue = Nothing
-            Me.dgvPatientName.FieldDescription = Nothing
-            Me.dgvPatientName.FieldName = Nothing
-            Me.dgvPatientName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.dgvPatientName.FindEnabled = False
-            Me.dgvPatientName.Frozen = True
-            Me.dgvPatientName.HeaderText = "Patient Name"
-            Me.dgvPatientName.IgnoreCase = False
-            Me.dgvPatientName.MinimumWidth = 6
-            Me.dgvPatientName.Name = "dgvPatientName"
-            Me.dgvPatientName.ReadOnly = True
-            Me.dgvPatientName.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvPatientName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.dgvPatientName.Translatable = False
-            Me.dgvPatientName.Width = 108
-            '
-            'dgvNationality
-            '
-            Me.dgvNationality.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-            Me.dgvNationality.BegFindValue = Nothing
-            Me.dgvNationality.DataPropertyName = "Nationality"
-            DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
-            Me.dgvNationality.DefaultCellStyle = DataGridViewCellStyle5
-            Me.dgvNationality.DisplayOnly = True
-            Me.dgvNationality.EditingMode = False
-            Me.dgvNationality.EndFindValue = Nothing
-            Me.dgvNationality.FieldDescription = Nothing
-            Me.dgvNationality.FieldName = Nothing
-            Me.dgvNationality.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.dgvNationality.FindEnabled = False
-            Me.dgvNationality.HeaderText = "Nationality"
-            Me.dgvNationality.IgnoreCase = False
-            Me.dgvNationality.MinimumWidth = 6
-            Me.dgvNationality.Name = "dgvNationality"
-            Me.dgvNationality.ReadOnly = True
-            Me.dgvNationality.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvNationality.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.dgvNationality.Translatable = False
-            Me.dgvNationality.Width = 99
-            '
-            'bsIbLabResultDetails
-            '
-            Me.bsIbLabResultDetails.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.IbLabResultDetailModel)
+            Me.dgvTransKey.DataPropertyName = "TransKey"
+            Me.dgvTransKey.HeaderText = "TransKey"
+            Me.dgvTransKey.Name = "dgvTransKey"
+            Me.dgvTransKey.ReadOnly = True
+            Me.dgvTransKey.Visible = False
             '
             'IbLabResultForm
             '
-            Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+            Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
             Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
             Me.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.GreenGradientBackgroundLarge
-            Me.ClientSize = New System.Drawing.Size(1370, 700)
+            Me.ClientSize = New System.Drawing.Size(1168, 586)
             Me.Controls.Add(Me.CFlowLayout2)
             Me.Controls.Add(Me.txtDoctorCode)
-            Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
             Me.Name = "IbLabResultForm"
             Me.Text = "Diagnostic Result Entry Form"
             Me.Controls.SetChildIndex(Me.txtDoctorCode, 0)
@@ -831,9 +817,9 @@
             Me.TableLayoutPanel1.ResumeLayout(False)
             Me.TableLayoutPanel1.PerformLayout()
             CType(Me.DataGridViewIbLabResultDetails, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.bsIbLabResultDetails, System.ComponentModel.ISupportInitialize).EndInit()
             Me.CFlowLayout1.ResumeLayout(False)
             Me.CFlowLayout1.PerformLayout()
-            CType(Me.bsIbLabResultDetails, System.ComponentModel.ISupportInitialize).EndInit()
             Me.ResumeLayout(False)
             Me.PerformLayout()
 
@@ -881,11 +867,11 @@
         Friend WithEvents Sequence As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents dgvLabNo As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents dgvPatientName As Libraries.CBaseControlsLibrary.CDgvTextColumn
-        Friend WithEvents dgvNationality As Libraries.CBaseControlsLibrary.CDgvTextColumn
+        Friend WithEvents dgvNationality As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
         Friend WithEvents dgvProfession As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents dgvIqamaNo As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents dgvPassportNumber As Libraries.CBaseControlsLibrary.CDgvTextColumn
-        Friend WithEvents dgvGender As Libraries.CBaseControlsLibrary.CDgvTextColumn
+        Friend WithEvents dgvGender As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
         Friend WithEvents dgvClinical As DataGridViewCheckBoxColumn
         Friend WithEvents dgvXRay As DataGridViewCheckBoxColumn
         Friend WithEvents dgvTBSputum As DataGridViewCheckBoxColumn
@@ -900,5 +886,6 @@
         Friend WithEvents dgvBilharziasisStool As DataGridViewCheckBoxColumn
         Friend WithEvents dgvShigella As DataGridViewCheckBoxColumn
         Friend WithEvents dgvCholera As DataGridViewCheckBoxColumn
+        Friend WithEvents dgvTransKey As DataGridViewTextBoxColumn
     End Class
 End Namespace

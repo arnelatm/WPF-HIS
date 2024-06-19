@@ -1,11 +1,15 @@
 ﻿
 
 
+
+
+
+
 CREATE VIEW [dbo].[ZPurchaseDetail_View]
 AS
-SELECT  Group_key as PurchaseIdNo, SlNo As [Sequence], c.IdNo as ProductIdNo, UserQty as Quantity, BonusQty as BonusQuantity, IIf(Unit='B',1,IIf(Unit='S',2,3)) as UnitIdNo, Batch as BatchNo,
-		PurchasePrice as Price, Round(a.UserQty*PurchasePrice * (1 - (1-Discount/100) * (1-Discount2/100)),2) as DiscountAmount, SellingPrice as UnitSalesPrice, 
-		Expiry as ExpiryDate, VATAmt as VatAmount, a.VATPercent, Round(a.UserQty*PurchasePrice - a.UserQty*PurchasePrice * (1 - (1-Discount/100) * (1-Discount2/100)) + VatAmt,2) as NetAmount
+SELECT  SlNo As [Sequence], Group_key as PurchaseIdNo, c.IdNo as ProductIdNo, UserQty as Quantity, BonusQty as BonusQuantity, IIf(Unit='B',1,IIf(Unit='S',2,3)) as UnitIdNo, Batch as BatchNo,
+		a.PurchasePrice as Price, Round(UserQTy * a.PurchasePrice,2) - Round(a.CostPrice * a.TotalQty,2) as DiscountAmount, SellingPrice as UnitSalesPrice, 
+		Expiry as ExpiryDate, Round(a.CostPrice * a.TotalQty,2) as NetAmount, VATAmt as VatAmount, a.VATPercent, 0 as 'ExtraDiscount'
 FROM    dbo.PurchaseDetails a
 Left Join ItemDetails b
 on a.Item_Code = b.Item_Code and a.BranchID = b.BranchID

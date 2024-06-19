@@ -36,9 +36,13 @@ Namespace PresentationLayer.Views.Interfaces
 
         Property TransactionDate As Date?
         Property IbLabResultDetails As List(Of IbLabResultDetailView)
+        Property Genders As DataTable
+        Property Nationalities As DataTable
+        Property IbInvoiceDetailEditingAllowed As Boolean
         Event IbLabResultRequested(transactionDate As Date?)
         Event IbLabResultChanged(bindingSource As BindingSource)
         Event FillUpButtonClicked()
+        Event SetupEditableFields(bindingSource As BindingSource)
     End Interface
 
     Public Interface IIbLabResultDetailView

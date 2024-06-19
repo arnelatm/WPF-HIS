@@ -14,12 +14,14 @@ Namespace PresentationLayer.Views.Forms
         'Public Event GetPmrDataAccessRequested(ByRef dataAccessCode As String) Implements IbLabResultView.GetPmrDataAccessRequested
 
         Private _ibLabResultDetails As New List(Of IbLabResultDetailView)
+        Private _genders As DataTable
         Private _doctorId As String
         Private _dataAccessLevel As String = ""
 
         Public Event IbLabResultRequested(transactionDate As Date?) Implements IIbLabResultView.IbLabResultRequested
         Public Event IbLabResultChanged(bindingSource As BindingSource) Implements IIbLabResultView.IbLabResultChanged
         Public Event FillUpButtonClicked() Implements IIbLabResultView.FillUpButtonClicked
+        Public Event SetupEditableFields(bindingSource As BindingSource) Implements IIbLabResultView.SetupEditableFields
 
         Public Sub New()
             'MyBase.New()
@@ -53,6 +55,27 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property IbInvoiceDetailEditingAllowed As Boolean Implements IIbLabResultView.IbInvoiceDetailEditingAllowed
+
+        Public Property Genders As DataTable Implements IIbLabResultView.Genders
+            Get
+                Return _genders
+            End Get
+            Set
+                _genders = Value
+            End Set
+        End Property
+
+        Private _nationalities As DataTable
+        Public Property Nationalities As DataTable Implements IIbLabResultView.Nationalities
+            Get
+                Return _nationalities
+            End Get
+            Set
+                _nationalities = Value
+            End Set
+        End Property
+
         Private Sub BindIbLabResultDisplay()
             SuspendLayout()
             bsIbLabResultDetails.DataSource = Nothing
@@ -62,6 +85,12 @@ Namespace PresentationLayer.Views.Forms
             With DataGridViewIbLabResultDetails
                 .AutoGenerateColumns = False
                 .DataSource = bsIbLabResultDetails
+                dgvGender.DataSource = Genders
+                dgvGender.DisplayMember = "Name"
+                dgvGender.ValueMember = "Code"
+                dgvNationality.DataSource = Nationalities
+                dgvNationality.DisplayMember = "Name"
+                dgvNationality.ValueMember = "Code"
             End With
             ResumeLayout()
         End Sub
@@ -70,8 +99,22 @@ Namespace PresentationLayer.Views.Forms
             RaiseEvent IbLabResultRequested(TransactionDate)
         End Sub
 
-        Private Sub IbLabResultCollectionForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Private Sub IbLabResultForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             RaiseEvent IbLabResultRequested(TransactionDate)
+            RaiseEvent SetupEditableFields(bsIbLabResultDetails)
+            If IbInvoiceDetailEditingALlowed Then
+                dgvPatientName.DisplayOnly = False
+                dgvNationality.DisplayOnly = False
+                dgvProfession.DisplayOnly = False
+                dgvIqamaNo.DisplayOnly = False
+                dgvGender.DisplayOnly = False
+            Else
+                dgvPatientName.DisplayOnly = True
+                dgvNationality.DisplayOnly = True
+                dgvProfession.DisplayOnly = True
+                dgvIqamaNo.DisplayOnly = True
+                dgvGender.DisplayOnly = True
+            End If
             'dgvClinical.ThreeState = True
             ''dgvAge.DisplayOnly = True
             'For Each col In DataGridViewIbLabResultDetails.Columns
@@ -122,11 +165,10 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Protected Overrides Sub CreateMainFieldsDictionary()
-            'MainFieldsDictionary = New Dictionary(Of String, Object) From
-            '    {
-            '    {"DoctorCode", txtDoctorCode},
-            '    {"DoctorName", cboDoctorName}
-            '    }
+            MainFieldsDictionary = New Dictionary(Of String, Object) From
+                {
+                {"Genders", Genders}
+                }
         End Sub
 
         Private Sub cboDoctorName_Validated(sender As Object, e As EventArgs)

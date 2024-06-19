@@ -1,5 +1,6 @@
 ﻿
 
+
 CREATE VIEW [dbo].[MOHReport_View]
   AS
   (SELECT 
@@ -14,7 +15,7 @@ CREATE VIEW [dbo].[MOHReport_View]
   saleType,
   iif(InvoiceType='Cash','CA','CR') as 'BillType',
   Group_Key,
-  transdateenglish,
+  Convert(Date,transdateenglish,111) as 'TransDate',
   transnbr,
   rejected
   FROM [iGroupClinic].[dbo].[AllInvoicesDetails_View] as A

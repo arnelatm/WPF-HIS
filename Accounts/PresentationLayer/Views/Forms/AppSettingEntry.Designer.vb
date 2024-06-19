@@ -41,7 +41,7 @@
             '
             Me.TableLayoutPanel1.BackColor = System.Drawing.Color.Transparent
             Me.TableLayoutPanel1.ColumnCount = 3
-            Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200.0!))
+            Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150.0!))
             Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
             Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
             Me.TableLayoutPanel1.Controls.Add(Me.btnLockGroup, 2, 0)
@@ -53,8 +53,7 @@
             Me.TableLayoutPanel1.Controls.Add(Me.lblSelector2IdNo, 0, 3)
             Me.TableLayoutPanel1.Controls.Add(Me.cboSelector1IdNo, 1, 2)
             Me.TableLayoutPanel1.Controls.Add(Me.lblSelector1IdNo, 0, 2)
-            Me.TableLayoutPanel1.Location = New System.Drawing.Point(16, 70)
-            Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.TableLayoutPanel1.Location = New System.Drawing.Point(12, 57)
             Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
             Me.TableLayoutPanel1.RowCount = 6
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
@@ -62,8 +61,8 @@
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25.0!))
-            Me.TableLayoutPanel1.Size = New System.Drawing.Size(769, 172)
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+            Me.TableLayoutPanel1.Size = New System.Drawing.Size(577, 140)
             Me.TableLayoutPanel1.TabIndex = 5
             '
             'btnLockGroup
@@ -77,12 +76,11 @@
             Me.btnLockGroup.FillType = AATM.Libraries.CBaseControlsLibrary.CButton.eFillType.Solid
             Me.btnLockGroup.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.btnLockGroup.ImageIndex = 0
-            Me.btnLockGroup.Location = New System.Drawing.Point(709, 4)
-            Me.btnLockGroup.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.btnLockGroup.Location = New System.Drawing.Point(533, 3)
             Me.btnLockGroup.Name = "btnLockGroup"
             Me.btnLockGroup.OriginalImageName = Nothing
             Me.btnLockGroup.SecurityKey = ""
-            Me.btnLockGroup.Size = New System.Drawing.Size(31, 26)
+            Me.btnLockGroup.Size = New System.Drawing.Size(23, 21)
             Me.btnLockGroup.TabIndex = 164
             Me.btnLockGroup.Text = ""
             '
@@ -96,7 +94,7 @@
             Me.lblAppSettingGroupSelector.Location = New System.Drawing.Point(1, 1)
             Me.lblAppSettingGroupSelector.Margin = New System.Windows.Forms.Padding(1)
             Me.lblAppSettingGroupSelector.Name = "lblAppSettingGroupSelector"
-            Me.lblAppSettingGroupSelector.Size = New System.Drawing.Size(122, 20)
+            Me.lblAppSettingGroupSelector.Size = New System.Drawing.Size(104, 17)
             Me.lblAppSettingGroupSelector.TabIndex = 11
             Me.lblAppSettingGroupSelector.Text = "Group Selector"
             Me.lblAppSettingGroupSelector.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -111,7 +109,7 @@
             Me.cboAppSettingGroupSelector.DataValue = Nothing
             Me.cboAppSettingGroupSelector.DefaultValue = Nothing
             Me.cboAppSettingGroupSelector.DisplayMember = "Name"
-            Me.cboAppSettingGroupSelector.DropDownHeight = 24
+            Me.cboAppSettingGroupSelector.DropDownHeight = 21
             Me.cboAppSettingGroupSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboAppSettingGroupSelector.Editable = True
             Me.cboAppSettingGroupSelector.EditingMode = False
@@ -128,7 +126,7 @@
             Me.cboAppSettingGroupSelector.IgnoreCase = False
             Me.cboAppSettingGroupSelector.LimitToList = False
             Me.cboAppSettingGroupSelector.LinkedLabel = Nothing
-            Me.cboAppSettingGroupSelector.Location = New System.Drawing.Point(201, 1)
+            Me.cboAppSettingGroupSelector.Location = New System.Drawing.Point(151, 1)
             Me.cboAppSettingGroupSelector.Margin = New System.Windows.Forms.Padding(1)
             Me.cboAppSettingGroupSelector.MaxDropDownItems = 1
             Me.cboAppSettingGroupSelector.Name = "cboAppSettingGroupSelector"
@@ -138,7 +136,7 @@
             Me.cboAppSettingGroupSelector.OverrideDropDownStyleList = False
             Me.cboAppSettingGroupSelector.PreviousSearchTerm = Nothing
             Me.cboAppSettingGroupSelector.PropertySelector = Nothing
-            Me.cboAppSettingGroupSelector.Size = New System.Drawing.Size(503, 29)
+            Me.cboAppSettingGroupSelector.Size = New System.Drawing.Size(378, 24)
             Me.cboAppSettingGroupSelector.SuggestBoxHeight = 200
             Me.cboAppSettingGroupSelector.SuggestCharCount = 0
             Me.cboAppSettingGroupSelector.SuggestListOrderRule = Nothing
@@ -168,7 +166,7 @@
             Me.TxtIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
             Me.TxtIdNo.LinkedLabel = Nothing
-            Me.TxtIdNo.Location = New System.Drawing.Point(201, 35)
+            Me.TxtIdNo.Location = New System.Drawing.Point(151, 28)
             Me.TxtIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.TxtIdNo.MaximumValue = Nothing
             Me.TxtIdNo.MinimumValue = Nothing
@@ -177,7 +175,7 @@
             Me.TxtIdNo.OverrideMaxLength = 0
             Me.TxtIdNo.ReadOnly = True
             Me.TxtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.TxtIdNo.Size = New System.Drawing.Size(117, 26)
+            Me.TxtIdNo.Size = New System.Drawing.Size(88, 23)
             Me.TxtIdNo.TabIndex = 0
             Me.TxtIdNo.Translatable = False
             '
@@ -188,10 +186,10 @@
             Me.lblIdNo.DisplayOnly = True
             Me.lblIdNo.EditingMode = False
             Me.lblIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblIdNo.Location = New System.Drawing.Point(1, 35)
+            Me.lblIdNo.Location = New System.Drawing.Point(1, 28)
             Me.lblIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.lblIdNo.Name = "lblIdNo"
-            Me.lblIdNo.Size = New System.Drawing.Size(98, 20)
+            Me.lblIdNo.Size = New System.Drawing.Size(83, 17)
             Me.lblIdNo.TabIndex = 1
             Me.lblIdNo.Text = "I.D. Number"
             Me.lblIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -208,7 +206,7 @@
             Me.cboSelector2IdNo.DefaultValue = Nothing
             Me.cboSelector2IdNo.DisplayMember = "Name"
             Me.cboSelector2IdNo.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.cboSelector2IdNo.DropDownHeight = 24
+            Me.cboSelector2IdNo.DropDownHeight = 21
             Me.cboSelector2IdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboSelector2IdNo.Editable = True
             Me.cboSelector2IdNo.EditingMode = False
@@ -225,7 +223,7 @@
             Me.cboSelector2IdNo.IgnoreCase = False
             Me.cboSelector2IdNo.LimitToList = False
             Me.cboSelector2IdNo.LinkedLabel = Nothing
-            Me.cboSelector2IdNo.Location = New System.Drawing.Point(201, 94)
+            Me.cboSelector2IdNo.Location = New System.Drawing.Point(151, 79)
             Me.cboSelector2IdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.cboSelector2IdNo.MaxDropDownItems = 1
             Me.cboSelector2IdNo.Name = "cboSelector2IdNo"
@@ -235,7 +233,7 @@
             Me.cboSelector2IdNo.OverrideDropDownStyleList = False
             Me.cboSelector2IdNo.PreviousSearchTerm = Nothing
             Me.cboSelector2IdNo.PropertySelector = Nothing
-            Me.cboSelector2IdNo.Size = New System.Drawing.Size(567, 29)
+            Me.cboSelector2IdNo.Size = New System.Drawing.Size(426, 24)
             Me.cboSelector2IdNo.SuggestBoxHeight = 200
             Me.cboSelector2IdNo.SuggestCharCount = 0
             Me.cboSelector2IdNo.SuggestListOrderRule = Nothing
@@ -254,10 +252,10 @@
             Me.lblSelector2IdNo.DisplayOnly = True
             Me.lblSelector2IdNo.EditingMode = False
             Me.lblSelector2IdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblSelector2IdNo.Location = New System.Drawing.Point(1, 94)
+            Me.lblSelector2IdNo.Location = New System.Drawing.Point(1, 79)
             Me.lblSelector2IdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.lblSelector2IdNo.Name = "lblSelector2IdNo"
-            Me.lblSelector2IdNo.Size = New System.Drawing.Size(85, 20)
+            Me.lblSelector2IdNo.Size = New System.Drawing.Size(72, 17)
             Me.lblSelector2IdNo.TabIndex = 8
             Me.lblSelector2IdNo.Text = "Selector 2"
             Me.lblSelector2IdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -274,7 +272,7 @@
             Me.cboSelector1IdNo.DefaultValue = Nothing
             Me.cboSelector1IdNo.DisplayMember = "Name"
             Me.cboSelector1IdNo.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.cboSelector1IdNo.DropDownHeight = 24
+            Me.cboSelector1IdNo.DropDownHeight = 21
             Me.cboSelector1IdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboSelector1IdNo.Editable = True
             Me.cboSelector1IdNo.EditingMode = False
@@ -291,7 +289,7 @@
             Me.cboSelector1IdNo.IgnoreCase = False
             Me.cboSelector1IdNo.LimitToList = False
             Me.cboSelector1IdNo.LinkedLabel = Nothing
-            Me.cboSelector1IdNo.Location = New System.Drawing.Point(201, 63)
+            Me.cboSelector1IdNo.Location = New System.Drawing.Point(151, 53)
             Me.cboSelector1IdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.cboSelector1IdNo.MaxDropDownItems = 1
             Me.cboSelector1IdNo.Name = "cboSelector1IdNo"
@@ -301,7 +299,7 @@
             Me.cboSelector1IdNo.OverrideDropDownStyleList = False
             Me.cboSelector1IdNo.PreviousSearchTerm = Nothing
             Me.cboSelector1IdNo.PropertySelector = Nothing
-            Me.cboSelector1IdNo.Size = New System.Drawing.Size(567, 29)
+            Me.cboSelector1IdNo.Size = New System.Drawing.Size(426, 24)
             Me.cboSelector1IdNo.SuggestBoxHeight = 200
             Me.cboSelector1IdNo.SuggestCharCount = 0
             Me.cboSelector1IdNo.SuggestListOrderRule = Nothing
@@ -320,10 +318,10 @@
             Me.lblSelector1IdNo.DisplayOnly = True
             Me.lblSelector1IdNo.EditingMode = False
             Me.lblSelector1IdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblSelector1IdNo.Location = New System.Drawing.Point(1, 63)
+            Me.lblSelector1IdNo.Location = New System.Drawing.Point(1, 53)
             Me.lblSelector1IdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.lblSelector1IdNo.Name = "lblSelector1IdNo"
-            Me.lblSelector1IdNo.Size = New System.Drawing.Size(85, 20)
+            Me.lblSelector1IdNo.Size = New System.Drawing.Size(72, 17)
             Me.lblSelector1IdNo.TabIndex = 3
             Me.lblSelector1IdNo.Text = "Selector 1"
             Me.lblSelector1IdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -347,7 +345,7 @@
             Me.txtAppSettingGroupIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtAppSettingGroupIdNo.ForeColor = System.Drawing.Color.Black
             Me.txtAppSettingGroupIdNo.LinkedLabel = Nothing
-            Me.txtAppSettingGroupIdNo.Location = New System.Drawing.Point(16, 247)
+            Me.txtAppSettingGroupIdNo.Location = New System.Drawing.Point(12, 201)
             Me.txtAppSettingGroupIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.txtAppSettingGroupIdNo.MaximumValue = Nothing
             Me.txtAppSettingGroupIdNo.MinimumValue = Nothing
@@ -356,19 +354,18 @@
             Me.txtAppSettingGroupIdNo.OverrideMaxLength = 0
             Me.txtAppSettingGroupIdNo.ReadOnly = True
             Me.txtAppSettingGroupIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtAppSettingGroupIdNo.Size = New System.Drawing.Size(117, 26)
+            Me.txtAppSettingGroupIdNo.Size = New System.Drawing.Size(88, 23)
             Me.txtAppSettingGroupIdNo.TabIndex = 165
             Me.txtAppSettingGroupIdNo.Translatable = False
             Me.txtAppSettingGroupIdNo.Visible = False
             '
             'AppSettingEntry
             '
-            Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+            Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
             Me.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.GreenGradientBackgroundLarge
-            Me.ClientSize = New System.Drawing.Size(801, 263)
+            Me.ClientSize = New System.Drawing.Size(601, 230)
             Me.Controls.Add(Me.txtAppSettingGroupIdNo)
             Me.Controls.Add(Me.TableLayoutPanel1)
-            Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
             Me.Name = "AppSettingEntry"
             Me.Controls.SetChildIndex(Me.TableLayoutPanel1, 0)
             Me.Controls.SetChildIndex(Me.txtAppSettingGroupIdNo, 0)
