@@ -1,10 +1,15 @@
-﻿CREATE VIEW dbo.Contact_View
+﻿
+CREATE VIEW [dbo].[CSEContact_View]
 AS
-SELECT     dbo.CSEContact_View.ContactName, dbo.CSEContact_View.ContactNameAra, dbo.CSEContact_View.ContactCode, dbo.Contact.IdNo, dbo.Contact.PayeeIdNo, dbo.Contact.PayeeType
-FROM        dbo.Contact INNER JOIN
-                  dbo.CSEContact_View ON dbo.Contact.PayeeType = dbo.CSEContact_View.ContactType AND dbo.Contact.PayeeIdNo = dbo.CSEContact_View.ContactIdNo
+(SELECT     'C' as ContactType, IdNo AS ContactIdNo, CustomerCode AS ContactCode, CustomerName AS ContactName, CustomerNameAra AS ContactNameAra
+ FROM        dbo.Customer
+Union
+SELECT     'S',IdNo, SupplierCode, SupplierName, SupplierNameAra FROM dbo.Supplier
+Union
+ SELECT     'E',IdNo, EmployeeCode, EmployeeName, EmployeeNameAra from dbo.Employee 
+ )
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'Contact_View';
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'CSEContact_View';
 
 
 GO
@@ -79,22 +84,12 @@ Begin DesignProperties =
          Left = 0
       End
       Begin Tables = 
-         Begin Table = "Contact"
+         Begin Table = "Customer"
             Begin Extent = 
                Top = 7
                Left = 48
-               Bottom = 315
-               Right = 242
-            End
-            DisplayFlags = 280
-            TopColumn = 0
-         End
-         Begin Table = "CSEContact_View"
-            Begin Extent = 
-               Top = 7
-               Left = 290
-               Bottom = 312
-               Right = 1243
+               Bottom = 243
+               Right = 286
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -109,23 +104,21 @@ Begin DesignProperties =
    End
    Begin CriteriaPane = 
       Begin ColumnWidths = 11
-         Column = 1440
-         Alias = 900
-         Table = 1176
+         Column = 2376
+         Alias = 3432
+         Table = 1170
          Output = 720
          Append = 1400
          NewValue = 1170
-         SortType = 1356
-         SortOrder = 1416
+         SortType = 1350
+         SortOrder = 1410
          GroupBy = 1350
-         Filter = 1356
+         Filter = 1350
          Or = 1350
          Or = 1350
          Or = 1350
       End
    End
 End
-', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'Contact_View';
-
-
+', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'CSEContact_View';
 

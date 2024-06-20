@@ -1601,12 +1601,6 @@
       <DependentUpon>Check Disbursement Journal.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\Check Printing Independent.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Check Printing Independent.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Reports\Check Printing NCB.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

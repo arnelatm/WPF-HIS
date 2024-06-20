@@ -38,7 +38,7 @@ SELECT cid.InvSource
 	  ,InvTransDateEnglish
 	  ,InvBillAmt
 	  ,Rejected
-	  ,CompanyID
+	  ,CID.CompanyID
   FROM [iGroupClinic].[dbo].[AllInvoices_View] as CID
   left join iGroupClinic.Dbo.AllInvoicesSummarized_View B
   ON CID.Group_Key = B.Group_Key and cid.InvSource = b.InvSource
