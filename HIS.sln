@@ -142,8 +142,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UsefulQueries", "UsefulQuer
 		Extract Varchar Fields to Images.sql = Extract Varchar Fields to Images.sql
 		Find all object references for a specific object.sql = Find all object references for a specific object.sql
 		Find all objects with a specific name.sql = Find all objects with a specific name.sql
-		Find All Tables without Primary KEy.sql = Find All Tables without Primary KEy.sql
 		Find all tables with a specific column name.sql = Find all tables with a specific column name.sql
+		Find All Tables without Primary KEy.sql = Find All Tables without Primary KEy.sql
 		Find duplicate fields in a table.sql = Find duplicate fields in a table.sql
 		FindDuplicateValuesInACustomObject = FindDuplicateValuesInACustomObject
 		FindItemInComboboxControlDataSource = FindItemInComboboxControlDataSource
@@ -177,6 +177,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CreateIspdata", "CreateIspd
 		Create Purchase = Create Purchase
 		Create PurchaseDetail = Create PurchaseDetail
 		Create Salt and user.sql = Create Salt and user.sql
+		CreateContactFromScratch.Sql = CreateContactFromScratch.Sql
 		Transfer IGroupCLinic dta to ISPDATA = Transfer IGroupCLinic dta to ISPDATA
 	EndProjectSection
 EndProject
@@ -188,6 +189,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Problems And Solutions", "P
 	ProjectSection(SolutionItems) = preProject
 		Bug on combobox displaymember = Bug on combobox displaymember
 		code 0x0000011b - printng error.txt = code 0x0000011b - printng error.txt
+		Comparison Object Error.txt = Comparison Object Error.txt
 		Error correction for DTC error.pdf = Error correction for DTC error.pdf
 		Problem when arabic menu not appearing.txt = Problem when arabic menu not appearing.txt
 	EndProjectSection
