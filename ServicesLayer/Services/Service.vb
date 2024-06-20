@@ -26,6 +26,9 @@ Namespace Services
         Protected Shared ReadOnly DataRetriever As IDataPageRetriever = Factory.DataRetriever
 
         Public Sub New(objectName As String, Optional bizParam As Object = Nothing, Optional daoParam As Object = Nothing)
+            'If objectName = "UserSecurity" Then
+            '    Debugger.Break()
+            'End If
             If objectName Is Nothing Or objectName = "" Then
                 objectName = "User"
             End If
@@ -118,6 +121,22 @@ Namespace Services
                                                        returnFieldName As String, Optional filter As String = Nothing) As TR Implements IService.GetField
             Return DataDao.GetField(Of TR, TS1, TS2, TS3)(searchValue1, searchValue2, searchValue3, tableName, searchFieldName1, searchFieldName2, searchFieldName3, returnFieldName, filter)
         End Function
+
+        Public Function GetRecordCount(tableName As String, Optional filter As String = Nothing) As Integer Implements IService.GetRecordCount
+            Return DataDao.GetRecordCount(tableName, filter)
+        End Function
+
+        Public Function GetRecordCount(Of TS1)(tableName As String, fieldName1 As String, fieldValue1 As TS1, Optional Filter As String = Nothing) As Integer Implements IService.GetRecordCount
+            Return DataDao.GetRecordCount(Of TS1)(tableName, fieldName1, fieldValue1, Filter)
+        End Function
+
+        Public Function GetRecordCount(Of TS1, TS2)(tableName As String, fieldName1 As String, fieldName2 As String, fieldValue1 As TS1, fieldValue2 As TS2, Optional filter As String = Nothing) As Integer Implements IService.GetRecordCount
+            Return DataDao.GetRecordCount(Of TS1)(tableName, fieldName1, fieldName2, fieldValue1, fieldValue2, filter)
+        End Function
+        Public Function GetRecordCount(Of TS1, TS2, TS3)(tableName As String, fieldName1 As String, fieldName2 As String, fieldName3 As String, fieldValue1 As TS1, fieldValue2 As TS2, fieldValue3 As TS3, Optional filter As String = Nothing) As Integer Implements IService.GetRecordCount
+            Return DataDao.GetRecordCount(Of TS1, TS2)(tableName, fieldName1, fieldName2, fieldName3, fieldValue1, fieldValue2, fieldValue3, filter)
+        End Function
+
 
         Public Function GetHLookup(lookupObj As LookupTable) As List(Of LookupTable.HLookupData)
             If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
@@ -577,10 +596,6 @@ Namespace Services
             Return modelOfPresenter
         End Function
 
-        Public Function GetRecordCount(tableName As String, Optional filter As String = Nothing) As Integer Implements IService.GetRecordCount
-            Return DataDao.GetRecordCount(tableName, filter)
-        End Function
-
         Public Function GetRecordDateTimeStamp(idNo As Int32, tableName As String, Optional ByVal dateTimeStampField As String = "DateTimeStamp") As Object Implements IService.GetRecordDateTimeStamp
             Return DataDao.GetRecordDateTimeStamp(idNo, tableName, dateTimeStampField)
         End Function
@@ -760,8 +775,8 @@ Namespace Services
             Return BaseDao.GetRecordWithIdNo(tableName, fieldList, IdNo)
         End Function
 
-        Public Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int16) As ArrayList Implements IService.GetUserSecurity
-            Return BaseDao.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)
+        Public Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int16, userIdNo As Int16) As ArrayList Implements IService.GetUserSecurity
+            Return BaseDao.GetUserSecurity(securityObjectIdNo, securityGroupIdNo, userIdNo)
         End Function
 
         Public Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Int16) As ArrayList Implements IService.GetUserSecurityForKey

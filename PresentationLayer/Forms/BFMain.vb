@@ -752,9 +752,7 @@ Public Class BfMain
 
     Private Function SetControlSecurityValue(securityIdNo As Integer) As ArrayList
         Dim controlSecurityValues As ArrayList
-
-        controlSecurityValues = Presenter.GetUserSecurity(Convert.ToInt16(securityIdNo),
-                                                             GlobalVariables.SecurityGroupIdNo)
+        controlSecurityValues = Presenter.GetUserSecurity(Convert.ToInt16(securityIdNo), GlobalVariables.SecurityGroupIdNo, GlobalVariables.UserIdNo)
         Return controlSecurityValues
     End Function
 
@@ -880,7 +878,7 @@ Public Class BfMain
     Private Function GetControlSecurityValues(ByRef controlSecurityKey As String) As ArrayList
         Dim controlSecurityObjectIdNo As Int32
         controlSecurityObjectIdNo = Presenter.GetControlSecurityIdNo(controlSecurityKey)
-        Return Presenter.GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo)
+        Return Presenter.GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo, GlobalVariables.UserIdNo)
     End Function
 
     Private Sub SetControlEditability(ByRef cCtrl As Control, ByRef editable As Boolean)
@@ -933,8 +931,7 @@ Public Class BfMain
                     Dim securityIdNo As Int32 = GetControlSecurityIdNo(subMenuName + " > " + controlSecurityKey, True)
                     If securityIdNo <> 0 Then
                         If GlobalVariables.SecurityGroupIdNo <> 0 Then
-                            controlSecurityValues = Presenter.GetUserSecurity(securityIdNo,
-                                                                            GlobalVariables.SecurityGroupIdNo)
+                            controlSecurityValues = Presenter.GetUserSecurity(securityIdNo, GlobalVariables.SecurityGroupIdNo, GlobalVariables.UserIdNo)
                             If controlSecurityValues.Count > 0 Then
                                 ' Visible property stored in first element of the array
                                 isVisible = controlSecurityValues(0)
@@ -1270,6 +1267,28 @@ Public Class BfMain
         childMdiForm.Show()
     End Sub
 
+    Public Sub ForceLooseFocusOnCurrentControl()
+        Dim currentActiveControl As Control = ActiveControl
+        If currentActiveControl IsNot Nothing Then
+            SelectNextControl(currentActiveControl, True, True, True, True)
+        End If
+        Refresh()
+        If currentActiveControl IsNot Nothing Then
+            ActiveControl = currentActiveControl
+        End If
+    End Sub
+
+    Public Sub ForceEndEditForAllGridControls()
+        Dim allControls As New List(Of Control)
+        FindControlRecursive(allControls, Me)
+        For Each cCtrl As Control In allControls
+            If TypeOf cCtrl Is DataGridView Then
+                Dim cGrid As DataGridView = cCtrl
+                cGrid.EndEdit()
+            End If
+        Next
+    End Sub
+
 End Class
 
 Public Class SettingsSaver
@@ -1294,5 +1313,7 @@ Public Class SettingsSaver
         control.Height = _height
         control.Visible = _visible
     End Sub
+
+
 
 End Class

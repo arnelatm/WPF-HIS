@@ -31,6 +31,7 @@ Namespace BusinessLayer
         Public Property ReportGroupIdNo As Int16
         Public Property ReportName As String
         Public Property ReportNameAra As String
+        Public Property ReportOrder As Int16
         Public Property ReportTitle As String
         Public Property ReportTitleAra As String
 

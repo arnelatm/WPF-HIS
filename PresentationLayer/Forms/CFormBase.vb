@@ -261,13 +261,14 @@ Public Class CFormBase
         If _debugSwitch = 1 Then
             Debugger.Break()
         End If
+        ForceLooseFocusOnCurrentControl()
+        ForceEndEditForAllGridControls()
         Dim allControls As New List(Of Control)
-        allControls = FindControlRecursive(allControls, Me)
+        FindControlRecursive(allControls, Me)
         For Each cCtrl As Control In allControls
             If TypeOf cCtrl Is DataGridView Then
                 Dim cGrid As DataGridView = cCtrl
                 cGrid.EndEdit()
-                GridValidator()
             End If
         Next
         Dim saveData As New SaveDataRequested(Me)
@@ -283,10 +284,6 @@ Public Class CFormBase
         If Ea IsNot Nothing Then
             Ea.PublishEvent(New ViewButtonClicked(buttonClicked))
         End If
-    End Sub
-
-    Protected Overridable Sub GridValidator()
-        '
     End Sub
 
     Private Sub BtnPrint_Click(sender As Object, e As EventArgs) Handles btnPrint.Click

@@ -2,11 +2,12 @@
 
 
 
+
 CREATE VIEW [dbo].[ZProduct_View]
 AS
 SELECT 
-Primary_Key,
 IIf(branchid='01',2,1) as 'BranchIdNo',
+Primary_Key,
 Ean_code as 'BarCode',
 1 as 'BaseUnitIdNo',
 Item_code as 'ProductCode',

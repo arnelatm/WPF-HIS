@@ -666,6 +666,19 @@
     <Build Include="dbo\Tables\ReportGroup.sql" />
     <Build Include="dbo\Views\SecurityReportAccess_View.sql" />
     <Build Include="dbo\Views\EmployeeLeaveEarnedLatestApproval_View.sql" />
+    <Build Include="dbo\Tables\Contact.sql" />
+    <Build Include="dbo\Views\EmployeeLastEarnedLeave_View.sql" />
+    <Build Include="dbo\Views\EmployeeApprovedLastEarnedLeave_View.sql" />
+    <Build Include="dbo\Tables\UserAccess.sql" />
+    <Build Include="dbo\Tables\ReportAccessOld.sql" />
+    <Build Include="dbo\Views\SecurityObjectHierarchy_View.sql" />
+    <Build Include="dbo\Views\ReportGroup_View.sql" />
+    <Build Include="dbo\Stored Procedures\UpdateUserAccessTVP.sql" />
+    <Build Include="dbo\User Defined Types\UserAccessUpdate.sql" />
+    <Build Include="dbo\User Defined Types\UserAccessInsert.sql" />
+    <Build Include="dbo\Views\UserAccessResultant_View.sql" />
+    <Build Include="dbo\Views\GroupNUserAccess_View.sql" />
+    <Build Include="dbo\Stored Procedures\InsertUserAccessTVP.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />

@@ -466,15 +466,8 @@ Public Class CFormEntry
         If _debugSwitch = 1 Then
             Debugger.Break()
         End If
-        Dim allControls As New List(Of Control)
-        allControls = FindControlRecursive(allControls, Me)
-        For Each cCtrl As Control In allControls
-            If TypeOf cCtrl Is DataGridView Then
-                Dim cGrid As DataGridView = cCtrl
-                cGrid.EndEdit()
-                GridValidator()
-            End If
-        Next
+        ForceLooseFocusOnCurrentControl()
+        ForceEndEditForAllGridControls()
         Dim saveData As New SaveDataRequested(Me)
         If Ea IsNot Nothing Then
             Ea.PublishEvent(saveData)
@@ -501,10 +494,6 @@ Public Class CFormEntry
         End If
         'RaiseEvent AfterChangeRecord()
         'Me.ResumeDrawingNew()
-    End Sub
-
-    Protected Overridable Sub GridValidator()
-        '
     End Sub
 
     Protected Sub RunAfterChangeRecord()

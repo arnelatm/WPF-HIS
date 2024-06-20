@@ -105,6 +105,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DefaultFieldValueModel.vb" />
+    <Compile Include="UserAccessModel.vb" />
     <Compile Include="GroupAccessModel.vb" />
     <Compile Include="IModelTblColProp.vb" />
     <Compile Include="ModelTblColProp.vb" />
@@ -128,6 +129,7 @@
     <Compile Include="SecurityObjectModel.vb" />
     <Compile Include="TblColPropModel.vb" />
     <Compile Include="UserModel.vb" />
+    <Compile Include="UserSecurityModel.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">

@@ -678,6 +678,12 @@
     <Compile Include="PresentationLayer\Views\Forms\IGroup\ClinicLabSampleForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\IbLabResultForm.Designer.vb">
+      <DependentUpon>IbLabResultForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\IbLabResultForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\IGroup\IbLabSampleForm.Designer.vb">
       <DependentUpon>IbLabSampleForm.vb</DependentUpon>
     </Compile>
@@ -2096,6 +2102,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\ClinicLabSampleForm.resx">
       <DependentUpon>ClinicLabSampleForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\IbLabResultForm.resx">
+      <DependentUpon>IbLabResultForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\IbLabSampleForm.resx">
       <DependentUpon>IbLabSampleForm.vb</DependentUpon>

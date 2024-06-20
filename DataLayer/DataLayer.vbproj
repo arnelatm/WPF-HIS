@@ -114,6 +114,8 @@
     <Compile Include="AdoNet\DB.vb" />
     <Compile Include="AdoNet\DefaultFieldValueDao.vb" />
     <Compile Include="AdoNet\Extensions.vb" />
+    <Compile Include="AdoNet\UserSecurityDao.vb" />
+    <Compile Include="AdoNet\UserAccessDao.vb" />
     <Compile Include="AdoNet\GroupAccessDao.vb" />
     <Compile Include="AdoNet\SaltDao.vb" />
     <Compile Include="AdoNet\SecurityGroupDao.vb" />

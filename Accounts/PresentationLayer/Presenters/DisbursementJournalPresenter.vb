@@ -1042,7 +1042,7 @@ Namespace PresentationLayer.Presenters
                     SetSupplierVatNumber(View.VatNumber, View.PayeeIdNo.ToString(), True)
                 End If
             Else
-                View.VatNumber = ""
+                'View.VatNumber = ""
             End If
         End Sub
 

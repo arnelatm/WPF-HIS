@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{021A8A1A-B69A-4254-9081-12357F20C01B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>AATM.PresentationLayer.Presenters</RootNamespace>
+    <AssemblyName>Presenters</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>Presenters.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>Presenters.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\..\packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="DiffEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c7a34512ecd69090, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\DiffEngine.11.3.0\lib\net461\DiffEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="EmptyFiles, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c7a34512ecd69090, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EmptyFiles.4.4.0\lib\net461\EmptyFiles.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.CodeDom, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.CodeDom.6.0.0\lib\net461\System.CodeDom.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DefaultFieldValuePresenter.vb" />
+    <Compile Include="IViewDataEntry.vb" />
+    <Compile Include="LoginPresenter.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="PresenterBase.vb" />
+    <Compile Include="Presenter.vb" />
+    <Compile Include="UserSecurityPresenter.vb" />
+    <Compile Include="SecurityGroupPresenter.vb" />
+    <Compile Include="SecurityObjectPresenter.vb" />
+    <Compile Include="UserPresenter.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\BusinessLayer\BusinessLayer.vbproj">
+      <Project>{F1004885-D468-41ED-8572-5BA952B9C39E}</Project>
+      <Name>BusinessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\AatmInterfaces\AatmInterfaces.vbproj">
+      <Project>{da82fb86-4f87-4e6e-b460-6141fe79ac23}</Project>
+      <Name>AatmInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\BaseControlsLibrary\BaseControlsLibrary.vbproj">
+      <Project>{58f5ec33-2974-4823-ab62-1d4e5b3ef152}</Project>
+      <Name>BaseControlsLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\CBaseControlsLibrary\CBaseControlsLibrary.vbproj">
+      <Project>{F991561A-78F8-487C-A873-E6436B41D801}</Project>
+      <Name>CBaseControlsLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\GlobalFuncNSub\GlobalFuncNSub.vbproj">
+      <Project>{3F360FF6-9EFF-4F94-9C21-38D9667646AC}</Project>
+      <Name>GlobalFuncNSub</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\HelperLibraries\HelperLibraries.vbproj">
+      <Project>{A7EE826E-E3B4-40A7-8754-285B373F4321}</Project>
+      <Name>HelperLibraries</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\MessagingLibrary\MessagingLibrary.vbproj">
+      <Project>{84437202-3E38-4F75-B8C1-4125852FC4FF}</Project>
+      <Name>MessagingLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ServicesLayer\ServicesLayer.vbproj">
+      <Project>{4B7A1168-E9FA-4360-9607-A2C98255E4C0}</Project>
+      <Name>ServicesLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Events\Events.vbproj">
+      <Project>{5F7FCA73-07BA-444A-BE5D-6117B973AA3D}</Project>
+      <Name>Events</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Models\Models.vbproj">
+      <Project>{6A8692E0-9B9B-4F31-8BA6-0C3DE257F9A4}</Project>
+      <Name>Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Views\Views.vbproj">
+      <Project>{4EEDC5F0-DCA9-4CFB-8926-07D7E5B37FA0}</Project>
+      <Name>Views</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <Import Project="..\..\packages\EmptyFiles.4.4.0\build\EmptyFiles.targets" Condition="Exists('..\..\packages\EmptyFiles.4.4.0\build\EmptyFiles.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\EmptyFiles.4.4.0\build\EmptyFiles.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\EmptyFiles.4.4.0\build\EmptyFiles.targets'))" />
+  </Target>
+</Project>

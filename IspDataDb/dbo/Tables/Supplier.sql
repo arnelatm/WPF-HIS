@@ -54,6 +54,8 @@
 
 
 
+
+
 GO
 CREATE UNIQUE NONCLUSTERED INDEX [IX_SupplierName]
     ON [dbo].[Supplier]([SupplierName] ASC);
@@ -68,3 +70,14 @@ GO
 CREATE UNIQUE NONCLUSTERED INDEX [IX_SupplierNameAra]
     ON [dbo].[Supplier]([SupplierNameAra] ASC);
 
+
+GO
+CREATE TRIGGER [dbo].[TR_Supplier_Add] ON [dbo].[Supplier]
+FOR INSERT
+AS
+
+INSERT INTO Contact
+        (PayeeIdNo, PayeeType)
+    SELECT
+        IdNo, 'S'
+        FROM inserted

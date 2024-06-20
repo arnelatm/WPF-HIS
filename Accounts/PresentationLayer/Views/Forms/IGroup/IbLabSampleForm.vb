@@ -84,9 +84,9 @@ Namespace PresentationLayer.Views.Forms
             'Next
         End Sub
 
-        Private Sub dtpTransactionDate_Validated(sender As Object, e As EventArgs) Handles dtpTransactionDate.Validated
-            'RaiseEvent GetDoctorPatientsRequested()
-        End Sub
+        'Private Sub dtpTransactionDate_Validated(sender As Object, e As EventArgs) Handles dtpTransactionDate.Validated
+        '    RaiseEvent IbLabSamplesRequested(TransactionDate)
+        'End Sub
 
         Private Sub DataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs)
             'With DataGridViewIbLabSample
@@ -137,13 +137,24 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub CheckBoxValueChanged() Handles DataGridViewIbLabSampleDetails.CellValueChanged
-            With DataGridViewIbLabSampleDetails
-                If TypeOf .CurrentCell Is DataGridViewCheckBoxCell Then
-                    RaiseEvent IbLabSampleChanged(bsIbLabSampleDetails)
-                End If
-            End With
+            'With DataGridViewIbLabSampleDetails
+            'If TypeOf .CurrentCell Is DataGridViewCheckBoxCell Then
+            RaiseEvent IbLabSampleChanged(bsIbLabSampleDetails)
+            '    End If
+            'End With
         End Sub
 
+        'Private Sub dtpTransactionDate_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles dtpTransactionDate.Validating
+        '    RaiseEvent IbLabSamplesRequested(TransactionDate)
+        'End Sub
+
+        Private Sub dtpTransactionDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpTransactionDate.ValueChanged
+            RaiseEvent IbLabSamplesRequested(TransactionDate)
+        End Sub
+
+        Private Sub DataGridViewIbLabSampleDetails_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewIbLabSampleDetails.CellContentClick
+
+        End Sub
     End Class
 
 End Namespace

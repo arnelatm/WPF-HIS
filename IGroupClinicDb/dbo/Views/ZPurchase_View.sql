@@ -7,12 +7,14 @@
 
 
 
+
+
 CREATE VIEW [dbo].[ZPurchase_View]
 AS
 SELECT      dbo.PurchaseGroup.Trans_Key AS IdNo, iif(dbo.PurchaseGroup.BranchID='01',2,1) AS BranchIdNo, IsNull(dbo.LinkSupplier.SupplierIdNo,0) as SupplierIdNo,
-			TransNo as ReferenceNo, Cast(dbo.PurchaseGroup.TransDate as Date) AS TransactionDate, dbo.PurchaseGroup.InvoiceAmt AS Amount, 
+			Cast(dbo.PurchaseGroup.TransDate as Date) AS TransactionDate, TransNo as ReferenceNo, dbo.PurchaseGroup.PurchaseCostAmt as AmountBeforeVat,  dbo.PurchaseGroup.InvoiceAmt AS Amount,
 			DateAdd(day,30,Cast(dbo.PurchaseGroup.TransDate as Date)) AS DueDate, dbo.PurchaseGroup.InvoiceNo, Cast(dbo.PurchaseGroup.TransDate as Date) AS InvoiceDate, dbo.SupplierDetails.VATNo as VatNumber, dbo.PurchaseGroup.VATAmt AS VatAmount, 
-            IIf(dbo.PurchaseGroup.PostInStock='Y',1,0) AS Posted, dbo.PurchaseGroup.Create_Date AS DateCreated, dbo.LinkUser.UserIdNo, dbo.LinkWarehouse.WarehouseIdNo as WarehouseIdNo
+            0 as 'ExtraDiscount',0 as 'VatAmountDiscount', dbo.LinkWarehouse.WarehouseIdNo as WarehouseIdNo, IIf(dbo.PurchaseGroup.PostInStock='Y',1,0) AS Posted, Cast(0 as Bit) as 'Cancelled', dbo.PurchaseGroup.Create_Date AS DateCreated, dbo.LinkUser.UserIdNo
 FROM        dbo.PurchaseGroup 
 			LEFT JOIN dbo.SupplierDetails 
 			ON dbo.PurchaseGroup.SupplierId = dbo.SupplierDetails.SupplierId

@@ -72,6 +72,9 @@ Public Interface IBaseDao
     Function GetPrintJobIdNo(reportFileName As String) As Integer
 
     Function GetRecordCount(tableName As String, Optional Filter As String = Nothing) As Integer
+    Function GetRecordCount(Of TS1)(tableName As String, fieldName As String, fieldValue As TS1, Optional filter As String = Nothing) As Integer
+    Function GetRecordCount(Of TS1, TS2)(tableName As String, fieldName1 As String, FieldName2 As String, fieldValue1 As TS1, fieldValue2 As TS2, Optional filter As String = Nothing) As Integer
+    Function GetRecordCount(Of TS1, TS2, TS3)(tableName As String, fieldName1 As String, FieldName2 As String, FieldName3 As String, fieldValue1 As TS1, fieldValue2 As TS2, fieldValue3 As TS3, Optional filter As String = Nothing) As Integer
 
     Function GetRecordDateTimeStamp(idNo As Int32, tableName As String, dateTimeStampField As String) As Object
 
@@ -105,7 +108,7 @@ Public Interface IBaseDao
 
     Function GetSpRecords(spName As String, fieldList As String, sortKey As String, filter As String, ParamArray parameters As Array()) As Object
 
-    Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int16) As ArrayList
+    Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int16, userIdNo As Int16) As ArrayList
 
     Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Int16) As ArrayList
 

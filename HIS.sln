@@ -191,6 +191,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Problems And Solutions", "P
 		code 0x0000011b - printng error.txt = code 0x0000011b - printng error.txt
 		Comparison Object Error.txt = Comparison Object Error.txt
 		Error correction for DTC error.pdf = Error correction for DTC error.pdf
+		Comparison Object Error.txt = Comparison Object Error.txt
 		Problem when arabic menu not appearing.txt = Problem when arabic menu not appearing.txt
 	EndProjectSection
 EndProject

@@ -88,7 +88,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public MainFieldsDictionary As New Dictionary(Of String, Object)
 
-        Public Property IdNo As Int32 Implements IUserView.IdNo
+        Public Property IdNo As Int16 Implements IUserView.IdNo
         Public Property SecurityGroupIdNo As Int16 Implements IUserView.SecurityGroupIdNo
         Public Property EmployeeIdNo As Int32? Implements IUserView.EmployeeIdNo
         Public Property UserName As String Implements IUserView.UserName
@@ -1338,6 +1338,24 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub ToolStripMenuItemReportGroup_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemReportGroup.Click
             RunForm(Of ReportGroupEntry, ReportGroupPresenter(Of ReportGroupModel))()
+        End Sub
+
+        Private Sub ToolStripMenuItemDiagnosticResultEntryIqama_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDiagnosticResultEntryIqama.Click
+            Dim parameter As String = "1"
+            Dim formToRun = New IbLabResultForm(parameter)
+            formToRun.Presenter = New IbLabResultPresenter(Of IbLabResultModel)(formToRun, parameter)
+            formToRun.Show()
+        End Sub
+
+        Private Sub ToolStripMenuItemUsersSecurity_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemUsersSecurity.Click
+            RunForm(Of UserSecurityEntryTv, UserSecurityPresenter(Of UserSecurityModel))()
+        End Sub
+
+        Private Sub ToolStripMenuItemDiagnosticResultEntryBaladiya_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDiagnosticResultEntryBaladiya.Click
+            Dim parameter As String = "2"
+            Dim formToRun = New IbLabResultForm(parameter)
+            formToRun.Presenter = New IbLabResultPresenter(Of IbLabResultModel)(formToRun, parameter)
+            formToRun.Show()
         End Sub
     End Class
 

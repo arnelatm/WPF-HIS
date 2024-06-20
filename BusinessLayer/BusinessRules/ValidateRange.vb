@@ -1,4 +1,5 @@
-﻿Imports AATM.Libraries.GlobalFuncNSub
+﻿Imports System.Globalization
+Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 
 Namespace BusinessRules
@@ -16,13 +17,24 @@ Namespace BusinessRules
         Public Sub New(propertyName As String, min As Object, max As Object, dataType As ValidationDataType)
             MyBase.New(propertyName)
             Dim fieldName = Messaging.TranslateCaption(propertyName.SplitCamelCase)
-            Dim errorMessage = Messaging.GetParametrizedMessage(True, "MsgInvalidRange", {"fieldName", fieldName, "minimumValue", min.ToString(), "maximumValue", max.ToString()})
+            Dim minFieldValue As String = min.ToString()
+            Dim maxFieldValue As String = max.ToString()
+            If TypeOf min Is DateTime Or TypeOf max Is DateTime Then
+                minFieldValue = GregorianShortDateString(min)
+                maxFieldValue = GregorianShortDateString(max)
+            Else
+                minFieldValue = min.ToString()
+                maxFieldValue = max.ToString()
+            End If
+            Dim errorMessage = Messaging.GetParametrizedMessage(True, "MsgInvalidRange", {"fieldName", fieldName, "minimumValue", minFieldValue, "maximumValue", maxFieldValue})
             Me.Min = min
             Me.Max = max
             Me.Operator = [Operator]
             Me.DataType = dataType
             [Error] = errorMessage
         End Sub
+
+
 
         Public Sub New(propertyName As String, errorMessage As String, min As Object, max As Object,
                        [operator] As ValidationOperator, dataType As ValidationDataType)

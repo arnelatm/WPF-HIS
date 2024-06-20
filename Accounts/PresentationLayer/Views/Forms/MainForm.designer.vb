@@ -80,6 +80,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemSecurityGroups = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemSecurityObjects = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemUsers = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemUsersSecurity = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemApplicationSetting = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemEmployee = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemEmployees = New System.Windows.Forms.ToolStripMenuItem()
@@ -156,6 +157,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemLaboratory = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemCbcResultRetrieval = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemDiagnosticSamples = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemDiagnosticResultEntryIqama = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemClinicSamples = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPharmacy = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemDrugSale = New System.Windows.Forms.ToolStripMenuItem()
@@ -211,7 +213,6 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemIqamaCBCResultBySampleNo = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemIqamaCBCResultByInvoiceNo = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemOtherLab = New System.Windows.Forms.ToolStripMenuItem()
-            Me.ToolStripMenuItemOtherReports = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPMRReports = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPrescription = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemDrInvestigationsPrescriptions = New System.Windows.Forms.ToolStripMenuItem()
@@ -227,6 +228,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemProductExpiryReport = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemRequestApproval = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemProductMovement = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemOtherReports = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemUtilities = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemUpdateMenuSecurityObjects = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemRecreateSecurityObjectMenu = New System.Windows.Forms.ToolStripMenuItem()
@@ -259,6 +261,7 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemDiagnosticResultEntryBaladiya = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.AccountsMenu.SuspendLayout()
@@ -521,7 +524,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemSecurity
             '
-            Me.ToolStripMenuItemSecurity.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemSecurityGroups, Me.ToolStripMenuItemSecurityObjects, Me.ToolStripMenuItemUsers, Me.ToolStripMenuItemApplicationSetting})
+            Me.ToolStripMenuItemSecurity.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemSecurityGroups, Me.ToolStripMenuItemSecurityObjects, Me.ToolStripMenuItemUsers, Me.ToolStripMenuItemUsersSecurity, Me.ToolStripMenuItemApplicationSetting})
             Me.ToolStripMenuItemSecurity.Name = "ToolStripMenuItemSecurity"
             resources.ApplyResources(Me.ToolStripMenuItemSecurity, "ToolStripMenuItemSecurity")
             '
@@ -539,6 +542,11 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.ToolStripMenuItemUsers.Name = "ToolStripMenuItemUsers"
             resources.ApplyResources(Me.ToolStripMenuItemUsers, "ToolStripMenuItemUsers")
+            '
+            'ToolStripMenuItemUsersSecurity
+            '
+            Me.ToolStripMenuItemUsersSecurity.Name = "ToolStripMenuItemUsersSecurity"
+            resources.ApplyResources(Me.ToolStripMenuItemUsersSecurity, "ToolStripMenuItemUsersSecurity")
             '
             'ToolStripMenuItemApplicationSetting
             '
@@ -918,7 +926,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemLaboratory
             '
-            Me.ToolStripMenuItemLaboratory.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemCbcResultRetrieval, Me.ToolStripMenuItemDiagnosticSamples, Me.ToolStripMenuItemClinicSamples})
+            Me.ToolStripMenuItemLaboratory.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemCbcResultRetrieval, Me.ToolStripMenuItemDiagnosticSamples, Me.ToolStripMenuItemDiagnosticResultEntryIqama, Me.ToolStripMenuItemDiagnosticResultEntryBaladiya, Me.ToolStripMenuItemClinicSamples})
             Me.ToolStripMenuItemLaboratory.Name = "ToolStripMenuItemLaboratory"
             resources.ApplyResources(Me.ToolStripMenuItemLaboratory, "ToolStripMenuItemLaboratory")
             '
@@ -931,6 +939,11 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.ToolStripMenuItemDiagnosticSamples.Name = "ToolStripMenuItemDiagnosticSamples"
             resources.ApplyResources(Me.ToolStripMenuItemDiagnosticSamples, "ToolStripMenuItemDiagnosticSamples")
+            '
+            'ToolStripMenuItemDiagnosticResultEntryIqama
+            '
+            Me.ToolStripMenuItemDiagnosticResultEntryIqama.Name = "ToolStripMenuItemDiagnosticResultEntryIqama"
+            resources.ApplyResources(Me.ToolStripMenuItemDiagnosticResultEntryIqama, "ToolStripMenuItemDiagnosticResultEntryIqama")
             '
             'ToolStripMenuItemClinicSamples
             '
@@ -1217,11 +1230,6 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemOtherLab.Name = "ToolStripMenuItemOtherLab"
             resources.ApplyResources(Me.ToolStripMenuItemOtherLab, "ToolStripMenuItemOtherLab")
             '
-            'ToolStripMenuItemOtherReports
-            '
-            Me.ToolStripMenuItemOtherReports.Name = "ToolStripMenuItemOtherReports"
-            resources.ApplyResources(Me.ToolStripMenuItemOtherReports, "ToolStripMenuItemOtherReports")
-            '
             'ToolStripMenuItemPMRReports
             '
             Me.ToolStripMenuItemPMRReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPrescription, Me.ToolStripMenuItemDrInvestigationsPrescriptions})
@@ -1300,6 +1308,11 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.ToolStripMenuItemProductMovement.Name = "ToolStripMenuItemProductMovement"
             resources.ApplyResources(Me.ToolStripMenuItemProductMovement, "ToolStripMenuItemProductMovement")
+            '
+            'ToolStripMenuItemOtherReports
+            '
+            Me.ToolStripMenuItemOtherReports.Name = "ToolStripMenuItemOtherReports"
+            resources.ApplyResources(Me.ToolStripMenuItemOtherReports, "ToolStripMenuItemOtherReports")
             '
             'ToolStripMenuItemUtilities
             '
@@ -1468,6 +1481,11 @@ Namespace PresentationLayer.Views.Forms
             '
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
+            '
+            'ToolStripMenuItemDiagnosticResultEntryBaladiya
+            '
+            Me.ToolStripMenuItemDiagnosticResultEntryBaladiya.Name = "ToolStripMenuItemDiagnosticResultEntryBaladiya"
+            resources.ApplyResources(Me.ToolStripMenuItemDiagnosticResultEntryBaladiya, "ToolStripMenuItemDiagnosticResultEntryBaladiya")
             '
             'MainForm
             '
@@ -1725,5 +1743,8 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ToolStripMenuItemEmployeeLeavesEarnedApproval As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemSupplierProductLink As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemReportGroup As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemDiagnosticResultEntryIqama As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemUsersSecurity As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemDiagnosticResultEntryBaladiya As ToolStripMenuItem
     End Class
 End NameSpace

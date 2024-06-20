@@ -442,6 +442,9 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
+        Private Sub floFullEntryArea_Paint(sender As Object, e As PaintEventArgs) Handles floFullEntryArea.Paint
+
+        End Sub
     End Class
 
 End Namespace

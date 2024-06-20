@@ -83,8 +83,11 @@
     [Create_Date]                  DATETIME      DEFAULT (getdate()) NULL,
     [MachineID]                    VARCHAR (20)  DEFAULT (host_name()) NULL,
     [COSTCENTRE]                   VARCHAR (15)  NULL,
+    [ShortName]                    VARCHAR (15)  NULL,
     PRIMARY KEY CLUSTERED ([Primary_Key] ASC)
 );
+
+
 
 
 GO

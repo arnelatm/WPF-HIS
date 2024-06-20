@@ -452,8 +452,8 @@ Namespace AdoNet
                 Dim dateSearch1 As String = dDate.ToString("yyyyMMdd", CultureInfo.InvariantCulture)
                 dDate = DateAndTime.DateAdd(DateInterval.Day, 1, dDate)
                 Dim dateSearch2 As String = dDate.ToString("yyyyMMdd", CultureInfo.InvariantCulture)
-                arrayParameter = {"@dateSearch1", dateSearch1, "@dateSearch2", dateSearch1}
-                sql += searchFieldName & " >= @dateSearch1 and " & searchFieldName & "< @dateSearch2"
+                arrayParameter = {searchParameterName, dateSearch1, searchParameterName, dateSearch1}
+                sql += "(" & searchFieldName & " >= '" & dateSearch1 & "' and " & searchFieldName & " < '" & dateSearch2 & "') "
             Else
                 arrayParameter = {searchParameterName, searchValue}
                 sql += searchFieldName & " = " & searchParameterName
@@ -767,8 +767,7 @@ Namespace AdoNet
             Return GetDb().Scalar(sql)
         End Function
 
-        Public Function GetRecordCount(tableName As String, Optional filter As String = Nothing) As Integer _
-            Implements IBaseDao.GetRecordCount
+        Public Function GetRecordCount(tableName As String, Optional filter As String = Nothing) As Integer Implements IBaseDao.GetRecordCount
             Dim sql As String = ""
             If filter Is Nothing Or filter = "" Then
                 sql = "Select Count(*) FROM [" & tableName & "]"
@@ -776,6 +775,52 @@ Namespace AdoNet
                 sql = "Select Count(*) FROM [" & tableName & "] " + IIf(filter Is Nothing, "", " where " & filter)
             End If
             Return GetDb().Scalar(sql)
+        End Function
+
+        Public Function GetRecordCount(Of TS1)(tableName As String, fieldName1 As String, fieldValue1 As TS1, Optional filter As String = Nothing) As Integer Implements IBaseDao.GetRecordCount
+            Dim sql As String = "Select Count()  FROM [" & tableName & "] Where "
+            Dim condition1 As String = ""
+            Dim obj1 As Object = ComposeSqlCommand(Of TS1)(fieldValue1, fieldName1, condition1)
+            Dim params() As Object = {obj1(0), obj1(1)}
+            sql += condition1
+            Dim retVal = GetDb().Scalar(sql, params)
+            If IsDBNull(retVal) Then
+                Return 0
+            End If
+            Return retVal
+        End Function
+
+
+        Public Function GetRecordCount(Of TS1, TS2)(tableName As String, fieldName1 As String, fieldName2 As String, fieldValue1 As TS1, fieldValue2 As TS2, Optional filter As String = Nothing) As Int32 Implements IBaseDao.GetRecordCount
+            Dim sql As String = "Select Count()  FROM [" & tableName & "] Where "
+            Dim condition1 As String = ""
+            Dim condition2 As String = ""
+            Dim obj1 As Object = ComposeSqlCommand(Of TS1)(fieldValue1, fieldName1, condition1)
+            Dim obj2 As Object = ComposeSqlCommand(Of TS2)(fieldValue2, fieldName2, condition2)
+            Dim params() As Object = {obj1(0), obj1(1), obj2(0), obj2(1)}
+            sql += condition1 & " and " & condition2
+            Dim retVal = GetDb().Scalar(sql, params)
+            If IsDBNull(retVal) Then
+                Return 0
+            End If
+            Return retVal
+        End Function
+
+        Public Function GetRecordCount(Of TS1, TS2, TS3)(tableName As String, fieldName1 As String, fieldName2 As String, fieldName3 As String, fieldValue1 As TS1, fieldValue2 As TS2, fieldValue3 As TS3, Optional filter As String = Nothing) As Int32 Implements IBaseDao.GetRecordCount
+            Dim sql As String = "Select Count()  FROM [" & tableName & "] Where "
+            Dim condition1 As String = ""
+            Dim condition2 As String = ""
+            Dim condition3 As String = ""
+            Dim obj1 As Object = ComposeSqlCommand(Of TS1)(fieldValue1, fieldName1, condition1)
+            Dim obj2 As Object = ComposeSqlCommand(Of TS2)(fieldValue2, fieldName2, condition2)
+            Dim obj3 As Object = ComposeSqlCommand(Of TS3)(fieldValue3, fieldName3, condition3)
+            Dim params() As Object = {obj1(0), obj1(1), obj2(0), obj2(1), obj3(0), obj3(1)}
+            sql += condition1 & " and " & condition2 & " and " & condition3
+            Dim retVal = GetDb().Scalar(sql, params)
+            If IsDBNull(retVal) Then
+                Return 0
+            End If
+            Return retVal
         End Function
 
         Public Function GetRecordDateTimeStamp(idNo As Int32, tableName As String, dateTimeStampField As String) _
@@ -1091,21 +1136,17 @@ Namespace AdoNet
         '            ' Attempt to roll back the transaction.
         '            Try
         '                transaction.Rollback()
-        Public Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int16) As ArrayList _
+        Public Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int16, userIdNo As Int16) As ArrayList _
             Implements IBaseDao.GetUserSecurity
-            Dim params() As Object =
-                    {"@SecurityObjectIdNo", securityObjectIdNo, "@SecurityGroupIdNo", securityGroupIdNo}
-            Dim sql =
-                    " SELECT top 1 Visible, Editable FROM GroupAccess where SecurityObjectIdNo = @SecurityObjectIdNo and SecurityGroupIdNo = @SecurityGroupIdNo"
+            Dim params() As Object = {"@SecurityObjectIdNo", securityObjectIdNo, "@SecurityGroupIdNo", securityGroupIdNo, "@UserIdNo", userIdNo}
+            Dim sql = "SELECT a.securityObjectIdNo,  Cast(Max(Cast(a.Visible as Int)) as Bit) as Visible, Cast(Max(CAST(a.Editable AS iNT)) as Bit) as Editable " &
+                      "FROM UserAccessResultant_View a WHERE securityObjectIdNo = @securityObjectIdNo and (useridno = @UserIdNo or securityGroupIdNo = @SecurityGroupIdNo) " &
+                      "group by securityObjectIdNo"
             Return _db.SqlReadSecurity(sql, params)
         End Function
 
-        '        Catch ex As Exception
-        '            Console.WriteLine("Commit Exception Type: {0}", ex.GetType())
-        '            Console.WriteLine("  Message: {0}", ex.Message)
         Public Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Int16) As ArrayList Implements IBaseDao.GetUserSecurityForKey
-            Dim params() As Object =
-                    {"@SecurityObjectName", securityObjectName, "@SecurityGroupIdNo", securityGroupIdNo}
+            Dim params() As Object = {"@SecurityObjectName", securityObjectName, "@SecurityGroupIdNo", securityGroupIdNo}
             Dim sql = "SELECT top 1 Visible, Editable FROM GroupAccess " &
                       "Left Join SecurityObject " &
                       "on GroupAccess.SecurityObjectIdNo = SecurityObject.IdNo " &
@@ -1626,6 +1667,7 @@ Namespace AdoNet
             End If
             Return code
         End Function
+
 
     End Class
 

@@ -1,0 +1,15 @@
+﻿
+
+
+CREATE VIEW [dbo].[MOHReportDiagnostic_View] as 
+SELECT DISTINCT(CAST(A.RegistrationNo AS VARCHAR)) AS 'FileNoNType',
+a.IBType, 
+a.Sex,
+Convert(Date,a.TransDateEnglish,111) as 'TransDate',
+a.Rejected,
+a.Create_Date, 
+a.border_iqama,
+IIF(B.CountryIOTA LIKE 'SAU','SAUDI','NON-SAUDI') AS 'Nationality' 
+FROM IBInvoiceGroup AS A 
+LEFT OUTER JOIN PatientDetails AS B 
+ON A.RegistrationNo = B.RegistrationNo

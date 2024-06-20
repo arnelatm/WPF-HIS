@@ -7,23 +7,23 @@ Namespace PresentationLayer.Models
     '''     Implements IModel and communicates with WCF Service.
     ''' </summary>
     Public Class PatientModel
-        Property RegistrationNo As Int32
-        Property Series As String
-        Property PatientNameEnglish As String
-        Property Sex As String
+        Public Property RegistrationNo As Int32
+        Public Property Series As String
+        Public Property PatientNameEnglish As String
+        Public Property Sex As String
     End Class
 
     Public Class PatientPrescriptionModel
         Inherits PatientModel
-        Property PrescriptionDetail As List(Of PrescriptionModel)
+        Public Property PrescriptionDetail As List(Of PrescriptionModel)
 
     End Class
 
     Public Class PrescriptionModel
 
-        Property ItemNameEnglish As String
-        Property DosageEnglish As String
-        Property Duration As String
+        Public Property ItemNameEnglish As String
+        Public Property DosageEnglish As String
+        Public Property Duration As String
 
     End Class
 

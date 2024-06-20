@@ -1,9 +1,4 @@
-﻿Imports System.Printing
-Imports AATM.Common.PresentationLayer.Presenters
-Imports AATM.Common.PresentationLayer.Views.Interface
-Imports AATM.Libraries.CBaseControlsLibrary
-Imports AATM.Libraries.GlobalFuncNSub
-Imports System.Management
+﻿Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Common.PresentationLayer.Views.Interfaces
 
 Namespace PresentationLayer.Views.Forms
@@ -159,14 +154,23 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DatabaseName As String Implements IReportView.DatabaseName
             Get
-                Return _databaseName
+                Return txtDataBaseName.Text
             End Get
             Set(value As String)
                 If value Is Nothing OrElse value = "" Then
-                    _databaseName = $"ISPDATA"
+                    txtDataBaseName.Text = $"ISPDATA"
                 Else
-                    _databaseName = value
+                    txtDataBaseName.Text = value
                 End If
+            End Set
+        End Property
+
+        Public Property ReportOrder As Short Implements IReportView.ReportOrder
+            Get
+                Return GlobalFunctions.NumParser(Of Int32)(txtReportOrder.Text)
+            End Get
+            Set
+                txtReportOrder.Text = Convert.ToString(Value)
             End Set
         End Property
 
@@ -178,6 +182,7 @@ Namespace PresentationLayer.Views.Forms
                 {
                 {"Active", chkActive},
                 {"BranchIdNo", txtBranchIdNo},
+                {"DataBaseName", txtDataBaseName},
                 {"DateCreated", txtDateCreated},
                 {"ReportGroupIdNo", cboReportGroupIdNo},
                 {"IdNo", txtIdNo},
@@ -187,6 +192,7 @@ Namespace PresentationLayer.Views.Forms
                 {"ReportCode", txtReportCode},
                 {"ReportFileName", txtReportFileName},
                 {"ReportName", txtReportName},
+                {"ReportOrder", txtReportName},
                 {"ReportNameAra", txtReportNameAra},
                 {"ReportTitle", txtReportTitle},
                 {"ReportTitleAra", txtReportTitleAra}

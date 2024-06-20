@@ -40,22 +40,22 @@ Namespace PresentationLayer.Views.Forms
             '
             'SplitContainer1
             '
-            Me.SplitContainer1.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+            Me.SplitContainer1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
             '
             'SplitContainer1.Panel2
             '
             Me.SplitContainer1.Panel2.Controls.Add(Me.CFlowLayout1)
             Me.SplitContainer1.Panel2.Controls.Add(Me.SecurityGroupView)
-            Me.SplitContainer1.Size = New System.Drawing.Size(1607, 798)
-            Me.SplitContainer1.SplitterDistance = 571
-            Me.SplitContainer1.SplitterWidth = 17
+            Me.SplitContainer1.Size = New System.Drawing.Size(1086, 638)
+            Me.SplitContainer1.SplitterDistance = 385
+            Me.SplitContainer1.SplitterWidth = 13
             '
             'FormTreeView
             '
             Me.FormTreeView.LineColor = System.Drawing.Color.Black
-            Me.FormTreeView.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+            Me.FormTreeView.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
             Me.FormTreeView.RightToLeft = System.Windows.Forms.RightToLeft.No
-            Me.FormTreeView.Size = New System.Drawing.Size(571, 798)
+            Me.FormTreeView.Size = New System.Drawing.Size(385, 638)
             '
             'ImageListTreeView
             '
@@ -72,9 +72,9 @@ Namespace PresentationLayer.Views.Forms
             Me.SecurityGroupView.BackColor = System.Drawing.Color.Transparent
             Me.SecurityGroupView.Dock = System.Windows.Forms.DockStyle.Fill
             Me.SecurityGroupView.Location = New System.Drawing.Point(0, 0)
-            Me.SecurityGroupView.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+            Me.SecurityGroupView.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
             Me.SecurityGroupView.Name = "SecurityGroupView"
-            Me.SecurityGroupView.Size = New System.Drawing.Size(1019, 798)
+            Me.SecurityGroupView.Size = New System.Drawing.Size(688, 638)
             Me.SecurityGroupView.TabIndex = 3
             '
             'btnCheckAllVisible
@@ -82,12 +82,11 @@ Namespace PresentationLayer.Views.Forms
             Me.btnCheckAllVisible.Anchor = System.Windows.Forms.AnchorStyles.None
             Me.btnCheckAllVisible.DesignerSelected = False
             Me.btnCheckAllVisible.ImageIndex = 0
-            Me.btnCheckAllVisible.Location = New System.Drawing.Point(4, 4)
-            Me.btnCheckAllVisible.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.btnCheckAllVisible.Location = New System.Drawing.Point(3, 3)
             Me.btnCheckAllVisible.Name = "btnCheckAllVisible"
             Me.btnCheckAllVisible.OriginalImageName = Nothing
             Me.btnCheckAllVisible.SecurityKey = ""
-            Me.btnCheckAllVisible.Size = New System.Drawing.Size(188, 31)
+            Me.btnCheckAllVisible.Size = New System.Drawing.Size(141, 25)
             Me.btnCheckAllVisible.TabIndex = 4
             Me.btnCheckAllVisible.Text = "Check All Visible"
             '
@@ -96,12 +95,11 @@ Namespace PresentationLayer.Views.Forms
             Me.btnCheckAllEditable.Anchor = System.Windows.Forms.AnchorStyles.None
             Me.btnCheckAllEditable.DesignerSelected = False
             Me.btnCheckAllEditable.ImageIndex = 0
-            Me.btnCheckAllEditable.Location = New System.Drawing.Point(200, 4)
-            Me.btnCheckAllEditable.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.btnCheckAllEditable.Location = New System.Drawing.Point(150, 3)
             Me.btnCheckAllEditable.Name = "btnCheckAllEditable"
             Me.btnCheckAllEditable.OriginalImageName = Nothing
             Me.btnCheckAllEditable.SecurityKey = ""
-            Me.btnCheckAllEditable.Size = New System.Drawing.Size(207, 31)
+            Me.btnCheckAllEditable.Size = New System.Drawing.Size(155, 25)
             Me.btnCheckAllEditable.TabIndex = 5
             Me.btnCheckAllEditable.Text = "Check All Editable"
             '
@@ -110,12 +108,11 @@ Namespace PresentationLayer.Views.Forms
             Me.btnUncheckAllEditable.Anchor = System.Windows.Forms.AnchorStyles.None
             Me.btnUncheckAllEditable.DesignerSelected = False
             Me.btnUncheckAllEditable.ImageIndex = 0
-            Me.btnUncheckAllEditable.Location = New System.Drawing.Point(642, 4)
-            Me.btnUncheckAllEditable.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.btnUncheckAllEditable.Location = New System.Drawing.Point(481, 3)
             Me.btnUncheckAllEditable.Name = "btnUncheckAllEditable"
             Me.btnUncheckAllEditable.OriginalImageName = Nothing
             Me.btnUncheckAllEditable.SecurityKey = ""
-            Me.btnUncheckAllEditable.Size = New System.Drawing.Size(207, 31)
+            Me.btnUncheckAllEditable.Size = New System.Drawing.Size(155, 25)
             Me.btnUncheckAllEditable.TabIndex = 7
             Me.btnUncheckAllEditable.Text = "Uncheck All Editable"
             '
@@ -124,12 +121,11 @@ Namespace PresentationLayer.Views.Forms
             Me.btnUncheckAllVisible.Anchor = System.Windows.Forms.AnchorStyles.None
             Me.btnUncheckAllVisible.DesignerSelected = False
             Me.btnUncheckAllVisible.ImageIndex = 0
-            Me.btnUncheckAllVisible.Location = New System.Drawing.Point(415, 4)
-            Me.btnUncheckAllVisible.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.btnUncheckAllVisible.Location = New System.Drawing.Point(311, 3)
             Me.btnUncheckAllVisible.Name = "btnUncheckAllVisible"
             Me.btnUncheckAllVisible.OriginalImageName = Nothing
             Me.btnUncheckAllVisible.SecurityKey = ""
-            Me.btnUncheckAllVisible.Size = New System.Drawing.Size(219, 31)
+            Me.btnUncheckAllVisible.Size = New System.Drawing.Size(164, 25)
             Me.btnUncheckAllVisible.TabIndex = 6
             Me.btnUncheckAllVisible.Text = "Uncheck All Visible"
             '
@@ -141,17 +137,16 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout1.Controls.Add(Me.btnUncheckAllVisible)
             Me.CFlowLayout1.Controls.Add(Me.btnUncheckAllEditable)
             Me.CFlowLayout1.Dock = System.Windows.Forms.DockStyle.Bottom
-            Me.CFlowLayout1.Location = New System.Drawing.Point(0, 752)
-            Me.CFlowLayout1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.CFlowLayout1.Location = New System.Drawing.Point(0, 601)
             Me.CFlowLayout1.Name = "CFlowLayout1"
-            Me.CFlowLayout1.Size = New System.Drawing.Size(1019, 46)
+            Me.CFlowLayout1.Size = New System.Drawing.Size(688, 37)
             Me.CFlowLayout1.TabIndex = 8
             '
             'SecurityGroupEntryTv
             '
-            Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
-            Me.ClientSize = New System.Drawing.Size(1607, 853)
-            Me.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
+            Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+            Me.ClientSize = New System.Drawing.Size(1086, 693)
+            Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
             Me.Name = "SecurityGroupEntryTv"
             Me.Text = "Security Group Maintenance"
             Me.SplitContainer1.Panel1.ResumeLayout(False)
@@ -160,8 +155,8 @@ Namespace PresentationLayer.Views.Forms
             Me.SplitContainer1.ResumeLayout(False)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             Me.CFlowLayout1.ResumeLayout(False)
-            Me.ResumeLayout(false)
-        Me.PerformLayout
+            Me.ResumeLayout(False)
+            Me.PerformLayout
 
 End Sub
 

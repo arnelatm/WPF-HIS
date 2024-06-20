@@ -57,7 +57,7 @@ Namespace AdoNet
             New SecurityGroup() With {
             .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
             .Notes = Extensions.AsString(reader("Notes")),
-            .ParentIdNo = Extensions.AsNullable(Of Int16?)(reader("ParentIdNo")),
+            .ParentIdNo = Extensions.AsInt(Of Int16)(reader("ParentIdNo")),
             .SecurityGroupCode = Extensions.AsString(reader("SecurityGroupCode")),
             .SecurityGroupName = Extensions.AsString(reader("SecurityGroupName")),
             .SecurityGroupNameAra = Extensions.AsString(reader("SecurityGroupNameAra"))}

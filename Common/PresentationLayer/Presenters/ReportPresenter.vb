@@ -1,10 +1,7 @@
 ﻿Imports System.Globalization
-Imports AATM.Common.BusinessLayer
-Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Views.Interfaces
 Imports AATM.Common.ServiceLayer
 Imports AATM.Libraries
-Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Forms
 Imports AATM.PresentationLayer.Views
 
