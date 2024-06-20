@@ -19,6 +19,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property ReportGroupIdNo As Int16
         Property ReportName As String
         Property ReportNameAra As String
+        Property ReportOrder As Int16
         Property ReportTitle As String
         Property ReportTitleAra As String
 

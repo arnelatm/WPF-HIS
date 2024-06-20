@@ -97,13 +97,15 @@ Namespace PresentationLayer.Presenters
         Implements ISubscriber(Of DgvItemsChanged)
 
         Private _ibLabResultDetailDao As New IbLabResultDetailDao
+        Private _IbType As String
 
         Public Sub New()
 
         End Sub
 
-        Public Sub New(itemView As IIbLabResultView)
+        Public Sub New(itemView As IIbLabResultView, IbType As String)
             MyBase.New(itemView)
+            _IbType = IbType
             Service = New AccountsService("IbLabResult")
             Service.SaveConnectionString()
             Service.SetConnectionString($"IGROUPCLINIC")
@@ -243,7 +245,7 @@ Namespace PresentationLayer.Presenters
             If String.IsNullOrEmpty(View.TransactionDate) Then
                 IbLabResultModel = Nothing
             Else
-                IbLabResultModel = Service.GetParametrized(Of IbLabResultModel)({View.TransactionDate})
+                IbLabResultModel = Service.GetParametrized(Of IbLabResultModel)({View.TransactionDate, _IbType})
             End If
             GlobalVariables.Mapper.Map(IbLabResultModel, View)
         End Sub

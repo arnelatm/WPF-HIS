@@ -63,7 +63,7 @@ Namespace PresentationLayer.Views.Forms
         Public Property BranchIdNo As Short Implements IReportView.BranchIdNo
         Public Property DateCreated As Date Implements IReportView.DateCreated
         Public Property DatabaseName As String Implements IReportView.DatabaseName
-
+        Public Property ReportOrder As Short Implements IReportView.ReportOrder
 
 #End Region
 

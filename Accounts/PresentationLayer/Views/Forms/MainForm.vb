@@ -1340,12 +1340,22 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of ReportGroupEntry, ReportGroupPresenter(Of ReportGroupModel))()
         End Sub
 
-        Private Sub DiagnosticResultEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDiagnosticResultEntry.Click
-            RunForm(Of IbLabResultForm, IbLabResultPresenter(Of IbLabResultModel))()
+        Private Sub ToolStripMenuItemDiagnosticResultEntryIqama_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDiagnosticResultEntryIqama.Click
+            Dim parameter As String = "1"
+            Dim formToRun = New IbLabResultForm(parameter)
+            formToRun.Presenter = New IbLabResultPresenter(Of IbLabResultModel)(formToRun, parameter)
+            formToRun.Show()
         End Sub
 
         Private Sub ToolStripMenuItemUsersSecurity_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemUsersSecurity.Click
             RunForm(Of UserSecurityEntryTv, UserSecurityPresenter(Of UserSecurityModel))()
+        End Sub
+
+        Private Sub ToolStripMenuItemDiagnosticResultEntryBaladiya_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDiagnosticResultEntryBaladiya.Click
+            Dim parameter As String = "2"
+            Dim formToRun = New IbLabResultForm(parameter)
+            formToRun.Presenter = New IbLabResultPresenter(Of IbLabResultModel)(formToRun, parameter)
+            formToRun.Show()
         End Sub
     End Class
 

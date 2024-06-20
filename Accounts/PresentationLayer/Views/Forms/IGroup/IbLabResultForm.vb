@@ -17,19 +17,21 @@ Namespace PresentationLayer.Views.Forms
         Private _genders As DataTable
         Private _doctorId As String
         Private _dataAccessLevel As String = ""
+        Private _ibType As String
 
         Public Event IbLabResultRequested(transactionDate As Date?) Implements IIbLabResultView.IbLabResultRequested
         Public Event IbLabResultChanged(bindingSource As BindingSource) Implements IIbLabResultView.IbLabResultChanged
         Public Event FillUpButtonClicked() Implements IIbLabResultView.FillUpButtonClicked
         Public Event SetupEditableFields(bindingSource As BindingSource) Implements IIbLabResultView.SetupEditableFields
 
-        Public Sub New()
+        Public Sub New(pIbType As String)
             'MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
             SingleData = True
             QueryOnly = True
             DisplaySetup()
+            _ibType = pIbType
         End Sub
 
         Private Sub DisplaySetup()

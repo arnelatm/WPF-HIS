@@ -102,14 +102,18 @@ Namespace DataLayer.AdoNet
             If parameter(0) Is Nothing Then
                 AATM.Libraries.MessagingLibrary.Messaging.Show("MsgDateCannotBeBlank")
                 Return Nothing
+            ElseIf parameter(1) Is Nothing Then
+                MessageBox.Show("Please provide IBType parameter.")
+                Return Nothing
             End If
             Dim transactionDate As Date = parameter(0)
+            Dim ibType As String = parameter(1)
             Dim sql As String
             Dim data As New IbLabResult
             Dim transactionDateString As String = transactionDate.ToString("yyyy/MM/dd")
             data.TransactionDate = transactionDate
-            Dim params() As Object = {"@TransactionDate", transactionDateString}
-            sql = $"SELECT Row_Number() Over (Order by Trans_key) as 'Sequence',IdNo,Trans_Key,Sex,TransactionDate,LabNo,PatientName,CountryIOTA,PassportNumber,Profession,Border_Iqama,Clinical,XRay,TBSputum,HIVEliza,HCVEliza,HBSAgEliza,Malaria,VDRL,WIdal,Pregnancy,BilharziasisUrine,BilharziasisStool,SHigella,Cholera from IbLabResultList_View where TransactionDate = @TransactionDate order by Trans_key"
+            Dim params() As Object = {"@TransactionDate", transactionDateString, "@IbType", ibType}
+            sql = $"SELECT Row_Number() Over (Order by Trans_key) as 'Sequence',IdNo,Trans_Key,Sex,TransactionDate,LabNo,PatientName,CountryIOTA,PassportNumber,Profession,Border_Iqama,Clinical,XRay,TBSputum,HIVEliza,HCVEliza,HBSAgEliza,Malaria,VDRL,WIdal,Pregnancy,BilharziasisUrine,BilharziasisStool,SHigella,Cholera from IbLabResultList_View where TransactionDate = @TransactionDate and IbType = @IbType order by Trans_key"
             data.IbLabResultDetails = _db.Read(sql, MakeIbLabResultDetails, params).ToList()
             Return data
         End Function
