@@ -57,21 +57,21 @@ Namespace PresentationLayer.Presenters
             Dim specialAccount As String
             specialAccount = Service.GetFieldWithIdNo(accountIdNo, "Account", "SpecialAccount")
             If specialAccount = EnumToCode(SpecialAccountSelection.AccountsPayable) Then
-                MakeVarDataSources({New Object() {"Payee_View", "PayeeByCode", "PayeeIdNo,PayeeName,PayeeCode", "PayeeType = 'S'"}})
+                MakeVarDataSources({New Object() {"Contact_View", "PayeeByCode", "IdNo,ContactName,ContactCode", "PayeeType = 'S'"}})
             ElseIf specialAccount = EnumToCode(SpecialAccountSelection.AccountsReceivable) Then
-                MakeVarDataSources({New Object() {"Payee_View", "PayeeByCode", "PayeeIdNo,PayeeName,PayeeCode", "PayeeType = 'C'"}})
+                MakeVarDataSources({New Object() {"Contact_View", "PayeeByCode", "IdNo,ContactName,ContactCode", "PayeeType = 'C'"}})
             ElseIf specialAccount = EnumToCode(SpecialAccountSelection.EmployeeLoan) Then
-                MakeVarDataSources({New Object() {"Payee_View", "PayeeByCode", "PayeeIdNo,PayeeName,PayeeCode", "PayeeType = 'E'"}})
+                MakeVarDataSources({New Object() {"Contact_View", "PayeeByCode", "IdNo,ContactName,ContactCode", "PayeeType = 'E'"}})
             End If
         End Sub
 
         Protected Overrides Sub CreateDataSources()
             MakeVarDataSources({New Object() {"Account", "AccountsByCode", Nothing, "DetailAccount=1"},
             New Object() {"RevCostCenter", "RevCostCentersByCode", Nothing, Nothing},
-            New Object() {"Payee_View", "PayeeByCode", "PayeeIdNo,PayeeName,PayeeCode", Nothing, Nothing},
-            New Object() {"Payee_View", "CustomerByCode", "PayeeIdNo,PayeeName,PayeeCode", "PayeeType = 'C'"},
-            New Object() {"Payee_View", "SupplierByCode", "PayeeIdNo,PayeeName,PayeeCode", "PayeeType = 'S'"},
-            New Object() {"Payee_View", "EmployeeByCode", "PayeeIdNo,PayeeName,PayeeCode", "PayeeType = 'E'"}})
+            New Object() {"Contact_View", "PayeeByCode", "IdNo,ContactName,ContactCode", Nothing, Nothing},
+            New Object() {"Contact_View", "CustomerByCode", "IdNo,ContactName,ContactCode", "PayeeType = 'C'", Nothing},
+            New Object() {"Contact_View", "SupplierByCode", "IdNo,ContactName,ContactCode", "PayeeType = 'S'", Nothing},
+            New Object() {"Contact_View", "EmployeeByCode", "IdNo,ContactName,ContactCode", "PayeeType = 'E'", Nothing}})
         End Sub
 
 
@@ -169,11 +169,11 @@ Namespace PresentationLayer.Presenters
                             retValue = False
                             Exit For
                         ElseIf specialAccount IsNot Nothing AndAlso invalidAccounts.Contains(specialAccount) Then
-                            Dim lineNumber As String = item.Sequence.ToString()
-                            Dim entryNames As String = Messaging.TranslateCaption("Accounts Payable") + "/" + Messaging.TranslateCaption("Accounts Receivable") + "/" + Messaging.TranslateCaption("Employee Accounts")
-                            Dim variables = {"lineNumber", lineNumber, "entryNames", entryNames}
-                            Messaging.ShowPmMessage(True, "MsgAccountsNotAllowed", variables)
-                            retValue = False
+                            'Dim lineNumber As String = item.Sequence.ToString()
+                            'Dim entryNames As String = Messaging.TranslateCaption("Accounts Payable") + "/" + Messaging.TranslateCaption("Accounts Receivable") + "/" + Messaging.TranslateCaption("Employee Accounts")
+                            'Dim variables = {"lineNumber", lineNumber, "entryNames", entryNames}
+                            'Messaging.ShowPmMessage(True, "MsgAccountsNotAllowed", variables)
+                            'retValue = False
                         End If
                     Next
                 End If

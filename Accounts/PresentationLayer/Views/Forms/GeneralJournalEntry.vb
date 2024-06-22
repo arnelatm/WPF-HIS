@@ -191,7 +191,7 @@ Namespace PresentationLayer.Views.Forms
             End With
             With DataGridViewJournalItems.Columns
                 dgvSequence.DisplayOnly = True
-                dgvAccountIdNo.DataSource = _AccountsByCode
+                dgvAccountIdNo.DataSource = AccountsByCode
                 dgvAccountIdNo.DisplayMember = "Name"
                 dgvAccountIdNo.ValueMember = "IdNo"
                 dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
