@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33815.320
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "CascadingComboBox", "CascadingComboBox.vbproj", "{BF8384A1-BEA9-4134-90F1-45127A658D81}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BF8384A1-BEA9-4134-90F1-45127A658D81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF8384A1-BEA9-4134-90F1-45127A658D81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF8384A1-BEA9-4134-90F1-45127A658D81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF8384A1-BEA9-4134-90F1-45127A658D81}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E22DB743-0A34-4835-833A-2FBC0DBDFB33}
+	EndGlobalSection
+EndGlobal

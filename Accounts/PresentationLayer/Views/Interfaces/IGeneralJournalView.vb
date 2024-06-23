@@ -23,7 +23,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property SupplierByCode As Object
         Property EmployeeByCode As Object
         Property PayeeByCode As Object
-        Event AccountIdChanged(accountIdNo As Int32)
+        Event AccountIdChanged(bsJournalItems As BindingSource)
 
     End Interface
 

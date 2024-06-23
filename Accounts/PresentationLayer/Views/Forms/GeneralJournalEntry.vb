@@ -1,4 +1,5 @@
 ﻿Imports System.Globalization
+Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
@@ -12,7 +13,8 @@ Namespace PresentationLayer.Views.Forms
         Private _footer As DgvFooter
         Private _journalItems As List(Of JournalItemView)
         Private ReadOnly _closingEntry As Boolean
-        Public Event AccountIdChanged(accountIdNo As Int32) Implements IGeneralJournalView.AccountIdChanged
+        Public Event AccountIdChanged(bsJournalItems As BindingSource) Implements IGeneralJournalView.AccountIdChanged
+        Private _selectedCombo As CtComboBox
 
         Public Sub New(closingEntry As Boolean)
             ' This call is required by the designer.
@@ -30,6 +32,27 @@ Namespace PresentationLayer.Views.Forms
                 Return _closingEntry
             End Get
         End Property
+
+        Private Sub dataGridView1_EditingControlShowing(ByVal sender As Object, ByVal e As Windows.Forms.DataGridViewEditingControlShowingEventArgs) Handles DataGridViewJournalItems.EditingControlShowing
+            If Equals(DataGridViewJournalItems.Columns(DataGridViewJournalItems.CurrentCell.ColumnIndex).Name, "dgvPayIdNo") Then
+                _selectedCombo = TryCast(e.Control, CtComboBox)
+                If _selectedCombo IsNot Nothing Then
+                    Dim selectedPayeeIdNo = CType(_selectedCombo, CtComboBox)
+                    Dim payeeCell As CDgvComboBoxCell = CType(DataGridViewJournalItems.CurrentCell, CDgvComboBoxCell)
+                    If bsJournalItems.Current.SpecialAccount = EnumToCode(SpecialAccountSelection.AccountsPayable) Then
+                        payeeCell.DataSource = SupplierByCode
+                    ElseIf bsJournalItems.Current.SpecialAccount = EnumToCode(SpecialAccountSelection.AccountsReceivable) Then
+                        payeeCell.DataSource = CustomerByCode
+                    ElseIf bsJournalItems.Current.SpecialAccount = EnumToCode(SpecialAccountSelection.EmployeeLoan) Then
+                        payeeCell.DataSource = EmployeeByCode
+                    Else
+                        payeeCell.Value = Nothing
+                    End If
+                    bsJournalItems.ResetCurrentItem()
+                End If
+            End If
+        End Sub
+
 
 #Region "Fields"
 
@@ -235,7 +258,7 @@ Namespace PresentationLayer.Views.Forms
                 If .CurrentRow IsNot Nothing Then
                     Select Case .CurrentCell.OwningColumn.Name.ToLower()
                         Case $"dgvaccountidno"
-                            RaiseEvent AccountIdChanged(DataGridViewJournalItems.CurrentCell.Value)
+                            RaiseEvent AccountIdChanged(bsJournalItems) ' DataGridViewJournalItems.CurrentCell.Value)
                         Case $"dgvdebit"
                             UpdateTotals()
                             SendKeys.Send("{TAB}")

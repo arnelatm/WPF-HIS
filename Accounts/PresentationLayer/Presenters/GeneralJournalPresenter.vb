@@ -1,6 +1,7 @@
 ﻿Imports System.Globalization
 Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
+Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
@@ -53,16 +54,8 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
-        Private Sub OnPayeeIdNoChanged(accountIdNo As Integer)
-            Dim specialAccount As String
-            specialAccount = Service.GetFieldWithIdNo(accountIdNo, "Account", "SpecialAccount")
-            If specialAccount = EnumToCode(SpecialAccountSelection.AccountsPayable) Then
-                MakeVarDataSources({New Object() {"Contact_View", "PayeeByCode", "IdNo,ContactName,ContactCode", "PayeeType = 'S'"}})
-            ElseIf specialAccount = EnumToCode(SpecialAccountSelection.AccountsReceivable) Then
-                MakeVarDataSources({New Object() {"Contact_View", "PayeeByCode", "IdNo,ContactName,ContactCode", "PayeeType = 'C'"}})
-            ElseIf specialAccount = EnumToCode(SpecialAccountSelection.EmployeeLoan) Then
-                MakeVarDataSources({New Object() {"Contact_View", "PayeeByCode", "IdNo,ContactName,ContactCode", "PayeeType = 'E'"}})
-            End If
+        Private Sub OnPayeeIdNoChanged(bs As BindingSource)
+            bs.Current.SpecialAccount = Service.GetFieldWithIdNo(bs.Current.AccountIdNo, "Account", "SpecialAccount")
         End Sub
 
         Protected Overrides Sub CreateDataSources()
@@ -84,10 +77,6 @@ Namespace PresentationLayer.Presenters
             language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
 
             currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
-            'View.TotalCredits = 0
-            'For Each item In View.JournalItems
-            '    View.TotalCredits = View.TotalCredits + item.Credit
-            'Next
             If language = "ar" Then
                 totalCreditAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
             Else
@@ -142,10 +131,6 @@ Namespace PresentationLayer.Presenters
         Protected Overrides Function IsBizDataValid() As Boolean
             Dim retValue As Boolean = False
             If MyBase.IsBizDataValid() Then
-                Dim invalidAccounts As String = EnumToCode(SpecialAccountSelection.AccountsPayable) + "|" + EnumToCode(SpecialAccountSelection.AccountsReceivable) + "|" +
-                                                EnumToCode(SpecialAccountSelection.AdvancesToSupplier) + "|" + EnumToCode(SpecialAccountSelection.CustomerAdvances) + "|" +
-                                                EnumToCode(SpecialAccountSelection.AccountsPayableDiscount) + "|" + EnumToCode(SpecialAccountSelection.AccountsReceivableDiscount) + "|" +
-                                                EnumToCode(SpecialAccountSelection.EmployeeLoan)
                 Dim specialAccount As String
                 Dim account As AccountModel
                 Dim dateToday As DateTime = Now()
@@ -157,7 +142,7 @@ Namespace PresentationLayer.Presenters
                 ElseIf IsDateRangeValid("General Journal", View.TransactionDate, lastPostingDate, dateToday) = DialogResult.No Then
                     retValue = False
                 Else
-                    For Each item In View.JournalItems
+                    For Each item As JournalItemView In View.JournalItems
                         If item.AccountIdNo Is Nothing OrElse item.AccountIdNo = 0 Then
                             specialAccount = Nothing
                         Else
@@ -168,12 +153,20 @@ Namespace PresentationLayer.Presenters
                             MessageBox.Show(String.Format("Error in line {0:N0}. Cannot save entries with blank account id.", item.Sequence.ToString()))
                             retValue = False
                             Exit For
-                        ElseIf specialAccount IsNot Nothing AndAlso invalidAccounts.Contains(specialAccount) Then
-                            'Dim lineNumber As String = item.Sequence.ToString()
-                            'Dim entryNames As String = Messaging.TranslateCaption("Accounts Payable") + "/" + Messaging.TranslateCaption("Accounts Receivable") + "/" + Messaging.TranslateCaption("Employee Accounts")
-                            'Dim variables = {"lineNumber", lineNumber, "entryNames", entryNames}
-                            'Messaging.ShowPmMessage(True, "MsgAccountsNotAllowed", variables)
-                            'retValue = False
+                        ElseIf item.SpecialAccount IsNot Nothing AndAlso item.PayIdNo = 0 Then
+                            Dim lineNumber As String = item.Sequence.ToString()
+                            Dim messageString As String = ""
+                            If item.SpecialAccount = EnumToCode(SpecialAccountSelection.AccountsPayable) Then
+                                messageString = Messaging.TranslateCaption("Accounts Payable")
+                            ElseIf item.SpecialAccount = EnumToCode(SpecialAccountSelection.AccountsReceivable) Then
+                                messageString = Messaging.TranslateCaption("Accounts Receivable")
+                            ElseIf item.SpecialAccount = EnumToCode(SpecialAccountSelection.EmployeeLoan) Then
+                                messageString = Messaging.TranslateCaption("Employee Loan")
+                            End If
+                            If messageString <> "" Then
+                                MessageBox.Show(String.Format("Error in line {0:N0}. Cannot save because {1} must have payee entered.", item.Sequence.ToString(), messageString))
+                                retValue = False
+                            End If
                         End If
                     Next
                 End If

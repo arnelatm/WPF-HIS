@@ -1273,8 +1273,12 @@ Public Class BfMain
             SelectNextControl(currentActiveControl, True, True, True, True)
         End If
         Refresh()
-        If currentActiveControl IsNot Nothing Then
-            ActiveControl = currentActiveControl
+        If currentActiveControl IsNot Nothing AndAlso currentActiveControl.Visible AndAlso currentActiveControl.Enabled Then
+            Try
+                ActiveControl = currentActiveControl
+            Catch ex As Exception
+
+            End Try
         End If
     End Sub
 
