@@ -51,7 +51,20 @@ Namespace PresentationLayer.Presenters
             DtUpdateTable.Columns.Add("Sequence", GetType(Int16))
 
             AddHandler view.AccountIdChanged, AddressOf OnPayeeIdNoChanged
+            AddHandler view.EditingAccountIdNo, AddressOf OnEditingAccountIdNo
 
+        End Sub
+
+        Private Sub OnEditingAccountIdNo(bs As BindingSource)
+            If bs.Current.SpecialAccount = EnumToCode(SpecialAccountSelection.AccountsPayable) Then
+                View.CurrentPayeeDataSource = MakeVarDataSources1({"Contact_View", "IdNo,ContactName,ContactCode", "PayeeType = 'S'", Nothing})
+            ElseIf bs.Current.SpecialAccount = EnumToCode(SpecialAccountSelection.AccountsReceivable) Then
+                View.CurrentPayeeDataSource = MakeVarDataSources1({"Contact_View", "IdNo,ContactName,ContactCode", "PayeeType = 'C'", Nothing})
+            ElseIf bs.Current.SpecialAccount = EnumToCode(SpecialAccountSelection.EmployeeLoan) Then
+                View.CurrentPayeeDataSource = MakeVarDataSources1({"Contact_View", "IdNo,ContactName,ContactCode", "PayeeType = 'E'", Nothing})
+            Else
+                bs.Current.PayIdNo = Nothing
+            End If
         End Sub
 
         Private Sub OnPayeeIdNoChanged(bs As BindingSource)
@@ -61,10 +74,10 @@ Namespace PresentationLayer.Presenters
         Protected Overrides Sub CreateDataSources()
             MakeVarDataSources({New Object() {"Account", "AccountsByCode", Nothing, "DetailAccount=1"},
             New Object() {"RevCostCenter", "RevCostCentersByCode", Nothing, Nothing},
-            New Object() {"Contact_View", "PayeeByCode", "IdNo,ContactName,ContactCode", Nothing, Nothing},
-            New Object() {"Contact_View", "CustomerByCode", "IdNo,ContactName,ContactCode", "PayeeType = 'C'", Nothing},
-            New Object() {"Contact_View", "SupplierByCode", "IdNo,ContactName,ContactCode", "PayeeType = 'S'", Nothing},
-            New Object() {"Contact_View", "EmployeeByCode", "IdNo,ContactName,ContactCode", "PayeeType = 'E'", Nothing}})
+            New Object() {"Contact_View", "PayeeByCode", "IdNo,ContactName,ContactCode", Nothing, Nothing}})
+            'New Object() {"Contact_View", "CustomerByCode", "IdNo,ContactName,ContactCode", "PayeeType = 'C'", Nothing},
+            'New Object() {"Contact_View", "SupplierByCode", "IdNo,ContactName,ContactCode", "PayeeType = 'S'", Nothing},
+            'New Object() {"Contact_View", "EmployeeByCode", "IdNo,ContactName,ContactCode", "PayeeType = 'E'", Nothing}})
         End Sub
 
 

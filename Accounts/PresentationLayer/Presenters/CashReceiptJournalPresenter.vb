@@ -1,5 +1,4 @@
 ﻿Imports System.Globalization
-Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
@@ -67,48 +66,68 @@ Namespace PresentationLayer.Presenters
                                               {"IdNo", GetType(Int32)},
                                               {"Sequence", GetType(Int16)}})
 
-            AddHandler view.AutoApplyAmount, AddressOf OnAutoApplyAmount
+            AddHandler view.AutoApplyAmountRequested, AddressOf OnAutoApplyAmountRequested
             AddHandler view.AddCustomerOpenInvoices, AddressOf OnAddCustomerOpenInvoices
             AddHandler view.FirstLineUpdateNeeded, AddressOf OnFirstLineUpdateNeeded
             AddHandler view.ReceiptTypeChanged, AddressOf MakePayorIdNoDataSource
+            AddHandler view.AccountIdNoChanged, AddressOf OnAccountIdNoChanged
+            AddHandler view.DebitAmountChanged, AddressOf OnDebitAmountChanged
+            AddHandler view.CreditAmountChanged, AddressOf OnCreditAmountChanged
+            'AddHandler view.OpenInvoiceDataRequested, AddressOf OnOpenInvoiceDataRequested
+            AddHandler view.ContactIdNoChanged, AddressOf OnContactIdNoChanged
 
+            view.CashReceiptAccountCount = GetCrAccountCount()
         End Sub
 
+
+
+        Public Property JournalCode As String = "CR"
+
         Protected Overrides Sub CreateDataSources()
+            MakeControlDataSources({{New Object() {"Contact_View", "ContactIdNo", "IdNo,ContactName,ContactCode", Nothing, Nothing}},
+                                    {New Object() {"Contact_View", "Payee", "IdNo,ContactName,ContactCode", Nothing, Nothing}}})
             MakeVarDataSources({New Object() {"Account", "AccountsByCode", Nothing, Nothing},
-            New Object() {"RevCostCenter", "RevCostCentersByCode", Nothing, Nothing},
-            New Object() {"Employee", "EmployeesByName", Nothing, Nothing},
-            New Object() {"Customer", "CustomersByName", Nothing, Nothing},
-            New Object() {"Supplier", "SuppliersByName", Nothing, Nothing}})
+            New Object() {"RevCostCenter", "RevCostCentersByCode", Nothing, Nothing}})
+            'New Object() {"Employee", "EmployeesByName", Nothing, Nothing},
+            'New Object() {"Customer", "CustomersByName", Nothing, Nothing},
+            'New Object() {"Supplier", "SuppliersByName", Nothing, Nothing}})
+            'New Object() {"Contact_View", "ContactByName", "IdNo,ContactName,ContactCode", Nothing, Nothing},
             CreateEnumDataSource(Of ReceiptTypeSelection)("PayorType")
             CreateSpecialAccountDataSource("AccountIdNo", {EnumToCode(SpecialAccountSelection.Bank), EnumToCode(SpecialAccountSelection.Cash), EnumToCode(SpecialAccountSelection.CheckingAccount)})
             CreateSpecialAccountDataSource("DiscountAccountIdNo", {EnumToCode(SpecialAccountSelection.AccountsReceivableDiscount)})
+        End Sub
+
+        Public Sub CrLanguageChanged() Handles MyBase.LanguageChanged
+            UpdateJournalCodeDisplay()
+        End Sub
+
+        Private Sub UpdateJournalCodeDisplay()
+            If GlobalVariables.RightToLeftLayout Then
+                View.JournalCodeDisplay = GetLocalizedPrefix(JournalCode)
+            Else
+                View.JournalCodeDisplay = JournalCode
+            End If
         End Sub
 
         Public Function GetCustomerAdvancesAccountIdNo()
             Return GetRecordFieldWithKey(EnumToCode(SpecialAccountSelection.CustomerAdvances), "Account", "SpecialAccount", "IdNo")
         End Function
 
-        Public Property JournalCode As String
+        Private Function GetCrAccountCount() As Int16
+            Dim retVal As Int16
+            Dim specialAccountList As String = EnumToCode(SpecialAccountSelection.Bank) + "," + EnumToCode(SpecialAccountSelection.Cash) +
+                                               "," + EnumToCode(SpecialAccountSelection.CheckingAccount)
+            Dim filter As String = ConvertSpecialAccountsToFilter(specialAccountList)
+            retVal = Service.GetRecordCount("Account", filter)
+            Return retVal
+        End Function
 
-        Public ReadOnly Property CrAccountCount As Int16
-            Get
-                Dim specialAccountList As String = EnumToCode(SpecialAccountSelection.Bank) + "," + EnumToCode(SpecialAccountSelection.Cash) +
-                                                   "," + EnumToCode(SpecialAccountSelection.CheckingAccount)
-                'Dim accounts = EnumToCode(SpecialAccountSelection.Bank) + "," + EnumToCode(SpecialAccountSelection.Cash) +
-                '               "," + EnumToCode(SpecialAccountSelection.CheckingAccount)
-                'Dim cdAccounts = GetAccountTypesList(accounts)
-                'Return cdAccounts.Count()
-                Dim filter As String = ConvertSpecialAccountsToFilter(specialAccountList)
-                Return Service.GetRecordCount("Account", filter)
-            End Get
-        End Property
 
-        Public ReadOnly Property DefaultCashReceiptAccount As Int16
+        Private ReadOnly Property DefaultCashReceiptAccount As Int16
             Get
                 Dim retVal As String = Nothing
                 If View.AccountIdNo = 0 Then
-                    If CrAccountCount >= 1 Then
+                    If View.CashReceiptAccountCount >= 1 Then
                         retVal = GetRecordFieldWithKey(EnumToCode(SpecialAccountSelection.Bank), "Account",
                                                        "SpecialAccount", "IdNo")
                         If retVal Is Nothing Then
@@ -126,48 +145,6 @@ Namespace PresentationLayer.Presenters
             End Get
         End Property
 
-        Public Sub OnBeforeSave() Handles MyBase.BeforeSave
-            If Not CancelSave Then
-                If CodeToEnum(Of ReceiptTypeSelection)(View.PayorType) <> ReceiptTypeSelection.AccountsReceivable Then
-                    CustomObjToDataTables(View.JournalItems, DtInsertTable, DtUpdateTable, AddressOf JournalItemFillData,
-                                     AddressOf JournalItemFilter)
-                    View.UnApplied = 0
-                    View.Applied = View.Amount
-                    If DtOiInsertTable IsNot Nothing Then
-                        DtOiInsertTable.Clear()
-                    End If
-                    If DtOiUpdateTable IsNot Nothing Then
-                        DtOiUpdateTable.Clear()
-                    End If
-                Else
-                    MakeJournalItem()
-                    CustomObjToDataTables(View.JournalItems, DtInsertTable, DtUpdateTable, AddressOf JournalItemFillData,
-                                     AddressOf JournalItemFilter)
-                    CustomObjToDataTables(View.CsrOiItems, DtOiInsertTable, DtOiUpdateTable, AddressOf CsrOiFillData,
-                                     AddressOf CsrOiItemFilter)
-                End If
-                For Each item In View.JournalItems
-                    If item.Equals(DBNull.Value) Then
-                        item.Notes = ""
-                    End If
-                    If item.Notes Is Nothing Then
-                        item.Notes = ""
-                    End If
-                Next
-            End If
-        End Sub
-
-        Public Sub OnBeforeValidate() Handles MyBase.BeforeValidate
-            'If CodeToEnum(Of ReceiptTypeSelection)(View.PayorType) = ReceiptTypeSelection.AccountsReceivable Then
-            '    View.TotalDebits = 0
-            '    View.TotalCredits = 0
-            '    For Each ji In View.CsrOiItems
-            '        View.TotalDebits += ji.Amount + ji.DiscountTaken
-            '    Next
-            '    View.TotalCredits = View.TotalDebits
-            'End If
-            View.UnApplied = View.Amount - View.Applied
-        End Sub
 
         Public Sub SaveChildren(ByRef retVal As Integer) _
             Handles MyBase.RecordUpdatedSuccessfully, MyBase.RecordAddedSuccessfully
@@ -309,35 +286,6 @@ Namespace PresentationLayer.Presenters
                                    "Language")
             cForm.Show()
         End Sub
-
-        Public Sub AutoApplyAmount()
-            Dim amountToApply = View.Amount
-            'Dim appliedAmount As Decimal = 0D
-            For Each item In View.CsrOiItems
-                If amountToApply = 0D Then
-                    item.Amount = 0D
-                    item.DiscountTaken = 0D
-                    item.Balance = item.PreviousBalance
-                Else
-                    If item.PreviousBalance <= amountToApply Then
-                        amountToApply -= item.PreviousBalance
-                        item.Amount = item.PreviousBalance
-                        item.DiscountTaken = 0D
-                        item.Balance = 0D
-                    Else
-                        item.Amount = amountToApply
-                        item.DiscountTaken = 0D
-                        item.Balance = item.PreviousBalance - amountToApply
-                        amountToApply = 0D
-                    End If
-                End If
-            Next item
-        End Sub
-
-        'Private Sub OnUserDeletedRow()
-        '    Dim payeeTypeEnum = CodeToEnum(Of ReceiptTypeSelection)(View.PayorType)
-        '    UpdateVatAmount(View.JournalItems)
-        'End Sub
 
         Private Sub MakeJournalItem()
             If CodeToEnum(Of ReceiptTypeSelection)(View.PayorType) = ReceiptTypeSelection.AccountsReceivable Then
@@ -734,24 +682,24 @@ Namespace PresentationLayer.Presenters
             Return _journalItemService.GetRecordsWithGroupIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
         End Function
 
-        Public Function GetCustomerOpenInvoices(dView As List(Of CsrOiItemView)) As List(Of CsrOiItemView)
-            Dim dModel As New List(Of CsrOiItemModel)
-            Dim dOriginalModel As New List(Of CsrOiItemModel)
-            Dim nSeq As Integer
-            GlobalVariables.Mapper.Map(dView, dModel)
-            nSeq = dView.Count()
-            If EditMode Then
-                If View.PayorIdNo = OriginalModel.PayorIdNo AndAlso View.PayorType = OriginalModel.PayorType Then
-                    ' need to add the original items because if items are already paid in the original data they will not be added if there is already a full or partial payment
-                    AddOpenInvoices(True, OriginalModel.CsrOiItems, dModel, nSeq)
-                    nSeq = dModel.Count()
-                End If
-            End If
-            Dim unpaidInvoices = Service.GetOpenInvoices(Of CsrOiItemModel)(View.PayorIdNo)
-            AddOpenInvoices(False, unpaidInvoices, dModel, nSeq)
-            GlobalVariables.Mapper.Map(dModel, dView)
-            Return dView
-        End Function
+        'Public Function GetCustomerOpenInvoices(dView As List(Of CsrOiItemView)) As List(Of CsrOiItemView)
+        '    Dim dModel As New List(Of CsrOiItemModel)
+        '    Dim dOriginalModel As New List(Of CsrOiItemModel)
+        '    Dim nSeq As Integer
+        '    GlobalVariables.Mapper.Map(dView, dModel)
+        '    nSeq = dView.Count()
+        '    If EditMode Then
+        '        If View.PayorIdNo = OriginalModel.PayorIdNo AndAlso View.PayorType = OriginalModel.PayorType Then
+        '            ' need to add the original items because if items are already paid in the original data they will not be added if there is already a full or partial payment
+        '            AddOpenInvoices(True, OriginalModel.CsrOiItems, dModel, nSeq)
+        '            nSeq = dModel.Count()
+        '        End If
+        '    End If
+        '    Dim unpaidInvoices = Service.GetOpenInvoices(Of CsrOiItemModel)(View.PayorIdNo)
+        '    AddOpenInvoices(False, unpaidInvoices, dModel, nSeq)
+        '    GlobalVariables.Mapper.Map(dModel, dView)
+        '    Return dView
+        'End Function
 
         Public Function GetCustomerOpenInvoices(ByRef customerIdNo As Int32?) As List(Of CsrOiItemModel)
             If customerIdNo Is Nothing Then
@@ -760,33 +708,6 @@ Namespace PresentationLayer.Presenters
                 Return Service.GetOpenInvoices(Of CsrOiItemModel)(customerIdNo)
             End If
         End Function
-
-        Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
-            View.TransactionDate = Date.Now()
-            If View.JournalItems IsNot Nothing Then
-                View.JournalItems.Clear()
-            Else
-                View.JournalItems = New List(Of JournalItemView)
-            End If
-            Dim item As New JournalItemView With {
-                    .JournalIdNo = View.IdNo,
-                    .Sequence = 1,
-                    .AccountIdNo = Nothing,
-                    .Credit = 0,
-                    .Debit = View.Amount,
-                    .RevCostCenterIdNo = 0,
-                    .Notes = ""
-                    }
-            View.JournalItems.Add(item)
-            If View.CsrOiItems IsNot Nothing Then
-                View.CsrOiItems.Clear()
-            Else
-                View.CsrOiItems = New List(Of CsrOiItemView)
-            End If
-            If View.AccountIdNo <= 0 Then
-                View.AccountIdNo = DefaultCashReceiptAccount
-            End If
-        End Sub
 
         Private Sub JournalItemFillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
             workRow("AccountIdNo") = itemDataView.AccountIdNo
@@ -911,16 +832,44 @@ Namespace PresentationLayer.Presenters
             Return item
         End Function
 
-        Private Sub OnBeforeMappingData(dataModel As Object) Handles MyBase.BeforeMappingData
-            ' need to do this because the Mapping source part of this program maps the PayeeIdNo first before
-            ' the ReceiptType so in order to override this part we need to retrieve the ReceiptType first
-            ' because when assigning the cboPayorIdNo the datasource must be correct that is why
-            ' we need to set the DataSource part of the cboPayorIdNo before we can assign the PayorIdNo
-            View.PayorType = dataModel.PayorType
-            MakePayorIdNoDataSource(dataModel.PayorType)
-            'CallByName(View, "SetPayorDataSource", CallType.Method, View.PayorType)
-            View.PayorIdNo = dataModel.PayorIdNo
+
+        Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
+            View.TransactionDate = Date.Now()
+            If View.JournalItems IsNot Nothing Then
+                View.JournalItems.Clear()
+            Else
+                View.JournalItems = New List(Of JournalItemView)
+            End If
+            Dim item As New JournalItemView With {
+                    .JournalIdNo = View.IdNo,
+                    .Sequence = 1,
+                    .AccountIdNo = Nothing,
+                    .Credit = 0,
+                    .Debit = View.Amount,
+                    .RevCostCenterIdNo = 0,
+                    .Notes = ""
+                    }
+            View.JournalItems.Add(item)
+            If View.CsrOiItems IsNot Nothing Then
+                View.CsrOiItems.Clear()
+            Else
+                View.CsrOiItems = New List(Of CsrOiItemView)
+            End If
+            If View.AccountIdNo <= 0 Then
+                View.AccountIdNo = DefaultCashReceiptAccount
+            End If
         End Sub
+
+        'Private Sub OnBeforeMappingData(dataModel As Object) Handles MyBase.BeforeMappingData
+        '    ' need to do this because the Mapping source part of this program maps the PayeeIdNo first before
+        '    ' the PayorType so in order to override this part we need to retrieve the PayroType first
+        '    ' because when assigning the cboPayorIdNo the datasource must be correct that is why
+        '    ' we need to set the DataSource part of the cboPayorIdNo before we can assign the PayorIdNo
+        '    View.PayorType = dataModel.PayorType
+        '    MakePayorIdNoDataSource(dataModel.PayorType)
+        '    'CallByName(View, "SetPayorDataSource", CallType.Method, View.PayorType)
+        '    View.ContactIdNo = dataModel.ContactIdNo
+        'End Sub
 
         Private Sub OnFirstLineUpdateNeeded()
             If EditMode Or AddMode Then
@@ -943,6 +892,87 @@ Namespace PresentationLayer.Presenters
                 End If
             End If
         End Sub
+
+        'Private Sub OnOpenInvoiceDataRequested(bs As BindingSource)
+        '    bs.DataSource = GetCustomerOpenInvoices(View.CsrOiItems)
+        'End Sub
+
+        Private Sub OnAutoApplyAmountRequested(bsCsrOiItems As BindingSource)
+            Dim amountToApply = View.Amount
+            For Each item As CsrOiItemModel In bsCsrOiItems
+                If amountToApply = 0D Then
+                    item.Amount = 0D
+                    item.DiscountTaken = 0D
+                    item.Balance = item.PreviousBalance
+                Else
+                    If item.PreviousBalance <= amountToApply Then
+                        amountToApply -= item.PreviousBalance
+                        item.Amount = item.PreviousBalance
+                        item.DiscountTaken = 0D
+                        item.Balance = 0D
+                    Else
+                        item.Amount = amountToApply
+                        item.DiscountTaken = 0D
+                        item.Balance = item.PreviousBalance - amountToApply
+                        amountToApply = 0D
+                    End If
+                End If
+            Next item
+        End Sub
+
+        Public Sub OnBeforeSave() Handles MyBase.BeforeSave
+            If Not CancelSave Then
+                If CodeToEnum(Of ReceiptTypeSelection)(View.PayorType) <> ReceiptTypeSelection.AccountsReceivable Then
+                    CustomObjToDataTables(View.JournalItems, DtInsertTable, DtUpdateTable, AddressOf JournalItemFillData,
+                                     AddressOf JournalItemFilter)
+                    View.UnApplied = 0
+                    View.Applied = View.Amount
+                    If DtOiInsertTable IsNot Nothing Then
+                        DtOiInsertTable.Clear()
+                    End If
+                    If DtOiUpdateTable IsNot Nothing Then
+                        DtOiUpdateTable.Clear()
+                    End If
+                Else
+                    MakeJournalItem()
+                    CustomObjToDataTables(View.JournalItems, DtInsertTable, DtUpdateTable, AddressOf JournalItemFillData,
+                                     AddressOf JournalItemFilter)
+                    CustomObjToDataTables(View.CsrOiItems, DtOiInsertTable, DtOiUpdateTable, AddressOf CsrOiFillData,
+                                     AddressOf CsrOiItemFilter)
+                End If
+                For Each item In View.JournalItems
+                    If item.Equals(DBNull.Value) Then
+                        item.Notes = ""
+                    End If
+                    If item.Notes Is Nothing Then
+                        item.Notes = ""
+                    End If
+                Next
+            End If
+        End Sub
+
+        Public Sub OnBeforeValidate() Handles MyBase.BeforeValidate
+            'If CodeToEnum(Of ReceiptTypeSelection)(View.PayorType) = ReceiptTypeSelection.AccountsReceivable Then
+            '    View.TotalDebits = 0
+            '    View.TotalCredits = 0
+            '    For Each ji In View.CsrOiItems
+            '        View.TotalDebits += ji.Amount + ji.DiscountTaken
+            '    Next
+            '    View.TotalCredits = View.TotalDebits
+            'End If
+            View.UnApplied = View.Amount - View.Applied
+        End Sub
+
+
+        Private Sub OnUserDeletedRow(sender)
+            Dim payorTypeEnum As ReceiptTypeSelection = CodeToEnum(Of ReceiptTypeSelection)(View.PayorType)
+            If payorTypeEnum = ReceiptTypeSelection.AccountsReceivable Or payorTypeEnum = ReceiptTypeSelection.Customer Then
+                UpdateOutputVatAmount(View.JournalItems)
+            ElseIf payorTypeEnum = ReceiptTypeSelection.SupplierRefund Then
+                UpdateInputVatAmount(View.JournalItems)
+            End If
+        End Sub
+
 
         Private Sub OnSuccessfulDelete(idNo As Int32) Handles MyBase.SuccessfulDelete
             ' ReSharper disable once VBUseMethodAny.1
@@ -1041,41 +1071,31 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub MakePayorIdNoDataSource(payorType As String)
-            Dim x As ReceiptTypeSelection = CodeToEnum(Of ReceiptTypeSelection)(payorType)
-            Select Case x
-                Case ReceiptTypeSelection.AccountsReceivable
-                    MakeVarDataSources({New Object() {"Customer", "PayorDataSource", Nothing, Nothing}})
-                Case ReceiptTypeSelection.Employee
-                    MakeVarDataSources({New Object() {"Employee", "PayorDataSource", Nothing, Nothing}})
-                Case ReceiptTypeSelection.Customer, ReceiptTypeSelection.AccountsReceivable
-                    MakeVarDataSources({New Object() {"Customer", "PayorDataSource", Nothing, Nothing}})
-                Case ReceiptTypeSelection.SupplierRefund
-                    MakeVarDataSources({New Object() {"Supplier", "PayorDataSource", Nothing, Nothing}})
-                Case Else
-                    MakeVarDataSources({New Object() {"Customer", "PayorDataSource", Nothing, Nothing}})
-                    View.PayorDataSource = Nothing
-            End Select
+            Dim saveContactidNo As Int32? = 0
+            saveContactidNo = View.ContactIdNo
+            View.ContactIdNo = 1
+            MakeControlDataSources({New Object() {"Contact_View", "ContactIdNo", "IdNo,ContactName,ContactCode", Nothing, Nothing}})
+            View.ContactIdNo = saveContactidNo
+            'MakeVarDataSource({{New Object() {"Contact_View", "ContactIdNo", "IdNo,ContactName,ContactCode", Nothing, Nothing}}})
+            'Dim x As ReceiptTypeSelection = CodeToEnum(Of ReceiptTypeSelection)(payorType)
+            'MakeVarDataSource({New Object() {"Contact_View", "ContactIdNo", "IdNo,ContactName,ContactCode", Nothing, Nothing}})
+            'Select Case x
+            '    Case ReceiptTypeSelection.AccountsReceivable
+            '        MakeVarDataSources({New Object() {"Customer", "PayorDataSource", Nothing, Nothing}})
+            '    Case ReceiptTypeSelection.Employee
+            '        MakeVarDataSources({New Object() {"Employee", "PayorDataSource", Nothing, Nothing}})
+            '    Case ReceiptTypeSelection.Customer, ReceiptTypeSelection.AccountsReceivable
+            '        MakeVarDataSources({New Object() {"Customer", "PayorDataSource", Nothing, Nothing}})
+            '    Case ReceiptTypeSelection.SupplierRefund
+            '        MakeVarDataSources({New Object() {"Supplier", "PayorDataSource", Nothing, Nothing}})
+            '    Case Else
+            '        MakeVarDataSources({New Object() {"Customer", "PayorDataSource", Nothing, Nothing}})
+            '        View.PayorDataSource = Nothing
+            'End Select
         End Sub
 
 
-        'Public Function GetCustomerOpenInvoices(dView As List(Of CsrOiItemView)) As List(Of CsrOiItemView)
-        '    Dim dModel As New List(Of CsrOiItemModel)
-        '    Dim dOriginalModel As New List(Of CsrOiItemModel)
-        '    Dim nSeq As Integer
-        '    GlobalVariables.Mapper.Map(dView, dModel)
-        '    nSeq = dView.Count()
-        '    If EditMode Then
-        '        If View.PayorIdNo = OriginalModel.PayorIdNo AndAlso View.PayorType = OriginalModel.PayorType Then
-        '            ' need to add the original items because if items are already paid in the original data they will not be added if there is already a full or partial payment
-        '            AddOpenInvoices(True, OriginalModel.CsrOiItems, dModel, nSeq)
-        '            nSeq = dModel.Count()
-        '        End If
-        '    End If
-        '    Dim unpaidInvoices = GetCustomerOpenInvoices(View.PayorIdNo)
-        '    AddOpenInvoices(False, unpaidInvoices, dModel, nSeq)
-        '    GlobalVariables.Mapper.Map(dModel, dView)
-        '    Return dView
-        'End Function
+
 
         'Public Overrides Function IsOkToEditRecord() As Boolean
         '    Dim result As Boolean = True
@@ -1114,6 +1134,127 @@ Namespace PresentationLayer.Presenters
             End If
             Return retValue
         End Function
+
+
+        Private Sub OnAccountIdNoChanged(sender As Object, e As DataGridViewCellEventArgs)
+            Dim bs As BindingSource = DirectCast(sender.DataSource, BindingSource)
+            Dim accountIdNo = bs.Current.AccountIdNo
+            If accountIdNo IsNot Nothing Then
+                Dim ji As JournalItemView = DirectCast(bs.Current, JournalItemView)
+                MakePayTypeAndSpecialAccount(ji, accountIdNo)
+                UpdateInputVatAmount(View.JournalItems)
+            End If
+        End Sub
+
+        Private Sub OnCreditAmountChanged(sender As Object, e As DataGridViewCellEventArgs)
+            Dim bs As BindingSource = DirectCast(sender.DataSource, BindingSource)
+            MakeDebitAmount(View.JournalItems(e.RowIndex), bs.Current.Debit)
+            View.VatAmount = UpdateInputVatAmount(View.JournalItems)
+        End Sub
+
+        Private Sub OnDebitAmountChanged(sender As Object, e As DataGridViewCellEventArgs)
+            Dim bs As BindingSource = DirectCast(sender.DataSource, BindingSource)
+            MakeCreditAmount(View.JournalItems(e.RowIndex), bs.Current.Credit)
+            View.VatAmount = UpdateInputVatAmount(View.JournalItems)
+        End Sub
+
+        Private Sub OnContactIdNoChanged(bs As BindingSource)
+            Dim dModel As New List(Of CsrOiItemModel)
+            Dim dView As New List(Of CsrOiItemView)
+            Dim dOriginalModel As New List(Of CsrOiItemModel)
+            Dim nSeq As Integer
+            If View.PayorType IsNot Nothing AndAlso View.PayorType = EnumToCode(ReceiptTypeSelection.AccountsReceivable) Then
+                If EditMode Or AddMode Then
+
+                    GlobalVariables.Mapper.Map(dView, dModel)
+                    nSeq = dView.Count()
+                    If View.PayorIdNo = OriginalModel.PayorIdNo AndAlso View.PayorType = OriginalModel.PayorType Then
+                        ' need to add the original items because if items are already paid in the original data they will not be added if there is already a full or partial payment
+                        AddOpenInvoices(True, OriginalModel.CsrOiItems, dModel, nSeq)
+                        nSeq = dModel.Count()
+                    End If
+
+                    Dim unpaidInvoices = GetCustomerOpenInvoices(View.PayorIdNo)
+                    AddOpenInvoices(False, unpaidInvoices, dModel, nSeq)
+                    GlobalVariables.Mapper.Map(dModel, dView)
+
+                    If View.PayorType Is Nothing Then
+
+                        View.PayorIdNo = 0
+                    Else
+                        View.PayorIdNo = GetPayorIdNo(View.ContactIdNo, View.PayorType)
+                        bs.DataSource = GetCustomerOpenInvoices(View.PayorIdNo)
+                        View.VatAmount = UpdateInputVatAmount(View.JournalItems)
+                    End If
+                Else
+                    ' nothing to do, data already displayed
+                End If
+            Else
+                GlobalVariables.Mapper.Map(dModel, dView)
+            End If
+        End Sub
+
+
+        Public Function GetCustomerOpenInvoices(dView As List(Of CsrOiItemView)) As List(Of CsrOiItemView)
+            Dim dModel As New List(Of CsrOiItemModel)
+            Dim dOriginalModel As New List(Of CsrOiItemModel)
+            Dim nSeq As Integer
+            GlobalVariables.Mapper.Map(dView, dModel)
+            nSeq = dView.Count()
+            If EditMode Then
+                If View.PayorIdNo = OriginalModel.PayorIdNo AndAlso View.PayorType = OriginalModel.PayorType Then
+                    ' need to add the original items because if items are already paid in the original data they will not be added if there is already a full or partial payment
+                    AddOpenInvoices(True, OriginalModel.CsrOiItems, dModel, nSeq)
+                    nSeq = dModel.Count()
+                End If
+            End If
+            Dim unpaidInvoices = GetCustomerOpenInvoices(View.PayorIdNo)
+            AddOpenInvoices(False, unpaidInvoices, dModel, nSeq)
+            GlobalVariables.Mapper.Map(dModel, dView)
+            Return dView
+        End Function
+
+        Private Function GetPayorIdNo(contactIdNo As Integer, payorType As String) As Int32
+            Return Service.GetField(Of Int32, Int32)(contactIdNo, "Contact", "IdNo", "PayorIdNo")
+        End Function
+
+        'bsJournalItems.AddNew()
+        'JournalItems(nIndex).AccountIdNo = accountId
+        '' adding a new row to the bindingsource adds a new empty row at the end with null values
+        '' therefore there is a need to remove that row because it causes errors when moving to that empty row
+        'bsJournalItems.RemoveAt(bsJournalItems.Count - 1)
+
+        'End If
+
+        '    Dim accountId = DirectCast(DataGridViewJournalItems.CurrentCell, CDgvComboBoxCell).CellEditingControl.GetValue()
+        '    If DataGridViewJournalItems.CurrentRow.Index = DataGridViewJournalItems.NewRowIndex Then
+        '        bsJournalItems.AddNew()
+        '        JournalItems(nIndex).AccountIdNo = accountId
+        '        ' adding a new row to the bindingsource adds a new empty row at the end with null values
+        '        ' therefore there is a need to remove that row because it causes errors when moving to that empty row
+        '        bsJournalItems.RemoveAt(bsJournalItems.Count - 1)
+        '    End If
+        '    Presenter.MakePayTypeAndSpecialAccount(JournalItems(nIndex), accountId)
+        '    UpdateInputVatAmount()
+        '    bsJournalItems.ResetItem(nIndex)
+        '    DataGridViewJournalItems.Refresh()
+        'Case $"dgvdebit"
+        '    Presenter.MakeDebitAmount(JournalItems(nIndex), .CurrentCell.Value)
+        '    UpdateJiTotals()
+        '    UpdateInputVatAmount()
+        '    bsJournalItems.ResetItem(nIndex)
+        '    SendKeys.Send("{TAB}")
+        'Case $"dgvcredit"
+        '    Presenter.MakeCreditAmount(JournalItems(nIndex), .CurrentCell.Value)
+        '    UpdateJiTotals()
+        '    UpdateInputVatAmount()
+        '    bsJournalItems.ResetItem(nIndex)
+        'Case $"dgvnotes"
+        '    SendKeys.Send("{DOWN}")
+        'End Select
+        'End If
+        'End If
+
 
     End Class
 

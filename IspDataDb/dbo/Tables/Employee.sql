@@ -106,6 +106,10 @@
 
 
 
+
+
+
+
 GO
 CREATE UNIQUE NONCLUSTERED INDEX [IX_EmployeeNameAra]
     ON [dbo].[Employee]([EmployeeNameAra] ASC);
@@ -127,7 +131,7 @@ FOR INSERT
 AS
 
 INSERT INTO Contact
-        (PayeeIdNo, PayeeType)
+        (PayorIdNo, CSECode)
     SELECT
         IdNo, 'E'
         FROM inserted

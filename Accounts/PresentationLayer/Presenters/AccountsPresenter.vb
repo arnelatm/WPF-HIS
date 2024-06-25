@@ -72,12 +72,14 @@ Namespace PresentationLayer.Presenters
 
         Public Function UpdateInputVatAmount(journalItems As List(Of JournalItemView)) As Decimal
             Dim tiVatAmount As Decimal = 0
-            Dim inputVatAccount As String = GlobalFunctions.EnumToCode(SpecialAccountSelection.VatInput)
-            For Each item In journalItems
-                If item.SpecialAccount = inputVatAccount Then
-                    tiVatAmount = tiVatAmount + item.Debit - item.Credit
-                End If
-            Next
+            If journalItems IsNot Nothing Then
+                Dim inputVatAccount As String = GlobalFunctions.EnumToCode(SpecialAccountSelection.VatInput)
+                For Each item In journalItems
+                    If item.SpecialAccount = inputVatAccount Then
+                        tiVatAmount = tiVatAmount + item.Debit - item.Credit
+                    End If
+                Next
+            End If
             Return tiVatAmount
         End Function
 

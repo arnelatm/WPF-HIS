@@ -1,7 +1,10 @@
 ﻿
+
+
+
 CREATE VIEW [dbo].[CSEContact_View]
 AS
-(SELECT     'C' as ContactType, IdNo AS ContactIdNo, CustomerCode AS ContactCode, CustomerName AS ContactName, CustomerNameAra AS ContactNameAra
+(SELECT     'C' as CSECode, IdNo AS PayorIdNo, CustomerCode AS ContactCode, CustomerName AS ContactName, CustomerNameAra AS ContactNameAra
  FROM        dbo.Customer
 Union
 SELECT     'S',IdNo, SupplierCode, SupplierName, SupplierNameAra FROM dbo.Supplier

@@ -16,7 +16,7 @@ Namespace BusinessLayer
                 AddRule(New ValidateRequired("Notes"))
                 AddRule(New ValidateRequired("PayorType"))
                 AddRule(New ValidateRequired("AccountIdNo"))
-                AddRule(New ValidateRequired("PayeeIdNo", $"Payor Name must not be blank.", {"PayorName", "PayorIdNo"}))
+                'AddRule(New ValidateRequired("PayeeIdNo", $"Payor Name must not be blank.", {"PayorName", "PayeeIdNo"}))
                 AddRule(New ValidateVatNumber("VatNumber"))
                 AddRule(New ValidateIfRequired("VatNumber", "VatAmount", ValidationDataType.Decimal, ValidationOperator.NotEqual, 0))
                 AddRule(New ValidateIfRequired("DiscountAccountIdNo", "DiscountTaken", ValidationDataType.Decimal, ValidationOperator.NotEqual, 0))
@@ -31,6 +31,7 @@ Namespace BusinessLayer
         Public Property Cancelled As Boolean
         Public Property CheckDate As Date?
         Public Property CheckNumber As String
+        Public Property ContactIdNo As Int32
         Public Property CsrOiItems As List(Of CsrOiItem)
         Public Property DateCreated As DateTime?
         Public Property DiscountAccountIdNo As Int16?
@@ -39,7 +40,8 @@ Namespace BusinessLayer
         Public Property JournalItems As List(Of JournalItem)
         Public Property Notes As String
         Public Property OrNumber As String
-        Public Property PayorIdNo As Int32
+        Public Property Payee As Int32?
+        Public Property PayorIdNo As Int32?
         Public Property PayorName As String
         Public Property PayorType As String
         Public Property Posted As Boolean

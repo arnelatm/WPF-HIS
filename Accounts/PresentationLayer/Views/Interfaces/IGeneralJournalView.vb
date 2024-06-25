@@ -19,12 +19,10 @@ Namespace PresentationLayer.Views.Interfaces
         Property JournalItems As List(Of JournalItemView)
         Property AccountsByCode As Object
         Property RevCostCentersByCode As Object
-        Property CustomerByCode As Object
-        Property SupplierByCode As Object
-        Property EmployeeByCode As Object
         Property PayeeByCode As Object
+        Property CurrentPayeeDataSource As Object
         Event AccountIdChanged(bsJournalItems As BindingSource)
-
+        Event EditingAccountIdNo(bsJournalItems As BindingSource)
     End Interface
 
 End Namespace

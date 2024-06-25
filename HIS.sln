@@ -179,6 +179,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CreateIspdata", "CreateIspd
 		Create Salt and user.sql = Create Salt and user.sql
 		CreateContactFromScratch.Sql = CreateContactFromScratch.Sql
 		Transfer IGroupCLinic dta to ISPDATA = Transfer IGroupCLinic dta to ISPDATA
+		UpdateCashReceiptJournalByAddingContactID.sql = UpdateCashReceiptJournalByAddingContactID.sql
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CAccounts", "Accounts\CAccounts\CAccounts.csproj", "{DFF185B6-1B96-47F7-B39B-C4B114B3C581}"
@@ -941,6 +942,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CascadingComboBoxes", "Casc
 EndProject
 Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "CascadingComboboBox", "CascadingComboboBox\CascadingComboboBox.vbproj", "{E1F9D242-6551-4136-B570-CA406C1CA79B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CtrlCloneTst", "Libraries\CloneControl\CtrlCloneTst.csproj", "{9EDEE47A-DBFE-4F3E-BC0D-5CBEC8634785}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug (.NET 3.5)|Any CPU = Debug (.NET 3.5)|Any CPU
@@ -1173,6 +1176,14 @@ Global
 		{E1F9D242-6551-4136-B570-CA406C1CA79B}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
 		{E1F9D242-6551-4136-B570-CA406C1CA79B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1F9D242-6551-4136-B570-CA406C1CA79B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EDEE47A-DBFE-4F3E-BC0D-5CBEC8634785}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EDEE47A-DBFE-4F3E-BC0D-5CBEC8634785}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
+		{9EDEE47A-DBFE-4F3E-BC0D-5CBEC8634785}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EDEE47A-DBFE-4F3E-BC0D-5CBEC8634785}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EDEE47A-DBFE-4F3E-BC0D-5CBEC8634785}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{9EDEE47A-DBFE-4F3E-BC0D-5CBEC8634785}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
+		{9EDEE47A-DBFE-4F3E-BC0D-5CBEC8634785}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EDEE47A-DBFE-4F3E-BC0D-5CBEC8634785}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1216,6 +1227,7 @@ Global
 		{D0B01D55-90CD-4F17-9FE8-92C4E06ADE25} = {0598D101-4147-476C-98FF-8C78D96B971E}
 		{53F1E513-02CC-40BF-A697-B1D602FDFDFC} = {0598D101-4147-476C-98FF-8C78D96B971E}
 		{E1F9D242-6551-4136-B570-CA406C1CA79B} = {A6C79BF6-2C34-4AEA-9845-360F48976962}
+		{9EDEE47A-DBFE-4F3E-BC0D-5CBEC8634785} = {A6C79BF6-2C34-4AEA-9845-360F48976962}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {433E9001-0D97-4552-9BF4-6FED04B194AE}

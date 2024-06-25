@@ -23,6 +23,7 @@ Namespace DataLayer.AdoNet
                     "Cancelled," &
                     "CheckDate," &
                     "CheckNumber," &
+                    "ContactIdNo," &
                     "DateCreated," &
                     "DiscountAccountIdNo," &
                     "DiscountTaken," &
@@ -64,13 +65,15 @@ Namespace DataLayer.AdoNet
                     "Cancelled     = @Cancelled," &
                     "CheckDate     = @CheckDate," &
                     "CheckNumber   = @CheckNumber," &
+                    "ContactIdNo   = @ContactIdNo," &
                     "DiscountAccountIdNo = @DiscountAccountIdNo," &
                     "DiscountTaken = @DiscountTaken," &
                     "Notes         = @Notes," &
                     "ORNumber      = @ORNumber," &
+                    "Payee         = @Payee," &
                     "PayorIdNo     = @PayorIdNo," &
                     "PayorName     = @PayorName," &
-                    "PayorType   = @PayorType," &
+                    "PayorType     = @PayorType," &
                     "Posted        = @Posted," &
                     "ReferenceNo   = @ReferenceNo," &
                     "TransactionDate = @TransactionDate," &
@@ -91,6 +94,7 @@ Namespace DataLayer.AdoNet
                     "Cancelled," &
                     "CheckDate," &
                     "CheckNumber," &
+                    "ContactIdNo," &
                     "DiscountAccountIdNo," &
                     "DiscountTaken," &
                     "Notes," &
@@ -112,6 +116,7 @@ Namespace DataLayer.AdoNet
                     "@Cancelled," &
                     "@CheckDate," &
                     "@CheckNumber," &
+                    "@ContactIdNo," &
                     "@DiscountAccountIdNo," &
                     "@DiscountTaken," &
                     "@Notes," &
@@ -140,12 +145,14 @@ Namespace DataLayer.AdoNet
             .CheckDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("CheckDate")),
             .CheckNumber = AATM.DataLayer.AdoNet.Extensions.AsString(reader("CheckNumber")),
             .DateCreated = AATM.DataLayer.AdoNet.Extensions.AsNullableDateTime(reader("DateCreated")),
+            .ContactIdNo = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Int32)(reader("ContactIdNo")),
             .DiscountAccountIdNo = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Int16?)(reader("DiscountAccountIdNo")),
             .DiscountTaken = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("DiscountTaken")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .Notes = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Notes")),
             .OrNumber = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ORNumber")),
-            .PayorIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("PayorIdNo")),
+            .Payee = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Integer)(reader("ContactIdNo")),
+            .PayorIdNo = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Integer)(reader("PayorIdNo")),
             .PayorName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("PayorName")),
             .PayorType = AATM.DataLayer.AdoNet.Extensions.AsString(reader("PayorType")),
             .Posted = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Posted")),
@@ -165,12 +172,14 @@ Namespace DataLayer.AdoNet
                                     "@Cancelled", cashReceiptJournal.Cancelled,
                                     "@CheckDate", cashReceiptJournal.CheckDate,
                                     "@CheckNumber", cashReceiptJournal.CheckNumber,
+                                    "@ContactIdNo", cashReceiptJournal.ContactIdNo,
                                     "@DateCreated", cashReceiptJournal.DateCreated,
                                     "@DiscountAccountIdNo", cashReceiptJournal.DiscountAccountIdNo,
                                     "@DiscountTaken", cashReceiptJournal.DiscountTaken,
                                     "@IdNo", cashReceiptJournal.IdNo,
                                     "@Notes", cashReceiptJournal.Notes,
                                     "@ORNumber", cashReceiptJournal.OrNumber,
+                                    "@Payee", cashReceiptJournal.Payee,
                                     "@PayorIdNo", cashReceiptJournal.PayorIdNo,
                                     "@PayorName", cashReceiptJournal.PayorName,
                                     "@PayorType", cashReceiptJournal.PayorType,

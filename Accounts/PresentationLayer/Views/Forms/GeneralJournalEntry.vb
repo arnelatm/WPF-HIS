@@ -1,5 +1,4 @@
 ﻿Imports System.Globalization
-Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
@@ -14,6 +13,7 @@ Namespace PresentationLayer.Views.Forms
         Private _journalItems As List(Of JournalItemView)
         Private ReadOnly _closingEntry As Boolean
         Public Event AccountIdChanged(bsJournalItems As BindingSource) Implements IGeneralJournalView.AccountIdChanged
+        Public Event EditingAccountIdNo(bsJournalItems As BindingSource) Implements IGeneralJournalView.EditingAccountIdNo
         Private _selectedCombo As CtComboBox
 
         Public Sub New(closingEntry As Boolean)
@@ -35,19 +35,12 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub dataGridView1_EditingControlShowing(ByVal sender As Object, ByVal e As Windows.Forms.DataGridViewEditingControlShowingEventArgs) Handles DataGridViewJournalItems.EditingControlShowing
             If Equals(DataGridViewJournalItems.Columns(DataGridViewJournalItems.CurrentCell.ColumnIndex).Name, "dgvPayIdNo") Then
+                RaiseEvent EditingAccountIdNo(bsJournalItems)
                 _selectedCombo = TryCast(e.Control, CtComboBox)
                 If _selectedCombo IsNot Nothing Then
                     Dim selectedPayeeIdNo = CType(_selectedCombo, CtComboBox)
                     Dim payeeCell As CDgvComboBoxCell = CType(DataGridViewJournalItems.CurrentCell, CDgvComboBoxCell)
-                    If bsJournalItems.Current.SpecialAccount = EnumToCode(SpecialAccountSelection.AccountsPayable) Then
-                        payeeCell.DataSource = SupplierByCode
-                    ElseIf bsJournalItems.Current.SpecialAccount = EnumToCode(SpecialAccountSelection.AccountsReceivable) Then
-                        payeeCell.DataSource = CustomerByCode
-                    ElseIf bsJournalItems.Current.SpecialAccount = EnumToCode(SpecialAccountSelection.EmployeeLoan) Then
-                        payeeCell.DataSource = EmployeeByCode
-                    Else
-                        payeeCell.Value = Nothing
-                    End If
+                    payeeCell.DataSource = CurrentPayeeDataSource
                     bsJournalItems.ResetCurrentItem()
                 End If
             End If
@@ -58,10 +51,9 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property RevCostCentersByCode As Object Implements IGeneralJournalView.RevCostCentersByCode
         Public Property PayeeByCode As Object Implements IGeneralJournalView.PayeeByCode
-        Public Property CustomerByCode As Object Implements IGeneralJournalView.CustomerByCode
-        Public Property SupplierByCode As Object Implements IGeneralJournalView.SupplierByCode
-        Public Property EmployeeByCode As Object Implements IGeneralJournalView.EmployeeByCode
         Public Property AccountsByCode As Object Implements IGeneralJournalView.AccountsByCode
+        Public Property CurrentPayeeDataSource As Object Implements IGeneralJournalView.CurrentPayeeDataSource
+
 
         Public Property Cancelled As Boolean Implements IGeneralJournalView.Cancelled
             Get
@@ -177,6 +169,7 @@ Namespace PresentationLayer.Views.Forms
                 chkApproved.Checked = Value
             End Set
         End Property
+
 
 #End Region
 

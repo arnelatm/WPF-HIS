@@ -598,6 +598,9 @@
     <EmbeddedResource Include="CMonthPicker.resx">
       <DependentUpon>CMonthPicker.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CtComboBoxEditingControl.resx">
+      <DependentUpon>CtComboBoxEditingControl.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CTextBox.resx">
       <DependentUpon>CTextBox.vb</DependentUpon>
       <SubType>Designer</SubType>

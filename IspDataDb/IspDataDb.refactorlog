@@ -7,4 +7,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="ArOpenInvoiceIdNo" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="4bad502a-6eba-40eb-9ab0-d9d953a45824" ChangeDateTime="06/25/2024 07:49:48">
+    <Property Name="ElementName" Value="[dbo].[Contact].[PayeeIdNo]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Contact]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CSEIdNo" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="21fa1cfc-0aca-48ba-ace3-b7364c66e14d" ChangeDateTime="06/25/2024 07:49:54">
+    <Property Name="ElementName" Value="[dbo].[Contact].[PayeeType]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Contact]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CSECode" />
+  </Operation>
 </Operations>

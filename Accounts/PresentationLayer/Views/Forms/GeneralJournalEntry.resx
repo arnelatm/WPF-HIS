@@ -124,10 +124,10 @@
     <value>281, 17</value>
   </metadata>
   <metadata name="AppDataDAC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>411, 17</value>
+    <value>684, 17</value>
   </metadata>
   <metadata name="MyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>535, 17</value>
+    <value>411, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblIdNo.Font" type="System.Drawing.Font, System.Drawing">
@@ -944,7 +944,7 @@
     <value>150</value>
   </data>
   <data name="dgvPayIdNo.HeaderText" xml:space="preserve">
-    <value>PayIdNo</value>
+    <value>Payee Name - Code</value>
   </data>
   <data name="dgvPayIdNo.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1100,38 +1100,8 @@
     <value>125</value>
   </data>
   <metadata name="bsJournalItems.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>675, 17</value>
+    <value>551, 17</value>
   </metadata>
-  <data name="DataGridViewJournalItems.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 139</value>
-  </data>
-  <data name="DataGridViewJournalItems.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="DataGridViewJournalItems.RowHeadersWidth" type="System.Int32, mscorlib">
-    <value>51</value>
-  </data>
-  <data name="DataGridViewJournalItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>986, 295</value>
-  </data>
-  <data name="DataGridViewJournalItems.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;DataGridViewJournalItems.Name" xml:space="preserve">
-    <value>DataGridViewJournalItems</value>
-  </data>
-  <data name="&gt;&gt;DataGridViewJournalItems.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtDataGridView, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;DataGridViewJournalItems.Parent" xml:space="preserve">
-    <value>CFlowLayout4</value>
-  </data>
-  <data name="&gt;&gt;DataGridViewJournalItems.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="CFlowLayout4.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
-  </data>
   <data name="txtTotalCredits.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
@@ -1196,10 +1166,10 @@
     <value>Top</value>
   </data>
   <data name="CFlowLayout4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 55</value>
+    <value>0, 38</value>
   </data>
   <data name="CFlowLayout4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>994, 468</value>
+    <value>996, 471</value>
   </data>
   <data name="CFlowLayout4.TabIndex" type="System.Int32, mscorlib">
     <value>246</value>
@@ -1215,6 +1185,33 @@
   </data>
   <data name="&gt;&gt;CFlowLayout4.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="DataGridViewJournalItems.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 139</value>
+  </data>
+  <data name="DataGridViewJournalItems.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="DataGridViewJournalItems.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="DataGridViewJournalItems.Size" type="System.Drawing.Size, System.Drawing">
+    <value>986, 295</value>
+  </data>
+  <data name="DataGridViewJournalItems.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;DataGridViewJournalItems.Name" xml:space="preserve">
+    <value>DataGridViewJournalItems</value>
+  </data>
+  <data name="&gt;&gt;DataGridViewJournalItems.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CtDataGridView, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;DataGridViewJournalItems.Parent" xml:space="preserve">
+    <value>CFlowLayout4</value>
+  </data>
+  <data name="&gt;&gt;DataGridViewJournalItems.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -2380,7 +2377,10 @@
     <value>Tile</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>994, 524</value>
+    <value>996, 514</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>754, 480</value>
@@ -2442,12 +2442,6 @@
   <data name="&gt;&gt;dgvRevCostCenterIdNo.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;dgvPayIdNo.Name" xml:space="preserve">
-    <value>dgvPayIdNo</value>
-  </data>
-  <data name="&gt;&gt;dgvPayIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
   <data name="&gt;&gt;dgvNotes.Name" xml:space="preserve">
     <value>dgvNotes</value>
   </data>
@@ -2465,6 +2459,12 @@
   </data>
   <data name="&gt;&gt;SpecialAccount.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dgvPayIdNo.Name" xml:space="preserve">
+    <value>dgvPayIdNo</value>
+  </data>
+  <data name="&gt;&gt;dgvPayIdNo.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;AccountIdNoDataGridViewTextBoxColumn.Name" xml:space="preserve">
     <value>AccountIdNoDataGridViewTextBoxColumn</value>

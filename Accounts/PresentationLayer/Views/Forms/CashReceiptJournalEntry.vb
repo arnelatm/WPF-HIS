@@ -3,6 +3,7 @@ Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
+Imports KellermanSoftware.CompareNetObjects
 
 Namespace PresentationLayer.Views.Forms
 
@@ -18,11 +19,16 @@ Namespace PresentationLayer.Views.Forms
         Private _journalItems As List(Of JournalItemView)
         Private _defaultAccount As Int16
 
-        Public Event AutoApplyAmount(bsDjOiItem As BindingSource) Implements ICashReceiptJournalView.AutoApplyAmount
+        Public Event AutoApplyAmountRequested(bsCsrOiItems As BindingSource) Implements ICashReceiptJournalView.AutoApplyAmountRequested
         Public Event AddCustomerOpenInvoices() Implements ICashReceiptJournalView.AddCustomerOpenInvoices
-        Public Event UserDeletedRow() Implements ICashReceiptJournalView.UserDeletedRow
+        Public Event UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Implements ICashReceiptJournalView.UserDeletedRow
         Public Event FirstLineUpdateNeeded() Implements ICashReceiptJournalView.FirstLineUpdateNeeded
         Public Event ReceiptTypeChanged(paymentType As String) Implements ICashReceiptJournalView.ReceiptTypeChanged
+        Public Event AccountIdNoChanged(sender As Object, e As DataGridViewCellEventArgs) Implements ICashReceiptJournalView.AccountIdNoChanged
+        Public Event DebitAmountChanged(sender As Object, e As DataGridViewCellEventArgs) Implements ICashReceiptJournalView.DebitAmountChanged
+        Public Event CreditAmountChanged(sender As Object, e As DataGridViewCellEventArgs) Implements ICashReceiptJournalView.CreditAmountChanged
+        Public Event OpenInvoiceDataRequested(bs As BindingSource) Implements ICashReceiptJournalView.OpenInvoiceDataRequested
+        Public Event ContactidNoChanged(bs As BindingSource) Implements ICashReceiptJournalView.ContactIdNoChanged
 
         Public Sub New()
             MyBase.New()
@@ -31,8 +37,7 @@ Namespace PresentationLayer.Views.Forms
             ' Add any initialization after the InitializeComponent() call.
             FirstControl = cboPayorType
             _nfi.NumberDecimalDigits = 2
-            _payorOrigWidth = cboPayorIdNo.Width
-            cboPayorIdNo.EditingMode = False
+            _payorOrigWidth = cboContactIdNo.Width
             SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
         End Sub
 
@@ -65,6 +70,8 @@ Namespace PresentationLayer.Views.Forms
         Public Property EmployeesByName Implements ICashReceiptJournalView.EmployeesByName
         Public Property CustomersByName Implements ICashReceiptJournalView.CustomersByName
         Public Property SuppliersByName Implements ICashReceiptJournalView.SuppliersByName
+        Public Property CashReceiptAccountCount As Short Implements ICashReceiptJournalView.CashReceiptAccountCount
+
 
         Public Property AccountIdNo As Int16? Implements ICashReceiptJournalView.AccountIdNo
             Get
@@ -72,6 +79,15 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 cboAccountIdNo.SetValue(Value)
+            End Set
+        End Property
+
+        Public Property Payee As Int32? Implements ICashReceiptJournalView.Payee
+            Get
+                Return ContactIdNo
+            End Get
+            Set
+                cboPayee.SetValue(ContactIdNo)
             End Set
         End Property
 
@@ -197,22 +213,34 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PayorIdNo As Int32? Implements ICashReceiptJournalView.PayorIdNo
+        Public Property ContactIdNo As Integer? Implements ICashReceiptJournalView.ContactIdNo
             Get
-                Return cboPayorIdNo.GetNullableValue(Of Int32)
+                Return cboContactIdNo.GetNullableValue(Of Int32)
             End Get
             Set
-                cboPayorIdNo.SetValue(Value)
-                ShowPayor()
+                cboContactIdNo.SetValue(Value)
+            End Set
+        End Property
+
+        Public Property PayorIdNo As Int32? Implements ICashReceiptJournalView.PayorIdNo
+            Get
+                If txtPayorIdNo.Text <> "" Then
+                    Return Convert.ToInt32(TxtIdNo.Text)
+                Else
+                    Return 0
+                End If
+            End Get
+            Set
+                txtPayorIdNo.Text = Convert.ToString(Value)
             End Set
         End Property
 
         Public Property PayorName As String Implements ICashReceiptJournalView.PayorName
             Get
-                Return txtPayorName.Text
+                Return txtContactName.Text
             End Get
             Set
-                txtPayorName.Text = Value
+                txtContactName.Text = Value
             End Set
         End Property
 
@@ -254,14 +282,14 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set(value As Object)
                 _payorDataSource = value
-                cboPayorIdNo.ValueMember = "IdNo"
-                cboPayorIdNo.DisplayMember = "Name"
-                cboPayorIdNo.DataSource = value
-                cboPayorIdNo.SetValue(PayorIdNo)
-                cboPayorIdNo.BackColor = cboPayorType.BackColor
-                cboPayorIdNo.MaxDropDownItems = 8
-                cboPayorIdNo.DropDownHeight = 106
-                cboPayorIdNo.Refresh()
+                cboContactIdNo.ValueMember = "IdNo"
+                cboContactIdNo.DisplayMember = "Name"
+                cboContactIdNo.DataSource = value
+                'cboContactIdNo.SetValue(ContactIdNo)
+                cboContactIdNo.BackColor = cboPayorType.BackColor
+                cboContactIdNo.MaxDropDownItems = 8
+                cboContactIdNo.DropDownHeight = 106
+                'cboContactIdNo.Refresh()
             End Set
         End Property
         Public Property Posted As Boolean Implements ICashReceiptJournalView.Posted
@@ -331,6 +359,16 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property JournalCode As String Implements ICashReceiptJournalView.JournalCode
+        Public Property JournalCodeDisplay As String Implements ICashReceiptJournalView.JournalCodeDisplay
+            Get
+                Return txtJournalCodeDisplay.GetValue(Of String)
+            End Get
+            Set(value As String)
+                txtJournalCodeDisplay.Text = value
+            End Set
+        End Property
+
 #End Region
 
         Protected Overrides Sub CreateMainFieldsDictionary()
@@ -342,6 +380,7 @@ Namespace PresentationLayer.Views.Forms
          {"Cancelled", chkCancelled},
          {"CheckDate", dtpCheckDate},
          {"CheckNumber", txtCheckNumber},
+         {"ContactIdNo", cboContactIdNo},
          {"DateCreated", txtDateCreated},
          {"DiscountAccountIdNo", cboDiscountAccountIdNo},
          {"DiscountTaken", txtDiscountTaken},
@@ -349,8 +388,9 @@ Namespace PresentationLayer.Views.Forms
          {"Notes", txtNotes},
          {"OrNumber", txtORNumber},
          {"PayorType", cboPayorType},
-         {"PayorIdNo", cboPayorIdNo},
-         {"PayorName", txtPayorName},
+         {"PayorIdNo", txtPayorIdNo},
+         {"PayorName", txtContactName},
+         {"Payee", cboPayee},
          {"Posted", chkPosted},
          {"ReferenceNo", txtReferenceNo},
          {"TransactionDate", dtpTransactionDate},
@@ -367,11 +407,6 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub CashReceiptJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            If GlobalVariables.RightToLeftLayout Then
-                txtJournalCode.Text = Presenter.GetLocalizedPrefix("CR")
-            Else
-                txtJournalCode.Text = "CR"
-            End If
             _jiFooter = New DgvFooter(DataGridViewJournalItems) With {
                 .AutoCalc = True
             }
@@ -388,18 +423,19 @@ Namespace PresentationLayer.Views.Forms
             _arFooter.ColumnToSum("dgvPreviousBalance") = True
             _arFooter.SetText("dgvJournalIdNoAp", "Totals")
 
-            If Presenter.CrAccountCount = 1 Then
+            If CashReceiptAccountCount = 1 Then
                 cboAccountIdNo.DisplayOnly = True
                 cboAccountIdNo.TabStop = False
             End If
             If cboAccountIdNo.SelectedValue <= 0 Then
                 cboAccountIdNo.SelectedValue = _defaultAccount
             End If
-            If Presenter.CrAccountCount = 0 Then
+            If CashReceiptAccountCount = 0 Then
                 Dim accountName As String
                 accountName = Messaging.TranslateCaption("Cash")
                 Messaging.ShowPmMessage(True, "MsgNoSpecialAccount", {"specialAccountName", accountName})
-                Presenter.GoQuit()
+                CancelClose = False
+
             End If
             BindCsrOiItem()
             BindJournalItem()
@@ -465,10 +501,10 @@ Namespace PresentationLayer.Views.Forms
         Private Sub UpdateOpenInvoicesDisplay()
             If OpenInvoiceMode Then
                 If CsrOiItems IsNot Nothing Then
-                    If Presenter.AddMode Or cboPayorIdNo.ValueChanged() Then
+                    If AddingMode Or cboContactIdNo.ValueChanged() Then
                         CsrOiItems.Clear()
                     End If
-                    bsCsrOiItems.DataSource = Presenter.GetCustomerOpenInvoices(CsrOiItems)
+                    RaiseEvent OpenInvoiceDataRequested(bsCsrOiItems)
                     bsCsrOiItems.ResetBindings(True)
                     UpdateOiTotals()
                 End If
@@ -482,7 +518,7 @@ Namespace PresentationLayer.Views.Forms
             UpdateFirstLine()
         End Sub
 
-        Private Sub CboPayorIdNo_ValueChanged(sender As Object, e As EventArgs) Handles cboPayorIdNo.Validated, cboPayorIdNo.SelectedIndexChanged
+        Private Sub CboContactIdNo_ValueChanged(sender As Object, e As EventArgs)
             If FormShown Then
                 If OpenInvoiceMode Then
                     UpdateOpenInvoicesDisplay()
@@ -495,11 +531,11 @@ Namespace PresentationLayer.Views.Forms
                 RaiseEvent ReceiptTypeChanged(PayorType)
                 If OpenInvoiceMode Then
                     UpdateOpenInvoicesDisplay()
-                    If cboPayorIdNo.SelectedIndex = -1 Then
+                    If cboContactIdNo.SelectedIndex = -1 Then
                         bsCsrOiItems.Clear()
                     End If
                 Else
-                    cboPayorIdNo.SelectedIndex = -1
+                    cboContactIdNo.SelectedIndex = -1
                 End If
                 UpdateFirstLine()
                 UpdateDisplay()
@@ -535,35 +571,21 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
+
         Private Sub DgvJi_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewJournalItems.CellEndEdit
             With DataGridViewJournalItems
                 If .CurrentRow IsNot Nothing Then
                     Dim nIndex = .CurrentRow.Index
                     Select Case .CurrentCell.OwningColumn.Name.ToLower()
                         Case $"dgvaccountidno"
-                            Dim accountId = DirectCast(DataGridViewJournalItems.CurrentCell, CDgvComboBoxCell).CellEditingControl.GetValue()
-                            If DataGridViewJournalItems.CurrentRow.Index = DataGridViewJournalItems.NewRowIndex Then
-                                bsJournalItems.AddNew()
-                                JournalItems(nIndex).AccountIdNo = accountId
-                                ' adding a new row to the bindingsource adds a new empty row at the end with null values
-                                ' therefore there is a need to remove that row because it causes errors when moving to that empty row
-                                bsJournalItems.RemoveAt(bsJournalItems.Count - 1)
-                            End If
-                            Presenter.MakePayTypeAndSpecialAccount(JournalItems(nIndex), accountId)
-                            UpdateInputVatAmount()
-                            bsJournalItems.ResetItem(nIndex)
-                            DataGridViewJournalItems.Refresh()
+                            RaiseEvent AccountIdNoChanged(sender, e)
                         Case $"dgvdebit"
-                            Presenter.MakeDebitAmount(JournalItems(nIndex), .CurrentCell.Value)
+                            RaiseEvent DebitAmountChanged(sender, e)
                             UpdateJiTotals()
-                            UpdateInputVatAmount()
-                            bsJournalItems.ResetItem(nIndex)
                             SendKeys.Send("{TAB}")
                         Case $"dgvcredit"
-                            Presenter.MakeCreditAmount(JournalItems(nIndex), .CurrentCell.Value)
+                            RaiseEvent CreditAmountChanged(sender, e)
                             UpdateJiTotals()
-                            UpdateInputVatAmount()
-                            bsJournalItems.ResetItem(nIndex)
                         Case $"dgvnotes"
                             SendKeys.Send("{DOWN}")
                     End Select
@@ -594,23 +616,17 @@ Namespace PresentationLayer.Views.Forms
             End With
         End Sub
 
-        Private Sub UpdateInputVatAmount()
-            VatAmount = Presenter.UpdateInputVatAmount(JournalItems)
-        End Sub
+        'Private Sub UpdateInputVatAmount()
+        '    VatAmount = Presenter.UpdateInputVatAmount(JournalItems)
+        'End Sub
 
-        Private Sub UpdateOutputVatAmount()
-            VatAmount = Presenter.UpdateOutputVatAmount(JournalItems)
-        End Sub
+        'Private Sub UpdateOutputVatAmount()
+        '    VatAmount = Presenter.UpdateOutputVatAmount(JournalItems)
+        'End Sub
 
         Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewJournalItems.UserDeletedRow
-            RaiseEvent UserDeletedRow()
+            RaiseEvent UserDeletedRow(sender, e)
             UpdateTotals()
-            Dim payorTypeEnum = CodeToEnum(Of ReceiptTypeSelection)(cboPayorType.SelectedIndex)
-            If payorTypeEnum = ReceiptTypeSelection.AccountsReceivable Or payorTypeEnum = ReceiptTypeSelection.Customer Then
-                UpdateOutputVatAmount()
-            ElseIf payorTypeEnum = ReceiptTypeSelection.SupplierRefund Then
-                UpdateInputVatAmount()
-            End If
         End Sub
 
         Private Sub UpdateTotals()
@@ -678,7 +694,7 @@ Namespace PresentationLayer.Views.Forms
             End If
             ShowPayor()
             UpdateTotals()
-            If Presenter.EditMode Or Presenter.AddMode Then
+            If EditingMode Or AddingMode Then
                 If OpenInvoiceMode Then
                     btnAutoApply.Visible = True
                 Else
@@ -689,18 +705,19 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ShowPayor()
+
             Dim payorTypeEnum = CodeToEnum(Of ReceiptTypeSelection)(cboPayorType.SelectedValue)
             If payorTypeEnum = ReceiptTypeSelection.Others Or payorTypeEnum = ReceiptTypeSelection.NotSpecified Then
-                cboPayorIdNo.Visible = False
-                txtPayorName.Visible = True
-                txtPayorName.Width = _payorOrigWidth
-                cboPayorIdNo.SelectedIndex = -1
-                cboPayorIdNo.Width = 0
+                cboContactIdNo.Visible = False
+                cboContactIdNo.Width = 0
+                txtContactName.Visible = True
+                cboContactIdNo.SelectedIndex = -1
+                txtContactName.Width = _payorOrigWidth
             Else
-                cboPayorIdNo.Visible = True
-                txtPayorName.Visible = False
-                cboPayorIdNo.Width = _payorOrigWidth
-                txtPayorName.Width = 0
+                cboContactIdNo.Visible = True
+                cboContactIdNo.Width = _payorOrigWidth
+                txtContactName.Visible = False
+                txtContactName.Width = 0
             End If
         End Sub
 
@@ -749,18 +766,37 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub btnAutoApply_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnAutoApply.ClickButtonArea
-            Presenter.AutoApplyAmount()
-            DataGridViewCsrOiItems.Refresh()
+            RaiseEvent AutoApplyAmountRequested(bsCsrOiItems)
             UpdateOiTotals()
         End Sub
 
-        'Private Sub CashReceiptJournalEntry_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
-        '    SetPayorDataSource(PayorType)
-        'End Sub
+        Private OrigCombobox As CBFormCtrl
+        Private _sw As Int32 = 0
 
-        Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs)
-            Debugger.Break()
+        Private Sub txtNotes_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles txtNotes.MouseDoubleClick
+            If _sw = 0 Then
+                Debugger.Break()
+                'Refresh()
+                'cboContactIdNo.DataSource = Presenter.MakeControlDataSources({New Object() {"Contact_View", "ContactIdNo", "IdNo,ContactName,ContactCode", Nothing, Nothing}})
+                'cboContactIdNo.Refresh()
+                cboContactIdNo.DroppedDown = True
+                OrigComboBox = ControlFactory.CopyToObject(cboContactIdNo)
+                _sw += 1
+            Else
+                Dim currentComboBox As CBFormCtrl = ControlFactory.CopyToObject(cboContactIdNo)
+                Dim compareLogic As CompareLogic = New CompareLogic()
+                compareLogic.Config.MaxDifferences = 1000
+                Dim result As ComparisonResult = compareLogic.Compare(currentComboBox, OrigComboBox)
+                If Not result.AreEqual Then
+                    MessageBox.Show(result.DifferencesString)
+                End If
+            End If
         End Sub
+
+        Private Sub cboContactIdNo_SelectedIndexChanged() Handles cboContactIdNo.SelectionChangeCommitted
+            RaiseEvent ContactidNoChanged(bsCsrOiItems)
+        End Sub
+
     End Class
 
 End Namespace

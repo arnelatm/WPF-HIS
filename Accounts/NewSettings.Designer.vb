@@ -12,29 +12,31 @@ Option Strict On
 Option Explicit On
 
 
-
-<Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
- Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.8.1.0")>  _
-Partial Friend NotInheritable Class NewSettings
-    Inherits Global.System.Configuration.ApplicationSettingsBase
+Namespace My
     
-    Private Shared defaultInstance As NewSettings = CType(Global.System.Configuration.ApplicationSettingsBase.Synchronized(New NewSettings()),NewSettings)
-    
-    Public Shared ReadOnly Property [Default]() As NewSettings
-        Get
-            Return defaultInstance
-        End Get
-    End Property
-    
-    <Global.System.Configuration.UserScopedSettingAttribute(),  _
-     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("Arnel")>  _
-    Public Property UserName() As String
-        Get
-            Return CType(Me("UserName"),String)
-        End Get
-        Set
-            Me("UserName") = value
-        End Set
-    End Property
-End Class
+    <Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.6.0.0")>  _
+    Partial Friend NotInheritable Class NewSettings
+        Inherits Global.System.Configuration.ApplicationSettingsBase
+        
+        Private Shared defaultInstance As NewSettings = CType(Global.System.Configuration.ApplicationSettingsBase.Synchronized(New NewSettings()),NewSettings)
+        
+        Public Shared ReadOnly Property [Default]() As NewSettings
+            Get
+                Return defaultInstance
+            End Get
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Arnel")>  _
+        Public Property UserName() As String
+            Get
+                Return CType(Me("UserName"),String)
+            End Get
+            Set
+                Me("UserName") = value
+            End Set
+        End Property
+    End Class
+End Namespace
