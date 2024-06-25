@@ -84,8 +84,7 @@ Namespace PresentationLayer.Presenters
         Public Property JournalCode As String = "CR"
 
         Protected Overrides Sub CreateDataSources()
-            MakeControlDataSources({{New Object() {"Contact_View", "ContactIdNo", "IdNo,ContactName,ContactCode", Nothing, Nothing}},
-                                    {New Object() {"Contact_View", "Payee", "IdNo,ContactName,ContactCode", Nothing, Nothing}}})
+            MakeControlDataSources({{New Object() {"Contact_View", "ContactIdNo", "IdNo,ContactName,ContactCode", Nothing, Nothing}}})
             MakeVarDataSources({New Object() {"Account", "AccountsByCode", Nothing, Nothing},
             New Object() {"RevCostCenter", "RevCostCentersByCode", Nothing, Nothing}})
             'New Object() {"Employee", "EmployeesByName", Nothing, Nothing},

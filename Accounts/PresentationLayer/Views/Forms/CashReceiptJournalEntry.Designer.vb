@@ -47,7 +47,6 @@ Namespace PresentationLayer.Views.Forms
             Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Me.floFullEntryArea = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.cboPayee = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.floPurchaseJournalHeader = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
             Me.lblContactIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -151,7 +150,6 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.floFullEntryArea, "floFullEntryArea")
             Me.floFullEntryArea.BackColor = System.Drawing.Color.Transparent
             Me.floFullEntryArea.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-            Me.floFullEntryArea.Controls.Add(Me.cboPayee)
             Me.floFullEntryArea.Controls.Add(Me.floPurchaseJournalHeader)
             Me.floFullEntryArea.Controls.Add(Me.floPurchaseJournalItems)
             Me.floFullEntryArea.Controls.Add(Me.floFooter)
@@ -160,49 +158,6 @@ Namespace PresentationLayer.Views.Forms
             Me.floFullEntryArea.Controls.Add(Me.txtTotalCredits)
             Me.floFullEntryArea.Controls.Add(Me.txtPayorIdNo)
             Me.floFullEntryArea.Name = "floFullEntryArea"
-            '
-            'cboPayee
-            '
-            Me.cboPayee.BackColor = System.Drawing.Color.White
-            Me.cboPayee.BegFindValue = Nothing
-            Me.cboPayee.ChangingSearchValueOnly = False
-            Me.cboPayee.CurrentSearchTerm = ""
-            Me.cboPayee.DataValue = Nothing
-            Me.cboPayee.DefaultValue = Nothing
-            Me.cboPayee.DisplayMember = "Name"
-            Me.cboPayee.DropDownHeight = 24
-            Me.cboPayee.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
-            Me.cboPayee.Editable = True
-            Me.cboPayee.EditingMode = False
-            Me.cboPayee.EndFindValue = Nothing
-            Me.cboPayee.FieldDescription = Nothing
-            Me.cboPayee.FieldName = Nothing
-            Me.cboPayee.FilterRule = Nothing
-            Me.cboPayee.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.cboPayee.FindEnabled = False
-            resources.ApplyResources(Me.cboPayee, "cboPayee")
-            Me.cboPayee.ForeColor = System.Drawing.Color.Black
-            Me.cboPayee.FormattingEnabled = True
-            Me.cboPayee.HideWhenNotEditingOrAdding = False
-            Me.cboPayee.IgnoreCase = False
-            Me.cboPayee.LimitToList = False
-            Me.cboPayee.LinkedLabel = Nothing
-            Me.cboPayee.Name = "cboPayee"
-            Me.cboPayee.OldValue = 0
-            Me.cboPayee.OriginalDataSource = Nothing
-            Me.cboPayee.OriginalList = Nothing
-            Me.cboPayee.OverrideDropDownStyleList = False
-            Me.cboPayee.PreviousSearchTerm = Nothing
-            Me.cboPayee.PropertySelector = Nothing
-            Me.cboPayee.SuggestBoxHeight = 200
-            Me.cboPayee.SuggestCharCount = 0
-            Me.cboPayee.SuggestListOrderRule = Nothing
-            Me.cboPayee.TextToSearch = Nothing
-            Me.cboPayee.Translatable = False
-            Me.cboPayee.ValueIsMandatory = False
-            Me.cboPayee.ValueIsNullable = False
-            Me.cboPayee.ValueIsNumeric = False
-            Me.cboPayee.ValueMember = "IdNo"
             '
             'floPurchaseJournalHeader
             '
@@ -1879,6 +1834,5 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents chkApproved As UcCheckBox
         Friend WithEvents lblDateCreated As CLabel
         Friend WithEvents txtDateCreated As CTextBox
-        Friend WithEvents cboPayee As CtComboBox
     End Class
 End Namespace

@@ -193,6 +193,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Problems And Solutions", "P
 		Comparison Object Error.txt = Comparison Object Error.txt
 		Error correction for DTC error.pdf = Error correction for DTC error.pdf
 		Problem when arabic menu not appearing.txt = Problem when arabic menu not appearing.txt
+		Problem with Combobox Display not showing data (must be proper nullable).txt = Problem with Combobox Display not showing data (must be proper nullable).txt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IGroup", "IGroup", "{B5D54750-F102-47FF-BDF7-A67CB2A5A22D}"

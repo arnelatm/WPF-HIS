@@ -70,7 +70,6 @@ Namespace DataLayer.AdoNet
                     "DiscountTaken = @DiscountTaken," &
                     "Notes         = @Notes," &
                     "ORNumber      = @ORNumber," &
-                    "Payee         = @Payee," &
                     "PayorIdNo     = @PayorIdNo," &
                     "PayorName     = @PayorName," &
                     "PayorType     = @PayorType," &
@@ -151,7 +150,6 @@ Namespace DataLayer.AdoNet
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .Notes = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Notes")),
             .OrNumber = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ORNumber")),
-            .Payee = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Integer)(reader("ContactIdNo")),
             .PayorIdNo = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Integer)(reader("PayorIdNo")),
             .PayorName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("PayorName")),
             .PayorType = AATM.DataLayer.AdoNet.Extensions.AsString(reader("PayorType")),
@@ -179,7 +177,6 @@ Namespace DataLayer.AdoNet
                                     "@IdNo", cashReceiptJournal.IdNo,
                                     "@Notes", cashReceiptJournal.Notes,
                                     "@ORNumber", cashReceiptJournal.OrNumber,
-                                    "@Payee", cashReceiptJournal.Payee,
                                     "@PayorIdNo", cashReceiptJournal.PayorIdNo,
                                     "@PayorName", cashReceiptJournal.PayorName,
                                     "@PayorType", cashReceiptJournal.PayorType,

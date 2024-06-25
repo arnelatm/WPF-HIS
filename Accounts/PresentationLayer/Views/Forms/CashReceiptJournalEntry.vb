@@ -82,15 +82,6 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Payee As Int32? Implements ICashReceiptJournalView.Payee
-            Get
-                Return ContactIdNo
-            End Get
-            Set
-                cboPayee.SetValue(ContactIdNo)
-            End Set
-        End Property
-
         Public Property Amount As Decimal Implements ICashReceiptJournalView.Amount
             Get
                 Return Convert.ToDecimal(NumParser(Of Decimal)(txtAmount.Text), _nfi)
@@ -390,7 +381,6 @@ Namespace PresentationLayer.Views.Forms
          {"PayorType", cboPayorType},
          {"PayorIdNo", txtPayorIdNo},
          {"PayorName", txtContactName},
-         {"Payee", cboPayee},
          {"Posted", chkPosted},
          {"ReferenceNo", txtReferenceNo},
          {"TransactionDate", dtpTransactionDate},

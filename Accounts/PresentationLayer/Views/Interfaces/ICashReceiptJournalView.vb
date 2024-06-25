@@ -18,7 +18,6 @@ Namespace PresentationLayer.Views.Interfaces
         Property IdNo As Int32
         Property Notes As String
         Property OrNumber As String
-        Property Payee As Int32?
         Property PayorIdNo As Int32?
         Property PayorName As String
         Property PayorType As String
