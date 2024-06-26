@@ -1,4 +1,5 @@
 ﻿Imports System.Globalization
+Imports System.Security.Cryptography
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
@@ -69,7 +70,7 @@ Namespace PresentationLayer.Presenters
             AddHandler view.AutoApplyAmountRequested, AddressOf OnAutoApplyAmountRequested
             AddHandler view.AddCustomerOpenInvoices, AddressOf OnAddCustomerOpenInvoices
             AddHandler view.FirstLineUpdateNeeded, AddressOf OnFirstLineUpdateNeeded
-            AddHandler view.ReceiptTypeChanged, AddressOf MakePayorIdNoDataSource
+            AddHandler view.ReceiptTypeChanged, AddressOf OnReceiptTypeChanged
             AddHandler view.AccountIdNoChanged, AddressOf OnAccountIdNoChanged
             AddHandler view.DebitAmountChanged, AddressOf OnDebitAmountChanged
             AddHandler view.CreditAmountChanged, AddressOf OnCreditAmountChanged
@@ -84,7 +85,7 @@ Namespace PresentationLayer.Presenters
         Public Property JournalCode As String = "CR"
 
         Protected Overrides Sub CreateDataSources()
-            MakeControlDataSources({{New Object() {"Contact_View", "ContactIdNo", "IdNo,ContactName,ContactCode", Nothing, Nothing}}})
+            View.ContactDataSource = GetDataLookupTable({"Contact_View", "IdNo,ContactName,ContactCode,CSECode"})
             MakeVarDataSources({New Object() {"Account", "AccountsByCode", Nothing, Nothing},
             New Object() {"RevCostCenter", "RevCostCentersByCode", Nothing, Nothing}})
             'New Object() {"Employee", "EmployeesByName", Nothing, Nothing},
@@ -1069,28 +1070,22 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Private Sub MakePayorIdNoDataSource(payorType As String)
-            Dim saveContactidNo As Int32? = 0
-            saveContactidNo = View.ContactIdNo
-            View.ContactIdNo = 1
-            MakeControlDataSources({New Object() {"Contact_View", "ContactIdNo", "IdNo,ContactName,ContactCode", Nothing, Nothing}})
-            View.ContactIdNo = saveContactidNo
-            'MakeVarDataSource({{New Object() {"Contact_View", "ContactIdNo", "IdNo,ContactName,ContactCode", Nothing, Nothing}}})
-            'Dim x As ReceiptTypeSelection = CodeToEnum(Of ReceiptTypeSelection)(payorType)
-            'MakeVarDataSource({New Object() {"Contact_View", "ContactIdNo", "IdNo,ContactName,ContactCode", Nothing, Nothing}})
-            'Select Case x
-            '    Case ReceiptTypeSelection.AccountsReceivable
-            '        MakeVarDataSources({New Object() {"Customer", "PayorDataSource", Nothing, Nothing}})
-            '    Case ReceiptTypeSelection.Employee
-            '        MakeVarDataSources({New Object() {"Employee", "PayorDataSource", Nothing, Nothing}})
-            '    Case ReceiptTypeSelection.Customer, ReceiptTypeSelection.AccountsReceivable
-            '        MakeVarDataSources({New Object() {"Customer", "PayorDataSource", Nothing, Nothing}})
-            '    Case ReceiptTypeSelection.SupplierRefund
-            '        MakeVarDataSources({New Object() {"Supplier", "PayorDataSource", Nothing, Nothing}})
-            '    Case Else
-            '        MakeVarDataSources({New Object() {"Customer", "PayorDataSource", Nothing, Nothing}})
-            '        View.PayorDataSource = Nothing
-            'End Select
+        Private Sub OnReceiptTypeChanged(payorType As String)
+            UpdateContactDataSource(payorType)
+        End Sub
+
+        Private Sub UpdateContactDataSource(payorType As String)
+            Dim x As ReceiptTypeSelection = CodeToEnum(Of ReceiptTypeSelection)(payorType)
+            Select Case x
+                Case ReceiptTypeSelection.AccountsReceivable, ReceiptTypeSelection.Customer
+                    View.ContactDataSource.DefaultView.RowFilter = "CSECode = 'C'"
+                Case ReceiptTypeSelection.Employee
+                    View.ContactDataSource.DefaultView.RowFilter = "CSECode = 'E'"
+                Case ReceiptTypeSelection.SupplierRefund
+                    View.ContactDataSource.DefaultView.RowFilter = "CSECode = 'S'"
+                Case Else
+                    View.ContactDataSource.DefaultView.RowFilter = Nothing
+            End Select
         End Sub
 
 

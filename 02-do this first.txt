@@ -1,3 +1,5 @@
+check CashReceiptEntry value being chagned after save for contactIdNo
+
 Check adding of ARJournal - duplicate entries in ARJOURNAL when saving new record (Why? just check)
 
 delete purchase item 8413 - pharmacy

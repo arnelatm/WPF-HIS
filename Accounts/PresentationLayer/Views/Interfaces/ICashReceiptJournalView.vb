@@ -36,7 +36,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property EmployeesByName As Object
         Property CustomersByName As Object
         Property SuppliersByName As Object
-        Property PayorDataSource As Object
+        Property ContactDataSource As DataTable
         Property JournalCode As String
         Property JournalCodeDisplay As String
         Property CashReceiptAccountCount As Int16

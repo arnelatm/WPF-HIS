@@ -129,6 +129,7 @@ Public Class DgvFooter
         MyBase.RowHeadersVisible = False
         Height = 22
         Width = _parentDgv.Width
+        RowHeadersWidth = _parentDgv.RowHeadersWidth
         AllowUserToAddRows = False
         AllowUserToDeleteRows = False
         AllowUserToOrderColumns = False
@@ -184,6 +185,7 @@ Public Class DgvFooter
             Next
 
             RowHeadersVisible = _parentDgv.RowHeadersVisible
+            RowHeadersWidth = _parentDgv.RowHeadersWidth
             ColumnHeadersVisible = False
 
             _killAddColumns = True

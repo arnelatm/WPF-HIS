@@ -216,7 +216,7 @@ Namespace PresentationLayer.Views.Forms
         Public Property PayorIdNo As Int32? Implements ICashReceiptJournalView.PayorIdNo
             Get
                 If txtPayorIdNo.Text <> "" Then
-                    Return Convert.ToInt32(TxtIdNo.Text)
+                    Return Convert.ToInt32(txtPayorIdNo.Text)
                 Else
                     Return 0
                 End If
@@ -228,10 +228,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property PayorName As String Implements ICashReceiptJournalView.PayorName
             Get
-                Return txtContactName.Text
+                Return txtPayorName.Text
             End Get
             Set
-                txtContactName.Text = Value
+                txtPayorName.Text = Value
             End Set
         End Property
 
@@ -265,24 +265,19 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Private _payorDataSource
-
-        Public Property PayorDataSource As Object Implements ICashReceiptJournalView.PayorDataSource
+        Private _contactDataSource As DataTable
+        Public Property ContactDataSource As DataTable Implements ICashReceiptJournalView.ContactDataSource
             Get
-                Return _payorDataSource
+                Return _contactDataSource
             End Get
-            Set(value As Object)
-                _payorDataSource = value
-                cboContactIdNo.ValueMember = "IdNo"
-                cboContactIdNo.DisplayMember = "Name"
-                cboContactIdNo.DataSource = value
-                'cboContactIdNo.SetValue(ContactIdNo)
-                cboContactIdNo.BackColor = cboPayorType.BackColor
-                cboContactIdNo.MaxDropDownItems = 8
-                cboContactIdNo.DropDownHeight = 106
-                'cboContactIdNo.Refresh()
+            Set
+                _contactDataSource = Value
+                cboContactIdNo.DataSource = Nothing
+                cboContactIdNo.DataSource = Value
+                cboContactIdNo.Refresh()
             End Set
         End Property
+
         Public Property Posted As Boolean Implements ICashReceiptJournalView.Posted
             Get
                 Return chkPosted.Checked
@@ -380,7 +375,7 @@ Namespace PresentationLayer.Views.Forms
          {"OrNumber", txtORNumber},
          {"PayorType", cboPayorType},
          {"PayorIdNo", txtPayorIdNo},
-         {"PayorName", txtContactName},
+         {"PayorName", txtPayorName},
          {"Posted", chkPosted},
          {"ReferenceNo", txtReferenceNo},
          {"TransactionDate", dtpTransactionDate},
@@ -516,7 +511,7 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub CboPayorType_ValueChanged(sender As Object, e As EventArgs) Handles cboPayorType.Validated, cboPayorType.SelectionChangeCommitted
+        Private Sub CboPayorType_Validated(sender As Object, e As EventArgs) Handles cboPayorType.Validated, cboPayorType.SelectionChangeCommitted
             If FormShown Then
                 RaiseEvent ReceiptTypeChanged(PayorType)
                 If OpenInvoiceMode Then
@@ -532,7 +527,7 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub CboAccountIdNo_Changed(sender As Object, e As EventArgs) Handles cboAccountIdNo.Validated, cboAccountIdNo.SelectedIndexChanged
+        Private Sub CboAccountIdNo_Changed(sender As Object, e As EventArgs) Handles cboAccountIdNo.Validated
             If FormShown Then
                 UpdateFirstLine()
             End If
@@ -700,14 +695,14 @@ Namespace PresentationLayer.Views.Forms
             If payorTypeEnum = ReceiptTypeSelection.Others Or payorTypeEnum = ReceiptTypeSelection.NotSpecified Then
                 cboContactIdNo.Visible = False
                 cboContactIdNo.Width = 0
-                txtContactName.Visible = True
+                txtPayorName.Visible = True
                 cboContactIdNo.SelectedIndex = -1
-                txtContactName.Width = _payorOrigWidth
+                txtPayorName.Width = _payorOrigWidth
             Else
                 cboContactIdNo.Visible = True
                 cboContactIdNo.Width = _payorOrigWidth
-                txtContactName.Visible = False
-                txtContactName.Width = 0
+                txtPayorName.Visible = False
+                txtPayorName.Width = 0
             End If
         End Sub
 
@@ -783,9 +778,21 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub cboContactIdNo_SelectedIndexChanged() Handles cboContactIdNo.SelectionChangeCommitted
+        Private Sub cboContactIdNo_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cboContactIdNo.SelectionChangeCommitted
             RaiseEvent ContactidNoChanged(bsCsrOiItems)
         End Sub
+
+        Private Sub cboContactIdNo_Validated(sender As Object, e As EventArgs) Handles cboContactIdNo.Validated
+            RaiseEvent ContactidNoChanged(bsCsrOiItems)
+        End Sub
+
+        Public Sub CRAfterSave() Handles btnUndo.Click, btnSave.Click
+            Dim x As Int32 = ContactIdNo
+            ContactDataSource.DefaultView.RowFilter = Nothing
+            cboContactIdNo.SelectedValue = x
+            cboContactIdNo.Refresh()
+        End Sub
+
 
     End Class
 

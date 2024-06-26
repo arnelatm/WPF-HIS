@@ -57,11 +57,11 @@ Namespace PresentationLayer.Presenters
 
         Private Sub OnEditingAccountIdNo(bs As BindingSource)
             If bs.Current.SpecialAccount = EnumToCode(SpecialAccountSelection.AccountsPayable) Then
-                View.CurrentPayeeDataSource = MakeVarDataSources1({"Contact_View", "IdNo,ContactName,ContactCode", "PayeeType = 'S'", Nothing})
+                View.CurrentPayeeDataSource = GetDataLookupTable({"Contact_View", "IdNo,ContactName,ContactCode", "CSECode = 'S'", Nothing})
             ElseIf bs.Current.SpecialAccount = EnumToCode(SpecialAccountSelection.AccountsReceivable) Then
-                View.CurrentPayeeDataSource = MakeVarDataSources1({"Contact_View", "IdNo,ContactName,ContactCode", "PayeeType = 'C'", Nothing})
+                View.CurrentPayeeDataSource = GetDataLookupTable({"Contact_View", "IdNo,ContactName,ContactCode", "CSECode = 'C'", Nothing})
             ElseIf bs.Current.SpecialAccount = EnumToCode(SpecialAccountSelection.EmployeeLoan) Then
-                View.CurrentPayeeDataSource = MakeVarDataSources1({"Contact_View", "IdNo,ContactName,ContactCode", "PayeeType = 'E'", Nothing})
+                View.CurrentPayeeDataSource = GetDataLookupTable({"Contact_View", "IdNo,ContactName,ContactCode", "CSECode = 'E'", Nothing})
             Else
                 bs.Current.PayIdNo = Nothing
             End If

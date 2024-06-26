@@ -89,10 +89,9 @@ Namespace PresentationLayer.Views.Forms
             Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.dtpTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
-            Me.CFloPayor = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.FloPayor = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.cboContactIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
-            Me.CTextBox1 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.txtContactName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtPayorName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.floPurchaseJournalItems = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -136,7 +135,7 @@ Namespace PresentationLayer.Views.Forms
             Me.floPurchaseJournalHeader.SuspendLayout()
             Me.TableLayoutPanel1.SuspendLayout()
             Me.floHeader2.SuspendLayout()
-            Me.CFloPayor.SuspendLayout()
+            Me.FloPayor.SuspendLayout()
             Me.floPurchaseJournalItems.SuspendLayout()
             CType(Me.DataGridViewJournalItems, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.bsJournalItems, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -198,15 +197,15 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.Controls.Add(Me.txtNotes, 1, 5)
             Me.TableLayoutPanel1.Controls.Add(Me.floHeader2, 9, 0)
             Me.TableLayoutPanel1.Controls.Add(Me.dtpTransactionDate, 7, 0)
-            Me.TableLayoutPanel1.Controls.Add(Me.CFloPayor, 5, 1)
+            Me.TableLayoutPanel1.Controls.Add(Me.FloPayor, 5, 1)
             Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
             '
             'lblContactIdNo
             '
             Me.lblContactIdNo.BackColor = System.Drawing.Color.Transparent
             Me.lblContactIdNo.DisplayOnly = True
-            Me.lblContactIdNo.EditingMode = False
             resources.ApplyResources(Me.lblContactIdNo, "lblContactIdNo")
+            Me.lblContactIdNo.EditingMode = False
             Me.lblContactIdNo.Name = "lblContactIdNo"
             Me.lblContactIdNo.Translatable = True
             '
@@ -325,7 +324,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayorType.DataValue = Nothing
             Me.cboPayorType.DefaultValue = "0"
             Me.cboPayorType.DisplayMember = "Name"
-            Me.cboPayorType.DropDownHeight = 24
+            Me.cboPayorType.DropDownHeight = 21
             Me.cboPayorType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboPayorType.Editable = True
             Me.cboPayorType.EditingMode = False
@@ -408,8 +407,8 @@ Namespace PresentationLayer.Views.Forms
             Me.lblReferenceNo.BackColor = System.Drawing.Color.Transparent
             Me.TableLayoutPanel1.SetColumnSpan(Me.lblReferenceNo, 2)
             Me.lblReferenceNo.DisplayOnly = True
-            Me.lblReferenceNo.EditingMode = False
             resources.ApplyResources(Me.lblReferenceNo, "lblReferenceNo")
+            Me.lblReferenceNo.EditingMode = False
             Me.lblReferenceNo.Name = "lblReferenceNo"
             Me.lblReferenceNo.Translatable = True
             '
@@ -489,7 +488,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.DataValue = Nothing
             Me.cboAccountIdNo.DefaultValue = ""
             Me.cboAccountIdNo.DisplayMember = "Name"
-            Me.cboAccountIdNo.DropDownHeight = 24
+            Me.cboAccountIdNo.DropDownHeight = 21
             Me.cboAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboAccountIdNo.Editable = True
             Me.cboAccountIdNo.EditingMode = False
@@ -533,7 +532,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDiscountAccountIdNo.DataValue = Nothing
             Me.cboDiscountAccountIdNo.DefaultValue = Nothing
             Me.cboDiscountAccountIdNo.DisplayMember = "Name"
-            Me.cboDiscountAccountIdNo.DropDownHeight = 24
+            Me.cboDiscountAccountIdNo.DropDownHeight = 21
             Me.cboDiscountAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboDiscountAccountIdNo.Editable = True
             Me.cboDiscountAccountIdNo.EditingMode = False
@@ -991,15 +990,14 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpTransactionDate.ValueIsMandatory = False
             Me.dtpTransactionDate.ValueIsNullable = False
             '
-            'CFloPayor
+            'FloPayor
             '
-            Me.CFloPayor.BackColor = System.Drawing.Color.Transparent
-            Me.TableLayoutPanel1.SetColumnSpan(Me.CFloPayor, 3)
-            Me.CFloPayor.Controls.Add(Me.cboContactIdNo)
-            Me.CFloPayor.Controls.Add(Me.CTextBox1)
-            Me.CFloPayor.Controls.Add(Me.txtContactName)
-            resources.ApplyResources(Me.CFloPayor, "CFloPayor")
-            Me.CFloPayor.Name = "CFloPayor"
+            resources.ApplyResources(Me.FloPayor, "FloPayor")
+            Me.FloPayor.BackColor = System.Drawing.Color.Transparent
+            Me.TableLayoutPanel1.SetColumnSpan(Me.FloPayor, 3)
+            Me.FloPayor.Controls.Add(Me.cboContactIdNo)
+            Me.FloPayor.Controls.Add(Me.txtPayorName)
+            Me.FloPayor.Name = "FloPayor"
             '
             'cboContactIdNo
             '
@@ -1011,7 +1009,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboContactIdNo.DataValue = Nothing
             Me.cboContactIdNo.DefaultValue = Nothing
             Me.cboContactIdNo.DisplayMember = "Name"
-            Me.cboContactIdNo.DropDownHeight = 24
+            Me.cboContactIdNo.DropDownHeight = 21
             Me.cboContactIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboContactIdNo.Editable = True
             Me.cboContactIdNo.EditingMode = False
@@ -1044,56 +1042,31 @@ Namespace PresentationLayer.Views.Forms
             Me.cboContactIdNo.ValueIsNumeric = False
             Me.cboContactIdNo.ValueMember = "IdNo"
             '
-            'CTextBox1
+            'txtPayorName
             '
-            Me.CTextBox1.BackColor = System.Drawing.Color.White
-            Me.CTextBox1.BegFindValue = Nothing
-            Me.CTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.CTextBox1.ComputedValue = False
-            Me.CTextBox1.CustomFormat = Nothing
-            Me.CTextBox1.DataBoundControl = True
-            Me.CTextBox1.EditingMode = True
-            Me.CTextBox1.EndFindValue = Nothing
-            Me.CTextBox1.FieldDescription = Nothing
-            Me.CTextBox1.FieldName = Nothing
-            Me.CTextBox1.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.CTextBox1.FindEnabled = False
-            resources.ApplyResources(Me.CTextBox1, "CTextBox1")
-            Me.CTextBox1.ForeColor = System.Drawing.Color.Black
-            Me.CTextBox1.LinkedLabel = Nothing
-            Me.CTextBox1.MaximumValue = Nothing
-            Me.CTextBox1.MinimumValue = Nothing
-            Me.CTextBox1.Name = "CTextBox1"
-            Me.CTextBox1.OldValue = Nothing
-            Me.CTextBox1.OverrideMaxLength = 0
-            Me.CTextBox1.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.CTextBox1.Translatable = False
-            '
-            'txtContactName
-            '
-            Me.txtContactName.BackColor = System.Drawing.Color.White
-            Me.txtContactName.BegFindValue = Nothing
-            Me.txtContactName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtContactName.ComputedValue = False
-            Me.txtContactName.CustomFormat = Nothing
-            Me.txtContactName.DataBoundControl = True
-            Me.txtContactName.EditingMode = False
-            Me.txtContactName.EndFindValue = Nothing
-            Me.txtContactName.FieldDescription = Nothing
-            Me.txtContactName.FieldName = Nothing
-            Me.txtContactName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtContactName.FindEnabled = False
-            resources.ApplyResources(Me.txtContactName, "txtContactName")
-            Me.txtContactName.ForeColor = System.Drawing.Color.Black
-            Me.txtContactName.LinkedLabel = Nothing
-            Me.txtContactName.MaximumValue = Nothing
-            Me.txtContactName.MinimumValue = Nothing
-            Me.txtContactName.Name = "txtContactName"
-            Me.txtContactName.OldValue = Nothing
-            Me.txtContactName.OverrideMaxLength = 0
-            Me.txtContactName.ReadOnly = True
-            Me.txtContactName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtContactName.Translatable = False
+            Me.txtPayorName.BackColor = System.Drawing.Color.White
+            Me.txtPayorName.BegFindValue = Nothing
+            Me.txtPayorName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtPayorName.ComputedValue = False
+            Me.txtPayorName.CustomFormat = Nothing
+            Me.txtPayorName.DataBoundControl = True
+            Me.txtPayorName.EditingMode = False
+            Me.txtPayorName.EndFindValue = Nothing
+            Me.txtPayorName.FieldDescription = Nothing
+            Me.txtPayorName.FieldName = Nothing
+            Me.txtPayorName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtPayorName.FindEnabled = False
+            resources.ApplyResources(Me.txtPayorName, "txtPayorName")
+            Me.txtPayorName.ForeColor = System.Drawing.Color.Black
+            Me.txtPayorName.LinkedLabel = Nothing
+            Me.txtPayorName.MaximumValue = Nothing
+            Me.txtPayorName.MinimumValue = Nothing
+            Me.txtPayorName.Name = "txtPayorName"
+            Me.txtPayorName.OldValue = Nothing
+            Me.txtPayorName.OverrideMaxLength = 0
+            Me.txtPayorName.ReadOnly = True
+            Me.txtPayorName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtPayorName.Translatable = False
             '
             'floPurchaseJournalItems
             '
@@ -1734,8 +1707,8 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.PerformLayout()
             Me.floHeader2.ResumeLayout(False)
             Me.floHeader2.PerformLayout()
-            Me.CFloPayor.ResumeLayout(False)
-            Me.CFloPayor.PerformLayout()
+            Me.FloPayor.ResumeLayout(False)
+            Me.FloPayor.PerformLayout()
             Me.floPurchaseJournalItems.ResumeLayout(False)
             CType(Me.DataGridViewJournalItems, System.ComponentModel.ISupportInitialize).EndInit()
             CType(Me.bsJournalItems, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1787,7 +1760,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents txtORNumber As CTextBox
         Friend WithEvents txtAmount As CTextBox
         Friend WithEvents txtVatNumber As CTextBox
-        Friend WithEvents txtContactName As CTextBox
+        Friend WithEvents txtPayorName As CTextBox
         Friend dgvSequence As CDgvTextColumn
         Friend WithEvents dgvAccountIdNo As CDgvComboBoxColumn
         Friend dgvDebit As CdgvMoneyColumn
@@ -1816,10 +1789,9 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents AccountIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents txtPayorIdNo As CTextBox
-        Friend WithEvents CTextBox1 As CTextBox
         Friend WithEvents cboContactIdNo As CtComboBox
         Friend WithEvents dtpTransactionDate As CCustomDateTimePicker
-        Friend WithEvents CFloPayor As CFlowLayout
+        Friend WithEvents FloPayor As CFlowLayout
         Friend WithEvents floHeader2 As CFlowLayout
         Friend WithEvents lblApplied As CLabel
         Friend WithEvents txtApplied As CTextBox

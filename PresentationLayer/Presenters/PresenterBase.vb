@@ -2378,10 +2378,12 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         CreateVarDataSources(data)
     End Sub
 
-    Public Function MakeVarDataSources1(dataObject As Object) As DataTable
-        Dim result As DataTable
-        result = CreateDataLookUp1(dataObject)
-        Return result
+    Public Function GetDataLookupTable(dataObject As Object) As DataTable
+        Dim dataLookupSpecs As DataTableLookupSpec
+        dataLookupSpecs = CreateDataLookupTable(dataObject)
+        Dim cd As New DataCreator(Service)
+        Dim data As DataTable = cd.CreateDataTable(dataLookupSpecs)
+        Return data
     End Function
 
     Public Function MakeVarDataSource(item As Object) As DataTable
@@ -2470,7 +2472,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Return dtl
     End Function
 
-    Private Function CreateDataLookUp1(item As Object) As DataTable
+    Private Function CreateDataLookupTable(item As Object) As DataTableLookupSpec
         Const LookupTableName As Int32 = 0
         Const LookupFieldNames As Int32 = 1
         Const LookupFilter As Int32 = 2
@@ -2478,36 +2480,32 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Const Ascending As Int32 = 4
         Const ValueMember As Int32 = 5
         Const DisplayMember As Int32 = 6
-
-        Dim dtl As New DataLookupSpecs
+        Dim dtl As New DataTableLookupSpec
         dtl.TableName = item(LookupTableName)
         dtl.Ascending = True
-        If item.Length - 1 > 1 Then
+        If item.Length - 1 > 0 Then
             dtl.LuFields = item(LookupFieldNames)
         End If
-        If item.Length - 1 > 2 Then
+        If item.Length - 1 > 1 Then
             dtl.Filter = item(LookupFilter)
         End If
-        If item.Length - 1 > 3 Then
+        If item.Length - 1 > 2 Then
             dtl.SortKey = item(LookupSortKey)
         End If
-        If item.Length - 1 > 4 Then
+        If item.Length - 1 > 3 Then
             dtl.Ascending = item(Ascending)
         End If
-        If item.Length - 1 > 5 Then
+        If item.Length - 1 > 4 Then
             dtl.ValueMember = item(ValueMember)
         End If
-        If item.Length - 1 > 6 Then
+        If item.Length - 1 > 5 Then
             dtl.DisplayMember = item(DisplayMember)
         End If
         ComposeLookupProperties(dtl)
-        Dim cd As New DataCreator(Service)
-        Dim data As DataTable = cd.CreateDataTable(dtl)
-        cd = Nothing
-        Return data
+        Return dtl
     End Function
 
-    Private Sub ComposeLookupProperties(dtl As DataLookupSpecs)
+    Private Sub ComposeLookupProperties(dtl As DataTableLookupSpec)
         Dim RightToLeftFormat = GlobalFunctions.IsRightToLeft(CultureInfo.CurrentCulture.ToString())
         If dtl.LuFields Is Nothing Then
             dtl.NameFieldOrig = dtl.TableName + "Name"
@@ -2561,6 +2559,19 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
                     dtl.DisplayMember = "Name"
                 End If
                 dtl.LuFields = fieldNames(0) + " As IdNo," + dtl.NameDisplayValue + " as Name," + fieldNames(2).ToString() + " as Code"
+                If dtl.SortKey Is Nothing Then
+                    dtl.SortKey = dtl.NameField
+                End If
+            ElseIf fieldNames.Count() = 4 Then
+                dtl.NameField = fieldNames(1).Trim()
+                dtl.NameDisplayValue = "Concat(" + TranslateNameField(dtl.TableName, dtl.NameField) + " COLLATE SQL_Latin1_General_CP1_CI_AS,'-'," + fieldNames(2) + ") COLLATE SQL_Latin1_General_CP1_CI_AS"
+                If dtl.ValueMember Is Nothing Then
+                    dtl.ValueMember = "IdNo"
+                End If
+                If dtl.DisplayMember Is Nothing Then
+                    dtl.DisplayMember = "Name"
+                End If
+                dtl.LuFields = fieldNames(0) + " As IdNo," + dtl.NameDisplayValue + " as Name," + fieldNames(2).ToString() + " as Code" + ", " + fieldNames(3)
                 If dtl.SortKey Is Nothing Then
                     dtl.SortKey = dtl.NameField
                 End If
@@ -2694,9 +2705,9 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
 
 End Class
 
-Public Class DataLookupSpecs1
+
+Public Class DataTableLookupSpec
     Public Property TableName As String
-    Public Property PropertyControl As CtComboBox
     Public Property LuFields As String
     Public Property SortKey As String
     Public Property Filter As String
@@ -2714,7 +2725,9 @@ Public Class DataLookupSpecs1
 End Class
 
 Public Class DataLookupSpecs
-    Inherits DataLookupSpecs1
+    Inherits DataTableLookupSpec
+
+    Public Property PropertyControl As CtComboBox
     Public Property PropertyName As String
 
 End Class
@@ -2728,6 +2741,10 @@ Public Class DataCreator
     End Sub
 
     Public Function CreateDataTable(dtl As DataLookupSpecs) As DataTable
+        Return _sv.GetDtRecords(dtl.TableName, dtl.LuFields, dtl.Filter, dtl.SortKey, dtl.Ascending)
+    End Function
+
+    Public Function CreateDataTable(dtl As DataTableLookupSpec) As DataTable
         Return _sv.GetDtRecords(dtl.TableName, dtl.LuFields, dtl.Filter, dtl.SortKey, dtl.Ascending)
     End Function
 
