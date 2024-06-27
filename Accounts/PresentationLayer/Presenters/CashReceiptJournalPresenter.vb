@@ -1214,6 +1214,10 @@ Namespace PresentationLayer.Presenters
             Return Service.GetField(Of Int32, Int32)(contactIdNo, "Contact", "IdNo", "PayorIdNo")
         End Function
 
+        Public Sub OnBeforeEdit() Handles MyBase.BeforeEdit
+            UpdateContactDataSource(View.PayorType)
+        End Sub
+
         'bsJournalItems.AddNew()
         'JournalItems(nIndex).AccountIdNo = accountId
         '' adding a new row to the bindingsource adds a new empty row at the end with null values

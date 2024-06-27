@@ -513,23 +513,8 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        'Private Sub CboPayorType_Validating(sender As Object, e As EventArgs) Handles cboPayorType.Validating
-        'Public Sub MyProc() Handles cboPayorType.SelectedValueChanged
-        '    RaiseEvent ReceiptTypeChanged(PayorType)
-        '    If OpenInvoiceMode Then
-        '        UpdateOpenInvoicesDisplay()
-        '        If cboContactIdNo.SelectedIndex = -1 Then
-        '            bsCsrOiItems.Clear()
-        '        End If
-        '    Else
-        '        cboContactIdNo.SelectedIndex = -1
-        '    End If
-        '    UpdateFirstLine()
-        '    UpdateDisplay()
-        'End Sub
-
         Private Sub CboPayorType_ValueChanged(sender As Object, e As EventArgs) Handles cboPayorType.SelectedValueChanged
-            If AddingMode Or EditingMode Then
+            If AddingMode OrElse EditingMode Then
                 RaiseEvent ReceiptTypeChanged(PayorType)
                 If OpenInvoiceMode Then
                     UpdateOpenInvoicesDisplay()
@@ -795,17 +780,21 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
+        'Private Sub cboPayContactIdNo_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cboContactIdNo.SelectionChangeCommitted
+        '    RaiseEvent ContactidNoChanged(bsCsrOiItems)
+        'End Sub
+
+
         Private Sub cboContactIdNo_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cboContactIdNo.SelectionChangeCommitted
             RaiseEvent ContactidNoChanged(bsCsrOiItems)
         End Sub
-
         'Private Sub cboContactIdNo_Validated(sender As Object, e As EventArgs) Handles cboContactIdNo.Validated
         '    If AddingMode OrElse EditingMode Then
         '        RaiseEvent ContactidNoChanged(bsCsrOiItems)
         '    End If
         'End Sub
 
-        Public Sub CRAfterSave() Handles btnUndo.Click, btnSave.Click
+        Public Sub CRAfterSave()
             Dim x As Int32 = ContactIdNo
             ContactDataSource.DefaultView.RowFilter = Nothing
             cboContactIdNo.SelectedValue = x

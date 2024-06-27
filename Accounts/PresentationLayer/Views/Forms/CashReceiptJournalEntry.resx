@@ -2180,7 +2180,7 @@
     <value>1000, 530</value>
   </data>
   <data name="floFullEntryArea.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1091, 574</value>
+    <value>1091, 596</value>
   </data>
   <data name="floFullEntryArea.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2201,7 +2201,7 @@
     <value>True</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>42</value>
+    <value>43</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>

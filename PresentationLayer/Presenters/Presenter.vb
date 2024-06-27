@@ -101,7 +101,6 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
 
     Public Overrides Sub ViewButtonClicked(ByRef eventType As ViewButtonClicked)
         RaiseEvent BeforeChangeRecord()
-
         Select Case eventType.SelectedButton
             Case ButtonClicked.First
                 GoFirstRecord()
