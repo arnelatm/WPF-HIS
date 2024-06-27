@@ -497,22 +497,39 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub TxtAmount_Validated(sender As Object, e As EventArgs) Handles txtAmount.Validated
-            If OpenInvoiceMode Then
-                UpdateOiTotals()
+            If AddingMode OrElse EditingMode Then
+                If OpenInvoiceMode Then
+                    UpdateOiTotals()
+                End If
+                UpdateFirstLine()
             End If
-            UpdateFirstLine()
         End Sub
 
-        Private Sub CboContactIdNo_ValueChanged(sender As Object, e As EventArgs)
-            If FormShown Then
+        Private Sub CboContactIdNo_ValueChanged(sender As Object, e As EventArgs) Handles cboContactIdNo.SelectedValueChanged
+            If AddingMode OrElse EditingMode Then
                 If OpenInvoiceMode Then
                     UpdateOpenInvoicesDisplay()
                 End If
             End If
         End Sub
 
-        Private Sub CboPayorType_Validated(sender As Object, e As EventArgs) Handles cboPayorType.Validated, cboPayorType.SelectionChangeCommitted
-            If FormShown Then
+        'Private Sub CboPayorType_Validating(sender As Object, e As EventArgs) Handles cboPayorType.Validating
+        'Public Sub MyProc() Handles cboPayorType.SelectedValueChanged
+        '    RaiseEvent ReceiptTypeChanged(PayorType)
+        '    If OpenInvoiceMode Then
+        '        UpdateOpenInvoicesDisplay()
+        '        If cboContactIdNo.SelectedIndex = -1 Then
+        '            bsCsrOiItems.Clear()
+        '        End If
+        '    Else
+        '        cboContactIdNo.SelectedIndex = -1
+        '    End If
+        '    UpdateFirstLine()
+        '    UpdateDisplay()
+        'End Sub
+
+        Private Sub CboPayorType_ValueChanged(sender As Object, e As EventArgs) Handles cboPayorType.SelectedValueChanged
+            If AddingMode Or EditingMode Then
                 RaiseEvent ReceiptTypeChanged(PayorType)
                 If OpenInvoiceMode Then
                     UpdateOpenInvoicesDisplay()
@@ -527,14 +544,14 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub CboAccountIdNo_Changed(sender As Object, e As EventArgs) Handles cboAccountIdNo.Validated
-            If FormShown Then
+        Private Sub CboAccountIdNo_Changed(sender As Object, e As EventArgs) Handles cboAccountIdNo.SelectedValueChanged
+            If AddingMode OrElse EditingMode Then
                 UpdateFirstLine()
             End If
         End Sub
 
         Private Sub TxtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
-            If FormShown Then
+            If AddingMode OrElse EditingMode Then
                 If OpenInvoiceMode Then
                     MoveToGridView(DataGridViewCsrOiItems, "dgvAmount")
                 Else
@@ -679,7 +696,7 @@ Namespace PresentationLayer.Views.Forms
             End If
             ShowPayor()
             UpdateTotals()
-            If EditingMode Or AddingMode Then
+            If AddingMode OrElse EditingMode Then
                 If OpenInvoiceMode Then
                     btnAutoApply.Visible = True
                 Else
@@ -765,13 +782,13 @@ Namespace PresentationLayer.Views.Forms
                 'cboContactIdNo.DataSource = Presenter.MakeControlDataSources({New Object() {"Contact_View", "ContactIdNo", "IdNo,ContactName,ContactCode", Nothing, Nothing}})
                 'cboContactIdNo.Refresh()
                 cboContactIdNo.DroppedDown = True
-                OrigComboBox = ControlFactory.CopyToObject(cboContactIdNo)
+                OrigCombobox = ControlFactory.CopyToObject(cboContactIdNo)
                 _sw += 1
             Else
                 Dim currentComboBox As CBFormCtrl = ControlFactory.CopyToObject(cboContactIdNo)
                 Dim compareLogic As CompareLogic = New CompareLogic()
                 compareLogic.Config.MaxDifferences = 1000
-                Dim result As ComparisonResult = compareLogic.Compare(currentComboBox, OrigComboBox)
+                Dim result As ComparisonResult = compareLogic.Compare(currentComboBox, OrigCombobox)
                 If Not result.AreEqual Then
                     MessageBox.Show(result.DifferencesString)
                 End If
@@ -782,9 +799,11 @@ Namespace PresentationLayer.Views.Forms
             RaiseEvent ContactidNoChanged(bsCsrOiItems)
         End Sub
 
-        Private Sub cboContactIdNo_Validated(sender As Object, e As EventArgs) Handles cboContactIdNo.Validated
-            RaiseEvent ContactidNoChanged(bsCsrOiItems)
-        End Sub
+        'Private Sub cboContactIdNo_Validated(sender As Object, e As EventArgs) Handles cboContactIdNo.Validated
+        '    If AddingMode OrElse EditingMode Then
+        '        RaiseEvent ContactidNoChanged(bsCsrOiItems)
+        '    End If
+        'End Sub
 
         Public Sub CRAfterSave() Handles btnUndo.Click, btnSave.Click
             Dim x As Int32 = ContactIdNo

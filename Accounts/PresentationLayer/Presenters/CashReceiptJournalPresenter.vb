@@ -1080,7 +1080,9 @@ Namespace PresentationLayer.Presenters
                 Case ReceiptTypeSelection.AccountsReceivable, ReceiptTypeSelection.Customer
                     View.ContactDataSource.DefaultView.RowFilter = "CSECode = 'C'"
                 Case ReceiptTypeSelection.Employee
+                    Dim y = View.ContactIdNo
                     View.ContactDataSource.DefaultView.RowFilter = "CSECode = 'E'"
+                    View.ContactIdNo = y
                 Case ReceiptTypeSelection.SupplierRefund
                     View.ContactDataSource.DefaultView.RowFilter = "CSECode = 'S'"
                 Case Else
