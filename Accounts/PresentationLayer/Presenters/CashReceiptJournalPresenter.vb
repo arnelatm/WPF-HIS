@@ -69,18 +69,29 @@ Namespace PresentationLayer.Presenters
 
             AddHandler view.AutoApplyAmountRequested, AddressOf OnAutoApplyAmountRequested
             AddHandler view.AddCustomerOpenInvoices, AddressOf OnAddCustomerOpenInvoices
-            AddHandler view.FirstLineUpdateNeeded, AddressOf OnFirstLineUpdateNeeded
             AddHandler view.ReceiptTypeChanged, AddressOf OnReceiptTypeChanged
-            AddHandler view.AccountIdNoChanged, AddressOf OnAccountIdNoChanged
+            AddHandler view.JiAccountIdNoChanged, AddressOf OnAccountIdNoChanged
             AddHandler view.DebitAmountChanged, AddressOf OnDebitAmountChanged
             AddHandler view.CreditAmountChanged, AddressOf OnCreditAmountChanged
             'AddHandler view.OpenInvoiceDataRequested, AddressOf OnOpenInvoiceDataRequested
             AddHandler view.ContactIdNoChanged, AddressOf OnContactIdNoChanged
+            AddHandler view.ReceiptAmountChanged, AddressOf OnReceiptAmountChanged
+            AddHandler view.DebitAccountIdNoChanged, AddressOf OnDebitAccountIdNoChanged
 
             view.CashReceiptAccountCount = GetCrAccountCount()
         End Sub
 
+        Private Sub OnDebitAccountIdNoChanged(bs As BindingSource)
+            UpdateFirstJournalItemEntry(bs)
+        End Sub
 
+        Private Sub OnReceiptAmountChanged(bsJournalItem As BindingSource, bsCsrOiItem As BindingSource)
+            If View.OpenInvoiceMode Then
+                View.UnApplied =
+            Else
+                UpdateFirstJournalItemEntry(bsJournalItem)
+            End If
+        End Sub
 
         Public Property JournalCode As String = "CR"
 
@@ -163,25 +174,33 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Public Sub UpdateFirstLine()
-            If EditMode Or AddMode Then
-                If View.JournalItems.Count() = 0 Then
-                    View.JournalItems = New List(Of JournalItemView) From {
-                        FirstJournalItem()
-                        }
+        Private Sub UpdateFirstJournalItemEntry(bs As BindingSource)
+            If View.JournalItems IsNot Nothing Then
+                If bs.Count() = 0 Then
+                    CreateFirstJournalItem(bs)
+                Else
+                    bs.MoveFirst()
                 End If
-                For Each item In View.JournalItems
-                    item.JournalIdNo = View.IdNo
-                    item.Sequence = 1
-                    item.AccountIdNo = View.AccountIdNo
-                    item.Credit = 0
-                    item.Debit = View.Amount
-                    item.RevCostCenterIdNo = 0
-                    MakePayTypeAndSpecialAccount(item, View.AccountIdNo)
-                    Exit For
-                Next
+                With bs.Current
+                    .JournalIdNo = View.IdNo
+                    .Sequence = 1
+                    .AccountIdNo = View.AccountIdNo
+                    .Credit = 0
+                    .Debit = View.Amount
+                    .RevCostCenterIdNo = 0
+                    MakePayTypeAndSpecialAccount(bs, View.AccountIdNo)
+                End With
             End If
         End Sub
+
+        Private Function CreateFirstJournalItem(bs As BindingSource)
+            bs.AddNew()
+            bs.Current.JournaldNo = View.IdNo
+            'Dim item As New JournalItemView With {
+            '        .JournalIdNo = View.IdNo
+            '        }
+            'Return item
+        End Function
 
         Protected Overrides Function IsBizDataValid() As Boolean
             Dim retValue = False
@@ -241,20 +260,7 @@ Namespace PresentationLayer.Presenters
             Return retValue
         End Function
 
-        Private Function FirstJournalItem()
-            Dim item As New JournalItemView With {
-                    .JournalIdNo = View.IdNo,
-                    .Sequence = 1,
-                    .AccountIdNo = View.AccountIdNo,
-                    .Credit = View.Amount,
-                    .Debit = 0,
-                    .RevCostCenterIdNo = 0,
-                    .SpecialAccount = Nothing,
-                    .PayeeType = Nothing,
-                    .Notes = ""
-                    }
-            Return item
-        End Function
+
 
         Public Overrides Sub GoPrintRecord()
             Dim transactionAmount As String
@@ -871,28 +877,6 @@ Namespace PresentationLayer.Presenters
         '    View.ContactIdNo = dataModel.ContactIdNo
         'End Sub
 
-        Private Sub OnFirstLineUpdateNeeded()
-            If EditMode Or AddMode Then
-                If View.JournalItems IsNot Nothing Then
-                    If View.JournalItems.Count() = 0 Then
-                        View.JournalItems = New List(Of JournalItemView) From {
-                            FirstJournalItem()
-                            }
-                    End If
-                    For Each item In View.JournalItems
-                        item.JournalIdNo = View.IdNo
-                        item.Sequence = 1
-                        item.AccountIdNo = View.AccountIdNo
-                        item.Credit = 0
-                        item.Debit = View.Amount
-                        item.RevCostCenterIdNo = 0
-                        MakePayTypeAndSpecialAccount(item, View.AccountIdNo)
-                        Exit For
-                    Next
-                End If
-            End If
-        End Sub
-
         'Private Sub OnOpenInvoiceDataRequested(bs As BindingSource)
         '    bs.DataSource = GetCustomerOpenInvoices(View.CsrOiItems)
         'End Sub
@@ -1020,6 +1004,10 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub OnAddCustomerOpenInvoices()
+            CreateOpenInvoiceData()
+        End Sub
+
+        Private Sub CreateOpenInvoiceData()
             If View.PayorIdNo <> 0 Then
                 Dim unpaidInvoices = GetCustomerOpenInvoices(View.PayorIdNo)
                 Dim nSeq As Integer
@@ -1034,15 +1022,9 @@ Namespace PresentationLayer.Presenters
                 For Each unpaidInvoice In unpaidInvoices
                     Dim itemFound = False
                     If View.CsrOiItems IsNot Nothing Then
-                        For Each item In View.CsrOiItems
-                            If item.ArOpenInvoiceIdNo = unpaidInvoice.IdNo Then
-                                itemFound = True
-                                Exit For
-                            End If
-                        Next
+                        itemFound = IsUnpaidInvoiceFound(unpaidInvoice)
                     End If
                     If Not itemFound Then
-
                         If unpaidInvoice.JournalCode = JournalCode And unpaidInvoice.JournalIdNo = View.IdNo Then
                             ' ignore advance payments if applied to this entry.
                         Else
@@ -1064,14 +1046,50 @@ Namespace PresentationLayer.Presenters
                                 View.CsrOiItems = New List(Of CsrOiItemView)
                             End If
                             View.CsrOiItems.Add(item)
+
                         End If
                     End If
                 Next
             End If
         End Sub
 
-        Private Sub OnReceiptTypeChanged(payorType As String)
+        Private Function IsUnpaidInvoiceFound(unpaidInvoice As CsrOiItemModel) As Boolean
+            Dim itemFound As Boolean = False
+            For Each item In View.CsrOiItems
+                If item.ArOpenInvoiceIdNo = unpaidInvoice.IdNo Then
+                    itemFound = True
+                    Exit For
+                End If
+            Next
+            Return itemFound
+        End Function
+
+        Private Sub OnReceiptTypeChanged(payorType As String, bsJournalItem As BindingSource, bsCsrOiItems As BindingSource)
+            SetOpenInvoiceMode()
             UpdateContactDataSource(payorType)
+            If View.OpenInvoiceMode Then
+                If View.ContactIdNo IsNot Nothing AndAlso View.ContactIdNo > 0 Then
+                    Dim CseCode As String = Service.GetField(Of Int32, Int32)("Contact_View", View.ContactIdNo, "CseCode").ToString()
+                    If CseCode = ReceiptTypeSelection.AccountsReceivable Then
+                        View.PayorIdNo = Service.GetField(Of Int32, Int32)(View.ContactIdNo, "Contact_View", View.ContactIdNo, "PayorType", )
+                        CreateOpenInvoiceData()
+                    Else
+                        View.PayorIdNo = Nothing
+                        DeleteBindingSourceData(bsCsrOiItems)
+                    End If
+                Else
+                    DeleteBindingSourceData(bsCsrOiItems)
+                End If
+            Else
+                UpdateFirstJournalItemEntry(bsJournalItem)
+                DeleteBindingSourceData(bsCsrOiItems)
+            End If
+        End Sub
+
+        Private Shared Sub DeleteBindingSourceData(bs As BindingSource)
+            For Each item As DataRowView In bs
+                bs.Remove(item)
+            Next
         End Sub
 
         Private Sub UpdateContactDataSource(payorType As String)
@@ -1214,9 +1232,23 @@ Namespace PresentationLayer.Presenters
             Return Service.GetField(Of Int32, Int32)(contactIdNo, "Contact", "IdNo", "PayorIdNo")
         End Function
 
-        Public Sub OnBeforeEdit() Handles MyBase.BeforeEdit
+        Private Sub OnBeforeEdit() Handles MyBase.BeforeEdit
             UpdateContactDataSource(View.PayorType)
         End Sub
+
+        Private Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
+            SetOpenInvoiceMode()
+        End Sub
+
+        Private Sub SetOpenInvoiceMode()
+            Dim receiptTypeEnum = CodeToEnum(Of ReceiptTypeSelection)(View.PayorType)
+            If receiptTypeEnum = ReceiptTypeSelection.AccountsReceivable Then
+                View.OpenInvoiceMode = True
+            Else
+                View.OpenInvoiceMode = False
+            End If
+        End Sub
+
 
         'bsJournalItems.AddNew()
         'JournalItems(nIndex).AccountIdNo = accountId

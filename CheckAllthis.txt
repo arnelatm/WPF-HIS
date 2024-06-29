@@ -1,0 +1,12 @@
+        'Private Sub JournalItemBs_AddingNew(ByVal sender As Object, ByVal e As AddingNewEventArgs) Handles bsJournalItems.AddingNew
+        '    e.NewObject = New JournalItemView
+        '    ' work arround for error on datagrid entry on lastrow please do not remove.
+        '    ' The reason it works Is because On a DataGridView where AllowUserToAddRows Is True,
+        '    ' it adds an empty row at the end of its rows which if bound to a list creates a null element at the end of the list.
+        '    ' The code removes that element And then the AddNew in the BindingList will trigger the DataGridView to add it again
+        '    If DataGridViewJournalItems.Rows.Count = bsJournalItems.Count Then
+        '        bsJournalItems.RemoveAt(bsJournalItems.Count - 1)
+        '    End If
+        'End Sub
+
+        Possibly remove them, now working on cashreceiptentry without this code for adding new item.

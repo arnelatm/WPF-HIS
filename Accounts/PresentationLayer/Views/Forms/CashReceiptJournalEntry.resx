@@ -118,16 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <metadata name="StoreCaptions1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>146, 17</value>
+    <value>170, 17</value>
   </metadata>
   <metadata name="TranslatorDAC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>281, 17</value>
+    <value>327, 17</value>
   </metadata>
   <metadata name="AppDataDAC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>411, 17</value>
+    <value>478, 17</value>
   </metadata>
   <metadata name="MyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>535, 17</value>
+    <value>621, 17</value>
   </metadata>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="floFullEntryArea.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
@@ -190,7 +190,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 137</value>
+    <value>1, 141</value>
   </data>
   <data name="lblNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -235,13 +235,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblInvoiceNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>646, 108</value>
+    <value>655, 112</value>
   </data>
   <data name="lblInvoiceNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblInvoiceNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>54, 27</value>
+    <value>69, 27</value>
   </data>
   <data name="lblInvoiceNo.TabIndex" type="System.Int32, mscorlib">
     <value>254</value>
@@ -265,13 +265,13 @@
     <value>3</value>
   </data>
   <data name="txtORNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>702, 108</value>
+    <value>726, 112</value>
   </data>
   <data name="txtORNumber.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtORNumber.Size" type="System.Drawing.Size, System.Drawing">
-    <value>117, 23</value>
+    <value>117, 26</value>
   </data>
   <data name="txtORNumber.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -295,13 +295,13 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="dtpCheckDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>459, 108</value>
+    <value>459, 112</value>
   </data>
   <data name="dtpCheckDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="dtpCheckDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>118, 23</value>
+    <value>119, 27</value>
   </data>
   <data name="dtpCheckDate.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -325,7 +325,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblCheckDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>236, 108</value>
+    <value>236, 112</value>
   </data>
   <data name="lblCheckDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -361,7 +361,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblCheckNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 108</value>
+    <value>1, 112</value>
   </data>
   <data name="lblCheckNumber.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -397,7 +397,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblDiscountAccountIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 82</value>
+    <value>1, 84</value>
   </data>
   <data name="lblDiscountAccountIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -544,13 +544,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblTransactionDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>667, 1</value>
+    <value>681, 1</value>
   </data>
   <data name="lblTransactionDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblTransactionDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>33, 27</value>
+    <value>43, 27</value>
   </data>
   <data name="lblTransactionDate.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -622,7 +622,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtReferenceNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 23</value>
+    <value>152, 26</value>
   </data>
   <data name="txtReferenceNo.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -685,7 +685,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="TxtIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>78, 23</value>
+    <value>78, 26</value>
   </data>
   <data name="TxtIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -715,7 +715,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtJournalCodeDisplay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 23</value>
+    <value>25, 26</value>
   </data>
   <data name="txtJournalCodeDisplay.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -769,7 +769,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="cboDiscountAccountIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>128, 81</value>
+    <value>128, 83</value>
   </data>
   <data name="cboDiscountAccountIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -817,7 +817,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblAmount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 24</value>
+    <value>111, 26</value>
   </data>
   <data name="lblAmount.TabIndex" type="System.Int32, mscorlib">
     <value>264</value>
@@ -841,13 +841,13 @@
     <value>21</value>
   </data>
   <data name="txtAmount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>702, 56</value>
+    <value>726, 56</value>
   </data>
   <data name="txtAmount.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtAmount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>117, 23</value>
+    <value>117, 26</value>
   </data>
   <data name="txtAmount.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -871,13 +871,13 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtVatNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>702, 82</value>
+    <value>726, 84</value>
   </data>
   <data name="txtVatNumber.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtVatNumber.Size" type="System.Drawing.Size, System.Drawing">
-    <value>117, 23</value>
+    <value>117, 26</value>
   </data>
   <data name="txtVatNumber.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -910,13 +910,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblVatNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>634, 82</value>
+    <value>638, 84</value>
   </data>
   <data name="lblVatNumber.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblVatNumber.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 24</value>
+    <value>86, 26</value>
   </data>
   <data name="lblVatNumber.TabIndex" type="System.Int32, mscorlib">
     <value>282</value>
@@ -943,13 +943,13 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtCheckNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>129, 108</value>
+    <value>129, 112</value>
   </data>
   <data name="txtCheckNumber.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtCheckNumber.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 23</value>
+    <value>105, 26</value>
   </data>
   <data name="txtCheckNumber.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -970,7 +970,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>129, 137</value>
+    <value>129, 141</value>
   </data>
   <data name="txtNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1045,7 +1045,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtApplied.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 23</value>
+    <value>92, 26</value>
   </data>
   <data name="txtApplied.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1072,7 +1072,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblUnapplied.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 26</value>
+    <value>1, 29</value>
   </data>
   <data name="lblUnapplied.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1105,13 +1105,13 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtUnapplied.Location" type="System.Drawing.Point, System.Drawing">
-    <value>134, 26</value>
+    <value>134, 29</value>
   </data>
   <data name="txtUnapplied.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtUnapplied.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 23</value>
+    <value>92, 26</value>
   </data>
   <data name="txtUnapplied.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1138,7 +1138,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblDiscountTaken.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 51</value>
+    <value>1, 57</value>
   </data>
   <data name="lblDiscountTaken.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1171,13 +1171,13 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtDiscountTaken.Location" type="System.Drawing.Point, System.Drawing">
-    <value>134, 51</value>
+    <value>134, 57</value>
   </data>
   <data name="txtDiscountTaken.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtDiscountTaken.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 23</value>
+    <value>92, 26</value>
   </data>
   <data name="txtDiscountTaken.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1204,7 +1204,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblVatAmount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 76</value>
+    <value>1, 85</value>
   </data>
   <data name="lblVatAmount.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1237,13 +1237,13 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtVatAmount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>134, 76</value>
+    <value>134, 85</value>
   </data>
   <data name="txtVatAmount.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtVatAmount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 23</value>
+    <value>92, 26</value>
   </data>
   <data name="txtVatAmount.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1270,7 +1270,7 @@
     <value>Arial Narrow, 10.2pt</value>
   </data>
   <data name="chkCancelled.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 104</value>
+    <value>4, 116</value>
   </data>
   <data name="chkCancelled.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1306,7 +1306,7 @@
     <value>Arial Narrow, 10.2pt</value>
   </data>
   <data name="chkPosted.Location" type="System.Drawing.Point, System.Drawing">
-    <value>126, 104</value>
+    <value>126, 116</value>
   </data>
   <data name="chkPosted.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1342,7 +1342,7 @@
     <value>Arial Narrow, 10.2pt</value>
   </data>
   <data name="chkApproved.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 133</value>
+    <value>4, 145</value>
   </data>
   <data name="chkApproved.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1378,7 +1378,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblDateCreated.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 159</value>
+    <value>1, 171</value>
   </data>
   <data name="lblDateCreated.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1411,13 +1411,13 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtDateCreated.Location" type="System.Drawing.Point, System.Drawing">
-    <value>93, 159</value>
+    <value>93, 171</value>
   </data>
   <data name="txtDateCreated.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtDateCreated.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 23</value>
+    <value>133, 26</value>
   </data>
   <data name="txtDateCreated.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -1435,7 +1435,7 @@
     <value>12</value>
   </data>
   <data name="floHeader2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>822, 0</value>
+    <value>844, 0</value>
   </data>
   <data name="floHeader2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -1465,13 +1465,13 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="dtpTransactionDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>701, 0</value>
+    <value>725, 0</value>
   </data>
   <data name="dtpTransactionDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="dtpTransactionDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>118, 23</value>
+    <value>119, 27</value>
   </data>
   <data name="dtpTransactionDate.TabIndex" type="System.Int32, mscorlib">
     <value>283</value>
@@ -1541,7 +1541,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="txtPayorName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 23</value>
+    <value>0, 26</value>
   </data>
   <data name="txtPayorName.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1808,7 +1808,7 @@
     <value>125</value>
   </data>
   <metadata name="bsJournalItems.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>675, 17</value>
+    <value>785, 17</value>
   </metadata>
   <data name="DataGridViewJournalItems.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Left</value>
@@ -1868,7 +1868,7 @@
     <value>6</value>
   </data>
   <data name="dgvTransactionDate.Width" type="System.Int32, mscorlib">
-    <value>86</value>
+    <value>105</value>
   </data>
   <metadata name="dgvJournalCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1880,7 +1880,7 @@
     <value>6</value>
   </data>
   <data name="dgvJournalCode.Width" type="System.Int32, mscorlib">
-    <value>68</value>
+    <value>84</value>
   </data>
   <metadata name="dgvJournalIdNoAp.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1892,7 +1892,7 @@
     <value>6</value>
   </data>
   <data name="dgvJournalIdNoAp.Width" type="System.Int32, mscorlib">
-    <value>75</value>
+    <value>90</value>
   </data>
   <metadata name="dgvPreviousBalance.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1942,6 +1942,9 @@
   <data name="AccountIdNoDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <data name="AccountIdNoDataGridViewTextBoxColumn.Width" type="System.Int32, mscorlib">
+    <value>113</value>
+  </data>
   <data name="IdNoDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
     <value>IdNo</value>
   </data>
@@ -1955,7 +1958,7 @@
     <value>125</value>
   </data>
   <metadata name="bsCsrOiItems.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>808, 17</value>
+    <value>943, 17</value>
   </metadata>
   <data name="DataGridViewCsrOiItems.Location" type="System.Drawing.Point, System.Drawing">
     <value>1074, 3</value>
@@ -2093,7 +2096,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtTotalDebits.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 23</value>
+    <value>100, 26</value>
   </data>
   <data name="txtTotalDebits.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2123,7 +2126,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtTotalCredits.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 23</value>
+    <value>100, 26</value>
   </data>
   <data name="txtTotalCredits.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2153,7 +2156,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtPayorIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 23</value>
+    <value>100, 26</value>
   </data>
   <data name="txtPayorIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>252</value>
@@ -2204,7 +2207,7 @@
     <value>43</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+    <value>8, 16</value>
   </data>
   <data name="$this.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
@@ -90418,7 +90421,10 @@
     <value>Tile</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1090, 628</value>
+    <value>1453, 773</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Cash Receipt Journal </value>
@@ -90446,6 +90452,42 @@
   </data>
   <data name="&gt;&gt;MyErrorProvider.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.ErrorProviderExtended, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;dgvSequenceCsrOi.Name" xml:space="preserve">
+    <value>dgvSequenceCsrOi</value>
+  </data>
+  <data name="&gt;&gt;dgvSequenceCsrOi.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;dgvInvoiceNo.Name" xml:space="preserve">
+    <value>dgvInvoiceNo</value>
+  </data>
+  <data name="&gt;&gt;dgvInvoiceNo.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;dgvJournalCode.Name" xml:space="preserve">
+    <value>dgvJournalCode</value>
+  </data>
+  <data name="&gt;&gt;dgvJournalCode.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;dgvJournalIdNoAp.Name" xml:space="preserve">
+    <value>dgvJournalIdNoAp</value>
+  </data>
+  <data name="&gt;&gt;dgvJournalIdNoAp.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;dgvPreviousBalance.Name" xml:space="preserve">
+    <value>dgvPreviousBalance</value>
+  </data>
+  <data name="&gt;&gt;dgvPreviousBalance.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;dgvBalance.Name" xml:space="preserve">
+    <value>dgvBalance</value>
+  </data>
+  <data name="&gt;&gt;dgvBalance.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvSequence.Name" xml:space="preserve">
     <value>dgvSequence</value>
@@ -90543,47 +90585,11 @@
   <data name="&gt;&gt;SpecialAccountDataGridViewTextBoxColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;bsJournalItems.Name" xml:space="preserve">
-    <value>bsJournalItems</value>
-  </data>
-  <data name="&gt;&gt;bsJournalItems.Type" xml:space="preserve">
-    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dgvSequenceCsrOi.Name" xml:space="preserve">
-    <value>dgvSequenceCsrOi</value>
-  </data>
-  <data name="&gt;&gt;dgvSequenceCsrOi.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;dgvInvoiceNo.Name" xml:space="preserve">
-    <value>dgvInvoiceNo</value>
-  </data>
-  <data name="&gt;&gt;dgvInvoiceNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
   <data name="&gt;&gt;dgvTransactionDate.Name" xml:space="preserve">
     <value>dgvTransactionDate</value>
   </data>
   <data name="&gt;&gt;dgvTransactionDate.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;dgvJournalCode.Name" xml:space="preserve">
-    <value>dgvJournalCode</value>
-  </data>
-  <data name="&gt;&gt;dgvJournalCode.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;dgvJournalIdNoAp.Name" xml:space="preserve">
-    <value>dgvJournalIdNoAp</value>
-  </data>
-  <data name="&gt;&gt;dgvJournalIdNoAp.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;dgvPreviousBalance.Name" xml:space="preserve">
-    <value>dgvPreviousBalance</value>
-  </data>
-  <data name="&gt;&gt;dgvPreviousBalance.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvAmount.Name" xml:space="preserve">
     <value>dgvAmount</value>
@@ -90597,12 +90603,6 @@
   <data name="&gt;&gt;dgvDiscountTaken.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;dgvBalance.Name" xml:space="preserve">
-    <value>dgvBalance</value>
-  </data>
-  <data name="&gt;&gt;dgvBalance.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
   <data name="&gt;&gt;AccountIdNoDataGridViewTextBoxColumn.Name" xml:space="preserve">
     <value>AccountIdNoDataGridViewTextBoxColumn</value>
   </data>
@@ -90614,6 +90614,12 @@
   </data>
   <data name="&gt;&gt;IdNoDataGridViewTextBoxColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bsJournalItems.Name" xml:space="preserve">
+    <value>bsJournalItems</value>
+  </data>
+  <data name="&gt;&gt;bsJournalItems.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;bsCsrOiItems.Name" xml:space="preserve">
     <value>bsCsrOiItems</value>

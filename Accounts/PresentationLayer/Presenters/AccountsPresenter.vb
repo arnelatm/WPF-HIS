@@ -136,6 +136,24 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
+        Public Sub MakePayTypeAndSpecialAccount(bs As BindingSource, accountIdNo As Int16?)
+            With bs.Current
+                Dim account As AccountModel
+                If accountIdNo Is Nothing Or accountIdNo <= 0 Then
+                    .JournalIdNo = 0
+                    .SpecialAccount = Nothing
+                    .PayeeType = Nothing
+                    .AccountName = ""
+                Else
+                    account = GetAccount(accountIdNo)
+                    .AccountIdNo = accountIdNo
+                    .SpecialAccount = account.SpecialAccount
+                    .PayeeType = account.PayeeType
+                    .AccountName = account.AccountName
+                End If
+            End With
+        End Sub
+
         Public Function UserIsASupervisor()
             Dim employeeIdNo As Int32 = GetUserEmployeeIdNo()
             If employeeIdNo > 0 Then

@@ -3,7 +3,6 @@ Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
-Imports KellermanSoftware.CompareNetObjects
 
 Namespace PresentationLayer.Views.Forms
 
@@ -14,21 +13,12 @@ Namespace PresentationLayer.Views.Forms
         Private ReadOnly _payorOrigWidth As Integer
 
         Private _arFooter As DgvFooter
+        Private _contactDataSource As DataTable
         Private _csrOiItems As List(Of CsrOiItemView)
+        Private _defaultAccount As Int16
         Private _jiFooter As DgvFooter
         Private _journalItems As List(Of JournalItemView)
-        Private _defaultAccount As Int16
-
-        Public Event AutoApplyAmountRequested(bsCsrOiItems As BindingSource) Implements ICashReceiptJournalView.AutoApplyAmountRequested
-        Public Event AddCustomerOpenInvoices() Implements ICashReceiptJournalView.AddCustomerOpenInvoices
-        Public Event UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Implements ICashReceiptJournalView.UserDeletedRow
-        Public Event FirstLineUpdateNeeded() Implements ICashReceiptJournalView.FirstLineUpdateNeeded
-        Public Event ReceiptTypeChanged(paymentType As String) Implements ICashReceiptJournalView.ReceiptTypeChanged
-        Public Event AccountIdNoChanged(sender As Object, e As DataGridViewCellEventArgs) Implements ICashReceiptJournalView.AccountIdNoChanged
-        Public Event DebitAmountChanged(sender As Object, e As DataGridViewCellEventArgs) Implements ICashReceiptJournalView.DebitAmountChanged
-        Public Event CreditAmountChanged(sender As Object, e As DataGridViewCellEventArgs) Implements ICashReceiptJournalView.CreditAmountChanged
-        Public Event OpenInvoiceDataRequested(bs As BindingSource) Implements ICashReceiptJournalView.OpenInvoiceDataRequested
-        Public Event ContactidNoChanged(bs As BindingSource) Implements ICashReceiptJournalView.ContactIdNoChanged
+        Private _sw As Int32 = 0
 
         Public Sub New()
             MyBase.New()
@@ -41,37 +31,21 @@ Namespace PresentationLayer.Views.Forms
             SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
         End Sub
 
-        'Private Sub JournalItemBs_AddingNew(ByVal sender As Object, ByVal e As AddingNewEventArgs) Handles bsJournalItems.AddingNew
-        '    e.NewObject = New JournalItemView
-        '    ' work arround for error on datagrid entry on lastrow please do not remove.
-        '    ' The reason it works Is because On a DataGridView where AllowUserToAddRows Is True,
-        '    ' it adds an empty row at the end of its rows which if bound to a list creates a null element at the end of the list.
-        '    ' The code removes that element And then the AddNew in the BindingList will trigger the DataGridView to add it again
-        '    If DataGridViewJournalItems.Rows.Count = bsJournalItems.Count Then
-        '        bsJournalItems.RemoveAt(bsJournalItems.Count - 1)
-        '    End If
-        'End Sub
+        Public Event DebitAccountIdNoChanged(bs As BindingSource) Implements ICashReceiptJournalView.DebitAccountIdNoChanged
+        Public Event AddCustomerOpenInvoices(bs As BindingSource) Implements ICashReceiptJournalView.AddCustomerOpenInvoices
+        Public Event AutoApplyAmountRequested(bsCsrOiItems As BindingSource) Implements ICashReceiptJournalView.AutoApplyAmountRequested
+        Public Event ContactidNoChanged(bs As BindingSource) Implements ICashReceiptJournalView.ContactIdNoChanged
+        Public Event CreditAmountChanged(sender As Object, e As DataGridViewCellEventArgs) Implements ICashReceiptJournalView.CreditAmountChanged
+        Public Event DebitAmountChanged(sender As Object, e As DataGridViewCellEventArgs) Implements ICashReceiptJournalView.DebitAmountChanged
+        Public Event JiAccountIdNoChanged(sender As Object, e As DataGridViewCellEventArgs) Implements ICashReceiptJournalView.JiAccountIdNoChanged
+        'Public Event FirstLineUpdateNeeded() Implements ICashReceiptJournalView.FirstLineUpdateNeeded
+        Public Event OpenInvoiceDataRequested(bs As BindingSource) Implements ICashReceiptJournalView.OpenInvoiceDataRequested
+        Public Event ReceiptAmountChanged(bsJournaltem As BindingSource, bsCsrJournalItem As BindingSource) Implements ICashReceiptJournalView.ReceiptAmountChanged
+        Public Event ReceiptTypeChanged(paymentType As String, bsJournalItem As BindingSource, bsCsrOiItems As BindingSource) Implements ICashReceiptJournalView.ReceiptTypeChanged
+        Public Event UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Implements ICashReceiptJournalView.UserDeletedRow
+        Public Event FirstLineUpdateNeeded() Implements ICashReceiptJournalView.FirstLineUpdateNeeded
 
-        Private ReadOnly Property OpenInvoiceMode As Boolean
-            Get
-                Dim receiptTypeEnum = CodeToEnum(Of ReceiptTypeSelection)(cboPayorType.SelectedValue)
-                If receiptTypeEnum = ReceiptTypeSelection.AccountsReceivable Then
-                    Return True
-                Else
-                    Return False
-                End If
-            End Get
-        End Property
-
-#Region "Field Items"
-
-        Public Property AccountsByCode Implements ICashReceiptJournalView.AccountsByCode
-        Public Property RevCostCentersByCode Implements ICashReceiptJournalView.RevCostCentersByCode
-        Public Property EmployeesByName Implements ICashReceiptJournalView.EmployeesByName
-        Public Property CustomersByName Implements ICashReceiptJournalView.CustomersByName
-        Public Property SuppliersByName Implements ICashReceiptJournalView.SuppliersByName
-        Public Property CashReceiptAccountCount As Short Implements ICashReceiptJournalView.CashReceiptAccountCount
-
+#Region "Properties"
 
         Public Property AccountIdNo As Int16? Implements ICashReceiptJournalView.AccountIdNo
             Get
@@ -82,6 +56,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property AccountsByCode Implements ICashReceiptJournalView.AccountsByCode
         Public Property Amount As Decimal Implements ICashReceiptJournalView.Amount
             Get
                 Return Convert.ToDecimal(NumParser(Of Decimal)(txtAmount.Text), _nfi)
@@ -101,6 +76,15 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property Approved As Boolean Implements ICashReceiptJournalView.Approved
+            Get
+                Return chkApproved.Checked
+            End Get
+            Set
+                chkApproved.Checked = Value
+            End Set
+        End Property
+
         Public Property Cancelled As Boolean Implements ICashReceiptJournalView.Cancelled
             Get
                 Return chkCancelled.Checked
@@ -110,6 +94,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property CashReceiptAccountCount As Short Implements ICashReceiptJournalView.CashReceiptAccountCount
         Public Property CheckDate As DateTime? Implements ICashReceiptJournalView.CheckDate
             Get
                 Return dtpCheckDate.Value
@@ -132,6 +117,38 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property ContactDataSource As DataTable Implements ICashReceiptJournalView.ContactDataSource
+            Get
+                Return _contactDataSource
+            End Get
+            Set
+                _contactDataSource = Value
+                cboContactIdNo.DataSource = Nothing
+                cboContactIdNo.DataSource = Value
+                cboContactIdNo.Refresh()
+            End Set
+        End Property
+
+        Public Property ContactIdNo As Integer? Implements ICashReceiptJournalView.ContactIdNo
+            Get
+                Return cboContactIdNo.GetNullableValue(Of Int32)
+            End Get
+            Set
+                cboContactIdNo.SetValue(Value)
+            End Set
+        End Property
+
+        Public Property CsrOiItems As List(Of CsrOiItemView) Implements ICashReceiptJournalView.CsrOiItems
+            Get
+                Return _csrOiItems
+            End Get
+            Set(value As List(Of CsrOiItemView))
+                _csrOiItems = value
+                BindCsrOiItem()
+            End Set
+        End Property
+
+        Public Property CustomersByName Implements ICashReceiptJournalView.CustomersByName
         Public Property DateCreated As DateTime? Implements ICashReceiptJournalView.DateCreated
             Get
                 Return txtDateCreated.Text
@@ -163,6 +180,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property EmployeesByName Implements ICashReceiptJournalView.EmployeesByName
         Public Property IdNo As Int32 Implements ICashReceiptJournalView.IdNo
             Get
                 If TxtIdNo.Text <> "" Then
@@ -173,6 +191,16 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 TxtIdNo.Text = Convert.ToString(Value)
+            End Set
+        End Property
+
+        Public Property JournalCode As String Implements ICashReceiptJournalView.JournalCode
+        Public Property JournalCodeDisplay As String Implements ICashReceiptJournalView.JournalCodeDisplay
+            Get
+                Return txtJournalCodeDisplay.GetValue(Of String)
+            End Get
+            Set(value As String)
+                txtJournalCodeDisplay.Text = value
             End Set
         End Property
 
@@ -201,15 +229,6 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 txtORNumber.Text = Value
-            End Set
-        End Property
-
-        Public Property ContactIdNo As Integer? Implements ICashReceiptJournalView.ContactIdNo
-            Get
-                Return cboContactIdNo.GetNullableValue(Of Int32)
-            End Get
-            Set
-                cboContactIdNo.SetValue(Value)
             End Set
         End Property
 
@@ -244,40 +263,6 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public ReadOnly Property TotalCredits As Decimal Implements ICashReceiptJournalView.TotalCredits
-            Get
-                Return NumParser(Of Decimal)(txtTotalCredits.Text)
-            End Get
-        End Property
-
-        Public ReadOnly Property TotalDebits As Decimal Implements ICashReceiptJournalView.TotalDebits
-            Get
-                Return NumParser(Of Decimal)(txtTotalDebits.Text)
-            End Get
-        End Property
-        Public Property CsrOiItems As List(Of CsrOiItemView) Implements ICashReceiptJournalView.CsrOiItems
-            Get
-                Return _csrOiItems
-            End Get
-            Set(value As List(Of CsrOiItemView))
-                _csrOiItems = value
-                BindCsrOiItem()
-            End Set
-        End Property
-
-        Private _contactDataSource As DataTable
-        Public Property ContactDataSource As DataTable Implements ICashReceiptJournalView.ContactDataSource
-            Get
-                Return _contactDataSource
-            End Get
-            Set
-                _contactDataSource = Value
-                cboContactIdNo.DataSource = Nothing
-                cboContactIdNo.DataSource = Value
-                cboContactIdNo.Refresh()
-            End Set
-        End Property
-
         Public Property Posted As Boolean Implements ICashReceiptJournalView.Posted
             Get
                 Return chkPosted.Checked
@@ -294,6 +279,20 @@ Namespace PresentationLayer.Views.Forms
             Set
                 txtReferenceNo.Text = Value
             End Set
+        End Property
+
+        Public Property RevCostCentersByCode Implements ICashReceiptJournalView.RevCostCentersByCode
+        Public Property SuppliersByName Implements ICashReceiptJournalView.SuppliersByName
+        Public ReadOnly Property TotalCredits As Decimal Implements ICashReceiptJournalView.TotalCredits
+            Get
+                Return NumParser(Of Decimal)(txtTotalCredits.Text)
+            End Get
+        End Property
+
+        Public ReadOnly Property TotalDebits As Decimal Implements ICashReceiptJournalView.TotalDebits
+            Get
+                Return NumParser(Of Decimal)(txtTotalDebits.Text)
+            End Get
         End Property
 
         Public Property TransactionDate As Date? Implements ICashReceiptJournalView.TransactionDate
@@ -336,26 +335,23 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Approved As Boolean Implements ICashReceiptJournalView.Approved
-            Get
-                Return chkApproved.Checked
-            End Get
-            Set
-                chkApproved.Checked = Value
-            End Set
-        End Property
+        Public Property OpenInvoiceMode As Boolean Implements ICashReceiptJournalView.OpenInvoiceMode
 
-        Public Property JournalCode As String Implements ICashReceiptJournalView.JournalCode
-        Public Property JournalCodeDisplay As String Implements ICashReceiptJournalView.JournalCodeDisplay
-            Get
-                Return txtJournalCodeDisplay.GetValue(Of String)
-            End Get
-            Set(value As String)
-                txtJournalCodeDisplay.Text = value
-            End Set
-        End Property
+#End Region 'Properties
 
-#End Region
+#Region "Subs"
+
+
+        Public Sub CRAfterSave()
+            Dim x As Int32 = ContactIdNo
+            ContactDataSource.DefaultView.RowFilter = Nothing
+            cboContactIdNo.SelectedValue = x
+            cboContactIdNo.Refresh()
+        End Sub
+
+        Public Overloads Sub Dispose()
+            Close()
+        End Sub
 
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
@@ -387,43 +383,9 @@ Namespace PresentationLayer.Views.Forms
         }
         End Sub
 
+
         Protected Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
             UpdateDisplay()
-        End Sub
-
-        Private Sub CashReceiptJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            _jiFooter = New DgvFooter(DataGridViewJournalItems) With {
-                .AutoCalc = True
-            }
-            _jiFooter.ColumnToSum("dgvDebit") = True
-            _jiFooter.ColumnToSum("dgvCredit") = True
-            _jiFooter.SetText("DgvAccountIdNo", "Totals ->")
-
-            _arFooter = New DgvFooter(DataGridViewCsrOiItems) With {
-                .AutoCalc = True
-            }
-            _arFooter.ColumnToSum("dgvAmount") = True
-            _arFooter.ColumnToSum("dgvDiscountTaken") = True
-            _arFooter.ColumnToSum("dgvBalance") = True
-            _arFooter.ColumnToSum("dgvPreviousBalance") = True
-            _arFooter.SetText("dgvJournalIdNoAp", "Totals")
-
-            If CashReceiptAccountCount = 1 Then
-                cboAccountIdNo.DisplayOnly = True
-                cboAccountIdNo.TabStop = False
-            End If
-            If cboAccountIdNo.SelectedValue <= 0 Then
-                cboAccountIdNo.SelectedValue = _defaultAccount
-            End If
-            If CashReceiptAccountCount = 0 Then
-                Dim accountName As String
-                accountName = Messaging.TranslateCaption("Cash")
-                Messaging.ShowPmMessage(True, "MsgNoSpecialAccount", {"specialAccountName", accountName})
-                CancelClose = False
-
-            End If
-            BindCsrOiItem()
-            BindJournalItem()
         End Sub
 
         Private Sub BindCsrOiItem()
@@ -479,188 +441,98 @@ Namespace PresentationLayer.Views.Forms
             ResumeLayout()
         End Sub
 
-        Public Overloads Sub Dispose()
-            Close()
+        Private Sub btnAutoApply_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnAutoApply.ClickButtonArea
+            RaiseEvent AutoApplyAmountRequested(bsCsrOiItems)
+            UpdateOiTotals()
         End Sub
 
-        Private Sub UpdateOpenInvoicesDisplay()
+        Private Sub CashReceiptJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            _jiFooter = New DgvFooter(DataGridViewJournalItems) With {
+                .AutoCalc = True
+            }
+            _jiFooter.ColumnToSum("dgvDebit") = True
+            _jiFooter.ColumnToSum("dgvCredit") = True
+            _jiFooter.SetText("DgvAccountIdNo", "Totals ->")
+
+            _arFooter = New DgvFooter(DataGridViewCsrOiItems) With {
+                .AutoCalc = True
+            }
+            _arFooter.ColumnToSum("dgvAmount") = True
+            _arFooter.ColumnToSum("dgvDiscountTaken") = True
+            _arFooter.ColumnToSum("dgvBalance") = True
+            _arFooter.ColumnToSum("dgvPreviousBalance") = True
+            _arFooter.SetText("dgvJournalIdNoAp", "Totals")
+
+            If CashReceiptAccountCount = 1 Then
+                cboAccountIdNo.DisplayOnly = True
+                cboAccountIdNo.TabStop = False
+            End If
+            If cboAccountIdNo.SelectedValue <= 0 Then
+                cboAccountIdNo.SelectedValue = _defaultAccount
+            End If
+            If CashReceiptAccountCount = 0 Then
+                Dim accountName As String
+                accountName = Messaging.TranslateCaption("Cash")
+                Messaging.ShowPmMessage(True, "MsgNoSpecialAccount", {"specialAccountName", accountName})
+                CancelClose = False
+
+            End If
+            BindCsrOiItem()
+            BindJournalItem()
+        End Sub
+        Private Sub cboContactIdNo_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cboContactIdNo.SelectionChangeCommitted
+            RaiseEvent ContactidNoChanged(bsCsrOiItems)
+        End Sub
+
+        Private Sub OnInputsTurnedOff() Handles MyBase.InputsTurnedOff
             If OpenInvoiceMode Then
-                If CsrOiItems IsNot Nothing Then
-                    If AddingMode Or cboContactIdNo.ValueChanged() Then
-                        CsrOiItems.Clear()
-                    End If
-                    RaiseEvent OpenInvoiceDataRequested(bsCsrOiItems)
-                    bsCsrOiItems.ResetBindings(True)
-                    UpdateOiTotals()
-                End If
-            End If
-        End Sub
-
-        Private Sub TxtAmount_Validated(sender As Object, e As EventArgs) Handles txtAmount.Validated
-            If AddingMode OrElse EditingMode Then
-                If OpenInvoiceMode Then
-                    UpdateOiTotals()
-                End If
-                UpdateFirstLine()
-            End If
-        End Sub
-
-        Private Sub CboContactIdNo_ValueChanged(sender As Object, e As EventArgs) Handles cboContactIdNo.SelectedValueChanged
-            If AddingMode OrElse EditingMode Then
-                If OpenInvoiceMode Then
-                    UpdateOpenInvoicesDisplay()
-                End If
-            End If
-        End Sub
-
-        Private Sub CboPayorType_ValueChanged(sender As Object, e As EventArgs) Handles cboPayorType.SelectedValueChanged
-            If AddingMode OrElse EditingMode Then
-                RaiseEvent ReceiptTypeChanged(PayorType)
-                If OpenInvoiceMode Then
-                    UpdateOpenInvoicesDisplay()
-                    If cboContactIdNo.SelectedIndex = -1 Then
-                        bsCsrOiItems.Clear()
-                    End If
-                Else
-                    cboContactIdNo.SelectedIndex = -1
-                End If
-                UpdateFirstLine()
-                UpdateDisplay()
-            End If
-        End Sub
-
-        Private Sub CboAccountIdNo_Changed(sender As Object, e As EventArgs) Handles cboAccountIdNo.SelectedValueChanged
-            If AddingMode OrElse EditingMode Then
-                UpdateFirstLine()
-            End If
-        End Sub
-
-        Private Sub TxtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
-            If AddingMode OrElse EditingMode Then
-                If OpenInvoiceMode Then
-                    MoveToGridView(DataGridViewCsrOiItems, "dgvAmount")
-                Else
-                    MoveToGridView(DataGridViewJournalItems, "dgvRevCostCenterIdNo")
-                End If
-            End If
-        End Sub
-
-        Private Sub DgvJi_OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewJournalItems.CellBeginEdit
-            If DataGridViewJournalItems.CurrentCell.RowIndex() = 0 Then
-                With DataGridViewJournalItems.CurrentCell
-                    Dim cColumnName = .OwningColumn.Name.ToLower()
-                    If cColumnName = $"dgvaccountidno" Or cColumnName = $"dgvdebit" Or cColumnName = $"dgvcredit" Then
-                        Beep()
-                        e.Cancel = True
-                        DataGridViewJournalItems.EndEdit()
-                    End If
-                End With
-            End If
-        End Sub
-
-
-        Private Sub DgvJi_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewJournalItems.CellEndEdit
-            With DataGridViewJournalItems
-                If .CurrentRow IsNot Nothing Then
-                    Dim nIndex = .CurrentRow.Index
-                    Select Case .CurrentCell.OwningColumn.Name.ToLower()
-                        Case $"dgvaccountidno"
-                            RaiseEvent AccountIdNoChanged(sender, e)
-                        Case $"dgvdebit"
-                            RaiseEvent DebitAmountChanged(sender, e)
-                            UpdateJiTotals()
-                            SendKeys.Send("{TAB}")
-                        Case $"dgvcredit"
-                            RaiseEvent CreditAmountChanged(sender, e)
-                            UpdateJiTotals()
-                        Case $"dgvnotes"
-                            SendKeys.Send("{DOWN}")
-                    End Select
-                End If
-            End With
-        End Sub
-
-        Private Sub CsrOiItemDgv_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewCsrOiItems.CellEndEdit
-            With DataGridViewCsrOiItems
-                If .CurrentRow IsNot Nothing Then
-                    Select Case .CurrentCell.OwningColumn.Name.ToLower()
-                        Case $"dgvamount"
-                            Dim selectedRow As CsrOiItemView
-                            Dim amt = .CurrentCell.Value
-                            selectedRow = DataGridViewCsrOiItems.Rows(.CurrentCell.RowIndex).DataBoundItem
-                            selectedRow.Balance = selectedRow.PreviousBalance - amt - selectedRow.DiscountTaken
-                            UpdateOiTotals()
-                        Case $"dgvdiscounttaken"
-                            Dim selectedRow As CsrOiItemView
-                            Dim amt = .CurrentCell.Value
-                            selectedRow = DataGridViewCsrOiItems.Rows(.CurrentCell.RowIndex).DataBoundItem
-                            selectedRow.Balance = selectedRow.PreviousBalance - selectedRow.Amount - amt
-                            UpdateOiTotals()
-                        Case $"dgvbalance"
-                            SendKeys.Send("{DOWN}")
-                    End Select
-                End If
-            End With
-        End Sub
-
-        'Private Sub UpdateInputVatAmount()
-        '    VatAmount = Presenter.UpdateInputVatAmount(JournalItems)
-        'End Sub
-
-        'Private Sub UpdateOutputVatAmount()
-        '    VatAmount = Presenter.UpdateOutputVatAmount(JournalItems)
-        'End Sub
-
-        Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewJournalItems.UserDeletedRow
-            RaiseEvent UserDeletedRow(sender, e)
-            UpdateTotals()
-        End Sub
-
-        Private Sub UpdateTotals()
-            If OpenInvoiceMode Then
-                UpdateOiTotals()
-            Else
-                UpdateJiTotals()
-            End If
-        End Sub
-
-        Private Sub UpdateOiTotals()
-            If _arFooter IsNot Nothing Then
-                _arFooter.CalculateTotals()
-                Applied = _arFooter.Value("dgvAmount")
-                DiscountTaken = _arFooter.Value("dgvDiscountTaken")
-                UnApplied = Amount - Applied
-            End If
-        End Sub
-
-        Private Sub UpdateJiTotals()
-            If _jiFooter IsNot Nothing Then
-                _jiFooter.CalculateTotals()
-                txtTotalDebits.Text = _jiFooter.Value("dgvDebit")
-                txtTotalCredits.Text = _jiFooter.Value("dgvCredit")
-            End If
-            Applied = Amount
-            UnApplied = 0
-            DataGridViewJournalItems.Refresh()
-        End Sub
-
-        Private Sub UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) Handles DataGridViewJournalItems.UserDeletingRow
-            Dim crJournalRow As DataGridViewRow = DataGridViewJournalItems.Rows(0)
-            If DataGridViewJournalItems.SelectedRows.Contains(crJournalRow) Then
-                ' Do not allow the user to delete the first row.
-                Messaging.Show(True, "MsgFirstRowDeletionNotAllowed", "Deletion of the first row Is Not allowed!", "Delete Error")
-                ' Cancel the deletion
-                e.Cancel = True
-            End If
-        End Sub
-
-        Private Sub BtnViewGL_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnViewGL.ClickButtonArea
-            If DataGridViewJournalItems.Visible Then
+                btnViewGL.Visible = True
                 btnViewGL.Text = Messaging.TranslateCaption("View Journal Entry")
-                ShowOpenInvoicesDataGrid()
             Else
-                btnViewGL.Text = Messaging.TranslateCaption("Show Journal Entry")
-                ShowJournalItemDataGrid()
+                btnViewGL.Visible = False
+            End If
+            btnAutoApply.Visible = False
+        End Sub
+
+        Private Sub OnInputsTurnedOn() Handles MyBase.InputsTurnedOn
+            bsJournalItems.ResetBindings(False)
+            btnViewGL.Visible = False
+            RaiseEvent AddCustomerOpenInvoices(bsCsrOiItems)
+            bsCsrOiItems.ResetBindings(False)
+            UpdateDisplay()
+            If OpenInvoiceMode Then
+                btnAutoApply.Visible = True
+            Else
+                btnAutoApply.Visible = False
+            End If
+        End Sub
+
+        Private Sub ShowJournalItemDataGrid()
+            'UpdateFirstLine()
+            UpdateTotals()
+            DataGridViewJournalItems.Visible = True
+            DataGridViewCsrOiItems.Visible = False
+            DataGridViewJournalItems.DataSource = bsJournalItems
+        End Sub
+
+        Private Sub ShowOpenInvoicesDataGrid()
+            DataGridViewJournalItems.Visible = False
+            DataGridViewCsrOiItems.Visible = True
+        End Sub
+
+        Private Sub ShowPayor()
+            Dim payorTypeEnum = CodeToEnum(Of ReceiptTypeSelection)(cboPayorType.SelectedValue)
+            If payorTypeEnum = ReceiptTypeSelection.Others Or payorTypeEnum = ReceiptTypeSelection.NotSpecified Then
+                cboContactIdNo.Visible = False
+                cboContactIdNo.Width = 0
+                txtPayorName.Visible = True
+                cboContactIdNo.SelectedIndex = -1
+                txtPayorName.Width = _payorOrigWidth
+            Else
+                cboContactIdNo.Visible = True
+                cboContactIdNo.Width = _payorOrigWidth
+                txtPayorName.Visible = False
+                txtPayorName.Width = 0
             End If
         End Sub
 
@@ -691,116 +563,199 @@ Namespace PresentationLayer.Views.Forms
             ResumeLayout()
         End Sub
 
-        Private Sub ShowPayor()
+        'Private Sub UpdateFirstLine()
+        '    'RaiseEvent FirstLineUpdateNeeded()
+        '    If Not OpenInvoiceMode Then
+        '        bsJournalItems.ResetBindings(True)
+        '        UpdateJiTotals()
+        '    End If
+        'End Sub
 
-            Dim payorTypeEnum = CodeToEnum(Of ReceiptTypeSelection)(cboPayorType.SelectedValue)
-            If payorTypeEnum = ReceiptTypeSelection.Others Or payorTypeEnum = ReceiptTypeSelection.NotSpecified Then
-                cboContactIdNo.Visible = False
-                cboContactIdNo.Width = 0
-                txtPayorName.Visible = True
-                cboContactIdNo.SelectedIndex = -1
-                txtPayorName.Width = _payorOrigWidth
-            Else
-                cboContactIdNo.Visible = True
-                cboContactIdNo.Width = _payorOrigWidth
-                txtPayorName.Visible = False
-                txtPayorName.Width = 0
+        Private Sub UpdateJiTotals()
+            If _jiFooter IsNot Nothing Then
+                _jiFooter.CalculateTotals()
+                txtTotalDebits.Text = _jiFooter.Value("dgvDebit")
+                txtTotalCredits.Text = _jiFooter.Value("dgvCredit")
+            End If
+            Applied = Amount
+            UnApplied = 0
+            DataGridViewJournalItems.Refresh()
+        End Sub
+
+        Private Sub UpdateOiTotals()
+            If _arFooter IsNot Nothing Then
+                _arFooter.CalculateTotals()
+                Applied = _arFooter.Value("dgvAmount")
+                DiscountTaken = _arFooter.Value("dgvDiscountTaken")
+                UnApplied = Amount - Applied
             End If
         End Sub
 
-        Private Sub OnInputsTurnedOff() Handles MyBase.InputsTurnedOff
-            If OpenInvoiceMode Then
-                btnViewGL.Visible = True
-                btnViewGL.Text = Messaging.TranslateCaption("View Journal Entry")
-            Else
-                btnViewGL.Visible = False
-            End If
-            btnAutoApply.Visible = False
-        End Sub
-
-        Private Sub OnInputsTurnedOn() Handles MyBase.InputsTurnedOn
-            bsJournalItems.ResetBindings(False)
-            btnViewGL.Visible = False
-            RaiseEvent AddCustomerOpenInvoices()
-            bsCsrOiItems.ResetBindings(False)
-            UpdateDisplay()
-            If OpenInvoiceMode Then
-                btnAutoApply.Visible = True
-            Else
-                btnAutoApply.Visible = False
-            End If
-        End Sub
-
-        Private Sub ShowJournalItemDataGrid()
-            UpdateFirstLine()
-            UpdateTotals()
-            DataGridViewJournalItems.Visible = True
-            DataGridViewCsrOiItems.Visible = False
-            DataGridViewJournalItems.DataSource = bsJournalItems
-        End Sub
-
-        Private Sub ShowOpenInvoicesDataGrid()
-            DataGridViewJournalItems.Visible = False
-            DataGridViewCsrOiItems.Visible = True
-        End Sub
-
-        Private Sub UpdateFirstLine()
-            RaiseEvent FirstLineUpdateNeeded()
-            If Not OpenInvoiceMode Then
-                bsJournalItems.ResetBindings(True)
-                UpdateJiTotals()
-            End If
-        End Sub
-
-        Private Sub btnAutoApply_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnAutoApply.ClickButtonArea
-            RaiseEvent AutoApplyAmountRequested(bsCsrOiItems)
-            UpdateOiTotals()
-        End Sub
-
-        Private OrigCombobox As CBFormCtrl
-        Private _sw As Int32 = 0
-
-        Private Sub txtNotes_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles txtNotes.MouseDoubleClick
-            If _sw = 0 Then
-                Debugger.Break()
-                'Refresh()
-                'cboContactIdNo.DataSource = Presenter.MakeControlDataSources({New Object() {"Contact_View", "ContactIdNo", "IdNo,ContactName,ContactCode", Nothing, Nothing}})
-                'cboContactIdNo.Refresh()
-                cboContactIdNo.DroppedDown = True
-                OrigCombobox = ControlFactory.CopyToObject(cboContactIdNo)
-                _sw += 1
-            Else
-                Dim currentComboBox As CBFormCtrl = ControlFactory.CopyToObject(cboContactIdNo)
-                Dim compareLogic As CompareLogic = New CompareLogic()
-                compareLogic.Config.MaxDifferences = 1000
-                Dim result As ComparisonResult = compareLogic.Compare(currentComboBox, OrigCombobox)
-                If Not result.AreEqual Then
-                    MessageBox.Show(result.DifferencesString)
+        Private Sub UpdateOpenInvoicesDisplay()
+            If CsrOiItems IsNot Nothing Then
+                If AddingMode Or cboContactIdNo.ValueChanged() Then
+                    CsrOiItems.Clear()
                 End If
+                RaiseEvent OpenInvoiceDataRequested(bsCsrOiItems)
+                bsCsrOiItems.ResetBindings(True)
+                UpdateOiTotals()
+            End If
+        End Sub
+
+        Private Sub UpdateTotals()
+            If OpenInvoiceMode Then
+                UpdateOiTotals()
+            Else
+                UpdateJiTotals()
             End If
         End Sub
 
         'Private Sub cboPayContactIdNo_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cboContactIdNo.SelectionChangeCommitted
         '    RaiseEvent ContactidNoChanged(bsCsrOiItems)
         'End Sub
-
-
-        Private Sub cboContactIdNo_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cboContactIdNo.SelectionChangeCommitted
-            RaiseEvent ContactidNoChanged(bsCsrOiItems)
-        End Sub
         'Private Sub cboContactIdNo_Validated(sender As Object, e As EventArgs) Handles cboContactIdNo.Validated
         '    If AddingMode OrElse EditingMode Then
         '        RaiseEvent ContactidNoChanged(bsCsrOiItems)
         '    End If
         'End Sub
+#End Region
 
-        Public Sub CRAfterSave()
-            Dim x As Int32 = ContactIdNo
-            ContactDataSource.DefaultView.RowFilter = Nothing
-            cboContactIdNo.SelectedValue = x
-            cboContactIdNo.Refresh()
+
+#Region "Event Handlers"
+
+        Private Sub BtnViewGL_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnViewGL.ClickButtonArea
+            If DataGridViewJournalItems.Visible Then
+                btnViewGL.Text = Messaging.TranslateCaption("View Journal Entry")
+                ShowOpenInvoicesDataGrid()
+            Else
+                btnViewGL.Text = Messaging.TranslateCaption("Show Journal Entry")
+                ShowJournalItemDataGrid()
+            End If
         End Sub
 
+        Private Sub CboAccountIdNo_Changed(sender As Object, e As EventArgs) Handles cboAccountIdNo.SelectedValueChanged
+            If AddingMode OrElse EditingMode Then
+                If Not OpenInvoiceMode Then
+                    RaiseEvent DebitAccountIdNoChanged(bsJournalItems)
+                Else
+                    ' nothing to do, values for JournalItem will be auto-generated or computed based on paid invoices
+                End If
+            End If
+        End Sub
+
+        Private Sub CboContactIdNo_ValueChanged(sender As Object, e As EventArgs) Handles cboContactIdNo.SelectedValueChanged
+            If AddingMode OrElse EditingMode Then
+                If OpenInvoiceMode Then
+                    UpdateOpenInvoicesDisplay()
+                End If
+            End If
+        End Sub
+
+        Private Sub CboPayorType_ValueChanged(sender As Object, e As EventArgs) Handles cboPayorType.SelectedValueChanged
+            If AddingMode OrElse EditingMode Then
+                RaiseEvent ReceiptTypeChanged(PayorType, bsJournalItems, bsCsrOiItems)
+                If OpenInvoiceMode Then
+                    UpdateOpenInvoicesDisplay()
+                    If cboContactIdNo.SelectedIndex = -1 Then
+                        bsCsrOiItems.Clear()
+                    End If
+                Else
+                    cboContactIdNo.SelectedIndex = -1
+                End If
+                'UpdateFirstLine()
+                UpdateDisplay()
+            End If
+        End Sub
+
+        Private Sub CsrOiItemDgv_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewCsrOiItems.CellEndEdit
+            With DataGridViewCsrOiItems
+                If .CurrentRow IsNot Nothing Then
+                    Select Case .CurrentCell.OwningColumn.Name.ToLower()
+                        Case $"dgvamount"
+                            Dim selectedRow As CsrOiItemView
+                            Dim amt = .CurrentCell.Value
+                            selectedRow = DataGridViewCsrOiItems.Rows(.CurrentCell.RowIndex).DataBoundItem
+                            selectedRow.Balance = selectedRow.PreviousBalance - amt - selectedRow.DiscountTaken
+                            UpdateOiTotals()
+                        Case $"dgvdiscounttaken"
+                            Dim selectedRow As CsrOiItemView
+                            Dim amt = .CurrentCell.Value
+                            selectedRow = DataGridViewCsrOiItems.Rows(.CurrentCell.RowIndex).DataBoundItem
+                            selectedRow.Balance = selectedRow.PreviousBalance - selectedRow.Amount - amt
+                            UpdateOiTotals()
+                        Case $"dgvbalance"
+                            SendKeys.Send("{DOWN}")
+                    End Select
+                End If
+            End With
+        End Sub
+
+        Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewJournalItems.UserDeletedRow
+            RaiseEvent UserDeletedRow(sender, e)
+            UpdateTotals()
+        End Sub
+
+        Private Sub DgvJi_OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewJournalItems.CellBeginEdit
+            If DataGridViewJournalItems.CurrentCell.RowIndex() = 0 Then
+                With DataGridViewJournalItems.CurrentCell
+                    Dim cColumnName = .OwningColumn.Name.ToLower()
+                    If cColumnName = $"dgvaccountidno" Or cColumnName = $"dgvdebit" Or cColumnName = $"dgvcredit" Then
+                        Beep()
+                        e.Cancel = True
+                        DataGridViewJournalItems.EndEdit()
+                    End If
+                End With
+            End If
+        End Sub
+
+        Private Sub DgvJi_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewJournalItems.CellEndEdit
+            With DataGridViewJournalItems
+                If .CurrentRow IsNot Nothing Then
+                    Dim nIndex = .CurrentRow.Index
+                    Select Case .CurrentCell.OwningColumn.Name.ToLower()
+                        Case $"dgvaccountidno"
+                            RaiseEvent JiAccountIdNoChanged(sender, e)
+                        Case $"dgvdebit"
+                            RaiseEvent DebitAmountChanged(sender, e)
+                            UpdateJiTotals()
+                            SendKeys.Send("{TAB}")
+                        Case $"dgvcredit"
+                            RaiseEvent CreditAmountChanged(sender, e)
+                            UpdateJiTotals()
+                        Case $"dgvnotes"
+                            SendKeys.Send("{DOWN}")
+                    End Select
+                End If
+            End With
+        End Sub
+
+        Private Sub TxtAmount_Validated(sender As Object, e As EventArgs) Handles txtAmount.Validated
+            RaiseEvent ReceiptAmountChanged(bsJournalItems)
+            'RaiseEvent ReceiptAmountChanged(bsJournalItems)
+            'If OpenInvoiceMode Then
+            ' UpdateOiTotals()
+            'End If
+            'UpdateFirstLine()
+        End Sub
+
+        Private Sub TxtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
+            If OpenInvoiceMode Then
+                MoveToGridView(DataGridViewCsrOiItems, "dgvAmount")
+            Else
+                MoveToGridView(DataGridViewJournalItems, "dgvRevCostCenterIdNo")
+            End If
+        End Sub
+
+        Private Sub UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) Handles DataGridViewJournalItems.UserDeletingRow
+            Dim crJournalRow As DataGridViewRow = DataGridViewJournalItems.Rows(0)
+            If DataGridViewJournalItems.SelectedRows.Contains(crJournalRow) Then
+                ' Do not allow the user to delete the first row.
+                Messaging.Show(True, "MsgFirstRowDeletionNotAllowed", "Deletion of the first row Is Not allowed!", "Delete Error")
+                ' Cancel the deletion
+                e.Cancel = True
+            End If
+        End Sub
+#End Region
 
     End Class
 

@@ -917,6 +917,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ToDos", "ToDos", "{E4F0E91F
 	ProjectSection(SolutionItems) = preProject
 		01-DrugSale_View.sql = 01-DrugSale_View.sql
 		02-do this first.txt = 02-do this first.txt
+		CheckAllthis.txt = CheckAllthis.txt
 		ClinicBeginningStock = ClinicBeginningStock
 		CommonErrors.txt = CommonErrors.txt
 		Pharmacy.exe.config = Pharmacy.exe.config
@@ -934,6 +935,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProgramTemplates", "Program
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{53F1E513-02CC-40BF-A697-B1D602FDFDFC}"
 	ProjectSection(SolutionItems) = preProject
+		Compare Controls Properties.vb = Compare Controls Properties.vb
 		EntryFields.vb = EntryFields.vb
 	EndProjectSection
 EndProject

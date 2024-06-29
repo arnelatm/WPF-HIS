@@ -40,17 +40,20 @@ Namespace PresentationLayer.Views.Interfaces
         Property JournalCode As String
         Property JournalCodeDisplay As String
         Property CashReceiptAccountCount As Int16
+        Property OpenInvoiceMode As Boolean
 
         Event AutoApplyAmountRequested(bsCsrOiItems As BindingSource)
-        Event AddCustomerOpenInvoices()
+        Event AddCustomerOpenInvoices(bs As BindingSource)
         Event UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs)
         Event FirstLineUpdateNeeded()
-        Event ReceiptTypeChanged(paymentType As String)
-        Event AccountIdNoChanged(sender As Object, e As DataGridViewCellEventArgs)
+        Event ReceiptTypeChanged(paymentType As String, bsJournalItem As BindingSource, bsCsrOiItems As BindingSource)
+        Event JiAccountIdNoChanged(sender As Object, e As DataGridViewCellEventArgs)
         Event DebitAmountChanged(sender As Object, e As DataGridViewCellEventArgs)
         Event CreditAmountChanged(sender As Object, e As DataGridViewCellEventArgs)
         Event OpenInvoiceDataRequested(bs As BindingSource)
         Event ContactIdNoChanged(bs As BindingSource)
+        Event ReceiptAmountChanged(bsJournalItem As BindingSource, bsCsrOiItem As BindingSource)
+        Event DebitAccountIdNoChanged(bs As BindingSource)
     End Interface
 
 End Namespace
