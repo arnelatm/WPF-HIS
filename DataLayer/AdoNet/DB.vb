@@ -21,7 +21,6 @@ Namespace AdoNet
         Private _connectionString As String
         Private Shared SecurityConnectionString As String
 
-        'Private _waitForm As LoadingForm
 
         Public Sub New(Optional ByVal conn As String = Nothing)
 
@@ -1205,56 +1204,6 @@ Namespace AdoNet
             '_waitForm.Close()
             Return connection
         End Function
-        ' creates a connection object
-
-        'Private Function CreateConnection() As DbConnection
-        '    ' ** Factory pattern in action
-        '    'Try
-        '    'If _waitForm Is Nothing Then
-        '    '    _waitForm = New LoadingForm()
-        '    'End If
-        '    '_waitForm.Show()
-
-        '    Dim result = WaitWindow.Show(AddressOf Me.CreateConnectionWorkerMethod, Nothing)
-
-        '    'Dim connection = _factory.CreateConnection()
-        '    'connection.ConnectionString = ConnectionString
-        '    'If connection.State = ConnectionState.Closed Then
-        '    '    connection.Open()
-        '    'End If
-
-        '    '_waitForm.Hide()
-
-        '    Return result
-
-        '    'Catch ex As Exception
-        '    '    If ex.InnerException IsNot Nothing AndAlso ex.InnerException.Message.Contains("Timeout Expired") Then
-        '    '        Return Nothing
-        '    '    ElseIf ex.InnerException IsNot Nothing AndAlso ex.InnerException.Message.Contains("Transaction Timeout") Then
-        '    '        Return Nothing
-        '    '    Else
-        '    '        Throw
-        '    '    End If
-
-        '    'End Try
-
-        'End Function
-
-        'Private Sub CreateConnectionWorkerMethod(ByVal sender As Object, ByVal e As WaitWindowEventArgs)
-        '    'System.Threading.Thread.Sleep(4000)
-        '    System.Threading.Thread.Sleep(0)
-
-        '    Dim connection = _factory.CreateConnection()
-        '    connection.ConnectionString = ConnectionString
-        '    If connection.State = ConnectionState.Closed Then
-        '        connection.Open()
-        '    End If
-
-        '    e.Result = connection
-
-        'End Sub
-
-        ' creates a command object
 
         Private Function CreateCommand(sql As String, conn As DbConnection, ByVal ParamArray parms() As Object) _
             As DbCommand

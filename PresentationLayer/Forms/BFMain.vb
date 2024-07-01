@@ -217,7 +217,7 @@ Public Class BfMain
     Public Sub TranslateForm()
         If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
             'SuspendDrawing()
-            Dim settings As New SettingsSaver
+            Dim settings As New ControlSettingsSaver
             Dim allCtrl As New List(Of Control)
             allCtrl = FindControlRecursive(allCtrl, Me)
             settings.SaveSetting(Me)
@@ -1165,25 +1165,6 @@ Public Class BfMain
     Public Property HideNavigatorButtons As Boolean
     Public Property IgnoreTextBoxNumParserMessage As Boolean
 
-    Protected Function TextBoxNumParser(Of T As Structure)(ByRef control As CTextBox) As T
-        Dim retValue As T
-        Try
-            retValue = Parser(Of T).Parser(control.Text)
-            Text = retValue.ToString()
-        Catch ex As Exception
-            If Not IgnoreTextBoxNumParserMessage Then
-                Dim description As String
-                If TypeOf control Is ILinkedLabel Then
-                    description = DirectCast(control, ILinkedLabel).GetControlDescription()
-                Else
-                    description = control.Name
-                End If
-            End If
-            retValue = Parser(Of T).Parser("0")
-        End Try
-        Return retValue
-    End Function
-
     Protected Overloads Sub CreateLookupDataTable(tableName As String, targetProperty As String)
         Ea.PublishEvent(New GetLookupDataTableRequested(tableName, Me, targetProperty))
     End Sub
@@ -1292,32 +1273,5 @@ Public Class BfMain
             End If
         Next
     End Sub
-
-End Class
-
-Public Class SettingsSaver
-    Private _top As UInt16
-    Private _left As UInt16
-    Private _width As UInt16
-    Private _height As UInt16
-    Private _visible As Boolean
-
-    Public Sub SaveSetting(control As Control)
-        _top = Math.Max(control.Top, 0)
-        _left = Math.Max(control.Left, 0)
-        _width = control.Width
-        _height = control.Height
-        _visible = control.Visible
-    End Sub
-
-    Public Sub RestoreSetting(control As Control)
-        control.Top = _top
-        control.Left = _left
-        control.Width = _width
-        control.Height = _height
-        control.Visible = _visible
-    End Sub
-
-
 
 End Class

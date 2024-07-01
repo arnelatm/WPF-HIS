@@ -1,9 +1,11 @@
-﻿Imports AATM.PresentationLayer.Views
+﻿Imports AATM.PresentationLayer.Presenters
+Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views.Interfaces
 
     Public Interface ICashReceiptJournalView
         Inherits IView
+
         Property AccountIdNo As Int16?
         Property Amount As Decimal
         Property Applied As Decimal
@@ -54,6 +56,7 @@ Namespace PresentationLayer.Views.Interfaces
         Event ContactIdNoChanged(bs As BindingSource)
         Event ReceiptAmountChanged(bsJournalItem As BindingSource, bsCsrOiItem As BindingSource)
         Event DebitAccountIdNoChanged(bs As BindingSource)
+
     End Interface
 
 End Namespace

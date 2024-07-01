@@ -25,12 +25,7 @@ Imports KellermanSoftware.CompareNetObjects
 '''     MV Patterns: MVP design pattern.
 ''' </remarks>
 ''' <typeparam name="TV">Type of itemView.</typeparam>
-Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
-    Implements ISubscriber(Of ViewButtonClicked),
-               ISubscriber(Of EntryFormLoaded),
-               ISubscriber(Of SaveDataRequested),
-               ISubscriber(Of GetLookupDataTableRequested),
-               ISubscriber(Of LanguageChanged)
+Public MustInherit Class PresenterBaseNew(Of TV As IView, TM As New)
 
     Public ChildPresenters As New List(Of Object)
     Public ChildServices As New List(Of Service)
@@ -1338,95 +1333,14 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         mainBizObj.AddError(errors)
     End Sub
 
-    Public Overridable Sub OnViewButtonClicked_EventHandler(ByRef eventType As ViewButtonClicked) Implements ISubscriber(Of ViewButtonClicked).OnEventHandler
-        Select Case eventType.SelectedButton
-            Case ButtonClicked.Undo
-                GoUndoChanges()
-            Case ButtonClicked.Add
-                GoAddRecord()
-            Case ButtonClicked.Edit
-                GoEditRecord()
-            Case ButtonClicked.Print
-                GoPrintRecord()
-            Case ButtonClicked.Quit
-                GoQuit()
-            Case ButtonClicked.Translate
-                GoTranslate()
-            Case ButtonClicked.Filter
-                GoFilter()
-            Case Else
-                ViewButtonClicked(eventType)
-        End Select
-    End Sub
-
     Public Overridable Sub ViewButtonClicked(ByRef eventType As ViewButtonClicked)
 
-    End Sub
-
-    Public Sub OnEntryFormLoaded_EventHandler(ByRef eventType As EntryFormLoaded) Implements ISubscriber(Of EntryFormLoaded).OnEventHandler
-        Dim rules = GetBizObjectRules()
-        For Each rule In rules
-            Dim control As Control = Nothing
-            If MainFieldsDictionary.TryGetValue(rule.Property, control) Then
-                MyErrorProvider.Controls.AddValidation(control, rule.Property, rule.Error)
-            End If
-        Next
-        Dim tableColumnPropertyList As List(Of TblColPropModel)
-        tableColumnPropertyList = ModelTblColProp.GetMainTableColumnProperties(TableName)
-        TableProperties = tableColumnPropertyList.ToArray
-        SetAllControlsDynamicProperties(eventType.ViewControl)
-        CreateDataSources()
-        EntryFormLoaded()
-        eventType.AddingAllowed = UserHasAccess("Table" + TableName + "Adding")
-        eventType.EditingAllowed = UserHasAccess("Table" + TableName + "Editing")
-        eventType.DeletingAllowed = UserHasAccess("Table" + TableName + "Deleting")
-        'GoFirstRecord()
-        'GoLastRecord()
     End Sub
 
     Protected Overridable Sub CreateDataSources()
     End Sub
 
     Public Overridable Sub EntryFormLoaded()
-    End Sub
-
-    Public Sub OnEventHandler(ByRef eventType As SaveDataRequested) Implements ISubscriber(Of SaveDataRequested).OnEventHandler
-        ' Validate record first for errors before saving
-        Dim validated As Boolean = True
-        Dim noChanges As Boolean = False
-        eventType.ValidData = False
-        RaiseEvent BeforeValidate()
-        PreValidate()
-        ClearAllErrorMessages()
-        _dataErrors = ""
-        validated = CheckForDataErrors(eventType)
-        If validated AndAlso (EditMode Or AddMode) Then
-            If Not ChangesMade() Then
-                Messaging.Show(True, "MsgNoChangesMadeNothingToSave", "No changes made, nothing to save!", "Nothing to save")
-                noChanges = True
-            Else
-                If Not IsBizDataValid() Then
-                    validated = False
-                End If
-            End If
-        End If
-        If noChanges Then
-            GoUndoChanges()
-        Else
-            If validated Then
-                If Save(eventType.ViewControl) Then
-                    eventType.ValidData = True
-                Else
-                    eventType.ValidData = False
-                End If
-            Else
-                Beep()
-                Messaging.MessageKey = "ValidationErrors"
-                MessageBox.Show("Record not saved!" & Environment.NewLine & _dataErrors, $"Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                eventType.ValidData = False
-                'ShowErrors("Record not saved!" & Environment.NewLine & _dataErrors)
-            End If
-        End If
     End Sub
 
     Private Function CheckForDataErrors(eventType As SaveDataRequested) As Boolean
@@ -1917,39 +1831,6 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Return description
     End Function
 
-    'Public Sub ShowWaitForm_DoWorkHandler(sender As Object, e As DoWorkEventArgs(Of String))
-    '    If ShowWaitForm.CancellationPending Then
-    '        e.Cancel = True
-    '        Return
-    '    End If
-    '    e.Result = Presenter.GetIdNoOfSortedPositionNumber(Presenter.RecordPositionNumber)
-    'End Sub
-
-    'Public Sub GotoTargetRecordWorker_DoWorkHandler(sender As Object, e As DoWorkEventArgs(Of String))
-    '    If GotoTargetRecordWorker.CancellationPending Then
-    '        e.Cancel = True
-    '        Return
-    '    End If
-    '    Presenter.TargetIdNo = e.Argument
-    '    Presenter.RecordPositionNumber = Presenter.GetSortedRecordPosition(Presenter.TargetIdNo)
-    '    Presenter.TargetIdNo = Presenter.GetIdNoOfSortedPositionNumber(Presenter.RecordPositionNumber)
-    '    Presenter.UpdateViewDisplay(Presenter.TargetIdNo)
-    '    DoPaintEvents()
-    'End Sub
-
-
-    Public Sub OnGetLookupDataRequestedTableHandler(ByRef eventType As GetLookupDataTableRequested) Implements ISubscriber(Of GetLookupDataTableRequested).OnEventHandler
-        If eventType.Control IsNot Nothing Then
-            Dim data As DataTable
-            If eventType.Fields Is Nothing Then
-                data = GetLookupDataTable(eventType.TableName, eventType.SortKey, eventType.Filter)
-            Else
-                data = GetLookupDataTable(eventType.TableName, eventType.Fields, eventType.SortKey, eventType.Filter)
-            End If
-            Invoker.SetProperty(eventType.Control, "DataSource", {data})
-        End If
-    End Sub
-
     Public Function UserHasAccess(securityKey As String, Optional inform As Boolean = False) As Boolean
         Dim hasAccess As Boolean
         If UserIsASuperAdmin() Then
@@ -1977,65 +1858,9 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Return hasAccess
     End Function
 
-    Public Sub OnPresenterBase_LanguageChangedEventHandler(ByRef eventType As LanguageChanged) Implements ISubscriber(Of LanguageChanged).OnEventHandler
-        Dim type As Type = View.GetType
-        If type.GetProperty("UpdateViewDisplay") IsNot Nothing Then
-            UpdateViewDisplay()
-            CreateDataSources()
-            'RaiseEvent LanguageChanged()
-        End If
-        RaiseEvent LanguageChanged()
-    End Sub
-
-    'Public Sub CreateListDataSource(ByVal sourceTableName As String, ByVal fieldName As String, ByVal listName As String)
-    '    SetListDataSource(sourceTableName, GetControlName(fieldName), listName)
-    'End Sub
-
     Public Sub CreateListDataSource(ByVal sourceTableName As String, ByVal fieldName As String, ByVal listName As String)
         SetListDataSourceT(sourceTableName, GetControlName(fieldName), listName)
     End Sub
-
-    'Public Sub CreateDataSource(ByVal sourceTableName As String, ByVal fieldName As String)
-    '    CreateDataSource(sourceTableName, fieldName, Nothing, Nothing, Nothing)
-    'End Sub
-
-    'Public Sub CreateDataSource(ByVal sourceTableName As String, ByVal fieldName As String, ByVal list As Boolean, ByVal ListName As String)
-    '    CreateDataSource(sourceTableName, fieldName, Nothing, Nothing, Nothing)
-    'End Sub
-
-    'Public Sub CreateDataSource(ByVal sourceTableName As String, ByVal fieldName As String, Optional filter As String = Nothing)
-    '    CreateDataSource(sourceTableName, fieldName, Nothing, Nothing, filter)
-    'End Sub
-
-    'Public Sub CreateDataSource(ByVal sourceTableName As String, ByVal fieldName As String, Optional sortKey As String = Nothing, Optional filter As String = Nothing)
-    '    CreateDataSource(sourceTableName, fieldName, Nothing, sortKey, filter)
-    'End Sub
-
-    'Public Sub CreateDataSource(ByVal sourceTableName As String, ByVal fieldName As String, fieldsArray As String(), Optional sortKey As String = Nothing, Optional filter As String = Nothing)
-    '    SetDataSource(sourceTableName, GetControlName(fieldName), fieldsArray, sortKey, filter)
-    'End Sub
-
-    'Public Sub CreateDataSource(ByVal sourceTableName As String, ByVal fieldName As String, list As Boolean, fieldsArray As String(), Optional sortKey As String = Nothing, Optional filter As String = Nothing)
-    '    SetDataSource(sourceTableName, GetControlName(fieldName), fieldsArray, sortKey, filter)
-    'End Sub
-
-    'Public Sub CreateDataSource(ByVal sourceTableName As String, ByVal control As Control, fieldsArray As String(), Optional sortKey As String = Nothing, Optional filter As String = Nothing)
-    '    SetDataSource(sourceTableName, control, fieldsArray, sortKey, filter)
-    'End Sub
-
-    'Public Sub CreateDataSource(ByVal sourceTableName As String, ByVal control As Control)
-    '    SetDataSource(sourceTableName, control, Nothing, Nothing, Nothing)
-    'End Sub
-
-    'Public Sub CreateDataSource(ByVal sourceTableName As String, ByVal control As Control, Optional ByVal filter As String = Nothing)
-    '    SetDataSource(sourceTableName, control, Nothing, Nothing, filter)
-    'End Sub
-
-    'Public Sub CreateDataSourceGroupCode(ByVal fieldName As String, groupCode As String)
-    '    Dim idNo As Int16
-    '    idNo = Service.GetRecordFieldWithKeyG(Of Int16, String)(groupCode, "CodeGroup", "CodeGroupCode", "IdNo")
-    '    CreateDataSource("ItemCode", fieldName, Nothing, Nothing, "CodeGroupIdNo = " & idNo.ToString())
-    'End Sub
 
     Protected Function GetControlName(ByVal fieldName As String) As CtComboBox
         Dim control As Control = Nothing
@@ -2058,17 +1883,6 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         End Try
         Return control
     End Function
-
-    'Public Sub MakeControlDtDataSource(dataTableName As String, control As Control, Optional dataFields As String() = Nothing, Optional sortKey As String = Nothing, Optional filter As String = Nothing, Optional ascending As Boolean = True)
-    '    Dim data As DataTable
-    '    Dim lookupObj As LookupTable
-    '    lookupObj = SetLookupObjectT(dataTableName, control,,, filter)
-    '    data = GetLookupDT(lookupObj)
-    '    Dim Task1
-    '    Task1 = Task.Factory.StartNew(Sub() GetLookup(lookupObj))
-    '    Task.WaitAll(Task1)
-    '    Invoker.SetProperty(control, "DataSource", {data})
-    'End Sub
 
     Protected Sub SetListDataSourceT(dataTableName As String, control As Control, listName As String)
         Dim data As DataTable
@@ -2702,3 +2516,4 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     End Sub
 
 End Class
+

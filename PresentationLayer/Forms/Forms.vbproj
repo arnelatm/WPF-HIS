@@ -178,6 +178,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BFMainNew.designer.vb">
+      <DependentUpon>BFMainNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="BFMainNew.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="BFMain.designer.vb">
       <DependentUpon>BFMain.vb</DependentUpon>
     </Compile>
@@ -190,22 +196,34 @@
     <Compile Include="BFModalForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="DFormBase.Designer.vb">
+      <DependentUpon>DFormBase.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DFormBase.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CFormBase.Designer.vb">
       <DependentUpon>CFormBase.vb</DependentUpon>
     </Compile>
     <Compile Include="CFormBase.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="DFormEntry.designer.vb">
+      <DependentUpon>DFormEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DFormEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CFormEntry.designer.vb">
+      <DependentUpon>CFormEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CFormEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CPictureViewer.Designer.vb">
       <DependentUpon>CPictureViewer.vb</DependentUpon>
     </Compile>
     <Compile Include="CPictureViewer.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CFormEntry.Designer.vb">
-      <DependentUpon>CFormEntry.vb</DependentUpon>
-    </Compile>
-    <Compile Include="CFormEntry.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CFormEntryTv.Designer.vb">
@@ -275,21 +293,30 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="BFMainNew.resx">
+      <DependentUpon>BFMainNew.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="BFMain.resx">
       <DependentUpon>BFMain.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="BFModalForm.resx">
       <DependentUpon>BFModalForm.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DFormBase.resx">
+      <DependentUpon>DFormBase.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CFormBase.resx">
       <DependentUpon>CFormBase.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DFormEntry.resx">
+      <DependentUpon>DFormEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CFormEntry.resx">
+      <DependentUpon>CFormEntry.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CPictureViewer.resx">
       <DependentUpon>CPictureViewer.vb</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CFormEntry.resx">
-      <DependentUpon>CFormEntry.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CFormEntryTv.resx">
       <DependentUpon>CFormEntryTv.vb</DependentUpon>

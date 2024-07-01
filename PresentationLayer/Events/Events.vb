@@ -129,18 +129,6 @@ Public Class ValidatingData
     Public Property Validated
 End Class
 
-'Public Class DataGridCellChanged
-
-'    Public Sub New(ByVal index As Integer, ByVal columnName As String)
-'        Me.Index = index
-'        Me.ColumnName = columnName
-'    End Sub
-
-'    Public Property Index As Integer
-'    Public Property ColumnName As String
-
-'End Class
-
 Public Class ViewButtonClicked
 
     Public Sub New(ByVal selectedButton As ButtonClicked)
@@ -333,6 +321,17 @@ Public Class SaveDataRequested
 
     Public Property ViewControl As Control
     Public Property ValidData As Boolean
+
+End Class
+
+Public Class DataValidator
+
+    Public Sub New(ByVal viewControl As Control)
+        Me.ViewControl = viewControl
+    End Sub
+
+    Public Property ViewControl As Control
+    Public Property Valid As Boolean
 
 End Class
 

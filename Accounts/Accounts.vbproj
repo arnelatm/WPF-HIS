@@ -563,6 +563,7 @@
     <Compile Include="PresentationLayer\Models\PensionProviderModel.vb" />
     <Compile Include="PresentationLayer\Models\PensionSchemeModel.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountEvents.vb" />
+    <Compile Include="PresentationLayer\Presenters\AccountsPresenterNew.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\AppSettingPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ApArEmReportPresenter.vb" />
@@ -707,6 +708,12 @@
       <DependentUpon>ReportSelectorForm.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\ReportSelectorForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\Reports\ShiftDailyReportNew.Designer.vb">
+      <DependentUpon>ShiftDailyReportNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\Reports\ShiftDailyReportNew.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\SupplierProductEntry.Designer.vb">
@@ -2123,6 +2130,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\ReportSelectorForm.resx">
       <DependentUpon>ReportSelectorForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\ShiftDailyReportNew.resx">
+      <DependentUpon>ShiftDailyReportNew.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\SupplierProductEntry.resx">
       <DependentUpon>SupplierProductEntry.vb</DependentUpon>

@@ -6,7 +6,7 @@ Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Views.Forms
 
-    Public Class CashReceiptJournalEntry
+    Public Class CashReceiptJournalEntryNew
         Implements ICashReceiptJournalView
 
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
@@ -438,7 +438,7 @@ Namespace PresentationLayer.Views.Forms
             UpdateOiTotals()
         End Sub
 
-        Private Sub CashReceiptJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Private Sub CashReceiptJournalEntryNew_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             _jiFooter = New DgvFooter(DataGridViewJournalItems) With {
                 .AutoCalc = True
             }

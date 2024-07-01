@@ -105,6 +105,12 @@
     <Compile Include="BCombobox.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="FormBase.Designer.vb">
+      <DependentUpon>FormBase.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormBase.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="BForm.Designer.vb">
       <DependentUpon>BForm.vb</DependentUpon>
     </Compile>
@@ -131,6 +137,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="FormBase.resx">
+      <DependentUpon>FormBase.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="BForm.resx">
       <DependentUpon>BForm.vb</DependentUpon>
     </EmbeddedResource>

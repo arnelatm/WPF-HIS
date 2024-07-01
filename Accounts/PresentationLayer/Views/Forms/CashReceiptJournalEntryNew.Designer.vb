@@ -3,7 +3,7 @@ Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Views.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-    Partial Class CashReceiptJournalEntry
+    Partial Class CashReceiptJournalEntryNew
         Inherits CFormEntry
 
         'Form overrides dispose to clean up the component list.
@@ -24,7 +24,7 @@ Namespace PresentationLayer.Views.Forms
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
             Me.components = New System.ComponentModel.Container()
-            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CashReceiptJournalEntry))
+            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CashReceiptJournalEntryNew))
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim EventAggregator1 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
@@ -1693,11 +1693,11 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayorIdNo.TabStop = False
             Me.txtPayorIdNo.Translatable = False
             '
-            'CashReceiptJournalEntry
+            'CashReceiptJournalEntryNew
             '
             resources.ApplyResources(Me, "$this")
             Me.Controls.Add(Me.floFullEntryArea)
-            Me.Name = "CashReceiptJournalEntry"
+            Me.Name = "CashReceiptJournalEntryNew"
             Me.Controls.SetChildIndex(Me.floFullEntryArea, 0)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             Me.floFullEntryArea.ResumeLayout(False)

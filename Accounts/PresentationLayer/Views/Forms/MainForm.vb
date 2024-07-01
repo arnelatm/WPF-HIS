@@ -1057,7 +1057,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ShiftDailySummaryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemShiftDailySummary.Click
-            RunReportNew(Of ShiftDailyReport)()
+            RunReportNew(Of ShiftDailyReportNew)()
             'RunForm(Of ShiftDailyReport)()
         End Sub
 

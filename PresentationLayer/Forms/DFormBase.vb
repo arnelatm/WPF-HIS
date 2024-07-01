@@ -1,26 +1,23 @@
 ﻿Imports System.ComponentModel
 Imports System.Drawing
 Imports System.Globalization
-Imports System.Threading
 Imports System.Windows.Forms
 Imports AATM.Libraries
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Events
 
-Public Class CFormBase
+Public Class DFormBase
 
     Public MainFieldsDictionary As New Dictionary(Of String, Object)
-    Public GotoTargetRecordWorker As BackgroundWorker(Of String)
-    Public ShowWaitForm As BackgroundWorker(Of String)
     Public DisallowSaves As Boolean = False
     Protected Const TurnOff As Boolean = False
-    Protected Shared _resetEvent As AutoResetEvent = New AutoResetEvent(False)
     Protected FirstControl As Control
     Protected ParentFieldName As String = ""
     Protected RecordDateTimeStampValue As Object
     Protected SingleData As Boolean = False
     Protected QueryOnly As Boolean = False
+
     Private _debugSwitch As Byte = 0
     Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
     Private _editingMode As Boolean = False
@@ -28,45 +25,25 @@ Public Class CFormBase
     Private _translatable As Boolean = True
     Private _firstLoadSwitch As UInt16 = 0
 
-    Public Event AfterUpdateView()
-
-    Public Event InputsTurnedOn()
-
-    Public Event InputsTurnedOff()
-
     Public Sub New()
         InitializeComponent()
         DoubleBuffered = True
-
     End Sub
-
-    Delegate Sub SafeCallDelegate(ByRef controlObject As Control, textString As String)
 
     Private Declare Function SetProcessWorkingSetSize Lib "kernel32.dll" (hProcess As IntPtr,
                                                                          dwMinimumWorkingSetSize As Int32,
                                                                           dwMaximumWorkingSetSize As Int32) As Int32
-
-    <Bindable(True)>
-    <Category("Properties")>
-    <DefaultValue(GetType(Boolean))>
-    <Description("Type here the Child Table name if any, otherwise leave it blank.")>
-    <Browsable(True)>
-    Public Property ChildTableName As String = ""
-
-    Public Property TableProperties As Array
-
     Protected Property FormTitleCaption As String = ""
+
 
     Private Sub OnCFormEntryNewShown() Handles MyBase.Shown
         SuspendDrawing()
         If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
             If btnArabic.Enabled Then
-                'btnArabic.PerformClick()
                 SwitchUiLanguage(False)
             End If
         Else
             If Not btnArabic.Enabled Then
-                'btnOriginal.PerformClick()
                 SwitchUiLanguage(True)
             End If
         End If
@@ -82,31 +59,29 @@ Public Class CFormBase
         SetFormTitleCaption()
     End Sub
 
+    Private Sub TurnOnInputs()
+        Throw New NotImplementedException()
+    End Sub
+
     Public Overridable Sub UpdateViewDisplay(editMode As Boolean, addMode As Boolean, recordPositionNumber As Integer, targetIdNo As Integer, recordCount As Integer)
         If (QueryOnly Or SingleData) Then
             TurnOnInputs()
         Else
-            'TurnOnInputs()
-            'btnSave.Visible = False
-            'btnEdit.Visible = False
-            'btnUndo.Visible = False
-            'btnFilter.Visible = False
-            'Else
             If addMode Or editMode Then
                 TurnOnInputs()
             Else
                 TurnOffInputs()
             End If
         End If
-        RaiseEvent AfterUpdateView()
+        'RaiseEvent AfterUpdateView()
+    End Sub
+
+    Private Sub TurnOffInputs()
+        Throw New NotImplementedException()
     End Sub
 
     Public Sub CheckDataChanges()
     End Sub
-
-    'Public Sub FindFieldNew(findableControl As IFindableControl)
-    '    Ea.PublishEvent(New FindFieldRequested(findableControl))
-    'End Sub
 
     Public Function GetMainFieldsDictionary()
         Return MainFieldsDictionary
@@ -130,30 +105,12 @@ Public Class CFormBase
         lblFormDescription.TextAlign = ContentAlignment.MiddleCenter
     End Sub
 
-    Public Overridable Sub TurnOffInputs()
-        Inputs(False)
-        RaiseEvent InputsTurnedOff()
-    End Sub
-
-    Public Overridable Sub TurnOnInputs()
-        Inputs(True)
-        RaiseEvent InputsTurnedOn()
-        If FirstControl IsNot Nothing Then
-            FirstControl.Focus()
-        End If
-    End Sub
-
-    'Protected Overridable Sub CreateDataSources()
-    '    '
-    'End Sub
-
     Protected Overridable Sub CreateMainFieldsDictionary()
         '
     End Sub
 
     Protected Overridable Sub OnTextDisplayLanguageChanged() Handles Me.TextDisplayLanguageChanged
         CultureInfo.CurrentCulture = New CultureInfo(TextDisplayLanguage, False)
-        'CreateDataSources()
         PublishEvent(New LanguageChanged(Me))
     End Sub
 
@@ -236,10 +193,7 @@ Public Class CFormBase
         If _debugSwitch = 1 Then
             Debugger.Break()
         End If
-        PublishClickedButton(ButtonClicked.Edit)
-        'If EditMode Then
-        '    TurnOnInputs()
-        'End If
+        'PublishClickedButton(ButtonClicked.Edit)
     End Sub
 
     Private Sub BtnOriginal_Click(sender As Object, e As EventArgs) Handles btnOriginal.Click
@@ -271,26 +225,26 @@ Public Class CFormBase
             End If
         Next
         Dim saveData As New SaveDataRequested(Me)
-        If Ea IsNot Nothing Then
-            Ea.PublishEvent(saveData)
-        End If
+        'If Ea IsNot Nothing Then
+        '    Ea.PublishEvent(saveData)
+        'End If
         If saveData.ValidData Then
             Close()
         End If
     End Sub
 
-    Protected Sub PublishClickedButton(buttonClicked As ButtonClicked)
-        If Ea IsNot Nothing Then
-            Ea.PublishEvent(New ViewButtonClicked(buttonClicked))
-        End If
-    End Sub
+    'Protected Sub PublishClickedButton(buttonClicked As ButtonClicked)
+    '    'If Ea IsNot Nothing Then
+    '    '    Ea.PublishEvent(New ViewButtonClicked(buttonClicked))
+    '    'End If
+    'End Sub
 
-    Private Sub BtnPrint_Click(sender As Object, e As EventArgs) Handles btnPrint.Click
-        If _debugSwitch = 1 Then
-            Debugger.Break()
-        End If
-        PublishClickedButton(ButtonClicked.Print)
-    End Sub
+    'Private Sub BtnPrint_Click(sender As Object, e As EventArgs) Handles btnPrint.Click
+    '    If _debugSwitch = 1 Then
+    '        Debugger.Break()
+    '    End If
+    '    PublishClickedButton(ButtonClicked.Print)
+    'End Sub
 
     Private Sub BtnTranslate_Click(sender As Object, e As EventArgs) Handles btnTranslate.Click
         If _debugSwitch Then
@@ -301,16 +255,16 @@ Public Class CFormBase
 
     End Sub
 
-    Private Sub BtnUndo_Click(sender As Object, e As EventArgs) Handles btnUndo.Click
-        PublishClickedButton(ButtonClicked.Undo)
-    End Sub
+    'Private Sub BtnUndo_Click(sender As Object, e As EventArgs) Handles btnUndo.Click
+    '    PublishClickedButton(ButtonClicked.Undo)
+    'End Sub
 
-    Private Sub BtnFilter_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
-        PublishClickedButton(ButtonClicked.Filter)
-    End Sub
+    'Private Sub BtnFilter_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
+    '    PublishClickedButton(ButtonClicked.Filter)
+    'End Sub
 
     Private Sub CFormEntry_Closing(sender As Object, e As CancelEventArgs) Handles MyBase.Closing
-        PublishClickedButton(ButtonClicked.Quit)
+        'PublishClickedButton(ButtonClicked.Quit)
         If CancelClose Then
             e.Cancel = True
         Else
@@ -322,41 +276,13 @@ Public Class CFormBase
         CloseForm()
     End Sub
 
-    'Private Sub CFormEntry_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
-    '    If e.KeyCode = Keys.F10 Then
-    '        If btnSave.Enabled Then
-    '            e.SuppressKeyPress = True
-    '            e.Handled = True
-    '            PublishClickedButton(ButtonClicked.Save)
-    '        Else
-    '            Beep()
-    '        End If
-    '    ElseIf e.KeyCode = Keys.F2 Then
-    '        If btnSave.Enabled Then
-    '            e.SuppressKeyPress = True
-    '            e.Handled = True
-    '            PublishClickedButton(ButtonClicked.Edit)
-    '        Else
-    '            Beep()
-    '        End If
-    '    ElseIf e.KeyCode = Keys.Enter Then
-
-    '        e.Handled = False
-    '    End If
-    'End Sub
-
     Private Sub CFormEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'If _firstLoadSwitch = 0 Then
-        '    GetNSaveCaptions()
-        '    _firstLoadSwitch = 1
-        'End If
         If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
             TextDisplayLanguage = CultureInfo.CurrentCulture.Name
-            'CreateDataSources()
             CreateMainFieldsDictionary()
-            If Ea IsNot Nothing Then
-                Ea.PublishEvent(New EntryFormLoaded(Me))
-            End If
+            'If Ea IsNot Nothing Then
+            '    Ea.PublishEvent(New EntryFormLoaded(Me))
+            'End If
             Inputs(False)
             If GlobalVariables.RightToLeftLayout Then
                 btnArabic.Visible = False
@@ -373,7 +299,6 @@ Public Class CFormBase
             If Not UserIsASuperAdmin() Then
                 HideButton(btnDebug)
             End If
-            'CenterForm(Me)
         End If
     End Sub
 
@@ -419,12 +344,12 @@ Public Class CFormBase
                 SetPropertyValue(ctrl, "EditingMode", onOff)
             End If
         Next
-        If onOff Then
-            RaiseEvent InputsTurnedOn()
-            UnselectTextOnCtComboboxes(allCtrl)
-        Else
-            RaiseEvent InputsTurnedOff()
-        End If
+        'If onOff Then
+        '    RaiseEvent InputsTurnedOn()
+        '    UnselectTextOnCtComboboxes(allCtrl)
+        'Else
+        '    RaiseEvent InputsTurnedOff()
+        'End If
         If FirstControl IsNot Nothing Then
             FirstControl.Focus()
         End If
@@ -440,44 +365,12 @@ Public Class CFormBase
     End Sub
 
 
-    Private Sub OnBeforeLoad() Handles MyBase.BeforeLoad
-        'SetFormTitleCaption()
-    End Sub
+    'Private Sub OnBeforeLoad() Handles MyBase.BeforeLoad
+    '    'SetFormTitleCaption()
+    'End Sub
 
     Private Sub PasteToolStripButton_Click(sender As Object, e As EventArgs) Handles PasteToolStripButton.Click
         PasteText()
-    End Sub
-
-    Protected Overridable Sub SwitchUiLanguage(originalUi As Boolean)
-        SuspendDrawing()
-        Dim sw As Integer = 0
-        If originalUi Then
-            If TextDisplayLanguage <> GlobalVariables.DefaultUnmirroredCultureInfoStr Then
-                TextDisplayLanguage = GlobalVariables.DefaultUnmirroredCultureInfoStr
-                sw = 1
-            End If
-            GlobalVariables.RightToLeftLayout = True
-            RightToLeft = RightToLeft.No
-        Else
-            If TextDisplayLanguage <> GlobalVariables.DefaultMirroredCultureInfoStr Then
-                TextDisplayLanguage = GlobalVariables.DefaultMirroredCultureInfoStr
-                sw = 1
-            End If
-            GlobalVariables.RightToLeftLayout = False
-            RightToLeft = RightToLeft.Yes
-        End If
-        TranslateForm()
-        If sw = 1 Then
-            CultureInfo.CurrentCulture = New CultureInfo(TextDisplayLanguage, False)
-            btnArabic.Visible = originalUi
-            btnOriginal.Visible = Not originalUi
-            btnArabic.Enabled = originalUi
-            btnOriginal.Enabled = Not originalUi
-            If Ea IsNot Nothing Then
-                Ea.PublishEvent(New LanguageChanged(Me))
-            End If
-        End If
-        ResumeDrawing()
     End Sub
 
 End Class
