@@ -29,7 +29,6 @@ Public Class PresenterB(Of TV As IViewNew, TM As New)
         If itemView IsNot Nothing Then
             Me.View = itemView
             Me.DataFilter = View.DataFilter
-            'Me.Model = New TM
             MyErrorProvider = GetErrorProvider()
             OriginalModel = Activator.CreateInstance(GetType(TM))
             Dim systemViewName As String
