@@ -673,7 +673,6 @@ Namespace PresentationLayer.Views.Forms
             Else
                 ToolStripMenuItemPayGroups.Visible = False
             End If
-            ' Add any initialization after the InitializeComponent() call.
             Dim mySettings = AppSettings.Load()
             Dim mirroredLanguage = My.Settings.MirroredLanguage
             If mirroredLanguage Then
@@ -681,28 +680,52 @@ Namespace PresentationLayer.Views.Forms
                 SetLanguageChangeButtons()
                 SwitchUiLanguage(False)
             End If
-            '_appSettings = PropertyGrid.SelectedObject
-            ' Attribute for the user-scope settings.
 
         End Sub
 
-        ''' <summary>
-        '''     Displays login dialog box and loads member list in treeview.
-        ''' </summary>
-        ''' <param name="sender"></param>
-        ''' <param name="e"></param>
         Private Sub LoginToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemLogin.Click
-            'RunForm(Of LoginEntry, Boolean)(False)
-            Dim logForm As New LoginEntry(False)
+            Login(False)
+        End Sub
+
+        Private Sub ToolStripMenuItemChangePassword_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemChangePassword.Click
+            Login(True)
+            'Dim logForm As New LoginEntry(True)
+            'Dim presenter = New UserPresenter(Of UserModel)(logForm)
+            'Using logForm
+            '    Try
+            '        If logForm.ShowDialog() = DialogResult.OK Then
+            '            If logForm.LoginOk Then
+            '                LogStatus = LoginStatus.LoggedIn
+            '            Else
+            '                Messaging.Show(True, "MsgOldPasswordError")
+            '                LogStatus = LoginStatus.LoggedOut
+            '            End If
+            '        Else
+            '            LogStatus = LoginStatus.LoggedOut
+            '        End If
+            '        ToolStripButtonExit.Enabled = True
+            '    Catch ex As TypeInitializationException
+            '        MessageBox.Show("Invalid Connection String, specified connection String doesn't exist.",
+            '                        "Connection String Error!", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            '        ErrLogger.LogError(ex, True)
+            '        LogStatus = LoginStatus.LoggedOut
+            '    Catch ex As Exception
+            '        LogStatus = LoginStatus.LoggedIn
+            '    End Try
+            'End Using
+        End Sub
+
+        Private Sub Login(changePassword)
+            Dim logForm As New LoginEntry(changePassword)
             Dim presenter = New LoginPresenter(Of UserModel)(logForm)
             Using logForm
-                'logForm.Show()
                 Try
                     If logForm.ShowDialog() = DialogResult.OK Then
                         If logForm.LoginOk Then
                             LogStatus = LoginStatus.LoggedIn
                         Else
                             LogStatus = LoginStatus.LoggedOut
+                            Messaging.Show(True, "MsgPasswordError")
                         End If
                     Else
                         LogStatus = LoginStatus.LoggedOut
@@ -726,10 +749,8 @@ Namespace PresentationLayer.Views.Forms
             End Using
         End Sub
 
-        'End Sub
-        ''' <summary>
-        '''     Logoff user, empties datagridviews, and disables menus.
-        ''' </summary>
+
+
         Private Sub LogoutToolStripMenuItem_Click(sender As Object, e As EventArgs) _
             Handles ToolStripMenuItemLogout.Click
             If LogStatus = LoginStatus.LoggedIn Then
@@ -864,34 +885,6 @@ Namespace PresentationLayer.Views.Forms
             'ToolStripButtonArabic.Enabled = False
             'ToolStripButtonEnglish.Visible = True
             'ToolStripButtonEnglish.Enabled = True
-        End Sub
-
-        Private Sub ToolStripMenuItemChangePassword_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemChangePassword.Click
-            Dim logForm As New LoginEntry(True)
-            Dim presenter = New UserPresenter(Of UserModel)(logForm)
-            Using logForm 'As New LoginEntry(True)
-                Try
-                    If logForm.ShowDialog() = DialogResult.OK Then
-                        If logForm.LoginOk Then
-                            LogStatus = LoginStatus.LoggedIn
-                        Else
-                            Messaging.Show(True, "MsgOldPasswordError")
-                            LogStatus = LoginStatus.LoggedOut
-                            LogStatus = LoginStatus.LoggedOut
-                        End If
-                    Else
-                        LogStatus = LoginStatus.LoggedOut
-                    End If
-                    ToolStripButtonExit.Enabled = True
-                Catch ex As TypeInitializationException
-                    MessageBox.Show("Invalid Connection String, specified connection String doesn't exist.",
-                                    "Connection String Error!", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    ErrLogger.LogError(ex, True)
-                    LogStatus = LoginStatus.LoggedOut
-                Catch ex As Exception
-                    LogStatus = LoginStatus.LoggedIn
-                End Try
-            End Using
         End Sub
 
         Private Sub ToolStripMenuItemEmployeeLeave_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeLeaveNonHoliday.Click

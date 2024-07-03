@@ -37,7 +37,7 @@ Partial Class LoginEntry
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.textNewPassword = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.textBoxPassword = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.textConfirmation = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.textConfirmedPassword = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblConfirmation = New System.Windows.Forms.Label()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.btnCancel = New System.Windows.Forms.Button()
@@ -49,19 +49,11 @@ Partial Class LoginEntry
         Me.TableLayoutPanel2.SuspendLayout()
         Me.SuspendLayout()
         '
-        'TranslatorDAC
-        '
-        Me.TranslatorDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
-        '
-        'AppDataDAC
-        '
-        Me.AppDataDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
-        '
         'PictureBox1
         '
         Me.PictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.PictureBox1.Image = Global.AATM.PresentationLayer.Forms.My.Resources.Resources.Logo
-        Me.PictureBox1.Location = New System.Drawing.Point(116, 12)
+        Me.PictureBox1.Location = New System.Drawing.Point(163, 12)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(200, 150)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -70,12 +62,13 @@ Partial Class LoginEntry
         '
         'Label4
         '
+        Me.Label4.BackColor = System.Drawing.Color.Transparent
         Me.TableLayoutPanel1.SetColumnSpan(Me.Label4, 2)
         Me.Label4.DisplayOnly = True
         Me.Label4.EditingMode = False
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
         Me.Label4.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label4.Location = New System.Drawing.Point(0, 26)
+        Me.Label4.Location = New System.Drawing.Point(0, 30)
         Me.Label4.Margin = New System.Windows.Forms.Padding(0)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(90, 20)
@@ -101,7 +94,7 @@ Partial Class LoginEntry
         Me.txtUserName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
         Me.txtUserName.ForeColor = System.Drawing.Color.Black
         Me.txtUserName.LinkedLabel = Nothing
-        Me.txtUserName.Location = New System.Drawing.Point(120, 26)
+        Me.txtUserName.Location = New System.Drawing.Point(120, 30)
         Me.txtUserName.Margin = New System.Windows.Forms.Padding(0)
         Me.txtUserName.MaximumValue = Nothing
         Me.txtUserName.MinimumValue = Nothing
@@ -110,7 +103,7 @@ Partial Class LoginEntry
         Me.txtUserName.OverrideMaxLength = 0
         Me.txtUserName.ReadOnly = True
         Me.txtUserName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtUserName.Size = New System.Drawing.Size(278, 23)
+        Me.txtUserName.Size = New System.Drawing.Size(368, 26)
         Me.txtUserName.TabIndex = 0
         Me.txtUserName.Translatable = False
         '
@@ -118,7 +111,7 @@ Partial Class LoginEntry
         '
         Me.TableLayoutPanel1.SetColumnSpan(Me.Label3, 2)
         Me.Label3.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label3.Location = New System.Drawing.Point(0, 49)
+        Me.Label3.Location = New System.Drawing.Point(0, 56)
         Me.Label3.Margin = New System.Windows.Forms.Padding(0)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(90, 20)
@@ -142,7 +135,7 @@ Partial Class LoginEntry
         Me.chkSaveUserNameAndPassword.IFindableControl_FindEnabled = False
         Me.chkSaveUserNameAndPassword.IgnoreCase = False
         Me.chkSaveUserNameAndPassword.LinkedLabel = Nothing
-        Me.chkSaveUserNameAndPassword.Location = New System.Drawing.Point(1, 119)
+        Me.chkSaveUserNameAndPassword.Location = New System.Drawing.Point(1, 135)
         Me.chkSaveUserNameAndPassword.Margin = New System.Windows.Forms.Padding(1)
         Me.chkSaveUserNameAndPassword.Name = "chkSaveUserNameAndPassword"
         Me.chkSaveUserNameAndPassword.NoLabel = True
@@ -156,11 +149,12 @@ Partial Class LoginEntry
         '
         'CLabel2
         '
+        Me.CLabel2.BackColor = System.Drawing.Color.Transparent
         Me.TableLayoutPanel1.SetColumnSpan(Me.CLabel2, 2)
         Me.CLabel2.DisplayOnly = True
         Me.CLabel2.EditingMode = False
         Me.CLabel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CLabel2.Location = New System.Drawing.Point(16, 119)
+        Me.CLabel2.Location = New System.Drawing.Point(16, 135)
         Me.CLabel2.Margin = New System.Windows.Forms.Padding(1)
         Me.CLabel2.Name = "CLabel2"
         Me.CLabel2.Size = New System.Drawing.Size(249, 23)
@@ -174,7 +168,7 @@ Partial Class LoginEntry
         Me.lblNewPassword.BackColor = System.Drawing.Color.Transparent
         Me.TableLayoutPanel1.SetColumnSpan(Me.lblNewPassword, 2)
         Me.lblNewPassword.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblNewPassword.Location = New System.Drawing.Point(0, 72)
+        Me.lblNewPassword.Location = New System.Drawing.Point(0, 82)
         Me.lblNewPassword.Margin = New System.Windows.Forms.Padding(0)
         Me.lblNewPassword.Name = "lblNewPassword"
         Me.TableLayoutPanel1.SetRowSpan(Me.lblNewPassword, 2)
@@ -185,16 +179,18 @@ Partial Class LoginEntry
         '
         'floPasswordEntry
         '
+        Me.floPasswordEntry.AutoSize = True
         Me.floPasswordEntry.BackColor = System.Drawing.Color.Transparent
         Me.floPasswordEntry.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.floPasswordEntry.Controls.Add(Me.TableLayoutPanel1)
         Me.floPasswordEntry.Location = New System.Drawing.Point(12, 177)
         Me.floPasswordEntry.Name = "floPasswordEntry"
-        Me.floPasswordEntry.Size = New System.Drawing.Size(413, 153)
+        Me.floPasswordEntry.Size = New System.Drawing.Size(500, 176)
         Me.floPasswordEntry.TabIndex = 0
         '
         'TableLayoutPanel1
         '
+        Me.TableLayoutPanel1.AutoSize = True
         Me.TableLayoutPanel1.ColumnCount = 3
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
@@ -203,7 +199,7 @@ Partial Class LoginEntry
         Me.TableLayoutPanel1.Controls.Add(Me.CLabel1, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.textNewPassword, 2, 3)
         Me.TableLayoutPanel1.Controls.Add(Me.textBoxPassword, 2, 2)
-        Me.TableLayoutPanel1.Controls.Add(Me.textConfirmation, 2, 4)
+        Me.TableLayoutPanel1.Controls.Add(Me.textConfirmedPassword, 2, 4)
         Me.TableLayoutPanel1.Controls.Add(Me.lblConfirmation, 0, 4)
         Me.TableLayoutPanel1.Controls.Add(Me.chkSaveUserNameAndPassword, 0, 5)
         Me.TableLayoutPanel1.Controls.Add(Me.lblNewPassword, 0, 3)
@@ -222,7 +218,7 @@ Partial Class LoginEntry
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(403, 145)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(489, 159)
         Me.TableLayoutPanel1.TabIndex = 33
         '
         'cboBranchIdNo
@@ -234,6 +230,7 @@ Partial Class LoginEntry
         Me.cboBranchIdNo.DataValue = Nothing
         Me.cboBranchIdNo.DefaultValue = Nothing
         Me.cboBranchIdNo.DisplayMember = "Name"
+        Me.cboBranchIdNo.Editable = True
         Me.cboBranchIdNo.EditingMode = True
         Me.cboBranchIdNo.EndFindValue = Nothing
         Me.cboBranchIdNo.FieldDescription = Nothing
@@ -258,8 +255,9 @@ Partial Class LoginEntry
         Me.cboBranchIdNo.OverrideDropDownStyleList = False
         Me.cboBranchIdNo.PreviousSearchTerm = Nothing
         Me.cboBranchIdNo.PropertySelector = Nothing
-        Me.cboBranchIdNo.Size = New System.Drawing.Size(277, 24)
+        Me.cboBranchIdNo.Size = New System.Drawing.Size(367, 28)
         Me.cboBranchIdNo.SuggestBoxHeight = 200
+        Me.cboBranchIdNo.SuggestCharCount = 0
         Me.cboBranchIdNo.SuggestListOrderRule = Nothing
         Me.cboBranchIdNo.TabIndex = 36
         Me.cboBranchIdNo.TextToSearch = Nothing
@@ -271,6 +269,7 @@ Partial Class LoginEntry
         '
         'CLabel1
         '
+        Me.CLabel1.BackColor = System.Drawing.Color.Transparent
         Me.TableLayoutPanel1.SetColumnSpan(Me.CLabel1, 2)
         Me.CLabel1.DisplayOnly = True
         Me.CLabel1.EditingMode = False
@@ -302,7 +301,7 @@ Partial Class LoginEntry
         Me.textNewPassword.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
         Me.textNewPassword.ForeColor = System.Drawing.Color.Black
         Me.textNewPassword.LinkedLabel = Nothing
-        Me.textNewPassword.Location = New System.Drawing.Point(120, 72)
+        Me.textNewPassword.Location = New System.Drawing.Point(120, 82)
         Me.textNewPassword.Margin = New System.Windows.Forms.Padding(0)
         Me.textNewPassword.MaximumValue = Nothing
         Me.textNewPassword.MinimumValue = Nothing
@@ -312,7 +311,7 @@ Partial Class LoginEntry
         Me.textNewPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.textNewPassword.ReadOnly = True
         Me.textNewPassword.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.textNewPassword.Size = New System.Drawing.Size(278, 23)
+        Me.textNewPassword.Size = New System.Drawing.Size(368, 26)
         Me.textNewPassword.TabIndex = 2
         Me.textNewPassword.Text = "1"
         Me.textNewPassword.Translatable = False
@@ -335,7 +334,7 @@ Partial Class LoginEntry
         Me.textBoxPassword.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
         Me.textBoxPassword.ForeColor = System.Drawing.Color.Black
         Me.textBoxPassword.LinkedLabel = Nothing
-        Me.textBoxPassword.Location = New System.Drawing.Point(120, 49)
+        Me.textBoxPassword.Location = New System.Drawing.Point(120, 56)
         Me.textBoxPassword.Margin = New System.Windows.Forms.Padding(0)
         Me.textBoxPassword.MaximumValue = Nothing
         Me.textBoxPassword.MinimumValue = Nothing
@@ -345,50 +344,50 @@ Partial Class LoginEntry
         Me.textBoxPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.textBoxPassword.ReadOnly = True
         Me.textBoxPassword.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.textBoxPassword.Size = New System.Drawing.Size(278, 23)
+        Me.textBoxPassword.Size = New System.Drawing.Size(368, 26)
         Me.textBoxPassword.TabIndex = 1
         Me.textBoxPassword.Text = "1"
         Me.textBoxPassword.Translatable = False
         '
-        'textConfirmation
+        'textConfirmedPassword
         '
-        Me.textConfirmation.BackColor = System.Drawing.Color.White
-        Me.textConfirmation.BegFindValue = Nothing
-        Me.textConfirmation.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.textConfirmation.ComputedValue = False
-        Me.textConfirmation.CustomFormat = Nothing
-        Me.textConfirmation.DataBoundControl = True
-        Me.textConfirmation.EditingMode = False
-        Me.textConfirmation.EndFindValue = Nothing
-        Me.textConfirmation.FieldDescription = Nothing
-        Me.textConfirmation.FieldName = Nothing
-        Me.textConfirmation.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.textConfirmation.FindEnabled = False
-        Me.textConfirmation.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.textConfirmation.ForeColor = System.Drawing.Color.Black
-        Me.textConfirmation.LinkedLabel = Nothing
-        Me.textConfirmation.Location = New System.Drawing.Point(120, 95)
-        Me.textConfirmation.Margin = New System.Windows.Forms.Padding(0)
-        Me.textConfirmation.MaximumValue = Nothing
-        Me.textConfirmation.MinimumValue = Nothing
-        Me.textConfirmation.Name = "textConfirmation"
-        Me.textConfirmation.OldValue = Nothing
-        Me.textConfirmation.OverrideMaxLength = 0
-        Me.textConfirmation.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
-        Me.textConfirmation.ReadOnly = True
-        Me.textConfirmation.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.textConfirmation.Size = New System.Drawing.Size(278, 23)
-        Me.textConfirmation.TabIndex = 3
-        Me.textConfirmation.Text = "1"
-        Me.textConfirmation.Translatable = False
-        Me.textConfirmation.Visible = False
+        Me.textConfirmedPassword.BackColor = System.Drawing.Color.White
+        Me.textConfirmedPassword.BegFindValue = Nothing
+        Me.textConfirmedPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.textConfirmedPassword.ComputedValue = False
+        Me.textConfirmedPassword.CustomFormat = Nothing
+        Me.textConfirmedPassword.DataBoundControl = True
+        Me.textConfirmedPassword.EditingMode = False
+        Me.textConfirmedPassword.EndFindValue = Nothing
+        Me.textConfirmedPassword.FieldDescription = Nothing
+        Me.textConfirmedPassword.FieldName = Nothing
+        Me.textConfirmedPassword.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.textConfirmedPassword.FindEnabled = False
+        Me.textConfirmedPassword.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+        Me.textConfirmedPassword.ForeColor = System.Drawing.Color.Black
+        Me.textConfirmedPassword.LinkedLabel = Nothing
+        Me.textConfirmedPassword.Location = New System.Drawing.Point(120, 108)
+        Me.textConfirmedPassword.Margin = New System.Windows.Forms.Padding(0)
+        Me.textConfirmedPassword.MaximumValue = Nothing
+        Me.textConfirmedPassword.MinimumValue = Nothing
+        Me.textConfirmedPassword.Name = "textConfirmedPassword"
+        Me.textConfirmedPassword.OldValue = Nothing
+        Me.textConfirmedPassword.OverrideMaxLength = 0
+        Me.textConfirmedPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
+        Me.textConfirmedPassword.ReadOnly = True
+        Me.textConfirmedPassword.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.textConfirmedPassword.Size = New System.Drawing.Size(368, 26)
+        Me.textConfirmedPassword.TabIndex = 3
+        Me.textConfirmedPassword.Text = "1"
+        Me.textConfirmedPassword.Translatable = False
+        Me.textConfirmedPassword.Visible = False
         '
         'lblConfirmation
         '
         Me.lblConfirmation.BackColor = System.Drawing.Color.Transparent
         Me.TableLayoutPanel1.SetColumnSpan(Me.lblConfirmation, 2)
         Me.lblConfirmation.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblConfirmation.Location = New System.Drawing.Point(0, 95)
+        Me.lblConfirmation.Location = New System.Drawing.Point(0, 108)
         Me.lblConfirmation.Margin = New System.Windows.Forms.Padding(0)
         Me.lblConfirmation.Name = "lblConfirmation"
         Me.lblConfirmation.Size = New System.Drawing.Size(120, 20)
@@ -405,12 +404,12 @@ Partial Class LoginEntry
         Me.TableLayoutPanel2.Controls.Add(Me.btnCancel, 0, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.btn_Login, 1, 0)
         Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.TableLayoutPanel2.Location = New System.Drawing.Point(0, 337)
+        Me.TableLayoutPanel2.Location = New System.Drawing.Point(0, 362)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 1
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(432, 37)
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 46.0!))
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(528, 47)
         Me.TableLayoutPanel2.TabIndex = 34
         '
         'btnCancel
@@ -425,9 +424,9 @@ Partial Class LoginEntry
         Me.btnCancel.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.btnCancel.ImageIndex = 0
         Me.btnCancel.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnCancel.Location = New System.Drawing.Point(69, 7)
+        Me.btnCancel.Location = New System.Drawing.Point(93, 8)
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(77, 23)
+        Me.btnCancel.Size = New System.Drawing.Size(77, 30)
         Me.btnCancel.TabIndex = 0
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = False
@@ -444,16 +443,17 @@ Partial Class LoginEntry
         Me.btn_Login.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.btn_Login.ImageIndex = 0
         Me.btn_Login.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btn_Login.Location = New System.Drawing.Point(286, 7)
+        Me.btn_Login.Location = New System.Drawing.Point(358, 8)
         Me.btn_Login.Name = "btn_Login"
-        Me.btn_Login.Size = New System.Drawing.Size(75, 23)
+        Me.btn_Login.Size = New System.Drawing.Size(75, 30)
         Me.btn_Login.TabIndex = 1
         Me.btn_Login.Text = "Login"
         Me.btn_Login.UseVisualStyleBackColor = False
         '
         'LoginEntry
         '
-        Me.ClientSize = New System.Drawing.Size(432, 374)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.ClientSize = New System.Drawing.Size(528, 409)
         Me.Controls.Add(Me.TableLayoutPanel2)
         Me.Controls.Add(Me.floPasswordEntry)
         Me.Controls.Add(Me.PictureBox1)
@@ -462,10 +462,12 @@ Partial Class LoginEntry
         CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.floPasswordEntry.ResumeLayout(False)
+        Me.floPasswordEntry.PerformLayout()
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel1.PerformLayout()
         Me.TableLayoutPanel2.ResumeLayout(False)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents PictureBox1 As Windows.Forms.PictureBox
@@ -477,7 +479,7 @@ Partial Class LoginEntry
     Friend WithEvents lblNewPassword As Label
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
     Friend WithEvents floPasswordEntry As CFlowLayout
-    Friend WithEvents textConfirmation As CTextBox
+    Friend WithEvents textConfirmedPassword As CTextBox
     Friend WithEvents lblConfirmation As Label
     Friend WithEvents textNewPassword As CTextBox
     Friend WithEvents textBoxPassword As CTextBox

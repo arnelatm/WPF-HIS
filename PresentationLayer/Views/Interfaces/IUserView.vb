@@ -29,6 +29,7 @@
         Property SecurityLevel As Int16
         Property UserName As String
         Property LoginOk As Boolean
+        Property ConfirmedPassword As String
     End Interface
 
 End Namespace

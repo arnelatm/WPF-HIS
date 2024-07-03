@@ -1,7 +1,5 @@
 ﻿Imports System.Windows.Forms
-Imports System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel
 Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Views
 Imports AATM.PresentationLayer.Views.Interfaces
 Imports AATM.ServicesLayer.Services
 
@@ -27,14 +25,6 @@ Public Class LoginPresenter(Of TM As New)
         Return serviceLogin.Login(userName, password)
     End Function
 
-    Private Function SaveNewPassword()
-        If View.NewPassword.Trim().Length() > 0 Then
-            Dim userIdNo = Convert.ToInt16(Service.GetRecordFieldWithKey(View.UserName.Trim(), "User", "UserName", "IdNo"))
-            Return _serviceLogin.SavePassword(userIdNo, View.NewPassword.Trim())
-        End If
-        Return False
-    End Function
-
     Private Function OnLogin()
         Try
             If Login(View.UserName, View.Password) Then
@@ -44,6 +34,8 @@ Public Class LoginPresenter(Of TM As New)
                     If SaveNewPassword() Then
                         View.Password = View.NewPassword
                         View.LoginOk = True
+                    Else
+                        View.LoginOk = False
                     End If
                 End If
             Else
@@ -59,5 +51,16 @@ Public Class LoginPresenter(Of TM As New)
         End Try
     End Function
 
+    Private Function SaveNewPassword()
+        If View.NewPassword.Trim().Length() > 0 Then
+            If View.ConfirmedPassword <> View.NewPassword Then
+                Messaging.Show(True, "MsgPasswordMatchError")
+            Else
+                Dim userIdNo = Convert.ToInt16(Service.GetRecordFieldWithKey(View.UserName.Trim(), "User", "UserName", "IdNo"))
+                Return _serviceLogin.SavePassword(userIdNo, View.NewPassword.Trim())
+            End If
+        End If
+        Return False
+    End Function
 
 End Class

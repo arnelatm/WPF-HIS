@@ -47,25 +47,25 @@ Public Class LoginEntry
 
         If ChangePassword Then
             textNewPassword.Visible = True
-            textConfirmation.Visible = True
+            textConfirmedPassword.Visible = True
             lblNewPassword.Visible = True
             lblConfirmation.Visible = True
             textNewPassword.DisplayOnly = False
-            textConfirmation.DisplayOnly = False
+            textConfirmedPassword.DisplayOnly = False
             btn_Login.Text = Messaging.TranslateCaption("Save")
             textNewPassword.Text = "" 'Space(20)
-            textConfirmation.Text = "" 'Space(20)
+            textConfirmedPassword.Text = "" 'Space(20)
             textBoxPassword.Text = "" 'Space(20)
             textNewPassword.Editable = True
-            textConfirmation.Editable = True
+            textConfirmedPassword.Editable = True
             txtUserName.DisplayOnly = True
             Refresh()
-            Height = 448
-            floPasswordEntry.Height = 413
+            Height = 456
+            'floPasswordEntry.Height = 413
         Else
             txtUserName.DisplayOnly = False
-            Height = 402
-            floPasswordEntry.Height = 413 - 46
+            Height = 456 - 46
+            'floPasswordEntry.Height = 413 - 46
         End If
 
     End Sub
@@ -119,6 +119,14 @@ Public Class LoginEntry
             textNewPassword.Text = value
         End Set
     End Property
+    Public Property ConfirmedPassword As String Implements IUserViewNew.ConfirmedPassword
+        Get
+            Return textConfirmedPassword.Text.Trim()
+        End Get
+        Set(value As String)
+            textConfirmedPassword.Text = value
+        End Set
+    End Property
 
     Public Property Password As String Implements IUserViewNew.Password
         Get
@@ -170,10 +178,6 @@ Public Class LoginEntry
         'End If
     End Sub
 
-    Private Sub BtnCancel_Click(sender As Object, e As EventArgs)
-        Close()
-    End Sub
-
     Private Sub FormLogin_Closing(sender As Object, e As CancelEventArgs)
         If ChangePassword Then
             CancelClose = True
@@ -193,11 +197,11 @@ Public Class LoginEntry
             _txtUserName.DisplayOnly = False
         End If
         _textBoxPassword.ReadOnly = False
-        _textConfirmation.ReadOnly = False
+        _textConfirmedPassword.ReadOnly = False
         _textNewPassword.ReadOnly = False
         _textBoxPassword.DisplayOnly = False
         _textNewPassword.DisplayOnly = False
-        _textConfirmation.DisplayOnly = False
+        _textConfirmedPassword.DisplayOnly = False
     End Sub
 
     Private Sub SaveUserPasswordSetting()
@@ -217,4 +221,7 @@ Public Class LoginEntry
         My.Settings.Save()
     End Sub
 
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        Close()
+    End Sub
 End Class
