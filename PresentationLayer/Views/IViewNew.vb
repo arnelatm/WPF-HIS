@@ -1,7 +1,10 @@
 ﻿' marker interface, no members
 
 Public Interface IViewNew
-    Property Errors As List(Of String)
-    Property DataFilter As String
+    Inherits IView
+
+    Property ViewDisplayName As String
+    Property MainFieldsDictionary As Dictionary(Of String, Object)
+
     ' No members..
 End Interface

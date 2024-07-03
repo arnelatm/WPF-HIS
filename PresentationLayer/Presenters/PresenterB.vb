@@ -1,0 +1,282 @@
+﻿Imports AATM.BusinessLayer.BusinessObjects
+Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.PresentationLayer.Models
+Imports AATM.PresentationLayer.Views
+Imports AATM.ServicesLayer.Services
+Imports AATM.Libraries.CBaseControlsLibrary
+Imports AATM.Libraries
+Imports System.Globalization
+Imports System.Windows.Forms
+
+Public Class PresenterB(Of TV As IViewNew, TM As New)
+
+    Public Service As Object
+
+    Public Property View As TV
+    Public MyErrorProvider As New ErrorProviderExtended
+    Protected DataFilter As String = Nothing
+    Protected OriginalModel
+    Protected DefaultFieldValueService As New DefaultFieldValueService
+    Public Property ViewDefaultFieldValues As List(Of DefaultFieldValueModel)
+
+    Public Property TableName As String
+
+    Protected Sub New()
+        Service = New Service()
+    End Sub
+
+    Public Sub New(itemView As IViewNew)
+        If itemView IsNot Nothing Then
+            Me.View = itemView
+            Me.DataFilter = View.DataFilter
+            'Me.Model = New TM
+            MyErrorProvider = GetErrorProvider()
+            OriginalModel = Activator.CreateInstance(GetType(TM))
+            Dim systemViewName As String
+            If itemView.ViewDisplayName IsNot Nothing Then
+                systemViewName = itemView.ViewDisplayName.Trim()
+                If systemViewName Is Nothing Or systemViewName = "" Then
+                    systemViewName = DirectCast(itemView, System.Windows.Forms.Control).Name.Trim()
+                End If
+            Else
+                systemViewName = DirectCast(itemView, System.Windows.Forms.Control).Name.Trim()
+            End If
+            Dim data As List(Of DefaultFieldValue) = DefaultFieldValueService.GetDefaultFieldValues(systemViewName)
+            ViewDefaultFieldValues = New List(Of DefaultFieldValueModel)
+            GlobalVariables.Mapper.Map(data, ViewDefaultFieldValues)
+        End If
+    End Sub
+
+    Protected Function GetErrorProvider() As Object
+        Return Invoker.GetField(View, "MyErrorProvider")
+    End Function
+
+
+    Public Function MakeVarDataSource(ByRef item As Object) As DataTable
+        Dim dtl As New DataLookupSpecs
+        Const LookupTableName As Int32 = 0
+        Const LookupFieldNames As Int32 = 1
+        Const LookupFilter As Int32 = 2
+        Const LookupSortKey As Int32 = 3
+        Const ValueMember As Int32 = 4
+        Const DisplayMember As Int32 = 5
+        Const Ascending As Int32 = 6
+        dtl.TableName = item(LookupTableName)
+        dtl.Ascending = True
+        If item.Length - 1 > 0 Then
+            dtl.LuFields = item(LookupFieldNames)
+        End If
+        If item.Length - 1 > 1 Then
+            dtl.Filter = item(LookupFilter)
+        End If
+        If item.Length - 1 > 2 Then
+            dtl.SortKey = item(LookupSortKey)
+        End If
+        If item.Length - 1 > 3 Then
+            dtl.ValueMember = item(ValueMember)
+        End If
+        If item.Length - 1 > 4 Then
+            dtl.DisplayMember = item(DisplayMember)
+        End If
+        If item.Length - 1 > 5 Then
+            dtl.Ascending = item(Ascending)
+        End If
+        ComposeLookupProperties(dtl)
+        Return GetDtRecords(dtl.TableName, dtl.LuFields, dtl.Filter, dtl.SortKey)
+    End Function
+
+    Public Function GetDtRecords(ByVal pTableName As String, ByVal fieldNames As String(), Optional filter As String = Nothing, Optional sortKey As String = Nothing, Optional ascending As Boolean = True)
+        Return Service.GetDtRecords(pTableName, fieldNames, filter, sortKey, ascending)
+    End Function
+
+    Public Function GetDtRecords(ByVal pTableName As String, ByVal fieldNames As String, Optional filter As String = Nothing, Optional sortKey As String = Nothing, Optional ascending As Boolean = True)
+        Return Service.GetDtRecords(pTableName, fieldNames, filter, sortKey, ascending)
+    End Function
+
+
+    Public Sub MakeControlDataSources(dataObject As Object)
+        'dataObject must be in the form of an Array {{LookupTableName,LookupControl,LookupFieldNames,LookupFilter,LookupSortKey,ValueMember,DisplayMember,Ascending},
+        '                                            {LookupTableName,LookupControl,LookupFieldNames,LookupFilter,LookupSortKey,ValueMember,DisplayMember,Ascending}}
+        ' compose the ArrayList from the given dataObject
+        Dim data As New ArrayList
+        For Each aItem As Object In dataObject
+            data.Add(aItem)
+        Next
+        ' create the actual datasources from the given ArrayList
+        CreateControlDataSources(data)
+    End Sub
+
+
+    Protected Sub CreateControlDataSources(dataSourceSpecs As ArrayList)
+        Dim dataLookupSpecs As List(Of DataLookupSpecs)
+        dataLookupSpecs = CreateDataLookups(dataSourceSpecs)
+        For Each dataLookupSpec As DataLookupSpecs In dataLookupSpecs
+            If TypeOf dataLookupSpec.PropertyName Is String Then
+                dataLookupSpec.PropertyControl = GetFieldControlName(dataLookupSpec.PropertyName)
+            End If
+            Invoker.SetControlProperty(dataLookupSpec.PropertyControl, "DataSource", dataLookupSpec.LookUpTask.Result)
+            Invoker.SetControlProperty(dataLookupSpec.PropertyControl, "DisplayMember", dataLookupSpec.DisplayMember)
+            Invoker.SetControlProperty(dataLookupSpec.PropertyControl, "ValueMember", dataLookupSpec.ValueMember)
+        Next
+    End Sub
+
+    Private Function CreateDataLookups(dataSourceNames As ArrayList) As List(Of DataLookupSpecs)
+        Dim lookups As New List(Of DataLookupSpecs)
+        For Each dataSourceName In dataSourceNames
+            Dim dtl As DataLookupSpecs
+            dtl = CreateDataLookUp(dataSourceName)
+            lookups.Add(dtl)
+        Next
+        Return lookups
+    End Function
+
+    Private Function CreateDataLookUp(item As Object) As DataLookupSpecs
+        Const LookupTableName As Int32 = 0
+        Const LookupControl As Int32 = 1
+        Const LookupFieldNames As Int32 = 2
+        Const LookupFilter As Int32 = 3
+        Const LookupSortKey As Int32 = 4
+        Const Ascending As Int32 = 5
+        Const ValueMember As Int32 = 6
+        Const DisplayMember As Int32 = 7
+
+        Dim dtl As New DataLookupSpecs
+        dtl.TableName = item(LookupTableName)
+        If TypeOf item(LookupControl) Is String Then
+            dtl.PropertyName = item(LookupControl)
+        Else
+            dtl.PropertyControl = item(LookupControl)
+        End If
+        dtl.Ascending = True
+        If item.Length - 1 > 1 Then
+            dtl.LuFields = item(LookupFieldNames)
+        End If
+        If item.Length - 1 > 2 Then
+            dtl.Filter = item(LookupFilter)
+        End If
+        If item.Length - 1 > 3 Then
+            dtl.SortKey = item(LookupSortKey)
+        End If
+        If item.Length - 1 > 4 Then
+            dtl.Ascending = item(Ascending)
+        End If
+        If item.Length - 1 > 5 Then
+            dtl.ValueMember = item(ValueMember)
+        End If
+        If item.Length - 1 > 6 Then
+            dtl.DisplayMember = item(DisplayMember)
+        End If
+        ComposeLookupProperties(dtl)
+        dtl.LookUpTask = Task(Of DataTable).Factory.StartNew(Function() LookupDataTableCreator(dtl))
+        Return dtl
+    End Function
+
+    Protected Function GetFieldControlName(ByVal propertyName As String) As CtComboBox
+        Dim control As CtComboBox = Nothing
+        Try
+            If Not View.MainFieldsDictionary.TryGetValue(propertyName, control) Then
+                Debugger.Break()
+                System.Windows.Forms.MessageBox.Show($"Field '" & propertyName & $"' is not present in the MainFieldsDictionary.")
+            End If
+        Catch ex As Exception
+            Debugger.Break()
+        End Try
+        Return control
+    End Function
+
+    Private Function LookupDataTableCreator(dtl As DataLookupSpecs) As DataTable
+        Dim cd As New DataCreator(Service)
+        Dim data As DataTable = cd.CreateDataTable(dtl)
+        cd = Nothing
+        Return data
+    End Function
+
+    Private Sub ComposeLookupProperties(dtl As DataTableLookupSpec)
+        Dim RightToLeftFormat = GlobalFunctions.IsRightToLeft(CultureInfo.CurrentCulture.ToString())
+        If dtl.LuFields Is Nothing Then
+            dtl.NameFieldOrig = dtl.TableName + "Name"
+            dtl.NameField = TranslateNameField(dtl.TableName, dtl.NameFieldOrig)
+            dtl.NameDisplayValue = dtl.NameField + "+'-'+" + dtl.TableName + "Code"
+            If dtl.ValueMember Is Nothing Then
+                dtl.ValueMember = "IdNo"
+            End If
+            If dtl.DisplayMember Is Nothing Then
+                dtl.DisplayMember = "Name"
+            End If
+            dtl.LuFields = "IdNo, " + dtl.NameDisplayValue + " COLLATE SQL_Latin1_General_CP1_CI_AS As Name"
+            If dtl.SortKey Is Nothing Then
+                dtl.SortKey = dtl.NameField
+            End If
+        Else
+            Dim fieldNames = dtl.LuFields.Split(",")
+            If fieldNames.Count() = 1 Then
+                dtl.NameFieldOrig = fieldNames(0)
+                dtl.NameField = TranslateNameField(dtl.TableName, dtl.NameFieldOrig)
+                dtl.NameDisplayValue = dtl.NameField
+                dtl.ValueMember = "Name"
+                dtl.DisplayMember = "Name"
+                dtl.LuFields = dtl.NameField + " as Name"
+                If dtl.SortKey Is Nothing Then
+                    dtl.SortKey = fieldNames(0)
+                End If
+            ElseIf fieldNames.Count() = 2 Then
+                ' assumed the first field is the value member and the second field as the display Value
+                dtl.NameFieldOrig = fieldNames(1)
+                dtl.NameField = TranslateNameField(dtl.TableName, dtl.NameFieldOrig)
+                dtl.NameDisplayValue = "Concat(" + dtl.NameField + " COLLATE SQL_Latin1_General_CP1_CI_AS,'-'," + fieldNames(0) + ") COLLATE SQL_Latin1_General_CP1_CI_AS"
+                If dtl.ValueMember Is Nothing Then
+                    dtl.ValueMember = "IdNo"
+                End If
+                If dtl.DisplayMember Is Nothing Then
+                    dtl.NameDisplayValue = "Concat(" + dtl.NameField + " COLLATE SQL_Latin1_General_CP1_CI_AS,'-'," + fieldNames(0) + ") COLLATE SQL_Latin1_General_CP1_CI_AS"
+                    dtl.DisplayMember = "Name"
+                End If
+                dtl.LuFields = fieldNames(0) + " as IdNo," + dtl.NameDisplayValue + " as Name"
+                If dtl.SortKey Is Nothing Then
+                    dtl.SortKey = dtl.NameField
+                End If
+            ElseIf fieldNames.Count() = 3 Then
+                dtl.NameField = fieldNames(1).Trim()
+                dtl.NameDisplayValue = "Concat(" + TranslateNameField(dtl.TableName, dtl.NameField) + " COLLATE SQL_Latin1_General_CP1_CI_AS,'-'," + fieldNames(2) + ") COLLATE SQL_Latin1_General_CP1_CI_AS"
+                If dtl.ValueMember Is Nothing Then
+                    dtl.ValueMember = "IdNo"
+                End If
+                If dtl.DisplayMember Is Nothing Then
+                    dtl.DisplayMember = "Name"
+                End If
+                dtl.LuFields = fieldNames(0) + " As IdNo," + dtl.NameDisplayValue + " as Name," + fieldNames(2).ToString() + " as Code"
+                If dtl.SortKey Is Nothing Then
+                    dtl.SortKey = dtl.NameField
+                End If
+            ElseIf fieldNames.Count() = 4 Then
+                dtl.NameField = fieldNames(1).Trim()
+                dtl.NameDisplayValue = "Concat(" + TranslateNameField(dtl.TableName, dtl.NameField) + " COLLATE SQL_Latin1_General_CP1_CI_AS,'-'," + fieldNames(2) + ") COLLATE SQL_Latin1_General_CP1_CI_AS"
+                If dtl.ValueMember Is Nothing Then
+                    dtl.ValueMember = "IdNo"
+                End If
+                If dtl.DisplayMember Is Nothing Then
+                    dtl.DisplayMember = "Name"
+                End If
+                dtl.LuFields = fieldNames(0) + " As IdNo," + dtl.NameDisplayValue + " as Name," + fieldNames(2).ToString() + " as Code" + ", " + fieldNames(3)
+                If dtl.SortKey Is Nothing Then
+                    dtl.SortKey = dtl.NameField
+                End If
+            Else
+                MessageBox.Show("Too much parameters passed!")
+                Debugger.Break()
+            End If
+        End If
+    End Sub
+
+    Private Function TranslateNameField(tableName As String, fieldName As String) As String
+        Dim retValue As String = fieldName
+        If GlobalFunctions.IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
+            Dim nameFieldArabic As String = fieldName + "Ara"
+            If Service.FieldExistInTable(tableName, nameFieldArabic) Then
+                retValue = fieldName + "Ara"
+            End If
+        End If
+        Return retValue
+    End Function
+
+End Class

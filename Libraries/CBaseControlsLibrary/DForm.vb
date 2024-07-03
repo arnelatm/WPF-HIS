@@ -4,7 +4,7 @@ Imports System.ComponentModel
 Imports System.Drawing
 Imports System.Windows.Forms
 
-Public Class DFormBase
+Public Class DForm
 
     Public Property FixedLtrRtlLayout As Boolean
     Public Property UseGlobalFormColor As Boolean = True
@@ -15,7 +15,6 @@ Public Class DFormBase
     Public Property DefaultFormControlsReadOnlyBackColor As Color = Color.White
     Public Property DefaultFormControlsReadOnlyForeColor As Color = Color.Gray
     Public Property ViewDisplayName As String
-
 
     Public MyErrorProvider As New ErrorProviderExtended
 

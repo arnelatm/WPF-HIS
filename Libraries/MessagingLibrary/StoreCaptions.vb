@@ -38,7 +38,7 @@ Public Class StoreCaptions
         InsertTranslation(frm.Text, systemViewIdNo)
         Dim t As String
         Dim allCtrl As New List(Of Control)
-        For Each cCtrl As Control In FindControlRecursive(allCtrl, frm)
+        For Each cCtrl As Control In GlobalFunctions.FindControlRecursive(allCtrl, frm)
             If TypeOf cCtrl Is MenuStrip Then
                 Dim subMenuName = cCtrl.Name
                 Dim menuStrip As MenuStrip = cCtrl
@@ -111,7 +111,7 @@ Public Class StoreCaptions
         InsertTranslation(frm.Text, systemViewIdNo)
         Dim t As String
         Dim allCtrl As New List(Of Control)
-        For Each cCtrl As Control In FindControlRecursive(allCtrl, frm)
+        For Each cCtrl As Control In GlobalFunctions.FindControlRecursive(allCtrl, frm)
             If TypeOf cCtrl Is MenuStrip Then
                 Dim subMenuName = cCtrl.Name
                 Dim menuStrip As MenuStrip = cCtrl
@@ -312,7 +312,7 @@ Public Class StoreCaptions
         frm.Tag = frm.Text
         Dim t As String
         Dim allCtrl As New List(Of Control)
-        For Each cCtrl As Control In FindControlRecursive(allCtrl, frm)
+        For Each cCtrl As Control In GlobalFunctions.FindControlRecursive(allCtrl, frm)
             If TypeOf cCtrl Is MenuStrip Then
                 Dim subMenuName = cCtrl.Name
                 Dim menuStrip As MenuStrip = cCtrl
@@ -499,13 +499,13 @@ Public Class StoreCaptions
     '    Next
     'End Sub
 
-    Public Function FindControlRecursive(ByVal list As List(Of Control), ByVal parentControl As Control) As List(Of Control)
-        If parentControl Is Nothing Then Return list
-        list.Add(parentControl)
-        For Each child As Control In parentControl.Controls
-            FindControlRecursive(list, child)
-        Next
-        Return list
-    End Function
+    'Private Function FindControlRecursive(ByVal list As List(Of Control), ByVal parentControl As Control) As List(Of Control)
+    '    If parentControl Is Nothing Then Return list
+    '    list.Add(parentControl)
+    '    For Each child As Control In parentControl.Controls
+    '        FindControlRecursive(list, child)
+    '    Next
+    '    Return list
+    'End Function
 
 End Class

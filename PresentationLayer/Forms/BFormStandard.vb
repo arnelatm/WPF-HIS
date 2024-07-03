@@ -9,7 +9,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Views
 
-Public Class BfMainNew
+Public Class BFormStandard
     Implements IViewNew
 
     Public Dv As DataView

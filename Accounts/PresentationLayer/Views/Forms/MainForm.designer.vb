@@ -158,6 +158,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemCbcResultRetrieval = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemDiagnosticSamples = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemDiagnosticResultEntryIqama = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemDiagnosticResultEntryBaladiya = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemClinicSamples = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPharmacy = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemDrugSale = New System.Windows.Forms.ToolStripMenuItem()
@@ -261,7 +262,6 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-            Me.ToolStripMenuItemDiagnosticResultEntryBaladiya = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.AccountsMenu.SuspendLayout()
@@ -945,6 +945,11 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemDiagnosticResultEntryIqama.Name = "ToolStripMenuItemDiagnosticResultEntryIqama"
             resources.ApplyResources(Me.ToolStripMenuItemDiagnosticResultEntryIqama, "ToolStripMenuItemDiagnosticResultEntryIqama")
             '
+            'ToolStripMenuItemDiagnosticResultEntryBaladiya
+            '
+            Me.ToolStripMenuItemDiagnosticResultEntryBaladiya.Name = "ToolStripMenuItemDiagnosticResultEntryBaladiya"
+            resources.ApplyResources(Me.ToolStripMenuItemDiagnosticResultEntryBaladiya, "ToolStripMenuItemDiagnosticResultEntryBaladiya")
+            '
             'ToolStripMenuItemClinicSamples
             '
             Me.ToolStripMenuItemClinicSamples.Name = "ToolStripMenuItemClinicSamples"
@@ -1481,11 +1486,6 @@ Namespace PresentationLayer.Views.Forms
             '
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
-            '
-            'ToolStripMenuItemDiagnosticResultEntryBaladiya
-            '
-            Me.ToolStripMenuItemDiagnosticResultEntryBaladiya.Name = "ToolStripMenuItemDiagnosticResultEntryBaladiya"
-            resources.ApplyResources(Me.ToolStripMenuItemDiagnosticResultEntryBaladiya, "ToolStripMenuItemDiagnosticResultEntryBaladiya")
             '
             'MainForm
             '

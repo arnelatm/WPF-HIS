@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class DFormBase
+Partial Class DForm
     Inherits AATM.Libraries.BaseControlsLibrary.BForm
 
     'Form overrides dispose to clean up the component list.
@@ -32,12 +32,12 @@ Partial Class DFormBase
         '
         Me.AppDataDac.Cs = ""
         '
-        'DFormBase
+        'DForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.ClientSize = New System.Drawing.Size(1067, 554)
-        Me.Name = "DFormBase"
-        Me.Text = "DFormBase"
+        Me.Name = "DForm"
+        Me.Text = "DForm"
         Me.ResumeLayout(False)
 
     End Sub

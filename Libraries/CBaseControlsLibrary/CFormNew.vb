@@ -4,7 +4,7 @@ Imports System.Globalization
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 
-Public Class CForm
+Public Class CFormNew
 
     Public Property FixedLtrRtlLayout As Boolean
 
@@ -40,23 +40,7 @@ Public Class CForm
                 DefaultFormControlsReadOnlyForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
             End If
             If GlobalVariables.RightToLeftLayout Then
-                For Each cCtrl As Control In GlobalFunctions.FindControlRecursive(allControls, Me)
-                    If TypeOf cCtrl Is CButton OrElse TypeOf cCtrl Is Button Then
-                        If GetPropertyValue(cCtrl, "Image") IsNot Nothing Then
-                            Dim btnImageName As String
-                            btnImageName = (cCtrl.Name.ToString() + "_" + Strings.Left(CultureInfo.CurrentCulture.Name, 2)).ToLower()
-                            Dim resource As Object = My.Resources.ResourceManager.GetObject(btnImageName)
-                            If Not (resource Is Nothing) Then
-                                Dim i = CType(cCtrl, CButton)
-                                i.Image = DirectCast(resource, Image)
-                            End If
-                        ElseIf TypeOf cCtrl Is CTabControl OrElse TypeOf cCtrl Is TabControl Then
-                            Dim c = CType(cCtrl, CTabControl)
-                            c.RightToLeftLayout = True
-                            c.RightToLeft = RightToLeft.No
-                        End If
-                    End If
-                Next cCtrl
+                LayoutControls(allControls)
             Else
                 'RightToLeftLayout = False
                 'RightToLeft = RightToLeft.No
@@ -64,57 +48,28 @@ Public Class CForm
         End If
     End Sub
 
-    'Public Function FindControlRecursive(ByVal list As List(Of Control), ByVal parentControl As Control) As List(Of Control)
-    '    If parentControl Is Nothing Then Return list
-    '    list.Add(parentControl)
-    '    For Each child As Control In parentControl.Controls
-    '        FindControlRecursive(list, child)
-    '    Next
-    '    Return list
-    'End Function
 
-    Private Sub SetToolStripItems(dropDownItems As ToolStripItemCollection)
-        Try
-            For Each obj As Object In dropDownItems
-                ' ReSharper disable once VBPossibleMistakenCallToGetType.2
-                If obj.GetType().ToString() = "System.Windows.Forms.ToolStripButton" Then
-                    Dim toolStripButton As ToolStripButton = obj
-                    If toolStripButton.Text IsNot Nothing Then
-                        'Dim securityName = formName + ".ToolStripButton." + toolStripButton.Name.Substring(15)
-                        toolStripButton.Enabled = True
-                        toolStripButton.Visible = True
+    Private Sub LayoutControls(allControls As List(Of Control))
+        For Each cCtrl As Control In GlobalFunctions.FindControlRecursive(allControls, Me)
+            If TypeOf cCtrl Is CButton OrElse TypeOf cCtrl Is Button Then
+                If GetPropertyValue(cCtrl, "Image") IsNot Nothing Then
+                    Dim btnImageName As String
+                    btnImageName = (cCtrl.Name.ToString() + "_" + Strings.Left(CultureInfo.CurrentCulture.Name, 2)).ToLower()
+                    Dim resource As Object = My.Resources.ResourceManager.GetObject(btnImageName)
+                    If Not (resource Is Nothing) Then
+                        Dim i = CType(cCtrl, CButton)
+                        i.Image = DirectCast(resource, Image)
                     End If
                 End If
-            Next
-        Catch ex As Exception
-            MessageBox.Show(ex.Message, $"SetToolStripItems", MessageBoxButtons.OK, MessageBoxIcon.[Error])
-        End Try
+            ElseIf TypeOf cCtrl Is CTabControl OrElse TypeOf cCtrl Is TabControl Then
+                Dim c = CType(cCtrl, CTabControl)
+                c.RightToLeftLayout = True
+                c.RightToLeft = RightToLeft.No
+            End If
+        Next cCtrl
     End Sub
 
-    Private Sub SetMenuStripItems(dropDownItems As ToolStripItemCollection, formName As String)
-        Try
 
-            For Each obj As Object In dropDownItems
-                Dim subMenu = TryCast(obj, ToolStripMenuItem)
-
-                If subMenu IsNot Nothing Then
-
-                    If subMenu.HasDropDownItems Then
-                        SetMenuStripItems(subMenu.DropDownItems, formName)
-                    Else
-
-                        If subMenu.Text IsNot Nothing Then
-                            'Dim securityName = formName + ".ToolStripMenu." + subMenu.Name.Substring(17)
-                            subMenu.Enabled = True
-                            subMenu.Visible = True
-                        End If
-                    End If
-                End If
-            Next
-        Catch ex As Exception
-            MessageBox.Show(ex.Message, $"SetMenuStripItems", MessageBoxButtons.OK, MessageBoxIcon.[Error])
-        End Try
-    End Sub
 
     ' The form will handle all key events before the control With
     ' focus handles them
@@ -158,5 +113,6 @@ Public Class CForm
             textBox.Paste()
         End If
     End Sub
+
 
 End Class

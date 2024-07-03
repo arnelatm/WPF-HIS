@@ -204,7 +204,6 @@
     <Compile Include="PresentationLayer\Models\PrintSetupModel.vb" />
     <Compile Include="PresentationLayer\Models\ReportGroupModel.vb" />
     <Compile Include="PresentationLayer\Models\ReportModel.vb" />
-    <Compile Include="PresentationLayer\Presenters\CommonPresenterNew.vb" />
     <Compile Include="PresentationLayer\Presenters\PrinterPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PrintJobPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PrintSetupPresenter.vb" />

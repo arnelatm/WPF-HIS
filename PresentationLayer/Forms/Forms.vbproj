@@ -178,12 +178,6 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BFMainNew.designer.vb">
-      <DependentUpon>BFMainNew.vb</DependentUpon>
-    </Compile>
-    <Compile Include="BFMainNew.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="BFMain.designer.vb">
       <DependentUpon>BFMain.vb</DependentUpon>
     </Compile>
@@ -196,22 +190,10 @@
     <Compile Include="BFModalForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DFormBase.Designer.vb">
-      <DependentUpon>DFormBase.vb</DependentUpon>
-    </Compile>
-    <Compile Include="DFormBase.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="CFormBase.Designer.vb">
       <DependentUpon>CFormBase.vb</DependentUpon>
     </Compile>
     <Compile Include="CFormBase.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DFormEntry.designer.vb">
-      <DependentUpon>DFormEntry.vb</DependentUpon>
-    </Compile>
-    <Compile Include="DFormEntry.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CFormEntry.designer.vb">
@@ -257,7 +239,12 @@
     <Compile Include="CrystalDecisions\ReportAppServer\CommonControls.vb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="FormHelpers.vb" />
+    <Compile Include="DFormBase.Designer.vb">
+      <DependentUpon>DFormBase.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DFormBase.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="HijriCalendarForm.Designer.vb">
       <DependentUpon>HijriCalendarForm.vb</DependentUpon>
     </Compile>
@@ -268,6 +255,12 @@
       <DependentUpon>LoginEntry.vb</DependentUpon>
     </Compile>
     <Compile Include="LoginEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginEntryOld.Designer.vb">
+      <DependentUpon>LoginEntryOld.vb</DependentUpon>
+    </Compile>
+    <Compile Include="LoginEntryOld.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -293,23 +286,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="BFMainNew.resx">
-      <DependentUpon>BFMainNew.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="BFMain.resx">
       <DependentUpon>BFMain.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="BFModalForm.resx">
       <DependentUpon>BFModalForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DFormBase.resx">
-      <DependentUpon>DFormBase.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="CFormBase.resx">
       <DependentUpon>CFormBase.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DFormEntry.resx">
-      <DependentUpon>DFormEntry.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CFormEntry.resx">
       <DependentUpon>CFormEntry.vb</DependentUpon>
@@ -331,11 +315,17 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="DFormBase.resx">
+      <DependentUpon>DFormBase.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HijriCalendarForm.resx">
       <DependentUpon>HijriCalendarForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginEntry.resx">
       <DependentUpon>LoginEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginEntryOld.resx">
+      <DependentUpon>LoginEntryOld.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

@@ -1,38 +1,28 @@
 ﻿Imports System.ComponentModel
 Imports System.Windows.Forms
+Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views.Interfaces
 
-Public Class LoginEntry
-    Implements IUserViewNew
+Public Class LoginEntryOld
+    Implements IUserView
 
     Private ReadOnly _cancelLogin As Boolean
 
     'Private ReadOnly _loginPresenter As MyPresenter
 
-    Private ReadOnly _changingPassword As Boolean = False
-    Private ReadOnly _rememberPassword As Boolean = False
     Private _cancelClose As Boolean
-    Private _loginOk As Boolean
-    Private _mainFieldsDictionary As Dictionary(Of String, Object)
+    Private ReadOnly _rememberPassword As Boolean = False
+    Private ReadOnly _changingPassword As Boolean = False
     Private _oterkis As String
-    Private _presenter As Object
 
-    Public Sub New()
+    ' The Presenter
+    Private _loginOk As Boolean
 
-        ' This call is required by the designer.
-        InitializeComponent()
-
-        ' Add any initialization after the InitializeComponent() call.
-        ViewDisplayName = "LoginEntry"
-
-    End Sub
-
-
-    Public Sub New(changePassword As Boolean, presenter As Object)
+    Public Sub New(changePassword As Boolean)
 
         ' This call is required by the designer.
         InitializeComponent()
@@ -45,10 +35,14 @@ Public Class LoginEntry
         AddHandler FormClosing, AddressOf FormLogin_Closing
         'textBoxUserName.Text = Environment.UserName
 
-        'presenter = New UserPresenter(Of UserModel)(Me)
-        _presenter = presenter
+        Presenter = New UserPresenter(Of UserModel)(Me)
 
-        '_presenter.CreateBranchSource()
+        MainFieldsDictionary = New Dictionary(Of String, Object) From
+            {
+             {"BranchIdNo", cboBranchIdNo},
+             {"UserName", txtUserName}
+            }
+        Presenter.CreateBranchSource()
 
         If changePassword Then
             UserName = GlobalVariables.UserName
@@ -94,23 +88,31 @@ Public Class LoginEntry
 
     End Sub
 
-    Public data As DataTable
+    Public Property MainTableName As String = "User"
 
-    Private _branchIdNoData As DataTable
+    Public Property EmployeeIdNo As Int32? Implements IUserView.EmployeeIdNo
 
-    Public Property BranchIdNoData As DataTable Implements IUserViewNew.BranchIdNoData
+    ''' <summary>
+    '''     Gets the password.
+    ''' </summary>
+    Public Property Password As String Implements IUserView.Password
         Get
-            Return _branchIdNoData
+            Return textBoxPassword.Text.Trim()
         End Get
-        Set(value As DataTable)
-            _branchIdNoData = value
-            cboBranchIdNo.DataSource = Nothing
-            cboBranchIdNo.DataSource = value
-            data = value
+        Set(value As String)
+            textBoxPassword.Text = value
         End Set
     End Property
 
-    Public Property Active As Boolean Implements IUserViewNew.Active
+    Public Property UserName As String Implements IUserView.UserName
+        Get
+            Return txtUserName.Text.Trim()
+        End Get
+        Set(value As String)
+            txtUserName.Text = value
+        End Set
+    End Property
+
     Public Property BranchIdNo As Int16
         Get
             Return cboBranchIdNo.GetValue(Of Int16)
@@ -120,61 +122,17 @@ Public Class LoginEntry
         End Set
     End Property
 
-    Public Property DataFilter As String Implements Views.IView.DataFilter
-    Public Property EmployeeIdNo As Int32? Implements IUserViewNew.EmployeeIdNo
-    Public Property Errors As List(Of String) Implements Views.IView.Errors
-    Public Property IdNo As Int16 Implements IUserViewNew.IdNo
-    Public Property MainFieldsDictionary As Dictionary(Of String, Object) Implements Views.IViewNew.MainFieldsDictionary
-        Set(value As Dictionary(Of String, Object))
-            _mainFieldsDictionary = value
-        End Set
-        Get
-            Return New Dictionary(Of String, Object) From
-            {
-             {"BranchIdNo", cboBranchIdNo},
-             {"UserName", txtUserName}
-            }
-        End Get
-    End Property
+    Public Property IdNo As Int16 Implements IUserView.IdNo
 
-    Public Property MainTableName As String = "User"
-    ''' <summary>
-    '''     Gets the password.
-    ''' </summary>
-    Public Property Password As String Implements IUserViewNew.Password
-        Get
-            Return textBoxPassword.Text.Trim()
-        End Get
-        Set(value As String)
-            textBoxPassword.Text = value
-        End Set
-    End Property
+    Public Property SecurityLevel As Short Implements IUserView.SecurityLevel
 
-    Public Property SecurityGroupIdNo As Short Implements IUserViewNew.SecurityGroupIdNo
+    Public Property SecurityGroupIdNo As Short Implements IUserView.SecurityGroupIdNo
 
-    Public Property SecurityLevel As Short Implements IUserViewNew.SecurityLevel
+    Public Property Active As Boolean Implements IUserView.Active
 
-    Public Property UserName As String Implements IUserViewNew.UserName
-        Get
-            Return txtUserName.Text.Trim()
-        End Get
-        Set(value As String)
-            txtUserName.Text = value
-        End Set
-    End Property
-    Public Property ViewDisplayName As String Implements Views.IViewNew.ViewDisplayName
     Public Function LoginOk()
         Return _loginOk
     End Function
-
-    Protected Sub EnableEdit()
-        _presenter.EditMode = True
-    End Sub
-
-    Private Sub AfterSuccessfulLogin()
-        SaveUserPasswordSetting()
-        GlobalVariables.BranchIdNo = cboBranchIdNo.SelectedValue
-    End Sub
 
     ''' <summary>
     '''     Performs login and upon success closes dialog.
@@ -182,12 +140,12 @@ Public Class LoginEntry
     Private Sub Btn_Login_Click(sender As Object, e As EventArgs) Handles btn_Login.Click
         Try
             _oterkis = textBoxPassword.Text
-            If _presenter.Login(UserName, Password) Then
+            If Presenter.Login(UserName, Password) Then
                 _loginOk = True
                 If Not _changingPassword Then
                     AfterSuccessfulLogin()
                 Else
-                    If _presenter.SaveNewPassword(textNewPassword.Text.Trim()) > 0 Then
+                    If Presenter.SaveNewPassword(textNewPassword.Text.Trim()) > 0 Then
                         textBoxPassword = textNewPassword
                         AfterSuccessfulLogin()
                     End If
@@ -204,6 +162,30 @@ Public Class LoginEntry
             Throw ex
         End Try
     End Sub
+
+    Private Sub AfterSuccessfulLogin()
+        SaveUserPasswordSetting()
+        GlobalVariables.BranchIdNo = cboBranchIdNo.SelectedValue
+    End Sub
+
+    Private Sub SaveUserPasswordSetting()
+        If chkSaveUserNameAndPassword.Checked Then
+            My.Settings.UserName = txtUserName.Text.Trim()
+            My.Settings.Oterkis = _oterkis
+            My.Settings.RememberPassword = True
+            My.Settings.BranchIdNo = cboBranchIdNo.SelectedValue
+            My.Settings.Save()
+        Else
+            My.Settings.UserName = ""
+            My.Settings.Oterkis = ""
+            My.Settings.BranchIdNo = 1
+            My.Settings.RememberPassword = False
+            My.Settings.Save()
+        End If
+        GlobalVariables.BranchIdNo = cboBranchIdNo.SelectedValue
+
+    End Sub
+
     ''' <summary>
     '''     Cancel was requested. Now closes dialog
     ''' </summary>
@@ -242,33 +224,16 @@ Public Class LoginEntry
         _textConfirmation.DisplayOnly = False
     End Sub
 
+
+    Public MainFieldsDictionary As New Dictionary(Of String, Object)
+
     Private Sub FormLogin_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         If _cancelLogin Then
             Close()
         End If
     End Sub
 
-    Private Function SaveNewPassword()
-        Return _presenter.SavePassword(textNewPassword.Text)
-    End Function
 
-    Private Sub SaveUserPasswordSetting()
-        If chkSaveUserNameAndPassword.Checked Then
-            My.Settings.UserName = txtUserName.Text.Trim()
-            My.Settings.Oterkis = _oterkis
-            My.Settings.RememberPassword = True
-            My.Settings.BranchIdNo = cboBranchIdNo.SelectedValue
-            My.Settings.Save()
-        Else
-            My.Settings.UserName = ""
-            My.Settings.Oterkis = ""
-            My.Settings.BranchIdNo = 1
-            My.Settings.RememberPassword = False
-            My.Settings.Save()
-        End If
-        GlobalVariables.BranchIdNo = cboBranchIdNo.SelectedValue
-
-    End Sub
     'Private Sub Button1_Click(sender As Object, e As EventArgs)
     '    If txtConfirmation.Visible Then
     '        If txtConfirmation.Visible = txtNewPassword.Visible AndAlso txtConfirmation.Text.Length >= 6 Then
@@ -288,4 +253,14 @@ Public Class LoginEntry
     '    End If
     '    _changingPassword = True
     'End Sub
+
+    Private Function SaveNewPassword()
+        Return Presenter.SavePassword(textNewPassword.Text)
+    End Function
+
+    Protected Sub EnableEdit()
+        Presenter.EditMode = True
+    End Sub
+
+
 End Class

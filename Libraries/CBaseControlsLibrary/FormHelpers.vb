@@ -1,5 +1,9 @@
-﻿Imports System.Windows.Forms
+﻿Imports System.Drawing
+Imports System.Globalization
+Imports System.Windows.Forms
 Imports AATM.Libraries
+Imports AATM.Libraries.CBaseControlsLibrary
+Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 
 Public Module FormHelpers
@@ -88,6 +92,36 @@ Public Module FormHelpers
         End If
         Return Nothing
     End Function
+
+    Public Sub MakeFormRightToLeft(pForm As Form, allControls As List(Of Control))
+        For Each cCtrl As Control In GlobalFunctions.FindControlRecursive(allControls, pForm)
+            If TypeOf cCtrl Is CButton OrElse TypeOf cCtrl Is Button Then
+                If GlobalFuncNSub.GetPropertyValue(cCtrl, "Image") IsNot Nothing Then
+                    Dim btnImageName As String
+                    btnImageName = (cCtrl.Name.ToString() + "_" + Strings.Left(CultureInfo.CurrentCulture.Name, 2)).ToLower()
+                    Dim resource As Object = My.Resources.ResourceManager.GetObject(btnImageName)
+                    If Not (resource Is Nothing) Then
+                        Dim i = CType(cCtrl, CButton)
+                        i.Image = DirectCast(resource, Image)
+                    End If
+                ElseIf TypeOf cCtrl Is CTabControl OrElse TypeOf cCtrl Is TabControl Then
+                    Dim c = CType(cCtrl, CTabControl)
+                    c.RightToLeftLayout = True
+                    c.RightToLeft = RightToLeft.No
+                End If
+            End If
+        Next cCtrl
+    End Sub
+
+    'Public Function FindControlRecursive(ByVal list As List(Of Control), ByVal parentControl As Control) As List(Of Control)
+    '    If parentControl Is Nothing Then Return list
+    '    list.Add(parentControl)
+    '    For Each child As Control In parentControl.Controls
+    '        FindControlRecursive(list, child)
+    '    Next
+    '    Return list
+    'End Function
+
 
 End Module
 

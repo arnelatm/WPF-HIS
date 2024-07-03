@@ -1,6 +1,4 @@
-﻿Imports AATM.Common.PresentationLayer.Presenters
-Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
-Imports AATM.PresentationLayer.Views
+﻿Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
 
 Public Interface IPrintReportView
     Inherits AATM.PresentationLayer.Views.IView

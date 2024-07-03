@@ -10,7 +10,7 @@ Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
 Imports AATM.PresentationLayer.Views
 
-Public Class BfMain
+Public Class BFormBasic
     Implements IView
 
     Dim _originalText As String
@@ -181,7 +181,7 @@ Public Class BfMain
         End If
         Me.Activate()
         Dim allCtrl As New List(Of Control)
-        allCtrl = GlobalFunctions.FindControlRecursive(allCtrl, Me)
+        allCtrl = FindControlRecursive(allCtrl, Me)
         'ResumeDrawing()
         FormShown = True
     End Sub
@@ -219,7 +219,7 @@ Public Class BfMain
             'SuspendDrawing()
             Dim settings As New ControlSettingsSaver
             Dim allCtrl As New List(Of Control)
-            allCtrl = GlobalFunctions.FindControlRecursive(allCtrl, Me)
+            allCtrl = FindControlRecursive(allCtrl, Me)
             settings.SaveSetting(Me)
             ' form location is being changed when Resetting RightToLeftLayout so need to save values
             ' to restore form with the same size and location
@@ -756,7 +756,7 @@ Public Class BfMain
         Return controlSecurityValues
     End Function
 
-    Private Sub BFMain_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+    Private Sub BFormBasic_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
             If _firstLoadSwitch = 0 Then
                 GetNSaveCaptions()
@@ -1084,7 +1084,7 @@ Public Class BfMain
 
     Private Sub UseOriginalCaptions()
         Dim allCtrl As New List(Of Control)
-        For Each cCtrl As Control In GlobalFunctions.FindControlRecursive(allCtrl, Me)
+        For Each cCtrl As Control In FindControlRecursive(allCtrl, Me)
             If IsTranslatable(cCtrl) Then
                 If TypeOf cCtrl Is MenuStrip Then
                     Dim subMenuName = ""
@@ -1135,7 +1135,7 @@ Public Class BfMain
     '    Debugger.Break()
     'End Sub
 
-    'Private Sub BfMain_Paint(sender As Object, e As PaintEventArgs) Handles MyBase.Paint
+    'Private Sub BFormBasic_Paint(sender As Object, e As PaintEventArgs) Handles MyBase.Paint
     '    If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft And BackgroundImage IsNot Nothing Then
     '        ' this routine is needed for righttoleft languages because the backgroundimage is
     '        ' not redrawn for this culture.  So need to manually repaint the background form with
@@ -1265,7 +1265,7 @@ Public Class BfMain
 
     Public Sub ForceEndEditForAllGridControls()
         Dim allControls As New List(Of Control)
-        GlobalFunctions.FindControlRecursive(allControls, Me)
+        FindControlRecursive(allControls, Me)
         For Each cCtrl As Control In allControls
             If TypeOf cCtrl Is DataGridView Then
                 Dim cGrid As DataGridView = cCtrl

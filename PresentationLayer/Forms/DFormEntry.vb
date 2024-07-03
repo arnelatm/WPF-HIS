@@ -4,11 +4,10 @@ Imports System.Globalization
 Imports System.Threading
 Imports System.Windows.Forms
 Imports AATM.Libraries
-Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Events
-Imports AATM.PresentationLayer.Presenters
+Imports AATM.PresentationLayer.Views
 
 Public Class DFormEntry
     Implements IViewDFormEntry
@@ -59,7 +58,6 @@ Public Class DFormEntry
     Public Property RecordDateTimeStampValue As Object Implements IViewDFormEntry.RecordDateTimeStampValue
     Public Property RecordPositionNumber As Integer Implements IViewDFormEntry.RecordPositionNumber
     Public Property RecordCount As Integer Implements IViewDFormEntry.RecordCount
-    Public Property ShowWaitForm As BackgroundWorker(Of String) Implements IViewDFormEntry.ShowWaitForm
     Public Property SingleData As Boolean Implements IViewDFormEntry.SingleData
 
 
@@ -134,9 +132,9 @@ Public Class DFormEntry
     End Sub
 
     Public Overridable Sub TurnOnInputs()
-        If Not _inputTurnedOn Then
+        If Not _InputTurnedOn Then
             Inputs(True)
-            _inputTurnedOn = True
+            _InputTurnedOn = True
         End If
     End Sub
 

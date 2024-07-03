@@ -19,9 +19,4 @@ Public Class BForm
 
     End Sub
 
-    'Public Sub New()
-    '    MyBase.New()
-    '    BackColor = SystemColors.ControlLight
-    'End Sub
-
 End Class

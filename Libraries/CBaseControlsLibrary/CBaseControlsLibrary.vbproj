@@ -153,6 +153,20 @@
     </Compile>
     <Compile Include="CfDgvComboBoxCell.vb" />
     <Compile Include="CfDgvComboBoxColumn.vb" />
+    <Compile Include="CFormNew.Designer.vb">
+      <DependentUpon>CFormNew.vb</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="CFormNew.vb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CFormNew1.Designer.vb">
+      <DependentUpon>CFormNew.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="CtComboBoxEditingControl.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -397,6 +411,12 @@
     <Compile Include="DateRangeControl.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="DForm.Designer.vb">
+      <DependentUpon>DForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dgvfooter.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -430,6 +450,7 @@
     <Compile Include="DisplayProgressForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormHelpers.vb" />
     <Compile Include="gDateTimePicker.designer.vb">
       <DependentUpon>gDateTimePicker.vb</DependentUpon>
     </Compile>
@@ -547,6 +568,13 @@
     <EmbeddedResource Include="BFGregorianCalendar.resx">
       <DependentUpon>BFGregorianCalendar.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CFormNew.resx">
+      <DependentUpon>CFormNew.vb</DependentUpon>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CFormNew1.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="CListSelector.resx">
       <DependentUpon>CListSelector.vb</DependentUpon>
     </EmbeddedResource>
@@ -613,6 +641,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DateRangeControl.resx">
       <DependentUpon>DateRangeControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DForm.resx">
+      <DependentUpon>DForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTimeColors.resx">
       <DependentUpon>dlgTimeColors.vb</DependentUpon>

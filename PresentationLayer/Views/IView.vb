@@ -8,3 +8,13 @@ Public Interface IView
     ' No members..
 End Interface
 
+Public Interface IViewDataEntry
+    Inherits IView
+
+    Property QuitOnSave As Boolean
+
+
+    'Function SetPresenter(presenter As Object)
+
+    ' No members..
+End Interface

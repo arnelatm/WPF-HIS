@@ -7,7 +7,7 @@ Imports AATM.Libraries.MessagingLibrary
 Imports Microsoft.VisualBasic.CompilerServices
 
 <DesignerGenerated()>
-Partial Class BfMainNew
+Partial Class BFormStandard
     Inherits CForm
 
     'Form overrides dispose to clean up the component list.
@@ -28,7 +28,7 @@ Partial Class BfMainNew
     <DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(BfMainNew))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(BFormStandard))
         Me.LocalizableContent1 = New AATM.Libraries.LocalizationUtilities.LocalizableContent()
         Me._MBDeletionNotAllowed = New AATM.Libraries.LocalizationUtilities.LocalizableMessageBox()
         Me._MBAddRecordFailed = New AATM.Libraries.LocalizationUtilities.LocalizableMessageBox()

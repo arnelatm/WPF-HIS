@@ -160,7 +160,7 @@ Public Module GlobalFunctions
             'If child.Name = "DataGridViewPcJournals" Then
             '    Debugger.Break()
             'End If
-            FindControlRecursive(list, child)
+            GlobalFunctions.FindControlRecursive(list, child)
         Next
         Return list
     End Function

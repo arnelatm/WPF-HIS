@@ -9,6 +9,7 @@ Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Events
 Imports AATM.PresentationLayer.Presenters
+Imports AATM.PresentationLayer.Views
 
 Public Class CFormEntry
     Implements IViewDataEntry
@@ -677,7 +678,7 @@ Public Class CFormEntry
     Public Sub Inputs(onOff As Boolean)
         Dim allCtrl As New List(Of Control)
         Dim ctrl As Control
-        For Each ctrl In FindControlRecursive(allCtrl, Me)
+        For Each ctrl In GlobalFunctions.FindControlRecursive(allCtrl, Me)
             If TypeOf ctrl Is IEntryControl Then
                 'If TypeOf ctrl Is CtDataGridView Then 'And ctrl.Name = "dgvAccountIdNo" Then ' = "cboAccountIdNo" Then
                 '    Dim cx As CtComboBoxColumn
@@ -712,7 +713,7 @@ Public Class CFormEntry
 
     Public Sub UnselectTextOnCtComboboxes(Optional allCtrl As List(Of Control) = Nothing)
         If allCtrl Is Nothing Then
-            FindControlRecursive(allCtrl, Me)
+            GlobalFunctions.FindControlRecursive(allCtrl, Me)
         End If
         ' i don't want text to be selected on comboboxes this sub will make sure to unselect the text for CtCombobox's
         For Each ctrl In allCtrl

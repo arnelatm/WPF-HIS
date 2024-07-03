@@ -1,5 +1,4 @@
-﻿Imports AATM.Libraries
-Imports System.Windows.Forms
+﻿Imports System.Windows.Forms
 
 
 
@@ -26,7 +25,6 @@ Public Interface IViewDFormEntry
     Property RecordDateTimeStampValue As Object
     Property RecordCount As Integer
     Property RecordPositionNumber As Integer
-    Property ShowWaitForm As BackgroundWorker(Of String)
     Property SingleData As Boolean
 
     Event AfterUpdateView()

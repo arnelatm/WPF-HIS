@@ -104,6 +104,7 @@
   <ItemGroup>
     <Compile Include="Interfaces\IUserAccessView.vb" />
     <Compile Include="Interfaces\IUserSecurityView.vb" />
+    <Compile Include="Interfaces\IViewDForm.vb" />
     <Compile Include="UserAccessView.vb" />
     <Compile Include="GroupAccessView.vb" />
     <Compile Include="IDefaultFieldValueView.vb" />

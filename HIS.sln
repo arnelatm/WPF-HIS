@@ -931,6 +931,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProgramTemplates", "Program
 		ExecuteMultipleSqlStatementsInATransaction.Vb = ExecuteMultipleSqlStatementsInATransaction.Vb
 		OnCellFormating.vb = OnCellFormating.vb
 		SampleManualMapping = SampleManualMapping
+		UnusedFuncsNSubs.vb = UnusedFuncsNSubs.vb
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{53F1E513-02CC-40BF-A697-B1D602FDFDFC}"

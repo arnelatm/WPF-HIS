@@ -101,7 +101,7 @@ Namespace PresentationLayer.Views.Forms
                 _logStatus = Value
                 If _logStatus = LoginStatus.LoggedIn Then
                     Dim allControls As New List(Of Control)
-                    allControls = FindControlRecursive(allControls, Me)
+                    allControls = AATM.Libraries.GlobalFuncNSub.FindControlRecursive(allControls, Me)
                     GlobalVariables.IsUserLoggedIn = True
                     SecurityGroupIdNo = GlobalVariables.SecurityGroupIdNo
                     If UserIsASuperAdmin() Then
@@ -693,10 +693,13 @@ Namespace PresentationLayer.Views.Forms
         ''' <param name="e"></param>
         Private Sub LoginToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemLogin.Click
             'RunForm(Of UserEntryTv, UserPresenter(Of UserModel))()
-            Using form As New LoginEntry(False)
+            Dim logForm As New LoginEntry()
+            Dim presenter = New LoginPresenter(Of UserModel)(logForm)
+            Using logForm
+                'Using form As New LoginEntryOld(False)
                 Try
-                    If form.ShowDialog() = DialogResult.OK Then
-                        If form.LoginOk Then
+                    If logForm.ShowDialog() = DialogResult.OK Then
+                        If logForm.LoginOk Then
                             LogStatus = LoginStatus.LoggedIn
                         Else
                             LogStatus = LoginStatus.LoggedOut
@@ -716,7 +719,7 @@ Namespace PresentationLayer.Views.Forms
                     'Presenter.ResetMenuSecurity(Me)
                 Catch ex As TypeInitializationException
                     MessageBox.Show("Invalid Connection String, specified connection String doesn't exist.",
-                                    "Connection String Error!", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                                        "Connection String Error!", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     ErrLogger.LogError(ex, True)
                     LogStatus = LoginStatus.LoggedOut
                 Catch ex As Exception
@@ -760,7 +763,7 @@ Namespace PresentationLayer.Views.Forms
                     addSecurityObject = False
                 End If
                 If addSecurityObject Then
-                    For Each cCtrl As Control In FindControlRecursive(allControls, Me)
+                    For Each cCtrl As Control In GlobalFunctions.FindControlRecursive(allControls, Me)
                         ResetMenuSecurity(cCtrl)
                     Next
                 End If
@@ -866,7 +869,9 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripMenuItemChangePassword_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemChangePassword.Click
-            Using form As New LoginEntry(True)
+            Dim logForm As New LoginEntry()
+            Dim presenter = New UserPresenter(Of UserModel)(logForm)
+            Using form As New LoginEntry(True, presenter)
                 Try
                     If form.ShowDialog() = DialogResult.OK Then
                         If form.LoginOk Then
@@ -972,7 +977,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub UpdateMenuSecurityObjectsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemUpdateMenuSecurityObjects.Click
             Dim allControls As New List(Of Control)
             If UserIsASuperAdmin() Then
-                For Each cCtrl As Control In FindControlRecursive(allControls, Me)
+                For Each cCtrl As Control In GlobalFunctions.FindControlRecursive(allControls, Me)
                     UpdateMenuSecurity(cCtrl)
                 Next
             End If

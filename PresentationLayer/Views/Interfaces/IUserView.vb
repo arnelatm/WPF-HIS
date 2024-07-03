@@ -13,4 +13,18 @@
 
     End Interface
 
+    Public Interface IUserViewNew
+        Inherits IViewNew
+
+        Property Active As Boolean
+        Property IdNo As Int16
+        Property UserName As String
+        Property EmployeeIdNo As Int32?
+        Property Password As String
+        Property SecurityLevel As Int16
+        Property SecurityGroupIdNo As Int16
+        Property BranchIdNoData As DataTable
+
+    End Interface
+
 End Namespace

@@ -1582,7 +1582,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Dim validationsPassed As Boolean
         validationsPassed = True
         Dim allControls As New List(Of Control)
-        allControls = FindControlRecursive(allControls, sender)
+        allControls = GlobalFunctions.FindControlRecursive(allControls, sender)
         For Each cCtrl As Control In allControls
             If TypeOf cCtrl Is IEntryControl Then
                 If TypeOf cCtrl Is CTextBox Then
@@ -1607,7 +1607,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     Public Sub ResetMenuSecurity(viewControl As Control)
 
         Dim allControls As New List(Of Control)
-        allControls = FindControlRecursive(allControls, viewControl)
+        allControls = GlobalFunctions.FindControlRecursive(allControls, viewControl)
         Dim resources = New ComponentResourceManager(Me.GetType())
         For Each cCtrl As Control In allControls
             SetControlDynamicProperties(cCtrl)
