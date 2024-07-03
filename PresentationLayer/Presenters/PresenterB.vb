@@ -52,7 +52,7 @@ Public Class PresenterB(Of TV As IViewNew, TM As New)
     End Function
 
 
-    Public Function MakeVarDataSource(ByRef item As Object) As DataTable
+    Public Function MakeDataTable(ByRef dataTableSpecs As Object) As DataTable
         Dim dtl As New DataLookupSpecs
         Const LookupTableName As Int32 = 0
         Const LookupFieldNames As Int32 = 1
@@ -61,25 +61,25 @@ Public Class PresenterB(Of TV As IViewNew, TM As New)
         Const ValueMember As Int32 = 4
         Const DisplayMember As Int32 = 5
         Const Ascending As Int32 = 6
-        dtl.TableName = item(LookupTableName)
+        dtl.TableName = dataTableSpecs(LookupTableName)
         dtl.Ascending = True
-        If item.Length - 1 > 0 Then
-            dtl.LuFields = item(LookupFieldNames)
+        If dataTableSpecs.Length - 1 > 0 Then
+            dtl.LuFields = dataTableSpecs(LookupFieldNames)
         End If
-        If item.Length - 1 > 1 Then
-            dtl.Filter = item(LookupFilter)
+        If dataTableSpecs.Length - 1 > 1 Then
+            dtl.Filter = dataTableSpecs(LookupFilter)
         End If
-        If item.Length - 1 > 2 Then
-            dtl.SortKey = item(LookupSortKey)
+        If dataTableSpecs.Length - 1 > 2 Then
+            dtl.SortKey = dataTableSpecs(LookupSortKey)
         End If
-        If item.Length - 1 > 3 Then
-            dtl.ValueMember = item(ValueMember)
+        If dataTableSpecs.Length - 1 > 3 Then
+            dtl.ValueMember = dataTableSpecs(ValueMember)
         End If
-        If item.Length - 1 > 4 Then
-            dtl.DisplayMember = item(DisplayMember)
+        If dataTableSpecs.Length - 1 > 4 Then
+            dtl.DisplayMember = dataTableSpecs(DisplayMember)
         End If
-        If item.Length - 1 > 5 Then
-            dtl.Ascending = item(Ascending)
+        If dataTableSpecs.Length - 1 > 5 Then
+            dtl.Ascending = dataTableSpecs(Ascending)
         End If
         ComposeLookupProperties(dtl)
         Return GetDtRecords(dtl.TableName, dtl.LuFields, dtl.Filter, dtl.SortKey)

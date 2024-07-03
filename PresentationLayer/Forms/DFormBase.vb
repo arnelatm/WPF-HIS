@@ -14,7 +14,6 @@ Public Class DFormBase
     Public Property DefaultFormControlsForeColor As Color = Color.Black
     Public Property DefaultFormControlsReadOnlyBackColor As Color = Color.White
     Public Property DefaultFormControlsReadOnlyForeColor As Color = Color.Gray
-    Public Property ViewDisplayName As String
 
 
     Public MyErrorProvider As New ErrorProviderExtended

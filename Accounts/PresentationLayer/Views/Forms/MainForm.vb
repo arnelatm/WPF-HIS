@@ -871,7 +871,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ToolStripMenuItemChangePassword_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemChangePassword.Click
             Dim logForm As New LoginEntry()
             Dim presenter = New UserPresenter(Of UserModel)(logForm)
-            Using form As New LoginEntry(True, presenter)
+            Using form As New LoginEntry(True)
                 Try
                     If form.ShowDialog() = DialogResult.OK Then
                         If form.LoginOk Then
