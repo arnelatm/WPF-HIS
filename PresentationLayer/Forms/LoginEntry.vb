@@ -2,8 +2,6 @@
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Models
-Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views.Interfaces
 
 Public Class LoginEntry
@@ -43,13 +41,7 @@ Public Class LoginEntry
         ' Add any initialization after the InitializeComponent() call.
         _cancelLogin = False
         AddHandler FormClosing, AddressOf FormLogin_Closing
-        'textBoxUserName.Text = Environment.UserName
-
-        'presenter = New UserPresenter(Of UserModel)(Me)
         _presenter = presenter
-
-        '_presenter.CreateBranchSource()
-
         If changePassword Then
             UserName = GlobalVariables.UserName
             Password = ""
@@ -58,7 +50,6 @@ Public Class LoginEntry
             Password = My.Settings.Oterkis
             BranchIdNo = My.Settings.BranchIdNo
         End If
-
         _rememberPassword = My.Settings.RememberPassword
         If UserName IsNot Nothing Then
             If Password IsNot Nothing Then
@@ -182,6 +173,7 @@ Public Class LoginEntry
     Private Sub Btn_Login_Click(sender As Object, e As EventArgs) Handles btn_Login.Click
         Try
             _oterkis = textBoxPassword.Text
+            RaiseEvent Login(UserName, Password)
             If _presenter.Login(UserName, Password) Then
                 _loginOk = True
                 If Not _changingPassword Then
