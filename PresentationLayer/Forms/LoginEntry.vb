@@ -6,7 +6,6 @@ Imports AATM.PresentationLayer.Views.Interfaces
 Public Class LoginEntry
     Implements IUserViewNew
 
-    Private _mainFieldsDictionary As Dictionary(Of String, Object)
     Private _oterkis As String
 
     Public Sub New()
@@ -100,15 +99,6 @@ Public Class LoginEntry
     Public Property EmployeeIdNo As Int32? Implements IUserViewNew.EmployeeIdNo
     Public Property Errors As List(Of String) Implements Views.IView.Errors
     Public Property IdNo As Int16 Implements IUserViewNew.IdNo
-    Public ReadOnly Property MainFieldsDictionary As Dictionary(Of String, Object) Implements Views.IViewNew.MainFieldsDictionary
-        Get
-            Return New Dictionary(Of String, Object) From
-            {
-             {"BranchIdNo", cboBranchIdNo},
-             {"UserName", txtUserName}
-            }
-        End Get
-    End Property
 
     Public Property MainTableName As String = "User"
     Public Property NewPassword As String Implements IUserViewNew.NewPassword
