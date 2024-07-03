@@ -160,10 +160,7 @@ Public Class LoginEntry
         My.Settings.Save()
     End Sub
 
-    Private Sub AfterSuccessfulLogin()
-        SaveUserPasswordSetting()
-        GlobalVariables.BranchIdNo = cboBranchIdNo.SelectedValue
-    End Sub
+
 
     Private Sub Btn_Login_Click(sender As Object, e As EventArgs) Handles btn_Login.Click
         _oterkis = textBoxPassword.Text
@@ -171,11 +168,11 @@ Public Class LoginEntry
         If LoginOk Then
             AfterSuccessfulLogin()
         End If
-        '_oterkis = textBoxPassword.Text
-        'RaiseEvent Login()
-        'If LoginOk Then
-        '    AfterSuccessfulLogin()
-        'End If
+    End Sub
+
+    Private Sub AfterSuccessfulLogin()
+        SaveUserPasswordSetting()
+        GlobalVariables.BranchIdNo = cboBranchIdNo.SelectedValue
     End Sub
 
     Private Sub FormLogin_Closing(sender As Object, e As CancelEventArgs)
