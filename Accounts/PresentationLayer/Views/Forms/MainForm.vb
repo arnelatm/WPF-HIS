@@ -692,7 +692,6 @@ Namespace PresentationLayer.Views.Forms
         ''' <param name="sender"></param>
         ''' <param name="e"></param>
         Private Sub LoginToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemLogin.Click
-            'RunForm(Of UserEntryTv, UserPresenter(Of UserModel))()
             'RunForm(Of LoginEntry, Boolean)(False)
             Dim logForm As New LoginEntry(False)
             Dim presenter = New LoginPresenter(Of UserModel)(logForm)
@@ -716,8 +715,6 @@ Namespace PresentationLayer.Views.Forms
                             SwitchUiLanguage(False)
                         End If
                     End If
-
-                    'Presenter.ResetMenuSecurity(Me)
                 Catch ex As TypeInitializationException
                     MessageBox.Show("Invalid Connection String, specified connection String doesn't exist.",
                                         "Connection String Error!", MessageBoxButtons.OK, MessageBoxIcon.Information)

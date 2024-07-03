@@ -163,6 +163,11 @@ Public Class LoginEntry
         If LoginOk Then
             AfterSuccessfulLogin()
         End If
+        '_oterkis = textBoxPassword.Text
+        'RaiseEvent Login()
+        'If LoginOk Then
+        '    AfterSuccessfulLogin()
+        'End If
     End Sub
 
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs)
