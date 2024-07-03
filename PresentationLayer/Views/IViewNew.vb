@@ -4,7 +4,7 @@ Public Interface IViewNew
     Inherits IView
 
     Property ViewDisplayName As String
-    Property MainFieldsDictionary As Dictionary(Of String, Object)
+    ReadOnly Property MainFieldsDictionary As Dictionary(Of String, Object)
 
     ' No members..
 End Interface

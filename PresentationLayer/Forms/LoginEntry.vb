@@ -1,5 +1,4 @@
 ﻿Imports System.ComponentModel
-Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Views.Interfaces
@@ -7,8 +6,6 @@ Imports AATM.PresentationLayer.Views.Interfaces
 Public Class LoginEntry
     Implements IUserViewNew
 
-    Public ReadOnly _changingPassword As Boolean = False
-    Private ReadOnly _rememberPassword As Boolean = False
     Private _mainFieldsDictionary As Dictionary(Of String, Object)
     Private _oterkis As String
 
@@ -40,14 +37,13 @@ Public Class LoginEntry
             Password = My.Settings.Oterkis
             BranchIdNo = My.Settings.BranchIdNo
         End If
-        _rememberPassword = My.Settings.RememberPassword
         If UserName IsNot Nothing Then
             If Password IsNot Nothing Then
                 textBoxPassword.Text = Password
             End If
             txtUserName.Text = UserName
         End If
-        chkSaveUserNameAndPassword.Checked = _rememberPassword
+        chkSaveUserNameAndPassword.Checked = My.Settings.RememberPassword
 
         If ChangePassword Then
             textNewPassword.Visible = True
@@ -86,17 +82,25 @@ Public Class LoginEntry
         End Set
     End Property
 
+    Private _brIdData As DataTable
+
     Public Property BranchIdNoData As DataTable Implements IUserViewNew.BranchIdNoData
+        Get
+            Return _brIdData
+        End Get
+        Set(value As DataTable)
+            _brIdData = value
+            cboBranchIdNo.DataSource = value
+        End Set
+    End Property
+
     Public Property CancelClose As Boolean Implements IUserViewNew.CancelClose
     Public Property ChangePassword As Boolean Implements IUserViewNew.ChangePassword
     Public Property DataFilter As String Implements Views.IView.DataFilter
     Public Property EmployeeIdNo As Int32? Implements IUserViewNew.EmployeeIdNo
     Public Property Errors As List(Of String) Implements Views.IView.Errors
     Public Property IdNo As Int16 Implements IUserViewNew.IdNo
-    Public Property MainFieldsDictionary As Dictionary(Of String, Object) Implements Views.IViewNew.MainFieldsDictionary
-        Set(value As Dictionary(Of String, Object))
-            _mainFieldsDictionary = value
-        End Set
+    Public ReadOnly Property MainFieldsDictionary As Dictionary(Of String, Object) Implements Views.IViewNew.MainFieldsDictionary
         Get
             Return New Dictionary(Of String, Object) From
             {
@@ -191,8 +195,13 @@ Public Class LoginEntry
         _textConfirmation.DisplayOnly = False
     End Sub
 
-    Private Sub FormLogin_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
-        Close()
+    Private Sub SaveUserPasswordSetting()
+        If Not chkSaveUserNameAndPassword.Checked Then
+            ClearPasswordSetting()
+        Else
+            SavePasswordSetting()
+        End If
+        GlobalVariables.BranchIdNo = cboBranchIdNo.SelectedValue
     End Sub
 
     Private Sub SavePasswordSetting()
@@ -203,12 +212,4 @@ Public Class LoginEntry
         My.Settings.Save()
     End Sub
 
-    Private Sub SaveUserPasswordSetting()
-        If Not chkSaveUserNameAndPassword.Checked Then
-            ClearPasswordSetting()
-        Else
-            SavePasswordSetting()
-        End If
-        GlobalVariables.BranchIdNo = cboBranchIdNo.SelectedValue
-    End Sub
 End Class

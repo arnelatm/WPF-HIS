@@ -693,10 +693,11 @@ Namespace PresentationLayer.Views.Forms
         ''' <param name="e"></param>
         Private Sub LoginToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemLogin.Click
             'RunForm(Of UserEntryTv, UserPresenter(Of UserModel))()
-            Dim logForm As New LoginEntry()
+            'RunForm(Of LoginEntry, Boolean)(False)
+            Dim logForm As New LoginEntry(False)
             Dim presenter = New LoginPresenter(Of UserModel)(logForm)
             Using logForm
-                'Using form As New LoginEntryOld(False)
+                'logForm.Show()
                 Try
                     If logForm.ShowDialog() = DialogResult.OK Then
                         If logForm.LoginOk Then
@@ -869,12 +870,12 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripMenuItemChangePassword_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemChangePassword.Click
-            Dim logForm As New LoginEntry()
+            Dim logForm As New LoginEntry(True)
             Dim presenter = New UserPresenter(Of UserModel)(logForm)
-            Using form As New LoginEntry(True)
+            Using logForm 'As New LoginEntry(True)
                 Try
-                    If form.ShowDialog() = DialogResult.OK Then
-                        If form.LoginOk Then
+                    If logForm.ShowDialog() = DialogResult.OK Then
+                        If logForm.LoginOk Then
                             LogStatus = LoginStatus.LoggedIn
                         Else
                             Messaging.Show(True, "MsgOldPasswordError")
