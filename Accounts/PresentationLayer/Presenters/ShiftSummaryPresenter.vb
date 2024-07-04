@@ -65,10 +65,15 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Overrides Function IsOkToEditRecord() As Boolean
-            If userCanEdit Then
+            If UserIsASuperAdmin() Then
                 Return True
             End If
-            Return false
+            If View.DateStart >= DateAndTime.DateAdd(DateInterval.Day, -2, Now()) Then
+                If userCanEdit Then
+                    Return True
+                End If
+            End If
+            Return False
         End Function
 
     End Class

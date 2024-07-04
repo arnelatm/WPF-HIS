@@ -15,7 +15,10 @@ Namespace BusinessLayer
                 AddRule(New ValidateRequired("UserIdNo"))
                 AddRule(New ValidateRequired("DateStart"))
                 AddRule(New ValidateRequired("DateEnd"))
+                AddRule(New ValidateRange("DateEnd", Date.MinValue, Date.Today, ValidationDataType.Date))
+                AddRule(New ValidateRange("DateStart", Date.MinValue, Date.Today, ValidationDataType.Date))
                 AddRule(New ValidateCompare("DateStart", "DateEnd", ValidationOperator.LessThanOrEqual, ValidationDataType.Date))
+                AddRule(New ValidateCompare("DateEnd", "DateEnd", ValidationOperator.LessThanOrEqual, ValidationDataType.Date))
             End If
 
         End Sub
