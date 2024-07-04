@@ -178,10 +178,13 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="TxtIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 23</value>
+    <value>62, 26</value>
   </data>
   <data name="TxtIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
+  </data>
+  <data name="TxtIdNo.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
   </data>
   <data name="&gt;&gt;TxtIdNo.Name" xml:space="preserve">
     <value>TxtIdNo</value>
@@ -199,7 +202,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="lblBranchCode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 36</value>
+    <value>11, 39</value>
   </data>
   <data name="lblBranchCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -232,13 +235,13 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtBranchCode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 36</value>
+    <value>168, 39</value>
   </data>
   <data name="txtBranchCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtBranchCode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 23</value>
+    <value>62, 26</value>
   </data>
   <data name="txtBranchCode.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -259,7 +262,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="lblBranchName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 61</value>
+    <value>11, 67</value>
   </data>
   <data name="lblBranchName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -292,13 +295,13 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtBranchName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 61</value>
+    <value>168, 67</value>
   </data>
   <data name="txtBranchName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtBranchName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>418, 23</value>
+    <value>418, 26</value>
   </data>
   <data name="txtBranchName.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -319,7 +322,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="lblBranchNameAra.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 86</value>
+    <value>11, 95</value>
   </data>
   <data name="lblBranchNameAra.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -352,7 +355,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtBranchNameAra.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 86</value>
+    <value>168, 95</value>
   </data>
   <data name="txtBranchNameAra.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -361,7 +364,7 @@
     <value>Yes</value>
   </data>
   <data name="txtBranchNameAra.Size" type="System.Drawing.Size, System.Drawing">
-    <value>418, 23</value>
+    <value>418, 26</value>
   </data>
   <data name="txtBranchNameAra.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -382,7 +385,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="lblNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 111</value>
+    <value>11, 123</value>
   </data>
   <data name="lblNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -418,7 +421,7 @@
     <value>AlphaFull</value>
   </data>
   <data name="txtNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 111</value>
+    <value>168, 123</value>
   </data>
   <data name="txtNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -444,62 +447,11 @@
   <data name="&gt;&gt;txtNotes.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="CButton1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 175</value>
-  </data>
-  <data name="CButton1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 40</value>
-  </data>
-  <data name="CButton1.TabIndex" type="System.Int32, mscorlib">
-    <value>160</value>
-  </data>
-  <data name="CButton1.Text" xml:space="preserve">
-    <value>Read Barcode</value>
-  </data>
-  <data name="&gt;&gt;CButton1.Name" xml:space="preserve">
-    <value>CButton1</value>
-  </data>
-  <data name="&gt;&gt;CButton1.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CButton, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;CButton1.Parent" xml:space="preserve">
-    <value>floDataDisplay</value>
-  </data>
-  <data name="&gt;&gt;CButton1.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="txtBarcode.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Barcode, 8.249999pt</value>
-  </data>
-  <data name="txtBarcode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>109, 175</value>
-  </data>
-  <data name="txtBarcode.Multiline" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="txtBarcode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>477, 134</value>
-  </data>
-  <data name="txtBarcode.TabIndex" type="System.Int32, mscorlib">
-    <value>161</value>
-  </data>
-  <data name="&gt;&gt;txtBarcode.Name" xml:space="preserve">
-    <value>txtBarcode</value>
-  </data>
-  <data name="&gt;&gt;txtBarcode.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtBarcode.Parent" xml:space="preserve">
-    <value>floDataDisplay</value>
-  </data>
-  <data name="&gt;&gt;txtBarcode.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
   <data name="CButton2.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="CButton2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 315</value>
+    <value>590, 125</value>
   </data>
   <data name="CButton2.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 25</value>
@@ -520,7 +472,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;CButton2.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>10</value>
   </data>
   <data name="floDataDisplay.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -535,7 +487,7 @@
     <value>10, 10, 0, 0</value>
   </data>
   <data name="floDataDisplay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>604, 402</value>
+    <value>806, 505</value>
   </data>
   <data name="floDataDisplay.TabIndex" type="System.Int32, mscorlib">
     <value>147</value>
@@ -565,10 +517,10 @@
     <value>1</value>
   </data>
   <data name="SplitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>919, 402</value>
+    <value>1225, 505</value>
   </data>
   <data name="SplitContainer1.SplitterDistance" type="System.Int32, mscorlib">
-    <value>305</value>
+    <value>406</value>
   </data>
   <data name="&gt;&gt;SplitContainer1.Name" xml:space="preserve">
     <value>SplitContainer1</value>
@@ -582,8 +534,11 @@
   <data name="&gt;&gt;SplitContainer1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="FormTreeView.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>No</value>
+  </data>
   <data name="FormTreeView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>305, 402</value>
+    <value>406, 505</value>
   </data>
   <data name="&gt;&gt;FormTreeView.Name" xml:space="preserve">
     <value>FormTreeView</value>
@@ -605,7 +560,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACG
-        CQAAAk1TRnQBSQFMAgEBAgEAATgBAAFgAQABEAEAARABAAT/AQkBEAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CQAAAk1TRnQBSQFMAgEBAgEAATgBAAFoAQABEAEAARABAAT/AQkBEAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -649,28 +604,31 @@
 </value>
   </data>
   <metadata name="StoreCaptions1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>299, 17</value>
+    <value>354, 17</value>
   </metadata>
   <metadata name="TranslatorDAC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>434, 17</value>
+    <value>511, 17</value>
   </metadata>
   <metadata name="AppDataDAC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>564, 17</value>
+    <value>662, 17</value>
   </metadata>
   <metadata name="MyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>688, 17</value>
+    <value>805, 17</value>
   </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+    <value>8, 16</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>919, 455</value>
+    <value>1225, 560</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 6, 5, 6</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>320, 235</value>
+    <value>421, 278</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Branches Maintenance Form</value>

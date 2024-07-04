@@ -74,7 +74,7 @@ Namespace PresentationLayer.Views.Forms
                 }
         End Sub
 
-        Private Sub CButton1_ClickButtonArea_1(Sender As Object, e As MouseEventArgs) Handles CButton1.ClickButtonArea
+        Private Sub CButton1_ClickButtonArea_1(Sender As Object, e As MouseEventArgs) 
 
             Dim fileReader As String
             fileReader = My.Computer.FileSystem.ReadAllText("C:\temp\DrugQrCode.txt")

@@ -4,7 +4,7 @@ Imports AATM.Libraries.CBaseControlsLibrary
 
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class LoginEntry
-    Inherits DFormBase
+    Inherits DForm
 
     'Form overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()>
@@ -452,13 +452,16 @@ Partial Class LoginEntry
         '
         'LoginEntry
         '
+        Me.AcceptButton = Me.btn_Login
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(528, 409)
         Me.Controls.Add(Me.TableLayoutPanel2)
         Me.Controls.Add(Me.floPasswordEntry)
         Me.Controls.Add(Me.PictureBox1)
         Me.Name = "LoginEntry"
         Me.Text = "Login Form"
+        Me.TopMost = True
         CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.floPasswordEntry.ResumeLayout(False)

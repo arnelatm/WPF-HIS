@@ -95,9 +95,7 @@ Public Class LoginEntry
 
     Public Property CancelClose As Boolean Implements IUserViewNew.CancelClose
     Public Property ChangePassword As Boolean Implements IUserViewNew.ChangePassword
-    Public Property DataFilter As String Implements Views.IView.DataFilter
     Public Property EmployeeIdNo As Int32? Implements IUserViewNew.EmployeeIdNo
-    Public Property Errors As List(Of String) Implements Views.IView.Errors
     Public Property IdNo As Int16 Implements IUserViewNew.IdNo
 
     Public Property MainTableName As String = "User"

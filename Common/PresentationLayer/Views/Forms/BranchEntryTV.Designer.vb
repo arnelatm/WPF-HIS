@@ -36,8 +36,6 @@ Namespace PresentationLayer.Views.Forms
             Me.lblBranchName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblBranchNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.CButton1 = New AATM.Libraries.CBaseControlsLibrary.CButton()
-            Me.txtBarcode = New System.Windows.Forms.TextBox()
             Me.CButton2 = New AATM.Libraries.CBaseControlsLibrary.CButton()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
@@ -97,6 +95,7 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.MinimumValue = Nothing
             Me.TxtIdNo.Name = "TxtIdNo"
             Me.TxtIdNo.OldValue = Nothing
+            Me.TxtIdNo.OverrideMaxLength = 0
             Me.TxtIdNo.ReadOnly = True
             Me.TxtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.TxtIdNo.TabStop = False
@@ -125,6 +124,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtBranchCode.MinimumValue = Nothing
             Me.txtBranchCode.Name = "txtBranchCode"
             Me.txtBranchCode.OldValue = Nothing
+            Me.txtBranchCode.OverrideMaxLength = 0
             Me.txtBranchCode.ReadOnly = True
             Me.txtBranchCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtBranchCode.Translatable = False
@@ -153,6 +153,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtBranchName.MinimumValue = Nothing
             Me.txtBranchName.Name = "txtBranchName"
             Me.txtBranchName.OldValue = Nothing
+            Me.txtBranchName.OverrideMaxLength = 0
             Me.txtBranchName.ReadOnly = True
             Me.txtBranchName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtBranchName.Translatable = False
@@ -182,6 +183,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtBranchNameAra.MinimumValue = Nothing
             Me.txtBranchNameAra.Name = "txtBranchNameAra"
             Me.txtBranchNameAra.OldValue = Nothing
+            Me.txtBranchNameAra.OverrideMaxLength = 0
             Me.txtBranchNameAra.ReadOnly = True
             Me.txtBranchNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtBranchNameAra.Translatable = False
@@ -194,6 +196,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtNotes.ComputedValue = False
             Me.txtNotes.CustomFormat = Nothing
+            Me.txtNotes.DataBoundControl = True
             Me.txtNotes.EditingMode = False
             Me.txtNotes.EndFindValue = Nothing
             Me.txtNotes.FieldDescription = Nothing
@@ -207,6 +210,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.MinimumValue = Nothing
             Me.txtNotes.Name = "txtNotes"
             Me.txtNotes.OldValue = Nothing
+            Me.txtNotes.OverrideMaxLength = 0
             Me.txtNotes.ReadOnly = True
             Me.txtNotes.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtNotes.Translatable = False
@@ -226,13 +230,12 @@ Namespace PresentationLayer.Views.Forms
             Me.floDataDisplay.Controls.Add(Me.txtBranchNameAra)
             Me.floDataDisplay.Controls.Add(Me.lblNotes)
             Me.floDataDisplay.Controls.Add(Me.txtNotes)
-            Me.floDataDisplay.Controls.Add(Me.CButton1)
-            Me.floDataDisplay.Controls.Add(Me.txtBarcode)
             Me.floDataDisplay.Controls.Add(Me.CButton2)
             Me.floDataDisplay.Name = "floDataDisplay"
             '
             'lblIdNo
             '
+            Me.lblIdNo.BackColor = System.Drawing.Color.Transparent
             Me.lblIdNo.DisplayOnly = True
             Me.lblIdNo.EditingMode = False
             resources.ApplyResources(Me.lblIdNo, "lblIdNo")
@@ -241,6 +244,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'lblBranchCode
             '
+            Me.lblBranchCode.BackColor = System.Drawing.Color.Transparent
             Me.lblBranchCode.DisplayOnly = True
             Me.lblBranchCode.EditingMode = False
             resources.ApplyResources(Me.lblBranchCode, "lblBranchCode")
@@ -249,6 +253,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'lblBranchName
             '
+            Me.lblBranchName.BackColor = System.Drawing.Color.Transparent
             Me.lblBranchName.DisplayOnly = True
             Me.lblBranchName.EditingMode = False
             resources.ApplyResources(Me.lblBranchName, "lblBranchName")
@@ -257,6 +262,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'lblBranchNameAra
             '
+            Me.lblBranchNameAra.BackColor = System.Drawing.Color.Transparent
             Me.lblBranchNameAra.DisplayOnly = True
             Me.lblBranchNameAra.EditingMode = False
             resources.ApplyResources(Me.lblBranchNameAra, "lblBranchNameAra")
@@ -265,25 +271,12 @@ Namespace PresentationLayer.Views.Forms
             '
             'lblNotes
             '
+            Me.lblNotes.BackColor = System.Drawing.Color.Transparent
             Me.lblNotes.DisplayOnly = True
             Me.lblNotes.EditingMode = False
             resources.ApplyResources(Me.lblNotes, "lblNotes")
             Me.lblNotes.Name = "lblNotes"
             Me.lblNotes.Translatable = True
-            '
-            'CButton1
-            '
-            Me.CButton1.DesignerSelected = False
-            Me.CButton1.ImageIndex = 0
-            resources.ApplyResources(Me.CButton1, "CButton1")
-            Me.CButton1.Name = "CButton1"
-            Me.CButton1.OriginalImageName = Nothing
-            Me.CButton1.SecurityKey = ""
-            '
-            'txtBarcode
-            '
-            resources.ApplyResources(Me.txtBarcode, "txtBarcode")
-            Me.txtBarcode.Name = "txtBarcode"
             '
             'CButton2
             '
@@ -320,8 +313,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblBranchName As CLabel
         Friend WithEvents lblBranchNameAra As CLabel
         Friend WithEvents lblNotes As CLabel
-        Friend WithEvents CButton1 As CButton
-        Friend WithEvents txtBarcode As TextBox
         Friend WithEvents CButton2 As CButton
     End Class
 End NameSpace

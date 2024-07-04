@@ -148,6 +148,12 @@
     <Compile Include="CfComboBox.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="DFindForm.designer.vb">
+      <DependentUpon>DFindForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DFindForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CFindGridForm.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -567,6 +573,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="BFGregorianCalendar.resx">
       <DependentUpon>BFGregorianCalendar.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DFindForm.resx">
+      <DependentUpon>DFindForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CFormNew.resx">
       <DependentUpon>CFormNew.vb</DependentUpon>
