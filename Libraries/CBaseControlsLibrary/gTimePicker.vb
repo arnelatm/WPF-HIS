@@ -5,6 +5,9 @@ Imports System.Windows.Forms.Design
 Imports System.Drawing.Design
 Imports System.Windows.Forms
 Imports AATM.Libraries.CBaseControlsLibrary.gTimePickerCntrl
+Imports System.Text.RegularExpressions
+Imports System.Diagnostics.Eventing.Reader
+Imports AATM.DataLayer.AdoNet
 
 'Version 1.0 8-09
 'version 1.1 8-09 Fixed 24 hour time
@@ -163,6 +166,16 @@ Public Class gTimePicker
             Invalidate()
         End Set
     End Property
+
+    Private Sub InformUserOfInvalidTime()
+        'ToolTip1.ToolTipTitle = "Input Rejected"
+        'Dim calendarName As String = Messaging.TranslateCaption(CalendarNameInEnglish(_targetCulture))
+        'Dim cText = txtDate.Text
+        'Dim cCalendarName As String = calendarName
+        'ToolTip1.ToolTipTitle = "Input Rejected"
+        'Messaging.ShowPmMessage(True, "MsgErroneousDate", {"enteredDate", cText, "calendarName", cCalendarName})
+        MessageBox.Show("Invalid time entered!")
+    End Sub
 
     Public Sub SetTime(lMilitaryTime As String)
         If lMilitaryTime < "12:00" Then
@@ -879,9 +892,47 @@ Public Class gTimePicker
 
     Private Sub txbTime_LostFocus(ByVal sender As Object, ByVal e As EventArgs) Handles txbTime.LostFocus
         If Time <> txbTime.Text Then
-            Time = txbTime.Text
+            If validateTime(txbTime.Text) Then
+                Time = txbTime.Text
+            Else
+                txbTime.Text = Time
+            End If
+            'Dim retVal As Boolean = True
+            ''If Not (cText = $"  :  :" Or cText = "") Then
+            'If Not (txbTime.Text = $"  :  :" Or txbTime.Text = "") Then
+            '    Dim sPattern = "([0-1]\d|2[0-3]):([0-5]\d)$"
+            '    '"([0-1]\d|2[0-3]):([0-5]\d)$"
+            '    Dim match As New Regex(sPattern)
+            '    Dim bIsMatch As Boolean = match.IsMatch(txbTime.Text)
+            '    If bIsMatch = False Then
+            '        InformUserOfInvalidTime()
+            '        txbTime.Text = gTime.Time
+            '        'tTime = gTime.Time
+            '        Time = gTime.Time
+            '    Else
+            '        Time = txbTime.Text
+            '    End If
+            'Else
+            '    Time = txbTime.Text
+            'End If
         End If
     End Sub
+
+    Private Function validateTime(strTime As String) As Boolean
+        Dim retVal As Boolean = True
+        If strTime Is Nothing OrElse strTime = $"  :  :  " OrElse strTime = $"  :  " OrElse strTime = "" Then
+            Return False
+        End If
+        'Dim sPattern = "^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$"
+        Dim sPattern = "^(?:0?[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$"
+        Dim match As New Regex(sPattern)
+        Dim bIsMatch As Boolean = match.IsMatch(txbTime.Text)
+        If bIsMatch = False Then
+            InformUserOfInvalidTime()
+            Return False
+        End If
+        Return True
+    End Function
 
 #End Region
 
