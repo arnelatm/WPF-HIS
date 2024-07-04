@@ -214,51 +214,75 @@
     <Compile Include="PresentationLayer\Views\Forms\PrinterEntryTv.Designer.vb">
       <DependentUpon>PrinterEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\PrinterEntryTv.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\PrinterEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\PrintJobEntryTv.Designer.vb">
       <DependentUpon>PrintJobEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\PrintJobEntryTv.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\PrintJobEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\ReportEntry.Designer.vb">
       <DependentUpon>ReportEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\ReportEntry.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\ReportEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\PrintSetupEntry.Designer.vb">
       <DependentUpon>PrintSetupEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\PrintSetupEntry.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\PrintSetupEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\DefaultFieldValueEntryTv.Designer.vb">
       <DependentUpon>DefaultFieldValueEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\DefaultFieldValueEntryTv.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\DefaultFieldValueEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\BranchEntryTV.Designer.vb">
       <DependentUpon>BranchEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\BranchEntryTv.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\BranchEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\CommonForm.Designer.vb">
       <DependentUpon>CommonForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\CommonForm.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\CommonForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\ReportGroupEntry.Designer.vb">
       <DependentUpon>ReportGroupEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\ReportGroupEntry.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\ReportGroupEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\ReportPrinting.designer.vb">
       <DependentUpon>ReportPrinting.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\ReportPrinting.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\ReportPrinting.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\RevCostCenterEntry.Designer.vb">
       <DependentUpon>RevCostCenterEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\RevCostCenterEntry.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\RevCostCenterEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\CountryEntryTv.Designer.vb">
       <DependentUpon>CountryEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\CountryEntryTv.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\CountryEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\DepartmentEntryTv.Designer.vb">
       <DependentUpon>DepartmentEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\DepartmentEntryTv.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\DepartmentEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\FormAbout.designer.vb">
       <DependentUpon>FormAbout.vb</DependentUpon>
     </Compile>
@@ -268,19 +292,27 @@
     <Compile Include="PresentationLayer\Views\Forms\OriginalCaptionEntryTv.Designer.vb">
       <DependentUpon>OriginalCaptionEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\OriginalCaptionEntryTv.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\OriginalCaptionEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\OriginalMessagesEntryTv.Designer.vb">
       <DependentUpon>OriginalMessagesEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\OriginalMessagesEntryTv.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\OriginalMessagesEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\RevenueGroupEntryTv.Designer.vb">
       <DependentUpon>RevenueGroupEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\RevenueGroupEntryTv.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\RevenueGroupEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\SecurityGroupEntryTv.Designer.vb">
       <DependentUpon>SecurityGroupEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\SecurityGroupEntryTv.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\SecurityGroupEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Interfaces\IPrintableCrReportView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPrinterVIew.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPrintJobVIew.vb" />
@@ -297,11 +329,15 @@
     <Compile Include="PresentationLayer\Views\Forms\SecurityObjectEntryTv.Designer.vb">
       <DependentUpon>SecurityObjectEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\SecurityObjectEntryTv.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\SecurityObjectEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\UserEntryTv.Designer.vb">
       <DependentUpon>UserEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\UserEntryTv.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\UserEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Models\BranchModel.vb" />
     <Compile Include="PresentationLayer\Models\RevCostCenterModel.vb" />
     <Compile Include="PresentationLayer\Models\CountryModel.vb" />
