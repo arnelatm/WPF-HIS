@@ -562,7 +562,7 @@ Public Class CCustomDateTimePicker
         txtDate.SetPosition()
     End Sub
 
-    Public Sub CDtpPicker_Validating(sender As Object, e As CancelEventArgs) Handles txtDate.Validating, txtLongDate.Validating, txtTime.Validating
+    Public Sub CDtpPicker_Validating(sender As Object, e As CancelEventArgs) Handles txtDate.Validating, txtLongDate.Validating ', txtTime.Validating
         If Not ShowLongDate Then
             If txtDate.Text Is Nothing OrElse txtDate.Text = EmptyMask OrElse txtDate.Text = "" Then
                 If ShowTime Then
@@ -572,12 +572,12 @@ Public Class CCustomDateTimePicker
                 Dim cText As String = txtDate.Text
                 Try
                     Dim dDateTime = Convert.ToDateTime(cText, _targetCulture)
-                    If ShowTime Then
-                        If Not IsValidTime(txtTime.Text) Then
-                            e.Cancel = True
-                            Exit Sub
-                        End If
-                    End If
+                    'If ShowTime Then
+                    '    If Not IsValidTime(txtTime.Text) Then
+                    '        e.Cancel = True
+                    '        Exit Sub
+                    '    End If
+                    'End If
                 Catch ex As Exception
                     e.Cancel = True
                     InformUserOfInvalidDate()
@@ -596,10 +596,11 @@ Public Class CCustomDateTimePicker
                 Try
                     Dim dDateTime = Convert.ToDateTime(cText, _targetCulture)
                     If ShowTime Then
-                        If Not IsValidTime(cText) Then
-                            e.Cancel = True
-                            Exit Sub
-                        End If
+                        ' no need to validate time already validated in gTimePicker class
+                        'If Not IsValidTime(cText) Then
+                        '    e.Cancel = True
+                        '    Exit Sub
+                        'End If
                     End If
                 Catch ex As Exception
                     e.Cancel = True
@@ -611,19 +612,19 @@ Public Class CCustomDateTimePicker
         e.Cancel = False
     End Sub
 
-    Public Function IsValidTime(cText As String) As Boolean
-        Dim retVal As Boolean = True
-        If Not (cText = $"  :  :" Or cText = "") Then
-            Dim sPattern = "([0-1]\d|2[0-3]):([0-5]\d)(:([0-5]\d))$"
-            Dim match As New Regex(sPattern)
-            Dim bIsMatch As Boolean = match.IsMatch(cText)
-            If bIsMatch = False Then
-                InformUserOfInvalidTime()
-                retVal = False
-            End If
-        End If
-        Return retVal
-    End Function
+    'Public Function IsValidTime(cText As String) As Boolean
+    '    Dim retVal As Boolean = True
+    '    If Not (cText = $"  :  :" Or cText = "") Then
+    '        Dim sPattern = "([0-1]\d|2[0-3]):([0-5]\d)(:([0-5]\d))$"
+    '        Dim match As New Regex(sPattern)
+    '        Dim bIsMatch As Boolean = match.IsMatch(cText)
+    '        If bIsMatch = False Then
+    '            InformUserOfInvalidTime()
+    '            retVal = False
+    '        End If
+    '    End If
+    '    Return retVal
+    'End Function
 
     Private Sub OnDtp_Validated(sender As Object, e As EventArgs) Handles txtDate.Validated, txtLongDate.Validated, txtTime.Validated
         If Not ShowLongDate Then
