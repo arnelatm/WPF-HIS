@@ -2,6 +2,7 @@
 Imports AATM.Common.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
+Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views.Forms
 
@@ -10,10 +11,12 @@ Namespace PresentationLayer.Views.Forms
 
         Private _reportList As New List(Of IReportView)
         Private _reportGroupList As New List(Of IReportGroupView)
+        Private _idNo As Int32
+        Private _reportGroupIdNo As Int32
         Private ReadOnly _sReportGroup As String
 
         Public Event ReportDoubleClickEvent(reportIdNo As Int16) Implements IReportSelectorView.ReportDoubleClickEvent
-        Public Event ReportGroupDoubleClickEvent(reportIdNo As Int16) Implements IReportSelectorView.ReportGroupDoubleClickEvent
+        Public Event ReportGroupClickEvent(reportIdNo As Int16) Implements IReportSelectorView.ReportGroupClickEvent
 
         Public Sub New(reportGroupParam As String)
             MyBase.New()
@@ -21,7 +24,6 @@ Namespace PresentationLayer.Views.Forms
             InitializeComponent()
             ' Add any initialization after the InitializeComponent() call.
             Me.Text = Messaging.TranslateCaption("Report Selector")
-            FormToolStrip.Visible = False
             _sReportGroup = reportGroupParam
         End Sub
 
@@ -47,30 +49,28 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property IdNo As Int16 Implements IReportSelectorView.IdNo
-        Public Property QueryForm As String Implements IReportSelectorView.QueryForm
-        Public Property ReportCode As String Implements IReportSelectorView.ReportCode
+        'Public Property IdNo As Int16 Implements IReportSelectorView.IdNo
+        'Public Property QueryForm As String Implements IReportSelectorView.QueryForm
+        'Public Property ReportCode As String Implements IReportSelectorView.ReportCode
+        'Public Property ReportFileName As String Implements IReportSelectorView.ReportFileName
+        'Public Property ReportGroupIdNo As Int16 Implements IReportSelectorView.ReportGroupIdNo
+        'Private Property IReportSelectorView_ReportName As String Implements IReportSelectorView.ReportName
+        'Public Property ReportNameAra As String Implements IReportSelectorView.ReportNameAra
+        'Public Property ReportTitle As String Implements IReportSelectorView.ReportTitle
+        'Public Property ReportTitleAra As String Implements IReportSelectorView.ReportTitleAra
+        'Public Property QueryFormParameters As String Implements IReportView.QueryFormParameters
+        'Public Property QueryParameters As String Implements IReportView.QueryParameters
+        'Public Property PrintJobIdNo As Short Implements IReportView.PrintJobIdNo
+        'Public Property Active As Boolean Implements IReportView.Active
+        'Public Property BranchIdNo As Short Implements IReportView.BranchIdNo
+        'Public Property DateCreated As Date Implements IReportView.DateCreated
+        'Public Property DatabaseName As String Implements IReportView.DatabaseName
+        'Public Property ReportOrder As Short Implements IReportView.ReportOrder
+        Public Property ViewDisplayName As String Implements IViewNew.ViewDisplayName
         Public Property ReportFileName As String Implements IReportSelectorView.ReportFileName
-        Public Property ReportGroupIdNo As Int16 Implements IReportSelectorView.ReportGroupIdNo
-        Private Property IReportSelectorView_ReportName As String Implements IReportSelectorView.ReportName
-        Public Property ReportNameAra As String Implements IReportSelectorView.ReportNameAra
-        Public Property ReportTitle As String Implements IReportSelectorView.ReportTitle
-        Public Property ReportTitleAra As String Implements IReportSelectorView.ReportTitleAra
-        Public Property QueryFormParameters As String Implements IReportView.QueryFormParameters
-        Public Property QueryParameters As String Implements IReportView.QueryParameters
-        Public Property PrintJobIdNo As Short Implements IReportView.PrintJobIdNo
-        Public Property Active As Boolean Implements IReportView.Active
-        Public Property BranchIdNo As Short Implements IReportView.BranchIdNo
-        Public Property DateCreated As Date Implements IReportView.DateCreated
-        Public Property DatabaseName As String Implements IReportView.DatabaseName
-        Public Property ReportOrder As Short Implements IReportView.ReportOrder
 
 #End Region
 
-        Protected Overrides Sub CreateMainFieldsDictionary()
-            MainFieldsDictionary = New Dictionary(Of String, Object) From
-                {}
-        End Sub
 
         Private Sub BindReportList()
             SuspendLayout()
@@ -111,20 +111,20 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ReportSelector_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
             bsReportList.ResetBindings(True)
             bsReportGroupList.ResetBindings(True)
-            PublishClickedButton(ButtonClicked.Edit)
+            'PublishClickedButton(ButtonClicked.Edit)
         End Sub
 
         Private Sub DataGridViewReportList_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewReportList.CellDoubleClick
-            IdNo = DataGridViewReportList.Rows(e.RowIndex).Cells("dgvIdNo").Value
-            RaiseEvent ReportDoubleClickEvent(IdNo)
+            _idNo = DataGridViewReportList.Rows(e.RowIndex).Cells("dgvIdNo").Value
+            RaiseEvent ReportDoubleClickEvent(_idNo)
         End Sub
 
         Private Sub DataGridViewReportGroupList_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewReportGroupList.CellClick
             If e.RowIndex < 0 Then
                 ' do nothing
             Else
-                ReportGroupIdNo = DataGridViewReportGroupList.Rows(e.RowIndex).Cells("dgvReportGroupIdNo").Value
-                RaiseEvent ReportGroupDoubleClickEvent(ReportGroupIdNo)
+                _reportGroupIdNo = DataGridViewReportGroupList.Rows(e.RowIndex).Cells("dgvReportGroupIdNo").Value
+                RaiseEvent ReportGroupClickEvent(_reportGroupIdNo)
                 BindReportList()
             End If
 

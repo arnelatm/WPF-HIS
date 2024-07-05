@@ -936,6 +936,13 @@ Namespace PresentationLayer.Views.Forms
             ShowEntryForm(formToRun)
         End Sub
 
+        Private Overloads Sub RunFormNew(Of TV, TP, TX)(param As TX)
+            Dim formToRun = Activator.CreateInstance(GetType(TV), param)
+            Dim pType As Type = GetType(TP)
+            Activator.CreateInstance(pType, {formToRun, param})
+            ShowEntryForm(formToRun)
+        End Sub
+
         Private Overloads Sub RunForm(Of TV, TP, TX, TY)(param1 As TX, param2 As TY)
             Dim formToRun = Activator.CreateInstance(GetType(TV), param1, param2)
             Dim pType As Type = GetType(TP)
@@ -1066,7 +1073,8 @@ Namespace PresentationLayer.Views.Forms
         'End Sub
 
         Private Sub SalesReportsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemOtherReports.Click
-            RunForm(Of ReportSelectorForm, ReportSelectorPresenter(Of ReportSelectorModel), String)($"IGSALES")
+            'RunForm(Of ReportSelectorForm, ReportSelectorPresenter(Of ReportSelectorModel), String)($"IGSALES")
+            RunFormNew(Of ReportSelectorForm, ReportSelectorPresenter(Of ReportSelectorModel), String)($"IGSALES")
         End Sub
 
         Private Sub DrugListToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPharmacyItem.Click

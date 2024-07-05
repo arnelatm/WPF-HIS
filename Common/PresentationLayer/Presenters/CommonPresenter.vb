@@ -23,5 +23,22 @@ Namespace PresentationLayer.Presenters
 
     End Class
 
+    Public MustInherit Class CommonPresenterNew(Of TV As IViewNew, TM As New)
+        Inherits PresenterB(Of TV, TM)
+
+        Public Sub New()
+            MyBase.New()
+        End Sub
+
+        Public Sub New(itemView As IViewNew)
+            MyBase.New(itemView)
+        End Sub
+
+        'Public Overrides Sub GoAddRecord()
+        '    MyBase.GoAddRecord()
+        '    MakeDefaultValues()
+        'End Sub
+
+    End Class
 
 End Namespace

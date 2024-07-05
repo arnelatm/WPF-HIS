@@ -11,24 +11,21 @@ Imports System.Reflection
 Namespace PresentationLayer.Presenters
 
     Public Class ReportSelectorPresenter(Of TM As New)
-        Inherits CommonPresenter(Of IReportSelectorView, TM)
+        Inherits CommonPresenterNew(Of IReportSelectorView, TM)
 
         Private _reportGroupCode As String
 
         Public Sub New(view As IReportSelectorView, reportGroupCode As String)
             MyBase.New(view)
-            WithTreeView = False
             Service = New CommonService("Report")
             TableName = "Report"
-            SortOrderKey = "ReportName"
-            AskBeforeSave = True
-            DisableSaveMemento = True
             _reportGroupCode = reportGroupCode
             AddHandler view.ReportDoubleClickEvent, AddressOf OnReportDoubleClickEvent
-            AddHandler view.ReportGroupDoubleClickEvent, AddressOf OnReportGroupDoubleClickEvent
+            AddHandler view.ReportGroupClickEvent, AddressOf OnReportGroupClickEvent
+            CreateDataSources()
         End Sub
 
-        Protected Overrides Sub CreateDataSources()
+        Private Sub CreateDataSources()
             Dim reportGroupList As List(Of ReportGroupModel) = Service.GetList(Of ReportGroupModel)
             GlobalVariables.Mapper.Map(reportGroupList, View.ReportGroupList)
             UpdateReportList(View.ReportGroupList(0).IdNo)
@@ -39,17 +36,13 @@ Namespace PresentationLayer.Presenters
             GlobalVariables.Mapper.Map(reportList, View.ReportList)
         End Sub
 
-        Public Overrides Sub GoPrintRecord()
-            'Dim dtIdPrinting As New DataTable
-            'CreateDataTable(dtIdPrinting, {{"ReportIdNo", GetType(Int32)},
-            '                               {"TransactionNumber", GetType(Int32)}
-            '                               })
+        Private Sub GoPrintRecord()
             Dim cForm
             cForm = New ReportForm(View.ReportFileName)
             cForm.Show()
         End Sub
 
-        Public Sub OnReportGroupDoubleClickEvent(reportGroupIdNo As Int16)
+        Public Sub OnReportGroupClickEvent(reportGroupIdNo As Int16)
             Dim reportList As List(Of ReportModel) = Service.GetListParametrized(Of ReportModel)(reportGroupIdNo)
             'Dim reportGroupList As List(Of ReportGroupModel) = Service.GetList(Of ReportGroupModel)
             GlobalVariables.Mapper.Map(reportList, View.ReportList)
