@@ -101,11 +101,11 @@ Namespace PresentationLayer.Views.Forms
             BindReportGroupList()
         End Sub
 
-        Private Sub ReportSelector_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
-            bsReportList.ResetBindings(True)
-            bsReportGroupList.ResetBindings(True)
-            'PublishClickedButton(ButtonClicked.Edit)
-        End Sub
+        'Private Sub ReportSelector_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        '    bsReportList.ResetBindings(True)
+        '    bsReportGroupList.ResetBindings(True)
+        '    'PublishClickedButton(ButtonClicked.Edit)
+        'End Sub
 
         Private Sub DataGridViewReportList_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewReportList.CellDoubleClick
             _idNo = DataGridViewReportList.Rows(e.RowIndex).Cells("dgvIdNo").Value
