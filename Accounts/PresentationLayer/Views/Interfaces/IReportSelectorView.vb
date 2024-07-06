@@ -9,6 +9,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property ReportList As List(Of IReportView)
         Property ReportGroupList As List(Of IReportGroupView)
         Property ReportFileName As String
+        Property BsReportGroup As BindingSource
 
         Event ReportDoubleClickEvent(reportIdNo As Int16)
         Event ReportGroupClickEvent(reportGroupIdNo As Int16)

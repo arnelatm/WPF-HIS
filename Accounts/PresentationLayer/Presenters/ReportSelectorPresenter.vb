@@ -22,6 +22,7 @@ Namespace PresentationLayer.Presenters
             _reportGroupCode = reportGroupCode
             AddHandler view.ReportDoubleClickEvent, AddressOf OnReportDoubleClickEvent
             AddHandler view.ReportGroupClickEvent, AddressOf OnReportGroupClickEvent
+            view.BsReportGroup = New BindingSource
             CreateDataSources()
         End Sub
 
@@ -29,6 +30,9 @@ Namespace PresentationLayer.Presenters
             Dim reportGroupList As List(Of ReportGroupModel) = Service.GetList(Of ReportGroupModel)
             GlobalVariables.Mapper.Map(reportGroupList, View.ReportGroupList)
             UpdateReportList(View.ReportGroupList(0).IdNo)
+
+            View.BsReportGroup.DataSource = View.ReportGroupList
+
         End Sub
 
         Private Sub UpdateReportList(reportGroupIdNo As Int16)

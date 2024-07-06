@@ -1,7 +1,6 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Common.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Events
 Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views.Forms
@@ -13,7 +12,6 @@ Namespace PresentationLayer.Views.Forms
         Private _reportGroupList As New List(Of IReportGroupView)
         Private _idNo As Int32
         Private _reportGroupIdNo As Int32
-        Private ReadOnly _sReportGroup As String
 
         Public Event ReportDoubleClickEvent(reportIdNo As Int16) Implements IReportSelectorView.ReportDoubleClickEvent
         Public Event ReportGroupClickEvent(reportIdNo As Int16) Implements IReportSelectorView.ReportGroupClickEvent
@@ -24,7 +22,6 @@ Namespace PresentationLayer.Views.Forms
             InitializeComponent()
             ' Add any initialization after the InitializeComponent() call.
             Me.Text = Messaging.TranslateCaption("Report Selector")
-            _sReportGroup = reportGroupParam
         End Sub
 
 #Region "Field Items"
@@ -45,12 +42,25 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 _reportGroupList = Value
-                BindReportGroupList()
+                'BindReportGroupList()
             End Set
         End Property
 
         Public Property ViewDisplayName As String Implements IViewNew.ViewDisplayName
         Public Property ReportFileName As String Implements IReportSelectorView.ReportFileName
+
+        Private _bsReportGroup As BindingSource
+        Public Property BsReportGroup As BindingSource Implements IReportSelectorView.BsReportGroup
+            Set(value As BindingSource)
+                _bsReportGroup = value
+                bsReportGroupList = value
+                bsReportGroupList.ResetBindings(True)
+            End Set
+            Get
+                Return _bsReportGroup
+            End Get
+
+        End Property
 
 #End Region
 
@@ -89,6 +99,8 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewReportGroupList.Refresh()
             BindReportList()
             BindReportGroupList()
+            '
+            'BindReportGroupList()
         End Sub
 
         Private Sub ReportSelector_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
