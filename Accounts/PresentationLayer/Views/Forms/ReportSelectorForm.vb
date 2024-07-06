@@ -32,7 +32,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 _reportList = Value
-                BindReportList()
+                'BindReportList()
             End Set
         End Property
 
@@ -99,8 +99,6 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewReportGroupList.Refresh()
             BindReportList()
             BindReportGroupList()
-            '
-            'BindReportGroupList()
         End Sub
 
         Private Sub ReportSelector_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown

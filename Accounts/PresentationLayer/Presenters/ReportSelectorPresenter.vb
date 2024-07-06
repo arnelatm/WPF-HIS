@@ -7,6 +7,7 @@ Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Common.ServiceLayer
 Imports AATM.Libraries.GlobalFuncNSub
 Imports System.Reflection
+Imports Telerik.WinControls.VirtualKeyboard
 
 Namespace PresentationLayer.Presenters
 
@@ -29,10 +30,10 @@ Namespace PresentationLayer.Presenters
         Private Sub CreateDataSources()
             Dim reportGroupList As List(Of ReportGroupModel) = Service.GetList(Of ReportGroupModel)
             GlobalVariables.Mapper.Map(reportGroupList, View.ReportGroupList)
-            UpdateReportList(View.ReportGroupList(0).IdNo)
-
+            If reportGroupList.Count() > 0 Then
+                UpdateReportList(reportGroupList.Item(0).IdNo)
+            End If
             View.BsReportGroup.DataSource = View.ReportGroupList
-
         End Sub
 
         Private Sub UpdateReportList(reportGroupIdNo As Int16)
