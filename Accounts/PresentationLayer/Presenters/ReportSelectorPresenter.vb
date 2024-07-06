@@ -44,7 +44,6 @@ Namespace PresentationLayer.Presenters
 
         Public Sub OnReportGroupClickEvent(reportGroupIdNo As Int16)
             Dim reportList As List(Of ReportModel) = Service.GetListParametrized(Of ReportModel)(reportGroupIdNo)
-            'Dim reportGroupList As List(Of ReportGroupModel) = Service.GetList(Of ReportGroupModel)
             GlobalVariables.Mapper.Map(reportList, View.ReportList)
         End Sub
 
@@ -54,15 +53,7 @@ Namespace PresentationLayer.Presenters
             report.ReportFileName = IIf(Strings.Right(report.ReportFileName, 4).ToLower() = $".rpt", report.ReportFileName, report.ReportFileName + ".rpt")
             If queryForm Is Nothing Then
                 MessageBox.Show("Missing QueryForm Parameter on Report")
-                'Dim cForm = New ReportFormIGroup(report.ReportFileName + ".rpt", CultureInfo.CurrentCulture, If(parameters.Count() = 0, Nothing, parameters))
-                'cForm.Show()
             Else
-                'Dim formToRun As Form= Activator.CreateInstance(GetType(DocumentEntryTv))
-                'Dim pType As Type
-                'formToRun.Presenter = Activator.CreateInstance(pType, {formToRun})
-                'formToRun.AddOnOpen = True
-                'formToRun.QuitOnSave = True
-                'formToRun.Show()
                 Select Case queryForm
                     Case "ContactDateRangeForm"
                         Dim formToRun As New ContactDateRangeForm(report)

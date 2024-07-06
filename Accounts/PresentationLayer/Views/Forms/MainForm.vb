@@ -717,8 +717,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub Login(changePassword)
             Dim logForm As New LoginEntry(changePassword)
-            Dim presenter = New LoginPresenter(Of UserModel)(logForm)
-            Using logForm
+            Using New LoginPresenter(Of UserModel)(logForm)
                 Try
                     If logForm.ShowDialog() = DialogResult.OK Then
                         If logForm.LoginOk Then

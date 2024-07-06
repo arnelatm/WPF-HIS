@@ -5,7 +5,6 @@ Namespace PresentationLayer.Views.Interfaces
 
     Public Interface IReportSelectorView
         Inherits IViewNew
-        'Inherits IReportViewNew
 
         Property ReportList As List(Of IReportView)
         Property ReportGroupList As List(Of IReportGroupView)
