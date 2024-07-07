@@ -32,7 +32,6 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 _reportList = Value
-                'bsReportGroupList.DataSource = Value
                 bsReportList.DataSource = Value
                 bsReportList.ResetBindings(False)
             End Set
@@ -70,8 +69,6 @@ Namespace PresentationLayer.Views.Forms
             bsReportList.DataSource = ReportList
             bsReportGroupList.ResetBindings(False)
             bsReportList.ResetBindings(False)
-            'DataGridViewReportList.Refresh()
-            'DataGridViewReportGroupList.Refresh()
         End Sub
 
 
@@ -86,7 +83,6 @@ Namespace PresentationLayer.Views.Forms
             Else
                 RaiseEvent ReportGroupSelected(GetReportGroupIdNo())
                 bsReportList.DataSource = ReportList
-                'DataGridViewReportList.DataSource = ReportList
             End If
             DataGridViewReportList.Refresh()
         End Sub
