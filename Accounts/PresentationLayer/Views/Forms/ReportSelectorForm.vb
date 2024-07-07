@@ -16,6 +16,7 @@ Namespace PresentationLayer.Views.Forms
         Public Event ReportDoubleClickEvent(reportIdNo As Int16) Implements IReportSelectorView.ReportDoubleClickEvent
         Public Event ReportGroupClickEvent(reportIdNo As Int16) Implements IReportSelectorView.ReportGroupClickEvent
         Public Event ReportGroupBindingEvent(sender As Object) Implements IReportSelectorView.ReportGroupBindingEvent
+        Public Event ReportListBindingEvent(sender As Object) Implements IReportSelectorView.ReportListBindingEvent
 
         Public Sub New(reportGroupParam As String)
             MyBase.New()
@@ -33,47 +34,31 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 _reportList = Value
-                'BindReportList()
             End Set
         End Property
-
         Public Property ReportGroupList As List(Of IReportGroupView) Implements IReportSelectorView.ReportGroupList
             Get
                 Return _reportGroupList
             End Get
             Set
                 _reportGroupList = Value
-                'BindReportGroupList()
             End Set
         End Property
-
         Public Property ViewDisplayName As String Implements IViewNew.ViewDisplayName
         Public Property ReportFileName As String Implements IReportSelectorView.ReportFileName
-
-        'Public Property BsReportGroup As BindingSource Implements IReportSelectorView.BsReportGroup
-        '    Set(value As BindingSource)
-        '        bsReportGroupList = value
-        '        bsReportGroupList.ResetBindings(True)
-        '    End Set
-        'End Property
 
 #End Region
 
 
         Private Sub BindReportList()
-            SuspendLayout()
-            bsReportList.DataSource = Nothing
-            DataGridViewReportList.Refresh()
-            bsReportList.DataSource = ReportList
-            bsReportList.AllowNew = True
             With DataGridViewReportList
                 .AutoGenerateColumns = False
-                .DataSource = bsReportList
+                .AllowUserToAddRows = False
             End With
             With DataGridViewReportList.Columns
                 dgvIdNo.DisplayOnly = True
             End With
-            ResumeLayout()
+            RaiseEvent ReportListBindingEvent(DataGridViewReportList)
         End Sub
 
 

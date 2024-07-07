@@ -7,7 +7,6 @@ Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Common.ServiceLayer
 Imports AATM.Libraries.GlobalFuncNSub
 Imports System.Reflection
-Imports Telerik.WinControls.VirtualKeyboard
 
 Namespace PresentationLayer.Presenters
 
@@ -24,7 +23,7 @@ Namespace PresentationLayer.Presenters
             AddHandler view.ReportDoubleClickEvent, AddressOf OnReportDoubleClickEvent
             AddHandler view.ReportGroupClickEvent, AddressOf OnReportGroupClickEvent
             AddHandler view.ReportGroupBindingEvent, AddressOf OnReportGroupBindingEvent
-            'view.BsReportGroup = New BindingSource
+            AddHandler view.ReportListBindingEvent, AddressOf OnReportListBindingEvent
             CreateDataSources()
         End Sub
 
@@ -34,7 +33,6 @@ Namespace PresentationLayer.Presenters
             If reportGroupList.Count() > 0 Then
                 UpdateReportList(reportGroupList.Item(0).IdNo)
             End If
-            'View.BsReportGroup.DataSource = View.ReportGroupList
         End Sub
 
         Private Sub UpdateReportList(reportGroupIdNo As Int16)
@@ -80,6 +78,10 @@ Namespace PresentationLayer.Presenters
             sender.DataSource = View.ReportGroupList
         End Sub
 
+        Private Sub OnReportListBindingEvent(sender As Object)
+            sender.DataSource = Nothing
+            sender.DataSource = View.ReportList
+        End Sub
 
     End Class
 
