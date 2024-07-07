@@ -24,7 +24,7 @@ Namespace PresentationLayer.Presenters
             AddHandler view.ReportDoubleClickEvent, AddressOf OnReportDoubleClickEvent
             AddHandler view.ReportGroupClickEvent, AddressOf OnReportGroupClickEvent
             AddHandler view.ReportGroupBindingEvent, AddressOf OnReportGroupBindingEvent
-            view.BsReportGroup = New BindingSource
+            'view.BsReportGroup = New BindingSource
             CreateDataSources()
         End Sub
 

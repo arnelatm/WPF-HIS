@@ -50,12 +50,12 @@ Namespace PresentationLayer.Views.Forms
         Public Property ViewDisplayName As String Implements IViewNew.ViewDisplayName
         Public Property ReportFileName As String Implements IReportSelectorView.ReportFileName
 
-        Public WriteOnly Property BsReportGroup As BindingSource Implements IReportSelectorView.BsReportGroup
-            Set(value As BindingSource)
-                bsReportGroupList = value
-                bsReportGroupList.ResetBindings(True)
-            End Set
-        End Property
+        'Public Property BsReportGroup As BindingSource Implements IReportSelectorView.BsReportGroup
+        '    Set(value As BindingSource)
+        '        bsReportGroupList = value
+        '        bsReportGroupList.ResetBindings(True)
+        '    End Set
+        'End Property
 
 #End Region
 
