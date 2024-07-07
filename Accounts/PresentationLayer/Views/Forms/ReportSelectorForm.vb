@@ -15,6 +15,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Event ReportDoubleClickEvent(reportIdNo As Int16) Implements IReportSelectorView.ReportDoubleClickEvent
         Public Event ReportGroupClickEvent(reportIdNo As Int16) Implements IReportSelectorView.ReportGroupClickEvent
+        Public Event SetupBindingsEvent(sender As Object) Implements IReportSelectorView.SetupBindingsEvent
 
         Public Sub New(reportGroupParam As String)
             MyBase.New()
@@ -81,18 +82,29 @@ Namespace PresentationLayer.Views.Forms
             ResumeLayout()
         End Sub
 
+
         Private Sub BindReportGroupList()
-            SuspendLayout()
-            bsReportGroupList.DataSource = Nothing
-            DataGridViewReportGroupList.Refresh()
-            bsReportGroupList.DataSource = ReportGroupList
-            bsReportGroupList.AllowNew = True
+            RaiseEvent SetupBindingsEvent(Me)
             With DataGridViewReportGroupList
                 .AutoGenerateColumns = False
-                .DataSource = bsReportGroupList
+                .AllowUserToAddRows = False
+                .DataSource = BsReportGroup
             End With
             ResumeLayout()
         End Sub
+
+        'Private Sub BindReportGroupList()
+        '    SuspendLayout()
+        '    bsReportGroupList.DataSource = Nothing
+        '    DataGridViewReportGroupList.Refresh()
+        '    bsReportGroupList.DataSource = ReportGroupList
+        '    bsReportGroupList.AllowNew = True
+        '    With DataGridViewReportGroupList
+        '        .AutoGenerateColumns = False
+        '        .DataSource = bsReportGroupList
+        '    End With
+        '    ResumeLayout()
+        'End Sub
 
         Private Sub ReportSelector_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             DataGridViewReportList.Refresh()

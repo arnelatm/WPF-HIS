@@ -23,6 +23,7 @@ Namespace PresentationLayer.Presenters
             _reportGroupCode = reportGroupCode
             AddHandler view.ReportDoubleClickEvent, AddressOf OnReportDoubleClickEvent
             AddHandler view.ReportGroupClickEvent, AddressOf OnReportGroupClickEvent
+            AddHandler view.SetupBindingsEvent, AddressOf OnSetupBindingsEvent
             view.BsReportGroup = New BindingSource
             CreateDataSources()
         End Sub
@@ -73,6 +74,14 @@ Namespace PresentationLayer.Presenters
             End If
 
         End Sub
+
+
+
+        Private Sub OnSetupBindingsEvent(sender As Object)
+            View.BsReportGroup.DataSource = Nothing
+            View.BsReportGroup.DataSource = View.ReportGroupList
+        End Sub
+
 
     End Class
 

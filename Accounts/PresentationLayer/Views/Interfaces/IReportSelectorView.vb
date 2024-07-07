@@ -13,7 +13,7 @@ Namespace PresentationLayer.Views.Interfaces
 
         Event ReportDoubleClickEvent(reportIdNo As Int16)
         Event ReportGroupClickEvent(reportGroupIdNo As Int16)
-
+        Event SetupBindingsEvent(sender As Object)
     End Interface
 
 End Namespace
