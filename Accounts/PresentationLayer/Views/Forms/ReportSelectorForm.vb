@@ -15,8 +15,6 @@ Namespace PresentationLayer.Views.Forms
 
         Public Event PrintReportEvent(reportIdNo As Int16) Implements IReportSelectorView.PrintReportEvent
         Public Event ReportGroupSelected(reportIdNo As Int16) Implements IReportSelectorView.ReportGroupSelected
-        'Public Event ReportGroupBindingEvent(sender As Object) Implements IReportSelectorView.ReportGroupBindingEvent
-        ' Event ReportListBindingEvent(sender As Object) Implements IReportSelectorView.ReportListBindingEvent
 
         Public Sub New(reportGroupParam As String)
             MyBase.New()
@@ -34,7 +32,8 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 _reportList = Value
-                bsReportGroupList.DataSource = Value
+                'bsReportGroupList.DataSource = Value
+                bsReportList.DataSource = Value
                 bsReportList.ResetBindings(False)
             End Set
         End Property
@@ -46,6 +45,8 @@ Namespace PresentationLayer.Views.Forms
                 _reportGroupList = Value
                 bsReportGroupList.DataSource = Value
                 bsReportGroupList.ResetBindings(False)
+                RaiseEvent ReportGroupSelected(GetReportGroupIdNo())
+
             End Set
         End Property
         Public Property ViewDisplayName As String Implements IViewNew.ViewDisplayName
@@ -54,8 +55,6 @@ Namespace PresentationLayer.Views.Forms
 #End Region
 
         Private Sub ReportSelector_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            'BindReportGroup()
-            'BindReportList()
             With DataGridViewReportGroupList
                 .AutoGenerateColumns = False
                 .AllowUserToAddRows = False
@@ -69,10 +68,10 @@ Namespace PresentationLayer.Views.Forms
             End With
             bsReportGroupList.DataSource = ReportGroupList
             bsReportList.DataSource = ReportList
-            'DataGridViewReportGroupList.DataSource = bsReportGroupList
-            'DataGridViewReportList.DataSource = bsReportList
-            DataGridViewReportList.Refresh()
-            DataGridViewReportGroupList.Refresh()
+            bsReportGroupList.ResetBindings(False)
+            bsReportList.ResetBindings(False)
+            'DataGridViewReportList.Refresh()
+            'DataGridViewReportGroupList.Refresh()
         End Sub
 
 
@@ -81,45 +80,23 @@ Namespace PresentationLayer.Views.Forms
             RaiseEvent PrintReportEvent(_idNo)
         End Sub
 
-        'Private Sub BindReportGroup()
-        '    With DataGridViewReportGroupList
-        '        .AutoGenerateColumns = False
-        '        .AllowUserToAddRows = False
-        '    End With
-        '    'bsReportGroupList.DataSource = ReportGroupList
-        '    RaiseEvent ReportGroupSelected(GetReportGroupIdNo)
-        'End Sub
-
-        'Private Sub BindReportList()
-        '    With DataGridViewReportList
-        '        .AutoGenerateColumns = False
-        '        .AllowUserToAddRows = False
-        '    End With
-        '    With DataGridViewReportList.Columns
-        '        dgvIdNo.DisplayOnly = True
-        '    End With
-        '    'DataGridViewReportGroupList.DataSource = ReportGroupList
-        '    bsReportList.DataSource = ReportList
-        '    DataGridViewReportList.Refresh()
-        '    'RaiseEvent ReportListBindingEvent(DataGridViewReportList)
-        'End Sub
-
-
         Private Sub DataGridViewReportGroupList_Click(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewReportGroupList.CellClick
             If e.RowIndex < 0 Then
                 ' do nothing
             Else
-                '_reportGroupIdNo = GetReportGroupIdNo()
                 RaiseEvent ReportGroupSelected(GetReportGroupIdNo())
-                DataGridViewReportList.DataSource = ReportList
+                bsReportList.DataSource = ReportList
+                'DataGridViewReportList.DataSource = ReportList
             End If
             DataGridViewReportList.Refresh()
         End Sub
 
         Private Function GetReportGroupIdNo() As Integer
             Dim selectedReportIdNo As Int16 = 0
-            If bsReportGroupList.Current IsNot Nothing Then
-                selectedReportIdNo = bsReportGroupList.Current.IdNo ' DataGridViewReportGroupList.Rows(e.RowIndex).Cells("dgvReportGroupIdNo").Value
+            If bsReportGroupList.Current Is Nothing Then
+                Debugger.Break()
+            Else
+                selectedReportIdNo = bsReportGroupList.Current.IdNo
             End If
             Return selectedReportIdNo
         End Function
