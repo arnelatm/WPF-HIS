@@ -23,7 +23,7 @@ Namespace PresentationLayer.Presenters
             _reportGroupCode = reportGroupCode
             AddHandler view.ReportDoubleClickEvent, AddressOf OnReportDoubleClickEvent
             AddHandler view.ReportGroupClickEvent, AddressOf OnReportGroupClickEvent
-            AddHandler view.SetupBindingsEvent, AddressOf OnSetupBindingsEvent
+            AddHandler view.ReportGroupBindingEvent, AddressOf OnReportGroupBindingEvent
             view.BsReportGroup = New BindingSource
             CreateDataSources()
         End Sub
@@ -34,7 +34,7 @@ Namespace PresentationLayer.Presenters
             If reportGroupList.Count() > 0 Then
                 UpdateReportList(reportGroupList.Item(0).IdNo)
             End If
-            View.BsReportGroup.DataSource = View.ReportGroupList
+            'View.BsReportGroup.DataSource = View.ReportGroupList
         End Sub
 
         Private Sub UpdateReportList(reportGroupIdNo As Int16)
@@ -75,11 +75,9 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
-
-
-        Private Sub OnSetupBindingsEvent(sender As Object)
-            View.BsReportGroup.DataSource = Nothing
-            View.BsReportGroup.DataSource = View.ReportGroupList
+        Private Sub OnReportGroupBindingEvent(sender As Object)
+            sender.DataSource = Nothing
+            sender.DataSource = View.ReportGroupList
         End Sub
 
 
