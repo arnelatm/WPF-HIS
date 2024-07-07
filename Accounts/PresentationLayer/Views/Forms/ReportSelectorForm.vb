@@ -74,8 +74,6 @@ Namespace PresentationLayer.Views.Forms
         Private Sub SetupGridDataBindings()
             bsReportGroupList.DataSource = ReportGroupList
             bsReportList.DataSource = ReportList
-            'bsReportGroupList.ResetBindings(False)
-            'bsReportList.ResetBindings(False)
         End Sub
 
         Private Sub DataGridViewReportList_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewReportList.CellDoubleClick
