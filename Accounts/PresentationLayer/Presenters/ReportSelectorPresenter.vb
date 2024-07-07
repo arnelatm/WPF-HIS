@@ -20,10 +20,10 @@ Namespace PresentationLayer.Presenters
             Service = New CommonService("Report")
             TableName = "Report"
             _reportGroupCode = reportGroupCode
-            AddHandler view.ReportDoubleClickEvent, AddressOf OnReportDoubleClickEvent
-            AddHandler view.ReportGroupClickEvent, AddressOf OnReportGroupClickEvent
-            AddHandler view.ReportGroupBindingEvent, AddressOf OnReportGroupBindingEvent
-            AddHandler view.ReportListBindingEvent, AddressOf OnReportListBindingEvent
+            AddHandler view.PrintReportEvent, AddressOf OnPrintReportEvent
+            AddHandler view.ReportGroupSelected, AddressOf OnSelectedREportGroup
+            'AddHandler view.ReportGroupBindingEvent, AddressOf OnReportGroupBindingEvent
+            'AddHandler view.ReportListBindingEvent, AddressOf OnReportListBindingEvent
             CreateDataSources()
         End Sub
 
@@ -46,12 +46,12 @@ Namespace PresentationLayer.Presenters
             cForm.Show()
         End Sub
 
-        Public Sub OnReportGroupClickEvent(reportGroupIdNo As Int16)
+        Public Sub OnSelectedREportGroup(reportGroupIdNo As Int16)
             Dim reportList As List(Of ReportModel) = Service.GetListParametrized(Of ReportModel)(reportGroupIdNo)
             GlobalVariables.Mapper.Map(reportList, View.ReportList)
         End Sub
 
-        Public Sub OnReportDoubleClickEvent(reportIdNo As Int16)
+        Public Sub OnPrintReportEvent(reportIdNo As Int16)
             Dim report As ReportModel = Service.GetRecordByIdNo(Of ReportModel)(reportIdNo)
             Dim queryForm As String = report.QueryForm
             report.ReportFileName = IIf(Strings.Right(report.ReportFileName, 4).ToLower() = $".rpt", report.ReportFileName, report.ReportFileName + ".rpt")
@@ -73,15 +73,15 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
-        Private Sub OnReportGroupBindingEvent(sender As Object)
-            sender.DataSource = Nothing
-            sender.DataSource = View.ReportGroupList
-        End Sub
+        'Private Sub OnReportGroupBindingEvent(sender As Object)
+        '    sender.DataSource = Nothing
+        '    sender.DataSource = View.ReportGroupList
+        'End Sub
 
-        Private Sub OnReportListBindingEvent(sender As Object)
-            sender.DataSource = Nothing
-            sender.DataSource = View.ReportList
-        End Sub
+        'Private Sub OnReportListBindingEvent(sender As Object)
+        '    sender.DataSource = Nothing
+        '    sender.DataSource = View.ReportList
+        'End Sub
 
     End Class
 

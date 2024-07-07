@@ -13,10 +13,10 @@ Namespace PresentationLayer.Views.Forms
         Private _idNo As Int32
         Private _reportGroupIdNo As Int32
 
-        Public Event ReportDoubleClickEvent(reportIdNo As Int16) Implements IReportSelectorView.ReportDoubleClickEvent
-        Public Event ReportGroupClickEvent(reportIdNo As Int16) Implements IReportSelectorView.ReportGroupClickEvent
-        Public Event ReportGroupBindingEvent(sender As Object) Implements IReportSelectorView.ReportGroupBindingEvent
-        Public Event ReportListBindingEvent(sender As Object) Implements IReportSelectorView.ReportListBindingEvent
+        Public Event PrintReportEvent(reportIdNo As Int16) Implements IReportSelectorView.PrintReportEvent
+        Public Event ReportGroupSelected(reportIdNo As Int16) Implements IReportSelectorView.ReportGroupSelected
+        'Public Event ReportGroupBindingEvent(sender As Object) Implements IReportSelectorView.ReportGroupBindingEvent
+        ' Event ReportListBindingEvent(sender As Object) Implements IReportSelectorView.ReportListBindingEvent
 
         Public Sub New(reportGroupParam As String)
             MyBase.New()
@@ -34,6 +34,8 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 _reportList = Value
+                bsReportGroupList.DataSource = Value
+                bsReportList.ResetBindings(False)
             End Set
         End Property
         Public Property ReportGroupList As List(Of IReportGroupView) Implements IReportSelectorView.ReportGroupList
@@ -42,6 +44,8 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 _reportGroupList = Value
+                bsReportGroupList.DataSource = Value
+                bsReportGroupList.ResetBindings(False)
             End Set
         End Property
         Public Property ViewDisplayName As String Implements IViewNew.ViewDisplayName
@@ -49,8 +53,13 @@ Namespace PresentationLayer.Views.Forms
 
 #End Region
 
-
-        Private Sub BindReportList()
+        Private Sub ReportSelector_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            'BindReportGroup()
+            'BindReportList()
+            With DataGridViewReportGroupList
+                .AutoGenerateColumns = False
+                .AllowUserToAddRows = False
+            End With
             With DataGridViewReportList
                 .AutoGenerateColumns = False
                 .AllowUserToAddRows = False
@@ -58,41 +67,62 @@ Namespace PresentationLayer.Views.Forms
             With DataGridViewReportList.Columns
                 dgvIdNo.DisplayOnly = True
             End With
-            RaiseEvent ReportListBindingEvent(DataGridViewReportList)
-        End Sub
-
-
-        Private Sub BindReportGroup()
-            With DataGridViewReportGroupList
-                .AutoGenerateColumns = False
-                .AllowUserToAddRows = False
-            End With
-            RaiseEvent ReportGroupBindingEvent(DataGridViewReportGroupList)
-        End Sub
-
-        Private Sub ReportSelector_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            bsReportGroupList.DataSource = ReportGroupList
+            bsReportList.DataSource = ReportList
+            'DataGridViewReportGroupList.DataSource = bsReportGroupList
+            'DataGridViewReportList.DataSource = bsReportList
             DataGridViewReportList.Refresh()
             DataGridViewReportGroupList.Refresh()
-            BindReportList()
-            BindReportGroup()
         End Sub
+
 
         Private Sub DataGridViewReportList_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewReportList.CellDoubleClick
             _idNo = DataGridViewReportList.Rows(e.RowIndex).Cells("dgvIdNo").Value
-            RaiseEvent ReportDoubleClickEvent(_idNo)
+            RaiseEvent PrintReportEvent(_idNo)
         End Sub
 
-        Private Sub DataGridViewReportGroupList_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewReportGroupList.CellClick
+        'Private Sub BindReportGroup()
+        '    With DataGridViewReportGroupList
+        '        .AutoGenerateColumns = False
+        '        .AllowUserToAddRows = False
+        '    End With
+        '    'bsReportGroupList.DataSource = ReportGroupList
+        '    RaiseEvent ReportGroupSelected(GetReportGroupIdNo)
+        'End Sub
+
+        'Private Sub BindReportList()
+        '    With DataGridViewReportList
+        '        .AutoGenerateColumns = False
+        '        .AllowUserToAddRows = False
+        '    End With
+        '    With DataGridViewReportList.Columns
+        '        dgvIdNo.DisplayOnly = True
+        '    End With
+        '    'DataGridViewReportGroupList.DataSource = ReportGroupList
+        '    bsReportList.DataSource = ReportList
+        '    DataGridViewReportList.Refresh()
+        '    'RaiseEvent ReportListBindingEvent(DataGridViewReportList)
+        'End Sub
+
+
+        Private Sub DataGridViewReportGroupList_Click(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewReportGroupList.CellClick
             If e.RowIndex < 0 Then
                 ' do nothing
             Else
-                _reportGroupIdNo = DataGridViewReportGroupList.Rows(e.RowIndex).Cells("dgvReportGroupIdNo").Value
-                RaiseEvent ReportGroupClickEvent(_reportGroupIdNo)
-                BindReportList()
+                '_reportGroupIdNo = GetReportGroupIdNo()
+                RaiseEvent ReportGroupSelected(GetReportGroupIdNo())
+                DataGridViewReportList.DataSource = ReportList
             End If
-
+            DataGridViewReportList.Refresh()
         End Sub
 
+        Private Function GetReportGroupIdNo() As Integer
+            Dim selectedReportIdNo As Int16 = 0
+            If bsReportGroupList.Current IsNot Nothing Then
+                selectedReportIdNo = bsReportGroupList.Current.IdNo ' DataGridViewReportGroupList.Rows(e.RowIndex).Cells("dgvReportGroupIdNo").Value
+            End If
+            Return selectedReportIdNo
+        End Function
     End Class
 
 End Namespace
