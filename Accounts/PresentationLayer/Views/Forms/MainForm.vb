@@ -935,11 +935,24 @@ Namespace PresentationLayer.Views.Forms
             ShowEntryForm(formToRun)
         End Sub
 
+        Private Overloads Sub RunFormNew(Of TV, TP)()
+            Dim formToRun = Activator.CreateInstance(GetType(TV))
+            Dim pType As Type = GetType(TP)
+            formToRun.Presenter = Activator.CreateInstance(pType, {formToRun})
+            Dim form As Form = formToRun
+            Invoker.InvokeFunction(formToRun, "Show")
+        End Sub
+
         Private Overloads Sub RunFormNew(Of TV, TP, TX)(param As TX)
             Dim formToRun = Activator.CreateInstance(GetType(TV), param)
             Dim pType As Type = GetType(TP)
             Activator.CreateInstance(pType, {formToRun, param})
-            ShowEntryForm(formToRun)
+            If (MdiChildren.Length > GlobalVariables.MaximumOpenForms - 1) Then
+                Dim maxOpenForms As String = GlobalVariables.MaximumOpenForms.ToString()
+                Messaging.Show(True, "MsgTooManyFormsOpen", "Too many forms open. You can only open up to {maxOpenForms} forms at the same time.", "Too many forms open", {"maxOpenForms", maxOpenForms})
+            Else
+                Invoker.InvokeFunction(formToRun, "Show")
+            End If
         End Sub
 
         Private Overloads Sub RunForm(Of TV, TP, TX, TY)(param1 As TX, param2 As TY)
@@ -1072,7 +1085,6 @@ Namespace PresentationLayer.Views.Forms
         'End Sub
 
         Private Sub SalesReportsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemOtherReports.Click
-            'RunForm(Of ReportSelectorForm, ReportSelectorPresenter(Of ReportSelectorModel), String)($"IGSALES")
             RunFormNew(Of ReportSelectorForm, ReportSelectorPresenter(Of ReportSelectorModel), String)($"IGSALES")
         End Sub
 

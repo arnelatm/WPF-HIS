@@ -45,7 +45,6 @@ Namespace PresentationLayer.Views.Forms
                 bsReportGroupList.DataSource = Value
                 bsReportGroupList.ResetBindings(False)
                 RaiseEvent ReportGroupSelected(GetReportGroupIdNo())
-
             End Set
         End Property
         Public Property ViewDisplayName As String Implements IViewNew.ViewDisplayName
@@ -54,6 +53,10 @@ Namespace PresentationLayer.Views.Forms
 #End Region
 
         Private Sub ReportSelector_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            SetupDataGrids()
+        End Sub
+
+        Private Sub SetupDataGrids()
             With DataGridViewReportGroupList
                 .AutoGenerateColumns = False
                 .AllowUserToAddRows = False
@@ -65,12 +68,15 @@ Namespace PresentationLayer.Views.Forms
             With DataGridViewReportList.Columns
                 dgvIdNo.DisplayOnly = True
             End With
-            bsReportGroupList.DataSource = ReportGroupList
-            bsReportList.DataSource = ReportList
-            bsReportGroupList.ResetBindings(False)
-            bsReportList.ResetBindings(False)
+            SetupGridDataBindings()
         End Sub
 
+        Private Sub SetupGridDataBindings()
+            bsReportGroupList.DataSource = ReportGroupList
+            bsReportList.DataSource = ReportList
+            'bsReportGroupList.ResetBindings(False)
+            'bsReportList.ResetBindings(False)
+        End Sub
 
         Private Sub DataGridViewReportList_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewReportList.CellDoubleClick
             _idNo = DataGridViewReportList.Rows(e.RowIndex).Cells("dgvIdNo").Value
