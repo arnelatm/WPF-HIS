@@ -1,7 +1,6 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Common.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views.Forms
 
@@ -42,8 +41,8 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property ViewDisplayName As String Implements IViewNew.ViewDisplayName
         Public Property ReportFileName As String Implements IReportSelectorView.ReportFileName
+
 
 #End Region
 

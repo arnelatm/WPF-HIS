@@ -34,10 +34,10 @@ Public Class PresenterB(Of TV As IViewNew, TM As New)
             If itemView.ViewDisplayName IsNot Nothing Then
                 systemViewName = itemView.ViewDisplayName.Trim()
                 If systemViewName Is Nothing Or systemViewName = "" Then
-                    systemViewName = DirectCast(itemView, System.Windows.Forms.Control).Name.Trim()
+                    systemViewName = View.FormName.Trim()
                 End If
             Else
-                systemViewName = DirectCast(itemView, System.Windows.Forms.Control).Name.Trim()
+                systemViewName = View.FormName.Trim()
             End If
             Dim data As List(Of DefaultFieldValue) = DefaultFieldValueService.GetDefaultFieldValues(systemViewName)
             ViewDefaultFieldValues = New List(Of DefaultFieldValueModel)

@@ -24,13 +24,14 @@ Partial Class DFormBasic
         Me.StoreCaptions1 = New AATM.Libraries.MessagingLibrary.StoreCaptions()
         Me.AppDataDac = New AATM.Libraries.MessagingLibrary.Dac()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
-        Me.btnArabic = New System.Windows.Forms.ToolStripButton()
+        Me.CopyToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.CutToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.btnArabic = New System.Windows.Forms.ToolStripButton()
         Me.btnOriginal = New System.Windows.Forms.ToolStripButton()
         Me.btnTranslate = New System.Windows.Forms.ToolStripButton()
         Me.HelpToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.btnQuit = New System.Windows.Forms.ToolStripButton()
-        Me.CopyToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.btnDebug = New System.Windows.Forms.ToolStripButton()
         CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ToolStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -46,12 +47,30 @@ Partial Class DFormBasic
         'ToolStrip1
         '
         Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopyToolStripButton, Me.CutToolStripButton, Me.btnArabic, Me.btnOriginal, Me.btnTranslate, Me.HelpToolStripButton, Me.btnQuit})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopyToolStripButton, Me.CutToolStripButton, Me.btnArabic, Me.btnOriginal, Me.btnTranslate, Me.HelpToolStripButton, Me.btnQuit, Me.btnDebug})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.Size = New System.Drawing.Size(1067, 27)
         Me.ToolStrip1.TabIndex = 0
         Me.ToolStrip1.Text = "ToolStrip1"
+        '
+        'CopyToolStripButton
+        '
+        Me.CopyToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.CopyToolStripButton.Image = CType(resources.GetObject("CopyToolStripButton.Image"), System.Drawing.Image)
+        Me.CopyToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.CopyToolStripButton.Name = "CopyToolStripButton"
+        Me.CopyToolStripButton.Size = New System.Drawing.Size(29, 24)
+        Me.CopyToolStripButton.Text = "&Copy"
+        '
+        'CutToolStripButton
+        '
+        Me.CutToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.CutToolStripButton.Image = CType(resources.GetObject("CutToolStripButton.Image"), System.Drawing.Image)
+        Me.CutToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.CutToolStripButton.Name = "CutToolStripButton"
+        Me.CutToolStripButton.Size = New System.Drawing.Size(29, 24)
+        Me.CutToolStripButton.Text = "C&ut"
         '
         'btnArabic
         '
@@ -63,15 +82,6 @@ Partial Class DFormBasic
         Me.btnArabic.Text = "Arabic"
         Me.btnArabic.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnArabic.ToolTipText = "Arabic"
-        '
-        'CutToolStripButton
-        '
-        Me.CutToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.CutToolStripButton.Image = CType(resources.GetObject("CutToolStripButton.Image"), System.Drawing.Image)
-        Me.CutToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.CutToolStripButton.Name = "CutToolStripButton"
-        Me.CutToolStripButton.Size = New System.Drawing.Size(29, 24)
-        Me.CutToolStripButton.Text = "C&ut"
         '
         'btnOriginal
         '
@@ -112,21 +122,21 @@ Partial Class DFormBasic
         Me.btnQuit.Size = New System.Drawing.Size(29, 24)
         Me.btnQuit.Text = "Exit and close this form"
         '
-        'CopyToolStripButton
+        'btnDebug
         '
-        Me.CopyToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.CopyToolStripButton.Image = CType(resources.GetObject("CopyToolStripButton.Image"), System.Drawing.Image)
-        Me.CopyToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.CopyToolStripButton.Name = "CopyToolStripButton"
-        Me.CopyToolStripButton.Size = New System.Drawing.Size(29, 24)
-        Me.CopyToolStripButton.Text = "&Copy"
+        Me.btnDebug.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.btnDebug.Image = CType(resources.GetObject("btnDebug.Image"), System.Drawing.Image)
+        Me.btnDebug.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnDebug.Name = "btnDebug"
+        Me.btnDebug.Size = New System.Drawing.Size(29, 24)
+        Me.btnDebug.Text = "Set debugger on."
         '
-        'DFormBase
+        'DFormBasic
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.ClientSize = New System.Drawing.Size(1067, 554)
         Me.Controls.Add(Me.ToolStrip1)
-        Me.Name = "DFormBase"
+        Me.Name = "DFormBasic"
         Me.Text = "DFormBase"
         CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ToolStrip1.ResumeLayout(False)
@@ -147,4 +157,5 @@ Partial Class DFormBasic
     Friend WithEvents HelpToolStripButton As Windows.Forms.ToolStripButton
     Friend WithEvents btnQuit As Windows.Forms.ToolStripButton
     Friend WithEvents CopyToolStripButton As Windows.Forms.ToolStripButton
+    Friend WithEvents btnDebug As Windows.Forms.ToolStripButton
 End Class

@@ -140,6 +140,12 @@ Public Class LoginEntry
 
     Public Property ViewDisplayName As String Implements Views.IViewNew.ViewDisplayName
 
+    Public ReadOnly Property FormName As String Implements Views.IViewNew.FormName
+        Get
+            Return Name
+        End Get
+    End Property
+
     Private Shared Sub ClearPasswordSetting()
         My.Settings.UserName = ""
         My.Settings.Oterkis = ""
