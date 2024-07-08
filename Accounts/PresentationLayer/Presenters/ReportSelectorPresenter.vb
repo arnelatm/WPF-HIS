@@ -48,7 +48,8 @@ Namespace PresentationLayer.Presenters
             bsReportList.ResetBindings(False)
         End Sub
 
-        Public Sub OnPrintReportEvent(reportIdNo As Int16)
+        Public Sub OnPrintReportEvent(bsReportList As BindingSource)
+            Dim reportIdNo = bsReportList.Current.IdNo
             Dim report As ReportModel = Service.GetRecordByIdNo(Of ReportModel)(reportIdNo)
             Dim queryForm As String = report.QueryForm
             report.ReportFileName = IIf(Strings.Right(report.ReportFileName, 4).ToLower() = $".rpt", report.ReportFileName, report.ReportFileName + ".rpt")

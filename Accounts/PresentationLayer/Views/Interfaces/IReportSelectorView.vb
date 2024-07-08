@@ -10,10 +10,9 @@ Namespace PresentationLayer.Views.Interfaces
         Property ReportGroupList As List(Of IReportGroupView)
         Property ReportFileName As String
 
-        Event PrintReportEvent(reportIdNo As Int16)
+        Event PrintReportEvent(bsReportList As BindingSource)
         Event SelectedReportGroupChangedEvent(ByRef bsReportGroupList As BindingSource, ByRef bsReportList As BindingSource)
-        'Event ReportGroupBindingEvent(sender As Object)
-        'Event ReportListBindingEvent(sender As Object)
+
     End Interface
 
 End Namespace

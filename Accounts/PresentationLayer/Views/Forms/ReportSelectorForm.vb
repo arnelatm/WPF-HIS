@@ -11,7 +11,7 @@ Namespace PresentationLayer.Views.Forms
         Private _reportList As New List(Of IReportView)
         Private _reportGroupList As New List(Of IReportGroupView)
 
-        Public Event PrintReportEvent(reportIdNo As Int16) Implements IReportSelectorView.PrintReportEvent
+        Public Event PrintReportEvent(bsReportList As BindingSource) Implements IReportSelectorView.PrintReportEvent
         Public Event SelectedReportGroupChangedEvent(ByRef bsReportGroupList As BindingSource, ByRef bsReportList As BindingSource) Implements IReportSelectorView.SelectedReportGroupChangedEvent
 
         Public Sub New() ' reportGroupParam As String)
@@ -30,8 +30,6 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 _reportList = Value
-                bsReportList.DataSource = Value
-                bsReportList.ResetBindings(False)
             End Set
         End Property
 
@@ -43,6 +41,7 @@ Namespace PresentationLayer.Views.Forms
                 _reportGroupList = Value
             End Set
         End Property
+
         Public Property ViewDisplayName As String Implements IViewNew.ViewDisplayName
         Public Property ReportFileName As String Implements IReportSelectorView.ReportFileName
 
@@ -73,18 +72,11 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub DataGridViewReportList_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewReportList.CellDoubleClick
-            Dim _idNo = DataGridViewReportList.Rows(e.RowIndex).Cells("dgvIdNo").Value
-            RaiseEvent PrintReportEvent(_idNo)
+            RaiseEvent PrintReportEvent(bsReportList)
         End Sub
 
         Private Sub DataGridViewReportGroupList_Click(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewReportGroupList.CellClick, DataGridViewReportGroupList.CellEnter
-            If e.RowIndex < 0 Then
-                ' do nothing
-            Else
-                RaiseEvent SelectedReportGroupChangedEvent(bsReportGroupList, bsReportList) ',GetReportGroupIdNo())
-                bsReportList.DataSource = ReportList
-            End If
-            DataGridViewReportList.Refresh()
+            RaiseEvent SelectedReportGroupChangedEvent(bsReportGroupList, bsReportList)
         End Sub
 
     End Class
