@@ -11,7 +11,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property ReportFileName As String
 
         Event PrintReportEvent(reportIdNo As Int16)
-        Event SelectedReportGroupChangedEvent(reportGroupIdNo As Int16)
+        Event SelectedReportGroupChangedEvent(ByRef bsReportGroupList As BindingSource, ByRef bsReportList As BindingSource)
         'Event ReportGroupBindingEvent(sender As Object)
         'Event ReportListBindingEvent(sender As Object)
     End Interface

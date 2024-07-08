@@ -12,7 +12,7 @@ Namespace PresentationLayer.Views.Forms
         Private _reportGroupList As New List(Of IReportGroupView)
 
         Public Event PrintReportEvent(reportIdNo As Int16) Implements IReportSelectorView.PrintReportEvent
-        Public Event SelectedReportGroupChangedEvent(reportIdNo As Int16) Implements IReportSelectorView.SelectedReportGroupChangedEvent
+        Public Event SelectedReportGroupChangedEvent(ByRef bsReportGroupList As BindingSource, ByRef bsReportList As BindingSource) Implements IReportSelectorView.SelectedReportGroupChangedEvent
 
         Public Sub New() ' reportGroupParam As String)
             MyBase.New()
@@ -41,9 +41,6 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 _reportGroupList = Value
-                bsReportGroupList.DataSource = Value
-                bsReportGroupList.ResetBindings(False)
-                RaiseEvent SelectedReportGroupChangedEvent(GetReportGroupIdNo())
             End Set
         End Property
         Public Property ViewDisplayName As String Implements IViewNew.ViewDisplayName
@@ -84,21 +81,12 @@ Namespace PresentationLayer.Views.Forms
             If e.RowIndex < 0 Then
                 ' do nothing
             Else
-                RaiseEvent SelectedReportGroupChangedEvent(GetReportGroupIdNo())
+                RaiseEvent SelectedReportGroupChangedEvent(bsReportGroupList, bsReportList) ',GetReportGroupIdNo())
                 bsReportList.DataSource = ReportList
             End If
             DataGridViewReportList.Refresh()
         End Sub
 
-        Private Function GetReportGroupIdNo() As Integer
-            Dim selectedReportIdNo As Int16 = 0
-            If bsReportGroupList.Current Is Nothing Then
-                Debugger.Break()
-            Else
-                selectedReportIdNo = bsReportGroupList.Current.IdNo
-            End If
-            Return selectedReportIdNo
-        End Function
     End Class
 
 End Namespace

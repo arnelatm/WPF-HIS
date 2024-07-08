@@ -17,7 +17,7 @@ Namespace PresentationLayer.Presenters
             Service = New CommonService("Report")
             TableName = "Report"
             AddHandler view.PrintReportEvent, AddressOf OnPrintReportEvent
-            AddHandler view.SelectedReportGroupChangedEvent, AddressOf OnSelectedReportGroup
+            AddHandler view.SelectedReportGroupChangedEvent, AddressOf OnSelectedGroupChangedEvent
             CreateDataSources()
         End Sub
 
@@ -40,9 +40,12 @@ Namespace PresentationLayer.Presenters
             cForm.Show()
         End Sub
 
-        Public Sub OnSelectedReportGroup(reportGroupIdNo As Int16)
+        Public Sub OnSelectedGroupChangedEvent(ByRef bsReportGroupList As BindingSource, ByRef bsReportList As BindingSource)
+            Dim reportGroupIdNo As Int32 = GetReportGroupIdNo(bsReportGroupList)
             Dim reportList As List(Of ReportModel) = Service.GetListParametrized(Of ReportModel)(reportGroupIdNo)
             GlobalVariables.Mapper.Map(reportList, View.ReportList)
+            bsReportList.DataSource = View.ReportList
+            bsReportList.ResetBindings(False)
         End Sub
 
         Public Sub OnPrintReportEvent(reportIdNo As Int16)
@@ -66,6 +69,16 @@ Namespace PresentationLayer.Presenters
             End If
 
         End Sub
+
+        Private Function GetReportGroupIdNo(bsReportGroupList As BindingSource) As Integer
+            Dim selectedReportIdNo As Int16 = 0
+            If bsReportGroupList.Current Is Nothing Then
+                Debugger.Break()
+            Else
+                selectedReportIdNo = bsReportGroupList.Current.IdNo
+            End If
+            Return selectedReportIdNo
+        End Function
 
     End Class
 
