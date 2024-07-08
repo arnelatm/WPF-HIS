@@ -1,5 +1,6 @@
 ﻿Imports System.Drawing
 Imports System.Globalization
+Imports System.Reflection
 Imports System.Windows.Forms
 Imports AATM.Libraries
 Imports AATM.Libraries.CBaseControlsLibrary
@@ -152,3 +153,75 @@ Public Class ControlSettingsSaver
 
 End Class
 
+
+'Public Class FormFunctions
+
+'    Public Shared Function GetFormByName(ByVal formName As String) As Form
+'        Dim T As Type = GetFormObjectByName(formName)
+'        Return CType(Activator.CreateInstance(T), Form)
+'    End Function
+
+'    Private Shared Function GetFormObjectByName(formName As String) As Type
+'        'first try: in case the full namespace has been provided (as it should ;-) )
+'        Dim T As Type = Type.GetType(formName, False)
+'        'if not found, search for it
+'        If T Is Nothing Then T = FindType(formName)
+'        'if still not found, throw exception
+'        If T Is Nothing Then Throw New Exception(formName + " could not be found")
+'        Return T
+'    End Function
+
+'    'Public Shared Function GetFormByName(ByVal formName As String, parameter As ArrayList) As Form
+'    '    Dim T As Type = GetFormObjectByName(formName)
+'    '    Return CType(Activator.CreateInstance(T, parameter), Form)
+'    'End Function
+
+'    Public Shared Function GetFormByName(ByVal formName As String, report As ReportModel) As Form
+'        Dim T As Type = GetFormObjectByName(formName)
+'        Return CType(Activator.CreateInstance(T, report), Form)
+'    End Function
+
+'#Region "Assemblies and types"
+
+'    Public Shared Function GetAllAssemblies() As ArrayList
+'        Dim al As New ArrayList
+'        Dim a As [Assembly] = [Assembly].GetEntryAssembly()
+'        FillAssemblies(a, al)
+'        Return al
+'    End Function
+
+'    Private Shared Sub FillAssemblies(ByVal a As [Assembly], ByVal al As ArrayList)
+'        If Not al.Contains(a) Then
+'            al.Add(a)
+'            Dim an As AssemblyName
+'            For Each an In a.GetReferencedAssemblies()
+'                If Not an.Name.StartsWith("System") Then FillAssemblies([Assembly].Load(an), al)
+'            Next
+'        End If
+'    End Sub
+
+'    Public Shared Function GetAllTypes() As ArrayList
+'        Dim a As [Assembly], t As Type, al As New ArrayList
+'        For Each a In GetAllAssemblies()
+'            For Each t In a.GetTypes
+'                If Not al.Contains(t) Then al.Add(t)
+'            Next
+'        Next
+'        Return al
+'    End Function
+
+'    Public Shared Function FindType(ByVal Name As String) As Type
+'        Dim T As Type
+'        For Each T In GetAllTypes()
+'            If T.Name = Name Then Return T
+'        Next
+'        Return Nothing
+'    End Function
+
+'#End Region
+
+'End Class
+
+''example call:
+''Dim f As Form = FormFunctions.GetFormByName("Form1")
+''f.Show()

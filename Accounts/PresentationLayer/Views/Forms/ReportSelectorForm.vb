@@ -10,11 +10,9 @@ Namespace PresentationLayer.Views.Forms
 
         Private _reportList As New List(Of IReportView)
         Private _reportGroupList As New List(Of IReportGroupView)
-        Private _idNo As Int32
-        Private _reportGroupIdNo As Int32
 
         Public Event PrintReportEvent(reportIdNo As Int16) Implements IReportSelectorView.PrintReportEvent
-        Public Event ReportGroupSelected(reportIdNo As Int16) Implements IReportSelectorView.ReportGroupSelected
+        Public Event SelectedReportGroupChangedEvent(reportIdNo As Int16) Implements IReportSelectorView.SelectedReportGroupChangedEvent
 
         Public Sub New() ' reportGroupParam As String)
             MyBase.New()
@@ -26,7 +24,7 @@ Namespace PresentationLayer.Views.Forms
 
 #Region "Field Items"
 
-        Private Property ReportList As List(Of IReportView) Implements IReportSelectorView.ReportList
+        Public Property ReportList As List(Of IReportView) Implements IReportSelectorView.ReportList
             Get
                 Return _reportList
             End Get
@@ -36,6 +34,7 @@ Namespace PresentationLayer.Views.Forms
                 bsReportList.ResetBindings(False)
             End Set
         End Property
+
         Public Property ReportGroupList As List(Of IReportGroupView) Implements IReportSelectorView.ReportGroupList
             Get
                 Return _reportGroupList
@@ -44,7 +43,7 @@ Namespace PresentationLayer.Views.Forms
                 _reportGroupList = Value
                 bsReportGroupList.DataSource = Value
                 bsReportGroupList.ResetBindings(False)
-                RaiseEvent ReportGroupSelected(GetReportGroupIdNo())
+                RaiseEvent SelectedReportGroupChangedEvent(GetReportGroupIdNo())
             End Set
         End Property
         Public Property ViewDisplayName As String Implements IViewNew.ViewDisplayName
@@ -77,15 +76,15 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub DataGridViewReportList_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewReportList.CellDoubleClick
-            _idNo = DataGridViewReportList.Rows(e.RowIndex).Cells("dgvIdNo").Value
+            Dim _idNo = DataGridViewReportList.Rows(e.RowIndex).Cells("dgvIdNo").Value
             RaiseEvent PrintReportEvent(_idNo)
         End Sub
 
-        Private Sub DataGridViewReportGroupList_Click(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewReportGroupList.CellClick
+        Private Sub DataGridViewReportGroupList_Click(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewReportGroupList.CellClick, DataGridViewReportGroupList.CellEnter
             If e.RowIndex < 0 Then
                 ' do nothing
             Else
-                RaiseEvent ReportGroupSelected(GetReportGroupIdNo())
+                RaiseEvent SelectedReportGroupChangedEvent(GetReportGroupIdNo())
                 bsReportList.DataSource = ReportList
             End If
             DataGridViewReportList.Refresh()
