@@ -16,7 +16,7 @@ Namespace PresentationLayer.Views.Forms
         Public Event PrintReportEvent(reportIdNo As Int16) Implements IReportSelectorView.PrintReportEvent
         Public Event ReportGroupSelected(reportIdNo As Int16) Implements IReportSelectorView.ReportGroupSelected
 
-        Public Sub New(reportGroupParam As String)
+        Public Sub New() ' reportGroupParam As String)
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()

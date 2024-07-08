@@ -13,17 +13,18 @@ Namespace PresentationLayer.Presenters
     Public Class ReportSelectorPresenter(Of TM As New)
         Inherits CommonPresenterNew(Of IReportSelectorView, TM)
 
-        Private _reportGroupCode As String
+        'Private _reportGroupCode As String
 
-        Public Sub New(view As IReportSelectorView, reportGroupCode As String)
+        Public Sub New()
+        End Sub
+
+        Public Sub New(view As IReportSelectorView) ', reportGroupCode As String)
             MyBase.New(view)
             Service = New CommonService("Report")
             TableName = "Report"
-            _reportGroupCode = reportGroupCode
+            '_reportGroupCode = reportGroupCode
             AddHandler view.PrintReportEvent, AddressOf OnPrintReportEvent
-            AddHandler view.ReportGroupSelected, AddressOf OnSelectedREportGroup
-            'AddHandler view.ReportGroupBindingEvent, AddressOf OnReportGroupBindingEvent
-            'AddHandler view.ReportListBindingEvent, AddressOf OnReportListBindingEvent
+            AddHandler view.ReportGroupSelected, AddressOf OnSelectedReportGroup
             CreateDataSources()
         End Sub
 
@@ -46,7 +47,7 @@ Namespace PresentationLayer.Presenters
             cForm.Show()
         End Sub
 
-        Public Sub OnSelectedREportGroup(reportGroupIdNo As Int16)
+        Public Sub OnSelectedReportGroup(reportGroupIdNo As Int16)
             Dim reportList As List(Of ReportModel) = Service.GetListParametrized(Of ReportModel)(reportGroupIdNo)
             GlobalVariables.Mapper.Map(reportList, View.ReportList)
         End Sub
@@ -72,16 +73,6 @@ Namespace PresentationLayer.Presenters
             End If
 
         End Sub
-
-        'Private Sub OnReportGroupBindingEvent(sender As Object)
-        '    sender.DataSource = Nothing
-        '    sender.DataSource = View.ReportGroupList
-        'End Sub
-
-        'Private Sub OnReportListBindingEvent(sender As Object)
-        '    sender.DataSource = Nothing
-        '    sender.DataSource = View.ReportList
-        'End Sub
 
     End Class
 

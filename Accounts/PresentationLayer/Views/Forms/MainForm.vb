@@ -938,8 +938,8 @@ Namespace PresentationLayer.Views.Forms
         Private Overloads Sub RunFormNew(Of TV, TP)()
             Dim formToRun = Activator.CreateInstance(GetType(TV))
             Dim pType As Type = GetType(TP)
-            formToRun.Presenter = Activator.CreateInstance(pType, {formToRun})
-            Dim form As Form = formToRun
+            Activator.CreateInstance(pType, {formToRun})
+            ' form As Form = formToRun
             Invoker.InvokeFunction(formToRun, "Show")
         End Sub
 
@@ -1085,7 +1085,8 @@ Namespace PresentationLayer.Views.Forms
         'End Sub
 
         Private Sub SalesReportsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemOtherReports.Click
-            RunFormNew(Of ReportSelectorForm, ReportSelectorPresenter(Of ReportSelectorModel), String)($"IGSALES")
+            RunFormNew(Of ReportSelectorForm, ReportSelectorPresenter(Of ReportSelectorModel))()
+            'RunFormNew(Of ReportSelectorForm, ReportSelectorPresenter(Of ReportSelectorModel), String)($"IGSALES")
         End Sub
 
         Private Sub DrugListToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPharmacyItem.Click
