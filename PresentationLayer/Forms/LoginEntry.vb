@@ -1,4 +1,5 @@
 ﻿Imports System.ComponentModel
+Imports System.Globalization
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Views.Interfaces
@@ -6,6 +7,7 @@ Imports AATM.PresentationLayer.Views.Interfaces
 Public Class LoginEntry
     Implements IUserViewNew
 
+    Private _brIdData As DataTable
     Private _oterkis As String
 
     Public Sub New()
@@ -69,11 +71,14 @@ Public Class LoginEntry
 
     End Sub
 
-    Public Event Login As IUserViewNew.LoginEventHandler Implements IUserViewNew.Login
     Public Event ArabicDisplayRequested As Views.IViewNew.ArabicDisplayRequestedEventHandler Implements Views.IViewNew.ArabicDisplayRequested
-    Public Event OrigLanguageDisplayRequested As Views.IViewNew.OrigLanguageDisplayRequestedEventHandler Implements Views.IViewNew.OrigLanguageDisplayRequested
 
-    Public Property LoginOk As Boolean Implements IUserViewNew.LoginOk
+    Public Event FormLoaded As Views.IViewNew.FormLoadedEventHandler Implements Views.IViewNew.FormLoaded
+
+    Public Event FormTranslating As Views.IViewNew.FormTranslatingEventHandler Implements Views.IViewNew.FormTranslating
+
+    Public Event Login As IUserViewNew.LoginEventHandler Implements IUserViewNew.Login
+    Public Event OrigLanguageDisplayRequested As Views.IViewNew.OrigLanguageDisplayRequestedEventHandler Implements Views.IViewNew.OrigLanguageDisplayRequested
     Public Property Active As Boolean Implements IUserViewNew.Active
     Public Property BranchIdNo As Int16
         Get
@@ -83,8 +88,6 @@ Public Class LoginEntry
             cboBranchIdNo.SetValue(Value)
         End Set
     End Property
-
-    Private _brIdData As DataTable
 
     Public Property BranchIdNoData As DataTable Implements IUserViewNew.BranchIdNoData
         Get
@@ -97,19 +100,8 @@ Public Class LoginEntry
     End Property
 
     Public Property CancelClose As Boolean Implements IUserViewNew.CancelClose
+    Public Property CaptionCollection As Collection Implements Views.IViewNew.CaptionCollection
     Public Property ChangePassword As Boolean Implements IUserViewNew.ChangePassword
-    Public Property EmployeeIdNo As Int32? Implements IUserViewNew.EmployeeIdNo
-    Public Property IdNo As Int16 Implements IUserViewNew.IdNo
-
-    Public Property MainTableName As String = "User"
-    Public Property NewPassword As String Implements IUserViewNew.NewPassword
-        Get
-            Return textNewPassword.Text.Trim()
-        End Get
-        Set(value As String)
-            textNewPassword.Text = value
-        End Set
-    End Property
     Public Property ConfirmedPassword As String Implements IUserViewNew.ConfirmedPassword
         Get
             Return textConfirmedPassword.Text.Trim()
@@ -119,6 +111,25 @@ Public Class LoginEntry
         End Set
     End Property
 
+    Public Property EmployeeIdNo As Int32? Implements IUserViewNew.EmployeeIdNo
+    Public Property FormCulture As CultureInfo Implements Views.IViewNew.FormCulture
+    Public ReadOnly Property FormName As String Implements Views.IViewNew.FormName
+        Get
+            Return Name
+        End Get
+    End Property
+
+    Public Property IdNo As Int16 Implements IUserViewNew.IdNo
+    Public Property LoginOk As Boolean Implements IUserViewNew.LoginOk
+    Public Property MainTableName As String = "User"
+    Public Property NewPassword As String Implements IUserViewNew.NewPassword
+        Get
+            Return textNewPassword.Text.Trim()
+        End Get
+        Set(value As String)
+            textNewPassword.Text = value
+        End Set
+    End Property
     Public Property Password As String Implements IUserViewNew.Password
         Get
             Return textBoxPassword.Text.Trim()
@@ -128,6 +139,7 @@ Public Class LoginEntry
         End Set
     End Property
 
+    Public Property RightToLeftDisplay As String Implements Views.IViewNew.RightToLeftDisplay
     Public Property SecurityGroupIdNo As Short Implements IUserViewNew.SecurityGroupIdNo
 
     Public Property SecurityLevel As Short Implements IUserViewNew.SecurityLevel
@@ -142,13 +154,6 @@ Public Class LoginEntry
     End Property
 
     Public Property ViewDisplayName As String Implements Views.IViewNew.ViewDisplayName
-
-    Public ReadOnly Property FormName As String Implements Views.IViewNew.FormName
-        Get
-            Return Name
-        End Get
-    End Property
-
     Private Shared Sub ClearPasswordSetting()
         My.Settings.UserName = ""
         My.Settings.Oterkis = ""
@@ -159,6 +164,11 @@ Public Class LoginEntry
 
 
 
+    Private Sub AfterSuccessfulLogin()
+        SaveUserPasswordSetting()
+        GlobalVariables.BranchIdNo = cboBranchIdNo.SelectedValue
+    End Sub
+
     Private Sub Btn_Login_Click(sender As Object, e As EventArgs) Handles btn_Login.Click
         _oterkis = textBoxPassword.Text
         RaiseEvent Login()
@@ -166,10 +176,8 @@ Public Class LoginEntry
             AfterSuccessfulLogin()
         End If
     End Sub
-
-    Private Sub AfterSuccessfulLogin()
-        SaveUserPasswordSetting()
-        GlobalVariables.BranchIdNo = cboBranchIdNo.SelectedValue
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        Close()
     End Sub
 
     Private Sub FormLogin_Closing(sender As Object, e As CancelEventArgs)
@@ -198,15 +206,6 @@ Public Class LoginEntry
         _textConfirmedPassword.DisplayOnly = False
     End Sub
 
-    Private Sub SaveUserPasswordSetting()
-        If Not chkSaveUserNameAndPassword.Checked Then
-            ClearPasswordSetting()
-        Else
-            SavePasswordSetting()
-        End If
-        GlobalVariables.BranchIdNo = cboBranchIdNo.SelectedValue
-    End Sub
-
     Private Sub SavePasswordSetting()
         My.Settings.UserName = txtUserName.Text.Trim()
         My.Settings.Oterkis = _oterkis
@@ -215,7 +214,12 @@ Public Class LoginEntry
         My.Settings.Save()
     End Sub
 
-    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        Close()
+    Private Sub SaveUserPasswordSetting()
+        If Not chkSaveUserNameAndPassword.Checked Then
+            ClearPasswordSetting()
+        Else
+            SavePasswordSetting()
+        End If
+        GlobalVariables.BranchIdNo = cboBranchIdNo.SelectedValue
     End Sub
 End Class

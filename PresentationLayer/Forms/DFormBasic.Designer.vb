@@ -30,8 +30,8 @@ Partial Class DFormBasic
         Me.btnOriginal = New System.Windows.Forms.ToolStripButton()
         Me.btnTranslate = New System.Windows.Forms.ToolStripButton()
         Me.HelpToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.btnQuit = New System.Windows.Forms.ToolStripButton()
         Me.btnDebug = New System.Windows.Forms.ToolStripButton()
+        Me.btnQuit = New System.Windows.Forms.ToolStripButton()
         CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ToolStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -47,10 +47,10 @@ Partial Class DFormBasic
         'ToolStrip1
         '
         Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopyToolStripButton, Me.CutToolStripButton, Me.btnArabic, Me.btnOriginal, Me.btnTranslate, Me.HelpToolStripButton, Me.btnQuit, Me.btnDebug})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopyToolStripButton, Me.CutToolStripButton, Me.btnArabic, Me.btnOriginal, Me.btnTranslate, Me.HelpToolStripButton, Me.btnDebug, Me.btnQuit})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(1067, 27)
+        Me.ToolStrip1.Size = New System.Drawing.Size(800, 27)
         Me.ToolStrip1.TabIndex = 0
         Me.ToolStrip1.Text = "ToolStrip1"
         '
@@ -60,7 +60,7 @@ Partial Class DFormBasic
         Me.CopyToolStripButton.Image = CType(resources.GetObject("CopyToolStripButton.Image"), System.Drawing.Image)
         Me.CopyToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.CopyToolStripButton.Name = "CopyToolStripButton"
-        Me.CopyToolStripButton.Size = New System.Drawing.Size(29, 24)
+        Me.CopyToolStripButton.Size = New System.Drawing.Size(24, 24)
         Me.CopyToolStripButton.Text = "&Copy"
         '
         'CutToolStripButton
@@ -69,7 +69,7 @@ Partial Class DFormBasic
         Me.CutToolStripButton.Image = CType(resources.GetObject("CutToolStripButton.Image"), System.Drawing.Image)
         Me.CutToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.CutToolStripButton.Name = "CutToolStripButton"
-        Me.CutToolStripButton.Size = New System.Drawing.Size(29, 24)
+        Me.CutToolStripButton.Size = New System.Drawing.Size(24, 24)
         Me.CutToolStripButton.Text = "C&ut"
         '
         'btnArabic
@@ -78,7 +78,7 @@ Partial Class DFormBasic
         Me.btnArabic.Font = New System.Drawing.Font("Arial Rounded MT Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnArabic.Image = CType(resources.GetObject("btnArabic.Image"), System.Drawing.Image)
         Me.btnArabic.Name = "btnArabic"
-        Me.btnArabic.Size = New System.Drawing.Size(29, 24)
+        Me.btnArabic.Size = New System.Drawing.Size(24, 24)
         Me.btnArabic.Text = "Arabic"
         Me.btnArabic.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnArabic.ToolTipText = "Arabic"
@@ -89,7 +89,7 @@ Partial Class DFormBasic
         Me.btnOriginal.Image = CType(resources.GetObject("btnOriginal.Image"), System.Drawing.Image)
         Me.btnOriginal.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnOriginal.Name = "btnOriginal"
-        Me.btnOriginal.Size = New System.Drawing.Size(29, 24)
+        Me.btnOriginal.Size = New System.Drawing.Size(24, 24)
         Me.btnOriginal.Text = "English"
         '
         'btnTranslate
@@ -101,7 +101,7 @@ Partial Class DFormBasic
         Me.btnTranslate.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnTranslate.Margin = New System.Windows.Forms.Padding(1)
         Me.btnTranslate.Name = "btnTranslate"
-        Me.btnTranslate.Size = New System.Drawing.Size(29, 25)
+        Me.btnTranslate.Size = New System.Drawing.Size(23, 25)
         Me.btnTranslate.Text = "Translate"
         '
         'HelpToolStripButton
@@ -110,17 +110,8 @@ Partial Class DFormBasic
         Me.HelpToolStripButton.Image = CType(resources.GetObject("HelpToolStripButton.Image"), System.Drawing.Image)
         Me.HelpToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.HelpToolStripButton.Name = "HelpToolStripButton"
-        Me.HelpToolStripButton.Size = New System.Drawing.Size(29, 24)
+        Me.HelpToolStripButton.Size = New System.Drawing.Size(24, 24)
         Me.HelpToolStripButton.Text = "He&lp"
-        '
-        'btnQuit
-        '
-        Me.btnQuit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.btnQuit.Image = CType(resources.GetObject("btnQuit.Image"), System.Drawing.Image)
-        Me.btnQuit.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnQuit.Name = "btnQuit"
-        Me.btnQuit.Size = New System.Drawing.Size(29, 24)
-        Me.btnQuit.Text = "Exit and close this form"
         '
         'btnDebug
         '
@@ -128,13 +119,22 @@ Partial Class DFormBasic
         Me.btnDebug.Image = CType(resources.GetObject("btnDebug.Image"), System.Drawing.Image)
         Me.btnDebug.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnDebug.Name = "btnDebug"
-        Me.btnDebug.Size = New System.Drawing.Size(29, 24)
+        Me.btnDebug.Size = New System.Drawing.Size(24, 24)
         Me.btnDebug.Text = "Set debugger on."
+        '
+        'btnQuit
+        '
+        Me.btnQuit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.btnQuit.Image = CType(resources.GetObject("btnQuit.Image"), System.Drawing.Image)
+        Me.btnQuit.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnQuit.Name = "btnQuit"
+        Me.btnQuit.Size = New System.Drawing.Size(24, 24)
+        Me.btnQuit.Text = "Exit and close this form"
         '
         'DFormBasic
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
-        Me.ClientSize = New System.Drawing.Size(1067, 554)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.ClientSize = New System.Drawing.Size(800, 450)
         Me.Controls.Add(Me.ToolStrip1)
         Me.Name = "DFormBasic"
         Me.Text = "DFormBase"

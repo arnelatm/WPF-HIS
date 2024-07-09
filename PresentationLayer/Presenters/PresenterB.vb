@@ -7,16 +7,20 @@ Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries
 Imports System.Globalization
 Imports System.Windows.Forms
+Imports AATM.Libraries.MessagingLibrary
 
 Public Class PresenterB(Of TV As IViewNew, TM As New)
 
     Public Service As Object
+
 
     Public Property View As TV
     Public MyErrorProvider As New ErrorProviderExtended
     Protected DataFilter As String = Nothing
     Protected OriginalModel
     Protected DefaultFieldValueService As New DefaultFieldValueService
+    Protected TranslationDac As Dac
+
     Public Property ViewDefaultFieldValues As List(Of DefaultFieldValueModel)
 
     Public Property TableName As String
@@ -25,6 +29,16 @@ Public Class PresenterB(Of TV As IViewNew, TM As New)
         Service = New Service()
         AddHandler View.OrigLanguageDisplayRequested, AddressOf OnOrigLanguageDisplayRequested
         AddHandler View.ArabicDisplayRequested, AddressOf OnArabicDisplayRequested
+        AddHandler View.FormTranslating, AddressOf OnFormTranslating
+        AddHandler View.FormLoaded, AddressOf OnFormLoaded
+    End Sub
+
+    Private Sub OnFormLoaded(sender As Object, captionCollection As Collection)
+
+    End Sub
+
+    Private Sub OnFormTranslating(form As Object)
+        TranslateForm(form)
     End Sub
 
     Public Overridable Sub OnArabicDisplayRequested()
