@@ -248,10 +248,6 @@ Public Class StoreCaptions
         End Try
     End Sub
 
-    'Public Sub StoreMessage(ByVal message As Object)
-    '    InsertMessage(message)
-    'End Sub
-
     Private Sub SetMenuStripItems(dropDownItems As ToolStripItemCollection, subMenuName As String, systemViewIdNo As Int16)
         'Try
         '    For Each obj As Object In dropDownItems
@@ -437,75 +433,5 @@ Public Class StoreCaptions
         Return _dAc1.ExecScalar(Of Int16)(cmd, params)
     End Function
 
-    'Friend Function IsTranslatable(ByVal ctrl As Control)
-    '    Dim retVal As Boolean = False
-    '    If o.GetType().GetInterfaces().Contains(GetType(ISomething)) Then
-    '        ' The interface is implemented
-    '    End If
-    '    Return retVal
-    'End Function
-
-    'Friend Function IsTranslatable(ByVal ctrl As Control)
-    '    If TypeOf ctrl Is Label OrElse
-    '               TypeOf ctrl Is Button OrElse
-    '               TypeOf ctrl Is CheckBox OrElse
-    '               TypeOf ctrl Is RadioButton OrElse
-    '               TypeOf ctrl Is DataGrid OrElse
-    '               TypeOf ctrl Is ToolStrip OrElse
-    '               TypeOf ctrl Is TabControl OrElse
-    '               TypeOf ctrl Is TabPage OrElse
-    '               TypeOf ctrl Is GroupBox Then
-    '        Return True
-    '    Else
-    '        Return False
-    '    End If
-    'End Function
-
-    'Friend Function IsTranslatable(ByVal ctrl As Control)
-    '    If TypeOf ctrl Is CButton OrElse
-    '       TypeOf ctrl Is CLabel OrElse
-    '       TypeOf ctrl Is CCheckBox OrElse
-    '       TypeOf ctrl Is CRadioButton OrElse
-    '       TypeOf ctrl Is CtDataGridView OrElse
-    '       TypeOf ctrl Is CGroupBox OrElse
-    '       TypeOf ctrl Is CTabControl OrElse
-    '       TypeOf ctrl Is CTabPage OrElse
-    '       TypeOf ctrl Is Label OrElse
-    '       TypeOf ctrl Is Button OrElse
-    '       TypeOf ctrl Is CheckBox OrElse
-    '       TypeOf ctrl Is RadioButton OrElse
-    '       TypeOf ctrl Is DataGrid OrElse
-    '       TypeOf ctrl Is ToolStrip OrElse
-    '       TypeOf ctrl Is TabControl OrElse
-    '       TypeOf ctrl Is TabPage OrElse
-    '       TypeOf ctrl Is GroupBox Then
-    '        Return True
-    '    Else
-    '        Return False
-    '    End If
-    'End Function
-
-    'Friend Sub StoreMenuItems(
-    '                          ByVal micoll As MenuItem.MenuItemCollection,
-    '                          ByVal mLevel As String)
-    '    For I As Int16 = 0 To micoll.Count - 1
-    '        Dim mi As MenuItem
-    '        mi = micoll.Item(I)
-    '        Dim localMLevel As String = mLevel + I.ToString
-    '        Captions.Add(mi.Text, localMLevel)
-    '        InsertWord(mi.Text)
-    '        If mi.MenuItems.Count > 0 Then _
-    '            StoreMenuItems(mi.MenuItems, localMLevel)
-    '    Next
-    'End Sub
-
-    'Private Function FindControlRecursive(ByVal list As List(Of Control), ByVal parentControl As Control) As List(Of Control)
-    '    If parentControl Is Nothing Then Return list
-    '    list.Add(parentControl)
-    '    For Each child As Control In parentControl.Controls
-    '        FindControlRecursive(list, child)
-    '    Next
-    '    Return list
-    'End Function
 
 End Class

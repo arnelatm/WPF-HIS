@@ -235,58 +235,6 @@ Public Class DFormBasic
         End If
     End Sub
 
-    Private Sub TranslateButton(cCtrl As Control)
-        Dim o = CType(cCtrl, CButton)
-        Dim cButton = CType(cCtrl, CButton)
-        Dim cFileName = "btn" + o.OriginalImageName
-        If cButton.Image IsNot Nothing And cButton.OriginalImageName IsNot Nothing Then
-            If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
-                Dim cCurrentCulture = CultureInfo.CurrentCulture.Name.Replace("-", "_")
-                cFileName = "btn" + o.OriginalImageName.ToLower() + "_" + cCurrentCulture.ToLower()
-            Else
-                cFileName = "btn" + o.OriginalImageName.ToLower()
-            End If
-        End If
-        If GlobalResources.My.Resources.ResourceManager.GetObject(cFileName) IsNot Nothing Then
-            cButton.Image = GlobalResources.My.Resources.ResourceManager.GetObject(cFileName)
-        End If
-    End Sub
 
-    Private Sub TranslateDataGridView(ByRef CtDataGridView As DataGridView)
-        Dim cGrid As DataGridView = CtDataGridView
-        Dim r As String
-        For Each column As DataGridViewColumn In cGrid.Columns
-            r = Dv.Find(column.HeaderText)
-            If r >= 0 Then
-                column.HeaderText = Dv(r).Item("TranslatedCaption")
-            Else
-                column.HeaderText = column.Tag
-            End If
-        Next
-    End Sub
-
-    Private Sub TranslateMenuStripItems(dropDownItems As ToolStripItemCollection, subMenuName As String)
-        Try
-            For Each obj As Object In dropDownItems
-                Dim subMenu = TryCast(obj, ToolStripMenuItem)
-                If subMenu IsNot Nothing Then
-                    Dim r As Int16
-                    r = Dv.Find(obj.Tag)
-                    If r > 0 Then
-                        obj.Text = Dv(r).Item("translatedCaption")
-                    Else
-                        obj.Text = obj.Tag
-                    End If
-                    If subMenu.HasDropDownItems Then
-                        subMenuName = subMenuName + "." + obj.Name
-                        TranslateMenuStripItems(subMenu.DropDownItems, subMenuName)
-                    End If
-
-                End If
-            Next
-        Catch ex As Exception
-
-        End Try
-    End Sub
 
 End Class

@@ -267,6 +267,7 @@ Public Module FormHelpers
         LayOutControls(form, allCtrl)
         form.BackgroundImage = myImage
     End Sub
+
     Private Sub TranslateButton(cCtrl As Control)
         Dim o = CType(cCtrl, CButton)
         Dim cButton = CType(cCtrl, CButton)
@@ -543,6 +544,24 @@ Public Module FormHelpers
             End If
         Next
     End Sub
+
+    Private Function GetSystemViewIdNo(form As Object)
+        Dim cmd As String
+        If form.ViewDisplayName Is Nothing Or form.ViewDisplayName = "" Then
+            form.ViewDisplayName = form.Name
+        End If
+        cmd = "SELECT IdNo FROM SystemView where SystemViewName ='" + form.ViewDisplayName.Trim() + "'"
+        Return TranslatorDac.ExecScalar(Of Int16)(cmd)
+    End Function
+
+    Private Function GetTranslations(targetLanguageIdNo As Integer) As DataSet
+        Dim cmd As String = "Select Caption, translatedCaption from SystemViewItemOriginal_view where LanguageIdNo = " + targetLanguageIdNo.ToString() + " and SystemViewIdNo = " + GetSystemViewIdNo.ToString()
+        Dim translations As DataSet
+        translations = TranslatorDac.ReturnDs(cmd)
+        Return translations
+    End Function
+
+
 End Module
 
 
