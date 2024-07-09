@@ -23,6 +23,14 @@ Public Class PresenterB(Of TV As IViewNew, TM As New)
 
     Protected Sub New()
         Service = New Service()
+        AddHandler View.OrigLanguageDisplayRequested, AddressOf OnOrigLanguageDisplayRequested
+        AddHandler View.ArabicDisplayRequested, AddressOf OnArabicDisplayRequested
+    End Sub
+
+    Public Overridable Sub OnArabicDisplayRequested()
+    End Sub
+
+    Public Overridable Sub OnOrigLanguageDisplayRequested()
     End Sub
 
     Public Sub New(itemView As IViewNew)
@@ -185,5 +193,90 @@ Public Class PresenterB(Of TV As IViewNew, TM As New)
         End If
         Return retValue
     End Function
+
+    Public Function GetControlSecurityValues(ByRef controlSecurityKey As String, Optional menu As Boolean = False) As ArrayList
+        Dim controlSecurityObjectIdNo As Int32
+        controlSecurityObjectIdNo = GetControlSecurityIdNo(controlSecurityKey, menu)
+        Return GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo, GlobalVariables.UserIdNo)
+    End Function
+
+    Public Function GetRecordFieldWithKey(searchValue As String, cTableName As String, searchFieldName As String,
+                                       returnFieldName As String) _
+     As String
+        Try
+            Return Service.GetRecordFieldWithKey(searchValue, cTableName, searchFieldName, returnFieldName)
+        Catch ex As Exception
+            Return Nothing
+        End Try
+    End Function
+
+
+    Public Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int16, userIdNo As Int16) As ArrayList
+        Return Service.GetUserSecurity(securityObjectIdNo, securityGroupIdNo, userIdNo)
+    End Function
+
+    Private Sub SetMenuSecurity(cControl As Object, controlSecurityKey As String)
+        If UserIsASuperAdmin() Then
+            ' make all editable and visible regardless of security values
+            cControl.Enabled = True
+            cControl.Visible = True
+        Else
+            Dim securityIdNo As Integer
+            Dim controlSecurityValues As ArrayList
+            Dim isSelectable As Boolean
+            Dim isVisible As Boolean
+
+            securityIdNo = GetControlSecurityIdNo(controlSecurityKey, True)
+
+            If securityIdNo <> 0 Then
+                controlSecurityValues = SetControlSecurityValue(securityIdNo)
+                If controlSecurityValues.Count > 0 Then
+                    ' Visible property stored in first element of the array
+                    isVisible = controlSecurityValues(0)
+                    isSelectable = controlSecurityValues(1)
+                    ' Editable property stored in second element of the array
+                Else
+                    isVisible = False
+                    isSelectable = False
+                End If
+            Else
+                isVisible = False
+                isSelectable = False
+            End If
+            cControl.Enabled = isSelectable
+            cControl.Visible = isVisible
+        End If
+    End Sub
+
+    Private Function SetControlSecurityValue(securityIdNo As Integer) As ArrayList
+        Dim controlSecurityValues As ArrayList
+        controlSecurityValues = GetUserSecurity(Convert.ToInt16(securityIdNo), GlobalVariables.SecurityGroupIdNo, GlobalVariables.UserIdNo)
+        Return controlSecurityValues
+    End Function
+
+    'Private Function GetControlSecurityIdNo(ByRef controlSecurityKey As String, Optional objIsMenu As Boolean = False) As Int64
+    '    If objIsMenu Then
+    '        Return GetRecordFieldWithKey(controlSecurityKey, "SecurityObject_View1", "FullPathName", "IdNo")
+    '    Else
+    '        Dim idNo As Int32 = GetRecordFieldWithKey(controlSecurityKey, "SecurityObject", "SecurityObjectName", "IdNo")
+    '        Dim retVal As Integer
+    '        If Not Integer.TryParse(idNo, retVal) Then
+    '            Return retVal
+    '        Else
+    '            Return 0
+    '        End If
+    '    End If
+    'End Function
+
+
+    Public Function GetControlSecurityIdNo(searchValue As String, Optional menu As Boolean = False) As String
+        Try
+            Return Service.GetControlSecurityIdNo(searchValue, menu)
+        Catch ex As Exception
+            Return Nothing
+        End Try
+    End Function
+
+
 
 End Class

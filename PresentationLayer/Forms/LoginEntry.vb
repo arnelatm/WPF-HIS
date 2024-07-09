@@ -70,6 +70,9 @@ Public Class LoginEntry
     End Sub
 
     Public Event Login As IUserViewNew.LoginEventHandler Implements IUserViewNew.Login
+    Public Event ArabicDisplayRequested As Views.IViewNew.ArabicDisplayRequestedEventHandler Implements Views.IViewNew.ArabicDisplayRequested
+    Public Event OrigLanguageDisplayRequested As Views.IViewNew.OrigLanguageDisplayRequestedEventHandler Implements Views.IViewNew.OrigLanguageDisplayRequested
+
     Public Property LoginOk As Boolean Implements IUserViewNew.LoginOk
     Public Property Active As Boolean Implements IUserViewNew.Active
     Public Property BranchIdNo As Int16
