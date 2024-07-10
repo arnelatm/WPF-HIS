@@ -41,6 +41,17 @@ Public Class DFormBasic
         End Set
     End Property
 
+    Public Sub DFormBasic_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If _firstLoadSwitch = 0 Then
+            RaiseEvent FormLoaded(sender, CaptionCollection)
+            _firstLoadSwitch = 1
+        End If
+        'If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
+        '    TextDisplayLanguage = CultureInfo.CurrentCulture.Name
+        'End If
+        'RaiseEvent BeforeLoad()
+    End Sub
+
     Protected Sub SwitchDisplayToOriginalLanguage()
         Me.Visible = False
         If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
@@ -107,18 +118,6 @@ Public Class DFormBasic
     Private Sub CutToolStripButton_Click(sender As Object, e As EventArgs) Handles CutToolStripButton.Click
         CutText()
     End Sub
-
-    Public Sub DFormBasic_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If _firstLoadSwitch = 0 Then
-            RaiseEvent FormLoaded(sender, CaptionCollection)
-            _firstLoadSwitch = 1
-        End If
-        'If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
-        '    TextDisplayLanguage = CultureInfo.CurrentCulture.Name
-        'End If
-        'RaiseEvent BeforeLoad()
-    End Sub
-
     Private Sub DFormBasic_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         FormCulture = GlobalVariables.AppCultureInfo
         If FormCulture.TextInfo.IsRightToLeft Then
