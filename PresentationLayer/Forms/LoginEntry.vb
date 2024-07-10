@@ -72,11 +72,7 @@ Public Class LoginEntry
     End Sub
 
     Public Event ArabicDisplayRequested As Views.IViewNew.ArabicDisplayRequestedEventHandler Implements Views.IViewNew.ArabicDisplayRequested
-
     Public Event FormLoaded As Views.IViewNew.FormLoadedEventHandler Implements Views.IViewNew.FormLoaded
-
-    Public Event FormTranslating As Views.IViewNew.FormTranslatingEventHandler Implements Views.IViewNew.FormTranslating
-
     Public Event Login As IUserViewNew.LoginEventHandler Implements IUserViewNew.Login
     Public Event OrigLanguageDisplayRequested As Views.IViewNew.OrigLanguageDisplayRequestedEventHandler Implements Views.IViewNew.OrigLanguageDisplayRequested
     Public Event FormCaptionTranslator As Views.IViewNew.FormCaptionTranslatorEventHandler Implements Views.IViewNew.FormCaptionTranslator

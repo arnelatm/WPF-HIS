@@ -23,11 +23,9 @@ Public Class DFormBasic
         End If
     End Sub
 
-    Public Event AfterTranslateForm()
     Public Event ArabicDisplayRequested() Implements IViewNew.ArabicDisplayRequested
     Public Event FormCaptionTranslator(formTranslator As Object, cform As Object) Implements IViewNew.FormCaptionTranslator
     Public Event FormLoaded(sender As Object, captionCollection As Collection) Implements IViewNew.FormLoaded
-    Public Event FormTranslating(sender As Object) Implements IViewNew.FormTranslating
     Public Event OrigLanguageDisplayRequested() Implements IViewNew.OrigLanguageDisplayRequested
     Public Property CaptionCollection As New Collection Implements IViewNew.CaptionCollection
     Public Property FormCulture As CultureInfo Implements IViewNew.FormCulture
@@ -44,6 +42,7 @@ Public Class DFormBasic
     End Property
 
     Protected Sub SwitchDisplayToOriginalLanguage()
+        Me.Visible = False
         If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
             Dim cultureCode As String = GlobalVariables.DefaultUnmirroredCultureInfoStr
             If IsCultureOk(cultureCode) Then
@@ -54,12 +53,12 @@ Public Class DFormBasic
                 btnOriginal.Visible = False
                 btnArabic.Enabled = True
                 btnOriginal.Enabled = False
-                RaiseEvent FormTranslating(Me)
                 RaiseEvent OrigLanguageDisplayRequested()
             Else
                 MessageBox.Show("Invalid DefaultMirroredCultureInfoStr " & cultureCode & ".")
             End If
         End If
+        Me.Visible = True
     End Sub
 
     Private Sub BtnArabic_Click(sender As Object, e As EventArgs) Handles btnArabic.Click
@@ -109,7 +108,7 @@ Public Class DFormBasic
         CutText()
     End Sub
 
-    Private Sub DFormBasic_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Public Sub DFormBasic_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If _firstLoadSwitch = 0 Then
             RaiseEvent FormLoaded(sender, CaptionCollection)
             _firstLoadSwitch = 1
@@ -136,10 +135,10 @@ Public Class DFormBasic
             btnArabic.Visible = True
             btnOriginal.Visible = False
         End If
-        RaiseEvent FormTranslating(Me)
     End Sub
 
     Private Sub SwitchDisplayToArabicLanguage()
+        Me.Visible = False
         If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
             Dim cultureCode = GlobalVariables.DefaultMirroredCultureInfoStr
             If IsCultureOk(cultureCode) AndAlso IsRightToLeft(cultureCode) Then
@@ -158,6 +157,7 @@ Public Class DFormBasic
                 MessageBox.Show("Invalid DefaultMirroredCultureInfoStr " & cultureCode & ".")
             End If
         End If
+        Me.Visible = True
     End Sub
 
 End Class

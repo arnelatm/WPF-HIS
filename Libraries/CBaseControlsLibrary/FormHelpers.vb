@@ -49,7 +49,6 @@ Public Module FormHelpers
             Dim translatorDAC As New Dac
             captionCollection = storeCaptions.StoreTranslation(sender)
             storeCaptions.SaveControlsOriginalText(sender)
-            'DefaultMirroredLanguageIdNo = translatorDAC.DefaultMirroredLanguageIdNo
             If sender.ViewDisplayName Is Nothing Or sender.ViewDisplayName = "" Then
                 sender.ViewDisplayName = sender.Name
             End If
@@ -164,9 +163,9 @@ Public Module FormHelpers
             SetControlLayout(form, allCtrl)
             settings.RestoreSetting(form)
             'ResumeDrawing()
-            If GlobalVariables.TranslationMode Then
-                'RaiseEvent AfterTranslateForm()
-            End If
+            'If GlobalVariables.TranslationMode Then
+            '    'RaiseEvent AfterTranslateForm()
+            'End If
         End If
     End Sub
 

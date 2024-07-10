@@ -36,7 +36,7 @@ Partial Class DFormBasic
         'ToolStrip1
         '
         Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopyToolStripButton, Me.CutToolStripButton, Me.btnArabic, Me.btnOriginal, Me.btnTranslate, Me.HelpToolStripButton, Me.btnDebug, Me.btnQuit})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnDebug, Me.CopyToolStripButton, Me.CutToolStripButton, Me.btnArabic, Me.btnOriginal, Me.btnTranslate, Me.HelpToolStripButton, Me.btnQuit})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.Size = New System.Drawing.Size(800, 27)

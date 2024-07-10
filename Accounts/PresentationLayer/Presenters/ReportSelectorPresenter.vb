@@ -12,12 +12,13 @@ Namespace PresentationLayer.Presenters
     Public Class ReportSelectorPresenter(Of TM As New)
         Inherits CommonPresenterNew(Of IReportSelectorView, TM)
 
-        Public Sub New(view As IReportSelectorView)
-            MyBase.New(view)
+        Public Sub New(pView As IReportSelectorView)
+            MyBase.New(pView)
+            View = pView
             Service = New CommonService("Report")
             TableName = "Report"
-            AddHandler view.PrintReportEvent, AddressOf OnPrintReportEvent
-            AddHandler view.SelectedReportGroupChangedEvent, AddressOf OnSelectedGroupChangedEvent
+            AddHandler View.PrintReportEvent, AddressOf OnPrintReportEvent
+            AddHandler View.SelectedReportGroupChangedEvent, AddressOf OnSelectedGroupChangedEvent
             CreateDataSources()
         End Sub
 

@@ -8,7 +8,6 @@ Public Interface IViewNew
     Event ArabicDisplayRequested()
     Event FormCaptionTranslator(formTranslator As Object, cForm As Object)
     Event FormLoaded(sender As Object, captionCollection As Collection)
-    Event FormTranslating(sender As Object)
     Event OrigLanguageDisplayRequested()
 
     Property CaptionCollection As Collection

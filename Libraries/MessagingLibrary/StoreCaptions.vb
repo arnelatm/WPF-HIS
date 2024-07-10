@@ -5,18 +5,18 @@ Public Class StoreCaptions
 
     ' Generated form code omitted, except for the following overloaded
     ' constructor that I added:
-    Private _dAc1 As Dac
+    Private _dac As New Dac
 
     'Public Sub New()
     '    MyBase.New()
     'End Sub
 
-    Public Sub New(ByVal dac As Dac)
-        MyBase.New()
-        'This call is required by the Component Designer.
-        'Add any initialization after the InitializeComponent() call
-        _dAc1 = dac
-    End Sub
+    'Public Sub New(ByVal dac As Dac)
+    '    MyBase.New()
+    '    'This call is required by the Component Designer.
+    '    'Add any initialization after the InitializeComponent() call
+    '    _dac = dac
+    'End Sub
 
     Public Sub New()
     End Sub
@@ -26,7 +26,6 @@ Public Class StoreCaptions
     Function StoreCaptions(ByVal frm As Object) As Collection
         Dim systemViewIdNo As Int16
         Dim viewDisplayName As String
-        _dAc1 = frm.TranslatorDAC
         frm.Tag = frm.Text
         If frm.ViewDisplayName Is Nothing OrElse frm.ViewDisplayName = "" Then
             viewDisplayName = frm.Name
@@ -98,7 +97,7 @@ Public Class StoreCaptions
     Function StoreTranslation(ByVal frm As Object) As Collection
         Dim systemViewIdNo As Int16
         Dim viewDisplayName As String
-        _dAc1 = frm.TranslatorDAC
+        '_dac = frm.TranslatorDAC
         SaveOriginalText(frm, frm.Text)
         frm.Tag = frm.Text
         If frm.ViewDisplayName Is Nothing OrElse frm.ViewDisplayName = "" Then
@@ -366,11 +365,11 @@ Public Class StoreCaptions
         If Not (String.IsNullOrEmpty(word) OrElse word = "  /  /") Then
             Dim params() As Object = {"@word", word}
             cmd = "SELECT COUNT(*) From OriginalCaptions where Caption = @word"
-            Dim howMany As Int32 = _dAc1.ExecScalar(Of Int32)(cmd, params)
+            Dim howMany As Int32 = _dac.ExecScalar(Of Int32)(cmd, params)
             If howMany = 0 Then
                 'cmd = "INSERT INTO OriginalCaptions (caption) values ( '" + word + "')"
                 cmd = "INSERT INTO OriginalCaptions (caption) values ( @word )"
-                _dAc1.ExecCmd(cmd, params)
+                _dac.ExecCmd(cmd, params)
             End If
         End If
     End Sub
@@ -384,10 +383,10 @@ Public Class StoreCaptions
         Dim cmd As String
         Dim params() As Object = {"@key", key, "@message", message}
         cmd = "SELECT COUNT(*) FROM OriginalMessage where Key = @message"
-        Dim howMany As Int32 = _dAc1.ExecScalar(Of Int32)(cmd, params)
+        Dim howMany As Int32 = _dac.ExecScalar(Of Int32)(cmd, params)
         If howMany = 0 Then
             cmd = "INSERT INTO OriginalMessage (key, message) values (@key, @message)"
-            _dAc1.ExecCmd(cmd, params)
+            _dac.ExecCmd(cmd, params)
         End If
     End Sub
 
@@ -403,15 +402,15 @@ Public Class StoreCaptions
         Dim captionIdNo As Int32
         cmd = "Select IdNo From OriginalCaptions where Caption = @itemName"
         Dim params() As Object = {"@ItemName", itemName}
-        captionIdNo = _dAc1.ExecScalar(Of Int32)(cmd, params)
+        captionIdNo = _dac.ExecScalar(Of Int32)(cmd, params)
         'if item.ToString().TrimEnd() = "Gender" then
         '    debugger.Break()
         'End If
         cmd = "SELECT COUNT(*) FROM SystemViewItem where CaptionIdNo = " + captionIdNo.ToString() + " and SystemViewIdNo = " + systemViewIdNo.ToString()
-        Dim howMany As Integer = _dAc1.ExecScalar(Of Int16)(cmd)
+        Dim howMany As Integer = _dac.ExecScalar(Of Int16)(cmd)
         If howMany = 0 Then
             cmd = "INSERT INTO SystemViewItem (SystemViewIdNo, CaptionIdNO) values ( " + systemViewIdNo.ToString() + "," + captionIdNo.ToString() + ")"
-            _dAc1.ExecCmd(cmd)
+            _dac.ExecCmd(cmd)
         End If
     End Sub
 
@@ -419,10 +418,10 @@ Public Class StoreCaptions
         Dim cmd As String
         Dim params() As Object = {"@FormName", formName}
         cmd = "SELECT COUNT(*) FROM SystemView where SystemViewName = @formName "
-        Dim howMany As Int16 = _dAc1.ExecScalar(Of Int16)(cmd, params)
+        Dim howMany As Int16 = _dac.ExecScalar(Of Int16)(cmd, params)
         If howMany = 0 Then
             cmd = "INSERT INTO SystemView (SystemViewName) values (@formName)"
-            _dAc1.ExecCmd(cmd, params)
+            _dac.ExecCmd(cmd, params)
         End If
     End Sub
 
@@ -430,7 +429,7 @@ Public Class StoreCaptions
         Dim cmd As String
         Dim params() As Object = {"@FormName", formName}
         cmd = "SELECT IdNo FROM SystemView where SystemViewName = @formName "
-        Return _dAc1.ExecScalar(Of Int16)(cmd, params)
+        Return _dac.ExecScalar(Of Int16)(cmd, params)
     End Function
 
 

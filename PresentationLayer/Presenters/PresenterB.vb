@@ -11,56 +11,25 @@ Imports AATM.Libraries.MessagingLibrary
 
 Public Class PresenterB(Of TV As IViewNew, TM As New)
 
+    Public MyErrorProvider As New ErrorProviderExtended
     Public Service As Object
 
-
-    Public Property View As TV
-    Public MyErrorProvider As New ErrorProviderExtended
     Protected DataFilter As String = Nothing
-    Protected OriginalModel
     Protected DefaultFieldValueService As New DefaultFieldValueService
+    Protected OriginalModel
     Protected TranslationDac As Dac
 
-    Public Property ViewDefaultFieldValues As List(Of DefaultFieldValueModel)
-
-    Public Property TableName As String
-
-    Protected Sub New()
-        Service = New Service()
-        AddHandler View.OrigLanguageDisplayRequested, AddressOf OnOrigLanguageDisplayRequested
-        AddHandler View.ArabicDisplayRequested, AddressOf OnArabicDisplayRequested
-        AddHandler View.FormTranslating, AddressOf OnFormTranslating
-        AddHandler View.FormLoaded, AddressOf OnFormLoaded
-        AddHandler View.FormCaptionTranslator, AddressOf OnFormCaptionTranslator
-    End Sub
-
-
-    Private Sub OnFormLoaded(sender As Object, captionCollection As Collection)
-
-    End Sub
-
-    Private Sub OnFormCaptionTranslator(translatorForm As Object, form As Object)
-        Using translatorForm
-            translatorForm.SystemViewIdNoToTranslate = form.VSystemViewIdNo
-            translatorForm.AppDataDAC = New Dac
-            translatorForm.TranslatorDAC = New Dac
-            translatorForm.ShowDialog()
-        End Using
-    End Sub
-
-    Private Sub OnFormTranslating(form As Object)
-        TranslateForm(form)
-    End Sub
-
-    Public Overridable Sub OnArabicDisplayRequested()
-    End Sub
-
-    Public Overridable Sub OnOrigLanguageDisplayRequested()
+    Public Sub New()
     End Sub
 
     Public Sub New(itemView As IViewNew)
         If itemView IsNot Nothing Then
-            Me.View = itemView
+            View = itemView
+            Service = New Service()
+            AddHandler View.OrigLanguageDisplayRequested, AddressOf OnOrigLanguageDisplayRequested
+            AddHandler View.ArabicDisplayRequested, AddressOf OnArabicDisplayRequested
+            AddHandler View.FormCaptionTranslator, AddressOf OnFormCaptionTranslator
+            AddHandler View.FormLoaded, AddressOf OnFormLoaded
             MyErrorProvider = GetErrorProvider()
             OriginalModel = Activator.CreateInstance(GetType(TM))
             Dim data As List(Of DefaultFieldValue) = DefaultFieldValueService.GetDefaultFieldValues(View.ViewDisplayName)
@@ -69,10 +38,44 @@ Public Class PresenterB(Of TV As IViewNew, TM As New)
         End If
     End Sub
 
-    Protected Function GetErrorProvider() As Object
-        Return Invoker.GetField(View, "MyErrorProvider")
+    Public Property TableName As String
+    Public Property View As TV
+    Public Property ViewDefaultFieldValues As List(Of DefaultFieldValueModel)
+    Public Function GetControlSecurityIdNo(searchValue As String, Optional menu As Boolean = False) As String
+        Try
+            Return Service.GetControlSecurityIdNo(searchValue, menu)
+        Catch ex As Exception
+            Return Nothing
+        End Try
     End Function
 
+    Public Function GetControlSecurityValues(ByRef controlSecurityKey As String, Optional menu As Boolean = False) As ArrayList
+        Dim controlSecurityObjectIdNo As Int32
+        controlSecurityObjectIdNo = GetControlSecurityIdNo(controlSecurityKey, menu)
+        Return GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo, GlobalVariables.UserIdNo)
+    End Function
+
+    Public Function GetDtRecords(ByVal pTableName As String, ByVal fieldNames As String(), Optional filter As String = Nothing, Optional sortKey As String = Nothing, Optional ascending As Boolean = True)
+        Return Service.GetDtRecords(pTableName, fieldNames, filter, sortKey, ascending)
+    End Function
+
+    Public Function GetDtRecords(ByVal pTableName As String, ByVal fieldNames As String, Optional filter As String = Nothing, Optional sortKey As String = Nothing, Optional ascending As Boolean = True)
+        Return Service.GetDtRecords(pTableName, fieldNames, filter, sortKey, ascending)
+    End Function
+
+    Public Function GetRecordFieldWithKey(searchValue As String, cTableName As String, searchFieldName As String,
+                                       returnFieldName As String) _
+     As String
+        Try
+            Return Service.GetRecordFieldWithKey(searchValue, cTableName, searchFieldName, returnFieldName)
+        Catch ex As Exception
+            Return Nothing
+        End Try
+    End Function
+
+    Public Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int16, userIdNo As Int16) As ArrayList
+        Return Service.GetUserSecurity(securityObjectIdNo, securityGroupIdNo, userIdNo)
+    End Function
 
     Public Function MakeDataTable(ByRef dataTableSpecs As Object) As DataTable
         Dim dtl As New DataLookupSpecs
@@ -107,21 +110,52 @@ Public Class PresenterB(Of TV As IViewNew, TM As New)
         Return GetDtRecords(dtl.TableName, dtl.LuFields, dtl.Filter, dtl.SortKey)
     End Function
 
-    Public Function GetDtRecords(ByVal pTableName As String, ByVal fieldNames As String(), Optional filter As String = Nothing, Optional sortKey As String = Nothing, Optional ascending As Boolean = True)
-        Return Service.GetDtRecords(pTableName, fieldNames, filter, sortKey, ascending)
+    Public Sub OnFormLoaded(sender As Object, captionCollection As Collection)
+        If GlobalVariables.TranslationMode Then
+            GetNSaveCaptions(sender, captionCollection)
+        End If
+    End Sub
+
+    Protected Function GetErrorProvider() As Object
+        Return Invoker.GetField(View, "MyErrorProvider")
     End Function
 
-    Public Function GetDtRecords(ByVal pTableName As String, ByVal fieldNames As String, Optional filter As String = Nothing, Optional sortKey As String = Nothing, Optional ascending As Boolean = True)
-        Return Service.GetDtRecords(pTableName, fieldNames, filter, sortKey, ascending)
-    End Function
+    Protected Overridable Sub OnArabicDisplayRequested()
+    End Sub
 
-    Private Function LookupDataTableCreator(dtl As DataLookupSpecs) As DataTable
-        Dim cd As New DataCreator(Service)
-        Dim data As DataTable = cd.CreateDataTable(dtl)
-        cd = Nothing
-        Return data
-    End Function
+    'Private Function GetControlSecurityIdNo(ByRef controlSecurityKey As String, Optional objIsMenu As Boolean = False) As Int64
+    '    If objIsMenu Then
+    '        Return GetRecordFieldWithKey(controlSecurityKey, "SecurityObject_View1", "FullPathName", "IdNo")
+    '    Else
+    '        Dim idNo As Int32 = GetRecordFieldWithKey(controlSecurityKey, "SecurityObject", "SecurityObjectName", "IdNo")
+    '        Dim retVal As Integer
+    '        If Not Integer.TryParse(idNo, retVal) Then
+    '            Return retVal
+    '        Else
+    '            Return 0
+    '        End If
+    '    End If
+    'End Function
+    Protected Sub OnFormCaptionTranslate(ByVal nSystemViewIdNo As Int16, frm As Object)
+        Dim appDataDac As New Dac
+        Dim translatorDac As New Dac
+        'Dim frm As New TranslationTableManager()
+        frm.SystemViewIdNoToTranslate = nSystemViewIdNo
+        frm.AppDataDAC = appDataDac
+        frm.TranslatorDAC = translatorDac
+        frm.Show()
+    End Sub
 
+    Protected Sub OnFormCaptionTranslator(translatorForm As Object, form As Object)
+        Using translatorForm
+            translatorForm.SystemViewIdNoToTranslate = form.VSystemViewIdNo
+            translatorForm.AppDataDAC = New Dac
+            translatorForm.TranslatorDAC = New Dac
+            translatorForm.ShowDialog()
+        End Using
+    End Sub
+    Protected Overridable Sub OnOrigLanguageDisplayRequested()
+    End Sub
     Private Sub ComposeLookupProperties(dtl As DataTableLookupSpec)
         Dim RightToLeftFormat = GlobalFunctions.IsRightToLeft(CultureInfo.CurrentCulture.ToString())
         If dtl.LuFields Is Nothing Then
@@ -199,36 +233,16 @@ Public Class PresenterB(Of TV As IViewNew, TM As New)
         End If
     End Sub
 
-    Private Function TranslateNameField(tableName As String, fieldName As String) As String
-        Dim retValue As String = fieldName
-        If GlobalFunctions.IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
-            Dim nameFieldArabic As String = fieldName + "Ara"
-            If Service.FieldExistInTable(tableName, nameFieldArabic) Then
-                retValue = fieldName + "Ara"
-            End If
-        End If
-        Return retValue
+    Private Function LookupDataTableCreator(dtl As DataLookupSpecs) As DataTable
+        Dim cd As New DataCreator(Service)
+        Dim data As DataTable = cd.CreateDataTable(dtl)
+        cd = Nothing
+        Return data
     End Function
-
-    Public Function GetControlSecurityValues(ByRef controlSecurityKey As String, Optional menu As Boolean = False) As ArrayList
-        Dim controlSecurityObjectIdNo As Int32
-        controlSecurityObjectIdNo = GetControlSecurityIdNo(controlSecurityKey, menu)
-        Return GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo, GlobalVariables.UserIdNo)
-    End Function
-
-    Public Function GetRecordFieldWithKey(searchValue As String, cTableName As String, searchFieldName As String,
-                                       returnFieldName As String) _
-     As String
-        Try
-            Return Service.GetRecordFieldWithKey(searchValue, cTableName, searchFieldName, returnFieldName)
-        Catch ex As Exception
-            Return Nothing
-        End Try
-    End Function
-
-
-    Public Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int16, userIdNo As Int16) As ArrayList
-        Return Service.GetUserSecurity(securityObjectIdNo, securityGroupIdNo, userIdNo)
+    Private Function SetControlSecurityValue(securityIdNo As Integer) As ArrayList
+        Dim controlSecurityValues As ArrayList
+        controlSecurityValues = GetUserSecurity(Convert.ToInt16(securityIdNo), GlobalVariables.SecurityGroupIdNo, GlobalVariables.UserIdNo)
+        Return controlSecurityValues
     End Function
 
     Private Sub SetMenuSecurity(cControl As Object, controlSecurityKey As String)
@@ -264,43 +278,14 @@ Public Class PresenterB(Of TV As IViewNew, TM As New)
         End If
     End Sub
 
-    Private Function SetControlSecurityValue(securityIdNo As Integer) As ArrayList
-        Dim controlSecurityValues As ArrayList
-        controlSecurityValues = GetUserSecurity(Convert.ToInt16(securityIdNo), GlobalVariables.SecurityGroupIdNo, GlobalVariables.UserIdNo)
-        Return controlSecurityValues
+    Private Function TranslateNameField(tableName As String, fieldName As String) As String
+        Dim retValue As String = fieldName
+        If GlobalFunctions.IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
+            Dim nameFieldArabic As String = fieldName + "Ara"
+            If Service.FieldExistInTable(tableName, nameFieldArabic) Then
+                retValue = fieldName + "Ara"
+            End If
+        End If
+        Return retValue
     End Function
-
-    'Private Function GetControlSecurityIdNo(ByRef controlSecurityKey As String, Optional objIsMenu As Boolean = False) As Int64
-    '    If objIsMenu Then
-    '        Return GetRecordFieldWithKey(controlSecurityKey, "SecurityObject_View1", "FullPathName", "IdNo")
-    '    Else
-    '        Dim idNo As Int32 = GetRecordFieldWithKey(controlSecurityKey, "SecurityObject", "SecurityObjectName", "IdNo")
-    '        Dim retVal As Integer
-    '        If Not Integer.TryParse(idNo, retVal) Then
-    '            Return retVal
-    '        Else
-    '            Return 0
-    '        End If
-    '    End If
-    'End Function
-
-
-    Public Function GetControlSecurityIdNo(searchValue As String, Optional menu As Boolean = False) As String
-        Try
-            Return Service.GetControlSecurityIdNo(searchValue, menu)
-        Catch ex As Exception
-            Return Nothing
-        End Try
-    End Function
-
-    Protected Sub OnFormCaptionTranslate(ByVal nSystemViewIdNo As Int16, frm As Object)
-        Dim appDataDac As New Dac
-        Dim translatorDac As New Dac
-        'Dim frm As New TranslationTableManager()
-        frm.SystemViewIdNoToTranslate = nSystemViewIdNo
-        frm.AppDataDAC = appDataDac
-        frm.TranslatorDAC = translatorDac
-        frm.Show()
-    End Sub
-
 End Class
