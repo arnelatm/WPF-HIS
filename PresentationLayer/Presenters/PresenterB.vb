@@ -31,11 +31,21 @@ Public Class PresenterB(Of TV As IViewNew, TM As New)
         AddHandler View.ArabicDisplayRequested, AddressOf OnArabicDisplayRequested
         AddHandler View.FormTranslating, AddressOf OnFormTranslating
         AddHandler View.FormLoaded, AddressOf OnFormLoaded
-        AddHandler View.FormCaptionTranslator, AddressOf OnFormCaptionTranslate
+        AddHandler View.FormCaptionTranslator, AddressOf OnFormCaptionTranslator
     End Sub
+
 
     Private Sub OnFormLoaded(sender As Object, captionCollection As Collection)
 
+    End Sub
+
+    Private Sub OnFormCaptionTranslator(translatorForm As Object, form As Object)
+        Using translatorForm
+            translatorForm.SystemViewIdNoToTranslate = form.VSystemViewIdNo
+            translatorForm.AppDataDAC = New Dac
+            translatorForm.TranslatorDAC = New Dac
+            translatorForm.ShowDialog()
+        End Using
     End Sub
 
     Private Sub OnFormTranslating(form As Object)
@@ -292,11 +302,13 @@ Public Class PresenterB(Of TV As IViewNew, TM As New)
         End Try
     End Function
 
-    Protected Sub OnFormCaptionTranslate(ByVal nSystemViewIdNo)
-        Dim frm As New TranslationTableManager()
+    Protected Sub OnFormCaptionTranslate(ByVal nSystemViewIdNo As Int16, frm As Object)
+        Dim appDataDac As New Dac
+        Dim translatorDac As New Dac
+        'Dim frm As New TranslationTableManager()
         frm.SystemViewIdNoToTranslate = nSystemViewIdNo
-        frm.AppDataDAC = AppDataDac
-        frm.TranslatorDAC = TranslatorDac
+        frm.AppDataDAC = appDataDac
+        frm.TranslatorDAC = translatorDac
         frm.Show()
     End Sub
 

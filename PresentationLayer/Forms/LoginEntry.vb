@@ -79,6 +79,7 @@ Public Class LoginEntry
 
     Public Event Login As IUserViewNew.LoginEventHandler Implements IUserViewNew.Login
     Public Event OrigLanguageDisplayRequested As Views.IViewNew.OrigLanguageDisplayRequestedEventHandler Implements Views.IViewNew.OrigLanguageDisplayRequested
+    Public Event FormCaptionTranslator As Views.IViewNew.FormCaptionTranslatorEventHandler Implements Views.IViewNew.FormCaptionTranslator
     Public Property Active As Boolean Implements IUserViewNew.Active
     Public Property BranchIdNo As Int16
         Get

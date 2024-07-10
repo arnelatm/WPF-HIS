@@ -14,7 +14,7 @@ Public Interface IViewNew
     Event OrigLanguageDisplayRequested()
     Event FormTranslating(sender As Object)
     Event FormLoaded(sender As Object, captionCollection As Collection)
-    Event FormCaptionTranslator(vSystemViewIdNo As Short)
+    Event FormCaptionTranslator(formTranslator As Object, cForm As Object)
 
 
     ' No members..

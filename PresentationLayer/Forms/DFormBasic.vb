@@ -5,16 +5,16 @@ Imports AATM.PresentationLayer.Views
 Imports System.Globalization
 Imports AATM.Libraries
 Imports System.ComponentModel
+Imports AATM.Libraries.MessagingLibrary
 
 Public Class DFormBasic
     Implements IViewNew
 
-    Public Dv As DataView
     Private _debugSwitch As Byte = 0
     Private _firstLoadSwitch As Integer = 0
     Private _originalText As String
     Private _systemViewIdNo As Int32
-    Private _textDisplayLanguage As String
+
     Public Sub New()
         ' This call is required by the designer.
         InitializeComponent()
@@ -24,6 +24,8 @@ Public Class DFormBasic
     Public Event AfterTranslateForm()
 
     Public Event ArabicDisplayRequested() Implements IViewNew.ArabicDisplayRequested
+
+    Public Event FormCaptionTranslator(formTranslator As Object, cform As Object) Implements IViewNew.FormCaptionTranslator
 
     Public Event FormLoaded(sender As Object, captionCollection As Collection) Implements IViewNew.FormLoaded
 
@@ -43,7 +45,7 @@ Public Class DFormBasic
 
     Protected Property VSystemViewIdNo As Short
         Get
-            Return GetSystemViewIdNo()
+            Return GetSystemViewIdNo(Me)
         End Get
         Set(value As Short)
             _systemViewIdNo = value
@@ -79,39 +81,12 @@ Public Class DFormBasic
                TypeOf ctrl Is TabControl OrElse
                TypeOf ctrl Is TreeView OrElse
                TypeOf ctrl Is DataGrid Then
-                'If TypeOf ctrl Is CButton Then
-                '    Debugger.Break()
-                'End If
                 Return True
             Else
                 Return False
             End If
         End If
     End Function
-
-    Protected Function GetSystemViewIdNo()
-        Dim cmd As String
-        If ViewDisplayName Is Nothing Or ViewDisplayName = "" Then
-            ViewDisplayName = Name
-        End If
-        cmd = "SELECT IdNo FROM SystemView where SystemViewName ='" + ViewDisplayName.Trim() + "'"
-        Return TranslatorDac.ExecScalar(Of Int16)(cmd)
-    End Function
-
-    Protected Function GetTranslations(targetLanguageIdNo As Integer) As DataSet
-        Dim cmd As String = "Select Caption, translatedCaption from SystemViewItemOriginal_view where LanguageIdNo = " + targetLanguageIdNo.ToString() + " and SystemViewIdNo = " + GetSystemViewIdNo.ToString()
-        Dim translations As DataSet
-        translations = TranslatorDac.ReturnDs(cmd)
-        Return translations
-    End Function
-
-    Protected Sub RunTranslator(ByVal nSystemViewIdNo)
-        Dim frm As New TranslationTableManager()
-        frm.SystemViewIdNoToTranslate = nSystemViewIdNo
-        frm.AppDataDAC = AppDataDac
-        frm.TranslatorDAC = TranslatorDac
-        frm.Show()
-    End Sub
 
     Protected Sub SwitchDisplayToOriginalLanguage()
         If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
@@ -162,18 +137,23 @@ Public Class DFormBasic
         SwitchDisplayToOriginalLanguage()
     End Sub
     Private Sub btnQuit_Click(sender As Object, e As EventArgs) Handles btnQuit.Click
-        If _debugSwitch = 1 Then
-            Debugger.Break()
-        End If
+        CheckIfDebug()
         Close()
     End Sub
 
     Private Sub btnTranslate_Click(sender As Object, e As EventArgs) Handles btnTranslate.Click
-        If _debugSwitch Then
+        CheckIfDebug()
+        Dim frm As New TranslationTableManager()
+        frm.SystemViewIdNoToTranslate = VSystemViewIdNo
+        frm.AppDataDAC = AppDataDac
+        frm.TranslatorDAC = TranslatorDac
+        frm.Show()
+    End Sub
+
+    Private Sub CheckIfDebug()
+        If _debugSwitch = 1 Then
             Debugger.Break()
         End If
-
-        RunTranslator(VSystemViewIdNo)
     End Sub
 
     Private Sub CopyToolStripButton_Click(sender As Object, e As EventArgs) Handles CopyToolStripButton.Click

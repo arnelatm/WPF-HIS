@@ -55,13 +55,26 @@ Public Module FormHelpers
             End If
         End If
     End Sub
-    Public Function GetSystemViewIdNo(TranslatorDAC As Dac, ViewDisplayName As String, Name As String)
+
+    'Public Function GetFormSystemViewIdNo(translatorDac As Dac, cForm As Object)
+    '    Dim cmd As String
+    '    If cForm.ViewDisplayName Is Nothing Or cForm.ViewDisplayName = "" Then
+    '        cForm.ViewDisplayName = cForm.Name
+    '    End If
+    '    cmd = "SELECT IdNo FROM SystemView where SystemViewName ='" + cForm.ViewDisplayName.Trim() + "'"
+    '    Return translatorDac.ExecScalar(Of Int16)(cmd)
+    'End Function
+
+    Public Function GetSystemViewIdNo(cForm As Object, Optional translatorDac As Dac = Nothing)
         Dim cmd As String
-        If ViewDisplayName Is Nothing Or ViewDisplayName = "" Then
-            ViewDisplayName = Name
+        If cForm.ViewDisplayName Is Nothing Or cForm.ViewDisplayName = "" Then
+            cForm.ViewDisplayName = cForm.Name
         End If
-        cmd = "SELECT IdNo FROM SystemView where SystemViewName ='" + ViewDisplayName.Trim() + "'"
-        Return TranslatorDAC.ExecScalar(Of Int16)(cmd)
+        cmd = "SELECT IdNo FROM SystemView where SystemViewName ='" + cForm.ViewDisplayName.Trim() + "'"
+        If translatorDac Is Nothing Then
+            translatorDac = New Dac
+        End If
+        Return translatorDac.ExecScalar(Of Int16)(cmd)
     End Function
 
     'Public Function GetTargetLanguageIdNo(desiredLanguage As String) As Short
@@ -112,12 +125,14 @@ Public Module FormHelpers
         Return targetLanguageIdNo
     End Function
 
-    Public Function GetTranslations(TranslatorDAC As Dac, targetLanguageIdNo As Integer, viewDisplayName As String, formName As String) As DataSet
-        Dim cmd As String = "Select Caption, translatedCaption from SystemViewItemOriginal_view where LanguageIdNo = " + targetLanguageIdNo.ToString() + " and SystemViewIdNo = " + GetSystemViewIdNo(TranslatorDAC, viewDisplayName, formName).ToString()
+    Public Function GetTranslations(form As Object, TranslatorDAC As Dac, targetLanguageIdNo As Integer) As DataSet
+        Dim vSystemViewIdNo As Int16 = GetSystemViewIdNo(TranslatorDAC, form)
+        Dim cmd As String = "Select Caption, translatedCaption from SystemViewItemOriginal_view where LanguageIdNo = " + targetLanguageIdNo.ToString() + " and SystemViewIdNo = " + vSystemViewIdNo.ToString()
         Dim translations As DataSet
         translations = TranslatorDAC.ReturnDs(cmd)
         Return translations
     End Function
+
     Function IsTranslatable(ByRef ctrl As Control) As Boolean
         If TypeOf ctrl Is IEntryControl Then
             Return CType(ctrl, IEntryControl).Translatable
@@ -349,7 +364,7 @@ Public Module FormHelpers
     End Sub
 
     Private Sub TranslateToLanguageIdNo(form As Object, translatorDac As Dac, allCtrl As List(Of Control), targetLanguageIdNo As Integer)
-        Dim translations As DataSet = GetTranslations(translatorDac, targetLanguageIdNo, form.viewDisplayName, form.Name)
+        Dim translations As DataSet = GetTranslations(form, translatorDac, targetLanguageIdNo)
         Dim Dv As DataView
         Dv = translations.Tables(0).DefaultView
         Dv.Sort = "Caption"
@@ -545,21 +560,16 @@ Public Module FormHelpers
         Next
     End Sub
 
-    Private Function GetSystemViewIdNo(form As Object)
-        Dim cmd As String
-        If form.ViewDisplayName Is Nothing Or form.ViewDisplayName = "" Then
-            form.ViewDisplayName = form.Name
-        End If
-        cmd = "SELECT IdNo FROM SystemView where SystemViewName ='" + form.ViewDisplayName.Trim() + "'"
-        Return TranslatorDac.ExecScalar(Of Int16)(cmd)
-    End Function
+    'Private Function GetSystemViewIdNo(form As Object)
+    '    Dim cmd As String
+    '    If form.ViewDisplayName Is Nothing Or form.ViewDisplayName = "" Then
+    '        form.ViewDisplayName = form.Name
+    '    End If
+    '    cmd = "SELECT IdNo FROM SystemView where SystemViewName ='" + form.ViewDisplayName.Trim() + "'"
+    '    Return TranslatorDac.ExecScalar(Of Int16)(cmd)
+    'End Function
 
-    Private Function GetTranslations(targetLanguageIdNo As Integer) As DataSet
-        Dim cmd As String = "Select Caption, translatedCaption from SystemViewItemOriginal_view where LanguageIdNo = " + targetLanguageIdNo.ToString() + " and SystemViewIdNo = " + GetSystemViewIdNo.ToString()
-        Dim translations As DataSet
-        translations = TranslatorDac.ReturnDs(cmd)
-        Return translations
-    End Function
+
 
 
 End Module
