@@ -14,7 +14,7 @@ Public Class DFormBasic
     Private _originalText As String
     Private _systemViewIdNo As Int32
 
-    Public Sub New()
+    Protected Sub New()
         ' This call is required by the designer.
         InitializeComponent()
         KeyPreview = False

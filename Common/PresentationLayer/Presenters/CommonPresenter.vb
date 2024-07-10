@@ -26,11 +26,11 @@ Namespace PresentationLayer.Presenters
     Public MustInherit Class CommonPresenterNew(Of TV As IViewNew, TM As New)
         Inherits PresenterB(Of TV, TM)
 
-        Public Sub New()
+        Protected Sub New()
             MyBase.New()
         End Sub
 
-        Public Sub New(itemView As IViewNew)
+        Protected Sub New(itemView As IViewNew)
             MyBase.New(itemView)
         End Sub
 

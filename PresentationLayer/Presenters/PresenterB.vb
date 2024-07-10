@@ -19,10 +19,10 @@ Public Class PresenterB(Of TV As IViewNew, TM As New)
     Protected OriginalModel
     Protected TranslationDac As Dac
 
-    Public Sub New()
+    Protected Sub New()
     End Sub
 
-    Public Sub New(itemView As IViewNew)
+    Protected Sub New(itemView As IViewNew)
         If itemView IsNot Nothing Then
             View = itemView
             Service = New Service()

@@ -12,6 +12,10 @@ Namespace PresentationLayer.Presenters
     Public Class ReportSelectorPresenter(Of TM As New)
         Inherits CommonPresenterNew(Of IReportSelectorView, TM)
 
+        Protected Sub New()
+            MyBase.New()
+        End Sub
+
         Public Sub New(pView As IReportSelectorView)
             MyBase.New(pView)
             View = pView
