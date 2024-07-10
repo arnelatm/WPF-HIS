@@ -18,27 +18,19 @@ Public Class DFormBasic
         ' This call is required by the designer.
         InitializeComponent()
         KeyPreview = False
+        If ViewDisplayName Is Nothing OrElse ViewDisplayName = "" Then
+            ViewDisplayName = Name
+        End If
     End Sub
 
     Public Event AfterTranslateForm()
-
     Public Event ArabicDisplayRequested() Implements IViewNew.ArabicDisplayRequested
-
     Public Event FormCaptionTranslator(formTranslator As Object, cform As Object) Implements IViewNew.FormCaptionTranslator
-
     Public Event FormLoaded(sender As Object, captionCollection As Collection) Implements IViewNew.FormLoaded
-
     Public Event FormTranslating(sender As Object) Implements IViewNew.FormTranslating
-
     Public Event OrigLanguageDisplayRequested() Implements IViewNew.OrigLanguageDisplayRequested
     Public Property CaptionCollection As New Collection Implements IViewNew.CaptionCollection
     Public Property FormCulture As CultureInfo Implements IViewNew.FormCulture
-    Public ReadOnly Property FormName As String Implements IViewNew.FormName
-        Get
-            Return Name.Trim()
-        End Get
-    End Property
-
     Public Property RightToLeftDisplay As String Implements IViewNew.RightToLeftDisplay
     Public Property ViewDisplayName As String Implements IViewNew.ViewDisplayName
 
@@ -50,42 +42,6 @@ Public Class DFormBasic
             _systemViewIdNo = value
         End Set
     End Property
-
-    Public Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int16, userIdNo As Int16) As ArrayList
-        Return GetUserSecurity(securityObjectIdNo, securityGroupIdNo, userIdNo)
-    End Function
-
-    Function IsTranslatable(ByRef ctrl As Control) As Boolean
-        If TypeOf ctrl Is IEntryControl Then
-            'Dim x As IEntryControl
-            'x = ctrl
-            'Return x.Translatable
-            Return CType(ctrl, IEntryControl).Translatable
-        Else
-            If TypeOf ctrl Is CLabel OrElse
-               TypeOf ctrl Is CButton OrElse
-               TypeOf ctrl Is CCheckBox OrElse
-               TypeOf ctrl Is CRadioButton OrElse
-               TypeOf ctrl Is CtDataGridView OrElse
-               TypeOf ctrl Is CGroupBox OrElse
-               TypeOf ctrl Is CTabControl OrElse
-               TypeOf ctrl Is CTreeViewOld OrElse
-               TypeOf ctrl Is TreeView OrElse
-               TypeOf ctrl Is MenuStrip OrElse
-               TypeOf ctrl Is ToolStrip OrElse
-               TypeOf ctrl Is Label OrElse
-               TypeOf ctrl Is Button OrElse
-               TypeOf ctrl Is CheckBox OrElse
-               TypeOf ctrl Is RadioButton OrElse
-               TypeOf ctrl Is TabControl OrElse
-               TypeOf ctrl Is TreeView OrElse
-               TypeOf ctrl Is DataGrid Then
-                Return True
-            Else
-                Return False
-            End If
-        End If
-    End Function
 
     Protected Sub SwitchDisplayToOriginalLanguage()
         If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
@@ -103,17 +59,6 @@ Public Class DFormBasic
             Else
                 MessageBox.Show("Invalid DefaultMirroredCultureInfoStr " & cultureCode & ".")
             End If
-        End If
-    End Sub
-
-    Private Shared Sub SetControlVisibility(ByRef cCtrl As Control, controlVisible As Boolean)
-        ' if Visible is false, Don't show the controls content by masking content with '*' asterisk
-        If UserIsASuperAdmin() Then
-            SetPropertyValue(cCtrl, "Visible", True)
-        ElseIf controlVisible Then
-            SetPropertyValue(cCtrl, "Visible", True)
-        Else
-            SetPropertyValue(cCtrl, "Visible", False)
         End If
     End Sub
 
@@ -214,7 +159,5 @@ Public Class DFormBasic
             End If
         End If
     End Sub
-
-
 
 End Class

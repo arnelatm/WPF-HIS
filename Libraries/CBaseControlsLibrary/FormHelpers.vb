@@ -103,7 +103,7 @@ Public Module FormHelpers
         Return translations
     End Function
 
-    Function IsTranslatable(ByRef ctrl As Control) As Boolean
+    Private Function IsTranslatable(ByRef ctrl As Control) As Boolean
         If TypeOf ctrl Is IEntryControl Then
             Return CType(ctrl, IEntryControl).Translatable
         Else
@@ -530,17 +530,16 @@ Public Module FormHelpers
         Next
     End Sub
 
-    'Private Function GetSystemViewIdNo(form As Object)
-    '    Dim cmd As String
-    '    If form.ViewDisplayName Is Nothing Or form.ViewDisplayName = "" Then
-    '        form.ViewDisplayName = form.Name
-    '    End If
-    '    cmd = "SELECT IdNo FROM SystemView where SystemViewName ='" + form.ViewDisplayName.Trim() + "'"
-    '    Return TranslatorDac.ExecScalar(Of Int16)(cmd)
-    'End Function
-
-
-
+    Public Sub SetControlVisibility(ByRef cCtrl As Control, controlVisible As Boolean)
+        ' if Visible is false, Don't show the controls content by masking content with '*' asterisk
+        If UserIsASuperAdmin() Then
+            SetPropertyValue(cCtrl, "Visible", True)
+        ElseIf controlVisible Then
+            SetPropertyValue(cCtrl, "Visible", True)
+        Else
+            SetPropertyValue(cCtrl, "Visible", False)
+        End If
+    End Sub
 
 End Module
 

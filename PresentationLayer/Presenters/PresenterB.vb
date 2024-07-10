@@ -63,16 +63,7 @@ Public Class PresenterB(Of TV As IViewNew, TM As New)
             Me.View = itemView
             MyErrorProvider = GetErrorProvider()
             OriginalModel = Activator.CreateInstance(GetType(TM))
-            Dim systemViewName As String
-            If itemView.ViewDisplayName IsNot Nothing Then
-                systemViewName = itemView.ViewDisplayName.Trim()
-                If systemViewName Is Nothing Or systemViewName = "" Then
-                    systemViewName = View.FormName.Trim()
-                End If
-            Else
-                systemViewName = View.FormName.Trim()
-            End If
-            Dim data As List(Of DefaultFieldValue) = DefaultFieldValueService.GetDefaultFieldValues(systemViewName)
+            Dim data As List(Of DefaultFieldValue) = DefaultFieldValueService.GetDefaultFieldValues(View.ViewDisplayName)
             ViewDefaultFieldValues = New List(Of DefaultFieldValueModel)
             GlobalVariables.Mapper.Map(data, ViewDefaultFieldValues)
         End If

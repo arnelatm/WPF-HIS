@@ -5,17 +5,15 @@ Imports System.Windows.Forms
 
 Public Interface IViewNew
 
-    Property ViewDisplayName As String
-    Property CaptionCollection As Collection
-    ReadOnly Property FormName As String
-    Property RightToLeftDisplay As String
-    Property FormCulture As CultureInfo
     Event ArabicDisplayRequested()
-    Event OrigLanguageDisplayRequested()
-    Event FormTranslating(sender As Object)
-    Event FormLoaded(sender As Object, captionCollection As Collection)
     Event FormCaptionTranslator(formTranslator As Object, cForm As Object)
+    Event FormLoaded(sender As Object, captionCollection As Collection)
+    Event FormTranslating(sender As Object)
+    Event OrigLanguageDisplayRequested()
 
+    Property CaptionCollection As Collection
+    Property FormCulture As CultureInfo
+    Property RightToLeftDisplay As String
+    Property ViewDisplayName As String
 
-    ' No members..
 End Interface

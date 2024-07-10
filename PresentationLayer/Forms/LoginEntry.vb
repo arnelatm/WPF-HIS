@@ -114,12 +114,6 @@ Public Class LoginEntry
 
     Public Property EmployeeIdNo As Int32? Implements IUserViewNew.EmployeeIdNo
     Public Property FormCulture As CultureInfo Implements Views.IViewNew.FormCulture
-    Public ReadOnly Property FormName As String Implements Views.IViewNew.FormName
-        Get
-            Return Name
-        End Get
-    End Property
-
     Public Property IdNo As Int16 Implements IUserViewNew.IdNo
     Public Property LoginOk As Boolean Implements IUserViewNew.LoginOk
     Public Property MainTableName As String = "User"
