@@ -242,7 +242,9 @@
     <Compile Include="DFormBasic.Designer.vb">
       <DependentUpon>DFormBasic.vb</DependentUpon>
     </Compile>
-    <Compile Include="DFormBasic.vb" />
+    <Compile Include="DFormBasic.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="HijriCalendarForm.Designer.vb">
       <DependentUpon>HijriCalendarForm.vb</DependentUpon>
     </Compile>
