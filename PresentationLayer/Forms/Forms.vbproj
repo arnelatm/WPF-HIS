@@ -239,12 +239,6 @@
     <Compile Include="CrystalDecisions\ReportAppServer\CommonControls.vb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="DFormBasic.Designer.vb">
-      <DependentUpon>DFormBasic.vb</DependentUpon>
-    </Compile>
-    <Compile Include="DFormBasic.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="HijriCalendarForm.Designer.vb">
       <DependentUpon>HijriCalendarForm.vb</DependentUpon>
     </Compile>
@@ -314,9 +308,6 @@
       <DependentUpon>CrReportViewer.vb</DependentUpon>
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DFormBasic.resx">
-      <DependentUpon>DFormBasic.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HijriCalendarForm.resx">
       <DependentUpon>HijriCalendarForm.vb</DependentUpon>

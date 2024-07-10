@@ -120,17 +120,8 @@
   <metadata name="MyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <metadata name="TranslatorDac.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>157, 17</value>
-  </metadata>
-  <metadata name="StoreCaptions1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>283, 17</value>
-  </metadata>
-  <metadata name="AppDataDac.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>418, 17</value>
-  </metadata>
   <metadata name="ToolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>538, 17</value>
+    <value>157, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="CopyToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -372,18 +363,18 @@
   <data name="btnQuit.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         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
-        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
+        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
 </value>
   </data>
 </root>

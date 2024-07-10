@@ -3,7 +3,6 @@ Imports AATM.Libraries.GlobalFuncNSub
 Imports System.Windows.Forms
 Imports AATM.PresentationLayer.Views
 Imports System.Globalization
-Imports AATM.Libraries
 Imports System.ComponentModel
 Imports AATM.Libraries.MessagingLibrary
 
@@ -143,10 +142,11 @@ Public Class DFormBasic
 
     Private Sub btnTranslate_Click(sender As Object, e As EventArgs) Handles btnTranslate.Click
         CheckIfDebug()
-        Dim frm As New TranslationTableManager()
-        frm.SystemViewIdNoToTranslate = VSystemViewIdNo
-        frm.AppDataDAC = AppDataDac
-        frm.TranslatorDAC = TranslatorDac
+        Dim frm As New TranslationTableManager With {
+            .SystemViewIdNoToTranslate = VSystemViewIdNo,
+            .AppDataDAC = New Dac,
+            .TranslatorDAC = New Dac
+        }
         frm.Show()
     End Sub
 

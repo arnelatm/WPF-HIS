@@ -20,9 +20,6 @@ Partial Class DFormBasic
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DFormBasic))
-        Me.TranslatorDac = New AATM.Libraries.MessagingLibrary.Dac()
-        Me.StoreCaptions1 = New AATM.Libraries.MessagingLibrary.StoreCaptions()
-        Me.AppDataDac = New AATM.Libraries.MessagingLibrary.Dac()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.CopyToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.CutToolStripButton = New System.Windows.Forms.ToolStripButton()
@@ -35,14 +32,6 @@ Partial Class DFormBasic
         CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ToolStrip1.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'TranslatorDac
-        '
-        Me.TranslatorDac.Cs = ""
-        '
-        'AppDataDac
-        '
-        Me.AppDataDac.Cs = ""
         '
         'ToolStrip1
         '
@@ -145,10 +134,6 @@ Partial Class DFormBasic
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents TranslatorDac As Libraries.MessagingLibrary.Dac
-    Friend WithEvents StoreCaptions1 As Libraries.MessagingLibrary.StoreCaptions
-    Friend WithEvents AppDataDac As Libraries.MessagingLibrary.Dac
     Friend WithEvents ToolStrip1 As Windows.Forms.ToolStrip
     Public WithEvents btnArabic As Windows.Forms.ToolStripButton
     Friend WithEvents CutToolStripButton As Windows.Forms.ToolStripButton

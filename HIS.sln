@@ -946,6 +946,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CascadingComboBoxes", "Casc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CtrlCloneTst", "Libraries\CloneControl\CtrlCloneTst.csproj", "{9EDEE47A-DBFE-4F3E-BC0D-5CBEC8634785}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "NewForms", "Libraries\NewForms\NewForms.vbproj", "{D3E8B470-04D6-4844-B0D7-C424AF842469}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug (.NET 3.5)|Any CPU = Debug (.NET 3.5)|Any CPU
@@ -1178,6 +1180,14 @@ Global
 		{9EDEE47A-DBFE-4F3E-BC0D-5CBEC8634785}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
 		{9EDEE47A-DBFE-4F3E-BC0D-5CBEC8634785}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9EDEE47A-DBFE-4F3E-BC0D-5CBEC8634785}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3E8B470-04D6-4844-B0D7-C424AF842469}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3E8B470-04D6-4844-B0D7-C424AF842469}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
+		{D3E8B470-04D6-4844-B0D7-C424AF842469}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3E8B470-04D6-4844-B0D7-C424AF842469}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3E8B470-04D6-4844-B0D7-C424AF842469}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{D3E8B470-04D6-4844-B0D7-C424AF842469}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
+		{D3E8B470-04D6-4844-B0D7-C424AF842469}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3E8B470-04D6-4844-B0D7-C424AF842469}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1221,6 +1231,7 @@ Global
 		{D0B01D55-90CD-4F17-9FE8-92C4E06ADE25} = {0598D101-4147-476C-98FF-8C78D96B971E}
 		{53F1E513-02CC-40BF-A697-B1D602FDFDFC} = {0598D101-4147-476C-98FF-8C78D96B971E}
 		{9EDEE47A-DBFE-4F3E-BC0D-5CBEC8634785} = {A6C79BF6-2C34-4AEA-9845-360F48976962}
+		{D3E8B470-04D6-4844-B0D7-C424AF842469} = {66D0E355-CA37-4EEF-B18D-D4A9093BB11C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {433E9001-0D97-4552-9BF4-6FED04B194AE}

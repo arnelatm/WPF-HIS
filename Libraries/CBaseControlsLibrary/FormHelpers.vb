@@ -56,15 +56,6 @@ Public Module FormHelpers
         End If
     End Sub
 
-    'Public Function GetFormSystemViewIdNo(translatorDac As Dac, cForm As Object)
-    '    Dim cmd As String
-    '    If cForm.ViewDisplayName Is Nothing Or cForm.ViewDisplayName = "" Then
-    '        cForm.ViewDisplayName = cForm.Name
-    '    End If
-    '    cmd = "SELECT IdNo FROM SystemView where SystemViewName ='" + cForm.ViewDisplayName.Trim() + "'"
-    '    Return translatorDac.ExecScalar(Of Int16)(cmd)
-    'End Function
-
     Public Function GetSystemViewIdNo(cForm As Object, Optional translatorDac As Dac = Nothing)
         Dim cmd As String
         If cForm.ViewDisplayName Is Nothing Or cForm.ViewDisplayName = "" Then
@@ -76,27 +67,6 @@ Public Module FormHelpers
         End If
         Return translatorDac.ExecScalar(Of Int16)(cmd)
     End Function
-
-    'Public Function GetTargetLanguageIdNo(desiredLanguage As String) As Short
-    '    Dim cmd As String
-    '    Dim desiredLanguageIdNo As Int16
-    '    Dim targetLanguageIdNo As Int16
-    '    Dim translatorDAC As New Dac
-    '    If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
-    '        cmd = "Select IdNo from Languages where cultureInfoCode = '" + desiredLanguage + "'"
-    '        desiredLanguageIdNo = translatorDAC.ExecScalar(Of Int16)(cmd)
-    '        If desiredLanguageIdNo = 0 Then
-    '            targetLanguageIdNo = 0
-    '        Else
-    '            If Not TranslationLanguageExist(translatorDAC, desiredLanguage) Then
-    '                targetLanguageIdNo = GetFallBackLanguage(desiredLanguage, cmd, targetLanguageIdNo, translatorDAC)
-    '            Else
-    '                targetLanguageIdNo = desiredLanguageIdNo
-    '            End If
-    '        End If
-    '    End If
-    '    Return targetLanguageIdNo
-    'End Function
 
     Private Function GetTargetLanguageIdNo(translatorDac As Dac, desiredLanguage As String) As Short
         Dim cmd As String
