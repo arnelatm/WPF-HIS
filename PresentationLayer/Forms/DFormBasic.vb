@@ -25,7 +25,7 @@ Public Class DFormBasic
 
     Public Event ArabicDisplayRequested() Implements IViewNew.ArabicDisplayRequested
     Public Event FormCaptionTranslator(formTranslator As Object, cform As Object) Implements IViewNew.FormCaptionTranslator
-    Public Event FormLoaded(sender As Object, captionCollection As Collection) Implements IViewNew.FormLoaded
+    Public Event FormLoaded(sender As Object, captionCollection As Collection, allControls As List(Of Control)) Implements IViewNew.FormLoaded
     Public Event OrigLanguageDisplayRequested() Implements IViewNew.OrigLanguageDisplayRequested
     Public Property CaptionCollection As New Collection Implements IViewNew.CaptionCollection
     Public Property FormCulture As CultureInfo Implements IViewNew.FormCulture
@@ -41,9 +41,9 @@ Public Class DFormBasic
         End Set
     End Property
 
-    Public Sub DFormBasic_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Protected Sub DFormBasic_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If _firstLoadSwitch = 0 Then
-            RaiseEvent FormLoaded(sender, CaptionCollection)
+            RaiseEvent FormLoaded(sender, CaptionCollection, AllControls)
             _firstLoadSwitch = 1
         End If
         'If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
@@ -150,7 +150,7 @@ Public Class DFormBasic
                 curFormCulture = New CultureInfo(cultureCode, False)
                 FormCulture = curFormCulture
                 RightToLeft = RightToLeft.Yes
-                TranslateForm(Me)
+                TranslateForm(Me, AllControls)
                 RaiseEvent ArabicDisplayRequested()
             Else
                 MessageBox.Show("Invalid DefaultMirroredCultureInfoStr " & cultureCode & ".")

@@ -261,10 +261,8 @@ Public Class CFormBase
             Debugger.Break()
         End If
         ForceLooseFocusOnCurrentControl()
-        ForceEndEditForAllGridControls()
-        Dim allControls As New List(Of Control)
-        GlobalFunctions.FindControlRecursive(allControls, Me)
-        For Each cCtrl As Control In allControls
+        ForceEndEditForAllGridControls(AllControls)
+        For Each cCtrl As Control In AllControls
             If TypeOf cCtrl Is DataGridView Then
                 Dim cGrid As DataGridView = cCtrl
                 cGrid.EndEdit()
@@ -355,7 +353,7 @@ Public Class CFormBase
             'CreateDataSources()
             CreateMainFieldsDictionary()
             If Ea IsNot Nothing Then
-                Ea.PublishEvent(New EntryFormLoaded(Me))
+                Ea.PublishEvent(New EntryFormLoaded(Me, AllControls))
             End If
             Inputs(False)
             If GlobalVariables.RightToLeftLayout Then
@@ -412,16 +410,15 @@ Public Class CFormBase
     End Sub
 
     Public Sub Inputs(onOff As Boolean)
-        Dim allCtrl As New List(Of Control)
         Dim ctrl As Control
-        For Each ctrl In GlobalFunctions.FindControlRecursive(allCtrl, Me)
+        For Each ctrl In AllControls
             If TypeOf ctrl Is IEntryControl Then
                 SetPropertyValue(ctrl, "EditingMode", onOff)
             End If
         Next
         If onOff Then
             RaiseEvent InputsTurnedOn()
-            UnselectTextOnCtComboboxes(allCtrl)
+            UnselectTextOnCtComboboxes(AllControls)
         Else
             RaiseEvent InputsTurnedOff()
         End If
@@ -448,36 +445,36 @@ Public Class CFormBase
         PasteText()
     End Sub
 
-    Protected Overridable Sub SwitchUiLanguage(originalUi As Boolean)
-        SuspendDrawing()
-        Dim sw As Integer = 0
-        If originalUi Then
-            If TextDisplayLanguage <> GlobalVariables.DefaultUnmirroredCultureInfoStr Then
-                TextDisplayLanguage = GlobalVariables.DefaultUnmirroredCultureInfoStr
-                sw = 1
-            End If
-            GlobalVariables.RightToLeftLayout = True
-            RightToLeft = RightToLeft.No
-        Else
-            If TextDisplayLanguage <> GlobalVariables.DefaultMirroredCultureInfoStr Then
-                TextDisplayLanguage = GlobalVariables.DefaultMirroredCultureInfoStr
-                sw = 1
-            End If
-            GlobalVariables.RightToLeftLayout = False
-            RightToLeft = RightToLeft.Yes
-        End If
-        TranslateForm()
-        If sw = 1 Then
-            CultureInfo.CurrentCulture = New CultureInfo(TextDisplayLanguage, False)
-            btnArabic.Visible = originalUi
-            btnOriginal.Visible = Not originalUi
-            btnArabic.Enabled = originalUi
-            btnOriginal.Enabled = Not originalUi
-            If Ea IsNot Nothing Then
-                Ea.PublishEvent(New LanguageChanged(Me))
-            End If
-        End If
-        ResumeDrawing()
-    End Sub
+    'Protected Overridable Sub SwitchUiLanguage(originalUi As Boolean)
+    '    SuspendDrawing()
+    '    Dim sw As Integer = 0
+    '    If originalUi Then
+    '        If TextDisplayLanguage <> GlobalVariables.DefaultUnmirroredCultureInfoStr Then
+    '            TextDisplayLanguage = GlobalVariables.DefaultUnmirroredCultureInfoStr
+    '            sw = 1
+    '        End If
+    '        GlobalVariables.RightToLeftLayout = True
+    '        RightToLeft = RightToLeft.No
+    '    Else
+    '        If TextDisplayLanguage <> GlobalVariables.DefaultMirroredCultureInfoStr Then
+    '            TextDisplayLanguage = GlobalVariables.DefaultMirroredCultureInfoStr
+    '            sw = 1
+    '        End If
+    '        GlobalVariables.RightToLeftLayout = False
+    '        RightToLeft = RightToLeft.Yes
+    '    End If
+    '    TranslateForm()
+    '    If sw = 1 Then
+    '        CultureInfo.CurrentCulture = New CultureInfo(TextDisplayLanguage, False)
+    '        btnArabic.Visible = originalUi
+    '        btnOriginal.Visible = Not originalUi
+    '        btnArabic.Enabled = originalUi
+    '        btnOriginal.Enabled = Not originalUi
+    '        If Ea IsNot Nothing Then
+    '            Ea.PublishEvent(New LanguageChanged(Me))
+    '        End If
+    '    End If
+    '    ResumeDrawing()
+    'End Sub
 
 End Class

@@ -43,12 +43,12 @@ Public Module FormHelpers
         Return Nothing
     End Function
 
-    Public Sub GetNSaveCaptions(sender As Object, captionCollection As Collection)
+    Public Sub GetNSaveCaptions(sender As Object, captionCollection As Collection, AllControls As List(Of Control))
         If GlobalVariables.TranslationMode Then
             Dim storeCaptions As New StoreCaptions
             Dim translatorDAC As New Dac
-            captionCollection = storeCaptions.StoreTranslation(sender)
-            storeCaptions.SaveControlsOriginalText(sender)
+            captionCollection = storeCaptions.StoreTranslation(sender, AllControls)
+            storeCaptions.SaveControlsOriginalText(sender, AllControls)
             If sender.ViewDisplayName Is Nothing Or sender.ViewDisplayName = "" Then
                 sender.ViewDisplayName = sender.Name
             End If
@@ -131,7 +131,7 @@ Public Module FormHelpers
     End Function
 
     Public Sub MakeFormRightToLeft(pForm As Form, allControls As List(Of Control))
-        For Each cCtrl As Control In GlobalFunctions.FindControlRecursive(allControls, pForm)
+        For Each cCtrl As Control In allControls
             If TypeOf cCtrl Is CButton OrElse TypeOf cCtrl Is Button Then
                 If GlobalFuncNSub.GetPropertyValue(cCtrl, "Image") IsNot Nothing Then
                     Dim btnImageName As String
@@ -150,17 +150,15 @@ Public Module FormHelpers
         Next cCtrl
     End Sub
 
-    Public Sub TranslateForm(form As Object) ' form As Control, formCulture As CultureInfo)
+    Public Sub TranslateForm(form As Object, allControls As List(Of Control))
         If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
             Dim settings As New ControlSettingsSaver
-            Dim allCtrl As New List(Of Control)
-            allCtrl = GlobalFunctions.FindControlRecursive(allCtrl, form)
             settings.SaveSetting(form)
             ' form location is being changed when Resetting RightToLeftLayout so need to save values
             ' to restore form with the same size and location
             'DoubleBuffered = True
-            TranslateCaptions(form, allCtrl, form.formCulture.Name)
-            SetControlLayout(form, allCtrl)
+            TranslateCaptions(form, allControls, form.formCulture.Name)
+            SetControlLayout(form, allControls)
             settings.RestoreSetting(form)
             'ResumeDrawing()
             'If GlobalVariables.TranslationMode Then

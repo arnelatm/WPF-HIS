@@ -153,15 +153,16 @@ Public Module GlobalFunctions
         Return NoOfYears - 1 + (DateDiff(DateInterval.Day, tempDate, CDate(endDate)) + 1) / 365
     End Function
 
-    Public Function FindControlRecursive(list As List(Of Control), parent As Control) As List(Of Control)
-        If parent Is Nothing Then Return list
+    Public Function FindControlRecursive(ByRef list As List(Of Control), parent As Control) As List(Of Control)
         list.Add(parent)
-        For Each child As Control In parent.Controls
-            'If child.Name = "DataGridViewPcJournals" Then
-            '    Debugger.Break()
-            'End If
-            GlobalFunctions.FindControlRecursive(list, child)
-        Next
+        If parent IsNot Nothing Then
+            For Each child As Control In parent.Controls
+                'If child.Name = "DataGridViewPcJournals" Then
+                '    Debugger.Break()
+                'End If
+                GlobalFunctions.FindControlRecursive(list, child)
+            Next
+        End If
         Return list
     End Function
 

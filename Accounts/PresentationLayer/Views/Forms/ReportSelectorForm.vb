@@ -13,7 +13,7 @@ Namespace PresentationLayer.Views.Forms
         Public Event PrintReportEvent(bsReportList As BindingSource) Implements IReportSelectorView.PrintReportEvent
         Public Event SelectedReportGroupChangedEvent(ByRef bsReportGroupList As BindingSource, ByRef bsReportList As BindingSource) Implements IReportSelectorView.SelectedReportGroupChangedEvent
 
-        Public Sub New() ' reportGroupParam As String)
+        Public Sub New()
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()

@@ -41,6 +41,7 @@ Public Class CFormEntry
     Private _displayOnly As Boolean = False
     Private _translatable As Boolean = True
     Private _firstLoadSwitch As UInt16 = 0
+    Private _allControls As New List(Of Control)
 
     Public Event AfterUpdateView()
     Public Property AddOnOpen As Boolean = False
@@ -93,8 +94,6 @@ Public Class CFormEntry
             End If
         End If
         Me.Activate()
-        'Dim allCtrl As New List(Of Control)
-        'allCtrl = FindControlRecursive(allCtrl, Me)
         'For Each control In allCtrl
         '    If TypeOf control Is CtDataGridView Then
         '        Dim dgv As CtDataGridView
@@ -468,7 +467,7 @@ Public Class CFormEntry
             Debugger.Break()
         End If
         ForceLooseFocusOnCurrentControl()
-        ForceEndEditForAllGridControls()
+        ForceEndEditForAllGridControls(AllControls)
         Dim saveData As New SaveDataRequested(Me)
         If Ea IsNot Nothing Then
             Ea.PublishEvent(saveData)
@@ -571,7 +570,6 @@ Public Class CFormEntry
     'End Sub
 
     Private Sub CFormEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
         'If _firstLoadSwitch = 0 Then
         '    GetNSaveCaptions()
         '    _firstLoadSwitch = 1
@@ -581,7 +579,7 @@ Public Class CFormEntry
             TextDisplayLanguage = CultureInfo.CurrentCulture.Name
             'CreateDataSources()
             CreateMainFieldsDictionary()
-            Dim formLoaded As New EntryFormLoaded(Me)
+            Dim formLoaded As New EntryFormLoaded(Me, AllControls)
             If Ea IsNot Nothing Then
                 Ea.PublishEvent(formLoaded)
             End If
@@ -676,9 +674,8 @@ Public Class CFormEntry
     End Sub
 
     Public Sub Inputs(onOff As Boolean)
-        Dim allCtrl As New List(Of Control)
         Dim ctrl As Control
-        For Each ctrl In GlobalFunctions.FindControlRecursive(allCtrl, Me)
+        For Each ctrl In _allControls
             If TypeOf ctrl Is IEntryControl Then
                 'If TypeOf ctrl Is CtDataGridView Then 'And ctrl.Name = "dgvAccountIdNo" Then ' = "cboAccountIdNo" Then
                 '    Dim cx As CtComboBoxColumn
@@ -705,17 +702,14 @@ Public Class CFormEntry
         Else
             RaiseEvent InputsTurnedOff()
         End If
-        UnselectTextOnCtComboboxes(allCtrl)
+        UnselectTextOnCtComboboxes(_allControls)
         If FirstControl IsNot Nothing Then
             FirstControl.Focus()
         End If
     End Sub
 
     Public Sub UnselectTextOnCtComboboxes(Optional allCtrl As List(Of Control) = Nothing)
-        If allCtrl Is Nothing Then
-            GlobalFunctions.FindControlRecursive(allCtrl, Me)
-        End If
-        ' i don't want text to be selected on comboboxes this sub will make sure to unselect the text for CtCombobox's
+        ' I don't want text to be selected on comboboxes this sub will make sure to unselect the text for CtCombobox's
         For Each ctrl In allCtrl
             If TypeOf ctrl Is CtComboBox Then
                 DirectCast(ctrl, CtComboBox).SelectionLength = 0
@@ -733,6 +727,7 @@ Public Class CFormEntry
 
     Protected Overrides Sub SwitchUiLanguage(originalUi As Boolean)
         'Me.SuspendDrawingNew()
+        Me.Visible = False
         If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
             'SuspendLayout()
             'SuspendDrawing()
@@ -772,6 +767,7 @@ Public Class CFormEntry
             End If
             'Visible = True
         End If
+        Me.Visible = True
         'ResumeDrawing()
         'ResumeLayout()
         'Me.ResumeDrawingNew()

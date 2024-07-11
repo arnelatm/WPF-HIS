@@ -378,14 +378,16 @@ End Class
 
 Public Class EntryFormLoaded
 
-    Public Sub New(ByVal viewControl As Control)
+    Public Sub New(ByVal viewControl As Control, allControls As List(Of Control))
         Me.ViewControl = viewControl
+        Me.AllControls = allControls
     End Sub
 
     Public Property ViewControl As Control
     Public Property AddingAllowed As Boolean
     Public Property EditingAllowed As Boolean
     Public Property DeletingAllowed As Boolean
+    Public Property AllControls As List(Of Control)
 
 End Class
 

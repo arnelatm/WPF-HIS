@@ -12,7 +12,7 @@ Imports AATM.Libraries.MessagingLibrary
 Public Class PresenterB(Of TV As IViewNew, TM As New)
 
     Public MyErrorProvider As New ErrorProviderExtended
-    Public Service As Object
+    Protected Service As Object
 
     Protected DataFilter As String = Nothing
     Protected DefaultFieldValueService As New DefaultFieldValueService
@@ -38,10 +38,10 @@ Public Class PresenterB(Of TV As IViewNew, TM As New)
         End If
     End Sub
 
-    Public Property TableName As String
-    Public Property View As TV
-    Public Property ViewDefaultFieldValues As List(Of DefaultFieldValueModel)
-    Public Function GetControlSecurityIdNo(searchValue As String, Optional menu As Boolean = False) As String
+    Protected Property TableName As String
+    Protected Property View As TV
+    Protected Property ViewDefaultFieldValues As List(Of DefaultFieldValueModel)
+    Protected Function GetControlSecurityIdNo(searchValue As String, Optional menu As Boolean = False) As String
         Try
             Return Service.GetControlSecurityIdNo(searchValue, menu)
         Catch ex As Exception
@@ -49,21 +49,21 @@ Public Class PresenterB(Of TV As IViewNew, TM As New)
         End Try
     End Function
 
-    Public Function GetControlSecurityValues(ByRef controlSecurityKey As String, Optional menu As Boolean = False) As ArrayList
+    Protected Function GetControlSecurityValues(ByRef controlSecurityKey As String, Optional menu As Boolean = False) As ArrayList
         Dim controlSecurityObjectIdNo As Int32
         controlSecurityObjectIdNo = GetControlSecurityIdNo(controlSecurityKey, menu)
         Return GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo, GlobalVariables.UserIdNo)
     End Function
 
-    Public Function GetDtRecords(ByVal pTableName As String, ByVal fieldNames As String(), Optional filter As String = Nothing, Optional sortKey As String = Nothing, Optional ascending As Boolean = True)
+    Protected Function GetDtRecords(ByVal pTableName As String, ByVal fieldNames As String(), Optional filter As String = Nothing, Optional sortKey As String = Nothing, Optional ascending As Boolean = True)
         Return Service.GetDtRecords(pTableName, fieldNames, filter, sortKey, ascending)
     End Function
 
-    Public Function GetDtRecords(ByVal pTableName As String, ByVal fieldNames As String, Optional filter As String = Nothing, Optional sortKey As String = Nothing, Optional ascending As Boolean = True)
+    Protected Function GetDtRecords(ByVal pTableName As String, ByVal fieldNames As String, Optional filter As String = Nothing, Optional sortKey As String = Nothing, Optional ascending As Boolean = True)
         Return Service.GetDtRecords(pTableName, fieldNames, filter, sortKey, ascending)
     End Function
 
-    Public Function GetRecordFieldWithKey(searchValue As String, cTableName As String, searchFieldName As String,
+    Protected Function GetRecordFieldWithKey(searchValue As String, cTableName As String, searchFieldName As String,
                                        returnFieldName As String) _
      As String
         Try
@@ -73,11 +73,11 @@ Public Class PresenterB(Of TV As IViewNew, TM As New)
         End Try
     End Function
 
-    Public Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int16, userIdNo As Int16) As ArrayList
+    Protected Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int16, userIdNo As Int16) As ArrayList
         Return Service.GetUserSecurity(securityObjectIdNo, securityGroupIdNo, userIdNo)
     End Function
 
-    Public Function MakeDataTable(ByRef dataTableSpecs As Object) As DataTable
+    Protected Function MakeDataTable(ByRef dataTableSpecs As Object) As DataTable
         Dim dtl As New DataLookupSpecs
         Const LookupTableName As Int32 = 0
         Const LookupFieldNames As Int32 = 1
@@ -110,9 +110,9 @@ Public Class PresenterB(Of TV As IViewNew, TM As New)
         Return GetDtRecords(dtl.TableName, dtl.LuFields, dtl.Filter, dtl.SortKey)
     End Function
 
-    Public Sub OnFormLoaded(sender As Object, captionCollection As Collection)
+    Protected Sub OnFormLoaded(sender As Object, captionCollection As Collection, AllControls As List(Of Control))
         If GlobalVariables.TranslationMode Then
-            GetNSaveCaptions(sender, captionCollection)
+            GetNSaveCaptions(sender, captionCollection, AllControls)
         End If
     End Sub
 
@@ -156,6 +156,7 @@ Public Class PresenterB(Of TV As IViewNew, TM As New)
     End Sub
     Protected Overridable Sub OnOrigLanguageDisplayRequested()
     End Sub
+
     Private Sub ComposeLookupProperties(dtl As DataTableLookupSpec)
         Dim RightToLeftFormat = GlobalFunctions.IsRightToLeft(CultureInfo.CurrentCulture.ToString())
         If dtl.LuFields Is Nothing Then
@@ -239,6 +240,7 @@ Public Class PresenterB(Of TV As IViewNew, TM As New)
         cd = Nothing
         Return data
     End Function
+
     Private Function SetControlSecurityValue(securityIdNo As Integer) As ArrayList
         Dim controlSecurityValues As ArrayList
         controlSecurityValues = GetUserSecurity(Convert.ToInt16(securityIdNo), GlobalVariables.SecurityGroupIdNo, GlobalVariables.UserIdNo)

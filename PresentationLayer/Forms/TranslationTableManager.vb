@@ -47,7 +47,7 @@ Public Class TranslationTableManager
 
     Private Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
-            StoreCaptions1.StoreCaptions(Me)
+            StoreCaptions1.StoreCaptions(Me, AllControls)
             Cmd = "Select IdNo from SystemView where SystemViewName ='" + Name.Trim() + "'"
             VSystemViewIdNo = TranslatorDAC.ExecScalar(Of Int16)(Cmd)
             LoadLanguages(cmbLanguage)

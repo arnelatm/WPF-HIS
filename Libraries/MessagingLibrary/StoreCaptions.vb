@@ -23,7 +23,7 @@ Public Class StoreCaptions
 
     Public Captions As New Collection
 
-    Function StoreCaptions(ByVal frm As Object) As Collection
+    Function StoreCaptions(ByVal frm As Object, allControls As List(Of Control)) As Collection
         Dim systemViewIdNo As Int16
         Dim viewDisplayName As String
         frm.Tag = frm.Text
@@ -36,8 +36,7 @@ Public Class StoreCaptions
         systemViewIdNo = GetSystemViewIdNo(viewDisplayName)
         InsertTranslation(frm.Text, systemViewIdNo)
         Dim t As String
-        Dim allCtrl As New List(Of Control)
-        For Each cCtrl As Control In GlobalFunctions.FindControlRecursive(allCtrl, frm)
+        For Each cCtrl As Control In allControls
             If TypeOf cCtrl Is MenuStrip Then
                 Dim subMenuName = cCtrl.Name
                 Dim menuStrip As MenuStrip = cCtrl
@@ -94,7 +93,7 @@ Public Class StoreCaptions
         Return Captions
     End Function
 
-    Function StoreTranslation(ByVal frm As Object) As Collection
+    Function StoreTranslation(ByVal frm As Object, allControls As List(Of Control)) As Collection
         Dim systemViewIdNo As Int16
         Dim viewDisplayName As String
         '_dac = frm.TranslatorDAC
@@ -109,8 +108,7 @@ Public Class StoreCaptions
         systemViewIdNo = GetSystemViewIdNo(viewDisplayName)
         InsertTranslation(frm.Text, systemViewIdNo)
         Dim t As String
-        Dim allCtrl As New List(Of Control)
-        For Each cCtrl As Control In GlobalFunctions.FindControlRecursive(allCtrl, frm)
+        For Each cCtrl As Control In allControls
             If TypeOf cCtrl Is MenuStrip Then
                 Dim subMenuName = cCtrl.Name
                 Dim menuStrip As MenuStrip = cCtrl
@@ -137,8 +135,12 @@ Public Class StoreCaptions
                        TypeOf cCtrl Is ComboBox OrElse
                        TypeOf cCtrl Is MaskedTextBox OrElse
                        cCtrl.GetType().Name = "CCustomDateTimePicker" OrElse
-                       TypeOf cCtrl Is FlowLayoutPanel Then
-                    Else
+                       TypeOf cCtrl Is FlowLayoutPanel OrElse
+                       cCtrl.GetType().Name = "gTimePicker" Then
+                    ElseIf cCtrl.Text > "/z" AndAlso cCtrl.Text < "A" Then
+                        Debugger.Break()
+                        ' ignore these translations - non text - no need to translate? 
+                    Else 'If cCtrl.Text Then
                         'TypeOf cCtrl Is Button OrElse
                         'TypeOf cCtrl Is Label OrElse
                         'TypeOf cCtrl Is CheckBox OrElse
@@ -159,7 +161,7 @@ Public Class StoreCaptions
                         End If
                     End If
                 Catch ex As Exception
-
+                    'Debugger.Break()
                 End Try
             End If
         Next
@@ -303,11 +305,10 @@ Public Class StoreCaptions
         Next
     End Sub
 
-    Function SaveControlsOriginalText(ByVal frm As Object) As Collection
+    Function SaveControlsOriginalText(ByVal frm As Object, allControls As List(Of Control)) As Collection
         frm.Tag = frm.Text
         Dim t As String
-        Dim allCtrl As New List(Of Control)
-        For Each cCtrl As Control In GlobalFunctions.FindControlRecursive(allCtrl, frm)
+        For Each cCtrl As Control In allControls
             If TypeOf cCtrl Is MenuStrip Then
                 Dim subMenuName = cCtrl.Name
                 Dim menuStrip As MenuStrip = cCtrl
@@ -331,8 +332,9 @@ Public Class StoreCaptions
                        TypeOf cCtrl Is ComboBox OrElse
                        TypeOf cCtrl Is MaskedTextBox OrElse
                        cCtrl.GetType().Name = "CCustomDateTimePicker" OrElse
-                       TypeOf cCtrl Is FlowLayoutPanel Then
-                        'Debugger.Break()
+                       TypeOf cCtrl Is FlowLayoutPanel OrElse
+                       cCtrl.GetType().Name = "gTimePicker" Then
+                        ' nothing to do -  Debugger.Break()
                     Else
                         'TypeOf cCtrl Is Button OrElse
                         'TypeOf cCtrl Is Label OrElse
@@ -345,7 +347,12 @@ Public Class StoreCaptions
                         'TypeOf cCtrl Is TabPage Then
                         'TypeOf cCtrl Is AATM.Libraries.CBaseControlsLibrary.CButton Then
                         t = cCtrl.Text
-                        If Not String.IsNullOrWhiteSpace(t) Then
+                        If String.IsNullOrWhiteSpace(t) Then
+                            ' nothing to do
+                        ElseIf t > "/z" And t < "A" Then
+                            ' nothing to do
+                            Debugger.Break()
+                        Else
                             SaveOriginalText(cCtrl, t)
                         End If
                     End If

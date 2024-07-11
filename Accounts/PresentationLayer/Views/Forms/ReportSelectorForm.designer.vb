@@ -86,8 +86,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewReportList.FirstRowInsertionEnabled = True
             Me.DataGridViewReportList.IgnoreCase = False
             Me.DataGridViewReportList.IsDirty = False
-            Me.DataGridViewReportList.Location = New System.Drawing.Point(16, 364)
-            Me.DataGridViewReportList.Margin = New System.Windows.Forms.Padding(4)
+            Me.DataGridViewReportList.Location = New System.Drawing.Point(12, 296)
             Me.DataGridViewReportList.Name = "DataGridViewReportList"
             Me.DataGridViewReportList.OldCellValue = Nothing
             Me.DataGridViewReportList.ReadOnly = True
@@ -99,7 +98,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewReportList.SequenceColumn = "dgvSequence"
             Me.DataGridViewReportList.SequenceFieldName = "Sequence"
             Me.DataGridViewReportList.ShowFooter = False
-            Me.DataGridViewReportList.Size = New System.Drawing.Size(635, 288)
+            Me.DataGridViewReportList.Size = New System.Drawing.Size(476, 234)
             Me.DataGridViewReportList.TabIndex = 11
             Me.DataGridViewReportList.Translatable = True
             '
@@ -178,8 +177,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewReportGroupList.FirstRowInsertionEnabled = True
             Me.DataGridViewReportGroupList.IgnoreCase = False
             Me.DataGridViewReportGroupList.IsDirty = False
-            Me.DataGridViewReportGroupList.Location = New System.Drawing.Point(16, 69)
-            Me.DataGridViewReportGroupList.Margin = New System.Windows.Forms.Padding(4)
+            Me.DataGridViewReportGroupList.Location = New System.Drawing.Point(12, 56)
             Me.DataGridViewReportGroupList.Name = "DataGridViewReportGroupList"
             Me.DataGridViewReportGroupList.OldCellValue = Nothing
             Me.DataGridViewReportGroupList.ReadOnly = True
@@ -191,7 +189,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewReportGroupList.SequenceColumn = "dgvSequence"
             Me.DataGridViewReportGroupList.SequenceFieldName = "Sequence"
             Me.DataGridViewReportGroupList.ShowFooter = False
-            Me.DataGridViewReportGroupList.Size = New System.Drawing.Size(635, 288)
+            Me.DataGridViewReportGroupList.Size = New System.Drawing.Size(476, 234)
             Me.DataGridViewReportGroupList.TabIndex = 12
             Me.DataGridViewReportGroupList.Translatable = True
             '
@@ -212,7 +210,7 @@ Namespace PresentationLayer.Views.Forms
             'DataGridViewTextBoxColumn9
             '
             Me.DataGridViewTextBoxColumn9.DataPropertyName = "ReportGroupCode"
-            Me.DataGridViewTextBoxColumn9.HeaderText = "ReportGroupCode"
+            Me.DataGridViewTextBoxColumn9.HeaderText = "Report Group Code"
             Me.DataGridViewTextBoxColumn9.MinimumWidth = 6
             Me.DataGridViewTextBoxColumn9.Name = "DataGridViewTextBoxColumn9"
             Me.DataGridViewTextBoxColumn9.ReadOnly = True
@@ -223,7 +221,7 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.DataGridViewTextBoxColumn10.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
             Me.DataGridViewTextBoxColumn10.DataPropertyName = "ReportGroupName"
-            Me.DataGridViewTextBoxColumn10.HeaderText = "ReportGroupName"
+            Me.DataGridViewTextBoxColumn10.HeaderText = "Report Group Name"
             Me.DataGridViewTextBoxColumn10.MinimumWidth = 6
             Me.DataGridViewTextBoxColumn10.Name = "DataGridViewTextBoxColumn10"
             Me.DataGridViewTextBoxColumn10.ReadOnly = True
@@ -231,7 +229,7 @@ Namespace PresentationLayer.Views.Forms
             'DataGridViewTextBoxColumn11
             '
             Me.DataGridViewTextBoxColumn11.DataPropertyName = "ReportGroupNameAra"
-            Me.DataGridViewTextBoxColumn11.HeaderText = "ReportGroupNameAra"
+            Me.DataGridViewTextBoxColumn11.HeaderText = "Report Group Name Arabic"
             Me.DataGridViewTextBoxColumn11.MinimumWidth = 6
             Me.DataGridViewTextBoxColumn11.Name = "DataGridViewTextBoxColumn11"
             Me.DataGridViewTextBoxColumn11.ReadOnly = True
@@ -240,15 +238,18 @@ Namespace PresentationLayer.Views.Forms
             '
             'ReportSelectorForm
             '
-            Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+            Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
             Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
             Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile
-            Me.ClientSize = New System.Drawing.Size(672, 668)
+            Me.ClientSize = New System.Drawing.Size(504, 549)
             Me.Controls.Add(Me.DataGridViewReportGroupList)
             Me.Controls.Add(Me.DataGridViewReportList)
-            Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-            Me.MinimumSize = New System.Drawing.Size(394, 715)
+            Me.FormCulture = New System.Globalization.CultureInfo("en-GB")
+            Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+            Me.MinimumSize = New System.Drawing.Size(300, 588)
             Me.Name = "ReportSelectorForm"
+            Me.RightToLeft = System.Windows.Forms.RightToLeft.No
+            Me.RightToLeftDisplay = "False"
             Me.Text = "Report Selector"
             Me.Controls.SetChildIndex(Me.DataGridViewReportList, 0)
             Me.Controls.SetChildIndex(Me.DataGridViewReportGroupList, 0)

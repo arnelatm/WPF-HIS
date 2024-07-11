@@ -25,7 +25,6 @@ Public Class BfMain
     Private _formCulture As CultureInfo
     Private _systemViewIdNo As Int32
     Private _firstLoadSwitch As Int32 = 0
-
     'Private _myPresenter As UserPresenter
     Protected CaptionCollection As New Collection
 
@@ -180,8 +179,6 @@ Public Class BfMain
             SwitchUiLanguage(True)
         End If
         Me.Activate()
-        Dim allCtrl As New List(Of Control)
-        allCtrl = GlobalFunctions.FindControlRecursive(allCtrl, Me)
         'ResumeDrawing()
         FormShown = True
     End Sub
@@ -218,14 +215,12 @@ Public Class BfMain
         If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
             'SuspendDrawing()
             Dim settings As New ControlSettingsSaver
-            Dim allCtrl As New List(Of Control)
-            allCtrl = GlobalFunctions.FindControlRecursive(allCtrl, Me)
             settings.SaveSetting(Me)
             ' form location is being changed when Resetting RightToLeftLayout so need to save values
             ' to restore form with the same size and location
             DoubleBuffered = True
-            TranslateCaptions(allCtrl, TextDisplayLanguage)
-            SetControlLayout(allCtrl)
+            TranslateCaptions(AllControls, TextDisplayLanguage)
+            SetControlLayout(AllControls)
             settings.RestoreSetting(Me)
             'ResumeDrawing()
             If GlobalVariables.TranslationMode Then
@@ -234,7 +229,7 @@ Public Class BfMain
         End If
     End Sub
 
-    Protected Sub SetControlLayout(ByRef allCtrl As List(Of Control))
+    Protected Sub SetControlLayout(ByRef allControls As List(Of Control))
         Dim myImage As Bitmap
         myImage = BackgroundImage
         BackgroundImage = Nothing
@@ -247,7 +242,7 @@ Public Class BfMain
             RightToLeft = RightToLeft.No
             RightToLeftLayout = False
         End If
-        LayOutControls(allCtrl)
+        LayOutControls(allControls)
         BackgroundImage = myImage
     End Sub
 
@@ -297,7 +292,7 @@ Public Class BfMain
             Else
                 Dim targetLanguageIdNo As Short = GetTargetLanguageIdNo(desiredLanguage, allowFallBack)
                 If targetLanguageIdNo = 0 Then
-                    UseOriginalCaptions()
+                    UseOriginalCaptions(allCtrl)
                 Else
                     TranslateToLanguageIdNo(allCtrl, targetLanguageIdNo)
                 End If
@@ -460,91 +455,6 @@ Public Class BfMain
         cmd = "SELECT IdNo FROM SystemView where SystemViewName ='" + ViewDisplayName.Trim() + "'"
         Return TranslatorDAC.ExecScalar(Of Int16)(cmd)
     End Function
-
-    'Protected Sub TranslateControls(targetLanguageIdNo As Integer)
-    '    Dim cmd As String
-    '    cmd = "Select Caption, translatedCaption from SystemViewItemOriginal_view where LanguageIdNo = " + targetLanguageIdNo.ToString() + " and SystemViewIdNo = " + VSystemViewIdNo.ToString()
-    '    Dim translations As DataSet
-    '    translations = TranslatorDAC.ReturnDs(cmd)
-    '    Dv = translations.Tables(0).DefaultView
-    '    Dv.Sort = "Caption"
-    '    Dim r As Integer
-    '    If Tag Is Nothing Then
-    '        r = 0
-    '    Else
-    '        r = Dv.Find(Tag.ToString.TrimEnd)
-    '    End If
-    '    If r > 0 Then
-    '        Text = Dv(r).Item("translatedCaption")
-    '    Else
-    '        Text = Tag
-    '    End If
-    '    Dim allCtrl As New List(Of Control)
-    '    For Each cCtrl As Control In FindControlRecursive(allCtrl, Me)
-    '        If IsTranslatable(cCtrl) Then
-    '            If TypeOf cCtrl Is MenuStrip Then
-    '                Dim subMenuName = ""
-    '                Dim menuStrip As MenuStrip = cCtrl
-    '                TranslateMenuStripItems(menuStrip.Items, subMenuName)
-    '            ElseIf TypeOf cCtrl Is ToolStrip Then
-    '                TranslateToolStripItems(cCtrl)
-    '            ElseIf TypeOf cCtrl Is CTreeViewOld Or TypeOf cCtrl Is TreeView Then
-    '                Dim cT = CType(cCtrl, TreeView)
-    '                cT.ExpandAll()
-    '                'cT.RightToLeftLayout = GlobalVariables.RightToLeftLayout
-    '                'cT.RightToLeft = If(GlobalVariables.RightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
-    '            ElseIf TypeOf cCtrl Is DataGridView Then
-    '                '_originalText = CaptionCollection.Item(cCtrl.Name)
-    '                'r = Dv.Find(_originalText)
-    '                'If r >= 0 Then
-    '                ' CType(cCtrl, DataGridView).Text = Dv(r).Item(1)
-    '                'Else
-    '                'CType(cCtrl, DataGridView).Text = cCtrl.Tag
-    '                'End If
-    '                TranslateDataGridView(cCtrl)
-    '            ElseIf TypeOf cCtrl Is DataGrid Then
-    '                _originalText = CaptionCollection.Item(cCtrl.Name)
-    '                r = Dv.Find(_originalText)
-    '                If r >= 0 Then
-    '                    CType(cCtrl, DataGrid).CaptionText = Dv(r).Item(1)
-    '                Else
-    '                    CType(cCtrl, DataGrid).CaptionText = cCtrl.Tag
-    '                End If
-    '            Else
-    '                If TypeOf cCtrl Is CButton Then
-    '                    TranslateButton(cCtrl)
-    '                ElseIf TypeOf cCtrl Is CTabControl Then
-    '                    Dim tc = CType(cCtrl, CTabControl)
-    '                    tc.RightToLeft = If(GlobalVariables.RightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
-    '                    tc.RightToLeftLayout = GlobalVariables.RightToLeftLayout
-    '                End If
-    '                Try
-    '                    _originalText = CaptionCollection.Item(cCtrl.Name)
-
-    '                    r = Dv.Find(_originalText)
-    '                    If r >= 0 Then
-    '                        cCtrl.Text = Dv(r).Item("TranslatedCaption")
-    '                    Else
-    '                        cCtrl.Text = cCtrl.Tag
-    '                    End If
-    '                Catch ex As Exception
-    '                    cCtrl.Text = cCtrl.Tag
-    '                End Try
-
-    '            End If
-    '        ElseIf TypeOf cCtrl Is CTextBox Then
-    '            Dim tc = CType(cCtrl, CTextBox)
-    '            If tc.ValueIsNumeric Then
-    '                If tc.RightToLeft = RightToLeft.Yes Then
-    '                    tc.TextAlign = HorizontalAlignment.Left
-    '                Else
-    '                    tc.TextAlign = HorizontalAlignment.Right
-    '                End If
-    '            End If
-    '        End If
-    '    Next
-    'End Sub
-
     Private Sub TranslateToolStripItems(ByRef cToolStrip As ToolStrip)
         For Each obj As Object In cToolStrip.Items
             obj.Text = GetToolStripText(cToolStrip, obj, "Text")
@@ -772,8 +682,8 @@ Public Class BfMain
     Public Sub GetNSaveCaptions() 'control As Control)
         DoubleBuffered = True
         If GlobalVariables.TranslationMode Then
-            CaptionCollection = StoreCaptions1.StoreTranslation(Me)
-            StoreCaptions1.SaveControlsOriginalText(Me)
+            CaptionCollection = StoreCaptions1.StoreTranslation(Me, AllControls)
+            StoreCaptions1.SaveControlsOriginalText(Me, AllControls)
             DefaultMirroredLanguageIdNo = TranslatorDAC.DefaultMirroredLanguageIdNo
             If ViewDisplayName Is Nothing Or ViewDisplayName = "" Then
                 ViewDisplayName = Name
@@ -1082,9 +992,8 @@ Public Class BfMain
         End Try
     End Sub
 
-    Private Sub UseOriginalCaptions()
-        Dim allCtrl As New List(Of Control)
-        For Each cCtrl As Control In GlobalFunctions.FindControlRecursive(allCtrl, Me)
+    Private Sub UseOriginalCaptions(allCtrl)
+        For Each cCtrl As Control In allCtrl
             If IsTranslatable(cCtrl) Then
                 If TypeOf cCtrl Is MenuStrip Then
                     Dim subMenuName = ""
@@ -1263,9 +1172,7 @@ Public Class BfMain
         End If
     End Sub
 
-    Public Sub ForceEndEditForAllGridControls()
-        Dim allControls As New List(Of Control)
-        GlobalFunctions.FindControlRecursive(allControls, Me)
+    Public Sub ForceEndEditForAllGridControls(allControls As List(Of Control))
         For Each cCtrl As Control In allControls
             If TypeOf cCtrl Is DataGridView Then
                 Dim cGrid As DataGridView = cCtrl

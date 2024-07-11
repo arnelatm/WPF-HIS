@@ -15,6 +15,7 @@ Public Class CForm
     Public Property DefaultFormControlsForeColor As Color = Color.Black
     Public Property DefaultFormControlsReadOnlyBackColor As Color = Color.White
     Public Property DefaultFormControlsReadOnlyForeColor As Color = Color.Gray
+    Public Property AllControls As New List(Of Control)
 
     Public Sub New()
         ' This call is required by the designer.
@@ -27,7 +28,7 @@ Public Class CForm
     Public Property ViewDisplayName As String
 
     Private Sub CForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim allControls As New List(Of Control)
+        AllControls = GlobalFunctions.FindControlRecursive(AllControls, Me)
         If LicenseManager.UsageMode <> LicenseUsageMode.Designtime Then
             If UseGlobalFormColor Then
                 BackColor = GlobalVariables.DefaultFormBackgroundColor
@@ -40,7 +41,7 @@ Public Class CForm
                 DefaultFormControlsReadOnlyForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
             End If
             If GlobalVariables.RightToLeftLayout Then
-                For Each cCtrl As Control In GlobalFunctions.FindControlRecursive(allControls, Me)
+                For Each cCtrl As Control In AllControls
                     If TypeOf cCtrl Is CButton OrElse TypeOf cCtrl Is Button Then
                         If GetPropertyValue(cCtrl, "Image") IsNot Nothing Then
                             Dim btnImageName As String
@@ -63,15 +64,6 @@ Public Class CForm
             End If
         End If
     End Sub
-
-    'Public Function FindControlRecursive(ByVal list As List(Of Control), ByVal parentControl As Control) As List(Of Control)
-    '    If parentControl Is Nothing Then Return list
-    '    list.Add(parentControl)
-    '    For Each child As Control In parentControl.Controls
-    '        FindControlRecursive(list, child)
-    '    Next
-    '    Return list
-    'End Function
 
     Private Sub SetToolStripItems(dropDownItems As ToolStripItemCollection)
         Try

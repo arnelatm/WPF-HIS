@@ -1374,7 +1374,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Dim tableColumnPropertyList As List(Of TblColPropModel)
         tableColumnPropertyList = ModelTblColProp.GetMainTableColumnProperties(TableName)
         TableProperties = tableColumnPropertyList.ToArray
-        SetAllControlsDynamicProperties(eventType.ViewControl)
+        SetAllControlsDynamicProperties(eventType.ViewControl, eventType.AllControls)
         CreateDataSources()
         EntryFormLoaded()
         eventType.AddingAllowed = UserHasAccess("Table" + TableName + "Adding")
@@ -1579,6 +1579,8 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     End Function
 
     Public Function ValidateNumericValues(sender As Control)
+        Debugger.Break()
+        ' not being called?
         Dim validationsPassed As Boolean
         validationsPassed = True
         Dim allControls As New List(Of Control)
@@ -1598,16 +1600,13 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Return validationsPassed
     End Function
 
-    Private Sub SetAllControlsDynamicProperties(viewControl As Control)
+    Private Sub SetAllControlsDynamicProperties(viewControl As Control, AllControls As List(Of Control))
         If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
-            ResetMenuSecurity(viewControl)
+            ResetMenuSecurity(viewControl, AllControls)
         End If
     End Sub
 
-    Public Sub ResetMenuSecurity(viewControl As Control)
-
-        Dim allControls As New List(Of Control)
-        allControls = GlobalFunctions.FindControlRecursive(allControls, viewControl)
+    Public Sub ResetMenuSecurity(viewControl As Control, allControls As List(Of Control))
         Dim resources = New ComponentResourceManager(Me.GetType())
         For Each cCtrl As Control In allControls
             SetControlDynamicProperties(cCtrl)

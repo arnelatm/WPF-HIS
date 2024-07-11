@@ -14,6 +14,7 @@ Public Class DForm
     Public Property DefaultFormControlsForeColor As Color = Color.Black
     Public Property DefaultFormControlsReadOnlyBackColor As Color = Color.White
     Public Property DefaultFormControlsReadOnlyForeColor As Color = Color.Gray
+    Public Property AllControls As New List(Of Control)
 
     Public MyErrorProvider As New ErrorProviderExtended
 
@@ -24,7 +25,7 @@ Public Class DForm
     End Sub
 
     Private Sub CForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim allControls As New List(Of Control)
+        AllControls = GlobalFunctions.FindControlRecursive(AllControls, Me)
         If LicenseManager.UsageMode <> LicenseUsageMode.Designtime Then
             If UseGlobalFormColor Then
                 BackColor = GlobalVariables.DefaultFormBackgroundColor
@@ -37,7 +38,7 @@ Public Class DForm
                 DefaultFormControlsReadOnlyForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
             End If
             If GlobalVariables.RightToLeftLayout Then
-                MakeFormRightToLeft(Me, allControls)
+                MakeFormRightToLeft(Me, AllControls)
             Else
                 'RightToLeftLayout = False
                 'RightToLeft = RightToLeft.No
