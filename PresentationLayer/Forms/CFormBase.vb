@@ -58,7 +58,7 @@ Public Class CFormBase
     Protected Property FormTitleCaption As String = ""
 
     Private Sub OnCFormEntryNewShown() Handles MyBase.Shown
-        SuspendDrawing()
+        'SuspendDrawing()
         If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
             If btnArabic.Enabled Then
                 'btnArabic.PerformClick()
@@ -78,7 +78,7 @@ Public Class CFormBase
             btnOpen.Visible = False
             btnNew.Visible = False
         End If
-        ResumeDrawing()
+        'ResumeDrawing()
         SetFormTitleCaption()
     End Sub
 

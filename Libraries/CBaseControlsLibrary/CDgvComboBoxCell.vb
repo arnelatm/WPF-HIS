@@ -68,10 +68,10 @@ Public Class CDgvComboBoxCell
     ' This method will be called each time a cell in the column enters edit-mode,
     ' so you can fill the ComboBox instance based on the value of the edited cell
     Public Overrides Sub InitializeEditingControl(ByVal pRowIndex As Integer, ByVal pFormattedValue As Object, ByVal cellStyle As DataGridViewCellStyle)
-        DataGridView.SuspendDrawingNew()
+        'DataGridView.SuspendDrawingNew()
         MyBase.InitializeEditingControl(pRowIndex, pFormattedValue, cellStyle)
         CellEditingControl = CType(DataGridView.EditingControl, CtComboBoxEditingControl)
-        DataGridView.ResumeDrawingNew()
+        'DataGridView.ResumeDrawingNew()
     End Sub
 
     'Public Overrides Function Clone() As Object

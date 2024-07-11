@@ -5,7 +5,7 @@ Imports AATM.PresentationLayer.Views
 Namespace PresentationLayer.Views.Interfaces
 
     Public Interface IApArEmReportView
-        Inherits IView
+        Inherits IViewNew
 
         Property BeginningDate As Date?
         Property EndingDate As Date?
@@ -17,6 +17,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property PersonSelectorControl As Control
         Property PersonSelectorLabel As String
         Property NoDates As Boolean
+        Property IdNoData As DataTable
         Event ReportLoaded()
         Event PrintButtonClicked()
 

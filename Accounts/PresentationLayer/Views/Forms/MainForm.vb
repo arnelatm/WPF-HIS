@@ -476,23 +476,23 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub StatementOfEmployeeLoansToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemStatementOfEmployeeLoans.Click
-            RunForm(Of ApArEmReport, ApArEmReportPresenter(Of AccountModel), String)("ErStatement")
+            RunFormNew(Of ApArEmReport, ApArEmReportPresenter(Of AccountModel), String)("ErStatement")
         End Sub
 
         Private Sub ToolStripMenuItemStatementOfAccountsPayable_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemStatementOfAccountsPayable.Click
-            RunForm(Of ApArEmReport, ApArEmReportPresenter(Of AccountModel), String)("ApStatement")
+            RunFormNew(Of ApArEmReport, ApArEmReportPresenter(Of AccountModel), String)("ApStatement")
         End Sub
 
         Private Sub ToolStripMenuItemStatementOfAccountsReceivable_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemStatementOfAccountsReceivable.Click
-            RunForm(Of ApArEmReport, ApArEmReportPresenter(Of AccountModel), String)("ArStatement")
+            RunFormNew(Of ApArEmReport, ApArEmReportPresenter(Of AccountModel), String)("ArStatement")
         End Sub
 
         Private Sub ToolStripMenuItemEmployeeLeaveReport_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeLeaveReport.Click
-            RunForm(Of ApArEmReport, ApArEmReportPresenter(Of AccountModel), String)("LeaveStatement")
+            RunFormNew(Of ApArEmReport, ApArEmReportPresenter(Of AccountModel), String)("LeaveStatement")
         End Sub
 
         Private Sub ToolStripMenuItemEmployeeInformation_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeInformation.Click
-            RunForm(Of ApArEmReport, ApArEmReportPresenter(Of AccountModel), String)("EmployeeInfo")
+            RunFormNew(Of ApArEmReport, ApArEmReportPresenter(Of AccountModel), String)("EmployeeInfo")
         End Sub
 
         Private Sub ToolStripMenuItemStateOfEmployeeLoans_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSummaryOfEmployeeLoans.Click

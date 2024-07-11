@@ -1471,10 +1471,14 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         If cCtrl.EnglishControl Is Nothing Then
             MessageBox.Show($"EnglishControl for  CTextBoxArabic control <{cCtrl.Name}> not set.")
         End If
-        Dim originalValue As String = GetOriginalValue(cCtrl.EnglishControl)
-        Dim englishText As String = GetPropertyValue(cCtrl.EnglishControl, "Text")
-        If cCtrl.AutoFill And String.IsNullOrEmpty(cCtrl.Text) OrElse cCtrl.Text.Trim() = originalValue Then
-            cCtrl.Text = englishText
+        If cCtrl.EnglishControl Is Nothing Then
+            MessageBox.Show("English Control for field " & cCtrl.Name & " is not set.")
+        Else
+            Dim originalValue As String = GetOriginalValue(cCtrl.EnglishControl)
+            Dim englishText As String = GetPropertyValue(cCtrl.EnglishControl, "Text")
+            If cCtrl.AutoFill And String.IsNullOrEmpty(cCtrl.Text) OrElse cCtrl.Text.Trim() = originalValue Then
+                cCtrl.Text = englishText
+            End If
         End If
     End Sub
 

@@ -1,13 +1,12 @@
-﻿Imports System.Globalization
-Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Views.Forms.Reports
 
     Public Class ApArEmReport
         Implements IApArEmReportView
 
+        Private _idNoData As DataTable
         Public Event PrintButtonClicked() Implements IApArEmReportView.PrintButtonClicked
         Public Event ReportLoaded() Implements IApArEmReportView.ReportLoaded
         Protected SortOrderKey As String
@@ -51,7 +50,7 @@ Namespace PresentationLayer.Views.Forms.Reports
 
         Public ReadOnly Property Language As String Implements IApArEmReportView.Language
             Get
-                Return Strings.Left(TextDisplayLanguage, TextDisplayLanguage.IndexOf("-"))
+                Return Strings.Left(FormCulture.Name, FormCulture.Name.IndexOf("-"))
             End Get
         End Property
 
@@ -61,6 +60,16 @@ Namespace PresentationLayer.Views.Forms.Reports
             End Get
             Set(value As Integer)
                 cboIdNo.SetValue(value)
+            End Set
+        End Property
+
+        Public Property IdNoData As DataTable Implements IApArEmReportView.IdNoData
+            Get
+                Return _idNoData
+            End Get
+            Set(value As DataTable)
+                _idNoData = value
+                cboIdNo.DataSource = value
             End Set
         End Property
 
@@ -97,6 +106,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             If NoDates Then
                 Height -= 25
             End If
+            btnCancel.Left = floButtons.Size.Width - btnCancel.Width - btnOk.Width - floButtons.Margin.Left - floButtons.Margin.Right
         End Sub
 
     End Class

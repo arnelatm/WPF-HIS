@@ -1,5 +1,4 @@
-﻿Imports AATM.Common.PresentationLayer.Presenters
-Imports AATM.Common.PresentationLayer.Views.Interface
+﻿Imports AATM.Common.PresentationLayer.Views.Interface
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Views.Forms
@@ -74,66 +73,66 @@ Namespace PresentationLayer.Views.Forms
                 }
         End Sub
 
-        Private Sub CButton1_ClickButtonArea_1(Sender As Object, e As MouseEventArgs) 
+        'Private Sub CButton1_ClickButtonArea_1(Sender As Object, e As MouseEventArgs) 
 
-            Dim fileReader As String
-            fileReader = My.Computer.FileSystem.ReadAllText("C:\temp\DrugQrCode.txt")
+        '    Dim fileReader As String
+        '    fileReader = My.Computer.FileSystem.ReadAllText("C:\temp\DrugQrCode.txt")
 
-            Dim data As Byte()
-            data = convertQPToByteArray(fileReader)
-            Dim message As String = "Text Length = " + data.Count().ToString() + vbLf
-            Dim myByte() As Byte = data
-            Dim i As Int16 = 1
-            For Each x In myByte
-                i += 1
-                message += i.ToString("####") + " - " + x.ToString() + vbLf
-            Next
-            MessageBox.Show(message)
-        End Sub
+        '    Dim data As Byte()
+        '    data = convertQPToByteArray(fileReader)
+        '    Dim message As String = "Text Length = " + data.Count().ToString() + vbLf
+        '    Dim myByte() As Byte = data
+        '    Dim i As Int16 = 1
+        '    For Each x In myByte
+        '        i += 1
+        '        message += i.ToString("####") + " - " + x.ToString() + vbLf
+        '    Next
+        '    MessageBox.Show(message)
+        'End Sub
 
-        Private Sub CButton2_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles CButton2.ClickButtonArea
-            Dim fileReader As String
-            fileReader = My.Computer.FileSystem.ReadAllText("C:\temp\DrugQrCode.txt")
+        'Private Sub CButton2_ClickButtonArea(Sender As Object, e As MouseEventArgs)
+        '    Dim fileReader As String
+        '    fileReader = My.Computer.FileSystem.ReadAllText("C:\temp\DrugQrCode.txt")
 
-            Dim message As String = "Text Length = " + Len(txtNotes.Text).ToString() + vbLf
-            For i = 1 To Len(txtNotes.Text)
-                Dim x = Mid(txtNotes.Text, i, 1)
-                message += i.ToString("####") + " - " + Mid(txtNotes.Text, i, 1) + vbLf
-            Next
-            MessageBox.Show(message)
-        End Sub
+        '    Dim message As String = "Text Length = " + Len(txtNotes.Text).ToString() + vbLf
+        '    For i = 1 To Len(txtNotes.Text)
+        '        Dim x = Mid(txtNotes.Text, i, 1)
+        '        message += i.ToString("####") + " - " + Mid(txtNotes.Text, i, 1) + vbLf
+        '    Next
+        '    MessageBox.Show(message)
+        'End Sub
 
-        Private Function convertQPToByteArray(ByVal qpString As String) As Byte()
-            Dim c As Integer = 0
-            Dim i As Integer = 0
+        'Private Function convertQPToByteArray(ByVal qpString As String) As Byte()
+        '    Dim c As Integer = 0
+        '    Dim i As Integer = 0
 
-            While i < qpString.Length
-                If qpString(i) = "="c Then i += 2
-                i += 1
-                c += 1
-            End While
+        '    While i < qpString.Length
+        '        If qpString(i) = "="c Then i += 2
+        '        i += 1
+        '        c += 1
+        '    End While
 
-            Dim binaryData As Byte() = New Byte(c - 1) {}
-            Dim zero As Integer = Convert.ToInt16("0"c)
-            c = 0
-            i = 0
+        '    Dim binaryData As Byte() = New Byte(c - 1) {}
+        '    Dim zero As Integer = Convert.ToInt16("0"c)
+        '    c = 0
+        '    i = 0
 
-            While i < qpString.Length
+        '    While i < qpString.Length
 
-                If qpString(i) = "="c Then
-                    binaryData(c) = CByte(Integer.Parse(qpString.Substring(i + 1, 2), System.Globalization.NumberStyles.HexNumber))
-                    i += 2
-                Else
-                    binaryData(c) = Convert.ToByte(qpString(i))
-                End If
+        '        If qpString(i) = "="c Then
+        '            binaryData(c) = CByte(Integer.Parse(qpString.Substring(i + 1, 2), System.Globalization.NumberStyles.HexNumber))
+        '            i += 2
+        '        Else
+        '            binaryData(c) = Convert.ToByte(qpString(i))
+        '        End If
 
-                i += 1
-                c += 1
-            End While
+        '        i += 1
+        '        c += 1
+        '    End While
 
-            Return binaryData
+        '    Return binaryData
 
-        End Function
+        'End Function
 
     End Class
 

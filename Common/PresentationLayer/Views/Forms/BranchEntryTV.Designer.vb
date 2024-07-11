@@ -2,12 +2,12 @@
 Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Views.Forms
-    <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+    <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
     Partial Class BranchEntryTv
         Inherits CFormEntryTv
 
         'Form overrides dispose to clean up the component list.
-        <System.Diagnostics.DebuggerNonUserCode()> _
+        <System.Diagnostics.DebuggerNonUserCode()>
         Protected Overrides Sub Dispose(ByVal disposing As Boolean)
             If disposing AndAlso components IsNot Nothing Then
                 components.Dispose()
@@ -21,14 +21,14 @@ Namespace PresentationLayer.Views.Forms
         'NOTE: The following procedure is required by the Windows Form Designer
         'It can be modified using the Windows Form Designer.  
         'Do not modify it using the code editor.
-        <System.Diagnostics.DebuggerStepThrough()> _
+        <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
             Me.components = New System.ComponentModel.Container()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(BranchEntryTv))
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.txtBranchCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.txtBranchName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.txtBranchNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
+            Me.txtBranchName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -36,7 +36,6 @@ Namespace PresentationLayer.Views.Forms
             Me.lblBranchName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblBranchNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.CButton2 = New AATM.Libraries.CBaseControlsLibrary.CButton()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
             Me.SplitContainer1.Panel2.SuspendLayout()
@@ -110,7 +109,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtBranchCode.ComputedValue = False
             Me.txtBranchCode.CustomFormat = Nothing
             Me.txtBranchCode.DataBoundControl = True
-            Me.txtBranchCode.EditingMode = True
+            Me.txtBranchCode.EditingMode = False
             Me.txtBranchCode.EndFindValue = Nothing
             Me.txtBranchCode.FieldDescription = Nothing
             Me.txtBranchCode.FieldName = Nothing
@@ -130,35 +129,6 @@ Namespace PresentationLayer.Views.Forms
             Me.txtBranchCode.Translatable = False
             Me.txtBranchCode.ValueIsMandatory = True
             Me.txtBranchCode.ValueIsUnique = True
-            '
-            'txtBranchName
-            '
-            Me.txtBranchName.BackColor = System.Drawing.Color.White
-            Me.txtBranchName.BegFindValue = Nothing
-            Me.txtBranchName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtBranchName.ComputedValue = False
-            Me.txtBranchName.CustomFormat = Nothing
-            Me.txtBranchName.DataBoundControl = True
-            Me.txtBranchName.EditingMode = False
-            Me.txtBranchName.EndFindValue = Nothing
-            Me.txtBranchName.FieldDescription = Nothing
-            Me.txtBranchName.FieldName = Nothing
-            Me.txtBranchName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtBranchName.FindEnabled = True
-            Me.floDataDisplay.SetFlowBreak(Me.txtBranchName, True)
-            resources.ApplyResources(Me.txtBranchName, "txtBranchName")
-            Me.txtBranchName.ForeColor = System.Drawing.Color.Black
-            Me.txtBranchName.LinkedLabel = Nothing
-            Me.txtBranchName.MaximumValue = Nothing
-            Me.txtBranchName.MinimumValue = Nothing
-            Me.txtBranchName.Name = "txtBranchName"
-            Me.txtBranchName.OldValue = Nothing
-            Me.txtBranchName.OverrideMaxLength = 0
-            Me.txtBranchName.ReadOnly = True
-            Me.txtBranchName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtBranchName.Translatable = False
-            Me.txtBranchName.ValueIsMandatory = True
-            Me.txtBranchName.ValueIsUnique = True
             '
             'txtBranchNameAra
             '
@@ -188,6 +158,34 @@ Namespace PresentationLayer.Views.Forms
             Me.txtBranchNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtBranchNameAra.Translatable = False
             Me.txtBranchNameAra.ValueIsUnique = True
+            '
+            'txtBranchName
+            '
+            Me.txtBranchName.BackColor = System.Drawing.Color.White
+            Me.txtBranchName.BegFindValue = Nothing
+            Me.txtBranchName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtBranchName.ComputedValue = False
+            Me.txtBranchName.CustomFormat = Nothing
+            Me.txtBranchName.DataBoundControl = True
+            Me.txtBranchName.EditingMode = False
+            Me.txtBranchName.EndFindValue = Nothing
+            Me.txtBranchName.FieldDescription = Nothing
+            Me.txtBranchName.FieldName = Nothing
+            Me.txtBranchName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtBranchName.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.txtBranchName, True)
+            resources.ApplyResources(Me.txtBranchName, "txtBranchName")
+            Me.txtBranchName.ForeColor = System.Drawing.Color.Black
+            Me.txtBranchName.LinkedLabel = Nothing
+            Me.txtBranchName.MaximumValue = Nothing
+            Me.txtBranchName.MinimumValue = Nothing
+            Me.txtBranchName.Name = "txtBranchName"
+            Me.txtBranchName.OldValue = Nothing
+            Me.txtBranchName.OverrideMaxLength = 0
+            Me.txtBranchName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtBranchName.Translatable = False
+            Me.txtBranchName.ValueIsMandatory = True
+            Me.txtBranchName.ValueIsUnique = True
             '
             'txtNotes
             '
@@ -230,7 +228,6 @@ Namespace PresentationLayer.Views.Forms
             Me.floDataDisplay.Controls.Add(Me.txtBranchNameAra)
             Me.floDataDisplay.Controls.Add(Me.lblNotes)
             Me.floDataDisplay.Controls.Add(Me.txtNotes)
-            Me.floDataDisplay.Controls.Add(Me.CButton2)
             Me.floDataDisplay.Name = "floDataDisplay"
             '
             'lblIdNo
@@ -278,15 +275,6 @@ Namespace PresentationLayer.Views.Forms
             Me.lblNotes.Name = "lblNotes"
             Me.lblNotes.Translatable = True
             '
-            'CButton2
-            '
-            Me.CButton2.DesignerSelected = False
-            resources.ApplyResources(Me.CButton2, "CButton2")
-            Me.CButton2.ImageIndex = 0
-            Me.CButton2.Name = "CButton2"
-            Me.CButton2.OriginalImageName = Nothing
-            Me.CButton2.SecurityKey = ""
-            '
             'BranchEntryTv
             '
             resources.ApplyResources(Me, "$this")
@@ -304,7 +292,6 @@ Namespace PresentationLayer.Views.Forms
         End Sub
         Friend WithEvents TxtIdNo As CTextBox
         Friend WithEvents txtBranchCode As CTextBox
-        Friend WithEvents txtBranchName As CTextBox
         Friend WithEvents txtBranchNameAra As CTextBoxArabic
         Friend WithEvents txtNotes As CTextBox
         Friend WithEvents floDataDisplay As CFlowLayout
@@ -313,6 +300,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblBranchName As CLabel
         Friend WithEvents lblBranchNameAra As CLabel
         Friend WithEvents lblNotes As CLabel
-        Friend WithEvents CButton2 As CButton
+        Friend WithEvents txtBranchName As CTextBox
     End Class
 End NameSpace

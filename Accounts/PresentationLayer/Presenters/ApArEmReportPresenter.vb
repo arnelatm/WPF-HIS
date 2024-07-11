@@ -10,7 +10,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Events
 
 Public Class ApArEmReportPresenter(Of TM As New)
-    Inherits AccountsPresenter(Of IApArEmReportView, TM)
+    Inherits CommonPresenterNew(Of IApArEmReportView, TM)
 
     Private _reportFileName As String
     Private _reportName As String
@@ -23,13 +23,12 @@ Public Class ApArEmReportPresenter(Of TM As New)
     Public Sub New(view As IApArEmReportView, reportCode As String)
         MyBase.New(view)
         TableName = "Account"
-        WithTreeView = False
         Service = New AccountsService("Account")
         _reportCode = reportCode
         AddHandler view.PrintButtonClicked, AddressOf OnPrintButtonClicked
         AddHandler view.ReportLoaded, AddressOf OnReportLoaded
         SetupReportSpecs()
-
+        view.IdNoData = MakeDataTable({_tableName})
     End Sub
 
 
@@ -79,7 +78,7 @@ Public Class ApArEmReportPresenter(Of TM As New)
         End Select
     End Sub
 
-    Public Sub OnPrintButtonClicked()
+    Private Sub OnPrintButtonClicked()
         Dim curCulture = CultureInfo.CurrentCulture
         CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
         Dim beginningDate As Date?
@@ -154,7 +153,7 @@ Public Class ApArEmReportPresenter(Of TM As New)
         View.BeginningDate = GlobalFunctions.GregorianDateSerial(Today.Year, 1, 1)
         View.EndingDate = GlobalFunctions.GregorianDateSerial(Today.Year, Today.Month, Today.Day)
         View.Title = Libraries.MessagingLibrary.Messaging.TranslateCaption(_reportName)
-        MakeControlDataSources({New Object() {_tableName, View.PersonSelectorControl, Nothing, _filter}})
+        'MakeControlDataSources({New Object() {_tableName, View.PersonSelectorControl, Nothing, _filter}})
         Select Case View.ReportCode
             Case "LeaveStatement", "ErStatement", "EmployeeInfo"
                 View.PersonSelectorLabel = "Employee Name"

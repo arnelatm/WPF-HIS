@@ -41,7 +41,6 @@ Public Class CFormEntry
     Private _displayOnly As Boolean = False
     Private _translatable As Boolean = True
     Private _firstLoadSwitch As UInt16 = 0
-    Private _allControls As New List(Of Control)
 
     Public Event AfterUpdateView()
     Public Property AddOnOpen As Boolean = False
@@ -675,7 +674,7 @@ Public Class CFormEntry
 
     Public Sub Inputs(onOff As Boolean)
         Dim ctrl As Control
-        For Each ctrl In _allControls
+        For Each ctrl In AllControls
             If TypeOf ctrl Is IEntryControl Then
                 'If TypeOf ctrl Is CtDataGridView Then 'And ctrl.Name = "dgvAccountIdNo" Then ' = "cboAccountIdNo" Then
                 '    Dim cx As CtComboBoxColumn
@@ -702,7 +701,7 @@ Public Class CFormEntry
         Else
             RaiseEvent InputsTurnedOff()
         End If
-        UnselectTextOnCtComboboxes(_allControls)
+        UnselectTextOnCtComboboxes(AllControls)
         If FirstControl IsNot Nothing Then
             FirstControl.Focus()
         End If

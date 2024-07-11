@@ -1,9 +1,10 @@
 ﻿Imports AATM.Libraries.CBaseControlsLibrary
+Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Views.Forms.Reports
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
     Partial Class ApArEmReport
-        Inherits AATM.PresentationLayer.Forms.BfMain
+        Inherits DFormBasic
 
         'Form overrides dispose to clean up the component list.
         <System.Diagnostics.DebuggerNonUserCode()>
@@ -33,12 +34,13 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblTitle = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+            Me.floButtons = New System.Windows.Forms.FlowLayoutPanel()
             Me.btnCancel = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
-            Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout1.SuspendLayout()
             Me.TableLayoutPanel1.SuspendLayout()
+            Me.floButtons.SuspendLayout()
             Me.SuspendLayout()
             '
             'lblIdNo
@@ -62,10 +64,11 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.lblEndingDate.DisplayOnly = True
             Me.lblEndingDate.EditingMode = False
             Me.lblEndingDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblEndingDate.Location = New System.Drawing.Point(269, 1)
+            Me.lblEndingDate.Location = New System.Drawing.Point(256, 1)
             Me.lblEndingDate.Margin = New System.Windows.Forms.Padding(1)
             Me.lblEndingDate.Name = "lblEndingDate"
-            Me.lblEndingDate.Size = New System.Drawing.Size(132, 25)
+            Me.lblEndingDate.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+            Me.lblEndingDate.Size = New System.Drawing.Size(349, 25)
             Me.lblEndingDate.TabIndex = 21
             Me.lblEndingDate.Text = "Ending Date:"
             Me.lblEndingDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -96,6 +99,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.cboIdNo.DataValue = Nothing
             Me.cboIdNo.DefaultValue = Nothing
             Me.cboIdNo.DisplayMember = "Name"
+            Me.cboIdNo.Dock = System.Windows.Forms.DockStyle.Fill
             Me.cboIdNo.DropDownHeight = 24
             Me.cboIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboIdNo.Editable = True
@@ -123,7 +127,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.cboIdNo.OverrideDropDownStyleList = False
             Me.cboIdNo.PreviousSearchTerm = Nothing
             Me.cboIdNo.PropertySelector = Nothing
-            Me.cboIdNo.Size = New System.Drawing.Size(399, 24)
+            Me.cboIdNo.Size = New System.Drawing.Size(668, 25)
             Me.cboIdNo.SuggestBoxHeight = 200
             Me.cboIdNo.SuggestCharCount = 0
             Me.cboIdNo.SuggestListOrderRule = Nothing
@@ -149,7 +153,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.dtpEndingDate.EditsAllowed = False
             Me.dtpEndingDate.ForeColor = System.Drawing.Color.Black
             Me.dtpEndingDate.LinkedLabel = Nothing
-            Me.dtpEndingDate.Location = New System.Drawing.Point(403, 1)
+            Me.dtpEndingDate.Location = New System.Drawing.Point(607, 1)
             Me.dtpEndingDate.Margin = New System.Windows.Forms.Padding(1)
             Me.dtpEndingDate.Name = "dtpEndingDate"
             Me.dtpEndingDate.ReadOnlyDp = False
@@ -198,15 +202,13 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
             Me.CFlowLayout1.Controls.Add(Me.lblTitle)
             Me.CFlowLayout1.Controls.Add(Me.TableLayoutPanel1)
-            Me.CFlowLayout1.Location = New System.Drawing.Point(12, 12)
+            Me.CFlowLayout1.Location = New System.Drawing.Point(12, 30)
             Me.CFlowLayout1.Name = "CFlowLayout1"
-            Me.CFlowLayout1.Size = New System.Drawing.Size(543, 148)
+            Me.CFlowLayout1.Size = New System.Drawing.Size(811, 180)
             Me.CFlowLayout1.TabIndex = 26
             '
             'lblTitle
             '
-            Me.lblTitle.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
             Me.lblTitle.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer))
             Me.lblTitle.DisplayOnly = True
             Me.lblTitle.EditingMode = False
@@ -215,7 +217,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.lblTitle.Location = New System.Drawing.Point(1, 1)
             Me.lblTitle.Margin = New System.Windows.Forms.Padding(1)
             Me.lblTitle.Name = "lblTitle"
-            Me.lblTitle.Size = New System.Drawing.Size(534, 25)
+            Me.lblTitle.Size = New System.Drawing.Size(805, 24)
             Me.lblTitle.TabIndex = 26
             Me.lblTitle.Text = "Statement of Employee Leaves"
             Me.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -224,100 +226,104 @@ Namespace PresentationLayer.Views.Forms.Reports
             'TableLayoutPanel1
             '
             Me.TableLayoutPanel1.AutoSize = True
+            Me.TableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
             Me.TableLayoutPanel1.BackColor = System.Drawing.Color.Transparent
             Me.TableLayoutPanel1.ColumnCount = 4
-            Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-            Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-            Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-            Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+            Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+            Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+            Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+            Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
             Me.TableLayoutPanel1.Controls.Add(Me.lblIdNo, 0, 1)
             Me.TableLayoutPanel1.Controls.Add(Me.dtpEndingDate, 2, 0)
-            Me.TableLayoutPanel1.Controls.Add(Me.btnCancel, 2, 3)
             Me.TableLayoutPanel1.Controls.Add(Me.cboIdNo, 1, 1)
-            Me.TableLayoutPanel1.Controls.Add(Me.btnOk, 1, 3)
             Me.TableLayoutPanel1.Controls.Add(Me.lblEndingDate, 2, 0)
             Me.TableLayoutPanel1.Controls.Add(Me.dtpBeginningDate, 1, 0)
             Me.TableLayoutPanel1.Controls.Add(Me.lblBeginningDate, 0, 0)
-            Me.TableLayoutPanel1.Location = New System.Drawing.Point(3, 30)
+            Me.TableLayoutPanel1.Controls.Add(Me.floButtons, 0, 3)
+            Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.TableLayoutPanel1.Location = New System.Drawing.Point(3, 29)
             Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
             Me.TableLayoutPanel1.RowCount = 4
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 15.0!))
-            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
-            Me.TableLayoutPanel1.Size = New System.Drawing.Size(537, 100)
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50.0!))
+            Me.TableLayoutPanel1.Size = New System.Drawing.Size(804, 121)
             Me.TableLayoutPanel1.TabIndex = 30
+            '
+            'floButtons
+            '
+            Me.TableLayoutPanel1.SetColumnSpan(Me.floButtons, 4)
+            Me.floButtons.Controls.Add(Me.btnCancel)
+            Me.floButtons.Controls.Add(Me.btnOk)
+            Me.floButtons.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.floButtons.Location = New System.Drawing.Point(3, 74)
+            Me.floButtons.Name = "floButtons"
+            Me.floButtons.Padding = New System.Windows.Forms.Padding(300, 0, 0, 0)
+            Me.floButtons.Size = New System.Drawing.Size(798, 44)
+            Me.floButtons.TabIndex = 26
             '
             'btnCancel
             '
-            Me.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.None
             Me.btnCancel.DesignerSelected = False
+            Me.btnCancel.Dock = System.Windows.Forms.DockStyle.Left
+            Me.MyErrorProvider.SetIconAlignment(Me.btnCancel, System.Windows.Forms.ErrorIconAlignment.BottomLeft)
             Me.btnCancel.ImageIndex = 0
-            Me.btnCancel.Location = New System.Drawing.Point(290, 73)
+            Me.btnCancel.Location = New System.Drawing.Point(303, 3)
             Me.btnCancel.Name = "btnCancel"
             Me.btnCancel.OriginalImageName = Nothing
             Me.btnCancel.SecurityKey = ""
-            Me.btnCancel.Size = New System.Drawing.Size(90, 24)
+            Me.btnCancel.SideImageAlign = System.Drawing.ContentAlignment.MiddleCenter
+            Me.btnCancel.Size = New System.Drawing.Size(90, 35)
             Me.btnCancel.TabIndex = 28
             Me.btnCancel.Text = "Cancel"
             '
             'btnOk
             '
-            Me.btnOk.Anchor = System.Windows.Forms.AnchorStyles.None
             Me.btnOk.DesignerSelected = False
             Me.btnOk.ImageIndex = 0
-            Me.btnOk.Location = New System.Drawing.Point(156, 73)
+            Me.btnOk.Location = New System.Drawing.Point(399, 3)
             Me.btnOk.Name = "btnOk"
             Me.btnOk.OriginalImageName = Nothing
             Me.btnOk.SecurityKey = ""
-            Me.btnOk.Size = New System.Drawing.Size(90, 24)
+            Me.btnOk.Size = New System.Drawing.Size(90, 35)
             Me.btnOk.TabIndex = 27
             Me.btnOk.Text = "Ok"
             '
-            'CLabel1
-            '
-            Me.CLabel1.BackColor = System.Drawing.Color.Transparent
-            Me.CLabel1.DisplayOnly = True
-            Me.CLabel1.EditingMode = False
-            Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel1.Location = New System.Drawing.Point(25, 37)
-            Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
-            Me.CLabel1.Name = "CLabel1"
-            Me.CLabel1.Size = New System.Drawing.Size(150, 25)
-            Me.CLabel1.TabIndex = 26
-            Me.CLabel1.Text = "Beginning Date :"
-            Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.CLabel1.Translatable = True
-            '
             'ApArEmReport
             '
-            Me.ClientSize = New System.Drawing.Size(556, 160)
+            Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+            Me.ClientSize = New System.Drawing.Size(828, 198)
             Me.Controls.Add(Me.CFlowLayout1)
-            Me.Controls.Add(Me.CLabel1)
             Me.DoubleBuffered = True
+            Me.FormCulture = New System.Globalization.CultureInfo("en-GB")
             Me.Name = "ApArEmReport"
             Me.RightToLeft = System.Windows.Forms.RightToLeft.No
+            Me.RightToLeftDisplay = "False"
             Me.Text = "Statement of Employee Leaves"
+            Me.Controls.SetChildIndex(Me.CFlowLayout1, 0)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             Me.CFlowLayout1.ResumeLayout(False)
             Me.CFlowLayout1.PerformLayout()
             Me.TableLayoutPanel1.ResumeLayout(False)
             Me.TableLayoutPanel1.PerformLayout()
+            Me.floButtons.ResumeLayout(False)
             Me.ResumeLayout(False)
+            Me.PerformLayout()
 
         End Sub
 
         Friend WithEvents lblIdNo As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblEndingDate As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblBeginningDate As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboIdNo As Libraries.CBaseControlsLibrary.CtCombobox
+        Friend WithEvents cboIdNo As Libraries.CBaseControlsLibrary.CtComboBox
         Friend WithEvents dtpEndingDate As CCustomDateTimePicker
         Friend WithEvents dtpBeginningDate As CCustomDateTimePicker
         Friend WithEvents CFlowLayout1 As Libraries.CBaseControlsLibrary.CFlowLayout
         Friend WithEvents lblTitle As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents btnOk As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents btnCancel As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
+        Friend WithEvents floButtons As FlowLayoutPanel
     End Class
-End NameSpace
+End Namespace

@@ -141,6 +141,7 @@ Namespace AdoNet
                         Using command = CreateCommand(sql, connection, params)
                             Dim adapter As New SqlDataAdapter(command)
                             adapter.Fill(dataTable)
+                            adapter.Dispose()
                             connection.Close()
                         End Using
                     Catch ex As Exception
@@ -705,7 +706,7 @@ Namespace AdoNet
                                                "Cannot insert duplicate key row in object {tableName} with unique index {indexName}. The duplicate key value is {duplicateValue}!",
                                                "Unique Key Violation", variables, MessageBoxButtons.OK,
                                                MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
-                                retValue = -2  '' to indicate Unique Key Violation for now.
+                                retValue = -2  '' to indicate Unique Key Violation for now.                                
                             ElseIf ex.Number = 515 Then
                                 MessageBox.Show(ex.Message & " Record not added ")
                                 retValue = -1
@@ -1297,43 +1298,39 @@ Namespace AdoNet
             retValue = 0
             Using connection As New SqlConnection(_connectionString)
                 connection.Open()
+                Using transaction As SqlTransaction = connection.BeginTransaction(transactionName)
+                    Using command As SqlCommand = connection.CreateCommand()
+                        ' Start a local transaction
+                        ' Must assign both transaction object and connection
+                        ' to Command object for a pending local transaction.
+                        command.Connection = connection
+                        command.Transaction = transaction
+                        Try
+                            For Each item In commands
+                                command.CommandText = item
+                                command.ExecuteNonQuery()
+                            Next
+                            ' Attempt to commit the transaction.
+                            transaction.Commit()
+                            retValue = 1
+                        Catch ex As Exception
+                            MessageBox.Show("Commit Exception Type: " & ex.GetType().ToString())
+                            MessageBox.Show("  Message: {0}", ex.Message)
 
-                Dim command As SqlCommand = connection.CreateCommand()
-                Dim transaction As SqlTransaction
-
-                ' Start a local transaction
-                transaction = connection.BeginTransaction(transactionName)
-
-                ' Must assign both transaction object and connection
-                ' to Command object for a pending local transaction.
-                command.Connection = connection
-                command.Transaction = transaction
-
-                Try
-                    For Each item In commands
-                        command.CommandText = item
-                        command.ExecuteNonQuery()
-                    Next
-
-                    ' Attempt to commit the transaction.
-                    transaction.Commit()
-                    retValue = 1
-                Catch ex As Exception
-                    MessageBox.Show("Commit Exception Type: " & ex.GetType().ToString())
-                    MessageBox.Show("  Message: {0}", ex.Message)
-
-                    ' Attempt to roll back the transaction.
-                    Try
-                        transaction.Rollback()
-                    Catch ex2 As Exception
-                        ' This catch block will handle any errors that may have occurred
-                        ' on the server that would cause the rollback to fail, such as
-                        ' a closed connection.
-                        Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType())
-                        Console.WriteLine("  Message: {0}", ex2.Message)
-                    End Try
-                    retValue = -1
-                End Try
+                            ' Attempt to roll back the transaction.
+                            Try
+                                transaction.Rollback()
+                            Catch ex2 As Exception
+                                ' This catch block will handle any errors that may have occurred
+                                ' on the server that would cause the rollback to fail, such as
+                                ' a closed connection.
+                                Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType())
+                                Console.WriteLine("  Message: {0}", ex2.Message)
+                            End Try
+                            retValue = -1
+                        End Try
+                    End Using
+                End Using
             End Using
             Return retValue
         End Function
@@ -1343,40 +1340,41 @@ Namespace AdoNet
             retValue = 0
             Using connection As New SqlConnection(_connectionString)
                 connection.Open()
-                Dim transaction As SqlTransaction
-                ' Start a local transaction
-                transaction = connection.BeginTransaction(transactionName)
-                Try
-                    Dim command = Factory.CreateCommand()
-                    command.Connection = connection
-                    command.Transaction = transaction
-                    retValue = 0
-                    For Each item As DaoCommand In commandsWithParameters
-                        command.Parameters.Clear()
-                        command.CommandText = item.CommandText
-                        If item.Parameters IsNot Nothing AndAlso item.Parameters.Length() > 0 Then
-                            command.AddParameters(item.Parameters)
-                        End If
-                        retValue += command.ExecuteNonQuery()
-                    Next
-                    ' Attempt to commit the transaction.
-                    transaction.Commit()
-                Catch ex As Exception
-                    MessageBox.Show("Commit Exception Type: " & ex.GetType().ToString())
-                    MessageBox.Show("  Message: {0}", ex.Message)
-
-                    ' Attempt to roll back the transaction.
+                Using transaction As SqlTransaction = connection.BeginTransaction(transactionName)
+                    ' Start a local transaction
                     Try
-                        transaction.Rollback()
-                    Catch ex2 As Exception
-                        ' This catch block will handle any errors that may have occurred
-                        ' on the server that would cause the rollback to fail, such as
-                        ' a closed connection.
-                        Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType())
-                        Console.WriteLine("  Message: {0}", ex2.Message)
+                        Using command = Factory.CreateCommand()
+                            command.Connection = connection
+                            command.Transaction = transaction
+                            retValue = 0
+                            For Each item As DaoCommand In commandsWithParameters
+                                command.Parameters.Clear()
+                                command.CommandText = item.CommandText
+                                If item.Parameters IsNot Nothing AndAlso item.Parameters.Length() > 0 Then
+                                    command.AddParameters(item.Parameters)
+                                End If
+                                retValue += command.ExecuteNonQuery()
+                            Next
+                            ' Attempt to commit the transaction.
+                            transaction.Commit()
+                        End Using
+                    Catch ex As Exception
+                        MessageBox.Show("Commit Exception Type: " & ex.GetType().ToString())
+                        MessageBox.Show("  Message: {0}", ex.Message)
+
+                        ' Attempt to roll back the transaction.
+                        Try
+                            transaction.Rollback()
+                        Catch ex2 As Exception
+                            ' This catch block will handle any errors that may have occurred
+                            ' on the server that would cause the rollback to fail, such as
+                            ' a closed connection.
+                            Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType())
+                            Console.WriteLine("  Message: {0}", ex2.Message)
+                        End Try
+                        retValue = -1
                     End Try
-                    retValue = -1
-                End Try
+                End Using
             End Using
             Return retValue
         End Function
@@ -1386,44 +1384,42 @@ Namespace AdoNet
             retValue = 0
             Using connection As New SqlConnection(_connectionString)
                 connection.Open()
-
-                Dim command As SqlCommand = connection.CreateCommand()
-                Dim transaction As SqlTransaction
-
                 ' Start a local transaction
-                transaction = connection.BeginTransaction(transactionName)
+                Using transaction As SqlTransaction = connection.BeginTransaction(transactionName)
+                    Using Command As SqlCommand = connection.CreateCommand()
+                        ' Must assign both transaction object and connection
+                        ' to Command object for a pending local transaction.
+                        Command.Connection = connection
+                        Command.Transaction = transaction
 
-                ' Must assign both transaction object and connection
-                ' to Command object for a pending local transaction.
-                command.Connection = connection
-                command.Transaction = transaction
+                        Try
+                            Command.CommandText = sql1
+                            Command.ExecuteNonQuery()
+                            If Not (sql2 Is Nothing Or sql2 = "") Then
+                                Command.CommandText = sql2
+                                Command.ExecuteNonQuery()
+                            End If
 
-                Try
-                    command.CommandText = sql1
-                    command.ExecuteNonQuery()
-                    If Not (sql2 Is Nothing Or sql2 = "") Then
-                        command.CommandText = sql2
-                        command.ExecuteNonQuery()
-                    End If
+                            ' Attempt to commit the transaction.
+                            transaction.Commit()
+                        Catch ex As Exception
+                            MessageBox.Show("Commit Exception Type: " & ex.GetType().ToString())
+                            MessageBox.Show("  Message: {0}", ex.Message)
 
-                    ' Attempt to commit the transaction.
-                    transaction.Commit()
-                Catch ex As Exception
-                    MessageBox.Show("Commit Exception Type: " & ex.GetType().ToString())
-                    MessageBox.Show("  Message: {0}", ex.Message)
-
-                    ' Attempt to roll back the transaction.
-                    Try
-                        transaction.Rollback()
-                    Catch ex2 As Exception
-                        ' This catch block will handle any errors that may have occurred
-                        ' on the server that would cause the rollback to fail, such as
-                        ' a closed connection.
-                        Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType())
-                        Console.WriteLine("  Message: {0}", ex2.Message)
-                    End Try
-                    retValue = -1
-                End Try
+                            ' Attempt to roll back the transaction.
+                            Try
+                                transaction.Rollback()
+                            Catch ex2 As Exception
+                                ' This catch block will handle any errors that may have occurred
+                                ' on the server that would cause the rollback to fail, such as
+                                ' a closed connection.
+                                Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType())
+                                Console.WriteLine("  Message: {0}", ex2.Message)
+                            End Try
+                            retValue = -1
+                        End Try
+                    End Using
+                End Using
             End Using
             Return retValue
         End Function
@@ -1433,43 +1429,38 @@ Namespace AdoNet
             retValue = 0
             Using connection As New SqlConnection(_connectionString)
                 connection.Open()
-
-                Dim command As SqlCommand = connection.CreateCommand()
-                Dim transaction As SqlTransaction
-
                 ' Start a local transaction
-                transaction = connection.BeginTransaction(transactionName)
+                Using transaction As SqlTransaction = connection.BeginTransaction(transactionName)
+                    Using command As SqlCommand = connection.CreateCommand()
+                        ' Must assign both transaction object and connection
+                        ' to Command object for a pending local transaction.
+                        command.Connection = connection
+                        command.Transaction = transaction
+                        Try
+                            For Each sqlText In sqls
+                                command.CommandText = sqlText
+                                command.ExecuteNonQuery()
+                            Next
+                            ' Attempt to commit the transaction.
+                            transaction.Commit()
+                        Catch ex As Exception
+                            MessageBox.Show("Commit Exception Type: " & ex.GetType().ToString())
+                            MessageBox.Show("  Message: {0}", ex.Message)
 
-                ' Must assign both transaction object and connection
-                ' to Command object for a pending local transaction.
-                command.Connection = connection
-                command.Transaction = transaction
-
-                Try
-
-                    For Each sqlText In sqls
-                        command.CommandText = sqlText
-                        command.ExecuteNonQuery()
-                    Next
-
-                    ' Attempt to commit the transaction.
-                    transaction.Commit()
-                Catch ex As Exception
-                    MessageBox.Show("Commit Exception Type: " & ex.GetType().ToString())
-                    MessageBox.Show("  Message: {0}", ex.Message)
-
-                    ' Attempt to roll back the transaction.
-                    Try
-                        transaction.Rollback()
-                    Catch ex2 As Exception
-                        ' This catch block will handle any errors that may have occurred
-                        ' on the server that would cause the rollback to fail, such as
-                        ' a closed connection.
-                        Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType())
-                        Console.WriteLine("  Message: {0}", ex2.Message)
-                    End Try
-                    retValue = -1
-                End Try
+                            ' Attempt to roll back the transaction.
+                            Try
+                                transaction.Rollback()
+                            Catch ex2 As Exception
+                                ' This catch block will handle any errors that may have occurred
+                                ' on the server that would cause the rollback to fail, such as
+                                ' a closed connection.
+                                Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType())
+                                Console.WriteLine("  Message: {0}", ex2.Message)
+                            End Try
+                            retValue = -1
+                        End Try
+                    End Using
+                End Using
             End Using
             Return retValue
         End Function

@@ -124,7 +124,7 @@ Public Class CtDataGridView
         If _editingMode And Not DisplayOnly Then
             DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
             DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-            Me.[ReadOnly] = False
+            Me.ReadOnly = False
         Else
             'Me.[ReadOnly] = False
             DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
@@ -469,7 +469,7 @@ Public Class CtDataGridView
     Private Sub DataGridView1_EditingControlShowing(ByVal sender As Object, ByVal e As DataGridViewEditingControlShowingEventArgs) Handles MyBase.EditingControlShowing
         If TypeOf e.Control Is CtComboBoxEditingControl Then
             'Me.EditingMode = True
-            Me.SuspendDrawingNew()
+            'Me.SuspendDrawingNew()
             'declare variable(cb) as a CtCombobox
             Dim cb As CtComboBoxEditingControl
             cb = e.Control
@@ -482,7 +482,7 @@ Public Class CtDataGridView
             If CurrentCell IsNot Nothing Then
                 cb.SuggestCharCount = DirectCast(CurrentCell.OwningColumn, AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn).SuggestCharCount
             End If
-            Me.ResumeDrawingNew()
+            'Me.ResumeDrawingNew()
         ElseIf TypeOf e.Control Is CCustomDateTimePicker Then
             Dim cDtp As CCustomDateTimePicker
             cDtp = e.Control
