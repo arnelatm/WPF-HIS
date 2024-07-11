@@ -1,13 +1,11 @@
 ﻿Imports System.ComponentModel
-Imports System.Drawing
-Imports System.Windows.Forms
-Imports AATM.LIBRARIES.CBaseControlsLibrary
+Imports AATM.Libraries.CBaseControlsLibrary
 Imports CrystalDecisions.Windows.Forms
 Imports Microsoft.VisualBasic.CompilerServices
 
 <DesignerGenerated()>
 Partial Class CrReportViewer
-    Inherits BFMain
+    Inherits DFormBasic
 
     'Form overrides dispose to clean up the component list.
     <DebuggerNonUserCode()>
@@ -32,6 +30,7 @@ Partial Class CrReportViewer
         Me.btnCancel = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.CrystalReportViewer1 = New CrystalReportViewer()
         Me.btnQuit = New AATM.Libraries.CBaseControlsLibrary.CButton()
+        Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -40,10 +39,9 @@ Partial Class CrReportViewer
         Me.btnOk.Anchor = System.Windows.Forms.AnchorStyles.Bottom
         Me.btnOk.BackColor = System.Drawing.Color.Transparent
         Me.btnOk.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnOk.DesignerSelected = True
-        Me.btnOk.DisplayOnly = false
+        Me.btnOk.DesignerSelected = False
         Me.btnOk.ImageIndex = 0
-        Me.btnOk.Location = New System.Drawing.Point(106, 187)
+        Me.btnOk.Location = New System.Drawing.Point(187, 631)
         Me.btnOk.Name = "btnOk"
         Me.btnOk.OriginalImageName = Nothing
         Me.btnOk.SecurityKey = ""
@@ -58,9 +56,8 @@ Partial Class CrReportViewer
         Me.btnCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnCancel.DesignerSelected = False
         Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCancel.DisplayOnly = false
         Me.btnCancel.ImageIndex = 0
-        Me.btnCancel.Location = New System.Drawing.Point(187, 187)
+        Me.btnCancel.Location = New System.Drawing.Point(268, 631)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.OriginalImageName = Nothing
         Me.btnCancel.SecurityKey = ""
@@ -71,15 +68,14 @@ Partial Class CrReportViewer
         'CrystalReportViewer1
         '
         Me.CrystalReportViewer1.ActiveViewIndex = -1
-        Me.CrystalReportViewer1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.CrystalReportViewer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.CrystalReportViewer1.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.CrystalReportViewer1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.CrystalReportViewer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.CrystalReportViewer1.Cursor = System.Windows.Forms.Cursors.Default
         Me.CrystalReportViewer1.EnableDrillDown = False
         Me.CrystalReportViewer1.Location = New System.Drawing.Point(0, 0)
         Me.CrystalReportViewer1.Name = "CrystalReportViewer1"
-        Me.CrystalReportViewer1.Size = New System.Drawing.Size(353, 181)
+        Me.CrystalReportViewer1.Size = New System.Drawing.Size(353, 218)
         Me.CrystalReportViewer1.TabIndex = 2
         Me.CrystalReportViewer1.ToolPanelView = ToolPanelViewType.None
         '
@@ -90,10 +86,9 @@ Partial Class CrReportViewer
         Me.btnQuit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnQuit.DesignerSelected = False
         Me.btnQuit.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnQuit.DisplayOnly = false
         Me.btnQuit.Image = CType(resources.GetObject("btnQuit.Image"), System.Drawing.Image)
         Me.btnQuit.ImageIndex = 0
-        Me.btnQuit.Location = New System.Drawing.Point(353, 0)
+        Me.btnQuit.Location = New System.Drawing.Point(515, 0)
         Me.btnQuit.Name = "btnQuit"
         Me.btnQuit.OriginalImageName = Nothing
         Me.btnQuit.SecurityKey = ""
@@ -101,21 +96,41 @@ Partial Class CrReportViewer
         Me.btnQuit.TabIndex = 5
         Me.btnQuit.Visible = False
         '
+        'CFlowLayout1
+        '
+        Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
+        Me.CFlowLayout1.Location = New System.Drawing.Point(39, 240)
+        Me.CFlowLayout1.Name = "CFlowLayout1"
+        Me.CFlowLayout1.Size = New System.Drawing.Size(434, 331)
+        Me.CFlowLayout1.TabIndex = 6
+        '
         'CrReportViewer
         '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.CancelButton = Me.btnCancel
-        Me.ClientSize = New System.Drawing.Size(374, 222)
+        Me.ClientSize = New System.Drawing.Size(536, 666)
+        Me.Controls.Add(Me.CFlowLayout1)
         Me.Controls.Add(Me.btnQuit)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnOk)
         Me.Controls.Add(Me.CrystalReportViewer1)
+        Me.FormCulture = New System.Globalization.CultureInfo("en-GB")
         Me.Name = "CrReportViewer"
+        Me.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.RightToLeftDisplay = "False"
+        Me.Controls.SetChildIndex(Me.CrystalReportViewer1, 0)
+        Me.Controls.SetChildIndex(Me.btnOk, 0)
+        Me.Controls.SetChildIndex(Me.btnCancel, 0)
+        Me.Controls.SetChildIndex(Me.btnQuit, 0)
+        Me.Controls.SetChildIndex(Me.CFlowLayout1, 0)
         CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ResumeLayout(false)
+        Me.ResumeLayout(False)
+        Me.PerformLayout()
 
-End Sub
+    End Sub
     Protected WithEvents btnOk As CButton
     Protected WithEvents btnCancel As CButton
     Protected WithEvents btnQuit As CButton
-    Protected WithEvents CrystalReportViewer1 As CrystalReportViewer
+    Friend WithEvents CFlowLayout1 As CFlowLayout
+    Public WithEvents CrystalReportViewer1 As CrystalReportViewer
 End Class

@@ -130,7 +130,7 @@ Public Class CtDataGridView
             DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
             DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             Try
-                Me.[ReadOnly] = True
+                Me.ReadOnly = True
             Catch ex As Exception
 
             End Try
