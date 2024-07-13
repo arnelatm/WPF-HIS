@@ -1,13 +1,10 @@
 ﻿Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Models
-Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
-Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Events
 
 Public Class ApArEmReportPresenter(Of TM As New)
     Inherits CommonPresenterNew(Of IApArEmReportView, TM)

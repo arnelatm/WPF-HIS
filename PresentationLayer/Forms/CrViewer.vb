@@ -124,11 +124,11 @@ Public Class CrViewer
         ReportPrinter.PrintJobName = printJobName
     End Sub
 
-    Private Sub btnOk_Click(sender As Object, e As EventArgs) Handles btnOk.Click
+    Private Sub btnOk_Click(sender As Object, e As EventArgs)
         RaiseEvent OkButtonClicked()
     End Sub
 
-    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs)
         Dispose()
         Close()
     End Sub
