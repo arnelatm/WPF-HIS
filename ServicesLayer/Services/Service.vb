@@ -16,7 +16,7 @@ Namespace Services
     ' ** Repository pattern (Service could be split up in individual Repositories: Product, Category, etc).
 
     Public Class Service
-        Implements IService
+        Implements IService, IDisposable
 
         Protected Shared ReadOnly Provider As String = ConfigurationManager.AppSettings.Get("DataProvider")
         Protected Shared ReadOnly Factory As IDaoFactory = DaoFactories.GetFactory(Provider)
@@ -24,6 +24,7 @@ Namespace Services
         Protected Shared ReadOnly BaseDao As IBaseDao = Factory.BaseDao
         Protected Shared ReadOnly TblColPropDao As ITblColPropDao = Factory.TblColPropDao
         Protected Shared ReadOnly DataRetriever As IDataPageRetriever = Factory.DataRetriever
+        Private disposedValue As Boolean
 
         Public Sub New(objectName As String, Optional bizParam As Object = Nothing, Optional daoParam As Object = Nothing)
             'If objectName = "UserSecurity" Then
@@ -790,6 +791,31 @@ Namespace Services
         Public Function GenerateCode(idNo As Integer) As String Implements IService.GenerateCode
             Return DataDao.GenerateCode(idNo)
         End Function
+
+        Protected Overridable Sub Dispose(disposing As Boolean)
+            If Not disposedValue Then
+                If disposing Then
+                    ' TODO: dispose managed state (managed objects)
+                End If
+
+                ' TODO: free unmanaged resources (unmanaged objects) and override finalizer
+                ' TODO: set large fields to null
+                disposedValue = True
+            End If
+        End Sub
+
+        ' ' TODO: override finalizer only if 'Dispose(disposing As Boolean)' has code to free unmanaged resources
+        ' Protected Overrides Sub Finalize()
+        '     ' Do not change this code. Put cleanup code in 'Dispose(disposing As Boolean)' method
+        '     Dispose(disposing:=False)
+        '     MyBase.Finalize()
+        ' End Sub
+
+        Public Sub Dispose() Implements IDisposable.Dispose
+            ' Do not change this code. Put cleanup code in 'Dispose(disposing As Boolean)' method
+            Dispose(disposing:=True)
+            GC.SuppressFinalize(Me)
+        End Sub
 
 #End Region
 

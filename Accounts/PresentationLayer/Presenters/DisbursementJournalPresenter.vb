@@ -6,11 +6,16 @@ Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
+Imports AATM.Common.ServiceLayer
 Imports AATM.Libraries
+Imports AATM.Libraries.CrystalReportsHelper
+Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
+Imports AATM.PresentationLayer.Forms
 Imports AATM.PresentationLayer.Presenters
+Imports CrystalDecisions.[Shared].Json
 
 Namespace PresentationLayer.Presenters
 
@@ -366,6 +371,16 @@ Namespace PresentationLayer.Presenters
             Dim totalLineAmountInWords As String
             Dim currencies As New List(Of CurrencyInfo)()
             Dim curCulture = CultureInfo.CurrentCulture
+            Dim crReport As CrystalReportPrinter
+            Dim printJobService = New CommonService("PrintJob")
+            Dim printSetupService = New CommonService("PrintSetup")
+            Dim printerService = New CommonService("Printer")
+            Dim reportArgs As New CrPrintableArgs
+            Dim reportParameters As New Object
+            Dim reportTitle As String = ""
+            'Dim unitDescriptionObj As New Object
+            'Dim myOtherData As New OtherData("GetUnitDescription", cboProductIdNo.SelectedItem("IdNo"), unitDescriptionObj)
+
             CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
             Dim language As String
             language = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
@@ -387,6 +402,7 @@ Namespace PresentationLayer.Presenters
             Dim reportName As String
             If TableName = "PcJournal" Then
                 reportName = "Petty Cash Disbursement Journal.Rpt"
+                'reportTitle = Messaging.TranslateCaption("Cash Payment Voucher")
             Else
                 If View.PayType = EnumToCode(PayTypeSelection.BankTransfer) Then
                     reportName = "Bank Transfer Journal.Rpt"
@@ -396,8 +412,19 @@ Namespace PresentationLayer.Presenters
                     reportName = "Cash Disbursement Journal.Rpt"
                 End If
             End If
-            Dim cForm As New ReportFormOld(reportName, View.IdNo, "JournalIdNo", transactionAmountInWords, "transactionAmountInWords", totalLineAmountInWords, "TotalLineAmountInWords", language, "Language")
-            cForm.Show()
+            reportArgs.ReportParameters = {reportTitle, "ReportTitle",
+                                           GlobalVariables.EstablishmentName, "EstablishmentName",
+                                           CultureInfo.CurrentCulture.Name, "Language"
+                                           }
+            crReport = GetPrinterSetup(printSetupService, printerService, printJobService, reportName, reportArgs.DataBaseConnectionName, reportArgs.ReportParameters)
+
+            Dim crViewer As New CrViewer(reportName, reportArgs, False, crReport)
+            crViewer.Show()
+            printJobService.Dispose()
+            printerService.Dispose()
+            printSetupService.Dispose()
+            'Dim cForm As New ReportFormOld(reportName, View.IdNo, "JournalIdNo", transactionAmountInWords, "transactionAmountInWords", totalLineAmountInWords, "TotalLineAmountInWords", language, "Language")
+            'cForm.Show()
         End Sub
 
         Private Sub OnPrintCheck()
