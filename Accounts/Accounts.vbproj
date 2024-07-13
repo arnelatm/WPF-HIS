@@ -1242,10 +1242,10 @@
     <Compile Include="PresentationLayer\Views\Forms\Reports\ReportFormIGroup.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\ReportFormTest.Designer.vb">
-      <DependentUpon>ReportFormTest.vb</DependentUpon>
+    <Compile Include="PresentationLayer\Views\Forms\Reports\ReportForm.Designer.vb">
+      <DependentUpon>ReportForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\ReportFormTest.vb">
+    <Compile Include="PresentationLayer\Views\Forms\Reports\ReportForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\ShiftDailyReport.Designer.vb">
@@ -1498,10 +1498,10 @@
     <Compile Include="PresentationLayer\Views\Forms\ErJournalEntry.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\ReportForm.Designer.vb">
-      <DependentUpon>ReportForm.vb</DependentUpon>
+    <Compile Include="PresentationLayer\Views\Forms\Reports\ReportFormOld.Designer.vb">
+      <DependentUpon>ReportFormOld.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\ReportForm.vb">
+    <Compile Include="PresentationLayer\Views\Forms\Reports\ReportFormOld.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\AccountActivity.designer.vb">
@@ -2430,8 +2430,8 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\ReportFormIGroup.resx">
       <DependentUpon>ReportFormIGroup.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\ReportFormTest.resx">
-      <DependentUpon>ReportFormTest.vb</DependentUpon>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\ReportForm.resx">
+      <DependentUpon>ReportForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\ShiftDailyReport.resx">
       <DependentUpon>ShiftDailyReport.vb</DependentUpon>
@@ -2528,8 +2528,8 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\IGroup\CashIncomePerDoctorPerService.resx">
       <DependentUpon>CashIncomePerDoctorPerService.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\ReportForm.resx">
-      <DependentUpon>ReportForm.vb</DependentUpon>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\ReportFormOld.resx">
+      <DependentUpon>ReportFormOld.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\AccountActivity.resx">
       <DependentUpon>AccountActivity.vb</DependentUpon>

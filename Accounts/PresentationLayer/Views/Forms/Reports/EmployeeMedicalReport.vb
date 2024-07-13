@@ -37,7 +37,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Else
                 estName = GlobalVariables.EstablishmentName
             End If
-            cForm = New ReportForm("Employee Medical Report.rpt", estName, "EstablishmentName", reportTitle, "ReportTitle", CultureInfo.CurrentCulture, cboEmployeeIdNo.SelectedItem.IdNo, "EmployeeIdNo", Convert.ToDateTime(dtpMedicalReportDate.Value), "MedicalReportDate", chkVision.Checked, "Vision", chkHearing.Checked, "Hearing", chkBpPulse.Checked, "BPPulse", chkChestHeart.Checked, "ChestHeart", chkAbdomentDerma.Checked, "AbdomenDerma", chkNeuro.Checked, "Neuro", chkFinalResult.Checked, "FinalResult")
+            cForm = New ReportFormOld("Employee Medical Report.rpt", estName, "EstablishmentName", reportTitle, "ReportTitle", CultureInfo.CurrentCulture, cboEmployeeIdNo.SelectedItem.IdNo, "EmployeeIdNo", Convert.ToDateTime(dtpMedicalReportDate.Value), "MedicalReportDate", chkVision.Checked, "Vision", chkHearing.Checked, "Hearing", chkBpPulse.Checked, "BPPulse", chkChestHeart.Checked, "ChestHeart", chkAbdomentDerma.Checked, "AbdomenDerma", chkNeuro.Checked, "Neuro", chkFinalResult.Checked, "FinalResult")
             cForm.Show()
         End Sub
 

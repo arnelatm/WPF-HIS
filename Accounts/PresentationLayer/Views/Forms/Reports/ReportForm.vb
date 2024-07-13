@@ -1,30 +1,46 @@
-﻿Imports AATM.Libraries.GlobalFuncNSub
+﻿Imports AATM.Common
+Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views.Forms.Reports
 
     Public Class ReportForm
+        Implements ICrPrintableReportView
 
-        Public Sub New(ByVal fileName As String, ByVal ParamArray args() As Object)
+
+        Public Sub New()
+            MyBase.New()
+            ' This call is required by the designer.
+            InitializeComponent()
+
+            ' Add any initialization after the InitializeComponent() call.
+
+        End Sub
+
+        Public Sub New(ByVal fileName As String)
 
             ' This call is required by the designer.
             InitializeComponent()
 
             ' Add any initialization after the InitializeComponent() call.
             Text = fileName
-            ReportFileName = fileName
+            'ReportFileName = fileName
             MainTableName = "Account"
-            GetReportProperties()
-            For i = 0 To args.Length - 1 Step 2
-                Dim value = args(i)
-                ReportDocument.SetParameterValue(args(i + 1).ToString(), ConvertObjectToType(value))
-            Next
-            ReportDocument.DataSourceConnections.Clear()
-            ProcessReport()
-
+            'GetReportProperties()
+            'ReportDocument.DataSourceConnections.Clear()
+            'WindowState = FormWindowState.Maximized
+            'With CrystalReportViewer1
+            '    .Visible = True
+            '    .BringToFront()
+            '    .ReportSource = ReportDocument
+            '    .Refresh()
+            'End With
         End Sub
 
         Public Property MainTableName As String
+        Public Property Errors As List(Of String) Implements IView.Errors
+        Public Property DataFilter As String Implements IView.DataFilter
 
+        Public Event PrintReport As ICrPrintableReportView.PrintReportEventHandler Implements ICrPrintableReportView.PrintReport
     End Class
 
 End Namespace

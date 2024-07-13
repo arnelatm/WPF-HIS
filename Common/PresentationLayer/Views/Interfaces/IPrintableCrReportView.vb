@@ -13,4 +13,15 @@ Namespace PresentationLayer.Views.Interface
 
     End Interface
 
+
+    Public Interface IPrintableCrReportViewNew
+        Inherits AATM.PresentationLayer.Views.IViewNew
+
+        Property ReportFileName As String
+        Property PrintArgs As CrPrintableArgs
+
+        Event PrintReport(ByVal sender As IReportPrinterView)
+
+    End Interface
+
 End Namespace

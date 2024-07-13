@@ -3,7 +3,7 @@
 Namespace PresentationLayer.Views.Forms.Reports
 
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-    Partial Class ReportFormTest
+    Partial Class ReportFormOld
         Inherits CrReportViewer
 
         'Form overrides dispose to clean up the component list.
@@ -28,22 +28,6 @@ Namespace PresentationLayer.Views.Forms.Reports
         Private Sub InitializeComponent()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SuspendLayout()
-            '
-            'btnOk
-            '
-            Me.btnOk.DesignerSelected = False
-            Me.btnOk.Location = New System.Drawing.Point(0, 415)
-            Me.btnOk.Visible = False
-            '
-            'btnCancel
-            '
-            Me.btnCancel.DesignerSelected = True
-            Me.btnCancel.Location = New System.Drawing.Point(362, 415)
-            Me.btnCancel.Text = "Close"
-            '
-            'btnQuit
-            '
-            Me.btnQuit.Location = New System.Drawing.Point(766, 12)
             '
             'CrystalReportViewer1
             '

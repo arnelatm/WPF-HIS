@@ -54,7 +54,7 @@ Namespace PresentationLayer.Presenters
             Next
             Dim retVal = Service.ExecuteTvpSp("InsertEmployeeIdPrintingTvp", dtIdPrinting)
             Dim cForm
-            cForm = New ReportForm("HR Id Printing.Rpt", transactionNumber, "TransactionNumber")
+            cForm = New ReportFormOld("HR Id Printing.Rpt", transactionNumber, "TransactionNumber")
             cForm.Show()
         End Sub
 

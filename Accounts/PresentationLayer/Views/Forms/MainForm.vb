@@ -211,7 +211,7 @@ Namespace PresentationLayer.Views.Forms
             Else
                 estName = GlobalVariables.EstablishmentNameAra
             End If
-            Dim cForm As New ReportForm("Aging of Accounts Receivable.Rpt", reportTitle, "ReportTitle", estName, "EstablishmentName", language, "Language")
+            Dim cForm As New ReportFormOld("Aging of Accounts Receivable.Rpt", reportTitle, "ReportTitle", estName, "EstablishmentName", language, "Language")
             cForm.Show()
         End Sub
 
@@ -228,9 +228,9 @@ Namespace PresentationLayer.Views.Forms
             Else
                 estName = GlobalVariables.EstablishmentNameAra
             End If
-            Dim cForm As New ReportForm("Aging of Accounts Payable.Rpt", reportTitle, "ReportTitle", language, "Language", estName, "EstablishmentName")
-            cForm.Presenter = New PrintReportPresenter(Of ReportModel)
-            cForm.Show()
+            'Dim cForm As New ReportForm("Aging of Accounts Payable.Rpt", reportTitle, "ReportTitle", language, "Language", estName, "EstablishmentName")
+            RunFormNew(Of ReportForm, PrintReportPresenter(Of ReportModel), Object)({"Aging of Accounts Payable.Rpt", reportTitle, "ReportTitle", language, "Language", estName, "EstablishmentName"})
+            'cForm.Show()
         End Sub
 
         Private Sub BankTransferToolStripMenuItem_Click(sender As Object, e As EventArgs)
@@ -454,7 +454,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub TestToolStripMenuItem1_Click(sender As Object, e As EventArgs)
-            Dim cForm As New ReportFormTest("Blank Report.Rpt")
+            Dim cForm As New ReportForm("Blank Report.Rpt")
             cForm.Show()
         End Sub
 

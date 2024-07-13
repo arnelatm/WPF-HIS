@@ -396,7 +396,7 @@ Namespace PresentationLayer.Presenters
                     reportName = "Cash Disbursement Journal.Rpt"
                 End If
             End If
-            Dim cForm As New ReportForm(reportName, View.IdNo, "JournalIdNo", transactionAmountInWords, "transactionAmountInWords", totalLineAmountInWords, "TotalLineAmountInWords", language, "Language")
+            Dim cForm As New ReportFormOld(reportName, View.IdNo, "JournalIdNo", transactionAmountInWords, "transactionAmountInWords", totalLineAmountInWords, "TotalLineAmountInWords", language, "Language")
             cForm.Show()
         End Sub
 
@@ -414,7 +414,7 @@ Namespace PresentationLayer.Presenters
             End If
             Dim reportFileName As String
             reportFileName = "Check Printing" & View.AccountIdNo.ToString() & ".Rpt"
-            Dim cForm As New ReportForm(reportFileName, checkAmountInWords, "CheckAmountInWords", GetPayeeName(View.PayeeIdNo), "PayeeName", View.CheckDate, "CheckDate", Convert.ToDecimal(View.Amount), "CheckAmount", language, "Language", View.Notes, "Notes")
+            Dim cForm As New ReportFormOld(reportFileName, checkAmountInWords, "CheckAmountInWords", GetPayeeName(View.PayeeIdNo), "PayeeName", View.CheckDate, "CheckDate", Convert.ToDecimal(View.Amount), "CheckAmount", language, "Language", View.Notes, "Notes")
             cForm.Show()
         End Sub
 
@@ -431,7 +431,7 @@ Namespace PresentationLayer.Presenters
             Else
                 transactionAmountInWords = New ToWord(View.Amount, currencies(0)).ConvertToEnglish()
             End If
-            Dim cForm As New ReportForm("Petty Cash Replenishment Report.Rpt", transactionAmountInWords, "TransactionAmountInWords", View.IdNo, "JournalIdNo", language, "Language")
+            Dim cForm As New ReportFormOld("Petty Cash Replenishment Report.Rpt", transactionAmountInWords, "TransactionAmountInWords", View.IdNo, "JournalIdNo", language, "Language")
             cForm.Show()
         End Sub
 

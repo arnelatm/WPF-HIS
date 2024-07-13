@@ -119,7 +119,7 @@ Namespace PresentationLayer.Presenters
             Else
                 estName = GlobalVariables.EstablishmentName
             End If
-            Dim cForm As New ReportForm(reportName, reportTitle, "ReportTitle", language, "Language", estName, "EstablishmentName", View.PayrollIdNo, "PayrollIdNo")
+            Dim cForm As New ReportFormOld(reportName, reportTitle, "ReportTitle", language, "Language", estName, "EstablishmentName", View.PayrollIdNo, "PayrollIdNo")
             cForm.Show()
         End Sub
 

@@ -23,4 +23,10 @@ Namespace PresentationLayer.Views.Interfaces
 
     End Interface
 
+    Public Interface IReportFormView
+        Inherits IViewNew
+
+    End Interface
+
+
 End Namespace

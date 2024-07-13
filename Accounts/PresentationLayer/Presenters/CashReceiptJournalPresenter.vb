@@ -287,7 +287,7 @@ Namespace PresentationLayer.Presenters
             End If
             Dim _
                 cForm As _
-                    New ReportForm(ReportName, View.IdNo, "CashReceiptJournalIdNo", transactionAmount,
+                    New ReportFormOld(ReportName, View.IdNo, "CashReceiptJournalIdNo", transactionAmount,
                                    "CreditAmountInWords", totalCreditAmount, "TotalLineAmountInWords", language,
                                    "Language")
             cForm.Show()

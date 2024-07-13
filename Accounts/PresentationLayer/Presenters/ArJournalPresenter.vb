@@ -285,7 +285,7 @@ Namespace PresentationLayer.Presenters
             Else
                 totalArAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToEnglish()
             End If
-            Dim cForm As New ReportForm("Accounts Receivable Journal.Rpt", View.IdNo, "ArJournalIdNo", transactionAmount, "TotalArAmountInWords", totalArAmount, "TotalLineAmountInWords", language, "Language")
+            Dim cForm As New ReportFormOld("Accounts Receivable Journal.Rpt", View.IdNo, "ArJournalIdNo", transactionAmount, "TotalArAmountInWords", totalArAmount, "TotalLineAmountInWords", language, "Language")
             cForm.Show()
         End Sub
 

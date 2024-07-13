@@ -270,7 +270,7 @@ Namespace PresentationLayer.Presenters
             Else
                 estName = EstablishmentName
             End If
-            cForm = New ReportForm("Account Reconciliation Report.Rpt", language, "Language", estName, "EstablishmentName", reportTitle, "ReportTitle", View.IdNo, "ReconciliationNumber", View.AccountIdNo, "AccountIdNo", previousDate, "PreviousDate", beginningDate, "BeginningDate", View.ReconciliationDate, "EndingDate")
+            cForm = New ReportFormOld("Account Reconciliation Report.Rpt", language, "Language", estName, "EstablishmentName", reportTitle, "ReportTitle", View.IdNo, "ReconciliationNumber", View.AccountIdNo, "AccountIdNo", previousDate, "PreviousDate", beginningDate, "BeginningDate", View.ReconciliationDate, "EndingDate")
             cForm.Show()
         End Sub
 

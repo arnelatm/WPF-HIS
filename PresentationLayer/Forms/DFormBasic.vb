@@ -46,6 +46,9 @@ Public Class DFormBasic
             RaiseEvent FormLoaded(sender, CaptionCollection, AllControls)
             _firstLoadSwitch = 1
         End If
+        If FormCulture Is Nothing Then
+            FormCulture = GlobalVariables.AppCurrentCultureInfo
+        End If
         'If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
         '    TextDisplayLanguage = CultureInfo.CurrentCulture.Name
         'End If

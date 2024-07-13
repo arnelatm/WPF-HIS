@@ -51,7 +51,15 @@ Public Class CrViewer
 
     Private Sub SetParameters(reportArgs As CrPrintableArgs, Optional addDefaultParameters As Boolean = False)
         Dim language As String
-        language = Microsoft.VisualBasic.Strings.Left(reportArgs.Language, FormCulture.Name.IndexOf("-", StringComparison.Ordinal))
+        If reportArgs.Language Is Nothing Then
+            language = Microsoft.VisualBasic.Strings.Left(reportArgs.Language, GlobalVariables.AppCurrentCultureInfo.Name.IndexOf("-", StringComparison.Ordinal))
+            'language = Microsoft.VisualBasic.Strings.Left(reportArgs.Language, FormCulture.Name.IndexOf("-", StringComparison.Ordinal))
+        Else
+            language = reportArgs.Language
+        End If
+        If FormCulture Is Nothing Then
+            FormCulture = GlobalVariables.AppCurrentCultureInfo
+        End If
         Dim establishmentName As String = GetEstablishmentName(FormCulture, language)
         ReportPrinter.SetParameterValue(reportArgs.ReportParameters)
         If addDefaultParameters Then
@@ -73,8 +81,9 @@ Public Class CrViewer
 
     Private Function GetEstablishmentName(cFormCulture As CultureInfo, language As String) As String
         Dim establishmentName As String
-        language = Microsoft.VisualBasic.Strings.Left(cFormCulture.Name, cFormCulture.Name.IndexOf("-", StringComparison.Ordinal))
-        If language <> "ar" Then
+        Dim lLanguage As String = ""
+        lLanguage = Microsoft.VisualBasic.Strings.Left(cFormCulture.Name, cFormCulture.Name.IndexOf("-", StringComparison.Ordinal))
+        If lLanguage <> "ar" Then
             establishmentName = GlobalVariables.EstablishmentName
         Else
             establishmentName = GlobalVariables.EstablishmentNameAra
@@ -124,7 +133,7 @@ Public Class CrViewer
         Close()
     End Sub
 
-    Private Sub CButton1_Click(sender As Object, e As EventArgs) Handles btnQuit.Click
+    Private Sub CButton1_Click(sender As Object, e As EventArgs)
         Dispose()
         Close()
     End Sub

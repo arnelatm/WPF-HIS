@@ -242,7 +242,7 @@ Namespace PresentationLayer.Views.Forms
                 payee = Strings.Left(cboPayeeIdNo.Text, cboPayeeIdNo.Text.IndexOf("|", StringComparison.Ordinal))
             End If
             reportName = "Check Printing.Rpt"
-            Dim cForm As New ReportForm(reportName, checkAmountInWords, "CheckAmountInWords", payee, "PayeeName", dtpCheckDate.Value, "CheckDate", Convert.ToDecimal(txtAmount.Text), "CheckAmount", txtNotes.Text, "Notes", language, "Language")
+            Dim cForm As New ReportFormOld(reportName, checkAmountInWords, "CheckAmountInWords", payee, "PayeeName", dtpCheckDate.Value, "CheckDate", Convert.ToDecimal(txtAmount.Text), "CheckAmount", txtNotes.Text, "Notes", language, "Language")
             cForm.Show()
         End Sub
 

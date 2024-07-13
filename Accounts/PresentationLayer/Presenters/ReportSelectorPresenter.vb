@@ -41,7 +41,7 @@ Namespace PresentationLayer.Presenters
 
         Private Sub GoPrintRecord()
             Dim cForm
-            cForm = New ReportForm(View.ReportFileName)
+            cForm = New ReportFormOld(View.ReportFileName)
             cForm.Show()
         End Sub
 

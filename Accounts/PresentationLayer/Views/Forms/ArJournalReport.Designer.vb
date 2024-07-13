@@ -28,19 +28,6 @@ Namespace PresentationLayer.Views.Forms
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SuspendLayout()
             '
-            'btnOk
-            '
-            Me.btnOk.Location = New System.Drawing.Point(338, 187)
-            '
-            'btnCancel
-            '
-            Me.btnCancel.Location = New System.Drawing.Point(419, 187)
-            Me.btnCancel.Visible = False
-            '
-            'btnQuit
-            '
-            Me.btnQuit.Location = New System.Drawing.Point(776, 0)
-            '
             'CrystalReportViewer1
             '
             Me.CrystalReportViewer1.Size = New System.Drawing.Size(774, 181)

@@ -107,6 +107,7 @@ Public Class ApArEmReportPresenter(Of TM As New)
             Dim bDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(beginningDate, CultureInfo.CreateSpecificCulture("en-GB"))
             Dim eDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(endingDate, CultureInfo.CreateSpecificCulture("en-GB"))
             reportTitle = Libraries.MessagingLibrary.Messaging.SelectReportName(reportName, beginningDate, endingDate, curCulture)
+            reportArgs.Language = View.Language
             Select Case View.ReportCode
                 Case "ApStatement"
                     reportArgs.ReportParameters = {beginningDate.Value, "BeginningDate",

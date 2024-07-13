@@ -48,7 +48,7 @@ Namespace PresentationLayer.Presenters
                 establishmentName = GetRecordField("Establishment", "EstablishmentNameAra")
             End If
 
-            Dim cForm As New ReportForm("Shift Summary Report.Rpt", View.IdNo.ToString(), "TransactionIdNo", reportTitle, "ReportTitle", language, "Language", establishmentName, "EstablishmentName", reportTitle, "ReportTitle")
+            Dim cForm As New ReportFormOld("Shift Summary Report.Rpt", View.IdNo.ToString(), "TransactionIdNo", reportTitle, "ReportTitle", language, "Language", establishmentName, "EstablishmentName", reportTitle, "ReportTitle")
             cForm.Show()
         End Sub
 
