@@ -390,10 +390,6 @@ Namespace PresentationLayer.Presenters
             Else
                 transactionAmountInWords = New ToWord(View.Amount, currencies(0)).ConvertToEnglish()
             End If
-            'View.TotalCredits = 0
-            'For Each item In View.JournalItems
-            '    View.TotalCredits = View.TotalCredits + item.Credit
-            'Next
             If language = "ar" Then
                 totalLineAmountInWords = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
             Else
@@ -412,9 +408,13 @@ Namespace PresentationLayer.Presenters
                     reportName = "Cash Disbursement Journal.Rpt"
                 End If
             End If
-            reportArgs.ReportParameters = {reportTitle, "ReportTitle",
+            reportArgs.ReportParameters = {
+                                           View.IdNo, "JournalIdNo",
+                                           transactionAmountInWords, "TransactionAmountInWords",
+                                           totalLineAmountInWords, "TotalLineAmountInWords",
+                                           CultureInfo.CurrentCulture.Name, "Language",
                                            GlobalVariables.EstablishmentName, "EstablishmentName",
-                                           CultureInfo.CurrentCulture.Name, "Language"
+                                           reportTitle, "ReportTitle"
                                            }
             crReport = GetPrinterSetup(printSetupService, printerService, printJobService, reportName, reportArgs.DataBaseConnectionName, reportArgs.ReportParameters)
 
@@ -423,8 +423,6 @@ Namespace PresentationLayer.Presenters
             printJobService.Dispose()
             printerService.Dispose()
             printSetupService.Dispose()
-            'Dim cForm As New ReportFormOld(reportName, View.IdNo, "JournalIdNo", transactionAmountInWords, "transactionAmountInWords", totalLineAmountInWords, "TotalLineAmountInWords", language, "Language")
-            'cForm.Show()
         End Sub
 
         Private Sub OnPrintCheck()
