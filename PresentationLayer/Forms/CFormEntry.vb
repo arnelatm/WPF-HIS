@@ -485,11 +485,11 @@ Public Class CFormEntry
         AddingMode = False
     End Sub
 
-    Protected Overridable Sub PublishClickedButton(buttonClicked As ButtonClicked)
+    Protected Overridable Sub PublishClickedButton(buttonClicked As ButtonClicked, Optional params As Object = Nothing)
         'Me.SuspendDrawingNew()
         'RaiseEvent BeforeChangeRecord()
         If Ea IsNot Nothing Then
-            Ea.PublishEvent(New ViewButtonClicked(buttonClicked))
+            Ea.PublishEvent(New ViewButtonClicked(buttonClicked, params))
         End If
         'RaiseEvent AfterChangeRecord()
         'Me.ResumeDrawingNew()
@@ -771,6 +771,19 @@ Public Class CFormEntry
         'ResumeLayout()
         'Me.ResumeDrawingNew()
     End Sub
+
+    Private Sub btnPrintWithArgs_Click(sender As Object, e As EventArgs) Handles btnPrintWithArgs.Click
+        If _debugSwitch = 1 Then
+            Debugger.Break()
+        End If
+        Dim parameters As Object = Nothing
+        parameters = GetPrintParameters()
+        PublishClickedButton(ButtonClicked.PrintWithArgs, parameters)
+    End Sub
+
+    Public Overridable Function GetPrintParameters() As Object
+        Return Nothing
+    End Function
 
     'Private Sub tsbCurrentRecord_VisibleChanged(sender As Object, e As EventArgs) Handles tsbCurrentRecord.VisibleChanged
     '    Debugger.Break()

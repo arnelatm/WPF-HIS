@@ -17,6 +17,7 @@ Public Enum ButtonClicked
     [Print]
     [Filter]
     [Translate]
+    [PrintWithArgs]
 End Enum
 
 Public Class AddModeChanged
@@ -131,11 +132,15 @@ End Class
 
 Public Class ViewButtonClicked
 
-    Public Sub New(ByVal selectedButton As ButtonClicked)
+    Public Sub New(ByVal selectedButton As ButtonClicked, Optional parameters As Object = Nothing)
         Me.SelectedButton = selectedButton
+        If parameters IsNot Nothing Then
+            Me.Parameters = parameters
+        End If
     End Sub
 
     Public Property SelectedButton As ButtonClicked
+    Public Property Parameters As Object
 
 End Class
 

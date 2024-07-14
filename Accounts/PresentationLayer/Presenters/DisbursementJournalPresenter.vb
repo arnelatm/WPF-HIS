@@ -366,63 +366,96 @@ Namespace PresentationLayer.Presenters
             Return item
         End Function
 
-        Public Overrides Sub GoPrintRecord()
+        Public Overrides Sub GoPrintRecordWithArgs(Optional FormCulture As Object = Nothing)
+            Dim reportFileName As String
+            If TableName = "PcJournal" Then
+                reportFileName = "Petty Cash Disbursement Journal.Rpt"
+            Else
+                If View.PayType = EnumToCode(PayTypeSelection.BankTransfer) Then
+                    reportFileName = "Bank Transfer Journal.Rpt"
+                ElseIf View.PayType = EnumToCode(PayTypeSelection.CheckPayment) Then
+                    reportFileName = "Check Disbursement Journal.Rpt"
+                Else
+                    reportFileName = "Cash Disbursement Journal.Rpt"
+                End If
+            End If
             Dim transactionAmountInWords As String
             Dim totalLineAmountInWords As String
             Dim currencies As New List(Of CurrencyInfo)()
-            Dim curCulture = CultureInfo.CurrentCulture
-            Dim crReport As CrystalReportPrinter
-            Dim printJobService = New CommonService("PrintJob")
-            Dim printSetupService = New CommonService("PrintSetup")
-            Dim printerService = New CommonService("Printer")
+            Dim languageCode = Left(DirectCast(FormCulture, CultureInfo).Name, 2)
             Dim reportArgs As New CrPrintableArgs
-            Dim reportParameters As New Object
-            Dim reportTitle As String = ""
-            'Dim unitDescriptionObj As New Object
-            'Dim myOtherData As New OtherData("GetUnitDescription", cboProductIdNo.SelectedItem("IdNo"), unitDescriptionObj)
-
-            CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
-            Dim language As String
-            language = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
             currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
-            If language = "ar" Then
+            If languageCode = "ar" Then
                 transactionAmountInWords = New ToWord(View.Amount, currencies(0)).ConvertToArabic()
-            Else
-                transactionAmountInWords = New ToWord(View.Amount, currencies(0)).ConvertToEnglish()
-            End If
-            If language = "ar" Then
                 totalLineAmountInWords = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
             Else
+                transactionAmountInWords = New ToWord(View.Amount, currencies(0)).ConvertToEnglish()
                 totalLineAmountInWords = New ToWord(View.TotalCredits, currencies(0)).ConvertToEnglish()
-            End If
-            Dim reportName As String
-            If TableName = "PcJournal" Then
-                reportName = "Petty Cash Disbursement Journal.Rpt"
-                'reportTitle = Messaging.TranslateCaption("Cash Payment Voucher")
-            Else
-                If View.PayType = EnumToCode(PayTypeSelection.BankTransfer) Then
-                    reportName = "Bank Transfer Journal.Rpt"
-                ElseIf View.PayType = EnumToCode(PayTypeSelection.CheckPayment) Then
-                    reportName = "Check Disbursement Journal.Rpt"
-                Else
-                    reportName = "Cash Disbursement Journal.Rpt"
-                End If
             End If
             reportArgs.ReportParameters = {
                                            View.IdNo, "JournalIdNo",
                                            transactionAmountInWords, "TransactionAmountInWords",
                                            totalLineAmountInWords, "TotalLineAmountInWords",
-                                           CultureInfo.CurrentCulture.Name, "Language",
-                                           GlobalVariables.EstablishmentName, "EstablishmentName",
-                                           reportTitle, "ReportTitle"
+                                           CultureInfo.CurrentCulture.Name, "Language"
                                            }
-            crReport = GetPrinterSetup(printSetupService, printerService, printJobService, reportName, reportArgs.DataBaseConnectionName, reportArgs.ReportParameters)
 
-            Dim crViewer As New CrViewer(reportName, reportArgs, False, crReport)
-            crViewer.Show()
-            printJobService.Dispose()
-            printerService.Dispose()
-            printSetupService.Dispose()
+            Dim reportPrinter As New AATM.Common.ReportPrinter(reportFileName, "ISPDATA", FormCulture, reportArgs)
+            reportPrinter.ShowReport()
+
+
+            'Dim transactionAmountInWords As String
+            'Dim totalLineAmountInWords As String
+            'Dim currencies As New List(Of CurrencyInfo)()
+            'Dim curCulture = CultureInfo.CurrentCulture
+            'Dim crReport As CrystalReportPrinter
+            'Dim printJobService = New CommonService("PrintJob")
+            'Dim printSetupService = New CommonService("PrintSetup")
+            'Dim printerService = New CommonService("Printer")
+            'Dim reportArgs As New CrPrintableArgs
+            'Dim reportParameters As New Object
+            'Dim reportTitle As String = ""
+            'CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
+            'Dim language As String
+            'language = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
+            'currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
+            'If language = "ar" Then
+            '    transactionAmountInWords = New ToWord(View.Amount, currencies(0)).ConvertToArabic()
+            'Else
+            '    transactionAmountInWords = New ToWord(View.Amount, currencies(0)).ConvertToEnglish()
+            'End If
+            'If language = "ar" Then
+            '    totalLineAmountInWords = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
+            'Else
+            '    totalLineAmountInWords = New ToWord(View.TotalCredits, currencies(0)).ConvertToEnglish()
+            'End If
+            'Dim reportName As String
+            'If TableName = "PcJournal" Then
+            '    reportName = "Petty Cash Disbursement Journal.Rpt"
+            '    'reportTitle = Messaging.TranslateCaption("Cash Payment Voucher")
+            'Else
+            '    If View.PayType = EnumToCode(PayTypeSelection.BankTransfer) Then
+            '        reportName = "Bank Transfer Journal.Rpt"
+            '    ElseIf View.PayType = EnumToCode(PayTypeSelection.CheckPayment) Then
+            '        reportName = "Check Disbursement Journal.Rpt"
+            '    Else
+            '        reportName = "Cash Disbursement Journal.Rpt"
+            '    End If
+            'End If
+            'reportArgs.ReportParameters = {
+            '                               View.IdNo, "JournalIdNo",
+            '                               transactionAmountInWords, "TransactionAmountInWords",
+            '                               totalLineAmountInWords, "TotalLineAmountInWords",
+            '                               CultureInfo.CurrentCulture.Name, "Language",
+            '                               GlobalVariables.EstablishmentName, "EstablishmentName",
+            '                               reportTitle, "ReportTitle"
+            '                               }
+            'crReport = GetPrinterSetup(printSetupService, printerService, printJobService, reportName, reportArgs.DataBaseConnectionName, reportArgs.ReportParameters)
+
+            'Dim crViewer As New CrViewer(reportName, reportArgs, False, crReport)
+            'crViewer.Show()
+            'printJobService.Dispose()
+            'printerService.Dispose()
+            'printSetupService.Dispose()
         End Sub
 
         Private Sub OnPrintCheck()

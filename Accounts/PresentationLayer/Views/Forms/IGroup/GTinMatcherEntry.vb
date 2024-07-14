@@ -625,7 +625,7 @@ Get
             End If
         End Sub
 
-        Protected Overrides Sub PublishClickedButton(buttonClicked As ButtonClicked)
+        Protected Overrides Sub PublishClickedButton(buttonClicked As ButtonClicked, Optional parameters As Object = Nothing)
             MyBase.PublishClickedButton(buttonClicked)
             If buttonClicked = ButtonClicked.Filter Or buttonClicked = ButtonClicked.Save Then
                 MakeDataGridViews()

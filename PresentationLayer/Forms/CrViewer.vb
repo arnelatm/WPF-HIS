@@ -40,7 +40,7 @@ Public Class CrViewer
 
         ' This call is required by the designer.
         InitializeComponent()
-        ReportPrinter = crReport
+        'ReportPrinter = crReport
         ReportPrinter.SetReportProperties(reportFileName, reportArgs.DataBaseConnectionName)
         ReportPrinter.ReportFileName = reportFileName
         SetParameters(reportArgs, AddDefaultParameters)
@@ -137,5 +137,9 @@ Public Class CrViewer
         Dispose()
         Close()
     End Sub
+
+    'Private Sub CrViewer_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+    '    TranslateForm()
+    'End Sub
 
 End Class

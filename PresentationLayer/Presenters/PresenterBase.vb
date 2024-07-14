@@ -809,6 +809,9 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
 
     End Sub
 
+    Public Overridable Sub GoPrintRecordWithArgs(Optional parameters As Object = Nothing)
+    End Sub
+
     Public Sub GoQuit()
         Invoker.SetProperty(View, "CancelClose", {False})
     End Sub
@@ -1354,6 +1357,8 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
                 GoTranslate()
             Case ButtonClicked.Filter
                 GoFilter()
+            Case ButtonClicked.PrintWithArgs
+                GoPrintRecordWithArgs(eventType.Parameters)
             Case Else
                 ViewButtonClicked(eventType)
         End Select

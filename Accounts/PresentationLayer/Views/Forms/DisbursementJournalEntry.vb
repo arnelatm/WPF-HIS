@@ -3,6 +3,7 @@ Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
+Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Views.Forms
 
@@ -50,6 +51,8 @@ Namespace PresentationLayer.Views.Forms
             End If
             FirstControl = cboPaymentType
             Height = 860
+            btnPrint.Visible = False
+            btnPrintWithArgs.Visible = True
         End Sub
 
         Public Property OpenInvoiceMode As Boolean Implements IDisbursementJournalView.OpenInvoiceMode
@@ -375,6 +378,11 @@ Namespace PresentationLayer.Views.Forms
         Public Property CdAccountCount As Int32 Implements IDisbursementJournalView.CdAccountCount
 
         Public Property DefaultAccount As Int32? Implements IDisbursementJournalView.DefaultAccount
+
+        Public Overrides Function GetPrintParameters() As Object
+            Return Me.FormCulture
+        End Function
+
 
 
 #End Region

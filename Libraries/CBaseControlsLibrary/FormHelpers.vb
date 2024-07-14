@@ -201,8 +201,12 @@ Public Module FormHelpers
                 ElseIf TypeOf cCtrl Is CTreeViewOld Or TypeOf cCtrl Is Windows.Forms.TreeView Or TypeOf cCtrl Is CTreeView Then
                     Dim cT = CType(cCtrl, Windows.Forms.TreeView)
                     cT.ExpandAll()
-                    cT.RightToLeftLayout = form.RighToLeftDisplay
-                    cT.RightToLeft = If(form.RighToLeftDisplay, RightToLeft.Yes, RightToLeft.No)
+                    Try
+                        cT.RightToLeftLayout = form.RighToLeftDisplay
+                        cT.RightToLeft = If(form.RighToLeftDisplay, RightToLeft.Yes, RightToLeft.No)
+                    Catch ex As Exception
+
+                    End Try
                 ElseIf TypeOf cCtrl Is CButton Then
                     TranslateButton(cCtrl)
                 ElseIf TypeOf cCtrl Is CTabControl Then

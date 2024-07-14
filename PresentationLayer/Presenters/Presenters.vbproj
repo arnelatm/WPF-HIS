@@ -49,6 +49,9 @@
     <Reference Include="AutoMapper">
       <HintPath>..\..\packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
     </Reference>
+    <Reference Include="Forms">
+      <HintPath>..\Forms\bin\Debug\Forms.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -143,6 +146,10 @@
     <ProjectReference Include="..\..\Libraries\CBaseControlsLibrary\CBaseControlsLibrary.vbproj">
       <Project>{F991561A-78F8-487C-A873-E6436B41D801}</Project>
       <Name>CBaseControlsLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\CrystalReportsHelper\CrystalReportsHelper.vbproj">
+      <Project>{8F2BB05A-C065-4E1B-9B1A-D4F600C0DB62}</Project>
+      <Name>CrystalReportsHelper</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Libraries\GlobalFuncNSub\GlobalFuncNSub.vbproj">
       <Project>{3F360FF6-9EFF-4F94-9C21-38D9667646AC}</Project>

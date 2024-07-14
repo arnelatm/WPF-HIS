@@ -13,6 +13,9 @@ Public Class DFormBasic
     Private _firstLoadSwitch As Integer = 0
     Private _originalText As String
     Private _systemViewIdNo As Int32
+    Private _formCulture As CultureInfo
+    Private _initialDisplayIsRightToLeft As Boolean
+    Private _firstPass As Boolean = True
 
     Protected Sub New()
         ' This call is required by the designer.
@@ -21,6 +24,17 @@ Public Class DFormBasic
         If ViewDisplayName Is Nothing OrElse ViewDisplayName = "" Then
             ViewDisplayName = Name
         End If
+        _formCulture = GlobalVariables.AppCultureInfo
+        Dim cultureCode As String = Strings.Left(_formCulture.Name, 2)
+        If Not IsCultureOk(_formCulture.Name) Then
+            MessageBox.Show("Invalid Default AppCultureInfo. Please setup a valid initial cultureInfo on app settings.")
+            cultureCode = CultureInfo.DefaultThreadCurrentCulture.Name
+        End If
+        If IsRightToLeft(cultureCode) Then
+            _initialDisplayIsRightToLeft = True
+        Else
+            _initialDisplayIsRightToLeft = False
+        End If
     End Sub
 
     Public Event ArabicDisplayRequested() Implements IViewNew.ArabicDisplayRequested
@@ -28,7 +42,35 @@ Public Class DFormBasic
     Public Event FormLoaded(sender As Object, captionCollection As Collection, allControls As List(Of Control)) Implements IViewNew.FormLoaded
     Public Event OrigLanguageDisplayRequested() Implements IViewNew.OrigLanguageDisplayRequested
     Public Property CaptionCollection As New Collection Implements IViewNew.CaptionCollection
+
     Public Property FormCulture As CultureInfo Implements IViewNew.FormCulture
+        Get
+            Return _formCulture
+        End Get
+        Set(value As CultureInfo)
+            _formCulture = value
+            Dim cultureCode As String = Strings.Left(value.Name, 2)
+            If IsCultureOk(cultureCode) Then
+                If IsRightToLeft(cultureCode) Then
+                    SwitchDisplayToArabicLanguage()
+                    _firstPass = False
+                Else
+                    If _initialDisplayIsRightToLeft Then
+                        SwitchDisplayToOriginalLanguage()
+                    Else
+                        If _firstPass Then
+                            ' no need to switch since default is LeftToRight 
+                            ' only switch if not the first pass
+                        Else
+                            SwitchDisplayToOriginalLanguage()
+                        End If
+                        _firstPass = False
+                    End If
+                End If
+            End If
+        End Set
+    End Property
+
     Public Property RightToLeftDisplay As String Implements IViewNew.RightToLeftDisplay
     Public Property ViewDisplayName As String Implements IViewNew.ViewDisplayName
 
@@ -122,7 +164,6 @@ Public Class DFormBasic
         CutText()
     End Sub
     Private Sub DFormBasic_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
-        FormCulture = GlobalVariables.AppCultureInfo
         If FormCulture.TextInfo.IsRightToLeft Then
             RightToLeftDisplay = True
             RightToLeft = RightToLeft.Yes
@@ -151,7 +192,7 @@ Public Class DFormBasic
                 RightToLeftDisplay = True
                 Dim curFormCulture As CultureInfo
                 curFormCulture = New CultureInfo(cultureCode, False)
-                FormCulture = curFormCulture
+                _formCulture = curFormCulture
                 RightToLeft = RightToLeft.Yes
                 TranslateForm(Me, AllControls)
                 RaiseEvent ArabicDisplayRequested()

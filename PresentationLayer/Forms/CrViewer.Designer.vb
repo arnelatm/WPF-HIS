@@ -50,7 +50,6 @@ Partial Class CrViewer
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.ClientSize = New System.Drawing.Size(678, 314)
         Me.Controls.Add(Me.CrystalReportViewer1)
-        Me.FormCulture = New System.Globalization.CultureInfo("en-GB")
         Me.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.Name = "CrViewer"
         Me.RightToLeft = System.Windows.Forms.RightToLeft.No
