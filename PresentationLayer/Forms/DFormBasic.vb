@@ -15,7 +15,7 @@ Public Class DFormBasic
     Private _systemViewIdNo As Int32
     Private _formCulture As CultureInfo
     Private _initialDisplayIsRightToLeft As Boolean
-    Private _firstPass As Boolean = True
+    Private _displayedRightToLeft As Boolean = False
 
     Protected Sub New()
         ' This call is required by the designer.
@@ -53,18 +53,18 @@ Public Class DFormBasic
             If IsCultureOk(cultureCode) Then
                 If IsRightToLeft(cultureCode) Then
                     SwitchDisplayToArabicLanguage()
-                    _firstPass = False
+                    _displayedRightToLeft = True
                 Else
                     If _initialDisplayIsRightToLeft Then
                         SwitchDisplayToOriginalLanguage()
                     Else
-                        If _firstPass Then
-                            ' no need to switch since default is LeftToRight 
-                            ' only switch if not the first pass
-                        Else
+                        If _displayedRightToLeft Then
                             SwitchDisplayToOriginalLanguage()
+                        Else
+                            ' no need to switch since we haven't yet displayed RightToLeft Layout
+                            ' only switch if we have already displayed in RightToLeft Layout
                         End If
-                        _firstPass = False
+
                     End If
                 End If
             End If
