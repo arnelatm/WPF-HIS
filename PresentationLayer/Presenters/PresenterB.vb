@@ -290,4 +290,5 @@ Public Class PresenterB(Of TV As IViewNew, TM As New)
         End If
         Return retValue
     End Function
+
 End Class

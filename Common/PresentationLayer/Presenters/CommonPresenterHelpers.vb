@@ -1,9 +1,7 @@
 ﻿Imports System.Drawing.Printing
 Imports System.Globalization
-Imports AATM.Common.BusinessLayer
 Imports AATM.Common.Models
 Imports AATM.Common.ServiceLayer
-Imports AATM.DataLayer.AdoNet
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.CrystalReportsHelper
 Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter

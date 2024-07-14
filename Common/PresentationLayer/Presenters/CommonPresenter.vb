@@ -1,5 +1,7 @@
 ﻿' Category business object
 ' ** Enterprise Design Pattern: Domain Model, Identity Field
+Imports System.Globalization
+Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
 Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views
 
@@ -34,11 +36,13 @@ Namespace PresentationLayer.Presenters
             MyBase.New(itemView)
         End Sub
 
-        'Public Overrides Sub GoAddRecord()
-        '    MyBase.GoAddRecord()
-        '    MakeDefaultValues()
-        'End Sub
+        Protected Function PrintReport(reportFileName As String, dataBaseConnectionName As String, formCulture As CultureInfo, reportArgs As CrPrintableArgs)
+            Dim reportPrinter As New AATM.Common.ReportPrinter(reportFileName, dataBaseConnectionName, formCulture, reportArgs)
+            reportPrinter.ShowReport()
+        End Function
 
     End Class
+
+
 
 End Namespace
