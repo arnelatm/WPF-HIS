@@ -1045,12 +1045,6 @@
     <Compile Include="PresentationLayer\Views\Forms\PurchaseEntry.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\IqamaCbcReport2.designer.vb">
-      <DependentUpon>IqamaCbcReport2.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\IqamaCbcReport2.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\IqamaCbcReport.designer.vb">
       <DependentUpon>IqamaCbcReport.vb</DependentUpon>
     </Compile>
@@ -1231,18 +1225,6 @@
     <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\GenerateDrugCsv.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\NumberofCashPatientsPerDoctorPerDay - Copy.designer.vb">
-      <DependentUpon>NumberofCashPatientsPerDoctorPerDay - Copy.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\NumberofCashPatientsPerDoctorPerDay - Copy.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\ReportFormIGroup.Designer.vb">
-      <DependentUpon>ReportFormIGroup.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\ReportFormIGroup.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\ReportForm.Designer.vb">
       <DependentUpon>ReportForm.vb</DependentUpon>
     </Compile>
@@ -1396,12 +1378,6 @@
       <DependentUpon>DiagnosticTestSummary.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\DiagnosticTestSummary.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\CashIncomePerDoctorPerService.designer.vb">
-      <DependentUpon>CashIncomePerDoctorPerService.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\CashIncomePerDoctorPerService.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Interfaces\IBasicView.vb" />
@@ -2287,9 +2263,6 @@
       <DependentUpon>PurchaseEntry.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\IGroup\IqamaCbcReport2.resx">
-      <DependentUpon>IqamaCbcReport2.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\IGroup\IqamaCbcReport.resx">
       <DependentUpon>IqamaCbcReport.vb</DependentUpon>
     </EmbeddedResource>
@@ -2419,12 +2392,6 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\IGroup\GenerateDrugCsv.resx">
       <DependentUpon>GenerateDrugCsv.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\IGroup\NumberofCashPatientsPerDoctorPerDay - Copy.resx">
-      <DependentUpon>NumberofCashPatientsPerDoctorPerDay - Copy.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\ReportFormIGroup.resx">
-      <DependentUpon>ReportFormIGroup.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\ReportForm.resx">
       <DependentUpon>ReportForm.vb</DependentUpon>
     </EmbeddedResource>
@@ -2516,9 +2483,6 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\IGroup\DiagnosticTestSummary.resx">
       <DependentUpon>DiagnosticTestSummary.vb</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\IGroup\CashIncomePerDoctorPerService.resx">
-      <DependentUpon>CashIncomePerDoctorPerService.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\ReportFormOld.resx">
       <DependentUpon>ReportFormOld.vb</DependentUpon>
@@ -2871,12 +2835,12 @@
       <Link>.editorconfig</Link>
     </None>
     <None Include="app - Copy.config" />
-    <None Include="app-Isp-Server - Copy - Copy.config" />
+    <None Include="app-.config" />
+    <None Include="app.config" />
     <None Include="app-Isp-Server - Copy.config" />
     <None Include="app-ISP-SERVERNEW.config" />
     <None Include="app-ibn-server-test.config" />
     <None Include="app-IBNSINAP.config" />
-    <None Include="app.config" />
     <None Include="app-ISPADMIN2.config" />
     <None Include="app-Marcelo-Dell.config" />
     <None Include="app-Isp-Server.config" />

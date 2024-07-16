@@ -157,7 +157,7 @@ Namespace PresentationLayer.Presenters
 
             Dim printModel As New ReportModel
             Dim reportPrinter As New PrintReportPresenter(Of ReportModel)
-            reportPrinter.OnPrintReport("DosageLabel.Rpt", "ISPDATA", {_labelIdNo, "LabelIdNo"})
+            reportPrinter.OnPrintReport("DosageLabel.Rpt", {_labelIdNo, "LabelIdNo"})
 
 
             'Dim qtyDescription As String = IIf(View.Dose <> 0, GlobalFunctions.NumberToWordEnglish(View.Dose, False).ToLower() + Trim(GetRecordFieldWithKeyG(Of String)(View.DoseUnit, "ItemCode", "IdNo", "ItemCodeName")) + IIf(View.Dose > 1, "s", ""), "")
@@ -170,7 +170,7 @@ Namespace PresentationLayer.Presenters
         Public Overloads Sub OnEventHandler(ByRef eventType As PrintCrEventArgs) Implements ISubscriber(Of PrintCrEventArgs).OnEventHandler
             Dim printModel As New ReportModel
             Dim reportPrinter As New PrintReportPresenter(Of ReportModel)
-            reportPrinter.OnPrintReport("DosageLabel.Rpt", "IGROUPCLINIC", {_labelIdNo, "LabelIdNo"})
+            reportPrinter.OnPrintReport("DosageLabel.Rpt", {_labelIdNo, "LabelIdNo"}, "IGROUPCLINIC")
         End Sub
 
 
@@ -188,17 +188,6 @@ Namespace PresentationLayer.Presenters
             Dim nIdNo As Int32 = GetFieldOnMaxField("IdNo", "Dosage", "IdNo")
             DisplayTree(nIdNo)
         End Sub
-
-        'Public Sub OnPrintReportEventHandler(ByRef eventType As PrintCrEventArgs) Implements ISubscriber(Of PrintCrEventArgs).OnEventHandler
-
-        '    CreateLabels()
-
-        '    'Dim printModel As New ReportModel
-        '    'Dim reportPrinter As New PrintReportPresenter(Of ReportModel)
-        '    'reportPrinter.OnPrintReport("DosageLabel.Rpt", "IGROUPCLINIC", {_labelIdNo, "LabelIdNo"})
-
-        'End Sub
-
 
         Private Sub CreateLabels()
             _labelIdNo = Service.GetField(Of Int32, String)(_computerName, "DosageLabel", "ComputerName", "IdNo")

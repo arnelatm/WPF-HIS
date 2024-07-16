@@ -1,9 +1,7 @@
 ﻿Imports System.Globalization
-Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Presenters
-Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
 Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class ApArEmReportPresenter(Of TM As New)
@@ -100,14 +98,13 @@ Public Class ApArEmReportPresenter(Of TM As New)
             valid = False
         End If
         If valid Then
-            Dim reportArgs As New CrPrintableArgs
             Dim bDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(beginningDate, CultureInfo.CreateSpecificCulture("en-GB"))
             Dim eDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(endingDate, CultureInfo.CreateSpecificCulture("en-GB"))
+            Dim reportParameters As New Object
             reportTitle = Libraries.MessagingLibrary.Messaging.SelectReportName(reportName, beginningDate, endingDate, curCulture)
-            reportArgs.Language = View.Language
             Select Case View.ReportCode
                 Case "ApStatement"
-                    reportArgs.ReportParameters = {beginningDate.Value, "BeginningDate",
+                    reportParameters = {beginningDate.Value, "BeginningDate",
                         endingDate.Value, "EndingDate",
                         View.IdNo, "SupplierIdNo",
                         View.PersonSelectorControl.Text, "DisplayName",
@@ -115,7 +112,7 @@ Public Class ApArEmReportPresenter(Of TM As New)
                         GlobalVariables.EstablishmentName, "EstablishmentName",
                         View.Language, "Language"}
                 Case "ArStatement"
-                    reportArgs.ReportParameters = {beginningDate.Value, "BeginningDate",
+                    reportParameters = {beginningDate.Value, "BeginningDate",
                         endingDate.Value, "EndingDate",
                         View.IdNo, "CustomerIdNo",
                         View.PersonSelectorControl.Text, "DisplayName",
@@ -123,7 +120,7 @@ Public Class ApArEmReportPresenter(Of TM As New)
                         GlobalVariables.EstablishmentName, "EstablishmentName",
                         View.Language, "Language"}
                 Case "ErStatement"
-                    reportArgs.ReportParameters = {beginningDate.Value, "BeginningDate",
+                    reportParameters = {beginningDate.Value, "BeginningDate",
                         endingDate.Value, "EndingDate",
                         View.IdNo, "EmployeeIdNo",
                         View.PersonSelectorControl.Text, "DisplayName",
@@ -131,17 +128,16 @@ Public Class ApArEmReportPresenter(Of TM As New)
                         GlobalVariables.EstablishmentName, "EstablishmentName",
                         View.Language, "Language"}
                 Case "EmployeeInfo"
-                    reportArgs.ReportParameters = {View.IdNo, "EmployeeIdNo"}
+                    reportParameters = {View.IdNo, "EmployeeIdNo"}
                 Case "LeaveStatement"
-                    reportArgs.ReportParameters = {beginningDate.Value, "BeginningDate",
+                    reportParameters = {beginningDate.Value, "BeginningDate",
                         endingDate.Value, "EndingDate",
                         View.IdNo, "EmployeeIdNo",
                         reportTitle, "ReportTitle",
                         GlobalVariables.EstablishmentName, "EstablishmentName",
                         View.Language, "Language"}
             End Select
-            Dim p As New PrintReportPresenter(Of AccountModel)
-            p.ViewReport(_reportFileName, reportArgs, False)
+            ShowReportToScreen(_reportFileName, reportParameters)
         End If
         CultureInfo.CurrentCulture = curCulture
 

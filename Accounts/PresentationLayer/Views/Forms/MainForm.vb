@@ -249,10 +249,6 @@ Namespace PresentationLayer.Views.Forms
             formToRun.Show()
         End Sub
 
-        Private Sub CashIncomePerDoctorServiceToolStripMenuItem_Click(sender As Object, e As EventArgs)
-            RunForm(Of CashIncomePerDoctorPerService)()
-        End Sub
-
         Private Sub CashReceiptEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) _
             Handles ToolStripMenuItemCashReceiptEntry.Click
             RunForm(Of CashReceiptJournalEntry, CashReceiptJournalPresenter(Of CashReceiptJournalModel))()
@@ -355,9 +351,9 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of FinancialReport, FinancialReportPresenter(Of AccountModel), String, String)("IncomeStatement", "M")
         End Sub
 
-        Private Sub NumberOfCashPatientsPerDoctorToolStripMenuItem_Click(sender As Object, e As EventArgs)
-            RunForm(Of NumberOfCashPatientsPerDoctorPerDay)()
-        End Sub
+        'Private Sub NumberOfCashPatientsPerDoctorToolStripMenuItem_Click(sender As Object, e As EventArgs)
+        '    RunForm(Of NumberOfCashPatientsPerDoctorPerDay)()
+        'End Sub
 
         Private Sub PayCyclesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPayCycles.Click
             RunForm(Of PayCycleEntryTv, PayCyclePresenter(Of PayCycleModel))()

@@ -48,7 +48,7 @@ Namespace PresentationLayer.Presenters
 
             Dim printModel As New ReportModel
             Dim reportPrinter As New PrintReportPresenter(Of ReportModel)
-            reportPrinter.OnPrintReport("DosageLabel.Rpt", "IGROUPCLINIC", {_labelIdNo, "LabelIdNo"})
+            reportPrinter.OnPrintReport("DosageLabel.Rpt", {_labelIdNo, "LabelIdNo"}, "IGROUPCLINIC")
 
             ' after printing marked the records as not printable so as to avoid duplicate printing of labels
             For Each item As PrescriptionItemView In View.PrescriptionDetails

@@ -191,12 +191,12 @@ Namespace PresentationLayer.Views.Forms
                 End If
                 If whichToPrint > 0 Then
                     Dim transKey As Int32 = .CurrentRow.Cells("dgvTransKey").Value
-                    Dim parameter As New ArrayList
-                    parameter.Add({"TransKey", transKey})
-                    parameter.Add({"DataAccessLevel", _dataAccessLevel})
-                    parameter.Add({"WhichToPrint", whichToPrint})
-                    Dim cForm As New ReportFormIGroup($"PMR Doctors Form.Rpt", FormCulture, parameter)
-                    cForm.Show()
+                    Dim parameters As New Object
+                    parameters = {transKey, "TransKey",
+                                 _dataAccessLevel, "DataAccessLevel",
+                                 whichToPrint, "WhichToPrint"
+                                 }
+                    ShowReportToScreen($"PMR Doctors Form.Rpt", parameters, "IGroupClinic")
                 End If
             End With
         End Sub

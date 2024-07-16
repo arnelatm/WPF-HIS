@@ -122,6 +122,18 @@ Public Class ReportPrinter
         crPrintableArgs.ReportParameters = ReportParameters
     End Sub
 
+    Public Sub New(reportFileName As String, dataBaseConnectionName As String, crPrintableArgs As CrPrintableArgs)
+        Me.ReportFileName = reportFileName
+        Me.DataBaseConnectionName = dataBaseConnectionName
+        Me.CReportPrintableArgs = crPrintableArgs
+        Me.ReportParameters = crPrintableArgs.ReportParameters
+        crPrintableArgs.ReportFileName = reportFileName
+        crPrintableArgs.CultureInfo = Language
+        crPrintableArgs.DataBaseConnectionName = dataBaseConnectionName
+        crPrintableArgs.Language = Language
+        crPrintableArgs.ReportParameters = ReportParameters
+    End Sub
+
     Public Property Language As String
     Public ReadOnly Property ReportName As String
     Public ReadOnly Property ReportParameters As Object

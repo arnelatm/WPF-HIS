@@ -50,7 +50,30 @@ Namespace PresentationLayer.Presenters
             _prService = New CommonService("Printer")
         End Sub
 
-        Public Sub OnPrintReport(reportFileName As String, databaseConnectionName As String, Optional args() As Object = Nothing, Optional copies As Integer = 1, Optional collate As Boolean = False, Optional startPage As Integer = 0, Optional endPage As Integer = 0)
+        Public Sub OnPrintReport(reportFileName As String)
+            ' leave startpage and endpage to 0 - to print all pages
+            Dim DataBaseConnectionName = "ISPDATA"
+            ProcessReport(reportFileName, DataBaseConnectionName, True, Nothing, 1, False, 0, 0)
+        End Sub
+
+        Public Sub OnPrintReport(reportFileName As String, args() As Object)
+            ' leave startpage and endpage to 0 - to print all pages
+            Dim DataBaseConnectionName = "ISPDATA"
+            ProcessReport(reportFileName, DataBaseConnectionName, True, args, 1, False, 0, 0)
+        End Sub
+
+        Public Sub OnPrintReport(reportFileName As String, args() As Object, dataBaseConnectionName As String)
+            ' leave startpage and endpage to 0 - to print all pages
+            ProcessReport(reportFileName, DataBaseConnectionName, True, args, 1, False, 0, 0)
+        End Sub
+
+        Public Sub OnPrintReport(reportFileName As String, Optional args() As Object = Nothing, Optional copies As Integer = 1, Optional collate As Boolean = False, Optional startPage As Integer = 0, Optional endPage As Integer = 0)
+            ' leave startpage and endpage to 0 - to print all pages
+            Dim DataBaseConnectionName = "ISPDATA"
+            ProcessReport(reportFileName, DataBaseConnectionName, True, args, copies, collate, startPage, endPage)
+        End Sub
+
+        Public Sub OnPrintReport(reportFileName As String, Optional args() As Object = Nothing, Optional databaseConnectionName As String = "ISPDATA", Optional copies As Integer = 1, Optional collate As Boolean = False, Optional startPage As Integer = 0, Optional endPage As Integer = 0)
             ' leave startpage and endpage to 0 - to print all pages
             ProcessReport(reportFileName, databaseConnectionName, True, args, copies, collate, startPage, endPage)
         End Sub

@@ -4,6 +4,7 @@ Imports AATM.Common
 Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
+Imports CrystalDecisions.ReportAppServer.DataDefModel
 
 Namespace PresentationLayer.Views.Forms.Reports
 
@@ -26,47 +27,31 @@ Namespace PresentationLayer.Views.Forms.Reports
             SortOrderKey = "IdNo"
             txtSampleNo.Text = ""
             _mode = mode
+            If _mode = "SampleNo" Then
+                lblSampleNumber.Text = "Sample Number"
+            Else
+                lblSampleNumber.Text = "Invoice Number"
+            End If
         End Sub
 
         Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
-            Dim parameters As New ArrayList
-            Dim reportName As String
-            parameters.Add({"ReportTitle", "Complete Blood Count"})
-            If _mode = "SampleNo" Then
-                parameters.Add({"SampleNo", txtSampleNo.GetValue(Of Int32)})
-                reportName = "CBCReportDyMindBySampleNo.Rpt"
-            Else
-                parameters.Add({"InvoiceNo", txtSampleNo.GetValue(Of Int32)})
-                reportName = "CBCReportDyMindByInvoiceNo.Rpt"
-            End If
-            Dim cForm As New ReportFormIGroup(reportName, FormCulture, parameters)
-            cForm.Show()
-
-
-
+            Dim parameters As New Object
             Dim reportFileName As String
-            Dim reportArgs As New CrPrintableArgs
-            Dim reportParameters As New Object
-            Dim estName As String
-            Dim language = Strings.Left(CultureInfo.CurrentCulture.Name, CultureInfo.CurrentCulture.Name.IndexOf("-"))
-            If language = "ar" Then
-                estName = GlobalVariables.EstablishmentNameAra
-            Else
-                estName = GlobalVariables.EstablishmentName
-            End If
             If _mode = "SampleNo" Then
-                parameters.Add({"SampleNo", txtSampleNo.GetValue(Of Int32)})
+                parameters = {"Complete Blood Count", "ReportTitle",
+                              txtSampleNo.GetValue(Of Int32), "SampleNo",
+                              GetEstablishmentName("en"), "EstablishmentName"
+                             }
                 reportFileName = "CBCReportDyMindBySampleNo.Rpt"
             Else
-                parameters.Add({"InvoiceNo", txtSampleNo.GetValue(Of Int32)})
+                parameters = {"Complete Blood Count", "ReportTitle",
+                              txtSampleNo.GetValue(Of Int32), "InvoiceNo",
+                              GetEstablishmentName("en"), "EstablishmentName"
+                              }
                 reportFileName = "CBCReportDyMindByInvoiceNo.Rpt"
             End If
 
-            reportArgs.DataBaseConnectionName = "IGroupClinic"
-            reportArgs.ReportParameters = {"Complete Blood Count", "ReportTitle",
-                                           txtSampleNo.GetValue(Of Int32), IIf(_mode = "SampleNo", "SampleNo", "InvoiceNo"),
-                                           txtSampleNo.GetValue(Of Int32), "ReportNumber"}
-            RaiseEvent PrintReport(reportFileName, reportArgs, False)
+            ShowReportToScreen(reportFileName, parameters, "IGroupClinic")
 
         End Sub
 

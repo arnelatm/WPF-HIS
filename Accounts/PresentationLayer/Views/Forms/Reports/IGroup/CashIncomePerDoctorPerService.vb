@@ -1,6 +1,10 @@
-﻿Imports AATM.Accounts.PresentationLayer.Presenters
+﻿Imports AATM.Accounts.BusinessLayer
+Imports AATM.Accounts.DataLayer.AdoNet
+Imports AATM.Accounts.PresentationLayer.Models
+Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
+Imports CrystalDecisions.ReportAppServer.DataDefModel
 
 Namespace PresentationLayer.Views.Forms.Reports
 
@@ -31,13 +35,19 @@ Namespace PresentationLayer.Views.Forms.Reports
                 Dim cEndDate As String
                 cBegDate = Format(dtpBeginningDate.Value, "yyyy/MM/dd")
                 cEndDate = Format(dtpEndingDate.Value, "yyyy/MM/dd")
-                Dim parameter As New ArrayList
-                parameter.Add("BeginningDate")
-                parameter.Add(cBegDate)
-                parameter.Add("EndingDate")
-                parameter.Add(cEndDate)
-                Dim cForm As New ReportFormIGroup("Cash Income Summary Per Month Per Service Per Doctor.Rpt", FormCulture, parameter)
-                cForm.Show()
+                'Dim parameter As New ArrayList
+                'parameter.Add("BeginningDate")
+                'parameter.Add(cBegDate)
+                'parameter.Add("EndingDate")
+                'parameter.Add(cEndDate)
+                'Dim cForm As New ReportFormIGroup("Cash Income Summary Per Month Per Service Per Doctor.Rpt", FormCulture, parameter)
+                'cForm.Show()
+                Dim reportParameters = {cBegDate, "BeginningDate",
+                                        cEndDate, "EndingDate",
+                                        "Cash Income Summary Per Month Per Service Per Doctor", "ReportTitle",
+                                        GetEstablishmentName("en"), "EstablishmentName"
+                                        }
+                ShowReportToScreen("Cash Income Summary Per Month Per Service Per Doctor.Rpt", reportParameters)
             Else
                 Messaging.Show(True, "MsgBegDateMustBeLessThanEndDate")
             End If

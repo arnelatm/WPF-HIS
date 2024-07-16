@@ -1,9 +1,4 @@
-﻿Imports System.Globalization
-Imports AATM.Libraries.CBaseControlsLibrary
-Imports AATM.Libraries.CrystalReportsHelper
-Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
-Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Forms
+﻿Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.ServicesLayer.Services
 
 Public Enum DataTypeSelection

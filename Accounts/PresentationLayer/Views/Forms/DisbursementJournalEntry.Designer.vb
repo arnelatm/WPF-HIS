@@ -209,7 +209,7 @@ Namespace PresentationLayer.Views.Forms
             Me.tlpDisbursement.Controls.Add(Me.lblTransactionDate, 6, 0)
             Me.tlpDisbursement.Controls.Add(Me.dtpTransactionDate, 8, 0)
             Me.tlpDisbursement.Location = New System.Drawing.Point(0, 65)
-            Me.tlpDisbursement.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.tlpDisbursement.Margin = New System.Windows.Forms.Padding(4)
             Me.tlpDisbursement.Name = "tlpDisbursement"
             Me.tlpDisbursement.Padding = New System.Windows.Forms.Padding(13, 12, 13, 12)
             Me.tlpDisbursement.RowCount = 11
@@ -344,7 +344,7 @@ Namespace PresentationLayer.Views.Forms
             Me.chkPcClosed.IgnoreCase = False
             Me.chkPcClosed.LinkedLabel = Nothing
             Me.chkPcClosed.Location = New System.Drawing.Point(1037, 220)
-            Me.chkPcClosed.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+            Me.chkPcClosed.Margin = New System.Windows.Forms.Padding(5)
             Me.chkPcClosed.Name = "chkPcClosed"
             Me.chkPcClosed.RightToLeft = System.Windows.Forms.RightToLeft.No
             Me.chkPcClosed.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
@@ -370,7 +370,7 @@ Namespace PresentationLayer.Views.Forms
             Me.chkPosted.IgnoreCase = False
             Me.chkPosted.LinkedLabel = Nothing
             Me.chkPosted.Location = New System.Drawing.Point(939, 220)
-            Me.chkPosted.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+            Me.chkPosted.Margin = New System.Windows.Forms.Padding(5)
             Me.chkPosted.Name = "chkPosted"
             Me.chkPosted.RightToLeft = System.Windows.Forms.RightToLeft.No
             Me.chkPosted.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
@@ -467,7 +467,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewJournalItems.IgnoreCase = False
             Me.DataGridViewJournalItems.IsDirty = False
             Me.DataGridViewJournalItems.Location = New System.Drawing.Point(17, 255)
-            Me.DataGridViewJournalItems.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.DataGridViewJournalItems.Margin = New System.Windows.Forms.Padding(4)
             Me.DataGridViewJournalItems.Name = "DataGridViewJournalItems"
             Me.DataGridViewJournalItems.OldCellValue = Nothing
             Me.DataGridViewJournalItems.ReadOnly = True
@@ -1327,7 +1327,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewDjOiItems.IgnoreCase = False
             Me.DataGridViewDjOiItems.IsDirty = False
             Me.DataGridViewDjOiItems.Location = New System.Drawing.Point(17, 684)
-            Me.DataGridViewDjOiItems.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.DataGridViewDjOiItems.Margin = New System.Windows.Forms.Padding(4)
             Me.DataGridViewDjOiItems.MinimumSize = New System.Drawing.Size(0, 412)
             Me.DataGridViewDjOiItems.Name = "DataGridViewDjOiItems"
             Me.DataGridViewDjOiItems.OldCellValue = Nothing
@@ -1933,7 +1933,7 @@ Namespace PresentationLayer.Views.Forms
             Me.chkApproved.IgnoreCase = False
             Me.chkApproved.LinkedLabel = Nothing
             Me.chkApproved.Location = New System.Drawing.Point(778, 220)
-            Me.chkApproved.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+            Me.chkApproved.Margin = New System.Windows.Forms.Padding(5)
             Me.chkApproved.Name = "chkApproved"
             Me.chkApproved.RightToLeft = System.Windows.Forms.RightToLeft.No
             Me.chkApproved.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
@@ -1959,7 +1959,7 @@ Namespace PresentationLayer.Views.Forms
             Me.chkCancelled.IgnoreCase = False
             Me.chkCancelled.LinkedLabel = Nothing
             Me.chkCancelled.Location = New System.Drawing.Point(1136, 220)
-            Me.chkCancelled.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+            Me.chkCancelled.Margin = New System.Windows.Forms.Padding(5)
             Me.chkCancelled.Name = "chkCancelled"
             Me.chkCancelled.RightToLeft = System.Windows.Forms.RightToLeft.No
             Me.chkCancelled.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
@@ -2100,7 +2100,7 @@ Namespace PresentationLayer.Views.Forms
             Me.btnViewGL.Font = New System.Drawing.Font("Tahoma", 8.0!)
             Me.btnViewGL.ImageIndex = 0
             Me.btnViewGL.Location = New System.Drawing.Point(4, 4)
-            Me.btnViewGL.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.btnViewGL.Margin = New System.Windows.Forms.Padding(4)
             Me.btnViewGL.Name = "btnViewGL"
             Me.btnViewGL.OriginalImageName = Nothing
             Me.btnViewGL.SecurityKey = ""
@@ -2115,7 +2115,7 @@ Namespace PresentationLayer.Views.Forms
             Me.btnAutoApply.Font = New System.Drawing.Font("Tahoma", 8.0!)
             Me.btnAutoApply.ImageIndex = 0
             Me.btnAutoApply.Location = New System.Drawing.Point(193, 768)
-            Me.btnAutoApply.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.btnAutoApply.Margin = New System.Windows.Forms.Padding(4)
             Me.btnAutoApply.Name = "btnAutoApply"
             Me.btnAutoApply.OriginalImageName = Nothing
             Me.btnAutoApply.SecurityKey = ""
@@ -2129,7 +2129,7 @@ Namespace PresentationLayer.Views.Forms
             Me.btnPrintCheck.DesignerSelected = False
             Me.btnPrintCheck.ImageIndex = 0
             Me.btnPrintCheck.Location = New System.Drawing.Point(19, 768)
-            Me.btnPrintCheck.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.btnPrintCheck.Margin = New System.Windows.Forms.Padding(4)
             Me.btnPrintCheck.Name = "btnPrintCheck"
             Me.btnPrintCheck.OriginalImageName = Nothing
             Me.btnPrintCheck.SecurityKey = ""
@@ -2147,7 +2147,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout1.Controls.Add(Me.txtTotalDebits)
             Me.CFlowLayout1.Dock = System.Windows.Forms.DockStyle.Bottom
             Me.CFlowLayout1.Location = New System.Drawing.Point(0, 844)
-            Me.CFlowLayout1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.CFlowLayout1.Margin = New System.Windows.Forms.Padding(4)
             Me.CFlowLayout1.Name = "CFlowLayout1"
             Me.CFlowLayout1.Size = New System.Drawing.Size(1604, 2)
             Me.CFlowLayout1.TabIndex = 6
@@ -2217,7 +2217,7 @@ Namespace PresentationLayer.Views.Forms
             Me.btnPrintPcReplenishment.DesignerSelected = False
             Me.btnPrintPcReplenishment.ImageIndex = 0
             Me.btnPrintPcReplenishment.Location = New System.Drawing.Point(341, 768)
-            Me.btnPrintPcReplenishment.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.btnPrintPcReplenishment.Margin = New System.Windows.Forms.Padding(4)
             Me.btnPrintPcReplenishment.Name = "btnPrintPcReplenishment"
             Me.btnPrintPcReplenishment.OriginalImageName = Nothing
             Me.btnPrintPcReplenishment.SecurityKey = ""

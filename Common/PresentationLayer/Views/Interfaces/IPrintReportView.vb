@@ -3,7 +3,7 @@
 Public Interface IPrintReportView
     Inherits AATM.PresentationLayer.Views.IView
 
-    Event PrintReport(reportFileName As String, pDatabaseConnectionName As String, args As Object, copies As Integer)
+    Event PrintReport(reportFileName As String, args As Object, pDatabaseConnectionName As String, copies As Integer)
     'Event GetLanguageAndCo(ByVal sender As Object, ByVal formCulture As String, ByRef language As String, ByRef establishmentName As String, ByRef reportTitle As String)
     'Event GetLanguageAndCo(ByRef language As String, ByRef establishmentName As String)
     'Event GetStandardData()

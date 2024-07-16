@@ -260,12 +260,6 @@
     <Compile Include="PresentationLayer\Views\Forms\ReportGroupEntry.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\ReportPrinting.designer.vb">
-      <DependentUpon>ReportPrinting.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\ReportPrinting.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\RevCostCenterEntry.Designer.vb">
       <DependentUpon>RevCostCenterEntry.vb</DependentUpon>
     </Compile>
@@ -439,10 +433,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\ReportGroupEntry.resx">
       <DependentUpon>ReportGroupEntry.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\ReportPrinting.resx">
-      <DependentUpon>ReportPrinting.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\RevCostCenterEntry.resx">

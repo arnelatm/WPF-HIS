@@ -225,14 +225,6 @@ Public Class CrystalReportPrinter
         Next
     End Sub
 
-    Public Sub SetParameterValues(args() As Object)
-        For i = 0 To args.Length - 1 Step 2
-            Dim value As Object = GlobalFunctions.ConvertObjectToType(args(i))
-            Dim name As String = args(i + 1).ToString()
-            _report.SetParameterValue(name, value)
-        Next
-    End Sub
-
     Public Sub ClearDataSourceConnections()
         _report.DataSourceConnections.Clear()
     End Sub

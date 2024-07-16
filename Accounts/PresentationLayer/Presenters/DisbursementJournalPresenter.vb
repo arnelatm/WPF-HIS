@@ -1,21 +1,14 @@
 ﻿Imports System.Globalization
-Imports AATM.Accounts.BusinessLayer
-Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
-Imports AATM.Common.ServiceLayer
 Imports AATM.Libraries
-Imports AATM.Libraries.CrystalReportsHelper
 Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
-Imports AATM.PresentationLayer.Forms
-Imports AATM.PresentationLayer.Presenters
-Imports CrystalDecisions.[Shared].Json
 
 Namespace PresentationLayer.Presenters
 
@@ -407,6 +400,7 @@ Namespace PresentationLayer.Presenters
             Dim currencies As New List(Of CurrencyInfo)()
             Dim curCulture = CultureInfo.CurrentCulture
             Dim language As String
+            Dim reportArgs As New CrPrintableArgs
             language = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
             currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
             If language = "ar" Then
@@ -416,14 +410,25 @@ Namespace PresentationLayer.Presenters
             End If
             Dim reportFileName As String
             reportFileName = "Check Printing" & View.AccountIdNo.ToString() & ".Rpt"
-            Dim cForm As New ReportFormOld(reportFileName, checkAmountInWords, "CheckAmountInWords", GetPayeeName(View.PayeeIdNo), "PayeeName", View.CheckDate, "CheckDate", Convert.ToDecimal(View.Amount), "CheckAmount", language, "Language", View.Notes, "Notes")
-            cForm.Show()
+            reportArgs.ReportParameters = {checkAmountInWords, "CheckAmountInWords",
+                                           GetPayeeName(View.PayeeIdNo), "PayeeName",
+                                           View.CheckDate, "CheckDate",
+                                           Convert.ToDecimal(View.Amount), "CheckAmount",
+                                           language, "Language",
+                                           View.Notes, "Notes"
+                                           }
+            PrintReportToScreen(reportFileName, "ISPDATA", curCulture, reportArgs)
+            'Dim cForm As New ReportFormOld(reportFileName, checkAmountInWords, "CheckAmountInWords", GetPayeeName(View.PayeeIdNo), "PayeeName", View.CheckDate, "CheckDate", Convert.ToDecimal(View.Amount), "CheckAmount", language, "Language", View.Notes, "Notes")
+            'cForm.Show()
+
+
         End Sub
 
         Private Sub OnPrintPcReplenishment()
             Dim transactionAmountInWords As String
             Dim currencies As New List(Of CurrencyInfo)()
             Dim curCulture = CultureInfo.CurrentCulture
+            Dim reportArgs As New CrPrintableArgs
             CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
             Dim language As String
             language = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
@@ -433,8 +438,14 @@ Namespace PresentationLayer.Presenters
             Else
                 transactionAmountInWords = New ToWord(View.Amount, currencies(0)).ConvertToEnglish()
             End If
-            Dim cForm As New ReportFormOld("Petty Cash Replenishment Report.Rpt", transactionAmountInWords, "TransactionAmountInWords", View.IdNo, "JournalIdNo", language, "Language")
-            cForm.Show()
+            reportArgs.ReportParameters = {transactionAmountInWords, "TransactionAmountInWords",
+                                           View.IdNo, "JournalIdNo",
+                                           language, "Language"
+                                          }
+            PrintReportToScreen("Petty Cash Replenishment Report.Rpt", "ISPDATA", curCulture, reportArgs)
+
+            'Dim cForm As New ReportFormOld("Petty Cash Replenishment Report.Rpt", transactionAmountInWords, "TransactionAmountInWords", View.IdNo, "JournalIdNo", language, "Language")
+            'cForm.Show()
         End Sub
 
 
