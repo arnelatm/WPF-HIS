@@ -10,13 +10,12 @@ Public Class DFormBasic
     Implements IViewNew
 
     Private _debugSwitch As Byte = 0
+    Private _displayedRightToLeft As Boolean = False
     Private _firstLoadSwitch As Integer = 0
-    Private _originalText As String
-    Private _systemViewIdNo As Int32
     Private _formCulture As CultureInfo
     Private _initialDisplayIsRightToLeft As Boolean
-    Private _displayedRightToLeft As Boolean = False
-
+    Private _originalText As String
+    Private _systemViewIdNo As Int32
     Protected Sub New()
         ' This call is required by the designer.
         InitializeComponent()
@@ -37,7 +36,12 @@ Public Class DFormBasic
     Public Event FormCaptionTranslator(formTranslator As Object, cform As Object) Implements IViewNew.FormCaptionTranslator
     Public Event FormLoaded(sender As Object, captionCollection As Collection, allControls As List(Of Control)) Implements IViewNew.FormLoaded
     Public Event OrigLanguageDisplayRequested() Implements IViewNew.OrigLanguageDisplayRequested
+    Public Event MakeDataRequested(tableName As String, ByRef variableName As DataTable) Implements IViewNew.MakeDataRequested
     Public Property CaptionCollection As New Collection Implements IViewNew.CaptionCollection
+
+    Public Overridable Sub OnMakeDataRequested(tableName As String, ByRef variableName As DataTable)
+        RaiseEvent MakeDataRequested(tableName, variableName)
+    End Sub
 
     Public Property FormCulture As CultureInfo Implements IViewNew.FormCulture
         Get
@@ -70,6 +74,7 @@ Public Class DFormBasic
         End Set
     End Property
 
+    Public Property LanguageCode As String Implements IViewNew.LanguageCode
     Public Property RightToLeftDisplay As String Implements IViewNew.RightToLeftDisplay
     Public Property ViewDisplayName As String Implements IViewNew.ViewDisplayName
 
@@ -81,9 +86,6 @@ Public Class DFormBasic
             _systemViewIdNo = value
         End Set
     End Property
-
-    Public Property LanguageCode As String Implements IViewNew.LanguageCode
-
     Protected Sub DFormBasic_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If _firstLoadSwitch = 0 Then
             RaiseEvent FormLoaded(sender, CaptionCollection, AllControls)

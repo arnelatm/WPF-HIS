@@ -30,12 +30,19 @@ Public Class PresenterB(Of TV As IViewNew, TM As New)
             AddHandler View.ArabicDisplayRequested, AddressOf OnArabicDisplayRequested
             AddHandler View.FormCaptionTranslator, AddressOf OnFormCaptionTranslator
             AddHandler View.FormLoaded, AddressOf OnFormLoaded
+            AddHandler View.MakeDataRequested, AddressOf OnMakeDataRequested
             MyErrorProvider = GetErrorProvider()
             OriginalModel = Activator.CreateInstance(GetType(TM))
             Dim data As List(Of DefaultFieldValue) = DefaultFieldValueService.GetDefaultFieldValues(View.ViewDisplayName)
             ViewDefaultFieldValues = New List(Of DefaultFieldValueModel)
             GlobalVariables.Mapper.Map(data, ViewDefaultFieldValues)
         End If
+    End Sub
+
+
+
+    Protected Overridable Sub OnMakeDataRequested(tableName As String, ByRef variableName As DataTable)
+        variableName = MakeDataTable({tableName})
     End Sub
 
     Protected Property TableName As String

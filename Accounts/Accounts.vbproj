@@ -835,6 +835,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\ClinicLabSampleDetailView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeMedicalReportView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IApArEmReportView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IContactDateRangeView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeLeaveEarnedView.vb" />

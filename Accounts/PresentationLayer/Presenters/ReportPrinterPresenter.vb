@@ -3,12 +3,9 @@ Imports AATM.Common.Models
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Common.ServiceLayer
-Imports AATM.Libraries
 Imports AATM.Libraries.CrystalReportsHelper
-Imports AATM.PresentationLayer.Events
 Imports AATM.PresentationLayer.Forms
 Imports AATM.PresentationLayer.Views
-Imports AATM.ServicesLayer.Services
 
 Namespace PresentationLayer.Presenters
 
@@ -24,12 +21,18 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New()
             MakeServices()
+
             _computerName = Environment.MachineName
             _computerIdNo = _psService.GetRecordFieldWithKeyG(Of Int16)(_computerName, "Computer", "ComputerName", "IdNo")
         End Sub
 
-        Public Sub New(view As IViewNew)
-            MyBase.New(view)
+        Protected Sub OnMakeDataRequested1(tableName As String, ByRef variableName As DataTable)
+            variableName = MakeDataTable({tableName})
+        End Sub
+
+        Public Sub New(itemView As IViewNew)
+            View = itemView
+            AddHandler View.MakeDataRequested, AddressOf OnMakeDataRequested
             MakeServices()
         End Sub
 
