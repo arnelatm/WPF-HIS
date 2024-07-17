@@ -36,10 +36,10 @@ Namespace PresentationLayer.Presenters
             MyBase.New(itemView)
         End Sub
 
-        Protected Function PrintReport(reportFileName As String, dataBaseConnectionName As String, formCulture As CultureInfo, reportArgs As CrPrintableArgs)
-            Dim reportPrinter As New AATM.Common.ReportPrinter(reportFileName, dataBaseConnectionName, formCulture, reportArgs)
-            reportPrinter.ShowReport()
-        End Function
+        'Protected Function PrintReport(reportFileName As String, dataBaseConnectionName As String, formCulture As CultureInfo, reportArgs As CrPrintableArgs)
+        '    Dim reportPrinter As New AATM.Common.ReportPrinter(reportFileName, dataBaseConnectionName, formCulture, reportArgs)
+        '    reportPrinter.ShowReport()
+        'End Function
 
     End Class
 

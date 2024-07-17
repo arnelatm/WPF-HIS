@@ -1072,8 +1072,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ShiftDailySummaryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemShiftDailySummary.Click
-            RunReportNew(Of ShiftDailyReportNew)()
-            'RunForm(Of ShiftDailyReport)()
+            RunFormNew(Of ShiftDailyReport, ReportPrinterPresenter(Of AccountModel))()
         End Sub
 
         Private Sub SimplePasswordGeneratorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSimplePasswordGenerator.Click

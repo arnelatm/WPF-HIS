@@ -785,10 +785,10 @@
     <Compile Include="PresentationLayer\Views\Forms\ReportSelectorForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\ShiftDailyReportNew.Designer.vb">
-      <DependentUpon>ShiftDailyReportNew.vb</DependentUpon>
+    <Compile Include="PresentationLayer\Views\Forms\Reports\ShiftDailyReport.Designer.vb">
+      <DependentUpon>ShiftDailyReport.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\ShiftDailyReportNew.vb">
+    <Compile Include="PresentationLayer\Views\Forms\Reports\ShiftDailyReport.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\SupplierProductEntry.Designer.vb">
@@ -1224,12 +1224,6 @@
       <DependentUpon>GenerateDrugCsv.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\GenerateDrugCsv.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\ShiftDailyReport.Designer.vb">
-      <DependentUpon>ShiftDailyReport.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\ShiftDailyReport.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\TransactionSummaryForm.designer.vb">
@@ -2170,8 +2164,8 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\ReportSelectorForm.resx">
       <DependentUpon>ReportSelectorForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\ShiftDailyReportNew.resx">
-      <DependentUpon>ShiftDailyReportNew.vb</DependentUpon>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\ShiftDailyReport.resx">
+      <DependentUpon>ShiftDailyReport.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\SupplierProductEntry.resx">
       <DependentUpon>SupplierProductEntry.vb</DependentUpon>
@@ -2386,9 +2380,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\IGroup\GenerateDrugCsv.resx">
       <DependentUpon>GenerateDrugCsv.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\ShiftDailyReport.resx">
-      <DependentUpon>ShiftDailyReport.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\TransactionSummaryForm.resx">
       <DependentUpon>TransactionSummaryForm.vb</DependentUpon>

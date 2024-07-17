@@ -122,18 +122,18 @@ Namespace PresentationLayer.Presenters
         'End Sub
 
 
-        Private Sub PrintReport(ByVal sender As IReportPrinterView)
-            Dim language = sender.FormCultureLanguage
-            Dim EstablishmentName As String
-            If language <> "ar" Then
-                EstablishmentName = Service.GetRecordField("Establishment", "EstablishmentName")
-            Else
-                EstablishmentName = Service.GetRecordField("Establishment", "EstablishmentNameAra")
-            End If
-            Dim reportTitle As String = sender.ReportTitle
-            Dim args As Array = sender.Args
-            ShowReportToScreen(sender.FileName, args)
-        End Sub
+        'Public Sub PrintReport(ByVal sender As IReportPrinterView)
+        '    Dim language = sender.FormCultureLanguage
+        '    Dim EstablishmentName As String
+        '    If language <> "ar" Then
+        '        EstablishmentName = Service.GetRecordField("Establishment", "EstablishmentName")
+        '    Else
+        '        EstablishmentName = Service.GetRecordField("Establishment", "EstablishmentNameAra")
+        '    End If
+        '    Dim reportTitle As String = sender.ReportTitle
+        '    Dim args As Array = sender.Args
+        '    ShowReportToScreen(sender.FileName, args)
+        'End Sub
 
     End Class
 
