@@ -51,8 +51,6 @@ Namespace PresentationLayer.Views.Forms
             End If
             FirstControl = cboPaymentType
             Height = 860
-            btnPrint.Visible = False
-            btnPrintWithArgs.Visible = True
         End Sub
 
         Public Property OpenInvoiceMode As Boolean Implements IDisbursementJournalView.OpenInvoiceMode
@@ -817,6 +815,8 @@ Namespace PresentationLayer.Views.Forms
                 cboAccountIdNo.SelectedValue = DefaultAccount
             End If
             DisplayCheckInfo()
+            btnPrint.Visible = False
+            btnPrintWithArgs.Visible = True
         End Sub
 
         Private Sub AfterSave_Handler() Handles MyBase.AfterSave

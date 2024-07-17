@@ -110,7 +110,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Sub ViewReport(viewer As CrViewer, databaseConnectionName As String)
-            ProcessReport(viewer.ReportPrinter.ReportFileName, databaseConnectionName, False)
+            ShowReportToScreen(viewer.CrReportDocument.ReportFileName, databaseConnectionName, False)
         End Sub
 
         'Public Function GetService1()

@@ -214,19 +214,19 @@
     <Compile Include="CModalForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ReportViewer.Designer.vb">
-      <DependentUpon>ReportViewer.vb</DependentUpon>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="ReportViewer.vb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="CrViewer.Designer.vb">
       <DependentUpon>CrViewer.vb</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="CrViewer.vb">
+      <SubType>Form</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="ReportViewer.Designer.vb">
+      <DependentUpon>ReportViewer.vb</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="ReportViewer.vb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Form</SubType>
     </Compile>
@@ -307,13 +307,13 @@
     <EmbeddedResource Include="CFormEntryTv.resx">
       <DependentUpon>CFormEntryTv.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ReportViewer.resx">
-      <DependentUpon>ReportViewer.vb</DependentUpon>
+    <EmbeddedResource Include="CrViewer.resx">
+      <DependentUpon>CrViewer.vb</DependentUpon>
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="CrViewer.resx">
-      <DependentUpon>CrViewer.vb</DependentUpon>
+    <EmbeddedResource Include="ReportViewer.resx">
+      <DependentUpon>ReportViewer.vb</DependentUpon>
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>

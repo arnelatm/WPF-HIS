@@ -80,7 +80,10 @@ Public Class BfMain
         Set(value As String)
             If value <> _textDisplayLanguage Then
                 _textDisplayLanguage = value
-                SetCulture(_textDisplayLanguage)
+                FormCulture = New CultureInfo(_textDisplayLanguage, True)
+                If Name = "MainForm" Then
+                    SetCulture(_textDisplayLanguage)
+                End If
                 RaiseEvent TextDisplayLanguageChanged()
             End If
         End Set

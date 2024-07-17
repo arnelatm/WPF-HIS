@@ -442,8 +442,13 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub floFullEntryArea_Paint(sender As Object, e As PaintEventArgs) Handles floFullEntryArea.Paint
+        Public Overrides Function GetPrintParameters() As Object
+            Return Me.FormCulture
+        End Function
 
+        Private Sub ApJournalEntry_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+            btnPrint.Visible = False
+            btnPrintWithArgs.Visible = True
         End Sub
     End Class
 

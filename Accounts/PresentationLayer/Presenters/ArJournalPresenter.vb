@@ -266,27 +266,27 @@ Namespace PresentationLayer.Presenters
             Return item
         End Function
 
-        Public Overrides Sub GoPrintRecord()
+        Public Overrides Sub GoPrintRecordWithArgs(Optional FormCulture As Object = Nothing)
             Dim transactionAmount As String
             Dim totalArAmount As String
             Dim currencies As New List(Of CurrencyInfo)()
-            Dim curCulture = CultureInfo.CurrentCulture
-            CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
-            Dim language As String
-            language = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
+            Dim languageCode = GetCultureLanguageCode(FormCulture)
             currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
-            If language = "ar" Then
+            If languageCode = "ar" Then
                 transactionAmount = New ToWord(View.Amount, currencies(0)).ConvertToArabic()
             Else
                 transactionAmount = New ToWord(View.Amount, currencies(0)).ConvertToEnglish()
             End If
-            If language = "ar" Then
+            If languageCode = "ar" Then
                 totalArAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
             Else
                 totalArAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToEnglish()
             End If
-            Dim cForm As New ReportFormOld("Accounts Receivable Journal.Rpt", View.IdNo, "ArJournalIdNo", transactionAmount, "TotalArAmountInWords", totalArAmount, "TotalLineAmountInWords", language, "Language")
-            cForm.Show()
+            ShowReportToScreen("Accounts Receivable Journal.Rpt", {View.IdNo, "ArJournalIdNo",
+                                       transactionAmount, "TotalArAmountInWords",
+                                   totalArAmount, "TotalLineAmountInWords",
+                                   languageCode, "Language"})
+
         End Sub
 
         Private Sub OnSuccessfulDelete(ByVal idNo As Int32) Handles MyBase.SuccessfulDelete

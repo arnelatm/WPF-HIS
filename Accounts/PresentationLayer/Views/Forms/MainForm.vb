@@ -201,18 +201,10 @@ Namespace PresentationLayer.Views.Forms
         Private Sub AccountsReceivableToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemARAging.Click
             Dim reportTitle = Messaging.TranslateCaption("Aging of Accounts Receivable")
             reportTitle = reportTitle + " " + GlobalFuncNSub.GregorianLongDate(Now(), CultureInfo.CurrentCulture)
-            Dim curCulture = CultureInfo.CurrentCulture
-            CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
-            Dim language As String
-            Dim estName As String
-            language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
-            If language = "ar" Then
-                estName = GlobalVariables.EstablishmentName
-            Else
-                estName = GlobalVariables.EstablishmentNameAra
-            End If
-            Dim cForm As New ReportFormOld("Aging of Accounts Receivable.Rpt", reportTitle, "ReportTitle", estName, "EstablishmentName", language, "Language")
-            cForm.Show()
+            Dim estName As String = GetEstablishmentName(LanguageCode)
+            ShowReportToScreen("Aging of Accounts Receivable.Rpt", {reportTitle, "ReportTitle",
+                                                                    estName, "EstablishmentName",
+                                                                    LanguageCode, "Language"})
         End Sub
 
         Private Sub AgingOfAccountsPayableToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemAPAging.Click

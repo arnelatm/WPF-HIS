@@ -92,7 +92,7 @@ Namespace PresentationLayer.Presenters
             If printDirectly Then
                 crReport.PrintReport(printArgs.Copies, printArgs.Collate, printArgs.StartPage, printArgs.EndPage)
             Else
-                Dim crViewer As New CrViewer(reportFileName, printArgs, addDefaultParameters, crReport)
+                Dim crViewer As New CrViewer(reportFileName, printArgs.ReportParameters, printArgs.DataBaseConnectionName)
                 crViewer.Show()
             End If
         End Sub
@@ -165,7 +165,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Sub ViewReport(viewer As CrViewer, databaseConnectionName As String)
-            ProcessReport(viewer.ReportPrinter.ReportFileName, databaseConnectionName, False)
+            ProcessReport(viewer.CrReportDocument.ReportFileName, databaseConnectionName, False)
         End Sub
 
         Public Function GetService1()
@@ -207,7 +207,8 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub ViewReport(reportFileName As String, reportTitle As String, cFormCulture As CultureInfo, dbConnectionName As String, args As Object)
-            Dim crViewerForm As New CrViewer(reportFileName, reportTitle, cFormCulture, args)
+            Dim crViewerForm As New CrViewer(reportFileName, args)
+            'Dim crViewer As New CrViewer(reportFileName, args, dbConnectionName)
             crViewerForm.Show()
         End Sub
 

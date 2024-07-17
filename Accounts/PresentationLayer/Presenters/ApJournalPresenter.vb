@@ -1,8 +1,5 @@
-﻿Imports System.Globalization
-Imports AATM.Accounts.DataLayer.AdoNet
-Imports AATM.Accounts.PresentationLayer.Models
+﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
-Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries
@@ -272,27 +269,26 @@ Namespace PresentationLayer.Presenters
             Return item
         End Function
 
-        Public Overrides Sub GoPrintRecord()
+        Public Overrides Sub GoPrintRecordWithArgs(Optional FormCulture As Object = Nothing)
             Dim transactionAmount As String
             Dim totalApAmount As String
             Dim currencies As New List(Of CurrencyInfo)()
-            Dim curCulture = CultureInfo.CurrentCulture
-            CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
-            Dim language As String
-            language = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
+            Dim languageCode = GetCultureLanguageCode(FormCulture)
             currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
-            If language = "ar" Then
+            If languageCode = "ar" Then
                 transactionAmount = New ToWord(View.Amount, currencies(0)).ConvertToArabic()
             Else
                 transactionAmount = New ToWord(View.Amount, currencies(0)).ConvertToEnglish()
             End If
-            If language = "ar" Then
+            If languageCode = "ar" Then
                 totalApAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
             Else
                 totalApAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToEnglish()
             End If
-            Dim cForm As New ReportFormOld("Accounts Payable Journal.Rpt", View.IdNo, "ApJournalIdNo", transactionAmount, "ApAmountInWords", totalApAmount, "TotalLineAmountInWords", language, "Language")
-            cForm.Show()
+            ShowReportToScreen("Accounts Payable Journal.Rpt", {View.IdNo, "ApJournalIdNo",
+                                                                transactionAmount, "ApAmountInWords",
+                                                                totalApAmount, "TotalLineAmountInWords",
+                                                                languageCode, "Language"})
         End Sub
 
         Private Sub OnSuccessfulDelete(ByVal idNo As Int32) Handles MyBase.SuccessfulDelete

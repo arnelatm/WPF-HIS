@@ -27,7 +27,8 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub ShowReport(reportFileName As String, reportTitle As String, cFormCulture As CultureInfo, dbConnectionName As String, args As Object)
-            Dim crViewerForm As New CrViewer(reportFileName, reportTitle, cFormCulture, args)
+            'Dim crViewerForm As New CrViewer(reportFileName, reportTitle, cFormCulture, args)
+            Dim crViewerForm As New CrViewer(reportFileName, args, dbConnectionName)
             'Dim prPresenter As New PrintReportPresenter()
             'prPresenter.ViewReport(crViewerForm, dbConnectionName)
             crViewerForm.Show()

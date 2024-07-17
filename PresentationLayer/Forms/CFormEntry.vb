@@ -62,6 +62,7 @@ Public Class CFormEntry
         DoubleBuffered = True
         _inputTurnedOn = False
         _formCulture = GlobalVariables.AppCurrentCultureInfo
+        btnPrintWithArgs.Visible = False
         ' Add any initialization after the InitializeComponent() call.
     End Sub
 
@@ -105,7 +106,6 @@ Public Class CFormEntry
         FormShown = True
         PublishClickedButton(ButtonClicked.Last)
         SetFormTitleCaption()
-        btnPrintWithArgs.Visible = False
         'ResumeDrawing()
     End Sub
 
@@ -270,6 +270,7 @@ Public Class CFormEntry
                 btnAdd.Enabled = False
                 btnDelete.Enabled = False
                 btnPrint.Enabled = False
+                btnPrintWithArgs.Enabled = False
                 btnFind.Enabled = False
                 btnQuit.Enabled = False
                 btnFilter.Enabled = False
@@ -286,6 +287,7 @@ Public Class CFormEntry
                 btnAdd.Enabled = True
                 btnDelete.Enabled = True
                 btnPrint.Enabled = True
+                btnPrintWithArgs.Enabled = True
                 btnFind.Enabled = True
                 btnQuit.Enabled = True
                 btnFilter.Enabled = True
@@ -302,6 +304,7 @@ Public Class CFormEntry
                 btnDelete.Enabled = False
                 btnFind.Enabled = False
                 btnPrint.Enabled = False
+                btnPrintWithArgs.Enabled = False
                 If adding Or editing Then
                     If Not DisallowSaves Then
                         btnSave.Enabled = True
@@ -511,6 +514,15 @@ Public Class CFormEntry
             Debugger.Break()
         End If
         PublishClickedButton(ButtonClicked.Print)
+    End Sub
+
+    Private Sub btnPrintWithArgs_Click(sender As Object, e As EventArgs) Handles btnPrintWithArgs.Click
+        If _debugSwitch = 1 Then
+            Debugger.Break()
+        End If
+        Dim parameters As Object = Nothing
+        parameters = GetPrintParameters()
+        PublishClickedButton(ButtonClicked.PrintWithArgs, parameters)
     End Sub
 
     Private Sub BtnTranslate_Click(sender As Object, e As EventArgs) Handles btnTranslate.Click
@@ -774,15 +786,6 @@ Public Class CFormEntry
         'ResumeDrawing()
         'ResumeLayout()
         'Me.ResumeDrawingNew()
-    End Sub
-
-    Private Sub btnPrintWithArgs_Click(sender As Object, e As EventArgs) Handles btnPrintWithArgs.Click
-        If _debugSwitch = 1 Then
-            Debugger.Break()
-        End If
-        Dim parameters As Object = Nothing
-        parameters = GetPrintParameters()
-        PublishClickedButton(ButtonClicked.PrintWithArgs, parameters)
     End Sub
 
     Public Overridable Function GetPrintParameters() As Object

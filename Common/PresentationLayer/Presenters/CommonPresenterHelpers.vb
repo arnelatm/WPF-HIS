@@ -144,7 +144,7 @@ Public Class ReportPrinter
     Public Sub ShowReport()
         _crReport = GetReport()
 
-        Dim CrViewer As New CrViewer(ReportFileName, CReportPrintableArgs, False, _crReport)
+        Dim CrViewer As New CrViewer(ReportFileName, CReportPrintableArgs.ReportParameters)
         CrViewer.Show()
 
     End Sub

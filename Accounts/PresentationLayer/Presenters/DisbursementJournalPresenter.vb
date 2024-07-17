@@ -103,6 +103,7 @@ Namespace PresentationLayer.Presenters
             ' don't know why but without this the EmployeeNames if "E" won't display in the
             ' cboPayeeIdNo control, leave this until you find a fix.
             'CreatePayeeDataSource(CodeToEnum(Of PaymentTypeSelection)(PaymentTypeSelection.AccountsPayable))
+
         End Sub
 
         Protected Overrides Sub CreateDataSources()
