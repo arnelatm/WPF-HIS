@@ -106,7 +106,7 @@ Public Class CrViewer
             ceCulture = CeLocale.ceLocaleEnglish
         End If
         'Dim x As Integer = CInt(ceCulture)
-        With CrystalReportViewer1
+        With CrViewerObj
             .Visible = True
             .BringToFront()
             .ReportSource = ReportPrinter.GetReportSource()
@@ -136,6 +136,20 @@ Public Class CrViewer
     Private Sub CButton1_Click(sender As Object, e As EventArgs)
         Dispose()
         Close()
+    End Sub
+
+    Private Sub CrViewer_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        With CrViewerObj
+            .AutoSize = True
+            .Dock = DockStyle.Fill
+        End With
+    End Sub
+
+    Private Sub CrViewer_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
+        With CrViewerObj
+            .AutoSize = True
+            .Dock = DockStyle.Fill
+        End With
     End Sub
 
     'Private Sub CrViewer_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown

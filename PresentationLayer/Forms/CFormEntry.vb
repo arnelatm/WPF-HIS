@@ -639,6 +639,7 @@ Public Class CFormEntry
             'UpdateViewDisplay(editMode, addMode:=, recordPositionNumber:=, targetIdNo, recordCount)
         End If
         'Refresh()
+
     End Sub
 
     Public Shared Sub CenterForm(ByVal frm As Form, Optional ByVal parent As Form = Nothing)
