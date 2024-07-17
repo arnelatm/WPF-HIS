@@ -105,6 +105,7 @@ Public Class CFormEntry
         FormShown = True
         PublishClickedButton(ButtonClicked.Last)
         SetFormTitleCaption()
+        btnPrintWithArgs.Visible = False
         'ResumeDrawing()
     End Sub
 

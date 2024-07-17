@@ -31,29 +31,29 @@ Partial Class CrViewer
         'CrystalReportViewer1
         '
         Me.CrystalReportViewer1.ActiveViewIndex = -1
-        Me.CrystalReportViewer1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.CrystalReportViewer1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.CrystalReportViewer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.CrystalReportViewer1.Cursor = System.Windows.Forms.Cursors.Default
+        Me.CrystalReportViewer1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.CrystalReportViewer1.EnableDrillDown = False
-        Me.CrystalReportViewer1.Location = New System.Drawing.Point(0, 34)
-        Me.CrystalReportViewer1.Margin = New System.Windows.Forms.Padding(4)
+        Me.CrystalReportViewer1.Location = New System.Drawing.Point(0, 27)
         Me.CrystalReportViewer1.Name = "CrystalReportViewer1"
-        Me.CrystalReportViewer1.Size = New System.Drawing.Size(677, 275)
+        Me.CrystalReportViewer1.Size = New System.Drawing.Size(508, 228)
         Me.CrystalReportViewer1.TabIndex = 2
         Me.CrystalReportViewer1.ToolPanelView = ToolPanelViewType.None
         '
         'CrViewer
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
-        Me.ClientSize = New System.Drawing.Size(678, 314)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoSize = True
+        Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ClientSize = New System.Drawing.Size(508, 255)
         Me.Controls.Add(Me.CrystalReportViewer1)
-        Me.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
+        Me.Margin = New System.Windows.Forms.Padding(5)
         Me.Name = "CrViewer"
         Me.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.RightToLeftDisplay = "False"
+        Me.Text = "Report Viewer"
         Me.Controls.SetChildIndex(Me.CrystalReportViewer1, 0)
         CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
