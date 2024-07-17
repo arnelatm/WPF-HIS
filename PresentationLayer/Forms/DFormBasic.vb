@@ -24,13 +24,9 @@ Public Class DFormBasic
         If ViewDisplayName Is Nothing OrElse ViewDisplayName = "" Then
             ViewDisplayName = Name
         End If
-        _formCulture = GlobalVariables.AppCultureInfo
-        Dim cultureCode As String = Strings.Left(_formCulture.Name, 2)
-        If Not IsCultureOk(_formCulture.Name) Then
-            MessageBox.Show("Invalid Default AppCultureInfo. Please setup a valid initial cultureInfo on app settings.")
-            cultureCode = CultureInfo.DefaultThreadCurrentCulture.Name
-        End If
-        If IsRightToLeft(cultureCode) Then
+        _formCulture = GlobalVariables.AppCurrentCultureInfo
+        LanguageCode = GetCultureLanguageCode(_formCulture)
+        If IsRightToLeft(LanguageCode) Then
             _initialDisplayIsRightToLeft = True
         Else
             _initialDisplayIsRightToLeft = False
@@ -45,29 +41,32 @@ Public Class DFormBasic
 
     Public Property FormCulture As CultureInfo Implements IViewNew.FormCulture
         Get
+            If _formCulture Is Nothing Then
+                _formCulture = GlobalVariables.AppCurrentCultureInfo
+                LanguageCode = GetCultureLanguageCode(_formCulture)
+            End If
             Return _formCulture
         End Get
         Set(value As CultureInfo)
             _formCulture = value
             Dim cultureCode As String = Strings.Left(value.Name, 2)
-            If IsCultureOk(cultureCode) Then
-                If IsRightToLeft(cultureCode) Then
-                    SwitchDisplayToArabicLanguage()
-                    _displayedRightToLeft = True
+            If IsRightToLeft(cultureCode) Then
+                SwitchDisplayToArabicLanguage()
+                _displayedRightToLeft = True
+            Else
+                If _initialDisplayIsRightToLeft Then
+                    SwitchDisplayToOriginalLanguage()
                 Else
-                    If _initialDisplayIsRightToLeft Then
+                    If _displayedRightToLeft Then
                         SwitchDisplayToOriginalLanguage()
                     Else
-                        If _displayedRightToLeft Then
-                            SwitchDisplayToOriginalLanguage()
-                        Else
-                            ' no need to switch since we haven't yet displayed RightToLeft Layout
-                            ' only switch if we have already displayed in RightToLeft Layout
-                        End If
-
+                        ' no need to switch since we haven't yet displayed RightToLeft Layout
+                        ' only switch if we have already displayed in RightToLeft Layout
                     End If
+
                 End If
             End If
+            LanguageCode = GetCultureLanguageCode(value)
         End Set
     End Property
 
@@ -82,6 +81,8 @@ Public Class DFormBasic
             _systemViewIdNo = value
         End Set
     End Property
+
+    Public Property LanguageCode As String Implements IViewNew.LanguageCode
 
     Protected Sub DFormBasic_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If _firstLoadSwitch = 0 Then
@@ -101,7 +102,7 @@ Public Class DFormBasic
         Me.Visible = False
         If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
             Dim cultureCode As String = GlobalVariables.DefaultUnmirroredCultureInfoStr
-            If IsCultureOk(cultureCode) Then
+            If IsCultureInfoNameOk(cultureCode) Then
                 FormCulture = New CultureInfo(cultureCode, False)
                 RightToLeftDisplay = False
                 RightToLeft = RightToLeft.No
@@ -184,7 +185,7 @@ Public Class DFormBasic
         Me.Visible = False
         If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
             Dim cultureCode = GlobalVariables.DefaultMirroredCultureInfoStr
-            If IsCultureOk(cultureCode) AndAlso IsRightToLeft(cultureCode) Then
+            If IsCultureInfoNameOk(cultureCode) AndAlso IsRightToLeft(cultureCode) Then
                 btnArabic.Visible = False
                 btnOriginal.Visible = True
                 btnArabic.Enabled = False

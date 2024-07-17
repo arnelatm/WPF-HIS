@@ -13,13 +13,12 @@ Imports AATM.ServicesLayer.Services
 Namespace PresentationLayer.Presenters
 
     Public Class ReportPrinterPresenter(Of TM As New)
-        Inherits CommonPresenter(Of IView, TM)
-        Implements ISubscriber(Of GetControlDataSource)
+        Inherits CommonPresenterNew(Of IViewNew, TM)
 
         Private _psService As Object
         Private _pjService As Object
         Private _prService As Object
-        Private _presenter As CommonPresenter(Of IView, ReportModel)
+        Private _presenter As CommonPresenterNew(Of IViewNew, ReportModel)
         Private _computerName As String
         Private _computerIdNo As Int16
 
@@ -27,15 +26,11 @@ Namespace PresentationLayer.Presenters
             MakeServices()
             _computerName = Environment.MachineName
             _computerIdNo = _psService.GetRecordFieldWithKeyG(Of Int16)(_computerName, "Computer", "ComputerName", "IdNo")
-            Ea = New EventAggregator()
-            Ea.SubscribeEvent(Me)
         End Sub
 
-        Public Sub New(view As IView)
+        Public Sub New(view As IViewNew)
             MyBase.New(view)
             MakeServices()
-            Ea = New EventAggregator()
-            Ea.SubscribeEvent(Me)
         End Sub
 
         Private Sub MakeServices()
@@ -111,7 +106,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Function GetPrintJobIdNo(computerIdNo As Int16, printSetupIdNo As Integer) As Short
-            Return GetService.GetRecordFieldWith2KeyG(Of Int16, Int16, Int16)(computerIdNo, printSetupIdNo, "PrintJob", "ComputerIdNo", "PrintSetupIdNo", "IdNo")
+            Return _pjService.GetRecordFieldWith2KeyG(Of Int16, Int16, Int16)(computerIdNo, printSetupIdNo, "PrintJob", "ComputerIdNo", "PrintSetupIdNo", "IdNo")
         End Function
 
         Public Sub ViewReport(viewer As CrViewer, databaseConnectionName As String)
@@ -138,10 +133,6 @@ Namespace PresentationLayer.Presenters
             Dim reportTitle As String = sender.ReportTitle
             Dim args As Array = sender.Args
             ShowReportToScreen(sender.FileName, args)
-        End Sub
-
-        Public Sub OnGetCOntrolDataSourceEventHandler(ByRef eventType As GetControlDataSource) Implements ISubscriber(Of GetControlDataSource).OnEventHandler
-            Throw New NotImplementedException()
         End Sub
 
     End Class

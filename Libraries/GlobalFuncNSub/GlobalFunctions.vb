@@ -504,6 +504,28 @@ Public Module GlobalFunctions
         Return True
     End Function
 
+    Public Function IsLanguageCodeOk(ByVal languageCode As String) As Boolean
+        Dim cultures As CultureInfo() = CultureInfo.GetCultures(CultureTypes.AllCultures And Not CultureTypes.NeutralCultures)
+        Dim culture = cultures.FirstOrDefault(Function(c) c.Name.Equals(languageCode, StringComparison.OrdinalIgnoreCase))
+        If culture Is Nothing Then
+            Return False
+            'culture = cultures.FirstOrDefault(Function(c) c.Name.Equals(DefaultCultureCode, StringComparison.OrdinalIgnoreCase))
+            'If culture Is Nothing Then culture = CultureInfo.CurrentCulture
+        End If
+        Return True
+    End Function
+
+    Public Function IsCultureInfoNameOk(ByVal cCultureInfoName As String) As Boolean
+        Dim cultures As CultureInfo() = CultureInfo.GetCultures(CultureTypes.AllCultures And Not CultureTypes.NeutralCultures)
+        Dim culture = cultures.FirstOrDefault(Function(c) c.Name.Equals(cCultureInfoName, StringComparison.OrdinalIgnoreCase))
+        If culture Is Nothing Then
+            Return False
+            'culture = cultures.FirstOrDefault(Function(c) c.Name.Equals(DefaultCultureCode, StringComparison.OrdinalIgnoreCase))
+            'If culture Is Nothing Then culture = CultureInfo.CurrentCulture
+        End If
+        Return True
+    End Function
+
     '''<summary>
     '''Checks if a given date (in string format) is valid for the given target culture
     '''</summary>

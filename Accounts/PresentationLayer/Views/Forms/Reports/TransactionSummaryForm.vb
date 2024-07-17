@@ -47,10 +47,6 @@ Namespace PresentationLayer.Views.Forms.Reports
             Close()
         End Sub
 
-        Private Sub CButton1_ClickButtonArea_1(Sender As Object, e As MouseEventArgs) Handles btnTranslate.ClickButtonArea
-            RunTranslator(VSystemViewIdNo)
-        End Sub
-
     End Class
 
 End Namespace

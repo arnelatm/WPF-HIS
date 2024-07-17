@@ -145,6 +145,8 @@ Public Class LoginEntry
     End Property
 
     Public Property ViewDisplayName As String Implements Views.IViewNew.ViewDisplayName
+    Public Property LanguageCode As String Implements Views.IViewNew.LanguageCode
+
     Private Shared Sub ClearPasswordSetting()
         My.Settings.UserName = ""
         My.Settings.Oterkis = ""

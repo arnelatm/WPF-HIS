@@ -26,13 +26,13 @@ Module Module1
         End Using
     End Sub
 
-    Public Sub ShowReportToScreen(reportFileName As String, reportParameters As Object)
-        Dim crReportDocument As New CrystalReportDocument
-        Dim ReportViewer As New ReportViewer(reportFileName, reportParameters)
-        ReportViewer.Show()
-    End Sub
+    'Public Sub ShowReportToScreen(reportFileName As String, reportParameters As Object)
+    '    Dim crReportDocument As New CrystalReportDocument
+    '    Dim ReportViewer As New ReportViewer(reportFileName, reportParameters)
+    '    ReportViewer.Show()
+    'End Sub
 
-    Public Sub ShowReportToScreen(reportFileName As String, reportParameters As Object, Optional dataBaseConnectionCode As String = Nothing)
+    Public Sub ShowReportToScreen(reportFileName As String, Optional reportParameters As Object = Nothing, Optional dataBaseConnectionCode As String = Nothing)
         Dim crReportDocument As New CrystalReportDocument
         Dim ReportViewer As New ReportViewer(reportFileName, reportParameters, dataBaseConnectionCode)
         ReportViewer.Show()

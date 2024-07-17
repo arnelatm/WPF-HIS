@@ -53,6 +53,7 @@ Partial Class ReportViewer
         Me.Name = "ReportViewer"
         Me.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.RightToLeftDisplay = "False"
+        Me.Text = "Report Viewer"
         Me.Controls.SetChildIndex(Me.CrystalReportViewer1, 0)
         CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)

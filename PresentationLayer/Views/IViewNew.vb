@@ -14,5 +14,6 @@ Public Interface IViewNew
     Property FormCulture As CultureInfo
     Property RightToLeftDisplay As String
     Property ViewDisplayName As String
+    Property LanguageCode As String
 
 End Interface
