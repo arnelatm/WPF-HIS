@@ -6,8 +6,6 @@ Namespace PresentationLayer.Views
     Public Class IbLabSampleDetailView
         Implements IIbLabSampleDetailView
         Public Property Age As Decimal Implements IIbLabSampleDetailView.Age
-        Public Property DataFilter As String Implements IView.DataFilter
-        Public Property Errors As List(Of String) Implements IView.Errors
         Public Property IdNo As Integer Implements IIbLabSampleDetailView.IdNo
         Public Property IqamaNo As String Implements IIbLabSampleDetailView.IqamaNo
         Public Property LabNo As String Implements IIbLabSampleDetailView.LabNo
@@ -20,6 +18,10 @@ Namespace PresentationLayer.Views
         Public Property TakenDate As Date Implements IIbLabSampleDetailView.TakenDate
         Public Property TakenTime As String Implements IIbLabSampleDetailView.TakenTime
         Public Property Urine As Boolean Implements IIbLabSampleDetailView.Urine
+        Public Property DataFilter As String Implements IView.DataFilter
+        Public Property Errors As List(Of String) Implements IView.Errors
+
+
     End Class
 
     Public Class IbLabResultDetailView
@@ -49,8 +51,10 @@ Namespace PresentationLayer.Views
         Public Property VDRL As Boolean? Implements IIbLabResultDetailView.VDRL
         Public Property Widal As Boolean? Implements IIbLabResultDetailView.Widal
         Public Property XRay As Boolean? Implements IIbLabResultDetailView.XRay
-        Public Property Errors As List(Of String) Implements IView.Errors
         Public Property DataFilter As String Implements IView.DataFilter
+        Public Property Errors As List(Of String) Implements IView.Errors
+
+
 
     End Class
 

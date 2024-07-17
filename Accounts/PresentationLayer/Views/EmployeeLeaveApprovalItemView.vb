@@ -30,8 +30,9 @@ Namespace PresentationLayer.Views
         Public Property Status As String Implements IEmployeeLeaveApprovalItemView.Status
         Public Property StartDate As Date Implements IEmployeeLeaveApprovalItemView.StartDate
         Public Property SupervisorIdNo As Integer Implements IEmployeeLeaveApprovalItemView.SupervisorIdNo
-        Public Property Errors As List(Of String) Implements IView.Errors
         Public Property DataFilter As String Implements IView.DataFilter
+
+        Public Property Errors As List(Of String) Implements IView.Errors
     End Class
 
 
@@ -44,8 +45,6 @@ Namespace PresentationLayer.Views
         Public Property ApprovalNote As String Implements IEmployeeLeaveEarnedApprovalItemView.ApprovalNote
         Public Property Approved As Boolean Implements IEmployeeLeaveEarnedApprovalItemView.Approved
         Public Property Disapproved As Boolean Implements IEmployeeLeaveEarnedApprovalItemView.Disapproved
-        Public Property Errors As List(Of String) Implements IView.Errors
-        Public Property DataFilter As String Implements IView.DataFilter
         Public Property DateCreated As DateTime? Implements IEmployeeLeaveEarnedApprovalItemView.DateCreated
         Public Property DaysEarned As Decimal Implements IEmployeeLeaveEarnedApprovalItemView.DaysEarned
         Public Property EmployeeLeaveEarnedIdNo As Integer Implements IEmployeeLeaveEarnedApprovalItemView.EmployeeLeaveEarnedIdNo
@@ -63,6 +62,8 @@ Namespace PresentationLayer.Views
         Public Property Status As String Implements IEmployeeLeaveEarnedApprovalItemView.Status
         Public Property StartDate As Date Implements IEmployeeLeaveEarnedApprovalItemView.StartDate
         Public Property SupervisorIdNo As Integer Implements IEmployeeLeaveEarnedApprovalItemView.SupervisorIdNo
+        Public Property DataFilter As String Implements IView.DataFilter
+        Public Property Errors As List(Of String) Implements IView.Errors
 
     End Class
 End Namespace

@@ -44,13 +44,13 @@ Partial Class ReportViewer
         Me.CrystalReportViewer1.TabIndex = 2
         Me.CrystalReportViewer1.ToolPanelView = ToolPanelViewType.None
         '
-        'CrViewer
+        'ReportViewer
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.ClientSize = New System.Drawing.Size(678, 314)
         Me.Controls.Add(Me.CrystalReportViewer1)
         Me.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
-        Me.Name = "CrViewer"
+        Me.Name = "ReportViewer"
         Me.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.RightToLeftDisplay = "False"
         Me.Controls.SetChildIndex(Me.CrystalReportViewer1, 0)

@@ -14,12 +14,11 @@ Namespace PresentationLayer.Views
         Public Property EmployeeName As String Implements IEmployeeIdView.EmployeeName
 
         Public Property NationalIdNo As String Implements IEmployeeIdView.NationalIdNo
-
-        Public Property Errors As List(Of String) Implements IView.Errors
-
         Public Property Picture As Image Implements IEmployeeIdView.Picture
         Public Property Print As Boolean Implements IEmployeeIdView.Print
         Public Property DataFilter As String Implements IView.DataFilter
+        Public Property Errors As List(Of String) Implements IView.Errors
+
 
     End Class
 

@@ -25,9 +25,11 @@ Namespace PresentationLayer.Views
         Public Property IdNo As Int16 Implements IPayElementItemView.IdNo
         Public Property FactorType As String Implements IPayElementItemView.FactorType
         Public Property FactorValue As Decimal Implements IPayElementItemView.FactorValue
-        Public Property Errors As List(Of String) Implements IView.Errors
         Public Property Sequence As Int16 Implements IPayElementItemView.Sequence
         Public Property DataFilter As String Implements IView.DataFilter
+        Public Property Errors As List(Of String) Implements IView.Errors
+
+
     End Class
 
 End Namespace

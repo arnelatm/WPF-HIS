@@ -1,4 +1,5 @@
-﻿Imports AATM.Libraries
+﻿Imports System.Globalization
+Imports AATM.Libraries
 Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 
@@ -383,9 +384,10 @@ End Class
 
 Public Class EntryFormLoaded
 
-    Public Sub New(ByVal viewControl As Control, allControls As List(Of Control))
+    Public Sub New(ByVal viewControl As Control, allControls As List(Of Control), languageCode As String)
         Me.ViewControl = viewControl
         Me.AllControls = allControls
+        Me.LanguageCode = languageCode
     End Sub
 
     Public Property ViewControl As Control
@@ -393,6 +395,7 @@ Public Class EntryFormLoaded
     Public Property EditingAllowed As Boolean
     Public Property DeletingAllowed As Boolean
     Public Property AllControls As List(Of Control)
+    Public Property LanguageCode As String
 
 End Class
 

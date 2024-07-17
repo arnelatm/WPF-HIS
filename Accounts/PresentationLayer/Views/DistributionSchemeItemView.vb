@@ -17,9 +17,9 @@ Namespace PresentationLayer.Views
         Public Property RevCostCenterName As String Implements IDistributionSchemeItemView.RevCostCenterName
 
         Public Property Percentage As Decimal Implements IDistributionSchemeItemView.Percentage
-
-        Public Property Errors As List(Of String) Implements IView.Errors
         Public Property DataFilter As String Implements IView.DataFilter
+        Public Property Errors As List(Of String) Implements IView.Errors
+
 
     End Class
 

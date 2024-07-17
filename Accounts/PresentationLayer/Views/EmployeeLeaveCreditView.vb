@@ -9,7 +9,6 @@ Namespace PresentationLayer.Views
         Public Property AccumulatedLeave As Decimal Implements IEmployeeLeaveCreditView.AccumulatedLeave
         Public Property Cumulative As Boolean Implements IEmployeeLeaveCreditView.Cumulative
         Public Property EmployeeIdNo As Int32 Implements IEmployeeLeaveCreditView.EmployeeIdNo
-        Public Property Errors As List(Of String) Implements IView.Errors
         Public Property IdNo As Int32 Implements IEmployeeLeaveCreditView.IdNo
         Public Property LeaveAllowed As Decimal Implements IEmployeeLeaveCreditView.LeaveAllowed
         Public Property LeaveIdNo As Int16 Implements IEmployeeLeaveCreditView.LeaveIdNo
@@ -19,6 +18,8 @@ Namespace PresentationLayer.Views
         Public Property PaidPercent As Decimal Implements IEmployeeLeaveCreditView.PaidPercent
         Public Property Sequence As Int16 Implements IEmployeeLeaveCreditView.Sequence
         Public Property DataFilter As String Implements IView.DataFilter
+        Public Property Errors As List(Of String) Implements IView.Errors
+
 
     End Class
 

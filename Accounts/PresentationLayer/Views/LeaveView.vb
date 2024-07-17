@@ -1,5 +1,5 @@
-﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.Libraries.CBaseControlsLibrary
+﻿Imports System.Globalization
+Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Views
 
@@ -109,13 +109,9 @@ Namespace PresentationLayer.Views
             End Set
         End Property
 
-        Public Property Errors As List(Of String) Implements IView.Errors
-
         Public Property Holiday As Boolean Implements ILeaveView.Holiday
 
         Public Property LeaveType As String Implements ILeaveView.LeaveType
-
-        Public Property DataFilter As String Implements IView.DataFilter
 
         Public Property Earnable As Boolean Implements ILeaveView.Earnable
             Get
@@ -125,6 +121,11 @@ Namespace PresentationLayer.Views
                 chkEarnable.Checked = value
             End Set
         End Property
+
+        Public Property DataFilter As String Implements IView.DataFilter
+        Public Property Errors As List(Of String) Implements IView.Errors
+
+
     End Class
 
 End Namespace

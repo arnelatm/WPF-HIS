@@ -107,17 +107,8 @@ Namespace PresentationLayer.Views
         Public Property Sequence As Int16 Implements ISalesDepositView.Sequence
         Public Property VatAmount As Decimal Implements ISalesDepositView.VatAmount
 
-        Public Property Errors As List(Of String) Implements IView.Errors
-
-        'Public Function GetComputedBankCharge(pSaleAmount As Decimal, pRate As Decimal)
-        '    Return Math.Round(pRate * pSaleAmount / 100, 2)
-        'End Function
-
-        'Public Function GetComputedBankChargeVat(pBankCharge)
-        '    Return Math.Round(pBankCharge * _vatRate, 2)
-        'End Function
-
         Public Property DataFilter As String Implements IView.DataFilter
+        Public Property Errors As List(Of String) Implements IView.Errors
 
     End Class
 

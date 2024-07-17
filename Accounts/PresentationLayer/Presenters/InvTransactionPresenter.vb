@@ -13,15 +13,14 @@ Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
-Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Presenters
 
     Public Class InvTransactionPresenter(Of TM As New)
         Inherits TransactionsPresenter(Of IInvTransactionView, TM)
-        Implements ISubscriber(Of DgvItemsChanged), ICrPrintableReportView
+        Implements ISubscriber(Of DgvItemsChanged) ', ICrPrintableReportView
 
-        Public Event PrintReport As ICrPrintableReportView.PrintReportEventHandler Implements ICrPrintableReportView.PrintReport
+        'Public Event PrintReport As ICrPrintableReportView.PrintReportEventHandler Implements ICrPrintableReportView.PrintReport
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
         Private ReadOnly _productService As New AccountsService("Product")
@@ -111,9 +110,7 @@ Namespace PresentationLayer.Presenters
 
         Private ReadOnly _InvTransactionItemService As New AccountsService("InvTransactionDetail")
 
-        Public Property Errors As List(Of String) Implements IView.Errors
-
-        Private Property IView_DataFilter As String Implements IView.DataFilter
+        'Private Property DataFilter As String Implements AATM.PresentationLayer.Views.IView.DataFilter
 
         Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             Dim passedValue As Integer = retVal

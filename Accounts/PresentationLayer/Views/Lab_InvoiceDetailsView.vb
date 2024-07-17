@@ -6,8 +6,6 @@ Namespace PresentationLayer.Views
     Public Class Lab_InvoiceDetailsView
         Implements ILab_InvoiceDetailsView
 
-        Public Property Errors As List(Of String) Implements IView.Errors
-
         Public Property Group_Key As Decimal Implements ILab_InvoiceDetailsView.Group_Key
 
         Public Property SlNo As Decimal Implements ILab_InvoiceDetailsView.SlNo
@@ -18,6 +16,9 @@ Namespace PresentationLayer.Views
 
         Public Property Suffix1 As String Implements ILab_InvoiceDetailsView.Suffix1
         Public Property DataFilter As String Implements IView.DataFilter
+        Public Property Errors As List(Of String) Implements IView.Errors
+
+
 
     End Class
 

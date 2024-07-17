@@ -29,6 +29,7 @@ Public Class CFormEntry
     Protected AddingAllowed As Boolean = False
     Protected DeletingAllowed As Boolean = False
     Private _debugSwitch As Byte = 0
+    Private _formCulture As CultureInfo
 
     'Private _addMode As Boolean = False
     'Private _editMode As Boolean = False
@@ -60,6 +61,7 @@ Public Class CFormEntry
         InitializeComponent()
         DoubleBuffered = True
         _inputTurnedOn = False
+        _formCulture = GlobalVariables.AppCurrentCultureInfo
         ' Add any initialization after the InitializeComponent() call.
     End Sub
 
@@ -575,10 +577,10 @@ Public Class CFormEntry
         'End If
         If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
             'AddHandler TextDisplayLanguageChanged, AddressOf OnTextDisplayLanguageChanged
+            Dim languageCode As String = GetCultureLanguageCode(FormCulture)
             TextDisplayLanguage = CultureInfo.CurrentCulture.Name
-            'CreateDataSources()
             CreateMainFieldsDictionary()
-            Dim formLoaded As New EntryFormLoaded(Me, AllControls)
+            Dim formLoaded As New EntryFormLoaded(Me, AllControls, languageCode)
             If Ea IsNot Nothing Then
                 Ea.PublishEvent(formLoaded)
             End If

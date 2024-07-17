@@ -10,8 +10,6 @@ Namespace PresentationLayer.Views
         Public Property BaseUnitIdNo As Int16 Implements IInvTransactionDetailView.BaseUnitIdNo
         Public Property BatchNo As String Implements IInvTransactionDetailView.BatchNo
         Public Property CategoryIdNo As Short Implements IInvTransactionDetailView.CategoryIdNo
-        Public Property DataFilter As String Implements IView.DataFilter
-        Public Property Errors As List(Of String) Implements IView.Errors
         Public Property ExpiryDate As Date? Implements IInvTransactionDetailView.ExpiryDate
         Public Property IdNo As Int32 Implements IInvTransactionDetailView.IdNo
         Public Property InventoryIdNo As Int32 Implements IInvTransactionDetailView.InventoryIdNo
@@ -27,6 +25,9 @@ Namespace PresentationLayer.Views
         Public Property UnitCost As Decimal Implements IInvTransactionDetailView.UnitCost
         Public Property UnitCount As Int16 Implements IInvTransactionDetailView.UnitCount
         Public Property UnitIdNo As Int16 Implements IInvTransactionDetailView.UnitIdNo
+        Public Property DataFilter As String Implements IView.DataFilter
+        Public Property Errors As List(Of String) Implements IView.Errors
+
 
     End Class
 

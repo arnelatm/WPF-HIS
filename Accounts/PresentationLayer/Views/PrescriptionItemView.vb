@@ -1,4 +1,5 @@
-﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+﻿Imports System.Globalization
+Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views
@@ -6,10 +7,8 @@ Namespace PresentationLayer.Views
     Public Class PrescriptionItemView
         Implements IPrescriptionItemView
 
-        Public Property DataFilter As String Implements IView.DataFilter
         Public Property Dosage As String Implements IPrescriptionItemView.Dosage
         Public Property Duration As String Implements IPrescriptionItemView.Duration
-        Public Property Errors As List(Of String) Implements IView.Errors
         Public Property GenericName As String Implements IPrescriptionItemView.GenericName
         Public Property ItemCode As String Implements IPrescriptionItemView.ItemCode
         Public Property ItemIdNo As Integer Implements IPrescriptionItemView.ItemIdNo
@@ -19,6 +18,10 @@ Namespace PresentationLayer.Views
         Public Property PrintLabel As Boolean Implements IPrescriptionItemView.PrintLabel
         Public Property RowNbr As Integer Implements IPrescriptionItemView.RowNbr
         Public Property TransKey As Integer Implements IPrescriptionItemView.TransKey
+        Public Property DataFilter As String Implements IView.DataFilter
+        Public Property Errors As List(Of String) Implements IView.Errors
+
+
 
     End Class
 

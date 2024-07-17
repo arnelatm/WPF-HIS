@@ -30,11 +30,8 @@ Namespace PresentationLayer.Views
     Public Class PurchaseHistoryView
         Implements IPurchaseHistoryView
 
-
         Public Property BatchNo As String Implements IPurchaseHistoryView.BatchNo
         Public Property BonusQuantity As Decimal Implements IPurchaseHistoryView.BonusQuantity
-        Public Property DataFilter As String Implements IView.DataFilter
-        Public Property Errors As List(Of String) Implements IView.Errors
         Public Property ExpiryDate As Date? Implements IPurchaseHistoryView.ExpiryDate
         Public Property GrossAmount As Decimal Implements IPurchaseHistoryView.GrossAmount
         Public Property IdNo As Int32 Implements IPurchaseHistoryView.IdNo
@@ -48,14 +45,16 @@ Namespace PresentationLayer.Views
         Public Property UnitCost As Decimal Implements IPurchaseHistoryView.UnitCost
         Public Property UnitName As String Implements IPurchaseHistoryView.UnitName
         Public Property UnitSalesPrice As Decimal Implements IPurchaseHistoryView.UnitSalesPrice
+        Public Property DataFilter As String Implements IView.DataFilter
+        Public Property Errors As List(Of String) Implements IView.Errors
+
+
 
     End Class
 
     Public Class PurchaseDetailBaseView
         Implements IPurchaseDetailBaseView
 
-        Public Property Errors As List(Of String) Implements IView.Errors
-        Public Property DataFilter As String Implements IView.DataFilter
         Public Property IdNo As Integer Implements IPurchaseDetailBaseView.IdNo
         Public Property NetAmount As Decimal Implements IPurchaseDetailBaseView.NetAmount
         Public Property Price As Decimal Implements IPurchaseDetailBaseView.Price
@@ -66,6 +65,10 @@ Namespace PresentationLayer.Views
         Public Property Quantity As Decimal Implements IPurchaseDetailBaseView.Quantity
         Public Property Sequence As Short Implements IPurchaseDetailBaseView.Sequence
         Public Property UnitIdNo As Short Implements IPurchaseDetailBaseView.UnitIdNo
+        Public Property DataFilter As String Implements IView.DataFilter
+        Public Property Errors As List(Of String) Implements IView.Errors
+
+
 
     End Class
 

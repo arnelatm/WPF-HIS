@@ -220,17 +220,20 @@ Namespace PresentationLayer.Views.Forms
             reportTitle = reportTitle + " " + GlobalFuncNSub.GregorianLongDate(Now(), CultureInfo.CurrentCulture)
             Dim curCulture = CultureInfo.CurrentCulture
             CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
-            Dim language As String
-            Dim estName As String
-            language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
+            Dim language As String = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
+            Dim estName As String = GetEstablishmentName(language)
+
             If language = "ar" Then
                 estName = GlobalVariables.EstablishmentName
             Else
                 estName = GlobalVariables.EstablishmentNameAra
             End If
-            'Dim cForm As New ReportForm("Aging of Accounts Payable.Rpt", reportTitle, "ReportTitle", language, "Language", estName, "EstablishmentName")
-            RunFormNew(Of ReportForm, PrintReportPresenter(Of ReportModel), Object)({"Aging of Accounts Payable.Rpt", reportTitle, "ReportTitle", language, "Language", estName, "EstablishmentName"})
-            'cForm.Show()
+
+            ShowReportToScreen("Aging of Accounts Payable.Rpt", {reportTitle, "ReportTitle", language, "Language", estName, "EstablishmentName"})
+
+            ''Dim cForm As New ReportForm("Aging of Accounts Payable.Rpt", reportTitle, "ReportTitle", language, "Language", estName, "EstablishmentName")
+            'RunFormNew(Of ReportForm, PrintReportPresenter(Of ReportModel), Object)({"Aging of Accounts Payable.Rpt", reportTitle, "ReportTitle", language, "Language", estName, "EstablishmentName"})
+            ''cForm.Show()
         End Sub
 
         Private Sub BankTransferToolStripMenuItem_Click(sender As Object, e As EventArgs)
@@ -450,8 +453,8 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub TestToolStripMenuItem1_Click(sender As Object, e As EventArgs)
-            Dim cForm As New ReportForm("Blank Report.Rpt")
-            cForm.Show()
+            'Dim cForm As New ReportForm("Blank Report.Rpt")
+            'cForm.Show()
         End Sub
 
         Private Sub ToolStripButtonTranslate_Click(sender As Object, e As EventArgs) Handles ToolStripButtonTranslate.Click
@@ -533,7 +536,8 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub JournalListingsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemJournalTransactionSummary.Click
-            RunReportNew(Of TransactionSummary)()
+            'RunReportViewer(Of TransactionSummaryForm)()
+            RunFormNew(Of TransactionSummaryForm, ReportPrinterPresenter(Of AccountModel))()
         End Sub
 
         Private Sub RecurringPayElementToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemRecurringPayrollEntry.Click
@@ -961,7 +965,11 @@ Namespace PresentationLayer.Views.Forms
             Invoker.InvokeFunction(formToRun, "Show")
         End Sub
 
-
+        Private Overloads Sub RunReportViewer(Of TV)()
+            Dim formToRun = Activator.CreateInstance(GetType(TV))
+            'PrintReportPresenter(Of ReportModel)(formToRun)
+            Invoker.InvokeFunction(formToRun, "Show")
+        End Sub
 
         Private Overloads Sub RunBaseForm(Of TV, TP)(tableName As String, formName As String)
             Dim formToRun = Activator.CreateInstance(GetType(TV), tableName, formName)

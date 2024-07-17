@@ -1,4 +1,5 @@
-﻿Imports AATM.Common
+﻿Imports System.Globalization
+Imports AATM.Common
 Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views.Forms.Reports
@@ -39,6 +40,15 @@ Namespace PresentationLayer.Views.Forms.Reports
         Public Property MainTableName As String
         Public Property Errors As List(Of String) Implements IView.Errors
         Public Property DataFilter As String Implements IView.DataFilter
+
+        Private Property FormCulture As CultureInfo Implements IView.FormCulture
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As CultureInfo)
+                Throw New NotImplementedException()
+            End Set
+        End Property
 
         Public Event PrintReport As ICrPrintableReportView.PrintReportEventHandler Implements ICrPrintableReportView.PrintReport
     End Class

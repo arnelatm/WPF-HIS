@@ -6,11 +6,8 @@ Namespace PresentationLayer.Views
     Public Class PurchaseOrderDetailView
         Implements IPurchaseOrderDetailView
 
-
         Public Property BaseUnitIdNo As Int16 Implements IPurchaseOrderDetailView.BaseUnitIdNo
         Public Property CategoryIdNo As Short Implements IPurchaseOrderDetailView.CategoryIdNo
-        Public Property DataFilter As String Implements IView.DataFilter
-        Public Property Errors As List(Of String) Implements IView.Errors
         Public Property IdNo As Int32 Implements IPurchaseOrderDetailView.IdNo
         Public Property NetAmount As Decimal Implements IPurchaseOrderDetailView.NetAmount
         Public Property ProductCode As String Implements IPurchaseOrderDetailView.ProductCode
@@ -23,6 +20,10 @@ Namespace PresentationLayer.Views
         Public Property UnitCount As Int16 Implements IPurchaseOrderDetailView.UnitCount
         Public Property UnitIdNo As Int16 Implements IPurchaseOrderDetailView.UnitIdNo
         Public Property PurchaseOrderIdNo As Integer Implements IPurchaseOrderDetailView.PurchaseOrderIdNo
+        Public Property DataFilter As String Implements IView.DataFilter
+        Public Property Errors As List(Of String) Implements IView.Errors
+
+
 
     End Class
 
@@ -35,6 +36,7 @@ Namespace PresentationLayer.Views
         Public Property QtyOnHand As Decimal Implements IPurchaseOrderApprovalDetailView.QtyOnHand
         Public Property QtySupplied As Decimal Implements IPurchaseOrderApprovalDetailView.QtySupplied
         Public Property UnitName As String Implements IPurchaseOrderApprovalDetailView.UnitName
+
 
     End Class
 

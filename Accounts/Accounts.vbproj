@@ -648,6 +648,7 @@
     <Compile Include="PresentationLayer\Presenters\EmployeeLeaveEarnedPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\IGroup\ClinicLabSamplePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\IGroup\IbLabSamplePresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\ReportPrinterPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\SupplierProductPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PurchaseOrderApprovalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\UtilityPresenter.vb" />
@@ -1225,22 +1226,16 @@
     <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\GenerateDrugCsv.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\ReportForm.Designer.vb">
-      <DependentUpon>ReportForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\ReportForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\ShiftDailyReport.Designer.vb">
       <DependentUpon>ShiftDailyReport.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\ShiftDailyReport.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\TransactionSummary.designer.vb">
-      <DependentUpon>TransactionSummary.vb</DependentUpon>
+    <Compile Include="PresentationLayer\Views\Forms\Reports\TransactionSummaryForm.designer.vb">
+      <DependentUpon>TransactionSummaryForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\TransactionSummary.vb">
+    <Compile Include="PresentationLayer\Views\Forms\Reports\TransactionSummaryForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\RecurringPayElementEntry.designer.vb">
@@ -2392,14 +2387,11 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\IGroup\GenerateDrugCsv.resx">
       <DependentUpon>GenerateDrugCsv.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\ReportForm.resx">
-      <DependentUpon>ReportForm.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\ShiftDailyReport.resx">
       <DependentUpon>ShiftDailyReport.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\TransactionSummary.resx">
-      <DependentUpon>TransactionSummary.vb</DependentUpon>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\TransactionSummaryForm.resx">
+      <DependentUpon>TransactionSummaryForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\NotesTranslator.resx">
       <DependentUpon>NotesTranslator.vb</DependentUpon>

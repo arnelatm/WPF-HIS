@@ -1,5 +1,4 @@
-﻿Imports AATM.Common.PresentationLayer.Views.Forms.Reports
-Imports AATM.Libraries.CBaseControlsLibrary
+﻿Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Views.Forms.Reports

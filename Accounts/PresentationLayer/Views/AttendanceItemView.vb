@@ -66,12 +66,13 @@ Namespace PresentationLayer.Views
         Public Property EmployeeIdNo As Int32 Implements IAttendanceItemView.EmployeeIdNo
         Public Property EmployeeName As String Implements IAttendanceItemView.EmployeeName
         Public Property EmployeeNameAra As String Implements IAttendanceItemView.EmployeeNameAra
-        Public Property Errors As List(Of String) Implements IView.Errors
         Public Property IdNo As Int32 Implements IAttendanceItemView.IdNo
         Public Property PayrollIdNo As Int16 Implements IAttendanceItemView.PayrollIdNo
         Public Property Sequence As Int16 Implements IAttendanceItemView.Sequence
         Public Property Selected As Boolean Implements IAttendanceItemView.Selected
         Public Property DataFilter As String Implements IView.DataFilter
+        Public Property Errors As List(Of String) Implements IView.Errors
+
 
     End Class
 

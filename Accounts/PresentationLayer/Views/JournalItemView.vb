@@ -90,9 +90,9 @@ Namespace PresentationLayer.Views
         End Property
 
         Public Property SpecialAccount As String Implements IJournalItemView.SpecialAccount
-
-        Public Property Errors As List(Of String) Implements IView.Errors
         Public Property DataFilter As String Implements IView.DataFilter
+        Public Property Errors As List(Of String) Implements IView.Errors
+
 
     End Class
 

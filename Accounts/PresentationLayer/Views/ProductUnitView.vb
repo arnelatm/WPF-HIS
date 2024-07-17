@@ -7,7 +7,6 @@ Namespace PresentationLayer.Views
         Implements IProductUnitView
 
         Public Property IdNo As Int32 Implements IProductUnitView.IdNo
-        Public Property DataFilter As String Implements IView.DataFilter
         Public Property UnitIdNo As Int16 Implements IProductUnitView.UnitIdNo
         Public Property ProductIdNo As Int32 Implements IProductUnitView.ProductIdNo
 
@@ -40,9 +39,11 @@ Namespace PresentationLayer.Views
                 End If
             End Set
         End Property
-
-        Public Property Errors As List(Of String) Implements IView.Errors
         Public Property Sequence As Int16 Implements IProductUnitView.Sequence
+        Public Property DataFilter As String Implements IView.DataFilter
+        Public Property Errors As List(Of String) Implements IView.Errors
+
+
 
     End Class
 

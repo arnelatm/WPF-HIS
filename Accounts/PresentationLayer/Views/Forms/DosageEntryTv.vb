@@ -2,7 +2,6 @@
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views.Forms
 
@@ -75,8 +74,6 @@ Namespace PresentationLayer.Views.Forms
                 cboFrequencyTiming.SetValue(Value)
             End Set
         End Property
-
-        Public Shadows Property DataFilter As String Implements IView.DataFilter
 
         Public Property DosageCode As String Implements IDosageView.DosageCode
             Get

@@ -30,7 +30,7 @@ Public Class ReportViewer
         CrReportDocument.SetCrReportConnectionProperties()
         SetParameters(reportParameters)
         CrReportDocument.ClearDataSourceConnections()
-        SetupCrViewer()
+        SetupReportViewer()
 
     End Sub
 
@@ -38,7 +38,7 @@ Public Class ReportViewer
         CrReportDocument.SetParameterValue(reportParameters)
     End Sub
 
-    Protected Sub SetupCrViewer()
+    Protected Sub SetupReportViewer()
         WindowState = FormWindowState.Maximized
         Dim ceCulture As CeLocale
         If Me.FormCulture.Name.ToLower().Remove(2) = "ar" Then

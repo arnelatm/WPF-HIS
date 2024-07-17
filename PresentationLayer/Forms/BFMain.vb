@@ -11,7 +11,7 @@ Imports AATM.PresentationLayer.Events
 Imports AATM.PresentationLayer.Views
 
 Public Class BfMain
-    Implements IView
+    Implements IView, IViewForm
 
     Dim _originalText As String
 
@@ -32,6 +32,7 @@ Public Class BfMain
     Protected LtrCultureInfoStr = GlobalVariables.DefaultUnmirroredCultureInfoStr
     Protected RtlCultureInfoStr = GlobalVariables.DefaultMirroredCultureInfoStr
     Protected DefaultMirroredLanguageIdNo As Int16
+    Protected LanguageCode As String
     Protected Shared ResetEvent As AutoResetEvent = New AutoResetEvent(False)
     Protected FormShown As Boolean = False
     Public Dv As DataView
@@ -53,6 +54,7 @@ Public Class BfMain
         End If
         InitializationMode = False
         ' Add any initialization after the InitializeComponent() call.
+        FormCulture = GlobalVariables.AppCurrentCultureInfo
     End Sub
 
     Public Sub New(ByVal transDac As Dac, ByVal appDac As Dac)
@@ -71,10 +73,6 @@ Public Class BfMain
     Public Event TextDisplayLanguageChanged()
 
     Public Property CancelClose As Boolean
-
-    Public Property Errors As List(Of String) Implements IView.Errors
-    Public Property DataFilter As String Implements IView.DataFilter
-
     Protected Property TextDisplayLanguage As String
         Get
             Return _textDisplayLanguage
@@ -90,7 +88,6 @@ Public Class BfMain
 
     Protected Sub SetFormCulture(cCultureInfo As CultureInfo)
         FormCulture = cCultureInfo
-
         If FormCulture.TextInfo.IsRightToLeft Then
             RightToLeftLayout = True
             RightToLeft = RightToLeft.Yes
@@ -104,16 +101,17 @@ Public Class BfMain
         CultureInfo.DefaultThreadCurrentCulture = CultureInfo.CurrentCulture
     End Sub
 
-    Protected Property FormCulture As CultureInfo
+    Public Property FormCulture As CultureInfo Implements IViewForm.FormCulture
         Get
             If _formCulture Is Nothing Then
-                Return CultureInfo.CurrentCulture
-            Else
-                Return _formCulture
+                _formCulture = GlobalVariables.AppCurrentCultureInfo
+                LanguageCode = GetCultureLanguageCode(_formCulture)
             End If
+            Return _formCulture
         End Get
         Set(value As CultureInfo)
             _formCulture = value
+            LanguageCode = GetCultureLanguageCode(value)
         End Set
     End Property
 
@@ -1073,6 +1071,9 @@ Public Class BfMain
 
     Public Property HideNavigatorButtons As Boolean
     Public Property IgnoreTextBoxNumParserMessage As Boolean
+
+    Public Property Errors As List(Of String) Implements IViewForm.Errors
+    Public Property DataFilter As String Implements IViewForm.DataFilter
 
     Protected Overloads Sub CreateLookupDataTable(tableName As String, targetProperty As String)
         Ea.PublishEvent(New GetLookupDataTableRequested(tableName, Me, targetProperty))

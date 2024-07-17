@@ -59,6 +59,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     Private _undoMode As Boolean = False
     Private _ea As EventAggregator
     Private _dataErrors As String = ""
+    Protected _languageCode As String
     Public Service As Object
 
     Public Event AfterDelete(retVal As Integer)
@@ -1370,6 +1371,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
 
     Public Sub OnEntryFormLoaded_EventHandler(ByRef eventType As EntryFormLoaded) Implements ISubscriber(Of EntryFormLoaded).OnEventHandler
         Dim rules = GetBizObjectRules()
+        _languageCode = eventType.LanguageCode
         For Each rule In rules
             Dim control As Control = Nothing
             If MainFieldsDictionary.TryGetValue(rule.Property, control) Then

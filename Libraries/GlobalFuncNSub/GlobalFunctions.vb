@@ -1866,6 +1866,10 @@ Public Module GlobalFunctions
         Return fraction.N.ToString() + "/" + fraction.D.ToString()
     End Function
 
+    Public Function GetCultureLanguageCode(cCultureInfo As CultureInfo) As String
+        Return Strings.Left(cCultureInfo.Name, cCultureInfo.Name.IndexOf("-", StringComparison.Ordinal))
+    End Function
+
 
     ''' <summary>
     ''' Convert stored number to words using selected currency

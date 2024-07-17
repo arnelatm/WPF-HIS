@@ -13,7 +13,6 @@ Namespace PresentationLayer.Views
         Public Property Amount As Decimal Implements IPcClosingJournalView.Amount
 
         Public Property CdJournalIdNo As Int32 Implements IPcClosingJournalView.CdJournalIdNo
-        Public Property Errors As List(Of String) Implements IView.Errors
         Public Property IdNo As Integer Implements IPcClosingJournalView.IdNo
         Public Property Notes As String Implements IPcClosingJournalView.Notes
         Public Property PayeeName As String Implements IPcClosingJournalView.PayeeName
@@ -24,6 +23,9 @@ Namespace PresentationLayer.Views
         Public Property ReferenceNo As String Implements IPcClosingJournalView.ReferenceNo
         Public Property TransactionDate As Date? Implements IPcClosingJournalView.TransactionDate
         Public Property DataFilter As String Implements IView.DataFilter
+        Public Property Errors As List(Of String) Implements IView.Errors
+
+
     End Class
 
 End Namespace

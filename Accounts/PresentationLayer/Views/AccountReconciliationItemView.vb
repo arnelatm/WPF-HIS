@@ -24,6 +24,8 @@ Namespace PresentationLayer.Views
         Public Property DataFilter As String Implements IView.DataFilter
         Public Property Errors As List(Of String) Implements IView.Errors
 
+
+
     End Class
 
 End Namespace

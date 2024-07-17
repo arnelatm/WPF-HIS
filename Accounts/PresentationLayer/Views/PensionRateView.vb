@@ -8,7 +8,6 @@ Namespace PresentationLayer.Views
 
         Public Property EmployeeShare As Decimal Implements IPensionRateView.EmployeeShare
         Public Property EmployerShare As Decimal Implements IPensionRateView.EmployerShare
-        Public Property Errors As List(Of String) Implements IView.Errors
         Public Property HighRange As Decimal Implements IPensionRateView.HighRange
         Public Property IdNo As Int32 Implements IPensionRateView.IdNo
         Public Property LowRange As Decimal Implements IPensionRateView.LowRange
@@ -16,6 +15,10 @@ Namespace PresentationLayer.Views
         Public Property PensionSchemeIdNo As Int16 Implements IPensionRateView.PensionSchemeIdNo
         Public Property Sequence As Int16 Implements IPensionRateView.Sequence
         Public Property DataFilter As String Implements IView.DataFilter
+        Public Property Errors As List(Of String) Implements IView.Errors
+
+
+
 
     End Class
 

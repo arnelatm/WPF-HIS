@@ -349,11 +349,12 @@ Public Class CFormBase
         '    _firstLoadSwitch = 1
         'End If
         If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
+            Dim languageCode As String = GetCultureLanguageCode(FormCulture)
             TextDisplayLanguage = CultureInfo.CurrentCulture.Name
             'CreateDataSources()
             CreateMainFieldsDictionary()
             If Ea IsNot Nothing Then
-                Ea.PublishEvent(New EntryFormLoaded(Me, AllControls))
+                Ea.PublishEvent(New EntryFormLoaded(Me, AllControls, languageCode))
             End If
             Inputs(False)
             If GlobalVariables.RightToLeftLayout Then

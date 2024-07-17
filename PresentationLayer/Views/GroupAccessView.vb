@@ -37,6 +37,8 @@ Public Class GroupAccessView
     End Property
 
     Public Property SecurityObjectName As String Implements IGroupAccessView.SecurityObjectName
+    Public Property DataFilter As String Implements IView.DataFilter
+    Public Property Errors As List(Of String) Implements IView.Errors
 
-    Public Property Errors As List(Of String) Implements IGroupAccessView.Errors
+
 End Class

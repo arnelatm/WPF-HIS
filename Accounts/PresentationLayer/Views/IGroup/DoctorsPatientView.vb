@@ -15,9 +15,11 @@ Namespace PresentationLayer.Views.Interfaces
         Public Property TransKey As Int32 Implements IDoctorsPatientView.TransKey
         Public Property LastConsDate As String Implements IDoctorsPatientView.LastConsDate
         Public Property InvTime As Date Implements IDoctorsPatientView.InvTime
-        Public Property Errors As List(Of String) Implements IView.Errors
-        Public Property DataFilter As String Implements IView.DataFilter
         Public Property PatientIdNo As Int32 Implements IDoctorsPatientView.PatientIdNo
+        Public Property DataFilter As String Implements IView.DataFilter
+        Public Property Errors As List(Of String) Implements IView.Errors
+
+
 
     End Class
 
@@ -34,8 +36,9 @@ Namespace PresentationLayer.Views.Interfaces
         Public Property TransKey As Int32 Implements IPmrPatientDisplayView.TransKey
         Public Property LastConsDate As String Implements IPmrPatientDisplayView.LastConsDate
         Public Property InvTime As Date Implements IPmrPatientDisplayView.InvTime
-        Public Property Errors As List(Of String) Implements IView.Errors
         Public Property DataFilter As String Implements IView.DataFilter
+        Public Property Errors As List(Of String) Implements IView.Errors
+
 
     End Class
 

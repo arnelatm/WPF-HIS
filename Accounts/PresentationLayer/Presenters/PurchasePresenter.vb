@@ -206,22 +206,19 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Overrides Sub GoPrintRecord()
-            Dim cr As New CrPrintableArgs
-            Dim pr As New PrintReportPresenter(Of InvTransactionModel)
-            Dim title As String
+            Dim reportTitle As String
             If PurchaseOrder Then
-                title = Messaging.TranslateCaption("Purchase Order Report")
-                cr.ReportFileName = "Purchase Order Report.Rpt"
-                cr.Language = CultureInfo.CurrentCulture.Name
-                cr.ReportParameters = {cr.Language, "Language", title, "ReportTitle", View.IdNo, "PurchaseOrderIdNo"}
+                reportTitle = Messaging.TranslateCaption("Purchase Order Report", _languageCode)
+                ShowReportToScreen("Purchase Order Report.Rpt", {_languageCode, "Language",
+                                                                 reportTitle, "ReportTitle",
+                                                                 View.IdNo, "PurchaseOrderIdNo"})
             Else
-                title = Messaging.TranslateCaption("Purchase Report")
-                cr.ReportFileName = "Purchase Report.Rpt"
-                cr.Language = CultureInfo.CurrentCulture.Name
-                cr.ReportParameters = {cr.Language, "Language", title, "ReportTitle", View.IdNo, "PurchaseIdNo"}
+                reportTitle = Messaging.TranslateCaption("Purchase Report", _languageCode)
+                ShowReportToScreen("Purchase Report.Rpt", {_languageCode, "Language",
+                                                                 reportTitle, "ReportTitle",
+                                                                 View.IdNo, "PurchaseIdNo"})
             End If
 
-            pr.PrintReport(cr.ReportFileName, cr, False)
         End Sub
 
         Private Sub OnSuccessfulDelete(ByVal idNo As Int32) Handles MyBase.SuccessfulDelete

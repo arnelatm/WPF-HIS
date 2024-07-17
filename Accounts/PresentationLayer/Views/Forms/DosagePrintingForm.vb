@@ -98,7 +98,6 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Shadows Property DataFilter As String Implements IView.DataFilter
 
         Public Property DosageCode As String Implements IDosagePrintingView.DosageCode
             Get

@@ -13,8 +13,6 @@ Namespace PresentationLayer.Views
         Public Property CountryTelIdNo As Int16 Implements IEmployeePhoneView.CountryTelIdNo
         Public Property CountryTelCode As String Implements IEmployeePhoneView.CountryTelCode
         Public Property EmployeeIdNo As Int32 Implements IEmployeePhoneView.EmployeeIdNo
-        Public Property Errors As List(Of String) Implements IView.Errors
-
         Public Property FullPhone As String Implements IEmployeePhoneView.FullPhone
             Get
                 Return PhoneTypeName + " " + IIf(CountryTelCode = "", "", "+" + CountryTelCode) + " (" + AreaCode + ") " + PhoneNumber
@@ -42,6 +40,8 @@ Namespace PresentationLayer.Views
         Public Property PhoneTypeName As String Implements IEmployeePhoneView.PhoneTypeName
         Public Property PhoneTypeNameAra As String Implements IEmployeePhoneView.PhoneTypeNameAra
         Public Property DataFilter As String Implements IView.DataFilter
+        Public Property Errors As List(Of String) Implements IView.Errors
+
 
     End Class
 

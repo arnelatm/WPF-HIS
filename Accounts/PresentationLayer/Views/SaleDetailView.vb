@@ -6,15 +6,12 @@ Namespace PresentationLayer.Views
     Public Class SaleDetailView
         Implements ISaleDetailView
 
-
         Public Property AmtBefVat As Decimal Implements ISaleDetailView.AmtBefVat
         Public Property BaseUnitIdNo As Int16 Implements ISaleDetailView.BaseUnitIdNo
         Public Property BatchNo As String Implements ISaleDetailView.BatchNo
         Public Property CategoryIdNo As Short Implements ISaleDetailView.CategoryIdNo
-        Public Property DataFilter As String Implements IView.DataFilter
         Public Property DiscountAmount As Decimal Implements ISaleDetailView.DiscountAmount
         Public Property DiscountPercent As Decimal Implements ISaleDetailView.DiscountPercent
-        Public Property Errors As List(Of String) Implements IView.Errors
         Public Property ExpiryDate As Date? Implements ISaleDetailView.ExpiryDate
         Public Property GrossAmount As Decimal Implements ISaleDetailView.GrossAmount
         Public Property IdNo As Int32 Implements ISaleDetailView.IdNo
@@ -33,6 +30,10 @@ Namespace PresentationLayer.Views
         Public Property UnitCost As Decimal Implements ISaleDetailView.UnitCost
         Public Property VatAmount As Decimal Implements ISaleDetailView.VatAmount
         Public Property VatPercent As Decimal Implements ISaleDetailView.VatPercent
+        Public Property DataFilter As String Implements IView.DataFilter
+        Public Property Errors As List(Of String) Implements IView.Errors
+
+
 
     End Class
 

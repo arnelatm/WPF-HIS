@@ -13,7 +13,6 @@ Namespace PresentationLayer.Views
         Public Property DocumentIdNo As Int16 Implements IEmployeeDocumentView.DocumentIdNo
         Public Property DocumentNumber As String Implements IEmployeeDocumentView.DocumentNumber
         Public Property EmployeeIdNo As Int32 Implements IEmployeeDocumentView.EmployeeIdNo
-        Public Property Errors As List(Of String) Implements IView.Errors
         Public Property ExpiryDate As Date? Implements IEmployeeDocumentView.ExpiryDate
         Public Property IdNo As Int32 Implements IEmployeeDocumentView.IdNo
 
@@ -36,6 +35,9 @@ Namespace PresentationLayer.Views
         Public Property IssueDate As Date? Implements IEmployeeDocumentView.IssueDate
         Public Property Sequence As Int16 Implements IEmployeeDocumentView.Sequence
         Public Property DataFilter As String Implements IView.DataFilter
+        Public Property Errors As List(Of String) Implements IView.Errors
+
+
 
     End Class
 

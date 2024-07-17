@@ -7,11 +7,9 @@ Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Views.Forms.Reports
 
-    Public Class TransactionSummary
-        Implements ICrPrintableReportView
+    Public Class TransactionSummaryForm
 
         Public Property MainTableName As String
-        Public Event PrintReport(reportFileName As String, reportArgs As CrPrintableArgs, printDirectly As Boolean) Implements ICrPrintableReportView.PrintReport
         Protected SortOrderKey As String
 
         Public Sub New()
@@ -34,28 +32,15 @@ Namespace PresentationLayer.Views.Forms.Reports
             Dim bDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(dtpBeginningDate.Value, CultureInfo.CreateSpecificCulture("en-GB"))
             Dim eDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(dtpEndingDate.Value, CultureInfo.CreateSpecificCulture("en-GB"))
             reportTitle = Messaging.TranslateCaption("Transaction Summary Report")
-            Dim formCultureLanguage As String = CultureInfo.CurrentUICulture.Name
-
-            Dim language As String
-            language = Strings.Left(formCultureLanguage, formCultureLanguage.IndexOf("-"))
-
             Dim reportFileName As String
             reportFileName = "Transaction Summary Report.Rpt"
-            Dim reportArgs As New CrPrintableArgs
             Dim reportParameters As New Object
-            Dim estName As String
-            If formCultureLanguage = "ar" Then
-                estName = GlobalVariables.EstablishmentNameAra
-            Else
-                estName = GlobalVariables.EstablishmentName
-            End If
-            reportArgs.ReportParameters = {reportTitle, "ReportTitle",
-                                           formCultureLanguage, "Language",
-                                           dtpBeginningDate.Value, "BeginningDate",
-                                           dtpEndingDate.Value, "EndingDate",
-                                           estName, "EstablishmentName"}
-            RaiseEvent PrintReport(reportFileName, reportArgs, False)
-
+            reportParameters = {reportTitle, "ReportTitle",
+                                LanguageCode, "Language",
+                                dtpBeginningDate.Value, "BeginningDate",
+                                dtpEndingDate.Value, "EndingDate",
+                                GetEstablishmentName(LanguageCode), "EstablishmentName"}
+            ShowReportToScreen(reportFileName, reportParameters)
         End Sub
 
         Private Sub CButton2_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnCancel.ClickButtonArea

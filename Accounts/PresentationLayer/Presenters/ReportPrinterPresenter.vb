@@ -1,11 +1,14 @@
-﻿Imports AATM.Common.Models
+﻿Imports AATM.Common
+Imports AATM.Common.Models
 Imports AATM.Common.PresentationLayer.Models
+Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Common.ServiceLayer
 Imports AATM.Libraries
 Imports AATM.Libraries.CrystalReportsHelper
 Imports AATM.PresentationLayer.Events
 Imports AATM.PresentationLayer.Forms
 Imports AATM.PresentationLayer.Views
+Imports AATM.ServicesLayer.Services
 
 Namespace PresentationLayer.Presenters
 
@@ -22,9 +25,8 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New()
             MakeServices()
-            _computerName = Environment.MachineName      ' "Pharmacy" '
+            _computerName = Environment.MachineName
             _computerIdNo = _psService.GetRecordFieldWithKeyG(Of Int16)(_computerName, "Computer", "ComputerName", "IdNo")
-            'AddHandler View.PrintReport, AddressOf OnPrintReport
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
         End Sub
@@ -32,20 +34,9 @@ Namespace PresentationLayer.Presenters
         Public Sub New(view As IView)
             MyBase.New(view)
             MakeServices()
-            'AddHandler view.PrintReport, AddressOf OnPrintReport
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
         End Sub
-
-        'Public Sub New(view As IReportPrinterView)
-        '    MyBase.New(view)
-        '    MakeServices()
-        '    AddHandler view.PrintReport, AddressOf OnPrintReport
-        '    Ea = New EventAggregator()
-        '    Ea.SubscribeEvent(Me)
-        'End Sub
-
-
 
         Private Sub MakeServices()
             Service = New CommonService("Report")
@@ -53,10 +44,6 @@ Namespace PresentationLayer.Presenters
             _psService = New CommonService("PrintSetup")
             _prService = New CommonService("Printer")
         End Sub
-
-        'Protected Sub CreateDataSources(tableName As String, control As Control)
-        '    _presenter.CreateDataSource(tableName, control)
-        'End Sub
 
         Private Sub AddToArray(ByRef arr As Object(), newItem As Object, name As String)
             Dim len = arr.Length
@@ -67,7 +54,6 @@ Namespace PresentationLayer.Presenters
 
         Public Sub OnPrintReport(sender As IReportPrinterView) 'reportFileName As String, databaseConnectionName As String, Optional args() As Object = Nothing, Optional copies As Integer = 1, Optional collate As Boolean = False, Optional startPage As Integer = 1, Optional endPage As Integer = 100000)
             Dim args As Object() = sender.Args
-            'AddToArray(args, sender.FileName, "FileName")
             Dim establishmentName = Service.GetRecordField("Establishment", "EstablishmentName")
             AddToArray(args, establishmentName, "EstablishmentName")
             AddToArray(args, sender.FormCultureLanguage, "Language")
@@ -132,13 +118,13 @@ Namespace PresentationLayer.Presenters
             ProcessReport(viewer.ReportPrinter.ReportFileName, databaseConnectionName, False)
         End Sub
 
-        Public Function GetService1()
-            Return _pjService
-        End Function
+        'Public Function GetService1()
+        '    Return _pjService
+        'End Function
 
-        Public Sub OnGetControlDataSourceHandler(ByRef eventType As GetControlDataSource) Implements ISubscriber(Of GetControlDataSource).OnEventHandler
-            SetDataSource(eventType.TableName, eventType.Control)
-        End Sub
+        'Public Sub OnGetControlDataSourceHandler(ByRef eventType As GetControlDataSource) Implements ISubscriber(Of GetControlDataSource).OnEventHandler
+        '    SetDataSource(eventType.TableName, eventType.Control)
+        'End Sub
 
 
         Private Sub PrintReport(ByVal sender As IReportPrinterView)
@@ -151,7 +137,11 @@ Namespace PresentationLayer.Presenters
             End If
             Dim reportTitle As String = sender.ReportTitle
             Dim args As Array = sender.Args
-            ProcessReport(sender.FileName, "", True, args)
+            ShowReportToScreen(sender.FileName, args)
+        End Sub
+
+        Public Sub OnGetCOntrolDataSourceEventHandler(ByRef eventType As GetControlDataSource) Implements ISubscriber(Of GetControlDataSource).OnEventHandler
+            Throw New NotImplementedException()
         End Sub
 
     End Class
