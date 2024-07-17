@@ -1,9 +1,10 @@
 ﻿Imports System.Globalization
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views.Forms.Reports
 
-    Public Class FinancialReport
+    Public Class FinancialReportForm
         Implements IFinancialReportView
 
         Public Property MainTableName As String
@@ -45,13 +46,6 @@ Namespace PresentationLayer.Views.Forms.Reports
             End Get
         End Property
 
-        Public ReadOnly Property Language As String Implements IFinancialReportView.Language
-            Get
-                Dim curCulture = CultureInfo.CurrentCulture
-                Return Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-"))
-            End Get
-        End Property
-
         Public ReadOnly Property Period As String Implements IFinancialReportView.Period
 
         Public Property ReportCode As String Implements IFinancialReportView.ReportCode
@@ -72,10 +66,6 @@ Namespace PresentationLayer.Views.Forms.Reports
 
         Private Sub CButton2_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnCancel.ClickButtonArea
             Close()
-        End Sub
-
-        Private Sub CButton1_ClickButtonArea_1(Sender As Object, e As MouseEventArgs) Handles btnTranslate.ClickButtonArea
-            RunTranslator(VSystemViewIdNo)
         End Sub
 
         Private Sub FinancialReport_Shown() Handles MyBase.Shown
@@ -100,6 +90,17 @@ Namespace PresentationLayer.Views.Forms.Reports
             Text = Title
         End Sub
 
+        Private Sub CFlowLayout1_Paint(sender As Object, e As PaintEventArgs) Handles CFlowLayout1.Paint
+
+        End Sub
+
+        Private Sub lblTitle_Click(sender As Object, e As EventArgs) Handles lblTitle.Click
+
+        End Sub
+
+        Private Sub dtpEndingDate_Load(sender As Object, e As EventArgs) Handles dtpEndingDate.Load
+
+        End Sub
     End Class
 
 End Namespace

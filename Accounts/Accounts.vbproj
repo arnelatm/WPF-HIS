@@ -639,6 +639,7 @@
     <Compile Include="PresentationLayer\Module1.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountEvents.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountsPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\AccountsPresenterNew.vb" />
     <Compile Include="PresentationLayer\Presenters\AppSettingPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ApArEmReportPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\BasicPresenterHelper.vb" />
@@ -899,10 +900,10 @@
     <Compile Include="PresentationLayer\Views\Forms\IGroup\ItemDetailsFinder.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\FinancialReport.designer.vb">
-      <DependentUpon>FinancialReport.vb</DependentUpon>
+    <Compile Include="PresentationLayer\Views\Forms\Reports\FinancialReportForm.designer.vb">
+      <DependentUpon>FinancialReportForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\FinancialReport.vb">
+    <Compile Include="PresentationLayer\Views\Forms\Reports\FinancialReportForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\ExpiryReportByWarehouse.Designer.vb">
@@ -2201,8 +2202,8 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\ProductMovementReport.resx">
       <DependentUpon>ProductMovementReport.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\FinancialReport.resx">
-      <DependentUpon>FinancialReport.vb</DependentUpon>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\FinancialReportForm.resx">
+      <DependentUpon>FinancialReportForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\ExpiryReportByWarehouse.resx">
       <DependentUpon>ExpiryReportByWarehouse.vb</DependentUpon>

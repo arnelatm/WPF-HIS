@@ -8,17 +8,17 @@ Imports AATM.Libraries
 Imports System.Globalization
 Imports System.Windows.Forms
 Imports AATM.Libraries.MessagingLibrary
+Imports System.ComponentModel
 
 Public Class PresenterB(Of TV As IViewNew, TM As New)
 
     Public MyErrorProvider As New ErrorProviderExtended
-    Protected Service As Object
-
     Protected DataFilter As String = Nothing
     Protected DefaultFieldValueService As New DefaultFieldValueService
     Protected OriginalModel
+    Protected Service As Object
+    Protected SortOrderKey As String = "IdNo"
     Protected TranslationDac As Dac
-
     Protected Sub New()
     End Sub
 
@@ -39,8 +39,11 @@ Public Class PresenterB(Of TV As IViewNew, TM As New)
     End Sub
 
     Protected Property TableName As String
+
     Protected Property View As TV
+
     Protected Property ViewDefaultFieldValues As List(Of DefaultFieldValueModel)
+
     Protected Function GetControlSecurityIdNo(searchValue As String, Optional menu As Boolean = False) As String
         Try
             Return Service.GetControlSecurityIdNo(searchValue, menu)
@@ -63,14 +66,63 @@ Public Class PresenterB(Of TV As IViewNew, TM As New)
         Return Service.GetDtRecords(pTableName, fieldNames, filter, sortKey, ascending)
     End Function
 
+    Protected Function GetErrorProvider() As Object
+        Return Invoker.GetField(View, "MyErrorProvider")
+    End Function
+
+    Protected Function GetFieldOnMaxField(searchFieldName As String, tableName As String, returnFieldName As String, Optional filter As String = Nothing) As Object
+        Return Service.GetFieldOnMaxField(searchFieldName, tableName, returnFieldName, filter)
+    End Function
+
     Protected Function GetRecordFieldWithKey(searchValue As String, cTableName As String, searchFieldName As String,
-                                       returnFieldName As String) _
+                                           returnFieldName As String) _
      As String
         Try
             Return Service.GetRecordFieldWithKey(searchValue, cTableName, searchFieldName, returnFieldName)
         Catch ex As Exception
             Return Nothing
         End Try
+    End Function
+
+    Protected Function GetTranslatedField(Of TX)(dataSortOrder As String, ByRef dModel As TX) As String
+        Dim translatedSortOrder As String = dataSortOrder
+        If LicenseManager.UsageMode <> LicenseUsageMode.Designtime Then
+            If GlobalVariables.RightToLeftLayout Then
+                Dim stringLength = dataSortOrder.Length
+                Dim suffix = ""
+                Dim nameOfField As String = dataSortOrder
+                If stringLength > 4 And
+                   (dataSortOrder.Substring(stringLength - 4).ToLower() = " asc" OrElse
+                    dataSortOrder.Substring(stringLength - 4).ToLower() = " des") Then
+                    suffix = dataSortOrder.Substring(stringLength - 4)
+                    nameOfField = dataSortOrder.Substring(0, stringLength - 4)
+                End If
+                If PropertyExists(dModel, nameOfField + "ara") Then
+                    nameOfField += "Ara"
+                    translatedSortOrder = nameOfField + suffix
+                End If
+            End If
+        End If
+        Return translatedSortOrder
+    End Function
+
+    Protected Function GetTranslatedSortOrderKey(Of TX)(sortKey As String, ByRef dModel As TX) As String
+        If LicenseManager.UsageMode <> LicenseUsageMode.Designtime Then
+            If GlobalVariables.RightToLeftLayout Then
+                Dim stringLength = SortOrderKey.Length
+                Dim suffix = ""
+                Dim nameOfField As String = sortKey
+                If stringLength > 4 And
+                   (SortOrderKey.Substring(stringLength - 4).ToLower() = " asc" OrElse
+                    SortOrderKey.Substring(stringLength - 4).ToLower() = " des") Then
+                    suffix = SortOrderKey.Substring(stringLength - 4)
+                    nameOfField = SortOrderKey.Substring(0, stringLength - 4)
+                End If
+                nameOfField = GetTranslatedField(Of TX)(nameOfField, dModel)
+                sortKey = nameOfField + suffix
+            End If
+        End If
+        Return sortKey
     End Function
 
     Protected Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int16, userIdNo As Int16) As ArrayList
@@ -110,16 +162,6 @@ Public Class PresenterB(Of TV As IViewNew, TM As New)
         Return GetDtRecords(dtl.TableName, dtl.LuFields, dtl.Filter, dtl.SortKey)
     End Function
 
-    Protected Sub OnFormLoaded(sender As Object, captionCollection As Collection, AllControls As List(Of Control))
-        If GlobalVariables.TranslationMode Then
-            GetNSaveCaptions(sender, captionCollection, AllControls)
-        End If
-    End Sub
-
-    Protected Function GetErrorProvider() As Object
-        Return Invoker.GetField(View, "MyErrorProvider")
-    End Function
-
     Protected Overridable Sub OnArabicDisplayRequested()
     End Sub
 
@@ -154,9 +196,42 @@ Public Class PresenterB(Of TV As IViewNew, TM As New)
             translatorForm.ShowDialog()
         End Using
     End Sub
+
+    Protected Sub OnFormLoaded(sender As Object, captionCollection As Collection, AllControls As List(Of Control))
+        If GlobalVariables.TranslationMode Then
+            GetNSaveCaptions(sender, captionCollection, AllControls)
+        End If
+    End Sub
+
     Protected Overridable Sub OnOrigLanguageDisplayRequested()
     End Sub
 
+    Protected Function UserHasAccess(securityKey As String, Optional inform As Boolean = False) As Boolean
+        Dim hasAccess As Boolean
+        If UserIsASuperAdmin() Then
+            hasAccess = True
+        Else
+            Dim controlSecurityValues As ArrayList
+            Dim controlSecurityObjectIdNo As Int32
+            controlSecurityObjectIdNo = GetControlSecurityIdNo(securityKey)
+            If controlSecurityObjectIdNo = 0 Then
+                hasAccess = True
+            Else
+                controlSecurityValues = GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo, GlobalVariables.UserIdNo)
+                If controlSecurityValues.Count > 0 Then
+                    hasAccess = controlSecurityValues(1)
+                Else
+                    hasAccess = False
+                End If
+            End If
+            If inform Then
+                Dim securityKeyMessage = Messaging.TranslateCaption(securityKey)
+                Dim message = Messaging.GetParametrizedMessage(True, "MsgNoAccessToSecurity", {"securityKey", securityKeyMessage})
+                Messaging.Show(message)
+            End If
+        End If
+        Return hasAccess
+    End Function
     Private Sub ComposeLookupProperties(dtl As DataTableLookupSpec)
         Dim RightToLeftFormat = GlobalFunctions.IsRightToLeft(CultureInfo.CurrentCulture.ToString())
         If dtl.LuFields Is Nothing Then
@@ -290,5 +365,4 @@ Public Class PresenterB(Of TV As IViewNew, TM As New)
         End If
         Return retValue
     End Function
-
 End Class

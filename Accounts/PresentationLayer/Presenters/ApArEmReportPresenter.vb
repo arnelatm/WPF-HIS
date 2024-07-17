@@ -74,8 +74,8 @@ Public Class ApArEmReportPresenter(Of TM As New)
     End Sub
 
     Private Sub OnPrintButtonClicked()
-        Dim curCulture = CultureInfo.CurrentCulture
-        CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
+        'Dim curCulture = CultureInfo.CurrentCulture
+        'CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
         Dim beginningDate As Date?
         Dim endingDate As Date?
         Dim estName As String
@@ -101,7 +101,7 @@ Public Class ApArEmReportPresenter(Of TM As New)
             Dim bDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(beginningDate, CultureInfo.CreateSpecificCulture("en-GB"))
             Dim eDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(endingDate, CultureInfo.CreateSpecificCulture("en-GB"))
             Dim reportParameters As New Object
-            reportTitle = Libraries.MessagingLibrary.Messaging.SelectReportName(reportName, beginningDate, endingDate, curCulture)
+            reportTitle = Libraries.MessagingLibrary.Messaging.SelectReportName(reportName, beginningDate, endingDate, View.FormCulture)
             Select Case View.ReportCode
                 Case "ApStatement"
                     reportParameters = {beginningDate.Value, "BeginningDate",
@@ -139,7 +139,6 @@ Public Class ApArEmReportPresenter(Of TM As New)
             End Select
             ShowReportToScreen(_reportFileName, reportParameters)
         End If
-        CultureInfo.CurrentCulture = curCulture
 
     End Sub
 

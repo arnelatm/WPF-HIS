@@ -1,11 +1,10 @@
 ﻿Imports AATM.PresentationLayer.Views
 
 Public Interface IFinancialReportView
-    Inherits IView
+    Inherits IViewNew
 
     ReadOnly Property BeginningDate As Date?
     ReadOnly Property EndingDate As Date?
-    ReadOnly Property Language As String
     ReadOnly Property Period As String
     Property ZeroBalanceChecked As Boolean
     Property WithZeroBalanceQuery As Boolean
@@ -14,3 +13,4 @@ Public Interface IFinancialReportView
     Event PrintButtonClicked()
     Event ReportLoaded()
 End Interface
+

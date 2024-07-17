@@ -1,37 +1,36 @@
-﻿Imports System.Windows.Navigation
-Imports AATM.Accounts.BusinessLayer
+﻿Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Presenters
-Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
+Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Presenters
 
-    Public Class AccountsPresenterNew(Of TV As AATM.PresentationLayer.Views.IView, TM As New)
+    Public Class AccountsPresenterNew(Of TV As IViewNew, TM As New)
         Inherits CommonPresenterNew(Of TV, TM)
 
         Public Sub New()
             MyBase.New()
         End Sub
 
-        Public Sub New(itemView As AATM.PresentationLayer.Views.IView)
+        Public Sub New(itemView As AATM.PresentationLayer.Views.IViewNew)
             MyBase.New(itemView)
         End Sub
 
         Public Sub CreateSpecialAccountDataSourceT(fieldName As String, specialAccountArray As String())
             Dim filter As String
             filter = Accounts.AccountHelpers.CreateSpecialAccountFilterKey(specialAccountArray)
-            MakeControlDataSources({New Object() {"Account", fieldName, Nothing, filter}})
+            'MakeControlDataSources({New Object() {"Account", fieldName, Nothing, filter}})
         End Sub
 
         Public Sub CreateSpecialAccountDataSource(fieldName As String, specialAccountArray As String())
             Dim filter As String
             filter = Accounts.AccountHelpers.CreateSpecialAccountFilterKey(specialAccountArray)
-            MakeControlDataSources({New Object() {"Account", fieldName, Nothing, filter}})
+            'MakeControlDataSources({New Object() {"Account", fieldName, Nothing, filter}})
         End Sub
 
         Public Function GetDepositTypeModel() As List(Of DepositTypeModel)

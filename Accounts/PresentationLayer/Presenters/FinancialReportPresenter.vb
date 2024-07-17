@@ -7,7 +7,7 @@ Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
 Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class FinancialReportPresenter(Of TM As New)
-    Inherits AccountsPresenter(Of IFinancialReportView, TM)
+    Inherits AccountsPresenterNew(Of IFinancialReportView, TM)
 
     Private _reportFileName As String
     Private _reportName As String
@@ -16,7 +16,6 @@ Public Class FinancialReportPresenter(Of TM As New)
     Public Sub New(view As IFinancialReportView)
         MyBase.New(view)
         TableName = "Account"
-        WithTreeView = False
         Service = New AccountsService("Account")
         AddHandler view.PrintButtonClicked, AddressOf OnPrintButtonClicked
         AddHandler view.ReportLoaded, AddressOf OnReportLoaded
