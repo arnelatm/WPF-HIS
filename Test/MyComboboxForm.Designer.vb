@@ -31,6 +31,7 @@ Partial Class MyComboboxForm
         '
         'ComboBox1
         '
+        Me.ComboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.ComboBox1.FormattingEnabled = True
         Me.ComboBox1.Location = New System.Drawing.Point(0, 0)
         Me.ComboBox1.Name = "ComboBox1"
