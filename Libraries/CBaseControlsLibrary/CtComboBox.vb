@@ -494,6 +494,7 @@ Public Class CtComboBox
         BorderColor = Color.DimGray
         ValueMember = "IdNo"
         DisplayMember = "Name"
+        AutoCompleteSource = AutoCompleteSource.ListItems
         _defaultMaxDropDownItems = MaxDropDownItems
         _defaultDropdownStyle = DropDownStyle
         _defaultDropDownHeight = DropDownHeight

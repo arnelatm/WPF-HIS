@@ -88,7 +88,6 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.cboEmployeeIdNo.FormattingEnabled = True
             Me.cboEmployeeIdNo.HideWhenNotEditingOrAdding = False
             Me.cboEmployeeIdNo.IgnoreCase = False
-            Me.cboEmployeeIdNo.IntegralHeight = False
             Me.cboEmployeeIdNo.LimitToList = False
             Me.cboEmployeeIdNo.LinkedLabel = Nothing
             Me.cboEmployeeIdNo.Location = New System.Drawing.Point(153, 54)
@@ -571,7 +570,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         End Sub
 
         Friend WithEvents lblEmployeeCode As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboEmployeeIdNo As Libraries.CBaseControlsLibrary.CtCombobox
+        Friend WithEvents cboEmployeeIdNo As Libraries.CBaseControlsLibrary.CtComboBox
         Friend WithEvents CFlowLayout1 As Libraries.CBaseControlsLibrary.CFlowLayout
         Friend WithEvents CLabel2 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel

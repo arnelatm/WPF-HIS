@@ -504,6 +504,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="MyCombobox.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="MyDgvComboboxCell.vb" />
     <Compile Include="NullableDateTimeDropDown.designer.vb">
       <DependentUpon>NullableDateTimeDropDown.vb</DependentUpon>
@@ -678,6 +681,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyCombobox.resx">
+      <DependentUpon>MyCombobox.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NullableDateTimeDropDown.resx">
       <DependentUpon>NullableDateTimeDropDown.vb</DependentUpon>
