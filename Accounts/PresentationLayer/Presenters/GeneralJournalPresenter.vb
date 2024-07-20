@@ -1,12 +1,12 @@
-﻿Imports System.Globalization
-Imports AATM.Accounts.DataLayer.AdoNet
+﻿Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
-Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
+Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
+Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Presenters
 
@@ -80,25 +80,21 @@ Namespace PresentationLayer.Presenters
             'New Object() {"Contact_View", "EmployeeByCode", "IdNo,ContactName,ContactCode", "PayeeType = 'E'", Nothing}})
         End Sub
 
-
-        Public Overrides Sub GoPrintRecord()
+        Public Overrides Sub GoPrintRecordWithArgs(Optional formCulture As Object = Nothing)
             Dim totalCreditAmount As String
             Dim currencies As New List(Of CurrencyInfo)()
-            Dim curCulture = CultureInfo.CurrentCulture
-            CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
-            Dim language As String
-            language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
-
+            Dim curCulture = formCulture
+            Dim languageCode As String = GetCultureLanguageCode(formCulture)
             currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
-            If language = "ar" Then
+            If languageCode = "ar" Then
                 totalCreditAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
             Else
                 totalCreditAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToEnglish()
             End If
-
-            Dim cForm As New ReportFormOld("General Journal.Rpt", View.IdNo, "GeneralJournalIdNo", totalCreditAmount, "TotalLineAmountInWords", language, "Language")
-
-            cForm.Show()
+            ShowReportToScreen("General Journal.Rpt",
+                               {View.IdNo, "GeneralJournalIdNo",
+                               totalCreditAmount, "TotalLineAmountInWords",
+                               languageCode, "Language"})
         End Sub
 
         Private Sub OnSuccessfulDelete(ByVal idNo As Int32) Handles MyBase.SuccessfulDelete
@@ -107,6 +103,7 @@ Namespace PresentationLayer.Presenters
                 _gjJournalItemService.DelUpdateTvp(DtUpdateTable, idNo)
             End If
         End Sub
+
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If Not CancelSave Then

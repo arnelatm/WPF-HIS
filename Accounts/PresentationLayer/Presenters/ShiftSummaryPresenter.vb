@@ -1,5 +1,4 @@
 ﻿Imports System.Globalization
-Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Presenters
@@ -48,8 +47,13 @@ Namespace PresentationLayer.Presenters
                 establishmentName = GetRecordField("Establishment", "EstablishmentNameAra")
             End If
 
-            Dim cForm As New ReportFormOld("Shift Summary Report.Rpt", View.IdNo.ToString(), "TransactionIdNo", reportTitle, "ReportTitle", language, "Language", establishmentName, "EstablishmentName", reportTitle, "ReportTitle")
-            cForm.Show()
+            ShowReportToScreen("Shift Summary Report.Rpt",
+                               {View.IdNo.ToString(), "TransactionIdNo",
+                               reportTitle, "ReportTitle",
+                               language, "Language",
+                               establishmentName, "EstablishmentName"}
+                               )
+
         End Sub
 
         Public Overrides Sub EntryFormLoaded()

@@ -1,6 +1,4 @@
-﻿Imports System.Globalization
-Imports AATM.Libraries
-Imports AATM.Libraries.AatmInterfaces
+﻿Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 
 Public Enum ButtonClicked

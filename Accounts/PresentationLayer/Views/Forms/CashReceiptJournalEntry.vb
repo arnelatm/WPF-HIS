@@ -31,20 +31,24 @@ Namespace PresentationLayer.Views.Forms
             SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
         End Sub
 
-        Public Event DebitAccountIdNoChanged(bs As BindingSource) Implements ICashReceiptJournalView.DebitAccountIdNoChanged
         Public Event AddCustomerOpenInvoices(bs As BindingSource) Implements ICashReceiptJournalView.AddCustomerOpenInvoices
+
         Public Event AutoApplyAmountRequested(bsCsrOiItems As BindingSource) Implements ICashReceiptJournalView.AutoApplyAmountRequested
+
         Public Event ContactidNoChanged(bs As BindingSource) Implements ICashReceiptJournalView.ContactIdNoChanged
+
         Public Event CreditAmountChanged(sender As Object, e As DataGridViewCellEventArgs) Implements ICashReceiptJournalView.CreditAmountChanged
+
+        Public Event DebitAccountIdNoChanged(bs As BindingSource) Implements ICashReceiptJournalView.DebitAccountIdNoChanged
         Public Event DebitAmountChanged(sender As Object, e As DataGridViewCellEventArgs) Implements ICashReceiptJournalView.DebitAmountChanged
+        Public Event FirstLineUpdateNeeded() Implements ICashReceiptJournalView.FirstLineUpdateNeeded
+
         Public Event JiAccountIdNoChanged(sender As Object, e As DataGridViewCellEventArgs) Implements ICashReceiptJournalView.JiAccountIdNoChanged
         'Public Event FirstLineUpdateNeeded() Implements ICashReceiptJournalView.FirstLineUpdateNeeded
         Public Event OpenInvoiceDataRequested(bs As BindingSource) Implements ICashReceiptJournalView.OpenInvoiceDataRequested
         Public Event ReceiptAmountChanged(bsJournaltem As BindingSource, bsCsrJournalItem As BindingSource) Implements ICashReceiptJournalView.ReceiptAmountChanged
         Public Event ReceiptTypeChanged(paymentType As String, bsJournalItem As BindingSource, bsCsrOiItems As BindingSource) Implements ICashReceiptJournalView.ReceiptTypeChanged
         Public Event UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Implements ICashReceiptJournalView.UserDeletedRow
-        Public Event FirstLineUpdateNeeded() Implements ICashReceiptJournalView.FirstLineUpdateNeeded
-
 #Region "Properties"
 
         Public Property AccountIdNo As Int16? Implements ICashReceiptJournalView.AccountIdNo
@@ -223,6 +227,8 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property OpenInvoiceMode As Boolean Implements ICashReceiptJournalView.OpenInvoiceMode
+
         Public Property ORNumber As String Implements ICashReceiptJournalView.OrNumber
             Get
                 Return txtORNumber.Text
@@ -334,9 +340,6 @@ Namespace PresentationLayer.Views.Forms
                 txtVatNumber.Text = Value
             End Set
         End Property
-
-        Public Property OpenInvoiceMode As Boolean Implements ICashReceiptJournalView.OpenInvoiceMode
-
 #End Region 'Properties
 
 #Region "Subs"
@@ -344,6 +347,10 @@ Namespace PresentationLayer.Views.Forms
         Public Overloads Sub Dispose()
             Close()
         End Sub
+
+        Public Overrides Function GetPrintParameters() As Object
+            Return Me.FormCulture
+        End Function
 
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
@@ -472,6 +479,7 @@ Namespace PresentationLayer.Views.Forms
             BindCsrOiItem()
             BindJournalItem()
         End Sub
+
         Private Sub cboContactIdNo_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cboContactIdNo.SelectionChangeCommitted
             RaiseEvent ContactidNoChanged(bsCsrOiItems)
         End Sub
@@ -499,6 +507,10 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
+        Private Sub SalesJournalEntry_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+            btnPrint.Visible = False
+            btnPrintWithArgs.Visible = True
+        End Sub
         Private Sub ShowJournalItemDataGrid()
             'UpdateFirstLine()
             UpdateTotals()

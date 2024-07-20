@@ -319,6 +319,17 @@ Namespace PresentationLayer.Views.Forms
             _slFooter.SetText("dgvDepositTypeIdNo", "Totals")
         End Sub
 
+
+        Private Sub SalesJournalEntry_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+            btnPrint.Visible = False
+            btnPrintWithArgs.Visible = True
+        End Sub
+
+        Public Overrides Function GetPrintParameters() As Object
+            Return Me.FormCulture
+        End Function
+
+
         Public Overloads Sub Dispose()
             Close()
         End Sub

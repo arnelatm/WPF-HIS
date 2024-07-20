@@ -2,7 +2,6 @@
 Imports System.Globalization
 Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Views
-Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Presenters
@@ -15,7 +14,6 @@ Namespace PresentationLayer.Presenters
 
         Protected DtPayElementInsertTable As New DataTable
         Protected DtPayElementUpdateTable As New DataTable
-        'Private ReadOnly _payrollPayElementModel As New ModelAccounts("PayrollPayElement")
 
         Public Sub New(itemView As IPayrollDetailView)
             MyBase.New(itemView)
@@ -49,7 +47,7 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
-        
+
         Protected Overrides Sub CreateDataSources()
             'RaiseEvent UpdateDataFilterEvent(PayrollIdNo)
             MakeVarDataSources({New Object() {"PayElement", "PayEarningsByCode", Nothing, "PayElementKind = '" & EnumToCode(PayElementKindSelection.Earning) & "' and Summary = 0"},
@@ -106,21 +104,16 @@ Namespace PresentationLayer.Presenters
             Return retVal
         End Function
 
-        Public Overrides Sub GoPrintRecord()
-            Dim curCulture = CultureInfo.CurrentCulture
-            CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
+        Public Overrides Sub GoPrintRecordWithArgs(Optional formCulture As Object = Nothing)
             Dim reportName As String = "Payroll Report.Rpt"
             Dim reportTitle As String = Service.GetField(Of String, Int32)(View.PayrollIdNo, "Payroll", "IdNo", "PayrollName")
-            Dim language As String
-            Dim estName As String
-            language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
-            If language = "ar" Then
-                estName = GlobalVariables.EstablishmentNameAra
-            Else
-                estName = GlobalVariables.EstablishmentName
-            End If
-            Dim cForm As New ReportFormOld(reportName, reportTitle, "ReportTitle", language, "Language", estName, "EstablishmentName", View.PayrollIdNo, "PayrollIdNo")
-            cForm.Show()
+            Dim languageCode As String = GetCultureLanguageCode(formCulture)
+            Dim estName As String = GetEstablishmentName(languageCode)
+            ShowReportToScreen(reportName,
+                               {reportTitle, "ReportTitle",
+                               languageCode, "Language",
+                               estName, "EstablishmentName",
+                               View.PayrollIdNo, "PayrollIdNo"})
         End Sub
 
     End Class

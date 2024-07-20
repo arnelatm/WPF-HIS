@@ -270,21 +270,20 @@ Namespace PresentationLayer.Presenters
             Next
         End Sub
 
-        Public Overrides Sub GoPrintRecord()
+        Public Overrides Sub GoPrintRecordWithArgs(Optional formCulture As Object = Nothing)
             Dim totalCreditAmount As String
             Dim currencies As New List(Of CurrencyInfo)()
-            Dim curCulture = CultureInfo.CurrentCulture
-            CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
-            Dim language As String
-            language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-"))
+            Dim languageCode As String = GetCultureLanguageCode(formCulture)
             currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
-            If language = "ar" Then
+            If languageCode = "ar" Then
                 totalCreditAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
             Else
                 totalCreditAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToEnglish()
             End If
-            Dim cForm As New ReportFormOld("Sales Journal.Rpt", View.IdNo, "SalesJournalIdNo", totalCreditAmount, "TotalLineAmountInWords", language, "Language")
-            cForm.Show()
+            ShowReportToScreen("Sales Journal.Rpt",
+                               {View.IdNo, "SalesJournalIdNo",
+                                totalCreditAmount, "TotalLineAmountInWords",
+                               languageCode, "Language"})
         End Sub
 
         Private Sub OnSuccessfulDelete(ByVal idNo As Int32) Handles MyBase.SuccessfulDelete

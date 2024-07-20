@@ -223,14 +223,9 @@ Namespace PresentationLayer.Views.Forms
         Private Sub btnPrintCheck_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnPrintCheck.ClickButtonArea
             Dim checkAmountInWords As String
             Dim currencies As New List(Of CurrencyInfo)()
-            Dim curCulture = CultureInfo.CurrentCulture
-            CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
-            Dim language As String
-            Dim reportName As String
             Dim payee As String
-            language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
             currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
-            If language = "ar" Then
+            If LanguageCode = "ar" Then
                 checkAmountInWords = New ToWord(txtAmount.Text, currencies(0)).ConvertToArabic()
             Else
                 checkAmountInWords = New ToWord(txtAmount.Text, currencies(0)).ConvertToEnglish()
@@ -241,9 +236,13 @@ Namespace PresentationLayer.Views.Forms
             Else
                 payee = Strings.Left(cboPayeeIdNo.Text, cboPayeeIdNo.Text.IndexOf("|", StringComparison.Ordinal))
             End If
-            reportName = "Check Printing.Rpt"
-            Dim cForm As New ReportFormOld(reportName, checkAmountInWords, "CheckAmountInWords", payee, "PayeeName", dtpCheckDate.Value, "CheckDate", Convert.ToDecimal(txtAmount.Text), "CheckAmount", txtNotes.Text, "Notes", language, "Language")
-            cForm.Show()
+            ShowReportToScreen("Check Printing.Rpt",
+                               {checkAmountInWords, "CheckAmountInWords",
+                                payee, "PayeeName",
+                               dtpCheckDate.Value, "CheckDate",
+                               Convert.ToDecimal(txtAmount.Text), "CheckAmount",
+                               txtNotes.Text, "Notes",
+                               LanguageCode, "Language"})
         End Sub
 
         Private Sub ShowPayee()

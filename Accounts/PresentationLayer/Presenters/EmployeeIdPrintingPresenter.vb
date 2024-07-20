@@ -53,9 +53,7 @@ Namespace PresentationLayer.Presenters
                 End If
             Next
             Dim retVal = Service.ExecuteTvpSp("InsertEmployeeIdPrintingTvp", dtIdPrinting)
-            Dim cForm
-            cForm = New ReportFormOld("HR Id Printing.Rpt", transactionNumber, "TransactionNumber")
-            cForm.Show()
+            ShowReportToScreen("HR Id Printing.Rpt", {transactionNumber, "TransactionNumber"})
         End Sub
 
         Private Sub OnClearAllEmployeeId(ByVal bsData As BindingSource, clear As Boolean)

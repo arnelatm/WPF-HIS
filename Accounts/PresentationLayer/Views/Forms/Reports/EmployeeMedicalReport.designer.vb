@@ -25,7 +25,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EmployeeMedicalReport))
         Me.lblEmployeeCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblReportDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -80,7 +80,6 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.cboEmployeeIdNo.EndFindValue = Nothing
             Me.cboEmployeeIdNo.FieldDescription = Nothing
             Me.cboEmployeeIdNo.FieldName = Nothing
-            Me.cboEmployeeIdNo.FilterRule = Nothing
             Me.cboEmployeeIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboEmployeeIdNo.FindEnabled = False
             Me.cboEmployeeIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -98,11 +97,9 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.cboEmployeeIdNo.OriginalList = Nothing
             Me.cboEmployeeIdNo.OverrideDropDownStyleList = False
             Me.cboEmployeeIdNo.PreviousSearchTerm = Nothing
-            Me.cboEmployeeIdNo.PropertySelector = Nothing
             Me.cboEmployeeIdNo.Size = New System.Drawing.Size(520, 28)
             Me.cboEmployeeIdNo.SuggestBoxHeight = 200
             Me.cboEmployeeIdNo.SuggestCharCount = 0
-            Me.cboEmployeeIdNo.SuggestListOrderRule = Nothing
             Me.cboEmployeeIdNo.TabIndex = 25
             Me.cboEmployeeIdNo.TextToSearch = Nothing
             Me.cboEmployeeIdNo.Translatable = False
@@ -570,7 +567,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         End Sub
 
         Friend WithEvents lblEmployeeCode As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboEmployeeIdNo As Libraries.CBaseControlsLibrary.CtComboBox
+        Friend WithEvents cboEmployeeIdNo As Libraries.CBaseControlsLibrary.AtmComboBox
         Friend WithEvents CFlowLayout1 As Libraries.CBaseControlsLibrary.CFlowLayout
         Friend WithEvents CLabel2 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel

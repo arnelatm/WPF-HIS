@@ -1,11 +1,8 @@
-﻿Imports System.ComponentModel
-Imports System.Globalization
-Imports AATM.Accounts.PresentationLayer.Presenters
+﻿Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Views.Forms
 
@@ -40,9 +37,6 @@ Namespace PresentationLayer.Views.Forms
 
 #Region "Fields"
 
-        Public Property RevCostCentersByCode As Object Implements IErJournalView.RevCostCentersByCode
-        Public Property AccountsByCode As Object Implements IErJournalView.AccountsByCode
-
         Public Property AccountIdNo As Int16? Implements IErJournalView.AccountIdNo
             Get
                 Return cboAccountIdNo.GetNullableValue(Of Int16)
@@ -52,6 +46,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property AccountsByCode As Object Implements IErJournalView.AccountsByCode
         Public Property Amount As Decimal Implements IErJournalView.Amount
             Get
                 Return Convert.ToDecimal(NumParser(Of Decimal)(txtAmount.Text), _nfi)
@@ -61,21 +56,21 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Cancelled As Boolean Implements IErJournalView.Cancelled
-            Get
-                Return chkCancelled.Checked
-            End Get
-            Set
-                chkCancelled.Checked = Value
-            End Set
-        End Property
-
         Public Property Approved As Boolean Implements IErJournalView.Approved
             Get
                 Return chkApproved.Checked
             End Get
             Set
                 chkApproved.Checked = Value
+            End Set
+        End Property
+
+        Public Property Cancelled As Boolean Implements IErJournalView.Cancelled
+            Get
+                Return chkCancelled.Checked
+            End Get
+            Set
+                chkCancelled.Checked = Value
             End Set
         End Property
 
@@ -151,6 +146,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property RevCostCentersByCode As Object Implements IErJournalView.RevCostCentersByCode
         Public ReadOnly Property TotalCredits As Decimal Implements IErJournalView.TotalCredits
             Get
                 Return NumParser(Of Decimal)(txtTotalCredits.Text)
@@ -187,6 +183,10 @@ Namespace PresentationLayer.Views.Forms
 
 #End Region
 
+        Public Overrides Function GetPrintParameters() As Object
+            Return Me.FormCulture
+        End Function
+
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
         {
@@ -208,22 +208,6 @@ Namespace PresentationLayer.Views.Forms
 
         Protected Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
             UpdateTotals()
-        End Sub
-
-        Private Sub ErJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            If GlobalVariables.RightToLeftLayout Then
-                txtJournalCode.Text = Presenter.GetLocalizedPrefix("ER")
-            Else
-                txtJournalCode.Text = "ER"
-            End If
-            _footer = New DgvFooter(DataGridViewJournalItems) With {
-                .AutoCalc = True
-            }
-            _footer.ColumnToSum("dgvDebit") = True
-            _footer.ColumnToSum("dgvCredit") = True
-            _footer.SetAlignment("dgvDebit", ContentAlignment.MiddleRight)
-            _footer.SetAlignment("dgvCredit", ContentAlignment.MiddleRight)
-            _footer.SetText("DgvAccountIdNo", "Totals ->")
         End Sub
 
         Private Sub BindJournalItem()
@@ -252,6 +236,27 @@ Namespace PresentationLayer.Views.Forms
             ResumeLayout()
         End Sub
 
+        Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewJournalItems.UserDeletedRow
+            UpdateTotals()
+        End Sub
+
+        Private Sub ErJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            If GlobalVariables.RightToLeftLayout Then
+                txtJournalCode.Text = Presenter.GetLocalizedPrefix("ER")
+            Else
+                txtJournalCode.Text = "ER"
+            End If
+            _footer = New DgvFooter(DataGridViewJournalItems) With {
+                .AutoCalc = True
+            }
+            _footer.ColumnToSum("dgvDebit") = True
+            _footer.ColumnToSum("dgvCredit") = True
+            _footer.SetAlignment("dgvDebit", ContentAlignment.MiddleRight)
+            _footer.SetAlignment("dgvCredit", ContentAlignment.MiddleRight)
+            _footer.SetText("DgvAccountIdNo", "Totals ->")
+        End Sub
+
+
         'Private Sub CboAccountIdNo_Validating(sender As Object, e As CancelEventArgs) Handles cboAccountIdNo.Validating
         '    If PaymentOrDiscountMade() Then
         '        ' revert to previous value
@@ -259,17 +264,17 @@ Namespace PresentationLayer.Views.Forms
         '    End If
         'End Sub
 
+        Private Sub ErJournalEntry_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+            btnPrint.Visible = False
+            btnPrintWithArgs.Visible = True
+        End Sub
+
         'Private Sub CboEmployeeIdNo_Validating(sender As Object, e As CancelEventArgs) Handles cboEmployeeIdNo.Validating
         '    If PaymentOrDiscountMade() Then
         '        ' revert to previous value
         '        cboEmployeeIdNo.RevertValue()
         '    End If
         'End Sub
-
-        Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewJournalItems.UserDeletedRow
-            UpdateTotals()
-        End Sub
-
         Private Sub NeedUpdateFirstLine(sender As Object, e As EventArgs) Handles cboAccountIdNo.Validated, cboTransactionType.Validated, txtAmount.Validated
             Presenter.UpdateFirstLine()
             UpdateTotals()
@@ -320,7 +325,6 @@ Namespace PresentationLayer.Views.Forms
                 _footer.CalculateTotals()
             End If
         End Sub
-
         Private Sub UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) _
         Handles DataGridViewJournalItems.UserDeletingRow
             Dim erJournalRow As DataGridViewRow = DataGridViewJournalItems.Rows(0)

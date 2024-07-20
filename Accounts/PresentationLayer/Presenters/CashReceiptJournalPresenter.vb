@@ -262,35 +262,29 @@ Namespace PresentationLayer.Presenters
 
 
 
-        Public Overrides Sub GoPrintRecord()
-            Dim transactionAmount As String
+        Public Overrides Sub GoPrintRecordWithArgs(Optional formCulture As Object = Nothing)
             Dim totalCreditAmount As String
             Dim currencies As New List(Of CurrencyInfo)()
-            Dim curCulture = CultureInfo.CurrentCulture
-            CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
-            Dim language As String
-            language = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
+            Dim languageCode As String = GetCultureLanguageCode(formCulture)
             currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
-            If language = "ar" Then
+            Dim transactionAmount As String
+            Dim curCulture = CultureInfo.CurrentCulture
+            currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
+            If languageCode = "ar" Then
                 transactionAmount = New ToWord(View.Amount, currencies(0)).ConvertToArabic()
             Else
                 transactionAmount = New ToWord(View.Amount, currencies(0)).ConvertToEnglish()
             End If
-            'View.TotalCredits = 0
-            'For Each item In View.JournalItems
-            '    View.TotalCredits = View.TotalCredits + item.Credit
-            'Next
-            If language = "ar" Then
+            If languageCode = "ar" Then
                 totalCreditAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
             Else
                 totalCreditAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToEnglish()
             End If
-            Dim _
-                cForm As _
-                    New ReportFormOld(ReportName, View.IdNo, "CashReceiptJournalIdNo", transactionAmount,
-                                   "CreditAmountInWords", totalCreditAmount, "TotalLineAmountInWords", language,
-                                   "Language")
-            cForm.Show()
+            ShowReportToScreen(ReportName,
+                               {View.IdNo, "CashReceiptJournalIdNo",
+                               transactionAmount, "CreditAmountInWords",
+                               totalCreditAmount, "TotalLineAmountInWords",
+                               languageCode, "Language"})
         End Sub
 
         Private Sub MakeJournalItem()

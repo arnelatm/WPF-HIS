@@ -252,26 +252,24 @@ Namespace PresentationLayer.Presenters
             actualReconItems.Add(item)
         End Sub
 
-        Public Overrides Sub GoPrintRecord()
+        Public Overrides Sub GoPrintRecordWithArgs(Optional formCulture As Object = Nothing)
             Dim reportTitle As String
-            Dim cForm
             Dim previousDate As Date
             Dim beginningDate As Date
+            Dim languageCode As String = GetCultureLanguageCode(formCulture)
             beginningDate = GregorianDateSerial(GregorianYear(View.ReconciliationDate), GregorianMonth(View.ReconciliationDate), 1)
             previousDate = DateAdd(DateInterval.Day, -1, beginningDate)
-            reportTitle = Messaging.TranslateCaption("Account Reconciliation")
-            Dim curCulture = CultureInfo.CurrentCulture
-            CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
-            Dim language As String
-            Dim estName As String
-            language = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
-            If language = "ar" Then
-                estName = EstablishmentNameAra
-            Else
-                estName = EstablishmentName
-            End If
-            cForm = New ReportFormOld("Account Reconciliation Report.Rpt", language, "Language", estName, "EstablishmentName", reportTitle, "ReportTitle", View.IdNo, "ReconciliationNumber", View.AccountIdNo, "AccountIdNo", previousDate, "PreviousDate", beginningDate, "BeginningDate", View.ReconciliationDate, "EndingDate")
-            cForm.Show()
+            reportTitle = Messaging.TranslateCaption("Account Reconciliation", formCulture.Name)
+            Dim estName As String = GetEstablishmentName(languageCode)
+            ShowReportToScreen("Account Reconciliation Report.Rpt",
+                               {languageCode, "Language",
+                               estName, "EstablishmentName",
+                               reportTitle, "ReportTitle",
+                               View.IdNo, "ReconciliationNumber",
+                               View.AccountIdNo, "AccountIdNo",
+                               previousDate, "PreviousDate",
+                               beginningDate, "BeginningDate",
+                               View.ReconciliationDate, "EndingDate"})
         End Sub
 
         Public Sub ProcessReconciliationRequest(sender As Object, all As Boolean, clear As Boolean, dataBindingSource As BindingSource)

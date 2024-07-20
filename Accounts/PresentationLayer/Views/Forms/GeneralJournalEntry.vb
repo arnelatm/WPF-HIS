@@ -46,6 +46,15 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
+        Private Sub GeneralJournalEntry_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+            btnPrint.Visible = False
+            btnPrintWithArgs.Visible = True
+        End Sub
+
+        Public Overrides Function GetPrintParameters() As Object
+            Return Me.FormCulture
+        End Function
+
 
 #Region "Fields"
 

@@ -581,6 +581,15 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewReconciliationItems.Focus()
         End Sub
 
+        Public Overrides Function GetPrintParameters() As Object
+            Return Me.FormCulture
+        End Function
+
+        Private Sub ApJournalEntry_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+            btnPrint.Visible = False
+            btnPrintWithArgs.Visible = True
+        End Sub
+
     End Class
 
 End Namespace

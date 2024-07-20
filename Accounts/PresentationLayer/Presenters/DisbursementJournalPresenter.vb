@@ -1,7 +1,6 @@
 ﻿Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
-Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries
@@ -376,7 +375,7 @@ Namespace PresentationLayer.Presenters
             Dim transactionAmountInWords As String
             Dim totalLineAmountInWords As String
             Dim currencies As New List(Of CurrencyInfo)()
-            Dim languageCode = Left(DirectCast(FormCulture, CultureInfo).Name, 2)
+            Dim languageCode = GetCultureLanguageCode(FormCulture)
             Dim reportArgs As New CrPrintableArgs
             currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
             If languageCode = "ar" Then
@@ -419,9 +418,6 @@ Namespace PresentationLayer.Presenters
                                            View.Notes, "Notes"
                                            }
             PrintReportToScreen(reportFileName, "ISPDATA", curCulture, reportArgs)
-            'Dim cForm As New ReportFormOld(reportFileName, checkAmountInWords, "CheckAmountInWords", GetPayeeName(View.PayeeIdNo), "PayeeName", View.CheckDate, "CheckDate", Convert.ToDecimal(View.Amount), "CheckAmount", language, "Language", View.Notes, "Notes")
-            'cForm.Show()
-
 
         End Sub
 
@@ -444,9 +440,6 @@ Namespace PresentationLayer.Presenters
                                            language, "Language"
                                           }
             PrintReportToScreen("Petty Cash Replenishment Report.Rpt", "ISPDATA", curCulture, reportArgs)
-
-            'Dim cForm As New ReportFormOld("Petty Cash Replenishment Report.Rpt", transactionAmountInWords, "TransactionAmountInWords", View.IdNo, "JournalIdNo", language, "Language")
-            'cForm.Show()
         End Sub
 
 
