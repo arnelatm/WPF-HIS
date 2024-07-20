@@ -412,11 +412,13 @@ Public Class AtmComboBox
                 SendKeys.SendWait("{BACKSPACE}")
             ElseIf _suggestBindingSource.Count = 1 Then
                 Dim itemName As String = GetCurrentItemName()
-                If Text = itemName.Trim().Length Then
-                    [Select](0, Text.Length)
+                If Text.Length() = itemName.Trim().Length() Then
+                    [Select](Text.Length, Text.Length)
                     HideSuggestionBox()
                 End If
-            End If
+            End If True Then
+
+End If
         End If
     End Sub
 
