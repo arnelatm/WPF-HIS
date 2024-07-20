@@ -33,8 +33,8 @@ Public Class AtmComboBox
         FlatStyle = FlatStyle.Standard
         Font = myFont
         BorderColor = Color.DimGray
-        ValueMember = "IdNo"
-        DisplayMember = "Name"
+        'ValueMember = "IdNo"
+        'DisplayMember = "Name"
         AutoCompleteSource = AutoCompleteSource.ListItems
         _defaultMaxDropDownItems = MaxDropDownItems
         _defaultDropdownStyle = DropDownStyle
@@ -45,6 +45,8 @@ Public Class AtmComboBox
         SuggestListForm.SuggestListBox.DataSource = _suggestBindingSource
         SuggestListForm.SuggestListBox.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
         SuggestListForm.SuggestListBox.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+        SuggestListForm.SuggestListBox.ValueMember = ValueMember
+        SuggestListForm.SuggestListBox.DisplayMember = DisplayMember
         EditingMode = False
         AddHandler SuggestListForm.SuggestListBox.Click, AddressOf SuggestListBoxOnClick
         AddHandler ParentChanged, AddressOf OnParentChanged
@@ -264,12 +266,14 @@ Public Class AtmComboBox
                 BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             End If
         End If
+        _suggestBindingSource.Filter = Nothing
         If SelectedIndex < 0 Then
             If Text = "" Then
                 'allow empty strings
             Else
                 If _suggestBindingSource.Count() = 1 Then
-                    SelectedValue = DataSource.Current.IdNo
+                    Dim row As DataRow = DataSource.Row(0)
+                    SelectedValue = row(ValueMember)
                 Else
                     ' invalid selection or text set to empty string
                     Text = Nothing
@@ -373,8 +377,8 @@ Public Class AtmComboBox
             If _suggestBindingSource.DataSource Is Nothing Then
                 _suggestBindingSource.DataSource = DataSource.Copy()
                 _suggestBindingSource.ResetBindings(True)
-                SuggestListForm.SuggestListBox.DisplayMember = "Name"
-                SuggestListForm.SuggestListBox.ValueMember = "IdNo"
+                SuggestListForm.SuggestListBox.DisplayMember = DisplayMember
+                SuggestListForm.SuggestListBox.ValueMember = ValueMember
             End If
             _suggestBindingSource.Filter = IIf(Text = Nothing OrElse Text = "", Nothing, String.Format("Name like '*{0}*'", Text))
             Dim showForm As Boolean

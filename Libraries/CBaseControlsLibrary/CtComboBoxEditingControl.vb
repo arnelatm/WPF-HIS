@@ -1,14 +1,9 @@
-﻿Imports System.ComponentModel
-Imports System.Drawing
-Imports System.Globalization
-Imports System.Linq.Expressions
-Imports System.Threading
+﻿Imports System.Drawing
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
-Imports System.Runtime.InteropServices
 
 Public Class CtComboBoxEditingControl
-    Inherits CtComboBox
+    Inherits AtmComboBox
     Implements IDataGridViewEditingControl
 
     Private dataGridView As DataGridView
@@ -31,17 +26,8 @@ Public Class CtComboBoxEditingControl
         Set(ByVal value As Object)
             Dim text As String = TryCast(value, String)
             MyBase.Text = text
-            'If Not Equals(text, Nothing) Then
-            '    MyBase.Text = text
-            '    If String.Compare(text, MyBase.Text, ignoreCase:=True, CultureInfo.CurrentCulture) <> 0 Then
-            '        SelectedIndex = -1
-            '    End If
-            'End If
         End Set
     End Property
-
-
-
 
     '
     ' Summary:
