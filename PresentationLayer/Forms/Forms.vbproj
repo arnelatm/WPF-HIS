@@ -175,27 +175,39 @@
     <Compile Include="BFMain.designer.vb">
       <DependentUpon>BFMain.vb</DependentUpon>
     </Compile>
-    <Compile Include="BFMain.vb" />
+    <Compile Include="BFMain.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="BFModalForm.Designer.vb">
       <DependentUpon>BFModalForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="BFModalForm.vb" />
+    <Compile Include="BFModalForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CFormBase.Designer.vb">
       <DependentUpon>CFormBase.vb</DependentUpon>
     </Compile>
-    <Compile Include="CFormBase.vb" />
+    <Compile Include="CFormBase.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CFormEntry.designer.vb">
       <DependentUpon>CFormEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="CFormEntry.vb" />
+    <Compile Include="CFormEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CPictureViewer.Designer.vb">
       <DependentUpon>CPictureViewer.vb</DependentUpon>
     </Compile>
-    <Compile Include="CPictureViewer.vb" />
+    <Compile Include="CPictureViewer.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CFormEntryTv.Designer.vb">
       <DependentUpon>CFormEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="CFormEntryTv.vb" />
+    <Compile Include="CFormEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CModalForm.Designer.vb">
       <DependentUpon>CModalForm.vb</DependentUpon>
     </Compile>
@@ -208,6 +220,7 @@
     </Compile>
     <Compile Include="CrViewer.vb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="ReportViewer.Designer.vb">
       <DependentUpon>ReportViewer.vb</DependentUpon>
@@ -215,6 +228,7 @@
     </Compile>
     <Compile Include="ReportViewer.vb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="CrReportViewer.Designer.vb">
       <DependentUpon>CrReportViewer.vb</DependentUpon>
@@ -222,6 +236,7 @@
     </Compile>
     <Compile Include="CrReportViewer.vb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="CrystalDecisions\ReportAppServer\CommonControls.vb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -229,7 +244,9 @@
     <Compile Include="DFormBasic.Designer.vb">
       <DependentUpon>DFormBasic.vb</DependentUpon>
     </Compile>
-    <Compile Include="DFormBasic.vb" />
+    <Compile Include="DFormBasic.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="HijriCalendarForm.Designer.vb">
       <DependentUpon>HijriCalendarForm.vb</DependentUpon>
     </Compile>
@@ -239,11 +256,15 @@
     <Compile Include="LoginEntry.Designer.vb">
       <DependentUpon>LoginEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="LoginEntry.vb" />
+    <Compile Include="LoginEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="LoginEntryOld.Designer.vb">
       <DependentUpon>LoginEntryOld.vb</DependentUpon>
     </Compile>
-    <Compile Include="LoginEntryOld.vb" />
+    <Compile Include="LoginEntryOld.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -262,7 +283,9 @@
     <Compile Include="TranslationTableManager.Designer.vb">
       <DependentUpon>TranslationTableManager.vb</DependentUpon>
     </Compile>
-    <Compile Include="TranslationTableManager.vb" />
+    <Compile Include="TranslationTableManager.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="BFMain.resx">

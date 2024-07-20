@@ -1,6 +1,5 @@
 ﻿Imports System.ComponentModel
 Imports System.Drawing
-Imports System.Linq.Expressions
 Imports System.Threading
 Imports System.Windows.Forms
 Imports AATM.Libraries.AatmInterfaces
@@ -19,9 +18,6 @@ Public Class AtmComboBox
     Private ReadOnly _defaultDropdownStyle As ComboBoxStyle
     Private ReadOnly _defaultMaxDropDownItems As Int16
     Private _suggestBindingSource As BindingSource = New BindingSource
-
-    'Private dataLookup As New DataLookup(Of String)
-    'Private _bindingList As New BindingList(Of )
     Private Shared ReadOnly KeysToHandle As Keys() = {Keys.Down, Keys.Up, Keys.Enter, Keys.Escape}
     Private WithEvents _contextMenuStrip1 As New ContextMenuStrip
     Public DataSourceProgrammaticChange As Boolean = False
@@ -122,13 +118,6 @@ Public Class AtmComboBox
             IntegralHeight = True
             ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
             BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-            'Else
-            '    DropDownStyle = ComboBoxStyle.Simple
-            '    DropDownHeight = Height
-            '    MaxDropDownItems = 1
-            '    IntegralHeight = True
-            '    ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-            '    BackColor = GlobalVariables.DefaultFormControlBackgroundColor
         End If
 
     End Sub
@@ -160,7 +149,6 @@ Public Class AtmComboBox
     <Browsable(True)>
     Public Property OverrideDropDownStyleList As Boolean
 
-    'Public Property BorderColor As Color
     Public Property PreviousSearchTerm As String
 
     Public Property SuggestBoxHeight As Integer
@@ -292,7 +280,6 @@ Public Class AtmComboBox
 
     Protected Overrides Sub OnDropDown(e As EventArgs)
         HideSuggestionBox()
-        'SetVisibleCore(True)
         If DisplayOnly Then
             _previousIndex = SelectedIndex
         End If
@@ -304,18 +291,14 @@ Public Class AtmComboBox
     End Sub
 
     Protected Overloads Overrides Sub OnLostFocus(e As EventArgs)
-        'BeginUpdate()
         If Not SuggestListForm.SuggestListBox.Focused Then
             HideSuggestionBox()
         End If
-        'EndUpdate()
     End Sub
 
     Protected Overrides Sub OnGotFocus(e As EventArgs)
-        'BeginUpdate()
         MyBase.OnGotFocus(e)
         _lastValue = SelectedValue
-        'EndUpdate()
     End Sub
 
     Protected Overloads Overrides Sub OnPreviewKeyDown(e As PreviewKeyDownEventArgs)

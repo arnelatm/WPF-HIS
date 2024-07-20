@@ -533,7 +533,9 @@
     <Compile Include="MainProgram.Designer.vb">
       <DependentUpon>MainProgram.vb</DependentUpon>
     </Compile>
-    <Compile Include="MainProgram.vb" />
+    <Compile Include="MainProgram.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
@@ -709,27 +711,39 @@
     <Compile Include="PresentationLayer\Views\Forms\ContactDateRangeForm.Designer.vb">
       <DependentUpon>ContactDateRangeForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\ContactDateRangeForm.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\ContactDateRangeForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\DateRangeForm.Designer.vb">
       <DependentUpon>DateRangeForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\DateRangeForm.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\DateRangeForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\EmployeeEntryTv.designer.vb">
       <DependentUpon>EmployeeEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\EmployeeEntryTv.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\EmployeeEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\EmployeeLeaveEarnedApprovalEntry.Designer.vb">
       <DependentUpon>EmployeeLeaveEarnedApprovalEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\EmployeeLeaveEarnedApprovalEntry.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\EmployeeLeaveEarnedApprovalEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\EmployeeLeaveApprovalEntry.Designer.vb">
       <DependentUpon>EmployeeLeaveApprovalEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\EmployeeLeaveApprovalEntry.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\EmployeeLeaveApprovalEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\EmployeeLeaveEarnedEntry.Designer.vb">
       <DependentUpon>EmployeeLeaveEarnedEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\EmployeeLeaveEarnedEntry.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\EmployeeLeaveEarnedEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Form5.Designer.vb">
       <DependentUpon>Form5.vb</DependentUpon>
     </Compile>
@@ -739,59 +753,87 @@
     <Compile Include="PresentationLayer\Views\Forms\IGroup\ClinicLabSampleForm.Designer.vb">
       <DependentUpon>ClinicLabSampleForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\IGroup\ClinicLabSampleForm.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\ClinicLabSampleForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\IGroup\IbLabResultForm.Designer.vb">
       <DependentUpon>IbLabResultForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\IGroup\IbLabResultForm.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\IbLabResultForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\IGroup\IbLabSampleForm.Designer.vb">
       <DependentUpon>IbLabSampleForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\IGroup\IbLabSampleForm.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\IbLabSampleForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\InvRequestForm.Designer.vb">
       <DependentUpon>InvRequestForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\InvRequestForm.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\InvRequestForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\ProductBaseUnitChanger.Designer.vb">
       <DependentUpon>ProductBaseUnitChanger.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\ProductBaseUnitChanger.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\ProductBaseUnitChanger.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\ReportSelectorForm.designer.vb">
       <DependentUpon>ReportSelectorForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\ReportSelectorForm.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\ReportSelectorForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\ShiftDailyReport.Designer.vb">
       <DependentUpon>ShiftDailyReport.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\ShiftDailyReport.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\Reports\ShiftDailyReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\SupplierProductEntry.Designer.vb">
       <DependentUpon>SupplierProductEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\SupplierProductEntry.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\SupplierProductEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\PurchaseOrderApprovalForm.Designer.vb">
       <DependentUpon>PurchaseOrderApprovalForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\PurchaseOrderApprovalForm.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\PurchaseOrderApprovalForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\DocumentReportList.Designer.vb">
       <DependentUpon>DocumentReportList.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\DocumentReportList.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\Reports\DocumentReportList.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\DocumentExpiryList.Designer.vb">
       <DependentUpon>DocumentExpiryList.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\DocumentExpiryList.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\Reports\DocumentExpiryList.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\ClinicTestSummary.designer.vb">
       <DependentUpon>ClinicTestSummary.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\ClinicTestSummary.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\ClinicTestSummary.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\PayrollPrinting.Designer.vb">
       <DependentUpon>PayrollPrinting.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\PayrollPrinting.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\Reports\PayrollPrinting.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\ProductMovementReport.Designer.vb">
       <DependentUpon>ProductMovementReport.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\ProductMovementReport.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\Reports\ProductMovementReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\ClinicLabSampleDetailView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeMedicalReportView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IApArEmReportView.vb" />
@@ -808,15 +850,21 @@
     <Compile Include="PresentationLayer\Views\Forms\AppSettingEntry.Designer.vb">
       <DependentUpon>AppSettingEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\AppSettingEntry.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\AppSettingEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\DocumentDetailEntry.designer.vb">
       <DependentUpon>DocumentDetailEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\DocumentDetailEntry.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\DocumentDetailEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\IGroup\DoctorsPrescriptionForm.Designer.vb">
       <DependentUpon>DoctorsPrescriptionForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\IGroup\DoctorsPrescriptionForm.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\DoctorsPrescriptionForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\IGroup\DosageEditing.Designer.vb">
       <DependentUpon>DosageEditing.vb</DependentUpon>
     </Compile>
@@ -826,19 +874,27 @@
     <Compile Include="PresentationLayer\Views\Forms\IGroup\DurationTableManager.Designer.vb">
       <DependentUpon>DurationTableManager.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\IGroup\DurationTableManager.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\DurationTableManager.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\IGroup\DosageTableManager.Designer.vb">
       <DependentUpon>DosageTableManager.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\IGroup\DosageTableManager.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\DosageTableManager.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\IGroup\PmrInvestigationRequestForm.Designer.vb">
       <DependentUpon>PmrInvestigationRequestForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\IGroup\PmrInvestigationRequestForm.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\PmrInvestigationRequestForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\IGroup\PrescriptionForm.Designer.vb">
       <DependentUpon>PrescriptionForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\IGroup\PrescriptionForm.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\PrescriptionForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\IGroup\ItemDetailsFinder.Designer.vb">
       <DependentUpon>ItemDetailsFinder.vb</DependentUpon>
     </Compile>
@@ -848,19 +904,27 @@
     <Compile Include="PresentationLayer\Views\Forms\Reports\FinancialReportForm.designer.vb">
       <DependentUpon>FinancialReportForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\FinancialReportForm.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\Reports\FinancialReportForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\ExpiryReportByWarehouse.Designer.vb">
       <DependentUpon>ExpiryReportByWarehouse.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\ExpiryReportByWarehouse.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\Reports\ExpiryReportByWarehouse.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\InventoryReportByWarehouse.Designer.vb">
       <DependentUpon>InventoryReportByWarehouse.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\InventoryReportByWarehouse.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\Reports\InventoryReportByWarehouse.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\ApArEmReport.designer.vb">
       <DependentUpon>ApArEmReport.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\ApArEmReport.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\Reports\ApArEmReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Interfaces\IAppSettingView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IDocumentDetailView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IFinancialReportView.vb" />
@@ -872,23 +936,33 @@
     <Compile Include="PresentationLayer\Views\Forms\InvTransTypeEntryTv.designer.vb">
       <DependentUpon>InvTransTypeEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\InvTransTypeEntryTv.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\InvTransTypeEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\InvTransactionEntry.Designer.vb">
       <DependentUpon>InvTransactionEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\InvTransactionEntry.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\InvTransactionEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\InventorySelector.Designer.vb">
       <DependentUpon>InventorySelector.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\InventorySelector.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\InventorySelector.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\SterilizationLabelPrinting.designer.vb">
       <DependentUpon>SterilizationLabelPrinting.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\SterilizationLabelPrinting.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\Reports\SterilizationLabelPrinting.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\SaleEntry.Designer.vb">
       <DependentUpon>SaleEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\SaleEntry.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\SaleEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IDurationView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IDosageMasterView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IPrescriptionItemView.vb" />
@@ -905,11 +979,15 @@
     <Compile Include="PresentationLayer\Views\Forms\ApJournalEntry.designer.vb">
       <DependentUpon>ApJournalEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\ApJournalEntry.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\ApJournalEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\ArJournalEntry.designer.vb">
       <DependentUpon>ArJournalEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\ArJournalEntry.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\ArJournalEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\CGridBoxForm.Designer.vb">
       <DependentUpon>CGridBoxForm.vb</DependentUpon>
     </Compile>
@@ -925,15 +1003,21 @@
     <Compile Include="PresentationLayer\Views\Forms\DosagePrintingForm.Designer.vb">
       <DependentUpon>DosagePrintingForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\DosagePrintingForm.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\DosagePrintingForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\DosageEntryTv.Designer.vb">
       <DependentUpon>DosageEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\DosageEntryTv.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\DosageEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\DoctorEntry.Designer.vb">
       <DependentUpon>DoctorEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\DoctorEntry.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\DoctorEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Form3.Designer.vb">
       <DependentUpon>Form3.vb</DependentUpon>
     </Compile>
@@ -943,7 +1027,9 @@
     <Compile Include="PresentationLayer\Views\Forms\ProductFinder.Designer.vb">
       <DependentUpon>ProductFinder.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\ProductFinder.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\ProductFinder.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Form4.Designer.vb">
       <DependentUpon>Form4.vb</DependentUpon>
     </Compile>
@@ -953,15 +1039,21 @@
     <Compile Include="PresentationLayer\Views\Forms\ProductEntry.Designer.vb">
       <DependentUpon>ProductEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\ProductEntry.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\ProductEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\PurchaseEntry.Designer.vb">
       <DependentUpon>PurchaseEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\PurchaseEntry.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\PurchaseEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\IqamaCbcReport.designer.vb">
       <DependentUpon>IqamaCbcReport.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\IqamaCbcReport.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\IqamaCbcReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\TestForm3.Designer.vb">
       <DependentUpon>TestForm3.vb</DependentUpon>
     </Compile>
@@ -971,107 +1063,159 @@
     <Compile Include="PresentationLayer\Views\Forms\IGroup\DrugAcceptEntry.Designer.vb">
       <DependentUpon>DrugAcceptEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\IGroup\DrugAcceptEntry.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\DrugAcceptEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\IGroup\DrugSaleEntry.Designer.vb">
       <DependentUpon>DrugSaleEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\IGroup\DrugSaleEntry.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\DrugSaleEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\IGroup\GTinScanner.Designer.vb">
       <DependentUpon>GTinScanner.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\IGroup\GTinScanner.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\GTinScanner.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\IGroup\GTinMatcherEntry.Designer.vb">
       <DependentUpon>GTinMatcherEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\IGroup\GTinMatcherEntry.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\GTinMatcherEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\IGroup\StockInventoryEntry.Designer.vb">
       <DependentUpon>StockInventoryEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\IGroup\StockInventoryEntry.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\StockInventoryEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\ItemCodeEntry.Designer.vb">
       <DependentUpon>ItemCodeEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\ItemCodeEntry.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\ItemCodeEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\CodeGroupEntryTv.Designer.vb">
       <DependentUpon>CodeGroupEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\CodeGroupEntryTv.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\CodeGroupEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\CustomerEntryTv.Designer.vb">
       <DependentUpon>CustomerEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\CustomerEntryTv.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\CustomerEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\DocumentEntryTv.Designer.vb">
       <DependentUpon>DocumentEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\DocumentEntryTv.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\DocumentEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\HolidayTransferEntry.Designer.vb">
       <DependentUpon>HolidayTransferEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\HolidayTransferEntry.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\HolidayTransferEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\FormDataViewer.Designer.vb">
       <DependentUpon>FormDataViewer.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\FormDataViewer.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\FormDataViewer.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\GeneralJournalEntry.designer.vb">
       <DependentUpon>GeneralJournalEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\GeneralJournalEntry.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\GeneralJournalEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\HolidayAvailmentEntry.designer.vb">
       <DependentUpon>HolidayAvailmentEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\HolidayAvailmentEntry.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\HolidayAvailmentEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\HolidayEntry.designer.vb">
       <DependentUpon>HolidayEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\HolidayEntry.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\HolidayEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\IGroup\CbcRetrievalEntry.Designer.vb">
       <DependentUpon>CbcRetrievalEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\IGroup\CbcRetrievalEntry.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\CbcRetrievalEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\IGroup\PmrReportSelector.designer.vb">
       <DependentUpon>PmrReportSelector.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\IGroup\PmrReportSelector.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\PmrReportSelector.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\IGroup\ItemDetailsEntry.Designer.vb">
       <DependentUpon>ItemDetailsEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\IGroup\ItemDetailsEntry.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\ItemDetailsEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\JournalPrefixEntry.designer.vb">
       <DependentUpon>JournalPrefixEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\JournalPrefixEntry.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\JournalPrefixEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\LeaveEntryTv.designer.vb">
       <DependentUpon>LeaveEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\LeaveEntryTv.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\LeaveEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\MainForm.designer.vb">
       <DependentUpon>MainForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\MainForm.vb" />
-    <Compile Include="PresentationLayer\Views\Forms\GeneratePayrollBankCsv.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\MainForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\GeneratePayrollBankCsv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\GeneratePayrollBankCsv.Designer.vb">
       <DependentUpon>GeneratePayrollBankCsv.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\EmployeeLeaveEntry.designer.vb">
       <DependentUpon>EmployeeLeaveEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\EmployeeLeaveEntry.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\EmployeeLeaveEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\EmployeeAbsenceEntry.designer.vb">
       <DependentUpon>EmployeeAbsenceEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\EmployeeAbsenceEntry.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\EmployeeAbsenceEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\EmployeeIdPrinting.designer.vb">
       <DependentUpon>EmployeeIdPrinting.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\EmployeeIdPrinting.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\EmployeeIdPrinting.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\PasswordGenerator.Designer.vb">
       <DependentUpon>PasswordGenerator.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\PasswordGenerator.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\PasswordGenerator.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\EmployeeMedicalReport.designer.vb">
       <DependentUpon>EmployeeMedicalReport.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\EmployeeMedicalReport.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\Reports\EmployeeMedicalReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\CbcReportSelector.Designer.vb">
       <DependentUpon>CbcReportSelector.vb</DependentUpon>
     </Compile>
@@ -1081,35 +1225,51 @@
     <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\GenerateDrugCsv.Designer.vb">
       <DependentUpon>GenerateDrugCsv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\GenerateDrugCsv.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\GenerateDrugCsv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\TransactionSummaryForm.designer.vb">
       <DependentUpon>TransactionSummaryForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\TransactionSummaryForm.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\Reports\TransactionSummaryForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\RecurringPayElementEntry.designer.vb">
       <DependentUpon>RecurringPayElementEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\RecurringPayElementEntry.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\RecurringPayElementEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\NotesTranslator.Designer.vb">
       <DependentUpon>NotesTranslator.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\NotesTranslator.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\NotesTranslator.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\PayElementEntryTv.designer.vb">
       <DependentUpon>PayElementEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\PayElementEntryTv.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\PayElementEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\SalesJournalEntry.Designer.vb">
       <DependentUpon>SalesJournalEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\SalesJournalEntry.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\SalesJournalEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\ShiftSummaryEntry.designer.vb">
       <DependentUpon>ShiftSummaryEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\ShiftSummaryEntry.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\ShiftSummaryEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\SupplierEntryTv.Designer.vb">
       <DependentUpon>SupplierEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\SupplierEntryTv.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\SupplierEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\IGroup\DoctorsPatientView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IProductUnitView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IDrugAcceptView.vb" />
@@ -1167,7 +1327,9 @@
     <Compile Include="PresentationLayer\Views\Forms\PayrollDetailEntry.Designer.vb">
       <DependentUpon>PayrollDetailEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\PayrollDetailEntry.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\PayrollDetailEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Interfaces\IOtWorkHourView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayrollDetailView.vb" />
     <Compile Include="PresentationLayer\Views\PayElementAccountView.vb" />
@@ -1176,7 +1338,9 @@
     <Compile Include="PresentationLayer\Views\Forms\BasicEntry.Designer.vb">
       <DependentUpon>BasicEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\BasicEntry.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\BasicEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\CheckPrinting.Designer.vb">
       <DependentUpon>CheckPrinting.vb</DependentUpon>
     </Compile>
@@ -1186,19 +1350,27 @@
     <Compile Include="PresentationLayer\Views\Forms\CheckPrinter.Designer.vb">
       <DependentUpon>CheckPrinter.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\CheckPrinter.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\CheckPrinter.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\DisbursementJournalEntry.designer.vb">
       <DependentUpon>DisbursementJournalEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\DisbursementJournalEntry.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\DisbursementJournalEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\PettyCashClosingEntry.designer.vb">
       <DependentUpon>PettyCashClosingEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\PettyCashClosingEntry.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\PettyCashClosingEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\DiagnosticTestSummary.designer.vb">
       <DependentUpon>DiagnosticTestSummary.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\DiagnosticTestSummary.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\DiagnosticTestSummary.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Interfaces\IBasicView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IDjOiItemView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IDjOiItemsView.vb" />
@@ -1207,67 +1379,99 @@
     <Compile Include="PresentationLayer\Views\Forms\AccountReconciliationEntry.Designer.vb">
       <DependentUpon>AccountReconciliationEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\AccountReconciliationEntry.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\AccountReconciliationEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\CashReceiptJournalEntry.Designer.vb">
       <DependentUpon>CashReceiptJournalEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\CashReceiptJournalEntry.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\CashReceiptJournalEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\DepositTypeEntryTv.designer.vb">
       <DependentUpon>DepositTypeEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\DepositTypeEntryTv.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\DepositTypeEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\PensionSchemeEntryTv.designer.vb">
       <DependentUpon>PensionSchemeEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\PensionSchemeEntryTv.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\PensionSchemeEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\PayCycleEntryTv.designer.vb">
       <DependentUpon>PayCycleEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\PayCycleEntryTv.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\PayCycleEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\PayGroupEntryTv.designer.vb">
       <DependentUpon>PayGroupEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\PayGroupEntryTv.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\PayGroupEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\PayrollEntryTv.designer.vb">
       <DependentUpon>PayrollEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\PayrollEntryTv.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\PayrollEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\PensionProviderEntryTv.designer.vb">
       <DependentUpon>PensionProviderEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\PensionProviderEntryTv.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\PensionProviderEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\CategoryEntryTv.Designer.vb">
       <DependentUpon>CategoryEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\CategoryEntryTv.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\CategoryEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\AccountEntryTv.Designer.vb">
       <DependentUpon>AccountEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\AccountEntryTv.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\AccountEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\DesignationEntryTv.Designer.vb">
       <DependentUpon>DesignationEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\DesignationEntryTv.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\DesignationEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\DistributionSchemeEntry.Designer.vb">
       <DependentUpon>DistributionSchemeEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\DistributionSchemeEntry.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\DistributionSchemeEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\DistributionSchemeEntryTv.Designer.vb">
       <DependentUpon>DistributionSchemeEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\DistributionSchemeEntryTv.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\DistributionSchemeEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\ErJournalEntry.designer.vb">
       <DependentUpon>ErJournalEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\ErJournalEntry.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\ErJournalEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\ReportFormOld.Designer.vb">
       <DependentUpon>ReportFormOld.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\ReportFormOld.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\Reports\ReportFormOld.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\AccountActivity.designer.vb">
       <DependentUpon>AccountActivity.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\AccountActivity.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\Reports\AccountActivity.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Models\AccountReconciliationItemModel.vb" />
     <Compile Include="PresentationLayer\Models\AccountReconciliationModel.vb" />
     <Compile Include="PresentationLayer\Models\ApJournalModel.vb" />
