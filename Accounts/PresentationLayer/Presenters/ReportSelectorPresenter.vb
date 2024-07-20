@@ -40,9 +40,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub GoPrintRecord()
-            Dim cForm
-            cForm = New ReportFormOld(View.ReportFileName)
-            cForm.Show()
+            ShowReportToScreen(View.ReportFileName)
         End Sub
 
         Public Sub OnSelectedGroupChangedEvent(ByRef bsReportGroupList As BindingSource, ByRef bsReportList As BindingSource)

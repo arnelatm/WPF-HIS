@@ -75,9 +75,6 @@ Namespace PresentationLayer.Presenters
             MakeVarDataSources({New Object() {"Account", "AccountsByCode", Nothing, "DetailAccount=1"},
             New Object() {"RevCostCenter", "RevCostCentersByCode", Nothing, Nothing},
             New Object() {"Contact_View", "PayeeByCode", "IdNo,ContactName,ContactCode", Nothing, Nothing}})
-            'New Object() {"Contact_View", "CustomerByCode", "IdNo,ContactName,ContactCode", "PayeeType = 'C'", Nothing},
-            'New Object() {"Contact_View", "SupplierByCode", "IdNo,ContactName,ContactCode", "PayeeType = 'S'", Nothing},
-            'New Object() {"Contact_View", "EmployeeByCode", "IdNo,ContactName,ContactCode", "PayeeType = 'E'", Nothing}})
         End Sub
 
         Public Overrides Sub GoPrintRecordWithArgs(Optional formCulture As Object = Nothing)
