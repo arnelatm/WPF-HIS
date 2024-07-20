@@ -47,8 +47,8 @@ Public Class AtmComboBox
         Text = ""
         SetStyle(ControlStyles.EnableNotifyMessage, True)
         SuggestListForm.SuggestListBox.DataSource = _suggestBindingSource
-        SuggestListForm.SuggestListBox.ForeColor = Color.Green
-        SuggestListForm.SuggestListBox.BackColor = Color.White
+        SuggestListForm.SuggestListBox.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+        SuggestListForm.SuggestListBox.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
         EditingMode = False
         AddHandler SuggestListForm.SuggestListBox.Click, AddressOf SuggestListBoxOnClick
         AddHandler ParentChanged, AddressOf OnParentChanged
@@ -320,7 +320,6 @@ Public Class AtmComboBox
 
     Protected Overloads Overrides Sub OnPreviewKeyDown(e As PreviewKeyDownEventArgs)
         Dim sw As Int16 = 0
-        'BeginUpdate()
         If Not SuggestListForm.Visible Then
             MyBase.OnPreviewKeyDown(e)
             sw = 1
@@ -349,11 +348,9 @@ Public Class AtmComboBox
             End Select
             MyBase.OnPreviewKeyDown(e)
         End If
-        'EndUpdate()
     End Sub
 
     Private Sub HideDropDown(hide As Boolean)
-        'BeginUpdate()
         If hide Then
             DropDownStyle = ComboBoxStyle.Simple
             MaxDropDownItems = 1
@@ -383,7 +380,6 @@ Public Class AtmComboBox
             End If
             DropDownHeight = _defaultDropDownHeight
         End If
-        'EndUpdate()
     End Sub
 
     Private _editFilter As Boolean = True
@@ -397,10 +393,7 @@ Public Class AtmComboBox
                 SuggestListForm.SuggestListBox.DisplayMember = "Name"
                 SuggestListForm.SuggestListBox.ValueMember = "IdNo"
             End If
-            '_suggestBindingSource.RaiseListChangedEvents = False
             _suggestBindingSource.Filter = IIf(Text = Nothing OrElse Text = "", Nothing, String.Format("Name like '*{0}*'", Text))
-            '_suggestBindingSource.RaiseListChangedEvents = True
-            '_suggestBindingSource.ResetBindings(True)
             Dim showForm As Boolean
             showForm = IIf(_suggestBindingSource.Count() > 0, True, False)
             If showForm Then
@@ -416,9 +409,7 @@ Public Class AtmComboBox
                     [Select](Text.Length, Text.Length)
                     HideSuggestionBox()
                 End If
-            End If True Then
-
-End If
+            End If
         End If
     End Sub
 
@@ -426,10 +417,6 @@ End If
         Dim currentName As String = DirectCast(_suggestBindingSource.Current, System.Data.DataRowView).Row.ItemArray(1)
         Return currentName
     End Function
-
-    'Private Sub atmCb_DataSourceChanged(sender As Object, e As EventArgs) Handles Me.DataSourceChanged
-    '    _suggestBindingSource.DataSource = DataSource
-    'End Sub
 
     Private Sub ctComboBox_MouseUp(sender As Object, e As MouseEventArgs) Handles Me.MouseUp
         HandleMouseUp(sender, e)
@@ -446,40 +433,8 @@ End If
         ContextHandler(sender, e)
     End Sub
 
-    'Private Overloads Sub OnBindingContextChanged(sender As Object, e As EventArgs) Handles MyBase.BindingContextChanged
-    '    Dim nCol As Int32 = 1
-    '    If DataSource IsNot Nothing Then
-    '        'If TypeOf DataSource IsNot DataView Then
-    '        '    Debugger.Break()
-    '        'End If
-    '        Dim data As DataTable = DataSource
-    '        Dim dataView As DataView = data.DefaultView
-    '        Dim colCount As Int16 = 0
-    '        colCount = dataView.Table.Columns.Count
-    '        If colCount = 1 Then
-    '            nCol = 0
-    '        Else
-    '            nCol = 1
-    '        End If
-    '        'nCol = Math.Max(data.Columns.Count - 1, 0)
-    '        'PropertySelectorCompiled = Function(collection) collection.Cast(Of DataRowView)().[Select](Function(p) p.Row.ItemArray(nCol).ToString())
-    '        'PropertySelectorCompiled = Function(collection) collection.Cast(Of DataRowView)().[Select](Function(p) p.Row.Item(nCol).ToString())
-    '    End If
-
-    'End Sub
-
-    'Private Sub SurroundingSub()
-    '    Dim data As IEnumerable(Of SomeType) =
-    '   Dim table As DataTable = New DataTable()
-
-    '   Using reader = ObjectReader.Create(data, "Id", "Name", "Description")
-    '   table.Load(reader)
-    '    End Using
-
-    'End Sub
     Private Shadows Sub OnParentChanged(ByVal sender As Object, ByVal e As EventArgs)
         SetListBoxFormLocation(SuggestListForm)
-        'SuggestListForm.SuggestListBox.Font = New Font("Segoe UI", 9)
     End Sub
 
 #End Region
