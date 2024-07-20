@@ -64,9 +64,9 @@ Namespace My
     Friend Module MySettingsProperty
         
         <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")>  _
-        Friend ReadOnly Property Settings() As Global.AATM.Libraries.AtmCombobox.My.MySettings
+        Friend ReadOnly Property Settings() As Global.AATM.Libraries.Tester.My.MySettings
             Get
-                Return Global.AATM.Libraries.AtmCombobox.My.MySettings.Default
+                Return Global.AATM.Libraries.Tester.My.MySettings.Default
             End Get
         End Property
     End Module

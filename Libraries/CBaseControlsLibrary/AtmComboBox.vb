@@ -6,9 +6,8 @@ Imports System.Windows.Forms
 Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.BaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
 
-Public Class CtComboBox
+Public Class AtmComboBox
     Inherits BCombobox
     Implements IEntryControl, ILinkedLabel, IFindableControl
 
@@ -16,32 +15,51 @@ Public Class CtComboBox
 
     Private _translatable As Boolean = False
     Private _editingMode As Boolean = False
-    Private _filterRule As Expression(Of Func(Of String, String, Boolean))
-    Private _filterRuleCompiled As Func(Of String, Boolean)
-    Private _propertySelector As Expression(Of Func(Of ObjectCollection, IEnumerable(Of String)))
-    Private _suggestListOrderRule As Expression(Of Func(Of String, String))
-    Private _suggestListOrderRuleCompiled As Func(Of String, String)
     Private ReadOnly _defaultDropDownHeight As Int16
     Private ReadOnly _defaultDropdownStyle As ComboBoxStyle
     Private ReadOnly _defaultMaxDropDownItems As Int16
-    Private ReadOnly _suggestBindingList As BindingList(Of String) = New BindingList(Of String)()
+    Private _suggestBindingSource As BindingSource = New BindingSource
+
+    'Private dataLookup As New DataLookup(Of String)
+    'Private _bindingList As New BindingList(Of )
     Private Shared ReadOnly KeysToHandle As Keys() = {Keys.Down, Keys.Up, Keys.Enter, Keys.Escape}
     Private WithEvents _contextMenuStrip1 As New ContextMenuStrip
-    Protected PropertySelectorCompiled As Func(Of ObjectCollection, IEnumerable(Of String))
     Public DataSourceProgrammaticChange As Boolean = False
     Protected SuggestListForm As CListBoxForm = New CListBoxForm
 
+
+    Public Sub New()
+        MyBase.New()
+        Dim myFont As New Font("Sans Serif", 10.0!, FontStyle.Regular)
+        DoubleBuffered = True
+        ContextMenuStrip = _contextMenuStrip1
+        Margin = New Padding(1, 1, 1, 1)
+        FlatStyle = FlatStyle.Standard
+        Font = myFont
+        BorderColor = Color.DimGray
+        ValueMember = "IdNo"
+        DisplayMember = "Name"
+        AutoCompleteSource = AutoCompleteSource.ListItems
+        _defaultMaxDropDownItems = MaxDropDownItems
+        _defaultDropdownStyle = DropDownStyle
+        _defaultDropDownHeight = DropDownHeight
+        SelectedIndex = -1
+        Text = ""
+        SetStyle(ControlStyles.EnableNotifyMessage, True)
+        SuggestListForm.SuggestListBox.DataSource = _suggestBindingSource
+        SuggestListForm.SuggestListBox.ForeColor = Color.Green
+        SuggestListForm.SuggestListBox.BackColor = Color.White
+        EditingMode = False
+        AddHandler SuggestListForm.SuggestListBox.Click, AddressOf SuggestListBoxOnClick
+        AddHandler ParentChanged, AddressOf OnParentChanged
+    End Sub
+
     Private Property _editMode As Boolean
     Public Property ChangingSearchValueOnly As Boolean = False
-
     Public Shared Property Copy As String = "Copy Selected Text"
-
     Public Property CurrentSearchTerm As String = ""
-
     Public Shared Property Cut As String = "Cut Selected Text"
-
     Public Property DefaultValue As Object
-
     Public Shared Property Delete As String = "Delete Selected Text"
     Public ComboBoxValueChanged As Boolean = False
 
@@ -115,17 +133,6 @@ Public Class CtComboBox
 
     End Sub
 
-    Public Property FilterRule As Expression(Of Func(Of String, String, Boolean))
-        Get
-            Return _filterRule
-        End Get
-        Set(ByVal value As Expression(Of Func(Of String, String, Boolean)))
-            If value Is Nothing Then Return
-            _filterRule = value
-            _filterRuleCompiled = Function(item) value.Compile()(item, Text)
-        End Set
-    End Property
-
     <Bindable(True)>
     <Category("Custom Properties")>
     <DefaultValue(False)>
@@ -156,34 +163,12 @@ Public Class CtComboBox
     'Public Property BorderColor As Color
     Public Property PreviousSearchTerm As String
 
-    Public Property PropertySelector As Expression(Of Func(Of ObjectCollection, IEnumerable(Of String)))
-        Get
-            Return _propertySelector
-        End Get
-        Set(ByVal value As Expression(Of Func(Of ObjectCollection, IEnumerable(Of String))))
-            If value Is Nothing Then Return
-            _propertySelector = value
-            PropertySelectorCompiled = value.Compile()
-        End Set
-    End Property
-
     Public Property SuggestBoxHeight As Integer
         Get
             Return SuggestListForm.Height
         End Get
         Set(ByVal value As Integer)
             If value > 0 Then SuggestListForm.Height = value
-        End Set
-    End Property
-
-    Public Property SuggestListOrderRule As Expression(Of Func(Of String, String))
-        Get
-            Return _suggestListOrderRule
-        End Get
-        Set(ByVal value As Expression(Of Func(Of String, String)))
-            If value Is Nothing Then Return
-            _suggestListOrderRule = value
-            _suggestListOrderRuleCompiled = value.Compile()
         End Set
     End Property
 
@@ -295,8 +280,8 @@ Public Class CtComboBox
             If Text = "" Then
                 'allow empty strings
             Else
-                If _suggestBindingList.Count() = 1 Then
-                    Text = SuggestListForm.SuggestListBox.Items(0)
+                If _suggestBindingSource.Count() = 1 Then
+                    SelectedValue = DataSource.Current.IdNo
                 Else
                     ' invalid selection or text set to empty string
                     Text = Nothing
@@ -319,23 +304,23 @@ Public Class CtComboBox
     End Sub
 
     Protected Overloads Overrides Sub OnLostFocus(e As EventArgs)
-        BeginUpdate()
+        'BeginUpdate()
         If Not SuggestListForm.SuggestListBox.Focused Then
             HideSuggestionBox()
         End If
-        EndUpdate()
+        'EndUpdate()
     End Sub
 
     Protected Overrides Sub OnGotFocus(e As EventArgs)
-        BeginUpdate()
+        'BeginUpdate()
         MyBase.OnGotFocus(e)
         _lastValue = SelectedValue
-        EndUpdate()
+        'EndUpdate()
     End Sub
 
     Protected Overloads Overrides Sub OnPreviewKeyDown(e As PreviewKeyDownEventArgs)
         Dim sw As Int16 = 0
-        BeginUpdate()
+        'BeginUpdate()
         If Not SuggestListForm.Visible Then
             MyBase.OnPreviewKeyDown(e)
             sw = 1
@@ -343,7 +328,7 @@ Public Class CtComboBox
         If sw = 0 Then
             Select Case e.KeyCode
                 Case Keys.Down
-                    If SuggestListForm.SuggestListBox.SelectedIndex < _suggestBindingList.Count - 1 Then
+                    If SuggestListForm.SuggestListBox.SelectedIndex < _suggestBindingSource.Count - 1 Then
                         ' ReSharper disable once ReturnValueOfPureMethodIsNotUsed
                         Math.Max(Interlocked.Increment(SuggestListForm.SuggestListBox.SelectedIndex), SuggestListForm.SuggestListBox.SelectedIndex - 1)
                     End If
@@ -364,11 +349,11 @@ Public Class CtComboBox
             End Select
             MyBase.OnPreviewKeyDown(e)
         End If
-        EndUpdate()
+        'EndUpdate()
     End Sub
 
     Private Sub HideDropDown(hide As Boolean)
-        BeginUpdate()
+        'BeginUpdate()
         If hide Then
             DropDownStyle = ComboBoxStyle.Simple
             MaxDropDownItems = 1
@@ -398,36 +383,51 @@ Public Class CtComboBox
             End If
             DropDownHeight = _defaultDropDownHeight
         End If
-        EndUpdate()
+        'EndUpdate()
     End Sub
 
+    Private _editFilter As Boolean = True
     Protected Overrides Sub OnTextChanged(ByVal e As EventArgs)
-        BeginUpdate()
         MyBase.OnTextChanged(e)
         If Not Focused Then Return
-        If Text.Length >= SuggestCharCount Then
-            _suggestBindingList.Clear()
-            _suggestBindingList.RaiseListChangedEvents = False
-            PropertySelectorCompiled(Items).Where(_filterRuleCompiled).OrderBy(_suggestListOrderRuleCompiled).ToList().ForEach(AddressOf _suggestBindingList.Add)
-            _suggestBindingList.RaiseListChangedEvents = True
-            _suggestBindingList.ResetBindings()
+        If _editFilter AndAlso Text.Length >= SuggestCharCount Then
+            If _suggestBindingSource.DataSource Is Nothing Then
+                _suggestBindingSource.DataSource = DataSource.Copy()
+                _suggestBindingSource.ResetBindings(True)
+                SuggestListForm.SuggestListBox.DisplayMember = "Name"
+                SuggestListForm.SuggestListBox.ValueMember = "IdNo"
+            End If
+            '_suggestBindingSource.RaiseListChangedEvents = False
+            _suggestBindingSource.Filter = IIf(Text = Nothing OrElse Text = "", Nothing, String.Format("Name like '*{0}*'", Text))
+            '_suggestBindingSource.RaiseListChangedEvents = True
+            '_suggestBindingSource.ResetBindings(True)
             Dim showForm As Boolean
-            showForm = _suggestBindingList.Any()
+            showForm = IIf(_suggestBindingSource.Count() > 0, True, False)
             If showForm Then
                 SetListBoxFormLocation(SuggestListForm)
                 SuggestListForm.Visible = True
             End If
-            If _suggestBindingList.Count = 0 And LimitToList Then
+            If _suggestBindingSource.Count = 0 And LimitToList Then
                 Beep()
                 SendKeys.SendWait("{BACKSPACE}")
-            ElseIf _suggestBindingList.Count = 1 AndAlso _suggestBindingList.Single().Length = Text.Trim().Length Then
-                Text = _suggestBindingList.Single()
-                [Select](0, Text.Length)
-                HideSuggestionBox()
+            ElseIf _suggestBindingSource.Count = 1 Then
+                Dim itemName As String = GetCurrentItemName()
+                If Text = itemName.Trim().Length Then
+                    [Select](0, Text.Length)
+                    HideSuggestionBox()
+                End If
             End If
         End If
-        EndUpdate()
     End Sub
+
+    Private Function GetCurrentItemName() As String
+        Dim currentName As String = DirectCast(_suggestBindingSource.Current, System.Data.DataRowView).Row.ItemArray(1)
+        Return currentName
+    End Function
+
+    'Private Sub atmCb_DataSourceChanged(sender As Object, e As EventArgs) Handles Me.DataSourceChanged
+    '    _suggestBindingSource.DataSource = DataSource
+    'End Sub
 
     Private Sub ctComboBox_MouseUp(sender As Object, e As MouseEventArgs) Handles Me.MouseUp
         HandleMouseUp(sender, e)
@@ -444,27 +444,27 @@ Public Class CtComboBox
         ContextHandler(sender, e)
     End Sub
 
-    Private Overloads Sub OnBindingContextChanged(sender As Object, e As EventArgs) Handles MyBase.BindingContextChanged
-        Dim nCol As Int32 = 1
-        If DataSource IsNot Nothing Then
-            'If TypeOf DataSource IsNot DataView Then
-            '    Debugger.Break()
-            'End If
-            Dim data As DataTable = DataSource
-            Dim dataView As DataView = data.DefaultView
-            Dim colCount As Int16 = 0
-            colCount = dataView.Table.Columns.Count
-            If colCount = 1 Then
-                nCol = 0
-            Else
-                nCol = 1
-            End If
-            'nCol = Math.Max(data.Columns.Count - 1, 0)
-            'PropertySelectorCompiled = Function(collection) collection.Cast(Of DataRowView)().[Select](Function(p) p.Row.ItemArray(nCol).ToString())
-            PropertySelectorCompiled = Function(collection) collection.Cast(Of DataRowView)().[Select](Function(p) p.Row.Item(nCol).ToString())
-        End If
+    'Private Overloads Sub OnBindingContextChanged(sender As Object, e As EventArgs) Handles MyBase.BindingContextChanged
+    '    Dim nCol As Int32 = 1
+    '    If DataSource IsNot Nothing Then
+    '        'If TypeOf DataSource IsNot DataView Then
+    '        '    Debugger.Break()
+    '        'End If
+    '        Dim data As DataTable = DataSource
+    '        Dim dataView As DataView = data.DefaultView
+    '        Dim colCount As Int16 = 0
+    '        colCount = dataView.Table.Columns.Count
+    '        If colCount = 1 Then
+    '            nCol = 0
+    '        Else
+    '            nCol = 1
+    '        End If
+    '        'nCol = Math.Max(data.Columns.Count - 1, 0)
+    '        'PropertySelectorCompiled = Function(collection) collection.Cast(Of DataRowView)().[Select](Function(p) p.Row.ItemArray(nCol).ToString())
+    '        'PropertySelectorCompiled = Function(collection) collection.Cast(Of DataRowView)().[Select](Function(p) p.Row.Item(nCol).ToString())
+    '    End If
 
-    End Sub
+    'End Sub
 
     'Private Sub SurroundingSub()
     '    Dim data As IEnumerable(Of SomeType) =
@@ -477,41 +477,13 @@ Public Class CtComboBox
     'End Sub
     Private Shadows Sub OnParentChanged(ByVal sender As Object, ByVal e As EventArgs)
         SetListBoxFormLocation(SuggestListForm)
-        SuggestListForm.SuggestListBox.Font = New Font("Segoe UI", 9)
+        'SuggestListForm.SuggestListBox.Font = New Font("Segoe UI", 9)
     End Sub
 
 #End Region
 
 #Region "Methods"
 
-    Public Sub New()
-        MyBase.New()
-        Dim myFont As New Font("Sans Serif", 10.0!, FontStyle.Regular)
-        DoubleBuffered = True
-        ContextMenuStrip = _contextMenuStrip1
-        Margin = New Padding(1, 1, 1, 1)
-        FlatStyle = FlatStyle.Standard
-        Font = myFont
-        BorderColor = Color.DimGray
-        ValueMember = "IdNo"
-        DisplayMember = "Name"
-        AutoCompleteSource = AutoCompleteSource.ListItems
-        _defaultMaxDropDownItems = MaxDropDownItems
-        _defaultDropdownStyle = DropDownStyle
-        _defaultDropDownHeight = DropDownHeight
-
-        Text = ""
-        _filterRuleCompiled = Function(s) s.ToLower().Contains(Text.Trim().ToLower())
-        _suggestListOrderRuleCompiled = Function(s) s
-        PropertySelectorCompiled = Function(collection) collection.Cast(Of String)()
-        SetStyle(ControlStyles.EnableNotifyMessage, True)
-        SuggestListForm.SuggestListBox.DataSource = _suggestBindingList
-        SuggestListForm.SuggestListBox.ForeColor = Color.Green
-        SuggestListForm.SuggestListBox.BackColor = Color.White
-        EditingMode = False
-        AddHandler SuggestListForm.SuggestListBox.Click, AddressOf SuggestListBoxOnClick
-        AddHandler ParentChanged, AddressOf OnParentChanged
-    End Sub
 
     Public Function GetValue(Of T)() As T
         If SelectedIndex = -1 Then
@@ -795,7 +767,7 @@ Public Class CtComboBox
     Private Shadows Sub OnDropDownClosed(sender As Object, e As EventArgs) Handles Me.DropDownClosed
         If DisplayOnly Then
             SelectedIndex = _previousIndex
-            AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgCannotEditReadOnly")
+            'AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgCannotEditReadOnly")
         End If
     End Sub
 
@@ -819,8 +791,14 @@ Public Class CtComboBox
     End Sub
 
     Private Sub SuggestListBoxOnClick()
-        Text = SuggestListForm.SuggestListBox.Text
+        SelectedValue = SuggestListForm.SuggestListBox.SelectedValue ' _suggestBindingSource.Find("IdNo", SuggestListForm.SuggestListBox.SelectedValue)
+        'Text = _sugText
+        'SelectedValue = _suggestBindingSource.Current.IdNo
+        'SelectedValue = SuggestListForm.SuggestListBox.SelectedValue
+        'Text = _suggestBindingSource.Find("Name", SuggestListForm.SuggestListBox.Current)
         Focus()
+        Dim xText As String = ""
+        'Refresh()
     End Sub
 
     Public Function GetNullableValue(Of T)()
@@ -929,51 +907,3 @@ Public Class CtComboBox
     End Function
 
 End Class
-
-'Public Class CSuggestListForm
-'    Inherits CListBoxForm
-
-'End Class
-
-'Sample Use
-'
-'Imports System
-'Imports System.Linq
-'Imports System.Windows.Forms
-
-'Public Class Form1
-
-'    Public Sub New()
-
-'        ' This call is required by the designer.
-'        InitializeComponent()
-
-'        ' Add any initialization after the InitializeComponent() call.
-
-'    End Sub
-
-'    Private Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
-' ReSharper disable once CommentTypo
-'        sugComboBox.DataSource = {"Janean Mcgaha", "Tama Gaitan", "Jacque Tinnin", "Elvira Woolfolk", "Fransisca Owens", "Minnie Ardoin", "Renay Bentler", "Joye Boyter", "Jaime Flannery", "Maryland Arai", "Walton Edelstein", "Nereida Storrs", "Theron Zinn", "Katharyn Estrella", "Alline Dubin", "Edra Bhatti", "Willa Jeppson", "Chelsea Revel", "Sonya Lowy", "Danelle Kapoor"}
-'        sugComboBox.SelectedIndex = -1
-
-'        'trySomeThings()
-
-'    End Sub
-
-'    Private Sub TrySomeThings()
-'        sugComboBox.DataSource = sugComboBox.Items.Cast(Of String)().[Select](Function(i) New Person With {
-'            .Name = i
-'        }).ToList()
-'        sugComboBox.DisplayMember = "Name"
-'        sugComboBox.PropertySelector = Function(collection) collection.Cast(Of Person)().[Select](Function(p) p.Name)
-'        sugComboBox.FilterRule = Function(item, text) item.StartsWith(text.Trim(), StringComparison.CurrentCultureIgnoreCase)
-'        sugComboBox.SuggestListOrderRule = Function(s) s.Split(" "c)(1)
-'    End Sub
-'End Class
-
-'Class Person
-'    Public Property Name As String
-'    Public Property DateOfBirth As DateTime
-'    Public Property Height As Integer
-'End Class

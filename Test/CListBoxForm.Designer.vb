@@ -45,29 +45,25 @@ Partial Class CListBoxForm
     'Do not modify it using the code editor.
     <DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.SuggestListBox = New System.Windows.Forms.ListBox()
+        Me.SuggestListBox = New ListBox()
         Me.SuspendLayout()
         '
         'SuggestListBox
         '
-        Me.SuggestListBox.BackColor = System.Drawing.Color.BlueViolet
-        Me.SuggestListBox.DisplayMember = "Name"
-        Me.SuggestListBox.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SuggestListBox.ForeColor = System.Drawing.Color.BlanchedAlmond
+        Me.SuggestListBox.Dock = DockStyle.Fill
         Me.SuggestListBox.FormattingEnabled = True
-        Me.SuggestListBox.Location = New System.Drawing.Point(0, 0)
+        Me.SuggestListBox.Location = New Point(0, 0)
         Me.SuggestListBox.Name = "SuggestListBox"
-        Me.SuggestListBox.Size = New System.Drawing.Size(200, 200)
+        Me.SuggestListBox.Size = New Size(200, 200)
         Me.SuggestListBox.TabIndex = 0
-        Me.SuggestListBox.ValueMember = "Value"
         '
         'CListBoxForm
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(200, 200)
+        Me.AutoScaleDimensions = New SizeF(6.0!, 13.0!)
+        Me.AutoScaleMode = AutoScaleMode.Font
+        Me.ClientSize = New Size(200, 200)
         Me.Controls.Add(Me.SuggestListBox)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.FormBorderStyle = FormBorderStyle.None
         Me.Name = "CListBoxForm"
         Me.Text = "CListBoxForm"
         Me.ResumeLayout(False)

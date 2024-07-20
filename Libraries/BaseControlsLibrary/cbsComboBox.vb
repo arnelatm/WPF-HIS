@@ -29,38 +29,38 @@ Public Class CbsComboBox
         End Set
     End Property
 
-    Public Property PropertySelector As Expression(Of Func(Of ObjectCollection, IEnumerable(Of String)))
-        Get
-            Return _propertySelector
-        End Get
-        Set(ByVal value As Expression(Of Func(Of ObjectCollection, IEnumerable(Of String))))
-            If value Is Nothing Then Return
-            _propertySelector = value
-            PropertySelectorCompiled = value.Compile()
-        End Set
-    End Property
+    'Public Property PropertySelector As Expression(Of Func(Of ObjectCollection, IEnumerable(Of String)))
+    '    Get
+    '        Return _propertySelector
+    '    End Get
+    '    Set(ByVal value As Expression(Of Func(Of ObjectCollection, IEnumerable(Of String))))
+    '        If value Is Nothing Then Return
+    '        _propertySelector = value
+    '        PropertySelectorCompiled = value.Compile()
+    '    End Set
+    'End Property
 
-    Public Property FilterRule As Expression(Of Func(Of String, String, Boolean))
-        Get
-            Return _filterRule
-        End Get
-        Set(ByVal value As Expression(Of Func(Of String, String, Boolean)))
-            If value Is Nothing Then Return
-            _filterRule = value
-            _filterRuleCompiled = Function(item) value.Compile()(item, Text)
-        End Set
-    End Property
+    'Public Property FilterRule As Expression(Of Func(Of String, String, Boolean))
+    '    Get
+    '        Return _filterRule
+    '    End Get
+    '    Set(ByVal value As Expression(Of Func(Of String, String, Boolean)))
+    '        If value Is Nothing Then Return
+    '        _filterRule = value
+    '        _filterRuleCompiled = Function(item) value.Compile()(item, Text)
+    '    End Set
+    'End Property
 
-    Public Property SuggestListOrderRule As Expression(Of Func(Of String, String))
-        Get
-            Return _suggestListOrderRule
-        End Get
-        Set(ByVal value As Expression(Of Func(Of String, String)))
-            If value Is Nothing Then Return
-            _suggestListOrderRule = value
-            _suggestListOrderRuleCompiled = value.Compile()
-        End Set
-    End Property
+    'Public Property SuggestListOrderRule As Expression(Of Func(Of String, String))
+    '    Get
+    '        Return _suggestListOrderRule
+    '    End Get
+    '    Set(ByVal value As Expression(Of Func(Of String, String)))
+    '        If value Is Nothing Then Return
+    '        _suggestListOrderRule = value
+    '        _suggestListOrderRuleCompiled = value.Compile()
+    '    End Set
+    'End Property
 
     Public Sub New()
         _filterRuleCompiled = Function(s) s.ToLower().Contains(Text.Trim().ToLower())

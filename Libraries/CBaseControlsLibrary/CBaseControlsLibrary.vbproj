@@ -114,6 +114,9 @@
     <Compile Include="ATabPage.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="AtmComboBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="BackgroundWorkerForm.Designer.vb">
       <DependentUpon>BackgroundWorkerForm.vb</DependentUpon>
     </Compile>
@@ -148,6 +151,7 @@
     <Compile Include="CfComboBox.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CustomDataTables.vb" />
     <Compile Include="DFindForm.designer.vb">
       <DependentUpon>DFindForm.vb</DependentUpon>
     </Compile>
