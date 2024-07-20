@@ -33,8 +33,6 @@ Public Class AtmComboBox
         FlatStyle = FlatStyle.Standard
         Font = myFont
         BorderColor = Color.DimGray
-        'ValueMember = "IdNo"
-        'DisplayMember = "Name"
         AutoCompleteSource = AutoCompleteSource.ListItems
         _defaultMaxDropDownItems = MaxDropDownItems
         _defaultDropdownStyle = DropDownStyle
@@ -326,10 +324,12 @@ Public Class AtmComboBox
 #Enable Warning ReturnValueOfPureMethodIsNotUsed
                     End If
                 Case Keys.Enter
+                    _editFilter = False
                     Text = SuggestListForm.SuggestListBox.Text
                     [Select](0, Text.Length)
                     SuggestListForm.Hide()
                     SuggestListForm.Visible = False
+                    _editFilter = True
                 Case Keys.Escape
                     HideSuggestionBox()
             End Select
@@ -380,7 +380,7 @@ Public Class AtmComboBox
                 SuggestListForm.SuggestListBox.DisplayMember = DisplayMember
                 SuggestListForm.SuggestListBox.ValueMember = ValueMember
             End If
-            _suggestBindingSource.Filter = IIf(Text = Nothing OrElse Text = "", Nothing, String.Format("Name like '*{0}*'", Text))
+            _suggestBindingSource.Filter = IIf(Text = Nothing OrElse Text = "", Nothing, String.Format(DisplayMember + " like '*{0}*'", Text))
             Dim showForm As Boolean
             showForm = IIf(_suggestBindingSource.Count() > 0, True, False)
             If showForm Then
@@ -401,8 +401,8 @@ Public Class AtmComboBox
     End Sub
 
     Private Function GetCurrentItemName() As String
-        Dim currentName As String = DirectCast(_suggestBindingSource.Current, System.Data.DataRowView).Row.ItemArray(1)
-        Return currentName
+        Dim dataRow As DataRowView = DirectCast(_suggestBindingSource.Current, DataRowView)
+        Return dataRow.Row(DisplayMember)
     End Function
 
     Private Sub ctComboBox_MouseUp(sender As Object, e As MouseEventArgs) Handles Me.MouseUp
