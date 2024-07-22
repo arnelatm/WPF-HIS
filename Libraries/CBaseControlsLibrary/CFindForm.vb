@@ -1,7 +1,6 @@
 ﻿Imports System.Drawing
 Imports System.Windows.Forms
 Imports AATM.Libraries.AatmInterfaces
-Imports AATM.Libraries.CBaseControlsLibrary.CtDataGridView
 Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class CFindForm
@@ -431,4 +430,5 @@ Public Class CFindForm
         Return GTin
 
     End Function
+
 End Class

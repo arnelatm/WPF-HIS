@@ -1,6 +1,4 @@
-﻿Imports System.Globalization
-Imports System.Reflection
-Imports System.Runtime.Remoting
+﻿Imports System.Reflection
 Imports System.Windows.Forms
 
 Public Module GlobalSubs
@@ -174,7 +172,6 @@ Public Module GlobalSubs
         End If
     End Sub
 
-
     Public Enum CalendarToUse
         Gregorian = 0
         Hijri = 1
@@ -223,6 +220,5 @@ Public Module GlobalSubs
     Public Sub Gobble(dummy As Object)
         ' dummy sub to instantiate an object without assigning to a variable
     End Sub
-
 
 End Module

@@ -1,7 +1,7 @@
-Imports System.Drawing.Drawing2D
 Imports System.ComponentModel
 Imports System.Drawing
 Imports System.Drawing.Design
+Imports System.Drawing.Drawing2D
 Imports System.Windows.Forms.Design
 
 Public Class HatchStyleEditor

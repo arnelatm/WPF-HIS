@@ -20,12 +20,10 @@ Public Class CDgvCheckboxCell
         End Get
     End Property
 
-
     <Category("Custom Properties")>
     <DefaultValue(False)>
     <Description("Set to True to specify that this control is always editable.")>
     Public Property AlwaysEditable As Boolean = False
-
 
     <Category("Custom Properties")>
     <DefaultValue(False)>
@@ -42,7 +40,6 @@ Public Class CDgvCheckboxCell
         copy.Translatable = Translatable
         Return copy
     End Function
-
 
     Public Property EditingMode As Boolean Implements IEntryControl.EditingMode
         Get
@@ -69,6 +66,5 @@ Public Class CDgvCheckboxCell
 
         End If
     End Sub
-
 
 End Class

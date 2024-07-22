@@ -1,6 +1,6 @@
-Imports System.Windows.Forms.Design
 Imports System.ComponentModel
 Imports System.Windows.Forms
+Imports System.Windows.Forms.Design
 
 <ToolboxItem(False), ToolboxItemFilter("Prevent", ToolboxItemFilterType.Prevent)>
 Public Class DropDowngTimeEditor

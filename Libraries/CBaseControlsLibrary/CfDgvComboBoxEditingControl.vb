@@ -3,7 +3,6 @@ Imports System.Drawing
 Imports System.Linq.Expressions
 Imports System.Threading
 Imports System.Windows.Forms
-Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class CfDgvComboBoxEditingControl
     Inherits DataGridViewComboBoxEditingControl
@@ -69,8 +68,6 @@ Public Class CfDgvComboBoxEditingControl
             _suggestListOrderRuleCompiled = value.Compile()
         End Set
     End Property
-
-
 
     Public Property SuggestCharCount As Integer
 

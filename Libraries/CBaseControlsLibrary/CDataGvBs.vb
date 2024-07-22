@@ -12,6 +12,7 @@ Public Class CDataGvBs
 
     'Private _dgvInsertColumnIndex As Integer = -1
     Private _editingMode As Boolean
+
     Private _translatable As Boolean = False
     Private _firstEditableColumn As Integer = -1
     Private _firstVisibleColumn As Integer = -1

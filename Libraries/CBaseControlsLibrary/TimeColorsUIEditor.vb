@@ -1,5 +1,5 @@
-Imports System.Windows.Forms.Design
 Imports System.Drawing.Design
+Imports System.Windows.Forms.Design
 
 Class TimeColorsUIEditor
     Inherits UITypeEditor
@@ -10,14 +10,13 @@ Class TimeColorsUIEditor
     End Function
 
     ' Edit a Selected value.
-    Public Overrides Function EditValue(ByVal context As System.ComponentModel.ITypeDescriptorContext, _
+    Public Overrides Function EditValue(ByVal context As System.ComponentModel.ITypeDescriptorContext,
         ByVal provider As System.IServiceProvider, ByVal value As Object) As Object
         ' Get the editor service.
-        Dim editor_service As IWindowsFormsEditorService = _
-            CType(provider.GetService(GetType(IWindowsFormsEditorService)), _
+        Dim editor_service As IWindowsFormsEditorService =
+            CType(provider.GetService(GetType(IWindowsFormsEditorService)),
                 IWindowsFormsEditorService)
         If editor_service Is Nothing Then Return value
-
 
         Dim dlg As dlgTimeColors = New dlgTimeColors
 
@@ -52,4 +51,5 @@ Class TimeColorsUIEditor
         ' Return the new value.
         Return dlg.gTimePickerColors.TimeColors
     End Function
+
 End Class

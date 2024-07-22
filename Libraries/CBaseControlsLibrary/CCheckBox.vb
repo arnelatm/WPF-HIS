@@ -24,7 +24,6 @@ Public Class CCheckBox
 
     Private _state As CheckBoxState = CheckBoxState.UncheckedNormal
 
-
     Public Sub New()
         MyBase.New()
         Font = SystemFonts.IconTitleFont
@@ -276,7 +275,7 @@ Public Class CCheckBox
                 _editingMode = value
 
             End If
-	    UpdateDisplayOnlyControl()
+            UpdateDisplayOnlyControl()
         End Set
     End Property
 

@@ -475,6 +475,7 @@ Public Module FormHelpers
             End If
         Next
     End Sub
+
     Private Sub UseOriginalDataGridView(ByRef CtDataGridView As DataGridView)
         For Each col As DataGridViewColumn In CtDataGridView.Columns
             If col.Tag Is Nothing Then
@@ -544,7 +545,6 @@ Public Module FormHelpers
 
 End Module
 
-
 Public Class ControlSettingsSaver
 
     Private _height As UInt16
@@ -552,6 +552,7 @@ Public Class ControlSettingsSaver
     Private _top As UInt16
     Private _visible As Boolean
     Private _width As UInt16
+
     Public Sub RestoreSetting(control As Control)
         control.Top = _top
         control.Left = _left
@@ -567,8 +568,8 @@ Public Class ControlSettingsSaver
         _height = control.Height
         _visible = control.Visible
     End Sub
-End Class
 
+End Class
 
 'Public Class FormFunctions
 

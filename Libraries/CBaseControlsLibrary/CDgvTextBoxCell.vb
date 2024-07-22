@@ -64,7 +64,6 @@ Public Class CDgvTextBoxCell
         End If
     End Sub
 
-
     'Public Sub MakeEditable(editableControl As Boolean) Implements IEntryControl.MakeEditable
     '    Me.ReadOnly = editableControl
     'End Sub

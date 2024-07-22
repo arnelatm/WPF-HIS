@@ -1,6 +1,6 @@
-Imports System.Windows.Forms.Design
-Imports System.Drawing.Design
 Imports System.ComponentModel
+Imports System.Drawing.Design
+Imports System.Windows.Forms.Design
 
 Class TimeUIEditor
     Inherits UITypeEditor
@@ -11,11 +11,11 @@ Class TimeUIEditor
     End Function
 
     ' Edit a Selected value.
-    Public Overrides Function EditValue(ByVal context As ITypeDescriptorContext, _
+    Public Overrides Function EditValue(ByVal context As ITypeDescriptorContext,
         ByVal provider As IServiceProvider, ByVal value As Object) As Object
         ' Get the editor service.
-        Dim editor_service As IWindowsFormsEditorService = _
-            CType(provider.GetService(GetType(IWindowsFormsEditorService)), _
+        Dim editor_service As IWindowsFormsEditorService =
+            CType(provider.GetService(GetType(IWindowsFormsEditorService)),
                 IWindowsFormsEditorService)
         If editor_service Is Nothing Then Return value
 
@@ -50,9 +50,9 @@ Class TimeUIEditor
             If dropDownEditor.DDgTimePickerCntrl.Time = String.Empty Then
                 Return Nothing
             Else
-                Return dropDownEditor.DDgTimePickerCntrl.Time & IIf(dropDownEditor.DDgTimePickerCntrl.TimeAMPM = gTimePickerCntrl.eTimeAMPM.PM, "P", "A").ToString
+                Return dropDownEditor.DDgTimePickerCntrl.Time & IIf(dropDownEditor.DDgTimePickerCntrl.TimeAMPM = gTimePickerCntrl.eTimeAMPM.pm, "P", "A").ToString
             End If
         End Using
     End Function
-End Class
 
+End Class

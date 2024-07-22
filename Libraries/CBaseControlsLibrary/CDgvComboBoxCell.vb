@@ -1,8 +1,6 @@
 ﻿' This is the class that represents your cell which can use your ComboBox class
 Imports System.ComponentModel
-Imports System.Drawing
 Imports System.Windows.Forms
-Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class CDgvComboBoxCell
     Inherits DataGridViewComboBoxCell
@@ -62,8 +60,6 @@ Public Class CDgvComboBoxCell
         End Set
     End Property
 
-
-
     ' You must also override this method to initialize the ComboBox instance...
     ' This method will be called each time a cell in the column enters edit-mode,
     ' so you can fill the ComboBox instance based on the value of the edited cell
@@ -87,6 +83,4 @@ Public Class CDgvComboBoxCell
 
     Public Property CellEditingControl As CtComboBoxEditingControl
 
-
 End Class
-

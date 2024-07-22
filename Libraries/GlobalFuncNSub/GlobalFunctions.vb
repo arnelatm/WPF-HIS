@@ -123,13 +123,13 @@ Public Module GlobalFunctions
     End Function
 
     Public Function GetFloorIntYearDifference(beginningDate As Date, endingDate As Date) As Int16
-        Dim year1 As Int16 = Year(beginningDate) ' 1994/12/31 
+        Dim year1 As Int16 = Year(beginningDate) ' 1994/12/31
         Dim year2 As Int16 = Year(endingDate)   ' 2024/01/01
         Dim yearDifference As Int16 = year2 - year1
         ' for accuracy check wee need to get actual values not just the year
         ' we can do it this way :
         ' years = DateAndTime.DateDiff(DateInterval.Year, CDate(View.StartDate), CDate(View.EndDate))
-        ' but this would not result to an exact value where say for 2024/12/31 & 2025/01/01 would 
+        ' but this would not result to an exact value where say for 2024/12/31 & 2025/01/01 would
         ' give a result of 1 year for in fact there is only one day in between those days not a year
         ' the DateDiff function only considers the years of the date
         Dim testDate = DateAndTime.DateAdd(DateInterval.Year, yearDifference, beginningDate)
@@ -399,7 +399,6 @@ Public Module GlobalFunctions
         Return value
     End Function
 
-
     Public Function GregorianLongDateString(dateToFormat As Object) As String
         Dim value As String
         Dim curCulture = CultureInfo.CurrentCulture
@@ -408,7 +407,6 @@ Public Module GlobalFunctions
         CultureInfo.CurrentCulture = curCulture
         Return value
     End Function
-
 
     '''<summary>
     '''Returns the month name for the gregorian calendar for a given month number
@@ -1623,7 +1621,6 @@ Public Module GlobalFunctions
         Return obj
     End Function
 
-
     Public Function CreateDynamicField(ByRef obj As ExpandoObject, ByVal propertyName As String, ByVal propertyValue As Object)
         Dim name As String = propertyName.Replace(" ", "")
         name = name.Replace("[", "")
@@ -1649,7 +1646,6 @@ Public Module GlobalFunctions
         ElseIf num = den Then 'decimal rounds up to next whole number
 
             fracString = (wn + 1).ToString
-
         Else 'somewhere between
 
             Do Until num Mod 2 = 1
@@ -1663,7 +1659,6 @@ Public Module GlobalFunctions
             If wn > 0 Then
 
                 fracString = wn.ToString & " " & num.ToString & "/" & den.ToString
-
             Else
 
                 fracString = num.ToString & "/" & den.ToString
@@ -1706,7 +1701,6 @@ Public Module GlobalFunctions
         Next
         Return New Fraction(lngN, lngD)
     End Function
-
 
     ''' <summary>
     ''' Return a fraction string from a double.
@@ -1869,6 +1863,7 @@ Public Module GlobalFunctions
     End Function
 
     Public Structure Fraction
+
         Public Sub New(ByVal nP As Integer, ByVal dP As Integer)
             N = nP
             D = dP
@@ -1891,7 +1886,6 @@ Public Module GlobalFunctions
     Public Function GetCultureLanguageCode(cCultureInfo As CultureInfo) As String
         Return Strings.Left(cCultureInfo.Name, cCultureInfo.Name.IndexOf("-", StringComparison.Ordinal))
     End Function
-
 
     ''' <summary>
     ''' Convert stored number to words using selected currency
@@ -1918,7 +1912,6 @@ Public Module GlobalFunctions
         Return retVal
     End Function
 
-
 #Region "English Number To Word"
 
 #Region "Variables"
@@ -1928,7 +1921,6 @@ Public Module GlobalFunctions
      "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen",
      "Eighteen", "Nineteen"}
 
-
     Private _englishFractionOnes As String() = New String() {"", "one", "half", "third", "fourth", "fifth",
      "sixth", "seventh", "eighth", "ninth", "tenth", "eleventh",
      "twelfth", "thirteenth", "Fourteenth", "Fifteenth", "Sixteenth", "Seventeenth",
@@ -1936,7 +1928,6 @@ Public Module GlobalFunctions
 
     Private _englishTens As String() = New String() {"Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy",
      "Eighty", "Ninety"}
-
 
     Private _englishFractionTens As String() = New String() {"twentieth", "thirtieth", "Fortieth", "Fiftieth", "Sixtieth", "Seventieth",
      "Eightieth", "Ninetieth"}
@@ -1990,7 +1981,6 @@ Public Module GlobalFunctions
 
         Return retVal
     End Function
-
 
     Public Function ConvertWholeNumberToWord(ByRef wholeNumber As Int64, Optional fractionalPart As Boolean = False) As String
         Dim retVal As String = [String].Empty
@@ -2052,6 +2042,5 @@ Public Module GlobalFunctions
      "كوينتليونات", "سكستيليونات"}
 
 #End Region
-
 
 End Module

@@ -76,7 +76,6 @@ Public Class CtComboBoxEditingControl
         End Set
     End Property
 
-
     '
     ' Summary:
     '     Gets the cursor used during editing.
@@ -145,7 +144,6 @@ Public Class CtComboBoxEditingControl
         ForeColor = dataGridViewCellStyle.ForeColor
     End Sub
 
-
     '
     ' Summary:
     '     Determines whether the specified key is a regular input key that the editing
@@ -194,7 +192,6 @@ Public Class CtComboBoxEditingControl
         '    End Select
     End Function
 
-
     '
     ' Summary:
     '     Prepares the currently selected cell for editing.
@@ -236,4 +233,5 @@ Public Class CtComboBoxEditingControl
         Me.ResumeLayout(False)
 
     End Sub
+
 End Class

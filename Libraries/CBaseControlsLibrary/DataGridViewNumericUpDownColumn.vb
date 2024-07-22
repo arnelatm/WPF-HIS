@@ -1,7 +1,7 @@
-﻿Imports System.Text
+﻿Imports System.ComponentModel
 Imports System.Globalization
+Imports System.Text
 Imports System.Windows.Forms
-Imports System.ComponentModel
 
 ''' <summary>
 ''' Custom column type dedicated to the DataGridViewNumericUpDownCell cell type.
@@ -55,12 +55,12 @@ Public Class DataGridViewNumericUpDownColumn
                 Dim dataGridViewRows As DataGridViewRowCollection = Me.DataGridView.Rows
                 Dim rowCount As Integer = dataGridViewRows.Count
                 For rowIndex As Integer = 0 To rowCount - 1
-                    ' Be careful not to unshare rows unnecessarily. 
+                    ' Be careful not to unshare rows unnecessarily.
                     ' This could have severe performance repercussions.
                     Dim dataGridViewRow As DataGridViewRow = dataGridViewRows.SharedRow(rowIndex)
                     Dim dataGridViewCell As DataGridViewNumericUpDownCell = TryCast(dataGridViewRow.Cells(Me.Index), DataGridViewNumericUpDownCell)
                     If dataGridViewCell IsNot Nothing Then
-                        ' Call the internal SetDecimalPlaces method instead of the property to avoid invalidation 
+                        ' Call the internal SetDecimalPlaces method instead of the property to avoid invalidation
                         ' of each cell. The whole column is invalidated later in a single operation for better performance.
                         dataGridViewCell.SetDecimalPlaces(rowIndex, value)
                     End If
@@ -133,7 +133,7 @@ Public Class DataGridViewNumericUpDownColumn
                     End If
                 Next
                 ' TODO: This column and/or grid rows may need to be autosized depending on their
-                '       autosize settings. Call the autosizing methods to autosize the column, rows, 
+                '       autosize settings. Call the autosizing methods to autosize the column, rows,
                 '       column headers / row headers as needed.
                 Me.DataGridView.InvalidateColumn(Me.Index)
             End If
@@ -172,7 +172,7 @@ Public Class DataGridViewNumericUpDownColumn
                     End If
                 Next
                 ' TODO: This column and/or grid rows may need to be autosized depending on their
-                '       autosize settings. Call the autosizing methods to autosize the column, rows, 
+                '       autosize settings. Call the autosizing methods to autosize the column, rows,
                 '       column headers / row headers as needed.
                 Me.DataGridView.InvalidateColumn(Me.Index)
             End If
@@ -202,13 +202,12 @@ Public Class DataGridViewNumericUpDownColumn
                     End If
                 Next
                 ' TODO: This column and/or grid rows may need to be autosized depending on their
-                '       autosize settings. Call the autosizing methods to autosize the column, rows, 
+                '       autosize settings. Call the autosizing methods to autosize the column, rows,
                 '       column headers / row headers as needed.
                 Me.DataGridView.InvalidateColumn(Me.Index)
             End If
         End Set
     End Property
-
 
     ''' Indicates whether the Maximum property should be persisted.
     Private Function ShouldSerializeMinimum() As Boolean
@@ -242,7 +241,7 @@ Public Class DataGridViewNumericUpDownColumn
                     End If
                 Next
                 ' TODO: This column and/or grid rows may need to be autosized depending on their
-                '       autosize settings. Call the autosizing methods to autosize the column, rows, 
+                '       autosize settings. Call the autosizing methods to autosize the column, rows,
                 '       column headers / row headers as needed.
                 Me.DataGridView.InvalidateColumn(Me.Index)
             End If
@@ -270,4 +269,5 @@ Public Class DataGridViewNumericUpDownColumn
         sb.Append(" }")
         Return sb.ToString()
     End Function
+
 End Class

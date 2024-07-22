@@ -48,7 +48,6 @@ Public Class CrystalReportPrinter
         End If
     End Sub
 
-
     Public Sub SetReportProperties(pReportFileName As String)
         Select Case DataBaseConnectionName.ToUpper()
             Case Nothing
@@ -253,7 +252,6 @@ Public Class CrystalReportPrinter
         Return PrinterSettings.InstalledPrinters.Cast(Of String)().Any(Function(name) printerName.ToUpper().Trim() = name.ToUpper().Trim())
     End Function
 
-
     Public Class CrPrintableArgs
 
         Public Property ReportFileName As String
@@ -266,7 +264,6 @@ Public Class CrystalReportPrinter
         Public Property StartPage As Integer = 0
         Public Property EndPage As Integer = 0
         Public Property ReportTitle As String = ""
-
 
     End Class
 

@@ -1,7 +1,6 @@
 ﻿Imports System.ComponentModel
 Imports System.Drawing
 Imports System.Linq.Expressions
-Imports System.Threading
 Imports System.Windows.Forms
 Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.BaseControlsLibrary
@@ -33,8 +32,6 @@ Public Class CxComboBox
     Private CBFilteredList As Dictionary(Of String, Int32)
     Private ComboBoxBusy As Boolean
 
-
-
     Private Property _editMode As Boolean
     Public Property ChangingSearchValueOnly As Boolean = False
 
@@ -49,11 +46,11 @@ Public Class CxComboBox
     Public Shared Property Delete As String = "Delete Selected Text"
     Public ComboBoxValueChanged As Boolean = False
 
-
     <Category("Custom Properties")>
     <DefaultValue(False)>
     <Description("Set to True to specify that this control is always editable.")>
     Public Property AlwaysEditable As Boolean = False
+
     Private _lastValue As Object = Nothing
 
     <Bindable(True)>
@@ -63,12 +60,10 @@ Public Class CxComboBox
     <Browsable(True)>
     Public Property DisplayOnly As Boolean
 
-
     <Category("Custom Properties")>
     <DefaultValue(False)>
     <Description("Set to True to specify that this control can be edited.")>
     Public Property Editable As Boolean = True
-
 
     <Category("Custom Properties")>
     <DefaultValue(False)>
@@ -231,6 +226,7 @@ Public Class CxComboBox
             _previousIndex = SelectedIndex
         End If
     End Sub
+
     Protected Overrides Sub OnGotFocus(e As EventArgs)
         BeginUpdate()
         MyBase.OnGotFocus(e)
@@ -252,7 +248,6 @@ Public Class CxComboBox
     Private Sub HandlePopup(sender As Object, e As EventArgs) Handles _contextMenuStrip1.Opening
         ContextHandler(sender, e)
     End Sub
-
 
 #End Region
 
@@ -350,7 +345,6 @@ Public Class CxComboBox
             SelectedIndex = -1
         End If
     End Sub
-
 
     Private Sub IdNoSearch(value As Object)
         Dim returnValue As Int32

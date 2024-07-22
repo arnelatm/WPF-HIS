@@ -1,7 +1,6 @@
 ﻿Imports System.ComponentModel
 Imports System.Drawing
 Imports System.Linq.Expressions
-Imports System.Threading
 Imports System.Windows.Forms
 Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.BaseControlsLibrary
@@ -23,16 +22,22 @@ Public Class CbComboBox
     Private _filterRuleCompiled As Func(Of String, Boolean)
     Private _propertySelector As Expression(Of Func(Of ObjectCollection, IEnumerable(Of String)))
     Private _readOnlyCombo As Boolean
+
     'Private _suggestListOrderRule As Expression(Of Func(Of String, String))
     'Private _suggestListOrderRuleCompiled As Func(Of String, String)
     'Private ReadOnly _defaultDropDownHeight As Int16
     Private ReadOnly _defaultDropdownStyle As ComboBoxStyle
+
     Private ReadOnly _defaultMaxDropDownItems As Int16
+
     'Private ReadOnly _suggestBindingList As BindingList(Of String) = New BindingList(Of String)()
     Private Shared ReadOnly KeysToHandle As Keys() = {Keys.Down, Keys.Up, Keys.Enter, Keys.Escape}
+
     Private WithEvents _contextMenuStrip1 As New ContextMenuStrip
+
     'Protected PropertySelectorCompiled As Func(Of ObjectCollection, IEnumerable(Of String))
     Public DataSourceProgrammaticChange As Boolean = False
+
     'Protected SuggestListForm As CListBoxForm = New CListBoxForm
 
     Public Property ChangingSearchValueOnly As Boolean = False
@@ -833,5 +838,3 @@ Public Class CbComboBox
     End Function
 
 End Class
-
-

@@ -1,7 +1,5 @@
 ﻿Imports System.ComponentModel
-Imports System.Globalization
 Imports System.Windows.Forms
-Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class CtDgvDtpColumn

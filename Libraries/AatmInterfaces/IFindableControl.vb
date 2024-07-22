@@ -6,7 +6,7 @@ Public Interface IFindableControl
     Property SearchPlace As SearchPlaceEnum
     Property FieldName As String
     Property FieldDescription As String
-    Property IgnoreCase As Boolean 
+    Property IgnoreCase As Boolean
     ReadOnly Property FindDataSource As Object
     ReadOnly Property FindDisplayMember As String
     ReadOnly Property SearchMode As SearchModeEnum

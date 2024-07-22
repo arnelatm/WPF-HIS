@@ -15,7 +15,7 @@ Public Class CDgvDtComboBoxEditingControl
     Private _filterRuleCompiled As Func(Of String, Boolean)
     Private _suggestListOrderRule As Expression(Of Func(Of String, String))
     Private _suggestListOrderRuleCompiled As Func(Of String, String)
-    
+
     Public Sub New()
         _filterRuleCompiled = Function(s) s.ToLower().Contains(Text.Trim().ToLower())
         _suggestListOrderRuleCompiled = Function(s) s
@@ -68,8 +68,6 @@ Public Class CDgvDtComboBoxEditingControl
             _suggestListOrderRuleCompiled = value.Compile()
         End Set
     End Property
-
-
 
     Public Property SuggestCharCount As Integer
 
@@ -235,7 +233,6 @@ Public Class CDgvDtComboBoxEditingControl
     'Public Overrides Function EditingControlWantsInputKey(ByVal keyData As Keys, ByVal dataGridViewWantsInputKey As Boolean) As Boolean
     '    Return (keyData And Keys.KeyCode) = Keys.Down OrElse (keyData And Keys.KeyCode) = Keys.Up OrElse Me.DroppedDown AndAlso (keyData And Keys.KeyCode) = Keys.Escape OrElse (keyData And Keys.KeyCode) = Keys.[Return] OrElse Not dataGridViewWantsInputKey
     'End Function
-
 
     Public Overrides Function EditingControlWantsInputKey(ByVal key As Keys, ByVal dataGridViewWantsInputKey As Boolean) As Boolean
 

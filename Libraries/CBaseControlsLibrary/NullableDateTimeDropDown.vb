@@ -1,10 +1,11 @@
 Imports System.Windows.Forms.Design
 
-<System.ComponentModel.ToolboxItem(False)> _
+<System.ComponentModel.ToolboxItem(False)>
 Public Class NullableDateTimeDropDown
     Private _editorService As IWindowsFormsEditorService = Nothing
 
     Private _Value As Nullable(Of DateTime)
+
     Public Property Value() As Nullable(Of DateTime)
         Get
             Return _Value
@@ -36,4 +37,5 @@ Public Class NullableDateTimeDropDown
         _editorService = editorService
         Me.Value = value
     End Sub
+
 End Class

@@ -205,7 +205,6 @@
      "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen",
      "Eighteen", "Nineteen"}
 
-
     Private Shared _englishFractionOnes As String() = New String() {"", "", "half", "third", "fourth", "fifth",
      "sixth", "seventh", "eighth", "ninth", "tenth", "eleventh",
      "twelfth", "thirteenth", "Fourteenth", "Fifteenth", "Sixteenth", "Seventeenth",
@@ -213,7 +212,6 @@
 
     Private Shared _englishTens As String() = New String() {"Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy",
      "Eighty", "Ninety"}
-
 
     Private Shared _englishFractionTens As String() = New String() {"twentieth", "thirtieth", "Fortieth", "Fiftieth", "Sixtieth", "Seventieth",
      "Eightieth", "Ninetieth"}

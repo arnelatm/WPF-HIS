@@ -1,8 +1,7 @@
-Imports System.Drawing.Drawing2D
 Imports System.ComponentModel
 Imports System.Drawing
 Imports System.Drawing.Design
-Imports System.Windows.Forms
+Imports System.Drawing.Drawing2D
 
 'Version 1.0 9-09
 

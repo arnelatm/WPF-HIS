@@ -5,7 +5,6 @@ Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class DFindForm
 
-
     Private _textToSearch As String
     Private _searchPlace As SearchPlaceEnum
     Private _begDateToSearch As Date?
@@ -398,4 +397,5 @@ Public Class DFindForm
         Return GTin
 
     End Function
+
 End Class

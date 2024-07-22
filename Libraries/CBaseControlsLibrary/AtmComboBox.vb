@@ -23,7 +23,6 @@ Public Class AtmComboBox
     Public DataSourceProgrammaticChange As Boolean = False
     Protected SuggestListForm As CListBoxForm = New CListBoxForm
 
-
     Public Sub New()
         MyBase.New()
         Dim myFont As New Font("Sans Serif", 10.0!, FontStyle.Regular)
@@ -63,6 +62,7 @@ Public Class AtmComboBox
     <DefaultValue(False)>
     <Description("Set to True to specify that this control is always editable.")>
     Public Property AlwaysEditable As Boolean = False
+
     Private _lastValue As Object = Nothing
 
     <Bindable(True)>
@@ -72,12 +72,10 @@ Public Class AtmComboBox
     <Browsable(True)>
     Public Property DisplayOnly As Boolean
 
-
     <Category("Custom Properties")>
     <DefaultValue(False)>
     <Description("Set to True to specify that this control can be edited.")>
     Public Property Editable As Boolean = True
-
 
     <Category("Custom Properties")>
     <DefaultValue(False)>
@@ -97,7 +95,6 @@ Public Class AtmComboBox
             UpdateDisplayOnlyControl()
         End Set
     End Property
-
 
     Public Sub UpdateDisplayOnlyControl()
         If _editingMode AndAlso Editable AndAlso Not DisplayOnly Then
@@ -370,6 +367,7 @@ Public Class AtmComboBox
     End Sub
 
     Private _editFilter As Boolean = True
+
     Protected Overrides Sub OnTextChanged(ByVal e As EventArgs)
         MyBase.OnTextChanged(e)
         If Not Focused Then Return
@@ -428,7 +426,6 @@ Public Class AtmComboBox
 
 #Region "Methods"
 
-
     Public Function GetValue(Of T)() As T
         If SelectedIndex = -1 Then
             Return Nothing
@@ -469,7 +466,6 @@ Public Class AtmComboBox
             SelectedIndex = -1
         End If
     End Sub
-
 
     Private Sub IdNoSearch(value As Object)
         Dim returnValue As Int32

@@ -1,6 +1,6 @@
 ﻿Imports System.Drawing
-Imports System.Windows.Forms
 Imports System.Runtime.InteropServices
+Imports System.Windows.Forms
 
 ''' <summary>
 ''' Defines the editing control for the DataGridViewNumericUpDownCell custom cell type.
@@ -24,8 +24,10 @@ Class DataGridViewNumericUpDownEditingControl
 
     ' The grid that owns this editing control
     Private dataGridView As DataGridView
+
     ' Stores whether the editing control's value has changed or not
     Private _valueChanged As Boolean
+
     ' Stores the row index in which the editing control resides
     Private rowIndex As Integer
 
@@ -99,7 +101,7 @@ Class DataGridViewNumericUpDownEditingControl
     End Property
 
     ''' <summary>
-    ''' Property which indicates whether the editing control needs to be repositioned 
+    ''' Property which indicates whether the editing control needs to be repositioned
     ''' when its value changes.
     ''' </summary>
     Public Overridable ReadOnly Property RepositionEditingControlOnValueChange() As Boolean Implements IDataGridViewEditingControl.RepositionEditingControlOnValueChange
@@ -109,7 +111,7 @@ Class DataGridViewNumericUpDownEditingControl
     End Property
 
     ''' <summary>
-    ''' Method called by the grid before the editing control is shown so it can adapt to the 
+    ''' Method called by the grid before the editing control is shown so it can adapt to the
     ''' provided cell style.
     ''' </summary>
     Public Overridable Sub ApplyCellStyleToEditingControl(ByVal dataGridViewCellStyle As DataGridViewCellStyle) Implements IDataGridViewEditingControl.ApplyCellStyleToEditingControl
@@ -237,7 +239,7 @@ Class DataGridViewNumericUpDownEditingControl
     ' End of the IDataGridViewEditingControl interface implementation
 
     ''' <summary>
-    ''' Small utility function that updates the local dirty state and 
+    ''' Small utility function that updates the local dirty state and
     ''' notifies the grid of the value change.
     ''' </summary>
     Private Sub NotifyDataGridViewOfValueChange()
@@ -248,7 +250,7 @@ Class DataGridViewNumericUpDownEditingControl
     End Sub
 
     ''' <summary>
-    ''' Listen to the KeyPress notification to know when the value changed, and 
+    ''' Listen to the KeyPress notification to know when the value changed, and
     ''' notify the grid of the change.
     ''' </summary>
     Protected Overloads Overrides Sub OnKeyPress(ByVal e As KeyPressEventArgs)
@@ -305,4 +307,5 @@ Class DataGridViewNumericUpDownEditingControl
             Return MyBase.ProcessKeyEventArgs(m)
         End If
     End Function
+
 End Class

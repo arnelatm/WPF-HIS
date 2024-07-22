@@ -49,7 +49,6 @@ Public Class CFormNew
         End If
     End Sub
 
-
     Private Sub LayoutControls(allControls As List(Of Control))
         For Each cCtrl As Control In allControls
             If TypeOf cCtrl Is CButton OrElse TypeOf cCtrl Is Button Then
@@ -69,8 +68,6 @@ Public Class CFormNew
             End If
         Next cCtrl
     End Sub
-
-
 
     ' The form will handle all key events before the control With
     ' focus handles them
@@ -114,6 +111,5 @@ Public Class CFormNew
             textBox.Paste()
         End If
     End Sub
-
 
 End Class

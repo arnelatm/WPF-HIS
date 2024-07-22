@@ -1,5 +1,4 @@
 ﻿' This is the class that represents your cell which can use your ComboBox class
-Imports Microsoft.VisualBasic.PowerPacks
 Imports System.Windows.Forms
 
 Public Class MyDgvComboboxCell
@@ -9,16 +8,16 @@ Public Class MyDgvComboboxCell
         MyBase.New()
     End Sub
 
-    ' You must override the EditType property to return the cell's 
+    ' You must override the EditType property to return the cell's
     ' editing control type, which is your custom ComboBox class...
     Public Overrides ReadOnly Property EditType() As Type
         Get
-            Return GetType(CtCombobox)
+            Return GetType(CtComboBox)
         End Get
     End Property
 
     ' You must also override this method to initialize the ComboBox instance...
-    ' This method will be called each time a cell in the column enters edit-mode, 
+    ' This method will be called each time a cell in the column enters edit-mode,
     ' so you can fill the ComboBox instance based on the value of the edited cell
     Public Overrides Sub InitializeEditingControl(ByVal rowIndex As Integer, ByVal formattedValue As Object, ByVal cellStyle As DataGridViewCellStyle)
 
@@ -26,7 +25,7 @@ Public Class MyDgvComboboxCell
         MyBase.InitializeEditingControl(rowIndex, formattedValue, cellStyle)
 
         ' Convert the cell's EditingControl to your custom ComboBox type...
-        Dim ctl As CtCombobox = CType(DataGridView.EditingControl, CtCombobox)
+        Dim ctl As CtComboBox = CType(DataGridView.EditingControl, CtComboBox)
 
         ' Make sure you have an instance...
         If ctl IsNot Nothing Then
@@ -37,6 +36,7 @@ Public Class MyDgvComboboxCell
             ctl.SelectedValue = formattedValue
         End If
     End Sub
+
 End Class
 
 ' This is the class that represents your column which can use your cell class

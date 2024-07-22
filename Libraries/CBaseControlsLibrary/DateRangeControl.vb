@@ -1,6 +1,5 @@
 ﻿Public Class DateRangeControl
 
-
     Public Sub New()
 
         ' This call is required by the designer.
@@ -10,7 +9,6 @@
         Dim now As Date = Today()
         dtpEndingDate.Value = now
         dtpBeginningDate.Value = DateAndTime.DateAdd(DateInterval.Day, Day(now) * -1 + 1, now)
-
 
     End Sub
 
@@ -31,6 +29,5 @@
     '        dtpEndingDate.Value = value
     '    End Set
     'End Property
-
 
 End Class

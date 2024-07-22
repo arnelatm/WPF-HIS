@@ -1,6 +1,5 @@
 ﻿Imports System.ComponentModel
 Imports System.Drawing
-Imports System.Drawing.Drawing2D
 Imports System.Windows.Forms
 Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.GlobalFuncNSub

@@ -110,7 +110,6 @@ Public Class CTextBox
     '    End Set
     'End Property
 
-
     <Category("Custom Properties")>
     <DefaultValue(False)>
     <Description("Set to True to specify that this control is always editable.")>

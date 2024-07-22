@@ -12,8 +12,8 @@ Public Class UcCheckBox
     Private clicked As Boolean = False
     Private _state As CheckBoxState = CheckBoxState.UncheckedNormal
     Private _text As String
-    Public event CheckedChanged(sender As Object, e As EventArgs)
-        
+
+    Public Event CheckedChanged(sender As Object, e As EventArgs)
 
     Public Sub New()
 
@@ -196,7 +196,6 @@ Public Class UcCheckBox
     Public Sub UcCheckChanged(sender As Object, e As EventArgs) Handles checkBox.CheckedChanged
         RaiseEvent CheckedChanged(sender, e)
     End Sub
-
 
     'Protected Overrides Sub OnPaint(ByVal pEvent As PaintEventArgs)
     '    MyBase.OnPaint(pEvent)

@@ -35,8 +35,6 @@ Public Class CDgvCheckBoxEditingControl
         End Set
     End Property
 
-
-
     '
     ' Summary:
     '     Gets or sets the index of the owning cell's parent row.
@@ -83,7 +81,6 @@ Public Class CDgvCheckBoxEditingControl
             _valueChanged = value
         End Set
     End Property
-
 
     '
     ' Summary:
@@ -153,7 +150,6 @@ Public Class CDgvCheckBoxEditingControl
         ForeColor = dataGridViewCellStyle.ForeColor
     End Sub
 
-
     '
     ' Summary:
     '     Determines whether the specified key is a regular input key that the editing
@@ -203,7 +199,6 @@ Public Class CDgvCheckBoxEditingControl
     '    '    End Select
     'End Function
 
-
     '
     ' Summary:
     '     Prepares the currently selected cell for editing.
@@ -232,6 +227,5 @@ Public Class CDgvCheckBoxEditingControl
         'Return Not dataGridViewWantsInputKey
         Return False
     End Function
-
 
 End Class

@@ -320,7 +320,6 @@ Public Class DgvFooter
     ''' </remarks>
     Private Sub OnParentRowsAdded(ByVal sender As Object, ByVal e As DataGridViewRowsAddedEventArgs) Handles _parentDgv.RowsAdded
 
-
         If _parentDgv.Rows.Count < 1 Then Exit Sub
 
         Dim rowY As Integer = (_parentDgv.Rows.Count + 1) * _parentDgv.Rows(0).Height
@@ -356,7 +355,6 @@ Public Class DgvFooter
                 _parentDgv.FirstDisplayedScrollingRowIndex = _parentDgv.Rows.Count - 2
 
             End If
-
         Else
 
             If rowY + _parentDgv.ColumnHeadersHeight >= footY Then

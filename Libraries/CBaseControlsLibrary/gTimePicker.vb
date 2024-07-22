@@ -1,13 +1,11 @@
-Imports System.Drawing.Drawing2D
 Imports System.ComponentModel
 Imports System.Drawing
-Imports System.Windows.Forms.Design
 Imports System.Drawing.Design
-Imports System.Windows.Forms
-Imports AATM.Libraries.CBaseControlsLibrary.gTimePickerCntrl
+Imports System.Drawing.Drawing2D
 Imports System.Text.RegularExpressions
-Imports System.Diagnostics.Eventing.Reader
-Imports AATM.DataLayer.AdoNet
+Imports System.Windows.Forms
+Imports System.Windows.Forms.Design
+Imports AATM.Libraries.CBaseControlsLibrary.gTimePickerCntrl
 
 'Version 1.0 8-09
 'version 1.1 8-09 Fixed 24 hour time

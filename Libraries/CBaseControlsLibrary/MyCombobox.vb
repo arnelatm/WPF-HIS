@@ -9,7 +9,6 @@ Public Class MyFormCombobox
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-
         Dim MyTable As New DataTable
         MyTable.Columns.Add("Value", GetType(String))
 
@@ -62,4 +61,5 @@ Public Class MyFormCombobox
         Me.ResumeLayout(False)
 
     End Sub
+
 End Class

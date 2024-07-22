@@ -17,7 +17,6 @@ Public Class CfComboBox
     Private _cBFullList As Dictionary(Of String, System.Int32)
     Private _cBFilteredList As Dictionary(Of String, System.Int32)
 
-
     'Private MyErrorProvider As New ErrorProviderExtended
     Private ReadOnly _textToSearch As String
 
@@ -32,7 +31,6 @@ Public Class CfComboBox
     Public DatasourceProgrammaticChange As Boolean = False
     Private _currentSearchTerm As String = ""
     Private _changingSearchValueOnly As Boolean = False
-
 
     Public Sub New()
         MyBase.New()
@@ -75,7 +73,6 @@ Public Class CfComboBox
             _isNumeric = Value
         End Set
     End Property
-
 
     <Bindable(True)>
     <Category("Properties")>

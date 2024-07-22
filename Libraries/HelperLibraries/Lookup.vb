@@ -1,5 +1,4 @@
-﻿Imports System.Globalization
-Imports System.Reflection
+﻿Imports System.Reflection
 
 Public Class LookupTable
 
@@ -83,4 +82,5 @@ Public Class LookupTable
 
         Return dataTable
     End Function
+
 End Class

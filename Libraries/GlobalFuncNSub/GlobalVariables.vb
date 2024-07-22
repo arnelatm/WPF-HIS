@@ -562,6 +562,7 @@ Public Class GlobalVariables
     'Private _rtlCultureINfo As CultureInfo
     'Public Shared Property CurrentAppCultureInfo as CultureInfo
     Public Shared Property UserName As String
+
 #Region "Colors"
 
     Public Shared Property DefaultAlternatingBackGroundColor As Color
@@ -725,7 +726,9 @@ Public Class GlobalVariables
             _defaultFormForegroundColor = Value
         End Set
     End Property
+
 #End Region
+
     'Private Shared Sub GetAppCultureInfo()
     '    If _AppLanguage = "" Then
     '        Try

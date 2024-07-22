@@ -1,11 +1,5 @@
-﻿Imports System.ComponentModel
-Imports System.Drawing
-Imports System.Globalization
-Imports System.Linq.Expressions
-Imports System.Threading
+﻿Imports System.Drawing
 Imports System.Windows.Forms
-Imports AATM.Libraries.GlobalFuncNSub
-Imports System.Runtime.InteropServices
 
 Public Class CDgvComboBoxEditingControl
     Inherits CtComboBox
@@ -39,8 +33,6 @@ Public Class CDgvComboBoxEditingControl
             'End If
         End Set
     End Property
-
-
 
     '
     ' Summary:
@@ -88,7 +80,6 @@ Public Class CDgvComboBoxEditingControl
             _valueChanged = value
         End Set
     End Property
-
 
     '
     ' Summary:
@@ -158,7 +149,6 @@ Public Class CDgvComboBoxEditingControl
         ForeColor = dataGridViewCellStyle.ForeColor
     End Sub
 
-
     '
     ' Summary:
     '     Determines whether the specified key is a regular input key that the editing
@@ -206,7 +196,6 @@ Public Class CDgvComboBoxEditingControl
         '        Return Not dataGridViewWantsInputKey
         '    End Select
     End Function
-
 
     '
     ' Summary:

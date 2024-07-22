@@ -1,11 +1,10 @@
-Imports System.Text.RegularExpressions
-Imports System.Drawing.Drawing2D
-Imports System.Drawing.Design
-Imports System.Windows.Forms.Design
 Imports System.ComponentModel
 Imports System.Drawing
+Imports System.Drawing.Design
+Imports System.Drawing.Drawing2D
+Imports System.Text.RegularExpressions
 Imports System.Windows.Forms
-Imports System.Windows.Forms.VisualStyles
+Imports System.Windows.Forms.Design
 
 <ToolboxItem(True), ToolboxBitmap(GetType(gTimePickerCntrl), "gTimePickerControl.gTimePickerCntrl.bmp")>
 <Designer(GetType(gTimePickerCtrlDesigner))>

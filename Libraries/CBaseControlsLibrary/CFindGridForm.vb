@@ -9,5 +9,4 @@ Public Class CFindGridForm
         MyBase.New(findableControl)
     End Sub
 
-
 End Class

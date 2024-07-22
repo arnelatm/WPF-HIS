@@ -22,7 +22,6 @@ Public Class CrystalReportDocument
     Public Sub New()
     End Sub
 
-
     Public Sub New(crReportFileName As String, Optional crReportArgs() As Object = Nothing, Optional dbConnectionCode As String = DEFAULT_CONNECTION)
         Me.ReportFileName = crReportFileName
         Me.DataBaseConnectionCode = dbConnectionCode
@@ -55,7 +54,6 @@ Public Class CrystalReportDocument
             Return _crystalReportDocument
         End Get
     End Property
-
 
     Public Sub SetCrReportConnectionProperties()
         Select Case DataBaseConnectionCode.ToUpper()

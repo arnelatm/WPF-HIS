@@ -4,11 +4,9 @@
 Imports System.Drawing
 Imports System.Globalization
 Imports System.Windows.Forms
-Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
 Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.GlobalResources
 Imports AATM.Libraries.MessagingLibrary
 
 Public Class CtDataGridView
@@ -157,7 +155,6 @@ Public Class CtDataGridView
             _searchable = value
         End Set
     End Property
-
 
     Public Function GetColumnTotal(ByVal columnName As String)
         Return DgvFooter.GetColumnTotal(columnName)
@@ -353,7 +350,6 @@ Public Class CtDataGridView
         End If
     End Sub
 
-
     Private Sub InsertRow(rowIndex As Int16)
         If rowIndex = NewRowIndex() Then
             Beep()
@@ -370,7 +366,6 @@ Public Class CtDataGridView
         End If
         'End If
     End Sub
-
 
     Private Sub DataGridView_DataError(ByVal sender As Object, ByVal e As DataGridViewDataErrorEventArgs) Handles Me.DataError
 
@@ -689,7 +684,7 @@ Public Class CtDataGridView
             dataTypeEnum = GetObjectDataType(columnDataType)
             Dim searchForm As CFindForm
             FindDataType = dataTypeEnum
-            searchForm = New CFindForm(Me) ', _findColumnNo) 
+            searchForm = New CFindForm(Me) ', _findColumnNo)
             Dim screenRectangle As Rectangle
             Dim formLocation As Point
             searchForm.SetFieldDescription(Columns(_findColumnNo).HeaderText)
@@ -993,7 +988,6 @@ Public Class CtDataGridView
     '    End If
     'End Sub
 
-
     'Public Sub ResetDisplayOnly(lDisplayOnly As Boolean, control As Control)
     '    If control.GetType().GetProperty("DisplayOnly") IsNot Nothing Then
     '        If _editingMode Then
@@ -1014,6 +1008,5 @@ Public Class CtDataGridView
     '        End If
     '    End If
     'End Sub
-
 
 End Class
