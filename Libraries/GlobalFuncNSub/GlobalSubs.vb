@@ -16,12 +16,10 @@ Public Module GlobalSubs
         If pInfo IsNot Nothing Then
             'Dim pInfo As System.Reflection.PropertyInfo = objType.GetProperty(PropName, Reflection.BindingFlags.GetProperty)
             Try
-                If objType.FullName = "AATM.Libraries.CBaseControlsLibrary.CtDataGridView" Then
-                    If propName <> "EditingMode" Then
-                        pInfo.SetValue(obj, propValue, BindingFlags.GetProperty, Nothing, Nothing, Nothing)
-                    Else
-                        Debugger.Break()
-                    End If
+                If objType.FullName = "AATM.Libraries.CBaseControlsLibrary.CtDataGridView" And
+                    propName = "EditingMode" And obj.Name = "DataGridViewPhoneDisplay" Then
+                    'obj.EditingMode = propValue
+                    'Debugger.Break()
                 Else
                     pInfo.SetValue(obj, propValue, BindingFlags.GetProperty, Nothing, Nothing, Nothing)
                 End If

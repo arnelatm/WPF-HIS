@@ -831,14 +831,14 @@ Public Class AtmComboBox
 
     Private Const WmMousewheel As Integer = &H20A
 
-    <DebuggerStepThrough>
-    Protected Overrides Sub WndProc(ByRef m As Message)
-        If EditingMode And Not DisplayOnly Then
-            MyBase.WndProc(m)
-        Else
-            If Not m.Msg = WmMousewheel Then MyBase.WndProc(m)
-        End If
-    End Sub
+    '<DebuggerStepThrough>
+    'Protected Overrides Sub WndProc(ByRef m As Message)
+    '    If EditingMode And Not DisplayOnly Then
+    '        MyBase.WndProc(m)
+    '    Else
+    '        If Not m.Msg = WmMousewheel Then MyBase.WndProc(m)
+    '    End If
+    'End Sub
 
     Public Function GetControlDescription(Optional defaultDescription As String = Nothing) Implements ILinkedLabel.GetControlDescription
         Dim description As String

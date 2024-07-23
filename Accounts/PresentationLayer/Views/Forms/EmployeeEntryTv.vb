@@ -18,7 +18,7 @@ Namespace PresentationLayer.Views.Forms
         Private _regularEmployeeEarnings As List(Of EmployeePayElementView)
         Private _EmployeeLeaveCredits As List(Of EmployeeLeaveCreditView)
         Private _employeeDocuments As List(Of EmployeeDocumentView)
-        Private _employeePhones As List(Of EmployeePhoneView)
+        Private _employeePhones As New List(Of EmployeePhoneView)
         Private _fileSizeTooLarge As Boolean = False
         Private ReadOnly _nfi As NumberFormatInfo
 
@@ -550,11 +550,10 @@ Namespace PresentationLayer.Views.Forms
                 '.Refresh()
             End With
             With DataGridViewPhones.Columns
-                dgvPhoneTypeIdNo.DisplayStyleForCurrentCellOnly = True
                 dgvPhoneTypeIdNo.DataSource = PhoneTypes
                 dgvPhoneTypeIdNo.DisplayMember = "Name"
                 dgvPhoneTypeIdNo.ValueMember = "IdNo"
-                dgvCountryTelIdNo.DisplayStyleForCurrentCellOnly = True
+                dgvPhoneTypeIdNo.DisplayStyleForCurrentCellOnly = True
                 dgvCountryTelIdNo.DataSource = CountryTelCodes
                 dgvCountryTelIdNo.DisplayMember = "Name"
                 dgvCountryTelIdNo.ValueMember = "IdNo"

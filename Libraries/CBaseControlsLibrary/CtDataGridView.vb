@@ -3,6 +3,7 @@
 'Imports System.Data.SqlClient
 Imports System.Drawing
 Imports System.Globalization
+Imports System.Windows.Controls
 Imports System.Windows.Forms
 Imports AATM.DataLayer.AdoNet
 Imports AATM.Libraries.AatmInterfaces
@@ -394,28 +395,61 @@ Public Class CtDataGridView
 
     Private Sub DataGridView1_DataError(ByVal sender As Object, ByVal e As DataGridViewDataErrorEventArgs) Handles Me.DataError
 
-        MessageBox.Show("Error happened " & e.Context.ToString())
+        Try
+        Catch ex As Exception
+            If (e.Context = DataGridViewDataErrorContexts.Formatting) OrElse (e.Context = DataGridViewDataErrorContexts.PreferredSize) OrElse (e.Context = DataGridViewDataErrorContexts.Display) OrElse (e.Context = DataGridViewDataErrorContexts.Display) Then
+                Debugger.Break()
+                ' ignore error
+            Else
+                Debugger.Break()
+                MessageBox.Show("Error happened " & e.Context.ToString())
+                If (e.Context = DataGridViewDataErrorContexts.Commit) Then
+                    Debugger.Break()
+                    MessageBox.Show("Commit error")
+                End If
+                If (e.Context = DataGridViewDataErrorContexts.CurrentCellChange) Then
+                    MessageBox.Show("Cell change")
+                End If
+                If (e.Context = DataGridViewDataErrorContexts.Parsing) Then
+                    MessageBox.Show("parsing error")
+                End If
+                If (e.Context = DataGridViewDataErrorContexts.LeaveControl) Then
+                    Debugger.Break()
+                    MessageBox.Show("leave control error")
+                End If
 
-        If (e.Context = DataGridViewDataErrorContexts.Commit) Then
-            MessageBox.Show("Commit error")
-        End If
-        If (e.Context = DataGridViewDataErrorContexts.CurrentCellChange) Then
-            MessageBox.Show("Cell change")
-        End If
-        If (e.Context = DataGridViewDataErrorContexts.Parsing) Then
-            MessageBox.Show("parsing error")
-        End If
-        If (e.Context =
-        DataGridViewDataErrorContexts.LeaveControl) Then
-            MessageBox.Show("leave control error")
-        End If
+                If (TypeOf (e.Exception) Is ConstraintException) Then
+                    Debugger.Break()
+                    Dim view As DataGridView = CType(sender, DataGridView)
+                    view.Rows(e.RowIndex).ErrorText = "an error"
+                    view.Rows(e.RowIndex).Cells(e.ColumnIndex).ErrorText = "an error"
+                    e.ThrowException = False
+                End If
+            End If
+        End Try
 
-        If (TypeOf (e.Exception) Is ConstraintException) Then
-            Dim view As DataGridView = CType(sender, DataGridView)
-            view.Rows(e.RowIndex).ErrorText = "an error"
-            view.Rows(e.RowIndex).Cells(e.ColumnIndex).ErrorText = "an error"
-            e.ThrowException = False
-        End If
+        'MessageBox.Show("Error happened " & e.Context.ToString())
+
+        'If (e.Context = DataGridViewDataErrorContexts.Commit) Then
+        '    MessageBox.Show("Commit error")
+        'End If
+        'If (e.Context = DataGridViewDataErrorContexts.CurrentCellChange) Then
+        '    MessageBox.Show("Cell change")
+        'End If
+        'If (e.Context = DataGridViewDataErrorContexts.Parsing) Then
+        '    MessageBox.Show("parsing error")
+        'End If
+        'If (e.Context =
+        'DataGridViewDataErrorContexts.LeaveControl) Then
+        '    MessageBox.Show("leave control error")
+        'End If
+
+        'If (TypeOf (e.Exception) Is ConstraintException) Then
+        '    Dim view As DataGridView = CType(sender, DataGridView)
+        '    view.Rows(e.RowIndex).ErrorText = "an error"
+        '    view.Rows(e.RowIndex).Cells(e.ColumnIndex).ErrorText = "an error"
+        '    e.ThrowException = False
+        'End If
     End Sub
 
     Private Sub DataGridView1_RowHeaderMouseClick(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles Me.RowHeaderMouseClick
@@ -1008,10 +1042,8 @@ Public Class CtDataGridView
     End Sub
 
     Public Sub MakeHeaderToolTips()
-        'dgvAge.DisplayOnly = True
-        For Each col In Columns
-            Dim headerCell As DataGridViewColumnHeaderCell = headerCell
-            headerCell.ToolTipText = col.HeaderText
+        For Each column As DataGridViewColumn In Columns
+            column.HeaderCell.ToolTipText = column.HeaderText
         Next
     End Sub
 
