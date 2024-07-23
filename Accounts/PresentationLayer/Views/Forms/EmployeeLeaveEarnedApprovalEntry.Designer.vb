@@ -39,7 +39,7 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblEnteredBy = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboApprovedBy = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+        Me.cboApprovedBy = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.dtpDateCreated = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.DataGridViewEmployeeLeave = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
@@ -157,7 +157,6 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         Me.cboApprovedBy.EndFindValue = Nothing
         Me.cboApprovedBy.FieldDescription = Nothing
         Me.cboApprovedBy.FieldName = Nothing
-        Me.cboApprovedBy.FilterRule = Nothing
         Me.cboApprovedBy.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.cboApprovedBy.FindEnabled = False
         Me.cboApprovedBy.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -177,11 +176,9 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
         Me.cboApprovedBy.OriginalList = Nothing
         Me.cboApprovedBy.OverrideDropDownStyleList = False
         Me.cboApprovedBy.PreviousSearchTerm = Nothing
-        Me.cboApprovedBy.PropertySelector = Nothing
         Me.cboApprovedBy.Size = New System.Drawing.Size(339, 29)
         Me.cboApprovedBy.SuggestBoxHeight = 200
         Me.cboApprovedBy.SuggestCharCount = 0
-        Me.cboApprovedBy.SuggestListOrderRule = Nothing
         Me.cboApprovedBy.TabIndex = 1
         Me.cboApprovedBy.TextToSearch = Nothing
         Me.cboApprovedBy.Translatable = False
@@ -609,7 +606,7 @@ Partial Class EmployeeLeaveEarnedApprovalEntry
     Friend WithEvents lblIdNo As Libraries.CBaseControlsLibrary.CLabel
     Friend WithEvents txtIdNo As Libraries.CBaseControlsLibrary.CTextBox
     Friend WithEvents lblEnteredBy As Libraries.CBaseControlsLibrary.CLabel
-    Friend WithEvents cboApprovedBy As Libraries.CBaseControlsLibrary.AtmComboBox
+    Friend WithEvents cboApprovedBy As Libraries.CBaseControlsLibrary.CdtComboBox
     Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel
     Friend WithEvents dtpDateCreated As Libraries.CBaseControlsLibrary.CCustomDateTimePicker
     Friend WithEvents DataGridViewEmployeeLeave As Libraries.CBaseControlsLibrary.CtDataGridView

@@ -50,7 +50,7 @@
         Me.lblZipCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtZipCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblCountryCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacCountryCode = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cacCountryCode = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblPhone1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtPhone1 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblPhone2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -66,19 +66,19 @@
             Me.lblCrNumber = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtCrNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblBankIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacBankIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cacBankIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblBankAccountNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtBankAccountNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblIban = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtIban = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblExpAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacExpAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cacExpAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblApAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacApAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cacApAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblCreditLimit = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtCreditLimit = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblPaymentMethod = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacPaymentMethod = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cacPaymentMethod = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblOpeningBalance = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtOpeningBalance = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblSettlementDueDays = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -93,7 +93,7 @@
             Me.lblDateAccountOpen = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpDateAccountOpen = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.lblAccountStatus = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacAccountStatus = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cacAccountStatus = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtBalance = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -840,7 +840,6 @@
             Me.cacCountryCode.EndFindValue = Nothing
             Me.cacCountryCode.FieldDescription = Nothing
             Me.cacCountryCode.FieldName = Nothing
-            Me.cacCountryCode.FilterRule = Nothing
             Me.cacCountryCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cacCountryCode.FindEnabled = False
             Me.floDataDisplay.SetFlowBreak(Me.cacCountryCode, True)
@@ -860,10 +859,8 @@
             Me.cacCountryCode.OriginalList = Nothing
             Me.cacCountryCode.OverrideDropDownStyleList = False
             Me.cacCountryCode.PreviousSearchTerm = Nothing
-            Me.cacCountryCode.PropertySelector = Nothing
             Me.cacCountryCode.Size = New System.Drawing.Size(203, 24)
             Me.cacCountryCode.SuggestBoxHeight = 200
-            Me.cacCountryCode.SuggestListOrderRule = Nothing
             Me.cacCountryCode.TabIndex = 12
             Me.cacCountryCode.TextToSearch = Nothing
             Me.cacCountryCode.Translatable = False
@@ -1211,7 +1208,6 @@
             Me.cacBankIdNo.EndFindValue = Nothing
             Me.cacBankIdNo.FieldDescription = Nothing
             Me.cacBankIdNo.FieldName = Nothing
-            Me.cacBankIdNo.FilterRule = Nothing
             Me.cacBankIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cacBankIdNo.FindEnabled = False
             Me.floDataDisplay.SetFlowBreak(Me.cacBankIdNo, True)
@@ -1231,10 +1227,8 @@
             Me.cacBankIdNo.OriginalList = Nothing
             Me.cacBankIdNo.OverrideDropDownStyleList = False
             Me.cacBankIdNo.PreviousSearchTerm = Nothing
-            Me.cacBankIdNo.PropertySelector = Nothing
             Me.cacBankIdNo.Size = New System.Drawing.Size(204, 24)
             Me.cacBankIdNo.SuggestBoxHeight = 200
-            Me.cacBankIdNo.SuggestListOrderRule = Nothing
             Me.cacBankIdNo.TabIndex = 20
             Me.cacBankIdNo.TextToSearch = Nothing
             Me.cacBankIdNo.Translatable = False
@@ -1360,7 +1354,6 @@
             Me.cacExpAccountIdNo.EndFindValue = Nothing
             Me.cacExpAccountIdNo.FieldDescription = Nothing
             Me.cacExpAccountIdNo.FieldName = Nothing
-            Me.cacExpAccountIdNo.FilterRule = Nothing
             Me.cacExpAccountIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cacExpAccountIdNo.FindEnabled = False
             Me.cacExpAccountIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -1379,10 +1372,8 @@
             Me.cacExpAccountIdNo.OriginalList = Nothing
             Me.cacExpAccountIdNo.OverrideDropDownStyleList = False
             Me.cacExpAccountIdNo.PreviousSearchTerm = Nothing
-            Me.cacExpAccountIdNo.PropertySelector = Nothing
             Me.cacExpAccountIdNo.Size = New System.Drawing.Size(194, 24)
             Me.cacExpAccountIdNo.SuggestBoxHeight = 200
-            Me.cacExpAccountIdNo.SuggestListOrderRule = Nothing
             Me.cacExpAccountIdNo.TabIndex = 23
             Me.cacExpAccountIdNo.TabStop = False
             Me.cacExpAccountIdNo.TextToSearch = Nothing
@@ -1420,7 +1411,6 @@
             Me.cacApAccountIdNo.EndFindValue = Nothing
             Me.cacApAccountIdNo.FieldDescription = Nothing
             Me.cacApAccountIdNo.FieldName = Nothing
-            Me.cacApAccountIdNo.FilterRule = Nothing
             Me.cacApAccountIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cacApAccountIdNo.FindEnabled = False
             Me.floDataDisplay.SetFlowBreak(Me.cacApAccountIdNo, True)
@@ -1440,10 +1430,8 @@
             Me.cacApAccountIdNo.OriginalList = Nothing
             Me.cacApAccountIdNo.OverrideDropDownStyleList = False
             Me.cacApAccountIdNo.PreviousSearchTerm = Nothing
-            Me.cacApAccountIdNo.PropertySelector = Nothing
             Me.cacApAccountIdNo.Size = New System.Drawing.Size(204, 24)
             Me.cacApAccountIdNo.SuggestBoxHeight = 200
-            Me.cacApAccountIdNo.SuggestListOrderRule = Nothing
             Me.cacApAccountIdNo.TabIndex = 24
             Me.cacApAccountIdNo.TextToSearch = Nothing
             Me.cacApAccountIdNo.Translatable = False
@@ -1526,7 +1514,6 @@
             Me.cacPaymentMethod.EndFindValue = Nothing
             Me.cacPaymentMethod.FieldDescription = Nothing
             Me.cacPaymentMethod.FieldName = Nothing
-            Me.cacPaymentMethod.FilterRule = Nothing
             Me.cacPaymentMethod.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cacPaymentMethod.FindEnabled = False
             Me.floDataDisplay.SetFlowBreak(Me.cacPaymentMethod, True)
@@ -1546,10 +1533,8 @@
             Me.cacPaymentMethod.OriginalList = Nothing
             Me.cacPaymentMethod.OverrideDropDownStyleList = False
             Me.cacPaymentMethod.PreviousSearchTerm = Nothing
-            Me.cacPaymentMethod.PropertySelector = Nothing
             Me.cacPaymentMethod.Size = New System.Drawing.Size(204, 24)
             Me.cacPaymentMethod.SuggestBoxHeight = 200
-            Me.cacPaymentMethod.SuggestListOrderRule = Nothing
             Me.cacPaymentMethod.TabIndex = 26
             Me.cacPaymentMethod.TextToSearch = Nothing
             Me.cacPaymentMethod.Translatable = False
@@ -1882,7 +1867,6 @@
             Me.cacAccountStatus.EndFindValue = Nothing
             Me.cacAccountStatus.FieldDescription = Nothing
             Me.cacAccountStatus.FieldName = Nothing
-            Me.cacAccountStatus.FilterRule = Nothing
             Me.cacAccountStatus.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cacAccountStatus.FindEnabled = False
             Me.floDataDisplay.SetFlowBreak(Me.cacAccountStatus, True)
@@ -1902,10 +1886,8 @@
             Me.cacAccountStatus.OriginalList = Nothing
             Me.cacAccountStatus.OverrideDropDownStyleList = False
             Me.cacAccountStatus.PreviousSearchTerm = Nothing
-            Me.cacAccountStatus.PropertySelector = Nothing
             Me.cacAccountStatus.Size = New System.Drawing.Size(204, 24)
             Me.cacAccountStatus.SuggestBoxHeight = 200
-            Me.cacAccountStatus.SuggestListOrderRule = Nothing
             Me.cacAccountStatus.TabIndex = 32
             Me.cacAccountStatus.TextToSearch = Nothing
             Me.cacAccountStatus.Translatable = False
@@ -2056,7 +2038,7 @@
         Friend WithEvents lblZipCode As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtZipCode As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblCountryCode As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cacCountryCode As Libraries.CBaseControlsLibrary.AtmComboBox
+        Friend WithEvents cacCountryCode As Libraries.CBaseControlsLibrary.CdtComboBox
         Friend WithEvents lblPhone1 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtPhone1 As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblPhone2 As Libraries.CBaseControlsLibrary.CLabel
@@ -2072,19 +2054,19 @@
         Friend WithEvents lblCrNumber As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtCrNumber As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblBankIdNo As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cacBankIdNo As Libraries.CBaseControlsLibrary.AtmComboBox
+        Friend WithEvents cacBankIdNo As Libraries.CBaseControlsLibrary.CdtComboBox
         Friend WithEvents lblBankAccountNo As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtBankAccountNo As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblIban As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtIban As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblExpAccountIdNo As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cacExpAccountIdNo As Libraries.CBaseControlsLibrary.AtmComboBox
+        Friend WithEvents cacExpAccountIdNo As Libraries.CBaseControlsLibrary.CdtComboBox
         Friend WithEvents lblApAccountIdNo As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cacApAccountIdNo As Libraries.CBaseControlsLibrary.AtmComboBox
+        Friend WithEvents cacApAccountIdNo As Libraries.CBaseControlsLibrary.CdtComboBox
         Friend WithEvents lblCreditLimit As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtCreditLimit As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblPaymentMethod As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cacPaymentMethod As Libraries.CBaseControlsLibrary.AtmComboBox
+        Friend WithEvents cacPaymentMethod As Libraries.CBaseControlsLibrary.CdtComboBox
         Friend WithEvents lblOpeningBalance As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtOpeningBalance As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblSettlementDueDays As Libraries.CBaseControlsLibrary.CLabel
@@ -2099,7 +2081,7 @@
         Friend WithEvents lblDateAccountOpen As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents dtpDateAccountOpen As Libraries.CBaseControlsLibrary.CCustomDateTimePicker
         Friend WithEvents lblAccountStatus As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cacAccountStatus As Libraries.CBaseControlsLibrary.AtmComboBox
+        Friend WithEvents cacAccountStatus As Libraries.CBaseControlsLibrary.CdtComboBox
         Friend WithEvents lblNotes As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtBalance As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel

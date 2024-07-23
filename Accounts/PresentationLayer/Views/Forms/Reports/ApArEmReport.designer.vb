@@ -28,7 +28,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblEndingDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblBeginningDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.dtpEndingDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.dtpBeginningDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
@@ -107,7 +107,6 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.cboIdNo.EndFindValue = Nothing
             Me.cboIdNo.FieldDescription = Nothing
             Me.cboIdNo.FieldName = Nothing
-            Me.cboIdNo.FilterRule = Nothing
             Me.cboIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboIdNo.FindEnabled = False
             Me.cboIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -126,11 +125,9 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.cboIdNo.OriginalList = Nothing
             Me.cboIdNo.OverrideDropDownStyleList = False
             Me.cboIdNo.PreviousSearchTerm = Nothing
-            Me.cboIdNo.PropertySelector = Nothing
             Me.cboIdNo.Size = New System.Drawing.Size(668, 25)
             Me.cboIdNo.SuggestBoxHeight = 200
             Me.cboIdNo.SuggestCharCount = 0
-            Me.cboIdNo.SuggestListOrderRule = Nothing
             Me.cboIdNo.TabIndex = 25
             Me.cboIdNo.TextToSearch = Nothing
             Me.cboIdNo.Translatable = False
@@ -316,7 +313,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Friend WithEvents lblIdNo As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblEndingDate As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblBeginningDate As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboIdNo As Libraries.CBaseControlsLibrary.AtmComboBox
+        Friend WithEvents cboIdNo As Libraries.CBaseControlsLibrary.CdtComboBox
         Friend WithEvents dtpEndingDate As CCustomDateTimePicker
         Friend WithEvents dtpBeginningDate As CCustomDateTimePicker
         Friend WithEvents CFlowLayout1 As Libraries.CBaseControlsLibrary.CFlowLayout

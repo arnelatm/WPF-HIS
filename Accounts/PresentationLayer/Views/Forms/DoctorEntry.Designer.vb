@@ -38,9 +38,9 @@ Namespace PresentationLayer.Views.Forms
             Me.lblDoctorNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboSpecialtyIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboSpecialtyIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
@@ -266,7 +266,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboEmployeeIdNo.EndFindValue = Nothing
             Me.cboEmployeeIdNo.FieldDescription = Nothing
             Me.cboEmployeeIdNo.FieldName = Nothing
-            Me.cboEmployeeIdNo.FilterRule = Nothing
             Me.cboEmployeeIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboEmployeeIdNo.FindEnabled = False
             Me.floDataDisplay.SetFlowBreak(Me.cboEmployeeIdNo, True)
@@ -282,9 +281,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cboEmployeeIdNo.OriginalList = Nothing
             Me.cboEmployeeIdNo.OverrideDropDownStyleList = False
             Me.cboEmployeeIdNo.PreviousSearchTerm = Nothing
-            Me.cboEmployeeIdNo.PropertySelector = Nothing
             Me.cboEmployeeIdNo.SuggestBoxHeight = 200
-            Me.cboEmployeeIdNo.SuggestListOrderRule = Nothing
+
             Me.cboEmployeeIdNo.TextToSearch = Nothing
             Me.cboEmployeeIdNo.Translatable = False
             Me.cboEmployeeIdNo.ValueIsMandatory = False
@@ -313,7 +311,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboSpecialtyIdNo.EndFindValue = Nothing
             Me.cboSpecialtyIdNo.FieldDescription = Nothing
             Me.cboSpecialtyIdNo.FieldName = Nothing
-            Me.cboSpecialtyIdNo.FilterRule = Nothing
             Me.cboSpecialtyIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboSpecialtyIdNo.FindEnabled = False
             Me.floDataDisplay.SetFlowBreak(Me.cboSpecialtyIdNo, True)
@@ -329,9 +326,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboSpecialtyIdNo.OriginalList = Nothing
             Me.cboSpecialtyIdNo.OverrideDropDownStyleList = False
             Me.cboSpecialtyIdNo.PreviousSearchTerm = Nothing
-            Me.cboSpecialtyIdNo.PropertySelector = Nothing
             Me.cboSpecialtyIdNo.SuggestBoxHeight = 200
-            Me.cboSpecialtyIdNo.SuggestListOrderRule = Nothing
             Me.cboSpecialtyIdNo.TextToSearch = Nothing
             Me.cboSpecialtyIdNo.Translatable = False
             Me.cboSpecialtyIdNo.ValueIsMandatory = False
@@ -373,8 +368,8 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblDoctorNameAra As CLabel
         Friend WithEvents CFlowLayout1 As CFlowLayout
         Friend WithEvents CLabel1 As CLabel
-        Friend WithEvents cboEmployeeIdNo As AtmComboBox
+        Friend WithEvents cboEmployeeIdNo As CdtComboBox
         Friend WithEvents CLabel2 As CLabel
-        Friend WithEvents cboSpecialtyIdNo As AtmComboBox
+        Friend WithEvents cboSpecialtyIdNo As CdtComboBox
     End Class
 End Namespace

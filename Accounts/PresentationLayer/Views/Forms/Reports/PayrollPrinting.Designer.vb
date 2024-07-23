@@ -26,7 +26,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.lblSupplierCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboPayroll = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboPayroll = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.btnCancel = New AATM.Libraries.CBaseControlsLibrary.CButton()
@@ -92,7 +92,6 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.cboPayroll.EndFindValue = Nothing
             Me.cboPayroll.FieldDescription = Nothing
             Me.cboPayroll.FieldName = Nothing
-            Me.cboPayroll.FilterRule = Nothing
             Me.cboPayroll.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboPayroll.FindEnabled = False
             Me.CFlowLayout1.SetFlowBreak(Me.cboPayroll, True)
@@ -113,11 +112,9 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.cboPayroll.OriginalList = Nothing
             Me.cboPayroll.OverrideDropDownStyleList = False
             Me.cboPayroll.PreviousSearchTerm = Nothing
-            Me.cboPayroll.PropertySelector = Nothing
             Me.cboPayroll.Size = New System.Drawing.Size(530, 24)
             Me.cboPayroll.SuggestBoxHeight = 200
             Me.cboPayroll.SuggestCharCount = 0
-            Me.cboPayroll.SuggestListOrderRule = Nothing
             Me.cboPayroll.TabIndex = 29
             Me.cboPayroll.TextToSearch = Nothing
             Me.cboPayroll.Translatable = False
@@ -188,6 +185,6 @@ Namespace PresentationLayer.Views.Forms.Reports
         Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents btnOk As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents btnCancel As Libraries.CBaseControlsLibrary.CButton
-        Friend WithEvents cboPayroll As AtmComboBox
+        Friend WithEvents cboPayroll As CdtComboBox
     End Class
 End Namespace

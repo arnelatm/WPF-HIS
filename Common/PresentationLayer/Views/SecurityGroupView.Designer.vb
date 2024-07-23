@@ -53,7 +53,7 @@ Namespace PresentationLayer.Views
             Me.DgvVisible = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
             Me.DgvEditable = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
             Me.bsGroupAccesses = New System.Windows.Forms.BindingSource(Me.components)
-            Me.cacParentIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cacParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             CType(Me.DataGridViewGroupAccesses, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.bsGroupAccesses, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SuspendLayout()
@@ -529,7 +529,6 @@ Namespace PresentationLayer.Views
             Me.cacParentIdNo.EndFindValue = Nothing
             Me.cacParentIdNo.FieldDescription = Nothing
             Me.cacParentIdNo.FieldName = Nothing
-            Me.cacParentIdNo.FilterRule = Nothing
             Me.cacParentIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cacParentIdNo.FindEnabled = False
             Me.cacParentIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -549,11 +548,9 @@ Namespace PresentationLayer.Views
             Me.cacParentIdNo.OriginalList = Nothing
             Me.cacParentIdNo.OverrideDropDownStyleList = False
             Me.cacParentIdNo.PreviousSearchTerm = Nothing
-            Me.cacParentIdNo.PropertySelector = Nothing
             Me.cacParentIdNo.Size = New System.Drawing.Size(581, 30)
             Me.cacParentIdNo.SuggestBoxHeight = 246
             Me.cacParentIdNo.SuggestCharCount = 0
-            Me.cacParentIdNo.SuggestListOrderRule = Nothing
             Me.cacParentIdNo.TabIndex = 191
             Me.cacParentIdNo.TextToSearch = Nothing
             Me.cacParentIdNo.Translatable = False
@@ -608,6 +605,6 @@ Namespace PresentationLayer.Views
         Friend WithEvents DgvVisible As Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn
         Friend WithEvents DgvEditable As Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn
         Public WithEvents DataGridViewGroupAccesses As Libraries.CBaseControlsLibrary.CtDataGridView
-        Friend WithEvents cacParentIdNo As Libraries.CBaseControlsLibrary.AtmComboBox
+        Friend WithEvents cacParentIdNo As Libraries.CBaseControlsLibrary.CdtComboBox
     End Class
 End NameSpace

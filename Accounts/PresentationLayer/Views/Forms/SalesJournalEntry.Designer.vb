@@ -60,7 +60,7 @@ Namespace PresentationLayer.Views.Forms
         Me.dtpTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.txtPayeeName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.floHeader2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
@@ -354,7 +354,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.EndFindValue = Nothing
             Me.cboAccountIdNo.FieldDescription = Nothing
             Me.cboAccountIdNo.FieldName = Nothing
-            Me.cboAccountIdNo.FilterRule = Nothing
             Me.cboAccountIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboAccountIdNo.FindEnabled = False
             Me.floHeader1.SetFlowBreak(Me.cboAccountIdNo, True)
@@ -370,10 +369,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.OriginalList = Nothing
             Me.cboAccountIdNo.OverrideDropDownStyleList = False
             Me.cboAccountIdNo.PreviousSearchTerm = Nothing
-            Me.cboAccountIdNo.PropertySelector = Nothing
             Me.cboAccountIdNo.SuggestBoxHeight = 200
             Me.cboAccountIdNo.SuggestCharCount = 0
-            Me.cboAccountIdNo.SuggestListOrderRule = Nothing
             Me.cboAccountIdNo.TextToSearch = Nothing
             Me.cboAccountIdNo.Translatable = False
             Me.cboAccountIdNo.ValueIsMandatory = False
@@ -1321,7 +1318,7 @@ End Sub
         Friend WithEvents IdNoDataGridViewTextBoxColumn1 As Windows.Forms.DataGridViewTextBoxColumn
         Friend WithEvents SalesJournalIdNoDataGridViewTextBoxColumn As Windows.Forms.DataGridViewTextBoxColumn
         Friend WithEvents lblAccountIdNo As CLabel
-        Friend WithEvents cboAccountIdNo As AtmComboBox
+        Friend WithEvents cboAccountIdNo As CdtComboBox
         Friend WithEvents floSalesDepositsFooter As CFlowLayout
         Friend WithEvents CLabel1 As CLabel
         Friend WithEvents btnHideJournalEntries As CButton

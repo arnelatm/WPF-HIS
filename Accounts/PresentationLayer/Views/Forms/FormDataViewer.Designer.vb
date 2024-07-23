@@ -32,7 +32,7 @@ Namespace PresentationLayer.Views.Forms
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+        Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
         Me.dtpStartDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.CCustomDateTimePicker1 = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
@@ -163,9 +163,8 @@ Namespace PresentationLayer.Views.Forms
         Me.cboEmployeeIdNo.EndFindValue = Nothing
         Me.cboEmployeeIdNo.FieldDescription = Nothing
         Me.cboEmployeeIdNo.FieldName = Nothing
-        Me.cboEmployeeIdNo.FilterRule = Nothing
-        Me.cboEmployeeIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cboEmployeeIdNo.FindEnabled = false
+            Me.cboEmployeeIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboEmployeeIdNo.FindEnabled = false
         Me.CFlowLayout1.SetFlowBreak(Me.cboEmployeeIdNo, true)
         Me.cboEmployeeIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.cboEmployeeIdNo.ForeColor = System.Drawing.Color.Black
@@ -182,12 +181,10 @@ Namespace PresentationLayer.Views.Forms
         Me.cboEmployeeIdNo.OriginalList = Nothing
         Me.cboEmployeeIdNo.OverrideDropDownStyleList = false
         Me.cboEmployeeIdNo.PreviousSearchTerm = Nothing
-        Me.cboEmployeeIdNo.PropertySelector = Nothing
             Me.cboEmployeeIdNo.Size = New System.Drawing.Size(350, 24)
             Me.cboEmployeeIdNo.SuggestBoxHeight = 200
-        Me.cboEmployeeIdNo.SuggestListOrderRule = Nothing
-        Me.cboEmployeeIdNo.TabIndex = 14
-        Me.cboEmployeeIdNo.TextToSearch = Nothing
+            Me.cboEmployeeIdNo.TabIndex = 14
+            Me.cboEmployeeIdNo.TextToSearch = Nothing
         Me.cboEmployeeIdNo.Translatable = false
         Me.cboEmployeeIdNo.ValueIsMandatory = false
         Me.cboEmployeeIdNo.ValueIsNullable = false
@@ -314,7 +311,7 @@ End Sub
         Friend WithEvents lblIdNo As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtIdNo As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblEmployeeIdNo As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboEmployeeIdNo As Libraries.CBaseControlsLibrary.AtmComboBox
+        Friend WithEvents cboEmployeeIdNo As Libraries.CBaseControlsLibrary.CdtComboBox
         Friend WithEvents CFlowLayout1 As Libraries.CBaseControlsLibrary.CFlowLayout
         Friend WithEvents dtpStartDate As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents CCustomDateTimePicker1 As Libraries.CBaseControlsLibrary.CCustomDateTimePicker

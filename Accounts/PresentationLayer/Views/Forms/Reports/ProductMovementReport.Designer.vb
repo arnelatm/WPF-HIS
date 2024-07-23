@@ -28,9 +28,9 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboWarehouseIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboWarehouseIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblProductIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboProductIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboProductIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblBeginningDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpBeginningDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.lblEndingDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -123,7 +123,6 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.cboWarehouseIdNo.EndFindValue = Nothing
             Me.cboWarehouseIdNo.FieldDescription = Nothing
             Me.cboWarehouseIdNo.FieldName = Nothing
-            Me.cboWarehouseIdNo.FilterRule = Nothing
             Me.cboWarehouseIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboWarehouseIdNo.FindEnabled = False
             Me.cboWarehouseIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -143,11 +142,9 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.cboWarehouseIdNo.OriginalList = Nothing
             Me.cboWarehouseIdNo.OverrideDropDownStyleList = False
             Me.cboWarehouseIdNo.PreviousSearchTerm = Nothing
-            Me.cboWarehouseIdNo.PropertySelector = Nothing
             Me.cboWarehouseIdNo.Size = New System.Drawing.Size(530, 28)
             Me.cboWarehouseIdNo.SuggestBoxHeight = 200
             Me.cboWarehouseIdNo.SuggestCharCount = 0
-            Me.cboWarehouseIdNo.SuggestListOrderRule = Nothing
             Me.cboWarehouseIdNo.TabIndex = 29
             Me.cboWarehouseIdNo.TextToSearch = Nothing
             Me.cboWarehouseIdNo.Translatable = False
@@ -187,7 +184,6 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.cboProductIdNo.EndFindValue = Nothing
             Me.cboProductIdNo.FieldDescription = Nothing
             Me.cboProductIdNo.FieldName = Nothing
-            Me.cboProductIdNo.FilterRule = Nothing
             Me.cboProductIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboProductIdNo.FindEnabled = False
             Me.cboProductIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -206,12 +202,10 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.cboProductIdNo.OriginalList = Nothing
             Me.cboProductIdNo.OverrideDropDownStyleList = False
             Me.cboProductIdNo.PreviousSearchTerm = Nothing
-            Me.cboProductIdNo.PropertySelector = Nothing
             Me.cboProductIdNo.Size = New System.Drawing.Size(530, 28)
             Me.cboProductIdNo.Sorted = True
             Me.cboProductIdNo.SuggestBoxHeight = 246
             Me.cboProductIdNo.SuggestCharCount = 4
-            Me.cboProductIdNo.SuggestListOrderRule = Nothing
             Me.cboProductIdNo.TabIndex = 37
             Me.cboProductIdNo.TextToSearch = Nothing
             Me.cboProductIdNo.Translatable = False
@@ -372,12 +366,12 @@ Namespace PresentationLayer.Views.Forms.Reports
         Friend WithEvents btnOk As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents btnCancel As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents CLabel3 As CLabel
-        Friend WithEvents cboWarehouseIdNo As AtmComboBox
+        Friend WithEvents cboWarehouseIdNo As CdtComboBox
         Friend WithEvents lblBeginningDate As CLabel
         Friend WithEvents dtpBeginningDate As CCustomDateTimePicker
         Friend WithEvents lblEndingDate As CLabel
         Friend WithEvents dtpEndingDate As CCustomDateTimePicker
         Friend WithEvents lblProductIdNo As CLabel
-        Friend WithEvents cboProductIdNo As AtmComboBox
+        Friend WithEvents cboProductIdNo As CdtComboBox
     End Class
 End Namespace

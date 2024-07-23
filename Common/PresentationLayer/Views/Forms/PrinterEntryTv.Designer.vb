@@ -32,15 +32,15 @@ Namespace PresentationLayer.Views.Forms
         Me.lblPrinterCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtPrinterCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblPrinterName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboPrinterName = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboPrinterName = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblHostName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtHostOrIpName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.LblDefaultPaperSource = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboPaperSource = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboPaperSource = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.LblDefaultPaperSize = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboPaperSize = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboPaperSize = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.LblDefaultPaperOrientation = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboPaperOrientation = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboPaperOrientation = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
             Me.SplitContainer1.Panel2.SuspendLayout()
@@ -242,7 +242,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPrinterName.EndFindValue = Nothing
             Me.cboPrinterName.FieldDescription = Nothing
             Me.cboPrinterName.FieldName = Nothing
-            Me.cboPrinterName.FilterRule = Nothing
             Me.cboPrinterName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboPrinterName.FindEnabled = False
             Me.cboPrinterName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -261,11 +260,9 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPrinterName.OriginalList = Nothing
             Me.cboPrinterName.OverrideDropDownStyleList = False
             Me.cboPrinterName.PreviousSearchTerm = Nothing
-            Me.cboPrinterName.PropertySelector = Nothing
             Me.cboPrinterName.Size = New System.Drawing.Size(423, 24)
             Me.cboPrinterName.SuggestBoxHeight = 200
             Me.cboPrinterName.SuggestCharCount = 0
-            Me.cboPrinterName.SuggestListOrderRule = Nothing
             Me.cboPrinterName.TabIndex = 179
             Me.cboPrinterName.TextToSearch = Nothing
             Me.cboPrinterName.Translatable = False
@@ -352,7 +349,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPaperSource.EndFindValue = Nothing
             Me.cboPaperSource.FieldDescription = Nothing
             Me.cboPaperSource.FieldName = Nothing
-            Me.cboPaperSource.FilterRule = Nothing
             Me.cboPaperSource.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboPaperSource.FindEnabled = False
             Me.floDataDisplay.SetFlowBreak(Me.cboPaperSource, True)
@@ -372,11 +368,9 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPaperSource.OriginalList = Nothing
             Me.cboPaperSource.OverrideDropDownStyleList = False
             Me.cboPaperSource.PreviousSearchTerm = Nothing
-            Me.cboPaperSource.PropertySelector = Nothing
             Me.cboPaperSource.Size = New System.Drawing.Size(221, 24)
             Me.cboPaperSource.SuggestBoxHeight = 200
             Me.cboPaperSource.SuggestCharCount = 0
-            Me.cboPaperSource.SuggestListOrderRule = Nothing
             Me.cboPaperSource.TabIndex = 4
             Me.cboPaperSource.TextToSearch = Nothing
             Me.cboPaperSource.Translatable = False
@@ -417,7 +411,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPaperSize.EndFindValue = Nothing
             Me.cboPaperSize.FieldDescription = Nothing
             Me.cboPaperSize.FieldName = Nothing
-            Me.cboPaperSize.FilterRule = Nothing
             Me.cboPaperSize.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboPaperSize.FindEnabled = False
             Me.floDataDisplay.SetFlowBreak(Me.cboPaperSize, True)
@@ -437,11 +430,9 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPaperSize.OriginalList = Nothing
             Me.cboPaperSize.OverrideDropDownStyleList = False
             Me.cboPaperSize.PreviousSearchTerm = Nothing
-            Me.cboPaperSize.PropertySelector = Nothing
             Me.cboPaperSize.Size = New System.Drawing.Size(221, 24)
             Me.cboPaperSize.SuggestBoxHeight = 200
             Me.cboPaperSize.SuggestCharCount = 0
-            Me.cboPaperSize.SuggestListOrderRule = Nothing
             Me.cboPaperSize.TabIndex = 5
             Me.cboPaperSize.TextToSearch = Nothing
             Me.cboPaperSize.Translatable = False
@@ -481,7 +472,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPaperOrientation.EndFindValue = Nothing
             Me.cboPaperOrientation.FieldDescription = Nothing
             Me.cboPaperOrientation.FieldName = Nothing
-            Me.cboPaperOrientation.FilterRule = Nothing
             Me.cboPaperOrientation.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboPaperOrientation.FindEnabled = False
             Me.cboPaperOrientation.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -500,13 +490,11 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPaperOrientation.OriginalList = Nothing
             Me.cboPaperOrientation.OverrideDropDownStyleList = False
             Me.cboPaperOrientation.PreviousSearchTerm = Nothing
-            Me.cboPaperOrientation.PropertySelector = Nothing
             Me.cboPaperOrientation.Size = New System.Drawing.Size(221, 24)
             Me.cboPaperOrientation.SuggestBoxHeight = 200
             Me.cboPaperOrientation.SuggestCharCount = 0
-            Me.cboPaperOrientation.SuggestListOrderRule = Nothing
             Me.cboPaperOrientation.TabIndex = 6
-        Me.cboPaperOrientation.TextToSearch = Nothing
+            Me.cboPaperOrientation.TextToSearch = Nothing
         Me.cboPaperOrientation.Translatable = false
         Me.cboPaperOrientation.ValueIsMandatory = false
         Me.cboPaperOrientation.ValueIsNullable = false
@@ -541,13 +529,13 @@ End Sub
         Friend WithEvents LblDefaultPaperSize As CLabel
         Friend WithEvents LblDefaultPaperOrientation As CLabel
         Friend WithEvents lblPrinterName As CLabel
-        Friend WithEvents cboPaperSource As AtmComboBox
-        Friend WithEvents cboPaperSize As AtmComboBox
-        Friend WithEvents cboPaperOrientation As AtmComboBox
+        Friend WithEvents cboPaperSource As CdtComboBox
+        Friend WithEvents cboPaperSize As CdtComboBox
+        Friend WithEvents cboPaperOrientation As CdtComboBox
         Friend WithEvents txtPrinterCode As CTextBox
         Friend WithEvents lblHostName As CLabel
         Friend WithEvents txtHostOrIpName As CTextBox
         Friend WithEvents btnCheckPrinter As CButton
-        Friend WithEvents cboPrinterName As AtmComboBox
+        Friend WithEvents cboPrinterName As CdtComboBox
     End Class
 End Namespace

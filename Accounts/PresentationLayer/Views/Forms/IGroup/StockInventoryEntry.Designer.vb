@@ -43,7 +43,7 @@
             Me.txtQuantity = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblGTIN = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtGTIN = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.cboItemFinder = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboItemFinder = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.txtBranchId = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.TableLayoutPanel1.SuspendLayout()
@@ -577,7 +577,6 @@
             Me.cboItemFinder.EndFindValue = Nothing
             Me.cboItemFinder.FieldDescription = Nothing
             Me.cboItemFinder.FieldName = Nothing
-            Me.cboItemFinder.FilterRule = Nothing
             Me.cboItemFinder.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboItemFinder.FindEnabled = True
             Me.cboItemFinder.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -596,10 +595,8 @@
             Me.cboItemFinder.OriginalList = Nothing
             Me.cboItemFinder.OverrideDropDownStyleList = False
             Me.cboItemFinder.PreviousSearchTerm = Nothing
-            Me.cboItemFinder.PropertySelector = Nothing
             Me.cboItemFinder.Size = New System.Drawing.Size(420, 28)
             Me.cboItemFinder.SuggestBoxHeight = 200
-            Me.cboItemFinder.SuggestListOrderRule = Nothing
             Me.cboItemFinder.TabIndex = 11
             Me.cboItemFinder.TextToSearch = Nothing
             Me.cboItemFinder.Translatable = False
@@ -672,7 +669,7 @@
         Friend WithEvents txtQuantity As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents txtGTIN As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblGTIN As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboItemFinder As Libraries.CBaseControlsLibrary.AtmComboBox
+        Friend WithEvents cboItemFinder As Libraries.CBaseControlsLibrary.CdtComboBox
         Friend WithEvents lblItemNameEnglish As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtItemNameEnglish As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents txtSerialNo As Libraries.CBaseControlsLibrary.CTextBox

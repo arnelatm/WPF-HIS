@@ -37,13 +37,13 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboParentIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblLevelNumber = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtLevelNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblAccountGroup = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboAccountGroup = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboAccountGroup = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblSpecialAccount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboSpecialAccount = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboSpecialAccount = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkDetailAccount = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.lblWithReconciliation = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -51,9 +51,9 @@ Namespace PresentationLayer.Views.Forms
             Me.lblActive = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkActive = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.lblNormalBalance = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboNormalBalance = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboNormalBalance = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblPayeeType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboPayeeType = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboPayeeType = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtSortKey = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             LocalizableContent1 = New AATM.Libraries.LocalizationUtilities.LocalizableContent()
@@ -309,7 +309,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboParentIdNo.EndFindValue = Nothing
             Me.cboParentIdNo.FieldDescription = Nothing
             Me.cboParentIdNo.FieldName = Nothing
-            Me.cboParentIdNo.FilterRule = Nothing
             Me.cboParentIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboParentIdNo.FindEnabled = False
             Me.floDataDisplay.SetFlowBreak(Me.cboParentIdNo, True)
@@ -325,9 +324,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboParentIdNo.OriginalList = Nothing
             Me.cboParentIdNo.OverrideDropDownStyleList = False
             Me.cboParentIdNo.PreviousSearchTerm = Nothing
-            Me.cboParentIdNo.PropertySelector = Nothing
             Me.cboParentIdNo.SuggestBoxHeight = 200
-            Me.cboParentIdNo.SuggestListOrderRule = Nothing
             Me.cboParentIdNo.TextToSearch = Nothing
             Me.cboParentIdNo.Translatable = False
             Me.cboParentIdNo.ValueIsMandatory = False
@@ -393,7 +390,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountGroup.EndFindValue = Nothing
             Me.cboAccountGroup.FieldDescription = Nothing
             Me.cboAccountGroup.FieldName = Nothing
-            Me.cboAccountGroup.FilterRule = Nothing
             Me.cboAccountGroup.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboAccountGroup.FindEnabled = False
             Me.floDataDisplay.SetFlowBreak(Me.cboAccountGroup, True)
@@ -409,9 +405,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountGroup.OriginalList = Nothing
             Me.cboAccountGroup.OverrideDropDownStyleList = False
             Me.cboAccountGroup.PreviousSearchTerm = Nothing
-            Me.cboAccountGroup.PropertySelector = Nothing
             Me.cboAccountGroup.SuggestBoxHeight = 200
-            Me.cboAccountGroup.SuggestListOrderRule = Nothing
             Me.cboAccountGroup.TextToSearch = Nothing
             Me.cboAccountGroup.Translatable = False
             Me.cboAccountGroup.ValueIsMandatory = False
@@ -439,7 +433,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboSpecialAccount.EndFindValue = Nothing
             Me.cboSpecialAccount.FieldDescription = Nothing
             Me.cboSpecialAccount.FieldName = Nothing
-            Me.cboSpecialAccount.FilterRule = Nothing
             Me.cboSpecialAccount.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboSpecialAccount.FindEnabled = False
             Me.floDataDisplay.SetFlowBreak(Me.cboSpecialAccount, True)
@@ -455,9 +448,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboSpecialAccount.OriginalList = Nothing
             Me.cboSpecialAccount.OverrideDropDownStyleList = False
             Me.cboSpecialAccount.PreviousSearchTerm = Nothing
-            Me.cboSpecialAccount.PropertySelector = Nothing
             Me.cboSpecialAccount.SuggestBoxHeight = 200
-            Me.cboSpecialAccount.SuggestListOrderRule = Nothing
             Me.cboSpecialAccount.TextToSearch = Nothing
             Me.cboSpecialAccount.Translatable = False
             Me.cboSpecialAccount.ValueIsMandatory = False
@@ -584,7 +575,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboNormalBalance.EndFindValue = Nothing
             Me.cboNormalBalance.FieldDescription = Nothing
             Me.cboNormalBalance.FieldName = Nothing
-            Me.cboNormalBalance.FilterRule = Nothing
             Me.cboNormalBalance.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboNormalBalance.FindEnabled = False
             Me.floDataDisplay.SetFlowBreak(Me.cboNormalBalance, True)
@@ -600,9 +590,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboNormalBalance.OriginalList = Nothing
             Me.cboNormalBalance.OverrideDropDownStyleList = False
             Me.cboNormalBalance.PreviousSearchTerm = Nothing
-            Me.cboNormalBalance.PropertySelector = Nothing
             Me.cboNormalBalance.SuggestBoxHeight = 200
-            Me.cboNormalBalance.SuggestListOrderRule = Nothing
             Me.cboNormalBalance.TextToSearch = Nothing
             Me.cboNormalBalance.Translatable = False
             Me.cboNormalBalance.ValueIsMandatory = False
@@ -630,7 +618,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayeeType.EndFindValue = Nothing
             Me.cboPayeeType.FieldDescription = Nothing
             Me.cboPayeeType.FieldName = Nothing
-            Me.cboPayeeType.FilterRule = Nothing
             Me.cboPayeeType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboPayeeType.FindEnabled = False
             Me.floDataDisplay.SetFlowBreak(Me.cboPayeeType, True)
@@ -646,9 +633,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayeeType.OriginalList = Nothing
             Me.cboPayeeType.OverrideDropDownStyleList = False
             Me.cboPayeeType.PreviousSearchTerm = Nothing
-            Me.cboPayeeType.PropertySelector = Nothing
             Me.cboPayeeType.SuggestBoxHeight = 200
-            Me.cboPayeeType.SuggestListOrderRule = Nothing
             Me.cboPayeeType.TextToSearch = Nothing
             Me.cboPayeeType.Translatable = False
             Me.cboPayeeType.ValueIsMandatory = False
@@ -730,11 +715,11 @@ End Sub
         Friend WithEvents lblActive As CLabel
         Friend WithEvents CLabel1 As CLabel
         Friend WithEvents chkDetailAccount As CCheckBox
-        Friend WithEvents cboNormalBalance As AtmComboBox
-        Friend WithEvents cboPayeeType As AtmComboBox
-        Friend WithEvents cboAccountGroup As AtmComboBox
-        Friend WithEvents cboParentIdNo As AtmComboBox
+        Friend WithEvents cboNormalBalance As CdtComboBox
+        Friend WithEvents cboPayeeType As CdtComboBox
+        Friend WithEvents cboAccountGroup As CdtComboBox
+        Friend WithEvents cboParentIdNo As CdtComboBox
         Friend WithEvents lblSpecialAccount As CLabel
-        Friend WithEvents cboSpecialAccount As AtmComboBox
+        Friend WithEvents cboSpecialAccount As CdtComboBox
     End Class
 End NameSpace

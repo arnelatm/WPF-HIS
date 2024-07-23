@@ -31,13 +31,13 @@
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.dtpDateCreated = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.lblEnteredBy = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboHolidayIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboHolidayIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblHolidayDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpDateStart = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpDateEnd = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboenteredBy = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboenteredBy = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.DataGridViewHolidayTransferitems = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.dgvEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
             Me.HolidayTransferIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -192,7 +192,6 @@
             Me.cboHolidayIdNo.EndFindValue = Nothing
             Me.cboHolidayIdNo.FieldDescription = Nothing
             Me.cboHolidayIdNo.FieldName = Nothing
-            Me.cboHolidayIdNo.FilterRule = Nothing
             Me.cboHolidayIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboHolidayIdNo.FindEnabled = False
             Me.CFlowLayout1.SetFlowBreak(Me.cboHolidayIdNo, True)
@@ -212,11 +211,9 @@
             Me.cboHolidayIdNo.OriginalList = Nothing
             Me.cboHolidayIdNo.OverrideDropDownStyleList = False
             Me.cboHolidayIdNo.PreviousSearchTerm = Nothing
-            Me.cboHolidayIdNo.PropertySelector = Nothing
             Me.cboHolidayIdNo.Size = New System.Drawing.Size(431, 24)
             Me.cboHolidayIdNo.SuggestBoxHeight = 200
             Me.cboHolidayIdNo.SuggestCharCount = 0
-            Me.cboHolidayIdNo.SuggestListOrderRule = Nothing
             Me.cboHolidayIdNo.TabIndex = 2
             Me.cboHolidayIdNo.TextToSearch = Nothing
             Me.cboHolidayIdNo.Translatable = False
@@ -341,7 +338,6 @@
             Me.cboenteredBy.EndFindValue = Nothing
             Me.cboenteredBy.FieldDescription = Nothing
             Me.cboenteredBy.FieldName = Nothing
-            Me.cboenteredBy.FilterRule = Nothing
             Me.cboenteredBy.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboenteredBy.FindEnabled = False
             Me.CFlowLayout1.SetFlowBreak(Me.cboenteredBy, True)
@@ -361,11 +357,9 @@
             Me.cboenteredBy.OriginalList = Nothing
             Me.cboenteredBy.OverrideDropDownStyleList = False
             Me.cboenteredBy.PreviousSearchTerm = Nothing
-            Me.cboenteredBy.PropertySelector = Nothing
             Me.cboenteredBy.Size = New System.Drawing.Size(431, 24)
             Me.cboenteredBy.SuggestBoxHeight = 200
             Me.cboenteredBy.SuggestCharCount = 0
-            Me.cboenteredBy.SuggestListOrderRule = Nothing
             Me.cboenteredBy.TabIndex = 4
             Me.cboenteredBy.TextToSearch = Nothing
             Me.cboenteredBy.Translatable = False
@@ -491,11 +485,11 @@ End Sub
         Friend WithEvents txtIdNo As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblEnteredBy As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents DataGridViewHolidayTransferitems As Libraries.CBaseControlsLibrary.CtDataGridView
-        Friend WithEvents cboenteredBy As Libraries.CBaseControlsLibrary.AtmComboBox
+        Friend WithEvents cboenteredBy As Libraries.CBaseControlsLibrary.CdtComboBox
         Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents dtpDateCreated As Libraries.CBaseControlsLibrary.CCustomDateTimePicker
         Friend WithEvents CLabel2 As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboHolidayIdNo As Libraries.CBaseControlsLibrary.AtmComboBox
+        Friend WithEvents cboHolidayIdNo As Libraries.CBaseControlsLibrary.CdtComboBox
         Friend WithEvents dgvEmployeeIdNo As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
         Friend WithEvents HolidayTransferIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn

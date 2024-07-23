@@ -35,7 +35,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblReportNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtReportNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
             Me.lblReportGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboReportGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboReportGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblPrintJobIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblQueryForm = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtQueryForm = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -49,7 +49,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtReportTitleAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
             Me.lblReportFileName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtReportFileName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.cboPrintJobIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboPrintJobIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblReportOrder = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtReportOrder = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -361,7 +361,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboReportGroupIdNo.EndFindValue = Nothing
             Me.cboReportGroupIdNo.FieldDescription = Nothing
             Me.cboReportGroupIdNo.FieldName = Nothing
-            Me.cboReportGroupIdNo.FilterRule = Nothing
             Me.cboReportGroupIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboReportGroupIdNo.FindEnabled = False
             Me.floDataDisplay.SetFlowBreak(Me.cboReportGroupIdNo, True)
@@ -381,11 +380,9 @@ Namespace PresentationLayer.Views.Forms
             Me.cboReportGroupIdNo.OriginalList = Nothing
             Me.cboReportGroupIdNo.OverrideDropDownStyleList = False
             Me.cboReportGroupIdNo.PreviousSearchTerm = Nothing
-            Me.cboReportGroupIdNo.PropertySelector = Nothing
             Me.cboReportGroupIdNo.Size = New System.Drawing.Size(403, 24)
             Me.cboReportGroupIdNo.SuggestBoxHeight = 200
             Me.cboReportGroupIdNo.SuggestCharCount = 0
-            Me.cboReportGroupIdNo.SuggestListOrderRule = Nothing
             Me.cboReportGroupIdNo.TabIndex = 4
             Me.cboReportGroupIdNo.TextToSearch = Nothing
             Me.cboReportGroupIdNo.Translatable = False
@@ -703,7 +700,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPrintJobIdNo.EndFindValue = Nothing
             Me.cboPrintJobIdNo.FieldDescription = Nothing
             Me.cboPrintJobIdNo.FieldName = Nothing
-            Me.cboPrintJobIdNo.FilterRule = Nothing
             Me.cboPrintJobIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboPrintJobIdNo.FindEnabled = False
             Me.floDataDisplay.SetFlowBreak(Me.cboPrintJobIdNo, True)
@@ -723,11 +719,9 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPrintJobIdNo.OriginalList = Nothing
             Me.cboPrintJobIdNo.OverrideDropDownStyleList = False
             Me.cboPrintJobIdNo.PreviousSearchTerm = Nothing
-            Me.cboPrintJobIdNo.PropertySelector = Nothing
             Me.cboPrintJobIdNo.Size = New System.Drawing.Size(403, 24)
             Me.cboPrintJobIdNo.SuggestBoxHeight = 200
             Me.cboPrintJobIdNo.SuggestCharCount = 0
-            Me.cboPrintJobIdNo.SuggestListOrderRule = Nothing
             Me.cboPrintJobIdNo.TabIndex = 11
             Me.cboPrintJobIdNo.TextToSearch = Nothing
             Me.cboPrintJobIdNo.Translatable = False
@@ -1004,7 +998,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblReportNameAra As CLabel
         Friend WithEvents txtReportNameAra As CTextBoxArabic
         Friend WithEvents lblPrintJobIdNo As CLabel
-        Friend WithEvents cboPrintJobIdNo As AtmComboBox
+        Friend WithEvents cboPrintJobIdNo As CdtComboBox
         Friend WithEvents lblQueryForm As CLabel
         Friend WithEvents txtQueryForm As CTextBox
         Friend WithEvents lblQueryFormParameters As CLabel
@@ -1025,7 +1019,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents txtDateCreated As CTextBox
         Friend WithEvents lblActive As CLabel
         Friend WithEvents chkActive As CCheckBox
-        Friend WithEvents cboReportGroupIdNo As AtmComboBox
+        Friend WithEvents cboReportGroupIdNo As CdtComboBox
         Friend WithEvents lblReportGroupIdNo As CLabel
         Friend WithEvents CLabel1 As CLabel
         Friend WithEvents txtDataBaseName As CTextBox

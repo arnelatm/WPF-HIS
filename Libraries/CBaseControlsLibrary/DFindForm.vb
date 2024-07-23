@@ -60,7 +60,7 @@ Public Class DFindForm
             _findableControl.BegFindValue = TxtTextToSearch.Text
             If _findableControl.SearchMode = IFindableControl.SearchModeEnum.ComboBox Then
                 _findableControl.SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue
-                If TypeOf _findableControl IsNot AtmComboBox Then
+                If TypeOf _findableControl IsNot CdtComboBox Then
                     _findableControl.BegFindValue = cboTextToSearch.SelectedValue
                     _findableControl.EndFindValue = cboTextToSearch.SelectedValue
                 Else
@@ -82,7 +82,7 @@ Public Class DFindForm
         ElseIf _findableControl.FindDataType = IFindableControl.DataTypeEnum.Date Then
             If _findableControl.SearchMode = IFindableControl.SearchModeEnum.ComboBox Then
                 _findableControl.SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue
-                If TypeOf _findableControl IsNot AtmComboBox Then
+                If TypeOf _findableControl IsNot CdtComboBox Then
                     _findableControl.BegFindValue = cboTextToSearch.SelectedValue
                     _findableControl.EndFindValue = cboTextToSearch.SelectedValue
                 Else
@@ -97,7 +97,7 @@ Public Class DFindForm
         ElseIf _findableControl.FindDataType = IFindableControl.DataTypeEnum.Decimal Or _findableControl.FindDataType = IFindableControl.DataTypeEnum.Integer Then
             If _findableControl.SearchMode = IFindableControl.SearchModeEnum.ComboBox Then
                 _findableControl.SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue
-                If TypeOf _findableControl IsNot AtmComboBox Then
+                If TypeOf _findableControl IsNot CdtComboBox Then
                     _findableControl.BegFindValue = cboTextToSearch.SelectedValue
                     _findableControl.EndFindValue = cboTextToSearch.SelectedValue
                 Else
@@ -196,7 +196,7 @@ Public Class DFindForm
         SetFormLocation()
         If _findableControl.SearchMode = IFindableControl.SearchModeEnum.ComboBox Then
             TxtTextToSearch.Visible = False
-            If TypeOf _findableControl IsNot AtmComboBox Then
+            If TypeOf _findableControl IsNot CdtComboBox Then
                 cboTextToSearch.Visible = True
                 cboTextToSearch.DataSource = _findableControl.FindDataSource
                 cboTextToSearch.DisplayMember = _findableControl.FindDisplayMember

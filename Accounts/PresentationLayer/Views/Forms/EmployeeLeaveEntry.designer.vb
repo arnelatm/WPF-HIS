@@ -39,16 +39,16 @@ Namespace PresentationLayer.Views.Forms
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblStartDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpStartDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblLeaveName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboLeaveIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboLeaveIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblHolidayName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboHolidayIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboHolidayIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblFullDay = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkFullDay = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.lblEndDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -58,9 +58,9 @@ Namespace PresentationLayer.Views.Forms
             Me.lblReason = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtReason = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblStatus = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboStatus = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboStatus = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblenteredBy = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboenteredBy = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboenteredBy = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.DataGridViewApprovalHistory = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.dgvApprovalIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -144,7 +144,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboEmployeeIdNo.EndFindValue = Nothing
             Me.cboEmployeeIdNo.FieldDescription = Nothing
             Me.cboEmployeeIdNo.FieldName = Nothing
-            Me.cboEmployeeIdNo.FilterRule = Nothing
             Me.cboEmployeeIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboEmployeeIdNo.FindEnabled = True
             Me.CFlowLayout2.SetFlowBreak(Me.cboEmployeeIdNo, True)
@@ -161,10 +160,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cboEmployeeIdNo.OriginalList = Nothing
             Me.cboEmployeeIdNo.OverrideDropDownStyleList = False
             Me.cboEmployeeIdNo.PreviousSearchTerm = Nothing
-            Me.cboEmployeeIdNo.PropertySelector = Nothing
             Me.cboEmployeeIdNo.SuggestBoxHeight = 200
             Me.cboEmployeeIdNo.SuggestCharCount = 0
-            Me.cboEmployeeIdNo.SuggestListOrderRule = Nothing
             Me.cboEmployeeIdNo.TextToSearch = Nothing
             Me.cboEmployeeIdNo.Translatable = False
             Me.cboEmployeeIdNo.ValueIsMandatory = False
@@ -298,7 +295,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboLeaveIdNo.EndFindValue = Nothing
             Me.cboLeaveIdNo.FieldDescription = Nothing
             Me.cboLeaveIdNo.FieldName = Nothing
-            Me.cboLeaveIdNo.FilterRule = Nothing
             Me.cboLeaveIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboLeaveIdNo.FindEnabled = True
             Me.CFlowLayout2.SetFlowBreak(Me.cboLeaveIdNo, True)
@@ -315,10 +311,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cboLeaveIdNo.OriginalList = Nothing
             Me.cboLeaveIdNo.OverrideDropDownStyleList = False
             Me.cboLeaveIdNo.PreviousSearchTerm = Nothing
-            Me.cboLeaveIdNo.PropertySelector = Nothing
             Me.cboLeaveIdNo.SuggestBoxHeight = 200
             Me.cboLeaveIdNo.SuggestCharCount = 0
-            Me.cboLeaveIdNo.SuggestListOrderRule = Nothing
             Me.cboLeaveIdNo.TextToSearch = Nothing
             Me.cboLeaveIdNo.Translatable = False
             Me.cboLeaveIdNo.ValueIsMandatory = False
@@ -349,7 +343,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboHolidayIdNo.EndFindValue = Nothing
             Me.cboHolidayIdNo.FieldDescription = Nothing
             Me.cboHolidayIdNo.FieldName = Nothing
-            Me.cboHolidayIdNo.FilterRule = Nothing
             Me.cboHolidayIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboHolidayIdNo.FindEnabled = True
             Me.CFlowLayout2.SetFlowBreak(Me.cboHolidayIdNo, True)
@@ -366,10 +359,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cboHolidayIdNo.OriginalList = Nothing
             Me.cboHolidayIdNo.OverrideDropDownStyleList = False
             Me.cboHolidayIdNo.PreviousSearchTerm = Nothing
-            Me.cboHolidayIdNo.PropertySelector = Nothing
             Me.cboHolidayIdNo.SuggestBoxHeight = 200
             Me.cboHolidayIdNo.SuggestCharCount = 0
-            Me.cboHolidayIdNo.SuggestListOrderRule = Nothing
             Me.cboHolidayIdNo.TextToSearch = Nothing
             Me.cboHolidayIdNo.Translatable = False
             Me.cboHolidayIdNo.ValueIsMandatory = False
@@ -545,7 +536,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboStatus.EndFindValue = Nothing
             Me.cboStatus.FieldDescription = Nothing
             Me.cboStatus.FieldName = Nothing
-            Me.cboStatus.FilterRule = Nothing
             Me.cboStatus.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboStatus.FindEnabled = True
             Me.CFlowLayout2.SetFlowBreak(Me.cboStatus, True)
@@ -562,10 +552,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cboStatus.OriginalList = Nothing
             Me.cboStatus.OverrideDropDownStyleList = False
             Me.cboStatus.PreviousSearchTerm = Nothing
-            Me.cboStatus.PropertySelector = Nothing
             Me.cboStatus.SuggestBoxHeight = 200
             Me.cboStatus.SuggestCharCount = 0
-            Me.cboStatus.SuggestListOrderRule = Nothing
             Me.cboStatus.TextToSearch = Nothing
             Me.cboStatus.Translatable = False
             Me.cboStatus.ValueIsMandatory = False
@@ -599,7 +587,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboenteredBy.EndFindValue = Nothing
             Me.cboenteredBy.FieldDescription = Nothing
             Me.cboenteredBy.FieldName = Nothing
-            Me.cboenteredBy.FilterRule = Nothing
             Me.cboenteredBy.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboenteredBy.FindEnabled = True
             Me.CFlowLayout2.SetFlowBreak(Me.cboenteredBy, True)
@@ -616,10 +603,9 @@ Namespace PresentationLayer.Views.Forms
             Me.cboenteredBy.OriginalList = Nothing
             Me.cboenteredBy.OverrideDropDownStyleList = False
             Me.cboenteredBy.PreviousSearchTerm = Nothing
-            Me.cboenteredBy.PropertySelector = Nothing
             Me.cboenteredBy.SuggestBoxHeight = 200
             Me.cboenteredBy.SuggestCharCount = 0
-            Me.cboenteredBy.SuggestListOrderRule = Nothing
+
             Me.cboenteredBy.TextToSearch = Nothing
             Me.cboenteredBy.Translatable = False
             Me.cboenteredBy.ValueIsMandatory = False
@@ -845,14 +831,14 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblIdNo As CLabel
         Public WithEvents TxtIdNo As CTextBox
         Friend WithEvents lblEmployeeIdNo As CLabel
-        Public WithEvents cboEmployeeIdNo As AtmComboBox
+        Public WithEvents cboEmployeeIdNo As CdtComboBox
         Friend WithEvents lblStartDate As CLabel
         Public WithEvents dtpStartDate As CCustomDateTimePicker
         Friend WithEvents lblDateCreated As CLabel
         Public WithEvents txtDateCreated As CTextBox
         Friend WithEvents CFlowLayout2 As CFlowLayout
         Friend WithEvents lblLeaveName As CLabel
-        Public WithEvents cboLeaveIdNo As AtmComboBox
+        Public WithEvents cboLeaveIdNo As CdtComboBox
         Friend WithEvents lblEndDate As CLabel
         Public WithEvents dtpEndDate As CCustomDateTimePicker
         Friend WithEvents lblFullDay As CLabel
@@ -860,15 +846,15 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblReason As CLabel
         Public WithEvents txtReason As CTextBox
         Friend WithEvents lblStatus As CLabel
-        Public WithEvents cboStatus As AtmComboBox
+        Public WithEvents cboStatus As CdtComboBox
         Friend WithEvents lblenteredBy As CLabel
-        Public WithEvents cboenteredBy As AtmComboBox
+        Public WithEvents cboenteredBy As CdtComboBox
         Friend WithEvents DataGridViewApprovalHistory As CtDataGridView
         Friend WithEvents bsEmployeeLeaveApproval As BindingSource
         Friend WithEvents bsEmployeeLeaveApprovalHistory As BindingSource
         Friend WithEvents CLabel1 As CLabel
         Friend WithEvents lblHolidayName As CLabel
-        Public WithEvents cboHolidayIdNo As AtmComboBox
+        Public WithEvents cboHolidayIdNo As CdtComboBox
         Friend WithEvents dgvNote As CDgvTextColumn
         Friend WithEvents dgvDateCreated As CDgvTextColumn
         Friend WithEvents dgvApprovalIdNo As CDgvTextColumn

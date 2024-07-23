@@ -53,7 +53,7 @@
             Me.DataGridViewInvTransactionRequests = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.dgvDateCreated = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.lblWarehouseIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboWarehouseSelector = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboWarehouseSelector = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.DataGridViewInvTransItems = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.dgvUnitName = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvQtyOnHand = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
@@ -245,7 +245,6 @@
             Me.cboWarehouseSelector.EndFindValue = Nothing
             Me.cboWarehouseSelector.FieldDescription = Nothing
             Me.cboWarehouseSelector.FieldName = Nothing
-            Me.cboWarehouseSelector.FilterRule = Nothing
             Me.cboWarehouseSelector.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboWarehouseSelector.FindEnabled = False
             Me.cboWarehouseSelector.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -264,11 +263,9 @@
             Me.cboWarehouseSelector.OriginalList = Nothing
             Me.cboWarehouseSelector.OverrideDropDownStyleList = False
             Me.cboWarehouseSelector.PreviousSearchTerm = Nothing
-            Me.cboWarehouseSelector.PropertySelector = Nothing
             Me.cboWarehouseSelector.Size = New System.Drawing.Size(783, 29)
             Me.cboWarehouseSelector.SuggestBoxHeight = 200
             Me.cboWarehouseSelector.SuggestCharCount = 0
-            Me.cboWarehouseSelector.SuggestListOrderRule = Nothing
             Me.cboWarehouseSelector.TabIndex = 15
             Me.cboWarehouseSelector.TextToSearch = Nothing
             Me.cboWarehouseSelector.Translatable = False
@@ -929,7 +926,7 @@
         Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
         Friend WithEvents CreateDateDataGridViewTextBoxColumn As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents lblWarehouseIdNo As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboWarehouseSelector As Libraries.CBaseControlsLibrary.AtmComboBox
+        Friend WithEvents cboWarehouseSelector As Libraries.CBaseControlsLibrary.CdtComboBox
         Friend WithEvents txtDoctorCode As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents txtWarehouseIdNo As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents AmountDataGridViewTextBoxColumn As DataGridViewTextBoxColumn

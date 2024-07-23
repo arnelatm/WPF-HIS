@@ -33,13 +33,13 @@ Namespace PresentationLayer.Views.Forms
             Me.lblUserName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.TxtUserName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cacEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacSecurityLevel = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cacSecurityLevel = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblPassword = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.TxtPassword = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblSecurityGroupID = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacSecurityGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cacSecurityGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblActive = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkActive = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -221,7 +221,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacEmployeeIdNo.EndFindValue = Nothing
             Me.cacEmployeeIdNo.FieldDescription = Nothing
             Me.cacEmployeeIdNo.FieldName = Nothing
-            Me.cacEmployeeIdNo.FilterRule = Nothing
             Me.cacEmployeeIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cacEmployeeIdNo.FindEnabled = False
             Me.cacEmployeeIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -241,10 +240,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cacEmployeeIdNo.OriginalList = Nothing
             Me.cacEmployeeIdNo.OverrideDropDownStyleList = False
             Me.cacEmployeeIdNo.PreviousSearchTerm = Nothing
-            Me.cacEmployeeIdNo.PropertySelector = Nothing
             Me.cacEmployeeIdNo.Size = New System.Drawing.Size(320, 24)
             Me.cacEmployeeIdNo.SuggestBoxHeight = 200
-            Me.cacEmployeeIdNo.SuggestListOrderRule = Nothing
             Me.cacEmployeeIdNo.TabIndex = 131
             Me.cacEmployeeIdNo.TextToSearch = Nothing
             Me.cacEmployeeIdNo.Translatable = False
@@ -284,7 +281,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacSecurityLevel.EndFindValue = Nothing
             Me.cacSecurityLevel.FieldDescription = Nothing
             Me.cacSecurityLevel.FieldName = Nothing
-            Me.cacSecurityLevel.FilterRule = Nothing
             Me.cacSecurityLevel.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cacSecurityLevel.FindEnabled = False
             Me.cacSecurityLevel.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -304,10 +300,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cacSecurityLevel.OriginalList = Nothing
             Me.cacSecurityLevel.OverrideDropDownStyleList = False
             Me.cacSecurityLevel.PreviousSearchTerm = Nothing
-            Me.cacSecurityLevel.PropertySelector = Nothing
             Me.cacSecurityLevel.Size = New System.Drawing.Size(320, 24)
             Me.cacSecurityLevel.SuggestBoxHeight = 200
-            Me.cacSecurityLevel.SuggestListOrderRule = Nothing
             Me.cacSecurityLevel.TabIndex = 4
             Me.cacSecurityLevel.TextToSearch = Nothing
             Me.cacSecurityLevel.Translatable = False
@@ -395,7 +389,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacSecurityGroupIdNo.EndFindValue = Nothing
             Me.cacSecurityGroupIdNo.FieldDescription = Nothing
             Me.cacSecurityGroupIdNo.FieldName = Nothing
-            Me.cacSecurityGroupIdNo.FilterRule = Nothing
             Me.cacSecurityGroupIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cacSecurityGroupIdNo.FindEnabled = False
             Me.cacSecurityGroupIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -415,10 +408,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cacSecurityGroupIdNo.OriginalList = Nothing
             Me.cacSecurityGroupIdNo.OverrideDropDownStyleList = False
             Me.cacSecurityGroupIdNo.PreviousSearchTerm = Nothing
-            Me.cacSecurityGroupIdNo.PropertySelector = Nothing
             Me.cacSecurityGroupIdNo.Size = New System.Drawing.Size(320, 24)
             Me.cacSecurityGroupIdNo.SuggestBoxHeight = 200
-            Me.cacSecurityGroupIdNo.SuggestListOrderRule = Nothing
             Me.cacSecurityGroupIdNo.TabIndex = 6
             Me.cacSecurityGroupIdNo.TextToSearch = Nothing
             Me.cacSecurityGroupIdNo.Translatable = False
@@ -502,11 +493,11 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblPassword As CLabel
         Friend WithEvents TxtPassword As CTextBox
         Friend WithEvents lblSecurityGroupID As CLabel
-        Friend WithEvents cacSecurityGroupIdNo As AtmComboBox
+        Friend WithEvents cacSecurityGroupIdNo As CdtComboBox
         Friend WithEvents CLabel1 As CLabel
-        Friend WithEvents cacSecurityLevel As AtmComboBox
+        Friend WithEvents cacSecurityLevel As CdtComboBox
         Friend WithEvents lblEmployeeIdNo As CLabel
-        Friend WithEvents cacEmployeeIdNo As AtmComboBox
+        Friend WithEvents cacEmployeeIdNo As CdtComboBox
         Friend WithEvents lblActive As CLabel
         Friend WithEvents chkActive As CCheckBox
     End Class

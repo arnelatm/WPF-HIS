@@ -27,7 +27,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblSupplierCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboDocumentType = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboDocumentType = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.chkAllDocuments = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
             Me.lblExpiryDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpExpiryDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
@@ -260,7 +260,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Friend WithEvents lblExpiryDate As CLabel
         Friend WithEvents dtpExpiryDate As CCustomDateTimePicker
         Friend WithEvents lblSupplierCode As CLabel
-        Friend WithEvents cboDocumentType As AtmComboBox
+        Friend WithEvents cboDocumentType As CdtComboBox
         Friend WithEvents chkAllDocuments As UcCheckBox
     End Class
 End Namespace

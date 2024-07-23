@@ -39,7 +39,7 @@ Namespace PresentationLayer.Views.Forms
         Me.lblItemCodeNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboCodeGroupSelector = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboCodeGroupSelector = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.btnLockGroup = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.LblNote = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtNote = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -271,7 +271,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboCodeGroupSelector.EndFindValue = Nothing
             Me.cboCodeGroupSelector.FieldDescription = Nothing
             Me.cboCodeGroupSelector.FieldName = Nothing
-            Me.cboCodeGroupSelector.FilterRule = Nothing
             Me.cboCodeGroupSelector.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboCodeGroupSelector.FindEnabled = False
             resources.ApplyResources(Me.cboCodeGroupSelector, "cboCodeGroupSelector")
@@ -287,10 +286,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cboCodeGroupSelector.OriginalList = Nothing
             Me.cboCodeGroupSelector.OverrideDropDownStyleList = False
             Me.cboCodeGroupSelector.PreviousSearchTerm = Nothing
-            Me.cboCodeGroupSelector.PropertySelector = Nothing
             Me.cboCodeGroupSelector.SuggestBoxHeight = 200
             Me.cboCodeGroupSelector.SuggestCharCount = 0
-            Me.cboCodeGroupSelector.SuggestListOrderRule = Nothing
             Me.cboCodeGroupSelector.TextToSearch = Nothing
             Me.cboCodeGroupSelector.Translatable = False
             Me.cboCodeGroupSelector.ValueIsMandatory = False
@@ -413,7 +410,7 @@ End Sub
         Friend WithEvents lblItemCodeNameAra As CLabel
         Friend WithEvents CFlowLayout1 As CFlowLayout
         Friend WithEvents CLabel1 As CLabel
-        Friend WithEvents cboCodeGroupSelector As AtmComboBox
+        Friend WithEvents cboCodeGroupSelector As CdtComboBox
         Friend WithEvents LblNote As CLabel
         Friend WithEvents txtNote As CTextBox
         Friend WithEvents btnLockGroup As CButton

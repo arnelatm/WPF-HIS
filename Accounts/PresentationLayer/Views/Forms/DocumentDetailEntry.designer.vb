@@ -31,14 +31,14 @@ Namespace PresentationLayer.Views.Forms
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblLeaveIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboDocumentIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboDocumentIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CButton1 = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.lblBranchName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cBranchName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblContactName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboContactIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboContactIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblDocumentNumber = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtDocumentNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblIssueDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -123,7 +123,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDocumentIdNo.EndFindValue = Nothing
             Me.cboDocumentIdNo.FieldDescription = Nothing
             Me.cboDocumentIdNo.FieldName = Nothing
-            Me.cboDocumentIdNo.FilterRule = Nothing
             Me.cboDocumentIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboDocumentIdNo.FindEnabled = False
             Me.CFlowLayout2.SetFlowBreak(Me.cboDocumentIdNo, True)
@@ -140,10 +139,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDocumentIdNo.OriginalList = Nothing
             Me.cboDocumentIdNo.OverrideDropDownStyleList = False
             Me.cboDocumentIdNo.PreviousSearchTerm = Nothing
-            Me.cboDocumentIdNo.PropertySelector = Nothing
             Me.cboDocumentIdNo.SuggestBoxHeight = 200
             Me.cboDocumentIdNo.SuggestCharCount = 0
-            Me.cboDocumentIdNo.SuggestListOrderRule = Nothing
             Me.cboDocumentIdNo.TextToSearch = Nothing
             Me.cboDocumentIdNo.Translatable = False
             Me.cboDocumentIdNo.ValueIsMandatory = False
@@ -264,7 +261,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboContactIdNo.EndFindValue = Nothing
             Me.cboContactIdNo.FieldDescription = Nothing
             Me.cboContactIdNo.FieldName = Nothing
-            Me.cboContactIdNo.FilterRule = Nothing
             Me.cboContactIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboContactIdNo.FindEnabled = False
             Me.CFlowLayout2.SetFlowBreak(Me.cboContactIdNo, True)
@@ -281,10 +277,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cboContactIdNo.OriginalList = Nothing
             Me.cboContactIdNo.OverrideDropDownStyleList = False
             Me.cboContactIdNo.PreviousSearchTerm = Nothing
-            Me.cboContactIdNo.PropertySelector = Nothing
             Me.cboContactIdNo.SuggestBoxHeight = 200
             Me.cboContactIdNo.SuggestCharCount = 0
-            Me.cboContactIdNo.SuggestListOrderRule = Nothing
             Me.cboContactIdNo.TextToSearch = Nothing
             Me.cboContactIdNo.Translatable = False
             Me.cboContactIdNo.ValueIsMandatory = False
@@ -630,7 +624,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblIdNo As CLabel
         Public WithEvents TxtIdNo As CTextBox
         Friend WithEvents lblLeaveIdNo As CLabel
-        Public WithEvents cboDocumentIdNo As AtmComboBox
+        Public WithEvents cboDocumentIdNo As CdtComboBox
         Friend WithEvents CFlowLayout2 As CFlowLayout
         Public WithEvents txtDateCreated As CTextBox
         Friend WithEvents lblDateCreated As CLabel
@@ -641,7 +635,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblDocumentNumber As CLabel
         Friend WithEvents txtDocumentNumber As CTextBox
         Friend WithEvents lblContactName As CLabel
-        Public WithEvents cboContactIdNo As AtmComboBox
+        Public WithEvents cboContactIdNo As CdtComboBox
         Friend WithEvents lblPicture As CLabel
         Public WithEvents dtpExpiryDate As CCustomDateTimePicker
         Friend WithEvents txtUserIdNo As CTextBox

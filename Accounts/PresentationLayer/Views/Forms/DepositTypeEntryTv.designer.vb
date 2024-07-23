@@ -31,7 +31,7 @@ Namespace PresentationLayer.Views.Forms
         Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.tlpPaymentType = New System.Windows.Forms.TableLayoutPanel()
         Me.lblWithBankCharges = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+        Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
         Me.lblCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtDepositTypeNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
         Me.txtDepositTypeName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -42,9 +42,9 @@ Namespace PresentationLayer.Views.Forms
         Me.lblNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblBankChargesAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.cboBankChargesAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+        Me.cboBankChargesAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
         Me.lblBankChargesVatAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboBankChargesVatAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+        Me.cboBankChargesVatAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
         Me.txtRate = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblRate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -136,9 +136,8 @@ Namespace PresentationLayer.Views.Forms
         Me.cboAccountIdNo.EndFindValue = Nothing
         Me.cboAccountIdNo.FieldDescription = Nothing
         Me.cboAccountIdNo.FieldName = Nothing
-        Me.cboAccountIdNo.FilterRule = Nothing
-        Me.cboAccountIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cboAccountIdNo.FindEnabled = false
+            Me.cboAccountIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboAccountIdNo.FindEnabled = false
         resources.ApplyResources(Me.cboAccountIdNo, "cboAccountIdNo")
         Me.cboAccountIdNo.ForeColor = System.Drawing.Color.Black
         Me.cboAccountIdNo.FormattingEnabled = true
@@ -151,11 +150,9 @@ Namespace PresentationLayer.Views.Forms
         Me.cboAccountIdNo.OriginalList = Nothing
         Me.cboAccountIdNo.OverrideDropDownStyleList = false
         Me.cboAccountIdNo.PreviousSearchTerm = Nothing
-        Me.cboAccountIdNo.PropertySelector = Nothing
             Me.cboAccountIdNo.SuggestBoxHeight = 200
-            Me.cboAccountIdNo.SuggestListOrderRule = Nothing
-        Me.cboAccountIdNo.TextToSearch = Nothing
-        Me.cboAccountIdNo.Translatable = false
+            Me.cboAccountIdNo.TextToSearch = Nothing
+            Me.cboAccountIdNo.Translatable = false
         Me.cboAccountIdNo.ValueIsMandatory = false
         Me.cboAccountIdNo.ValueIsNullable = false
         Me.cboAccountIdNo.ValueIsNumeric = false
@@ -355,9 +352,8 @@ Namespace PresentationLayer.Views.Forms
         Me.cboBankChargesAccountIdNo.EndFindValue = Nothing
         Me.cboBankChargesAccountIdNo.FieldDescription = Nothing
         Me.cboBankChargesAccountIdNo.FieldName = Nothing
-        Me.cboBankChargesAccountIdNo.FilterRule = Nothing
-        Me.cboBankChargesAccountIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cboBankChargesAccountIdNo.FindEnabled = false
+            Me.cboBankChargesAccountIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboBankChargesAccountIdNo.FindEnabled = false
         Me.cboBankChargesAccountIdNo.ForeColor = System.Drawing.Color.Black
         Me.cboBankChargesAccountIdNo.FormattingEnabled = true
         Me.cboBankChargesAccountIdNo.HideWhenNotEditingOrAdding = false
@@ -369,11 +365,9 @@ Namespace PresentationLayer.Views.Forms
         Me.cboBankChargesAccountIdNo.OriginalList = Nothing
         Me.cboBankChargesAccountIdNo.OverrideDropDownStyleList = false
         Me.cboBankChargesAccountIdNo.PreviousSearchTerm = Nothing
-        Me.cboBankChargesAccountIdNo.PropertySelector = Nothing
             Me.cboBankChargesAccountIdNo.SuggestBoxHeight = 200
-            Me.cboBankChargesAccountIdNo.SuggestListOrderRule = Nothing
-        Me.cboBankChargesAccountIdNo.TextToSearch = Nothing
-        Me.cboBankChargesAccountIdNo.Translatable = false
+            Me.cboBankChargesAccountIdNo.TextToSearch = Nothing
+            Me.cboBankChargesAccountIdNo.Translatable = false
         Me.cboBankChargesAccountIdNo.ValueIsMandatory = false
         Me.cboBankChargesAccountIdNo.ValueIsNullable = false
         Me.cboBankChargesAccountIdNo.ValueIsNumeric = false
@@ -402,9 +396,8 @@ Namespace PresentationLayer.Views.Forms
         Me.cboBankChargesVatAccountIdNo.EndFindValue = Nothing
         Me.cboBankChargesVatAccountIdNo.FieldDescription = Nothing
         Me.cboBankChargesVatAccountIdNo.FieldName = Nothing
-        Me.cboBankChargesVatAccountIdNo.FilterRule = Nothing
-        Me.cboBankChargesVatAccountIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cboBankChargesVatAccountIdNo.FindEnabled = false
+            Me.cboBankChargesVatAccountIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboBankChargesVatAccountIdNo.FindEnabled = false
         Me.cboBankChargesVatAccountIdNo.ForeColor = System.Drawing.Color.Black
         Me.cboBankChargesVatAccountIdNo.FormattingEnabled = true
         Me.cboBankChargesVatAccountIdNo.HideWhenNotEditingOrAdding = false
@@ -416,11 +409,9 @@ Namespace PresentationLayer.Views.Forms
         Me.cboBankChargesVatAccountIdNo.OriginalList = Nothing
         Me.cboBankChargesVatAccountIdNo.OverrideDropDownStyleList = false
         Me.cboBankChargesVatAccountIdNo.PreviousSearchTerm = Nothing
-        Me.cboBankChargesVatAccountIdNo.PropertySelector = Nothing
             Me.cboBankChargesVatAccountIdNo.SuggestBoxHeight = 200
-            Me.cboBankChargesVatAccountIdNo.SuggestListOrderRule = Nothing
-        Me.cboBankChargesVatAccountIdNo.TextToSearch = Nothing
-        Me.cboBankChargesVatAccountIdNo.Translatable = false
+            Me.cboBankChargesVatAccountIdNo.TextToSearch = Nothing
+            Me.cboBankChargesVatAccountIdNo.Translatable = false
         Me.cboBankChargesVatAccountIdNo.ValueIsMandatory = false
         Me.cboBankChargesVatAccountIdNo.ValueIsNullable = false
         Me.cboBankChargesVatAccountIdNo.ValueIsNumeric = false
@@ -529,7 +520,7 @@ End Sub
         Friend WithEvents floDataDisplay As CFlowLayout
         Friend WithEvents tlpPaymentType As TableLayoutPanel
         Friend WithEvents lblWithBankCharges As CLabel
-        Friend WithEvents cboAccountIdNo As AtmComboBox
+        Friend WithEvents cboAccountIdNo As CdtComboBox
         Friend WithEvents lblCode As CLabel
         Friend WithEvents txtDepositTypeNameAra As CTextBoxArabic
         Friend WithEvents txtDepositTypeName As CTextBox
@@ -540,9 +531,9 @@ End Sub
         Friend WithEvents lblNameAra As CLabel
         Friend WithEvents lblBankChargesAccountIdNo As CLabel
         Friend WithEvents txtNotes As CTextBox
-        Friend WithEvents cboBankChargesAccountIdNo As AtmComboBox
+        Friend WithEvents cboBankChargesAccountIdNo As CdtComboBox
         Friend WithEvents lblBankChargesVatAccountIdNo As CLabel
-        Friend WithEvents cboBankChargesVatAccountIdNo As AtmComboBox
+        Friend WithEvents cboBankChargesVatAccountIdNo As CdtComboBox
         Friend WithEvents txtRate As CTextBox
         Friend WithEvents lblRate As CLabel
         Friend WithEvents lblNotes As CLabel

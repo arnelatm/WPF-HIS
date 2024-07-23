@@ -28,7 +28,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboWarehouseIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboWarehouseIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.chkAllWarehouses = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
@@ -115,7 +115,6 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.cboWarehouseIdNo.EndFindValue = Nothing
             Me.cboWarehouseIdNo.FieldDescription = Nothing
             Me.cboWarehouseIdNo.FieldName = Nothing
-            Me.cboWarehouseIdNo.FilterRule = Nothing
             Me.cboWarehouseIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboWarehouseIdNo.FindEnabled = False
             Me.cboWarehouseIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -135,10 +134,8 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.cboWarehouseIdNo.OriginalList = Nothing
             Me.cboWarehouseIdNo.OverrideDropDownStyleList = False
             Me.cboWarehouseIdNo.PreviousSearchTerm = Nothing
-            Me.cboWarehouseIdNo.PropertySelector = Nothing
             Me.cboWarehouseIdNo.Size = New System.Drawing.Size(530, 24)
             Me.cboWarehouseIdNo.SuggestBoxHeight = 200
-            Me.cboWarehouseIdNo.SuggestListOrderRule = Nothing
             Me.cboWarehouseIdNo.TabIndex = 29
             Me.cboWarehouseIdNo.TextToSearch = Nothing
             Me.cboWarehouseIdNo.Translatable = False
@@ -274,7 +271,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Friend WithEvents btnOk As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents btnCancel As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents CLabel3 As CLabel
-        Friend WithEvents cboWarehouseIdNo As AtmComboBox
+        Friend WithEvents cboWarehouseIdNo As CdtComboBox
         Friend WithEvents chkAllWarehouses As UcCheckBox
         Friend WithEvents lblExpiryDate As CLabel
         Friend WithEvents dtpExpiryDate As CCustomDateTimePicker

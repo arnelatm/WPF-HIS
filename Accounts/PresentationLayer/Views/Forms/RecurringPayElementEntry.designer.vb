@@ -31,7 +31,7 @@ Namespace PresentationLayer.Views.Forms
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+        Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
         Me.lblLimitAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtLimitAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblStartDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -42,9 +42,9 @@ Namespace PresentationLayer.Views.Forms
         Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.lblPayElementName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboPayElementIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+        Me.cboPayElementIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
         Me.lblRecurType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboRecurType = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+        Me.cboRecurType = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
         Me.lblEndDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.dtpEndDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.lblTotalAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -123,9 +123,8 @@ Namespace PresentationLayer.Views.Forms
         Me.cboEmployeeIdNo.EndFindValue = Nothing
         Me.cboEmployeeIdNo.FieldDescription = Nothing
         Me.cboEmployeeIdNo.FieldName = Nothing
-        Me.cboEmployeeIdNo.FilterRule = Nothing
-        Me.cboEmployeeIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cboEmployeeIdNo.FindEnabled = false
+            Me.cboEmployeeIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboEmployeeIdNo.FindEnabled = false
         Me.CFlowLayout2.SetFlowBreak(Me.cboEmployeeIdNo, true)
         resources.ApplyResources(Me.cboEmployeeIdNo, "cboEmployeeIdNo")
         Me.cboEmployeeIdNo.ForeColor = System.Drawing.Color.Black
@@ -139,11 +138,9 @@ Namespace PresentationLayer.Views.Forms
         Me.cboEmployeeIdNo.OriginalList = Nothing
         Me.cboEmployeeIdNo.OverrideDropDownStyleList = false
         Me.cboEmployeeIdNo.PreviousSearchTerm = Nothing
-        Me.cboEmployeeIdNo.PropertySelector = Nothing
             Me.cboEmployeeIdNo.SuggestBoxHeight = 200
-            Me.cboEmployeeIdNo.SuggestListOrderRule = Nothing
-        Me.cboEmployeeIdNo.TextToSearch = Nothing
-        Me.cboEmployeeIdNo.Translatable = false
+            Me.cboEmployeeIdNo.TextToSearch = Nothing
+            Me.cboEmployeeIdNo.Translatable = false
         Me.cboEmployeeIdNo.ValueIsMandatory = false
         Me.cboEmployeeIdNo.ValueIsNullable = false
         Me.cboEmployeeIdNo.ValueIsNumeric = false
@@ -342,9 +339,8 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPayElementIdNo.EndFindValue = Nothing
         Me.cboPayElementIdNo.FieldDescription = Nothing
         Me.cboPayElementIdNo.FieldName = Nothing
-        Me.cboPayElementIdNo.FilterRule = Nothing
-        Me.cboPayElementIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cboPayElementIdNo.FindEnabled = false
+            Me.cboPayElementIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboPayElementIdNo.FindEnabled = false
         Me.CFlowLayout2.SetFlowBreak(Me.cboPayElementIdNo, true)
         resources.ApplyResources(Me.cboPayElementIdNo, "cboPayElementIdNo")
         Me.cboPayElementIdNo.ForeColor = System.Drawing.Color.Black
@@ -358,11 +354,9 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPayElementIdNo.OriginalList = Nothing
         Me.cboPayElementIdNo.OverrideDropDownStyleList = false
         Me.cboPayElementIdNo.PreviousSearchTerm = Nothing
-        Me.cboPayElementIdNo.PropertySelector = Nothing
             Me.cboPayElementIdNo.SuggestBoxHeight = 200
-            Me.cboPayElementIdNo.SuggestListOrderRule = Nothing
-        Me.cboPayElementIdNo.TextToSearch = Nothing
-        Me.cboPayElementIdNo.Translatable = false
+            Me.cboPayElementIdNo.TextToSearch = Nothing
+            Me.cboPayElementIdNo.Translatable = false
         Me.cboPayElementIdNo.ValueIsMandatory = false
         Me.cboPayElementIdNo.ValueIsNullable = false
         Me.cboPayElementIdNo.ValueIsNumeric = false
@@ -390,9 +384,8 @@ Namespace PresentationLayer.Views.Forms
         Me.cboRecurType.EndFindValue = Nothing
         Me.cboRecurType.FieldDescription = Nothing
         Me.cboRecurType.FieldName = Nothing
-        Me.cboRecurType.FilterRule = Nothing
-        Me.cboRecurType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cboRecurType.FindEnabled = false
+            Me.cboRecurType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboRecurType.FindEnabled = false
         Me.CFlowLayout2.SetFlowBreak(Me.cboRecurType, true)
         resources.ApplyResources(Me.cboRecurType, "cboRecurType")
         Me.cboRecurType.ForeColor = System.Drawing.Color.Black
@@ -406,11 +399,9 @@ Namespace PresentationLayer.Views.Forms
         Me.cboRecurType.OriginalList = Nothing
         Me.cboRecurType.OverrideDropDownStyleList = false
         Me.cboRecurType.PreviousSearchTerm = Nothing
-        Me.cboRecurType.PropertySelector = Nothing
             Me.cboRecurType.SuggestBoxHeight = 200
-            Me.cboRecurType.SuggestListOrderRule = Nothing
-        Me.cboRecurType.TextToSearch = Nothing
-        Me.cboRecurType.Translatable = false
+            Me.cboRecurType.TextToSearch = Nothing
+            Me.cboRecurType.Translatable = false
         Me.cboRecurType.ValueIsMandatory = false
         Me.cboRecurType.ValueIsNullable = false
         Me.cboRecurType.ValueIsNumeric = false
@@ -537,7 +528,7 @@ End Sub
         Friend WithEvents lblIdNo As CLabel
         Public WithEvents TxtIdNo As CTextBox
         Friend WithEvents lblEmployeeIdNo As CLabel
-        Public WithEvents cboEmployeeIdNo As AtmComboBox
+        Public WithEvents cboEmployeeIdNo As CdtComboBox
         Friend WithEvents lblLimitAmount As CLabel
         Public WithEvents txtLimitAmount As CTextBox
         Friend WithEvents lblStartDate As CLabel
@@ -548,11 +539,11 @@ End Sub
         Public WithEvents txtDateCreated As CTextBox
         Friend WithEvents CFlowLayout2 As CFlowLayout
         Friend WithEvents lblPayElementName As CLabel
-        Public WithEvents cboPayElementIdNo As AtmComboBox
+        Public WithEvents cboPayElementIdNo As CdtComboBox
         Friend WithEvents lblTotalAmount As CLabel
         Public WithEvents txtTotalAmount As CTextBox
         Friend WithEvents lblRecurType As CLabel
-        Public WithEvents cboRecurType As AtmComboBox
+        Public WithEvents cboRecurType As CdtComboBox
         Friend WithEvents CLabel2 As CLabel
         Friend WithEvents chkActive As CCheckBox
         Friend WithEvents lblEndDate As CLabel

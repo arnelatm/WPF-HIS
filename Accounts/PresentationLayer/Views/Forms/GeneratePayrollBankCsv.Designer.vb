@@ -25,9 +25,9 @@ Namespace PresentationLayer.Views.Forms
         Me.lblPayrollName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblStartDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.cboIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblPayFrequency = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboPayCycleIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboPayCycleIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblPayrollCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtPayrollCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.dtpStartDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
@@ -102,7 +102,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboIdNo.EndFindValue = Nothing
             Me.cboIdNo.FieldDescription = Nothing
             Me.cboIdNo.FieldName = Nothing
-            Me.cboIdNo.FilterRule = Nothing
             Me.cboIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboIdNo.FindEnabled = False
             Me.CFlowLayout1.SetFlowBreak(Me.cboIdNo, True)
@@ -122,11 +121,9 @@ Namespace PresentationLayer.Views.Forms
             Me.cboIdNo.OriginalList = Nothing
             Me.cboIdNo.OverrideDropDownStyleList = False
             Me.cboIdNo.PreviousSearchTerm = Nothing
-            Me.cboIdNo.PropertySelector = Nothing
             Me.cboIdNo.Size = New System.Drawing.Size(481, 28)
             Me.cboIdNo.SuggestBoxHeight = 200
             Me.cboIdNo.SuggestCharCount = 0
-            Me.cboIdNo.SuggestListOrderRule = Nothing
             Me.cboIdNo.TabIndex = 0
             Me.cboIdNo.TextToSearch = Nothing
             Me.cboIdNo.Translatable = False
@@ -167,7 +164,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayCycleIdNo.EndFindValue = Nothing
             Me.cboPayCycleIdNo.FieldDescription = Nothing
             Me.cboPayCycleIdNo.FieldName = Nothing
-            Me.cboPayCycleIdNo.FilterRule = Nothing
             Me.cboPayCycleIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboPayCycleIdNo.FindEnabled = False
             Me.CFlowLayout1.SetFlowBreak(Me.cboPayCycleIdNo, True)
@@ -188,11 +184,9 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayCycleIdNo.OriginalList = Nothing
             Me.cboPayCycleIdNo.OverrideDropDownStyleList = False
             Me.cboPayCycleIdNo.PreviousSearchTerm = Nothing
-            Me.cboPayCycleIdNo.PropertySelector = Nothing
             Me.cboPayCycleIdNo.Size = New System.Drawing.Size(481, 30)
             Me.cboPayCycleIdNo.SuggestBoxHeight = 200
             Me.cboPayCycleIdNo.SuggestCharCount = 0
-            Me.cboPayCycleIdNo.SuggestListOrderRule = Nothing
             Me.cboPayCycleIdNo.TabIndex = 1
             Me.cboPayCycleIdNo.TextToSearch = Nothing
             Me.cboPayCycleIdNo.Translatable = False
@@ -379,8 +373,8 @@ End Sub
         Friend WithEvents lblPayFrequency As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblPayrollCode As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtPayrollCode As Libraries.CBaseControlsLibrary.CTextBox
-        Friend WithEvents cboIdNo As Libraries.CBaseControlsLibrary.AtmComboBox
-        Friend WithEvents cboPayCycleIdNo As Libraries.CBaseControlsLibrary.AtmComboBox
+        Friend WithEvents cboIdNo As Libraries.CBaseControlsLibrary.CdtComboBox
+        Friend WithEvents cboPayCycleIdNo As Libraries.CBaseControlsLibrary.CdtComboBox
         Friend WithEvents dtpStartDate As Libraries.CBaseControlsLibrary.CCustomDateTimePicker
         Friend WithEvents dtpEndDate As Libraries.CBaseControlsLibrary.CCustomDateTimePicker
     End Class

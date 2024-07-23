@@ -30,7 +30,7 @@ Namespace PresentationLayer.Views.Forms
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(InvTransTypeEntryTv))
             Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-            Me.cboInventoryAction = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboInventoryAction = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblInventoryAction = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -42,7 +42,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblInvTransTypeCycle = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkActive = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
@@ -124,7 +124,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboInventoryAction.EndFindValue = Nothing
             Me.cboInventoryAction.FieldDescription = Nothing
             Me.cboInventoryAction.FieldName = Nothing
-            Me.cboInventoryAction.FilterRule = Nothing
             Me.cboInventoryAction.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboInventoryAction.FindEnabled = False
             Me.cboInventoryAction.ForeColor = System.Drawing.Color.Black
@@ -139,8 +138,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboInventoryAction.OriginalList = Nothing
             Me.cboInventoryAction.OverrideDropDownStyleList = False
             Me.cboInventoryAction.PreviousSearchTerm = Nothing
-            Me.cboInventoryAction.PropertySelector = Nothing
-            Me.cboInventoryAction.SuggestListOrderRule = Nothing
             Me.cboInventoryAction.TextToSearch = Nothing
             Me.cboInventoryAction.Translatable = False
             Me.cboInventoryAction.ValueIsMandatory = False
@@ -360,7 +357,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.EndFindValue = Nothing
             Me.cboAccountIdNo.FieldDescription = Nothing
             Me.cboAccountIdNo.FieldName = Nothing
-            Me.cboAccountIdNo.FilterRule = Nothing
             Me.cboAccountIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboAccountIdNo.FindEnabled = False
             Me.cboAccountIdNo.ForeColor = System.Drawing.Color.Black
@@ -375,10 +371,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.OriginalList = Nothing
             Me.cboAccountIdNo.OverrideDropDownStyleList = False
             Me.cboAccountIdNo.PreviousSearchTerm = Nothing
-            Me.cboAccountIdNo.PropertySelector = Nothing
             Me.cboAccountIdNo.SuggestBoxHeight = 200
             Me.cboAccountIdNo.SuggestCharCount = 0
-            Me.cboAccountIdNo.SuggestListOrderRule = Nothing
             Me.cboAccountIdNo.TextToSearch = Nothing
             Me.cboAccountIdNo.Translatable = False
             Me.cboAccountIdNo.ValueIsMandatory = False
@@ -469,8 +463,8 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblActive As CLabel
         Friend WithEvents chkActive As CCheckBox
         Friend WithEvents lblInvTransTypeCycle As CLabel
-        Friend WithEvents cboAccountIdNo As AtmComboBox
-        Friend WithEvents cboInventoryAction As AtmComboBox
+        Friend WithEvents cboAccountIdNo As CdtComboBox
+        Friend WithEvents cboInventoryAction As CdtComboBox
         Friend WithEvents lblInventoryAction As CLabel
         Friend WithEvents txtInvTransTypeNameAra As CTextBoxArabic
     End Class

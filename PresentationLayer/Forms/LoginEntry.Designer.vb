@@ -33,7 +33,7 @@ Partial Class LoginEntry
         Me.lblNewPassword = New System.Windows.Forms.Label()
         Me.floPasswordEntry = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.cboBranchIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+        Me.cboBranchIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.textNewPassword = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.textBoxPassword = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -235,7 +235,6 @@ Partial Class LoginEntry
         Me.cboBranchIdNo.EndFindValue = Nothing
         Me.cboBranchIdNo.FieldDescription = Nothing
         Me.cboBranchIdNo.FieldName = Nothing
-        Me.cboBranchIdNo.FilterRule = Nothing
         Me.cboBranchIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.cboBranchIdNo.FindEnabled = False
         Me.cboBranchIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -254,11 +253,9 @@ Partial Class LoginEntry
         Me.cboBranchIdNo.OriginalList = Nothing
         Me.cboBranchIdNo.OverrideDropDownStyleList = False
         Me.cboBranchIdNo.PreviousSearchTerm = Nothing
-        Me.cboBranchIdNo.PropertySelector = Nothing
         Me.cboBranchIdNo.Size = New System.Drawing.Size(367, 28)
         Me.cboBranchIdNo.SuggestBoxHeight = 200
         Me.cboBranchIdNo.SuggestCharCount = 0
-        Me.cboBranchIdNo.SuggestListOrderRule = Nothing
         Me.cboBranchIdNo.TabIndex = 36
         Me.cboBranchIdNo.TextToSearch = Nothing
         Me.cboBranchIdNo.Translatable = False
@@ -490,5 +487,5 @@ Partial Class LoginEntry
     Friend WithEvents btnCancel As Button
     Friend WithEvents btn_Login As Button
     Friend WithEvents CLabel1 As CLabel
-    Friend WithEvents cboBranchIdNo As AtmComboBox
+    Friend WithEvents cboBranchIdNo As CdtComboBox
 End Class

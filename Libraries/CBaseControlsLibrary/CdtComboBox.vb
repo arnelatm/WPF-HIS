@@ -7,7 +7,7 @@ Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.BaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 
-Public Class AtmComboBox
+Public Class CdtComboBox
     Inherits BCombobox
     Implements IEntryControl, ILinkedLabel, IFindableControl
 
@@ -23,9 +23,6 @@ Public Class AtmComboBox
     Private WithEvents _contextMenuStrip1 As New ContextMenuStrip
     Public DataSourceProgrammaticChange As Boolean = False
     Protected SuggestListForm As CListBoxForm = New CListBoxForm
-    Public Property SuggestListOrderRule As Expression(Of Func(Of String, String))
-    Public Property FilterRule As String
-    Public Property PropertySelector As String
 
     Public Sub New()
         MyBase.New()
@@ -374,30 +371,38 @@ Public Class AtmComboBox
 
     Protected Overrides Sub OnTextChanged(ByVal e As EventArgs)
         MyBase.OnTextChanged(e)
-        If Not Focused Then Return
-        If _editFilter AndAlso Text.Length >= SuggestCharCount Then
-            If _suggestBindingSource.DataSource Is Nothing Then
-                _suggestBindingSource.DataSource = DataSource.Copy()
-                _suggestBindingSource.ResetBindings(True)
-                SuggestListForm.SuggestListBox.DisplayMember = DisplayMember
-                SuggestListForm.SuggestListBox.ValueMember = ValueMember
-            End If
-            _suggestBindingSource.Filter = IIf(Text = Nothing OrElse Text = "", Nothing, String.Format(DisplayMember + " like '*{0}*'", Text))
-            Dim showForm As Boolean
-            showForm = IIf(_suggestBindingSource.Count() > 0, True, False)
-            If showForm Then
-                SetListBoxFormLocation(SuggestListForm)
-                SuggestListForm.Visible = True
-            End If
-            If _suggestBindingSource.Count = 0 And LimitToList Then
-                Beep()
-                SendKeys.SendWait("{BACKSPACE}")
-            ElseIf _suggestBindingSource.Count = 1 Then
-                Dim itemName As String = GetCurrentItemName()
-                If Text.Length() = itemName.Trim().Length() Then
-                    [Select](Text.Length, Text.Length)
-                    HideSuggestionBox()
+        If DisplayMember Is Nothing OrElse DisplayMember = "" Then
+            ' for combobox embedded inside datagridView controls DisplayMember will be initially empty
+            ' so need to ignore checking for text change during this time
+            'Debugger.Break()
+        Else
+            If Not Focused Then Return
+            If _editFilter AndAlso Text.Length >= SuggestCharCount Then
+                If _suggestBindingSource.DataSource Is Nothing Then
+                    _suggestBindingSource.DataSource = DataSource.Copy()
+                    _suggestBindingSource.ResetBindings(True)
+                    SuggestListForm.SuggestListBox.DisplayMember = DisplayMember
+                    SuggestListForm.SuggestListBox.ValueMember = ValueMember
                 End If
+                _suggestBindingSource.Filter = IIf(Text = Nothing OrElse Text = "", Nothing, String.Format(DisplayMember + " like '*{0}*'", Text))
+                Dim showForm As Boolean
+                showForm = IIf(_suggestBindingSource.Count() > 0, True, False)
+                If showForm Then
+                    SetListBoxFormLocation(SuggestListForm)
+                    SuggestListForm.Visible = True
+                End If
+                If _suggestBindingSource.Count = 0 And LimitToList Then
+                    Beep()
+                    SendKeys.SendWait("{BACKSPACE}")
+                ElseIf _suggestBindingSource.Count = 1 Then
+                    Dim itemName As String = GetCurrentItemName()
+                    If Text.Length() = itemName.Trim().Length() Then
+                        [Select](Text.Length, Text.Length)
+                        HideSuggestionBox()
+                    End If
+                End If
+            Else
+                ' ignore also this condition if suggestCharCount > current Text.Length
             End If
         End If
     End Sub
@@ -831,14 +836,14 @@ Public Class AtmComboBox
 
     Private Const WmMousewheel As Integer = &H20A
 
-    '<DebuggerStepThrough>
-    'Protected Overrides Sub WndProc(ByRef m As Message)
-    '    If EditingMode And Not DisplayOnly Then
-    '        MyBase.WndProc(m)
-    '    Else
-    '        If Not m.Msg = WmMousewheel Then MyBase.WndProc(m)
-    '    End If
-    'End Sub
+    <DebuggerStepThrough>
+    Protected Overrides Sub WndProc(ByRef m As Message)
+        If EditingMode And Not DisplayOnly Then
+            MyBase.WndProc(m)
+        Else
+            If Not m.Msg = WmMousewheel Then MyBase.WndProc(m)
+        End If
+    End Sub
 
     Public Function GetControlDescription(Optional defaultDescription As String = Nothing) Implements ILinkedLabel.GetControlDescription
         Dim description As String

@@ -57,7 +57,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblNoMaxLimit = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkNoMaxLimit = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
-            Me.cboLeaveType = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboLeaveType = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
             Me.SplitContainer1.Panel2.SuspendLayout()
@@ -619,7 +619,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboLeaveType.EndFindValue = Nothing
             Me.cboLeaveType.FieldDescription = Nothing
             Me.cboLeaveType.FieldName = Nothing
-            Me.cboLeaveType.FilterRule = Nothing
             Me.cboLeaveType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboLeaveType.FindEnabled = False
             Me.cboLeaveType.ForeColor = System.Drawing.Color.Black
@@ -634,9 +633,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboLeaveType.OriginalList = Nothing
             Me.cboLeaveType.OverrideDropDownStyleList = False
             Me.cboLeaveType.PreviousSearchTerm = Nothing
-            Me.cboLeaveType.PropertySelector = Nothing
             Me.cboLeaveType.SuggestBoxHeight = 200
-            Me.cboLeaveType.SuggestListOrderRule = Nothing
             Me.cboLeaveType.TextToSearch = Nothing
             Me.cboLeaveType.Translatable = False
             Me.cboLeaveType.ValueIsMandatory = False
@@ -688,7 +685,7 @@ End Sub
         Friend WithEvents lblNoMaxLimit As CLabel
         Friend WithEvents chkNoMaxLimit As CCheckBox
         Friend WithEvents lblLeaveType As CLabel
-        Friend WithEvents cboLeaveType As AtmComboBox
+        Friend WithEvents cboLeaveType As CdtComboBox
         Friend WithEvents chkEarnable As CCheckBox
         Friend WithEvents CLabel1 As CLabel
     End Class

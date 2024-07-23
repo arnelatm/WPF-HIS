@@ -51,7 +51,7 @@ End Class
 Public Class DataLookupSpecs
     Inherits DataTableLookupSpec
 
-    Public Property PropertyControl As AtmComboBox
+    Public Property PropertyControl As CdtComboBox
     Public Property PropertyName As String
 
 End Class

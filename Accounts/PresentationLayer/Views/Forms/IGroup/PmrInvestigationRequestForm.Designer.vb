@@ -49,7 +49,7 @@
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
-            Me.cboDoctorName = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboDoctorName = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.txtDoctorCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout2.SuspendLayout()
@@ -408,7 +408,6 @@
             Me.cboDoctorName.EndFindValue = Nothing
             Me.cboDoctorName.FieldDescription = Nothing
             Me.cboDoctorName.FieldName = Nothing
-            Me.cboDoctorName.FilterRule = Nothing
             Me.cboDoctorName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboDoctorName.FindEnabled = False
             Me.cboDoctorName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -427,11 +426,9 @@
             Me.cboDoctorName.OriginalList = Nothing
             Me.cboDoctorName.OverrideDropDownStyleList = False
             Me.cboDoctorName.PreviousSearchTerm = Nothing
-            Me.cboDoctorName.PropertySelector = Nothing
             Me.cboDoctorName.Size = New System.Drawing.Size(677, 28)
             Me.cboDoctorName.SuggestBoxHeight = 200
             Me.cboDoctorName.SuggestCharCount = 0
-            Me.cboDoctorName.SuggestListOrderRule = Nothing
             Me.cboDoctorName.TabIndex = 15
             Me.cboDoctorName.TextToSearch = Nothing
             Me.cboDoctorName.Translatable = False
@@ -520,7 +517,7 @@
         Friend WithEvents InvTypeDataGridViewTextBoxColumn As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents dgvTime As DataGridViewTextBoxColumn
         Friend WithEvents dgvTransKey As DataGridViewTextBoxColumn
-        Friend WithEvents cboDoctorName As Libraries.CBaseControlsLibrary.AtmComboBox
+        Friend WithEvents cboDoctorName As Libraries.CBaseControlsLibrary.CdtComboBox
         Friend WithEvents txtDoctorCode As Libraries.CBaseControlsLibrary.CTextBox
     End Class
 End Namespace

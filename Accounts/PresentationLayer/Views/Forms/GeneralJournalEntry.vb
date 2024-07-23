@@ -14,7 +14,7 @@ Namespace PresentationLayer.Views.Forms
         Private ReadOnly _closingEntry As Boolean
         Public Event AccountIdChanged(bsJournalItems As BindingSource) Implements IGeneralJournalView.AccountIdChanged
         Public Event EditingAccountIdNo(bsJournalItems As BindingSource) Implements IGeneralJournalView.EditingAccountIdNo
-        Private _selectedCombo As AtmComboBox
+        Private _selectedCombo As CdtComboBox
 
         Public Sub New(closingEntry As Boolean)
             ' This call is required by the designer.
@@ -36,9 +36,9 @@ Namespace PresentationLayer.Views.Forms
         Private Sub dataGridView1_EditingControlShowing(ByVal sender As Object, ByVal e As Windows.Forms.DataGridViewEditingControlShowingEventArgs) Handles DataGridViewJournalItems.EditingControlShowing
             If Equals(DataGridViewJournalItems.Columns(DataGridViewJournalItems.CurrentCell.ColumnIndex).Name, "dgvPayIdNo") Then
                 RaiseEvent EditingAccountIdNo(bsJournalItems)
-                _selectedCombo = TryCast(e.Control, AtmComboBox)
+                _selectedCombo = TryCast(e.Control, CdtComboBox)
                 If _selectedCombo IsNot Nothing Then
-                    Dim selectedPayeeIdNo = CType(_selectedCombo, AtmComboBox)
+                    Dim selectedPayeeIdNo = CType(_selectedCombo, CdtComboBox)
                     Dim payeeCell As CDgvComboBoxCell = CType(DataGridViewJournalItems.CurrentCell, CDgvComboBoxCell)
                     payeeCell.DataSource = CurrentPayeeDataSource
                     bsJournalItems.ResetCurrentItem()

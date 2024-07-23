@@ -726,8 +726,8 @@ Public Class CFormEntry
     Public Sub UnselectTextOnCtComboboxes(Optional allCtrl As List(Of Control) = Nothing)
         ' I don't want text to be selected on comboboxes this sub will make sure to unselect the text for AtmComboBox's
         For Each ctrl In allCtrl
-            If TypeOf ctrl Is AtmComboBox Then
-                DirectCast(ctrl, AtmComboBox).SelectionLength = 0
+            If TypeOf ctrl Is CdtComboBox Then
+                DirectCast(ctrl, CdtComboBox).SelectionLength = 0
             End If
         Next
     End Sub

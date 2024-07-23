@@ -41,9 +41,9 @@ Namespace PresentationLayer.Views.Forms
             Me.lblRevenueGroupName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblRevenueGroupNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacParentIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cacParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblRevCostCenter = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.CtCombobox1 = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.CtCombobox1 = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtLevelNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -371,7 +371,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacParentIdNo.EndFindValue = Nothing
             Me.cacParentIdNo.FieldDescription = Nothing
             Me.cacParentIdNo.FieldName = Nothing
-            Me.cacParentIdNo.FilterRule = Nothing
             Me.cacParentIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cacParentIdNo.FindEnabled = False
             Me.floDataDisplay.SetFlowBreak(Me.cacParentIdNo, True)
@@ -390,10 +389,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cacParentIdNo.OriginalList = Nothing
             Me.cacParentIdNo.OverrideDropDownStyleList = False
             Me.cacParentIdNo.PreviousSearchTerm = Nothing
-            Me.cacParentIdNo.PropertySelector = Nothing
             Me.cacParentIdNo.Size = New System.Drawing.Size(418, 24)
             Me.cacParentIdNo.SuggestBoxHeight = 200
-            Me.cacParentIdNo.SuggestListOrderRule = Nothing
             Me.cacParentIdNo.TabIndex = 3
             Me.cacParentIdNo.TextToSearch = Nothing
             Me.cacParentIdNo.Translatable = False
@@ -429,7 +426,6 @@ Namespace PresentationLayer.Views.Forms
             Me.CtCombobox1.EndFindValue = Nothing
             Me.CtCombobox1.FieldDescription = Nothing
             Me.CtCombobox1.FieldName = Nothing
-            Me.CtCombobox1.FilterRule = Nothing
             Me.CtCombobox1.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.CtCombobox1.FindEnabled = False
             Me.floDataDisplay.SetFlowBreak(Me.CtCombobox1, True)
@@ -448,10 +444,8 @@ Namespace PresentationLayer.Views.Forms
             Me.CtCombobox1.OriginalList = Nothing
             Me.CtCombobox1.OverrideDropDownStyleList = False
             Me.CtCombobox1.PreviousSearchTerm = Nothing
-            Me.CtCombobox1.PropertySelector = Nothing
             Me.CtCombobox1.Size = New System.Drawing.Size(418, 24)
             Me.CtCombobox1.SuggestBoxHeight = 200
-            Me.CtCombobox1.SuggestListOrderRule = Nothing
             Me.CtCombobox1.TabIndex = 165
             Me.CtCombobox1.TextToSearch = Nothing
             Me.CtCombobox1.Translatable = False
@@ -591,8 +585,8 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents _MBParentWithChildrenChangedDisallowed As LocalizableMessageBox
         Friend WithEvents _MSGMandatoryFields As LocalizableMessage
         Friend WithEvents txtSortKey As CTextBox
-        Friend WithEvents cacParentIdNo As AtmComboBox
-        Friend WithEvents CtCombobox1 As AtmComboBox
+        Friend WithEvents cacParentIdNo As CdtComboBox
+        Friend WithEvents CtCombobox1 As CdtComboBox
         Friend WithEvents CLabel1 As CLabel
     End Class
 End Namespace

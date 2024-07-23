@@ -42,7 +42,7 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboParentIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
@@ -306,7 +306,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboParentIdNo.EndFindValue = Nothing
             Me.cboParentIdNo.FieldDescription = Nothing
             Me.cboParentIdNo.FieldName = Nothing
-            Me.cboParentIdNo.FilterRule = Nothing
             Me.cboParentIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboParentIdNo.FindEnabled = False
             Me.cboParentIdNo.ForeColor = System.Drawing.Color.Black
@@ -320,9 +319,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboParentIdNo.OriginalList = Nothing
             Me.cboParentIdNo.OverrideDropDownStyleList = False
             Me.cboParentIdNo.PreviousSearchTerm = Nothing
-            Me.cboParentIdNo.PropertySelector = Nothing
             Me.cboParentIdNo.SuggestBoxHeight = 200
-            Me.cboParentIdNo.SuggestListOrderRule = Nothing
             Me.cboParentIdNo.TextToSearch = Nothing
             Me.cboParentIdNo.Translatable = False
             Me.cboParentIdNo.ValueIsMandatory = False
@@ -384,7 +381,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents TxtIdNo As CTextBox
         Friend WithEvents lblIdNo As CLabel
         Friend WithEvents lblCode As CLabel
-        Friend WithEvents cboParentIdNo As AtmComboBox
+        Friend WithEvents cboParentIdNo As CdtComboBox
         Friend WithEvents txtLevelNumber As CTextBox
         Friend WithEvents CLabel1 As CLabel
         Friend WithEvents txtNotes As CTextBox

@@ -26,7 +26,7 @@ Namespace Accounts.PresentationLayer.Views.Forms
             Me.components = New System.ComponentModel.Container()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DateRangeForm))
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboContactIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboContactIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.btnCancel = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.lblContactIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -82,7 +82,6 @@ Namespace Accounts.PresentationLayer.Views.Forms
             Me.cboContactIdNo.EndFindValue = Nothing
             Me.cboContactIdNo.FieldDescription = Nothing
             Me.cboContactIdNo.FieldName = Nothing
-            Me.cboContactIdNo.FilterRule = Nothing
             Me.cboContactIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboContactIdNo.FindEnabled = False
             Me.cboContactIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -101,11 +100,9 @@ Namespace Accounts.PresentationLayer.Views.Forms
             Me.cboContactIdNo.OriginalList = Nothing
             Me.cboContactIdNo.OverrideDropDownStyleList = False
             Me.cboContactIdNo.PreviousSearchTerm = Nothing
-            Me.cboContactIdNo.PropertySelector = Nothing
             Me.cboContactIdNo.Size = New System.Drawing.Size(342, 28)
             Me.cboContactIdNo.SuggestBoxHeight = 200
             Me.cboContactIdNo.SuggestCharCount = 0
-            Me.cboContactIdNo.SuggestListOrderRule = Nothing
             Me.cboContactIdNo.TabIndex = 30
             Me.cboContactIdNo.TextToSearch = Nothing
             Me.cboContactIdNo.Translatable = False
@@ -316,7 +313,7 @@ Namespace Accounts.PresentationLayer.Views.Forms
         Friend WithEvents CLabel2 As Libraries.CBaseControlsLibrary.CLabel
         Private WithEvents btnOk As CButton
         Private WithEvents btnCancel As CButton
-        Friend WithEvents cboContactIdNo As AtmComboBox
+        Friend WithEvents cboContactIdNo As CdtComboBox
         Friend WithEvents lblContactIdNo As CLabel
         Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
         Friend WithEvents CFlowLayout1 As CFlowLayout

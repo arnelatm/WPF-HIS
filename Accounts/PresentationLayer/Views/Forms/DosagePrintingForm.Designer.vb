@@ -50,7 +50,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtFileNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
             Me.btnScanQrCode = New AATM.Libraries.CBaseControlsLibrary.CButton()
-            Me.cboItemIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboItemIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.txtItemName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtGTin = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -58,16 +58,16 @@ Namespace PresentationLayer.Views.Forms
             Me.lblBarCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblGtin = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtGenericName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.cboPatientType = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
-            Me.cboDurationUnit = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
-            Me.cboDoseUnit = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboPatientType = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
+            Me.cboDurationUnit = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
+            Me.cboDoseUnit = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.txtDosageNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.btnFindPatient = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.lblItemName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtItemCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboGender = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
-            Me.cboAgeYmd = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboGender = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
+            Me.cboAgeYmd = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.btnClear = New AATM.Libraries.CBaseControlsLibrary.CButton()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
@@ -710,7 +710,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboItemIdNo.EndFindValue = Nothing
             Me.cboItemIdNo.FieldDescription = Nothing
             Me.cboItemIdNo.FieldName = Nothing
-            Me.cboItemIdNo.FilterRule = Nothing
             Me.cboItemIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboItemIdNo.FindEnabled = False
             Me.cboItemIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -729,11 +728,9 @@ Namespace PresentationLayer.Views.Forms
             Me.cboItemIdNo.OriginalList = Nothing
             Me.cboItemIdNo.OverrideDropDownStyleList = False
             Me.cboItemIdNo.PreviousSearchTerm = Nothing
-            Me.cboItemIdNo.PropertySelector = Nothing
             Me.cboItemIdNo.Size = New System.Drawing.Size(415, 24)
             Me.cboItemIdNo.SuggestBoxHeight = 200
             Me.cboItemIdNo.SuggestCharCount = 4
-            Me.cboItemIdNo.SuggestListOrderRule = Nothing
             Me.cboItemIdNo.TabIndex = 7
             Me.cboItemIdNo.TextToSearch = Nothing
             Me.cboItemIdNo.Translatable = False
@@ -938,7 +935,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPatientType.EndFindValue = Nothing
             Me.cboPatientType.FieldDescription = Nothing
             Me.cboPatientType.FieldName = Nothing
-            Me.cboPatientType.FilterRule = Nothing
             Me.cboPatientType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboPatientType.FindEnabled = False
             Me.cboPatientType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -957,11 +953,9 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPatientType.OriginalList = Nothing
             Me.cboPatientType.OverrideDropDownStyleList = False
             Me.cboPatientType.PreviousSearchTerm = Nothing
-            Me.cboPatientType.PropertySelector = Nothing
             Me.cboPatientType.Size = New System.Drawing.Size(100, 24)
             Me.cboPatientType.SuggestBoxHeight = 200
             Me.cboPatientType.SuggestCharCount = 0
-            Me.cboPatientType.SuggestListOrderRule = Nothing
             Me.cboPatientType.TabIndex = 17
             Me.cboPatientType.TextToSearch = Nothing
             Me.cboPatientType.Translatable = False
@@ -986,7 +980,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDurationUnit.EndFindValue = Nothing
             Me.cboDurationUnit.FieldDescription = Nothing
             Me.cboDurationUnit.FieldName = Nothing
-            Me.cboDurationUnit.FilterRule = Nothing
             Me.cboDurationUnit.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboDurationUnit.FindEnabled = False
             Me.cboDurationUnit.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -1005,11 +998,9 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDurationUnit.OriginalList = Nothing
             Me.cboDurationUnit.OverrideDropDownStyleList = False
             Me.cboDurationUnit.PreviousSearchTerm = Nothing
-            Me.cboDurationUnit.PropertySelector = Nothing
             Me.cboDurationUnit.Size = New System.Drawing.Size(143, 24)
             Me.cboDurationUnit.SuggestBoxHeight = 200
             Me.cboDurationUnit.SuggestCharCount = 0
-            Me.cboDurationUnit.SuggestListOrderRule = Nothing
             Me.cboDurationUnit.TabIndex = 15
             Me.cboDurationUnit.TextToSearch = Nothing
             Me.cboDurationUnit.Translatable = False
@@ -1032,7 +1023,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDoseUnit.EndFindValue = Nothing
             Me.cboDoseUnit.FieldDescription = Nothing
             Me.cboDoseUnit.FieldName = Nothing
-            Me.cboDoseUnit.FilterRule = Nothing
             Me.cboDoseUnit.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboDoseUnit.FindEnabled = False
             Me.cboDoseUnit.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -1051,11 +1041,9 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDoseUnit.OriginalList = Nothing
             Me.cboDoseUnit.OverrideDropDownStyleList = False
             Me.cboDoseUnit.PreviousSearchTerm = Nothing
-            Me.cboDoseUnit.PropertySelector = Nothing
             Me.cboDoseUnit.Size = New System.Drawing.Size(98, 24)
             Me.cboDoseUnit.SuggestBoxHeight = 200
             Me.cboDoseUnit.SuggestCharCount = 0
-            Me.cboDoseUnit.SuggestListOrderRule = Nothing
             Me.cboDoseUnit.TabIndex = 11
             Me.cboDoseUnit.TextToSearch = Nothing
             Me.cboDoseUnit.Translatable = False
@@ -1195,7 +1183,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboGender.EndFindValue = Nothing
             Me.cboGender.FieldDescription = Nothing
             Me.cboGender.FieldName = Nothing
-            Me.cboGender.FilterRule = Nothing
             Me.cboGender.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboGender.FindEnabled = True
             Me.cboGender.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -1215,10 +1202,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cboGender.OriginalList = Nothing
             Me.cboGender.OverrideDropDownStyleList = False
             Me.cboGender.PreviousSearchTerm = Nothing
-            Me.cboGender.PropertySelector = Nothing
             Me.cboGender.Size = New System.Drawing.Size(113, 24)
             Me.cboGender.SuggestBoxHeight = 200
-            Me.cboGender.SuggestListOrderRule = Nothing
             Me.cboGender.TabIndex = 20
             Me.cboGender.TextToSearch = Nothing
             Me.cboGender.Translatable = False
@@ -1241,7 +1226,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAgeYmd.EndFindValue = Nothing
             Me.cboAgeYmd.FieldDescription = Nothing
             Me.cboAgeYmd.FieldName = Nothing
-            Me.cboAgeYmd.FilterRule = Nothing
             Me.cboAgeYmd.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboAgeYmd.FindEnabled = False
             Me.cboAgeYmd.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -1261,10 +1245,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAgeYmd.OriginalList = Nothing
             Me.cboAgeYmd.OverrideDropDownStyleList = False
             Me.cboAgeYmd.PreviousSearchTerm = Nothing
-            Me.cboAgeYmd.PropertySelector = Nothing
             Me.cboAgeYmd.Size = New System.Drawing.Size(74, 24)
             Me.cboAgeYmd.SuggestBoxHeight = 200
-            Me.cboAgeYmd.SuggestListOrderRule = Nothing
             Me.cboAgeYmd.TabIndex = 19
             Me.cboAgeYmd.TextToSearch = Nothing
             Me.cboAgeYmd.Translatable = False
@@ -1342,12 +1324,12 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblDoseUnit As CLabel
         Friend WithEvents lblGender As CLabel
         Friend WithEvents txtDosageNameAra As CTextBox
-        Friend WithEvents cboDoseUnit As AtmComboBox
-        Friend WithEvents cboDurationUnit As AtmComboBox
-        Friend WithEvents cboGender As AtmComboBox
-        Friend WithEvents cboAgeYmd As AtmComboBox
+        Friend WithEvents cboDoseUnit As CdtComboBox
+        Friend WithEvents cboDurationUnit As CdtComboBox
+        Friend WithEvents cboGender As CdtComboBox
+        Friend WithEvents cboAgeYmd As CdtComboBox
         Friend WithEvents btnFindPatient As CButton
-        Friend WithEvents cboPatientType As AtmComboBox
+        Friend WithEvents cboPatientType As CdtComboBox
         Friend WithEvents lblItemName As CLabel
         Friend WithEvents CLabel2 As CLabel
         Friend WithEvents txtItemCode As CTextBox
@@ -1358,7 +1340,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents txtGTin As CTextBox
         Friend WithEvents CLabel3 As CLabel
         Friend WithEvents txtItemName As CTextBox
-        Friend WithEvents cboItemIdNo As AtmComboBox
+        Friend WithEvents cboItemIdNo As CdtComboBox
         Friend WithEvents btnScanQrCode As CButton
         Friend WithEvents btnClear As CButton
     End Class

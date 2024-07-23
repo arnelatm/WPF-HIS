@@ -35,7 +35,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel4 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboNewUnitIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboNewUnitIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.txtOldUnitIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
             Me.bsNotes = New System.Windows.Forms.BindingSource(Me.components)
@@ -172,7 +172,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboNewUnitIdNo.EndFindValue = Nothing
             Me.cboNewUnitIdNo.FieldDescription = Nothing
             Me.cboNewUnitIdNo.FieldName = Nothing
-            Me.cboNewUnitIdNo.FilterRule = Nothing
             Me.cboNewUnitIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboNewUnitIdNo.FindEnabled = False
             Me.cboNewUnitIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -191,11 +190,9 @@ Namespace PresentationLayer.Views.Forms
             Me.cboNewUnitIdNo.OriginalList = Nothing
             Me.cboNewUnitIdNo.OverrideDropDownStyleList = False
             Me.cboNewUnitIdNo.PreviousSearchTerm = Nothing
-            Me.cboNewUnitIdNo.PropertySelector = Nothing
             Me.cboNewUnitIdNo.Size = New System.Drawing.Size(170, 24)
             Me.cboNewUnitIdNo.SuggestBoxHeight = 200
             Me.cboNewUnitIdNo.SuggestCharCount = 0
-            Me.cboNewUnitIdNo.SuggestListOrderRule = Nothing
             Me.cboNewUnitIdNo.TabIndex = 2
             Me.cboNewUnitIdNo.TextToSearch = Nothing
             Me.cboNewUnitIdNo.Translatable = False
@@ -288,7 +285,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents CLabel1 As CLabel
         Friend WithEvents CLabel3 As CLabel
         Friend WithEvents CLabel4 As CLabel
-        Friend WithEvents cboNewUnitIdNo As AtmComboBox
+        Friend WithEvents cboNewUnitIdNo As CdtComboBox
         Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
         Friend WithEvents txtOldUnitIdNo As CTextBox
     End Class

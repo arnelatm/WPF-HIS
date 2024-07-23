@@ -29,9 +29,9 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.lblBegDateCaption = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.dtpBeginningDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboStartAccountCode = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboStartAccountCode = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboEndAccountCode = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboEndAccountCode = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblTitle = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
@@ -174,7 +174,6 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.cboStartAccountCode.EndFindValue = Nothing
             Me.cboStartAccountCode.FieldDescription = Nothing
             Me.cboStartAccountCode.FieldName = Nothing
-            Me.cboStartAccountCode.FilterRule = Nothing
             Me.cboStartAccountCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboStartAccountCode.FindEnabled = False
             Me.cboStartAccountCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -193,10 +192,8 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.cboStartAccountCode.OriginalList = Nothing
             Me.cboStartAccountCode.OverrideDropDownStyleList = False
             Me.cboStartAccountCode.PreviousSearchTerm = Nothing
-            Me.cboStartAccountCode.PropertySelector = Nothing
             Me.cboStartAccountCode.Size = New System.Drawing.Size(520, 24)
             Me.cboStartAccountCode.SuggestBoxHeight = 200
-            Me.cboStartAccountCode.SuggestListOrderRule = Nothing
             Me.cboStartAccountCode.TabIndex = 2
             Me.cboStartAccountCode.TextToSearch = Nothing
             Me.cboStartAccountCode.Translatable = False
@@ -235,7 +232,6 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.cboEndAccountCode.EndFindValue = Nothing
             Me.cboEndAccountCode.FieldDescription = Nothing
             Me.cboEndAccountCode.FieldName = Nothing
-            Me.cboEndAccountCode.FilterRule = Nothing
             Me.cboEndAccountCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboEndAccountCode.FindEnabled = False
             Me.cboEndAccountCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -254,10 +250,8 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.cboEndAccountCode.OriginalList = Nothing
             Me.cboEndAccountCode.OverrideDropDownStyleList = False
             Me.cboEndAccountCode.PreviousSearchTerm = Nothing
-            Me.cboEndAccountCode.PropertySelector = Nothing
             Me.cboEndAccountCode.Size = New System.Drawing.Size(520, 24)
             Me.cboEndAccountCode.SuggestBoxHeight = 200
-            Me.cboEndAccountCode.SuggestListOrderRule = Nothing
             Me.cboEndAccountCode.TabIndex = 3
             Me.cboEndAccountCode.TextToSearch = Nothing
             Me.cboEndAccountCode.Translatable = False

@@ -49,12 +49,12 @@ Namespace PresentationLayer.Views.Forms
             Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DisbursementJournalEntry))
             Me.tlpDisbursement = New System.Windows.Forms.TableLayoutPanel()
-            Me.cboPayeeIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboPayeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblPaymentType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.chkPcClosed = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
             Me.chkPosted = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
-            Me.cboPayType = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboPayType = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
@@ -76,11 +76,11 @@ Namespace PresentationLayer.Views.Forms
             Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
             Me.lblDiscountAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtJournalCodeDisplay = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboDiscountAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboDiscountAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblInvoiceNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtORNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.txtAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -109,7 +109,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtVatNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.txtCheckNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblVatAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboPaymentType = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboPaymentType = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblVatNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -2257,15 +2257,15 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblDateCreated As CLabel
         Friend WithEvents lblDiscountAccountIdNo As CLabel
         Friend WithEvents lblNotes As CLabel
-        Friend WithEvents cboPaymentType As AtmComboBox
+        Friend WithEvents cboPaymentType As CdtComboBox
         Friend WithEvents lblPaymentType As CLabel
-        Friend WithEvents cboAccountIdNo As AtmComboBox
+        Friend WithEvents cboAccountIdNo As CdtComboBox
         Friend WithEvents lblAccountIdNo As CLabel
         Friend WithEvents TxtIdNo As CTextBox
         Friend WithEvents lblIdNo As CLabel
         Friend WithEvents txtJournalCodeDisplay As CTextBox
         Friend WithEvents lblReferenceNo As CLabel
-        Friend WithEvents cboDiscountAccountIdNo As AtmComboBox
+        Friend WithEvents cboDiscountAccountIdNo As CdtComboBox
         Friend WithEvents lblInvoiceNo As CLabel
         Friend WithEvents txtORNumber As CTextBox
         Friend WithEvents txtReferenceNo As CTextBox
@@ -2294,7 +2294,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblCheckNumber As CLabel
         Friend WithEvents btnPrintCheck As CButton
         Friend WithEvents dtpTransactionDate As CCustomDateTimePicker
-        Friend WithEvents cboPayType As AtmComboBox
+        Friend WithEvents cboPayType As CdtComboBox
         Friend WithEvents lblPayType As CLabel
         Friend WithEvents CFlowLayout1 As CFlowLayout
         Friend WithEvents lblCdJournalIdNo As CLabel
@@ -2318,7 +2318,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents dgvBalance As CdgvMoneyColumn
         Friend WithEvents DataGridViewTextBoxColumn6 As DataGridViewTextBoxColumn
         Friend WithEvents txtDateCreated As CTextBox
-        Friend WithEvents cboPayeeIdNo As AtmComboBox
+        Friend WithEvents cboPayeeIdNo As CdtComboBox
         Friend WithEvents dgvSequence As CDgvTextColumn
         Friend WithEvents dgvAccountIdNo As CDgvComboBoxColumn
         Friend WithEvents dgvDebit As CdgvMoneyColumn

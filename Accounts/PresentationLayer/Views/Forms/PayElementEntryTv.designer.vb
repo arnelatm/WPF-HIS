@@ -41,9 +41,9 @@ Namespace PresentationLayer.Views.Forms
             Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Me.floPayElement = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.tlpPayElement = New System.Windows.Forms.TableLayoutPanel()
-            Me.cboReportGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboReportGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblReportGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboPayElementKind = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboPayElementKind = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblPayElementType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblPayElementKind = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtPayElementNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
@@ -63,8 +63,8 @@ Namespace PresentationLayer.Views.Forms
             Me.floCalculation = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.tlpCalculation = New System.Windows.Forms.TableLayoutPanel()
             Me.lblQuantityType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboQuantityType = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
-            Me.cboCalculationType = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboQuantityType = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
+            Me.cboCalculationType = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblFactorValue = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblCalculationType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtRate = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -72,25 +72,25 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDefaultQuantity = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblDefaultQuantity = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblBasePayment = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboBasePaymentIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboBasePaymentIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblIncludeInEos = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkIncludeInEOS = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.txtMultiplier = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.cboFactorType = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboFactorType = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblFactorType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkTaxable = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.lblTaxable = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblSlash = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboUnit = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboUnit = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblUnit = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboPayElementType = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboPayElementType = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblSlash2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.tbpAccountPosting = New System.Windows.Forms.TabPage()
             Me.floPostingAccounts = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.tlpPostingAccounts = New System.Windows.Forms.TableLayoutPanel()
             Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkUsePayGroups = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
-            Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblUsePayGroups = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.DataGridViewPayElementAccounts = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -207,7 +207,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboReportGroupIdNo.EndFindValue = Nothing
             Me.cboReportGroupIdNo.FieldDescription = Nothing
             Me.cboReportGroupIdNo.FieldName = Nothing
-            Me.cboReportGroupIdNo.FilterRule = Nothing
             Me.cboReportGroupIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboReportGroupIdNo.FindEnabled = False
             Me.cboReportGroupIdNo.ForeColor = System.Drawing.Color.Black
@@ -221,9 +220,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboReportGroupIdNo.OriginalList = Nothing
             Me.cboReportGroupIdNo.OverrideDropDownStyleList = False
             Me.cboReportGroupIdNo.PreviousSearchTerm = Nothing
-            Me.cboReportGroupIdNo.PropertySelector = Nothing
             Me.cboReportGroupIdNo.SuggestBoxHeight = 200
-            Me.cboReportGroupIdNo.SuggestListOrderRule = Nothing
             Me.cboReportGroupIdNo.TextToSearch = Nothing
             Me.cboReportGroupIdNo.Translatable = False
             Me.cboReportGroupIdNo.ValueIsMandatory = False
@@ -253,7 +250,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayElementKind.EndFindValue = Nothing
             Me.cboPayElementKind.FieldDescription = Nothing
             Me.cboPayElementKind.FieldName = Nothing
-            Me.cboPayElementKind.FilterRule = Nothing
             Me.cboPayElementKind.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboPayElementKind.FindEnabled = False
             Me.cboPayElementKind.ForeColor = System.Drawing.Color.Black
@@ -267,9 +263,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayElementKind.OriginalList = Nothing
             Me.cboPayElementKind.OverrideDropDownStyleList = False
             Me.cboPayElementKind.PreviousSearchTerm = Nothing
-            Me.cboPayElementKind.PropertySelector = Nothing
             Me.cboPayElementKind.SuggestBoxHeight = 200
-            Me.cboPayElementKind.SuggestListOrderRule = Nothing
             Me.cboPayElementKind.TextToSearch = Nothing
             Me.cboPayElementKind.Translatable = False
             Me.cboPayElementKind.ValueIsMandatory = False
@@ -580,7 +574,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboQuantityType.EndFindValue = Nothing
             Me.cboQuantityType.FieldDescription = Nothing
             Me.cboQuantityType.FieldName = Nothing
-            Me.cboQuantityType.FilterRule = Nothing
             Me.cboQuantityType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboQuantityType.FindEnabled = False
             Me.cboQuantityType.ForeColor = System.Drawing.Color.Black
@@ -594,9 +587,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboQuantityType.OriginalList = Nothing
             Me.cboQuantityType.OverrideDropDownStyleList = False
             Me.cboQuantityType.PreviousSearchTerm = Nothing
-            Me.cboQuantityType.PropertySelector = Nothing
             Me.cboQuantityType.SuggestBoxHeight = 200
-            Me.cboQuantityType.SuggestListOrderRule = Nothing
             Me.cboQuantityType.TextToSearch = Nothing
             Me.cboQuantityType.Translatable = False
             Me.cboQuantityType.ValueIsMandatory = False
@@ -619,7 +610,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboCalculationType.EndFindValue = Nothing
             Me.cboCalculationType.FieldDescription = Nothing
             Me.cboCalculationType.FieldName = Nothing
-            Me.cboCalculationType.FilterRule = Nothing
             Me.cboCalculationType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboCalculationType.FindEnabled = False
             Me.cboCalculationType.ForeColor = System.Drawing.Color.Black
@@ -633,9 +623,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboCalculationType.OriginalList = Nothing
             Me.cboCalculationType.OverrideDropDownStyleList = False
             Me.cboCalculationType.PreviousSearchTerm = Nothing
-            Me.cboCalculationType.PropertySelector = Nothing
             Me.cboCalculationType.SuggestBoxHeight = 200
-            Me.cboCalculationType.SuggestListOrderRule = Nothing
             Me.cboCalculationType.TextToSearch = Nothing
             Me.cboCalculationType.Translatable = False
             Me.cboCalculationType.ValueIsMandatory = False
@@ -746,7 +734,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboBasePaymentIdNo.EndFindValue = Nothing
             Me.cboBasePaymentIdNo.FieldDescription = Nothing
             Me.cboBasePaymentIdNo.FieldName = Nothing
-            Me.cboBasePaymentIdNo.FilterRule = Nothing
             Me.cboBasePaymentIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboBasePaymentIdNo.FindEnabled = False
             Me.cboBasePaymentIdNo.ForeColor = System.Drawing.Color.Black
@@ -760,9 +747,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboBasePaymentIdNo.OriginalList = Nothing
             Me.cboBasePaymentIdNo.OverrideDropDownStyleList = False
             Me.cboBasePaymentIdNo.PreviousSearchTerm = Nothing
-            Me.cboBasePaymentIdNo.PropertySelector = Nothing
             Me.cboBasePaymentIdNo.SuggestBoxHeight = 200
-            Me.cboBasePaymentIdNo.SuggestListOrderRule = Nothing
             Me.cboBasePaymentIdNo.TextToSearch = Nothing
             Me.cboBasePaymentIdNo.Translatable = False
             Me.cboBasePaymentIdNo.ValueIsMandatory = False
@@ -842,7 +827,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboFactorType.EndFindValue = Nothing
             Me.cboFactorType.FieldDescription = Nothing
             Me.cboFactorType.FieldName = Nothing
-            Me.cboFactorType.FilterRule = Nothing
             Me.cboFactorType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboFactorType.FindEnabled = False
             Me.cboFactorType.ForeColor = System.Drawing.Color.Black
@@ -856,9 +840,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboFactorType.OriginalList = Nothing
             Me.cboFactorType.OverrideDropDownStyleList = False
             Me.cboFactorType.PreviousSearchTerm = Nothing
-            Me.cboFactorType.PropertySelector = Nothing
             Me.cboFactorType.SuggestBoxHeight = 200
-            Me.cboFactorType.SuggestListOrderRule = Nothing
             Me.cboFactorType.TextToSearch = Nothing
             Me.cboFactorType.Translatable = False
             Me.cboFactorType.ValueIsMandatory = False
@@ -929,7 +911,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboUnit.EndFindValue = Nothing
             Me.cboUnit.FieldDescription = Nothing
             Me.cboUnit.FieldName = Nothing
-            Me.cboUnit.FilterRule = Nothing
             Me.cboUnit.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboUnit.FindEnabled = False
             Me.cboUnit.ForeColor = System.Drawing.Color.Black
@@ -943,9 +924,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboUnit.OriginalList = Nothing
             Me.cboUnit.OverrideDropDownStyleList = False
             Me.cboUnit.PreviousSearchTerm = Nothing
-            Me.cboUnit.PropertySelector = Nothing
             Me.cboUnit.SuggestBoxHeight = 200
-            Me.cboUnit.SuggestListOrderRule = Nothing
             Me.cboUnit.TextToSearch = Nothing
             Me.cboUnit.Translatable = False
             Me.cboUnit.ValueIsMandatory = False
@@ -976,7 +955,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayElementType.EndFindValue = Nothing
             Me.cboPayElementType.FieldDescription = Nothing
             Me.cboPayElementType.FieldName = Nothing
-            Me.cboPayElementType.FilterRule = Nothing
             Me.cboPayElementType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboPayElementType.FindEnabled = False
             Me.cboPayElementType.ForeColor = System.Drawing.Color.Black
@@ -990,9 +968,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayElementType.OriginalList = Nothing
             Me.cboPayElementType.OverrideDropDownStyleList = False
             Me.cboPayElementType.PreviousSearchTerm = Nothing
-            Me.cboPayElementType.PropertySelector = Nothing
             Me.cboPayElementType.SuggestBoxHeight = 200
-            Me.cboPayElementType.SuggestListOrderRule = Nothing
             Me.cboPayElementType.TextToSearch = Nothing
             Me.cboPayElementType.Translatable = False
             Me.cboPayElementType.ValueIsMandatory = False
@@ -1080,7 +1056,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.EndFindValue = Nothing
             Me.cboAccountIdNo.FieldDescription = Nothing
             Me.cboAccountIdNo.FieldName = Nothing
-            Me.cboAccountIdNo.FilterRule = Nothing
             Me.cboAccountIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboAccountIdNo.FindEnabled = False
             Me.cboAccountIdNo.ForeColor = System.Drawing.Color.Black
@@ -1094,9 +1069,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.OriginalList = Nothing
             Me.cboAccountIdNo.OverrideDropDownStyleList = False
             Me.cboAccountIdNo.PreviousSearchTerm = Nothing
-            Me.cboAccountIdNo.PropertySelector = Nothing
             Me.cboAccountIdNo.SuggestBoxHeight = 200
-            Me.cboAccountIdNo.SuggestListOrderRule = Nothing
             Me.cboAccountIdNo.TextToSearch = Nothing
             Me.cboAccountIdNo.Translatable = False
             Me.cboAccountIdNo.ValueIsMandatory = False
@@ -1524,12 +1497,12 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents txtRate As CTextBox
         Friend WithEvents txtDefaultQuantity As CTextBox
         Friend WithEvents lblBasePayment As CLabel
-        Friend WithEvents cboBasePaymentIdNo As AtmComboBox
+        Friend WithEvents cboBasePaymentIdNo As CdtComboBox
         Friend WithEvents lblIncludeInEos As CLabel
         Friend WithEvents chkIncludeInEOS As CCheckBox
         Friend WithEvents txtMultiplier As CTextBox
-        Friend WithEvents cboFactorType As AtmComboBox
-        Friend WithEvents cboUnit As AtmComboBox
+        Friend WithEvents cboFactorType As CdtComboBox
+        Friend WithEvents cboUnit As CdtComboBox
         Friend WithEvents lblSlash As CLabel
         Friend WithEvents tbpAccountPosting As TabPage
         Friend WithEvents floPostingAccounts As CFlowLayout
@@ -1540,23 +1513,23 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblUsePayGroups As CLabel
         Friend WithEvents lblPayElementType As CLabel
         Friend WithEvents lblAccountIdNo As CLabel
-        Friend WithEvents cboAccountIdNo As AtmComboBox
+        Friend WithEvents cboAccountIdNo As CdtComboBox
         Friend WithEvents lblUnit As CLabel
         Friend WithEvents tbpSummaryDetail As TabPage
         Friend WithEvents tabPageImages As ImageList
         Friend WithEvents lblFactorType As CLabel
-        Friend WithEvents cboPayElementType As AtmComboBox
-        Friend WithEvents cboCalculationType As AtmComboBox
-        Friend WithEvents cboQuantityType As AtmComboBox
+        Friend WithEvents cboPayElementType As CdtComboBox
+        Friend WithEvents cboCalculationType As CdtComboBox
+        Friend WithEvents cboQuantityType As CdtComboBox
         Friend WithEvents lblSlash2 As CLabel
         Friend WithEvents lblQuantityType As CLabel
         Friend WithEvents DataGridViewPayElementItems As CtDataGridView
         Friend WithEvents bsPayElementItems As BindingSource
         Friend WithEvents DataGridViewPayElementAccounts As CtDataGridView
         Friend WithEvents bsPayElementAccounts As BindingSource
-        Friend WithEvents cboPayElementKind As AtmComboBox
+        Friend WithEvents cboPayElementKind As CdtComboBox
         Friend WithEvents lblPayElementKind As CLabel
-        Friend WithEvents cboReportGroupIdNo As AtmComboBox
+        Friend WithEvents cboReportGroupIdNo As CdtComboBox
         Friend WithEvents lblReportGroupIdNo As CLabel
         Friend WithEvents chkSummary As CCheckBox
         Friend WithEvents chkActive As CCheckBox

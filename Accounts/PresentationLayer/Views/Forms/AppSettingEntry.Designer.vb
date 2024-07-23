@@ -25,12 +25,12 @@
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
             Me.btnLockGroup = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.lblAppSettingGroupSelector = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboAppSettingGroupSelector = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboAppSettingGroupSelector = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboSelector2IdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboSelector2IdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblSelector2IdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboSelector1IdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboSelector1IdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblSelector1IdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtAppSettingGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -116,7 +116,6 @@
             Me.cboAppSettingGroupSelector.EndFindValue = Nothing
             Me.cboAppSettingGroupSelector.FieldDescription = Nothing
             Me.cboAppSettingGroupSelector.FieldName = Nothing
-            Me.cboAppSettingGroupSelector.FilterRule = Nothing
             Me.cboAppSettingGroupSelector.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboAppSettingGroupSelector.FindEnabled = False
             Me.cboAppSettingGroupSelector.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -135,11 +134,9 @@
             Me.cboAppSettingGroupSelector.OriginalList = Nothing
             Me.cboAppSettingGroupSelector.OverrideDropDownStyleList = False
             Me.cboAppSettingGroupSelector.PreviousSearchTerm = Nothing
-            Me.cboAppSettingGroupSelector.PropertySelector = Nothing
             Me.cboAppSettingGroupSelector.Size = New System.Drawing.Size(378, 24)
             Me.cboAppSettingGroupSelector.SuggestBoxHeight = 200
             Me.cboAppSettingGroupSelector.SuggestCharCount = 0
-            Me.cboAppSettingGroupSelector.SuggestListOrderRule = Nothing
             Me.cboAppSettingGroupSelector.TabIndex = 10
             Me.cboAppSettingGroupSelector.TextToSearch = Nothing
             Me.cboAppSettingGroupSelector.Translatable = False
@@ -213,7 +210,6 @@
             Me.cboSelector2IdNo.EndFindValue = Nothing
             Me.cboSelector2IdNo.FieldDescription = Nothing
             Me.cboSelector2IdNo.FieldName = Nothing
-            Me.cboSelector2IdNo.FilterRule = Nothing
             Me.cboSelector2IdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboSelector2IdNo.FindEnabled = False
             Me.cboSelector2IdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -232,11 +228,9 @@
             Me.cboSelector2IdNo.OriginalList = Nothing
             Me.cboSelector2IdNo.OverrideDropDownStyleList = False
             Me.cboSelector2IdNo.PreviousSearchTerm = Nothing
-            Me.cboSelector2IdNo.PropertySelector = Nothing
             Me.cboSelector2IdNo.Size = New System.Drawing.Size(426, 24)
             Me.cboSelector2IdNo.SuggestBoxHeight = 200
             Me.cboSelector2IdNo.SuggestCharCount = 0
-            Me.cboSelector2IdNo.SuggestListOrderRule = Nothing
             Me.cboSelector2IdNo.TabIndex = 7
             Me.cboSelector2IdNo.TextToSearch = Nothing
             Me.cboSelector2IdNo.Translatable = False
@@ -279,7 +273,6 @@
             Me.cboSelector1IdNo.EndFindValue = Nothing
             Me.cboSelector1IdNo.FieldDescription = Nothing
             Me.cboSelector1IdNo.FieldName = Nothing
-            Me.cboSelector1IdNo.FilterRule = Nothing
             Me.cboSelector1IdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboSelector1IdNo.FindEnabled = False
             Me.cboSelector1IdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -298,11 +291,9 @@
             Me.cboSelector1IdNo.OriginalList = Nothing
             Me.cboSelector1IdNo.OverrideDropDownStyleList = False
             Me.cboSelector1IdNo.PreviousSearchTerm = Nothing
-            Me.cboSelector1IdNo.PropertySelector = Nothing
             Me.cboSelector1IdNo.Size = New System.Drawing.Size(426, 24)
             Me.cboSelector1IdNo.SuggestBoxHeight = 200
             Me.cboSelector1IdNo.SuggestCharCount = 0
-            Me.cboSelector1IdNo.SuggestListOrderRule = Nothing
             Me.cboSelector1IdNo.TabIndex = 9
             Me.cboSelector1IdNo.TextToSearch = Nothing
             Me.cboSelector1IdNo.Translatable = False
@@ -381,11 +372,11 @@
         Friend WithEvents TxtIdNo As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblIdNo As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblSelector1IdNo As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboSelector2IdNo As Libraries.CBaseControlsLibrary.AtmComboBox
+        Friend WithEvents cboSelector2IdNo As Libraries.CBaseControlsLibrary.CdtComboBox
         Friend WithEvents lblSelector2IdNo As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboSelector1IdNo As Libraries.CBaseControlsLibrary.AtmComboBox
+        Friend WithEvents cboSelector1IdNo As Libraries.CBaseControlsLibrary.CdtComboBox
         Friend WithEvents lblAppSettingGroupSelector As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboAppSettingGroupSelector As Libraries.CBaseControlsLibrary.AtmComboBox
+        Friend WithEvents cboAppSettingGroupSelector As Libraries.CBaseControlsLibrary.CdtComboBox
         Friend WithEvents btnLockGroup As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents txtAppSettingGroupIdNo As Libraries.CBaseControlsLibrary.CTextBox
     End Class

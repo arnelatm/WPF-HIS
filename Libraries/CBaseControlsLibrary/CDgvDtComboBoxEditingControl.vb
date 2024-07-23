@@ -11,14 +11,14 @@ Public Class CDgvDtComboBoxEditingControl
     Private ReadOnly _suggestBindingList As BindingList(Of String) = New BindingList(Of String)()
     Private _propertySelector As Expression(Of Func(Of ObjectCollection, IEnumerable(Of String)))
     Protected PropertySelectorCompiled As Func(Of ObjectCollection, IEnumerable(Of String))
-    Private _filterRule As Expression(Of Func(Of String, String, Boolean))
-    Private _filterRuleCompiled As Func(Of String, Boolean)
-    Private _suggestListOrderRule As Expression(Of Func(Of String, String))
-    Private _suggestListOrderRuleCompiled As Func(Of String, String)
+    'Private _filterRule As Expression(Of Func(Of String, String, Boolean))
+    'Private _filterRuleCompiled As Func(Of String, Boolean)
+    'Private _suggestListOrderRule As Expression(Of Func(Of String, String))
+    'Private _suggestListOrderRuleCompiled As Func(Of String, String)
 
     Public Sub New()
-        _filterRuleCompiled = Function(s) s.ToLower().Contains(Text.Trim().ToLower())
-        _suggestListOrderRuleCompiled = Function(s) s
+        '_filterRuleCompiled = Function(s) s.ToLower().Contains(Text.Trim().ToLower())
+        '_suggestListOrderRuleCompiled = Function(s) s
         PropertySelectorCompiled = Function(collection) collection.Cast(Of String)()
 
         SuggestListForm.SuggestListBox.DataSource = _suggestBindingList
@@ -47,27 +47,27 @@ Public Class CDgvDtComboBoxEditingControl
         End Set
     End Property
 
-    Public Property FilterRule As Expression(Of Func(Of String, String, Boolean))
-        Get
-            Return _filterRule
-        End Get
-        Set(ByVal value As Expression(Of Func(Of String, String, Boolean)))
-            If value Is Nothing Then Return
-            _filterRule = value
-            _filterRuleCompiled = Function(item) value.Compile()(item, Text)
-        End Set
-    End Property
+    'Public Property FilterRule As Expression(Of Func(Of String, String, Boolean))
+    '    Get
+    '        Return _filterRule
+    '    End Get
+    '    Set(ByVal value As Expression(Of Func(Of String, String, Boolean)))
+    '        If value Is Nothing Then Return
+    '        _filterRule = value
+    '        _filterRuleCompiled = Function(item) value.Compile()(item, Text)
+    '    End Set
+    'End Property
 
-    Public Property SuggestListOrderRule As Expression(Of Func(Of String, String))
-        Get
-            Return _suggestListOrderRule
-        End Get
-        Set(ByVal value As Expression(Of Func(Of String, String)))
-            If value Is Nothing Then Return
-            _suggestListOrderRule = value
-            _suggestListOrderRuleCompiled = value.Compile()
-        End Set
-    End Property
+    'Public Property SuggestListOrderRule As Expression(Of Func(Of String, String))
+    '    Get
+    '        Return _suggestListOrderRule
+    '    End Get
+    '    Set(ByVal value As Expression(Of Func(Of String, String)))
+    '        If value Is Nothing Then Return
+    '        _suggestListOrderRule = value
+    '        _suggestListOrderRuleCompiled = value.Compile()
+    '    End Set
+    'End Property
 
     Public Property SuggestCharCount As Integer
 

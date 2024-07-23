@@ -31,14 +31,14 @@ Namespace PresentationLayer.Views.Forms
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblLeaveIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboLeaveIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+        Me.cboLeaveIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
         Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.lblStartDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.dtpDateStart = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.lblEndDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.dtpDateEnd = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.lblEnteredBy = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboEnteredBy = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+        Me.cboEnteredBy = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
         Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
@@ -112,9 +112,8 @@ Namespace PresentationLayer.Views.Forms
         Me.cboLeaveIdNo.EndFindValue = Nothing
         Me.cboLeaveIdNo.FieldDescription = Nothing
         Me.cboLeaveIdNo.FieldName = Nothing
-        Me.cboLeaveIdNo.FilterRule = Nothing
-        Me.cboLeaveIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cboLeaveIdNo.FindEnabled = false
+            Me.cboLeaveIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboLeaveIdNo.FindEnabled = false
         Me.CFlowLayout2.SetFlowBreak(Me.cboLeaveIdNo, true)
         resources.ApplyResources(Me.cboLeaveIdNo, "cboLeaveIdNo")
         Me.cboLeaveIdNo.ForeColor = System.Drawing.Color.Black
@@ -128,11 +127,9 @@ Namespace PresentationLayer.Views.Forms
         Me.cboLeaveIdNo.OriginalList = Nothing
         Me.cboLeaveIdNo.OverrideDropDownStyleList = false
         Me.cboLeaveIdNo.PreviousSearchTerm = Nothing
-        Me.cboLeaveIdNo.PropertySelector = Nothing
             Me.cboLeaveIdNo.SuggestBoxHeight = 200
-            Me.cboLeaveIdNo.SuggestListOrderRule = Nothing
-        Me.cboLeaveIdNo.TextToSearch = Nothing
-        Me.cboLeaveIdNo.Translatable = false
+            Me.cboLeaveIdNo.TextToSearch = Nothing
+            Me.cboLeaveIdNo.Translatable = false
         Me.cboLeaveIdNo.ValueIsMandatory = false
         Me.cboLeaveIdNo.ValueIsNullable = false
         Me.cboLeaveIdNo.ValueIsNumeric = false
@@ -244,9 +241,8 @@ Namespace PresentationLayer.Views.Forms
         Me.cboEnteredBy.EndFindValue = Nothing
         Me.cboEnteredBy.FieldDescription = Nothing
         Me.cboEnteredBy.FieldName = Nothing
-        Me.cboEnteredBy.FilterRule = Nothing
-        Me.cboEnteredBy.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cboEnteredBy.FindEnabled = false
+            Me.cboEnteredBy.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboEnteredBy.FindEnabled = false
         Me.CFlowLayout2.SetFlowBreak(Me.cboEnteredBy, true)
         resources.ApplyResources(Me.cboEnteredBy, "cboEnteredBy")
         Me.cboEnteredBy.ForeColor = System.Drawing.Color.Black
@@ -260,11 +256,9 @@ Namespace PresentationLayer.Views.Forms
         Me.cboEnteredBy.OriginalList = Nothing
         Me.cboEnteredBy.OverrideDropDownStyleList = false
         Me.cboEnteredBy.PreviousSearchTerm = Nothing
-        Me.cboEnteredBy.PropertySelector = Nothing
             Me.cboEnteredBy.SuggestBoxHeight = 200
-            Me.cboEnteredBy.SuggestListOrderRule = Nothing
-        Me.cboEnteredBy.TextToSearch = Nothing
-        Me.cboEnteredBy.Translatable = false
+            Me.cboEnteredBy.TextToSearch = Nothing
+            Me.cboEnteredBy.Translatable = false
         Me.cboEnteredBy.ValueIsMandatory = false
         Me.cboEnteredBy.ValueIsNullable = false
         Me.cboEnteredBy.ValueIsNumeric = false
@@ -325,7 +319,7 @@ End Sub
         Friend WithEvents lblIdNo As CLabel
         Public WithEvents TxtIdNo As CTextBox
         Friend WithEvents lblLeaveIdNo As CLabel
-        Public WithEvents cboLeaveIdNo As AtmComboBox
+        Public WithEvents cboLeaveIdNo As CdtComboBox
         Friend WithEvents CFlowLayout2 As CFlowLayout
         Public WithEvents txtDateCreated As CTextBox
         Friend WithEvents lblDateCreated As CLabel
@@ -334,6 +328,6 @@ End Sub
         Friend WithEvents lblEndDate As CLabel
         Public WithEvents dtpDateEnd As CCustomDateTimePicker
         Friend WithEvents lblEnteredBy As CLabel
-        Public WithEvents cboEnteredBy As AtmComboBox
+        Public WithEvents cboEnteredBy As CdtComboBox
     End Class
 End Namespace

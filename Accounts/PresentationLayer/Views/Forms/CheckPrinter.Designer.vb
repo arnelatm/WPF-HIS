@@ -31,10 +31,10 @@ Namespace PresentationLayer.Views.Forms
         Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblSupplierIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboPayeeIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+        Me.cboPayeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
         Me.lblPaymentType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblCheckNumber = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboPaymentType = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+        Me.cboPaymentType = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
         Me.txtCheckNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblCheckDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -225,7 +225,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayeeIdNo.EndFindValue = Nothing
             Me.cboPayeeIdNo.FieldDescription = Nothing
             Me.cboPayeeIdNo.FieldName = Nothing
-            Me.cboPayeeIdNo.FilterRule = Nothing
             Me.cboPayeeIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboPayeeIdNo.FindEnabled = False
             Me.cboPayeeIdNo.FlatStyle = System.Windows.Forms.FlatStyle.System
@@ -246,10 +245,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayeeIdNo.OriginalList = Nothing
             Me.cboPayeeIdNo.OverrideDropDownStyleList = False
             Me.cboPayeeIdNo.PreviousSearchTerm = Nothing
-            Me.cboPayeeIdNo.PropertySelector = Nothing
             Me.cboPayeeIdNo.Size = New System.Drawing.Size(741, 30)
             Me.cboPayeeIdNo.SuggestBoxHeight = 200
-            Me.cboPayeeIdNo.SuggestListOrderRule = Nothing
             Me.cboPayeeIdNo.TabIndex = 5
             Me.cboPayeeIdNo.TextToSearch = Nothing
             Me.cboPayeeIdNo.Translatable = False
@@ -308,7 +305,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPaymentType.EndFindValue = Nothing
             Me.cboPaymentType.FieldDescription = Nothing
             Me.cboPaymentType.FieldName = Nothing
-            Me.cboPaymentType.FilterRule = Nothing
             Me.cboPaymentType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboPaymentType.FindEnabled = False
             Me.cboPaymentType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -327,10 +323,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPaymentType.OriginalList = Nothing
             Me.cboPaymentType.OverrideDropDownStyleList = False
             Me.cboPaymentType.PreviousSearchTerm = Nothing
-            Me.cboPaymentType.PropertySelector = Nothing
             Me.cboPaymentType.Size = New System.Drawing.Size(256, 29)
             Me.cboPaymentType.SuggestBoxHeight = 200
-            Me.cboPaymentType.SuggestListOrderRule = Nothing
             Me.cboPaymentType.TabIndex = 4
             Me.cboPaymentType.TextToSearch = Nothing
             Me.cboPaymentType.Translatable = False
@@ -510,13 +504,13 @@ End Sub
         Friend WithEvents txtAmount As CTextBox
         Friend WithEvents lblAmount As CLabel
         Friend WithEvents txtNotes As CTextBox
-        Friend WithEvents cboPayeeIdNo As AtmComboBox
+        Friend WithEvents cboPayeeIdNo As CdtComboBox
         Friend WithEvents dtpCheckDate As CCustomDateTimePicker
         Friend WithEvents lblCheckDate As CLabel
         Friend WithEvents txtCheckNumber As CTextBox
         Friend WithEvents lblCheckNumber As CLabel
         Friend WithEvents lblPaymentType As CLabel
-        Friend WithEvents cboPaymentType As AtmComboBox
+        Friend WithEvents cboPaymentType As CdtComboBox
         Friend WithEvents btnPrintCheck As CButton
         Friend WithEvents txtPayeeName As CTextBox
     End Class

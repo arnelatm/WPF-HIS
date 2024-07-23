@@ -58,7 +58,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblCheckNumber = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblDiscountAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboPayorType = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboPayorType = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblReceiptType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -66,8 +66,8 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtJournalCodeDisplay = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
-            Me.cboDiscountAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
+            Me.cboDiscountAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.txtAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtVatNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -90,7 +90,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.dtpTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.FloPayor = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.cboContactIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboContactIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.txtPayorName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.floPurchaseJournalItems = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
@@ -331,7 +331,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayorType.EndFindValue = Nothing
             Me.cboPayorType.FieldDescription = Nothing
             Me.cboPayorType.FieldName = Nothing
-            Me.cboPayorType.FilterRule = Nothing
             Me.cboPayorType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboPayorType.FindEnabled = False
             resources.ApplyResources(Me.cboPayorType, "cboPayorType")
@@ -346,10 +345,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayorType.OriginalList = Nothing
             Me.cboPayorType.OverrideDropDownStyleList = False
             Me.cboPayorType.PreviousSearchTerm = Nothing
-            Me.cboPayorType.PropertySelector = Nothing
             Me.cboPayorType.SuggestBoxHeight = 200
             Me.cboPayorType.SuggestCharCount = 0
-            Me.cboPayorType.SuggestListOrderRule = Nothing
             Me.cboPayorType.TextToSearch = Nothing
             Me.cboPayorType.Translatable = False
             Me.cboPayorType.ValueIsMandatory = False
@@ -495,7 +492,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.EndFindValue = Nothing
             Me.cboAccountIdNo.FieldDescription = Nothing
             Me.cboAccountIdNo.FieldName = Nothing
-            Me.cboAccountIdNo.FilterRule = Nothing
             Me.cboAccountIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboAccountIdNo.FindEnabled = False
             resources.ApplyResources(Me.cboAccountIdNo, "cboAccountIdNo")
@@ -510,10 +506,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.OriginalList = Nothing
             Me.cboAccountIdNo.OverrideDropDownStyleList = False
             Me.cboAccountIdNo.PreviousSearchTerm = Nothing
-            Me.cboAccountIdNo.PropertySelector = Nothing
             Me.cboAccountIdNo.SuggestBoxHeight = 200
             Me.cboAccountIdNo.SuggestCharCount = 0
-            Me.cboAccountIdNo.SuggestListOrderRule = Nothing
             Me.cboAccountIdNo.TextToSearch = Nothing
             Me.cboAccountIdNo.Translatable = False
             Me.cboAccountIdNo.ValueIsMandatory = False
@@ -539,7 +533,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDiscountAccountIdNo.EndFindValue = Nothing
             Me.cboDiscountAccountIdNo.FieldDescription = Nothing
             Me.cboDiscountAccountIdNo.FieldName = Nothing
-            Me.cboDiscountAccountIdNo.FilterRule = Nothing
             Me.cboDiscountAccountIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboDiscountAccountIdNo.FindEnabled = False
             resources.ApplyResources(Me.cboDiscountAccountIdNo, "cboDiscountAccountIdNo")
@@ -555,10 +548,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDiscountAccountIdNo.OriginalList = Nothing
             Me.cboDiscountAccountIdNo.OverrideDropDownStyleList = False
             Me.cboDiscountAccountIdNo.PreviousSearchTerm = Nothing
-            Me.cboDiscountAccountIdNo.PropertySelector = Nothing
             Me.cboDiscountAccountIdNo.SuggestBoxHeight = 200
             Me.cboDiscountAccountIdNo.SuggestCharCount = 0
-            Me.cboDiscountAccountIdNo.SuggestListOrderRule = Nothing
             Me.cboDiscountAccountIdNo.TextToSearch = Nothing
             Me.cboDiscountAccountIdNo.Translatable = False
             Me.cboDiscountAccountIdNo.ValueIsMandatory = False
@@ -1016,7 +1007,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboContactIdNo.EndFindValue = Nothing
             Me.cboContactIdNo.FieldDescription = Nothing
             Me.cboContactIdNo.FieldName = Nothing
-            Me.cboContactIdNo.FilterRule = Nothing
             Me.cboContactIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboContactIdNo.FindEnabled = False
             resources.ApplyResources(Me.cboContactIdNo, "cboContactIdNo")
@@ -1031,10 +1021,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cboContactIdNo.OriginalList = Nothing
             Me.cboContactIdNo.OverrideDropDownStyleList = False
             Me.cboContactIdNo.PreviousSearchTerm = Nothing
-            Me.cboContactIdNo.PropertySelector = Nothing
             Me.cboContactIdNo.SuggestBoxHeight = 200
             Me.cboContactIdNo.SuggestCharCount = 0
-            Me.cboContactIdNo.SuggestListOrderRule = Nothing
             Me.cboContactIdNo.TextToSearch = Nothing
             Me.cboContactIdNo.Translatable = False
             Me.cboContactIdNo.ValueIsMandatory = False
@@ -1744,7 +1732,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblCheckNumber As CLabel
         Friend WithEvents txtCheckNumber As CTextBox
         Friend WithEvents lblDiscountAccountIdNo As CLabel
-        Friend WithEvents cboDiscountAccountIdNo As AtmComboBox
+        Friend WithEvents cboDiscountAccountIdNo As CdtComboBox
         Friend WithEvents bsCsrOiItems As Windows.Forms.BindingSource
         Friend WithEvents DataGridViewCsrOiItems As CtDataGridView
         Friend WithEvents btnViewGL As CButton
@@ -1755,8 +1743,8 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents txtTotalCredits As CTextBox
         Friend WithEvents txtTotalDebits As CTextBox
         Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
-        Friend WithEvents cboPayorType As AtmComboBox
-        Friend WithEvents cboAccountIdNo As AtmComboBox
+        Friend WithEvents cboPayorType As CdtComboBox
+        Friend WithEvents cboAccountIdNo As CdtComboBox
         Friend WithEvents txtORNumber As CTextBox
         Friend WithEvents txtAmount As CTextBox
         Friend WithEvents txtVatNumber As CTextBox
@@ -1789,7 +1777,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents AccountIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents txtPayorIdNo As CTextBox
-        Friend WithEvents cboContactIdNo As AtmComboBox
+        Friend WithEvents cboContactIdNo As CdtComboBox
         Friend WithEvents dtpTransactionDate As CCustomDateTimePicker
         Friend WithEvents FloPayor As CFlowLayout
         Friend WithEvents floHeader2 As CFlowLayout

@@ -3,7 +3,7 @@ Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class CtComboBoxEditingControl
-    Inherits AtmComboBox
+    Inherits CdtComboBox
     Implements IDataGridViewEditingControl
 
     Private dataGridView As DataGridView
@@ -108,6 +108,7 @@ Public Class CtComboBoxEditingControl
     '     class.
     Public Sub New()
         TabStop = False
+
     End Sub
 
     'Protected Overrides Function CreateAccessibilityInstance() As AccessibleObject
@@ -217,7 +218,7 @@ Public Class CtComboBoxEditingControl
     ' Parameters:
     '   e:
     '     An System.EventArgs that contains the event data.
-    Protected Overrides Sub OnSelectedIndexChanged(ByVal e As EventArgs)
+    Protected Sub ctCbEdtCtrlSelectedIndexChanged(sender As Object, ByVal e As EventArgs) Handles MyBase.SelectedIndexChanged
         'MyBase.OnSelectedIndexChanged(e)
         If SelectedIndex <> -1 Then
             NotifyDataGridViewOfValueChange()

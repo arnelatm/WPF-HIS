@@ -23,7 +23,7 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Me.AtmComboBox2 = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+        Me.AtmComboBox2 = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
         Me.SuspendLayout()
         '
         'AtmComboBox2
@@ -81,5 +81,5 @@ Partial Class Form1
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents AtmComboBox2 As CBaseControlsLibrary.AtmComboBox
+    Friend WithEvents AtmComboBox2 As CBaseControlsLibrary.CdtComboBox
 End Class

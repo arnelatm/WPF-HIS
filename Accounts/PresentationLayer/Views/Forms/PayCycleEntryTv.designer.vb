@@ -36,7 +36,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPayCycleCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblPayCycleName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblPayFrequency = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboPayFrequency = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboPayFrequency = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblPayCycleNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -319,7 +319,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayFrequency.EndFindValue = Nothing
             Me.cboPayFrequency.FieldDescription = Nothing
             Me.cboPayFrequency.FieldName = Nothing
-            Me.cboPayFrequency.FilterRule = Nothing
             Me.cboPayFrequency.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboPayFrequency.FindEnabled = False
             Me.floDataDisplay.SetFlowBreak(Me.cboPayFrequency, True)
@@ -338,10 +337,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayFrequency.OriginalList = Nothing
             Me.cboPayFrequency.OverrideDropDownStyleList = False
             Me.cboPayFrequency.PreviousSearchTerm = Nothing
-            Me.cboPayFrequency.PropertySelector = Nothing
             Me.cboPayFrequency.Size = New System.Drawing.Size(202, 24)
             Me.cboPayFrequency.SuggestBoxHeight = 200
-            Me.cboPayFrequency.SuggestListOrderRule = Nothing
             Me.cboPayFrequency.TabIndex = 3
             Me.cboPayFrequency.TextToSearch = Nothing
             Me.cboPayFrequency.Translatable = False
@@ -410,6 +407,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents _MBParentWithChildrenChangedDisallowed As LocalizableMessageBox
         Friend WithEvents _MSGMandatoryFields As LocalizableMessage
         Friend WithEvents lblPayFrequency As CLabel
-        Friend WithEvents cboPayFrequency As AtmComboBox
+        Friend WithEvents cboPayFrequency As CdtComboBox
     End Class
 End Namespace

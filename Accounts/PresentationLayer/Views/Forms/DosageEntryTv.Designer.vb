@@ -26,7 +26,7 @@ Namespace PresentationLayer.Views.Forms
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DosageEntryTv))
         Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboRoute = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+        Me.cboRoute = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
         Me.CLabel4 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.txtDosageNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -35,10 +35,10 @@ Namespace PresentationLayer.Views.Forms
         Me.txtDosageCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtDosageName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.cboDirection = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+        Me.cboDirection = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
         Me.CLabel6 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboFrequency = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
-        Me.cboFrequencyTiming = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+        Me.cboFrequency = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
+        Me.cboFrequencyTiming = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
         Me.CLabel5 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.CLabel10 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.CLabel9 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -108,7 +108,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboRoute.EndFindValue = Nothing
             Me.cboRoute.FieldDescription = Nothing
             Me.cboRoute.FieldName = Nothing
-            Me.cboRoute.FilterRule = Nothing
             Me.cboRoute.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboRoute.FindEnabled = False
             Me.cboRoute.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -127,11 +126,9 @@ Namespace PresentationLayer.Views.Forms
             Me.cboRoute.OriginalList = Nothing
             Me.cboRoute.OverrideDropDownStyleList = False
             Me.cboRoute.PreviousSearchTerm = Nothing
-            Me.cboRoute.PropertySelector = Nothing
             Me.cboRoute.Size = New System.Drawing.Size(758, 24)
             Me.cboRoute.SuggestBoxHeight = 200
             Me.cboRoute.SuggestCharCount = 0
-            Me.cboRoute.SuggestListOrderRule = Nothing
             Me.cboRoute.TabIndex = 5
             Me.cboRoute.TextToSearch = Nothing
             Me.cboRoute.Translatable = False
@@ -377,7 +374,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDirection.EndFindValue = Nothing
             Me.cboDirection.FieldDescription = Nothing
             Me.cboDirection.FieldName = Nothing
-            Me.cboDirection.FilterRule = Nothing
             Me.cboDirection.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboDirection.FindEnabled = False
             Me.cboDirection.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -396,11 +392,9 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDirection.OriginalList = Nothing
             Me.cboDirection.OverrideDropDownStyleList = False
             Me.cboDirection.PreviousSearchTerm = Nothing
-            Me.cboDirection.PropertySelector = Nothing
             Me.cboDirection.Size = New System.Drawing.Size(758, 24)
             Me.cboDirection.SuggestBoxHeight = 200
             Me.cboDirection.SuggestCharCount = 0
-            Me.cboDirection.SuggestListOrderRule = Nothing
             Me.cboDirection.TabIndex = 298
             Me.cboDirection.TextToSearch = Nothing
             Me.cboDirection.Translatable = False
@@ -440,7 +434,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboFrequency.EndFindValue = Nothing
             Me.cboFrequency.FieldDescription = Nothing
             Me.cboFrequency.FieldName = Nothing
-            Me.cboFrequency.FilterRule = Nothing
             Me.cboFrequency.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboFrequency.FindEnabled = False
             Me.cboFrequency.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -459,11 +452,9 @@ Namespace PresentationLayer.Views.Forms
             Me.cboFrequency.OriginalList = Nothing
             Me.cboFrequency.OverrideDropDownStyleList = False
             Me.cboFrequency.PreviousSearchTerm = Nothing
-            Me.cboFrequency.PropertySelector = Nothing
             Me.cboFrequency.Size = New System.Drawing.Size(142, 24)
             Me.cboFrequency.SuggestBoxHeight = 200
             Me.cboFrequency.SuggestCharCount = 0
-            Me.cboFrequency.SuggestListOrderRule = Nothing
             Me.cboFrequency.TabIndex = 295
             Me.cboFrequency.TextToSearch = Nothing
             Me.cboFrequency.Translatable = False
@@ -488,7 +479,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboFrequencyTiming.EndFindValue = Nothing
             Me.cboFrequencyTiming.FieldDescription = Nothing
             Me.cboFrequencyTiming.FieldName = Nothing
-            Me.cboFrequencyTiming.FilterRule = Nothing
             Me.cboFrequencyTiming.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboFrequencyTiming.FindEnabled = False
             Me.cboFrequencyTiming.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -507,11 +497,9 @@ Namespace PresentationLayer.Views.Forms
             Me.cboFrequencyTiming.OriginalList = Nothing
             Me.cboFrequencyTiming.OverrideDropDownStyleList = False
             Me.cboFrequencyTiming.PreviousSearchTerm = Nothing
-            Me.cboFrequencyTiming.PropertySelector = Nothing
             Me.cboFrequencyTiming.Size = New System.Drawing.Size(614, 24)
             Me.cboFrequencyTiming.SuggestBoxHeight = 200
             Me.cboFrequencyTiming.SuggestCharCount = 0
-            Me.cboFrequencyTiming.SuggestListOrderRule = Nothing
             Me.cboFrequencyTiming.TabIndex = 297
             Me.cboFrequencyTiming.TextToSearch = Nothing
             Me.cboFrequencyTiming.Translatable = False
@@ -629,14 +617,14 @@ End Sub
         Friend WithEvents DataGridViewCheckBoxColumn1 As Windows.Forms.DataGridViewCheckBoxColumn
         Friend WithEvents PcsIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents CLabel3 As CLabel
-        Friend WithEvents cboRoute As AtmComboBox
+        Friend WithEvents cboRoute As CdtComboBox
         Friend WithEvents CLabel4 As CLabel
         Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
         Friend WithEvents CLabel6 As CLabel
-        Friend WithEvents cboFrequency As AtmComboBox
+        Friend WithEvents cboFrequency As CdtComboBox
         Friend WithEvents CLabel9 As CLabel
-        Friend WithEvents cboFrequencyTiming As AtmComboBox
-        Friend WithEvents cboDirection As AtmComboBox
+        Friend WithEvents cboFrequencyTiming As CdtComboBox
+        Friend WithEvents cboDirection As CdtComboBox
         Friend WithEvents txtIdNo As CTextBox
         Friend WithEvents CLabel5 As CLabel
         Friend WithEvents txtDosageCode As CTextBox

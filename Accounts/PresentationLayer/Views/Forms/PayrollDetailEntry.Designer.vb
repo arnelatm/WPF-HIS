@@ -66,7 +66,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtTotalDeductions = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.txtNetPay = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel11 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblBankTransfer = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkBankTransfer = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -900,7 +900,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboEmployeeIdNo.EndFindValue = Nothing
             Me.cboEmployeeIdNo.FieldDescription = Nothing
             Me.cboEmployeeIdNo.FieldName = Nothing
-            Me.cboEmployeeIdNo.FilterRule = Nothing
             Me.cboEmployeeIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboEmployeeIdNo.FindEnabled = False
             Me.cboEmployeeIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -920,11 +919,9 @@ Namespace PresentationLayer.Views.Forms
             Me.cboEmployeeIdNo.OriginalList = Nothing
             Me.cboEmployeeIdNo.OverrideDropDownStyleList = False
             Me.cboEmployeeIdNo.PreviousSearchTerm = Nothing
-            Me.cboEmployeeIdNo.PropertySelector = Nothing
             Me.cboEmployeeIdNo.Size = New System.Drawing.Size(416, 29)
             Me.cboEmployeeIdNo.SuggestBoxHeight = 200
             Me.cboEmployeeIdNo.SuggestCharCount = 0
-            Me.cboEmployeeIdNo.SuggestListOrderRule = Nothing
             Me.cboEmployeeIdNo.TabIndex = 4
             Me.cboEmployeeIdNo.TabStop = False
             Me.cboEmployeeIdNo.TextToSearch = Nothing
@@ -1032,7 +1029,7 @@ End Sub
         Friend WithEvents dtpEndDate As CCustomDateTimePicker
         Friend WithEvents txtEmployeeCode As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents txtIdNo As Libraries.CBaseControlsLibrary.CTextBox
-        Friend WithEvents cboEmployeeIdNo As Libraries.CBaseControlsLibrary.AtmComboBox
+        Friend WithEvents cboEmployeeIdNo As Libraries.CBaseControlsLibrary.CdtComboBox
         Friend WithEvents DataGridViewEarnings As Libraries.CBaseControlsLibrary.CtDataGridView
         Friend WithEvents bsEarnings As BindingSource
         Friend WithEvents bsDeductions As BindingSource

@@ -90,15 +90,15 @@ Namespace PresentationLayer.Views.Forms
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.txtVatNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.cacCountryCode = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
-            Me.cacBankIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
-            Me.cacRevAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
-            Me.cacArAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
-            Me.cacPaymentMethod = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cacCountryCode = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
+            Me.cacBankIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
+            Me.cacRevAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
+            Me.cacArAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
+            Me.cacPaymentMethod = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacDiscountSchemeIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cacDiscountSchemeIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.dtpDateAccountOpen = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
-            Me.cacAccountStatus = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cacAccountStatus = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblActive = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkActive = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -1233,7 +1233,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacCountryCode.EndFindValue = Nothing
             Me.cacCountryCode.FieldDescription = Nothing
             Me.cacCountryCode.FieldName = Nothing
-            Me.cacCountryCode.FilterRule = Nothing
             Me.cacCountryCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cacCountryCode.FindEnabled = False
             Me.floDataDisplay.SetFlowBreak(Me.cacCountryCode, True)
@@ -1249,10 +1248,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cacCountryCode.OriginalList = Nothing
             Me.cacCountryCode.OverrideDropDownStyleList = False
             Me.cacCountryCode.PreviousSearchTerm = Nothing
-            Me.cacCountryCode.PropertySelector = Nothing
             Me.cacCountryCode.SecurityKey = ""
             Me.cacCountryCode.SuggestBoxHeight = 200
-            Me.cacCountryCode.SuggestListOrderRule = Nothing
             Me.cacCountryCode.TextToSearch = Nothing
             Me.cacCountryCode.Translatable = False
             Me.cacCountryCode.ValueIsMandatory = False
@@ -1273,7 +1270,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacBankIdNo.EndFindValue = Nothing
             Me.cacBankIdNo.FieldDescription = Nothing
             Me.cacBankIdNo.FieldName = Nothing
-            Me.cacBankIdNo.FilterRule = Nothing
             Me.cacBankIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cacBankIdNo.FindEnabled = False
             Me.floDataDisplay.SetFlowBreak(Me.cacBankIdNo, True)
@@ -1289,9 +1285,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacBankIdNo.OriginalList = Nothing
             Me.cacBankIdNo.OverrideDropDownStyleList = False
             Me.cacBankIdNo.PreviousSearchTerm = Nothing
-            Me.cacBankIdNo.PropertySelector = Nothing
             Me.cacBankIdNo.SuggestBoxHeight = 200
-            Me.cacBankIdNo.SuggestListOrderRule = Nothing
             Me.cacBankIdNo.TextToSearch = Nothing
             Me.cacBankIdNo.Translatable = False
             Me.cacBankIdNo.ValueIsMandatory = False
@@ -1312,7 +1306,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacRevAccountIdNo.EndFindValue = Nothing
             Me.cacRevAccountIdNo.FieldDescription = Nothing
             Me.cacRevAccountIdNo.FieldName = Nothing
-            Me.cacRevAccountIdNo.FilterRule = Nothing
             Me.cacRevAccountIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cacRevAccountIdNo.FindEnabled = False
             resources.ApplyResources(Me.cacRevAccountIdNo, "cacRevAccountIdNo")
@@ -1327,9 +1320,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacRevAccountIdNo.OriginalList = Nothing
             Me.cacRevAccountIdNo.OverrideDropDownStyleList = False
             Me.cacRevAccountIdNo.PreviousSearchTerm = Nothing
-            Me.cacRevAccountIdNo.PropertySelector = Nothing
             Me.cacRevAccountIdNo.SuggestBoxHeight = 200
-            Me.cacRevAccountIdNo.SuggestListOrderRule = Nothing
             Me.cacRevAccountIdNo.TextToSearch = Nothing
             Me.cacRevAccountIdNo.Translatable = False
             Me.cacRevAccountIdNo.ValueIsMandatory = False
@@ -1350,7 +1341,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacArAccountIdNo.EndFindValue = Nothing
             Me.cacArAccountIdNo.FieldDescription = Nothing
             Me.cacArAccountIdNo.FieldName = Nothing
-            Me.cacArAccountIdNo.FilterRule = Nothing
             Me.cacArAccountIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cacArAccountIdNo.FindEnabled = False
             Me.floDataDisplay.SetFlowBreak(Me.cacArAccountIdNo, True)
@@ -1366,9 +1356,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacArAccountIdNo.OriginalList = Nothing
             Me.cacArAccountIdNo.OverrideDropDownStyleList = False
             Me.cacArAccountIdNo.PreviousSearchTerm = Nothing
-            Me.cacArAccountIdNo.PropertySelector = Nothing
             Me.cacArAccountIdNo.SuggestBoxHeight = 200
-            Me.cacArAccountIdNo.SuggestListOrderRule = Nothing
             Me.cacArAccountIdNo.TextToSearch = Nothing
             Me.cacArAccountIdNo.Translatable = False
             Me.cacArAccountIdNo.ValueIsMandatory = False
@@ -1389,7 +1377,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacPaymentMethod.EndFindValue = Nothing
             Me.cacPaymentMethod.FieldDescription = Nothing
             Me.cacPaymentMethod.FieldName = Nothing
-            Me.cacPaymentMethod.FilterRule = Nothing
             Me.cacPaymentMethod.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cacPaymentMethod.FindEnabled = False
             Me.floDataDisplay.SetFlowBreak(Me.cacPaymentMethod, True)
@@ -1405,9 +1392,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacPaymentMethod.OriginalList = Nothing
             Me.cacPaymentMethod.OverrideDropDownStyleList = False
             Me.cacPaymentMethod.PreviousSearchTerm = Nothing
-            Me.cacPaymentMethod.PropertySelector = Nothing
             Me.cacPaymentMethod.SuggestBoxHeight = 200
-            Me.cacPaymentMethod.SuggestListOrderRule = Nothing
             Me.cacPaymentMethod.TextToSearch = Nothing
             Me.cacPaymentMethod.Translatable = False
             Me.cacPaymentMethod.ValueIsMandatory = False
@@ -1436,7 +1421,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacDiscountSchemeIdNo.EndFindValue = Nothing
             Me.cacDiscountSchemeIdNo.FieldDescription = Nothing
             Me.cacDiscountSchemeIdNo.FieldName = Nothing
-            Me.cacDiscountSchemeIdNo.FilterRule = Nothing
             Me.cacDiscountSchemeIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cacDiscountSchemeIdNo.FindEnabled = False
             resources.ApplyResources(Me.cacDiscountSchemeIdNo, "cacDiscountSchemeIdNo")
@@ -1451,9 +1435,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacDiscountSchemeIdNo.OriginalList = Nothing
             Me.cacDiscountSchemeIdNo.OverrideDropDownStyleList = False
             Me.cacDiscountSchemeIdNo.PreviousSearchTerm = Nothing
-            Me.cacDiscountSchemeIdNo.PropertySelector = Nothing
             Me.cacDiscountSchemeIdNo.SuggestBoxHeight = 200
-            Me.cacDiscountSchemeIdNo.SuggestListOrderRule = Nothing
             Me.cacDiscountSchemeIdNo.TextToSearch = Nothing
             Me.cacDiscountSchemeIdNo.Translatable = False
             Me.cacDiscountSchemeIdNo.ValueIsMandatory = False
@@ -1498,7 +1480,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacAccountStatus.EndFindValue = Nothing
             Me.cacAccountStatus.FieldDescription = Nothing
             Me.cacAccountStatus.FieldName = Nothing
-            Me.cacAccountStatus.FilterRule = Nothing
             Me.cacAccountStatus.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cacAccountStatus.FindEnabled = False
             resources.ApplyResources(Me.cacAccountStatus, "cacAccountStatus")
@@ -1513,9 +1494,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacAccountStatus.OriginalList = Nothing
             Me.cacAccountStatus.OverrideDropDownStyleList = False
             Me.cacAccountStatus.PreviousSearchTerm = Nothing
-            Me.cacAccountStatus.PropertySelector = Nothing
             Me.cacAccountStatus.SuggestBoxHeight = 200
-            Me.cacAccountStatus.SuggestListOrderRule = Nothing
             Me.cacAccountStatus.TextToSearch = Nothing
             Me.cacAccountStatus.Translatable = False
             Me.cacAccountStatus.ValueIsMandatory = False
@@ -1673,13 +1652,13 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents CLabel1 As CLabel
         Friend WithEvents lblActive As CLabel
         Friend WithEvents dtpDateAccountOpen As CCustomDateTimePicker
-        Friend WithEvents cacCountryCode As AtmComboBox
-        Friend WithEvents cacBankIdNo As AtmComboBox
-        Friend WithEvents cacRevAccountIdNo As AtmComboBox
-        Friend WithEvents cacArAccountIdNo As AtmComboBox
-        Friend WithEvents cacPaymentMethod As AtmComboBox
-        Friend WithEvents cacDiscountSchemeIdNo As AtmComboBox
-        Friend WithEvents cacAccountStatus As AtmComboBox
+        Friend WithEvents cacCountryCode As CdtComboBox
+        Friend WithEvents cacBankIdNo As CdtComboBox
+        Friend WithEvents cacRevAccountIdNo As CdtComboBox
+        Friend WithEvents cacArAccountIdNo As CdtComboBox
+        Friend WithEvents cacPaymentMethod As CdtComboBox
+        Friend WithEvents cacDiscountSchemeIdNo As CdtComboBox
+        Friend WithEvents cacAccountStatus As CdtComboBox
         Friend WithEvents CLabel3 As CLabel
         Friend WithEvents txtBalance As CTextBox
         Friend WithEvents chkActive As CCheckBox

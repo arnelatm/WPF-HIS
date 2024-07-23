@@ -34,20 +34,20 @@ Namespace PresentationLayer.Views.Forms
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+        Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
         Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboHolidayTransferIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+        Me.cboHolidayTransferIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
         Me.lblHolidayIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboHolidayIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+        Me.cboHolidayIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
         Me.lblAvailmentDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.dtpAvailmentDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.lblStatus = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboStatus = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+        Me.cboStatus = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
         Me.lblenteredBy = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboenteredBy = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+        Me.cboenteredBy = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.DataGridViewApprovalHistory = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
         Me.dgvApprovalIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -128,9 +128,8 @@ Namespace PresentationLayer.Views.Forms
         Me.cboEmployeeIdNo.EndFindValue = Nothing
         Me.cboEmployeeIdNo.FieldDescription = Nothing
         Me.cboEmployeeIdNo.FieldName = Nothing
-        Me.cboEmployeeIdNo.FilterRule = Nothing
-        Me.cboEmployeeIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cboEmployeeIdNo.FindEnabled = true
+            Me.cboEmployeeIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboEmployeeIdNo.FindEnabled = true
         Me.CFlowLayout2.SetFlowBreak(Me.cboEmployeeIdNo, true)
         resources.ApplyResources(Me.cboEmployeeIdNo, "cboEmployeeIdNo")
         Me.cboEmployeeIdNo.ForeColor = System.Drawing.Color.Black
@@ -144,11 +143,9 @@ Namespace PresentationLayer.Views.Forms
         Me.cboEmployeeIdNo.OriginalList = Nothing
         Me.cboEmployeeIdNo.OverrideDropDownStyleList = false
         Me.cboEmployeeIdNo.PreviousSearchTerm = Nothing
-        Me.cboEmployeeIdNo.PropertySelector = Nothing
             Me.cboEmployeeIdNo.SuggestBoxHeight = 200
-            Me.cboEmployeeIdNo.SuggestListOrderRule = Nothing
-        Me.cboEmployeeIdNo.TextToSearch = Nothing
-        Me.cboEmployeeIdNo.Translatable = false
+            Me.cboEmployeeIdNo.TextToSearch = Nothing
+            Me.cboEmployeeIdNo.Translatable = false
         Me.cboEmployeeIdNo.ValueIsMandatory = false
         Me.cboEmployeeIdNo.ValueIsNullable = false
         Me.cboEmployeeIdNo.ValueIsNumeric = false
@@ -236,9 +233,8 @@ Namespace PresentationLayer.Views.Forms
         Me.cboHolidayTransferIdNo.EndFindValue = Nothing
         Me.cboHolidayTransferIdNo.FieldDescription = Nothing
         Me.cboHolidayTransferIdNo.FieldName = Nothing
-        Me.cboHolidayTransferIdNo.FilterRule = Nothing
-        Me.cboHolidayTransferIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cboHolidayTransferIdNo.FindEnabled = true
+            Me.cboHolidayTransferIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboHolidayTransferIdNo.FindEnabled = true
         Me.CFlowLayout2.SetFlowBreak(Me.cboHolidayTransferIdNo, true)
         resources.ApplyResources(Me.cboHolidayTransferIdNo, "cboHolidayTransferIdNo")
         Me.cboHolidayTransferIdNo.ForeColor = System.Drawing.Color.Black
@@ -252,11 +248,9 @@ Namespace PresentationLayer.Views.Forms
         Me.cboHolidayTransferIdNo.OriginalList = Nothing
         Me.cboHolidayTransferIdNo.OverrideDropDownStyleList = false
         Me.cboHolidayTransferIdNo.PreviousSearchTerm = Nothing
-        Me.cboHolidayTransferIdNo.PropertySelector = Nothing
             Me.cboHolidayTransferIdNo.SuggestBoxHeight = 200
-            Me.cboHolidayTransferIdNo.SuggestListOrderRule = Nothing
-        Me.cboHolidayTransferIdNo.TextToSearch = Nothing
-        Me.cboHolidayTransferIdNo.Translatable = false
+            Me.cboHolidayTransferIdNo.TextToSearch = Nothing
+            Me.cboHolidayTransferIdNo.Translatable = false
         Me.cboHolidayTransferIdNo.ValueIsMandatory = false
         Me.cboHolidayTransferIdNo.ValueIsNullable = false
         Me.cboHolidayTransferIdNo.ValueIsNumeric = false
@@ -286,9 +280,8 @@ Namespace PresentationLayer.Views.Forms
         Me.cboHolidayIdNo.EndFindValue = Nothing
         Me.cboHolidayIdNo.FieldDescription = Nothing
         Me.cboHolidayIdNo.FieldName = Nothing
-        Me.cboHolidayIdNo.FilterRule = Nothing
-        Me.cboHolidayIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cboHolidayIdNo.FindEnabled = true
+            Me.cboHolidayIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboHolidayIdNo.FindEnabled = true
         Me.CFlowLayout2.SetFlowBreak(Me.cboHolidayIdNo, true)
         resources.ApplyResources(Me.cboHolidayIdNo, "cboHolidayIdNo")
         Me.cboHolidayIdNo.ForeColor = System.Drawing.Color.Black
@@ -302,11 +295,9 @@ Namespace PresentationLayer.Views.Forms
         Me.cboHolidayIdNo.OriginalList = Nothing
         Me.cboHolidayIdNo.OverrideDropDownStyleList = false
         Me.cboHolidayIdNo.PreviousSearchTerm = Nothing
-        Me.cboHolidayIdNo.PropertySelector = Nothing
             Me.cboHolidayIdNo.SuggestBoxHeight = 200
-            Me.cboHolidayIdNo.SuggestListOrderRule = Nothing
-        Me.cboHolidayIdNo.TextToSearch = Nothing
-        Me.cboHolidayIdNo.Translatable = false
+            Me.cboHolidayIdNo.TextToSearch = Nothing
+            Me.cboHolidayIdNo.Translatable = false
         Me.cboHolidayIdNo.ValueIsMandatory = false
         Me.cboHolidayIdNo.ValueIsNullable = false
         Me.cboHolidayIdNo.ValueIsNumeric = false
@@ -368,9 +359,8 @@ Namespace PresentationLayer.Views.Forms
         Me.cboStatus.EndFindValue = Nothing
         Me.cboStatus.FieldDescription = Nothing
         Me.cboStatus.FieldName = Nothing
-        Me.cboStatus.FilterRule = Nothing
-        Me.cboStatus.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cboStatus.FindEnabled = true
+            Me.cboStatus.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboStatus.FindEnabled = true
         resources.ApplyResources(Me.cboStatus, "cboStatus")
         Me.cboStatus.ForeColor = System.Drawing.Color.Black
         Me.cboStatus.FormattingEnabled = true
@@ -383,11 +373,9 @@ Namespace PresentationLayer.Views.Forms
         Me.cboStatus.OriginalList = Nothing
         Me.cboStatus.OverrideDropDownStyleList = false
         Me.cboStatus.PreviousSearchTerm = Nothing
-        Me.cboStatus.PropertySelector = Nothing
             Me.cboStatus.SuggestBoxHeight = 200
-            Me.cboStatus.SuggestListOrderRule = Nothing
-        Me.cboStatus.TextToSearch = Nothing
-        Me.cboStatus.Translatable = false
+            Me.cboStatus.TextToSearch = Nothing
+            Me.cboStatus.Translatable = false
         Me.cboStatus.ValueIsMandatory = false
         Me.cboStatus.ValueIsNullable = false
         Me.cboStatus.ValueIsNumeric = false
@@ -417,9 +405,8 @@ Namespace PresentationLayer.Views.Forms
         Me.cboenteredBy.EndFindValue = Nothing
         Me.cboenteredBy.FieldDescription = Nothing
         Me.cboenteredBy.FieldName = Nothing
-        Me.cboenteredBy.FilterRule = Nothing
-        Me.cboenteredBy.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cboenteredBy.FindEnabled = true
+            Me.cboenteredBy.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboenteredBy.FindEnabled = true
         Me.CFlowLayout2.SetFlowBreak(Me.cboenteredBy, true)
         resources.ApplyResources(Me.cboenteredBy, "cboenteredBy")
         Me.cboenteredBy.ForeColor = System.Drawing.Color.Black
@@ -433,11 +420,9 @@ Namespace PresentationLayer.Views.Forms
         Me.cboenteredBy.OriginalList = Nothing
         Me.cboenteredBy.OverrideDropDownStyleList = false
         Me.cboenteredBy.PreviousSearchTerm = Nothing
-        Me.cboenteredBy.PropertySelector = Nothing
             Me.cboenteredBy.SuggestBoxHeight = 200
-            Me.cboenteredBy.SuggestListOrderRule = Nothing
-        Me.cboenteredBy.TextToSearch = Nothing
-        Me.cboenteredBy.Translatable = false
+            Me.cboenteredBy.TextToSearch = Nothing
+            Me.cboenteredBy.Translatable = false
         Me.cboenteredBy.ValueIsMandatory = false
         Me.cboenteredBy.ValueIsNullable = false
         Me.cboenteredBy.ValueIsNumeric = false
@@ -543,12 +528,12 @@ End Sub
         Friend WithEvents lblIdNo As CLabel
         Public WithEvents TxtIdNo As CTextBox
         Friend WithEvents lblEmployeeIdNo As CLabel
-        Public WithEvents cboEmployeeIdNo As AtmComboBox
+        Public WithEvents cboEmployeeIdNo As CdtComboBox
         Friend WithEvents lblDateCreated As CLabel
         Public WithEvents txtDateCreated As CTextBox
         Friend WithEvents CFlowLayout2 As CFlowLayout
         Friend WithEvents lblenteredBy As CLabel
-        Public WithEvents cboenteredBy As AtmComboBox
+        Public WithEvents cboenteredBy As CdtComboBox
         Friend WithEvents DataGridViewApprovalHistory As CtDataGridView
         Friend WithEvents bsHolidayAvailmentApproval As BindingSource
         Friend WithEvents bsHolidayAvailmentApprovalHistory As BindingSource
@@ -561,12 +546,12 @@ End Sub
         Friend WithEvents dgvStatus As CDgvComboBoxColumn
         Friend WithEvents HolidayAvailmentIdNo As DataGridViewTextBoxColumn
         Friend WithEvents CLabel2 As CLabel
-        Public WithEvents cboHolidayTransferIdNo As AtmComboBox
+        Public WithEvents cboHolidayTransferIdNo As CdtComboBox
         Friend WithEvents lblHolidayIdNo As CLabel
-        Public WithEvents cboHolidayIdNo As AtmComboBox
+        Public WithEvents cboHolidayIdNo As CdtComboBox
         Friend WithEvents lblStatus As CLabel
         Friend WithEvents lblAvailmentDate As CLabel
         Public WithEvents dtpAvailmentDate As CCustomDateTimePicker
-        Public WithEvents cboStatus As AtmComboBox
+        Public WithEvents cboStatus As CdtComboBox
     End Class
 End Namespace

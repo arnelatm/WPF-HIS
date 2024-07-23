@@ -51,7 +51,7 @@ Namespace PresentationLayer.Views.Forms
         Me.lblDateAdded = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+        Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
         Me.lblPosted = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.chkPosted = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
         Me.txtOutstandingCredits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -316,9 +316,8 @@ Namespace PresentationLayer.Views.Forms
         Me.cboAccountIdNo.EndFindValue = Nothing
         Me.cboAccountIdNo.FieldDescription = Nothing
         Me.cboAccountIdNo.FieldName = Nothing
-        Me.cboAccountIdNo.FilterRule = Nothing
-        Me.cboAccountIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cboAccountIdNo.FindEnabled = false
+            Me.cboAccountIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboAccountIdNo.FindEnabled = false
         resources.ApplyResources(Me.cboAccountIdNo, "cboAccountIdNo")
         Me.cboAccountIdNo.ForeColor = System.Drawing.Color.Black
         Me.cboAccountIdNo.HideWhenNotEditingOrAdding = false
@@ -330,11 +329,9 @@ Namespace PresentationLayer.Views.Forms
         Me.cboAccountIdNo.OriginalList = Nothing
         Me.cboAccountIdNo.OverrideDropDownStyleList = false
         Me.cboAccountIdNo.PreviousSearchTerm = Nothing
-        Me.cboAccountIdNo.PropertySelector = Nothing
             Me.cboAccountIdNo.SuggestBoxHeight = 200
-            Me.cboAccountIdNo.SuggestListOrderRule = Nothing
-        Me.cboAccountIdNo.TextToSearch = Nothing
-        Me.cboAccountIdNo.Translatable = false
+            Me.cboAccountIdNo.TextToSearch = Nothing
+            Me.cboAccountIdNo.Translatable = false
         Me.cboAccountIdNo.ValueIsMandatory = false
         Me.cboAccountIdNo.ValueIsNullable = false
         Me.cboAccountIdNo.ValueIsNumeric = false
@@ -1298,7 +1295,7 @@ End Sub
         Friend WithEvents CFlowLayout1 As CFlowLayout
         Friend WithEvents CFlowLayout3 As CFlowLayout
         Friend WithEvents CFlowLayout4 As CFlowLayout
-        Friend WithEvents cboAccountIdNo As AtmComboBox
+        Friend WithEvents cboAccountIdNo As CdtComboBox
         Friend WithEvents lblEndingBankBalance As CLabel
         Friend WithEvents lblCreditsCleared As CLabel
         Friend WithEvents txtTotalCreditsCleared As CTextBox

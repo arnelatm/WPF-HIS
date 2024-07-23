@@ -37,9 +37,9 @@ Namespace PresentationLayer.Views.Forms
         Me.lblDocumentNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtDocumentNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
         Me.lblDocumentType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboDocumentType = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+        Me.cboDocumentType = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
         Me.lblImageType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboImageType = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+        Me.cboImageType = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkNeedsNumber = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -310,7 +310,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDocumentType.EndFindValue = Nothing
             Me.cboDocumentType.FieldDescription = Nothing
             Me.cboDocumentType.FieldName = Nothing
-            Me.cboDocumentType.FilterRule = Nothing
             Me.cboDocumentType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboDocumentType.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.cboDocumentType, True)
@@ -327,9 +326,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDocumentType.OriginalList = Nothing
             Me.cboDocumentType.OverrideDropDownStyleList = False
             Me.cboDocumentType.PreviousSearchTerm = Nothing
-            Me.cboDocumentType.PropertySelector = Nothing
             Me.cboDocumentType.SuggestBoxHeight = 200
-            Me.cboDocumentType.SuggestListOrderRule = Nothing
             Me.cboDocumentType.TextToSearch = Nothing
             Me.cboDocumentType.Translatable = False
             Me.cboDocumentType.ValueIsMandatory = False
@@ -359,7 +356,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboImageType.EndFindValue = Nothing
             Me.cboImageType.FieldDescription = Nothing
             Me.cboImageType.FieldName = Nothing
-            Me.cboImageType.FilterRule = Nothing
             Me.cboImageType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboImageType.FindEnabled = False
             Me.floDataDisplay.SetFlowBreak(Me.cboImageType, True)
@@ -376,9 +372,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboImageType.OriginalList = Nothing
             Me.cboImageType.OverrideDropDownStyleList = False
             Me.cboImageType.PreviousSearchTerm = Nothing
-            Me.cboImageType.PropertySelector = Nothing
             Me.cboImageType.SuggestBoxHeight = 200
-            Me.cboImageType.SuggestListOrderRule = Nothing
             Me.cboImageType.TextToSearch = Nothing
             Me.cboImageType.Translatable = False
             Me.cboImageType.ValueIsMandatory = False
@@ -510,9 +504,9 @@ End Sub
         Friend WithEvents lblDocumentName As CLabel
         Friend WithEvents lblNotes As CLabel
         Friend WithEvents lblDocumentType As CLabel
-        Friend WithEvents cboDocumentType As AtmComboBox
+        Friend WithEvents cboDocumentType As CdtComboBox
         Friend WithEvents lblImageType As CLabel
-        Friend WithEvents cboImageType As AtmComboBox
+        Friend WithEvents cboImageType As CdtComboBox
         Friend WithEvents lblDocumentNameAra As CLabel
         Friend WithEvents txtDocumentNameAra As CTextBoxArabic
         Friend WithEvents CLabel1 As CLabel

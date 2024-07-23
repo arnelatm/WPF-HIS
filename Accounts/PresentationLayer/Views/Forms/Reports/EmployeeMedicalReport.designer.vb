@@ -25,7 +25,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EmployeeMedicalReport))
         Me.lblEmployeeCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblReportDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -567,7 +567,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         End Sub
 
         Friend WithEvents lblEmployeeCode As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboEmployeeIdNo As Libraries.CBaseControlsLibrary.AtmComboBox
+        Friend WithEvents cboEmployeeIdNo As Libraries.CBaseControlsLibrary.CdtComboBox
         Friend WithEvents CFlowLayout1 As Libraries.CBaseControlsLibrary.CFlowLayout
         Friend WithEvents CLabel2 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel

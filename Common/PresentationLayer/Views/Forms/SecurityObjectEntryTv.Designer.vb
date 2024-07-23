@@ -36,11 +36,11 @@ Namespace PresentationLayer.Views.Forms
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtSecurityObjectCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblSystemViewIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboSystemViewIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboSystemViewIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblSecurityObjectName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblSecurityObjectNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacParentIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cacParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblManuallyGenerated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkManuallyAdded = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
@@ -269,7 +269,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboSystemViewIdNo.EndFindValue = Nothing
             Me.cboSystemViewIdNo.FieldDescription = Nothing
             Me.cboSystemViewIdNo.FieldName = Nothing
-            Me.cboSystemViewIdNo.FilterRule = Nothing
             Me.cboSystemViewIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboSystemViewIdNo.FindEnabled = False
             Me.floDataDisplay.SetFlowBreak(Me.cboSystemViewIdNo, True)
@@ -285,9 +284,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboSystemViewIdNo.OriginalList = Nothing
             Me.cboSystemViewIdNo.OverrideDropDownStyleList = False
             Me.cboSystemViewIdNo.PreviousSearchTerm = Nothing
-            Me.cboSystemViewIdNo.PropertySelector = Nothing
             Me.cboSystemViewIdNo.SuggestBoxHeight = 200
-            Me.cboSystemViewIdNo.SuggestListOrderRule = Nothing
             Me.cboSystemViewIdNo.TextToSearch = Nothing
             Me.cboSystemViewIdNo.Translatable = False
             Me.cboSystemViewIdNo.ValueIsMandatory = False
@@ -331,7 +328,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacParentIdNo.EndFindValue = Nothing
             Me.cacParentIdNo.FieldDescription = Nothing
             Me.cacParentIdNo.FieldName = Nothing
-            Me.cacParentIdNo.FilterRule = Nothing
             Me.cacParentIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cacParentIdNo.FindEnabled = False
             Me.floDataDisplay.SetFlowBreak(Me.cacParentIdNo, True)
@@ -347,9 +343,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacParentIdNo.OriginalList = Nothing
             Me.cacParentIdNo.OverrideDropDownStyleList = False
             Me.cacParentIdNo.PreviousSearchTerm = Nothing
-            Me.cacParentIdNo.PropertySelector = Nothing
             Me.cacParentIdNo.SuggestBoxHeight = 200
-            Me.cacParentIdNo.SuggestListOrderRule = Nothing
             Me.cacParentIdNo.TextToSearch = Nothing
             Me.cacParentIdNo.Translatable = False
             Me.cacParentIdNo.ValueIsMandatory = False
@@ -420,11 +414,11 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblSecurityObjectNameAra As CLabel
         Friend WithEvents lblNotes As CLabel
         Friend WithEvents lblParentIdNo As CLabel
-        Friend WithEvents cacParentIdNo As AtmComboBox
+        Friend WithEvents cacParentIdNo As CdtComboBox
         Friend WithEvents CLabel1 As CLabel
         Friend WithEvents txtSecurityObjectCode As CTextBox
         Friend WithEvents lblSystemViewIdNo As CLabel
-        Friend WithEvents cboSystemViewIdNo As AtmComboBox
+        Friend WithEvents cboSystemViewIdNo As CdtComboBox
         Friend WithEvents lblManuallyGenerated As CLabel
         Friend WithEvents chkManuallyAdded As CCheckBox
     End Class

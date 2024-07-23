@@ -85,7 +85,7 @@
             Me.lblEmployeeCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtEmployeeCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblEmployeeName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboTitle = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboTitle = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.txtEmployeeName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblEmployeeNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtEmployeeNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
@@ -95,19 +95,19 @@
             Me.lblPicture = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.imgPicture = New AATM.Libraries.CBaseControlsLibrary.CPictureBox()
             Me.lblGender = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacGender = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cacGender = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblMaritalStatus = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacMaritalStatus = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cacMaritalStatus = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblNationalityCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacNationalityCode = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cacNationalityCode = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblReligion = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacReligionIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cacReligionIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblBirthDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpBirthDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.lblNationalIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtNationalIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel4 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboBloodType = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboBloodType = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.tbpContact = New AATM.Libraries.CBaseControlsLibrary.CTabPage()
@@ -140,7 +140,7 @@
             Me.lblEmail = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblStreet = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacCountryCode = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cacCountryCode = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.tbpPayroll = New AATM.Libraries.CBaseControlsLibrary.CTabPage()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
@@ -152,7 +152,7 @@
             Me.lblBalance = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtOpeningBalance = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblOpeningBalance = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboPayCycleIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboPayCycleIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblPayCycleIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtIban = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblIban = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -161,9 +161,9 @@
             Me.lblBankAccountNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblBankIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblPaymentMethod = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboPaymentMethod = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
-            Me.cboPayGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
-            Me.cacBankIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboPaymentMethod = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
+            Me.cboPayGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
+            Me.cacBankIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.tbpEarnings = New AATM.Libraries.CBaseControlsLibrary.CTabPage()
             Me.DataGridViewEarnings = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.dgvSequenceEarning = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -235,10 +235,10 @@
             Me.lblReleasedDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpHiredDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.lblHiredDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboDesignationIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
-            Me.cboSponsorType = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
-            Me.cboSupervisorIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
-            Me.cacDepartmentIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboDesignationIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
+            Me.cboSponsorType = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
+            Me.cboSupervisorIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
+            Me.cacDepartmentIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
             Me.SplitContainer1.Panel2.SuspendLayout()
@@ -471,7 +471,6 @@
             Me.cboTitle.EndFindValue = Nothing
             Me.cboTitle.FieldDescription = Nothing
             Me.cboTitle.FieldName = Nothing
-            Me.cboTitle.FilterRule = Nothing
             Me.cboTitle.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboTitle.FindEnabled = False
             Me.cboTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -490,11 +489,9 @@
             Me.cboTitle.OriginalList = Nothing
             Me.cboTitle.OverrideDropDownStyleList = False
             Me.cboTitle.PreviousSearchTerm = Nothing
-            Me.cboTitle.PropertySelector = Nothing
             Me.cboTitle.Size = New System.Drawing.Size(63, 24)
             Me.cboTitle.SuggestBoxHeight = 200
             Me.cboTitle.SuggestCharCount = 0
-            Me.cboTitle.SuggestListOrderRule = Nothing
             Me.cboTitle.TabIndex = 2
             Me.cboTitle.TextToSearch = Nothing
             Me.cboTitle.Translatable = False
@@ -714,7 +711,6 @@
             Me.cacGender.EndFindValue = Nothing
             Me.cacGender.FieldDescription = Nothing
             Me.cacGender.FieldName = Nothing
-            Me.cacGender.FilterRule = Nothing
             Me.cacGender.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cacGender.FindEnabled = True
             Me.floPersonal.SetFlowBreak(Me.cacGender, True)
@@ -735,11 +731,9 @@
             Me.cacGender.OriginalList = Nothing
             Me.cacGender.OverrideDropDownStyleList = False
             Me.cacGender.PreviousSearchTerm = Nothing
-            Me.cacGender.PropertySelector = Nothing
             Me.cacGender.Size = New System.Drawing.Size(124, 24)
             Me.cacGender.SuggestBoxHeight = 200
             Me.cacGender.SuggestCharCount = 0
-            Me.cacGender.SuggestListOrderRule = Nothing
             Me.cacGender.TabIndex = 0
             Me.cacGender.TextToSearch = Nothing
             Me.cacGender.Translatable = False
@@ -781,7 +775,6 @@
             Me.cacMaritalStatus.EndFindValue = Nothing
             Me.cacMaritalStatus.FieldDescription = Nothing
             Me.cacMaritalStatus.FieldName = Nothing
-            Me.cacMaritalStatus.FilterRule = Nothing
             Me.cacMaritalStatus.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cacMaritalStatus.FindEnabled = True
             Me.floPersonal.SetFlowBreak(Me.cacMaritalStatus, True)
@@ -802,11 +795,9 @@
             Me.cacMaritalStatus.OriginalList = Nothing
             Me.cacMaritalStatus.OverrideDropDownStyleList = False
             Me.cacMaritalStatus.PreviousSearchTerm = Nothing
-            Me.cacMaritalStatus.PropertySelector = Nothing
             Me.cacMaritalStatus.Size = New System.Drawing.Size(278, 24)
             Me.cacMaritalStatus.SuggestBoxHeight = 200
             Me.cacMaritalStatus.SuggestCharCount = 0
-            Me.cacMaritalStatus.SuggestListOrderRule = Nothing
             Me.cacMaritalStatus.TabIndex = 1
             Me.cacMaritalStatus.TextToSearch = Nothing
             Me.cacMaritalStatus.Translatable = False
@@ -848,7 +839,6 @@
             Me.cacNationalityCode.EndFindValue = Nothing
             Me.cacNationalityCode.FieldDescription = Nothing
             Me.cacNationalityCode.FieldName = Nothing
-            Me.cacNationalityCode.FilterRule = Nothing
             Me.cacNationalityCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cacNationalityCode.FindEnabled = False
             Me.floPersonal.SetFlowBreak(Me.cacNationalityCode, True)
@@ -869,11 +859,9 @@
             Me.cacNationalityCode.OriginalList = Nothing
             Me.cacNationalityCode.OverrideDropDownStyleList = False
             Me.cacNationalityCode.PreviousSearchTerm = Nothing
-            Me.cacNationalityCode.PropertySelector = Nothing
             Me.cacNationalityCode.Size = New System.Drawing.Size(277, 24)
             Me.cacNationalityCode.SuggestBoxHeight = 246
             Me.cacNationalityCode.SuggestCharCount = 0
-            Me.cacNationalityCode.SuggestListOrderRule = Nothing
             Me.cacNationalityCode.TabIndex = 2
             Me.cacNationalityCode.TextToSearch = Nothing
             Me.cacNationalityCode.Translatable = False
@@ -915,7 +903,6 @@
             Me.cacReligionIdNo.EndFindValue = Nothing
             Me.cacReligionIdNo.FieldDescription = Nothing
             Me.cacReligionIdNo.FieldName = Nothing
-            Me.cacReligionIdNo.FilterRule = Nothing
             Me.cacReligionIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cacReligionIdNo.FindEnabled = False
             Me.floPersonal.SetFlowBreak(Me.cacReligionIdNo, True)
@@ -936,11 +923,9 @@
             Me.cacReligionIdNo.OriginalList = Nothing
             Me.cacReligionIdNo.OverrideDropDownStyleList = False
             Me.cacReligionIdNo.PreviousSearchTerm = Nothing
-            Me.cacReligionIdNo.PropertySelector = Nothing
             Me.cacReligionIdNo.Size = New System.Drawing.Size(277, 24)
             Me.cacReligionIdNo.SuggestBoxHeight = 246
             Me.cacReligionIdNo.SuggestCharCount = 0
-            Me.cacReligionIdNo.SuggestListOrderRule = Nothing
             Me.cacReligionIdNo.TabIndex = 3
             Me.cacReligionIdNo.TextToSearch = Nothing
             Me.cacReligionIdNo.Translatable = False
@@ -1077,7 +1062,6 @@
             Me.cboBloodType.EndFindValue = Nothing
             Me.cboBloodType.FieldDescription = Nothing
             Me.cboBloodType.FieldName = Nothing
-            Me.cboBloodType.FilterRule = Nothing
             Me.cboBloodType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboBloodType.FindEnabled = False
             Me.floPersonal.SetFlowBreak(Me.cboBloodType, True)
@@ -1098,11 +1082,9 @@
             Me.cboBloodType.OriginalList = Nothing
             Me.cboBloodType.OverrideDropDownStyleList = False
             Me.cboBloodType.PreviousSearchTerm = Nothing
-            Me.cboBloodType.PropertySelector = Nothing
             Me.cboBloodType.Size = New System.Drawing.Size(278, 24)
             Me.cboBloodType.SuggestBoxHeight = 200
             Me.cboBloodType.SuggestCharCount = 0
-            Me.cboBloodType.SuggestListOrderRule = Nothing
             Me.cboBloodType.TabIndex = 6
             Me.cboBloodType.TextToSearch = Nothing
             Me.cboBloodType.Translatable = False
@@ -1857,7 +1839,6 @@
             Me.cacCountryCode.EndFindValue = Nothing
             Me.cacCountryCode.FieldDescription = Nothing
             Me.cacCountryCode.FieldName = Nothing
-            Me.cacCountryCode.FilterRule = Nothing
             Me.cacCountryCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cacCountryCode.FindEnabled = False
             Me.cacCountryCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -1876,11 +1857,9 @@
             Me.cacCountryCode.OriginalList = Nothing
             Me.cacCountryCode.OverrideDropDownStyleList = False
             Me.cacCountryCode.PreviousSearchTerm = Nothing
-            Me.cacCountryCode.PropertySelector = Nothing
             Me.cacCountryCode.Size = New System.Drawing.Size(239, 24)
             Me.cacCountryCode.SuggestBoxHeight = 246
             Me.cacCountryCode.SuggestCharCount = 0
-            Me.cacCountryCode.SuggestListOrderRule = Nothing
             Me.cacCountryCode.TabIndex = 5
             Me.cacCountryCode.TextToSearch = Nothing
             Me.cacCountryCode.Translatable = False
@@ -2176,7 +2155,6 @@
             Me.cboPayCycleIdNo.EndFindValue = Nothing
             Me.cboPayCycleIdNo.FieldDescription = Nothing
             Me.cboPayCycleIdNo.FieldName = Nothing
-            Me.cboPayCycleIdNo.FilterRule = Nothing
             Me.cboPayCycleIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboPayCycleIdNo.FindEnabled = False
             Me.cboPayCycleIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -2195,12 +2173,10 @@
             Me.cboPayCycleIdNo.OriginalList = Nothing
             Me.cboPayCycleIdNo.OverrideDropDownStyleList = False
             Me.cboPayCycleIdNo.PreviousSearchTerm = Nothing
-            Me.cboPayCycleIdNo.PropertySelector = Nothing
             Me.cboPayCycleIdNo.SecurityKey = "EmployeePayInfo"
             Me.cboPayCycleIdNo.Size = New System.Drawing.Size(201, 22)
             Me.cboPayCycleIdNo.SuggestBoxHeight = 200
             Me.cboPayCycleIdNo.SuggestCharCount = 0
-            Me.cboPayCycleIdNo.SuggestListOrderRule = Nothing
             Me.cboPayCycleIdNo.TabIndex = 5
             Me.cboPayCycleIdNo.TextToSearch = Nothing
             Me.cboPayCycleIdNo.Translatable = False
@@ -2393,7 +2369,6 @@
             Me.cboPaymentMethod.EndFindValue = Nothing
             Me.cboPaymentMethod.FieldDescription = Nothing
             Me.cboPaymentMethod.FieldName = Nothing
-            Me.cboPaymentMethod.FilterRule = Nothing
             Me.cboPaymentMethod.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboPaymentMethod.FindEnabled = False
             Me.cboPaymentMethod.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -2412,12 +2387,10 @@
             Me.cboPaymentMethod.OriginalList = Nothing
             Me.cboPaymentMethod.OverrideDropDownStyleList = False
             Me.cboPaymentMethod.PreviousSearchTerm = Nothing
-            Me.cboPaymentMethod.PropertySelector = Nothing
             Me.cboPaymentMethod.SecurityKey = "EmployeePayInfo"
             Me.cboPaymentMethod.Size = New System.Drawing.Size(402, 22)
             Me.cboPaymentMethod.SuggestBoxHeight = 200
             Me.cboPaymentMethod.SuggestCharCount = 0
-            Me.cboPaymentMethod.SuggestListOrderRule = Nothing
             Me.cboPaymentMethod.TabIndex = 0
             Me.cboPaymentMethod.TextToSearch = Nothing
             Me.cboPaymentMethod.Translatable = False
@@ -2443,7 +2416,6 @@
             Me.cboPayGroupIdNo.EndFindValue = Nothing
             Me.cboPayGroupIdNo.FieldDescription = Nothing
             Me.cboPayGroupIdNo.FieldName = Nothing
-            Me.cboPayGroupIdNo.FilterRule = Nothing
             Me.cboPayGroupIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboPayGroupIdNo.FindEnabled = False
             Me.cboPayGroupIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -2462,12 +2434,10 @@
             Me.cboPayGroupIdNo.OriginalList = Nothing
             Me.cboPayGroupIdNo.OverrideDropDownStyleList = False
             Me.cboPayGroupIdNo.PreviousSearchTerm = Nothing
-            Me.cboPayGroupIdNo.PropertySelector = Nothing
             Me.cboPayGroupIdNo.SecurityKey = "EmployeePayInfo"
             Me.cboPayGroupIdNo.Size = New System.Drawing.Size(201, 22)
             Me.cboPayGroupIdNo.SuggestBoxHeight = 200
             Me.cboPayGroupIdNo.SuggestCharCount = 0
-            Me.cboPayGroupIdNo.SuggestListOrderRule = Nothing
             Me.cboPayGroupIdNo.TabIndex = 3
             Me.cboPayGroupIdNo.TextToSearch = Nothing
             Me.cboPayGroupIdNo.Translatable = False
@@ -2493,7 +2463,6 @@
             Me.cacBankIdNo.EndFindValue = Nothing
             Me.cacBankIdNo.FieldDescription = Nothing
             Me.cacBankIdNo.FieldName = Nothing
-            Me.cacBankIdNo.FilterRule = Nothing
             Me.cacBankIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cacBankIdNo.FindEnabled = False
             Me.cacBankIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -2513,12 +2482,10 @@
             Me.cacBankIdNo.OriginalList = Nothing
             Me.cacBankIdNo.OverrideDropDownStyleList = False
             Me.cacBankIdNo.PreviousSearchTerm = Nothing
-            Me.cacBankIdNo.PropertySelector = Nothing
             Me.cacBankIdNo.SecurityKey = "EmployeePayInfo"
             Me.cacBankIdNo.Size = New System.Drawing.Size(402, 22)
             Me.cacBankIdNo.SuggestBoxHeight = 246
             Me.cacBankIdNo.SuggestCharCount = 0
-            Me.cacBankIdNo.SuggestListOrderRule = Nothing
             Me.cacBankIdNo.TabIndex = 1
             Me.cacBankIdNo.TextToSearch = Nothing
             Me.cacBankIdNo.Translatable = False
@@ -3964,7 +3931,6 @@
             Me.cboDesignationIdNo.EndFindValue = Nothing
             Me.cboDesignationIdNo.FieldDescription = Nothing
             Me.cboDesignationIdNo.FieldName = Nothing
-            Me.cboDesignationIdNo.FilterRule = Nothing
             Me.cboDesignationIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboDesignationIdNo.FindEnabled = False
             Me.cboDesignationIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -3983,11 +3949,9 @@
             Me.cboDesignationIdNo.OriginalList = Nothing
             Me.cboDesignationIdNo.OverrideDropDownStyleList = False
             Me.cboDesignationIdNo.PreviousSearchTerm = Nothing
-            Me.cboDesignationIdNo.PropertySelector = Nothing
             Me.cboDesignationIdNo.Size = New System.Drawing.Size(430, 24)
             Me.cboDesignationIdNo.SuggestBoxHeight = 246
             Me.cboDesignationIdNo.SuggestCharCount = 0
-            Me.cboDesignationIdNo.SuggestListOrderRule = Nothing
             Me.cboDesignationIdNo.TabIndex = 3
             Me.cboDesignationIdNo.TextToSearch = Nothing
             Me.cboDesignationIdNo.Translatable = False
@@ -4013,7 +3977,6 @@
             Me.cboSponsorType.EndFindValue = Nothing
             Me.cboSponsorType.FieldDescription = Nothing
             Me.cboSponsorType.FieldName = Nothing
-            Me.cboSponsorType.FilterRule = Nothing
             Me.cboSponsorType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboSponsorType.FindEnabled = False
             Me.cboSponsorType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -4032,11 +3995,9 @@
             Me.cboSponsorType.OriginalList = Nothing
             Me.cboSponsorType.OverrideDropDownStyleList = False
             Me.cboSponsorType.PreviousSearchTerm = Nothing
-            Me.cboSponsorType.PropertySelector = Nothing
             Me.cboSponsorType.Size = New System.Drawing.Size(277, 24)
             Me.cboSponsorType.SuggestBoxHeight = 246
             Me.cboSponsorType.SuggestCharCount = 0
-            Me.cboSponsorType.SuggestListOrderRule = Nothing
             Me.cboSponsorType.TabIndex = 4
             Me.cboSponsorType.TextToSearch = Nothing
             Me.cboSponsorType.Translatable = False
@@ -4062,7 +4023,6 @@
             Me.cboSupervisorIdNo.EndFindValue = Nothing
             Me.cboSupervisorIdNo.FieldDescription = Nothing
             Me.cboSupervisorIdNo.FieldName = Nothing
-            Me.cboSupervisorIdNo.FilterRule = Nothing
             Me.cboSupervisorIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboSupervisorIdNo.FindEnabled = False
             Me.cboSupervisorIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -4081,11 +4041,9 @@
             Me.cboSupervisorIdNo.OriginalList = Nothing
             Me.cboSupervisorIdNo.OverrideDropDownStyleList = False
             Me.cboSupervisorIdNo.PreviousSearchTerm = Nothing
-            Me.cboSupervisorIdNo.PropertySelector = Nothing
             Me.cboSupervisorIdNo.Size = New System.Drawing.Size(277, 24)
             Me.cboSupervisorIdNo.SuggestBoxHeight = 246
             Me.cboSupervisorIdNo.SuggestCharCount = 0
-            Me.cboSupervisorIdNo.SuggestListOrderRule = Nothing
             Me.cboSupervisorIdNo.TabIndex = 5
             Me.cboSupervisorIdNo.TextToSearch = Nothing
             Me.cboSupervisorIdNo.Translatable = False
@@ -4111,7 +4069,6 @@
             Me.cacDepartmentIdNo.EndFindValue = Nothing
             Me.cacDepartmentIdNo.FieldDescription = Nothing
             Me.cacDepartmentIdNo.FieldName = Nothing
-            Me.cacDepartmentIdNo.FilterRule = Nothing
             Me.cacDepartmentIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cacDepartmentIdNo.FindEnabled = False
             Me.cacDepartmentIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -4130,11 +4087,9 @@
             Me.cacDepartmentIdNo.OriginalList = Nothing
             Me.cacDepartmentIdNo.OverrideDropDownStyleList = False
             Me.cacDepartmentIdNo.PreviousSearchTerm = Nothing
-            Me.cacDepartmentIdNo.PropertySelector = Nothing
             Me.cacDepartmentIdNo.Size = New System.Drawing.Size(430, 24)
             Me.cacDepartmentIdNo.SuggestBoxHeight = 246
             Me.cacDepartmentIdNo.SuggestCharCount = 0
-            Me.cacDepartmentIdNo.SuggestListOrderRule = Nothing
             Me.cacDepartmentIdNo.TabIndex = 2
             Me.cacDepartmentIdNo.TextToSearch = Nothing
             Me.cacDepartmentIdNo.Translatable = False
@@ -4225,7 +4180,7 @@
         Friend WithEvents bsDocuments As BindingSource
         Friend WithEvents dgvEmployeeDocumentIdNo As DataGridViewTextBoxColumn
         Friend WithEvents dgvDocumentNote As Libraries.CBaseControlsLibrary.CDgvTextColumn
-        Friend WithEvents cboTitle As Libraries.CBaseControlsLibrary.AtmComboBox
+        Friend WithEvents cboTitle As Libraries.CBaseControlsLibrary.CdtComboBox
         Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
         Friend WithEvents tbcEmployeeInformation As Libraries.CBaseControlsLibrary.CTabControl
         Friend WithEvents tbpPersonal As Libraries.CBaseControlsLibrary.CTabPage
@@ -4233,9 +4188,9 @@
         Friend WithEvents lblPicture As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents imgPicture As Libraries.CBaseControlsLibrary.CPictureBox
         Friend WithEvents lblGender As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cacGender As Libraries.CBaseControlsLibrary.AtmComboBox
+        Friend WithEvents cacGender As Libraries.CBaseControlsLibrary.CdtComboBox
         Friend WithEvents lblMaritalStatus As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cacMaritalStatus As Libraries.CBaseControlsLibrary.AtmComboBox
+        Friend WithEvents cacMaritalStatus As Libraries.CBaseControlsLibrary.CdtComboBox
         Friend WithEvents lblNationalityCode As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblReligion As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblBirthDate As Libraries.CBaseControlsLibrary.CLabel
@@ -4243,7 +4198,7 @@
         Friend WithEvents lblNationalIdNo As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtNationalIdNo As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents CLabel4 As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboBloodType As Libraries.CBaseControlsLibrary.AtmComboBox
+        Friend WithEvents cboBloodType As Libraries.CBaseControlsLibrary.CdtComboBox
         Friend WithEvents lblNotes As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtNotes As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents tbpContact As Libraries.CBaseControlsLibrary.CTabPage
@@ -4288,7 +4243,7 @@
         Friend WithEvents lblBalance As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtOpeningBalance As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblOpeningBalance As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboPayCycleIdNo As Libraries.CBaseControlsLibrary.AtmComboBox
+        Friend WithEvents cboPayCycleIdNo As Libraries.CBaseControlsLibrary.CdtComboBox
         Friend WithEvents lblPayCycleIdNo As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtIban As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblIban As Libraries.CBaseControlsLibrary.CLabel
@@ -4296,8 +4251,8 @@
         Friend WithEvents txtBankAccountNo As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblBankAccountNo As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblBankIdNo As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboPaymentMethod As Libraries.CBaseControlsLibrary.AtmComboBox
-        Friend WithEvents cboPayGroupIdNo As Libraries.CBaseControlsLibrary.AtmComboBox
+        Friend WithEvents cboPaymentMethod As Libraries.CBaseControlsLibrary.CdtComboBox
+        Friend WithEvents cboPayGroupIdNo As Libraries.CBaseControlsLibrary.CdtComboBox
         Friend WithEvents tbpEarnings As Libraries.CBaseControlsLibrary.CTabPage
         Friend WithEvents DataGridViewEarnings As Libraries.CBaseControlsLibrary.CtDataGridView
         Friend WithEvents dgvSequenceEarning As Libraries.CBaseControlsLibrary.CDgvTextColumn
@@ -4343,15 +4298,15 @@
         Friend WithEvents dgvEmployeeIdNo As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn1 As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents tbpEmployeInformation As AATM.Libraries.CBaseControlsLibrary.CTabPage
-        Friend WithEvents cacBankIdNo As Libraries.CBaseControlsLibrary.AtmComboBox
+        Friend WithEvents cacBankIdNo As Libraries.CBaseControlsLibrary.CdtComboBox
         Friend WithEvents dtpHiredDate As Libraries.CBaseControlsLibrary.CCustomDateTimePicker
-        Friend WithEvents cboDesignationIdNo As Libraries.CBaseControlsLibrary.AtmComboBox
-        Friend WithEvents cboSponsorType As Libraries.CBaseControlsLibrary.AtmComboBox
-        Friend WithEvents cboSupervisorIdNo As Libraries.CBaseControlsLibrary.AtmComboBox
-        Friend WithEvents cacDepartmentIdNo As Libraries.CBaseControlsLibrary.AtmComboBox
-        Friend WithEvents cacCountryCode As Libraries.CBaseControlsLibrary.AtmComboBox
-        Friend WithEvents cacNationalityCode As Libraries.CBaseControlsLibrary.AtmComboBox
-        Friend WithEvents cacReligionIdNo As Libraries.CBaseControlsLibrary.AtmComboBox
+        Friend WithEvents cboDesignationIdNo As Libraries.CBaseControlsLibrary.CdtComboBox
+        Friend WithEvents cboSponsorType As Libraries.CBaseControlsLibrary.CdtComboBox
+        Friend WithEvents cboSupervisorIdNo As Libraries.CBaseControlsLibrary.CdtComboBox
+        Friend WithEvents cacDepartmentIdNo As Libraries.CBaseControlsLibrary.CdtComboBox
+        Friend WithEvents cacCountryCode As Libraries.CBaseControlsLibrary.CdtComboBox
+        Friend WithEvents cacNationalityCode As Libraries.CBaseControlsLibrary.CdtComboBox
+        Friend WithEvents cacReligionIdNo As Libraries.CBaseControlsLibrary.CdtComboBox
         Friend WithEvents dgvSequenceLeaveCredits As DataGridViewTextBoxColumn
         Friend WithEvents dgvLeaveIdNo As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
         Friend WithEvents dgvLeaveAllowed As Libraries.CBaseControlsLibrary.CDgvDecimalColumn

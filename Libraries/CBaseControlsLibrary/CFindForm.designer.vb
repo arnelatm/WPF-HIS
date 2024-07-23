@@ -33,11 +33,11 @@ Partial Class CFindForm
         Me.RBtnStart = New System.Windows.Forms.RadioButton()
         Me.RBtnAnywhere = New System.Windows.Forms.RadioButton()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.cbtTextToSearch = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+        Me.cbtTextToSearch = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
         Me.txtEndValue = New System.Windows.Forms.TextBox()
         Me.txtBegValue = New System.Windows.Forms.TextBox()
         Me.lblTo1 = New System.Windows.Forms.Label()
-        Me.cboTextToSearch = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+        Me.cboTextToSearch = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
         Me.dtpEndDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.dtpBegDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.cgbStringFindOption = New AATM.Libraries.CBaseControlsLibrary.CGroupBox()
@@ -534,7 +534,7 @@ Partial Class CFindForm
     Friend WithEvents RBtnStart As RadioButton
     Friend WithEvents RBtnAnywhere As RadioButton
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
-    Public WithEvents cboTextToSearch As AtmComboBox
+    Public WithEvents cboTextToSearch As CdtComboBox
     Friend WithEvents lblTo1 As Label
     Friend WithEvents chkChecked As UcCheckBox
     Friend WithEvents dtpEndDate As CCustomDateTimePicker
@@ -549,6 +549,6 @@ Partial Class CFindForm
     Friend WithEvents lblIgnoreCase As Label
     Friend WithEvents BtnCancel As Button
     Friend WithEvents BtnFind As Button
-    Friend WithEvents cbtTextToSearch As AtmComboBox
+    Friend WithEvents cbtTextToSearch As CdtComboBox
     Friend WithEvents CtDataGridViewWithFooter1 As CtDataGridViewWithFooter
 End Class

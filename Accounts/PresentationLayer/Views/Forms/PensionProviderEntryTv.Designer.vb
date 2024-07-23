@@ -76,9 +76,9 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.cacCountryCode = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
-            Me.cacBankIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
-            Me.cacPaymentMethod = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cacCountryCode = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
+            Me.cacBankIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
+            Me.cacPaymentMethod = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblActive = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkActive = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -923,7 +923,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacCountryCode.EndFindValue = Nothing
             Me.cacCountryCode.FieldDescription = Nothing
             Me.cacCountryCode.FieldName = Nothing
-            Me.cacCountryCode.FilterRule = Nothing
             Me.cacCountryCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cacCountryCode.FindEnabled = False
             Me.floDataDisplay.SetFlowBreak(Me.cacCountryCode, True)
@@ -939,9 +938,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacCountryCode.OriginalList = Nothing
             Me.cacCountryCode.OverrideDropDownStyleList = False
             Me.cacCountryCode.PreviousSearchTerm = Nothing
-            Me.cacCountryCode.PropertySelector = Nothing
             Me.cacCountryCode.SuggestBoxHeight = 200
-            Me.cacCountryCode.SuggestListOrderRule = Nothing
             Me.cacCountryCode.TextToSearch = Nothing
             Me.cacCountryCode.Translatable = False
             Me.cacCountryCode.ValueIsMandatory = False
@@ -961,7 +958,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacBankIdNo.EndFindValue = Nothing
             Me.cacBankIdNo.FieldDescription = Nothing
             Me.cacBankIdNo.FieldName = Nothing
-            Me.cacBankIdNo.FilterRule = Nothing
             Me.cacBankIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cacBankIdNo.FindEnabled = False
             resources.ApplyResources(Me.cacBankIdNo, "cacBankIdNo")
@@ -976,9 +972,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacBankIdNo.OriginalList = Nothing
             Me.cacBankIdNo.OverrideDropDownStyleList = False
             Me.cacBankIdNo.PreviousSearchTerm = Nothing
-            Me.cacBankIdNo.PropertySelector = Nothing
             Me.cacBankIdNo.SuggestBoxHeight = 200
-            Me.cacBankIdNo.SuggestListOrderRule = Nothing
             Me.cacBankIdNo.TextToSearch = Nothing
             Me.cacBankIdNo.Translatable = False
             Me.cacBankIdNo.ValueIsMandatory = False
@@ -998,7 +992,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacPaymentMethod.EndFindValue = Nothing
             Me.cacPaymentMethod.FieldDescription = Nothing
             Me.cacPaymentMethod.FieldName = Nothing
-            Me.cacPaymentMethod.FilterRule = Nothing
             Me.cacPaymentMethod.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cacPaymentMethod.FindEnabled = False
             Me.floDataDisplay.SetFlowBreak(Me.cacPaymentMethod, True)
@@ -1014,9 +1007,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacPaymentMethod.OriginalList = Nothing
             Me.cacPaymentMethod.OverrideDropDownStyleList = False
             Me.cacPaymentMethod.PreviousSearchTerm = Nothing
-            Me.cacPaymentMethod.PropertySelector = Nothing
             Me.cacPaymentMethod.SuggestBoxHeight = 200
-            Me.cacPaymentMethod.SuggestListOrderRule = Nothing
             Me.cacPaymentMethod.TextToSearch = Nothing
             Me.cacPaymentMethod.Translatable = False
             Me.cacPaymentMethod.ValueIsMandatory = False
@@ -1131,9 +1122,9 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblPaymentMethod As CLabel
         Friend WithEvents chkActive As CCheckBox
         Friend WithEvents lblActive As CLabel
-        Friend WithEvents cacCountryCode As AtmComboBox
-        Friend WithEvents cacBankIdNo As AtmComboBox
-        Friend WithEvents cacPaymentMethod As AtmComboBox
+        Friend WithEvents cacCountryCode As CdtComboBox
+        Friend WithEvents cacBankIdNo As CdtComboBox
+        Friend WithEvents cacPaymentMethod As CdtComboBox
         Friend WithEvents CLabel1 As CLabel
     End Class
 End Namespace

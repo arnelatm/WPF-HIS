@@ -44,14 +44,14 @@ Namespace PresentationLayer.Views.Forms
             Me.tbpMain = New System.Windows.Forms.TabPage()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.tlpMainTab = New System.Windows.Forms.TableLayoutPanel()
-            Me.cboPensionProviderIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboPensionProviderIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblPensionProviderIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.tbpPensionRates = New System.Windows.Forms.TabPage()
             Me.tlpPostingAccounts = New System.Windows.Forms.TableLayoutPanel()
             Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.DataGridViewPensionRates = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvLowRange = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
@@ -182,7 +182,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPensionProviderIdNo.EndFindValue = Nothing
             Me.cboPensionProviderIdNo.FieldDescription = Nothing
             Me.cboPensionProviderIdNo.FieldName = Nothing
-            Me.cboPensionProviderIdNo.FilterRule = Nothing
             Me.cboPensionProviderIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboPensionProviderIdNo.FindEnabled = False
             Me.cboPensionProviderIdNo.ForeColor = System.Drawing.Color.Black
@@ -196,9 +195,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPensionProviderIdNo.OriginalList = Nothing
             Me.cboPensionProviderIdNo.OverrideDropDownStyleList = False
             Me.cboPensionProviderIdNo.PreviousSearchTerm = Nothing
-            Me.cboPensionProviderIdNo.PropertySelector = Nothing
             Me.cboPensionProviderIdNo.SuggestBoxHeight = 200
-            Me.cboPensionProviderIdNo.SuggestListOrderRule = Nothing
             Me.cboPensionProviderIdNo.TextToSearch = Nothing
             Me.cboPensionProviderIdNo.Translatable = False
             Me.cboPensionProviderIdNo.ValueIsMandatory = False
@@ -288,7 +285,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.EndFindValue = Nothing
             Me.cboAccountIdNo.FieldDescription = Nothing
             Me.cboAccountIdNo.FieldName = Nothing
-            Me.cboAccountIdNo.FilterRule = Nothing
             Me.cboAccountIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboAccountIdNo.FindEnabled = False
             Me.cboAccountIdNo.ForeColor = System.Drawing.Color.Black
@@ -302,9 +298,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.OriginalList = Nothing
             Me.cboAccountIdNo.OverrideDropDownStyleList = False
             Me.cboAccountIdNo.PreviousSearchTerm = Nothing
-            Me.cboAccountIdNo.PropertySelector = Nothing
             Me.cboAccountIdNo.SuggestBoxHeight = 200
-            Me.cboAccountIdNo.SuggestListOrderRule = Nothing
             Me.cboAccountIdNo.TextToSearch = Nothing
             Me.cboAccountIdNo.Translatable = False
             Me.cboAccountIdNo.ValueIsMandatory = False
@@ -700,14 +694,14 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents tbpMain As TabPage
         Friend WithEvents CFlowLayout1 As CFlowLayout
         Friend WithEvents tlpMainTab As TableLayoutPanel
-        Friend WithEvents cboPensionProviderIdNo As AtmComboBox
+        Friend WithEvents cboPensionProviderIdNo As CdtComboBox
         Friend WithEvents lblPensionProviderIdNo As CLabel
         Friend WithEvents txtNotes As CTextBox
         Friend WithEvents lblNotes As CLabel
         Friend WithEvents tbpPensionRates As TabPage
         Friend WithEvents tlpPostingAccounts As TableLayoutPanel
         Friend WithEvents lblAccountIdNo As CLabel
-        Friend WithEvents cboAccountIdNo As AtmComboBox
+        Friend WithEvents cboAccountIdNo As CdtComboBox
         Friend WithEvents DataGridViewPensionRates As CtDataGridView
         Friend WithEvents dgvSequence As CDgvTextColumn
         Friend WithEvents dgvLowRange As CdgvMoneyColumn

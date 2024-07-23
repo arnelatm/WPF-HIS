@@ -27,9 +27,9 @@ Partial Class EmployeeLeaveEarnedEntry
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+        Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
         Me.lblLeaveName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboLeaveIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+        Me.cboLeaveIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
         Me.lblStartDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.dtpStartDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.lblEndDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -39,13 +39,13 @@ Partial Class EmployeeLeaveEarnedEntry
         Me.lblReason = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtReason = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblenteredBy = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboenteredBy = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+        Me.cboenteredBy = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
         Me.lblApproved = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.chkApproved = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
         Me.lblDisapproved = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.chkDisapproved = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
         Me.lblApprovedBy = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboApprovedBy = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+        Me.cboApprovedBy = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
         Me.lblApprovalNote = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtApprovalNote = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -174,7 +174,6 @@ Partial Class EmployeeLeaveEarnedEntry
         Me.cboEmployeeIdNo.EndFindValue = Nothing
         Me.cboEmployeeIdNo.FieldDescription = Nothing
         Me.cboEmployeeIdNo.FieldName = Nothing
-        Me.cboEmployeeIdNo.FilterRule = Nothing
         Me.cboEmployeeIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.cboEmployeeIdNo.FindEnabled = True
         Me.CFlowLayout1.SetFlowBreak(Me.cboEmployeeIdNo, True)
@@ -195,11 +194,9 @@ Partial Class EmployeeLeaveEarnedEntry
         Me.cboEmployeeIdNo.OriginalList = Nothing
         Me.cboEmployeeIdNo.OverrideDropDownStyleList = False
         Me.cboEmployeeIdNo.PreviousSearchTerm = Nothing
-        Me.cboEmployeeIdNo.PropertySelector = Nothing
         Me.cboEmployeeIdNo.Size = New System.Drawing.Size(717, 29)
         Me.cboEmployeeIdNo.SuggestBoxHeight = 200
         Me.cboEmployeeIdNo.SuggestCharCount = 0
-        Me.cboEmployeeIdNo.SuggestListOrderRule = Nothing
         Me.cboEmployeeIdNo.TabIndex = 1
         Me.cboEmployeeIdNo.TextToSearch = Nothing
         Me.cboEmployeeIdNo.Translatable = False
@@ -238,7 +235,6 @@ Partial Class EmployeeLeaveEarnedEntry
         Me.cboLeaveIdNo.EndFindValue = Nothing
         Me.cboLeaveIdNo.FieldDescription = Nothing
         Me.cboLeaveIdNo.FieldName = Nothing
-        Me.cboLeaveIdNo.FilterRule = Nothing
         Me.cboLeaveIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.cboLeaveIdNo.FindEnabled = True
         Me.CFlowLayout1.SetFlowBreak(Me.cboLeaveIdNo, True)
@@ -258,11 +254,9 @@ Partial Class EmployeeLeaveEarnedEntry
         Me.cboLeaveIdNo.OriginalList = Nothing
         Me.cboLeaveIdNo.OverrideDropDownStyleList = False
         Me.cboLeaveIdNo.PreviousSearchTerm = Nothing
-        Me.cboLeaveIdNo.PropertySelector = Nothing
         Me.cboLeaveIdNo.Size = New System.Drawing.Size(717, 28)
         Me.cboLeaveIdNo.SuggestBoxHeight = 200
         Me.cboLeaveIdNo.SuggestCharCount = 0
-        Me.cboLeaveIdNo.SuggestListOrderRule = Nothing
         Me.cboLeaveIdNo.TabIndex = 2
         Me.cboLeaveIdNo.TextToSearch = Nothing
         Me.cboLeaveIdNo.Translatable = False
@@ -494,7 +488,6 @@ Partial Class EmployeeLeaveEarnedEntry
         Me.cboenteredBy.EndFindValue = Nothing
         Me.cboenteredBy.FieldDescription = Nothing
         Me.cboenteredBy.FieldName = Nothing
-        Me.cboenteredBy.FilterRule = Nothing
         Me.cboenteredBy.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.cboenteredBy.FindEnabled = True
         Me.CFlowLayout1.SetFlowBreak(Me.cboenteredBy, True)
@@ -514,12 +507,9 @@ Partial Class EmployeeLeaveEarnedEntry
         Me.cboenteredBy.OriginalDataSource = Nothing
         Me.cboenteredBy.OriginalList = Nothing
         Me.cboenteredBy.OverrideDropDownStyleList = False
-        Me.cboenteredBy.PreviousSearchTerm = Nothing
-        Me.cboenteredBy.PropertySelector = Nothing
         Me.cboenteredBy.Size = New System.Drawing.Size(717, 31)
         Me.cboenteredBy.SuggestBoxHeight = 200
         Me.cboenteredBy.SuggestCharCount = 0
-        Me.cboenteredBy.SuggestListOrderRule = Nothing
         Me.cboenteredBy.TabIndex = 7
         Me.cboenteredBy.TextToSearch = Nothing
         Me.cboenteredBy.Translatable = False
@@ -661,7 +651,6 @@ Partial Class EmployeeLeaveEarnedEntry
         Me.cboApprovedBy.EndFindValue = Nothing
         Me.cboApprovedBy.FieldDescription = Nothing
         Me.cboApprovedBy.FieldName = Nothing
-        Me.cboApprovedBy.FilterRule = Nothing
         Me.cboApprovedBy.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[Integer]
         Me.cboApprovedBy.FindEnabled = True
         Me.CFlowLayout1.SetFlowBreak(Me.cboApprovedBy, True)
@@ -682,12 +671,10 @@ Partial Class EmployeeLeaveEarnedEntry
         Me.cboApprovedBy.OriginalList = Nothing
         Me.cboApprovedBy.OverrideDropDownStyleList = False
         Me.cboApprovedBy.PreviousSearchTerm = Nothing
-        Me.cboApprovedBy.PropertySelector = Nothing
         Me.cboApprovedBy.Size = New System.Drawing.Size(717, 28)
         Me.cboApprovedBy.SuggestBoxHeight = 200
         Me.cboApprovedBy.SuggestCharCount = 0
-        Me.cboApprovedBy.SuggestListOrderRule = Nothing
-        Me.cboApprovedBy.TabIndex = 10
+
         Me.cboApprovedBy.TextToSearch = Nothing
         Me.cboApprovedBy.Translatable = False
         Me.cboApprovedBy.ValueIsMandatory = False
@@ -813,9 +800,9 @@ Partial Class EmployeeLeaveEarnedEntry
     Friend WithEvents lblIdNo As Libraries.CBaseControlsLibrary.CLabel
     Public WithEvents TxtIdNo As Libraries.CBaseControlsLibrary.CTextBox
     Friend WithEvents lblEmployeeIdNo As Libraries.CBaseControlsLibrary.CLabel
-    Public WithEvents cboEmployeeIdNo As Libraries.CBaseControlsLibrary.AtmComboBox
+    Public WithEvents cboEmployeeIdNo As Libraries.CBaseControlsLibrary.CdtComboBox
     Friend WithEvents lblLeaveName As Libraries.CBaseControlsLibrary.CLabel
-    Public WithEvents cboLeaveIdNo As Libraries.CBaseControlsLibrary.AtmComboBox
+    Public WithEvents cboLeaveIdNo As Libraries.CBaseControlsLibrary.CdtComboBox
     Friend WithEvents lblStartDate As Libraries.CBaseControlsLibrary.CLabel
     Public WithEvents dtpStartDate As Libraries.CBaseControlsLibrary.CCustomDateTimePicker
     Friend WithEvents lblEndDate As Libraries.CBaseControlsLibrary.CLabel
@@ -825,13 +812,13 @@ Partial Class EmployeeLeaveEarnedEntry
     Friend WithEvents lblReason As Libraries.CBaseControlsLibrary.CLabel
     Public WithEvents txtReason As Libraries.CBaseControlsLibrary.CTextBox
     Friend WithEvents lblenteredBy As Libraries.CBaseControlsLibrary.CLabel
-    Public WithEvents cboenteredBy As Libraries.CBaseControlsLibrary.AtmComboBox
+    Public WithEvents cboenteredBy As Libraries.CBaseControlsLibrary.CdtComboBox
     Friend WithEvents lblApproved As Libraries.CBaseControlsLibrary.CLabel
     Friend WithEvents chkApproved As Libraries.CBaseControlsLibrary.CCheckBox
     Friend WithEvents lblDateCreated As Libraries.CBaseControlsLibrary.CLabel
     Public WithEvents txtDateCreated As Libraries.CBaseControlsLibrary.CTextBox
     Friend WithEvents lblApprovedBy As Libraries.CBaseControlsLibrary.CLabel
-    Public WithEvents cboApprovedBy As Libraries.CBaseControlsLibrary.AtmComboBox
+    Public WithEvents cboApprovedBy As Libraries.CBaseControlsLibrary.CdtComboBox
     Friend WithEvents lblApprovalNote As Libraries.CBaseControlsLibrary.CLabel
     Friend WithEvents txtApprovalNote As Libraries.CBaseControlsLibrary.CTextBox
     Friend WithEvents lblDisapproved As Libraries.CBaseControlsLibrary.CLabel

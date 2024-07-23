@@ -39,13 +39,13 @@ Namespace PresentationLayer.Views.Forms
             Me.lblBranchIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtBranchIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblPurchaseAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboPurchaseAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboPurchaseAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblSaleAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboSaleAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboSaleAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblVatPurchaseAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboVatPurchaseAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboVatPurchaseAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblVatSaleAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboVatSaleAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboVatSaleAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblVatPercentage = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkNeedsExpiryDate = New AATM.Libraries.CBaseControlsLibrary.CCheckBoxNew()
@@ -356,7 +356,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPurchaseAccountIdNo.EndFindValue = Nothing
             Me.cboPurchaseAccountIdNo.FieldDescription = Nothing
             Me.cboPurchaseAccountIdNo.FieldName = Nothing
-            Me.cboPurchaseAccountIdNo.FilterRule = Nothing
             Me.cboPurchaseAccountIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboPurchaseAccountIdNo.FindEnabled = False
             Me.floDataDisplay.SetFlowBreak(Me.cboPurchaseAccountIdNo, True)
@@ -373,10 +372,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPurchaseAccountIdNo.OriginalList = Nothing
             Me.cboPurchaseAccountIdNo.OverrideDropDownStyleList = False
             Me.cboPurchaseAccountIdNo.PreviousSearchTerm = Nothing
-            Me.cboPurchaseAccountIdNo.PropertySelector = Nothing
             Me.cboPurchaseAccountIdNo.SuggestBoxHeight = 200
             Me.cboPurchaseAccountIdNo.SuggestCharCount = 1
-            Me.cboPurchaseAccountIdNo.SuggestListOrderRule = Nothing
             Me.cboPurchaseAccountIdNo.TextToSearch = Nothing
             Me.cboPurchaseAccountIdNo.Translatable = False
             Me.cboPurchaseAccountIdNo.ValueIsMandatory = False
@@ -406,7 +403,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboSaleAccountIdNo.EndFindValue = Nothing
             Me.cboSaleAccountIdNo.FieldDescription = Nothing
             Me.cboSaleAccountIdNo.FieldName = Nothing
-            Me.cboSaleAccountIdNo.FilterRule = Nothing
             Me.cboSaleAccountIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboSaleAccountIdNo.FindEnabled = False
             Me.floDataDisplay.SetFlowBreak(Me.cboSaleAccountIdNo, True)
@@ -423,10 +419,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cboSaleAccountIdNo.OriginalList = Nothing
             Me.cboSaleAccountIdNo.OverrideDropDownStyleList = False
             Me.cboSaleAccountIdNo.PreviousSearchTerm = Nothing
-            Me.cboSaleAccountIdNo.PropertySelector = Nothing
             Me.cboSaleAccountIdNo.SuggestBoxHeight = 200
             Me.cboSaleAccountIdNo.SuggestCharCount = 1
-            Me.cboSaleAccountIdNo.SuggestListOrderRule = Nothing
             Me.cboSaleAccountIdNo.TextToSearch = Nothing
             Me.cboSaleAccountIdNo.Translatable = False
             Me.cboSaleAccountIdNo.ValueIsMandatory = False
@@ -456,7 +450,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboVatPurchaseAccountIdNo.EndFindValue = Nothing
             Me.cboVatPurchaseAccountIdNo.FieldDescription = Nothing
             Me.cboVatPurchaseAccountIdNo.FieldName = Nothing
-            Me.cboVatPurchaseAccountIdNo.FilterRule = Nothing
             Me.cboVatPurchaseAccountIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboVatPurchaseAccountIdNo.FindEnabled = False
             Me.floDataDisplay.SetFlowBreak(Me.cboVatPurchaseAccountIdNo, True)
@@ -473,10 +466,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cboVatPurchaseAccountIdNo.OriginalList = Nothing
             Me.cboVatPurchaseAccountIdNo.OverrideDropDownStyleList = False
             Me.cboVatPurchaseAccountIdNo.PreviousSearchTerm = Nothing
-            Me.cboVatPurchaseAccountIdNo.PropertySelector = Nothing
             Me.cboVatPurchaseAccountIdNo.SuggestBoxHeight = 200
             Me.cboVatPurchaseAccountIdNo.SuggestCharCount = 1
-            Me.cboVatPurchaseAccountIdNo.SuggestListOrderRule = Nothing
             Me.cboVatPurchaseAccountIdNo.TextToSearch = Nothing
             Me.cboVatPurchaseAccountIdNo.Translatable = False
             Me.cboVatPurchaseAccountIdNo.ValueIsMandatory = False
@@ -506,7 +497,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboVatSaleAccountIdNo.EndFindValue = Nothing
             Me.cboVatSaleAccountIdNo.FieldDescription = Nothing
             Me.cboVatSaleAccountIdNo.FieldName = Nothing
-            Me.cboVatSaleAccountIdNo.FilterRule = Nothing
             Me.cboVatSaleAccountIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboVatSaleAccountIdNo.FindEnabled = False
             Me.floDataDisplay.SetFlowBreak(Me.cboVatSaleAccountIdNo, True)
@@ -523,10 +513,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cboVatSaleAccountIdNo.OriginalList = Nothing
             Me.cboVatSaleAccountIdNo.OverrideDropDownStyleList = False
             Me.cboVatSaleAccountIdNo.PreviousSearchTerm = Nothing
-            Me.cboVatSaleAccountIdNo.PropertySelector = Nothing
             Me.cboVatSaleAccountIdNo.SuggestBoxHeight = 200
             Me.cboVatSaleAccountIdNo.SuggestCharCount = 1
-            Me.cboVatSaleAccountIdNo.SuggestListOrderRule = Nothing
             Me.cboVatSaleAccountIdNo.TextToSearch = Nothing
             Me.cboVatSaleAccountIdNo.Translatable = False
             Me.cboVatSaleAccountIdNo.ValueIsMandatory = False
@@ -634,16 +622,16 @@ End Sub
         Friend WithEvents lblNameAra As CLabel
         Friend WithEvents lblNotes As CLabel
         Friend WithEvents lblPurchaseAccountIdNo As CLabel
-        Friend WithEvents cboPurchaseAccountIdNo As AtmComboBox
+        Friend WithEvents cboPurchaseAccountIdNo As CdtComboBox
         Friend WithEvents lblSaleAccountIdNo As CLabel
-        Friend WithEvents cboSaleAccountIdNo As AtmComboBox
+        Friend WithEvents cboSaleAccountIdNo As CdtComboBox
         Friend WithEvents lblVatPurchaseAccountIdNo As CLabel
-        Friend WithEvents cboVatPurchaseAccountIdNo As AtmComboBox
+        Friend WithEvents cboVatPurchaseAccountIdNo As CdtComboBox
         Friend WithEvents lblVatPercentage As CLabel
         Friend WithEvents txtVatPercentage As CTextBox
         Friend WithEvents lblPercentMark As CLabel
         Friend WithEvents lblVatSaleAccountIdNo As CLabel
-        Friend WithEvents cboVatSaleAccountIdNo As AtmComboBox
+        Friend WithEvents cboVatSaleAccountIdNo As CdtComboBox
         Friend WithEvents lblBranchIdNo As CLabel
         Friend WithEvents txtBranchIdNo As CTextBox
         Friend WithEvents CLabel1 As CLabel

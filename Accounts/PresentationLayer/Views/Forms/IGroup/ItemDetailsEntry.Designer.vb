@@ -28,7 +28,7 @@
         Me.txtpack2 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtpack3 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtQtyOnHand = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.cboRouteOfAdministration = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+        Me.cboRouteOfAdministration = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
         Me.txtGenericName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -46,11 +46,11 @@
         Me.lblGenericName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtPackageSize = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.cboPackageType = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
-        Me.cboUnitOfVolume = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+        Me.cboPackageType = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
+        Me.cboUnitOfVolume = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
         Me.txtVolume = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.cboDosageForm = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
-        Me.cboUnitOfStrength = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+        Me.cboDosageForm = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
+        Me.cboUnitOfStrength = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
         Me.txtStrengthValue = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.chkPrescriptionDrug = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
         Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -58,7 +58,7 @@
         Me.lblRegistrationCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblGTIN = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtGTIN = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.cboItemFinder = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+        Me.cboItemFinder = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
         Me.btnScanQrCode = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.CLabel4 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.CLabel5 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -338,9 +338,8 @@
         Me.cboRouteOfAdministration.EndFindValue = Nothing
         Me.cboRouteOfAdministration.FieldDescription = Nothing
         Me.cboRouteOfAdministration.FieldName = Nothing
-        Me.cboRouteOfAdministration.FilterRule = Nothing
-        Me.cboRouteOfAdministration.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cboRouteOfAdministration.FindEnabled = true
+            Me.cboRouteOfAdministration.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboRouteOfAdministration.FindEnabled = true
         Me.cboRouteOfAdministration.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.cboRouteOfAdministration.ForeColor = System.Drawing.Color.Black
         Me.cboRouteOfAdministration.FormattingEnabled = true
@@ -358,12 +357,10 @@
         Me.cboRouteOfAdministration.OriginalList = Nothing
         Me.cboRouteOfAdministration.OverrideDropDownStyleList = false
         Me.cboRouteOfAdministration.PreviousSearchTerm = Nothing
-        Me.cboRouteOfAdministration.PropertySelector = Nothing
             Me.cboRouteOfAdministration.Size = New System.Drawing.Size(436, 24)
             Me.cboRouteOfAdministration.SuggestBoxHeight = 200
-        Me.cboRouteOfAdministration.SuggestListOrderRule = Nothing
-        Me.cboRouteOfAdministration.TabIndex = 12
-        Me.cboRouteOfAdministration.TextToSearch = Nothing
+            Me.cboRouteOfAdministration.TabIndex = 12
+            Me.cboRouteOfAdministration.TextToSearch = Nothing
         Me.cboRouteOfAdministration.Translatable = false
         Me.cboRouteOfAdministration.ValueIsMandatory = false
         Me.cboRouteOfAdministration.ValueIsNullable = false
@@ -723,9 +720,8 @@
         Me.cboPackageType.EndFindValue = Nothing
         Me.cboPackageType.FieldDescription = Nothing
         Me.cboPackageType.FieldName = Nothing
-        Me.cboPackageType.FilterRule = Nothing
-        Me.cboPackageType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cboPackageType.FindEnabled = true
+            Me.cboPackageType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboPackageType.FindEnabled = true
         Me.cboPackageType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.cboPackageType.ForeColor = System.Drawing.Color.Black
         Me.cboPackageType.FormattingEnabled = true
@@ -743,12 +739,10 @@
         Me.cboPackageType.OriginalList = Nothing
         Me.cboPackageType.OverrideDropDownStyleList = false
         Me.cboPackageType.PreviousSearchTerm = Nothing
-        Me.cboPackageType.PropertySelector = Nothing
             Me.cboPackageType.Size = New System.Drawing.Size(436, 24)
             Me.cboPackageType.SuggestBoxHeight = 200
-        Me.cboPackageType.SuggestListOrderRule = Nothing
-        Me.cboPackageType.TabIndex = 10
-        Me.cboPackageType.TextToSearch = Nothing
+            Me.cboPackageType.TabIndex = 10
+            Me.cboPackageType.TextToSearch = Nothing
         Me.cboPackageType.Translatable = false
         Me.cboPackageType.ValueIsMandatory = false
         Me.cboPackageType.ValueIsNullable = false
@@ -774,9 +768,8 @@
         Me.cboUnitOfVolume.EndFindValue = Nothing
         Me.cboUnitOfVolume.FieldDescription = Nothing
         Me.cboUnitOfVolume.FieldName = Nothing
-        Me.cboUnitOfVolume.FilterRule = Nothing
-        Me.cboUnitOfVolume.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cboUnitOfVolume.FindEnabled = true
+            Me.cboUnitOfVolume.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboUnitOfVolume.FindEnabled = true
         Me.cboUnitOfVolume.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.cboUnitOfVolume.ForeColor = System.Drawing.Color.Black
         Me.cboUnitOfVolume.FormattingEnabled = true
@@ -794,12 +787,10 @@
         Me.cboUnitOfVolume.OriginalList = Nothing
         Me.cboUnitOfVolume.OverrideDropDownStyleList = false
         Me.cboUnitOfVolume.PreviousSearchTerm = Nothing
-        Me.cboUnitOfVolume.PropertySelector = Nothing
             Me.cboUnitOfVolume.Size = New System.Drawing.Size(436, 24)
             Me.cboUnitOfVolume.SuggestBoxHeight = 200
-        Me.cboUnitOfVolume.SuggestListOrderRule = Nothing
-        Me.cboUnitOfVolume.TabIndex = 9
-        Me.cboUnitOfVolume.TextToSearch = Nothing
+            Me.cboUnitOfVolume.TabIndex = 9
+            Me.cboUnitOfVolume.TextToSearch = Nothing
         Me.cboUnitOfVolume.Translatable = false
         Me.cboUnitOfVolume.ValueIsMandatory = false
         Me.cboUnitOfVolume.ValueIsNullable = false
@@ -856,9 +847,8 @@
         Me.cboDosageForm.EndFindValue = Nothing
         Me.cboDosageForm.FieldDescription = Nothing
         Me.cboDosageForm.FieldName = Nothing
-        Me.cboDosageForm.FilterRule = Nothing
-        Me.cboDosageForm.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cboDosageForm.FindEnabled = true
+            Me.cboDosageForm.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboDosageForm.FindEnabled = true
         Me.cboDosageForm.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.cboDosageForm.ForeColor = System.Drawing.Color.Black
         Me.cboDosageForm.FormattingEnabled = true
@@ -876,12 +866,10 @@
         Me.cboDosageForm.OriginalList = Nothing
         Me.cboDosageForm.OverrideDropDownStyleList = false
         Me.cboDosageForm.PreviousSearchTerm = Nothing
-        Me.cboDosageForm.PropertySelector = Nothing
             Me.cboDosageForm.Size = New System.Drawing.Size(436, 24)
             Me.cboDosageForm.SuggestBoxHeight = 200
-        Me.cboDosageForm.SuggestListOrderRule = Nothing
-        Me.cboDosageForm.TabIndex = 7
-        Me.cboDosageForm.TextToSearch = Nothing
+            Me.cboDosageForm.TabIndex = 7
+            Me.cboDosageForm.TextToSearch = Nothing
         Me.cboDosageForm.Translatable = false
         Me.cboDosageForm.ValueIsMandatory = false
         Me.cboDosageForm.ValueIsNullable = false
@@ -907,9 +895,8 @@
         Me.cboUnitOfStrength.EndFindValue = Nothing
         Me.cboUnitOfStrength.FieldDescription = Nothing
         Me.cboUnitOfStrength.FieldName = Nothing
-        Me.cboUnitOfStrength.FilterRule = Nothing
-        Me.cboUnitOfStrength.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cboUnitOfStrength.FindEnabled = true
+            Me.cboUnitOfStrength.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboUnitOfStrength.FindEnabled = true
         Me.cboUnitOfStrength.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.cboUnitOfStrength.ForeColor = System.Drawing.Color.Black
         Me.cboUnitOfStrength.FormattingEnabled = true
@@ -927,12 +914,10 @@
         Me.cboUnitOfStrength.OriginalList = Nothing
         Me.cboUnitOfStrength.OverrideDropDownStyleList = false
         Me.cboUnitOfStrength.PreviousSearchTerm = Nothing
-        Me.cboUnitOfStrength.PropertySelector = Nothing
             Me.cboUnitOfStrength.Size = New System.Drawing.Size(436, 24)
             Me.cboUnitOfStrength.SuggestBoxHeight = 200
-        Me.cboUnitOfStrength.SuggestListOrderRule = Nothing
-        Me.cboUnitOfStrength.TabIndex = 6
-        Me.cboUnitOfStrength.TextToSearch = Nothing
+            Me.cboUnitOfStrength.TabIndex = 6
+            Me.cboUnitOfStrength.TextToSearch = Nothing
         Me.cboUnitOfStrength.Translatable = false
         Me.cboUnitOfStrength.ValueIsMandatory = false
         Me.cboUnitOfStrength.ValueIsNullable = false
@@ -1124,9 +1109,8 @@
         Me.cboItemFinder.EndFindValue = Nothing
         Me.cboItemFinder.FieldDescription = Nothing
         Me.cboItemFinder.FieldName = Nothing
-        Me.cboItemFinder.FilterRule = Nothing
-        Me.cboItemFinder.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cboItemFinder.FindEnabled = true
+            Me.cboItemFinder.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboItemFinder.FindEnabled = true
         Me.cboItemFinder.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.cboItemFinder.ForeColor = System.Drawing.Color.Black
         Me.cboItemFinder.FormattingEnabled = true
@@ -1143,12 +1127,10 @@
         Me.cboItemFinder.OriginalList = Nothing
         Me.cboItemFinder.OverrideDropDownStyleList = false
         Me.cboItemFinder.PreviousSearchTerm = Nothing
-        Me.cboItemFinder.PropertySelector = Nothing
             Me.cboItemFinder.Size = New System.Drawing.Size(164, 24)
             Me.cboItemFinder.SuggestBoxHeight = 200
-        Me.cboItemFinder.SuggestListOrderRule = Nothing
-        Me.cboItemFinder.TabIndex = 37
-        Me.cboItemFinder.TextToSearch = Nothing
+            Me.cboItemFinder.TabIndex = 37
+            Me.cboItemFinder.TextToSearch = Nothing
         Me.cboItemFinder.Translatable = false
         Me.cboItemFinder.ValueIsMandatory = false
         Me.cboItemFinder.ValueIsNullable = false
@@ -1235,26 +1217,26 @@ End Sub
         Friend WithEvents txtStrengthValue As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents txtGenericName As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboUnitOfStrength As Libraries.CBaseControlsLibrary.AtmComboBox
+        Friend WithEvents cboUnitOfStrength As Libraries.CBaseControlsLibrary.CdtComboBox
         Friend WithEvents cboPackageSize As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblPackageType As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblUnitOfVolume As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblVolume As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblUnitOfStrength As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtPackageSize As Libraries.CBaseControlsLibrary.CTextBox
-        Friend WithEvents cboPackageType As Libraries.CBaseControlsLibrary.AtmComboBox
-        Friend WithEvents cboUnitOfVolume As Libraries.CBaseControlsLibrary.AtmComboBox
+        Friend WithEvents cboPackageType As Libraries.CBaseControlsLibrary.CdtComboBox
+        Friend WithEvents cboUnitOfVolume As Libraries.CBaseControlsLibrary.CdtComboBox
         Friend WithEvents txtVolume As Libraries.CBaseControlsLibrary.CTextBox
-        Friend WithEvents cboDosageForm As Libraries.CBaseControlsLibrary.AtmComboBox
+        Friend WithEvents cboDosageForm As Libraries.CBaseControlsLibrary.CdtComboBox
         Friend WithEvents CLabel2 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents chkPrescriptionDrug As Libraries.CBaseControlsLibrary.CCheckBox
         Friend WithEvents CLabel3 As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboRouteOfAdministration As Libraries.CBaseControlsLibrary.AtmComboBox
+        Friend WithEvents cboRouteOfAdministration As Libraries.CBaseControlsLibrary.CdtComboBox
         Friend WithEvents txtRegistrationNo As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblRegistrationCode As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtGTIN As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblGTIN As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboItemFinder As Libraries.CBaseControlsLibrary.AtmComboBox
+        Friend WithEvents cboItemFinder As Libraries.CBaseControlsLibrary.CdtComboBox
         Friend WithEvents btnScanQrCode As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents EventLog1 As EventLog
         Friend WithEvents txtQtyOnHand As Libraries.CBaseControlsLibrary.CTextBox

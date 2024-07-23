@@ -31,7 +31,7 @@ Namespace PresentationLayer.Views.Forms
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+        Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
         Me.lblEquivalentHours = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtEquivalentHours = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblAddedBy = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -48,7 +48,7 @@ Namespace PresentationLayer.Views.Forms
         Me.lblPayrollName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtPayrollName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblAbsenceType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboAbsenceType = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+        Me.cboAbsenceType = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
         Me.lblAbsenceReason = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtAbsenceReason = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -124,9 +124,8 @@ Namespace PresentationLayer.Views.Forms
         Me.cboEmployeeIdNo.EndFindValue = Nothing
         Me.cboEmployeeIdNo.FieldDescription = Nothing
         Me.cboEmployeeIdNo.FieldName = Nothing
-        Me.cboEmployeeIdNo.FilterRule = Nothing
-        Me.cboEmployeeIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cboEmployeeIdNo.FindEnabled = false
+            Me.cboEmployeeIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboEmployeeIdNo.FindEnabled = false
         Me.CFlowLayout2.SetFlowBreak(Me.cboEmployeeIdNo, true)
         resources.ApplyResources(Me.cboEmployeeIdNo, "cboEmployeeIdNo")
         Me.cboEmployeeIdNo.ForeColor = System.Drawing.Color.Black
@@ -140,11 +139,9 @@ Namespace PresentationLayer.Views.Forms
         Me.cboEmployeeIdNo.OriginalList = Nothing
         Me.cboEmployeeIdNo.OverrideDropDownStyleList = false
         Me.cboEmployeeIdNo.PreviousSearchTerm = Nothing
-        Me.cboEmployeeIdNo.PropertySelector = Nothing
             Me.cboEmployeeIdNo.SuggestBoxHeight = 200
-            Me.cboEmployeeIdNo.SuggestListOrderRule = Nothing
-        Me.cboEmployeeIdNo.TextToSearch = Nothing
-        Me.cboEmployeeIdNo.Translatable = false
+            Me.cboEmployeeIdNo.TextToSearch = Nothing
+            Me.cboEmployeeIdNo.Translatable = false
         Me.cboEmployeeIdNo.ValueIsMandatory = false
         Me.cboEmployeeIdNo.ValueIsNullable = false
         Me.cboEmployeeIdNo.ValueIsNumeric = false
@@ -455,9 +452,8 @@ Namespace PresentationLayer.Views.Forms
         Me.cboAbsenceType.EndFindValue = Nothing
         Me.cboAbsenceType.FieldDescription = Nothing
         Me.cboAbsenceType.FieldName = Nothing
-        Me.cboAbsenceType.FilterRule = Nothing
-        Me.cboAbsenceType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cboAbsenceType.FindEnabled = false
+            Me.cboAbsenceType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboAbsenceType.FindEnabled = false
         Me.CFlowLayout2.SetFlowBreak(Me.cboAbsenceType, true)
         resources.ApplyResources(Me.cboAbsenceType, "cboAbsenceType")
         Me.cboAbsenceType.ForeColor = System.Drawing.Color.Black
@@ -471,12 +467,9 @@ Namespace PresentationLayer.Views.Forms
         Me.cboAbsenceType.OriginalList = Nothing
         Me.cboAbsenceType.OverrideDropDownStyleList = false
         Me.cboAbsenceType.PreviousSearchTerm = Nothing
-        Me.cboAbsenceType.PropertySelector = Nothing
             Me.cboAbsenceType.SuggestBoxHeight = 200
-            Me.cboAbsenceType.SuggestListOrderRule = Nothing
-        Me.cboAbsenceType.TextToSearch = Nothing
-        Me.cboAbsenceType.Translatable = false
-        Me.cboAbsenceType.ValueIsMandatory = false
+            Me.cboAbsenceType.Translatable = False
+            Me.cboAbsenceType.ValueIsMandatory = false
         Me.cboAbsenceType.ValueIsNullable = false
         Me.cboAbsenceType.ValueIsNumeric = false
         Me.cboAbsenceType.ValueMember = "IdNo"
@@ -599,14 +592,14 @@ End Sub
         Friend WithEvents lblIdNo As CLabel
         Public WithEvents TxtIdNo As CTextBox
         Friend WithEvents lblEmployeeIdNo As CLabel
-        Public WithEvents cboEmployeeIdNo As AtmComboBox
+        Public WithEvents cboEmployeeIdNo As CdtComboBox
         Friend WithEvents lblEquivalentHours As CLabel
         Public WithEvents txtEquivalentHours As CTextBox
         Friend WithEvents lblAddedBy As CLabel
         Public WithEvents txtUserName As CTextBox
         Friend WithEvents CFlowLayout2 As CFlowLayout
         Friend WithEvents lblAbsenceType As CLabel
-        Public WithEvents cboAbsenceType As AtmComboBox
+        Public WithEvents cboAbsenceType As CdtComboBox
         Friend WithEvents lblAbsenceReason As CLabel
         Public WithEvents txtAbsenceReason As CTextBox
         Friend WithEvents lblPayrollIdNo As CLabel

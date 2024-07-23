@@ -57,7 +57,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblEndDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtPayrollCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblPayrollCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboPayCycleIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboPayCycleIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblPayCycleIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.tbcPayroll = New AATM.Libraries.CBaseControlsLibrary.CTabControl()
@@ -473,7 +473,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayCycleIdNo.EndFindValue = Nothing
             Me.cboPayCycleIdNo.FieldDescription = Nothing
             Me.cboPayCycleIdNo.FieldName = Nothing
-            Me.cboPayCycleIdNo.FilterRule = Nothing
             Me.cboPayCycleIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboPayCycleIdNo.FindEnabled = False
             Me.cboPayCycleIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -492,11 +491,9 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayCycleIdNo.OriginalList = Nothing
             Me.cboPayCycleIdNo.OverrideDropDownStyleList = False
             Me.cboPayCycleIdNo.PreviousSearchTerm = Nothing
-            Me.cboPayCycleIdNo.PropertySelector = Nothing
             Me.cboPayCycleIdNo.Size = New System.Drawing.Size(772, 28)
             Me.cboPayCycleIdNo.SuggestBoxHeight = 200
             Me.cboPayCycleIdNo.SuggestCharCount = 0
-            Me.cboPayCycleIdNo.SuggestListOrderRule = Nothing
             Me.cboPayCycleIdNo.TabIndex = 1
             Me.cboPayCycleIdNo.TextToSearch = Nothing
             Me.cboPayCycleIdNo.Translatable = False
@@ -1194,7 +1191,7 @@ End Sub
         Friend WithEvents _MBParentWithChildrenChangedDisallowed As LocalizableMessageBox
         Friend WithEvents _MSGMandatoryFields As LocalizableMessage
         Friend WithEvents lblPayrollName As CLabel
-        Friend WithEvents cboPayCycleIdNo As AtmComboBox
+        Friend WithEvents cboPayCycleIdNo As CdtComboBox
         Friend WithEvents dtpStartDate As CCustomDateTimePicker
         Friend WithEvents dtpEndDate As CCustomDateTimePicker
         Friend WithEvents lblPayrollNameAra As CLabel

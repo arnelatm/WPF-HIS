@@ -54,7 +54,7 @@ Namespace PresentationLayer.Views.Forms
         Me.lblTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.dtpTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+        Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
         Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -65,9 +65,9 @@ Namespace PresentationLayer.Views.Forms
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.btnSelectAll = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboPayType = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+        Me.cboPayType = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
         Me.CLabel4 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboPcAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+        Me.cboPcAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
         Me.txtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.DataGridViewPcJournals,System.ComponentModel.ISupportInitialize).BeginInit
@@ -520,7 +520,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.EndFindValue = Nothing
             Me.cboAccountIdNo.FieldDescription = Nothing
             Me.cboAccountIdNo.FieldName = Nothing
-            Me.cboAccountIdNo.FilterRule = Nothing
             Me.cboAccountIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboAccountIdNo.FindEnabled = False
             Me.cboAccountIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -539,11 +538,9 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.OriginalList = Nothing
             Me.cboAccountIdNo.OverrideDropDownStyleList = False
             Me.cboAccountIdNo.PreviousSearchTerm = Nothing
-            Me.cboAccountIdNo.PropertySelector = Nothing
             Me.cboAccountIdNo.SecurityKey = "ClosePettyCash"
             Me.cboAccountIdNo.Size = New System.Drawing.Size(411, 24)
             Me.cboAccountIdNo.SuggestBoxHeight = 200
-            Me.cboAccountIdNo.SuggestListOrderRule = Nothing
             Me.cboAccountIdNo.TabIndex = 5
             Me.cboAccountIdNo.TextToSearch = Nothing
             Me.cboAccountIdNo.Translatable = False
@@ -781,7 +778,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayType.EndFindValue = Nothing
             Me.cboPayType.FieldDescription = Nothing
             Me.cboPayType.FieldName = Nothing
-            Me.cboPayType.FilterRule = Nothing
             Me.cboPayType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboPayType.FindEnabled = False
             Me.cboPayType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -800,11 +796,9 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayType.OriginalList = Nothing
             Me.cboPayType.OverrideDropDownStyleList = False
             Me.cboPayType.PreviousSearchTerm = Nothing
-            Me.cboPayType.PropertySelector = Nothing
             Me.cboPayType.SecurityKey = "ClosePettyCash"
             Me.cboPayType.Size = New System.Drawing.Size(341, 24)
             Me.cboPayType.SuggestBoxHeight = 200
-            Me.cboPayType.SuggestListOrderRule = Nothing
             Me.cboPayType.TabIndex = 6
             Me.cboPayType.TextToSearch = Nothing
             Me.cboPayType.Translatable = False
@@ -844,7 +838,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPcAccountIdNo.EndFindValue = Nothing
             Me.cboPcAccountIdNo.FieldDescription = Nothing
             Me.cboPcAccountIdNo.FieldName = Nothing
-            Me.cboPcAccountIdNo.FilterRule = Nothing
             Me.cboPcAccountIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboPcAccountIdNo.FindEnabled = False
             Me.cboPcAccountIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -863,11 +856,9 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPcAccountIdNo.OriginalList = Nothing
             Me.cboPcAccountIdNo.OverrideDropDownStyleList = False
             Me.cboPcAccountIdNo.PreviousSearchTerm = Nothing
-            Me.cboPcAccountIdNo.PropertySelector = Nothing
             Me.cboPcAccountIdNo.SecurityKey = "ClosePettyCash"
             Me.cboPcAccountIdNo.Size = New System.Drawing.Size(411, 24)
             Me.cboPcAccountIdNo.SuggestBoxHeight = 200
-            Me.cboPcAccountIdNo.SuggestListOrderRule = Nothing
             Me.cboPcAccountIdNo.TabIndex = 7
             Me.cboPcAccountIdNo.TextToSearch = Nothing
             Me.cboPcAccountIdNo.Translatable = False
@@ -943,7 +934,7 @@ End Sub
         Friend WithEvents lblTransactionDate As CLabel
         Friend WithEvents dtpTransactionDate As CCustomDateTimePicker
         Friend WithEvents lblAccountIdNo As CLabel
-        Friend WithEvents cboAccountIdNo As AtmComboBox
+        Friend WithEvents cboAccountIdNo As CdtComboBox
         Friend WithEvents CLabel2 As CLabel
         Friend WithEvents txtNotes As CTextBox
         Friend WithEvents txtReferenceNo As CTextBox
@@ -957,9 +948,9 @@ End Sub
         Friend WithEvents btnUnselectAll As CButton
         Friend WithEvents btnSelectAll As CButton
         Friend WithEvents CLabel3 As CLabel
-        Friend WithEvents cboPayType As AtmComboBox
+        Friend WithEvents cboPayType As CdtComboBox
         Friend WithEvents CLabel4 As CLabel
-        Friend WithEvents cboPcAccountIdNo As AtmComboBox
+        Friend WithEvents cboPcAccountIdNo As CdtComboBox
         Friend WithEvents txtIdNo As CTextBox
         Friend WithEvents dgvPcClosed As CDgvCheckBoxColumn
         Friend WithEvents dgvTransactionDate As CDgvTextColumn

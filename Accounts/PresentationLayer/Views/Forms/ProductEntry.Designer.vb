@@ -41,10 +41,10 @@ Namespace PresentationLayer.Views.Forms
             Me.lblProductNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtProductNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
             Me.lblBaseUnit = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboBaseUnitIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboBaseUnitIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblCategoryIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.btnBaseUnitChanger = New AATM.Libraries.CBaseControlsLibrary.CButton()
-            Me.cboCategoryIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboCategoryIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblBarcode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtBarcode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -278,7 +278,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboBaseUnitIdNo.EndFindValue = Nothing
             Me.cboBaseUnitIdNo.FieldDescription = Nothing
             Me.cboBaseUnitIdNo.FieldName = Nothing
-            Me.cboBaseUnitIdNo.FilterRule = Nothing
             Me.cboBaseUnitIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboBaseUnitIdNo.FindEnabled = False
             resources.ApplyResources(Me.cboBaseUnitIdNo, "cboBaseUnitIdNo")
@@ -293,10 +292,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cboBaseUnitIdNo.OriginalList = Nothing
             Me.cboBaseUnitIdNo.OverrideDropDownStyleList = False
             Me.cboBaseUnitIdNo.PreviousSearchTerm = Nothing
-            Me.cboBaseUnitIdNo.PropertySelector = Nothing
             Me.cboBaseUnitIdNo.SuggestBoxHeight = 200
             Me.cboBaseUnitIdNo.SuggestCharCount = 1
-            Me.cboBaseUnitIdNo.SuggestListOrderRule = Nothing
             Me.cboBaseUnitIdNo.TextToSearch = Nothing
             Me.cboBaseUnitIdNo.Translatable = False
             Me.cboBaseUnitIdNo.ValueIsMandatory = False
@@ -336,7 +333,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboCategoryIdNo.EndFindValue = Nothing
             Me.cboCategoryIdNo.FieldDescription = Nothing
             Me.cboCategoryIdNo.FieldName = Nothing
-            Me.cboCategoryIdNo.FilterRule = Nothing
             Me.cboCategoryIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboCategoryIdNo.FindEnabled = False
             Me.CFlowLayout4.SetFlowBreak(Me.cboCategoryIdNo, True)
@@ -352,10 +348,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cboCategoryIdNo.OriginalList = Nothing
             Me.cboCategoryIdNo.OverrideDropDownStyleList = False
             Me.cboCategoryIdNo.PreviousSearchTerm = Nothing
-            Me.cboCategoryIdNo.PropertySelector = Nothing
             Me.cboCategoryIdNo.SuggestBoxHeight = 200
             Me.cboCategoryIdNo.SuggestCharCount = 1
-            Me.cboCategoryIdNo.SuggestListOrderRule = Nothing
             Me.cboCategoryIdNo.TextToSearch = Nothing
             Me.cboCategoryIdNo.Translatable = False
             Me.cboCategoryIdNo.ValueIsMandatory = False
@@ -720,7 +714,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblDateCreated As CLabel
         Friend WithEvents lblCategoryIdNo As CLabel
         Friend WithEvents lblActive As CLabel
-        Friend WithEvents cboCategoryIdNo As AtmComboBox
+        Friend WithEvents cboCategoryIdNo As CdtComboBox
         Friend WithEvents lblProductName As CLabel
         Friend WithEvents txtProductName As CTextBox
         Friend WithEvents lblProductNameAra As CLabel
@@ -730,7 +724,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblGTIN As CLabel
         Friend WithEvents txtGTIN As CTextBox
         Friend WithEvents lblBaseUnit As CLabel
-        Friend WithEvents cboBaseUnitIdNo As AtmComboBox
+        Friend WithEvents cboBaseUnitIdNo As CdtComboBox
         Friend WithEvents chkActive As CCheckBox
         Friend WithEvents CFlowLayout1 As CFlowLayout
         Friend WithEvents CFlowLayout2 As CFlowLayout
