@@ -35,7 +35,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel4 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboNewUnitIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboNewUnitIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.txtOldUnitIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
             Me.bsNotes = New System.Windows.Forms.BindingSource(Me.components)
@@ -288,7 +288,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents CLabel1 As CLabel
         Friend WithEvents CLabel3 As CLabel
         Friend WithEvents CLabel4 As CLabel
-        Friend WithEvents cboNewUnitIdNo As CtComboBox
+        Friend WithEvents cboNewUnitIdNo As AtmComboBox
         Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
         Friend WithEvents txtOldUnitIdNo As CTextBox
     End Class

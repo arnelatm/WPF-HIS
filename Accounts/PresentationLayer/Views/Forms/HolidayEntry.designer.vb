@@ -31,14 +31,14 @@ Namespace PresentationLayer.Views.Forms
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblLeaveIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboLeaveIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+        Me.cboLeaveIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.lblStartDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.dtpDateStart = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.lblEndDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.dtpDateEnd = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.lblEnteredBy = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboEnteredBy = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+        Me.cboEnteredBy = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
@@ -325,7 +325,7 @@ End Sub
         Friend WithEvents lblIdNo As CLabel
         Public WithEvents TxtIdNo As CTextBox
         Friend WithEvents lblLeaveIdNo As CLabel
-        Public WithEvents cboLeaveIdNo As CtCombobox
+        Public WithEvents cboLeaveIdNo As AtmComboBox
         Friend WithEvents CFlowLayout2 As CFlowLayout
         Public WithEvents txtDateCreated As CTextBox
         Friend WithEvents lblDateCreated As CLabel
@@ -334,6 +334,6 @@ End Sub
         Friend WithEvents lblEndDate As CLabel
         Public WithEvents dtpDateEnd As CCustomDateTimePicker
         Friend WithEvents lblEnteredBy As CLabel
-        Public WithEvents cboEnteredBy As CtCombobox
+        Public WithEvents cboEnteredBy As AtmComboBox
     End Class
 End Namespace

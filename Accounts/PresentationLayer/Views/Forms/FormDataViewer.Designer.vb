@@ -32,7 +32,7 @@ Namespace PresentationLayer.Views.Forms
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+        Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         Me.dtpStartDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.CCustomDateTimePicker1 = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
@@ -314,7 +314,7 @@ End Sub
         Friend WithEvents lblIdNo As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtIdNo As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblEmployeeIdNo As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboEmployeeIdNo As Libraries.CBaseControlsLibrary.CtCombobox
+        Friend WithEvents cboEmployeeIdNo As Libraries.CBaseControlsLibrary.AtmComboBox
         Friend WithEvents CFlowLayout1 As Libraries.CBaseControlsLibrary.CFlowLayout
         Friend WithEvents dtpStartDate As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents CCustomDateTimePicker1 As Libraries.CBaseControlsLibrary.CCustomDateTimePicker

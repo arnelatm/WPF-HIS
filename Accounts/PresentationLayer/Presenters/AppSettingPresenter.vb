@@ -20,7 +20,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub OnAppSettingGroupValueChanged(sender As Object)
-            Dim cb As CtComboBox = DirectCast(sender, CtComboBox)
+            Dim cb As AtmComboBox = DirectCast(sender, AtmComboBox)
             Dim idNo As Int16 = cb.SelectedValue
             View.DataFilter = "AppSettingGroupIdNo = " & idNo.ToString()
             Dim appSettingGroup As Object

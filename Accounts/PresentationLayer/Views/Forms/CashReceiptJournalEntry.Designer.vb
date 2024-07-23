@@ -58,7 +58,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblCheckNumber = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblDiscountAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboPayorType = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboPayorType = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblReceiptType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -66,8 +66,8 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtJournalCodeDisplay = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
-            Me.cboDiscountAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboDiscountAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.txtAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtVatNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -90,7 +90,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.dtpTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.FloPayor = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.cboContactIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboContactIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.txtPayorName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.floPurchaseJournalItems = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
@@ -1744,7 +1744,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblCheckNumber As CLabel
         Friend WithEvents txtCheckNumber As CTextBox
         Friend WithEvents lblDiscountAccountIdNo As CLabel
-        Friend WithEvents cboDiscountAccountIdNo As CtComboBox
+        Friend WithEvents cboDiscountAccountIdNo As AtmComboBox
         Friend WithEvents bsCsrOiItems As Windows.Forms.BindingSource
         Friend WithEvents DataGridViewCsrOiItems As CtDataGridView
         Friend WithEvents btnViewGL As CButton
@@ -1755,8 +1755,8 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents txtTotalCredits As CTextBox
         Friend WithEvents txtTotalDebits As CTextBox
         Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
-        Friend WithEvents cboPayorType As CtComboBox
-        Friend WithEvents cboAccountIdNo As CtComboBox
+        Friend WithEvents cboPayorType As AtmComboBox
+        Friend WithEvents cboAccountIdNo As AtmComboBox
         Friend WithEvents txtORNumber As CTextBox
         Friend WithEvents txtAmount As CTextBox
         Friend WithEvents txtVatNumber As CTextBox
@@ -1789,7 +1789,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents AccountIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents txtPayorIdNo As CTextBox
-        Friend WithEvents cboContactIdNo As CtComboBox
+        Friend WithEvents cboContactIdNo As AtmComboBox
         Friend WithEvents dtpTransactionDate As CCustomDateTimePicker
         Friend WithEvents FloPayor As CFlowLayout
         Friend WithEvents floHeader2 As CFlowLayout

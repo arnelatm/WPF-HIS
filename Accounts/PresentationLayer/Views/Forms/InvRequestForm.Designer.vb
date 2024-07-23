@@ -53,7 +53,7 @@
             Me.DataGridViewInvTransactionRequests = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.dgvDateCreated = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.lblWarehouseIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboWarehouseSelector = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboWarehouseSelector = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.DataGridViewInvTransItems = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.dgvUnitName = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvQtyOnHand = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
@@ -929,7 +929,7 @@
         Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
         Friend WithEvents CreateDateDataGridViewTextBoxColumn As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents lblWarehouseIdNo As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboWarehouseSelector As Libraries.CBaseControlsLibrary.CtComboBox
+        Friend WithEvents cboWarehouseSelector As Libraries.CBaseControlsLibrary.AtmComboBox
         Friend WithEvents txtDoctorCode As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents txtWarehouseIdNo As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents AmountDataGridViewTextBoxColumn As DataGridViewTextBoxColumn

@@ -53,7 +53,7 @@ Namespace PresentationLayer.Views
             Me.DgvVisible = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
             Me.DgvEditable = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
             Me.bsGroupAccesses = New System.Windows.Forms.BindingSource(Me.components)
-            Me.cacParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cacParentIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             CType(Me.DataGridViewGroupAccesses, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.bsGroupAccesses, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SuspendLayout()
@@ -608,6 +608,6 @@ Namespace PresentationLayer.Views
         Friend WithEvents DgvVisible As Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn
         Friend WithEvents DgvEditable As Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn
         Public WithEvents DataGridViewGroupAccesses As Libraries.CBaseControlsLibrary.CtDataGridView
-        Friend WithEvents cacParentIdNo As Libraries.CBaseControlsLibrary.CtComboBox
+        Friend WithEvents cacParentIdNo As Libraries.CBaseControlsLibrary.AtmComboBox
     End Class
 End NameSpace

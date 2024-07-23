@@ -85,7 +85,7 @@
             Me.lblEmployeeCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtEmployeeCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblEmployeeName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboTitle = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboTitle = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.txtEmployeeName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblEmployeeNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtEmployeeNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
@@ -95,19 +95,19 @@
             Me.lblPicture = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.imgPicture = New AATM.Libraries.CBaseControlsLibrary.CPictureBox()
             Me.lblGender = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacGender = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cacGender = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblMaritalStatus = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacMaritalStatus = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cacMaritalStatus = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblNationalityCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacNationalityCode = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cacNationalityCode = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblReligion = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacReligionIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cacReligionIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblBirthDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpBirthDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.lblNationalIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtNationalIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel4 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboBloodType = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboBloodType = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.tbpContact = New AATM.Libraries.CBaseControlsLibrary.CTabPage()
@@ -140,7 +140,7 @@
             Me.lblEmail = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblStreet = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacCountryCode = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cacCountryCode = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.tbpPayroll = New AATM.Libraries.CBaseControlsLibrary.CTabPage()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
@@ -152,7 +152,7 @@
             Me.lblBalance = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtOpeningBalance = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblOpeningBalance = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboPayCycleIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboPayCycleIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblPayCycleIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtIban = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblIban = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -161,9 +161,9 @@
             Me.lblBankAccountNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblBankIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblPaymentMethod = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboPaymentMethod = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
-            Me.cboPayGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
-            Me.cacBankIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboPaymentMethod = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboPayGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cacBankIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.tbpEarnings = New AATM.Libraries.CBaseControlsLibrary.CTabPage()
             Me.DataGridViewEarnings = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.dgvSequenceEarning = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -235,10 +235,10 @@
             Me.lblReleasedDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpHiredDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.lblHiredDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboDesignationIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
-            Me.cboSponsorType = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
-            Me.cboSupervisorIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
-            Me.cacDepartmentIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboDesignationIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboSponsorType = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboSupervisorIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cacDepartmentIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
             Me.SplitContainer1.Panel2.SuspendLayout()
@@ -456,6 +456,7 @@
             '
             'cboTitle
             '
+            Me.cboTitle.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
             Me.cboTitle.BackColor = System.Drawing.Color.White
             Me.cboTitle.BegFindValue = Nothing
             Me.cboTitle.ChangingSearchValueOnly = False
@@ -698,6 +699,7 @@
             '
             'cacGender
             '
+            Me.cacGender.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
             Me.cacGender.BackColor = System.Drawing.Color.White
             Me.cacGender.BegFindValue = Nothing
             Me.cacGender.ChangingSearchValueOnly = False
@@ -764,6 +766,7 @@
             '
             'cacMaritalStatus
             '
+            Me.cacMaritalStatus.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
             Me.cacMaritalStatus.BackColor = System.Drawing.Color.White
             Me.cacMaritalStatus.BegFindValue = Nothing
             Me.cacMaritalStatus.ChangingSearchValueOnly = False
@@ -830,6 +833,7 @@
             '
             'cacNationalityCode
             '
+            Me.cacNationalityCode.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
             Me.cacNationalityCode.BackColor = System.Drawing.Color.White
             Me.cacNationalityCode.BegFindValue = Nothing
             Me.cacNationalityCode.ChangingSearchValueOnly = False
@@ -896,6 +900,7 @@
             '
             'cacReligionIdNo
             '
+            Me.cacReligionIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
             Me.cacReligionIdNo.BackColor = System.Drawing.Color.White
             Me.cacReligionIdNo.BegFindValue = Nothing
             Me.cacReligionIdNo.ChangingSearchValueOnly = False
@@ -1057,6 +1062,7 @@
             '
             'cboBloodType
             '
+            Me.cboBloodType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
             Me.cboBloodType.BackColor = System.Drawing.Color.White
             Me.cboBloodType.BegFindValue = Nothing
             Me.cboBloodType.ChangingSearchValueOnly = False
@@ -1836,6 +1842,7 @@
             '
             'cacCountryCode
             '
+            Me.cacCountryCode.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
             Me.cacCountryCode.BackColor = System.Drawing.Color.White
             Me.cacCountryCode.BegFindValue = Nothing
             Me.cacCountryCode.ChangingSearchValueOnly = False
@@ -2154,6 +2161,7 @@
             '
             'cboPayCycleIdNo
             '
+            Me.cboPayCycleIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
             Me.cboPayCycleIdNo.BackColor = System.Drawing.Color.White
             Me.cboPayCycleIdNo.BegFindValue = Nothing
             Me.cboPayCycleIdNo.ChangingSearchValueOnly = False
@@ -2370,6 +2378,7 @@
             '
             'cboPaymentMethod
             '
+            Me.cboPaymentMethod.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
             Me.cboPaymentMethod.BackColor = System.Drawing.Color.White
             Me.cboPaymentMethod.BegFindValue = Nothing
             Me.cboPaymentMethod.ChangingSearchValueOnly = False
@@ -2419,6 +2428,7 @@
             '
             'cboPayGroupIdNo
             '
+            Me.cboPayGroupIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
             Me.cboPayGroupIdNo.BackColor = System.Drawing.Color.White
             Me.cboPayGroupIdNo.BegFindValue = Nothing
             Me.cboPayGroupIdNo.ChangingSearchValueOnly = False
@@ -2468,6 +2478,7 @@
             '
             'cacBankIdNo
             '
+            Me.cacBankIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
             Me.cacBankIdNo.BackColor = System.Drawing.Color.White
             Me.cacBankIdNo.BegFindValue = Nothing
             Me.cacBankIdNo.ChangingSearchValueOnly = False
@@ -3938,6 +3949,7 @@
             '
             'cboDesignationIdNo
             '
+            Me.cboDesignationIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
             Me.cboDesignationIdNo.BackColor = System.Drawing.Color.White
             Me.cboDesignationIdNo.BegFindValue = Nothing
             Me.cboDesignationIdNo.ChangingSearchValueOnly = False
@@ -3986,6 +3998,7 @@
             '
             'cboSponsorType
             '
+            Me.cboSponsorType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
             Me.cboSponsorType.BackColor = System.Drawing.Color.White
             Me.cboSponsorType.BegFindValue = Nothing
             Me.cboSponsorType.ChangingSearchValueOnly = False
@@ -4034,6 +4047,7 @@
             '
             'cboSupervisorIdNo
             '
+            Me.cboSupervisorIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
             Me.cboSupervisorIdNo.BackColor = System.Drawing.Color.White
             Me.cboSupervisorIdNo.BegFindValue = Nothing
             Me.cboSupervisorIdNo.ChangingSearchValueOnly = False
@@ -4082,6 +4096,7 @@
             '
             'cacDepartmentIdNo
             '
+            Me.cacDepartmentIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
             Me.cacDepartmentIdNo.BackColor = System.Drawing.Color.White
             Me.cacDepartmentIdNo.BegFindValue = Nothing
             Me.cacDepartmentIdNo.ChangingSearchValueOnly = False
@@ -4132,6 +4147,7 @@
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
             Me.ClientSize = New System.Drawing.Size(1086, 515)
+            Me.FormCulture = New System.Globalization.CultureInfo("en-US")
             Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
             Me.Name = "EmployeeEntryTv"
             Me.Text = "Employee Maintenance Form"
@@ -4209,7 +4225,7 @@
         Friend WithEvents bsDocuments As BindingSource
         Friend WithEvents dgvEmployeeDocumentIdNo As DataGridViewTextBoxColumn
         Friend WithEvents dgvDocumentNote As Libraries.CBaseControlsLibrary.CDgvTextColumn
-        Friend WithEvents cboTitle As Libraries.CBaseControlsLibrary.CtComboBox
+        Friend WithEvents cboTitle As Libraries.CBaseControlsLibrary.AtmComboBox
         Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
         Friend WithEvents tbcEmployeeInformation As Libraries.CBaseControlsLibrary.CTabControl
         Friend WithEvents tbpPersonal As Libraries.CBaseControlsLibrary.CTabPage
@@ -4217,9 +4233,9 @@
         Friend WithEvents lblPicture As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents imgPicture As Libraries.CBaseControlsLibrary.CPictureBox
         Friend WithEvents lblGender As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cacGender As Libraries.CBaseControlsLibrary.CtComboBox
+        Friend WithEvents cacGender As Libraries.CBaseControlsLibrary.AtmComboBox
         Friend WithEvents lblMaritalStatus As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cacMaritalStatus As Libraries.CBaseControlsLibrary.CtComboBox
+        Friend WithEvents cacMaritalStatus As Libraries.CBaseControlsLibrary.AtmComboBox
         Friend WithEvents lblNationalityCode As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblReligion As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblBirthDate As Libraries.CBaseControlsLibrary.CLabel
@@ -4227,7 +4243,7 @@
         Friend WithEvents lblNationalIdNo As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtNationalIdNo As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents CLabel4 As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboBloodType As Libraries.CBaseControlsLibrary.CtComboBox
+        Friend WithEvents cboBloodType As Libraries.CBaseControlsLibrary.AtmComboBox
         Friend WithEvents lblNotes As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtNotes As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents tbpContact As Libraries.CBaseControlsLibrary.CTabPage
@@ -4272,7 +4288,7 @@
         Friend WithEvents lblBalance As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtOpeningBalance As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblOpeningBalance As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboPayCycleIdNo As Libraries.CBaseControlsLibrary.CtComboBox
+        Friend WithEvents cboPayCycleIdNo As Libraries.CBaseControlsLibrary.AtmComboBox
         Friend WithEvents lblPayCycleIdNo As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtIban As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblIban As Libraries.CBaseControlsLibrary.CLabel
@@ -4280,8 +4296,8 @@
         Friend WithEvents txtBankAccountNo As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblBankAccountNo As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblBankIdNo As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboPaymentMethod As Libraries.CBaseControlsLibrary.CtComboBox
-        Friend WithEvents cboPayGroupIdNo As Libraries.CBaseControlsLibrary.CtComboBox
+        Friend WithEvents cboPaymentMethod As Libraries.CBaseControlsLibrary.AtmComboBox
+        Friend WithEvents cboPayGroupIdNo As Libraries.CBaseControlsLibrary.AtmComboBox
         Friend WithEvents tbpEarnings As Libraries.CBaseControlsLibrary.CTabPage
         Friend WithEvents DataGridViewEarnings As Libraries.CBaseControlsLibrary.CtDataGridView
         Friend WithEvents dgvSequenceEarning As Libraries.CBaseControlsLibrary.CDgvTextColumn
@@ -4327,15 +4343,15 @@
         Friend WithEvents dgvEmployeeIdNo As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn1 As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents tbpEmployeInformation As AATM.Libraries.CBaseControlsLibrary.CTabPage
-        Friend WithEvents cacBankIdNo As Libraries.CBaseControlsLibrary.CtComboBox
+        Friend WithEvents cacBankIdNo As Libraries.CBaseControlsLibrary.AtmComboBox
         Friend WithEvents dtpHiredDate As Libraries.CBaseControlsLibrary.CCustomDateTimePicker
-        Friend WithEvents cboDesignationIdNo As Libraries.CBaseControlsLibrary.CtComboBox
-        Friend WithEvents cboSponsorType As Libraries.CBaseControlsLibrary.CtComboBox
-        Friend WithEvents cboSupervisorIdNo As Libraries.CBaseControlsLibrary.CtComboBox
-        Friend WithEvents cacDepartmentIdNo As Libraries.CBaseControlsLibrary.CtComboBox
-        Friend WithEvents cacCountryCode As Libraries.CBaseControlsLibrary.CtComboBox
-        Friend WithEvents cacNationalityCode As Libraries.CBaseControlsLibrary.CtComboBox
-        Friend WithEvents cacReligionIdNo As Libraries.CBaseControlsLibrary.CtComboBox
+        Friend WithEvents cboDesignationIdNo As Libraries.CBaseControlsLibrary.AtmComboBox
+        Friend WithEvents cboSponsorType As Libraries.CBaseControlsLibrary.AtmComboBox
+        Friend WithEvents cboSupervisorIdNo As Libraries.CBaseControlsLibrary.AtmComboBox
+        Friend WithEvents cacDepartmentIdNo As Libraries.CBaseControlsLibrary.AtmComboBox
+        Friend WithEvents cacCountryCode As Libraries.CBaseControlsLibrary.AtmComboBox
+        Friend WithEvents cacNationalityCode As Libraries.CBaseControlsLibrary.AtmComboBox
+        Friend WithEvents cacReligionIdNo As Libraries.CBaseControlsLibrary.AtmComboBox
         Friend WithEvents dgvSequenceLeaveCredits As DataGridViewTextBoxColumn
         Friend WithEvents dgvLeaveIdNo As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
         Friend WithEvents dgvLeaveAllowed As Libraries.CBaseControlsLibrary.CDgvDecimalColumn

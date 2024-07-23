@@ -28,9 +28,9 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboWarehouseIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboWarehouseIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblProductIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboProductIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboProductIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblBeginningDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpBeginningDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.lblEndingDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -372,12 +372,12 @@ Namespace PresentationLayer.Views.Forms.Reports
         Friend WithEvents btnOk As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents btnCancel As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents CLabel3 As CLabel
-        Friend WithEvents cboWarehouseIdNo As CtComboBox
+        Friend WithEvents cboWarehouseIdNo As AtmComboBox
         Friend WithEvents lblBeginningDate As CLabel
         Friend WithEvents dtpBeginningDate As CCustomDateTimePicker
         Friend WithEvents lblEndingDate As CLabel
         Friend WithEvents dtpEndingDate As CCustomDateTimePicker
         Friend WithEvents lblProductIdNo As CLabel
-        Friend WithEvents cboProductIdNo As CtComboBox
+        Friend WithEvents cboProductIdNo As AtmComboBox
     End Class
 End Namespace

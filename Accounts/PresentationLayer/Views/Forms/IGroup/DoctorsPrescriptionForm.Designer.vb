@@ -48,7 +48,7 @@
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
-            Me.cboDoctorName = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboDoctorName = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.CGroupBox1 = New AATM.Libraries.CBaseControlsLibrary.CGroupBox()
             Me.DataGridViewPrescriptionDetails = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.DurationDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -614,7 +614,7 @@
         Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents CLabel2 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents dtpTransactionDate As Libraries.CBaseControlsLibrary.CCustomDateTimePicker
-        Friend WithEvents cboDoctorName As Libraries.CBaseControlsLibrary.CtCombobox
+        Friend WithEvents cboDoctorName As Libraries.CBaseControlsLibrary.AtmComboBox
         Friend WithEvents txtDoctorCode As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents DataGridViewPrescriptionDetails As Libraries.CBaseControlsLibrary.CtDataGridView
         Friend WithEvents bsPrescriptionDetails As BindingSource

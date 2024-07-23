@@ -148,9 +148,6 @@
     <Compile Include="CDvCheckBoxEditingControl.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CfComboBox.vb">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="CustomDataTables.vb" />
     <Compile Include="DFindForm.designer.vb">
       <DependentUpon>DFindForm.vb</DependentUpon>
@@ -161,8 +158,6 @@
     <Compile Include="CFindGridForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CfDgvComboBoxCell.vb" />
-    <Compile Include="CfDgvComboBoxColumn.vb" />
     <Compile Include="CFormNew.Designer.vb">
       <DependentUpon>CFormNew.vb</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -182,20 +177,11 @@
     </Compile>
     <Compile Include="CDgvComboBoxCell.vb" />
     <Compile Include="CDgvComboBoxColumn.vb" />
-    <Compile Include="cxComboBox.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="CfDgvComboBoxEditingControl.vb">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="CtDgvDtpColumn.vb" />
     <Compile Include="CtDataGridView.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CtComboBox.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="CdComboBox.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CbComboBox.vb">
@@ -262,9 +248,6 @@
     <Compile Include="CDgvDecimalCell.vb" />
     <Compile Include="CDgvCheckBoxColumn.vb" />
     <Compile Include="CdgvDecimalColumn.vb" />
-    <Compile Include="cbsComboBox.vb">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="CCheckBox.vb">
       <SubType>Component</SubType>
     </Compile>

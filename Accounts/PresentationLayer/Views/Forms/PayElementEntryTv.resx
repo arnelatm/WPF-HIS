@@ -1353,7 +1353,7 @@
     <value>cboReportGroupIdNo</value>
   </data>
   <data name="&gt;&gt;cboReportGroupIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtCombobox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboReportGroupIdNo.Parent" xml:space="preserve">
     <value>tlpPayElement</value>
@@ -1425,7 +1425,7 @@
     <value>cboPayElementKind</value>
   </data>
   <data name="&gt;&gt;cboPayElementKind.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtCombobox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboPayElementKind.Parent" xml:space="preserve">
     <value>tlpPayElement</value>
@@ -2001,7 +2001,7 @@
     <value>cboQuantityType</value>
   </data>
   <data name="&gt;&gt;cboQuantityType.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtCombobox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboQuantityType.Parent" xml:space="preserve">
     <value>tlpCalculation</value>
@@ -2034,7 +2034,7 @@
     <value>cboCalculationType</value>
   </data>
   <data name="&gt;&gt;cboCalculationType.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtCombobox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboCalculationType.Parent" xml:space="preserve">
     <value>tlpCalculation</value>
@@ -2328,7 +2328,7 @@
     <value>cboBasePaymentIdNo</value>
   </data>
   <data name="&gt;&gt;cboBasePaymentIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtCombobox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboBasePaymentIdNo.Parent" xml:space="preserve">
     <value>tlpCalculation</value>
@@ -2523,7 +2523,7 @@
     <value>cboFactorType</value>
   </data>
   <data name="&gt;&gt;cboFactorType.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtCombobox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboFactorType.Parent" xml:space="preserve">
     <value>tlpCalculation</value>
@@ -2724,7 +2724,7 @@
     <value>cboUnit</value>
   </data>
   <data name="&gt;&gt;cboUnit.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtCombobox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboUnit.Parent" xml:space="preserve">
     <value>tlpCalculation</value>
@@ -2757,7 +2757,7 @@
     <value>cboPayElementType</value>
   </data>
   <data name="&gt;&gt;cboPayElementType.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtCombobox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboPayElementType.Parent" xml:space="preserve">
     <value>tlpCalculation</value>
@@ -2994,7 +2994,7 @@
     <value>cboAccountIdNo</value>
   </data>
   <data name="&gt;&gt;cboAccountIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtCombobox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboAccountIdNo.Parent" xml:space="preserve">
     <value>tlpPostingAccounts</value>

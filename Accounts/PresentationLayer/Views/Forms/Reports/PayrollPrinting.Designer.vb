@@ -26,7 +26,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.lblSupplierCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboPayroll = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboPayroll = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.btnCancel = New AATM.Libraries.CBaseControlsLibrary.CButton()
@@ -188,6 +188,6 @@ Namespace PresentationLayer.Views.Forms.Reports
         Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents btnOk As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents btnCancel As Libraries.CBaseControlsLibrary.CButton
-        Friend WithEvents cboPayroll As CtComboBox
+        Friend WithEvents cboPayroll As AtmComboBox
     End Class
 End Namespace

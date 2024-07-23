@@ -26,7 +26,7 @@ Namespace PresentationLayer.Views.Forms
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DosageEntryTv))
         Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboRoute = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+        Me.cboRoute = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         Me.CLabel4 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.txtDosageNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -35,10 +35,10 @@ Namespace PresentationLayer.Views.Forms
         Me.txtDosageCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtDosageName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.cboDirection = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+        Me.cboDirection = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         Me.CLabel6 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboFrequency = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
-        Me.cboFrequencyTiming = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+        Me.cboFrequency = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+        Me.cboFrequencyTiming = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         Me.CLabel5 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.CLabel10 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.CLabel9 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -629,14 +629,14 @@ End Sub
         Friend WithEvents DataGridViewCheckBoxColumn1 As Windows.Forms.DataGridViewCheckBoxColumn
         Friend WithEvents PcsIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents CLabel3 As CLabel
-        Friend WithEvents cboRoute As CtComboBox
+        Friend WithEvents cboRoute As AtmComboBox
         Friend WithEvents CLabel4 As CLabel
         Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
         Friend WithEvents CLabel6 As CLabel
-        Friend WithEvents cboFrequency As CtComboBox
+        Friend WithEvents cboFrequency As AtmComboBox
         Friend WithEvents CLabel9 As CLabel
-        Friend WithEvents cboFrequencyTiming As CtComboBox
-        Friend WithEvents cboDirection As CtComboBox
+        Friend WithEvents cboFrequencyTiming As AtmComboBox
+        Friend WithEvents cboDirection As AtmComboBox
         Friend WithEvents txtIdNo As CTextBox
         Friend WithEvents CLabel5 As CLabel
         Friend WithEvents txtDosageCode As CTextBox

@@ -1135,7 +1135,7 @@
     <value>cboLeaveType</value>
   </data>
   <data name="&gt;&gt;cboLeaveType.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtCombobox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboLeaveType.Parent" xml:space="preserve">
     <value>TableLayoutPanel1</value>

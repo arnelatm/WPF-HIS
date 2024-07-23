@@ -64,9 +64,9 @@ Namespace PresentationLayer.Views.Forms
             Me.lblTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.lblCustomerIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboCustomerIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboCustomerIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblTransactionType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboTransactionType = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboTransactionType = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblDueDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -74,7 +74,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblInvoiceNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtInvoiceNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
@@ -1432,15 +1432,15 @@ End Sub
         Friend WithEvents lblDateAdded As CLabel
         Friend WithEvents lblPercent As CLabel
         Friend WithEvents lblAccountIdNo As CLabel
-        Friend WithEvents cboCustomerIdNo As CtCombobox
+        Friend WithEvents cboCustomerIdNo As AtmComboBox
         Friend WithEvents txtNotes As CTextBox
         Friend WithEvents bsJournalItems As Windows.Forms.BindingSource
         Friend WithEvents CFlowLayout3 As CFlowLayout
         Friend WithEvents CLabel5 As CLabel
         Friend WithEvents CFlowLayout2 As CFlowLayout
-        Friend WithEvents cboAccountIdNo As CtCombobox
+        Friend WithEvents cboAccountIdNo As AtmComboBox
         Friend WithEvents lblTransactionType As CLabel
-        Friend WithEvents cboTransactionType As CtCombobox
+        Friend WithEvents cboTransactionType As AtmComboBox
         Friend WithEvents CLabel2 As CLabel
         Friend WithEvents CLabel1 As CLabel
         Friend WithEvents BalanceDataGridViewTextBoxColumn As Windows.Forms.DataGridViewTextBoxColumn

@@ -49,7 +49,7 @@
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
-            Me.cboDoctorName = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboDoctorName = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.txtDoctorCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout2.SuspendLayout()
@@ -520,7 +520,7 @@
         Friend WithEvents InvTypeDataGridViewTextBoxColumn As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents dgvTime As DataGridViewTextBoxColumn
         Friend WithEvents dgvTransKey As DataGridViewTextBoxColumn
-        Friend WithEvents cboDoctorName As Libraries.CBaseControlsLibrary.CtCombobox
+        Friend WithEvents cboDoctorName As Libraries.CBaseControlsLibrary.AtmComboBox
         Friend WithEvents txtDoctorCode As Libraries.CBaseControlsLibrary.CTextBox
     End Class
 End Namespace

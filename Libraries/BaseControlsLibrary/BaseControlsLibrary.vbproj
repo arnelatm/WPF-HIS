@@ -105,9 +105,6 @@
     <Compile Include="BCombobox.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="cbsComboBox.vb">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="FormBase.Designer.vb">
       <DependentUpon>FormBase.vb</DependentUpon>
     </Compile>

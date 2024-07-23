@@ -36,11 +36,11 @@ Namespace PresentationLayer.Views.Forms
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtSecurityObjectCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblSystemViewIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboSystemViewIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboSystemViewIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblSecurityObjectName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblSecurityObjectNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cacParentIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblManuallyGenerated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkManuallyAdded = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
@@ -420,11 +420,11 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblSecurityObjectNameAra As CLabel
         Friend WithEvents lblNotes As CLabel
         Friend WithEvents lblParentIdNo As CLabel
-        Friend WithEvents cacParentIdNo As CtComboBox
+        Friend WithEvents cacParentIdNo As AtmComboBox
         Friend WithEvents CLabel1 As CLabel
         Friend WithEvents txtSecurityObjectCode As CTextBox
         Friend WithEvents lblSystemViewIdNo As CLabel
-        Friend WithEvents cboSystemViewIdNo As CtComboBox
+        Friend WithEvents cboSystemViewIdNo As AtmComboBox
         Friend WithEvents lblManuallyGenerated As CLabel
         Friend WithEvents chkManuallyAdded As CCheckBox
     End Class

@@ -665,8 +665,8 @@ Namespace PresentationLayer.Views.Forms
             MyBase.UpdateViewDisplay(editMode, addMode, recordPositionNumber, targetIdNo, recordCount)
             UpdateActionButtons(editMode Or addMode)
             'For Each control In Controls
-            '    If TypeOf control Is CtComboBox Then
-            '        Dim x As CtComboBox = control
+            '    If TypeOf control Is AtmComboBox Then
+            '        Dim x As AtmComboBox = control
             '        x.SelectionLength = 0
             '        x.SelectionStart = 0
             '    End If
@@ -698,8 +698,8 @@ Namespace PresentationLayer.Views.Forms
                 btnAutoApply.Visible = False
             End If
             'For Each control In Controls
-            '    If TypeOf control Is CtComboBox Then
-            '        Dim x As CtComboBox = control
+            '    If TypeOf control Is AtmComboBox Then
+            '        Dim x As AtmComboBox = control
             '        x.SelectionLength = 0
             '        x.SelectionStart = 0
             '    End If

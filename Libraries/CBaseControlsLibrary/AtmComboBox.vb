@@ -1,5 +1,6 @@
 ﻿Imports System.ComponentModel
 Imports System.Drawing
+Imports System.Linq.Expressions
 Imports System.Threading
 Imports System.Windows.Forms
 Imports AATM.Libraries.AatmInterfaces
@@ -22,6 +23,9 @@ Public Class AtmComboBox
     Private WithEvents _contextMenuStrip1 As New ContextMenuStrip
     Public DataSourceProgrammaticChange As Boolean = False
     Protected SuggestListForm As CListBoxForm = New CListBoxForm
+    Public Property SuggestListOrderRule As Expression(Of Func(Of String, String))
+    Public Property FilterRule As String
+    Public Property PropertySelector As String
 
     Public Sub New()
         MyBase.New()

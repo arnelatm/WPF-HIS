@@ -49,19 +49,19 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel5 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboWarehouseToIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboWarehouseToIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblInvTransTypeIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblWarehouseIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.txtReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.cboInvTransTypeIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
-            Me.cboWarehouseIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboInvTransTypeIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboWarehouseIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblWarehouseToIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtJournalIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.dtpTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboUserIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboUserIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.DataGridViewInvTransactionDetails = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.dgvInventoryIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.btnPost = New AATM.Libraries.CBaseControlsLibrary.CButton()
@@ -1222,10 +1222,10 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblWarehouseIdNo As CLabel
         Friend WithEvents lblTransactionDate As CLabel
         Friend WithEvents lblInvTransTypeIdNo As CLabel
-        Friend WithEvents cboInvTransTypeIdNo As CtComboBox
+        Friend WithEvents cboInvTransTypeIdNo As AtmComboBox
         Friend WithEvents ProductBindingSource As BindingSource
         Friend WithEvents ProductTableAdapter As ISPDATADataSetTableAdapters.ProductTableAdapter
-        Friend WithEvents cboWarehouseIdNo As CtComboBox
+        Friend WithEvents cboWarehouseIdNo As AtmComboBox
         Friend WithEvents CLabel1 As CLabel
         Friend WithEvents txtReferenceNo As CTextBox
         Friend WithEvents CLabel2 As CLabel
@@ -1235,7 +1235,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents InvTransactionIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents dgvIdNo As DataGridViewTextBoxColumn
         Friend WithEvents lblWarehouseToIdNo As CLabel
-        Friend WithEvents cboWarehouseToIdNo As CtComboBox
+        Friend WithEvents cboWarehouseToIdNo As AtmComboBox
         Friend WithEvents txtNotes As CTextBox
         Friend WithEvents CLabel5 As CLabel
         Friend WithEvents UnitSalesPriceDataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
@@ -1246,7 +1246,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents DataGridViewInvTransactionDetails As CtDataGridView
         Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
         Friend WithEvents dtpTransactionDate As CCustomDateTimePicker
-        Friend WithEvents cboUserIdNo As CtComboBox
+        Friend WithEvents cboUserIdNo As AtmComboBox
         Friend WithEvents dgvSequence As CDgvTextColumn
         Friend WithEvents dgvProductCode As CDgvTextColumn
         Friend WithEvents dgvProductName As CDgvTextColumn

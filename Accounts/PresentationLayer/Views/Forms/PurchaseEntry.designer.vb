@@ -82,7 +82,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblVatNumber = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtVatNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblSupplierIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboSupplierIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboSupplierIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblInvoiceNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtInvoiceNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblDueDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -90,11 +90,11 @@ Namespace PresentationLayer.Views.Forms
             Me.lblInvoiceDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpInvoiceDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.lblWarehouseIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboWarehouseIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboWarehouseIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CTextBox1 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboUserIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboUserIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.DataGridViewPurchaseDetails = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
@@ -2253,7 +2253,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblTransactionDate As CLabel
         Friend WithEvents dtpTransactionDate As CCustomDateTimePicker
         Friend WithEvents lblSupplierIdNo As CLabel
-        Friend WithEvents cboSupplierIdNo As CtComboBox
+        Friend WithEvents cboSupplierIdNo As AtmComboBox
         Friend WithEvents lblAmount As CLabel
         Friend WithEvents txtAmount As CTextBox
         Friend WithEvents lblInvoiceDate As CLabel
@@ -2271,7 +2271,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ProductTableAdapter As ISPDATADataSetTableAdapters.ProductTableAdapter
         Friend WithEvents lblExtraDiscount As CLabel
         Friend WithEvents txtDiscountAmount As CTextBox
-        Friend WithEvents cboWarehouseIdNo As CtComboBox
+        Friend WithEvents cboWarehouseIdNo As AtmComboBox
         Friend WithEvents CFlowLayout1 As CFlowLayout
         Friend WithEvents lblGrossAmount As CLabel
         Friend WithEvents txtGrossAmount As CTextBox
@@ -2303,7 +2303,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents CLabel2 As CLabel
         Friend WithEvents CTextBox1 As CTextBox
         Friend WithEvents CLabel3 As CLabel
-        Friend WithEvents cboUserIdNo As CtComboBox
+        Friend WithEvents cboUserIdNo As AtmComboBox
         Friend WithEvents btnPost As CButton
         Friend WithEvents dgvSequence As CDgvTextColumn
         Friend WithEvents dgvProductCode As CDgvTextColumn

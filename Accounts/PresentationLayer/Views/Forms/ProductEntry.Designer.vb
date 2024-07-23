@@ -41,10 +41,10 @@ Namespace PresentationLayer.Views.Forms
             Me.lblProductNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtProductNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
             Me.lblBaseUnit = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboBaseUnitIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboBaseUnitIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblCategoryIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.btnBaseUnitChanger = New AATM.Libraries.CBaseControlsLibrary.CButton()
-            Me.cboCategoryIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboCategoryIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblBarcode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtBarcode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -720,7 +720,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblDateCreated As CLabel
         Friend WithEvents lblCategoryIdNo As CLabel
         Friend WithEvents lblActive As CLabel
-        Friend WithEvents cboCategoryIdNo As CtComboBox
+        Friend WithEvents cboCategoryIdNo As AtmComboBox
         Friend WithEvents lblProductName As CLabel
         Friend WithEvents txtProductName As CTextBox
         Friend WithEvents lblProductNameAra As CLabel
@@ -730,7 +730,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblGTIN As CLabel
         Friend WithEvents txtGTIN As CTextBox
         Friend WithEvents lblBaseUnit As CLabel
-        Friend WithEvents cboBaseUnitIdNo As CtComboBox
+        Friend WithEvents cboBaseUnitIdNo As AtmComboBox
         Friend WithEvents chkActive As CCheckBox
         Friend WithEvents CFlowLayout1 As CFlowLayout
         Friend WithEvents CFlowLayout2 As CFlowLayout

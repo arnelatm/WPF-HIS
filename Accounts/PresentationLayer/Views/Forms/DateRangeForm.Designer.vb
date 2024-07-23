@@ -26,7 +26,7 @@ Namespace Accounts.PresentationLayer.Views.Forms
             Me.components = New System.ComponentModel.Container()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DateRangeForm))
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboContactIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboContactIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.btnCancel = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.lblContactIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -316,7 +316,7 @@ Namespace Accounts.PresentationLayer.Views.Forms
         Friend WithEvents CLabel2 As Libraries.CBaseControlsLibrary.CLabel
         Private WithEvents btnOk As CButton
         Private WithEvents btnCancel As CButton
-        Friend WithEvents cboContactIdNo As CtComboBox
+        Friend WithEvents cboContactIdNo As AtmComboBox
         Friend WithEvents lblContactIdNo As CLabel
         Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
         Friend WithEvents CFlowLayout1 As CFlowLayout

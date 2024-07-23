@@ -35,7 +35,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblReportNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtReportNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
             Me.lblReportGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboReportGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboReportGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblPrintJobIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblQueryForm = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtQueryForm = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -49,7 +49,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtReportTitleAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
             Me.lblReportFileName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtReportFileName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.cboPrintJobIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboPrintJobIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblReportOrder = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtReportOrder = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -1004,7 +1004,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblReportNameAra As CLabel
         Friend WithEvents txtReportNameAra As CTextBoxArabic
         Friend WithEvents lblPrintJobIdNo As CLabel
-        Friend WithEvents cboPrintJobIdNo As CtComboBox
+        Friend WithEvents cboPrintJobIdNo As AtmComboBox
         Friend WithEvents lblQueryForm As CLabel
         Friend WithEvents txtQueryForm As CTextBox
         Friend WithEvents lblQueryFormParameters As CLabel
@@ -1025,7 +1025,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents txtDateCreated As CTextBox
         Friend WithEvents lblActive As CLabel
         Friend WithEvents chkActive As CCheckBox
-        Friend WithEvents cboReportGroupIdNo As CtComboBox
+        Friend WithEvents cboReportGroupIdNo As AtmComboBox
         Friend WithEvents lblReportGroupIdNo As CLabel
         Friend WithEvents CLabel1 As CLabel
         Friend WithEvents txtDataBaseName As CTextBox

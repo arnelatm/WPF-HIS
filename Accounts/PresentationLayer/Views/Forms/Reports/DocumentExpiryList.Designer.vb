@@ -27,7 +27,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblSupplierCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboDocumentType = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboDocumentType = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.chkAllDocuments = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
             Me.lblExpiryDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpExpiryDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
@@ -98,7 +98,6 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.cboDocumentType.EndFindValue = Nothing
             Me.cboDocumentType.FieldDescription = Nothing
             Me.cboDocumentType.FieldName = Nothing
-            Me.cboDocumentType.FilterRule = Nothing
             Me.cboDocumentType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboDocumentType.FindEnabled = False
             Me.cboDocumentType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -118,11 +117,9 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.cboDocumentType.OriginalList = Nothing
             Me.cboDocumentType.OverrideDropDownStyleList = False
             Me.cboDocumentType.PreviousSearchTerm = Nothing
-            Me.cboDocumentType.PropertySelector = Nothing
             Me.cboDocumentType.Size = New System.Drawing.Size(530, 30)
             Me.cboDocumentType.SuggestBoxHeight = 200
             Me.cboDocumentType.SuggestCharCount = 0
-            Me.cboDocumentType.SuggestListOrderRule = Nothing
             Me.cboDocumentType.TabIndex = 35
             Me.cboDocumentType.TextToSearch = Nothing
             Me.cboDocumentType.Translatable = False
@@ -263,7 +260,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Friend WithEvents lblExpiryDate As CLabel
         Friend WithEvents dtpExpiryDate As CCustomDateTimePicker
         Friend WithEvents lblSupplierCode As CLabel
-        Friend WithEvents cboDocumentType As CtComboBox
+        Friend WithEvents cboDocumentType As AtmComboBox
         Friend WithEvents chkAllDocuments As UcCheckBox
     End Class
 End Namespace

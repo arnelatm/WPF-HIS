@@ -34,20 +34,20 @@ Namespace PresentationLayer.Views.Forms
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+        Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboHolidayTransferIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+        Me.cboHolidayTransferIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         Me.lblHolidayIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboHolidayIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+        Me.cboHolidayIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         Me.lblAvailmentDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.dtpAvailmentDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.lblStatus = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboStatus = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+        Me.cboStatus = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         Me.lblenteredBy = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboenteredBy = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+        Me.cboenteredBy = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.DataGridViewApprovalHistory = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
         Me.dgvApprovalIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -543,12 +543,12 @@ End Sub
         Friend WithEvents lblIdNo As CLabel
         Public WithEvents TxtIdNo As CTextBox
         Friend WithEvents lblEmployeeIdNo As CLabel
-        Public WithEvents cboEmployeeIdNo As CtCombobox
+        Public WithEvents cboEmployeeIdNo As AtmComboBox
         Friend WithEvents lblDateCreated As CLabel
         Public WithEvents txtDateCreated As CTextBox
         Friend WithEvents CFlowLayout2 As CFlowLayout
         Friend WithEvents lblenteredBy As CLabel
-        Public WithEvents cboenteredBy As CtCombobox
+        Public WithEvents cboenteredBy As AtmComboBox
         Friend WithEvents DataGridViewApprovalHistory As CtDataGridView
         Friend WithEvents bsHolidayAvailmentApproval As BindingSource
         Friend WithEvents bsHolidayAvailmentApprovalHistory As BindingSource
@@ -561,12 +561,12 @@ End Sub
         Friend WithEvents dgvStatus As CDgvComboBoxColumn
         Friend WithEvents HolidayAvailmentIdNo As DataGridViewTextBoxColumn
         Friend WithEvents CLabel2 As CLabel
-        Public WithEvents cboHolidayTransferIdNo As CtCombobox
+        Public WithEvents cboHolidayTransferIdNo As AtmComboBox
         Friend WithEvents lblHolidayIdNo As CLabel
-        Public WithEvents cboHolidayIdNo As CtCombobox
+        Public WithEvents cboHolidayIdNo As AtmComboBox
         Friend WithEvents lblStatus As CLabel
         Friend WithEvents lblAvailmentDate As CLabel
         Public WithEvents dtpAvailmentDate As CCustomDateTimePicker
-        Public WithEvents cboStatus As CtCombobox
+        Public WithEvents cboStatus As AtmComboBox
     End Class
 End Namespace

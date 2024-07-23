@@ -523,10 +523,10 @@ Public Class CDataGvBs
 
     'Private Sub DataGridView1_EditingControlShowing(ByVal sender As Object, ByVal e As DataGridViewEditingControlShowingEventArgs) Handles Me.EditingControlShowing
     '    'declare variable(cb) as a combobox
-    '    Dim cb As CtCombobox
+    '    Dim cb As AtmComboBox
     '    'e represent the editing control in the datagridview
     '    'the condition is, if the type of e is combobox then set your code for autocomplete
-    '    If TypeOf e.Control Is CtCombobox Then
+    '    If TypeOf e.Control Is AtmComboBox Then
     '        cb = e.Control
     '        'set the dropdown style of a combobox
     '        cb.DropDownStyle = ComboBoxStyle.DropDown

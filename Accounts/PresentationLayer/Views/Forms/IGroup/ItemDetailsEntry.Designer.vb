@@ -28,7 +28,7 @@
         Me.txtpack2 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtpack3 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtQtyOnHand = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.cboRouteOfAdministration = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+        Me.cboRouteOfAdministration = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         Me.txtGenericName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -46,11 +46,11 @@
         Me.lblGenericName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtPackageSize = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.cboPackageType = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
-        Me.cboUnitOfVolume = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+        Me.cboPackageType = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+        Me.cboUnitOfVolume = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         Me.txtVolume = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.cboDosageForm = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
-        Me.cboUnitOfStrength = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+        Me.cboDosageForm = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+        Me.cboUnitOfStrength = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         Me.txtStrengthValue = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.chkPrescriptionDrug = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
         Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -58,7 +58,7 @@
         Me.lblRegistrationCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblGTIN = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtGTIN = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.cboItemFinder = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+        Me.cboItemFinder = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         Me.btnScanQrCode = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.CLabel4 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.CLabel5 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -1235,26 +1235,26 @@ End Sub
         Friend WithEvents txtStrengthValue As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents txtGenericName As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboUnitOfStrength As Libraries.CBaseControlsLibrary.CtCombobox
+        Friend WithEvents cboUnitOfStrength As Libraries.CBaseControlsLibrary.AtmComboBox
         Friend WithEvents cboPackageSize As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblPackageType As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblUnitOfVolume As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblVolume As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblUnitOfStrength As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtPackageSize As Libraries.CBaseControlsLibrary.CTextBox
-        Friend WithEvents cboPackageType As Libraries.CBaseControlsLibrary.CtCombobox
-        Friend WithEvents cboUnitOfVolume As Libraries.CBaseControlsLibrary.CtCombobox
+        Friend WithEvents cboPackageType As Libraries.CBaseControlsLibrary.AtmComboBox
+        Friend WithEvents cboUnitOfVolume As Libraries.CBaseControlsLibrary.AtmComboBox
         Friend WithEvents txtVolume As Libraries.CBaseControlsLibrary.CTextBox
-        Friend WithEvents cboDosageForm As Libraries.CBaseControlsLibrary.CtCombobox
+        Friend WithEvents cboDosageForm As Libraries.CBaseControlsLibrary.AtmComboBox
         Friend WithEvents CLabel2 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents chkPrescriptionDrug As Libraries.CBaseControlsLibrary.CCheckBox
         Friend WithEvents CLabel3 As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboRouteOfAdministration As Libraries.CBaseControlsLibrary.CtCombobox
+        Friend WithEvents cboRouteOfAdministration As Libraries.CBaseControlsLibrary.AtmComboBox
         Friend WithEvents txtRegistrationNo As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblRegistrationCode As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtGTIN As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblGTIN As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboItemFinder As Libraries.CBaseControlsLibrary.CtCombobox
+        Friend WithEvents cboItemFinder As Libraries.CBaseControlsLibrary.AtmComboBox
         Friend WithEvents btnScanQrCode As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents EventLog1 As EventLog
         Friend WithEvents txtQtyOnHand As Libraries.CBaseControlsLibrary.CTextBox

@@ -32,15 +32,15 @@ Namespace PresentationLayer.Views.Forms
         Me.lblPrinterCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtPrinterCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblPrinterName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboPrinterName = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboPrinterName = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblHostName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtHostOrIpName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.LblDefaultPaperSource = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboPaperSource = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboPaperSource = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.LblDefaultPaperSize = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboPaperSize = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboPaperSize = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.LblDefaultPaperOrientation = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboPaperOrientation = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboPaperOrientation = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
             Me.SplitContainer1.Panel2.SuspendLayout()
@@ -541,13 +541,13 @@ End Sub
         Friend WithEvents LblDefaultPaperSize As CLabel
         Friend WithEvents LblDefaultPaperOrientation As CLabel
         Friend WithEvents lblPrinterName As CLabel
-        Friend WithEvents cboPaperSource As CtCombobox
-        Friend WithEvents cboPaperSize As CtCombobox
-        Friend WithEvents cboPaperOrientation As CtCombobox
+        Friend WithEvents cboPaperSource As AtmComboBox
+        Friend WithEvents cboPaperSize As AtmComboBox
+        Friend WithEvents cboPaperOrientation As AtmComboBox
         Friend WithEvents txtPrinterCode As CTextBox
         Friend WithEvents lblHostName As CLabel
         Friend WithEvents txtHostOrIpName As CTextBox
         Friend WithEvents btnCheckPrinter As CButton
-        Friend WithEvents cboPrinterName As CtCombobox
+        Friend WithEvents cboPrinterName As AtmComboBox
     End Class
 End Namespace

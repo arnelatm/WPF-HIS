@@ -66,27 +66,27 @@ Namespace PresentationLayer.Views.Forms
             Me.txtInvoiceNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtFileNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.cboPatientType = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboPatientType = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblCustomerIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtPatientName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblNationality = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboNationalityCode = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboNationalityCode = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblGender = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboGender = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.cboGender = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblAge = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtAge = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.cboAgeYmd = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.cboAgeYmd = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblPhoneNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtPhoneNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblDoctorIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboDoctorIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
-            Me.cboCustomerIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboDoctorIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboCustomerIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblWarehouseIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboWarehouseIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboWarehouseIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblDueDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpDueDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboUserIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboUserIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.DataGridViewSaleDetails = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvProductCode = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -1993,7 +1993,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblTransactionDate As CLabel
         Friend WithEvents dtpTransactionDate As CCustomDateTimePicker
         Friend WithEvents lblCustomerIdNo As CLabel
-        Friend WithEvents cboCustomerIdNo As CtComboBox
+        Friend WithEvents cboCustomerIdNo As AtmComboBox
         Friend WithEvents lblDueDate As CLabel
         Friend WithEvents dtpDueDate As CCustomDateTimePicker
         Friend WithEvents lblInvoiceNo As CLabel
@@ -2002,7 +2002,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ISPDATADataSet As ISPDATADataSet
         Friend WithEvents ProductBindingSource As BindingSource
         Friend WithEvents ProductTableAdapter As ISPDATADataSetTableAdapters.ProductTableAdapter
-        Friend WithEvents cboWarehouseIdNo As CtComboBox
+        Friend WithEvents cboWarehouseIdNo As AtmComboBox
         Friend WithEvents CtDataGridView2 As CtDataGridView
         Friend WithEvents bsSaleHistory As BindingSource
         Friend WithEvents ProductIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
@@ -2058,20 +2058,20 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents txtFileNo As CTextBox
         Friend WithEvents txtPatientName As CTextBox
         Friend WithEvents lblNationality As CLabel
-        Friend WithEvents cboNationalityCode As CtComboBox
+        Friend WithEvents cboNationalityCode As AtmComboBox
         Friend WithEvents lblGender As CLabel
-        Friend WithEvents cboGender As CtCombobox
+        Friend WithEvents cboGender As AtmComboBox
         Friend WithEvents lblAge As CLabel
         Friend WithEvents txtAge As CTextBox
         Friend WithEvents lblPhoneNo As CLabel
         Friend WithEvents txtPhoneNo As CTextBox
         Friend WithEvents lblDoctorIdNo As CLabel
-        Friend WithEvents cboDoctorIdNo As CtComboBox
+        Friend WithEvents cboDoctorIdNo As AtmComboBox
         Friend WithEvents CLabel2 As CLabel
-        Friend WithEvents cboUserIdNo As CtComboBox
+        Friend WithEvents cboUserIdNo As AtmComboBox
         Friend WithEvents txtJournalIdNo As CTextBox
         Friend WithEvents lblJournalIdNo As CLabel
-        Friend WithEvents cboPatientType As CtComboBox
-        Friend WithEvents cboAgeYmd As CtCombobox
+        Friend WithEvents cboPatientType As AtmComboBox
+        Friend WithEvents cboAgeYmd As AtmComboBox
     End Class
 End NameSpace

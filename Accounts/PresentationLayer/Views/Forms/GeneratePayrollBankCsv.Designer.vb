@@ -25,9 +25,9 @@ Namespace PresentationLayer.Views.Forms
         Me.lblPayrollName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblStartDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.cboIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblPayFrequency = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboPayCycleIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboPayCycleIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblPayrollCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtPayrollCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.dtpStartDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
@@ -379,8 +379,8 @@ End Sub
         Friend WithEvents lblPayFrequency As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblPayrollCode As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtPayrollCode As Libraries.CBaseControlsLibrary.CTextBox
-        Friend WithEvents cboIdNo As Libraries.CBaseControlsLibrary.CtCombobox
-        Friend WithEvents cboPayCycleIdNo As Libraries.CBaseControlsLibrary.CtCombobox
+        Friend WithEvents cboIdNo As Libraries.CBaseControlsLibrary.AtmComboBox
+        Friend WithEvents cboPayCycleIdNo As Libraries.CBaseControlsLibrary.AtmComboBox
         Friend WithEvents dtpStartDate As Libraries.CBaseControlsLibrary.CCustomDateTimePicker
         Friend WithEvents dtpEndDate As Libraries.CBaseControlsLibrary.CCustomDateTimePicker
     End Class

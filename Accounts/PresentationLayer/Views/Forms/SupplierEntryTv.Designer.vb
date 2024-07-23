@@ -50,7 +50,7 @@
         Me.lblZipCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtZipCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblCountryCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacCountryCode = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cacCountryCode = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblPhone1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtPhone1 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblPhone2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -66,19 +66,19 @@
             Me.lblCrNumber = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtCrNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblBankIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacBankIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cacBankIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblBankAccountNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtBankAccountNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblIban = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtIban = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblExpAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacExpAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cacExpAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblApAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacApAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cacApAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblCreditLimit = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtCreditLimit = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblPaymentMethod = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacPaymentMethod = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cacPaymentMethod = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblOpeningBalance = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtOpeningBalance = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblSettlementDueDays = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -93,7 +93,7 @@
             Me.lblDateAccountOpen = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpDateAccountOpen = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.lblAccountStatus = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacAccountStatus = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cacAccountStatus = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtBalance = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -2056,7 +2056,7 @@
         Friend WithEvents lblZipCode As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtZipCode As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblCountryCode As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cacCountryCode As Libraries.CBaseControlsLibrary.CtComboBox
+        Friend WithEvents cacCountryCode As Libraries.CBaseControlsLibrary.AtmComboBox
         Friend WithEvents lblPhone1 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtPhone1 As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblPhone2 As Libraries.CBaseControlsLibrary.CLabel
@@ -2072,19 +2072,19 @@
         Friend WithEvents lblCrNumber As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtCrNumber As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblBankIdNo As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cacBankIdNo As Libraries.CBaseControlsLibrary.CtComboBox
+        Friend WithEvents cacBankIdNo As Libraries.CBaseControlsLibrary.AtmComboBox
         Friend WithEvents lblBankAccountNo As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtBankAccountNo As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblIban As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtIban As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblExpAccountIdNo As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cacExpAccountIdNo As Libraries.CBaseControlsLibrary.CtComboBox
+        Friend WithEvents cacExpAccountIdNo As Libraries.CBaseControlsLibrary.AtmComboBox
         Friend WithEvents lblApAccountIdNo As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cacApAccountIdNo As Libraries.CBaseControlsLibrary.CtComboBox
+        Friend WithEvents cacApAccountIdNo As Libraries.CBaseControlsLibrary.AtmComboBox
         Friend WithEvents lblCreditLimit As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtCreditLimit As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblPaymentMethod As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cacPaymentMethod As Libraries.CBaseControlsLibrary.CtComboBox
+        Friend WithEvents cacPaymentMethod As Libraries.CBaseControlsLibrary.AtmComboBox
         Friend WithEvents lblOpeningBalance As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtOpeningBalance As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblSettlementDueDays As Libraries.CBaseControlsLibrary.CLabel
@@ -2099,7 +2099,7 @@
         Friend WithEvents lblDateAccountOpen As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents dtpDateAccountOpen As Libraries.CBaseControlsLibrary.CCustomDateTimePicker
         Friend WithEvents lblAccountStatus As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cacAccountStatus As Libraries.CBaseControlsLibrary.CtComboBox
+        Friend WithEvents cacAccountStatus As Libraries.CBaseControlsLibrary.AtmComboBox
         Friend WithEvents lblNotes As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtBalance As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel

@@ -37,11 +37,11 @@ Namespace PresentationLayer.Views.Forms
             Me.lblRevCostCenterName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblRevCostCenterNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.cacParentIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblLevelNumber = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtLevelNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacRcType = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.cacRcType = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtSortKey = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -565,8 +565,8 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents _MBParentWithChildrenChangedDisallowed As LocalizableMessageBox
         Friend WithEvents _MSGMandatoryFields As LocalizableMessage
         Friend WithEvents txtSortKey As CTextBox
-        Friend WithEvents cacParentIdNo As CtCombobox
+        Friend WithEvents cacParentIdNo As AtmComboBox
         Friend WithEvents lblRevCostCenterIdNo As CLabel
-        Friend WithEvents cacRcType As CtCombobox
+        Friend WithEvents cacRcType As AtmComboBox
     End Class
 End Namespace

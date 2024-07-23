@@ -3,7 +3,7 @@
 Public Class Class1
 
     Private OrigCombobox As CBFormCtrl
-    Dim cboConrol As New CtComboBox
+    Dim cboConrol As New AtmComboBox
     origComboBox = cboControl
     OrigCombobox = ControlFactory.CopyToObject(cboContactIdNo)
 

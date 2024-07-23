@@ -499,7 +499,7 @@
     <value>cboPurchaseAccountIdNo</value>
   </data>
   <data name="&gt;&gt;cboPurchaseAccountIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboPurchaseAccountIdNo.Parent" xml:space="preserve">
     <value>floDataDisplay</value>
@@ -565,7 +565,7 @@
     <value>cboSaleAccountIdNo</value>
   </data>
   <data name="&gt;&gt;cboSaleAccountIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboSaleAccountIdNo.Parent" xml:space="preserve">
     <value>floDataDisplay</value>
@@ -631,7 +631,7 @@
     <value>cboVatPurchaseAccountIdNo</value>
   </data>
   <data name="&gt;&gt;cboVatPurchaseAccountIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboVatPurchaseAccountIdNo.Parent" xml:space="preserve">
     <value>floDataDisplay</value>
@@ -697,7 +697,7 @@
     <value>cboVatSaleAccountIdNo</value>
   </data>
   <data name="&gt;&gt;cboVatSaleAccountIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboVatSaleAccountIdNo.Parent" xml:space="preserve">
     <value>floDataDisplay</value>

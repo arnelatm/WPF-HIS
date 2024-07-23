@@ -30,7 +30,7 @@ Namespace PresentationLayer.Views.Forms
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(InvTransTypeEntryTv))
             Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-            Me.cboInventoryAction = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.cboInventoryAction = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblInventoryAction = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -42,7 +42,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblInvTransTypeCycle = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkActive = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
@@ -469,8 +469,8 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblActive As CLabel
         Friend WithEvents chkActive As CCheckBox
         Friend WithEvents lblInvTransTypeCycle As CLabel
-        Friend WithEvents cboAccountIdNo As CtComboBox
-        Friend WithEvents cboInventoryAction As CtCombobox
+        Friend WithEvents cboAccountIdNo As AtmComboBox
+        Friend WithEvents cboInventoryAction As AtmComboBox
         Friend WithEvents lblInventoryAction As CLabel
         Friend WithEvents txtInvTransTypeNameAra As CTextBoxArabic
     End Class

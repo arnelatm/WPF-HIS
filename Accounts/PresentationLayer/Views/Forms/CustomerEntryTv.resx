@@ -89211,7 +89211,7 @@
     <value>cacCountryCode</value>
   </data>
   <data name="&gt;&gt;cacCountryCode.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtCombobox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cacCountryCode.Parent" xml:space="preserve">
     <value>floDataDisplay</value>
@@ -89718,7 +89718,7 @@
     <value>cacBankIdNo</value>
   </data>
   <data name="&gt;&gt;cacBankIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtCombobox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cacBankIdNo.Parent" xml:space="preserve">
     <value>floDataDisplay</value>
@@ -89910,7 +89910,7 @@
     <value>cacRevAccountIdNo</value>
   </data>
   <data name="&gt;&gt;cacRevAccountIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtCombobox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cacRevAccountIdNo.Parent" xml:space="preserve">
     <value>floDataDisplay</value>
@@ -89976,7 +89976,7 @@
     <value>cacArAccountIdNo</value>
   </data>
   <data name="&gt;&gt;cacArAccountIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtCombobox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cacArAccountIdNo.Parent" xml:space="preserve">
     <value>floDataDisplay</value>
@@ -90108,7 +90108,7 @@
     <value>cacPaymentMethod</value>
   </data>
   <data name="&gt;&gt;cacPaymentMethod.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtCombobox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cacPaymentMethod.Parent" xml:space="preserve">
     <value>floDataDisplay</value>
@@ -90438,7 +90438,7 @@
     <value>cacDiscountSchemeIdNo</value>
   </data>
   <data name="&gt;&gt;cacDiscountSchemeIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtCombobox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cacDiscountSchemeIdNo.Parent" xml:space="preserve">
     <value>floDataDisplay</value>
@@ -90577,7 +90577,7 @@
     <value>cacAccountStatus</value>
   </data>
   <data name="&gt;&gt;cacAccountStatus.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtCombobox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cacAccountStatus.Parent" xml:space="preserve">
     <value>floDataDisplay</value>

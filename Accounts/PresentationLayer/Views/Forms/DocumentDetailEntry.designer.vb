@@ -31,14 +31,14 @@ Namespace PresentationLayer.Views.Forms
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblLeaveIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboDocumentIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboDocumentIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CButton1 = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.lblBranchName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cBranchName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblContactName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboContactIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboContactIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblDocumentNumber = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtDocumentNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblIssueDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -630,7 +630,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblIdNo As CLabel
         Public WithEvents TxtIdNo As CTextBox
         Friend WithEvents lblLeaveIdNo As CLabel
-        Public WithEvents cboDocumentIdNo As CtComboBox
+        Public WithEvents cboDocumentIdNo As AtmComboBox
         Friend WithEvents CFlowLayout2 As CFlowLayout
         Public WithEvents txtDateCreated As CTextBox
         Friend WithEvents lblDateCreated As CLabel
@@ -641,7 +641,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblDocumentNumber As CLabel
         Friend WithEvents txtDocumentNumber As CTextBox
         Friend WithEvents lblContactName As CLabel
-        Public WithEvents cboContactIdNo As CtComboBox
+        Public WithEvents cboContactIdNo As AtmComboBox
         Friend WithEvents lblPicture As CLabel
         Public WithEvents dtpExpiryDate As CCustomDateTimePicker
         Friend WithEvents txtUserIdNo As CTextBox

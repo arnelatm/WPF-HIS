@@ -27,9 +27,9 @@ Partial Class EmployeeLeaveEarnedEntry
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+        Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         Me.lblLeaveName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboLeaveIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+        Me.cboLeaveIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         Me.lblStartDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.dtpStartDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.lblEndDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -39,13 +39,13 @@ Partial Class EmployeeLeaveEarnedEntry
         Me.lblReason = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtReason = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblenteredBy = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboenteredBy = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+        Me.cboenteredBy = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         Me.lblApproved = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.chkApproved = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
         Me.lblDisapproved = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.chkDisapproved = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
         Me.lblApprovedBy = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboApprovedBy = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+        Me.cboApprovedBy = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         Me.lblApprovalNote = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtApprovalNote = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -813,9 +813,9 @@ Partial Class EmployeeLeaveEarnedEntry
     Friend WithEvents lblIdNo As Libraries.CBaseControlsLibrary.CLabel
     Public WithEvents TxtIdNo As Libraries.CBaseControlsLibrary.CTextBox
     Friend WithEvents lblEmployeeIdNo As Libraries.CBaseControlsLibrary.CLabel
-    Public WithEvents cboEmployeeIdNo As Libraries.CBaseControlsLibrary.CtComboBox
+    Public WithEvents cboEmployeeIdNo As Libraries.CBaseControlsLibrary.AtmComboBox
     Friend WithEvents lblLeaveName As Libraries.CBaseControlsLibrary.CLabel
-    Public WithEvents cboLeaveIdNo As Libraries.CBaseControlsLibrary.CtComboBox
+    Public WithEvents cboLeaveIdNo As Libraries.CBaseControlsLibrary.AtmComboBox
     Friend WithEvents lblStartDate As Libraries.CBaseControlsLibrary.CLabel
     Public WithEvents dtpStartDate As Libraries.CBaseControlsLibrary.CCustomDateTimePicker
     Friend WithEvents lblEndDate As Libraries.CBaseControlsLibrary.CLabel
@@ -825,13 +825,13 @@ Partial Class EmployeeLeaveEarnedEntry
     Friend WithEvents lblReason As Libraries.CBaseControlsLibrary.CLabel
     Public WithEvents txtReason As Libraries.CBaseControlsLibrary.CTextBox
     Friend WithEvents lblenteredBy As Libraries.CBaseControlsLibrary.CLabel
-    Public WithEvents cboenteredBy As Libraries.CBaseControlsLibrary.CtComboBox
+    Public WithEvents cboenteredBy As Libraries.CBaseControlsLibrary.AtmComboBox
     Friend WithEvents lblApproved As Libraries.CBaseControlsLibrary.CLabel
     Friend WithEvents chkApproved As Libraries.CBaseControlsLibrary.CCheckBox
     Friend WithEvents lblDateCreated As Libraries.CBaseControlsLibrary.CLabel
     Public WithEvents txtDateCreated As Libraries.CBaseControlsLibrary.CTextBox
     Friend WithEvents lblApprovedBy As Libraries.CBaseControlsLibrary.CLabel
-    Public WithEvents cboApprovedBy As Libraries.CBaseControlsLibrary.CtComboBox
+    Public WithEvents cboApprovedBy As Libraries.CBaseControlsLibrary.AtmComboBox
     Friend WithEvents lblApprovalNote As Libraries.CBaseControlsLibrary.CLabel
     Friend WithEvents txtApprovalNote As Libraries.CBaseControlsLibrary.CTextBox
     Friend WithEvents lblDisapproved As Libraries.CBaseControlsLibrary.CLabel

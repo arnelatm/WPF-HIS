@@ -457,7 +457,7 @@
     <value>cboBaseUnitIdNo</value>
   </data>
   <data name="&gt;&gt;cboBaseUnitIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboBaseUnitIdNo.Parent" xml:space="preserve">
     <value>CFlowLayout4</value>
@@ -550,7 +550,7 @@
     <value>cboCategoryIdNo</value>
   </data>
   <data name="&gt;&gt;cboCategoryIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboCategoryIdNo.Parent" xml:space="preserve">
     <value>CFlowLayout4</value>

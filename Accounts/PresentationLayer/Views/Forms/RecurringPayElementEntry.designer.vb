@@ -31,7 +31,7 @@ Namespace PresentationLayer.Views.Forms
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+        Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         Me.lblLimitAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtLimitAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblStartDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -42,9 +42,9 @@ Namespace PresentationLayer.Views.Forms
         Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.lblPayElementName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboPayElementIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+        Me.cboPayElementIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         Me.lblRecurType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboRecurType = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+        Me.cboRecurType = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         Me.lblEndDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.dtpEndDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.lblTotalAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -537,7 +537,7 @@ End Sub
         Friend WithEvents lblIdNo As CLabel
         Public WithEvents TxtIdNo As CTextBox
         Friend WithEvents lblEmployeeIdNo As CLabel
-        Public WithEvents cboEmployeeIdNo As CtCombobox
+        Public WithEvents cboEmployeeIdNo As AtmComboBox
         Friend WithEvents lblLimitAmount As CLabel
         Public WithEvents txtLimitAmount As CTextBox
         Friend WithEvents lblStartDate As CLabel
@@ -548,11 +548,11 @@ End Sub
         Public WithEvents txtDateCreated As CTextBox
         Friend WithEvents CFlowLayout2 As CFlowLayout
         Friend WithEvents lblPayElementName As CLabel
-        Public WithEvents cboPayElementIdNo As CtCombobox
+        Public WithEvents cboPayElementIdNo As AtmComboBox
         Friend WithEvents lblTotalAmount As CLabel
         Public WithEvents txtTotalAmount As CTextBox
         Friend WithEvents lblRecurType As CLabel
-        Public WithEvents cboRecurType As CtCombobox
+        Public WithEvents cboRecurType As AtmComboBox
         Friend WithEvents CLabel2 As CLabel
         Friend WithEvents chkActive As CCheckBox
         Friend WithEvents lblEndDate As CLabel

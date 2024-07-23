@@ -2,7 +2,7 @@
 Imports System.Windows.Forms
 
 Public Class CDgvComboBoxEditingControl
-    Inherits CtComboBox
+    Inherits AtmComboBox
     Implements IDataGridViewEditingControl
 
     Private dataGridView As DataGridView

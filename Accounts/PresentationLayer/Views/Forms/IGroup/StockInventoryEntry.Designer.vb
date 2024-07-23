@@ -43,7 +43,7 @@
             Me.txtQuantity = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblGTIN = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtGTIN = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.cboItemFinder = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.cboItemFinder = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.txtBranchId = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.TableLayoutPanel1.SuspendLayout()
@@ -672,7 +672,7 @@
         Friend WithEvents txtQuantity As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents txtGTIN As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblGTIN As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboItemFinder As Libraries.CBaseControlsLibrary.CtCombobox
+        Friend WithEvents cboItemFinder As Libraries.CBaseControlsLibrary.AtmComboBox
         Friend WithEvents lblItemNameEnglish As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtItemNameEnglish As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents txtSerialNo As Libraries.CBaseControlsLibrary.CTextBox

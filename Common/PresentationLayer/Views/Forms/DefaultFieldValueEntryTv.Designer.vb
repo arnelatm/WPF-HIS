@@ -30,10 +30,10 @@ Namespace PresentationLayer.Views.Forms
         Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblSystemViewIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboSystemViewIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+        Me.cboSystemViewIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         Me.lblFieldName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblDataType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboDataType = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+        Me.cboDataType = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         Me.lblLength = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtLength = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblDecimalPart = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -522,8 +522,8 @@ End Sub
         Friend WithEvents txtDefaultValue As CTextBox
         Friend WithEvents lblDecimalPart As CLabel
         Friend WithEvents txtDecimalPart As CTextBox
-        Friend WithEvents cboDataType As CtCombobox
-        Friend WithEvents cboSystemViewIdNo As CtCombobox
+        Friend WithEvents cboDataType As AtmComboBox
+        Friend WithEvents cboSystemViewIdNo As AtmComboBox
         Friend WithEvents txtSystemViewNameAra As CTextBox
         Friend WithEvents txtSystemViewName As CTextBox
     End Class

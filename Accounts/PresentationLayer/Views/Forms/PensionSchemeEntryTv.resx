@@ -172,7 +172,7 @@
     <value>cboPensionProviderIdNo</value>
   </data>
   <data name="&gt;&gt;cboPensionProviderIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtCombobox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboPensionProviderIdNo.Parent" xml:space="preserve">
     <value>tlpMainTab</value>
@@ -445,7 +445,7 @@
     <value>cboAccountIdNo</value>
   </data>
   <data name="&gt;&gt;cboAccountIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtCombobox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboAccountIdNo.Parent" xml:space="preserve">
     <value>tlpPostingAccounts</value>

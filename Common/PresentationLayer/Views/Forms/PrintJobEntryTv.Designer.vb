@@ -35,13 +35,13 @@ Namespace PresentationLayer.Views.Forms
         Me.LblPrintJobNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtPrintJobNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
         Me.lblPrinterIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboPrinterIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+        Me.cboPrinterIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         Me.LblPaperSource = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboPaperSource = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+        Me.cboPaperSource = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         Me.LblPaperSize = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboPaperSize = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+        Me.cboPaperSize = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         Me.LblPaperOrientation = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboPaperOrientation = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+        Me.cboPaperOrientation = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SplitContainer1.Panel1.SuspendLayout
         Me.SplitContainer1.Panel2.SuspendLayout
@@ -555,12 +555,12 @@ End Sub
         Friend WithEvents LblPaperOrientation As CLabel
         Friend WithEvents lblPrinterIdNo As CLabel
         Friend WithEvents lblPrintJobName As CLabel
-        Friend WithEvents cboPaperSource As CtCombobox
-        Friend WithEvents cboPaperSize As CtCombobox
-        Friend WithEvents cboPaperOrientation As CtCombobox
+        Friend WithEvents cboPaperSource As AtmComboBox
+        Friend WithEvents cboPaperSize As AtmComboBox
+        Friend WithEvents cboPaperOrientation As AtmComboBox
         Friend WithEvents txtPrintJobName As CTextBox
         Friend WithEvents txtPrintJobNameAra As CTextBoxArabic
-        Friend WithEvents cboPrinterIdNo As CtCombobox
+        Friend WithEvents cboPrinterIdNo As AtmComboBox
         Friend WithEvents CLabel1 As CLabel
         Friend WithEvents txtPrintJobCode As CTextBox
     End Class

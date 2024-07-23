@@ -28,7 +28,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboWarehouseIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.cboWarehouseIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.chkAllWarehouses = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
@@ -274,7 +274,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Friend WithEvents btnOk As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents btnCancel As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents CLabel3 As CLabel
-        Friend WithEvents cboWarehouseIdNo As CtCombobox
+        Friend WithEvents cboWarehouseIdNo As AtmComboBox
         Friend WithEvents chkAllWarehouses As UcCheckBox
         Friend WithEvents lblExpiryDate As CLabel
         Friend WithEvents dtpExpiryDate As CCustomDateTimePicker

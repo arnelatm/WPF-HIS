@@ -31,9 +31,9 @@ Namespace PresentationLayer.Views.Forms
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblProductIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboProductIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboProductIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblSupplierIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboSupplierIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboSupplierIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblSupplierProductName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtSupplierProductName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblSupplierProductNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -160,7 +160,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboProductIdNo.EndFindValue = Nothing
             Me.cboProductIdNo.FieldDescription = Nothing
             Me.cboProductIdNo.FieldName = Nothing
-            Me.cboProductIdNo.FilterRule = Nothing
             Me.cboProductIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboProductIdNo.FindEnabled = False
             Me.CFlowLayout4.SetFlowBreak(Me.cboProductIdNo, True)
@@ -176,10 +175,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cboProductIdNo.OriginalList = Nothing
             Me.cboProductIdNo.OverrideDropDownStyleList = False
             Me.cboProductIdNo.PreviousSearchTerm = Nothing
-            Me.cboProductIdNo.PropertySelector = Nothing
             Me.cboProductIdNo.SuggestBoxHeight = 200
             Me.cboProductIdNo.SuggestCharCount = 3
-            Me.cboProductIdNo.SuggestListOrderRule = Nothing
             Me.cboProductIdNo.TextToSearch = Nothing
             Me.cboProductIdNo.Translatable = False
             Me.cboProductIdNo.ValueIsMandatory = False
@@ -210,7 +207,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboSupplierIdNo.EndFindValue = Nothing
             Me.cboSupplierIdNo.FieldDescription = Nothing
             Me.cboSupplierIdNo.FieldName = Nothing
-            Me.cboSupplierIdNo.FilterRule = Nothing
             Me.cboSupplierIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboSupplierIdNo.FindEnabled = False
             Me.CFlowLayout4.SetFlowBreak(Me.cboSupplierIdNo, True)
@@ -226,10 +222,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cboSupplierIdNo.OriginalList = Nothing
             Me.cboSupplierIdNo.OverrideDropDownStyleList = False
             Me.cboSupplierIdNo.PreviousSearchTerm = Nothing
-            Me.cboSupplierIdNo.PropertySelector = Nothing
             Me.cboSupplierIdNo.SuggestBoxHeight = 200
             Me.cboSupplierIdNo.SuggestCharCount = 1
-            Me.cboSupplierIdNo.SuggestListOrderRule = Nothing
             Me.cboSupplierIdNo.TextToSearch = Nothing
             Me.cboSupplierIdNo.Translatable = False
             Me.cboSupplierIdNo.ValueIsMandatory = False
@@ -343,13 +337,13 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblSupplierProductCode As CLabel
         Friend WithEvents txtSupplierProductCode As CTextBox
         Friend WithEvents lblSupplierIdNo As CLabel
-        Friend WithEvents cboProductIdNo As CtComboBox
+        Friend WithEvents cboProductIdNo As AtmComboBox
         Friend WithEvents lblSupplierProductName As CLabel
         Friend WithEvents txtSupplierProductName As CTextBox
         Friend WithEvents lblSupplierProductNameAra As CLabel
         Friend WithEvents txtSupplierProductNameAra As CTextBoxArabic
         Friend WithEvents lblProductIdNo As CLabel
-        Friend WithEvents cboSupplierIdNo As CtComboBox
+        Friend WithEvents cboSupplierIdNo As AtmComboBox
         Friend WithEvents dgvUnitIdNo As CDgvComboBoxColumn
         Friend WithEvents dgvUnitQty As DataGridViewTextBoxColumn
         Friend WithEvents BaseQtyDataGridViewTextBoxColumn As DataGridViewTextBoxColumn

@@ -38,9 +38,9 @@ Namespace PresentationLayer.Views.Forms
             Me.lblDoctorNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboSpecialtyIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.cboSpecialtyIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
@@ -373,8 +373,8 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblDoctorNameAra As CLabel
         Friend WithEvents CFlowLayout1 As CFlowLayout
         Friend WithEvents CLabel1 As CLabel
-        Friend WithEvents cboEmployeeIdNo As CtCombobox
+        Friend WithEvents cboEmployeeIdNo As AtmComboBox
         Friend WithEvents CLabel2 As CLabel
-        Friend WithEvents cboSpecialtyIdNo As CtCombobox
+        Friend WithEvents cboSpecialtyIdNo As AtmComboBox
     End Class
 End Namespace

@@ -226,7 +226,7 @@
     <value>cboLeaveIdNo</value>
   </data>
   <data name="&gt;&gt;cboLeaveIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtCombobox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboLeaveIdNo.Parent" xml:space="preserve">
     <value>CFlowLayout2</value>
@@ -415,7 +415,7 @@
     <value>cboEnteredBy</value>
   </data>
   <data name="&gt;&gt;cboEnteredBy.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtCombobox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboEnteredBy.Parent" xml:space="preserve">
     <value>CFlowLayout2</value>

@@ -33,11 +33,11 @@ Partial Class CFindForm
         Me.RBtnStart = New System.Windows.Forms.RadioButton()
         Me.RBtnAnywhere = New System.Windows.Forms.RadioButton()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.cbtTextToSearch = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+        Me.cbtTextToSearch = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         Me.txtEndValue = New System.Windows.Forms.TextBox()
         Me.txtBegValue = New System.Windows.Forms.TextBox()
         Me.lblTo1 = New System.Windows.Forms.Label()
-        Me.cboTextToSearch = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+        Me.cboTextToSearch = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         Me.dtpEndDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.dtpBegDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.cgbStringFindOption = New AATM.Libraries.CBaseControlsLibrary.CGroupBox()
@@ -158,7 +158,6 @@ Partial Class CFindForm
         Me.cbtTextToSearch.EndFindValue = Nothing
         Me.cbtTextToSearch.FieldDescription = Nothing
         Me.cbtTextToSearch.FieldName = Nothing
-        Me.cbtTextToSearch.FilterRule = Nothing
         Me.cbtTextToSearch.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.cbtTextToSearch.FindEnabled = False
         Me.cbtTextToSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -176,11 +175,9 @@ Partial Class CFindForm
         Me.cbtTextToSearch.OriginalList = Nothing
         Me.cbtTextToSearch.OverrideDropDownStyleList = False
         Me.cbtTextToSearch.PreviousSearchTerm = Nothing
-        Me.cbtTextToSearch.PropertySelector = Nothing
         Me.cbtTextToSearch.Size = New System.Drawing.Size(279, 28)
         Me.cbtTextToSearch.SuggestBoxHeight = 200
         Me.cbtTextToSearch.SuggestCharCount = 0
-        Me.cbtTextToSearch.SuggestListOrderRule = Nothing
         Me.cbtTextToSearch.TabIndex = 9
         Me.cbtTextToSearch.TextToSearch = Nothing
         Me.cbtTextToSearch.Translatable = False
@@ -235,7 +232,6 @@ Partial Class CFindForm
         Me.cboTextToSearch.EndFindValue = Nothing
         Me.cboTextToSearch.FieldDescription = Nothing
         Me.cboTextToSearch.FieldName = Nothing
-        Me.cboTextToSearch.FilterRule = Nothing
         Me.cboTextToSearch.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.cboTextToSearch.FindEnabled = False
         Me.cboTextToSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -253,10 +249,8 @@ Partial Class CFindForm
         Me.cboTextToSearch.OriginalList = Nothing
         Me.cboTextToSearch.OverrideDropDownStyleList = False
         Me.cboTextToSearch.PreviousSearchTerm = Nothing
-        Me.cboTextToSearch.PropertySelector = Nothing
         Me.cboTextToSearch.Size = New System.Drawing.Size(279, 28)
         Me.cboTextToSearch.SuggestBoxHeight = 200
-        Me.cboTextToSearch.SuggestListOrderRule = Nothing
         Me.cboTextToSearch.TabIndex = 3
         Me.cboTextToSearch.TextToSearch = Nothing
         Me.cboTextToSearch.Translatable = False
@@ -540,7 +534,7 @@ Partial Class CFindForm
     Friend WithEvents RBtnStart As RadioButton
     Friend WithEvents RBtnAnywhere As RadioButton
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
-    Public WithEvents cboTextToSearch As CtComboBox
+    Public WithEvents cboTextToSearch As AtmComboBox
     Friend WithEvents lblTo1 As Label
     Friend WithEvents chkChecked As UcCheckBox
     Friend WithEvents dtpEndDate As CCustomDateTimePicker
@@ -555,6 +549,6 @@ Partial Class CFindForm
     Friend WithEvents lblIgnoreCase As Label
     Friend WithEvents BtnCancel As Button
     Friend WithEvents BtnFind As Button
-    Friend WithEvents cbtTextToSearch As CtComboBox
+    Friend WithEvents cbtTextToSearch As AtmComboBox
     Friend WithEvents CtDataGridViewWithFooter1 As CtDataGridViewWithFooter
 End Class

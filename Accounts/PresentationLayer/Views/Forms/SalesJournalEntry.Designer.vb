@@ -60,7 +60,7 @@ Namespace PresentationLayer.Views.Forms
         Me.dtpTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.txtPayeeName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.floHeader2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
@@ -1321,7 +1321,7 @@ End Sub
         Friend WithEvents IdNoDataGridViewTextBoxColumn1 As Windows.Forms.DataGridViewTextBoxColumn
         Friend WithEvents SalesJournalIdNoDataGridViewTextBoxColumn As Windows.Forms.DataGridViewTextBoxColumn
         Friend WithEvents lblAccountIdNo As CLabel
-        Friend WithEvents cboAccountIdNo As CtCombobox
+        Friend WithEvents cboAccountIdNo As AtmComboBox
         Friend WithEvents floSalesDepositsFooter As CFlowLayout
         Friend WithEvents CLabel1 As CLabel
         Friend WithEvents btnHideJournalEntries As CButton

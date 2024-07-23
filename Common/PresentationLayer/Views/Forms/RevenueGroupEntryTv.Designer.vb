@@ -41,9 +41,9 @@ Namespace PresentationLayer.Views.Forms
             Me.lblRevenueGroupName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblRevenueGroupNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.cacParentIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblRevCostCenter = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.CtCombobox1 = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.CtCombobox1 = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtLevelNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -591,8 +591,8 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents _MBParentWithChildrenChangedDisallowed As LocalizableMessageBox
         Friend WithEvents _MSGMandatoryFields As LocalizableMessage
         Friend WithEvents txtSortKey As CTextBox
-        Friend WithEvents cacParentIdNo As CtCombobox
-        Friend WithEvents CtCombobox1 As CtCombobox
+        Friend WithEvents cacParentIdNo As AtmComboBox
+        Friend WithEvents CtCombobox1 As AtmComboBox
         Friend WithEvents CLabel1 As CLabel
     End Class
 End Namespace

@@ -31,17 +31,17 @@ Namespace PresentationLayer.Views.Forms
         Me.lblPrintSetupName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtPrintSetupName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblPrintSetupIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboPrintJobIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+        Me.cboPrintJobIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         Me.LblComputerIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboComputerIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+        Me.cboComputerIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         Me.lblPrinterIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboPrinterIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+        Me.cboPrinterIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         Me.LblPaperSource = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboPaperSource = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+        Me.cboPaperSource = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         Me.LblPaperSize = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboPaperSize = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+        Me.cboPaperSize = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         Me.LblPaperOrientation = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboPaperOrientation = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+        Me.cboPaperOrientation = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SplitContainer1.Panel1.SuspendLayout
         Me.SplitContainer1.Panel2.SuspendLayout
@@ -599,12 +599,12 @@ End Sub
         Friend WithEvents LblPaperOrientation As CLabel
         Friend WithEvents lblPrinterIdNo As CLabel
         Friend WithEvents lblPrintSetupIdNo As CLabel
-        Friend WithEvents cboPrintJobIdNo As CtCombobox
-        Friend WithEvents cboPaperSource As CtCombobox
-        Friend WithEvents cboPaperSize As CtCombobox
-        Friend WithEvents cboPaperOrientation As CtCombobox
-        Friend WithEvents cboComputerIdNo As CtCombobox
-        Friend WithEvents cboPrinterIdNo As CtCombobox
+        Friend WithEvents cboPrintJobIdNo As AtmComboBox
+        Friend WithEvents cboPaperSource As AtmComboBox
+        Friend WithEvents cboPaperSize As AtmComboBox
+        Friend WithEvents cboPaperOrientation As AtmComboBox
+        Friend WithEvents cboComputerIdNo As AtmComboBox
+        Friend WithEvents cboPrinterIdNo As AtmComboBox
         Friend WithEvents lblPrintSetupName As CLabel
         Friend WithEvents txtPrintSetupName As CTextBox
     End Class

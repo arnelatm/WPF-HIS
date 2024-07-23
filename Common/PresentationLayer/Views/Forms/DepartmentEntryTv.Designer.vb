@@ -35,9 +35,9 @@ Namespace PresentationLayer.Views.Forms
         Me.lblDepartmentNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtDepartmentNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
         Me.lblParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cacParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+        Me.cacParentIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         Me.lblRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cacRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+        Me.cacRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtSortKey = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -443,8 +443,8 @@ End Sub
         Friend WithEvents txtNotes As CTextBox
         Friend WithEvents lblRevCostCenterIdNo As CLabel
         Friend WithEvents lblParentIdNo As CLabel
-        Friend WithEvents cacParentIdNo As CtComboBox
-        Friend WithEvents cacRevCostCenterIdNo As CtComboBox
+        Friend WithEvents cacParentIdNo As AtmComboBox
+        Friend WithEvents cacRevCostCenterIdNo As AtmComboBox
         Friend WithEvents txtSortKey As CTextBox
     End Class
 End Namespace

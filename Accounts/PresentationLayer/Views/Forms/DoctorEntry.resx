@@ -313,7 +313,7 @@
     <value>cboEmployeeIdNo</value>
   </data>
   <data name="&gt;&gt;cboEmployeeIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtCombobox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboEmployeeIdNo.Parent" xml:space="preserve">
     <value>floDataDisplay</value>
@@ -502,7 +502,7 @@
     <value>cboSpecialtyIdNo</value>
   </data>
   <data name="&gt;&gt;cboSpecialtyIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtCombobox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboSpecialtyIdNo.Parent" xml:space="preserve">
     <value>floDataDisplay</value>

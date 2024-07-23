@@ -436,7 +436,7 @@
     <value>cacParentIdNo</value>
   </data>
   <data name="&gt;&gt;cacParentIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cacParentIdNo.Parent" xml:space="preserve">
     <value>CFlowLayout1</value>
@@ -499,7 +499,7 @@
     <value>cacRevCostCenterIdNo</value>
   </data>
   <data name="&gt;&gt;cacRevCostCenterIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cacRevCostCenterIdNo.Parent" xml:space="preserve">
     <value>CFlowLayout1</value>

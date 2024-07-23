@@ -202,7 +202,7 @@
     <value>cboInventoryAction</value>
   </data>
   <data name="&gt;&gt;cboInventoryAction.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtCombobox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboInventoryAction.Parent" xml:space="preserve">
     <value>TableLayoutPanel1</value>
@@ -583,7 +583,7 @@
     <value>cboAccountIdNo</value>
   </data>
   <data name="&gt;&gt;cboAccountIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboAccountIdNo.Parent" xml:space="preserve">
     <value>TableLayoutPanel1</value>

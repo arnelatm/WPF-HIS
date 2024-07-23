@@ -436,7 +436,7 @@
     <value>cboParentIdNo</value>
   </data>
   <data name="&gt;&gt;cboParentIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtCombobox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboParentIdNo.Parent" xml:space="preserve">
     <value>floDataDisplay</value>
@@ -565,7 +565,7 @@
     <value>cboAccountGroup</value>
   </data>
   <data name="&gt;&gt;cboAccountGroup.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtCombobox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboAccountGroup.Parent" xml:space="preserve">
     <value>floDataDisplay</value>
@@ -631,7 +631,7 @@
     <value>cboSpecialAccount</value>
   </data>
   <data name="&gt;&gt;cboSpecialAccount.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtCombobox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboSpecialAccount.Parent" xml:space="preserve">
     <value>floDataDisplay</value>
@@ -940,7 +940,7 @@
     <value>cboNormalBalance</value>
   </data>
   <data name="&gt;&gt;cboNormalBalance.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtCombobox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboNormalBalance.Parent" xml:space="preserve">
     <value>floDataDisplay</value>
@@ -1006,7 +1006,7 @@
     <value>cboPayeeType</value>
   </data>
   <data name="&gt;&gt;cboPayeeType.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtCombobox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboPayeeType.Parent" xml:space="preserve">
     <value>floDataDisplay</value>

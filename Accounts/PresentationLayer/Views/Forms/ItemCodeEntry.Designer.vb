@@ -39,7 +39,7 @@ Namespace PresentationLayer.Views.Forms
         Me.lblItemCodeNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboCodeGroupSelector = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboCodeGroupSelector = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.btnLockGroup = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.LblNote = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtNote = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -413,7 +413,7 @@ End Sub
         Friend WithEvents lblItemCodeNameAra As CLabel
         Friend WithEvents CFlowLayout1 As CFlowLayout
         Friend WithEvents CLabel1 As CLabel
-        Friend WithEvents cboCodeGroupSelector As CtComboBox
+        Friend WithEvents cboCodeGroupSelector As AtmComboBox
         Friend WithEvents LblNote As CLabel
         Friend WithEvents txtNote As CTextBox
         Friend WithEvents btnLockGroup As CButton

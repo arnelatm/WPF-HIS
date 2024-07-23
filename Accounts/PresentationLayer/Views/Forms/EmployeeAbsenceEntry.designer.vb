@@ -31,7 +31,7 @@ Namespace PresentationLayer.Views.Forms
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+        Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         Me.lblEquivalentHours = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtEquivalentHours = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblAddedBy = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -48,7 +48,7 @@ Namespace PresentationLayer.Views.Forms
         Me.lblPayrollName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtPayrollName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblAbsenceType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboAbsenceType = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+        Me.cboAbsenceType = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         Me.lblAbsenceReason = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtAbsenceReason = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -599,14 +599,14 @@ End Sub
         Friend WithEvents lblIdNo As CLabel
         Public WithEvents TxtIdNo As CTextBox
         Friend WithEvents lblEmployeeIdNo As CLabel
-        Public WithEvents cboEmployeeIdNo As CtCombobox
+        Public WithEvents cboEmployeeIdNo As AtmComboBox
         Friend WithEvents lblEquivalentHours As CLabel
         Public WithEvents txtEquivalentHours As CTextBox
         Friend WithEvents lblAddedBy As CLabel
         Public WithEvents txtUserName As CTextBox
         Friend WithEvents CFlowLayout2 As CFlowLayout
         Friend WithEvents lblAbsenceType As CLabel
-        Public WithEvents cboAbsenceType As CtComboBox
+        Public WithEvents cboAbsenceType As AtmComboBox
         Friend WithEvents lblAbsenceReason As CLabel
         Public WithEvents txtAbsenceReason As CTextBox
         Friend WithEvents lblPayrollIdNo As CLabel

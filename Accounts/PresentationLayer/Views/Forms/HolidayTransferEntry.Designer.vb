@@ -31,13 +31,13 @@
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.dtpDateCreated = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.lblEnteredBy = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboHolidayIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboHolidayIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblHolidayDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpDateStart = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpDateEnd = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboenteredBy = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboenteredBy = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.DataGridViewHolidayTransferitems = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.dgvEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
             Me.HolidayTransferIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -491,11 +491,11 @@ End Sub
         Friend WithEvents txtIdNo As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblEnteredBy As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents DataGridViewHolidayTransferitems As Libraries.CBaseControlsLibrary.CtDataGridView
-        Friend WithEvents cboenteredBy As Libraries.CBaseControlsLibrary.CtCombobox
+        Friend WithEvents cboenteredBy As Libraries.CBaseControlsLibrary.AtmComboBox
         Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents dtpDateCreated As Libraries.CBaseControlsLibrary.CCustomDateTimePicker
         Friend WithEvents CLabel2 As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboHolidayIdNo As Libraries.CBaseControlsLibrary.CtCombobox
+        Friend WithEvents cboHolidayIdNo As Libraries.CBaseControlsLibrary.AtmComboBox
         Friend WithEvents dgvEmployeeIdNo As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
         Friend WithEvents HolidayTransferIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn

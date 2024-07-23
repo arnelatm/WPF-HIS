@@ -81,7 +81,7 @@ Public Class CFindForm
             _findableControl.BegFindValue = TxtTextToSearch.Text
             If _findableControl.SearchMode = IFindableControl.SearchModeEnum.ComboBox Then
                 _findableControl.SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue
-                If TypeOf _findableControl IsNot CtComboBox Then
+                If TypeOf _findableControl IsNot AtmComboBox Then
                     _findableControl.BegFindValue = cboTextToSearch.SelectedValue
                     _findableControl.EndFindValue = cboTextToSearch.SelectedValue
                 Else
@@ -103,7 +103,7 @@ Public Class CFindForm
         ElseIf _findableControl.FindDataType = IFindableControl.DataTypeEnum.Date Then
             If _findableControl.SearchMode = IFindableControl.SearchModeEnum.ComboBox Then
                 _findableControl.SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue
-                If TypeOf _findableControl IsNot CtComboBox Then
+                If TypeOf _findableControl IsNot AtmComboBox Then
                     _findableControl.BegFindValue = cboTextToSearch.SelectedValue
                     _findableControl.EndFindValue = cboTextToSearch.SelectedValue
                 Else
@@ -118,7 +118,7 @@ Public Class CFindForm
         ElseIf _findableControl.FindDataType = IFindableControl.DataTypeEnum.Decimal Or _findableControl.FindDataType = IFindableControl.DataTypeEnum.Integer Then
             If _findableControl.SearchMode = IFindableControl.SearchModeEnum.ComboBox Then
                 _findableControl.SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue
-                If TypeOf _findableControl IsNot CtComboBox Then
+                If TypeOf _findableControl IsNot AtmComboBox Then
                     _findableControl.BegFindValue = cboTextToSearch.SelectedValue
                     _findableControl.EndFindValue = cboTextToSearch.SelectedValue
                 Else
@@ -221,7 +221,7 @@ Public Class CFindForm
             'lblLookFor3.Visible = False
             'lblLookFor4.Visible = False
             TxtTextToSearch.Visible = False
-            If TypeOf _findableControl IsNot CtComboBox Then
+            If TypeOf _findableControl IsNot AtmComboBox Then
                 cboTextToSearch.Visible = True
                 cboTextToSearch.DataSource = _findableControl.FindDataSource
                 cboTextToSearch.DisplayMember = _findableControl.FindDisplayMember

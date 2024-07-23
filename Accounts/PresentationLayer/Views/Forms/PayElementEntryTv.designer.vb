@@ -41,9 +41,9 @@ Namespace PresentationLayer.Views.Forms
             Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Me.floPayElement = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.tlpPayElement = New System.Windows.Forms.TableLayoutPanel()
-            Me.cboReportGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.cboReportGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblReportGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboPayElementKind = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.cboPayElementKind = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblPayElementType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblPayElementKind = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtPayElementNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
@@ -63,8 +63,8 @@ Namespace PresentationLayer.Views.Forms
             Me.floCalculation = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.tlpCalculation = New System.Windows.Forms.TableLayoutPanel()
             Me.lblQuantityType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboQuantityType = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
-            Me.cboCalculationType = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.cboQuantityType = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cboCalculationType = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblFactorValue = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblCalculationType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtRate = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -72,25 +72,25 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDefaultQuantity = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblDefaultQuantity = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblBasePayment = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboBasePaymentIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.cboBasePaymentIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblIncludeInEos = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkIncludeInEOS = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.txtMultiplier = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.cboFactorType = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.cboFactorType = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblFactorType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkTaxable = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.lblTaxable = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblSlash = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboUnit = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.cboUnit = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblUnit = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboPayElementType = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.cboPayElementType = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblSlash2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.tbpAccountPosting = New System.Windows.Forms.TabPage()
             Me.floPostingAccounts = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.tlpPostingAccounts = New System.Windows.Forms.TableLayoutPanel()
             Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkUsePayGroups = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
-            Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblUsePayGroups = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.DataGridViewPayElementAccounts = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -1524,12 +1524,12 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents txtRate As CTextBox
         Friend WithEvents txtDefaultQuantity As CTextBox
         Friend WithEvents lblBasePayment As CLabel
-        Friend WithEvents cboBasePaymentIdNo As CtCombobox
+        Friend WithEvents cboBasePaymentIdNo As AtmComboBox
         Friend WithEvents lblIncludeInEos As CLabel
         Friend WithEvents chkIncludeInEOS As CCheckBox
         Friend WithEvents txtMultiplier As CTextBox
-        Friend WithEvents cboFactorType As CtCombobox
-        Friend WithEvents cboUnit As CtCombobox
+        Friend WithEvents cboFactorType As AtmComboBox
+        Friend WithEvents cboUnit As AtmComboBox
         Friend WithEvents lblSlash As CLabel
         Friend WithEvents tbpAccountPosting As TabPage
         Friend WithEvents floPostingAccounts As CFlowLayout
@@ -1540,23 +1540,23 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblUsePayGroups As CLabel
         Friend WithEvents lblPayElementType As CLabel
         Friend WithEvents lblAccountIdNo As CLabel
-        Friend WithEvents cboAccountIdNo As CtCombobox
+        Friend WithEvents cboAccountIdNo As AtmComboBox
         Friend WithEvents lblUnit As CLabel
         Friend WithEvents tbpSummaryDetail As TabPage
         Friend WithEvents tabPageImages As ImageList
         Friend WithEvents lblFactorType As CLabel
-        Friend WithEvents cboPayElementType As CtCombobox
-        Friend WithEvents cboCalculationType As CtCombobox
-        Friend WithEvents cboQuantityType As CtCombobox
+        Friend WithEvents cboPayElementType As AtmComboBox
+        Friend WithEvents cboCalculationType As AtmComboBox
+        Friend WithEvents cboQuantityType As AtmComboBox
         Friend WithEvents lblSlash2 As CLabel
         Friend WithEvents lblQuantityType As CLabel
         Friend WithEvents DataGridViewPayElementItems As CtDataGridView
         Friend WithEvents bsPayElementItems As BindingSource
         Friend WithEvents DataGridViewPayElementAccounts As CtDataGridView
         Friend WithEvents bsPayElementAccounts As BindingSource
-        Friend WithEvents cboPayElementKind As CtCombobox
+        Friend WithEvents cboPayElementKind As AtmComboBox
         Friend WithEvents lblPayElementKind As CLabel
-        Friend WithEvents cboReportGroupIdNo As CtCombobox
+        Friend WithEvents cboReportGroupIdNo As AtmComboBox
         Friend WithEvents lblReportGroupIdNo As CLabel
         Friend WithEvents chkSummary As CCheckBox
         Friend WithEvents chkActive As CCheckBox

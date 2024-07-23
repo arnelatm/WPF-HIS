@@ -76,9 +76,9 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.cacCountryCode = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
-            Me.cacBankIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
-            Me.cacPaymentMethod = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.cacCountryCode = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cacBankIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
+            Me.cacPaymentMethod = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblActive = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkActive = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -1131,9 +1131,9 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblPaymentMethod As CLabel
         Friend WithEvents chkActive As CCheckBox
         Friend WithEvents lblActive As CLabel
-        Friend WithEvents cacCountryCode As CtCombobox
-        Friend WithEvents cacBankIdNo As CtCombobox
-        Friend WithEvents cacPaymentMethod As CtCombobox
+        Friend WithEvents cacCountryCode As AtmComboBox
+        Friend WithEvents cacBankIdNo As AtmComboBox
+        Friend WithEvents cacPaymentMethod As AtmComboBox
         Friend WithEvents CLabel1 As CLabel
     End Class
 End Namespace

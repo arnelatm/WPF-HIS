@@ -41,7 +41,7 @@ Partial Class EmployeeLeaveApprovalEntry
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblEnteredBy = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboApprovedBy = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+        Me.cboApprovedBy = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.dtpDateCreated = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.DataGridViewEmployeeLeave = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
@@ -657,7 +657,7 @@ Partial Class EmployeeLeaveApprovalEntry
     Friend WithEvents lblIdNo As Libraries.CBaseControlsLibrary.CLabel
     Friend WithEvents txtIdNo As Libraries.CBaseControlsLibrary.CTextBox
     Friend WithEvents lblEnteredBy As Libraries.CBaseControlsLibrary.CLabel
-    Friend WithEvents cboApprovedBy As Libraries.CBaseControlsLibrary.CtComboBox
+    Friend WithEvents cboApprovedBy As Libraries.CBaseControlsLibrary.AtmComboBox
     Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel
     Friend WithEvents dtpDateCreated As Libraries.CBaseControlsLibrary.CCustomDateTimePicker
     Friend WithEvents DataGridViewEmployeeLeave As Libraries.CBaseControlsLibrary.CtDataGridView

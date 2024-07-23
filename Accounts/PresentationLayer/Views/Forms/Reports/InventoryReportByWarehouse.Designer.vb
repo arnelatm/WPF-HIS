@@ -26,7 +26,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.lblSupplierCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboWarehouseIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.cboWarehouseIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.chkAllWarehouses = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
@@ -208,7 +208,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents btnOk As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents btnCancel As Libraries.CBaseControlsLibrary.CButton
-        Friend WithEvents cboWarehouseIdNo As CtCombobox
+        Friend WithEvents cboWarehouseIdNo As AtmComboBox
         Friend WithEvents chkAllWarehouses As UcCheckBox
     End Class
 End Namespace

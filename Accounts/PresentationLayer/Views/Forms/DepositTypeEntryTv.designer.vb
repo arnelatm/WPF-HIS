@@ -31,7 +31,7 @@ Namespace PresentationLayer.Views.Forms
         Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.tlpPaymentType = New System.Windows.Forms.TableLayoutPanel()
         Me.lblWithBankCharges = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+        Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         Me.lblCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtDepositTypeNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
         Me.txtDepositTypeName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -42,9 +42,9 @@ Namespace PresentationLayer.Views.Forms
         Me.lblNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblBankChargesAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.cboBankChargesAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+        Me.cboBankChargesAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         Me.lblBankChargesVatAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboBankChargesVatAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+        Me.cboBankChargesVatAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         Me.txtRate = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblRate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -529,7 +529,7 @@ End Sub
         Friend WithEvents floDataDisplay As CFlowLayout
         Friend WithEvents tlpPaymentType As TableLayoutPanel
         Friend WithEvents lblWithBankCharges As CLabel
-        Friend WithEvents cboAccountIdNo As CtCombobox
+        Friend WithEvents cboAccountIdNo As AtmComboBox
         Friend WithEvents lblCode As CLabel
         Friend WithEvents txtDepositTypeNameAra As CTextBoxArabic
         Friend WithEvents txtDepositTypeName As CTextBox
@@ -540,9 +540,9 @@ End Sub
         Friend WithEvents lblNameAra As CLabel
         Friend WithEvents lblBankChargesAccountIdNo As CLabel
         Friend WithEvents txtNotes As CTextBox
-        Friend WithEvents cboBankChargesAccountIdNo As CtCombobox
+        Friend WithEvents cboBankChargesAccountIdNo As AtmComboBox
         Friend WithEvents lblBankChargesVatAccountIdNo As CLabel
-        Friend WithEvents cboBankChargesVatAccountIdNo As CtCombobox
+        Friend WithEvents cboBankChargesVatAccountIdNo As AtmComboBox
         Friend WithEvents txtRate As CTextBox
         Friend WithEvents lblRate As CLabel
         Friend WithEvents lblNotes As CLabel

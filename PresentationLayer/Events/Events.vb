@@ -468,13 +468,13 @@ End Class
 
 Public Class GetControlEnumDataSource
 
-    Public Sub New(enumObj As [Enum], control As CtComboBox)
+    Public Sub New(enumObj As [Enum], control As AtmComboBox)
         Me.Control = control
         Me.EnumObj = enumObj
     End Sub
 
     Public Property EnumObj As [Enum]
-    Public Property Control As CtComboBox
+    Public Property Control As AtmComboBox
 
 End Class
 

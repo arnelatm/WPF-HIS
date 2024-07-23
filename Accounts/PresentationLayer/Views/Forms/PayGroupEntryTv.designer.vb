@@ -42,7 +42,7 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.cboParentIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
@@ -384,7 +384,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents TxtIdNo As CTextBox
         Friend WithEvents lblIdNo As CLabel
         Friend WithEvents lblCode As CLabel
-        Friend WithEvents cboParentIdNo As CtCombobox
+        Friend WithEvents cboParentIdNo As AtmComboBox
         Friend WithEvents txtLevelNumber As CTextBox
         Friend WithEvents CLabel1 As CLabel
         Friend WithEvents txtNotes As CTextBox

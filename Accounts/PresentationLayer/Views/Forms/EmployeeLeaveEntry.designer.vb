@@ -39,16 +39,16 @@ Namespace PresentationLayer.Views.Forms
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblStartDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpStartDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblLeaveName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboLeaveIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboLeaveIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblHolidayName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboHolidayIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboHolidayIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblFullDay = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkFullDay = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.lblEndDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -58,9 +58,9 @@ Namespace PresentationLayer.Views.Forms
             Me.lblReason = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtReason = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblStatus = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboStatus = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboStatus = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblenteredBy = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboenteredBy = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboenteredBy = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.DataGridViewApprovalHistory = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.dgvApprovalIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -845,14 +845,14 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblIdNo As CLabel
         Public WithEvents TxtIdNo As CTextBox
         Friend WithEvents lblEmployeeIdNo As CLabel
-        Public WithEvents cboEmployeeIdNo As CtComboBox
+        Public WithEvents cboEmployeeIdNo As AtmComboBox
         Friend WithEvents lblStartDate As CLabel
         Public WithEvents dtpStartDate As CCustomDateTimePicker
         Friend WithEvents lblDateCreated As CLabel
         Public WithEvents txtDateCreated As CTextBox
         Friend WithEvents CFlowLayout2 As CFlowLayout
         Friend WithEvents lblLeaveName As CLabel
-        Public WithEvents cboLeaveIdNo As CtComboBox
+        Public WithEvents cboLeaveIdNo As AtmComboBox
         Friend WithEvents lblEndDate As CLabel
         Public WithEvents dtpEndDate As CCustomDateTimePicker
         Friend WithEvents lblFullDay As CLabel
@@ -860,15 +860,15 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblReason As CLabel
         Public WithEvents txtReason As CTextBox
         Friend WithEvents lblStatus As CLabel
-        Public WithEvents cboStatus As CtComboBox
+        Public WithEvents cboStatus As AtmComboBox
         Friend WithEvents lblenteredBy As CLabel
-        Public WithEvents cboenteredBy As CtComboBox
+        Public WithEvents cboenteredBy As AtmComboBox
         Friend WithEvents DataGridViewApprovalHistory As CtDataGridView
         Friend WithEvents bsEmployeeLeaveApproval As BindingSource
         Friend WithEvents bsEmployeeLeaveApprovalHistory As BindingSource
         Friend WithEvents CLabel1 As CLabel
         Friend WithEvents lblHolidayName As CLabel
-        Public WithEvents cboHolidayIdNo As CtComboBox
+        Public WithEvents cboHolidayIdNo As AtmComboBox
         Friend WithEvents dgvNote As CDgvTextColumn
         Friend WithEvents dgvDateCreated As CDgvTextColumn
         Friend WithEvents dgvApprovalIdNo As CDgvTextColumn

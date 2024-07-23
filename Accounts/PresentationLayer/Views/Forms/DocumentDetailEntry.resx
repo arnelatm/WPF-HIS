@@ -421,7 +421,7 @@
     <value>cboContactIdNo</value>
   </data>
   <data name="&gt;&gt;cboContactIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboContactIdNo.Parent" xml:space="preserve">
     <value>CFlowLayout2</value>
@@ -1048,7 +1048,7 @@
     <value>cboDocumentIdNo</value>
   </data>
   <data name="&gt;&gt;cboDocumentIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboDocumentIdNo.Parent" xml:space="preserve">
     <value>CFlowLayout2</value>

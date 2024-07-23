@@ -36,7 +36,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPayCycleCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblPayCycleName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblPayFrequency = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboPayFrequency = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.cboPayFrequency = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblPayCycleNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -410,6 +410,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents _MBParentWithChildrenChangedDisallowed As LocalizableMessageBox
         Friend WithEvents _MSGMandatoryFields As LocalizableMessage
         Friend WithEvents lblPayFrequency As CLabel
-        Friend WithEvents cboPayFrequency As CtCombobox
+        Friend WithEvents cboPayFrequency As AtmComboBox
     End Class
 End Namespace

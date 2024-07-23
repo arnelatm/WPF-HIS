@@ -37,9 +37,9 @@ Namespace PresentationLayer.Views.Forms
         Me.lblDocumentNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtDocumentNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
         Me.lblDocumentType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboDocumentType = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+        Me.cboDocumentType = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         Me.lblImageType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboImageType = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+        Me.cboImageType = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkNeedsNumber = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -510,9 +510,9 @@ End Sub
         Friend WithEvents lblDocumentName As CLabel
         Friend WithEvents lblNotes As CLabel
         Friend WithEvents lblDocumentType As CLabel
-        Friend WithEvents cboDocumentType As CtCombobox
+        Friend WithEvents cboDocumentType As AtmComboBox
         Friend WithEvents lblImageType As CLabel
-        Friend WithEvents cboImageType As CtCombobox
+        Friend WithEvents cboImageType As AtmComboBox
         Friend WithEvents lblDocumentNameAra As CLabel
         Friend WithEvents txtDocumentNameAra As CTextBoxArabic
         Friend WithEvents CLabel1 As CLabel

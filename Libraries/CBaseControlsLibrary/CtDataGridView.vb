@@ -94,7 +94,6 @@ Public Class CtDataGridView
         End Get
         Set(value As Boolean)
             _editingMode = value
-            UpdateDisplayOnlyControl()
             For Each col In Columns
                 If TypeOf col Is IEntryControl Then
                     'If TypeOf col Is CDgvCheckBoxColumn And value Then
@@ -115,6 +114,7 @@ Public Class CtDataGridView
                 End If
                 DgvFooter.CalculateTotals()
             End If
+            UpdateDisplayOnlyControl()
         End Set
     End Property
 
@@ -122,7 +122,12 @@ Public Class CtDataGridView
         If _editingMode And Not DisplayOnly Then
             DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
             DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-            Me.ReadOnly = False
+            Try
+                Me.ReadOnly = False
+            Catch ex As Exception
+
+            End Try
+            'Me.ReadOnly = False
         Else
             'Me.[ReadOnly] = False
             DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
@@ -367,21 +372,49 @@ Public Class CtDataGridView
         'End If
     End Sub
 
-    Private Sub DataGridView_DataError(ByVal sender As Object, ByVal e As DataGridViewDataErrorEventArgs) Handles Me.DataError
+    'Private Sub DataGridView_DataError(ByVal sender As Object, ByVal e As DataGridViewDataErrorEventArgs) Handles Me.DataError
 
-        'Try
-        'Catch ex As Exception
-        If (e.Context = DataGridViewDataErrorContexts.Formatting) OrElse (e.Context = DataGridViewDataErrorContexts.PreferredSize) OrElse (e.Context = DataGridViewDataErrorContexts.Display) OrElse (e.Context = DataGridViewDataErrorContexts.Display) Then
-            'Debugger.Break()
-            ' ignore error
-        Else
-            If e.Context.HasFlag(DataGridViewDataErrorContexts.Parsing) Then
-                Dim editControl As Object = Me.EditingControl
-                If TypeOf (editControl) Is CtDgvDtpEditingControl Then
-                    Dim x As CtDgvDtpEditingControl = DirectCast(editControl, CtDgvDtpEditingControl)
-                    x.InformUserOfInvalidDate()
-                End If
-            End If
+    '    'Try
+    '    'Catch ex As Exception
+    '    If (e.Context = DataGridViewDataErrorContexts.Formatting) OrElse (e.Context = DataGridViewDataErrorContexts.PreferredSize) OrElse (e.Context = DataGridViewDataErrorContexts.Display) OrElse (e.Context = DataGridViewDataErrorContexts.Display) Then
+    '        'Debugger.Break()
+    '        ' ignore error
+    '    Else
+    '        If e.Context.HasFlag(DataGridViewDataErrorContexts.Parsing) Then
+    '            Dim editControl As Object = Me.EditingControl
+    '            If TypeOf (editControl) Is CtDgvDtpEditingControl Then
+    '                Dim x As CtDgvDtpEditingControl = DirectCast(editControl, CtDgvDtpEditingControl)
+    '                x.InformUserOfInvalidDate()
+    '            End If
+    '        End If
+    '    End If
+    'End Sub
+
+
+
+    Private Sub DataGridView1_DataError(ByVal sender As Object, ByVal e As DataGridViewDataErrorEventArgs) Handles Me.DataError
+
+        MessageBox.Show("Error happened " & e.Context.ToString())
+
+        If (e.Context = DataGridViewDataErrorContexts.Commit) Then
+            MessageBox.Show("Commit error")
+        End If
+        If (e.Context = DataGridViewDataErrorContexts.CurrentCellChange) Then
+            MessageBox.Show("Cell change")
+        End If
+        If (e.Context = DataGridViewDataErrorContexts.Parsing) Then
+            MessageBox.Show("parsing error")
+        End If
+        If (e.Context =
+        DataGridViewDataErrorContexts.LeaveControl) Then
+            MessageBox.Show("leave control error")
+        End If
+
+        If (TypeOf (e.Exception) Is ConstraintException) Then
+            Dim view As DataGridView = CType(sender, DataGridView)
+            view.Rows(e.RowIndex).ErrorText = "an error"
+            view.Rows(e.RowIndex).Cells(e.ColumnIndex).ErrorText = "an error"
+            e.ThrowException = False
         End If
     End Sub
 
@@ -465,7 +498,7 @@ Public Class CtDataGridView
         If TypeOf e.Control Is CtComboBoxEditingControl Then
             'Me.EditingMode = True
             'Me.SuspendDrawingNew()
-            'declare variable(cb) as a CtCombobox
+            'declare variable(cb) as a AtmComboBox
             Dim cb As CtComboBoxEditingControl
             cb = e.Control
             'set the dropdown style of a combobox

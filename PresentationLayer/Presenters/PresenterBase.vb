@@ -1101,7 +1101,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
 
     Private Sub FormatError(ctrl As Object, ctrlError As String)
         If DirectCast(ctrl, Control).Dock = DockStyle.Fill Then
-            If TypeOf ctrl Is CtComboBox Then
+            If TypeOf ctrl Is AtmComboBox Then
                 MyErrorProvider.SetIconPadding(ctrl, -27)
             Else
                 MyErrorProvider.SetIconPadding(ctrl, -16)
@@ -1704,7 +1704,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
                             End If
                         End If
                         Exit For
-                    ElseIf TypeOf cCtrl Is CtComboBox OrElse TypeOf cCtrl Is CComboBox Then
+                    ElseIf TypeOf cCtrl Is AtmComboBox OrElse TypeOf cCtrl Is CComboBox Then
                         '
                         '
                     ElseIf TypeOf cCtrl Is CCustomDateTimePicker OrElse TypeOf cCtrl Is CDateTimePicker OrElse
@@ -2047,7 +2047,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     '    CreateDataSource("ItemCode", fieldName, Nothing, Nothing, "CodeGroupIdNo = " & idNo.ToString())
     'End Sub
 
-    Protected Function GetControlName(ByVal fieldName As String) As CtComboBox
+    Protected Function GetControlName(ByVal fieldName As String) As AtmComboBox
         Dim control As Control = Nothing
         If Not MainFieldsDictionary.TryGetValue(fieldName, control) Then
             Debugger.Break()
@@ -2056,8 +2056,8 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Return control
     End Function
 
-    Protected Function GetFieldControlName(ByVal propertyName As String) As CtComboBox
-        Dim control As CtComboBox = Nothing
+    Protected Function GetFieldControlName(ByVal propertyName As String) As AtmComboBox
+        Dim control As AtmComboBox = Nothing
         Try
             If Not MainFieldsDictionary.TryGetValue(propertyName, control) Then
                 Debugger.Break()
@@ -2098,7 +2098,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     End Function
 
     Public Sub CreateEnumDataSource(Of TE)(ByVal fieldName As String)
-        Dim control As CtComboBox = Nothing
+        Dim control As AtmComboBox = Nothing
         Dim x = MainFieldsDictionary
         If MainFieldsDictionary.TryGetValue(fieldName, control) Then
             control.DataSource = GetEnumData(Of TE)()

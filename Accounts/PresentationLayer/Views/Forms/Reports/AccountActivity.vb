@@ -116,8 +116,8 @@ Namespace PresentationLayer.Views.Forms.Reports
 
         Friend WithEvents CLabel2 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents CLabel3 As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboStartAccountCode As Libraries.CBaseControlsLibrary.CtCombobox
-        Friend WithEvents cboEndAccountCode As Libraries.CBaseControlsLibrary.CtCombobox
+        Friend WithEvents cboStartAccountCode As Libraries.CBaseControlsLibrary.AtmComboBox
+        Friend WithEvents cboEndAccountCode As Libraries.CBaseControlsLibrary.AtmComboBox
     End Class
 
 End Namespace

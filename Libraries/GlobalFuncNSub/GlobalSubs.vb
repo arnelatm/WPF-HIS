@@ -5,7 +5,7 @@ Public Module GlobalSubs
 
 #Region "Old Subs"
 
-    Public Sub SetPropertyValue(obj As Object, propName As String, propValue As Object, Optional ByVal ignoreException As Boolean = False)
+    Public Sub SetPropertyValue(ByRef obj As Object, propName As String, propValue As Object, Optional ByVal ignoreException As Boolean = False)
         'If TypeOf obj Is DataGridView Then
         '    Debugger.Break()
         'End If
@@ -16,10 +16,15 @@ Public Module GlobalSubs
         If pInfo IsNot Nothing Then
             'Dim pInfo As System.Reflection.PropertyInfo = objType.GetProperty(PropName, Reflection.BindingFlags.GetProperty)
             Try
-                'If objType.FullName = "AATM.Libraries.CBaseControlsLibrary.CtDataGridView" Then
-                '    Debugger.Break()
-                'End If
-                pInfo.SetValue(obj, propValue) ', BindingFlags.GetProperty, Nothing, Nothing, Nothing)
+                If objType.FullName = "AATM.Libraries.CBaseControlsLibrary.CtDataGridView" Then
+                    If propName <> "EditingMode" Then
+                        pInfo.SetValue(obj, propValue, BindingFlags.GetProperty, Nothing, Nothing, Nothing)
+                    Else
+                        Debugger.Break()
+                    End If
+                Else
+                    pInfo.SetValue(obj, propValue, BindingFlags.GetProperty, Nothing, Nothing, Nothing)
+                End If
             Catch ex As Exception
                 'Debugger.Break()
                 If Not ignoreException Then

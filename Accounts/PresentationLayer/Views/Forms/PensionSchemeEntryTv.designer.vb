@@ -44,14 +44,14 @@ Namespace PresentationLayer.Views.Forms
             Me.tbpMain = New System.Windows.Forms.TabPage()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.tlpMainTab = New System.Windows.Forms.TableLayoutPanel()
-            Me.cboPensionProviderIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.cboPensionProviderIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.lblPensionProviderIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.tbpPensionRates = New System.Windows.Forms.TabPage()
             Me.tlpPostingAccounts = New System.Windows.Forms.TableLayoutPanel()
             Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.AtmComboBox()
             Me.DataGridViewPensionRates = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvLowRange = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
@@ -700,14 +700,14 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents tbpMain As TabPage
         Friend WithEvents CFlowLayout1 As CFlowLayout
         Friend WithEvents tlpMainTab As TableLayoutPanel
-        Friend WithEvents cboPensionProviderIdNo As CtCombobox
+        Friend WithEvents cboPensionProviderIdNo As AtmComboBox
         Friend WithEvents lblPensionProviderIdNo As CLabel
         Friend WithEvents txtNotes As CTextBox
         Friend WithEvents lblNotes As CLabel
         Friend WithEvents tbpPensionRates As TabPage
         Friend WithEvents tlpPostingAccounts As TableLayoutPanel
         Friend WithEvents lblAccountIdNo As CLabel
-        Friend WithEvents cboAccountIdNo As CtCombobox
+        Friend WithEvents cboAccountIdNo As AtmComboBox
         Friend WithEvents DataGridViewPensionRates As CtDataGridView
         Friend WithEvents dgvSequence As CDgvTextColumn
         Friend WithEvents dgvLowRange As CdgvMoneyColumn
