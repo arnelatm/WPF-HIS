@@ -30,15 +30,15 @@ Namespace PresentationLayer.Views.Forms
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PayElementEntryTv))
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Me.floPayElement = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.tlpPayElement = New System.Windows.Forms.TableLayoutPanel()
             Me.cboReportGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
@@ -93,23 +93,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.lblUsePayGroups = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.DataGridViewPayElementAccounts = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
-            Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvPayGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
-            Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
-            Me.AccountNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.PayElementIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.IdNoDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.PayGroupNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.bsPayElementAccounts = New System.Windows.Forms.BindingSource(Me.components)
             Me.tbpSummaryDetail = New System.Windows.Forms.TabPage()
             Me.DataGridViewPayElementItems = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
-            Me.dgvSequenceSummary = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvPayElementIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
-            Me.dgvFactorValue = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvFactorType = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
-            Me.ParentIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.bsPayElementItems = New System.Windows.Forms.BindingSource(Me.components)
             Me.tbpNotes = New System.Windows.Forms.TabPage()
             Me.floMain = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.tlpNotes = New System.Windows.Forms.TableLayoutPanel()
@@ -118,6 +103,21 @@ Namespace PresentationLayer.Views.Forms
             Me.tabPageImages = New System.Windows.Forms.ImageList(Me.components)
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.bsPayElementAccounts = New System.Windows.Forms.BindingSource(Me.components)
+            Me.dgvSequenceSummary = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvPayElementIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+            Me.dgvFactorValue = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvFactorType = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+            Me.ParentIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.bsPayElementItems = New System.Windows.Forms.BindingSource(Me.components)
+            Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvPayGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+            Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+            Me.AccountNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.PayElementIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.IdNoDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.PayGroupNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
             Me.SplitContainer1.Panel2.SuspendLayout()
@@ -133,14 +133,14 @@ Namespace PresentationLayer.Views.Forms
             Me.floPostingAccounts.SuspendLayout()
             Me.tlpPostingAccounts.SuspendLayout()
             CType(Me.DataGridViewPayElementAccounts, System.ComponentModel.ISupportInitialize).BeginInit()
-            CType(Me.bsPayElementAccounts, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.tbpSummaryDetail.SuspendLayout()
             CType(Me.DataGridViewPayElementItems, System.ComponentModel.ISupportInitialize).BeginInit()
-            CType(Me.bsPayElementItems, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.tbpNotes.SuspendLayout()
             Me.floMain.SuspendLayout()
             Me.tlpNotes.SuspendLayout()
             Me.floDataDisplay.SuspendLayout()
+            CType(Me.bsPayElementAccounts, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.bsPayElementItems, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SuspendLayout()
             '
             'SplitContainer1
@@ -165,6 +165,10 @@ Namespace PresentationLayer.Views.Forms
             'TranslatorDAC
             '
             Me.TranslatorDAC.Cs = ""
+            '
+            'AppDataDAC
+            '
+            Me.AppDataDAC.Cs = ""
             '
             'floPayElement
             '
@@ -1205,93 +1209,6 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPayElementAccounts.ShowFooter = False
             Me.DataGridViewPayElementAccounts.Translatable = True
             '
-            'dgvSequence
-            '
-            Me.dgvSequence.BegFindValue = Nothing
-            Me.dgvSequence.DataPropertyName = "Sequence"
-            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
-            Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle2
-            Me.dgvSequence.DisplayOnly = True
-            Me.dgvSequence.EditingMode = False
-            Me.dgvSequence.EndFindValue = Nothing
-            Me.dgvSequence.FieldDescription = Nothing
-            Me.dgvSequence.FieldName = Nothing
-            Me.dgvSequence.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.dgvSequence.FindEnabled = False
-            resources.ApplyResources(Me.dgvSequence, "dgvSequence")
-            Me.dgvSequence.IgnoreCase = False
-            Me.dgvSequence.Name = "dgvSequence"
-            Me.dgvSequence.ReadOnly = True
-            Me.dgvSequence.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvSequence.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.dgvSequence.Translatable = False
-            '
-            'dgvPayGroupIdNo
-            '
-            Me.dgvPayGroupIdNo.AutoComplete = False
-            Me.dgvPayGroupIdNo.DataPropertyName = "PayGroupIdNo"
-            DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
-            Me.dgvPayGroupIdNo.DefaultCellStyle = DataGridViewCellStyle3
-            Me.dgvPayGroupIdNo.EditingMode = False
-            resources.ApplyResources(Me.dgvPayGroupIdNo, "dgvPayGroupIdNo")
-            Me.dgvPayGroupIdNo.Name = "dgvPayGroupIdNo"
-            Me.dgvPayGroupIdNo.ReadOnly = True
-            Me.dgvPayGroupIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvPayGroupIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-            Me.dgvPayGroupIdNo.SuggestCharCount = 0
-            Me.dgvPayGroupIdNo.Translatable = False
-            '
-            'dgvAccountIdNo
-            '
-            Me.dgvAccountIdNo.AutoComplete = False
-            Me.dgvAccountIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-            Me.dgvAccountIdNo.DataPropertyName = "AccountIdNo"
-            DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
-            Me.dgvAccountIdNo.DefaultCellStyle = DataGridViewCellStyle4
-            Me.dgvAccountIdNo.EditingMode = False
-            resources.ApplyResources(Me.dgvAccountIdNo, "dgvAccountIdNo")
-            Me.dgvAccountIdNo.Name = "dgvAccountIdNo"
-            Me.dgvAccountIdNo.ReadOnly = True
-            Me.dgvAccountIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvAccountIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-            Me.dgvAccountIdNo.SuggestCharCount = 0
-            Me.dgvAccountIdNo.Translatable = False
-            '
-            'AccountNameDataGridViewTextBoxColumn
-            '
-            Me.AccountNameDataGridViewTextBoxColumn.DataPropertyName = "AccountName"
-            resources.ApplyResources(Me.AccountNameDataGridViewTextBoxColumn, "AccountNameDataGridViewTextBoxColumn")
-            Me.AccountNameDataGridViewTextBoxColumn.Name = "AccountNameDataGridViewTextBoxColumn"
-            Me.AccountNameDataGridViewTextBoxColumn.ReadOnly = True
-            '
-            'PayElementIdNoDataGridViewTextBoxColumn
-            '
-            Me.PayElementIdNoDataGridViewTextBoxColumn.DataPropertyName = "PayElementIdNo"
-            resources.ApplyResources(Me.PayElementIdNoDataGridViewTextBoxColumn, "PayElementIdNoDataGridViewTextBoxColumn")
-            Me.PayElementIdNoDataGridViewTextBoxColumn.Name = "PayElementIdNoDataGridViewTextBoxColumn"
-            Me.PayElementIdNoDataGridViewTextBoxColumn.ReadOnly = True
-            '
-            'IdNoDataGridViewTextBoxColumn1
-            '
-            Me.IdNoDataGridViewTextBoxColumn1.DataPropertyName = "IdNo"
-            resources.ApplyResources(Me.IdNoDataGridViewTextBoxColumn1, "IdNoDataGridViewTextBoxColumn1")
-            Me.IdNoDataGridViewTextBoxColumn1.Name = "IdNoDataGridViewTextBoxColumn1"
-            Me.IdNoDataGridViewTextBoxColumn1.ReadOnly = True
-            '
-            'PayGroupNameDataGridViewTextBoxColumn
-            '
-            Me.PayGroupNameDataGridViewTextBoxColumn.DataPropertyName = "PayGroupName"
-            resources.ApplyResources(Me.PayGroupNameDataGridViewTextBoxColumn, "PayGroupNameDataGridViewTextBoxColumn")
-            Me.PayGroupNameDataGridViewTextBoxColumn.Name = "PayGroupNameDataGridViewTextBoxColumn"
-            Me.PayGroupNameDataGridViewTextBoxColumn.ReadOnly = True
-            '
-            'bsPayElementAccounts
-            '
-            Me.bsPayElementAccounts.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PayElementAccountModel)
-            '
             'tbpSummaryDetail
             '
             Me.tbpSummaryDetail.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.YellowGradientBackgroundLarge
@@ -1346,6 +1263,93 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPayElementItems.SequenceFieldName = "Sequence"
             Me.DataGridViewPayElementItems.ShowFooter = False
             Me.DataGridViewPayElementItems.Translatable = True
+            '
+            'tbpNotes
+            '
+            Me.tbpNotes.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.YellowGradientBackgroundLarge
+            resources.ApplyResources(Me.tbpNotes, "tbpNotes")
+            Me.tbpNotes.Controls.Add(Me.floMain)
+            Me.tbpNotes.Cursor = System.Windows.Forms.Cursors.Default
+            Me.tbpNotes.Name = "tbpNotes"
+            Me.tbpNotes.UseVisualStyleBackColor = True
+            '
+            'floMain
+            '
+            Me.floMain.BackColor = System.Drawing.Color.Transparent
+            Me.floMain.Controls.Add(Me.tlpNotes)
+            resources.ApplyResources(Me.floMain, "floMain")
+            Me.floMain.Name = "floMain"
+            '
+            'tlpNotes
+            '
+            resources.ApplyResources(Me.tlpNotes, "tlpNotes")
+            Me.tlpNotes.Controls.Add(Me.txtNotes, 0, 6)
+            Me.tlpNotes.Controls.Add(Me.lblNotes, 0, 5)
+            Me.tlpNotes.Name = "tlpNotes"
+            '
+            'txtNotes
+            '
+            Me.txtNotes.BackColor = System.Drawing.Color.White
+            Me.txtNotes.BegFindValue = Nothing
+            Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.tlpNotes.SetColumnSpan(Me.txtNotes, 2)
+            Me.txtNotes.ComputedValue = False
+            Me.txtNotes.CustomFormat = Nothing
+            Me.txtNotes.DataBoundControl = True
+            resources.ApplyResources(Me.txtNotes, "txtNotes")
+            Me.txtNotes.EditingMode = False
+            Me.txtNotes.EndFindValue = Nothing
+            Me.txtNotes.FieldDescription = Nothing
+            Me.txtNotes.FieldName = Nothing
+            Me.txtNotes.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtNotes.FindEnabled = True
+            Me.txtNotes.ForeColor = System.Drawing.Color.Black
+            Me.txtNotes.LinkedLabel = Nothing
+            Me.txtNotes.MaximumValue = Nothing
+            Me.txtNotes.MinimumValue = Nothing
+            Me.txtNotes.Name = "txtNotes"
+            Me.txtNotes.OldValue = Nothing
+            Me.txtNotes.OverrideMaxLength = 0
+            Me.txtNotes.ReadOnly = True
+            Me.txtNotes.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtNotes.Translatable = False
+            Me.txtNotes.ValueIsMandatory = True
+            '
+            'lblNotes
+            '
+            Me.lblNotes.BackColor = System.Drawing.Color.Transparent
+            Me.lblNotes.DisplayOnly = True
+            Me.lblNotes.EditingMode = False
+            resources.ApplyResources(Me.lblNotes, "lblNotes")
+            Me.lblNotes.Name = "lblNotes"
+            Me.lblNotes.Translatable = True
+            '
+            'tabPageImages
+            '
+            Me.tabPageImages.ImageStream = CType(resources.GetObject("tabPageImages.ImageStream"), System.Windows.Forms.ImageListStreamer)
+            Me.tabPageImages.TransparentColor = System.Drawing.Color.Transparent
+            Me.tabPageImages.Images.SetKeyName(0, "error.png")
+            '
+            'CLabel1
+            '
+            Me.CLabel1.BackColor = System.Drawing.Color.Transparent
+            Me.CLabel1.DisplayOnly = True
+            Me.CLabel1.EditingMode = False
+            resources.ApplyResources(Me.CLabel1, "CLabel1")
+            Me.CLabel1.Name = "CLabel1"
+            Me.CLabel1.Translatable = True
+            '
+            'floDataDisplay
+            '
+            resources.ApplyResources(Me.floDataDisplay, "floDataDisplay")
+            Me.floDataDisplay.BackColor = System.Drawing.Color.Transparent
+            Me.floDataDisplay.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.YellowGradientBackgroundLarge
+            Me.floDataDisplay.Controls.Add(Me.floPayElement)
+            Me.floDataDisplay.Name = "floDataDisplay"
+            '
+            'bsPayElementAccounts
+            '
+            Me.bsPayElementAccounts.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PayElementAccountModel)
             '
             'dgvSequenceSummary
             '
@@ -1441,88 +1445,88 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.bsPayElementItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PayElementItemModel)
             '
-            'tbpNotes
+            'dgvSequence
             '
-            Me.tbpNotes.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.YellowGradientBackgroundLarge
-            resources.ApplyResources(Me.tbpNotes, "tbpNotes")
-            Me.tbpNotes.Controls.Add(Me.floMain)
-            Me.tbpNotes.Cursor = System.Windows.Forms.Cursors.Default
-            Me.tbpNotes.Name = "tbpNotes"
-            Me.tbpNotes.UseVisualStyleBackColor = True
+            Me.dgvSequence.BegFindValue = Nothing
+            Me.dgvSequence.DataPropertyName = "Sequence"
+            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+            Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle2
+            Me.dgvSequence.DisplayOnly = True
+            Me.dgvSequence.EditingMode = False
+            Me.dgvSequence.EndFindValue = Nothing
+            Me.dgvSequence.FieldDescription = Nothing
+            Me.dgvSequence.FieldName = Nothing
+            Me.dgvSequence.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvSequence.FindEnabled = False
+            resources.ApplyResources(Me.dgvSequence, "dgvSequence")
+            Me.dgvSequence.IgnoreCase = False
+            Me.dgvSequence.Name = "dgvSequence"
+            Me.dgvSequence.ReadOnly = True
+            Me.dgvSequence.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvSequence.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.dgvSequence.Translatable = False
             '
-            'floMain
+            'dgvPayGroupIdNo
             '
-            Me.floMain.BackColor = System.Drawing.Color.Transparent
-            Me.floMain.Controls.Add(Me.tlpNotes)
-            resources.ApplyResources(Me.floMain, "floMain")
-            Me.floMain.Name = "floMain"
+            Me.dgvPayGroupIdNo.AutoComplete = False
+            Me.dgvPayGroupIdNo.DataPropertyName = "PayGroupIdNo"
+            DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
+            Me.dgvPayGroupIdNo.DefaultCellStyle = DataGridViewCellStyle3
+            Me.dgvPayGroupIdNo.EditingMode = False
+            resources.ApplyResources(Me.dgvPayGroupIdNo, "dgvPayGroupIdNo")
+            Me.dgvPayGroupIdNo.Name = "dgvPayGroupIdNo"
+            Me.dgvPayGroupIdNo.ReadOnly = True
+            Me.dgvPayGroupIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvPayGroupIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvPayGroupIdNo.SuggestCharCount = 0
+            Me.dgvPayGroupIdNo.Translatable = False
             '
-            'tlpNotes
+            'dgvAccountIdNo
             '
-            resources.ApplyResources(Me.tlpNotes, "tlpNotes")
-            Me.tlpNotes.Controls.Add(Me.txtNotes, 0, 6)
-            Me.tlpNotes.Controls.Add(Me.lblNotes, 0, 5)
-            Me.tlpNotes.Name = "tlpNotes"
+            Me.dgvAccountIdNo.AutoComplete = False
+            Me.dgvAccountIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+            Me.dgvAccountIdNo.DataPropertyName = "AccountIdNo"
+            DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
+            Me.dgvAccountIdNo.DefaultCellStyle = DataGridViewCellStyle4
+            Me.dgvAccountIdNo.EditingMode = False
+            resources.ApplyResources(Me.dgvAccountIdNo, "dgvAccountIdNo")
+            Me.dgvAccountIdNo.Name = "dgvAccountIdNo"
+            Me.dgvAccountIdNo.ReadOnly = True
+            Me.dgvAccountIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvAccountIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvAccountIdNo.SuggestCharCount = 0
+            Me.dgvAccountIdNo.Translatable = False
             '
-            'txtNotes
+            'AccountNameDataGridViewTextBoxColumn
             '
-            Me.txtNotes.BackColor = System.Drawing.Color.White
-            Me.txtNotes.BegFindValue = Nothing
-            Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.tlpNotes.SetColumnSpan(Me.txtNotes, 2)
-            Me.txtNotes.ComputedValue = False
-            Me.txtNotes.CustomFormat = Nothing
-            Me.txtNotes.DataBoundControl = True
-            resources.ApplyResources(Me.txtNotes, "txtNotes")
-            Me.txtNotes.EditingMode = False
-            Me.txtNotes.EndFindValue = Nothing
-            Me.txtNotes.FieldDescription = Nothing
-            Me.txtNotes.FieldName = Nothing
-            Me.txtNotes.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtNotes.FindEnabled = True
-            Me.txtNotes.ForeColor = System.Drawing.Color.Black
-            Me.txtNotes.LinkedLabel = Nothing
-            Me.txtNotes.MaximumValue = Nothing
-            Me.txtNotes.MinimumValue = Nothing
-            Me.txtNotes.Name = "txtNotes"
-            Me.txtNotes.OldValue = Nothing
-            Me.txtNotes.OverrideMaxLength = 0
-            Me.txtNotes.ReadOnly = True
-            Me.txtNotes.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtNotes.Translatable = False
-            Me.txtNotes.ValueIsMandatory = True
+            Me.AccountNameDataGridViewTextBoxColumn.DataPropertyName = "AccountName"
+            resources.ApplyResources(Me.AccountNameDataGridViewTextBoxColumn, "AccountNameDataGridViewTextBoxColumn")
+            Me.AccountNameDataGridViewTextBoxColumn.Name = "AccountNameDataGridViewTextBoxColumn"
+            Me.AccountNameDataGridViewTextBoxColumn.ReadOnly = True
             '
-            'lblNotes
+            'PayElementIdNoDataGridViewTextBoxColumn
             '
-            Me.lblNotes.BackColor = System.Drawing.Color.Transparent
-            Me.lblNotes.DisplayOnly = True
-            Me.lblNotes.EditingMode = False
-            resources.ApplyResources(Me.lblNotes, "lblNotes")
-            Me.lblNotes.Name = "lblNotes"
-            Me.lblNotes.Translatable = True
+            Me.PayElementIdNoDataGridViewTextBoxColumn.DataPropertyName = "PayElementIdNo"
+            resources.ApplyResources(Me.PayElementIdNoDataGridViewTextBoxColumn, "PayElementIdNoDataGridViewTextBoxColumn")
+            Me.PayElementIdNoDataGridViewTextBoxColumn.Name = "PayElementIdNoDataGridViewTextBoxColumn"
+            Me.PayElementIdNoDataGridViewTextBoxColumn.ReadOnly = True
             '
-            'tabPageImages
+            'IdNoDataGridViewTextBoxColumn1
             '
-            Me.tabPageImages.ImageStream = CType(resources.GetObject("tabPageImages.ImageStream"), System.Windows.Forms.ImageListStreamer)
-            Me.tabPageImages.TransparentColor = System.Drawing.Color.Transparent
-            Me.tabPageImages.Images.SetKeyName(0, "error.png")
+            Me.IdNoDataGridViewTextBoxColumn1.DataPropertyName = "IdNo"
+            resources.ApplyResources(Me.IdNoDataGridViewTextBoxColumn1, "IdNoDataGridViewTextBoxColumn1")
+            Me.IdNoDataGridViewTextBoxColumn1.Name = "IdNoDataGridViewTextBoxColumn1"
+            Me.IdNoDataGridViewTextBoxColumn1.ReadOnly = True
             '
-            'CLabel1
+            'PayGroupNameDataGridViewTextBoxColumn
             '
-            Me.CLabel1.BackColor = System.Drawing.Color.Transparent
-            Me.CLabel1.DisplayOnly = True
-            Me.CLabel1.EditingMode = False
-            resources.ApplyResources(Me.CLabel1, "CLabel1")
-            Me.CLabel1.Name = "CLabel1"
-            Me.CLabel1.Translatable = True
-            '
-            'floDataDisplay
-            '
-            resources.ApplyResources(Me.floDataDisplay, "floDataDisplay")
-            Me.floDataDisplay.BackColor = System.Drawing.Color.Transparent
-            Me.floDataDisplay.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.YellowGradientBackgroundLarge
-            Me.floDataDisplay.Controls.Add(Me.floPayElement)
-            Me.floDataDisplay.Name = "floDataDisplay"
+            Me.PayGroupNameDataGridViewTextBoxColumn.DataPropertyName = "PayGroupName"
+            resources.ApplyResources(Me.PayGroupNameDataGridViewTextBoxColumn, "PayGroupNameDataGridViewTextBoxColumn")
+            Me.PayGroupNameDataGridViewTextBoxColumn.Name = "PayGroupNameDataGridViewTextBoxColumn"
+            Me.PayGroupNameDataGridViewTextBoxColumn.ReadOnly = True
             '
             'PayElementEntryTv
             '
@@ -1547,15 +1551,15 @@ Namespace PresentationLayer.Views.Forms
             Me.tlpPostingAccounts.ResumeLayout(False)
             Me.tlpPostingAccounts.PerformLayout()
             CType(Me.DataGridViewPayElementAccounts, System.ComponentModel.ISupportInitialize).EndInit()
-            CType(Me.bsPayElementAccounts, System.ComponentModel.ISupportInitialize).EndInit()
             Me.tbpSummaryDetail.ResumeLayout(False)
             CType(Me.DataGridViewPayElementItems, System.ComponentModel.ISupportInitialize).EndInit()
-            CType(Me.bsPayElementItems, System.ComponentModel.ISupportInitialize).EndInit()
             Me.tbpNotes.ResumeLayout(False)
             Me.floMain.ResumeLayout(False)
             Me.tlpNotes.ResumeLayout(False)
             Me.tlpNotes.PerformLayout()
             Me.floDataDisplay.ResumeLayout(False)
+            CType(Me.bsPayElementAccounts, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.bsPayElementItems, System.ComponentModel.ISupportInitialize).EndInit()
             Me.ResumeLayout(False)
             Me.PerformLayout()
 
@@ -1630,6 +1634,8 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents dgvFactorType As CDgvComboBoxColumn
         Friend WithEvents ParentIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents lblIdNo As CLabel
+        Friend WithEvents chkUsePayGroups As CCheckBox
         Friend WithEvents dgvSequence As CDgvTextColumn
         Friend WithEvents dgvPayGroupIdNo As CDgvComboBoxColumn
         Friend WithEvents dgvAccountIdNo As CDgvComboBoxColumn
@@ -1637,7 +1643,5 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents PayElementIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
         Friend WithEvents PayGroupNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents lblIdNo As CLabel
-        Friend WithEvents chkUsePayGroups As CCheckBox
     End Class
 End Namespace

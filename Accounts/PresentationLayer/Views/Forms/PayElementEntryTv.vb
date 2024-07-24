@@ -21,6 +21,7 @@ Namespace PresentationLayer.Views.Forms
         Private cellPosOrigUnit As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(3, 2)
         Private cellPosQtyUnit As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(3, 6)
         Private cellPosUnitSave As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(0, 8)
+        Private _accountsByCode As DataTable
 
         Public Sub New()
             'MyBase.New()
@@ -266,7 +267,17 @@ Namespace PresentationLayer.Views.Forms
         Public Property DedReportGroupsByCode As Object Implements IPayElementView.DedReportGroupsByCode
         Public Property PayElementsByCode As Object Implements IPayElementView.PayElementsByCode
         Public Property PayGroupsByCode As Object Implements IPayElementView.PayGroupsByCode
+
         Public Property AccountsByCode As Object Implements IPayElementView.AccountsByCode
+            Get
+                Return _accountsByCode
+                Debugger.Break()
+            End Get
+            Set(value As Object)
+                _accountsByCode = value
+                Debugger.Break()
+            End Set
+        End Property
 
 #End Region
 
@@ -371,6 +382,7 @@ Namespace PresentationLayer.Views.Forms
             End With
         End Sub
 
+
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {
@@ -398,22 +410,6 @@ Namespace PresentationLayer.Views.Forms
                 {"Unit", cboUnit},
                 {"UsePayGroups", chkUsePayGroups}
                 }
-
-            _eSumFieldsDict = New Dictionary(Of String, Object) From
-                {
-                {"PayElementIdNo", dgvPayElementIdNo},
-                {"FactorValue", dgvFactorValue},
-                {"FactorType", dgvFactorType}
-                }
-
-            _eAccFieldsDict = New Dictionary(Of String, Object) From
-                {
-                {"PayGroupIdNo", dgvPayGroupIdNo},
-                {"AccountIdNo", dgvAccountIdNo}
-                }
-
-            DataGridViewPayElementItems.FieldsDictionary = _eSumFieldsDict
-            DataGridViewPayElementAccounts.FieldsDictionary = _eAccFieldsDict
 
         End Sub
 

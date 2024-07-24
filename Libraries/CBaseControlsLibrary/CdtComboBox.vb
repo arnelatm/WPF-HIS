@@ -786,6 +786,14 @@ Public Class CdtComboBox
         End Get
     End Property
 
+    Public Sub SetSuggestDataSource(ds As Object)
+        _suggestBindingSource.DataSource = DataSource.Copy()
+        _suggestBindingSource.ResetBindings(True)
+        SuggestListForm.SuggestListBox.DisplayMember = DisplayMember
+        SuggestListForm.SuggestListBox.ValueMember = ValueMember
+    End Sub
+
+
     Private ReadOnly Property FindDisplayMember As String Implements IFindableControl.FindDisplayMember
         Get
             Return DisplayMember
