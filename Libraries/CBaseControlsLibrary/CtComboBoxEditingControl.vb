@@ -225,14 +225,14 @@ Public Class CtComboBoxEditingControl
         End If
     End Sub
 
-    Private Sub InitializeComponent()
-        Me.SuspendLayout()
-        '
-        'CtComboBoxEditingControl
-        '
-        Me.Size = New System.Drawing.Size(121, 28)
-        Me.ResumeLayout(False)
+    'Private Sub InitializeComponent()
+    '    Me.SuspendLayout()
+    '    '
+    '    'CtComboBoxEditingControl
+    '    '
+    '    Me.Size = New System.Drawing.Size(121, 28)
+    '    Me.ResumeLayout(False)
 
-    End Sub
+    'End Sub
 
 End Class
