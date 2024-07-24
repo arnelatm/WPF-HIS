@@ -1273,6 +1273,9 @@
   <data name="SplitContainer1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>None</value>
   </data>
+  <data name="SplitContainer1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 65</value>
+  </data>
   <data name="&gt;&gt;SplitContainer1.Panel1.Name" xml:space="preserve">
     <value>SplitContainer1.Panel1</value>
   </data>
@@ -1308,7 +1311,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblReportGroupIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 102</value>
+    <value>1, 105</value>
   </data>
   <data name="lblReportGroupIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1338,7 +1341,7 @@
     <value>1</value>
   </data>
   <data name="cboReportGroupIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 102</value>
+    <value>168, 105</value>
   </data>
   <data name="cboReportGroupIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1353,7 +1356,7 @@
     <value>cboReportGroupIdNo</value>
   </data>
   <data name="&gt;&gt;cboReportGroupIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CdtComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboReportGroupIdNo.Parent" xml:space="preserve">
     <value>tlpPayElement</value>
@@ -1410,7 +1413,7 @@
     <value>3</value>
   </data>
   <data name="cboPayElementKind.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 76</value>
+    <value>168, 79</value>
   </data>
   <data name="cboPayElementKind.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1425,7 +1428,7 @@
     <value>cboPayElementKind</value>
   </data>
   <data name="&gt;&gt;cboPayElementKind.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CdtComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboPayElementKind.Parent" xml:space="preserve">
     <value>tlpPayElement</value>
@@ -1440,7 +1443,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblPayElementKind.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 76</value>
+    <value>1, 79</value>
   </data>
   <data name="lblPayElementKind.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1485,13 +1488,13 @@
     <value>TopRight</value>
   </data>
   <data name="txtPayElementName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 26</value>
+    <value>168, 29</value>
   </data>
   <data name="txtPayElementName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtPayElementName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>421, 23</value>
+    <value>444, 23</value>
   </data>
   <data name="txtPayElementName.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1512,7 +1515,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtPayElementNameAra.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 51</value>
+    <value>168, 54</value>
   </data>
   <data name="txtPayElementNameAra.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1521,7 +1524,7 @@
     <value>Yes</value>
   </data>
   <data name="txtPayElementNameAra.Size" type="System.Drawing.Size, System.Drawing">
-    <value>421, 23</value>
+    <value>444, 23</value>
   </data>
   <data name="txtPayElementNameAra.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1545,7 +1548,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 26</value>
+    <value>1, 29</value>
   </data>
   <data name="lblName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1593,7 +1596,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtPayElementCode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 23</value>
+    <value>118, 23</value>
   </data>
   <data name="txtPayElementCode.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1626,7 +1629,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblCode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>218, 23</value>
+    <value>218, 26</value>
   </data>
   <data name="lblCode.TabIndex" type="System.Int32, mscorlib">
     <value>157</value>
@@ -1686,7 +1689,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblNameAra.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 51</value>
+    <value>1, 54</value>
   </data>
   <data name="lblNameAra.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1734,7 +1737,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSummary.Location" type="System.Drawing.Point, System.Drawing">
-    <value>494, 76</value>
+    <value>494, 79</value>
   </data>
   <data name="lblSummary.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1764,7 +1767,7 @@
     <value>13</value>
   </data>
   <data name="chkSummary.Location" type="System.Drawing.Point, System.Drawing">
-    <value>573, 78</value>
+    <value>596, 81</value>
   </data>
   <data name="chkSummary.Size" type="System.Drawing.Size, System.Drawing">
     <value>11, 13</value>
@@ -1806,7 +1809,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblActive.Location" type="System.Drawing.Point, System.Drawing">
-    <value>494, 102</value>
+    <value>494, 105</value>
   </data>
   <data name="lblActive.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1836,7 +1839,7 @@
     <value>14</value>
   </data>
   <data name="chkActive.Location" type="System.Drawing.Point, System.Drawing">
-    <value>573, 104</value>
+    <value>596, 107</value>
   </data>
   <data name="chkActive.Size" type="System.Drawing.Size, System.Drawing">
     <value>11, 13</value>
@@ -1908,7 +1911,7 @@
     <value>5</value>
   </data>
   <data name="tlpPayElement.Size" type="System.Drawing.Size, System.Drawing">
-    <value>590, 126</value>
+    <value>613, 134</value>
   </data>
   <data name="tlpPayElement.TabIndex" type="System.Int32, mscorlib">
     <value>159</value>
@@ -2001,7 +2004,7 @@
     <value>cboQuantityType</value>
   </data>
   <data name="&gt;&gt;cboQuantityType.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CdtComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboQuantityType.Parent" xml:space="preserve">
     <value>tlpCalculation</value>
@@ -2034,7 +2037,7 @@
     <value>cboCalculationType</value>
   </data>
   <data name="&gt;&gt;cboCalculationType.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CdtComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboCalculationType.Parent" xml:space="preserve">
     <value>tlpCalculation</value>
@@ -2328,7 +2331,7 @@
     <value>cboBasePaymentIdNo</value>
   </data>
   <data name="&gt;&gt;cboBasePaymentIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CdtComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboBasePaymentIdNo.Parent" xml:space="preserve">
     <value>tlpCalculation</value>
@@ -2523,7 +2526,7 @@
     <value>cboFactorType</value>
   </data>
   <data name="&gt;&gt;cboFactorType.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CdtComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboFactorType.Parent" xml:space="preserve">
     <value>tlpCalculation</value>
@@ -2724,7 +2727,7 @@
     <value>cboUnit</value>
   </data>
   <data name="&gt;&gt;cboUnit.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CdtComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboUnit.Parent" xml:space="preserve">
     <value>tlpCalculation</value>
@@ -2757,7 +2760,7 @@
     <value>cboPayElementType</value>
   </data>
   <data name="&gt;&gt;cboPayElementType.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CdtComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboPayElementType.Parent" xml:space="preserve">
     <value>tlpCalculation</value>
@@ -2841,7 +2844,7 @@
     <value>3, 3</value>
   </data>
   <data name="floCalculation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>575, 307</value>
+    <value>598, 291</value>
   </data>
   <data name="floCalculation.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2865,7 +2868,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbpCalculation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>581, 313</value>
+    <value>604, 297</value>
   </data>
   <data name="tbpCalculation.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -2975,14 +2978,14 @@
   <data name="cboAccountIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="cboAccountIdNo.IntegralHeight" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="cboAccountIdNo.Location" type="System.Drawing.Point, System.Drawing">
     <value>189, 20</value>
   </data>
   <data name="cboAccountIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
+  </data>
+  <data name="cboAccountIdNo.MaxDropDownItems" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
   <data name="cboAccountIdNo.Size" type="System.Drawing.Size, System.Drawing">
     <value>383, 24</value>
@@ -2994,7 +2997,7 @@
     <value>cboAccountIdNo</value>
   </data>
   <data name="&gt;&gt;cboAccountIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CdtComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboAccountIdNo.Parent" xml:space="preserve">
     <value>tlpPostingAccounts</value>
@@ -3047,6 +3050,9 @@
   <data name="dgvSequence.HeaderText" xml:space="preserve">
     <value>Seq</value>
   </data>
+  <data name="dgvSequence.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
   <data name="dgvSequence.Width" type="System.Int32, mscorlib">
     <value>40</value>
   </data>
@@ -3062,38 +3068,68 @@
   <data name="dgvAccountIdNo.HeaderText" xml:space="preserve">
     <value>Account Name</value>
   </data>
+  <data name="dgvAccountIdNo.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
   <data name="AccountNameDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
     <value>AccountName</value>
+  </data>
+  <data name="AccountNameDataGridViewTextBoxColumn.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
   <data name="AccountNameDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <data name="AccountNameDataGridViewTextBoxColumn.Width" type="System.Int32, mscorlib">
+    <value>125</value>
+  </data>
   <data name="PayElementIdNoDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
     <value>PayElementIdNo</value>
+  </data>
+  <data name="PayElementIdNoDataGridViewTextBoxColumn.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
   <data name="PayElementIdNoDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <data name="PayElementIdNoDataGridViewTextBoxColumn.Width" type="System.Int32, mscorlib">
+    <value>125</value>
+  </data>
   <data name="IdNoDataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
     <value>IdNo</value>
+  </data>
+  <data name="IdNoDataGridViewTextBoxColumn1.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
   <data name="IdNoDataGridViewTextBoxColumn1.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <data name="IdNoDataGridViewTextBoxColumn1.Width" type="System.Int32, mscorlib">
+    <value>125</value>
+  </data>
   <data name="PayGroupNameDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
     <value>PayGroupName</value>
+  </data>
+  <data name="PayGroupNameDataGridViewTextBoxColumn.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
   <data name="PayGroupNameDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <data name="PayGroupNameDataGridViewTextBoxColumn.Width" type="System.Int32, mscorlib">
+    <value>125</value>
+  </data>
   <metadata name="bsPayElementAccounts.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 56</value>
+    <value>963, 17</value>
   </metadata>
   <data name="DataGridViewPayElementAccounts.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
   <data name="DataGridViewPayElementAccounts.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 48</value>
+  </data>
+  <data name="DataGridViewPayElementAccounts.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>51</value>
   </data>
   <data name="DataGridViewPayElementAccounts.Size" type="System.Drawing.Size, System.Drawing">
     <value>567, 251</value>
@@ -3147,7 +3183,7 @@
     <value>3, 3</value>
   </data>
   <data name="floPostingAccounts.Size" type="System.Drawing.Size, System.Drawing">
-    <value>575, 307</value>
+    <value>598, 291</value>
   </data>
   <data name="floPostingAccounts.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -3171,7 +3207,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbpAccountPosting.Size" type="System.Drawing.Size, System.Drawing">
-    <value>581, 313</value>
+    <value>604, 297</value>
   </data>
   <data name="tbpAccountPosting.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -3194,14 +3230,23 @@
   <data name="dgvSequenceSummary.HeaderText" xml:space="preserve">
     <value>Seq</value>
   </data>
+  <data name="dgvSequenceSummary.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
   <data name="dgvSequenceSummary.Width" type="System.Int32, mscorlib">
     <value>35</value>
   </data>
   <data name="dgvPayElementIdNo.HeaderText" xml:space="preserve">
     <value>Pay Element Name (Base Payment)</value>
   </data>
+  <data name="dgvPayElementIdNo.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
   <data name="dgvFactorValue.HeaderText" xml:space="preserve">
     <value>Factor Value</value>
+  </data>
+  <data name="dgvFactorValue.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
   <data name="dgvFactorValue.Width" type="System.Int32, mscorlib">
     <value>55</value>
@@ -3209,23 +3254,38 @@
   <data name="dgvFactorType.HeaderText" xml:space="preserve">
     <value>Factor Type</value>
   </data>
+  <data name="dgvFactorType.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
   <data name="dgvFactorType.Width" type="System.Int32, mscorlib">
     <value>150</value>
   </data>
   <data name="ParentIdNoDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
     <value>ParentIdNo</value>
   </data>
+  <data name="ParentIdNoDataGridViewTextBoxColumn.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
   <data name="ParentIdNoDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
+  </data>
+  <data name="ParentIdNoDataGridViewTextBoxColumn.Width" type="System.Int32, mscorlib">
+    <value>125</value>
   </data>
   <data name="IdNoDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
     <value>IdNo</value>
   </data>
+  <data name="IdNoDataGridViewTextBoxColumn.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
   <data name="IdNoDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <data name="IdNoDataGridViewTextBoxColumn.Width" type="System.Int32, mscorlib">
+    <value>125</value>
+  </data>
   <metadata name="bsPayElementItems.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>194, 56</value>
+    <value>17, 56</value>
   </metadata>
   <data name="DataGridViewPayElementItems.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -3233,8 +3293,11 @@
   <data name="DataGridViewPayElementItems.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
+  <data name="DataGridViewPayElementItems.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
   <data name="DataGridViewPayElementItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>575, 307</value>
+    <value>598, 291</value>
   </data>
   <data name="DataGridViewPayElementItems.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3258,7 +3321,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbpSummaryDetail.Size" type="System.Drawing.Size, System.Drawing">
-    <value>581, 313</value>
+    <value>604, 297</value>
   </data>
   <data name="tbpSummaryDetail.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -3387,7 +3450,7 @@
     <value>3, 3</value>
   </data>
   <data name="floMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>575, 307</value>
+    <value>598, 291</value>
   </data>
   <data name="floMain.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3411,7 +3474,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbpNotes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>581, 313</value>
+    <value>604, 297</value>
   </data>
   <data name="tbpNotes.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3439,7 +3502,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACe
-        BwAAAk1TRnQBSQFMAwEBAAEoAQQBKAEEARABAAEQAQAE/wEJAQAI/wFCAU0BNgEEBgABNgEEAgABKAMA
+        BwAAAk1TRnQBSQFMAwEBAAFgAQQBYAEEARABAAEQAQAE/wEJAQAI/wFCAU0BNgEEBgABNgEEAgABKAMA
         AUADAAEQAwABAQEAAQgGAAEEGAABgAIAAYADAAKAAQABgAMAAYABAAGAAQACgAIAA8ABAAHAAdwBwAEA
         AfABygGmAQABMwUAATMBAAEzAQABMwEAAjMCAAMWAQADHAEAAyIBAAMpAQADVQEAA00BAANCAQADOQEA
         AYABfAH/AQACUAH/AQABkwEAAdYBAAH/AewBzAEAAcYB1gHvAQAB1gLnAQABkAGpAa0CAAH/ATMDAAFm
@@ -3475,7 +3538,7 @@
 </value>
   </data>
   <data name="tbcPayElement.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 132</value>
+    <value>10, 140</value>
   </data>
   <data name="tbcPayElement.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>10, 0, 10, 3</value>
@@ -3484,7 +3547,7 @@
     <value>0, 0</value>
   </data>
   <data name="tbcPayElement.Size" type="System.Drawing.Size, System.Drawing">
-    <value>589, 340</value>
+    <value>612, 324</value>
   </data>
   <data name="tbcPayElement.TabIndex" type="System.Int32, mscorlib">
     <value>284</value>
@@ -3508,7 +3571,7 @@
     <value>NoControl</value>
   </data>
   <data name="CLabel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 476</value>
+    <value>1, 468</value>
   </data>
   <data name="CLabel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -3541,7 +3604,7 @@
     <value>3, 18</value>
   </data>
   <data name="floPayElement.Size" type="System.Drawing.Size, System.Drawing">
-    <value>613, 480</value>
+    <value>632, 480</value>
   </data>
   <data name="floPayElement.TabIndex" type="System.Int32, mscorlib">
     <value>282</value>
@@ -3650,7 +3713,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACa
-        CQAAAk1TRnQBSQFMAgEBAgEAAaABAAEwAQEBEAEAARABAAT/AQkBEAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CQAAAk1TRnQBSQFMAgEBAgEAAaABAAFoAQEBEAEAARABAAT/AQkBEAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -3721,11 +3784,11 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>1031, 571</value>
   </data>
-  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>918, 288</value>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
   </data>
-  <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>No</value>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>918, 287</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Pay Elements Maintenance Form</value>
@@ -3770,13 +3833,13 @@
     <value>dgvPayGroupIdNo</value>
   </data>
   <data name="&gt;&gt;dgvPayGroupIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtComboboxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvAccountIdNo.Name" xml:space="preserve">
     <value>dgvAccountIdNo</value>
   </data>
   <data name="&gt;&gt;dgvAccountIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtComboboxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;AccountNameDataGridViewTextBoxColumn.Name" xml:space="preserve">
     <value>AccountNameDataGridViewTextBoxColumn</value>
@@ -3818,7 +3881,7 @@
     <value>dgvPayElementIdNo</value>
   </data>
   <data name="&gt;&gt;dgvPayElementIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtComboboxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvFactorValue.Name" xml:space="preserve">
     <value>dgvFactorValue</value>
@@ -3830,7 +3893,7 @@
     <value>dgvFactorType</value>
   </data>
   <data name="&gt;&gt;dgvFactorType.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtComboboxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ParentIdNoDataGridViewTextBoxColumn.Name" xml:space="preserve">
     <value>ParentIdNoDataGridViewTextBoxColumn</value>

@@ -162,6 +162,10 @@ Namespace PresentationLayer.Views.Forms
             Me.ImageListTreeView.Images.SetKeyName(0, "TreeNode.ico")
             Me.ImageListTreeView.Images.SetKeyName(1, "openbriefcase.png")
             '
+            'TranslatorDAC
+            '
+            Me.TranslatorDAC.Cs = ""
+            '
             'floPayElement
             '
             Me.floPayElement.BackColor = System.Drawing.Color.Transparent
@@ -194,6 +198,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'cboReportGroupIdNo
             '
+            Me.cboReportGroupIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
             Me.cboReportGroupIdNo.BackColor = System.Drawing.Color.White
             Me.cboReportGroupIdNo.BegFindValue = Nothing
             Me.cboReportGroupIdNo.ChangingSearchValueOnly = False
@@ -203,6 +208,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboReportGroupIdNo.DefaultValue = Nothing
             Me.cboReportGroupIdNo.DisplayMember = "Name"
             resources.ApplyResources(Me.cboReportGroupIdNo, "cboReportGroupIdNo")
+            Me.cboReportGroupIdNo.Editable = True
             Me.cboReportGroupIdNo.EditingMode = True
             Me.cboReportGroupIdNo.EndFindValue = Nothing
             Me.cboReportGroupIdNo.FieldDescription = Nothing
@@ -213,6 +219,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboReportGroupIdNo.FormattingEnabled = True
             Me.cboReportGroupIdNo.HideWhenNotEditingOrAdding = False
             Me.cboReportGroupIdNo.IgnoreCase = False
+            Me.cboReportGroupIdNo.LimitToList = False
             Me.cboReportGroupIdNo.LinkedLabel = Me.lblReportGroupIdNo
             Me.cboReportGroupIdNo.Name = "cboReportGroupIdNo"
             Me.cboReportGroupIdNo.OldValue = 0
@@ -221,6 +228,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboReportGroupIdNo.OverrideDropDownStyleList = False
             Me.cboReportGroupIdNo.PreviousSearchTerm = Nothing
             Me.cboReportGroupIdNo.SuggestBoxHeight = 200
+            Me.cboReportGroupIdNo.SuggestCharCount = 0
             Me.cboReportGroupIdNo.TextToSearch = Nothing
             Me.cboReportGroupIdNo.Translatable = False
             Me.cboReportGroupIdNo.ValueIsMandatory = False
@@ -230,6 +238,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'lblReportGroupIdNo
             '
+            Me.lblReportGroupIdNo.BackColor = System.Drawing.Color.Transparent
             Me.lblReportGroupIdNo.DisplayOnly = True
             Me.lblReportGroupIdNo.EditingMode = False
             resources.ApplyResources(Me.lblReportGroupIdNo, "lblReportGroupIdNo")
@@ -238,6 +247,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'cboPayElementKind
             '
+            Me.cboPayElementKind.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
             Me.cboPayElementKind.BackColor = System.Drawing.Color.White
             Me.cboPayElementKind.BegFindValue = Nothing
             Me.cboPayElementKind.ChangingSearchValueOnly = False
@@ -246,6 +256,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayElementKind.DefaultValue = Nothing
             Me.cboPayElementKind.DisplayMember = "Name"
             resources.ApplyResources(Me.cboPayElementKind, "cboPayElementKind")
+            Me.cboPayElementKind.Editable = True
             Me.cboPayElementKind.EditingMode = True
             Me.cboPayElementKind.EndFindValue = Nothing
             Me.cboPayElementKind.FieldDescription = Nothing
@@ -256,6 +267,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayElementKind.FormattingEnabled = True
             Me.cboPayElementKind.HideWhenNotEditingOrAdding = False
             Me.cboPayElementKind.IgnoreCase = False
+            Me.cboPayElementKind.LimitToList = False
             Me.cboPayElementKind.LinkedLabel = Me.lblPayElementType
             Me.cboPayElementKind.Name = "cboPayElementKind"
             Me.cboPayElementKind.OldValue = 0
@@ -264,6 +276,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayElementKind.OverrideDropDownStyleList = False
             Me.cboPayElementKind.PreviousSearchTerm = Nothing
             Me.cboPayElementKind.SuggestBoxHeight = 200
+            Me.cboPayElementKind.SuggestCharCount = 0
             Me.cboPayElementKind.TextToSearch = Nothing
             Me.cboPayElementKind.Translatable = False
             Me.cboPayElementKind.ValueIsMandatory = False
@@ -273,6 +286,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'lblPayElementType
             '
+            Me.lblPayElementType.BackColor = System.Drawing.Color.Transparent
             Me.lblPayElementType.DisplayOnly = True
             Me.lblPayElementType.EditingMode = False
             resources.ApplyResources(Me.lblPayElementType, "lblPayElementType")
@@ -281,6 +295,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'lblPayElementKind
             '
+            Me.lblPayElementKind.BackColor = System.Drawing.Color.Transparent
             Me.lblPayElementKind.DisplayOnly = True
             Me.lblPayElementKind.EditingMode = False
             resources.ApplyResources(Me.lblPayElementKind, "lblPayElementKind")
@@ -310,6 +325,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayElementNameAra.MinimumValue = Nothing
             Me.txtPayElementNameAra.Name = "txtPayElementNameAra"
             Me.txtPayElementNameAra.OldValue = Nothing
+            Me.txtPayElementNameAra.OverrideMaxLength = 0
             Me.txtPayElementNameAra.ReadOnly = True
             Me.txtPayElementNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtPayElementNameAra.Translatable = False
@@ -338,6 +354,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayElementName.MinimumValue = Nothing
             Me.txtPayElementName.Name = "txtPayElementName"
             Me.txtPayElementName.OldValue = Nothing
+            Me.txtPayElementName.OverrideMaxLength = 0
             Me.txtPayElementName.ReadOnly = True
             Me.txtPayElementName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtPayElementName.Translatable = False
@@ -346,6 +363,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'lblName
             '
+            Me.lblName.BackColor = System.Drawing.Color.Transparent
             Me.lblName.DisplayOnly = True
             Me.lblName.EditingMode = False
             resources.ApplyResources(Me.lblName, "lblName")
@@ -376,6 +394,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayElementCode.MinimumValue = Nothing
             Me.txtPayElementCode.Name = "txtPayElementCode"
             Me.txtPayElementCode.OldValue = Nothing
+            Me.txtPayElementCode.OverrideMaxLength = 0
             Me.txtPayElementCode.ReadOnly = True
             Me.txtPayElementCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtPayElementCode.Translatable = False
@@ -384,6 +403,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'lblCode
             '
+            Me.lblCode.BackColor = System.Drawing.Color.Transparent
             Me.lblCode.DisplayOnly = True
             resources.ApplyResources(Me.lblCode, "lblCode")
             Me.lblCode.EditingMode = False
@@ -412,6 +432,7 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.MinimumValue = Nothing
             Me.TxtIdNo.Name = "TxtIdNo"
             Me.TxtIdNo.OldValue = Nothing
+            Me.TxtIdNo.OverrideMaxLength = 0
             Me.TxtIdNo.ReadOnly = True
             Me.TxtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.TxtIdNo.TabStop = False
@@ -420,6 +441,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'lblNameAra
             '
+            Me.lblNameAra.BackColor = System.Drawing.Color.Transparent
             Me.lblNameAra.DisplayOnly = True
             Me.lblNameAra.EditingMode = False
             resources.ApplyResources(Me.lblNameAra, "lblNameAra")
@@ -452,6 +474,7 @@ Namespace PresentationLayer.Views.Forms
             'lblSummary
             '
             resources.ApplyResources(Me.lblSummary, "lblSummary")
+            Me.lblSummary.BackColor = System.Drawing.Color.Transparent
             Me.lblSummary.DisplayOnly = True
             Me.lblSummary.EditingMode = False
             Me.lblSummary.Name = "lblSummary"
@@ -483,6 +506,7 @@ Namespace PresentationLayer.Views.Forms
             'lblActive
             '
             resources.ApplyResources(Me.lblActive, "lblActive")
+            Me.lblActive.BackColor = System.Drawing.Color.Transparent
             Me.lblActive.DisplayOnly = True
             Me.lblActive.EditingMode = False
             Me.lblActive.Name = "lblActive"
@@ -491,6 +515,7 @@ Namespace PresentationLayer.Views.Forms
             'lblIdNo
             '
             resources.ApplyResources(Me.lblIdNo, "lblIdNo")
+            Me.lblIdNo.BackColor = System.Drawing.Color.Transparent
             Me.lblIdNo.DisplayOnly = True
             Me.lblIdNo.EditingMode = False
             Me.lblIdNo.Name = "lblIdNo"
@@ -554,6 +579,7 @@ Namespace PresentationLayer.Views.Forms
             'lblQuantityType
             '
             resources.ApplyResources(Me.lblQuantityType, "lblQuantityType")
+            Me.lblQuantityType.BackColor = System.Drawing.Color.Transparent
             Me.lblQuantityType.DisplayOnly = True
             Me.lblQuantityType.EditingMode = False
             Me.lblQuantityType.Name = "lblQuantityType"
@@ -561,6 +587,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'cboQuantityType
             '
+            Me.cboQuantityType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
             Me.cboQuantityType.BackColor = System.Drawing.Color.White
             Me.cboQuantityType.BegFindValue = Nothing
             Me.cboQuantityType.ChangingSearchValueOnly = False
@@ -570,6 +597,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboQuantityType.DefaultValue = Nothing
             Me.cboQuantityType.DisplayMember = "Name"
             resources.ApplyResources(Me.cboQuantityType, "cboQuantityType")
+            Me.cboQuantityType.Editable = True
             Me.cboQuantityType.EditingMode = True
             Me.cboQuantityType.EndFindValue = Nothing
             Me.cboQuantityType.FieldDescription = Nothing
@@ -580,6 +608,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboQuantityType.FormattingEnabled = True
             Me.cboQuantityType.HideWhenNotEditingOrAdding = False
             Me.cboQuantityType.IgnoreCase = False
+            Me.cboQuantityType.LimitToList = False
             Me.cboQuantityType.LinkedLabel = Me.lblQuantityType
             Me.cboQuantityType.Name = "cboQuantityType"
             Me.cboQuantityType.OldValue = 0
@@ -588,6 +617,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboQuantityType.OverrideDropDownStyleList = False
             Me.cboQuantityType.PreviousSearchTerm = Nothing
             Me.cboQuantityType.SuggestBoxHeight = 200
+            Me.cboQuantityType.SuggestCharCount = 0
             Me.cboQuantityType.TextToSearch = Nothing
             Me.cboQuantityType.Translatable = False
             Me.cboQuantityType.ValueIsMandatory = False
@@ -597,6 +627,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'cboCalculationType
             '
+            Me.cboCalculationType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
             Me.cboCalculationType.BackColor = System.Drawing.Color.White
             Me.cboCalculationType.BegFindValue = Nothing
             Me.cboCalculationType.ChangingSearchValueOnly = False
@@ -606,6 +637,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboCalculationType.DefaultValue = Nothing
             Me.cboCalculationType.DisplayMember = "Name"
             resources.ApplyResources(Me.cboCalculationType, "cboCalculationType")
+            Me.cboCalculationType.Editable = True
             Me.cboCalculationType.EditingMode = True
             Me.cboCalculationType.EndFindValue = Nothing
             Me.cboCalculationType.FieldDescription = Nothing
@@ -616,6 +648,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboCalculationType.FormattingEnabled = True
             Me.cboCalculationType.HideWhenNotEditingOrAdding = False
             Me.cboCalculationType.IgnoreCase = False
+            Me.cboCalculationType.LimitToList = False
             Me.cboCalculationType.LinkedLabel = Me.lblPayElementType
             Me.cboCalculationType.Name = "cboCalculationType"
             Me.cboCalculationType.OldValue = 0
@@ -624,6 +657,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboCalculationType.OverrideDropDownStyleList = False
             Me.cboCalculationType.PreviousSearchTerm = Nothing
             Me.cboCalculationType.SuggestBoxHeight = 200
+            Me.cboCalculationType.SuggestCharCount = 0
             Me.cboCalculationType.TextToSearch = Nothing
             Me.cboCalculationType.Translatable = False
             Me.cboCalculationType.ValueIsMandatory = False
@@ -634,6 +668,7 @@ Namespace PresentationLayer.Views.Forms
             'lblFactorValue
             '
             resources.ApplyResources(Me.lblFactorValue, "lblFactorValue")
+            Me.lblFactorValue.BackColor = System.Drawing.Color.Transparent
             Me.lblFactorValue.DisplayOnly = True
             Me.lblFactorValue.EditingMode = False
             Me.lblFactorValue.Name = "lblFactorValue"
@@ -642,6 +677,7 @@ Namespace PresentationLayer.Views.Forms
             'lblCalculationType
             '
             resources.ApplyResources(Me.lblCalculationType, "lblCalculationType")
+            Me.lblCalculationType.BackColor = System.Drawing.Color.Transparent
             Me.lblCalculationType.DisplayOnly = True
             Me.lblCalculationType.EditingMode = False
             Me.lblCalculationType.Name = "lblCalculationType"
@@ -668,12 +704,14 @@ Namespace PresentationLayer.Views.Forms
             Me.txtRate.MinimumValue = Nothing
             Me.txtRate.Name = "txtRate"
             Me.txtRate.OldValue = Nothing
+            Me.txtRate.OverrideMaxLength = 0
             Me.txtRate.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtRate.Translatable = False
             '
             'lblRate
             '
             resources.ApplyResources(Me.lblRate, "lblRate")
+            Me.lblRate.BackColor = System.Drawing.Color.Transparent
             Me.lblRate.DisplayOnly = True
             Me.lblRate.EditingMode = False
             Me.lblRate.Name = "lblRate"
@@ -700,12 +738,14 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDefaultQuantity.MinimumValue = Nothing
             Me.txtDefaultQuantity.Name = "txtDefaultQuantity"
             Me.txtDefaultQuantity.OldValue = Nothing
+            Me.txtDefaultQuantity.OverrideMaxLength = 0
             Me.txtDefaultQuantity.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtDefaultQuantity.Translatable = False
             '
             'lblDefaultQuantity
             '
             resources.ApplyResources(Me.lblDefaultQuantity, "lblDefaultQuantity")
+            Me.lblDefaultQuantity.BackColor = System.Drawing.Color.Transparent
             Me.lblDefaultQuantity.DisplayOnly = True
             Me.lblDefaultQuantity.EditingMode = False
             Me.lblDefaultQuantity.Name = "lblDefaultQuantity"
@@ -714,6 +754,7 @@ Namespace PresentationLayer.Views.Forms
             'lblBasePayment
             '
             resources.ApplyResources(Me.lblBasePayment, "lblBasePayment")
+            Me.lblBasePayment.BackColor = System.Drawing.Color.Transparent
             Me.lblBasePayment.DisplayOnly = True
             Me.lblBasePayment.EditingMode = False
             Me.lblBasePayment.Name = "lblBasePayment"
@@ -721,6 +762,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'cboBasePaymentIdNo
             '
+            Me.cboBasePaymentIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
             Me.cboBasePaymentIdNo.BackColor = System.Drawing.Color.White
             Me.cboBasePaymentIdNo.BegFindValue = Nothing
             Me.cboBasePaymentIdNo.ChangingSearchValueOnly = False
@@ -730,6 +772,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboBasePaymentIdNo.DefaultValue = Nothing
             Me.cboBasePaymentIdNo.DisplayMember = "Name"
             resources.ApplyResources(Me.cboBasePaymentIdNo, "cboBasePaymentIdNo")
+            Me.cboBasePaymentIdNo.Editable = True
             Me.cboBasePaymentIdNo.EditingMode = True
             Me.cboBasePaymentIdNo.EndFindValue = Nothing
             Me.cboBasePaymentIdNo.FieldDescription = Nothing
@@ -740,6 +783,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboBasePaymentIdNo.FormattingEnabled = True
             Me.cboBasePaymentIdNo.HideWhenNotEditingOrAdding = False
             Me.cboBasePaymentIdNo.IgnoreCase = False
+            Me.cboBasePaymentIdNo.LimitToList = False
             Me.cboBasePaymentIdNo.LinkedLabel = Me.lblBasePayment
             Me.cboBasePaymentIdNo.Name = "cboBasePaymentIdNo"
             Me.cboBasePaymentIdNo.OldValue = 0
@@ -748,6 +792,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboBasePaymentIdNo.OverrideDropDownStyleList = False
             Me.cboBasePaymentIdNo.PreviousSearchTerm = Nothing
             Me.cboBasePaymentIdNo.SuggestBoxHeight = 200
+            Me.cboBasePaymentIdNo.SuggestCharCount = 0
             Me.cboBasePaymentIdNo.TextToSearch = Nothing
             Me.cboBasePaymentIdNo.Translatable = False
             Me.cboBasePaymentIdNo.ValueIsMandatory = False
@@ -758,6 +803,7 @@ Namespace PresentationLayer.Views.Forms
             'lblIncludeInEos
             '
             resources.ApplyResources(Me.lblIncludeInEos, "lblIncludeInEos")
+            Me.lblIncludeInEos.BackColor = System.Drawing.Color.Transparent
             Me.tlpCalculation.SetColumnSpan(Me.lblIncludeInEos, 2)
             Me.lblIncludeInEos.DisplayOnly = True
             Me.lblIncludeInEos.EditingMode = False
@@ -809,11 +855,13 @@ Namespace PresentationLayer.Views.Forms
             Me.txtMultiplier.MinimumValue = Nothing
             Me.txtMultiplier.Name = "txtMultiplier"
             Me.txtMultiplier.OldValue = Nothing
+            Me.txtMultiplier.OverrideMaxLength = 0
             Me.txtMultiplier.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtMultiplier.Translatable = False
             '
             'cboFactorType
             '
+            Me.cboFactorType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
             Me.cboFactorType.BackColor = System.Drawing.Color.White
             Me.cboFactorType.BegFindValue = Nothing
             Me.cboFactorType.ChangingSearchValueOnly = False
@@ -823,6 +871,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboFactorType.DefaultValue = Nothing
             Me.cboFactorType.DisplayMember = "Name"
             resources.ApplyResources(Me.cboFactorType, "cboFactorType")
+            Me.cboFactorType.Editable = True
             Me.cboFactorType.EditingMode = True
             Me.cboFactorType.EndFindValue = Nothing
             Me.cboFactorType.FieldDescription = Nothing
@@ -833,6 +882,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboFactorType.FormattingEnabled = True
             Me.cboFactorType.HideWhenNotEditingOrAdding = False
             Me.cboFactorType.IgnoreCase = False
+            Me.cboFactorType.LimitToList = False
             Me.cboFactorType.LinkedLabel = Me.lblFactorType
             Me.cboFactorType.Name = "cboFactorType"
             Me.cboFactorType.OldValue = 0
@@ -841,6 +891,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboFactorType.OverrideDropDownStyleList = False
             Me.cboFactorType.PreviousSearchTerm = Nothing
             Me.cboFactorType.SuggestBoxHeight = 200
+            Me.cboFactorType.SuggestCharCount = 0
             Me.cboFactorType.TextToSearch = Nothing
             Me.cboFactorType.Translatable = False
             Me.cboFactorType.ValueIsMandatory = False
@@ -851,6 +902,7 @@ Namespace PresentationLayer.Views.Forms
             'lblFactorType
             '
             resources.ApplyResources(Me.lblFactorType, "lblFactorType")
+            Me.lblFactorType.BackColor = System.Drawing.Color.Transparent
             Me.lblFactorType.DisplayOnly = True
             Me.lblFactorType.EditingMode = False
             Me.lblFactorType.Name = "lblFactorType"
@@ -883,6 +935,7 @@ Namespace PresentationLayer.Views.Forms
             'lblTaxable
             '
             resources.ApplyResources(Me.lblTaxable, "lblTaxable")
+            Me.lblTaxable.BackColor = System.Drawing.Color.Transparent
             Me.tlpCalculation.SetColumnSpan(Me.lblTaxable, 2)
             Me.lblTaxable.DisplayOnly = True
             Me.lblTaxable.EditingMode = False
@@ -892,6 +945,7 @@ Namespace PresentationLayer.Views.Forms
             'lblSlash
             '
             resources.ApplyResources(Me.lblSlash, "lblSlash")
+            Me.lblSlash.BackColor = System.Drawing.Color.Transparent
             Me.lblSlash.DisplayOnly = True
             Me.lblSlash.EditingMode = False
             Me.lblSlash.Name = "lblSlash"
@@ -899,6 +953,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'cboUnit
             '
+            Me.cboUnit.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
             Me.cboUnit.BackColor = System.Drawing.Color.White
             Me.cboUnit.BegFindValue = Nothing
             Me.cboUnit.ChangingSearchValueOnly = False
@@ -907,6 +962,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboUnit.DefaultValue = Nothing
             Me.cboUnit.DisplayMember = "Name"
             resources.ApplyResources(Me.cboUnit, "cboUnit")
+            Me.cboUnit.Editable = True
             Me.cboUnit.EditingMode = True
             Me.cboUnit.EndFindValue = Nothing
             Me.cboUnit.FieldDescription = Nothing
@@ -917,6 +973,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboUnit.FormattingEnabled = True
             Me.cboUnit.HideWhenNotEditingOrAdding = False
             Me.cboUnit.IgnoreCase = False
+            Me.cboUnit.LimitToList = False
             Me.cboUnit.LinkedLabel = Me.lblUnit
             Me.cboUnit.Name = "cboUnit"
             Me.cboUnit.OldValue = 0
@@ -925,6 +982,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboUnit.OverrideDropDownStyleList = False
             Me.cboUnit.PreviousSearchTerm = Nothing
             Me.cboUnit.SuggestBoxHeight = 200
+            Me.cboUnit.SuggestCharCount = 0
             Me.cboUnit.TextToSearch = Nothing
             Me.cboUnit.Translatable = False
             Me.cboUnit.ValueIsMandatory = False
@@ -935,6 +993,7 @@ Namespace PresentationLayer.Views.Forms
             'lblUnit
             '
             resources.ApplyResources(Me.lblUnit, "lblUnit")
+            Me.lblUnit.BackColor = System.Drawing.Color.Transparent
             Me.lblUnit.DisplayOnly = True
             Me.lblUnit.EditingMode = False
             Me.lblUnit.Name = "lblUnit"
@@ -942,6 +1001,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'cboPayElementType
             '
+            Me.cboPayElementType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
             Me.cboPayElementType.BackColor = System.Drawing.Color.White
             Me.cboPayElementType.BegFindValue = Nothing
             Me.cboPayElementType.ChangingSearchValueOnly = False
@@ -951,6 +1011,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayElementType.DefaultValue = Nothing
             Me.cboPayElementType.DisplayMember = "Name"
             resources.ApplyResources(Me.cboPayElementType, "cboPayElementType")
+            Me.cboPayElementType.Editable = True
             Me.cboPayElementType.EditingMode = True
             Me.cboPayElementType.EndFindValue = Nothing
             Me.cboPayElementType.FieldDescription = Nothing
@@ -961,6 +1022,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayElementType.FormattingEnabled = True
             Me.cboPayElementType.HideWhenNotEditingOrAdding = False
             Me.cboPayElementType.IgnoreCase = False
+            Me.cboPayElementType.LimitToList = False
             Me.cboPayElementType.LinkedLabel = Me.lblPayElementType
             Me.cboPayElementType.Name = "cboPayElementType"
             Me.cboPayElementType.OldValue = 0
@@ -969,6 +1031,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayElementType.OverrideDropDownStyleList = False
             Me.cboPayElementType.PreviousSearchTerm = Nothing
             Me.cboPayElementType.SuggestBoxHeight = 200
+            Me.cboPayElementType.SuggestCharCount = 0
             Me.cboPayElementType.TextToSearch = Nothing
             Me.cboPayElementType.Translatable = False
             Me.cboPayElementType.ValueIsMandatory = False
@@ -979,6 +1042,7 @@ Namespace PresentationLayer.Views.Forms
             'lblSlash2
             '
             resources.ApplyResources(Me.lblSlash2, "lblSlash2")
+            Me.lblSlash2.BackColor = System.Drawing.Color.Transparent
             Me.lblSlash2.DisplayOnly = True
             Me.lblSlash2.EditingMode = False
             Me.lblSlash2.Name = "lblSlash2"
@@ -1011,6 +1075,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'lblAccountIdNo
             '
+            Me.lblAccountIdNo.BackColor = System.Drawing.Color.Transparent
             Me.lblAccountIdNo.DisplayOnly = True
             resources.ApplyResources(Me.lblAccountIdNo, "lblAccountIdNo")
             Me.lblAccountIdNo.EditingMode = False
@@ -1052,6 +1117,9 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.DefaultValue = Nothing
             Me.cboAccountIdNo.DisplayMember = "Name"
             resources.ApplyResources(Me.cboAccountIdNo, "cboAccountIdNo")
+            Me.cboAccountIdNo.DropDownHeight = 24
+            Me.cboAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
+            Me.cboAccountIdNo.Editable = True
             Me.cboAccountIdNo.EditingMode = False
             Me.cboAccountIdNo.EndFindValue = Nothing
             Me.cboAccountIdNo.FieldDescription = Nothing
@@ -1062,6 +1130,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.FormattingEnabled = True
             Me.cboAccountIdNo.HideWhenNotEditingOrAdding = False
             Me.cboAccountIdNo.IgnoreCase = False
+            Me.cboAccountIdNo.LimitToList = False
             Me.cboAccountIdNo.LinkedLabel = Nothing
             Me.cboAccountIdNo.Name = "cboAccountIdNo"
             Me.cboAccountIdNo.OldValue = 0
@@ -1070,6 +1139,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.OverrideDropDownStyleList = False
             Me.cboAccountIdNo.PreviousSearchTerm = Nothing
             Me.cboAccountIdNo.SuggestBoxHeight = 200
+            Me.cboAccountIdNo.SuggestCharCount = 0
             Me.cboAccountIdNo.TextToSearch = Nothing
             Me.cboAccountIdNo.Translatable = False
             Me.cboAccountIdNo.ValueIsMandatory = False
@@ -1080,6 +1150,7 @@ Namespace PresentationLayer.Views.Forms
             'lblUsePayGroups
             '
             resources.ApplyResources(Me.lblUsePayGroups, "lblUsePayGroups")
+            Me.lblUsePayGroups.BackColor = System.Drawing.Color.Transparent
             Me.tlpPostingAccounts.SetColumnSpan(Me.lblUsePayGroups, 2)
             Me.lblUsePayGroups.DisplayOnly = True
             Me.lblUsePayGroups.EditingMode = False
@@ -1092,9 +1163,11 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPayElementAccounts.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
             Me.DataGridViewPayElementAccounts.AutoGenerateColumns = False
             Me.DataGridViewPayElementAccounts.BegFindValue = Nothing
+            Me.DataGridViewPayElementAccounts.Cached = False
             Me.DataGridViewPayElementAccounts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
             Me.DataGridViewPayElementAccounts.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvPayGroupIdNo, Me.dgvAccountIdNo, Me.AccountNameDataGridViewTextBoxColumn, Me.PayElementIdNoDataGridViewTextBoxColumn, Me.IdNoDataGridViewTextBoxColumn1, Me.PayGroupNameDataGridViewTextBoxColumn})
             Me.tlpPostingAccounts.SetColumnSpan(Me.DataGridViewPayElementAccounts, 3)
+            Me.DataGridViewPayElementAccounts.DataFilter = Nothing
             Me.DataGridViewPayElementAccounts.DataSource = Me.bsPayElementAccounts
             DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
             DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
@@ -1114,6 +1187,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPayElementAccounts.FieldDescription = Nothing
             Me.DataGridViewPayElementAccounts.FieldName = Nothing
             Me.DataGridViewPayElementAccounts.FieldsDictionary = Nothing
+            Me.DataGridViewPayElementAccounts.FindColumnNo = CType(0, Short)
             Me.DataGridViewPayElementAccounts.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.DataGridViewPayElementAccounts.FindEnabled = False
             Me.DataGridViewPayElementAccounts.FirstRowDeletionEnabled = True
@@ -1121,7 +1195,9 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPayElementAccounts.IgnoreCase = False
             Me.DataGridViewPayElementAccounts.IsDirty = False
             Me.DataGridViewPayElementAccounts.Name = "DataGridViewPayElementAccounts"
+            Me.DataGridViewPayElementAccounts.OldCellValue = Nothing
             Me.DataGridViewPayElementAccounts.ReadOnly = True
+            Me.DataGridViewPayElementAccounts.Searchable = True
             Me.DataGridViewPayElementAccounts.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewPayElementAccounts.SecurityKey = ""
             Me.DataGridViewPayElementAccounts.SequenceColumn = "dgvSequence"
@@ -1164,6 +1240,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvPayGroupIdNo.ReadOnly = True
             Me.dgvPayGroupIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvPayGroupIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvPayGroupIdNo.SuggestCharCount = 0
             Me.dgvPayGroupIdNo.Translatable = False
             '
             'dgvAccountIdNo
@@ -1180,6 +1257,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvAccountIdNo.ReadOnly = True
             Me.dgvAccountIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvAccountIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvAccountIdNo.SuggestCharCount = 0
             Me.dgvAccountIdNo.Translatable = False
             '
             'AccountNameDataGridViewTextBoxColumn
@@ -1228,8 +1306,10 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPayElementItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle6
             Me.DataGridViewPayElementItems.AutoGenerateColumns = False
             Me.DataGridViewPayElementItems.BegFindValue = Nothing
+            Me.DataGridViewPayElementItems.Cached = False
             Me.DataGridViewPayElementItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
             Me.DataGridViewPayElementItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceSummary, Me.dgvPayElementIdNo, Me.dgvFactorValue, Me.dgvFactorType, Me.ParentIdNoDataGridViewTextBoxColumn, Me.IdNoDataGridViewTextBoxColumn})
+            Me.DataGridViewPayElementItems.DataFilter = Nothing
             Me.DataGridViewPayElementItems.DataSource = Me.bsPayElementItems
             DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
             DataGridViewCellStyle11.BackColor = System.Drawing.Color.White
@@ -1249,6 +1329,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPayElementItems.FieldDescription = Nothing
             Me.DataGridViewPayElementItems.FieldName = Nothing
             Me.DataGridViewPayElementItems.FieldsDictionary = Nothing
+            Me.DataGridViewPayElementItems.FindColumnNo = CType(0, Short)
             Me.DataGridViewPayElementItems.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.DataGridViewPayElementItems.FindEnabled = False
             Me.DataGridViewPayElementItems.FirstRowDeletionEnabled = True
@@ -1256,7 +1337,9 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPayElementItems.IgnoreCase = False
             Me.DataGridViewPayElementItems.IsDirty = False
             Me.DataGridViewPayElementItems.Name = "DataGridViewPayElementItems"
+            Me.DataGridViewPayElementItems.OldCellValue = Nothing
             Me.DataGridViewPayElementItems.ReadOnly = True
+            Me.DataGridViewPayElementItems.Searchable = True
             Me.DataGridViewPayElementItems.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewPayElementItems.SecurityKey = ""
             Me.DataGridViewPayElementItems.SequenceColumn = "dgvSequenceSummary"
@@ -1300,6 +1383,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvPayElementIdNo.ReadOnly = True
             Me.dgvPayElementIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvPayElementIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvPayElementIdNo.SuggestCharCount = 0
             Me.dgvPayElementIdNo.Translatable = False
             '
             'dgvFactorValue
@@ -1336,6 +1420,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvFactorType.ReadOnly = True
             Me.dgvFactorType.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvFactorType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvFactorType.SuggestCharCount = 0
             Me.dgvFactorType.Translatable = False
             '
             'ParentIdNoDataGridViewTextBoxColumn
@@ -1401,6 +1486,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.MinimumValue = Nothing
             Me.txtNotes.Name = "txtNotes"
             Me.txtNotes.OldValue = Nothing
+            Me.txtNotes.OverrideMaxLength = 0
             Me.txtNotes.ReadOnly = True
             Me.txtNotes.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtNotes.Translatable = False
@@ -1408,6 +1494,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'lblNotes
             '
+            Me.lblNotes.BackColor = System.Drawing.Color.Transparent
             Me.lblNotes.DisplayOnly = True
             Me.lblNotes.EditingMode = False
             resources.ApplyResources(Me.lblNotes, "lblNotes")
@@ -1422,6 +1509,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'CLabel1
             '
+            Me.CLabel1.BackColor = System.Drawing.Color.Transparent
             Me.CLabel1.DisplayOnly = True
             Me.CLabel1.EditingMode = False
             resources.ApplyResources(Me.CLabel1, "CLabel1")
@@ -1439,6 +1527,7 @@ Namespace PresentationLayer.Views.Forms
             'PayElementEntryTv
             '
             resources.ApplyResources(Me, "$this")
+            Me.FormCulture = New System.Globalization.CultureInfo("en-US")
             Me.Name = "PayElementEntryTv"
             Me.SplitContainer1.Panel1.ResumeLayout(False)
             Me.SplitContainer1.Panel2.ResumeLayout(False)
