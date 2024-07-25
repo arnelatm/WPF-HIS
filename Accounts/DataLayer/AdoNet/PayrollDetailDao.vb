@@ -48,6 +48,7 @@ Namespace DataLayer.AdoNet
                 data.PayPeriodNameAra = payroll.PayrollNameAra
                 data.PayrollEarnings = ppeDao.GetDaoRecords("PayrollDetailIdNo = " & idNo & " and PayElementKind = '" & EnumToCode(PayElementKindSelection.Earning) & "'")
                 data.PayrollDeductions = ppeDao.GetDaoRecords("PayrollDetailIdNo = " & idNo & " and PayElementKind = '" & EnumToCode(PayElementKindSelection.Deduction) & "'")
+                data.Posted = payroll.Posted
             End If
             Return data
         End Function

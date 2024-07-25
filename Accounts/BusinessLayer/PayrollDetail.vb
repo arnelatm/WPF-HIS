@@ -26,6 +26,7 @@
         Public Property PaymentMethod As String
         Public Property SponsorType As String
         Public Property PayrollIdNo As Int16
+        Public Property Posted As Boolean
         Public Property StartDate As Date
     End Class
 

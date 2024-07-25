@@ -63,6 +63,9 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property Employees As Object Implements IPayrollView.Employees
 
+        Public Property Posted As Boolean Implements IPayrollView.Posted
+
+
         Protected SortOrderKey As String
 
         Public Event InitializeAttendance(sender As Object) Implements IPayrollView.InitializeAttendance

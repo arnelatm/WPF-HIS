@@ -20,7 +20,7 @@ Namespace DataLayer.AdoNet
             Dim sql As String =
                     " SELECT IdNo, EmployeeCode, Title, EmployeeName, EmployeeNameAra, Gender, BirthDate, BloodType, MaritalStatus, NationalityCode, ReligionIdNo, NationalIdNo, Street, District, TownCity, " &
                     " ProvinceState, CountryCode, PoBox, ZipCode, Phone1, Phone2, Email, DepartmentIdNo, DesignationIdNo, DutyHours, ActualDutyHours, HiredDate, ReleasedDate, " &
-                    " ArAccountIdNo, BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, Balance, PayCycleIdNo, PayGroupIdNo, PaymentMethod, SponsorType, Supervisor, SupervisorIdNo, Active, Picture" &
+                    " ArAccountIdNo, BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, Balance, PayCycleIdNo, PayGroupIdNo, PaymentMethod, RevCostCenterIdNo, SponsorType, Supervisor, SupervisorIdNo, Active, Picture" &
                     "   FROM [Employee]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
@@ -102,6 +102,7 @@ Namespace DataLayer.AdoNet
                     " ProvinceState = @ProvinceState," &
                     " ReleasedDate = @ReleasedDate," &
                     " ReligionIdNo = @ReligionIdNo," &
+                    " RevCostCenterIdNo = @RevCostCenterIdNo," &
                     " SponsorType = @SponsorType," &
                     " Street = @Street," &
                     " Supervisor = @Supervisor," &
@@ -117,10 +118,10 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef employee As Employee) As Integer Implements iDao(Of Employee).AddRecord
             Dim sql As String =
                     " INSERT INTO [Employee] " &
-                    "        (Title, EmployeeCode, EmployeeName, EmployeeNameAra, Gender, BirthDate, BloodType, MaritalStatus, NationalIdNo, ReligionIdNo, Street, District, TownCity, " &
+                    "        (Title, EmployeeCode, EmployeeName, EmployeeNameAra, Gender, BirthDate, BloodType, MaritalStatus, NationalIdNo, ReligionIdNo, RevCostCenterIdNo, Street, District, TownCity, " &
                     "         ProvinceState, CountryCode, PoBox, ZipCode, Phone1, Phone2, Email, DepartmentIdNo, DesignationIdNo, HiredDate, ReleasedDate, " &
                     "         BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, Balance, DutyHours, ActualDutyHours, PayCycleIdNo, PayGroupIdNo, PaymentMethod, SponsorType, Supervisor, SupervisorIdNo, Active, Picture)" &
-                    " VALUES (@Title, @EmployeeCode, @EmployeeName, @EmployeeNameAra, @Gender, @BirthDate, @BloodType, @MaritalStatus, @NationalIdNo, @ReligionIdNo, @Street, @District, @TownCity, " &
+                    " VALUES (@Title, @EmployeeCode, @EmployeeName, @EmployeeNameAra, @Gender, @BirthDate, @BloodType, @MaritalStatus, @NationalIdNo, @ReligionIdNo, @RevCostCenterIdNo, @Street, @District, @TownCity, " &
                     "         @ProvinceState, @CountryCode, @PoBox, @ZipCode, @Phone1, @Phone2, @Email, @DepartmentIdNo, @DesignationIdNo, @HiredDate, @ReleasedDate, " &
                     "         @BankIdNo, @BankAccountNo, @Iban, @Notes, @OpeningBalance, @Balance, @DutyHours, @ActualDutyHours, @PayCycleIdNo, @PayGroupIdNo, @PaymentMethod, @SponsorType, @Supervisor, @SupervisorIdNo, @Active, @Picture)"
             Return _db.Insert(sql, Take(employee))
@@ -164,6 +165,7 @@ Namespace DataLayer.AdoNet
             .ProvinceState = Extensions.AsString(reader("ProvinceState")),
             .ReleasedDate = Extensions.AsNullable(Of Date?)(reader("ReleasedDate")),
             .ReligionIdNo = Extensions.AsNullable(Of Int16?)(reader("ReligionIdNo")),
+            .RevCostCenterIdNo = Extensions.AsNullable(Of Int16?)(reader("RevCostCenterIdNo")),
             .SponsorType = Extensions.AsString(reader("SponsorType")),
             .Street = Extensions.AsString(reader("Street")),
             .Supervisor = Extensions.AsBool(reader("Supervisor")),
@@ -217,6 +219,7 @@ Namespace DataLayer.AdoNet
                                     "@ProvinceState", employee.ProvinceState,
                                     "@ReleasedDate", employee.ReleasedDate,
                                     "@ReligionIdNo", employee.ReligionIdNo,
+                                    "@RevCostCenterIdNo", employee.RevCostCenterIdNo,
                                     "@SponsorType", employee.SponsorType,
                                     "@Street", employee.Street,
                                     "@Supervisor", employee.Supervisor,

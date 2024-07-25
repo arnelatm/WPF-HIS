@@ -193,6 +193,8 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property Selected As Boolean Implements IPayrollDetailView.Selected
 
+        Public Property Posted As Boolean Implements IPayrollDetailView.Posted
+
         'Public Property PayPeriodDescription As String
 
 #End Region

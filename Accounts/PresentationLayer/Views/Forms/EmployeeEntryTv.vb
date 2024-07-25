@@ -373,6 +373,15 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property RevCostCenterIdNo As Int16? Implements IEmployeeView.RevCostCenterIdNo
+            Get
+                Return cboRevCostCenterIdNo.GetValue(Of Int16)
+            End Get
+            Set
+                cboRevCostCenterIdNo.SetValue(Value)
+            End Set
+        End Property
+
         Public Property Street As String Implements IEmployeeView.Street
             Get
                 Return txtStreet.GetValue(Of String)
@@ -646,6 +655,7 @@ Namespace PresentationLayer.Views.Forms
          {"ProvinceState", txtProvinceState},
          {"ReleasedDate", dtpReleasedDate},
          {"ReligionIdNo", cacReligionIdNo},
+         {"RevCostCenterIdNo", cboRevCostCenterIdNo},
          {"SponsorType", cboSponsorType},
          {"Street", txtStreet},
          {"Supervisor", chkSupervisor},
@@ -831,7 +841,7 @@ Namespace PresentationLayer.Views.Forms
 
         End Sub
 
-
     End Class
+
 
 End Namespace

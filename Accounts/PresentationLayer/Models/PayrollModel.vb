@@ -16,6 +16,7 @@
         Public Property StartDate As Date
         Public Property PayrollAttendance As List(Of AttendanceItemModel)
         Public Property PayrollOvertime As List(Of OtWorkHourModel)
+        Public Property Posted As Boolean
     End Class
 
 End Namespace

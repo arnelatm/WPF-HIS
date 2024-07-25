@@ -152,6 +152,15 @@ Namespace PresentationLayer.Presenters
             View.PayFrequency = Service.GetField(Of String, Int16)(View.PayCycleIdNo, "PayCycle", "IdNo", "PayFrequency")
         End Sub
 
+        Public Overrides Function IsOkToEditRecord() As Boolean
+            Dim retVal As Boolean = True
+            If View.Posted Then
+                Messaging.Show(True, "MsgChangePostedRecordNotAllowed")
+                retVal = False
+            End If
+            Return retVal
+        End Function
+
         Public Sub InitializeMonthlyPayroll(payCycleRecord As PayCycleModel)
             If View.StartDate Is Nothing And View.EndDate Is Nothing Then
                 If payCycleRecord.PayCycleCode = "Month" Then

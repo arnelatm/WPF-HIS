@@ -23,6 +23,19 @@ Namespace PresentationLayer.Views.Interfaces
 
     End Interface
 
+    Public Interface IAccountSelectorForm
+        Inherits IViewNew
+
+        ReadOnly Property Language As String
+        ReadOnly Property IdNo As Int32
+        ReadOnly Property ReportCode As String
+        Property Title As String
+        Property UserHasAccess As Boolean
+        Property AccountSelectorControl As Control
+        Property IdNoData As DataTable
+        Event PostButtonClicked()
+
+    End Interface
     Public Interface IReportFormView
         Inherits IViewNew
 

@@ -21,6 +21,7 @@ Namespace DataLayer.AdoNet
                                       "PayrollName," &
                                       "PayrollNameAra," &
                                       "PayFrequency," &
+                                      "Posted," &
                                       "StartDate"
 
         Public Function GetRecordByIdNo(idNo) As Payroll Implements iDao(Of Payroll).GetRecordByIdNo
@@ -76,6 +77,7 @@ Namespace DataLayer.AdoNet
             .PayrollCode = Extensions.AsString(reader("PayrollCode")),
             .PayrollName = Extensions.AsString(reader("PayrollName")),
             .PayrollNameAra = Extensions.AsString(reader("PayrollNameAra")),
+            .Posted = Extensions.AsBool(reader("Posted")),
             .StartDate = Extensions.AsDate(reader("StartDate"))
             }
 
@@ -87,6 +89,7 @@ Namespace DataLayer.AdoNet
                                  "@PayrollCode", Payroll.PayrollCode,
                                  "@PayrollName", Payroll.PayrollName,
                                  "@PayrollNameAra", Payroll.PayrollNameAra,
+                                 "@Posted", Payroll.Posted,
                                  "@StartDate", Payroll.StartDate
                                  }
         End Function

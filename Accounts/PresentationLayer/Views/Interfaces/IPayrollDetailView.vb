@@ -20,6 +20,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property StartDate As Date
         Property PayEarningsByCode
         Property PayDeductionsByCode
+        Property Posted As Boolean
         Property Selected As Boolean
 
     End Interface

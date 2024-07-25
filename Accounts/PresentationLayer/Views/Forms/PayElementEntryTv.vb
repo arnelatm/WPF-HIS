@@ -271,11 +271,11 @@ Namespace PresentationLayer.Views.Forms
         Public Property AccountsByCode As Object Implements IPayElementView.AccountsByCode
             Get
                 Return _accountsByCode
-                Debugger.Break()
+                'Debugger.Break()
             End Get
             Set(value As Object)
                 _accountsByCode = value
-                Debugger.Break()
+                'Debugger.Break()
             End Set
         End Property
 

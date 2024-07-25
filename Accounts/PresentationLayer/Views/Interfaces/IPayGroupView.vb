@@ -10,6 +10,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property PayGroupCode As String
         Property PayGroupName As String
         Property PayGroupNameAra As String
+        Property RevCostCenterIdNo As Int16
         Property Notes As String
     End Interface
 

@@ -5,7 +5,6 @@ Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common
-Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Events
@@ -151,6 +150,7 @@ Namespace PresentationLayer.Presenters
                              New Object() {"PayCycle", "PayCycleIdNo"},
                              New Object() {"PayGroup", "PayGroupIdNo"},
                              New Object() {"List", "Title", "IdNo,ListName"},
+                             New Object() {"RevCostCenter", "RevCostCenterIdNo"},
                              New Object() {"Employee", "SupervisorIdNo", Nothing, "Supervisor=1"}})
             MakeVarDataSources({New Object() {"PayElement", "DeductionsByName", Nothing, "PayElementKind = '" + EnumToCode(PayElementKindSelection.Deduction) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'"},
                                New Object() {"PayElement", "EarningsByName", Nothing, "PayElementKind = '" + EnumToCode(PayElementKindSelection.Earning) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'"},

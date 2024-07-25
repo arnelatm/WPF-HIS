@@ -72,6 +72,10 @@
     <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
+    <Import Include="KellermanSoftware.CompareNetObjects" />
+    <Import Include="KellermanSoftware.CompareNetObjects.IgnoreOrderTypes" />
+    <Import Include="KellermanSoftware.CompareNetObjects.Reports" />
+    <Import Include="KellermanSoftware.CompareNetObjects.TypeComparers" />
     <Import Include="Microsoft.VisualBasic" />
     <Import Include="System" />
     <Import Include="System.Collections" />

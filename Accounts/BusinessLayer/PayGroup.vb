@@ -13,6 +13,7 @@ Namespace BusinessLayer
             If GetRules().Count() = 0 Then
                 AddRule(New ValidateRequired("PayGroupName"))
                 AddRule(New ValidateRequired("PayGroupCode"))
+                AddRule(New ValidateRequired("RevCostCenterIdNo"))
                 'AddRule(New ValidateCompare("ParentIdNo", "IdNo", ValidationOperator.NotEqual,
                 '                            ValidationDataType.Integer))
             End If
@@ -25,6 +26,7 @@ Namespace BusinessLayer
         Public Property PayGroupNameAra As String
         Public Property SortKey As String
         Public Property IdNo As Int16
+        Public Property RevCostCenterIdNo As Int16
         Public Property Notes As String
     End Class
 

@@ -18,7 +18,8 @@
         Public Property PayrollDeductions As List(Of PayrollPayElementModel)
         Public Property PayrollEarnings As List(Of PayrollPayElementModel)
         Public Property PayrollIdNo As Int16
-        Public Property PaymentMethod as String
+        Public Property PaymentMethod As String
+        Public Property Posted As Boolean
         Public Property SponsorType as String
         Public Property StartDate As Date
         Public Property Selected As Boolean

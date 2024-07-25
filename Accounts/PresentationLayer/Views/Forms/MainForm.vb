@@ -1358,6 +1358,8 @@ Namespace PresentationLayer.Views.Forms
             formToRun.Presenter = New IbLabResultPresenter(Of IbLabResultModel)(formToRun, parameter)
             formToRun.Show()
         End Sub
+
+
     End Class
 
 End Namespace

@@ -132,6 +132,9 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property Posted As Boolean Implements IPayrollView.Posted
+
+
 #End Region
 
         Public Event InitializeAttendance(sender As Object) Implements IPayrollView.InitializeAttendance
@@ -228,9 +231,15 @@ Namespace PresentationLayer.Views.Forms
 
         Protected Sub OnInputsTurnedOn() Handles MyBase.InputsTurnedOn
             UpdateButtonText()
-            btnInitializeAttendance.Enabled = True
-            btnInitializeOvertime.Enabled = True
+            If Posted Then
+                btnInitializeAttendance.Enabled = False
+                btnInitializeOvertime.Enabled = False
+            Else
+                btnInitializeAttendance.Enabled = True
+                btnInitializeOvertime.Enabled = True
+            End If
             btnGenerateRegularPayElements.Enabled = True
+            btnPost.Enabled = False
         End Sub
 
         Private Sub UpdateButtonText()
@@ -250,6 +259,11 @@ Namespace PresentationLayer.Views.Forms
             btnInitializeAttendance.Enabled = False
             btnInitializeOvertime.Enabled = False
             btnGenerateRegularPayElements.Enabled = False
+            If Not Posted Then
+                btnPost.Enabled = True
+            Else
+                btnPost.Enabled = False
+            End If
         End Sub
 
         Private Sub OnInitializeAttendance_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnInitializeAttendance.ClickButtonArea
@@ -318,13 +332,7 @@ Namespace PresentationLayer.Views.Forms
             End With
         End Sub
 
-        Private Sub CButton3_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles CButton3.ClickButtonArea
-            'RaiseEvent PostPayroll(Me)
-            btnEdit.Enabled = True
-            btnAdd.Enabled = True
-            TurnOffInputs()
-            'Dim x = IdNo
-            'Close()
+        Private Sub CButton3_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnPost.ClickButtonArea
             RunSubForm(Of PayrollDetailEntry, PayrollDetailPresenter(Of PayrollDetailModel))(IdNo, ParentForm)
         End Sub
 
@@ -338,6 +346,26 @@ Namespace PresentationLayer.Views.Forms
             btnPrintWithArgs.Visible = True
         End Sub
 
+        Protected Overrides Sub OnRecordPositionChanged()
+            If Posted Then
+                btnPost.Enabled = False
+                btnEmployeeAbsenceEntry.Enabled = False
+                btnGenerateRegularPayElements.Enabled = False
+                btnInitializeAttendance.Enabled = False
+                btnHolidayLeave.Enabled = False
+                btnInitializeOvertime.Enabled = False
+                btnNonHolidayLeave.Enabled = False
+            Else
+                If EditingMode Or AddingMode Then
+                    btnPost.Enabled = False
+                Else
+                    btnPost.Enabled = True
+                End If
+                btnHolidayLeave.Enabled = True
+                btnNonHolidayLeave.Enabled = True
+                btnEmployeeAbsenceEntry.Enabled = True
+            End If
+        End Sub
 
     End Class
 

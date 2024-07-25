@@ -27,6 +27,7 @@ Namespace BusinessLayer
         Public Property PayrollAttendance As List(Of AttendanceItem)
         Public Property PayrollOvertime As List(Of OtWorkHour)
         Public Property PayFrequency As String
+        Public Property Posted As Boolean
     End Class
 
 End Namespace

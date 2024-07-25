@@ -34,7 +34,6 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtPayGroupNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
             Me.txtPayGroupName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.lblNote = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -44,6 +43,9 @@ Namespace PresentationLayer.Views.Forms
             Me.lblCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblNote = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
             Me.SplitContainer1.Panel2.SuspendLayout()
@@ -72,6 +74,10 @@ Namespace PresentationLayer.Views.Forms
             Me.ImageListTreeView.Images.SetKeyName(0, "openbriefcase.png")
             Me.ImageListTreeView.Images.SetKeyName(1, "TreeNode.ico")
             '
+            'TranslatorDAC
+            '
+            Me.TranslatorDAC.Cs = ""
+            '
             'floDataDisplay
             '
             resources.ApplyResources(Me.floDataDisplay, "floDataDisplay")
@@ -86,7 +92,6 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.Controls.Add(Me.txtLevelNumber, 0, 9)
             Me.TableLayoutPanel1.Controls.Add(Me.CLabel1, 0, 8)
             Me.TableLayoutPanel1.Controls.Add(Me.txtPayGroupNameAra, 0, 5)
-            Me.TableLayoutPanel1.Controls.Add(Me.lblNote, 0, 10)
             Me.TableLayoutPanel1.Controls.Add(Me.lblParentIdNo, 0, 6)
             Me.TableLayoutPanel1.Controls.Add(Me.lblNameAra, 0, 4)
             Me.TableLayoutPanel1.Controls.Add(Me.txtPayGroupName, 0, 3)
@@ -96,7 +101,10 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.Controls.Add(Me.lblIdNo, 0, 0)
             Me.TableLayoutPanel1.Controls.Add(Me.lblCode, 1, 0)
             Me.TableLayoutPanel1.Controls.Add(Me.cboParentIdNo, 0, 7)
-            Me.TableLayoutPanel1.Controls.Add(Me.txtNotes, 0, 11)
+            Me.TableLayoutPanel1.Controls.Add(Me.txtNotes, 0, 13)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblNote, 0, 12)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblRevCostCenterIdNo, 0, 10)
+            Me.TableLayoutPanel1.Controls.Add(Me.cboRevCostCenterIdNo, 0, 11)
             Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
             '
             'txtLevelNumber
@@ -121,6 +129,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtLevelNumber.MinimumValue = Nothing
             Me.txtLevelNumber.Name = "txtLevelNumber"
             Me.txtLevelNumber.OldValue = Nothing
+            Me.txtLevelNumber.OverrideMaxLength = 0
             Me.txtLevelNumber.ReadOnly = True
             Me.txtLevelNumber.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtLevelNumber.Translatable = False
@@ -129,6 +138,7 @@ Namespace PresentationLayer.Views.Forms
             'CLabel1
             '
             resources.ApplyResources(Me.CLabel1, "CLabel1")
+            Me.CLabel1.BackColor = System.Drawing.Color.Transparent
             Me.CLabel1.DisplayOnly = True
             Me.CLabel1.EditingMode = False
             Me.CLabel1.Name = "CLabel1"
@@ -157,6 +167,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayGroupNameAra.MinimumValue = Nothing
             Me.txtPayGroupNameAra.Name = "txtPayGroupNameAra"
             Me.txtPayGroupNameAra.OldValue = Nothing
+            Me.txtPayGroupNameAra.OverrideMaxLength = 0
             Me.txtPayGroupNameAra.ReadOnly = True
             Me.txtPayGroupNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtPayGroupNameAra.Translatable = False
@@ -183,22 +194,16 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayGroupName.MinimumValue = Nothing
             Me.txtPayGroupName.Name = "txtPayGroupName"
             Me.txtPayGroupName.OldValue = Nothing
+            Me.txtPayGroupName.OverrideMaxLength = 0
             Me.txtPayGroupName.ReadOnly = True
             Me.txtPayGroupName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtPayGroupName.Translatable = False
             Me.txtPayGroupName.ValueIsMandatory = True
             '
-            'lblNote
-            '
-            resources.ApplyResources(Me.lblNote, "lblNote")
-            Me.lblNote.DisplayOnly = True
-            Me.lblNote.EditingMode = False
-            Me.lblNote.Name = "lblNote"
-            Me.lblNote.Translatable = True
-            '
             'lblParentIdNo
             '
             resources.ApplyResources(Me.lblParentIdNo, "lblParentIdNo")
+            Me.lblParentIdNo.BackColor = System.Drawing.Color.Transparent
             Me.lblParentIdNo.DisplayOnly = True
             Me.lblParentIdNo.EditingMode = False
             Me.lblParentIdNo.Name = "lblParentIdNo"
@@ -207,6 +212,7 @@ Namespace PresentationLayer.Views.Forms
             'lblNameAra
             '
             resources.ApplyResources(Me.lblNameAra, "lblNameAra")
+            Me.lblNameAra.BackColor = System.Drawing.Color.Transparent
             Me.TableLayoutPanel1.SetColumnSpan(Me.lblNameAra, 2)
             Me.lblNameAra.DisplayOnly = True
             Me.lblNameAra.EditingMode = False
@@ -216,6 +222,7 @@ Namespace PresentationLayer.Views.Forms
             'lblName
             '
             resources.ApplyResources(Me.lblName, "lblName")
+            Me.lblName.BackColor = System.Drawing.Color.Transparent
             Me.TableLayoutPanel1.SetColumnSpan(Me.lblName, 2)
             Me.lblName.DisplayOnly = True
             Me.lblName.EditingMode = False
@@ -243,6 +250,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayGroupCode.MinimumValue = Nothing
             Me.txtPayGroupCode.Name = "txtPayGroupCode"
             Me.txtPayGroupCode.OldValue = Nothing
+            Me.txtPayGroupCode.OverrideMaxLength = 0
             Me.txtPayGroupCode.ReadOnly = True
             Me.txtPayGroupCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtPayGroupCode.Translatable = False
@@ -270,6 +278,7 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.MinimumValue = Nothing
             Me.TxtIdNo.Name = "TxtIdNo"
             Me.TxtIdNo.OldValue = Nothing
+            Me.TxtIdNo.OverrideMaxLength = 0
             Me.TxtIdNo.ReadOnly = True
             Me.TxtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.TxtIdNo.TabStop = False
@@ -279,6 +288,7 @@ Namespace PresentationLayer.Views.Forms
             'lblIdNo
             '
             resources.ApplyResources(Me.lblIdNo, "lblIdNo")
+            Me.lblIdNo.BackColor = System.Drawing.Color.Transparent
             Me.lblIdNo.DisplayOnly = True
             Me.lblIdNo.EditingMode = False
             Me.lblIdNo.Name = "lblIdNo"
@@ -287,6 +297,7 @@ Namespace PresentationLayer.Views.Forms
             'lblCode
             '
             resources.ApplyResources(Me.lblCode, "lblCode")
+            Me.lblCode.BackColor = System.Drawing.Color.Transparent
             Me.lblCode.DisplayOnly = True
             Me.lblCode.EditingMode = False
             Me.lblCode.Name = "lblCode"
@@ -294,14 +305,17 @@ Namespace PresentationLayer.Views.Forms
             '
             'cboParentIdNo
             '
+            Me.cboParentIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
             Me.cboParentIdNo.BackColor = System.Drawing.Color.White
             Me.cboParentIdNo.BegFindValue = Nothing
             Me.cboParentIdNo.ChangingSearchValueOnly = False
             Me.TableLayoutPanel1.SetColumnSpan(Me.cboParentIdNo, 2)
             Me.cboParentIdNo.CurrentSearchTerm = ""
+            Me.cboParentIdNo.DataValue = Nothing
             Me.cboParentIdNo.DefaultValue = Nothing
             Me.cboParentIdNo.DisplayMember = "Name"
             resources.ApplyResources(Me.cboParentIdNo, "cboParentIdNo")
+            Me.cboParentIdNo.Editable = True
             Me.cboParentIdNo.EditingMode = True
             Me.cboParentIdNo.EndFindValue = Nothing
             Me.cboParentIdNo.FieldDescription = Nothing
@@ -312,6 +326,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboParentIdNo.FormattingEnabled = True
             Me.cboParentIdNo.HideWhenNotEditingOrAdding = False
             Me.cboParentIdNo.IgnoreCase = False
+            Me.cboParentIdNo.LimitToList = False
             Me.cboParentIdNo.LinkedLabel = Me.lblParentIdNo
             Me.cboParentIdNo.Name = "cboParentIdNo"
             Me.cboParentIdNo.OldValue = 0
@@ -320,6 +335,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboParentIdNo.OverrideDropDownStyleList = False
             Me.cboParentIdNo.PreviousSearchTerm = Nothing
             Me.cboParentIdNo.SuggestBoxHeight = 200
+            Me.cboParentIdNo.SuggestCharCount = 0
             Me.cboParentIdNo.TextToSearch = Nothing
             Me.cboParentIdNo.Translatable = False
             Me.cboParentIdNo.ValueIsMandatory = False
@@ -349,12 +365,73 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.MinimumValue = Nothing
             Me.txtNotes.Name = "txtNotes"
             Me.txtNotes.OldValue = Nothing
+            Me.txtNotes.OverrideMaxLength = 0
             Me.txtNotes.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtNotes.Translatable = False
+            '
+            'lblNote
+            '
+            resources.ApplyResources(Me.lblNote, "lblNote")
+            Me.lblNote.BackColor = System.Drawing.Color.Transparent
+            Me.lblNote.DisplayOnly = True
+            Me.lblNote.EditingMode = False
+            Me.lblNote.Name = "lblNote"
+            Me.lblNote.Translatable = True
+            '
+            'lblRevCostCenterIdNo
+            '
+            resources.ApplyResources(Me.lblRevCostCenterIdNo, "lblRevCostCenterIdNo")
+            Me.lblRevCostCenterIdNo.BackColor = System.Drawing.Color.Transparent
+            Me.TableLayoutPanel1.SetColumnSpan(Me.lblRevCostCenterIdNo, 2)
+            Me.lblRevCostCenterIdNo.DisplayOnly = True
+            Me.lblRevCostCenterIdNo.EditingMode = False
+            Me.lblRevCostCenterIdNo.Name = "lblRevCostCenterIdNo"
+            Me.lblRevCostCenterIdNo.Translatable = True
+            '
+            'cboRevCostCenterIdNo
+            '
+            Me.cboRevCostCenterIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+            Me.cboRevCostCenterIdNo.BackColor = System.Drawing.Color.White
+            Me.cboRevCostCenterIdNo.BegFindValue = Nothing
+            Me.cboRevCostCenterIdNo.ChangingSearchValueOnly = False
+            Me.TableLayoutPanel1.SetColumnSpan(Me.cboRevCostCenterIdNo, 2)
+            Me.cboRevCostCenterIdNo.CurrentSearchTerm = ""
+            Me.cboRevCostCenterIdNo.DataValue = Nothing
+            Me.cboRevCostCenterIdNo.DefaultValue = Nothing
+            resources.ApplyResources(Me.cboRevCostCenterIdNo, "cboRevCostCenterIdNo")
+            Me.cboRevCostCenterIdNo.DropDownHeight = 24
+            Me.cboRevCostCenterIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
+            Me.cboRevCostCenterIdNo.Editable = True
+            Me.cboRevCostCenterIdNo.EditingMode = False
+            Me.cboRevCostCenterIdNo.EndFindValue = Nothing
+            Me.cboRevCostCenterIdNo.FieldDescription = Nothing
+            Me.cboRevCostCenterIdNo.FieldName = Nothing
+            Me.cboRevCostCenterIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboRevCostCenterIdNo.FindEnabled = False
+            Me.cboRevCostCenterIdNo.ForeColor = System.Drawing.Color.Black
+            Me.cboRevCostCenterIdNo.FormattingEnabled = True
+            Me.cboRevCostCenterIdNo.HideWhenNotEditingOrAdding = False
+            Me.cboRevCostCenterIdNo.IgnoreCase = False
+            Me.cboRevCostCenterIdNo.LimitToList = False
+            Me.cboRevCostCenterIdNo.LinkedLabel = Nothing
+            Me.cboRevCostCenterIdNo.Name = "cboRevCostCenterIdNo"
+            Me.cboRevCostCenterIdNo.OldValue = 0
+            Me.cboRevCostCenterIdNo.OriginalDataSource = Nothing
+            Me.cboRevCostCenterIdNo.OriginalList = Nothing
+            Me.cboRevCostCenterIdNo.OverrideDropDownStyleList = False
+            Me.cboRevCostCenterIdNo.PreviousSearchTerm = Nothing
+            Me.cboRevCostCenterIdNo.SuggestBoxHeight = 246
+            Me.cboRevCostCenterIdNo.SuggestCharCount = 0
+            Me.cboRevCostCenterIdNo.TextToSearch = Nothing
+            Me.cboRevCostCenterIdNo.Translatable = False
+            Me.cboRevCostCenterIdNo.ValueIsMandatory = False
+            Me.cboRevCostCenterIdNo.ValueIsNullable = False
+            Me.cboRevCostCenterIdNo.ValueIsNumeric = False
             '
             'PayGroupEntryTv
             '
             resources.ApplyResources(Me, "$this")
+            Me.FormCulture = New System.Globalization.CultureInfo("en-US")
             Me.Name = "PayGroupEntryTv"
             Me.SplitContainer1.Panel1.ResumeLayout(False)
             Me.SplitContainer1.Panel2.ResumeLayout(False)
@@ -385,5 +462,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents txtLevelNumber As CTextBox
         Friend WithEvents CLabel1 As CLabel
         Friend WithEvents txtNotes As CTextBox
+        Friend WithEvents cboRevCostCenterIdNo As CdtComboBox
+        Friend WithEvents lblRevCostCenterIdNo As CLabel
     End Class
 End Namespace

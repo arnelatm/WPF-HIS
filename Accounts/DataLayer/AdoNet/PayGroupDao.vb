@@ -15,7 +15,7 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordByIdNo(idNo) As PayGroup Implements iDao(Of PayGroup).GetRecordByIdNo
             Dim sql As String =
-                    " SELECT IdNo, ParentIdNo, PayGroupCode, PayGroupName, PayGroupNameAra, LevelNumber, Notes, SortKey" &
+                    " SELECT IdNo, ParentIdNo, PayGroupCode, PayGroupName, PayGroupNameAra, RevCostCenterIdNo, LevelNumber, Notes, SortKey" &
                     "   FROM PayGroup_View " &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
@@ -30,6 +30,7 @@ Namespace DataLayer.AdoNet
                     "        PayGroupCode = @PayGroupCode," &
                     "        PayGroupName = @PayGroupName," &
                     "        PayGroupNameAra = @PayGroupNameAra," &
+                    "        RevCostCenterIdNo = @RevCostCenterIdNo," &
                     "        Notes = @Notes" &
                     "  WHERE IdNo = @IdNo"
 
@@ -39,8 +40,8 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef PayGroup As PayGroup) As Integer Implements iDao(Of PayGroup).AddRecord
             Dim sql As String =
                     " INSERT INTO [PayGroup] " &
-                    " (ParentIdNo,PayGroupCode,PayGroupName,PayGroupNameAra,Notes) " &
-                    " VALUES (@ParentIdNo,@PayGroupCode,@PayGroupName,@PayGroupNameAra,@Notes)"
+                    " (ParentIdNo,PayGroupCode,PayGroupName,PayGroupNameAra,RevCostCenterIdNo,Notes) " &
+                    " VALUES (@ParentIdNo,@PayGroupCode,@PayGroupName,@PayGroupNameAra,@RevCostCenterIdNo,@Notes)"
             Return _db.Insert(sql, Take(PayGroup))
         End Function
 
@@ -48,10 +49,11 @@ Namespace DataLayer.AdoNet
                                     Function(reader) _
             New PayGroup() With {
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
-            .ParentIdNo = Extensions.AsNullable(Of Int32?)(reader("ParentIdNo")),
+            .ParentIdNo = Extensions.AsNullable(Of Int16?)(reader("ParentIdNo")),
             .PayGroupCode = Extensions.AsString(reader("PayGroupCode")),
             .PayGroupName = Extensions.AsString(reader("PayGroupName")),
             .PayGroupNameAra = Extensions.AsString(reader("PayGroupNameAra")),
+            .RevCostCenterIdNo = Extensions.AsInt(Of Int16)(reader("RevCostCenterIdNo")),
             .LevelNumber = Extensions.AsInt(Of Short)(reader("LevelNumber")),
             .Notes = Extensions.AsString(reader("Notes")),
             .SortKey = Extensions.AsString(reader("SortKey"))
@@ -64,6 +66,7 @@ Namespace DataLayer.AdoNet
                                     "@PayGroupCode", PayGroup.PayGroupCode,
                                     "@PayGroupName", PayGroup.PayGroupName,
                                     "@PayGroupNameAra", PayGroup.PayGroupNameAra,
+                                    "@RevCostCenterIdNo", PayGroup.RevCostCenterIdNo,
                                     "@LevelNumber", PayGroup.LevelNumber,
                                     "@Notes", PayGroup.Notes,
                                     "@SortKey", PayGroup.SortKey

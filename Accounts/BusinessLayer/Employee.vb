@@ -61,6 +61,7 @@ Namespace BusinessLayer
         Public Property PoBox As String
         Public Property ProvinceState As String
         Public Property ReleasedDate As Date?
+        Public Property RevCostCenterIdNo As Int16?
         Public Property ReligionIdNo As Int16?
         Public Property SponsorType As String
         Public Property Street As String

@@ -60,6 +60,15 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property RevCostCenterIdNo As Int16 Implements IPayGroupView.RevCostCenterIdNo
+            Get
+                Return cboRevCostCenterIdNo.GetValue(Of Int16)
+            End Get
+            Set
+                cboRevCostCenterIdNo.SetValue(Value)
+            End Set
+        End Property
+
         Public Property Notes As String Implements IPayGroupView.Notes
             Get
                 Return txtNotes.Text
@@ -89,6 +98,7 @@ Namespace PresentationLayer.Views.Forms
                 {"PayGroupName", txtPayGroupName},
                 {"PayGroupNameAra", txtPayGroupNameAra},
                 {"ParentIdNo", cboParentIdNo},
+                {"RevCostCenterIdNo", cboRevCostCenterIdNo},
                 {"IdNo", TxtIdNo},
                 {"Notes", txtNotes}
                 }

@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CompareNETObjects" Version="4.79.0" />
     <PackageReference Include="DiffEngine" Version="11.3.0" />
   </ItemGroup>
 

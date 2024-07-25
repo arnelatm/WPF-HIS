@@ -1495,6 +1495,7 @@ Namespace PresentationLayer.Views.Forms
             Me.Controls.Add(Me.ToolStrip)
             Me.Controls.Add(Me.AccountsMenu)
             Me.DoubleBuffered = True
+            Me.FormCulture = New System.Globalization.CultureInfo("en-US")
             Me.IsMdiContainer = True
             Me.MenuFormName = "Menu"
             Me.Name = "MainForm"

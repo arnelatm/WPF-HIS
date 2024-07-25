@@ -20,7 +20,8 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            MakeControlDataSources({New Object() {"PayGroup", "ParentIdNo", Nothing, Nothing}})
+            MakeControlDataSources({New Object() {"PayGroup", "ParentIdNo", Nothing, Nothing},
+                                    New Object() {"RevCostCenter", "RevCostCenterIdNo", Nothing, Nothing}})
         End Sub
 
         Protected Overrides Function IsBizDataValid() As Boolean

@@ -380,6 +380,7 @@ Partial Class CFormEntry
         Me.Controls.Add(Me.lblFormDescription)
         Me.Controls.Add(Me.FormToolStrip)
         Me.DoubleBuffered = True
+        Me.FormCulture = New System.Globalization.CultureInfo("en-US")
         Me.Name = "CFormEntry"
         Me.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.Text = "CFormEntry"

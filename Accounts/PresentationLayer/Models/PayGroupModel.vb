@@ -13,6 +13,7 @@
         Public Property PayGroupCode As String
         Public Property PayGroupName As String
         Public Property PayGroupNameAra As String
+        Public Property RevCostCenterIdNo As Int16
         Public Property SortKey As String
         Public Property Notes As String
     End Class

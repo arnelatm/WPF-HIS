@@ -62,7 +62,6 @@ Public Class CFormEntry
         DoubleBuffered = True
         _inputTurnedOn = False
         _formCulture = GlobalVariables.AppCurrentCultureInfo
-        btnPrintWithArgs.Visible = False
         ' Add any initialization after the InitializeComponent() call.
     End Sub
 
@@ -106,6 +105,7 @@ Public Class CFormEntry
         FormShown = True
         PublishClickedButton(ButtonClicked.Last)
         SetFormTitleCaption()
+        btnPrintWithArgs.Visible = False
         'ResumeDrawing()
     End Sub
 
@@ -145,7 +145,11 @@ Public Class CFormEntry
             TurnOffInputs()
         End If
         RaiseEvent AfterUpdateView()
+        OnRecordPositionChanged()
         'Me.ResumeDrawingNew
+    End Sub
+
+    Protected Overridable Sub OnRecordPositionChanged()
     End Sub
 
     'Protected Overridable Sub OnAfterRecordChanged() Handles Me.AfterUpdateView

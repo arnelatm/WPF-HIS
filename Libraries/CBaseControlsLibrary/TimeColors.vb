@@ -9,7 +9,6 @@ Public Class TimeColors
     End Sub
 
     Public Sub New(ByVal FrameOuter As Color, ByVal FrameInner As Color, ByVal FaceOuter As Color, ByVal FaceInner As Color, ByVal Box As Color, ByVal HourNums As Color, ByVal HourHand As Color, ByVal MinuteNums As Color, ByVal MinuteHand As Color, ByVal MinutePlus As Color, ByVal TimeAMPM_ON As Color, ByVal TimeAMPM_OFF As Color, ByVal DisplayTime As Color, ByVal BackGround As Color)
-
         Me.FrameOuter = FrameOuter
         Me.FrameInner = FrameInner
         Me.FaceOuter = FaceOuter

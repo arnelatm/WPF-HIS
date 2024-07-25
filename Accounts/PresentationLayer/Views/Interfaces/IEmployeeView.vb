@@ -38,6 +38,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property ProvinceState As String
         Property ReleasedDate As Date?
         Property ReligionIdNo As Int16?
+        Property RevCostCenterIdNo As Int16?
         Property Street As String
         Property Supervisor As Boolean
         Property SupervisorIdNo As Int32
