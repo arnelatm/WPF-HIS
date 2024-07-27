@@ -17,38 +17,29 @@ Namespace DataLayer.AdoNet
                                   "EmployeeIdNo," &
                                   "EmployeeName," &
                                   "EmployeeNameAra," &
+                                  "EndDate," &
                                   "IdNo," &
                                   "PaymentMethod," &
+                                  "PayPeriodName," &
+                                  "PayPeriodNameAra," &
                                   "PayrollIdNo," &
-                                  "SponsorType"
+                                  "Posted," &
+                                  "SponsorType," &
+                                  "StartDate"
+
 
         Public Function GetRecordByIdNo(idNo) As PayrollDetail Implements IDao(Of PayrollDetail).GetRecordByIdNo
             Dim sql As String =
-                    "SELECT " &
-                    "BankTransfer," &
-                    "EmployeeCode," &
-                    "EmployeeIdNo," &
-                    "EmployeeName," &
-                    "EmployeeNameAra," &
-                    "IdNo," &
-                    "PaymentMethod," &
-                    "PayrollIdNo," &
-                    "SponsorType" &
+                    "SELECT " & FieldList &
                     " FROM [PayrollDetail_View]" &
                     " WHERE IdNo = @IdNo"
-            Dim params() As Object = {"@IdNo", idNo}
-            Dim data = _db.Read(sql, Make, params).FirstOrDefault()
+            Dim parameters() As Object = {"@IdNo", idNo}
+            Dim data = _db.Read(sql, Make, parameters).FirstOrDefault()
             If data IsNot Nothing Then
                 Dim ppeDao = New PayrollPayElementDao()
                 Dim payrollDao = New PayrollDao()
-                Dim payroll = payrollDao.GetRecordByIdNo(data.PayrollIdNo)
-                data.StartDate = payroll.StartDate
-                data.EndDate = payroll.EndDate
-                data.PayPeriodName = payroll.PayrollName
-                data.PayPeriodNameAra = payroll.PayrollNameAra
                 data.PayrollEarnings = ppeDao.GetDaoRecords("PayrollDetailIdNo = " & idNo & " and PayElementKind = '" & EnumToCode(PayElementKindSelection.Earning) & "'")
                 data.PayrollDeductions = ppeDao.GetDaoRecords("PayrollDetailIdNo = " & idNo & " and PayElementKind = '" & EnumToCode(PayElementKindSelection.Deduction) & "'")
-                data.Posted = payroll.Posted
             End If
             Return data
         End Function
@@ -117,10 +108,15 @@ Namespace DataLayer.AdoNet
             .EmployeeIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("EmployeeIdNo")),
             .EmployeeName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("EmployeeName")),
             .EmployeeNameAra = AATM.DataLayer.AdoNet.Extensions.AsString(reader("EmployeeNameAra")),
+            .EndDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("EndDate")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .PaymentMethod = AATM.DataLayer.AdoNet.Extensions.AsString(reader("PaymentMethod")),
+            .PayPeriodName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("PayPeriodName")),
+            .PayPeriodNameAra = AATM.DataLayer.AdoNet.Extensions.AsString(reader("PayPeriodNameAra")),
             .PayrollIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("PayrollIdNo")),
-            .SponsorType = AATM.DataLayer.AdoNet.Extensions.AsString(reader("SponsorType"))
+            .Posted = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Posted")),
+            .SponsorType = AATM.DataLayer.AdoNet.Extensions.AsString(reader("SponsorType")),
+            .StartDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("StartDate"))
             }
 
     End Class

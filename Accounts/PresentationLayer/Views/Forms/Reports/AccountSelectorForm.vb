@@ -3,58 +3,29 @@ Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Views.Forms.Reports
 
-    Public Class ApArEmReport
-        Implements IApArEmReportView
+    Public Class AccountSelectorForm
+        Implements IAccountSelector
 
         Private _idNoData As DataTable
-        Public Event PrintButtonClicked() Implements IApArEmReportView.PrintButtonClicked
-        Public Event ReportLoaded() Implements IApArEmReportView.ReportLoaded
+        Public Event PostButtonClicked(IdNo As Int16) Implements IAccountSelector.PostButtonClicked
         Protected SortOrderKey As String
 
-        Public Sub New(pReportCode As String)
+        Public Sub New(title As String)
             ' This call is required by the designer.
             InitializeComponent()
 
             ' Add any initialization after the InitializeComponent() call.
-            ReportCode = pReportCode
+            Text = AATM.Libraries.MessagingLibrary.Messaging.TranslateCaption(title)
             MainTableName = "Account"
             SortOrderKey = "IdNo"
             Dim today = Now()
-            dtpBeginningDate.Value = GlobalFunctions.GregorianDateSerial(today.Year, 1, 1)
-            dtpEndingDate.Value = GlobalFunctions.GregorianDateSerial(today.Year, today.Month, today.Day)
-            PersonSelectorControl = cboIdNo
+            AccountSelectorControl = cboIdNo
         End Sub
 
         Public Property MainTableName As String
 
-        Public Property PersonSelectorControl As Control Implements IApArEmReportView.PersonSelectorControl
 
-
-        Public Property BeginningDate As Date? Implements IApArEmReportView.BeginningDate
-            Get
-                Return dtpBeginningDate.Value
-            End Get
-            Set(value As Date?)
-                dtpBeginningDate.Value = value
-            End Set
-        End Property
-
-        Public Property EndingDate As Date? Implements IApArEmReportView.EndingDate
-            Get
-                Return dtpEndingDate.Value
-            End Get
-            Set(value As Date?)
-                dtpEndingDate.Value = value
-            End Set
-        End Property
-
-        Public ReadOnly Property Language As String Implements IApArEmReportView.Language
-            Get
-                Return Strings.Left(FormCulture.Name, FormCulture.Name.IndexOf("-"))
-            End Get
-        End Property
-
-        Public Property IdNo As Integer Implements IApArEmReportView.IdNo
+        Public Property IdNo As Integer Implements IAccountSelector.IdNo
             Get
                 Return cboIdNo.GetValue(Of Integer)
             End Get
@@ -63,7 +34,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             End Set
         End Property
 
-        Public Property IdNoData As DataTable Implements IApArEmReportView.IdNoData
+        Public Property IdNoData As DataTable Implements IAccountSelector.IdNoData
             Get
                 Return _idNoData
             End Get
@@ -73,41 +44,41 @@ Namespace PresentationLayer.Views.Forms.Reports
             End Set
         End Property
 
-        Public ReadOnly Property ReportCode As String Implements IApArEmReportView.ReportCode
+        Public ReadOnly Property ReportCode As String Implements IAccountSelector.ReportCode
 
-        Public Property UserHasAccess As Boolean Implements IApArEmReportView.UserHasAccess
+        Public Property UserHasAccess As Boolean Implements IAccountSelector.UserHasAccess
 
-        Public Property Title As String Implements IApArEmReportView.Title
+        Public Property Title As String Implements IAccountSelector.Title
 
-        Public Property PersonSelectorLabel As String Implements IApArEmReportView.PersonSelectorLabel
+        Private ReadOnly Property Language As String Implements IAccountSelector.Language
 
-        Public Property NoDates As Boolean Implements IApArEmReportView.NoDates
-
-        Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
-            RaiseEvent PrintButtonClicked()
-        End Sub
+        Public Property AccountSelectorControl As Control Implements IAccountSelector.AccountSelectorControl
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As Control)
+                Throw New NotImplementedException()
+            End Set
+        End Property
 
         Private Sub CButton2_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnCancel.ClickButtonArea
             Close()
         End Sub
 
-        Private Sub Form_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            cboIdNo.EditingMode = False
-            RaiseEvent ReportLoaded()
-
-            cboIdNo.EditingMode = True
-            Text = Title
-            lblTitle.Text = Title
-            lblIdNo.Text = PersonSelectorLabel
-            dtpBeginningDate.Visible = Not NoDates
-            dtpEndingDate.Visible = Not NoDates
-            lblBeginningDate.Visible = Not NoDates
-            lblEndingDate.Visible = Not NoDates
-            If NoDates Then
-                Height -= 25
-            End If
-            btnCancel.Left = floButtons.Size.Width - btnCancel.Width - btnOk.Width - floButtons.Margin.Left - floButtons.Margin.Right
+        Private Sub btnOk_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
+            RaiseEvent PostButtonClicked(IdNo)
         End Sub
+
+
+        'Private Sub Form_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        '    cboIdNo.EditingMode = False
+        '    RaiseEvent ReportLoaded()
+
+        '    cboIdNo.EditingMode = True
+        '    Text = Title
+        '    lblTitle.Text = Title
+        '    btnCancel.Left = floButtons.Size.Width - btnCancel.Width - btnOk.Width - floButtons.Margin.Left - floButtons.Margin.Right
+        'End Sub
 
     End Class
 

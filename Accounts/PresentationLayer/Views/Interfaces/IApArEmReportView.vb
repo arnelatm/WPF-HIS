@@ -23,7 +23,7 @@ Namespace PresentationLayer.Views.Interfaces
 
     End Interface
 
-    Public Interface IAccountSelectorForm
+    Public Interface IAccountSelector
         Inherits IViewNew
 
         ReadOnly Property Language As String
@@ -33,7 +33,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property UserHasAccess As Boolean
         Property AccountSelectorControl As Control
         Property IdNoData As DataTable
-        Event PostButtonClicked()
+        Event PostButtonClicked(idNo As Int16)
 
     End Interface
     Public Interface IReportFormView
