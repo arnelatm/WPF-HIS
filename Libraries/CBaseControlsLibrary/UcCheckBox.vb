@@ -97,7 +97,6 @@ Public Class UcCheckBox
             If _displayOnly = value Then Exit Property
             _displayOnly = value
             checkBox.DisplayOnly = value
-            Debugger.Break()
         End Set
     End Property
 

@@ -1,7 +1,5 @@
 ﻿Imports System.ComponentModel
 Imports System.Windows.Forms
-Imports AATM.Libraries.GlobalFuncNSub
-Imports Microsoft.VisualBasic.PowerPacks
 
 Public Class CDgvCheckboxCell
     Inherits DataGridViewCheckBoxCell
@@ -11,6 +9,7 @@ Public Class CDgvCheckboxCell
     Private _displayOnly As Boolean
     Private _editingMode As Boolean
     Private _translatable As Boolean = False
+    Private _alwaysEditable As Boolean = False
 
     Public Sub New()
         MyBase.New()
@@ -20,7 +19,18 @@ Public Class CDgvCheckboxCell
     <Category("Custom Properties")>
     <DefaultValue(False)>
     <Description("Set to True to specify that this control is always editable.")>
-    Public Property AlwaysEditable As Boolean = False
+    Public Property AlwaysEditable As Boolean
+        Get
+            If OwningColumn IsNot Nothing Then
+                Return DirectCast(OwningColumn, AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn).AlwaysEditable
+            Else
+                Return False
+            End If
+        End Get
+        Set(value As Boolean)
+            _alwaysEditable = value
+        End Set
+    End Property
 
     Public Property CellEditingControl As CDgvCheckBoxEditingControl
 
@@ -33,23 +43,27 @@ Public Class CDgvCheckboxCell
     <Browsable(True)>
     Public Property DisplayOnly As Boolean
         Get
-            Return _displayOnly
+            If OwningColumn IsNot Nothing Then
+                Return DirectCast(OwningColumn, AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn).DisplayOnly
+            Else
+                Return False
+            End If
         End Get
         Set(value As Boolean)
             _displayOnly = value
-            If value Then
-                _editingMode = False
-            End If
         End Set
     End Property
 
     Public Property EditingMode As Boolean Implements IEntryControl.EditingMode
         Get
-            Return _editingMode
+            If OwningColumn IsNot Nothing Then
+                Return DirectCast(OwningColumn, AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn).EditingMode
+            Else
+                Return False
+            End If
         End Get
         Set(value As Boolean)
             _editingMode = value
-            Debugger.Break()
         End Set
     End Property
 
@@ -63,7 +77,11 @@ Public Class CDgvCheckboxCell
 
     Public Property Translatable As Boolean Implements IEntryControl.Translatable
         Get
-            Return False
+            If OwningColumn IsNot Nothing Then
+                Return DirectCast(OwningColumn, AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn).Translatable
+            Else
+                Return False
+            End If
         End Get
         Set(value As Boolean)
             _translatable = value
@@ -72,6 +90,7 @@ Public Class CDgvCheckboxCell
 
     Public Overrides Function Clone() As Object
         Dim copy As CDgvCheckboxCell = TryCast(MyBase.Clone(), CDgvCheckboxCell)
+        copy.AlwaysEditable = AlwaysEditable
         copy.DisplayOnly = DisplayOnly
         copy.EditingMode = EditingMode
         copy.Translatable = Translatable

@@ -10,6 +10,7 @@ Public Class CDgvCheckBoxColumn
     Private _displayOnly As Boolean
     Private _editingMode As Boolean
     Private _translatable As Boolean = False
+    Private _alwaysEditable As Boolean = False
 
     Public Sub New()
         CellTemplate = New CDgvCheckboxCell
@@ -35,7 +36,19 @@ Public Class CDgvCheckBoxColumn
     <Category("Custom Properties")>
     <DefaultValue(False)>
     <Description("Set to True to specify that this control is always editable.")>
-    Public Property AlwaysEditable As Boolean = False
+    Public Property AlwaysEditable As Boolean
+        Get
+            Return _alwaysEditable
+        End Get
+        Set(value As Boolean)
+            _alwaysEditable = value
+            If value Then
+                EditingMode = True
+                DisplayOnly = False
+            End If
+        End Set
+    End Property
+
 
     <DisplayName("DisplayOnly")>
     <Category("Custom Properties")>
@@ -65,8 +78,8 @@ Public Class CDgvCheckBoxColumn
             Else
                 _displayOnly = False
                 Me.ReadOnly = False
+                _editingMode = True
             End If
-            CType(CellTemplate, CDgvCheckboxCell).DisplayOnly = _displayOnly
         End Set
     End Property
 
@@ -77,9 +90,10 @@ Public Class CDgvCheckBoxColumn
         Set(value As Boolean)
             If Not AlwaysEditable Then
                 _editingMode = value
+            Else
+                _editingMode = True
             End If
             UpdateDisplayOnlyControl()
-            CType(CellTemplate, CDgvCheckboxCell).EditingMode = _editingMode
         End Set
     End Property
 
@@ -108,7 +122,6 @@ Public Class CDgvCheckBoxColumn
         End Get
         Set(value As Boolean)
             _translatable = value
-            CType(CellTemplate, CDgvCheckboxCell).Translatable = _translatable
         End Set
     End Property
 
