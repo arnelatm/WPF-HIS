@@ -1037,8 +1037,10 @@ Public Class CtDataGridView
         If CurrentCell IsNot Nothing AndAlso TypeOf CurrentCell Is IEntryControl Then
             If TypeOf CurrentCell Is CDgvCheckboxCell Then
                 If e.ColumnIndex < 0 OrElse e.RowIndex < 0 Then Exit Sub
-                CurrentCell.Value = Not CurrentCell.Value
-                CommitEdit(DataGridViewDataErrorContexts.Commit)
+                If CType(CurrentCell, CDgvCheckboxCell).EditingMode And Not CType(CurrentCell, CDgvCheckboxCell).DisplayOnly Then
+                    CurrentCell.Value = Not CurrentCell.Value
+                    CommitEdit(DataGridViewDataErrorContexts.Commit)
+                End If
             End If
         End If
     End Sub

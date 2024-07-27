@@ -307,21 +307,6 @@ Namespace PresentationLayer.Views.Forms
             btnPrintWithArgs.Visible = True
         End Sub
 
-        Private Sub SplitContainer1_Panel2_Paint(sender As Object, e As PaintEventArgs) Handles SplitContainer1.Panel2.Paint
-
-        End Sub
-
-        Private Sub TableLayoutPanel1_Paint(sender As Object, e As PaintEventArgs) Handles TableLayoutPanel1.Paint
-
-        End Sub
-
-        Private Sub SplitContainer1_SplitterMoved(sender As Object, e As SplitterEventArgs) Handles SplitContainer1.SplitterMoved
-
-        End Sub
-
-        Private Sub PayrollDetailEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-        End Sub
     End Class
 
 End Namespace

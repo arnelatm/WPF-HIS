@@ -67,8 +67,9 @@ Partial Class UcCheckBox
         '
         'CLabel1
         '
-        Me.CLabel1.AutoSize = true
-        Me.CLabel1.DisplayOnly = true
+        Me.CLabel1.AutoSize = True
+        Me.CLabel1.BackColor = System.Drawing.Color.Transparent
+        Me.CLabel1.DisplayOnly = True
         Me.CLabel1.EditingMode = false
         Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.CLabel1.Location = New System.Drawing.Point(21, 1)

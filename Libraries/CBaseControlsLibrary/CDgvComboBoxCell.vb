@@ -15,13 +15,7 @@ Public Class CDgvComboBoxCell
         AutoComplete = False
     End Sub
 
-    ' You must override the EditType property to return the cell's
-    ' editing control type, which is your custom ComboBox class...
-    Public Overrides ReadOnly Property EditType() As Type
-        Get
-            Return GetType(CtComboBoxEditingControl)
-        End Get
-    End Property
+    Public Property CellEditingControl As CtComboBoxEditingControl
 
     <DisplayName("DisplayOnly")>
     <Category("Custom Properties")>
@@ -51,6 +45,13 @@ Public Class CDgvComboBoxCell
         End Set
     End Property
 
+    ' You must override the EditType property to return the cell's
+    ' editing control type, which is your custom ComboBox class...
+    Public Overrides ReadOnly Property EditType() As Type
+        Get
+            Return GetType(CtComboBoxEditingControl)
+        End Get
+    End Property
     Public Property Translatable As Boolean Implements IEntryControl.Translatable
         Get
             Return False
@@ -81,7 +82,4 @@ Public Class CDgvComboBoxCell
     '    'copy.ValueMember = CellEditingControl.ValueMember
     '    Return copy
     'End Function
-
-    Public Property CellEditingControl As CtComboBoxEditingControl
-
 End Class

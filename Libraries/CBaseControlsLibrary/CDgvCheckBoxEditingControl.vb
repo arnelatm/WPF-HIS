@@ -3,7 +3,7 @@ Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class CDgvCheckBoxEditingControl
-    Inherits CCheckBox
+    Inherits UcCheckBox
     Implements IDataGridViewEditingControl
 
     Private dataGridView As DataGridView
@@ -24,11 +24,16 @@ Public Class CDgvCheckBoxEditingControl
             Return GetEditingControlFormattedValue(DataGridViewDataErrorContexts.Formatting)
         End Get
         Set(ByVal value As Object)
+            'Dim text As Boolean = TryCast(value, Boolean)
             MyBase.Checked = value
+            'If Not Equals(text, Nothing) Then
+            '    MyBase.Text = text
+            '    If String.Compare(text, MyBase.Text, ignoreCase:=True, CultureInfo.CurrentCulture) <> 0 Then
+            '        SelectedIndex = -1
+            '    End If
+            'End If
         End Set
     End Property
-
-
 
     '
     ' Summary:
@@ -76,7 +81,6 @@ Public Class CDgvCheckBoxEditingControl
             _valueChanged = value
         End Set
     End Property
-
 
     '
     ' Summary:
@@ -142,10 +146,8 @@ Public Class CDgvCheckBoxEditingControl
         Else
             BackColor = dataGridViewCellStyle.BackColor
         End If
-
         ForeColor = dataGridViewCellStyle.ForeColor
     End Sub
-
 
     '
     ' Summary:
@@ -196,7 +198,6 @@ Public Class CDgvCheckBoxEditingControl
     '    '    End Select
     'End Function
 
-
     '
     ' Summary:
     '     Prepares the currently selected cell for editing.
@@ -225,6 +226,5 @@ Public Class CDgvCheckBoxEditingControl
         'Return Not dataGridViewWantsInputKey
         Return False
     End Function
-
 
 End Class

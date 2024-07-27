@@ -97,6 +97,7 @@ Public Class UcCheckBox
             If _displayOnly = value Then Exit Property
             _displayOnly = value
             checkBox.DisplayOnly = value
+            Debugger.Break()
         End Set
     End Property
 
@@ -186,15 +187,23 @@ Public Class UcCheckBox
     End Function
 
     Private Sub CLabel1_Click(sender As Object, e As EventArgs) Handles CLabel1.Click
-        If checkBox.Checked Then
-            checkBox.Checked = False
+        If DisplayOnly Then
+            ' changes not allowed
         Else
-            checkBox.Checked = True
+            If checkBox.Checked Then
+                checkBox.Checked = False
+            Else
+                checkBox.Checked = True
+            End If
         End If
     End Sub
 
     Public Sub UcCheckChanged(sender As Object, e As EventArgs) Handles checkBox.CheckedChanged
         RaiseEvent CheckedChanged(sender, e)
+    End Sub
+
+    Private Sub checkBox_Click(sender As Object, e As EventArgs) Handles checkBox.Click
+        Debugger.Break()
     End Sub
 
     'Protected Overrides Sub OnPaint(ByVal pEvent As PaintEventArgs)

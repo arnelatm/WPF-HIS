@@ -28,6 +28,7 @@ Public Class CDgvCheckBoxColumn
                 Throw New InvalidCastException("Must be a CDgvCheckBoxCell")
             End If
             MyBase.CellTemplate = value
+
         End Set
     End Property
 
@@ -52,7 +53,7 @@ Public Class CDgvCheckBoxColumn
                 _editingMode = value
                 If value Then
                     [ReadOnly] = False
-                    DefaultCellStyle.BackColor = System.Drawing.Color.Orange 'GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                    DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
                     DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                     _displayOnly = True
                 Else
@@ -65,6 +66,7 @@ Public Class CDgvCheckBoxColumn
                 _displayOnly = False
                 Me.ReadOnly = False
             End If
+            CType(CellTemplate, CDgvCheckboxCell).DisplayOnly = _displayOnly
         End Set
     End Property
 
@@ -77,6 +79,7 @@ Public Class CDgvCheckBoxColumn
                 _editingMode = value
             End If
             UpdateDisplayOnlyControl()
+            CType(CellTemplate, CDgvCheckboxCell).EditingMode = _editingMode
         End Set
     End Property
 
@@ -105,6 +108,7 @@ Public Class CDgvCheckBoxColumn
         End Get
         Set(value As Boolean)
             _translatable = value
+            CType(CellTemplate, CDgvCheckboxCell).Translatable = _translatable
         End Set
     End Property
 

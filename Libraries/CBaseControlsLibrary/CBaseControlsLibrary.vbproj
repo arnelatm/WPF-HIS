@@ -136,8 +136,8 @@
     <Compile Include="BlendTypeEditor.vb" />
     <Compile Include="CDgvExpiryColumn.vb" />
     <Compile Include="CDgvExpiryCell.vb" />
-    <Compile Include="CDvCheckBoxEditingControl.vb">
-      <SubType>Component</SubType>
+    <Compile Include="CDgvCheckBoxEditingControl.vb">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="CustomDataTables.vb" />
     <Compile Include="DFindForm.designer.vb">

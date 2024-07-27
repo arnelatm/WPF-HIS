@@ -365,6 +365,7 @@ Namespace PresentationLayer.Views.Forms
                 btnNonHolidayLeave.Enabled = True
                 btnEmployeeAbsenceEntry.Enabled = True
             End If
+            dgvSelected.EditingMode = True ' always editable
         End Sub
 
     End Class

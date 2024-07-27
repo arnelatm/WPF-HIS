@@ -115,21 +115,21 @@ Namespace PresentationLayer.Views.Forms
             '
             'SplitContainer1
             '
-            Me.SplitContainer1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.SplitContainer1.Margin = New System.Windows.Forms.Padding(5)
             '
             'SplitContainer1.Panel2
             '
             Me.SplitContainer1.Panel2.Controls.Add(Me.floDataDisplay)
-            Me.SplitContainer1.Size = New System.Drawing.Size(1224, 660)
-            Me.SplitContainer1.SplitterDistance = 405
-            Me.SplitContainer1.SplitterWidth = 13
+            Me.SplitContainer1.Size = New System.Drawing.Size(1632, 825)
+            Me.SplitContainer1.SplitterDistance = 540
+            Me.SplitContainer1.SplitterWidth = 17
             '
             'FormTreeView
             '
             Me.FormTreeView.LineColor = System.Drawing.Color.Black
-            Me.FormTreeView.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.FormTreeView.Margin = New System.Windows.Forms.Padding(5)
             Me.FormTreeView.RightToLeft = System.Windows.Forms.RightToLeft.No
-            Me.FormTreeView.Size = New System.Drawing.Size(405, 660)
+            Me.FormTreeView.Size = New System.Drawing.Size(540, 825)
             '
             'ImageListTreeView
             '
@@ -163,7 +163,7 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
             Me.TxtIdNo.LinkedLabel = Nothing
-            Me.TxtIdNo.Location = New System.Drawing.Point(194, 27)
+            Me.TxtIdNo.Location = New System.Drawing.Point(259, 31)
             Me.TxtIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.TxtIdNo.MaximumValue = Nothing
             Me.TxtIdNo.MinimumValue = Nothing
@@ -172,7 +172,7 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.OverrideMaxLength = 0
             Me.TxtIdNo.ReadOnly = True
             Me.TxtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.TxtIdNo.Size = New System.Drawing.Size(72, 23)
+            Me.TxtIdNo.Size = New System.Drawing.Size(95, 26)
             Me.TxtIdNo.TabIndex = 0
             Me.TxtIdNo.TabStop = False
             Me.TxtIdNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -198,7 +198,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayrollName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtPayrollName.ForeColor = System.Drawing.Color.Black
             Me.txtPayrollName.LinkedLabel = Nothing
-            Me.txtPayrollName.Location = New System.Drawing.Point(194, 52)
+            Me.txtPayrollName.Location = New System.Drawing.Point(259, 61)
             Me.txtPayrollName.Margin = New System.Windows.Forms.Padding(1)
             Me.txtPayrollName.MaximumValue = Nothing
             Me.txtPayrollName.MinimumValue = Nothing
@@ -207,7 +207,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayrollName.OverrideMaxLength = 0
             Me.txtPayrollName.ReadOnly = True
             Me.txtPayrollName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtPayrollName.Size = New System.Drawing.Size(579, 23)
+            Me.txtPayrollName.Size = New System.Drawing.Size(772, 26)
             Me.txtPayrollName.TabIndex = 3
             Me.txtPayrollName.Translatable = False
             Me.txtPayrollName.ValueIsMandatory = True
@@ -220,10 +220,11 @@ Namespace PresentationLayer.Views.Forms
             Me.floDataDisplay.Controls.Add(Me.CFlowLayout1)
             Me.floDataDisplay.Dock = System.Windows.Forms.DockStyle.Fill
             Me.floDataDisplay.Location = New System.Drawing.Point(0, 0)
-            Me.floDataDisplay.MinimumSize = New System.Drawing.Size(804, 624)
+            Me.floDataDisplay.Margin = New System.Windows.Forms.Padding(4)
+            Me.floDataDisplay.MinimumSize = New System.Drawing.Size(1072, 768)
             Me.floDataDisplay.Name = "floDataDisplay"
-            Me.floDataDisplay.Padding = New System.Windows.Forms.Padding(10, 10, 0, 0)
-            Me.floDataDisplay.Size = New System.Drawing.Size(806, 660)
+            Me.floDataDisplay.Padding = New System.Windows.Forms.Padding(13, 12, 0, 0)
+            Me.floDataDisplay.Size = New System.Drawing.Size(1075, 825)
             Me.floDataDisplay.TabIndex = 147
             '
             'TableLayoutPanel1
@@ -248,7 +249,8 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.Controls.Add(Me.TxtIdNo, 1, 1)
             Me.TableLayoutPanel1.Controls.Add(Me.txtPayrollName, 1, 3)
             Me.TableLayoutPanel1.Controls.Add(Me.tbcPayroll, 0, 6)
-            Me.TableLayoutPanel1.Location = New System.Drawing.Point(13, 13)
+            Me.TableLayoutPanel1.Location = New System.Drawing.Point(17, 16)
+            Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4)
             Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
             Me.TableLayoutPanel1.RowCount = 7
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
@@ -258,8 +260,8 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-            Me.TableLayoutPanel1.Size = New System.Drawing.Size(774, 524)
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25.0!))
+            Me.TableLayoutPanel1.Size = New System.Drawing.Size(1032, 645)
             Me.TableLayoutPanel1.TabIndex = 169
             '
             'dtpStartDate
@@ -275,14 +277,14 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpStartDate.EditsAllowed = False
             Me.dtpStartDate.ForeColor = System.Drawing.Color.Black
             Me.dtpStartDate.LinkedLabel = Nothing
-            Me.dtpStartDate.Location = New System.Drawing.Point(194, 102)
+            Me.dtpStartDate.Location = New System.Drawing.Point(259, 121)
             Me.dtpStartDate.Margin = New System.Windows.Forms.Padding(1)
             Me.dtpStartDate.Name = "dtpStartDate"
             Me.dtpStartDate.ReadOnlyDp = False
             Me.dtpStartDate.SecurityKey = Nothing
             Me.dtpStartDate.ShowLongDate = False
             Me.dtpStartDate.ShowTime = False
-            Me.dtpStartDate.Size = New System.Drawing.Size(90, 23)
+            Me.dtpStartDate.Size = New System.Drawing.Size(119, 27)
             Me.dtpStartDate.TabIndex = 5
             Me.dtpStartDate.TargetCalendar = CType(resources.GetObject("dtpStartDate.TargetCalendar"), System.Globalization.Calendar)
             Me.dtpStartDate.Translatable = False
@@ -303,14 +305,14 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpEndDate.EditsAllowed = False
             Me.dtpEndDate.ForeColor = System.Drawing.Color.Black
             Me.dtpEndDate.LinkedLabel = Nothing
-            Me.dtpEndDate.Location = New System.Drawing.Point(580, 102)
+            Me.dtpEndDate.Location = New System.Drawing.Point(775, 121)
             Me.dtpEndDate.Margin = New System.Windows.Forms.Padding(1)
             Me.dtpEndDate.Name = "dtpEndDate"
             Me.dtpEndDate.ReadOnlyDp = False
             Me.dtpEndDate.SecurityKey = Nothing
             Me.dtpEndDate.ShowLongDate = False
             Me.dtpEndDate.ShowTime = False
-            Me.dtpEndDate.Size = New System.Drawing.Size(90, 23)
+            Me.dtpEndDate.Size = New System.Drawing.Size(119, 27)
             Me.dtpEndDate.TabIndex = 6
             Me.dtpEndDate.TargetCalendar = CType(resources.GetObject("dtpEndDate.TargetCalendar"), System.Globalization.Calendar)
             Me.dtpEndDate.Translatable = False
@@ -324,10 +326,10 @@ Namespace PresentationLayer.Views.Forms
             Me.lblStartDate.DisplayOnly = True
             Me.lblStartDate.EditingMode = False
             Me.lblStartDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblStartDate.Location = New System.Drawing.Point(1, 102)
+            Me.lblStartDate.Location = New System.Drawing.Point(1, 121)
             Me.lblStartDate.Margin = New System.Windows.Forms.Padding(1)
             Me.lblStartDate.Name = "lblStartDate"
-            Me.lblStartDate.Size = New System.Drawing.Size(142, 23)
+            Me.lblStartDate.Size = New System.Drawing.Size(189, 28)
             Me.lblStartDate.TabIndex = 157
             Me.lblStartDate.Text = "Start Date"
             Me.lblStartDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -353,7 +355,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayrollNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtPayrollNameAra.ForeColor = System.Drawing.Color.Black
             Me.txtPayrollNameAra.LinkedLabel = Nothing
-            Me.txtPayrollNameAra.Location = New System.Drawing.Point(194, 77)
+            Me.txtPayrollNameAra.Location = New System.Drawing.Point(259, 91)
             Me.txtPayrollNameAra.Margin = New System.Windows.Forms.Padding(1)
             Me.txtPayrollNameAra.MaximumValue = Nothing
             Me.txtPayrollNameAra.MinimumValue = Nothing
@@ -363,7 +365,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayrollNameAra.ReadOnly = True
             Me.txtPayrollNameAra.RightToLeft = System.Windows.Forms.RightToLeft.Yes
             Me.txtPayrollNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtPayrollNameAra.Size = New System.Drawing.Size(579, 23)
+            Me.txtPayrollNameAra.Size = New System.Drawing.Size(772, 26)
             Me.txtPayrollNameAra.TabIndex = 4
             Me.txtPayrollNameAra.Translatable = False
             '
@@ -373,10 +375,10 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPayrollNameAra.DisplayOnly = True
             Me.lblPayrollNameAra.EditingMode = False
             Me.lblPayrollNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblPayrollNameAra.Location = New System.Drawing.Point(1, 77)
+            Me.lblPayrollNameAra.Location = New System.Drawing.Point(1, 91)
             Me.lblPayrollNameAra.Margin = New System.Windows.Forms.Padding(1)
             Me.lblPayrollNameAra.Name = "lblPayrollNameAra"
-            Me.lblPayrollNameAra.Size = New System.Drawing.Size(142, 23)
+            Me.lblPayrollNameAra.Size = New System.Drawing.Size(189, 28)
             Me.lblPayrollNameAra.TabIndex = 167
             Me.lblPayrollNameAra.Text = "Name (Arabic)"
             Me.lblPayrollNameAra.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -388,10 +390,10 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPayrollName.DisplayOnly = True
             Me.lblPayrollName.EditingMode = False
             Me.lblPayrollName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblPayrollName.Location = New System.Drawing.Point(1, 52)
+            Me.lblPayrollName.Location = New System.Drawing.Point(1, 61)
             Me.lblPayrollName.Margin = New System.Windows.Forms.Padding(1)
             Me.lblPayrollName.Name = "lblPayrollName"
-            Me.lblPayrollName.Size = New System.Drawing.Size(142, 23)
+            Me.lblPayrollName.Size = New System.Drawing.Size(189, 28)
             Me.lblPayrollName.TabIndex = 164
             Me.lblPayrollName.Text = "Name"
             Me.lblPayrollName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -404,10 +406,10 @@ Namespace PresentationLayer.Views.Forms
             Me.lblEndDate.EditingMode = False
             Me.lblEndDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblEndDate.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblEndDate.Location = New System.Drawing.Point(387, 102)
+            Me.lblEndDate.Location = New System.Drawing.Point(517, 121)
             Me.lblEndDate.Margin = New System.Windows.Forms.Padding(1)
             Me.lblEndDate.Name = "lblEndDate"
-            Me.lblEndDate.Size = New System.Drawing.Size(142, 23)
+            Me.lblEndDate.Size = New System.Drawing.Size(189, 28)
             Me.lblEndDate.TabIndex = 161
             Me.lblEndDate.Text = "End Date"
             Me.lblEndDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -430,7 +432,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayrollCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtPayrollCode.ForeColor = System.Drawing.Color.Black
             Me.txtPayrollCode.LinkedLabel = Nothing
-            Me.txtPayrollCode.Location = New System.Drawing.Point(580, 27)
+            Me.txtPayrollCode.Location = New System.Drawing.Point(775, 31)
             Me.txtPayrollCode.Margin = New System.Windows.Forms.Padding(1)
             Me.txtPayrollCode.MaximumValue = Nothing
             Me.txtPayrollCode.MinimumValue = Nothing
@@ -439,7 +441,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayrollCode.OverrideMaxLength = 0
             Me.txtPayrollCode.ReadOnly = True
             Me.txtPayrollCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtPayrollCode.Size = New System.Drawing.Size(72, 23)
+            Me.txtPayrollCode.Size = New System.Drawing.Size(95, 26)
             Me.txtPayrollCode.TabIndex = 2
             Me.txtPayrollCode.Translatable = False
             Me.txtPayrollCode.ValueIsMandatory = True
@@ -450,10 +452,10 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPayrollCode.DisplayOnly = True
             Me.lblPayrollCode.EditingMode = False
             Me.lblPayrollCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblPayrollCode.Location = New System.Drawing.Point(387, 27)
+            Me.lblPayrollCode.Location = New System.Drawing.Point(517, 31)
             Me.lblPayrollCode.Margin = New System.Windows.Forms.Padding(1)
             Me.lblPayrollCode.Name = "lblPayrollCode"
-            Me.lblPayrollCode.Size = New System.Drawing.Size(78, 23)
+            Me.lblPayrollCode.Size = New System.Drawing.Size(104, 28)
             Me.lblPayrollCode.TabIndex = 168
             Me.lblPayrollCode.Text = "Code"
             Me.lblPayrollCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -486,7 +488,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayCycleIdNo.IntegralHeight = False
             Me.cboPayCycleIdNo.LimitToList = False
             Me.cboPayCycleIdNo.LinkedLabel = Nothing
-            Me.cboPayCycleIdNo.Location = New System.Drawing.Point(194, 1)
+            Me.cboPayCycleIdNo.Location = New System.Drawing.Point(259, 1)
             Me.cboPayCycleIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.cboPayCycleIdNo.Name = "cboPayCycleIdNo"
             Me.cboPayCycleIdNo.OldValue = 0
@@ -494,7 +496,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayCycleIdNo.OriginalList = Nothing
             Me.cboPayCycleIdNo.OverrideDropDownStyleList = False
             Me.cboPayCycleIdNo.PreviousSearchTerm = Nothing
-            Me.cboPayCycleIdNo.Size = New System.Drawing.Size(579, 24)
+            Me.cboPayCycleIdNo.Size = New System.Drawing.Size(772, 28)
             Me.cboPayCycleIdNo.SuggestBoxHeight = 200
             Me.cboPayCycleIdNo.SuggestCharCount = 0
             Me.cboPayCycleIdNo.TabIndex = 1
@@ -514,7 +516,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPayCycleIdNo.Location = New System.Drawing.Point(1, 1)
             Me.lblPayCycleIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.lblPayCycleIdNo.Name = "lblPayCycleIdNo"
-            Me.lblPayCycleIdNo.Size = New System.Drawing.Size(142, 23)
+            Me.lblPayCycleIdNo.Size = New System.Drawing.Size(189, 28)
             Me.lblPayCycleIdNo.TabIndex = 156
             Me.lblPayCycleIdNo.Text = "Pay Cycle "
             Me.lblPayCycleIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -526,10 +528,10 @@ Namespace PresentationLayer.Views.Forms
             Me.lblIdNo.DisplayOnly = True
             Me.lblIdNo.EditingMode = False
             Me.lblIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblIdNo.Location = New System.Drawing.Point(1, 27)
+            Me.lblIdNo.Location = New System.Drawing.Point(1, 31)
             Me.lblIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.lblIdNo.Name = "lblIdNo"
-            Me.lblIdNo.Size = New System.Drawing.Size(142, 23)
+            Me.lblIdNo.Size = New System.Drawing.Size(189, 28)
             Me.lblIdNo.TabIndex = 150
             Me.lblIdNo.Text = "ID No."
             Me.lblIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -541,20 +543,22 @@ Namespace PresentationLayer.Views.Forms
             Me.tbcPayroll.Controls.Add(Me.tbpAttendance)
             Me.tbcPayroll.Controls.Add(Me.tbpOvertime)
             Me.tbcPayroll.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.tbcPayroll.Location = New System.Drawing.Point(3, 129)
+            Me.tbcPayroll.Location = New System.Drawing.Point(4, 154)
+            Me.tbcPayroll.Margin = New System.Windows.Forms.Padding(4)
             Me.tbcPayroll.Name = "tbcPayroll"
             Me.tbcPayroll.RightToLeft = System.Windows.Forms.RightToLeft.No
             Me.tbcPayroll.SelectedIndex = 0
-            Me.tbcPayroll.Size = New System.Drawing.Size(768, 396)
+            Me.tbcPayroll.Size = New System.Drawing.Size(1024, 487)
             Me.tbcPayroll.TabIndex = 172
             '
             'tbpAttendance
             '
             Me.tbpAttendance.Controls.Add(Me.DataGridViewPayrollAttendance)
-            Me.tbpAttendance.Location = New System.Drawing.Point(4, 22)
+            Me.tbpAttendance.Location = New System.Drawing.Point(4, 25)
+            Me.tbpAttendance.Margin = New System.Windows.Forms.Padding(4)
             Me.tbpAttendance.Name = "tbpAttendance"
-            Me.tbpAttendance.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
-            Me.tbpAttendance.Size = New System.Drawing.Size(760, 370)
+            Me.tbpAttendance.Padding = New System.Windows.Forms.Padding(4)
+            Me.tbpAttendance.Size = New System.Drawing.Size(1016, 458)
             Me.tbpAttendance.TabIndex = 0
             Me.tbpAttendance.Text = "Attendance"
             Me.tbpAttendance.UseVisualStyleBackColor = True
@@ -596,7 +600,8 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPayrollAttendance.FirstRowInsertionEnabled = True
             Me.DataGridViewPayrollAttendance.IgnoreCase = False
             Me.DataGridViewPayrollAttendance.IsDirty = False
-            Me.DataGridViewPayrollAttendance.Location = New System.Drawing.Point(6, 6)
+            Me.DataGridViewPayrollAttendance.Location = New System.Drawing.Point(8, 7)
+            Me.DataGridViewPayrollAttendance.Margin = New System.Windows.Forms.Padding(4)
             Me.DataGridViewPayrollAttendance.Name = "DataGridViewPayrollAttendance"
             Me.DataGridViewPayrollAttendance.OldCellValue = Nothing
             Me.DataGridViewPayrollAttendance.ReadOnly = True
@@ -607,7 +612,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPayrollAttendance.SequenceColumn = "dgvSequence"
             Me.DataGridViewPayrollAttendance.SequenceFieldName = "Sequence"
             Me.DataGridViewPayrollAttendance.ShowFooter = False
-            Me.DataGridViewPayrollAttendance.Size = New System.Drawing.Size(745, 346)
+            Me.DataGridViewPayrollAttendance.Size = New System.Drawing.Size(993, 426)
             Me.DataGridViewPayrollAttendance.TabIndex = 171
             Me.DataGridViewPayrollAttendance.Translatable = True
             '
@@ -658,7 +663,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvSelected.ReadOnly = True
             Me.dgvSelected.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.dgvSelected.Translatable = False
-            Me.dgvSelected.Width = 43
+            Me.dgvSelected.Width = 51
             '
             'dgvEmployeeIdNo
             '
@@ -802,10 +807,11 @@ Namespace PresentationLayer.Views.Forms
             'tbpOvertime
             '
             Me.tbpOvertime.Controls.Add(Me.DataGridViewPayrollOvertime)
-            Me.tbpOvertime.Location = New System.Drawing.Point(4, 22)
+            Me.tbpOvertime.Location = New System.Drawing.Point(4, 25)
+            Me.tbpOvertime.Margin = New System.Windows.Forms.Padding(4)
             Me.tbpOvertime.Name = "tbpOvertime"
-            Me.tbpOvertime.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
-            Me.tbpOvertime.Size = New System.Drawing.Size(760, 370)
+            Me.tbpOvertime.Padding = New System.Windows.Forms.Padding(4)
+            Me.tbpOvertime.Size = New System.Drawing.Size(1016, 458)
             Me.tbpOvertime.TabIndex = 1
             Me.tbpOvertime.Text = "Overtime"
             Me.tbpOvertime.UseVisualStyleBackColor = True
@@ -846,7 +852,8 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPayrollOvertime.FirstRowInsertionEnabled = True
             Me.DataGridViewPayrollOvertime.IgnoreCase = False
             Me.DataGridViewPayrollOvertime.IsDirty = False
-            Me.DataGridViewPayrollOvertime.Location = New System.Drawing.Point(3, 3)
+            Me.DataGridViewPayrollOvertime.Location = New System.Drawing.Point(4, 4)
+            Me.DataGridViewPayrollOvertime.Margin = New System.Windows.Forms.Padding(4)
             Me.DataGridViewPayrollOvertime.Name = "DataGridViewPayrollOvertime"
             Me.DataGridViewPayrollOvertime.OldCellValue = Nothing
             Me.DataGridViewPayrollOvertime.ReadOnly = True
@@ -857,7 +864,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPayrollOvertime.SequenceColumn = "dgvSequence"
             Me.DataGridViewPayrollOvertime.SequenceFieldName = "Sequence"
             Me.DataGridViewPayrollOvertime.ShowFooter = False
-            Me.DataGridViewPayrollOvertime.Size = New System.Drawing.Size(754, 364)
+            Me.DataGridViewPayrollOvertime.Size = New System.Drawing.Size(1008, 450)
             Me.DataGridViewPayrollOvertime.TabIndex = 0
             Me.DataGridViewPayrollOvertime.Translatable = True
             '
@@ -994,9 +1001,10 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout1.Controls.Add(Me.CButton2)
             Me.CFlowLayout1.Controls.Add(Me.btnPost)
             Me.CFlowLayout1.Controls.Add(Me.ProgressBar)
-            Me.CFlowLayout1.Location = New System.Drawing.Point(13, 543)
+            Me.CFlowLayout1.Location = New System.Drawing.Point(17, 669)
+            Me.CFlowLayout1.Margin = New System.Windows.Forms.Padding(4)
             Me.CFlowLayout1.Name = "CFlowLayout1"
-            Me.CFlowLayout1.Size = New System.Drawing.Size(773, 107)
+            Me.CFlowLayout1.Size = New System.Drawing.Size(1031, 132)
             Me.CFlowLayout1.TabIndex = 175
             '
             'btnInitializeOvertime
@@ -1004,11 +1012,12 @@ Namespace PresentationLayer.Views.Forms
             Me.btnInitializeOvertime.DesignerSelected = False
             Me.btnInitializeOvertime.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.btnInitializeOvertime.ImageIndex = 0
-            Me.btnInitializeOvertime.Location = New System.Drawing.Point(3, 3)
+            Me.btnInitializeOvertime.Location = New System.Drawing.Point(4, 4)
+            Me.btnInitializeOvertime.Margin = New System.Windows.Forms.Padding(4)
             Me.btnInitializeOvertime.Name = "btnInitializeOvertime"
             Me.btnInitializeOvertime.OriginalImageName = Nothing
             Me.btnInitializeOvertime.SecurityKey = ""
-            Me.btnInitializeOvertime.Size = New System.Drawing.Size(70, 40)
+            Me.btnInitializeOvertime.Size = New System.Drawing.Size(93, 49)
             Me.btnInitializeOvertime.TabIndex = 169
             Me.btnInitializeOvertime.Text = "Initialize Overtime"
             '
@@ -1017,11 +1026,12 @@ Namespace PresentationLayer.Views.Forms
             Me.btnInitializeAttendance.DesignerSelected = False
             Me.btnInitializeAttendance.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.btnInitializeAttendance.ImageIndex = 0
-            Me.btnInitializeAttendance.Location = New System.Drawing.Point(79, 3)
+            Me.btnInitializeAttendance.Location = New System.Drawing.Point(105, 4)
+            Me.btnInitializeAttendance.Margin = New System.Windows.Forms.Padding(4)
             Me.btnInitializeAttendance.Name = "btnInitializeAttendance"
             Me.btnInitializeAttendance.OriginalImageName = Nothing
             Me.btnInitializeAttendance.SecurityKey = ""
-            Me.btnInitializeAttendance.Size = New System.Drawing.Size(81, 40)
+            Me.btnInitializeAttendance.Size = New System.Drawing.Size(108, 49)
             Me.btnInitializeAttendance.TabIndex = 173
             Me.btnInitializeAttendance.Text = "Initialize Attendance"
             '
@@ -1030,11 +1040,12 @@ Namespace PresentationLayer.Views.Forms
             Me.btnEmployeeAbsenceEntry.DesignerSelected = False
             Me.btnEmployeeAbsenceEntry.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.btnEmployeeAbsenceEntry.ImageIndex = 0
-            Me.btnEmployeeAbsenceEntry.Location = New System.Drawing.Point(166, 3)
+            Me.btnEmployeeAbsenceEntry.Location = New System.Drawing.Point(221, 4)
+            Me.btnEmployeeAbsenceEntry.Margin = New System.Windows.Forms.Padding(4)
             Me.btnEmployeeAbsenceEntry.Name = "btnEmployeeAbsenceEntry"
             Me.btnEmployeeAbsenceEntry.OriginalImageName = Nothing
             Me.btnEmployeeAbsenceEntry.SecurityKey = ""
-            Me.btnEmployeeAbsenceEntry.Size = New System.Drawing.Size(109, 40)
+            Me.btnEmployeeAbsenceEntry.Size = New System.Drawing.Size(145, 49)
             Me.btnEmployeeAbsenceEntry.TabIndex = 175
             Me.btnEmployeeAbsenceEntry.Text = "Enter Employee Absences/ Lates"
             '
@@ -1043,11 +1054,12 @@ Namespace PresentationLayer.Views.Forms
             Me.btnNonHolidayLeave.DesignerSelected = False
             Me.btnNonHolidayLeave.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.btnNonHolidayLeave.ImageIndex = 0
-            Me.btnNonHolidayLeave.Location = New System.Drawing.Point(281, 3)
+            Me.btnNonHolidayLeave.Location = New System.Drawing.Point(374, 4)
+            Me.btnNonHolidayLeave.Margin = New System.Windows.Forms.Padding(4)
             Me.btnNonHolidayLeave.Name = "btnNonHolidayLeave"
             Me.btnNonHolidayLeave.OriginalImageName = Nothing
             Me.btnNonHolidayLeave.SecurityKey = ""
-            Me.btnNonHolidayLeave.Size = New System.Drawing.Size(119, 40)
+            Me.btnNonHolidayLeave.Size = New System.Drawing.Size(159, 49)
             Me.btnNonHolidayLeave.TabIndex = 176
             Me.btnNonHolidayLeave.Text = "Enter Employee Non Holiday Leaves"
             '
@@ -1056,11 +1068,12 @@ Namespace PresentationLayer.Views.Forms
             Me.btnHolidayLeave.DesignerSelected = False
             Me.btnHolidayLeave.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.btnHolidayLeave.ImageIndex = 0
-            Me.btnHolidayLeave.Location = New System.Drawing.Point(406, 3)
+            Me.btnHolidayLeave.Location = New System.Drawing.Point(541, 4)
+            Me.btnHolidayLeave.Margin = New System.Windows.Forms.Padding(4)
             Me.btnHolidayLeave.Name = "btnHolidayLeave"
             Me.btnHolidayLeave.OriginalImageName = Nothing
             Me.btnHolidayLeave.SecurityKey = ""
-            Me.btnHolidayLeave.Size = New System.Drawing.Size(87, 40)
+            Me.btnHolidayLeave.Size = New System.Drawing.Size(116, 49)
             Me.btnHolidayLeave.TabIndex = 177
             Me.btnHolidayLeave.Text = "Enter Employee Holiday Leaves"
             '
@@ -1069,11 +1082,12 @@ Namespace PresentationLayer.Views.Forms
             Me.btnGenerateRegularPayElements.DesignerSelected = False
             Me.btnGenerateRegularPayElements.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.btnGenerateRegularPayElements.ImageIndex = 0
-            Me.btnGenerateRegularPayElements.Location = New System.Drawing.Point(499, 3)
+            Me.btnGenerateRegularPayElements.Location = New System.Drawing.Point(665, 4)
+            Me.btnGenerateRegularPayElements.Margin = New System.Windows.Forms.Padding(4)
             Me.btnGenerateRegularPayElements.Name = "btnGenerateRegularPayElements"
             Me.btnGenerateRegularPayElements.OriginalImageName = Nothing
             Me.btnGenerateRegularPayElements.SecurityKey = ""
-            Me.btnGenerateRegularPayElements.Size = New System.Drawing.Size(121, 40)
+            Me.btnGenerateRegularPayElements.Size = New System.Drawing.Size(161, 49)
             Me.btnGenerateRegularPayElements.TabIndex = 174
             Me.btnGenerateRegularPayElements.Text = "Generate Employee Earnings / Deductions"
             '
@@ -1083,11 +1097,12 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout1.SetFlowBreak(Me.btnViewPayrollReport, True)
             Me.btnViewPayrollReport.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.btnViewPayrollReport.ImageIndex = 0
-            Me.btnViewPayrollReport.Location = New System.Drawing.Point(626, 3)
+            Me.btnViewPayrollReport.Location = New System.Drawing.Point(834, 4)
+            Me.btnViewPayrollReport.Margin = New System.Windows.Forms.Padding(4)
             Me.btnViewPayrollReport.Name = "btnViewPayrollReport"
             Me.btnViewPayrollReport.OriginalImageName = Nothing
             Me.btnViewPayrollReport.SecurityKey = ""
-            Me.btnViewPayrollReport.Size = New System.Drawing.Size(96, 40)
+            Me.btnViewPayrollReport.Size = New System.Drawing.Size(128, 49)
             Me.btnViewPayrollReport.TabIndex = 171
             Me.btnViewPayrollReport.Text = "View/Edit Payroll Details"
             '
@@ -1096,11 +1111,12 @@ Namespace PresentationLayer.Views.Forms
             Me.CButton1.DesignerSelected = False
             Me.CButton1.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.CButton1.ImageIndex = 0
-            Me.CButton1.Location = New System.Drawing.Point(3, 49)
+            Me.CButton1.Location = New System.Drawing.Point(4, 61)
+            Me.CButton1.Margin = New System.Windows.Forms.Padding(4)
             Me.CButton1.Name = "CButton1"
             Me.CButton1.OriginalImageName = Nothing
             Me.CButton1.SecurityKey = ""
-            Me.CButton1.Size = New System.Drawing.Size(70, 23)
+            Me.CButton1.Size = New System.Drawing.Size(93, 28)
             Me.CButton1.TabIndex = 178
             Me.CButton1.Text = "Select All"
             '
@@ -1109,48 +1125,51 @@ Namespace PresentationLayer.Views.Forms
             Me.CButton2.DesignerSelected = False
             Me.CButton2.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.CButton2.ImageIndex = 0
-            Me.CButton2.Location = New System.Drawing.Point(79, 49)
+            Me.CButton2.Location = New System.Drawing.Point(105, 61)
+            Me.CButton2.Margin = New System.Windows.Forms.Padding(4)
             Me.CButton2.Name = "CButton2"
             Me.CButton2.OriginalImageName = Nothing
             Me.CButton2.SecurityKey = ""
-            Me.CButton2.Size = New System.Drawing.Size(81, 23)
+            Me.CButton2.Size = New System.Drawing.Size(108, 28)
             Me.CButton2.TabIndex = 179
             Me.CButton2.Text = "Unselect All"
             '
             'btnPost
             '
-            Me.btnPost.DesignerSelected = True
+            Me.btnPost.DesignerSelected = False
             Me.btnPost.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.btnPost.ImageIndex = 0
-            Me.btnPost.Location = New System.Drawing.Point(166, 49)
+            Me.btnPost.Location = New System.Drawing.Point(221, 61)
+            Me.btnPost.Margin = New System.Windows.Forms.Padding(4)
             Me.btnPost.Name = "btnPost"
             Me.btnPost.OriginalImageName = Nothing
             Me.btnPost.SecurityKey = ""
-            Me.btnPost.Size = New System.Drawing.Size(109, 23)
+            Me.btnPost.Size = New System.Drawing.Size(145, 28)
             Me.btnPost.TabIndex = 180
             Me.btnPost.Text = "Post Payroll"
             '
             'ProgressBar
             '
             Me.ProgressBar.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.ProgressBar.Location = New System.Drawing.Point(3, 78)
+            Me.ProgressBar.Location = New System.Drawing.Point(4, 97)
+            Me.ProgressBar.Margin = New System.Windows.Forms.Padding(4)
             Me.ProgressBar.Name = "ProgressBar"
-            Me.ProgressBar.Size = New System.Drawing.Size(764, 23)
+            Me.ProgressBar.Size = New System.Drawing.Size(1019, 28)
             Me.ProgressBar.TabIndex = 148
             Me.ProgressBar.Visible = False
             '
             'PayrollEntryTv
             '
-            Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-            Me.ClientSize = New System.Drawing.Size(1224, 715)
-            Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+            Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+            Me.ClientSize = New System.Drawing.Size(1632, 880)
+            Me.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
             Me.Name = "PayrollEntryTv"
             Me.Text = "Payroll Maintenance Form"
             Me.SplitContainer1.Panel1.ResumeLayout(False)
             Me.SplitContainer1.Panel2.ResumeLayout(False)
-            CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).EndInit
-        Me.SplitContainer1.ResumeLayout(false)
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
+            CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.SplitContainer1.ResumeLayout(False)
+            CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.floDataDisplay.ResumeLayout(false)
         Me.TableLayoutPanel1.ResumeLayout(false)
         Me.TableLayoutPanel1.PerformLayout
