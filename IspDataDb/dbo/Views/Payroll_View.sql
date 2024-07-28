@@ -1,9 +1,10 @@
 ﻿
 
+
 CREATE VIEW [dbo].[Payroll_View]
 AS
 SELECT        dbo.Payroll.IdNo, dbo.Payroll.PayCycleIdNo, dbo.PayCycle.PayCycleCode, dbo.PayCycle.PayCycleName, dbo.PayCycle.PayFrequency, dbo.PayCycle.PayCycleNameAra, dbo.Payroll.StartDate, dbo.Payroll.EndDate, 
-              dbo.Payroll.PayrollName, dbo.Payroll.PayrollNameAra, dbo.Payroll.PayrollCode
+              dbo.Payroll.PayrollName, dbo.Payroll.PayrollNameAra, dbo.Payroll.PayrollCode, dbo.Payroll.Posted
 FROM          dbo.PayCycle INNER JOIN
               dbo.Payroll ON dbo.PayCycle.IdNo = dbo.Payroll.PayCycleIdNo
 GO

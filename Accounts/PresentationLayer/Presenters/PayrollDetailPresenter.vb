@@ -47,6 +47,38 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
+        Public Overrides Function IsOkToEditRecord() As Boolean
+            Dim result As Boolean = True
+            If Not MyBase.IsOkToEditRecord() Then
+                result = False
+            Else
+                If View.Posted Then
+                    result = False
+                Else
+                    result = True
+                End If
+            End If
+            Return result
+        End Function
+
+
+        Public Overrides Function IsOkToDeleteRecord() As Boolean
+            Dim retVal As Boolean = True
+            If MyBase.IsOkToDeleteRecord() Then
+                Dim type As Type = View.GetType
+                If View.Posted Then
+                    retVal = False
+                    Dim description As String = ""
+                    description = AATM.Libraries.MessagingLibrary.Messaging.TranslateCaption("Posted")
+                    AATM.Libraries.MessagingLibrary.Messaging.ShowPmMessage(True, "MsgDeleteEntryNotAllowed", {"description", description})
+                Else
+                    retVal = True
+                End If
+            Else
+                retVal = False
+            End If
+            Return retVal
+        End Function
 
         Protected Overrides Sub CreateDataSources()
             'RaiseEvent UpdateDataFilterEvent(PayrollIdNo)

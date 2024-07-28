@@ -17,7 +17,7 @@
     [Taxable]           BIT             NULL,
     [Unit]              CHAR (1)        NULL,
     [QuantityType]      CHAR (1)        NULL,
-    [UsePayGroups]      BIT             NULL,
+    [UsePayGroups]      BIT             NOT NULL,
     [ReportGroupIdNo]   TINYINT         NULL,
     [Notes]             NVARCHAR (100)  NULL,
     [DateTimeStamp]     ROWVERSION      NULL,
@@ -25,6 +25,8 @@
     [Active]            BIT             NULL,
     CONSTRAINT [PK_PayElement] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 

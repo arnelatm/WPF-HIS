@@ -366,7 +366,6 @@ Namespace PresentationLayer.Views.Forms
                 btnEmployeeAbsenceEntry.Enabled = True
             End If
             dgvSelected.AlwaysEditable = True
-            dgvSelected.EditingMode = True
         End Sub
 
     End Class

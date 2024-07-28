@@ -1,18 +1,10 @@
 ﻿
 
-
-
 CREATE VIEW [dbo].[Contact_View]
 AS
-SELECT		dbo.Contact.IdNo, 
-			dbo.CSEContact_View.ContactName, 
-			dbo.CSEContact_View.ContactNameAra, 
-			dbo.CSEContact_View.ContactCode, 
-			dbo.Contact.PayorIdNo, 
-			dbo.Contact.CSECode
-FROM        dbo.Contact 
-			INNER JOIN dbo.CSEContact_View 
-			ON dbo.Contact.CSECode = dbo.CSEContact_View.CSECode AND dbo.Contact.PayorIdNo = dbo.CSEContact_View.PayorIdNo
+SELECT     dbo.Contact.IdNo, dbo.Contact.CSEIdNo, dbo.Contact.CSECode, dbo.CSEContact_View.ContactName, dbo.CSEContact_View.ContactCode, dbo.CSEContact_View.ContactNameAra
+FROM       dbo.Contact INNER JOIN
+           dbo.CSEContact_View ON dbo.Contact.CSECode = dbo.CSEContact_View.CSECode AND dbo.Contact.CSEIdNo = dbo.CSEContact_View.ContactIdNo
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'Contact_View';
 

@@ -2,6 +2,10 @@
 
 
 
+
+
+
+
 CREATE View [dbo].[PayGroup_View] as 
 with cte as
 (
@@ -10,7 +14,8 @@ select IDNo
       ,PayGroupName
       ,PayGroupNameAra
       ,ParentIdNo
-      ,Notes
+	  ,RevCostCenterIdNo
+      ,[Notes]
       ,DateTimeStamp
       ,cast(row_number()over(partition by ParentIdNo order by PayGroupName) as varchar(max)) as [path]
       ,0 as levelnumber
@@ -23,8 +28,9 @@ select t.IDNo
       ,t.PayGroupCode
       ,t.PayGroupName
       ,t.PayGroupNameAra
-      ,t.ParentIdNo
-      ,t.Notes
+	  ,t.ParentIdNo
+	  ,t.RevCostCenterIdNo
+      ,t.[Notes]
       ,t.DateTimeStamp
       ,[path] +'-'+ cast(row_number()over(partition by t.ParentIdNo order by t.PayGroupName) as varchar(max))
       ,levelnumber+1
@@ -39,8 +45,9 @@ select IDNo
       ,PayGroupCode
       ,PayGroupName
       ,PayGroupNameAra
-      ,ParentIdNo
-      ,Notes
+	  ,ParentIdNo
+	  ,RevCostCenterIdNo
+      ,[Notes]
       ,DateTimeStamp
 	  ,LevelNumber
       ,[path]

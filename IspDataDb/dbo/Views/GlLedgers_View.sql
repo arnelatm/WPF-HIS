@@ -9,6 +9,7 @@
 
 
 
+
 CREATE VIEW [dbo].[GlLedgers_View]	
   AS
 (SELECT 'GJ' Collate SQL_Latin1_General_CP1_CI_AS AS 'JournalCode'
@@ -19,7 +20,7 @@ CREATE VIEW [dbo].[GlLedgers_View]
 	  ,ch.[AccountCode]
       ,a.[Debit]
       ,a.[Credit]
-	  ,[RevCostCenterIdNo]
+	  ,a.[RevCostCenterIdNo]
       ,a.[Notes]  COLLATE Arabic_CI_AS AS 'Notes'
 	  ,a.[Posted]
 	  ,[TransactionDate] 
@@ -43,7 +44,7 @@ UNION
 	  ,ch.AccountCode
       ,a.[Debit]
       ,a.[Credit]
-      ,[RevCostCenterIdNo]
+      ,a.[RevCostCenterIdNo]
       ,a.[Notes]
       ,a.[Posted]
 	  ,[TransactionDate]
@@ -69,7 +70,7 @@ UNION
 	  ,ch.AccountCode
       ,a.[Debit]
       ,a.[Credit]
-      ,[RevCostCenterIdNo]
+      ,a.[RevCostCenterIdNo]
       ,a.[Notes]
       ,a.[Posted]
 	  ,[TransactionDate]
@@ -95,7 +96,7 @@ UNION
 	  ,ch.AccountCode
       ,a.[Debit]
       ,a.[Credit]
-      ,[RevCostCenterIdNo]
+      ,a.[RevCostCenterIdNo]
       ,a.[Notes]
       ,a.[Posted]
 	  ,[TransactionDate]
@@ -121,7 +122,7 @@ UNION
 	  ,ch.AccountCode
       ,a.[Debit]
       ,a.[Credit]
-	  ,[RevCostCenterIdNo]
+	  ,a.[RevCostCenterIdNo]
       ,a.[Notes]
 	  ,a.[Posted]
 	  ,[TransactionDate]
@@ -165,7 +166,7 @@ UNION
 	  ,ch.AccountCode
       ,a.[Debit]
       ,a.[Credit]
-	  ,[RevCostCenterIdNo]
+	  ,a.[RevCostCenterIdNo]
       ,a.[Notes]
 	  ,a.[Posted]
 	  ,[TransactionDate]
@@ -209,7 +210,7 @@ UNION
 	  ,ch.AccountCode
       ,a.[Debit]
       ,a.[Credit]
-	  ,[RevCostCenterIdNo]
+	  ,a.[RevCostCenterIdNo]
       ,a.[Notes]
 	  ,a.[Posted]
 	  ,[TransactionDate]
@@ -257,7 +258,7 @@ UNION
 	  ,ch.AccountCode
       ,a.[Debit]
       ,a.[Credit]
-	  ,[RevCostCenterIdNo]
+	  ,a.[RevCostCenterIdNo]
       ,a.[Notes]
 	  ,a.[Posted]
 	  ,[TransactionDate]

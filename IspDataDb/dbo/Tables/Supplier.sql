@@ -60,6 +60,8 @@
 
 
 
+
+
 GO
 CREATE UNIQUE NONCLUSTERED INDEX [IX_SupplierName]
     ON [dbo].[Supplier]([SupplierName] ASC);
@@ -81,7 +83,7 @@ FOR INSERT
 AS
 
 INSERT INTO Contact
-        (PayorIdNo, CSECode)
+        (CSEIdNo, CSECode)
     SELECT
         IdNo, 'S'
         FROM inserted

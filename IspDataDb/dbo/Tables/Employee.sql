@@ -45,6 +45,7 @@
     [OTRateSpecial]       DECIMAL (7, 2)  NULL,
     [DutyHours]           DECIMAL (5, 2)  NULL,
     [ActualDutyHours]     DECIMAL (5, 2)  NULL,
+    [RevCostCenterIdNo]   SMALLINT        NULL,
     [BloodType]           CHAR (3)        NULL,
     [Supervisor]          BIT             NULL,
     [SupervisorIdNo]      INT             NULL,
@@ -54,6 +55,10 @@
     [DateTimeStamp]       ROWVERSION      NULL,
     CONSTRAINT [PK_EmployeeIdNo] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
+
+
 
 
 
@@ -131,7 +136,7 @@ FOR INSERT
 AS
 
 INSERT INTO Contact
-        (PayorIdNo, CSECode)
+        (CSEIdNo, CSECode)
     SELECT
         IdNo, 'E'
         FROM inserted

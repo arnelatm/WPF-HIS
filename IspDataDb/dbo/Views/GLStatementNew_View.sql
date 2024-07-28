@@ -12,6 +12,7 @@
 
 
 
+
 CREATE View [dbo].[GLStatementNew_View] 
 as 
 ( SELECT 'GJ' AS 'JournalCode'
@@ -22,7 +23,7 @@ as
 	  ,ch.[AccountCode]
       ,a.[Debit]
       ,a.[Credit]
-	  ,[RevCostCenterIdNo]
+	  ,a.[RevCostCenterIdNo]
       ,a.[Notes]  COLLATE Arabic_CI_AS AS 'Notes'
 	  ,a.[Posted]
 	  ,[TransactionDate] 
@@ -46,7 +47,7 @@ UNION
 	  ,ch.AccountCode
       ,a.[Debit]
       ,a.[Credit]
-      ,[RevCostCenterIdNo]
+      ,a.[RevCostCenterIdNo]
       ,iif(a.[Notes] is Null or a.[Notes] = '',b.Notes,a.Notes)
       ,a.[Posted]
 	  ,[TransactionDate]
@@ -72,7 +73,7 @@ UNION
 	  ,ch.AccountCode
       ,a.[Debit]
       ,a.[Credit]
-      ,[RevCostCenterIdNo]
+      ,a.[RevCostCenterIdNo]
       ,iif(a.[Notes] is Null or a.[Notes] = '',b.Notes,a.Notes)
       ,a.[Posted]
 	  ,[TransactionDate]
@@ -98,7 +99,7 @@ UNION
 	  ,ch.AccountCode
       ,a.[Debit]
       ,a.[Credit]
-      ,[RevCostCenterIdNo]
+      ,a.[RevCostCenterIdNo]
       ,iif(a.[Notes] is Null or a.[Notes] = '',b.Notes,a.Notes)
       ,a.[Posted]
 	  ,[TransactionDate]
@@ -124,7 +125,7 @@ UNION
 	  ,ch.AccountCode
       ,a.[Debit]
       ,a.[Credit]
-	  ,[RevCostCenterIdNo]
+	  ,a.[RevCostCenterIdNo]
       ,a.[Notes]
 	  ,a.[Posted]
 	  ,[TransactionDate]
@@ -168,7 +169,7 @@ UNION
 	  ,ch.AccountCode
       ,a.[Debit]
       ,a.[Credit]
-	  ,[RevCostCenterIdNo]
+	  ,a.[RevCostCenterIdNo]
       ,iif(a.[Notes] is Null or a.[Notes] = '',b.Notes,a.Notes)
 	  ,a.[Posted]
 	  ,[TransactionDate]
@@ -216,7 +217,7 @@ UNION
 	  ,ch.AccountCode
       ,a.[Debit]
       ,a.[Credit]
-	  ,[RevCostCenterIdNo]
+	  ,a.[RevCostCenterIdNo]
       ,iif(a.[Notes] is Null or a.[Notes] = '',b.Notes,a.Notes)
 	  ,a.[Posted]
 	  ,[TransactionDate]
@@ -264,7 +265,7 @@ UNION
 	  ,ch.AccountCode
       ,a.[Debit]
       ,a.[Credit]
-	  ,[RevCostCenterIdNo]
+	  ,a.[RevCostCenterIdNo]
 	  ,iif(a.[Notes] is Null or a.[Notes] = '',b.Notes,a.Notes)
 	  ,a.[Posted]
 	  ,[TransactionDate]
@@ -308,7 +309,7 @@ UNION
 	  ,ch.AccountCode
       ,a.[Debit]
       ,a.[Credit]
-	  ,[RevCostCenterIdNo]
+	  ,a.[RevCostCenterIdNo]
       ,a.[Notes]
 	  ,a.[Posted]
 	  ,[TransactionDate]

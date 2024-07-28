@@ -1037,9 +1037,9 @@ Public Class CtDataGridView
         If CurrentCell IsNot Nothing AndAlso TypeOf CurrentCell Is IEntryControl Then
             If TypeOf CurrentCell Is CDgvCheckboxCell Then
                 If e.ColumnIndex < 0 OrElse e.RowIndex < 0 Then Exit Sub
-                Dim editMode As Boolean = DirectCast(CurrentCell.OwningColumn, AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn).EditingMode
-                Dim dispMode As Boolean = DirectCast(CurrentCell.OwningColumn, AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn).DisplayOnly
-                If editMode And Not dispMode Then
+                Dim editable As Boolean = DirectCast(CurrentCell.OwningColumn, AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn).EditingMode
+                Dim displayableOnly As Boolean = DirectCast(CurrentCell.OwningColumn, AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn).DisplayOnly
+                If editable And Not displayableOnly Then
                     CurrentCell.Value = Not CurrentCell.Value
                     CommitEdit(DataGridViewDataErrorContexts.Commit)
                 End If

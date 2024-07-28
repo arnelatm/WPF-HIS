@@ -1,4 +1,5 @@
 ﻿
+
 CREATE VIEW [dbo].[GlLedgersSummmary_View]	
   AS
 (SELECT 'GJ' Collate SQL_Latin1_General_CP1_CI_AS AS 'JournalCode'
@@ -9,7 +10,7 @@ CREATE VIEW [dbo].[GlLedgersSummmary_View]
 	  ,ch.[AccountCode]
       ,a.[Debit]
       ,a.[Credit]
-	  ,[RevCostCenterIdNo]
+	  ,a.[RevCostCenterIdNo]
 	  ,a.[Posted]
 	  ,b.[TransactionDate] 
 	  ,[ClosingJournal]
@@ -28,7 +29,7 @@ UNION
 	  ,ch.AccountCode
       ,a.[Debit]
       ,a.[Credit]
-      ,[RevCostCenterIdNo]
+      ,a.[RevCostCenterIdNo]
       ,a.[Posted]
 	  ,[TransactionDate]
       ,CAST(0 AS BIT) 
@@ -47,7 +48,7 @@ UNION
 	  ,ch.AccountCode
       ,a.[Debit]
       ,a.[Credit]
-      ,[RevCostCenterIdNo]
+      ,a.[RevCostCenterIdNo]
 	  ,a.[Posted]
 	  ,[TransactionDate]
       ,CAST(0 AS BIT)
@@ -68,7 +69,7 @@ UNION
 	  ,ch.AccountCode
       ,a.[Debit]
       ,a.[Credit]
-      ,[RevCostCenterIdNo]
+      ,a.[RevCostCenterIdNo]
       ,a.[Posted]
 	  ,[TransactionDate]
       ,CAST(0 AS BIT)
@@ -87,7 +88,7 @@ UNION
 	  ,ch.AccountCode
       ,a.[Debit]
       ,a.[Credit]
-	  ,[RevCostCenterIdNo]
+	  ,a.[RevCostCenterIdNo]
 	  ,a.[Posted]
 	  ,[TransactionDate]
       ,CAST(0 AS BIT)	
@@ -112,7 +113,7 @@ UNION
 	  ,ch.AccountCode
       ,a.[Debit]
       ,a.[Credit]
-	  ,[RevCostCenterIdNo]
+	  ,a.[RevCostCenterIdNo]
       ,a.[Posted]
 	  ,[TransactionDate]
       ,CAST(0 AS BIT)  
@@ -131,7 +132,7 @@ UNION
 	  ,ch.AccountCode
       ,a.[Debit]
       ,a.[Credit]
-	  ,[RevCostCenterIdNo]
+	  ,a.[RevCostCenterIdNo]
       ,a.[Posted]
 	  ,[TransactionDate]
       ,CAST(0 AS BIT)
@@ -150,7 +151,7 @@ UNION
 	  ,ch.AccountCode
       ,a.[Debit]
       ,a.[Credit]
-	  ,[RevCostCenterIdNo]
+	  ,a.[RevCostCenterIdNo]
 	  ,a.[Posted]
 	  ,[TransactionDate]
       ,CAST(0 AS BIT)  
@@ -169,7 +170,7 @@ UNION
 	  ,ch.AccountCode
       ,a.[Debit]
       ,a.[Credit]
-	  ,[RevCostCenterIdNo]
+	  ,a.[RevCostCenterIdNo]
 	  ,a.[Posted]
 	  ,[TransactionDate]
       ,CAST(0 AS BIT)	  
