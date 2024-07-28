@@ -26,7 +26,7 @@ Namespace PresentationLayer.Views.Forms
         Public Event UserDeletedRow() Implements IDisbursementJournalView.UserDeletedRow
         Public Event FirstLineUpdateNeeded() Implements IDisbursementJournalView.FirstLineUpdateNeeded
         Public Event PaymentTypeChanged(paymentType As String) Implements IDisbursementJournalView.PaymentTypeChanged
-        Public Event PayeeIdNoChanged() Implements IDisbursementJournalView.PayeeIdNoChanged
+        Public Event ContactIdNoChanged() Implements IDisbursementJournalView.ContactIdNoChanged
 
         Public Sub New(ByVal tableName As String)
             MyBase.New()
@@ -227,13 +227,6 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
         Public Property PayeeIdNo As Int32? Implements IDisbursementJournalView.PayeeIdNo
-            Get
-                Return cboPayeeIdNo.GetNullableValue(Of Int32)
-            End Get
-            Set
-                cboPayeeIdNo.SetValue(Value)
-            End Set
-        End Property
 
         Public Property PayeeName As String Implements IDisbursementJournalView.PayeeName
             Get
@@ -282,16 +275,16 @@ Namespace PresentationLayer.Views.Forms
                 Return _payeeDataSource
             End Get
             Set(value As Object)
-                Dim cbValue As Int32 = cboPayeeIdNo.SelectedValue
+                Dim cbValue As Int32 = cboContactIdNo.SelectedValue
                 _payeeDataSource = value
-                cboPayeeIdNo.ValueMember = "IdNo"
-                cboPayeeIdNo.DisplayMember = "Name"
-                cboPayeeIdNo.DataSource = value
-                cboPayeeIdNo.BackColor = cboPaymentType.BackColor
-                cboPayeeIdNo.MaxDropDownItems = 8
-                cboPayeeIdNo.DropDownHeight = 106
-                cboPayeeIdNo.SelectedValue = cbValue
-                cboPayeeIdNo.Refresh()
+                cboContactIdNo.ValueMember = "IdNo"
+                cboContactIdNo.DisplayMember = "Name"
+                cboContactIdNo.DataSource = value
+                cboContactIdNo.BackColor = cboPaymentType.BackColor
+                cboContactIdNo.MaxDropDownItems = 8
+                cboContactIdNo.DropDownHeight = 106
+                cboContactIdNo.SelectedValue = cbValue
+                cboContactIdNo.Refresh()
             End Set
         End Property
 
@@ -377,6 +370,17 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DefaultAccount As Int32? Implements IDisbursementJournalView.DefaultAccount
 
+        Public Property CSEIdNo As Integer? Implements IDisbursementJournalView.CSEIdNo
+
+        Public Property ContactIdNo As Integer? Implements IDisbursementJournalView.ContactIdNo
+            Get
+                Return cboContactIdNo.GetNullableValue(Of Int32)
+            End Get
+            Set
+                cboContactIdNo.SetValue(Value)
+            End Set
+        End Property
+
         Public Overrides Function GetPrintParameters() As Object
             Return Me.FormCulture
         End Function
@@ -403,7 +407,7 @@ Namespace PresentationLayer.Views.Forms
          {"Notes", txtNotes},
          {"OrNumber", txtORNumber},
          {"PaymentType", cboPaymentType},
-         {"PayeeIdNo", cboPayeeIdNo},
+         {"ContactIdNo", cboContactIdNo},
          {"PayeeName", txtPayeeName},
          {"Posted", chkPosted},
          {"ReferenceNo", txtReferenceNo},
@@ -499,8 +503,8 @@ Namespace PresentationLayer.Views.Forms
             UpdateFirstLine()
         End Sub
 
-        Private Sub CboPayeeIdNo_ValueChanged(sender As Object, e As EventArgs) Handles cboPayeeIdNo.SelectedValueChanged
-            RaiseEvent PayeeIdNoChanged()
+        Private Sub CboContactIdNo_ValueChanged(sender As Object, e As EventArgs) Handles cboContactIdNo.SelectedValueChanged
+            RaiseEvent ContactIdNoChanged()
             If OpenInvoiceMode Then
                 UpdateOpenInvoiceDisplay()
             End If
@@ -750,23 +754,23 @@ Namespace PresentationLayer.Views.Forms
         Private Sub UpdatePayeeDisplay()
             Dim paymentTypeEnum = CodeToEnum(Of PaymentTypeSelection)(cboPaymentType.SelectedValue)
             If paymentTypeEnum = PaymentTypeSelection.Others Or paymentTypeEnum = PaymentTypeSelection.NotSpecified Then
-                cboPayeeIdNo.Visible = False
+                cboContactIdNo.Visible = False
                 txtPayeeName.Visible = True
-                cboPayeeIdNo.SelectedIndex = -1
-                tlpDisbursement.SetCellPosition(cboPayeeIdNo, New TableLayoutPanelCellPosition(12, 9))
+                cboContactIdNo.SelectedIndex = -1
+                tlpDisbursement.SetCellPosition(cboContactIdNo, New TableLayoutPanelCellPosition(12, 9))
                 tlpDisbursement.SetCellPosition(txtPayeeName, New TableLayoutPanelCellPosition(1, 2))
                 tlpDisbursement.SetColumnSpan(txtPayeeName, 8)
             Else
-                cboPayeeIdNo.Visible = True
+                cboContactIdNo.Visible = True
                 txtPayeeName.Visible = False
-                txtPayeeName.Text = cboPayeeIdNo.Text
+                txtPayeeName.Text = cboContactIdNo.Text
                 tlpDisbursement.SetCellPosition(txtPayeeName, New TableLayoutPanelCellPosition(12, 9))
-                tlpDisbursement.SetCellPosition(cboPayeeIdNo, New TableLayoutPanelCellPosition(1, 2))
-                tlpDisbursement.SetColumnSpan(cboPayeeIdNo, 8)
+                tlpDisbursement.SetCellPosition(cboContactIdNo, New TableLayoutPanelCellPosition(1, 2))
+                tlpDisbursement.SetColumnSpan(cboContactIdNo, 8)
             End If
             cboPaymentType.SelectionLength = 0
             cboPayType.SelectionLength = 0
-            cboPayeeIdNo.SelectionLength = 0
+            cboContactIdNo.SelectionLength = 0
             cboAccountIdNo.SelectionLength = 0
             cboDiscountAccountIdNo.SelectionLength = 0
         End Sub

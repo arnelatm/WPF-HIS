@@ -73,7 +73,6 @@ Namespace PresentationLayer.Presenters
             AddHandler view.JiAccountIdNoChanged, AddressOf OnAccountIdNoChanged
             AddHandler view.DebitAmountChanged, AddressOf OnDebitAmountChanged
             AddHandler view.CreditAmountChanged, AddressOf OnCreditAmountChanged
-            'AddHandler view.OpenInvoiceDataRequested, AddressOf OnOpenInvoiceDataRequested
             AddHandler view.ContactIdNoChanged, AddressOf OnContactIdNoChanged
             AddHandler view.ReceiptAmountChanged, AddressOf OnReceiptAmountChanged
             AddHandler view.DebitAccountIdNoChanged, AddressOf OnDebitAccountIdNoChanged
@@ -1175,6 +1174,7 @@ Namespace PresentationLayer.Presenters
             Dim nSeq As Integer
             If View.PayorType IsNot Nothing AndAlso View.PayorType = EnumToCode(ReceiptTypeSelection.AccountsReceivable) Then
                 GlobalVariables.Mapper.Map(dView, dModel)
+                View.PayorIdNo = Service.GetField()
                 nSeq = dView.Count()
                 If View.PayorIdNo = OriginalModel.PayorIdNo AndAlso View.PayorType = OriginalModel.PayorType Then
                     ' need to add the original items because if items are already paid in the original data they will not be added if there is already a full or partial payment

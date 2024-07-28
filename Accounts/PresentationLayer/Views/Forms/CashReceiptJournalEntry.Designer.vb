@@ -129,7 +129,7 @@ Namespace PresentationLayer.Views.Forms
             Me.btnAutoApply = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.txtTotalDebits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.txtTotalCredits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.txtPayorIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtCSEIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floFullEntryArea.SuspendLayout()
             Me.floPurchaseJournalHeader.SuspendLayout()
@@ -155,7 +155,7 @@ Namespace PresentationLayer.Views.Forms
             Me.floFullEntryArea.Controls.Add(Me.btnAutoApply)
             Me.floFullEntryArea.Controls.Add(Me.txtTotalDebits)
             Me.floFullEntryArea.Controls.Add(Me.txtTotalCredits)
-            Me.floFullEntryArea.Controls.Add(Me.txtPayorIdNo)
+            Me.floFullEntryArea.Controls.Add(Me.txtCSEIdNo)
             Me.floFullEntryArea.Name = "floFullEntryArea"
             '
             'floPurchaseJournalHeader
@@ -316,6 +316,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'cboPayorType
             '
+            Me.cboPayorType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
             Me.cboPayorType.BackColor = System.Drawing.Color.White
             Me.cboPayorType.BegFindValue = Nothing
             Me.cboPayorType.ChangingSearchValueOnly = False
@@ -477,6 +478,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'cboAccountIdNo
             '
+            Me.cboAccountIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
             Me.cboAccountIdNo.BackColor = System.Drawing.Color.White
             Me.cboAccountIdNo.BegFindValue = Nothing
             Me.cboAccountIdNo.ChangingSearchValueOnly = False
@@ -992,6 +994,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'cboContactIdNo
             '
+            Me.cboContactIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
             Me.cboContactIdNo.BackColor = System.Drawing.Color.White
             Me.cboContactIdNo.BegFindValue = Nothing
             Me.cboContactIdNo.ChangingSearchValueOnly = False
@@ -1655,31 +1658,31 @@ Namespace PresentationLayer.Views.Forms
             Me.txtTotalCredits.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtTotalCredits.Translatable = False
             '
-            'txtPayorIdNo
+            'txtCSEIdNo
             '
-            Me.txtPayorIdNo.BackColor = System.Drawing.Color.White
-            Me.txtPayorIdNo.BegFindValue = Nothing
-            Me.txtPayorIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtPayorIdNo.ComputedValue = False
-            Me.txtPayorIdNo.CustomFormat = Nothing
-            Me.txtPayorIdNo.DataBoundControl = True
-            Me.txtPayorIdNo.EditingMode = True
-            Me.txtPayorIdNo.EndFindValue = Nothing
-            Me.txtPayorIdNo.FieldDescription = Nothing
-            Me.txtPayorIdNo.FieldName = Nothing
-            Me.txtPayorIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtPayorIdNo.FindEnabled = False
-            resources.ApplyResources(Me.txtPayorIdNo, "txtPayorIdNo")
-            Me.txtPayorIdNo.ForeColor = System.Drawing.Color.Black
-            Me.txtPayorIdNo.LinkedLabel = Nothing
-            Me.txtPayorIdNo.MaximumValue = Nothing
-            Me.txtPayorIdNo.MinimumValue = Nothing
-            Me.txtPayorIdNo.Name = "txtPayorIdNo"
-            Me.txtPayorIdNo.OldValue = Nothing
-            Me.txtPayorIdNo.OverrideMaxLength = 0
-            Me.txtPayorIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtPayorIdNo.TabStop = False
-            Me.txtPayorIdNo.Translatable = False
+            Me.txtCSEIdNo.BackColor = System.Drawing.Color.White
+            Me.txtCSEIdNo.BegFindValue = Nothing
+            Me.txtCSEIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtCSEIdNo.ComputedValue = False
+            Me.txtCSEIdNo.CustomFormat = Nothing
+            Me.txtCSEIdNo.DataBoundControl = True
+            Me.txtCSEIdNo.EditingMode = True
+            Me.txtCSEIdNo.EndFindValue = Nothing
+            Me.txtCSEIdNo.FieldDescription = Nothing
+            Me.txtCSEIdNo.FieldName = Nothing
+            Me.txtCSEIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtCSEIdNo.FindEnabled = False
+            resources.ApplyResources(Me.txtCSEIdNo, "txtCSEIdNo")
+            Me.txtCSEIdNo.ForeColor = System.Drawing.Color.Black
+            Me.txtCSEIdNo.LinkedLabel = Nothing
+            Me.txtCSEIdNo.MaximumValue = Nothing
+            Me.txtCSEIdNo.MinimumValue = Nothing
+            Me.txtCSEIdNo.Name = "txtCSEIdNo"
+            Me.txtCSEIdNo.OldValue = Nothing
+            Me.txtCSEIdNo.OverrideMaxLength = 0
+            Me.txtCSEIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtCSEIdNo.TabStop = False
+            Me.txtCSEIdNo.Translatable = False
             '
             'CashReceiptJournalEntry
             '
@@ -1776,7 +1779,7 @@ Namespace PresentationLayer.Views.Forms
         Friend dgvBalance As CdgvMoneyColumn
         Friend WithEvents AccountIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents txtPayorIdNo As CTextBox
+        Friend WithEvents txtCSEIdNo As CTextBox
         Friend WithEvents cboContactIdNo As CdtComboBox
         Friend WithEvents dtpTransactionDate As CCustomDateTimePicker
         Friend WithEvents FloPayor As CFlowLayout

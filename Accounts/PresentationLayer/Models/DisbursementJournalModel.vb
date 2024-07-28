@@ -10,14 +10,16 @@
         Public Property Amount As Decimal
         Public Property Applied As Decimal
         Public Property Approved As Boolean
-        Public Property DjOiItems As List(Of DjOiItemModel)
         Public Property Cancelled As Boolean
         Public Property CdJournalIdNo As Int32?
         Public Property CheckDate As Date?
         Public Property CheckNumber As String
+        Public Property ContactIdNo As Int32?
+        Public Property CSEIdNo As Int32?
         Public Property DateCreated As DateTime?
         Public Property DiscountAccountIdNo As Int16?
         Public Property DiscountTaken As Decimal
+        Public Property DjOiItems As List(Of DjOiItemModel)
         Public Property Errors As List(Of String)
         Public Property IdNo As Int32
         Public Property JournalItems As List(Of JournalItemModel)

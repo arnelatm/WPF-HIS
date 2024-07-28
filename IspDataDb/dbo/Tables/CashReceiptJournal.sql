@@ -9,6 +9,7 @@
     [Payorname]           NVARCHAR (50)  NULL,
     [CheckNumber]         VARCHAR (10)   NULL,
     [CheckDate]           DATE           NULL,
+    [CSEIdNo]             INT            NULL,
     [ORNumber]            VARCHAR (15)   NULL,
     [DiscountTaken]       MONEY          NULL,
     [DiscountAccountIdNo] SMALLINT       NULL,

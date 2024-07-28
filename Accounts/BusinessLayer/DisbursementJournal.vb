@@ -33,19 +33,22 @@ Namespace BusinessLayer
 
         End Sub
 
+        Public Event PrintCheck()
+
         Public Property AccountIdNo As Int16?
         Public Property Amount As Decimal
         Public Property Applied As Decimal
         Public Property Approved As Boolean
-        Public Property DjOiItems As List(Of DjOiItem)
         Public Property Cancelled As Boolean
+        Public Property CdJournalIdNo As Int32
         Public Property CheckDate As Date?
         Public Property CheckNumber As String
-        Public Property CdJournalIdNo As Int32
+        Public Property ContactIdNo As Int32?
+        Public Property CSEIdNo As Int32?
         Public Property DateCreated As DateTime?
-        Public Property PayType As String
         Public Property DiscountAccountIdNo As Int16?
         Public Property DiscountTaken As Decimal
+        Public Property DjOiItems As List(Of DjOiItem)
         Public Property IdNo As Int32
         Public Property JournalItems As List(Of JournalItem)
         Public Property Notes As String
@@ -54,6 +57,7 @@ Namespace BusinessLayer
         Public Property PayeeName As String
         Public Property PayeeType As String
         Public Property PaymentType As String
+        Public Property PayType As String
         Public Property PcClosed As Boolean
         Public Property Posted As Boolean
         Public Property ReferenceNo As String
@@ -63,9 +67,6 @@ Namespace BusinessLayer
         Public Property UnApplied As Decimal
         Public Property VatAmount As Decimal
         Public Property VatNumber As String
-
-        Public Event PrintCheck()
-
         'Public Event PrintPcReplenishment()
         'Public Event AutoApplyAmount()
         'Public Event UpdateFirstLine()

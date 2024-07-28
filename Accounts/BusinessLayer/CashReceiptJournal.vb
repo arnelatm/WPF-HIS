@@ -32,6 +32,7 @@ Namespace BusinessLayer
         Public Property CheckDate As Date?
         Public Property CheckNumber As String
         Public Property ContactIdNo As Int32?
+        Public Property CSEIdNo As Int32?
         Public Property CsrOiItems As List(Of CsrOiItem)
         Public Property DateCreated As DateTime?
         Public Property DiscountAccountIdNo As Int16?

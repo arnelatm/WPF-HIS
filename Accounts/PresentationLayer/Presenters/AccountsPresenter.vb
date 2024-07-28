@@ -22,32 +22,15 @@ Namespace PresentationLayer.Presenters
             MyBase.New(itemView)
         End Sub
 
-        Public Sub CreateSpecialAccountDataSourceT(fieldName As String, specialAccountArray As String())
-            Dim filter As String
-            filter = Accounts.AccountHelpers.CreateSpecialAccountFilterKey(specialAccountArray)
-            MakeControlDataSources({New Object() {"Account", fieldName, Nothing, filter}})
-        End Sub
 
-        Public Sub CreateSpecialAccountDataSource(fieldName As String, specialAccountArray As String())
-            Dim filter As String
-            filter = Accounts.AccountHelpers.CreateSpecialAccountFilterKey(specialAccountArray)
-            MakeControlDataSources({New Object() {"Account", fieldName, Nothing, filter}})
-        End Sub
-
-        Public Function GetDepositTypeModel() As List(Of DepositTypeModel)
-            Dim cModel As New DepositTypeModel
-            Dim cModelList As New List(Of DepositTypeModel)
-            Dim depositTypeService As New AccountsService("DepositType")
-            Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of DepositTypeModel)("DepositTypeName", cModel)
-            Dim depositType As List(Of DepositType)
-            depositType = depositTypeService.GetList(Of DepositType)(newSortOrderKey)
-            GlobalVariables.Mapper.Map(depositType, cModelList)
-            Return cModelList
-        End Function
-
-        Public Function GetAccount(idNo As String)
-            Dim accountService As New AccountsService("Account")
-            Return accountService.GetRecordByIdNo(Of AccountModel)(idNo)
+        Public Function AddApOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer
+            Dim apOpenInvoiceService As New AccountsService("ApOpenInvoice")
+            Dim apOpenInvoiceModel As New ApOpenInvoiceModel With {
+                    .JournalCode = journalCode,
+                    .JournalIdNo = journalItem.JournalIdNo,
+                    .JournalItemIdNo = journalItem.IdNo
+                    }
+            Return apOpenInvoiceService.AddRecord(apOpenInvoiceModel)
         End Function
 
         Public Function AddArOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer
@@ -60,52 +43,72 @@ Namespace PresentationLayer.Presenters
             Return arOpenInvoiceService.AddRecord(arOpenInvoiceModel)
         End Function
 
-        Public Function AddApOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer
-            Dim apOpenInvoiceService As New AccountsService("ApOpenInvoice")
-            Dim apOpenInvoiceModel As New ApOpenInvoiceModel With {
-                    .JournalCode = journalCode,
-                    .JournalIdNo = journalItem.JournalIdNo,
-                    .JournalItemIdNo = journalItem.IdNo
-                    }
-            Return apOpenInvoiceService.AddRecord(apOpenInvoiceModel)
-        End Function
-
-        Public Function UpdateInputVatAmount(journalItems As List(Of JournalItemView)) As Decimal
-            Dim tiVatAmount As Decimal = 0
-            If journalItems IsNot Nothing Then
-                Dim inputVatAccount As String = GlobalFunctions.EnumToCode(SpecialAccountSelection.VatInput)
-                For Each item In journalItems
-                    If item.SpecialAccount = inputVatAccount Then
-                        tiVatAmount = tiVatAmount + item.Debit - item.Credit
-                    End If
-                Next
-            End If
-            Return tiVatAmount
-        End Function
-
-        Public Function UpdateOutputVatAmount(journalItems As List(Of JournalItemView))
-            Dim toVatAmount As Decimal = 0
-            Dim outputVatAccount As String = GlobalFunctions.EnumToCode(SpecialAccountSelection.VatOutput)
-            For Each item In journalItems
-                If item.SpecialAccount = outputVatAccount Then
-                    toVatAmount = toVatAmount + item.Credit - item.Debit
+        Public Function ConvertSpecialAccountsToFilter(accountType As String)
+            Dim values = accountType.Split(",")
+            Dim lookupFilter = ""
+            For Each account In values
+                If lookupFilter <> "" Then
+                    lookupFilter = lookupFilter + " Or "
                 End If
+                lookupFilter = lookupFilter + "SpecialAccount = '" & account & "'"
             Next
-            Return toVatAmount
+            Return lookupFilter
         End Function
 
-        Public Sub MakeDebitAmount(journalItem As JournalItemView, amount As Decimal?)
-            If amount Is Nothing OrElse amount >= 0 Then
-                If journalItem.Credit <> 0 Then
-                    journalItem.Credit = 0
-                End If
-            ElseIf amount < 0 Then
-                journalItem.Credit = amount * -1
-                If journalItem.Debit <> 0 Then
-                    journalItem.Debit = 0
-                End If
-            End If
+        Public Sub CreateSpecialAccountDataSource(fieldName As String, specialAccountArray As String())
+            Dim filter As String
+            filter = Accounts.AccountHelpers.CreateSpecialAccountFilterKey(specialAccountArray)
+            MakeControlDataSources({New Object() {"Account", fieldName, Nothing, filter}})
         End Sub
+
+        Public Sub CreateSpecialAccountDataSourceT(fieldName As String, specialAccountArray As String())
+            Dim filter As String
+            filter = Accounts.AccountHelpers.CreateSpecialAccountFilterKey(specialAccountArray)
+            MakeControlDataSources({New Object() {"Account", fieldName, Nothing, filter}})
+        End Sub
+
+        Public Function GetAccount(idNo As String)
+            Dim accountService As New AccountsService("Account")
+            Return accountService.GetRecordByIdNo(Of AccountModel)(idNo)
+        End Function
+
+        Public Function GetApOpenInvoiceNumber(journalItemIdNo As Int32) As Int32
+            Dim idNo As Int32
+            idNo = Service.GetRecordFieldWith2KeyG(Of String, Int32, Int32)("AP", journalItemIdNo, "ApOpenInvoice", "JournalCode", "JournalItemIdNo", "IdNo")
+            Return idNo
+        End Function
+
+        Public Function GetArOpenInvoiceNumber(journalItemIdNo As Int32) As Int32
+            Dim idNo As Int32
+            idNo = Service.GetRecordFieldWith2KeyG(Of String, Int32, Int32)("AR", journalItemIdNo, "ArOpenInvoice", "JournalCode", "JournalItemIdNo", "IdNo")
+            Return idNo
+        End Function
+
+        Public Function GetCSEIdNo(contactIdNo As Integer) As Int32?
+            Return Service.GetField(Of Int32, Int32)(contactIdNo, "Contact", "IdNo", "CSEIdNo")
+        End Function
+
+        Public Function GetDepositTypeModel() As List(Of DepositTypeModel)
+            Dim cModel As New DepositTypeModel
+            Dim cModelList As New List(Of DepositTypeModel)
+            Dim depositTypeService As New AccountsService("DepositType")
+            Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of DepositTypeModel)("DepositTypeName", cModel)
+            Dim depositType As List(Of DepositType)
+            depositType = depositTypeService.GetList(Of DepositType)(newSortOrderKey)
+            GlobalVariables.Mapper.Map(depositType, cModelList)
+            Return cModelList
+        End Function
+        Public Function GetUserEmployeeIdNo() As Int32
+            Return Service.GetUserEmployeeIdNo()
+        End Function
+
+        Public Function IsAccountsPayableAccount(ByVal accountIdNo As Int16)
+            Return GetRecordFieldWithKey(accountIdNo, "Account", "IdNo", "SpecialAccount") = EnumToCode(SpecialAccountSelection.AccountsPayable)
+        End Function
+
+        Public Function IsAccountsReceivableAccount(ByVal accountIdNo As Int16)
+            Return GetRecordFieldWithKey(accountIdNo, "Account", "IdNo", "SpecialAccount") = EnumToCode(SpecialAccountSelection.AccountsReceivable)
+        End Function
 
         Public Sub MakeCreditAmount(journalItem As JournalItemView, amount As Decimal?)
             If amount Is Nothing OrElse amount > 0 Then
@@ -116,6 +119,19 @@ Namespace PresentationLayer.Presenters
                 journalItem.Debit = amount * -1
                 If journalItem.Credit <> 0 Then
                     journalItem.Credit = 0
+                End If
+            End If
+        End Sub
+
+        Public Sub MakeDebitAmount(journalItem As JournalItemView, amount As Decimal?)
+            If amount Is Nothing OrElse amount >= 0 Then
+                If journalItem.Credit <> 0 Then
+                    journalItem.Credit = 0
+                End If
+            ElseIf amount < 0 Then
+                journalItem.Credit = amount * -1
+                If journalItem.Debit <> 0 Then
+                    journalItem.Debit = 0
                 End If
             End If
         End Sub
@@ -154,17 +170,59 @@ Namespace PresentationLayer.Presenters
             End With
         End Sub
 
-        Public Function UserIsASupervisor()
-            Dim employeeIdNo As Int32 = GetUserEmployeeIdNo()
-            If employeeIdNo > 0 Then
-                Return Service.GetField(Of Boolean, Int32)(employeeIdNo, "Employee", "IdNo", "Supervisor")
-            End If
-            Return False
+        Public Function ReconciledEntriesExist(journalItems As List(Of JournalItemView), journalCode As String) As Boolean
+            Dim result As Boolean = False
+            Dim reconciledDao = New ReconciledDao
+            For Each item In journalItems
+                'Dim reconciledData As Reconciled = reconciledDao.GetReconciledItem(JournalCode, item.IdNo)
+                If reconciledDao.IsItemReconciled(journalCode, item.IdNo) Then
+                    Messaging.Show(True, "MsgEditingOfReconciledNotAllowed")
+                    result = True
+                    Exit For
+                End If
+            Next
+            Return result
         End Function
 
+        Public Sub SetSupplierVatNumber(ByRef currentVatNumber As String, idNo As String, override As Boolean)
+            If IsEmpty(currentVatNumber) Or override Then
+                If idNo IsNot Nothing Then
+                    Dim supplierVatNumber = GetRecordFieldWithKey(idNo, "Supplier", "IdNo", "VatNumber")
+                    currentVatNumber = supplierVatNumber
+                Else
+                    currentVatNumber = Nothing
+                End If
+            End If
+        End Sub
 
-        Public Function UserIsASuperAdministrator()
-            Return GlobalFunctions.UserIsASuperAdmin
+        Public Function UpdateInputVatAmount(journalItems As List(Of JournalItemView)) As Decimal
+            Dim tiVatAmount As Decimal = 0
+            If journalItems IsNot Nothing Then
+                Dim inputVatAccount As String = GlobalFunctions.EnumToCode(SpecialAccountSelection.VatInput)
+                For Each item In journalItems
+                    If item.SpecialAccount = inputVatAccount Then
+                        tiVatAmount = tiVatAmount + item.Debit - item.Credit
+                    End If
+                Next
+            End If
+            Return tiVatAmount
+        End Function
+
+        Public Function UpdateOutputVatAmount(journalItems As List(Of JournalItemView))
+            Dim toVatAmount As Decimal = 0
+            Dim outputVatAccount As String = GlobalFunctions.EnumToCode(SpecialAccountSelection.VatOutput)
+            For Each item In journalItems
+                If item.SpecialAccount = outputVatAccount Then
+                    toVatAmount = toVatAmount + item.Credit - item.Debit
+                End If
+            Next
+            Return toVatAmount
+        End Function
+        Public Function UserHasHrAccess()
+            If UserHasAccess("HumanResources") Then
+                Return True
+            End If
+            Return False
         End Function
 
         Public Function UserHasHrManagerAccess()
@@ -174,18 +232,17 @@ Namespace PresentationLayer.Presenters
             Return False
         End Function
 
-        Public Function UserHasHrAccess()
-            If UserHasAccess("HumanResources") Then
-                Return True
+        Public Function UserIsASuperAdministrator()
+            Return GlobalFunctions.UserIsASuperAdmin
+        End Function
+
+        Public Function UserIsASupervisor()
+            Dim employeeIdNo As Int32 = GetUserEmployeeIdNo()
+            If employeeIdNo > 0 Then
+                Return Service.GetField(Of Boolean, Int32)(employeeIdNo, "Employee", "IdNo", "Supervisor")
             End If
             Return False
         End Function
-
-
-        Public Function GetUserEmployeeIdNo() As Int32
-            Return Service.GetUserEmployeeIdNo()
-        End Function
-
         'Public Sub AddNewItemOnBindingSource(Of TS As New)(ByVal e As System.ComponentModel.AddingNewEventArgs, bindingSource As BindingSource, dataGridView As DataGridView) Implements IAccountsPresenter.AddNewItemOnBindingSource
         '    e.NewObject = New TS
         '    ' work around for error on datagrid entry on lastrow please do not remove.
@@ -270,64 +327,6 @@ Namespace PresentationLayer.Presenters
         '    End If
         '    Return retValue
         'End Function
-
-        Public Sub SetSupplierVatNumber(ByRef currentVatNumber As String, idNo As String, override As Boolean)
-            If IsEmpty(currentVatNumber) Or override Then
-                If idNo IsNot Nothing Then
-                    Dim supplierVatNumber = GetRecordFieldWithKey(idNo, "Supplier", "IdNo", "VatNumber")
-                    currentVatNumber = supplierVatNumber
-                Else
-                    currentVatNumber = Nothing
-                End If
-            End If
-        End Sub
-
-        Public Function ConvertSpecialAccountsToFilter(accountType As String)
-            Dim values = accountType.Split(",")
-            Dim lookupFilter = ""
-            For Each account In values
-                If lookupFilter <> "" Then
-                    lookupFilter = lookupFilter + " Or "
-                End If
-                lookupFilter = lookupFilter + "SpecialAccount = '" & account & "'"
-            Next
-            Return lookupFilter
-        End Function
-
-        Public Function GetApOpenInvoiceNumber(journalItemIdNo As Int32) As Int32
-            Dim idNo As Int32
-            idNo = Service.GetRecordFieldWith2KeyG(Of String, Int32, Int32)("AP", journalItemIdNo, "ApOpenInvoice", "JournalCode", "JournalItemIdNo", "IdNo")
-            Return idNo
-        End Function
-
-        Public Function GetArOpenInvoiceNumber(journalItemIdNo As Int32) As Int32
-            Dim idNo As Int32
-            idNo = Service.GetRecordFieldWith2KeyG(Of String, Int32, Int32)("AR", journalItemIdNo, "ArOpenInvoice", "JournalCode", "JournalItemIdNo", "IdNo")
-            Return idNo
-        End Function
-
-        Public Function IsAccountsPayableAccount(ByVal accountIdNo As Int16)
-            Return GetRecordFieldWithKey(accountIdNo, "Account", "IdNo", "SpecialAccount") = EnumToCode(SpecialAccountSelection.AccountsPayable)
-        End Function
-
-        Public Function IsAccountsReceivableAccount(ByVal accountIdNo As Int16)
-            Return GetRecordFieldWithKey(accountIdNo, "Account", "IdNo", "SpecialAccount") = EnumToCode(SpecialAccountSelection.AccountsReceivable)
-        End Function
-
-        Public Function ReconciledEntriesExist(journalItems As List(Of JournalItemView), journalCode As String) As Boolean
-            Dim result As Boolean = False
-            Dim reconciledDao = New ReconciledDao
-            For Each item In journalItems
-                'Dim reconciledData As Reconciled = reconciledDao.GetReconciledItem(JournalCode, item.IdNo)
-                If reconciledDao.IsItemReconciled(journalCode, item.IdNo) Then
-                    Messaging.Show(True, "MsgEditingOfReconciledNotAllowed")
-                    result = True
-                    Exit For
-                End If
-            Next
-            Return result
-        End Function
-
     End Class
 
 End Namespace

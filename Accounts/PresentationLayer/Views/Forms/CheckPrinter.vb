@@ -30,7 +30,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Event SetSupplierVatNumber(ByRef currentVatNumber As String, idNo As String, override As Boolean) Implements IDisbursementJournalView.SetSupplierVatNumber
         Public Event PaymentTypeChanged(paymentType As String) Implements IDisbursementJournalView.PaymentTypeChanged
-        Public Event PayeeIdNoChanged() Implements IDisbursementJournalView.PayeeIdNoChanged
+        Public Event ContactIdNoChanged() Implements IDisbursementJournalView.ContactIdNoChanged
 
         Public Sub New()
 
@@ -122,17 +122,6 @@ Namespace PresentationLayer.Views.Forms
         Public Property ORNumber As String Implements IDisbursementJournalView.OrNumber
 
         Public Property PayeeIdNo As Int32? Implements IDisbursementJournalView.PayeeIdNo
-            Get
-                Return cboPayeeIdNo.GetNullableValue(Of Int32)
-            End Get
-            Set
-                If cboPayeeIdNo.DataSource IsNot Nothing Then
-                    cboPayeeIdNo.SetValue(Value)
-                Else
-                    cboPayeeIdNo.SelectedValue = Nothing
-                End If
-            End Set
-        End Property
 
         Public Property PayeeName As String Implements IDisbursementJournalView.PayeeName
             Get
@@ -189,6 +178,21 @@ Namespace PresentationLayer.Views.Forms
         Public Property DefaultAccount As Int32? Implements IDisbursementJournalView.DefaultAccount
         Public Property OpenInvoiceMode As Boolean Implements IDisbursementJournalView.OpenInvoiceMode
 
+        Public Property CSEIdNo As Integer? Implements IDisbursementJournalView.CSEIdNo
+
+        Public Property ContactIdNo As Integer? Implements IDisbursementJournalView.ContactIdNo
+            Get
+                Return cboContactIdNo.GetNullableValue(Of Int32)
+            End Get
+            Set
+                If cboContactIdNo.DataSource IsNot Nothing Then
+                    cboContactIdNo.SetValue(Value)
+                Else
+                    cboContactIdNo.SelectedValue = Nothing
+                End If
+            End Set
+        End Property
+
 #End Region
 
         Public Sub OnEventHandler(ByRef eventType As BeforeAssignment) Implements ISubscriber(Of BeforeAssignment).OnEventHandler
@@ -216,7 +220,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub CboPaymentType_ValueChanged(sender As Object, e As EventArgs) Handles cboPaymentType.SelectionChangeCommitted, cboPaymentType.Validated
             SetPayeeDataSource(PaymentType)
-            txtPayeeName.Text = cboPayeeIdNo.Text
+            txtPayeeName.Text = cboContactIdNo.Text
             ShowPayee()
         End Sub
 
@@ -234,7 +238,7 @@ Namespace PresentationLayer.Views.Forms
             If paymentTypeEnum = PaymentTypeSelection.Others Then
                 payee = txtPayeeName.Text
             Else
-                payee = Strings.Left(cboPayeeIdNo.Text, cboPayeeIdNo.Text.IndexOf("|", StringComparison.Ordinal))
+                payee = Strings.Left(cboContactIdNo.Text, cboContactIdNo.Text.IndexOf("|", StringComparison.Ordinal))
             End If
             ShowReportToScreen("Check Printing.Rpt",
                                {checkAmountInWords, "CheckAmountInWords",
@@ -248,35 +252,35 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ShowPayee()
             Dim paymentTypeEnum = CodeToEnum(Of PaymentTypeSelection)(cboPaymentType.SelectedValue)
             If paymentTypeEnum <> PaymentTypeSelection.Others Then
-                cboPayeeIdNo.Visible = True
+                cboContactIdNo.Visible = True
                 txtPayeeName.Visible = False
                 tlpDisbursement.SetCellPosition(txtPayeeName, New TableLayoutPanelCellPosition(0, 5))
-                tlpDisbursement.SetCellPosition(cboPayeeIdNo, New TableLayoutPanelCellPosition(1, 3))
+                tlpDisbursement.SetCellPosition(cboContactIdNo, New TableLayoutPanelCellPosition(1, 3))
             Else
-                cboPayeeIdNo.Visible = False
+                cboContactIdNo.Visible = False
                 txtPayeeName.Visible = True
-                tlpDisbursement.SetCellPosition(cboPayeeIdNo, New TableLayoutPanelCellPosition(0, 5))
+                tlpDisbursement.SetCellPosition(cboContactIdNo, New TableLayoutPanelCellPosition(0, 5))
                 tlpDisbursement.SetCellPosition(txtPayeeName, New TableLayoutPanelCellPosition(1, 3))
             End If
         End Sub
 
         Private Sub SetPayeeDataSource(ByVal cPaymentType As String)
             Dim cbDataSource = Nothing
-            Dim curValue As Int32? = cboPayeeIdNo.SelectedValue
-            cboPayeeIdNo.DataSource = cbDataSource
+            Dim curValue As Int32? = cboContactIdNo.SelectedValue
+            cboContactIdNo.DataSource = cbDataSource
             Dim paymentTypeEnum = CodeToEnum(Of PaymentTypeSelection)(cPaymentType)
             If paymentTypeEnum = PaymentTypeSelection.Supplier Or paymentTypeEnum = PaymentTypeSelection.AccountsPayable Then
-                Presenter.MakeControlDataSources({New Object() {"Supplier", cboPayeeIdNo, Nothing, Nothing}})
+                Presenter.MakeControlDataSources({New Object() {"Supplier", cboContactIdNo, Nothing, Nothing}})
             ElseIf paymentTypeEnum = PaymentTypeSelection.Employee Then
-                Presenter.MakeControlDataSources({New Object() {"Employee", cboPayeeIdNo, Nothing, Nothing}})
+                Presenter.MakeControlDataSources({New Object() {"Employee", cboContactIdNo, Nothing, Nothing}})
             ElseIf paymentTypeEnum = PaymentTypeSelection.CustomerRefund Then
-                Presenter.MakeControlDataSources({New Object() {"Customer", cboPayeeIdNo, Nothing, Nothing}})
+                Presenter.MakeControlDataSources({New Object() {"Customer", cboContactIdNo, Nothing, Nothing}})
             End If
-            cboPayeeIdNo.DataSource = cbDataSource
+            cboContactIdNo.DataSource = cbDataSource
             If curValue IsNot Nothing Then
-                cboPayeeIdNo.SelectedValue = curValue
+                cboContactIdNo.SelectedValue = curValue
             Else
-                cboPayeeIdNo.SelectedValue = -1
+                cboContactIdNo.SelectedValue = -1
             End If
         End Sub
 
@@ -296,6 +300,8 @@ Namespace PresentationLayer.Views.Forms
             Presenter.CreateEnumDataSource(Of PaymentTypeSelection)("PaymentType")
             'Presenter.MakeEnumComboList(Of PaymentTypeSelection)("PaymentType")
         End Sub
+
+
     End Class
 
 End Namespace

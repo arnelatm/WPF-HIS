@@ -35,7 +35,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Event AutoApplyAmountRequested(bsCsrOiItems As BindingSource) Implements ICashReceiptJournalView.AutoApplyAmountRequested
 
-        Public Event ContactidNoChanged(bs As BindingSource) Implements ICashReceiptJournalView.ContactIdNoChanged
+        Public Event ContactIdNoChanged(bs As BindingSource) Implements ICashReceiptJournalView.ContactIdNoChanged
 
         Public Event CreditAmountChanged(sender As Object, e As DataGridViewCellEventArgs) Implements ICashReceiptJournalView.CreditAmountChanged
 
@@ -46,7 +46,7 @@ Namespace PresentationLayer.Views.Forms
         Public Event JiAccountIdNoChanged(sender As Object, e As DataGridViewCellEventArgs) Implements ICashReceiptJournalView.JiAccountIdNoChanged
         'Public Event FirstLineUpdateNeeded() Implements ICashReceiptJournalView.FirstLineUpdateNeeded
         Public Event OpenInvoiceDataRequested(bs As BindingSource) Implements ICashReceiptJournalView.OpenInvoiceDataRequested
-        Public Event ReceiptAmountChanged(bsJournaltem As BindingSource, bsCsrJournalItem As BindingSource) Implements ICashReceiptJournalView.ReceiptAmountChanged
+        Public Event ReceiptAmountChanged(bsJournalItem As BindingSource, bsCsrJournalItem As BindingSource) Implements ICashReceiptJournalView.ReceiptAmountChanged
         Public Event ReceiptTypeChanged(paymentType As String, bsJournalItem As BindingSource, bsCsrOiItems As BindingSource) Implements ICashReceiptJournalView.ReceiptTypeChanged
         Public Event UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Implements ICashReceiptJournalView.UserDeletedRow
 #Region "Properties"
@@ -239,18 +239,6 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
         Public Property PayorIdNo As Int32? Implements ICashReceiptJournalView.PayorIdNo
-            Get
-                If txtPayorIdNo.Text <> "" Then
-                    Return Convert.ToInt32(txtPayorIdNo.Text)
-                Else
-                    Return 0
-                End If
-            End Get
-            Set
-                txtPayorIdNo.Text = Convert.ToString(Value)
-            End Set
-        End Property
-
         Public Property PayorName As String Implements ICashReceiptJournalView.PayorName
             Get
                 Return txtPayorName.Text
@@ -340,6 +328,19 @@ Namespace PresentationLayer.Views.Forms
                 txtVatNumber.Text = Value
             End Set
         End Property
+
+        Public Property CSEIdNo As Integer? Implements ICashReceiptJournalView.CSEIdNo
+            Get
+                If txtCSEIdNo.Text <> "" Then
+                    Return Convert.ToInt32(txtCSEIdNo.Text)
+                Else
+                    Return 0
+                End If
+            End Get
+            Set
+                txtCSEIdNo.Text = Convert.ToString(Value)
+            End Set
+        End Property
 #End Region 'Properties
 
 #Region "Subs"
@@ -361,7 +362,7 @@ Namespace PresentationLayer.Views.Forms
          {"Cancelled", chkCancelled},
          {"CheckDate", dtpCheckDate},
          {"CheckNumber", txtCheckNumber},
-         {"ContactIdNo", cboContactIdNo},
+         {"CSEIdNo", cboContactIdNo},
          {"DateCreated", txtDateCreated},
          {"DiscountAccountIdNo", cboDiscountAccountIdNo},
          {"DiscountTaken", txtDiscountTaken},
@@ -369,7 +370,6 @@ Namespace PresentationLayer.Views.Forms
          {"Notes", txtNotes},
          {"OrNumber", txtORNumber},
          {"PayorType", cboPayorType},
-         {"PayorIdNo", txtPayorIdNo},
          {"PayorName", txtPayorName},
          {"Posted", chkPosted},
          {"ReferenceNo", txtReferenceNo},

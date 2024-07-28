@@ -11,11 +11,12 @@ Namespace PresentationLayer.Models
         Public Property Amount As Decimal
         Public Property Applied As Decimal
         Public Property Approved As Boolean
-        Public Property CsrOiItems As List(Of CsrOiItemModel)
         Public Property Cancelled As Boolean
         Public Property CheckDate As Date?
         Public Property CheckNumber As String
         Public Property ContactIdNo As Int32?
+        Public Property CSEIdNo As Int32?
+        Public Property CsrOiItems As List(Of CsrOiItemModel)
         Public Property DateCreated As DateTime?
         Public Property DiscountAccountIdNo As Int16?
         Public Property DiscountTaken As Decimal

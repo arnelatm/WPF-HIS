@@ -94,14 +94,10 @@ Namespace PresentationLayer.Presenters
             AddHandler view.UserDeletedRow, AddressOf OnUserDeletedRow
             AddHandler view.FirstLineUpdateNeeded, AddressOf OnFirstLineUpdateNeeded
             AddHandler view.PaymentTypeChanged, AddressOf OnPaymentTypeChanged
-            AddHandler view.PayeeIdNoChanged, AddressOf OnPayeeIdNoChanged
+            AddHandler view.ContactIdNoChanged, AddressOf OnContactIdNoChanged
 
             view.CdAccountCount = CdAccountCount
             view.DefaultAccount = DefaultDisbursementAccount
-            ' needed the next line for the payeeidno to be displayed
-            ' don't know why but without this the EmployeeNames if "E" won't display in the
-            ' cboPayeeIdNo control, leave this until you find a fix.
-            'CreatePayeeDataSource(CodeToEnum(Of PaymentTypeSelection)(PaymentTypeSelection.AccountsPayable))
 
         End Sub
 
@@ -224,7 +220,7 @@ Namespace PresentationLayer.Presenters
                         item.Notes = ""
                     End If
                 Next
-                If View.PayeeIdNo IsNot Nothing AndAlso View.PayeeIdNo <> 0 Then
+                If View.CSEIdNo IsNot Nothing AndAlso View.CSEIdNo <> 0 Then
                     If lViewPaymentTypeEnum = PaymentTypeSelection.AccountsPayable Or
                        lViewPaymentTypeEnum = PaymentTypeSelection.Employee Or
                        lViewPaymentTypeEnum = PaymentTypeSelection.Supplier Or
@@ -283,7 +279,7 @@ Namespace PresentationLayer.Presenters
             End If
             If retVal >= 0 AndAlso (View.PaymentType = EnumToCode(PaymentTypeSelection.AccountsPayable) Or View.PaymentType = EnumToCode(PaymentTypeSelection.Supplier)) _
                            AndAlso Not IsEmpty(View.VatNumber) Then
-                Service.UpdateVatNumber(View.VatNumber, View.PayeeIdNo)
+                Service.UpdateVatNumber(View.VatNumber, View.CSEIdNo)
             End If
         End Sub
 
@@ -411,7 +407,7 @@ Namespace PresentationLayer.Presenters
             Dim reportFileName As String
             reportFileName = "Check Printing" & View.AccountIdNo.ToString() & ".Rpt"
             reportArgs.ReportParameters = {checkAmountInWords, "CheckAmountInWords",
-                                           GetPayeeName(View.PayeeIdNo), "PayeeName",
+                                           GetPayeeName(View.ContactIdNo), "PayeeName",
                                            View.CheckDate, "CheckDate",
                                            Convert.ToDecimal(View.Amount), "CheckAmount",
                                            language, "Language",
@@ -479,17 +475,17 @@ Namespace PresentationLayer.Presenters
             End With
         End Sub
 
-        Private Sub OnBeforeMappingData(ByVal dataModel As Object) Handles MyBase.BeforeMappingData
-            ' need to do this because the Mapping source part of this program maps the PayeeIdNo first before
-            ' the DepositType so in order to override this part we need to retrieve the DepositType first
-            ' because when assigning the cboPayeeIdNo the dataSource must be correct that is why
-            ' we need to set the DataSource part of the cboPayeeIdNo before we can assign the PayeeIdNo
-            Dim data As DisbursementJournalModel
-            data = dataModel
-            View.PaymentType = data.PaymentType
-            CreatePayeeDataSource(CodeToEnum(Of PaymentTypeSelection)(View.PaymentType))
-            View.PayeeIdNo = data.PayeeIdNo
-        End Sub
+        'Private Sub OnBeforeMappingData(ByVal dataModel As Object) Handles MyBase.BeforeMappingData
+        '    ' need to do this because the Mapping source part of this program maps the PayeeIdNo first before
+        '    ' the DepositType so in order to override this part we need to retrieve the DepositType first
+        '    ' because when assigning the cboPayeeIdNo the dataSource must be correct that is why
+        '    ' we need to set the DataSource part of the cboPayeeIdNo before we can assign the PayeeIdNo
+        '    Dim data As DisbursementJournalModel
+        '    data = dataModel
+        '    View.PaymentType = data.PaymentType
+        '    CreatePayeeDataSource(CodeToEnum(Of PaymentTypeSelection)(View.PaymentType))
+        '    View.PayeeIdNo = data.PayeeIdNo
+        'End Sub
 
         Private Sub OnFirstLineUpdateNeeded()
             If EditMode Or AddMode Then
@@ -514,8 +510,8 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub OnAddSupplierOpenInvoices()
-            If View.PayeeIdNo <> 0 Then
-                Dim unpaidInvoices = GetSupplierOpenInvoices(View.PayeeIdNo)
+            If View.CSEIdNo <> 0 Then
+                Dim unpaidInvoices = GetSupplierOpenInvoices(View.CSEIdNo)
                 Dim nSeq As Integer
                 If AddMode Then
                     View.DjOiItems.Clear()
@@ -995,13 +991,13 @@ Namespace PresentationLayer.Presenters
             GlobalVariables.Mapper.Map(dView, dModel)
             nSeq = dView.Count()
             If EditMode Then
-                If View.PayeeIdNo = OriginalModel.PayeeIdNo AndAlso View.PaymentType = OriginalModel.PaymentType Then
+                If View.CSEIdNo = OriginalModel.CSEIdNo AndAlso View.PaymentType = OriginalModel.PaymentType Then
                     ' need to add the original items because if items are already paid in the original data they will not be added if there is already a full or partial payment
                     AddOpenInvoices(True, OriginalModel.DjOiItems, dModel, nSeq)
                     nSeq = dModel.Count()
                 End If
             End If
-            Dim unpaidInvoices = Service.GetOpenInvoices(Of DjOiItemModel)(View.PayeeIdNo)
+            Dim unpaidInvoices = Service.GetOpenInvoices(Of DjOiItemModel)(View.CSEIdNo)
             AddOpenInvoices(False, unpaidInvoices, dModel, nSeq)
             GlobalVariables.Mapper.Map(dModel, dView)
             Return dView
@@ -1043,16 +1039,16 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
-        Public Sub OnPayeeIdNoChanged()
+        Public Sub OnContactIdNoChanged()
+            View.CSEIdNo = GetCSEIdNo(View.ContactIdNo)
+            View.PayeeIdNo = View.CSEIdNo
             If View.OpenInvoiceMode Then
                 UpdateOpenInvoicesDisplay()
             End If
             If CodeToEnum(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.Supplier Or CodeToEnum(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
-                If View.PayeeIdNo IsNot Nothing Then
-                    SetSupplierVatNumber(View.VatNumber, View.PayeeIdNo.ToString(), True)
+                If View.CSEIdNo IsNot Nothing Then
+                    SetSupplierVatNumber(View.VatNumber, View.CSEIdNo.ToString(), True)
                 End If
-            Else
-                'View.VatNumber = ""
             End If
         End Sub
 
@@ -1144,30 +1140,30 @@ Namespace PresentationLayer.Presenters
             Return item
         End Function
 
-
-        Private Function GetPayeeName(ByVal payeeIdNo? As Int32)
+        Private Function GetCSEName(ByVal cseIdNo? As Int32)
             Dim payee As String
             Dim curCulture = CultureInfo.CurrentCulture
             Dim language As String
             language = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
-            Dim paymentTypeEnum = CodeToEnum(Of PaymentTypeSelection)(View.PaymentType)
-            If paymentTypeEnum = PaymentTypeSelection.AccountsPayable OrElse paymentTypeEnum = PaymentTypeSelection.Supplier Then
-                If language = "ar" Then
-                    payee = GetFieldWithIdNo(payeeIdNo, "Supplier", "SupplierNameAra")
+
+            If language = "ar" Then
+                    payee = GetFieldWithIdNo(cseIdNo, "Supplier", "SupplierNameAra")
                 Else
-                    payee = GetFieldWithIdNo(payeeIdNo, "Supplier", "SupplierName")
+                    payee = View.PayeeName
                 End If
-            ElseIf paymentTypeEnum = PaymentTypeSelection.Employee Then
+                Return payee
+        End Function
+
+        Private Function GetPayeeName(ByVal contactIdNo As Int32?) As String
+            Dim payee As String
+            Dim curCulture = CultureInfo.CurrentCulture
+            Dim language As String
+            language = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
+            If contactIdNo IsNot Nothing Then
                 If language = "ar" Then
-                    payee = GetFieldWithIdNo(payeeIdNo, "Employee", "EmployeeNameAra")
+                    payee = GetFieldWithIdNo(contactIdNo, "Contact_View", "ContactNameAra")
                 Else
-                    payee = GetFieldWithIdNo(payeeIdNo, "Employee", "EmployeeName")
-                End If
-            ElseIf paymentTypeEnum = PaymentTypeSelection.CustomerRefund Then
-                If language = "ar" Then
-                    payee = GetFieldWithIdNo(payeeIdNo, "Customer", "CustomerNameAra")
-                Else
-                    payee = GetFieldWithIdNo(payeeIdNo, "Customer", "CustomerName")
+                    payee = GetFieldWithIdNo(contactIdNo, "Contact_View", "ContactName")
                 End If
             Else
                 payee = View.PayeeName
