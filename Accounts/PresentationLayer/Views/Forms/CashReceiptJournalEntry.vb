@@ -142,6 +142,19 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property CSEIdNo As Integer? Implements ICashReceiptJournalView.CSEIdNo
+            Get
+                If txtCSEIdNo.Text <> "" Then
+                    Return Convert.ToInt32(txtCSEIdNo.Text)
+                Else
+                    Return 0
+                End If
+            End Get
+            Set
+                txtCSEIdNo.Text = Convert.ToString(Value)
+            End Set
+        End Property
+
         Public Property CsrOiItems As List(Of CsrOiItemView) Implements ICashReceiptJournalView.CsrOiItems
             Get
                 Return _csrOiItems
@@ -152,7 +165,6 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property CustomersByName Implements ICashReceiptJournalView.CustomersByName
         Public Property DateCreated As DateTime? Implements ICashReceiptJournalView.DateCreated
             Get
                 Return txtDateCreated.Text
@@ -184,7 +196,6 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property EmployeesByName Implements ICashReceiptJournalView.EmployeesByName
         Public Property IdNo As Int32 Implements ICashReceiptJournalView.IdNo
             Get
                 If TxtIdNo.Text <> "" Then
@@ -239,6 +250,7 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
         Public Property PayorIdNo As Int32? Implements ICashReceiptJournalView.PayorIdNo
+
         Public Property PayorName As String Implements ICashReceiptJournalView.PayorName
             Get
                 Return txtPayorName.Text
@@ -276,7 +288,6 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
         Public Property RevCostCentersByCode Implements ICashReceiptJournalView.RevCostCentersByCode
-        Public Property SuppliersByName Implements ICashReceiptJournalView.SuppliersByName
         Public ReadOnly Property TotalCredits As Decimal Implements ICashReceiptJournalView.TotalCredits
             Get
                 Return NumParser(Of Decimal)(txtTotalCredits.Text)
@@ -326,19 +337,6 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 txtVatNumber.Text = Value
-            End Set
-        End Property
-
-        Public Property CSEIdNo As Integer? Implements ICashReceiptJournalView.CSEIdNo
-            Get
-                If txtCSEIdNo.Text <> "" Then
-                    Return Convert.ToInt32(txtCSEIdNo.Text)
-                Else
-                    Return 0
-                End If
-            End Get
-            Set
-                txtCSEIdNo.Text = Convert.ToString(Value)
             End Set
         End Property
 #End Region 'Properties

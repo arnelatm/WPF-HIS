@@ -84,7 +84,7 @@ Namespace PresentationLayer.Presenters
             Return idNo
         End Function
 
-        Public Function GetCSEIdNo(contactIdNo As Integer) As Int32?
+        Public Function GetCSEIdNo(contactIdNo As Int32?) As Int32?
             Return Service.GetField(Of Int32, Int32)(contactIdNo, "Contact", "IdNo", "CSEIdNo")
         End Function
 

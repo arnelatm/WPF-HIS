@@ -166,12 +166,9 @@ Namespace PresentationLayer.Views.Forms
         Public Property PcClosed As Boolean Implements IDisbursementJournalView.PcClosed
 
         Public Property AccountsByCode As Object Implements IDisbursementJournalView.AccountsByCode
-        Public Property EmployeesByName As Object Implements IDisbursementJournalView.EmployeesByName
-        Public Property SuppliersByName As Object Implements IDisbursementJournalView.SuppliersByName
-        Public Property CustomersByName As Object Implements IDisbursementJournalView.CustomersByName
         Public Property RevCostCentersByCode As Object Implements IDisbursementJournalView.RevCostCentersByCode
         Public Property BankTransfer As Boolean Implements IDisbursementJournalView.BankTransfer
-        Public Property PayeeDataSource As Object Implements IDisbursementJournalView.PayeeDataSource
+        Public Property ContactDataSource As Object Implements IDisbursementJournalView.ContactDataSource
         Public Property JournalCode As String Implements IDisbursementJournalView.JournalCode
         Public Property JournalCodeDisplay As String Implements IDisbursementJournalView.JournalCodeDisplay
         Public Property CdAccountCount As Int32 Implements IDisbursementJournalView.CdAccountCount
@@ -192,6 +189,8 @@ Namespace PresentationLayer.Views.Forms
                 End If
             End Set
         End Property
+
+        Public Property ContactsByName As Object Implements IDisbursementJournalView.ContactsByName
 
 #End Region
 

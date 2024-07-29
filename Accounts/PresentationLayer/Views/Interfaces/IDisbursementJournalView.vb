@@ -9,10 +9,9 @@ Namespace PresentationLayer.Views.Interfaces
 
         Event AutoApplyAmount(bsDjOiItem As BindingSource)
 
-        Event FirstLineUpdateNeeded()
-
         Event ContactIdNoChanged()
 
+        Event FirstLineUpdateNeeded()
         Event PaymentTypeChanged(paymentType As String)
 
         Event PrintCheck()
@@ -35,14 +34,13 @@ Namespace PresentationLayer.Views.Interfaces
         Property CheckDate As Date?
         Property CheckNumber As String
         Property ContactIdNo As Int32?
+        Property ContactsByName
         Property CSEIdNo As Int32?
-        Property CustomersByName
         Property DateCreated As DateTime?
         Property DefaultAccount As Int32?
         Property DiscountAccountIdNo As Int16?
         Property DiscountTaken As Decimal
         Property DjOiItems As List(Of DjOiItemView)
-        Property EmployeesByName
         Property IdNo As Int32
         Property JournalCode As String
         Property JournalCodeDisplay As String
@@ -50,7 +48,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property Notes As String
         Property OpenInvoiceMode As Boolean
         Property OrNumber As String
-        Property PayeeDataSource As Object
+        Property ContactDataSource As Object
         Property PayeeIdNo As Int32?
         Property PayeeName As String
         Property PaymentType As String
@@ -59,7 +57,6 @@ Namespace PresentationLayer.Views.Interfaces
         Property Posted As Boolean
         Property ReferenceNo As String
         Property RevCostCentersByCode
-        Property SuppliersByName
         ReadOnly Property TotalCredits As Decimal
         ReadOnly Property TotalDebits As Decimal
         Property TransactionDate As Date?

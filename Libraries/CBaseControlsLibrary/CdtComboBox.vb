@@ -18,6 +18,7 @@ Public Class CdtComboBox
     Private ReadOnly _defaultDropDownHeight As Int16
     Private ReadOnly _defaultDropdownStyle As ComboBoxStyle
     Private ReadOnly _defaultMaxDropDownItems As Int16
+    Private _textUpdatedByKeyBoard As Boolean = False
     Private _suggestBindingSource As BindingSource = New BindingSource
     Private Shared ReadOnly KeysToHandle As Keys() = {Keys.Down, Keys.Up, Keys.Enter, Keys.Escape}
     Private WithEvents _contextMenuStrip1 As New ContextMenuStrip
@@ -384,7 +385,11 @@ Public Class CdtComboBox
                     SuggestListForm.SuggestListBox.DisplayMember = DisplayMember
                     SuggestListForm.SuggestListBox.ValueMember = ValueMember
                 End If
-                _suggestBindingSource.Filter = IIf(Text = Nothing OrElse Text = "", Nothing, String.Format(DisplayMember + " like '*{0}*'", Text))
+
+                'need to do this to escape apostrophe "'"
+                Dim textToFilter As String = Text.ToString().Replace("'", "''")
+                Dim filter As String = IIf(Text = Nothing OrElse Text = "", Nothing, String.Format(DisplayMember + " like '*{0}*'", textToFilter))
+                _suggestBindingSource.Filter = filter
                 Dim showForm As Boolean
                 showForm = IIf(_suggestBindingSource.Count() > 0, True, False)
                 If showForm Then
@@ -862,5 +867,7 @@ Public Class CdtComboBox
         End If
         Return description
     End Function
+
+
 
 End Class

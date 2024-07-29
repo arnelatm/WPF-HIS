@@ -874,6 +874,10 @@ Namespace PresentationLayer.Presenters
         '    bs.DataSource = GetCustomerOpenInvoices(View.CsrOiItems)
         'End Sub
 
+        Private Sub OnAfterMappingData(dataModel As Object) Handles MyBase.AfterMappingData
+            View.OpenInvoiceMode = GetOpenInvoiceMode()
+        End Sub
+
         Private Sub OnAutoApplyAmountRequested(bsCsrOiItems As BindingSource)
             Dim amountToApply = View.Amount
             For Each item As CsrOiItemModel In bsCsrOiItems
@@ -1060,7 +1064,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Private Sub OnReceiptTypeChanged(payorType As String, bsJournalItem As BindingSource, bsCsrOiItems As BindingSource)
-            SetOpenInvoiceMode()
+            View.OpenInvoiceMode = GetOpenInvoiceMode()
             UpdateContactDataSource(payorType)
             If View.OpenInvoiceMode Then
                 If View.ContactIdNo IsNot Nothing AndAlso View.ContactIdNo > 0 Then
@@ -1227,18 +1231,27 @@ Namespace PresentationLayer.Presenters
             UpdateContactDataSource(View.PayorType)
         End Sub
 
-        Private Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
-            SetOpenInvoiceMode()
-        End Sub
+        'Private Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
+        '    View.OpenInvoiceMode = GetOpenInvoiceMode()
+        'End Sub
 
-        Private Sub SetOpenInvoiceMode()
+        'Private Sub SetOpenInvoiceMode()
+        '    Dim receiptTypeEnum = CodeToEnum(Of ReceiptTypeSelection)(View.PayorType)
+        '    If receiptTypeEnum = ReceiptTypeSelection.AccountsReceivable Then
+        '        View.OpenInvoiceMode = True
+        '    Else
+        '        View.OpenInvoiceMode = False
+        '    End If
+        'End Sub
+
+        Private Function GetOpenInvoiceMode() As Boolean
             Dim receiptTypeEnum = CodeToEnum(Of ReceiptTypeSelection)(View.PayorType)
             If receiptTypeEnum = ReceiptTypeSelection.AccountsReceivable Then
-                View.OpenInvoiceMode = True
+                Return True
             Else
-                View.OpenInvoiceMode = False
+                Return False
             End If
-        End Sub
+        End Function
 
 
         'bsJournalItems.AddNew()

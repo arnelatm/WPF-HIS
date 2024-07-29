@@ -102,11 +102,10 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
+            View.ContactDataSource = GetDataLookupTable({"Contact_View", "IdNo,ContactName,ContactCode,CSECode"})
             MakeVarDataSources({New Object() {"Account", "AccountsByCode", Nothing, "DetailAccount=1"},
-            New Object() {"RevCostCenter", "RevCostCentersByCode", Nothing, Nothing},
-            New Object() {"Employee", "EmployeesByName", Nothing, Nothing},
-            New Object() {"Customer", "CustomersByName", Nothing, Nothing},
-            New Object() {"Supplier", "SuppliersByName", Nothing, Nothing}})
+            New Object() {"RevCostCenter", "RevCostCentersByCode", Nothing, Nothing}
+            })
             CreateEnumDataSource(Of PaymentTypeSelection)("PaymentType")
             CreateEnumDataSource(Of PayTypeSelection)("PayType")
             If TableName = "CdJournal" Then
@@ -129,7 +128,7 @@ Namespace PresentationLayer.Presenters
 
 
         Protected Overrides Sub UpdateViewDisplay()
-            View.OpenInvoiceMode = GetOpenInvoiceMode()
+            View.OpenInvoiceMode = GetOpenInvoiceMode(View.PaymentType)
             MyBase.UpdateViewDisplay()
             UpdateJournalCodeDisplay()
         End Sub
@@ -1042,6 +1041,7 @@ Namespace PresentationLayer.Presenters
         Public Sub OnContactIdNoChanged()
             View.CSEIdNo = GetCSEIdNo(View.ContactIdNo)
             View.PayeeIdNo = View.CSEIdNo
+            View.OpenInvoiceMode = GetOpenInvoiceMode(View.PaymentType)
             If View.OpenInvoiceMode Then
                 UpdateOpenInvoicesDisplay()
             End If
@@ -1052,8 +1052,22 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Private Function GetOpenInvoiceMode() As Boolean
-            Dim paymentTypeEnum = CodeToEnum(Of PaymentTypeSelection)(View.PaymentType)
+        Private Sub OnAfterMappingData(dataModel As Object) Handles MyBase.AfterMappingData
+            View.OpenInvoiceMode = GetOpenInvoiceMode(View.PaymentType)
+        End Sub
+
+
+        'Private Sub SetOpenInvoiceMode()
+        '    Dim paymentTypeEnum = CodeToEnum(Of PaymentTypeSelection)(View.PaymentType)
+        '    If paymentTypeEnum = PaymentTypeSelection.AccountsPayable Then
+        '        View.OpenInvoiceMode = True
+        '    Else
+        '        View.OpenInvoiceMode = False
+        '    End If
+        'End Sub
+
+        Private Function GetOpenInvoiceMode(paymentType As String) As Boolean
+            Dim paymentTypeEnum = CodeToEnum(Of PaymentTypeSelection)(paymentType)
             If paymentTypeEnum = PaymentTypeSelection.AccountsPayable Then
                 Return True
             Else
@@ -1076,7 +1090,7 @@ Namespace PresentationLayer.Presenters
             workRow("JournalIdNo") = View.IdNo
             workRow("Notes") = itemDataView.Notes
             workRow("PayIdNo") = itemDataView.PayIdNo
-            workRow("RevCostCenteridNo") = itemDataView.RevCostCenterIdNo
+            workRow("RevCostCenterIdNo") = itemDataView.RevCostCenterIdNo
         End Sub
 
         Public Function JournalItemFilter(ByVal obj As Object) As Boolean
@@ -1172,13 +1186,29 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Private Sub OnPaymentTypeChanged(paymentType As String)
-            Dim cPaymentTypeSelection As PaymentTypeSelection = CodeToEnum(Of PaymentTypeSelection)(paymentType)
-            View.OpenInvoiceMode = GetOpenInvoiceMode()
-            CreatePayeeDataSource(cPaymentTypeSelection)
+            View.OpenInvoiceMode = GetOpenInvoiceMode(paymentType)
+            UpdateContactDataSource(paymentType)
             If View.OpenInvoiceMode Then
                 UpdateOpenInvoicesDisplay()
             End If
         End Sub
+
+        Private Sub UpdateContactDataSource(paymentType As String)
+            Dim x As PaymentTypeSelection = CodeToEnum(Of PaymentTypeSelection)(paymentType)
+            Select Case x
+                Case PaymentTypeSelection.AccountsPayable, PaymentTypeSelection.Supplier
+                    View.ContactDataSource.DefaultView.RowFilter = "CSECode = 'S'"
+                Case PaymentTypeSelection.Employee
+                    Dim y = View.ContactIdNo
+                    View.ContactDataSource.DefaultView.RowFilter = "CSECode = 'E'"
+                    View.ContactIdNo = y
+                Case PaymentTypeSelection.CustomerRefund
+                    View.ContactDataSource.DefaultView.RowFilter = "CSECode = 'C'"
+                Case Else
+                    View.ContactDataSource.DefaultView.RowFilter = Nothing
+            End Select
+        End Sub
+
 
         Private Sub CreatePayeeDataSource(paymentType As PaymentTypeSelection)
             Select Case paymentType
@@ -1250,6 +1280,7 @@ Namespace PresentationLayer.Presenters
             End If
             Return retVal
         End Function
+
 
     End Class
 

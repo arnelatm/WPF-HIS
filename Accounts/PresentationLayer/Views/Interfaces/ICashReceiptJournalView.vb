@@ -43,11 +43,9 @@ Namespace PresentationLayer.Views.Interfaces
         Property ContactIdNo As Int32?
         Property CSEIdNo As Int32?
         Property CsrOiItems As List(Of CsrOiItemView)
-        Property CustomersByName As Object
         Property DateCreated As DateTime?
         Property DiscountAccountIdNo As Int16?
         Property DiscountTaken As Decimal
-        Property EmployeesByName As Object
         Property IdNo As Int32
         Property JournalCode As String
         Property JournalCodeDisplay As String
@@ -61,7 +59,6 @@ Namespace PresentationLayer.Views.Interfaces
         Property Posted As Boolean
         Property ReferenceNo As String
         Property RevCostCentersByCode As Object
-        Property SuppliersByName As Object
         ReadOnly Property TotalCredits As Decimal
         ReadOnly Property TotalDebits As Decimal
         Property TransactionDate As Date?

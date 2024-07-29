@@ -133,6 +133,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtTotalCredits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.txtTotalDebits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.btnPrintPcReplenishment = New AATM.Libraries.CBaseControlsLibrary.CButton()
+            Me.CFlowLayout3 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.tlpDisbursement.SuspendLayout()
             CType(Me.DataGridViewJournalItems, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -140,6 +141,7 @@ Namespace PresentationLayer.Views.Forms
             CType(Me.DataGridViewDjOiItems, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.bsDjOiItems, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout1.SuspendLayout()
+            Me.CFlowLayout3.SuspendLayout()
             Me.SuspendLayout()
             '
             'tlpDisbursement
@@ -272,7 +274,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboContactIdNo.ValueIsMandatory = False
             Me.cboContactIdNo.ValueIsNullable = False
             Me.cboContactIdNo.ValueIsNumeric = False
-            Me.cboContactIdNo.ValueMember = "Code"
+            Me.cboContactIdNo.ValueMember = "IdNo"
             '
             'lblPaymentType
             '
@@ -2081,7 +2083,7 @@ Namespace PresentationLayer.Views.Forms
             Me.btnViewGL.DesignerSelected = False
             Me.btnViewGL.Font = New System.Drawing.Font("Tahoma", 8.0!)
             Me.btnViewGL.ImageIndex = 0
-            Me.btnViewGL.Location = New System.Drawing.Point(3, 3)
+            Me.btnViewGL.Location = New System.Drawing.Point(246, 3)
             Me.btnViewGL.Name = "btnViewGL"
             Me.btnViewGL.OriginalImageName = Nothing
             Me.btnViewGL.SecurityKey = ""
@@ -2095,7 +2097,7 @@ Namespace PresentationLayer.Views.Forms
             Me.btnAutoApply.DesignerSelected = False
             Me.btnAutoApply.Font = New System.Drawing.Font("Tahoma", 8.0!)
             Me.btnAutoApply.ImageIndex = 0
-            Me.btnAutoApply.Location = New System.Drawing.Point(145, 624)
+            Me.btnAutoApply.Location = New System.Drawing.Point(134, 3)
             Me.btnAutoApply.Name = "btnAutoApply"
             Me.btnAutoApply.OriginalImageName = Nothing
             Me.btnAutoApply.SecurityKey = ""
@@ -2108,7 +2110,7 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.btnPrintCheck.DesignerSelected = False
             Me.btnPrintCheck.ImageIndex = 0
-            Me.btnPrintCheck.Location = New System.Drawing.Point(14, 624)
+            Me.btnPrintCheck.Location = New System.Drawing.Point(3, 3)
             Me.btnPrintCheck.Name = "btnPrintCheck"
             Me.btnPrintCheck.OriginalImageName = Nothing
             Me.btnPrintCheck.SecurityKey = ""
@@ -2121,11 +2123,10 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.CFlowLayout1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
             Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
-            Me.CFlowLayout1.Controls.Add(Me.btnViewGL)
             Me.CFlowLayout1.Controls.Add(Me.txtTotalCredits)
             Me.CFlowLayout1.Controls.Add(Me.txtTotalDebits)
             Me.CFlowLayout1.Dock = System.Windows.Forms.DockStyle.Bottom
-            Me.CFlowLayout1.Location = New System.Drawing.Point(0, 685)
+            Me.CFlowLayout1.Location = New System.Drawing.Point(0, 659)
             Me.CFlowLayout1.Name = "CFlowLayout1"
             Me.CFlowLayout1.Size = New System.Drawing.Size(965, 2)
             Me.CFlowLayout1.TabIndex = 6
@@ -2147,7 +2148,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtTotalCredits.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtTotalCredits.ForeColor = System.Drawing.Color.Black
             Me.txtTotalCredits.LinkedLabel = Nothing
-            Me.txtTotalCredits.Location = New System.Drawing.Point(113, 1)
+            Me.txtTotalCredits.Location = New System.Drawing.Point(1, 1)
             Me.txtTotalCredits.Margin = New System.Windows.Forms.Padding(1)
             Me.txtTotalCredits.MaximumValue = Nothing
             Me.txtTotalCredits.MinimumValue = Nothing
@@ -2177,7 +2178,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtTotalDebits.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtTotalDebits.ForeColor = System.Drawing.Color.Black
             Me.txtTotalDebits.LinkedLabel = Nothing
-            Me.txtTotalDebits.Location = New System.Drawing.Point(187, 1)
+            Me.txtTotalDebits.Location = New System.Drawing.Point(75, 1)
             Me.txtTotalDebits.Margin = New System.Windows.Forms.Padding(1)
             Me.txtTotalDebits.MaximumValue = Nothing
             Me.txtTotalDebits.MinimumValue = Nothing
@@ -2194,13 +2195,25 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.btnPrintPcReplenishment.DesignerSelected = False
             Me.btnPrintPcReplenishment.ImageIndex = 0
-            Me.btnPrintPcReplenishment.Location = New System.Drawing.Point(256, 624)
+            Me.btnPrintPcReplenishment.Location = New System.Drawing.Point(358, 3)
             Me.btnPrintPcReplenishment.Name = "btnPrintPcReplenishment"
             Me.btnPrintPcReplenishment.OriginalImageName = Nothing
             Me.btnPrintPcReplenishment.SecurityKey = ""
             Me.btnPrintPcReplenishment.Size = New System.Drawing.Size(326, 25)
             Me.btnPrintPcReplenishment.TabIndex = 292
             Me.btnPrintPcReplenishment.Text = "Print Petty Cash Replenishment Report"
+            '
+            'CFlowLayout3
+            '
+            Me.CFlowLayout3.BackColor = System.Drawing.Color.Transparent
+            Me.CFlowLayout3.Controls.Add(Me.btnPrintCheck)
+            Me.CFlowLayout3.Controls.Add(Me.btnAutoApply)
+            Me.CFlowLayout3.Controls.Add(Me.btnViewGL)
+            Me.CFlowLayout3.Controls.Add(Me.btnPrintPcReplenishment)
+            Me.CFlowLayout3.Location = New System.Drawing.Point(1, 624)
+            Me.CFlowLayout3.Name = "CFlowLayout3"
+            Me.CFlowLayout3.Size = New System.Drawing.Size(952, 33)
+            Me.CFlowLayout3.TabIndex = 294
             '
             'DisbursementJournalEntry
             '
@@ -2209,21 +2222,17 @@ Namespace PresentationLayer.Views.Forms
             Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
             Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
             Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile
-            Me.ClientSize = New System.Drawing.Size(965, 687)
+            Me.ClientSize = New System.Drawing.Size(965, 661)
+            Me.Controls.Add(Me.CFlowLayout3)
             Me.Controls.Add(Me.CFlowLayout1)
-            Me.Controls.Add(Me.btnPrintPcReplenishment)
-            Me.Controls.Add(Me.btnAutoApply)
             Me.Controls.Add(Me.tlpDisbursement)
-            Me.Controls.Add(Me.btnPrintCheck)
             Me.DefaultFormBackColor = System.Drawing.Color.Transparent
             Me.MinimumSize = New System.Drawing.Size(752, 683)
             Me.Name = "DisbursementJournalEntry"
             Me.Text = "Petty Cash Journal "
-            Me.Controls.SetChildIndex(Me.btnPrintCheck, 0)
             Me.Controls.SetChildIndex(Me.tlpDisbursement, 0)
-            Me.Controls.SetChildIndex(Me.btnAutoApply, 0)
-            Me.Controls.SetChildIndex(Me.btnPrintPcReplenishment, 0)
             Me.Controls.SetChildIndex(Me.CFlowLayout1, 0)
+            Me.Controls.SetChildIndex(Me.CFlowLayout3, 0)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             Me.tlpDisbursement.ResumeLayout(False)
             Me.tlpDisbursement.PerformLayout()
@@ -2233,6 +2242,7 @@ Namespace PresentationLayer.Views.Forms
             CType(Me.bsDjOiItems, System.ComponentModel.ISupportInitialize).EndInit()
             Me.CFlowLayout1.ResumeLayout(False)
             Me.CFlowLayout1.PerformLayout()
+            Me.CFlowLayout3.ResumeLayout(False)
             Me.ResumeLayout(False)
             Me.PerformLayout()
 
@@ -2335,5 +2345,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents dgvSpecialAccount As CDgvTextColumn
         Friend WithEvents AccountNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents CancelledDataGridViewCheckBoxColumn As DataGridViewCheckBoxColumn
+        Friend WithEvents CFlowLayout3 As CFlowLayout
     End Class
 End Namespace

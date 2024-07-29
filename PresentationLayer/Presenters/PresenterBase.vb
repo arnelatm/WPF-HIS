@@ -67,6 +67,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     Public Event AfterSave()
 
     Public Event AfterUpdateView()
+    Public Event AfterMappingData(dataModel As TM)
 
     Public Event BeforeCompare()
 
@@ -1016,6 +1017,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         For Each child In ChildPresenters
             child.UpdateViewDisplay(idNo)
         Next
+        RaiseEvent AfterMappingData(modelData)
         'End If
         ClearAllErrorMessages()
     End Sub

@@ -43,6 +43,7 @@ Namespace DataLayer.AdoNet
                     "Cancelled," &
                     "CheckDate," &
                     "CheckNumber," &
+                    "ContactIdNo," &
                     "CSEIdNo," &
                     "DateCreated," &
                     "PayType," &
@@ -72,6 +73,7 @@ Namespace DataLayer.AdoNet
                     "Approved," &
                     "Cancelled," &
                     "CdJournalIdNo," &
+                    "ContactIdNo," &
                     "CSEIdNo," &
                     "DateCreated," &
                     "DiscountAccountIdNo," &
@@ -115,6 +117,7 @@ Namespace DataLayer.AdoNet
                     "Cancelled     = @Cancelled," &
                     "CheckDate     = @CheckDate," &
                     "CheckNumber   = @CheckNumber," &
+                    "ContactIdNo   = @ContactIdNo," &
                     "CSEIdNo       = @CSEIdNo," &
                     "PayType       = @PayType," &
                     "DiscountAccountIdNo = @DiscountAccountIdNo," &
@@ -141,6 +144,7 @@ Namespace DataLayer.AdoNet
                     "Approved      = @Approved," &
                     "Cancelled     = @Cancelled," &
                     "CdJournalIdNo = @CdJournalIdNo," &
+                    "ContactIdNo   = @ContactIdNo," &
                     "CSEIdNo       = @CSEIdNo," &
                     "DiscountAccountIdNo = @DiscountAccountIdNo," &
                     "DiscountTaken = @DiscountTaken," &
@@ -172,6 +176,7 @@ Namespace DataLayer.AdoNet
                         "Cancelled," &
                         "CheckDate," &
                         "CheckNumber," &
+                        "ContactIdNo," &
                         "CSEIdNo," &
                         "PayType," &
                         "DiscountAccountIdNo," &
@@ -221,6 +226,7 @@ Namespace DataLayer.AdoNet
                         "Applied," &
                         "Approved," &
                         "Cancelled," &
+                        "ContactIdNo," &
                         "CSEIdNo," &
                         "DiscountAccountIdNo," &
                         "DiscountTaken," &
@@ -271,6 +277,7 @@ Namespace DataLayer.AdoNet
             .Approved = Extensions.AsBool(reader("Approved")),
             .Cancelled = Extensions.AsBool(reader("Cancelled")),
             .CdJournalIdNo = Extensions.AsInt(Of Int32)(reader("CdJournalIdNO")),
+            .ContactIdNo = Extensions.AsInt(Of Int32)(reader("ContactIdNo")),
             .CSEIdNo = Extensions.AsNullable(Of Int32?)(reader("CSEIdNo")),
             .DateCreated = Extensions.AsNullableDateTime(reader("DateCreated")),
             .DiscountAccountIdNo = Extensions.AsNullable(Of Int16?)(reader("DiscountAccountIdNo")),
@@ -300,6 +307,7 @@ Namespace DataLayer.AdoNet
             .Cancelled = Extensions.AsBool(reader("Cancelled")),
             .CheckDate = Extensions.AsNullable(Of Date?)(reader("CheckDate")),
             .CheckNumber = Extensions.AsString(reader("CheckNumber")),
+            .ContactIdNo = Extensions.AsInt(Of Int32)(reader("ContactIdNo")),
             .CSEIdNo = Extensions.AsNullable(Of Int32?)(reader("PayeeIdNo")),
             .DateCreated = Extensions.AsNullableDateTime(reader("DateCreated")),
             .PayType = Extensions.AsString(reader("PayType")),
@@ -328,6 +336,7 @@ Namespace DataLayer.AdoNet
                                     "@Approved", disbursementJournal.Approved,
                                     "@Cancelled", disbursementJournal.Cancelled,
                                     "@CdJournalIdNo", disbursementJournal.CdJournalIdNo,
+                                    "@ContactIdNo", disbursementJournal.ContactIdNo,
                                     "@CSEIdNo", disbursementJournal.CSEIdNo,
                                     "@DateCreated", disbursementJournal.DateCreated,
                                     "@DiscountAccountIdNo", disbursementJournal.DiscountAccountIdNo,
@@ -357,6 +366,7 @@ Namespace DataLayer.AdoNet
                                     "@Cancelled", disbursementJournal.Cancelled,
                                     "@CheckDate", disbursementJournal.CheckDate,
                                     "@CheckNumber", disbursementJournal.CheckNumber,
+                                    "@ContactIdNo", disbursementJournal.ContactIdNo,
                                     "@CSEIdNo", disbursementJournal.CSEIdNo,
                                     "@DateCreated", disbursementJournal.DateCreated,
                                     "@PayType", disbursementJournal.PayType,
