@@ -22,6 +22,7 @@ FROM [DBO].CkJournalItem A WHERE A.JOURNALIDNO = @GroupIdNo and NOT EXISTS (SELE
 -- Update existing CkJournalItems
 UPDATE a 
 SET a.AccountIdNo = B.AccountIdNo,
+    a.ContactIdNo = B.ContactIdNo,
 	a.Credit = B.Credit,
 	a.Debit = B.Debit,
 	a.JournalIdNo = @GroupIdNo,

@@ -12,7 +12,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property DataImageIdNo As Int32
         Property DocumentIdNo As Int16
         Property DocumentNumber As String
-        Property ContactIdNo As Int32
+        Property ContactIdNo As Int32?
         Property ExpiryDate As Date?
         Property IdNo As Int32
         Property IssueDate As Date?

@@ -8,6 +8,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property AccountIdNo As Int16?
         Property AccountName As String
         Property Cancelled As Boolean
+        Property ContactIdNo As Int32?
         Property Credit As Decimal
         Property Debit As Decimal
         Property DiscountTaken As Decimal
@@ -18,7 +19,6 @@ Namespace PresentationLayer.Views.Interfaces
         Property OriginalAmount As Decimal
         Property PaidAmount As Decimal
         Property PayeeType As String
-        Property PayIdNo as Int32
         Property RevCostCenterIdNo As Int16
         Property Sequence As Int16
         Property SpecialAccount As String

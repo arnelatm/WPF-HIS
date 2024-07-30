@@ -24,11 +24,11 @@ FROM [DBO].SalesJournalItem A WHERE A.JOURNALIDNO = @GroupIdNo and NOT EXISTS (S
 -- Update existing SalesJournalItems
 UPDATE A
 SET a.AccountIdNo = B.AccountIdNo,
+    a.ContactIdNo = B.ContactIdNo,
 	a.Credit = B.Credit,
 	a.Debit = B.Debit,
 	a.JournalIdNo = @GroupIdNo,
 	a.Notes = B.Notes,
-	a.PayIdNo = b.PayIdNo,
 	a.RevCostCenterIdNo = B.RevCostCenterIdNo,
 	a.[Sequence] = B.[Sequence]
 from [dbo].SalesJournalItem A INNER JOIN @MParam As B

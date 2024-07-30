@@ -258,7 +258,7 @@ Namespace PresentationLayer.Presenters
                 workRow("AccountIdNo") = ji.AccountIdNo
                 workRow("Debit") = ji.Debit
                 workRow("Credit") = ji.Credit
-                workRow("PayIdNo") = ji.PayIdNo
+                workRow("PayIdNo") = ji.ContactIdNo
                 workRow("RevCostCenterIdNo") = ji.RevCostCenterIdNo
                 workRow("Notes") = If(ji.Notes, "")
                 If ji.IdNo <= 0 Then

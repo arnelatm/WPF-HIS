@@ -5,11 +5,12 @@
     [Amount]              MONEY          NULL,
     [AccountIdNo]         SMALLINT       NOT NULL,
     [PayorType]           CHAR (1)       NULL,
+    [ContactIdNo]         INT            NULL,
     [PayorIdNo]           INT            NULL,
+    [CSEIdNo]             INT            NULL,
     [Payorname]           NVARCHAR (50)  NULL,
     [CheckNumber]         VARCHAR (10)   NULL,
     [CheckDate]           DATE           NULL,
-    [CSEIdNo]             INT            NULL,
     [ORNumber]            VARCHAR (15)   NULL,
     [DiscountTaken]       MONEY          NULL,
     [DiscountAccountIdNo] SMALLINT       NULL,
@@ -25,6 +26,8 @@
     [DateTimeStamp]       ROWVERSION     NULL,
     CONSTRAINT [PK_CashReceiptJournal] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 

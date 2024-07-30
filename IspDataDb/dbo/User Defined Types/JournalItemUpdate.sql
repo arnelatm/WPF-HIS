@@ -1,5 +1,6 @@
 ﻿CREATE TYPE [dbo].[JournalItemUpdate] AS TABLE (
     [AccountIdNo]       INT            NOT NULL,
+    [ContactIdNo]       INT            NULL,
     [Credit]            MONEY          NOT NULL,
     [Debit]             MONEY          NOT NULL,
     [IDNo]              INT            NOT NULL,

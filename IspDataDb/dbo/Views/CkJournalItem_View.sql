@@ -1,8 +1,8 @@
 ﻿CREATE VIEW dbo.CkJournalItem_View
 AS
-SELECT        dbo.CkJournalItem.AccountIdNo, dbo.CkJournalItem.Credit, dbo.CkJournalItem.Debit, dbo.CkJournalItem.IdNo, dbo.CkJournalItem.JournalIdNo, dbo.CkJournalItem.Notes, dbo.CkJournalItem.RevCostCenterIdNo, 
+SELECT        dbo.CkJournalItem.AccountIdNo, dbo.CkJournalItem.Credit, dbo.CkJournalItem.Debit, dbo.CkJournalItem.IdNo, dbo.CkJournalItem.JournalIdNo, dbo.CkJournalItem.Notes, dbo.CkJournalItem.RevCostCenterIdNo, dbo.CkJournalItem.ContactIdNo,
                          dbo.CkJournalItem.Sequence, dbo.Account.AccountName, dbo.CkJournalItem.Debit - dbo.CkJournalItem.Credit AS OriginalAmount, dbo.Account.PayeeType, dbo.Account.SpecialAccount, 0 AS OpenInvoiceIdNo, 0 AS PaidAmount, 
-                         dbo.ApOpenInvoice.PaidAmount AS Expr1, dbo.ApOpenInvoice.DiscountTaken, dbo.CkJournalItem.PayIdNo
+                         dbo.ApOpenInvoice.PaidAmount AS Expr1, dbo.ApOpenInvoice.DiscountTaken
 FROM            dbo.CkJournal LEFT OUTER JOIN
                          dbo.CkJournalItem ON dbo.CkJournal.IdNo = dbo.CkJournalItem.JournalIdNo LEFT OUTER JOIN
                          dbo.Account ON dbo.CkJournalItem.AccountIdNo = dbo.Account.IdNo LEFT OUTER JOIN

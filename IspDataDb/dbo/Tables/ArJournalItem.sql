@@ -6,7 +6,7 @@
     [Debit]             MONEY          CONSTRAINT [DF_ArJournalItem_Debit] DEFAULT ((0)) NOT NULL,
     [Credit]            MONEY          CONSTRAINT [DF_ArJournalItem_Credit] DEFAULT ((0)) NOT NULL,
     [RevCostCenterIdNo] INT            CONSTRAINT [DF_ArJournalItem_ProfitCenterIdNo] DEFAULT ((0)) NULL,
-    [PayIdNo]           INT            NULL,
+    [ContactIdNo]       INT             NULL,
     [Notes]             NVARCHAR (300) NULL,
     [Posted]            BIT            CONSTRAINT [DF_ArJournalItem_Posted] DEFAULT ((0)) NOT NULL,
     [DateTimeStamp]     ROWVERSION     NOT NULL,

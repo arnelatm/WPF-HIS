@@ -136,11 +136,11 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property ContactIdNo As Integer Implements IDocumentDetailView.ContactIdNo
+        Public Property ContactIdNo As Integer? Implements IDocumentDetailView.ContactIdNo
             Get
                 Return cboContactIdNo.GetValue(Of Integer)
             End Get
-            Set(value As Integer)
+            Set(value As Integer?)
                 cboContactIdNo.SetValue(value)
             End Set
         End Property

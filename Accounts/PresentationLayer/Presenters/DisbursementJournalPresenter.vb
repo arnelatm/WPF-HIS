@@ -51,22 +51,22 @@ Namespace PresentationLayer.Presenters
             _advancesToSupplierAccountIdNo = GetAdvancesToSupplierAccountIdNo()
 
             CreateDataTable(DtInsertTable, {{"AccountIdNo", GetType(Int16)},
+                                            {"ContactIdNo", GetType(Int32)},
                                             {"Credit", GetType(Decimal)},
                                             {"Debit", GetType(Decimal)},
                                             {"JournalIdNo", GetType(Int32)},
                                             {"Notes", GetType(String)},
-                                            {"PayIdNo", GetType(Int32)},
                                             {"RevCostCenterIdNo", GetType(Int16)},
                                             {"Sequence", GetType(Int16)}
                                             })
 
             CreateDataTable(DtUpdateTable, {{"AccountIdNo", GetType(Int16)},
+                                            {"ContactIdNo", GetType(Int32)},
                                             {"Credit", GetType(Decimal)},
                                             {"Debit", GetType(Decimal)},
                                             {"IdNo", GetType(Int32)},
                                             {"JournalIdNo", GetType(Int32)},
                                             {"Notes", GetType(String)},
-                                            {"PayIdNo", GetType(Int32)},
                                             {"RevCostCenterIdNo", GetType(Int16)},
                                             {"Sequence", GetType(Int16)}
                                             })
@@ -219,7 +219,7 @@ Namespace PresentationLayer.Presenters
                         item.Notes = ""
                     End If
                 Next
-                If View.CSEIdNo IsNot Nothing AndAlso View.CSEIdNo <> 0 Then
+                If View.ContactIdNo IsNot Nothing AndAlso View.ContactIdNo <> 0 Then
                     If lViewPaymentTypeEnum = PaymentTypeSelection.AccountsPayable Or
                        lViewPaymentTypeEnum = PaymentTypeSelection.Employee Or
                        lViewPaymentTypeEnum = PaymentTypeSelection.Supplier Or
@@ -278,7 +278,8 @@ Namespace PresentationLayer.Presenters
             End If
             If retVal >= 0 AndAlso (View.PaymentType = EnumToCode(PaymentTypeSelection.AccountsPayable) Or View.PaymentType = EnumToCode(PaymentTypeSelection.Supplier)) _
                            AndAlso Not IsEmpty(View.VatNumber) Then
-                Service.UpdateVatNumber(View.VatNumber, View.CSEIdNo)
+                Dim cseIdNo As Int32? = GetCSEIdNo(View.ContactIdNo)
+                Service.UpdateVatNumber(View.VatNumber, cseIdNo)
             End If
         End Sub
 
@@ -464,7 +465,7 @@ Namespace PresentationLayer.Presenters
                         Case $"DiscountTaken"
                             eventType.BindingSource.Current.Balance = eventType.BindingSource.Current.PreviousBalance - eventType.BindingSource.Current.Amount - eventType.BindingSource.Current.DiscountTaken
                             CallByName(View, "UpdateOiTotals", CallType.Method)
-                        Case $"PayIdNo"
+                        Case $"ContactIdNo"
                             eventType.BindingSource.Current.SpecialAccount
 
                         Case $"Balance"
@@ -501,6 +502,7 @@ Namespace PresentationLayer.Presenters
                         item.Credit = View.Amount
                         item.Debit = 0
                         item.RevCostCenterIdNo = 0
+                        item.ContactIdNo = View.ContactIdNo
                         MakePayTypeAndSpecialAccount(item, View.AccountIdNo)
                         Exit For
                     Next
@@ -509,8 +511,9 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub OnAddSupplierOpenInvoices()
-            If View.CSEIdNo <> 0 Then
-                Dim unpaidInvoices = GetSupplierOpenInvoices(View.CSEIdNo)
+            Dim cseIdNo As Int32? = GetCSEIdNo(View.ContactIdNo)
+            If cseIdNo <> 0 Then
+                Dim unpaidInvoices = GetSupplierOpenInvoices(cseIdNo)
                 Dim nSeq As Integer
                 If AddMode Then
                     View.DjOiItems.Clear()
@@ -990,13 +993,14 @@ Namespace PresentationLayer.Presenters
             GlobalVariables.Mapper.Map(dView, dModel)
             nSeq = dView.Count()
             If EditMode Then
-                If View.CSEIdNo = OriginalModel.CSEIdNo AndAlso View.PaymentType = OriginalModel.PaymentType Then
+                If View.ContactIdNo = OriginalModel.ContactIdNo AndAlso View.PaymentType = OriginalModel.PaymentType Then
                     ' need to add the original items because if items are already paid in the original data they will not be added if there is already a full or partial payment
                     AddOpenInvoices(True, OriginalModel.DjOiItems, dModel, nSeq)
                     nSeq = dModel.Count()
                 End If
             End If
-            Dim unpaidInvoices = Service.GetOpenInvoices(Of DjOiItemModel)(View.CSEIdNo)
+            Dim cseIdNo As Int32? = GetCSEIdNo(View.ContactIdNo)
+            Dim unpaidInvoices = Service.GetOpenInvoices(Of DjOiItemModel)(cseIdNo)
             AddOpenInvoices(False, unpaidInvoices, dModel, nSeq)
             GlobalVariables.Mapper.Map(dModel, dView)
             Return dView
@@ -1039,15 +1043,14 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub OnContactIdNoChanged()
-            View.CSEIdNo = GetCSEIdNo(View.ContactIdNo)
-            View.PayeeIdNo = View.CSEIdNo
+            Dim cseIdNo As Int32? = GetCSEIdNo(View.ContactIdNo)
             View.OpenInvoiceMode = GetOpenInvoiceMode(View.PaymentType)
             If View.OpenInvoiceMode Then
                 UpdateOpenInvoicesDisplay()
             End If
             If CodeToEnum(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.Supplier Or CodeToEnum(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
-                If View.CSEIdNo IsNot Nothing Then
-                    SetSupplierVatNumber(View.VatNumber, View.CSEIdNo.ToString(), True)
+                If cseIdNo IsNot Nothing Then
+                    SetSupplierVatNumber(View.VatNumber, cseIdNo.ToString(), True)
                 End If
             End If
         End Sub
@@ -1089,7 +1092,7 @@ Namespace PresentationLayer.Presenters
             workRow("Debit") = itemDataView.Debit
             workRow("JournalIdNo") = View.IdNo
             workRow("Notes") = itemDataView.Notes
-            workRow("PayIdNo") = itemDataView.PayIdNo
+            workRow("ContactIdNo") = IIf(itemDataView.ContactIdNo Is Nothing, DBNull.Value, itemDataView.ContactIdNo)
             workRow("RevCostCenterIdNo") = itemDataView.RevCostCenterIdNo
         End Sub
 
@@ -1154,19 +1157,19 @@ Namespace PresentationLayer.Presenters
             Return item
         End Function
 
-        Private Function GetCSEName(ByVal cseIdNo? As Int32)
-            Dim payee As String
-            Dim curCulture = CultureInfo.CurrentCulture
-            Dim language As String
-            language = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
+        'Private Function GetCSEName(ByVal cseIdNo? As Int32)
+        '    Dim payee As String
+        '    Dim curCulture = CultureInfo.CurrentCulture
+        '    Dim language As String
+        '    language = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
 
-            If language = "ar" Then
-                    payee = GetFieldWithIdNo(cseIdNo, "Supplier", "SupplierNameAra")
-                Else
-                    payee = View.PayeeName
-                End If
-                Return payee
-        End Function
+        '    If language = "ar" Then
+        '            payee = GetFieldWithIdNo(cseIdNo, "Supplier", "SupplierNameAra")
+        '        Else
+        '            payee = View.PayeeName
+        '        End If
+        '        Return payee
+        'End Function
 
         Private Function GetPayeeName(ByVal contactIdNo As Int32?) As String
             Dim payee As String

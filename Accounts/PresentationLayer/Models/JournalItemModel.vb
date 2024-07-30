@@ -9,6 +9,7 @@ Namespace PresentationLayer.Models
         Public Property AccountIdNo As Int16?
         Public Property AccountName As String
         Public Property Cancelled As Boolean
+        Public Property ContactIdNo As Int32
         Public Property Credit As Decimal
         Public Property DiscountTaken As Decimal
         Public Property Debit As Decimal
@@ -19,7 +20,6 @@ Namespace PresentationLayer.Models
         Public Property OriginalAmount As Decimal
         Public Property PaidAmount As Decimal
         Public Property PayeeType As String
-        Public Property PayIdNo as Int32
         Public Property RevCostCenterIdNo As Int16
         Public Property Sequence As Int16
         Public Property SpecialAccount As String

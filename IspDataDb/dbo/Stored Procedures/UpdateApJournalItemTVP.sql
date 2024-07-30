@@ -19,6 +19,7 @@ FROM [DBO].ApJournalItem A WHERE A.JOURNALIDNO = @GroupIdNo and NOT EXISTS (SELE
 -- Update existing ApJournalItems
 UPDATE a 
 SET a.AccountIdNo = B.AccountIdNo,
+    a.ContactIdNo = B.ContactIdNo,
 	a.Credit = B.Credit,
 	a.Debit = B.Debit,
 	a.JournalIdNo = @GroupIdNo,

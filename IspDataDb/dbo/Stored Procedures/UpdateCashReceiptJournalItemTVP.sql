@@ -18,6 +18,7 @@ FROM [DBO].CashReceiptJournalItem A WHERE A.JOURNALIDNO = @GroupIdNo and NOT EXI
 -- Update existing CashReceiptJournalItems
 UPDATE a 
 SET a.AccountIdNo = B.AccountIdNo,
+    a.ContactIdNo = B.ContactIdNo,
 	a.Credit = B.Credit,
 	a.Debit = B.Debit,
 	a.JournalIdNo = @GroupIdNo,

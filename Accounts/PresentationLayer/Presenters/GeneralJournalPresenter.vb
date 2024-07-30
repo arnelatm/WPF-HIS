@@ -32,6 +32,7 @@ Namespace PresentationLayer.Presenters
             SortOrderKey = "IdNo"
 
             DtInsertTable.Columns.Add("AccountIdNo", GetType(Int16))
+            DtInsertTable.Columns.Add("ContactIdNo", GetType(Int32?))
             DtInsertTable.Columns.Add("Credit", GetType(Decimal))
             DtInsertTable.Columns.Add("Debit", GetType(Decimal))
             DtInsertTable.Columns.Add("JournalIdNo", GetType(Int32))
@@ -41,6 +42,7 @@ Namespace PresentationLayer.Presenters
             DtInsertTable.Columns.Add("Sequence", GetType(Int16))
 
             DtUpdateTable.Columns.Add("AccountIdNo", GetType(Int16))
+            DtUpdateTable.Columns.Add("ContactIdNo", GetType(Int32?))
             DtUpdateTable.Columns.Add("Credit", GetType(Decimal))
             DtUpdateTable.Columns.Add("Debit", GetType(Decimal))
             DtUpdateTable.Columns.Add("IdNo", GetType(Int32))
@@ -113,7 +115,7 @@ Namespace PresentationLayer.Presenters
             workRow("AccountIdNo") = itemDataView.AccountIdNo
             workRow("Debit") = itemDataView.Debit
             workRow("Credit") = itemDataView.Credit
-            workRow("PayIdNo") = itemDataView.PayIdNo
+            workRow("ContactIdNo") = itemDataView.ContactIdNo
             workRow("RevCostCenterIdNo") = itemDataView.RevCostCenterIdNo
             workRow("Notes") = If(itemDataView.Notes, "")
         End Sub
@@ -160,7 +162,7 @@ Namespace PresentationLayer.Presenters
                             MessageBox.Show(String.Format("Error in line {0:N0}. Cannot save entries with blank account id.", item.Sequence.ToString()))
                             retValue = False
                             Exit For
-                        ElseIf item.SpecialAccount IsNot Nothing AndAlso item.PayIdNo = 0 Then
+                        ElseIf item.SpecialAccount IsNot Nothing AndAlso item.ContactIdNo = 0 Then
                             Dim lineNumber As String = item.Sequence.ToString()
                             Dim messageString As String = ""
                             If item.SpecialAccount = EnumToCode(SpecialAccountSelection.AccountsPayable) Then

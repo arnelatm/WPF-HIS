@@ -6,8 +6,8 @@ Namespace PresentationLayer.Views
     Public Class JournalItemView
         Implements IJournalItemView
 
-        Private _debit As Decimal
         Private _credit As Decimal
+        Private _debit As Decimal
         Private _lastRow As Integer
         Private _sequence As Integer
 
@@ -21,6 +21,8 @@ Namespace PresentationLayer.Views
         Public Property AccountName As String Implements IJournalItemView.AccountName
 
         Public Property Cancelled As Boolean Implements IJournalItemView.Cancelled
+
+        Public Property ContactIdNo As Int32? Implements IJournalItemView.ContactIdNo
 
         Public Property Credit As Decimal Implements IJournalItemView.Credit
             Get
@@ -40,6 +42,8 @@ Namespace PresentationLayer.Views
                 End If
             End Set
         End Property
+
+        Public Property DataFilter As String Implements IView.DataFilter
 
         Public Property Debit As Decimal Implements IJournalItemView.Debit
             Get
@@ -62,6 +66,7 @@ Namespace PresentationLayer.Views
 
         Public Property DiscountTaken As Decimal Implements IJournalItemView.DiscountTaken
 
+        Public Property Errors As List(Of String) Implements IView.Errors
         Public Property IdNo As Int32 Implements IJournalItemView.IdNo
 
         Public Property JournalIdNo As Int32 Implements IJournalItemView.JournalIdNo
@@ -71,10 +76,7 @@ Namespace PresentationLayer.Views
 
         Public Property OriginalAmount As Decimal Implements IJournalItemView.OriginalAmount
         Public Property PaidAmount As Decimal Implements IJournalItemView.PaidAmount
-
         Public Property PayeeType As String Implements IJournalItemView.PayeeType
-        Public Property PayIdNo As Int32 Implements IJournalItemView.PayIdNo
-
         Public Property RevCostCenterIdNo As Int16 Implements IJournalItemView.RevCostCenterIdNo
 
         Public Property Sequence As Int16 Implements IJournalItemView.Sequence
@@ -90,10 +92,6 @@ Namespace PresentationLayer.Views
         End Property
 
         Public Property SpecialAccount As String Implements IJournalItemView.SpecialAccount
-        Public Property DataFilter As String Implements IView.DataFilter
-        Public Property Errors As List(Of String) Implements IView.Errors
-
-
     End Class
 
 End Namespace

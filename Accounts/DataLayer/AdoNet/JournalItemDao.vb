@@ -44,6 +44,7 @@ Namespace DataLayer.AdoNet
                     "SELECT " &
                     "AccountIdNo," &
                     "AccountName," &
+                    "ContactIdNo," &
                     "Credit," &
                     "Debit," &
                     "DiscountTaken," &
@@ -54,7 +55,6 @@ Namespace DataLayer.AdoNet
                     "OriginalAmount," &
                     "PaidAmount," &
                     "PayeeType," &
-                    "PayIdNo," &
                     "RevCostCenterIdNo," &
                     "Sequence," &
                     "SpecialAccount" &
@@ -80,6 +80,7 @@ Namespace DataLayer.AdoNet
             New JournalItem() With {
             .AccountIdNo = Extensions.AsInt(Of Int16)(reader("AccountIdNo")),
             .AccountName = Extensions.AsString(reader("AccountName")),
+            .ContactIdNo = Extensions.AsInt(Of Int32)(reader("AccountIdNo")),
             .Credit = Extensions.AsDecimal(reader("Credit")),
             .DiscountTaken = Extensions.AsDecimal(reader("DiscountTaken")),
             .Debit = Extensions.AsDecimal(reader("Debit")),
@@ -90,7 +91,6 @@ Namespace DataLayer.AdoNet
             .OpenInvoiceIdNo = Extensions.AsDecimal(reader("OpenInvoiceIdNo")),
             .PaidAmount = Extensions.AsDecimal(reader("PaidAmount")),
             .PayeeType = Extensions.AsString(reader("PayeeType")),
-            .PayIdNo = Extensions.AsInt(Of Int32)(reader("PayIdNo")),
             .RevCostCenterIdNo = Extensions.AsInt(Of Integer)(reader("RevCostCenterIdNo")),
             .Sequence = Extensions.AsInt(Of Int16)(reader("sequence")),
             .SpecialAccount = Extensions.AsString(reader("SpecialAccount"))
