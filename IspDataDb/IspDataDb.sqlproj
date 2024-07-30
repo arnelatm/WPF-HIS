@@ -683,6 +683,7 @@
     <Build Include="dbo\Views\PayrollReportPosting_View.sql" />
     <Build Include="dbo\Views\PayrollPostingPerPayGroup_View.sql" />
     <Build Include="dbo\Views\PayrollPostingPerEmployee_View.sql" />
+    <Build Include="dbo\Views\GlLedgersContact_View.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />
