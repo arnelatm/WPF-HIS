@@ -89,6 +89,7 @@
             Me.TxtIdNo.MinimumValue = Nothing
             Me.TxtIdNo.Name = "TxtIdNo"
             Me.TxtIdNo.OldValue = Nothing
+            Me.TxtIdNo.OverrideMaxLength = 0
             Me.TxtIdNo.ReadOnly = True
             Me.TxtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.TxtIdNo.Size = New System.Drawing.Size(88, 23)
@@ -98,6 +99,7 @@
             'lblIdNo
             '
             Me.lblIdNo.AutoSize = True
+            Me.lblIdNo.BackColor = System.Drawing.Color.Transparent
             Me.lblIdNo.DisplayOnly = True
             Me.lblIdNo.EditingMode = False
             Me.lblIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -113,6 +115,7 @@
             'lblCode
             '
             Me.lblCode.AutoSize = True
+            Me.lblCode.BackColor = System.Drawing.Color.Transparent
             Me.lblCode.DisplayOnly = True
             Me.lblCode.EditingMode = False
             Me.lblCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -128,6 +131,7 @@
             'lblName
             '
             Me.lblName.AutoSize = True
+            Me.lblName.BackColor = System.Drawing.Color.Transparent
             Me.lblName.DisplayOnly = True
             Me.lblName.EditingMode = False
             Me.lblName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -143,6 +147,7 @@
             'lblNameAra
             '
             Me.lblNameAra.AutoSize = True
+            Me.lblNameAra.BackColor = System.Drawing.Color.Transparent
             Me.lblNameAra.DisplayOnly = True
             Me.lblNameAra.EditingMode = False
             Me.lblNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -178,6 +183,7 @@
             Me.TxtCode.MinimumValue = Nothing
             Me.TxtCode.Name = "TxtCode"
             Me.TxtCode.OldValue = Nothing
+            Me.TxtCode.OverrideMaxLength = 0
             Me.TxtCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.TxtCode.Size = New System.Drawing.Size(88, 23)
             Me.TxtCode.TabIndex = 5
@@ -208,6 +214,7 @@
             Me.TxtName.MinimumValue = Nothing
             Me.TxtName.Name = "TxtName"
             Me.TxtName.OldValue = Nothing
+            Me.TxtName.OverrideMaxLength = 0
             Me.TxtName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.TxtName.Size = New System.Drawing.Size(425, 23)
             Me.TxtName.TabIndex = 6
@@ -216,6 +223,7 @@
             'lblNote
             '
             Me.lblNote.AutoSize = True
+            Me.lblNote.BackColor = System.Drawing.Color.Transparent
             Me.lblNote.DisplayOnly = True
             Me.lblNote.EditingMode = False
             Me.lblNote.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -254,6 +262,7 @@
             Me.TxtNote.Multiline = True
             Me.TxtNote.Name = "TxtNote"
             Me.TxtNote.OldValue = Nothing
+            Me.TxtNote.OverrideMaxLength = 0
             Me.TxtNote.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.TxtNote.Size = New System.Drawing.Size(425, 38)
             Me.TxtNote.TabIndex = 9
@@ -285,6 +294,7 @@
             Me.txtNameAra.MinimumValue = Nothing
             Me.txtNameAra.Name = "txtNameAra"
             Me.txtNameAra.OldValue = Nothing
+            Me.txtNameAra.OverrideMaxLength = 0
             Me.txtNameAra.RightToLeft = System.Windows.Forms.RightToLeft.Yes
             Me.txtNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtNameAra.Size = New System.Drawing.Size(425, 23)
@@ -299,7 +309,7 @@
             Me.Controls.Add(Me.TableLayoutPanel1)
             Me.Name = "BasicEntry"
             Me.Controls.SetChildIndex(Me.TableLayoutPanel1, 0)
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
+            CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.TableLayoutPanel1.ResumeLayout(false)
         Me.TableLayoutPanel1.PerformLayout
         Me.ResumeLayout(false)

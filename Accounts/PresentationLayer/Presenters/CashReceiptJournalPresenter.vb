@@ -36,21 +36,21 @@ Namespace PresentationLayer.Presenters
             _advancesToCustomerAccountIdNo = GetCustomerAdvancesAccountIdNo()
 
             CreateDataTable(DtInsertTable, {{"AccountIdNo", GetType(Int16)},
+                                            {"ContactIdNo", GetType(Int32)},
                                             {"Credit", GetType(Decimal)},
                                             {"Debit", GetType(Decimal)},
                                             {"JournalIdNo", GetType(Int32)},
                                             {"Notes", GetType(String)},
-                                            {"PayIdNo", GetType(Int32)},
                                             {"RevCostCenterIdNo", GetType(Int16)},
                                             {"Sequence", GetType(Int16)}})
 
             CreateDataTable(DtUpdateTable, {{"AccountIdNo", GetType(Int16)},
+                                            {"ContactIdNo", GetType(Int32)},
                                             {"Credit", GetType(Decimal)},
                                             {"Debit", GetType(Decimal)},
                                             {"IdNo", GetType(Int32)},
                                             {"JournalIdNo", GetType(Int32)},
                                             {"Notes", GetType(String)},
-                                            {"PayIdNo", GetType(Int32)},
                                             {"RevCostCenterIdNo", GetType(Int16)},
                                             {"Sequence", GetType(Int16)}})
 
@@ -710,12 +710,12 @@ Namespace PresentationLayer.Presenters
 
         Private Sub JournalItemFillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
             workRow("AccountIdNo") = itemDataView.AccountIdNo
+            workRow("ContactIdNo") = View.ContactIdNo
             workRow("Credit") = itemDataView.Credit
             workRow("Debit") = itemDataView.Debit
             workRow("JournalIdNo") = View.IdNo
-            workRow("PayIdNo") = itemDataView.PayIdNo
             workRow("Notes") = itemDataView.Notes
-            workRow("RevCostCenteridNo") = itemDataView.RevCostCenterIdNo
+            workRow("RevCostCenterIdNo") = itemDataView.RevCostCenterIdNo
         End Sub
 
         Public Function JournalItemFilter(obj As Object) As Boolean
@@ -741,8 +741,9 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Sub AddCustomerOpenInvoices()
-            If View.PayorIdNo <> 0 Then
-                Dim unpaidInvoices = GetCustomerOpenInvoices(View.PayorIdNo)
+            Dim cseIdNo As Int32? = GetCSEIdNo(View.ContactIdNo)
+            If cseIdNo <> 0 Then
+                Dim unpaidInvoices = GetCustomerOpenInvoices(cseIdNo)
                 Dim nSeq As Integer
                 If AddMode Then
                     View.CsrOiItems.Clear()
@@ -880,7 +881,7 @@ Namespace PresentationLayer.Presenters
 
         Private Sub OnAutoApplyAmountRequested(bsCsrOiItems As BindingSource)
             Dim amountToApply = View.Amount
-            For Each item As CsrOiItemModel In bsCsrOiItems
+            For Each item As CsrOiItemView In bsCsrOiItems
                 If amountToApply = 0D Then
                     item.Amount = 0D
                     item.DiscountTaken = 0D
@@ -899,6 +900,7 @@ Namespace PresentationLayer.Presenters
                     End If
                 End If
             Next item
+            bsCsrOiItems.ResetBindings(False)
         End Sub
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
@@ -1005,8 +1007,9 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub CreateOpenInvoiceData(bs As BindingSource)
-            If View.PayorIdNo <> 0 Then
-                Dim unpaidInvoices = GetCustomerOpenInvoices(View.PayorIdNo)
+            Dim cseIdNo As Int32? = GetCSEIdNo(View.ContactIdNo)
+            If cseIdNo IsNot Nothing AndAlso cseIdNo <> 0 Then
+                Dim unpaidInvoices = GetCustomerOpenInvoices(cseIdNo)
                 Dim nSeq As Integer
                 If AddMode Then
                     View.CsrOiItems.Clear()
@@ -1068,12 +1071,9 @@ Namespace PresentationLayer.Presenters
             UpdateContactDataSource(payorType)
             If View.OpenInvoiceMode Then
                 If View.ContactIdNo IsNot Nothing AndAlso View.ContactIdNo > 0 Then
-                    Dim CseCode As String = Service.GetField(Of Int32, Int32)("Contact_View", View.ContactIdNo, "CseCode").ToString()
-                    If CseCode = ReceiptTypeSelection.AccountsReceivable Then
-                        View.PayorIdNo = Service.GetField(Of Int32, Int32)(View.ContactIdNo, "Contact_View", View.ContactIdNo, "PayorType", )
+                    If CodeToEnum(Of ReceiptTypeSelection)(payorType) = ReceiptTypeSelection.AccountsReceivable Then
                         CreateOpenInvoiceData(bsCsrOiItems)
                     Else
-                        View.PayorIdNo = Nothing
                         DeleteBindingSourceData(bsCsrOiItems)
                     End If
                 Else
@@ -1092,19 +1092,32 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub UpdateContactDataSource(payorType As String)
-            Dim x As ReceiptTypeSelection = CodeToEnum(Of ReceiptTypeSelection)(payorType)
-            Select Case x
+            Dim filter As String = View.ContactDataSource.DefaultView.RowFilter
+            Dim receiptTypeEnum As ReceiptTypeSelection = CodeToEnum(Of ReceiptTypeSelection)(payorType)
+            Dim oldContactIdNo As Int32? = View.ContactIdNo
+            Select Case receiptTypeEnum
                 Case ReceiptTypeSelection.AccountsReceivable, ReceiptTypeSelection.Customer
-                    View.ContactDataSource.DefaultView.RowFilter = "CSECode = 'C'"
+                    If filter <> "CSECode = 'C'" Then
+                        View.ContactDataSource.DefaultView.RowFilter = "CSECode = 'C'"
+                    End If
                 Case ReceiptTypeSelection.Employee
-                    Dim y = View.ContactIdNo
-                    View.ContactDataSource.DefaultView.RowFilter = "CSECode = 'E'"
-                    View.ContactIdNo = y
+                    If filter <> "CSECode = 'E'" Then
+                        View.ContactDataSource.DefaultView.RowFilter = "CSECode = 'E'"
+                    End If
                 Case ReceiptTypeSelection.SupplierRefund
-                    View.ContactDataSource.DefaultView.RowFilter = "CSECode = 'S'"
+                    If filter <> "CSECode = 'S'" Then
+                        View.ContactDataSource.DefaultView.RowFilter = "CSECode = 'S'"
+                    End If
                 Case Else
                     View.ContactDataSource.DefaultView.RowFilter = Nothing
             End Select
+            'restore the old value
+            View.ContactIdNo = oldContactIdNo
+            ' check if value was assigned
+            If View.ContactIdNo <> oldContactIdNo Then
+                ' value assigned (y) not found in DataSource, so force a non existing value to force contactIdNo set to nothing
+                View.ContactIdNo = Nothing
+            End If
         End Sub
 
 
@@ -1178,26 +1191,19 @@ Namespace PresentationLayer.Presenters
             Dim nSeq As Integer
             If View.PayorType IsNot Nothing AndAlso View.PayorType = EnumToCode(ReceiptTypeSelection.AccountsReceivable) Then
                 GlobalVariables.Mapper.Map(dView, dModel)
-                View.PayorIdNo = Service.GetField()
+                Dim cseIdNo As Int32? = GetCSEIdNo(View.ContactIdNo)
                 nSeq = dView.Count()
-                If View.PayorIdNo = OriginalModel.PayorIdNo AndAlso View.PayorType = OriginalModel.PayorType Then
+                If View.ContactIdNo = OriginalModel.ContactIdNo AndAlso View.PayorType = OriginalModel.PayorType Then
                     ' need to add the original items because if items are already paid in the original data they will not be added if there is already a full or partial payment
                     AddOpenInvoices(True, OriginalModel.CsrOiItems, dModel, nSeq)
                     nSeq = dModel.Count()
                 End If
 
-                Dim unpaidInvoices = GetCustomerOpenInvoices(View.PayorIdNo)
+                Dim unpaidInvoices = GetCustomerOpenInvoices(cseIdNo)
                 AddOpenInvoices(False, unpaidInvoices, dModel, nSeq)
                 GlobalVariables.Mapper.Map(dModel, dView)
-
-                If View.PayorType Is Nothing Then
-
-                    View.PayorIdNo = 0
-                Else
-                    View.PayorIdNo = GetPayorIdNo(View.ContactIdNo, View.PayorType)
-                    bs.DataSource = GetCustomerOpenInvoices(View.PayorIdNo)
-                    View.VatAmount = UpdateInputVatAmount(View.JournalItems)
-                End If
+                bs.DataSource = GetCustomerOpenInvoices(cseIdNo)
+                View.VatAmount = UpdateInputVatAmount(View.JournalItems)
             Else
                 GlobalVariables.Mapper.Map(dModel, dView)
             End If
@@ -1208,24 +1214,25 @@ Namespace PresentationLayer.Presenters
             Dim dModel As New List(Of CsrOiItemModel)
             Dim dOriginalModel As New List(Of CsrOiItemModel)
             Dim nSeq As Integer
+            Dim cseIdNo As Int32? = GetCSEIdNo(View.ContactIdNo)
             GlobalVariables.Mapper.Map(dView, dModel)
             nSeq = dView.Count()
             If EditMode Then
-                If View.PayorIdNo = OriginalModel.PayorIdNo AndAlso View.PayorType = OriginalModel.PayorType Then
+                If View.ContactIdNo = OriginalModel.ContactIdNo AndAlso View.PayorType = OriginalModel.PayorType Then
                     ' need to add the original items because if items are already paid in the original data they will not be added if there is already a full or partial payment
                     AddOpenInvoices(True, OriginalModel.CsrOiItems, dModel, nSeq)
                     nSeq = dModel.Count()
                 End If
             End If
-            Dim unpaidInvoices = GetCustomerOpenInvoices(View.PayorIdNo)
+            Dim unpaidInvoices = GetCustomerOpenInvoices(cseIdNo)
             AddOpenInvoices(False, unpaidInvoices, dModel, nSeq)
             GlobalVariables.Mapper.Map(dModel, dView)
             Return dView
         End Function
 
-        Private Function GetPayorIdNo(contactIdNo As Integer, payorType As String) As Int32
-            Return Service.GetField(Of Int32, Int32)(contactIdNo, "Contact", "IdNo", "PayorIdNo")
-        End Function
+        'Private Function GetPayorIdNo(contactIdNo As Int32?, payorType As String) As Int32
+        '    Return Service.GetField(Of Int32, Int32)(contactIdNo, "Contact", "IdNo", "PayorIdNo")
+        'End Function
 
         Private Sub OnBeforeEdit() Handles MyBase.BeforeEdit
             UpdateContactDataSource(View.PayorType)

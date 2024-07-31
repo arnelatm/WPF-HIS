@@ -15,6 +15,7 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly Db As New Db()
         Private ReadOnly _tableOrViewName As String
+        Private _table As String
         Private Property WithNotes As Boolean
         Private Property LimitToBranch As Boolean
 
@@ -25,7 +26,13 @@ Namespace DataLayer.AdoNet
         End Sub
 
         Public Function GetRecordByIdNo(idNo) As Basic Implements IDao(Of Basic).GetRecordByIdNo
-            Dim fields As String = "IdNo," + _tableOrViewName + "Code," + _tableOrViewName + "Name," + _tableOrViewName + "NameAra"
+            Dim fields As String
+            If _tableOrViewName.Right(5) = "_View" Then
+                _table = Strings.Left(_tableOrViewName, _tableOrViewName.Length - 5)
+            Else
+                _table = _tableOrViewName
+            End If
+            fields = "IdNo," + _table + "Code," + _table + "Name," + _table + "NameAra"
             If WithNotes Then
                 fields += ",Notes"
             End If
@@ -53,9 +60,9 @@ Namespace DataLayer.AdoNet
 
         Public Function UpdateRecord(ByRef Basic As Basic) As Integer Implements IDao(Of Basic).UpdateRecord
             Dim withNotes As Boolean = IIf(Accounts.AccountHelpers.BasicWithNotes(_tableOrViewName), True, False)
-            Dim fields As String = _tableOrViewName + "Code = @Code," &
-                                   _tableOrViewName + "Name = @Name," &
-                                   _tableOrViewName + "NameAra = @NameAra" &
+            Dim fields As String = _table + "Code = @Code," &
+                                   _table + "Name = @Name," &
+                                   _table + "NameAra = @NameAra" &
                                    IIf(withNotes, ",Notes = @Notes", "") &
                                    IIf(LimitToBranch, ",BranchIdNo = @BranchIdNo", "")
             Dim sql As String = " UPDATE " & _tableOrViewName & " SET " + fields + "  WHERE IdNo = @IdNo"
@@ -92,18 +99,18 @@ Namespace DataLayer.AdoNet
                                     Function(reader) _
             New Basic() With {
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
-            .Code = Extensions.AsString(reader(_tableOrViewName + "Code")),
-            .Name = Extensions.AsString(reader(_tableOrViewName + "Name")),
-            .NameAra = Extensions.AsString(reader(_tableOrViewName + "NameAra"))
+            .Code = Extensions.AsString(reader(_table + "Code")),
+            .Name = Extensions.AsString(reader(_table + "Name")),
+            .NameAra = Extensions.AsString(reader(_table + "NameAra"))
             }
 
         Private ReadOnly MakeNotes As Func(Of IDataReader, Basic) =
                                     Function(reader) _
             New Basic() With {
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
-            .Code = Extensions.AsString(reader(_tableOrViewName + "Code")),
-            .Name = Extensions.AsString(reader(_tableOrViewName + "Name")),
-            .NameAra = Extensions.AsString(reader(_tableOrViewName + "NameAra")),
+            .Code = Extensions.AsString(reader(_table + "Code")),
+            .Name = Extensions.AsString(reader(_table + "Name")),
+            .NameAra = Extensions.AsString(reader(_table + "NameAra")),
             .Notes = Extensions.AsString(reader("Notes"))
             }
 
@@ -112,9 +119,9 @@ Namespace DataLayer.AdoNet
             New Basic() With {
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .BranchIdNo = Extensions.AsInt(Of Int16)(reader("BranchIdNo")),
-            .Code = Extensions.AsString(reader(_tableOrViewName + "Code")),
-            .Name = Extensions.AsString(reader(_tableOrViewName + "Name")),
-            .NameAra = Extensions.AsString(reader(_tableOrViewName + "NameAra"))
+            .Code = Extensions.AsString(reader(_table + "Code")),
+            .Name = Extensions.AsString(reader(_table + "Name")),
+            .NameAra = Extensions.AsString(reader(_table + "NameAra"))
             }
 
         Private ReadOnly MakeBranchNotes As Func(Of IDataReader, Basic) =
@@ -122,9 +129,9 @@ Namespace DataLayer.AdoNet
             New Basic() With {
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .BranchIdNo = Extensions.AsInt(Of Int16)(reader("BranchIdNo")),
-            .Code = Extensions.AsString(reader(_tableOrViewName + "Code")),
-            .Name = Extensions.AsString(reader(_tableOrViewName + "Name")),
-            .NameAra = Extensions.AsString(reader(_tableOrViewName + "NameAra")),
+            .Code = Extensions.AsString(reader(_table + "Code")),
+            .Name = Extensions.AsString(reader(_table + "Name")),
+            .NameAra = Extensions.AsString(reader(_table + "NameAra")),
             .Notes = Extensions.AsString(reader("Notes"))
             }
 

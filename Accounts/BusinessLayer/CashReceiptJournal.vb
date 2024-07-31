@@ -41,7 +41,6 @@ Namespace BusinessLayer
         Public Property JournalItems As List(Of JournalItem)
         Public Property Notes As String
         Public Property OrNumber As String
-        Public Property PayorIdNo As Int32?
         Public Property PayorName As String
         Public Property PayorType As String
         Public Property Posted As Boolean

@@ -30,7 +30,6 @@ Namespace DataLayer.AdoNet
                     "IdNo," &
                     "Notes," &
                     "ORNumber," &
-                    "PayorIdNo," &
                     "PayorName," &
                     "PayorType," &
                     "Posted," &
@@ -70,7 +69,6 @@ Namespace DataLayer.AdoNet
                     "DiscountTaken = @DiscountTaken," &
                     "Notes         = @Notes," &
                     "ORNumber      = @ORNumber," &
-                    "PayorIdNo     = @PayorIdNo," &
                     "PayorName     = @PayorName," &
                     "PayorType     = @PayorType," &
                     "Posted        = @Posted," &
@@ -98,7 +96,6 @@ Namespace DataLayer.AdoNet
                     "DiscountTaken," &
                     "Notes," &
                     "ORNumber," &
-                    "PayorIdNo," &
                     "PayorName," &
                     "PayorType," &
                     "Posted," &
@@ -120,7 +117,6 @@ Namespace DataLayer.AdoNet
                     "@DiscountTaken," &
                     "@Notes," &
                     "@ORNumber," &
-                    "@PayorIdNo," &
                     "@PayorName," &
                     "@PayorType," &
                     "@Posted," &
@@ -144,13 +140,12 @@ Namespace DataLayer.AdoNet
             .CheckDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("CheckDate")),
             .CheckNumber = AATM.DataLayer.AdoNet.Extensions.AsString(reader("CheckNumber")),
             .DateCreated = AATM.DataLayer.AdoNet.Extensions.AsNullableDateTime(reader("DateCreated")),
-            .ContactIdNo = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Int32)(reader("ContactIdNo")),
+            .ContactIdNo = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Int32?)(reader("ContactIdNo")),
             .DiscountAccountIdNo = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Int16?)(reader("DiscountAccountIdNo")),
             .DiscountTaken = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("DiscountTaken")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .Notes = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Notes")),
             .OrNumber = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ORNumber")),
-            .PayorIdNo = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Integer)(reader("PayorIdNo")),
             .PayorName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("PayorName")),
             .PayorType = AATM.DataLayer.AdoNet.Extensions.AsString(reader("PayorType")),
             .Posted = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Posted")),
@@ -177,7 +172,6 @@ Namespace DataLayer.AdoNet
                                     "@IdNo", cashReceiptJournal.IdNo,
                                     "@Notes", cashReceiptJournal.Notes,
                                     "@ORNumber", cashReceiptJournal.OrNumber,
-                                    "@PayorIdNo", cashReceiptJournal.PayorIdNo,
                                     "@PayorName", cashReceiptJournal.PayorName,
                                     "@PayorType", cashReceiptJournal.PayorType,
                                     "@Posted", cashReceiptJournal.Posted,

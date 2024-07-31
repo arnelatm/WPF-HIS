@@ -158,7 +158,12 @@ Namespace AdoNet
                     Else
                         Dim fName As String = findableControl.FieldName
                         If fName = "Name" Or fName = "Code" Then
-                            fName = Trim(tableName) + fName
+                            If tableName.Right(5) = "_View" Then
+                                fName = Trim(Left(tableName, tableName.Length - 5)) + fName
+                            Else
+                                fName = Trim(tableName) + fName
+                            End If
+
                             sql &= fName
                         Else
                             sql &= GetActualFieldName(findableControl.FieldName).Trim()

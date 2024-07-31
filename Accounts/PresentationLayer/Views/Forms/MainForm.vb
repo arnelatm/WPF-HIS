@@ -380,6 +380,7 @@ Namespace PresentationLayer.Views.Forms
             'RunForm(Of ReligionEntryTv, ReligionPresenter(Of ReligionModel))()
         End Sub
 
+
         Private Sub RevCostCentersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemRevCostCenters.Click
             RunForm(Of RevCostCenterEntryTv, RevCostCenterPresenter(Of RevCostCenterModel))()
         End Sub
@@ -388,8 +389,8 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of RevenueGroupEntryTv, RevenueGroupPresenter(Of RevenueGroupModel))()
         End Sub
 
-        Private Sub RunBasicForm(ByVal tableOrViewName As String, ByVal formCaption As String)
-            RunBaseForm(Of BasicEntry, BasicPresenter(Of BasicModel))(tableOrViewName, formCaption)
+        Private Sub RunBasicForm(ByVal tableOrViewName As String, ByVal formCaption As String, Optional options As String = "A,M,D")
+            RunBaseForm(Of BasicEntry, BasicPresenter(Of BasicModel))(tableOrViewName, formCaption, options)
         End Sub
 
         Private Sub SalesDepositTypesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSalesDepositTypes.Click
@@ -957,8 +958,8 @@ Namespace PresentationLayer.Views.Forms
             Invoker.InvokeFunction(formToRun, "Show")
         End Sub
 
-        Private Overloads Sub RunBaseForm(Of TV, TP)(tableName As String, formName As String)
-            Dim formToRun = Activator.CreateInstance(GetType(TV), tableName, formName)
+        Private Overloads Sub RunBaseForm(Of TV, TP)(tableName As String, formName As String, Optional options As String = "A,M,D")
+            Dim formToRun = Activator.CreateInstance(GetType(TV), tableName, formName, options)
             Dim pType As Type = GetType(TP)
             formToRun.Presenter = Activator.CreateInstance(pType, {formToRun, tableName})
             ShowEntryForm(formToRun)
@@ -1359,7 +1360,9 @@ Namespace PresentationLayer.Views.Forms
             formToRun.Show()
         End Sub
 
-
+        Private Sub ToolStripMenuItemContacts_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemContacts.Click
+            RunBasicForm("Contact_View", "Contacts Entry", "")
+        End Sub
     End Class
 
 End Namespace

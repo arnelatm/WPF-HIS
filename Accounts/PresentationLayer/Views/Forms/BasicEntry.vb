@@ -1,4 +1,5 @@
-﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+﻿Imports System.Windows.Forms.Design.AxImporter
+Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 
@@ -7,7 +8,9 @@ Namespace PresentationLayer.Views.Forms
     Public Class BasicEntry
         Implements IBasicView
 
-        Public Sub New(ByVal tableOrViewName As String, ByVal formCaption As String)
+        Private _options As String
+
+        Public Sub New(ByVal tableOrViewName As String, ByVal formCaption As String, Optional ByVal options As String = "A,M,D")
             MyBase.New()
 
             ' This call is required by the designer.
@@ -25,7 +28,7 @@ Namespace PresentationLayer.Views.Forms
                 TxtNote.Visible = False
                 lblNote.Visible = False
             End If
-
+            _options = options
         End Sub
 
 #Region "Field Items"
@@ -100,6 +103,17 @@ Namespace PresentationLayer.Views.Forms
             }
         End Sub
 
+        Private Sub BasicEntry_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+            If Not _options.Contains("A") Then
+                btnAdd.Visible = False
+            End If
+            If Not _options.Contains("M") Then
+                btnEdit.Visible = False
+            End If
+            If Not _options.Contains("D") Then
+                btnDelete.Visible = False
+            End If
+        End Sub
     End Class
 
 End Namespace

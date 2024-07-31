@@ -262,6 +262,7 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemContacts = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.AccountsMenu.SuspendLayout()
@@ -417,7 +418,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemGeneral
             '
-            Me.ToolStripMenuItemGeneral.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemBranches, Me.ToolStripMenuItemChartOfAccounts, Me.ToolStripMenuItemDepartments, Me.ToolStripMenuItemRevCostCenters, Me.ToolStripMenuItemRevenueGroups, Me.ToolStripMenuItemDistributionSchemes, Me.ToolStripSeparator4, Me.ToolStripMenuItemCountries, Me.ToolStripMenuItemDocuments, Me.ToolStripMenuItemPhoneTypes, Me.ToolStripMenuItemReligions, Me.ToolStripMenuItemBanks, Me.ToolStripMenuItemItems, Me.ToolStripMenuItemDefaultFieldValues, Me.ToolStripMenuItemSalesDepositTypes, Me.ToolStripMenuItemPrinting, Me.ToolStripMenuItemReportGroup})
+            Me.ToolStripMenuItemGeneral.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemBranches, Me.ToolStripMenuItemChartOfAccounts, Me.ToolStripMenuItemDepartments, Me.ToolStripMenuItemRevCostCenters, Me.ToolStripMenuItemRevenueGroups, Me.ToolStripMenuItemDistributionSchemes, Me.ToolStripSeparator4, Me.ToolStripMenuItemCountries, Me.ToolStripMenuItemDocuments, Me.ToolStripMenuItemContacts, Me.ToolStripMenuItemPhoneTypes, Me.ToolStripMenuItemReligions, Me.ToolStripMenuItemBanks, Me.ToolStripMenuItemItems, Me.ToolStripMenuItemDefaultFieldValues, Me.ToolStripMenuItemSalesDepositTypes, Me.ToolStripMenuItemPrinting, Me.ToolStripMenuItemReportGroup})
             Me.ToolStripMenuItemGeneral.Name = "ToolStripMenuItemGeneral"
             resources.ApplyResources(Me.ToolStripMenuItemGeneral, "ToolStripMenuItemGeneral")
             '
@@ -1487,6 +1488,11 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
             '
+            'ToolStripMenuItemContacts
+            '
+            Me.ToolStripMenuItemContacts.Name = "ToolStripMenuItemContacts"
+            resources.ApplyResources(Me.ToolStripMenuItemContacts, "ToolStripMenuItemContacts")
+            '
             'MainForm
             '
             Me.AllowDrop = True
@@ -1747,5 +1753,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ToolStripMenuItemDiagnosticResultEntryIqama As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemUsersSecurity As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemDiagnosticResultEntryBaladiya As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemContacts As ToolStripMenuItem
     End Class
 End NameSpace

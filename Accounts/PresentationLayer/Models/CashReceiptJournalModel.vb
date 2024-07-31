@@ -15,7 +15,6 @@ Namespace PresentationLayer.Models
         Public Property CheckDate As Date?
         Public Property CheckNumber As String
         Public Property ContactIdNo As Int32?
-        Public Property CSEIdNo As Int32?
         Public Property CsrOiItems As List(Of CsrOiItemModel)
         Public Property DateCreated As DateTime?
         Public Property DiscountAccountIdNo As Int16?
@@ -25,7 +24,6 @@ Namespace PresentationLayer.Models
         Public Property JournalItems As List(Of JournalItemModel)
         Public Property Notes As String
         Public Property OrNumber As String
-        Public Property PayorIdNo As Int32?
         Public Property PayorName As String
         Public Property PayorType As String
         Public Property Posted As Boolean

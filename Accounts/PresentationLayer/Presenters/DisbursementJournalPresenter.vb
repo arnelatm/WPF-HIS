@@ -1197,19 +1197,26 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub UpdateContactDataSource(paymentType As String)
-            Dim x As PaymentTypeSelection = CodeToEnum(Of PaymentTypeSelection)(paymentType)
-            Select Case x
+            Dim filter As String = View.ContactDataSource.DefaultView.RowFilter
+            Dim payTypeENum As PaymentTypeSelection = CodeToEnum(Of PaymentTypeSelection)(paymentType)
+            Dim oldContactIdNo As Int32? = View.ContactIdNo
+            Select Case payTypeENum
                 Case PaymentTypeSelection.AccountsPayable, PaymentTypeSelection.Supplier
                     View.ContactDataSource.DefaultView.RowFilter = "CSECode = 'S'"
                 Case PaymentTypeSelection.Employee
-                    Dim y = View.ContactIdNo
                     View.ContactDataSource.DefaultView.RowFilter = "CSECode = 'E'"
-                    View.ContactIdNo = y
                 Case PaymentTypeSelection.CustomerRefund
                     View.ContactDataSource.DefaultView.RowFilter = "CSECode = 'C'"
                 Case Else
                     View.ContactDataSource.DefaultView.RowFilter = Nothing
             End Select
+            'restore the old value
+            View.ContactIdNo = oldContactIdNo
+            ' check if value was assigned
+            If View.ContactIdNo <> oldContactIdNo Then
+                ' value assigned (y) not found in DataSource, so force a non existing value to force contactIdNo set to nothing
+                View.ContactIdNo = Nothing
+            End If
         End Sub
 
 

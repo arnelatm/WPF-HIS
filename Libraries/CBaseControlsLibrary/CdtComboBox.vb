@@ -458,6 +458,8 @@ Public Class CdtComboBox
         End If
     End Function
 
+
+
     Public Sub SetValue(value)
         If value Is DBNull.Value OrElse value Is Nothing Then
             SelectedIndex = -1

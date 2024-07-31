@@ -53,7 +53,6 @@ Namespace PresentationLayer.Views.Interfaces
         Property Notes As String
         Property OpenInvoiceMode As Boolean
         Property OrNumber As String
-        Property PayorIdNo As Int32?
         Property PayorName As String
         Property PayorType As String
         Property Posted As Boolean

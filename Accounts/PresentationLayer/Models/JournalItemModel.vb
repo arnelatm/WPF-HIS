@@ -9,7 +9,7 @@ Namespace PresentationLayer.Models
         Public Property AccountIdNo As Int16?
         Public Property AccountName As String
         Public Property Cancelled As Boolean
-        Public Property ContactIdNo As Int32
+        Public Property ContactIdNo As Int32?
         Public Property Credit As Decimal
         Public Property DiscountTaken As Decimal
         Public Property Debit As Decimal

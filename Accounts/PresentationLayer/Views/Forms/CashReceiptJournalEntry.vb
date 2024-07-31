@@ -127,15 +127,21 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 _contactDataSource = Value
+                Dim x As Int32? = cboContactIdNo.SelectedValue
                 cboContactIdNo.DataSource = Nothing
                 cboContactIdNo.DataSource = Value
-                cboContactIdNo.Refresh()
+                If x Is Nothing Then
+                    cboContactIdNo.SelectedIndex = -1
+                Else
+                    cboContactIdNo.SelectedValue = x
+                End If
+
             End Set
         End Property
 
         Public Property ContactIdNo As Integer? Implements ICashReceiptJournalView.ContactIdNo
             Get
-                Return cboContactIdNo.GetNullableValue(Of Int32)
+                Return cboContactIdNo.GetNullableValue(Of Int32?)
             End Get
             Set
                 cboContactIdNo.SetValue(Value)
@@ -249,8 +255,6 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PayorIdNo As Int32? Implements ICashReceiptJournalView.PayorIdNo
-
         Public Property PayorName As String Implements ICashReceiptJournalView.PayorName
             Get
                 Return txtPayorName.Text
@@ -360,7 +364,7 @@ Namespace PresentationLayer.Views.Forms
          {"Cancelled", chkCancelled},
          {"CheckDate", dtpCheckDate},
          {"CheckNumber", txtCheckNumber},
-         {"CSEIdNo", cboContactIdNo},
+         {"ContactIdNo", cboContactIdNo},
          {"DateCreated", txtDateCreated},
          {"DiscountAccountIdNo", cboDiscountAccountIdNo},
          {"DiscountTaken", txtDiscountTaken},
@@ -479,7 +483,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub cboContactIdNo_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cboContactIdNo.SelectionChangeCommitted
-            RaiseEvent ContactidNoChanged(bsCsrOiItems)
+            RaiseEvent ContactIdNoChanged(bsCsrOiItems)
         End Sub
 
         Private Sub OnInputsTurnedOff() Handles MyBase.InputsTurnedOff
@@ -757,6 +761,14 @@ Namespace PresentationLayer.Views.Forms
                 e.Cancel = True
             End If
         End Sub
+
+        Private Sub floFullEntryArea_Click(sender As Object, e As EventArgs) Handles floFullEntryArea.Click
+            Debugger.Break()
+        End Sub
+
+
+
+
 #End Region
 
     End Class
