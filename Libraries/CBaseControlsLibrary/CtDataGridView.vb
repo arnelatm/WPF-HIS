@@ -537,14 +537,14 @@ Public Class CtDataGridView
             cb = e.Control
             'set the dropdown style of a combobox
             cb.DropDownStyle = ComboBoxStyle.DropDown
-            set the property of a combobox to autocomplete mode.
+            'set the property of a combobox to autocomplete mode.
             cb.AutoCompleteMode = AutoCompleteMode.SuggestAppend
             'cb.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
             'cb.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             If CurrentCell IsNot Nothing Then
                 cb.SuggestCharCount = DirectCast(CurrentCell.OwningColumn, AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn).SuggestCharCount
-                Dim ds As DataTable = DirectCast(e.Control, System.Windows.Forms.ComboBox).DataSource
-                cb.SetSuggestDataSource(ds)
+                'Dim ds As DataTable = DirectCast(e.Control, System.Windows.Forms.ComboBox).DataSource
+                cb.SetSuggestDataSource()
             End If
             'Me.ResumeDrawingNew()
         ElseIf TypeOf e.Control Is CCustomDateTimePicker Then

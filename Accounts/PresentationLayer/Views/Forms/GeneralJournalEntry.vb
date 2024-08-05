@@ -43,14 +43,17 @@ Namespace PresentationLayer.Views.Forms
                 Dim selectedCombo As CdtCOmboBox= TryCast(e.Control, CdtComboBox)
                 If selectedCombo IsNot Nothing Then
                     'Dim selectedPayeeIdNo = CType(_selectedCombo, CdtComboBox)
-                    'Dim payeeCell As CDgvComboBoxCell = CType(DataGridViewJournalItems.CurrentCell, CDgvComboBoxCell)
-                    'payeeCell.DataSource = Nothing
-                    'payeeCell.DataSource = CurrentPayeeDataSource
-                    'payeeCell.DisplayMember = "Name"
-                    'payeeCell.ValueMember = "idNo"
-                    selectedCombo.DataSource = CurrentPayeeDataSource
-                    selectedCombo.SuggestBindingSource = CurrentPayeeDataSource
+                    Dim payeeCell As CDgvComboBoxCell = CType(DataGridViewJournalItems.CurrentCell, CDgvComboBoxCell)
+                    payeeCell.DataSource = Nothing
+                    payeeCell.DataSource = CurrentPayeeDataSource
+                    payeeCell.DisplayMember = "Name"
+                    payeeCell.ValueMember = "idNo"
+                    'payeeCell.SetSuggestDataSource()
+                    'selectedCombo.DataSource = CurrentPayeeDataSource
+                    'selectedCombo.SuggestBindingSource = CurrentPayeeDataSource
+                    'need this next line to reflect changes in DataSource
                     bsJournalItems.ResetCurrentItem()
+                    'bsJournalItems.ResetBindings(False)
                 End If
             End If
         End Sub

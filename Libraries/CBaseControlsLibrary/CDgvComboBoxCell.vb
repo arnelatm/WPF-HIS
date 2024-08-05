@@ -69,6 +69,7 @@ Public Class CDgvComboBoxCell
         'DataGridView.SuspendDrawingNew()
         MyBase.InitializeEditingControl(pRowIndex, pFormattedValue, cellStyle)
         CellEditingControl = CType(DataGridView.EditingControl, CtComboBoxEditingControl)
+        CellEditingControl.SetSuggestDataSource()
         'DataGridView.ResumeDrawingNew()
     End Sub
 

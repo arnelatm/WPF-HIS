@@ -802,11 +802,23 @@ Public Class CdtComboBox
         End Get
     End Property
 
-    Public Sub SetSuggestDataSource(ds As Object)
-        _suggestBindingSource.DataSource = DataSource.Copy()
-        _suggestBindingSource.ResetBindings(True)
-        SuggestListForm.SuggestListBox.DisplayMember = DisplayMember
-        SuggestListForm.SuggestListBox.ValueMember = ValueMember
+    Public Sub SetSuggestDataSource()
+        If DataSource IsNot Nothing Then
+            _suggestBindingSource.DataSource = DataSource.Copy()
+            _suggestBindingSource.ResetBindings(True)
+            SuggestListForm.SuggestListBox.DisplayMember = DisplayMember
+            SuggestListForm.SuggestListBox.ValueMember = ValueMember
+        End If
+
+    End Sub
+
+
+    Private Sub Me_DataSourceChanged(sender As Object, e As EventArgs) Handles Me.DataSourceChanged
+        SetSuggestDataSource()
+        '_suggestBindingSource.DataSource = DataSource.Copy()
+        '_suggestBindingSource.ResetBindings(True)
+        'SuggestListForm.SuggestListBox.DisplayMember = DisplayMember
+        'SuggestListForm.SuggestListBox.ValueMember = ValueMember
     End Sub
 
     'Public Sub SetSuggestDataSource()
