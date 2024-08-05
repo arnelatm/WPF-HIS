@@ -389,12 +389,13 @@ Public Class CdtComboBox
             If Not Focused Then Return
             If _editFilter AndAlso Text.Length >= SuggestCharCount Then
                 If _suggestBindingSource.DataSource Is Nothing Then
-                    _suggestBindingSource.DataSource = DataSource.Copy()
-                    _suggestBindingSource.ResetBindings(True)
-                    SuggestListForm.SuggestListBox.DisplayMember = DisplayMember
-                    SuggestListForm.SuggestListBox.ValueMember = ValueMember
+                    If DataSource IsNot Nothing Then
+                        _suggestBindingSource.DataSource = DataSource.Copy()
+                        _suggestBindingSource.ResetBindings(True)
+                        SuggestListForm.SuggestListBox.DisplayMember = DisplayMember
+                        SuggestListForm.SuggestListBox.ValueMember = ValueMember
+                    End If
                 End If
-
                 'need to do this to escape apostrophe "'"
                 Dim textToFilter As String = Text.ToString().Replace("'", "''")
                 Dim filter As String = IIf(Text = Nothing OrElse Text = "", Nothing, String.Format(DisplayMember + " like '*{0}*'", textToFilter))

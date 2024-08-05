@@ -544,7 +544,7 @@ Public Class CtDataGridView
             If CurrentCell IsNot Nothing Then
                 cb.SuggestCharCount = DirectCast(CurrentCell.OwningColumn, AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn).SuggestCharCount
                 'Dim ds As DataTable = DirectCast(e.Control, System.Windows.Forms.ComboBox).DataSource
-                cb.SetSuggestDataSource()
+                'cb.SetSuggestDataSource()
             End If
             'Me.ResumeDrawingNew()
         ElseIf TypeOf e.Control Is CCustomDateTimePicker Then
