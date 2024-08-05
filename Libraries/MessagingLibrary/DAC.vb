@@ -21,6 +21,7 @@ Public Class Dac
     Public Da As Object
     Public Cn As Object
     Public Dc As Object
+    Private cultureCode As String
 
     'Public Shared DefaultMirroredLanguageIdNo As Int16
 
@@ -62,6 +63,11 @@ Public Class Dac
             DacFileName = GlobalVariables.DacFileName
         End If
 
+    End Sub
+
+    Public Sub New(cCultureCode As String)
+        MyBase.New()
+        cultureCode = cCultureCode
     End Sub
 
     Private _cs As String = ""
@@ -523,7 +529,7 @@ Public Class Dac
         cmd = "SELECT IdNo FROM OriginalMessages where MessageKey = '" + key.Trim() + "'"
         Dim idNo As Int32 = ExecScalar(Of Int16)(cmd)
         If idNo <> 0 Then
-            Dim textDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name.ToLower()
+            Dim textDisplayLanguage = GlobalVariables.LastCultureInfo.Name.ToLower()
             cmd = "SELECT TranslatedMessage, TranslatedCaption FROM TranslatedMessages_View where MessageIdNo = " + idNo.ToString() + " and Lower(CultureInfoCode) = '" + textDisplayLanguage.TrimEnd + "'"
             Dim items As Collection = ExecReader(cmd)
             If Not (items Is Nothing OrElse items.Count = 0) Then
@@ -583,6 +589,7 @@ Public Class Dac
         cmd = "SELECT IdNo FROM OriginalMessages where MessageKey = '" + key.Trim() + "'"
         Dim idNo As Int32 = ExecScalar(Of Int16)(cmd)
         If idNo <> 0 Then
+            'Dim myForm As Form =
             Dim textDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name.ToLower()
             cmd = "SELECT TranslatedCaption FROM TranslatedMessages_View where MessageIdNo = " + idNo.ToString() + " and Lower(CultureInfoCode) = '" + textDisplayLanguage.TrimEnd + "'"
             Dim result = ExecScalar(Of Object)(cmd)
@@ -603,7 +610,7 @@ Public Class Dac
         If pTargetCulture IsNot Nothing Then
             targetCulture = pTargetCulture.TrimEnd()
         Else
-            targetCulture = GlobalVariables.AppCurrentCultureInfo.Name.ToLower().TrimEnd()
+            targetCulture = GlobalVariables.LastCultureInfo.Name.ToLower().TrimEnd()
         End If
         If NeedToTranslateText(targetCulture) Then
             Dim cmd As String
@@ -614,7 +621,7 @@ Public Class Dac
             'End If
 
             If translatedText IsNot Nothing AndAlso Strings.Left(translatedText, 1) <> "~" Then
-                If GlobalVariables.RightToLeftLayout Or pTargetCulture IsNot Nothing Then
+                If GlobalVariables.RightToLeftLayout Or targetCulture IsNot Nothing Then
                     translatedText = Strings.Left(translatedText, translatedText.IndexOf("~", StringComparison.CurrentCulture))
                 Else
                     translatedText = Strings.Mid(translatedText, translatedText.IndexOf("~", StringComparison.CurrentCulture) + 1)

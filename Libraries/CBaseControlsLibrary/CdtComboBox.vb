@@ -84,6 +84,15 @@ Public Class CdtComboBox
     <Description("Set to True to specify that this control value is hidden (used for secured controls)")>
     Public Property Hidden As Boolean = False
 
+    Public Property SuggestBindingSource As BindingSource
+        Get
+            Return _suggestBindingSource
+        End Get
+        Set(value As BindingSource)
+            _suggestBindingSource = value
+        End Set
+    End Property
+
     Public Property EditingMode As Boolean Implements IEntryControl.EditingMode
         Get
             Return _editingMode
@@ -800,6 +809,19 @@ Public Class CdtComboBox
         SuggestListForm.SuggestListBox.ValueMember = ValueMember
     End Sub
 
+    'Public Sub SetSuggestDataSource()
+    '    _suggestBindingSource.DataSource = DataSource.Copy()
+    '    SuggestListForm.SuggestListBox.DataSource = DataSource.Copy()
+    '    SuggestListForm.SuggestListBox.DisplayMember = DisplayMember
+    '    SuggestListForm.SuggestListBox.ValueMember = ValueMember
+    '    _suggestBindingSource.ResetBindings(True)
+    'End Sub
+
+    'Protected Sub CdtCbDataSourceChanged(sender As Object, e As EventArgs) Handles MyBase.DataSourceChanged
+    '    SuggestListForm.SuggestListBox.DataSource = DataSource
+    '    SuggestListForm.SuggestListBox.DisplayMember = DisplayMember
+    '    SuggestListForm.SuggestListBox.ValueMember = ValueMember
+    'End Sub
 
     Private ReadOnly Property FindDisplayMember As String Implements IFindableControl.FindDisplayMember
         Get

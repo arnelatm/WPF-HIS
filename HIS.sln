@@ -183,6 +183,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CreateIspdata", "CreateIspd
 		Transfer IGroupCLinic dta to ISPDATA = Transfer IGroupCLinic dta to ISPDATA
 		Update PCJournal by adding ContactIdNo  Field.sql = Update PCJournal by adding ContactIdNo  Field.sql
 		UpdateCashDisbursementJournalByAddingContactID.sql = UpdateCashDisbursementJournalByAddingContactID.sql
+		UpdateAPARERJournalByAddingContactIdNoField.sql = UpdateAPARERJournalByAddingContactIdNoField.sql
 		UpdateCashReceiptByAddingContactId Field.sql = UpdateCashReceiptByAddingContactId Field.sql
 		UpdateCheckDisbursementJournalItemTVP.sql = UpdateCheckDisbursementJournalItemTVP.sql
 	EndProjectSection

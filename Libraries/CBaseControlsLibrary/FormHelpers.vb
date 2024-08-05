@@ -157,6 +157,9 @@ Public Module FormHelpers
             ' form location is being changed when Resetting RightToLeftLayout so need to save values
             ' to restore form with the same size and location
             'DoubleBuffered = True
+            Dim cFCulture As String = form.formCulture.Name
+            Dim cCulture As CultureInfo = New CultureInfo(cFCulture)
+            GlobalVariables.LastCultureInfo = cCulture
             TranslateCaptions(form, allControls, form.formCulture.Name)
             SetControlLayout(form, allControls)
             settings.RestoreSetting(form)
@@ -273,7 +276,7 @@ Public Module FormHelpers
 
     Private Sub TranslateCaptions(form As Object, ByRef allCtrl As List(Of Control), ByVal desiredLanguage As String)
         Try
-            Dim translatorDac As New Dac
+            Dim translatorDac As New Dac(desiredLanguage)
             Dim targetLanguageIdNo As Short = GetTargetLanguageIdNo(translatorDac, desiredLanguage)
             If targetLanguageIdNo = 0 Then
                 UseOriginalCaptions(allCtrl)

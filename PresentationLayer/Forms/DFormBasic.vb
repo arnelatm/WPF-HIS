@@ -105,7 +105,9 @@ Public Class DFormBasic
         If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
             Dim cultureCode As String = GlobalVariables.DefaultUnmirroredCultureInfoStr
             If IsCultureInfoNameOk(cultureCode) Then
-                FormCulture = New CultureInfo(cultureCode, False)
+                _formCulture = New CultureInfo(cultureCode, False)
+                _LanguageCode = GetCultureLanguageCode(_formCulture)
+                GlobalVariables.LastCultureInfo = _formCulture
                 RightToLeftDisplay = False
                 RightToLeft = RightToLeft.No
                 btnArabic.Visible = True
@@ -197,11 +199,14 @@ Public Class DFormBasic
                 curFormCulture = New CultureInfo(cultureCode, False)
                 _formCulture = curFormCulture
                 RightToLeft = RightToLeft.Yes
+                _LanguageCode = GetCultureLanguageCode(_formCulture)
+                GlobalVariables.LastCultureInfo = _formCulture
                 TranslateForm(Me, AllControls)
                 RaiseEvent ArabicDisplayRequested()
             Else
                 MessageBox.Show("Invalid DefaultMirroredCultureInfoStr " & cultureCode & ".")
             End If
+
         End If
         Me.Visible = True
     End Sub

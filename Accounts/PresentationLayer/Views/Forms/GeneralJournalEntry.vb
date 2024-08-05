@@ -8,12 +8,10 @@ Namespace PresentationLayer.Views.Forms
     Public Class GeneralJournalEntry
         Implements IGeneralJournalView
 
+        Private ReadOnly _closingEntry As Boolean
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
         Private _footer As DgvFooter
         Private _journalItems As List(Of JournalItemView)
-        Private ReadOnly _closingEntry As Boolean
-        Public Event AccountIdChanged(bsJournalItems As BindingSource) Implements IGeneralJournalView.AccountIdChanged
-        Public Event EditingAccountIdNo(bsJournalItems As BindingSource) Implements IGeneralJournalView.EditingAccountIdNo
         Private _selectedCombo As CdtComboBox
 
         Public Sub New(closingEntry As Boolean)
@@ -26,6 +24,8 @@ Namespace PresentationLayer.Views.Forms
             _nfi.NumberDecimalDigits = 2
         End Sub
 
+        Public Event AccountIdChanged(bsJournalItems As BindingSource) Implements IGeneralJournalView.AccountIdChanged
+        Public Event EditingContactIdNo(bsJournalItems As BindingSource) Implements IGeneralJournalView.EditingContactIdNo
         ' This event handler provides custom item-creation behavior.
         Public ReadOnly Property ClosingEntry As Boolean
             Get
@@ -33,14 +33,23 @@ Namespace PresentationLayer.Views.Forms
             End Get
         End Property
 
+        Public Overrides Function GetPrintParameters() As Object
+            Return Me.FormCulture
+        End Function
+
         Private Sub dataGridView1_EditingControlShowing(ByVal sender As Object, ByVal e As Windows.Forms.DataGridViewEditingControlShowingEventArgs) Handles DataGridViewJournalItems.EditingControlShowing
-            If Equals(DataGridViewJournalItems.Columns(DataGridViewJournalItems.CurrentCell.ColumnIndex).Name, "dgvPayIdNo") Then
-                RaiseEvent EditingAccountIdNo(bsJournalItems)
-                _selectedCombo = TryCast(e.Control, CdtComboBox)
-                If _selectedCombo IsNot Nothing Then
-                    Dim selectedPayeeIdNo = CType(_selectedCombo, CdtComboBox)
-                    Dim payeeCell As CDgvComboBoxCell = CType(DataGridViewJournalItems.CurrentCell, CDgvComboBoxCell)
-                    payeeCell.DataSource = CurrentPayeeDataSource
+            If Equals(DataGridViewJournalItems.Columns(DataGridViewJournalItems.CurrentCell.ColumnIndex).Name, "dgvContactIdNo") Then
+                RaiseEvent EditingContactIdNo(bsJournalItems)
+                Dim selectedCombo As CdtCOmboBox= TryCast(e.Control, CdtComboBox)
+                If selectedCombo IsNot Nothing Then
+                    'Dim selectedPayeeIdNo = CType(_selectedCombo, CdtComboBox)
+                    'Dim payeeCell As CDgvComboBoxCell = CType(DataGridViewJournalItems.CurrentCell, CDgvComboBoxCell)
+                    'payeeCell.DataSource = Nothing
+                    'payeeCell.DataSource = CurrentPayeeDataSource
+                    'payeeCell.DisplayMember = "Name"
+                    'payeeCell.ValueMember = "idNo"
+                    selectedCombo.DataSource = CurrentPayeeDataSource
+                    selectedCombo.SuggestBindingSource = CurrentPayeeDataSource
                     bsJournalItems.ResetCurrentItem()
                 End If
             End If
@@ -50,19 +59,17 @@ Namespace PresentationLayer.Views.Forms
             btnPrint.Visible = False
             btnPrintWithArgs.Visible = True
         End Sub
-
-        Public Overrides Function GetPrintParameters() As Object
-            Return Me.FormCulture
-        End Function
-
-
 #Region "Fields"
 
-        Public Property RevCostCentersByCode As Object Implements IGeneralJournalView.RevCostCentersByCode
-        Public Property PayeeByCode As Object Implements IGeneralJournalView.PayeeByCode
         Public Property AccountsByCode As Object Implements IGeneralJournalView.AccountsByCode
-        Public Property CurrentPayeeDataSource As Object Implements IGeneralJournalView.CurrentPayeeDataSource
-
+        Public Property Approved As Boolean Implements IGeneralJournalView.Approved
+            Get
+                Return chkApproved.Checked
+            End Get
+            Set
+                chkApproved.Checked = Value
+            End Set
+        End Property
 
         Public Property Cancelled As Boolean Implements IGeneralJournalView.Cancelled
             Get
@@ -73,6 +80,14 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        '    Get
+        '        Return _currentPayeeDataSource
+        '    End Get
+        '    Set(value As Object)
+        '        _currentPayeeDataSource = value
+        '        dgvContactIdNo.DataSource = value
+        '    End Set
+        'End Property
         Public Property ClosingJournal As Boolean Implements IGeneralJournalView.ClosingJournal
             Get
                 Return chkClosingJournal.Checked
@@ -81,6 +96,10 @@ Namespace PresentationLayer.Views.Forms
                 chkClosingJournal.Checked = value
             End Set
         End Property
+
+        Public Property ContactIdDataSource As Object Implements IGeneralJournalView.ContactIdDataSource
+        'Private _currentPayeeDataSource As Object
+        Public Property CurrentPayeeDataSource As Object Implements IGeneralJournalView.CurrentPayeeDataSource
 
         Public Property DateCreated As DateTime? Implements IGeneralJournalView.DateCreated
             Get
@@ -127,6 +146,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property PayeeByCode As Object Implements IGeneralJournalView.PayeeByCode
         Public Property Posted As Boolean Implements IGeneralJournalView.Posted
             Get
                 Return chkPosted.Checked
@@ -145,18 +165,18 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public ReadOnly Property TotalDebits As Decimal Implements IGeneralJournalView.TotalDebits
-            Get
-                Return NumParser(Of Decimal)(txtTotalDebits.Text)
-            End Get
-        End Property
-
+        Public Property RevCostCentersByCode As Object Implements IGeneralJournalView.RevCostCentersByCode
         Public ReadOnly Property TotalCredits As Decimal Implements IGeneralJournalView.TotalCredits
             Get
                 Return NumParser(Of Decimal)(_footer.Value("dgvCredit"))
             End Get
         End Property
 
+        Public ReadOnly Property TotalDebits As Decimal Implements IGeneralJournalView.TotalDebits
+            Get
+                Return NumParser(Of Decimal)(txtTotalDebits.Text)
+            End Get
+        End Property
         Public Property TransactionDate As Date? Implements IGeneralJournalView.TransactionDate
             Get
                 Return dtpTransactionDate.Value
@@ -169,17 +189,6 @@ Namespace PresentationLayer.Views.Forms
                 End If
             End Set
         End Property
-
-        Public Property Approved As Boolean Implements IGeneralJournalView.Approved
-            Get
-                Return chkApproved.Checked
-            End Get
-            Set
-                chkApproved.Checked = Value
-            End Set
-        End Property
-
-
 #End Region
 
 #Region "Methods"
@@ -224,10 +233,10 @@ Namespace PresentationLayer.Views.Forms
                 dgvRevCostCenterIdNo.DisplayMember = "Name"
                 dgvRevCostCenterIdNo.ValueMember = "idNo"
                 dgvRevCostCenterIdNo.DisplayStyleForCurrentCellOnly = True
-                dgvPayIdNo.DataSource = PayeeByCode
-                dgvPayIdNo.DisplayMember = "Name"
-                dgvPayIdNo.ValueMember = "idNo"
-                dgvPayIdNo.DisplayStyleForCurrentCellOnly = True
+                dgvContactIdNo.DataSource = ContactIdDataSource
+                dgvContactIdNo.DisplayMember = "Name"
+                dgvContactIdNo.ValueMember = "idNo"
+                dgvContactIdNo.DisplayStyleForCurrentCellOnly = True
             End With
         End Sub
 

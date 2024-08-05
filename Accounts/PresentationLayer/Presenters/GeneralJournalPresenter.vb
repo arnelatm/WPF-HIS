@@ -3,10 +3,8 @@ Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
-Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Presenters
 
@@ -32,41 +30,41 @@ Namespace PresentationLayer.Presenters
             SortOrderKey = "IdNo"
 
             DtInsertTable.Columns.Add("AccountIdNo", GetType(Int16))
-            DtInsertTable.Columns.Add("ContactIdNo", GetType(Int32?))
+            DtInsertTable.Columns.Add("ContactIdNo", GetType(Int32))
             DtInsertTable.Columns.Add("Credit", GetType(Decimal))
             DtInsertTable.Columns.Add("Debit", GetType(Decimal))
             DtInsertTable.Columns.Add("JournalIdNo", GetType(Int32))
             DtInsertTable.Columns.Add("Notes", GetType(String))
-            DtInsertTable.Columns.Add("PayIdNo", GetType(Int32))
             DtInsertTable.Columns.Add("RevCostCenterIdNo", GetType(Int16))
             DtInsertTable.Columns.Add("Sequence", GetType(Int16))
 
             DtUpdateTable.Columns.Add("AccountIdNo", GetType(Int16))
-            DtUpdateTable.Columns.Add("ContactIdNo", GetType(Int32?))
+            DtUpdateTable.Columns.Add("ContactIdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("Credit", GetType(Decimal))
             DtUpdateTable.Columns.Add("Debit", GetType(Decimal))
             DtUpdateTable.Columns.Add("IdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("JournalIdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("Notes", GetType(String))
-            DtUpdateTable.Columns.Add("PayIdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("RevCostCenterIdNo", GetType(Int16))
             DtUpdateTable.Columns.Add("Sequence", GetType(Int16))
 
             AddHandler view.AccountIdChanged, AddressOf OnPayeeIdNoChanged
-            AddHandler view.EditingAccountIdNo, AddressOf OnEditingAccountIdNo
+            AddHandler view.EditingContactIdNo, AddressOf OnEditingContactIdNo
 
         End Sub
 
-        Private Sub OnEditingAccountIdNo(bs As BindingSource)
+        Private Sub OnEditingContactIdNo(bs As BindingSource)
+            Dim filter As String = Nothing
             If bs.Current.SpecialAccount = EnumToCode(SpecialAccountSelection.AccountsPayable) Then
-                View.CurrentPayeeDataSource = GetDataLookupTable({"Contact_View", "IdNo,ContactName,ContactCode", "CSECode = 'S'", Nothing})
+                filter = "CSECode = 'S'"
             ElseIf bs.Current.SpecialAccount = EnumToCode(SpecialAccountSelection.AccountsReceivable) Then
-                View.CurrentPayeeDataSource = GetDataLookupTable({"Contact_View", "IdNo,ContactName,ContactCode", "CSECode = 'C'", Nothing})
+                filter = "CSECode = 'C'"
             ElseIf bs.Current.SpecialAccount = EnumToCode(SpecialAccountSelection.EmployeeLoan) Then
-                View.CurrentPayeeDataSource = GetDataLookupTable({"Contact_View", "IdNo,ContactName,ContactCode", "CSECode = 'E'", Nothing})
+                filter = "CSECode = 'E'"
             Else
-                bs.Current.PayIdNo = Nothing
+                filter = Nothing
             End If
+            View.CurrentPayeeDataSource = MakeDataTable({"Contact_View", "IdNo,ContactName,ContactCode,CSECode", filter, Nothing})
         End Sub
 
         Private Sub OnPayeeIdNoChanged(bs As BindingSource)
@@ -74,6 +72,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
+            View.ContactIdDataSource = MakeDataTable({"Contact_View", "IdNo,ContactName,ContactCode,CSECode"})
             MakeVarDataSources({New Object() {"Account", "AccountsByCode", Nothing, "DetailAccount=1"},
             New Object() {"RevCostCenter", "RevCostCentersByCode", Nothing, Nothing},
             New Object() {"Contact_View", "PayeeByCode", "IdNo,ContactName,ContactCode", Nothing, Nothing}})
@@ -115,7 +114,7 @@ Namespace PresentationLayer.Presenters
             workRow("AccountIdNo") = itemDataView.AccountIdNo
             workRow("Debit") = itemDataView.Debit
             workRow("Credit") = itemDataView.Credit
-            workRow("ContactIdNo") = itemDataView.ContactIdNo
+            workRow("ContactIdNo") = IIf(itemDataView.ContactIdNo Is Nothing, DBNull.Value, itemDataView.ContactIdNo)
             workRow("RevCostCenterIdNo") = itemDataView.RevCostCenterIdNo
             workRow("Notes") = If(itemDataView.Notes, "")
         End Sub

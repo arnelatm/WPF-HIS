@@ -31,6 +31,7 @@ Public Class GlobalVariables
     Private Shared _defaultNumberFormatInfo As NumberFormatInfo
     Private Shared _defaultUnMirroredCultureInfoStr As String
     Private Shared _lookupSetting As String = "CodeAndName"
+    Private Shared _lastCultureInfo As CultureInfo
     Private Shared _maximumOpenForms As Int16
     Private Shared _originalCultureUiInfo As CultureInfo = CultureInfo.CurrentUICulture
     Private Shared _showDataDifferenceWhenSaving As Boolean?
@@ -98,6 +99,24 @@ Public Class GlobalVariables
         End Get
         Set(value As CultureInfo)
             _appCurrentCultureInfo = value
+        End Set
+    End Property
+
+    Public Shared Property LastCultureInfo() As CultureInfo
+        Get
+            Try
+                If _lastCultureInfo Is Nothing Then
+                    Return AppCurrentCultureInfo()
+                Else
+                    Return _lastCultureInfo
+                End If
+            Catch
+                _lastCultureInfo = New CultureInfo("en-GB")
+            End Try
+            Return _lastCultureInfo
+        End Get
+        Set(value As CultureInfo)
+            _lastCultureInfo = value
         End Set
     End Property
 

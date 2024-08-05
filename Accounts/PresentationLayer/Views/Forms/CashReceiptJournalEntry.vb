@@ -547,7 +547,11 @@ Namespace PresentationLayer.Views.Forms
             If OpenInvoiceMode Then
                 ShowOpenInvoicesDataGrid()
                 cboDiscountAccountIdNo.Enabled = True
-                btnViewGL.Visible = True
+                If EditingMode Or AddingMode Then
+                    btnViewGL.Visible = False
+                Else
+                    btnViewGL.Visible = True
+                End If
             Else
                 ShowJournalItemDataGrid()
                 btnViewGL.Visible = False
@@ -634,7 +638,7 @@ Namespace PresentationLayer.Views.Forms
                 btnViewGL.Text = Messaging.TranslateCaption("View Journal Entry")
                 ShowOpenInvoicesDataGrid()
             Else
-                btnViewGL.Text = Messaging.TranslateCaption("Show Journal Entry")
+                btnViewGL.Text = Messaging.TranslateCaption("Hide Journal Entry")
                 ShowJournalItemDataGrid()
             End If
         End Sub

@@ -9,7 +9,7 @@ Namespace PresentationLayer.Views.Interfaces
 
         Property BeginningDate As Date?
         Property EndingDate As Date?
-        ReadOnly Property Language As String
+        'ReadOnly Property CultureInfoString As String
         ReadOnly Property IdNo As Int32
         ReadOnly Property ReportCode As String
         Property Title As String

@@ -144,6 +144,7 @@
             Me.tbpPayroll = New AATM.Libraries.CBaseControlsLibrary.CTabPage()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
+            Me.CLabel6 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtActualDutyHours = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblActualDutyHours = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtDutyHours = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -164,6 +165,7 @@
             Me.cboPaymentMethod = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.cboPayGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.cacBankIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
+            Me.cboRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.tbpEarnings = New AATM.Libraries.CBaseControlsLibrary.CTabPage()
             Me.DataGridViewEarnings = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.dgvSequenceEarning = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -239,8 +241,6 @@
             Me.cboSponsorType = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.cboSupervisorIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
             Me.cacDepartmentIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
-            Me.cboRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CdtComboBox()
-            Me.CLabel6 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
             Me.SplitContainer1.Panel2.SuspendLayout()
@@ -279,7 +279,7 @@
             '
             'SplitContainer1
             '
-            Me.SplitContainer1.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+            Me.SplitContainer1.Margin = New System.Windows.Forms.Padding(5)
             '
             'SplitContainer1.Panel2
             '
@@ -291,7 +291,7 @@
             'FormTreeView
             '
             Me.FormTreeView.LineColor = System.Drawing.Color.Black
-            Me.FormTreeView.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+            Me.FormTreeView.Margin = New System.Windows.Forms.Padding(5)
             Me.FormTreeView.RightToLeft = System.Windows.Forms.RightToLeft.No
             Me.FormTreeView.Size = New System.Drawing.Size(492, 579)
             '
@@ -337,7 +337,7 @@
             Me.floMainData.Controls.Add(Me.tbcEmployeeInformation)
             Me.floMainData.Dock = System.Windows.Forms.DockStyle.Left
             Me.floMainData.Location = New System.Drawing.Point(0, 0)
-            Me.floMainData.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.floMainData.Margin = New System.Windows.Forms.Padding(4)
             Me.floMainData.Name = "floMainData"
             Me.floMainData.Size = New System.Drawing.Size(925, 579)
             Me.floMainData.TabIndex = 9
@@ -600,7 +600,7 @@
             Me.tbcEmployeeInformation.Controls.Add(Me.tbpEmployeInformation)
             Me.tbcEmployeeInformation.HotTrack = True
             Me.tbcEmployeeInformation.Location = New System.Drawing.Point(4, 95)
-            Me.tbcEmployeeInformation.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.tbcEmployeeInformation.Margin = New System.Windows.Forms.Padding(4)
             Me.tbcEmployeeInformation.Name = "tbcEmployeeInformation"
             Me.tbcEmployeeInformation.RightToLeft = System.Windows.Forms.RightToLeft.No
             Me.tbcEmployeeInformation.SelectedIndex = 0
@@ -614,9 +614,9 @@
             Me.tbpPersonal.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
             Me.tbpPersonal.Controls.Add(Me.floPersonal)
             Me.tbpPersonal.Location = New System.Drawing.Point(4, 25)
-            Me.tbpPersonal.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.tbpPersonal.Margin = New System.Windows.Forms.Padding(4)
             Me.tbpPersonal.Name = "tbpPersonal"
-            Me.tbpPersonal.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.tbpPersonal.Padding = New System.Windows.Forms.Padding(4)
             Me.tbpPersonal.Size = New System.Drawing.Size(909, 425)
             Me.tbpPersonal.TabIndex = 0
             Me.tbpPersonal.Text = "Personal Information"
@@ -675,7 +675,7 @@
             Me.imgPicture.EditingMode = False
             Me.floPersonal.SetFlowBreak(Me.imgPicture, True)
             Me.imgPicture.Location = New System.Drawing.Point(238, 4)
-            Me.imgPicture.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.imgPicture.Margin = New System.Windows.Forms.Padding(4)
             Me.imgPicture.MaxImageSize = 240000
             Me.imgPicture.Name = "imgPicture"
             Me.imgPicture.Size = New System.Drawing.Size(131, 102)
@@ -978,7 +978,7 @@
             Me.dtpBirthDate.SecurityKey = Nothing
             Me.dtpBirthDate.ShowLongDate = False
             Me.dtpBirthDate.ShowTime = False
-            Me.dtpBirthDate.Size = New System.Drawing.Size(149, 27)
+            Me.dtpBirthDate.Size = New System.Drawing.Size(124, 27)
             Me.dtpBirthDate.TabIndex = 4
             Me.dtpBirthDate.TargetCalendar = CType(resources.GetObject("dtpBirthDate.TargetCalendar"), System.Globalization.Calendar)
             Me.dtpBirthDate.Translatable = False
@@ -1155,9 +1155,9 @@
             Me.tbpContact.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
             Me.tbpContact.Controls.Add(Me.floContactInformation)
             Me.tbpContact.Location = New System.Drawing.Point(4, 25)
-            Me.tbpContact.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.tbpContact.Margin = New System.Windows.Forms.Padding(4)
             Me.tbpContact.Name = "tbpContact"
-            Me.tbpContact.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.tbpContact.Padding = New System.Windows.Forms.Padding(4)
             Me.tbpContact.Size = New System.Drawing.Size(909, 425)
             Me.tbpContact.TabIndex = 1
             Me.tbpContact.Text = "Contact Information"
@@ -1168,7 +1168,7 @@
             Me.floContactInformation.BackColor = System.Drawing.Color.Transparent
             Me.floContactInformation.Controls.Add(Me.TableLayoutPanel1)
             Me.floContactInformation.Location = New System.Drawing.Point(4, 4)
-            Me.floContactInformation.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.floContactInformation.Margin = New System.Windows.Forms.Padding(4)
             Me.floContactInformation.Name = "floContactInformation"
             Me.floContactInformation.Size = New System.Drawing.Size(855, 390)
             Me.floContactInformation.TabIndex = 8
@@ -1200,7 +1200,7 @@
             Me.TableLayoutPanel1.Controls.Add(Me.CLabel3, 0, 6)
             Me.TableLayoutPanel1.Controls.Add(Me.cacCountryCode, 3, 4)
             Me.TableLayoutPanel1.Location = New System.Drawing.Point(4, 4)
-            Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4)
             Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
             Me.TableLayoutPanel1.RowCount = 10
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
@@ -1257,7 +1257,7 @@
             Me.DataGridViewPhoneDisplay.IgnoreCase = False
             Me.DataGridViewPhoneDisplay.IsDirty = False
             Me.DataGridViewPhoneDisplay.Location = New System.Drawing.Point(4, 204)
-            Me.DataGridViewPhoneDisplay.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.DataGridViewPhoneDisplay.Margin = New System.Windows.Forms.Padding(4)
             Me.DataGridViewPhoneDisplay.Name = "DataGridViewPhoneDisplay"
             Me.DataGridViewPhoneDisplay.OldCellValue = Nothing
             Me.DataGridViewPhoneDisplay.ReadOnly = True
@@ -1885,9 +1885,9 @@
             Me.tbpPayroll.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
             Me.tbpPayroll.Controls.Add(Me.CFlowLayout1)
             Me.tbpPayroll.Location = New System.Drawing.Point(4, 25)
-            Me.tbpPayroll.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.tbpPayroll.Margin = New System.Windows.Forms.Padding(4)
             Me.tbpPayroll.Name = "tbpPayroll"
-            Me.tbpPayroll.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.tbpPayroll.Padding = New System.Windows.Forms.Padding(4)
             Me.tbpPayroll.SecurityKey = "EmployeePayInfo"
             Me.tbpPayroll.Size = New System.Drawing.Size(909, 425)
             Me.tbpPayroll.TabIndex = 2
@@ -1949,6 +1949,23 @@
             Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
             Me.TableLayoutPanel3.Size = New System.Drawing.Size(883, 333)
             Me.TableLayoutPanel3.TabIndex = 10
+            '
+            'CLabel6
+            '
+            Me.CLabel6.BackColor = System.Drawing.Color.Transparent
+            Me.CLabel6.DisplayOnly = True
+            Me.CLabel6.EditingMode = False
+            Me.CLabel6.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.CLabel6.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.CLabel6.Location = New System.Drawing.Point(1, 301)
+            Me.CLabel6.Margin = New System.Windows.Forms.Padding(1)
+            Me.CLabel6.Name = "CLabel6"
+            Me.CLabel6.SecurityKey = "EmployeePayInfo"
+            Me.CLabel6.Size = New System.Drawing.Size(192, 28)
+            Me.CLabel6.TabIndex = 11
+            Me.CLabel6.Text = "Revenue Cost Center"
+            Me.CLabel6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.CLabel6.Translatable = True
             '
             'txtActualDutyHours
             '
@@ -2508,13 +2525,60 @@
             Me.cacBankIdNo.ValueIsNumeric = False
             Me.cacBankIdNo.ValueMember = "IdNo"
             '
+            'cboRevCostCenterIdNo
+            '
+            Me.cboRevCostCenterIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+            Me.cboRevCostCenterIdNo.BackColor = System.Drawing.Color.White
+            Me.cboRevCostCenterIdNo.BegFindValue = Nothing
+            Me.cboRevCostCenterIdNo.ChangingSearchValueOnly = False
+            Me.cboRevCostCenterIdNo.CurrentSearchTerm = ""
+            Me.cboRevCostCenterIdNo.DataValue = Nothing
+            Me.cboRevCostCenterIdNo.DefaultValue = Nothing
+            Me.cboRevCostCenterIdNo.DisplayMember = "PayGroupName"
+            Me.cboRevCostCenterIdNo.DropDownHeight = 24
+            Me.cboRevCostCenterIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
+            Me.cboRevCostCenterIdNo.Editable = True
+            Me.cboRevCostCenterIdNo.EditingMode = False
+            Me.cboRevCostCenterIdNo.EndFindValue = Nothing
+            Me.cboRevCostCenterIdNo.FieldDescription = Nothing
+            Me.cboRevCostCenterIdNo.FieldName = Nothing
+            Me.cboRevCostCenterIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboRevCostCenterIdNo.FindEnabled = False
+            Me.cboRevCostCenterIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.cboRevCostCenterIdNo.ForeColor = System.Drawing.Color.Black
+            Me.cboRevCostCenterIdNo.FormattingEnabled = True
+            Me.cboRevCostCenterIdNo.HideWhenNotEditingOrAdding = False
+            Me.cboRevCostCenterIdNo.IgnoreCase = False
+            Me.cboRevCostCenterIdNo.LimitToList = False
+            Me.cboRevCostCenterIdNo.LinkedLabel = Me.lblPayGroupIdNo
+            Me.cboRevCostCenterIdNo.Location = New System.Drawing.Point(195, 301)
+            Me.cboRevCostCenterIdNo.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
+            Me.cboRevCostCenterIdNo.MaxDropDownItems = 1
+            Me.cboRevCostCenterIdNo.Name = "cboRevCostCenterIdNo"
+            Me.cboRevCostCenterIdNo.OldValue = 0
+            Me.cboRevCostCenterIdNo.OriginalDataSource = Nothing
+            Me.cboRevCostCenterIdNo.OriginalList = Nothing
+            Me.cboRevCostCenterIdNo.OverrideDropDownStyleList = False
+            Me.cboRevCostCenterIdNo.PreviousSearchTerm = Nothing
+            Me.cboRevCostCenterIdNo.SecurityKey = "EmployeePayInfo"
+            Me.cboRevCostCenterIdNo.Size = New System.Drawing.Size(267, 26)
+            Me.cboRevCostCenterIdNo.SuggestBoxHeight = 200
+            Me.cboRevCostCenterIdNo.SuggestCharCount = 0
+            Me.cboRevCostCenterIdNo.TabIndex = 10
+            Me.cboRevCostCenterIdNo.TextToSearch = Nothing
+            Me.cboRevCostCenterIdNo.Translatable = False
+            Me.cboRevCostCenterIdNo.ValueIsMandatory = False
+            Me.cboRevCostCenterIdNo.ValueIsNullable = True
+            Me.cboRevCostCenterIdNo.ValueIsNumeric = False
+            Me.cboRevCostCenterIdNo.ValueMember = "IdNo"
+            '
             'tbpEarnings
             '
             Me.tbpEarnings.BackgroundImage = CType(resources.GetObject("tbpEarnings.BackgroundImage"), System.Drawing.Image)
             Me.tbpEarnings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
             Me.tbpEarnings.Controls.Add(Me.DataGridViewEarnings)
             Me.tbpEarnings.Location = New System.Drawing.Point(4, 25)
-            Me.tbpEarnings.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.tbpEarnings.Margin = New System.Windows.Forms.Padding(4)
             Me.tbpEarnings.Name = "tbpEarnings"
             Me.tbpEarnings.SecurityKey = "EmployeeEarnings"
             Me.tbpEarnings.Size = New System.Drawing.Size(909, 425)
@@ -2561,7 +2625,7 @@
             Me.DataGridViewEarnings.IgnoreCase = False
             Me.DataGridViewEarnings.IsDirty = False
             Me.DataGridViewEarnings.Location = New System.Drawing.Point(0, 0)
-            Me.DataGridViewEarnings.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.DataGridViewEarnings.Margin = New System.Windows.Forms.Padding(4)
             Me.DataGridViewEarnings.Name = "DataGridViewEarnings"
             Me.DataGridViewEarnings.OldCellValue = Nothing
             Me.DataGridViewEarnings.ReadOnly = True
@@ -2704,9 +2768,9 @@
             Me.tbpDeductions.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
             Me.tbpDeductions.Controls.Add(Me.DataGridViewDeductions)
             Me.tbpDeductions.Location = New System.Drawing.Point(4, 25)
-            Me.tbpDeductions.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.tbpDeductions.Margin = New System.Windows.Forms.Padding(4)
             Me.tbpDeductions.Name = "tbpDeductions"
-            Me.tbpDeductions.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.tbpDeductions.Padding = New System.Windows.Forms.Padding(4)
             Me.tbpDeductions.SecurityKey = "EmployeeDeductions"
             Me.tbpDeductions.Size = New System.Drawing.Size(909, 425)
             Me.tbpDeductions.TabIndex = 6
@@ -2752,7 +2816,7 @@
             Me.DataGridViewDeductions.IgnoreCase = False
             Me.DataGridViewDeductions.IsDirty = False
             Me.DataGridViewDeductions.Location = New System.Drawing.Point(4, 4)
-            Me.DataGridViewDeductions.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.DataGridViewDeductions.Margin = New System.Windows.Forms.Padding(4)
             Me.DataGridViewDeductions.Name = "DataGridViewDeductions"
             Me.DataGridViewDeductions.OldCellValue = Nothing
             Me.DataGridViewDeductions.ReadOnly = True
@@ -2902,9 +2966,9 @@
             Me.tbpPhones.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
             Me.tbpPhones.Controls.Add(Me.DataGridViewPhones)
             Me.tbpPhones.Location = New System.Drawing.Point(4, 25)
-            Me.tbpPhones.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.tbpPhones.Margin = New System.Windows.Forms.Padding(4)
             Me.tbpPhones.Name = "tbpPhones"
-            Me.tbpPhones.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.tbpPhones.Padding = New System.Windows.Forms.Padding(4)
             Me.tbpPhones.Size = New System.Drawing.Size(909, 425)
             Me.tbpPhones.TabIndex = 5
             Me.tbpPhones.Text = "Phones"
@@ -2947,7 +3011,7 @@
             Me.DataGridViewPhones.IgnoreCase = False
             Me.DataGridViewPhones.IsDirty = False
             Me.DataGridViewPhones.Location = New System.Drawing.Point(4, 4)
-            Me.DataGridViewPhones.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.DataGridViewPhones.Margin = New System.Windows.Forms.Padding(4)
             Me.DataGridViewPhones.Name = "DataGridViewPhones"
             Me.DataGridViewPhones.OldCellValue = Nothing
             Me.DataGridViewPhones.ReadOnly = True
@@ -3123,9 +3187,9 @@
             Me.tbpLeaveCredits.Controls.Add(Me.DataGridViewLeaveCredits)
             Me.tbpLeaveCredits.DisplayOnly = True
             Me.tbpLeaveCredits.Location = New System.Drawing.Point(4, 25)
-            Me.tbpLeaveCredits.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.tbpLeaveCredits.Margin = New System.Windows.Forms.Padding(4)
             Me.tbpLeaveCredits.Name = "tbpLeaveCredits"
-            Me.tbpLeaveCredits.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.tbpLeaveCredits.Padding = New System.Windows.Forms.Padding(4)
             Me.tbpLeaveCredits.Size = New System.Drawing.Size(909, 425)
             Me.tbpLeaveCredits.TabIndex = 7
             Me.tbpLeaveCredits.Text = "Leave Credits"
@@ -3168,7 +3232,7 @@
             Me.DataGridViewLeaveCredits.IgnoreCase = False
             Me.DataGridViewLeaveCredits.IsDirty = False
             Me.DataGridViewLeaveCredits.Location = New System.Drawing.Point(4, 4)
-            Me.DataGridViewLeaveCredits.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.DataGridViewLeaveCredits.Margin = New System.Windows.Forms.Padding(4)
             Me.DataGridViewLeaveCredits.Name = "DataGridViewLeaveCredits"
             Me.DataGridViewLeaveCredits.OldCellValue = Nothing
             Me.DataGridViewLeaveCredits.ReadOnly = True
@@ -3314,7 +3378,7 @@
             Me.NoMaxLimit.ReadOnly = True
             Me.NoMaxLimit.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.NoMaxLimit.Translatable = False
-            Me.NoMaxLimit.Width = 83
+            Me.NoMaxLimit.Width = 59
             '
             'dgvMaxLimit
             '
@@ -3382,9 +3446,9 @@
             Me.tbpDocuments.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
             Me.tbpDocuments.Controls.Add(Me.DataGridViewDocuments)
             Me.tbpDocuments.Location = New System.Drawing.Point(4, 25)
-            Me.tbpDocuments.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.tbpDocuments.Margin = New System.Windows.Forms.Padding(4)
             Me.tbpDocuments.Name = "tbpDocuments"
-            Me.tbpDocuments.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.tbpDocuments.Padding = New System.Windows.Forms.Padding(4)
             Me.tbpDocuments.Size = New System.Drawing.Size(909, 425)
             Me.tbpDocuments.TabIndex = 8
             Me.tbpDocuments.Text = "Documents"
@@ -3427,7 +3491,7 @@
             Me.DataGridViewDocuments.IgnoreCase = False
             Me.DataGridViewDocuments.IsDirty = False
             Me.DataGridViewDocuments.Location = New System.Drawing.Point(4, 4)
-            Me.DataGridViewDocuments.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.DataGridViewDocuments.Margin = New System.Windows.Forms.Padding(4)
             Me.DataGridViewDocuments.Name = "DataGridViewDocuments"
             Me.DataGridViewDocuments.OldCellValue = Nothing
             Me.DataGridViewDocuments.ReadOnly = True
@@ -3869,7 +3933,7 @@
             Me.dtpReleasedDate.SecurityKey = Nothing
             Me.dtpReleasedDate.ShowLongDate = False
             Me.dtpReleasedDate.ShowTime = False
-            Me.dtpReleasedDate.Size = New System.Drawing.Size(149, 27)
+            Me.dtpReleasedDate.Size = New System.Drawing.Size(124, 27)
             Me.dtpReleasedDate.TabIndex = 1
             Me.dtpReleasedDate.TargetCalendar = CType(resources.GetObject("dtpReleasedDate.TargetCalendar"), System.Globalization.Calendar)
             Me.dtpReleasedDate.Translatable = False
@@ -3914,7 +3978,7 @@
             Me.dtpHiredDate.SecurityKey = Nothing
             Me.dtpHiredDate.ShowLongDate = False
             Me.dtpHiredDate.ShowTime = False
-            Me.dtpHiredDate.Size = New System.Drawing.Size(149, 27)
+            Me.dtpHiredDate.Size = New System.Drawing.Size(124, 27)
             Me.dtpHiredDate.TabIndex = 0
             Me.dtpHiredDate.TargetCalendar = CType(resources.GetObject("dtpHiredDate.TargetCalendar"), System.Globalization.Calendar)
             Me.dtpHiredDate.Translatable = False
@@ -4122,75 +4186,10 @@
             Me.cacDepartmentIdNo.ValueIsNumeric = False
             Me.cacDepartmentIdNo.ValueMember = "IdNo"
             '
-            'cboRevCostCenterIdNo
-            '
-            Me.cboRevCostCenterIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-            Me.cboRevCostCenterIdNo.BackColor = System.Drawing.Color.White
-            Me.cboRevCostCenterIdNo.BegFindValue = Nothing
-            Me.cboRevCostCenterIdNo.ChangingSearchValueOnly = False
-            Me.cboRevCostCenterIdNo.CurrentSearchTerm = ""
-            Me.cboRevCostCenterIdNo.DataValue = Nothing
-            Me.cboRevCostCenterIdNo.DefaultValue = Nothing
-            Me.cboRevCostCenterIdNo.DisplayMember = "PayGroupName"
-            Me.cboRevCostCenterIdNo.DropDownHeight = 24
-            Me.cboRevCostCenterIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
-            Me.cboRevCostCenterIdNo.Editable = True
-            Me.cboRevCostCenterIdNo.EditingMode = False
-            Me.cboRevCostCenterIdNo.EndFindValue = Nothing
-            Me.cboRevCostCenterIdNo.FieldDescription = Nothing
-            Me.cboRevCostCenterIdNo.FieldName = Nothing
-            Me.cboRevCostCenterIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.cboRevCostCenterIdNo.FindEnabled = False
-            Me.cboRevCostCenterIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.cboRevCostCenterIdNo.ForeColor = System.Drawing.Color.Black
-            Me.cboRevCostCenterIdNo.FormattingEnabled = True
-            Me.cboRevCostCenterIdNo.HideWhenNotEditingOrAdding = False
-            Me.cboRevCostCenterIdNo.IgnoreCase = False
-            Me.cboRevCostCenterIdNo.LimitToList = False
-            Me.cboRevCostCenterIdNo.LinkedLabel = Me.lblPayGroupIdNo
-            Me.cboRevCostCenterIdNo.Location = New System.Drawing.Point(195, 301)
-            Me.cboRevCostCenterIdNo.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
-            Me.cboRevCostCenterIdNo.MaxDropDownItems = 1
-            Me.cboRevCostCenterIdNo.Name = "cboRevCostCenterIdNo"
-            Me.cboRevCostCenterIdNo.OldValue = 0
-            Me.cboRevCostCenterIdNo.OriginalDataSource = Nothing
-            Me.cboRevCostCenterIdNo.OriginalList = Nothing
-            Me.cboRevCostCenterIdNo.OverrideDropDownStyleList = False
-            Me.cboRevCostCenterIdNo.PreviousSearchTerm = Nothing
-            Me.cboRevCostCenterIdNo.SecurityKey = "EmployeePayInfo"
-            Me.cboRevCostCenterIdNo.Size = New System.Drawing.Size(267, 26)
-            Me.cboRevCostCenterIdNo.SuggestBoxHeight = 200
-            Me.cboRevCostCenterIdNo.SuggestCharCount = 0
-            Me.cboRevCostCenterIdNo.TabIndex = 10
-            Me.cboRevCostCenterIdNo.TextToSearch = Nothing
-            Me.cboRevCostCenterIdNo.Translatable = False
-            Me.cboRevCostCenterIdNo.ValueIsMandatory = False
-            Me.cboRevCostCenterIdNo.ValueIsNullable = True
-            Me.cboRevCostCenterIdNo.ValueIsNumeric = False
-            Me.cboRevCostCenterIdNo.ValueMember = "IdNo"
-            '
-            'CLabel6
-            '
-            Me.CLabel6.BackColor = System.Drawing.Color.Transparent
-            Me.CLabel6.DisplayOnly = True
-            Me.CLabel6.EditingMode = False
-            Me.CLabel6.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel6.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.CLabel6.Location = New System.Drawing.Point(1, 301)
-            Me.CLabel6.Margin = New System.Windows.Forms.Padding(1)
-            Me.CLabel6.Name = "CLabel6"
-            Me.CLabel6.SecurityKey = "EmployeePayInfo"
-            Me.CLabel6.Size = New System.Drawing.Size(192, 28)
-            Me.CLabel6.TabIndex = 11
-            Me.CLabel6.Text = "Revenue Cost Center"
-            Me.CLabel6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.CLabel6.Translatable = True
-            '
             'EmployeeEntryTv
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
             Me.ClientSize = New System.Drawing.Size(1448, 634)
-            Me.FormCulture = New System.Globalization.CultureInfo("en-US")
             Me.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
             Me.Name = "EmployeeEntryTv"
             Me.Text = "Employee Maintenance Form"

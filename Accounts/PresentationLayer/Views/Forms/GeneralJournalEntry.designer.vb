@@ -68,7 +68,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvDebit = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
             Me.dgvCredit = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
             Me.dgvRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
-            Me.dgvPayIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+            Me.dgvContactIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
             Me.dgvNotes = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.SpecialAccount = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -483,7 +483,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewJournalItems.BegFindValue = Nothing
             Me.DataGridViewJournalItems.Cached = False
             Me.DataGridViewJournalItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DataGridViewJournalItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvAccountIdNo, Me.dgvDebit, Me.dgvCredit, Me.dgvRevCostCenterIdNo, Me.dgvPayIdNo, Me.dgvNotes, Me.dgvIdNo, Me.SpecialAccount, Me.AccountIdNoDataGridViewTextBoxColumn, Me.AccountNameDataGridViewTextBoxColumn, Me.CancelledDataGridViewCheckBoxColumn, Me.DiscountTakenDataGridViewTextBoxColumn, Me.JournalIdNoDataGridViewTextBoxColumn, Me.OpenInvoiceIdNoDataGridViewTextBoxColumn, Me.OriginalAmountDataGridViewTextBoxColumn, Me.PaidAmountDataGridViewTextBoxColumn, Me.PayeeTypeDataGridViewTextBoxColumn})
+            Me.DataGridViewJournalItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvAccountIdNo, Me.dgvDebit, Me.dgvCredit, Me.dgvRevCostCenterIdNo, Me.dgvContactIdNo, Me.dgvNotes, Me.dgvIdNo, Me.SpecialAccount, Me.AccountIdNoDataGridViewTextBoxColumn, Me.AccountNameDataGridViewTextBoxColumn, Me.CancelledDataGridViewCheckBoxColumn, Me.DiscountTakenDataGridViewTextBoxColumn, Me.JournalIdNoDataGridViewTextBoxColumn, Me.OpenInvoiceIdNoDataGridViewTextBoxColumn, Me.OriginalAmountDataGridViewTextBoxColumn, Me.PaidAmountDataGridViewTextBoxColumn, Me.PayeeTypeDataGridViewTextBoxColumn})
             Me.DataGridViewJournalItems.DataFilter = Nothing
             Me.DataGridViewJournalItems.DataSource = Me.bsJournalItems
             DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -689,22 +689,20 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvRevCostCenterIdNo.SuggestCharCount = 0
             Me.dgvRevCostCenterIdNo.Translatable = False
             '
-            'dgvPayIdNo
+            'dgvContactIdNo
             '
-            Me.dgvPayIdNo.AutoComplete = False
-            Me.dgvPayIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-            Me.dgvPayIdNo.DataPropertyName = "PayIdNo"
+            Me.dgvContactIdNo.AutoComplete = False
+            Me.dgvContactIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+            Me.dgvContactIdNo.DataPropertyName = "ContactIdNo"
             DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
-            Me.dgvPayIdNo.DefaultCellStyle = DataGridViewCellStyle7
-            Me.dgvPayIdNo.EditingMode = False
-            resources.ApplyResources(Me.dgvPayIdNo, "dgvPayIdNo")
-            Me.dgvPayIdNo.Name = "dgvPayIdNo"
-            Me.dgvPayIdNo.ReadOnly = True
-            Me.dgvPayIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvPayIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-            Me.dgvPayIdNo.SuggestCharCount = 0
-            Me.dgvPayIdNo.Translatable = False
+            Me.dgvContactIdNo.DefaultCellStyle = DataGridViewCellStyle7
+            Me.dgvContactIdNo.EditingMode = False
+            resources.ApplyResources(Me.dgvContactIdNo, "dgvContactIdNo")
+            Me.dgvContactIdNo.Name = "dgvContactIdNo"
+            Me.dgvContactIdNo.ReadOnly = True
+            Me.dgvContactIdNo.SuggestCharCount = 0
+            Me.dgvContactIdNo.Translatable = False
             '
             'dgvNotes
             '
@@ -854,12 +852,13 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblClosing As CLabel
         Friend WithEvents txtTotalDebits As CTextBox
         Friend WithEvents txtTotalCredits As CTextBox
+        Friend WithEvents dgvPayIdNo As CDgvComboBoxColumn
         Friend WithEvents dgvSequence As CDgvTextColumn
         Friend WithEvents dgvAccountIdNo As CDgvComboBoxColumn
         Friend WithEvents dgvDebit As CdgvMoneyColumn
         Friend WithEvents dgvCredit As CdgvMoneyColumn
         Friend WithEvents dgvRevCostCenterIdNo As CDgvComboBoxColumn
-        Friend WithEvents dgvPayIdNo As CDgvComboBoxColumn
+        Friend WithEvents dgvContactIdNo As CDgvComboBoxColumn
         Friend WithEvents dgvNotes As CDgvTextColumn
         Friend WithEvents dgvIdNo As DataGridViewTextBoxColumn
         Friend WithEvents SpecialAccount As DataGridViewTextBoxColumn

@@ -80,7 +80,7 @@ Namespace DataLayer.AdoNet
             New JournalItem() With {
             .AccountIdNo = Extensions.AsInt(Of Int16)(reader("AccountIdNo")),
             .AccountName = Extensions.AsString(reader("AccountName")),
-            .ContactIdNo = Extensions.AsInt(Of Int32)(reader("AccountIdNo")),
+            .ContactIdNo = Extensions.AsNullable(Of Int32?)(reader("ContactIdNo")),
             .Credit = Extensions.AsDecimal(reader("Credit")),
             .DiscountTaken = Extensions.AsDecimal(reader("DiscountTaken")),
             .Debit = Extensions.AsDecimal(reader("Debit")),

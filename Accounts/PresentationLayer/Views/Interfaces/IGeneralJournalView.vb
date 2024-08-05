@@ -20,9 +20,10 @@ Namespace PresentationLayer.Views.Interfaces
         Property AccountsByCode As Object
         Property RevCostCentersByCode As Object
         Property PayeeByCode As Object
+        Property ContactIdDataSource As Object
         Property CurrentPayeeDataSource As Object
         Event AccountIdChanged(bsJournalItems As BindingSource)
-        Event EditingAccountIdNo(bsJournalItems As BindingSource)
+        Event EditingContactIdNo(bsJournalItems As BindingSource)
     End Interface
 
 End Namespace

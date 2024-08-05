@@ -35,16 +35,12 @@ Public Class ApArEmReportPresenter(Of TM As New)
         Select Case View.ReportCode
             Case "ApStatement"
                 _reportName = "Statement Of Accounts Payable"
-                If View.Language = "ar" Then
-                    _reportFileName = "Statement of Accounts Payable Arabic.Rpt"
-                Else
-                    _reportFileName = "Statement of Accounts Payable.Rpt"
-                End If
+                _reportFileName = "Statement of Accounts Payable.Rpt"
                 _tableName = "Supplier"
                 View.NoDates = False
             Case "ArStatement"
                 _reportName = "Statement Of Accounts Receivable"
-                If View.Language = "ar" Then
+                If View.LanguageCode = "ar" Then
                     _reportFileName = "Statement of Accounts Receivable Arabic.Rpt"
                 Else
                     _reportFileName = "Statement of Accounts Receivable.Rpt"
@@ -53,7 +49,7 @@ Public Class ApArEmReportPresenter(Of TM As New)
                 View.NoDates = False
             Case "ErStatement"
                 _reportName = "Statement Of Employee Loans"
-                If View.Language = "ar" Then
+                If View.LanguageCode = "ar" Then
                     _reportFileName = "Statement of Employee Loans Arabic.Rpt"
                 Else
                     _reportFileName = "Statement of Employee Loans.Rpt"
@@ -80,14 +76,14 @@ Public Class ApArEmReportPresenter(Of TM As New)
         Dim endingDate As Date?
         Dim estName As String
 
-        If View.Language = "ar" Then
+        If View.LanguageCode = "ar" Then
             estName = GlobalVariables.EstablishmentNameAra
         Else
             estName = GlobalVariables.EstablishmentName
         End If
         beginningDate = View.BeginningDate
         endingDate = View.EndingDate
-        Dim reportName = Libraries.MessagingLibrary.Messaging.TranslateCaption(_reportName)
+        Dim reportName = Libraries.MessagingLibrary.Messaging.TranslateCaption(_reportName, View.FormCulture.Name)
         Dim reportTitle As String
         Dim valid As Boolean = True
         If beginningDate Is Nothing Or endingDate Is Nothing Then
@@ -109,24 +105,24 @@ Public Class ApArEmReportPresenter(Of TM As New)
                         View.IdNo, "SupplierIdNo",
                         View.PersonSelectorControl.Text, "DisplayName",
                         reportTitle, "ReportTitle",
-                        GlobalVariables.EstablishmentName, "EstablishmentName",
-                        View.Language, "Language"}
+                        estName, "EstablishmentName",
+                        View.LanguageCode, "Language"}
                 Case "ArStatement"
                     reportParameters = {beginningDate.Value, "BeginningDate",
                         endingDate.Value, "EndingDate",
                         View.IdNo, "CustomerIdNo",
                         View.PersonSelectorControl.Text, "DisplayName",
                         reportTitle, "ReportTitle",
-                        GlobalVariables.EstablishmentName, "EstablishmentName",
-                        View.Language, "Language"}
+                        estName, "EstablishmentName",
+                        View.LanguageCode, "Language"}
                 Case "ErStatement"
                     reportParameters = {beginningDate.Value, "BeginningDate",
                         endingDate.Value, "EndingDate",
                         View.IdNo, "EmployeeIdNo",
                         View.PersonSelectorControl.Text, "DisplayName",
                         reportTitle, "ReportTitle",
-                        GlobalVariables.EstablishmentName, "EstablishmentName",
-                        View.Language, "Language"}
+                        estName, "EstablishmentName",
+                        View.LanguageCode, "Language"}
                 Case "EmployeeInfo"
                     reportParameters = {View.IdNo, "EmployeeIdNo"}
                 Case "LeaveStatement"
@@ -134,8 +130,8 @@ Public Class ApArEmReportPresenter(Of TM As New)
                         endingDate.Value, "EndingDate",
                         View.IdNo, "EmployeeIdNo",
                         reportTitle, "ReportTitle",
-                        GlobalVariables.EstablishmentName, "EstablishmentName",
-                        View.Language, "Language"}
+                        estName, "EstablishmentName",
+                        View.LanguageCode, "Language"}
             End Select
             ShowReportToScreen(_reportFileName, reportParameters)
         End If

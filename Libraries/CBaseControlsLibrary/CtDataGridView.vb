@@ -537,7 +537,7 @@ Public Class CtDataGridView
             cb = e.Control
             'set the dropdown style of a combobox
             cb.DropDownStyle = ComboBoxStyle.DropDown
-            'set the property of a combobox to autocomplete mode.
+            set the property of a combobox to autocomplete mode.
             cb.AutoCompleteMode = AutoCompleteMode.SuggestAppend
             'cb.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
             'cb.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor

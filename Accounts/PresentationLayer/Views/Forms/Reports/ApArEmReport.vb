@@ -48,11 +48,13 @@ Namespace PresentationLayer.Views.Forms.Reports
             End Set
         End Property
 
-        Public ReadOnly Property Language As String Implements IApArEmReportView.Language
-            Get
-                Return Strings.Left(FormCulture.Name, FormCulture.Name.IndexOf("-"))
-            End Get
-        End Property
+        'Public ReadOnly Property CultureInfoString As String Implements IApArEmReportView.CultureInfoString
+        '    Get
+        '        GlobalVariables.LastCultureInfo = New Globalization.CultureInfo(FormCulture.Name)
+        '        Return FormCulture.Name
+        '        'Return Strings.Left(FormCulture.Name, FormCulture.Name.IndexOf("-"))
+        '    End Get
+        'End Property
 
         Public Property IdNo As Integer Implements IApArEmReportView.IdNo
             Get
