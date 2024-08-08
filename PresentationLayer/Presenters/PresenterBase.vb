@@ -772,9 +772,10 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         End Try
     End Sub
 
-    Protected Sub AddRecordInitializer()
+    Protected Overridable Sub AddRecordInitializer()
         Model = New TM
-        GlobalVariables.Mapper.Map(Model, View)
+        GlobalFunctions.ManualMap(Model, View)
+        'GlobalVariables.Mapper.Map(Model, View)
         RaiseEvent NewRecordInitialized()
     End Sub
 

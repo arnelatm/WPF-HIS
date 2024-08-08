@@ -6,15 +6,15 @@ Namespace PresentationLayer.Views.Interfaces
     Public Interface ICashReceiptJournalView
         Inherits IView
 
-        Event AddCustomerOpenInvoices(bs As BindingSource)
+        Event AddUnpaidCustomerOpenInvoices()
 
-        Event AutoApplyAmountRequested(bsCsrOiItems As BindingSource)
+        Event AutoApplyAmountRequested()
 
-        Event ContactIdNoChanged(bs As BindingSource)
+        Event ContactIdNoChanged()
 
         Event CreditAmountChanged(sender As Object, e As DataGridViewCellEventArgs)
 
-        Event DebitAccountIdNoChanged(bs As BindingSource)
+        Event DebitAccountIdNoChanged()
 
         Event DebitAmountChanged(sender As Object, e As DataGridViewCellEventArgs)
 
@@ -22,11 +22,11 @@ Namespace PresentationLayer.Views.Interfaces
 
         Event JiAccountIdNoChanged(sender As Object, e As DataGridViewCellEventArgs)
 
-        Event OpenInvoiceDataRequested(bs As BindingSource)
+        Event OpenInvoiceDataRequested()
 
-        Event ReceiptAmountChanged(bsJournalItem As BindingSource, bsCsrOiItem As BindingSource)
+        Event ReceiptAmountChanged()
 
-        Event ReceiptTypeChanged(paymentType As String, bsJournalItem As BindingSource, bsCsrOiItems As BindingSource)
+        Event ReceiptTypeChanged(paymentType As String)
 
         Event UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs)
 
@@ -43,12 +43,14 @@ Namespace PresentationLayer.Views.Interfaces
         Property ContactIdNo As Int32?
         Property CSEIdNo As Int32?
         Property CsrOiItems As List(Of CsrOiItemView)
+        Property CsrOiItemsBs As BindingSource
         Property DateCreated As DateTime?
         Property DiscountAccountIdNo As Int16?
         Property DiscountTaken As Decimal
         Property IdNo As Int32
         Property JournalCode As String
         Property JournalCodeDisplay As String
+        Property JournalItemsBs As BindingSource
         Property JournalItems As List(Of JournalItemView)
         Property Notes As String
         Property OpenInvoiceMode As Boolean

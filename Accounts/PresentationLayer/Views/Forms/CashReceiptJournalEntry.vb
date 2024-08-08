@@ -31,24 +31,25 @@ Namespace PresentationLayer.Views.Forms
             SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
         End Sub
 
-        Public Event AddCustomerOpenInvoices(bs As BindingSource) Implements ICashReceiptJournalView.AddCustomerOpenInvoices
+        Public Event AddUnpaidCustomerOpenInvoices() Implements ICashReceiptJournalView.AddUnpaidCustomerOpenInvoices
 
-        Public Event AutoApplyAmountRequested(bsCsrOiItems As BindingSource) Implements ICashReceiptJournalView.AutoApplyAmountRequested
+        Public Event AutoApplyAmountRequested() Implements ICashReceiptJournalView.AutoApplyAmountRequested
 
-        Public Event ContactIdNoChanged(bs As BindingSource) Implements ICashReceiptJournalView.ContactIdNoChanged
+        Public Event ContactIdNoChanged() Implements ICashReceiptJournalView.ContactIdNoChanged
 
         Public Event CreditAmountChanged(sender As Object, e As DataGridViewCellEventArgs) Implements ICashReceiptJournalView.CreditAmountChanged
 
-        Public Event DebitAccountIdNoChanged(bs As BindingSource) Implements ICashReceiptJournalView.DebitAccountIdNoChanged
+        Public Event DebitAccountIdNoChanged() Implements ICashReceiptJournalView.DebitAccountIdNoChanged
         Public Event DebitAmountChanged(sender As Object, e As DataGridViewCellEventArgs) Implements ICashReceiptJournalView.DebitAmountChanged
         Public Event FirstLineUpdateNeeded() Implements ICashReceiptJournalView.FirstLineUpdateNeeded
 
         Public Event JiAccountIdNoChanged(sender As Object, e As DataGridViewCellEventArgs) Implements ICashReceiptJournalView.JiAccountIdNoChanged
         'Public Event FirstLineUpdateNeeded() Implements ICashReceiptJournalView.FirstLineUpdateNeeded
-        Public Event OpenInvoiceDataRequested(bs As BindingSource) Implements ICashReceiptJournalView.OpenInvoiceDataRequested
-        Public Event ReceiptAmountChanged(bsJournalItem As BindingSource, bsCsrJournalItem As BindingSource) Implements ICashReceiptJournalView.ReceiptAmountChanged
-        Public Event ReceiptTypeChanged(paymentType As String, bsJournalItem As BindingSource, bsCsrOiItems As BindingSource) Implements ICashReceiptJournalView.ReceiptTypeChanged
+        Public Event OpenInvoiceDataRequested() Implements ICashReceiptJournalView.OpenInvoiceDataRequested
+        Public Event ReceiptAmountChanged() Implements ICashReceiptJournalView.ReceiptAmountChanged
+        Public Event ReceiptTypeChanged(paymentType As String) Implements ICashReceiptJournalView.ReceiptTypeChanged
         Public Event UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Implements ICashReceiptJournalView.UserDeletedRow
+
 #Region "Properties"
 
         Public Property AccountIdNo As Int16? Implements ICashReceiptJournalView.AccountIdNo
@@ -292,16 +293,22 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
         Public Property RevCostCentersByCode Implements ICashReceiptJournalView.RevCostCentersByCode
-        Public ReadOnly Property TotalCredits As Decimal Implements ICashReceiptJournalView.TotalCredits
+        Public Property TotalCredits As Decimal Implements ICashReceiptJournalView.TotalCredits
             Get
                 Return NumParser(Of Decimal)(txtTotalCredits.Text)
             End Get
+            Set(value As Decimal)
+                txtTotalCredits.Text = value
+            End Set
         End Property
 
-        Public ReadOnly Property TotalDebits As Decimal Implements ICashReceiptJournalView.TotalDebits
+        Public Property TotalDebits As Decimal Implements ICashReceiptJournalView.TotalDebits
             Get
                 Return NumParser(Of Decimal)(txtTotalDebits.Text)
             End Get
+            Set(value As Decimal)
+                txtTotalDebits.Text = value
+            End Set
         End Property
 
         Public Property TransactionDate As Date? Implements ICashReceiptJournalView.TransactionDate
@@ -341,6 +348,24 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 txtVatNumber.Text = Value
+            End Set
+        End Property
+
+        Public Property CsrOiItemsBs As BindingSource Implements ICashReceiptJournalView.CsrOiItemsBs
+            Get
+                Return bsCsrOiItems
+            End Get
+            Set(value As BindingSource)
+                bsCsrOiItems = value
+            End Set
+        End Property
+
+        Public Property JournalItemsBs As BindingSource Implements ICashReceiptJournalView.JournalItemsBs
+            Get
+                Return bsJournalItems
+            End Get
+            Set(value As BindingSource)
+                bsJournalItems = value
             End Set
         End Property
 #End Region 'Properties
@@ -443,7 +468,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub btnAutoApply_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnAutoApply.ClickButtonArea
-            RaiseEvent AutoApplyAmountRequested(bsCsrOiItems)
+            RaiseEvent AutoApplyAmountRequested()
             UpdateOiTotals()
         End Sub
 
@@ -482,8 +507,9 @@ Namespace PresentationLayer.Views.Forms
             BindJournalItem()
         End Sub
 
-        Private Sub cboContactIdNo_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cboContactIdNo.SelectionChangeCommitted
-            RaiseEvent ContactIdNoChanged(bsCsrOiItems)
+        Private Sub cboContactIdNo_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cboContactIdNo.Validated
+            RaiseEvent ContactIdNoChanged()
+            bsCsrOiItems.ResetBindings(False)
         End Sub
 
         Private Sub OnInputsTurnedOff() Handles MyBase.InputsTurnedOff
@@ -499,7 +525,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub OnInputsTurnedOn() Handles MyBase.InputsTurnedOn
             bsJournalItems.ResetBindings(False)
             btnViewGL.Visible = False
-            RaiseEvent AddCustomerOpenInvoices(bsCsrOiItems)
+            RaiseEvent AddUnpaidCustomerOpenInvoices()
             bsCsrOiItems.ResetBindings(False)
             UpdateDisplay()
             If OpenInvoiceMode Then
@@ -603,10 +629,10 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub UpdateOpenInvoicesDisplay()
             If CsrOiItems IsNot Nothing Then
-                If AddingMode Or cboContactIdNo.ValueChanged() Then
+                If AddingMode Then
                     CsrOiItems.Clear()
                 End If
-                RaiseEvent OpenInvoiceDataRequested(bsCsrOiItems)
+                RaiseEvent OpenInvoiceDataRequested()
                 bsCsrOiItems.ResetBindings(True)
                 UpdateOiTotals()
             End If
@@ -646,7 +672,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub CboAccountIdNo_Changed(sender As Object, e As EventArgs) Handles cboAccountIdNo.SelectedValueChanged
             If AddingMode OrElse EditingMode Then
                 If Not OpenInvoiceMode Then
-                    RaiseEvent DebitAccountIdNoChanged(bsJournalItems)
+                    RaiseEvent DebitAccountIdNoChanged()
                 Else
                     ' nothing to do, values for JournalItem will be auto-generated or computed based on paid invoices
                 End If
@@ -654,16 +680,12 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub CboContactIdNo_ValueChanged(sender As Object, e As EventArgs) Handles cboContactIdNo.SelectedValueChanged
-            If AddingMode OrElse EditingMode Then
-                If OpenInvoiceMode Then
-                    UpdateOpenInvoicesDisplay()
-                End If
-            End If
+            UpdateOpenInvoicesDisplay()
         End Sub
 
         Private Sub CboPayorType_ValueChanged(sender As Object, e As EventArgs) Handles cboPayorType.SelectedValueChanged
             If AddingMode OrElse EditingMode Then
-                RaiseEvent ReceiptTypeChanged(PayorType, bsJournalItems, bsCsrOiItems)
+                RaiseEvent ReceiptTypeChanged(PayorType)
                 If OpenInvoiceMode Then
                     UpdateOpenInvoicesDisplay()
                     If cboContactIdNo.SelectedIndex = -1 Then
@@ -740,7 +762,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub TxtAmount_Validated(sender As Object, e As EventArgs) Handles txtAmount.Validated
-            RaiseEvent ReceiptAmountChanged(bsJournalItems, bsCsrOiItems)
+            RaiseEvent ReceiptAmountChanged()
             'RaiseEvent ReceiptAmountChanged(bsJournalItems)
             'If OpenInvoiceMode Then
             ' UpdateOiTotals()

@@ -20,7 +20,8 @@ Namespace PresentationLayer.Views
         Public Property TransactionDate As Date? Implements ICsrOiItemView.TransactionDate
         Public Property DataFilter As String Implements IView.DataFilter
         Public Property Errors As List(Of String) Implements IView.Errors
-
+        'Public Property CsrOiItemViewBs As BindingSource Implements ICsrOiItemView.BindingSourceBs
+        'Public Property JournalItemBs As BindingSource Implements ICsrOiItemView.JournalItemBs
 
     End Class
 
