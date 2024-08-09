@@ -1341,24 +1341,29 @@ Public Module GlobalFunctions
                     Dim instance = Activator.CreateInstance(collectionType)
                     toObject = instance
                 Else
+                    Dim newCollectionObj = Activator.CreateInstance(collectionType)
                     For Each obj As Object In TryCast(fromObject, IEnumerable)
-                        toObject = Nothing
+                        'toObject = Nothing
                         Dim memberType = collectionType.GetGenericArguments.Single
-                        Dim memberNewMethod As MethodInfo = memberType.GetMethods().Where(Function(m) m.Name = "New" AndAlso m.GetParameters().Count() = 1).FirstOrDefault()
+                        'Dim memberNewMethod As MethodInfo = memberType.GetMethods().Where(Function(m) m.Name = "New" AndAlso m.GetParameters().Count() = 1).FirstOrDefault()
+                        Dim newObj = Activator.CreateInstance(memberType)
+                        ManualMap(obj, newObj)
+                        newCollectionObj.Add(newObj)
                         'Dim memberInstance
                         'memberNewMethod.Invoke(obj)
 
                         'ManualMap(obj, instance)
                         'addMethod.Invoke(toObject, instance)
-                        toObject = Nothing
+                        'toObject = Nothing
                     Next
+                    toObject = newCollectionObj
                 End If
             End If
         Else
             For Each fromObjPi As PropertyInfo In propList
                 For Each toObjPi As PropertyInfo In toObject.GetType.GetProperties()
                     If fromObjPi.Name.ToLower() = toObjPi.Name.ToLower() And toObjPi.CanWrite Then
-                        Dim source = toObjPi.GetValue(toObject)
+                        Dim source = fromObjPi.GetValue(fromObject)
                         Dim propName As String = fromObjPi.Name()
                         Dim tType As Type
                         Dim safeValue As Object
