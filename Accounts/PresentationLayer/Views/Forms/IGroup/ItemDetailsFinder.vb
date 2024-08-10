@@ -139,7 +139,7 @@ Public Class ItemDetailsFinder
             SelectedId = DataGridViewItemDetails.CurrentRow.Cells("IdNo").Value
             ItemDetails = _service.GetRecordByIdNo(Of ItemDetailsModel)(SelectedId)
             'Dim ItemDetailsModel = _service.GetRecordByIdNo(Of ItemDetailsModel)(SelectedId)
-            'ItemDetails = GlobalVariables.Mapper.Map(ItemDetailsModel, ItemDetails)
+            'ItemDetails = GlobalFUnctions.ManualMap(ItemDetailsModel, ItemDetails)
             'ItemDetails = ItemDetailsModel
             'NoOfUnits = _service.CountRecordWithKey(Of Int32)("ItemDetailsUnit", "ItemDetailsIdNo", SelectedId) + 1
         End If

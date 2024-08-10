@@ -42,7 +42,7 @@ Namespace PresentationLayer.Presenters
             Else
                 pmrInvestigationModel = Service.GetParametrized(Of PmrInvestigationModel)({View.DoctorCode, View.TransactionDate})
             End If
-            GlobalVariables.Mapper.Map(pmrInvestigationModel, View)
+            GlobalFUnctions.ManualMap(pmrInvestigationModel, View)
         End Sub
 
         Private Sub GetDoctorCode(ByRef drId As String)
@@ -57,7 +57,7 @@ Namespace PresentationLayer.Presenters
         Private Sub PrintReport()
             Dim pmrPatients As New PmrInvestigationModel
             pmrPatients = Service.GetParametrized(Of PmrInvestigationModel)({View.DoctorCode, View.TransactionDate})
-            GlobalVariables.Mapper.Map(pmrPatients, View)
+            GlobalFUnctions.ManualMap(pmrPatients, View)
         End Sub
 
         Public Sub GetPMRDataAccess(ByRef dataAccessLevel As String)
@@ -131,7 +131,7 @@ Namespace PresentationLayer.Presenters
             Else
                 DoctorsPrescriptionModel = Service.GetParametrized(Of DoctorsPrescriptionModel)({View.DoctorCode, View.TransactionDate})
             End If
-            GlobalVariables.Mapper.Map(DoctorsPrescriptionModel, View)
+            GlobalFUnctions.ManualMap(DoctorsPrescriptionModel, View)
         End Sub
 
         Private Sub GetDoctorCode(ByRef drId As String)
@@ -150,13 +150,13 @@ Namespace PresentationLayer.Presenters
         Private Sub UpdatePrescriptionDetail(transKey As Int32?)
             Dim prescriptionDetails As New List(Of PrescriptionItemModel)
             prescriptionDetails = _prescriptionDetailsService.GetRecordsWithGroupIdNo(Of PrescriptionItemModel)(transKey)
-            GlobalVariables.Mapper.Map(prescriptionDetails, View.PrescriptionDetails)
+            GlobalFUnctions.ManualMap(prescriptionDetails, View.PrescriptionDetails)
         End Sub
 
         'Private Sub PrintReport()
         '    Dim pmrPatients As New DoctorsPrescriptionModel
         '    pmrPatients = Service.GetParametrized(Of DoctorsPrescriptionModel)({View.DoctorCode, View.TransactionDate})
-        '    GlobalVariables.Mapper.Map(pmrPatients, View)
+        '    GlobalFUnctions.ManualMap(pmrPatients, View)
         'End Sub
 
         'Private ReadOnly _prescriptionDetailsService As New AccountsService("PrescriptionDetail")
@@ -192,7 +192,7 @@ Namespace PresentationLayer.Presenters
         ''        'pmrPatients = _doctorsPatientService.GetParametrized(Of DoctorsPatientModel)({View.DoctorCode, View.TransactionDate})
         ''        pmrPatients = Service.GetParametrized(Of DoctorsPatientModel)({View.DoctorCode, View.TransactionDate})
         ''    End If
-        ''    GlobalVariables.Mapper.Map(pmrPatients, View.DoctorsPatients)
+        ''    GlobalFUnctions.ManualMap(pmrPatients, View.DoctorsPatients)
         ''End Sub
 
         'Private Sub GetDoctorCode(ByRef drId As String)
@@ -207,7 +207,7 @@ Namespace PresentationLayer.Presenters
         'Private Sub PrintReport()
         '    Dim pmrPatients As New DoctorsPrescriptionModel
         '    pmrPatients = Service.GetParametrized(Of DoctorsPrescriptionModel)({View.DoctorCode, View.TransactionDate})
-        '    GlobalVariables.Mapper.Map(pmrPatients, View)
+        '    GlobalFUnctions.ManualMap(pmrPatients, View)
         'End Sub
 
         'Private Sub OnRowChanged(patientIdNo As Int32)
@@ -218,7 +218,7 @@ Namespace PresentationLayer.Presenters
         'Private Sub UpdatePrescriptionDetail(patientIdNo As Int32)
         '    Dim prescriptionDetails As List(Of PrescriptionDetailModel)
         '    prescriptionDetails = _prescriptionDetailsService.GetRecordsWithGroupIdNo(Of PrescriptionDetailModel)(patientIdNo)
-        '    GlobalVariables.Mapper.Map(prescriptionDetails, View.PrescriptionDetails)
+        '    GlobalFUnctions.ManualMap(prescriptionDetails, View.PrescriptionDetails)
         'End Sub
 
     End Class
@@ -243,7 +243,7 @@ Namespace PresentationLayer.Presenters
     '    Private Sub UpdatePrescriptionDetail(patientIdNo As Int32)
     '        Dim prescriptionDetails As List(Of PrescriptionDetailModel)
     '        prescriptionDetails = _prescriptionDetailsService.GetRecordsWithGroupIdNo(Of PrescriptionDetailModel)(patientIdNo)
-    '        GlobalVariables.Mapper.Map(prescriptionDetails, View.PrescriptionDetails)
+    '        GlobalFUnctions.ManualMap(prescriptionDetails, View.PrescriptionDetails)
     '    End Sub
 
     'End Class
@@ -281,7 +281,7 @@ Namespace PresentationLayer.Presenters
             Else
                 pmrPatients = Service.GetParametrized(Of PmrInvestigationRequestModel)({View.DoctorCode, View.TransactionDate})
             End If
-            GlobalVariables.Mapper.Map(pmrPatients, View)
+            GlobalFUnctions.ManualMap(pmrPatients, View)
         End Sub
 
         Private Sub GetDoctorCode(ByRef drId As String)
@@ -296,7 +296,7 @@ Namespace PresentationLayer.Presenters
         Private Sub PrintReport()
             Dim pmrPatients As New PmrInvestigationRequestModel
             pmrPatients = Service.GetParametrized(Of PmrInvestigationRequestModel)({View.DoctorCode, View.TransactionDate})
-            GlobalVariables.Mapper.Map(pmrPatients, View)
+            GlobalFUnctions.ManualMap(pmrPatients, View)
         End Sub
 
         Public Sub GetPMRDataAccess(ByRef dataAccessLevel As String)

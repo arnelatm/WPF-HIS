@@ -30,3 +30,4 @@ ON dbo.DrugAccept.GTIN = dbo.DrugList.GTIN
 GO
 *******************************************************************
 
+Remove one entry for GlobalVariables.Mapper.Map 

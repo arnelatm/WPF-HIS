@@ -28,7 +28,7 @@ Namespace PresentationLayer.Presenters
 
         Private Sub CreateDataSources()
             Dim reportGroupList As List(Of ReportGroupModel) = Service.GetList(Of ReportGroupModel)
-            GlobalVariables.Mapper.Map(reportGroupList, View.ReportGroupList)
+            GlobalFUnctions.ManualMap(reportGroupList, View.ReportGroupList)
             If reportGroupList.Count() > 0 Then
                 UpdateReportList(reportGroupList.Item(0).IdNo)
             End If
@@ -36,7 +36,7 @@ Namespace PresentationLayer.Presenters
 
         Private Sub UpdateReportList(reportGroupIdNo As Int16)
             Dim reportList As List(Of ReportModel) = Service.GetListParametrized(Of ReportModel)(reportGroupIdNo)
-            GlobalVariables.Mapper.Map(reportList, View.ReportList)
+            GlobalFUnctions.ManualMap(reportList, View.ReportList)
         End Sub
 
         Private Sub GoPrintRecord()
@@ -46,7 +46,7 @@ Namespace PresentationLayer.Presenters
         Public Sub OnSelectedGroupChangedEvent(ByRef bsReportGroupList As BindingSource, ByRef bsReportList As BindingSource)
             Dim reportGroupIdNo As Int32 = GetReportGroupIdNo(bsReportGroupList)
             Dim reportList As List(Of ReportModel) = Service.GetListParametrized(Of ReportModel)(reportGroupIdNo)
-            GlobalVariables.Mapper.Map(reportList, View.ReportList)
+            GlobalFUnctions.ManualMap(reportList, View.ReportList)
             bsReportList.DataSource = View.ReportList
             bsReportList.ResetBindings(False)
         End Sub

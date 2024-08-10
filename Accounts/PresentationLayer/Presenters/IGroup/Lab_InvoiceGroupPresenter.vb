@@ -114,7 +114,7 @@ Namespace PresentationLayer.Presenters
             _idNo = Service.GetRecordFieldWith2KeyG(Of Decimal, String, Decimal)(View.InvoiceNo, "CBCNK", "Lab_InvoiceGroup", "InvoiceNo", "InvestigationId", "Trans_Key")
             Dim labInvoiceGroup As New Lab_InvoiceGroupModel
             labInvoiceGroup = Service.GetRecordByIdNo(Of Lab_InvoiceGroupModel)(_idNo)
-            GlobalVariables.Mapper.Map(labInvoiceGroup, View)
+            GlobalFUnctions.ManualMap(labInvoiceGroup, View)
             AssigValuesToDisplay()
         End Sub
 
@@ -414,8 +414,8 @@ Namespace PresentationLayer.Presenters
             Dim labInvoiceDetailsDao As New Lab_InvoiceDetailsDao()
             Dim labInvoiceDetailsModel = New List(Of Lab_InvoiceDetailsModel)
             Dim labInvoiceDetails = New List(Of Lab_InvoiceDetails)
-            GlobalVariables.Mapper.Map(View.LabInvoiceDetails, labInvoiceDetailsModel)
-            GlobalVariables.Mapper.Map(labInvoiceDetailsModel, labInvoiceDetails)
+            GlobalFUnctions.ManualMap(View.LabInvoiceDetails, labInvoiceDetailsModel)
+            GlobalFUnctions.ManualMap(labInvoiceDetailsModel, labInvoiceDetails)
             retVal = labInvoiceDetailsDao.UpdateTable(Of Int32)(labInvoiceDetails, _idNo)
             Return retVal
         End Function
@@ -456,7 +456,7 @@ Namespace PresentationLayer.Presenters
         'Public Sub GetServerResults(invoiceNo As Integer)
         '    Dim cbcRetrievalDao As New CbcRetrievalDao
         '    Dim lab_InvoiceGroup As Lab_InvoiceGroup = cbcRetrievalDao.GetRecordByIdNo(invoiceNo)
-        '    GlobalVariables.Mapper.Map(lab_InvoiceGroup, View)
+        '    GlobalFUnctions.ManualMap(lab_InvoiceGroup, View)
         'End Sub
 
         Private Sub AssigValuesToDisplay()

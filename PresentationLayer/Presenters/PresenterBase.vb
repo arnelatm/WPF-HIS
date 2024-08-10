@@ -126,6 +126,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
             Dim data As List(Of DefaultFieldValue) = DefaultFieldValueService.GetDefaultFieldValues(systemViewName)
             ViewDefaultFieldValues = New List(Of DefaultFieldValueModel)
             GlobalVariables.Mapper.Map(data, ViewDefaultFieldValues)
+            'GlobalFunctions.ManualMap(data, ViewDefaultFieldValues)
         End If
     End Sub
 
@@ -459,6 +460,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     End Function
 
     Public Sub CreateDataTable(ByRef dataTable As DataTable, rowColumns As Object)
+        Dim noOfColumns = rowColumns.GetLength(0)
         For i = 0 To rowColumns.GetLength(0) - 1
             dataTable.Columns.Add(rowColumns(i, 0), rowColumns(i, 1))
         Next
@@ -775,13 +777,13 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     Protected Overridable Sub AddRecordInitializer()
         Model = New TM
         GlobalFunctions.ManualMap(Model, View)
-        'GlobalVariables.Mapper.Map(Model, View)
+        'GlobalFUnctions.ManualMap(Model, View)
         RaiseEvent NewRecordInitialized()
     End Sub
 
     Public Overridable Function GoDeleteRecord() As Integer
         Dim record As New TM
-        GlobalVariables.Mapper.Map(Of IView, TM)(View, record)
+        GlobalFunctions.ManualMap(View, record)
         Dim retValue = 0
         Dim currentIdNo = Invoker.GetProperty(View, IdFieldName)
         If IsOkToDeleteRecord() Then
@@ -943,7 +945,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Dim retVal As Integer = 0
         If Not CancelSave Then
             Dim record As New TM
-            GlobalVariables.Mapper.Map(Of IView, TM)(View, record)
+            GlobalFunctions.ManualMap(View, record)
             retVal = InitiateSave()
             If retVal < 0 Then
                 Messaging.Show(True, "MsgSaveRecordFailed", "Something went wrong during saving, saving record failed", "Saving Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -993,7 +995,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     End Function
 
     Public Overridable Sub SaveOriginalValues()
-        GlobalVariables.Mapper.Map(Of TV, TM)(View, OriginalModel)
+        GlobalFunctions.ManualMap(View, OriginalModel)
     End Sub
 
     Public Sub ShowErrors(Optional ByVal additionalMessage As String = Nothing)
@@ -1047,7 +1049,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         modelData = Service.GetRecordByIdNo(Of TM)(idNo)
 
         RaiseEvent BeforeMappingData(modelData)
-        GlobalVariables.Mapper.Map(Of TM, TV)(modelData, View)
+        GlobalFunctions.ManualMap(modelData, View)
         For Each child In ChildPresenters
             child.UpdateViewDisplay(idNo)
         Next
@@ -1119,7 +1121,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
 
     Protected Overridable Function IsBizDataValid() As Boolean
         Dim retValue As Boolean = True
-        GlobalVariables.Mapper.Map(Of TV, TM)(View, Model)
+        GlobalFunctions.ManualMap(View, Model)
         If Not Service.IsValid(Model) Then
             retValue = False
         End If
@@ -1290,7 +1292,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Dim retValue As Integer
         Try
             Dim record As New TM
-            GlobalVariables.Mapper.Map(Of IView, TM)(View, record)
+            GlobalFunctions.ManualMap(View, record)
             Using scope As New TransactionScope(TransactionScopeOption.Required, New TimeSpan(0, 1, 0))
                 If AddMode Then
                     retValue = SaveAddedRecord(record)
@@ -2159,7 +2161,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
             Dim workRow As DataRow = dt.NewRow()
             workRow("IdNo") = CInt(c)
             workRow("Name") = Messaging.TranslateCaption(c.ToString().SplitCamelCase())
-            workRow("Code") = EnumToCode(c)
+            workRow("Code") = IIf(EnumToCode(c) Is Nothing, CInt(c).ToString(), EnumToCode(c))
             dt.Rows.Add(workRow)
         Next
         Return dt  '.DefaultView

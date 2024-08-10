@@ -131,7 +131,7 @@ Namespace PresentationLayer.Presenters
             retVal = UpdateChildData(_gjJournalItemService, DtUpdateTable, DtInsertTable, passedValue, "JournalIdNo")
             If retVal >= 0 And IsEmpty(View.ReferenceNo) Then
                 Dim dataModel = New TM
-                GlobalVariables.Mapper.Map(View, dataModel)
+                GlobalFUnctions.ManualMap(View, dataModel)
                 retVal = Service.UpdateGlReferenceNumber(dataModel)
             End If
         End Sub

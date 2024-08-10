@@ -42,7 +42,7 @@ Public Class UserPresenter(Of TM As New)
         If ePassword IsNot Nothing Then
             View.Password = ePassword
             Dim userModel As New TM
-            GlobalVariables.Mapper.Map(View, userModel)
+            GlobalFUnctions.ManualMap(View, userModel)
             If UpdateRecord(userModel) <= 0 Then
                 Messaging.Show(True, "MsgPasswordNotSaved", "Password not saved")
             End If

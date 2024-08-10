@@ -17,7 +17,7 @@
             'View.InvTransactionRequests.Clear()
             'For Each item In invTransactions.InvTransactionRequests
             '    Dim x As IInvTransactionBaseView
-            '    GlobalVariables.Mapper.Map(item, x)
+            '    GlobalFUnctions.ManualMap(item, x)
             '    View.InvTransactionRequests.Add(x)
             '    'x.Cancelled = item.Cancelled
             '    'x.DateCreated = item.DateCreated

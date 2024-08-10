@@ -24,7 +24,7 @@ Namespace PresentationLayer.Presenters
             Dim dmv As New List(Of IDosageMasterView)
             Dim record = Service.GetAll(Of TM)(sortKey)
             If record IsNot Nothing Then
-                GlobalVariables.Mapper.Map(record, dmv)
+                GlobalFUnctions.ManualMap(record, dmv)
                 View.DosageMasterList = dmv
             End If
         End Sub

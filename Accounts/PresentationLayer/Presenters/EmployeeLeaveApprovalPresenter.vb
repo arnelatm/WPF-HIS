@@ -91,7 +91,7 @@ Namespace PresentationLayer.Presenters
             End If
             Dim employeeLeaveApprovalItemsModel As List(Of EmployeeLeaveApprovalItemModel)
             employeeLeaveApprovalItemsModel = Service.GetDaoRecords(Of EmployeeLeaveApprovalItemModel)(filter)
-            GlobalVariables.Mapper.Map(employeeLeaveApprovalItemsModel, View.EmployeeLeaveApprovalItems)
+            GlobalFUnctions.ManualMap(employeeLeaveApprovalItemsModel, View.EmployeeLeaveApprovalItems)
             CallByName(View, "BindEmployeeLeaveList", CallType.Method)
         End Sub
 
@@ -122,7 +122,7 @@ Namespace PresentationLayer.Presenters
         Public Overrides Function Save(ByRef viewControl As Control) As Boolean
             Dim retVal As Integer
             Dim record As New EmployeeLeaveApprovalModel
-            GlobalVariables.Mapper.Map(Of IEmployeeLeaveApprovalView, EmployeeLeaveApprovalModel)(View, record)
+            GlobalFunctions.ManualMap(View, record)
             NewlyAddedRecordIdNo = Service.AddRecord(record)
             If NewlyAddedRecordIdNo > 0 Then
                 CreateApprovalData()

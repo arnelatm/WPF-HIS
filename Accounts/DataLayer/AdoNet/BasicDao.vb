@@ -27,7 +27,7 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordByIdNo(idNo) As Basic Implements IDao(Of Basic).GetRecordByIdNo
             Dim fields As String
-            If _tableOrViewName.Right(5) = "_View" Then
+            If _tableOrViewName.Length > 4 AndAlso _tableOrViewName.Right(5) = "_View" Then
                 _table = Strings.Left(_tableOrViewName, _tableOrViewName.Length - 5)
             Else
                 _table = _tableOrViewName

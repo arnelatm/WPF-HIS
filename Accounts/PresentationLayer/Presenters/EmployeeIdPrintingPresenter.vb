@@ -29,7 +29,7 @@ Namespace PresentationLayer.Presenters
 
         Protected Overrides Sub CreateDataSources()
             Dim employeeIdListModel As List(Of EmployeeIdModel) = Service.GetEmployeeIdList()
-            GlobalVariables.Mapper.Map(employeeIdListModel, View.EmployeeIdList)
+            GlobalFUnctions.ManualMap(employeeIdListModel, View.EmployeeIdList)
         End Sub
 
         'Private Sub OnEmployeeIdCheckedEvent(sender As Object)

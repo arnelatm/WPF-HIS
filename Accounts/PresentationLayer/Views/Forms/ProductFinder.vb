@@ -139,7 +139,7 @@ Public Class ProductFinder
             SelectedId = DataGridViewProducts.CurrentRow.Cells(1).Value
             Product = _service.GetRecordByIdNo(Of ProductModel)(SelectedId)
             'Dim productModel = _service.GetRecordByIdNo(Of ProductModel)(SelectedId)
-            'Product = GlobalVariables.Mapper.Map(productModel, Product)
+            'Product = GlobalFUnctions.ManualMap(productModel, Product)
             'Product = productModel
             NoOfUnits = _service.CountRecordWithKey(Of Int32)("ProductUnit", "ProductIdNo", SelectedId) + 1
         End If

@@ -178,7 +178,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="TxtIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 23</value>
+    <value>62, 26</value>
   </data>
   <data name="TxtIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -199,7 +199,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="lblSystemViewIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 36</value>
+    <value>11, 39</value>
   </data>
   <data name="lblSystemViewIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -235,13 +235,13 @@
     <value>False</value>
   </data>
   <data name="cboSystemViewIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 36</value>
+    <value>168, 39</value>
   </data>
   <data name="cboSystemViewIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="cboSystemViewIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>418, 24</value>
+    <value>418, 28</value>
   </data>
   <data name="cboSystemViewIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -250,7 +250,7 @@
     <value>cboSystemViewIdNo</value>
   </data>
   <data name="&gt;&gt;cboSystemViewIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CdtComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboSystemViewIdNo.Parent" xml:space="preserve">
     <value>floDataDisplay</value>
@@ -262,7 +262,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="lblFieldName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 62</value>
+    <value>11, 69</value>
   </data>
   <data name="lblFieldName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -295,13 +295,13 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtFieldName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 62</value>
+    <value>168, 69</value>
   </data>
   <data name="txtFieldName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtFieldName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>418, 23</value>
+    <value>418, 26</value>
   </data>
   <data name="txtFieldName.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -322,7 +322,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="lblDataType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 87</value>
+    <value>11, 97</value>
   </data>
   <data name="lblDataType.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -358,13 +358,13 @@
     <value>False</value>
   </data>
   <data name="cboDataType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 87</value>
+    <value>168, 97</value>
   </data>
   <data name="cboDataType.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="cboDataType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>418, 24</value>
+    <value>418, 28</value>
   </data>
   <data name="cboDataType.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -373,7 +373,7 @@
     <value>cboDataType</value>
   </data>
   <data name="&gt;&gt;cboDataType.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.AtmComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CdtComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboDataType.Parent" xml:space="preserve">
     <value>floDataDisplay</value>
@@ -385,7 +385,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="lblLength.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 113</value>
+    <value>11, 127</value>
   </data>
   <data name="lblLength.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -418,13 +418,13 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtLength.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 113</value>
+    <value>168, 127</value>
   </data>
   <data name="txtLength.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtLength.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 23</value>
+    <value>62, 26</value>
   </data>
   <data name="txtLength.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -451,7 +451,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblDecimalPart.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 138</value>
+    <value>11, 155</value>
   </data>
   <data name="lblDecimalPart.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -484,13 +484,13 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtDecimalPart.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 138</value>
+    <value>168, 155</value>
   </data>
   <data name="txtDecimalPart.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtDecimalPart.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 23</value>
+    <value>62, 26</value>
   </data>
   <data name="txtDecimalPart.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -517,7 +517,7 @@
     <value>NoControl</value>
   </data>
   <data name="CLabel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 163</value>
+    <value>11, 183</value>
   </data>
   <data name="CLabel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -550,13 +550,13 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtLinkedTable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 163</value>
+    <value>168, 183</value>
   </data>
   <data name="txtLinkedTable.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtLinkedTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>418, 23</value>
+    <value>418, 26</value>
   </data>
   <data name="txtLinkedTable.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -580,7 +580,7 @@
     <value>NoControl</value>
   </data>
   <data name="CLabel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 188</value>
+    <value>11, 211</value>
   </data>
   <data name="CLabel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -613,13 +613,13 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtLinkedField.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 188</value>
+    <value>168, 211</value>
   </data>
   <data name="txtLinkedField.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtLinkedField.Size" type="System.Drawing.Size, System.Drawing">
-    <value>418, 23</value>
+    <value>418, 26</value>
   </data>
   <data name="txtLinkedField.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -643,7 +643,7 @@
     <value>NoControl</value>
   </data>
   <data name="CLabel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 213</value>
+    <value>11, 239</value>
   </data>
   <data name="CLabel3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -676,13 +676,13 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtDefaultValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 213</value>
+    <value>168, 239</value>
   </data>
   <data name="txtDefaultValue.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtDefaultValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>418, 23</value>
+    <value>418, 26</value>
   </data>
   <data name="txtDefaultValue.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -703,13 +703,13 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtSystemViewNameAra.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 238</value>
+    <value>11, 267</value>
   </data>
   <data name="txtSystemViewNameAra.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtSystemViewNameAra.Size" type="System.Drawing.Size, System.Drawing">
-    <value>418, 23</value>
+    <value>418, 26</value>
   </data>
   <data name="txtSystemViewNameAra.TabIndex" type="System.Int32, mscorlib">
     <value>170</value>
@@ -733,13 +733,13 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtSystemViewName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 263</value>
+    <value>11, 295</value>
   </data>
   <data name="txtSystemViewName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtSystemViewName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>418, 23</value>
+    <value>418, 26</value>
   </data>
   <data name="txtSystemViewName.TabIndex" type="System.Int32, mscorlib">
     <value>171</value>
@@ -772,7 +772,7 @@
     <value>10, 10, 0, 0</value>
   </data>
   <data name="floDataDisplay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>601, 461</value>
+    <value>802, 578</value>
   </data>
   <data name="floDataDisplay.TabIndex" type="System.Int32, mscorlib">
     <value>147</value>
@@ -802,10 +802,10 @@
     <value>1</value>
   </data>
   <data name="SplitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>914, 461</value>
+    <value>1219, 578</value>
   </data>
   <data name="SplitContainer1.SplitterDistance" type="System.Int32, mscorlib">
-    <value>303</value>
+    <value>404</value>
   </data>
   <data name="&gt;&gt;SplitContainer1.Name" xml:space="preserve">
     <value>SplitContainer1</value>
@@ -819,8 +819,11 @@
   <data name="&gt;&gt;SplitContainer1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="FormTreeView.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>No</value>
+  </data>
   <data name="FormTreeView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>303, 461</value>
+    <value>404, 578</value>
   </data>
   <data name="&gt;&gt;FormTreeView.Name" xml:space="preserve">
     <value>FormTreeView</value>
@@ -842,7 +845,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACG
-        CQAAAk1TRnQBSQFMAgEBAgEAATgBAAFYAQABEAEAARABAAT/AQkBEAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CQAAAk1TRnQBSQFMAgEBAgEAATgBAAFwAQABEAEAARABAAT/AQkBEAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -886,28 +889,31 @@
 </value>
   </data>
   <metadata name="StoreCaptions1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>299, 17</value>
+    <value>354, 17</value>
   </metadata>
   <metadata name="TranslatorDAC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>434, 17</value>
+    <value>511, 17</value>
   </metadata>
   <metadata name="AppDataDAC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>564, 17</value>
+    <value>662, 17</value>
   </metadata>
   <metadata name="MyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>688, 17</value>
+    <value>805, 17</value>
   </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+    <value>8, 16</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>914, 514</value>
+    <value>1219, 633</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 6, 5, 6</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>320, 235</value>
+    <value>421, 278</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Default Field Values Maintenance Form</value>

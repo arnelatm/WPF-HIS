@@ -276,6 +276,11 @@ Public Module Extensions
         arr(arr.Length - 1) = item
     End Sub
 
+    Public Function GetDeclaredType(Of T)(ByVal obj As T) As Type
+        Return GetType(T)
+    End Function
+
+
 End Module
 
 'Public Function MakePlural( noun As String) As String

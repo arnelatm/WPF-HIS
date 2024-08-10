@@ -66,14 +66,14 @@ Namespace ServiceLayer.ActionService
         Public Function GetEmployeeIdList()
             Dim model As New List(Of EmployeeIdModel)
             Dim records As List(Of EmployeeId) = DataDao.GetEmployeeIdList()
-            GlobalVariables.Mapper.Map(records, model)
+            GlobalFUnctions.ManualMap(records, model)
             Return model
         End Function
 
         'Public Function GetEmployeeLeaveList()
         '    Dim model As New List(Of EmployeeLeaveModel)
         '    Dim records As List(Of EmployeeLeave) = DataDao.GetEmployeeLeaveList()
-        '    GlobalVariables.Mapper.Map(records, model)
+        '    GlobalFUnctions.ManualMap(records, model)
         '    Return model
         'End Function
 
@@ -82,7 +82,7 @@ Namespace ServiceLayer.ActionService
             Implements IServiceAccounts.GetAcctReconItems
             Dim records = DataDao.GetAcctReconItems(accountIdNo, reconciliationDate, sortOrder)
             Dim model As New List(Of TM)
-            GlobalVariables.Mapper.Map(records, model)
+            GlobalFUnctions.ManualMap(records, model)
             Return model
         End Function
 
@@ -90,7 +90,7 @@ Namespace ServiceLayer.ActionService
             Implements IServiceAccounts.GetOpenInvoices
             Dim records = DataDao.GetOpenInvoices(idNo)
             Dim model As New List(Of TM)
-            GlobalVariables.Mapper.Map(records, model)
+            GlobalFUnctions.ManualMap(records, model)
             Return model
         End Function
 
@@ -102,13 +102,13 @@ Namespace ServiceLayer.ActionService
 
         Public Function UpdateGlReferenceNumber(Of TM)(ByRef model As TM) As Integer _
                                     Implements IServiceAccounts.UpdateGlReferenceNumber
-            GlobalVariables.Mapper.Map(model, DataBo)
+            GlobalFUnctions.ManualMap(model, DataBo)
             Return DataDao.UpdateGlReferenceNumber(DataBo)
         End Function
 
         Public Function UpdateOpeningBalance(Of TM)(ByRef model As TM) As Integer _
             Implements IServiceAccounts.UpdateOpeningBalance
-            GlobalVariables.Mapper.Map(model, DataBo)
+            GlobalFUnctions.ManualMap(model, DataBo)
             Return DataDao.UpdateOpeningBalance(DataBo)
         End Function
 
@@ -124,42 +124,42 @@ Namespace ServiceLayer.ActionService
         Public Function GetOpenPettyCash() Implements IServiceAccounts.GetOpenPettyCash
             Dim records = DataDao.GetOpenPettyCash()
             Dim model As New List(Of PcClosingJournalModel)
-            GlobalVariables.Mapper.Map(records, model)
+            GlobalFUnctions.ManualMap(records, model)
             Return model
         End Function
 
         Public Function GetSupplierOpenInvoices(Of TM)(idNo As Integer) As List(Of TM) Implements IServiceAccounts.GetSupplierOpenInvoices
             Dim records = DataDao.GetSupplierOpenInvoices(idNo)
             Dim model As New List(Of TM)
-            GlobalVariables.Mapper.Map(records, model)
+            GlobalFUnctions.ManualMap(records, model)
             Return model
         End Function
 
         Friend Function GetEmployeeHolidayLeaves(idNo As Integer, holidayIdNo As Short) As List(Of EmployeeLeaveModel)
             Dim records = DataDao.GetEmployeeHolidayLeaves(idNo, holidayIdNo)
             Dim model As New List(Of EmployeeLeaveModel)
-            GlobalVariables.Mapper.Map(records, model)
+            GlobalFUnctions.ManualMap(records, model)
             Return model
         End Function
 
         Public Function GetEmployeeLeaves(idNo As Integer, leaveIdNo As Short, Optional filterSelection As String = "", Optional leaveYear As Short = 0) As List(Of EmployeeLeaveModel)
             Dim records = DataDao.GetEmployeeLeaves(idNo, leaveIdNo, filterSelection, leaveYear)
             Dim model As New List(Of EmployeeLeaveModel)
-            GlobalVariables.Mapper.Map(records, model)
+            GlobalFUnctions.ManualMap(records, model)
             Return model
         End Function
 
         Public Function GetOverlappingLeave(employeeIdNo As Int32, beginningDate As Date, endingDate As Date) As EmployeeLeaveModel
             Dim records = DataDao.GetOverlappingLeave(employeeIdNo, beginningDate, endingDate)
             Dim model As New EmployeeLeaveModel
-            GlobalVariables.Mapper.Map(records, model)
+            GlobalFUnctions.ManualMap(records, model)
             Return model
         End Function
 
         Public Function GetOverlappingEarnedLeave(employeeIdNo As Int32, beginningDate As Date, endingDate As Date, leaveIdNo As Int16) As EmployeeLeaveEarnedModel
             Dim records = DataDao.GetOverlappingEarnedLeave(employeeIdNo, beginningDate, endingDate, leaveIdNo)
             Dim model As New EmployeeLeaveEarnedModel
-            GlobalVariables.Mapper.Map(records, model)
+            GlobalFUnctions.ManualMap(records, model)
             Return model
         End Function
 
@@ -325,7 +325,7 @@ Namespace ServiceLayer.ActionService
             Dim empLvCredits = New EmployeeLeaveCredit
             empLvCredits = DataDao.GetLeaveCredit(employeeIdNo, leaveIdNo)
             Dim model As New EmployeeLeaveCreditModel
-            GlobalVariables.Mapper.Map(empLvCredits, model)
+            GlobalFUnctions.ManualMap(empLvCredits, model)
             Return model
         End Function
 
@@ -352,7 +352,7 @@ Namespace ServiceLayer.ActionService
         'Public Function GetCustomerOpenInvoices(Of TM)(idNo As Int32) As List(Of TM) Implements IServiceAccounts.GetCustomerOpenInvoices
         '    Dim records = DataDao.GetCustomerOpenInvoices(idNo)
         '    Dim model As New List(Of TM)
-        '    GlobalVariables.Mapper.Map(records, model)
+        '    GlobalFUnctions.ManualMap(records, model)
         '    Return model
         'End Function
 

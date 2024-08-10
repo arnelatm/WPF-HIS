@@ -1326,7 +1326,105 @@ Public Module GlobalFunctions
     '''<summary>
     '''Compares two objects if the same
     '''</summary>
-    Public Function ManualMap(ByRef fromObject As Object, ByRef toObject As Object, Optional collection As Boolean = False, Optional collectionType As Type = Nothing)
+    Public Sub ManualMap(ByRef fromObject As Object, ByRef toObject As Object, Optional collection As Boolean = False, Optional collectionType As Type = Nothing)
+        Dim objectsCompareResult = True
+        Dim propList = fromObject.GetType().GetProperties()
+        If collection Then
+            If toObject Is Nothing And fromObject Is Nothing Then
+                ' already the same so skip this property
+            ElseIf fromObject Is Nothing Then
+                toObject = Nothing
+            ElseIf fromObject.Count() = 0 And toObject.Count() = 0 Then
+                ' already the same empty records so no need to map
+            Else
+                Dim addMethod As MethodInfo = collectionType.GetMethods().Where(Function(m) m.Name = "Add" AndAlso m.GetParameters().Count() = 1).FirstOrDefault()
+                Dim newMethod As MethodInfo = collectionType.GetMethods().Where(Function(m) m.Name = "New" AndAlso m.GetParameters().Count() = 1).FirstOrDefault()
+                If fromObject.Count() = 0 Then
+                    Dim instance = Activator.CreateInstance(collectionType)
+                    toObject = instance
+                Else
+                    Dim newCollectionObj = Activator.CreateInstance(collectionType)
+                    Dim memberType = collectionType.GetGenericArguments.Single
+                    'Dim memberNewMethod As MethodInfo = memberType.GetMethods().Where(Function(m) m.Name = "New" AndAlso m.GetParameters().Count() = 1).FirstOrDefault()
+                    'Dim newObj = Activator.CreateInstance(memberType)
+                    For Each obj As Object In TryCast(fromObject, IEnumerable)
+                        'toObject = Nothing
+                        Dim newObj = Activator.CreateInstance(memberType)
+                        ManualMap(obj, newObj)
+                        newCollectionObj.Add(newObj)
+                        'Dim memberInstance
+                        'memberNewMethod.Invoke(obj)
+
+                        'ManualMap(obj, instance)
+                        'addMethod.Invoke(toObject, instance)
+                        'toObject = Nothing
+                    Next
+                    'Dim toObjPi = toObject.GetType().GetProperties()
+                    'toObjPi.SetValue(toObject, newCollectionObj)
+                    toObject.Clear()
+                    toObject.TrimExcess()
+                    toObject.AddRange(newCollectionObj)
+                    'toObject = newCollectionObj
+                End If
+            End If
+        Else
+            If TypeOf fromObject Is ICollection Then
+                Dim curCollectionType = fromObject.GetType()
+                ManualMap(fromObject, toObject, True, curCollectionType)
+            Else
+                For Each fromObjPi As PropertyInfo In propList
+                    For Each toObjPi As PropertyInfo In toObject.GetType.GetProperties()
+                        If fromObjPi.Name.ToLower() = toObjPi.Name.ToLower() And toObjPi.CanWrite Then
+                            Dim source = fromObjPi.GetValue(fromObject)
+                            Dim propName As String = fromObjPi.Name()
+                            Dim tType As Type
+                            Dim safeValue As Object
+                            Try
+                                'If fromObjPi.Name = "RegularEmployeeEarnings" Then
+                                '    Debugger.Break()
+
+                                'End If
+                                If fromObject Is Nothing And toObject Is Nothing Then
+                                    ' no need to map already the same null or empty values
+                                ElseIf fromObject Is Nothing Then
+                                    toObject = Nothing
+                                Else
+                                    If TypeOf fromObjPi.GetValue(fromObject) Is ICollection Then
+                                        Dim obj = toObjPi.GetValue(toObject)
+                                        Dim toObjType
+                                        If obj Is Nothing Then
+                                            toObjType = DirectCast(toObjPi, PropertyInfo).PropertyType()
+                                            obj = Activator.CreateInstance(toObjType)
+                                            safeValue = If((source Is Nothing), Nothing, obj)
+                                            toObjPi.SetValue(toObject, safeValue)
+                                        Else
+                                            toObjType = toObjPi.GetValue(toObject).GetType()
+                                        End If
+                                        ManualMap(fromObjPi.GetValue(fromObject), toObjPi.GetValue(toObject), True, toObjType)
+                                    Else
+                                        tType = If(Nullable.GetUnderlyingType(fromObjPi.PropertyType), fromObjPi.PropertyType)
+                                        If tType.FullName() = "System.Drawing.Image" Then
+                                            toObjPi.SetValue(toObject, source)
+                                        Else
+                                            safeValue = If((source Is Nothing), Nothing, Convert.ChangeType(source, tType))
+                                            toObjPi.SetValue(toObject, safeValue)
+                                        End If
+
+                                    End If
+                                End If
+                            Catch ex As Exception
+                                Debugger.Break()
+                                MessageBox.Show(ex.ToString())
+                            End Try
+                            Exit For
+                        End If
+                    Next
+                Next
+            End If
+        End If
+    End Sub
+
+    Public Sub ManualMap(Of Ts,Tt)(ByRef fromObject As Object, ByRef toObject As Object, Optional collection As Boolean = False, Optional collectionType As Type = Nothing)
         Dim objectsCompareResult = True
         Dim propList = fromObject.GetType().GetProperties()
         If collection Then
@@ -1360,82 +1458,45 @@ Public Module GlobalFunctions
                 End If
             End If
         Else
-            For Each fromObjPi As PropertyInfo In propList
-                For Each toObjPi As PropertyInfo In toObject.GetType.GetProperties()
-                    If fromObjPi.Name.ToLower() = toObjPi.Name.ToLower() And toObjPi.CanWrite Then
-                        Dim source = fromObjPi.GetValue(fromObject)
-                        Dim propName As String = fromObjPi.Name()
-                        Dim tType As Type
-                        Dim safeValue As Object
-                        Try
-                            If fromObjPi.Name = "JournalItems" Then
+            If TypeOf fromObject Is ICollection Then
+                Dim curCollectionType = fromObject.GetType()
+                ManualMap(fromObject, toObject, True, curCollectionType)
+            Else
+                For Each fromObjPi As PropertyInfo In propList
+                    For Each toObjPi As PropertyInfo In toObject.GetType.GetProperties()
+                        If fromObjPi.Name.ToLower() = toObjPi.Name.ToLower() And toObjPi.CanWrite Then
+                            Dim source = fromObjPi.GetValue(fromObject)
+                            Dim propName As String = fromObjPi.Name()
+                            Dim tType As Type
+                            Dim safeValue As Object
+                            Try
+                                If fromObjPi.Name = "RegularEmployeeDeductions" Then
+                                    Debugger.Break()
+                                End If
+                                If fromObject Is Nothing And toObject Is Nothing Then
+                                    ' no need to map already the same null or empty values
+                                ElseIf fromObject Is Nothing Then
+                                    toObject = Nothing
+                                Else
+                                    If TypeOf fromObjPi.GetValue(fromObject) Is ICollection Then
+                                        ManualMap(fromObjPi.GetValue(fromObject), toObjPi.GetValue(toObject), True, toObjPi.GetValue(toObject).GetType())
+                                    Else
+                                        tType = If(Nullable.GetUnderlyingType(fromObjPi.PropertyType), fromObjPi.PropertyType)
+                                        safeValue = If((source Is Nothing), Nothing, Convert.ChangeType(source, tType))
+                                        toObjPi.SetValue(toObject, safeValue)
+                                    End If
+                                End If
+                            Catch ex As Exception
                                 Debugger.Break()
-                            End If
-                            If TypeOf toObjPi.GetValue(toObject) Is ICollection Then
-                                ManualMap(toObjPi.GetValue(toObject), fromObjPi.GetValue(fromObject), True, toObjPi.GetValue(toObject).GetType())
-                            Else
-                                tType = If(Nullable.GetUnderlyingType(fromObjPi.PropertyType), fromObjPi.PropertyType)
-                                safeValue = If((source Is Nothing), Nothing, Convert.ChangeType(source, tType))
-                                toObjPi.SetValue(toObject, safeValue)
-                            End If
-
-                        Catch ex As Exception
-                            MessageBox.Show(ex.ToString())
-                        End Try
-
-                        'If target Is Nothing And source Is Nothing Then
-                        '    '' objects compare
-                        'ElseIf target Is Nothing And TypeOf source Is String Then
-                        '    If String.IsNullOrWhiteSpace(source) Then
-                        '        '' objects compare
-                        '    Else
-                        '        objectsCompareResult = False
-                        '    End If
-                        'ElseIf target Is Nothing And TypeOf source Is IEnumerable Then
-                        '    'if source.Count() = 0 Then
-                        '    '    '' object both empty
-                        '    'Else
-                        '    '    objectsCompareResult = False
-                        '    'End If
-                        'ElseIf target Is Nothing And source IsNot Nothing Then
-                        '    If String.IsNullOrWhiteSpace(source) Then
-                        '        '' objects compare
-                        '    Else
-                        '        objectsCompareResult = False
-                        '    End If
-                        'ElseIf source Is Nothing And target IsNot Nothing Then
-                        '    If String.IsNullOrWhiteSpace(target) Then
-                        '        '' objects compare
-                        '    Else
-                        '        objectsCompareResult = False
-                        '    End If
-                        'ElseIf TypeOf target Is IList Then
-                        '    'ElseIf TypeOf target Is IEnumerable AndAlso TypeOf source Is IEnumerable Then
-                        '    '    If target.Count() <> source.Count()
-                        '    '        objectsCompareResult = False
-                        '    '    End If
-                        '    '    For i = 0 To target.Count()-1
-                        '    '        ObjectsCompare(target.item(1),source.item(1))
-                        '    '    Next
-                        '    'ElseIf target <> source Then
-                        'ElseIf Not target.Equals(source) Then
-                        '    If t.Name.ToLower() = $"datecreated" Then
-                        '        ' ignore these fields
-                        '    Else
-                        '        objectsCompareResult = False
-                        '    End If
-                        'End If
-                        Exit For
-                    End If
+                                MessageBox.Show(ex.ToString())
+                            End Try
+                            Exit For
+                        End If
+                    Next
                 Next
-                If Not objectsCompareResult Then
-                    Exit For
-                End If
-            Next
+            End If
         End If
-        Return objectsCompareResult
-    End Function
-
+    End Sub
     '''<summary>
     '''converts a date string to double digits say 1/1/2012 -> 01/01/2012
     '''</summary>

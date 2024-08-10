@@ -47,8 +47,8 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, RevCostCenter) =
                                     Function(reader) _
             New RevCostCenter() With {
-            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
-            .ParentIdNo = Extensions.AsNullable(Of Int32?)(reader("ParentIdNo")),
+            .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
+            .ParentIdNo = Extensions.AsNullable(Of Int16?)(reader("ParentIdNo")),
             .RevCostCenterCode = Extensions.AsString(reader("RevCostCenterCode")),
             .RevCostCenterName = Extensions.AsString(reader("RevCostCenterName")),
             .RevCostCenterNameAra = Extensions.AsString(reader("RevCostCenterNameAra")),

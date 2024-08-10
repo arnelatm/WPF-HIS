@@ -169,7 +169,7 @@ Namespace PresentationLayer.Presenters
             End If
             If retVal >= 0 And IsEmpty(View.ReferenceNo) Then
                 Dim dataModel = New TM
-                GlobalVariables.Mapper.Map(View, dataModel)
+                GlobalFUnctions.ManualMap(View, dataModel)
                 retVal = Service.UpdateGlReferenceNumber(dataModel)
             End If
         End Sub
@@ -682,7 +682,7 @@ Namespace PresentationLayer.Presenters
         '    Dim dModel As New List(Of CsrOiItemModel)
         '    Dim dOriginalModel As New List(Of CsrOiItemModel)
         '    Dim nSeq As Integer
-        '    GlobalVariables.Mapper.Map(dView, dModel)
+        '    GlobalFUnctions.ManualMap(dView, dModel)
         '    nSeq = dView.Count()
         '    If EditMode Then
         '        If View.PayorIdNo = OriginalModel.PayorIdNo AndAlso View.PayorType = OriginalModel.PayorType Then
@@ -693,7 +693,7 @@ Namespace PresentationLayer.Presenters
         '    End If
         '    Dim unpaidInvoices = Service.GetOpenInvoices(Of CsrOiItemModel)(View.PayorIdNo)
         '    AddOpenInvoices(False, unpaidInvoices, dModel, nSeq)
-        '    GlobalVariables.Mapper.Map(dModel, dView)
+        '    GlobalFUnctions.ManualMap(dModel, dView)
         '    Return dView
         'End Function
 
@@ -709,7 +709,7 @@ Namespace PresentationLayer.Presenters
             Dim oiDao = New CsrOiItemDao
             Dim oi As List(Of CsrOiItem) = oiDao.GetRecordsWithGroupIdNo(cashReceiptJournalIdNo, "sequence")
             Dim csrOiItems As New List(Of CsrOiItemModel)
-            GlobalVariables.Mapper.Map(oi, csrOiItems)
+            GlobalFUnctions.ManualMap(oi, csrOiItems)
             Return csrOiItems
         End Function
 
@@ -864,7 +864,7 @@ Namespace PresentationLayer.Presenters
                 Dim cseIdNo As Int32? = GetCSEIdNo(View.ContactIdNo)
                 Dim unpaidInvoices = Service.GetOpenInvoices(Of CsrOiItemModel)(cseIdNo)
                 Dim nSeq As Int32
-                GlobalVariables.Mapper.Map(unpaidInvoices, dView)
+                GlobalFUnctions.ManualMap(unpaidInvoices, dView)
                 If View.CsrOiItems IsNot Nothing Then
                     nSeq = View.CsrOiItems.Count()
                 Else
@@ -913,7 +913,7 @@ Namespace PresentationLayer.Presenters
         '    Dim dModel As New List(Of CsrOiItemModel)
         '    Dim dOriginalModel As New List(Of CsrOiItemModel)
         '    Dim nSeq As Integer
-        '    'GlobalVariables.Mapper.Map(dView, dModel)
+        '    'GlobalFUnctions.ManualMap(dView, dModel)
         '    'nSeq = dView.Count()
         '    If EditMode Then
         '        If View.ContactIdNo = OriginalModel.ContactIdNo AndAlso View.PayorType = OriginalModel.PayorType Then
@@ -924,7 +924,7 @@ Namespace PresentationLayer.Presenters
         '    End If
         '    Dim unpaidInvoices = Service.GetOpenInvoices(Of CsrOiItemModel)(View.PayorIdNo)
         '    AddOpenInvoices(False, unpaidInvoices, dModel, nSeq)
-        '    GlobalVariables.Mapper.Map(dModel, dView)
+        '    GlobalFUnctions.ManualMap(dModel, dView)
         '    Return dView
         'End Function
 
@@ -1153,14 +1153,14 @@ Namespace PresentationLayer.Presenters
                         nSeq += 1
                         Item.Sequence = nSeq
                     Next
-                    GlobalVariables.Mapper.Map(csrOiItems, View.CsrOiItems)
+                    GlobalFUnctions.ManualMap(csrOiItems, View.CsrOiItems)
                 Else
                     ' check current CsrOiItems if applicable to the current customerIdNo
                     Dim originalContactIdNo As Int32? = Service.GetField(View.IdNo, "CashReceiptJournal", "IdNo", "ContactIdNo")
                     If originalContactIdNo = View.ContactIdNo Then
                         Dim CsrOiItemsView As New List(Of CsrOiItemView)
                         Dim CsrOiItemsModel As List(Of CsrOiItemModel) = GetCsrOiItems(View.IdNo)
-                        GlobalVariables.Mapper.Map(CsrOiItemsModel, CsrOiItemsView)
+                        GlobalFUnctions.ManualMap(CsrOiItemsModel, CsrOiItemsView)
                         View.CsrOiItems = CsrOiItemsView
                         nSeq = View.CsrOiItems.Count()
                     Else
@@ -1194,7 +1194,7 @@ Namespace PresentationLayer.Presenters
         Private Function GetOpenInvoices(cseIdNo As Integer?) As List(Of CsrOiItemView)
             Dim csrOiItemsView As New List(Of CsrOiItemView)
             Dim csrOiItemsModel As List(Of CsrOiItemModel) = GetCustomerOpenInvoices(cseIdNo)
-            GlobalVariables.Mapper.Map(CsrOiItemsModel, CsrOiItemsView)
+            GlobalFUnctions.ManualMap(CsrOiItemsModel, CsrOiItemsView)
             Return CsrOiItemsView
         End Function
 
@@ -1353,7 +1353,7 @@ Namespace PresentationLayer.Presenters
                     End If
                     Dim unpaidInvoices As List(Of CsrOiItemModel) = GetCustomerOpenInvoices(cseIdNo)
                     AddOpenInvoices(False, unpaidInvoices, newCsrOiItems, nSeq)
-                    GlobalVariables.Mapper.Map(newCsrOiItems, View.CsrOiItems)
+                    GlobalFUnctions.ManualMap(newCsrOiItems, View.CsrOiItems)
                     View.VatAmount = UpdateInputVatAmount(View.JournalItems)
                 Else
                     View.CsrOiItems.Clear()
@@ -1369,7 +1369,7 @@ Namespace PresentationLayer.Presenters
         '    'Dim dOriginalModel As New List(Of CsrOiItemView)
         '    Dim nSeq As Integer
         '    Dim cseIdNo As Int32? = GetCSEIdNo(View.ContactIdNo)
-        '    'GlobalVariables.Mapper.Map(dView, dModel)
+        '    'GlobalFUnctions.ManualMap(dView, dModel)
         '    nSeq = dView.Count()
         '    If EditMode Then
         '        If View.ContactIdNo = OriginalModel.ContactIdNo AndAlso View.PayorType = OriginalModel.PayorType Then

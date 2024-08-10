@@ -169,7 +169,7 @@ Namespace PresentationLayer.Presenters
         '    Dim employeePayElementDao As New EmployeePayElementDao
         '    Dim employeeDeductionModel As New List(Of EmployeePayElementModel)
         '    Dim employeeDeduction As List(Of EmployeePayElement) = employeePayElementDao.GetDaoRecords("PayElementKind = '" & PayElementKindSelection.Deduction & "' and EmployeeIdNo = " & View.IdNo)
-        '    GlobalVariables.Mapper.Map(employeeDeduction, employeeDeductionModel)
+        '    GlobalFUnctions.ManualMap(employeeDeduction, employeeDeductionModel)
         '    Return employeeDeductionModel
         'End Function
 
@@ -177,7 +177,7 @@ Namespace PresentationLayer.Presenters
         '    Dim employeePayElementDao As New EmployeePayElementDao
         '    Dim employeeEarningModel As New List(Of EmployeePayElementModel)
         '    Dim employeeEarning As List(Of EmployeePayElement) = employeePayElementDao.GetDaoRecords("PayElementKind = '" & PayElementKindSelection.Earning & "' and EmployeeIdNo = " & View.IdNo)
-        '    GlobalVariables.Mapper.Map(employeeEarning, employeeEarningModel)
+        '    GlobalFUnctions.ManualMap(employeeEarning, employeeEarningModel)
         '    Return employeeEarningModel
         'End Function
 

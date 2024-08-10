@@ -53,7 +53,8 @@ Public Class SecurityGroupPresenter(Of TM As New)
     Private Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
         Dim gaModel = Service.GetRecordsWithGroupIdNo(Of GroupAccessModel)(0, "SecurityObjectName")
         Dim gaView = New List(Of GroupAccessView)
-        View.GroupAccesses = GlobalVariables.Mapper.Map(gaModel, gaView)
+        GlobalFunctions.ManualMap(gaModel, gaView)
+        View.GroupAccesses = gaView
     End Sub
 
     Private Sub OnBeforeSave() Handles MyBase.BeforeSave

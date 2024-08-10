@@ -113,11 +113,11 @@ Namespace PresentationLayer.Views.Forms
             '
             'SplitContainer1
             '
+            resources.ApplyResources(Me.SplitContainer1, "SplitContainer1")
             '
             'SplitContainer1.Panel2
             '
             Me.SplitContainer1.Panel2.Controls.Add(Me.floDataDisplay)
-            resources.ApplyResources(Me.SplitContainer1, "SplitContainer1")
             '
             'FormTreeView
             '
@@ -129,6 +129,10 @@ Namespace PresentationLayer.Views.Forms
             Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"), System.Windows.Forms.ImageListStreamer)
             Me.ImageListTreeView.Images.SetKeyName(0, "TreeNode.ico")
             Me.ImageListTreeView.Images.SetKeyName(1, "openbriefcase.png")
+            '
+            'TranslatorDAC
+            '
+            Me.TranslatorDAC.Cs = ""
             '
             'txtNotes
             '
@@ -151,6 +155,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.MinimumValue = Nothing
             Me.txtNotes.Name = "txtNotes"
             Me.txtNotes.OldValue = Nothing
+            Me.txtNotes.OverrideMaxLength = 0
             Me.txtNotes.ReadOnly = True
             Me.txtNotes.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtNotes.Translatable = False
@@ -158,6 +163,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'lblNotes
             '
+            Me.lblNotes.BackColor = System.Drawing.Color.Transparent
             Me.lblNotes.DisplayOnly = True
             Me.lblNotes.EditingMode = False
             resources.ApplyResources(Me.lblNotes, "lblNotes")
@@ -166,6 +172,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'lblAccountStatus
             '
+            Me.lblAccountStatus.BackColor = System.Drawing.Color.Transparent
             Me.lblAccountStatus.DisplayOnly = True
             Me.lblAccountStatus.EditingMode = False
             resources.ApplyResources(Me.lblAccountStatus, "lblAccountStatus")
@@ -174,6 +181,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'lblDateAccountOpen
             '
+            Me.lblDateAccountOpen.BackColor = System.Drawing.Color.Transparent
             Me.lblDateAccountOpen.DisplayOnly = True
             Me.lblDateAccountOpen.EditingMode = False
             resources.ApplyResources(Me.lblDateAccountOpen, "lblDateAccountOpen")
@@ -201,6 +209,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtOpeningBalance.MinimumValue = Nothing
             Me.txtOpeningBalance.Name = "txtOpeningBalance"
             Me.txtOpeningBalance.OldValue = Nothing
+            Me.txtOpeningBalance.OverrideMaxLength = 0
             Me.txtOpeningBalance.ReadOnly = True
             Me.txtOpeningBalance.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtOpeningBalance.Translatable = False
@@ -208,6 +217,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'lblOpeningBalance
             '
+            Me.lblOpeningBalance.BackColor = System.Drawing.Color.Transparent
             Me.lblOpeningBalance.DisplayOnly = True
             Me.lblOpeningBalance.EditingMode = False
             resources.ApplyResources(Me.lblOpeningBalance, "lblOpeningBalance")
@@ -237,12 +247,14 @@ Namespace PresentationLayer.Views.Forms
             Me.txtSettlementDiscount.MinimumValue = Nothing
             Me.txtSettlementDiscount.Name = "txtSettlementDiscount"
             Me.txtSettlementDiscount.OldValue = Nothing
+            Me.txtSettlementDiscount.OverrideMaxLength = 0
             Me.txtSettlementDiscount.ReadOnly = True
             Me.txtSettlementDiscount.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtSettlementDiscount.Translatable = False
             '
             'lblSettlementDiscount
             '
+            Me.lblSettlementDiscount.BackColor = System.Drawing.Color.Transparent
             Me.lblSettlementDiscount.DisplayOnly = True
             Me.lblSettlementDiscount.EditingMode = False
             resources.ApplyResources(Me.lblSettlementDiscount, "lblSettlementDiscount")
@@ -272,12 +284,14 @@ Namespace PresentationLayer.Views.Forms
             Me.txtSettlementDueDays.MinimumValue = Nothing
             Me.txtSettlementDueDays.Name = "txtSettlementDueDays"
             Me.txtSettlementDueDays.OldValue = Nothing
+            Me.txtSettlementDueDays.OverrideMaxLength = 0
             Me.txtSettlementDueDays.ReadOnly = True
             Me.txtSettlementDueDays.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtSettlementDueDays.Translatable = False
             '
             'CLabel2
             '
+            Me.CLabel2.BackColor = System.Drawing.Color.Transparent
             Me.CLabel2.DisplayOnly = True
             Me.CLabel2.EditingMode = False
             resources.ApplyResources(Me.CLabel2, "CLabel2")
@@ -286,6 +300,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'lblPaymentMethod
             '
+            Me.lblPaymentMethod.BackColor = System.Drawing.Color.Transparent
             Me.lblPaymentMethod.DisplayOnly = True
             Me.lblPaymentMethod.EditingMode = False
             resources.ApplyResources(Me.lblPaymentMethod, "lblPaymentMethod")
@@ -314,12 +329,14 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPaymentDueDays.MinimumValue = Nothing
             Me.txtPaymentDueDays.Name = "txtPaymentDueDays"
             Me.txtPaymentDueDays.OldValue = Nothing
+            Me.txtPaymentDueDays.OverrideMaxLength = 0
             Me.txtPaymentDueDays.ReadOnly = True
             Me.txtPaymentDueDays.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtPaymentDueDays.Translatable = False
             '
             'lblPaymentDueDays
             '
+            Me.lblPaymentDueDays.BackColor = System.Drawing.Color.Transparent
             Me.lblPaymentDueDays.DisplayOnly = True
             Me.lblPaymentDueDays.EditingMode = False
             resources.ApplyResources(Me.lblPaymentDueDays, "lblPaymentDueDays")
@@ -347,6 +364,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtCreditLimit.MinimumValue = Nothing
             Me.txtCreditLimit.Name = "txtCreditLimit"
             Me.txtCreditLimit.OldValue = Nothing
+            Me.txtCreditLimit.OverrideMaxLength = 0
             Me.txtCreditLimit.ReadOnly = True
             Me.txtCreditLimit.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtCreditLimit.Translatable = False
@@ -354,6 +372,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'lblCreditLimit
             '
+            Me.lblCreditLimit.BackColor = System.Drawing.Color.Transparent
             Me.lblCreditLimit.DisplayOnly = True
             Me.lblCreditLimit.EditingMode = False
             resources.ApplyResources(Me.lblCreditLimit, "lblCreditLimit")
@@ -362,6 +381,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'lblArAccountIdNo
             '
+            Me.lblArAccountIdNo.BackColor = System.Drawing.Color.Transparent
             Me.lblArAccountIdNo.DisplayOnly = True
             Me.lblArAccountIdNo.EditingMode = False
             resources.ApplyResources(Me.lblArAccountIdNo, "lblArAccountIdNo")
@@ -370,6 +390,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'lblRevAccountIdNo
             '
+            Me.lblRevAccountIdNo.BackColor = System.Drawing.Color.Transparent
             Me.lblRevAccountIdNo.DisplayOnly = True
             Me.lblRevAccountIdNo.EditingMode = False
             resources.ApplyResources(Me.lblRevAccountIdNo, "lblRevAccountIdNo")
@@ -398,12 +419,14 @@ Namespace PresentationLayer.Views.Forms
             Me.txtIban.MinimumValue = Nothing
             Me.txtIban.Name = "txtIban"
             Me.txtIban.OldValue = Nothing
+            Me.txtIban.OverrideMaxLength = 0
             Me.txtIban.ReadOnly = True
             Me.txtIban.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtIban.Translatable = False
             '
             'lblIban
             '
+            Me.lblIban.BackColor = System.Drawing.Color.Transparent
             Me.lblIban.DisplayOnly = True
             Me.lblIban.EditingMode = False
             resources.ApplyResources(Me.lblIban, "lblIban")
@@ -431,12 +454,14 @@ Namespace PresentationLayer.Views.Forms
             Me.txtBankAccountNo.MinimumValue = Nothing
             Me.txtBankAccountNo.Name = "txtBankAccountNo"
             Me.txtBankAccountNo.OldValue = Nothing
+            Me.txtBankAccountNo.OverrideMaxLength = 0
             Me.txtBankAccountNo.ReadOnly = True
             Me.txtBankAccountNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtBankAccountNo.Translatable = False
             '
             'lblBankAccountNo
             '
+            Me.lblBankAccountNo.BackColor = System.Drawing.Color.Transparent
             Me.lblBankAccountNo.DisplayOnly = True
             Me.lblBankAccountNo.EditingMode = False
             resources.ApplyResources(Me.lblBankAccountNo, "lblBankAccountNo")
@@ -445,6 +470,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'lblBankIdNo
             '
+            Me.lblBankIdNo.BackColor = System.Drawing.Color.Transparent
             Me.lblBankIdNo.DisplayOnly = True
             Me.lblBankIdNo.EditingMode = False
             resources.ApplyResources(Me.lblBankIdNo, "lblBankIdNo")
@@ -472,12 +498,14 @@ Namespace PresentationLayer.Views.Forms
             Me.txtCrNumber.MinimumValue = Nothing
             Me.txtCrNumber.Name = "txtCrNumber"
             Me.txtCrNumber.OldValue = Nothing
+            Me.txtCrNumber.OverrideMaxLength = 0
             Me.txtCrNumber.ReadOnly = True
             Me.txtCrNumber.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtCrNumber.Translatable = False
             '
             'lblCrNumber
             '
+            Me.lblCrNumber.BackColor = System.Drawing.Color.Transparent
             Me.lblCrNumber.DisplayOnly = True
             Me.lblCrNumber.EditingMode = False
             resources.ApplyResources(Me.lblCrNumber, "lblCrNumber")
@@ -506,12 +534,14 @@ Namespace PresentationLayer.Views.Forms
             Me.txtWebsite.MinimumValue = Nothing
             Me.txtWebsite.Name = "txtWebsite"
             Me.txtWebsite.OldValue = Nothing
+            Me.txtWebsite.OverrideMaxLength = 0
             Me.txtWebsite.ReadOnly = True
             Me.txtWebsite.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtWebsite.Translatable = False
             '
             'lblWebsite
             '
+            Me.lblWebsite.BackColor = System.Drawing.Color.Transparent
             Me.lblWebsite.DisplayOnly = True
             Me.lblWebsite.EditingMode = False
             resources.ApplyResources(Me.lblWebsite, "lblWebsite")
@@ -539,12 +569,14 @@ Namespace PresentationLayer.Views.Forms
             Me.txtEmail.MinimumValue = Nothing
             Me.txtEmail.Name = "txtEmail"
             Me.txtEmail.OldValue = Nothing
+            Me.txtEmail.OverrideMaxLength = 0
             Me.txtEmail.ReadOnly = True
             Me.txtEmail.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtEmail.Translatable = False
             '
             'lblEmail
             '
+            Me.lblEmail.BackColor = System.Drawing.Color.Transparent
             Me.lblEmail.DisplayOnly = True
             Me.lblEmail.EditingMode = False
             resources.ApplyResources(Me.lblEmail, "lblEmail")
@@ -573,12 +605,14 @@ Namespace PresentationLayer.Views.Forms
             Me.txtMobile.MinimumValue = Nothing
             Me.txtMobile.Name = "txtMobile"
             Me.txtMobile.OldValue = Nothing
+            Me.txtMobile.OverrideMaxLength = 0
             Me.txtMobile.ReadOnly = True
             Me.txtMobile.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtMobile.Translatable = False
             '
             'lblMobile
             '
+            Me.lblMobile.BackColor = System.Drawing.Color.Transparent
             Me.lblMobile.DisplayOnly = True
             Me.lblMobile.EditingMode = False
             resources.ApplyResources(Me.lblMobile, "lblMobile")
@@ -606,12 +640,14 @@ Namespace PresentationLayer.Views.Forms
             Me.txtFax.MinimumValue = Nothing
             Me.txtFax.Name = "txtFax"
             Me.txtFax.OldValue = Nothing
+            Me.txtFax.OverrideMaxLength = 0
             Me.txtFax.ReadOnly = True
             Me.txtFax.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtFax.Translatable = False
             '
             'lblFax
             '
+            Me.lblFax.BackColor = System.Drawing.Color.Transparent
             Me.lblFax.DisplayOnly = True
             Me.lblFax.EditingMode = False
             resources.ApplyResources(Me.lblFax, "lblFax")
@@ -640,12 +676,14 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPhone2.MinimumValue = Nothing
             Me.txtPhone2.Name = "txtPhone2"
             Me.txtPhone2.OldValue = Nothing
+            Me.txtPhone2.OverrideMaxLength = 0
             Me.txtPhone2.ReadOnly = True
             Me.txtPhone2.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtPhone2.Translatable = False
             '
             'lblPhone2
             '
+            Me.lblPhone2.BackColor = System.Drawing.Color.Transparent
             Me.lblPhone2.DisplayOnly = True
             Me.lblPhone2.EditingMode = False
             resources.ApplyResources(Me.lblPhone2, "lblPhone2")
@@ -673,12 +711,14 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPhone1.MinimumValue = Nothing
             Me.txtPhone1.Name = "txtPhone1"
             Me.txtPhone1.OldValue = Nothing
+            Me.txtPhone1.OverrideMaxLength = 0
             Me.txtPhone1.ReadOnly = True
             Me.txtPhone1.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtPhone1.Translatable = False
             '
             'lblPhone1
             '
+            Me.lblPhone1.BackColor = System.Drawing.Color.Transparent
             Me.lblPhone1.DisplayOnly = True
             Me.lblPhone1.EditingMode = False
             resources.ApplyResources(Me.lblPhone1, "lblPhone1")
@@ -687,6 +727,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'lblCountryCode
             '
+            Me.lblCountryCode.BackColor = System.Drawing.Color.Transparent
             Me.lblCountryCode.DisplayOnly = True
             Me.lblCountryCode.EditingMode = False
             resources.ApplyResources(Me.lblCountryCode, "lblCountryCode")
@@ -714,12 +755,14 @@ Namespace PresentationLayer.Views.Forms
             Me.txtZipCode.MinimumValue = Nothing
             Me.txtZipCode.Name = "txtZipCode"
             Me.txtZipCode.OldValue = Nothing
+            Me.txtZipCode.OverrideMaxLength = 0
             Me.txtZipCode.ReadOnly = True
             Me.txtZipCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtZipCode.Translatable = False
             '
             'lblZipCode
             '
+            Me.lblZipCode.BackColor = System.Drawing.Color.Transparent
             Me.lblZipCode.DisplayOnly = True
             Me.lblZipCode.EditingMode = False
             resources.ApplyResources(Me.lblZipCode, "lblZipCode")
@@ -747,12 +790,14 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPoBox.MinimumValue = Nothing
             Me.txtPoBox.Name = "txtPoBox"
             Me.txtPoBox.OldValue = Nothing
+            Me.txtPoBox.OverrideMaxLength = 0
             Me.txtPoBox.ReadOnly = True
             Me.txtPoBox.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtPoBox.Translatable = False
             '
             'lblPoBox
             '
+            Me.lblPoBox.BackColor = System.Drawing.Color.Transparent
             Me.lblPoBox.DisplayOnly = True
             Me.lblPoBox.EditingMode = False
             resources.ApplyResources(Me.lblPoBox, "lblPoBox")
@@ -781,12 +826,14 @@ Namespace PresentationLayer.Views.Forms
             Me.txtProvinceState.MinimumValue = Nothing
             Me.txtProvinceState.Name = "txtProvinceState"
             Me.txtProvinceState.OldValue = Nothing
+            Me.txtProvinceState.OverrideMaxLength = 0
             Me.txtProvinceState.ReadOnly = True
             Me.txtProvinceState.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtProvinceState.Translatable = False
             '
             'lblProvinceState
             '
+            Me.lblProvinceState.BackColor = System.Drawing.Color.Transparent
             Me.lblProvinceState.DisplayOnly = True
             Me.lblProvinceState.EditingMode = False
             resources.ApplyResources(Me.lblProvinceState, "lblProvinceState")
@@ -814,12 +861,14 @@ Namespace PresentationLayer.Views.Forms
             Me.txtTownCity.MinimumValue = Nothing
             Me.txtTownCity.Name = "txtTownCity"
             Me.txtTownCity.OldValue = Nothing
+            Me.txtTownCity.OverrideMaxLength = 0
             Me.txtTownCity.ReadOnly = True
             Me.txtTownCity.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtTownCity.Translatable = False
             '
             'lblTownCity
             '
+            Me.lblTownCity.BackColor = System.Drawing.Color.Transparent
             Me.lblTownCity.DisplayOnly = True
             Me.lblTownCity.EditingMode = False
             resources.ApplyResources(Me.lblTownCity, "lblTownCity")
@@ -848,12 +897,14 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDistrict.MinimumValue = Nothing
             Me.txtDistrict.Name = "txtDistrict"
             Me.txtDistrict.OldValue = Nothing
+            Me.txtDistrict.OverrideMaxLength = 0
             Me.txtDistrict.ReadOnly = True
             Me.txtDistrict.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtDistrict.Translatable = False
             '
             'lblDistrict
             '
+            Me.lblDistrict.BackColor = System.Drawing.Color.Transparent
             Me.lblDistrict.DisplayOnly = True
             Me.lblDistrict.EditingMode = False
             resources.ApplyResources(Me.lblDistrict, "lblDistrict")
@@ -881,12 +932,14 @@ Namespace PresentationLayer.Views.Forms
             Me.txtStreet.MinimumValue = Nothing
             Me.txtStreet.Name = "txtStreet"
             Me.txtStreet.OldValue = Nothing
+            Me.txtStreet.OverrideMaxLength = 0
             Me.txtStreet.ReadOnly = True
             Me.txtStreet.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtStreet.Translatable = False
             '
             'lblStreet
             '
+            Me.lblStreet.BackColor = System.Drawing.Color.Transparent
             Me.lblStreet.DisplayOnly = True
             Me.lblStreet.EditingMode = False
             resources.ApplyResources(Me.lblStreet, "lblStreet")
@@ -915,12 +968,14 @@ Namespace PresentationLayer.Views.Forms
             Me.txtContactDesignation.MinimumValue = Nothing
             Me.txtContactDesignation.Name = "txtContactDesignation"
             Me.txtContactDesignation.OldValue = Nothing
+            Me.txtContactDesignation.OverrideMaxLength = 0
             Me.txtContactDesignation.ReadOnly = True
             Me.txtContactDesignation.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtContactDesignation.Translatable = False
             '
             'lblContactDesignation
             '
+            Me.lblContactDesignation.BackColor = System.Drawing.Color.Transparent
             Me.lblContactDesignation.DisplayOnly = True
             Me.lblContactDesignation.EditingMode = False
             resources.ApplyResources(Me.lblContactDesignation, "lblContactDesignation")
@@ -948,12 +1003,14 @@ Namespace PresentationLayer.Views.Forms
             Me.txtContactPerson.MinimumValue = Nothing
             Me.txtContactPerson.Name = "txtContactPerson"
             Me.txtContactPerson.OldValue = Nothing
+            Me.txtContactPerson.OverrideMaxLength = 0
             Me.txtContactPerson.ReadOnly = True
             Me.txtContactPerson.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtContactPerson.Translatable = False
             '
             'lblContactPerson
             '
+            Me.lblContactPerson.BackColor = System.Drawing.Color.Transparent
             Me.lblContactPerson.DisplayOnly = True
             Me.lblContactPerson.EditingMode = False
             resources.ApplyResources(Me.lblContactPerson, "lblContactPerson")
@@ -983,6 +1040,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtCustomerNameAra.MinimumValue = Nothing
             Me.txtCustomerNameAra.Name = "txtCustomerNameAra"
             Me.txtCustomerNameAra.OldValue = Nothing
+            Me.txtCustomerNameAra.OverrideMaxLength = 0
             Me.txtCustomerNameAra.ReadOnly = True
             Me.txtCustomerNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtCustomerNameAra.Translatable = False
@@ -1011,6 +1069,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtCustomerName.MinimumValue = Nothing
             Me.txtCustomerName.Name = "txtCustomerName"
             Me.txtCustomerName.OldValue = Nothing
+            Me.txtCustomerName.OverrideMaxLength = 0
             Me.txtCustomerName.ReadOnly = True
             Me.txtCustomerName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtCustomerName.Translatable = False
@@ -1019,6 +1078,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'lblCustomerName
             '
+            Me.lblCustomerName.BackColor = System.Drawing.Color.Transparent
             Me.lblCustomerName.DisplayOnly = True
             Me.lblCustomerName.EditingMode = False
             resources.ApplyResources(Me.lblCustomerName, "lblCustomerName")
@@ -1027,6 +1087,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'lblCustomerNameAra
             '
+            Me.lblCustomerNameAra.BackColor = System.Drawing.Color.Transparent
             Me.lblCustomerNameAra.DisplayOnly = True
             Me.lblCustomerNameAra.EditingMode = False
             resources.ApplyResources(Me.lblCustomerNameAra, "lblCustomerNameAra")
@@ -1035,6 +1096,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'lblVatNumber
             '
+            Me.lblVatNumber.BackColor = System.Drawing.Color.Transparent
             Me.lblVatNumber.DisplayOnly = True
             Me.lblVatNumber.EditingMode = False
             resources.ApplyResources(Me.lblVatNumber, "lblVatNumber")
@@ -1062,6 +1124,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtCustomerCode.MinimumValue = Nothing
             Me.txtCustomerCode.Name = "txtCustomerCode"
             Me.txtCustomerCode.OldValue = Nothing
+            Me.txtCustomerCode.OverrideMaxLength = 0
             Me.txtCustomerCode.ReadOnly = True
             Me.txtCustomerCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtCustomerCode.Translatable = False
@@ -1070,6 +1133,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'lblCustomerCode
             '
+            Me.lblCustomerCode.BackColor = System.Drawing.Color.Transparent
             Me.lblCustomerCode.DisplayOnly = True
             Me.lblCustomerCode.EditingMode = False
             resources.ApplyResources(Me.lblCustomerCode, "lblCustomerCode")
@@ -1098,6 +1162,7 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.MinimumValue = Nothing
             Me.TxtIdNo.Name = "TxtIdNo"
             Me.TxtIdNo.OldValue = Nothing
+            Me.TxtIdNo.OverrideMaxLength = 0
             Me.TxtIdNo.ReadOnly = True
             Me.TxtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.TxtIdNo.TabStop = False
@@ -1106,6 +1171,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'lblIdNo
             '
+            Me.lblIdNo.BackColor = System.Drawing.Color.Transparent
             Me.lblIdNo.DisplayOnly = True
             Me.lblIdNo.EditingMode = False
             resources.ApplyResources(Me.lblIdNo, "lblIdNo")
@@ -1216,19 +1282,23 @@ Namespace PresentationLayer.Views.Forms
             Me.txtVatNumber.MinimumValue = Nothing
             Me.txtVatNumber.Name = "txtVatNumber"
             Me.txtVatNumber.OldValue = Nothing
+            Me.txtVatNumber.OverrideMaxLength = 0
             Me.txtVatNumber.ReadOnly = True
             Me.txtVatNumber.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtVatNumber.Translatable = False
             '
             'cacCountryCode
             '
+            Me.cacCountryCode.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
             Me.cacCountryCode.BackColor = System.Drawing.Color.White
             Me.cacCountryCode.BegFindValue = Nothing
             Me.cacCountryCode.ChangingSearchValueOnly = False
             Me.cacCountryCode.CurrentSearchTerm = ""
             Me.cacCountryCode.DataValue = Nothing
             Me.cacCountryCode.DefaultValue = Nothing
-            Me.cacCountryCode.DisplayMember = "Name"
+            Me.cacCountryCode.DropDownHeight = 24
+            Me.cacCountryCode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
+            Me.cacCountryCode.Editable = True
             Me.cacCountryCode.EditingMode = False
             Me.cacCountryCode.EndFindValue = Nothing
             Me.cacCountryCode.FieldDescription = Nothing
@@ -1241,6 +1311,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacCountryCode.FormattingEnabled = True
             Me.cacCountryCode.HideWhenNotEditingOrAdding = False
             Me.cacCountryCode.IgnoreCase = False
+            Me.cacCountryCode.LimitToList = False
             Me.cacCountryCode.LinkedLabel = Me.lblCountryCode
             Me.cacCountryCode.Name = "cacCountryCode"
             Me.cacCountryCode.OldValue = 0
@@ -1250,15 +1321,16 @@ Namespace PresentationLayer.Views.Forms
             Me.cacCountryCode.PreviousSearchTerm = Nothing
             Me.cacCountryCode.SecurityKey = ""
             Me.cacCountryCode.SuggestBoxHeight = 200
+            Me.cacCountryCode.SuggestCharCount = 0
             Me.cacCountryCode.TextToSearch = Nothing
             Me.cacCountryCode.Translatable = False
             Me.cacCountryCode.ValueIsMandatory = False
             Me.cacCountryCode.ValueIsNullable = False
             Me.cacCountryCode.ValueIsNumeric = False
-            Me.cacCountryCode.ValueMember = "Code"
             '
             'cacBankIdNo
             '
+            Me.cacBankIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
             Me.cacBankIdNo.BackColor = System.Drawing.Color.White
             Me.cacBankIdNo.BegFindValue = Nothing
             Me.cacBankIdNo.ChangingSearchValueOnly = False
@@ -1266,6 +1338,9 @@ Namespace PresentationLayer.Views.Forms
             Me.cacBankIdNo.DataValue = Nothing
             Me.cacBankIdNo.DefaultValue = Nothing
             Me.cacBankIdNo.DisplayMember = "Name"
+            Me.cacBankIdNo.DropDownHeight = 24
+            Me.cacBankIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
+            Me.cacBankIdNo.Editable = True
             Me.cacBankIdNo.EditingMode = False
             Me.cacBankIdNo.EndFindValue = Nothing
             Me.cacBankIdNo.FieldDescription = Nothing
@@ -1278,6 +1353,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacBankIdNo.FormattingEnabled = True
             Me.cacBankIdNo.HideWhenNotEditingOrAdding = False
             Me.cacBankIdNo.IgnoreCase = False
+            Me.cacBankIdNo.LimitToList = False
             Me.cacBankIdNo.LinkedLabel = Nothing
             Me.cacBankIdNo.Name = "cacBankIdNo"
             Me.cacBankIdNo.OldValue = 0
@@ -1286,6 +1362,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacBankIdNo.OverrideDropDownStyleList = False
             Me.cacBankIdNo.PreviousSearchTerm = Nothing
             Me.cacBankIdNo.SuggestBoxHeight = 200
+            Me.cacBankIdNo.SuggestCharCount = 0
             Me.cacBankIdNo.TextToSearch = Nothing
             Me.cacBankIdNo.Translatable = False
             Me.cacBankIdNo.ValueIsMandatory = False
@@ -1295,6 +1372,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'cacRevAccountIdNo
             '
+            Me.cacRevAccountIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
             Me.cacRevAccountIdNo.BackColor = System.Drawing.Color.White
             Me.cacRevAccountIdNo.BegFindValue = Nothing
             Me.cacRevAccountIdNo.ChangingSearchValueOnly = False
@@ -1302,6 +1380,9 @@ Namespace PresentationLayer.Views.Forms
             Me.cacRevAccountIdNo.DataValue = Nothing
             Me.cacRevAccountIdNo.DefaultValue = Nothing
             Me.cacRevAccountIdNo.DisplayMember = "Name"
+            Me.cacRevAccountIdNo.DropDownHeight = 24
+            Me.cacRevAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
+            Me.cacRevAccountIdNo.Editable = True
             Me.cacRevAccountIdNo.EditingMode = False
             Me.cacRevAccountIdNo.EndFindValue = Nothing
             Me.cacRevAccountIdNo.FieldDescription = Nothing
@@ -1313,6 +1394,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacRevAccountIdNo.FormattingEnabled = True
             Me.cacRevAccountIdNo.HideWhenNotEditingOrAdding = False
             Me.cacRevAccountIdNo.IgnoreCase = False
+            Me.cacRevAccountIdNo.LimitToList = False
             Me.cacRevAccountIdNo.LinkedLabel = Nothing
             Me.cacRevAccountIdNo.Name = "cacRevAccountIdNo"
             Me.cacRevAccountIdNo.OldValue = 0
@@ -1321,6 +1403,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacRevAccountIdNo.OverrideDropDownStyleList = False
             Me.cacRevAccountIdNo.PreviousSearchTerm = Nothing
             Me.cacRevAccountIdNo.SuggestBoxHeight = 200
+            Me.cacRevAccountIdNo.SuggestCharCount = 0
             Me.cacRevAccountIdNo.TextToSearch = Nothing
             Me.cacRevAccountIdNo.Translatable = False
             Me.cacRevAccountIdNo.ValueIsMandatory = False
@@ -1330,6 +1413,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'cacArAccountIdNo
             '
+            Me.cacArAccountIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
             Me.cacArAccountIdNo.BackColor = System.Drawing.Color.White
             Me.cacArAccountIdNo.BegFindValue = Nothing
             Me.cacArAccountIdNo.ChangingSearchValueOnly = False
@@ -1337,6 +1421,9 @@ Namespace PresentationLayer.Views.Forms
             Me.cacArAccountIdNo.DataValue = Nothing
             Me.cacArAccountIdNo.DefaultValue = Nothing
             Me.cacArAccountIdNo.DisplayMember = "Name"
+            Me.cacArAccountIdNo.DropDownHeight = 24
+            Me.cacArAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
+            Me.cacArAccountIdNo.Editable = True
             Me.cacArAccountIdNo.EditingMode = False
             Me.cacArAccountIdNo.EndFindValue = Nothing
             Me.cacArAccountIdNo.FieldDescription = Nothing
@@ -1349,6 +1436,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacArAccountIdNo.FormattingEnabled = True
             Me.cacArAccountIdNo.HideWhenNotEditingOrAdding = False
             Me.cacArAccountIdNo.IgnoreCase = False
+            Me.cacArAccountIdNo.LimitToList = False
             Me.cacArAccountIdNo.LinkedLabel = Nothing
             Me.cacArAccountIdNo.Name = "cacArAccountIdNo"
             Me.cacArAccountIdNo.OldValue = 0
@@ -1357,6 +1445,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacArAccountIdNo.OverrideDropDownStyleList = False
             Me.cacArAccountIdNo.PreviousSearchTerm = Nothing
             Me.cacArAccountIdNo.SuggestBoxHeight = 200
+            Me.cacArAccountIdNo.SuggestCharCount = 0
             Me.cacArAccountIdNo.TextToSearch = Nothing
             Me.cacArAccountIdNo.Translatable = False
             Me.cacArAccountIdNo.ValueIsMandatory = False
@@ -1366,6 +1455,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'cacPaymentMethod
             '
+            Me.cacPaymentMethod.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
             Me.cacPaymentMethod.BackColor = System.Drawing.Color.White
             Me.cacPaymentMethod.BegFindValue = Nothing
             Me.cacPaymentMethod.ChangingSearchValueOnly = False
@@ -1373,6 +1463,9 @@ Namespace PresentationLayer.Views.Forms
             Me.cacPaymentMethod.DataValue = Nothing
             Me.cacPaymentMethod.DefaultValue = Nothing
             Me.cacPaymentMethod.DisplayMember = "Name"
+            Me.cacPaymentMethod.DropDownHeight = 24
+            Me.cacPaymentMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
+            Me.cacPaymentMethod.Editable = True
             Me.cacPaymentMethod.EditingMode = False
             Me.cacPaymentMethod.EndFindValue = Nothing
             Me.cacPaymentMethod.FieldDescription = Nothing
@@ -1385,6 +1478,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacPaymentMethod.FormattingEnabled = True
             Me.cacPaymentMethod.HideWhenNotEditingOrAdding = False
             Me.cacPaymentMethod.IgnoreCase = False
+            Me.cacPaymentMethod.LimitToList = False
             Me.cacPaymentMethod.LinkedLabel = Nothing
             Me.cacPaymentMethod.Name = "cacPaymentMethod"
             Me.cacPaymentMethod.OldValue = 0
@@ -1393,6 +1487,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacPaymentMethod.OverrideDropDownStyleList = False
             Me.cacPaymentMethod.PreviousSearchTerm = Nothing
             Me.cacPaymentMethod.SuggestBoxHeight = 200
+            Me.cacPaymentMethod.SuggestCharCount = 0
             Me.cacPaymentMethod.TextToSearch = Nothing
             Me.cacPaymentMethod.Translatable = False
             Me.cacPaymentMethod.ValueIsMandatory = False
@@ -1402,6 +1497,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'CLabel1
             '
+            Me.CLabel1.BackColor = System.Drawing.Color.Transparent
             Me.CLabel1.DisplayOnly = True
             Me.CLabel1.EditingMode = False
             resources.ApplyResources(Me.CLabel1, "CLabel1")
@@ -1410,6 +1506,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'cacDiscountSchemeIdNo
             '
+            Me.cacDiscountSchemeIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
             Me.cacDiscountSchemeIdNo.BackColor = System.Drawing.Color.White
             Me.cacDiscountSchemeIdNo.BegFindValue = Nothing
             Me.cacDiscountSchemeIdNo.ChangingSearchValueOnly = False
@@ -1417,6 +1514,9 @@ Namespace PresentationLayer.Views.Forms
             Me.cacDiscountSchemeIdNo.DataValue = Nothing
             Me.cacDiscountSchemeIdNo.DefaultValue = Nothing
             Me.cacDiscountSchemeIdNo.DisplayMember = "Name"
+            Me.cacDiscountSchemeIdNo.DropDownHeight = 24
+            Me.cacDiscountSchemeIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
+            Me.cacDiscountSchemeIdNo.Editable = True
             Me.cacDiscountSchemeIdNo.EditingMode = False
             Me.cacDiscountSchemeIdNo.EndFindValue = Nothing
             Me.cacDiscountSchemeIdNo.FieldDescription = Nothing
@@ -1428,6 +1528,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacDiscountSchemeIdNo.FormattingEnabled = True
             Me.cacDiscountSchemeIdNo.HideWhenNotEditingOrAdding = False
             Me.cacDiscountSchemeIdNo.IgnoreCase = False
+            Me.cacDiscountSchemeIdNo.LimitToList = False
             Me.cacDiscountSchemeIdNo.LinkedLabel = Nothing
             Me.cacDiscountSchemeIdNo.Name = "cacDiscountSchemeIdNo"
             Me.cacDiscountSchemeIdNo.OldValue = 0
@@ -1436,6 +1537,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacDiscountSchemeIdNo.OverrideDropDownStyleList = False
             Me.cacDiscountSchemeIdNo.PreviousSearchTerm = Nothing
             Me.cacDiscountSchemeIdNo.SuggestBoxHeight = 200
+            Me.cacDiscountSchemeIdNo.SuggestCharCount = 0
             Me.cacDiscountSchemeIdNo.TextToSearch = Nothing
             Me.cacDiscountSchemeIdNo.Translatable = False
             Me.cacDiscountSchemeIdNo.ValueIsMandatory = False
@@ -1445,6 +1547,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'dtpDateAccountOpen
             '
+            resources.ApplyResources(Me.dtpDateAccountOpen, "dtpDateAccountOpen")
             Me.dtpDateAccountOpen.CalendarCulture = New System.Globalization.CultureInfo("en-GB")
             Me.dtpDateAccountOpen.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
             Me.dtpDateAccountOpen.DefaultValue = Nothing
@@ -1453,7 +1556,6 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpDateAccountOpen.EditingMode = False
             Me.dtpDateAccountOpen.EditsAllowed = False
             Me.floDataDisplay.SetFlowBreak(Me.dtpDateAccountOpen, True)
-            resources.ApplyResources(Me.dtpDateAccountOpen, "dtpDateAccountOpen")
             Me.dtpDateAccountOpen.ForeColor = System.Drawing.Color.Black
             Me.dtpDateAccountOpen.LinkedLabel = Nothing
             Me.dtpDateAccountOpen.Name = "dtpDateAccountOpen"
@@ -1469,6 +1571,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'cacAccountStatus
             '
+            Me.cacAccountStatus.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
             Me.cacAccountStatus.BackColor = System.Drawing.Color.White
             Me.cacAccountStatus.BegFindValue = Nothing
             Me.cacAccountStatus.ChangingSearchValueOnly = False
@@ -1476,6 +1579,9 @@ Namespace PresentationLayer.Views.Forms
             Me.cacAccountStatus.DataValue = Nothing
             Me.cacAccountStatus.DefaultValue = Nothing
             Me.cacAccountStatus.DisplayMember = "Name"
+            Me.cacAccountStatus.DropDownHeight = 24
+            Me.cacAccountStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
+            Me.cacAccountStatus.Editable = True
             Me.cacAccountStatus.EditingMode = False
             Me.cacAccountStatus.EndFindValue = Nothing
             Me.cacAccountStatus.FieldDescription = Nothing
@@ -1487,6 +1593,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacAccountStatus.FormattingEnabled = True
             Me.cacAccountStatus.HideWhenNotEditingOrAdding = False
             Me.cacAccountStatus.IgnoreCase = False
+            Me.cacAccountStatus.LimitToList = False
             Me.cacAccountStatus.LinkedLabel = Nothing
             Me.cacAccountStatus.Name = "cacAccountStatus"
             Me.cacAccountStatus.OldValue = 0
@@ -1495,6 +1602,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacAccountStatus.OverrideDropDownStyleList = False
             Me.cacAccountStatus.PreviousSearchTerm = Nothing
             Me.cacAccountStatus.SuggestBoxHeight = 200
+            Me.cacAccountStatus.SuggestCharCount = 0
             Me.cacAccountStatus.TextToSearch = Nothing
             Me.cacAccountStatus.Translatable = False
             Me.cacAccountStatus.ValueIsMandatory = False
@@ -1504,6 +1612,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'lblActive
             '
+            Me.lblActive.BackColor = System.Drawing.Color.Transparent
             Me.lblActive.DisplayOnly = True
             Me.lblActive.EditingMode = False
             resources.ApplyResources(Me.lblActive, "lblActive")
@@ -1536,6 +1645,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'CLabel3
             '
+            Me.CLabel3.BackColor = System.Drawing.Color.Transparent
             Me.CLabel3.DisplayOnly = True
             Me.CLabel3.EditingMode = False
             resources.ApplyResources(Me.CLabel3, "CLabel3")
@@ -1565,6 +1675,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtBalance.MinimumValue = Nothing
             Me.txtBalance.Name = "txtBalance"
             Me.txtBalance.OldValue = Nothing
+            Me.txtBalance.OverrideMaxLength = 0
             Me.txtBalance.ReadOnly = True
             Me.txtBalance.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtBalance.Translatable = False

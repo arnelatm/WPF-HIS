@@ -102,7 +102,7 @@ Namespace PresentationLayer.Presenters
         Private Sub RefreshRequestDetailsAndQtyOnHand(PurchaseOrderIdNo As Integer)
             Dim PurchaseOrderApprovalItems As List(Of PurchaseOrderApprovalDetailModel) = _purchaseOrderApprovalItemService.GetRecordsWithGroupIdNo(Of PurchaseOrderApprovalDetailModel)(PurchaseOrderIdNo)
             Dim invItems As New List(Of PurchaseOrderApprovalDetailView)
-            GlobalVariables.Mapper.Map(PurchaseOrderApprovalItems, invItems)
+            GlobalFUnctions.ManualMap(PurchaseOrderApprovalItems, invItems)
             View.PurchaseOrderDetails = invItems
         End Sub
 
@@ -125,7 +125,7 @@ Namespace PresentationLayer.Presenters
         Private Sub GetUnPostedPo()
             Dim purchaseOrders As New PurchaseOrderApprovalModel
             purchaseOrders = Service.GetParametrized(Of PurchaseOrderApprovalModel)(Nothing)
-            GlobalVariables.Mapper.Map(purchaseOrders, View)
+            GlobalFUnctions.ManualMap(purchaseOrders, View)
         End Sub
 
         Public Sub OnPurchaseOrderdgvItemsChangedEventHandler(ByRef eventType As DgvItemsChanged) Implements ISubscriber(Of DgvItemsChanged).OnEventHandler

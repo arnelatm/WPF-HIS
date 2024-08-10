@@ -805,10 +805,11 @@ Public Class CdtComboBox
 
     Public Sub SetSuggestDataSource()
         If DataSource IsNot Nothing Then
+            Dim ds = DataSource
             _suggestBindingSource.DataSource = DataSource.Copy()
             _suggestBindingSource.ResetBindings(True)
-            SuggestListForm.SuggestListBox.DisplayMember = DisplayMember
-            SuggestListForm.SuggestListBox.ValueMember = ValueMember
+            SuggestListForm.SuggestListBox.DisplayMember = IIf(DisplayMember Is Nothing OrElse DisplayMember = "", "Name", DisplayMember)
+            SuggestListForm.SuggestListBox.ValueMember = IIf(ValueMember Is Nothing OrElse ValueMember = "", "IdNo", ValueMember)
         End If
 
     End Sub

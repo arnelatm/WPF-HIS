@@ -26,7 +26,7 @@ Namespace BusinessLayer
         Public Property EmployeeIdNo As Int32
         Public Property IdNo As Int32
         Public Property Rate As Decimal
-        Public Property Unit As Char
+        Public Property Unit As String
         Public Property Sequence As Int16
 
     End Class

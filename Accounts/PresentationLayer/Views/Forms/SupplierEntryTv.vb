@@ -359,7 +359,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property Balance As Decimal Implements ISupplierView.Balance
             Get
-                Return txtBalance.Text
+                Return Convert.ToDecimal(NumParser(Of Decimal)(txtBalance.Text), _nfi)
             End Get
             Set(value As Decimal)
                 txtBalance.Text = FormatDecimalNumber(value)

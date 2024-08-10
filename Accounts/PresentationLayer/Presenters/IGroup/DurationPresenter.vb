@@ -24,7 +24,7 @@ Namespace PresentationLayer.Presenters
             Dim dmv As New List(Of IDurationView)
             Dim record = Service.GetAll(Of TM)(sortKey)
             If record IsNot Nothing Then
-                GlobalVariables.Mapper.Map(record, dmv)
+                GlobalFUnctions.ManualMap(record, dmv)
                 View.DurationList = dmv
             End If
         End Sub

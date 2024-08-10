@@ -21,7 +21,11 @@ Namespace PresentationLayer.Presenters
             End If
             'Dim presenterModelName = $"AATM.Accounts.PresentationLayer.Models.ModelAccounts"
             TableName = tableOrViewName
-            TableBaseName = IIf(tableOrViewName.Right(5) = "_View", Left(tableOrViewName, tableOrViewName.Length - 5), tableOrViewName)
+            If tableOrViewName.Length > 5 Then
+                TableBaseName = IIf(tableOrViewName.Right(5) = "_View", Left(tableOrViewName, tableOrViewName.Length - 5), tableOrViewName)
+            Else
+                TableBaseName = tableOrViewName
+            End If
             WithTreeView = False
             Service = New AccountsService("Basic", , tableOrViewName)
             If AutoGenerateCode(TableName) Then

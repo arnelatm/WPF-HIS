@@ -263,7 +263,7 @@ Namespace PresentationLayer.Presenters
             seq = 1
             If _reinitialize Then
                 Dim currentEmpAttendance As New List(Of AttendanceItemView)
-                GlobalVariables.Mapper.Map(View.PayrollAttendance, currentEmpAttendance)
+                GlobalFUnctions.ManualMap(View.PayrollAttendance, currentEmpAttendance)
                 Dim i As Int16 = 1
                 seq = 1
                 View.PayrollAttendance.Clear()
@@ -602,7 +602,7 @@ Namespace PresentationLayer.Presenters
 
         '    '_absenceDeductions = New List(Of Deduction)
         '    'Dim absencesDeductions = _deductionsDao.GetDaoRecords("DeductionType = '" & .Computed) & "' and QuantityType = '" & EnumToCode(AttendanceUnitSelection.OvertimeSpecial) & "'")
-        '    'GlobalVariables.Mapper.Map(absencesDeductions, _absenceDeductions)
+        '    'GlobalFUnctions.ManualMap(absencesDeductions, _absenceDeductions)
         '    _deductionComputationMethod = GetAppSetting($"PYCM", "Payroll", "Deduction Computation Method")
 
         'End Sub
@@ -623,7 +623,7 @@ Namespace PresentationLayer.Presenters
                 If _payFrequency = PayFrequencySelection.Monthly Then
                     _daysInTheMonth = DateTime.DaysInMonth(Year(View.EndDate), Month(View.EndDate))
                     payrollPayElements = _payrollPayElementsService.GetRecordsWithGroupIdNo(Of PayrollPayElementModel)(View.IdNo)
-                    'GlobalVariables.Mapper.Map(payrollPayElements, _payrollPayElements)
+                    'GlobalFUnctions.ManualMap(payrollPayElements, _payrollPayElements)
                     If payrollPayElements.Count() = 0 Then
                         ProcessPayroll(False)
                     Else
@@ -766,13 +766,13 @@ Namespace PresentationLayer.Presenters
             Dim employeePayElementsService As New AccountsService("EmployeePayElement")
             empPayElementsModel = employeePayElementsService.GetRecordsWithGroupIdNo(Of EmployeePayElementModel)(employeeIdNo)
             'Dim empPayElementsModel As New List(Of EmployeePayElementModel)
-            'GlobalVariables.Mapper.Map(empPayElements, empPayElementsModel)
+            'GlobalFUnctions.ManualMap(empPayElements, empPayElementsModel)
             Dim amount As Decimal
             For Each empPayElement As EmployeePayElementModel In empPayElementsModel
                 Dim payElement As New PayElementModel
                 payElement = _payElementsService.GetRecordByIdNo(Of PayElementModel)(empPayElement.PayElementIdNo)
                 'Dim payElementModel As New PayElementModel
-                'GlobalVariables.Mapper.Map(payElement, payElementModel)
+                'GlobalFUnctions.ManualMap(payElement, payElementModel)
                 If payElement.CalculationType = _calcTypeFixedAmount Then
                     amount = ComputePayAmount(_payFrequency, empPayElement.Amount, empPayElement.Unit)
                     If Not regenerate Then
@@ -873,7 +873,7 @@ Namespace PresentationLayer.Presenters
         '    Dim empDeductions As New List(Of EmployeePayElement)
         '    empDeductions = _employeePayElementsService.GetRecordsWithGroupIdNo(employeeIdNo)
         '    Dim EmpDeductionsModel As New List(Of EmployeePayElementModel)
-        '    GlobalVariables.Mapper.Map(empDeductions, EmpDeductionsModel)
+        '    GlobalFUnctions.ManualMap(empDeductions, EmpDeductionsModel)
         '    Dim amount As Decimal
         '    For Each empDeduction As EmployeePayElementModel In EmpDeductionsModel
         '        Dim Deduction As New PayElement
@@ -882,7 +882,7 @@ Namespace PresentationLayer.Presenters
         '        '    Debugger.Break()
         '        'End If
         '        Deduction = _payElementsDao.GetRecordByIdNo(empDeduction.PayElementIdNo)
-        '        GlobalVariables.Mapper.Map(Deduction, DeductionModel)
+        '        GlobalFUnctions.ManualMap(Deduction, DeductionModel)
         '        If Deduction.CalculationType = _fixedAmountType Then
         '            amount = ComputeFixedAmount(empDeduction.Amount, empDeduction.Unit)
         '            If Not regenerate Then
@@ -1106,7 +1106,7 @@ Namespace PresentationLayer.Presenters
             'Dim savedPayrollDetailsModel As New List(Of PayrollDetailModel)
             savedPayrollDetails = _payrollDetailsService.GetRecordsWithGroupIdNo(Of PayrollDetailModel)(_payrollIdNo)
             Dim employee As Object
-            'GlobalVariables.Mapper.Map(savedPayrollDetails, savedPayrollDetailsModel)
+            'GlobalFUnctions.ManualMap(savedPayrollDetails, savedPayrollDetailsModel)
             If savedPayrollDetails.Count() = 0 Then
                 For Each currentPayrollAttendance In View.PayrollAttendance
                     Dim newPayrollDetail As New PayrollDetailModel

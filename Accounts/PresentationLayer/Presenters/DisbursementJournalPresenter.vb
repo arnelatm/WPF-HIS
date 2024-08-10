@@ -286,7 +286,7 @@ Namespace PresentationLayer.Presenters
         Public Function UpdateGlReferenceNumber() As String
             Dim retValue As String
             Dim dataModel As New TM
-            GlobalVariables.Mapper.Map(View, dataModel)
+            GlobalFUnctions.ManualMap(View, dataModel)
             retValue = Service.UpdateGlReferenceNumber(dataModel)
             Return retValue
         End Function
@@ -990,7 +990,7 @@ Namespace PresentationLayer.Presenters
             Dim dModel As New List(Of DjOiItemModel)
             Dim dOriginalModel As New List(Of DjOiItemModel)
             Dim nSeq As Integer
-            GlobalVariables.Mapper.Map(dView, dModel)
+            GlobalFUnctions.ManualMap(dView, dModel)
             nSeq = dView.Count()
             If EditMode Then
                 If View.ContactIdNo = OriginalModel.ContactIdNo AndAlso View.PaymentType = OriginalModel.PaymentType Then
@@ -1002,7 +1002,7 @@ Namespace PresentationLayer.Presenters
             Dim cseIdNo As Int32? = GetCSEIdNo(View.ContactIdNo)
             Dim unpaidInvoices = Service.GetOpenInvoices(Of DjOiItemModel)(cseIdNo)
             AddOpenInvoices(False, unpaidInvoices, dModel, nSeq)
-            GlobalVariables.Mapper.Map(dModel, dView)
+            GlobalFUnctions.ManualMap(dModel, dView)
             Return dView
         End Function
 

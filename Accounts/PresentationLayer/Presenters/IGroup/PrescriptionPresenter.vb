@@ -167,7 +167,7 @@ Namespace PresentationLayer.Presenters
             Else
                 prescriptionModel = Service.GetParametrized(Of PrescriptionModel)({View.DoctorCode, View.TransDate})
             End If
-            GlobalVariables.Mapper.Map(prescriptionModel, View)
+            GlobalFUnctions.ManualMap(prescriptionModel, View)
         End Sub
 
         Private Sub GetDoctorCode(ByRef drId As String)
@@ -182,7 +182,7 @@ Namespace PresentationLayer.Presenters
         Private Sub UpdatePrescriptionDetail(transKey As Int32?)
             Dim prescriptionDetails As New List(Of PrescriptionItemModel)
             prescriptionDetails = _prescriptionItemService.GetRecordsWithGroupIdNo(Of PrescriptionItemModel)(transKey)
-            GlobalVariables.Mapper.Map(prescriptionDetails, View.PrescriptionDetails)
+            GlobalFUnctions.ManualMap(prescriptionDetails, View.PrescriptionDetails)
         End Sub
 
     End Class

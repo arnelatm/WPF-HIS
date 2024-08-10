@@ -31,7 +31,7 @@ Namespace PresentationLayer.Presenters
         '    If idNoTm <> 0 Then
         '        modelData = Model.GetRecordByIdNo(Of TranslatedMessagesModel)(messageIdNo)
         '    End If
-        '    GlobalVariables.Mapper.Map(modelData, View)
+        '    GlobalFUnctions.ManualMap(modelData, View)
         'End Sub
 
         Public Overrides Function ChangesMade() As Boolean

@@ -28,7 +28,7 @@ Namespace PresentationLayer.Presenters
             CreateEnumDataSource(Of AccountStatusSelection)("AccountStatus")
             CreateEnumDataSource(Of PaymentMethodSelection)("PaymentMethod")
             MakeControlDataSources({New Object() {"Bank", "BankIdNo", Nothing, Nothing},
-                             New Object() {"Country", "CountryCode", "CountryCode,CountryName", Nothing},
+                             New Object() {"Country", "CountryCode", "IdNo,CountryName,CountryCode", Nothing, "CountryName", True, "Code", "Name"},
                              New Object() {"Account", "ExpAccountIdNo", Nothing, "DetailAccount=1"}})
             CreateSpecialAccountDataSourceT("ApAccountIdNo", {EnumToCode(SpecialAccountSelection.AccountsPayable)})
         End Sub

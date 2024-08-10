@@ -46,7 +46,7 @@ Namespace Services
                             GlobalVariables.UserName = user.UserName
                             GlobalVariables.SecurityGroupIdNo = user.SecurityGroupIdNo
                             GlobalVariables.UserIdNo = user.IdNo
-                            'GlobalVariables.Mapper.Map(user, Me)
+                            'GlobalFUnctions.ManualMap(user, Me)
                             ' MsgBox("Welcome to my Application!")
                         Else
                             'MsgBox("Invalid user name or password.")

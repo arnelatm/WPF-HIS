@@ -32,14 +32,20 @@ Public Class LookupTable
         Public Property Code As String
         Public Property Index
 
-        'Public Sub New()
-        '    Dim x = 0
-        '    x = x + 1
-        'End Sub
+        Public Sub New()
+        End Sub
 
         Public Overrides Function ToString() As String
             Return Name.ToString()
         End Function
+
+        'Public Function Copy()
+        '    Dim luCopy As LookupData
+        '    luCopy.IdNo = IdNo
+        '    luCopy.Name = Name
+        '    luCopy.Code = Code
+        '    Return luCopy
+        'End Function
 
     End Class
 
