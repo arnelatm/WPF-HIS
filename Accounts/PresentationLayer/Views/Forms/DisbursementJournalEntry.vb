@@ -442,6 +442,8 @@ Namespace PresentationLayer.Views.Forms
             ResumeLayout()
             MyBase.UpdateViewDisplay(editMode, addMode, recordPositionNumber, targetIdNo, recordCount)
             UpdateActionButtons(editMode Or addMode)
+            bsJournalItems.ResetBindings(False)
+            bsDjOiItems.ResetBindings(False)
             'For Each control In Controls
             '    If TypeOf control Is AtmComboBox Then
             '        Dim x As AtmComboBox = control

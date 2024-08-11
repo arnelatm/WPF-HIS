@@ -78,7 +78,7 @@ Namespace PresentationLayer.Presenters
                 End If
             Next
             View.EnteredBy = GlobalVariables.UserIdNo
-            GlobalFUnctions.ManualMap(holidayTransferItems, View.HolidayTransferItems)
+            GlobalFunctions.ManualMap(holidayTransferItems, View.HolidayTransferItems)
         End Sub
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave

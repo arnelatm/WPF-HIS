@@ -42,7 +42,7 @@ Namespace PresentationLayer.Presenters
         'Public Overrides Function Save(ByRef viewControl As Control) As Boolean
         '    'Dim retVal As Integer
         '    'Dim record As New InvTransactionModel
-        '    'GlobalFUnctions.ManualMap(Of IStockRequestApprovalView, InvTransactionModel)(View, record)
+        '    'GlobalFunctions.ManualMap(Of IStockRequestApprovalView, InvTransactionModel)(View, record)
         '    'NewlyAddedRecordIdNo = Service.AddRecord(record)
         '    'If NewlyAddedRecordIdNo > 0 Then
         '    '    CreateApprovalData()

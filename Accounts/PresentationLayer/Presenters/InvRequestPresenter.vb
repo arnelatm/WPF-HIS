@@ -117,7 +117,7 @@ Namespace PresentationLayer.Presenters
         Private Sub RefreshRequestDetailsAndQtyOnHand(invTransactionIdNo As Integer)
             Dim invRequestItems As List(Of InvRequestDetailModel) = _invRequestItemService.GetRecordsWithGroupIdNo(Of InvRequestDetailModel)(invTransactionIdNo)
             Dim invItems As New List(Of InvRequestDetailView)
-            GlobalFUnctions.ManualMap(invRequestItems, invItems)
+            GlobalFunctions.ManualMap(invRequestItems, invItems)
             View.InvRequestDetails = invItems
         End Sub
 
@@ -143,7 +143,7 @@ Namespace PresentationLayer.Presenters
             Else
                 invTransactions = Service.GetParametrized(Of InvRequestModel)({View.WarehouseIdNo})
             End If
-            GlobalFUnctions.ManualMap(invTransactions, View)
+            GlobalFunctions.ManualMap(invTransactions, View)
         End Sub
 
         Public Sub OnInvTransactiondgvItemsChangedEventHandler(ByRef eventType As DgvItemsChanged) Implements ISubscriber(Of DgvItemsChanged).OnEventHandler

@@ -30,7 +30,7 @@ Namespace PresentationLayer.Presenters
             End If
             For Each modData In modelData
                 Dim modelTb As New TM
-                GlobalFUnctions.ManualMap(modData, modelTb)
+                GlobalFunctions.ManualMap(modData, modelTb)
                 TreeViewList.Add(modelTb)
             Next
             Return TreeViewList
@@ -41,7 +41,7 @@ Namespace PresentationLayer.Presenters
         '        Dim modelData As OriginalMessagesModel
         '        modelData = Model.GetRecordByIdNo(Of OriginalMessagesModel)(idNo)
         '        If modelData IsNot Nothing Then
-        '            GlobalFUnctions.ManualMap(modelData, View)
+        '            GlobalFunctions.ManualMap(modelData, View)
         '        End If
         '        TranslatedMessagesPresenter.Display(idNo)
         '    End If

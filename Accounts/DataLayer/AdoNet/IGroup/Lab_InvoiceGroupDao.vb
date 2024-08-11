@@ -92,7 +92,7 @@ Namespace DataLayer.AdoNet
             Dim retVal As Integer
             Dim commands As New List(Of DaoCommand)
             Dim labData As New List(Of Lab_InvoiceDetails)
-            GlobalFUnctions.ManualMap(data, labData)
+            GlobalFunctions.ManualMap(data, labData)
             For Each item As Lab_InvoiceDetails In labData
                 Dim command As New DaoCommand
                 command.Add("Update Lab_InvoiceDetails Set Result1 = @Result1, suffix1 = @Suffix1 where group_key = @group_Key and slno = @SlNo",
@@ -154,7 +154,7 @@ Namespace DataLayer.AdoNet
         '    Dim retVal As Integer
         '    Dim commands As New List(Of DaoCommand)
         '    Dim labData As New List(Of Lab_InvoiceDetails)
-        '    GlobalFUnctions.ManualMap(data, labData)
+        '    GlobalFunctions.ManualMap(data, labData)
         '    For Each item As Lab_InvoiceDetails In labData
         '        Dim command As New DaoCommand
         '        command.Add("Update Lab_InvoiceDetails Set Result1 = @Result1, suffix1 = @Suffix1 where group_key = @group_Key and slno = @SlNo",

@@ -130,7 +130,7 @@ Namespace PresentationLayer.Presenters
         Public Function UpdateGlReferenceNumber() As String
             Dim retValue As String
             Dim dataModel As New TM
-            GlobalFUnctions.ManualMap(View, dataModel)
+            GlobalFunctions.ManualMap(View, dataModel)
             retValue = Service.UpdateGlReferenceNumber(dataModel)
             Return retValue
         End Function

@@ -281,6 +281,7 @@ Namespace PresentationLayer.Views.Forms
 
         Protected Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
             UpdateTotals()
+            bsJournalItems.ResetBindings(False)
         End Sub
 
         Private Sub ApJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load

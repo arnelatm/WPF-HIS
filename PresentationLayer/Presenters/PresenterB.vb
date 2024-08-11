@@ -35,7 +35,7 @@ Public Class PresenterB(Of TV As IViewNew, TM As New)
             OriginalModel = Activator.CreateInstance(GetType(TM))
             Dim data As List(Of DefaultFieldValue) = DefaultFieldValueService.GetDefaultFieldValues(View.ViewDisplayName)
             ViewDefaultFieldValues = New List(Of DefaultFieldValueModel)
-            GlobalFUnctions.ManualMap(data, ViewDefaultFieldValues)
+            GlobalFunctions.ManualMap(data, ViewDefaultFieldValues)
         End If
     End Sub
 

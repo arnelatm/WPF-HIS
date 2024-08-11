@@ -14,12 +14,12 @@
 			Save(eventType.ViewControl)							
 				InitiateSave()
 					Dim record As New TM
-					GlobalFUnctions.ManualMap(Of IView, TM)(View, record)
+					GlobalFunctions.ManualMap(Of IView, TM)(View, record)
 					SaveAddedRecord(record As TM) As Integer
 						Service.AddRecord(record)
 
 	Service.AddRecord(byRef model)
-		GlobalFUnctions.ManualMap(model, DataBo)
+		GlobalFunctions.ManualMap(model, DataBo)
         Return DataDao.AddRecord(DataBo)
 		
 			

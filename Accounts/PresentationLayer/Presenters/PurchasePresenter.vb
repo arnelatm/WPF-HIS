@@ -567,7 +567,7 @@ Namespace PresentationLayer.Presenters
         Private Sub UpdatePurchaseHistory(productIdNo As Int32)
             Dim purHistory As List(Of PurchaseHistoryModel)
             purHistory = _purchaseHistoryService.GetRecordsWithGroupIdNo(Of PurchaseHistoryModel)(productIdNo)
-            GlobalFUnctions.ManualMap(purHistory, View.PurchaseHistory)
+            GlobalFunctions.ManualMap(purHistory, View.PurchaseHistory)
         End Sub
 
         Private Sub RecomputePrice(oldUnit As Int16, newUnit As Int16, bs As BindingSource)

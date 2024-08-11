@@ -1343,11 +1343,13 @@ Public Module GlobalFunctions
                     Dim instance = Activator.CreateInstance(collectionType)
                     toObject = instance
                 Else
+                    'Dim newCollectionObj = Activator.CreateInstance(collectionType)
                     Dim newCollectionObj = Activator.CreateInstance(collectionType)
                     Dim memberType = collectionType.GetGenericArguments.Single
                     'Dim memberNewMethod As MethodInfo = memberType.GetMethods().Where(Function(m) m.Name = "New" AndAlso m.GetParameters().Count() = 1).FirstOrDefault()
                     'Dim newObj = Activator.CreateInstance(memberType)
-                    For Each obj As Object In TryCast(fromObject, IEnumerable)
+                    'For Each obj As Object In TryCast(fromObject, IEnumerable)
+                    For Each obj As Object In fromObject
                         'toObject = Nothing
                         Dim newObj = Activator.CreateInstance(memberType)
                         ManualMap(obj, newObj)
@@ -1359,17 +1361,17 @@ Public Module GlobalFunctions
                         'addMethod.Invoke(toObject, instance)
                         'toObject = Nothing
                     Next
-                    'Dim toObjPi = toObject.GetType().GetProperties()
-                    'toObjPi.SetValue(toObject, newCollectionObj)
                     toObject.Clear()
                     toObject.TrimExcess()
+                    'Dim toObjPi = toObject.GetType().GetProperties()
+                    'toObjPi.SetValue(toObject, newCollectionObj)
                     toObject.AddRange(newCollectionObj)
                     'toObject = newCollectionObj
                 End If
             End If
         Else
             If TypeOf fromObject Is ICollection Then
-                Dim curCollectionType = fromObject.GetType()
+                Dim curCollectionType = toObject.GetType()
                 ManualMap(fromObject, toObject, True, curCollectionType)
             Else
                 For Each fromObjPi As PropertyInfo In propList
@@ -1424,79 +1426,6 @@ Public Module GlobalFunctions
         End If
     End Sub
 
-    Public Sub ManualMap(Of Ts,Tt)(ByRef fromObject As Object, ByRef toObject As Object, Optional collection As Boolean = False, Optional collectionType As Type = Nothing)
-        Dim objectsCompareResult = True
-        Dim propList = fromObject.GetType().GetProperties()
-        If collection Then
-            If toObject Is Nothing And fromObject Is Nothing Then
-                ' already the same so skip this property
-            ElseIf fromObject Is Nothing Then
-                toObject = Nothing
-            ElseIf fromObject IsNot Nothing And toObject Is Nothing Then
-                Dim addMethod As MethodInfo = collectionType.GetMethods().Where(Function(m) m.Name = "Add" AndAlso m.GetParameters().Count() = 1).FirstOrDefault()
-                Dim newMethod As MethodInfo = collectionType.GetMethods().Where(Function(m) m.Name = "New" AndAlso m.GetParameters().Count() = 1).FirstOrDefault()
-                If fromObject.Count() = 0 Then
-                    Dim instance = Activator.CreateInstance(collectionType)
-                    toObject = instance
-                Else
-                    Dim newCollectionObj = Activator.CreateInstance(collectionType)
-                    For Each obj As Object In TryCast(fromObject, IEnumerable)
-                        'toObject = Nothing
-                        Dim memberType = collectionType.GetGenericArguments.Single
-                        'Dim memberNewMethod As MethodInfo = memberType.GetMethods().Where(Function(m) m.Name = "New" AndAlso m.GetParameters().Count() = 1).FirstOrDefault()
-                        Dim newObj = Activator.CreateInstance(memberType)
-                        ManualMap(obj, newObj)
-                        newCollectionObj.Add(newObj)
-                        'Dim memberInstance
-                        'memberNewMethod.Invoke(obj)
-
-                        'ManualMap(obj, instance)
-                        'addMethod.Invoke(toObject, instance)
-                        'toObject = Nothing
-                    Next
-                    toObject = newCollectionObj
-                End If
-            End If
-        Else
-            If TypeOf fromObject Is ICollection Then
-                Dim curCollectionType = fromObject.GetType()
-                ManualMap(fromObject, toObject, True, curCollectionType)
-            Else
-                For Each fromObjPi As PropertyInfo In propList
-                    For Each toObjPi As PropertyInfo In toObject.GetType.GetProperties()
-                        If fromObjPi.Name.ToLower() = toObjPi.Name.ToLower() And toObjPi.CanWrite Then
-                            Dim source = fromObjPi.GetValue(fromObject)
-                            Dim propName As String = fromObjPi.Name()
-                            Dim tType As Type
-                            Dim safeValue As Object
-                            Try
-                                If fromObjPi.Name = "RegularEmployeeDeductions" Then
-                                    Debugger.Break()
-                                End If
-                                If fromObject Is Nothing And toObject Is Nothing Then
-                                    ' no need to map already the same null or empty values
-                                ElseIf fromObject Is Nothing Then
-                                    toObject = Nothing
-                                Else
-                                    If TypeOf fromObjPi.GetValue(fromObject) Is ICollection Then
-                                        ManualMap(fromObjPi.GetValue(fromObject), toObjPi.GetValue(toObject), True, toObjPi.GetValue(toObject).GetType())
-                                    Else
-                                        tType = If(Nullable.GetUnderlyingType(fromObjPi.PropertyType), fromObjPi.PropertyType)
-                                        safeValue = If((source Is Nothing), Nothing, Convert.ChangeType(source, tType))
-                                        toObjPi.SetValue(toObject, safeValue)
-                                    End If
-                                End If
-                            Catch ex As Exception
-                                Debugger.Break()
-                                MessageBox.Show(ex.ToString())
-                            End Try
-                            Exit For
-                        End If
-                    Next
-                Next
-            End If
-        End If
-    End Sub
     '''<summary>
     '''converts a date string to double digits say 1/1/2012 -> 01/01/2012
     '''</summary>

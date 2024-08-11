@@ -83,7 +83,7 @@ Namespace PresentationLayer.Presenters
             Dim modelData As List(Of PcClosingJournalModel)
             modelData = Service.GetOpenPettyCash()
             View.PcClosingJournals = New List(Of PcClosingJournalView)
-            GlobalFUnctions.ManualMap(modelData, View.PcClosingJournals)
+            GlobalFunctions.ManualMap(modelData, View.PcClosingJournals)
         End Sub
 
         'Private Sub OnClearAllPcJournal(ByVal bsPcClosingJournal As BindingSource, clear As Boolean)
@@ -174,7 +174,7 @@ Namespace PresentationLayer.Presenters
         Public Function UpdateGlReferenceNumber() As String
             Dim retValue As String
             Dim dataModel As New TM
-            GlobalFUnctions.ManualMap(View, dataModel)
+            GlobalFunctions.ManualMap(View, dataModel)
             retValue = Service.UpdateGlReferenceNumber(dataModel)
             Return retValue
         End Function

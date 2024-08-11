@@ -437,6 +437,7 @@ Namespace PresentationLayer.Views.Forms
                     dgvJournalIdNoAp.DisplayOnly = True
                 End If
             End With
+            bsCsrOiItems.ResetBindings(False)
             UpdateTotals()
             ResumeLayout()
         End Sub

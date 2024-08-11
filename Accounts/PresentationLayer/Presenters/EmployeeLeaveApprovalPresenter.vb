@@ -91,7 +91,7 @@ Namespace PresentationLayer.Presenters
             End If
             Dim employeeLeaveApprovalItemsModel As List(Of EmployeeLeaveApprovalItemModel)
             employeeLeaveApprovalItemsModel = Service.GetDaoRecords(Of EmployeeLeaveApprovalItemModel)(filter)
-            GlobalFUnctions.ManualMap(employeeLeaveApprovalItemsModel, View.EmployeeLeaveApprovalItems)
+            GlobalFunctions.ManualMap(employeeLeaveApprovalItemsModel, View.EmployeeLeaveApprovalItems)
             CallByName(View, "BindEmployeeLeaveList", CallType.Method)
         End Sub
 

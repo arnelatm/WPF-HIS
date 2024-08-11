@@ -35,6 +35,7 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
     Private _dataErrors As String = ""
     Public Event BeforeChangeRecord()
     Public Event AfterChangeRecord()
+    Public Event ResetDataBindings()
 
     'Public Shadows Event AfterDelete(retVal As Integer)
 
@@ -116,7 +117,9 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
                 GoDeleteRecord()
         End Select
         RaiseEvent AfterChangeRecord()
+        RaiseEvent ResetDataBindings()
     End Sub
+
 
     Public Overrides Sub EntryFormLoaded()
         If _WithTreeView Then

@@ -54,7 +54,7 @@ Namespace PresentationLayer.Presenters
             Else
                 ClinicLabSampleModel = Service.GetParametrized(Of ClinicLabSampleModel)({View.TransactionDate})
             End If
-            GlobalFUnctions.ManualMap(ClinicLabSampleModel, View)
+            GlobalFunctions.ManualMap(ClinicLabSampleModel, View)
         End Sub
 
         Public Overrides Sub GoPrintRecord()

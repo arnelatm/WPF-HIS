@@ -95,7 +95,7 @@ Namespace PresentationLayer.Presenters
             Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of DepositTypeModel)("DepositTypeName", cModel)
             Dim depositType As List(Of DepositType)
             depositType = depositTypeService.GetList(Of DepositType)(newSortOrderKey)
-            GlobalFUnctions.ManualMap(depositType, cModelList)
+            GlobalFunctions.ManualMap(depositType, cModelList)
             Return cModelList
         End Function
         Public Function GetUserEmployeeIdNo() As Int32
@@ -281,8 +281,8 @@ Namespace PresentationLayer.Presenters
         '                For Each row As DataGridViewRow In dataGridView.Rows
         '                    Dim model As New TMG
         '                    If row.Index() >= 0 AndAlso row.Index() < dataGridView.RowCount() - 1 Then
-        '                        GlobalFUnctions.ManualMap(viewProperty(row.Index()), model)
-        '                        GlobalFUnctions.ManualMap(model, bo)
+        '                        GlobalFunctions.ManualMap(viewProperty(row.Index()), model)
+        '                        GlobalFunctions.ManualMap(model, bo)
         '                        If Not bo.IsRuleValid(rule) Then
         '                            Dim obj As New Object
         '                            dictionary.TryGetValue(rule.Property, obj)
@@ -316,7 +316,7 @@ Namespace PresentationLayer.Presenters
         '    Dim retValue As Boolean = True
         '    Dim sModel As New List(Of Tcm)
         '    Dim esModel As New ModelAccounts(bizName)
-        '    Dim dModel = GlobalFUnctions.ManualMap(childProperty, sModel)
+        '    Dim dModel = GlobalFunctions.ManualMap(childProperty, sModel)
         '    For Each item In sModel
         '        If Not esModel.IsValid(item) Then
         '            retValue = False

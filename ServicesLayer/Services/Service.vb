@@ -435,7 +435,7 @@ Namespace Services
 #Region "Current Service Function"
 
         Public Function AddRecord(ByRef model) As Integer Implements IService.AddRecord
-            GlobalFUnctions.ManualMap(model, DataBo)
+            GlobalFunctions.ManualMap(model, DataBo)
             Return DataDao.AddRecord(DataBo)
         End Function
 
@@ -503,7 +503,7 @@ Namespace Services
             Dim modelOfPresenter As New List(Of TM)
             Dim record = DataDao.GetAll(Of TM)(sortKey)
             If record IsNot Nothing Then
-                GlobalFUnctions.ManualMap(record, modelOfPresenter)
+                GlobalFunctions.ManualMap(record, modelOfPresenter)
             End If
             Return modelOfPresenter
         End Function
@@ -515,7 +515,7 @@ Namespace Services
         Public Function GetDaoRecords(Of TM)(Optional filter As String = Nothing)
             Dim dataModel As New List(Of TM)
             Dim bizData = DataDao.GetDaoRecords(filter)
-            GlobalFUnctions.ManualMap(bizData, dataModel)
+            GlobalFunctions.ManualMap(bizData, dataModel)
             Return dataModel
         End Function
 
@@ -580,7 +580,7 @@ Namespace Services
             Dim modelOfPresenter As New TM
             Dim record = DataDao.GetParametrized(Of TM)(parameter, sortOrder)
             If record IsNot Nothing Then
-                GlobalFUnctions.ManualMap(record, modelOfPresenter)
+                GlobalFunctions.ManualMap(record, modelOfPresenter)
             End If
             Return modelOfPresenter
         End Function
@@ -592,7 +592,7 @@ Namespace Services
             Dim modelOfPresenter As New TM
             Dim record = DataDao.GetRecordByIdNo(Convert.ToInt32(idNo))
             If record IsNot Nothing Then
-                GlobalFUnctions.ManualMap(record, modelOfPresenter)
+                GlobalFunctions.ManualMap(record, modelOfPresenter)
             End If
             Return modelOfPresenter
         End Function
@@ -652,20 +652,20 @@ Namespace Services
         'Public Function GetRecords(Of TM)(ByVal parameters As Object, ByVal Optional sortKey As String = Nothing) As List(Of TM) Implements IService.GetRecords
         '    Dim bizData = DataDao.GetRecordsWithGroupIdNo(parameters, sortKey)
         '    Dim dataModel As New List(Of TM)
-        '    GlobalFUnctions.ManualMap(bizData, dataModel)
+        '    GlobalFunctions.ManualMap(bizData, dataModel)
         '    Return dataModel
         'End Function
         Public Function GetRecordsWithGroupIdNo(Of TM)(idNo, Optional ByRef sortKey = Nothing) As List(Of TM) Implements IService.GetRecordsWithGroupIdNo
             Dim bizData = DataDao.GetRecordsWithGroupIdNo(idNo, sortKey)
             Dim dataModel As New List(Of TM)
-            GlobalFUnctions.ManualMap(bizData, dataModel)
+            GlobalFunctions.ManualMap(bizData, dataModel)
             Return dataModel
         End Function
 
         Public Function GetRecordsWithParams(Of TM)(parameters As Object) As List(Of TM) Implements IService.GetRecordsWithParams
             Dim bizData = DataDao.GetRecordsWithParams(parameters)
             Dim dataModel As New List(Of TM)
-            GlobalFUnctions.ManualMap(bizData, dataModel)
+            GlobalFunctions.ManualMap(bizData, dataModel)
             Return dataModel
         End Function
 
@@ -694,7 +694,7 @@ Namespace Services
         End Function
 
         Public Function IsValid(model) As Boolean Implements IService.IsValid
-            GlobalFUnctions.ManualMap(model, DataBo)
+            GlobalFunctions.ManualMap(model, DataBo)
             Return DataBo.IsValid()
         End Function
 
@@ -727,7 +727,7 @@ Namespace Services
         End Function
 
         Public Function UpdateRecord(ByVal model) As Integer Implements IService.UpdateRecord
-            GlobalFUnctions.ManualMap(model, DataBo)
+            GlobalFunctions.ManualMap(model, DataBo)
             Return DataDao.UpdateRecord(DataBo)
         End Function
 

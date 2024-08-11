@@ -25,7 +25,7 @@ Namespace PresentationLayer.Presenters
             End If
             For Each modData In modelData
                 Dim modelTb As New TM
-                GlobalFUnctions.ManualMap(modData, modelTb)
+                GlobalFunctions.ManualMap(modData, modelTb)
                 TreeViewList.Add(modelTb)
             Next
             Return TreeViewList

@@ -53,6 +53,7 @@ Public Class CFormEntry
     Public Event InputsTurnedOff()
 
     Public Event AfterChangeRecord()
+    Public Event ResetDataBindings()
     Public Event BeforeChangeRecord()
 
     Public Sub New()

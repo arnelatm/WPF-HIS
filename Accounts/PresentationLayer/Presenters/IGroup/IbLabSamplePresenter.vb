@@ -65,7 +65,7 @@ Namespace PresentationLayer.Presenters
             Else
                 IbLabSampleModel = Service.GetParametrized(Of IbLabSampleModel)({View.TransactionDate})
             End If
-            GlobalFUnctions.ManualMap(IbLabSampleModel, View)
+            GlobalFunctions.ManualMap(IbLabSampleModel, View)
         End Sub
 
         Public Overrides Sub GoPrintRecord()
@@ -247,7 +247,7 @@ Namespace PresentationLayer.Presenters
             Else
                 IbLabResultModel = Service.GetParametrized(Of IbLabResultModel)({View.TransactionDate, _IbType})
             End If
-            GlobalFUnctions.ManualMap(IbLabResultModel, View)
+            GlobalFunctions.ManualMap(IbLabResultModel, View)
         End Sub
 
         Public Overrides Sub GoPrintRecord()

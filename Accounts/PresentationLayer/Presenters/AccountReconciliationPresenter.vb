@@ -228,7 +228,7 @@ Namespace PresentationLayer.Presenters
                 'Next
             End If
             Dim result As New List(Of AccountReconciliationItemView)
-            GlobalFUnctions.ManualMap(acctReconItems, result)
+            GlobalFunctions.ManualMap(acctReconItems, result)
             Return result
         End Function
 
