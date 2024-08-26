@@ -1377,15 +1377,16 @@ Public Module GlobalFunctions
                 For Each fromObjPi As PropertyInfo In propList
                     For Each toObjPi As PropertyInfo In toObject.GetType.GetProperties()
                         If fromObjPi.Name.ToLower() = toObjPi.Name.ToLower() And toObjPi.CanWrite Then
+                            'If fromObjPi.Name = "PayElementAccounts" Then
+                            '    Debugger.Break()
+
+                            'End If
                             Dim source = fromObjPi.GetValue(fromObject)
                             Dim propName As String = fromObjPi.Name()
                             Dim tType As Type
                             Dim safeValue As Object
                             Try
-                                'If fromObjPi.Name = "RegularEmployeeEarnings" Then
-                                '    Debugger.Break()
 
-                                'End If
                                 If fromObject Is Nothing And toObject Is Nothing Then
                                     ' no need to map already the same null or empty values
                                 ElseIf fromObject Is Nothing Then

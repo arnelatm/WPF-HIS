@@ -25,16 +25,16 @@ Namespace PresentationLayer.Views.Forms
         Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(GeneralJournalEntry))
-            Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim EventAggregator1 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
-            Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim EventAggregator2 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
+            Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Me.floJournalHeader = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -59,10 +59,6 @@ Namespace PresentationLayer.Views.Forms
             Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpDateCreated = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
-            Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
-            Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.txtTotalCredits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.txtTotalDebits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
             Me.dgvDebit = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
@@ -81,6 +77,10 @@ Namespace PresentationLayer.Views.Forms
             Me.OriginalAmountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.PaidAmountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.PayeeTypeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
+            Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.txtTotalCredits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtTotalDebits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floJournalHeader.SuspendLayout()
             Me.CFlowLayout1.SuspendLayout()
@@ -476,8 +476,8 @@ Namespace PresentationLayer.Views.Forms
             '
             'DataGridViewJournalItems
             '
-            DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
-            Me.DataGridViewJournalItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+            DataGridViewCellStyle10.BackColor = System.Drawing.Color.FloralWhite
+            Me.DataGridViewJournalItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle10
             Me.DataGridViewJournalItems.AutoGenerateColumns = False
             Me.DataGridViewJournalItems.BackgroundColor = System.Drawing.SystemColors.Window
             Me.DataGridViewJournalItems.BegFindValue = Nothing
@@ -486,17 +486,17 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewJournalItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvAccountIdNo, Me.dgvDebit, Me.dgvCredit, Me.dgvRevCostCenterIdNo, Me.dgvContactIdNo, Me.dgvNotes, Me.dgvIdNo, Me.SpecialAccount, Me.AccountIdNoDataGridViewTextBoxColumn, Me.AccountNameDataGridViewTextBoxColumn, Me.CancelledDataGridViewCheckBoxColumn, Me.DiscountTakenDataGridViewTextBoxColumn, Me.JournalIdNoDataGridViewTextBoxColumn, Me.OpenInvoiceIdNoDataGridViewTextBoxColumn, Me.OriginalAmountDataGridViewTextBoxColumn, Me.PaidAmountDataGridViewTextBoxColumn, Me.PayeeTypeDataGridViewTextBoxColumn})
             Me.DataGridViewJournalItems.DataFilter = Nothing
             Me.DataGridViewJournalItems.DataSource = Me.bsJournalItems
-            DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle9.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewJournalItems.DefaultCellStyle = DataGridViewCellStyle9
+            DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle18.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle18.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle18.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewJournalItems.DefaultCellStyle = DataGridViewCellStyle18
             Me.DataGridViewJournalItems.DgvFooter = Nothing
             Me.DataGridViewJournalItems.DisplayOnly = False
-            Me.DataGridViewJournalItems.Ea = EventAggregator1
+            Me.DataGridViewJournalItems.Ea = EventAggregator2
             Me.DataGridViewJournalItems.EditingMode = False
             Me.DataGridViewJournalItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
             Me.DataGridViewJournalItems.EndFindValue = Nothing
@@ -523,77 +523,13 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewJournalItems.ShowFooter = False
             Me.DataGridViewJournalItems.Translatable = True
             '
-            'bsJournalItems
-            '
-            Me.bsJournalItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.JournalItemModel)
-            '
-            'CFlowLayout4
-            '
-            Me.CFlowLayout4.BackColor = System.Drawing.Color.Transparent
-            Me.CFlowLayout4.Controls.Add(Me.floJournalHeader)
-            Me.CFlowLayout4.Controls.Add(Me.DataGridViewJournalItems)
-            Me.CFlowLayout4.Controls.Add(Me.txtTotalCredits)
-            Me.CFlowLayout4.Controls.Add(Me.txtTotalDebits)
-            resources.ApplyResources(Me.CFlowLayout4, "CFlowLayout4")
-            Me.CFlowLayout4.Name = "CFlowLayout4"
-            '
-            'txtTotalCredits
-            '
-            Me.txtTotalCredits.BackColor = System.Drawing.Color.White
-            Me.txtTotalCredits.BegFindValue = Nothing
-            Me.txtTotalCredits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtTotalCredits.ComputedValue = False
-            Me.txtTotalCredits.CustomFormat = Nothing
-            Me.txtTotalCredits.DataBoundControl = True
-            Me.txtTotalCredits.EditingMode = True
-            Me.txtTotalCredits.EndFindValue = Nothing
-            Me.txtTotalCredits.FieldDescription = Nothing
-            Me.txtTotalCredits.FieldName = Nothing
-            Me.txtTotalCredits.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtTotalCredits.FindEnabled = False
-            resources.ApplyResources(Me.txtTotalCredits, "txtTotalCredits")
-            Me.txtTotalCredits.ForeColor = System.Drawing.Color.Black
-            Me.txtTotalCredits.LinkedLabel = Nothing
-            Me.txtTotalCredits.MaximumValue = Nothing
-            Me.txtTotalCredits.MinimumValue = Nothing
-            Me.txtTotalCredits.Name = "txtTotalCredits"
-            Me.txtTotalCredits.OldValue = Nothing
-            Me.txtTotalCredits.OverrideMaxLength = 0
-            Me.txtTotalCredits.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtTotalCredits.Translatable = False
-            '
-            'txtTotalDebits
-            '
-            Me.txtTotalDebits.BackColor = System.Drawing.Color.White
-            Me.txtTotalDebits.BegFindValue = Nothing
-            Me.txtTotalDebits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtTotalDebits.ComputedValue = False
-            Me.txtTotalDebits.CustomFormat = Nothing
-            Me.txtTotalDebits.DataBoundControl = True
-            Me.txtTotalDebits.EditingMode = True
-            Me.txtTotalDebits.EndFindValue = Nothing
-            Me.txtTotalDebits.FieldDescription = Nothing
-            Me.txtTotalDebits.FieldName = Nothing
-            Me.txtTotalDebits.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtTotalDebits.FindEnabled = False
-            resources.ApplyResources(Me.txtTotalDebits, "txtTotalDebits")
-            Me.txtTotalDebits.ForeColor = System.Drawing.Color.Black
-            Me.txtTotalDebits.LinkedLabel = Nothing
-            Me.txtTotalDebits.MaximumValue = Nothing
-            Me.txtTotalDebits.MinimumValue = Nothing
-            Me.txtTotalDebits.Name = "txtTotalDebits"
-            Me.txtTotalDebits.OldValue = Nothing
-            Me.txtTotalDebits.OverrideMaxLength = 0
-            Me.txtTotalDebits.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtTotalDebits.Translatable = False
-            '
             'dgvSequence
             '
             Me.dgvSequence.BegFindValue = Nothing
             Me.dgvSequence.DataPropertyName = "Sequence"
-            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
-            Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle2
+            DataGridViewCellStyle11.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black
+            Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle11
             Me.dgvSequence.DisplayOnly = True
             Me.dgvSequence.EditingMode = False
             Me.dgvSequence.EndFindValue = Nothing
@@ -614,9 +550,9 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvAccountIdNo.AutoComplete = False
             Me.dgvAccountIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCellsExceptHeader
             Me.dgvAccountIdNo.DataPropertyName = "AccountIdNo"
-            DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
-            Me.dgvAccountIdNo.DefaultCellStyle = DataGridViewCellStyle3
+            DataGridViewCellStyle12.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black
+            Me.dgvAccountIdNo.DefaultCellStyle = DataGridViewCellStyle12
             Me.dgvAccountIdNo.EditingMode = False
             resources.ApplyResources(Me.dgvAccountIdNo, "dgvAccountIdNo")
             Me.dgvAccountIdNo.Name = "dgvAccountIdNo"
@@ -630,11 +566,11 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvDebit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
             Me.dgvDebit.BegFindValue = Nothing
             Me.dgvDebit.DataPropertyName = "Debit"
-            DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle4.Format = "N2"
-            Me.dgvDebit.DefaultCellStyle = DataGridViewCellStyle4
+            DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle13.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle13.Format = "N2"
+            Me.dgvDebit.DefaultCellStyle = DataGridViewCellStyle13
             Me.dgvDebit.EditingMode = False
             Me.dgvDebit.EndFindValue = Nothing
             Me.dgvDebit.FieldDescription = Nothing
@@ -654,11 +590,11 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvCredit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
             Me.dgvCredit.BegFindValue = Nothing
             Me.dgvCredit.DataPropertyName = "Credit"
-            DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle5.Format = "N2"
-            Me.dgvCredit.DefaultCellStyle = DataGridViewCellStyle5
+            DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle14.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle14.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle14.Format = "N2"
+            Me.dgvCredit.DefaultCellStyle = DataGridViewCellStyle14
             Me.dgvCredit.EditingMode = False
             Me.dgvCredit.EndFindValue = Nothing
             Me.dgvCredit.FieldDescription = Nothing
@@ -678,9 +614,9 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvRevCostCenterIdNo.AutoComplete = False
             Me.dgvRevCostCenterIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
             Me.dgvRevCostCenterIdNo.DataPropertyName = "RevCostCenterIdNo"
-            DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
-            Me.dgvRevCostCenterIdNo.DefaultCellStyle = DataGridViewCellStyle6
+            DataGridViewCellStyle15.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle15.ForeColor = System.Drawing.Color.Black
+            Me.dgvRevCostCenterIdNo.DefaultCellStyle = DataGridViewCellStyle15
             Me.dgvRevCostCenterIdNo.EditingMode = False
             resources.ApplyResources(Me.dgvRevCostCenterIdNo, "dgvRevCostCenterIdNo")
             Me.dgvRevCostCenterIdNo.Name = "dgvRevCostCenterIdNo"
@@ -694,9 +630,9 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvContactIdNo.AutoComplete = False
             Me.dgvContactIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
             Me.dgvContactIdNo.DataPropertyName = "ContactIdNo"
-            DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
-            Me.dgvContactIdNo.DefaultCellStyle = DataGridViewCellStyle7
+            DataGridViewCellStyle16.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle16.ForeColor = System.Drawing.Color.Black
+            Me.dgvContactIdNo.DefaultCellStyle = DataGridViewCellStyle16
             Me.dgvContactIdNo.EditingMode = False
             resources.ApplyResources(Me.dgvContactIdNo, "dgvContactIdNo")
             Me.dgvContactIdNo.Name = "dgvContactIdNo"
@@ -709,9 +645,9 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvNotes.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
             Me.dgvNotes.BegFindValue = Nothing
             Me.dgvNotes.DataPropertyName = "Notes"
-            DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
-            Me.dgvNotes.DefaultCellStyle = DataGridViewCellStyle8
+            DataGridViewCellStyle17.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle17.ForeColor = System.Drawing.Color.Black
+            Me.dgvNotes.DefaultCellStyle = DataGridViewCellStyle17
             Me.dgvNotes.EditingMode = False
             Me.dgvNotes.EndFindValue = Nothing
             Me.dgvNotes.FieldDescription = Nothing
@@ -802,6 +738,70 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.PayeeTypeDataGridViewTextBoxColumn, "PayeeTypeDataGridViewTextBoxColumn")
             Me.PayeeTypeDataGridViewTextBoxColumn.Name = "PayeeTypeDataGridViewTextBoxColumn"
             Me.PayeeTypeDataGridViewTextBoxColumn.ReadOnly = True
+            '
+            'bsJournalItems
+            '
+            Me.bsJournalItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.JournalItemModel)
+            '
+            'CFlowLayout4
+            '
+            Me.CFlowLayout4.BackColor = System.Drawing.Color.Transparent
+            Me.CFlowLayout4.Controls.Add(Me.floJournalHeader)
+            Me.CFlowLayout4.Controls.Add(Me.DataGridViewJournalItems)
+            Me.CFlowLayout4.Controls.Add(Me.txtTotalCredits)
+            Me.CFlowLayout4.Controls.Add(Me.txtTotalDebits)
+            resources.ApplyResources(Me.CFlowLayout4, "CFlowLayout4")
+            Me.CFlowLayout4.Name = "CFlowLayout4"
+            '
+            'txtTotalCredits
+            '
+            Me.txtTotalCredits.BackColor = System.Drawing.Color.White
+            Me.txtTotalCredits.BegFindValue = Nothing
+            Me.txtTotalCredits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtTotalCredits.ComputedValue = False
+            Me.txtTotalCredits.CustomFormat = Nothing
+            Me.txtTotalCredits.DataBoundControl = True
+            Me.txtTotalCredits.EditingMode = True
+            Me.txtTotalCredits.EndFindValue = Nothing
+            Me.txtTotalCredits.FieldDescription = Nothing
+            Me.txtTotalCredits.FieldName = Nothing
+            Me.txtTotalCredits.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtTotalCredits.FindEnabled = False
+            resources.ApplyResources(Me.txtTotalCredits, "txtTotalCredits")
+            Me.txtTotalCredits.ForeColor = System.Drawing.Color.Black
+            Me.txtTotalCredits.LinkedLabel = Nothing
+            Me.txtTotalCredits.MaximumValue = Nothing
+            Me.txtTotalCredits.MinimumValue = Nothing
+            Me.txtTotalCredits.Name = "txtTotalCredits"
+            Me.txtTotalCredits.OldValue = Nothing
+            Me.txtTotalCredits.OverrideMaxLength = 0
+            Me.txtTotalCredits.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtTotalCredits.Translatable = False
+            '
+            'txtTotalDebits
+            '
+            Me.txtTotalDebits.BackColor = System.Drawing.Color.White
+            Me.txtTotalDebits.BegFindValue = Nothing
+            Me.txtTotalDebits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtTotalDebits.ComputedValue = False
+            Me.txtTotalDebits.CustomFormat = Nothing
+            Me.txtTotalDebits.DataBoundControl = True
+            Me.txtTotalDebits.EditingMode = True
+            Me.txtTotalDebits.EndFindValue = Nothing
+            Me.txtTotalDebits.FieldDescription = Nothing
+            Me.txtTotalDebits.FieldName = Nothing
+            Me.txtTotalDebits.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtTotalDebits.FindEnabled = False
+            resources.ApplyResources(Me.txtTotalDebits, "txtTotalDebits")
+            Me.txtTotalDebits.ForeColor = System.Drawing.Color.Black
+            Me.txtTotalDebits.LinkedLabel = Nothing
+            Me.txtTotalDebits.MaximumValue = Nothing
+            Me.txtTotalDebits.MinimumValue = Nothing
+            Me.txtTotalDebits.Name = "txtTotalDebits"
+            Me.txtTotalDebits.OldValue = Nothing
+            Me.txtTotalDebits.OverrideMaxLength = 0
+            Me.txtTotalDebits.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtTotalDebits.Translatable = False
             '
             'GeneralJournalEntry
             '

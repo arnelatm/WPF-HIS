@@ -1313,7 +1313,6 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeLeaveCreditView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IHolidayView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IRecurringPayElementView.vb" />
-    <Compile Include="PresentationLayer\Views\Interfaces\IPayElementAccountsView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayElementAcountView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayrollPayElementView.vb" />
     <Compile Include="PresentationLayer\Views\EmployeeIdView.vb" />
@@ -2820,11 +2819,11 @@
     </None>
     <None Include="app - Copy.config" />
     <None Include="app-.config" />
+    <None Include="app.config" />
     <None Include="app-Isp-Server - Copy.config" />
     <None Include="app-ISP-SERVERNEW.config" />
     <None Include="app-ibn-server-test.config" />
     <None Include="app-IBNSINAP.config" />
-    <None Include="app.config" />
     <None Include="app-ISPADMIN2.config" />
     <None Include="app-Marcelo-Dell.config" />
     <None Include="app-Isp-Server.config" />
