@@ -121,7 +121,7 @@ Namespace DataLayer.AdoNet
             .DosageForm = Extensions.AsString(reader("DosageForm")),
             .GenericName = Extensions.AsString(reader("GenericName")),
             .GTin = Extensions.AsString(reader("GTIN")),
-            .IdNo = Extensions.AsId(Of Int32)(reader("Primary_Key")),
+            .IdNo = Extensions.AsInt(Of Int32)(reader("Primary_Key")),
             .ItemDetailsCode = Extensions.AsString(reader("Item_Code")),
             .ItemDetailsName = Extensions.AsString(reader("ItemNameEnglish")),
             .ItemGroup = Extensions.AsString(reader("ItemGroup")),

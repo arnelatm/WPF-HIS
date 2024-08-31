@@ -60,16 +60,18 @@ Namespace AdoNet
 
         <Extension>
         Public Function AsNullable(Of T)(ByVal obj As IConvertible)
+            Dim retVal
             If obj.Equals(DBNull.Value) Or obj Is Nothing Then
                 Return Nothing
             End If
             Dim objType As Type = GetType(T)
             Dim objUnderlyingTYpe As Type = Nullable.GetUnderlyingType(objType)
             If objUnderlyingTYpe IsNot Nothing Then
-                Return If((obj Is Nothing), Nothing, CType(Convert.ChangeType(obj, objUnderlyingTYpe), T))
+                retVal = If((obj Is Nothing), Nothing, CType(Convert.ChangeType(obj, objUnderlyingTYpe), T))
             Else
-                Return Convert.ChangeType(obj, objType)
+                retVal = Convert.ChangeType(obj, objType)
             End If
+            Return retVal
         End Function
 
         ' transform object into double data type

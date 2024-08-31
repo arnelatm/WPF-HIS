@@ -92,11 +92,12 @@ Namespace PresentationLayer.Views.Interfaces
         Property Remarks As String
         Property AgeF As String
         Property SexF As String
+        Property SampleId As Int32
+        Property UseInvoiceNo As Boolean
         Property LabInvoiceDetails As List(Of Lab_InvoiceDetailsView)
 
-        Event RetrieveLabResultRequested()
-
-        Event SaveResultRequested()
+        Event RetrieveLabResultRequested(useInvoiceNo As Boolean)
+        Event SaveResultRequested(useInvoiceNo As Boolean)
 
     End Interface
 
