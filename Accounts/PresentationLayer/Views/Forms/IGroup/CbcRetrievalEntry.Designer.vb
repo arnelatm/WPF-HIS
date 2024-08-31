@@ -3890,8 +3890,8 @@
             Me.Name = "CbcRetrievalEntry"
             Me.RightToLeft = System.Windows.Forms.RightToLeft.No
             Me.Text = "CBC Results Retrieval"
-            CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
-        Me.TableLayoutPanel1.ResumeLayout(false)
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.TableLayoutPanel1.ResumeLayout(false)
         Me.TableLayoutPanel1.PerformLayout
         Me.ResumeLayout(false)
         Me.PerformLayout

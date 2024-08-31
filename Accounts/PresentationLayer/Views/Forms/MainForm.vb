@@ -1082,7 +1082,11 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripMenuItemCbcResultRetrieval_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCbcResultRetrieval.Click
-            RunForm(Of CbcRetrievalEntry, Lab_InvoiceGroupPresenter(Of Lab_InvoiceGroupModel))()
+            RunForm(Of CbcRetrievalEntry, Lab_InvoiceGroupPresenter(Of Lab_InvoiceGroupModel), Boolean)(True)
+        End Sub
+
+        Private Sub ToolStripMenuItemCbcResultRetrievalSampleId_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCbcResultRetrievalSampleId.Click
+            RunForm(Of CbcRetrievalEntry, Lab_InvoiceGroupPresenter(Of Lab_InvoiceGroupModel), Boolean)(False)
         End Sub
 
         Private Sub ToolStripMenuItemDocuments_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDocuments.Click
@@ -1343,6 +1347,8 @@ Namespace PresentationLayer.Views.Forms
         Private Sub DiagnosticResultEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDiagnosticResultEntry.Click
             RunForm(Of IbLabResultForm, IbLabResultPresenter(Of IbLabResultModel))()
         End Sub
+
+
     End Class
 
 End Namespace

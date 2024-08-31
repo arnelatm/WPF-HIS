@@ -15,11 +15,10 @@ Namespace PresentationLayer.Views.Forms
         Implements ILab_InvoiceGroupView
 
         Private _nfi As NumberFormatInfo
-        Private Event RetrieveLabResultRequested() Implements ILab_InvoiceGroupView.RetrieveLabResultRequested
-        Private Event SaveResultRequested() Implements ILab_InvoiceGroupView.SaveResultRequested
+        Private Event RetrieveLabResultRequested(useInvoiceNo As Boolean) Implements ILab_InvoiceGroupView.RetrieveLabResultRequested
+        Private Event SaveResultRequested(useInvoiceNo As Boolean) Implements ILab_InvoiceGroupView.SaveResultRequested
 
-
-        Public Sub New()
+        Public Sub New(lUseInvoiceNo As Boolean)
 
             ' This call is required by the designer.
             InitializeComponent()
@@ -40,6 +39,8 @@ Namespace PresentationLayer.Views.Forms
                 _nfi.NumberGroupSeparator = numberGroupSeparator
             End If
             txtRemarks.Enabled = True
+            lblIdNo.Text = IIf(lUseInvoiceNo, "Invoice No.", "Sample No.")
+            UseInvoiceNo = lUseInvoiceNo
         End Sub
 
 #Region "Field Items"
@@ -879,14 +880,25 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property SampleId As Integer Implements ILab_InvoiceGroupView.SampleId
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As Integer)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
+        Public Property UseInvoiceNo As Boolean Implements ILab_InvoiceGroupView.UseInvoiceNo
+
 #End Region
 
         Private Sub btnRetrieve_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnRetrieve.ClickButtonArea
-            RetrievelabResult()
+            RetrieveLabResult()
         End Sub
 
-        Private Sub RetrievelabResult()
-            RaiseEvent RetrieveLabResultRequested()
+        Private Sub RetrieveLabResult()
+            RaiseEvent RetrieveLabResultRequested(UseInvoiceNo)
             If LabInvoiceDetails Is Nothing OrElse LabInvoiceDetails.Count() = 0 Then
                 btnTransferResults.Enabled = False
             End If
@@ -1194,7 +1206,7 @@ Namespace PresentationLayer.Views.Forms
         'End Enum
 
         Private Sub btnTransferResults_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnTransferResults.ClickButtonArea
-            RaiseEvent SaveResultRequested()
+            RaiseEvent SaveResultRequested(UseInvoiceNo)
         End Sub
 
         Private Sub txtInvoiceNo_Leave(sender As Object, e As EventArgs) Handles txtInvoiceNoF.Leave

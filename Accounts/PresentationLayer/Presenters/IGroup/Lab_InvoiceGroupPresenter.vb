@@ -20,7 +20,7 @@ Namespace PresentationLayer.Presenters
 
         Private ReadOnly _labInvoiceDetailsService As New AccountsService("Lab_InvoiceDetails")
 
-        Public Sub New(itemView As ILab_InvoiceGroupView)
+        Public Sub New(itemView As ILab_InvoiceGroupView, param As Object)
             MyBase.New(itemView)
             Service = New AccountsService("Lab_InvoiceGroup") ', Nothing ,Nothing, "IGROUPCLINIC")
             Service.SaveConnectionString()
@@ -33,6 +33,23 @@ Namespace PresentationLayer.Presenters
             AddHandler View.RetrieveLabResultRequested, AddressOf RetrieveLabResult
             AddHandler View.SaveResultRequested, AddressOf SaveResult
         End Sub
+
+        Private Function RetrieveLabResult() As Object
+            If View.InvoiceNoF Is Nothing Or View.InvoiceNoF = "" Then
+                MessageBox.Show("Sorry you must enter the " + IIf(View.UseInvoiceNo, "invoice", "sample id") + " number to be retrieved.")
+                BlankOutResults()
+            Else
+                If RetrieveCbcMachineResults() Then
+                    RetrieveCurrentSystemResult()
+                    If View.LabInvoiceDetails.Count() <> 0 Then
+                        MessageBox.Show("Data successfully retrieved!")
+                    Else
+                        MessageBox.Show("No CBC result generated for that sample id number. Please generate first a blank CBC Report before attempting to transfer result!")
+                        View.LabInvoiceDetails.Clear()
+                    End If
+                End If
+            End If
+        End Function
 
         'Protected Sub CreateDataTables()
         '    CreateDataTable(DtLab_InvoiceDetailsUpdateTable, {{"SlNo", GetType(Decimal)},
@@ -63,22 +80,22 @@ Namespace PresentationLayer.Presenters
             retVal = UpdateChildData(_labInvoiceDetailsService, DtLab_InvoiceDetailsUpdateTable, DtLab_InvoiceDetailsInsertTable, passedValue, "Group_Key")
         End Sub
 
-        Public Sub RetrieveLabResult()
-            If View.InvoiceNoF Is Nothing Or View.InvoiceNoF = "" Then
-                MessageBox.Show("Sorry you must enter the invoice number to be retrieved.")
-                BlankOutResults()
-            Else
-                If RetrieveCbcMachineResults() Then
-                    RetrieveCurrentSystemResult()
-                    If View.LabInvoiceDetails.Count() <> 0 Then
-                        MessageBox.Show("Data successfully retrieved!")
-                    Else
-                        MessageBox.Show("No CBC result generated for that invoice number. Please generate first a blank CBC Report before attempting to transfer result!")
-                        View.LabInvoiceDetails.Clear()
-                    End If
-                End If
-            End If
-        End Sub
+        'Public Sub RetrieveLabResultByInvoiceNo()
+        '    If View.InvoiceNoF Is Nothing Or View.InvoiceNoF = "" Then
+        '        MessageBox.Show("Sorry you must enter the invoice number to be retrieved.")
+        '        BlankOutResults()
+        '    Else
+        '        If RetrieveCbcMachineResults() Then
+        '            RetrieveCurrentSystemResult()
+        '            If View.LabInvoiceDetails.Count() <> 0 Then
+        '                MessageBox.Show("Data successfully retrieved!")
+        '            Else
+        '                MessageBox.Show("No CBC result generated for that invoice number. Please generate first a blank CBC Report before attempting to transfer result!")
+        '                View.LabInvoiceDetails.Clear()
+        '            End If
+        '        End If
+        '    End If
+        'End Sub
 
         Private Sub BlankOutResults()
             EmptyResults()
@@ -86,13 +103,11 @@ Namespace PresentationLayer.Presenters
 
         Private Function RetrieveCbcMachineResults()
             Dim retVal As Boolean = False
-            
             Dim sFiles As String()
-            Dim pattern As String = "*_" + View.InvoiceNoF + ".csv"
+            Dim pattern As String = IIf(View.UseInvoiceNo, "*_", "*__") + View.InvoiceNoF + ".csv"
             Dim mySettings = AppSettings.Load()
-            Dim filePath As String = IIf(mySettings.LaboratoryResultDirectory Is Nothing Or mySettings.LaboratoryResultDirectory="","\\laboratory5\drivec\NihonKohden",mySettings.LaboratoryResultDirectory)
+            Dim filePath As String = IIf(mySettings.LaboratoryResultDirectory Is Nothing Or mySettings.LaboratoryResultDirectory = "", "\\laboratory5\drivec\NihonKohden", mySettings.LaboratoryResultDirectory)
             mySettings = Nothing
-
             View.InvoiceNo = Val(StripNonNumbers(View.InvoiceNoF))
             sFiles = Directory.GetFileSystemEntries(filePath, pattern)
             If sFiles.Length > 0 Then
@@ -102,7 +117,7 @@ Namespace PresentationLayer.Presenters
             End If
             If Not retVal Then
                 BlankOutResults()
-                MessageBox.Show("No result with that invoice number was found on [" + filePath + "]")
+                MessageBox.Show("No result with that " & IIf(View.UseInvoiceNo, "invoice", "sample id") + " number was found on [" + filePath + "]")
             End If
             Return retVal
         End Function
@@ -111,7 +126,11 @@ Namespace PresentationLayer.Presenters
             'Dim invNo As Decimal
             'invNo = Val(View.InvoiceNoF)
             'View.InvoiceNo = invNo
-            _idNo = Service.GetRecordFieldWith2KeyG(Of Decimal, String, Decimal)(View.InvoiceNo, "CBCNK", "Lab_InvoiceGroup", "InvoiceNo", "InvestigationId", "Trans_Key")
+            If View.UseInvoiceNo Then
+                _idNo = Service.GetRecordFieldWith2KeyG(Of Decimal, String, Decimal)(View.InvoiceNo, "CBCNK", "Lab_InvoiceGroup", "InvoiceNo", "InvestigationId", "Trans_Key")
+            Else
+                _idNo = Service.GetRecordFieldWith2KeyG(Of Decimal, String, Decimal)(View.InvoiceNo, "CBCNK", "Lab_InvoiceGroup", "SampleNo", "InvestigationId", "Trans_Key")
+            End If
             Dim labInvoiceGroup As New Lab_InvoiceGroupModel
             labInvoiceGroup = Service.GetRecordByIdNo(Of Lab_InvoiceGroupModel)(_idNo)
             GlobalVariables.Mapper.Map(labInvoiceGroup, View)
@@ -132,8 +151,8 @@ Namespace PresentationLayer.Presenters
                 Dim cbcReportSelector As New CbcReportSelector(sFiles, filePath, View.InvoiceNo)
                 Dim result = cbcReportSelector.ShowDialog()
                 If result = DialogResult.OK Then
-                    Dim cPatern = sFiles(cbcReportSelector.SelectedIndex).Substring(filePath.Length + 1)
-                    Dim cFile = Directory.GetFileSystemEntries(filePath, cPatern)
+                    Dim cPattern = sFiles(cbcReportSelector.SelectedIndex).Substring(filePath.Length + 1)
+                    Dim cFile = Directory.GetFileSystemEntries(filePath, cPattern)
                     GetResultOnFile(cFile, aFileResults, aCBCResults)
                     success = True
                 Else
@@ -153,9 +172,6 @@ Namespace PresentationLayer.Presenters
                 Next
             End Using
             FileResultsToCbcResults(aFileResults, aCBCResults)
-            View.PatientName = aFileResults(143)
-            View.SexF = aFileResults(144)
-            View.AgeF = aFileResults(146)
         End Sub
 
         Private Sub EmptyResults()
@@ -251,24 +267,51 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub FileResultsToCbcResults(aFileResults() As String, aCBCResults() As String)
-            aCBCResults(CBCEnum.Wbc) = aFileResults(15)
-            aCBCResults(CBCEnum.NE) = aFileResults(16)
-            aCBCResults(CBCEnum.LY) = aFileResults(17)
-            aCBCResults(CBCEnum.MO) = aFileResults(18)
-            aCBCResults(CBCEnum.EO) = aFileResults(19)
-            aCBCResults(CBCEnum.BA) = aFileResults(20)
-            aCBCResults(CBCEnum.Rbc) = aFileResults(26)
-            aCBCResults(CBCEnum.Hgb) = aFileResults(27)
-            aCBCResults(CBCEnum.Hct) = aFileResults(28)
-            aCBCResults(CBCEnum.Mcv) = aFileResults(29)
-            aCBCResults(CBCEnum.Mch) = aFileResults(30)
-            aCBCResults(CBCEnum.Mchc) = aFileResults(31)
-            aCBCResults(CBCEnum.Rdwcv) = aFileResults(32)
-            aCBCResults(CBCEnum.Rdwsd) = aFileResults(49)
-            aCBCResults(CBCEnum.Plt) = aFileResults(33)
-            aCBCResults(CBCEnum.Pct) = aFileResults(34)
-            aCBCResults(CBCEnum.Mpv) = aFileResults(35)
-            aCBCResults(CBCEnum.Pdw) = aFileResults(36)
+            If aFileResults(1) = "UNIT1" Then 'DyMind
+                aCBCResults(CBCEnum.Wbc) = aFileResults(15)
+                aCBCResults(CBCEnum.NE) = aFileResults(16)
+                aCBCResults(CBCEnum.LY) = aFileResults(17)
+                aCBCResults(CBCEnum.MO) = aFileResults(18)
+                aCBCResults(CBCEnum.EO) = aFileResults(19)
+                aCBCResults(CBCEnum.BA) = aFileResults(20)
+                aCBCResults(CBCEnum.Rbc) = aFileResults(26)
+                aCBCResults(CBCEnum.Hgb) = aFileResults(27)
+                aCBCResults(CBCEnum.Hct) = aFileResults(28)
+                aCBCResults(CBCEnum.Mcv) = aFileResults(29)
+                aCBCResults(CBCEnum.Mch) = aFileResults(30)
+                aCBCResults(CBCEnum.Mchc) = aFileResults(31)
+                aCBCResults(CBCEnum.Rdwcv) = aFileResults(32)
+                aCBCResults(CBCEnum.Rdwsd) = aFileResults(49)
+                aCBCResults(CBCEnum.Plt) = aFileResults(33)
+                aCBCResults(CBCEnum.Pct) = aFileResults(34)
+                aCBCResults(CBCEnum.Mpv) = aFileResults(35)
+                aCBCResults(CBCEnum.Pdw) = aFileResults(36)
+                View.PatientName = aFileResults(143)
+                View.SexF = aFileResults(144)
+                View.AgeF = aFileResults(146)
+            ElseIf aFileResults(1) = "2" Then ' Mindray
+                View.PatientName = aFileResults(4)
+                View.SexF = aFileResults(5)
+                View.AgeF = aFileResults(6)
+                aCBCResults(CBCEnum.Wbc) = aFileResults(7)
+                aCBCResults(CBCEnum.NE) = aFileResults(8)
+                aCBCResults(CBCEnum.LY) = aFileResults(9)
+                aCBCResults(CBCEnum.MO) = aFileResults(10)
+                aCBCResults(CBCEnum.EO) = aFileResults(11)
+                aCBCResults(CBCEnum.BA) = aFileResults(12)
+                aCBCResults(CBCEnum.Rbc) = aFileResults(13)
+                aCBCResults(CBCEnum.Hgb) = aFileResults(14)
+                aCBCResults(CBCEnum.Hct) = aFileResults(15)
+                aCBCResults(CBCEnum.Mcv) = aFileResults(16)
+                aCBCResults(CBCEnum.Mch) = aFileResults(17)
+                aCBCResults(CBCEnum.Mchc) = aFileResults(18)
+                aCBCResults(CBCEnum.Rdwcv) = aFileResults(19)
+                aCBCResults(CBCEnum.Rdwsd) = aFileResults(20)
+                aCBCResults(CBCEnum.Plt) = aFileResults(21)
+                aCBCResults(CBCEnum.Pct) = aFileResults(22)
+                aCBCResults(CBCEnum.Mpv) = aFileResults(23)
+                aCBCResults(CBCEnum.Pdw) = aFileResults(24)
+            End If
             CbcResultsToView(aCBCResults)
         End Sub
 
