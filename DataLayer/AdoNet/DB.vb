@@ -327,7 +327,9 @@ Namespace AdoNet
                             Using command = CreateCommand(sql, connection, params)
                                 Using reader = command.ExecuteReader()
                                     Do While reader.Read()
-                                        Yield make(reader)
+                                        Dim x
+                                        x = make(reader)
+                                        Yield x
                                     Loop
                                 End Using
                             End Using
