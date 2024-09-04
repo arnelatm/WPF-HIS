@@ -174,7 +174,7 @@
         Me.txtMONv.Font = New System.Drawing.Font("Arial Narrow", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.txtMONv.ForeColor = System.Drawing.Color.Black
         Me.txtMONv.LinkedLabel = Nothing
-            Me.txtMONv.Location = New System.Drawing.Point(256, 211)
+            Me.txtMONv.Location = New System.Drawing.Point(234, 211)
             Me.txtMONv.Margin = New System.Windows.Forms.Padding(1)
             Me.txtMONv.MaximumValue = Nothing
             Me.txtMONv.MinimumValue = Nothing
@@ -183,7 +183,7 @@
             Me.txtMONv.OverrideMaxLength = 0
             Me.txtMONv.ReadOnly = True
             Me.txtMONv.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtMONv.Size = New System.Drawing.Size(133, 18)
+            Me.txtMONv.Size = New System.Drawing.Size(133, 14)
             Me.txtMONv.TabIndex = 108
             Me.txtMONv.Translatable = False
             '
@@ -207,7 +207,7 @@
             Me.txtLYNv.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtLYNv.ForeColor = System.Drawing.Color.Black
             Me.txtLYNv.LinkedLabel = Nothing
-            Me.txtLYNv.Location = New System.Drawing.Point(256, 196)
+            Me.txtLYNv.Location = New System.Drawing.Point(234, 196)
             Me.txtLYNv.Margin = New System.Windows.Forms.Padding(1)
             Me.txtLYNv.MaximumValue = Nothing
             Me.txtLYNv.MinimumValue = Nothing
@@ -216,7 +216,7 @@
             Me.txtLYNv.OverrideMaxLength = 0
             Me.txtLYNv.ReadOnly = True
             Me.txtLYNv.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtLYNv.Size = New System.Drawing.Size(133, 18)
+            Me.txtLYNv.Size = New System.Drawing.Size(133, 14)
             Me.txtLYNv.TabIndex = 106
             Me.txtLYNv.Translatable = False
             '
@@ -240,7 +240,7 @@
             Me.txtHgbNv.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtHgbNv.ForeColor = System.Drawing.Color.Black
             Me.txtHgbNv.LinkedLabel = Nothing
-            Me.txtHgbNv.Location = New System.Drawing.Point(256, 286)
+            Me.txtHgbNv.Location = New System.Drawing.Point(234, 286)
             Me.txtHgbNv.Margin = New System.Windows.Forms.Padding(1)
             Me.txtHgbNv.MaximumValue = Nothing
             Me.txtHgbNv.MinimumValue = Nothing
@@ -249,7 +249,7 @@
             Me.txtHgbNv.OverrideMaxLength = 0
             Me.txtHgbNv.ReadOnly = True
             Me.txtHgbNv.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtHgbNv.Size = New System.Drawing.Size(133, 18)
+            Me.txtHgbNv.Size = New System.Drawing.Size(133, 14)
             Me.txtHgbNv.TabIndex = 63
             Me.txtHgbNv.Translatable = False
             '
@@ -272,7 +272,7 @@
             Me.txtLYR.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtLYR.ForeColor = System.Drawing.Color.Black
             Me.txtLYR.LinkedLabel = Nothing
-            Me.txtLYR.Location = New System.Drawing.Point(413, 196)
+            Me.txtLYR.Location = New System.Drawing.Point(391, 196)
             Me.txtLYR.Margin = New System.Windows.Forms.Padding(1)
             Me.txtLYR.MaximumValue = Nothing
             Me.txtLYR.MinimumValue = Nothing
@@ -281,7 +281,7 @@
             Me.txtLYR.OverrideMaxLength = 0
             Me.txtLYR.ReadOnly = True
             Me.txtLYR.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtLYR.Size = New System.Drawing.Size(140, 18)
+            Me.txtLYR.Size = New System.Drawing.Size(140, 14)
             Me.txtLYR.TabIndex = 107
             Me.txtLYR.Translatable = False
             '
@@ -305,7 +305,7 @@
             Me.txtPltNv.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtPltNv.ForeColor = System.Drawing.Color.Black
             Me.txtPltNv.LinkedLabel = Nothing
-            Me.txtPltNv.Location = New System.Drawing.Point(256, 421)
+            Me.txtPltNv.Location = New System.Drawing.Point(234, 421)
             Me.txtPltNv.Margin = New System.Windows.Forms.Padding(1)
             Me.txtPltNv.MaximumValue = Nothing
             Me.txtPltNv.MinimumValue = Nothing
@@ -314,7 +314,7 @@
             Me.txtPltNv.OverrideMaxLength = 0
             Me.txtPltNv.ReadOnly = True
             Me.txtPltNv.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtPltNv.Size = New System.Drawing.Size(133, 18)
+            Me.txtPltNv.Size = New System.Drawing.Size(133, 14)
             Me.txtPltNv.TabIndex = 62
             Me.txtPltNv.Translatable = False
             '
@@ -338,7 +338,7 @@
             Me.txtNENv.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtNENv.ForeColor = System.Drawing.Color.Black
             Me.txtNENv.LinkedLabel = Nothing
-            Me.txtNENv.Location = New System.Drawing.Point(256, 181)
+            Me.txtNENv.Location = New System.Drawing.Point(234, 181)
             Me.txtNENv.Margin = New System.Windows.Forms.Padding(1)
             Me.txtNENv.MaximumValue = Nothing
             Me.txtNENv.MinimumValue = Nothing
@@ -347,7 +347,7 @@
             Me.txtNENv.OverrideMaxLength = 0
             Me.txtNENv.ReadOnly = True
             Me.txtNENv.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtNENv.Size = New System.Drawing.Size(133, 18)
+            Me.txtNENv.Size = New System.Drawing.Size(133, 14)
             Me.txtNENv.TabIndex = 92
             Me.txtNENv.Translatable = False
             '
@@ -370,7 +370,7 @@
             Me.txtNER.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtNER.ForeColor = System.Drawing.Color.Black
             Me.txtNER.LinkedLabel = Nothing
-            Me.txtNER.Location = New System.Drawing.Point(413, 181)
+            Me.txtNER.Location = New System.Drawing.Point(391, 181)
             Me.txtNER.Margin = New System.Windows.Forms.Padding(1)
             Me.txtNER.MaximumValue = Nothing
             Me.txtNER.MinimumValue = Nothing
@@ -379,7 +379,7 @@
             Me.txtNER.OverrideMaxLength = 0
             Me.txtNER.ReadOnly = True
             Me.txtNER.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtNER.Size = New System.Drawing.Size(140, 18)
+            Me.txtNER.Size = New System.Drawing.Size(140, 14)
             Me.txtNER.TabIndex = 64
             Me.txtNER.Translatable = False
             '
@@ -402,7 +402,7 @@
             Me.txtNERNv.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtNERNv.ForeColor = System.Drawing.Color.Black
             Me.txtNERNv.LinkedLabel = Nothing
-            Me.txtNERNv.Location = New System.Drawing.Point(580, 181)
+            Me.txtNERNv.Location = New System.Drawing.Point(558, 181)
             Me.txtNERNv.Margin = New System.Windows.Forms.Padding(1)
             Me.txtNERNv.MaximumValue = Nothing
             Me.txtNERNv.MinimumValue = Nothing
@@ -411,7 +411,7 @@
             Me.txtNERNv.OverrideMaxLength = 0
             Me.txtNERNv.ReadOnly = True
             Me.txtNERNv.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtNERNv.Size = New System.Drawing.Size(133, 18)
+            Me.txtNERNv.Size = New System.Drawing.Size(133, 14)
             Me.txtNERNv.TabIndex = 76
             Me.txtNERNv.Translatable = False
             '
@@ -435,7 +435,7 @@
             Me.txtPctNv.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtPctNv.ForeColor = System.Drawing.Color.Black
             Me.txtPctNv.LinkedLabel = Nothing
-            Me.txtPctNv.Location = New System.Drawing.Point(256, 436)
+            Me.txtPctNv.Location = New System.Drawing.Point(234, 436)
             Me.txtPctNv.Margin = New System.Windows.Forms.Padding(1)
             Me.txtPctNv.MaximumValue = Nothing
             Me.txtPctNv.MinimumValue = Nothing
@@ -444,7 +444,7 @@
             Me.txtPctNv.OverrideMaxLength = 0
             Me.txtPctNv.ReadOnly = True
             Me.txtPctNv.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtPctNv.Size = New System.Drawing.Size(133, 18)
+            Me.txtPctNv.Size = New System.Drawing.Size(133, 14)
             Me.txtPctNv.TabIndex = 89
             Me.txtPctNv.Translatable = False
             '
@@ -467,7 +467,7 @@
             Me.txtPdw.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtPdw.ForeColor = System.Drawing.Color.Black
             Me.txtPdw.LinkedLabel = Nothing
-            Me.txtPdw.Location = New System.Drawing.Point(96, 466)
+            Me.txtPdw.Location = New System.Drawing.Point(74, 466)
             Me.txtPdw.Margin = New System.Windows.Forms.Padding(1)
             Me.txtPdw.MaximumValue = Nothing
             Me.txtPdw.MinimumValue = Nothing
@@ -476,7 +476,7 @@
             Me.txtPdw.OverrideMaxLength = 0
             Me.txtPdw.ReadOnly = True
             Me.txtPdw.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtPdw.Size = New System.Drawing.Size(132, 18)
+            Me.txtPdw.Size = New System.Drawing.Size(132, 14)
             Me.txtPdw.TabIndex = 90
             Me.txtPdw.Translatable = False
             '
@@ -499,7 +499,7 @@
             Me.txtMpv.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtMpv.ForeColor = System.Drawing.Color.Black
             Me.txtMpv.LinkedLabel = Nothing
-            Me.txtMpv.Location = New System.Drawing.Point(96, 451)
+            Me.txtMpv.Location = New System.Drawing.Point(74, 451)
             Me.txtMpv.Margin = New System.Windows.Forms.Padding(1)
             Me.txtMpv.MaximumValue = Nothing
             Me.txtMpv.MinimumValue = Nothing
@@ -508,7 +508,7 @@
             Me.txtMpv.OverrideMaxLength = 0
             Me.txtMpv.ReadOnly = True
             Me.txtMpv.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtMpv.Size = New System.Drawing.Size(132, 18)
+            Me.txtMpv.Size = New System.Drawing.Size(132, 14)
             Me.txtMpv.TabIndex = 93
             Me.txtMpv.Translatable = False
             '
@@ -531,7 +531,7 @@
             Me.txtPct.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtPct.ForeColor = System.Drawing.Color.Black
             Me.txtPct.LinkedLabel = Nothing
-            Me.txtPct.Location = New System.Drawing.Point(96, 436)
+            Me.txtPct.Location = New System.Drawing.Point(74, 436)
             Me.txtPct.Margin = New System.Windows.Forms.Padding(1)
             Me.txtPct.MaximumValue = Nothing
             Me.txtPct.MinimumValue = Nothing
@@ -540,7 +540,7 @@
             Me.txtPct.OverrideMaxLength = 0
             Me.txtPct.ReadOnly = True
             Me.txtPct.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtPct.Size = New System.Drawing.Size(132, 18)
+            Me.txtPct.Size = New System.Drawing.Size(132, 14)
             Me.txtPct.TabIndex = 88
             Me.txtPct.Translatable = False
             '
@@ -563,7 +563,7 @@
             Me.txtPlt.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtPlt.ForeColor = System.Drawing.Color.Black
             Me.txtPlt.LinkedLabel = Nothing
-            Me.txtPlt.Location = New System.Drawing.Point(96, 421)
+            Me.txtPlt.Location = New System.Drawing.Point(74, 421)
             Me.txtPlt.Margin = New System.Windows.Forms.Padding(1)
             Me.txtPlt.MaximumValue = Nothing
             Me.txtPlt.MinimumValue = Nothing
@@ -572,7 +572,7 @@
             Me.txtPlt.OverrideMaxLength = 0
             Me.txtPlt.ReadOnly = True
             Me.txtPlt.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtPlt.Size = New System.Drawing.Size(132, 18)
+            Me.txtPlt.Size = New System.Drawing.Size(132, 14)
             Me.txtPlt.TabIndex = 91
             Me.txtPlt.Translatable = False
             '
@@ -595,7 +595,7 @@
             Me.txtRdwsd.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtRdwsd.ForeColor = System.Drawing.Color.Black
             Me.txtRdwsd.LinkedLabel = Nothing
-            Me.txtRdwsd.Location = New System.Drawing.Point(96, 376)
+            Me.txtRdwsd.Location = New System.Drawing.Point(74, 376)
             Me.txtRdwsd.Margin = New System.Windows.Forms.Padding(1)
             Me.txtRdwsd.MaximumValue = Nothing
             Me.txtRdwsd.MinimumValue = Nothing
@@ -604,7 +604,7 @@
             Me.txtRdwsd.OverrideMaxLength = 0
             Me.txtRdwsd.ReadOnly = True
             Me.txtRdwsd.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtRdwsd.Size = New System.Drawing.Size(132, 18)
+            Me.txtRdwsd.Size = New System.Drawing.Size(132, 14)
             Me.txtRdwsd.TabIndex = 94
             Me.txtRdwsd.Translatable = False
             '
@@ -627,7 +627,7 @@
             Me.txtRdwcv.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtRdwcv.ForeColor = System.Drawing.Color.Black
             Me.txtRdwcv.LinkedLabel = Nothing
-            Me.txtRdwcv.Location = New System.Drawing.Point(96, 361)
+            Me.txtRdwcv.Location = New System.Drawing.Point(74, 361)
             Me.txtRdwcv.Margin = New System.Windows.Forms.Padding(1)
             Me.txtRdwcv.MaximumValue = Nothing
             Me.txtRdwcv.MinimumValue = Nothing
@@ -636,7 +636,7 @@
             Me.txtRdwcv.OverrideMaxLength = 0
             Me.txtRdwcv.ReadOnly = True
             Me.txtRdwcv.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtRdwcv.Size = New System.Drawing.Size(132, 18)
+            Me.txtRdwcv.Size = New System.Drawing.Size(132, 14)
             Me.txtRdwcv.TabIndex = 86
             Me.txtRdwcv.Translatable = False
             '
@@ -659,7 +659,7 @@
             Me.txtMchc.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtMchc.ForeColor = System.Drawing.Color.Black
             Me.txtMchc.LinkedLabel = Nothing
-            Me.txtMchc.Location = New System.Drawing.Point(96, 346)
+            Me.txtMchc.Location = New System.Drawing.Point(74, 346)
             Me.txtMchc.Margin = New System.Windows.Forms.Padding(1)
             Me.txtMchc.MaximumValue = Nothing
             Me.txtMchc.MinimumValue = Nothing
@@ -668,7 +668,7 @@
             Me.txtMchc.OverrideMaxLength = 0
             Me.txtMchc.ReadOnly = True
             Me.txtMchc.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtMchc.Size = New System.Drawing.Size(132, 18)
+            Me.txtMchc.Size = New System.Drawing.Size(132, 14)
             Me.txtMchc.TabIndex = 87
             Me.txtMchc.Translatable = False
             '
@@ -691,7 +691,7 @@
             Me.txtMch.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtMch.ForeColor = System.Drawing.Color.Black
             Me.txtMch.LinkedLabel = Nothing
-            Me.txtMch.Location = New System.Drawing.Point(96, 331)
+            Me.txtMch.Location = New System.Drawing.Point(74, 331)
             Me.txtMch.Margin = New System.Windows.Forms.Padding(1)
             Me.txtMch.MaximumValue = Nothing
             Me.txtMch.MinimumValue = Nothing
@@ -700,7 +700,7 @@
             Me.txtMch.OverrideMaxLength = 0
             Me.txtMch.ReadOnly = True
             Me.txtMch.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtMch.Size = New System.Drawing.Size(132, 18)
+            Me.txtMch.Size = New System.Drawing.Size(132, 14)
             Me.txtMch.TabIndex = 85
             Me.txtMch.Translatable = False
             '
@@ -723,7 +723,7 @@
             Me.txtMcv.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtMcv.ForeColor = System.Drawing.Color.Black
             Me.txtMcv.LinkedLabel = Nothing
-            Me.txtMcv.Location = New System.Drawing.Point(96, 316)
+            Me.txtMcv.Location = New System.Drawing.Point(74, 316)
             Me.txtMcv.Margin = New System.Windows.Forms.Padding(1)
             Me.txtMcv.MaximumValue = Nothing
             Me.txtMcv.MinimumValue = Nothing
@@ -732,7 +732,7 @@
             Me.txtMcv.OverrideMaxLength = 0
             Me.txtMcv.ReadOnly = True
             Me.txtMcv.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtMcv.Size = New System.Drawing.Size(132, 18)
+            Me.txtMcv.Size = New System.Drawing.Size(132, 14)
             Me.txtMcv.TabIndex = 83
             Me.txtMcv.Translatable = False
             '
@@ -755,7 +755,7 @@
             Me.txtHct.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtHct.ForeColor = System.Drawing.Color.Black
             Me.txtHct.LinkedLabel = Nothing
-            Me.txtHct.Location = New System.Drawing.Point(96, 301)
+            Me.txtHct.Location = New System.Drawing.Point(74, 301)
             Me.txtHct.Margin = New System.Windows.Forms.Padding(1)
             Me.txtHct.MaximumValue = Nothing
             Me.txtHct.MinimumValue = Nothing
@@ -764,7 +764,7 @@
             Me.txtHct.OverrideMaxLength = 0
             Me.txtHct.ReadOnly = True
             Me.txtHct.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtHct.Size = New System.Drawing.Size(132, 18)
+            Me.txtHct.Size = New System.Drawing.Size(132, 14)
             Me.txtHct.TabIndex = 81
             Me.txtHct.Translatable = False
             '
@@ -779,7 +779,7 @@
             Me.lblName.Location = New System.Drawing.Point(1, 76)
             Me.lblName.Margin = New System.Windows.Forms.Padding(1)
             Me.lblName.Name = "lblName"
-            Me.lblName.Size = New System.Drawing.Size(33, 13)
+            Me.lblName.Size = New System.Drawing.Size(26, 13)
             Me.lblName.TabIndex = 3
             Me.lblName.Text = "Age"
             Me.lblName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -795,7 +795,7 @@
             Me.CLabel16.Location = New System.Drawing.Point(1, 31)
             Me.CLabel16.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel16.Name = "CLabel16"
-            Me.CLabel16.Size = New System.Drawing.Size(48, 13)
+            Me.CLabel16.Size = New System.Drawing.Size(37, 13)
             Me.CLabel16.TabIndex = 47
             Me.CLabel16.Text = "Status"
             Me.CLabel16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -820,7 +820,7 @@
             Me.txtWbcR.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtWbcR.ForeColor = System.Drawing.Color.Black
             Me.txtWbcR.LinkedLabel = Nothing
-            Me.txtWbcR.Location = New System.Drawing.Point(413, 166)
+            Me.txtWbcR.Location = New System.Drawing.Point(391, 166)
             Me.txtWbcR.Margin = New System.Windows.Forms.Padding(1)
             Me.txtWbcR.MaximumValue = Nothing
             Me.txtWbcR.MinimumValue = Nothing
@@ -829,7 +829,7 @@
             Me.txtWbcR.OverrideMaxLength = 0
             Me.txtWbcR.ReadOnly = True
             Me.txtWbcR.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtWbcR.Size = New System.Drawing.Size(140, 18)
+            Me.txtWbcR.Size = New System.Drawing.Size(140, 14)
             Me.txtWbcR.TabIndex = 58
             Me.txtWbcR.Translatable = False
             '
@@ -842,7 +842,7 @@
             Me.CLabel18.Dock = System.Windows.Forms.DockStyle.Fill
             Me.CLabel18.EditingMode = False
             Me.CLabel18.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.CLabel18.Location = New System.Drawing.Point(256, 136)
+            Me.CLabel18.Location = New System.Drawing.Point(234, 136)
             Me.CLabel18.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel18.Name = "CLabel18"
             Me.CLabel18.Size = New System.Drawing.Size(155, 13)
@@ -870,7 +870,7 @@
             Me.txtBAR.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtBAR.ForeColor = System.Drawing.Color.Black
             Me.txtBAR.LinkedLabel = Nothing
-            Me.txtBAR.Location = New System.Drawing.Point(413, 241)
+            Me.txtBAR.Location = New System.Drawing.Point(391, 241)
             Me.txtBAR.Margin = New System.Windows.Forms.Padding(1)
             Me.txtBAR.MaximumValue = Nothing
             Me.txtBAR.MinimumValue = Nothing
@@ -879,7 +879,7 @@
             Me.txtBAR.OverrideMaxLength = 0
             Me.txtBAR.ReadOnly = True
             Me.txtBAR.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtBAR.Size = New System.Drawing.Size(140, 18)
+            Me.txtBAR.Size = New System.Drawing.Size(140, 14)
             Me.txtBAR.TabIndex = 80
             Me.txtBAR.Translatable = False
             '
@@ -902,7 +902,7 @@
             Me.txtEO.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtEO.ForeColor = System.Drawing.Color.Black
             Me.txtEO.LinkedLabel = Nothing
-            Me.txtEO.Location = New System.Drawing.Point(96, 226)
+            Me.txtEO.Location = New System.Drawing.Point(74, 226)
             Me.txtEO.Margin = New System.Windows.Forms.Padding(1)
             Me.txtEO.MaximumValue = Nothing
             Me.txtEO.MinimumValue = Nothing
@@ -911,7 +911,7 @@
             Me.txtEO.OverrideMaxLength = 0
             Me.txtEO.ReadOnly = True
             Me.txtEO.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtEO.Size = New System.Drawing.Size(132, 18)
+            Me.txtEO.Size = New System.Drawing.Size(132, 14)
             Me.txtEO.TabIndex = 67
             Me.txtEO.Translatable = False
             '
@@ -935,7 +935,7 @@
             Me.txtHctNv.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtHctNv.ForeColor = System.Drawing.Color.Black
             Me.txtHctNv.LinkedLabel = Nothing
-            Me.txtHctNv.Location = New System.Drawing.Point(256, 301)
+            Me.txtHctNv.Location = New System.Drawing.Point(234, 301)
             Me.txtHctNv.Margin = New System.Windows.Forms.Padding(1)
             Me.txtHctNv.MaximumValue = Nothing
             Me.txtHctNv.MinimumValue = Nothing
@@ -944,7 +944,7 @@
             Me.txtHctNv.OverrideMaxLength = 0
             Me.txtHctNv.ReadOnly = True
             Me.txtHctNv.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtHctNv.Size = New System.Drawing.Size(133, 18)
+            Me.txtHctNv.Size = New System.Drawing.Size(133, 14)
             Me.txtHctNv.TabIndex = 82
             Me.txtHctNv.Translatable = False
             '
@@ -967,7 +967,7 @@
             Me.txtBA.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtBA.ForeColor = System.Drawing.Color.Black
             Me.txtBA.LinkedLabel = Nothing
-            Me.txtBA.Location = New System.Drawing.Point(96, 241)
+            Me.txtBA.Location = New System.Drawing.Point(74, 241)
             Me.txtBA.Margin = New System.Windows.Forms.Padding(1)
             Me.txtBA.MaximumValue = Nothing
             Me.txtBA.MinimumValue = Nothing
@@ -976,7 +976,7 @@
             Me.txtBA.OverrideMaxLength = 0
             Me.txtBA.ReadOnly = True
             Me.txtBA.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtBA.Size = New System.Drawing.Size(132, 18)
+            Me.txtBA.Size = New System.Drawing.Size(132, 14)
             Me.txtBA.TabIndex = 68
             Me.txtBA.Translatable = False
             '
@@ -999,7 +999,7 @@
             Me.txtLY.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtLY.ForeColor = System.Drawing.Color.Black
             Me.txtLY.LinkedLabel = Nothing
-            Me.txtLY.Location = New System.Drawing.Point(96, 196)
+            Me.txtLY.Location = New System.Drawing.Point(74, 196)
             Me.txtLY.Margin = New System.Windows.Forms.Padding(1)
             Me.txtLY.MaximumValue = Nothing
             Me.txtLY.MinimumValue = Nothing
@@ -1008,7 +1008,7 @@
             Me.txtLY.OverrideMaxLength = 0
             Me.txtLY.ReadOnly = True
             Me.txtLY.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtLY.Size = New System.Drawing.Size(132, 18)
+            Me.txtLY.Size = New System.Drawing.Size(132, 14)
             Me.txtLY.TabIndex = 84
             Me.txtLY.Translatable = False
             '
@@ -1031,7 +1031,7 @@
             Me.txtNE.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtNE.ForeColor = System.Drawing.Color.Black
             Me.txtNE.LinkedLabel = Nothing
-            Me.txtNE.Location = New System.Drawing.Point(96, 181)
+            Me.txtNE.Location = New System.Drawing.Point(74, 181)
             Me.txtNE.Margin = New System.Windows.Forms.Padding(1)
             Me.txtNE.MaximumValue = Nothing
             Me.txtNE.MinimumValue = Nothing
@@ -1040,7 +1040,7 @@
             Me.txtNE.OverrideMaxLength = 0
             Me.txtNE.ReadOnly = True
             Me.txtNE.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtNE.Size = New System.Drawing.Size(132, 18)
+            Me.txtNE.Size = New System.Drawing.Size(132, 14)
             Me.txtNE.TabIndex = 77
             Me.txtNE.Translatable = False
             '
@@ -1063,7 +1063,7 @@
             Me.txtRbc.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtRbc.ForeColor = System.Drawing.Color.Black
             Me.txtRbc.LinkedLabel = Nothing
-            Me.txtRbc.Location = New System.Drawing.Point(96, 271)
+            Me.txtRbc.Location = New System.Drawing.Point(74, 271)
             Me.txtRbc.Margin = New System.Windows.Forms.Padding(1)
             Me.txtRbc.MaximumValue = Nothing
             Me.txtRbc.MinimumValue = Nothing
@@ -1072,7 +1072,7 @@
             Me.txtRbc.OverrideMaxLength = 0
             Me.txtRbc.ReadOnly = True
             Me.txtRbc.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtRbc.Size = New System.Drawing.Size(132, 18)
+            Me.txtRbc.Size = New System.Drawing.Size(132, 14)
             Me.txtRbc.TabIndex = 11
             Me.txtRbc.Translatable = False
             '
@@ -1096,7 +1096,7 @@
             Me.txtMcvNv.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtMcvNv.ForeColor = System.Drawing.Color.Black
             Me.txtMcvNv.LinkedLabel = Nothing
-            Me.txtMcvNv.Location = New System.Drawing.Point(256, 316)
+            Me.txtMcvNv.Location = New System.Drawing.Point(234, 316)
             Me.txtMcvNv.Margin = New System.Windows.Forms.Padding(1)
             Me.txtMcvNv.MaximumValue = Nothing
             Me.txtMcvNv.MinimumValue = Nothing
@@ -1105,7 +1105,7 @@
             Me.txtMcvNv.OverrideMaxLength = 0
             Me.txtMcvNv.ReadOnly = True
             Me.txtMcvNv.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtMcvNv.Size = New System.Drawing.Size(133, 18)
+            Me.txtMcvNv.Size = New System.Drawing.Size(133, 14)
             Me.txtMcvNv.TabIndex = 65
             Me.txtMcvNv.Translatable = False
             '
@@ -1129,7 +1129,7 @@
             Me.txtMchNv.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtMchNv.ForeColor = System.Drawing.Color.Black
             Me.txtMchNv.LinkedLabel = Nothing
-            Me.txtMchNv.Location = New System.Drawing.Point(256, 331)
+            Me.txtMchNv.Location = New System.Drawing.Point(234, 331)
             Me.txtMchNv.Margin = New System.Windows.Forms.Padding(1)
             Me.txtMchNv.MaximumValue = Nothing
             Me.txtMchNv.MinimumValue = Nothing
@@ -1138,7 +1138,7 @@
             Me.txtMchNv.OverrideMaxLength = 0
             Me.txtMchNv.ReadOnly = True
             Me.txtMchNv.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtMchNv.Size = New System.Drawing.Size(133, 18)
+            Me.txtMchNv.Size = New System.Drawing.Size(133, 14)
             Me.txtMchNv.TabIndex = 66
             Me.txtMchNv.Translatable = False
             '
@@ -1153,7 +1153,7 @@
             Me.CLabel17.Location = New System.Drawing.Point(1, 91)
             Me.CLabel17.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel17.Name = "CLabel17"
-            Me.CLabel17.Size = New System.Drawing.Size(93, 13)
+            Me.CLabel17.Size = New System.Drawing.Size(71, 13)
             Me.CLabel17.TabIndex = 48
             Me.CLabel17.Text = "Gender"
             Me.CLabel17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -1168,10 +1168,10 @@
             Me.CLabel22.DisplayOnly = True
             Me.CLabel22.EditingMode = False
             Me.CLabel22.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.CLabel22.Location = New System.Drawing.Point(492, 31)
+            Me.CLabel22.Location = New System.Drawing.Point(488, 31)
             Me.CLabel22.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel22.Name = "CLabel22"
-            Me.CLabel22.Size = New System.Drawing.Size(86, 13)
+            Me.CLabel22.Size = New System.Drawing.Size(68, 13)
             Me.CLabel22.TabIndex = 53
             Me.CLabel22.Text = "Invoice Date"
             Me.CLabel22.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -1197,7 +1197,7 @@
             Me.txtWbcNv.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtWbcNv.ForeColor = System.Drawing.Color.Black
             Me.txtWbcNv.LinkedLabel = Nothing
-            Me.txtWbcNv.Location = New System.Drawing.Point(256, 166)
+            Me.txtWbcNv.Location = New System.Drawing.Point(234, 166)
             Me.txtWbcNv.Margin = New System.Windows.Forms.Padding(1)
             Me.txtWbcNv.MaximumValue = Nothing
             Me.txtWbcNv.MinimumValue = Nothing
@@ -1206,7 +1206,7 @@
             Me.txtWbcNv.OverrideMaxLength = 0
             Me.txtWbcNv.ReadOnly = True
             Me.txtWbcNv.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtWbcNv.Size = New System.Drawing.Size(133, 18)
+            Me.txtWbcNv.Size = New System.Drawing.Size(133, 14)
             Me.txtWbcNv.TabIndex = 57
             Me.txtWbcNv.Translatable = False
             '
@@ -1219,10 +1219,10 @@
             Me.CLabel2.DisplayOnly = True
             Me.CLabel2.EditingMode = False
             Me.CLabel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.CLabel2.Location = New System.Drawing.Point(522, 61)
+            Me.CLabel2.Location = New System.Drawing.Point(513, 61)
             Me.CLabel2.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel2.Name = "CLabel2"
-            Me.CLabel2.Size = New System.Drawing.Size(56, 13)
+            Me.CLabel2.Size = New System.Drawing.Size(43, 13)
             Me.CLabel2.TabIndex = 31
             Me.CLabel2.Text = "File No."
             Me.CLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -1236,7 +1236,7 @@
             Me.CLabel15.Dock = System.Windows.Forms.DockStyle.Fill
             Me.CLabel15.EditingMode = False
             Me.CLabel15.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.CLabel15.Location = New System.Drawing.Point(96, 136)
+            Me.CLabel15.Location = New System.Drawing.Point(74, 136)
             Me.CLabel15.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel15.Name = "CLabel15"
             Me.CLabel15.Size = New System.Drawing.Size(133, 13)
@@ -1255,7 +1255,7 @@
             Me.CLabel11.Location = New System.Drawing.Point(1, 466)
             Me.CLabel11.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel11.Name = "CLabel11"
-            Me.CLabel11.Size = New System.Drawing.Size(40, 13)
+            Me.CLabel11.Size = New System.Drawing.Size(33, 13)
             Me.CLabel11.TabIndex = 42
             Me.CLabel11.Text = "PDW"
             Me.CLabel11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -1271,7 +1271,7 @@
             Me.CLabel4.Location = New System.Drawing.Point(1, 451)
             Me.CLabel4.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel4.Name = "CLabel4"
-            Me.CLabel4.Size = New System.Drawing.Size(37, 13)
+            Me.CLabel4.Size = New System.Drawing.Size(30, 13)
             Me.CLabel4.TabIndex = 35
             Me.CLabel4.Text = "MPV"
             Me.CLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -1287,7 +1287,7 @@
             Me.CLabel14.Location = New System.Drawing.Point(1, 436)
             Me.CLabel14.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel14.Name = "CLabel14"
-            Me.CLabel14.Size = New System.Drawing.Size(35, 13)
+            Me.CLabel14.Size = New System.Drawing.Size(28, 13)
             Me.CLabel14.TabIndex = 45
             Me.CLabel14.Text = "PCT"
             Me.CLabel14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -1303,7 +1303,7 @@
             Me.CLabel13.Location = New System.Drawing.Point(1, 421)
             Me.CLabel13.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel13.Name = "CLabel13"
-            Me.CLabel13.Size = New System.Drawing.Size(34, 13)
+            Me.CLabel13.Size = New System.Drawing.Size(27, 13)
             Me.CLabel13.TabIndex = 44
             Me.CLabel13.Text = "PLT"
             Me.CLabel13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -1319,7 +1319,7 @@
             Me.CLabel5.Location = New System.Drawing.Point(1, 376)
             Me.CLabel5.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel5.Name = "CLabel5"
-            Me.CLabel5.Size = New System.Drawing.Size(65, 13)
+            Me.CLabel5.Size = New System.Drawing.Size(52, 13)
             Me.CLabel5.TabIndex = 36
             Me.CLabel5.Text = "RDW-SD"
             Me.CLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -1335,7 +1335,7 @@
             Me.CLabel8.Location = New System.Drawing.Point(1, 361)
             Me.CLabel8.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel8.Name = "CLabel8"
-            Me.CLabel8.Size = New System.Drawing.Size(64, 13)
+            Me.CLabel8.Size = New System.Drawing.Size(51, 13)
             Me.CLabel8.TabIndex = 39
             Me.CLabel8.Text = "RDW-CV"
             Me.CLabel8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -1351,7 +1351,7 @@
             Me.CLabel6.Location = New System.Drawing.Point(1, 346)
             Me.CLabel6.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel6.Name = "CLabel6"
-            Me.CLabel6.Size = New System.Drawing.Size(47, 13)
+            Me.CLabel6.Size = New System.Drawing.Size(38, 13)
             Me.CLabel6.TabIndex = 37
             Me.CLabel6.Text = "MCHC"
             Me.CLabel6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -1367,7 +1367,7 @@
             Me.CLabel7.Location = New System.Drawing.Point(1, 331)
             Me.CLabel7.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel7.Name = "CLabel7"
-            Me.CLabel7.Size = New System.Drawing.Size(43, 13)
+            Me.CLabel7.Size = New System.Drawing.Size(35, 13)
             Me.CLabel7.TabIndex = 38
             Me.CLabel7.Text = "MCH"
             Me.CLabel7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -1383,7 +1383,7 @@
             Me.CLabel9.Location = New System.Drawing.Point(1, 316)
             Me.CLabel9.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel9.Name = "CLabel9"
-            Me.CLabel9.Size = New System.Drawing.Size(37, 13)
+            Me.CLabel9.Size = New System.Drawing.Size(30, 13)
             Me.CLabel9.TabIndex = 40
             Me.CLabel9.Text = "MCV"
             Me.CLabel9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -1399,7 +1399,7 @@
             Me.CLabel12.Location = New System.Drawing.Point(1, 271)
             Me.CLabel12.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel12.Name = "CLabel12"
-            Me.CLabel12.Size = New System.Drawing.Size(36, 13)
+            Me.CLabel12.Size = New System.Drawing.Size(29, 13)
             Me.CLabel12.TabIndex = 43
             Me.CLabel12.Text = "RBC"
             Me.CLabel12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -1415,7 +1415,7 @@
             Me.CLabel3.Location = New System.Drawing.Point(1, 301)
             Me.CLabel3.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel3.Name = "CLabel3"
-            Me.CLabel3.Size = New System.Drawing.Size(36, 13)
+            Me.CLabel3.Size = New System.Drawing.Size(29, 13)
             Me.CLabel3.TabIndex = 34
             Me.CLabel3.Text = "HCT"
             Me.CLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -1431,7 +1431,7 @@
             Me.lblRegistrationCode.Location = New System.Drawing.Point(1, 286)
             Me.lblRegistrationCode.Margin = New System.Windows.Forms.Padding(1)
             Me.lblRegistrationCode.Name = "lblRegistrationCode"
-            Me.lblRegistrationCode.Size = New System.Drawing.Size(38, 13)
+            Me.lblRegistrationCode.Size = New System.Drawing.Size(30, 13)
             Me.lblRegistrationCode.TabIndex = 33
             Me.lblRegistrationCode.Text = "HGB"
             Me.lblRegistrationCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -1456,7 +1456,7 @@
             Me.txtHgb.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtHgb.ForeColor = System.Drawing.Color.Black
             Me.txtHgb.LinkedLabel = Nothing
-            Me.txtHgb.Location = New System.Drawing.Point(96, 286)
+            Me.txtHgb.Location = New System.Drawing.Point(74, 286)
             Me.txtHgb.Margin = New System.Windows.Forms.Padding(1)
             Me.txtHgb.MaximumValue = Nothing
             Me.txtHgb.MinimumValue = Nothing
@@ -1465,7 +1465,7 @@
             Me.txtHgb.OverrideMaxLength = 0
             Me.txtHgb.ReadOnly = True
             Me.txtHgb.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtHgb.Size = New System.Drawing.Size(132, 18)
+            Me.txtHgb.Size = New System.Drawing.Size(132, 14)
             Me.txtHgb.TabIndex = 13
             Me.txtHgb.Translatable = False
             '
@@ -1488,7 +1488,7 @@
             Me.txtWbc.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtWbc.ForeColor = System.Drawing.Color.Black
             Me.txtWbc.LinkedLabel = Nothing
-            Me.txtWbc.Location = New System.Drawing.Point(96, 166)
+            Me.txtWbc.Location = New System.Drawing.Point(74, 166)
             Me.txtWbc.Margin = New System.Windows.Forms.Padding(1)
             Me.txtWbc.MaximumValue = Nothing
             Me.txtWbc.MinimumValue = Nothing
@@ -1497,7 +1497,7 @@
             Me.txtWbc.OverrideMaxLength = 0
             Me.txtWbc.ReadOnly = True
             Me.txtWbc.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtWbc.Size = New System.Drawing.Size(132, 18)
+            Me.txtWbc.Size = New System.Drawing.Size(132, 14)
             Me.txtWbc.TabIndex = 5
             Me.txtWbc.Translatable = False
             '
@@ -1520,7 +1520,7 @@
             Me.txtMO.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtMO.ForeColor = System.Drawing.Color.Black
             Me.txtMO.LinkedLabel = Nothing
-            Me.txtMO.Location = New System.Drawing.Point(96, 211)
+            Me.txtMO.Location = New System.Drawing.Point(74, 211)
             Me.txtMO.Margin = New System.Windows.Forms.Padding(1)
             Me.txtMO.MaximumValue = Nothing
             Me.txtMO.MinimumValue = Nothing
@@ -1529,7 +1529,7 @@
             Me.txtMO.OverrideMaxLength = 0
             Me.txtMO.ReadOnly = True
             Me.txtMO.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtMO.Size = New System.Drawing.Size(132, 18)
+            Me.txtMO.Size = New System.Drawing.Size(132, 14)
             Me.txtMO.TabIndex = 8
             Me.txtMO.Translatable = False
             '
@@ -1543,7 +1543,7 @@
             Me.CLabel1.Location = New System.Drawing.Point(1, 166)
             Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel1.Name = "CLabel1"
-            Me.CLabel1.Size = New System.Drawing.Size(39, 13)
+            Me.CLabel1.Size = New System.Drawing.Size(32, 13)
             Me.CLabel1.TabIndex = 11
             Me.CLabel1.Text = "WBC"
             Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -1559,7 +1559,7 @@
             Me.lblUnitOfStrength.Location = New System.Drawing.Point(1, 181)
             Me.lblUnitOfStrength.Margin = New System.Windows.Forms.Padding(1)
             Me.lblUnitOfStrength.Name = "lblUnitOfStrength"
-            Me.lblUnitOfStrength.Size = New System.Drawing.Size(27, 13)
+            Me.lblUnitOfStrength.Size = New System.Drawing.Size(22, 13)
             Me.lblUnitOfStrength.TabIndex = 17
             Me.lblUnitOfStrength.Text = "NE"
             Me.lblUnitOfStrength.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -1575,7 +1575,7 @@
             Me.lblDosageForm.Location = New System.Drawing.Point(1, 196)
             Me.lblDosageForm.Margin = New System.Windows.Forms.Padding(1)
             Me.lblDosageForm.Name = "lblDosageForm"
-            Me.lblDosageForm.Size = New System.Drawing.Size(25, 13)
+            Me.lblDosageForm.Size = New System.Drawing.Size(20, 13)
             Me.lblDosageForm.TabIndex = 29
             Me.lblDosageForm.Text = "LY"
             Me.lblDosageForm.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -1591,7 +1591,7 @@
             Me.lblVolume.Location = New System.Drawing.Point(1, 211)
             Me.lblVolume.Margin = New System.Windows.Forms.Padding(1)
             Me.lblVolume.Name = "lblVolume"
-            Me.lblVolume.Size = New System.Drawing.Size(30, 13)
+            Me.lblVolume.Size = New System.Drawing.Size(24, 13)
             Me.lblVolume.TabIndex = 19
             Me.lblVolume.Text = "MO"
             Me.lblVolume.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -1607,7 +1607,7 @@
             Me.lblUnitOfVolume.Location = New System.Drawing.Point(1, 226)
             Me.lblUnitOfVolume.Margin = New System.Windows.Forms.Padding(1)
             Me.lblUnitOfVolume.Name = "lblUnitOfVolume"
-            Me.lblUnitOfVolume.Size = New System.Drawing.Size(28, 13)
+            Me.lblUnitOfVolume.Size = New System.Drawing.Size(22, 13)
             Me.lblUnitOfVolume.TabIndex = 21
             Me.lblUnitOfVolume.Text = "EO"
             Me.lblUnitOfVolume.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -1623,7 +1623,7 @@
             Me.lblPackageType.Location = New System.Drawing.Point(1, 241)
             Me.lblPackageType.Margin = New System.Windows.Forms.Padding(1)
             Me.lblPackageType.Name = "lblPackageType"
-            Me.lblPackageType.Size = New System.Drawing.Size(26, 13)
+            Me.lblPackageType.Size = New System.Drawing.Size(21, 13)
             Me.lblPackageType.TabIndex = 25
             Me.lblPackageType.Text = "BA"
             Me.lblPackageType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -1648,7 +1648,7 @@
             Me.txtInvoiceTypeDisplay.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtInvoiceTypeDisplay.ForeColor = System.Drawing.Color.Black
             Me.txtInvoiceTypeDisplay.LinkedLabel = Nothing
-            Me.txtInvoiceTypeDisplay.Location = New System.Drawing.Point(95, 15)
+            Me.txtInvoiceTypeDisplay.Location = New System.Drawing.Point(73, 15)
             Me.txtInvoiceTypeDisplay.Margin = New System.Windows.Forms.Padding(0)
             Me.txtInvoiceTypeDisplay.MaximumValue = Nothing
             Me.txtInvoiceTypeDisplay.MinimumValue = Nothing
@@ -1657,7 +1657,7 @@
             Me.txtInvoiceTypeDisplay.OverrideMaxLength = 0
             Me.txtInvoiceTypeDisplay.ReadOnly = True
             Me.txtInvoiceTypeDisplay.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtInvoiceTypeDisplay.Size = New System.Drawing.Size(133, 16)
+            Me.txtInvoiceTypeDisplay.Size = New System.Drawing.Size(133, 13)
             Me.txtInvoiceTypeDisplay.TabIndex = 1
             Me.txtInvoiceTypeDisplay.Translatable = False
             '
@@ -1671,7 +1671,7 @@
             Me.lblCode.Location = New System.Drawing.Point(1, 16)
             Me.lblCode.Margin = New System.Windows.Forms.Padding(1)
             Me.lblCode.Name = "lblCode"
-            Me.lblCode.Size = New System.Drawing.Size(88, 13)
+            Me.lblCode.Size = New System.Drawing.Size(69, 13)
             Me.lblCode.TabIndex = 2
             Me.lblCode.Text = "Invoice Type"
             Me.lblCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -1687,7 +1687,7 @@
             Me.lblIdNo.Location = New System.Drawing.Point(1, 1)
             Me.lblIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.lblIdNo.Name = "lblIdNo"
-            Me.lblIdNo.Size = New System.Drawing.Size(78, 13)
+            Me.lblIdNo.Size = New System.Drawing.Size(62, 13)
             Me.lblIdNo.TabIndex = 1
             Me.lblIdNo.Text = "Invoice No."
             Me.lblIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -1710,7 +1710,7 @@
             Me.txtInvoiceNoF.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtInvoiceNoF.ForeColor = System.Drawing.Color.Black
             Me.txtInvoiceNoF.LinkedLabel = Nothing
-            Me.txtInvoiceNoF.Location = New System.Drawing.Point(95, 0)
+            Me.txtInvoiceNoF.Location = New System.Drawing.Point(73, 0)
             Me.txtInvoiceNoF.Margin = New System.Windows.Forms.Padding(0)
             Me.txtInvoiceNoF.MaximumValue = Nothing
             Me.txtInvoiceNoF.MinimumValue = Nothing
@@ -1718,7 +1718,7 @@
             Me.txtInvoiceNoF.OldValue = ""
             Me.txtInvoiceNoF.OverrideMaxLength = 0
             Me.txtInvoiceNoF.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtInvoiceNoF.Size = New System.Drawing.Size(133, 16)
+            Me.txtInvoiceNoF.Size = New System.Drawing.Size(133, 13)
             Me.txtInvoiceNoF.TabIndex = 0
             Me.txtInvoiceNoF.Translatable = False
             '
@@ -1741,7 +1741,7 @@
             Me.txtMORNv.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtMORNv.ForeColor = System.Drawing.Color.Black
             Me.txtMORNv.LinkedLabel = Nothing
-            Me.txtMORNv.Location = New System.Drawing.Point(580, 211)
+            Me.txtMORNv.Location = New System.Drawing.Point(558, 211)
             Me.txtMORNv.Margin = New System.Windows.Forms.Padding(1)
             Me.txtMORNv.MaximumValue = Nothing
             Me.txtMORNv.MinimumValue = Nothing
@@ -1750,7 +1750,7 @@
             Me.txtMORNv.OverrideMaxLength = 0
             Me.txtMORNv.ReadOnly = True
             Me.txtMORNv.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtMORNv.Size = New System.Drawing.Size(133, 18)
+            Me.txtMORNv.Size = New System.Drawing.Size(133, 14)
             Me.txtMORNv.TabIndex = 69
             Me.txtMORNv.Translatable = False
             '
@@ -1773,7 +1773,7 @@
             Me.txtMchR.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtMchR.ForeColor = System.Drawing.Color.Black
             Me.txtMchR.LinkedLabel = Nothing
-            Me.txtMchR.Location = New System.Drawing.Point(413, 331)
+            Me.txtMchR.Location = New System.Drawing.Point(391, 331)
             Me.txtMchR.Margin = New System.Windows.Forms.Padding(1)
             Me.txtMchR.MaximumValue = Nothing
             Me.txtMchR.MinimumValue = Nothing
@@ -1782,7 +1782,7 @@
             Me.txtMchR.OverrideMaxLength = 0
             Me.txtMchR.ReadOnly = True
             Me.txtMchR.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtMchR.Size = New System.Drawing.Size(140, 18)
+            Me.txtMchR.Size = New System.Drawing.Size(140, 14)
             Me.txtMchR.TabIndex = 70
             Me.txtMchR.Translatable = False
             '
@@ -1806,7 +1806,7 @@
             Me.txtRbcNv.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtRbcNv.ForeColor = System.Drawing.Color.Black
             Me.txtRbcNv.LinkedLabel = Nothing
-            Me.txtRbcNv.Location = New System.Drawing.Point(256, 271)
+            Me.txtRbcNv.Location = New System.Drawing.Point(234, 271)
             Me.txtRbcNv.Margin = New System.Windows.Forms.Padding(1)
             Me.txtRbcNv.MaximumValue = Nothing
             Me.txtRbcNv.MinimumValue = Nothing
@@ -1815,7 +1815,7 @@
             Me.txtRbcNv.OverrideMaxLength = 0
             Me.txtRbcNv.ReadOnly = True
             Me.txtRbcNv.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtRbcNv.Size = New System.Drawing.Size(133, 18)
+            Me.txtRbcNv.Size = New System.Drawing.Size(133, 14)
             Me.txtRbcNv.TabIndex = 71
             Me.txtRbcNv.Translatable = False
             '
@@ -1838,7 +1838,7 @@
             Me.txtHctR.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtHctR.ForeColor = System.Drawing.Color.Black
             Me.txtHctR.LinkedLabel = Nothing
-            Me.txtHctR.Location = New System.Drawing.Point(413, 301)
+            Me.txtHctR.Location = New System.Drawing.Point(391, 301)
             Me.txtHctR.Margin = New System.Windows.Forms.Padding(1)
             Me.txtHctR.MaximumValue = Nothing
             Me.txtHctR.MinimumValue = Nothing
@@ -1847,7 +1847,7 @@
             Me.txtHctR.OverrideMaxLength = 0
             Me.txtHctR.ReadOnly = True
             Me.txtHctR.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtHctR.Size = New System.Drawing.Size(140, 18)
+            Me.txtHctR.Size = New System.Drawing.Size(140, 14)
             Me.txtHctR.TabIndex = 72
             Me.txtHctR.Translatable = False
             '
@@ -1870,7 +1870,7 @@
             Me.txtEORNv.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtEORNv.ForeColor = System.Drawing.Color.Black
             Me.txtEORNv.LinkedLabel = Nothing
-            Me.txtEORNv.Location = New System.Drawing.Point(580, 226)
+            Me.txtEORNv.Location = New System.Drawing.Point(558, 226)
             Me.txtEORNv.Margin = New System.Windows.Forms.Padding(1)
             Me.txtEORNv.MaximumValue = Nothing
             Me.txtEORNv.MinimumValue = Nothing
@@ -1879,7 +1879,7 @@
             Me.txtEORNv.OverrideMaxLength = 0
             Me.txtEORNv.ReadOnly = True
             Me.txtEORNv.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtEORNv.Size = New System.Drawing.Size(133, 18)
+            Me.txtEORNv.Size = New System.Drawing.Size(133, 14)
             Me.txtEORNv.TabIndex = 73
             Me.txtEORNv.Translatable = False
             '
@@ -1903,7 +1903,7 @@
             Me.txtRdwsdNv.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtRdwsdNv.ForeColor = System.Drawing.Color.Black
             Me.txtRdwsdNv.LinkedLabel = Nothing
-            Me.txtRdwsdNv.Location = New System.Drawing.Point(256, 376)
+            Me.txtRdwsdNv.Location = New System.Drawing.Point(234, 376)
             Me.txtRdwsdNv.Margin = New System.Windows.Forms.Padding(1)
             Me.txtRdwsdNv.MaximumValue = Nothing
             Me.txtRdwsdNv.MinimumValue = Nothing
@@ -1912,7 +1912,7 @@
             Me.txtRdwsdNv.OverrideMaxLength = 0
             Me.txtRdwsdNv.ReadOnly = True
             Me.txtRdwsdNv.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtRdwsdNv.Size = New System.Drawing.Size(133, 18)
+            Me.txtRdwsdNv.Size = New System.Drawing.Size(133, 14)
             Me.txtRdwsdNv.TabIndex = 75
             Me.txtRdwsdNv.Translatable = False
             '
@@ -1935,7 +1935,7 @@
             Me.txtBARNv.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtBARNv.ForeColor = System.Drawing.Color.Black
             Me.txtBARNv.LinkedLabel = Nothing
-            Me.txtBARNv.Location = New System.Drawing.Point(580, 241)
+            Me.txtBARNv.Location = New System.Drawing.Point(558, 241)
             Me.txtBARNv.Margin = New System.Windows.Forms.Padding(1)
             Me.txtBARNv.MaximumValue = Nothing
             Me.txtBARNv.MinimumValue = Nothing
@@ -1944,7 +1944,7 @@
             Me.txtBARNv.OverrideMaxLength = 0
             Me.txtBARNv.ReadOnly = True
             Me.txtBARNv.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtBARNv.Size = New System.Drawing.Size(133, 18)
+            Me.txtBARNv.Size = New System.Drawing.Size(133, 14)
             Me.txtBARNv.TabIndex = 78
             Me.txtBARNv.Translatable = False
             '
@@ -1967,7 +1967,7 @@
             Me.txtLYRNv.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtLYRNv.ForeColor = System.Drawing.Color.Black
             Me.txtLYRNv.LinkedLabel = Nothing
-            Me.txtLYRNv.Location = New System.Drawing.Point(580, 196)
+            Me.txtLYRNv.Location = New System.Drawing.Point(558, 196)
             Me.txtLYRNv.Margin = New System.Windows.Forms.Padding(1)
             Me.txtLYRNv.MaximumValue = Nothing
             Me.txtLYRNv.MinimumValue = Nothing
@@ -1976,7 +1976,7 @@
             Me.txtLYRNv.OverrideMaxLength = 0
             Me.txtLYRNv.ReadOnly = True
             Me.txtLYRNv.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtLYRNv.Size = New System.Drawing.Size(133, 18)
+            Me.txtLYRNv.Size = New System.Drawing.Size(133, 14)
             Me.txtLYRNv.TabIndex = 79
             Me.txtLYRNv.Translatable = False
             '
@@ -1999,7 +1999,7 @@
             Me.txtMcvR.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtMcvR.ForeColor = System.Drawing.Color.Black
             Me.txtMcvR.LinkedLabel = Nothing
-            Me.txtMcvR.Location = New System.Drawing.Point(413, 316)
+            Me.txtMcvR.Location = New System.Drawing.Point(391, 316)
             Me.txtMcvR.Margin = New System.Windows.Forms.Padding(1)
             Me.txtMcvR.MaximumValue = Nothing
             Me.txtMcvR.MinimumValue = Nothing
@@ -2008,7 +2008,7 @@
             Me.txtMcvR.OverrideMaxLength = 0
             Me.txtMcvR.ReadOnly = True
             Me.txtMcvR.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtMcvR.Size = New System.Drawing.Size(140, 18)
+            Me.txtMcvR.Size = New System.Drawing.Size(140, 14)
             Me.txtMcvR.TabIndex = 95
             Me.txtMcvR.Translatable = False
             '
@@ -2032,7 +2032,7 @@
             Me.txtBANv.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtBANv.ForeColor = System.Drawing.Color.Black
             Me.txtBANv.LinkedLabel = Nothing
-            Me.txtBANv.Location = New System.Drawing.Point(256, 241)
+            Me.txtBANv.Location = New System.Drawing.Point(234, 241)
             Me.txtBANv.Margin = New System.Windows.Forms.Padding(1)
             Me.txtBANv.MaximumValue = Nothing
             Me.txtBANv.MinimumValue = Nothing
@@ -2041,7 +2041,7 @@
             Me.txtBANv.OverrideMaxLength = 0
             Me.txtBANv.ReadOnly = True
             Me.txtBANv.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtBANv.Size = New System.Drawing.Size(133, 18)
+            Me.txtBANv.Size = New System.Drawing.Size(133, 14)
             Me.txtBANv.TabIndex = 98
             Me.txtBANv.Translatable = False
             '
@@ -2064,7 +2064,7 @@
             Me.txtEOR.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtEOR.ForeColor = System.Drawing.Color.Black
             Me.txtEOR.LinkedLabel = Nothing
-            Me.txtEOR.Location = New System.Drawing.Point(413, 226)
+            Me.txtEOR.Location = New System.Drawing.Point(391, 226)
             Me.txtEOR.Margin = New System.Windows.Forms.Padding(1)
             Me.txtEOR.MaximumValue = Nothing
             Me.txtEOR.MinimumValue = Nothing
@@ -2073,7 +2073,7 @@
             Me.txtEOR.OverrideMaxLength = 0
             Me.txtEOR.ReadOnly = True
             Me.txtEOR.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtEOR.Size = New System.Drawing.Size(140, 18)
+            Me.txtEOR.Size = New System.Drawing.Size(140, 14)
             Me.txtEOR.TabIndex = 102
             Me.txtEOR.Translatable = False
             '
@@ -2096,7 +2096,7 @@
             Me.txtMOR.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtMOR.ForeColor = System.Drawing.Color.Black
             Me.txtMOR.LinkedLabel = Nothing
-            Me.txtMOR.Location = New System.Drawing.Point(413, 211)
+            Me.txtMOR.Location = New System.Drawing.Point(391, 211)
             Me.txtMOR.Margin = New System.Windows.Forms.Padding(1)
             Me.txtMOR.MaximumValue = Nothing
             Me.txtMOR.MinimumValue = Nothing
@@ -2105,7 +2105,7 @@
             Me.txtMOR.OverrideMaxLength = 0
             Me.txtMOR.ReadOnly = True
             Me.txtMOR.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtMOR.Size = New System.Drawing.Size(140, 18)
+            Me.txtMOR.Size = New System.Drawing.Size(140, 14)
             Me.txtMOR.TabIndex = 104
             Me.txtMOR.Translatable = False
             '
@@ -2129,7 +2129,7 @@
             Me.txtEONv.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtEONv.ForeColor = System.Drawing.Color.Black
             Me.txtEONv.LinkedLabel = Nothing
-            Me.txtEONv.Location = New System.Drawing.Point(256, 226)
+            Me.txtEONv.Location = New System.Drawing.Point(234, 226)
             Me.txtEONv.Margin = New System.Windows.Forms.Padding(1)
             Me.txtEONv.MaximumValue = Nothing
             Me.txtEONv.MinimumValue = Nothing
@@ -2138,7 +2138,7 @@
             Me.txtEONv.OverrideMaxLength = 0
             Me.txtEONv.ReadOnly = True
             Me.txtEONv.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtEONv.Size = New System.Drawing.Size(133, 18)
+            Me.txtEONv.Size = New System.Drawing.Size(133, 14)
             Me.txtEONv.TabIndex = 105
             Me.txtEONv.Translatable = False
             '
@@ -2161,7 +2161,7 @@
             Me.txtRbcR.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtRbcR.ForeColor = System.Drawing.Color.Black
             Me.txtRbcR.LinkedLabel = Nothing
-            Me.txtRbcR.Location = New System.Drawing.Point(413, 271)
+            Me.txtRbcR.Location = New System.Drawing.Point(391, 271)
             Me.txtRbcR.Margin = New System.Windows.Forms.Padding(1)
             Me.txtRbcR.MaximumValue = Nothing
             Me.txtRbcR.MinimumValue = Nothing
@@ -2170,7 +2170,7 @@
             Me.txtRbcR.OverrideMaxLength = 0
             Me.txtRbcR.ReadOnly = True
             Me.txtRbcR.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtRbcR.Size = New System.Drawing.Size(140, 18)
+            Me.txtRbcR.Size = New System.Drawing.Size(140, 14)
             Me.txtRbcR.TabIndex = 109
             Me.txtRbcR.Translatable = False
             '
@@ -2193,7 +2193,7 @@
             Me.txtHgbR.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtHgbR.ForeColor = System.Drawing.Color.Black
             Me.txtHgbR.LinkedLabel = Nothing
-            Me.txtHgbR.Location = New System.Drawing.Point(413, 286)
+            Me.txtHgbR.Location = New System.Drawing.Point(391, 286)
             Me.txtHgbR.Margin = New System.Windows.Forms.Padding(1)
             Me.txtHgbR.MaximumValue = Nothing
             Me.txtHgbR.MinimumValue = Nothing
@@ -2202,7 +2202,7 @@
             Me.txtHgbR.OverrideMaxLength = 0
             Me.txtHgbR.ReadOnly = True
             Me.txtHgbR.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtHgbR.Size = New System.Drawing.Size(140, 18)
+            Me.txtHgbR.Size = New System.Drawing.Size(140, 14)
             Me.txtHgbR.TabIndex = 111
             Me.txtHgbR.Translatable = False
             '
@@ -2395,7 +2395,7 @@
             Me.CLabel20.Dock = System.Windows.Forms.DockStyle.Fill
             Me.CLabel20.EditingMode = False
             Me.CLabel20.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.CLabel20.Location = New System.Drawing.Point(413, 1)
+            Me.CLabel20.Location = New System.Drawing.Point(391, 1)
             Me.CLabel20.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel20.Name = "CLabel20"
             Me.CLabel20.Size = New System.Drawing.Size(165, 13)
@@ -2425,7 +2425,7 @@
             Me.txtRemarks.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtRemarks.ForeColor = System.Drawing.Color.Black
             Me.txtRemarks.LinkedLabel = Nothing
-            Me.txtRemarks.Location = New System.Drawing.Point(96, 481)
+            Me.txtRemarks.Location = New System.Drawing.Point(74, 481)
             Me.txtRemarks.Margin = New System.Windows.Forms.Padding(1)
             Me.txtRemarks.MaximumValue = Nothing
             Me.txtRemarks.MinimumValue = Nothing
@@ -2435,7 +2435,7 @@
             Me.txtRemarks.OverrideMaxLength = 0
             Me.txtRemarks.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
             Me.txtRemarks.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtRemarks.Size = New System.Drawing.Size(619, 58)
+            Me.txtRemarks.Size = New System.Drawing.Size(641, 58)
             Me.txtRemarks.TabIndex = 155
             Me.txtRemarks.Translatable = False
             '
@@ -2447,10 +2447,10 @@
             Me.CLabel25.Dock = System.Windows.Forms.DockStyle.Fill
             Me.CLabel25.EditingMode = False
             Me.CLabel25.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.CLabel25.Location = New System.Drawing.Point(580, 136)
+            Me.CLabel25.Location = New System.Drawing.Point(558, 136)
             Me.CLabel25.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel25.Name = "CLabel25"
-            Me.CLabel25.Size = New System.Drawing.Size(135, 13)
+            Me.CLabel25.Size = New System.Drawing.Size(157, 13)
             Me.CLabel25.TabIndex = 154
             Me.CLabel25.Text = "Normal Values"
             Me.CLabel25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -2465,10 +2465,10 @@
             Me.CLabel23.Dock = System.Windows.Forms.DockStyle.Fill
             Me.CLabel23.EditingMode = False
             Me.CLabel23.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.CLabel23.Location = New System.Drawing.Point(413, 121)
+            Me.CLabel23.Location = New System.Drawing.Point(391, 121)
             Me.CLabel23.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel23.Name = "CLabel23"
-            Me.CLabel23.Size = New System.Drawing.Size(302, 13)
+            Me.CLabel23.Size = New System.Drawing.Size(324, 13)
             Me.CLabel23.TabIndex = 152
             Me.CLabel23.Text = "Reported"
             Me.CLabel23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -2484,7 +2484,7 @@
             Me.CLabel19.Location = New System.Drawing.Point(1, 481)
             Me.CLabel19.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel19.Name = "CLabel19"
-            Me.CLabel19.Size = New System.Drawing.Size(64, 17)
+            Me.CLabel19.Size = New System.Drawing.Size(49, 13)
             Me.CLabel19.TabIndex = 50
             Me.CLabel19.Text = "Remarks"
             Me.CLabel19.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -2500,7 +2500,7 @@
             Me.CLabel21.Location = New System.Drawing.Point(1, 46)
             Me.CLabel21.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel21.Name = "CLabel21"
-            Me.CLabel21.Size = New System.Drawing.Size(93, 13)
+            Me.CLabel21.Size = New System.Drawing.Size(71, 13)
             Me.CLabel21.TabIndex = 52
             Me.CLabel21.Text = "Patient Name"
             Me.CLabel21.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -2525,7 +2525,7 @@
             Me.txtMchcR.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtMchcR.ForeColor = System.Drawing.Color.Black
             Me.txtMchcR.LinkedLabel = Nothing
-            Me.txtMchcR.Location = New System.Drawing.Point(413, 346)
+            Me.txtMchcR.Location = New System.Drawing.Point(391, 346)
             Me.txtMchcR.Margin = New System.Windows.Forms.Padding(1)
             Me.txtMchcR.MaximumValue = Nothing
             Me.txtMchcR.MinimumValue = Nothing
@@ -2534,7 +2534,7 @@
             Me.txtMchcR.OverrideMaxLength = 0
             Me.txtMchcR.ReadOnly = True
             Me.txtMchcR.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtMchcR.Size = New System.Drawing.Size(140, 18)
+            Me.txtMchcR.Size = New System.Drawing.Size(140, 14)
             Me.txtMchcR.TabIndex = 124
             Me.txtMchcR.Translatable = False
             '
@@ -2557,7 +2557,7 @@
             Me.txtRdwcvR.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtRdwcvR.ForeColor = System.Drawing.Color.Black
             Me.txtRdwcvR.LinkedLabel = Nothing
-            Me.txtRdwcvR.Location = New System.Drawing.Point(413, 361)
+            Me.txtRdwcvR.Location = New System.Drawing.Point(391, 361)
             Me.txtRdwcvR.Margin = New System.Windows.Forms.Padding(1)
             Me.txtRdwcvR.MaximumValue = Nothing
             Me.txtRdwcvR.MinimumValue = Nothing
@@ -2566,7 +2566,7 @@
             Me.txtRdwcvR.OverrideMaxLength = 0
             Me.txtRdwcvR.ReadOnly = True
             Me.txtRdwcvR.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtRdwcvR.Size = New System.Drawing.Size(140, 18)
+            Me.txtRdwcvR.Size = New System.Drawing.Size(140, 14)
             Me.txtRdwcvR.TabIndex = 127
             Me.txtRdwcvR.Translatable = False
             '
@@ -2589,7 +2589,7 @@
             Me.txtRdwsdR.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtRdwsdR.ForeColor = System.Drawing.Color.Black
             Me.txtRdwsdR.LinkedLabel = Nothing
-            Me.txtRdwsdR.Location = New System.Drawing.Point(413, 376)
+            Me.txtRdwsdR.Location = New System.Drawing.Point(391, 376)
             Me.txtRdwsdR.Margin = New System.Windows.Forms.Padding(1)
             Me.txtRdwsdR.MaximumValue = Nothing
             Me.txtRdwsdR.MinimumValue = Nothing
@@ -2598,7 +2598,7 @@
             Me.txtRdwsdR.OverrideMaxLength = 0
             Me.txtRdwsdR.ReadOnly = True
             Me.txtRdwsdR.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtRdwsdR.Size = New System.Drawing.Size(140, 18)
+            Me.txtRdwsdR.Size = New System.Drawing.Size(140, 14)
             Me.txtRdwsdR.TabIndex = 119
             Me.txtRdwsdR.Translatable = False
             '
@@ -2621,7 +2621,7 @@
             Me.txtPltR.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtPltR.ForeColor = System.Drawing.Color.Black
             Me.txtPltR.LinkedLabel = Nothing
-            Me.txtPltR.Location = New System.Drawing.Point(413, 421)
+            Me.txtPltR.Location = New System.Drawing.Point(391, 421)
             Me.txtPltR.Margin = New System.Windows.Forms.Padding(1)
             Me.txtPltR.MaximumValue = Nothing
             Me.txtPltR.MinimumValue = Nothing
@@ -2630,7 +2630,7 @@
             Me.txtPltR.OverrideMaxLength = 0
             Me.txtPltR.ReadOnly = True
             Me.txtPltR.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtPltR.Size = New System.Drawing.Size(140, 18)
+            Me.txtPltR.Size = New System.Drawing.Size(140, 14)
             Me.txtPltR.TabIndex = 120
             Me.txtPltR.Translatable = False
             '
@@ -2653,7 +2653,7 @@
             Me.txtPctR.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtPctR.ForeColor = System.Drawing.Color.Black
             Me.txtPctR.LinkedLabel = Nothing
-            Me.txtPctR.Location = New System.Drawing.Point(413, 436)
+            Me.txtPctR.Location = New System.Drawing.Point(391, 436)
             Me.txtPctR.Margin = New System.Windows.Forms.Padding(1)
             Me.txtPctR.MaximumValue = Nothing
             Me.txtPctR.MinimumValue = Nothing
@@ -2662,7 +2662,7 @@
             Me.txtPctR.OverrideMaxLength = 0
             Me.txtPctR.ReadOnly = True
             Me.txtPctR.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtPctR.Size = New System.Drawing.Size(140, 18)
+            Me.txtPctR.Size = New System.Drawing.Size(140, 14)
             Me.txtPctR.TabIndex = 122
             Me.txtPctR.Translatable = False
             '
@@ -2685,7 +2685,7 @@
             Me.txtMpvR.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtMpvR.ForeColor = System.Drawing.Color.Black
             Me.txtMpvR.LinkedLabel = Nothing
-            Me.txtMpvR.Location = New System.Drawing.Point(413, 451)
+            Me.txtMpvR.Location = New System.Drawing.Point(391, 451)
             Me.txtMpvR.Margin = New System.Windows.Forms.Padding(1)
             Me.txtMpvR.MaximumValue = Nothing
             Me.txtMpvR.MinimumValue = Nothing
@@ -2694,7 +2694,7 @@
             Me.txtMpvR.OverrideMaxLength = 0
             Me.txtMpvR.ReadOnly = True
             Me.txtMpvR.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtMpvR.Size = New System.Drawing.Size(140, 18)
+            Me.txtMpvR.Size = New System.Drawing.Size(140, 14)
             Me.txtMpvR.TabIndex = 126
             Me.txtMpvR.Translatable = False
             '
@@ -2717,7 +2717,7 @@
             Me.txtPdwR.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtPdwR.ForeColor = System.Drawing.Color.Black
             Me.txtPdwR.LinkedLabel = Nothing
-            Me.txtPdwR.Location = New System.Drawing.Point(413, 466)
+            Me.txtPdwR.Location = New System.Drawing.Point(391, 466)
             Me.txtPdwR.Margin = New System.Windows.Forms.Padding(1)
             Me.txtPdwR.MaximumValue = Nothing
             Me.txtPdwR.MinimumValue = Nothing
@@ -2726,7 +2726,7 @@
             Me.txtPdwR.OverrideMaxLength = 0
             Me.txtPdwR.ReadOnly = True
             Me.txtPdwR.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtPdwR.Size = New System.Drawing.Size(140, 18)
+            Me.txtPdwR.Size = New System.Drawing.Size(140, 14)
             Me.txtPdwR.TabIndex = 121
             Me.txtPdwR.Translatable = False
             '
@@ -2749,7 +2749,7 @@
             Me.txtRbcRNv.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtRbcRNv.ForeColor = System.Drawing.Color.Black
             Me.txtRbcRNv.LinkedLabel = Nothing
-            Me.txtRbcRNv.Location = New System.Drawing.Point(580, 271)
+            Me.txtRbcRNv.Location = New System.Drawing.Point(558, 271)
             Me.txtRbcRNv.Margin = New System.Windows.Forms.Padding(1)
             Me.txtRbcRNv.MaximumValue = Nothing
             Me.txtRbcRNv.MinimumValue = Nothing
@@ -2758,7 +2758,7 @@
             Me.txtRbcRNv.OverrideMaxLength = 0
             Me.txtRbcRNv.ReadOnly = True
             Me.txtRbcRNv.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtRbcRNv.Size = New System.Drawing.Size(133, 18)
+            Me.txtRbcRNv.Size = New System.Drawing.Size(133, 14)
             Me.txtRbcRNv.TabIndex = 129
             Me.txtRbcRNv.Translatable = False
             '
@@ -2781,7 +2781,7 @@
             Me.txtHgbRNv.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtHgbRNv.ForeColor = System.Drawing.Color.Black
             Me.txtHgbRNv.LinkedLabel = Nothing
-            Me.txtHgbRNv.Location = New System.Drawing.Point(580, 286)
+            Me.txtHgbRNv.Location = New System.Drawing.Point(558, 286)
             Me.txtHgbRNv.Margin = New System.Windows.Forms.Padding(1)
             Me.txtHgbRNv.MaximumValue = Nothing
             Me.txtHgbRNv.MinimumValue = Nothing
@@ -2790,7 +2790,7 @@
             Me.txtHgbRNv.OverrideMaxLength = 0
             Me.txtHgbRNv.ReadOnly = True
             Me.txtHgbRNv.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtHgbRNv.Size = New System.Drawing.Size(133, 18)
+            Me.txtHgbRNv.Size = New System.Drawing.Size(133, 14)
             Me.txtHgbRNv.TabIndex = 132
             Me.txtHgbRNv.Translatable = False
             '
@@ -2813,7 +2813,7 @@
             Me.txtHctRNv.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtHctRNv.ForeColor = System.Drawing.Color.Black
             Me.txtHctRNv.LinkedLabel = Nothing
-            Me.txtHctRNv.Location = New System.Drawing.Point(580, 301)
+            Me.txtHctRNv.Location = New System.Drawing.Point(558, 301)
             Me.txtHctRNv.Margin = New System.Windows.Forms.Padding(1)
             Me.txtHctRNv.MaximumValue = Nothing
             Me.txtHctRNv.MinimumValue = Nothing
@@ -2822,7 +2822,7 @@
             Me.txtHctRNv.OverrideMaxLength = 0
             Me.txtHctRNv.ReadOnly = True
             Me.txtHctRNv.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtHctRNv.Size = New System.Drawing.Size(133, 18)
+            Me.txtHctRNv.Size = New System.Drawing.Size(133, 14)
             Me.txtHctRNv.TabIndex = 130
             Me.txtHctRNv.Translatable = False
             '
@@ -2845,7 +2845,7 @@
             Me.txtMcvRNv.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtMcvRNv.ForeColor = System.Drawing.Color.Black
             Me.txtMcvRNv.LinkedLabel = Nothing
-            Me.txtMcvRNv.Location = New System.Drawing.Point(580, 316)
+            Me.txtMcvRNv.Location = New System.Drawing.Point(558, 316)
             Me.txtMcvRNv.Margin = New System.Windows.Forms.Padding(1)
             Me.txtMcvRNv.MaximumValue = Nothing
             Me.txtMcvRNv.MinimumValue = Nothing
@@ -2854,7 +2854,7 @@
             Me.txtMcvRNv.OverrideMaxLength = 0
             Me.txtMcvRNv.ReadOnly = True
             Me.txtMcvRNv.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtMcvRNv.Size = New System.Drawing.Size(133, 18)
+            Me.txtMcvRNv.Size = New System.Drawing.Size(133, 14)
             Me.txtMcvRNv.TabIndex = 133
             Me.txtMcvRNv.Translatable = False
             '
@@ -2877,7 +2877,7 @@
             Me.txtMchRNv.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtMchRNv.ForeColor = System.Drawing.Color.Black
             Me.txtMchRNv.LinkedLabel = Nothing
-            Me.txtMchRNv.Location = New System.Drawing.Point(580, 331)
+            Me.txtMchRNv.Location = New System.Drawing.Point(558, 331)
             Me.txtMchRNv.Margin = New System.Windows.Forms.Padding(1)
             Me.txtMchRNv.MaximumValue = Nothing
             Me.txtMchRNv.MinimumValue = Nothing
@@ -2886,7 +2886,7 @@
             Me.txtMchRNv.OverrideMaxLength = 0
             Me.txtMchRNv.ReadOnly = True
             Me.txtMchRNv.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtMchRNv.Size = New System.Drawing.Size(133, 18)
+            Me.txtMchRNv.Size = New System.Drawing.Size(133, 14)
             Me.txtMchRNv.TabIndex = 134
             Me.txtMchRNv.Translatable = False
             '
@@ -2909,7 +2909,7 @@
             Me.txtMchcRNv.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtMchcRNv.ForeColor = System.Drawing.Color.Black
             Me.txtMchcRNv.LinkedLabel = Nothing
-            Me.txtMchcRNv.Location = New System.Drawing.Point(580, 346)
+            Me.txtMchcRNv.Location = New System.Drawing.Point(558, 346)
             Me.txtMchcRNv.Margin = New System.Windows.Forms.Padding(1)
             Me.txtMchcRNv.MaximumValue = Nothing
             Me.txtMchcRNv.MinimumValue = Nothing
@@ -2918,7 +2918,7 @@
             Me.txtMchcRNv.OverrideMaxLength = 0
             Me.txtMchcRNv.ReadOnly = True
             Me.txtMchcRNv.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtMchcRNv.Size = New System.Drawing.Size(133, 18)
+            Me.txtMchcRNv.Size = New System.Drawing.Size(133, 14)
             Me.txtMchcRNv.TabIndex = 135
             Me.txtMchcRNv.Translatable = False
             '
@@ -2941,7 +2941,7 @@
             Me.txtRdwcvRNv.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtRdwcvRNv.ForeColor = System.Drawing.Color.Black
             Me.txtRdwcvRNv.LinkedLabel = Nothing
-            Me.txtRdwcvRNv.Location = New System.Drawing.Point(580, 361)
+            Me.txtRdwcvRNv.Location = New System.Drawing.Point(558, 361)
             Me.txtRdwcvRNv.Margin = New System.Windows.Forms.Padding(1)
             Me.txtRdwcvRNv.MaximumValue = Nothing
             Me.txtRdwcvRNv.MinimumValue = Nothing
@@ -2950,7 +2950,7 @@
             Me.txtRdwcvRNv.OverrideMaxLength = 0
             Me.txtRdwcvRNv.ReadOnly = True
             Me.txtRdwcvRNv.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtRdwcvRNv.Size = New System.Drawing.Size(133, 18)
+            Me.txtRdwcvRNv.Size = New System.Drawing.Size(133, 14)
             Me.txtRdwcvRNv.TabIndex = 138
             Me.txtRdwcvRNv.Translatable = False
             '
@@ -2973,7 +2973,7 @@
             Me.txtRdwsdRNv.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtRdwsdRNv.ForeColor = System.Drawing.Color.Black
             Me.txtRdwsdRNv.LinkedLabel = Nothing
-            Me.txtRdwsdRNv.Location = New System.Drawing.Point(580, 376)
+            Me.txtRdwsdRNv.Location = New System.Drawing.Point(558, 376)
             Me.txtRdwsdRNv.Margin = New System.Windows.Forms.Padding(1)
             Me.txtRdwsdRNv.MaximumValue = Nothing
             Me.txtRdwsdRNv.MinimumValue = Nothing
@@ -2982,7 +2982,7 @@
             Me.txtRdwsdRNv.OverrideMaxLength = 0
             Me.txtRdwsdRNv.ReadOnly = True
             Me.txtRdwsdRNv.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtRdwsdRNv.Size = New System.Drawing.Size(133, 18)
+            Me.txtRdwsdRNv.Size = New System.Drawing.Size(133, 14)
             Me.txtRdwsdRNv.TabIndex = 137
             Me.txtRdwsdRNv.Translatable = False
             '
@@ -3005,7 +3005,7 @@
             Me.txtPltRNv.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtPltRNv.ForeColor = System.Drawing.Color.Black
             Me.txtPltRNv.LinkedLabel = Nothing
-            Me.txtPltRNv.Location = New System.Drawing.Point(580, 421)
+            Me.txtPltRNv.Location = New System.Drawing.Point(558, 421)
             Me.txtPltRNv.Margin = New System.Windows.Forms.Padding(1)
             Me.txtPltRNv.MaximumValue = Nothing
             Me.txtPltRNv.MinimumValue = Nothing
@@ -3014,7 +3014,7 @@
             Me.txtPltRNv.OverrideMaxLength = 0
             Me.txtPltRNv.ReadOnly = True
             Me.txtPltRNv.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtPltRNv.Size = New System.Drawing.Size(133, 18)
+            Me.txtPltRNv.Size = New System.Drawing.Size(133, 14)
             Me.txtPltRNv.TabIndex = 123
             Me.txtPltRNv.Translatable = False
             '
@@ -3037,7 +3037,7 @@
             Me.txtPctRNv.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtPctRNv.ForeColor = System.Drawing.Color.Black
             Me.txtPctRNv.LinkedLabel = Nothing
-            Me.txtPctRNv.Location = New System.Drawing.Point(580, 436)
+            Me.txtPctRNv.Location = New System.Drawing.Point(558, 436)
             Me.txtPctRNv.Margin = New System.Windows.Forms.Padding(1)
             Me.txtPctRNv.MaximumValue = Nothing
             Me.txtPctRNv.MinimumValue = Nothing
@@ -3046,7 +3046,7 @@
             Me.txtPctRNv.OverrideMaxLength = 0
             Me.txtPctRNv.ReadOnly = True
             Me.txtPctRNv.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtPctRNv.Size = New System.Drawing.Size(133, 18)
+            Me.txtPctRNv.Size = New System.Drawing.Size(133, 14)
             Me.txtPctRNv.TabIndex = 125
             Me.txtPctRNv.Translatable = False
             '
@@ -3069,7 +3069,7 @@
             Me.txtMpvRNv.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtMpvRNv.ForeColor = System.Drawing.Color.Black
             Me.txtMpvRNv.LinkedLabel = Nothing
-            Me.txtMpvRNv.Location = New System.Drawing.Point(580, 451)
+            Me.txtMpvRNv.Location = New System.Drawing.Point(558, 451)
             Me.txtMpvRNv.Margin = New System.Windows.Forms.Padding(1)
             Me.txtMpvRNv.MaximumValue = Nothing
             Me.txtMpvRNv.MinimumValue = Nothing
@@ -3078,7 +3078,7 @@
             Me.txtMpvRNv.OverrideMaxLength = 0
             Me.txtMpvRNv.ReadOnly = True
             Me.txtMpvRNv.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtMpvRNv.Size = New System.Drawing.Size(133, 18)
+            Me.txtMpvRNv.Size = New System.Drawing.Size(133, 14)
             Me.txtMpvRNv.TabIndex = 128
             Me.txtMpvRNv.Translatable = False
             '
@@ -3101,7 +3101,7 @@
             Me.txtPdwRNv.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtPdwRNv.ForeColor = System.Drawing.Color.Black
             Me.txtPdwRNv.LinkedLabel = Nothing
-            Me.txtPdwRNv.Location = New System.Drawing.Point(580, 466)
+            Me.txtPdwRNv.Location = New System.Drawing.Point(558, 466)
             Me.txtPdwRNv.Margin = New System.Windows.Forms.Padding(1)
             Me.txtPdwRNv.MaximumValue = Nothing
             Me.txtPdwRNv.MinimumValue = Nothing
@@ -3110,7 +3110,7 @@
             Me.txtPdwRNv.OverrideMaxLength = 0
             Me.txtPdwRNv.ReadOnly = True
             Me.txtPdwRNv.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtPdwRNv.Size = New System.Drawing.Size(133, 18)
+            Me.txtPdwRNv.Size = New System.Drawing.Size(133, 14)
             Me.txtPdwRNv.TabIndex = 131
             Me.txtPdwRNv.Translatable = False
             '
@@ -3133,7 +3133,7 @@
             Me.txtWbcRNv.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtWbcRNv.ForeColor = System.Drawing.Color.Black
             Me.txtWbcRNv.LinkedLabel = Nothing
-            Me.txtWbcRNv.Location = New System.Drawing.Point(580, 166)
+            Me.txtWbcRNv.Location = New System.Drawing.Point(558, 166)
             Me.txtWbcRNv.Margin = New System.Windows.Forms.Padding(1)
             Me.txtWbcRNv.MaximumValue = Nothing
             Me.txtWbcRNv.MinimumValue = Nothing
@@ -3142,7 +3142,7 @@
             Me.txtWbcRNv.OverrideMaxLength = 0
             Me.txtWbcRNv.ReadOnly = True
             Me.txtWbcRNv.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtWbcRNv.Size = New System.Drawing.Size(133, 18)
+            Me.txtWbcRNv.Size = New System.Drawing.Size(133, 14)
             Me.txtWbcRNv.TabIndex = 136
             Me.txtWbcRNv.Translatable = False
             '
@@ -3166,7 +3166,7 @@
             Me.txtMchcNv.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtMchcNv.ForeColor = System.Drawing.Color.Black
             Me.txtMchcNv.LinkedLabel = Nothing
-            Me.txtMchcNv.Location = New System.Drawing.Point(256, 346)
+            Me.txtMchcNv.Location = New System.Drawing.Point(234, 346)
             Me.txtMchcNv.Margin = New System.Windows.Forms.Padding(1)
             Me.txtMchcNv.MaximumValue = Nothing
             Me.txtMchcNv.MinimumValue = Nothing
@@ -3175,7 +3175,7 @@
             Me.txtMchcNv.OverrideMaxLength = 0
             Me.txtMchcNv.ReadOnly = True
             Me.txtMchcNv.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtMchcNv.Size = New System.Drawing.Size(133, 18)
+            Me.txtMchcNv.Size = New System.Drawing.Size(133, 14)
             Me.txtMchcNv.TabIndex = 140
             Me.txtMchcNv.Translatable = False
             '
@@ -3199,7 +3199,7 @@
             Me.txtRdwcvNv.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtRdwcvNv.ForeColor = System.Drawing.Color.Black
             Me.txtRdwcvNv.LinkedLabel = Nothing
-            Me.txtRdwcvNv.Location = New System.Drawing.Point(256, 361)
+            Me.txtRdwcvNv.Location = New System.Drawing.Point(234, 361)
             Me.txtRdwcvNv.Margin = New System.Windows.Forms.Padding(1)
             Me.txtRdwcvNv.MaximumValue = Nothing
             Me.txtRdwcvNv.MinimumValue = Nothing
@@ -3208,7 +3208,7 @@
             Me.txtRdwcvNv.OverrideMaxLength = 0
             Me.txtRdwcvNv.ReadOnly = True
             Me.txtRdwcvNv.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtRdwcvNv.Size = New System.Drawing.Size(133, 18)
+            Me.txtRdwcvNv.Size = New System.Drawing.Size(133, 14)
             Me.txtRdwcvNv.TabIndex = 143
             Me.txtRdwcvNv.Translatable = False
             '
@@ -3232,7 +3232,7 @@
             Me.txtMpvNv.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtMpvNv.ForeColor = System.Drawing.Color.Black
             Me.txtMpvNv.LinkedLabel = Nothing
-            Me.txtMpvNv.Location = New System.Drawing.Point(256, 451)
+            Me.txtMpvNv.Location = New System.Drawing.Point(234, 451)
             Me.txtMpvNv.Margin = New System.Windows.Forms.Padding(1)
             Me.txtMpvNv.MaximumValue = Nothing
             Me.txtMpvNv.MinimumValue = Nothing
@@ -3241,7 +3241,7 @@
             Me.txtMpvNv.OverrideMaxLength = 0
             Me.txtMpvNv.ReadOnly = True
             Me.txtMpvNv.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtMpvNv.Size = New System.Drawing.Size(133, 18)
+            Me.txtMpvNv.Size = New System.Drawing.Size(133, 14)
             Me.txtMpvNv.TabIndex = 142
             Me.txtMpvNv.Translatable = False
             '
@@ -3265,7 +3265,7 @@
             Me.txtPdwNv.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtPdwNv.ForeColor = System.Drawing.Color.Black
             Me.txtPdwNv.LinkedLabel = Nothing
-            Me.txtPdwNv.Location = New System.Drawing.Point(256, 466)
+            Me.txtPdwNv.Location = New System.Drawing.Point(234, 466)
             Me.txtPdwNv.Margin = New System.Windows.Forms.Padding(1)
             Me.txtPdwNv.MaximumValue = Nothing
             Me.txtPdwNv.MinimumValue = Nothing
@@ -3274,7 +3274,7 @@
             Me.txtPdwNv.OverrideMaxLength = 0
             Me.txtPdwNv.ReadOnly = True
             Me.txtPdwNv.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtPdwNv.Size = New System.Drawing.Size(133, 18)
+            Me.txtPdwNv.Size = New System.Drawing.Size(133, 14)
             Me.txtPdwNv.TabIndex = 141
             Me.txtPdwNv.Translatable = False
             '
@@ -3299,7 +3299,7 @@
             Me.txtPatientName.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtPatientName.ForeColor = System.Drawing.Color.Black
             Me.txtPatientName.LinkedLabel = Nothing
-            Me.txtPatientName.Location = New System.Drawing.Point(96, 46)
+            Me.txtPatientName.Location = New System.Drawing.Point(74, 46)
             Me.txtPatientName.Margin = New System.Windows.Forms.Padding(1)
             Me.txtPatientName.MaximumValue = Nothing
             Me.txtPatientName.MinimumValue = Nothing
@@ -3308,7 +3308,7 @@
             Me.txtPatientName.OverrideMaxLength = 0
             Me.txtPatientName.ReadOnly = True
             Me.txtPatientName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtPatientName.Size = New System.Drawing.Size(290, 16)
+            Me.txtPatientName.Size = New System.Drawing.Size(290, 13)
             Me.txtPatientName.TabIndex = 148
             Me.txtPatientName.Translatable = False
             '
@@ -3321,7 +3321,7 @@
             Me.CLabel10.Dock = System.Windows.Forms.DockStyle.Fill
             Me.CLabel10.EditingMode = False
             Me.CLabel10.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.CLabel10.Location = New System.Drawing.Point(96, 121)
+            Me.CLabel10.Location = New System.Drawing.Point(74, 121)
             Me.CLabel10.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel10.Name = "CLabel10"
             Me.CLabel10.Size = New System.Drawing.Size(290, 13)
@@ -3338,7 +3338,7 @@
             Me.CLabel24.Dock = System.Windows.Forms.DockStyle.Fill
             Me.CLabel24.EditingMode = False
             Me.CLabel24.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.CLabel24.Location = New System.Drawing.Point(413, 136)
+            Me.CLabel24.Location = New System.Drawing.Point(391, 136)
             Me.CLabel24.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel24.Name = "CLabel24"
             Me.CLabel24.Size = New System.Drawing.Size(140, 13)
@@ -3367,7 +3367,7 @@
             Me.txtPatientNameEnglish.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtPatientNameEnglish.ForeColor = System.Drawing.Color.Black
             Me.txtPatientNameEnglish.LinkedLabel = Nothing
-            Me.txtPatientNameEnglish.Location = New System.Drawing.Point(413, 46)
+            Me.txtPatientNameEnglish.Location = New System.Drawing.Point(391, 46)
             Me.txtPatientNameEnglish.Margin = New System.Windows.Forms.Padding(1)
             Me.txtPatientNameEnglish.MaximumValue = Nothing
             Me.txtPatientNameEnglish.MinimumValue = Nothing
@@ -3376,7 +3376,7 @@
             Me.txtPatientNameEnglish.OverrideMaxLength = 0
             Me.txtPatientNameEnglish.ReadOnly = True
             Me.txtPatientNameEnglish.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtPatientNameEnglish.Size = New System.Drawing.Size(300, 16)
+            Me.txtPatientNameEnglish.Size = New System.Drawing.Size(300, 13)
             Me.txtPatientNameEnglish.TabIndex = 157
             Me.txtPatientNameEnglish.Translatable = False
             '
@@ -3389,7 +3389,7 @@
             Me.CLabel26.Dock = System.Windows.Forms.DockStyle.Fill
             Me.CLabel26.EditingMode = False
             Me.CLabel26.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.CLabel26.Location = New System.Drawing.Point(413, 16)
+            Me.CLabel26.Location = New System.Drawing.Point(391, 16)
             Me.CLabel26.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel26.Name = "CLabel26"
             Me.CLabel26.Size = New System.Drawing.Size(165, 13)
@@ -3417,7 +3417,7 @@
             Me.txtSexF.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtSexF.ForeColor = System.Drawing.Color.Black
             Me.txtSexF.LinkedLabel = Nothing
-            Me.txtSexF.Location = New System.Drawing.Point(96, 91)
+            Me.txtSexF.Location = New System.Drawing.Point(74, 91)
             Me.txtSexF.Margin = New System.Windows.Forms.Padding(1)
             Me.txtSexF.MaximumValue = Nothing
             Me.txtSexF.MinimumValue = Nothing
@@ -3426,7 +3426,7 @@
             Me.txtSexF.OverrideMaxLength = 0
             Me.txtSexF.ReadOnly = True
             Me.txtSexF.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtSexF.Size = New System.Drawing.Size(133, 16)
+            Me.txtSexF.Size = New System.Drawing.Size(133, 13)
             Me.txtSexF.TabIndex = 149
             Me.txtSexF.Translatable = False
             '
@@ -3450,7 +3450,7 @@
             Me.txtSexDisplay.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtSexDisplay.ForeColor = System.Drawing.Color.Black
             Me.txtSexDisplay.LinkedLabel = Nothing
-            Me.txtSexDisplay.Location = New System.Drawing.Point(413, 91)
+            Me.txtSexDisplay.Location = New System.Drawing.Point(391, 91)
             Me.txtSexDisplay.Margin = New System.Windows.Forms.Padding(1)
             Me.txtSexDisplay.MaximumValue = Nothing
             Me.txtSexDisplay.MinimumValue = Nothing
@@ -3459,7 +3459,7 @@
             Me.txtSexDisplay.OverrideMaxLength = 0
             Me.txtSexDisplay.ReadOnly = True
             Me.txtSexDisplay.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtSexDisplay.Size = New System.Drawing.Size(140, 16)
+            Me.txtSexDisplay.Size = New System.Drawing.Size(140, 13)
             Me.txtSexDisplay.TabIndex = 162
             Me.txtSexDisplay.Translatable = False
             '
@@ -3482,7 +3482,7 @@
             Me.txtAgeF.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtAgeF.ForeColor = System.Drawing.Color.Black
             Me.txtAgeF.LinkedLabel = Nothing
-            Me.txtAgeF.Location = New System.Drawing.Point(96, 76)
+            Me.txtAgeF.Location = New System.Drawing.Point(74, 76)
             Me.txtAgeF.Margin = New System.Windows.Forms.Padding(1)
             Me.txtAgeF.MaximumValue = Nothing
             Me.txtAgeF.MinimumValue = Nothing
@@ -3491,7 +3491,7 @@
             Me.txtAgeF.OverrideMaxLength = 0
             Me.txtAgeF.ReadOnly = True
             Me.txtAgeF.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtAgeF.Size = New System.Drawing.Size(133, 16)
+            Me.txtAgeF.Size = New System.Drawing.Size(133, 13)
             Me.txtAgeF.TabIndex = 163
             Me.txtAgeF.Translatable = False
             '
@@ -3514,7 +3514,7 @@
             Me.txtAge.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtAge.ForeColor = System.Drawing.Color.Black
             Me.txtAge.LinkedLabel = Nothing
-            Me.txtAge.Location = New System.Drawing.Point(278, 76)
+            Me.txtAge.Location = New System.Drawing.Point(256, 76)
             Me.txtAge.Margin = New System.Windows.Forms.Padding(1)
             Me.txtAge.MaximumValue = Nothing
             Me.txtAge.MinimumValue = Nothing
@@ -3523,7 +3523,7 @@
             Me.txtAge.OverrideMaxLength = 0
             Me.txtAge.ReadOnly = True
             Me.txtAge.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtAge.Size = New System.Drawing.Size(61, 16)
+            Me.txtAge.Size = New System.Drawing.Size(61, 13)
             Me.txtAge.TabIndex = 145
             Me.txtAge.Translatable = False
             Me.txtAge.Visible = False
@@ -3547,7 +3547,7 @@
             Me.txtAgeYmd.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtAgeYmd.ForeColor = System.Drawing.Color.Black
             Me.txtAgeYmd.LinkedLabel = Nothing
-            Me.txtAgeYmd.Location = New System.Drawing.Point(341, 76)
+            Me.txtAgeYmd.Location = New System.Drawing.Point(319, 76)
             Me.txtAgeYmd.Margin = New System.Windows.Forms.Padding(1)
             Me.txtAgeYmd.MaximumValue = Nothing
             Me.txtAgeYmd.MinimumValue = Nothing
@@ -3556,7 +3556,7 @@
             Me.txtAgeYmd.OverrideMaxLength = 0
             Me.txtAgeYmd.ReadOnly = True
             Me.txtAgeYmd.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtAgeYmd.Size = New System.Drawing.Size(45, 16)
+            Me.txtAgeYmd.Size = New System.Drawing.Size(45, 13)
             Me.txtAgeYmd.TabIndex = 146
             Me.txtAgeYmd.Translatable = False
             Me.txtAgeYmd.Visible = False
@@ -3568,7 +3568,7 @@
             Me.btnRetrieve.Dock = System.Windows.Forms.DockStyle.Fill
             Me.btnRetrieve.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.btnRetrieve.ImageIndex = 0
-            Me.btnRetrieve.Location = New System.Drawing.Point(255, 0)
+            Me.btnRetrieve.Location = New System.Drawing.Point(233, 0)
             Me.btnRetrieve.Margin = New System.Windows.Forms.Padding(0)
             Me.btnRetrieve.Name = "btnRetrieve"
             Me.btnRetrieve.OriginalImageName = Nothing
@@ -3598,7 +3598,7 @@
             Me.txtAgeDisplay.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtAgeDisplay.ForeColor = System.Drawing.Color.Black
             Me.txtAgeDisplay.LinkedLabel = Nothing
-            Me.txtAgeDisplay.Location = New System.Drawing.Point(413, 76)
+            Me.txtAgeDisplay.Location = New System.Drawing.Point(391, 76)
             Me.txtAgeDisplay.Margin = New System.Windows.Forms.Padding(1)
             Me.txtAgeDisplay.MaximumValue = Nothing
             Me.txtAgeDisplay.MinimumValue = Nothing
@@ -3607,7 +3607,7 @@
             Me.txtAgeDisplay.OverrideMaxLength = 0
             Me.txtAgeDisplay.ReadOnly = True
             Me.txtAgeDisplay.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtAgeDisplay.Size = New System.Drawing.Size(140, 16)
+            Me.txtAgeDisplay.Size = New System.Drawing.Size(140, 13)
             Me.txtAgeDisplay.TabIndex = 161
             Me.txtAgeDisplay.Translatable = False
             '
@@ -3630,7 +3630,7 @@
             Me.txtStatusDisplay.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtStatusDisplay.ForeColor = System.Drawing.Color.Black
             Me.txtStatusDisplay.LinkedLabel = Nothing
-            Me.txtStatusDisplay.Location = New System.Drawing.Point(96, 31)
+            Me.txtStatusDisplay.Location = New System.Drawing.Point(74, 31)
             Me.txtStatusDisplay.Margin = New System.Windows.Forms.Padding(1)
             Me.txtStatusDisplay.MaximumValue = Nothing
             Me.txtStatusDisplay.MinimumValue = Nothing
@@ -3639,7 +3639,7 @@
             Me.txtStatusDisplay.OverrideMaxLength = 0
             Me.txtStatusDisplay.ReadOnly = True
             Me.txtStatusDisplay.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtStatusDisplay.Size = New System.Drawing.Size(133, 16)
+            Me.txtStatusDisplay.Size = New System.Drawing.Size(133, 13)
             Me.txtStatusDisplay.TabIndex = 144
             Me.txtStatusDisplay.Translatable = False
             '
@@ -3662,7 +3662,7 @@
             Me.txtRegistrationNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtRegistrationNo.ForeColor = System.Drawing.Color.Black
             Me.txtRegistrationNo.LinkedLabel = Nothing
-            Me.txtRegistrationNo.Location = New System.Drawing.Point(580, 61)
+            Me.txtRegistrationNo.Location = New System.Drawing.Point(558, 61)
             Me.txtRegistrationNo.Margin = New System.Windows.Forms.Padding(1)
             Me.txtRegistrationNo.MaximumValue = Nothing
             Me.txtRegistrationNo.MinimumValue = Nothing
@@ -3671,7 +3671,7 @@
             Me.txtRegistrationNo.OverrideMaxLength = 0
             Me.txtRegistrationNo.ReadOnly = True
             Me.txtRegistrationNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtRegistrationNo.Size = New System.Drawing.Size(133, 16)
+            Me.txtRegistrationNo.Size = New System.Drawing.Size(133, 13)
             Me.txtRegistrationNo.TabIndex = 160
             Me.txtRegistrationNo.Translatable = False
             '
@@ -3694,7 +3694,7 @@
             Me.txtInvoiceDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtInvoiceDate.ForeColor = System.Drawing.Color.Black
             Me.txtInvoiceDate.LinkedLabel = Nothing
-            Me.txtInvoiceDate.Location = New System.Drawing.Point(580, 31)
+            Me.txtInvoiceDate.Location = New System.Drawing.Point(558, 31)
             Me.txtInvoiceDate.Margin = New System.Windows.Forms.Padding(1)
             Me.txtInvoiceDate.MaximumValue = Nothing
             Me.txtInvoiceDate.MinimumValue = Nothing
@@ -3703,7 +3703,7 @@
             Me.txtInvoiceDate.OverrideMaxLength = 0
             Me.txtInvoiceDate.ReadOnly = True
             Me.txtInvoiceDate.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtInvoiceDate.Size = New System.Drawing.Size(133, 16)
+            Me.txtInvoiceDate.Size = New System.Drawing.Size(133, 13)
             Me.txtInvoiceDate.TabIndex = 139
             Me.txtInvoiceDate.Translatable = False
             '
@@ -3726,7 +3726,7 @@
             Me.txtSampleNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.txtSampleNo.ForeColor = System.Drawing.Color.Black
             Me.txtSampleNo.LinkedLabel = Nothing
-            Me.txtSampleNo.Location = New System.Drawing.Point(580, 16)
+            Me.txtSampleNo.Location = New System.Drawing.Point(558, 16)
             Me.txtSampleNo.Margin = New System.Windows.Forms.Padding(1)
             Me.txtSampleNo.MaximumValue = Nothing
             Me.txtSampleNo.MinimumValue = Nothing
@@ -3735,7 +3735,7 @@
             Me.txtSampleNo.OverrideMaxLength = 0
             Me.txtSampleNo.ReadOnly = True
             Me.txtSampleNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtSampleNo.Size = New System.Drawing.Size(133, 16)
+            Me.txtSampleNo.Size = New System.Drawing.Size(133, 13)
             Me.txtSampleNo.TabIndex = 159
             Me.txtSampleNo.Translatable = False
             '
@@ -3756,7 +3756,7 @@
             Me.TxtInvoiceNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.TxtInvoiceNo.ForeColor = System.Drawing.Color.Black
             Me.TxtInvoiceNo.LinkedLabel = Nothing
-            Me.TxtInvoiceNo.Location = New System.Drawing.Point(579, 0)
+            Me.TxtInvoiceNo.Location = New System.Drawing.Point(557, 0)
             Me.TxtInvoiceNo.Margin = New System.Windows.Forms.Padding(0)
             Me.TxtInvoiceNo.MaximumValue = Nothing
             Me.TxtInvoiceNo.MinimumValue = Nothing
@@ -3764,7 +3764,7 @@
             Me.TxtInvoiceNo.OldValue = ""
             Me.TxtInvoiceNo.OverrideMaxLength = 0
             Me.TxtInvoiceNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.TxtInvoiceNo.Size = New System.Drawing.Size(133, 16)
+            Me.TxtInvoiceNo.Size = New System.Drawing.Size(133, 13)
             Me.TxtInvoiceNo.TabIndex = 167
             Me.TxtInvoiceNo.Translatable = False
             '
@@ -3808,7 +3808,7 @@
             Me.txtStatus.OverrideMaxLength = 0
             Me.txtStatus.ReadOnly = True
             Me.txtStatus.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtStatus.Size = New System.Drawing.Size(133, 23)
+            Me.txtStatus.Size = New System.Drawing.Size(133, 20)
             Me.txtStatus.TabIndex = 158
             Me.txtStatus.Translatable = False
             Me.txtStatus.Visible = False
@@ -3840,7 +3840,7 @@
             Me.txtInvoiceType.OverrideMaxLength = 0
             Me.txtInvoiceType.ReadOnly = True
             Me.txtInvoiceType.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtInvoiceType.Size = New System.Drawing.Size(133, 23)
+            Me.txtInvoiceType.Size = New System.Drawing.Size(133, 20)
             Me.txtInvoiceType.TabIndex = 159
             Me.txtInvoiceType.Translatable = False
             Me.txtInvoiceType.Visible = False
@@ -3872,7 +3872,7 @@
             Me.txtSex.OverrideMaxLength = 0
             Me.txtSex.ReadOnly = True
             Me.txtSex.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtSex.Size = New System.Drawing.Size(133, 23)
+            Me.txtSex.Size = New System.Drawing.Size(133, 20)
             Me.txtSex.TabIndex = 160
             Me.txtSex.Translatable = False
             Me.txtSex.Visible = False
@@ -3880,7 +3880,7 @@
             'CbcRetrievalEntry
             '
             Me.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.GreenGradientBackgroundLarge
-            Me.ClientSize = New System.Drawing.Size(711, 590)
+            Me.ClientSize = New System.Drawing.Size(733, 590)
             Me.Controls.Add(Me.btnTransferResults)
             Me.Controls.Add(Me.txtSex)
             Me.Controls.Add(Me.txtInvoiceType)
@@ -3891,8 +3891,8 @@
             Me.RightToLeft = System.Windows.Forms.RightToLeft.No
             Me.Text = "CBC Results Retrieval"
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
-            Me.TableLayoutPanel1.ResumeLayout(false)
-        Me.TableLayoutPanel1.PerformLayout
+            Me.TableLayoutPanel1.ResumeLayout(False)
+            Me.TableLayoutPanel1.PerformLayout
         Me.ResumeLayout(false)
         Me.PerformLayout
 
