@@ -311,6 +311,8 @@ Namespace PresentationLayer.Presenters
                 aCBCResults(CBCEnum.Pct) = aFileResults(22)
                 aCBCResults(CBCEnum.Mpv) = aFileResults(23)
                 aCBCResults(CBCEnum.Pdw) = aFileResults(24)
+                aCBCResults(CBCEnum.Remarks) = aFileResults(25)
+                aCBCResults(CBCEnum.FileNo) = aFileResults(26)
             End If
             CbcResultsToView(aCBCResults)
         End Sub
@@ -375,6 +377,7 @@ Namespace PresentationLayer.Presenters
             View.Pct = Transform(aCBCResults(CBCEnum.Pct), "%")
             View.Mpv = Transform(aCBCResults(CBCEnum.Mpv), " fL")
             View.Pdw = Transform(aCBCResults(CBCEnum.Pdw), "%")
+            View.Remarks = String.Join("~", aCBCResults(CBCEnum.Remarks).Split("~"))
         End Sub
 
         Public Enum CBCEnum
@@ -396,6 +399,8 @@ Namespace PresentationLayer.Presenters
             Pct
             Mpv
             Pdw
+            FileNo
+            Remarks
         End Enum
 
         Private _idNo As Decimal
