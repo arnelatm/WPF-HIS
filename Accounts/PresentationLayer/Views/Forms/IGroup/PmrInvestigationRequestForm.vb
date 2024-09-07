@@ -1,5 +1,6 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Views.Forms
@@ -16,6 +17,7 @@ Namespace PresentationLayer.Views.Forms
         Private _pmrPatientsDisplay As New List(Of PmrPatientDisplayView)
         Private _doctorId As String
         Private _dataAccessLevel As String = ""
+        Public ServiceRequestFormList As List(Of IItemCodeView)
 
         Public Sub New()
             'MyBase.New()
@@ -92,6 +94,15 @@ Namespace PresentationLayer.Views.Forms
             Set
                 _pmrPatientsDisplay = Value
                 BindPmrPatientDisplay()
+            End Set
+        End Property
+
+        Public Property ServiceRequestForm As Int16 Implements IPmrInvestigationRequestView.ServiceRequestForm
+            Get
+                Return cboServiceRequestForm.GetValue()
+            End Get
+            Set(value As Int16)
+                cboServiceRequestForm.SetValue(value)
             End Set
         End Property
 
@@ -205,7 +216,8 @@ Namespace PresentationLayer.Views.Forms
             MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {
                 {"DoctorCode", txtDoctorCode},
-                {"DoctorName", cboDoctorName}
+                {"DoctorName", cboDoctorName},
+                {"ServiceRequestForm", cboServiceRequestForm}
                 }
         End Sub
 
