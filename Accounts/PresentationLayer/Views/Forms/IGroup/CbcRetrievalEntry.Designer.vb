@@ -3892,8 +3892,8 @@
             Me.Text = "CBC Results Retrieval"
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             Me.TableLayoutPanel1.ResumeLayout(False)
-            Me.TableLayoutPanel1.PerformLayout
-        Me.ResumeLayout(false)
+            Me.TableLayoutPanel1.PerformLayout()
+            Me.ResumeLayout(false)
         Me.PerformLayout
 
 End Sub

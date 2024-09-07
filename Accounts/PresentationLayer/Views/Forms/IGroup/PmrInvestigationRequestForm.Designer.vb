@@ -25,32 +25,34 @@
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PmrInvestigationRequestForm))
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Me.btnRefresh = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.imgList = New System.Windows.Forms.ImageList(Me.components)
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
             Me.DataGridViewPmrPatientDisplay = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
-            Me.TokenDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.StatusDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
-            Me.FileNoDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.NameDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvFileType = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.InvTypeDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvTime = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.dgvTransKey = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.bsPmrPatientDisplay = New System.Windows.Forms.BindingSource(Me.components)
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.cboDoctorName = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.txtDoctorCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblBlankOrPrePrintedForm = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboServiceRequestForm = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.TokenDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.StatusDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
+            Me.FileNoDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.NameDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.InvTypeDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.bsPmrPatientDisplay = New System.Windows.Forms.BindingSource(Me.components)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout2.SuspendLayout()
             Me.TableLayoutPanel1.SuspendLayout()
@@ -62,12 +64,11 @@
             '
             Me.btnRefresh.DesignerSelected = False
             Me.btnRefresh.ImageIndex = 0
-            Me.btnRefresh.Location = New System.Drawing.Point(913, 4)
-            Me.btnRefresh.Margin = New System.Windows.Forms.Padding(4)
+            Me.btnRefresh.Location = New System.Drawing.Point(611, 3)
             Me.btnRefresh.Name = "btnRefresh"
             Me.btnRefresh.OriginalImageName = Nothing
             Me.btnRefresh.SecurityKey = ""
-            Me.btnRefresh.Size = New System.Drawing.Size(120, 31)
+            Me.btnRefresh.Size = New System.Drawing.Size(203, 25)
             Me.btnRefresh.TabIndex = 11
             Me.btnRefresh.Text = "Refresh"
             '
@@ -82,10 +83,9 @@
             Me.CFlowLayout2.BackColor = System.Drawing.Color.Transparent
             Me.CFlowLayout2.Controls.Add(Me.TableLayoutPanel1)
             Me.CFlowLayout2.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.CFlowLayout2.Location = New System.Drawing.Point(0, 59)
-            Me.CFlowLayout2.Margin = New System.Windows.Forms.Padding(4)
+            Me.CFlowLayout2.Location = New System.Drawing.Point(0, 55)
             Me.CFlowLayout2.Name = "CFlowLayout2"
-            Me.CFlowLayout2.Size = New System.Drawing.Size(1053, 622)
+            Me.CFlowLayout2.Size = New System.Drawing.Size(822, 537)
             Me.CFlowLayout2.TabIndex = 5
             '
             'TableLayoutPanel1
@@ -96,21 +96,23 @@
             Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
             Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
             Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+            Me.TableLayoutPanel1.Controls.Add(Me.lblBlankOrPrePrintedForm, 2, 1)
             Me.TableLayoutPanel1.Controls.Add(Me.DataGridViewPmrPatientDisplay, 0, 2)
             Me.TableLayoutPanel1.Controls.Add(Me.CLabel1, 0, 1)
             Me.TableLayoutPanel1.Controls.Add(Me.CLabel2, 0, 0)
             Me.TableLayoutPanel1.Controls.Add(Me.btnRefresh, 3, 0)
             Me.TableLayoutPanel1.Controls.Add(Me.dtpTransactionDate, 1, 1)
             Me.TableLayoutPanel1.Controls.Add(Me.cboDoctorName, 1, 0)
+            Me.TableLayoutPanel1.Controls.Add(Me.cboServiceRequestForm, 3, 1)
             Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.TableLayoutPanel1.Location = New System.Drawing.Point(4, 4)
-            Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4)
+            Me.TableLayoutPanel1.Location = New System.Drawing.Point(3, 3)
             Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
             Me.TableLayoutPanel1.RowCount = 3
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-            Me.TableLayoutPanel1.Size = New System.Drawing.Size(1044, 607)
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+            Me.TableLayoutPanel1.Size = New System.Drawing.Size(817, 493)
             Me.TableLayoutPanel1.TabIndex = 17
             '
             'DataGridViewPmrPatientDisplay
@@ -150,8 +152,7 @@
             Me.DataGridViewPmrPatientDisplay.FirstRowInsertionEnabled = True
             Me.DataGridViewPmrPatientDisplay.IgnoreCase = False
             Me.DataGridViewPmrPatientDisplay.IsDirty = False
-            Me.DataGridViewPmrPatientDisplay.Location = New System.Drawing.Point(4, 73)
-            Me.DataGridViewPmrPatientDisplay.Margin = New System.Windows.Forms.Padding(4)
+            Me.DataGridViewPmrPatientDisplay.Location = New System.Drawing.Point(3, 59)
             Me.DataGridViewPmrPatientDisplay.Name = "DataGridViewPmrPatientDisplay"
             Me.DataGridViewPmrPatientDisplay.OldCellValue = Nothing
             Me.DataGridViewPmrPatientDisplay.ReadOnly = True
@@ -162,9 +163,246 @@
             Me.DataGridViewPmrPatientDisplay.SequenceColumn = "dgvSequence"
             Me.DataGridViewPmrPatientDisplay.SequenceFieldName = "Sequence"
             Me.DataGridViewPmrPatientDisplay.ShowFooter = False
-            Me.DataGridViewPmrPatientDisplay.Size = New System.Drawing.Size(1036, 530)
+            Me.DataGridViewPmrPatientDisplay.Size = New System.Drawing.Size(811, 431)
             Me.DataGridViewPmrPatientDisplay.TabIndex = 11
             Me.DataGridViewPmrPatientDisplay.Translatable = True
+            '
+            'dgvFileType
+            '
+            Me.dgvFileType.BegFindValue = Nothing
+            Me.dgvFileType.DataPropertyName = "InvType"
+            DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
+            Me.dgvFileType.DefaultCellStyle = DataGridViewCellStyle6
+            Me.dgvFileType.EditingMode = False
+            Me.dgvFileType.EndFindValue = Nothing
+            Me.dgvFileType.FieldDescription = Nothing
+            Me.dgvFileType.FieldName = Nothing
+            Me.dgvFileType.FillWeight = 60.0!
+            Me.dgvFileType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvFileType.FindEnabled = False
+            Me.dgvFileType.HeaderText = "Patient Type"
+            Me.dgvFileType.IgnoreCase = False
+            Me.dgvFileType.MinimumWidth = 6
+            Me.dgvFileType.Name = "dgvFileType"
+            Me.dgvFileType.ReadOnly = True
+            Me.dgvFileType.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.dgvFileType.Translatable = False
+            Me.dgvFileType.Width = 60
+            '
+            'dgvTime
+            '
+            Me.dgvTime.DataPropertyName = "InvTime"
+            DataGridViewCellStyle8.Format = "hh:mm tt"
+            DataGridViewCellStyle8.NullValue = Nothing
+            Me.dgvTime.DefaultCellStyle = DataGridViewCellStyle8
+            Me.dgvTime.HeaderText = "Time"
+            Me.dgvTime.MinimumWidth = 6
+            Me.dgvTime.Name = "dgvTime"
+            Me.dgvTime.ReadOnly = True
+            Me.dgvTime.Width = 125
+            '
+            'dgvTransKey
+            '
+            Me.dgvTransKey.DataPropertyName = "TransKey"
+            Me.dgvTransKey.HeaderText = "TransKey"
+            Me.dgvTransKey.MinimumWidth = 6
+            Me.dgvTransKey.Name = "dgvTransKey"
+            Me.dgvTransKey.ReadOnly = True
+            Me.dgvTransKey.Visible = False
+            Me.dgvTransKey.Width = 125
+            '
+            'CLabel1
+            '
+            Me.CLabel1.BackColor = System.Drawing.Color.Transparent
+            Me.CLabel1.DisplayOnly = True
+            Me.CLabel1.EditingMode = False
+            Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.CLabel1.Location = New System.Drawing.Point(1, 32)
+            Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
+            Me.CLabel1.Name = "CLabel1"
+            Me.CLabel1.Size = New System.Drawing.Size(156, 23)
+            Me.CLabel1.TabIndex = 13
+            Me.CLabel1.Text = "Transaction Date:"
+            Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.CLabel1.Translatable = True
+            '
+            'CLabel2
+            '
+            Me.CLabel2.BackColor = System.Drawing.Color.Transparent
+            Me.CLabel2.DisplayOnly = True
+            Me.CLabel2.EditingMode = False
+            Me.CLabel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.CLabel2.Location = New System.Drawing.Point(1, 1)
+            Me.CLabel2.Margin = New System.Windows.Forms.Padding(1)
+            Me.CLabel2.Name = "CLabel2"
+            Me.CLabel2.Size = New System.Drawing.Size(171, 23)
+            Me.CLabel2.TabIndex = 14
+            Me.CLabel2.Text = "Doctors Code - Name:"
+            Me.CLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.CLabel2.Translatable = True
+            '
+            'dtpTransactionDate
+            '
+            Me.dtpTransactionDate.AutoSize = True
+            Me.dtpTransactionDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+            Me.dtpTransactionDate.CalendarCulture = New System.Globalization.CultureInfo("en-GB")
+            Me.dtpTransactionDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+            Me.dtpTransactionDate.DefaultValue = Nothing
+            Me.dtpTransactionDate.DisplayOnly = False
+            Me.dtpTransactionDate.DtpDefaultValue = Nothing
+            Me.dtpTransactionDate.EditingMode = True
+            Me.dtpTransactionDate.EditsAllowed = False
+            Me.dtpTransactionDate.ForeColor = System.Drawing.Color.Black
+            Me.dtpTransactionDate.LinkedLabel = Nothing
+            Me.dtpTransactionDate.Location = New System.Drawing.Point(174, 32)
+            Me.dtpTransactionDate.Margin = New System.Windows.Forms.Padding(1)
+            Me.dtpTransactionDate.Name = "dtpTransactionDate"
+            Me.dtpTransactionDate.ReadOnlyDp = False
+            Me.dtpTransactionDate.SecurityKey = Nothing
+            Me.dtpTransactionDate.ShowLongDate = False
+            Me.dtpTransactionDate.ShowTime = False
+            Me.dtpTransactionDate.Size = New System.Drawing.Size(118, 23)
+            Me.dtpTransactionDate.TabIndex = 12
+            Me.dtpTransactionDate.TargetCalendar = CType(resources.GetObject("dtpTransactionDate.TargetCalendar"), System.Globalization.Calendar)
+            Me.dtpTransactionDate.Translatable = False
+            Me.dtpTransactionDate.Value = Nothing
+            Me.dtpTransactionDate.ValueIsMandatory = False
+            Me.dtpTransactionDate.ValueIsNullable = False
+            '
+            'cboDoctorName
+            '
+            Me.cboDoctorName.BackColor = System.Drawing.Color.White
+            Me.cboDoctorName.BegFindValue = Nothing
+            Me.cboDoctorName.ChangingSearchValueOnly = False
+            Me.TableLayoutPanel1.SetColumnSpan(Me.cboDoctorName, 2)
+            Me.cboDoctorName.CurrentSearchTerm = ""
+            Me.cboDoctorName.DataValue = Nothing
+            Me.cboDoctorName.DefaultValue = Nothing
+            Me.cboDoctorName.DisplayMember = "Name"
+            Me.cboDoctorName.Editable = True
+            Me.cboDoctorName.EditingMode = True
+            Me.cboDoctorName.EndFindValue = Nothing
+            Me.cboDoctorName.FieldDescription = Nothing
+            Me.cboDoctorName.FieldName = Nothing
+            Me.cboDoctorName.FilterRule = Nothing
+            Me.cboDoctorName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboDoctorName.FindEnabled = False
+            Me.cboDoctorName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.cboDoctorName.ForeColor = System.Drawing.Color.Black
+            Me.cboDoctorName.FormattingEnabled = True
+            Me.cboDoctorName.HideWhenNotEditingOrAdding = False
+            Me.cboDoctorName.IgnoreCase = False
+            Me.cboDoctorName.IntegralHeight = False
+            Me.cboDoctorName.LimitToList = False
+            Me.cboDoctorName.LinkedLabel = Nothing
+            Me.cboDoctorName.Location = New System.Drawing.Point(174, 1)
+            Me.cboDoctorName.Margin = New System.Windows.Forms.Padding(1)
+            Me.cboDoctorName.Name = "cboDoctorName"
+            Me.cboDoctorName.OldValue = 0
+            Me.cboDoctorName.OriginalDataSource = Nothing
+            Me.cboDoctorName.OriginalList = Nothing
+            Me.cboDoctorName.OverrideDropDownStyleList = False
+            Me.cboDoctorName.PreviousSearchTerm = Nothing
+            Me.cboDoctorName.PropertySelector = Nothing
+            Me.cboDoctorName.Size = New System.Drawing.Size(433, 24)
+            Me.cboDoctorName.SuggestBoxHeight = 200
+            Me.cboDoctorName.SuggestCharCount = 0
+            Me.cboDoctorName.SuggestListOrderRule = Nothing
+            Me.cboDoctorName.TabIndex = 15
+            Me.cboDoctorName.TextToSearch = Nothing
+            Me.cboDoctorName.Translatable = False
+            Me.cboDoctorName.ValueIsMandatory = False
+            Me.cboDoctorName.ValueIsNullable = False
+            Me.cboDoctorName.ValueIsNumeric = False
+            Me.cboDoctorName.ValueMember = "Code"
+            '
+            'txtDoctorCode
+            '
+            Me.txtDoctorCode.BackColor = System.Drawing.Color.White
+            Me.txtDoctorCode.BegFindValue = Nothing
+            Me.txtDoctorCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtDoctorCode.ComputedValue = False
+            Me.txtDoctorCode.CustomFormat = Nothing
+            Me.txtDoctorCode.DataBoundControl = True
+            Me.txtDoctorCode.EditingMode = True
+            Me.txtDoctorCode.EndFindValue = Nothing
+            Me.txtDoctorCode.FieldDescription = Nothing
+            Me.txtDoctorCode.FieldName = Nothing
+            Me.txtDoctorCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtDoctorCode.FindEnabled = False
+            Me.txtDoctorCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtDoctorCode.ForeColor = System.Drawing.Color.Black
+            Me.txtDoctorCode.LinkedLabel = Nothing
+            Me.txtDoctorCode.Location = New System.Drawing.Point(693, 89)
+            Me.txtDoctorCode.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtDoctorCode.MaximumValue = Nothing
+            Me.txtDoctorCode.MinimumValue = Nothing
+            Me.txtDoctorCode.Name = "txtDoctorCode"
+            Me.txtDoctorCode.OldValue = Nothing
+            Me.txtDoctorCode.OverrideMaxLength = 0
+            Me.txtDoctorCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtDoctorCode.Size = New System.Drawing.Size(80, 23)
+            Me.txtDoctorCode.TabIndex = 16
+            Me.txtDoctorCode.Translatable = False
+            Me.txtDoctorCode.Visible = False
+            '
+            'lblBlankOrPrePrintedForm
+            '
+            Me.lblBlankOrPrePrintedForm.BackColor = System.Drawing.Color.Transparent
+            Me.lblBlankOrPrePrintedForm.DisplayOnly = True
+            Me.lblBlankOrPrePrintedForm.EditingMode = False
+            Me.lblBlankOrPrePrintedForm.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblBlankOrPrePrintedForm.Location = New System.Drawing.Point(294, 32)
+            Me.lblBlankOrPrePrintedForm.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblBlankOrPrePrintedForm.Name = "lblBlankOrPrePrintedForm"
+            Me.lblBlankOrPrePrintedForm.Size = New System.Drawing.Size(313, 23)
+            Me.lblBlankOrPrePrintedForm.TabIndex = 17
+            Me.lblBlankOrPrePrintedForm.Text = "Select Service Request Form"
+            Me.lblBlankOrPrePrintedForm.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+            Me.lblBlankOrPrePrintedForm.Translatable = True
+            '
+            'cboServiceRequestForm
+            '
+            Me.cboServiceRequestForm.BackColor = System.Drawing.Color.White
+            Me.cboServiceRequestForm.BegFindValue = Nothing
+            Me.cboServiceRequestForm.ChangingSearchValueOnly = False
+            Me.cboServiceRequestForm.CurrentSearchTerm = ""
+            Me.cboServiceRequestForm.DataValue = Nothing
+            Me.cboServiceRequestForm.DefaultValue = Nothing
+            Me.cboServiceRequestForm.DisplayMember = "Name"
+            Me.cboServiceRequestForm.EditingMode = True
+            Me.cboServiceRequestForm.EndFindValue = Nothing
+            Me.cboServiceRequestForm.FieldDescription = Nothing
+            Me.cboServiceRequestForm.FieldName = Nothing
+            Me.cboServiceRequestForm.FilterRule = Nothing
+            Me.cboServiceRequestForm.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboServiceRequestForm.FindEnabled = False
+            Me.cboServiceRequestForm.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.cboServiceRequestForm.ForeColor = System.Drawing.Color.Black
+            Me.cboServiceRequestForm.FormattingEnabled = True
+            Me.cboServiceRequestForm.HideWhenNotEditingOrAdding = False
+            Me.cboServiceRequestForm.IgnoreCase = False
+            Me.cboServiceRequestForm.IntegralHeight = False
+            Me.cboServiceRequestForm.LinkedLabel = Nothing
+            Me.cboServiceRequestForm.Location = New System.Drawing.Point(609, 32)
+            Me.cboServiceRequestForm.Margin = New System.Windows.Forms.Padding(1)
+            Me.cboServiceRequestForm.Name = "cboServiceRequestForm"
+            Me.cboServiceRequestForm.OldValue = 0
+            Me.cboServiceRequestForm.OriginalDataSource = Nothing
+            Me.cboServiceRequestForm.OriginalList = Nothing
+            Me.cboServiceRequestForm.OverrideDropDownStyleList = False
+            Me.cboServiceRequestForm.PreviousSearchTerm = Nothing
+            Me.cboServiceRequestForm.Size = New System.Drawing.Size(207, 24)
+            Me.cboServiceRequestForm.SuggestBoxHeight = 200
+            Me.cboServiceRequestForm.SuggestListOrderRule = Nothing
+            Me.cboServiceRequestForm.TabIndex = 18
+            Me.cboServiceRequestForm.TextToSearch = Nothing
+            Me.cboServiceRequestForm.Translatable = False
+            Me.cboServiceRequestForm.ValueIsMandatory = False
+            Me.cboServiceRequestForm.ValueIsNullable = False
+            Me.cboServiceRequestForm.ValueIsNumeric = False
+            Me.cboServiceRequestForm.ValueMember = "IdNo"
             '
             'TokenDataGridViewTextBoxColumn
             '
@@ -192,11 +430,12 @@
             '
             'StatusDataGridViewTextBoxColumn
             '
+            Me.StatusDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
             Me.StatusDataGridViewTextBoxColumn.BegFindValue = Nothing
             Me.StatusDataGridViewTextBoxColumn.DataPropertyName = "Status"
             DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
             DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Orange
+            DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
             DataGridViewCellStyle3.NullValue = False
             Me.StatusDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle3
             Me.StatusDataGridViewTextBoxColumn.EditingMode = False
@@ -214,7 +453,7 @@
             Me.StatusDataGridViewTextBoxColumn.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.StatusDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
             Me.StatusDataGridViewTextBoxColumn.Translatable = False
-            Me.StatusDataGridViewTextBoxColumn.Width = 40
+            Me.StatusDataGridViewTextBoxColumn.Width = 62
             '
             'FileNoDataGridViewTextBoxColumn
             '
@@ -262,29 +501,6 @@
             Me.NameDataGridViewTextBoxColumn.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.NameDataGridViewTextBoxColumn.Translatable = False
             '
-            'dgvFileType
-            '
-            Me.dgvFileType.BegFindValue = Nothing
-            Me.dgvFileType.DataPropertyName = "InvType"
-            DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
-            Me.dgvFileType.DefaultCellStyle = DataGridViewCellStyle6
-            Me.dgvFileType.EditingMode = False
-            Me.dgvFileType.EndFindValue = Nothing
-            Me.dgvFileType.FieldDescription = Nothing
-            Me.dgvFileType.FieldName = Nothing
-            Me.dgvFileType.FillWeight = 60.0!
-            Me.dgvFileType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.dgvFileType.FindEnabled = False
-            Me.dgvFileType.HeaderText = "Patient Type"
-            Me.dgvFileType.IgnoreCase = False
-            Me.dgvFileType.MinimumWidth = 6
-            Me.dgvFileType.Name = "dgvFileType"
-            Me.dgvFileType.ReadOnly = True
-            Me.dgvFileType.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.dgvFileType.Translatable = False
-            Me.dgvFileType.Width = 60
-            '
             'InvTypeDataGridViewTextBoxColumn
             '
             Me.InvTypeDataGridViewTextBoxColumn.BegFindValue = Nothing
@@ -308,177 +524,18 @@
             Me.InvTypeDataGridViewTextBoxColumn.Translatable = False
             Me.InvTypeDataGridViewTextBoxColumn.Width = 70
             '
-            'dgvTime
-            '
-            Me.dgvTime.DataPropertyName = "InvTime"
-            DataGridViewCellStyle8.Format = "hh:mm tt"
-            DataGridViewCellStyle8.NullValue = Nothing
-            Me.dgvTime.DefaultCellStyle = DataGridViewCellStyle8
-            Me.dgvTime.HeaderText = "Time"
-            Me.dgvTime.MinimumWidth = 6
-            Me.dgvTime.Name = "dgvTime"
-            Me.dgvTime.ReadOnly = True
-            Me.dgvTime.Width = 125
-            '
-            'dgvTransKey
-            '
-            Me.dgvTransKey.DataPropertyName = "TransKey"
-            Me.dgvTransKey.HeaderText = "TransKey"
-            Me.dgvTransKey.MinimumWidth = 6
-            Me.dgvTransKey.Name = "dgvTransKey"
-            Me.dgvTransKey.ReadOnly = True
-            Me.dgvTransKey.Visible = False
-            Me.dgvTransKey.Width = 125
-            '
             'bsPmrPatientDisplay
             '
             Me.bsPmrPatientDisplay.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PmrPatientDisplayModel)
             '
-            'CLabel1
-            '
-            Me.CLabel1.BackColor = System.Drawing.Color.Transparent
-            Me.CLabel1.DisplayOnly = True
-            Me.CLabel1.EditingMode = False
-            Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel1.Location = New System.Drawing.Point(1, 40)
-            Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
-            Me.CLabel1.Name = "CLabel1"
-            Me.CLabel1.Size = New System.Drawing.Size(208, 28)
-            Me.CLabel1.TabIndex = 13
-            Me.CLabel1.Text = "Transaction Date:"
-            Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.CLabel1.Translatable = True
-            '
-            'CLabel2
-            '
-            Me.CLabel2.BackColor = System.Drawing.Color.Transparent
-            Me.CLabel2.DisplayOnly = True
-            Me.CLabel2.EditingMode = False
-            Me.CLabel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel2.Location = New System.Drawing.Point(1, 1)
-            Me.CLabel2.Margin = New System.Windows.Forms.Padding(1)
-            Me.CLabel2.Name = "CLabel2"
-            Me.CLabel2.Size = New System.Drawing.Size(228, 28)
-            Me.CLabel2.TabIndex = 14
-            Me.CLabel2.Text = "Doctors Code - Name:"
-            Me.CLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.CLabel2.Translatable = True
-            '
-            'dtpTransactionDate
-            '
-            Me.dtpTransactionDate.AutoSize = True
-            Me.dtpTransactionDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-            Me.dtpTransactionDate.CalendarCulture = New System.Globalization.CultureInfo("en-GB")
-            Me.dtpTransactionDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
-            Me.TableLayoutPanel1.SetColumnSpan(Me.dtpTransactionDate, 2)
-            Me.dtpTransactionDate.DefaultValue = Nothing
-            Me.dtpTransactionDate.DisplayOnly = False
-            Me.dtpTransactionDate.DtpDefaultValue = Nothing
-            Me.dtpTransactionDate.EditingMode = True
-            Me.dtpTransactionDate.EditsAllowed = False
-            Me.dtpTransactionDate.ForeColor = System.Drawing.Color.Black
-            Me.dtpTransactionDate.LinkedLabel = Nothing
-            Me.dtpTransactionDate.Location = New System.Drawing.Point(231, 40)
-            Me.dtpTransactionDate.Margin = New System.Windows.Forms.Padding(1)
-            Me.dtpTransactionDate.Name = "dtpTransactionDate"
-            Me.dtpTransactionDate.ReadOnlyDp = False
-            Me.dtpTransactionDate.SecurityKey = Nothing
-            Me.dtpTransactionDate.ShowLongDate = False
-            Me.dtpTransactionDate.ShowTime = False
-            Me.dtpTransactionDate.Size = New System.Drawing.Size(119, 27)
-            Me.dtpTransactionDate.TabIndex = 12
-            Me.dtpTransactionDate.TargetCalendar = CType(resources.GetObject("dtpTransactionDate.TargetCalendar"), System.Globalization.Calendar)
-            Me.dtpTransactionDate.Translatable = False
-            Me.dtpTransactionDate.Value = Nothing
-            Me.dtpTransactionDate.ValueIsMandatory = False
-            Me.dtpTransactionDate.ValueIsNullable = False
-            '
-            'cboDoctorName
-            '
-            Me.cboDoctorName.BackColor = System.Drawing.Color.White
-            Me.cboDoctorName.BegFindValue = Nothing
-            Me.cboDoctorName.ChangingSearchValueOnly = False
-            Me.TableLayoutPanel1.SetColumnSpan(Me.cboDoctorName, 2)
-            Me.cboDoctorName.CurrentSearchTerm = ""
-            Me.cboDoctorName.DataValue = Nothing
-            Me.cboDoctorName.DefaultValue = Nothing
-            Me.cboDoctorName.DisplayMember = "Name"
-            Me.cboDoctorName.Editable = True
-            Me.cboDoctorName.EditingMode = True
-            Me.cboDoctorName.EndFindValue = Nothing
-            Me.cboDoctorName.FieldDescription = Nothing
-            Me.cboDoctorName.FieldName = Nothing
-            Me.cboDoctorName.FilterRule = Nothing
-            Me.cboDoctorName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.cboDoctorName.FindEnabled = False
-            Me.cboDoctorName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.cboDoctorName.ForeColor = System.Drawing.Color.Black
-            Me.cboDoctorName.FormattingEnabled = True
-            Me.cboDoctorName.HideWhenNotEditingOrAdding = False
-            Me.cboDoctorName.IgnoreCase = False
-            Me.cboDoctorName.IntegralHeight = False
-            Me.cboDoctorName.LimitToList = False
-            Me.cboDoctorName.LinkedLabel = Nothing
-            Me.cboDoctorName.Location = New System.Drawing.Point(231, 1)
-            Me.cboDoctorName.Margin = New System.Windows.Forms.Padding(1)
-            Me.cboDoctorName.Name = "cboDoctorName"
-            Me.cboDoctorName.OldValue = 0
-            Me.cboDoctorName.OriginalDataSource = Nothing
-            Me.cboDoctorName.OriginalList = Nothing
-            Me.cboDoctorName.OverrideDropDownStyleList = False
-            Me.cboDoctorName.PreviousSearchTerm = Nothing
-            Me.cboDoctorName.PropertySelector = Nothing
-            Me.cboDoctorName.Size = New System.Drawing.Size(677, 28)
-            Me.cboDoctorName.SuggestBoxHeight = 200
-            Me.cboDoctorName.SuggestCharCount = 0
-            Me.cboDoctorName.SuggestListOrderRule = Nothing
-            Me.cboDoctorName.TabIndex = 15
-            Me.cboDoctorName.TextToSearch = Nothing
-            Me.cboDoctorName.Translatable = False
-            Me.cboDoctorName.ValueIsMandatory = False
-            Me.cboDoctorName.ValueIsNullable = False
-            Me.cboDoctorName.ValueIsNumeric = False
-            Me.cboDoctorName.ValueMember = "Code"
-            '
-            'txtDoctorCode
-            '
-            Me.txtDoctorCode.BackColor = System.Drawing.Color.White
-            Me.txtDoctorCode.BegFindValue = Nothing
-            Me.txtDoctorCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtDoctorCode.ComputedValue = False
-            Me.txtDoctorCode.CustomFormat = Nothing
-            Me.txtDoctorCode.DataBoundControl = True
-            Me.txtDoctorCode.EditingMode = True
-            Me.txtDoctorCode.EndFindValue = Nothing
-            Me.txtDoctorCode.FieldDescription = Nothing
-            Me.txtDoctorCode.FieldName = Nothing
-            Me.txtDoctorCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtDoctorCode.FindEnabled = False
-            Me.txtDoctorCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtDoctorCode.ForeColor = System.Drawing.Color.Black
-            Me.txtDoctorCode.LinkedLabel = Nothing
-            Me.txtDoctorCode.Location = New System.Drawing.Point(924, 110)
-            Me.txtDoctorCode.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtDoctorCode.MaximumValue = Nothing
-            Me.txtDoctorCode.MinimumValue = Nothing
-            Me.txtDoctorCode.Name = "txtDoctorCode"
-            Me.txtDoctorCode.OldValue = Nothing
-            Me.txtDoctorCode.OverrideMaxLength = 0
-            Me.txtDoctorCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtDoctorCode.Size = New System.Drawing.Size(106, 26)
-            Me.txtDoctorCode.TabIndex = 16
-            Me.txtDoctorCode.Translatable = False
-            Me.txtDoctorCode.Visible = False
-            '
             'PmrInvestigationRequestForm
             '
-            Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+            Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
             Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
             Me.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.GreenGradientBackgroundLarge
-            Me.ClientSize = New System.Drawing.Size(1053, 681)
+            Me.ClientSize = New System.Drawing.Size(822, 592)
             Me.Controls.Add(Me.CFlowLayout2)
             Me.Controls.Add(Me.txtDoctorCode)
-            Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
             Me.Name = "PmrInvestigationRequestForm"
             Me.Text = "PMR Request Form"
             Me.Controls.SetChildIndex(Me.txtDoctorCode, 0)
@@ -522,5 +579,8 @@
         Friend WithEvents dgvTransKey As DataGridViewTextBoxColumn
         Friend WithEvents cboDoctorName As Libraries.CBaseControlsLibrary.CtCombobox
         Friend WithEvents txtDoctorCode As Libraries.CBaseControlsLibrary.CTextBox
+        Friend WithEvents btnBlankOrPrePrintedForm As Libraries.CBaseControlsLibrary.CButton
+        Friend WithEvents lblBlankOrPrePrintedForm As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents cboServiceRequestForm As Libraries.CBaseControlsLibrary.CtComboBox
     End Class
 End Namespace

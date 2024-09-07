@@ -31,6 +31,7 @@ Namespace PresentationLayer.Presenters
             Service.SaveConnectionString()
             Service.SetConnectionString($"ISPDATA")
             MakeControlDataSources({New Object() {"Doctor_View", "DoctorName", "IdNo,DoctorName,DoctorCode", Nothing, Nothing}})
+            MakeControlDataSources({New Object() {"ItemCode", "ServiceRequestForm", Nothing, "CodeGroupIdNo=17"}})
             Service.RestoreConnectionString()
         End Sub
 
@@ -255,21 +256,30 @@ Namespace PresentationLayer.Presenters
             MyBase.New(itemView)
             Service = New AccountsService("PmrInvestigationRequest")
             Service.SaveConnectionString()
-            Service.SetConnectionString($"IGROUPCLINIC")
             TableName = "PmrPatientDisplay_View"
             SortOrderKey = "Trans_Key"
-            Service.RestoreConnectionString()
             WithTreeView = False
             AddHandler View.DoctorCodeRequested, AddressOf GetDoctorCode
             AddHandler View.GetDoctorPatientsRequested, AddressOf GetDoctorsPatients
             AddHandler View.GetPmrDataAccessRequested, AddressOf GetPMRDataAccess
-
+            Service.SetConnectionString($"ISPDATA")
+            View.ServiceRequestForm = Service.GetField(Of Int16, Int16, Int16)(AppSettingGroupSelector.UserDefaultServiceRequestForm, GlobalVariables.UserIdNo, "AppSetting", "AppSettingGroupIdNo", "Selector1IdNo", "selector2IdNo")
+            Service.RestoreConnectionString()
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            Service.SaveConnectionString()
+            'Service.SaveConnectionString()
+            'MakeControlDataSources({New Object() {"Doctor_View", "DoctorName", "IdNo,DoctorName,DoctorCode", Nothing, Nothing}})
+
+            'Service.SetConnectionString($"ISPDATA")
+            'MakeControlDataSources({New Object() {"ItemCode", "ServiceRequestForm", "IdNo,ItemCodeName,ItemCodeCode", "CodeGroupIdNo = 17", Nothing}})
+
+
+            Dim data As New ArrayList
             Service.SetConnectionString($"ISPDATA")
-            MakeControlDataSources({New Object() {"Doctor_View", "DoctorName", "IdNo,DoctorName,DoctorCode", Nothing, Nothing}})
+            data.Add({"Doctor_View", "DoctorName", "IdNo,DoctorName,DoctorCode", Nothing})
+            data.Add({"ItemCode", "ServiceRequestForm", "IdNo,ItemCodeName,ItemCodeCode", "CodeGroupIdNo=13"})
+            CreateControlDataSources(data)
             Service.RestoreConnectionString()
         End Sub
 

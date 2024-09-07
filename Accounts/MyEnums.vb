@@ -445,5 +445,6 @@ Public Enum AppSettingGroupSelector
     SecurityGroupDefaultBranch = 2
     SecurityGroupDefaultInventoryWarehouse = 3
     UserManagedWarehouse = 4
+    UserDefaultServiceRequestForm = 5
 End Enum
 
