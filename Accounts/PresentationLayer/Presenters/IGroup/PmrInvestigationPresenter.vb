@@ -278,7 +278,7 @@ Namespace PresentationLayer.Presenters
             Dim data As New ArrayList
             Service.SetConnectionString($"ISPDATA")
             data.Add({"Doctor_View", "DoctorName", "IdNo,DoctorName,DoctorCode", Nothing})
-            data.Add({"ItemCode", "ServiceRequestForm", "IdNo,ItemCodeName,ItemCodeCode", "CodeGroupIdNo=13"})
+            data.Add({"ItemCode", "ServiceRequestForm", "IdNo,ItemCodeName,ItemCodeCode", "CodeGroupIdNo=17"})
             CreateControlDataSources(data)
             Service.RestoreConnectionString()
         End Sub
@@ -300,6 +300,11 @@ Namespace PresentationLayer.Presenters
             Service.SaveConnectionString()
             Service.SetConnectionString($"ISPDATA")
             drId = Service.GetField(Of String, Int32)(employeeIdNo, "Doctor", "EmployeeIdNo", "DoctorCode")
+            View.ServiceRequestForm = Service.GetField(Of Int16, Int32, Int32)(5, GlobalVariables.UserIdNo, "AppSetting", "AppSettingGroupIdNo", "Selector1IdNo", "Selector2IdNo")
+            If View.ServiceRequestForm = 0 Then
+                Dim sServiceRequestForm As String = Service.GetField(Of Int16, Int32, Int32)(5, GlobalVariables.UserIdNo, "AppSetting", "AppSettingGroupIdNo", "Selector1IdNo", "Selector2IdNo")
+                View.ServiceRequestForm = Convert.ToInt16(sServiceRequestForm)
+            End If
             Service.RestoreConnectionString()
         End Sub
 
