@@ -3,6 +3,7 @@ Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries.GlobalFuncNSub
+Imports CrystalDecisions.ReportAppServer.DataDefModel
 
 Namespace PresentationLayer.Presenters
 
@@ -67,6 +68,26 @@ Namespace PresentationLayer.Presenters
             dataAccessLevel += IIf(CanUserViewSecurity("PMRLab"), "1", "0")
             dataAccessLevel += IIf(CanUserViewSecurity("PMRXray"), "1", "0")
             dataAccessLevel += IIf(CanUserViewSecurity("PMREROther"), "1", "0")
+        End Sub
+
+        Public Sub SetDefaultForm()
+            Service.SaveConnectionString()
+            Service.SetConnectionString($"ISPDATA")
+            Dim idNo As Int16 = Service.GetField(Of Int16)(5, GlobalVariables.UserIdNo, "AppSetting", "AppSettingGroupIdNo", "Selector1IdNo", "IdNo")
+            Service.GenericUpdateRecordWithIdNo(Of Decimal)(idNo, "AppSetting", "Selector2IdNo", View.ServiceRequestForm)
+            Service.RestoreConnectionString()
+
+            'If Service.GenericUpdateRecordWithIdNo(Of String)(GlobalVariables.UserIdNo, "AppSettingUser", "Password", ePassword) Then
+            '    Messaging.Show(True, "MsgPasswordSaved", "Password saved")
+            '    retVal = True
+            'Else
+            '    Messaging.Show(True, "MsgPasswordNotSaved", "Password not saved")
+            '    retVal = False
+            'End If
+
+            'Service.GenericUpdateRecordWithIdNo(Of String)(userIdNo, "User", "Password", ePassword) Then
+
+
         End Sub
 
         Private Function CanUserViewSecurity(securityKey As String) As String
@@ -248,7 +269,7 @@ Namespace PresentationLayer.Presenters
     '    End Sub
 
     'End Class
-    
+
     Public Class PmrInvestigationRequestPresenter(Of TM As New)
         Inherits CommonPresenter(Of IPmrInvestigationRequestView, TM)
 
@@ -262,6 +283,7 @@ Namespace PresentationLayer.Presenters
             AddHandler View.DoctorCodeRequested, AddressOf GetDoctorCode
             AddHandler View.GetDoctorPatientsRequested, AddressOf GetDoctorsPatients
             AddHandler View.GetPmrDataAccessRequested, AddressOf GetPMRDataAccess
+            AddHandler View.SetDefaultForm, AddressOf SetDefaultForm
             Service.SetConnectionString($"ISPDATA")
             View.ServiceRequestForm = Service.GetField(Of Int16, Int16, Int16)(AppSettingGroupSelector.UserDefaultServiceRequestForm, GlobalVariables.UserIdNo, "AppSetting", "AppSettingGroupIdNo", "Selector1IdNo", "selector2IdNo")
             Service.RestoreConnectionString()
@@ -302,8 +324,24 @@ Namespace PresentationLayer.Presenters
             drId = Service.GetField(Of String, Int32)(employeeIdNo, "Doctor", "EmployeeIdNo", "DoctorCode")
             View.ServiceRequestForm = Service.GetField(Of Int16, Int32, Int32)(5, GlobalVariables.UserIdNo, "AppSetting", "AppSettingGroupIdNo", "Selector1IdNo", "Selector2IdNo")
             If View.ServiceRequestForm = 0 Then
-                Dim sServiceRequestForm As String = Service.GetField(Of Int16, Int32, Int32)(5, GlobalVariables.UserIdNo, "AppSetting", "AppSettingGroupIdNo", "Selector1IdNo", "Selector2IdNo")
+                Dim sServiceRequestForm As String = Service.GetField(Of Int16, String)(5, "AppSettingGroup", "AppSettingCode", "DefaultValue")
                 View.ServiceRequestForm = Convert.ToInt16(sServiceRequestForm)
+                If View.ServiceRequestForm = 0 Then
+
+                End If
+            End If
+            Service.RestoreConnectionString()
+        End Sub
+
+        Public Sub SetDefaultForm()
+            Service.SaveConnectionString()
+            Service.SetConnectionString($"ISPDATA")
+            Dim idNo As Int32 = Service.GetField(Of Int16, Int32, Int32)(5, GlobalVariables.UserIdNo, "AppSetting", "AppSettingGroupIdNo", "Selector1IdNo", "IdNo")
+            If idNo > 0 Then
+                Service.GenericUpdateRecordWithIdNo(Of Decimal)(idNo, "AppSetting", "Selector2IdNo", View.ServiceRequestForm)
+            Else
+                Dim values As Object() = CType({5, GlobalVariables.UserIdNo, View.ServiceRequestForm}, Object())
+                Dim result As Int32 = Service.InsertRecord("AppSetting", {"AppSettingGroupIdNo", "Selector1IdNo", "Selector2IdNo"}, {"Integer", "Integer", "Integer"}, values)
             End If
             Service.RestoreConnectionString()
         End Sub

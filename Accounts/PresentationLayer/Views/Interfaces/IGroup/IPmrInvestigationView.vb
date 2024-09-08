@@ -9,9 +9,10 @@ Namespace PresentationLayer.Views.Interfaces
         Property DoctorName As String
         Property TransactionDate As Date?
         Property DoctorsPatients As List(Of DoctorsPatientView)
+        Property ServiceRequestForm As Int16
 
         Event DataChanged()
-
+        Event SetDefaultForm()
         Event DoctorCodeRequested(ByRef drId As String)
         Event GetPmrDataAccessRequested(ByRef drId As String)
     End Interface
@@ -49,7 +50,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property PmrPatientsDisplay As List(Of PmrPatientDisplayView)
 
         Event GetDoctorPatientsRequested()
-
+        Event SetDefaultForm()
         Event DoctorCodeRequested(ByRef drId As String)
         Event GetPmrDataAccessRequested(ByRef drId As String)
     End Interface
