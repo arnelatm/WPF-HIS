@@ -9,6 +9,7 @@ Namespace PresentationLayer.Views.Forms
         Implements IPmrInvestigationRequestView
 
         Public Event GetDoctorPatientsRequested() Implements IPmrInvestigationRequestView.GetDoctorPatientsRequested
+        Public Event SetDefaultForm() Implements IPmrInvestigationRequestView.SetDefaultForm
 
         Public Event DoctorCodeRequested(ByRef drId As String) Implements IPmrInvestigationRequestView.DoctorCodeRequested
 
@@ -241,6 +242,9 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
+        Private Sub btnSetAsDefault_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnSetAsDefault.ClickButtonArea
+            RaiseEvent SetDefaultForm()
+        End Sub
     End Class
 
 End Namespace

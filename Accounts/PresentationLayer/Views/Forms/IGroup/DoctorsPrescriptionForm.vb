@@ -23,6 +23,7 @@ Namespace PresentationLayer.Views.Forms
         Private _prescriptionDetails As New List(Of PrescriptionItemView)
         Public Event RowChanged(patientIdNo As Int32) Implements IDoctorsPrescriptionView.RowChanged
         Public Event PrintDosageLabel() Implements IDoctorsPrescriptionView.PrintDosageLabel
+        Public Event SetDefaultForm() Implements IPmrInvestigationView.SetDefaultForm
 
         Public Sub New()
             'MyBase.New()
@@ -92,6 +93,14 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property ServiceRequestForm As Short Implements IPmrInvestigationView.ServiceRequestForm
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As Short)
+                Throw New NotImplementedException()
+            End Set
+        End Property
 
         Private Sub BindDoctorsPatient()
             SuspendLayout()
