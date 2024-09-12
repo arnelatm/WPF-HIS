@@ -25,13 +25,13 @@
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PmrInvestigationRequestForm))
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Me.btnRefresh = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.imgList = New System.Windows.Forms.ImageList(Me.components)
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
@@ -39,21 +39,21 @@
             Me.btnSetAsDefault = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.lblBlankOrPrePrintedForm = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.DataGridViewPmrPatientDisplay = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
-            Me.TokenDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.StatusDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
-            Me.FileNoDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.NameDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvFileType = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.InvTypeDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvTime = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.dgvTransKey = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.bsPmrPatientDisplay = New System.Windows.Forms.BindingSource(Me.components)
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.cboDoctorName = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.cboServiceRequestForm = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.txtDoctorCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.TokenDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.StatusDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
+            Me.FileNoDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.NameDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.InvTypeDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.bsPmrPatientDisplay = New System.Windows.Forms.BindingSource(Me.components)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout2.SuspendLayout()
             Me.TableLayoutPanel1.SuspendLayout()
@@ -197,103 +197,6 @@
             Me.DataGridViewPmrPatientDisplay.TabIndex = 11
             Me.DataGridViewPmrPatientDisplay.Translatable = True
             '
-            'TokenDataGridViewTextBoxColumn
-            '
-            Me.TokenDataGridViewTextBoxColumn.BegFindValue = Nothing
-            Me.TokenDataGridViewTextBoxColumn.DataPropertyName = "Token"
-            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
-            Me.TokenDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle2
-            Me.TokenDataGridViewTextBoxColumn.EditingMode = False
-            Me.TokenDataGridViewTextBoxColumn.EndFindValue = Nothing
-            Me.TokenDataGridViewTextBoxColumn.FieldDescription = Nothing
-            Me.TokenDataGridViewTextBoxColumn.FieldName = Nothing
-            Me.TokenDataGridViewTextBoxColumn.FillWeight = 40.0!
-            Me.TokenDataGridViewTextBoxColumn.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.TokenDataGridViewTextBoxColumn.FindEnabled = False
-            Me.TokenDataGridViewTextBoxColumn.HeaderText = "Token"
-            Me.TokenDataGridViewTextBoxColumn.IgnoreCase = False
-            Me.TokenDataGridViewTextBoxColumn.MinimumWidth = 6
-            Me.TokenDataGridViewTextBoxColumn.Name = "TokenDataGridViewTextBoxColumn"
-            Me.TokenDataGridViewTextBoxColumn.ReadOnly = True
-            Me.TokenDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.TokenDataGridViewTextBoxColumn.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.TokenDataGridViewTextBoxColumn.Translatable = False
-            Me.TokenDataGridViewTextBoxColumn.Width = 40
-            '
-            'StatusDataGridViewTextBoxColumn
-            '
-            Me.StatusDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-            Me.StatusDataGridViewTextBoxColumn.BegFindValue = Nothing
-            Me.StatusDataGridViewTextBoxColumn.DataPropertyName = "Status"
-            DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-            DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle3.NullValue = False
-            Me.StatusDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle3
-            Me.StatusDataGridViewTextBoxColumn.EditingMode = False
-            Me.StatusDataGridViewTextBoxColumn.EndFindValue = Nothing
-            Me.StatusDataGridViewTextBoxColumn.FieldDescription = Nothing
-            Me.StatusDataGridViewTextBoxColumn.FieldName = Nothing
-            Me.StatusDataGridViewTextBoxColumn.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.StatusDataGridViewTextBoxColumn.FindEnabled = False
-            Me.StatusDataGridViewTextBoxColumn.HeaderText = "Status"
-            Me.StatusDataGridViewTextBoxColumn.IgnoreCase = False
-            Me.StatusDataGridViewTextBoxColumn.MinimumWidth = 6
-            Me.StatusDataGridViewTextBoxColumn.Name = "StatusDataGridViewTextBoxColumn"
-            Me.StatusDataGridViewTextBoxColumn.ReadOnly = True
-            Me.StatusDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.StatusDataGridViewTextBoxColumn.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.StatusDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-            Me.StatusDataGridViewTextBoxColumn.Translatable = False
-            Me.StatusDataGridViewTextBoxColumn.Width = 62
-            '
-            'FileNoDataGridViewTextBoxColumn
-            '
-            Me.FileNoDataGridViewTextBoxColumn.BegFindValue = Nothing
-            Me.FileNoDataGridViewTextBoxColumn.DataPropertyName = "FileNo"
-            DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
-            Me.FileNoDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle4
-            Me.FileNoDataGridViewTextBoxColumn.EditingMode = False
-            Me.FileNoDataGridViewTextBoxColumn.EndFindValue = Nothing
-            Me.FileNoDataGridViewTextBoxColumn.FieldDescription = Nothing
-            Me.FileNoDataGridViewTextBoxColumn.FieldName = Nothing
-            Me.FileNoDataGridViewTextBoxColumn.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.FileNoDataGridViewTextBoxColumn.FindEnabled = False
-            Me.FileNoDataGridViewTextBoxColumn.HeaderText = "FileNo"
-            Me.FileNoDataGridViewTextBoxColumn.IgnoreCase = False
-            Me.FileNoDataGridViewTextBoxColumn.MinimumWidth = 6
-            Me.FileNoDataGridViewTextBoxColumn.Name = "FileNoDataGridViewTextBoxColumn"
-            Me.FileNoDataGridViewTextBoxColumn.ReadOnly = True
-            Me.FileNoDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.FileNoDataGridViewTextBoxColumn.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.FileNoDataGridViewTextBoxColumn.Translatable = False
-            Me.FileNoDataGridViewTextBoxColumn.Width = 80
-            '
-            'NameDataGridViewTextBoxColumn
-            '
-            Me.NameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-            Me.NameDataGridViewTextBoxColumn.BegFindValue = Nothing
-            Me.NameDataGridViewTextBoxColumn.DataPropertyName = "Name"
-            DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
-            Me.NameDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle5
-            Me.NameDataGridViewTextBoxColumn.EditingMode = False
-            Me.NameDataGridViewTextBoxColumn.EndFindValue = Nothing
-            Me.NameDataGridViewTextBoxColumn.FieldDescription = Nothing
-            Me.NameDataGridViewTextBoxColumn.FieldName = Nothing
-            Me.NameDataGridViewTextBoxColumn.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.NameDataGridViewTextBoxColumn.FindEnabled = False
-            Me.NameDataGridViewTextBoxColumn.HeaderText = "Name"
-            Me.NameDataGridViewTextBoxColumn.IgnoreCase = False
-            Me.NameDataGridViewTextBoxColumn.MinimumWidth = 6
-            Me.NameDataGridViewTextBoxColumn.Name = "NameDataGridViewTextBoxColumn"
-            Me.NameDataGridViewTextBoxColumn.ReadOnly = True
-            Me.NameDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.NameDataGridViewTextBoxColumn.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.NameDataGridViewTextBoxColumn.Translatable = False
-            '
             'dgvFileType
             '
             Me.dgvFileType.BegFindValue = Nothing
@@ -317,29 +220,6 @@
             Me.dgvFileType.Translatable = False
             Me.dgvFileType.Width = 60
             '
-            'InvTypeDataGridViewTextBoxColumn
-            '
-            Me.InvTypeDataGridViewTextBoxColumn.BegFindValue = Nothing
-            Me.InvTypeDataGridViewTextBoxColumn.DataPropertyName = "InvType"
-            DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
-            Me.InvTypeDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle7
-            Me.InvTypeDataGridViewTextBoxColumn.EditingMode = False
-            Me.InvTypeDataGridViewTextBoxColumn.EndFindValue = Nothing
-            Me.InvTypeDataGridViewTextBoxColumn.FieldDescription = Nothing
-            Me.InvTypeDataGridViewTextBoxColumn.FieldName = Nothing
-            Me.InvTypeDataGridViewTextBoxColumn.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.InvTypeDataGridViewTextBoxColumn.FindEnabled = False
-            Me.InvTypeDataGridViewTextBoxColumn.HeaderText = "Invoice Type"
-            Me.InvTypeDataGridViewTextBoxColumn.IgnoreCase = False
-            Me.InvTypeDataGridViewTextBoxColumn.MinimumWidth = 6
-            Me.InvTypeDataGridViewTextBoxColumn.Name = "InvTypeDataGridViewTextBoxColumn"
-            Me.InvTypeDataGridViewTextBoxColumn.ReadOnly = True
-            Me.InvTypeDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.InvTypeDataGridViewTextBoxColumn.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.InvTypeDataGridViewTextBoxColumn.Translatable = False
-            Me.InvTypeDataGridViewTextBoxColumn.Width = 70
-            '
             'dgvTime
             '
             Me.dgvTime.DataPropertyName = "InvTime"
@@ -361,10 +241,6 @@
             Me.dgvTransKey.ReadOnly = True
             Me.dgvTransKey.Visible = False
             Me.dgvTransKey.Width = 125
-            '
-            'bsPmrPatientDisplay
-            '
-            Me.bsPmrPatientDisplay.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PmrPatientDisplayModel)
             '
             'CLabel1
             '
@@ -547,6 +423,130 @@
             Me.txtDoctorCode.TabIndex = 16
             Me.txtDoctorCode.Translatable = False
             Me.txtDoctorCode.Visible = False
+            '
+            'TokenDataGridViewTextBoxColumn
+            '
+            Me.TokenDataGridViewTextBoxColumn.BegFindValue = Nothing
+            Me.TokenDataGridViewTextBoxColumn.DataPropertyName = "Token"
+            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+            Me.TokenDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle2
+            Me.TokenDataGridViewTextBoxColumn.EditingMode = False
+            Me.TokenDataGridViewTextBoxColumn.EndFindValue = Nothing
+            Me.TokenDataGridViewTextBoxColumn.FieldDescription = Nothing
+            Me.TokenDataGridViewTextBoxColumn.FieldName = Nothing
+            Me.TokenDataGridViewTextBoxColumn.FillWeight = 40.0!
+            Me.TokenDataGridViewTextBoxColumn.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.TokenDataGridViewTextBoxColumn.FindEnabled = False
+            Me.TokenDataGridViewTextBoxColumn.HeaderText = "Token"
+            Me.TokenDataGridViewTextBoxColumn.IgnoreCase = False
+            Me.TokenDataGridViewTextBoxColumn.MinimumWidth = 6
+            Me.TokenDataGridViewTextBoxColumn.Name = "TokenDataGridViewTextBoxColumn"
+            Me.TokenDataGridViewTextBoxColumn.ReadOnly = True
+            Me.TokenDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.TokenDataGridViewTextBoxColumn.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.TokenDataGridViewTextBoxColumn.Translatable = False
+            Me.TokenDataGridViewTextBoxColumn.Width = 40
+            '
+            'StatusDataGridViewTextBoxColumn
+            '
+            Me.StatusDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+            Me.StatusDataGridViewTextBoxColumn.BegFindValue = Nothing
+            Me.StatusDataGridViewTextBoxColumn.DataPropertyName = "Status"
+            DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+            DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle3.NullValue = False
+            Me.StatusDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle3
+            Me.StatusDataGridViewTextBoxColumn.EditingMode = False
+            Me.StatusDataGridViewTextBoxColumn.EndFindValue = Nothing
+            Me.StatusDataGridViewTextBoxColumn.FieldDescription = Nothing
+            Me.StatusDataGridViewTextBoxColumn.FieldName = Nothing
+            Me.StatusDataGridViewTextBoxColumn.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.StatusDataGridViewTextBoxColumn.FindEnabled = False
+            Me.StatusDataGridViewTextBoxColumn.HeaderText = "Status"
+            Me.StatusDataGridViewTextBoxColumn.IgnoreCase = False
+            Me.StatusDataGridViewTextBoxColumn.MinimumWidth = 6
+            Me.StatusDataGridViewTextBoxColumn.Name = "StatusDataGridViewTextBoxColumn"
+            Me.StatusDataGridViewTextBoxColumn.ReadOnly = True
+            Me.StatusDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.StatusDataGridViewTextBoxColumn.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.StatusDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.StatusDataGridViewTextBoxColumn.Translatable = False
+            Me.StatusDataGridViewTextBoxColumn.Width = 62
+            '
+            'FileNoDataGridViewTextBoxColumn
+            '
+            Me.FileNoDataGridViewTextBoxColumn.BegFindValue = Nothing
+            Me.FileNoDataGridViewTextBoxColumn.DataPropertyName = "FileNo"
+            DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
+            Me.FileNoDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle4
+            Me.FileNoDataGridViewTextBoxColumn.EditingMode = False
+            Me.FileNoDataGridViewTextBoxColumn.EndFindValue = Nothing
+            Me.FileNoDataGridViewTextBoxColumn.FieldDescription = Nothing
+            Me.FileNoDataGridViewTextBoxColumn.FieldName = Nothing
+            Me.FileNoDataGridViewTextBoxColumn.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.FileNoDataGridViewTextBoxColumn.FindEnabled = False
+            Me.FileNoDataGridViewTextBoxColumn.HeaderText = "FileNo"
+            Me.FileNoDataGridViewTextBoxColumn.IgnoreCase = False
+            Me.FileNoDataGridViewTextBoxColumn.MinimumWidth = 6
+            Me.FileNoDataGridViewTextBoxColumn.Name = "FileNoDataGridViewTextBoxColumn"
+            Me.FileNoDataGridViewTextBoxColumn.ReadOnly = True
+            Me.FileNoDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.FileNoDataGridViewTextBoxColumn.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.FileNoDataGridViewTextBoxColumn.Translatable = False
+            Me.FileNoDataGridViewTextBoxColumn.Width = 80
+            '
+            'NameDataGridViewTextBoxColumn
+            '
+            Me.NameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+            Me.NameDataGridViewTextBoxColumn.BegFindValue = Nothing
+            Me.NameDataGridViewTextBoxColumn.DataPropertyName = "Name"
+            DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
+            Me.NameDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle5
+            Me.NameDataGridViewTextBoxColumn.EditingMode = False
+            Me.NameDataGridViewTextBoxColumn.EndFindValue = Nothing
+            Me.NameDataGridViewTextBoxColumn.FieldDescription = Nothing
+            Me.NameDataGridViewTextBoxColumn.FieldName = Nothing
+            Me.NameDataGridViewTextBoxColumn.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.NameDataGridViewTextBoxColumn.FindEnabled = False
+            Me.NameDataGridViewTextBoxColumn.HeaderText = "Name"
+            Me.NameDataGridViewTextBoxColumn.IgnoreCase = False
+            Me.NameDataGridViewTextBoxColumn.MinimumWidth = 6
+            Me.NameDataGridViewTextBoxColumn.Name = "NameDataGridViewTextBoxColumn"
+            Me.NameDataGridViewTextBoxColumn.ReadOnly = True
+            Me.NameDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.NameDataGridViewTextBoxColumn.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.NameDataGridViewTextBoxColumn.Translatable = False
+            '
+            'InvTypeDataGridViewTextBoxColumn
+            '
+            Me.InvTypeDataGridViewTextBoxColumn.BegFindValue = Nothing
+            Me.InvTypeDataGridViewTextBoxColumn.DataPropertyName = "InvType"
+            DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
+            Me.InvTypeDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle7
+            Me.InvTypeDataGridViewTextBoxColumn.EditingMode = False
+            Me.InvTypeDataGridViewTextBoxColumn.EndFindValue = Nothing
+            Me.InvTypeDataGridViewTextBoxColumn.FieldDescription = Nothing
+            Me.InvTypeDataGridViewTextBoxColumn.FieldName = Nothing
+            Me.InvTypeDataGridViewTextBoxColumn.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.InvTypeDataGridViewTextBoxColumn.FindEnabled = False
+            Me.InvTypeDataGridViewTextBoxColumn.HeaderText = "Invoice Type"
+            Me.InvTypeDataGridViewTextBoxColumn.IgnoreCase = False
+            Me.InvTypeDataGridViewTextBoxColumn.MinimumWidth = 6
+            Me.InvTypeDataGridViewTextBoxColumn.Name = "InvTypeDataGridViewTextBoxColumn"
+            Me.InvTypeDataGridViewTextBoxColumn.ReadOnly = True
+            Me.InvTypeDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.InvTypeDataGridViewTextBoxColumn.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.InvTypeDataGridViewTextBoxColumn.Translatable = False
+            Me.InvTypeDataGridViewTextBoxColumn.Width = 70
+            '
+            'bsPmrPatientDisplay
+            '
+            Me.bsPmrPatientDisplay.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PmrPatientDisplayModel)
             '
             'PmrInvestigationRequestForm
             '

@@ -335,6 +335,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub SetDefaultForm()
             Service.SaveConnectionString()
+
             Service.SetConnectionString($"ISPDATA")
             Dim idNo As Int32 = Service.GetField(Of Int16, Int32, Int32)(5, GlobalVariables.UserIdNo, "AppSetting", "AppSettingGroupIdNo", "Selector1IdNo", "IdNo")
             If idNo > 0 Then
