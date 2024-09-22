@@ -377,7 +377,12 @@ Namespace PresentationLayer.Presenters
             View.Pct = Transform(aCBCResults(CBCEnum.Pct), "%")
             View.Mpv = Transform(aCBCResults(CBCEnum.Mpv), " fL")
             View.Pdw = Transform(aCBCResults(CBCEnum.Pdw), "%")
-            View.Remarks = String.Join("~", aCBCResults(CBCEnum.Remarks).Split("~"))
+            If aCBCResults(CBCEnum.Remarks) Is Nothing Then
+                View.Remarks = ""
+            Else
+                View.Remarks = String.Join("~", aCBCResults(CBCEnum.Remarks).Split("~"))
+            End If
+
         End Sub
 
         Public Enum CBCEnum
