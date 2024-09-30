@@ -1252,27 +1252,29 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         End If
         Dim nRowCount As Int16 = 1
         Dim workRow As DataRow = Nothing
-        For Each dataView In dataViews
-            If includeFilter.Invoke(dataView) Then
-                Dim idNo As Integer = Invoker.GetProperty(dataView, dataViewIdNoFieldName)
-                If idNo <= 0 Then
-                    workRow = insertTable.NewRow()
-                Else
-                    workRow = updateTable.NewRow()
-                    workRow(dataViewIdNoFieldName) = idNo
+        If dataViews IsNot Nothing Then
+            For Each dataView In dataViews
+                If includeFilter.Invoke(dataView) Then
+                    Dim idNo As Integer = Invoker.GetProperty(dataView, dataViewIdNoFieldName)
+                    If idNo <= 0 Then
+                        workRow = insertTable.NewRow()
+                    Else
+                        workRow = updateTable.NewRow()
+                        workRow(dataViewIdNoFieldName) = idNo
+                    End If
+                    If sequenceFieldName <> "" Then
+                        workRow(sequenceFieldName) = nRowCount
+                    End If
+                    fillSub.Invoke(dataView, workRow)
+                    If idNo <= 0 Then
+                        insertTable.Rows.Add(workRow)
+                    Else
+                        updateTable.Rows.Add(workRow)
+                    End If
+                    nRowCount += 1
                 End If
-                If sequenceFieldName <> "" Then
-                    workRow(sequenceFieldName) = nRowCount
-                End If
-                fillSub.Invoke(dataView, workRow)
-                If idNo <= 0 Then
-                    insertTable.Rows.Add(workRow)
-                Else
-                    updateTable.Rows.Add(workRow)
-                End If
-                nRowCount += 1
-            End If
-        Next
+            Next
+        End If
         Return workRow
     End Function
 
@@ -2172,17 +2174,19 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     End Function
 
     Public Function FirstFieldDuplicate(Of T1, T2)(ByRef items As List(Of T1), ByVal fieldName As String) As Integer?
-        Dim [set] As HashSet(Of T2) = New HashSet(Of T2)()
-        Dim i As Integer = 0
-        Dim x As T2
-        For Each item As T1 In items
-            x = Invoker.GetProperty(item, fieldName)
-            If [set].Contains(x) Then
-                Return i
-            End If
-            [set].Add(x)
-            i += 1
-        Next
+        If items IsNot Nothing Then
+            Dim [set] As HashSet(Of T2) = New HashSet(Of T2)()
+            Dim i As Integer = 0
+            Dim x As T2
+            For Each item As T1 In items
+                x = Invoker.GetProperty(item, fieldName)
+                If [set].Contains(x) Then
+                    Return i
+                End If
+                [set].Add(x)
+                i += 1
+            Next
+        End If
         Return Nothing
     End Function
 

@@ -91,6 +91,10 @@ Namespace PresentationLayer.Presenters
             Return False
         End Function
 
+        Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
+            View.Active = True
+        End Sub
+
     End Class
 
 End Namespace

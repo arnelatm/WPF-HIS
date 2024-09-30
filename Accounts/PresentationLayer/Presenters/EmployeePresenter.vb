@@ -188,10 +188,12 @@ Namespace PresentationLayer.Presenters
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If Not CancelSave Then
                 Dim employeePayElements As New List(Of EmployeePayElementView)
-                employeePayElements.AddRange(View.RegularEmployeeEarnings)
-                employeePayElements.AddRange(View.RegularEmployeeDeductions)
-
-                CustomObjToDataTables(employeePayElements, DtEmpPayElementInsertTable, DtEmpPayElementUpdateTable, AddressOf EmpPayElementFillData, AddressOf EmpPayElementFilter)
+                If View.RegularEmployeeEarnings IsNot Nothing Then
+                    employeePayElements.AddRange(View.RegularEmployeeEarnings)
+                End If
+                If View.RegularEmployeeDeductions IsNot Nothing Then
+                    employeePayElements.AddRange(View.RegularEmployeeDeductions)
+                End If
                 CustomObjToDataTables(View.EmployeeLeaveCredits, DtEmpLeaveCreditInsertTable, DtEmpLeaveCreditUpdateTable, AddressOf EmpLeaveCreditFillData, AddressOf EmpLeaveCreditFilter)
                 CustomObjToDataTables(View.EmployeePhones, DtPhoneInsertTable, DtPhoneUpdateTable, AddressOf PhoneFillData, AddressOf PhoneFilter)
                 SaveDocumentImages()
@@ -285,41 +287,44 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub SaveDocumentImages()
-            For Each item In View.EmployeeDocuments
-                If item.Changed Then
-                    ' item has changed need to save the image
-                    Dim diImage As New DataImage
-                    If IsEmpty(item.ImageFileName) Then
-                        If item.DataImageIdNo > 0 Then
-                            diImage.IdNo = item.IdNo
-                            diImage.Image = Nothing
-                            SaveDataImage(item, diImage, Nothing)
-                        End If
-                    Else
-                        Dim fileInfo As New FileInfo(item.ImageFileName)
-                        Dim length As Long = fileInfo.Length
-                        Dim maxImageSize As Decimal = 3000000
-                        If maxImageSize > 0 Then
-                            If fileInfo.Length > maxImageSize Then
-                                Dim resizer As ImageResizer = New ImageResizer(maxImageSize, item.ImageFileName, item.ImageFileName)
-                                If Not resizer.ScaleImage() Then
-                                    MessageBox.Show("Cannot scale image to " & maxImageSize.ToString() & $" bytes size. Either select a smaller file size or resize the image manually to less than or equal to " & maxImageSize.ToString() & " bytes.")
-                                Else
-                                    If IsEmpty(item.ImageFileName) Then
-                                        diImage.Image = Nothing
+            If View.EmployeeDocuments IsNot Nothing Then
+                For Each item In View.EmployeeDocuments
+                    If item.Changed Then
+                        ' item has changed need to save the image
+                        Dim diImage As New DataImage
+                        If IsEmpty(item.ImageFileName) Then
+                            If item.DataImageIdNo > 0 Then
+                                diImage.IdNo = item.IdNo
+                                diImage.Image = Nothing
+                                SaveDataImage(item, diImage, Nothing)
+                            End If
+                        Else
+                            Dim fileInfo As New FileInfo(item.ImageFileName)
+                            Dim length As Long = fileInfo.Length
+                            Dim maxImageSize As Decimal = 3000000
+                            If maxImageSize > 0 Then
+                                If fileInfo.Length > maxImageSize Then
+                                    Dim resizer As ImageResizer = New ImageResizer(maxImageSize, item.ImageFileName, item.ImageFileName)
+                                    If Not resizer.ScaleImage() Then
+                                        MessageBox.Show("Cannot scale image to " & maxImageSize.ToString() & $" bytes size. Either select a smaller file size or resize the image manually to less than or equal to " & maxImageSize.ToString() & " bytes.")
                                     Else
-                                        diImage.Image = Drawing.Image.FromFile(item.ImageFileName)
+                                        If IsEmpty(item.ImageFileName) Then
+                                            diImage.Image = Nothing
+                                        Else
+                                            diImage.Image = Drawing.Image.FromFile(item.ImageFileName)
+                                        End If
+                                        SaveDataImage(item, diImage, item.ImageFileName)
                                     End If
+                                Else
+                                    diImage.IdNo = item.DataImageIdNo
                                     SaveDataImage(item, diImage, item.ImageFileName)
                                 End If
-                            Else
-                                diImage.IdNo = item.DataImageIdNo
-                                SaveDataImage(item, diImage, item.ImageFileName)
                             End If
                         End If
                     End If
-                End If
-            Next
+                Next
+            End If
+
         End Sub
 
         Private Shared Sub SaveDataImage(ByRef employeeDocumentView As EmployeeDocumentView, ByRef diImage As DataImage, ByVal imageFileName As String)
