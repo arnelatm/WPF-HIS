@@ -1,0 +1,2 @@
+﻿CREATE USER [مختبر2] WITHOUT LOGIN;
+

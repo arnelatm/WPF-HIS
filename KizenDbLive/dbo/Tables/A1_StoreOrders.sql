@@ -1,0 +1,25 @@
+﻿CREATE TABLE [dbo].[A1_StoreOrders] (
+    [ID]                 INT            IDENTITY (1, 1) NOT NULL,
+    [WorkID]             NVARCHAR (MAX) NULL,
+    [Count]              INT            NULL,
+    [Date]               DATE           NULL,
+    [Time]               TIME (0)       NULL,
+    [UserName]           NVARCHAR (MAX) NULL,
+    [Note]               NVARCHAR (MAX) NULL,
+    [SupplierID]         INT            NULL,
+    [NeededLevel]        INT            NULL,
+    [ExpensesCount]      INT            NULL,
+    [ExpensesName]       NVARCHAR (MAX) NULL,
+    [ExpensesDate]       DATE           NULL,
+    [ExpensesTime]       TIME (0)       NULL,
+    [ExpensesNote]       NVARCHAR (MAX) NULL,
+    [ExpensesSupplierID] INT            NULL,
+    [PrushesID]          NVARCHAR (MAX) NULL,
+    [Status]             INT            NULL,
+    [ExpensesWorkID]     NVARCHAR (MAX) NULL,
+    [ExpensesWorkName]   NVARCHAR (MAX) NULL,
+    [ExpensesStoreID]    INT            NULL,
+    [PrushesWorkID]      INT            NULL,
+    CONSTRAINT [PK_A1_StoreOrders] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+

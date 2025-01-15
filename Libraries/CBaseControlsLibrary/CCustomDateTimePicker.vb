@@ -200,7 +200,12 @@ Public Class CCustomDateTimePicker
                 If ShowTime Then
                     cText += " " + txtTime.GetMilitaryTime()
                 End If
-                retVal = Convert.ToDateTime(cText, tCulture)
+                Try
+                    retVal = Convert.ToDateTime(cText, tCulture)
+                Catch ex As Exception
+                    Beep()
+                    retVal = Today()
+                End Try
             End If
         Else
             Dim tCalendar As Calendar
@@ -736,7 +741,7 @@ Public Class CCustomDateTimePicker
         ToggleTargetCulture()
     End Sub
 
-    Protected Overridable Sub OnValueChanged(sender As Object, e As EventArgs) Handles txtLongDate.TextChanged, txtDate.TextChanged
+    Protected Overridable Sub OnValueChanged(sender As Object, e As EventArgs) Handles txtLongDate.Validating, txtDate.Validating
         RaiseEvent ValueChanged(sender, e)
     End Sub
 

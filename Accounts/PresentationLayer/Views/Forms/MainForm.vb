@@ -1308,7 +1308,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub DiagnosticSamplesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDiagnosticSamples.Click
-            RunForm(Of IbLabSampleForm, IbLabSamplePresenter(Of IbLabSampleModel))()
+            RunForm(Of IbLabSampleForm, IbLabSamplePresenter(Of IbLabSampleModel), String)("IGroupClinic")
         End Sub
 
         Private Sub ToolStripMenuItemClinicTestSummary_Click(sender As Object, e As EventArgs)
@@ -1344,11 +1344,29 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of ReportGroupEntry, ReportGroupPresenter(Of ReportGroupModel))()
         End Sub
 
-        Private Sub DiagnosticResultEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDiagnosticResultEntry.Click
-            RunForm(Of IbLabResultForm, IbLabResultPresenter(Of IbLabResultModel))()
+        Private Sub IqamaResultEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemIqamaResultEntryIGroup.Click
+            RunForm(Of IbLabResultForm, IbLabResultPresenter(Of IbLabResultModel), Object)({"IGroupClinic", "Iqama"})
         End Sub
 
+        Private Sub BaladiyaResultEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemBaladiyaResultEntryIGroup.Click
+            RunForm(Of IbLabResultForm, IbLabResultPresenter(Of IbLabResultModel), Object)({"IGroupClinic", "Baladiya"})
+        End Sub
 
+        Private Sub DiagnosticResultEntryKizenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemIqamaResultEntryKizen.Click
+            RunForm(Of IbLabResultForm, IbLabResultPresenter(Of IbLabResultModel), Object)({"Kizen", "Iqama"})
+        End Sub
+
+        Private Sub DiagnosticSamplesKizenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDiagnosticSamplesKizen.Click
+            RunForm(Of IbLabSampleForm, IbLabSamplePresenter(Of IbLabSampleModel), String)("Kizen")
+        End Sub
+
+        Private Sub ToolStripMenuItemBaladiyaResultEntryKizen_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemBaladiyaResultEntryKizen.Click
+            RunForm(Of IbLabResultForm, IbLabResultPresenter(Of IbLabResultModel), Object)({"Kizen", "Baladiya"})
+        End Sub
+
+        Private Sub ToolStripMenuItemReports_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemReports.Click
+
+        End Sub
     End Class
 
 End Namespace

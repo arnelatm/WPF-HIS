@@ -14,14 +14,16 @@ Namespace PresentationLayer.Views.Forms
         Private _ibLabSampleDetails As New List(Of IbLabSampleDetailView)
         Private _doctorId As String
         Private _dataAccessLevel As String = ""
+        Private _connectionName As String = ""
 
         Public Event IbLabSamplesRequested(transactionDate As Date?) Implements IIbLabSampleView.IbLabSamplesRequested
         Public Event IbLabSampleChanged(bindingSource As BindingSource) Implements IIbLabSampleView.IbLabSampleChanged
 
-        Public Sub New()
+        Public Sub New(connectionName As String)
             'MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
+            _connectionName = connectionName
             SingleData = True
             QueryOnly = True
             DisplaySetup()
@@ -147,6 +149,7 @@ Namespace PresentationLayer.Views.Forms
         'Private Sub dtpTransactionDate_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles dtpTransactionDate.Validating
         '    RaiseEvent IbLabSamplesRequested(TransactionDate)
         'End Sub
+
 
         Private Sub dtpTransactionDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpTransactionDate.ValueChanged
             RaiseEvent IbLabSamplesRequested(TransactionDate)

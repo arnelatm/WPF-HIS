@@ -1,0 +1,25 @@
+﻿CREATE TABLE [dbo].[A1_BankTransiction] (
+    [ID]                 INT             IDENTITY (1, 1) NOT NULL,
+    [BankID]             INT             NULL,
+    [TransictionDate]    DATE            NULL,
+    [Type]               NVARCHAR (50)   NULL,
+    [Income]             DECIMAL (18, 2) NULL,
+    [OutCome]            DECIMAL (18, 2) NULL,
+    [Net]                DECIMAL (18, 2) NULL,
+    [For]                NVARCHAR (MAX)  NULL,
+    [TransictionID]      NVARCHAR (MAX)  NULL,
+    [Details]            NVARCHAR (MAX)  NULL,
+    [Note]               NVARCHAR (MAX)  NULL,
+    [User]               NVARCHAR (MAX)  NULL,
+    [Date]               DATE            NULL,
+    [Time]               TIME (0)        NULL,
+    [SourceName]         NVARCHAR (50)   NULL,
+    [TakenID]            INT             NULL,
+    [ExpensedEnb]        BIT             NULL,
+    [ExpensedID]         INT             NULL,
+    [SourceID]           INT             NULL,
+    [SourceID2]          INT             NULL,
+    [IsEndedDailyAcount] BIT             NULL,
+    CONSTRAINT [PK_A1_BankTransiction] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+

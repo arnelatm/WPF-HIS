@@ -1,0 +1,348 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>KizenDbLocal</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{fce4c02f-f867-43ee-9d1a-bc0aa2e0a9ba}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql160DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>KizenDb</RootNamespace>
+    <AssemblyName>KizenDb</AssemblyName>
+    <ModelCollation>1025,CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DefaultCollation>Arabic_CI_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+    <Folder Include="dbo\Views\" />
+    <Folder Include="Security\" />
+    <Folder Include="dbo\Functions\" />
+    <Folder Include="dbo\Stored Procedures\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\A1_Works_CustomSourceCode.sql" />
+    <Build Include="dbo\Tables\InsuranceInvoiceReturnLink.sql" />
+    <Build Include="dbo\Tables\Appointments.sql" />
+    <Build Include="dbo\Tables\__MigrationHistory.sql" />
+    <Build Include="dbo\Tables\VisitInput.sql" />
+    <Build Include="dbo\Tables\CustomerHealthEvents.sql" />
+    <Build Include="dbo\Tables\JC_DASH_Dashboard.sql" />
+    <Build Include="dbo\Tables\JC_DASH_DashboardAddedItem.sql" />
+    <Build Include="dbo\Tables\ErrorViewer.sql" />
+    <Build Include="dbo\Tables\AppType.sql" />
+    <Build Include="dbo\Tables\CBCResults.sql" />
+    <Build Include="dbo\Tables\FeedBack.sql" />
+    <Build Include="dbo\Tables\AppWorkTime.sql" />
+    <Build Include="dbo\Tables\Clinics.sql" />
+    <Build Include="dbo\Tables\HealthStatOtherType.sql" />
+    <Build Include="dbo\Tables\Drs.sql" />
+    <Build Include="dbo\Tables\VisitType.sql" />
+    <Build Include="dbo\Tables\Insurance_DCAF.sql" />
+    <Build Include="dbo\Tables\VisitData.sql" />
+    <Build Include="dbo\Tables\A1_ExpensesInvoices.sql" />
+    <Build Include="dbo\Tables\VisitList.sql" />
+    <Build Include="dbo\Tables\A1_ATM.sql" />
+    <Build Include="dbo\Tables\A1_OfferInvoice.sql" />
+    <Build Include="dbo\Tables\MedicRep.sql" />
+    <Build Include="dbo\Tables\A1_Box.sql" />
+    <Build Include="dbo\Tables\Notification.sql" />
+    <Build Include="dbo\Tables\A1_OfferInvoiceWorks.sql" />
+    <Build Include="dbo\Tables\NewsBarTxt.sql" />
+    <Build Include="dbo\Tables\A1_Salary.sql" />
+    <Build Include="dbo\Tables\KS_CustomerTemp.sql" />
+    <Build Include="dbo\Tables\Notification_Type.sql" />
+    <Build Include="dbo\Tables\A1_SalaryCommission.sql" />
+    <Build Include="dbo\Tables\KS_NoteUser.sql" />
+    <Build Include="dbo\Tables\Prescription.sql" />
+    <Build Include="dbo\Tables\JC_REP_Report.sql" />
+    <Build Include="dbo\Tables\AppointmentsCheckList.sql" />
+    <Build Include="dbo\Tables\1.sql" />
+    <Build Include="dbo\Tables\JC_REP_ReportSetting.sql" />
+    <Build Include="dbo\Tables\COMP_PrintHistory.sql" />
+    <Build Include="dbo\Tables\RepSty.sql" />
+    <Build Include="dbo\Tables\A1_Works_CustomPrice.sql" />
+    <Build Include="dbo\Tables\JC_REP_Setting.sql" />
+    <Build Include="dbo\Tables\CustomerNote.sql" />
+    <Build Include="dbo\Tables\ThtEvents.sql" />
+    <Build Include="dbo\Tables\JC_ED_Document.sql" />
+    <Build Include="dbo\Tables\ThtProcedureType.sql" />
+    <Build Include="dbo\Tables\EmployeeCommissions.sql" />
+    <Build Include="dbo\Tables\InsuranceInvoice.sql" />
+    <Build Include="dbo\Tables\A1_Store.sql" />
+    <Build Include="dbo\Tables\Insurance_DiscountTahmel.sql" />
+    <Build Include="dbo\Tables\UserSty.sql" />
+    <Build Include="dbo\Tables\A1_Vendor.sql" />
+    <Build Include="dbo\Tables\GrowthChart.sql" />
+    <Build Include="dbo\Tables\InsuranceInvoiceDiscount.sql" />
+    <Build Include="dbo\Tables\OccupationalExam.sql" />
+    <Build Include="dbo\Tables\InsuranceInvoiceReturn.sql" />
+    <Build Include="dbo\Tables\A1_Categorys.sql" />
+    <Build Include="dbo\Tables\Insurance_UCAF.sql" />
+    <Build Include="dbo\Tables\Adress.sql" />
+    <Build Include="dbo\Tables\A1_Invoces.sql" />
+    <Build Include="dbo\Tables\Specialties.sql" />
+    <Build Include="dbo\Tables\UserSession.sql" />
+    <Build Include="dbo\Tables\JC_SET_Setting.sql" />
+    <Build Include="dbo\Tables\SequenceList.sql" />
+    <Build Include="dbo\Tables\A1_Suppliers.sql" />
+    <Build Include="dbo\Tables\A1_StoreExpenses.sql" />
+    <Build Include="dbo\Tables\CustomersNotes.sql" />
+    <Build Include="dbo\Tables\InsuranceInvoicePayment.sql" />
+    <Build Include="dbo\Tables\A1_StoreExpensesWorks.sql" />
+    <Build Include="dbo\Tables\CutTybe.sql" />
+    <Build Include="dbo\Tables\InsuranceInvoicePaymentLink.sql" />
+    <Build Include="dbo\Tables\A1_StoreRequest.sql" />
+    <Build Include="dbo\Tables\JC_TOL_NumberingLog.sql" />
+    <Build Include="dbo\Tables\JC_TOL_NumberingSetting.sql" />
+    <Build Include="dbo\Tables\A1_StoreTransfers.sql" />
+    <Build Include="dbo\Tables\A1_StoreTransfersWorks.sql" />
+    <Build Include="dbo\Tables\Resources.sql" />
+    <Build Include="dbo\Tables\JC_CD_TemplateDocument.sql" />
+    <Build Include="dbo\Tables\JC_CD_Template.sql" />
+    <Build Include="dbo\Tables\DocumentsType.sql" />
+    <Build Include="dbo\Tables\AppStat.sql" />
+    <Build Include="dbo\Tables\JC_CD_Category.sql" />
+    <Build Include="dbo\Tables\A1_StoreOrders.sql" />
+    <Build Include="dbo\Tables\Query.sql" />
+    <Build Include="dbo\Tables\Glasses.sql" />
+    <Build Include="dbo\Tables\AppointmentsWatting.sql" />
+    <Build Include="dbo\Tables\JC_CD_SourceImage.sql" />
+    <Build Include="dbo\Tables\AppWorkTimeType.sql" />
+    <Build Include="dbo\Tables\MedicalReferral.sql" />
+    <Build Include="dbo\Tables\Chat.sql" />
+    <Build Include="dbo\Tables\Qualification.sql" />
+    <Build Include="dbo\Tables\Note.sql" />
+    <Build Include="dbo\Tables\A1_OrderWorks.sql" />
+    <Build Include="dbo\Tables\JobSources.sql" />
+    <Build Include="dbo\Tables\A1_QuotationWroks.sql" />
+    <Build Include="dbo\Tables\NoteTemplateTxt.sql" />
+    <Build Include="dbo\Tables\A1_Expenses.sql" />
+    <Build Include="dbo\Tables\City.sql" />
+    <Build Include="dbo\Tables\A1_payments.sql" />
+    <Build Include="dbo\Tables\DL_LabNames.sql" />
+    <Build Include="dbo\Tables\Archef.sql" />
+    <Build Include="dbo\Tables\MedicineList.sql" />
+    <Build Include="dbo\Tables\A1_Quotation.sql" />
+    <Build Include="dbo\Tables\DL_LabOrder.sql" />
+    <Build Include="dbo\Tables\Settings.sql" />
+    <Build Include="dbo\Tables\DL_LabOrderWorks.sql" />
+    <Build Include="dbo\Tables\Sms.sql" />
+    <Build Include="dbo\Tables\EmpHoliday.sql" />
+    <Build Include="dbo\Tables\Customers.sql" />
+    <Build Include="dbo\Tables\SmsTemplte.sql" />
+    <Build Include="dbo\Tables\Employee.sql" />
+    <Build Include="dbo\Tables\CustomReport.sql" />
+    <Build Include="dbo\Tables\KS_CustomersOutBlocked.sql" />
+    <Build Include="dbo\Tables\A1_PurchaseInvoces.sql" />
+    <Build Include="dbo\Tables\Empvisa.sql" />
+    <Build Include="dbo\Tables\Documents.sql" />
+    <Build Include="dbo\Tables\Values.sql" />
+    <Build Include="dbo\Tables\A1_PurchaseInvocesWorks.sql" />
+    <Build Include="dbo\Tables\ESignature.sql" />
+    <Build Include="dbo\Tables\Insurance_UCAF_DCAF_Works.sql" />
+    <Build Include="dbo\Tables\A1_StoreRequestWorks.sql" />
+    <Build Include="dbo\Tables\HolidayType.sql" />
+    <Build Include="dbo\Tables\MedicalEmpExamination.sql" />
+    <Build Include="dbo\Tables\A1_WorksVAT.sql" />
+    <Build Include="dbo\Tables\A1_Works.sql" />
+    <Build Include="dbo\Tables\Licenses.sql" />
+    <Build Include="dbo\Tables\PrescriptionMedic.sql" />
+    <Build Include="dbo\Tables\KS_FileNotes.sql" />
+    <Build Include="dbo\Tables\A1_Bank.sql" />
+    <Build Include="dbo\Tables\VisitAnalysesData.sql" />
+    <Build Include="dbo\Tables\NoteTemplateCat.sql" />
+    <Build Include="dbo\Tables\SpecialtieConsultants.sql" />
+    <Build Include="dbo\Tables\A1_BankTransiction.sql" />
+    <Build Include="dbo\Tables\A1_Contract.sql" />
+    <Build Include="dbo\Tables\Users.sql" />
+    <Build Include="dbo\Tables\A1_ContractQuotationLink.sql" />
+    <Build Include="dbo\Tables\VisitAnalysesResult.sql" />
+    <Build Include="dbo\Tables\A1_ExpensesCatag.sql" />
+    <Build Include="dbo\Tables\A1_InvoiceSession.sql" />
+    <Build Include="dbo\Tables\A1_Insurance_Company.sql" />
+    <Build Include="dbo\Tables\A1_InvoiceSessionDetail.sql" />
+    <Build Include="dbo\Tables\A1_Works_Wishlist.sql" />
+    <Build Include="dbo\Tables\Insurance_Company.sql" />
+    <Build Include="dbo\Tables\A1_Insurance_Contract.sql" />
+    <Build Include="dbo\Tables\A1_InvoiceSource.sql" />
+    <Build Include="dbo\Tables\AdmissionDischarge.sql" />
+    <Build Include="dbo\Tables\Insurance_Policy.sql" />
+    <Build Include="dbo\Tables\A1_OfferCompanie.sql" />
+    <Build Include="dbo\Tables\A1_PaymentMethod.sql" />
+    <Build Include="dbo\Tables\FileType.sql" />
+    <Build Include="dbo\Tables\Sms_NoEvent.sql" />
+    <Build Include="dbo\Tables\A1_OfferCompany.sql" />
+    <Build Include="dbo\Tables\A1_WalletPayment.sql" />
+    <Build Include="dbo\Tables\Insurance_OCAF.sql" />
+    <Build Include="dbo\Tables\HealthStatType.sql" />
+    <Build Include="dbo\Tables\A1_QucikInvoice.sql" />
+    <Build Include="dbo\Tables\A1_WorksSession.sql" />
+    <Build Include="dbo\Tables\KS_WordTranslation.sql" />
+    <Build Include="dbo\Tables\Jobs.sql" />
+    <Build Include="dbo\Tables\National.sql" />
+    <Build Include="dbo\Tables\UsersTemplte.sql" />
+    <Build Include="dbo\Tables\AppWaitType.sql" />
+    <Build Include="dbo\Tables\InsuranceInvoiceDoctorDetail.sql" />
+    <Build Include="dbo\Tables\A1_LocalProductionIncome.sql" />
+    <Build Include="dbo\Tables\JC_Grid.sql" />
+    <Build Include="dbo\Tables\KS_ValuesByType.sql" />
+    <Build Include="dbo\Tables\AppBlockedDate.sql" />
+    <Build Include="dbo\Tables\A1_LocalProductionOutcome.sql" />
+    <Build Include="dbo\Tables\JC_GridSetting.sql" />
+    <Build Include="dbo\Tables\InsuranceInvoiceReturnDetail.sql" />
+    <Build Include="dbo\Tables\AppointmentNote.sql" />
+    <Build Include="dbo\Tables\EventViewer.sql" />
+    <Build Include="dbo\Views\RefundedItem_View.sql" />
+    <Build Include="dbo\Views\EmploymentTests_View.sql" />
+    <Build Include="Security\kizen.sql" />
+    <Build Include="Security\NT AUTHORITY_NETWORK.sql" />
+    <Build Include="Security\88.sql" />
+    <Build Include="Security\Dr. Wafaa Alzuhairy.sql" />
+    <Build Include="Security\Duaa Basha.sql" />
+    <Build Include="Security\asd.sql" />
+    <Build Include="Security\dasd.sql" />
+    <Build Include="Security\dd.sql" />
+    <Build Include="Security\in.sql" />
+    <Build Include="Security\Dr Adel Abdulati.sql" />
+    <Build Include="Security\refd.sql" />
+    <Build Include="Security\rt.sql" />
+    <Build Include="Security\ss.sql" />
+    <Build Include="Security\test.sql" />
+    <Build Include="Security\z.sql" />
+    <Build Include="Security\أشعة.sql" />
+    <Build Include="Security\صفية.sql" />
+    <Build Include="Security\طبيب.sql" />
+    <Build Include="Security\طبيبة.sql" />
+    <Build Include="Security\مختبر.sql" />
+    <Build Include="Security\Khlood albriki.sql" />
+    <Build Include="Security\مختبر2.sql" />
+    <Build Include="Security\مستودع.sql" />
+    <Build Include="Security\admin2.sql" />
+    <Build Include="Security\جدبد.sql" />
+    <Build Include="Security\tt.sql" />
+    <Build Include="Security\insurace.sql" />
+    <Build Include="Security\t1.sql" />
+    <Build Include="Security\store.sql" />
+    <Build Include="Security\X-Ray Naif Alsmari.sql" />
+    <Build Include="Security\t2.sql" />
+    <Build Include="Security\t3.sql" />
+    <Build Include="Security\Fatin.sql" />
+    <Build Include="Security\rec.sql" />
+    <Build Include="Security\د محمد.sql" />
+    <Build Include="Security\Reem ALJuhani.sql" />
+    <Build Include="Security\Dr Abdulaziz Buaih.sql" />
+    <Build Include="Security\RDP.sql" />
+    <Build Include="Security\NT AUTHORITY_SYSTEM.sql" />
+    <Build Include="Security\NT AUTHORITY_SYSTEM_1.sql" />
+    <Build Include="Security\KIZEN_Administrator.sql" />
+    <Build Include="Security\Rana Bashraheel.sql" />
+    <Build Include="Security\Nada ALJuhani.sql" />
+    <Build Include="Security\Areej ALShareef.sql" />
+    <Build Include="Security\Hala Fetiani.sql" />
+    <Build Include="Security\Ahmad Rafat.sql" />
+    <Build Include="Security\Ihab Bukair.sql" />
+    <Build Include="Security\Mounirah Aljouid.sql" />
+    <Build Include="Security\MARWAH HAKAMI.sql" />
+    <Build Include="Security\Abdullah Amer.sql" />
+    <Build Include="Security\Rolando Gatbunton.sql" />
+    <Build Include="Security\Fatma Elzoghby.sql" />
+    <Build Include="Security\X-Ray allan.sql" />
+    <Build Include="Security\Dr Abdullrahman ALfol.sql" />
+    <Build Include="Security\ARNEL.sql" />
+    <Build Include="Security\ER.sql" />
+    <Build Include="Security\Pharmacy.sql" />
+    <Build Include="Security\Dr Jumana.sql" />
+    <Build Include="Security\Dr Ibrahim Abdulsalam.sql" />
+    <Build Include="Security\Dr Azza Ezzat.sql" />
+    <Build Include="Security\Dr Shaimaa Abdulrahim.sql" />
+    <Build Include="Security\Dr Esam Dahab.sql" />
+    <Build Include="Security\Dr Mahmoud Faraj.sql" />
+    <Build Include="Security\Latifa ALMutairi.sql" />
+    <Build Include="Security\Dr Abdullah Bajri.sql" />
+    <Build Include="Security\Dr Mervat abdulsalam.sql" />
+    <Build Include="Security\Doaa.sql" />
+    <Build Include="Security\CDAuditor.sql" />
+    <Build Include="Security\Nurse.sql" />
+    <Build Include="Security\Receptionist.sql" />
+    <Build Include="Security\VillyR.sql" />
+    <Build Include="Security\Emmarose.sql" />
+    <Build Include="Security\VillyS.sql" />
+    <Build Include="Security\EmmaR.sql" />
+    <Build Include="Security\EmmaRc.sql" />
+    <Build Include="Security\Duaa Bashaa.sql" />
+    <Build Include="Security\RoleMemberships.sql" />
+    <Build Include="dbo\Functions\GetInvoicePaidByDate.sql" />
+    <Build Include="dbo\Functions\GetPurchaseInvocesReturn.sql" />
+    <Build Include="dbo\Functions\GetWorkPurchaseCount.sql" />
+    <Build Include="dbo\Functions\GetWorkSaleCount.sql" />
+    <Build Include="dbo\Functions\GetWorkStoreRequestIncomeCount.sql" />
+    <Build Include="dbo\Functions\GetWorkStoreRequestOutcomeCount.sql" />
+    <Build Include="dbo\Functions\IsDrWorks.sql" />
+    <Build Include="dbo\Functions\GetVATPerExpense.sql" />
+    <Build Include="dbo\Functions\GetVATPerPayment.sql" />
+    <Build Include="dbo\Functions\ConvertDateToAge.sql" />
+    <Build Include="dbo\Functions\GetVATPerExpense_ByCat.sql" />
+    <Build Include="dbo\Functions\ConvertDCAFToothNo.sql" />
+    <Build Include="dbo\Functions\splitstring.sql" />
+    <Build Include="dbo\Functions\ConvertDateToAgeRounded.sql" />
+    <Build Include="dbo\Functions\ExpenseVATInfo.sql" />
+    <Build Include="dbo\Functions\PaymentVATInfo.sql" />
+    <Build Include="dbo\Stored Procedures\InvoicesWorksName.sql" />
+    <Build Include="dbo\Stored Procedures\SearchAllTables.sql" />
+    <Build Include="dbo\Stored Procedures\SetCustIDInsertIntoWithoutID.sql" />
+    <Build Include="dbo\Stored Procedures\ThtEventsGetPatWTeeth.sql" />
+    <Build Include="dbo\Stored Procedures\SearchNumAllTables.sql" />
+    <Build Include="dbo\Stored Procedures\SetA1_WorksIDToMinWithDelete.sql" />
+    <Build Include="dbo\Stored Procedures\SetA1_WorksInsertInto.sql" />
+    <Build Include="dbo\Stored Procedures\SetCustIDInsertInto.sql" />
+    <Build Include="dbo\Stored Procedures\SetCustIDToMax.sql" />
+    <Build Include="dbo\Stored Procedures\SetCustIDToMinWithDelete.sql" />
+    <Build Include="dbo\Stored Procedures\SetCustIDToZero.sql" />
+  </ItemGroup>
+</Project>

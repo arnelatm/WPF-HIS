@@ -1,0 +1,2 @@
+﻿CREATE USER [د محمد] WITHOUT LOGIN;
+

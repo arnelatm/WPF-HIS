@@ -1,0 +1,2 @@
+﻿CREATE USER [dd] WITHOUT LOGIN;
+

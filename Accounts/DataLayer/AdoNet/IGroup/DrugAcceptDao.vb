@@ -68,12 +68,12 @@ Namespace DataLayer.AdoNet
                             Function(reader) _
             New DrugAccept() With {
             .BatchNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("BatchNo")),
-            .Expiry = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Date)(reader("Expiry")),
+            .Expiry = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Date?)(reader("Expiry")),
             .GTin = AATM.DataLayer.AdoNet.Extensions.AsString(reader("GTin")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .ProductCode = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ProductCode")),
             .ProductName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ProductName")),
-            .AcceptDate = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Date)(reader("AcceptDate")),
+            .AcceptDate = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Date?)(reader("AcceptDate")),
             .SerializationNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("SerializationNo"))
             }
 

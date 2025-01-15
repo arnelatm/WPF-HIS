@@ -16,6 +16,7 @@ Namespace PresentationLayer.Models
         Public Property Age As Decimal
         Public Property IdNo As Int32
         Public Property IqamaNo As String
+        Public Property InvoiceNo As Int32
         Public Property LabNo As String
         Public Property Nationality As String
         Public Property PatientName As String
@@ -44,6 +45,7 @@ Namespace PresentationLayer.Models
         Public Property HIVEliza As Boolean?
         Public Property HCVEliza As Boolean?
         Public Property IdNo As Int32
+        Public Property InvoiceNo As Int32
         Public Property IqamaNo As String
         Public Property LabNo As String
         Public Property Malaria As Boolean?

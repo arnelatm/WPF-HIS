@@ -1,0 +1,2 @@
+﻿CREATE USER [طبيبة] WITHOUT LOGIN;
+

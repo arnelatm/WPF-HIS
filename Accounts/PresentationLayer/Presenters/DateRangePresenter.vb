@@ -192,6 +192,8 @@ Public Class ContactDateRangePresenter(Of TM As New)
             Service.SetConnectionString(_reportModel.DatabaseName)
             If contactName = "InsuranceDetails" Then
                 MakeVarDataSources({New Object() {"InsuranceDetails", "ContactDataSource", "InsuranceId,NameEnglish", Nothing}})
+            ElseIf contactName = "Insurance_Company" Then
+                MakeVarDataSources({New Object() {"Insurance_Company", "ContactDataSource", "Code,LatinName", Nothing}})
             ElseIf contactName = "Employee" Then
                 MakeVarDataSources({New Object() {"Employee", "ContactDataSource", "IdNo,EmployeeName,EmployeeCode", Nothing}})
             Else
@@ -228,8 +230,12 @@ Friend Module DateRangeModule
                 value = GlobalFunctions.GregorianDateSerial(now.Year, now.Month, now.Day).AddDays(1)
             Case "CM"
                 value = GlobalFunctions.GregorianDateSerial(now.Year, now.Month, 1)
+            Case "CME"
+                value = GlobalFunctions.GregorianDateSerial(now.Year, now.Month, 1).AddMonths(1).AddDays(-1)
             Case = "PM"
                 value = GlobalFunctions.GregorianDateSerial(now.Year, now.Month, 1).AddMonths(-1)
+            Case = "PME"
+                value = GlobalFunctions.GregorianDateSerial(now.Year, now.Month, 1).AddDays(-1)
             Case = "NM"
                 value = GlobalFunctions.GregorianDateSerial(now.Year, now.Month, 1).AddMonths(1)
             Case = "CY"

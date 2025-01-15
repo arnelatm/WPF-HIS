@@ -130,14 +130,14 @@
     <value>468, 17</value>
   </metadata>
   <metadata name="imageListMember.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1145, 17</value>
+    <value>17, 60</value>
   </metadata>
   <data name="imageListMember.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACg
-        CQAAAk1TRnQBSQFMAgEBAgEAAXgBDQF4AQ0BEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CQAAAk1TRnQBSQFMAgEBAgEAAaABDQGgAQ0BEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -4486,17 +4486,41 @@
   <data name="ToolStripMenuItemCbcResultRetrievalSampleId.Text" xml:space="preserve">
     <value>Cbc Result Retrieval By Sample Id No.</value>
   </data>
+  <data name="ToolStripMenuItemIqamaResultEntryKizen.Size" type="System.Drawing.Size, System.Drawing">
+    <value>341, 26</value>
+  </data>
+  <data name="ToolStripMenuItemIqamaResultEntryKizen.Text" xml:space="preserve">
+    <value>Iqama Result Entry (Kizen)</value>
+  </data>
+  <data name="ToolStripMenuItemBaladiyaResultEntryKizen.Size" type="System.Drawing.Size, System.Drawing">
+    <value>341, 26</value>
+  </data>
+  <data name="ToolStripMenuItemBaladiyaResultEntryKizen.Text" xml:space="preserve">
+    <value>Baladiya Result Entry (Kizen)</value>
+  </data>
+  <data name="ToolStripMenuItemDiagnosticSamplesKizen.Size" type="System.Drawing.Size, System.Drawing">
+    <value>341, 26</value>
+  </data>
+  <data name="ToolStripMenuItemDiagnosticSamplesKizen.Text" xml:space="preserve">
+    <value>Diagnostic Samples (Kizen)</value>
+  </data>
+  <data name="ToolStripMenuItemIqamaResultEntryIGroup.Size" type="System.Drawing.Size, System.Drawing">
+    <value>341, 26</value>
+  </data>
+  <data name="ToolStripMenuItemIqamaResultEntryIGroup.Text" xml:space="preserve">
+    <value>Iqama Result Entry (IGroup)</value>
+  </data>
+  <data name="ToolStripMenuItemBaladiyaResultEntryIGroup.Size" type="System.Drawing.Size, System.Drawing">
+    <value>341, 26</value>
+  </data>
+  <data name="ToolStripMenuItemBaladiyaResultEntryIGroup.Text" xml:space="preserve">
+    <value>Baladiya Result Entry (IGroup)</value>
+  </data>
   <data name="ToolStripMenuItemDiagnosticSamples.Size" type="System.Drawing.Size, System.Drawing">
     <value>341, 26</value>
   </data>
   <data name="ToolStripMenuItemDiagnosticSamples.Text" xml:space="preserve">
     <value>Diagnostic Samples</value>
-  </data>
-  <data name="ToolStripMenuItemDiagnosticResultEntry.Size" type="System.Drawing.Size, System.Drawing">
-    <value>341, 26</value>
-  </data>
-  <data name="ToolStripMenuItemDiagnosticResultEntry.Text" xml:space="preserve">
-    <value>Diagnostic Result Entry</value>
   </data>
   <data name="ToolStripMenuItemClinicSamples.Size" type="System.Drawing.Size, System.Drawing">
     <value>341, 26</value>
@@ -5109,14 +5133,14 @@
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <metadata name="imageList1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1324, 17</value>
+    <value>196, 60</value>
   </metadata>
   <data name="imageList1.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACg
-        CQAAAk1TRnQBSQFMAgEBAgEAAXgBDQF4AQ0BEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CQAAAk1TRnQBSQFMAgEBAgEAAaABDQGgAQ0BEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -5161,7 +5185,7 @@
 </value>
   </data>
   <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1454, 17</value>
+    <value>326, 60</value>
   </metadata>
   <data name="toolStripMenuItem3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -7399,16 +7423,40 @@
   <data name="&gt;&gt;ToolStripMenuItemCbcResultRetrieval.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;ToolStripMenuItemCbcResultRetrievalSampleId.Name" xml:space="preserve">
+    <value>ToolStripMenuItemCbcResultRetrievalSampleId</value>
+  </data>
+  <data name="&gt;&gt;ToolStripMenuItemCbcResultRetrievalSampleId.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolStripMenuItemIqamaResultEntryKizen.Name" xml:space="preserve">
+    <value>ToolStripMenuItemIqamaResultEntryKizen</value>
+  </data>
+  <data name="&gt;&gt;ToolStripMenuItemIqamaResultEntryKizen.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolStripMenuItemBaladiyaResultEntryKizen.Name" xml:space="preserve">
+    <value>ToolStripMenuItemBaladiyaResultEntryKizen</value>
+  </data>
+  <data name="&gt;&gt;ToolStripMenuItemBaladiyaResultEntryKizen.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolStripMenuItemDiagnosticSamplesKizen.Name" xml:space="preserve">
+    <value>ToolStripMenuItemDiagnosticSamplesKizen</value>
+  </data>
+  <data name="&gt;&gt;ToolStripMenuItemDiagnosticSamplesKizen.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolStripMenuItemIqamaResultEntryIGroup.Name" xml:space="preserve">
+    <value>ToolStripMenuItemIqamaResultEntryIGroup</value>
+  </data>
+  <data name="&gt;&gt;ToolStripMenuItemIqamaResultEntryIGroup.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;ToolStripMenuItemDiagnosticSamples.Name" xml:space="preserve">
     <value>ToolStripMenuItemDiagnosticSamples</value>
   </data>
   <data name="&gt;&gt;ToolStripMenuItemDiagnosticSamples.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ToolStripMenuItemDiagnosticResultEntry.Name" xml:space="preserve">
-    <value>ToolStripMenuItemDiagnosticResultEntry</value>
-  </data>
-  <data name="&gt;&gt;ToolStripMenuItemDiagnosticResultEntry.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ToolStripMenuItemClinicSamples.Name" xml:space="preserve">
@@ -8017,10 +8065,10 @@
   <data name="&gt;&gt;toolStripMenuItem19.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItemCbcResultRetrievalSampleId.Name" xml:space="preserve">
-    <value>ToolStripMenuItemCbcResultRetrievalSampleId</value>
+  <data name="&gt;&gt;ToolStripMenuItemBaladiyaResultEntryIGroup.Name" xml:space="preserve">
+    <value>ToolStripMenuItemBaladiyaResultEntryIGroup</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItemCbcResultRetrievalSampleId.Type" xml:space="preserve">
+  <data name="&gt;&gt;ToolStripMenuItemBaladiyaResultEntryIGroup.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[A1_Box] (
+    [ID]   INT           IDENTITY (1, 1) NOT NULL,
+    [Name] NVARCHAR (50) NULL,
+    CONSTRAINT [PK_A1_Box] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+

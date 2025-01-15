@@ -87,9 +87,9 @@ Namespace DataLayer.AdoNet
             .DataImageIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("DataImageIdNo")),
             .DocumentIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("DocumentIdNo")),
             .DocumentNumber = AATM.DataLayer.AdoNet.Extensions.AsString(reader("DocumentNumber")),
-            .ExpiryDate = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Date)(reader("ExpiryDate")),
+            .ExpiryDate = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Date?)(reader("ExpiryDate")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int16)(reader("IdNo")),
-            .IssueDate = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Date)(reader("IssueDate")),
+            .IssueDate = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Date?)(reader("IssueDate")),
             .Picture = AATM.DataLayer.AdoNet.Extensions.AsImage(reader("Picture")),
             .UserIdNo = GlobalVariables.UserIdNo
             }

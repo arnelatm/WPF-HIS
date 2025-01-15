@@ -43,7 +43,7 @@ Namespace DataLayer.AdoNet
                                     Function(reader) _
             New Inventory() With {
             .BatchNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("BatchNo")),
-            .ExpiryDate = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Date)(reader("ExpiryDate")),
+            .ExpiryDate = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Date?)(reader("ExpiryDate")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .TotalCost = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("TotalCost")),
             .ProductIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("ProductIdNo")),

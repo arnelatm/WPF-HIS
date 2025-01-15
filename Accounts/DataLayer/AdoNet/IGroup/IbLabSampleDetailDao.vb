@@ -9,7 +9,11 @@ Namespace DataLayer.AdoNet
     Public Class IbLabSampleDetailDao
         Inherits AccountsDao
 
-        Private ReadOnly _db As New Db("IGROUPCLINIC")
+        Private ReadOnly _db As New Db()
+
+        Public Sub New(connectionName As String)
+            _db = New Db(connectionName)
+        End Sub
 
         Public Overrides Function GetDB()
             Return _db
@@ -25,16 +29,33 @@ Namespace DataLayer.AdoNet
             Return _db.Update(sql, {"@Urine", urine, "@Stool", stool, "@Rbs", rbs, "@IdNo", idNo})
         End Function
 
+        Public Function AddRecord(invoiceNo As Int32, urine As Boolean?, stool As Boolean?, rbs As Decimal?, labNo As String, takenBy As String, takenDate As String, takenTime As String)
+            Dim sql As String = " Insert Into [IbLabSampleTaken] " &
+                    " (Trans_key, Urine, Stool, Rbs, LabReportNo, TakenBy, TakenDate, TakenTime) " &
+                    " Values " &
+                    " (@InvoiceNo, @Urine, @Stool, @Rbs, @LabNo, @TakenBy, @TakenDate, @TakenTime)"
+            Return _db.Insert(sql, {"@InvoiceNo", invoiceNo, "@Urine", urine, "@Stool", stool, "@Rbs", rbs, "@LabNo", labNo, "@TakenBy", takenBy, "@TakenDate", takenDate, "@TakenTime", takenTime})
+
+        End Function
+
     End Class
 
     Public Class IbLabResultDetailDao
         Inherits AccountsDao
 
-        Private ReadOnly _db As New Db("IGROUPCLINIC")
+        Private ReadOnly _db As New Db()
+        Private ReadOnly _connection As String
+        Private ReadOnly _testType As String
 
+        Public Sub New(parameter As Object)
+            _connection = parameter(0)
+            _testType = parameter(1)
+            _db = New Db(_connection)
+        End Sub
         Public Overrides Function GetDB()
             Return _db
         End Function
+
 
         Public Function UpdateRecord(IdNo As Int32, passportNumber As String, clinical As Boolean?, Xray As Boolean?, TBSputum As Boolean?,
                                                 hivEliza As Boolean?, HCVEliza As Boolean?, hbsagEliza As Boolean?, malaria As Boolean?, vdrl As Boolean?,

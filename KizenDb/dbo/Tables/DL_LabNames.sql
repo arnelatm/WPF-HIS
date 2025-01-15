@@ -1,0 +1,26 @@
+﻿CREATE TABLE [dbo].[DL_LabNames] (
+    [ID]                   INT            IDENTITY (1, 1) NOT NULL,
+    [Name]                 NVARCHAR (255) NULL,
+    [Date]                 DATE           NULL,
+    [time]                 TIME (0)       NULL,
+    [Adress]               NVARCHAR (MAX) NULL,
+    [Phone]                NVARCHAR (255) NULL,
+    [Mobile]               NVARCHAR (255) NULL,
+    [Fax]                  NVARCHAR (255) NULL,
+    [Nat]                  NVARCHAR (255) NULL,
+    [PersonalIdentity]     NVARCHAR (255) NULL,
+    [Email]                NVARCHAR (255) NULL,
+    [Note]                 NVARCHAR (MAX) NULL,
+    [User]                 NVARCHAR (255) NULL,
+    [City]                 NVARCHAR (255) NULL,
+    [IsDisabled]           BIT            NULL,
+    [IsAutoOrderNumbering] BIT            NULL,
+    [WebSite]              NVARCHAR (MAX) NULL,
+    [TechnicianName]       NVARCHAR (255) NULL,
+    [TechnicianMobile]     NVARCHAR (255) NULL,
+    [DelegateName]         NVARCHAR (255) NULL,
+    [DelegateMobile]       NVARCHAR (255) NULL,
+    [VATNumber]            NVARCHAR (MAX) NULL,
+    CONSTRAINT [PK_DL_LabNames] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+

@@ -1,0 +1,2 @@
+﻿CREATE USER [ss] WITHOUT LOGIN;
+

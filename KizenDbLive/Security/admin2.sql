@@ -1,0 +1,2 @@
+﻿CREATE USER [admin2] WITHOUT LOGIN;
+
