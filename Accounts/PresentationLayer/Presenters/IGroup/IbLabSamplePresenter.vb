@@ -17,20 +17,24 @@ Namespace PresentationLayer.Presenters
     Public Class IbLabSamplePresenter(Of TM As New)
         Inherits CommonPresenter(Of IIbLabSampleView, TM)
 
-        Private _ibLabSampleDetailDao As New IbLabSampleDetailDao
+        Private _ibLabSampleDetailDao
+        Private _connectionName As String
 
-        Public Sub New()
-
+        Public Sub New(connectionName As String)
+            _ibLabSampleDetailDao = New IbLabSampleDetailDao(connectionName)
+            _connectionName = connectionName
         End Sub
 
-        Public Sub New(itemView As IIbLabSampleView)
+        Public Sub New(itemView As IIbLabSampleView, connectionName As String)
             MyBase.New(itemView)
+            _connectionName = connectionName
+            _ibLabSampleDetailDao = New IbLabSampleDetailDao(_connectionName)
             Service = New AccountsService("IbLabSample")
             Service.SaveConnectionString()
-            Service.SetConnectionString($"IGROUPCLINIC")
+            Service.SetConnectionString(_connectionName)
             TableName = "IbLabSampleList_View"
             SortOrderKey = ""
-            Service.RestoreConnectionString()
+            'Service.RestoreConnectionString()
             WithTreeView = False
             AddHandler View.IbLabSamplesRequested, AddressOf GetIbLabSamples
             AddHandler View.IbLabSampleChanged, AddressOf UpdateLabSample
@@ -42,7 +46,13 @@ Namespace PresentationLayer.Presenters
 
         Public Sub UpdateLabSample(bindingSource As BindingSource)
             With bindingSource.Current
-                _ibLabSampleDetailDao.UpdateRecord(.idNo, .urine, .stool, .Rbs)
+                With bindingSource.Current
+                    If .IdNo < 0 Then
+                        AddNewRecord(bindingSource.Current)
+                    Else
+                        _ibLabSampleDetailDao.UpdateRecord(.idNo, .urine, .stool, .Rbs)
+                    End If
+                End With
             End With
         End Sub
 
@@ -66,6 +76,13 @@ Namespace PresentationLayer.Presenters
             GlobalVariables.Mapper.Map(IbLabSampleModel, View)
         End Sub
 
+        Private Sub AddNewRecord(item As IbLabSampleDetailView)
+            If item.IdNo <= 0 Then
+                Dim newIdNo As Int32 = _ibLabSampleDetailDao.AddRecord(item.InvoiceNo, item.Urine, item.Stool, item.Rbs, item.LabNo, item.TakenBy, item.TakenDate.ToString("dd/MM/yyyy"), Right(item.TakenTime, 8))
+                item.IdNo = newIdNo
+            End If
+        End Sub
+
         Public Overrides Sub GoPrintRecord()
             If View.TransactionDate Is Nothing Then
                 AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgDateCannotBeBlank")
@@ -79,7 +96,7 @@ Namespace PresentationLayer.Presenters
                 reportArgs.ReportParameters = {dateString, "TransactionDate",
                                                GlobalVariables.EstablishmentName, "EstablishmentName",
                                                reportTitle, "ReportTitle"}
-                reportArgs.DataBaseConnectionName = "IGroupClinic"
+                reportArgs.DataBaseConnectionName = _connectionName
                 Dim reportFileName As String = "IB Lab Sample Daily Report.Rpt"
                 Dim rpPresenter = New PrintReportPresenter(Of ReportModel)
                 rpPresenter.ViewReport(reportFileName, reportArgs, False)
@@ -95,20 +112,26 @@ Namespace PresentationLayer.Presenters
         Inherits CommonPresenter(Of IIbLabResultView, TM)
         'Implements ISubscriber(Of DgvItemsChanged)
 
-        Private _ibLabResultDetailDao As New IbLabResultDetailDao
+        Private _ibLabResultDetailDao
+        Private _connectionName As String
+        Private _testType As String
 
         Public Sub New()
 
         End Sub
 
-        Public Sub New(itemView As IIbLabResultView)
+
+        Public Sub New(itemView As IIbLabResultView, parameter As Object)
             MyBase.New(itemView)
+            _connectionName = parameter(0)
+            _testType = parameter(1)
+            _ibLabResultDetailDao = New IbLabResultDetailDao(parameter)
             Service = New AccountsService("IbLabResult")
             Service.SaveConnectionString()
-            Service.SetConnectionString($"IGROUPCLINIC")
+            Service.SetConnectionString(_connectionName)
             TableName = "IbLabResultList_View"
             SortOrderKey = ""
-            Service.RestoreConnectionString()
+            'Service.RestoreConnectionString()
             WithTreeView = False
             AddHandler View.IbLabResultRequested, AddressOf GetIbLabResults
             AddHandler View.IbLabResultChanged, AddressOf UpdateLabResult
@@ -144,7 +167,7 @@ Namespace PresentationLayer.Presenters
         Private Sub AddNewRecord(item As IbLabResultDetailView)
             If item.IdNo <= 0 Then
 
-                Dim newIdNo As Int32 = _ibLabResultDetailDao.AddRecord(item.TransKey, item.PassportNumber, item.Clinical, item.XRay, item.TBSputum,
+                Dim newIdNo As Int32 = _ibLabResultDetailDao.AddRecord(item.InvoiceNo, item.PassportNumber, item.Clinical, item.XRay, item.TBSputum,
                               item.HIVEliza, item.HCVEliza, item.HBSAgEliza, item.Malaria, item.VDRL, item.Widal, item.Pregnancy, item.BilharziasisUrine,
                               item.BilharziasisStool, item.Shigella, item.Cholera)
                 item.IdNo = newIdNo
@@ -229,7 +252,7 @@ Namespace PresentationLayer.Presenters
             If String.IsNullOrEmpty(View.TransactionDate) Then
                 IbLabResultModel = Nothing
             Else
-                IbLabResultModel = Service.GetParametrized(Of IbLabResultModel)({View.TransactionDate})
+                IbLabResultModel = Service.GetParametrized(Of IbLabResultModel)({View.TransactionDate, _testType, _connectionName})
             End If
             GlobalVariables.Mapper.Map(IbLabResultModel, View)
         End Sub
@@ -242,12 +265,14 @@ Namespace PresentationLayer.Presenters
                 Dim reportParameters As New Object
                 Dim dateString As String
                 Dim tempDate As DateTime = View.TransactionDate.Value
+                Dim ibType As String = IIf(_testType = "Iqama", "1", "2")
                 dateString = tempDate.ToString("yyyy/MM/dd")
                 Dim reportTitle As String = AATM.Libraries.MessagingLibrary.Messaging.TranslateCaption("Diagnostic Test Samples Taken Report for ") + dateString
                 reportArgs.ReportParameters = {dateString, "TransactionDate",
                                                GlobalVariables.EstablishmentName, "EstablishmentName",
-                                               reportTitle, "ReportTitle"}
-                reportArgs.DataBaseConnectionName = "IGroupClinic"
+                                               reportTitle, "ReportTitle",
+                                               ibType, "IbType"}
+                reportArgs.DataBaseConnectionName = _connectionName
                 Dim reportFileName As String = "IB Lab Result Daily Report.Rpt"
                 Dim rpPresenter = New PrintReportPresenter(Of ReportModel)
                 rpPresenter.ViewReport(reportFileName, reportArgs, False)

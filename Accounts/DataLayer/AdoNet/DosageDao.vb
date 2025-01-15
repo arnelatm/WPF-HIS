@@ -69,12 +69,12 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, Dosage) =
                             Function(reader) _
             New Dosage() With {
-            .Direction = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Int32)(reader("Direction")),
+            .Direction = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Int32?)(reader("Direction")),
             .DosageCode = AATM.DataLayer.AdoNet.Extensions.AsString(reader("DosageCode")),
             .Frequency = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("Frequency")),
-            .FrequencyTiming = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Int32)(reader("FrequencyTiming")),
+            .FrequencyTiming = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Int32?)(reader("FrequencyTiming")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
-            .Route = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Int32)(reader("Route")),
+            .Route = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Int32?)(reader("Route")),
             .DosageName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("DosageName")),
             .DosageNameAra = AATM.DataLayer.AdoNet.Extensions.AsString(reader("DosageNameAra"))
             }

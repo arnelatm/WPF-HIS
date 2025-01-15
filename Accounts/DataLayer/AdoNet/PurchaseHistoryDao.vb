@@ -53,7 +53,7 @@ Namespace DataLayer.AdoNet
             New PurchaseHistory() With {
             .BatchNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("BatchNo")),
             .BonusQuantity = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("BonusQuantity")),
-            .ExpiryDate = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Date)(reader("ExpiryDate")),
+            .ExpiryDate = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Date?)(reader("ExpiryDate")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .PurchaseIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("PurchaseIdNo")),
             .Quantity = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Quantity")),

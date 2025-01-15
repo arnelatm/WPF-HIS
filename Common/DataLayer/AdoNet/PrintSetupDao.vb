@@ -61,8 +61,8 @@ Namespace DataLayer.AdoNet
             .PaperOrientation = Extensions.AsInt(Of Int16)(reader("PaperOrientation")),
             .PaperSize = Extensions.AsInt(Of Int16)(reader("PaperSize")),
             .PaperSource = Extensions.AsInt(Of Integer)(reader("PaperSource")),
-            .PrinterIdNo = Extensions.AsNullable(Of Int16)(reader("PrinterIdNo")),
-            .PrintJobIdNo = Extensions.AsNullable(Of Int16)(reader("PrintJobIdNo")),
+            .PrinterIdNo = Extensions.AsNullable(Of Int16?)(reader("PrinterIdNo")),
+            .PrintJobIdNo = Extensions.AsNullable(Of Int16?)(reader("PrintJobIdNo")),
             .PrintSetupName = Extensions.AsString(reader("PrintSetupName"))
             }
 

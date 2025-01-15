@@ -1,0 +1,2 @@
+﻿CREATE USER [أشعة] WITHOUT LOGIN;
+

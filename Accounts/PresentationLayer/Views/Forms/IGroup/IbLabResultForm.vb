@@ -16,18 +16,22 @@ Namespace PresentationLayer.Views.Forms
         Private _ibLabResultDetails As New List(Of IbLabResultDetailView)
         Private _doctorId As String
         Private _dataAccessLevel As String = ""
+        Private _connectionName As String = ""
+        Private _testType As String = ""
 
         Public Event IbLabResultRequested(transactionDate As Date?) Implements IIbLabResultView.IbLabResultRequested
         Public Event IbLabResultChanged(bindingSource As BindingSource) Implements IIbLabResultView.IbLabResultChanged
         Public Event FillUpButtonClicked() Implements IIbLabResultView.FillUpButtonClicked
 
-        Public Sub New()
+        Public Sub New(parameter As Object)
             'MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
             SingleData = True
             QueryOnly = True
             DisplaySetup()
+            _connectionName = parameter(0)
+            _testType = parameter(1)
         End Sub
 
         Private Sub DisplaySetup()

@@ -1,0 +1,27 @@
+﻿CREATE TABLE [dbo].[MedicalEmpExamination] (
+    [ID]                       INT            IDENTITY (1, 1) NOT NULL,
+    [DateTime]                 DATETIME       NULL,
+    [UserID]                   INT            NULL,
+    [DrName]                   NVARCHAR (255) NULL,
+    [PatID]                    INT            NULL,
+    [PatName]                  NVARCHAR (255) NULL,
+    [Data]                     NVARCHAR (MAX) NULL,
+    [NotMedicallyfitEnb]       BIT            NULL,
+    [NotMedicallyfitCause]     NVARCHAR (MAX) NULL,
+    [AgainstSchizophrenia]     NVARCHAR (MAX) NULL,
+    [AgainstSchizophreniaDate] DATE           NULL,
+    [AgainstSchizophreniaDone] BIT            NULL,
+    [AgainstTyphoid]           NVARCHAR (MAX) NULL,
+    [AgainstTyphoidDate]       DATE           NULL,
+    [AgainstTyphoidDone]       BIT            NULL,
+    [HideMedicalSector]        BIT            NULL,
+    [Other]                    NVARCHAR (MAX) NULL,
+    [SampleLaboratory]         NVARCHAR (255) NULL,
+    [SampleXRay]               NVARCHAR (255) NULL,
+    [SampleDate]               DATETIME       NULL,
+    [IsFinish]                 BIT            NULL,
+    [Serial]                   INT            NULL,
+    [SampleUser]               NVARCHAR (255) NULL,
+    CONSTRAINT [PK_MedicalEmpExamination] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+

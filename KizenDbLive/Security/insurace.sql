@@ -1,0 +1,2 @@
+﻿CREATE USER [insurace] WITHOUT LOGIN;
+

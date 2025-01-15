@@ -19,6 +19,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property Age As Decimal
         Property IdNo As Int32
         Property IqamaNo As String
+        Property InvoiceNo As Int32
         Property LabNo As String
         Property Nationality As String
         Property PatientName As String
@@ -28,7 +29,9 @@ Namespace PresentationLayer.Views.Interfaces
         Property TakenBy As String
         Property TakenDate As Date
         Property TakenTime As String
+        Property Trans_key As Integer
         Property Urine As Boolean
+
     End Interface
 
     Public Interface IIbLabResultView
@@ -68,7 +71,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property VDRL As Boolean?
         Property Widal As Boolean?
         Property XRay As Boolean?
-
+        Property InvoiceNo As Integer
     End Interface
 
 End Namespace

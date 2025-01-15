@@ -155,8 +155,12 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemClosePettyCashFund = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemLaboratory = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemCbcResultRetrieval = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemCbcResultRetrievalSampleId = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemIqamaResultEntryKizen = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemBaladiyaResultEntryKizen = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemDiagnosticSamplesKizen = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemIqamaResultEntryIGroup = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemDiagnosticSamples = New System.Windows.Forms.ToolStripMenuItem()
-            Me.ToolStripMenuItemDiagnosticResultEntry = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemClinicSamples = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPharmacy = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemDrugSale = New System.Windows.Forms.ToolStripMenuItem()
@@ -260,7 +264,7 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-            Me.ToolStripMenuItemCbcResultRetrievalSampleId = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemBaladiyaResultEntryIGroup = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.AccountsMenu.SuspendLayout()
@@ -920,7 +924,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemLaboratory
             '
-            Me.ToolStripMenuItemLaboratory.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemCbcResultRetrieval, Me.ToolStripMenuItemCbcResultRetrievalSampleId, Me.ToolStripMenuItemDiagnosticSamples, Me.ToolStripMenuItemDiagnosticResultEntry, Me.ToolStripMenuItemClinicSamples})
+            Me.ToolStripMenuItemLaboratory.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemCbcResultRetrieval, Me.ToolStripMenuItemCbcResultRetrievalSampleId, Me.ToolStripMenuItemIqamaResultEntryKizen, Me.ToolStripMenuItemBaladiyaResultEntryKizen, Me.ToolStripMenuItemDiagnosticSamplesKizen, Me.ToolStripMenuItemIqamaResultEntryIGroup, Me.ToolStripMenuItemBaladiyaResultEntryIGroup, Me.ToolStripMenuItemDiagnosticSamples, Me.ToolStripMenuItemClinicSamples})
             Me.ToolStripMenuItemLaboratory.Name = "ToolStripMenuItemLaboratory"
             resources.ApplyResources(Me.ToolStripMenuItemLaboratory, "ToolStripMenuItemLaboratory")
             '
@@ -929,15 +933,35 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemCbcResultRetrieval.Name = "ToolStripMenuItemCbcResultRetrieval"
             resources.ApplyResources(Me.ToolStripMenuItemCbcResultRetrieval, "ToolStripMenuItemCbcResultRetrieval")
             '
+            'ToolStripMenuItemCbcResultRetrievalSampleId
+            '
+            Me.ToolStripMenuItemCbcResultRetrievalSampleId.Name = "ToolStripMenuItemCbcResultRetrievalSampleId"
+            resources.ApplyResources(Me.ToolStripMenuItemCbcResultRetrievalSampleId, "ToolStripMenuItemCbcResultRetrievalSampleId")
+            '
+            'ToolStripMenuItemIqamaResultEntryKizen
+            '
+            Me.ToolStripMenuItemIqamaResultEntryKizen.Name = "ToolStripMenuItemIqamaResultEntryKizen"
+            resources.ApplyResources(Me.ToolStripMenuItemIqamaResultEntryKizen, "ToolStripMenuItemIqamaResultEntryKizen")
+            '
+            'ToolStripMenuItemBaladiyaResultEntryKizen
+            '
+            Me.ToolStripMenuItemBaladiyaResultEntryKizen.Name = "ToolStripMenuItemBaladiyaResultEntryKizen"
+            resources.ApplyResources(Me.ToolStripMenuItemBaladiyaResultEntryKizen, "ToolStripMenuItemBaladiyaResultEntryKizen")
+            '
+            'ToolStripMenuItemDiagnosticSamplesKizen
+            '
+            Me.ToolStripMenuItemDiagnosticSamplesKizen.Name = "ToolStripMenuItemDiagnosticSamplesKizen"
+            resources.ApplyResources(Me.ToolStripMenuItemDiagnosticSamplesKizen, "ToolStripMenuItemDiagnosticSamplesKizen")
+            '
+            'ToolStripMenuItemIqamaResultEntryIGroup
+            '
+            Me.ToolStripMenuItemIqamaResultEntryIGroup.Name = "ToolStripMenuItemIqamaResultEntryIGroup"
+            resources.ApplyResources(Me.ToolStripMenuItemIqamaResultEntryIGroup, "ToolStripMenuItemIqamaResultEntryIGroup")
+            '
             'ToolStripMenuItemDiagnosticSamples
             '
             Me.ToolStripMenuItemDiagnosticSamples.Name = "ToolStripMenuItemDiagnosticSamples"
             resources.ApplyResources(Me.ToolStripMenuItemDiagnosticSamples, "ToolStripMenuItemDiagnosticSamples")
-            '
-            'ToolStripMenuItemDiagnosticResultEntry
-            '
-            Me.ToolStripMenuItemDiagnosticResultEntry.Name = "ToolStripMenuItemDiagnosticResultEntry"
-            resources.ApplyResources(Me.ToolStripMenuItemDiagnosticResultEntry, "ToolStripMenuItemDiagnosticResultEntry")
             '
             'ToolStripMenuItemClinicSamples
             '
@@ -1476,10 +1500,10 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
             '
-            'ToolStripMenuItemCbcResultRetrievalSampleId
+            'ToolStripMenuItemBaladiyaResultEntryIGroup
             '
-            Me.ToolStripMenuItemCbcResultRetrievalSampleId.Name = "ToolStripMenuItemCbcResultRetrievalSampleId"
-            resources.ApplyResources(Me.ToolStripMenuItemCbcResultRetrievalSampleId, "ToolStripMenuItemCbcResultRetrievalSampleId")
+            Me.ToolStripMenuItemBaladiyaResultEntryIGroup.Name = "ToolStripMenuItemBaladiyaResultEntryIGroup"
+            resources.ApplyResources(Me.ToolStripMenuItemBaladiyaResultEntryIGroup, "ToolStripMenuItemBaladiyaResultEntryIGroup")
             '
             'MainForm
             '
@@ -1737,7 +1761,11 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ToolStripMenuItemEmployeeLeavesEarnedApproval As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemSupplierProductLink As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemReportGroup As ToolStripMenuItem
-        Friend WithEvents ToolStripMenuItemDiagnosticResultEntry As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemIqamaResultEntryIGroup As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemCbcResultRetrievalSampleId As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemIqamaResultEntryKizen As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemDiagnosticSamplesKizen As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemBaladiyaResultEntryKizen As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemBaladiyaResultEntryIGroup As ToolStripMenuItem
     End Class
 End NameSpace

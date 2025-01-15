@@ -63,7 +63,7 @@ Namespace DataLayer.AdoNet
             New EmployeeLeaveEarned() With {
             .ApprovalNote = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ApprovalNote")),
             .Approved = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Approved")),
-            .ApprovedBy = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Int32)(reader("ApprovedBy")),
+            .ApprovedBy = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Int32?)(reader("ApprovedBy")),
             .DateCreated = AATM.DataLayer.AdoNet.Extensions.AsNullableDateTime(reader("DateCreated")),
             .DaysEarned = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("DaysEarned")),
             .EmployeeIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("EmployeeIdNo")),

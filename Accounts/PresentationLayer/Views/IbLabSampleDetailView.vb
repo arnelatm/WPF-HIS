@@ -9,6 +9,7 @@ Namespace PresentationLayer.Views
         Public Property DataFilter As String Implements IView.DataFilter
         Public Property Errors As List(Of String) Implements IView.Errors
         Public Property IdNo As Integer Implements IIbLabSampleDetailView.IdNo
+        Public Property InvoiceNo As Integer Implements IIbLabSampleDetailView.InvoiceNo
         Public Property IqamaNo As String Implements IIbLabSampleDetailView.IqamaNo
         Public Property LabNo As String Implements IIbLabSampleDetailView.LabNo
         Public Property Nationality As String Implements IIbLabSampleDetailView.Nationality
@@ -19,6 +20,7 @@ Namespace PresentationLayer.Views
         Public Property TakenBy As String Implements IIbLabSampleDetailView.TakenBy
         Public Property TakenDate As Date Implements IIbLabSampleDetailView.TakenDate
         Public Property TakenTime As String Implements IIbLabSampleDetailView.TakenTime
+        Public Property Trans_Key As Int32 Implements IIbLabSampleDetailView.Trans_key
         Public Property Urine As Boolean Implements IIbLabSampleDetailView.Urine
     End Class
 
@@ -35,6 +37,7 @@ Namespace PresentationLayer.Views
         Public Property HCVEliza As Boolean? Implements IIbLabResultDetailView.HCVEliza
         Public Property IdNo As Integer Implements IIbLabResultDetailView.IdNo
         Public Property IqamaNo As String Implements IIbLabResultDetailView.IqamaNo
+        Public Property InvoiceNo As Int32 Implements IIbLabResultDetailView.InvoiceNo
         Public Property LabNo As String Implements IIbLabResultDetailView.LabNo
         Public Property Malaria As Boolean? Implements IIbLabResultDetailView.Malaria
         Public Property Nationality As String Implements IIbLabResultDetailView.Nationality

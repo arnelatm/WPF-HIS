@@ -3680,7 +3680,7 @@
             Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
-            Me.TableLayoutPanel2.Size = New System.Drawing.Size(606, 181)
+            Me.TableLayoutPanel2.Size = New System.Drawing.Size(606, 220)
             Me.TableLayoutPanel2.TabIndex = 297
             '
             'lblActive

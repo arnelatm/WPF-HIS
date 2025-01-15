@@ -36,7 +36,7 @@ Namespace DataLayer.AdoNet
             Dim transactionDateString As String = transactionDate.ToString("yyyy/MM/dd")
             data.TransactionDate = transactionDate
             Dim params() As Object = {"@TransactionDate", transactionDateString}
-            sql = $"SELECT Row_Number() Over (Order by TakenTime) as 'Sequence',IdNo,TakenDate,TakenTime,LabNo,Border_Iqama,PatientName,Age,CountryNameEng,Stool,Urine,RBS,TakenBy from IbLabSampleList_View where TransDateEnglish = @TransactionDate order by TakenTime"
+            sql = $"SELECT Row_Number() Over (Order by TakenTime) as 'Sequence',IdNo,TransNbr,TakenDate,TakenTime,LabNo,Border_Iqama,PatientName,Age,CountryNameEng,Stool,Urine,RBS,TakenBy from IbLabSampleList_View where TransDateEnglish = @TransactionDate order by TakenTime"
             data.IbLabSampleDetails = _db.Read(sql, MakeIbLabSampleDetails, params).ToList()
             Return data
         End Function
@@ -70,6 +70,7 @@ Namespace DataLayer.AdoNet
             .Sequence = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("Sequence")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .IqamaNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Border_Iqama")),
+            .InvoiceNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("TransNbr")),
             .TakenDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("TakenDate")),
             .TakenTime = AATM.DataLayer.AdoNet.Extensions.AsTimeString(reader("TakenTime")),
             .LabNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("LabNo")),
@@ -88,7 +89,7 @@ Namespace DataLayer.AdoNet
         Inherits CommonDao
         Implements IDaoParametrized(Of IbLabResult), IDao(Of IbLabResult)
 
-        Private ReadOnly _db As New Db("IGROUPCLINIC")
+        Private ReadOnly _db As New Db()
 
         Public Overrides Function GetDB()
             Return _db
@@ -103,13 +104,22 @@ Namespace DataLayer.AdoNet
                 AATM.Libraries.MessagingLibrary.Messaging.Show("MsgDateCannotBeBlank")
                 Return Nothing
             End If
+
             Dim transactionDate As Date = parameter(0)
             Dim sql As String
             Dim data As New IbLabResult
             Dim transactionDateString As String = transactionDate.ToString("yyyy/MM/dd")
+            Dim ibType As String
             data.TransactionDate = transactionDate
-            Dim params() As Object = {"@TransactionDate", transactionDateString}
-            sql = $"SELECT Row_Number() Over (Order by Trans_key) as 'Sequence',IdNo,Trans_Key,Sex,TransactionDate,LabNo,PatientName,CountryNameEng,PassportNumber,Profession,Border_Iqama,Clinical,XRay,TBSputum,HIVEliza,HCVEliza,HBSAgEliza,Malaria,VDRL,WIdal,Pregnancy,BilharziasisUrine,BilharziasisStool,SHigella,Cholera from IbLabResultList_View where TransactionDate = @TransactionDate order by Trans_key"
+            Dim params() As Object = {"@TransactionDate", transactionDateString, "@IBType", IIf(parameter(1) = "Iqama", "1", "2")}
+            If parameter(1) = "Iqama" Then
+                sql = $"SELECT Row_Number() Over (Order by Trans_key) as 'Sequence',IdNo,Trans_Key,Sex,TransactionDate,LabNo,PatientName,CountryNameEng,PassportNumber,Profession,Border_Iqama,InvoiceNo,Clinical,XRay,TBSputum,HIVEliza,HCVEliza,HBSAgEliza,Malaria,VDRL,WIdal,Pregnancy,BilharziasisUrine,BilharziasisStool,SHigella,Cholera from IbLabResultList_View where TransactionDate = @TransactionDate and LTrim(IbType) = @IbType order by Trans_key"
+            ElseIf parameter(1) = "Baladiya" Then
+                sql = $"SELECT Row_Number() Over (Order by Trans_key) as 'Sequence',IdNo,Trans_Key,Sex,TransactionDate,LabNo,PatientName,CountryNameEng,PassportNumber,Profession,Border_Iqama,InvoiceNo,Clinical,XRay,TBSputum,HIVEliza,HCVEliza,HBSAgEliza,Malaria,VDRL,WIdal,Pregnancy,BilharziasisUrine,BilharziasisStool,SHigella,Cholera from IbLabResultList_View where TransactionDate = @TransactionDate and LTrim(IBType) = @IbTYpe order by Trans_key"
+            Else
+                sql = $"SELECT Row_Number() Over (Order by Trans_key) as 'Sequence',IdNo,Trans_Key,Sex,TransactionDate,LabNo,PatientName,CountryNameEng,PassportNumber,Profession,Border_Iqama,InvoiceNo,Clinical,XRay,TBSputum,HIVEliza,HCVEliza,HBSAgEliza,Malaria,VDRL,WIdal,Pregnancy,BilharziasisUrine,BilharziasisStool,SHigella,Cholera from IbLabResultList_View where TransactionDate = @TransactionDate order by Trans_key"
+
+            End If
             data.IbLabResultDetails = _db.Read(sql, MakeIbLabResultDetails, params).ToList()
             Return data
         End Function
@@ -162,27 +172,28 @@ Namespace DataLayer.AdoNet
             .Sequence = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("Sequence")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .TransKey = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("Trans_key")),
-            .Gender = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Char)(reader("Sex")),
+            .Gender = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Char?)(reader("Sex")),
             .LabNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("LabNo")),
             .PatientName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("PatientName")),
             .Nationality = AATM.DataLayer.AdoNet.Extensions.AsString(reader("CountryNameEng")),
             .Profession = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Profession")),
             .PassportNumber = AATM.DataLayer.AdoNet.Extensions.AsString(reader("PassportNumber")),
             .IqamaNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Border_Iqama")),
-            .Clinical = SwitchValue(AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean)(reader("Clinical"))),
-            .XRay = SwitchValue(AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean)(reader("Xray"))),
-            .TBSputum = SwitchValue(AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean)(reader("TBSputum"))),
-            .HIVEliza = SwitchValue(AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean)(reader("HIVEliza"))),
-            .HCVEliza = SwitchValue(AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean)(reader("HCVEliza"))),
-            .HBSAgEliza = SwitchValue(AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean)(reader("HBSAgEliza"))),
-            .Malaria = SwitchValue(AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean)(reader("Malaria"))),
-            .VDRL = SwitchValue(AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean)(reader("VDRL"))),
-            .Widal = SwitchValue(AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean)(reader("Widal"))),
-            .Pregnancy = SwitchValue(AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean)(reader("Pregnancy"))),
-            .BilharziasisUrine = SwitchValue(AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean)(reader("BilharziasisUrine"))),
-            .BilharziasisStool = SwitchValue(AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean)(reader("BilharziasisStool"))),
-            .Shigella = SwitchValue(AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean)(reader("Shigella"))),
-            .Cholera = SwitchValue(AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean)(reader("Cholera")))
+            .InvoiceNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("InvoiceNo")),
+            .Clinical = SwitchValue(AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean?)(reader("Clinical"))),
+            .XRay = SwitchValue(AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean?)(reader("Xray"))),
+            .TBSputum = SwitchValue(AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean?)(reader("TBSputum"))),
+            .HIVEliza = SwitchValue(AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean?)(reader("HIVEliza"))),
+            .HCVEliza = SwitchValue(AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean?)(reader("HCVEliza"))),
+            .HBSAgEliza = SwitchValue(AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean?)(reader("HBSAgEliza"))),
+            .Malaria = SwitchValue(AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean?)(reader("Malaria"))),
+            .VDRL = SwitchValue(AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean?)(reader("VDRL"))),
+            .Widal = SwitchValue(AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean?)(reader("Widal"))),
+            .Pregnancy = SwitchValue(AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean?)(reader("Pregnancy"))),
+            .BilharziasisUrine = SwitchValue(AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean?)(reader("BilharziasisUrine"))),
+            .BilharziasisStool = SwitchValue(AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean?)(reader("BilharziasisStool"))),
+            .Shigella = SwitchValue(AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean?)(reader("Shigella"))),
+            .Cholera = SwitchValue(AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean?)(reader("Cholera")))
             }
 
         Public Shared Function SwitchValue(value As Boolean?) As Boolean?

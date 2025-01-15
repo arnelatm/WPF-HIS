@@ -2802,6 +2802,7 @@
     </None>
     <None Include="app - Copy.config" />
     <None Include="app.config" />
+    <None Include="app-kizen.config" />
     <None Include="app-Isp-Server - Copy - Copy.config" />
     <None Include="app-Isp-Server - Copy.config" />
     <None Include="app-ISP-SERVERNEW.config" />

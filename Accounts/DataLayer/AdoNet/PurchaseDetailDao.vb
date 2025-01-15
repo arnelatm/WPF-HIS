@@ -104,7 +104,7 @@ Namespace DataLayer.AdoNet
             .CategoryIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("CategoryIdNo")),
             .DiscountAmount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("DiscountAmount")),
             .DiscountPercent = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("DiscountPercent")),
-            .ExpiryDate = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Date)(reader("ExpiryDate")),
+            .ExpiryDate = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Date?)(reader("ExpiryDate")),
             .GrossAmount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("GrossAmount")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .NeedsExpiryDate = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("NeedsExpiryDate")),

@@ -37,6 +37,8 @@ Public Class CrystalReportPrinter
                 UseDefaultConnection()
             Case $"IGROUPCLINIC"
                 UseIGroupConnection()
+            Case $"KIZEN"
+                UseKizenConnection()
             Case Else
                 MessageBox.Show($"No database connection specified or connection name not recognized.")
                 Debugger.Break()
@@ -57,6 +59,8 @@ Public Class CrystalReportPrinter
                 UseDefaultConnection()
             Case $"IGROUPCLINIC"
                 UseIGroupConnection()
+            Case $"KIZEN"
+                UseKizenConnection()
             Case Else
                 MessageBox.Show($"No database connection specified or connection name not recognized.")
                 Debugger.Break()
@@ -83,6 +87,14 @@ Public Class CrystalReportPrinter
         _pwd = ConfigurationManager.AppSettings.Get("PWD")
         _server = ConfigurationManager.AppSettings.Get("ServerTranslator")
         _database = ConfigurationManager.AppSettings.Get("DatabaseIGroup")
+    End Sub
+
+    Private Sub UseKizenConnection()
+        _reportPath = ConfigurationManager.AppSettings.Get("ReportPathsKizen")
+        _uid = "Arnel"
+        _pwd = "JaSi5214@"
+        _server = "Ibn-Server\Kizen"
+        _database = "kizenClinic"
     End Sub
 
     Public Property ReportFileName() As String
