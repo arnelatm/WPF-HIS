@@ -566,6 +566,7 @@
     <Compile Include="PresentationLayer\Presenters\AppSettingPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ApArEmReportPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\BasicPresenterHelper.vb" />
+    <Compile Include="PresentationLayer\Presenters\DateTimeRangePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DateRangePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\EmployeeAbsencePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\EmployeeLeaveEarnedApprovalPresenter.vb" />
@@ -634,6 +635,12 @@
       <DependentUpon>ContactDateRangeForm.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\ContactDateRangeForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\DateRangeTimeForm.Designer.vb">
+      <DependentUpon>DateRangeTimeForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\DateRangeTimeForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\DateRangeForm.Designer.vb">
@@ -2068,6 +2075,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\ContactDateRangeForm.resx">
       <DependentUpon>ContactDateRangeForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\DateRangeTimeForm.resx">
+      <DependentUpon>DateRangeTimeForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\DateRangeForm.resx">
       <DependentUpon>DateRangeForm.vb</DependentUpon>
