@@ -85,6 +85,23 @@ Public Module GlobalFunctions
     End Function
 
     '''<summary>
+    '''Converts the given Date String to the requested TargetCulture
+    '''</summary>
+    Public Function DateStringSpecificCultureToDateTime(dateString As String, targetCultureInfo As CultureInfo) As DateTime?
+        Dim retDate As DateTime?
+        Dim curCulture = CultureInfo.CurrentCulture
+        Try
+            CultureInfo.CurrentCulture = targetCultureInfo
+            retDate = Convert.ToDateTime(dateString)
+        Catch ex As Exception
+            retDate = Nothing
+        Finally
+            CultureInfo.CurrentCulture = curCulture
+        End Try
+        Return retDate
+    End Function
+
+    '''<summary>
     '''Converts a given Date Value to the desired shortDateString for the targetCulture
     '''</summary>
     Public Function DateToSpecificCultureShortDateString(dateValue As DateTime?, targetCulture As CultureInfo) As String
@@ -105,6 +122,29 @@ Public Module GlobalFunctions
             CultureInfo.CurrentCulture = curCulture
         End Try
         Return shortDateString
+    End Function
+
+    '''<summary>
+    '''Converts a given Date Value to the desired shortDateString for the targetCulture
+    '''</summary>
+    Public Function DateTimeToSpecificCultureShortDateTimeString(dateValue As DateTime?, targetCulture As CultureInfo) As String
+        If dateValue Is Nothing Then
+            Return Nothing
+        End If
+        Dim givenDate As DateTime = dateValue
+        Dim shortDateTimeString As String
+        Dim curCulture As CultureInfo = CultureInfo.CurrentCulture
+        If targetCulture IsNot Nothing Then
+            CultureInfo.CurrentCulture = targetCulture
+        End If
+        Try
+            shortDateTimeString = givenDate.ToShortDateString() + " " + givenDate.ToShortTimeString()
+        Catch ex As Exception
+            shortDateTimeString = Nothing
+        Finally
+            CultureInfo.CurrentCulture = curCulture
+        End Try
+        Return shortDateTimeString
     End Function
 
     '''<summary>

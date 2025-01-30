@@ -79,6 +79,10 @@ Namespace PresentationLayer.Presenters
                         Dim formToRun As New DateRangeForm(report)
                         formToRun.Presenter = New DateRangePresenter(Of ReportModel)(formToRun, report)
                         formToRun.Show()
+                    Case "DateTimeRangeForm"
+                        Dim formToRun As New DateTimeRangeForm(report)
+                        formToRun.Presenter = New DateTimeRangePresenter(Of ReportModel)(formToRun, report)
+                        formToRun.Show()
                 End Select
 
             End If

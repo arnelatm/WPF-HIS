@@ -270,6 +270,10 @@ Public Class Messaging
                 cSemester = TranslateCaption("Second")
             End If
             Return Messaging.GetParametrizedMessage(True, "RptForTheSemester", {"reportName", reportName, "semesterName", cSemester, "year", cYear})
+        ElseIf periodCode = "T" Then
+            Dim bDateTime As String = GlobalFunctions.DateTimeToSpecificCultureShortDateTimeString(beginningDate, CultureInfo.CreateSpecificCulture("en-GB"))
+            Dim eDateTime As String = GlobalFunctions.DateTimeToSpecificCultureShortDateTimeString(endingDate, CultureInfo.CreateSpecificCulture("en-GB"))
+            Return Messaging.GetParametrizedMessage(True, "RptForThePeriod", {"reportName", reportName, "beginningDate", bDateTime, "endingDate", eDateTime})
         Else
             If beginningDate = endingDate Then
                 Dim cDay As String
