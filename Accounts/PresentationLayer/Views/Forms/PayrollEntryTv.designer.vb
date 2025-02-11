@@ -120,8 +120,8 @@ Namespace PresentationLayer.Views.Forms
             'SplitContainer1.Panel2
             '
             Me.SplitContainer1.Panel2.Controls.Add(Me.floDataDisplay)
-            Me.SplitContainer1.Size = New System.Drawing.Size(1632, 825)
-            Me.SplitContainer1.SplitterDistance = 541
+            Me.SplitContainer1.Size = New System.Drawing.Size(1401, 825)
+            Me.SplitContainer1.SplitterDistance = 285
             Me.SplitContainer1.SplitterWidth = 17
             '
             'FormTreeView
@@ -129,7 +129,7 @@ Namespace PresentationLayer.Views.Forms
             Me.FormTreeView.LineColor = System.Drawing.Color.Black
             Me.FormTreeView.Margin = New System.Windows.Forms.Padding(5)
             Me.FormTreeView.RightToLeft = System.Windows.Forms.RightToLeft.No
-            Me.FormTreeView.Size = New System.Drawing.Size(541, 825)
+            Me.FormTreeView.Size = New System.Drawing.Size(285, 825)
             '
             'ImageListTreeView
             '
@@ -140,6 +140,10 @@ Namespace PresentationLayer.Views.Forms
             'TranslatorDAC
             '
             Me.TranslatorDAC.Cs = ""
+            '
+            'AppDataDAC
+            '
+            Me.AppDataDAC.Cs = ""
             '
             'TxtIdNo
             '
@@ -220,7 +224,7 @@ Namespace PresentationLayer.Views.Forms
             Me.floDataDisplay.MinimumSize = New System.Drawing.Size(1072, 768)
             Me.floDataDisplay.Name = "floDataDisplay"
             Me.floDataDisplay.Padding = New System.Windows.Forms.Padding(13, 12, 0, 0)
-            Me.floDataDisplay.Size = New System.Drawing.Size(1074, 825)
+            Me.floDataDisplay.Size = New System.Drawing.Size(1099, 825)
             Me.floDataDisplay.TabIndex = 147
             '
             'TableLayoutPanel1
@@ -1159,17 +1163,17 @@ Namespace PresentationLayer.Views.Forms
             'PayrollEntryTv
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
-            Me.ClientSize = New System.Drawing.Size(1632, 880)
+            Me.ClientSize = New System.Drawing.Size(1401, 880)
             Me.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
             Me.Name = "PayrollEntryTv"
             Me.Text = "Payroll Maintenance Form"
-            Me.SplitContainer1.Panel1.ResumeLayout(false)
-        Me.SplitContainer1.Panel2.ResumeLayout(false)
-        CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).EndInit
-        Me.SplitContainer1.ResumeLayout(false)
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
-        Me.floDataDisplay.ResumeLayout(false)
-        Me.TableLayoutPanel1.ResumeLayout(false)
+            Me.SplitContainer1.Panel1.ResumeLayout(False)
+            Me.SplitContainer1.Panel2.ResumeLayout(False)
+            CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.SplitContainer1.ResumeLayout(False)
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.floDataDisplay.ResumeLayout(False)
+            Me.TableLayoutPanel1.ResumeLayout(false)
         Me.TableLayoutPanel1.PerformLayout
         Me.tbcPayroll.ResumeLayout(false)
         Me.tbpAttendance.ResumeLayout(false)

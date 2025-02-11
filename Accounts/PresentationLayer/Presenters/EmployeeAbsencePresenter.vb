@@ -23,10 +23,10 @@ Namespace PresentationLayer.Presenters
             TableName = "EmployeeAbsence"
             SortOrderKey = "IdNo"
             WithTreeView = False
-            If View.PayrollIdNo = 0 Then
-                View.PayrollIdNo = Service.GetFieldOnMaxField("PayrollIdNo", "PayrollDetail", "PayrollIdNo")
-                _payrollIdNo = View.PayrollIdNo
-            End If
+            'If View.PayrollIdNo = 0 Then
+            '    View.PayrollIdNo = Service.GetFieldOnMaxField("PayrollIdNo", "PayrollDetail", "PayrollIdNo")
+            '    _payrollIdNo = View.PayrollIdNo
+            'End If
             SetPayroll()
             'AddHandler View.AddedByUserChanged, AddressOf OnAddedByUserChanged
         End Sub
@@ -42,13 +42,16 @@ Namespace PresentationLayer.Presenters
             View.PayrollIdNo = _payrollIdNo
             View.AddedByUser = GlobalVariables.UserIdNo
             View.UserName = Service.GetFieldWithIdNo(GlobalVariables.UserIdNo, "User", "UserName")
+            If View.PayrollFilter = "" Then
+                View.PayrollIdNo = Service.GetFieldOnMaxField("PayrollIdNo", "PayrollDetail", "PayrollIdNo")
+            Else
+                View.PayrollIdNo = ToInt32Number(View.PayrollFilter)
+            End If
+            SetPayroll()
         End Sub
 
         Public Sub SetPayroll()
             Dim payroll As PayrollModel
-            If View.PayrollIdNo = 0 Then
-                View.PayrollIdNo = Service.GetFieldOnMaxField("PayrollIdNo", "PayrollDetail", "PayrollIdNo")
-            End If
             payroll = _payrollService.GetRecordByIdNo(Of PayrollModel)(View.PayrollIdNo)
             View.PayrollCode = payroll.PayrollCode
             View.StartDate = payroll.StartDate
@@ -61,7 +64,9 @@ Namespace PresentationLayer.Presenters
             View.StartDate = payroll.StartDate
             View.EndDate = payroll.EndDate
             View.PayrollCode = payroll.PayrollCode
-            DataFilter = "PayrollIdNo = " & View.PayrollIdNo.ToString()
+            If View.PayrollFilter <> "" Then
+                DataFilter = "PayrollIdNo = " & View.PayrollFilter.ToString() + " or PayrollIdNo = 0 "
+            End If
         End Sub
 
         'Protected Sub OnAddedByUserChanged()

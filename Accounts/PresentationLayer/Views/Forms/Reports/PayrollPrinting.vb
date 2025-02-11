@@ -31,7 +31,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Dim reportParameters As New Object
             Dim language As String
             Dim curCulture = CultureInfo.CurrentCulture
-            Dim reportTitle As String = Messaging.TranslateCaption("Payroll Report")
+            Dim reportTitle As String = cboPayroll.Text
             Dim reportFileName As String = "Payroll Report.Rpt"
             Dim estName As String
             language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))

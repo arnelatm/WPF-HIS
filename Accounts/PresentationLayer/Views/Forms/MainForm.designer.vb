@@ -160,6 +160,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemBaladiyaResultEntryKizen = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemDiagnosticSamplesKizen = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemIqamaResultEntryIGroup = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemBaladiyaResultEntryIGroup = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemDiagnosticSamples = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemClinicSamples = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPharmacy = New System.Windows.Forms.ToolStripMenuItem()
@@ -264,7 +265,7 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-            Me.ToolStripMenuItemBaladiyaResultEntryIGroup = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemInvoiceNoteEditor = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.AccountsMenu.SuspendLayout()
@@ -739,7 +740,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemTransactions
             '
-            Me.ToolStripMenuItemTransactions.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPettyCash, Me.ToolStripMenuItemCashDisbursementEntry, Me.ToolStripMenuItemAccountsPayableEntry, Me.ToolStripMenuItemAccountsReceivableEntry, Me.ToolStripMenuItemCashReceiptEntry, Me.ToolStripMenuItemEmployeeReceivable, Me.ToolStripMenuItemGeneralJournalEntry, Me.ToolStripMenuItemSales, Me.ToolStripMenuItemPurchases, Me.ToolStripMenuItemSalesJournalEntry, Me.ToolStripMenuItemInventoryTransactions, Me.ToolStripMenuItemAccountReconciliation, Me.ToolStripMenuItemPostPettyCashAccount, Me.ToolStripMenuItemHR, Me.ToolStripMenuItemClosing, Me.ToolStripMenuItemPayrollTransaction, Me.ToolStripMenuItemShiftSummaryEntry, Me.ToolStripSeparator2, Me.ToolStripMenuItemClosePettyCashFund, Me.ToolStripMenuItemLaboratory, Me.ToolStripMenuItemPharmacy, Me.ToolStripMenuItemDocManagement})
+            Me.ToolStripMenuItemTransactions.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPettyCash, Me.ToolStripMenuItemCashDisbursementEntry, Me.ToolStripMenuItemAccountsPayableEntry, Me.ToolStripMenuItemAccountsReceivableEntry, Me.ToolStripMenuItemCashReceiptEntry, Me.ToolStripMenuItemEmployeeReceivable, Me.ToolStripMenuItemGeneralJournalEntry, Me.ToolStripMenuItemSales, Me.ToolStripMenuItemPurchases, Me.ToolStripMenuItemSalesJournalEntry, Me.ToolStripMenuItemInventoryTransactions, Me.ToolStripMenuItemAccountReconciliation, Me.ToolStripMenuItemPostPettyCashAccount, Me.ToolStripMenuItemHR, Me.ToolStripMenuItemClosing, Me.ToolStripMenuItemPayrollTransaction, Me.ToolStripMenuItemShiftSummaryEntry, Me.ToolStripSeparator2, Me.ToolStripMenuItemClosePettyCashFund, Me.ToolStripMenuItemLaboratory, Me.ToolStripMenuItemPharmacy, Me.ToolStripMenuItemDocManagement, Me.ToolStripMenuItemInvoiceNoteEditor})
             Me.ToolStripMenuItemTransactions.Name = "ToolStripMenuItemTransactions"
             resources.ApplyResources(Me.ToolStripMenuItemTransactions, "ToolStripMenuItemTransactions")
             '
@@ -957,6 +958,11 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.ToolStripMenuItemIqamaResultEntryIGroup.Name = "ToolStripMenuItemIqamaResultEntryIGroup"
             resources.ApplyResources(Me.ToolStripMenuItemIqamaResultEntryIGroup, "ToolStripMenuItemIqamaResultEntryIGroup")
+            '
+            'ToolStripMenuItemBaladiyaResultEntryIGroup
+            '
+            Me.ToolStripMenuItemBaladiyaResultEntryIGroup.Name = "ToolStripMenuItemBaladiyaResultEntryIGroup"
+            resources.ApplyResources(Me.ToolStripMenuItemBaladiyaResultEntryIGroup, "ToolStripMenuItemBaladiyaResultEntryIGroup")
             '
             'ToolStripMenuItemDiagnosticSamples
             '
@@ -1500,10 +1506,10 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
             '
-            'ToolStripMenuItemBaladiyaResultEntryIGroup
+            'ToolStripMenuItemInvoiceNoteEditor
             '
-            Me.ToolStripMenuItemBaladiyaResultEntryIGroup.Name = "ToolStripMenuItemBaladiyaResultEntryIGroup"
-            resources.ApplyResources(Me.ToolStripMenuItemBaladiyaResultEntryIGroup, "ToolStripMenuItemBaladiyaResultEntryIGroup")
+            Me.ToolStripMenuItemInvoiceNoteEditor.Name = "ToolStripMenuItemInvoiceNoteEditor"
+            resources.ApplyResources(Me.ToolStripMenuItemInvoiceNoteEditor, "ToolStripMenuItemInvoiceNoteEditor")
             '
             'MainForm
             '
@@ -1767,5 +1773,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ToolStripMenuItemDiagnosticSamplesKizen As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemBaladiyaResultEntryKizen As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemBaladiyaResultEntryIGroup As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemInvoiceNoteEditor As ToolStripMenuItem
     End Class
 End NameSpace

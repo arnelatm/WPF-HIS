@@ -8,6 +8,7 @@ Namespace PresentationLayer.Views.Forms
         Implements IEmployeeAbsenceView
 
         Private ReadOnly _nfi As NumberFormatInfo
+        Private _payrollFilter As String
         'Private _payrollIdNo As Int32
 
         Public Sub New()
@@ -24,7 +25,11 @@ Namespace PresentationLayer.Views.Forms
             InitializeComponent()
             FirstControl = cboEmployeeIdNo
             _nfi = GlobalVariables.DefaultNumberFormatInfo
-            PayrollIdNo = nPayrollIdNo
+            If nPayrollIdNo = 0 Then
+                _payrollFilter = ""
+            Else
+                _payrollFilter = nPayrollIdNo.ToString()
+            End If
             'FormTreeView.Visible = False
         End Sub
 
@@ -160,6 +165,15 @@ Namespace PresentationLayer.Views.Forms
         Public Property PayrollEndDate As Date Implements IEmployeeAbsenceView.PayrollEndDate
 
         Public Property PayrollStartDate As Date Implements IEmployeeAbsenceView.PayrollStartDate
+
+        Public Property PayrollFilter As String Implements IEmployeeAbsenceView.PayrollFilter
+            Get
+                Return _payrollFilter
+            End Get
+            Set(value As String)
+                _payrollFilter = value
+            End Set
+        End Property
 
 #End Region
 
