@@ -316,8 +316,8 @@ Namespace PresentationLayer.Presenters
                 Dim empAttendance As AttendanceItemView
                 empAttendance = View.PayrollAttendance.Find(Function(c) c.EmployeeIdNo = empIdNo)
                 If empAttendance IsNot Nothing Then
-                    empAttendance.DaysAbsentWithoutPay += Math.Round(absence.EquivalentHours / dutyHours * actualDutyHours, 4)
-                    empAttendance.DaysPresent -= Math.Round(absence.EquivalentHours / dutyHours * actualDutyHours, 4)
+                    empAttendance.DaysAbsentWithoutPay += Math.Round(absence.EquivalentHours / actualDutyHours, 4)
+                    empAttendance.DaysPresent -= Math.Round(absence.EquivalentHours / actualDutyHours, 4)
                 End If
                 counter = counter + 1
                 progressDisplayForm.UpdateProgressBar(counter)

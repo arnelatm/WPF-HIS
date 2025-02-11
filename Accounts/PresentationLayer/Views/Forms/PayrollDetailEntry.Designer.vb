@@ -92,8 +92,8 @@ Namespace PresentationLayer.Views.Forms
             'SplitContainer1.Panel2
             '
             Me.SplitContainer1.Panel2.Controls.Add(Me.CFlowLayout1)
-            Me.SplitContainer1.Size = New System.Drawing.Size(1381, 660)
-            Me.SplitContainer1.SplitterDistance = 467
+            Me.SplitContainer1.Size = New System.Drawing.Size(1373, 660)
+            Me.SplitContainer1.SplitterDistance = 470
             Me.SplitContainer1.SplitterWidth = 17
             '
             'FormTreeView
@@ -101,7 +101,7 @@ Namespace PresentationLayer.Views.Forms
             Me.FormTreeView.LineColor = System.Drawing.Color.Black
             Me.FormTreeView.Margin = New System.Windows.Forms.Padding(5)
             Me.FormTreeView.RightToLeft = System.Windows.Forms.RightToLeft.No
-            Me.FormTreeView.Size = New System.Drawing.Size(467, 660)
+            Me.FormTreeView.Size = New System.Drawing.Size(470, 660)
             '
             'ImageListTreeView
             '
@@ -113,6 +113,10 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.TranslatorDAC.Cs = ""
             '
+            'AppDataDAC
+            '
+            Me.AppDataDAC.Cs = ""
+            '
             'CFlowLayout1
             '
             Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
@@ -121,7 +125,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout1.Location = New System.Drawing.Point(0, 0)
             Me.CFlowLayout1.Margin = New System.Windows.Forms.Padding(4)
             Me.CFlowLayout1.Name = "CFlowLayout1"
-            Me.CFlowLayout1.Size = New System.Drawing.Size(897, 660)
+            Me.CFlowLayout1.Size = New System.Drawing.Size(886, 660)
             Me.CFlowLayout1.TabIndex = 4
             '
             'TableLayoutPanel1
@@ -170,7 +174,7 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25.0!))
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25.0!))
-            Me.TableLayoutPanel1.Size = New System.Drawing.Size(888, 631)
+            Me.TableLayoutPanel1.Size = New System.Drawing.Size(877, 631)
             Me.TableLayoutPanel1.TabIndex = 0
             '
             'txtIdNo
@@ -246,7 +250,7 @@ Namespace PresentationLayer.Views.Forms
             Me.tbcPayroll.Name = "tbcPayroll"
             Me.tbcPayroll.RightToLeft = System.Windows.Forms.RightToLeft.No
             Me.tbcPayroll.SelectedIndex = 0
-            Me.tbcPayroll.Size = New System.Drawing.Size(913, 428)
+            Me.tbcPayroll.Size = New System.Drawing.Size(863, 428)
             Me.tbcPayroll.TabIndex = 34
             '
             'tpgEarnings
@@ -256,7 +260,7 @@ Namespace PresentationLayer.Views.Forms
             Me.tpgEarnings.Margin = New System.Windows.Forms.Padding(4)
             Me.tpgEarnings.Name = "tpgEarnings"
             Me.tpgEarnings.Padding = New System.Windows.Forms.Padding(4)
-            Me.tpgEarnings.Size = New System.Drawing.Size(905, 399)
+            Me.tpgEarnings.Size = New System.Drawing.Size(855, 399)
             Me.tpgEarnings.TabIndex = 0
             Me.tpgEarnings.Text = "Earnings"
             Me.tpgEarnings.UseVisualStyleBackColor = True
@@ -309,7 +313,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewEarnings.SequenceColumn = "dgvSequence"
             Me.DataGridViewEarnings.SequenceFieldName = "Sequence"
             Me.DataGridViewEarnings.ShowFooter = False
-            Me.DataGridViewEarnings.Size = New System.Drawing.Size(897, 391)
+            Me.DataGridViewEarnings.Size = New System.Drawing.Size(847, 391)
             Me.DataGridViewEarnings.TabIndex = 0
             Me.DataGridViewEarnings.Translatable = True
             '
@@ -393,7 +397,7 @@ Namespace PresentationLayer.Views.Forms
             Me.tpgDeductions.Margin = New System.Windows.Forms.Padding(4)
             Me.tpgDeductions.Name = "tpgDeductions"
             Me.tpgDeductions.Padding = New System.Windows.Forms.Padding(4)
-            Me.tpgDeductions.Size = New System.Drawing.Size(905, 399)
+            Me.tpgDeductions.Size = New System.Drawing.Size(855, 399)
             Me.tpgDeductions.TabIndex = 2
             Me.tpgDeductions.Text = "Deductions"
             Me.tpgDeductions.UseVisualStyleBackColor = True
@@ -446,7 +450,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewDeductions.SequenceColumn = "dgvSequence"
             Me.DataGridViewDeductions.SequenceFieldName = "Sequence"
             Me.DataGridViewDeductions.ShowFooter = False
-            Me.DataGridViewDeductions.Size = New System.Drawing.Size(897, 391)
+            Me.DataGridViewDeductions.Size = New System.Drawing.Size(847, 391)
             Me.DataGridViewDeductions.TabIndex = 0
             Me.DataGridViewDeductions.Translatable = True
             '
@@ -659,7 +663,6 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayPeriodDescription.CustomFormat = Nothing
             Me.txtPayPeriodDescription.DataBoundControl = True
             Me.txtPayPeriodDescription.DisplayOnly = True
-            Me.txtPayPeriodDescription.Dock = System.Windows.Forms.DockStyle.Fill
             Me.txtPayPeriodDescription.EditingMode = True
             Me.txtPayPeriodDescription.EndFindValue = Nothing
             Me.txtPayPeriodDescription.FieldDescription = Nothing
@@ -678,7 +681,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayPeriodDescription.OverrideMaxLength = 0
             Me.txtPayPeriodDescription.ReadOnly = True
             Me.txtPayPeriodDescription.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtPayPeriodDescription.Size = New System.Drawing.Size(743, 26)
+            Me.txtPayPeriodDescription.Size = New System.Drawing.Size(682, 26)
             Me.txtPayPeriodDescription.TabIndex = 3
             Me.txtPayPeriodDescription.TabStop = False
             Me.txtPayPeriodDescription.Translatable = False
@@ -745,7 +748,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtTotalEarnings.OverrideMaxLength = 0
             Me.txtTotalEarnings.ReadOnly = True
             Me.txtTotalEarnings.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtTotalEarnings.Size = New System.Drawing.Size(153, 26)
+            Me.txtTotalEarnings.Size = New System.Drawing.Size(138, 26)
             Me.txtTotalEarnings.TabIndex = 6
             Me.txtTotalEarnings.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             Me.txtTotalEarnings.Translatable = False
@@ -825,7 +828,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtTotalDeductions.OverrideMaxLength = 0
             Me.txtTotalDeductions.ReadOnly = True
             Me.txtTotalDeductions.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtTotalDeductions.Size = New System.Drawing.Size(153, 26)
+            Me.txtTotalDeductions.Size = New System.Drawing.Size(138, 26)
             Me.txtTotalDeductions.TabIndex = 7
             Me.txtTotalDeductions.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             Me.txtTotalDeductions.Translatable = False
@@ -858,7 +861,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNetPay.OverrideMaxLength = 0
             Me.txtNetPay.ReadOnly = True
             Me.txtNetPay.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtNetPay.Size = New System.Drawing.Size(153, 26)
+            Me.txtNetPay.Size = New System.Drawing.Size(138, 26)
             Me.txtNetPay.TabIndex = 8
             Me.txtNetPay.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             Me.txtNetPay.Translatable = False
@@ -986,13 +989,13 @@ Namespace PresentationLayer.Views.Forms
             'PayrollDetailEntry
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
-            Me.ClientSize = New System.Drawing.Size(1381, 715)
+            Me.ClientSize = New System.Drawing.Size(1373, 715)
             Me.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
             Me.Name = "PayrollDetailEntry"
             Me.Text = " "
-        Me.SplitContainer1.Panel1.ResumeLayout(false)
-        Me.SplitContainer1.Panel2.ResumeLayout(false)
-        CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).EndInit
+            Me.SplitContainer1.Panel1.ResumeLayout(False)
+            Me.SplitContainer1.Panel2.ResumeLayout(False)
+            CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).EndInit
         Me.SplitContainer1.ResumeLayout(false)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.CFlowLayout1.ResumeLayout(false)

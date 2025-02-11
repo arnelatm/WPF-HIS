@@ -48,6 +48,10 @@ Public Class DateTimeRangePresenter(Of TM As New)
             End If
         End If
         SetInitialDates(period, defStart, defEnd, View.BeginningDate, View.EndingDate)
+        If Not View.EndingDate Is Nothing Then
+            Dim eDate As Date = View.EndingDate
+            View.EndingDate = eDate.AddHours(23).AddMinutes(59).AddSeconds(59).AddMilliseconds(999)
+        End If
     End Sub
 
     Public Sub New()
@@ -81,11 +85,12 @@ Public Class DateTimeRangePresenter(Of TM As New)
             Dim bDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(beginningDate, CultureInfo.CreateSpecificCulture("en-GB"))
             Dim eDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(endingDate, CultureInfo.CreateSpecificCulture("en-GB"))
             Dim language = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
-            _reportModel.ReportTitle = Libraries.MessagingLibrary.Messaging.SelectReportName(_reportModel.ReportName, beginningDate, endingDate, curCulture, "T")
+            Dim reportTitle As String
+            reportTitle = Libraries.MessagingLibrary.Messaging.SelectReportName(_reportModel.ReportTitle, beginningDate, endingDate, curCulture, "T")
             reportArgs.ReportParameters = {
                                             beginningDate.Value, "BeginningDate",
                                             endingDate.Value, "EndingDate",
-                                            _reportModel.ReportTitle, "ReportTitle",
+                                            reportTitle, "ReportTitle",
                                             GlobalVariables.EstablishmentName, "EstablishmentName",
                                             language, "Language"}
             If _reportModel.QueryParameters IsNot Nothing AndAlso _reportModel.QueryParameters <> "" Then
@@ -187,6 +192,14 @@ Public Class ContactDateTimeRangePresenter(Of TM As New)
         Dim dStart As DateTime = GetCodedDate(defStart)
         Dim dEnd As DateTime = GetCodedDate(defEnd)
         SetInitialDates(period, defStart, defEnd, View.BeginningDate, View.EndingDate)
+
+        If Not View.EndingDate Is Nothing Then
+            Dim eDate As DateTime
+            eDate = View.EndingDate
+            eDate.AddHours(23).AddMinutes(59).AddSeconds(59).AddMilliseconds(999)
+            View.EndingDate = eDate
+        End If
+
         If contactName <> "" And Not (_reportModel.DatabaseName Is Nothing OrElse _reportModel.DatabaseName = "") Then
             Service.SaveConnectionString()
             Service.SetConnectionString(_reportModel.DatabaseName)

@@ -18,9 +18,13 @@ Namespace DataLayer.AdoNet
                                       "AddedByUser," &
                                       "DateCreated," &
                                       "EmployeeIdNo," &
+                                      "EndDate," &
                                       "EquivalentHours," &
                                       "IdNo," &
                                       "PayrollIdNo," &
+                                      "PayrollName," &
+                                      "PayrollNameAra," &
+                                      "StartDate," &
                                       "UserName"
 
         Public Function GetRecordByIdNo(idNo) As EmployeeAbsence Implements iDao(Of EmployeeAbsence).GetRecordByIdNo
@@ -60,10 +64,14 @@ Namespace DataLayer.AdoNet
             .AbsenceType = Extensions.AsChar(reader("AbsenceType")),
             .AddedByUser = Extensions.AsInt(Of Int16)(reader("AddedByUser")),
             .DateCreated = Extensions.AsDateTime(reader("DateCreated")),
+            .EndDate = Extensions.AsNullableDateTime(reader("EndDate")),
             .EmployeeIdNo = Extensions.AsInt(Of Int32)(reader("EmployeeIdNo")),
             .EquivalentHours = Extensions.AsDecimal(reader("EquivalentHours")),
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .PayrollIdNo = Extensions.AsId(Of Int16)(reader("PayrollIdNo")),
+            .PayrollName = Extensions.AsString(reader("PayrollName")),
+            .PayrollNameAra = Extensions.AsString(reader("PayrollNameAra")),
+            .StartDate = Extensions.AsNullableDateTime(reader("StartDate")),
             .UserName = Extensions.AsString(reader("UserName"))
             }
 

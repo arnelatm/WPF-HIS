@@ -138,7 +138,7 @@ Public Module GlobalFunctions
             CultureInfo.CurrentCulture = targetCulture
         End If
         Try
-            shortDateTimeString = givenDate.ToShortDateString() + " " + givenDate.ToShortTimeString()
+            shortDateTimeString = givenDate.ToShortDateString() + " " + givenDate.ToString("hh:mm tt")
         Catch ex As Exception
             shortDateTimeString = Nothing
         Finally
@@ -489,6 +489,19 @@ Public Module GlobalFunctions
         Dim curCulture = CultureInfo.CurrentCulture
         CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
         value = DateSerial(nYear, nMonth, nDay)
+        CultureInfo.CurrentCulture = curCulture
+        Return value
+    End Function
+
+    '''<summary>
+    '''Converts a Date to Gregorian Date given the year,month,and day.
+    '''</summary>
+    Public Function GregorianDateTimeSerial(ByVal nYear As Integer, nMonth As Integer, nDay As Integer, Optional nHour As Integer = 0, Optional nMinute As Integer = 0, Optional nSeconds As Integer = 0) As DateTime
+        Dim value As DateTime
+        Dim curCulture = CultureInfo.CurrentCulture
+        CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
+        value = DateSerial(nYear, nMonth, nDay).AddHours(nHour).AddMinutes(nMinute)
+        value = value.AddSeconds(nSeconds)
         CultureInfo.CurrentCulture = curCulture
         Return value
     End Function
