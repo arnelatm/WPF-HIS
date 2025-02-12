@@ -42,15 +42,15 @@
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel6 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.DataGridViewInvMedNotesDetails = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
-            Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.SeqDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.ItemCodeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.ItemNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.NotesDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.bsInvMedNotesDetails = New System.Windows.Forms.BindingSource(Me.components)
             Me.CLabel7 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CTextBox1 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.txtDoctorCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.SeqDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.ItemCodeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.ItemNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.Note = New System.Windows.Forms.DataGridViewTextBoxColumn()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout2.SuspendLayout()
             Me.TableLayoutPanel1.SuspendLayout()
@@ -411,7 +411,7 @@
             Me.DataGridViewInvMedNotesDetails.BegFindValue = Nothing
             Me.DataGridViewInvMedNotesDetails.Cached = False
             Me.DataGridViewInvMedNotesDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DataGridViewInvMedNotesDetails.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn2, Me.SeqDataGridViewTextBoxColumn, Me.ItemCodeDataGridViewTextBoxColumn, Me.ItemNameDataGridViewTextBoxColumn, Me.NotesDataGridViewTextBoxColumn})
+            Me.DataGridViewInvMedNotesDetails.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn2, Me.SeqDataGridViewTextBoxColumn, Me.ItemCodeDataGridViewTextBoxColumn, Me.ItemNameDataGridViewTextBoxColumn, Me.Note})
             Me.TableLayoutPanel1.SetColumnSpan(Me.DataGridViewInvMedNotesDetails, 6)
             Me.DataGridViewInvMedNotesDetails.DataFilter = Nothing
             Me.DataGridViewInvMedNotesDetails.DataSource = Me.bsInvMedNotesDetails
@@ -454,52 +454,6 @@
             Me.DataGridViewInvMedNotesDetails.Size = New System.Drawing.Size(742, 200)
             Me.DataGridViewInvMedNotesDetails.TabIndex = 14
             Me.DataGridViewInvMedNotesDetails.Translatable = True
-            '
-            'DataGridViewTextBoxColumn2
-            '
-            Me.DataGridViewTextBoxColumn2.DataPropertyName = "IdNo"
-            Me.DataGridViewTextBoxColumn2.HeaderText = "IdNo"
-            Me.DataGridViewTextBoxColumn2.MinimumWidth = 6
-            Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
-            Me.DataGridViewTextBoxColumn2.ReadOnly = True
-            Me.DataGridViewTextBoxColumn2.Visible = False
-            Me.DataGridViewTextBoxColumn2.Width = 36
-            '
-            'SeqDataGridViewTextBoxColumn
-            '
-            Me.SeqDataGridViewTextBoxColumn.DataPropertyName = "Seq"
-            Me.SeqDataGridViewTextBoxColumn.HeaderText = "Seq"
-            Me.SeqDataGridViewTextBoxColumn.MinimumWidth = 6
-            Me.SeqDataGridViewTextBoxColumn.Name = "SeqDataGridViewTextBoxColumn"
-            Me.SeqDataGridViewTextBoxColumn.ReadOnly = True
-            Me.SeqDataGridViewTextBoxColumn.Width = 51
-            '
-            'ItemCodeDataGridViewTextBoxColumn
-            '
-            Me.ItemCodeDataGridViewTextBoxColumn.DataPropertyName = "ItemCode"
-            Me.ItemCodeDataGridViewTextBoxColumn.HeaderText = "ItemCode"
-            Me.ItemCodeDataGridViewTextBoxColumn.MinimumWidth = 6
-            Me.ItemCodeDataGridViewTextBoxColumn.Name = "ItemCodeDataGridViewTextBoxColumn"
-            Me.ItemCodeDataGridViewTextBoxColumn.ReadOnly = True
-            Me.ItemCodeDataGridViewTextBoxColumn.Width = 77
-            '
-            'ItemNameDataGridViewTextBoxColumn
-            '
-            Me.ItemNameDataGridViewTextBoxColumn.DataPropertyName = "ItemName"
-            Me.ItemNameDataGridViewTextBoxColumn.HeaderText = "ItemName"
-            Me.ItemNameDataGridViewTextBoxColumn.MinimumWidth = 6
-            Me.ItemNameDataGridViewTextBoxColumn.Name = "ItemNameDataGridViewTextBoxColumn"
-            Me.ItemNameDataGridViewTextBoxColumn.ReadOnly = True
-            Me.ItemNameDataGridViewTextBoxColumn.Width = 80
-            '
-            'NotesDataGridViewTextBoxColumn
-            '
-            Me.NotesDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-            Me.NotesDataGridViewTextBoxColumn.DataPropertyName = "Notes"
-            Me.NotesDataGridViewTextBoxColumn.HeaderText = "Notes"
-            Me.NotesDataGridViewTextBoxColumn.MinimumWidth = 6
-            Me.NotesDataGridViewTextBoxColumn.Name = "NotesDataGridViewTextBoxColumn"
-            Me.NotesDataGridViewTextBoxColumn.ReadOnly = True
             '
             'bsInvMedNotesDetails
             '
@@ -581,6 +535,51 @@
             Me.txtDoctorCode.Translatable = False
             Me.txtDoctorCode.Visible = False
             '
+            'DataGridViewTextBoxColumn2
+            '
+            Me.DataGridViewTextBoxColumn2.DataPropertyName = "IdNo"
+            Me.DataGridViewTextBoxColumn2.HeaderText = "IdNo"
+            Me.DataGridViewTextBoxColumn2.MinimumWidth = 6
+            Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
+            Me.DataGridViewTextBoxColumn2.ReadOnly = True
+            Me.DataGridViewTextBoxColumn2.Visible = False
+            Me.DataGridViewTextBoxColumn2.Width = 36
+            '
+            'SeqDataGridViewTextBoxColumn
+            '
+            Me.SeqDataGridViewTextBoxColumn.DataPropertyName = "Seq"
+            Me.SeqDataGridViewTextBoxColumn.HeaderText = "Seq"
+            Me.SeqDataGridViewTextBoxColumn.MinimumWidth = 6
+            Me.SeqDataGridViewTextBoxColumn.Name = "SeqDataGridViewTextBoxColumn"
+            Me.SeqDataGridViewTextBoxColumn.ReadOnly = True
+            Me.SeqDataGridViewTextBoxColumn.Width = 51
+            '
+            'ItemCodeDataGridViewTextBoxColumn
+            '
+            Me.ItemCodeDataGridViewTextBoxColumn.DataPropertyName = "ItemCode"
+            Me.ItemCodeDataGridViewTextBoxColumn.HeaderText = "ItemCode"
+            Me.ItemCodeDataGridViewTextBoxColumn.MinimumWidth = 6
+            Me.ItemCodeDataGridViewTextBoxColumn.Name = "ItemCodeDataGridViewTextBoxColumn"
+            Me.ItemCodeDataGridViewTextBoxColumn.ReadOnly = True
+            Me.ItemCodeDataGridViewTextBoxColumn.Width = 77
+            '
+            'ItemNameDataGridViewTextBoxColumn
+            '
+            Me.ItemNameDataGridViewTextBoxColumn.DataPropertyName = "ItemName"
+            Me.ItemNameDataGridViewTextBoxColumn.HeaderText = "ItemName"
+            Me.ItemNameDataGridViewTextBoxColumn.MinimumWidth = 6
+            Me.ItemNameDataGridViewTextBoxColumn.Name = "ItemNameDataGridViewTextBoxColumn"
+            Me.ItemNameDataGridViewTextBoxColumn.ReadOnly = True
+            Me.ItemNameDataGridViewTextBoxColumn.Width = 80
+            '
+            'Note
+            '
+            Me.Note.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+            Me.Note.DataPropertyName = "Note"
+            Me.Note.HeaderText = "Note"
+            Me.Note.Name = "Note"
+            Me.Note.ReadOnly = True
+            '
             'InvMedNotesForm
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -590,7 +589,7 @@
             Me.Controls.Add(Me.CFlowLayout2)
             Me.Controls.Add(Me.txtDoctorCode)
             Me.Name = "InvMedNotesForm"
-            Me.Text = "Diagnostic Result Entry Form"
+            Me.Text = "Invoice Notes Editor"
             Me.Controls.SetChildIndex(Me.txtDoctorCode, 0)
             Me.Controls.SetChildIndex(Me.CFlowLayout2, 0)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
@@ -650,12 +649,13 @@
         Friend WithEvents CLabel5 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtDoctorName As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents CLabel6 As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents NotesDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents CLabel7 As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents CTextBox1 As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
         Friend WithEvents SeqDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents ItemCodeDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents ItemNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents NotesDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents CLabel7 As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents CTextBox1 As Libraries.CBaseControlsLibrary.CTextBox
+        Friend WithEvents Note As DataGridViewTextBoxColumn
     End Class
 End Namespace
