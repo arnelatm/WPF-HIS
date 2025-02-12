@@ -101,6 +101,24 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property Nationality As String Implements IInvMedNotesView.Nationality
+            Get
+                Return txtNationality.Text
+            End Get
+            Set
+                txtNationality.Text = Value
+            End Set
+        End Property
+
+        Public Property MRN As Integer Implements IInvMedNotesView.MRN
+            Get
+                Return GlobalFunctions.NumParser(Of Int32)(txtMRN.Text)
+            End Get
+            Set
+                txtMRN.Text = Convert.ToString(Value)
+            End Set
+        End Property
+
         Private Sub BindInvMedNotesDisplay()
             SuspendLayout()
             bsInvMedNotesDetails.DataSource = Nothing
@@ -110,6 +128,9 @@ Namespace PresentationLayer.Views.Forms
             With DataGridViewInvMedNotesDetails
                 .AutoGenerateColumns = False
                 .DataSource = bsInvMedNotesDetails
+                dgvSeq.DisplayOnly = True
+                dgvItemCode.DisplayOnly = True
+                dgvItemName.DisplayOnly = True
             End With
             ResumeLayout()
         End Sub
@@ -219,17 +240,6 @@ Namespace PresentationLayer.Views.Forms
             End With
         End Sub
 
-        Private Sub TableLayoutPanel1_Paint(sender As Object, e As PaintEventArgs) Handles TableLayoutPanel1.Paint
-
-        End Sub
-
-        Private Sub CLabel3_Click(sender As Object, e As EventArgs) Handles CLabel3.Click
-
-        End Sub
-
-        Private Sub CLabel2_Click(sender As Object, e As EventArgs) Handles CLabel2.Click
-
-        End Sub
     End Class
 
 End Namespace

@@ -11,6 +11,8 @@ Namespace PresentationLayer.Views.Interfaces
         Property InvoiceNo As Int32
         Property DoctorName As String
         Property InvMedNotesDetails As List(Of InvMedNotesDetailView)
+        Property MRN As Integer
+        Property Nationality As String
 
         Event InvMedNotesRequested(invoiceNo As Int32)
         Event InvMedNotesChanged(bindingSource As BindingSource)
@@ -25,7 +27,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property ItemCode As String
         Property ItemName As String
         Property Note As String
-
+        Property MRN As Integer
     End Interface
 
 End Namespace

@@ -9,8 +9,10 @@ Namespace PresentationLayer.Models
         Public Property PatientName As String
         Public Property Gender As String
         Public Property Age As String
+        Public Property MRN As Int32
         Public Property InvoiceNo As Int32
         Public Property DoctorName As String
+        Public Property Nationality As String
         Public Property InvMedNotesDetails As List(Of InvMedNotesDetailModel)
     End Class
 

@@ -42,7 +42,7 @@ Namespace DataLayer.AdoNet
             Dim sql2 As String
             sql2 = $"SELECT Row_Number() Over (Order by IdNo) as Seq,IdNo,ItemCode,ItemName,Note from InvMedNotes_View where InvoiceNo = @InvoiceNo "
             If invoiceNo = 0 Then
-                value.InvMedNotesDetails = Nothing
+                'value.InvMedNotesDetails = Nothing
             Else
                 value.InvMedNotesDetails = _db.Read(sql2, MakeInvMedNotesDetails, params).ToList()
             End If
