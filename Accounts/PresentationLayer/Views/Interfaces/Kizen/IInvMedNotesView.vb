@@ -12,7 +12,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property DoctorName As String
         Property InvMedNotesDetails As List(Of InvMedNotesDetailView)
 
-        Event InvMedNotesRequested(invoiceDate As Date?)
+        Event InvMedNotesRequested(invoiceNo As Int32)
         Event InvMedNotesChanged(bindingSource As BindingSource)
 
     End Interface
@@ -24,7 +24,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property Seq As Int32
         Property ItemCode As String
         Property ItemName As String
-        Property Notes As String
+        Property Note As String
 
     End Interface
 

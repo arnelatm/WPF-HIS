@@ -329,6 +329,13 @@ Public Class MappingProfileAccounts
         CreateMap(Of Inventory, InventoryModel)().ReverseMap()
 
 
+        CreateMap(Of InvMedNotes, InvMedNotesModel)().ReverseMap()
+        CreateMap(Of InvMedNotesModel, IInvMedNotesView)().ReverseMap()
+
+        CreateMap(Of InvMedNotesDetail, InvMedNotesDetailModel)().ReverseMap()
+        CreateMap(Of InvMedNotesDetailModel, IInvMedNotesDetailView)().ReverseMap()
+        CreateMap(Of InvMedNotesDetailModel, InvMedNotesDetailView)().ReverseMap()
+
     End Sub
 
     'CreateMap(Of List(Of JournalItem), List(Of JournalItemModel))().ReverseMap()

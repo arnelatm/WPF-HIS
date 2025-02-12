@@ -16,7 +16,7 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly _fieldList As String = "Age," &
                                                 "DoctorName," &
-                                                "Gender" &
+                                                "Gender," &
                                                 "InvoiceDate," &
                                                 "InvoiceNo," &
                                                 "MRN," &
@@ -31,26 +31,34 @@ Namespace DataLayer.AdoNet
         '    Return "Trans_Key"
         'End Function
 
-        Public Function GetRecordByIdNo(idNo) As InvMedNotes Implements IDao(Of InvMedNotes).GetRecordByIdNo
+        Public Function GetRecordByIdNo(invoiceNo) As InvMedNotes Implements IDao(Of InvMedNotes).GetRecordByIdNo
             Dim sql As String =
                     "SELECT " & _fieldList &
                     " FROM InvMedNotes_View" &
-                    " WHERE IdNo = @IdNo"
-            Dim params() As Object = {"@IdNo", idNo}
+                    " WHERE InvoiceNo = @InvoiceNo"
+            Dim params() As Object = {"@InvoiceNo", invoiceNo}
+
             Dim value As InvMedNotes = _db.Read(sql, Make, params).FirstOrDefault()
+            Dim sql2 As String
+            sql2 = $"SELECT Row_Number() Over (Order by IdNo) as Seq,IdNo,ItemCode,ItemName,Note from InvMedNotes_View where InvoiceNo = @InvoiceNo "
+            If invoiceNo = 0 Then
+                value.InvMedNotesDetails = Nothing
+            Else
+                value.InvMedNotesDetails = _db.Read(sql2, MakeInvMedNotesDetails, params).ToList()
+            End If
             Return value
         End Function
 
         Public Function GetParametrized(Of InvMedNotesModel)(parameter As Object, Optional sortExpression As String = Nothing) As InvMedNotes Implements IDaoParametrized(Of InvMedNotes).GetParametrized
-            If parameter(0) Is Nothing Then
+            If parameter Is Nothing Then
                 AATM.Libraries.MessagingLibrary.Messaging.Show("MsgDateCannotBeBlank")
                 Return Nothing
             End If
-            Dim invoiceNo As Date = parameter(0)
+            Dim invoiceNo As Int32 = parameter(0)
             Dim sql As String
             Dim data As New InvMedNotes
-            Dim params() As Object = {"@InvoiceNo", InvoiceNo}
-            sql = $"SELECT Row_Number() Over (Order by TakenTime) as 'Sequence',IdNo,ItemCode,ItemName,Notes from InvMedNotes_View where InvoiceNo = @InvoiceNo "
+            Dim params() As Object = {"@InvoiceNo", invoiceNo}
+            sql = $"SELECT Row_Number() Over (Order by IdNo) as Seq,IdNo,ItemCode,ItemName,Note from InvMedNotes_View where InvoiceNo = @InvoiceNo "
             data.InvMedNotesDetails = _db.Read(sql, MakeInvMedNotesDetails, params).ToList()
             Return data
         End Function
@@ -66,14 +74,14 @@ Namespace DataLayer.AdoNet
 
         Private Shared ReadOnly Make As Func(Of IDataReader, InvMedNotes) = Function(reader) New InvMedNotes() With
         {
-        .Age = AATM.DataLayer.AdoNet.Extensions.AsString(reader("TransDateEnglish")),
+        .Age = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Age")),
         .DoctorName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("DoctorName")),
         .Gender = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Gender")),
         .InvoiceDate = AATM.DataLayer.AdoNet.Extensions.AsString(reader("InvoiceDate")),
         .InvoiceNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("InvoiceNo")),
         .MRN = AATM.DataLayer.AdoNet.Extensions.AsString(reader("MRN")),
         .Nationality = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Nationality")),
-        .PatientName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("TransDateEnglish"))}
+        .PatientName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("PatientName"))}
 
         'Public Function UpdateInvMedNotesDetail(IdNo As Int32, urine As Boolean, stool As Boolean, rbs As Decimal)
         '    Dim sql As String =
@@ -87,11 +95,11 @@ Namespace DataLayer.AdoNet
 
         Private Shared ReadOnly MakeInvMedNotesDetails As Func(Of IDataReader, InvMedNotesDetail) = Function(reader) New InvMedNotesDetail() With
             {
-            .Seq = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("Sequence")),
+            .Seq = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("Seq")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .ItemCode = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ItemCode")),
             .ItemName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ItemName")),
-            .Notes = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Notes"))
+            .Note = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Note"))
             }
 
     End Class
@@ -104,7 +112,7 @@ Namespace DataLayer.AdoNet
                                                 "ItemCode" &
                                                 "ItemName," &
                                                 "Seq," &
-                                                "Notes"
+                                                "Note"
 
 
         Private ReadOnly _db As New Db()
@@ -117,12 +125,12 @@ Namespace DataLayer.AdoNet
             Return _db
         End Function
 
-        Public Function UpdateRecord(idNo As Int32, notes As String)
+        Public Function UpdateRecord(idNo As Int32, note As String)
             Dim sql As String =
-                    " UPDATE [A1_Invoces] Set" &
-                    " Notes = @Notes " &
-                    " WHERE IdNo = @IdNo"
-            Return _db.Update(sql, {"@Notes", notes, "@IdNo", idNo})
+                    " UPDATE A1_OrderWorks Set" &
+                    " Note = @Note " &
+                    " WHERE Id = @IdNo"
+            Return _db.Update(sql, {"@Note", note, "@IdNo", idNo})
         End Function
 
     End Class

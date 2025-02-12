@@ -1,5 +1,6 @@
 ﻿Imports System.Data.Common
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.DataLayer
 Imports AATM.Libraries.GlobalFuncNSub
 Imports Telerik.WinControls.VirtualKeyboard
 
@@ -17,21 +18,19 @@ Namespace PresentationLayer.Views.Forms
         Private _InvMedNotesDetails As New List(Of InvMedNotesDetailView)
         Private _doctorId As String
         Private _dataAccessLevel As String = ""
-        Private _connectionName As String = ""
-        Private _testType As String = ""
+        Private _connectionName As String = "Kizen"
 
-        Public Event InvMedNotesRequested(transactionDate As Date?) Implements IInvMedNotesView.InvMedNotesRequested
+        Public Event InvMedNotesRequested(transactionDate As Int32) Implements IInvMedNotesView.InvMedNotesRequested
+        'Public Event InvMedNotesChanged(note As String) Implements IInvMedNotesView.InvMedNotesChanged
         Public Event InvMedNotesChanged(bindingSource As BindingSource) Implements IInvMedNotesView.InvMedNotesChanged
 
-        Public Sub New(parameter As Object)
+        Public Sub New()
             'MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
             SingleData = True
             QueryOnly = True
             DisplaySetup()
-            _connectionName = parameter(0)
-            _testType = parameter(1)
         End Sub
 
         Private Sub DisplaySetup()
@@ -116,11 +115,11 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub btnRefresh_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnRefresh.ClickButtonArea
-            RaiseEvent InvMedNotesRequested(InvoiceDate)
+            RaiseEvent InvMedNotesRequested(InvoiceNo)
         End Sub
 
         Private Sub InvMedNotesCollectionForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            RaiseEvent InvMedNotesRequested(InvoiceDate)
+            RaiseEvent InvMedNotesRequested(InvoiceNo)
             'dgvClinical.ThreeState = True
             ''dgvAge.DisplayOnly = True
             'For Each col In DataGridViewInvMedNotesDetails.Columns
@@ -140,8 +139,8 @@ Namespace PresentationLayer.Views.Forms
             'Next
         End Sub
 
-        Private Sub dtpTransactionDate_Validated(sender As Object, e As EventArgs) Handles dtpInvoiceDate.Validated
-            RaiseEvent InvMedNotesRequested(InvoiceDate)
+        Private Sub txtInvoiceNo_Validated(sender As Object, e As EventArgs) Handles txtInvoiceNo.Validated
+            RaiseEvent InvMedNotesRequested(InvoiceNo)
         End Sub
 
         Private Sub DataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs)
@@ -189,18 +188,19 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub DataGridViewInvMedNotesDetails_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewInvMedNotesDetails.CellEndEdit
+            'Dim editedNote As String = DirectCast(sender, System.Windows.Forms.DataGridView).CurrentCell.EditedFormattedValue
             RaiseEvent InvMedNotesChanged(bsInvMedNotesDetails)
         End Sub
 
-        Private Sub CheckBoxValueChanged() Handles DataGridViewInvMedNotesDetails.CellValueChanged
-            With DataGridViewInvMedNotesDetails
-                If TypeOf .CurrentCell Is DataGridViewCheckBoxCell Then
-                    RaiseEvent InvMedNotesChanged(bsInvMedNotesDetails)
-                End If
-            End With
-        End Sub
+        'Private Sub CheckBoxValueChanged() Handles DataGridViewInvMedNotesDetails.CellValueChanged
+        '    With DataGridViewInvMedNotesDetails
+        '        If TypeOf .CurrentCell Is DataGridViewCheckBoxCell Then
+        '            RaiseEvent InvMedNotesChanged(bsInvMedNotesDetails)
+        '        End If
+        '    End With
+        'End Sub
 
-        Private Sub oncellendedit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewInvMedNotesDetails.CellEndEdit
+        Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewInvMedNotesDetails.CellEndEdit
             ProcessCellEndEdit(DataGridViewInvMedNotesDetails, bsInvMedNotesDetails)
         End Sub
 

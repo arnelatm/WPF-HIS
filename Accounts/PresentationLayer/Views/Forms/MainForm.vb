@@ -1369,7 +1369,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripMenuItemInvoiceNoteEditor_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemInvoiceNoteEditor.Click
-            RunForm(Of InvMedNotesForm, InvMedNotesPresenter(Of InvMedNotesModel), Object)({"Kizen"})
+            RunForm(Of InvMedNotesForm, InvMedNotesPresenter(Of InvMedNotesModel))()
         End Sub
     End Class
 
