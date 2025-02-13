@@ -243,6 +243,7 @@
     <Compile Include="BusinessLayer\IGroup\Prescription.vb" />
     <Compile Include="BusinessLayer\IGroup\PrescriptionItem.vb" />
     <Compile Include="BusinessLayer\IGroup\StockInventory.vb" />
+    <Compile Include="BusinessLayer\Kizen\LabReportStatus.vb" />
     <Compile Include="BusinessLayer\Kizen\InvMedNotes.vb" />
     <Compile Include="BusinessLayer\SupplierProduct.vb" />
     <Compile Include="BusinessLayer\PurchaseOrderDetail.vb" />
@@ -348,6 +349,7 @@
     <Compile Include="DataLayer\AdoNet\IGroup\DosageMasterDao.vb" />
     <Compile Include="DataLayer\AdoNet\IGroup\PrescriptionDao.vb" />
     <Compile Include="DataLayer\AdoNet\IGroup\PrescriptionItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\Kizen\LabResultStatusDao.vb" />
     <Compile Include="DataLayer\AdoNet\Kizen\InvMedNotesDao.vb" />
     <Compile Include="DataLayer\AdoNet\SupplierProductDao.vb" />
     <Compile Include="DataLayer\AdoNet\PurchaseOrderApprovalDetailDao.vb" />
@@ -502,6 +504,7 @@
     <Compile Include="PresentationLayer\Models\IGroup\PrescriptionModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\StockInventoryModel.vb" />
     <Compile Include="PresentationLayer\Models\InventoryModel.vb" />
+    <Compile Include="PresentationLayer\Models\Kizen\LabReportStatusModel.vb" />
     <Compile Include="PresentationLayer\Models\Kizen\InvMedNotesModel.vb" />
     <Compile Include="PresentationLayer\Models\SupplierProductModel.vb" />
     <Compile Include="PresentationLayer\Models\PurchaseOrderDetailModel.vb" />
@@ -707,6 +710,12 @@
     <Compile Include="PresentationLayer\Views\Forms\InvRequestForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\Kizen\LabReportStatusForm.Designer.vb">
+      <DependentUpon>LabReportStatusForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\Kizen\LabReportStatusForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Kizen\InvMedNotesForm.Designer.vb">
       <DependentUpon>InvMedNotesForm.vb</DependentUpon>
     </Compile>
@@ -768,6 +777,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\ClinicLabSampleDetailView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\Kizen\ILabReportStatusView.vb" />
     <Compile Include="PresentationLayer\Views\InvMedNotesDetailView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IApArEmReportView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IContactDateRangeView.vb" />
@@ -2144,6 +2154,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\InvRequestForm.resx">
       <DependentUpon>InvRequestForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\Kizen\LabReportStatusForm.resx">
+      <DependentUpon>LabReportStatusForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Kizen\InvMedNotesForm.resx">
       <DependentUpon>InvMedNotesForm.vb</DependentUpon>
