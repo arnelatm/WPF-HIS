@@ -21,28 +21,25 @@ Namespace PresentationLayer.Views.Forms
             InitializeComponent()
             SingleData = True
             QueryOnly = True
-            DisplaySetup()
         End Sub
 
-        Private Sub DisplaySetup()
-            dtpInvoiceDate.Value = Today()
-        End Sub
 
-        Public Property InvoiceDate As Date Implements ILabReportStatusView.InvoiceDate
+
+        Public Property RequestedDateTime As String Implements ILabReportStatusView.RequestedDateTime
             Get
-                Return dtpInvoiceDate.Value
+                Return txtRequestedDateTime.Text
             End Get
-            Set(value As Date)
-                dtpInvoiceDate.Value = value
+            Set
+                txtRequestedDateTime.Text = Value
             End Set
         End Property
 
         Public Property PatientName As String Implements ILabReportStatusView.PatientName
             Get
-                Return txtPatientName.Text
+                Return txtPatientNameMRN.Text
             End Get
             Set
-                txtPatientName.Text = Value
+                txtPatientNameMRN.Text = Value
             End Set
         End Property
 
@@ -64,12 +61,12 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property DoctorName As String Implements ILabReportStatusView.DoctorName
+        Public Property RequestedBy As String Implements ILabReportStatusView.RequestedBy
             Get
-                Return txtDoctorName.Text
+                Return txtRequestedBy.Text
             End Get
             Set
-                txtDoctorName.Text = Value
+                txtRequestedBy.Text = Value
             End Set
         End Property
 
@@ -102,73 +99,82 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property CollectedBy As String Implements ILabReportStatusView.CollectedBy
             Get
-                Throw New NotImplementedException()
+                Return txtCollectedBy.Text
             End Get
-            Set(value As String)
-                Throw New NotImplementedException()
+            Set
+                txtCollectedBy.Text = Value
             End Set
         End Property
 
-        Public Property CollectedDateTime As Date Implements ILabReportStatusView.CollectedDateTime
+        Public Property CollectedDateTime As DateTime? Implements ILabReportStatusView.CollectedDateTime
             Get
-                Throw New NotImplementedException()
+                Return dtpCollectedDateTime.Value
             End Get
-            Set(value As Date)
-                Throw New NotImplementedException()
+            Set
+                dtpCollectedDateTime.Value = Value
             End Set
         End Property
 
         Public Property Completed As Boolean? Implements ILabReportStatusView.Completed
             Get
-                Throw New NotImplementedException()
+                Return chkCompleted.Checked
             End Get
-            Set(value As Boolean?)
-                Throw New NotImplementedException()
+            Set
+                chkCompleted.Checked = Value
             End Set
         End Property
 
         Public Property ProcessedBy As String Implements ILabReportStatusView.ProcessedBy
             Get
-                Throw New NotImplementedException()
+                Return txtProcessedBy.Text
             End Get
-            Set(value As String)
-                Throw New NotImplementedException()
+            Set
+                txtProcessedBy.Text = Value
             End Set
         End Property
 
-        Public Property ProcessedDateTime As Date Implements ILabReportStatusView.ProcessedDateTime
+        Public Property ProcessedDateTime As DateTime? Implements ILabReportStatusView.ProcessedDateTime
             Get
-                Throw New NotImplementedException()
+                Return dtpProcessedDateTime.Value
             End Get
-            Set(value As Date)
-                Throw New NotImplementedException()
+            Set
+                dtpProcessedDateTime.Value = Value
             End Set
         End Property
 
         Public Property ValidatedBy As String Implements ILabReportStatusView.ValidatedBy
             Get
-                Throw New NotImplementedException()
+                Return txtValidatedBy.Text
             End Get
-            Set(value As String)
-                Throw New NotImplementedException()
+            Set
+                txtValidatedBy.Text = Value
             End Set
         End Property
 
-        Public Property ValidatedDateTime As Date Implements ILabReportStatusView.ValidatedDateTime
+        Public Property ValidatedDateTime As DateTime? Implements ILabReportStatusView.ValidatedDateTime
             Get
-                Throw New NotImplementedException()
+                Return dtpValidatedDateTime.Value
             End Get
-            Set(value As Date)
-                Throw New NotImplementedException()
+            Set
+                dtpValidatedDateTime.Value = Value
             End Set
         End Property
 
         Public Property PatientNameMRN As String Implements ILabReportStatusView.PatientNameMRN
             Get
-                Throw New NotImplementedException()
+                Return txtPatientNameMRN.Text
             End Get
-            Set(value As String)
-                Throw New NotImplementedException()
+            Set
+                txtPatientNameMRN.Text = Value
+            End Set
+        End Property
+
+        Public Property SampleNo As Integer Implements ILabReportStatusView.SampleNo
+            Get
+                Return GlobalFunctions.NumParser(Of Int32)(txtSampleNo.Text)
+            End Get
+            Set
+                txtSampleNo.Text = Convert.ToString(Value)
             End Set
         End Property
 
@@ -186,7 +192,7 @@ Namespace PresentationLayer.Views.Forms
             'Next
         End Sub
 
-        Private Sub txtInvoiceNo_Validated(sender As Object, e As EventArgs) Handles txtInvoiceNo.Validated
+        Private Sub txtInvoiceNo_Validated(sender As Object, e As EventArgs) Handles txtSampleNo.Validated
             RaiseEvent LabReportStatusRequested(InvoiceNo)
         End Sub
 
@@ -195,7 +201,7 @@ Namespace PresentationLayer.Views.Forms
             'MainFieldsDictionary = New Dictionary(Of String, Object) From
             '    {
             '    {"DoctorCode", txtDoctorCode},
-            '    {"DoctorName", cboDoctorName}
+            '    {"RequestedBy", cboRequestedBy}
             '    }
         End Sub
 
