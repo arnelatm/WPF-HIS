@@ -169,6 +169,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemItemMatcher = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemDosagePrinting = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemDocManagement = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemInvoiceNoteEditor = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemReports = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemStatementOfAccountsPayable = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemStatementOfAccountsReceivable = New System.Windows.Forms.ToolStripMenuItem()
@@ -265,7 +266,7 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-            Me.ToolStripMenuItemInvoiceNoteEditor = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemLabReportStatus = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.AccountsMenu.SuspendLayout()
@@ -925,7 +926,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemLaboratory
             '
-            Me.ToolStripMenuItemLaboratory.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemCbcResultRetrieval, Me.ToolStripMenuItemCbcResultRetrievalSampleId, Me.ToolStripMenuItemIqamaResultEntryKizen, Me.ToolStripMenuItemBaladiyaResultEntryKizen, Me.ToolStripMenuItemDiagnosticSamplesKizen, Me.ToolStripMenuItemIqamaResultEntryIGroup, Me.ToolStripMenuItemBaladiyaResultEntryIGroup, Me.ToolStripMenuItemDiagnosticSamples, Me.ToolStripMenuItemClinicSamples})
+            Me.ToolStripMenuItemLaboratory.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemCbcResultRetrieval, Me.ToolStripMenuItemCbcResultRetrievalSampleId, Me.ToolStripMenuItemIqamaResultEntryKizen, Me.ToolStripMenuItemBaladiyaResultEntryKizen, Me.ToolStripMenuItemDiagnosticSamplesKizen, Me.ToolStripMenuItemIqamaResultEntryIGroup, Me.ToolStripMenuItemBaladiyaResultEntryIGroup, Me.ToolStripMenuItemDiagnosticSamples, Me.ToolStripMenuItemClinicSamples, Me.ToolStripMenuItemLabReportStatus})
             Me.ToolStripMenuItemLaboratory.Name = "ToolStripMenuItemLaboratory"
             resources.ApplyResources(Me.ToolStripMenuItemLaboratory, "ToolStripMenuItemLaboratory")
             '
@@ -1004,6 +1005,11 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.ToolStripMenuItemDocManagement.Name = "ToolStripMenuItemDocManagement"
             resources.ApplyResources(Me.ToolStripMenuItemDocManagement, "ToolStripMenuItemDocManagement")
+            '
+            'ToolStripMenuItemInvoiceNoteEditor
+            '
+            Me.ToolStripMenuItemInvoiceNoteEditor.Name = "ToolStripMenuItemInvoiceNoteEditor"
+            resources.ApplyResources(Me.ToolStripMenuItemInvoiceNoteEditor, "ToolStripMenuItemInvoiceNoteEditor")
             '
             'ToolStripMenuItemReports
             '
@@ -1506,10 +1512,10 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
             '
-            'ToolStripMenuItemInvoiceNoteEditor
+            'ToolStripMenuItemLabReportStatus
             '
-            Me.ToolStripMenuItemInvoiceNoteEditor.Name = "ToolStripMenuItemInvoiceNoteEditor"
-            resources.ApplyResources(Me.ToolStripMenuItemInvoiceNoteEditor, "ToolStripMenuItemInvoiceNoteEditor")
+            Me.ToolStripMenuItemLabReportStatus.Name = "ToolStripMenuItemLabReportStatus"
+            resources.ApplyResources(Me.ToolStripMenuItemLabReportStatus, "ToolStripMenuItemLabReportStatus")
             '
             'MainForm
             '
@@ -1774,5 +1780,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ToolStripMenuItemBaladiyaResultEntryKizen As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemBaladiyaResultEntryIGroup As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemInvoiceNoteEditor As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemLabReportStatus As ToolStripMenuItem
     End Class
 End NameSpace

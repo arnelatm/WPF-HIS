@@ -1371,6 +1371,10 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ToolStripMenuItemInvoiceNoteEditor_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemInvoiceNoteEditor.Click
             RunForm(Of InvMedNotesForm, InvMedNotesPresenter(Of InvMedNotesModel))()
         End Sub
+
+        Private Sub ToolStripMenuItemLabReportStatus_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemLabReportStatus.Click
+            RunForm(Of LabReportStatusForm, LabReportStatusPresenter(Of LabReportStatusModel))()
+        End Sub
     End Class
 
 End Namespace

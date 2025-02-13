@@ -11,20 +11,21 @@ Namespace BusinessLayer
 
         Public Property Age As String
         Public Property RequestedBy As String
-        Public Property InvoiceDate As Date
         Public Property PatientName As String
+        Public Property PatientNameMRN As String
         Public Property Gender As String
         Public Property InvoiceNo As Int32
         Public Property MRN As Int32
         Public Property Nationality As String
         Public Property Completed As Boolean?
         Public Property CollectedBy As String
-        Public Property CollectedDateTime As DateTime
+        Public Property CollectedDateTime As DateTime?
         Public Property ProcessedBy As String
-        Public Property ProcessedDateTime As DateTime
+        Public Property ProcessedDateTime As DateTime?
+        Public Property RequestedDateTime As String
+        Public Property SampleNo As Int32
         Public Property ValidatedBy As String
-        Public Property ValidatedDateTime As DateTime
-        Property PatientNameMRN As String
+        Public Property ValidatedDateTime As DateTime?
 
 
     End Class

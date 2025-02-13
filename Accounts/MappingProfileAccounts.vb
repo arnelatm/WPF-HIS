@@ -332,6 +332,9 @@ Public Class MappingProfileAccounts
         CreateMap(Of InvMedNotes, InvMedNotesModel)().ReverseMap()
         CreateMap(Of InvMedNotesModel, IInvMedNotesView)().ReverseMap()
 
+        CreateMap(Of LabReportStatus, LabReportStatusModel)().ReverseMap()
+        CreateMap(Of LabReportStatusModel, ILabReportStatusView)().ReverseMap()
+
         CreateMap(Of InvMedNotesDetail, InvMedNotesDetailModel)().ReverseMap()
         CreateMap(Of InvMedNotesDetailModel, IInvMedNotesDetailView)().ReverseMap()
         CreateMap(Of InvMedNotesDetailModel, InvMedNotesDetailView)().ReverseMap()
