@@ -1,4 +1,5 @@
-﻿Imports AATM.Accounts.DataLayer.AdoNet
+﻿Imports AATM.Accounts.BusinessLayer
+Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
@@ -24,11 +25,12 @@ Namespace PresentationLayer.Presenters
             Service.RestoreConnectionString()
             WithTreeView = False
             AddHandler View.LabReportStatusRequested, AddressOf GetLabReportStatus
-            'AddHandler View.LabReportStatusChanged, AddressOf UpdateLabSample
+            AddHandler View.LabReportStatusSaved, AddressOf UpdateLabSample
+            AddHandler View.LabReportStatusUpdateName, AddressOf UpdateLabReportPatientName
         End Sub
 
-        Public Sub UpdateLabSample(bindingSource As BindingSource)
-            Debugger.Break()
+        Public Sub UpdateLabSample(sampleNo As Int32)
+            SaveData()
         End Sub
 
         Private Sub GetLabReportStatus(idNo As Int32)
@@ -51,6 +53,27 @@ Namespace PresentationLayer.Presenters
             GlobalVariables.Mapper.Map(LabReportStatusModel, View)
         End Sub
 
+        Private Sub SaveData()
+            Dim LabReportStatus As New LabReportStatusModel
+            If View.SampleNo = 0 Then
+                LabReportStatus = Nothing
+            Else
+                GlobalVariables.Mapper.Map(View, LabReportStatus)
+                Service.UpdateRecord(LabReportStatus)
+            End If
+
+        End Sub
+
+        Private Sub UpdateLabReportPatientName()
+            Dim labReportStatusModel As New LabReportStatusModel
+            If View.SampleNo = 0 Then
+                labReportStatusModel = Nothing
+            Else
+                GlobalVariables.Mapper.Map(View, labReportStatusModel)
+                Service.GenericUpdate(labReportStatusModel)
+            End If
+
+        End Sub
 
     End Class
 

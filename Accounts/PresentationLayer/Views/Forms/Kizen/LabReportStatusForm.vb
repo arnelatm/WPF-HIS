@@ -14,13 +14,15 @@ Namespace PresentationLayer.Views.Forms
         Private _connectionName As String = "Kizen"
 
         Public Event LabReportStatusRequested(transactionDate As Int32) Implements ILabReportStatusView.LabReportStatusRequested
+        Public Event LabReportStatusSaved(sampleNo As Int32) Implements ILabReportStatusView.LabReportStatusSaved
+        Public Event UpdatePatientNameClick(sampleNo As Int32) Implements ILabReportStatusView.LabReportStatusUpdateName
 
         Public Sub New()
             'MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
             SingleData = True
-            QueryOnly = True
+            QueryOnly = False
         End Sub
 
 
@@ -36,10 +38,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property PatientName As String Implements ILabReportStatusView.PatientName
             Get
-                Return txtPatientNameMRN.Text
+                Return txtPatientName.Text
             End Get
             Set
-                txtPatientNameMRN.Text = Value
+                txtPatientName.Text = Value
             End Set
         End Property
 
@@ -120,7 +122,7 @@ Namespace PresentationLayer.Views.Forms
                 Return chkCompleted.Checked
             End Get
             Set
-                chkCompleted.Checked = Value
+                chkCompleted.Checked = If(Value Is Nothing, False, Value)
             End Set
         End Property
 
@@ -179,11 +181,11 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
         Private Sub btnRefresh_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnRefresh.ClickButtonArea
-            RaiseEvent LabReportStatusRequested(InvoiceNo)
+            RaiseEvent LabReportStatusRequested(SampleNo)
         End Sub
 
         Private Sub LabReportStatusCollectionForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            RaiseEvent LabReportStatusRequested(InvoiceNo)
+            RaiseEvent LabReportStatusRequested(SampleNo)
             'dgvClinical.ThreeState = True
             ''dgvAge.DisplayOnly = True
             'For Each col In DataGridViewLabReportStatusDetails.Columns
@@ -192,8 +194,8 @@ Namespace PresentationLayer.Views.Forms
             'Next
         End Sub
 
-        Private Sub txtInvoiceNo_Validated(sender As Object, e As EventArgs) Handles txtSampleNo.Validated
-            RaiseEvent LabReportStatusRequested(InvoiceNo)
+        Private Sub txtSampleNo_Validated(sender As Object, e As EventArgs) Handles txtSampleNo.Validated
+            RaiseEvent LabReportStatusRequested(SampleNo)
         End Sub
 
 
@@ -205,6 +207,13 @@ Namespace PresentationLayer.Views.Forms
             '    }
         End Sub
 
+        Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnSaveStatus.ClickButtonArea
+            RaiseEvent LabReportStatusSaved(SampleNo)
+        End Sub
+
+        Private Sub btnUpdateNameFromFile_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnUpdateNameFromFile.ClickButtonArea
+            RaiseEvent UpdatePatientNameClick(SampleNo)
+        End Sub
     End Class
 
 End Namespace

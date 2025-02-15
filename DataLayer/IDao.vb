@@ -80,6 +80,13 @@ Public Interface IDaoParametrized(Of TBiz)
 
 End Interface
 
+Public Interface IDaoGeneric(Of TBiz)
+
+    ' updates a recordData
+    Function GenericUpdate(ByRef recordData As TBiz)
+
+End Interface
+
 Public Interface IDaoChild(Of TBiz)
     ' gets a specific record data
 

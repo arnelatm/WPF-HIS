@@ -752,6 +752,12 @@ Namespace Services
                 Return False
             End If
         End Function
+
+        Public Function GenericUpdate(ByVal model) As Integer Implements IService.GenericUpdate
+            GlobalVariables.Mapper.Map(model, DataBo)
+            Return DataDao.GenericUpdate(DataBo)
+        End Function
+
 #End Region
 
 #Region "BaseDao Functions"
