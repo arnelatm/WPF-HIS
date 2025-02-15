@@ -23,7 +23,8 @@ Namespace PresentationLayer.Views.Interfaces
         Property ValidatedDateTime As DateTime?
 
         Event LabReportStatusRequested(invoiceNo As Int32)
-
+        Event LabReportStatusSaved(transactionDate As Integer)
+        Event LabReportStatusUpdateName(sampleNo As Integer)
     End Interface
 
 End Namespace

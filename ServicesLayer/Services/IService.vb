@@ -83,7 +83,7 @@ Namespace Services
         Function GetRecordFieldsFiltered(tableName As String, fieldList As String, filter As String, parameter As Object) As ExpandoObject
         Function GetRecordWithIdNo(tableName As String, fieldList As String, IdNo As Integer) As ExpandoObject
         Function GenerateCode(ByVal idNo As Integer) As String
-
+        Function GenericUpdate(model As Object) As Integer
     End Interface
 
 End Namespace

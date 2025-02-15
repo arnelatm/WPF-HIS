@@ -23,10 +23,11 @@
         Private Sub InitializeComponent()
             Me.components = New System.ComponentModel.Container()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(LabReportStatusForm))
-            Me.btnRefresh = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.imgList = New System.Windows.Forms.ImageList(Me.components)
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+            Me.txtInvoiceNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.CLabel17 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtNationality = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.txtPatientName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel16 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -45,12 +46,10 @@
             Me.txtCollectedBy = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.txtProcessedBy = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.txtValidatedBy = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.chkCompleted = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel7 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel8 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtMRN = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel10 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel12 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel14 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -58,29 +57,18 @@
             Me.CLabel5 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtGender = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtDoctorCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.btnUpdateNameFromFile = New AATM.Libraries.CBaseControlsLibrary.CButton()
+            Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblRequestedBy = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.CLabel17 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtInvoiceNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.chkCompleted = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.txtRequestedDateTime = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtDoctorCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.btnRefresh = New AATM.Libraries.CBaseControlsLibrary.CButton()
+            Me.btnSaveStatus = New AATM.Libraries.CBaseControlsLibrary.CButton()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout2.SuspendLayout()
             Me.TableLayoutPanel1.SuspendLayout()
             Me.SuspendLayout()
-            '
-            'btnRefresh
-            '
-            Me.btnRefresh.DesignerSelected = False
-            Me.btnRefresh.ImageIndex = 0
-            Me.btnRefresh.Location = New System.Drawing.Point(708, 180)
-            Me.btnRefresh.Margin = New System.Windows.Forms.Padding(0)
-            Me.btnRefresh.Name = "btnRefresh"
-            Me.btnRefresh.OriginalImageName = Nothing
-            Me.btnRefresh.SecurityKey = ""
-            Me.btnRefresh.Size = New System.Drawing.Size(71, 26)
-            Me.btnRefresh.TabIndex = 11
-            Me.btnRefresh.Text = "Refresh"
             '
             'imgList
             '
@@ -97,7 +85,7 @@
             Me.CFlowLayout2.Dock = System.Windows.Forms.DockStyle.Fill
             Me.CFlowLayout2.Location = New System.Drawing.Point(0, 55)
             Me.CFlowLayout2.Name = "CFlowLayout2"
-            Me.CFlowLayout2.Size = New System.Drawing.Size(914, 233)
+            Me.CFlowLayout2.Size = New System.Drawing.Size(983, 289)
             Me.CFlowLayout2.TabIndex = 5
             '
             'TableLayoutPanel1
@@ -110,7 +98,6 @@
             Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
             Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
             Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-            Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
             Me.TableLayoutPanel1.Controls.Add(Me.txtInvoiceNo, 0, 10)
             Me.TableLayoutPanel1.Controls.Add(Me.CLabel17, 0, 10)
             Me.TableLayoutPanel1.Controls.Add(Me.txtNationality, 3, 4)
@@ -148,22 +135,72 @@
             Me.TableLayoutPanel1.Controls.Add(Me.lblRequestedBy, 4, 3)
             Me.TableLayoutPanel1.Controls.Add(Me.chkCompleted, 4, 10)
             Me.TableLayoutPanel1.Controls.Add(Me.txtRequestedDateTime, 5, 3)
+            Me.TableLayoutPanel1.Controls.Add(Me.btnSaveStatus, 3, 11)
             Me.TableLayoutPanel1.Location = New System.Drawing.Point(3, 3)
             Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
-            Me.TableLayoutPanel1.RowCount = 11
+            Me.TableLayoutPanel1.RowCount = 12
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-            Me.TableLayoutPanel1.Size = New System.Drawing.Size(906, 206)
+            Me.TableLayoutPanel1.Size = New System.Drawing.Size(933, 274)
             Me.TableLayoutPanel1.TabIndex = 17
+            '
+            'txtInvoiceNo
+            '
+            Me.txtInvoiceNo.BackColor = System.Drawing.Color.White
+            Me.txtInvoiceNo.BegFindValue = Nothing
+            Me.txtInvoiceNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtInvoiceNo.ComputedValue = False
+            Me.txtInvoiceNo.CustomFormat = Nothing
+            Me.txtInvoiceNo.DataBoundControl = True
+            Me.txtInvoiceNo.DisplayOnly = True
+            Me.txtInvoiceNo.EditingMode = True
+            Me.txtInvoiceNo.EndFindValue = Nothing
+            Me.txtInvoiceNo.FieldDescription = Nothing
+            Me.txtInvoiceNo.FieldName = Nothing
+            Me.txtInvoiceNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtInvoiceNo.FindEnabled = False
+            Me.txtInvoiceNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtInvoiceNo.ForeColor = System.Drawing.Color.Black
+            Me.txtInvoiceNo.LinkedLabel = Nothing
+            Me.txtInvoiceNo.Location = New System.Drawing.Point(158, 204)
+            Me.txtInvoiceNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtInvoiceNo.MaximumValue = Nothing
+            Me.txtInvoiceNo.MinimumValue = Nothing
+            Me.txtInvoiceNo.Name = "txtInvoiceNo"
+            Me.txtInvoiceNo.OldValue = Nothing
+            Me.txtInvoiceNo.OverrideMaxLength = 0
+            Me.txtInvoiceNo.ReadOnly = True
+            Me.txtInvoiceNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtInvoiceNo.Size = New System.Drawing.Size(97, 23)
+            Me.txtInvoiceNo.TabIndex = 52
+            Me.txtInvoiceNo.Translatable = False
+            '
+            'CLabel17
+            '
+            Me.CLabel17.AutoSize = True
+            Me.CLabel17.BackColor = System.Drawing.Color.Transparent
+            Me.CLabel17.DisplayOnly = True
+            Me.CLabel17.Dock = System.Windows.Forms.DockStyle.Left
+            Me.CLabel17.EditingMode = False
+            Me.CLabel17.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.CLabel17.Location = New System.Drawing.Point(1, 204)
+            Me.CLabel17.Margin = New System.Windows.Forms.Padding(1)
+            Me.CLabel17.Name = "CLabel17"
+            Me.CLabel17.Size = New System.Drawing.Size(110, 18)
+            Me.CLabel17.TabIndex = 51
+            Me.CLabel17.Text = "Invoice Number:"
+            Me.CLabel17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.CLabel17.Translatable = True
             '
             'txtNationality
             '
@@ -175,7 +212,6 @@
             Me.txtNationality.CustomFormat = Nothing
             Me.txtNationality.DataBoundControl = True
             Me.txtNationality.DisplayOnly = True
-            Me.txtNationality.Dock = System.Windows.Forms.DockStyle.Fill
             Me.txtNationality.EditingMode = True
             Me.txtNationality.EndFindValue = Nothing
             Me.txtNationality.FieldDescription = Nothing
@@ -185,7 +221,7 @@
             Me.txtNationality.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtNationality.ForeColor = System.Drawing.Color.Black
             Me.txtNationality.LinkedLabel = Nothing
-            Me.txtNationality.Location = New System.Drawing.Point(393, 96)
+            Me.txtNationality.Location = New System.Drawing.Point(393, 101)
             Me.txtNationality.Margin = New System.Windows.Forms.Padding(1)
             Me.txtNationality.MaximumValue = Nothing
             Me.txtNationality.MinimumValue = Nothing
@@ -194,7 +230,7 @@
             Me.txtNationality.OverrideMaxLength = 0
             Me.txtNationality.ReadOnly = True
             Me.txtNationality.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtNationality.Size = New System.Drawing.Size(512, 23)
+            Me.txtNationality.Size = New System.Drawing.Size(536, 23)
             Me.txtNationality.TabIndex = 46
             Me.txtNationality.Translatable = False
             '
@@ -254,10 +290,10 @@
             Me.CLabel15.Dock = System.Windows.Forms.DockStyle.Left
             Me.CLabel15.EditingMode = False
             Me.CLabel15.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel15.Location = New System.Drawing.Point(393, 181)
+            Me.CLabel15.Location = New System.Drawing.Point(393, 204)
             Me.CLabel15.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel15.Name = "CLabel15"
-            Me.CLabel15.Size = New System.Drawing.Size(79, 24)
+            Me.CLabel15.Size = New System.Drawing.Size(79, 18)
             Me.CLabel15.TabIndex = 35
             Me.CLabel15.Text = "Completed:"
             Me.CLabel15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -282,7 +318,7 @@
             Me.txtRequestedBy.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtRequestedBy.ForeColor = System.Drawing.Color.Black
             Me.txtRequestedBy.LinkedLabel = Nothing
-            Me.txtRequestedBy.Location = New System.Drawing.Point(158, 71)
+            Me.txtRequestedBy.Location = New System.Drawing.Point(158, 76)
             Me.txtRequestedBy.Margin = New System.Windows.Forms.Padding(1)
             Me.txtRequestedBy.MaximumValue = Nothing
             Me.txtRequestedBy.MinimumValue = Nothing
@@ -321,7 +357,6 @@
             Me.txtPatientNameMRN.CustomFormat = Nothing
             Me.txtPatientNameMRN.DataBoundControl = True
             Me.txtPatientNameMRN.DisplayOnly = True
-            Me.txtPatientNameMRN.Dock = System.Windows.Forms.DockStyle.Fill
             Me.txtPatientNameMRN.EditingMode = True
             Me.txtPatientNameMRN.EndFindValue = Nothing
             Me.txtPatientNameMRN.FieldDescription = Nothing
@@ -340,7 +375,7 @@
             Me.txtPatientNameMRN.OverrideMaxLength = 0
             Me.txtPatientNameMRN.ReadOnly = True
             Me.txtPatientNameMRN.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtPatientNameMRN.Size = New System.Drawing.Size(512, 23)
+            Me.txtPatientNameMRN.Size = New System.Drawing.Size(536, 23)
             Me.txtPatientNameMRN.TabIndex = 18
             Me.txtPatientNameMRN.Translatable = False
             '
@@ -380,7 +415,7 @@
             Me.CLabel6.DisplayOnly = True
             Me.CLabel6.EditingMode = False
             Me.CLabel6.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel6.Location = New System.Drawing.Point(1, 71)
+            Me.CLabel6.Location = New System.Drawing.Point(1, 76)
             Me.CLabel6.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel6.Name = "CLabel6"
             Me.CLabel6.Size = New System.Drawing.Size(100, 17)
@@ -396,10 +431,10 @@
             Me.CLabel9.Dock = System.Windows.Forms.DockStyle.Left
             Me.CLabel9.EditingMode = False
             Me.CLabel9.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel9.Location = New System.Drawing.Point(1, 121)
+            Me.CLabel9.Location = New System.Drawing.Point(1, 129)
             Me.CLabel9.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel9.Name = "CLabel9"
-            Me.CLabel9.Size = New System.Drawing.Size(110, 18)
+            Me.CLabel9.Size = New System.Drawing.Size(110, 23)
             Me.CLabel9.TabIndex = 29
             Me.CLabel9.Text = "Collected by:"
             Me.CLabel9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -412,10 +447,10 @@
             Me.CLabel13.Dock = System.Windows.Forms.DockStyle.Left
             Me.CLabel13.EditingMode = False
             Me.CLabel13.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel13.Location = New System.Drawing.Point(1, 161)
+            Me.CLabel13.Location = New System.Drawing.Point(1, 179)
             Me.CLabel13.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel13.Name = "CLabel13"
-            Me.CLabel13.Size = New System.Drawing.Size(110, 18)
+            Me.CLabel13.Size = New System.Drawing.Size(110, 23)
             Me.CLabel13.TabIndex = 33
             Me.CLabel13.Text = "Validated by:"
             Me.CLabel13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -428,10 +463,10 @@
             Me.CLabel11.Dock = System.Windows.Forms.DockStyle.Left
             Me.CLabel11.EditingMode = False
             Me.CLabel11.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel11.Location = New System.Drawing.Point(1, 141)
+            Me.CLabel11.Location = New System.Drawing.Point(1, 154)
             Me.CLabel11.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel11.Name = "CLabel11"
-            Me.CLabel11.Size = New System.Drawing.Size(110, 18)
+            Me.CLabel11.Size = New System.Drawing.Size(110, 23)
             Me.CLabel11.TabIndex = 31
             Me.CLabel11.Text = "Processed by:"
             Me.CLabel11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -454,14 +489,14 @@
             Me.dtpCollectedDateTime.EditsAllowed = False
             Me.dtpCollectedDateTime.ForeColor = System.Drawing.Color.Black
             Me.dtpCollectedDateTime.LinkedLabel = Nothing
-            Me.dtpCollectedDateTime.Location = New System.Drawing.Point(708, 120)
+            Me.dtpCollectedDateTime.Location = New System.Drawing.Point(734, 128)
             Me.dtpCollectedDateTime.Margin = New System.Windows.Forms.Padding(0)
             Me.dtpCollectedDateTime.Name = "dtpCollectedDateTime"
             Me.dtpCollectedDateTime.ReadOnlyDp = False
             Me.dtpCollectedDateTime.SecurityKey = Nothing
             Me.dtpCollectedDateTime.ShowLongDate = False
             Me.dtpCollectedDateTime.ShowTime = True
-            Me.dtpCollectedDateTime.Size = New System.Drawing.Size(195, 20)
+            Me.dtpCollectedDateTime.Size = New System.Drawing.Size(195, 23)
             Me.dtpCollectedDateTime.TabIndex = 36
             Me.dtpCollectedDateTime.TargetCalendar = CType(resources.GetObject("dtpCollectedDateTime.TargetCalendar"), System.Globalization.Calendar)
             Me.dtpCollectedDateTime.Translatable = False
@@ -486,14 +521,14 @@
             Me.dtpProcessedDateTime.EditsAllowed = False
             Me.dtpProcessedDateTime.ForeColor = System.Drawing.Color.Black
             Me.dtpProcessedDateTime.LinkedLabel = Nothing
-            Me.dtpProcessedDateTime.Location = New System.Drawing.Point(708, 140)
+            Me.dtpProcessedDateTime.Location = New System.Drawing.Point(734, 153)
             Me.dtpProcessedDateTime.Margin = New System.Windows.Forms.Padding(0)
             Me.dtpProcessedDateTime.Name = "dtpProcessedDateTime"
             Me.dtpProcessedDateTime.ReadOnlyDp = False
             Me.dtpProcessedDateTime.SecurityKey = Nothing
             Me.dtpProcessedDateTime.ShowLongDate = False
             Me.dtpProcessedDateTime.ShowTime = True
-            Me.dtpProcessedDateTime.Size = New System.Drawing.Size(195, 20)
+            Me.dtpProcessedDateTime.Size = New System.Drawing.Size(195, 23)
             Me.dtpProcessedDateTime.TabIndex = 37
             Me.dtpProcessedDateTime.TargetCalendar = CType(resources.GetObject("dtpProcessedDateTime.TargetCalendar"), System.Globalization.Calendar)
             Me.dtpProcessedDateTime.Translatable = False
@@ -518,14 +553,14 @@
             Me.dtpValidatedDateTime.EditsAllowed = False
             Me.dtpValidatedDateTime.ForeColor = System.Drawing.Color.Black
             Me.dtpValidatedDateTime.LinkedLabel = Nothing
-            Me.dtpValidatedDateTime.Location = New System.Drawing.Point(708, 160)
+            Me.dtpValidatedDateTime.Location = New System.Drawing.Point(734, 178)
             Me.dtpValidatedDateTime.Margin = New System.Windows.Forms.Padding(0)
             Me.dtpValidatedDateTime.Name = "dtpValidatedDateTime"
             Me.dtpValidatedDateTime.ReadOnlyDp = False
             Me.dtpValidatedDateTime.SecurityKey = Nothing
             Me.dtpValidatedDateTime.ShowLongDate = False
             Me.dtpValidatedDateTime.ShowTime = True
-            Me.dtpValidatedDateTime.Size = New System.Drawing.Size(195, 20)
+            Me.dtpValidatedDateTime.Size = New System.Drawing.Size(195, 23)
             Me.dtpValidatedDateTime.TabIndex = 38
             Me.dtpValidatedDateTime.TargetCalendar = CType(resources.GetObject("dtpValidatedDateTime.TargetCalendar"), System.Globalization.Calendar)
             Me.dtpValidatedDateTime.Translatable = False
@@ -542,7 +577,6 @@
             Me.txtCollectedBy.ComputedValue = False
             Me.txtCollectedBy.CustomFormat = Nothing
             Me.txtCollectedBy.DataBoundControl = True
-            Me.txtCollectedBy.DisplayOnly = True
             Me.txtCollectedBy.Dock = System.Windows.Forms.DockStyle.Fill
             Me.txtCollectedBy.EditingMode = True
             Me.txtCollectedBy.EndFindValue = Nothing
@@ -553,16 +587,15 @@
             Me.txtCollectedBy.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtCollectedBy.ForeColor = System.Drawing.Color.Black
             Me.txtCollectedBy.LinkedLabel = Nothing
-            Me.txtCollectedBy.Location = New System.Drawing.Point(158, 121)
+            Me.txtCollectedBy.Location = New System.Drawing.Point(158, 129)
             Me.txtCollectedBy.Margin = New System.Windows.Forms.Padding(1)
             Me.txtCollectedBy.MaximumValue = Nothing
             Me.txtCollectedBy.MinimumValue = Nothing
             Me.txtCollectedBy.Name = "txtCollectedBy"
             Me.txtCollectedBy.OldValue = Nothing
             Me.txtCollectedBy.OverrideMaxLength = 0
-            Me.txtCollectedBy.ReadOnly = True
             Me.txtCollectedBy.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtCollectedBy.Size = New System.Drawing.Size(419, 23)
+            Me.txtCollectedBy.Size = New System.Drawing.Size(445, 23)
             Me.txtCollectedBy.TabIndex = 39
             Me.txtCollectedBy.Translatable = False
             '
@@ -575,7 +608,6 @@
             Me.txtProcessedBy.ComputedValue = False
             Me.txtProcessedBy.CustomFormat = Nothing
             Me.txtProcessedBy.DataBoundControl = True
-            Me.txtProcessedBy.DisplayOnly = True
             Me.txtProcessedBy.Dock = System.Windows.Forms.DockStyle.Fill
             Me.txtProcessedBy.EditingMode = True
             Me.txtProcessedBy.EndFindValue = Nothing
@@ -586,16 +618,15 @@
             Me.txtProcessedBy.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtProcessedBy.ForeColor = System.Drawing.Color.Black
             Me.txtProcessedBy.LinkedLabel = Nothing
-            Me.txtProcessedBy.Location = New System.Drawing.Point(158, 141)
+            Me.txtProcessedBy.Location = New System.Drawing.Point(158, 154)
             Me.txtProcessedBy.Margin = New System.Windows.Forms.Padding(1)
             Me.txtProcessedBy.MaximumValue = Nothing
             Me.txtProcessedBy.MinimumValue = Nothing
             Me.txtProcessedBy.Name = "txtProcessedBy"
             Me.txtProcessedBy.OldValue = Nothing
             Me.txtProcessedBy.OverrideMaxLength = 0
-            Me.txtProcessedBy.ReadOnly = True
             Me.txtProcessedBy.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtProcessedBy.Size = New System.Drawing.Size(419, 23)
+            Me.txtProcessedBy.Size = New System.Drawing.Size(445, 23)
             Me.txtProcessedBy.TabIndex = 40
             Me.txtProcessedBy.Translatable = False
             '
@@ -608,7 +639,6 @@
             Me.txtValidatedBy.ComputedValue = False
             Me.txtValidatedBy.CustomFormat = Nothing
             Me.txtValidatedBy.DataBoundControl = True
-            Me.txtValidatedBy.DisplayOnly = True
             Me.txtValidatedBy.Dock = System.Windows.Forms.DockStyle.Fill
             Me.txtValidatedBy.EditingMode = True
             Me.txtValidatedBy.EndFindValue = Nothing
@@ -619,46 +649,17 @@
             Me.txtValidatedBy.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtValidatedBy.ForeColor = System.Drawing.Color.Black
             Me.txtValidatedBy.LinkedLabel = Nothing
-            Me.txtValidatedBy.Location = New System.Drawing.Point(158, 161)
+            Me.txtValidatedBy.Location = New System.Drawing.Point(158, 179)
             Me.txtValidatedBy.Margin = New System.Windows.Forms.Padding(1)
             Me.txtValidatedBy.MaximumValue = Nothing
             Me.txtValidatedBy.MinimumValue = Nothing
             Me.txtValidatedBy.Name = "txtValidatedBy"
             Me.txtValidatedBy.OldValue = Nothing
             Me.txtValidatedBy.OverrideMaxLength = 0
-            Me.txtValidatedBy.ReadOnly = True
             Me.txtValidatedBy.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtValidatedBy.Size = New System.Drawing.Size(419, 23)
+            Me.txtValidatedBy.Size = New System.Drawing.Size(445, 23)
             Me.txtValidatedBy.TabIndex = 41
             Me.txtValidatedBy.Translatable = False
-            '
-            'chkCompleted
-            '
-            Me.chkCompleted.BackColor = System.Drawing.Color.White
-            Me.chkCompleted.BegFindValue = Nothing
-            Me.chkCompleted.DisplayOnly = False
-            Me.chkCompleted.EditingMode = True
-            Me.chkCompleted.EndFindValue = Nothing
-            Me.chkCompleted.FieldDescription = Nothing
-            Me.chkCompleted.FieldName = Nothing
-            Me.chkCompleted.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.chkCompleted.FindEnabled = False
-            Me.chkCompleted.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-            Me.chkCompleted.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-            Me.chkCompleted.ForeColor = System.Drawing.Color.Black
-            Me.chkCompleted.IFindableControl_FindEnabled = False
-            Me.chkCompleted.IgnoreCase = False
-            Me.chkCompleted.LinkedLabel = Nothing
-            Me.chkCompleted.Location = New System.Drawing.Point(581, 183)
-            Me.chkCompleted.Name = "chkCompleted"
-            Me.chkCompleted.NoLabel = True
-            Me.chkCompleted.OldValue = Nothing
-            Me.chkCompleted.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.chkCompleted.Size = New System.Drawing.Size(13, 13)
-            Me.chkCompleted.TabIndex = 42
-            Me.chkCompleted.Text = "CCheckBox1"
-            Me.chkCompleted.Translatable = False
-            Me.chkCompleted.UseVisualStyleBackColor = False
             '
             'CLabel3
             '
@@ -683,7 +684,7 @@
             Me.CLabel7.DisplayOnly = True
             Me.CLabel7.EditingMode = False
             Me.CLabel7.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel7.Location = New System.Drawing.Point(257, 96)
+            Me.CLabel7.Location = New System.Drawing.Point(257, 101)
             Me.CLabel7.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel7.Name = "CLabel7"
             Me.CLabel7.Size = New System.Drawing.Size(78, 17)
@@ -699,7 +700,7 @@
             Me.CLabel8.DisplayOnly = True
             Me.CLabel8.EditingMode = False
             Me.CLabel8.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel8.Location = New System.Drawing.Point(1, 46)
+            Me.CLabel8.Location = New System.Drawing.Point(1, 51)
             Me.CLabel8.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel8.Name = "CLabel8"
             Me.CLabel8.Size = New System.Drawing.Size(39, 17)
@@ -726,7 +727,7 @@
             Me.txtMRN.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtMRN.ForeColor = System.Drawing.Color.Black
             Me.txtMRN.LinkedLabel = Nothing
-            Me.txtMRN.Location = New System.Drawing.Point(158, 46)
+            Me.txtMRN.Location = New System.Drawing.Point(158, 51)
             Me.txtMRN.Margin = New System.Windows.Forms.Padding(1)
             Me.txtMRN.MaximumValue = Nothing
             Me.txtMRN.MinimumValue = Nothing
@@ -739,21 +740,6 @@
             Me.txtMRN.TabIndex = 48
             Me.txtMRN.Translatable = False
             '
-            'CLabel2
-            '
-            Me.CLabel2.BackColor = System.Drawing.Color.Transparent
-            Me.CLabel2.DisplayOnly = True
-            Me.CLabel2.EditingMode = False
-            Me.CLabel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel2.Location = New System.Drawing.Point(257, 46)
-            Me.CLabel2.Margin = New System.Windows.Forms.Padding(1)
-            Me.CLabel2.Name = "CLabel2"
-            Me.CLabel2.Size = New System.Drawing.Size(37, 23)
-            Me.CLabel2.TabIndex = 15
-            Me.CLabel2.Text = "Age:"
-            Me.CLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.CLabel2.Translatable = True
-            '
             'CLabel10
             '
             Me.CLabel10.BackColor = System.Drawing.Color.Transparent
@@ -761,10 +747,10 @@
             Me.CLabel10.Dock = System.Windows.Forms.DockStyle.Left
             Me.CLabel10.EditingMode = False
             Me.CLabel10.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel10.Location = New System.Drawing.Point(579, 121)
+            Me.CLabel10.Location = New System.Drawing.Point(605, 129)
             Me.CLabel10.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel10.Name = "CLabel10"
-            Me.CLabel10.Size = New System.Drawing.Size(110, 18)
+            Me.CLabel10.Size = New System.Drawing.Size(110, 23)
             Me.CLabel10.TabIndex = 30
             Me.CLabel10.Text = "Collected Date:"
             Me.CLabel10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -777,10 +763,10 @@
             Me.CLabel12.Dock = System.Windows.Forms.DockStyle.Left
             Me.CLabel12.EditingMode = False
             Me.CLabel12.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel12.Location = New System.Drawing.Point(579, 141)
+            Me.CLabel12.Location = New System.Drawing.Point(605, 154)
             Me.CLabel12.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel12.Name = "CLabel12"
-            Me.CLabel12.Size = New System.Drawing.Size(128, 18)
+            Me.CLabel12.Size = New System.Drawing.Size(128, 23)
             Me.CLabel12.TabIndex = 32
             Me.CLabel12.Text = "Processed Date:"
             Me.CLabel12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -793,10 +779,10 @@
             Me.CLabel14.Dock = System.Windows.Forms.DockStyle.Left
             Me.CLabel14.EditingMode = False
             Me.CLabel14.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel14.Location = New System.Drawing.Point(579, 161)
+            Me.CLabel14.Location = New System.Drawing.Point(605, 179)
             Me.CLabel14.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel14.Name = "CLabel14"
-            Me.CLabel14.Size = New System.Drawing.Size(110, 18)
+            Me.CLabel14.Size = New System.Drawing.Size(110, 23)
             Me.CLabel14.TabIndex = 34
             Me.CLabel14.Text = "Validated Date:"
             Me.CLabel14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -820,7 +806,7 @@
             Me.txtAge.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtAge.ForeColor = System.Drawing.Color.Black
             Me.txtAge.LinkedLabel = Nothing
-            Me.txtAge.Location = New System.Drawing.Point(393, 46)
+            Me.txtAge.Location = New System.Drawing.Point(393, 51)
             Me.txtAge.Margin = New System.Windows.Forms.Padding(1)
             Me.txtAge.MaximumValue = Nothing
             Me.txtAge.MinimumValue = Nothing
@@ -839,7 +825,7 @@
             Me.CLabel5.DisplayOnly = True
             Me.CLabel5.EditingMode = False
             Me.CLabel5.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel5.Location = New System.Drawing.Point(579, 46)
+            Me.CLabel5.Location = New System.Drawing.Point(605, 51)
             Me.CLabel5.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel5.Name = "CLabel5"
             Me.CLabel5.Size = New System.Drawing.Size(60, 17)
@@ -857,7 +843,6 @@
             Me.txtGender.CustomFormat = Nothing
             Me.txtGender.DataBoundControl = True
             Me.txtGender.DisplayOnly = True
-            Me.txtGender.Dock = System.Windows.Forms.DockStyle.Fill
             Me.txtGender.EditingMode = True
             Me.txtGender.EndFindValue = Nothing
             Me.txtGender.FieldDescription = Nothing
@@ -867,7 +852,7 @@
             Me.txtGender.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtGender.ForeColor = System.Drawing.Color.Black
             Me.txtGender.LinkedLabel = Nothing
-            Me.txtGender.Location = New System.Drawing.Point(709, 46)
+            Me.txtGender.Location = New System.Drawing.Point(735, 51)
             Me.txtGender.Margin = New System.Windows.Forms.Padding(1)
             Me.txtGender.MaximumValue = Nothing
             Me.txtGender.MinimumValue = Nothing
@@ -876,7 +861,7 @@
             Me.txtGender.OverrideMaxLength = 0
             Me.txtGender.ReadOnly = True
             Me.txtGender.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtGender.Size = New System.Drawing.Size(196, 23)
+            Me.txtGender.Size = New System.Drawing.Size(194, 23)
             Me.txtGender.TabIndex = 22
             Me.txtGender.Translatable = False
             '
@@ -888,14 +873,117 @@
             Me.CLabel1.EditingMode = False
             Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.CLabel1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.CLabel1.Location = New System.Drawing.Point(1, 96)
+            Me.CLabel1.Location = New System.Drawing.Point(1, 101)
             Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel1.Name = "CLabel1"
-            Me.CLabel1.Size = New System.Drawing.Size(110, 23)
+            Me.CLabel1.Size = New System.Drawing.Size(110, 26)
             Me.CLabel1.TabIndex = 13
             Me.CLabel1.Text = "Invoice Date:"
             Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             Me.CLabel1.Translatable = True
+            '
+            'btnUpdateNameFromFile
+            '
+            Me.TableLayoutPanel1.SetColumnSpan(Me.btnUpdateNameFromFile, 2)
+            Me.btnUpdateNameFromFile.DesignerSelected = False
+            Me.btnUpdateNameFromFile.ImageIndex = 0
+            Me.btnUpdateNameFromFile.Location = New System.Drawing.Point(604, 25)
+            Me.btnUpdateNameFromFile.Margin = New System.Windows.Forms.Padding(0)
+            Me.btnUpdateNameFromFile.Name = "btnUpdateNameFromFile"
+            Me.btnUpdateNameFromFile.OriginalImageName = Nothing
+            Me.btnUpdateNameFromFile.SecurityKey = ""
+            Me.btnUpdateNameFromFile.Size = New System.Drawing.Size(325, 20)
+            Me.btnUpdateNameFromFile.TabIndex = 49
+            Me.btnUpdateNameFromFile.Text = "Update Name from File"
+            '
+            'CLabel2
+            '
+            Me.CLabel2.BackColor = System.Drawing.Color.Transparent
+            Me.CLabel2.DisplayOnly = True
+            Me.CLabel2.EditingMode = False
+            Me.CLabel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.CLabel2.Location = New System.Drawing.Point(257, 51)
+            Me.CLabel2.Margin = New System.Windows.Forms.Padding(1)
+            Me.CLabel2.Name = "CLabel2"
+            Me.CLabel2.Size = New System.Drawing.Size(37, 23)
+            Me.CLabel2.TabIndex = 15
+            Me.CLabel2.Text = "Age:"
+            Me.CLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.CLabel2.Translatable = True
+            '
+            'lblRequestedBy
+            '
+            Me.lblRequestedBy.BackColor = System.Drawing.Color.Transparent
+            Me.lblRequestedBy.DisplayOnly = True
+            Me.lblRequestedBy.EditingMode = False
+            Me.lblRequestedBy.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblRequestedBy.Location = New System.Drawing.Point(605, 76)
+            Me.lblRequestedBy.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblRequestedBy.Name = "lblRequestedBy"
+            Me.lblRequestedBy.Size = New System.Drawing.Size(128, 17)
+            Me.lblRequestedBy.TabIndex = 50
+            Me.lblRequestedBy.Text = "Requested Date:"
+            Me.lblRequestedBy.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblRequestedBy.Translatable = True
+            '
+            'chkCompleted
+            '
+            Me.chkCompleted.BackColor = System.Drawing.Color.White
+            Me.chkCompleted.BegFindValue = Nothing
+            Me.chkCompleted.DisplayOnly = False
+            Me.chkCompleted.EditingMode = True
+            Me.chkCompleted.EndFindValue = Nothing
+            Me.chkCompleted.FieldDescription = Nothing
+            Me.chkCompleted.FieldName = Nothing
+            Me.chkCompleted.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.chkCompleted.FindEnabled = False
+            Me.chkCompleted.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+            Me.chkCompleted.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+            Me.chkCompleted.ForeColor = System.Drawing.Color.Black
+            Me.chkCompleted.IFindableControl_FindEnabled = False
+            Me.chkCompleted.IgnoreCase = False
+            Me.chkCompleted.LinkedLabel = Nothing
+            Me.chkCompleted.Location = New System.Drawing.Point(607, 206)
+            Me.chkCompleted.Name = "chkCompleted"
+            Me.chkCompleted.NoLabel = True
+            Me.chkCompleted.OldValue = Nothing
+            Me.chkCompleted.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.chkCompleted.Size = New System.Drawing.Size(13, 13)
+            Me.chkCompleted.TabIndex = 42
+            Me.chkCompleted.Text = "CCheckBox1"
+            Me.chkCompleted.Translatable = False
+            Me.chkCompleted.UseVisualStyleBackColor = False
+            '
+            'txtRequestedDateTime
+            '
+            Me.txtRequestedDateTime.BackColor = System.Drawing.Color.White
+            Me.txtRequestedDateTime.BegFindValue = Nothing
+            Me.txtRequestedDateTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtRequestedDateTime.ComputedValue = False
+            Me.txtRequestedDateTime.CustomFormat = Nothing
+            Me.txtRequestedDateTime.DataBoundControl = True
+            Me.txtRequestedDateTime.DisplayOnly = True
+            Me.txtRequestedDateTime.EditingMode = True
+            Me.txtRequestedDateTime.EndFindValue = Nothing
+            Me.txtRequestedDateTime.FieldDescription = Nothing
+            Me.txtRequestedDateTime.FieldName = Nothing
+            Me.txtRequestedDateTime.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtRequestedDateTime.FindEnabled = False
+            Me.txtRequestedDateTime.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtRequestedDateTime.ForeColor = System.Drawing.Color.Black
+            Me.txtRequestedDateTime.LinkedLabel = Nothing
+            Me.txtRequestedDateTime.Location = New System.Drawing.Point(735, 76)
+            Me.txtRequestedDateTime.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtRequestedDateTime.MaximumValue = Nothing
+            Me.txtRequestedDateTime.MinimumValue = Nothing
+            Me.txtRequestedDateTime.Name = "txtRequestedDateTime"
+            Me.txtRequestedDateTime.OldValue = Nothing
+            Me.txtRequestedDateTime.OverrideMaxLength = 0
+            Me.txtRequestedDateTime.ReadOnly = True
+            Me.txtRequestedDateTime.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtRequestedDateTime.Size = New System.Drawing.Size(194, 23)
+            Me.txtRequestedDateTime.TabIndex = 53
+            Me.txtRequestedDateTime.Translatable = False
             '
             'txtDoctorCode
             '
@@ -927,121 +1015,42 @@
             Me.txtDoctorCode.Translatable = False
             Me.txtDoctorCode.Visible = False
             '
-            'btnUpdateNameFromFile
+            'btnRefresh
             '
-            Me.TableLayoutPanel1.SetColumnSpan(Me.btnUpdateNameFromFile, 2)
-            Me.btnUpdateNameFromFile.DesignerSelected = False
-            Me.btnUpdateNameFromFile.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.btnUpdateNameFromFile.ImageIndex = 0
-            Me.btnUpdateNameFromFile.Location = New System.Drawing.Point(578, 25)
-            Me.btnUpdateNameFromFile.Margin = New System.Windows.Forms.Padding(0)
-            Me.btnUpdateNameFromFile.Name = "btnUpdateNameFromFile"
-            Me.btnUpdateNameFromFile.OriginalImageName = Nothing
-            Me.btnUpdateNameFromFile.SecurityKey = ""
-            Me.btnUpdateNameFromFile.Size = New System.Drawing.Size(328, 20)
-            Me.btnUpdateNameFromFile.TabIndex = 49
-            Me.btnUpdateNameFromFile.Text = "Update Name from File"
+            Me.btnRefresh.DesignerSelected = False
+            Me.btnRefresh.ImageIndex = 0
+            Me.btnRefresh.Location = New System.Drawing.Point(734, 203)
+            Me.btnRefresh.Margin = New System.Windows.Forms.Padding(0)
+            Me.btnRefresh.Name = "btnRefresh"
+            Me.btnRefresh.OriginalImageName = Nothing
+            Me.btnRefresh.SecurityKey = ""
+            Me.btnRefresh.Size = New System.Drawing.Size(71, 20)
+            Me.btnRefresh.TabIndex = 11
+            Me.btnRefresh.Text = "Refresh"
             '
-            'lblRequestedBy
+            'btnSaveStatus
             '
-            Me.lblRequestedBy.BackColor = System.Drawing.Color.Transparent
-            Me.lblRequestedBy.DisplayOnly = True
-            Me.lblRequestedBy.EditingMode = False
-            Me.lblRequestedBy.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblRequestedBy.Location = New System.Drawing.Point(579, 71)
-            Me.lblRequestedBy.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblRequestedBy.Name = "lblRequestedBy"
-            Me.lblRequestedBy.Size = New System.Drawing.Size(128, 17)
-            Me.lblRequestedBy.TabIndex = 50
-            Me.lblRequestedBy.Text = "Requested Date:"
-            Me.lblRequestedBy.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.lblRequestedBy.Translatable = True
-            '
-            'CLabel17
-            '
-            Me.CLabel17.AutoSize = True
-            Me.CLabel17.BackColor = System.Drawing.Color.Transparent
-            Me.CLabel17.DisplayOnly = True
-            Me.CLabel17.Dock = System.Windows.Forms.DockStyle.Left
-            Me.CLabel17.EditingMode = False
-            Me.CLabel17.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel17.Location = New System.Drawing.Point(1, 181)
-            Me.CLabel17.Margin = New System.Windows.Forms.Padding(1)
-            Me.CLabel17.Name = "CLabel17"
-            Me.CLabel17.Size = New System.Drawing.Size(110, 24)
-            Me.CLabel17.TabIndex = 51
-            Me.CLabel17.Text = "Invoice Number:"
-            Me.CLabel17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.CLabel17.Translatable = True
-            '
-            'txtInvoiceNo
-            '
-            Me.txtInvoiceNo.BackColor = System.Drawing.Color.White
-            Me.txtInvoiceNo.BegFindValue = Nothing
-            Me.txtInvoiceNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtInvoiceNo.ComputedValue = False
-            Me.txtInvoiceNo.CustomFormat = Nothing
-            Me.txtInvoiceNo.DataBoundControl = True
-            Me.txtInvoiceNo.EditingMode = True
-            Me.txtInvoiceNo.EndFindValue = Nothing
-            Me.txtInvoiceNo.FieldDescription = Nothing
-            Me.txtInvoiceNo.FieldName = Nothing
-            Me.txtInvoiceNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtInvoiceNo.FindEnabled = False
-            Me.txtInvoiceNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtInvoiceNo.ForeColor = System.Drawing.Color.Black
-            Me.txtInvoiceNo.LinkedLabel = Nothing
-            Me.txtInvoiceNo.Location = New System.Drawing.Point(158, 181)
-            Me.txtInvoiceNo.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtInvoiceNo.MaximumValue = Nothing
-            Me.txtInvoiceNo.MinimumValue = Nothing
-            Me.txtInvoiceNo.Name = "txtInvoiceNo"
-            Me.txtInvoiceNo.OldValue = Nothing
-            Me.txtInvoiceNo.OverrideMaxLength = 0
-            Me.txtInvoiceNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtInvoiceNo.Size = New System.Drawing.Size(97, 23)
-            Me.txtInvoiceNo.TabIndex = 52
-            Me.txtInvoiceNo.Translatable = False
-            '
-            'txtRequestedDateTime
-            '
-            Me.txtRequestedDateTime.BackColor = System.Drawing.SystemColors.ControlLight
-            Me.txtRequestedDateTime.BegFindValue = Nothing
-            Me.txtRequestedDateTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtRequestedDateTime.ComputedValue = False
-            Me.txtRequestedDateTime.CustomFormat = Nothing
-            Me.txtRequestedDateTime.DataBoundControl = True
-            Me.txtRequestedDateTime.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.txtRequestedDateTime.EditingMode = True
-            Me.txtRequestedDateTime.EndFindValue = Nothing
-            Me.txtRequestedDateTime.FieldDescription = Nothing
-            Me.txtRequestedDateTime.FieldName = Nothing
-            Me.txtRequestedDateTime.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtRequestedDateTime.FindEnabled = False
-            Me.txtRequestedDateTime.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtRequestedDateTime.LinkedLabel = Nothing
-            Me.txtRequestedDateTime.Location = New System.Drawing.Point(709, 71)
-            Me.txtRequestedDateTime.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtRequestedDateTime.MaximumValue = Nothing
-            Me.txtRequestedDateTime.MinimumValue = Nothing
-            Me.txtRequestedDateTime.Name = "txtRequestedDateTime"
-            Me.txtRequestedDateTime.OldValue = Nothing
-            Me.txtRequestedDateTime.OverrideMaxLength = 0
-            Me.txtRequestedDateTime.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtRequestedDateTime.Size = New System.Drawing.Size(196, 23)
-            Me.txtRequestedDateTime.TabIndex = 53
-            Me.txtRequestedDateTime.Translatable = False
+            Me.btnSaveStatus.DesignerSelected = False
+            Me.btnSaveStatus.ImageIndex = 0
+            Me.btnSaveStatus.Location = New System.Drawing.Point(395, 226)
+            Me.btnSaveStatus.Name = "btnSaveStatus"
+            Me.btnSaveStatus.OriginalImageName = Nothing
+            Me.btnSaveStatus.SecurityKey = ""
+            Me.btnSaveStatus.SideImageAlign = System.Drawing.ContentAlignment.BottomCenter
+            Me.btnSaveStatus.Size = New System.Drawing.Size(134, 25)
+            Me.btnSaveStatus.TabIndex = 54
+            Me.btnSaveStatus.Text = "Save"
             '
             'LabReportStatusForm
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
             Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
             Me.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.GreenGradientBackgroundLarge
-            Me.ClientSize = New System.Drawing.Size(914, 288)
+            Me.ClientSize = New System.Drawing.Size(983, 344)
             Me.Controls.Add(Me.CFlowLayout2)
             Me.Controls.Add(Me.txtDoctorCode)
             Me.Name = "LabReportStatusForm"
-            Me.Text = "Invoice Notes Editor"
+            Me.Text = "Laboratory Report Status Updater"
             Me.Controls.SetChildIndex(Me.txtDoctorCode, 0)
             Me.Controls.SetChildIndex(Me.CFlowLayout2, 0)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1052,8 +1061,6 @@
             Me.PerformLayout()
 
         End Sub
-
-        Friend WithEvents btnRefresh As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents imgList As ImageList
         Friend WithEvents CFlowLayout2 As Libraries.CBaseControlsLibrary.CFlowLayout
         Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
@@ -1095,5 +1102,7 @@
         Friend WithEvents txtInvoiceNo As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents CLabel17 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtRequestedDateTime As Libraries.CBaseControlsLibrary.CTextBox
+        Friend WithEvents btnRefresh As Libraries.CBaseControlsLibrary.CButton
+        Friend WithEvents btnSaveStatus As Libraries.CBaseControlsLibrary.CButton
     End Class
 End Namespace

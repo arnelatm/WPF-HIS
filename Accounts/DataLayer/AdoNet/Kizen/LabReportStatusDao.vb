@@ -9,7 +9,7 @@ Namespace DataLayer.AdoNet
 
     Public Class LabReportStatusDao
         Inherits CommonDao
-        Implements IDao(Of LabReportStatus)
+        Implements IDao(Of LabReportStatus), IDaoGeneric(Of LabReportStatus)
 
         Private ReadOnly _db As New Db("Kizen")
 
@@ -17,6 +17,7 @@ Namespace DataLayer.AdoNet
         Private ReadOnly _fieldList As String = "Age," &
                                                 "CollectedBy," &
                                                 "CollectedDateTime," &
+                                                "Completed," &
                                                 "RequestedBy," &
                                                 "Gender," &
                                                 "RequestedDateTime," &
@@ -49,8 +50,19 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function UpdateRecord(ByRef recordData As LabReportStatus) As Integer Implements IDao(Of LabReportStatus).UpdateRecord
-            Return 0
+            Dim sql As String = "Update VisitAnalysesData Set " &
+                                "ReceivedUser = @CollectedBy," &
+                                "CollectedUser = @ProcessedBy," &
+                                "LastEditUser = @ValidatedBy," &
+                                "ReceivedDate = @CollectedDateTime," &
+                                "CollectedDate = @ProcessedDateTime," &
+                                "ResultTakenDate = @ValidatedDateTime " &
+                                "where Id = @SampleNo"
+            Dim Value = _db.Update(sql, Take(recordData))
+            Return Value
         End Function
+
+
 
         Public Function AddRecord(ByRef recordData As LabReportStatus) As Integer Implements IDao(Of LabReportStatus).AddRecord
             Throw New NotImplementedException()
@@ -61,6 +73,7 @@ Namespace DataLayer.AdoNet
         .Age = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Age")),
         .CollectedBy = AATM.DataLayer.AdoNet.Extensions.AsString(reader("CollectedBy")),
         .CollectedDateTime = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of DateTime?)(reader("CollectedDateTime")),
+        .Completed = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Boolean?)(reader("Completed")),
         .Gender = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Gender")),
         .InvoiceNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("InvoiceNo")),
         .MRN = AATM.DataLayer.AdoNet.Extensions.AsString(reader("MRN")),
@@ -71,9 +84,37 @@ Namespace DataLayer.AdoNet
         .ProcessedDateTime = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of DateTime?)(reader("ProcessedDateTime")),
         .RequestedBy = AATM.DataLayer.AdoNet.Extensions.AsString(reader("RequestedBy")),
         .RequestedDateTime = AATM.DataLayer.AdoNet.Extensions.AsString(reader("RequestedDateTime")),
+        .SampleNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("SampleNo")),
         .ValidatedBy = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ValidatedBy")),
         .ValidatedDateTime = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of DateTime?)(reader("ValidatedDateTime"))
         }
+
+        Private Function Take(labReportStatus As LabReportStatus) As Object()
+            Return New Object() {
+                        "@SampleNo", labReportStatus.SampleNo,
+                        "@CollectedBy", labReportStatus.CollectedBy,
+                        "@ProcessedBy", labReportStatus.ProcessedBy,
+                        "@ValidatedBy", labReportStatus.ValidatedBy,
+                        "@CollectedDateTime", labReportStatus.CollectedDateTime,
+                        "@ProcessedDateTime", labReportStatus.ProcessedDateTime,
+                        "@ValidatedDateTime", labReportStatus.ValidatedDateTime
+                       }
+        End Function
+
+        Public Function GenericUpdate(ByRef recordData As LabReportStatus) Implements IDaoGeneric(Of LabReportStatus).GenericUpdate
+            Dim sql As String = "Update VisitAnalysesData Set " &
+                                "PatName = @PatientNameMRN " &
+                                "where Id = @SampleNo"
+            Dim Value As Integer = _db.GenericUpdate(sql, Take1(recordData))
+            Return Nothing
+        End Function
+
+        Private Function Take1(labReportStatus As LabReportStatus) As Object()
+            Return New Object() {
+                        "@SampleNo", labReportStatus.SampleNo,
+                        "@PatientNameMRN", labReportStatus.PatientNameMRN
+                       }
+        End Function
 
     End Class
 
