@@ -195,7 +195,7 @@
             Me.DataGridViewClinicLabSampleDetails.IsDirty = False
             Me.DataGridViewClinicLabSampleDetails.Location = New System.Drawing.Point(3, 34)
             Me.DataGridViewClinicLabSampleDetails.Name = "DataGridViewClinicLabSampleDetails"
-            Me.DataGridViewClinicLabSampleDetails.RowHeadersWidth = 51
+            Me.DataGridViewClinicLabSampleDetails.RowHeadersWidth = 25
             Me.DataGridViewClinicLabSampleDetails.Searchable = True
             Me.DataGridViewClinicLabSampleDetails.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewClinicLabSampleDetails.SecurityKey = ""

@@ -1264,7 +1264,7 @@
             Me.DataGridViewPhoneDisplay.OldCellValue = Nothing
             Me.DataGridViewPhoneDisplay.ReadOnly = True
             Me.DataGridViewPhoneDisplay.RowHeadersVisible = False
-            Me.DataGridViewPhoneDisplay.RowHeadersWidth = 51
+            Me.DataGridViewPhoneDisplay.RowHeadersWidth = 25
             Me.DataGridViewPhoneDisplay.ScrollBars = System.Windows.Forms.ScrollBars.None
             Me.DataGridViewPhoneDisplay.Searchable = True
             Me.DataGridViewPhoneDisplay.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
@@ -2571,7 +2571,7 @@
             Me.DataGridViewEarnings.Name = "DataGridViewEarnings"
             Me.DataGridViewEarnings.OldCellValue = Nothing
             Me.DataGridViewEarnings.ReadOnly = True
-            Me.DataGridViewEarnings.RowHeadersWidth = 51
+            Me.DataGridViewEarnings.RowHeadersWidth = 25
             Me.DataGridViewEarnings.Searchable = True
             Me.DataGridViewEarnings.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewEarnings.SecurityKey = "EmployeeEarnings"
@@ -2760,7 +2760,7 @@
             Me.DataGridViewDeductions.Name = "DataGridViewDeductions"
             Me.DataGridViewDeductions.OldCellValue = Nothing
             Me.DataGridViewDeductions.ReadOnly = True
-            Me.DataGridViewDeductions.RowHeadersWidth = 51
+            Me.DataGridViewDeductions.RowHeadersWidth = 25
             Me.DataGridViewDeductions.Searchable = True
             Me.DataGridViewDeductions.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewDeductions.SecurityKey = "EmployeeDeductions"
@@ -2953,7 +2953,7 @@
             Me.DataGridViewPhones.Name = "DataGridViewPhones"
             Me.DataGridViewPhones.OldCellValue = Nothing
             Me.DataGridViewPhones.ReadOnly = True
-            Me.DataGridViewPhones.RowHeadersWidth = 51
+            Me.DataGridViewPhones.RowHeadersWidth = 25
             Me.DataGridViewPhones.Searchable = True
             Me.DataGridViewPhones.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewPhones.SecurityKey = ""
@@ -3172,7 +3172,7 @@
             Me.DataGridViewLeaveCredits.Name = "DataGridViewLeaveCredits"
             Me.DataGridViewLeaveCredits.OldCellValue = Nothing
             Me.DataGridViewLeaveCredits.ReadOnly = True
-            Me.DataGridViewLeaveCredits.RowHeadersWidth = 51
+            Me.DataGridViewLeaveCredits.RowHeadersWidth = 25
             Me.DataGridViewLeaveCredits.Searchable = True
             Me.DataGridViewLeaveCredits.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewLeaveCredits.SecurityKey = ""
@@ -3429,7 +3429,7 @@
             Me.DataGridViewDocuments.Name = "DataGridViewDocuments"
             Me.DataGridViewDocuments.OldCellValue = Nothing
             Me.DataGridViewDocuments.ReadOnly = True
-            Me.DataGridViewDocuments.RowHeadersWidth = 51
+            Me.DataGridViewDocuments.RowHeadersWidth = 25
             Me.DataGridViewDocuments.Searchable = True
             Me.DataGridViewDocuments.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewDocuments.SecurityKey = ""

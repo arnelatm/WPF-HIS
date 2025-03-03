@@ -204,7 +204,7 @@
             Me.DataGridViewIbLabSampleDetails.Name = "DataGridViewIbLabSampleDetails"
             Me.DataGridViewIbLabSampleDetails.OldCellValue = Nothing
             Me.DataGridViewIbLabSampleDetails.ReadOnly = True
-            Me.DataGridViewIbLabSampleDetails.RowHeadersWidth = 51
+            Me.DataGridViewIbLabSampleDetails.RowHeadersWidth = 25
             Me.DataGridViewIbLabSampleDetails.Searchable = True
             Me.DataGridViewIbLabSampleDetails.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewIbLabSampleDetails.SecurityKey = ""

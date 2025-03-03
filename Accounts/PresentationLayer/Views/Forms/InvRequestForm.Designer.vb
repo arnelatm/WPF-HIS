@@ -178,7 +178,7 @@
             Me.DataGridViewInvTransactionRequests.Name = "DataGridViewInvTransactionRequests"
             Me.DataGridViewInvTransactionRequests.OldCellValue = Nothing
             Me.DataGridViewInvTransactionRequests.ReadOnly = True
-            Me.DataGridViewInvTransactionRequests.RowHeadersWidth = 51
+            Me.DataGridViewInvTransactionRequests.RowHeadersWidth = 25
             Me.DataGridViewInvTransactionRequests.Searchable = True
             Me.DataGridViewInvTransactionRequests.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewInvTransactionRequests.SecurityKey = ""
@@ -320,7 +320,7 @@
             Me.DataGridViewInvTransItems.Name = "DataGridViewInvTransItems"
             Me.DataGridViewInvTransItems.OldCellValue = Nothing
             Me.DataGridViewInvTransItems.ReadOnly = True
-            Me.DataGridViewInvTransItems.RowHeadersWidth = 51
+            Me.DataGridViewInvTransItems.RowHeadersWidth = 25
             Me.DataGridViewInvTransItems.Searchable = True
             Me.DataGridViewInvTransItems.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewInvTransItems.SecurityKey = ""

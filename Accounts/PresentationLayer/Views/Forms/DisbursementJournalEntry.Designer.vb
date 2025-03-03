@@ -469,7 +469,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewJournalItems.Name = "DataGridViewJournalItems"
             Me.DataGridViewJournalItems.OldCellValue = Nothing
             Me.DataGridViewJournalItems.ReadOnly = True
-            Me.DataGridViewJournalItems.RowHeadersWidth = 51
+            Me.DataGridViewJournalItems.RowHeadersWidth = 25
             Me.DataGridViewJournalItems.Searchable = True
             Me.DataGridViewJournalItems.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewJournalItems.SecurityKey = ""
@@ -1052,7 +1052,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewDjOiItems.Name = "DataGridViewDjOiItems"
             Me.DataGridViewDjOiItems.OldCellValue = Nothing
             Me.DataGridViewDjOiItems.ReadOnly = True
-            Me.DataGridViewDjOiItems.RowHeadersWidth = 51
+            Me.DataGridViewDjOiItems.RowHeadersWidth = 25
             Me.DataGridViewDjOiItems.Searchable = True
             Me.DataGridViewDjOiItems.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewDjOiItems.SecurityKey = ""

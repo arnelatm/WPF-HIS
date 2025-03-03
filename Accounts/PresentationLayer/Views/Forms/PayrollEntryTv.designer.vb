@@ -607,7 +607,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPayrollAttendance.Name = "DataGridViewPayrollAttendance"
             Me.DataGridViewPayrollAttendance.OldCellValue = Nothing
             Me.DataGridViewPayrollAttendance.ReadOnly = True
-            Me.DataGridViewPayrollAttendance.RowHeadersWidth = 51
+            Me.DataGridViewPayrollAttendance.RowHeadersWidth = 25
             Me.DataGridViewPayrollAttendance.Searchable = True
             Me.DataGridViewPayrollAttendance.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewPayrollAttendance.SecurityKey = ""
@@ -859,7 +859,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPayrollOvertime.Name = "DataGridViewPayrollOvertime"
             Me.DataGridViewPayrollOvertime.OldCellValue = Nothing
             Me.DataGridViewPayrollOvertime.ReadOnly = True
-            Me.DataGridViewPayrollOvertime.RowHeadersWidth = 51
+            Me.DataGridViewPayrollOvertime.RowHeadersWidth = 25
             Me.DataGridViewPayrollOvertime.Searchable = True
             Me.DataGridViewPayrollOvertime.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewPayrollOvertime.SecurityKey = ""

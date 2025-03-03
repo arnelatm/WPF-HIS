@@ -1060,7 +1060,7 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle24.SelectionForeColor = System.Drawing.SystemColors.HighlightText
             DataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
             Me.DataGridViewPurchaseDetails.RowHeadersDefaultCellStyle = DataGridViewCellStyle24
-            Me.DataGridViewPurchaseDetails.RowHeadersWidth = 51
+            Me.DataGridViewPurchaseDetails.RowHeadersWidth = 25
             Me.DataGridViewPurchaseDetails.Searchable = True
             Me.DataGridViewPurchaseDetails.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewPurchaseDetails.SecurityKey = ""
@@ -1840,7 +1840,7 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle39.SelectionForeColor = System.Drawing.SystemColors.HighlightText
             DataGridViewCellStyle39.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
             Me.DataGridViewPurchaseHistory.RowHeadersDefaultCellStyle = DataGridViewCellStyle39
-            Me.DataGridViewPurchaseHistory.RowHeadersWidth = 51
+            Me.DataGridViewPurchaseHistory.RowHeadersWidth = 25
             Me.DataGridViewPurchaseHistory.Searchable = True
             Me.DataGridViewPurchaseHistory.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewPurchaseHistory.SecurityKey = ""

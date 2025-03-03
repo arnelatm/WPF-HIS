@@ -76,7 +76,7 @@ Partial Class CbcReportSelector
         Me.DataGridViewReportFiles.Margin = New System.Windows.Forms.Padding(4)
         Me.DataGridViewReportFiles.Name = "DataGridViewReportFiles"
         Me.DataGridViewReportFiles.ReadOnly = True
-        Me.DataGridViewReportFiles.RowHeadersWidth = 51
+        Me.DataGridViewReportFiles.RowHeadersWidth = 25
         Me.DataGridViewReportFiles.Searchable = True
         Me.DataGridViewReportFiles.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.DataGridViewReportFiles.SecurityKey = ""

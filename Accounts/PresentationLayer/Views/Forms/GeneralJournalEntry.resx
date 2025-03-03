@@ -118,16 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <metadata name="StoreCaptions1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>170, 17</value>
+    <value>146, 17</value>
   </metadata>
   <metadata name="TranslatorDAC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>327, 17</value>
+    <value>281, 17</value>
   </metadata>
   <metadata name="AppDataDAC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>478, 17</value>
+    <value>411, 17</value>
   </metadata>
   <metadata name="MyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>621, 17</value>
+    <value>535, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblIdNo.Font" type="System.Drawing.Font, System.Drawing">
@@ -178,7 +178,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtJournalCode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 26</value>
+    <value>24, 23</value>
   </data>
   <data name="txtJournalCode.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -208,7 +208,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="TxtIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 26</value>
+    <value>102, 23</value>
   </data>
   <data name="TxtIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -274,7 +274,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtReferenceNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 26</value>
+    <value>96, 23</value>
   </data>
   <data name="txtReferenceNo.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -298,7 +298,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblTransactionDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 29</value>
+    <value>1, 26</value>
   </data>
   <data name="lblTransactionDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -337,13 +337,13 @@
     <value>Tahoma, 9.75pt</value>
   </data>
   <data name="dtpTransactionDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>155, 28</value>
+    <value>155, 25</value>
   </data>
   <data name="dtpTransactionDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="dtpTransactionDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>124, 27</value>
+    <value>124, 23</value>
   </data>
   <data name="dtpTransactionDate.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -377,7 +377,7 @@
     <value>NoControl</value>
   </data>
   <data name="CLabel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>280, 29</value>
+    <value>280, 26</value>
   </data>
   <data name="CLabel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -413,7 +413,7 @@
     <value>NoControl</value>
   </data>
   <data name="chkClosingJournal.Location" type="System.Drawing.Point, System.Drawing">
-    <value>517, 31</value>
+    <value>517, 28</value>
   </data>
   <data name="chkClosingJournal.Size" type="System.Drawing.Size, System.Drawing">
     <value>13, 13</value>
@@ -446,13 +446,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblClosing.Location" type="System.Drawing.Point, System.Drawing">
-    <value>534, 29</value>
+    <value>534, 26</value>
   </data>
   <data name="lblClosing.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblClosing.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 20</value>
+    <value>113, 17</value>
   </data>
   <data name="lblClosing.TabIndex" type="System.Int32, mscorlib">
     <value>168</value>
@@ -482,7 +482,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 56</value>
+    <value>1, 51</value>
   </data>
   <data name="lblNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -515,7 +515,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>156, 56</value>
+    <value>156, 51</value>
   </data>
   <data name="txtNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -611,7 +611,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="CLabel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 20</value>
+    <value>60, 17</value>
   </data>
   <data name="CLabel3.TabIndex" type="System.Int32, mscorlib">
     <value>293</value>
@@ -644,7 +644,7 @@
     <value>NoControl</value>
   </data>
   <data name="chkCancelled.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 25</value>
+    <value>3, 22</value>
   </data>
   <data name="chkCancelled.Size" type="System.Drawing.Size, System.Drawing">
     <value>13, 13</value>
@@ -677,13 +677,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblCancelled.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 23</value>
+    <value>20, 20</value>
   </data>
   <data name="lblCancelled.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblCancelled.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 20</value>
+    <value>78, 17</value>
   </data>
   <data name="lblCancelled.TabIndex" type="System.Int32, mscorlib">
     <value>294</value>
@@ -716,7 +716,7 @@
     <value>NoControl</value>
   </data>
   <data name="chkApproved.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 47</value>
+    <value>3, 41</value>
   </data>
   <data name="chkApproved.Size" type="System.Drawing.Size, System.Drawing">
     <value>13, 13</value>
@@ -749,13 +749,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblApproved.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 45</value>
+    <value>20, 39</value>
   </data>
   <data name="lblApproved.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblApproved.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 20</value>
+    <value>77, 17</value>
   </data>
   <data name="lblApproved.TabIndex" type="System.Int32, mscorlib">
     <value>295</value>
@@ -785,7 +785,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblDateCreated.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 67</value>
+    <value>1, 58</value>
   </data>
   <data name="lblDateCreated.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -821,13 +821,13 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="dtpDateCreated.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 92</value>
+    <value>10, 83</value>
   </data>
   <data name="dtpDateCreated.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>10, 1, 1, 1</value>
   </data>
   <data name="dtpDateCreated.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 27</value>
+    <value>174, 23</value>
   </data>
   <data name="dtpDateCreated.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1100,7 +1100,7 @@
     <value>125</value>
   </data>
   <metadata name="bsJournalItems.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>785, 17</value>
+    <value>675, 17</value>
   </metadata>
   <data name="DataGridViewJournalItems.Location" type="System.Drawing.Point, System.Drawing">
     <value>1, 143</value>
@@ -1109,7 +1109,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="DataGridViewJournalItems.RowHeadersWidth" type="System.Int32, mscorlib">
-    <value>51</value>
+    <value>25</value>
   </data>
   <data name="DataGridViewJournalItems.Size" type="System.Drawing.Size, System.Drawing">
     <value>966, 255</value>
@@ -1142,7 +1142,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtTotalCredits.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 26</value>
+    <value>100, 23</value>
   </data>
   <data name="txtTotalCredits.TabIndex" type="System.Int32, mscorlib">
     <value>248</value>
@@ -1172,7 +1172,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtTotalDebits.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 26</value>
+    <value>100, 23</value>
   </data>
   <data name="txtTotalDebits.TabIndex" type="System.Int32, mscorlib">
     <value>247</value>
@@ -1199,7 +1199,7 @@
     <value>0, 55</value>
   </data>
   <data name="CFlowLayout4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>982, 427</value>
+    <value>972, 427</value>
   </data>
   <data name="CFlowLayout4.TabIndex" type="System.Int32, mscorlib">
     <value>246</value>
@@ -1220,7 +1220,7 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>8, 16</value>
+    <value>6, 13</value>
   </data>
   <data name="$this.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
@@ -2380,13 +2380,10 @@
     <value>Tile</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>982, 608</value>
-  </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
+    <value>972, 494</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>1000, 582</value>
+    <value>754, 480</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>General Journal Entry</value>
@@ -2414,12 +2411,6 @@
   </data>
   <data name="&gt;&gt;MyErrorProvider.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.ErrorProviderExtended, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;bsJournalItems.Name" xml:space="preserve">
-    <value>bsJournalItems</value>
-  </data>
-  <data name="&gt;&gt;bsJournalItems.Type" xml:space="preserve">
-    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;dgvSequence.Name" xml:space="preserve">
     <value>dgvSequence</value>
@@ -2528,6 +2519,12 @@
   </data>
   <data name="&gt;&gt;PayeeTypeDataGridViewTextBoxColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bsJournalItems.Name" xml:space="preserve">
+    <value>bsJournalItems</value>
+  </data>
+  <data name="&gt;&gt;bsJournalItems.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>GeneralJournalEntry</value>

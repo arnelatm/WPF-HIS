@@ -306,7 +306,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewEarnings.Name = "DataGridViewEarnings"
             Me.DataGridViewEarnings.OldCellValue = Nothing
             Me.DataGridViewEarnings.ReadOnly = True
-            Me.DataGridViewEarnings.RowHeadersWidth = 51
+            Me.DataGridViewEarnings.RowHeadersWidth = 25
             Me.DataGridViewEarnings.Searchable = True
             Me.DataGridViewEarnings.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewEarnings.SecurityKey = ""
@@ -443,7 +443,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewDeductions.Name = "DataGridViewDeductions"
             Me.DataGridViewDeductions.OldCellValue = Nothing
             Me.DataGridViewDeductions.ReadOnly = True
-            Me.DataGridViewDeductions.RowHeadersWidth = 51
+            Me.DataGridViewDeductions.RowHeadersWidth = 25
             Me.DataGridViewDeductions.Searchable = True
             Me.DataGridViewDeductions.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewDeductions.SecurityKey = ""

@@ -174,7 +174,7 @@
             Me.DataGridViewPoUnposted.Name = "DataGridViewPoUnposted"
             Me.DataGridViewPoUnposted.OldCellValue = Nothing
             Me.DataGridViewPoUnposted.ReadOnly = True
-            Me.DataGridViewPoUnposted.RowHeadersWidth = 51
+            Me.DataGridViewPoUnposted.RowHeadersWidth = 25
             Me.DataGridViewPoUnposted.Searchable = True
             Me.DataGridViewPoUnposted.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewPoUnposted.SecurityKey = ""
@@ -264,7 +264,7 @@
             Me.DataGridViewPoItems.Name = "DataGridViewPoItems"
             Me.DataGridViewPoItems.OldCellValue = Nothing
             Me.DataGridViewPoItems.ReadOnly = True
-            Me.DataGridViewPoItems.RowHeadersWidth = 51
+            Me.DataGridViewPoItems.RowHeadersWidth = 25
             Me.DataGridViewPoItems.Searchable = True
             Me.DataGridViewPoItems.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewPoItems.SecurityKey = ""
