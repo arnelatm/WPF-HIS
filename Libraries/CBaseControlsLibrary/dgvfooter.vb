@@ -138,7 +138,7 @@ Public Class DgvFooter
         DefaultCellStyle.SelectionBackColor = _parentDgv.DefaultCellStyle.BackColor
         DefaultCellStyle.SelectionForeColor = _parentDgv.ForeColor
         DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
+        RowHeadersWidth = _parentDgv.RowHeadersWidth
         Width = Width
         Dock = DockStyle.Bottom
         Show()

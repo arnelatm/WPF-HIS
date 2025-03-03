@@ -275,7 +275,7 @@ Partial Class EmployeeLeaveApprovalEntry
         Me.DataGridViewEmployeeLeave.Name = "DataGridViewEmployeeLeave"
         Me.DataGridViewEmployeeLeave.OldCellValue = Nothing
         Me.DataGridViewEmployeeLeave.ReadOnly = True
-        Me.DataGridViewEmployeeLeave.RowHeadersWidth = 51
+        Me.DataGridViewEmployeeLeave.RowHeadersWidth = 25
         Me.DataGridViewEmployeeLeave.Searchable = True
         Me.DataGridViewEmployeeLeave.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.DataGridViewEmployeeLeave.SecurityKey = ""

@@ -186,7 +186,7 @@
             Me.DataGridViewPmrPatientDisplay.Name = "DataGridViewPmrPatientDisplay"
             Me.DataGridViewPmrPatientDisplay.OldCellValue = Nothing
             Me.DataGridViewPmrPatientDisplay.ReadOnly = True
-            Me.DataGridViewPmrPatientDisplay.RowHeadersWidth = 51
+            Me.DataGridViewPmrPatientDisplay.RowHeadersWidth = 25
             Me.DataGridViewPmrPatientDisplay.Searchable = True
             Me.DataGridViewPmrPatientDisplay.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewPmrPatientDisplay.SecurityKey = ""

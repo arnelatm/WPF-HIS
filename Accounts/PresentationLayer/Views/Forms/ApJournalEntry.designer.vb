@@ -163,7 +163,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewJournalItems.Name = "DataGridViewJournalItems"
             Me.DataGridViewJournalItems.OldCellValue = Nothing
             Me.DataGridViewJournalItems.ReadOnly = True
-            Me.DataGridViewJournalItems.RowHeadersWidth = 51
+            Me.DataGridViewJournalItems.RowHeadersWidth = 25
             Me.DataGridViewJournalItems.Searchable = True
             Me.DataGridViewJournalItems.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewJournalItems.SecurityKey = ""

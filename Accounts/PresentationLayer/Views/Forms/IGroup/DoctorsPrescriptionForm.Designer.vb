@@ -169,7 +169,7 @@
             Me.DataGridViewDoctorsPatient.Name = "DataGridViewDoctorsPatient"
             Me.DataGridViewDoctorsPatient.OldCellValue = Nothing
             Me.DataGridViewDoctorsPatient.ReadOnly = True
-            Me.DataGridViewDoctorsPatient.RowHeadersWidth = 51
+            Me.DataGridViewDoctorsPatient.RowHeadersWidth = 25
             Me.DataGridViewDoctorsPatient.Searchable = True
             Me.DataGridViewDoctorsPatient.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewDoctorsPatient.SecurityKey = ""
@@ -469,7 +469,7 @@
             Me.DataGridViewPrescriptionDetails.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
             Me.DataGridViewPrescriptionDetails.Name = "DataGridViewPrescriptionDetails"
             Me.DataGridViewPrescriptionDetails.OldCellValue = Nothing
-            Me.DataGridViewPrescriptionDetails.RowHeadersWidth = 51
+            Me.DataGridViewPrescriptionDetails.RowHeadersWidth = 25
             Me.DataGridViewPrescriptionDetails.Searchable = True
             Me.DataGridViewPrescriptionDetails.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewPrescriptionDetails.SecurityKey = ""

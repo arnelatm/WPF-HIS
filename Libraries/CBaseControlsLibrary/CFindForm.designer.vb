@@ -503,7 +503,7 @@ Partial Class CFindForm
         Me.CtDataGridViewWithFooter1.IsDirty = False
         Me.CtDataGridViewWithFooter1.Location = New System.Drawing.Point(0, 353)
         Me.CtDataGridViewWithFooter1.Name = "CtDataGridViewWithFooter1"
-        Me.CtDataGridViewWithFooter1.RowHeadersWidth = 51
+        Me.CtDataGridViewWithFooter1.RowHeadersWidth = 25
         Me.CtDataGridViewWithFooter1.Searchable = True
         Me.CtDataGridViewWithFooter1.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.CtDataGridViewWithFooter1.SecurityKey = ""

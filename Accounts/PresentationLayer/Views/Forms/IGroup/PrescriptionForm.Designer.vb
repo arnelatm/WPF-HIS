@@ -417,7 +417,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPrescriptionItems.Name = "DataGridViewPrescriptionItems"
             Me.DataGridViewPrescriptionItems.OldCellValue = Nothing
             Me.DataGridViewPrescriptionItems.ReadOnly = True
-            Me.DataGridViewPrescriptionItems.RowHeadersWidth = 51
+            Me.DataGridViewPrescriptionItems.RowHeadersWidth = 25
             Me.DataGridViewPrescriptionItems.Searchable = True
             Me.DataGridViewPrescriptionItems.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewPrescriptionItems.SecurityKey = ""

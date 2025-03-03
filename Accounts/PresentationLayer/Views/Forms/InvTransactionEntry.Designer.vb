@@ -817,7 +817,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewInvTransactionDetails.Name = "DataGridViewInvTransactionDetails"
             Me.DataGridViewInvTransactionDetails.OldCellValue = Nothing
             Me.DataGridViewInvTransactionDetails.ReadOnly = True
-            Me.DataGridViewInvTransactionDetails.RowHeadersWidth = 51
+            Me.DataGridViewInvTransactionDetails.RowHeadersWidth = 25
             Me.DataGridViewInvTransactionDetails.Searchable = True
             Me.DataGridViewInvTransactionDetails.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewInvTransactionDetails.SecurityKey = ""

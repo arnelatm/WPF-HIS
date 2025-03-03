@@ -353,7 +353,7 @@ Namespace PresentationLayer.Views
             Me.DataGridViewGroupAccesses.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
             Me.DataGridViewGroupAccesses.Name = "DataGridViewGroupAccesses"
             Me.DataGridViewGroupAccesses.ReadOnly = True
-            Me.DataGridViewGroupAccesses.RowHeadersWidth = 51
+            Me.DataGridViewGroupAccesses.RowHeadersWidth = 25
             Me.DataGridViewGroupAccesses.Searchable = True
             Me.DataGridViewGroupAccesses.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewGroupAccesses.SecurityKey = ""
