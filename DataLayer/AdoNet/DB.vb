@@ -802,6 +802,53 @@ Namespace AdoNet
             Return retValue
         End Function
 
+        Public Function GenericUpdate(sql As String, ParamArray ByVal parms() As Object) As Int32
+            Dim retValue As Object = Nothing
+            Dim tryAgain As Boolean
+            Using connection = CreateConnection()
+                '_waitForm.Show()
+                Do While True
+                    tryAgain = False
+                    Try
+                        Using command = CreateCommand(sql, connection, parms)
+                            retValue = command.ExecuteNonQuery()
+                        End Using
+                    Catch ex As SqlException
+                        '_waitForm.Close()
+                        If ex.Number = 2601 OrElse ex.Number = 2627 Then
+                            MessageBox.Show(
+                                "Duplicate values found ....." & ex.Message & vbNewLine & "Record not saved!!",
+                                "NOT Saved", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+                            retValue = -1
+                        Else
+                            Select Case TryToCatchError(ex)
+                                Case DialogResult.Cancel
+                                    retValue = -1
+                                    '
+                                Case DialogResult.Retry
+                                    tryAgain = True
+                                    '_waitForm.Show()
+                                Case Else
+                                    retValue = -1
+                                    MessageBox.Show(ex.Message)
+                                    Throw
+                            End Select
+                        End If
+                    Catch ex As Exception
+                        retValue = -1
+                        MessageBox.Show(ex.Message)
+                        Throw
+                    Finally
+                        '_waitForm.Close()
+                    End Try
+                    If Not tryAgain Then
+                        Exit Do
+                    End If
+                Loop
+            End Using
+            Return retValue
+        End Function
+
         Public Function TvpMerge(tableValuedProcedure As String, dataTableName As DataTable, mParam As String) _
             As Integer
             Dim retValue = 0

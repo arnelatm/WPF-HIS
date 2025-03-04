@@ -1363,6 +1363,19 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ToolStripMenuItemContacts_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemContacts.Click
             RunBasicForm("Contact_View", "Contacts Entry", "")
         End Sub
+
+        Private Sub ToolStripMenuItemTransactions_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemTransactions.Click
+
+        End Sub
+
+        Private Sub ToolStripMenuItemInvoiceNoteEditor_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemInvoiceNoteEditor.Click
+            RunForm(Of InvMedNotesForm, InvMedNotesPresenter(Of InvMedNotesModel))()
+        End Sub
+
+        'Private Sub ToolStripMenuItemLabReportStatus_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemLabReportStatus.Click
+        '    RunForm(Of LabReportStatusForm, LabReportStatusPresenter(Of LabReportStatusModel))()
+        'End Sub
+
     End Class
 
 End Namespace

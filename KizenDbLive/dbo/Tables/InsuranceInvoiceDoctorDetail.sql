@@ -1,0 +1,25 @@
+﻿CREATE TABLE [dbo].[InsuranceInvoiceDoctorDetail] (
+    [ID]                                         INT             IDENTITY (1, 1) NOT NULL,
+    [InsuranceInvoiceID]                         INT             NOT NULL,
+    [DoctorID]                                   INT             NULL,
+    [ClaimsCount]                                INT             NULL,
+    [ReportItemsCount]                           INT             NULL,
+    [TotalWorksBeforeDiscount]                   DECIMAL (18, 2) NULL,
+    [TotalDiscount]                              DECIMAL (18, 2) NULL,
+    [TotalWorksAfterDiscountWithoutVAT]          DECIMAL (18, 2) NULL,
+    [TotalPatientCarryWithoutVAT]                DECIMAL (18, 2) NULL,
+    [TotalPatientCarryFromAmountIncludeVAT]      DECIMAL (18, 2) NULL,
+    [TotalPatientCarryFromAmountNotIncludeVAT]   DECIMAL (18, 2) NULL,
+    [TotalPatientVATValue]                       DECIMAL (18, 2) NULL,
+    [TotalPatientCarryWithVAT]                   DECIMAL (18, 2) NULL,
+    [TotalInsuranceCarryWithoutVAT]              DECIMAL (18, 2) NULL,
+    [TotalInsuranceCarryFromAmountIncludeVAT]    DECIMAL (18, 2) NULL,
+    [TotalInsuranceCarryFromAmountNotIncludeVAT] DECIMAL (18, 2) NULL,
+    [TotalInsuranceVATValue]                     DECIMAL (18, 2) NULL,
+    [TotalInsuranceCarryWithVAT]                 DECIMAL (18, 2) NULL,
+    [ItemId]                                     INT             NULL,
+    [ItemName]                                   NVARCHAR (MAX)  NULL,
+    [VATNote]                                    NVARCHAR (MAX)  NULL,
+    CONSTRAINT [PK_InsuranceInvoiceDoctorDetail] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+

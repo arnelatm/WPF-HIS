@@ -1,0 +1,2 @@
+﻿CREATE USER [rec] WITHOUT LOGIN;
+

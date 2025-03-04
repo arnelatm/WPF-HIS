@@ -1,0 +1,2 @@
+﻿CREATE USER [dasd] WITHOUT LOGIN;
+

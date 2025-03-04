@@ -1,0 +1,190 @@
+﻿GRANT CONNECT TO [kizen];
+
+
+GO
+GRANT CONNECT TO [NT AUTHORITY\NETWORK];
+
+
+GO
+GRANT CONNECT TO [Dr. Wafaa Alzuhairy];
+
+
+GO
+GRANT CONNECT TO [Duaa Basha];
+
+
+GO
+GRANT CONNECT TO [Dr Adel Abdulati];
+
+
+GO
+GRANT CONNECT TO [Khlood albriki];
+
+
+GO
+GRANT CONNECT TO [store];
+
+
+GO
+GRANT CONNECT TO [Naif Alsmari];
+
+
+GO
+GRANT CONNECT TO [Fatin];
+
+
+GO
+GRANT CONNECT TO [Reem ALJuhani];
+
+
+GO
+GRANT CONNECT TO [Dr Abdulaziz Buaih];
+
+
+GO
+GRANT CONNECT TO [NT AUTHORITY\SYSTEM];
+
+
+GO
+GRANT CONNECT TO [KIZEN\Administrator];
+
+
+GO
+GRANT CONNECT TO [Rana Bashraheel];
+
+
+GO
+GRANT CONNECT TO [Nada ALJuhani];
+
+
+GO
+GRANT CONNECT TO [Areej ALShareef];
+
+
+GO
+GRANT CONNECT TO [Hala Fetiani];
+
+
+GO
+GRANT CONNECT TO [Ahmad Rafat];
+
+
+GO
+GRANT CONNECT TO [Ihab Bukair];
+
+
+GO
+GRANT CONNECT TO [Mounirah Aljouid];
+
+
+GO
+GRANT CONNECT TO [MARWAH HAKAMI];
+
+
+GO
+GRANT CONNECT TO [Abdullah Amer];
+
+
+GO
+GRANT CONNECT TO [Rolando Gatbunton];
+
+
+GO
+GRANT CONNECT TO [Fatma Elzoghby];
+
+
+GO
+GRANT CONNECT TO [Allan];
+
+
+GO
+GRANT CONNECT TO [Dr Abdullrahman ALfol];
+
+
+GO
+GRANT CONNECT TO [ARNEL];
+
+
+GO
+GRANT CONNECT TO [ER];
+
+
+GO
+GRANT CONNECT TO [Pharmacy];
+
+
+GO
+GRANT CONNECT TO [Dr Jumana];
+
+
+GO
+GRANT CONNECT TO [Dr Ibrahim Abdulsalam];
+
+
+GO
+GRANT CONNECT TO [Dr Azza Ezzat];
+
+
+GO
+GRANT CONNECT TO [Dr Shaimaa Abdulrahim];
+
+
+GO
+GRANT CONNECT TO [Dr Esam Dahab];
+
+
+GO
+GRANT CONNECT TO [Dr Mahmoud Faraj];
+
+
+GO
+GRANT CONNECT TO [Latifa ALMutairi];
+
+
+GO
+GRANT CONNECT TO [Dr Abdullah Bajri];
+
+
+GO
+GRANT CONNECT TO [Dr Mervat abdulsalam];
+
+
+GO
+GRANT CONNECT TO [Doaa];
+
+
+GO
+GRANT CONNECT TO [CDAuditor];
+
+
+GO
+GRANT CONNECT TO [Nurse];
+
+
+GO
+GRANT CONNECT TO [Receptionist];
+
+
+GO
+GRANT CONNECT TO [VillyR];
+
+
+GO
+GRANT CONNECT TO [Emmarose];
+
+
+GO
+GRANT CONNECT TO [VillyS];
+
+
+GO
+GRANT CONNECT TO [EmmaR];
+
+
+GO
+GRANT CONNECT TO [EmmaRc];
+
+
+GO
+GRANT CONNECT TO [Duaa Bashaa];
+

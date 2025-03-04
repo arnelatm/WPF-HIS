@@ -1,0 +1,28 @@
+﻿CREATE TABLE [dbo].[A1_Salary] (
+    [ID]                      INT             IDENTITY (1, 1) NOT NULL,
+    [ExpensesID]              INT             NULL,
+    [StartDate]               DATE            NULL,
+    [EndDate]                 DATE            NULL,
+    [EmpName]                 NVARCHAR (255)  NULL,
+    [DrName]                  NVARCHAR (255)  NULL,
+    [Income1]                 DECIMAL (18, 2) NULL,
+    [Expenses1]               DECIMAL (18, 2) NULL,
+    [Expenses2]               DECIMAL (18, 2) NULL,
+    [Expenses3]               DECIMAL (18, 2) NULL,
+    [Expenses4]               DECIMAL (18, 2) NULL,
+    [IncomeNet]               DECIMAL (18, 2) NULL,
+    [Salary]                  DECIMAL (18, 2) NULL,
+    [HousingAllowance]        DECIMAL (18, 2) NULL,
+    [TransportationAllowance] DECIMAL (18, 2) NULL,
+    [OtherAllowance]          DECIMAL (18, 2) NULL,
+    [Commission]              DECIMAL (18, 2) NULL,
+    [SalaryTotal]             DECIMAL (18, 2) NULL,
+    [SalaryIncrease]          DECIMAL (18, 2) NULL,
+    [SalaryDecrease]          DECIMAL (18, 2) NULL,
+    [SalaryIncreaseNote]      NVARCHAR (MAX)  NULL,
+    [SalaryDecreaseNote]      NVARCHAR (MAX)  NULL,
+    [SalaryNet]               DECIMAL (18, 2) NULL,
+    [EmpType]                 NVARCHAR (50)   NULL,
+    CONSTRAINT [PK_A1_Salary] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+

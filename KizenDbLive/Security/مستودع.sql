@@ -1,0 +1,2 @@
+﻿CREATE USER [مستودع] WITHOUT LOGIN;
+

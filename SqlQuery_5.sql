@@ -1,0 +1,25 @@
+﻿DECLARE @schema_name NVARCHAR(128);
+DECLARE @table_name NVARCHAR(128);
+DECLARE @sql_query NVARCHAR(MAX);
+
+DECLARE table_cursor CURSOR FOR
+SELECT 
+    schema_name(schema_id) AS schema_name,
+    name AS table_name
+FROM 
+    sys.tables;
+
+OPEN table_cursor;
+
+FETCH NEXT FROM table_cursor INTO @schema_name, @table_name;
+
+WHILE @@FETCH_STATUS = 0
+BEGIN
+    SET @sql_query = 'SELECT ''' + @schema_name + '.' + @table_name + ''' AS table_name, COUNT(*) AS record_count FROM ' + @schema_name + '.' + @table_name;
+    EXEC sp_executesql @sql_query;
+
+    FETCH NEXT FROM table_cursor INTO @schema_name, @table_name;
+END
+
+CLOSE table_cursor;
+DEALLOCATE table_cursor;

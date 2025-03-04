@@ -1,0 +1,2 @@
+﻿CREATE USER [asd] WITHOUT LOGIN;
+
