@@ -2818,6 +2818,7 @@
       <Link>.editorconfig</Link>
     </None>
     <None Include="app - Copy %282%29.config" />
+    <None Include="app.config" />
     <None Include="app-ISPADMIN2 - Copy.config" />
     <None Include="app-Marcelo-Dell - Copy %282%29.config" />
     <None Include="app-.config" />
@@ -2825,7 +2826,6 @@
     <None Include="app-ISP-SERVERNEW.config" />
     <None Include="app-ibn-server-test.config" />
     <None Include="app-IBNSINAP.config" />
-    <None Include="app.config" />
     <None Include="app-SEACHI.config" />
     <None Include="app-Marcelo-Dell.config" />
     <None Include="app-Isp-Server.config" />
