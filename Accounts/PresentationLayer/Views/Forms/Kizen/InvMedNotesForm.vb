@@ -163,6 +163,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub txtInvoiceNo_Validated(sender As Object, e As EventArgs) Handles txtInvoiceNo.Validated
             RaiseEvent InvMedNotesRequested(InvoiceNo)
+            InvMedNotesDetails = _InvMedNotesDetails
         End Sub
 
         Private Sub DataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs)

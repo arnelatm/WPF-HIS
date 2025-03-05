@@ -52,7 +52,6 @@ Namespace PresentationLayer.Presenters
             Else
                 InvMedNotesModel = Service.GetRecordByIdNo(Of InvMedNotesModel)(View.InvoiceNo)
                 GlobalFunctions.ManualMap(InvMedNotesModel, View)
-                View.InvMedNotesDetails = View.InvMedNotesDetails
             End If
         End Sub
 
