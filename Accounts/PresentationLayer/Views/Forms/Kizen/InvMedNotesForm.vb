@@ -31,6 +31,7 @@ Namespace PresentationLayer.Views.Forms
             SingleData = True
             QueryOnly = True
             DisplaySetup()
+            BindInvMedNotesDisplay()
         End Sub
 
         Private Sub DisplaySetup()
@@ -128,9 +129,9 @@ Namespace PresentationLayer.Views.Forms
             With DataGridViewInvMedNotesDetails
                 .AutoGenerateColumns = False
                 .DataSource = bsInvMedNotesDetails
-                dgvSeq.DisplayOnly = True
-                dgvItemCode.DisplayOnly = True
-                dgvItemName.DisplayOnly = True
+                'dgvSeq.DisplayOnly = True
+                'dgvItemCode.DisplayOnly = True
+                'dgvItemName.DisplayOnly = True
             End With
             ResumeLayout()
         End Sub

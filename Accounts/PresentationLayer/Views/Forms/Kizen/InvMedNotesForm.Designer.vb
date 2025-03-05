@@ -24,11 +24,7 @@
             Me.components = New System.ComponentModel.Container()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(InvMedNotesForm))
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Me.btnRefresh = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.imgList = New System.Windows.Forms.ImageList(Me.components)
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
@@ -43,20 +39,20 @@
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel6 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.DataGridViewInvMedNotesDetails = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
+            Me.bsInvMedNotesDetails = New System.Windows.Forms.BindingSource(Me.components)
             Me.CLabel7 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtNationality = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.txtGender = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.CLabel5 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.dtpInvoiceDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.CLabel8 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtDoctorCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.txtMRN = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.bsInvMedNotesDetails = New System.Windows.Forms.BindingSource(Me.components)
-            Me.DataGridViewTextBoxColumn2 = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvSeq = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvItemCode = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvItemName = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvNote = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.dtpInvoiceDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
+            Me.CLabel5 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtDoctorCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.SeqDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.ItemCodeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.ItemNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.NoteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout2.SuspendLayout()
             Me.TableLayoutPanel1.SuspendLayout()
@@ -68,11 +64,12 @@
             '
             Me.btnRefresh.DesignerSelected = False
             Me.btnRefresh.ImageIndex = 0
-            Me.btnRefresh.Location = New System.Drawing.Point(549, 78)
+            Me.btnRefresh.Location = New System.Drawing.Point(701, 88)
+            Me.btnRefresh.Margin = New System.Windows.Forms.Padding(4)
             Me.btnRefresh.Name = "btnRefresh"
             Me.btnRefresh.OriginalImageName = Nothing
             Me.btnRefresh.SecurityKey = ""
-            Me.btnRefresh.Size = New System.Drawing.Size(90, 21)
+            Me.btnRefresh.Size = New System.Drawing.Size(120, 26)
             Me.btnRefresh.TabIndex = 11
             Me.btnRefresh.Text = "Refresh"
             '
@@ -90,8 +87,9 @@
             Me.CFlowLayout2.Controls.Add(Me.TableLayoutPanel1)
             Me.CFlowLayout2.Dock = System.Windows.Forms.DockStyle.Fill
             Me.CFlowLayout2.Location = New System.Drawing.Point(0, 55)
+            Me.CFlowLayout2.Margin = New System.Windows.Forms.Padding(4)
             Me.CFlowLayout2.Name = "CFlowLayout2"
-            Me.CFlowLayout2.Size = New System.Drawing.Size(767, 318)
+            Me.CFlowLayout2.Size = New System.Drawing.Size(1023, 404)
             Me.CFlowLayout2.TabIndex = 5
             '
             'TableLayoutPanel1
@@ -122,7 +120,8 @@
             Me.TableLayoutPanel1.Controls.Add(Me.txtMRN, 3, 1)
             Me.TableLayoutPanel1.Controls.Add(Me.dtpInvoiceDate, 1, 3)
             Me.TableLayoutPanel1.Controls.Add(Me.CLabel5, 2, 3)
-            Me.TableLayoutPanel1.Location = New System.Drawing.Point(3, 3)
+            Me.TableLayoutPanel1.Location = New System.Drawing.Point(4, 4)
+            Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4)
             Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
             Me.TableLayoutPanel1.RowCount = 6
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
@@ -131,7 +130,7 @@
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-            Me.TableLayoutPanel1.Size = New System.Drawing.Size(755, 305)
+            Me.TableLayoutPanel1.Size = New System.Drawing.Size(1007, 375)
             Me.TableLayoutPanel1.TabIndex = 17
             '
             'txtDoctorName
@@ -154,7 +153,7 @@
             Me.txtDoctorName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtDoctorName.ForeColor = System.Drawing.Color.Black
             Me.txtDoctorName.LinkedLabel = Nothing
-            Me.txtDoctorName.Location = New System.Drawing.Point(113, 51)
+            Me.txtDoctorName.Location = New System.Drawing.Point(150, 57)
             Me.txtDoctorName.Margin = New System.Windows.Forms.Padding(1)
             Me.txtDoctorName.MaximumValue = Nothing
             Me.txtDoctorName.MinimumValue = Nothing
@@ -163,7 +162,7 @@
             Me.txtDoctorName.OverrideMaxLength = 0
             Me.txtDoctorName.ReadOnly = True
             Me.txtDoctorName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtDoctorName.Size = New System.Drawing.Size(643, 23)
+            Me.txtDoctorName.Size = New System.Drawing.Size(898, 26)
             Me.txtDoctorName.TabIndex = 24
             Me.txtDoctorName.Translatable = False
             '
@@ -185,7 +184,7 @@
             Me.txtAge.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtAge.ForeColor = System.Drawing.Color.Black
             Me.txtAge.LinkedLabel = Nothing
-            Me.txtAge.Location = New System.Drawing.Point(113, 26)
+            Me.txtAge.Location = New System.Drawing.Point(150, 29)
             Me.txtAge.Margin = New System.Windows.Forms.Padding(1)
             Me.txtAge.MaximumValue = Nothing
             Me.txtAge.MinimumValue = Nothing
@@ -194,7 +193,7 @@
             Me.txtAge.OverrideMaxLength = 0
             Me.txtAge.ReadOnly = True
             Me.txtAge.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtAge.Size = New System.Drawing.Size(162, 23)
+            Me.txtAge.Size = New System.Drawing.Size(215, 26)
             Me.txtAge.TabIndex = 21
             Me.txtAge.Translatable = False
             '
@@ -208,7 +207,7 @@
             Me.CLabel4.Location = New System.Drawing.Point(1, 1)
             Me.CLabel4.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel4.Name = "CLabel4"
-            Me.CLabel4.Size = New System.Drawing.Size(110, 17)
+            Me.CLabel4.Size = New System.Drawing.Size(130, 20)
             Me.CLabel4.TabIndex = 19
             Me.CLabel4.Text = "Invoice Number:"
             Me.CLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -221,10 +220,10 @@
             Me.CLabel2.DisplayOnly = True
             Me.CLabel2.EditingMode = False
             Me.CLabel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel2.Location = New System.Drawing.Point(1, 26)
+            Me.CLabel2.Location = New System.Drawing.Point(1, 29)
             Me.CLabel2.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel2.Name = "CLabel2"
-            Me.CLabel2.Size = New System.Drawing.Size(37, 17)
+            Me.CLabel2.Size = New System.Drawing.Size(43, 20)
             Me.CLabel2.TabIndex = 15
             Me.CLabel2.Text = "Age:"
             Me.CLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -237,10 +236,10 @@
             Me.CLabel3.DisplayOnly = True
             Me.CLabel3.EditingMode = False
             Me.CLabel3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel3.Location = New System.Drawing.Point(277, 1)
+            Me.CLabel3.Location = New System.Drawing.Point(367, 1)
             Me.CLabel3.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel3.Name = "CLabel3"
-            Me.CLabel3.Size = New System.Drawing.Size(93, 17)
+            Me.CLabel3.Size = New System.Drawing.Size(110, 20)
             Me.CLabel3.TabIndex = 16
             Me.CLabel3.Text = "Patient Name"
             Me.CLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -266,7 +265,7 @@
             Me.txtPatientName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtPatientName.ForeColor = System.Drawing.Color.Black
             Me.txtPatientName.LinkedLabel = Nothing
-            Me.txtPatientName.Location = New System.Drawing.Point(372, 1)
+            Me.txtPatientName.Location = New System.Drawing.Point(479, 1)
             Me.txtPatientName.Margin = New System.Windows.Forms.Padding(1)
             Me.txtPatientName.MaximumValue = Nothing
             Me.txtPatientName.MinimumValue = Nothing
@@ -275,7 +274,7 @@
             Me.txtPatientName.OverrideMaxLength = 0
             Me.txtPatientName.ReadOnly = True
             Me.txtPatientName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtPatientName.Size = New System.Drawing.Size(384, 23)
+            Me.txtPatientName.Size = New System.Drawing.Size(569, 26)
             Me.txtPatientName.TabIndex = 18
             Me.txtPatientName.Translatable = False
             '
@@ -296,7 +295,7 @@
             Me.txtInvoiceNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtInvoiceNo.ForeColor = System.Drawing.Color.Black
             Me.txtInvoiceNo.LinkedLabel = Nothing
-            Me.txtInvoiceNo.Location = New System.Drawing.Point(113, 1)
+            Me.txtInvoiceNo.Location = New System.Drawing.Point(150, 1)
             Me.txtInvoiceNo.Margin = New System.Windows.Forms.Padding(1)
             Me.txtInvoiceNo.MaximumValue = Nothing
             Me.txtInvoiceNo.MinimumValue = Nothing
@@ -304,7 +303,7 @@
             Me.txtInvoiceNo.OldValue = Nothing
             Me.txtInvoiceNo.OverrideMaxLength = 0
             Me.txtInvoiceNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtInvoiceNo.Size = New System.Drawing.Size(162, 23)
+            Me.txtInvoiceNo.Size = New System.Drawing.Size(215, 26)
             Me.txtInvoiceNo.TabIndex = 17
             Me.txtInvoiceNo.Translatable = False
             '
@@ -315,10 +314,10 @@
             Me.CLabel1.DisplayOnly = True
             Me.CLabel1.EditingMode = False
             Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel1.Location = New System.Drawing.Point(1, 77)
+            Me.CLabel1.Location = New System.Drawing.Point(1, 87)
             Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel1.Name = "CLabel1"
-            Me.CLabel1.Size = New System.Drawing.Size(110, 23)
+            Me.CLabel1.Size = New System.Drawing.Size(147, 28)
             Me.CLabel1.TabIndex = 13
             Me.CLabel1.Text = "Invoice Date:"
             Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -331,10 +330,10 @@
             Me.CLabel6.DisplayOnly = True
             Me.CLabel6.EditingMode = False
             Me.CLabel6.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel6.Location = New System.Drawing.Point(1, 51)
+            Me.CLabel6.Location = New System.Drawing.Point(1, 57)
             Me.CLabel6.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel6.Name = "CLabel6"
-            Me.CLabel6.Size = New System.Drawing.Size(95, 17)
+            Me.CLabel6.Size = New System.Drawing.Size(114, 20)
             Me.CLabel6.TabIndex = 23
             Me.CLabel6.Text = "Doctor Name:"
             Me.CLabel6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -351,18 +350,18 @@
             Me.DataGridViewInvMedNotesDetails.BegFindValue = Nothing
             Me.DataGridViewInvMedNotesDetails.Cached = False
             Me.DataGridViewInvMedNotesDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DataGridViewInvMedNotesDetails.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn2, Me.dgvSeq, Me.dgvItemCode, Me.dgvItemName, Me.dgvNote})
+            Me.DataGridViewInvMedNotesDetails.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn2, Me.SeqDataGridViewTextBoxColumn, Me.ItemCodeDataGridViewTextBoxColumn, Me.ItemNameDataGridViewTextBoxColumn, Me.NoteDataGridViewTextBoxColumn})
             Me.TableLayoutPanel1.SetColumnSpan(Me.DataGridViewInvMedNotesDetails, 6)
             Me.DataGridViewInvMedNotesDetails.DataFilter = Nothing
             Me.DataGridViewInvMedNotesDetails.DataSource = Me.bsInvMedNotesDetails
-            DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewInvMedNotesDetails.DefaultCellStyle = DataGridViewCellStyle6
+            DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewInvMedNotesDetails.DefaultCellStyle = DataGridViewCellStyle2
             Me.DataGridViewInvMedNotesDetails.DgvFooter = Nothing
             Me.DataGridViewInvMedNotesDetails.DisplayOnly = False
             Me.DataGridViewInvMedNotesDetails.Ea = Nothing
@@ -379,7 +378,8 @@
             Me.DataGridViewInvMedNotesDetails.FirstRowInsertionEnabled = True
             Me.DataGridViewInvMedNotesDetails.IgnoreCase = False
             Me.DataGridViewInvMedNotesDetails.IsDirty = False
-            Me.DataGridViewInvMedNotesDetails.Location = New System.Drawing.Point(3, 105)
+            Me.DataGridViewInvMedNotesDetails.Location = New System.Drawing.Point(4, 122)
+            Me.DataGridViewInvMedNotesDetails.Margin = New System.Windows.Forms.Padding(4)
             Me.DataGridViewInvMedNotesDetails.Name = "DataGridViewInvMedNotesDetails"
             Me.DataGridViewInvMedNotesDetails.OldCellValue = Nothing
             Me.DataGridViewInvMedNotesDetails.ReadOnly = True
@@ -390,9 +390,14 @@
             Me.DataGridViewInvMedNotesDetails.SequenceColumn = "dgvSequence"
             Me.DataGridViewInvMedNotesDetails.SequenceFieldName = "Sequence"
             Me.DataGridViewInvMedNotesDetails.ShowFooter = False
-            Me.DataGridViewInvMedNotesDetails.Size = New System.Drawing.Size(751, 200)
+            Me.DataGridViewInvMedNotesDetails.Size = New System.Drawing.Size(1001, 246)
             Me.DataGridViewInvMedNotesDetails.TabIndex = 14
             Me.DataGridViewInvMedNotesDetails.Translatable = True
+            '
+            'bsInvMedNotesDetails
+            '
+            Me.bsInvMedNotesDetails.AllowNew = False
+            Me.bsInvMedNotesDetails.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.InvMedNotesDetailModel)
             '
             'CLabel7
             '
@@ -401,10 +406,10 @@
             Me.CLabel7.DisplayOnly = True
             Me.CLabel7.EditingMode = False
             Me.CLabel7.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel7.Location = New System.Drawing.Point(467, 26)
+            Me.CLabel7.Location = New System.Drawing.Point(604, 29)
             Me.CLabel7.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel7.Name = "CLabel7"
-            Me.CLabel7.Size = New System.Drawing.Size(78, 17)
+            Me.CLabel7.Size = New System.Drawing.Size(92, 20)
             Me.CLabel7.TabIndex = 25
             Me.CLabel7.Text = "Nationality:"
             Me.CLabel7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -429,7 +434,7 @@
             Me.txtNationality.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtNationality.ForeColor = System.Drawing.Color.Black
             Me.txtNationality.LinkedLabel = Nothing
-            Me.txtNationality.Location = New System.Drawing.Point(547, 26)
+            Me.txtNationality.Location = New System.Drawing.Point(698, 29)
             Me.txtNationality.Margin = New System.Windows.Forms.Padding(1)
             Me.txtNationality.MaximumValue = Nothing
             Me.txtNationality.MinimumValue = Nothing
@@ -438,7 +443,7 @@
             Me.txtNationality.OverrideMaxLength = 0
             Me.txtNationality.ReadOnly = True
             Me.txtNationality.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtNationality.Size = New System.Drawing.Size(209, 23)
+            Me.txtNationality.Size = New System.Drawing.Size(350, 26)
             Me.txtNationality.TabIndex = 26
             Me.txtNationality.Translatable = False
             '
@@ -460,7 +465,7 @@
             Me.txtGender.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtGender.ForeColor = System.Drawing.Color.Black
             Me.txtGender.LinkedLabel = Nothing
-            Me.txtGender.Location = New System.Drawing.Point(372, 76)
+            Me.txtGender.Location = New System.Drawing.Point(479, 85)
             Me.txtGender.Margin = New System.Windows.Forms.Padding(1)
             Me.txtGender.MaximumValue = Nothing
             Me.txtGender.MinimumValue = Nothing
@@ -469,53 +474,9 @@
             Me.txtGender.OverrideMaxLength = 0
             Me.txtGender.ReadOnly = True
             Me.txtGender.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtGender.Size = New System.Drawing.Size(93, 23)
+            Me.txtGender.Size = New System.Drawing.Size(123, 26)
             Me.txtGender.TabIndex = 22
             Me.txtGender.Translatable = False
-            '
-            'CLabel5
-            '
-            Me.CLabel5.AutoSize = True
-            Me.CLabel5.BackColor = System.Drawing.Color.Transparent
-            Me.CLabel5.DisplayOnly = True
-            Me.CLabel5.EditingMode = False
-            Me.CLabel5.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel5.Location = New System.Drawing.Point(277, 76)
-            Me.CLabel5.Margin = New System.Windows.Forms.Padding(1)
-            Me.CLabel5.Name = "CLabel5"
-            Me.CLabel5.Size = New System.Drawing.Size(60, 17)
-            Me.CLabel5.TabIndex = 20
-            Me.CLabel5.Text = "Gender:"
-            Me.CLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.CLabel5.Translatable = True
-            '
-            'dtpInvoiceDate
-            '
-            Me.dtpInvoiceDate.AutoSize = True
-            Me.dtpInvoiceDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-            Me.dtpInvoiceDate.CalendarCulture = New System.Globalization.CultureInfo("en-GB")
-            Me.dtpInvoiceDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
-            Me.dtpInvoiceDate.DefaultValue = Nothing
-            Me.dtpInvoiceDate.DisplayOnly = True
-            Me.dtpInvoiceDate.DtpDefaultValue = Nothing
-            Me.dtpInvoiceDate.EditingMode = True
-            Me.dtpInvoiceDate.EditsAllowed = False
-            Me.dtpInvoiceDate.ForeColor = System.Drawing.Color.Black
-            Me.dtpInvoiceDate.LinkedLabel = Nothing
-            Me.dtpInvoiceDate.Location = New System.Drawing.Point(113, 76)
-            Me.dtpInvoiceDate.Margin = New System.Windows.Forms.Padding(1)
-            Me.dtpInvoiceDate.Name = "dtpInvoiceDate"
-            Me.dtpInvoiceDate.ReadOnlyDp = True
-            Me.dtpInvoiceDate.SecurityKey = Nothing
-            Me.dtpInvoiceDate.ShowLongDate = False
-            Me.dtpInvoiceDate.ShowTime = False
-            Me.dtpInvoiceDate.Size = New System.Drawing.Size(97, 23)
-            Me.dtpInvoiceDate.TabIndex = 12
-            Me.dtpInvoiceDate.TargetCalendar = CType(resources.GetObject("dtpInvoiceDate.TargetCalendar"), System.Globalization.Calendar)
-            Me.dtpInvoiceDate.Translatable = False
-            Me.dtpInvoiceDate.Value = Nothing
-            Me.dtpInvoiceDate.ValueIsMandatory = False
-            Me.dtpInvoiceDate.ValueIsNullable = False
             '
             'CLabel8
             '
@@ -524,44 +485,14 @@
             Me.CLabel8.DisplayOnly = True
             Me.CLabel8.EditingMode = False
             Me.CLabel8.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel8.Location = New System.Drawing.Point(277, 26)
+            Me.CLabel8.Location = New System.Drawing.Point(367, 29)
             Me.CLabel8.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel8.Name = "CLabel8"
-            Me.CLabel8.Size = New System.Drawing.Size(39, 17)
+            Me.CLabel8.Size = New System.Drawing.Size(47, 20)
             Me.CLabel8.TabIndex = 27
             Me.CLabel8.Text = "MRN"
             Me.CLabel8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             Me.CLabel8.Translatable = True
-            '
-            'txtDoctorCode
-            '
-            Me.txtDoctorCode.BackColor = System.Drawing.Color.White
-            Me.txtDoctorCode.BegFindValue = Nothing
-            Me.txtDoctorCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtDoctorCode.ComputedValue = False
-            Me.txtDoctorCode.CustomFormat = Nothing
-            Me.txtDoctorCode.DataBoundControl = True
-            Me.txtDoctorCode.EditingMode = True
-            Me.txtDoctorCode.EndFindValue = Nothing
-            Me.txtDoctorCode.FieldDescription = Nothing
-            Me.txtDoctorCode.FieldName = Nothing
-            Me.txtDoctorCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtDoctorCode.FindEnabled = False
-            Me.txtDoctorCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtDoctorCode.ForeColor = System.Drawing.Color.Black
-            Me.txtDoctorCode.LinkedLabel = Nothing
-            Me.txtDoctorCode.Location = New System.Drawing.Point(693, 89)
-            Me.txtDoctorCode.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtDoctorCode.MaximumValue = Nothing
-            Me.txtDoctorCode.MinimumValue = Nothing
-            Me.txtDoctorCode.Name = "txtDoctorCode"
-            Me.txtDoctorCode.OldValue = Nothing
-            Me.txtDoctorCode.OverrideMaxLength = 0
-            Me.txtDoctorCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtDoctorCode.Size = New System.Drawing.Size(80, 23)
-            Me.txtDoctorCode.TabIndex = 16
-            Me.txtDoctorCode.Translatable = False
-            Me.txtDoctorCode.Visible = False
             '
             'txtMRN
             '
@@ -581,7 +512,7 @@
             Me.txtMRN.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtMRN.ForeColor = System.Drawing.Color.Black
             Me.txtMRN.LinkedLabel = Nothing
-            Me.txtMRN.Location = New System.Drawing.Point(372, 26)
+            Me.txtMRN.Location = New System.Drawing.Point(479, 29)
             Me.txtMRN.Margin = New System.Windows.Forms.Padding(1)
             Me.txtMRN.MaximumValue = Nothing
             Me.txtMRN.MinimumValue = Nothing
@@ -590,126 +521,139 @@
             Me.txtMRN.OverrideMaxLength = 0
             Me.txtMRN.ReadOnly = True
             Me.txtMRN.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtMRN.Size = New System.Drawing.Size(93, 23)
+            Me.txtMRN.Size = New System.Drawing.Size(123, 26)
             Me.txtMRN.TabIndex = 28
             Me.txtMRN.Translatable = False
             '
-            'bsInvMedNotesDetails
+            'dtpInvoiceDate
             '
-            Me.bsInvMedNotesDetails.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.InvMedNotesDetailModel)
+            Me.dtpInvoiceDate.AutoSize = True
+            Me.dtpInvoiceDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+            Me.dtpInvoiceDate.CalendarCulture = New System.Globalization.CultureInfo("en-GB")
+            Me.dtpInvoiceDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+            Me.dtpInvoiceDate.DefaultValue = Nothing
+            Me.dtpInvoiceDate.DisplayOnly = True
+            Me.dtpInvoiceDate.DtpDefaultValue = Nothing
+            Me.dtpInvoiceDate.EditingMode = True
+            Me.dtpInvoiceDate.EditsAllowed = False
+            Me.dtpInvoiceDate.ForeColor = System.Drawing.Color.Black
+            Me.dtpInvoiceDate.LinkedLabel = Nothing
+            Me.dtpInvoiceDate.Location = New System.Drawing.Point(150, 85)
+            Me.dtpInvoiceDate.Margin = New System.Windows.Forms.Padding(1)
+            Me.dtpInvoiceDate.Name = "dtpInvoiceDate"
+            Me.dtpInvoiceDate.ReadOnlyDp = True
+            Me.dtpInvoiceDate.SecurityKey = Nothing
+            Me.dtpInvoiceDate.ShowLongDate = False
+            Me.dtpInvoiceDate.ShowTime = False
+            Me.dtpInvoiceDate.Size = New System.Drawing.Size(98, 27)
+            Me.dtpInvoiceDate.TabIndex = 12
+            Me.dtpInvoiceDate.TargetCalendar = CType(resources.GetObject("dtpInvoiceDate.TargetCalendar"), System.Globalization.Calendar)
+            Me.dtpInvoiceDate.Translatable = False
+            Me.dtpInvoiceDate.Value = Nothing
+            Me.dtpInvoiceDate.ValueIsMandatory = False
+            Me.dtpInvoiceDate.ValueIsNullable = False
+            '
+            'CLabel5
+            '
+            Me.CLabel5.AutoSize = True
+            Me.CLabel5.BackColor = System.Drawing.Color.Transparent
+            Me.CLabel5.DisplayOnly = True
+            Me.CLabel5.EditingMode = False
+            Me.CLabel5.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.CLabel5.Location = New System.Drawing.Point(367, 85)
+            Me.CLabel5.Margin = New System.Windows.Forms.Padding(1)
+            Me.CLabel5.Name = "CLabel5"
+            Me.CLabel5.Size = New System.Drawing.Size(69, 20)
+            Me.CLabel5.TabIndex = 20
+            Me.CLabel5.Text = "Gender:"
+            Me.CLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.CLabel5.Translatable = True
+            '
+            'txtDoctorCode
+            '
+            Me.txtDoctorCode.BackColor = System.Drawing.Color.White
+            Me.txtDoctorCode.BegFindValue = Nothing
+            Me.txtDoctorCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtDoctorCode.ComputedValue = False
+            Me.txtDoctorCode.CustomFormat = Nothing
+            Me.txtDoctorCode.DataBoundControl = True
+            Me.txtDoctorCode.EditingMode = True
+            Me.txtDoctorCode.EndFindValue = Nothing
+            Me.txtDoctorCode.FieldDescription = Nothing
+            Me.txtDoctorCode.FieldName = Nothing
+            Me.txtDoctorCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtDoctorCode.FindEnabled = False
+            Me.txtDoctorCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtDoctorCode.ForeColor = System.Drawing.Color.Black
+            Me.txtDoctorCode.LinkedLabel = Nothing
+            Me.txtDoctorCode.Location = New System.Drawing.Point(924, 110)
+            Me.txtDoctorCode.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtDoctorCode.MaximumValue = Nothing
+            Me.txtDoctorCode.MinimumValue = Nothing
+            Me.txtDoctorCode.Name = "txtDoctorCode"
+            Me.txtDoctorCode.OldValue = Nothing
+            Me.txtDoctorCode.OverrideMaxLength = 0
+            Me.txtDoctorCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtDoctorCode.Size = New System.Drawing.Size(106, 26)
+            Me.txtDoctorCode.TabIndex = 16
+            Me.txtDoctorCode.Translatable = False
+            Me.txtDoctorCode.Visible = False
             '
             'DataGridViewTextBoxColumn2
             '
-            Me.DataGridViewTextBoxColumn2.BegFindValue = Nothing
             Me.DataGridViewTextBoxColumn2.DataPropertyName = "IdNo"
-            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
-            Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle2
-            Me.DataGridViewTextBoxColumn2.EditingMode = False
-            Me.DataGridViewTextBoxColumn2.EndFindValue = Nothing
-            Me.DataGridViewTextBoxColumn2.FieldDescription = Nothing
-            Me.DataGridViewTextBoxColumn2.FieldName = Nothing
-            Me.DataGridViewTextBoxColumn2.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.DataGridViewTextBoxColumn2.FindEnabled = False
             Me.DataGridViewTextBoxColumn2.HeaderText = "IdNo"
-            Me.DataGridViewTextBoxColumn2.IgnoreCase = False
             Me.DataGridViewTextBoxColumn2.MinimumWidth = 6
             Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
             Me.DataGridViewTextBoxColumn2.ReadOnly = True
-            Me.DataGridViewTextBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.DataGridViewTextBoxColumn2.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.DataGridViewTextBoxColumn2.Translatable = False
-            Me.DataGridViewTextBoxColumn2.Visible = False
-            Me.DataGridViewTextBoxColumn2.Width = 36
+            Me.DataGridViewTextBoxColumn2.Width = 65
             '
-            'dgvSeq
+            'SeqDataGridViewTextBoxColumn
             '
-            Me.dgvSeq.BegFindValue = Nothing
-            Me.dgvSeq.DataPropertyName = "Seq"
-            DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
-            Me.dgvSeq.DefaultCellStyle = DataGridViewCellStyle3
-            Me.dgvSeq.DisplayOnly = True
-            Me.dgvSeq.EditingMode = True
-            Me.dgvSeq.EndFindValue = Nothing
-            Me.dgvSeq.FieldDescription = Nothing
-            Me.dgvSeq.FieldName = Nothing
-            Me.dgvSeq.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.dgvSeq.FindEnabled = False
-            Me.dgvSeq.HeaderText = "Seq"
-            Me.dgvSeq.IgnoreCase = False
-            Me.dgvSeq.MinimumWidth = 6
-            Me.dgvSeq.Name = "dgvSeq"
-            Me.dgvSeq.ReadOnly = True
-            Me.dgvSeq.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvSeq.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.dgvSeq.Translatable = False
-            Me.dgvSeq.Width = 51
+            Me.SeqDataGridViewTextBoxColumn.DataPropertyName = "Seq"
+            Me.SeqDataGridViewTextBoxColumn.HeaderText = "Seq"
+            Me.SeqDataGridViewTextBoxColumn.MinimumWidth = 6
+            Me.SeqDataGridViewTextBoxColumn.Name = "SeqDataGridViewTextBoxColumn"
+            Me.SeqDataGridViewTextBoxColumn.ReadOnly = True
+            Me.SeqDataGridViewTextBoxColumn.Width = 61
             '
-            'dgvItemCode
+            'ItemCodeDataGridViewTextBoxColumn
             '
-            Me.dgvItemCode.BegFindValue = Nothing
-            Me.dgvItemCode.DataPropertyName = "ItemCode"
-            DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
-            Me.dgvItemCode.DefaultCellStyle = DataGridViewCellStyle4
-            Me.dgvItemCode.DisplayOnly = True
-            Me.dgvItemCode.EditingMode = True
-            Me.dgvItemCode.EndFindValue = Nothing
-            Me.dgvItemCode.FieldDescription = Nothing
-            Me.dgvItemCode.FieldName = Nothing
-            Me.dgvItemCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.dgvItemCode.FindEnabled = False
-            Me.dgvItemCode.HeaderText = "ItemCode"
-            Me.dgvItemCode.IgnoreCase = False
-            Me.dgvItemCode.MinimumWidth = 6
-            Me.dgvItemCode.Name = "dgvItemCode"
-            Me.dgvItemCode.ReadOnly = True
-            Me.dgvItemCode.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvItemCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.dgvItemCode.Translatable = False
-            Me.dgvItemCode.Width = 77
+            Me.ItemCodeDataGridViewTextBoxColumn.DataPropertyName = "ItemCode"
+            Me.ItemCodeDataGridViewTextBoxColumn.HeaderText = "ItemCode"
+            Me.ItemCodeDataGridViewTextBoxColumn.MinimumWidth = 6
+            Me.ItemCodeDataGridViewTextBoxColumn.Name = "ItemCodeDataGridViewTextBoxColumn"
+            Me.ItemCodeDataGridViewTextBoxColumn.ReadOnly = True
+            Me.ItemCodeDataGridViewTextBoxColumn.Width = 94
             '
-            'dgvItemName
+            'ItemNameDataGridViewTextBoxColumn
             '
-            Me.dgvItemName.BegFindValue = Nothing
-            Me.dgvItemName.DataPropertyName = "ItemName"
-            DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
-            Me.dgvItemName.DefaultCellStyle = DataGridViewCellStyle5
-            Me.dgvItemName.DisplayOnly = True
-            Me.dgvItemName.EditingMode = True
-            Me.dgvItemName.EndFindValue = Nothing
-            Me.dgvItemName.FieldDescription = Nothing
-            Me.dgvItemName.FieldName = Nothing
-            Me.dgvItemName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.dgvItemName.FindEnabled = False
-            Me.dgvItemName.HeaderText = "ItemName"
-            Me.dgvItemName.IgnoreCase = False
-            Me.dgvItemName.MinimumWidth = 6
-            Me.dgvItemName.Name = "dgvItemName"
-            Me.dgvItemName.ReadOnly = True
-            Me.dgvItemName.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvItemName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.dgvItemName.Translatable = False
-            Me.dgvItemName.Width = 80
+            Me.ItemNameDataGridViewTextBoxColumn.DataPropertyName = "ItemName"
+            Me.ItemNameDataGridViewTextBoxColumn.HeaderText = "ItemName"
+            Me.ItemNameDataGridViewTextBoxColumn.MinimumWidth = 6
+            Me.ItemNameDataGridViewTextBoxColumn.Name = "ItemNameDataGridViewTextBoxColumn"
+            Me.ItemNameDataGridViewTextBoxColumn.ReadOnly = True
+            Me.ItemNameDataGridViewTextBoxColumn.Width = 98
             '
-            'dgvNote
+            'NoteDataGridViewTextBoxColumn
             '
-            Me.dgvNote.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-            Me.dgvNote.DataPropertyName = "Note"
-            Me.dgvNote.HeaderText = "Note"
-            Me.dgvNote.Name = "dgvNote"
-            Me.dgvNote.ReadOnly = True
+            Me.NoteDataGridViewTextBoxColumn.DataPropertyName = "Note"
+            Me.NoteDataGridViewTextBoxColumn.HeaderText = "Note"
+            Me.NoteDataGridViewTextBoxColumn.MinimumWidth = 6
+            Me.NoteDataGridViewTextBoxColumn.Name = "NoteDataGridViewTextBoxColumn"
+            Me.NoteDataGridViewTextBoxColumn.ReadOnly = True
+            Me.NoteDataGridViewTextBoxColumn.Width = 65
             '
             'InvMedNotesForm
             '
-            Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+            Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
             Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
             Me.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.GreenGradientBackgroundLarge
-            Me.ClientSize = New System.Drawing.Size(767, 373)
+            Me.ClientSize = New System.Drawing.Size(1023, 459)
             Me.Controls.Add(Me.CFlowLayout2)
             Me.Controls.Add(Me.txtDoctorCode)
+            Me.FormCulture = New System.Globalization.CultureInfo("en-US")
+            Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
             Me.Name = "InvMedNotesForm"
             Me.Text = "Invoice Notes Editor"
             Me.Controls.SetChildIndex(Me.txtDoctorCode, 0)
@@ -776,10 +720,10 @@
         Friend WithEvents txtNationality As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents CLabel8 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtMRN As Libraries.CBaseControlsLibrary.CTextBox
-        Friend WithEvents DataGridViewTextBoxColumn2 As Libraries.CBaseControlsLibrary.CDgvTextColumn
-        Friend WithEvents dgvSeq As Libraries.CBaseControlsLibrary.CDgvTextColumn
-        Friend WithEvents dgvItemCode As Libraries.CBaseControlsLibrary.CDgvTextColumn
-        Friend WithEvents dgvItemName As Libraries.CBaseControlsLibrary.CDgvTextColumn
-        Friend WithEvents dgvNote As DataGridViewTextBoxColumn
+        Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
+        Friend WithEvents SeqDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents ItemCodeDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents ItemNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents NoteDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     End Class
 End Namespace

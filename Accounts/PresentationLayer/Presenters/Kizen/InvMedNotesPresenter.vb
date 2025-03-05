@@ -48,13 +48,13 @@ Namespace PresentationLayer.Presenters
         Private Sub UpdateData()
             Dim InvMedNotesModel As New InvMedNotesModel
             If View.InvoiceNo = 0 Then
-                InvMedNotesModel = Nothing
+                'InvMedNotesModel = Nothing
             Else
                 InvMedNotesModel = Service.GetRecordByIdNo(Of InvMedNotesModel)(View.InvoiceNo)
+                GlobalFunctions.ManualMap(InvMedNotesModel, View)
+                View.InvMedNotesDetails = View.InvMedNotesDetails
             End If
-            GlobalVariables.Mapper.Map(InvMedNotesModel, View)
         End Sub
-
 
     End Class
 

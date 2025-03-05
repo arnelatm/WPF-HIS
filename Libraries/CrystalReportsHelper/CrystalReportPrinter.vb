@@ -37,6 +37,8 @@ Public Class CrystalReportPrinter
                 UseDefaultConnection()
             Case $"IGROUPCLINIC"
                 UseIGroupConnection()
+            Case $"KIZEN"
+                UseKizenConnection()
             Case Else
                 MessageBox.Show($"No database connection specified or connection name not recognized.")
                 Debugger.Break()
@@ -56,6 +58,8 @@ Public Class CrystalReportPrinter
                 UseDefaultConnection()
             Case $"IGROUPCLINIC"
                 UseIGroupConnection()
+            Case $"KIZEN"
+                UseKizenConnection()
             Case Else
                 MessageBox.Show($"No database connection specified or connection name not recognized.")
                 Debugger.Break()
@@ -82,6 +86,14 @@ Public Class CrystalReportPrinter
         _pwd = ConfigurationManager.AppSettings.Get("PWD")
         _server = ConfigurationManager.AppSettings.Get("ServerTranslator")
         _database = ConfigurationManager.AppSettings.Get("DatabaseIGroup")
+    End Sub
+
+    Private Sub UseKizenConnection()
+        _reportPath = ConfigurationManager.AppSettings.Get("ReportPathsKizen")
+        _uid = "Arnel"
+        _pwd = "JaSi5214@"
+        _server = "Ibn-Server\Kizen"
+        _database = "kizenClinic"
     End Sub
 
     Public Property ReportFileName() As String
@@ -224,6 +236,14 @@ Public Class CrystalReportPrinter
         Next
     End Sub
 
+    Public Sub SetParameterValues(args() As Object)
+        For i = 0 To args.Length - 1 Step 2
+            Dim value As Object = GlobalFunctions.ConvertObjectToType(args(i))
+            Dim name As String = args(i + 1).ToString()
+            _report.SetParameterValue(name, value)
+        Next
+    End Sub
+
     Public Sub ClearDataSourceConnections()
         _report.DataSourceConnections.Clear()
     End Sub
@@ -252,6 +272,7 @@ Public Class CrystalReportPrinter
         Return PrinterSettings.InstalledPrinters.Cast(Of String)().Any(Function(name) printerName.ToUpper().Trim() = name.ToUpper().Trim())
     End Function
 
+
     Public Class CrPrintableArgs
 
         Public Property ReportFileName As String
@@ -264,6 +285,7 @@ Public Class CrystalReportPrinter
         Public Property StartPage As Integer = 0
         Public Property EndPage As Integer = 0
         Public Property ReportTitle As String = ""
+
 
     End Class
 
