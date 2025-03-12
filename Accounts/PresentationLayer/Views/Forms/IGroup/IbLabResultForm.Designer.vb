@@ -123,7 +123,7 @@
             Me.CFlowLayout2.Location = New System.Drawing.Point(0, 55)
             Me.CFlowLayout2.Margin = New System.Windows.Forms.Padding(4)
             Me.CFlowLayout2.Name = "CFlowLayout2"
-            Me.CFlowLayout2.Size = New System.Drawing.Size(1530, 382)
+            Me.CFlowLayout2.Size = New System.Drawing.Size(1530, 666)
             Me.CFlowLayout2.TabIndex = 5
             '
             'TableLayoutPanel1
@@ -819,9 +819,10 @@
             Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
             Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
             Me.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.GreenGradientBackgroundLarge
-            Me.ClientSize = New System.Drawing.Size(1530, 437)
+            Me.ClientSize = New System.Drawing.Size(1530, 721)
             Me.Controls.Add(Me.CFlowLayout2)
             Me.Controls.Add(Me.txtDoctorCode)
+            Me.FormCulture = New System.Globalization.CultureInfo("en-US")
             Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
             Me.Name = "IbLabResultForm"
             Me.Text = "Diagnostic Result Entry Form"
