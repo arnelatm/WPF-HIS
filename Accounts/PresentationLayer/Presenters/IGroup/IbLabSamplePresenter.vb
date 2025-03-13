@@ -1,4 +1,5 @@
-﻿Imports AATM.Accounts.BusinessLayer
+﻿Imports System.Text.RegularExpressions
+Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
@@ -179,7 +180,7 @@ Namespace PresentationLayer.Presenters
             If gender = "F" Then
                 pregnant = True
             ElseIf gender = "M" Then
-                pregnant = Nothing
+                pregnant = False
             Else
                 pregnant = False
             End If
@@ -204,26 +205,26 @@ Namespace PresentationLayer.Presenters
                 If .IdNo < 0 Then
                     AddNewRecord(bindingSource.Current)
                 Else
-                    _ibLabResultDetailDao.UpdateRecord(.IdNo, .passportNumber, ActualValue(.clinical), ActualValue(.Xray), ActualValue(.TBSputum),
-                                                   ActualValue(.hivEliza), ActualValue(.HCVEliza), ActualValue(.hbsagEliza), ActualValue(.malaria),
-                                                   ActualValue(.vdrl), ActualValue(.Widal), ActualValue(.pregnancy), ActualValue(.bilharziasisUrine),
-                                                   ActualValue(.bilharziasisStool), ActualValue(.shigella), ActualValue(.cholera))
+                    _ibLabResultDetailDao.UpdateRecord(.IdNo, .passportNumber, .clinical, .Xray, .TBSputum,
+                                                   .hivEliza, .HCVEliza, .hbsagEliza, .malaria,
+                                                   .vdrl, .Widal, .pregnancy, .bilharziasisUrine,
+                                                   .bilharziasisStool, .shigella, .cholera)
 
                 End If
             End With
         End Sub
 
-        Public Function SetActualValue(displayValue As Boolean?) As Boolean?
-            If displayValue.HasValue Then
-                If displayValue Then
-                    Return True
-                Else
-                    Return Nothing
-                End If
-            Else
-                Return False
-            End If
-        End Function
+        'Public Function SetActualValue(displayValue As Boolean?) As Boolean?
+        '    If displayValue.HasValue Then
+        '        If displayValue Then
+        '            Return True
+        '        Else
+        '            Return Nothing
+        '        End If
+        '    Else
+        '        Return False
+        '    End If
+        'End Function
 
         Private Sub GetIbLabResults(transactionDate As Date?)
             UpdateData()

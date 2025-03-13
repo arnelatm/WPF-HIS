@@ -32,6 +32,8 @@ Namespace PresentationLayer.Views.Forms
             DisplaySetup()
             _connectionName = parameter(0)
             _testType = parameter(1)
+            BindIbLabResultDisplay()
+            'bsIbLabResultDetails.ResetBindings(False)
         End Sub
 
         Private Sub DisplaySetup()
@@ -53,7 +55,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 _ibLabResultDetails = Value
-                BindIbLabResultDisplay()
+                'BindIbLabResultDisplay()
             End Set
         End Property
 
@@ -72,10 +74,12 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub btnRefresh_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnRefresh.ClickButtonArea
             RaiseEvent IbLabResultRequested(TransactionDate)
+            bsIbLabResultDetails.ResetBindings(False)
         End Sub
 
         Private Sub IbLabResultCollectionForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             RaiseEvent IbLabResultRequested(TransactionDate)
+            bsIbLabResultDetails.ResetBindings(False)
             'dgvClinical.ThreeState = True
             ''dgvAge.DisplayOnly = True
             'For Each col In DataGridViewIbLabResultDetails.Columns
@@ -97,6 +101,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub dtpTransactionDate_Validated(sender As Object, e As EventArgs) Handles dtpTransactionDate.Validated
             RaiseEvent IbLabResultRequested(TransactionDate)
+            bsIbLabResultDetails.ResetBindings(False)
         End Sub
 
         Private Sub DataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs)
@@ -157,6 +162,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles CButton1.ClickButtonArea
             RaiseEvent FillUpButtonClicked()
+            bsIbLabResultDetails.ResetBindings(False)
         End Sub
 
         Private Sub oncellendedit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewIbLabResultDetails.CellEndEdit
