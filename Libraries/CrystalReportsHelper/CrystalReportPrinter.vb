@@ -91,10 +91,10 @@ Public Class CrystalReportPrinter
 
     Private Sub UseKizenConnection()
         _reportPath = ConfigurationManager.AppSettings.Get("ReportPathsKizen")
-        _uid = "Arnel"
-        _pwd = "JaSi5214@"
-        _server = "Ibn-Server\Kizen"
-        _database = "kizenClinic"
+        _uid = ConfigurationManager.AppSettings.Get("UIDKizen")
+        _pwd = ConfigurationManager.AppSettings.Get("PWDKizen")
+        _server = ConfigurationManager.AppSettings.Get("ServerTranslatorKizen")
+        _database = ConfigurationManager.AppSettings.Get("DatabaseKizen")
     End Sub
 
     Public Property ReportFileName() As String

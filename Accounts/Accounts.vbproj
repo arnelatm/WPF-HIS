@@ -2839,6 +2839,7 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
+    <None Include="app -  ibn-server - Kizen %28local ispadmin2%29.config" />
     <None Include="app - Copy.config" />
     <None Include="app.config" />
     <None Include="app-kizen.config" />
