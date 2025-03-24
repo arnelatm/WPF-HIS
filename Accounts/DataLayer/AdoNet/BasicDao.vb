@@ -71,7 +71,7 @@ Namespace DataLayer.AdoNet
             Dim values As String = "@Code,@Name,@NameAra"
             If WithNotes Then
                 fields += ",Notes"
-                values += ",@BranchIdNo"
+                values += ",@Notes"
             End If
             If LimitToBranch Then
                 fields += ",BranchIdNo"
