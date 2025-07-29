@@ -25,6 +25,9 @@ Public Class BfMain
     Private _formCulture As CultureInfo
     Private _systemViewIdNo As Int32
     Private _firstLoadSwitch As Int32 = 0
+    Private _translationCache As Dictionary(Of String, String)
+    Private _translationCacheLanguage As String
+    Private _translationCacheViewId As Integer
 
     'Private _myPresenter As UserPresenter
     Protected CaptionCollection As New Collection
@@ -60,6 +63,7 @@ Public Class BfMain
         MyBase.New()
         ' This call is required by the designer.
         InitializeComponent()
+                Ea = New EventAggregator
         If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
             TranslatorDAC = transDac
             AppDataDAC = appDac
@@ -82,6 +86,7 @@ Public Class BfMain
         End Get
         Set(value As String)
             If value <> _textDisplayLanguage Then
+                InvalidateTranslationCache() ' Invalidate cache when language changes
                 _textDisplayLanguage = value
                 SetCulture(_textDisplayLanguage)
                 RaiseEvent TextDisplayLanguageChanged()
@@ -127,15 +132,63 @@ Public Class BfMain
         End Set
     End Property
 
-    'Public Sub SetupDisplay()
-    '    If IsRightToLeft(_textDisplayLanguage) Then
-    '        RightToLeft = RightToLeft.Yes
-    '        RightToLeftLayout = True
-    '    Else
-    '        RightToLeft = RightToLeft.No
-    '        RightToLeftLayout = False
+    'Private Function BuildTranslationDictionary()
+    '    ' Build the translation dictionary once
+    '    Dim translationDict As New Dictionary(Of String, String)(StringComparer.OrdinalIgnoreCase)
+    '    If Dv IsNot Nothing AndAlso Dv.Table IsNot Nothing Then
+    '        Dim captionCol As String = ""
+    '        Dim translatedCol As String = ""
+    '        If Dv.Table.Columns.Contains("Caption") Then captionCol = "Caption"
+    '        If Dv.Table.Columns.Contains("TranslatedCaption") Then translatedCol = "TranslatedCaption"
+    '        If captionCol = "" OrElse translatedCol = "" Then
+    '            ' Optionally log: missing columns
+    '            Return Nothing
+    '        End If
+    '        For Each row As DataRowView In Dv
+    '            Dim key = Convert.ToString(row(captionCol))
+    '            Dim value = Convert.ToString(row(translatedCol))
+    '            If Not translationDict.ContainsKey(key) Then
+    '                translationDict.Add(key, value)
+    '            End If
+    '        Next
     '    End If
-    'End Sub
+    '    Return translationDict
+    'End Function
+
+    Private Function GetTranslationDictionary(languageIdNo As Integer) As Dictionary(Of String, String)
+        Dim currentLanguage = TextDisplayLanguage
+        Dim currentViewId = GetSystemViewIdNo()
+
+        ' Use cache if valid
+        If _translationCache IsNot Nothing AndAlso
+          _translationCacheLanguage = currentLanguage AndAlso
+          _translationCacheViewId = currentViewId Then
+            Return _translationCache
+        End If
+
+        ' Build dictionary from DataSet
+        Dim translations As DataSet = GetTranslations(languageIdNo)
+        Dim dict As New Dictionary(Of String, String)(StringComparer.OrdinalIgnoreCase)
+        If translations IsNot Nothing AndAlso translations.Tables.Count > 0 Then
+            Dim table = translations.Tables(0)
+            If table.Columns.Contains("Caption") AndAlso table.Columns.Contains("translatedCaption") Then
+                For Each row As DataRow In table.Rows
+                    Dim key = Convert.ToString(row("Caption"))
+                    Dim value = Convert.ToString(row("translatedCaption"))
+                    If Not dict.ContainsKey(key) Then
+                        dict.Add(key, value)
+                    End If
+                Next
+            End If
+        End If
+
+        ' Update cache
+        _translationCache = dict
+        _translationCacheLanguage = currentLanguage
+        _translationCacheViewId = currentViewId
+        Return dict
+    End Function
+
 
     Function IsTranslatable(ByRef ctrl As Control) As Boolean
         If TypeOf ctrl Is IEntryControl Then
@@ -295,7 +348,7 @@ Public Class BfMain
             If (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
                 ' continue
             Else
-                Dim targetLanguageIdNo As Short = GetTargetLanguageIdNo(desiredLanguage, allowFallBack)
+                targetLanguageIdNo = GetTargetLanguageIdNo(desiredLanguage, allowFallBack)
                 If targetLanguageIdNo = 0 Then
                     UseOriginalCaptions()
                 Else
@@ -303,7 +356,8 @@ Public Class BfMain
                 End If
             End If
         Catch ex As Exception
-
+            Messaging.Show("Error while translating form: " + ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Debugger.Break()
         End Try
     End Sub
 
@@ -312,7 +366,6 @@ Public Class BfMain
         Dim desiredLanguageIdNo As Int16
         Dim fallBackLanguageIdNo As Int16
         Dim fallBackLanguage As String
-        Dim targetLanguageIdNo As Int16
         If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
             cmd = "Select IdNo from Languages where cultureInfoCode = '" + desiredLanguage + "'"
             desiredLanguageIdNo = TranslatorDAC.ExecScalar(Of Int16)(cmd)
@@ -340,61 +393,90 @@ Public Class BfMain
         Return targetLanguageIdNo
     End Function
 
+    Private Sub InvalidateTranslationCache()
+        _translationCache = Nothing
+        _translationCacheLanguage = Nothing
+        _translationCacheViewId = 0
+    End Sub
+
     Protected Sub TranslateToLanguageIdNo(ByRef allCtrl As List(Of Control), targetLanguageIdNo As Integer)
-        Dim translations As DataSet = GetTranslations(targetLanguageIdNo)
-        Dv = translations.Tables(0).DefaultView
-        Dv.Sort = "Caption"
-        Dim r As Integer
-        If Tag Is Nothing Then
-            r = 0
-        Else
-            r = Dv.Find(Tag.ToString.TrimEnd)
-        End If
-        If r > 0 Then
-            Text = Dv(r).Item("translatedCaption")
-        Else
-            Text = Tag
-        End If
+        'Dim translations As DataSet = GetTranslations(targetLanguageIdNo)
+        Dim translationDict = GetTranslationDictionary(targetLanguageIdNo)
+        'BuildTranslationDictionary(targetLanguageIdNo)
+        Dim translated As String = Nothing
+
+        'Dv = translations.Tables(0).DefaultView
+        'Dv.Sort = "Caption"
+        'Dim r As Integer = -1
+        'If Tag IsNot Nothing Then
+        '    r = Dv.Find(Tag.ToString.TrimEnd)
+        'End If
+        'If r >= 0 AndAlso Dv.Table.Columns.Contains("translatedCaption") Then
+        '    Text = Convert.ToString(Dv(r).Item("translatedCaption"))
+        'ElseIf Tag IsNot Nothing Then
+        '    Text = Tag.ToString()
+        'Else
+        '    Text = String.Empty
+        'End If
         For Each cCtrl As Control In allCtrl
-            If IsTranslatable(cCtrl) Then
-                If TypeOf cCtrl Is MenuStrip Then
-                    Dim subMenuName = ""
-                    Dim menuStrip As MenuStrip = cCtrl
-                    TranslateMenuStripItems(menuStrip.Items, subMenuName)
-                ElseIf TypeOf cCtrl Is ToolStrip Then
-                    TranslateToolStripItems(cCtrl)
-                ElseIf TypeOf cCtrl Is CTreeViewOld Or TypeOf cCtrl Is TreeView Then
-                ElseIf TypeOf cCtrl Is DataGridView Then
-                    TranslateDataGridView(cCtrl)
-                ElseIf TypeOf cCtrl Is DataGrid Then
-                    _originalText = CaptionCollection.Item(cCtrl.Name)
-                    r = Dv.Find(_originalText)
-                    If r >= 0 Then
-                        CType(cCtrl, DataGrid).CaptionText = Dv(r).Item(1)
-                    Else
-                        CType(cCtrl, DataGrid).CaptionText = cCtrl.Tag
-                    End If
-                ElseIf TypeOf cCtrl Is CTabControl Then
-                    TranslateTabControl(cCtrl)
-                Else
-                    If TypeOf cCtrl Is CButton Then
-                        TranslateButton(cCtrl)
-                    End If
-                    Try
-                        _originalText = CaptionCollection.Item(cCtrl.Name)
-                        'if _originalText = "Gender" then
-                        '    debugger.Break()
-                        'End If
-                        r = Dv.Find(_originalText)
-                        If r >= 0 Then
-                            cCtrl.Text = Dv(r).Item("TranslatedCaption")
-                        Else
-                            cCtrl.Text = cCtrl.Tag
-                        End If
-                    Catch ex As Exception
-                        cCtrl.Text = cCtrl.Tag
-                    End Try
+            If Not IsTranslatable(cCtrl) Then Continue For
+
+            If TypeOf cCtrl Is MenuStrip Then
+                Dim subMenuName As String = ""
+                Dim menuStrip As MenuStrip = CType(cCtrl, MenuStrip)
+                TranslateMenuStripItems(menuStrip.Items, subMenuName)
+
+            ElseIf TypeOf cCtrl Is ToolStrip Then
+                TranslateToolStripItems(cCtrl)
+
+            ElseIf TypeOf cCtrl Is CTreeViewOld Or TypeOf cCtrl Is TreeView Then
+                ' No translation needed for tree view controls here
+
+            ElseIf TypeOf cCtrl Is DataGridView Then
+                TranslateDataGridView(cCtrl, targetLanguageIdNo)
+
+            ElseIf TypeOf cCtrl Is DataGrid Then
+                Dim originalText As String = cCtrl.Name
+                If CaptionCollection.Contains(cCtrl.Name) Then
+                    originalText = CaptionCollection.Item(cCtrl.Name)
                 End If
+                '_originalText = CaptionCollection.Item(cCtrl.Name)
+
+                If translationDict.TryGetValue(originalText, translated) Then
+                    CType(cCtrl, DataGrid).CaptionText = translated
+                ElseIf cCtrl.Tag IsNot Nothing Then
+                    CType(cCtrl, DataGrid).CaptionText = cCtrl.Tag.ToString()
+                Else
+                    CType(cCtrl, DataGrid).CaptionText = String.Empty
+                End If
+
+            ElseIf TypeOf cCtrl Is CTabControl Then
+                TranslateTabControl(cCtrl)
+
+            Else
+                If TypeOf cCtrl Is CButton Then
+                    TranslateButton(cCtrl)
+                End If
+                Dim originalText As String = cCtrl.Name
+                If CaptionCollection.Contains(cCtrl.Name) Then
+                    originalText = CaptionCollection.Item(cCtrl.Name)
+                End If
+                If translationDict.TryGetValue(originalText, translated) Then
+                    cCtrl.Text = translated
+                ElseIf cCtrl.Tag IsNot Nothing Then
+                    cCtrl.Text = cCtrl.Tag.ToString()
+                Else
+                    cCtrl.Text = String.Empty
+                End If
+                'r = Dv.Find(originalText)
+                'If r >= 0 AndAlso Dv.Table.Columns.Contains("TranslatedCaption") Then
+                '    cCtrl.Text = Convert.ToString(Dv(r).Item("TranslatedCaption"))
+                'ElseIf cCtrl.Tag IsNot Nothing Then
+                '    cCtrl.Text = cCtrl.Tag.ToString()
+                'Else
+                '    cCtrl.Text = String.Empty
+                'End If
+
             End If
         Next
     End Sub
@@ -438,10 +520,6 @@ Public Class BfMain
                     End If
                 End If
             End If
-            'If TypeOf cCtrl Is CtDataGridView Or TypeOf cCtrl Is CtDataGridView Then
-            '    Dim cControl As CtDataGridView = DirectCast(cCtrl, CtDataGridView)
-            '    cControl.MakeGridSearchable()
-            'End If
         Next
     End Sub
 
@@ -460,90 +538,6 @@ Public Class BfMain
         cmd = "SELECT IdNo FROM SystemView where SystemViewName ='" + ViewDisplayName.Trim() + "'"
         Return TranslatorDAC.ExecScalar(Of Int16)(cmd)
     End Function
-
-    'Protected Sub TranslateControls(targetLanguageIdNo As Integer)
-    '    Dim cmd As String
-    '    cmd = "Select Caption, translatedCaption from SystemViewItemOriginal_view where LanguageIdNo = " + targetLanguageIdNo.ToString() + " and SystemViewIdNo = " + VSystemViewIdNo.ToString()
-    '    Dim translations As DataSet
-    '    translations = TranslatorDAC.ReturnDs(cmd)
-    '    Dv = translations.Tables(0).DefaultView
-    '    Dv.Sort = "Caption"
-    '    Dim r As Integer
-    '    If Tag Is Nothing Then
-    '        r = 0
-    '    Else
-    '        r = Dv.Find(Tag.ToString.TrimEnd)
-    '    End If
-    '    If r > 0 Then
-    '        Text = Dv(r).Item("translatedCaption")
-    '    Else
-    '        Text = Tag
-    '    End If
-    '    Dim allCtrl As New List(Of Control)
-    '    For Each cCtrl As Control In FindControlRecursive(allCtrl, Me)
-    '        If IsTranslatable(cCtrl) Then
-    '            If TypeOf cCtrl Is MenuStrip Then
-    '                Dim subMenuName = ""
-    '                Dim menuStrip As MenuStrip = cCtrl
-    '                TranslateMenuStripItems(menuStrip.Items, subMenuName)
-    '            ElseIf TypeOf cCtrl Is ToolStrip Then
-    '                TranslateToolStripItems(cCtrl)
-    '            ElseIf TypeOf cCtrl Is CTreeViewOld Or TypeOf cCtrl Is TreeView Then
-    '                Dim cT = CType(cCtrl, TreeView)
-    '                cT.ExpandAll()
-    '                'cT.RightToLeftLayout = GlobalVariables.RightToLeftLayout
-    '                'cT.RightToLeft = If(GlobalVariables.RightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
-    '            ElseIf TypeOf cCtrl Is DataGridView Then
-    '                '_originalText = CaptionCollection.Item(cCtrl.Name)
-    '                'r = Dv.Find(_originalText)
-    '                'If r >= 0 Then
-    '                ' CType(cCtrl, DataGridView).Text = Dv(r).Item(1)
-    '                'Else
-    '                'CType(cCtrl, DataGridView).Text = cCtrl.Tag
-    '                'End If
-    '                TranslateDataGridView(cCtrl)
-    '            ElseIf TypeOf cCtrl Is DataGrid Then
-    '                _originalText = CaptionCollection.Item(cCtrl.Name)
-    '                r = Dv.Find(_originalText)
-    '                If r >= 0 Then
-    '                    CType(cCtrl, DataGrid).CaptionText = Dv(r).Item(1)
-    '                Else
-    '                    CType(cCtrl, DataGrid).CaptionText = cCtrl.Tag
-    '                End If
-    '            Else
-    '                If TypeOf cCtrl Is CButton Then
-    '                    TranslateButton(cCtrl)
-    '                ElseIf TypeOf cCtrl Is CTabControl Then
-    '                    Dim tc = CType(cCtrl, CTabControl)
-    '                    tc.RightToLeft = If(GlobalVariables.RightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
-    '                    tc.RightToLeftLayout = GlobalVariables.RightToLeftLayout
-    '                End If
-    '                Try
-    '                    _originalText = CaptionCollection.Item(cCtrl.Name)
-
-    '                    r = Dv.Find(_originalText)
-    '                    If r >= 0 Then
-    '                        cCtrl.Text = Dv(r).Item("TranslatedCaption")
-    '                    Else
-    '                        cCtrl.Text = cCtrl.Tag
-    '                    End If
-    '                Catch ex As Exception
-    '                    cCtrl.Text = cCtrl.Tag
-    '                End Try
-
-    '            End If
-    '        ElseIf TypeOf cCtrl Is CTextBox Then
-    '            Dim tc = CType(cCtrl, CTextBox)
-    '            If tc.ValueIsNumeric Then
-    '                If tc.RightToLeft = RightToLeft.Yes Then
-    '                    tc.TextAlign = HorizontalAlignment.Left
-    '                Else
-    '                    tc.TextAlign = HorizontalAlignment.Right
-    '                End If
-    '            End If
-    '        End If
-    '    Next
-    'End Sub
 
     Private Sub TranslateToolStripItems(ByRef cToolStrip As ToolStrip)
         For Each obj As Object In cToolStrip.Items
@@ -574,24 +568,60 @@ Public Class BfMain
         Next
     End Sub
 
-    Private Sub TranslateDataGridView(ByRef CtDataGridView As DataGridView)
-        Dim cGrid As DataGridView = CtDataGridView
-        Dim r As String
-        For Each column As DataGridViewColumn In cGrid.Columns
-            r = Dv.Find(column.HeaderText)
-            If r >= 0 Then
-                column.HeaderText = Dv(r).Item("TranslatedCaption")
-            Else
-                column.HeaderText = column.Tag
+    Private Sub TranslateDataGridView(ByRef CtDataGridView As DataGridView, ByVal targetLanguageIdNo As Integer)
+        Dim translationDict = GetTranslationDictionary(targetLanguageIdNo)
+        For Each column As DataGridViewColumn In CtDataGridView.Columns
+            Dim lookupKey As String = If(column.Tag IsNot Nothing, column.Tag.ToString(), column.Name)
+            Dim translated As String = Nothing
+            If translationDict.TryGetValue(lookupKey, translated) Then
+                column.HeaderText = translated
+            ElseIf column.Tag IsNot Nothing Then
+                column.HeaderText = column.Tag.ToString()
             End If
+            ' If both translation and tag are missing, keep the current HeaderText
         Next
+        'If Dv Is Nothing OrElse Dv.Table Is Nothing Then Exit Sub
+
+        '' Ensure DataView is sorted by Caption
+        'If Dv.Table.Columns.Contains("Caption") Then
+        '    Dv.Sort = "Caption"
+        'Else
+        '    ' Optionally log: "Caption column missing in translations"
+        '    Exit Sub
+        'End If
+
+        '' Find the correct column name for translation (case-insensitive)
+        'Dim translatedColName As String = ""
+        'If Dv.Table.Columns.Contains("TranslatedCaption") Then
+        '    translatedColName = "TranslatedCaption"
+        'ElseIf Dv.Table.Columns.Contains("translatedCaption") Then
+        '    translatedColName = "translatedCaption"
+        'Else
+        '    ' Optionally log: "TranslatedCaption column missing in translations"
+        '    Exit Sub
+        'End If
+
+        'For Each column As DataGridViewColumn In CtDataGridView.Columns
+        '    Dim r As Integer = -1
+        '    If Not String.IsNullOrEmpty(column.HeaderText) Then
+        '        r = Dv.Find(column.HeaderText)
+        '    End If
+
+        '    If r >= 0 Then
+        '        column.HeaderText = Convert.ToString(Dv(r).Item(translatedColName))
+        '    ElseIf column.Tag IsNot Nothing Then
+        '        column.HeaderText = Convert.ToString(column.Tag)
+        '    End If
+        '    ' If both translation and tag are missing, keep the current HeaderText
+        'Next
+
     End Sub
 
     Private Sub TranslateTabControl(ByRef cTabControl As CTabControl)
         For Each tabPage As TabPage In cTabControl.TabPages
             Dim r As Int16
             r = Dv.Find(tabPage.Tag)
-            If r > 0 Then
+            If r >= 0 Then
                 tabPage.Text = Dv(r).Item("translatedCaption")
             Else
                 tabPage.Text = tabPage.Tag
@@ -599,18 +629,58 @@ Public Class BfMain
         Next
     End Sub
 
+    Private _targetLanguageIdNo As Integer
+
+    Private Property TargetLanguageIdNo As Integer
+        Set(value As Integer)
+            _targetLanguageIdNo = value
+        End Set
+        Get
+            Return _targetLanguageIdNo
+        End Get
+    End Property
+
+
+
     Private Function GetToolStripText(cToolStrip As ToolStrip, obj As Object, propName As String) As String
-        Dim translatedText As String = ""
-        Dim r As Integer
-        If CaptionCollection.Contains(cToolStrip.Name + "." + obj.Name + "." + propName) Then
-            r = Dv.Find(CaptionCollection.Item(cToolStrip.Name + "." + obj.Name + "." + propName))
-            If r > 0 Then
-                translatedText = Dv(r).Item("translatedCaption")
+        Dim key As String = cToolStrip.Name & "." & obj.Name & "." & propName
+        Dim translatedText As String = Nothing
+        Dim translationDict = GetTranslationDictionary(targetLanguageIdNo)
+
+        If translationDict IsNot Nothing AndAlso translationDict.TryGetValue(key, translatedText) Then
+            Return translatedText
+        End If
+
+        ' Fallback: try to get from Tag (if it's an array, pick the right index)
+        If obj.Tag IsNot Nothing Then
+            If TypeOf obj.Tag Is Object() Then
+                Dim tagArr = DirectCast(obj.Tag, Object())
+                If propName = "ToolTipText" AndAlso tagArr.Length > 1 AndAlso tagArr(1) IsNot Nothing Then
+                    Return tagArr(1).ToString()
+                    'End If
+                    'If propName = "Text" AndAlso tagArr.Length > 0 Then
+                    '    Return tagArr(0).ToString()
+                    'ElseIf propName = "ToolTipText" AndAlso tagArr.Length > 1 Then
+                    '    Return tagArr(1).ToString()
+                End If
             Else
-                translatedText = obj.Tag(If(propName = "Text", 0, 1))
+                Return obj.Tag.ToString()
             End If
         End If
-        Return translatedText
+
+        Return String.Empty
+
+        'Dim translatedText As String = ""
+        'Dim r As Integer
+        'If CaptionCollection.Contains(cToolStrip.Name + "." + obj.Name + "." + propName) Then
+        '    r = Dv.Find(CaptionCollection.Item(cToolStrip.Name + "." + obj.Name + "." + propName))
+        '    If r >= 0 Then
+        '        translatedText = Dv(r).Item("translatedCaption")
+        '    Else
+        '        translatedText = obj.Tag(If(propName = "Text", 0, 1))
+        '    End If
+        'End If
+        'Return translatedText
     End Function
 
     Private Sub TranslateButton(cCtrl As Control)
@@ -682,8 +752,13 @@ Public Class BfMain
     End Sub
 
     Private Sub ApplyMenuSecurityNew(ByRef obj As ToolStripMenuItem, ByRef subMenuName As String)
+        Const menuPrefix As String = "ToolStripMenuItem"
         Dim toolStripMenuItem As ToolStripMenuItem = obj
-        Dim controlSecurityKey = subMenuName + " > " + Mid(toolStripMenuItem.Name, 18)
+        Dim shortName As String = toolStripMenuItem.Name
+        If shortName.StartsWith(menuPrefix) Then
+            shortName = shortName.Substring(menuPrefix.Length)
+        End If
+        Dim controlSecurityKey = subMenuName + " > " + shortName
         If GlobalVariables.IsUserLoggedIn Then
             SetMenuSecurity(toolStripMenuItem, controlSecurityKey)
         Else
@@ -691,31 +766,6 @@ Public Class BfMain
             toolStripMenuItem.Visible = True
         End If
     End Sub
-
-    'Private Function ApplyMenuSecurity(ByRef obj As ToolStripMenuItem, ByRef subMenuName As String, ByVal parentIdNo As Int32) As Int32
-    '    Dim toolStripMenuItem As ToolStripMenuItem = obj
-
-    '    Dim controlSecurityKey = subMenuName + " > " + Mid(toolStripMenuItem.Name, 18)
-    '    'Dim service As New Service
-    '    If GlobalVariables.IsUserLoggedIn Then
-    '        SetMenuSecurity(toolStripMenuItem, controlSecurityKey)
-    '        If _addSecurityObject Then
-    '            Dim securityObject As New SecurityObject With {.SecurityObjectName = Mid(toolStripMenuItem.Name, 18),
-    '                    .SystemViewIdNo = _VSystemViewIdNo,
-    '                    .ParentIdNo = parentIdNo}
-    '            parentIdNo = Presenter.AddSecurityObject(securityObject)
-    '        End If
-    '    Else
-    '        toolStripMenuItem.Enabled = False
-    '        toolStripMenuItem.Visible = True
-    '    End If
-    '    If UserIsASuperAdministrator() Then
-    '        ' make all editable and visible regardless of security values
-    '        toolStripMenuItem.Enabled = True
-    '        toolStripMenuItem.Visible = True
-    '    End If
-    '    Return parentIdNo
-    'End Function
 
     Private Sub SetMenuSecurity(cControl As Object, controlSecurityKey As String)
         If UserIsASuperAdmin() Then
@@ -833,42 +883,6 @@ Public Class BfMain
         End If
     End Sub
 
-    'Private Sub InitializeSecurityObject(ByRef cCtrl As Control)
-    '    Dim objectSecurityKey As String
-    '    If TypeOf cCtrl Is MenuStrip Then
-    '        ' check for MenuStrip first because MenuStrip is also a ToolStrip
-    '        Dim subMenuName = MenuFormName + " > " + cCtrl.Name.Trim()
-    '        Dim menuStrip As MenuStrip = cCtrl
-    '        SetMenuSecurity(menuStrip, subMenuName)
-    '        SetMenuStripItemsNew(menuStrip.Items, subMenuName)
-    '    ElseIf TypeOf cCtrl Is ToolStrip Then
-    '        Dim subMenuName = MenuFormName + " > " + cCtrl.Name.TrimEnd()
-    '        Dim toolStrip As ToolStrip = cCtrl
-    '        SetMenuSecurity(toolStrip, subMenuName)
-    '        SetToolStripItemsNew(toolStrip.Items, subMenuName)
-    '    Else
-    '        objectSecurityKey = GetControlSecurityKey(cCtrl)
-    '        If objectSecurityKey Is Nothing Or objectSecurityKey = "" Then
-    '            cCtrl.Visible = True
-    '            cCtrl.Enabled = True
-    '        Else
-    '            Dim controlSecurityValues As ArrayList
-    '            Dim isEditable As Boolean
-    '            Dim isVisible As Boolean
-    '            controlSecurityValues = GetControlSecurityValues(objectSecurityKey)
-    '            If controlSecurityValues.Count > 0 Then
-    '                isVisible = controlSecurityValues(0)
-    '                isEditable = controlSecurityValues(1)
-    '            Else
-    '                isVisible = False
-    '                isEditable = False
-    '            End If
-    '            SetControlVisibility(cCtrl, isVisible)
-    '            SetControlEditability(cCtrl, isEditable)
-    '        End If
-    '    End If
-    'End Sub
-
     Private Function GetControlSecurityKey(ByRef cCtrl As Control)
         If cCtrl.GetType().GetProperty("SecurityKey") IsNot Nothing Then
             Return GetPropertyValue(cCtrl, "SecurityKey")
@@ -904,42 +918,30 @@ Public Class BfMain
         Next
     End Sub
 
-    'Private Sub SetMenuStripItems(dropDownItems As ToolStripItemCollection, pParentMenuName As String, pParentIdNo As Int32)
-    '    Dim parentIdNo As Int32
-    '    Dim systemViewIdNo = VSystemViewIdNo
-    '    For Each dropDownItem As Object In dropDownItems
-    '        Dim subMenu = TryCast(dropDownItem, ToolStripMenuItem)
-    '        If subMenu IsNot Nothing Then
-    '            Dim parentMenuName = pParentMenuName
-    '            parentIdNo = ApplyMenuSecurity(dropDownItem, parentMenuName, pParentIdNo)
-    '            If subMenu.HasDropDown Then
-    '                Dim childSubMenuName As String = pParentMenuName + " > " + Mid(dropDownItem.Name, 18)
-    '                SetMenuStripItems(subMenu.DropDownItems, childSubMenuName, parentIdNo)
-    '            End If
-    '        End If
-    '    Next
-    'End Sub
-
     Private Sub SetToolStripItemsNew(dropDownItems As ToolStripItemCollection, subMenuName As String)
+        Const toolStripButtonPrefix As String = "ToolStripButton"
         For Each obj As Object In dropDownItems
-            ' ReSharper disable once VBPossibleMistakenCallToGetType.2
-            If obj.GetType().ToString() = "System.Windows.Forms.ToolStripButton" Then
-                Dim toolStripButton As ToolStripButton = obj
-                Dim controlSecurityKey = Mid(toolStripButton.Name, 16).TrimEnd()
+            Dim toolStripButton = TryCast(obj, ToolStripButton)
+            If toolStripButton IsNot Nothing Then
+                ' Remove the known prefix from the button name, if present
+                Dim controlSecurityKey As String = toolStripButton.Name
+                If controlSecurityKey.StartsWith(toolStripButtonPrefix, StringComparison.OrdinalIgnoreCase) Then
+                    controlSecurityKey = controlSecurityKey.Substring(toolStripButtonPrefix.Length)
+                End If
+                controlSecurityKey = controlSecurityKey.TrimEnd()
+                controlSecurityKey = subMenuName & " > " & controlSecurityKey
+
                 If GlobalVariables.IsUserLoggedIn Then
-                    Dim controlSecurityValues As ArrayList
-                    Dim isSelectable As Boolean
-                    Dim isVisible As Boolean
-                    Dim securityIdNo As Int32 = GetControlSecurityIdNo(subMenuName + " > " + controlSecurityKey, True)
+                    Dim controlSecurityValues As ArrayList = Nothing
+                    Dim isSelectable As Boolean = True
+                    Dim isVisible As Boolean = True
+                    Dim securityIdNo As Int32 = GetControlSecurityIdNo(controlSecurityKey, True)
                     If securityIdNo <> 0 Then
                         If GlobalVariables.SecurityGroupIdNo <> 0 Then
-                            controlSecurityValues = Presenter.GetUserSecurity(securityIdNo,
-                                                                            GlobalVariables.SecurityGroupIdNo)
-                            If controlSecurityValues.Count > 0 Then
-                                ' Visible property stored in first element of the array
-                                isVisible = controlSecurityValues(0)
-                                ' Editable property stored in third element of the array
-                                isSelectable = controlSecurityValues(1)
+                            controlSecurityValues = Presenter.GetUserSecurity(securityIdNo, GlobalVariables.SecurityGroupIdNo)
+                            If controlSecurityValues IsNot Nothing AndAlso controlSecurityValues.Count > 0 Then
+                                isVisible = CBool(controlSecurityValues(0))
+                                isSelectable = CBool(controlSecurityValues(1))
                             Else
                                 isVisible = False
                                 isSelectable = False
@@ -970,119 +972,52 @@ Public Class BfMain
         Next
     End Sub
 
-    'Private Sub SetToolStripItems(dropDownItems As ToolStripItemCollection, subMenuName As String, parentIdNo As Int32)
-    '    Try
-    '        Dim systemViewIdNo = VSystemViewIdNo
-    '        For Each obj As Object In dropDownItems
-    '            ' ReSharper disable once VBPossibleMistakenCallToGetType.2
-    '            If obj.GetType().ToString() = "System.Windows.Forms.ToolStripButton" Then ' And GlobalVariables.SecurityGroupIdNo > 0 Then
-    '                Dim toolStripButton As ToolStripButton = obj
-    '                'Dim controlSecurityKey = pParentMenuName + "." + Mid(toolStripButton.Name, 16).TrimEnd()
-    '                Dim controlSecurityKey = Mid(toolStripButton.Name, 16).TrimEnd()
-    '                If GlobalVariables.IsUserLoggedIn Then
-    '                    Dim controlSecurityValues As ArrayList
-    '                    Dim isSelectable As Boolean
-    '                    Dim isVisible As Boolean
-    '                    'Dim service As New Service
-    '                    Dim securityIdNo As Int32 = GetControlSecurityIdNo(subMenuName + " > " + controlSecurityKey, True)
-
-    '                    If securityIdNo <> 0 Then
-    '                        If GlobalVariables.SecurityGroupIdNo <> 0 Then
-    '                            controlSecurityValues = Presenter.GetUserSecurity(securityIdNo,
-    '                                                                            GlobalVariables.SecurityGroupIdNo)
-    '                            If controlSecurityValues.Count > 0 Then
-    '                                ' Visible property stored in first element of the array
-    '                                isVisible = controlSecurityValues(0)
-    '                                ' Editable property stored in third element of the array
-    '                                isSelectable = controlSecurityValues(1)
-    '                            Else
-    '                                isVisible = False
-    '                                isSelectable = False
-    '                            End If
-    '                        Else
-    '                            isVisible = True
-    '                            isSelectable = False
-    '                        End If
-    '                    Else
-    '                        isVisible = True
-    '                        isSelectable = True
-    '                    End If
-    '                    toolStripButton.Enabled = isSelectable
-    '                    toolStripButton.Visible = isVisible
-    '                Else
-    '                    If obj.Name = "ToolStripButtonLogin" Then
-    '                        toolStripButton.Enabled = True
-    '                        toolStripButton.Visible = True
-    '                    Else
-    '                        toolStripButton.Enabled = False
-    '                        toolStripButton.Visible = True
-    '                    End If
-    '                End If
-    '                If _addSecurityObject Then
-    '                    Dim securityObject As New SecurityObject With {.SecurityObjectName = controlSecurityKey,
-    '                                                                   .SystemViewIdNo = systemViewIdNo,
-    '                                                                   .ParentIdNo = parentIdNo}
-    '                    Presenter.AddSecurityObject(securityObject)
-    '                End If
-    '            Else
-    '                obj.Enabled = True
-    '                obj.Visible = True
-    '            End If
-    '        Next
-    '        If UserIsASuperAdministrator() Then
-    '            ' override values regardless of security values
-    '            For Each obj As Object In dropDownItems
-    '                obj.Enabled = True
-    '                obj.Visible = True
-    '            Next
-    '        End If
-    '    Catch ex As Exception
-    '        MessageBox.Show(ex.Message, $"SetToolStripItems", MessageBoxButtons.OK, MessageBoxIcon.[Error])
-    '    End Try
-    'End Sub
-
     Private Sub TranslateMenuStripItems(dropDownItems As ToolStripItemCollection, subMenuName As String)
-        Try
-            For Each obj As Object In dropDownItems
-                Dim subMenu = TryCast(obj, ToolStripMenuItem)
-                If subMenu IsNot Nothing Then
-                    Dim r As Int16
-                    r = Dv.Find(obj.Tag)
-                    If r > 0 Then
-                        obj.Text = Dv(r).Item("translatedCaption")
-                    Else
-                        obj.Text = obj.Tag
-                    End If
-                    If subMenu.HasDropDownItems Then
-                        subMenuName = subMenuName + "." + obj.Name
-                        TranslateMenuStripItems(subMenu.DropDownItems, subMenuName)
-                    End If
-
+        For Each obj As Object In dropDownItems
+            Dim subMenu = TryCast(obj, ToolStripMenuItem)
+            If subMenu IsNot Nothing Then
+                Dim r As Int16 = -1
+                Dim tagValue As Object = obj.Tag
+                If tagValue IsNot Nothing AndAlso Dv IsNot Nothing Then
+                    r = Dv.Find(tagValue)
                 End If
-            Next
-        Catch ex As Exception
+                If r >= 0 AndAlso Dv.Table.Columns.Contains("translatedCaption") Then
+                    obj.Text = Convert.ToString(Dv(r).Item("translatedCaption"))
+                ElseIf tagValue IsNot Nothing Then
+                    obj.Text = tagValue.ToString
+                Else
+                    obj.Text = String.Empty
+                End If
+                If subMenu.HasDropDownItems Then
+                    Dim newSubMenuName = subMenuName
+                    If Not String.IsNullOrEmpty(obj.Name) Then
+                        newSubMenuName = newSubMenuName & "." & obj.Name
+                    End If
+                    TranslateMenuStripItems(subMenu.DropDownItems, newSubMenuName)
+                End If
 
-        End Try
+            End If
+        Next
     End Sub
 
     Private Sub UseOriginalMenuStripCaptions(dropDownItems As ToolStripItemCollection, subMenuName As String)
-        Try
-            For Each obj As Object In dropDownItems
-                Dim subMenu = TryCast(obj, ToolStripMenuItem)
-                If subMenu IsNot Nothing Then
-                    If subMenu.HasDropDownItems Then
-                        subMenuName = subMenuName + "." + obj.Name
-                        obj.Text = obj.Tag
-                        UseOriginalMenuStripCaptions(subMenu.DropDownItems, subMenuName)
-                    Else
-                        Dim toolStripMenuItem As ToolStripMenuItem = obj
-                        toolStripMenuItem.Text = toolStripMenuItem.Tag
+        For Each obj As Object In dropDownItems
+            Dim subMenu = TryCast(obj, ToolStripMenuItem)
+            If subMenu IsNot Nothing Then
+                Dim tagValue As Object = obj.Tag
+                If subMenu.HasDropDownItems Then
+                    Dim newSubMenuName = subMenuName
+                    If Not String.IsNullOrEmpty(obj.Name) Then
+                        newSubMenuName = newSubMenuName & "." & obj.Name
                     End If
+                    obj.Text = If(tagValue IsNot Nothing, tagValue.ToString(), String.Empty)
+                    UseOriginalMenuStripCaptions(subMenu.DropDownItems, newSubMenuName)
+                Else
+                    Dim toolStripMenuItem As ToolStripMenuItem = obj
+                    toolStripMenuItem.Text = If(toolStripMenuItem.Tag IsNot Nothing, toolStripMenuItem.Tag.ToString(), String.Empty)
                 End If
-            Next
-        Catch ex As Exception
-
-        End Try
+            End If
+        Next
     End Sub
 
     Private Sub UseOriginalCaptions()
@@ -1111,8 +1046,17 @@ Public Class BfMain
 
     Private Sub UseOriginalToolStripItems(ByRef cToolStrip As ToolStrip)
         For Each obj As Object In cToolStrip.Items
-            obj.Text = obj.Tag(0)
-            obj.ToolTipText = obj.Tag(1)
+            If obj.Tag IsNot Nothing AndAlso TypeOf obj.Tag Is Object() Then
+                Dim tagArr = DirectCast(obj.Tag, Object())
+                If tagArr.Length > 0 Then obj.Text = tagArr(0)
+                If tagArr.Length > 1 Then obj.ToolTipText = tagArr(1)
+            ElseIf obj.Tag IsNot Nothing Then
+                obj.Text = obj.Tag.ToString()
+                obj.ToolTipText = ""
+            Else
+                obj.Text = ""
+                obj.ToolTipText = ""
+            End If
             If TypeOf obj Is ToolStripButton Then
                 UseOriginalToolStripButtonImage(obj)
             ElseIf TypeOf obj Is TextBox Then
@@ -1133,32 +1077,6 @@ Public Class BfMain
             cButton.Image = GlobalResources.My.Resources.ResourceManager.GetObject(cResourceName)
         End If
     End Sub
-
-    'Private Sub CFormEntryNew_SizeChanged(sender As Object, e As EventArgs) Handles MyBase.SizeChanged
-    '    Debugger.Break()
-    'End Sub
-
-    'Private Sub BfMain_Paint(sender As Object, e As PaintEventArgs) Handles MyBase.Paint
-    '    If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft And BackgroundImage IsNot Nothing Then
-    '        ' this routine is needed for righttoleft languages because the backgroundimage is
-    '        ' not redrawn for this culture.  So need to manually repaint the background form with
-    '        ' this procedure.
-    '        Dim r As Rectangle = ClientRectangle
-    '        e.Graphics.DrawImage(BackgroundImage, r)
-    '    End If
-    'End Sub
-
-    'Protected Overridable Sub EndEditOnAllBindingSources()
-    '    'Dim bindingSourcesQuery = From BindingSources In components.Components
-    '    '                          Where (TypeOf BindingSources Is Windows.Forms.BindingSource)
-    '    'Select Case BindingSources
-    '    Dim currentComponents = components.Components
-    '    For Each item In currentComponents
-    '        If TypeOf item Is Windows.Forms.BindingSource Then
-    '            item.EndEdit()
-    '        End If
-    '    Next
-    'End Sub
 
     Public Shared Sub EnableDoubleBuff(ByVal cont As Control)
         Dim demoProp As Reflection.PropertyInfo = GetType(Control).GetProperty("DoubleBuffered", Reflection.BindingFlags.NonPublic Or Reflection.BindingFlags.Instance)
@@ -1316,7 +1234,5 @@ Public Class SettingsSaver
         control.Height = _height
         control.Visible = _visible
     End Sub
-
-
 
 End Class

@@ -339,6 +339,7 @@ Public Class Messaging
     Public Shared Sub MessageTimeOutNowait(sMessage As String, sTitle As String, iSeconds As Integer)
         Dim t As New System.Threading.Thread(AddressOf ShowMSG)
         Dim messageParam As New WaitMessageParameters
+        Debugger.Break()
         messageParam.Message = sMessage
         messageParam.Title = sTitle
         messageParam.Seconds = iSeconds
