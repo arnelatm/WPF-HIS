@@ -1,4 +1,5 @@
 ﻿Imports System.ComponentModel
+Imports System.Data.Common
 Imports System.Drawing
 Imports System.Globalization
 Imports System.Threading
@@ -63,7 +64,7 @@ Public Class BfMain
         MyBase.New()
         ' This call is required by the designer.
         InitializeComponent()
-                Ea = New EventAggregator
+        Ea = New EventAggregator
         If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
             TranslatorDAC = transDac
             AppDataDAC = appDac
@@ -348,11 +349,11 @@ Public Class BfMain
             If (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
                 ' continue
             Else
-                targetLanguageIdNo = GetTargetLanguageIdNo(desiredLanguage, allowFallBack)
-                If targetLanguageIdNo = 0 Then
+                TargetLanguageIdNo = GetTargetLanguageIdNo(desiredLanguage, allowFallBack)
+                If TargetLanguageIdNo = 0 Then
                     UseOriginalCaptions()
                 Else
-                    TranslateToLanguageIdNo(allCtrl, targetLanguageIdNo)
+                    TranslateToLanguageIdNo(allCtrl, TargetLanguageIdNo)
                 End If
             End If
         Catch ex As Exception
@@ -370,7 +371,7 @@ Public Class BfMain
             cmd = "Select IdNo from Languages where cultureInfoCode = '" + desiredLanguage + "'"
             desiredLanguageIdNo = TranslatorDAC.ExecScalar(Of Int16)(cmd)
             If desiredLanguageIdNo = 0 Then
-                targetLanguageIdNo = 0
+                TargetLanguageIdNo = 0
             Else
                 If Not TranslationLanguageExist(desiredLanguage) Then
                     If allowFallBack Then
@@ -378,19 +379,19 @@ Public Class BfMain
                         cmd = "Select cultureInfoCode from Languages where IdNo = " + fallBackLanguageIdNo.ToString()
                         fallBackLanguage = TranslatorDAC.ExecScalar(Of String)(cmd)
                         If Not NeedToTranslateText(fallBackLanguage) Then
-                            targetLanguageIdNo = 0
+                            TargetLanguageIdNo = 0
                         Else
-                            targetLanguageIdNo = fallBackLanguageIdNo
+                            TargetLanguageIdNo = fallBackLanguageIdNo
                         End If
                     Else
-                        targetLanguageIdNo = 0
+                        TargetLanguageIdNo = 0
                     End If
                 Else
-                    targetLanguageIdNo = desiredLanguageIdNo
+                    TargetLanguageIdNo = desiredLanguageIdNo
                 End If
             End If
         End If
-        Return targetLanguageIdNo
+        Return TargetLanguageIdNo
     End Function
 
     Private Sub InvalidateTranslationCache()
@@ -645,7 +646,7 @@ Public Class BfMain
     Private Function GetToolStripText(cToolStrip As ToolStrip, obj As Object, propName As String) As String
         Dim key As String = cToolStrip.Name & "." & obj.Name & "." & propName
         Dim translatedText As String = Nothing
-        Dim translationDict = GetTranslationDictionary(targetLanguageIdNo)
+        Dim translationDict = GetTranslationDictionary(TargetLanguageIdNo)
 
         If translationDict IsNot Nothing AndAlso translationDict.TryGetValue(key, translatedText) Then
             Return translatedText
@@ -657,11 +658,8 @@ Public Class BfMain
                 Dim tagArr = DirectCast(obj.Tag, Object())
                 If propName = "ToolTipText" AndAlso tagArr.Length > 1 AndAlso tagArr(1) IsNot Nothing Then
                     Return tagArr(1).ToString()
-                    'End If
-                    'If propName = "Text" AndAlso tagArr.Length > 0 Then
-                    '    Return tagArr(0).ToString()
-                    'ElseIf propName = "ToolTipText" AndAlso tagArr.Length > 1 Then
-                    '    Return tagArr(1).ToString()
+                ElseIf propName = "Text" AndAlso tagArr.Length > 1 AndAlso tagArr(0) IsNot Nothing Then
+                    Return tagArr(0).ToString()
                 End If
             Else
                 Return obj.Tag.ToString()
@@ -973,18 +971,17 @@ Public Class BfMain
     End Sub
 
     Private Sub TranslateMenuStripItems(dropDownItems As ToolStripItemCollection, subMenuName As String)
+        Dim translationDict = GetTranslationDictionary(TargetLanguageIdNo)
         For Each obj As Object In dropDownItems
             Dim subMenu = TryCast(obj, ToolStripMenuItem)
             If subMenu IsNot Nothing Then
-                Dim r As Int16 = -1
-                Dim tagValue As Object = obj.Tag
-                If tagValue IsNot Nothing AndAlso Dv IsNot Nothing Then
-                    r = Dv.Find(tagValue)
-                End If
-                If r >= 0 AndAlso Dv.Table.Columns.Contains("translatedCaption") Then
-                    obj.Text = Convert.ToString(Dv(r).Item("translatedCaption"))
-                ElseIf tagValue IsNot Nothing Then
-                    obj.Text = tagValue.ToString
+
+                Dim lookupKey As String = If(obj.Tag IsNot Nothing, obj.Tag.ToString(), obj.Name)
+                Dim translated As String = Nothing
+                If translationDict.TryGetValue(lookupKey, translated) Then
+                    obj.Text = translated
+                ElseIf translated IsNot Nothing Then
+                    obj.Text = lookupKey
                 Else
                     obj.Text = String.Empty
                 End If
@@ -995,6 +992,28 @@ Public Class BfMain
                     End If
                     TranslateMenuStripItems(subMenu.DropDownItems, newSubMenuName)
                 End If
+
+                'Dim r As Int16 = -1
+                'Dim tagValue As Object = obj.Tag
+                'If tagValue IsNot Nothing AndAlso Dv IsNot Nothing Then
+
+
+                '    r = Dv.Find(tagValue)
+                'End If
+                'If r >= 0 AndAlso Dv.Table.Columns.Contains("translatedCaption") Then
+                '    obj.Text = Convert.ToString(Dv(r).Item("translatedCaption"))
+                'ElseIf tagValue IsNot Nothing Then
+                '    obj.Text = tagValue.ToString
+                'Else
+                '    obj.Text = String.Empty
+                'End If
+                'If subMenu.HasDropDownItems Then
+                '    Dim newSubMenuName = subMenuName
+                '    If Not String.IsNullOrEmpty(obj.Name) Then
+                '        newSubMenuName = newSubMenuName & "." & obj.Name
+                '    End If
+                '    TranslateMenuStripItems(subMenu.DropDownItems, newSubMenuName)
+                'End If
 
             End If
         Next
