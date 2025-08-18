@@ -18,7 +18,8 @@ Public Class BfMain
 
     '    Dim _menuLevel As String = " "
     Private _textDisplayLanguage As String
-
+    ' Global translation cache for all forms/views/languages
+    Private Shared _globalTranslationCache As New Dictionary(Of String, Dictionary(Of String, String))
     Protected _addSecurityObject As Boolean = False
     Private _parentSecurityObjectIdNo As Int32
     Private _sw As Int16 = 0
@@ -159,7 +160,10 @@ Public Class BfMain
     Private Function GetTranslationDictionary(languageIdNo As Integer) As Dictionary(Of String, String)
         Dim currentLanguage = TextDisplayLanguage
         Dim currentViewId = GetSystemViewIdNo()
-
+        Dim cacheKey = currentLanguage & "_" & currentViewId
+        If _translationCache.ContainsKey(cacheKey) Then
+            Return _translationCache(cacheKey)
+        End If
         ' Use cache if valid
         If _translationCache IsNot Nothing AndAlso
           _translationCacheLanguage = currentLanguage AndAlso
