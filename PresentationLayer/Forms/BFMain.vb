@@ -11,6 +11,7 @@ Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
 Imports AATM.PresentationLayer.Views
 
+
 Public Class BfMain
     Implements IView
 
@@ -19,7 +20,6 @@ Public Class BfMain
     '    Dim _menuLevel As String = " "
     Private _textDisplayLanguage As String
     ' Global translation cache for all forms/views/languages
-    Private Shared _globalTranslationCache As New Dictionary(Of String, Dictionary(Of String, String))
     Protected _addSecurityObject As Boolean = False
     Private _parentSecurityObjectIdNo As Int32
     Private _sw As Int16 = 0
@@ -27,9 +27,6 @@ Public Class BfMain
     Private _formCulture As CultureInfo
     Private _systemViewIdNo As Int32
     Private _firstLoadSwitch As Int32 = 0
-    Private _translationCache As Dictionary(Of String, String)
-    Private _translationCacheLanguage As String
-    Private _translationCacheViewId As Integer
 
     'Private _myPresenter As UserPresenter
     Protected CaptionCollection As New Collection
@@ -160,38 +157,8 @@ Public Class BfMain
     Private Function GetTranslationDictionary(languageIdNo As Integer) As Dictionary(Of String, String)
         Dim currentLanguage = TextDisplayLanguage
         Dim currentViewId = GetSystemViewIdNo()
-        Dim cacheKey = currentLanguage & "_" & currentViewId
-        If _translationCache.ContainsKey(cacheKey) Then
-            Return _translationCache(cacheKey)
-        End If
-        ' Use cache if valid
-        If _translationCache IsNot Nothing AndAlso
-          _translationCacheLanguage = currentLanguage AndAlso
-          _translationCacheViewId = currentViewId Then
-            Return _translationCache
-        End If
-
-        ' Build dictionary from DataSet
-        Dim translations As DataSet = GetTranslations(languageIdNo)
-        Dim dict As New Dictionary(Of String, String)(StringComparer.OrdinalIgnoreCase)
-        If translations IsNot Nothing AndAlso translations.Tables.Count > 0 Then
-            Dim table = translations.Tables(0)
-            If table.Columns.Contains("Caption") AndAlso table.Columns.Contains("translatedCaption") Then
-                For Each row As DataRow In table.Rows
-                    Dim key = Convert.ToString(row("Caption"))
-                    Dim value = Convert.ToString(row("translatedCaption"))
-                    If Not dict.ContainsKey(key) Then
-                        dict.Add(key, value)
-                    End If
-                Next
-            End If
-        End If
-
-        ' Update cache
-        _translationCache = dict
-        _translationCacheLanguage = currentLanguage
-        _translationCacheViewId = currentViewId
-        Return dict
+        ' Use the utility (pass TranslatorDAC as the third argument)
+        Return TranslationUtility.GetTranslationDictionary(currentLanguage, currentViewId, TranslatorDAC)
     End Function
 
 
@@ -403,9 +370,7 @@ Public Class BfMain
     End Function
 
     Private Sub InvalidateTranslationCache()
-        _translationCache = Nothing
-        _translationCacheLanguage = Nothing
-        _translationCacheViewId = 0
+        TranslationUtility.ClearCache()
     End Sub
 
     Protected Sub TranslateToLanguageIdNo(ByRef allCtrl As List(Of Control), targetLanguageIdNo As Integer)
@@ -845,6 +810,9 @@ Public Class BfMain
 
     Private Sub BFMain_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
+            ' Preload translations for English and Arabic, and views 1 and 2
+            TranslationUtility.PreloadTranslations(New String() {"en-US", "ar-SA"}, New Integer() {1, 2}, TranslatorDAC)
+
             If _firstLoadSwitch = 0 Then
                 GetNSaveCaptions()
                 _firstLoadSwitch = 1
