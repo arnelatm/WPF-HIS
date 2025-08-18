@@ -270,18 +270,22 @@ Public Class BfMain
 
     Public Sub TranslateForm()
         If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
-            'SuspendDrawing()
             Dim settings As New SettingsSaver
             Dim allCtrl As New List(Of Control)
             allCtrl = FindControlRecursive(allCtrl, Me)
             settings.SaveSetting(Me)
+            ' If RightToLeftLayout is True, then the form location is being changed when Resetting RightToLeftLayout
             ' form location is being changed when Resetting RightToLeftLayout so need to save values
             ' to restore form with the same size and location
             DoubleBuffered = True
-            TranslateCaptions(allCtrl, TextDisplayLanguage)
-            SetControlLayout(allCtrl)
-            settings.RestoreSetting(Me)
-            'ResumeDrawing()
+            Me.SuspendLayout()
+            Try
+                TranslateCaptions(allCtrl, TextDisplayLanguage)
+                SetControlLayout(allCtrl)
+                settings.RestoreSetting(Me)
+            Finally
+                Me.ResumeLayout()
+            End Try
             If GlobalVariables.TranslationMode Then
                 RaiseEvent AfterTranslateForm()
             End If
@@ -487,6 +491,7 @@ Public Class BfMain
             If IsTranslatable(cCtrl) Then
                 If TypeOf cCtrl Is ToolStrip Then
                     Dim cToolStrip As ToolStrip = cCtrl
+                    cToolStrip.SuspendLayout()
                     For Each obj As Object In cToolStrip.Items
                         If TypeOf obj Is ToolStripButton Then
                             TranslateToolStripButtonImage(obj)
@@ -499,17 +504,22 @@ Public Class BfMain
                             End If
                         End If
                     Next
+                    cToolStrip.ResumeLayout()
                 ElseIf TypeOf cCtrl Is CTreeViewOld Or TypeOf cCtrl Is TreeView Or TypeOf cCtrl Is CTreeView Then
                     Dim cT = CType(cCtrl, TreeView)
+                    cT.SuspendLayout()
                     cT.ExpandAll()
                     cT.RightToLeftLayout = GlobalVariables.RightToLeftLayout
                     cT.RightToLeft = If(GlobalVariables.RightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
+                    cT.ResumeLayout()
                 ElseIf TypeOf cCtrl Is CButton Then
                     TranslateButton(cCtrl)
                 ElseIf TypeOf cCtrl Is CTabControl Then
                     Dim tc = CType(cCtrl, CTabControl)
+                    tc.SuspendLayout()
                     tc.RightToLeft = If(GlobalVariables.RightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
                     tc.RightToLeftLayout = GlobalVariables.RightToLeftLayout
+                    tc.ResumeLayout()
                 End If
             ElseIf TypeOf cCtrl Is CTextBox Then
                 Dim tc = CType(cCtrl, CTextBox)
@@ -570,6 +580,7 @@ Public Class BfMain
     End Sub
 
     Private Sub TranslateDataGridView(ByRef CtDataGridView As DataGridView, ByVal targetLanguageIdNo As Integer)
+        CtDataGridView.SuspendLayout()
         Dim translationDict = GetTranslationDictionary(targetLanguageIdNo)
         For Each column As DataGridViewColumn In CtDataGridView.Columns
             Dim lookupKey As String = If(column.Tag IsNot Nothing, column.Tag.ToString(), column.Name)
@@ -581,6 +592,7 @@ Public Class BfMain
             End If
             ' If both translation and tag are missing, keep the current HeaderText
         Next
+        CtDataGridView.ResumeLayout()
         'If Dv Is Nothing OrElse Dv.Table Is Nothing Then Exit Sub
 
         '' Ensure DataView is sorted by Caption
@@ -619,15 +631,36 @@ Public Class BfMain
     End Sub
 
     Private Sub TranslateTabControl(ByRef cTabControl As CTabControl)
+        cTabControl.SuspendLayout()
+        Dim translationDict = GetTranslationDictionary(TargetLanguageIdNo)
         For Each tabPage As TabPage In cTabControl.TabPages
-            Dim r As Int16
-            r = Dv.Find(tabPage.Tag)
-            If r >= 0 Then
-                tabPage.Text = Dv(r).Item("translatedCaption")
-            Else
-                tabPage.Text = tabPage.Tag
+            Dim lookupKey As String = If(tabPage.Tag IsNot Nothing, tabPage.Tag.ToString(), tabPage.Name)
+            Dim translated As String = Nothing
+            If translationDict.TryGetValue(lookupKey, translated) Then
+                tabPage.Text = translated
+            ElseIf tabPage.Tag IsNot Nothing Then
+                tabPage.Text = tabPage.Tag.ToString()
             End If
+            'Dim r As Int16
+            'r = Dv.Find(tabPage.Tag)
+            'If r >= 0 Then
+            '    tabPage.Text = Dv(r).Item("translatedCaption")
+            'Else
+            '    tabPage.Text = tabPage.Tag
+            'End If
         Next
+        cTabControl.ResumeLayout()
+        'Dim translationDict = GetTranslationDictionary(TargetLanguageIdNo)
+        'For Each column As DataGridViewColumn In CtDataGridView.Columns
+        '    Dim lookupKey As String = If(column.Tag IsNot Nothing, column.Tag.ToString(), column.Name)
+        '    Dim translated As String = Nothing
+        '    If translationDict.TryGetValue(lookupKey, translated) Then
+        '        column.HeaderText = translated
+        '    ElseIf column.Tag IsNot Nothing Then
+        '        column.HeaderText = column.Tag.ToString()
+        '    End If
+        '    ' If both translation and tag are missing, keep the current HeaderText
+        'Next
     End Sub
 
     Private _targetLanguageIdNo As Integer
