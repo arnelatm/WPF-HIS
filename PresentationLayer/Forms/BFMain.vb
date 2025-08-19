@@ -434,9 +434,7 @@ Public Class BfMain
 
         ' Special controls
         For Each menu As MenuStrip In allCtrl.OfType(Of MenuStrip)()
-            Dim subMenuName As String = ""
-            Dim menuStrip As MenuStrip = CType(menu, MenuStrip)
-            TranslateMenuStripItems(menuStrip.Items, subMenuName)
+            TranslateMenu(menu)
         Next
 
         For Each tool As ToolStrip In allCtrl.OfType(Of ToolStrip)()
@@ -576,6 +574,20 @@ Public Class BfMain
         Return TranslatorDAC.ExecScalar(Of Int16)(cmd)
     End Function
 
+
+    Private Sub TranslateMenu(ByRef cMenuStrip As MenuStrip)
+        For Each obj As ToolStripItem In cMenuStrip.Items
+            obj.Text = GetToolStripText(cMenuStrip, obj, "Text")
+            obj.ToolTipText = GetToolStripText(cMenuStrip, obj, "ToolTipText")
+            'Dim c = CType(obj, TextBox)
+            'If GlobalVariables.RightToLeftLayout Then
+            '    c.Text = Messaging.TranslateCaption(c.Text)
+            '    c.RightToLeft = RightToLeft.Yes
+            'Else
+            '    c.RightToLeft = RightToLeft.No
+            'End If
+        Next
+    End Sub
     Private Sub TranslateToolStripItems(ByRef cToolStrip As ToolStrip)
         For Each obj As Object In cToolStrip.Items
             obj.Text = GetToolStripText(cToolStrip, obj, "Text")
