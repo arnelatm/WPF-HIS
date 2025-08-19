@@ -1,7 +1,9 @@
-﻿Imports System.ComponentModel
+﻿Imports System.Collections.Generic
+Imports System.ComponentModel
 Imports System.Data.Common
 Imports System.Drawing
 Imports System.Globalization
+Imports System.Reflection.Emit
 Imports System.Threading
 Imports System.Windows.Forms
 Imports AATM.Libraries
@@ -180,7 +182,7 @@ Public Class BfMain
                TypeOf ctrl Is TreeView OrElse
                TypeOf ctrl Is MenuStrip OrElse
                TypeOf ctrl Is ToolStrip OrElse
-               TypeOf ctrl Is Label OrElse
+               TypeOf ctrl Is Windows.Forms.Label OrElse
                TypeOf ctrl Is Button OrElse
                TypeOf ctrl Is CheckBox OrElse
                TypeOf ctrl Is RadioButton OrElse
@@ -242,8 +244,7 @@ Public Class BfMain
     Public Sub TranslateForm()
         If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
             Dim settings As New SettingsSaver
-            Dim allCtrl As New List(Of Control)
-            allCtrl = FindControlRecursive(allCtrl, Me)
+            Dim allControls As List(Of Control) = TranslationUtility.GetAllControls(Me)
             settings.SaveSetting(Me)
             ' If RightToLeftLayout is True, then the form location is being changed when Resetting RightToLeftLayout
             ' form location is being changed when Resetting RightToLeftLayout so need to save values
@@ -251,8 +252,8 @@ Public Class BfMain
             DoubleBuffered = True
             Me.SuspendLayout()
             Try
-                TranslateCaptions(allCtrl, TextDisplayLanguage)
-                SetControlLayout(allCtrl)
+                TranslateCaptions(allControls, TextDisplayLanguage)
+                SetControlLayout(allControls)
                 settings.RestoreSetting(Me)
             Finally
                 Me.ResumeLayout()
@@ -319,7 +320,7 @@ Public Class BfMain
         Return TranslatorDAC.ExecScalar(Of String)(cmd)
     End Function
 
-    Protected Sub TranslateCaptions(ByRef allCtrl As List(Of Control), ByVal desiredLanguage As String, Optional ByVal allowFallBack As Boolean = True)
+    Protected Sub TranslateCaptions(ByRef allControls As List(Of Control), ByVal desiredLanguage As String, Optional ByVal allowFallBack As Boolean = True)
         Try
             If (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
                 ' continue
@@ -328,7 +329,7 @@ Public Class BfMain
                 If TargetLanguageIdNo = 0 Then
                     UseOriginalCaptions()
                 Else
-                    TranslateToLanguageIdNo(allCtrl, TargetLanguageIdNo)
+                    TranslateToLanguageIdNo(allControls, TargetLanguageIdNo)
                 End If
             End If
         Catch ex As Exception
@@ -374,86 +375,142 @@ Public Class BfMain
     End Sub
 
     Protected Sub TranslateToLanguageIdNo(ByRef allCtrl As List(Of Control), targetLanguageIdNo As Integer)
-        'Dim translations As DataSet = GetTranslations(targetLanguageIdNo)
         Dim translationDict = GetTranslationDictionary(targetLanguageIdNo)
-        'BuildTranslationDictionary(targetLanguageIdNo)
-        Dim translated As String = Nothing
 
-        'Dv = translations.Tables(0).DefaultView
-        'Dv.Sort = "Caption"
-        'Dim r As Integer = -1
-        'If Tag IsNot Nothing Then
-        '    r = Dv.Find(Tag.ToString.TrimEnd)
-        'End If
-        'If r >= 0 AndAlso Dv.Table.Columns.Contains("translatedCaption") Then
-        '    Text = Convert.ToString(Dv(r).Item("translatedCaption"))
-        'ElseIf Tag IsNot Nothing Then
-        '    Text = Tag.ToString()
-        'Else
-        '    Text = String.Empty
-        'End If
-        For Each cCtrl As Control In allCtrl
-            If Not IsTranslatable(cCtrl) Then Continue For
+        ' Standard WinForms controls
+        For Each lbl As Windows.Forms.Label In allCtrl.OfType(Of Windows.Forms.Label)()
+            Dim key = If(lbl.Tag IsNot Nothing, lbl.Tag.ToString(), lbl.Name)
+            Dim translated As String = Nothing
+            If translationDict.TryGetValue(key, translated) Then
+                lbl.Text = translated
+            End If
+        Next
 
-            If TypeOf cCtrl Is MenuStrip Then
-                Dim subMenuName As String = ""
-                Dim menuStrip As MenuStrip = CType(cCtrl, MenuStrip)
-                TranslateMenuStripItems(menuStrip.Items, subMenuName)
+        For Each btn As Button In allCtrl.OfType(Of Button)()
+            Dim key = If(btn.Tag IsNot Nothing, btn.Tag.ToString(), btn.Name)
+            Dim translated As String = Nothing
+            If translationDict.TryGetValue(key, translated) Then
+                btn.Text = translated
+            End If
+        Next
 
-            ElseIf TypeOf cCtrl Is ToolStrip Then
-                TranslateToolStripItems(cCtrl)
+        For Each chk As CheckBox In allCtrl.OfType(Of CheckBox)()
+            Dim key = If(chk.Tag IsNot Nothing, chk.Tag.ToString(), chk.Name)
+            Dim translated As String = Nothing
+            If translationDict.TryGetValue(key, translated) Then
+                chk.Text = translated
+            End If
+        Next
 
-            ElseIf TypeOf cCtrl Is CTreeViewOld Or TypeOf cCtrl Is TreeView Then
-                ' No translation needed for tree view controls here
+        For Each rad As RadioButton In allCtrl.OfType(Of RadioButton)()
+            Dim key = If(rad.Tag IsNot Nothing, rad.Tag.ToString(), rad.Name)
+            Dim translated As String = Nothing
+            If translationDict.TryGetValue(key, translated) Then
+                rad.Text = translated
+            End If
+        Next
 
-            ElseIf TypeOf cCtrl Is DataGridView Then
-                TranslateDataGridView(cCtrl, targetLanguageIdNo)
+        For Each tab As TabPage In allCtrl.OfType(Of TabPage)()
+            Dim key = If(tab.Tag IsNot Nothing, tab.Tag.ToString(), tab.Name)
+            Dim translated As String = Nothing
+            If translationDict.TryGetValue(key, translated) Then
+                tab.Text = translated
+            End If
+        Next
 
-            ElseIf TypeOf cCtrl Is DataGrid Then
-                Dim originalText As String = cCtrl.Name
-                If CaptionCollection.Contains(cCtrl.Name) Then
-                    originalText = CaptionCollection.Item(cCtrl.Name)
-                End If
-                '_originalText = CaptionCollection.Item(cCtrl.Name)
+        ' Custom controls
+        For Each cbtn As CButton In allCtrl.OfType(Of CButton)()
+            TranslateButton(cbtn)
+            Dim key = If(cbtn.Tag IsNot Nothing, cbtn.Tag.ToString(), cbtn.Name)
+            Dim translated As String = Nothing
+            If translationDict.TryGetValue(key, translated) Then
+                cbtn.Text = translated
+            End If
+        Next
 
-                If translationDict.TryGetValue(originalText, translated) Then
-                    CType(cCtrl, DataGrid).CaptionText = translated
-                ElseIf cCtrl.Tag IsNot Nothing Then
-                    CType(cCtrl, DataGrid).CaptionText = cCtrl.Tag.ToString()
+        For Each ctab As CTabControl In allCtrl.OfType(Of CTabControl)()
+            TranslateTabControl(ctab)
+        Next
+
+        ' Special controls
+        For Each menu As MenuStrip In allCtrl.OfType(Of MenuStrip)()
+            Dim subMenuName As String = ""
+            Dim menuStrip As MenuStrip = CType(menu, MenuStrip)
+            TranslateMenuStripItems(menuStrip.Items, subMenuName)
+        Next
+
+        For Each tool As ToolStrip In allCtrl.OfType(Of ToolStrip)()
+            TranslateToolStripItems(tool)
+        Next
+
+        For Each grid As DataGridView In allCtrl.OfType(Of DataGridView)()
+            TranslateDataGridView(grid, targetLanguageIdNo)
+        Next
+
+        For Each grid As DataGrid In allCtrl.OfType(Of DataGrid)()
+            TranslateDataGrid(grid, targetLanguageIdNo)
+        Next
+
+        ' Fallback for any other translatable controls not covered above
+        For Each ctrl In allCtrl
+            If Not (TypeOf ctrl Is Windows.Forms.Label OrElse TypeOf ctrl Is Button OrElse TypeOf ctrl Is CheckBox OrElse
+                TypeOf ctrl Is RadioButton OrElse TypeOf ctrl Is TabPage OrElse
+                TypeOf ctrl Is CButton OrElse TypeOf ctrl Is CTabControl OrElse
+                TypeOf ctrl Is MenuStrip OrElse TypeOf ctrl Is ToolStrip OrElse
+                TypeOf ctrl Is DataGridView OrElse TypeOf ctrl Is DataGrid) AndAlso IsTranslatable(ctrl) Then
+
+                Dim key = If(ctrl.Tag IsNot Nothing, ctrl.Tag.ToString(), ctrl.Name)
+                Dim translated As String = Nothing
+                If translationDict.TryGetValue(key, translated) Then
+                    ctrl.Text = translated
+                ElseIf ctrl.Tag IsNot Nothing Then
+                    ctrl.Text = ctrl.Tag.ToString()
                 Else
-                    CType(cCtrl, DataGrid).CaptionText = String.Empty
+                    ctrl.Text = String.Empty
                 End If
-
-            ElseIf TypeOf cCtrl Is CTabControl Then
-                TranslateTabControl(cCtrl)
-
-            Else
-                If TypeOf cCtrl Is CButton Then
-                    TranslateButton(cCtrl)
-                End If
-                Dim originalText As String = cCtrl.Name
-                If CaptionCollection.Contains(cCtrl.Name) Then
-                    originalText = CaptionCollection.Item(cCtrl.Name)
-                End If
-                If translationDict.TryGetValue(originalText, translated) Then
-                    cCtrl.Text = translated
-                ElseIf cCtrl.Tag IsNot Nothing Then
-                    cCtrl.Text = cCtrl.Tag.ToString()
-                Else
-                    cCtrl.Text = String.Empty
-                End If
-                'r = Dv.Find(originalText)
-                'If r >= 0 AndAlso Dv.Table.Columns.Contains("TranslatedCaption") Then
-                '    cCtrl.Text = Convert.ToString(Dv(r).Item("TranslatedCaption"))
-                'ElseIf cCtrl.Tag IsNot Nothing Then
-                '    cCtrl.Text = cCtrl.Tag.ToString()
-                'Else
-                '    cCtrl.Text = String.Empty
-                'End If
-
             End If
         Next
     End Sub
+
+
+    '    ' This method is commented out because it is not used in the current implementation.
+    'Protected Sub TranslateToLanguageIdNo(ByRef allCtrl As List(Of Control), targetLanguageIdNo As Integer)
+    '    Dim translationDict = GetTranslationDictionary(targetLanguageIdNo)
+    '    For Each cCtrl As Control In allCtrl
+    '        If Not IsTranslatable(cCtrl) Then Continue For
+
+    '        If TypeOf cCtrl Is MenuStrip Then
+    '            Dim subMenuName As String = ""
+    '            Dim menuStrip As MenuStrip = CType(cCtrl, MenuStrip)
+    '            TranslateMenuStripItems(menuStrip.Items, subMenuName)
+    '        ElseIf TypeOf cCtrl Is ToolStrip Then
+    '            TranslateToolStripItems(cCtrl)
+    '        ElseIf TypeOf cCtrl Is CTreeViewOld Or TypeOf cCtrl Is TreeView Then
+    '            ' No translation needed for tree view controls here
+    '        ElseIf TypeOf cCtrl Is DataGridView Then
+    '            TranslateDataGridView(cCtrl, targetLanguageIdNo)
+    '        ElseIf TypeOf cCtrl Is DataGrid Then
+    '            TranslateDataGrid(cCtrl, targetLanguageIdNo)
+    '        ElseIf TypeOf cCtrl Is CTabControl Then
+    '            TranslateTabControl(cCtrl)
+    '        ElseIf TypeOf cCtrl Is CButton Then
+    '            TranslateButton(cCtrl)
+    '        Else
+    '            Dim originalText As String = cCtrl.Name
+    '            If CaptionCollection.Contains(cCtrl.Name) Then
+    '                originalText = CaptionCollection.Item(cCtrl.Name)
+    '            End If
+    '            Dim translated As String = Nothing
+    '            If translationDict.TryGetValue(originalText, translated) Then
+    '                cCtrl.Text = translated
+    '            ElseIf cCtrl.Tag IsNot Nothing Then
+    '                cCtrl.Text = cCtrl.Tag.ToString()
+    '            Else
+    '                cCtrl.Text = String.Empty
+    '            End If
+    '        End If
+    '    Next
+    'End Sub
 
     Protected Sub LayOutControls(ByRef allCtrl As List(Of Control))
         For Each cCtrl As Control In allCtrl
@@ -562,42 +619,28 @@ Public Class BfMain
             ' If both translation and tag are missing, keep the current HeaderText
         Next
         CtDataGridView.ResumeLayout()
-        'If Dv Is Nothing OrElse Dv.Table Is Nothing Then Exit Sub
-
-        '' Ensure DataView is sorted by Caption
-        'If Dv.Table.Columns.Contains("Caption") Then
-        '    Dv.Sort = "Caption"
-        'Else
-        '    ' Optionally log: "Caption column missing in translations"
-        '    Exit Sub
-        'End If
-
-        '' Find the correct column name for translation (case-insensitive)
-        'Dim translatedColName As String = ""
-        'If Dv.Table.Columns.Contains("TranslatedCaption") Then
-        '    translatedColName = "TranslatedCaption"
-        'ElseIf Dv.Table.Columns.Contains("translatedCaption") Then
-        '    translatedColName = "translatedCaption"
-        'Else
-        '    ' Optionally log: "TranslatedCaption column missing in translations"
-        '    Exit Sub
-        'End If
-
-        'For Each column As DataGridViewColumn In CtDataGridView.Columns
-        '    Dim r As Integer = -1
-        '    If Not String.IsNullOrEmpty(column.HeaderText) Then
-        '        r = Dv.Find(column.HeaderText)
-        '    End If
-
-        '    If r >= 0 Then
-        '        column.HeaderText = Convert.ToString(Dv(r).Item(translatedColName))
-        '    ElseIf column.Tag IsNot Nothing Then
-        '        column.HeaderText = Convert.ToString(column.Tag)
-        '    End If
-        '    ' If both translation and tag are missing, keep the current HeaderText
-        'Next
-
     End Sub
+
+    Private Sub TranslateDataGrid(ByRef cDataGrid As DataGrid, ByVal targetLanguageIdNo As Integer)
+        cDataGrid.SuspendLayout()
+        Dim translationDict = GetTranslationDictionary(targetLanguageIdNo)
+        Dim originalText As String = cDataGrid.Name
+        If CaptionCollection.Contains(cDataGrid.Name) Then
+            originalText = CaptionCollection.Item(cDataGrid.Name)
+        End If
+        Dim translated As String = Nothing
+        If translationDict.TryGetValue(originalText, translated) Then
+            CType(cDataGrid, DataGrid).CaptionText = translated
+        ElseIf cDataGrid.Tag IsNot Nothing Then
+            CType(cDataGrid, DataGrid).CaptionText = cDataGrid.Tag.ToString()
+        Else
+            CType(cDataGrid, DataGrid).CaptionText = String.Empty
+        End If
+        cDataGrid.ResumeLayout()
+    End Sub
+
+
+
 
     Private Sub TranslateTabControl(ByRef cTabControl As CTabControl)
         cTabControl.SuspendLayout()
@@ -983,6 +1026,7 @@ Public Class BfMain
 
                 Dim lookupKey As String = If(obj.Tag IsNot Nothing, obj.Tag.ToString(), obj.Name)
                 Dim translated As String = Nothing
+                Debug.WriteLine("Menu key: " & lookupKey)
                 If translationDict.TryGetValue(lookupKey, translated) Then
                     obj.Text = translated
                 ElseIf translated IsNot Nothing Then
@@ -997,7 +1041,7 @@ Public Class BfMain
                     End If
                     TranslateMenuStripItems(subMenu.DropDownItems, newSubMenuName)
                 End If
-
+                Debug.WriteLine("Translation key: " & obj.Text)
                 'Dim r As Int16 = -1
                 'Dim tagValue As Object = obj.Tag
                 'If tagValue IsNot Nothing AndAlso Dv IsNot Nothing Then

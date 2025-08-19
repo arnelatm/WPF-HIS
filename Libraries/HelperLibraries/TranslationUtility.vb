@@ -1,4 +1,5 @@
 ﻿Imports System.Data
+Imports System.Windows.Forms
 
 
 ''' <summary>
@@ -31,7 +32,7 @@ Public NotInheritable Class TranslationUtility
                             For Each row As DataRow In table.Rows
                                 Dim key = Convert.ToString(row("Caption"))
                                 Dim value = Convert.ToString(row("translatedCaption"))
-                                If Not dict.ContainsKey(key) Then
+                                If Not String.IsNullOrEmpty(key) AndAlso Not dict.ContainsKey(key) Then
                                     dict.Add(key, value)
                                 End If
                             Next
@@ -57,7 +58,7 @@ Public NotInheritable Class TranslationUtility
         End If
 
         ' Fallback: load and cache on demand
-        Dim cmd As String = "Select Caption, translatedCaption from SystemViewItemOriginal_view where LanguageIdNo = " & viewId.ToString() & " and CultureInfoCode = '" & language & "'"
+        Dim cmd As String = "Select Caption, TranslatedCaption from SystemViewItemOriginal_view where SystemViewIdNo = " & viewId.ToString() & " and CultureInfoCode = '" & language & "'"
         Dim ds As DataSet = translatorDac.ReturnDs(cmd)
         Dim dict As New Dictionary(Of String, String)(StringComparer.OrdinalIgnoreCase)
         If ds IsNot Nothing AndAlso ds.Tables.Count > 0 Then
@@ -66,10 +67,13 @@ Public NotInheritable Class TranslationUtility
                 For Each row As DataRow In table.Rows
                     Dim key = Convert.ToString(row("Caption"))
                     Dim value = Convert.ToString(row("translatedCaption"))
-                    If Not dict.ContainsKey(key) Then
+                    If Not String.IsNullOrEmpty(key) AndAlso Not dict.ContainsKey(key) Then
                         dict.Add(key, value)
                     End If
                 Next
+                If dict.Count = 0 Then
+                    Debug.WriteLine("No translations found for: " & language & " / " & viewId)
+                End If
             End If
         End If
         _globalTranslationCache(cacheKey) = dict
@@ -82,6 +86,20 @@ Public NotInheritable Class TranslationUtility
     Public Shared Sub ClearCache()
         _globalTranslationCache.Clear()
     End Sub
+
+    Public Shared Function GetAllControls(root As Control) As List(Of Control)
+        Dim result As New List(Of Control)
+        Dim stack As New Stack(Of Control)
+        stack.Push(root)
+        While stack.Count > 0
+            Dim ctrl = stack.Pop()
+            result.Add(ctrl)
+            For Each child As Control In ctrl.Controls
+                stack.Push(child)
+            Next
+        End While
+        Return result
+    End Function
 
 End Class
 
