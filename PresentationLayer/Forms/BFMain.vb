@@ -261,6 +261,8 @@ Public Class BfMain
             If GlobalVariables.TranslationMode Then
                 RaiseEvent AfterTranslateForm()
             End If
+            SetGlobalFont(Me, New Font("Tahoma", 9)) ' Or another Unicode-supporting font
+            settings.RestoreSetting(Me)
         End If
     End Sub
 
@@ -429,16 +431,16 @@ Public Class BfMain
         Next
 
         For Each ctab As CTabControl In allCtrl.OfType(Of CTabControl)()
-            TranslateTabControl(ctab)
+            TranslateTabControl(ctab, translationDict)
         Next
 
-        ' Special controls
-        For Each menu As MenuStrip In allCtrl.OfType(Of MenuStrip)()
-            TranslateMenu(menu)
+        '' Special controls
+        For Each menuStrip As MenuStrip In allCtrl.OfType(Of MenuStrip)()
+            TranslateMenuStrip(menuStrip, translationDict)
         Next
 
-        For Each tool As ToolStrip In allCtrl.OfType(Of ToolStrip)()
-            TranslateToolStripItems(tool)
+        For Each toolStripButton As ToolStripButton In allCtrl.OfType(Of ToolStripButton)()
+            TranslateToolStripButton(toolStripButton, translationDict)
         Next
 
         For Each grid As DataGridView In allCtrl.OfType(Of DataGridView)()
@@ -575,33 +577,82 @@ Public Class BfMain
     End Function
 
 
-    Private Sub TranslateMenu(ByRef cMenuStrip As MenuStrip)
-        For Each obj As ToolStripItem In cMenuStrip.Items
-            obj.Text = GetToolStripText(cMenuStrip, obj, "Text")
-            obj.ToolTipText = GetToolStripText(cMenuStrip, obj, "ToolTipText")
-            'Dim c = CType(obj, TextBox)
-            'If GlobalVariables.RightToLeftLayout Then
-            '    c.Text = Messaging.TranslateCaption(c.Text)
-            '    c.RightToLeft = RightToLeft.Yes
-            'Else
-            '    c.RightToLeft = RightToLeft.No
-            'End If
+    Private Sub TranslateMenuStrip(cMenuStrip As MenuStrip, translationDict As Dictionary(Of String, String))
+        For Each obj As ToolStripMenuItem In cMenuStrip.Items
+            Dim key = If(obj.Tag IsNot Nothing, obj.Tag.ToString(), obj.Name)
+            Dim translatedText As String = Nothing
+            If translationDict.TryGetValue(key, translatedText) Then
+                obj.Text = translatedText
+            ElseIf obj.Tag IsNot Nothing Then
+                obj.Text = obj.Tag.ToString()
+            Else
+                obj.Text = obj.Name ' Fallback to Name if Tag and translation are missing
+            End If
+
+            ' Recursively translate submenus
+            For Each toolStripMenuItem As ToolStripMenuItem In obj.DropDownItems.OfType(Of ToolStripMenuItem)()
+                TranslateToolStripMenuItem(toolStripMenuItem, translationDict)
+            Next
+        Next
+
+        ' Optionally, set RTL and font for the menu and its items
+        cMenuStrip.RightToLeft = If(GlobalVariables.RightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
+        cMenuStrip.Font = New Font("Tahoma", 9) ' Or another Unicode-supporting font
+        cMenuStrip.Refresh()
+    End Sub
+
+    Private Sub TranslateToolStripMenuItem(cToolStripMenuItem As ToolStripMenuItem, translationDict As Dictionary(Of String, String))
+        Dim key = If(cToolStripMenuItem.Tag IsNot Nothing, cToolStripMenuItem.Tag.ToString(), cToolStripMenuItem.Name)
+        Dim translatedText As String = Nothing
+        If translationDict.TryGetValue(key, translatedText) Then
+            cToolStripMenuItem.Text = translatedText
+        ElseIf cToolStripMenuItem.Tag IsNot Nothing Then
+            cToolStripMenuItem.Text = cToolStripMenuItem.Tag.ToString()
+        Else
+            cToolStripMenuItem.Text = cToolStripMenuItem.Name ' Fallback to Name if Tag and translation are missing
+        End If
+
+        ' Recursively translate submenus
+        For Each item As ToolStripMenuItem In cToolStripMenuItem.DropDownItems.OfType(Of ToolStripMenuItem)()
+            TranslateToolStripMenuItem(item, translationDict)
         Next
     End Sub
-    Private Sub TranslateToolStripItems(ByRef cToolStrip As ToolStrip)
+
+    Private Sub TranslateToolStripButton(ByRef cToolStripButton As ToolStripButton, translationDict As Dictionary(Of String, String))
+        Dim translatedText As String = Nothing
+        translatedText = Nothing
+        Dim key = If(cToolStripButton.Tag IsNot Nothing, cToolStripButton.Tag.ToString(), cToolStripButton.Name)
+        If translationDict.TryGetValue(key, translatedText) Then
+            cToolStripButton.Text = translatedText
+        Else
+            cToolStripButton.Text = cToolStripButton.Tag
+        End If
+    End Sub
+
+
+
+    Private Sub TranslateToolStrip(ByRef cToolStrip As ToolStrip, translationDict As Dictionary(Of String, String))
+        Dim translatedText As String = Nothing
         For Each obj As Object In cToolStrip.Items
-            obj.Text = GetToolStripText(cToolStrip, obj, "Text")
-            obj.ToolTipText = GetToolStripText(cToolStrip, obj, "ToolTipText")
-            If TypeOf obj Is ToolStripButton Then
-                TranslateToolStripButtonImage(obj)
-            ElseIf TypeOf obj Is TextBox Then
-                Dim c = CType(obj, TextBox)
-                If GlobalVariables.RightToLeftLayout Then
-                    c.Text = Messaging.TranslateCaption(c.Text)
-                    c.RightToLeft = RightToLeft.Yes
-                Else
-                    c.RightToLeft = RightToLeft.No
-                End If
+            translatedText = Nothing
+            Dim key = If(obj.Tag IsNot Nothing, obj.Tag.ToString(), obj.Name)
+            If translationDict.TryGetValue(key, translatedText) Then
+                obj.Text = translatedText
+            Else
+                obj.Text = obj.Tag
+            End If
+        Next
+    End Sub
+
+
+
+    Private Sub TranslateToolStripItems(ByRef cToolStrip As ToolStrip, translationDict As Dictionary(Of String, String))
+        Dim translatedText As String = Nothing
+        For Each obj As Object In cToolStrip.Items
+            translatedText = Nothing
+            Dim key = If(obj.Tag IsNot Nothing, obj.Tag.ToString(), obj.Name)
+            If translationDict.TryGetValue(key, translatedText) Then
+                obj.Text = translatedText
             End If
         Next
     End Sub
@@ -654,9 +705,8 @@ Public Class BfMain
 
 
 
-    Private Sub TranslateTabControl(ByRef cTabControl As CTabControl)
+    Private Sub TranslateTabControl(ByRef cTabControl As CTabControl, translationDict As Dictionary(Of String, String))
         cTabControl.SuspendLayout()
-        Dim translationDict = GetTranslationDictionary(TargetLanguageIdNo)
         For Each tabPage As TabPage In cTabControl.TabPages
             Dim lookupKey As String = If(tabPage.Tag IsNot Nothing, tabPage.Tag.ToString(), tabPage.Name)
             Dim translated As String = Nothing
@@ -665,13 +715,6 @@ Public Class BfMain
             ElseIf tabPage.Tag IsNot Nothing Then
                 tabPage.Text = tabPage.Tag.ToString()
             End If
-            'Dim r As Int16
-            'r = Dv.Find(tabPage.Tag)
-            'If r >= 0 Then
-            '    tabPage.Text = Dv(r).Item("translatedCaption")
-            'Else
-            '    tabPage.Text = tabPage.Tag
-            'End If
         Next
         cTabControl.ResumeLayout()
         'Dim translationDict = GetTranslationDictionary(TargetLanguageIdNo)
@@ -1286,6 +1329,39 @@ Public Class BfMain
             If TypeOf cCtrl Is DataGridView Then
                 Dim cGrid As DataGridView = cCtrl
                 cGrid.EndEdit()
+            End If
+        Next
+    End Sub
+
+    Private Sub SetGlobalFont(ctrl As Control, font As Font)
+        ctrl.Font = font
+        For Each child As Control In ctrl.Controls
+            SetGlobalFont(child, font)
+        Next
+
+        ' Special handling for MenuStrip and ToolStrip
+        If TypeOf ctrl Is MenuStrip Then
+            Dim menu = CType(ctrl, MenuStrip)
+            menu.Font = font
+            For Each item As ToolStripMenuItem In menu.Items
+                SetToolStripItemFont(item, font)
+            Next
+        ElseIf TypeOf ctrl Is ToolStrip Then
+            Dim tool = CType(ctrl, ToolStrip)
+            tool.Font = font
+            For Each item As ToolStripItem In tool.Items
+                item.Font = font
+            Next
+        End If
+    End Sub
+
+    Private Sub SetToolStripItemFont(item As ToolStripMenuItem, font As Font)
+        item.Font = font
+        For Each subItem As ToolStripItem In item.DropDownItems
+            If TypeOf subItem Is ToolStripMenuItem Then
+                SetToolStripItemFont(CType(subItem, ToolStripMenuItem), font)
+            Else
+                subItem.Font = font
             End If
         Next
     End Sub
