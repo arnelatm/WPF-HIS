@@ -743,16 +743,16 @@ Public Class CFormEntry
                     sw = 1
                 End If
                 GlobalVariables.RightToLeftLayout = True
-                RightToLeft = RightToLeft.No
+                'RightToLeft = RightToLeft.No
             Else
                 If TextDisplayLanguage <> GlobalVariables.DefaultMirroredCultureInfoStr Then
                     TextDisplayLanguage = GlobalVariables.DefaultMirroredCultureInfoStr
                     sw = 1
                 End If
                 GlobalVariables.RightToLeftLayout = False
-                RightToLeft = RightToLeft.Yes
             End If
-            TranslateForm()
+            FlickerFreeTranslateForm()
+            'RightToLeft = RightToLeft.Yes
             If sw = 1 Then
                 CultureInfo.CurrentCulture = New CultureInfo(TextDisplayLanguage, False)
                 'If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then

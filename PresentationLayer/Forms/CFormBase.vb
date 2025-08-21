@@ -467,7 +467,7 @@ Public Class CFormBase
             GlobalVariables.RightToLeftLayout = False
             RightToLeft = RightToLeft.Yes
         End If
-        TranslateForm()
+        FlickerFreeTranslateForm()
         If sw = 1 Then
             CultureInfo.CurrentCulture = New CultureInfo(TextDisplayLanguage, False)
             btnArabic.Visible = originalUi
