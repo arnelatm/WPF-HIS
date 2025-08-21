@@ -160,6 +160,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="RunWorkerCompletedEventArgs.vb" />
+    <Compile Include="TranslationUtility.vb" />
     <Compile Include="WaitingForm.Designer.vb">
       <DependentUpon>WaitingForm.vb</DependentUpon>
     </Compile>
