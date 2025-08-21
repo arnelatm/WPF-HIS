@@ -48,6 +48,43 @@ Public Class BfMain
 
     Public Event BeforeLoad()
 
+    ' Add these Win32 declarations at the top of your class
+    Private Const WM_SETREDRAW As Integer = &HB
+    <System.Runtime.InteropServices.DllImport("user32.dll")>
+    Private Shared Function SendMessage(hWnd As IntPtr, msg As Integer, wParam As Boolean, lParam As Integer) As IntPtr
+    End Function
+
+    ' Helper to suspend painting
+    Private Sub SuspendDrawing(ctrl As Control)
+        If ctrl.IsHandleCreated Then
+            SendMessage(ctrl.Handle, WM_SETREDRAW, False, 0)
+        End If
+    End Sub
+
+    ' Helper to resume painting
+    Private Sub ResumeDrawing(ctrl As Control)
+        If ctrl.IsHandleCreated Then
+            SendMessage(ctrl.Handle, WM_SETREDRAW, True, 0)
+            ctrl.Refresh()
+        End If
+    End Sub
+
+    Private Sub EnableDataGridViewDoubleBuffering(dgv As DataGridView)
+        Dim dgvType = dgv.GetType()
+        Dim pi = dgvType.GetProperty("DoubleBuffered", Reflection.BindingFlags.Instance Or Reflection.BindingFlags.NonPublic)
+        If pi IsNot Nothing Then
+            pi.SetValue(dgv, True, Nothing)
+        End If
+    End Sub
+
+    Private Sub EnableTreeViewDoubleBuffering(tv As TreeView)
+        Dim tvType = tv.GetType()
+        Dim pi = tvType.GetProperty("DoubleBuffered", Reflection.BindingFlags.Instance Or Reflection.BindingFlags.NonPublic)
+        If pi IsNot Nothing Then
+            pi.SetValue(tv, True, Nothing)
+        End If
+    End Sub
+
     Public Sub New()
 
         ' This call is required by the designer.
@@ -231,7 +268,7 @@ Public Class BfMain
             GlobalVariables.RightToLeftLayout = True
             RightToLeft = RightToLeft.Yes
         End If
-        TranslateForm()
+        FlickerFreeTranslateForm()
         If sw = 1 Then
             CultureInfo.CurrentCulture = New CultureInfo(TextDisplayLanguage, False)
             If Ea IsNot Nothing Then
@@ -239,6 +276,64 @@ Public Class BfMain
             End If
         End If
         Visible = True
+    End Sub
+
+    ' Flicker-free translation routine
+    Private Sub FlickerFreeTranslateForm()
+        If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
+            Dim settings As New SettingsSaver
+            Dim allControls As List(Of Control) = TranslationUtility.GetAllControls(Me)
+            settings.SaveSetting(Me)
+            Me.DoubleBuffered = True
+
+            ' Enable double buffering for all containers
+            For Each ctrl As Control In allControls
+                If TypeOf ctrl Is Panel OrElse TypeOf ctrl Is TabControl OrElse TypeOf ctrl Is GroupBox OrElse TypeOf ctrl Is UserControl Then
+                    EnableDoubleBuff(ctrl)
+                ElseIf TypeOf ctrl Is DataGridView Then
+                    EnableDataGridViewDoubleBuffering(ctrl)
+                ElseIf TypeOf ctrl Is TreeView Then
+                    EnableTreeViewDoubleBuffering(ctrl)
+                ElseIf TypeOf ctrl Is FlowLayoutPanel Then
+                    EnableDoubleBuff(ctrl)
+                End If
+            Next
+
+            Me.Visible = False
+            Me.SuspendLayout()
+            SuspendAllDrawing(Me)
+            Try
+                TranslateCaptions(allControls, TextDisplayLanguage)
+                SetControlLayout(allControls)
+                SetGlobalFont(Me, New Font("Tahoma", 9))
+                settings.RestoreSetting(Me)
+            Finally
+                ResumeAllDrawing(Me)
+                Me.ResumeLayout(False)
+                Me.PerformLayout()
+                Me.Visible = True
+            End Try
+
+            If GlobalVariables.TranslationMode Then
+                RaiseEvent AfterTranslateForm()
+            End If
+        End If
+    End Sub
+
+    ' Recursively suspend drawing for all controls
+    Private Sub SuspendAllDrawing(ctrl As Control)
+        SuspendDrawing(ctrl)
+        For Each child As Control In ctrl.Controls
+            SuspendAllDrawing(child)
+        Next
+    End Sub
+
+    ' Recursively resume drawing for all controls
+    Private Sub ResumeAllDrawing(ctrl As Control)
+        ResumeDrawing(ctrl)
+        For Each child As Control In ctrl.Controls
+            ResumeAllDrawing(child)
+        Next
     End Sub
 
     Public Sub TranslateForm()
