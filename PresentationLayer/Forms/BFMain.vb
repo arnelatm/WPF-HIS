@@ -472,7 +472,7 @@ Public Class BfMain
 
     Protected Function GetSystemViewIdNo()
         Dim cmd As String
-        If ViewDisplayName IsNothing Or ViewDisplayName = "" Then
+        If ViewDisplayName Is Nothing Or ViewDisplayName = "" Then
             ViewDisplayName = Name
         End If
         cmd = "SELECT IdNo FROM SystemView where SystemViewName ='" + ViewDisplayName.Trim() + "'"
@@ -484,9 +484,8 @@ Public Class BfMain
             If col.Tag Is Nothing Then
                 col.Tag = col.HeaderText
             Else
-                col.HeaderText = col.Tag
+                col.HeaderText = col.Tag.ToString() ' FIX: ensure string
             End If
-
         Next
     End Sub
 
@@ -654,17 +653,12 @@ Public Class BfMain
         End If
     End Sub
 
-    Private Function GetControlSecurityIdNo(ByRef controlSecurityKey As String, Optional objIsMenu As Boolean = False) As Int64
+    Private Function GetControlSecurityIdNo(controlSecurityKey As String, Optional objIsMenu As Boolean = False) As Int64
         If objIsMenu Then
             Return Presenter.GetRecordFieldWithKey(controlSecurityKey, "SecurityObject_View1", "FullPathName", "IdNo")
-        Else
-            Dim idNo As Int32 = Presenter.GetRecordFieldWithKey(controlSecurityKey, "SecurityObject", "SecurityObjectName", "IdNo")
-            Dim parsed As Integer
-            If Integer.TryParse(idNo.ToString(), parsed) Then
-                Return parsed
-            End If
-            Return 0
         End If
+        Dim idNo As Int32 = Presenter.GetRecordFieldWithKey(controlSecurityKey, "SecurityObject", "SecurityObjectName", "IdNo")
+        Return If(idNo <> 0, idNo, 0)
     End Function
 
     Public Sub SetObjectSecurityNew(ByRef cCtrl As Control)
@@ -949,39 +943,95 @@ Public Class BfMain
         bindingSource.ResetBindings(False)
     End Sub
 
-    Public Sub RunSubForm(Of TF, TP)(data As Object, subFormParent As Form)
-        Dim childForm = Activator.CreateInstance(GetType(TF), data)
-        Activator.CreateInstance(GetType(TP), {childForm})
-        Dim pType As Type = GetType(TP)
-        childForm.Presenter = Activator.CreateInstance(pType, {childForm})
-        childForm.Show()
-        childForm.MdiParent = subFormParent
+
+
+
+    'Public Sub RunSubForm(Of TF, TP)(data As Object, subFormParent As Form)
+    '    Dim childForm = Activator.CreateInstance(GetType(TF), data)
+    '    AttachPresenter(Of TP)(childForm, childForm)
+    '    childForm.MdiParent = subFormParent
+    '    childForm.Show()
+    'End Sub
+
+    ' -------------------------------
+    ' Unified presenter attachment
+    ' -------------------------------
+    Private Sub AttachPresenter(Of TPresenter)(view As Form, ParamArray ctorArgs() As Object)
+        Dim presenter = Activator.CreateInstance(GetType(TPresenter), ctorArgs)
+        Dim pi = view.GetType().GetProperty("Presenter")
+        If pi IsNot Nothing Then
+            pi.SetValue(view, presenter, Nothing)
+        End If
     End Sub
 
-    Public Sub RunSubForm(Of TV, TP)()
-        Dim childMdiForm = Activator.CreateInstance(GetType(TV))
-        Dim pType As Type = GetType(TP)
-        childMdiForm.Presenter = Activator.CreateInstance(pType, {childMdiForm})
-        childMdiForm.MdiParent = Me
-        childMdiForm.Show()
+    ' View only, parent = Me (MDI host)
+    Public Sub RunSubForm(Of TView As {Form}, TPresenter)()
+        Dim child As TView = DirectCast(Activator.CreateInstance(GetType(TView)), TView)
+        AttachPresenter(Of TPresenter)(child, child)
+        child.MdiParent = Me
+        child.Show()
     End Sub
 
-    Public Sub RunSubForm(Of TF, TP)(subFormParent As Form)
-        Dim childForm = Activator.CreateInstance(GetType(TF))
-        Activator.CreateInstance(GetType(TP), {childForm})
-        Dim pType As Type = GetType(TP)
-        childForm.Presenter = Activator.CreateInstance(pType, {childForm})
-        childForm.Show()
-        childForm.MdiParent = subFormParent
+
+    ' View + data (data only for view ctor; presenter receives just the view)
+    Public Sub RunSubForm(Of TView As {Form}, TPresenter)(data As Object, mdiParent As Form)
+        Dim child As TView = DirectCast(Activator.CreateInstance(GetType(TView), data), TView)
+        AttachPresenter(Of TPresenter)(child, child)
+        child.MdiParent = mdiParent
+        child.Show()
     End Sub
 
-    Public Sub RunSubForm(Of TF, TP, TX)(ByRef subFormParent As Form, param As TX)
-        Dim childMdiForm = Activator.CreateInstance(GetType(TF), param)
-        childMdiForm.MdiParent = subFormParent
-        Dim pType As Type = GetType(TP)
-        childMdiForm.Presenter = Activator.CreateInstance(pType, {childMdiForm, param})
-        childMdiForm.Show()
+    'Public Sub RunSubForm(Of TF, TP)(data As Object, subFormParent As Form)
+    '    Dim childForm = Activator.CreateInstance(GetType(TF), data)
+    '    Activator.CreateInstance(GetType(TP), {childForm})
+    '    Dim pType As Type = GetType(TP)
+    '    childForm.Presenter = Activator.CreateInstance(pType, {childForm})
+    '    childForm.Show()
+    '    childForm.MdiParent = subFormParent
+    'End Sub
+
+
+
+    'Public Sub RunSubForm(Of TV, TP)()
+    '    Dim childMdiForm = Activator.CreateInstance(GetType(TV))
+    '    Dim pType As Type = GetType(TP)
+    '    childMdiForm.Presenter = Activator.CreateInstance(pType, {childMdiForm})
+    '    childMdiForm.MdiParent = Me
+    '    childMdiForm.Show()
+    'End Sub
+
+    ' View only, explicit parent
+    Public Sub RunSubForm(Of TView As {Form}, TPresenter)(mdiParent As Form)
+        Dim child As TView = DirectCast(Activator.CreateInstance(GetType(TView)), TView)
+        AttachPresenter(Of TPresenter)(child, child)
+        child.MdiParent = mdiParent
+        child.Show()
     End Sub
+
+    'Public Sub RunSubForm(Of TF, TP)(subFormParent As Form)
+    '    Dim childForm = Activator.CreateInstance(GetType(TF))
+    '    Activator.CreateInstance(GetType(TP), {childForm})
+    '    Dim pType As Type = GetType(TP)
+    '    childForm.Presenter = Activator.CreateInstance(pType, {childForm})
+    '    childForm.Show()
+    '    childForm.MdiParent = subFormParent
+    'End Sub
+
+    ' View + extra param (param passed to both view ctor and presenter ctor)
+    Public Sub RunSubForm(Of TView As {Form}, TPresenter, TArg)(ByRef mdiParent As Form, param As TArg)
+        Dim child As TView = DirectCast(Activator.CreateInstance(GetType(TView), param), TView)
+        AttachPresenter(Of TPresenter)(child, child, param)
+        child.MdiParent = mdiParent
+        child.Show()
+    End Sub
+
+    'Public Sub RunSubForm(Of TF, TP, TX)(ByRef subFormParent As Form, param As TX)
+    '    Dim childMdiForm = Activator.CreateInstance(GetType(TF), param)
+    '    childMdiForm.MdiParent = subFormParent
+    '    Dim pType As Type = GetType(TP)
+    '    childMdiForm.Presenter = Activator.CreateInstance(pType, {childMdiForm, param})
+    '    childMdiForm.Show()
+    'End Sub
 
     Public Sub ForceLooseFocusOnCurrentControl()
         Dim currentActiveControl As Control = ActiveControl
