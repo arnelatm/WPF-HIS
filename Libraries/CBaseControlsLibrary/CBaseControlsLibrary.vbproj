@@ -462,6 +462,7 @@
     <Compile Include="HijriDates.vb" />
     <Compile Include="ISequencedData.vb" />
     <Compile Include="IEntryControl.vb" />
+    <Compile Include="Localization\ControlLocalizer.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>

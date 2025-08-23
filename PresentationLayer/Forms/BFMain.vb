@@ -3,12 +3,13 @@ Imports System.Drawing
 Imports System.Globalization
 Imports System.Threading
 Imports System.Windows.Forms
-Imports AATM.Libraries
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
 Imports AATM.PresentationLayer.Views
+Imports AATM.Libraries
+Imports AATM.Libraries.CBaseControlsLibrary.Localization
 
 
 Public Class BfMain
@@ -151,29 +152,6 @@ Public Class BfMain
         End Set
     End Property
 
-    'Private Function BuildTranslationDictionary()
-    '    ' Build the translation dictionary once
-    '    Dim translationDict As New Dictionary(Of String, String)(StringComparer.OrdinalIgnoreCase)
-    '    If Dv IsNot Nothing AndAlso Dv.Table IsNot Nothing Then
-    '        Dim captionCol As String = ""
-    '        Dim translatedCol As String = ""
-    '        If Dv.Table.Columns.Contains("Caption") Then captionCol = "Caption"
-    '        If Dv.Table.Columns.Contains("TranslatedCaption") Then translatedCol = "TranslatedCaption"
-    '        If captionCol = "" OrElse translatedCol = "" Then
-    '            ' Optionally log: missing columns
-    '            Return Nothing
-    '        End If
-    '        For Each row As DataRowView In Dv
-    '            Dim key = Convert.ToString(row(captionCol))
-    '            Dim value = Convert.ToString(row(translatedCol))
-    '            If Not translationDict.ContainsKey(key) Then
-    '                translationDict.Add(key, value)
-    '            End If
-    '        Next
-    '    End If
-    '    Return translationDict
-    'End Function
-
     Private Function GetTranslationDictionary(languageIdNo As Integer) As Dictionary(Of String, String)
         Dim currentLanguage = TextDisplayLanguage
         Dim currentViewId = GetSystemViewIdNo()
@@ -184,7 +162,7 @@ Public Class BfMain
 
     Function IsTranslatable(ByRef ctrl As Control) As Boolean
         If TypeOf ctrl Is IEntryControl Then
-            'Dim x As IEntryControl
+            'Dim x: IEntryControl
             'x = ctrl
             'Return x.Translatable
             Return CType(ctrl, IEntryControl).Translatable
@@ -281,15 +259,15 @@ Public Class BfMain
         If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
             Dim settings As New SettingsSaver
             Dim allControls As List(Of Control) = TranslationUtility.GetAllControls(Me)
-            settings.SaveSetting(Me)
-            Me.DoubleBuffered = True
 
-            ' Enable double buffering for all containers
-            For Each ctrl As Control In allControls
-                If TypeOf ctrl Is Panel OrElse TypeOf ctrl Is TabControl OrElse TypeOf ctrl Is GroupBox OrElse TypeOf ctrl Is UserControl Then
-                    EnableDoubleBuff(ctrl)
-                End If
-            Next
+            ' (1) Persist current form bounds/state
+            settings.SaveSetting(Me)
+
+            ' (2) Turn on double buffer for entire tree early with guard
+            EnableDoubleBuffRecursive(Me, AddressOf ShouldSkipDoubleBuffer)
+
+            ' (3) Also keep form itself double buffered
+            Me.DoubleBuffered = True
 
             Me.Visible = False
             Me.SuspendLayout()
@@ -311,31 +289,6 @@ Public Class BfMain
             End If
         End If
     End Sub
-
-    'Public Sub TranslateForm()
-    '    If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
-    '        Dim settings As New SettingsSaver
-    '        Dim allControls As List(Of Control) = TranslationUtility.GetAllControls(Me)
-    '        settings.SaveSetting(Me)
-    '        ' If RightToLeftLayout is True, then the form location is being changed when Resetting RightToLeftLayout
-    '        ' form location is being changed when Resetting RightToLeftLayout so need to save values
-    '        ' to restore form with the same size and location
-    '        DoubleBuffered = True
-    '        Me.SuspendLayout()
-    '        Try
-    '            TranslateCaptions(allControls, TextDisplayLanguage)
-    '            SetControlLayout(allControls)
-    '            settings.RestoreSetting(Me)
-    '        Finally
-    '            Me.ResumeLayout()
-    '        End Try
-    '        If GlobalVariables.TranslationMode Then
-    '            RaiseEvent AfterTranslateForm()
-    '        End If
-    '        SetGlobalFont(Me, New Font("Tahoma", 9)) ' Or another Unicode-supporting font
-    '        settings.RestoreSetting(Me)
-    '    End If
-    'End Sub
 
     Protected Sub SetControlLayout(ByRef allCtrl As List(Of Control))
         Dim myImage As Bitmap
@@ -395,18 +348,28 @@ Public Class BfMain
 
     Protected Sub TranslateCaptions(ByRef allControls As List(Of Control), ByVal desiredLanguage As String, Optional ByVal allowFallBack As Boolean = True)
         Try
-            If (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
-                ' continue
-            Else
-                TargetLanguageIdNo = GetTargetLanguageIdNo(desiredLanguage, allowFallBack)
-                If TargetLanguageIdNo = 0 Then
-                    UseOriginalCaptions()
-                Else
-                    TranslateToLanguageIdNo(allControls, TargetLanguageIdNo)
-                End If
+            If System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime Then
+                Return
             End If
+
+            TargetLanguageIdNo = GetTargetLanguageIdNo(desiredLanguage, allowFallBack)
+
+#If DEBUG Then
+            Debug.WriteLine($"[TranslateCaptions] desiredLanguage={desiredLanguage}, targetLanguageIdNo={TargetLanguageIdNo}")
+#End If
+
+            If TargetLanguageIdNo = 0 Then
+                ' Was UseOriginalCaptions(); now directly use unified reset
+                ControlLocalizer.ResetControls(Me, AddressOf ControlLocalizer.ResetToolStripButtonImage)
+            Else
+                TranslateToLanguageIdNo(allControls, TargetLanguageIdNo)
+            End If
+
         Catch ex As Exception
-            Messaging.Show("Error while translating form: " + ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error)
+#If DEBUG Then
+            Debug.WriteLine("[TranslateCaptions][ERROR] " & ex.ToString())
+#End If
+            Messaging.Show("Error while translating form: " & ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error)
             Debugger.Break()
         End Try
     End Sub
@@ -417,7 +380,7 @@ Public Class BfMain
         Dim fallBackLanguageIdNo As Int16
         Dim fallBackLanguage As String
         If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
-            cmd = "Select IdNo from Languages where cultureInfoCode = '" + desiredLanguage + "'"
+            cmd = "Select Idno from Languages where cultureInfoCode = '" + desiredLanguage + "'"
             desiredLanguageIdNo = TranslatorDAC.ExecScalar(Of Int16)(cmd)
             If desiredLanguageIdNo = 0 Then
                 TargetLanguageIdNo = 0
@@ -449,175 +412,8 @@ Public Class BfMain
 
     Private Sub TranslateToLanguageIdNo(ByRef allCtrl As List(Of Control), targetLanguageIdNo As Integer)
         Dim translationDict = GetTranslationDictionary(targetLanguageIdNo)
-        For Each ctrl As Control In allCtrl
-            If Not IsTranslatable(ctrl) Then Continue For
-
-            Dim key = If(ctrl.Tag IsNot Nothing, ctrl.Tag.ToString(), ctrl.Name)
-            Dim translated As String = Nothing
-
-            If TypeOf ctrl Is Windows.Forms.Label OrElse TypeOf ctrl Is Button OrElse TypeOf ctrl Is CheckBox OrElse TypeOf ctrl Is RadioButton OrElse TypeOf ctrl Is TabPage Then
-                If translationDict.TryGetValue(key, translated) AndAlso ctrl.Text <> translated Then
-                    ctrl.Text = translated
-                End If
-            ElseIf TypeOf ctrl Is CButton Then
-                TranslateButton(ctrl)
-                If translationDict.TryGetValue(key, translated) AndAlso ctrl.Text <> translated Then
-                    ctrl.Text = translated
-                End If
-            ElseIf TypeOf ctrl Is CTabControl Then
-                TranslateTabControl(CType(ctrl, CTabControl), translationDict)
-            ElseIf TypeOf ctrl Is MenuStrip Then
-                TranslateMenuStrip(CType(ctrl, MenuStrip), translationDict)
-            ElseIf TypeOf ctrl Is ToolStrip Then
-                TranslateToolStrip(CType(ctrl, ToolStrip), translationDict)
-            ElseIf TypeOf ctrl Is DataGridView Then
-                TranslateDataGridView(CType(ctrl, DataGridView), targetLanguageIdNo)
-            ElseIf TypeOf ctrl Is DataGrid Then
-                TranslateDataGrid(CType(ctrl, DataGrid), targetLanguageIdNo)
-            Else
-                ' Fallback for any other translatable controls
-                If translationDict.TryGetValue(key, translated) AndAlso ctrl.Text <> translated Then
-                    ctrl.Text = translated
-                End If
-            End If
-        Next
+        ControlLocalizer.TranslateControls(Me, translationDict, toolStripButtonImageTranslator:=AddressOf ControlLocalizer.TranslateToolStripButtonImage)
     End Sub
-
-    'Protected Sub TranslateToLanguageIdNo(ByRef allCtrl As List(Of Control), targetLanguageIdNo As Integer)
-    '    Dim translationDict = GetTranslationDictionary(targetLanguageIdNo)
-
-    '    ' Standard WinForms controls
-    '    For Each lbl As Windows.Forms.Label In allCtrl.OfType(Of Windows.Forms.Label)()
-    '        Dim key = If(lbl.Tag IsNot Nothing, lbl.Tag.ToString(), lbl.Name)
-    '        Dim translated As String = Nothing
-    '        If translationDict.TryGetValue(key, translated) Then
-    '            lbl.Text = translated
-    '        End If
-    '    Next
-
-    '    For Each btn As Button In allCtrl.OfType(Of Button)()
-    '        Dim key = If(btn.Tag IsNot Nothing, btn.Tag.ToString(), btn.Name)
-    '        Dim translated As String = Nothing
-    '        If translationDict.TryGetValue(key, translated) Then
-    '            btn.Text = translated
-    '        End If
-    '    Next
-
-    '    For Each chk As CheckBox In allCtrl.OfType(Of CheckBox)()
-    '        Dim key = If(chk.Tag IsNot Nothing, chk.Tag.ToString(), chk.Name)
-    '        Dim translated As String = Nothing
-    '        If translationDict.TryGetValue(key, translated) Then
-    '            chk.Text = translated
-    '        End If
-    '    Next
-
-    '    For Each rad As RadioButton In allCtrl.OfType(Of RadioButton)()
-    '        Dim key = If(rad.Tag IsNot Nothing, rad.Tag.ToString(), rad.Name)
-    '        Dim translated As String = Nothing
-    '        If translationDict.TryGetValue(key, translated) Then
-    '            rad.Text = translated
-    '        End If
-    '    Next
-
-    '    For Each tab As TabPage In allCtrl.OfType(Of TabPage)()
-    '        Dim key = If(tab.Tag IsNot Nothing, tab.Tag.ToString(), tab.Name)
-    '        Dim translated As String = Nothing
-    '        If translationDict.TryGetValue(key, translated) Then
-    '            tab.Text = translated
-    '        End If
-    '    Next
-
-    '    ' Custom controls
-    '    For Each cbtn As CButton In allCtrl.OfType(Of CButton)()
-    '        TranslateButton(cbtn)
-    '        Dim key = If(cbtn.Tag IsNot Nothing, cbtn.Tag.ToString(), cbtn.Name)
-    '        Dim translated As String = Nothing
-    '        If translationDict.TryGetValue(key, translated) Then
-    '            cbtn.Text = translated
-    '        End If
-    '    Next
-
-    '    For Each ctab As CTabControl In allCtrl.OfType(Of CTabControl)()
-    '        TranslateTabControl(ctab, translationDict)
-    '    Next
-
-    '    '' Special controls
-    '    For Each menuStrip As MenuStrip In allCtrl.OfType(Of MenuStrip)()
-    '        TranslateMenuStrip(menuStrip, translationDict)
-    '    Next
-
-    '    For Each toolStripButton As ToolStripButton In allCtrl.OfType(Of ToolStripButton)()
-    '        TranslateToolStripButton(toolStripButton, translationDict)
-    '    Next
-
-    '    For Each grid As DataGridView In allCtrl.OfType(Of DataGridView)()
-    '        TranslateDataGridView(grid, targetLanguageIdNo)
-    '    Next
-
-    '    For Each grid As DataGrid In allCtrl.OfType(Of DataGrid)()
-    '        TranslateDataGrid(grid, targetLanguageIdNo)
-    '    Next
-
-    '    ' Fallback for any other translatable controls not covered above
-    '    For Each ctrl In allCtrl
-    '        If Not (TypeOf ctrl Is Windows.Forms.Label OrElse TypeOf ctrl Is Button OrElse TypeOf ctrl Is CheckBox OrElse
-    '            TypeOf ctrl Is RadioButton OrElse TypeOf ctrl Is TabPage OrElse
-    '            TypeOf ctrl Is CButton OrElse TypeOf ctrl Is CTabControl OrElse
-    '            TypeOf ctrl Is MenuStrip OrElse TypeOf ctrl Is ToolStrip OrElse
-    '            TypeOf ctrl Is DataGridView OrElse TypeOf ctrl Is DataGrid) AndAlso IsTranslatable(ctrl) Then
-
-    '            Dim key = If(ctrl.Tag IsNot Nothing, ctrl.Tag.ToString(), ctrl.Name)
-    '            Dim translated As String = Nothing
-    '            If translationDict.TryGetValue(key, translated) Then
-    '                ctrl.Text = translated
-    '            ElseIf ctrl.Tag IsNot Nothing Then
-    '                ctrl.Text = ctrl.Tag.ToString()
-    '            Else
-    '                ctrl.Text = String.Empty
-    '            End If
-    '        End If
-    '    Next
-    'End Sub
-
-
-    '    ' This method is commented out because it is not used in the current implementation.
-    'Protected Sub TranslateToLanguageIdNo(ByRef allCtrl As List(Of Control), targetLanguageIdNo As Integer)
-    '    Dim translationDict = GetTranslationDictionary(targetLanguageIdNo)
-    '    For Each cCtrl As Control In allCtrl
-    '        If Not IsTranslatable(cCtrl) Then Continue For
-
-    '        If TypeOf cCtrl Is MenuStrip Then
-    '            Dim subMenuName As String = ""
-    '            Dim menuStrip As MenuStrip = CType(cCtrl, MenuStrip)
-    '            TranslateMenuStripItems(menuStrip.Items, subMenuName)
-    '        ElseIf TypeOf cCtrl Is ToolStrip Then
-    '            TranslateToolStripItems(cCtrl)
-    '        ElseIf TypeOf cCtrl Is CTreeViewOld Or TypeOf cCtrl Is TreeView Then
-    '            ' No translation needed for tree view controls here
-    '        ElseIf TypeOf cCtrl Is DataGridView Then
-    '            TranslateDataGridView(cCtrl, targetLanguageIdNo)
-    '        ElseIf TypeOf cCtrl Is DataGrid Then
-    '            TranslateDataGrid(cCtrl, targetLanguageIdNo)
-    '        ElseIf TypeOf cCtrl Is CTabControl Then
-    '            TranslateTabControl(cCtrl)
-    '        ElseIf TypeOf cCtrl Is CButton Then
-    '            TranslateButton(cCtrl)
-    '        Else
-    '            Dim originalText As String = cCtrl.Name
-    '            If CaptionCollection.Contains(cCtrl.Name) Then
-    '                originalText = CaptionCollection.Item(cCtrl.Name)
-    '            End If
-    '            Dim translated As String = Nothing
-    '            If translationDict.TryGetValue(originalText, translated) Then
-    '                cCtrl.Text = translated
-    '            ElseIf cCtrl.Tag IsNot Nothing Then
-    '                cCtrl.Text = cCtrl.Tag.ToString()
-    '            Else
-    '                cCtrl.Text = String.Empty
-    '            End If
-    '        End If
-    '    Next
-    'End Sub
 
     Protected Sub LayOutControls(ByRef allCtrl As List(Of Control))
         For Each cCtrl As Control In allCtrl
@@ -627,7 +423,7 @@ Public Class BfMain
                     cToolStrip.SuspendLayout()
                     For Each obj As Object In cToolStrip.Items
                         If TypeOf obj Is ToolStripButton Then
-                            TranslateToolStripButtonImage(obj)
+                            ControlLocalizer.TranslateToolStripButtonImage(CType(obj, ToolStripButton))
                         ElseIf TypeOf obj Is TextBox Then
                             Dim c = CType(obj, TextBox)
                             If GlobalVariables.RightToLeftLayout Then
@@ -676,383 +472,12 @@ Public Class BfMain
 
     Protected Function GetSystemViewIdNo()
         Dim cmd As String
-        If ViewDisplayName Is Nothing Or ViewDisplayName = "" Then
+        If ViewDisplayName IsNothing Or ViewDisplayName = "" Then
             ViewDisplayName = Name
         End If
         cmd = "SELECT IdNo FROM SystemView where SystemViewName ='" + ViewDisplayName.Trim() + "'"
         Return TranslatorDAC.ExecScalar(Of Int16)(cmd)
     End Function
-
-    'Private Sub TranslateMenuStrip(cMenuStrip As MenuStrip, translationDict As Dictionary(Of String, String))
-    '    If translationDict Is Nothing OrElse cMenuStrip Is Nothing Then Exit Sub
-
-    '    ' Use the unified translator for each top-level menu item
-    '    For Each item As ToolStripItem In cMenuStrip.Items
-    '        TranslateToolStripItem(item, translationDict)
-    '    Next
-
-    '    ' Keep existing RTL/font behaviors
-    '    'cMenuStrip.RightToLeft = If(GlobalVariables.RightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
-    '    cMenuStrip.Font = New Font("Tahoma", 9)
-    '    cMenuStrip.Refresh()
-    'End Sub
-
-    Private Sub TranslateMenuStrip(cMenuStrip As MenuStrip, translationDict As Dictionary(Of String, String))
-        If translationDict Is Nothing OrElse cMenuStrip Is Nothing Then Exit Sub
-
-        ToolStripLocalizer.TranslateMenuStrip(
-            menu:=cMenuStrip,
-            translationDict:=translationDict,
-            applyRtl:=False,
-            rightToLeft:=GlobalVariables.RightToLeftLayout,
-            font:=New Font("Tahoma", 9),
-            buttonImageTranslator:=AddressOf TranslateToolStripButtonImage
-        )
-    End Sub
-
-
-    'Private Sub TranslateMenuStrip(cMenuStrip As MenuStrip, translationDict As Dictionary(Of String, String))
-    '    For Each obj As ToolStripMenuItem In cMenuStrip.Items
-    '        Dim key = If(obj.Tag IsNot Nothing, obj.Tag.ToString(), obj.Name)
-    '        Dim translatedText As String = Nothing
-    '        If translationDict.TryGetValue(key, translatedText) Then
-    '            obj.Text = translatedText
-    '        ElseIf obj.Tag IsNot Nothing Then
-    '            obj.Text = obj.Tag.ToString()
-    '        Else
-    '            obj.Text = obj.Name ' Fallback to Name if Tag and translation are missing
-    '        End If
-
-    '        ' Recursively translate submenus
-    '        For Each toolStripMenuItem As ToolStripMenuItem In obj.DropDownItems.OfType(Of ToolStripMenuItem)()
-    '            TranslateToolStripMenuItem(toolStripMenuItem, translationDict)
-    '        Next
-    '    Next
-
-    '    ' Optionally, set RTL and font for the menu and its items
-    '    cMenuStrip.RightToLeft = If(GlobalVariables.RightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
-    '    cMenuStrip.Font = New Font("Tahoma", 9) ' Or another Unicode-supporting font
-    '    cMenuStrip.Refresh()
-    'End Sub
-
-
-    'Private Sub TranslateToolStripMenuItem(cToolStripMenuItem As ToolStripMenuItem, translationDict As Dictionary(Of String, String))
-    '    Dim key = If(cToolStripMenuItem.Tag IsNot Nothing, cToolStripMenuItem.Tag.ToString(), cToolStripMenuItem.Name)
-    '    Dim translatedText As String = Nothing
-    '    If translationDict.TryGetValue(key, translatedText) Then
-    '        cToolStripMenuItem.Text = translatedText
-    '    ElseIf cToolStripMenuItem.Tag IsNot Nothing Then
-    '        cToolStripMenuItem.Text = cToolStripMenuItem.Tag.ToString()
-    '    Else
-    '        cToolStripMenuItem.Text = cToolStripMenuItem.Name ' Fallback to Name if Tag and translation are missing
-    '    End If
-
-    '    ' Recursively translate submenus
-    '    For Each item As ToolStripMenuItem In cToolStripMenuItem.DropDownItems.OfType(Of ToolStripMenuItem)()
-    '        TranslateToolStripMenuItem(item, translationDict)
-    '    Next
-    'End Sub
-
-    Private Sub TranslateToolStripItem(item As ToolStripItem, translationDict As Dictionary(Of String, String))
-        ToolStripLocalizer.TranslateToolStripItem(
-            item:=item,
-            translationDict:=translationDict,
-            buttonImageTranslator:=AddressOf TranslateToolStripButtonImage
-        )
-    End Sub
-
-
-    '' New common translator for ToolStrip items (buttons and menu items)
-    'Private Sub TranslateToolStripItem(item As ToolStripItem, translationDict As Dictionary(Of String, String))
-    '    If translationDict Is Nothing OrElse item Is Nothing Then Exit Sub
-
-    '    Dim txtKey As String = Nothing
-    '    Dim tipKey As String = Nothing
-
-    '    ' Expect Tag to optionally be Object() { textKey, toolTipKey }
-    '    If item.Tag IsNot Nothing AndAlso TypeOf item.Tag Is Object() Then
-    '        Dim tagArr = DirectCast(item.Tag, Object())
-    '        If tagArr.Length > 0 AndAlso tagArr(0) IsNot Nothing Then
-    '            txtKey = tagArr(0).ToString()
-    '        End If
-    '        If tagArr.Length > 1 AndAlso tagArr(1) IsNot Nothing Then
-    '            tipKey = tagArr(1).ToString()
-    '        End If
-    '    ElseIf item.Tag IsNot Nothing Then
-    '        ' Single key in Tag applies to Text
-    '        txtKey = item.Tag.ToString()
-    '    End If
-
-    '    ' Fallback keys when Tag is missing/partial
-    '    If String.IsNullOrWhiteSpace(txtKey) Then
-    '        txtKey = If(Not String.IsNullOrWhiteSpace(item.Text), item.Text, item.Name)
-    '    End If
-    '    If String.IsNullOrWhiteSpace(tipKey) Then
-    '        tipKey = item.ToolTipText
-    '    End If
-
-    '    ' Apply translations when available; otherwise keep existing values
-    '    Dim translated As String = Nothing
-    '    If Not String.IsNullOrWhiteSpace(txtKey) AndAlso translationDict.TryGetValue(txtKey, translated) Then
-    '        If item.Text <> translated Then
-    '            item.Text = translated
-    '        End If
-    '    End If
-
-    '    If Not String.IsNullOrWhiteSpace(tipKey) AndAlso translationDict.TryGetValue(tipKey, translated) Then
-    '        If item.ToolTipText <> translated Then
-    '            item.ToolTipText = translated
-    '        End If
-    '    End If
-
-    '    ' Optional: keep icon consistent with current layout/culture (buttons only)
-    '    Dim btn = TryCast(item, ToolStripButton)
-    '    If btn IsNot Nothing Then
-    '        TranslateToolStripButtonImage(btn)
-    '    End If
-
-    '    ' Recursively translate sub-items if this is a dropdown (covers menu items, dropdown/split buttons)
-    '    Dim dd = TryCast(item, ToolStripDropDownItem)
-    '    If dd IsNot Nothing Then
-    '        For Each subItem As ToolStripItem In dd.DropDownItems
-    '            TranslateToolStripItem(subItem, translationDict)
-    '        Next
-    '    End If
-    'End Sub
-
-
-    Private Sub TranslateToolStripMenuItem(cToolStripMenuItem As ToolStripMenuItem, translationDict As Dictionary(Of String, String))
-        ToolStripLocalizer.TranslateToolStripItem(cToolStripMenuItem, translationDict, AddressOf TranslateToolStripButtonImage)
-    End Sub
-
-    Private Sub TranslateToolStripButton(ByRef cToolStripButton As ToolStripButton, translationDict As Dictionary(Of String, String))
-        ToolStripLocalizer.TranslateToolStripItem(cToolStripButton, translationDict, AddressOf TranslateToolStripButtonImage)
-    End Sub
-
-    '' Thin wrapper for backward compatibility
-    'Private Sub TranslateToolStripMenuItem(cToolStripMenuItem As ToolStripMenuItem, translationDict As Dictionary(Of String, String))
-    '    TranslateToolStripItem(cToolStripMenuItem, translationDict)
-    'End Sub
-
-    '' Thin wrapper for backward compatibility
-    'Private Sub TranslateToolStripButton(ByRef cToolStripButton As ToolStripButton, translationDict As Dictionary(Of String, String))
-    '    TranslateToolStripItem(cToolStripButton, translationDict)
-    'End Sub
-
-    'Private Sub TranslateToolStripMenuItem(cToolStripMenuItem As ToolStripMenuItem, translationDict As Dictionary(Of String, String))
-    '    If translationDict Is Nothing Then Exit Sub
-
-    '    Dim txtKey As String = Nothing
-    '    Dim tipKey As String = Nothing
-
-    '    ' Expect Tag to optionally be Object() { textKey, toolTipKey }
-    '    If cToolStripMenuItem.Tag IsNot Nothing AndAlso TypeOf cToolStripMenuItem.Tag Is Object() Then
-    '        Dim tagArr = DirectCast(cToolStripMenuItem.Tag, Object())
-    '        If tagArr.Length > 0 AndAlso tagArr(0) IsNot Nothing Then
-    '            txtKey = tagArr(0).ToString()
-    '        End If
-    '        If tagArr.Length > 1 AndAlso tagArr(1) IsNot Nothing Then
-    '            tipKey = tagArr(1).ToString()
-    '        End If
-    '    ElseIf cToolStripMenuItem.Tag IsNot Nothing Then
-    '        ' Single key in Tag applies to Text
-    '        txtKey = cToolStripMenuItem.Tag.ToString()
-    '    End If
-
-    '    ' Fallback keys when Tag is missing/partial
-    '    If String.IsNullOrWhiteSpace(txtKey) Then
-    '        txtKey = If(Not String.IsNullOrWhiteSpace(cToolStripMenuItem.Text), cToolStripMenuItem.Text, cToolStripMenuItem.Name)
-    '    End If
-    '    If String.IsNullOrWhiteSpace(tipKey) Then
-    '        tipKey = cToolStripMenuItem.ToolTipText
-    '    End If
-
-    '    ' Apply translations when available; otherwise keep existing values
-    '    Dim translated As String = Nothing
-    '    If Not String.IsNullOrWhiteSpace(txtKey) AndAlso translationDict.TryGetValue(txtKey, translated) Then
-    '        If cToolStripMenuItem.Text <> translated Then
-    '            cToolStripMenuItem.Text = translated
-    '        End If
-    '    End If
-
-    '    If Not String.IsNullOrWhiteSpace(tipKey) AndAlso translationDict.TryGetValue(tipKey, translated) Then
-    '        If cToolStripMenuItem.ToolTipText <> translated Then
-    '            cToolStripMenuItem.ToolTipText = translated
-    '        End If
-    '    End If
-
-    '    ' Recursively translate submenus
-    '    For Each item As ToolStripMenuItem In cToolStripMenuItem.DropDownItems.OfType(Of ToolStripMenuItem)()
-    '        TranslateToolStripMenuItem(item, translationDict)
-    '    Next
-    'End Sub
-
-    'Private Sub TranslateToolStripButton(ByRef cToolStripButton As ToolStripButton, translationDict As Dictionary(Of String, String))
-    '    Dim translatedText As String = Nothing
-    '    ' toolStripButton have 2 tags tag(0) is the Text and tag(1) is the ToolTipText
-    '    For i = 0 To 1
-    '        translatedText = Nothing
-    '        Dim key = If(cToolStripButton.Tag(i) IsNot Nothing, cToolStripButton.Tag(i).ToString(), cToolStripButton.Name)
-    '        If translationDict.TryGetValue(key, translatedText) Then
-    '            If i = 0 Then
-    '                cToolStripButton.Text = translatedText
-    '            Else
-    '                cToolStripButton.ToolTipText = translatedText
-    '            End If
-    '        Else
-    '            If i = 0 Then
-    '                cToolStripButton.Text = key
-    '            Else
-    '                cToolStripButton.ToolTipText = key
-    '            End If
-    '        End If
-    '    Next
-    'End Sub
-
-    'Private Sub TranslateToolStripButton(ByRef cToolStripButton As ToolStripButton, translationDict As Dictionary(Of String, String))
-    '    If translationDict Is Nothing Then Exit Sub
-
-    '    Dim txtKey As String = Nothing
-    '    Dim tipKey As String = Nothing
-
-    '    ' Expect Tag to optionally be Object() { textKey, toolTipKey }
-    '    If cToolStripButton.Tag IsNot Nothing AndAlso TypeOf cToolStripButton.Tag Is Object() Then
-    '        Dim tagArr = DirectCast(cToolStripButton.Tag, Object())
-    '        If tagArr.Length > 0 AndAlso tagArr(0) IsNot Nothing Then
-    '            txtKey = tagArr(0).ToString()
-    '        End If
-    '        If tagArr.Length > 1 AndAlso tagArr(1) IsNot Nothing Then
-    '            tipKey = tagArr(1).ToString()
-    '        End If
-    '    ElseIf cToolStripButton.Tag IsNot Nothing Then
-    '        ' Single key in Tag applies to Text
-    '        txtKey = cToolStripButton.Tag.ToString()
-    '    End If
-
-    '    ' Fallback keys when Tag is missing/partial
-    '    If String.IsNullOrWhiteSpace(txtKey) Then
-    '        txtKey = If(Not String.IsNullOrWhiteSpace(cToolStripButton.Text), cToolStripButton.Text, cToolStripButton.Name)
-    '    End If
-    '    If String.IsNullOrWhiteSpace(tipKey) Then
-    '        tipKey = cToolStripButton.ToolTipText
-    '    End If
-
-    '    ' Apply translations when available; otherwise keep existing values
-    '    Dim translated As String = Nothing
-    '    If Not String.IsNullOrWhiteSpace(txtKey) AndAlso translationDict.TryGetValue(txtKey, translated) Then
-    '        If cToolStripButton.Text <> translated Then
-    '            cToolStripButton.Text = translated
-    '        End If
-    '    End If
-
-    '    If Not String.IsNullOrWhiteSpace(tipKey) AndAlso translationDict.TryGetValue(tipKey, translated) Then
-    '        If cToolStripButton.ToolTipText <> translated Then
-    '            cToolStripButton.ToolTipText = translated
-    '        End If
-    '    End If
-
-    '    ' Optional: keep icon consistent with current layout/culture
-    '    TranslateToolStripButtonImage(cToolStripButton)
-    'End Sub
-
-
-    'Private Sub TranslateToolStrip(ByRef cToolStrip As ToolStrip, translationDict As Dictionary(Of String, String))
-    '    For Each obj As Object In cToolStrip.Items
-    '        If TypeOf obj Is ToolStripButton Then
-    '            TranslateToolStripButton(CType(obj, ToolStripButton), translationDict)
-    '        ElseIf TypeOf obj Is ToolStripSeparator Then
-    '            ' ignore them
-    '        Else
-    '            Dim translatedText As String = Nothing
-    '            Dim key = If(obj.Tag IsNot Nothing, obj.Tag.ToString(), obj.Name)
-    '            If translationDict.TryGetValue(key, translatedText) Then
-    '                obj.Text = translatedText
-    '            Else
-    '                obj.Text = obj.Tag
-    '            End If
-    '        End If
-    '    Next
-    'End Sub
-
-    Private Sub TranslateToolStrip(ByRef cToolStrip As ToolStrip, translationDict As Dictionary(Of String, String))
-        ToolStripLocalizer.TranslateToolStrip(
-            tool:=cToolStrip,
-            translationDict:=translationDict,
-            buttonImageTranslator:=AddressOf TranslateToolStripButtonImage
-        )
-    End Sub
-
-    'Private Sub TranslateToolStrip(ByRef cToolStrip As ToolStrip, translationDict As Dictionary(Of String, String))
-    '    For Each obj As Object In cToolStrip.Items
-    '        If TypeOf obj Is ToolStripButton Then
-    '            TranslateToolStripButton(CType(obj, ToolStripButton), translationDict)
-    '        ElseIf TypeOf obj Is ToolStripSeparator Then
-    '            ' ignore
-    '        ElseIf TypeOf obj Is ToolStripDropDownButton Then
-    '            Dim dropDown = CType(obj, ToolStripDropDownButton)
-    '            Dim key = If(dropDown.Tag IsNot Nothing, dropDown.Tag.ToString(), dropDown.Name)
-    '            Dim translatedText As String = Nothing
-    '            If translationDict.TryGetValue(key, translatedText) Then
-    '                dropDown.Text = translatedText
-    '            End If
-    '            ' Recursively translate dropdown items
-    '            TranslateToolStripDropDownItems(dropDown.DropDownItems, translationDict)
-    '        ElseIf TypeOf obj Is ToolStripSplitButton Then
-    '            Dim splitBtn = CType(obj, ToolStripSplitButton)
-    '            Dim key = If(splitBtn.Tag IsNot Nothing, splitBtn.Tag.ToString(), splitBtn.Name)
-    '            Dim translatedText As String = Nothing
-    '            If translationDict.TryGetValue(key, translatedText) Then
-    '                splitBtn.Text = translatedText
-    '            End If
-    '            TranslateToolStripDropDownItems(splitBtn.DropDownItems, translationDict)
-    '        ElseIf TypeOf obj Is ToolStripLabel Then
-    '            Dim label = CType(obj, ToolStripLabel)
-    '            Dim key = If(label.Tag IsNot Nothing, label.Tag.ToString(), label.Name)
-    '            Dim translatedText As String = Nothing
-    '            If translationDict.TryGetValue(key, translatedText) Then
-    '                label.Text = translatedText
-    '            End If
-    '        Else
-    '            ' Fallback for other ToolStripItem types
-    '            Dim key = If(obj.Tag IsNot Nothing, obj.Tag.ToString(), obj.Name)
-    '            Dim translatedText As String = Nothing
-    '            If translationDict.TryGetValue(key, translatedText) Then
-    '                Try
-    '                    obj.Text = translatedText
-    '                Catch
-    '                    ' Ignore if obj does not have Text property
-    '                End Try
-    '            End If
-    '        End If
-    '    Next
-    'End Sub
-
-    'Private Sub TranslateToolStripDropDownItems(items As ToolStripItemCollection, translationDict As Dictionary(Of String, String))
-    '    For Each item As ToolStripItem In items
-    '        Dim key = If(item.Tag IsNot Nothing, item.Tag.ToString(), item.Name)
-    '        Dim translatedText As String = Nothing
-    '        If translationDict.TryGetValue(key, translatedText) Then
-    '            item.Text = translatedText
-    '        End If
-    '        ' Recursively handle nested dropdowns
-    '        If TypeOf item Is ToolStripDropDownButton Then
-    '            TranslateToolStripDropDownItems(CType(item, ToolStripDropDownButton).DropDownItems, translationDict)
-    '        ElseIf TypeOf item Is ToolStripSplitButton Then
-    '            TranslateToolStripDropDownItems(CType(item, ToolStripSplitButton).DropDownItems, translationDict)
-    '        End If
-    '    Next
-    'End Sub
-
-    'Private Sub TranslateToolStripItems(ByRef cToolStrip As ToolStrip, translationDict As Dictionary(Of String, String))
-    '    Dim translatedText As String = Nothing
-    '    For Each obj As Object In cToolStrip.Items
-    '        translatedText = Nothing
-    '        Dim key = If(obj.Tag IsNot Nothing, obj.Tag.ToString(), obj.Name)
-    '        If translationDict.TryGetValue(key, translatedText) Then
-    '            obj.Text = translatedText
-    '        End If
-    '    Next
-    'End Sub
 
     Private Sub UseOriginalDataGridView(ByRef CtDataGridView As DataGridView)
         For Each col As DataGridViewColumn In CtDataGridView.Columns
@@ -1069,7 +494,7 @@ Public Class BfMain
         CtDataGridView.SuspendLayout()
         Dim translationDict = GetTranslationDictionary(targetLanguageIdNo)
         For Each column As DataGridViewColumn In CtDataGridView.Columns
-            Dim lookupKey As String = If(column.Tag IsNot Nothing, column.Tag.ToString(), column.Name)
+            Dim lookupKey = If(column.Tag IsNot Nothing, column.Tag.ToString(), column.Name)
             Dim translated As String = Nothing
             If translationDict.TryGetValue(lookupKey, translated) Then
                 column.HeaderText = translated
@@ -1079,52 +504,6 @@ Public Class BfMain
             ' If both translation and tag are missing, keep the current HeaderText
         Next
         CtDataGridView.ResumeLayout()
-    End Sub
-
-    Private Sub TranslateDataGrid(ByRef cDataGrid As DataGrid, ByVal targetLanguageIdNo As Integer)
-        cDataGrid.SuspendLayout()
-        Dim translationDict = GetTranslationDictionary(targetLanguageIdNo)
-        Dim originalText As String = cDataGrid.Name
-        If CaptionCollection.Contains(cDataGrid.Name) Then
-            originalText = CaptionCollection.Item(cDataGrid.Name)
-        End If
-        Dim translated As String = Nothing
-        If translationDict.TryGetValue(originalText, translated) Then
-            CType(cDataGrid, DataGrid).CaptionText = translated
-        ElseIf cDataGrid.Tag IsNot Nothing Then
-            CType(cDataGrid, DataGrid).CaptionText = cDataGrid.Tag.ToString()
-        Else
-            CType(cDataGrid, DataGrid).CaptionText = String.Empty
-        End If
-        cDataGrid.ResumeLayout()
-    End Sub
-
-
-
-
-    Private Sub TranslateTabControl(ByRef cTabControl As CTabControl, translationDict As Dictionary(Of String, String))
-        cTabControl.SuspendLayout()
-        For Each tabPage As TabPage In cTabControl.TabPages
-            Dim lookupKey As String = If(tabPage.Tag IsNot Nothing, tabPage.Tag.ToString(), tabPage.Name)
-            Dim translated As String = Nothing
-            If translationDict.TryGetValue(lookupKey, translated) Then
-                tabPage.Text = translated
-            ElseIf tabPage.Tag IsNot Nothing Then
-                tabPage.Text = tabPage.Tag.ToString()
-            End If
-        Next
-        cTabControl.ResumeLayout()
-        'Dim translationDict = GetTranslationDictionary(TargetLanguageIdNo)
-        'For Each column As DataGridViewColumn In CtDataGridView.Columns
-        '    Dim lookupKey As String = If(column.Tag IsNot Nothing, column.Tag.ToString(), column.Name)
-        '    Dim translated As String = Nothing
-        '    If translationDict.TryGetValue(lookupKey, translated) Then
-        '        column.HeaderText = translated
-        '    ElseIf column.Tag IsNot Nothing Then
-        '        column.HeaderText = column.Tag.ToString()
-        '    End If
-        '    ' If both translation and tag are missing, keep the current HeaderText
-        'Next
     End Sub
 
     Private _targetLanguageIdNo As Integer
@@ -1138,46 +517,6 @@ Public Class BfMain
         End Get
     End Property
 
-
-
-    'Private Function GetToolStripText(cToolStrip As ToolStrip, obj As Object, propName As String) As String
-    '    Dim key As String = cToolStrip.Name & "." & obj.Name & "." & propName
-    '    Dim translatedText As String = Nothing
-    '    Dim translationDict = GetTranslationDictionary(TargetLanguageIdNo)
-
-    '    If translationDict IsNot Nothing AndAlso translationDict.TryGetValue(key, translatedText) Then
-    '        Return translatedText
-    '    End If
-
-    '    ' Fallback: try to get from Tag (if it's an array, pick the right index)
-    '    If obj.Tag IsNot Nothing Then
-    '        If TypeOf obj.Tag Is Object() Then
-    '            Dim tagArr = DirectCast(obj.Tag, Object())
-    '            If propName = "ToolTipText" AndAlso tagArr.Length > 1 AndAlso tagArr(1) IsNot Nothing Then
-    '                Return tagArr(1).ToString()
-    '            ElseIf propName = "Text" AndAlso tagArr.Length > 1 AndAlso tagArr(0) IsNot Nothing Then
-    '                Return tagArr(0).ToString()
-    '            End If
-    '        Else
-    '            Return obj.Tag.ToString()
-    '        End If
-    '    End If
-
-    '    Return String.Empty
-
-    '    'Dim translatedText As String = ""
-    '    'Dim r As Integer
-    '    'If CaptionCollection.Contains(cToolStrip.Name + "." + obj.Name + "." + propName) Then
-    '    '    r = Dv.Find(CaptionCollection.Item(cToolStrip.Name + "." + obj.Name + "." + propName))
-    '    '    If r >= 0 Then
-    '    '        translatedText = Dv(r).Item("translatedCaption")
-    '    '    Else
-    '    '        translatedText = obj.Tag(If(propName = "Text", 0, 1))
-    '    '    End If
-    '    'End If
-    '    'Return translatedText
-    'End Function
-
     Private Sub TranslateButton(cCtrl As Control)
         Dim o = CType(cCtrl, CButton)
         Dim cButton = CType(cCtrl, CButton)
@@ -1190,8 +529,8 @@ Public Class BfMain
                 cFileName = "btn" + o.OriginalImageName.ToLower()
             End If
         End If
-        If GlobalResources.My.Resources.ResourceManager.GetObject(cFileName) IsNot Nothing Then
-            cButton.Image = GlobalResources.My.Resources.ResourceManager.GetObject(cFileName)
+        If My.Resources.ResourceManager.GetObject(cFileName) IsNot Nothing Then
+            cButton.Image = My.Resources.ResourceManager.GetObject(cFileName)
         End If
     End Sub
 
@@ -1202,24 +541,8 @@ Public Class BfMain
         If cButton.Image IsNot Nothing And cButton.OriginalImageName IsNot Nothing Then
             cFileName = "btn" + o.OriginalImageName.ToLower()
         End If
-        If GlobalResources.My.Resources.ResourceManager.GetObject(cFileName) IsNot Nothing Then
-            cButton.Image = GlobalResources.My.Resources.ResourceManager.GetObject(cFileName)
-        End If
-    End Sub
-
-    Private Sub TranslateToolStripButtonImage(cButton As ToolStripButton)
-        Dim cResourceName = cButton.Name.ToLower()
-        If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
-            Dim cCurrentCulture = CultureInfo.CurrentCulture.Name.Replace("-", "_")
-            cResourceName = cResourceName + "_" + cCurrentCulture.ToLower()
-        Else
-            If cButton.Image IsNot Nothing Then
-                cResourceName = If(cButton.Image.Tag IsNot Nothing, cButton.Image.Tag, cResourceName)
-            End If
-            'cButton.ToolTipText = If(cButton.Tag IsNot Nothing, cButton.Tag(1), cButton.ToolTipText)
-        End If
-        If GlobalResources.My.Resources.ResourceManager.GetObject(cResourceName) IsNot Nothing Then
-            cButton.Image = GlobalResources.My.Resources.ResourceManager.GetObject(cResourceName)
+        If My.Resources.ResourceManager.GetObject(cFileName) IsNot Nothing Then
+            cButton.Image = My.Resources.ResourceManager.GetObject(cFileName)
         End If
     End Sub
 
@@ -1307,7 +630,6 @@ Public Class BfMain
         If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
             ' Preload translations for English and Arabic, and views 1 and 2
             TranslationUtility.PreloadTranslations(New String() {"en-US", "ar-SA"}, New Integer() {1, 2}, TranslatorDAC)
-
             If _firstLoadSwitch = 0 Then
                 GetNSaveCaptions()
                 _firstLoadSwitch = 1
@@ -1317,6 +639,7 @@ Public Class BfMain
             End If
             RaiseEvent BeforeLoad()
         End If
+        EnableDoubleBuffRecursive(Me, AddressOf ShouldSkipDoubleBuffer)
     End Sub
 
     Public Sub GetNSaveCaptions() 'control As Control)
@@ -1336,12 +659,11 @@ Public Class BfMain
             Return Presenter.GetRecordFieldWithKey(controlSecurityKey, "SecurityObject_View1", "FullPathName", "IdNo")
         Else
             Dim idNo As Int32 = Presenter.GetRecordFieldWithKey(controlSecurityKey, "SecurityObject", "SecurityObjectName", "IdNo")
-            Dim retVal As Integer
-            If Not Integer.TryParse(idNo, retVal) Then
-                Return retVal
-            Else
-                Return 0
+            Dim parsed As Integer
+            If Integer.TryParse(idNo.ToString(), parsed) Then
+                Return parsed
             End If
+            Return 0
         End If
     End Function
 
@@ -1470,165 +792,112 @@ Public Class BfMain
         Next
     End Sub
 
-    'Private Sub TranslateMenuStripItems(dropDownItems As ToolStripItemCollection, subMenuName As String)
-    '    Dim translationDict = GetTranslationDictionary(TargetLanguageIdNo)
-    '    For Each obj As Object In dropDownItems
-    '        Dim subMenu = TryCast(obj, ToolStripMenuItem)
-    '        If subMenu IsNot Nothing Then
+    ' --- Double buffering helpers (enhanced) ---
 
-    '            Dim lookupKey As String = If(obj.Tag IsNot Nothing, obj.Tag.ToString(), obj.Name)
-    '            Dim translated As String = Nothing
-    '            If translationDict.TryGetValue(lookupKey, translated) Then
-    '                obj.Text = translated
-    '            ElseIf translated IsNot Nothing Then
-    '                obj.Text = lookupKey
-    '            Else
-    '                obj.Text = String.Empty
-    '            End If
-    '            If subMenu.HasDropDownItems Then
-    '                Dim newSubMenuName = subMenuName
-    '                If Not String.IsNullOrEmpty(obj.Name) Then
-    '                    newSubMenuName = newSubMenuName & "." & obj.Name
-    '                End If
-    '                TranslateMenuStripItems(subMenu.DropDownItems, newSubMenuName)
-    '            End If
-    '            'Dim r As Int16 = -1
-    '            'Dim tagValue As Object = obj.Tag
-    '            'If tagValue IsNot Nothing AndAlso Dv IsNot Nothing Then
+    Private Shared ReadOnly _doubleBufferedPropCache As New Dictionary(Of Type, Reflection.PropertyInfo)()
+    Private Shared ReadOnly _cacheSync As New Object()
 
+    ' Predicate: return True to SKIP double buffering for that control
+    Private Shared Function ShouldSkipDoubleBuffer(ctrl As Control) As Boolean
+        ' Example: skip huge PictureBox (e.g. > 800k pixels) to avoid memory churn
+        If TypeOf ctrl Is PictureBox Then
+            Dim pb = DirectCast(ctrl, PictureBox)
+            If (pb.Width * pb.Height) > 800000 Then Return True
+        End If
 
-    '            '    r = Dv.Find(tagValue)
-    '            'End If
-    '            'If r >= 0 AndAlso Dv.Table.Columns.Contains("translatedCaption") Then
-    '            '    obj.Text = Convert.ToString(Dv(r).Item("translatedCaption"))
-    '            'ElseIf tagValue IsNot Nothing Then
-    '            '    obj.Text = tagValue.ToString
-    '            'Else
-    '            '    obj.Text = String.Empty
-    '            'End If
-    '            'If subMenu.HasDropDownItems Then
-    '            '    Dim newSubMenuName = subMenuName
-    '            '    If Not String.IsNullOrEmpty(obj.Name) Then
-    '            '        newSubMenuName = newSubMenuName & "." & obj.Name
-    '            '    End If
-    '            '    TranslateMenuStripItems(subMenu.DropDownItems, newSubMenuName)
-    '            'End If
+        ' Example: skip TextBoxBase descendants if you do not need them buffered
+        If TypeOf ctrl Is TextBoxBase Then Return True
 
-    '        End If
-    '    Next
-    'End Sub
+        ' Example: skip controls explicitly tagged: Tag = "__NO_DB__"
+        If ctrl.Tag IsNot Nothing AndAlso String.Equals(ctrl.Tag.ToString(), "__NO_DB__", StringComparison.Ordinal) Then
+            Return True
+        End If
 
-    Private Sub UseOriginalMenuStripCaptions(dropDownItems As ToolStripItemCollection, subMenuName As String)
-        For Each obj As Object In dropDownItems
-            Dim subMenu = TryCast(obj, ToolStripMenuItem)
-            If subMenu IsNot Nothing Then
-                Dim tagValue As Object = obj.Tag
-                If subMenu.HasDropDownItems Then
-                    Dim newSubMenuName = subMenuName
-                    If Not String.IsNullOrEmpty(obj.Name) Then
-                        newSubMenuName = newSubMenuName & "." & obj.Name
-                    End If
-                    obj.Text = If(tagValue IsNot Nothing, tagValue.ToString(), String.Empty)
-                    UseOriginalMenuStripCaptions(subMenu.DropDownItems, newSubMenuName)
-                Else
-                    Dim toolStripMenuItem As ToolStripMenuItem = obj
-                    toolStripMenuItem.Text = If(toolStripMenuItem.Tag IsNot Nothing, toolStripMenuItem.Tag.ToString(), String.Empty)
-                End If
+        Return False
+    End Function
+
+    Public Shared Sub EnableDoubleBuff(control As Control)
+        If control Is Nothing Then Return
+        If ShouldSkipDoubleBuffer(control) Then Return
+
+        Dim t = control.GetType()
+        Dim pi As Reflection.PropertyInfo = Nothing
+
+        ' Cache lookup
+        SyncLock _cacheSync
+            If Not _doubleBufferedPropCache.TryGetValue(t, pi) Then
+                pi = t.GetProperty("DoubleBuffered",
+                                   Reflection.BindingFlags.Instance Or Reflection.BindingFlags.NonPublic)
+                _doubleBufferedPropCache(t) = pi ' can be Nothing if absent
             End If
-        Next
-    End Sub
+        End SyncLock
 
-    Private Sub UseOriginalCaptions()
-        Dim allCtrl As New List(Of Control)
-        For Each cCtrl As Control In FindControlRecursive(allCtrl, Me)
-            If IsTranslatable(cCtrl) Then
-                If TypeOf cCtrl Is MenuStrip Then
-                    Dim menuStrip As MenuStrip = cCtrl
-                    ToolStripLocalizer.ResetMenuStripToOriginalTags(menuStrip)
-                ElseIf TypeOf cCtrl Is ToolStrip Then
-                    UseOriginalToolStripItems(cCtrl)
-                ElseIf TypeOf cCtrl Is DataGridView Then
-                    UseOriginalDataGridView(cCtrl)
-                ElseIf TypeOf cCtrl Is DataGrid Then
-                    CType(cCtrl, DataGrid).CaptionText = cCtrl.Tag
-                Else
-                    If TypeOf cCtrl Is CButton Then
-                        UseOriginalButtonText(cCtrl)
-                    End If
-                    cCtrl.Text = cCtrl.Tag
-                End If
-            End If
-        Next
-    End Sub
+        If pi IsNot Nothing AndAlso pi.CanWrite Then
+            Try
+                pi.SetValue(control, True, Nothing)
+            Catch
+                ' ignore
+            End Try
+        End If
 
-    Private Sub UseOriginalToolStripItems(ByRef cToolStrip As ToolStrip)
-        ToolStripLocalizer.ResetToolStripToOriginalTags(cToolStrip)
-        For Each obj As Object In cToolStrip.Items
-            If TypeOf obj Is ToolStripButton Then
-                UseOriginalToolStripButtonImage(DirectCast(obj, ToolStripButton))
-            End If
-        Next
-    End Sub
-
-    'Private Sub UseOriginalToolStripItems(ByRef cToolStrip As ToolStrip)
-    '    For Each obj As Object In cToolStrip.Items
-    '        If obj.Tag IsNot Nothing AndAlso TypeOf obj.Tag Is Object() Then
-    '            Dim tagArr = DirectCast(obj.Tag, Object())
-    '            If tagArr.Length > 0 Then obj.Text = tagArr(0)
-    '            If tagArr.Length > 1 Then obj.ToolTipText = tagArr(1)
-    '        ElseIf obj.Tag IsNot Nothing Then
-    '            obj.Text = obj.Tag.ToString()
-    '            obj.ToolTipText = ""
-    '        Else
-    '            obj.Text = ""
-    '            obj.ToolTipText = ""
-    '        End If
-    '        If TypeOf obj Is ToolStripButton Then
-    '            UseOriginalToolStripButtonImage(obj)
-    '        ElseIf TypeOf obj Is TextBox Then
-    '            Dim c = CType(obj, TextBox)
-    '            If GlobalVariables.RightToLeftLayout Then
-    '                c.Text = Messaging.TranslateCaption(c.Text)
-    '                c.RightToLeft = RightToLeft.Yes
-    '            Else
-    '                c.RightToLeft = RightToLeft.No
-    '            End If
-    '        End If
-    '    Next
-    'End Sub
-
-    Private Sub UseOriginalToolStripButtonImage(cButton As ToolStripButton)
-        Dim cResourceName = cButton.Name.ToLower()
-        If GlobalResources.My.Resources.ResourceManager.GetObject(cResourceName) IsNot Nothing Then
-            cButton.Image = GlobalResources.My.Resources.ResourceManager.GetObject(cResourceName)
+        ' Targeted tweaks for DataGridView
+        Dim dgv = TryCast(control, DataGridView)
+        If dgv IsNot Nothing Then
+            dgv.EnableHeadersVisualStyles = False
         End If
     End Sub
 
-    Public Shared Sub EnableDoubleBuff(ByVal cont As Control)
-        Dim demoProp As Reflection.PropertyInfo = GetType(Control).GetProperty("DoubleBuffered", Reflection.BindingFlags.NonPublic Or Reflection.BindingFlags.Instance)
-        demoProp.SetValue(cont, True, Nothing)
+    Public Shared Sub EnableDoubleBuffRecursive(root As Control,
+                                                Optional excludePredicate As Func(Of Control, Boolean) = Nothing)
+        If root Is Nothing Then Return
+
+        If excludePredicate Is Nothing Then
+            EnableDoubleBuff(root)
+        ElseIf Not excludePredicate(root) Then
+            EnableDoubleBuff(root)
+        End If
+
+        For Each child As Control In root.Controls
+            EnableDoubleBuffRecursive(child, excludePredicate)
+        Next
     End Sub
 
     Public Property HideNavigatorButtons As Boolean
     Public Property IgnoreTextBoxNumParserMessage As Boolean
 
-    Protected Function TextBoxNumParser(Of T As Structure)(ByRef control As CTextBox) As T
-        Dim retValue As T
+    ' Updated to initialize retValue to its default value to avoid BC42109 warning.
+    Protected Function TextBoxNumParser(Of T As Structure)(ByVal control As CTextBox) As T
+        ' Pseudocode:
+        ' 1. Initialize retValue to default(T) (Nothing for value types) to silence unassigned use warning.
+        ' 2. Read and trim control text.
+        ' 3. If empty: set control text to default value string and return default.
+        ' 4. Try parse:
+        '    a. On success assign parsed value, set control text to its string and return.
+        '    b. On failure: optionally log, reset control text to default value string and return default.
+        Dim retValue As T = Nothing  ' Ensures variable is initialized (fixes BC42109)
+
+        Dim originalText = If(control.Text, String.Empty).Trim()
+
+        If String.IsNullOrEmpty(originalText) Then
+            control.Text = retValue.ToString()
+            Return retValue
+        End If
+
         Try
-            retValue = Parser(Of T).Parser(control.Text)
-            Text = retValue.ToString()
+            retValue = Parser(Of T).Parser(originalText)
+            control.Text = retValue.ToString()
+            Return retValue
         Catch ex As Exception
             If Not IgnoreTextBoxNumParserMessage Then
-                Dim description As String
-                If TypeOf control Is ILinkedLabel Then
-                    description = DirectCast(control, ILinkedLabel).GetControlDescription()
-                Else
-                    description = control.Name
-                End If
+                Dim description As String =
+                    If(TypeOf control Is ILinkedLabel,
+                       DirectCast(control, ILinkedLabel).GetControlDescription(),
+                       control.Name)
+                ' TODO: log description & ex.Message
             End If
-            retValue = Parser(Of T).Parser("0")
+            control.Text = retValue.ToString()
+            Return retValue
         End Try
-        Return retValue
     End Function
 
     Protected Overloads Sub CreateLookupDataTable(tableName As String, targetProperty As String)
