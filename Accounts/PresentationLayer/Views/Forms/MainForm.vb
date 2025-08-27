@@ -1,5 +1,6 @@
 ﻿Imports System.ComponentModel
 Imports System.Globalization
+Imports System.Reflection
 Imports System.Threading
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
@@ -13,12 +14,17 @@ Imports AATM.Common.PresentationLayer.Views.Forms
 Imports AATM.Libraries
 Imports AATM.Libraries.ErrorsAndEvents
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.Localization.Core
+Imports AATM.Libraries.Localization.Services
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Forms
+Imports AATM.PresentationLayer.Forms.Services.Security
+Imports AATM.PresentationLayer.Forms.Services.SystemView
 Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views.Interfaces
 Imports AutoMapper
+Imports Services.SystemView
 
 
 Namespace PresentationLayer.Views.Forms
@@ -39,18 +45,38 @@ Namespace PresentationLayer.Views.Forms
     Partial Public Class MainForm
         Implements IUserView
 
+        ' ADD: SystemView / Security services
+        Private _systemViewIdProvider As SystemViewIdProvider
+        Private _securityApplier As SecurityApplier
+        Private _securityServicesInitialized As Boolean
+
         Public IdleTimer As New System.Windows.Forms.Timer()
         Const MinuteMicroseconds As Integer = 10000
 
         Public Shared AccountsMapper As IMapper
         Private _logStatus As LoginStatus
         Public Event UserLoggedIn(sender As Object, formControls As List(Of Control))
+        ' --- Translation infrastructure ---
+        Private _translationRepo As ITranslationRepository
+        Private _translationCache As TranslationCache
+        Private _formTranslator As FormTranslationService
 
         'Private ReadOnly _presenterObj
 
         ''' <summary>
         '''     Default form constructor.
         ''' </summary>
+        ''' 
+
+        ' ADD: Wrapper property to unify system view id usage
+        Private ReadOnly Property CurrentSystemViewId As Integer
+            Get
+                EnsureSystemViewIdProvider()
+                Return _systemViewIdProvider.GetId()
+            End Get
+        End Property
+
+
         Public Sub New()
 
             InitializeComponent()
@@ -75,8 +101,63 @@ Namespace PresentationLayer.Views.Forms
                 Presenter = New UserPresenter(Of UserModel)(Me)
                 GlobalVariables.EstablishmentName = Presenter.EstablishmentName
                 GlobalVariables.EstablishmentNameAra = Presenter.EstablishmentNameAra
+
+                ' Initialize security helpers AFTER Presenter created
+                InitializeSecurityServices()
+
             End If
         End Sub
+
+        ' Centralized initialization of id provider + security applier
+        Private Sub InitializeSecurityServices(Optional force As Boolean = False)
+            If _securityServicesInitialized AndAlso Not force Then Return
+
+            EnsureSystemViewIdProvider()
+
+            ' SecurityApplier instantiation (adjust lambdas to real methods available in your Presenter/base)
+            _securityApplier = New SecurityApplier(
+                isSuperAdmin:=Function() UserIsASuperAdmin(),
+                isLoggedIn:=Function() GlobalVariables.IsUserLoggedIn,
+                securityGroupId:=Function() GlobalVariables.SecurityGroupIdNo,
+                getSecurityId:=Function(key, isMenu) SafeGetSecurityId(key, isMenu),
+                getUserSecurity:=Function(secId, grp) SafeGetUserSecurity(secId, grp)
+            )
+
+            _securityServicesInitialized = True
+        End Sub
+
+        ' Ensure provider re-usable & safe
+        Private Sub EnsureSystemViewIdProvider()
+            If _systemViewIdProvider Is Nothing Then
+                _systemViewIdProvider = New SystemViewIdProvider(
+                    translatorDac:=TranslatorDAC,
+                    viewNameFunc:=Function() If(String.IsNullOrWhiteSpace(ViewDisplayName), Me.Name, ViewDisplayName)
+                )
+            End If
+        End Sub
+
+        ' Safe wrappers (avoid exceptions if Presenter not ready)
+        Private Function SafeGetSecurityId(fullPath As String, isMenu As Boolean) As Long
+            If Presenter Is Nothing OrElse String.IsNullOrWhiteSpace(fullPath) Then Return 0
+            Try
+                If isMenu Then
+                    Return Presenter.GetRecordFieldWithKey(fullPath, "SecurityObject_View1", "FullPathName", "IdNo")
+                End If
+                ' For controls (non-menu) a different table might be used; adjust if needed:
+                Return Presenter.GetRecordFieldWithKey(fullPath, "SecurityObject", "SecurityObjectName", "IdNo")
+            Catch
+                Return 0
+            End Try
+        End Function
+
+        Private Function SafeGetUserSecurity(secId As Long, groupId As Integer) As ArrayList
+            If Presenter Is Nothing OrElse secId = 0 OrElse groupId = 0 Then Return New ArrayList()
+            Try
+                Return Presenter.GetUserSecurity(secId, groupId)
+            Catch
+                Return New ArrayList()
+            End Try
+        End Function
 
         Public Event FormCultureChanged()
 
@@ -93,6 +174,71 @@ Namespace PresentationLayer.Views.Forms
         Public Property EmployeeIdNo As Int32? Implements IUserView.EmployeeIdNo
         Public Property UserName As String Implements IUserView.UserName
 
+
+        Private Sub ApplySecurityToAllControls()
+            InitializeSecurityServices()
+
+            Dim allControls As New List(Of Control)
+            allControls = FindControlRecursive(allControls, Me)
+
+
+            For Each c In allControls
+                ApplySecurityToControl(c)
+            Next
+
+            'For Each c In allControls
+            '    If TypeOf c Is MenuStrip Then
+            '        _securityApplier.ApplyMenuStrip(DirectCast(c, MenuStrip), MenuFormName)
+            '    ElseIf TypeOf c Is ToolStrip Then
+            '        _securityApplier.ApplyToolStrip(DirectCast(c, ToolStrip), MenuFormName)
+            '    Else
+            '        Dim key = GetControlSecurityKey(c) ' Provided by base (BfMain) or local implementation
+            '        If Not String.IsNullOrWhiteSpace(key) Then
+            '            _securityApplier.ApplyControl(c, key)
+            '        End If
+            '    End If
+            'Next
+        End Sub
+
+
+
+        ' Centralized per–control security application (avoids duplicated inline logic)
+        Private Sub ApplySecurityToControl(ctrl As Control)
+            If _securityApplier Is Nothing OrElse ctrl Is Nothing Then Return
+
+            If TypeOf ctrl Is MenuStrip Then
+                _securityApplier.ApplyMenuStrip(DirectCast(ctrl, MenuStrip), MenuFormName)
+            ElseIf TypeOf ctrl Is ToolStrip Then
+                _securityApplier.ApplyToolStrip(DirectCast(ctrl, ToolStrip), MenuFormName)
+            Else
+                Dim key = GetControlSecurityKey(ctrl)
+                If Not String.IsNullOrWhiteSpace(key) Then
+                    _securityApplier.ApplyControl(ctrl, key)
+                End If
+            End If
+        End Sub
+
+        ' Replacement for missing GetControlSecurityKey (uses reflection to read optional SecurityKey property)
+        Private Function GetControlSecurityKey(ctrl As Control) As String
+            Try
+                Dim pi = ctrl.GetType().GetProperty("SecurityKey", BindingFlags.Instance Or BindingFlags.Public)
+                If pi Is Nothing Then Return String.Empty
+                Dim val = TryCast(pi.GetValue(ctrl, Nothing), String)
+                Return If(val, "").Trim()
+            Catch
+                Return String.Empty
+            End Try
+        End Function
+
+        ' Provide a local MenuFormName if not inherited from a base form
+        Private ReadOnly Property MenuFormName As String
+            Get
+                ' Adjust if you have a specific form-wide menu/security root name
+                Return Me.Name
+            End Get
+        End Property
+
+        ' LogStatus setter updated to use ApplySecurityToAllControls
         Public Property LogStatus As LoginStatus
             Get
                 Return _logStatus
@@ -100,23 +246,12 @@ Namespace PresentationLayer.Views.Forms
             Set
                 _logStatus = Value
                 If _logStatus = LoginStatus.LoggedIn Then
-                    Dim allControls As New List(Of Control)
-                    allControls = FindControlRecursive(allControls, Me)
                     GlobalVariables.IsUserLoggedIn = True
                     SecurityGroupIdNo = GlobalVariables.SecurityGroupIdNo
-                    If UserIsASuperAdmin() Then
-                        GlobalSubs.ShowAndEnableMenuItems(AccountsMenu)
-                        If _addSecurityObject Then
-                            For Each cCtrl As Control In allControls
-                                SetObjectSecurityNew(cCtrl)
-                            Next
-                        End If
-                    Else
-                        For Each cCtrl As Control In allControls
-                            SetObjectSecurityNew(cCtrl)
-                        Next
-                    End If
-                    RaiseEvent UserLoggedIn(Me, allControls)
+
+                    ApplySecurityToAllControls() ' CHG: Replaces manual enumeration + SetObjectSecurityNew
+
+                    RaiseEvent UserLoggedIn(Me, FindControlRecursive(New List(Of Control), Me))
                     DisableLogin()
                 Else
                     GlobalVariables.IsUserLoggedIn = False
@@ -133,38 +268,44 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property Active As Boolean Implements IUserView.Active
 
+
+        ' ResetMenuSecurity now uses CurrentSystemViewId
         Public Sub ResetMenuSecurity(ByRef cCtrl As Control)
             Static sw = 0
             Static mainParentIdNo As Int32
             If sw = 0 Then
-                Dim securityObject As New SecurityObject With {.SecurityObjectName = MenuFormName,
-                        .SystemViewIdNo = VSystemViewIdNo,
-                        .ParentIdNo = Nothing}
+                InitializeSecurityServices()
+                Dim securityObject As New SecurityObject With {
+                    .SecurityObjectName = MenuFormName,
+                    .SystemViewIdNo = CShort(CurrentSystemViewId),
+                    .ParentIdNo = Nothing
+                }
                 mainParentIdNo = Presenter.AddSecurityObject(securityObject)
                 sw = 1
             End If
+
             If TypeOf cCtrl Is MenuStrip Then
-                ' check for MenuStrip first because MenuStrip is also a ToolStrip
                 Dim subMenuName = MenuFormName + " > " + cCtrl.Name.Trim()
                 Dim menuStripMain As MenuStrip = cCtrl
-                Dim securityObject As New SecurityObject With {.SecurityObjectName = cCtrl.Name.Trim(),
-                        .SystemViewIdNo = VSystemViewIdNo,
-                        .ParentIdNo = mainParentIdNo}
-                Dim parentIdNo As Int32
-                parentIdNo = Presenter.AddSecurityObject(securityObject)
+                Dim securityObject As New SecurityObject With {
+                    .SecurityObjectName = cCtrl.Name.Trim(),
+                    .SystemViewIdNo = CShort(CurrentSystemViewId),
+                    .ParentIdNo = mainParentIdNo
+                }
+                Dim parentIdNo As Int32 = Presenter.AddSecurityObject(securityObject)
                 AddChildMenuSecurityObjects(menuStripMain.Items, subMenuName, parentIdNo)
             ElseIf TypeOf cCtrl Is ToolStrip Then
                 Dim subMenuName = MenuFormName + " > " + cCtrl.Name.TrimEnd()
                 Dim toolStripMain As ToolStrip = cCtrl
-                Dim securityObject As New SecurityObject With {.SecurityObjectName = cCtrl.Name.TrimEnd(),
-                        .SystemViewIdNo = VSystemViewIdNo,
-                        .ParentIdNo = mainParentIdNo}
-                Dim parentIdNo As Int32
-                parentIdNo = Presenter.AddSecurityObject(securityObject)
+                Dim securityObject As New SecurityObject With {
+                    .SecurityObjectName = cCtrl.Name.TrimEnd(),
+                    .SystemViewIdNo = CShort(CurrentSystemViewId),
+                    .ParentIdNo = mainParentIdNo
+                }
+                Dim parentIdNo As Int32 = Presenter.AddSecurityObject(securityObject)
                 AddChildMenuSecurityObjects(toolStripMain.Items, subMenuName, parentIdNo)
             End If
         End Sub
-
         Public Sub SetupMapper()
             Dim mapperConfigurationAccounts = New MapperConfiguration(Sub(cfg)
                                                                           cfg.AddProfile(New MappingProfileAccounts)
@@ -572,6 +713,13 @@ Namespace PresentationLayer.Views.Forms
 
 #End Region
 
+        Private Sub SwitchUiLanguage(originalUi As Boolean)
+            ' Delegate to centralized service; adjust buttons after translation
+            _formTranslator.SwitchUiLanguage(originalUi,
+                                     allowFallback:=True,
+                                     adjustButtonsCallback:=AddressOf SetLanguageChangeButtons)
+        End Sub
+
         'Protected Sub SwitchUiLanguage(originalUi As Boolean)
         '    If originalUi Then
         '        TextDisplayLanguage = GlobalVariables.DefaultUnmirroredCultureInfoStr
@@ -601,12 +749,12 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Function AddSecurityObject(Of T)(ByRef obj As T, ByRef subMenuName As String, ByVal parentIdNo As Int32, loc As Int16) As Int32
-            Dim toolStripMenuItem As T = obj
-            'Dim objName = CallByName(obj, "Name", CallType.Get)
             Dim objName = Invoker.GetProperty(obj, "Name")
-            Dim securityObject As New SecurityObject With {.SecurityObjectName = objName.SubString(loc),
-                    .SystemViewIdNo = VSystemViewIdNo,
-                    .ParentIdNo = parentIdNo}
+            Dim securityObject As New SecurityObject With {
+                .SecurityObjectName = objName.SubString(loc),
+                .SystemViewIdNo = CShort(CurrentSystemViewId),
+                .ParentIdNo = parentIdNo
+            }
             parentIdNo = Presenter.AddSecurityObject(securityObject)
             Return parentIdNo
         End Function
@@ -657,7 +805,26 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            GetNSaveCaptions()
+            ' Initialize global translator DAC (only once)
+            TranslatorAccessor.InitializeTranslator(TranslatorDAC)
+
+            ' Create repository + cache + service
+            _translationRepo = New TranslationRepository(TranslatorDAC)
+            _translationCache = New TranslationCache(_translationRepo)
+            _formTranslator = New FormTranslationService(Me, _translationRepo, _translationCache)
+
+            ' Preload the two core cultures for this view id
+            _formTranslator.Preload(
+                {GlobalVariables.DefaultUnmirroredCultureInfoStr, GlobalVariables.DefaultMirroredCultureInfoStr},
+                {CurrentSystemViewId}
+            )
+
+            '{GetSystemViewIdNo()}
+
+
+            ' Initial translation pass (allows UI to start in correct language/RTL)
+            _formTranslator.TranslateCurrentForm()
+            'GetNSaveCaptions()
             If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
                 ToolStripButtonArabic.Visible = False
                 ToolStripButtonEnglish.Visible = True
@@ -704,16 +871,6 @@ Namespace PresentationLayer.Views.Forms
                     Else
                         LogStatus = LoginStatus.LoggedOut
                     End If
-                    If LogStatus = LoginStatus.LoggedIn Then
-                        Dim mirroredLanguage = My.Settings.MirroredLanguage
-                        If mirroredLanguage Then
-                            GlobalFunctions.SetCulture(GlobalVariables.DefaultMirroredCultureInfoStr)
-                            SetLanguageChangeButtons()
-                            SwitchUiLanguage(False)
-                        End If
-                    End If
-
-                    'Presenter.ResetMenuSecurity(Me)
                 Catch ex As TypeInitializationException
                     MessageBox.Show("Invalid Connection String, specified connection String doesn't exist.",
                                     "Connection String Error!", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -843,10 +1000,10 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub ToolStripButtonLTR_Click(sender As Object, e As EventArgs) Handles ToolStripButtonEnglish.Click
             'If GlobalVariables.RightToLeftLayout Then
-            GlobalVariables.RightToLeftLayout = False
+            'GlobalVariables.RightToLeftLayout = False
             'End If
             SwitchUiLanguage(True)
-            SetLanguageChangeButtons()
+            'SetLanguageChangeButtons()
             'ToolStripButtonArabic.Visible = True
             'ToolStripButtonArabic.Enabled = True
             'ToolStripButtonEnglish.Visible = False
@@ -854,11 +1011,11 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripButtonRTL_Click(sender As Object, e As EventArgs) Handles ToolStripButtonArabic.Click
-            'If Not GlobalVariables.RightToLeftLayout Then
-            GlobalVariables.RightToLeftLayout = True
-            'End If
+            ''If Not GlobalVariables.RightToLeftLayout Then
+            'GlobalVariables.RightToLeftLayout = True
+            ''End If
             SwitchUiLanguage(False)
-            SetLanguageChangeButtons()
+            'SetLanguageChangeButtons()
             'ToolStripButtonArabic.Visible = False
             'ToolStripButtonArabic.Enabled = False
             'ToolStripButtonEnglish.Visible = True
@@ -978,6 +1135,7 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
+        ' UpdateMenuSecurity & UpdateSecurityObject now also use CurrentSystemViewId
         Public Sub UpdateMenuSecurity(ByRef cCtrl As Control)
             Static sw = 0
             Static mainParentIdNo As Int32
@@ -985,24 +1143,26 @@ Namespace PresentationLayer.Views.Forms
                 mainParentIdNo = Presenter.GetRecordFieldWithKey(MenuFormName, "SecurityObject", "SecurityObjectName", "IdNo")
                 sw = 1
             End If
+
             If TypeOf cCtrl Is MenuStrip Then
-                ' check for MenuStrip first because MenuStrip is also a ToolStrip
                 Dim subMenuName = MenuFormName + " > " + cCtrl.Name.Trim()
                 Dim menuStripMain As MenuStrip = cCtrl
-                Dim securityObject As New SecurityObject With {.SecurityObjectName = cCtrl.Name.Trim(),
-                        .SystemViewIdNo = VSystemViewIdNo,
-                        .ParentIdNo = mainParentIdNo}
-                Dim parentIdNo As Int32
-                parentIdNo = Presenter.UpdateSecurityObject(securityObject)
+                Dim securityObject As New SecurityObject With {
+                    .SecurityObjectName = cCtrl.Name.Trim(),
+                    .SystemViewIdNo = CShort(CurrentSystemViewId),
+                    .ParentIdNo = mainParentIdNo
+                }
+                Dim parentIdNo As Int32 = Presenter.UpdateSecurityObject(securityObject)
                 UpdateChildMenuSecurityObjects(menuStripMain.Items, subMenuName, parentIdNo)
             ElseIf TypeOf cCtrl Is ToolStrip Then
                 Dim subMenuName = MenuFormName + " > " + cCtrl.Name.TrimEnd()
                 Dim toolStripMain As ToolStrip = cCtrl
-                Dim securityObject As New SecurityObject With {.SecurityObjectName = cCtrl.Name.TrimEnd(),
-                        .SystemViewIdNo = VSystemViewIdNo,
-                        .ParentIdNo = mainParentIdNo}
-                Dim parentIdNo As Int32
-                parentIdNo = Presenter.UpdateSecurityObject(securityObject)
+                Dim securityObject As New SecurityObject With {
+                    .SecurityObjectName = cCtrl.Name.TrimEnd(),
+                    .SystemViewIdNo = CShort(CurrentSystemViewId),
+                    .ParentIdNo = mainParentIdNo
+                }
+                Dim parentIdNo As Int32 = Presenter.UpdateSecurityObject(securityObject)
                 UpdateChildMenuSecurityObjects(toolStripMain.Items, subMenuName, parentIdNo)
             End If
         End Sub
@@ -1031,11 +1191,12 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Function UpdateSecurityObject(Of T)(ByRef obj As T, ByRef subMenuName As String, ByVal parentIdNo As Int32, loc As Int16) As Int32
-            Dim toolStripMenuItem As T = obj
             Dim objName = Invoker.GetProperty(obj, "Name")
-            Dim securityObject As New SecurityObject With {.SecurityObjectName = objName.SubString(loc),
-                    .SystemViewIdNo = VSystemViewIdNo,
-                    .ParentIdNo = parentIdNo}
+            Dim securityObject As New SecurityObject With {
+                .SecurityObjectName = objName.SubString(loc),
+                .SystemViewIdNo = CShort(CurrentSystemViewId),
+                .ParentIdNo = parentIdNo
+            }
             parentIdNo = Presenter.UpdateSecurityObject(securityObject)
             Return parentIdNo
         End Function

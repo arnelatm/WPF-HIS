@@ -2991,6 +2991,10 @@
       <Project>{63aacd2c-a92e-4cf4-8f4d-49c774e2b1c6}</Project>
       <Name>LocalizationUtilities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Libraries\Localization\Localization.vbproj">
+      <Project>{3F50A1A8-D56B-4D64-A2F2-D1DD3D440D8D}</Project>
+      <Name>Localization</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Libraries\MessagingLibrary\MessagingLibrary.vbproj">
       <Project>{84437202-3E38-4F75-B8C1-4125852FC4FF}</Project>
       <Name>MessagingLibrary</Name>

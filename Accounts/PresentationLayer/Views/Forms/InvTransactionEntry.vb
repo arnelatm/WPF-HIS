@@ -14,6 +14,7 @@ Namespace PresentationLayer.Views.Forms
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
         Private _footer As DgvFooter
         Private _invTransactionDetails As List(Of InvTransactionDetailView)
+        Private _shownInitialized As Boolean
 
         Public Event ProductCodeChanged(productCode As String, bs As BindingSource) Implements IInvTransactionView.ProductCodeChanged
         Public Event GTinScanned(GTin As String, bs As BindingSource, ByRef productCode As String) Implements IInvTransactionView.GTinScanned
@@ -565,7 +566,7 @@ Namespace PresentationLayer.Views.Forms
 
 
         Private Sub cboInvTransTypeIdNo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboInvTransTypeIdNo.SelectedIndexChanged
-            If FormShown Then
+            If _shownInitialized Then
                 UpdateDgvColumns()
             End If
         End Sub

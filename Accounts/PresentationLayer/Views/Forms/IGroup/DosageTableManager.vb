@@ -21,6 +21,17 @@ Public Class DosageTableManager
     Private _originalAppTextLanguage As String
     Public Property SystemViewIdNoToTranslate As Int16
 
+    ' NEW: Local initialization guard (replaces missing base InitializationMode)
+    Private _initializing As Boolean = True
+    Public Property InitializationMode As Boolean
+        Get
+            Return _initializing
+        End Get
+        Set(value As Boolean)
+            _initializing = value
+        End Set
+    End Property
+
     Public Property DosageMasterList As List(Of IDosageMasterView) Implements IDosageMasterListView.DosageMasterList
         Get
             Return _dosageMasterList
@@ -47,7 +58,7 @@ Public Class DosageTableManager
         ' This call is required by the designer.
 
         InitializeComponent()
-        InitializationMode = False
+        _initializing = True ' start guarded
         If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
             ' Add any initialization after the InitializeComponent() call.
             _originalAppTextLanguage = GlobalVariables.OriginalAppTextLanguage

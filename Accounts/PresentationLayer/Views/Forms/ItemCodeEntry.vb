@@ -8,6 +8,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private _lockGroup As Boolean = False
         Private _groupIdNo As Int16
+        Private _shownInitialized As Boolean
 
         Public Sub New()
             MyBase.New()
@@ -181,11 +182,12 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ItemCodeEntryTv_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
-            FormShown = True
+            If _shownInitialized Then Return
+            _shownInitialized = True
         End Sub
 
         Private Sub cboCodeGroupIdNo_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cboCodeGroupSelector.SelectionChangeCommitted
-            If FormShown Then
+            If _shownInitialized Then
                 DataFilter = "CodeGroupIdNo = " & cboCodeGroupSelector.SelectedValue.ToString()
                 CodeGroupIdNo = cboCodeGroupSelector.SelectedValue
                 SavedGroupIdNo = CodeGroupIdNo

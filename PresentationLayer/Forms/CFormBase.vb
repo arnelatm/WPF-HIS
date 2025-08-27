@@ -158,6 +158,10 @@ Public Class CFormBase
         PublishEvent(New LanguageChanged(Me))
     End Sub
 
+    'Public Property HideNavigatorButtons As Boolean
+
+
+
     Protected Sub UpdateNavigationButtonDisplay(editing As Boolean, adding As Boolean, recordPositionNumber As Integer, recordCount As Integer)
         If SingleData Or QueryOnly Then
             HideNavigatorButtons = True
@@ -479,6 +483,17 @@ Public Class CFormBase
             End If
         End If
         ResumeDrawing()
+    End Sub
+
+    Protected Overridable Sub FlickerFreeTranslateForm()
+        ' Placeholder implementation to prevent flicker during UI language switch.
+        ' Extend this method to perform control text updates while layout is suspended.
+        Try
+            SuspendLayout()
+            ' TODO: Insert control caption re-assignment / localization logic here if needed.
+        Finally
+            ResumeLayout(True)
+        End Try
     End Sub
 
 End Class

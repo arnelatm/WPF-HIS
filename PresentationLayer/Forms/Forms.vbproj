@@ -178,8 +178,14 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BFMain.Compat.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="BFMain.designer.vb">
       <DependentUpon>BFMain.vb</DependentUpon>
+    </Compile>
+    <Compile Include="BFMain.ErrorProvider.vb">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="BFMain.vb">
       <SubType>Form</SubType>
@@ -267,6 +273,15 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Services\BfMainServices.vb" />
+    <Compile Include="Services\Lookup\LookupDispatcher.vb" />
+    <Compile Include="Services\Security\SecurityApplier.vb" />
+    <Compile Include="Services\SubFormLauncher.vb" />
+    <Compile Include="Services\SystemView\SystemViewIdProvider.vb" />
+    <Compile Include="Services\Translation\StoreCaptions1.vb" />
+    <Compile Include="Services\Translation\TranslationCoordinator.Vb" />
+    <Compile Include="Services\Ui\DataGridCoordinator.vb" />
+    <Compile Include="Services\Ui\UiPerformanceHelper.vb" />
     <Compile Include="TranslationTableManager.Designer.vb">
       <DependentUpon>TranslationTableManager.vb</DependentUpon>
     </Compile>
@@ -370,6 +385,10 @@
     <ProjectReference Include="..\..\Libraries\LocalizationUtilities\LocalizationUtilities.csproj">
       <Project>{63AACD2C-A92E-4CF4-8F4D-49C774E2B1C6}</Project>
       <Name>LocalizationUtilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\Localization\Localization.vbproj">
+      <Project>{3F50A1A8-D56B-4D64-A2F2-D1DD3D440D8D}</Project>
+      <Name>Localization</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Libraries\MessagingLibrary\MessagingLibrary.vbproj">
       <Project>{84437202-3e38-4f75-b8c1-4125852fc4ff}</Project>

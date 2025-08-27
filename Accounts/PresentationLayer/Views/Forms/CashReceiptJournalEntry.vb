@@ -17,6 +17,7 @@ Namespace PresentationLayer.Views.Forms
         Private _jiFooter As DgvFooter
         Private _journalItems As List(Of JournalItemView)
         Private _defaultAccount As Int16
+        Private _shownInitialized As Boolean
 
         Public Event AutoApplyAmount(bsDjOiItem As BindingSource) Implements ICashReceiptJournalView.AutoApplyAmount
         Public Event AddCustomerOpenInvoices() Implements ICashReceiptJournalView.AddCustomerOpenInvoices
@@ -483,15 +484,15 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub CboPayorIdNo_ValueChanged(sender As Object, e As EventArgs) Handles cboPayorIdNo.Validated, cboPayorIdNo.SelectedIndexChanged
-            If FormShown Then
-                If OpenInvoiceMode Then
-                    UpdateOpenInvoicesDisplay()
-                End If
+            If _shownInitialized Then Return
+            If OpenInvoiceMode Then
+                UpdateOpenInvoicesDisplay()
             End If
+            _shownInitialized = True
         End Sub
 
         Private Sub CboPayorType_ValueChanged(sender As Object, e As EventArgs) Handles cboPayorType.Validated, cboPayorType.SelectionChangeCommitted
-            If FormShown Then
+            If _shownInitialized Then
                 RaiseEvent ReceiptTypeChanged(PayorType)
                 If OpenInvoiceMode Then
                     UpdateOpenInvoicesDisplay()
@@ -507,13 +508,13 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub CboAccountIdNo_Changed(sender As Object, e As EventArgs) Handles cboAccountIdNo.Validated, cboAccountIdNo.SelectedIndexChanged
-            If FormShown Then
+            If _shownInitialized Then
                 UpdateFirstLine()
             End If
         End Sub
 
         Private Sub TxtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
-            If FormShown Then
+            If _shownInitialized Then
                 If OpenInvoiceMode Then
                     MoveToGridView(DataGridViewCsrOiItems, "dgvAmount")
                 Else

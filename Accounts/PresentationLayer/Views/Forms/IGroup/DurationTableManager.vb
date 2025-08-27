@@ -19,6 +19,8 @@ Public Class DurationTableManager
     Private MenuLevel As String = ""
     Private _durationMasterList As List(Of IDurationView)
     Private _originalAppTextLanguage As String
+    Private _initializing As Boolean = True
+
     Public Property SystemViewIdNoToTranslate As Int16
 
     Public Property DurationList As List(Of IDurationView) Implements IDurationListView.DurationList
@@ -47,7 +49,7 @@ Public Class DurationTableManager
         ' This call is required by the designer.
 
         InitializeComponent()
-        InitializationMode = False
+        _initializing = True
         If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
             ' Add any initialization after the InitializeComponent() call.
             _originalAppTextLanguage = GlobalVariables.OriginalAppTextLanguage
@@ -135,7 +137,7 @@ Public Class DurationTableManager
     End Sub
 
     Private Sub DataGridViewCellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewDuration.CellValueChanged
-        If Not InitializationMode Then
+        If Not _initializing Then
             RaiseEvent SaveCurrent(sender.Rows(e.RowIndex).Cells(3).Value, sender.Rows(e.RowIndex).Cells(2).Value)
         End If
     End Sub

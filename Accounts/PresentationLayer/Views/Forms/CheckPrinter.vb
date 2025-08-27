@@ -44,7 +44,7 @@ Namespace PresentationLayer.Views.Forms
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
-            EnableDoubleBuff(tlpDisbursement)
+            AATM.PresentationLayer.Forms.Services.Ui.UiPerformanceHelper.EnableDoubleBuff(tlpDisbursement)
             ' Add any initialization after the InitializeComponent() call.
             HideNavigatorButtons = True
             'MainTableName = tableName

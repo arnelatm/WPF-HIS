@@ -108,6 +108,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\EmptyFiles.4.4.0\build\EmptyFiles.targets" Condition="Exists('..\..\packages\EmptyFiles.4.4.0\build\EmptyFiles.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

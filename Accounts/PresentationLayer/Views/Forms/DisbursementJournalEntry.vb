@@ -16,6 +16,7 @@ Namespace PresentationLayer.Views.Forms
         Private _jiFooter As DgvFooter
         Private _journalItems As List(Of JournalItemView)
         Private _tableName As String = ""
+        Private _shownInitialized As Boolean
 
         Public Event PrintCheck() Implements IDisbursementJournalView.PrintCheck
         Public Event SetSupplierVatNumber(ByRef currentVatNumber As String, ByVal idNo As String, ByVal override As Boolean) Implements IDisbursementJournalView.SetSupplierVatNumber
@@ -32,7 +33,7 @@ Namespace PresentationLayer.Views.Forms
             ' This call is required by the designer.
             InitializeComponent()
             _tableName = tableName
-            EnableDoubleBuff(tlpDisbursement)
+            AATM.PresentationLayer.Forms.Services.Ui.UiPerformanceHelper.EnableDoubleBuff(tlpDisbursement)
             ' Add any initialization after the InitializeComponent() call.
             If tableName = "CdJournal" Then
                 ViewDisplayName = "CdJournalEntry"
@@ -513,8 +514,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub CboPayType_ValueChanged(sender As Object, e As EventArgs) Handles cboPayType.SelectionChangeCommitted '  ,cboPayType.Validated, cboPayType.SelectedValueChanged 
-            If FormShown Then
-
+            If _shownInitialized Then
                 DisplayPrintCheckButton(cboPayType.SelectedValue)
                 DisplayCheckInfo()
             End If

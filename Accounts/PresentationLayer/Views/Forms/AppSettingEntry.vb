@@ -7,6 +7,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private _lockGroup As Boolean = False
         Private _groupIdNo As Int16
+        Private _shownInitialized As Boolean
         Public Event AppSettingGroupValueChanged(sender As Object) Implements IAppSettingView.AppSettingGroupValueChanged
         Public Property Selector1Data As Object Implements IAppSettingView.Selector1Data
         Public Property Selector2Data As Object Implements IAppSettingView.Selector2Data
@@ -181,7 +182,8 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub AppSettingEntryTv_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
-            FormShown = True
+            If _shownInitialized Then Return
+            _shownInitialized = True
         End Sub
 
         Private Sub cboSelector1_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cboAppSettingGroupSelector.SelectionChangeCommitted

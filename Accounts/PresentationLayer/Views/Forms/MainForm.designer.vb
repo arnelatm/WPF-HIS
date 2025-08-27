@@ -1526,7 +1526,6 @@ Namespace PresentationLayer.Views.Forms
             Me.Controls.Add(Me.AccountsMenu)
             Me.DoubleBuffered = True
             Me.IsMdiContainer = True
-            Me.MenuFormName = "Menu"
             Me.Name = "MainForm"
             Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()

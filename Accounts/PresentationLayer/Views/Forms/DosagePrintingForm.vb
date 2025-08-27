@@ -13,6 +13,7 @@ Namespace PresentationLayer.Views.Forms
         Implements IDosagePrintingView
 
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
+        Private _shownInitialized As Boolean
         Public Event AddNewDosage() Implements IDosagePrintingView.AddNewDosage
         Public Event UpdateTree() Implements IDosagePrintingView.UpdateTree
         Public Event UpdatePatient() Implements IDosagePrintingView.UpdatePatient
@@ -315,14 +316,14 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub btnFindPatient_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnFindPatient.ClickButtonArea
-            If FormShown Then
+            If _shownInitialized Then
                 RaiseEvent FindPatient()
             End If
         End Sub
 
 
         Private Sub txtItemCode_TextChanged(sender As Object, e As EventArgs) Handles txtItemCode.LostFocus
-            If FormShown Then
+            If _shownInitialized Then
                 Dim cItemCode As String = sender.Text
                 If cItemCode IsNot Nothing AndAlso cItemCode <> "" Then
                     RaiseEvent ItemCodeChanged()
@@ -331,7 +332,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub cboItemIdNo_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cboItemIdNo.SelectedValueChanged, cboItemIdNo.Leave
-            If FormShown Then
+            If _shownInitialized Then
                 Dim selectedIdNo As Int32 = cboItemIdNo.SelectedValue
                 If selectedIdNo <> 0 Then
                     RaiseEvent ItemNameChanged(selectedIdNo)
@@ -341,7 +342,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub txtBarCode_Leave(sender As Object, e As EventArgs) Handles txtBarCode.Leave
-            If FormShown Then
+            If _shownInitialized Then
                 Dim cBarCode As String = sender.Text
                 If cBarCode IsNot Nothing AndAlso cBarCode <> "" Then
                     RaiseEvent BarCodeChanged(txtBarCode.Text)
@@ -350,13 +351,13 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub txtGTin_Leave(sender As Object, e As EventArgs) Handles txtGTin.Leave
-            If FormShown Then
+            If _shownInitialized Then
                 ProcessGTinEntry()
             End If
         End Sub
 
         Private Sub btnScanQrCode_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnScanQrCode.ClickButtonArea
-            If FormShown Then
+            If _shownInitialized Then
                 Dim gTinScanner As New GTinScanner
                 gTinScanner.ShowDialog()
                 txtGTin.Text = gTinScanner.GTin
@@ -366,7 +367,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ProcessGTinEntry()
-            If FormShown Then
+            If _shownInitialized Then
                 Dim cGTin As String = txtGTin.Text
                 If cGTin IsNot Nothing AndAlso cGTin <> "" Then
                     RaiseEvent GTinChanged(txtGTin.Text)
