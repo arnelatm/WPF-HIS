@@ -560,7 +560,9 @@ Namespace PresentationLayer.Views.Forms
                 dgvCountryTelIdNo.ValueMember = "IdNo"
                 dgvCountryTelIdNo.DisplayStyleForCurrentCellOnly = True
             End With
-            If GlobalVariables.RightToLeftLayout Then
+            Dim host = TryCast(Me, CFormEntry)
+            Dim isRtl = If(host IsNot Nothing, host.FormIsRtl, False)
+            If isRtl Then
                 dgvFullPhone.Visible = False
                 dgvFullPhoneAra.Visible = True
             Else
@@ -832,6 +834,16 @@ Namespace PresentationLayer.Views.Forms
 
         End Sub
 
+        Public Overrides Sub DoCustomSub()
+            ForceRightToLeft()
+
+        End Sub
+
+        Private Sub ForceRightToLeft()
+            floContactInformation.RightToLeft = RightToLeft.Yes
+            floMainData.RightToLeft = RightToLeft.Yes
+            floPersonal.RightToLeft = RightToLeft.Yes
+        End Sub
 
     End Class
 

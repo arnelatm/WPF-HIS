@@ -22,60 +22,60 @@
         Private Sub InitializeComponent()
             Me.components = New System.ComponentModel.Container()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EmployeeEntryTv))
-            Dim DataGridViewCellStyle43 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle103 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle52 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle95 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle96 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle97 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle98 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle99 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle100 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle101 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle102 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle53 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle108 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim EventAggregator2 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
-            Dim DataGridViewCellStyle63 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle104 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle105 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle106 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle107 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle113 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim EventAggregator3 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
-            Dim DataGridViewCellStyle68 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle109 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle110 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle111 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle112 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle118 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle73 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle114 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle115 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle116 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle117 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim EventAggregator1 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
+            Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle126 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle78 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle119 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle120 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle121 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle122 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle123 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle124 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle125 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle25 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim EventAggregator2 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
+            Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle26 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle134 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle86 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle127 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle128 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle129 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle130 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle131 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle132 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle133 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle32 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle27 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle28 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle29 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle30 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle31 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle33 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle42 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle34 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle35 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle36 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle37 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle38 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle39 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle40 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle41 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle43 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle52 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle44 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle45 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle46 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle47 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle48 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle49 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle50 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle51 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Me.bsPhones = New System.Windows.Forms.BindingSource(Me.components)
             Me.bsEarnings = New System.Windows.Forms.BindingSource(Me.components)
             Me.bsDeductions = New System.Windows.Forms.BindingSource(Me.components)
@@ -278,7 +278,6 @@
             'SplitContainer1
             '
             Me.SplitContainer1.Font = New System.Drawing.Font("Tahoma", 9.0!)
-            Me.SplitContainer1.Location = New System.Drawing.Point(0, 57)
             Me.SplitContainer1.Margin = New System.Windows.Forms.Padding(5, 4, 5, 4)
             '
             'SplitContainer1.Panel1
@@ -289,7 +288,7 @@
             '
             Me.SplitContainer1.Panel2.Controls.Add(Me.floMainData)
             Me.SplitContainer1.Panel2.Font = New System.Drawing.Font("Tahoma", 9.0!)
-            Me.SplitContainer1.Size = New System.Drawing.Size(1255, 510)
+            Me.SplitContainer1.Size = New System.Drawing.Size(1255, 512)
             Me.SplitContainer1.SplitterDistance = 426
             Me.SplitContainer1.SplitterWidth = 15
             '
@@ -299,7 +298,7 @@
             Me.FormTreeView.LineColor = System.Drawing.Color.Black
             Me.FormTreeView.Margin = New System.Windows.Forms.Padding(5, 4, 5, 4)
             Me.FormTreeView.RightToLeft = System.Windows.Forms.RightToLeft.No
-            Me.FormTreeView.Size = New System.Drawing.Size(426, 510)
+            Me.FormTreeView.Size = New System.Drawing.Size(426, 512)
             '
             'ImageListTreeView
             '
@@ -346,7 +345,7 @@
             Me.floMainData.Location = New System.Drawing.Point(0, 0)
             Me.floMainData.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
             Me.floMainData.Name = "floMainData"
-            Me.floMainData.Size = New System.Drawing.Size(811, 510)
+            Me.floMainData.Size = New System.Drawing.Size(811, 512)
             Me.floMainData.TabIndex = 9
             '
             'lblIdNo
@@ -999,7 +998,7 @@
             Me.dtpBirthDate.SecurityKey = Nothing
             Me.dtpBirthDate.ShowLongDate = False
             Me.dtpBirthDate.ShowTime = False
-            Me.dtpBirthDate.Size = New System.Drawing.Size(124, 22)
+            Me.dtpBirthDate.Size = New System.Drawing.Size(124, 23)
             Me.dtpBirthDate.TabIndex = 4
             Me.dtpBirthDate.TargetCalendar = CType(resources.GetObject("dtpBirthDate.TargetCalendar"), System.Globalization.Calendar)
             Me.dtpBirthDate.Translatable = False
@@ -1178,11 +1177,11 @@
             Me.tbpContact.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
             Me.tbpContact.Controls.Add(Me.floContactInformation)
             Me.tbpContact.Font = New System.Drawing.Font("Tahoma", 9.0!)
-            Me.tbpContact.Location = New System.Drawing.Point(4, 22)
+            Me.tbpContact.Location = New System.Drawing.Point(4, 23)
             Me.tbpContact.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
             Me.tbpContact.Name = "tbpContact"
             Me.tbpContact.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
-            Me.tbpContact.Size = New System.Drawing.Size(795, 371)
+            Me.tbpContact.Size = New System.Drawing.Size(795, 370)
             Me.tbpContact.TabIndex = 1
             Me.tbpContact.Text = "Contact Information"
             Me.tbpContact.UseVisualStyleBackColor = True
@@ -1247,8 +1246,8 @@
             Me.DataGridViewPhoneDisplay.AllowUserToAddRows = False
             Me.DataGridViewPhoneDisplay.AllowUserToDeleteRows = False
             Me.DataGridViewPhoneDisplay.AllowUserToResizeColumns = False
-            DataGridViewCellStyle43.BackColor = System.Drawing.Color.FloralWhite
-            Me.DataGridViewPhoneDisplay.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle43
+            DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
+            Me.DataGridViewPhoneDisplay.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
             Me.DataGridViewPhoneDisplay.AutoGenerateColumns = False
             Me.DataGridViewPhoneDisplay.BegFindValue = Nothing
             Me.DataGridViewPhoneDisplay.Cached = False
@@ -1258,14 +1257,14 @@
             Me.TableLayoutPanel1.SetColumnSpan(Me.DataGridViewPhoneDisplay, 4)
             Me.DataGridViewPhoneDisplay.DataFilter = Nothing
             Me.DataGridViewPhoneDisplay.DataSource = Me.bsPhones
-            DataGridViewCellStyle103.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle103.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle103.Font = New System.Drawing.Font("Tahoma", 9.0!)
-            DataGridViewCellStyle103.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle103.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle103.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle103.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewPhoneDisplay.DefaultCellStyle = DataGridViewCellStyle103
+            DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle11.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle11.Font = New System.Drawing.Font("Tahoma", 9.0!)
+            DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewPhoneDisplay.DefaultCellStyle = DataGridViewCellStyle11
             Me.DataGridViewPhoneDisplay.DgvFooter = Nothing
             Me.DataGridViewPhoneDisplay.DisplayOnly = False
             Me.DataGridViewPhoneDisplay.Ea = Nothing
@@ -1305,9 +1304,9 @@
             '
             Me.dgvSequencePhoneDisplay.BegFindValue = Nothing
             Me.dgvSequencePhoneDisplay.DataPropertyName = "Sequence"
-            DataGridViewCellStyle52.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle52.ForeColor = System.Drawing.Color.Black
-            Me.dgvSequencePhoneDisplay.DefaultCellStyle = DataGridViewCellStyle52
+            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+            Me.dgvSequencePhoneDisplay.DefaultCellStyle = DataGridViewCellStyle2
             Me.dgvSequencePhoneDisplay.EditingMode = False
             Me.dgvSequencePhoneDisplay.EndFindValue = Nothing
             Me.dgvSequencePhoneDisplay.FieldDescription = Nothing
@@ -1329,9 +1328,9 @@
             Me.FullPhone.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
             Me.FullPhone.BegFindValue = Nothing
             Me.FullPhone.DataPropertyName = "FullPhone"
-            DataGridViewCellStyle95.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle95.ForeColor = System.Drawing.Color.Black
-            Me.FullPhone.DefaultCellStyle = DataGridViewCellStyle95
+            DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
+            Me.FullPhone.DefaultCellStyle = DataGridViewCellStyle3
             Me.FullPhone.EditingMode = False
             Me.FullPhone.EndFindValue = Nothing
             Me.FullPhone.FieldDescription = Nothing
@@ -1352,9 +1351,9 @@
             Me.FullPhoneAra.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
             Me.FullPhoneAra.BegFindValue = Nothing
             Me.FullPhoneAra.DataPropertyName = "FullPhoneAra"
-            DataGridViewCellStyle96.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle96.ForeColor = System.Drawing.Color.Black
-            Me.FullPhoneAra.DefaultCellStyle = DataGridViewCellStyle96
+            DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
+            Me.FullPhoneAra.DefaultCellStyle = DataGridViewCellStyle4
             Me.FullPhoneAra.EditingMode = False
             Me.FullPhoneAra.EndFindValue = Nothing
             Me.FullPhoneAra.FieldDescription = Nothing
@@ -1375,9 +1374,9 @@
             '
             Me.AreaCodeDataGridViewTextBoxColumn.BegFindValue = Nothing
             Me.AreaCodeDataGridViewTextBoxColumn.DataPropertyName = "AreaCode"
-            DataGridViewCellStyle97.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle97.ForeColor = System.Drawing.Color.Black
-            Me.AreaCodeDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle97
+            DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
+            Me.AreaCodeDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle5
             Me.AreaCodeDataGridViewTextBoxColumn.EditingMode = False
             Me.AreaCodeDataGridViewTextBoxColumn.EndFindValue = Nothing
             Me.AreaCodeDataGridViewTextBoxColumn.FieldDescription = Nothing
@@ -1398,9 +1397,9 @@
             'EmployeeIdNoDataGridViewTextBoxColumn3
             '
             Me.EmployeeIdNoDataGridViewTextBoxColumn3.DataPropertyName = "EmployeeIdNo"
-            DataGridViewCellStyle98.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle98.ForeColor = System.Drawing.Color.Black
-            Me.EmployeeIdNoDataGridViewTextBoxColumn3.DefaultCellStyle = DataGridViewCellStyle98
+            DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
+            Me.EmployeeIdNoDataGridViewTextBoxColumn3.DefaultCellStyle = DataGridViewCellStyle6
             Me.EmployeeIdNoDataGridViewTextBoxColumn3.HeaderText = "EmployeeIdNo"
             Me.EmployeeIdNoDataGridViewTextBoxColumn3.MinimumWidth = 6
             Me.EmployeeIdNoDataGridViewTextBoxColumn3.Name = "EmployeeIdNoDataGridViewTextBoxColumn3"
@@ -1412,9 +1411,9 @@
             'IdNoDataGridViewTextBoxColumn3
             '
             Me.IdNoDataGridViewTextBoxColumn3.DataPropertyName = "IdNo"
-            DataGridViewCellStyle99.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle99.ForeColor = System.Drawing.Color.Black
-            Me.IdNoDataGridViewTextBoxColumn3.DefaultCellStyle = DataGridViewCellStyle99
+            DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
+            Me.IdNoDataGridViewTextBoxColumn3.DefaultCellStyle = DataGridViewCellStyle7
             Me.IdNoDataGridViewTextBoxColumn3.HeaderText = "IdNo"
             Me.IdNoDataGridViewTextBoxColumn3.MinimumWidth = 6
             Me.IdNoDataGridViewTextBoxColumn3.Name = "IdNoDataGridViewTextBoxColumn3"
@@ -1427,9 +1426,9 @@
             '
             Me.CountryTelIdNo.AutoComplete = False
             Me.CountryTelIdNo.DataPropertyName = "CountryTelIdNo"
-            DataGridViewCellStyle100.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle100.ForeColor = System.Drawing.Color.Black
-            Me.CountryTelIdNo.DefaultCellStyle = DataGridViewCellStyle100
+            DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
+            Me.CountryTelIdNo.DefaultCellStyle = DataGridViewCellStyle8
             Me.CountryTelIdNo.EditingMode = False
             Me.CountryTelIdNo.HeaderText = "CountryTelIdNo"
             Me.CountryTelIdNo.MinimumWidth = 6
@@ -1446,9 +1445,9 @@
             '
             Me.PhoneNumberDataGridViewTextBoxColumn.BegFindValue = Nothing
             Me.PhoneNumberDataGridViewTextBoxColumn.DataPropertyName = "PhoneNumber"
-            DataGridViewCellStyle101.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle101.ForeColor = System.Drawing.Color.Black
-            Me.PhoneNumberDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle101
+            DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
+            Me.PhoneNumberDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle9
             Me.PhoneNumberDataGridViewTextBoxColumn.EditingMode = False
             Me.PhoneNumberDataGridViewTextBoxColumn.EndFindValue = Nothing
             Me.PhoneNumberDataGridViewTextBoxColumn.FieldDescription = Nothing
@@ -1470,9 +1469,9 @@
             '
             Me.PhoneTypeIdNo.AutoComplete = False
             Me.PhoneTypeIdNo.DataPropertyName = "PhoneTypeIdNo"
-            DataGridViewCellStyle102.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle102.ForeColor = System.Drawing.Color.Black
-            Me.PhoneTypeIdNo.DefaultCellStyle = DataGridViewCellStyle102
+            DataGridViewCellStyle10.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
+            Me.PhoneTypeIdNo.DefaultCellStyle = DataGridViewCellStyle10
             Me.PhoneTypeIdNo.EditingMode = False
             Me.PhoneTypeIdNo.HeaderText = "PhoneTypeIdNo"
             Me.PhoneTypeIdNo.MinimumWidth = 6
@@ -1914,12 +1913,12 @@
             Me.tbpPayroll.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
             Me.tbpPayroll.Controls.Add(Me.CFlowLayout1)
             Me.tbpPayroll.Font = New System.Drawing.Font("Tahoma", 9.0!)
-            Me.tbpPayroll.Location = New System.Drawing.Point(4, 22)
+            Me.tbpPayroll.Location = New System.Drawing.Point(4, 23)
             Me.tbpPayroll.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
             Me.tbpPayroll.Name = "tbpPayroll"
             Me.tbpPayroll.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
             Me.tbpPayroll.SecurityKey = "EmployeePayInfo"
-            Me.tbpPayroll.Size = New System.Drawing.Size(795, 371)
+            Me.tbpPayroll.Size = New System.Drawing.Size(795, 370)
             Me.tbpPayroll.TabIndex = 2
             Me.tbpPayroll.Text = "Payroll Information"
             Me.tbpPayroll.UseVisualStyleBackColor = True
@@ -1933,7 +1932,7 @@
             Me.CFlowLayout1.Location = New System.Drawing.Point(4, 3)
             Me.CFlowLayout1.Margin = New System.Windows.Forms.Padding(2)
             Me.CFlowLayout1.Name = "CFlowLayout1"
-            Me.CFlowLayout1.Size = New System.Drawing.Size(783, 361)
+            Me.CFlowLayout1.Size = New System.Drawing.Size(783, 360)
             Me.CFlowLayout1.TabIndex = 0
             '
             'TableLayoutPanel3
@@ -2551,11 +2550,11 @@
             Me.tbpEarnings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
             Me.tbpEarnings.Controls.Add(Me.DataGridViewEarnings)
             Me.tbpEarnings.Font = New System.Drawing.Font("Tahoma", 9.0!)
-            Me.tbpEarnings.Location = New System.Drawing.Point(4, 22)
+            Me.tbpEarnings.Location = New System.Drawing.Point(4, 23)
             Me.tbpEarnings.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
             Me.tbpEarnings.Name = "tbpEarnings"
             Me.tbpEarnings.SecurityKey = "EmployeeEarnings"
-            Me.tbpEarnings.Size = New System.Drawing.Size(795, 371)
+            Me.tbpEarnings.Size = New System.Drawing.Size(795, 370)
             Me.tbpEarnings.TabIndex = 4
             Me.tbpEarnings.Text = "Earnings"
             Me.tbpEarnings.UseVisualStyleBackColor = True
@@ -2563,8 +2562,8 @@
             'DataGridViewEarnings
             '
             Me.DataGridViewEarnings.AllowUserToOrderColumns = True
-            DataGridViewCellStyle53.BackColor = System.Drawing.Color.FloralWhite
-            Me.DataGridViewEarnings.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle53
+            DataGridViewCellStyle12.BackColor = System.Drawing.Color.FloralWhite
+            Me.DataGridViewEarnings.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle12
             Me.DataGridViewEarnings.AutoGenerateColumns = False
             Me.DataGridViewEarnings.BackgroundColor = System.Drawing.Color.White
             Me.DataGridViewEarnings.BegFindValue = Nothing
@@ -2573,18 +2572,18 @@
             Me.DataGridViewEarnings.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceEarning, Me.dgvEarningIdNo, Me.dgvEarningRate, Me.dgvEarningUnit, Me.dgvEarningAmount, Me.EmployeeIdNoDataGridViewTextBoxColumn2, Me.IdNoDataGridViewTextBoxColumn2})
             Me.DataGridViewEarnings.DataFilter = Nothing
             Me.DataGridViewEarnings.DataSource = Me.bsEarnings
-            DataGridViewCellStyle108.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle108.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle108.Font = New System.Drawing.Font("Tahoma", 9.0!)
-            DataGridViewCellStyle108.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle108.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle108.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle108.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewEarnings.DefaultCellStyle = DataGridViewCellStyle108
+            DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle18.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle18.Font = New System.Drawing.Font("Tahoma", 9.0!)
+            DataGridViewCellStyle18.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewEarnings.DefaultCellStyle = DataGridViewCellStyle18
             Me.DataGridViewEarnings.DgvFooter = Nothing
             Me.DataGridViewEarnings.DisplayOnly = False
             Me.DataGridViewEarnings.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.DataGridViewEarnings.Ea = EventAggregator2
+            Me.DataGridViewEarnings.Ea = EventAggregator1
             Me.DataGridViewEarnings.EditingMode = False
             Me.DataGridViewEarnings.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
             Me.DataGridViewEarnings.EndFindValue = Nothing
@@ -2611,7 +2610,7 @@
             Me.DataGridViewEarnings.SequenceColumn = "dgvSequenceEarning"
             Me.DataGridViewEarnings.SequenceFieldName = "Sequence"
             Me.DataGridViewEarnings.ShowFooter = True
-            Me.DataGridViewEarnings.Size = New System.Drawing.Size(795, 371)
+            Me.DataGridViewEarnings.Size = New System.Drawing.Size(795, 370)
             Me.DataGridViewEarnings.TabIndex = 5
             Me.DataGridViewEarnings.Translatable = True
             '
@@ -2619,9 +2618,9 @@
             '
             Me.dgvSequenceEarning.BegFindValue = Nothing
             Me.dgvSequenceEarning.DataPropertyName = "Sequence"
-            DataGridViewCellStyle63.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle63.ForeColor = System.Drawing.Color.Black
-            Me.dgvSequenceEarning.DefaultCellStyle = DataGridViewCellStyle63
+            DataGridViewCellStyle13.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black
+            Me.dgvSequenceEarning.DefaultCellStyle = DataGridViewCellStyle13
             Me.dgvSequenceEarning.EditingMode = False
             Me.dgvSequenceEarning.EndFindValue = Nothing
             Me.dgvSequenceEarning.FieldDescription = Nothing
@@ -2643,9 +2642,9 @@
             Me.dgvEarningIdNo.AutoComplete = False
             Me.dgvEarningIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
             Me.dgvEarningIdNo.DataPropertyName = "PayElementIdNo"
-            DataGridViewCellStyle104.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle104.ForeColor = System.Drawing.Color.Black
-            Me.dgvEarningIdNo.DefaultCellStyle = DataGridViewCellStyle104
+            DataGridViewCellStyle14.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle14.ForeColor = System.Drawing.Color.Black
+            Me.dgvEarningIdNo.DefaultCellStyle = DataGridViewCellStyle14
             Me.dgvEarningIdNo.EditingMode = False
             Me.dgvEarningIdNo.HeaderText = "Earning Name - Code"
             Me.dgvEarningIdNo.MinimumWidth = 6
@@ -2660,10 +2659,10 @@
             '
             Me.dgvEarningRate.DataPropertyName = "Rate"
             Me.dgvEarningRate.DecimalPlaces = -1
-            DataGridViewCellStyle105.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle105.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle105.ForeColor = System.Drawing.Color.Black
-            Me.dgvEarningRate.DefaultCellStyle = DataGridViewCellStyle105
+            DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle15.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle15.ForeColor = System.Drawing.Color.Black
+            Me.dgvEarningRate.DefaultCellStyle = DataGridViewCellStyle15
             Me.dgvEarningRate.EditingMode = False
             Me.dgvEarningRate.HeaderText = "Rate / Amount"
             Me.dgvEarningRate.MinimumWidth = 6
@@ -2678,9 +2677,9 @@
             '
             Me.dgvEarningUnit.AutoComplete = False
             Me.dgvEarningUnit.DataPropertyName = "Unit"
-            DataGridViewCellStyle106.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle106.ForeColor = System.Drawing.Color.Black
-            Me.dgvEarningUnit.DefaultCellStyle = DataGridViewCellStyle106
+            DataGridViewCellStyle16.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle16.ForeColor = System.Drawing.Color.Black
+            Me.dgvEarningUnit.DefaultCellStyle = DataGridViewCellStyle16
             Me.dgvEarningUnit.EditingMode = False
             Me.dgvEarningUnit.HeaderText = "Unit"
             Me.dgvEarningUnit.MinimumWidth = 6
@@ -2696,11 +2695,11 @@
             '
             Me.dgvEarningAmount.BegFindValue = Nothing
             Me.dgvEarningAmount.DataPropertyName = "Amount"
-            DataGridViewCellStyle107.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle107.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle107.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle107.Format = "###,##0.00"
-            Me.dgvEarningAmount.DefaultCellStyle = DataGridViewCellStyle107
+            DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle17.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle17.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle17.Format = "###,##0.00"
+            Me.dgvEarningAmount.DefaultCellStyle = DataGridViewCellStyle17
             Me.dgvEarningAmount.EditingMode = False
             Me.dgvEarningAmount.EndFindValue = Nothing
             Me.dgvEarningAmount.FieldDescription = Nothing
@@ -2743,12 +2742,12 @@
             Me.tbpDeductions.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
             Me.tbpDeductions.Controls.Add(Me.DataGridViewDeductions)
             Me.tbpDeductions.Font = New System.Drawing.Font("Tahoma", 9.0!)
-            Me.tbpDeductions.Location = New System.Drawing.Point(4, 22)
+            Me.tbpDeductions.Location = New System.Drawing.Point(4, 23)
             Me.tbpDeductions.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
             Me.tbpDeductions.Name = "tbpDeductions"
             Me.tbpDeductions.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
             Me.tbpDeductions.SecurityKey = "EmployeeDeductions"
-            Me.tbpDeductions.Size = New System.Drawing.Size(795, 371)
+            Me.tbpDeductions.Size = New System.Drawing.Size(795, 370)
             Me.tbpDeductions.TabIndex = 6
             Me.tbpDeductions.Tag = ""
             Me.tbpDeductions.Text = "Deductions"
@@ -2757,8 +2756,8 @@
             'DataGridViewDeductions
             '
             Me.DataGridViewDeductions.AllowUserToOrderColumns = True
-            DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
-            Me.DataGridViewDeductions.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+            DataGridViewCellStyle19.BackColor = System.Drawing.Color.FloralWhite
+            Me.DataGridViewDeductions.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle19
             Me.DataGridViewDeductions.AutoGenerateColumns = False
             Me.DataGridViewDeductions.BegFindValue = Nothing
             Me.DataGridViewDeductions.Cached = False
@@ -2766,18 +2765,18 @@
             Me.DataGridViewDeductions.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceDeduction, Me.dgvDeductionIdNo, Me.dgvDeductionRate, Me.dgvDeductionUnit, Me.dgvDeductionAmount, Me.EmployeeIdNoDataGridViewTextBoxColumn, Me.IdNoDataGridViewTextBoxColumn})
             Me.DataGridViewDeductions.DataFilter = Nothing
             Me.DataGridViewDeductions.DataSource = Me.bsDeductions
-            DataGridViewCellStyle113.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle113.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle113.Font = New System.Drawing.Font("Tahoma", 9.0!)
-            DataGridViewCellStyle113.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle113.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle113.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle113.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewDeductions.DefaultCellStyle = DataGridViewCellStyle113
+            DataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle25.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle25.Font = New System.Drawing.Font("Tahoma", 9.0!)
+            DataGridViewCellStyle25.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle25.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle25.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewDeductions.DefaultCellStyle = DataGridViewCellStyle25
             Me.DataGridViewDeductions.DgvFooter = Nothing
             Me.DataGridViewDeductions.DisplayOnly = False
             Me.DataGridViewDeductions.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.DataGridViewDeductions.Ea = EventAggregator3
+            Me.DataGridViewDeductions.Ea = EventAggregator2
             Me.DataGridViewDeductions.EditingMode = False
             Me.DataGridViewDeductions.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
             Me.DataGridViewDeductions.EndFindValue = Nothing
@@ -2804,7 +2803,7 @@
             Me.DataGridViewDeductions.SequenceColumn = "dgvSequenceDeduction"
             Me.DataGridViewDeductions.SequenceFieldName = "Sequence"
             Me.DataGridViewDeductions.ShowFooter = False
-            Me.DataGridViewDeductions.Size = New System.Drawing.Size(787, 365)
+            Me.DataGridViewDeductions.Size = New System.Drawing.Size(787, 364)
             Me.DataGridViewDeductions.TabIndex = 2
             Me.DataGridViewDeductions.Translatable = True
             '
@@ -2812,9 +2811,9 @@
             '
             Me.dgvSequenceDeduction.BegFindValue = Nothing
             Me.dgvSequenceDeduction.DataPropertyName = "Sequence"
-            DataGridViewCellStyle68.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle68.ForeColor = System.Drawing.Color.Black
-            Me.dgvSequenceDeduction.DefaultCellStyle = DataGridViewCellStyle68
+            DataGridViewCellStyle20.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle20.ForeColor = System.Drawing.Color.Black
+            Me.dgvSequenceDeduction.DefaultCellStyle = DataGridViewCellStyle20
             Me.dgvSequenceDeduction.EditingMode = False
             Me.dgvSequenceDeduction.EndFindValue = Nothing
             Me.dgvSequenceDeduction.FieldDescription = Nothing
@@ -2836,9 +2835,9 @@
             Me.dgvDeductionIdNo.AutoComplete = False
             Me.dgvDeductionIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
             Me.dgvDeductionIdNo.DataPropertyName = "PayElementIdNo"
-            DataGridViewCellStyle109.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle109.ForeColor = System.Drawing.Color.Black
-            Me.dgvDeductionIdNo.DefaultCellStyle = DataGridViewCellStyle109
+            DataGridViewCellStyle21.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle21.ForeColor = System.Drawing.Color.Black
+            Me.dgvDeductionIdNo.DefaultCellStyle = DataGridViewCellStyle21
             Me.dgvDeductionIdNo.EditingMode = False
             Me.dgvDeductionIdNo.HeaderText = "Deduction Name - Code"
             Me.dgvDeductionIdNo.MinimumWidth = 6
@@ -2853,11 +2852,11 @@
             '
             Me.dgvDeductionRate.BegFindValue = Nothing
             Me.dgvDeductionRate.DataPropertyName = "Rate"
-            DataGridViewCellStyle110.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle110.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle110.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle110.Format = "###,##0.00"
-            Me.dgvDeductionRate.DefaultCellStyle = DataGridViewCellStyle110
+            DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle22.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle22.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle22.Format = "###,##0.00"
+            Me.dgvDeductionRate.DefaultCellStyle = DataGridViewCellStyle22
             Me.dgvDeductionRate.EditingMode = False
             Me.dgvDeductionRate.EndFindValue = Nothing
             Me.dgvDeductionRate.FieldDescription = Nothing
@@ -2878,9 +2877,9 @@
             '
             Me.dgvDeductionUnit.AutoComplete = False
             Me.dgvDeductionUnit.DataPropertyName = "Unit"
-            DataGridViewCellStyle111.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle111.ForeColor = System.Drawing.Color.Black
-            Me.dgvDeductionUnit.DefaultCellStyle = DataGridViewCellStyle111
+            DataGridViewCellStyle23.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle23.ForeColor = System.Drawing.Color.Black
+            Me.dgvDeductionUnit.DefaultCellStyle = DataGridViewCellStyle23
             Me.dgvDeductionUnit.EditingMode = False
             Me.dgvDeductionUnit.HeaderText = "Unit"
             Me.dgvDeductionUnit.MinimumWidth = 6
@@ -2896,11 +2895,11 @@
             '
             Me.dgvDeductionAmount.BegFindValue = Nothing
             Me.dgvDeductionAmount.DataPropertyName = "Amount"
-            DataGridViewCellStyle112.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle112.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle112.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle112.Format = "###,##0.00"
-            Me.dgvDeductionAmount.DefaultCellStyle = DataGridViewCellStyle112
+            DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle24.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle24.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle24.Format = "###,##0.00"
+            Me.dgvDeductionAmount.DefaultCellStyle = DataGridViewCellStyle24
             Me.dgvDeductionAmount.EditingMode = False
             Me.dgvDeductionAmount.EndFindValue = Nothing
             Me.dgvDeductionAmount.FieldDescription = Nothing
@@ -2943,19 +2942,19 @@
             Me.tbpPhones.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
             Me.tbpPhones.Controls.Add(Me.DataGridViewPhones)
             Me.tbpPhones.Font = New System.Drawing.Font("Tahoma", 9.0!)
-            Me.tbpPhones.Location = New System.Drawing.Point(4, 22)
+            Me.tbpPhones.Location = New System.Drawing.Point(4, 23)
             Me.tbpPhones.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
             Me.tbpPhones.Name = "tbpPhones"
             Me.tbpPhones.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
-            Me.tbpPhones.Size = New System.Drawing.Size(795, 371)
+            Me.tbpPhones.Size = New System.Drawing.Size(795, 370)
             Me.tbpPhones.TabIndex = 5
             Me.tbpPhones.Text = "Phones"
             Me.tbpPhones.UseVisualStyleBackColor = True
             '
             'DataGridViewPhones
             '
-            DataGridViewCellStyle12.BackColor = System.Drawing.Color.FloralWhite
-            Me.DataGridViewPhones.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle12
+            DataGridViewCellStyle26.BackColor = System.Drawing.Color.FloralWhite
+            Me.DataGridViewPhones.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle26
             Me.DataGridViewPhones.AutoGenerateColumns = False
             Me.DataGridViewPhones.BegFindValue = Nothing
             Me.DataGridViewPhones.Cached = False
@@ -2963,14 +2962,14 @@
             Me.DataGridViewPhones.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvPhoneSequenceDisplay, Me.dgvPhoneTypeIdNo, Me.dgvCountryTelIdNo, Me.dgvAreaCode, Me.PhoneNumber, Me.dgvFullPhone, Me.dgvFullPhoneAra, Me.CountryTelCode, Me.EmployeeIdNo, Me.IdNoDataGridViewTextBoxColumn4})
             Me.DataGridViewPhones.DataFilter = Nothing
             Me.DataGridViewPhones.DataSource = Me.bsPhones
-            DataGridViewCellStyle118.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle118.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle118.Font = New System.Drawing.Font("Tahoma", 9.0!)
-            DataGridViewCellStyle118.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle118.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle118.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle118.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewPhones.DefaultCellStyle = DataGridViewCellStyle118
+            DataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle32.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle32.Font = New System.Drawing.Font("Tahoma", 9.0!)
+            DataGridViewCellStyle32.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle32.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle32.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle32.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewPhones.DefaultCellStyle = DataGridViewCellStyle32
             Me.DataGridViewPhones.DgvFooter = Nothing
             Me.DataGridViewPhones.DisplayOnly = False
             Me.DataGridViewPhones.Dock = System.Windows.Forms.DockStyle.Fill
@@ -3001,7 +3000,7 @@
             Me.DataGridViewPhones.SequenceColumn = "dgvSequence"
             Me.DataGridViewPhones.SequenceFieldName = "Sequence"
             Me.DataGridViewPhones.ShowFooter = False
-            Me.DataGridViewPhones.Size = New System.Drawing.Size(787, 365)
+            Me.DataGridViewPhones.Size = New System.Drawing.Size(787, 364)
             Me.DataGridViewPhones.TabIndex = 273
             Me.DataGridViewPhones.Translatable = True
             '
@@ -3009,9 +3008,9 @@
             '
             Me.dgvPhoneSequenceDisplay.BegFindValue = Nothing
             Me.dgvPhoneSequenceDisplay.DataPropertyName = "Sequence"
-            DataGridViewCellStyle73.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle73.ForeColor = System.Drawing.Color.Black
-            Me.dgvPhoneSequenceDisplay.DefaultCellStyle = DataGridViewCellStyle73
+            DataGridViewCellStyle27.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle27.ForeColor = System.Drawing.Color.Black
+            Me.dgvPhoneSequenceDisplay.DefaultCellStyle = DataGridViewCellStyle27
             Me.dgvPhoneSequenceDisplay.DisplayOnly = True
             Me.dgvPhoneSequenceDisplay.EditingMode = False
             Me.dgvPhoneSequenceDisplay.EndFindValue = Nothing
@@ -3033,9 +3032,9 @@
             '
             Me.dgvPhoneTypeIdNo.AutoComplete = False
             Me.dgvPhoneTypeIdNo.DataPropertyName = "PhoneTypeIdNo"
-            DataGridViewCellStyle114.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle114.ForeColor = System.Drawing.Color.Black
-            Me.dgvPhoneTypeIdNo.DefaultCellStyle = DataGridViewCellStyle114
+            DataGridViewCellStyle28.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle28.ForeColor = System.Drawing.Color.Black
+            Me.dgvPhoneTypeIdNo.DefaultCellStyle = DataGridViewCellStyle28
             Me.dgvPhoneTypeIdNo.EditingMode = False
             Me.dgvPhoneTypeIdNo.HeaderText = "Phone Type Code - Name"
             Me.dgvPhoneTypeIdNo.MinimumWidth = 6
@@ -3051,9 +3050,9 @@
             '
             Me.dgvCountryTelIdNo.AutoComplete = False
             Me.dgvCountryTelIdNo.DataPropertyName = "CountryTelIdNo"
-            DataGridViewCellStyle115.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle115.ForeColor = System.Drawing.Color.Black
-            Me.dgvCountryTelIdNo.DefaultCellStyle = DataGridViewCellStyle115
+            DataGridViewCellStyle29.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle29.ForeColor = System.Drawing.Color.Black
+            Me.dgvCountryTelIdNo.DefaultCellStyle = DataGridViewCellStyle29
             Me.dgvCountryTelIdNo.EditingMode = False
             Me.dgvCountryTelIdNo.HeaderText = "Country Phone Code"
             Me.dgvCountryTelIdNo.MinimumWidth = 200
@@ -3067,9 +3066,9 @@
             '
             Me.dgvAreaCode.BegFindValue = Nothing
             Me.dgvAreaCode.DataPropertyName = "AreaCode"
-            DataGridViewCellStyle116.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle116.ForeColor = System.Drawing.Color.Black
-            Me.dgvAreaCode.DefaultCellStyle = DataGridViewCellStyle116
+            DataGridViewCellStyle30.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle30.ForeColor = System.Drawing.Color.Black
+            Me.dgvAreaCode.DefaultCellStyle = DataGridViewCellStyle30
             Me.dgvAreaCode.EditingMode = False
             Me.dgvAreaCode.EndFindValue = Nothing
             Me.dgvAreaCode.FieldDescription = Nothing
@@ -3090,9 +3089,9 @@
             '
             Me.PhoneNumber.BegFindValue = Nothing
             Me.PhoneNumber.DataPropertyName = "PhoneNumber"
-            DataGridViewCellStyle117.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle117.ForeColor = System.Drawing.Color.Black
-            Me.PhoneNumber.DefaultCellStyle = DataGridViewCellStyle117
+            DataGridViewCellStyle31.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle31.ForeColor = System.Drawing.Color.Black
+            Me.PhoneNumber.DefaultCellStyle = DataGridViewCellStyle31
             Me.PhoneNumber.EditingMode = False
             Me.PhoneNumber.EndFindValue = Nothing
             Me.PhoneNumber.FieldDescription = Nothing
@@ -3166,19 +3165,19 @@
             Me.tbpLeaveCredits.Controls.Add(Me.DataGridViewLeaveCredits)
             Me.tbpLeaveCredits.DisplayOnly = True
             Me.tbpLeaveCredits.Font = New System.Drawing.Font("Tahoma", 9.0!)
-            Me.tbpLeaveCredits.Location = New System.Drawing.Point(4, 22)
+            Me.tbpLeaveCredits.Location = New System.Drawing.Point(4, 23)
             Me.tbpLeaveCredits.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
             Me.tbpLeaveCredits.Name = "tbpLeaveCredits"
             Me.tbpLeaveCredits.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
-            Me.tbpLeaveCredits.Size = New System.Drawing.Size(795, 371)
+            Me.tbpLeaveCredits.Size = New System.Drawing.Size(795, 370)
             Me.tbpLeaveCredits.TabIndex = 7
             Me.tbpLeaveCredits.Text = "Leave Credits"
             Me.tbpLeaveCredits.UseVisualStyleBackColor = True
             '
             'DataGridViewLeaveCredits
             '
-            DataGridViewCellStyle19.BackColor = System.Drawing.Color.FloralWhite
-            Me.DataGridViewLeaveCredits.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle19
+            DataGridViewCellStyle33.BackColor = System.Drawing.Color.FloralWhite
+            Me.DataGridViewLeaveCredits.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle33
             Me.DataGridViewLeaveCredits.AutoGenerateColumns = False
             Me.DataGridViewLeaveCredits.BegFindValue = Nothing
             Me.DataGridViewLeaveCredits.Cached = False
@@ -3186,14 +3185,14 @@
             Me.DataGridViewLeaveCredits.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceLeaveCredits, Me.dgvLeaveIdNo, Me.dgvLeaveAllowed, Me.dgvPaidPercent, Me.dgvCumulative, Me.dgvMaxCarryOver, Me.NoMaxLimit, Me.dgvMaxLimit, Me.dgvAccumulatedLeave, Me.dgvEmployeeIdNoLeaveCredits, Me.dgvIdNoLeaveCredits})
             Me.DataGridViewLeaveCredits.DataFilter = Nothing
             Me.DataGridViewLeaveCredits.DataSource = Me.bsLeaveCredits
-            DataGridViewCellStyle126.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle126.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle126.Font = New System.Drawing.Font("Tahoma", 9.0!)
-            DataGridViewCellStyle126.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle126.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle126.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle126.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewLeaveCredits.DefaultCellStyle = DataGridViewCellStyle126
+            DataGridViewCellStyle42.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle42.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle42.Font = New System.Drawing.Font("Tahoma", 9.0!)
+            DataGridViewCellStyle42.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle42.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle42.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle42.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewLeaveCredits.DefaultCellStyle = DataGridViewCellStyle42
             Me.DataGridViewLeaveCredits.DgvFooter = Nothing
             Me.DataGridViewLeaveCredits.DisplayOnly = False
             Me.DataGridViewLeaveCredits.Dock = System.Windows.Forms.DockStyle.Fill
@@ -3225,7 +3224,7 @@
             Me.DataGridViewLeaveCredits.SequenceFieldName = "Sequence"
             Me.DataGridViewLeaveCredits.ShowCellErrors = False
             Me.DataGridViewLeaveCredits.ShowFooter = False
-            Me.DataGridViewLeaveCredits.Size = New System.Drawing.Size(787, 365)
+            Me.DataGridViewLeaveCredits.Size = New System.Drawing.Size(787, 364)
             Me.DataGridViewLeaveCredits.TabIndex = 0
             Me.DataGridViewLeaveCredits.Translatable = True
             '
@@ -3243,9 +3242,9 @@
             Me.dgvLeaveIdNo.AutoComplete = False
             Me.dgvLeaveIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
             Me.dgvLeaveIdNo.DataPropertyName = "LeaveIdNo"
-            DataGridViewCellStyle78.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle78.ForeColor = System.Drawing.Color.Black
-            Me.dgvLeaveIdNo.DefaultCellStyle = DataGridViewCellStyle78
+            DataGridViewCellStyle34.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle34.ForeColor = System.Drawing.Color.Black
+            Me.dgvLeaveIdNo.DefaultCellStyle = DataGridViewCellStyle34
             Me.dgvLeaveIdNo.EditingMode = False
             Me.dgvLeaveIdNo.HeaderText = "Leave Credit Code/Name"
             Me.dgvLeaveIdNo.MinimumWidth = 200
@@ -3260,10 +3259,10 @@
             '
             Me.dgvLeaveAllowed.DataPropertyName = "LeaveAllowed"
             Me.dgvLeaveAllowed.DecimalPlaces = -1
-            DataGridViewCellStyle119.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle119.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle119.ForeColor = System.Drawing.Color.Black
-            Me.dgvLeaveAllowed.DefaultCellStyle = DataGridViewCellStyle119
+            DataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle35.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle35.ForeColor = System.Drawing.Color.Black
+            Me.dgvLeaveAllowed.DefaultCellStyle = DataGridViewCellStyle35
             Me.dgvLeaveAllowed.EditingMode = False
             Me.dgvLeaveAllowed.HeaderText = "Leaves Allowed"
             Me.dgvLeaveAllowed.MinimumWidth = 6
@@ -3278,10 +3277,10 @@
             '
             Me.dgvPaidPercent.DataPropertyName = "PaidPercent"
             Me.dgvPaidPercent.DecimalPlaces = -1
-            DataGridViewCellStyle120.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle120.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle120.ForeColor = System.Drawing.Color.Black
-            Me.dgvPaidPercent.DefaultCellStyle = DataGridViewCellStyle120
+            DataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle36.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle36.ForeColor = System.Drawing.Color.Black
+            Me.dgvPaidPercent.DefaultCellStyle = DataGridViewCellStyle36
             Me.dgvPaidPercent.EditingMode = False
             Me.dgvPaidPercent.HeaderText = "Paid Percent"
             Me.dgvPaidPercent.MinimumWidth = 6
@@ -3297,11 +3296,11 @@
             Me.dgvCumulative.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
             Me.dgvCumulative.BegFindValue = Nothing
             Me.dgvCumulative.DataPropertyName = "Cumulative"
-            DataGridViewCellStyle121.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-            DataGridViewCellStyle121.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle121.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle121.NullValue = False
-            Me.dgvCumulative.DefaultCellStyle = DataGridViewCellStyle121
+            DataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+            DataGridViewCellStyle37.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle37.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle37.NullValue = False
+            Me.dgvCumulative.DefaultCellStyle = DataGridViewCellStyle37
             Me.dgvCumulative.EditingMode = False
             Me.dgvCumulative.EndFindValue = Nothing
             Me.dgvCumulative.FieldDescription = Nothing
@@ -3322,10 +3321,10 @@
             '
             Me.dgvMaxCarryOver.DataPropertyName = "MaxCarryOver"
             Me.dgvMaxCarryOver.DecimalPlaces = -1
-            DataGridViewCellStyle122.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle122.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle122.ForeColor = System.Drawing.Color.Black
-            Me.dgvMaxCarryOver.DefaultCellStyle = DataGridViewCellStyle122
+            DataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle38.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle38.ForeColor = System.Drawing.Color.Black
+            Me.dgvMaxCarryOver.DefaultCellStyle = DataGridViewCellStyle38
             Me.dgvMaxCarryOver.EditingMode = False
             Me.dgvMaxCarryOver.HeaderText = "Max Carry Over"
             Me.dgvMaxCarryOver.MinimumWidth = 6
@@ -3341,11 +3340,11 @@
             Me.NoMaxLimit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
             Me.NoMaxLimit.BegFindValue = Nothing
             Me.NoMaxLimit.DataPropertyName = "NoMaxLimit"
-            DataGridViewCellStyle123.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-            DataGridViewCellStyle123.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle123.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle123.NullValue = False
-            Me.NoMaxLimit.DefaultCellStyle = DataGridViewCellStyle123
+            DataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+            DataGridViewCellStyle39.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle39.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle39.NullValue = False
+            Me.NoMaxLimit.DefaultCellStyle = DataGridViewCellStyle39
             Me.NoMaxLimit.EditingMode = False
             Me.NoMaxLimit.EndFindValue = Nothing
             Me.NoMaxLimit.FieldDescription = Nothing
@@ -3359,16 +3358,16 @@
             Me.NoMaxLimit.ReadOnly = True
             Me.NoMaxLimit.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.NoMaxLimit.Translatable = False
-            Me.NoMaxLimit.Width = 78
+            Me.NoMaxLimit.Width = 38
             '
             'dgvMaxLimit
             '
             Me.dgvMaxLimit.DataPropertyName = "MaxLimit"
             Me.dgvMaxLimit.DecimalPlaces = -1
-            DataGridViewCellStyle124.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle124.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle124.ForeColor = System.Drawing.Color.Black
-            Me.dgvMaxLimit.DefaultCellStyle = DataGridViewCellStyle124
+            DataGridViewCellStyle40.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle40.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle40.ForeColor = System.Drawing.Color.Black
+            Me.dgvMaxLimit.DefaultCellStyle = DataGridViewCellStyle40
             Me.dgvMaxLimit.EditingMode = False
             Me.dgvMaxLimit.HeaderText = "Max Limit"
             Me.dgvMaxLimit.MinimumWidth = 50
@@ -3383,10 +3382,10 @@
             '
             Me.dgvAccumulatedLeave.DataPropertyName = "AccumulatedLeave"
             Me.dgvAccumulatedLeave.DecimalPlaces = -1
-            DataGridViewCellStyle125.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle125.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle125.ForeColor = System.Drawing.Color.Black
-            Me.dgvAccumulatedLeave.DefaultCellStyle = DataGridViewCellStyle125
+            DataGridViewCellStyle41.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle41.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle41.ForeColor = System.Drawing.Color.Black
+            Me.dgvAccumulatedLeave.DefaultCellStyle = DataGridViewCellStyle41
             Me.dgvAccumulatedLeave.EditingMode = False
             Me.dgvAccumulatedLeave.HeaderText = "Accum. Leaves"
             Me.dgvAccumulatedLeave.MinimumWidth = 50
@@ -3427,19 +3426,19 @@
             Me.tbpDocuments.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
             Me.tbpDocuments.Controls.Add(Me.DataGridViewDocuments)
             Me.tbpDocuments.Font = New System.Drawing.Font("Tahoma", 9.0!)
-            Me.tbpDocuments.Location = New System.Drawing.Point(4, 22)
+            Me.tbpDocuments.Location = New System.Drawing.Point(4, 23)
             Me.tbpDocuments.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
             Me.tbpDocuments.Name = "tbpDocuments"
             Me.tbpDocuments.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
-            Me.tbpDocuments.Size = New System.Drawing.Size(795, 371)
+            Me.tbpDocuments.Size = New System.Drawing.Size(795, 370)
             Me.tbpDocuments.TabIndex = 8
             Me.tbpDocuments.Text = "Documents"
             Me.tbpDocuments.UseVisualStyleBackColor = True
             '
             'DataGridViewDocuments
             '
-            DataGridViewCellStyle26.BackColor = System.Drawing.Color.FloralWhite
-            Me.DataGridViewDocuments.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle26
+            DataGridViewCellStyle43.BackColor = System.Drawing.Color.FloralWhite
+            Me.DataGridViewDocuments.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle43
             Me.DataGridViewDocuments.AutoGenerateColumns = False
             Me.DataGridViewDocuments.BegFindValue = Nothing
             Me.DataGridViewDocuments.Cached = False
@@ -3447,14 +3446,14 @@
             Me.DataGridViewDocuments.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceDocument, Me.dgvDocumentIdNo, Me.dgvNumber, Me.dgvIssueDate, Me.dgvExpiryDate, Me.dgvImageButton, Me.dgvFileName, Me.dgvDataImageIdNo, Me.dgvEmployeeIdNo, Me.IdNoDataGridViewTextBoxColumn1})
             Me.DataGridViewDocuments.DataFilter = Nothing
             Me.DataGridViewDocuments.DataSource = Me.bsDocuments
-            DataGridViewCellStyle134.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle134.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle134.Font = New System.Drawing.Font("Tahoma", 9.0!)
-            DataGridViewCellStyle134.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle134.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle134.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle134.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewDocuments.DefaultCellStyle = DataGridViewCellStyle134
+            DataGridViewCellStyle52.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle52.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle52.Font = New System.Drawing.Font("Tahoma", 9.0!)
+            DataGridViewCellStyle52.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle52.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle52.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle52.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewDocuments.DefaultCellStyle = DataGridViewCellStyle52
             Me.DataGridViewDocuments.DgvFooter = Nothing
             Me.DataGridViewDocuments.DisplayOnly = False
             Me.DataGridViewDocuments.Dock = System.Windows.Forms.DockStyle.Fill
@@ -3486,7 +3485,7 @@
             Me.DataGridViewDocuments.SequenceFieldName = "Sequence"
             Me.DataGridViewDocuments.ShowCellErrors = False
             Me.DataGridViewDocuments.ShowFooter = False
-            Me.DataGridViewDocuments.Size = New System.Drawing.Size(787, 365)
+            Me.DataGridViewDocuments.Size = New System.Drawing.Size(787, 364)
             Me.DataGridViewDocuments.TabIndex = 1
             Me.DataGridViewDocuments.Translatable = True
             '
@@ -3494,9 +3493,9 @@
             '
             Me.dgvSequenceDocument.BegFindValue = Nothing
             Me.dgvSequenceDocument.DataPropertyName = "Sequence"
-            DataGridViewCellStyle86.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle86.ForeColor = System.Drawing.Color.Black
-            Me.dgvSequenceDocument.DefaultCellStyle = DataGridViewCellStyle86
+            DataGridViewCellStyle44.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle44.ForeColor = System.Drawing.Color.Black
+            Me.dgvSequenceDocument.DefaultCellStyle = DataGridViewCellStyle44
             Me.dgvSequenceDocument.EditingMode = False
             Me.dgvSequenceDocument.EndFindValue = Nothing
             Me.dgvSequenceDocument.FieldDescription = Nothing
@@ -3518,9 +3517,9 @@
             Me.dgvDocumentIdNo.AutoComplete = False
             Me.dgvDocumentIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
             Me.dgvDocumentIdNo.DataPropertyName = "DocumentIdNo"
-            DataGridViewCellStyle127.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle127.ForeColor = System.Drawing.Color.Black
-            Me.dgvDocumentIdNo.DefaultCellStyle = DataGridViewCellStyle127
+            DataGridViewCellStyle45.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle45.ForeColor = System.Drawing.Color.Black
+            Me.dgvDocumentIdNo.DefaultCellStyle = DataGridViewCellStyle45
             Me.dgvDocumentIdNo.EditingMode = False
             Me.dgvDocumentIdNo.HeaderText = "Document Type"
             Me.dgvDocumentIdNo.MinimumWidth = 6
@@ -3535,9 +3534,9 @@
             '
             Me.dgvNumber.BegFindValue = Nothing
             Me.dgvNumber.DataPropertyName = "DocumentNumber"
-            DataGridViewCellStyle128.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle128.ForeColor = System.Drawing.Color.Black
-            Me.dgvNumber.DefaultCellStyle = DataGridViewCellStyle128
+            DataGridViewCellStyle46.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle46.ForeColor = System.Drawing.Color.Black
+            Me.dgvNumber.DefaultCellStyle = DataGridViewCellStyle46
             Me.dgvNumber.EditingMode = False
             Me.dgvNumber.EndFindValue = Nothing
             Me.dgvNumber.FieldDescription = Nothing
@@ -3557,9 +3556,9 @@
             'dgvIssueDate
             '
             Me.dgvIssueDate.DataPropertyName = "IssueDate"
-            DataGridViewCellStyle129.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle129.ForeColor = System.Drawing.Color.Black
-            Me.dgvIssueDate.DefaultCellStyle = DataGridViewCellStyle129
+            DataGridViewCellStyle47.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle47.ForeColor = System.Drawing.Color.Black
+            Me.dgvIssueDate.DefaultCellStyle = DataGridViewCellStyle47
             Me.dgvIssueDate.EditingMode = False
             Me.dgvIssueDate.HeaderText = "Issue Date"
             Me.dgvIssueDate.MinimumWidth = 6
@@ -3573,9 +3572,9 @@
             'dgvExpiryDate
             '
             Me.dgvExpiryDate.DataPropertyName = "ExpiryDate"
-            DataGridViewCellStyle130.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle130.ForeColor = System.Drawing.Color.Black
-            Me.dgvExpiryDate.DefaultCellStyle = DataGridViewCellStyle130
+            DataGridViewCellStyle48.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle48.ForeColor = System.Drawing.Color.Black
+            Me.dgvExpiryDate.DefaultCellStyle = DataGridViewCellStyle48
             Me.dgvExpiryDate.EditingMode = False
             Me.dgvExpiryDate.HeaderText = "Expiry Date"
             Me.dgvExpiryDate.MinimumWidth = 6
@@ -3610,9 +3609,9 @@
             '
             Me.dgvDataImageIdNo.BegFindValue = Nothing
             Me.dgvDataImageIdNo.DataPropertyName = "DataImageIdNo"
-            DataGridViewCellStyle131.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle131.ForeColor = System.Drawing.Color.Black
-            Me.dgvDataImageIdNo.DefaultCellStyle = DataGridViewCellStyle131
+            DataGridViewCellStyle49.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle49.ForeColor = System.Drawing.Color.Black
+            Me.dgvDataImageIdNo.DefaultCellStyle = DataGridViewCellStyle49
             Me.dgvDataImageIdNo.EditingMode = False
             Me.dgvDataImageIdNo.EndFindValue = Nothing
             Me.dgvDataImageIdNo.FieldDescription = Nothing
@@ -3635,9 +3634,9 @@
             '
             Me.dgvEmployeeIdNo.BegFindValue = Nothing
             Me.dgvEmployeeIdNo.DataPropertyName = "EmployeeIdNo"
-            DataGridViewCellStyle132.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle132.ForeColor = System.Drawing.Color.Black
-            Me.dgvEmployeeIdNo.DefaultCellStyle = DataGridViewCellStyle132
+            DataGridViewCellStyle50.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle50.ForeColor = System.Drawing.Color.Black
+            Me.dgvEmployeeIdNo.DefaultCellStyle = DataGridViewCellStyle50
             Me.dgvEmployeeIdNo.EditingMode = False
             Me.dgvEmployeeIdNo.EndFindValue = Nothing
             Me.dgvEmployeeIdNo.FieldDescription = Nothing
@@ -3658,9 +3657,9 @@
             '
             Me.IdNoDataGridViewTextBoxColumn1.BegFindValue = Nothing
             Me.IdNoDataGridViewTextBoxColumn1.DataPropertyName = "IdNo"
-            DataGridViewCellStyle133.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle133.ForeColor = System.Drawing.Color.Black
-            Me.IdNoDataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle133
+            DataGridViewCellStyle51.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle51.ForeColor = System.Drawing.Color.Black
+            Me.IdNoDataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle51
             Me.IdNoDataGridViewTextBoxColumn1.EditingMode = False
             Me.IdNoDataGridViewTextBoxColumn1.EndFindValue = Nothing
             Me.IdNoDataGridViewTextBoxColumn1.FieldDescription = Nothing
@@ -3688,11 +3687,11 @@
             Me.tbpEmployeInformation.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
             Me.tbpEmployeInformation.Controls.Add(Me.TableLayoutPanel2)
             Me.tbpEmployeInformation.Font = New System.Drawing.Font("Tahoma", 9.0!)
-            Me.tbpEmployeInformation.Location = New System.Drawing.Point(4, 22)
+            Me.tbpEmployeInformation.Location = New System.Drawing.Point(4, 23)
             Me.tbpEmployeInformation.Margin = New System.Windows.Forms.Padding(2)
             Me.tbpEmployeInformation.Name = "tbpEmployeInformation"
             Me.tbpEmployeInformation.Padding = New System.Windows.Forms.Padding(2)
-            Me.tbpEmployeInformation.Size = New System.Drawing.Size(795, 371)
+            Me.tbpEmployeInformation.Size = New System.Drawing.Size(795, 370)
             Me.tbpEmployeInformation.TabIndex = 9
             Me.tbpEmployeInformation.Text = "Employee Information"
             Me.tbpEmployeInformation.UseVisualStyleBackColor = True
@@ -3918,7 +3917,7 @@
             Me.dtpReleasedDate.SecurityKey = Nothing
             Me.dtpReleasedDate.ShowLongDate = False
             Me.dtpReleasedDate.ShowTime = False
-            Me.dtpReleasedDate.Size = New System.Drawing.Size(124, 22)
+            Me.dtpReleasedDate.Size = New System.Drawing.Size(124, 23)
             Me.dtpReleasedDate.TabIndex = 1
             Me.dtpReleasedDate.TargetCalendar = CType(resources.GetObject("dtpReleasedDate.TargetCalendar"), System.Globalization.Calendar)
             Me.dtpReleasedDate.Translatable = False
@@ -3963,7 +3962,7 @@
             Me.dtpHiredDate.SecurityKey = Nothing
             Me.dtpHiredDate.ShowLongDate = False
             Me.dtpHiredDate.ShowTime = False
-            Me.dtpHiredDate.Size = New System.Drawing.Size(124, 22)
+            Me.dtpHiredDate.Size = New System.Drawing.Size(124, 23)
             Me.dtpHiredDate.TabIndex = 0
             Me.dtpHiredDate.TargetCalendar = CType(resources.GetObject("dtpHiredDate.TargetCalendar"), System.Globalization.Calendar)
             Me.dtpHiredDate.Translatable = False
@@ -4184,7 +4183,7 @@
             Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
             Me.ClientSize = New System.Drawing.Size(1255, 567)
             Me.Font = New System.Drawing.Font("Tahoma", 9.0!)
-            Me.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+            Me.Margin = New System.Windows.Forms.Padding(5)
             Me.Name = "EmployeeEntryTv"
             Me.Text = "Employee Maintenance Form"
             Me.ViewDisplayName = "EmployeeEntryTv"

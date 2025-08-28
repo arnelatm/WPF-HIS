@@ -90,6 +90,61 @@ Namespace Services
             End Try
         End Sub
 
+        ' --- Overload to translate with explicit culture (NEW) ---
+        ' REPLACE the existing TranslateCurrentForm overload with the following fixed version
+        Public Sub TranslateCurrentForm(targetCulture As CultureInfo)
+            ' Plan:
+            ' 1. If targetCulture is Nothing, delegate to existing TranslateCurrentForm().
+            ' 2. Use existing GetSystemViewId (fix: remove call to missing GetViewId).
+            ' 3. Fetch translation dictionary from cache.
+            ' 4. Apply translations.
+            If targetCulture Is Nothing Then
+                TranslateCurrentForm()
+                Return
+            End If
+            Dim cultureName = targetCulture.Name
+            Dim viewId = GetSystemViewId()
+            Dim dict = _cache.GetOrAdd(cultureName, viewId)
+            ApplyTranslations(dict, targetCulture)
+        End Sub
+
+        ' --- Factor existing logic into reusable method (NEW if not present) ---
+        Private Sub ApplyTranslations(dict As IDictionary(Of String, String), targetCulture As CultureInfo)
+            If dict Is Nothing Then Exit Sub
+            For Each ctl In EnumerateControls(_form)
+                Dim key = ResolveKey(ctl)
+                If key IsNot Nothing AndAlso dict.ContainsKey(key) Then
+                    ctl.Text = dict(key)
+                End If
+            Next
+            ' (No global RTL changes here; form decides its own layout)
+        End Sub
+
+        ' NEW: Enumerate all controls (depth-first) starting from a root control.
+        Private Iterator Function EnumerateControls(root As Control) As IEnumerable(Of Control)
+            If root Is Nothing Then
+                Return
+            End If
+            Dim stack As New Stack(Of Control)
+            stack.Push(root)
+            While stack.Count > 0
+                Dim current = stack.Pop()
+                Yield current
+                For i = current.Controls.Count - 1 To 0 Step -1
+                    stack.Push(current.Controls(i))
+                Next
+            End While
+        End Function
+
+        ' NEW: Resolve translation key for a control (can be extended later).
+        ' Currently uses control.Name; falls back to Nothing when unnamed.
+        Private Function ResolveKey(ctrl As Control) As String
+            If ctrl Is Nothing Then Return Nothing
+            If String.IsNullOrWhiteSpace(ctrl.Name) Then Return Nothing
+            Return ctrl.Name
+        End Function
+
+
         ' CHANGE: Added ApplyRtlState call so partial translations also reflect correct RTL without multiple flips elsewhere.
         Public Sub TranslateSpecificControls(controls As IEnumerable(Of Control))
             If controls Is Nothing Then Return
@@ -109,10 +164,12 @@ Namespace Services
         End Sub
 
         ' ADD: Centralized, idempotent RTL application (only sets when changed).
+        ' Added: RTL handling for TabControl and TabPages
         Private Sub ApplyRtlState()
             Dim shouldBeRtl = CultureInfo.CurrentCulture.TextInfo.IsRightToLeft
             Dim desired = If(shouldBeRtl, Windows.Forms.RightToLeft.Yes, Windows.Forms.RightToLeft.No)
 
+            ' Form level
             If _form.RightToLeft <> desired Then
                 _form.RightToLeft = desired
             End If
@@ -121,11 +178,51 @@ Namespace Services
             If f IsNot Nothing AndAlso f.RightToLeftLayout <> shouldBeRtl Then
                 f.RightToLeftLayout = shouldBeRtl
             End If
+
+            ' Flow layouts (existing behavior)
             For Each fl In GetAllFlowLayouts(_form)
                 fl.RefreshRtl()
             Next
 
+            ' NEW: TabControls + their TabPages
+            For Each tc In GetAllTabControls(_form)
+                If tc.RightToLeft <> desired Then
+                    tc.RightToLeft = desired
+                End If
+#If NETFRAMEWORK Then
+                ' RightToLeftLayout exists for TabControl in .NET Framework
+                Try
+                    If tc.RightToLeftLayout <> shouldBeRtl Then
+                        tc.RightToLeftLayout = shouldBeRtl
+                    End If
+                Catch
+                    ' Ignore if not supported (defensive)
+                End Try
+#End If
+                For Each page As TabPage In tc.TabPages
+                    If page.RightToLeft <> desired Then
+                        page.RightToLeft = desired
+                    End If
+                    ' TabPage does not expose RightToLeftLayout; layout mirroring handled by parent.
+                Next
+            Next
         End Sub
+
+        ' NEW: Collect all TabControls in the form hierarchy
+        Private Function GetAllTabControls(root As Control) As IEnumerable(Of TabControl)
+            Dim list As New List(Of TabControl)
+            Dim stack As New Stack(Of Control)
+            stack.Push(root)
+            While stack.Count > 0
+                Dim c = stack.Pop()
+                Dim tc = TryCast(c, TabControl)
+                If tc IsNot Nothing Then list.Add(tc)
+                For Each child As Control In c.Controls
+                    stack.Push(child)
+                Next
+            End While
+            Return list
+        End Function
 
 
 
@@ -215,11 +312,26 @@ Namespace Services
             Next
         End Sub
 
+
+        ' CHANGE: Always perform layout for any FlowLayoutPanel / CFlowLayout while still deferring others
+        ' Rationale: Previously only the root received performLayout:=True; flow panels stayed suspended (no reflow after RTL / text changes).
+        ' This forces a layout pass on flow-based containers to update child order/direction (especially after RTL switch).
         Private Sub ResumeAllLayout(root As Control, performLayout As Boolean)
             For Each c As Control In root.Controls
-                ResumeAllLayout(c, performLayout:=False)
+                Dim childNeedsLayout As Boolean =
+                    TypeOf c Is FlowLayoutPanel OrElse TypeOf c Is CFlowLayout
+                ' Propagate True only for flow panels (or if explicitly requested upstream)
+                ResumeAllLayout(c, performLayout:=childNeedsLayout)
             Next
-            root.ResumeLayout(performLayout)
+
+            Dim isFlow As Boolean = TypeOf root Is FlowLayoutPanel OrElse TypeOf root Is CFlowLayout
+            Dim doLayout As Boolean = performLayout OrElse isFlow
+            root.ResumeLayout(doLayout)
+
+            ' Extra safety: explicit PerformLayout for flow containers when we requested layout.
+            If doLayout AndAlso isFlow Then
+                root.PerformLayout()
+            End If
         End Sub
 #End Region
 

@@ -153,6 +153,9 @@
     </Compile>
     <Compile Include="CfDgvComboBoxCell.vb" />
     <Compile Include="CfDgvComboBoxColumn.vb" />
+    <Compile Include="CFlowLayout.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CtComboBoxEditingControl.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -271,9 +274,6 @@
     </Compile>
     <Compile Include="CFindForm.vb">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CFlowLayout.vb">
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="cFocalPoints.vb" />
     <Compile Include="CForm.Designer.vb">

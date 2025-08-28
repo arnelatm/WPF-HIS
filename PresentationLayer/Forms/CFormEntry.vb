@@ -11,6 +11,7 @@ Imports AATM.Libraries.Localization
 Imports AATM.Libraries.Localization.Core
 Imports AATM.Libraries.Localization.Services
 Imports AATM.PresentationLayer.Events
+Imports AATM.PresentationLayer.Forms.Services.SystemView
 Imports AATM.PresentationLayer.Presenters
 
 Public Class CFormEntry
@@ -32,12 +33,27 @@ Public Class CFormEntry
     Protected DeletingAllowed As Boolean = False
     Private _debugSwitch As Byte = 0
     Private _shownInitialized As Boolean
+    Private _currentFormCulture As CultureInfo = CultureInfo.CurrentCulture
+    Private _formIsRtl As Boolean = CultureInfo.CurrentCulture.TextInfo.IsRightToLeft
 
     'Private _addMode As Boolean = False
     'Private _editMode As Boolean = False
     'Private _recordCount As Int32 = 0
     'Private _recordPositionNumber As Int32 = 0
     Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
+    Private _translationRepo As ITranslationRepository
+    Private _translationCache As TranslationCache
+    Private _formTranslator As FormTranslationService
+    Private _systemViewIdProvider As SystemViewIdProvider
+
+
+    Public Sub New(repo As ITranslationRepository, cache As TranslationCache)
+        InitializeComponent()
+        DoubleBuffered = True
+        _translationRepo = repo
+        _translationCache = cache
+        _formTranslationService = New FormTranslationService(Me, _translationRepo, _translationCache)
+    End Sub
 
     Protected EditingMode As Boolean = False
     Protected AddingMode As Boolean = False
@@ -72,6 +88,18 @@ Public Class CFormEntry
                                                                          dwMinimumWorkingSetSize As Int32,
                                                                           dwMaximumWorkingSetSize As Int32) As Int32
 
+    ' Ensure provider re-usable & safe
+    Private Sub EnsureSystemViewIdProvider()
+        If _systemViewIdProvider Is Nothing Then
+            _systemViewIdProvider = New SystemViewIdProvider(
+                    translatorDac:=TranslatorDAC,
+                    viewNameFunc:=Function() If(String.IsNullOrWhiteSpace(ViewDisplayName), Me.Name, ViewDisplayName)
+                )
+        End If
+    End Sub
+
+
+
     <Bindable(True)>
     <Category("Properties")>
     <DefaultValue(GetType(Boolean))>
@@ -82,13 +110,26 @@ Public Class CFormEntry
 
     Protected Property FormTitleCaption As String = ""
 
+    Public ReadOnly Property CurrentFormCulture As CultureInfo
+        Get
+            Return _CurrentFormCulture
+        End Get
+    End Property
+
+    Public ReadOnly Property FormIsRtl As Boolean
+        Get
+            Return _formIsRtl
+        End Get
+    End Property
 
     Private Sub OnCFormEntryNewShown() Handles MyBase.Shown
         If _shownInitialized Then Return   ' guard against accidental re-entry
 
-        ' Decide initial UI direction based on current culture
+        ' Decide initial UI direction based on current thread culture (read-only)
         Dim rtl = CultureInfo.CurrentCulture.TextInfo.IsRightToLeft
-        SwitchUiLanguage(originalUi:=Not rtl) ' originalUi=True means default LTR language
+        _currentFormCulture = CultureInfo.CurrentCulture
+        _formIsRtl = rtl
+        SwitchUiLanguage(originalUi:=Not rtl) ' originalUi=True means default LTR language (will not change globals)
 
         Me.Activate()
 
@@ -255,8 +296,6 @@ Public Class CFormEntry
     End Sub
 
     Protected Overridable Sub OnTextDisplayLanguageChanged() Handles Me.TextDisplayLanguageChanged
-        CultureInfo.CurrentCulture = New CultureInfo(TextDisplayLanguage, False)
-        'CreateDataSources()
         PublishEvent(New LanguageChanged(Me))
     End Sub
 
@@ -391,6 +430,7 @@ Public Class CFormEntry
             _debugSwitch = 0
             btnDebug.Checked = True
         End If
+        DoCustomSub()
     End Sub
 
     Private Sub BtnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
@@ -559,6 +599,10 @@ Public Class CFormEntry
         PublishClickedButton(ButtonClicked.Print)
     End Sub
 
+    Public Overridable Sub DoCustomSub()
+        ' run any custom sub here
+    End Sub
+
     Private Sub BtnTranslate_Click(sender As Object, e As EventArgs) Handles btnTranslate.Click
         If _debugSwitch Then
             Debugger.Break()
@@ -626,8 +670,37 @@ Public Class CFormEntry
     '    End If
     'End Sub
 
-    Private Sub CFormEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    ' ADD: Wrapper property to unify system view id usage
+    Private ReadOnly Property CurrentSystemViewId As Integer
+        Get
+            EnsureSystemViewIdProvider()
+            Return _systemViewIdProvider.GetId()
+        End Get
+    End Property
 
+    Private Sub CFormEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        _translationRepo = New TranslationRepository(TranslatorDAC)
+        _translationCache = New TranslationCache(_translationRepo)
+        _formTranslator = New FormTranslationService(Me, _translationRepo, _translationCache)
+
+
+        ' Preload the two core cultures for this view id
+        _formTranslator.Preload(
+                {GlobalVariables.DefaultUnmirroredCultureInfoStr, GlobalVariables.DefaultMirroredCultureInfoStr},
+                {CurrentSystemViewId}
+            )
+
+        '{GetSystemViewIdNo()}
+
+
+        ' Initial translation pass (allows UI to start in correct language/RTL)
+        _formTranslator.TranslateCurrentForm()
+
+        If _formTranslationService Is Nothing Then
+            _formTranslationService = New FormTranslationService(Me, _translationRepo, _translationCache)
+            'TranslatorAccessor.TranslatorDACV?.Repository,
+            '                                                 New TranslationCache())
+        End If
         'If _firstLoadSwitch = 0 Then
         '    GetNSaveCaptions()
         '    _firstLoadSwitch = 1
@@ -670,7 +743,7 @@ Public Class CFormEntry
                 tssnavigator1.Visible = False
                 btnOf.Visible = False
             End If
-            If GlobalVariables.RightToLeftLayout Then
+            If FormIsRtl Then
                 btnArabic.Visible = False
                 btnOriginal.Visible = True
                 btnOriginal.Enabled = True
@@ -826,72 +899,111 @@ Public Class CFormEntry
             _root.Refresh()
         End Sub
     End Class
-    ' Override / hide base to control ordering and avoid flicker
-    ' Override / hide base to control ordering and avoid flicker
+
     Protected Shadows Sub SwitchUiLanguage(originalUi As Boolean)
         If LicenseManager.UsageMode = LicenseUsageMode.Designtime Then Return
 
-        ' 0. Determine target culture for requested mode
-        Dim targetCulture As String =
-            If(originalUi,
-               GlobalVariables.DefaultUnmirroredCultureInfoStr,
-               GlobalVariables.DefaultMirroredCultureInfoStr)
+        ' Delegate to centralized service; adjust buttons after translation
+        _formTranslator.SwitchUiLanguage(originalUi,
+                                     allowFallback:=True,
+                                     Nothing)
 
-        ' FAST EXIT: If already on the requested culture (case-insensitive), do nothing heavy.
-        ' (Assumes no forced re-translate needed; call RefreshTranslation if you need a manual retrigger.)
-        If String.Equals(TextDisplayLanguage, targetCulture, StringComparison.OrdinalIgnoreCase) Then
-            ' Just make sure language buttons reflect current mode.
-            btnArabic.Visible = originalUi
-            btnArabic.Enabled = originalUi
-            btnOriginal.Visible = Not originalUi
-            btnOriginal.Enabled = Not originalUi
-            Return
-        End If
+        'Using New RedrawScope(Me)
+        '    ' Per-form culture (do NOT touch GlobalFunctions.SetCulture or GlobalVariables.RightToLeftLayout)
+        '    _currentFormCulture = New CultureInfo(targetCultureName, False)
+        '    _formIsRtl = _currentFormCulture.TextInfo.IsRightToLeft
+        '    TextDisplayLanguage = _currentFormCulture.Name   ' keep legacy listeners satisfied
 
-        Using New RedrawScope(Me)
+        '    ' Translation (pass explicit culture if overload exists)
+        '    If _formTranslationService IsNot Nothing Then
+        '        _formTranslationService.TranslateCurrentForm(_currentFormCulture)
+        '    Else
+        '        FlickerFreeTranslateForm()
+        '    End If
 
-            Dim cultureChanged As Boolean = Not String.Equals(TextDisplayLanguage, targetCulture, StringComparison.OrdinalIgnoreCase)
+        '    ' Apply RTL only to this form (and chosen child containers)
+        '    Dim desiredRTLEnum = If(_formIsRtl, RightToLeft.Yes, RightToLeft.No)
+        '    If Me.RightToLeft <> desiredRTLEnum Then Me.RightToLeft = desiredRTLEnum
+        '    Dim frm = TryCast(Me, Form)
+        '    If frm IsNot Nothing AndAlso frm.RightToLeftLayout <> _formIsRtl Then
+        '        frm.RightToLeftLayout = _formIsRtl
+        '    End If
 
-            If cultureChanged Then
-                TextDisplayLanguage = targetCulture
-                GlobalFunctions.SetCulture(targetCulture)
-                GlobalVariables.AppCurrentCultureInfo = CultureInfo.CurrentCulture
-                GlobalVariables.RightToLeftLayout = CultureInfo.CurrentCulture.TextInfo.IsRightToLeft
-            End If
 
-            ' Translate via service (preferred) or fallback
-            If _formTranslationService IsNot Nothing Then
-                _formTranslationService.TranslateCurrentForm()
-            Else
-                FlickerFreeTranslateForm()
-            End If
 
-            ' Apply RTL properties after translation while drawing suspended
-            Dim shouldBeRtl As Boolean = CultureInfo.CurrentCulture.TextInfo.IsRightToLeft
-            Dim desiredRTLEnum As RightToLeft = If(shouldBeRtl, Windows.Forms.RightToLeft.Yes, Windows.Forms.RightToLeft.No)
+        '    ToggleLanguageButtons(originalUi)
 
-            If Me.RightToLeft <> desiredRTLEnum Then
-                Me.RightToLeft = desiredRTLEnum
-            End If
-
-            If TypeOf Me Is Form Then
-                Dim frm = DirectCast(Me, Form)
-                If frm.RightToLeftLayout <> shouldBeRtl Then
-                    frm.RightToLeftLayout = shouldBeRtl
-                End If
-            End If
-
-            ' Toggle language buttons
-            btnArabic.Visible = originalUi
-            btnArabic.Enabled = originalUi
-            btnOriginal.Visible = Not originalUi
-            btnOriginal.Enabled = Not originalUi
-
-            If cultureChanged AndAlso Ea IsNot Nothing Then
-                Ea.PublishEvent(New LanguageChanged(Me))
-            End If
-        End Using
+        '    ' Notify listeners (form-scoped)
+        '    If Ea IsNot Nothing Then
+        '        Ea.PublishEvent(New LanguageChanged(Me))
+        '    End If
+        'End Using
     End Sub
+
+    'Protected Shadows Sub SwitchUiLanguage(originalUi As Boolean)
+    '    If LicenseManager.UsageMode = LicenseUsageMode.Designtime Then Return
+
+    '    ' 0. Determine target culture for requested mode
+    '    Dim targetCulture As String =
+    '        If(originalUi,
+    '           GlobalVariables.DefaultUnmirroredCultureInfoStr,
+    '           GlobalVariables.DefaultMirroredCultureInfoStr)
+
+    '    ' FAST EXIT: If already on the requested culture (case-insensitive), do nothing heavy.
+    '    ' (Assumes no forced re-translate needed; call RefreshTranslation if you need a manual retrigger.)
+    '    If String.Equals(TextDisplayLanguage, targetCulture, StringComparison.OrdinalIgnoreCase) Then
+    '        ' Just make sure language buttons reflect current mode.
+    '        btnArabic.Visible = originalUi
+    '        btnArabic.Enabled = originalUi
+    '        btnOriginal.Visible = Not originalUi
+    '        btnOriginal.Enabled = Not originalUi
+    '        Return
+    '    End If
+
+    '    Using New RedrawScope(Me)
+
+    '        Dim cultureChanged As Boolean = Not String.Equals(TextDisplayLanguage, targetCulture, StringComparison.OrdinalIgnoreCase)
+
+    '        If cultureChanged Then
+    '            TextDisplayLanguage = targetCulture
+    '            GlobalFunctions.SetCulture(targetCulture)
+    '            GlobalVariables.AppCurrentCultureInfo = CultureInfo.CurrentCulture
+    '            GlobalVariables.RightToLeftLayout = CultureInfo.CurrentCulture.TextInfo.IsRightToLeft
+    '        End If
+
+    '        ' Translate via service (preferred) or fallback
+    '        If _formTranslationService IsNot Nothing Then
+    '            _formTranslationService.TranslateCurrentForm()
+    '        Else
+    '            FlickerFreeTranslateForm()
+    '        End If
+
+    '        ' Apply RTL properties after translation while drawing suspended
+    '        Dim shouldBeRtl As Boolean = CultureInfo.CurrentCulture.TextInfo.IsRightToLeft
+    '        Dim desiredRTLEnum As RightToLeft = If(shouldBeRtl, Windows.Forms.RightToLeft.Yes, Windows.Forms.RightToLeft.No)
+
+    '        If Me.RightToLeft <> desiredRTLEnum Then
+    '            Me.RightToLeft = desiredRTLEnum
+    '        End If
+
+    '        If TypeOf Me Is Form Then
+    '            Dim frm = DirectCast(Me, Form)
+    '            If frm.RightToLeftLayout <> shouldBeRtl Then
+    '                frm.RightToLeftLayout = shouldBeRtl
+    '            End If
+    '        End If
+
+    '        ' Toggle language buttons
+    '        btnArabic.Visible = originalUi
+    '        btnArabic.Enabled = originalUi
+    '        btnOriginal.Visible = Not originalUi
+    '        btnOriginal.Enabled = Not originalUi
+
+    '        If cultureChanged AndAlso Ea IsNot Nothing Then
+    '            Ea.PublishEvent(New LanguageChanged(Me))
+    '        End If
+    '    End Using
+    'End Sub
 
 #End Region
 
@@ -907,9 +1019,6 @@ Public Class CFormEntry
         End Set
     End Property
 
-    ' Optional (only if you need direct access when service is absent)
-    Private _translationRepo As AATM.Libraries.Localization.Core.ITranslationRepository
-    Private _translationCache As AATM.Libraries.Localization.Core.TranslationCache
 
     Public Sub InitializeTranslationFallback(repo As AATM.Libraries.Localization.Core.ITranslationRepository,
                                              cache As AATM.Libraries.Localization.Core.TranslationCache)
@@ -997,6 +1106,35 @@ Public Class CFormEntry
         Catch
             Return 0
         End Try
+    End Function
+
+    Private Sub ToggleLanguageButtons(originalUi As Boolean)
+        btnArabic.Visible = originalUi
+        btnArabic.Enabled = originalUi
+        btnOriginal.Visible = Not originalUi
+        btnOriginal.Enabled = Not originalUi
+    End Sub
+
+    Private Sub ApplyPerFormRtlToContainers(flowlayoutControlList)
+        ' List any flow panels or custom containers you want mirrored
+        For Each n In flowlayoutControlList
+            Dim c = TryFindControl(n)
+            If c Is Nothing Then Continue For
+            If TypeOf c Is FlowLayoutPanel Then
+                Dim fl = DirectCast(c, FlowLayoutPanel)
+                fl.RightToLeft = If(_formIsRtl, RightToLeft.Yes, RightToLeft.No)
+            Else
+                c.RightToLeft = If(_formIsRtl, RightToLeft.Yes, RightToLeft.No)
+            End If
+        Next
+    End Sub
+
+
+    Private Function TryFindControl(name As String) As Control
+        If String.IsNullOrEmpty(name) Then Return Nothing
+        Dim arr = Me.Controls.Find(name, True)
+        If arr Is Nothing OrElse arr.Length = 0 Then Return Nothing
+        Return arr(0)
     End Function
 
 #End Region
