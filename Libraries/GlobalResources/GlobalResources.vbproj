@@ -6,8 +6,9 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{821EE93B-1DE7-414D-9612-960288F355FE}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>AATM.Libraries.GlobalResources</RootNamespace>
-    <AssemblyName>GlobalResources</AssemblyName>
+    <RootNamespace>
+    </RootNamespace>
+    <AssemblyName>AATM.Platform.Resources</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>

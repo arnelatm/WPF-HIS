@@ -6,8 +6,9 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{021A8A1A-B69A-4254-9081-12357F20C01B}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>AATM.PresentationLayer.Presenters</RootNamespace>
-    <AssemblyName>Presenters</AssemblyName>
+    <RootNamespace>
+    </RootNamespace>
+    <AssemblyName>AATM.Platform.Presentation.Presenters</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>

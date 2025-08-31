@@ -6,8 +6,9 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{58F5EC33-2974-4823-AB62-1D4E5B3EF152}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>AATM.Libraries.BaseControlsLibrary</RootNamespace>
-    <AssemblyName>BaseControlsLibrary</AssemblyName>
+    <RootNamespace>
+    </RootNamespace>
+    <AssemblyName>AATM.Platform.UI.Controls</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>

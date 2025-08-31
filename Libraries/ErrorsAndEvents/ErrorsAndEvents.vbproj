@@ -6,8 +6,9 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{ABBF2275-7DFF-4724-98F9-71A2FD10B471}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>AATM.Libraries.ErrorsAndEvents</RootNamespace>
-    <AssemblyName>ErrorsAndEvents</AssemblyName>
+    <RootNamespace>
+    </RootNamespace>
+    <AssemblyName>AATM.Platform.Diagnostics</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>

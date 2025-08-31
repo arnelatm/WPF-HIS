@@ -1,28 +1,24 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <RootNamespace>Localization</RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <TargetFramework>net8.0</TargetFramework>
+    <AssemblyName>AATM.Platform.Localization</AssemblyName>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Remove="Core\TranslationCache.vb" />
     <Compile Remove="Core\TranslationRepository.vb" />
   </ItemGroup>
-
   <ItemGroup>
     <Content Include="Core\TranslationCache.vb" />
     <Content Include="Core\TranslationRepository.vb" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\GlobalFuncNSub\GlobalFuncNSub.vbproj" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="System.Windows.Forms">
       <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.Windows.Forms.dll</HintPath>
     </Reference>
   </ItemGroup>
-
 </Project>

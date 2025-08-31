@@ -6,8 +6,9 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{4EEDC5F0-DCA9-4CFB-8926-07D7E5B37FA0}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>AATM.PresentationLayer.Views</RootNamespace>
-    <AssemblyName>Views</AssemblyName>
+    <RootNamespace>
+    </RootNamespace>
+    <AssemblyName>AATM.Platform.Presentation.Views</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
