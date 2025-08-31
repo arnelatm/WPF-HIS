@@ -88,6 +88,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Services\FormTranslationService.vb" />
+    <Compile Include="Services\IUiLocalizationService.vb" />
     <Compile Include="Services\LayoutAdjuster.vb" />
   </ItemGroup>
   <ItemGroup>

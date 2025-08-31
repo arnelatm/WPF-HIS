@@ -104,6 +104,7 @@
   <ItemGroup>
     <Compile Include="AccessTypeEventArgs.vb" />
     <Compile Include="BackgroundWorker.vb" />
+    <Compile Include="IEventAggregator.vb" />
     <Compile Include="ImageResizer.vb" />
     <Compile Include="Lookup.vb" />
     <Compile Include="CompareLogic.vb" />
@@ -119,7 +120,6 @@
     <Compile Include="GifFOrm.vb" />
     <Compile Include="IAccessTypeEventArgs.vb" />
     <Compile Include="IApplicationEvent.vb" />
-    <Compile Include="IEventAggregator.vb" />
     <Compile Include="ISelfDuplicating.vb" />
     <Compile Include="ISubscriber.vb" />
     <Compile Include="Invoker.vb" />

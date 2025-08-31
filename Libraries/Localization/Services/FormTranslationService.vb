@@ -11,6 +11,7 @@ Imports AATM.Libraries.MessagingLibrary
 Namespace Services
 
     Public Class FormTranslationService
+        Implements IUiLocalizationService
 
         Private ReadOnly _form As Form
         Private ReadOnly _repo As ITranslationRepository
@@ -28,6 +29,31 @@ Namespace Services
             _form = hostForm
             _repo = repo
             _cache = cache
+        End Sub
+
+        ' Add event + interface members:
+        Public Event UiLanguageChanged(newCulture As CultureInfo, isRtl As Boolean) Implements IUiLocalizationService.UiLanguageChanged
+
+        Public ReadOnly Property CurrentCulture As CultureInfo Implements IUiLocalizationService.CurrentCulture
+            Get
+                Return CultureInfo.CurrentCulture
+            End Get
+        End Property
+
+        Public ReadOnly Property IsRtl As Boolean Implements IUiLocalizationService.IsRtl
+            Get
+                Return CultureInfo.CurrentCulture.TextInfo.IsRightToLeft
+            End Get
+        End Property
+
+        Public Sub SwitchLanguage(originalUi As Boolean) Implements IUiLocalizationService.SwitchLanguage
+            SwitchUiLanguage(originalUi, allowFallback:=True)
+            RaiseEvent UiLanguageChanged(CultureInfo.CurrentCulture, CultureInfo.CurrentCulture.TextInfo.IsRightToLeft)
+        End Sub
+
+        Public Sub Translate(Optional force As Boolean = False) Implements IUiLocalizationService.Translate
+            TranslateCurrentForm()
+            RaiseEvent UiLanguageChanged(CultureInfo.CurrentCulture, CultureInfo.CurrentCulture.TextInfo.IsRightToLeft)
         End Sub
 
         Public Sub Preload(cultures As IEnumerable(Of String), viewIds As IEnumerable(Of Integer))

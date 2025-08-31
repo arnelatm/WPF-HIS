@@ -23,6 +23,7 @@ Public Class GlobalVariables
     Private Shared _lookupSetting As String = "CodeAndName"
     Private Shared _vatRate As Decimal = 0D
     Private Shared _showDataDifferenceWhenSaving As Boolean?
+
     'Private Shared _defaultMirroredLanguageIdNo As Int32
     Private Shared _defaultMirroredCultureInfoStr As String
 
@@ -62,7 +63,6 @@ Public Class GlobalVariables
 
     Public Shared Property EstablishmentName As String
     Public Shared Property EstablishmentNameAra As String
-
 
 #Region "Colors"
 
@@ -228,7 +228,6 @@ Public Class GlobalVariables
         End Set
     End Property
 
-
 #End Region
 
     Public Property TranslateMode As Boolean = False
@@ -382,7 +381,7 @@ Public Class GlobalVariables
         Get
             Try
                 _dacPassword = ConfigurationManager.AppSettings.Get("PWDTranslator") ' SQL, MDB
-                
+
                 If _dacPassword Is Nothing Then
                     MessageBox.Show("Error, Invalid Configuration File. Missing 'PWDTranslator'")
                     '_dacPassword = "igss@123"
@@ -736,6 +735,13 @@ Public Class GlobalVariables
     Public Shared Property TranslationMode As Boolean = True
 
     Public Shared Property PreferredLanguage As String = $"English (إنجليزي)"
+
+    'Private ReadOnly _eventAggregator As New EventAggregator(SynchronizationContext.Current)
+    'Public ReadOnly Property EventAggregator As EventAggregator
+    '    Get
+    '        Return _eventAggregator
+    '    End Get
+    'End Property
 
     'Private Shared Sub GetAppCultureInfo()
     '    If _AppLanguage = "" Then
