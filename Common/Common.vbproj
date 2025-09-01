@@ -530,9 +530,9 @@
       <Project>{63AACD2C-A92E-4CF4-8F4D-49C774E2B1C6}</Project>
       <Name>LocalizationUtilities</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Libraries\MessagingLibrary\MessagingLibrary.vbproj">
+    <ProjectReference Include="..\Libraries\MessagingLibrary\Messaging.vbproj">
       <Project>{84437202-3e38-4f75-b8c1-4125852fc4ff}</Project>
-      <Name>MessagingLibrary</Name>
+      <Name>Messaging</Name>
     </ProjectReference>
     <ProjectReference Include="..\PresentationLayer\Events\Events.vbproj">
       <Project>{5F7FCA73-07BA-444A-BE5D-6117B973AA3D}</Project>

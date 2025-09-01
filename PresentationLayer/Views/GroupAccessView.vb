@@ -1,4 +1,4 @@
-﻿Imports AATM.PresentationLayer.Views.Interfaces
+﻿Imports AATM.Platform.Presentation.Views.Interfaces
 
 Public Class GroupAccessView
     Implements IGroupAccessView

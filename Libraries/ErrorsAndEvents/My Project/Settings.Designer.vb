@@ -7,10 +7,26 @@
 '     the code is regenerated.
 ' </auto-generated>
 '------------------------------------------------------------------------------
-
 Option Strict On
 Option Explicit On
 
+' FIX EXPLANATION:
+' The property in MySettingsProperty was referencing:
+'   Global.AATM.Libraries.ErrorsAndEvents.My.MySettings
+' This fully-qualified name assumes the project's Root Namespace is
+' "AATM.Libraries.ErrorsAndEvents". The compiler error BC30002 indicates that
+' this type does not exist under that path (likely the Root Namespace differs
+' or is blank). The generated MySettings class (declared below in Namespace My)
+' is normally accessed as Global.My.MySettings (the VB "My" namespace is
+' projected at the root). Fix: change both the property return type and the
+' returned expression to Global.My.MySettings to match the actual generated type.
+'
+' CODE SUMMARY:
+' - MySettings: Partial class inheriting ApplicationSettingsBase providing
+'   strongly-typed application/user settings singleton via Default property.
+' - AutoSaveSettings: (conditionally compiled for WindowsForms) hooks shutdown
+'   to persist settings if SaveMySettingsOnExit is True.
+' - MySettingsProperty module exposes a shorthand My.Settings reference.
 
 Namespace My
     
@@ -39,7 +55,6 @@ Namespace My
         
         Public Shared ReadOnly Property [Default]() As MySettings
             Get
-                
 #If _MyType = "WindowsForms" Then
                If Not addedHandler Then
                     SyncLock addedHandlerLockObject
@@ -62,11 +77,11 @@ Namespace My
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute()>  _
     Friend Module MySettingsProperty
-        
-        <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")>  _
-        Friend ReadOnly Property Settings() As Global.AATM.Libraries.ErrorsAndEvents.My.MySettings
+
+        <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")>
+        Friend ReadOnly Property Settings() As Global.My.MySettings
             Get
-                Return Global.AATM.Libraries.ErrorsAndEvents.My.MySettings.Default
+                Return Global.My.MySettings.Default
             End Get
         End Property
     End Module

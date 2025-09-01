@@ -10,7 +10,7 @@
 
 Option Strict On
 Option Explicit On
-
+Imports AAtm.Platform.Resources
 
 Namespace My
     
@@ -62,11 +62,11 @@ Namespace My
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute()>  _
     Friend Module MySettingsProperty
-        
-        <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")>  _
-        Friend ReadOnly Property Settings() As Global.AATM.Libraries.GlobalResources.My.MySettings
+
+        <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")>
+        Friend ReadOnly Property Settings() As My.MySettings
             Get
-                Return Global.AATM.Libraries.GlobalResources.My.MySettings.Default
+                Return My.MySettings.Default
             End Get
         End Property
     End Module

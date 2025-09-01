@@ -25,7 +25,7 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BusinessLayer", "BusinessLa
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DataLayer", "DataLayer\DataLayer.vbproj", "{440C4740-2584-4050-9086-543018EAC766}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PresentationLayer", "PresentationLayer", "{66D0E355-CA37-4EEF-B18D-D4A9093BB11C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{66D0E355-CA37-4EEF-B18D-D4A9093BB11C}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Models", "PresentationLayer\Models\Models.vbproj", "{6A8692E0-9B9B-4F31-8BA6-0C3DE257F9A4}"
 EndProject
@@ -121,7 +121,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageBoxManager", "Libraries\MessageBoxManager\MessageBoxManager.csproj", "{0E9D874E-5354-465E-9EC3-F7A35C268A8A}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "MessagingLibrary", "Libraries\MessagingLibrary\MessagingLibrary.vbproj", "{84437202-3E38-4F75-B8C1-4125852FC4FF}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Messaging", "Libraries\MessagingLibrary\Messaging.vbproj", "{84437202-3E38-4F75-B8C1-4125852FC4FF}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Events", "PresentationLayer\Events\Events.vbproj", "{5F7FCA73-07BA-444A-BE5D-6117B973AA3D}"
 EndProject
@@ -938,6 +938,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{
 	EndProjectSection
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Localization", "Libraries\Localization\Localization.vbproj", "{3F50A1A8-D56B-4D64-A2F2-D1DD3D440D8D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platform", "Platform", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

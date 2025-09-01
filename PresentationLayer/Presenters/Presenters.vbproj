@@ -178,9 +178,9 @@
       <Project>{A7EE826E-E3B4-40A7-8754-285B373F4321}</Project>
       <Name>HelperLibraries</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Libraries\MessagingLibrary\MessagingLibrary.vbproj">
+    <ProjectReference Include="..\..\Libraries\MessagingLibrary\Messaging.vbproj">
       <Project>{84437202-3E38-4F75-B8C1-4125852FC4FF}</Project>
-      <Name>MessagingLibrary</Name>
+      <Name>Messaging</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\ServicesLayer\ServicesLayer.vbproj">
       <Project>{4B7A1168-E9FA-4360-9607-A2C98255E4C0}</Project>

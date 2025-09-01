@@ -177,9 +177,9 @@
       <Project>{a7ee826e-e3b4-40a7-8754-285b373f4321}</Project>
       <Name>HelperLibraries</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Libraries\MessagingLibrary\MessagingLibrary.vbproj">
+    <ProjectReference Include="..\Libraries\MessagingLibrary\Messaging.vbproj">
       <Project>{84437202-3E38-4F75-B8C1-4125852FC4FF}</Project>
-      <Name>MessagingLibrary</Name>
+      <Name>Messaging</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

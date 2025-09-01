@@ -302,7 +302,7 @@ Public Module GlobalFunctions
         For Each fieldInfo In type.GetFields()
             Dim descriptionAttribute = Attribute.GetCustomAttribute(fieldInfo, GetType(EnumCode))
             If descriptionAttribute IsNot Nothing Then
-                If DirectCast(descriptionAttribute, AATM.Libraries.GlobalFuncNSub.EnumCode).EnumCode <> description Then
+                If DirectCast(descriptionAttribute, EnumCode).EnumCode <> description Then
                     Continue For
                 End If
                 Return DirectCast(fieldInfo.GetValue(Nothing), T)

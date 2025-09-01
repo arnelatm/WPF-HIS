@@ -1,5 +1,5 @@
 ﻿' compares values of two properties given a data type and operator  (>, ==, etc)
-Imports AATM.Libraries.GlobalFuncNSub
+
 
 Namespace BusinessRules
 
@@ -35,14 +35,27 @@ Namespace BusinessRules
             End Select
         End Sub
 
+
         Private Sub MakeError(errMessageKey As String)
-            Dim fieldName1 = Libraries.MessagingLibrary.Messaging.TranslateCaption(PropertyName.SplitCamelCase)
-            Dim fieldName2 = Libraries.MessagingLibrary.Messaging.TranslateCaption(OtherPropertyName.SplitCamelCase)
-            [Error] = Libraries.MessagingLibrary.Messaging.GetParametrizedMessage(True, errMessageKey, {"PropertyName", fieldName1, "OtherPropertyName", fieldName2})
-            'Dim strError = "{propertyName} " + errMessageText + " {otherPropertyName}"
-            'strError = Dac.GetMessage(errMessageKey, strError, "Validation Error")
-            '[Error] = strError.Interpolate(Function(x) PropertyName, Function(x) OtherPropertyName)
+            ' Removed malformed debug line and extra parenthesis
+            ' Ensure SplitCamelCase() is accessible (add parentheses if it is an extension method)
+            Dim fieldName1 As String = AATM.Libraries.MessagingLibrary.Messaging.TranslateCaption(PropertyName.SplitCamelCase())
+            Dim fieldName2 As String = Global.Messaging.TranslateCaption(OtherPropertyName.SplitCamelCase())
+            [Error] = Global.Messaging.GetParametrizedMessage(True, errMessageKey, {
+                "PropertyName", fieldName1,
+                "OtherPropertyName", fieldName2
+            })
         End Sub
+
+        '' Replaced incorrect fully-qualified references inside MakeError
+        'Private Sub MakeError(errMessageKey As String)
+        '    Dim fieldName1 As String = Messaging.TranslateCaption(PropertyName.SplitCamelCase)
+        '    Dim fieldName2 As String = Messaging.TranslateCaption(OtherPropertyName.SplitCamelCase)
+        '    [Error] = Messaging.GetParametrizedMessage(True, errMessageKey, New String() {
+        '            "PropertyName", fieldName1,
+        '            "OtherPropertyName", fieldName2
+        '        })
+        'End Sub
 
         Public Sub New(propertyName As String, otherPropertyName As String, errorMessage As String,
                        [operator] As ValidationOperator, dataType As ValidationDataType)

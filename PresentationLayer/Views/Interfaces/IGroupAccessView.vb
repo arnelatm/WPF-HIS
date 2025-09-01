@@ -1,4 +1,4 @@
-﻿Namespace Interfaces
+﻿Namespace AATM.Platform.Presentation.Views.Interfaces
 
     Public Interface IGroupAccessView
 
