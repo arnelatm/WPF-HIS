@@ -1,6 +1,6 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 
 Namespace PresentationLayer.Views.Forms.Reports
 
@@ -39,7 +39,7 @@ Namespace PresentationLayer.Views.Forms.Reports
                 Dim cForm As New ReportFormIGroup("Cash Income Summary Per Month Per Service Per Doctor.Rpt", FormCulture, parameter)
                 cForm.Show()
             Else
-                Messaging.Show(True, "MsgBegDateMustBeLessThanEndDate")
+                MessagingService.Show(True, "MsgBegDateMustBeLessThanEndDate")
             End If
         End Sub
 

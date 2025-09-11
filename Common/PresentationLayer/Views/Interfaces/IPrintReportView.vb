@@ -1,9 +1,9 @@
 ﻿Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
-Imports AATM.PresentationLayer.Views
+Imports AATM.Presentation.Views
 
 Public Interface IPrintReportView
-    Inherits AATM.PresentationLayer.Views.IView
+    Inherits AATM.Presentation.Views.IView
 
     Event PrintReport(reportFileName As String, pDatabaseConnectionName As String, args As Object, copies As Integer)
     'Event GetLanguageAndCo(ByVal sender As Object, ByVal formCulture As String, ByRef language As String, ByRef establishmentName As String, ByRef reportTitle As String)
@@ -14,7 +14,7 @@ End Interface
 
 
 Public Interface IReportPrinterView
-    Inherits AATM.PresentationLayer.Views.IView
+    Inherits AATM.Presentation.Views.IView
 
     Property FileName As String
     Property ReportTitle As String
@@ -30,7 +30,7 @@ Public Interface IReportPrinterView
 End Interface
 
 Public Interface ICrPrintableReportView
-    Inherits AATM.PresentationLayer.Views.IView
+    Inherits AATM.Presentation.Views.IView
 
     Event PrintReport(reportFileName As String, reportArgs As CrPrintableArgs, printDirectly As Boolean)
     'Event CreateDataSourceEnum(control As Control, EnumData As [Enum])

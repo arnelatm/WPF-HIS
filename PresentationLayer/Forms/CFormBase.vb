@@ -7,7 +7,7 @@ Imports System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel
 Imports AATM.Libraries
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Events
+Imports AATM.Presentation.Events
 
 Public Class CFormBase
 

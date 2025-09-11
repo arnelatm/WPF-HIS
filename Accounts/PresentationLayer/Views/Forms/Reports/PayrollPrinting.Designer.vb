@@ -3,7 +3,7 @@
 Namespace PresentationLayer.Views.Forms.Reports
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
     Partial Class PayrollPrinting
-        Inherits AATM.PresentationLayer.Forms.BfMain
+        Inherits AATM.Presentation.Forms.BfMain
 
         'Form overrides dispose to clean up the component list.
         <System.Diagnostics.DebuggerNonUserCode()>

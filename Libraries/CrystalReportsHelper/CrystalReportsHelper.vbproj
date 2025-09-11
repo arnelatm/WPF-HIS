@@ -6,9 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{8F2BB05A-C065-4E1B-9B1A-D4F600C0DB62}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>
-    </RootNamespace>
-    <AssemblyName>AATM.Platform.Reporting.Crystal</AssemblyName>
+    <RootNamespace>AATM.Libraries.CrystalReportsHelper</RootNamespace>
+    <AssemblyName>AATM.Libraries.CrystalReportsHelper</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>

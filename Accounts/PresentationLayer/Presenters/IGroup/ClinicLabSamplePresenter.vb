@@ -59,14 +59,14 @@ Namespace PresentationLayer.Presenters
 
         Public Overrides Sub GoPrintRecord()
             If View.TransactionDate Is Nothing Then
-                AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgDateCannotBeBlank")
+                AATM.Libraries.Messaging.MessagingService.Show(True, "MsgDateCannotBeBlank")
             Else
                 Dim reportArgs As New CrPrintableArgs
                 Dim reportParameters As New Object
                 Dim dateString As String
                 Dim tempDate As DateTime = View.TransactionDate.Value
                 dateString = tempDate.ToString("yyyy/MM/dd")
-                Dim reportTitle As String = AATM.Libraries.MessagingLibrary.Messaging.TranslateCaption("Diagnostic Test Samples Taken Report for ") + dateString
+                Dim reportTitle As String = AATM.Libraries.Messaging.MessagingService.TranslateCaption("Diagnostic Test Samples Taken Report for ") + dateString
                 reportArgs.ReportParameters = {dateString, "TransactionDate",
                                                GlobalVariables.EstablishmentName, "EstablishmentName",
                                                reportTitle, "ReportTitle"}

@@ -3,8 +3,8 @@ Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Events
+Imports AATM.Libraries.Messaging
+Imports AATM.Presentation.Events
 
 Namespace PresentationLayer.Views.Forms
 
@@ -44,13 +44,13 @@ Namespace PresentationLayer.Views.Forms
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
-            AATM.PresentationLayer.Forms.Services.Ui.UiPerformanceHelper.EnableDoubleBuff(tlpDisbursement)
+            AATM.Presentation.Forms.Services.Ui.UiPerformanceHelper.EnableDoubleBuff(tlpDisbursement)
             ' Add any initialization after the InitializeComponent() call.
             HideNavigatorButtons = True
             'MainTableName = tableName
             'MyPresenter = New DisbursementJournalPresenter(Me, "CdJournal")
             'MyPresenter.JournalCode = "CD"
-            Text = Messaging.TranslateCaption("Check Disbursement Journal")
+            Text = MessagingService.TranslateCaption("Check Disbursement Journal")
             btnPrintCheck.Visible = True
             'Presenter = MyPresenter
             'SortOrderKey = "IdNo"

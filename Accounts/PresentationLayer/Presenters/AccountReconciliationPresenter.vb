@@ -10,7 +10,7 @@ Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 
 Namespace PresentationLayer.Presenters
 
@@ -129,7 +129,7 @@ Namespace PresentationLayer.Presenters
                     Service.UpdateRecordWithIdNo(Of Boolean)(idNo, "AccountReconciliation", "Posted", True)
                     scope.Complete()
                 End Using
-                Messaging.Show(True, "MsgRecordSuccessfullyPosted")
+                MessagingService.Show(True, "MsgRecordSuccessfullyPosted")
                 View.Posted = True
             Catch ex As TransactionAbortedException
                 MessageBox.Show(ex.Message, "Transaction Aborted")
@@ -199,7 +199,7 @@ Namespace PresentationLayer.Presenters
                 'oldReconciliationItems = ModelOfPresenter.GetRecordsWithGroupIdNo(Of AccountReconciliationItemModel)(idNo, "TransactionDate")
                 progressDisplayForm.Show()
                 progressDisplayForm.DisplayProgress(nCount)
-                Dim caption = Messaging.TranslateCaption("Please wait getting account transactions ...")
+                Dim caption = MessagingService.TranslateCaption("Please wait getting account transactions ...")
                 progressDisplayForm.InitializeDisplay(nCount, caption)
                 For Each acctReconItem In allAcctReconItems
                     'Dim found As Boolean = False
@@ -259,7 +259,7 @@ Namespace PresentationLayer.Presenters
             Dim beginningDate As Date
             beginningDate = GregorianDateSerial(GregorianYear(View.ReconciliationDate), GregorianMonth(View.ReconciliationDate), 1)
             previousDate = DateAdd(DateInterval.Day, -1, beginningDate)
-            reportTitle = Messaging.TranslateCaption("Account Reconciliation")
+            reportTitle = MessagingService.TranslateCaption("Account Reconciliation")
             Dim curCulture = CultureInfo.CurrentCulture
             CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
             Dim language As String
@@ -363,7 +363,7 @@ Namespace PresentationLayer.Presenters
                 progressDisplayForm.Show()
                 Dim nCount = View.AccountReconciliationItems.Count()
                 progressDisplayForm.DisplayProgress(nCount)
-                Dim caption = Messaging.TranslateCaption("Please wait computing reconciliation totals...")
+                Dim caption = MessagingService.TranslateCaption("Please wait computing reconciliation totals...")
                 progressDisplayForm.InitializeDisplay(nCount, caption)
                 Dim counter As Int32 = 1
                 For Each accountReconciliationItem In View.AccountReconciliationItems
@@ -421,16 +421,16 @@ Namespace PresentationLayer.Presenters
 
         Private Sub OnReconciliationPostingRequestEvent(sender As Object, bsAccountReconciliationItem As BindingSource)
             If View.UnreconciledDifference = 0 Then
-                Dim caption = Messaging.TranslateCaption("Please confirm.")
-                Dim action As String = Messaging.TranslateCaption("post")
-                Dim itemName As String = Messaging.TranslateCaption("account reconciliation transaction")
-                Dim msg = Messaging.GetParametrizedMessage(True, "AskIfContinueAction", {"action", action, "itemName", itemName})
-                If Messaging.Show(msg, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+                Dim caption = MessagingService.TranslateCaption("Please confirm.")
+                Dim action As String = MessagingService.TranslateCaption("post")
+                Dim itemName As String = MessagingService.TranslateCaption("account reconciliation transaction")
+                Dim msg = MessagingService.GetParametrizedMessage(True, "AskIfContinueAction", {"action", action, "itemName", itemName})
+                If MessagingService.Show(msg, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
                     PostReconciliation(View.IdNo, bsAccountReconciliationItem)
                 End If
             Else
-                'Dim err = Messaging.GetMessage(True, "MsgCannotPostUnreconciledEntry", "Sorry you can't post an un-reconciled entry!", "")
-                Messaging.Show(False, "MsgCannotPostUnreconciledEntry")
+                'Dim err = MessagingService.GetMessage(True, "MsgCannotPostUnreconciledEntry", "Sorry you can't post an un-reconciled entry!", "")
+                MessagingService.Show(False, "MsgCannotPostUnreconciledEntry")
             End If
         End Sub
 

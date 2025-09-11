@@ -4,9 +4,9 @@ Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.Localization.Core
 Imports AATM.Libraries.Localization.Services
-Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Events
-Imports AATM.PresentationLayer.Forms.Services.SystemView
+Imports AATM.Libraries.Messaging
+Imports AATM.Presentation.Events
+Imports AATM.Presentation.Forms.Services.SystemView
 
 Namespace Services.Translation
     Public Class TranslationCoordinator

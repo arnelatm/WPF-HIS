@@ -67,13 +67,13 @@ Public Class DateRangePresenter(Of TM As New)
         End If
         beginningDate = View.BeginningDate
         endingDate = View.EndingDate
-        Dim reportName = Libraries.MessagingLibrary.Messaging.TranslateCaption(_reportName)
+        Dim reportName = Libraries.MessagingService.TranslateCaption(_reportName)
         Dim valid As Boolean = True
         If beginningDate Is Nothing Or endingDate Is Nothing Then
-            Libraries.MessagingLibrary.Messaging.Show(True, "MsgDatesCannotBeEmpty")
+            Libraries.MessagingService.Show(True, "MsgDatesCannotBeEmpty")
             valid = False
         ElseIf beginningDate > endingDate Then
-            Libraries.MessagingLibrary.Messaging.Show(True, "MsgBegDateMustBeLessThanEndDate")
+            Libraries.MessagingService.Show(True, "MsgBegDateMustBeLessThanEndDate")
             valid = False
         End If
         If valid Then
@@ -140,14 +140,14 @@ Public Class ContactDateRangePresenter(Of TM As New)
         End If
         beginningDate = View.BeginningDate
         endingDate = View.EndingDate
-        Dim reportName = Libraries.MessagingLibrary.Messaging.TranslateCaption(_reportName)
+        Dim reportName = Libraries.MessagingService.TranslateCaption(_reportName)
         Dim reportTitle As String
         Dim valid As Boolean = True
         If beginningDate Is Nothing Or endingDate Is Nothing Then
-            Libraries.MessagingLibrary.Messaging.Show(True, "MsgDatesCannotBeEmpty")
+            Libraries.MessagingService.Show(True, "MsgDatesCannotBeEmpty")
             valid = False
         ElseIf beginningDate > endingDate Then
-            Libraries.MessagingLibrary.Messaging.Show(True, "MsgBegDateMustBeLessThanEndDate")
+            Libraries.MessagingService.Show(True, "MsgBegDateMustBeLessThanEndDate")
             valid = False
         End If
         If valid Then

@@ -1,4 +1,4 @@
-﻿Imports AATM.Libraries.MessagingLibrary
+﻿Imports AATM.Libraries.Messaging
 
 Public Class OneTimeRun
 

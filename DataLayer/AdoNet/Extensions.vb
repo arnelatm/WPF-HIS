@@ -1,7 +1,7 @@
 ﻿Imports System.Globalization
 Imports System.IO
 Imports System.Runtime.CompilerServices
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 
 Namespace AdoNet
     ' useful set of Extension methods for Data Access purposes
@@ -52,7 +52,7 @@ Namespace AdoNet
                 'If Not Integer.TryParse(item.ToString(), result) Then
                 result = Convert.ChangeType(item, GetType(T))
             Catch ex As Exception
-                Messaging.Show("MsgInvalidNumberConversion", "Conversion error (AsNumber Extensions)" & ex.Message)
+                MessagingService.Show("MsgInvalidNumberConversion", "Conversion error (AsNumber Extensions)" & ex.Message)
             End Try
 
             Return result

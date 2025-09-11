@@ -175,7 +175,7 @@ Public Class UcCheckBox
             'CallByName(myForm, "FindFieldNew", CallType.Method, Me)
             Invoker.InvokeFunction(myForm, "FindFieldNew", {Me})
         Else
-            AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgNothingToFind")
+            AATM.Libraries.Messaging.MessagingService.Show(True, "MsgNothingToFind")
         End If
         'Dim x = Me.GetType()
         'MessageBox.Show(x.ToString())

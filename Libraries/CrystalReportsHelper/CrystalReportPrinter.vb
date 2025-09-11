@@ -2,7 +2,7 @@
 Imports System.Drawing.Printing
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary.Messaging
+Imports AATM.Libraries.Messaging.MessagingService
 Imports CrystalDecisions.CrystalReports.Engine
 Imports CrystalDecisions.Shared
 Imports PaperSize = CrystalDecisions.Shared.PaperSize

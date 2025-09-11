@@ -3,8 +3,8 @@ Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Events
+Imports AATM.Libraries.Messaging
+Imports AATM.Presentation.Events
 
 Namespace PresentationLayer.Views.Forms
 
@@ -488,8 +488,8 @@ Namespace PresentationLayer.Views.Forms
                     SendKeys.Send("{Tab}{Tab}")
                 End If
             Else
-                Dim msg = Messaging.GetParametrizedMessage(True, "MsgInvalidValue", {"fieldValue", findText, "fieldDescription", "Product Name"})
-                Messaging.Show(msg)
+                Dim msg = MessagingService.GetParametrizedMessage(True, "MsgInvalidValue", {"fieldValue", findText, "fieldDescription", "Product Name"})
+                MessagingService.Show(msg)
                 e.Cancel = True
                 dgv.Rows(e.RowIndex).ErrorText = msg
             End If
@@ -511,7 +511,7 @@ Namespace PresentationLayer.Views.Forms
                 RaiseEvent ProductCodeValidating(code, DataGridViewPurchaseDetails.EditingControl)
                 If Not ProductCodeIsValid Then
                     e.Cancel = True
-                    Messaging.ShowPmMessage(True, "MsgInvalidValue", {"fieldValue", code, "fieldDescription", "Product Code"})
+                    MessagingService.ShowPmMessage(True, "MsgInvalidValue", {"fieldValue", code, "fieldDescription", "Product Code"})
                 Else
                     Dim cProductName = dgv.CurrentRow().Cells("dgvProductName").Value
                     If Not String.IsNullOrEmpty(cProductName) Then
@@ -520,7 +520,7 @@ Namespace PresentationLayer.Views.Forms
                     Else
                         If Not String.IsNullOrEmpty(code) Then
                             e.Cancel = True
-                            Messaging.ShowPmMessage(True, "MsgInvalidValue", {"fieldValue", code, "fieldDescription", "Product Code"})
+                            MessagingService.ShowPmMessage(True, "MsgInvalidValue", {"fieldValue", code, "fieldDescription", "Product Code"})
                         End If
                     End If
                 End If
@@ -663,16 +663,16 @@ Namespace PresentationLayer.Views.Forms
             RaiseEvent PostData(IdNo)
 
             'If EditingMode Or AddModeChanged Then
-            '    Messaging.Show(True, "MsgCannotPostUnsaved")
+            '    MessagingService.Show(True, "MsgCannotPostUnsaved")
             'Else
             '    If Posted Then
-            '        Messaging.Show(True, "MsgAlreadyPosted")
+            '        MessagingService.Show(True, "MsgAlreadyPosted")
             '    Else
-            '        Dim caption = Messaging.TranslateCaption("Please confirm.")
-            '        Dim action As String = Messaging.TranslateCaption("post")
-            '        Dim itemName As String = Messaging.TranslateCaption("purchase transaction")
-            '        Dim msg = Messaging.GetParametrizedMessage(True, "AskIfContinueAction", {"action", action, "itemName", itemName})
-            '        If Messaging.Show(msg, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+            '        Dim caption = MessagingService.TranslateCaption("Please confirm.")
+            '        Dim action As String = MessagingService.TranslateCaption("post")
+            '        Dim itemName As String = MessagingService.TranslateCaption("purchase transaction")
+            '        Dim msg = MessagingService.GetParametrizedMessage(True, "AskIfContinueAction", {"action", action, "itemName", itemName})
+            '        If MessagingService.Show(msg, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
             '            RaiseEvent PostData(IdNo)
             '        End If
             '    End If
@@ -696,7 +696,7 @@ Namespace PresentationLayer.Views.Forms
             Dim prIdNo As Int32 = dgvRow.Cells("dgvProductIdNo").Value
             RaiseEvent RowChanged(prIdNo)
             bsPurchaseHistory.ResetBindings(False)
-            CGroupBox1.Text = Messaging.TranslateCaption("Purchase History for ") + dgvRow.Cells("dgvProductCode").Value + "-" + dgvRow.Cells("dgvProductName").Value
+            CGroupBox1.Text = MessagingService.TranslateCaption("Purchase History for ") + dgvRow.Cells("dgvProductCode").Value + "-" + dgvRow.Cells("dgvProductName").Value
         End Sub
 
         Private Sub OnTransactionDateValidated(sender As Object, e As EventArgs) Handles dtpTransactionDate.Validated

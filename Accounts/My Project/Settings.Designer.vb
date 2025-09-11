@@ -10,7 +10,7 @@ Option Explicit On
 ' </auto-generated>
 '------------------------------------------------------------------------------
 
-Imports AATM.PresentationLayer.Presenters
+Imports AATM.Presentation.Presenters
 
 Namespace My
 

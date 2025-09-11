@@ -8,7 +8,7 @@ Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Forms
+Imports AATM.Presentation.Forms
 
 Namespace PresentationLayer.Presenters
 
@@ -50,13 +50,13 @@ Namespace PresentationLayer.Presenters
             documentType = Service.GetField(Of String, Int32)(View.DocumentIdNo, "Document", "IdNo", "DocumentType")
             If documentType = EnumToCode(DocumentTypeSelection.Employee) Then
                 data.Add({"Employee", View.ContactIdDataName})
-                View.ContactDescription = Libraries.MessagingLibrary.Messaging.TranslateCaption("Employee")
+                View.ContactDescription = Libraries.MessagingService.TranslateCaption("Employee")
             ElseIf documentType = EnumToCode(DocumentTypeSelection.Customer) Then
                 data.Add({"Customer", View.ContactIdDataName})
-                View.ContactDescription = Libraries.MessagingLibrary.Messaging.TranslateCaption("Customer")
+                View.ContactDescription = Libraries.MessagingService.TranslateCaption("Customer")
             ElseIf documentType = EnumToCode(DocumentTypeSelection.Supplier) Then
                 data.Add({"Supplier", View.ContactIdDataName})
-                View.ContactDescription = Libraries.MessagingLibrary.Messaging.TranslateCaption("Supplier")
+                View.ContactDescription = Libraries.MessagingService.TranslateCaption("Supplier")
             End If
             CreateVarDataSources(data)
         End Sub
@@ -127,7 +127,7 @@ Namespace PresentationLayer.Presenters
 
         Private Sub DisplayImage(cFileName As String, cRemarks As String)
             If cFileName Is Nothing Or cFileName = "" Then
-                Libraries.MessagingLibrary.Messaging.Show(True, "MsgNoImageEntered")
+                Libraries.MessagingService.Show(True, "MsgNoImageEntered")
             Else
                 Dim cPictureViewer As New CPictureViewer(cFileName, cRemarks, True)
                 cPictureViewer.ShowDialog()

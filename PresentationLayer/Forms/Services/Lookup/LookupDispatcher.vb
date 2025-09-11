@@ -1,5 +1,5 @@
 Imports AATM.Libraries
-Imports AATM.PresentationLayer.Events
+Imports AATM.Presentation.Events
 
 Namespace Services.Lookup
     Public Class LookupDispatcher

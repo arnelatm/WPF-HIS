@@ -7,7 +7,7 @@ Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Events
+Imports AATM.Presentation.Events
 
 Namespace PresentationLayer.Presenters
     Public Class InvRequestPresenter(Of TM As New)
@@ -79,12 +79,12 @@ Namespace PresentationLayer.Presenters
                 retVal = invTranDao.RunSpWithRollBack("spPostInvRequest", parameters)
                 If retVal >= 0 Then
                     View.WarehouseIdNo = View.WarehouseSelector
-                    AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgInvTransferSuccess")
+                    AATM.Libraries.Messaging.MessagingService.Show(True, "MsgInvTransferSuccess")
                     GetInvTransactions()
                     RefreshRequestDetailsAndQtyOnHand(0)
                 End If
             Else
-                AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgNoApprovedQtySpecified")
+                AATM.Libraries.Messaging.MessagingService.Show(True, "MsgNoApprovedQtySpecified")
             End If
         End Sub
 
@@ -93,14 +93,14 @@ Namespace PresentationLayer.Presenters
             ' values might have changed if the screen has been left open for a long time
             RefreshRequestDetailsAndQtyOnHand(invTransactionIdNo)
             If View.InvRequestDetails Is Nothing Then
-                AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgNoSelectedRecordToView")
+                AATM.Libraries.Messaging.MessagingService.Show(True, "MsgNoSelectedRecordToView")
             Else
                 Dim qtyToTransfer As Decimal
                 For Each item In View.InvRequestDetails
                     qtyToTransfer = Math.Min(item.Quantity, item.QtyOnHand)
                     item.QtyApproved = qtyToTransfer
                 Next
-                AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgApprovedQtyUpdated")
+                AATM.Libraries.Messaging.MessagingService.Show(True, "MsgApprovedQtyUpdated")
             End If
         End Sub
 

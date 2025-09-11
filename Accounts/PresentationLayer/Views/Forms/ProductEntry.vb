@@ -237,7 +237,7 @@ Namespace PresentationLayer.Views.Forms
                 Handles DataGridViewProductUnits.UserDeletingRow
             If EditingMode Then
                 e.Cancel = True
-                AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgRowDelExistNotAllowed")
+                AATM.Libraries.Messaging.MessagingService.Show(True, "MsgRowDelExistNotAllowed")
                 'Do not allow deletions for units
             End If
         End Sub

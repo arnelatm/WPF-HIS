@@ -7,18 +7,18 @@ Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 
 Namespace PresentationLayer.Presenters
 
-    Public Class AccountsPresenter(Of TV As AATM.PresentationLayer.Views.IView, TM As New)
+    Public Class AccountsPresenter(Of TV As AATM.Presentation.Views.IView, TM As New)
         Inherits CommonPresenter(Of TV, TM)
 
         Public Sub New()
             MyBase.New()
         End Sub
 
-        Public Sub New(itemView As AATM.PresentationLayer.Views.IView)
+        Public Sub New(itemView As AATM.Presentation.Views.IView)
             MyBase.New(itemView)
         End Sub
 
@@ -300,7 +300,7 @@ Namespace PresentationLayer.Presenters
             For Each item In journalItems
                 'Dim reconciledData As Reconciled = reconciledDao.GetReconciledItem(JournalCode, item.IdNo)
                 If reconciledDao.IsItemReconciled(journalCode, item.IdNo) Then
-                    Messaging.Show(True, "MsgEditingOfReconciledNotAllowed")
+                    MessagingService.Show(True, "MsgEditingOfReconciledNotAllowed")
                     result = True
                     Exit For
                 End If

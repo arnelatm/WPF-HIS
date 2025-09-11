@@ -95,14 +95,14 @@ Public Class FinancialReportPresenter(Of TM As New)
             beginningDate = View.BeginningDate
             endingDate = View.EndingDate
         End If
-        Dim reportName = Libraries.MessagingLibrary.Messaging.TranslateCaption(_reportName)
+        Dim reportName = Libraries.MessagingService.TranslateCaption(_reportName)
         Dim reportTitle As String
         Dim valid As Boolean = True
         If beginningDate Is Nothing Or endingDate Is Nothing Then
-            Libraries.MessagingLibrary.Messaging.Show(True, "MsgDatesCannotBeEmpty")
+            Libraries.MessagingService.Show(True, "MsgDatesCannotBeEmpty")
             valid = False
         ElseIf beginningDate > endingDate Then
-            Libraries.MessagingLibrary.Messaging.Show(True, "MsgBegDateMustBeLessThanEndDate")
+            Libraries.MessagingService.Show(True, "MsgBegDateMustBeLessThanEndDate")
             valid = False
         End If
         If valid Then
@@ -171,16 +171,16 @@ Public Class FinancialReportPresenter(Of TM As New)
     Private Sub OnReportLoaded()
         AdjustBeginningEndDates(View.Period, View.BeginningDate, View.EndingDate)
         Dim title As String
-        title = Libraries.MessagingLibrary.Messaging.TranslateCaption(_reportName)
+        title = Libraries.MessagingService.TranslateCaption(_reportName)
         Select Case View.Period
             Case "Y"
-                title = Libraries.MessagingLibrary.Messaging.TranslateCaption("Yearly") + " " + title
+                title = Libraries.MessagingService.TranslateCaption("Yearly") + " " + title
             Case "M"
-                title = Libraries.MessagingLibrary.Messaging.TranslateCaption("Monthly") + " " + title
+                title = Libraries.MessagingService.TranslateCaption("Monthly") + " " + title
             Case "Q"
-                title = Libraries.MessagingLibrary.Messaging.TranslateCaption("Quarterly") + " " + title
+                title = Libraries.MessagingService.TranslateCaption("Quarterly") + " " + title
             Case "S"
-                title = Libraries.MessagingLibrary.Messaging.TranslateCaption("Semestral") + " " + title
+                title = Libraries.MessagingService.TranslateCaption("Semestral") + " " + title
             Case "C"
         End Select
         View.Title = title

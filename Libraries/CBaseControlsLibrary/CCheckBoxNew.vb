@@ -4,6 +4,7 @@ Imports System.Drawing.Drawing2D
 Imports System.Windows.Forms
 Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.Messaging
 
 Public Class CCheckBoxNew
     Inherits CheckBox
@@ -39,7 +40,7 @@ Public Class CCheckBoxNew
 #Region "Declarations#"
 
     ' Text Menu Captions
-    Private ReadOnly _textFind = MessagingLibrary.Messaging.TranslateCaption("Find on this field")
+    Private ReadOnly _textFind = MessagingService.TranslateCaption("Find on this field")
 
 #End Region
 
@@ -177,7 +178,7 @@ Public Class CCheckBoxNew
     Protected Sub ContextHandler(sender As Object, e As EventArgs)
         _contextMenuStrip1.Items.Clear()
         Dim menuItemFind As New ToolStripMenuItem With {
-                .Text = AATM.Libraries.MessagingLibrary.Messaging.TranslateCaption("Find on this field")
+                .Text = AATM.Libraries.Messaging.MessagingService.TranslateCaption("Find on this field")
                 }
         _contextMenuStrip1.Items.Add(menuItemFind)
         menuItemFind.ShortcutKeys = Keys.Control Or Keys.F
@@ -216,7 +217,7 @@ Public Class CCheckBoxNew
             'CallByName(myForm, "FindFieldNew", CallType.Method, Me)
             Invoker.InvokeFunction(myForm, "FindFieldNew", {Me})
         Else
-            AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgNothingToFind")
+            AATM.Libraries.Messaging.MessagingService.Show(True, "MsgNothingToFind")
         End If
         'Dim x = Me.GetType()
         'MessageBox.Show(x.ToString())

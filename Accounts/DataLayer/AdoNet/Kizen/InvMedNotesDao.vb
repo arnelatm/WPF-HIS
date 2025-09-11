@@ -51,7 +51,7 @@ Namespace DataLayer.AdoNet
 
         Public Function GetParametrized(Of InvMedNotesModel)(parameter As Object, Optional sortExpression As String = Nothing) As InvMedNotes Implements IDaoParametrized(Of InvMedNotes).GetParametrized
             If parameter Is Nothing Then
-                AATM.Libraries.MessagingLibrary.Messaging.Show("MsgDateCannotBeBlank")
+                AATM.Libraries.Messaging.MessagingService.Show("MsgDateCannotBeBlank")
                 Return Nothing
             End If
             Dim invoiceNo As Int32 = parameter(0)

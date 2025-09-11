@@ -11,7 +11,7 @@ Imports AATM.DataLayer
 Imports AATM.Libraries
 Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Events
+Imports AATM.Presentation.Events
 
 Namespace PresentationLayer.Presenters
 
@@ -86,14 +86,14 @@ Namespace PresentationLayer.Presenters
 
         Public Overrides Sub GoPrintRecord()
             If View.TransactionDate Is Nothing Then
-                AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgDateCannotBeBlank")
+                AATM.Libraries.Messaging.MessagingService.Show(True, "MsgDateCannotBeBlank")
             Else
                 Dim reportArgs As New CrPrintableArgs
                 Dim reportParameters As New Object
                 Dim dateString As String
                 Dim tempDate As DateTime = View.TransactionDate.Value
                 dateString = tempDate.ToString("yyyy/MM/dd")
-                Dim reportTitle As String = AATM.Libraries.MessagingLibrary.Messaging.TranslateCaption("Diagnostic Test Samples Taken Report for ") + dateString
+                Dim reportTitle As String = AATM.Libraries.Messaging.MessagingService.TranslateCaption("Diagnostic Test Samples Taken Report for ") + dateString
                 reportArgs.ReportParameters = {dateString, "TransactionDate",
                                                GlobalVariables.EstablishmentName, "EstablishmentName",
                                                reportTitle, "ReportTitle"}
@@ -260,7 +260,7 @@ Namespace PresentationLayer.Presenters
 
         Public Overrides Sub GoPrintRecord()
             If View.TransactionDate Is Nothing Then
-                AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgDateCannotBeBlank")
+                AATM.Libraries.Messaging.MessagingService.Show(True, "MsgDateCannotBeBlank")
             Else
                 Dim reportArgs As New CrPrintableArgs
                 Dim reportParameters As New Object
@@ -268,7 +268,7 @@ Namespace PresentationLayer.Presenters
                 Dim tempDate As DateTime = View.TransactionDate.Value
                 Dim ibType As String = IIf(_testType = "Iqama", "1", "2")
                 dateString = tempDate.ToString("yyyy/MM/dd")
-                Dim reportTitle As String = AATM.Libraries.MessagingLibrary.Messaging.TranslateCaption("Diagnostic Test Samples Taken Report for ") + dateString
+                Dim reportTitle As String = AATM.Libraries.Messaging.MessagingService.TranslateCaption("Diagnostic Test Samples Taken Report for ") + dateString
                 reportArgs.ReportParameters = {dateString, "TransactionDate",
                                                GlobalVariables.EstablishmentName, "EstablishmentName",
                                                reportTitle, "ReportTitle",

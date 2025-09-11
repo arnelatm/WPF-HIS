@@ -3,7 +3,7 @@ Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Events
+Imports AATM.Presentation.Events
 
 Namespace PresentationLayer.Views.Forms
 
@@ -243,7 +243,7 @@ Namespace PresentationLayer.Views.Forms
                                 selectedRow = DataGridViewDistributionSchemeItems.Rows(.CurrentCell.RowIndex).DataBoundItem
                                 If amount > 100 Or amount < 0 Then
                                     selectedRow.Percentage = 0
-                                    AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgInvalidPercentageRange")
+                                    AATM.Libraries.Messaging.MessagingService.Show(True, "MsgInvalidPercentageRange")
                                 End If
                             End If
                             UpdateTotals()

@@ -1,7 +1,7 @@
 ﻿Imports System.Drawing
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Forms.Services.SystemView
+Imports AATM.Presentation.Forms.Services.SystemView
 
 Public Class TranslationTableManager
 

@@ -7,7 +7,7 @@ Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Events
+Imports AATM.Presentation.Events
 
 Namespace PresentationLayer.Presenters
     Public Class PurchaseOrderApprovalPresenter(Of TM As New)
@@ -69,7 +69,7 @@ Namespace PresentationLayer.Presenters
             Dim retVal As Int16
             retVal = purchaseOrderDao.RunSpWithRollBack("spPostPurchaseOrder", parameters)
             If retVal >= 0 Then
-                AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgInvTransferSuccess")
+                AATM.Libraries.Messaging.MessagingService.Show(True, "MsgInvTransferSuccess")
                 GetUnPostedPo()
                 RefreshRequestDetailsAndQtyOnHand(0)
             End If
@@ -80,14 +80,14 @@ Namespace PresentationLayer.Presenters
             ' values might have changed if the screen has been left open for a long time
             RefreshRequestDetailsAndQtyOnHand(PurchaseOrderIdNo)
             If View.PurchaseOrderDetails Is Nothing Then
-                AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgNoSelectedRecordToView")
+                AATM.Libraries.Messaging.MessagingService.Show(True, "MsgNoSelectedRecordToView")
             Else
                 Dim qtyToTransfer As Decimal
                 For Each item In View.PurchaseOrderDetails
                     qtyToTransfer = item.Quantity
                     item.QtyApproved = qtyToTransfer
                 Next
-                AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgApprovedQtyUpdated")
+                AATM.Libraries.Messaging.MessagingService.Show(True, "MsgApprovedQtyUpdated")
             End If
         End Sub
 
@@ -138,7 +138,7 @@ Namespace PresentationLayer.Presenters
                     Select Case eventType.PropertyName
                         Case $"QtyApproved"
                             'If purchaseOrderApprovalDetail.QtyApproved + purchaseOrderApprovalDetail.QtySupplied > purchaseOrderApprovalDetail.Quantity Then
-                            '    AATM.Libraries.MessagingLibrary.Messaging.Show("Sorry Quantity Approved + Quantity Supplied can't be more than the requested quantity! Changing value to maximum allowed quantity.")
+                            '    AATM.Libraries.Messaging.MessagingService.Show("Sorry Quantity Approved + Quantity Supplied can't be more than the requested quantity! Changing value to maximum allowed quantity.")
                             '    purchaseOrderApprovalDetail.QtyApproved = purchaseOrderApprovalDetail.Quantity - purchaseOrderApprovalDetail.QtySupplied
                             'End If
                     End Select

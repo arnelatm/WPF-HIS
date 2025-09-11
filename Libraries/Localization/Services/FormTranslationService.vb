@@ -6,7 +6,7 @@ Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.CBaseControlsLibrary.Localization
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.Localization.Core
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 
 Namespace Services
 

@@ -3,7 +3,7 @@ Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 
 Namespace PresentationLayer.Presenters
 
@@ -87,7 +87,7 @@ Namespace PresentationLayer.Presenters
 
         Private Function StartAndEndDateIsValid() As Boolean
             If View.StartDate > View.EndDate Then
-                Messaging.Show(True, "MsgBegDateMustBeLessThanEndDate")
+                MessagingService.Show(True, "MsgBegDateMustBeLessThanEndDate")
                 Return False
             End If
             If _hiredDate Is Nothing Then
@@ -96,19 +96,19 @@ Namespace PresentationLayer.Presenters
             ElseIf View.StartDate < _earliestEarnedLeaveDate Then
                 Dim ed As String = Format(_earliestEarnedLeaveDate, "dd/MM/yyyy")
                 Dim sd As String = Format(View.StartDate, "dd/MM/yyyy")
-                Messaging.ShowPmMessage(True, "MsgValueMustBeGreaterThanOrEqual", {"fieldName1", "Start Date", "fieldValue1", sd, "fieldName2", "'Earliest Earned Leave Date'", "fieldValue2", ed})
+                MessagingService.ShowPmMessage(True, "MsgValueMustBeGreaterThanOrEqual", {"fieldName1", "Start Date", "fieldValue1", sd, "fieldName2", "'Earliest Earned Leave Date'", "fieldValue2", ed})
                 Return False
 
             ElseIf View.StartDate < _hiredDate Then
                 Dim hd As String = Format(CType(_hiredDate, Date), "dd/MM/yyyy")
                 Dim sd As String = Format(View.StartDate, "dd/MM/yyyy")
-                Messaging.ShowPmMessage(True, "MsgValueMustBeGreaterThanOrEqual", {"fieldName1", "Start Date", "fieldValue1", sd, "fieldName2", "employee hired date", "fieldValue2", hd})
+                MessagingService.ShowPmMessage(True, "MsgValueMustBeGreaterThanOrEqual", {"fieldName1", "Start Date", "fieldValue1", sd, "fieldName2", "employee hired date", "fieldValue2", hd})
                 Return False
             End If
             If _releasedDate IsNot Nothing AndAlso View.EndDate > _releasedDate Then
                 Dim rd As String = Format(CType(_releasedDate, Date), "dd/MM/yyyy")
                 Dim ed As String = Format(View.EndDate, "dd/MM/yyyy")
-                Messaging.ShowPmMessage(True, "MsgValueMustBeLessThan", {"fieldName1", "End Date", "fieldValue1", ed, "fieldName2", "employee released date or today's date", "fieldValue2", rd})
+                MessagingService.ShowPmMessage(True, "MsgValueMustBeLessThan", {"fieldName1", "End Date", "fieldValue1", ed, "fieldName2", "employee released date or today's date", "fieldValue2", rd})
                 Return False
             End If
             Return True
@@ -321,10 +321,10 @@ Namespace PresentationLayer.Presenters
         Private Sub OnBeforeEdit() Handles MyBase.BeforeEdit
             If View.ApprovedBy <> 0 Then
                 If View.Approved Then
-                    Messaging.Show(True, "MsgLeaveAlreadyActed", {"approvalAction", Messaging.TranslateCaption(LeaveStatusSelection.Approved.ToString())})
+                    MessagingService.Show(True, "MsgLeaveAlreadyActed", {"approvalAction", MessagingService.TranslateCaption(LeaveStatusSelection.Approved.ToString())})
                     CancelEdit = True
                 ElseIf View.Disapproved Then
-                    Messaging.Show(True, "MsgLeaveAlreadyActed", {"approvalAction", Messaging.TranslateCaption(LeaveStatusSelection.Disapproved.ToString())})
+                    MessagingService.Show(True, "MsgLeaveAlreadyActed", {"approvalAction", MessagingService.TranslateCaption(LeaveStatusSelection.Disapproved.ToString())})
                     CancelEdit = True
                 End If
             End If
@@ -335,10 +335,10 @@ Namespace PresentationLayer.Presenters
             If MyBase.IsOkToDeleteRecord() Then
                 If View.ApprovedBy <> 0 Then
                     If View.Approved Then
-                        Messaging.Show(True, "MsgLeaveAlreadyActed", {"approvalAction", Messaging.TranslateCaption(LeaveStatusSelection.Approved.ToString())})
+                        MessagingService.Show(True, "MsgLeaveAlreadyActed", {"approvalAction", MessagingService.TranslateCaption(LeaveStatusSelection.Approved.ToString())})
                         retVal = False
                     ElseIf View.Disapproved Then
-                        Messaging.Show(True, "MsgLeaveAlreadyActed", {"approvalAction", Messaging.TranslateCaption(LeaveStatusSelection.Disapproved.ToString())})
+                        MessagingService.Show(True, "MsgLeaveAlreadyActed", {"approvalAction", MessagingService.TranslateCaption(LeaveStatusSelection.Disapproved.ToString())})
                         retVal = False
                     End If
                 End If

@@ -27,7 +27,7 @@ Namespace DataLayer.AdoNet
 
         Public Function GetParametrized(Of IbLabSampleModel)(parameter As Object, Optional sortExpression As String = Nothing) As IbLabSample Implements IDaoParametrized(Of IbLabSample).GetParametrized
             If parameter(0) Is Nothing Then
-                AATM.Libraries.MessagingLibrary.Messaging.Show("MsgDateCannotBeBlank")
+                AATM.Libraries.Messaging.MessagingService.Show("MsgDateCannotBeBlank")
                 Return Nothing
             End If
             Dim transactionDate As Date = parameter(0)
@@ -101,7 +101,7 @@ Namespace DataLayer.AdoNet
 
         Public Function GetParametrized(Of IbLabResultModel)(parameter As Object, Optional sortExpression As String = Nothing) As IbLabResult Implements IDaoParametrized(Of IbLabResult).GetParametrized
             If parameter(0) Is Nothing Then
-                AATM.Libraries.MessagingLibrary.Messaging.Show("MsgDateCannotBeBlank")
+                AATM.Libraries.Messaging.MessagingService.Show("MsgDateCannotBeBlank")
                 Return Nothing
             End If
 

@@ -3,7 +3,7 @@ Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 
 Namespace PresentationLayer.Views.Forms
 
@@ -185,7 +185,7 @@ Namespace PresentationLayer.Views.Forms
             Else
                 If Not String.IsNullOrEmpty(code) Then
                     e.Cancel = True
-                    Messaging.ShowPmMessage(True, "MsgInvalidValue", {"fieldValue", code, "fieldDescription", "Item Code"})
+                    MessagingService.ShowPmMessage(True, "MsgInvalidValue", {"fieldValue", code, "fieldDescription", "Item Code"})
                 End If
             End If
         End Sub
@@ -206,8 +206,8 @@ Namespace PresentationLayer.Views.Forms
                 If form.ShowDialog() = Windows.Forms.DialogResult.OK Then
                     Dim item As ItemDetailsModel = form.ItemDetails
                     If item Is Nothing Then
-                        Dim msg = Messaging.GetParametrizedMessage(True, "MsgInvalidValue", {"fieldValue", findText, "fieldDescription", "Medicine Name"})
-                        Messaging.Show(msg)
+                        Dim msg = MessagingService.GetParametrizedMessage(True, "MsgInvalidValue", {"fieldValue", findText, "fieldDescription", "Medicine Name"})
+                        MessagingService.Show(msg)
                         e.Cancel = True
                         dgv.Rows(e.RowIndex).ErrorText = msg
                     Else

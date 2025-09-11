@@ -5,7 +5,7 @@ Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 
 Namespace PresentationLayer.Views.Forms
 
@@ -439,7 +439,7 @@ Namespace PresentationLayer.Views.Forms
         '    '    Beep()
         '    '    e.Cancel = True
         '    '    DataGridViewSaleDetails.EndEdit()
-        '    '    Messaging.Show(True, "MsgPaymentDiscExistChangeNotAllowed")
+        '    '    MessagingService.Show(True, "MsgPaymentDiscExistChangeNotAllowed")
         '    ' End If
         'End Sub
 
@@ -651,8 +651,8 @@ Namespace PresentationLayer.Views.Forms
                     Dim product As ProductModel = form.Product
                     _noOfUnits = form.NoOfUnits
                     If product Is Nothing Then
-                        Dim msg = Messaging.GetParametrizedMessage(True, "MsgInvalidValue", {"fieldValue", findText, "fieldDescription", "Product Name"})
-                        Messaging.Show(msg)
+                        Dim msg = MessagingService.GetParametrizedMessage(True, "MsgInvalidValue", {"fieldValue", findText, "fieldDescription", "Product Name"})
+                        MessagingService.Show(msg)
                         e.Cancel = True
                         dgv.Rows(e.RowIndex).ErrorText = msg
                     Else
@@ -682,7 +682,7 @@ Namespace PresentationLayer.Views.Forms
             Else
                 If Not String.IsNullOrEmpty(code) Then
                     e.Cancel = True
-                    Messaging.ShowPmMessage(True, "MsgInvalidValue", {"fieldValue", code, "fieldDescription", "Product Code"})
+                    MessagingService.ShowPmMessage(True, "MsgInvalidValue", {"fieldValue", code, "fieldDescription", "Product Code"})
                 End If
             End If
         End Sub
@@ -702,7 +702,7 @@ Namespace PresentationLayer.Views.Forms
             '    End If
             'Else
             '    If Not String.IsNullOrEmpty(code) Then
-            '        Messaging.ShowPmMessage(True, "MsgInvalidValue", {"fieldValue", code, "fieldDescription", "Product Code"})
+            '        MessagingService.ShowPmMessage(True, "MsgInvalidValue", {"fieldValue", code, "fieldDescription", "Product Code"})
             '        e.Cancel = True
             '    End If
             'End If
@@ -723,7 +723,7 @@ Namespace PresentationLayer.Views.Forms
         '            If e.FormattedValue <> "" Then
         '                RaiseEvent ProductCodeChanged(e.FormattedValue, bsSaleDetails)
         '                If DataGridViewSaleDetails.CurrentRow().Cells("dgvProductName").Value = "" Then
-        '                    Messaging.ShowPmMessage(True, "MsgInvalidCode", {"fieldName", Messaging.TranslateCaption("Product Code")})
+        '                    MessagingService.ShowPmMessage(True, "MsgInvalidCode", {"fieldName", MessagingService.TranslateCaption("Product Code")})
         '                    e.Cancel = True
         '                Else
         '                    'MoveToGridView(DataGridViewSaleDetails, "dgvUnitIdNo")
@@ -825,7 +825,7 @@ Namespace PresentationLayer.Views.Forms
         'Private Function PaymentOrDiscountMade()
         '    Dim retVal As Boolean = False
         '    If (DataGridViewSaleDetails.Rows(0).Cells("dgvPaidAmount").Value <> 0 Or DataGridViewSaleDetails.Rows(0).Cells("dgvDiscountTaken").Value <> 0) Then
-        '        Messaging.Show(True, "MsgPaymentDiscExistChangeNotAllowed")
+        '        MessagingService.Show(True, "MsgPaymentDiscExistChangeNotAllowed")
         '        retVal = True
         '    End If
         '    Return retVal
@@ -901,7 +901,7 @@ Namespace PresentationLayer.Views.Forms
             '    Beep()
             '    e.Cancel = True
             '    DataGridViewSaleDetails.EndEdit()
-            '    Messaging.Show(True, "MsgPaymentDiscExistChangeNotAllowed")
+            '    MessagingService.Show(True, "MsgPaymentDiscExistChangeNotAllowed")
             ' End If
         End Sub
 

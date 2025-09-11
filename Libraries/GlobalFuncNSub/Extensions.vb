@@ -1,11 +1,9 @@
 ﻿Imports System.ComponentModel
-Imports System.Drawing
 Imports System.Globalization
 Imports System.Linq.Expressions
 Imports System.Reflection
 Imports System.Runtime.CompilerServices
 Imports System.Runtime.InteropServices
-Imports System.Text.RegularExpressions
 Imports System.Windows.Forms
 
 Public Module Extensions

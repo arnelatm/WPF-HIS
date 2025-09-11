@@ -3,7 +3,7 @@
 Namespace PresentationLayer.Views.Forms.Reports
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
     Partial Class AccountActivity
-        Inherits AATM.PresentationLayer.Forms.BFMain
+        Inherits AATM.Presentation.Forms.BFMain
 
         'Form overrides dispose to clean up the component list.
         <System.Diagnostics.DebuggerNonUserCode()>

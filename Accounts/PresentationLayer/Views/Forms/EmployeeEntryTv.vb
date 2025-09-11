@@ -5,8 +5,8 @@ Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Common.BusinessLayer
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Forms
+Imports AATM.Libraries.Messaging
+Imports AATM.Presentation.Forms
 
 Namespace PresentationLayer.Views.Forms
 
@@ -719,7 +719,7 @@ Namespace PresentationLayer.Views.Forms
                                     Dim remarks = DataGridViewDocuments.CurrentRow.Cells("dgvDocumentIdNo").EditedFormattedValue
                                     DisplayImage(tempFileName, EmployeeName & " " & remarks)
                                 Else
-                                    Messaging.Show(True, "MsgNoImageEntered")
+                                    MessagingService.Show(True, "MsgNoImageEntered")
                                 End If
                             End If
                         End If
@@ -775,7 +775,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub DisplayImage(cFileName As String, cRemarks As String)
             If cFileName Is Nothing Or cFileName = "" Then
-                Messaging.Show(True, "MsgNoImageEntered")
+                MessagingService.Show(True, "MsgNoImageEntered")
             Else
                 Dim cPictureViewer As New CPictureViewer(cFileName, cRemarks, True)
                 cPictureViewer.ShowDialog()

@@ -3,8 +3,8 @@ Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Events
+Imports AATM.Libraries.Messaging
+Imports AATM.Presentation.Events
 
 Namespace PresentationLayer.Views.Forms
 
@@ -321,19 +321,19 @@ Namespace PresentationLayer.Views.Forms
                     ElseIf cColumnName = $"dgvExpiryDate" Then
                         ValidateExpiryDate(DataGridViewInvTransactionDetails, e)
                         If .CurrentRow.Cells("dgvInventoryIdNo").Value <> 0 Then
-                            Messaging.ShowPmMessage(True, "MsgCannotEditInvItems", {"fieldName", Messaging.TranslateCaption("expiry date")})
+                            MessagingService.ShowPmMessage(True, "MsgCannotEditInvItems", {"fieldName", MessagingService.TranslateCaption("expiry date")})
                             e.Cancel = True
                             .CurrentRow.Cells("dgvExpiryDate").Value = DataGridViewInvTransactionDetails.OldCellValue
                         End If
                     ElseIf cColumnName = $"dgvBatchNo" Then
                         If .CurrentRow.Cells("dgvInventoryIdNo").Value <> 0 Then
-                            Messaging.ShowPmMessage(True, "MsgCannotEditInvItems", {"fieldName", Messaging.TranslateCaption("batch number")})
+                            MessagingService.ShowPmMessage(True, "MsgCannotEditInvItems", {"fieldName", MessagingService.TranslateCaption("batch number")})
                             e.Cancel = True
                             .CurrentRow.Cells("dgvBatchNo").Value = DataGridViewInvTransactionDetails.OldCellValue
                         End If
                     ElseIf cColumnName = $"dgvUnitCost" Then
                         If .CurrentRow.Cells("dgvInventoryIdNo").Value <> 0 Then
-                            Messaging.ShowPmMessage(True, "MsgCannotEditInvItems", {"fieldName", Messaging.TranslateCaption("unit cost")})
+                            MessagingService.ShowPmMessage(True, "MsgCannotEditInvItems", {"fieldName", MessagingService.TranslateCaption("unit cost")})
                             e.Cancel = True
                             .CurrentRow.Cells("dgvUnitCost").Value = DataGridViewInvTransactionDetails.OldCellValue
                         End If
@@ -549,7 +549,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub cboInvTransTypeIdNo_Validating(sender As Object, e As CancelEventArgs) Handles cboInvTransTypeIdNo.Validating
             If cboInvTransTypeIdNo.SelectedValue Is Nothing Then
-                Messaging.ShowPmMessage(True, "MsgMustSelectFromList", {"selectionName", Messaging.TranslateCaption("Inventory Transaction Type")})
+                MessagingService.ShowPmMessage(True, "MsgMustSelectFromList", {"selectionName", MessagingService.TranslateCaption("Inventory Transaction Type")})
                 e.Cancel = True
             End If
         End Sub

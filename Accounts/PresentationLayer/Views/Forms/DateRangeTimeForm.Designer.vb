@@ -1,5 +1,5 @@
 ﻿Imports AATM.Libraries.CBaseControlsLibrary
-Imports AATM.PresentationLayer.Forms
+Imports AATM.Presentation.Forms
 
 Namespace Accounts.PresentationLayer.Views.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>

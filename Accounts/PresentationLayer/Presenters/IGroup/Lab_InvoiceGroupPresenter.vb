@@ -8,7 +8,7 @@ Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 
 Namespace PresentationLayer.Presenters
 
@@ -147,7 +147,7 @@ Namespace PresentationLayer.Presenters
                 GetResultOnFile(sFiles, aFileResults, aCBCResults)
                 success = True
             ElseIf sFiles.Count() > 1 Then
-                Messaging.Show("MsgMultiResultCBCFound")
+                MessagingService.Show("MsgMultiResultCBCFound")
                 Dim cbcReportSelector As New CbcReportSelector(sFiles, filePath, View.InvoiceNo)
                 Dim result = cbcReportSelector.ShowDialog()
                 If result = DialogResult.OK Then

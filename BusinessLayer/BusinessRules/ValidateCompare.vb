@@ -1,4 +1,6 @@
 ﻿' compares values of two properties given a data type and operator  (>, ==, etc)
+Imports AATM.Libraries.Messaging
+Imports AATM.Libraries.GlobalFuncNSub
 
 
 Namespace BusinessRules
@@ -39,9 +41,9 @@ Namespace BusinessRules
         Private Sub MakeError(errMessageKey As String)
             ' Removed malformed debug line and extra parenthesis
             ' Ensure SplitCamelCase() is accessible (add parentheses if it is an extension method)
-            Dim fieldName1 As String = AATM.Libraries.MessagingLibrary.Messaging.TranslateCaption(PropertyName.SplitCamelCase())
-            Dim fieldName2 As String = Global.Messaging.TranslateCaption(OtherPropertyName.SplitCamelCase())
-            [Error] = Global.Messaging.GetParametrizedMessage(True, errMessageKey, {
+            Dim fieldName1 As String = MessagingService.TranslateCaption(PropertyName.SplitCamelCase())
+            Dim fieldName2 As String = MessagingService.TranslateCaption(OtherPropertyName.SplitCamelCase())
+            [Error] = MessagingService.GetParametrizedMessage(True, errMessageKey, {
                 "PropertyName", fieldName1,
                 "OtherPropertyName", fieldName2
             })
@@ -49,9 +51,9 @@ Namespace BusinessRules
 
         '' Replaced incorrect fully-qualified references inside MakeError
         'Private Sub MakeError(errMessageKey As String)
-        '    Dim fieldName1 As String = Messaging.TranslateCaption(PropertyName.SplitCamelCase)
-        '    Dim fieldName2 As String = Messaging.TranslateCaption(OtherPropertyName.SplitCamelCase)
-        '    [Error] = Messaging.GetParametrizedMessage(True, errMessageKey, New String() {
+        '    Dim fieldName1 As String = MessagingService.TranslateCaption(PropertyName.SplitCamelCase)
+        '    Dim fieldName2 As String = MessagingService.TranslateCaption(OtherPropertyName.SplitCamelCase)
+        '    [Error] = MessagingService.GetParametrizedMessage(True, errMessageKey, New String() {
         '            "PropertyName", fieldName1,
         '            "OtherPropertyName", fieldName2
         '        })

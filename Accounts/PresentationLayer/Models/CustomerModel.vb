@@ -1,4 +1,4 @@
-﻿Imports AATM.PresentationLayer.Models
+﻿Imports AATM.Presentation.Models
 
 Namespace PresentationLayer.Models
 

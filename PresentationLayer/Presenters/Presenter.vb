@@ -1,13 +1,10 @@
-﻿Imports System.Globalization
-Imports System.Reflection
+﻿Imports System.Reflection
 Imports System.Windows.Forms
-Imports AATM.Libraries
 Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Events
-Imports AATM.PresentationLayer.Models
-Imports AATM.PresentationLayer.Views
+Imports AATM.Libraries.Messaging
+Imports AATM.Presentation.Models
+Imports AATM.Presentation.Views
 
 ''' <summary>
 '''     Base class for all presenter classes. Keeps track of Service and View classes.
@@ -95,7 +92,7 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
         If idNo <> 0 Then
             RecordPositionNumber = GetSortedRecordPosition(idNo)
         Else
-            Messaging.Show(True, "MsgNoMatchingRecordFound")
+            MessagingService.Show(True, "MsgNoMatchingRecordFound")
         End If
     End Sub
 
@@ -132,7 +129,7 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
             filter = ParentFieldName + " = " + CallByName(View, IdFieldName, CallType.Get).ToString()
             If Service.GetRecordCount(TableName, filter) > 0 Then
                 If warn Then
-                    Messaging.Show(True, "MsgChildRecordsExists")
+                    MessagingService.Show(True, "MsgChildRecordsExists")
                 End If
                 returnValue = True
             End If
@@ -154,7 +151,7 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
             Dim root As TreeNode = FormTreeView.Nodes(0)
             root.Nodes.Clear()
             Dim treeViewData As Object = GetTreeViewData()
-            root.Text = Messaging.TranslateCaption(TableName)
+            root.Text = MessagingService.TranslateCaption(TableName)
             If ParentFieldName Is Nothing OrElse ParentFieldName = "" Then
                 For Each dataNode In treeViewData
                     AddRecordToTree(dataNode)
@@ -342,7 +339,7 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
         If EditMode Or AddMode Then
             If e.Action = TreeViewAction.ByKeyboard Or e.Action = TreeViewAction.ByMouse Then
                 'MessageBox.Show("You like the keyboard!")
-                MessagingLibrary.Messaging.Show(True, "MsgTvSelectionNotAllowed")
+                MessagingService.Show(True, "MsgTvSelectionNotAllowed")
             End If
             e.Cancel = True
         End If
@@ -379,7 +376,7 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
         If idNo <> 0 Then
             RecordPositionNumber = GetSortedRecordPosition(idNo)
         Else
-            Messaging.Show(True, "MsgNoMatchingRecordFound")
+            MessagingService.Show(True, "MsgNoMatchingRecordFound")
         End If
     End Sub
 
@@ -388,7 +385,7 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
         If idNo <> 0 Then
             RecordPositionNumber = GetSortedRecordPosition(idNo)
         Else
-            Messaging.Show(True, "MsgNoMatchingRecordFound")
+            MessagingService.Show(True, "MsgNoMatchingRecordFound")
         End If
     End Sub
 
@@ -404,7 +401,7 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
     Public Sub GoFindRecord()
         Dim idNoOfFoundRecord = FindRecord()
         If idNoOfFoundRecord = 0 Then
-            If Messaging.Show(True, "AskLastRecordReachStartBeg", "This is the last matching record for the given text. Do you want to start search from the first record?", "Last Record Found.",
+            If MessagingService.Show(True, "AskLastRecordReachStartBeg", "This is the last matching record for the given text. Do you want to start search from the first record?", "Last Record Found.",
                               MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
                 idNoOfFoundRecord = FindFieldContinue(0)
                 RecordPositionNumber = GetSortedRecordPosition(idNoOfFoundRecord)

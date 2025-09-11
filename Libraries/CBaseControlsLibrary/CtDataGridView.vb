@@ -9,7 +9,7 @@ Imports AATM.DataLayer.AdoNet
 Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.GlobalResources
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 
 Public Class CtDataGridView
     Inherits DataGridView
@@ -348,7 +348,7 @@ Public Class CtDataGridView
 
     Private Sub CtDataGridView_UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) Handles Me.UserDeletingRow
         If Not EditingMode Then
-            Messaging.Show(True, "MsgRowDelNotAllowedInViewMode")
+            MessagingService.Show(True, "MsgRowDelNotAllowedInViewMode")
             e.Cancel = True
         End If
     End Sub
@@ -366,7 +366,7 @@ Public Class CtDataGridView
             ReSequenceDgvAfterInsert()
             CurrentCell = Me(FirstEditableColumn, If(CurrentRow.Index() > 0, CurrentRow.Index() - 1, 0))
         Else
-            Messaging.Show(True, "MsgFirstRowInsertionNotAllowed")
+            MessagingService.Show(True, "MsgFirstRowInsertionNotAllowed")
         End If
         'End If
     End Sub
@@ -624,7 +624,7 @@ Public Class CtDataGridView
             hitTestInfo = Me.HitTest(e.X, e.Y)
 
             If _existingFind Then
-                If Messaging.Show(True, "AskContinueWithPreviousSearch",
+                If MessagingService.Show(True, "AskContinueWithPreviousSearch",
                                   MessageBoxButtons.YesNo,
                                   MessageBoxIcon.Warning,
                                   MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
@@ -663,15 +663,15 @@ Public Class CtDataGridView
                 'Ensure data is displayed using the display format.
                 EditingControl.Text = value.ToString("yyyy/MM/dd")
                 If value < Today() Then
-                    If Messaging.Show(True, "AskIfUseExpiredDate", "Are you sure you want to use this expired date?", "Please Confirm!", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then
+                    If MessagingService.Show(True, "AskIfUseExpiredDate", "Are you sure you want to use this expired date?", "Please Confirm!", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then
                         e.Cancel = True
                     End If
                 End If
             Else
                 If Me.CurrentCell.Value Is Nothing Or CurrentCell.Value = Date.MinValue Then
-                    Messaging.Show(True, "MsgBlankExpNotAllowed")
+                    MessagingService.Show(True, "MsgBlankExpNotAllowed")
                 Else
-                    Messaging.ShowPmMessage(True, "MsgInvalidDate", {"enteredDate", e.FormattedValue})
+                    MessagingService.ShowPmMessage(True, "MsgInvalidDate", {"enteredDate", e.FormattedValue})
                 End If
                 'e.Cancel = True
             End If
@@ -833,7 +833,7 @@ Public Class CtDataGridView
                 searchForm.Dispose()
             End If
             If sw = 0 Then
-                Messaging.Show(True, "MsgNoMatchingRecordFound")
+                MessagingService.Show(True, "MsgNoMatchingRecordFound")
                 _existingFind = False
             End If
         End If
@@ -952,7 +952,7 @@ Public Class CtDataGridView
             End Try
         End If
         If matchSw = 0 Then
-            If Messaging.Show(True, "AskLastRecordReachStartBeg",
+            If MessagingService.Show(True, "AskLastRecordReachStartBeg",
                               MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
                 _previousSelectedRow = -1
                 ContinuePreviousSearch()

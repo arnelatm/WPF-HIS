@@ -73,7 +73,7 @@ Public Class ItemDetailsFinder
         Dim dao As New ItemDetailsDao
         If txtFinder.Text.Length() < 3 Then
             DataGridViewItemDetails.DataSource = Nothing
-            'AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgText2Short")
+            'AATM.Libraries.Messaging.MessagingService.Show(True, "MsgText2Short")
         Else
             DataGridViewItemDetails.DataSource = dao.GetItemDetailBySearchString(txtFinder.Text)
             _findText = txtFinder.Text

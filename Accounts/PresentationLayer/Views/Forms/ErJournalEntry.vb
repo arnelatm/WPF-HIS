@@ -4,8 +4,8 @@ Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Events
+Imports AATM.Libraries.Messaging
+Imports AATM.Presentation.Events
 
 Namespace PresentationLayer.Views.Forms
 
@@ -293,7 +293,7 @@ Namespace PresentationLayer.Views.Forms
                 Beep()
                 e.Cancel = True
                 DataGridViewJournalItems.EndEdit()
-                Messaging.Show(True, "MsgPaymentCollExistChangeNotAllowed")
+                MessagingService.Show(True, "MsgPaymentCollExistChangeNotAllowed")
             End If
         End Sub
 
@@ -305,7 +305,7 @@ Namespace PresentationLayer.Views.Forms
         'Private Function PaymentOrDiscountMade()
         '    Dim retVal As Boolean = False
         '    If (DataGridViewJournalItems.Rows(0).Cells("dgvPaidAmount").Value <> 0 Or DataGridViewJournalItems.Rows(0).Cells("dgvDiscountTaken").Value <> 0) Then
-        '        Messaging.Show(True, "MsgPaymentDiscExistChangeNotAllowed")
+        '        MessagingService.Show(True, "MsgPaymentDiscExistChangeNotAllowed")
         '        retVal = True
         '    End If
         '    Return retVal
@@ -326,7 +326,7 @@ Namespace PresentationLayer.Views.Forms
             Dim erJournalRow As DataGridViewRow = DataGridViewJournalItems.Rows(0)
             If DataGridViewJournalItems.SelectedRows.Contains(erJournalRow) Then
                 ' Do not allow the user to delete the first row.
-                Messaging.Show(True, "MsgFirstRowDeletionNotAllowed", "Deletion of the first row Is Not allowed!", "Delete Error")
+                MessagingService.Show(True, "MsgFirstRowDeletionNotAllowed", "Deletion of the first row Is Not allowed!", "Delete Error")
                 ' Cancel the deletion
                 e.Cancel = True
             End If

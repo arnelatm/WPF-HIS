@@ -8,7 +8,7 @@ Imports AATM.Common
 Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Events
+Imports AATM.Presentation.Events
 
 Namespace PresentationLayer.Presenters
 

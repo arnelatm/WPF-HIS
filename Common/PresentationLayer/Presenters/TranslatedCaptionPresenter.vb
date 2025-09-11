@@ -2,7 +2,7 @@
 Imports AATM.Common.PresentationLayer.Views.Interface
 Imports AATM.Common.ServiceLayer
 Imports AATM.Libraries
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 
 Namespace PresentationLayer.Presenters
 

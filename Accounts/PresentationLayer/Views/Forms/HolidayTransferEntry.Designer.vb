@@ -1,7 +1,7 @@
 ﻿Namespace PresentationLayer.Views.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
     Partial Class HolidayTransferEntry
-        Inherits AATM.PresentationLayer.Forms.CFormEntry
+        Inherits AATM.Presentation.Forms.CFormEntry
 
         'Form overrides dispose to clean up the component list.
         <System.Diagnostics.DebuggerNonUserCode()>

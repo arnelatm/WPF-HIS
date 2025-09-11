@@ -5,7 +5,7 @@ Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 
 Namespace PresentationLayer.Presenters
 
@@ -138,7 +138,7 @@ Namespace PresentationLayer.Presenters
                 retValue = True
                 Dim lastPostingDate As DateTime? = Service.GetRecordFieldWithKeyG(Of DateTime?)("General Journal", "LastPosting", "TransactionName", "LastPostingDate")
                 If View.JournalItems Is Nothing OrElse View.JournalItems.Count() = 0 Then
-                    Messaging.Show(True, "MsgCannotSaveAnEmptyTransaction", "Sorry, cannot save an empty transaction!", "Error")
+                    MessagingService.Show(True, "MsgCannotSaveAnEmptyTransaction", "Sorry, cannot save an empty transaction!", "Error")
                     retValue = False
                 ElseIf IsDateRangeValid("General Journal", View.TransactionDate, lastPostingDate, dateToday) = DialogResult.No Then
                     retValue = False
@@ -156,9 +156,9 @@ Namespace PresentationLayer.Presenters
                             Exit For
                         ElseIf specialAccount IsNot Nothing AndAlso invalidAccounts.Contains(specialAccount) Then
                             Dim lineNumber As String = item.Sequence.ToString()
-                            Dim entryNames As String = Messaging.TranslateCaption("Accounts Payable") + "/" + Messaging.TranslateCaption("Accounts Receivable") + "/" + Messaging.TranslateCaption("Employee Accounts")
+                            Dim entryNames As String = MessagingService.TranslateCaption("Accounts Payable") + "/" + MessagingService.TranslateCaption("Accounts Receivable") + "/" + MessagingService.TranslateCaption("Employee Accounts")
                             Dim variables = {"lineNumber", lineNumber, "entryNames", entryNames}
-                            Messaging.ShowPmMessage(True, "MsgAccountsNotAllowed", variables)
+                            MessagingService.ShowPmMessage(True, "MsgAccountsNotAllowed", variables)
                             retValue = False
                         End If
                     Next
@@ -175,7 +175,7 @@ Namespace PresentationLayer.Presenters
             Dim reconciledDao = New ReconciledDao
             For Each item In View.JournalItems
                 If reconciledDao.IsItemReconciled("GJ", item.IdNo) Then
-                    Messaging.Show(True, "MsgEditingOfReconciledNotAllowed")
+                    MessagingService.Show(True, "MsgEditingOfReconciledNotAllowed")
                     result = False
                     Exit For
                 End If

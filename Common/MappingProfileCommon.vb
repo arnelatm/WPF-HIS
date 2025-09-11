@@ -4,9 +4,9 @@ Imports AATM.Common.Models
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Views.Interface
 Imports AATM.Common.PresentationLayer.Views.Interfaces
-Imports AATM.PresentationLayer.Models
-Imports AATM.PresentationLayer.Views
-Imports AATM.PresentationLayer.Views.Interfaces
+Imports AATM.Presentation.Models
+Imports AATM.Presentation.Views
+Imports AATM.Presentation.Views.Interfaces
 Imports AutoMapper
 
 Public Class MappingProfileCommon

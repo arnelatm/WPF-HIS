@@ -4,7 +4,7 @@ Namespace PresentationLayer.Views.Interface
 
 
     Public Interface IPrintableCrReportView
-        Inherits AATM.PresentationLayer.Views.IView
+        Inherits AATM.Presentation.Views.IView
 
         Property ReportFileName As String
         Property PrintArgs As CrPrintableArgs

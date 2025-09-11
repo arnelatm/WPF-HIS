@@ -7,7 +7,7 @@ Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Events
+Imports AATM.Presentation.Events
 
 Public Class ApArEmReportPresenter(Of TM As New)
     Inherits AccountsPresenter(Of IApArEmReportView, TM)
@@ -93,14 +93,14 @@ Public Class ApArEmReportPresenter(Of TM As New)
         End If
         beginningDate = View.BeginningDate
         endingDate = View.EndingDate
-        Dim reportName = Libraries.MessagingLibrary.Messaging.TranslateCaption(_reportName)
+        Dim reportName = Libraries.MessagingService.TranslateCaption(_reportName)
         Dim reportTitle As String
         Dim valid As Boolean = True
         If beginningDate Is Nothing Or endingDate Is Nothing Then
-            Libraries.MessagingLibrary.Messaging.Show(True, "MsgDatesCannotBeEmpty")
+            Libraries.MessagingService.Show(True, "MsgDatesCannotBeEmpty")
             valid = False
         ElseIf beginningDate > endingDate Then
-            Libraries.MessagingLibrary.Messaging.Show(True, "MsgBegDateMustBeLessThanEndDate")
+            Libraries.MessagingService.Show(True, "MsgBegDateMustBeLessThanEndDate")
             valid = False
         End If
         If valid Then
@@ -153,7 +153,7 @@ Public Class ApArEmReportPresenter(Of TM As New)
     Private Sub OnReportLoaded()
         View.BeginningDate = GlobalFunctions.GregorianDateSerial(Today.Year, 1, 1)
         View.EndingDate = GlobalFunctions.GregorianDateSerial(Today.Year, Today.Month, Today.Day)
-        View.Title = Libraries.MessagingLibrary.Messaging.TranslateCaption(_reportName)
+        View.Title = Libraries.MessagingService.TranslateCaption(_reportName)
         MakeControlDataSources({New Object() {_tableName, View.PersonSelectorControl, Nothing, _filter}})
         Select Case View.ReportCode
             Case "LeaveStatement", "ErStatement", "EmployeeInfo"

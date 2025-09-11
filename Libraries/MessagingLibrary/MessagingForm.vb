@@ -327,7 +327,7 @@ Public Class MessagingForm
 
         'Private Function GetButtonText(ByVal buttonId As ButtonId) As String
         '    Dim buttonTextArrayIndex = Convert.ToInt32(buttonId)
-        '    Return Messaging.TranslateCaption(ButtonTextsEnglishEn(buttonTextArrayIndex))
+        '    Return MessagingService.TranslateCaption(ButtonTextsEnglishEn(buttonTextArrayIndex))
         'End Function
 
         Private Function GetButtonText(ByVal buttonId As ButtonId) As String

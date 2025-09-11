@@ -3,7 +3,7 @@ Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 
 Namespace PresentationLayer.Views.Forms
 
@@ -365,7 +365,7 @@ Namespace PresentationLayer.Views.Forms
                 Beep()
                 e.Cancel = True
                 DataGridViewJournalItems.EndEdit()
-                Messaging.Show(True, "MsgPaymentCollExistChangeNotAllowed")
+                MessagingService.Show(True, "MsgPaymentCollExistChangeNotAllowed")
             End If
         End Sub
 
@@ -382,7 +382,7 @@ Namespace PresentationLayer.Views.Forms
         Private Function PaymentOrDiscountMade()
             Dim retVal As Boolean = False
             If (DataGridViewJournalItems.Rows(0).Cells("dgvPaidAmount").Value <> 0 Or DataGridViewJournalItems.Rows(0).Cells("dgvDiscountTaken").Value <> 0) Then
-                Messaging.Show(True, "MsgPaymentDiscExistChangeNotAllowed")
+                MessagingService.Show(True, "MsgPaymentDiscExistChangeNotAllowed")
                 retVal = True
             End If
             Return retVal
@@ -405,7 +405,7 @@ Namespace PresentationLayer.Views.Forms
             Dim arJournalRow As DataGridViewRow = DataGridViewJournalItems.Rows(0)
             If DataGridViewJournalItems.SelectedRows.Contains(arJournalRow) Then
                 ' Do not allow the user to delete the first row.
-                Messaging.Show(True, "MsgFirstRowDeletionNotAllowed", "Deletion of the first row Is Not allowed!", "Delete Error")
+                MessagingService.Show(True, "MsgFirstRowDeletionNotAllowed", "Deletion of the first row Is Not allowed!", "Delete Error")
                 ' Cancel the deletion
                 e.Cancel = True
             ElseIf Presenter.EditMode Then
@@ -413,7 +413,7 @@ Namespace PresentationLayer.Views.Forms
                 jiIdNo = DataGridViewJournalItems.CurrentRow.Cells("dgvIdNo").Value
                 If Presenter.ArCollectionExists("AR", jiIdNo) Then
                     ' Do not allow the user to delete items with existing payments/discounts (prevent orphaned records)
-                    Messaging.Show(True, "MsgDeleteCollEntryNotAllowed")
+                    MessagingService.Show(True, "MsgDeleteCollEntryNotAllowed")
                     ' Cancel the deletion
                     e.Cancel = True
                 End If

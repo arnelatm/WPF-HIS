@@ -2,7 +2,7 @@
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 
 Namespace PresentationLayer.Presenters
 
@@ -125,7 +125,7 @@ Namespace PresentationLayer.Presenters
                 '   View.PayElementType = EnumToCode(PayElementTypeSelection.OvertimeHoliday) Or
                 '   View.PayElementType = EnumToCode(PayElementTypeSelection.OvertimeSpecial) Then
                 If View.IdNo <= 3 Then
-                    Messaging.Show(True, "MsgSysPayElementDelNotAllowed")
+                    MessagingService.Show(True, "MsgSysPayElementDelNotAllowed")
                 Else
                     retValue = True
                 End If

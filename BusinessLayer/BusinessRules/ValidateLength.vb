@@ -1,5 +1,5 @@
 ﻿Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 
 Namespace BusinessRules
     ' length validation rule.
@@ -13,14 +13,14 @@ Namespace BusinessRules
 
         Public Sub New(propertyName As String, min As Integer, max As Integer)
             MyBase.New(propertyName)
-            Dim fieldName = Messaging.TranslateCaption(propertyName.SplitCamelCase)
+            Dim fieldName = MessagingService.TranslateCaption(propertyName.SplitCamelCase)
             Dim errorMessage As String
             _min = min
             _max = max
             If _min <> _max Then
-                errorMessage = Messaging.GetParametrizedMessage(True, "MsgInvalidTextLength", {"fieldName", fieldName, "minimumLength", min.ToString(), "maximumLength", max.ToString()})
+                errorMessage = MessagingService.GetParametrizedMessage(True, "MsgInvalidTextLength", {"fieldName", fieldName, "minimumLength", min.ToString(), "maximumLength", max.ToString()})
             Else
-                errorMessage = Messaging.GetParametrizedMessage(True, "MsgExactTextLength", {"fieldName", fieldName, "minimumLength", min.ToString()})
+                errorMessage = MessagingService.GetParametrizedMessage(True, "MsgExactTextLength", {"fieldName", fieldName, "minimumLength", min.ToString()})
             End If
             [Error] = errorMessage
         End Sub

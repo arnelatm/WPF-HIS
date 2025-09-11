@@ -8099,6 +8099,6 @@
     <value>MainForm</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>AATM.PresentationLayer.Forms.BfMain, Forms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Presentation.Forms.BfMain, Forms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

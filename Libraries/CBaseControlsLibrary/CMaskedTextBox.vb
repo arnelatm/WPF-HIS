@@ -3,6 +3,7 @@ Imports System.Drawing
 Imports System.Windows.Forms
 Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.Messaging
 
 Public Class CMaskedTextBox
     Inherits MaskedTextBox
@@ -206,14 +207,14 @@ Public Class CMaskedTextBox
 #Region "Declarations#"
 
     ' Text Menu Captions
-    Private ReadOnly _textFind = MessagingLibrary.Messaging.TranslateCaption("Find on this field")
+    Private ReadOnly _textFind = MessagingService.TranslateCaption("Find on this field")
 
-    Private ReadOnly _textCut = MessagingLibrary.Messaging.TranslateCaption("Cut Selected Text")
-    Private ReadOnly _textCopy = MessagingLibrary.Messaging.TranslateCaption("Copy Selected Text")
-    Private ReadOnly _textPaste = MessagingLibrary.Messaging.TranslateCaption("Paste Text")
-    Private ReadOnly _textUndo = MessagingLibrary.Messaging.TranslateCaption("Undo Last Action")
-    Private ReadOnly _textDelete = MessagingLibrary.Messaging.TranslateCaption("Delete Selected Text")
-    Private ReadOnly _textSelectAll = MessagingLibrary.Messaging.TranslateCaption("Select All Text")
+    Private ReadOnly _textCut = MessagingService.TranslateCaption("Cut Selected Text")
+    Private ReadOnly _textCopy = MessagingService.TranslateCaption("Copy Selected Text")
+    Private ReadOnly _textPaste = MessagingService.TranslateCaption("Paste Text")
+    Private ReadOnly _textUndo = MessagingService.TranslateCaption("Undo Last Action")
+    Private ReadOnly _textDelete = MessagingService.TranslateCaption("Delete Selected Text")
+    Private ReadOnly _textSelectAll = MessagingService.TranslateCaption("Select All Text")
 
 #End Region
 

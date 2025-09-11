@@ -1,12 +1,9 @@
-﻿Imports AATM.Libraries
-Imports AATM.Libraries.CBaseControlsLibrary
+﻿Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Events
-Imports AATM.PresentationLayer.Models
-Imports AATM.PresentationLayer.Views
-Imports AATM.PresentationLayer.Views.Interfaces
+Imports AATM.Libraries.Messaging
+Imports AATM.Presentation.Models
 Imports AATM.ServicesLayer.Services
+Imports AATM.Presentation.Views.Interfaces
 
 Public Class SecurityGroupPresenter(Of TM As New)
     Inherits Presenter(Of ISecurityGroupView, TM)
@@ -89,7 +86,7 @@ Public Class SecurityGroupPresenter(Of TM As New)
         Dim retValue = False
         If MyBase.IsBizDataValid() Then
             If EditMode And View.ParentIdNo = View.IdNo Then
-                Messaging.Show(True, "MsgMemberCannotBeAParentToItself")
+                MessagingService.Show(True, "MsgMemberCannotBeAParentToItself")
             Else
                 retValue = True
             End If

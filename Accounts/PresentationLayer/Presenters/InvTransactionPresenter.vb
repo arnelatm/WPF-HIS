@@ -11,9 +11,9 @@ Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries
 Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Events
-Imports AATM.PresentationLayer.Views
+Imports AATM.Libraries.Messaging
+Imports AATM.Presentation.Events
+Imports AATM.Presentation.Views
 
 Namespace PresentationLayer.Presenters
 
@@ -129,12 +129,12 @@ Namespace PresentationLayer.Presenters
                     For Each item In View.InvTransactionDetails
                         If item.NeedsExpiryDate AndAlso (item.ExpiryDate Is Nothing OrElse item.ExpiryDate.Value = Date.MinValue) Then
                             Dim lineNumber = Format(item.Sequence, "0")
-                            Messaging.ShowPmMessage(True, "MsgExpDateNeeded", {"lineNumber", lineNumber})
+                            MessagingService.ShowPmMessage(True, "MsgExpDateNeeded", {"lineNumber", lineNumber})
                             retValue = False
                             Exit For
                         ElseIf item.Quantity < 0 Then
                             Dim lineNumber = Format(item.Sequence, "0")
-                            Messaging.ShowPmMessage(True, "MsgNegativeValNotAllowed", {"fieldName", "Quantity", "lineNumber", lineNumber})
+                            MessagingService.ShowPmMessage(True, "MsgNegativeValNotAllowed", {"fieldName", "Quantity", "lineNumber", lineNumber})
                             retValue = False
                             Exit For
                         End If
@@ -145,10 +145,10 @@ Namespace PresentationLayer.Presenters
                         View.InventoryAction = EnumToCode(InventoryActionSelection.Request) Then
                         If View.WarehouseToIdNo Is Nothing OrElse View.WarehouseToIdNo = 0 OrElse View.WarehouseIdNo = 0 Then
                             retValue = False
-                            Messaging.Show(True, "MsgWareHouseToBlank")
+                            MessagingService.Show(True, "MsgWareHouseToBlank")
                         ElseIf View.WarehouseIdNo = View.WarehouseToIdNo Then
                             retValue = False
-                            Messaging.Show(True, "MsgSameSourceNTargetWH")
+                            MessagingService.Show(True, "MsgSameSourceNTargetWH")
                         End If
                     End If
                 End If
@@ -181,7 +181,7 @@ Namespace PresentationLayer.Presenters
         Public Overrides Sub GoPrintRecord()
             Dim cr As New CrPrintableArgs
             Dim pr As New PrintReportPresenter(Of InvTransactionModel)
-            Dim title As String = Messaging.TranslateCaption("Inventory Transaction")
+            Dim title As String = MessagingService.TranslateCaption("Inventory Transaction")
             cr.ReportFileName = "Inventory Transaction.Rpt"
             cr.Language = CultureInfo.CurrentCulture.Name
             cr.ReportParameters = {cr.Language, "Language", title, "ReportTitle", View.IdNo, "InvTransactionIdNo"}
@@ -327,7 +327,7 @@ Namespace PresentationLayer.Presenters
                             .InventoryIdNo = inventory(0).IdNo
                         Else
                             If View.InventoryAction = EnumToCode(InventoryActionSelection.Deduct) Then
-                                Messaging.Show(True, "MsgNoSuchInventory", "Error")
+                                MessagingService.Show(True, "MsgNoSuchInventory", "Error")
                             End If
                             'If View.InvTransTypeIdNo Then
                             'End If
@@ -337,7 +337,7 @@ Namespace PresentationLayer.Presenters
             Else
                 bs.Current.ProductIdNo = ""
                 bs.Current.ProductName = ""
-                Messaging.Show(True, "Invalid Product Code!")
+                MessagingService.Show(True, "Invalid Product Code!")
             End If
         End Sub
 
@@ -414,11 +414,11 @@ Namespace PresentationLayer.Presenters
                     View.ProductInInventory = False
                     If View.InventoryAction = EnumToCode(InventoryActionSelection.Deduct) Or
                        View.InventoryAction = EnumToCode(InventoryActionSelection.Transfer) Then
-                        Dim errorText = Messaging.GetMessage(True, "MsgNoSuchInventory")
+                        Dim errorText = MessagingService.GetMessage(True, "MsgNoSuchInventory")
                         View.ValidationErrorText = errorText
                         entryIsValid = False
                         itemCodeOkButNotInInventory = True
-                        Messaging.Show(True, "MsgNoSuchInventory")
+                        MessagingService.Show(True, "MsgNoSuchInventory")
                     Else
                         UpdateIdNameUnit(product)
                         View.InvTransactionDetailsBs.Current.InventoryIdNo = 0
@@ -442,12 +442,12 @@ Namespace PresentationLayer.Presenters
         Private Sub ShowInvalidMessage(value As String, fromProductCode As Boolean)
             Dim errorText As String
             If fromProductCode Then
-                errorText = Messaging.GetParametrizedMessage(True, "MsgInvalidValue", {"fieldValue", value, "fieldDescription", "Product Code"})
+                errorText = MessagingService.GetParametrizedMessage(True, "MsgInvalidValue", {"fieldValue", value, "fieldDescription", "Product Code"})
             Else
-                errorText = Messaging.GetParametrizedMessage(True, "MsgInvalidValue", {"fieldValue", value, "fieldDescription", "Product Name"})
+                errorText = MessagingService.GetParametrizedMessage(True, "MsgInvalidValue", {"fieldValue", value, "fieldDescription", "Product Name"})
             End If
             View.ValidationErrorText = errorText
-            Messaging.Show(errorText)
+            MessagingService.Show(errorText)
         End Sub
 
         Private Sub UpdateIdNameUnit(product As ProductModel)
@@ -563,7 +563,7 @@ Namespace PresentationLayer.Presenters
                 View.ProductInInventory = False
                 If View.InventoryAction = EnumToCode(InventoryActionSelection.Deduct) Or
                    View.InventoryAction = EnumToCode(InventoryActionSelection.Transfer) Then
-                    Messaging.Show(True, "MsgNoSuchInventory", "Error")
+                    MessagingService.Show(True, "MsgNoSuchInventory", "Error")
                     retVal = False
                 Else
                     'UpdInvTransDetailFromInventory(inventory, 0)
@@ -726,7 +726,7 @@ Namespace PresentationLayer.Presenters
 
         'Private Sub OnUnitChanged(oldUnit As Int16, newUnit As Int16, bs As BindingSource, formattedValue As String)
         '    If newUnit = 0 Then
-        '        Messaging.ShowPmMessage(True, "MsgInvalidValue", {"fieldValue", formattedValue, "fieldDescription", "Unit"})
+        '        MessagingService.ShowPmMessage(True, "MsgInvalidValue", {"fieldValue", formattedValue, "fieldDescription", "Unit"})
         '    Else
         '        RecomputePrice(oldUnit, newUnit, bs)
         '    End If
@@ -812,10 +812,10 @@ Namespace PresentationLayer.Presenters
         Private Sub OnPostData(idNo As Int32)
             Dim okToPost As Boolean = False
             If View.InventoryAction = EnumToCode(InventoryActionSelection.Request) Then
-                Messaging.Show(True, "MsgNonPostableEntry")
+                MessagingService.Show(True, "MsgNonPostableEntry")
             Else
                 If EditMode Or AddMode Then
-                    Messaging.Show(True, "MsgCannotPostUnsaved")
+                    MessagingService.Show(True, "MsgCannotPostUnsaved")
                 ElseIf View.InventoryAction = EnumToCode(InventoryActionSelection.Add) Or View.InventoryAction = EnumToCode(InventoryActionSelection.Deduct) Or View.InventoryAction = EnumToCode(InventoryActionSelection.Transfer) Then
                     If UserHasAccess("InventoryManager") Then
                         okToPost = True
@@ -828,18 +828,18 @@ Namespace PresentationLayer.Presenters
                     End If
                 End If
                 If okToPost Then
-                    Dim caption = Messaging.TranslateCaption("Please confirm.")
-                    Dim action As String = Messaging.TranslateCaption("post")
-                    Dim itemName As String = Messaging.TranslateCaption("InvTransaction transaction")
-                    Dim msg = Messaging.GetParametrizedMessage(True, "AskIfContinueAction", {"action", action, "itemName", itemName})
-                    If Messaging.Show(msg, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+                    Dim caption = MessagingService.TranslateCaption("Please confirm.")
+                    Dim action As String = MessagingService.TranslateCaption("post")
+                    Dim itemName As String = MessagingService.TranslateCaption("InvTransaction transaction")
+                    Dim msg = MessagingService.GetParametrizedMessage(True, "AskIfContinueAction", {"action", action, "itemName", itemName})
+                    If MessagingService.Show(msg, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
                         Service.PostData(idNo)
                         View.Posted = True
                         UpdateViewData(View.IdNo)
                         UpdateViewDisplay()
                     End If
                 Else
-                    Messaging.Show(True, "MsgNoPostOnWHouse")
+                    MessagingService.Show(True, "MsgNoPostOnWHouse")
                 End If
             End If
         End Sub
@@ -875,7 +875,7 @@ Namespace PresentationLayer.Presenters
         '                            retVal = True
         '                        Else
         '                            If View.InventoryAction = EnumToCode(InventoryActionSelection.Deduct) Then
-        '                                Messaging.Show(True, "MsgNoSuchInventory", "Error")
+        '                                MessagingService.Show(True, "MsgNoSuchInventory", "Error")
         '                            End If
         '                            If View.InvTransTypeIdNo Then
         '                            End If
@@ -884,7 +884,7 @@ Namespace PresentationLayer.Presenters
         '                Else
         '                    bs.Current.ProductIdNo = ""
         '                    bs.Current.ProductName = ""
-        '                    Messaging.Show(True, "Invalid Product Code!")
+        '                    MessagingService.Show(True, "Invalid Product Code!")
         '                End If
         '            Case Else
         '                ' nothing to do

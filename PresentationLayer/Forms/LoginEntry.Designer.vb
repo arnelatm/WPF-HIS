@@ -60,7 +60,7 @@ Partial Class LoginEntry
         'PictureBox1
         '
         Me.PictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.PictureBox1.Image = Global.AATM.PresentationLayer.Forms.My.Resources.Resources.Logo
+        Me.PictureBox1.Image = Global.AATM.Presentation.Forms.My.Resources.Resources.Logo
         Me.PictureBox1.Location = New System.Drawing.Point(116, 12)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(200, 150)

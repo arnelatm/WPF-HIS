@@ -2,10 +2,10 @@
 Imports System.Windows.Forms
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Models
-Imports AATM.PresentationLayer.Presenters
-Imports AATM.PresentationLayer.Views.Interfaces
+Imports AATM.Libraries.Messaging
+Imports AATM.Presentation.Models
+Imports AATM.Presentation.Presenters
+Imports AATM.Presentation.Views.Interfaces
 
 Public Class LoginEntry
     Implements IUserView
@@ -69,7 +69,7 @@ Public Class LoginEntry
             lblConfirmation.Visible = True
             textNewPassword.DisplayOnly = False
             textConfirmation.DisplayOnly = False
-            btn_Login.Text = Messaging.TranslateCaption("Save")
+            btn_Login.Text = MessagingService.TranslateCaption("Save")
             textNewPassword.Text = "" 'Space(20)
             textConfirmation.Text = "" 'Space(20)
             textBoxPassword.Text = "" 'Space(20)
@@ -151,7 +151,7 @@ Public Class LoginEntry
                     End If
                 End If
             Else
-                Messaging.Show(True, "MsgInvalidUserNameOrPassword")
+                MessagingService.Show(True, "MsgInvalidUserNameOrPassword")
                 _cancelClose = True
                 _loginOk = False
             End If

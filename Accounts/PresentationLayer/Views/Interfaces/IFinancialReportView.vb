@@ -1,4 +1,4 @@
-﻿Imports AATM.PresentationLayer.Views
+﻿Imports AATM.Presentation.Views
 
 Public Interface IFinancialReportView
     Inherits IView

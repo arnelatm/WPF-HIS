@@ -6,8 +6,8 @@ Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Events
+Imports AATM.Libraries.Messaging
+Imports AATM.Presentation.Events
 
 Namespace PresentationLayer.Presenters
 
@@ -228,22 +228,22 @@ Namespace PresentationLayer.Presenters
                         End If
                         If item.AccountIdNo Is Nothing Or item.AccountIdNo = 0 AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
                             Dim lineNumber As String = item.Sequence.ToString()
-                            Messaging.ShowPmMessage(True, "MsgBlankAccountIdNotAllowed", {"lineNumber", lineNumber})
+                            MessagingService.ShowPmMessage(True, "MsgBlankAccountIdNotAllowed", {"lineNumber", lineNumber})
                             retValue = False
                             Exit For
                         ElseIf item.SpecialAccount IsNot Nothing AndAlso cashAccount.Contains(item.SpecialAccount) Then
                             Dim lineNumber As String = item.Sequence.ToString()
-                            Messaging.ShowPmMessage(True, "MsgCashAccountsNotAllowed", {"lineNumber", lineNumber})
+                            MessagingService.ShowPmMessage(True, "MsgCashAccountsNotAllowed", {"lineNumber", lineNumber})
                             retValue = False
                         ElseIf item.SpecialAccount IsNot Nothing AndAlso invalidAccounts.Contains(item.SpecialAccount) Then
                             Dim lineNumber = Format(item.Sequence, "0")
-                            Dim entryNames = Messaging.TranslateCaption("Accounts Payables/Employee Loans")
-                            Messaging.ShowPmMessage(True, "MsgAccountsNotAllowed", {"lineNumber", lineNumber, "entryNames", entryNames})
+                            Dim entryNames = MessagingService.TranslateCaption("Accounts Payables/Employee Loans")
+                            MessagingService.ShowPmMessage(True, "MsgAccountsNotAllowed", {"lineNumber", lineNumber, "entryNames", entryNames})
                             retValue = False
                         End If
                     Next
                     If nTotalAr <> View.Amount Then
-                        Messaging.Show(True, "MsgTotalArMismatch")
+                        MessagingService.Show(True, "MsgTotalArMismatch")
                         retValue = False
                     End If
                 End If

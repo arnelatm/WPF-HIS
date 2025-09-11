@@ -3,7 +3,7 @@ Imports System.Runtime.Serialization.Formatters.Binary
 Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 
 Namespace PresentationLayer.Views.Forms
 
@@ -200,7 +200,7 @@ Namespace PresentationLayer.Views.Forms
             Dim transKey As Int32 = dgvRow.Cells("dgvTransKey").Value
             RaiseEvent RowChanged(transKey)
             bsPrescriptionDetails.ResetBindings(False)
-            CGroupBox1.Text = Messaging.TranslateCaption("Prescription for ") + dgvRow.Cells("dgvFileNo").Value + "-" + dgvRow.Cells("dgvPatientName").Value
+            CGroupBox1.Text = MessagingService.TranslateCaption("Prescription for ") + dgvRow.Cells("dgvFileNo").Value + "-" + dgvRow.Cells("dgvPatientName").Value
         End Sub
 
         Private Sub btnSelectAll_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnSelectAll.ClickButtonArea

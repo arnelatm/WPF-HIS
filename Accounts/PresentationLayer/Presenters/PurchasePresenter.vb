@@ -9,8 +9,8 @@ Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries
 Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Events
+Imports AATM.Libraries.Messaging
+Imports AATM.Presentation.Events
 
 Namespace PresentationLayer.Presenters
 
@@ -193,7 +193,7 @@ Namespace PresentationLayer.Presenters
                     For Each item In View.PurchaseDetails
                         If item.NeedsExpiryDate AndAlso (item.ExpiryDate Is Nothing OrElse item.ExpiryDate.Value = Date.MinValue) Then
                             Dim lineNumber = Format(item.Sequence, "0")
-                            Messaging.ShowPmMessage(True, "MsgExpDateNeeded", {"lineNumber", lineNumber})
+                            MessagingService.ShowPmMessage(True, "MsgExpDateNeeded", {"lineNumber", lineNumber})
                             retValue = False
                             Exit For
                         End If
@@ -210,12 +210,12 @@ Namespace PresentationLayer.Presenters
             Dim pr As New PrintReportPresenter(Of InvTransactionModel)
             Dim title As String
             If PurchaseOrder Then
-                title = Messaging.TranslateCaption("Purchase Order Report")
+                title = MessagingService.TranslateCaption("Purchase Order Report")
                 cr.ReportFileName = "Purchase Order Report.Rpt"
                 cr.Language = CultureInfo.CurrentCulture.Name
                 cr.ReportParameters = {cr.Language, "Language", title, "ReportTitle", View.IdNo, "PurchaseOrderIdNo"}
             Else
-                title = Messaging.TranslateCaption("Purchase Report")
+                title = MessagingService.TranslateCaption("Purchase Report")
                 cr.ReportFileName = "Purchase Report.Rpt"
                 cr.Language = CultureInfo.CurrentCulture.Name
                 cr.ReportParameters = {cr.Language, "Language", title, "ReportTitle", View.IdNo, "PurchaseIdNo"}
@@ -324,7 +324,7 @@ Namespace PresentationLayer.Presenters
             Else
                 bs.Current.ProductIdNo = ""
                 bs.Current.ProductName = ""
-                Messaging.Show(True, "Invalid Product Code!")
+                MessagingService.Show(True, "Invalid Product Code!")
             End If
         End Sub
 
@@ -557,7 +557,7 @@ Namespace PresentationLayer.Presenters
 
         Private Sub OnUnitChanged(oldUnit As Int16, newUnit As Int16, bs As BindingSource, formattedValue As String)
             If newUnit = 0 Then
-                Messaging.ShowPmMessage(True, "MsgInvalidValue", {"fieldValue", formattedValue, "fieldDescription", "Unit"})
+                MessagingService.ShowPmMessage(True, "MsgInvalidValue", {"fieldValue", formattedValue, "fieldDescription", "Unit"})
             Else
                 RecomputePrice(oldUnit, newUnit, bs)
             End If
@@ -665,7 +665,7 @@ Namespace PresentationLayer.Presenters
             If UserIsASuperAdministrator() Then
                 okToPost = True
             ElseIf EditMode Or AddMode Then
-                Messaging.Show(True, "MsgCannotPostUnsaved")
+                MessagingService.Show(True, "MsgCannotPostUnsaved")
             ElseIf View.WarehouseIdNo = _defaultUserWarehouseIdNo Then
                 ' you can post if your default warehouseid is the same as the current warehouseidno
                 okToPost = True

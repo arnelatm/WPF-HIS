@@ -3,7 +3,7 @@ Imports System.Text
 Imports System.Windows.Forms
 Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 Imports AATM.ServicesLayer.Services
 
 Namespace Services
@@ -155,10 +155,10 @@ Namespace Services
             Dim ePassword As String
             ePassword = EncryptPassword(userIdNo, password)
             If Service.GenericUpdateRecordWithIdNo(Of String)(userIdNo, "User", "Password", ePassword) Then
-                Messaging.Show(True, "MsgPasswordSaved", "Password saved")
+                MessagingService.Show(True, "MsgPasswordSaved", "Password saved")
                 retVal = True
             Else
-                Messaging.Show(True, "MsgPasswordNotSaved", "Password not saved")
+                MessagingService.Show(True, "MsgPasswordNotSaved", "Password not saved")
                 retVal = False
             End If
             Return retVal

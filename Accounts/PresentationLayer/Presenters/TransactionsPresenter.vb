@@ -1,8 +1,8 @@
 ﻿Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Events
-Imports AATM.PresentationLayer.Views
+Imports AATM.Libraries.Messaging
+Imports AATM.Presentation.Events
+Imports AATM.Presentation.Views
 
 Namespace PresentationLayer.Presenters
 
@@ -22,8 +22,8 @@ Namespace PresentationLayer.Presenters
                     Dim cPosted = CallByName(View, "Posted", CallType.Get)
                     If cPosted Then
                         Dim description As String = ""
-                        description = Messaging.TranslateCaption("Posted")
-                        Messaging.ShowPmMessage(True, "MsgDeleteEntryNotAllowed", {"description", description})
+                        description = MessagingService.TranslateCaption("Posted")
+                        MessagingService.ShowPmMessage(True, "MsgDeleteEntryNotAllowed", {"description", description})
                         retVal = False
                     End If
                 End If
@@ -41,14 +41,14 @@ Namespace PresentationLayer.Presenters
                 If type.GetProperty("Posted") IsNot Nothing Then
                     Dim cPosted = CallByName(View, "Posted", CallType.Get)
                     If cPosted Then
-                        Messaging.Show(True, "MsgChangePostedRecordNotAllowed")
+                        MessagingService.Show(True, "MsgChangePostedRecordNotAllowed")
                         retVal = False
                     End If
                 End If
                 If retVal AndAlso type.GetProperty("TransactionDate") IsNot Nothing Then
                     Dim cTransactionDate = CallByName(View, "TransactionDate", CallType.Get)
                     If cTransactionDate <= closedTransactionDate Then
-                        Messaging.Show(True, "MsgChangeClosedTransaction")
+                        MessagingService.Show(True, "MsgChangeClosedTransaction")
                         retVal = False
                     End If
                 End If
@@ -68,7 +68,7 @@ Namespace PresentationLayer.Presenters
                         If isEditable Then
                             ' user has editing options for approved transactions
                         Else
-                            Messaging.Show(True, "MsgChangeApprovedTransaction")
+                            MessagingService.Show(True, "MsgChangeApprovedTransaction")
                             retVal = False
                         End If
                     End If
@@ -90,14 +90,14 @@ Namespace PresentationLayer.Presenters
             '    If type.GetProperty("Posted") IsNot Nothing Then
             '        Dim cPosted = CallByName(View, "Posted", CallType.Get)
             '        If cPosted Then
-            '            Messaging.Show(True, "MsgChangePostedRecordNotAllowed")
+            '            MessagingService.Show(True, "MsgChangePostedRecordNotAllowed")
             '            retVal = False
             '        End If
             '    End If
             '    If retVal AndAlso type.GetProperty("TransactionDate") IsNot Nothing Then
             '        Dim cTransactionDate = CallByName(View, "TransactionDate", CallType.Get)
             '        If cTransactionDate <= closedTransactionDate Then
-            '            Messaging.Show(True, "MsgChangeClosedTransaction")
+            '            MessagingService.Show(True, "MsgChangeClosedTransaction")
             '            retVal = False
             '        End If
             '    End If
@@ -117,7 +117,7 @@ Namespace PresentationLayer.Presenters
             '            If isEditable Then
             '                ' user has editing options for approved transactions
             '            Else
-            '                Messaging.Show(True, "MsgChangeApprovedTransaction")
+            '                MessagingService.Show(True, "MsgChangeApprovedTransaction")
             '                retVal = False
             '            End If
             '        End If
@@ -133,7 +133,7 @@ Namespace PresentationLayer.Presenters
             If type.GetProperty("TransactionDate") IsNot Nothing Then
                 Dim cTransactionDate = CallByName(View, "TransactionDate", CallType.Get)
                 If cTransactionDate <= closedTransactionDate Then
-                    Messaging.Show(True, "MsgTransactionDateClosed")
+                    MessagingService.Show(True, "MsgTransactionDateClosed")
                     eventType.Validated = False
                 End If
             End If
@@ -158,7 +158,7 @@ Namespace PresentationLayer.Presenters
                 If type.GetProperty("TransactionDate") IsNot Nothing Then
                     Dim cTransactionDate = CallByName(View, "TransactionDate", CallType.Get)
                     If cTransactionDate <= closedTransactionDate Then
-                        Messaging.Show(True, "MsgChangeClosedTransaction")
+                        MessagingService.Show(True, "MsgChangeClosedTransaction")
                         CancelSave = True
                     End If
                 End If

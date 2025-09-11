@@ -1,4 +1,4 @@
-﻿Imports AATM.Libraries.MessagingLibrary
+﻿Imports AATM.Libraries.Messaging
 
 Namespace BusinessRules
     ' base class for regex based validation rules.
@@ -11,7 +11,7 @@ Namespace BusinessRules
         Public Sub New(propertyName As String)
             MyBase.New(propertyName, VatPattern)
             Pattern = VatPattern
-            [Error] = Messaging.GetMessage(True, "MsgInvalidVatNumber")
+            [Error] = MessagingService.GetMessage(True, "MsgInvalidVatNumber")
         End Sub
 
         Public Sub New(propertyName As String, errorMessage As String)

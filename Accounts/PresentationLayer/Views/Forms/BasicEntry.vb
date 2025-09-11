@@ -1,6 +1,6 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 
 Namespace PresentationLayer.Views.Forms
 
@@ -17,7 +17,7 @@ Namespace PresentationLayer.Views.Forms
             Else
                 FirstControl = TxtName
             End If
-            Me.Text = Messaging.TranslateCaption(formCaption)
+            Me.Text = MessagingService.TranslateCaption(formCaption)
             If Accounts.AccountHelpers.BasicWithNotes(tableOrViewName) Then
                 TxtNote.Visible = True
                 lblNote.Visible = True

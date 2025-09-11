@@ -6,9 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{51DA927A-505F-49CF-9768-9E401219B91C}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>
-    </RootNamespace>
-    <AssemblyName>AATM.Platform.Presentation.Forms</AssemblyName>
+    <RootNamespace>AATM.Presentation.Forms</RootNamespace>
+    <AssemblyName>AATM.Presentation.Forms</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -179,14 +178,8 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BFMain.Compat.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="BFMain.designer.vb">
       <DependentUpon>BFMain.vb</DependentUpon>
-    </Compile>
-    <Compile Include="BFMain.ErrorProvider.vb">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="BFMain.vb">
       <SubType>Form</SubType>
@@ -263,6 +256,7 @@
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>

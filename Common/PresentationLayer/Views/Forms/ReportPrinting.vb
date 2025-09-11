@@ -1,8 +1,8 @@
 ﻿Imports System.Globalization
 Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Presenters
+Imports AATM.Libraries.Messaging
+Imports AATM.Presentation.Presenters
 Imports CrystalDecisions.ReportAppServer.Controllers
 
 Namespace PresentationLayer.Views.Forms.Reports

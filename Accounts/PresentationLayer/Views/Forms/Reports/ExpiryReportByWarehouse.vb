@@ -2,8 +2,8 @@
 Imports AATM.Common
 Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Events
+Imports AATM.Libraries.Messaging
+Imports AATM.Presentation.Events
 
 Namespace PresentationLayer.Views.Forms.Reports
 
@@ -30,11 +30,11 @@ Namespace PresentationLayer.Views.Forms.Reports
 
         Private Sub btnOk_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
             If dtpExpiryDate.Value Is Nothing Then
-                Messaging.Show(True, "MsgDateCannotBeBlank")
+                MessagingService.Show(True, "MsgDateCannotBeBlank")
             Else
                 Dim reportArgs As New CrPrintableArgs
                 Dim reportParameters As New Object
-                Dim reportTitle As String = Messaging.TranslateCaption("Expiry Report by Warehouse")
+                Dim reportTitle As String = MessagingService.TranslateCaption("Expiry Report by Warehouse")
                 reportArgs.ReportParameters = {CultureInfo.CurrentCulture.Name, "Language",
                                                reportTitle, "ReportTitle",
                                                cboWarehouseIdNo.SelectedItem.IdNo, "WarehouseIdNo",

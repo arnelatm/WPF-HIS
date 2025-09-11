@@ -1,6 +1,6 @@
 ﻿Imports System.Globalization
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 
 Namespace BusinessRules
     ' validates a range (min and max) for a given data type
@@ -16,7 +16,7 @@ Namespace BusinessRules
 
         Public Sub New(propertyName As String, min As Object, max As Object, dataType As ValidationDataType)
             MyBase.New(propertyName)
-            Dim fieldName = Messaging.TranslateCaption(propertyName.SplitCamelCase)
+            Dim fieldName = MessagingService.TranslateCaption(propertyName.SplitCamelCase)
             Dim minFieldValue As String = min.ToString()
             Dim maxFieldValue As String = max.ToString()
             If TypeOf min Is DateTime Or TypeOf max Is DateTime Then
@@ -26,7 +26,7 @@ Namespace BusinessRules
                 minFieldValue = min.ToString()
                 maxFieldValue = max.ToString()
             End If
-            Dim errorMessage = Messaging.GetParametrizedMessage(True, "MsgInvalidRange", {"fieldName", fieldName, "minimumValue", minFieldValue, "maximumValue", maxFieldValue})
+            Dim errorMessage = MessagingService.GetParametrizedMessage(True, "MsgInvalidRange", {"fieldName", fieldName, "minimumValue", minFieldValue, "maximumValue", maxFieldValue})
             Me.Min = min
             Me.Max = max
             Me.Operator = [Operator]

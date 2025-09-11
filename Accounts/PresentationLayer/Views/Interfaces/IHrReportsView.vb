@@ -1,5 +1,5 @@
 ﻿
-Imports AATM.PresentationLayer.Views
+Imports AATM.Presentation.Views
 
 
 Public Interface IHrReportsView

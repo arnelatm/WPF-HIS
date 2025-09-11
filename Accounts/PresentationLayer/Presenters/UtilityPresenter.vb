@@ -28,9 +28,9 @@ Namespace PresentationLayer.Presenters
             If utilityObject.StoredProcedure Then
                 retVal = Service.RunSpWithRollBack("sp" & utilityName, parameters)
                 If retVal >= 0 Then
-                    AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgRecordSuccessfullyUpdated")
+                    AATM.Libraries.Messaging.MessagingService.Show(True, "MsgRecordSuccessfullyUpdated")
                 Else
-                    AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgRecordUpdateFail")
+                    AATM.Libraries.Messaging.MessagingService.Show(True, "MsgRecordUpdateFail")
                 End If
             End If
             Return retVal

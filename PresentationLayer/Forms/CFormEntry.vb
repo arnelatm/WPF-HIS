@@ -10,9 +10,9 @@ Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.Localization
 Imports AATM.Libraries.Localization.Core
 Imports AATM.Libraries.Localization.Services
-Imports AATM.PresentationLayer.Events
-Imports AATM.PresentationLayer.Forms.Services.SystemView
-Imports AATM.PresentationLayer.Presenters
+Imports AATM.Presentation.Events
+Imports AATM.Presentation.Forms.Services.SystemView
+Imports AATM.Presentation.Presenters
 
 Public Class CFormEntry
     Implements IViewDataEntry

@@ -4,7 +4,7 @@ Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.BusinessLayer
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 Imports CrystalDecisions.ReportAppServer.DataDefModel
 
 Namespace PresentationLayer.Presenters
@@ -116,14 +116,14 @@ Namespace PresentationLayer.Presenters
         Private Sub OnBeforeEdit() Handles MyBase.BeforeEdit
             Dim type As Type = View.GetType
             If View.Status <> EnumToCode(LeaveStatusSelection.Submitted) Then
-                Messaging.Show(True, "MsgLeaveAlreadyActed", {"approvalAction", CodeToEnum(Of LeaveStatusSelection)(View.Status).ToString()})
+                MessagingService.Show(True, "MsgLeaveAlreadyActed", {"approvalAction", CodeToEnum(Of LeaveStatusSelection)(View.Status).ToString()})
                 CancelEdit = True
             ElseIf View.EnteredBy = GlobalVariables.UserIdNo Then
 
             ElseIf Not (View.UserHasHrAccess OrElse _userHasHrManagerAccess OrElse View.UserIsASuperAdministrator) Then
-                Dim securityKeyMessage = Messaging.TranslateCaption("HumanResources")
-                Dim message = Messaging.GetParametrizedMessage(True, "MsgNoAccessToSecurity", {"securityKey", securityKeyMessage})
-                Messaging.Show(message)
+                Dim securityKeyMessage = MessagingService.TranslateCaption("HumanResources")
+                Dim message = MessagingService.GetParametrizedMessage(True, "MsgNoAccessToSecurity", {"securityKey", securityKeyMessage})
+                MessagingService.Show(message)
                 CancelEdit = True
             End If
         End Sub
@@ -215,7 +215,7 @@ Namespace PresentationLayer.Presenters
             '        ElseIf noOfDaysApplied > leaveModel.LeaveAllowed Then
             '            retValue = False
             '            Dim leaveName As String = If(Messaging.IsArabic, leaveModel.LeaveNameAra, leaveModel.LeaveName)
-            '            Messaging.ShowPmMessage(True, "MsgApplLvExceedAllowLv", {"leaveName", leaveName,
+            '            MessagingService.ShowPmMessage(True, "MsgApplLvExceedAllowLv", {"leaveName", leaveName,
             '                                                                     "noOfDaysApplied", Format(noOfDaysApplied, "0"),
             '                                                                     "noOfDaysAllowed", Format(leaveModel.LeaveAllowed, "0")})
             '        ElseIf leaveModel.LeaveType = LeaveTypeSelection.OnceOnly Then
@@ -313,7 +313,7 @@ Namespace PresentationLayer.Presenters
                 Dim leaveIdNo As Int16 = Format(records(0).IdNo, "0")
                 If Not (records Is Nothing OrElse records.Count = 0) Then
                     retValue = False
-                    Messaging.ShowPmMessage(True, "MsgOneTimeLeaveOnly", {"leaveName", leaveName, "leaveNumber", Format(records(0).IdNo, "0")})
+                    MessagingService.ShowPmMessage(True, "MsgOneTimeLeaveOnly", {"leaveName", leaveName, "leaveNumber", Format(records(0).IdNo, "0")})
                 End If
             End If
             Return retValue
@@ -326,7 +326,7 @@ Namespace PresentationLayer.Presenters
             Dim noOfDaysApplied As Long = DateDiff(DateInterval.Day, CDate(View.StartDate), CDate(View.EndDate)) + 1
             If noOfDaysApplied > leaveModel.LeaveAllowed Then
                 retVal = False
-                Messaging.ShowPmMessage(True, "MsgApplLvExceedAllowLv", {"leaveName", leaveName,
+                MessagingService.ShowPmMessage(True, "MsgApplLvExceedAllowLv", {"leaveName", leaveName,
                                                                      "noOfDaysApplied", Format(noOfDaysApplied, "0"),
                                                                      "noOfDaysAllowed", Format(leaveModel.LeaveAllowed, "0")})
             End If
@@ -430,7 +430,7 @@ Namespace PresentationLayer.Presenters
             '    Dim leaveName As String
             '    allowedDays = noOfDaysAllowed.ToString("N0")
             '    leaveName = Service.GetFieldWithIdNo(View.LeaveIdNo, "Leave", TranslateFieldName("LeaveName", "Leave"))
-            '    Messaging.ShowPmMessage(True, "MsgNotEnoughLeave", {"noOfDaysApplied", noOfDaysApplied, "allowedDays", allowedDays, "leaveName", leaveName})
+            '    MessagingService.ShowPmMessage(True, "MsgNotEnoughLeave", {"noOfDaysApplied", noOfDaysApplied, "allowedDays", allowedDays, "leaveName", leaveName})
             '    MessageBox.Show($"Sorry, either you have no more leave credits for this type of leave or the number of days applied exceeds the number of allowed leave days of " & noOfDaysAllowed.ToString("N0") + " day(s)")
             '    leaveDaysOk = False
             'End If
@@ -483,18 +483,18 @@ Namespace PresentationLayer.Presenters
                 If noOfDaysRequested > earnedLeaveDays Then
                     retVal = False
                     Dim leaveName As String = GetLeaveName(leaveModel)
-                    Messaging.ShowPmMessage(True, "MsgNotEnoughEarnedLeave", {"leaveName", leaveName, "noOfDaysRequested", noOfDaysRequested.ToString("0"), "earnedLeaveDays", earnedLeaveDays.ToString("0")}, "", "Error")
+                    MessagingService.ShowPmMessage(True, "MsgNotEnoughEarnedLeave", {"leaveName", leaveName, "noOfDaysRequested", noOfDaysRequested.ToString("0"), "earnedLeaveDays", earnedLeaveDays.ToString("0")}, "", "Error")
                 End If
             Else
                 retVal = False
-                Messaging.Show(True, "MsgNoEarnedLeaves", {"leaveName", GetLeaveName(leaveModel)})
+                MessagingService.Show(True, "MsgNoEarnedLeaves", {"leaveName", GetLeaveName(leaveModel)})
             End If
             If retVal Then
                 Dim pendingLeaves As Int32 = GetTotalPendingLeaves(leaveModel, earnedLeaveDays)
                 If pendingLeaves > 0 Then
                     If pendingLeaves + noOfDaysRequested > earnedLeaveDays Then
                         retVal = False
-                        Messaging.ShowPmMessage(True, "MsgLeavePlusPendingExcess", {"noOfDaysRequested", noOfDaysRequested.ToString("0"), "pendingLeaves", pendingLeaves.ToString("0"), "leaveName", GetLeaveName(leaveModel), "earnedLeaveDays", earnedLeaveDays.ToString("0")})
+                        MessagingService.ShowPmMessage(True, "MsgLeavePlusPendingExcess", {"noOfDaysRequested", noOfDaysRequested.ToString("0"), "pendingLeaves", pendingLeaves.ToString("0"), "leaveName", GetLeaveName(leaveModel), "earnedLeaveDays", earnedLeaveDays.ToString("0")})
                     End If
                 End If
             End If
@@ -573,12 +573,12 @@ Namespace PresentationLayer.Presenters
                 End If
             Else
                 If View.StartDate < _hiredDate Then
-                    Messaging.Show(True, "MsgValueMustBeGreaterThanOrEqual", {"fieldName1", "Start Date", "fieldValue1", View.StartDate.ToShortDateString, "fieldName2", "Hire Date", "fieldValue2", CDate(_hiredDate).ToShortDateString()})
+                    MessagingService.Show(True, "MsgValueMustBeGreaterThanOrEqual", {"fieldName1", "Start Date", "fieldValue1", View.StartDate.ToShortDateString, "fieldName2", "Hire Date", "fieldValue2", CDate(_hiredDate).ToShortDateString()})
                     View.StartDate = _hiredDate
                 End If
                 If _releasedDate IsNot Nothing Then
                     If View.EndDate > _releasedDate Then
-                        Messaging.Show(True, "MsgValueMustBeLessThanOrEqual", {"fieldName1", "End Date", "fieldValue1", View.EndDate.ToShortDateString(), "fieldName2", "Released Date", "fieldValue2", CDate(_releasedDate).ToShortDateString()})
+                        MessagingService.Show(True, "MsgValueMustBeLessThanOrEqual", {"fieldName1", "End Date", "fieldValue1", View.EndDate.ToShortDateString(), "fieldName2", "Released Date", "fieldValue2", CDate(_releasedDate).ToShortDateString()})
                         View.EndDate = _releasedDate
                     Else
                         If View.EndDate < _hiredDate Then
@@ -643,7 +643,7 @@ Namespace PresentationLayer.Presenters
             Dim leaveStatus As LeaveStatusSelection = CodeToEnum(Of LeaveStatusSelection)(View.Status)
             If MyBase.IsOkToDeleteRecord() Then
                 If leaveStatus = LeaveStatusSelection.Used OrElse leaveStatus = LeaveStatusSelection.Approved OrElse leaveStatus = LeaveStatusSelection.SupervisorApproved Then
-                    Messaging.Show(True, "MsgApprovedOrUsedLeave")
+                    MessagingService.Show(True, "MsgApprovedOrUsedLeave")
                     retVal = False
                 End If
             End If

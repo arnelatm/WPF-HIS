@@ -7,7 +7,7 @@ Imports AATM.DataLayer
 Imports AATM.Libraries
 Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 
 Namespace Services
     ' implementation of IService interface. It can handle different data providers.
@@ -741,9 +741,9 @@ Namespace Services
         Public Function UsePayGroups()
             Dim retValue = GetRecordFieldWithKey("PYGP", "Setting", "SettingCode", "Value")
             If retValue Is Nothing Then
-                Dim setupName As String = Messaging.TranslateCaption("Use Pay Groups")
+                Dim setupName As String = MessagingService.TranslateCaption("Use Pay Groups")
                 Dim groupSetting As String = "Payroll"
-                Messaging.ShowPmMessage(True, "MsgSettingNotSet", {"setupName", setupName, "groupSetting", groupSetting})
+                MessagingService.ShowPmMessage(True, "MsgSettingNotSet", {"setupName", setupName, "groupSetting", groupSetting})
                 Return Nothing
             End If
             If retValue = "1" Then

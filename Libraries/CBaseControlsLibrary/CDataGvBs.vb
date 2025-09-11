@@ -4,7 +4,7 @@ Imports System.Windows
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.GlobalResources
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 
 Public Class CDataGvBs
     Inherits DataGridView
@@ -125,7 +125,7 @@ Public Class CDataGvBs
     '        dgvInsColumn.Image = Images.InsertRowImage
     '        dgvInsColumn.Width = 30
     '        dgvInsColumn.Name = "dgvInsertColumn"
-    '        dgvInsColumn.HeaderText = Messaging.TranslateCaption("Ins.")
+    '        dgvInsColumn.HeaderText = MessagingService.TranslateCaption("Ins.")
     '        _insertColumnAdded = True
     '        _dgvInsertColumnIndex = dgvInsColumn.Index
     '    End With
@@ -229,7 +229,7 @@ Public Class CDataGvBs
 
     Private Sub CtDataGridView_UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) Handles Me.UserDeletingRow
         If Not EditingMode Then
-            Messaging.Show(True, "MsgRowDelNotAllowedInViewMode")
+            MessagingService.Show(True, "MsgRowDelNotAllowedInViewMode")
             e.Cancel = True
         End If
     End Sub
@@ -257,7 +257,7 @@ Public Class CDataGvBs
     '                '    ReSequenceDgvAfterInsert()
     '                '    CurrentCell = Me(FirstEditableColumn, If(CurrentRow.Index() > 0, CurrentRow.Index() - 1, 0))
     '                'Else
-    '                '    Messaging.Show(True, "MsgFirstRowInsertionNotAllowed")
+    '                '    MessagingService.Show(True, "MsgFirstRowInsertionNotAllowed")
     '                'End If
     '                ''End If
 

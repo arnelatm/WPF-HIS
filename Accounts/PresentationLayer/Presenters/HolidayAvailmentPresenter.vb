@@ -2,7 +2,7 @@
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 
 Namespace PresentationLayer.Presenters
 
@@ -68,7 +68,7 @@ Namespace PresentationLayer.Presenters
         Private Sub OnBeforeEdit() Handles MyBase.BeforeEdit
             Dim type As Type = View.GetType
             If View.Status <> EnumToCode(LeaveStatusSelection.Submitted) Then
-                Messaging.Show(True, "MsgHolidayAvailmentAlreadyActed", {"approvalAction", CodeToEnum(Of LeaveStatusSelection)(View.Status).ToString()})
+                MessagingService.Show(True, "MsgHolidayAvailmentAlreadyActed", {"approvalAction", CodeToEnum(Of LeaveStatusSelection)(View.Status).ToString()})
                 CancelEdit = True
             End If
         End Sub

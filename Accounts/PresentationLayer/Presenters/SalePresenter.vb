@@ -6,8 +6,8 @@ Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Events
+Imports AATM.Libraries.Messaging
+Imports AATM.Presentation.Events
 Imports AATM.ServicesLayer.Services
 
 Namespace PresentationLayer.Presenters
@@ -114,7 +114,7 @@ Namespace PresentationLayer.Presenters
                 For Each item In View.SaleDetails
                     If item.NeedsExpiryDate AndAlso (item.ExpiryDate Is Nothing OrElse item.ExpiryDate.Value = Date.MinValue) Then
                         Dim lineNumber = Format(item.Sequence, "0")
-                        Messaging.ShowPmMessage(True, "MsgExpDateNeeded", {"lineNumber", lineNumber})
+                        MessagingService.ShowPmMessage(True, "MsgExpDateNeeded", {"lineNumber", lineNumber})
                         retValue = False
                         Exit For
                     End If
@@ -287,7 +287,7 @@ Namespace PresentationLayer.Presenters
             Else
                 SaleDetail.ProductIdNo = ""
                 SaleDetail.ProductName = ""
-                Messaging.Show(True, "Invalid Product Code!")
+                MessagingService.Show(True, "Invalid Product Code!")
             End If
         End Sub
 

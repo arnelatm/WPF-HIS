@@ -4,7 +4,7 @@ Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 
 Namespace PresentationLayer.Views.Forms
 
@@ -276,7 +276,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub cboCalculationType_ValueChanged(sender As Object, e As EventArgs) Handles cboCalculationType.SelectionChangeCommitted, cboCalculationType.Validated
             If cboCalculationType.Focused Then
                 If IsCalcTypeItemDisabled(cboCalculationType.SelectedIndex) Then
-                    Messaging.ShowPmMessage(True, "MsgSelectedValueNotAllowed", {cboPayElementType.LinkedLabel.Text, "field1", cboCalculationType.LinkedLabel.Text, "field2"})
+                    MessagingService.ShowPmMessage(True, "MsgSelectedValueNotAllowed", {cboPayElementType.LinkedLabel.Text, "field1", cboCalculationType.LinkedLabel.Text, "field2"})
                     cboCalculationType.SelectedValue = -1
                 ElseIf cboCalculationType.SelectedValue = EnumToCode(CalculationTypeSelection.FixedAmount) Then
                     QuantityType = EnumToCode(QuantityTypeSelection.NotNeeded)
@@ -310,7 +310,7 @@ Namespace PresentationLayer.Views.Forms
             If cboCalculationType.Focused Then
                 If IsQtyTypeItemDisabled(cboCalculationType.SelectedIndex) Then
                     Dim description As String = DirectCast(cboCalculationType, ILinkedLabel).GetControlDescription()
-                    Messaging.ShowPmMessage(True, "MsgSelectedValueNotAllowed",
+                    MessagingService.ShowPmMessage(True, "MsgSelectedValueNotAllowed",
                                                       {DirectCast(cboCalculationType, ILinkedLabel).GetControlDescription(), "field1",
                                                        DirectCast(cboQuantityType, ILinkedLabel).GetControlDescription(), "field2"})
                     cboCalculationType.SelectedValue = -1
@@ -452,8 +452,8 @@ Namespace PresentationLayer.Views.Forms
             Select Case curCalculationType
                 Case CalculationTypeSelection.FixedAmount
                     lblSlash.Visible = True
-                    lblRate.Text = Messaging.TranslateCaption("Default Amount / Unit")
-                    lblSlash.Text = Messaging.TranslateCaption("/")
+                    lblRate.Text = MessagingService.TranslateCaption("Default Amount / Unit")
+                    lblSlash.Text = MessagingService.TranslateCaption("/")
                     cboPayElementType.Visible = True
                     cboUnit.Visible = True
                     lblRate.Visible = True
@@ -471,8 +471,8 @@ Namespace PresentationLayer.Views.Forms
                     tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
                 Case CalculationTypeSelection.FixedRate
                     lblSlash.Visible = True
-                    lblRate.Text = Messaging.TranslateCaption("Default Rate / Unit")
-                    lblSlash.Text = Messaging.TranslateCaption("/")
+                    lblRate.Text = MessagingService.TranslateCaption("Default Rate / Unit")
+                    lblSlash.Text = MessagingService.TranslateCaption("/")
                     cboPayElementType.Visible = True
                     cboUnit.Visible = True
                     lblDefaultQuantity.Visible = True
@@ -530,7 +530,7 @@ Namespace PresentationLayer.Views.Forms
                     lblDefaultQuantity.Visible = True
                     lblFactorValue.Visible = False
                     lblSlash2.Visible = False
-                    lblRate.Text = Messaging.TranslateCaption("Default Rate/Unit")
+                    lblRate.Text = MessagingService.TranslateCaption("Default Rate/Unit")
                     txtDefaultQuantity.Visible = True
                     txtMultiplier.Visible = False
                     txtRate.Visible = True
@@ -569,16 +569,16 @@ Namespace PresentationLayer.Views.Forms
                     lblUsePayGroups.Visible = True
                     If chkUsePayGroups.Checked Then
                         DataGridViewPayElementAccounts.Visible = True
-                        lblAccountIdNo.Text = Messaging.TranslateCaption("Default Posting Account")
+                        lblAccountIdNo.Text = MessagingService.TranslateCaption("Default Posting Account")
                     Else
                         DataGridViewPayElementAccounts.Visible = False
-                        lblAccountIdNo.Text = Messaging.TranslateCaption("Posting Account")
+                        lblAccountIdNo.Text = MessagingService.TranslateCaption("Posting Account")
                     End If
                 Else
                     DataGridViewPayElementAccounts.Visible = False
                     chkUsePayGroups.Visible = False
                     lblUsePayGroups.Visible = False
-                    lblAccountIdNo.Text = Messaging.TranslateCaption("Posting Account")
+                    lblAccountIdNo.Text = MessagingService.TranslateCaption("Posting Account")
                     DataGridViewPayElementAccounts.Visible = False
                 End If
             End If

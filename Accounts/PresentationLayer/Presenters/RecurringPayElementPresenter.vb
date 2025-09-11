@@ -2,7 +2,7 @@
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 
 Namespace PresentationLayer.Presenters
 
@@ -37,17 +37,17 @@ Namespace PresentationLayer.Presenters
                 Select Case View.RecurType
                     Case EnumToCode(RecurTypeSelection.UpToEndDate)
                         If View.EndDate Is Nothing Then
-                            Messaging.ShowPmMessage(True, "MsgRequiredField", {"fieldName", Messaging.TranslateCaption("End Date")})
+                            MessagingService.ShowPmMessage(True, "MsgRequiredField", {"fieldName", MessagingService.TranslateCaption("End Date")})
                         ElseIf View.EndDate < View.StartDate Then
-                            Messaging.ShowPmMessage(True, "MsgMustBeGreaterThan", {"fieldName1", Messaging.TranslateCaption("End Date"), "fieldName2", Messaging.TranslateCaption("Start Date")})
+                            MessagingService.ShowPmMessage(True, "MsgMustBeGreaterThan", {"fieldName1", MessagingService.TranslateCaption("End Date"), "fieldName2", MessagingService.TranslateCaption("Start Date")})
                         Else
                             retValue = True
                         End If
                     Case EnumToCode(RecurTypeSelection.UpToLimitAmount)
                         If View.LimitAmount = 0 Then
-                            Messaging.ShowPmMessage(True, "MsgRequiredField", {"fieldName", Messaging.TranslateCaption("Limit Amount")})
+                            MessagingService.ShowPmMessage(True, "MsgRequiredField", {"fieldName", MessagingService.TranslateCaption("Limit Amount")})
                         ElseIf View.LimitAmount < View.PeriodicAmount Then
-                            Messaging.ShowPmMessage(True, "MsgMustBeGreaterThan", {"fieldName1", Messaging.TranslateCaption("Limit Amount"), "fieldName2", Messaging.TranslateCaption("Periodic Amount")})
+                            MessagingService.ShowPmMessage(True, "MsgMustBeGreaterThan", {"fieldName1", MessagingService.TranslateCaption("Limit Amount"), "fieldName2", MessagingService.TranslateCaption("Periodic Amount")})
                         Else
                             retValue = True
                         End If

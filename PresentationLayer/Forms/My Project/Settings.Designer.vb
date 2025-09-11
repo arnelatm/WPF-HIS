@@ -15,7 +15,7 @@ Option Explicit On
 Namespace My
     
     <Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.5.0.0"),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.14.0.0"),  _
      Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
     Partial Friend NotInheritable Class MySettings
         Inherits Global.System.Configuration.ApplicationSettingsBase
@@ -91,14 +91,14 @@ Namespace My
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-         Global.System.Configuration.DefaultSettingValueAttribute("1")>
-        Public Property BranchIdNo() As Int16
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("1")>  _
+        Public Property BranchIdNo() As Integer
             Get
-                Return CType(Me("BranchIdNo"), Int16)
+                Return CType(Me("BranchIdNo"),Integer)
             End Get
             Set
-                Me("BranchIdNo") = Value
+                Me("BranchIdNo") = value
             End Set
         End Property
     End Class
@@ -112,9 +112,9 @@ Namespace My
     Friend Module MySettingsProperty
         
         <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")>  _
-        Friend ReadOnly Property Settings() As Global.AATM.PresentationLayer.Forms.My.MySettings
+        Friend ReadOnly Property Settings() As Global.AATM.Presentation.Forms.My.MySettings
             Get
-                Return Global.AATM.PresentationLayer.Forms.My.MySettings.Default
+                Return Global.AATM.Presentation.Forms.My.MySettings.Default
             End Get
         End Property
     End Module

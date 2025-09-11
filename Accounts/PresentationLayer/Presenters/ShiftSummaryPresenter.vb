@@ -4,7 +4,7 @@ Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 
 Namespace PresentationLayer.Presenters
 
@@ -35,7 +35,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Overrides Sub GoPrintRecord()
-            Dim reportTitle = Messaging.TranslateCaption("Cash Receipt")
+            Dim reportTitle = MessagingService.TranslateCaption("Cash Receipt")
             Dim language As String
             Dim curCulture = CultureInfo.CurrentCulture
             Dim establishmentName As String

@@ -6,6 +6,7 @@ Imports System.Windows.Forms
 Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.BaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.Messaging
 
 Public Class CtComboBox
     Inherits BCombobox
@@ -241,14 +242,14 @@ Public Class CtComboBox
 #Region "Declarations#"
 
     ' Text Menu Captions
-    Private Shared ReadOnly _textFind = MessagingLibrary.Messaging.TranslateCaption("Find on this field")
+    Private Shared ReadOnly _textFind = MessagingService.TranslateCaption("Find on this field")
 
-    Private Shared ReadOnly _textCut = MessagingLibrary.Messaging.TranslateCaption("Cut Selected Text")
-    Private Shared ReadOnly _textCopy = MessagingLibrary.Messaging.TranslateCaption("Copy Selected Text")
-    Private Shared ReadOnly _textPaste = MessagingLibrary.Messaging.TranslateCaption("Paste Text")
-    Private Shared ReadOnly _textUndo = MessagingLibrary.Messaging.TranslateCaption("Undo Last Action")
-    Private Shared ReadOnly _textDelete = MessagingLibrary.Messaging.TranslateCaption("Delete Selected Text")
-    Private Shared ReadOnly _textSelectAll = MessagingLibrary.Messaging.TranslateCaption("Select All Text")
+    Private Shared ReadOnly _textCut = MessagingService.TranslateCaption("Cut Selected Text")
+    Private Shared ReadOnly _textCopy = MessagingService.TranslateCaption("Copy Selected Text")
+    Private Shared ReadOnly _textPaste = MessagingService.TranslateCaption("Paste Text")
+    Private Shared ReadOnly _textUndo = MessagingService.TranslateCaption("Undo Last Action")
+    Private Shared ReadOnly _textDelete = MessagingService.TranslateCaption("Delete Selected Text")
+    Private Shared ReadOnly _textSelectAll = MessagingService.TranslateCaption("Select All Text")
 
 #End Region
 
@@ -709,7 +710,7 @@ Public Class CtComboBox
             Clipboard.SetText(SelectedText)
             SelectedIndex = -1
         Else
-            MessagingLibrary.Messaging.Show(True, "MsgOperationNotAvailableInViewMode")
+            MessagingService.Show(True, "MsgOperationNotAvailableInViewMode")
         End If
     End Sub
 
@@ -717,7 +718,7 @@ Public Class CtComboBox
         If EditingMode Then
             SelectedIndex = -1
         Else
-            MessagingLibrary.Messaging.Show(True, "MsgOperationNotAvailableInViewMode")
+            MessagingService.Show(True, "MsgOperationNotAvailableInViewMode")
         End If
     End Sub
 
@@ -729,7 +730,7 @@ Public Class CtComboBox
         If EditingMode Then
             Text = Clipboard.GetText()
         Else
-            MessagingLibrary.Messaging.Show(True, "MsgOperationNotAvailableInViewMode")
+            MessagingService.Show(True, "MsgOperationNotAvailableInViewMode")
         End If
     End Sub
 
@@ -737,7 +738,7 @@ Public Class CtComboBox
         If EditingMode Then
             SendKeys.Send("^Z")
         Else
-            MessagingLibrary.Messaging.Show(True, "MsgOperationNotAvailableInViewMode")
+            MessagingService.Show(True, "MsgOperationNotAvailableInViewMode")
         End If
     End Sub
 
@@ -793,7 +794,7 @@ Public Class CtComboBox
     Private Shadows Sub OnDropDownClosed(sender As Object, e As EventArgs) Handles Me.DropDownClosed
         If DisplayOnly Then
             SelectedIndex = _previousIndex
-            AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgCannotEditReadOnly")
+            AATM.Libraries.Messaging.MessagingService.Show(True, "MsgCannotEditReadOnly")
         End If
     End Sub
 

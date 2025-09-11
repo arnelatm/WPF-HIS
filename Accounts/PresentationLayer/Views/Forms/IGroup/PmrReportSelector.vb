@@ -70,7 +70,7 @@ Public Class PmrReportSelector
         '            If _findableControl.FindDataType = IFindableControl.DataTypeEnum.Decimal Then
         '                Dim value As Decimal
         '                If Not Decimal.TryParse(txtBegValue.Text, value) Then
-        '                    MessagingLibrary.Messaging.Show(True, "MsgInvalidDecimalValue")
+        '                    MessagingService.Show(True, "MsgInvalidDecimalValue")
         '                    DialogResult = DialogResult.Cancel
         '                Else
         '                    _findableControl.BegFindValue = txtBegValue.Text
@@ -78,7 +78,7 @@ Public Class PmrReportSelector
         '            Else
         '                Dim value As Integer
         '                If Not Integer.TryParse(txtBegValue.Text, value) Then
-        '                    MessagingLibrary.Messaging.Show(True, "MsgInvalidIntegerValue")
+        '                    MessagingService.Show(True, "MsgInvalidIntegerValue")
         '                Else
         '                    _findableControl.BegFindValue = txtBegValue.Text
         '                End If
@@ -91,14 +91,14 @@ Public Class PmrReportSelector
         '                Dim value As Decimal
         '                If Not Decimal.TryParse(txtEndValue.Text, value) Then
         '                    DialogResult = DialogResult.Cancel
-        '                    MessagingLibrary.Messaging.Show(True, "MsgInvalidDecimalValue")
+        '                    MessagingService.Show(True, "MsgInvalidDecimalValue")
         '                Else
         '                    _findableControl.EndFindValue = txtEndValue.Text
         '                End If
         '            Else
         '                Dim value As Integer
         '                If Not Integer.TryParse(txtEndValue.Text, value) Then
-        '                    MessagingLibrary.Messaging.Show(True, "MsgInvalidIntegerValue")
+        '                    MessagingService.Show(True, "MsgInvalidIntegerValue")
         '                Else
         '                    _findableControl.EndFindValue = txtEndValue.Text
         '                End If

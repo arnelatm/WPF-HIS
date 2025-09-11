@@ -2,7 +2,7 @@
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 
 Namespace PresentationLayer.Views.Forms
 
@@ -398,8 +398,8 @@ Namespace PresentationLayer.Views.Forms
             End If
             If Presenter.CrAccountCount = 0 Then
                 Dim accountName As String
-                accountName = Messaging.TranslateCaption("Cash")
-                Messaging.ShowPmMessage(True, "MsgNoSpecialAccount", {"specialAccountName", accountName})
+                accountName = MessagingService.TranslateCaption("Cash")
+                MessagingService.ShowPmMessage(True, "MsgNoSpecialAccount", {"specialAccountName", accountName})
                 Presenter.GoQuit()
             End If
             BindCsrOiItem()
@@ -646,7 +646,7 @@ Namespace PresentationLayer.Views.Forms
             Dim crJournalRow As DataGridViewRow = DataGridViewJournalItems.Rows(0)
             If DataGridViewJournalItems.SelectedRows.Contains(crJournalRow) Then
                 ' Do not allow the user to delete the first row.
-                Messaging.Show(True, "MsgFirstRowDeletionNotAllowed", "Deletion of the first row Is Not allowed!", "Delete Error")
+                MessagingService.Show(True, "MsgFirstRowDeletionNotAllowed", "Deletion of the first row Is Not allowed!", "Delete Error")
                 ' Cancel the deletion
                 e.Cancel = True
             End If
@@ -654,10 +654,10 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub BtnViewGL_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnViewGL.ClickButtonArea
             If DataGridViewJournalItems.Visible Then
-                btnViewGL.Text = Messaging.TranslateCaption("View Journal Entry")
+                btnViewGL.Text = MessagingService.TranslateCaption("View Journal Entry")
                 ShowOpenInvoicesDataGrid()
             Else
-                btnViewGL.Text = Messaging.TranslateCaption("Show Journal Entry")
+                btnViewGL.Text = MessagingService.TranslateCaption("Show Journal Entry")
                 ShowJournalItemDataGrid()
             End If
         End Sub
@@ -708,7 +708,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub OnInputsTurnedOff() Handles MyBase.InputsTurnedOff
             If OpenInvoiceMode Then
                 btnViewGL.Visible = True
-                btnViewGL.Text = Messaging.TranslateCaption("View Journal Entry")
+                btnViewGL.Text = MessagingService.TranslateCaption("View Journal Entry")
             Else
                 btnViewGL.Visible = False
             End If

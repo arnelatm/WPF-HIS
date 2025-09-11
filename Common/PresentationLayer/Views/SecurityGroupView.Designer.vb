@@ -1,4 +1,4 @@
-﻿Imports AATM.PresentationLayer.Models
+﻿Imports AATM.Presentation.Models
 
 Namespace PresentationLayer.Views
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
@@ -511,7 +511,7 @@ Namespace PresentationLayer.Views
             '
             'bsGroupAccesses
             '
-            Me.bsGroupAccesses.DataSource = GetType(AATM.PresentationLayer.Models.GroupAccessModel)
+            Me.bsGroupAccesses.DataSource = GetType(AATM.Presentation.Models.GroupAccessModel)
             '
             'cacParentIdNo
             '

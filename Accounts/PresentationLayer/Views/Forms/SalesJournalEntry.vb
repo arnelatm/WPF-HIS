@@ -3,8 +3,8 @@ Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Events
+Imports AATM.Libraries.Messaging
+Imports AATM.Presentation.Events
 
 Namespace PresentationLayer.Views.Forms
 
@@ -281,11 +281,11 @@ Namespace PresentationLayer.Views.Forms
             If _journalMode Then
                 DataGridViewJournalItems.Visible = True
                 DataGridViewSalesDeposits.Visible = False
-                btnViewGL.Text = Messaging.TranslateCaption("Hide Journal Entry")
+                btnViewGL.Text = MessagingService.TranslateCaption("Hide Journal Entry")
             Else
                 DataGridViewJournalItems.Visible = False
                 DataGridViewSalesDeposits.Visible = True
-                btnViewGL.Text = Messaging.TranslateCaption("Show Journal Entry")
+                btnViewGL.Text = MessagingService.TranslateCaption("Show Journal Entry")
             End If
         End Sub
 

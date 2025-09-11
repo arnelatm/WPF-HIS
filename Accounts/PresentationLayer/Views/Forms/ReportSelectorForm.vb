@@ -1,7 +1,7 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Common.PresentationLayer.Views.Interfaces
-Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Events
+Imports AATM.Libraries.Messaging
+Imports AATM.Presentation.Events
 
 Namespace PresentationLayer.Views.Forms
 
@@ -20,7 +20,7 @@ Namespace PresentationLayer.Views.Forms
             ' This call is required by the designer.
             InitializeComponent()
             ' Add any initialization after the InitializeComponent() call.
-            Me.Text = Messaging.TranslateCaption("Report Selector")
+            Me.Text = MessagingService.TranslateCaption("Report Selector")
             FormToolStrip.Visible = False
             _sReportGroup = reportGroupParam
         End Sub

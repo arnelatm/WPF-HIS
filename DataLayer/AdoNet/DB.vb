@@ -5,7 +5,7 @@ Imports System.Runtime.CompilerServices
 Imports System.Security.Policy
 Imports System.Text.RegularExpressions
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 
 Namespace AdoNet
     ' ADO.NET data access class.
@@ -624,7 +624,7 @@ Namespace AdoNet
                                 Dim variables =
                                         {"tableName", tableName, "indexName", indexName, "duplicateValue",
                                          duplicateValue}
-                                Messaging.Show(True, "MsgDuplicateKeyValueViolation",
+                                MessagingService.Show(True, "MsgDuplicateKeyValueViolation",
                                                "Cannot insert duplicate key row in object {tableName} with unique index {indexName}. The duplicate key value is {duplicateValue}!",
                                                "Unique Key Violation", variables, MessageBoxButtons.OK,
                                                MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
@@ -702,7 +702,7 @@ Namespace AdoNet
                                 Dim variables =
                                         {"tableName", tableName, "indexName", indexName, "duplicateValue",
                                          duplicateValue}
-                                Messaging.Show(True, "MsgDuplicateKeyValueViolation",
+                                MessagingService.Show(True, "MsgDuplicateKeyValueViolation",
                                                "Cannot insert duplicate key row in object {tableName} with unique index {indexName}. The duplicate key value is {duplicateValue}!",
                                                "Unique Key Violation", variables, MessageBoxButtons.OK,
                                                MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)

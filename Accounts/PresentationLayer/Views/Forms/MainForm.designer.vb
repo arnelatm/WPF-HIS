@@ -1,5 +1,5 @@
 ﻿Imports System.ComponentModel
-Imports AATM.PresentationLayer.Forms
+Imports AATM.Presentation.Forms
 
 Namespace PresentationLayer.Views.Forms
     Partial Public Class MainForm

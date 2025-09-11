@@ -1,4 +1,4 @@
-﻿Imports AATM.PresentationLayer.Forms
+﻿Imports AATM.Presentation.Forms
 
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class MainProgram

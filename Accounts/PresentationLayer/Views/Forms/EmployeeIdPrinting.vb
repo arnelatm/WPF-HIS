@@ -1,6 +1,6 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Events
+Imports AATM.Libraries.Messaging
+Imports AATM.Presentation.Events
 
 Namespace PresentationLayer.Views.Forms
 
@@ -18,7 +18,7 @@ Namespace PresentationLayer.Views.Forms
             ' This call is required by the designer.
             InitializeComponent()
             ' Add any initialization after the InitializeComponent() call.
-            Me.Text = Messaging.TranslateCaption("Employee I.D. Printing")
+            Me.Text = MessagingService.TranslateCaption("Employee I.D. Printing")
             btnEdit.Visible = False
         End Sub
 

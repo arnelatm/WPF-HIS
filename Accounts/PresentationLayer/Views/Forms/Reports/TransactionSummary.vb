@@ -3,7 +3,7 @@ Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Common
 Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 
 Namespace PresentationLayer.Views.Forms.Reports
 
@@ -29,11 +29,11 @@ Namespace PresentationLayer.Views.Forms.Reports
         End Sub
 
         Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
-            Dim reportName = Messaging.TranslateCaption("Summary of Employee Loans")
+            Dim reportName = MessagingService.TranslateCaption("Summary of Employee Loans")
             Dim reportTitle As String
             Dim bDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(dtpBeginningDate.Value, CultureInfo.CreateSpecificCulture("en-GB"))
             Dim eDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(dtpEndingDate.Value, CultureInfo.CreateSpecificCulture("en-GB"))
-            reportTitle = Messaging.TranslateCaption("Transaction Summary Report")
+            reportTitle = MessagingService.TranslateCaption("Transaction Summary Report")
             Dim formCultureLanguage As String = CultureInfo.CurrentUICulture.Name
 
             Dim language As String

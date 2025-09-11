@@ -3,7 +3,7 @@ Imports System.Drawing
 Imports System.Windows.Forms
 Imports AATM.LIBRARIES.CBaseControlsLibrary
 Imports AATM.LIBRARIES.LocalizationUtilities
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 Imports Microsoft.VisualBasic.CompilerServices
 
 <DesignerGenerated()>

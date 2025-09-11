@@ -7,8 +7,8 @@ Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Events
+Imports AATM.Libraries.Messaging
+Imports AATM.Presentation.Events
 
 Namespace PresentationLayer.Presenters
 
@@ -187,7 +187,7 @@ Namespace PresentationLayer.Presenters
             'For Each item In View.SalesDeposits
             '    View.TotalSales = View.TotalSales + item.SaleAmount
             'Next
-            MakeSalesJournal(oldJournalItems, counter, View.AccountIdNo, 0, View.TotalSales, "Sales", Messaging.TranslateCaption("Sales"))
+            MakeSalesJournal(oldJournalItems, counter, View.AccountIdNo, 0, View.TotalSales, "Sales", MessagingService.TranslateCaption("Sales"))
             For Each item As SalesDepositView In View.SalesDeposits
                 If item.DepositTypeIdNo <> 0 Then
                     Dim depositType = _depositTypesModel.Find(Function(c) c.IdNo = item.DepositTypeIdNo())
@@ -341,7 +341,7 @@ Namespace PresentationLayer.Presenters
             Dim reconciledDao = New ReconciledDao
             For Each item In View.JournalItems
                 If reconciledDao.IsItemReconciled("SJ", item.IdNo) Then
-                    Messaging.Show(True, "MsgEditingOfReconciledNotAllowed")
+                    MessagingService.Show(True, "MsgEditingOfReconciledNotAllowed")
                     result = False
                     Exit For
                 End If

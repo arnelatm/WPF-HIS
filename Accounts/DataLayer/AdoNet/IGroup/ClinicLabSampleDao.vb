@@ -27,7 +27,7 @@ Namespace DataLayer.AdoNet
 
         Public Function GetParametrized(Of ClinicLabSampleModel)(parameter As Object, Optional sortExpression As String = Nothing) As ClinicLabSample Implements IDaoParametrized(Of ClinicLabSample).GetParametrized
             If parameter(0) Is Nothing Then
-                AATM.Libraries.MessagingLibrary.Messaging.Show("MsgDateCannotBeBlank")
+                AATM.Libraries.Messaging.MessagingService.Show("MsgDateCannotBeBlank")
                 Return Nothing
             End If
             Dim transactionDate As Date = parameter(0)

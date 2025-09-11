@@ -3,7 +3,7 @@ Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 
 Namespace PresentationLayer.Views.Forms
 
@@ -235,13 +235,13 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub UpdateButtonText()
             If PayrollAttendance.Count() = 0 Then
-                btnInitializeAttendance.Text = Messaging.TranslateCaption("Initialize Attendance")
-                btnInitializeOvertime.Text = Messaging.TranslateCaption("Initialize Overtime")
-                btnGenerateRegularPayElements.Text = Messaging.TranslateCaption("Generate Employee Earnings / Deductions")
+                btnInitializeAttendance.Text = MessagingService.TranslateCaption("Initialize Attendance")
+                btnInitializeOvertime.Text = MessagingService.TranslateCaption("Initialize Overtime")
+                btnGenerateRegularPayElements.Text = MessagingService.TranslateCaption("Generate Employee Earnings / Deductions")
             Else
-                btnInitializeAttendance.Text = Messaging.TranslateCaption("Re-Process Attendance")
-                btnInitializeOvertime.Text = Messaging.TranslateCaption("Re-Process Overtime")
-                btnGenerateRegularPayElements.Text = Messaging.TranslateCaption("Re-generate Selected Employee Earnings / Deductions")
+                btnInitializeAttendance.Text = MessagingService.TranslateCaption("Re-Process Attendance")
+                btnInitializeOvertime.Text = MessagingService.TranslateCaption("Re-Process Overtime")
+                btnGenerateRegularPayElements.Text = MessagingService.TranslateCaption("Re-generate Selected Employee Earnings / Deductions")
             End If
         End Sub
 

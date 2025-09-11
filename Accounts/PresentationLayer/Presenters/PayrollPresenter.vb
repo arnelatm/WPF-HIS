@@ -6,7 +6,7 @@ Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 
 Namespace PresentationLayer.Presenters
 
@@ -167,11 +167,11 @@ Namespace PresentationLayer.Presenters
                     If dStartDate.Day = 1 Then
                         View.EndDate = dStartDate.AddMonths(1).AddDays(-1)
                         View.PayrollName = payMonthText & " " & MonthName(Month(View.EndDate)) & " " & Year(View.EndDate).ToString()
-                        View.PayrollNameAra = Messaging.TranslateCaption(payMonthText, "ar-SA") + GetMonthNamesInCulture(arabicCulture)(Month(View.EndDate) - 1) & " " & Year(View.EndDate).ToString()
+                        View.PayrollNameAra = MessagingService.TranslateCaption(payMonthText, "ar-SA") + GetMonthNamesInCulture(arabicCulture)(Month(View.EndDate) - 1) & " " & Year(View.EndDate).ToString()
                     Else
                         View.EndDate = maxRecord.EndDate.AddMonths(1)
                         View.PayrollName = PayrollText & " " & View.StartDate.ToString() & " to " & View.EndDate.ToString()
-                        View.PayrollNameAra = Messaging.TranslateCaption(PayrollText, "ar-SA") & " " & GetMonthNamesInCulture(arabicCulture)(Month(View.EndDate)) & " " & Year(View.EndDate).ToString()
+                        View.PayrollNameAra = MessagingService.TranslateCaption(PayrollText, "ar-SA") & " " & GetMonthNamesInCulture(arabicCulture)(Month(View.EndDate)) & " " & Year(View.EndDate).ToString()
                     End If
                     View.PayrollCode = "M" + View.EndDate.ToString("yyMM")
                 End If
@@ -207,10 +207,10 @@ Namespace PresentationLayer.Presenters
             Dim arabicCulture As New CultureInfo("ar-ae", False)
             If View.StartDate.Value.Day = 1 AndAlso AsMonthEndDate(View.StartDate) = View.EndDate Then
                 View.PayrollName = payMonthText & " " & MonthName(Month(View.EndDate)) & " " & Year(View.EndDate).ToString()
-                View.PayrollNameAra = Messaging.TranslateCaption(payMonthText, "ar-SA") + GetMonthNamesInCulture(arabicCulture)(Month(View.EndDate) - 1) & " " & Year(View.EndDate).ToString()
+                View.PayrollNameAra = MessagingService.TranslateCaption(payMonthText, "ar-SA") + GetMonthNamesInCulture(arabicCulture)(Month(View.EndDate) - 1) & " " & Year(View.EndDate).ToString()
             Else
                 View.PayrollName = PayrollText & " " & View.StartDate.ToString() & " to " & View.EndDate.ToString()
-                View.PayrollNameAra = Messaging.TranslateCaption(PayrollText, "ar-SA") & " " & GetMonthNamesInCulture(arabicCulture)(Month(View.EndDate)) & " " & Year(View.EndDate).ToString()
+                View.PayrollNameAra = MessagingService.TranslateCaption(PayrollText, "ar-SA") & " " & GetMonthNamesInCulture(arabicCulture)(Month(View.EndDate)) & " " & Year(View.EndDate).ToString()
             End If
             View.PayrollCode = "M" + CDate(View.EndDate).ToString("yyMM")
         End Sub
@@ -325,7 +325,7 @@ Namespace PresentationLayer.Presenters
             progressDisplayForm.UpdateProgressBar(counter)
             progressDisplayForm.Close()
 
-            Messaging.Show(True, "MsgAttendanceInitializationCompleted")
+            MessagingService.Show(True, "MsgAttendanceInitializationCompleted")
         End Sub
 
         Public Sub InitializeOvertime()
@@ -385,7 +385,7 @@ Namespace PresentationLayer.Presenters
             End If
             progressDisplayForm.UpdateProgressBar(counter + 1)
             progressDisplayForm.Close()
-            Messaging.Show(True, "MsgOvertimeInitializationCompleted")
+            MessagingService.Show(True, "MsgOvertimeInitializationCompleted")
         End Sub
 
         Public Sub AddEmployeeAttendance(ByVal dateHired As Date, ByVal dateReleased As Date?, ByVal empId As Int16, ByVal empName As String, ByVal daysInPeriod As Int16, ByVal daysOffInPeriod As Int16, ByVal seq As Int16)
@@ -600,11 +600,11 @@ Namespace PresentationLayer.Presenters
 
         Public Sub GenerateRegularPayElements()
             'If ChangesMade() Then
-            '    Messaging.Show(True,"MsgSaveFirstBeforeGeneration")
+            '    MessagingService.Show(True,"MsgSaveFirstBeforeGeneration")
             'Else
             _payrollIdNo = View.IdNo
             If View.PayrollAttendance.Count() = 0 And View.PayrollOvertime.Count() = 0 Then
-                Messaging.Show(True, "MsgEmptyEmployeeAttendanceOt")
+                MessagingService.Show(True, "MsgEmptyEmployeeAttendanceOt")
             Else
                 Dim payrollService As New AccountsService("Payroll")
                 Dim payroll As PayrollModel = payrollService.GetRecordByIdNo(Of PayrollModel)(View.IdNo)
@@ -618,7 +618,7 @@ Namespace PresentationLayer.Presenters
                     If payrollPayElements.Count() = 0 Then
                         ProcessPayroll(False)
                     Else
-                        If Messaging.Show(True, "AskIfRegeneratePayroll",
+                        If MessagingService.Show(True, "AskIfRegeneratePayroll",
                                            MessageBoxButtons.YesNo,
                                            MessageBoxIcon.Warning,
                                            MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
@@ -740,7 +740,7 @@ Namespace PresentationLayer.Presenters
             _payrollPayElements.Clear()
             progressDisplayForm.UpdateProgressBar(counter + 1)
             progressDisplayForm.Close()
-            'Messaging.Show(True, "MsgPayrollGenerationCompleted")
+            'MessagingService.Show(True, "MsgPayrollGenerationCompleted")
             Beep()
         End Sub
 
@@ -1422,8 +1422,8 @@ Namespace PresentationLayer.Presenters
             If MyBase.IsBizDataValid() Then
                 For Each item In View.PayrollAttendance
                     If item.DaysPresent < 0 Then
-                        'Messaging.Show("MsgNegativeDaysPresent")
-                        Messaging.ShowPmMessage(True, "MsgNegativeDaysPresent", {"lineNumber", item.Sequence.ToString()})
+                        'MessagingService.Show("MsgNegativeDaysPresent")
+                        MessagingService.ShowPmMessage(True, "MsgNegativeDaysPresent", {"lineNumber", item.Sequence.ToString()})
                         retValue = False
                         Exit For
                     End If
@@ -1441,7 +1441,7 @@ Namespace PresentationLayer.Presenters
         Public Sub PostPayroll()
             _payrollIdNo = View.IdNo
             If View.PayrollAttendance.Count() = 0 And View.PayrollOvertime.Count() = 0 Then
-                Messaging.Show(True, "MsgEmptyEmployeeAttendanceOt")
+                MessagingService.Show(True, "MsgEmptyEmployeeAttendanceOt")
             Else
                 Dim payelementsModel As New List(Of PayElementModel)
                 payelementsModel = _payElementsService.GetDaoRecords()
@@ -1553,7 +1553,7 @@ Namespace PresentationLayer.Presenters
                 '_payrollPayElements.Clear()
                 'progressDisplayForm.UpdateProgressBar(counter + 1)
                 'progressDisplayForm.Close()
-                ''Messaging.Show(True, "MsgPayrollGenerationCompleted")
+                ''MessagingService.Show(True, "MsgPayrollGenerationCompleted")
                 'Beep()
             End If
             'End If

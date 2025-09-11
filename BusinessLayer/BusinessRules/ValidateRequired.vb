@@ -1,5 +1,5 @@
 ﻿Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 
 Namespace BusinessRules
     ' represents a validation rules that states that a value is required
@@ -12,8 +12,8 @@ Namespace BusinessRules
         Public Sub New(propertyName As String)
 
             MyBase.New(propertyName)
-            Dim fieldName = Messaging.TranslateCaption(propertyName.SplitCamelCase)
-            Dim errorMessage = Messaging.GetParametrizedMessage(True, "MsgRequiredField", {"fieldName", fieldName})
+            Dim fieldName = MessagingService.TranslateCaption(propertyName.SplitCamelCase)
+            Dim errorMessage = MessagingService.GetParametrizedMessage(True, "MsgRequiredField", {"fieldName", fieldName})
             [Error] = errorMessage
 
         End Sub

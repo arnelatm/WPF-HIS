@@ -169,11 +169,11 @@ Public Class gTimePicker
 
     Private Sub InformUserOfInvalidTime()
         'ToolTip1.ToolTipTitle = "Input Rejected"
-        'Dim calendarName As String = Messaging.TranslateCaption(CalendarNameInEnglish(_targetCulture))
+        'Dim calendarName As String = MessagingService.TranslateCaption(CalendarNameInEnglish(_targetCulture))
         'Dim cText = txtDate.Text
         'Dim cCalendarName As String = calendarName
         'ToolTip1.ToolTipTitle = "Input Rejected"
-        'Messaging.ShowPmMessage(True, "MsgErroneousDate", {"enteredDate", cText, "calendarName", cCalendarName})
+        'MessagingService.ShowPmMessage(True, "MsgErroneousDate", {"enteredDate", cText, "calendarName", cCalendarName})
         MessageBox.Show("Invalid time entered!")
     End Sub
 

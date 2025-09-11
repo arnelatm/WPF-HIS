@@ -1,7 +1,7 @@
 ﻿Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Presenters
-Imports AATM.PresentationLayer.Views
+Imports AATM.Libraries.Messaging
+Imports AATM.Presentation.Presenters
+Imports AATM.Presentation.Views
 
 Namespace PresentationLayer.Views.Forms
 
@@ -96,14 +96,14 @@ Namespace PresentationLayer.Views.Forms
                     Dim isNumeric As Boolean = Decimal.TryParse(targetValue, num)
                     If Not isNumeric Then
                         Dim variables = {"FieldName", originalValue.name}
-                        Messaging.ShowPmMessage(True, "MsgOnlyNumbersAllowed", variables)
+                        MessagingService.ShowPmMessage(True, "MsgOnlyNumbersAllowed", variables)
                         Return originalValue.Text
                     End If
                     Select Case x.Name
                         Case "Byte"
                             If num < 0 OrElse num > 255 Then
                                 Dim variables = {"FieldName", originalValue.Name}
-                                Messaging.ShowPmMessage(True, "MsgNumeric0to255Only", variables)
+                                MessagingService.ShowPmMessage(True, "MsgNumeric0to255Only", variables)
                                 Return originalValue.Text
                             End If
                             Return num.ToString()

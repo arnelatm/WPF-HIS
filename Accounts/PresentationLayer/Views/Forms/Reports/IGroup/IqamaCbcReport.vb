@@ -3,7 +3,7 @@ Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Common
 Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 
 Namespace PresentationLayer.Views.Forms.Reports
 

@@ -6,8 +6,8 @@ Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Events
+Imports AATM.Libraries.Messaging
+Imports AATM.Presentation.Events
 
 Namespace PresentationLayer.Presenters
 
@@ -135,9 +135,9 @@ Namespace PresentationLayer.Presenters
                 End If
             End If
             If retVal < 0 Then
-                Messaging.Show(True, "MsgSaveRecordFailed", "Something went wrong during saving, saving record failed", "Saving Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessagingService.Show(True, "MsgSaveRecordFailed", "Something went wrong during saving, saving record failed", "Saving Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Else
-                Messaging.Show(True, "MsgRecordSuccessfullySaved")
+                MessagingService.Show(True, "MsgRecordSuccessfullySaved")
                 If AddMode Then
                     RecordPositionNumber = GetSortedRecordPosition(NewlyAddedRecordIdNo)
                 Else
@@ -169,7 +169,7 @@ Namespace PresentationLayer.Presenters
             For Each leave As EmployeeLeaveEarnedApprovalItemView In View.EmployeeLeaveEarnedApprovalItems
                 If leave.Disapproved Then
                     If leave.ApprovalNote Is Nothing OrElse leave.ApprovalNote.Trim() = "" Then
-                        Messaging.Show(True, "MsgEmptyApprovalNote", {"leaveNumber", leave.IdNo.ToString()})
+                        MessagingService.Show(True, "MsgEmptyApprovalNote", {"leaveNumber", leave.IdNo.ToString()})
                         valid = False
                     End If
                 End If

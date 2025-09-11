@@ -2,7 +2,7 @@
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Presenters
-Imports AATM.Libraries.MessagingLibrary.Messaging
+Imports AATM.Libraries.Messaging.MessagingService
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Forms
@@ -126,8 +126,8 @@ Namespace PresentationLayer.Presenters
                     Next
                 End If
                 If Not CodeAndBranchUnique() Then
-                    Dim errorMessage = Libraries.MessagingLibrary.Messaging.GetParametrizedMessage(True, "MsgDuplicateValuesNotAllowed", {"fieldValue", GlobalVariables.BranchIdNo.ToString() + "-" + View.ProductCode, "fieldDescription", "BranchIdNo - Product Code"})
-                    Libraries.MessagingLibrary.Messaging.Show(errorMessage)
+                    Dim errorMessage = Libraries.MessagingLibrary.MessagingService.GetParametrizedMessage(True, "MsgDuplicateValuesNotAllowed", {"fieldValue", GlobalVariables.BranchIdNo.ToString() + "-" + View.ProductCode, "fieldDescription", "BranchIdNo - Product Code"})
+                    Libraries.MessagingService.Show(errorMessage)
                     retValue = False
                 End If
             End If

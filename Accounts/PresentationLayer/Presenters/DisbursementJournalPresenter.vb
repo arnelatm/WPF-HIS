@@ -8,9 +8,9 @@ Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Events
-Imports AATM.PresentationLayer.Presenters
+Imports AATM.Libraries.Messaging
+Imports AATM.Presentation.Events
+Imports AATM.Presentation.Presenters
 
 Namespace PresentationLayer.Presenters
 
@@ -241,7 +241,7 @@ Namespace PresentationLayer.Presenters
         '    Dim type As Type = View.GetType
         '    Dim cPcClosed = CallByName(View, "PcClosed", CallType.Get)
         '    If cPcClosed Then
-        '        Messaging.Show(True, "MsgEditingOfClosedPcRecordNotAllowed")
+        '        MessagingService.Show(True, "MsgEditingOfClosedPcRecordNotAllowed")
         '        CancelEdit = True
         '    Else
         '        Dim reconciledDao = New ReconciledDao
@@ -253,7 +253,7 @@ Namespace PresentationLayer.Presenters
         '            End If
         '        Next
         '        If cancelEdit Then
-        '            Messaging.Show(True, "MsgEditingOfReconciledItemsNotAllowed")
+        '            MessagingService.Show(True, "MsgEditingOfReconciledItemsNotAllowed")
         '            CancelEdit = True
         '        End If
         '    End If
@@ -303,12 +303,12 @@ Namespace PresentationLayer.Presenters
                 Dim dateToday As DateTime = Now()
                 retValue = True
                 Dim lastPostingDate As DateTime? = Service.GetRecordFieldWithKeyG(Of DateTime?)("Petty Cash Disbursement", "LastPosting", "TransactionName", "LastPostingDate")
-                Dim dateFieldName = Messaging.TranslateCaption("Transaction Date")
+                Dim dateFieldName = MessagingService.TranslateCaption("Transaction Date")
                 If IsDateRangeValid(dateFieldName, View.TransactionDate, lastPostingDate, dateToday) = DialogResult.No Then
                     retValue = False
                 ElseIf CodeToEnum(Of PaymentTypeSelection)(View.PaymentType) <> PaymentTypeSelection.AccountsPayable Then
                     If View.JournalItems Is Nothing OrElse View.JournalItems.Count() = 0 Then
-                        Messaging.Show(True, "MsgCannotSaveAnEmptyTransaction", "Sorry, cannot save an empty transaction!", "Error")
+                        MessagingService.Show(True, "MsgCannotSaveAnEmptyTransaction", "Sorry, cannot save an empty transaction!", "Error")
                         retValue = False
                     End If
                     If retValue Then
@@ -336,7 +336,7 @@ Namespace PresentationLayer.Presenters
                     For Each item In View.JournalItems
                         If item.AccountIdNo Is Nothing Or item.AccountIdNo = 0 AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
                             Dim lineNumber As String = item.Sequence.ToString()
-                            Messaging.ShowPmMessage(True, "MsgBlankAccountIdNotAllowed", {"lineNumber", lineNumber})
+                            MessagingService.ShowPmMessage(True, "MsgBlankAccountIdNotAllowed", {"lineNumber", lineNumber})
                             retValue = False
                             Exit For
                         End If
@@ -861,12 +861,12 @@ Namespace PresentationLayer.Presenters
                         If CodeToEnum(Of SpecialAccountSelection)(item.SpecialAccount) = SpecialAccountSelection.AccountsPayable Or
                            CodeToEnum(Of SpecialAccountSelection)(item.SpecialAccount) = SpecialAccountSelection.AccountsReceivable Then
                             Dim lineNumber = Format(item.Sequence, "0")
-                            Dim entryNames = Messaging.TranslateCaption("Accounts Receivables/Accounts Payables")
+                            Dim entryNames = MessagingService.TranslateCaption("Accounts Receivables/Accounts Payables")
                             Dim caption = "Invalid Entry"
                             Dim variables As String() = {"lineNumber", lineNumber, "entryNames", entryNames}
-                            Dim message = Messaging.GetMessage(True, "MsgAccountsNotAllowed", "Error on line {lineNumber}. Sorry {entryNames} accounts not allowed for this transaction!", caption)
-                            caption = Messaging.TranslateCaption(caption)
-                            Messaging.Show(message, caption, variables, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            Dim message = MessagingService.GetMessage(True, "MsgAccountsNotAllowed", "Error on line {lineNumber}. Sorry {entryNames} accounts not allowed for this transaction!", caption)
+                            caption = MessagingService.TranslateCaption(caption)
+                            MessagingService.Show(message, caption, variables, MessageBoxButtons.OK, MessageBoxIcon.Error)
                             retValue = False
                             Exit For
                         End If
@@ -874,12 +874,12 @@ Namespace PresentationLayer.Presenters
                         If CodeToEnum(Of SpecialAccountSelection)(item.SpecialAccount) = SpecialAccountSelection.AccountsPayable Or
                            CodeToEnum(Of SpecialAccountSelection)(item.SpecialAccount) = SpecialAccountSelection.EmployeeLoan Then
                             Dim lineNumber = Format(item.Sequence, "0")
-                            Dim entryNames = Messaging.TranslateCaption("Accounts Payables/Employee")
+                            Dim entryNames = MessagingService.TranslateCaption("Accounts Payables/Employee")
                             Dim caption = "Invalid Entry"
                             Dim variables As String() = {"lineNumber", lineNumber, "entryNames", entryNames}
-                            Dim message = Messaging.GetMessage(True, "MsgAccountsNotAllowed")
-                            caption = Messaging.TranslateCaption(caption)
-                            Messaging.Show(message, caption, variables, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            Dim message = MessagingService.GetMessage(True, "MsgAccountsNotAllowed")
+                            caption = MessagingService.TranslateCaption(caption)
+                            MessagingService.Show(message, caption, variables, MessageBoxButtons.OK, MessageBoxIcon.Error)
                             retValue = False
                             Exit For
                         End If
@@ -888,12 +888,12 @@ Namespace PresentationLayer.Presenters
                            CodeToEnum(Of SpecialAccountSelection)(item.SpecialAccount) = SpecialAccountSelection.AccountsReceivable Or
                            CodeToEnum(Of SpecialAccountSelection)(item.SpecialAccount) = SpecialAccountSelection.EmployeeLoan Then
                             Dim lineNumber = Format(item.Sequence, "0")
-                            Dim entryNames = Messaging.TranslateCaption("Accounts Payables/Accounts Receivables/Employee")
+                            Dim entryNames = MessagingService.TranslateCaption("Accounts Payables/Accounts Receivables/Employee")
                             Dim caption = "Invalid Entry"
                             Dim variables As String() = {"lineNumber", lineNumber, "entryNames", entryNames}
-                            Dim message = Messaging.GetMessage(True, "MsgAccountsNotAllowed")
-                            caption = Messaging.TranslateCaption(caption)
-                            Messaging.Show(message, caption, variables, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            Dim message = MessagingService.GetMessage(True, "MsgAccountsNotAllowed")
+                            caption = MessagingService.TranslateCaption(caption)
+                            MessagingService.Show(message, caption, variables, MessageBoxButtons.OK, MessageBoxIcon.Error)
                             retValue = False
                             Exit For
                         End If
@@ -912,10 +912,10 @@ Namespace PresentationLayer.Presenters
                        (item.Amount + item.DiscountTaken < item.PreviousBalance And item.PreviousBalance < 0) Then
                         Dim lineNumber = item.Sequence.ToString()
                         Dim variables = {"lineNumber", lineNumber}
-                        Dim message = Messaging.GetMessage(True, "MsgAppliedAmtExceedsBalance", "Error in line {lineNumber}. Applied amount and discount exceeds balance.", "Invalid Payment")
-                        Dim caption = Messaging.TranslateCaption("Invalid Payment")
+                        Dim message = MessagingService.GetMessage(True, "MsgAppliedAmtExceedsBalance", "Error in line {lineNumber}. Applied amount and discount exceeds balance.", "Invalid Payment")
+                        Dim caption = MessagingService.TranslateCaption("Invalid Payment")
                         message = Messaging.ReplaceValues(message, variables)
-                        Messaging.Show(message, caption)
+                        MessagingService.Show(message, caption)
                         If View.DjOiItems(index).Errors Is Nothing Then
                             View.DjOiItems(index).Errors = New List(Of String)
                         End If
@@ -941,14 +941,14 @@ Namespace PresentationLayer.Presenters
                     Next
                     If totalBalance > 0 Then
                         If View.UnApplied > 0 Then
-                            Messaging.Show(True, "MsgPaymentNotFullyApplied")
+                            MessagingService.Show(True, "MsgPaymentNotFullyApplied")
                             retVal = False
                         Else
-                            Messaging.Show(True, "MsgPaymentIsOverApplied")
+                            MessagingService.Show(True, "MsgPaymentIsOverApplied")
                             retVal = False
                         End If
                     Else
-                        If Messaging.Show(True, "AskMakeExcessPaymentAdvance",
+                        If MessagingService.Show(True, "AskMakeExcessPaymentAdvance",
                                            MessageBoxButtons.YesNo,
                                            MessageBoxIcon.Warning,
                                            MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
@@ -1202,7 +1202,7 @@ Namespace PresentationLayer.Presenters
             Dim type As Type = View.GetType
             Dim cPcClosed = CallByName(View, "PcClosed", CallType.Get)
             If cPcClosed Then
-                Messaging.Show(True, "MsgEditingOfClosedPcRecordNotAllowed")
+                MessagingService.Show(True, "MsgEditingOfClosedPcRecordNotAllowed")
                 result = False
             Else
                 If ReconciledEntriesExist(View.JournalItems, JournalCode) Then
@@ -1212,7 +1212,7 @@ Namespace PresentationLayer.Presenters
                 'For Each item In View.JournalItems
                 '    'Dim reconciledData As Reconciled = reconciledDao.GetReconciledItem(JournalCode, item.IdNo)
                 '    If reconciledDao.IsItemReconciled(JournalCode, item.IdNo) Then
-                '        Messaging.Show(True, "MsgEditingOfReconciledNotAllowed")
+                '        MessagingService.Show(True, "MsgEditingOfReconciledNotAllowed")
                 '        result = False
                 '        Exit For
                 '    End If
@@ -1229,8 +1229,8 @@ Namespace PresentationLayer.Presenters
                     Dim cPosted = CallByName(View, "PcClosed", CallType.Get)
                     If cPosted Then
                         Dim description As String = ""
-                        description = Messaging.TranslateCaption("Petty Cash Replenishment")
-                        Messaging.ShowPmMessage(True, "MsgDeleteEntryNotAllowed", {"description", description})
+                        description = MessagingService.TranslateCaption("Petty Cash Replenishment")
+                        MessagingService.ShowPmMessage(True, "MsgDeleteEntryNotAllowed", {"description", description})
                         retVal = False
                     End If
                 End If

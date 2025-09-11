@@ -2,8 +2,8 @@
 Imports AATM.Common
 Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Events
+Imports AATM.Libraries.Messaging
+Imports AATM.Presentation.Events
 
 Namespace PresentationLayer.Views.Forms.Reports
 
@@ -29,7 +29,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Private Sub btnOk_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
             Dim crArgs As New CrPrintableArgs
             Dim reportParameters As New Object
-            Dim reportTitle As String = Messaging.TranslateCaption("Inventory Report By Warehouse")
+            Dim reportTitle As String = MessagingService.TranslateCaption("Inventory Report By Warehouse")
             Dim reportFileName As String = "Inventory Report By Warehouse.Rpt"
             crArgs.Language = CultureInfo.CurrentCulture.Name
             crArgs.ReportParameters = {reportTitle, "ReportTitle",

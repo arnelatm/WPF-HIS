@@ -6,9 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{3F50A1A8-D56B-4D64-A2F2-D1DD3D440D8D}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>
-    </RootNamespace>
-    <AssemblyName>AATM.Platform.Localization</AssemblyName>
+    <RootNamespace>AATM.Libraries.Localization</RootNamespace>
+    <AssemblyName>AATM.Libraries.Localization</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>

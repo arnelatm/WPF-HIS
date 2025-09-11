@@ -1,6 +1,6 @@
 ﻿Imports System.ComponentModel
 Imports AATM.Libraries.CBaseControlsLibrary
-Imports AATM.PresentationLayer.Forms
+Imports AATM.Presentation.Forms
 Imports Microsoft.VisualBasic.CompilerServices
 
 Namespace PresentationLayer.Views.Forms

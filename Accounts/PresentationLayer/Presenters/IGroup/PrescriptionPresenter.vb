@@ -69,7 +69,7 @@ Namespace PresentationLayer.Presenters
             Else
                 prescriptionDetail.ItemIdNo = ""
                 prescriptionDetail.ItemName = ""
-                AATM.Libraries.MessagingLibrary.Messaging.Show(True, "Invalid ItemDetails Code!")
+                AATM.Libraries.Messaging.MessagingService.Show(True, "Invalid ItemDetails Code!")
             End If
         End Sub
 

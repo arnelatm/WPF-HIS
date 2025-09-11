@@ -16,13 +16,13 @@ Imports AATM.Libraries.ErrorsAndEvents
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.Localization.Core
 Imports AATM.Libraries.Localization.Services
-Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Forms
-Imports AATM.PresentationLayer.Forms.Services.Security
-Imports AATM.PresentationLayer.Forms.Services.SystemView
-Imports AATM.PresentationLayer.Models
-Imports AATM.PresentationLayer.Presenters
-Imports AATM.PresentationLayer.Views.Interfaces
+Imports AATM.Libraries.Messaging
+Imports AATM.Presentation.Forms
+Imports AATM.Presentation.Forms.Services.Security
+Imports AATM.Presentation.Forms.Services.SystemView
+Imports AATM.Presentation.Models
+Imports AATM.Presentation.Presenters
+Imports AATM.Presentation.Views.Interfaces
 Imports AutoMapper
 Imports Services.SystemView
 
@@ -342,7 +342,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub AccountsReceivableToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemARAging.Click
-            Dim reportTitle = Messaging.TranslateCaption("Aging of Accounts Receivable")
+            Dim reportTitle = MessagingService.TranslateCaption("Aging of Accounts Receivable")
             reportTitle = reportTitle + " " + GlobalFuncNSub.GregorianLongDate(Now(), CultureInfo.CurrentCulture)
             Dim curCulture = CultureInfo.CurrentCulture
             CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
@@ -359,7 +359,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub AgingOfAccountsPayableToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemAPAging.Click
-            Dim reportTitle = Messaging.TranslateCaption("Aging of Accounts Payable as of ")
+            Dim reportTitle = MessagingService.TranslateCaption("Aging of Accounts Payable as of ")
             reportTitle = reportTitle + " " + GlobalFuncNSub.GregorianLongDate(Now(), CultureInfo.CurrentCulture)
             Dim curCulture = CultureInfo.CurrentCulture
             CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
@@ -941,7 +941,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ShowEntryForm(Of T As New)(ByRef formEntry As T)
             If (MdiChildren.Length > GlobalVariables.MaximumOpenForms - 1) Then
                 Dim maxOpenForms As String = GlobalVariables.MaximumOpenForms.ToString()
-                Messaging.Show(True, "MsgTooManyFormsOpen", "Too many forms open. You can only open up to {maxOpenForms} forms at the same time.", "Too many forms open", {"maxOpenForms", maxOpenForms})
+                MessagingService.Show(True, "MsgTooManyFormsOpen", "Too many forms open. You can only open up to {maxOpenForms} forms at the same time.", "Too many forms open", {"maxOpenForms", maxOpenForms})
             Else
                 Invoker.InvokeFunction(formEntry, "Show")
             End If
@@ -962,7 +962,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub ToolStripButtonHelp_Click(sender As Object, e As EventArgs)
             Dim maxOpenForms As String = GlobalVariables.MaximumOpenForms.ToString()
-            Messaging.Show(True, "MsgTooManyFormsOpen", "Too many forms open. You can only open up to {maxOpenForms} forms at the same time.", "Too many forms open", {"maxOpenForms", maxOpenForms})
+            MessagingService.Show(True, "MsgTooManyFormsOpen", "Too many forms open. You can only open up to {maxOpenForms} forms at the same time.", "Too many forms open", {"maxOpenForms", maxOpenForms})
         End Sub
 
         ''' <summary>
@@ -1029,7 +1029,7 @@ Namespace PresentationLayer.Views.Forms
                         If form.LoginOk Then
                             LogStatus = LoginStatus.LoggedIn
                         Else
-                            Messaging.Show(True, "MsgOldPasswordError")
+                            MessagingService.Show(True, "MsgOldPasswordError")
                             LogStatus = LoginStatus.LoggedOut
                             LogStatus = LoginStatus.LoggedOut
                         End If

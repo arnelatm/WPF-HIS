@@ -2,8 +2,8 @@
 Imports AATM.Common
 Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Events
+Imports AATM.Libraries.Messaging
+Imports AATM.Presentation.Events
 
 Namespace PresentationLayer.Views.Forms.Reports
 
@@ -62,17 +62,17 @@ Namespace PresentationLayer.Views.Forms.Reports
             Refresh()
             Dim valid As Boolean = True
             If dtpBeginningDate.Value Is Nothing Or dtpBeginningDate.Value Is Nothing Then
-                Messaging.Show(True, "MsgDatesCannotBeEmpty")
+                MessagingService.Show(True, "MsgDatesCannotBeEmpty")
                 valid = False
             ElseIf dtpBeginningDate.Value > dtpBeginningDate.Value Then
-                Messaging.Show(True, "MsgBegDateMustBeLessThanEndDate")
+                MessagingService.Show(True, "MsgBegDateMustBeLessThanEndDate")
                 valid = False
             End If
             If valid Then
                 Dim reportTitle As String
                 Dim bDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(dtpBeginningDate.Value, CultureInfo.CreateSpecificCulture("en-GB"))
                 Dim eDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(dtpEndingDate.Value, CultureInfo.CreateSpecificCulture("en-GB"))
-                reportTitle = Messaging.TranslateCaption("Account Activity Report")
+                reportTitle = MessagingService.TranslateCaption("Account Activity Report")
                 Dim formCultureLanguage As String = CultureInfo.CurrentUICulture.Name
                 Dim language As String = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-"))
                 Dim reportFileName As String

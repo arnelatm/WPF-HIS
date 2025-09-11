@@ -1,6 +1,6 @@
-﻿Imports AATM.PresentationLayer.Models
-Imports AATM.PresentationLayer.Presenters
-Imports AATM.PresentationLayer.Views.Interfaces
+﻿Imports AATM.Presentation.Models
+Imports AATM.Presentation.Presenters
+Imports AATM.Presentation.Views.Interfaces
 Imports AATM.ServicesLayer.Services
 
 Namespace PresentationLayer.Presenters

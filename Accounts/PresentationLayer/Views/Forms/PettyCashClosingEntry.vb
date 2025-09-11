@@ -2,7 +2,7 @@
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 
 Namespace PresentationLayer.Views.Forms
 
@@ -23,7 +23,7 @@ Namespace PresentationLayer.Views.Forms
             ' This call is required by the designer.
             InitializeComponent()
             ' Add any initialization after the InitializeComponent() call.
-            Me.Text = Messaging.TranslateCaption("Petty Cash Closing Journal")
+            Me.Text = MessagingService.TranslateCaption("Petty Cash Closing Journal")
             _nfi.NumberDecimalDigits = 2
             FirstControl = dtpTransactionDate
             QuitOnSave = True

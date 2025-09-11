@@ -3,17 +3,14 @@ Imports System.Drawing.Printing
 Imports System.Globalization
 Imports System.Reflection
 Imports System.Reflection.Emit
-Imports System.Security.Principal
 Imports System.Transactions
 Imports System.Windows.Forms
 Imports AATM.BusinessLayer.BusinessObjects
-Imports AATM.Libraries
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Events
-Imports AATM.PresentationLayer.Models
-Imports AATM.PresentationLayer.Views
+Imports AATM.Libraries.Messaging
+Imports AATM.Presentation.Models
+Imports AATM.Presentation.Views
 Imports AATM.ServicesLayer.Services
 Imports AutoMapper
 Imports KellermanSoftware.CompareNetObjects
@@ -365,12 +362,12 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
 
     Public Shared Function IsDateRangeValid(text As String, targetDate As Date, startDate As Date, endDate As Date) As DialogResult
         Dim retValue As DialogResult
-        Dim dateField As String = Messaging.TranslateCaption(text)
+        Dim dateField As String = MessagingService.TranslateCaption(text)
         Dim startDateStr As String = startDate.ToShortDateString()
         Dim endDateStr As String = endDate.ToShortDateString()
         If targetDate < startDate Or targetDate > endDate Then
             Dim variables = {"dateField", dateField, "startDate", startDateStr, "endDate", endDateStr}
-            Messaging.ShowPmMessage(True, "MsgDateNotInRange", variables)
+            MessagingService.ShowPmMessage(True, "MsgDateNotInRange", variables)
             retValue = DialogResult.No
         Else
             retValue = DialogResult.Yes
@@ -454,9 +451,9 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     Public Function GetAppSetting(ByVal settingCode As String, ByVal group As String, ByVal description As String)
         Dim retValue = Service.GetRecordFieldWithKey(settingCode, "Setting", "SettingCode", "Value")
         If retValue Is Nothing Then
-            Dim setupName As String = Messaging.TranslateCaption(description)
+            Dim setupName As String = MessagingService.TranslateCaption(description)
             Dim groupSetting As String = group
-            Messaging.ShowPmMessage(True, "MsgSettingNotSet", {"setupName", setupName, "groupSetting", groupSetting})
+            MessagingService.ShowPmMessage(True, "MsgSettingNotSet", {"setupName", setupName, "groupSetting", groupSetting})
             Return Nothing
         End If
         Return retValue
@@ -486,9 +483,9 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     Public Function GetDepartmentUseSetting()
         Dim retValue = Service.GetRecordFieldWithKey("DEPT", "Setting", "SettingCode", "Value")
         If retValue Is Nothing Then
-            Dim setupName As String = Messaging.TranslateCaption("Use Revenue/Cost Centers")
+            Dim setupName As String = MessagingService.TranslateCaption("Use Revenue/Cost Centers")
             Dim groupSetting As String = "Company"
-            Messaging.ShowPmMessage(True, "MsgSettingNotSet", {"setupName", setupName, "groupSetting", groupSetting})
+            MessagingService.ShowPmMessage(True, "MsgSettingNotSet", {"setupName", setupName, "groupSetting", groupSetting})
             Return Nothing
         End If
         If retValue = "0" Then
@@ -639,9 +636,9 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     Public Function GetRevCostCenterUseSetting()
         Dim retValue = Service.GetRecordFieldWithKey("RCCN", "Setting", "SettingCode", "Value")
         If retValue Is Nothing Then
-            Dim setupName As String = Messaging.TranslateCaption("Use Departments")
+            Dim setupName As String = MessagingService.TranslateCaption("Use Departments")
             Dim groupSetting As String = "Company"
-            Messaging.ShowPmMessage(True, "MsgSettingNotSet", {"setupName", setupName, "groupSetting", groupSetting})
+            MessagingService.ShowPmMessage(True, "MsgSettingNotSet", {"setupName", setupName, "groupSetting", groupSetting})
             Return Nothing
         End If
         If retValue = "0" Then
@@ -732,13 +729,13 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Dim retValue = 0
         Dim currentIdNo = Invoker.GetProperty(View, IdFieldName)
         If IsOkToDeleteRecord() Then
-            If Messaging.Show(True, "AskIfDeleteRecord", "Are you sure you want to delete this record?", "Please Confirm Delete!", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
+            If MessagingService.Show(True, "AskIfDeleteRecord", "Are you sure you want to delete this record?", "Please Confirm Delete!", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
                 RaiseEvent BeforeDelete()
                 retValue = DeleteRecord(currentIdNo)
                 If retValue < 0 Then
-                    Messaging.Show(True, "MsgDeleteRecordFailed", "This record was not deleted because of an error. Please try again later or ask Database Administrator for help.", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    MessagingService.Show(True, "MsgDeleteRecordFailed", "This record was not deleted because of an error. Please try again later or ask Database Administrator for help.", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Else
-                    Messaging.Show(True, "MsgRecordSuccessfullyDeleted", "Record was successfully deleted.", "Record Deleted")
+                    MessagingService.Show(True, "MsgRecordSuccessfullyDeleted", "Record was successfully deleted.", "Record Deleted")
                     ' if deleted stay on that given RecordPositionNumber
                     ' which in this case will be the next record after the deleted record
                     TargetIdNo = GetIdNoOfSortedPositionNumber(RecordPositionNumber)
@@ -774,7 +771,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
 
     Public Sub GoNextRecord()
         If RecordPositionNumber = RecordCount Then
-            Messaging.Show(True, "MsgLastRecordHit", "This is already the last record.", "Last Record")
+            MessagingService.Show(True, "MsgLastRecordHit", "This is already the last record.", "Last Record")
         Else
             RecordPositionNumber += 1
         End If
@@ -782,7 +779,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
 
     Public Sub GoPreviousRecord()
         If RecordPositionNumber = 1 Or RecordPositionNumber = 0 Then
-            Messaging.Show(True, "MsgFirstRecordHit", "This is already the first record.", "First Record")
+            MessagingService.Show(True, "MsgFirstRecordHit", "This is already the first record.", "First Record")
         Else
             RecordPositionNumber -= 1
         End If
@@ -799,10 +796,10 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     Public Overridable Function MessageBeforeSave() As Boolean
         Dim retVal As Boolean = False
         Dim caption = "Please confirm."
-        Dim action As String = Messaging.TranslateCaption("save")
-        Dim itemName As String = Messaging.TranslateCaption("transaction")
-        Dim msg = Messaging.GetParametrizedMessage(True, "AskIfContinueAction", {"action", action, "itemName", itemName})
-        If Messaging.Show(msg, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+        Dim action As String = MessagingService.TranslateCaption("save")
+        Dim itemName As String = MessagingService.TranslateCaption("transaction")
+        Dim msg = MessagingService.GetParametrizedMessage(True, "AskIfContinueAction", {"action", action, "itemName", itemName})
+        If MessagingService.Show(msg, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
             retVal = True
         End If
         Return retVal
@@ -860,10 +857,10 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         End If
         Dim idNo = Service.GetRecordFieldWithKeyG(Of Integer, Integer)(searchIdNo, dependentTableName, searchFieldName, returnIdFieldName)
         If idNo > 0 Then
-            Dim dependentTable = Messaging.TranslateCaption(dependentTableName)
-            Dim additionalMessage = Messaging.GetParametrizedMessage(True, "MsgSeeTableEntry", {"tableName", dependentTable, "idNumber", idNo})
-            Dim message = Messaging.GetParametrizedMessage(True, "MsgDependentRecordExists", {"additionalMessage", additionalMessage})
-            Messaging.Show(message, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Dim dependentTable = MessagingService.TranslateCaption(dependentTableName)
+            Dim additionalMessage = MessagingService.GetParametrizedMessage(True, "MsgSeeTableEntry", {"tableName", dependentTable, "idNumber", idNo})
+            Dim message = MessagingService.GetParametrizedMessage(True, "MsgDependentRecordExists", {"additionalMessage", additionalMessage})
+            MessagingService.Show(message, MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return True
         End If
         Return False
@@ -872,10 +869,10 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     'Public Function CheckDependentRecords(Of TS)(ByVal searchValue As TS, ByVal dependentTableName As String, ByVal keyFieldName As String) As Boolean
     '    Dim idNo = Service.GetRecordFieldWithKeyG(Of Integer, Integer)(searchValue, dependentTableName, keyFieldName)
     '    If idNo > 0 Then
-    '        Dim dependentTable = Messaging.TranslateCaption(dependentTableName)
-    '        Dim additionalMessage = Messaging.GetParametrizedMessage(True, "MsgSeeTableEntry", {"tableName", dependentTable, "idNumber", idNo})
-    '        Dim message = Messaging.GetParametrizedMessage(True, "MsgDependentRecordExists", {"additionalMessage", additionalMessage})
-    '        Messaging.Show(message, MessageBoxButtons.OK, MessageBoxIcon.Error)
+    '        Dim dependentTable = MessagingService.TranslateCaption(dependentTableName)
+    '        Dim additionalMessage = MessagingService.GetParametrizedMessage(True, "MsgSeeTableEntry", {"tableName", dependentTable, "idNumber", idNo})
+    '        Dim message = MessagingService.GetParametrizedMessage(True, "MsgDependentRecordExists", {"additionalMessage", additionalMessage})
+    '        MessagingService.Show(message, MessageBoxButtons.OK, MessageBoxIcon.Error)
     '        Return True
     '    End If
     '    Return False
@@ -890,16 +887,16 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
             GlobalVariables.Mapper.Map(Of IView, TM)(View, record)
             retVal = InitiateSave()
             If retVal < 0 Then
-                Messaging.Show(True, "MsgSaveRecordFailed", "Something went wrong during saving, saving record failed", "Saving Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessagingService.Show(True, "MsgSaveRecordFailed", "Something went wrong during saving, saving record failed", "Saving Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Else
                 RaiseEvent AfterSave()
             End If
             If retVal < 0 Then
             Else
                 If PromptOnSavedRecord Then
-                    Messaging.Show(True, "MsgRecordSuccessfullySaved")
+                    MessagingService.Show(True, "MsgRecordSuccessfullySaved")
                 Else
-                    Messaging.MessageTimeOutNowait("Record Saved", "Record Saved", 1)
+                    MessagingService.MessageTimeOutNowait("Record Saved", "Record Saved", 1)
                 End If
                 If AddMode Then
                     RecordPositionNumber = GetSortedRecordPosition(retVal)
@@ -921,15 +918,15 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     Public Function SaveOrAbandonChanges() As DialogResult
         Dim result As DialogResult
         Dim msg As String
-        msg = Messaging.GetMessage(True, "AskIfUserWantsToSaveOrContinueEdits",
+        msg = MessagingService.GetMessage(True, "AskIfUserWantsToSaveOrContinueEdits",
                                  "Changes have been made to this record.  Press [Yes] to save changes, [No] to Abandon changes, or press [Cancel] to continue editing record? Save Changes?",
                                  "Please Confirm.")
         If GlobalVariables.ShowDataDifferenceWhenSaving Then
-            result = Messaging.Show(msg & Environment.NewLine & CompareDifferences, "Please Confirm", MessageBoxButtons.YesNoCancel,
+            result = MessagingService.Show(msg & Environment.NewLine & CompareDifferences, "Please Confirm", MessageBoxButtons.YesNoCancel,
                                 MessageBoxIcon.Question,
                                 MessageBoxDefaultButton.Button3)
         Else
-            result = Messaging.Show(msg & Environment.NewLine, "Please Confirm", MessageBoxButtons.YesNoCancel,
+            result = MessagingService.Show(msg & Environment.NewLine, "Please Confirm", MessageBoxButtons.YesNoCancel,
                                     MessageBoxIcon.Question,
                                     MessageBoxDefaultButton.Button3)
         End If
@@ -951,8 +948,8 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
                 _errorList = _errorList & bizError & Environment.NewLine
             End If
         Next
-        Messaging.MessageKey = "ValidationErrors"
-        Messaging.Show(_errorList, $"Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        MessagingService.MessageKey = "ValidationErrors"
+        MessagingService.Show(_errorList, $"Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
     End Sub
 
     Public Sub Undo()
@@ -1308,7 +1305,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
             Dim data As New LookupTable.LookupData With {
                 .IdNo = CInt(c),
                 .Code = EnumToCode(c),
-                .Name = Messaging.TranslateCaption(c.ToString().SplitCamelCase())
+                .Name = MessagingService.TranslateCaption(c.ToString().SplitCamelCase())
             }
             dataList.Add(data)
         Next
@@ -1385,7 +1382,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         validated = CheckForDataErrors(eventType)
         If validated AndAlso (EditMode Or AddMode) Then
             If Not ChangesMade() Then
-                Messaging.Show(True, "MsgNoChangesMadeNothingToSave", "No changes made, nothing to save!", "Nothing to save")
+                MessagingService.Show(True, "MsgNoChangesMadeNothingToSave", "No changes made, nothing to save!", "Nothing to save")
                 noChanges = True
             Else
                 If Not IsBizDataValid() Then
@@ -1404,7 +1401,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
                 End If
             Else
                 Beep()
-                Messaging.MessageKey = "ValidationErrors"
+                MessagingService.MessageKey = "ValidationErrors"
                 MessageBox.Show("Record not saved!" & Environment.NewLine & _dataErrors, $"Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 eventType.ValidData = False
                 'ShowErrors("Record not saved!" & Environment.NewLine & _dataErrors)
@@ -1475,7 +1472,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
                 Dim controlName As String = ControlDescription(obj)
                 Dim num As Double
                 If Not IsNumeric(targetValue) Then
-                    FormatError(obj, Messaging.GetParametrizedMessage(True, "MsgInvalidNumericValue", {"controlName", controlName, "text", obj.Text}))
+                    FormatError(obj, MessagingService.GetParametrizedMessage(True, "MsgInvalidNumericValue", {"controlName", controlName, "text", obj.Text}))
                     returnValue = False
                 Else
                     Dim nMinValue As Double
@@ -1490,7 +1487,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
                     End If
                     num = Val(targetValue)
                     If num < nMinValue OrElse num > nMaxValue Then
-                        Dim err As String = Messaging.GetParametrizedMessage(True, "MsgNumericOverflow", {"number", obj.Text, "controlName", controlName, "lowNumber", nMinValue.ToString(), "highNumber", nMaxValue.ToString()})
+                        Dim err As String = MessagingService.GetParametrizedMessage(True, "MsgNumericOverflow", {"number", obj.Text, "controlName", controlName, "lowNumber", nMinValue.ToString(), "highNumber", nMaxValue.ToString()})
                         returnValue = False
                     End If
                     Dim isInteger As Boolean = False
@@ -1505,12 +1502,12 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
                     End If
                     If isInteger Then
                         If Not Math.Abs(num Mod 1) <= (Double.Epsilon * 100) Then
-                            FormatError(obj, Messaging.GetParametrizedMessage(True, "MsgInvalidInteger", {"number", obj.Text, "controlName", controlName}))
+                            FormatError(obj, MessagingService.GetParametrizedMessage(True, "MsgInvalidInteger", {"number", obj.Text, "controlName", controlName}))
                             returnValue = False
                         End If
                     End If
                     If num < obj.MinimumValue OrElse num > obj.MaximumValue Then
-                        FormatError(obj, Messaging.GetParametrizedMessage(True, "MsgNumericOverflow", {"number", obj.Text, "controlName", controlName, "lowNumber", obj.MinimumValue, "highNumber", obj.MaximumValue}))
+                        FormatError(obj, MessagingService.GetParametrizedMessage(True, "MsgNumericOverflow", {"number", obj.Text, "controlName", controlName, "lowNumber", obj.MinimumValue, "highNumber", obj.MaximumValue}))
                         returnValue = False
                     End If
                 End If
@@ -1538,7 +1535,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
             End If
         End If
         If recordIsNotUnique Then
-            Dim errorMessage = Messaging.GetParametrizedMessage(True, "MsgDuplicateValuesNotAllowed", {"fieldValue", cCtrl.Text, "fieldDescription", ControlDescription(cCtrl)})
+            Dim errorMessage = MessagingService.GetParametrizedMessage(True, "MsgDuplicateValuesNotAllowed", {"fieldValue", cCtrl.Text, "fieldDescription", ControlDescription(cCtrl)})
             FormatError(cCtrl, errorMessage)
             Return False
         End If
@@ -1952,9 +1949,9 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
                 End If
             End If
             If inform Then
-                Dim securityKeyMessage = Messaging.TranslateCaption(securityKey)
-                Dim message = Messaging.GetParametrizedMessage(True, "MsgNoAccessToSecurity", {"securityKey", securityKeyMessage})
-                Messaging.Show(message)
+                Dim securityKeyMessage = MessagingService.TranslateCaption(securityKey)
+                Dim message = MessagingService.GetParametrizedMessage(True, "MsgNoAccessToSecurity", {"securityKey", securityKeyMessage})
+                MessagingService.Show(message)
             End If
         End If
         Return hasAccess
@@ -2095,7 +2092,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         For Each c In [Enum].GetValues(GetType(TE))
             Dim workRow As DataRow = dt.NewRow()
             workRow("IdNo") = CInt(c)
-            workRow("Name") = Messaging.TranslateCaption(c.ToString().SplitCamelCase())
+            workRow("Name") = MessagingService.TranslateCaption(c.ToString().SplitCamelCase())
             workRow("Code") = EnumToCode(c)
             dt.Rows.Add(workRow)
         Next

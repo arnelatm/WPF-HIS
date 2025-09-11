@@ -5,7 +5,7 @@ Imports System.Text.RegularExpressions
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.GlobalResources
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 
 Public Class CCustomDateTimePicker
     Implements IEntryControl, ILinkedLabel
@@ -70,9 +70,9 @@ Public Class CCustomDateTimePicker
 #Region "Declarations#"
 
     ' Text Menu Captions
-    Private ReadOnly _textFind = MessagingLibrary.Messaging.TranslateCaption("Find on this field")
+    Private ReadOnly _textFind = MessagingService.TranslateCaption("Find on this field")
 
-    Private ReadOnly _textSelectAll = MessagingLibrary.Messaging.TranslateCaption("Select All Text")
+    Private ReadOnly _textSelectAll = MessagingService.TranslateCaption("Select All Text")
 
 #End Region
 
@@ -510,16 +510,16 @@ Public Class CCustomDateTimePicker
 
     Public Sub InformUserOfInvalidDate()
         ToolTip1.ToolTipTitle = "Input Rejected"
-        Dim calendarName As String = Messaging.TranslateCaption(CalendarNameInEnglish(_targetCulture))
+        Dim calendarName As String = MessagingService.TranslateCaption(CalendarNameInEnglish(_targetCulture))
         Dim cText = txtDate.Text
         Dim cCalendarName As String = calendarName
         ToolTip1.ToolTipTitle = "Input Rejected"
-        Messaging.ShowPmMessage(True, "MsgErroneousDate", {"enteredDate", cText, "calendarName", cCalendarName})
+        MessagingService.ShowPmMessage(True, "MsgErroneousDate", {"enteredDate", cText, "calendarName", cCalendarName})
     End Sub
 
     Private Sub InformUserOfInvalidTime()
         ToolTip1.ToolTipTitle = "Input Rejected"
-        Messaging.Show(True, "MsgErroneousTime")
+        MessagingService.Show(True, "MsgErroneousTime")
     End Sub
 
     Public Function CalendarNameInEnglish(targetCulture As CultureInfo)

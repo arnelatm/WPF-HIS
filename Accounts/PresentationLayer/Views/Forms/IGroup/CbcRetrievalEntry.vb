@@ -7,7 +7,7 @@ Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 
 Namespace PresentationLayer.Views.Forms
 
@@ -964,7 +964,7 @@ Namespace PresentationLayer.Views.Forms
         '        End Select
         '    Next
         '    SetNormalValues()
-        '    Messaging.Show("Data successfully retrieved!")
+        '    MessagingService.Show("Data successfully retrieved!")
         'End Sub
 
         'Private Sub SetNormalValues()
@@ -1083,7 +1083,7 @@ Namespace PresentationLayer.Views.Forms
         '        GetResultOnFile(sFiles, aFileResults, aCBCResults)
         '        success = True
         '    ElseIf sFiles.Count() > 1 Then
-        '        Messaging.Show("Multiple results found on file, please manually select the record you want to transfer")
+        '        MessagingService.Show("Multiple results found on file, please manually select the record you want to transfer")
         '        Dim cbcReportSelector As New CbcReportSelector(sFiles, filePath, txtInvoiceNo.Text)
         '        Dim result = cbcReportSelector.ShowDialog()
         '        If result = DialogResult.OK Then

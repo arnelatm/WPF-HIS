@@ -4,8 +4,8 @@ Imports AATM.Common
 Imports AATM.Libraries
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Views
+Imports AATM.Libraries.Messaging
+Imports AATM.Presentation.Views
 
 Namespace PresentationLayer.Views.Forms
 
@@ -39,7 +39,7 @@ Namespace PresentationLayer.Views.Forms
             ' This call is required by the designer.
             InitializeComponent()
             ' Add any initialization after the InitializeComponent() call.
-            Text = Messaging.TranslateCaption("Dosage Printing")
+            Text = MessagingService.TranslateCaption("Dosage Printing")
             _nfi.NumberDecimalDigits = 2
 
         End Sub

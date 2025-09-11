@@ -4,7 +4,7 @@ Imports System.Globalization
 Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 
 Namespace AdoNet
 
@@ -281,7 +281,7 @@ Namespace AdoNet
             Implements IBaseDao.FindFieldContinue
             Dim retVal As Integer
             If _lastFindQuery Is Nothing Then
-                Messaging.Show(True, "MsgNoPrevSearchFindInvalid")
+                MessagingService.Show(True, "MsgNoPrevSearchFindInvalid")
                 retVal = lastIdNo
             Else
                 Dim sql As String

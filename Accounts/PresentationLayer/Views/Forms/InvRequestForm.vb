@@ -1,6 +1,6 @@
 ﻿Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 
 Namespace PresentationLayer.Views.Forms
 
@@ -33,7 +33,7 @@ Namespace PresentationLayer.Views.Forms
                 dgvColumnName.Image = imgList.Images(0)
                 dgvColumnName.Width = 35
                 dgvColumnName.Name = dgvName
-                dgvColumnName.HeaderText = Messaging.TranslateCaption(caption)
+                dgvColumnName.HeaderText = MessagingService.TranslateCaption(caption)
             End With
         End Sub
 
@@ -123,7 +123,7 @@ Namespace PresentationLayer.Views.Forms
             Dim invTranIdNo As Int32 = dgvRow.Cells("dgvIdNo").Value
             RaiseEvent RowChanged(invTranIdNo)
             bsInvTranItems.ResetBindings(False)
-            lblRequestedItems.Text = Messaging.TranslateCaption("Requested Items for ") + dgvRow.Cells("dgvReferenceNo").Value
+            lblRequestedItems.Text = MessagingService.TranslateCaption("Requested Items for ") + dgvRow.Cells("dgvReferenceNo").Value
         End Sub
 
         Private Sub InvRequestForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load

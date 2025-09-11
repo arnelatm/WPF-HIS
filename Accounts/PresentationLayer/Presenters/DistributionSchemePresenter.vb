@@ -1,7 +1,7 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Presenters
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 
 Namespace PresentationLayer.Presenters
 
@@ -77,20 +77,20 @@ Namespace PresentationLayer.Presenters
             Dim totalPercentage As Decimal = 0D
             If MyBase.IsBizDataValid() Then
                 If View.DistributionSchemeItems Is Nothing OrElse View.DistributionSchemeItems.Count = 0 Then
-                    Messaging.Show(True, "MsgBlankDistributionScheme")
+                    MessagingService.Show(True, "MsgBlankDistributionScheme")
                     retValue = False
                 Else
                     For Each item In View.DistributionSchemeItems
                         totalPercentage += item.Percentage
                         If item.RevCostCenterIdNo = 0 Then
                             Dim lineNumber = Format(item.Sequence, "0")
-                            Messaging.ShowPmMessage(True, "MsgBlankRevenueCostCenter", {"lineNumber", lineNumber})
+                            MessagingService.ShowPmMessage(True, "MsgBlankRevenueCostCenter", {"lineNumber", lineNumber})
                             retValue = False
                             Exit For
                         End If
                     Next
                     If retValue And Math.Abs(totalPercentage - 100.0) > 0.001 Then
-                        Messaging.Show(True, "MsgInvalidTotalPercentage")
+                        MessagingService.Show(True, "MsgInvalidTotalPercentage")
                         retValue = False
                     End If
                 End If

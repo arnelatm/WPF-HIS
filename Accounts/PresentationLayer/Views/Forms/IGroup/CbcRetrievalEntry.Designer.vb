@@ -1,7 +1,7 @@
 ﻿Namespace PresentationLayer.Views.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
     Partial Class CbcRetrievalEntry
-        Inherits AATM.PresentationLayer.Forms.BFMain
+        Inherits AATM.Presentation.Forms.BFMain
 
         'Form overrides dispose to clean up the component list.
         <System.Diagnostics.DebuggerNonUserCode()>

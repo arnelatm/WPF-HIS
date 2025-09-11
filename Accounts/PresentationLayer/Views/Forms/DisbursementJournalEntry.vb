@@ -2,7 +2,7 @@
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 
 Namespace PresentationLayer.Views.Forms
 
@@ -33,15 +33,15 @@ Namespace PresentationLayer.Views.Forms
             ' This call is required by the designer.
             InitializeComponent()
             _tableName = tableName
-            AATM.PresentationLayer.Forms.Services.Ui.UiPerformanceHelper.EnableDoubleBuff(tlpDisbursement)
+            AATM.Presentation.Forms.Services.Ui.UiPerformanceHelper.EnableDoubleBuff(tlpDisbursement)
             ' Add any initialization after the InitializeComponent() call.
             If tableName = "CdJournal" Then
                 ViewDisplayName = "CdJournalEntry"
                 DisplayPrintCheckButton(PayType)
-                Me.Text = Messaging.TranslateCaption("Cash Disbursement Journal")
+                Me.Text = MessagingService.TranslateCaption("Cash Disbursement Journal")
             Else
                 ViewDisplayName = "PcJournalEntry"
-                Me.Text = Messaging.TranslateCaption("Petty Cash Disbursement Journal")
+                Me.Text = MessagingService.TranslateCaption("Petty Cash Disbursement Journal")
                 btnPrintCheck.Visible = False
                 btnPrintPcReplenishment.Visible = False
                 cboPayType.Visible = False
@@ -619,7 +619,7 @@ Namespace PresentationLayer.Views.Forms
             Dim cdJournalRow As DataGridViewRow = DataGridViewJournalItems.Rows(0)
             If DataGridViewJournalItems.SelectedRows.Contains(cdJournalRow) Then
                 ' Do not allow the user to delete the first row.
-                Messaging.Show(True, "MsgFirstRowDeletionNotAllowed", "Deletion of the first row Is Not allowed!", "Delete Error")
+                MessagingService.Show(True, "MsgFirstRowDeletionNotAllowed", "Deletion of the first row Is Not allowed!", "Delete Error")
                 ' Cancel the deletion
                 e.Cancel = True
             End If
@@ -713,9 +713,9 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub UpdateViewGLBtnDisplay()
             If DataGridViewJournalItems.Visible Then
-                btnViewGL.Text = Messaging.TranslateCaption("Hide Journal Entry")
+                btnViewGL.Text = MessagingService.TranslateCaption("Hide Journal Entry")
             Else
-                btnViewGL.Text = Messaging.TranslateCaption("View Journal Entry")
+                btnViewGL.Text = MessagingService.TranslateCaption("View Journal Entry")
             End If
         End Sub
 

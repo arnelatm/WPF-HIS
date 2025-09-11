@@ -2,7 +2,7 @@
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Views
+Imports AATM.Presentation.Views
 
 Namespace PresentationLayer.Views
 

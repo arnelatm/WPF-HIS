@@ -3,7 +3,7 @@ Imports System.Text
 Imports System.Windows.Forms
 Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 Imports AATM.ServicesLayer.Services
 
 Public Class UserModel

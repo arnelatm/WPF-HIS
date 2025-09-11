@@ -1,5 +1,5 @@
 ﻿Imports System.Windows.Forms
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 
 Public Class DisplayProgressForm
 
@@ -17,7 +17,7 @@ Public Class DisplayProgressForm
     Public Sub InitializeDisplay(Optional nMaxValue As Int32 = 100, Optional description As String = Nothing)
         Me.CenterToScreen()
         If description Is Nothing Then
-            Dim caption = Messaging.TranslateCaption("Please wait processing request...")
+            Dim caption = MessagingService.TranslateCaption("Please wait processing request...")
             _description = caption
         Else
             _description = description

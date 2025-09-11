@@ -1,0 +1,7 @@
+Layer			Project Name			Root Namespace			Contents
+Views (UI)		MyApp.Views				MyApp.Views				WinForms, UserControls
+Presentation	MyApp.Presentation		MyApp.Presentation		Presenters, Interfaces
+Model			MyApp.Model				MyApp.Model				Entities, Value Objects
+Data			MyApp.Data				MyApp.Data				Repositories, DbContext
+Common			MyApp.Common (or Core)	MyApp.Common			Helpers, Extensions, Logging
+Tests			MyApp.Tests				MyApp.Tests				Unit tests (mirror namespaces of tested code)

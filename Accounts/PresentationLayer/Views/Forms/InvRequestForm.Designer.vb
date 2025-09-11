@@ -2,7 +2,7 @@
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
     Partial Class InvRequestForm
 
-        Inherits AATM.PresentationLayer.Forms.CFormBase
+        Inherits AATM.Presentation.Forms.CFormBase
 
         'Form overrides dispose to clean up the component list.
         <System.Diagnostics.DebuggerNonUserCode()>

@@ -1,6 +1,6 @@
 ﻿Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Views.Interfaces
+Imports AATM.Libraries.Messaging
+Imports AATM.Presentation.Views.Interfaces
 Imports AATM.ServicesLayer.Services
 
 Public Class SecurityObjectPresenter(Of TM As New)
@@ -26,7 +26,7 @@ Public Class SecurityObjectPresenter(Of TM As New)
         Dim retValue = False
         If MyBase.IsBizDataValid() Then
             If EditMode And View.ParentIdNo = View.IdNo Then
-                Messaging.Show(True, "MsgMemberCannotBeAParentToItself")
+                MessagingService.Show(True, "MsgMemberCannotBeAParentToItself")
             Else
                 retValue = True
             End If

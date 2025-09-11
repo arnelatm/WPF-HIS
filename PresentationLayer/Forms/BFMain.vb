@@ -6,11 +6,11 @@ Imports System.Windows.Forms
 Imports AATM.Libraries
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Events
-Imports AATM.PresentationLayer.Forms.Services.Translation
-Imports AATM.PresentationLayer.Forms.Services.Ui
-Imports AATM.PresentationLayer.Views
+Imports AATM.Libraries.Messaging
+Imports AATM.Presentation.Events
+Imports AATM.Presentation.Forms.Services.Translation
+Imports AATM.Presentation.Forms.Services.Ui
+Imports AATM.Presentation.Views
 
 ' PURPOSE:
 '  Lean presentation-focused main form.
@@ -216,14 +216,14 @@ End Class
 'Imports AATM.Libraries
 'Imports AATM.Libraries.CBaseControlsLibrary
 'Imports AATM.Libraries.GlobalFuncNSub
-'Imports AATM.Libraries.MessagingLibrary
-'Imports AATM.PresentationLayer.Events
-'Imports AATM.PresentationLayer.Forms.Services.Lookup
-'Imports AATM.PresentationLayer.Forms.Services.Security
-'Imports AATM.PresentationLayer.Forms.Services.SystemView
-'Imports AATM.PresentationLayer.Forms.Services.Translation
-'Imports AATM.PresentationLayer.Forms.Services.Ui
-'Imports AATM.PresentationLayer.Views
+'Imports AATM.Libraries.Messaging
+'Imports AATM.Presentation.Events
+'Imports AATM.Presentation.Forms.Services.Lookup
+'Imports AATM.Presentation.Forms.Services.Security
+'Imports AATM.Presentation.Forms.Services.SystemView
+'Imports AATM.Presentation.Forms.Services.Translation
+'Imports AATM.Presentation.Forms.Services.Ui
+'Imports AATM.Presentation.Views
 
 'Public Class BfMain
 '    Implements IView

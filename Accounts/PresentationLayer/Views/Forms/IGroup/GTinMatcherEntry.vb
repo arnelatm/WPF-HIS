@@ -5,8 +5,8 @@ Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.DataLayer.AdoNet
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Events
-Imports AATM.PresentationLayer.Views
+Imports AATM.Presentation.Events
+Imports AATM.Presentation.Views
 
 Namespace PresentationLayer.Views.Forms
 

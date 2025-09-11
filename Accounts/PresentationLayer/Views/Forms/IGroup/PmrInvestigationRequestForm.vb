@@ -1,7 +1,7 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 
 Namespace PresentationLayer.Views.Forms
 
@@ -39,7 +39,7 @@ Namespace PresentationLayer.Views.Forms
                 dgvColumnName.Image = imgList.Images(0)
                 dgvColumnName.Width = 35
                 dgvColumnName.Name = dgvName
-                dgvColumnName.HeaderText = Messaging.TranslateCaption(caption)
+                dgvColumnName.HeaderText = MessagingService.TranslateCaption(caption)
             End With
         End Sub
 

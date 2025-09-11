@@ -41,7 +41,7 @@ Public Module Main
         AddHandler WaitTimer.Tick, AddressOf WaitTimeDone
         WaitTimer.Start()
 
-        Dim x As DialogResult = AATM.Libraries.MessagingLibrary.Messaging.Show(True, "AskAutoLogOff",
+        Dim x As DialogResult = AATM.Libraries.Messaging.MessagingService.Show(True, "AskAutoLogOff",
                                            MessageBoxButtons.YesNo,
                                            MessageBoxIcon.Warning,
                                            MessageBoxDefaultButton.Button2)

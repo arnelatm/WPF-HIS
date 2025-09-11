@@ -1,7 +1,7 @@
 ﻿Imports AATM.Accounts.BusinessLayer
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 
 Namespace DataLayer.AdoNet
     ' Data access object for PayElement
@@ -58,9 +58,9 @@ Namespace DataLayer.AdoNet
             Dim dao = New BaseDao
             Dim retValue = dao.GetRecordFieldWithKey("PYGP", "Setting", "SettingCode", "Value")
             If retValue Is Nothing Then
-                Dim setupName As String = Messaging.TranslateCaption("Use Pay Groups")
+                Dim setupName As String = MessagingService.TranslateCaption("Use Pay Groups")
                 Dim groupSetting As String = "Payroll"
-                Messaging.ShowPmMessage(True, "MsgSettingNotSet", {"setupName", setupName, "minimumValue", groupSetting, "maximumValue", groupSetting})
+                MessagingService.ShowPmMessage(True, "MsgSettingNotSet", {"setupName", setupName, "minimumValue", groupSetting, "maximumValue", groupSetting})
                 Return False
             End If
             If retValue = "1" Then

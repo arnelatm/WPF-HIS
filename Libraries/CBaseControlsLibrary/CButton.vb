@@ -6,6 +6,7 @@ Imports System.Drawing.Design
 Imports System.Drawing.Drawing2D
 Imports System.Runtime.InteropServices
 Imports System.Windows.Forms
+Imports AATM.Libraries.Messaging
 
 #End Region
 
@@ -112,7 +113,7 @@ Public Class CButton
             RaiseEvent ClickButtonArea(Sender, e)
         Else
             Beep()
-            MessagingLibrary.Messaging.Show(True, "MsgSecurityError")
+            MessagingService.Show(True, "MsgSecurityError")
 
         End If
     End Sub

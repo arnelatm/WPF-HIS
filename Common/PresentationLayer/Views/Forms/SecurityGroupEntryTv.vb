@@ -1,8 +1,8 @@
 ﻿Imports AATM.Libraries
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Views
-Imports AATM.PresentationLayer.Views.Interfaces
+Imports AATM.Presentation.Views
+Imports AATM.Presentation.Views.Interfaces
 
 Namespace PresentationLayer.Views.Forms
 

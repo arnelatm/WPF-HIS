@@ -14,8 +14,8 @@ Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Events
-Imports AATM.PresentationLayer.Views
+Imports AATM.Presentation.Events
+Imports AATM.Presentation.Views
 Imports System.Net.WebRequestMethods
 Imports System.Data.Entity.Design.PluralizationServices
 Imports System.Globalization

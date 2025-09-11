@@ -53,7 +53,7 @@ Public Class CForm
                     If TypeOf cCtrl Is CButton OrElse TypeOf cCtrl Is Button Then
                         If GetPropertyValue(cCtrl, "Image") IsNot Nothing Then
                             Dim btnImageName As String
-                            btnImageName = (cCtrl.Name.ToString() + "_" + Strings.Left(CultureInfo.CurrentCulture.Name, 2)).ToLower()
+                            btnImageName = (cCtrl.Name.ToString() + "_" + CultureInfo.CurrentCulture.TwoLetterISOLanguageName).ToLower()
                             Dim resource As Object = My.Resources.ResourceManager.GetObject(btnImageName)
                             If Not (resource Is Nothing) Then
                                 Dim i = CType(cCtrl, CButton)

@@ -3,14 +3,14 @@ Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries
-Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Events
+Imports AATM.Libraries.Messaging
+Imports AATM.Presentation.Events
 
 Namespace PresentationLayer.Presenters
 
     Public Class LeavePresenter(Of TM As New)
         Inherits CommonPresenter(Of ILeaveView, LeaveModel)
-        Implements ISubscriber(Of AATM.PresentationLayer.Events.DgvItemsChanged)
+        Implements ISubscriber(Of AATM.Presentation.Events.DgvItemsChanged)
 
         Public Sub New(view As ILeaveView)
             MyBase.New(view)

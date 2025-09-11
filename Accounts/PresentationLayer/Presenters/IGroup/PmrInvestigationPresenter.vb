@@ -78,10 +78,10 @@ Namespace PresentationLayer.Presenters
             Service.RestoreConnectionString()
 
             'If Service.GenericUpdateRecordWithIdNo(Of String)(GlobalVariables.UserIdNo, "AppSettingUser", "Password", ePassword) Then
-            '    Messaging.Show(True, "MsgPasswordSaved", "Password saved")
+            '    MessagingService.Show(True, "MsgPasswordSaved", "Password saved")
             '    retVal = True
             'Else
-            '    Messaging.Show(True, "MsgPasswordNotSaved", "Password not saved")
+            '    MessagingService.Show(True, "MsgPasswordNotSaved", "Password not saved")
             '    retVal = False
             'End If
 

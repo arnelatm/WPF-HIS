@@ -3,7 +3,7 @@
 Namespace PresentationLayer.Views.Forms.Reports
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
     Partial Class EmployeeMedicalReport
-        Inherits AATM.PresentationLayer.Forms.BFMain
+        Inherits AATM.Presentation.Forms.BFMain
 
         'Form overrides dispose to clean up the component list.
         <System.Diagnostics.DebuggerNonUserCode()> _

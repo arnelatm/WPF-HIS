@@ -1,5 +1,5 @@
 ﻿Imports AATM.Libraries
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 
 Namespace Services.SystemView
     ' Provides cached SystemView Id lookup for a form (by ViewDisplayName or Name)

@@ -3040,6 +3040,6 @@
     <value>AccountReconciliationEntry</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>AATM.PresentationLayer.Forms.CFormEntry, Forms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Presentation.Forms.CFormEntry, Forms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

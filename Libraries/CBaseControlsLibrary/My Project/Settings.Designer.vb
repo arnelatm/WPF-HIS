@@ -11,21 +11,16 @@
 Option Strict On
 Option Explicit On
 
-Imports System.CodeDom.Compiler
-Imports System.ComponentModel
-Imports System.ComponentModel.Design
-Imports System.Configuration
-Imports System.Runtime.CompilerServices
 
 Namespace My
     
-    <CompilerGenerated(),  _
-     GeneratedCode("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.9.0.0"),  _
-     EditorBrowsable(EditorBrowsableState.Advanced)>  _
+    <Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.14.0.0"),  _
+     Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
     Partial Friend NotInheritable Class MySettings
-        Inherits ApplicationSettingsBase
+        Inherits Global.System.Configuration.ApplicationSettingsBase
         
-        Private Shared defaultInstance As MySettings = CType(Synchronized(New MySettings()),MySettings)
+        Private Shared defaultInstance As MySettings = CType(Global.System.Configuration.ApplicationSettingsBase.Synchronized(New MySettings()),MySettings)
         
 #Region "My.Settings Auto-Save Functionality"
 #If _MyType = "WindowsForms" Then
@@ -63,15 +58,15 @@ End Namespace
 
 Namespace My
     
-    <HideModuleName(),  _
-     DebuggerNonUserCode(),  _
-     CompilerGenerated()>  _
+    <Global.Microsoft.VisualBasic.HideModuleNameAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute()>  _
     Friend Module MySettingsProperty
         
-        <HelpKeyword("My.Settings")>  _
-        Friend ReadOnly Property Settings() As MySettings
+        <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")>  _
+        Friend ReadOnly Property Settings() As Global.AATM.Libraries.CBaseControlsLibrary.My.MySettings
             Get
-                Return MySettings.Default
+                Return Global.AATM.Libraries.CBaseControlsLibrary.My.MySettings.Default
             End Get
         End Property
     End Module

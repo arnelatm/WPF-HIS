@@ -7,9 +7,9 @@ Imports AATM.Common.ServiceLayer
 Imports AATM.Libraries
 Imports AATM.Libraries.CrystalReportsHelper
 Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
-Imports AATM.PresentationLayer.Events
-Imports AATM.PresentationLayer.Forms
-Imports AATM.PresentationLayer.Views
+Imports AATM.Presentation.Events
+Imports AATM.Presentation.Forms
+Imports AATM.Presentation.Views
 
 Namespace PresentationLayer.Presenters
 

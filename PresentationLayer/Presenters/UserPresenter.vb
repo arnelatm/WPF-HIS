@@ -1,6 +1,6 @@
 ﻿Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Views.Interfaces
+Imports AATM.Libraries.Messaging
+Imports AATM.Presentation.Views.Interfaces
 Imports AATM.ServicesLayer.Services
 
 Public Class UserPresenter(Of TM As New)
@@ -44,7 +44,7 @@ Public Class UserPresenter(Of TM As New)
             Dim userModel As New TM
             GlobalVariables.Mapper.Map(View, userModel)
             If UpdateRecord(userModel) <= 0 Then
-                Messaging.Show(True, "MsgPasswordNotSaved", "Password not saved")
+                MessagingService.Show(True, "MsgPasswordNotSaved", "Password not saved")
             End If
         End If
     End Sub

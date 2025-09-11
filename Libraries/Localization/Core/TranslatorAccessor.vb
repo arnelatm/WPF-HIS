@@ -1,5 +1,5 @@
 Imports AATM.Libraries
-Imports AATM.Libraries.MessagingLibrary  ' for Dac
+Imports AATM.Libraries.Messaging  ' for Dac
 
 Namespace Core
     Public Module TranslatorAccessor

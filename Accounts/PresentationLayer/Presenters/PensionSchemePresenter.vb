@@ -76,7 +76,7 @@ Namespace PresentationLayer.Presenters
         '        retValue = True
         '        If Not UsePayGroups() Then
         '            If View.AccountIdNo <= 0 Then
-        '                Messaging.Show(True, "MsgPostingAccountMustNotBeBlank")
+        '                MessagingService.Show(True, "MsgPostingAccountMustNotBeBlank")
         '                retValue = False
         '            End If
         '        End If

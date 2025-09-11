@@ -4,6 +4,7 @@ Imports System.Windows.Forms
 Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.BaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.Messaging
 
 Public Class CTextBox
     Inherits BTextBox
@@ -436,14 +437,14 @@ Public Class CTextBox
 #Region "Declarations#"
 
     ' Text Menu Captions
-    Private Shared ReadOnly _textFind = MessagingLibrary.Messaging.TranslateCaption("Find on this field")
+    Private Shared ReadOnly _textFind = MessagingService.TranslateCaption("Find on this field")
 
-    Private Shared ReadOnly _textCut = MessagingLibrary.Messaging.TranslateCaption("Cut Selected Text")
-    Private Shared ReadOnly _textCopy = MessagingLibrary.Messaging.TranslateCaption("Copy Selected Text")
-    Private Shared ReadOnly _textPaste = MessagingLibrary.Messaging.TranslateCaption("Paste Text")
-    Private Shared ReadOnly _textUndo = MessagingLibrary.Messaging.TranslateCaption("Undo Last Action")
-    Private Shared ReadOnly _textDelete = MessagingLibrary.Messaging.TranslateCaption("Delete Selected Text")
-    Private Shared ReadOnly _textSelectAll = MessagingLibrary.Messaging.TranslateCaption("Select All Text")
+    Private Shared ReadOnly _textCut = MessagingService.TranslateCaption("Cut Selected Text")
+    Private Shared ReadOnly _textCopy = MessagingService.TranslateCaption("Copy Selected Text")
+    Private Shared ReadOnly _textPaste = MessagingService.TranslateCaption("Paste Text")
+    Private Shared ReadOnly _textUndo = MessagingService.TranslateCaption("Undo Last Action")
+    Private Shared ReadOnly _textDelete = MessagingService.TranslateCaption("Delete Selected Text")
+    Private Shared ReadOnly _textSelectAll = MessagingService.TranslateCaption("Select All Text")
 
 #End Region
 
@@ -561,7 +562,7 @@ Public Class CTextBox
             searchForm.Dispose()
             Invoker.InvokeFunction(myForm, "FindFieldNew", {Me})
         Else
-            AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgNothingToFind")
+            AATM.Libraries.Messaging.MessagingService.Show(True, "MsgNothingToFind")
         End If
     End Sub
 
@@ -569,7 +570,7 @@ Public Class CTextBox
         If EditingMode Then
             Cut()
         Else
-            MessagingLibrary.Messaging.Show(True, "MsgOperationNotAvailableInViewMode")
+            MessagingService.Show(True, "MsgOperationNotAvailableInViewMode")
         End If
     End Sub
 
@@ -581,7 +582,7 @@ Public Class CTextBox
         If EditingMode Then
             Paste()
         Else
-            MessagingLibrary.Messaging.Show(True, "MsgOperationNotAvailableInViewMode")
+            MessagingService.Show(True, "MsgOperationNotAvailableInViewMode")
         End If
     End Sub
 
@@ -593,7 +594,7 @@ Public Class CTextBox
         If EditingMode Then
             Undo()
         Else
-            MessagingLibrary.Messaging.Show(True, "MsgOperationNotAvailableInViewMode")
+            MessagingService.Show(True, "MsgOperationNotAvailableInViewMode")
         End If
     End Sub
 
@@ -606,7 +607,7 @@ Public Class CTextBox
                 Clipboard.SetText(clipBoardText)
             End If
         Else
-            MessagingLibrary.Messaging.Show(True, "MsgOperationNotAvailableInViewMode")
+            MessagingService.Show(True, "MsgOperationNotAvailableInViewMode")
         End If
     End Sub
 

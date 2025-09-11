@@ -1,7 +1,7 @@
 ﻿Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
+Imports AATM.Libraries.Messaging
 
 Namespace PresentationLayer.Views.Forms.Reports
 
@@ -30,8 +30,8 @@ Namespace PresentationLayer.Views.Forms.Reports
             Dim language As String
             Dim estName As String
             language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
-            reportName = Messaging.TranslateCaption("Employee Medical Report")
-            reportTitle = Messaging.GetParametrizedMessage(True, "RptForThePeriod", {"reportName", reportName})
+            reportName = MessagingService.TranslateCaption("Employee Medical Report")
+            reportTitle = MessagingService.GetParametrizedMessage(True, "RptForThePeriod", {"reportName", reportName})
             If language = "ar" Then
                 estName = GlobalVariables.EstablishmentNameAra
             Else

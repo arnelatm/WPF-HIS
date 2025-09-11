@@ -24,11 +24,11 @@ Namespace PresentationLayer.Views.Forms
             _nfi = GlobalVariables.DefaultNumberFormatInfo
             _holidayLeave = holidayLeave
             If holidayLeave Then
-                Text = MessagingLibrary.Messaging.TranslateCaption("Employee Holiday Leave Maintenance Form")
+                Text = MessagingService.TranslateCaption("Employee Holiday Leave Maintenance Form")
                 lblLeaveName.Visible = False
                 cboLeaveIdNo.Visible = False
             Else
-                Text = MessagingLibrary.Messaging.TranslateCaption("Employee Non-Holiday Leave Maintenance Form")
+                Text = MessagingService.TranslateCaption("Employee Non-Holiday Leave Maintenance Form")
                 lblHolidayName.Visible = False
                 cboHolidayIdNo.Visible = False
             End If
