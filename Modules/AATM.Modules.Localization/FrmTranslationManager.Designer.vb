@@ -1,8 +1,8 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class UserControl1
-    Inherits System.Windows.Forms.UserControl
+Partial Class FrmTranslationManager
+    Inherits System.Windows.Forms.Form
 
-    'UserControl1 overrides dispose to clean up the component list.
+    'Form overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()> _
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
@@ -22,9 +22,9 @@ Partial Class UserControl1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        components = New System.ComponentModel.Container()
+        components = New System.ComponentModel.Container
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Text = "FrmTranslationManager"
     End Sub
-
 End Class

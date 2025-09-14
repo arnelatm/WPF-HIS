@@ -49,9 +49,6 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AATM.Libraries.CBaseControlsLibrary">
-      <HintPath>..\..\Libraries\CBaseControlsLibrary\obj\Debug\AATM.Libraries.CBaseControlsLibrary.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -123,6 +120,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AATM.Core.Logging\AATM.Core.Logging.vbproj">
+      <Project>{126f0379-fd77-4a2f-bc2e-2b49b7c13fa2}</Project>
+      <Name>AATM.Core.Logging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AATM.Core.Messaging\AATM.Core.Messaging.vbproj">
+      <Project>{d1428ce2-1ce8-438e-a427-79dae88483fa}</Project>
+      <Name>AATM.Core.Messaging</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AATM.Core.vbproj">
       <Project>{170d7f0d-9aac-4294-bb4d-a2d95d1e7c8a}</Project>
       <Name>AATM.Core</Name>

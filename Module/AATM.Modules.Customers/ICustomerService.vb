@@ -1,19 +1,27 @@
-﻿Imports System.Collections.Generic
-Imports AATM.Modules.Customers
-
-''' <summary>
-''' Defines a contract for a service that provides customer-related business logic.
-''' This interface decouples the presenter from the specific business logic implementation.
+﻿''' <summary>
+''' Defines a contract for the business logic related to customers.
+''' This interface decouples the presenter from the service's implementation.
 ''' </summary>
 Public Interface ICustomerService
     ''' <summary>
-    ''' Retrieves a list of all customers.
+    ''' Gets a list of all customers.
     ''' </summary>
+    ''' <returns>A list of CustomerDTO objects.</returns>
     Function GetCustomers() As List(Of CustomerDTO)
 
     ''' <summary>
-    ''' Saves a customer record, either updating an existing one or adding a new one.
+    ''' Saves a customer to the data store.
+    ''' This method handles both creating a new customer and updating an existing one.
     ''' </summary>
-    ''' <param name="customer">The customer data transfer object to save.</param>
+    ''' <param name="customer">The customer to be saved.</param>
+    ''' <returns>A ValidationResult indicating the outcome of the save operation.</returns>
     Function SaveCustomer(customer As CustomerDTO) As ValidationResult
+
+    ''' <summary>
+    ''' Deletes a customer from the data store by their ID.
+    ''' </summary>
+    ''' <param name="customerID">The ID of the customer to be deleted.</param>
+    ''' <returns>A ValidationResult indicating the outcome of the delete operation.</returns>
+    Function DeleteCustomer(customerID As Integer) As ValidationResult
+
 End Interface

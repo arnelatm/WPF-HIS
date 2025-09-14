@@ -3,6 +3,7 @@
 ''' This interface decouples the Presenter from specific UI implementations like MessageBox.
 ''' </summary>
 Public Interface IMessagingService
+
     ''' <summary>
     ''' Displays a success message to the user.
     ''' </summary>
@@ -20,4 +21,5 @@ Public Interface IMessagingService
     ''' </summary>
     ''' <param name="message">The message to display.</param>
     Sub ShowInformation(message As String)
+
 End Interface

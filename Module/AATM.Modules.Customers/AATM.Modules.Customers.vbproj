@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomerDTO.vb" />
+    <Compile Include="CustomerPresenter.vb" />
     <Compile Include="CustomerRepository.vb" />
     <Compile Include="CustomerService.vb" />
     <Compile Include="ICustomerService.vb" />
@@ -121,9 +122,21 @@
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Core\AATM.Core.vbproj">
-      <Project>{170d7f0d-9aac-4294-bb4d-a2d95d1e7c8a}</Project>
-      <Name>AATM.Core</Name>
+    <ProjectReference Include="..\..\Core\AATM.Core.Localization\AATM.Core.Localization.vbproj">
+      <Project>{88088E99-8848-42CD-BD39-848B9794C88F}</Project>
+      <Name>AATM.Core.Localization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\AATM.Core.Logging\AATM.Core.Logging.vbproj">
+      <Project>{126f0379-fd77-4a2f-bc2e-2b49b7c13fa2}</Project>
+      <Name>AATM.Core.Logging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\AATM.Core.Messaging\AATM.Core.Messaging.vbproj">
+      <Project>{d1428ce2-1ce8-438e-a427-79dae88483fa}</Project>
+      <Name>AATM.Core.Messaging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Utilities\AATM.Core.Utilities.vbproj">
+      <Project>{b9c9a7bd-5c29-456b-b7e8-76ee005dc1f8}</Project>
+      <Name>AATM.Core.Utilities</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
