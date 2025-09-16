@@ -1,25 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29806.167
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Accounts", "Accounts\Accounts.vbproj", "{826EE6DC-954A-4C18-9108-EBD592FCB1E8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{A6C79BF6-2C34-4AEA-9845-360F48976962}"
-	ProjectSection(SolutionItems) = preProject
-		Libraries\CBaseControlsLibrary\DropDownSearchBox.cs = Libraries\CBaseControlsLibrary\DropDownSearchBox.cs
-	EndProjectSection
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BaseControlsLibrary", "Libraries\BaseControlsLibrary\BaseControlsLibrary.vbproj", "{58F5EC33-2974-4823-AB62-1D4E5B3EF152}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "CBaseControlsLibrary", "Libraries\CBaseControlsLibrary\CBaseControlsLibrary.vbproj", "{F991561A-78F8-487C-A873-E6436B41D801}"
-	ProjectSection(ProjectDependencies) = postProject
-		{63AACD2C-A92E-4CF4-8F4D-49C774E2B1C6} = {63AACD2C-A92E-4CF4-8F4D-49C774E2B1C6}
-		{0E9D874E-5354-465E-9EC3-F7A35C268A8A} = {0E9D874E-5354-465E-9EC3-F7A35C268A8A}
-		{ABBF2275-7DFF-4724-98F9-71A2FD10B471} = {ABBF2275-7DFF-4724-98F9-71A2FD10B471}
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomComboBox", "Libraries\CustomComboBox\CustomComboBox.csproj", "{78A0AC9E-8E5C-422A-A45A-2BD0035F14E2}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ErrorsAndEvents", "Libraries\ErrorsAndEvents\ErrorsAndEvents.vbproj", "{ABBF2275-7DFF-4724-98F9-71A2FD10B471}"
 EndProject
@@ -35,7 +25,7 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BusinessLayer", "BusinessLa
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DataLayer", "DataLayer\DataLayer.vbproj", "{440C4740-2584-4050-9086-543018EAC766}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PresentationLayer", "PresentationLayer", "{66D0E355-CA37-4EEF-B18D-D4A9093BB11C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{66D0E355-CA37-4EEF-B18D-D4A9093BB11C}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Models", "PresentationLayer\Models\Models.vbproj", "{6A8692E0-9B9B-4F31-8BA6-0C3DE257F9A4}"
 EndProject
@@ -54,14 +44,15 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Common", "Common\Common.vbp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{0598D101-4147-476C-98FF-8C78D96B971E}"
 	ProjectSection(SolutionItems) = preProject
+		AATM Project Structure.txt = AATM Project Structure.txt
 		App.config = App.config
 		C-Sharp to VB Net Translation.txt = C-Sharp to VB Net Translation.txt
-		CommonErrors.txt = CommonErrors.txt
 		ComputeClientFormSizeEqually.txt = ComputeClientFormSizeEqually.txt
 		Create JournalPrefix.sql = Create JournalPrefix.sql
 		CreateBaseSecurityObject.sql = CreateBaseSecurityObject.sql
 		CreatePayElementGroups.sql = CreatePayElementGroups.sql
 		CreateProgramSecurities(non menu).sql = CreateProgramSecurities(non menu).sql
+		Data Save Heirarchy = Data Save Heirarchy
 		DO THIS NOW.txt = DO THIS NOW.txt
 		Error correction for DTC error.pdf = Error correction for DTC error.pdf
 		HomeSqlDataStructures.sql = HomeSqlDataStructures.sql
@@ -97,12 +88,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Views", "Views", "{5DC97E00
 		PayGroups.sql = PayGroups.sql
 		PMRDoctorsGenForm_View.sql = PMRDoctorsGenForm_View.sql
 		PMRMedNInvestigationPrint_View.sql = PMRMedNInvestigationPrint_View.sql
+		Possible BugsErrors = Possible BugsErrors
 		ProfitCenter.sql = ProfitCenter.sql
 		SecurityTables.sql = SecurityTables.sql
 		SqlQuery_1.sql = SqlQuery_1.sql
 		SqlQuery_7.sql = SqlQuery_7.sql
 		TranslatedMessages_View.sql = TranslatedMessages_View.sql
 		UpdateCheckDisbursementJournalItemTVP.sql = UpdateCheckDisbursementJournalItemTVP.sql
+		UpdateChildData = UpdateChildData
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Table", "Table", "{6FD94599-A0DF-448F-BF82-CAB5948D5F53}"
@@ -124,11 +117,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8AD3DFDF-C6F0-4B21-8A40-902BAAFF6682}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		Rename-Assemblies.ps1 = Rename-Assemblies.ps1
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageBoxManager", "Libraries\MessageBoxManager\MessageBoxManager.csproj", "{0E9D874E-5354-465E-9EC3-F7A35C268A8A}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "MessagingLibrary", "Libraries\MessagingLibrary\MessagingLibrary.vbproj", "{84437202-3E38-4F75-B8C1-4125852FC4FF}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Messaging", "Libraries\MessagingLibrary\Messaging.vbproj", "{84437202-3E38-4F75-B8C1-4125852FC4FF}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Events", "PresentationLayer\Events\Events.vbproj", "{5F7FCA73-07BA-444A-BE5D-6117B973AA3D}"
 EndProject
@@ -136,19 +130,26 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "IspDataDb", "IspDataDb\IspD
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UsefulQueries", "UsefulQueries", "{E0336D98-67DC-4134-9508-7F5598295FEC}"
 	ProjectSection(SolutionItems) = preProject
+		Add a new identity to an existing  table = Add a new identity to an existing  table
 		Add constraint for not duplicate values including null values.sql = Add constraint for not duplicate values including null values.sql
 		Append a table to a new table.sql = Append a table to a new table.sql
 		Check for Duplicate Item RegistraTION pHARMACY.txt = Check for Duplicate Item RegistraTION pHARMACY.txt
+		Close all connections.sql = Close all connections.sql
 		Create Unique Index with null values.sql = Create Unique Index with null values.sql
 		CreateEditReset Sequence.sql = CreateEditReset Sequence.sql
 		Delete or restore Archirodon.sql = Delete or restore Archirodon.sql
+		DeleteDuplicateProblem.sql = DeleteDuplicateProblem.sql
 		DeleteDuplicates.sql = DeleteDuplicates.sql
 		EditingSqlQuery.sql = EditingSqlQuery.sql
 		Extract Varchar Fields to Images.sql = Extract Varchar Fields to Images.sql
 		Find all object references for a specific object.sql = Find all object references for a specific object.sql
 		Find all objects with a specific name.sql = Find all objects with a specific name.sql
+		Find all tables with a specific column name.sql = Find all tables with a specific column name.sql
 		Find All Tables without Primary KEy.sql = Find All Tables without Primary KEy.sql
 		Find duplicate fields in a table.sql = Find duplicate fields in a table.sql
+		Find Missing Item_Code in ItemDetails IGROUP.sql = Find Missing Item_Code in ItemDetails IGROUP.sql
+		FindDuplicateValuesInACustomObject = FindDuplicateValuesInACustomObject
+		FindItemInComboboxControlDataSource = FindItemInComboboxControlDataSource
 		FindStringInAllTablesInAllColumns.sql = FindStringInAllTablesInAllColumns.sql
 		Look for tables containing field name.sql = Look for tables containing field name.sql
 		Query changed tables in a database.sql = Query changed tables in a database.sql
@@ -161,6 +162,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UsefulQueries", "UsefulQuer
 		ResetIdentityField.sql = ResetIdentityField.sql
 		Reverse bit values.sql = Reverse bit values.sql
 		SearchDatabaseForASpecificColumnName.sql = SearchDatabaseForASpecificColumnName.sql
+		Set sequential unique number to a field.sql = Set sequential unique number to a field.sql
 		SqlQuery_2.sql = SqlQuery_2.sql
 		TextFile1.txt = TextFile1.txt
 		Update Query with Join.sql = Update Query with Join.sql
@@ -172,7 +174,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CreateIspdata", "CreateIspd
 		Change all 599 accountcode to 99 id no in account table.sql = Change all 599 accountcode to 99 id no in account table.sql
 		Create Chart Balance.sql = Create Chart Balance.sql
 		Create ISPDATA Database.sql = Create ISPDATA Database.sql
+		Create Posting Querry for InvTransactionDetails = Create Posting Querry for InvTransactionDetails
+		Create Product from IGroupCLinic Data = Create Product from IGroupCLinic Data
+		Create ProductUnit = Create ProductUnit
+		Create Purchase = Create Purchase
+		Create PurchaseDetail = Create PurchaseDetail
 		Create Salt and user.sql = Create Salt and user.sql
+		Transfer IGroupCLinic dta to ISPDATA = Transfer IGroupCLinic dta to ISPDATA
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CAccounts", "Accounts\CAccounts\CAccounts.csproj", "{DFF185B6-1B96-47F7-B39B-C4B114B3C581}"
@@ -181,8 +189,10 @@ Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "AatmInterfaces", "Libraries
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Problems And Solutions", "Problems And Solutions", "{981A0171-5E5E-461E-A09A-DE12F781F288}"
 	ProjectSection(SolutionItems) = preProject
+		Bug on combobox displaymember = Bug on combobox displaymember
 		code 0x0000011b - printng error.txt = code 0x0000011b - printng error.txt
 		Error correction for DTC error.pdf = Error correction for DTC error.pdf
+		Problem when arabic menu not appearing.txt = Problem when arabic menu not appearing.txt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IGroup", "IGroup", "{B5D54750-F102-47FF-BDF7-A67CB2A5A22D}"
@@ -354,6 +364,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reports", "Reports", "{56B6
 		IGroup\Reports\HR Employee Info Testing Only.rpt = IGroup\Reports\HR Employee Info Testing Only.rpt
 		IGroup\Reports\HR Employee Info.rpt = IGroup\Reports\HR Employee Info.rpt
 		IGroup\Reports\HR IDCCard Size Back.rpt = IGroup\Reports\HR IDCCard Size Back.rpt
+		IGroup\Reports\HREmployeeList Old.rpt = IGroup\Reports\HREmployeeList Old.rpt
+		IGroup\Reports\HREmployeeList.rpt = IGroup\Reports\HREmployeeList.rpt
+		IGroup\Reports\HREmployeeSalaryDescription.rpt = IGroup\Reports\HREmployeeSalaryDescription.rpt
+		IGroup\Reports\HREmployeeShiftDetails.rpt = IGroup\Reports\HREmployeeShiftDetails.rpt
+		IGroup\Reports\HRMonthlyAttendence.rpt = IGroup\Reports\HRMonthlyAttendence.rpt
 		IGroup\Reports\HR_ID List Final with lamination space.rpt = IGroup\Reports\HR_ID List Final with lamination space.rpt
 		IGroup\Reports\HR_ID New Database List Final with lamination space New.rpt = IGroup\Reports\HR_ID New Database List Final with lamination space New.rpt
 		IGroup\Reports\HR_ID New Database List Final with lamination space.rpt = IGroup\Reports\HR_ID New Database List Final with lamination space.rpt
@@ -370,11 +385,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reports", "Reports", "{56B6
 		IGroup\Reports\HR_IDList2.rpt = IGroup\Reports\HR_IDList2.rpt
 		IGroup\Reports\HR_IDListOrig.rpt = IGroup\Reports\HR_IDListOrig.rpt
 		IGroup\Reports\HR_IDListOrig2.rpt = IGroup\Reports\HR_IDListOrig2.rpt
-		IGroup\Reports\HREmployeeList Old.rpt = IGroup\Reports\HREmployeeList Old.rpt
-		IGroup\Reports\HREmployeeList.rpt = IGroup\Reports\HREmployeeList.rpt
-		IGroup\Reports\HREmployeeSalaryDescription.rpt = IGroup\Reports\HREmployeeSalaryDescription.rpt
-		IGroup\Reports\HREmployeeShiftDetails.rpt = IGroup\Reports\HREmployeeShiftDetails.rpt
-		IGroup\Reports\HRMonthlyAttendence.rpt = IGroup\Reports\HRMonthlyAttendence.rpt
 		IGroup\Reports\IBClinicServiceWiseSalesHistory.rpt = IGroup\Reports\IBClinicServiceWiseSalesHistory.rpt
 		IGroup\Reports\IBCombined Date Wise (Monthly) Cash Only.rpt = IGroup\Reports\IBCombined Date Wise (Monthly) Cash Only.rpt
 		IGroup\Reports\IBCombinedDoctorWiseSummaryStatement.rpt = IGroup\Reports\IBCombinedDoctorWiseSummaryStatement.rpt
@@ -523,9 +533,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reports", "Reports", "{56B6
 		IGroup\Reports\Payroll Report Per EmployeeTotal.rpt = IGroup\Reports\Payroll Report Per EmployeeTotal.rpt
 		IGroup\Reports\Payroll Report Statement Detail Per Employee per Month.rpt = IGroup\Reports\Payroll Report Statement Detail Per Employee per Month.rpt
 		IGroup\Reports\PaySlip.rpt = IGroup\Reports\PaySlip.rpt
-		IGroup\Reports\Phar_SalesInvoice_DateWiseBar.rpt = IGroup\Reports\Phar_SalesInvoice_DateWiseBar.rpt
-		IGroup\Reports\Phar_SalesInvoice_Detailed.rpt = IGroup\Reports\Phar_SalesInvoice_Detailed.rpt
-		IGroup\Reports\Phar_SalesInvoice_DetailedPieChart.rpt = IGroup\Reports\Phar_SalesInvoice_DetailedPieChart.rpt
 		IGroup\Reports\Pharmacy Cost of Sales for a given date Range.rpt = IGroup\Reports\Pharmacy Cost of Sales for a given date Range.rpt
 		IGroup\Reports\Pharmacy.rpt = IGroup\Reports\Pharmacy.rpt
 		IGroup\Reports\PharmacyCreditStatement.rpt = IGroup\Reports\PharmacyCreditStatement.rpt
@@ -552,6 +559,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reports", "Reports", "{56B6
 		IGroup\Reports\PharmacyPatientProfile.rpt = IGroup\Reports\PharmacyPatientProfile.rpt
 		IGroup\Reports\PharmacyPurchaseVATStatement.rpt = IGroup\Reports\PharmacyPurchaseVATStatement.rpt
 		IGroup\Reports\PharmacySummaryStatementDateWise.rpt = IGroup\Reports\PharmacySummaryStatementDateWise.rpt
+		IGroup\Reports\Phar_SalesInvoice_DateWiseBar.rpt = IGroup\Reports\Phar_SalesInvoice_DateWiseBar.rpt
+		IGroup\Reports\Phar_SalesInvoice_Detailed.rpt = IGroup\Reports\Phar_SalesInvoice_Detailed.rpt
+		IGroup\Reports\Phar_SalesInvoice_DetailedPieChart.rpt = IGroup\Reports\Phar_SalesInvoice_DetailedPieChart.rpt
 		IGroup\Reports\PhoneNumbersArabic.JPG = IGroup\Reports\PhoneNumbersArabic.JPG
 		IGroup\Reports\PMR Entries per Doctor.rpt = IGroup\Reports\PMR Entries per Doctor.rpt
 		IGroup\Reports\PMRDcafBlank.rpt = IGroup\Reports\PMRDcafBlank.rpt
@@ -906,6 +916,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ToDos", "ToDos", "{E4F0E91F
 	ProjectSection(SolutionItems) = preProject
 		01-DrugSale_View.sql = 01-DrugSale_View.sql
 		02-do this first.txt = 02-do this first.txt
+		ClinicBeginningStock = ClinicBeginningStock
+		CommonErrors.txt = CommonErrors.txt
 		Pharmacy.exe.config = Pharmacy.exe.config
 		Sample Data.txt = Sample Data.txt
 	EndProjectSection
@@ -914,120 +926,439 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "IGroupClinicDb", "IGroupCli
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "PMR", "PMR\PMR.vbproj", "{5FC553F1-5E77-4F35-B61A-5FC98A5D0E82}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProgramTemplates", "ProgramTemplates", "{D0B01D55-90CD-4F17-9FE8-92C4E06ADE25}"
+	ProjectSection(SolutionItems) = preProject
+		ExecuteMultipleSqlStatementsInATransaction.Vb = ExecuteMultipleSqlStatementsInATransaction.Vb
+		OnCellFormating.vb = OnCellFormating.vb
+		SampleManualMapping = SampleManualMapping
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{53F1E513-02CC-40BF-A697-B1D602FDFDFC}"
+	ProjectSection(SolutionItems) = preProject
+		EntryFields.vb = EntryFields.vb
+	EndProjectSection
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Localization", "Libraries\Localization\Localization.vbproj", "{3F50A1A8-D56B-4D64-A2F2-D1DD3D440D8D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platform", "Platform", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Design", "Design", "{61A224B6-BA57-44B7-81AD-540F2E146641}"
+	ProjectSection(SolutionItems) = preProject
+		CustomerModule.vb = CustomerModule.vb
+		CustomerPresenter.vb = CustomerPresenter.vb
+		Namespace and project Suggestion ChatGPT.txt = Namespace and project Suggestion ChatGPT.txt
+		Program.vb = Program.vb
+		SimpleDIContainer.vb = SimpleDIContainer.vb
+		StatusBarMessagingService.vb = StatusBarMessagingService.vb
+		TextFile1.txt = TextFile1.txt
+		WinForms VB.NET MVP Application Guide.md = WinForms VB.NET MVP Application Guide.md
+		WinformsMessageBoxService.vb = WinformsMessageBoxService.vb
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{B4F2ECE8-51A5-4A72-B503-5DDD564D7AD9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{65B07FE4-85BD-47A9-93F3-0E70C4999631}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{0B32745D-2C90-4434-A390-C3A3A46732FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AATM.Core", "Core\AATM.Core.csproj", "{A529FE66-56F4-0D65-3915-68A73F89482A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AATM.Core.Utilities", "Core\Utilities\AATM.Core.Utilities.csproj", "{0BED26D6-9071-0A9A-35B0-BC9062CAF558}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AATM.Core.Configuration", "Core\Configuration\AATM.CORE.Configuration\AATM.Core.Configuration.csproj", "{161A1671-FF81-0C1D-3304-D104941735FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AATM.Core.Logging", "Core\AATM.Core.Logging\AATM.Core.Logging.csproj", "{A04B8212-312F-05DE-3E76-E137D5560B02}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AATM.Core.UI.Logging", "Core\AATM.Core.UI.Logging\AATM.Core.UI.Logging.csproj", "{D1BB0BF3-55FE-0C10-3A58-9F9AA014D889}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AATM.UI.Winforms", "UI\Winforms\AATM.UI.Winforms.csproj", "{2902844F-CFD2-0F88-3515-7098759E42C4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A0B670DA-7150-4FB9-9A64-DA868BB73750}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "AATM.Core.Logging.Tests", "Tests\AATM.Core.Logging.Tests.vbproj", "{D228A024-3027-493E-8868-3510B9D49E75}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AATM.Modules.Customers", "Module\AATM.Modules.Customers\AATM.Modules.Customers.csproj", "{28115980-A3B0-09B8-23F4-9BAF762B5C6E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AATM.Core.Localization", "Core\AATM.Core.Localization\AATM.Core.Localization.csproj", "{3A2C0FF2-4410-0D3C-3F61-4EF5F503FC2F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AATM.Modules.Localization", "Modules\AATM.Modules.Localization\AATM.Modules.Localization.csproj", "{D27C4E1D-852B-0E75-209D-0DE42B0C6F86}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AATM.Data", "Data\AATM.Data\AATM.Data.csproj", "{72DFFF29-2590-00B6-1F3D-E5F62E08D951}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{A81AB9E9-1020-45E2-88EE-141849D3A90D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Localization.Sql", "Data\Localization.Sql\Localization.Sql.csproj", "{FCD250C4-3BFA-0674-20F7-8D649618450D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AATM.Data.Sql", "Data\AATM.Data.Sql\AATM.Data.Sql.csproj", "{031975CA-9C32-0B44-104C-364C9C4CF244}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AATM.Business.Logic", "Business\AATM.Business.Logic\AATM.Business.Logic.csproj", "{3C7BEC0F-17BB-0BA8-274F-A5196507CEBB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business", "Business", "{1A9C9053-FB5B-494C-A99F-677AC0C7E7B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AATM.Contracts", "Contracts\AATM.Contracts\AATM.Contracts.csproj", "{464CDA63-DB4A-02B4-1AFA-7083EF503845}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contracts", "Contracts", "{4A01AB0C-CCCD-420C-9557-42CD07E9BB70}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "AATM.Shared", "Shared\AATM.Shared\AATM.Shared.vbproj", "{774677EB-4059-4333-9F34-3AFEFF79AD1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AATM.Core.Messaging", "Core\AATM.Core.Messaging.Cs\AATM.Core.Messaging.csproj", "{1BBC78F4-68D9-4352-B1D3-81DC7CFED56B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug (.NET 3.5)|Any CPU = Debug (.NET 3.5)|Any CPU
 		Debug|Any CPU = Debug|Any CPU
+		Release (.NET 3.5)|Any CPU = Release (.NET 3.5)|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{826EE6DC-954A-4C18-9108-EBD592FCB1E8}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{826EE6DC-954A-4C18-9108-EBD592FCB1E8}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
 		{826EE6DC-954A-4C18-9108-EBD592FCB1E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{826EE6DC-954A-4C18-9108-EBD592FCB1E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{826EE6DC-954A-4C18-9108-EBD592FCB1E8}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{826EE6DC-954A-4C18-9108-EBD592FCB1E8}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
 		{826EE6DC-954A-4C18-9108-EBD592FCB1E8}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{826EE6DC-954A-4C18-9108-EBD592FCB1E8}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{58F5EC33-2974-4823-AB62-1D4E5B3EF152}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{58F5EC33-2974-4823-AB62-1D4E5B3EF152}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
 		{58F5EC33-2974-4823-AB62-1D4E5B3EF152}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{58F5EC33-2974-4823-AB62-1D4E5B3EF152}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58F5EC33-2974-4823-AB62-1D4E5B3EF152}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{58F5EC33-2974-4823-AB62-1D4E5B3EF152}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
 		{58F5EC33-2974-4823-AB62-1D4E5B3EF152}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58F5EC33-2974-4823-AB62-1D4E5B3EF152}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F991561A-78F8-487C-A873-E6436B41D801}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{F991561A-78F8-487C-A873-E6436B41D801}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
 		{F991561A-78F8-487C-A873-E6436B41D801}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F991561A-78F8-487C-A873-E6436B41D801}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F991561A-78F8-487C-A873-E6436B41D801}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{F991561A-78F8-487C-A873-E6436B41D801}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
 		{F991561A-78F8-487C-A873-E6436B41D801}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F991561A-78F8-487C-A873-E6436B41D801}.Release|Any CPU.Build.0 = Release|Any CPU
-		{78A0AC9E-8E5C-422A-A45A-2BD0035F14E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{78A0AC9E-8E5C-422A-A45A-2BD0035F14E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{78A0AC9E-8E5C-422A-A45A-2BD0035F14E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{78A0AC9E-8E5C-422A-A45A-2BD0035F14E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABBF2275-7DFF-4724-98F9-71A2FD10B471}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABBF2275-7DFF-4724-98F9-71A2FD10B471}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
 		{ABBF2275-7DFF-4724-98F9-71A2FD10B471}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ABBF2275-7DFF-4724-98F9-71A2FD10B471}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABBF2275-7DFF-4724-98F9-71A2FD10B471}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{ABBF2275-7DFF-4724-98F9-71A2FD10B471}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
 		{ABBF2275-7DFF-4724-98F9-71A2FD10B471}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ABBF2275-7DFF-4724-98F9-71A2FD10B471}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B56FDCD3-8B48-4859-983B-07FFA242673D}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{B56FDCD3-8B48-4859-983B-07FFA242673D}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
 		{B56FDCD3-8B48-4859-983B-07FFA242673D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B56FDCD3-8B48-4859-983B-07FFA242673D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B56FDCD3-8B48-4859-983B-07FFA242673D}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{B56FDCD3-8B48-4859-983B-07FFA242673D}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
 		{B56FDCD3-8B48-4859-983B-07FFA242673D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B56FDCD3-8B48-4859-983B-07FFA242673D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7EE826E-E3B4-40A7-8754-285B373F4321}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7EE826E-E3B4-40A7-8754-285B373F4321}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
 		{A7EE826E-E3B4-40A7-8754-285B373F4321}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A7EE826E-E3B4-40A7-8754-285B373F4321}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7EE826E-E3B4-40A7-8754-285B373F4321}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{A7EE826E-E3B4-40A7-8754-285B373F4321}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
 		{A7EE826E-E3B4-40A7-8754-285B373F4321}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7EE826E-E3B4-40A7-8754-285B373F4321}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63AACD2C-A92E-4CF4-8F4D-49C774E2B1C6}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{63AACD2C-A92E-4CF4-8F4D-49C774E2B1C6}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
 		{63AACD2C-A92E-4CF4-8F4D-49C774E2B1C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{63AACD2C-A92E-4CF4-8F4D-49C774E2B1C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63AACD2C-A92E-4CF4-8F4D-49C774E2B1C6}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{63AACD2C-A92E-4CF4-8F4D-49C774E2B1C6}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
 		{63AACD2C-A92E-4CF4-8F4D-49C774E2B1C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63AACD2C-A92E-4CF4-8F4D-49C774E2B1C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{821EE93B-1DE7-414D-9612-960288F355FE}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{821EE93B-1DE7-414D-9612-960288F355FE}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
 		{821EE93B-1DE7-414D-9612-960288F355FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{821EE93B-1DE7-414D-9612-960288F355FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{821EE93B-1DE7-414D-9612-960288F355FE}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{821EE93B-1DE7-414D-9612-960288F355FE}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
 		{821EE93B-1DE7-414D-9612-960288F355FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{821EE93B-1DE7-414D-9612-960288F355FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1004885-D468-41ED-8572-5BA952B9C39E}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1004885-D468-41ED-8572-5BA952B9C39E}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
 		{F1004885-D468-41ED-8572-5BA952B9C39E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F1004885-D468-41ED-8572-5BA952B9C39E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1004885-D468-41ED-8572-5BA952B9C39E}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{F1004885-D468-41ED-8572-5BA952B9C39E}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
 		{F1004885-D468-41ED-8572-5BA952B9C39E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1004885-D468-41ED-8572-5BA952B9C39E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{440C4740-2584-4050-9086-543018EAC766}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{440C4740-2584-4050-9086-543018EAC766}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
 		{440C4740-2584-4050-9086-543018EAC766}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{440C4740-2584-4050-9086-543018EAC766}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{440C4740-2584-4050-9086-543018EAC766}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{440C4740-2584-4050-9086-543018EAC766}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
 		{440C4740-2584-4050-9086-543018EAC766}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{440C4740-2584-4050-9086-543018EAC766}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A8692E0-9B9B-4F31-8BA6-0C3DE257F9A4}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A8692E0-9B9B-4F31-8BA6-0C3DE257F9A4}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
 		{6A8692E0-9B9B-4F31-8BA6-0C3DE257F9A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6A8692E0-9B9B-4F31-8BA6-0C3DE257F9A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A8692E0-9B9B-4F31-8BA6-0C3DE257F9A4}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{6A8692E0-9B9B-4F31-8BA6-0C3DE257F9A4}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
 		{6A8692E0-9B9B-4F31-8BA6-0C3DE257F9A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A8692E0-9B9B-4F31-8BA6-0C3DE257F9A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{021A8A1A-B69A-4254-9081-12357F20C01B}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{021A8A1A-B69A-4254-9081-12357F20C01B}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
 		{021A8A1A-B69A-4254-9081-12357F20C01B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{021A8A1A-B69A-4254-9081-12357F20C01B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{021A8A1A-B69A-4254-9081-12357F20C01B}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{021A8A1A-B69A-4254-9081-12357F20C01B}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
 		{021A8A1A-B69A-4254-9081-12357F20C01B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{021A8A1A-B69A-4254-9081-12357F20C01B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EEDC5F0-DCA9-4CFB-8926-07D7E5B37FA0}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EEDC5F0-DCA9-4CFB-8926-07D7E5B37FA0}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
 		{4EEDC5F0-DCA9-4CFB-8926-07D7E5B37FA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4EEDC5F0-DCA9-4CFB-8926-07D7E5B37FA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EEDC5F0-DCA9-4CFB-8926-07D7E5B37FA0}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{4EEDC5F0-DCA9-4CFB-8926-07D7E5B37FA0}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
 		{4EEDC5F0-DCA9-4CFB-8926-07D7E5B37FA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4EEDC5F0-DCA9-4CFB-8926-07D7E5B37FA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51DA927A-505F-49CF-9768-9E401219B91C}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{51DA927A-505F-49CF-9768-9E401219B91C}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
 		{51DA927A-505F-49CF-9768-9E401219B91C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{51DA927A-505F-49CF-9768-9E401219B91C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51DA927A-505F-49CF-9768-9E401219B91C}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{51DA927A-505F-49CF-9768-9E401219B91C}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
 		{51DA927A-505F-49CF-9768-9E401219B91C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51DA927A-505F-49CF-9768-9E401219B91C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B7A1168-E9FA-4360-9607-A2C98255E4C0}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B7A1168-E9FA-4360-9607-A2C98255E4C0}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
 		{4B7A1168-E9FA-4360-9607-A2C98255E4C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4B7A1168-E9FA-4360-9607-A2C98255E4C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B7A1168-E9FA-4360-9607-A2C98255E4C0}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{4B7A1168-E9FA-4360-9607-A2C98255E4C0}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
 		{4B7A1168-E9FA-4360-9607-A2C98255E4C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B7A1168-E9FA-4360-9607-A2C98255E4C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1B81E19-89AC-4859-BE75-CB05C7BE5105}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1B81E19-89AC-4859-BE75-CB05C7BE5105}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
 		{B1B81E19-89AC-4859-BE75-CB05C7BE5105}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B1B81E19-89AC-4859-BE75-CB05C7BE5105}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1B81E19-89AC-4859-BE75-CB05C7BE5105}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{B1B81E19-89AC-4859-BE75-CB05C7BE5105}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
 		{B1B81E19-89AC-4859-BE75-CB05C7BE5105}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1B81E19-89AC-4859-BE75-CB05C7BE5105}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E9D874E-5354-465E-9EC3-F7A35C268A8A}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E9D874E-5354-465E-9EC3-F7A35C268A8A}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
 		{0E9D874E-5354-465E-9EC3-F7A35C268A8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0E9D874E-5354-465E-9EC3-F7A35C268A8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E9D874E-5354-465E-9EC3-F7A35C268A8A}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{0E9D874E-5354-465E-9EC3-F7A35C268A8A}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
 		{0E9D874E-5354-465E-9EC3-F7A35C268A8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E9D874E-5354-465E-9EC3-F7A35C268A8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84437202-3E38-4F75-B8C1-4125852FC4FF}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{84437202-3E38-4F75-B8C1-4125852FC4FF}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
 		{84437202-3E38-4F75-B8C1-4125852FC4FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{84437202-3E38-4F75-B8C1-4125852FC4FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84437202-3E38-4F75-B8C1-4125852FC4FF}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{84437202-3E38-4F75-B8C1-4125852FC4FF}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
 		{84437202-3E38-4F75-B8C1-4125852FC4FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84437202-3E38-4F75-B8C1-4125852FC4FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F7FCA73-07BA-444A-BE5D-6117B973AA3D}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F7FCA73-07BA-444A-BE5D-6117B973AA3D}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
 		{5F7FCA73-07BA-444A-BE5D-6117B973AA3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5F7FCA73-07BA-444A-BE5D-6117B973AA3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F7FCA73-07BA-444A-BE5D-6117B973AA3D}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{5F7FCA73-07BA-444A-BE5D-6117B973AA3D}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
 		{5F7FCA73-07BA-444A-BE5D-6117B973AA3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F7FCA73-07BA-444A-BE5D-6117B973AA3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14A99D93-2025-492C-ACDB-0554812B47CE}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{14A99D93-2025-492C-ACDB-0554812B47CE}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
+		{14A99D93-2025-492C-ACDB-0554812B47CE}.Debug (.NET 3.5)|Any CPU.Deploy.0 = Debug|Any CPU
 		{14A99D93-2025-492C-ACDB-0554812B47CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{14A99D93-2025-492C-ACDB-0554812B47CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14A99D93-2025-492C-ACDB-0554812B47CE}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{14A99D93-2025-492C-ACDB-0554812B47CE}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{14A99D93-2025-492C-ACDB-0554812B47CE}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
+		{14A99D93-2025-492C-ACDB-0554812B47CE}.Release (.NET 3.5)|Any CPU.Deploy.0 = Release|Any CPU
 		{14A99D93-2025-492C-ACDB-0554812B47CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14A99D93-2025-492C-ACDB-0554812B47CE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{14A99D93-2025-492C-ACDB-0554812B47CE}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{DFF185B6-1B96-47F7-B39B-C4B114B3C581}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFF185B6-1B96-47F7-B39B-C4B114B3C581}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
 		{DFF185B6-1B96-47F7-B39B-C4B114B3C581}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DFF185B6-1B96-47F7-B39B-C4B114B3C581}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFF185B6-1B96-47F7-B39B-C4B114B3C581}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{DFF185B6-1B96-47F7-B39B-C4B114B3C581}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
 		{DFF185B6-1B96-47F7-B39B-C4B114B3C581}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DFF185B6-1B96-47F7-B39B-C4B114B3C581}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA82FB86-4F87-4E6E-B460-6141FE79AC23}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA82FB86-4F87-4E6E-B460-6141FE79AC23}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
 		{DA82FB86-4F87-4E6E-B460-6141FE79AC23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DA82FB86-4F87-4E6E-B460-6141FE79AC23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA82FB86-4F87-4E6E-B460-6141FE79AC23}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{DA82FB86-4F87-4E6E-B460-6141FE79AC23}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
 		{DA82FB86-4F87-4E6E-B460-6141FE79AC23}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA82FB86-4F87-4E6E-B460-6141FE79AC23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F2BB05A-C065-4E1B-9B1A-D4F600C0DB62}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F2BB05A-C065-4E1B-9B1A-D4F600C0DB62}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
 		{8F2BB05A-C065-4E1B-9B1A-D4F600C0DB62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8F2BB05A-C065-4E1B-9B1A-D4F600C0DB62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F2BB05A-C065-4E1B-9B1A-D4F600C0DB62}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{8F2BB05A-C065-4E1B-9B1A-D4F600C0DB62}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
 		{8F2BB05A-C065-4E1B-9B1A-D4F600C0DB62}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F2BB05A-C065-4E1B-9B1A-D4F600C0DB62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0105059D-8256-4280-8F09-B7010070AE2E}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
 		{0105059D-8256-4280-8F09-B7010070AE2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0105059D-8256-4280-8F09-B7010070AE2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0105059D-8256-4280-8F09-B7010070AE2E}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{0105059D-8256-4280-8F09-B7010070AE2E}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
 		{0105059D-8256-4280-8F09-B7010070AE2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0105059D-8256-4280-8F09-B7010070AE2E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0105059D-8256-4280-8F09-B7010070AE2E}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{5FC553F1-5E77-4F35-B61A-5FC98A5D0E82}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FC553F1-5E77-4F35-B61A-5FC98A5D0E82}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
 		{5FC553F1-5E77-4F35-B61A-5FC98A5D0E82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5FC553F1-5E77-4F35-B61A-5FC98A5D0E82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FC553F1-5E77-4F35-B61A-5FC98A5D0E82}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{5FC553F1-5E77-4F35-B61A-5FC98A5D0E82}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
 		{5FC553F1-5E77-4F35-B61A-5FC98A5D0E82}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5FC553F1-5E77-4F35-B61A-5FC98A5D0E82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F50A1A8-D56B-4D64-A2F2-D1DD3D440D8D}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F50A1A8-D56B-4D64-A2F2-D1DD3D440D8D}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
+		{3F50A1A8-D56B-4D64-A2F2-D1DD3D440D8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F50A1A8-D56B-4D64-A2F2-D1DD3D440D8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F50A1A8-D56B-4D64-A2F2-D1DD3D440D8D}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{3F50A1A8-D56B-4D64-A2F2-D1DD3D440D8D}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
+		{3F50A1A8-D56B-4D64-A2F2-D1DD3D440D8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F50A1A8-D56B-4D64-A2F2-D1DD3D440D8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A529FE66-56F4-0D65-3915-68A73F89482A}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{A529FE66-56F4-0D65-3915-68A73F89482A}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
+		{A529FE66-56F4-0D65-3915-68A73F89482A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A529FE66-56F4-0D65-3915-68A73F89482A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A529FE66-56F4-0D65-3915-68A73F89482A}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{A529FE66-56F4-0D65-3915-68A73F89482A}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
+		{A529FE66-56F4-0D65-3915-68A73F89482A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A529FE66-56F4-0D65-3915-68A73F89482A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BED26D6-9071-0A9A-35B0-BC9062CAF558}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BED26D6-9071-0A9A-35B0-BC9062CAF558}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
+		{0BED26D6-9071-0A9A-35B0-BC9062CAF558}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BED26D6-9071-0A9A-35B0-BC9062CAF558}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BED26D6-9071-0A9A-35B0-BC9062CAF558}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{0BED26D6-9071-0A9A-35B0-BC9062CAF558}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
+		{0BED26D6-9071-0A9A-35B0-BC9062CAF558}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BED26D6-9071-0A9A-35B0-BC9062CAF558}.Release|Any CPU.Build.0 = Release|Any CPU
+		{161A1671-FF81-0C1D-3304-D104941735FD}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{161A1671-FF81-0C1D-3304-D104941735FD}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
+		{161A1671-FF81-0C1D-3304-D104941735FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{161A1671-FF81-0C1D-3304-D104941735FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{161A1671-FF81-0C1D-3304-D104941735FD}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{161A1671-FF81-0C1D-3304-D104941735FD}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
+		{161A1671-FF81-0C1D-3304-D104941735FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{161A1671-FF81-0C1D-3304-D104941735FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A04B8212-312F-05DE-3E76-E137D5560B02}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{A04B8212-312F-05DE-3E76-E137D5560B02}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
+		{A04B8212-312F-05DE-3E76-E137D5560B02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A04B8212-312F-05DE-3E76-E137D5560B02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A04B8212-312F-05DE-3E76-E137D5560B02}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{A04B8212-312F-05DE-3E76-E137D5560B02}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
+		{A04B8212-312F-05DE-3E76-E137D5560B02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A04B8212-312F-05DE-3E76-E137D5560B02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1BB0BF3-55FE-0C10-3A58-9F9AA014D889}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1BB0BF3-55FE-0C10-3A58-9F9AA014D889}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
+		{D1BB0BF3-55FE-0C10-3A58-9F9AA014D889}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1BB0BF3-55FE-0C10-3A58-9F9AA014D889}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1BB0BF3-55FE-0C10-3A58-9F9AA014D889}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{D1BB0BF3-55FE-0C10-3A58-9F9AA014D889}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
+		{D1BB0BF3-55FE-0C10-3A58-9F9AA014D889}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1BB0BF3-55FE-0C10-3A58-9F9AA014D889}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2902844F-CFD2-0F88-3515-7098759E42C4}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{2902844F-CFD2-0F88-3515-7098759E42C4}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
+		{2902844F-CFD2-0F88-3515-7098759E42C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2902844F-CFD2-0F88-3515-7098759E42C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2902844F-CFD2-0F88-3515-7098759E42C4}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{2902844F-CFD2-0F88-3515-7098759E42C4}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
+		{2902844F-CFD2-0F88-3515-7098759E42C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2902844F-CFD2-0F88-3515-7098759E42C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D228A024-3027-493E-8868-3510B9D49E75}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{D228A024-3027-493E-8868-3510B9D49E75}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
+		{D228A024-3027-493E-8868-3510B9D49E75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D228A024-3027-493E-8868-3510B9D49E75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D228A024-3027-493E-8868-3510B9D49E75}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{D228A024-3027-493E-8868-3510B9D49E75}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
+		{D228A024-3027-493E-8868-3510B9D49E75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D228A024-3027-493E-8868-3510B9D49E75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28115980-A3B0-09B8-23F4-9BAF762B5C6E}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{28115980-A3B0-09B8-23F4-9BAF762B5C6E}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
+		{28115980-A3B0-09B8-23F4-9BAF762B5C6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28115980-A3B0-09B8-23F4-9BAF762B5C6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28115980-A3B0-09B8-23F4-9BAF762B5C6E}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{28115980-A3B0-09B8-23F4-9BAF762B5C6E}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
+		{28115980-A3B0-09B8-23F4-9BAF762B5C6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28115980-A3B0-09B8-23F4-9BAF762B5C6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A2C0FF2-4410-0D3C-3F61-4EF5F503FC2F}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A2C0FF2-4410-0D3C-3F61-4EF5F503FC2F}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
+		{3A2C0FF2-4410-0D3C-3F61-4EF5F503FC2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A2C0FF2-4410-0D3C-3F61-4EF5F503FC2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A2C0FF2-4410-0D3C-3F61-4EF5F503FC2F}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{3A2C0FF2-4410-0D3C-3F61-4EF5F503FC2F}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
+		{3A2C0FF2-4410-0D3C-3F61-4EF5F503FC2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A2C0FF2-4410-0D3C-3F61-4EF5F503FC2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D27C4E1D-852B-0E75-209D-0DE42B0C6F86}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{D27C4E1D-852B-0E75-209D-0DE42B0C6F86}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
+		{D27C4E1D-852B-0E75-209D-0DE42B0C6F86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D27C4E1D-852B-0E75-209D-0DE42B0C6F86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D27C4E1D-852B-0E75-209D-0DE42B0C6F86}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{D27C4E1D-852B-0E75-209D-0DE42B0C6F86}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
+		{D27C4E1D-852B-0E75-209D-0DE42B0C6F86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D27C4E1D-852B-0E75-209D-0DE42B0C6F86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72DFFF29-2590-00B6-1F3D-E5F62E08D951}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{72DFFF29-2590-00B6-1F3D-E5F62E08D951}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
+		{72DFFF29-2590-00B6-1F3D-E5F62E08D951}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72DFFF29-2590-00B6-1F3D-E5F62E08D951}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72DFFF29-2590-00B6-1F3D-E5F62E08D951}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{72DFFF29-2590-00B6-1F3D-E5F62E08D951}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
+		{72DFFF29-2590-00B6-1F3D-E5F62E08D951}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72DFFF29-2590-00B6-1F3D-E5F62E08D951}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCD250C4-3BFA-0674-20F7-8D649618450D}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCD250C4-3BFA-0674-20F7-8D649618450D}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
+		{FCD250C4-3BFA-0674-20F7-8D649618450D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCD250C4-3BFA-0674-20F7-8D649618450D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCD250C4-3BFA-0674-20F7-8D649618450D}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{FCD250C4-3BFA-0674-20F7-8D649618450D}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
+		{FCD250C4-3BFA-0674-20F7-8D649618450D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCD250C4-3BFA-0674-20F7-8D649618450D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{031975CA-9C32-0B44-104C-364C9C4CF244}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{031975CA-9C32-0B44-104C-364C9C4CF244}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
+		{031975CA-9C32-0B44-104C-364C9C4CF244}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{031975CA-9C32-0B44-104C-364C9C4CF244}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{031975CA-9C32-0B44-104C-364C9C4CF244}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{031975CA-9C32-0B44-104C-364C9C4CF244}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
+		{031975CA-9C32-0B44-104C-364C9C4CF244}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{031975CA-9C32-0B44-104C-364C9C4CF244}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C7BEC0F-17BB-0BA8-274F-A5196507CEBB}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C7BEC0F-17BB-0BA8-274F-A5196507CEBB}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
+		{3C7BEC0F-17BB-0BA8-274F-A5196507CEBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C7BEC0F-17BB-0BA8-274F-A5196507CEBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C7BEC0F-17BB-0BA8-274F-A5196507CEBB}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{3C7BEC0F-17BB-0BA8-274F-A5196507CEBB}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
+		{3C7BEC0F-17BB-0BA8-274F-A5196507CEBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C7BEC0F-17BB-0BA8-274F-A5196507CEBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{464CDA63-DB4A-02B4-1AFA-7083EF503845}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{464CDA63-DB4A-02B4-1AFA-7083EF503845}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
+		{464CDA63-DB4A-02B4-1AFA-7083EF503845}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{464CDA63-DB4A-02B4-1AFA-7083EF503845}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{464CDA63-DB4A-02B4-1AFA-7083EF503845}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{464CDA63-DB4A-02B4-1AFA-7083EF503845}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
+		{464CDA63-DB4A-02B4-1AFA-7083EF503845}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{464CDA63-DB4A-02B4-1AFA-7083EF503845}.Release|Any CPU.Build.0 = Release|Any CPU
+		{774677EB-4059-4333-9F34-3AFEFF79AD1E}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{774677EB-4059-4333-9F34-3AFEFF79AD1E}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
+		{774677EB-4059-4333-9F34-3AFEFF79AD1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{774677EB-4059-4333-9F34-3AFEFF79AD1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{774677EB-4059-4333-9F34-3AFEFF79AD1E}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{774677EB-4059-4333-9F34-3AFEFF79AD1E}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
+		{774677EB-4059-4333-9F34-3AFEFF79AD1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{774677EB-4059-4333-9F34-3AFEFF79AD1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BBC78F4-68D9-4352-B1D3-81DC7CFED56B}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BBC78F4-68D9-4352-B1D3-81DC7CFED56B}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
+		{1BBC78F4-68D9-4352-B1D3-81DC7CFED56B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BBC78F4-68D9-4352-B1D3-81DC7CFED56B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BBC78F4-68D9-4352-B1D3-81DC7CFED56B}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{1BBC78F4-68D9-4352-B1D3-81DC7CFED56B}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
+		{1BBC78F4-68D9-4352-B1D3-81DC7CFED56B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BBC78F4-68D9-4352-B1D3-81DC7CFED56B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1035,7 +1366,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{58F5EC33-2974-4823-AB62-1D4E5B3EF152} = {A6C79BF6-2C34-4AEA-9845-360F48976962}
 		{F991561A-78F8-487C-A873-E6436B41D801} = {A6C79BF6-2C34-4AEA-9845-360F48976962}
-		{78A0AC9E-8E5C-422A-A45A-2BD0035F14E2} = {A6C79BF6-2C34-4AEA-9845-360F48976962}
 		{ABBF2275-7DFF-4724-98F9-71A2FD10B471} = {A6C79BF6-2C34-4AEA-9845-360F48976962}
 		{B56FDCD3-8B48-4859-983B-07FFA242673D} = {A6C79BF6-2C34-4AEA-9845-360F48976962}
 		{A7EE826E-E3B4-40A7-8754-285B373F4321} = {A6C79BF6-2C34-4AEA-9845-360F48976962}
@@ -1069,6 +1399,26 @@ Global
 		{2CC5D6D4-CEA0-4991-8859-559BDF3FC1C4} = {C90D3B3E-01F4-401D-8649-0563028668C7}
 		{B721D695-0745-49EA-9FED-FF713FBE7792} = {549000D0-E128-4B80-AEDA-C6AF4FCC2989}
 		{E4F0E91F-DE65-4117-B6A5-99AFD8AF8DC3} = {0598D101-4147-476C-98FF-8C78D96B971E}
+		{D0B01D55-90CD-4F17-9FE8-92C4E06ADE25} = {0598D101-4147-476C-98FF-8C78D96B971E}
+		{53F1E513-02CC-40BF-A697-B1D602FDFDFC} = {0598D101-4147-476C-98FF-8C78D96B971E}
+		{3F50A1A8-D56B-4D64-A2F2-D1DD3D440D8D} = {A6C79BF6-2C34-4AEA-9845-360F48976962}
+		{61A224B6-BA57-44B7-81AD-540F2E146641} = {0598D101-4147-476C-98FF-8C78D96B971E}
+		{A529FE66-56F4-0D65-3915-68A73F89482A} = {B4F2ECE8-51A5-4A72-B503-5DDD564D7AD9}
+		{0BED26D6-9071-0A9A-35B0-BC9062CAF558} = {A6C79BF6-2C34-4AEA-9845-360F48976962}
+		{161A1671-FF81-0C1D-3304-D104941735FD} = {B4F2ECE8-51A5-4A72-B503-5DDD564D7AD9}
+		{A04B8212-312F-05DE-3E76-E137D5560B02} = {B4F2ECE8-51A5-4A72-B503-5DDD564D7AD9}
+		{D1BB0BF3-55FE-0C10-3A58-9F9AA014D889} = {B4F2ECE8-51A5-4A72-B503-5DDD564D7AD9}
+		{2902844F-CFD2-0F88-3515-7098759E42C4} = {65B07FE4-85BD-47A9-93F3-0E70C4999631}
+		{D228A024-3027-493E-8868-3510B9D49E75} = {A0B670DA-7150-4FB9-9A64-DA868BB73750}
+		{28115980-A3B0-09B8-23F4-9BAF762B5C6E} = {0B32745D-2C90-4434-A390-C3A3A46732FE}
+		{3A2C0FF2-4410-0D3C-3F61-4EF5F503FC2F} = {B4F2ECE8-51A5-4A72-B503-5DDD564D7AD9}
+		{D27C4E1D-852B-0E75-209D-0DE42B0C6F86} = {0B32745D-2C90-4434-A390-C3A3A46732FE}
+		{72DFFF29-2590-00B6-1F3D-E5F62E08D951} = {A81AB9E9-1020-45E2-88EE-141849D3A90D}
+		{FCD250C4-3BFA-0674-20F7-8D649618450D} = {A81AB9E9-1020-45E2-88EE-141849D3A90D}
+		{031975CA-9C32-0B44-104C-364C9C4CF244} = {B4F2ECE8-51A5-4A72-B503-5DDD564D7AD9}
+		{3C7BEC0F-17BB-0BA8-274F-A5196507CEBB} = {1A9C9053-FB5B-494C-A99F-677AC0C7E7B1}
+		{464CDA63-DB4A-02B4-1AFA-7083EF503845} = {4A01AB0C-CCCD-420C-9557-42CD07E9BB70}
+		{1BBC78F4-68D9-4352-B1D3-81DC7CFED56B} = {B4F2ECE8-51A5-4A72-B503-5DDD564D7AD9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {433E9001-0D97-4552-9BF4-6FED04B194AE}

@@ -1,5 +1,6 @@
 ﻿Imports System
 Imports System.Windows.Forms
+Imports AATM.Contracts
 
 ''' <summary>
 ''' A concrete implementation of IMessagingService that displays messages

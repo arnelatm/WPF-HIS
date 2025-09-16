@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -135,32 +135,32 @@
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Core\AATM.Core.Localization\AATM.Core.Localization.vbproj">
-      <Project>{88088E99-8848-42CD-BD39-848B9794C88F}</Project>
+    <ProjectReference Include="..\..\Core\AATM.Core.Localization\AATM.Core.Localization.csproj">
+      <Project>{3A2C0FF2-4410-0D3C-3F61-4EF5F503FC2F}</Project>
       <Name>AATM.Core.Localization</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Core\AATM.Core.Logging\AATM.Core.Logging.vbproj">
-      <Project>{126f0379-fd77-4a2f-bc2e-2b49b7c13fa2}</Project>
+    <ProjectReference Include="..\..\Core\AATM.Core.Logging\AATM.Core.Logging.csproj">
+      <Project>{A04B8212-312F-05DE-3E76-E137D5560B02}</Project>
       <Name>AATM.Core.Logging</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Core\AATM.Core.Messaging\AATM.Core.Messaging.vbproj">
-      <Project>{d1428ce2-1ce8-438e-a427-79dae88483fa}</Project>
+    <ProjectReference Include="..\..\Core\AATM.Core.Messaging.Cs\AATM.Core.Messaging.csproj">
+      <Project>{1bbc78f4-68d9-4352-b1d3-81dc7cfed56b}</Project>
       <Name>AATM.Core.Messaging</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Core\AATM.Core.UI.Logging\AATM.Core.UI.Logging.vbproj">
-      <Project>{639F8A98-99A6-43E1-B800-55E4C283EC29}</Project>
+    <ProjectReference Include="..\..\Core\AATM.Core.UI.Logging\AATM.Core.UI.Logging.csproj">
+      <Project>{D1BB0BF3-55FE-0C10-3A58-9F9AA014D889}</Project>
       <Name>AATM.Core.UI.Logging</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Core\AATM.Core.vbproj">
-      <Project>{170d7f0d-9aac-4294-bb4d-a2d95d1e7c8a}</Project>
+    <ProjectReference Include="..\..\Core\AATM.Core.csproj">
+      <Project>{A529FE66-56F4-0D65-3915-68A73F89482A}</Project>
       <Name>AATM.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Core\Configuration\AATM.CORE.Configuration\AATM.Core.Configuration.vbproj">
-      <Project>{a43e971a-33d9-43ec-b15c-1b7af680015d}</Project>
+    <ProjectReference Include="..\..\Core\Configuration\AATM.CORE.Configuration\AATM.Core.Configuration.csproj">
+      <Project>{161A1671-FF81-0C1D-3304-D104941735FD}</Project>
       <Name>AATM.Core.Configuration</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Module\AATM.Modules.Customers\AATM.Modules.Customers.vbproj">
-      <Project>{9a35d8eb-6fe8-4649-a1ac-51d114bc68ce}</Project>
+    <ProjectReference Include="..\..\Module\AATM.Modules.Customers\AATM.Modules.Customers.csproj">
+      <Project>{28115980-A3B0-09B8-23F4-9BAF762B5C6E}</Project>
       <Name>AATM.Modules.Customers</Name>
     </ProjectReference>
   </ItemGroup>

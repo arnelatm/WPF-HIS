@@ -1,4 +1,5 @@
-﻿Imports AATM.Core.Logging
+﻿Imports AATM.Contracts
+Imports AATM.Core.Logging
 Imports AATM.Core.Messaging
 Imports AATM.Core.Utilities
 Imports System.Collections.Generic

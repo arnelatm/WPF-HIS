@@ -4,6 +4,7 @@ Imports AATM.Core.Localization
 Imports AATM.Modules.Customers
 Imports System.Collections.Generic
 Imports AATM.UI.Winforms
+Imports AATM.Contracts
 
 ''' <summary>
 ''' The Presenter for the customer management feature.

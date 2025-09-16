@@ -1,102 +1,242 @@
 ﻿Imports System.Collections.Generic
-Imports System.IO
-Imports System.Linq
 Imports System.Globalization
-
+Imports System.Linq
+Imports AATM.Contracts
 
 ''' <summary>
-''' Manages localized strings for the application.
-''' It loads localization data from a repository and provides a single point of access.
+''' Provides localized strings by retrieving them from a database and managing them
+''' for a given language. This class implements the ILocalizationService interface.
 ''' </summary>
 Public Class LocalizationService
     Implements ILocalizationService
 
-    Private ReadOnly _localizationRepository As ILocalizationRepository
-    Private ReadOnly _languages As New List(Of (display As String, code As String))()
-    ' The primary dictionary holds the language code, and the nested dictionary
-    ' holds the UIIdentifier and the translated string.
-    Private ReadOnly _localizedStrings As New Dictionary(Of String, Dictionary(Of String, String))()
-    Private _currentLanguageCode As String = "en-US"
-    Private _isRightToLeft As Boolean = False
-    Private Const DEFAULT_LANGUAGE_CODE As String = "en-US"
+    Private ReadOnly _language As String
+    Private ReadOnly _localizedStrings As IDictionary(Of String, String)
 
-    Public Sub New(localizationRepository As ILocalizationRepository)
-        _localizationRepository = localizationRepository
-        LoadLanguages()
-        LoadAllLocalizedStrings()
+    ''' <summary>
+    ''' Initializes a new instance of the LocalizationService.
+    ''' The constructor loads all localized strings for the specified language
+    ''' into a local dictionary for fast retrieval.
+    ''' </summary>
+    ''' <param name="language">The language code for the strings to retrieve (e.g., "en-US").</param>
+    Public Sub New(language As String)
+        _language = language
+        _localizedStrings = Me.GetLocalizedStrings()
     End Sub
 
     ''' <summary>
-    ''' Gets a localized string for a specific UI element in the current language.
-    ''' If the translation is not found, the original string is returned.
+    ''' Retrieves a dictionary of all localized strings for the current language.
+    ''' This method simulates retrieving data from a database and mapping it
+    ''' to the TranslationDTO.
     ''' </summary>
-    ''' <param name="uiIdentifier">The unique identifier of the UI element (e.g., "btnSave").</param>
-    ''' <param name="originalString">The original, untranslated text (e.g., "Save").</param>
-    ''' <returns>The localized string or the original string if not found.</returns>
-    Public Function GetString(uiIdentifier As String, originalString As String) As String Implements ILocalizationService.GetString
-        ' Check if we have translations for the current language.
-        If _localizedStrings.ContainsKey(_currentLanguageCode) Then
-            ' Check if the specific UI element has a translation.
-            Dim translationsForLang As Dictionary(Of String, String) = _localizedStrings(_currentLanguageCode)
-            If translationsForLang.ContainsKey(uiIdentifier) Then
-                Return translationsForLang(uiIdentifier)
-            End If
-        End If
+    ''' <returns>A Dictionary where the key is the UI identifier and the value is the localized string.</returns>
+    Public Function GetLocalizedStrings() As IDictionary(Of String, String) Implements ILocalizationService.GetLocalizedStrings
+        Dim localizedStrings As New Dictionary(Of String, String)
+        Dim translationDTOs As New List(Of TranslationDTO)
 
-        ' If no translation is found, return the original string.
-        Return originalString
+        ' =========================================================================
+        ' TODO: In a real application, replace this section with your actual
+        ' database connection and query logic to populate the translationDTOs list.
+        ' =========================================================================
+
+        ' Placeholder data to simulate database records
+        Select Case _language.ToLower()
+            Case "en-us"
+                translationDTOs.Add(New TranslationDTO With {.UIIdentifier = "btnSave_Text", .LocalizedString = "Save"})
+                translationDTOs.Add(New TranslationDTO With {.UIIdentifier = "btnCancel_Text", .LocalizedString = "Cancel"})
+                translationDTOs.Add(New TranslationDTO With {.UIIdentifier = "msgConfirmDelete", .LocalizedString = "Are you sure you want to delete this record?"})
+                translationDTOs.Add(New TranslationDTO With {.UIIdentifier = "lblFirstName_Text", .LocalizedString = "First Name:"})
+
+            Case "es-es"
+                translationDTOs.Add(New TranslationDTO With {.UIIdentifier = "btnSave_Text", .LocalizedString = "Guardar"})
+                translationDTOs.Add(New TranslationDTO With {.UIIdentifier = "btnCancel_Text", .LocalizedString = "Cancelar"})
+                translationDTOs.Add(New TranslationDTO With {.UIIdentifier = "msgConfirmDelete", .LocalizedString = "¿Estás seguro de que quieres eliminar este registro?"})
+                translationDTOs.Add(New TranslationDTO With {.UIIdentifier = "lblFirstName_Text", .LocalizedString = "Nombre:"})
+
+            Case Else
+                ' You could implement a fallback to a default language here,
+                ' or simply return an empty dictionary.
+                Return New Dictionary(Of String, String)
+        End Select
+
+        ' Convert the list of DTOs into a dictionary for quick lookups
+        For Each translation In translationDTOs
+            If Not localizedStrings.ContainsKey(translation.UIIdentifier) Then
+                localizedStrings.Add(translation.UIIdentifier, translation.LocalizedString)
+            End If
+        Next
+
+        Return localizedStrings
     End Function
 
     ''' <summary>
-    ''' Adds a new localized string to the database or updates an existing one.
+    ''' Gets a localized string from the pre-loaded dictionary.
+    ''' </summary>
+    ''' <returns>The localized string or the original string if the translation is not found.</returns>
+    Public Function GetString(uiIdentifier As String, originalString As String) As String Implements ILocalizationService.GetString
+        Dim localizedString As String = ""
+        If _localizedStrings.TryGetValue(uiIdentifier, localizedString) Then
+            Return localizedString
+        Else
+            ' Log a warning that a translation was not found.
+            ' Consider implementing a mechanism to automatically add the new
+            ' key to the database here if it's missing.
+            ' Console.WriteLine($"Warning: Translation for '{uiIdentifier}' not found. Returning original string.")
+            Return originalString
+        End If
+    End Function
+
+    ''' <summary>
+    ''' Adds or updates a localized string in the database.
+    ''' This method simulates writing data to a database.
     ''' </summary>
     Public Sub AddOrUpdateString(moduleName As String, uiIdentifier As String, originalString As String, languageCode As String, localizedString As String) Implements ILocalizationService.AddOrUpdateString
-        _localizationRepository.AddOrUpdateLocalization(originalString, moduleName, uiIdentifier, languageCode, localizedString)
-        ' After adding or updating in the database, reload the in-memory cache.
-        LoadAllLocalizedStrings()
+        ' =========================================================================
+        ' TODO: Implement your database write logic here.
+        ' You would check if a record with the same uiIdentifier and languageCode
+        ' exists and either update it or insert a new record.
+        ' =========================================================================
+        Console.WriteLine($"Simulating DB write: Added/Updated string for UIIdentifier: {uiIdentifier}, Language: {languageCode}")
     End Sub
 
-    Public Sub SetLanguage(languageCode As String) Implements ILocalizationService.SetLanguage
-        If _languages.Any(Function(lang) lang.code = languageCode) Then
-            _currentLanguageCode = languageCode
-            Dim culture As New CultureInfo(languageCode)
-            _isRightToLeft = culture.TextInfo.IsRightToLeft
-        End If
-    End Sub
-
+    ''' <summary>
+    ''' Gets a list of available languages.
+    ''' </summary>
+    ''' <returns>A list of tuples with the display name and language code.</returns>
     Public Function GetAvailableLanguages() As List(Of (display As String, code As String)) Implements ILocalizationService.GetAvailableLanguages
-        Return _languages.ToList()
+        ' =========================================================================
+        ' TODO: Query your database for a list of unique language codes and their
+        ' display names to populate this list dynamically.
+        ' =========================================================================
+        Return New List(Of (String, String)) From {
+            ("English", "en-US"),
+            ("Español", "es-ES")
+        }
     End Function
 
+    Public Function Translate(sourceLang As String, targetLang As String, textToTranslate As String) As String Implements ILocalizationService.Translate
+        Throw New NotImplementedException()
+    End Function
+
+    ''' <summary>
+    ''' Indicates whether the current language is a right-to-left language.
+    ''' </summary>
     Public ReadOnly Property IsRightToLeft As Boolean Implements ILocalizationService.IsRightToLeft
         Get
-            Return _isRightToLeft
+            Try
+                Dim culture As New CultureInfo(_language)
+                Return culture.TextInfo.IsRightToLeft
+            Catch ex As Exception
+                ' Handle cases where the language code is invalid.
+                Return False
+            End Try
         End Get
     End Property
 
-    Private Sub LoadLanguages()
-        ' In a real-world app, this would be loaded from a configuration or a database table.
-        _languages.Add(("English", "en-US"))
-        _languages.Add(("Arabic", "ar-SA"))
-    End Sub
-
-    ''' <summary>
-    ''' Loads all localized strings from the repository into memory.
-    ''' This should be called once on application startup or after a translation is saved.
-    ''' </summary>
-    Private Sub LoadAllLocalizedStrings()
-        _localizedStrings.Clear()
-        For Each language In _languages
-            Dim localizedStringsForLang As New Dictionary(Of String, String)()
-            Dim translations As List(Of TranslationDTO) = _localizationRepository.GetLocalizedStrings(language.code)
-            For Each translation As TranslationDTO In translations
-                ' We use the UIIdentifier as the lookup key for the string.
-                localizedStringsForLang(translation.UIIdentifier) = translation.LocalizedString
-            Next
-            _localizedStrings(language.code) = localizedStringsForLang
-        Next
-    End Sub
 End Class
+
+
+
+
+'Imports System.Collections.Generic
+'Imports System.IO
+'Imports System.Linq
+'Imports System.Globalization
+
+
+'''' <summary>
+'''' Manages localized strings for the application.
+'''' It loads localization data from a repository and provides a single point of access.
+'''' </summary>
+'Public Class LocalizationService
+'    Implements ILocalizationService
+
+'    Private ReadOnly _localizationRepository As ILocalizationRepository
+'    Private ReadOnly _languages As New List(Of (display As String, code As String))()
+'    ' The primary dictionary holds the language code, and the nested dictionary
+'    ' holds the UIIdentifier and the translated string.
+'    Private ReadOnly _localizedStrings As New Dictionary(Of String, Dictionary(Of String, String))()
+'    Private _currentLanguageCode As String = "en-US"
+'    Private _isRightToLeft As Boolean = False
+'    Private Const DEFAULT_LANGUAGE_CODE As String = "en-US"
+
+'    Public Sub New(localizationRepository As ILocalizationRepository)
+'        _localizationRepository = localizationRepository
+'        LoadLanguages()
+'        LoadAllLocalizedStrings()
+'    End Sub
+
+'    ''' <summary>
+'    ''' Gets a localized string for a specific UI element in the current language.
+'    ''' If the translation is not found, the original string is returned.
+'    ''' </summary>
+'    ''' <param name="uiIdentifier">The unique identifier of the UI element (e.g., "btnSave").</param>
+'    ''' <param name="originalString">The original, untranslated text (e.g., "Save").</param>
+'    ''' <returns>The localized string or the original string if not found.</returns>
+'    Public Function GetString(uiIdentifier As String, originalString As String) As String Implements ILocalizationService.GetString
+'        ' Check if we have translations for the current language.
+'        If _localizedStrings.ContainsKey(_currentLanguageCode) Then
+'            ' Check if the specific UI element has a translation.
+'            Dim translationsForLang As Dictionary(Of String, String) = _localizedStrings(_currentLanguageCode)
+'            If translationsForLang.ContainsKey(uiIdentifier) Then
+'                Return translationsForLang(uiIdentifier)
+'            End If
+'        End If
+
+'        ' If no translation is found, return the original string.
+'        Return originalString
+'    End Function
+
+'    ''' <summary>
+'    ''' Adds a new localized string to the database or updates an existing one.
+'    ''' </summary>
+'    Public Sub AddOrUpdateString(moduleName As String, uiIdentifier As String, originalString As String, languageCode As String, localizedString As String) Implements ILocalizationService.AddOrUpdateString
+'        _localizationRepository.AddOrUpdateLocalization(originalString, moduleName, uiIdentifier, languageCode, localizedString)
+'        ' After adding or updating in the database, reload the in-memory cache.
+'        LoadAllLocalizedStrings()
+'    End Sub
+
+'    Public Sub SetLanguage(languageCode As String) Implements ILocalizationService.SetLanguage
+'        If _languages.Any(Function(lang) lang.code = languageCode) Then
+'            _currentLanguageCode = languageCode
+'            Dim culture As New CultureInfo(languageCode)
+'            _isRightToLeft = culture.TextInfo.IsRightToLeft
+'        End If
+'    End Sub
+
+'    Public Function GetAvailableLanguages() As List(Of (display As String, code As String)) Implements ILocalizationService.GetAvailableLanguages
+'        Return _languages.ToList()
+'    End Function
+
+'    Public ReadOnly Property IsRightToLeft As Boolean Implements ILocalizationService.IsRightToLeft
+'        Get
+'            Return _isRightToLeft
+'        End Get
+'    End Property
+
+'    Private Sub LoadLanguages()
+'        ' In a real-world app, this would be loaded from a configuration or a database table.
+'        _languages.Add(("English", "en-US"))
+'        _languages.Add(("Arabic", "ar-SA"))
+'    End Sub
+
+'    ''' <summary>
+'    ''' Loads all localized strings from the repository into memory.
+'    ''' This should be called once on application startup or after a translation is saved.
+'    ''' </summary>
+'    Private Sub LoadAllLocalizedStrings()
+'        _localizedStrings.Clear()
+'        For Each language In _languages
+'            Dim localizedStringsForLang As New Dictionary(Of String, String)()
+'            Dim translations As List(Of TranslationDTO) = _localizationRepository.GetLocalizedStrings(language.code)
+'            For Each translation As TranslationDTO In translations
+'                ' We use the UIIdentifier as the lookup key for the string.
+'                localizedStringsForLang(translation.UIIdentifier) = translation.LocalizedString
+'            Next
+'            _localizedStrings(language.code) = localizedStringsForLang
+'        Next
+'    End Sub
+'End Class
 
 
 

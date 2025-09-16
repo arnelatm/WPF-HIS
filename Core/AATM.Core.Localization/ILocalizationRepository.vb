@@ -1,4 +1,5 @@
 ﻿Imports System.Collections.Generic
+Imports AATM.Core.Data.Interfaces
 
 ''' <summary>
 ''' Defines a contract for a data access layer responsible for retrieving localized strings.

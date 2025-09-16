@@ -1,11 +1,13 @@
-﻿Imports System.Collections.Generic
-
-
-''' <summary>
-''' Defines a contract for a service that provides access to localized strings.
-''' This decouples the Presenter from the specific localization data source.
+﻿''' <summary>
+''' Defines the contract for a service that provides and manages localized strings.
 ''' </summary>
 Public Interface ILocalizationService
+
+    ''' <summary>
+    ''' Retrieves a dictionary of all localized strings for the current language.
+    ''' </summary>
+    ''' <returns>A Dictionary where the key is the UI identifier and the value is the localized string.</returns>
+    Function GetLocalizedStrings() As IDictionary(Of String, String)
 
     ''' <summary>
     ''' Gets a localized string for a specific UI element in the current language.
@@ -17,17 +19,13 @@ Public Interface ILocalizationService
     Function GetString(uiIdentifier As String, originalString As String) As String
 
     ''' <summary>
-    ''' Adds a new localized string to the data source or updates an existing one.
+    ''' Adds a new localized string to the database or updates an existing one.
     ''' </summary>
     Sub AddOrUpdateString(moduleName As String, uiIdentifier As String, originalString As String, languageCode As String, localizedString As String)
 
     ''' <summary>
-    ''' Sets the current language for the application.
-    ''' </summary>
-    Sub SetLanguage(languageCode As String)
-
-    ''' <summary>
     ''' Gets a list of available languages for localization.
+    ''' The result includes both the display name and the language code.
     ''' </summary>
     Function GetAvailableLanguages() As List(Of (display As String, code As String))
 
@@ -37,6 +35,7 @@ Public Interface ILocalizationService
     ReadOnly Property IsRightToLeft As Boolean
 
 End Interface
+
 
 
 

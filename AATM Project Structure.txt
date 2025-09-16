@@ -1,0 +1,27 @@
+﻿/AATM.sln
+├── /AATM.UI                 (Presentation Layer - e.g., ASP.NET Core web app)
+│   ├── Program.cs
+│   └── Pages/...
+│
+├── /AATM.Contracts          (Interface Layer - Defines the "rules")
+│   ├── ILocalizationService.cs
+│   └── UserDto.cs
+│
+├── /AATM.Business           (Business Logic Layer - The "engine")
+│   ├── LocalizationService.cs
+│   └── DomainModels/...
+│
+├── /AATM.Data               (Data Access Interface Layer)
+│   ├── IUserRepository.cs
+│   └── IProductRepository.cs
+│
+├── /AATM.Infrastructure     (Implementation Layer - The "how-to")
+│   ├── Data/...              (For concrete data access)
+│   │   ├── ApplicationDbContext.cs
+│   │   └── UserRepository.cs (Implements IUserRepository)
+│   └── Services/...          (For external services)
+│       └── EmailSenderService.cs
+│
+└── /AATM.Shared             (Common Utilities - The "shared toolbox" (note: it is still Core now to change later)
+    ├── Constants.cs
+    └── Helpers.cs

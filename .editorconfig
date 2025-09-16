@@ -2,3 +2,8 @@
 
 # BC42105: Function doesn't return a value on all code paths
 dotnet_diagnostic.BC42105.severity = suggestion
+
+[*.cs]
+
+# CS1591: Missing XML comment for publicly visible type or member
+dotnet_diagnostic.CS1591.severity = none

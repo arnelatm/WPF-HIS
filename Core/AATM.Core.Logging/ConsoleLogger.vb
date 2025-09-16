@@ -1,4 +1,6 @@
-﻿Public Class ConsoleLogger
+﻿Imports AATM.Contracts
+
+Public Class ConsoleLogger
     Implements ILogger
 
     Public Sub LogInfo(message As String) Implements ILogger.LogInfo

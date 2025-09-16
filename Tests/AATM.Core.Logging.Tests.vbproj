@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -108,8 +108,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core\AATM.Core.Logging\AATM.Core.Logging.vbproj">
-      <Project>{126f0379-fd77-4a2f-bc2e-2b49b7c13fa2}</Project>
+    <ProjectReference Include="..\Core\AATM.Core.Logging\AATM.Core.Logging.csproj">
+      <Project>{A04B8212-312F-05DE-3E76-E137D5560B02}</Project>
       <Name>AATM.Core.Logging</Name>
     </ProjectReference>
   </ItemGroup>

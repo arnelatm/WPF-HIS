@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports AATM.Contracts
 
 ''' <summary>
 ''' A simple file-based logger implementation.
