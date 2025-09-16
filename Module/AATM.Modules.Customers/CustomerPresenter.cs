@@ -30,14 +30,14 @@
 //        /// <returns>The translated string.</returns>
 //        public string GetString(string originalString, string languageCode, string uiIdentifier)
 //        {
-//            var translationDto = _translationService.Translate(
+//            var TranslationDto = _translationService.Translate(
 //                originalString: originalString,
 //                languageCode: languageCode,
 //                moduleName: this.GetType().Name, // Using the class name for the module identifier
 //                uiIdentifier: uiIdentifier
 //            );
 
-//            return translationDto.LocalizedString;
+//            return TranslationDto.LocalizedString;
 //        }
 
 //        // Example of how to use the GetString method.

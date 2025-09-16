@@ -32,7 +32,7 @@ namespace AATM.Modules.Localization
         /// <summary>
     /// Displays translations in a DataGridView or similar control.
     /// </summary>
-        void DisplayTranslations(List<TranslationDTO> translations);
+        void DisplayTranslations(List<TranslationDto> translations);
 
         /// <summary>
     /// Displays a message to the user, for example in a status bar or message box.

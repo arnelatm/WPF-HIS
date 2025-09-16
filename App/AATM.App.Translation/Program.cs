@@ -34,6 +34,7 @@ public class MockTranslationApi : ITranslationApi
 public class DatabaseTranslationService : ITranslationService
 {
     private readonly ITranslationApi _translationApi;
+
     // We use a ConcurrentDictionary to simulate a fast, in-memory database cache.
     private static readonly ConcurrentDictionary<string, string> _inMemoryDb = new ConcurrentDictionary<string, string>();
 

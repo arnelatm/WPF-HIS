@@ -12,6 +12,10 @@
 
 
 
+
+
+
+
 CREATE View [dbo].[GLStatementNew_View] 
 as 
 ( SELECT 'GJ' AS 'JournalCode'
@@ -22,7 +26,7 @@ as
 	  ,ch.[AccountCode]
       ,a.[Debit]
       ,a.[Credit]
-	  ,[RevCostCenterIdNo]
+	  ,a.[RevCostCenterIdNo]
       ,a.[Notes]  COLLATE Arabic_CI_AS AS 'Notes'
 	  ,a.[Posted]
 	  ,[TransactionDate] 
@@ -31,11 +35,13 @@ as
 	  ,iif(a.[Notes] is Null or a.[Notes] = '',b.Notes,a.Notes) COLLATE Arabic_CI_AS AS 'PayDescription'
 	  ,iif(a.[Notes] is Null or a.[Notes] = '',b.Notes,a.Notes) COLLATE Arabic_CI_AS AS 'PayDescriptionAra'
 	  ,[ClosingJournal]
+	  ,Cancelled
   FROM [dbo].[GeneralJournalItem] a
   LEFT OUTER JOIN dbo.GeneralJournal b
   on a.JournalIdNo = b.IdNo
   LEFT OUTER JOIN dbo.Account ch
   ON a.AccountIdNo = ch.IdNo
+  where cancelled = 0
 )
 UNION
 (SELECT 'AP' 
@@ -46,7 +52,7 @@ UNION
 	  ,ch.AccountCode
       ,a.[Debit]
       ,a.[Credit]
-      ,[RevCostCenterIdNo]
+      ,a.[RevCostCenterIdNo]
       ,iif(a.[Notes] is Null or a.[Notes] = '',b.Notes,a.Notes)
       ,a.[Posted]
 	  ,[TransactionDate]
@@ -55,6 +61,7 @@ UNION
 	  ,[SupplierName] 
 	  ,[SupplierNameAra] 
 	  ,CAST(0 AS BIT) 
+	  ,Cancelled
   FROM [dbo].[ApJournalItem] a
   LEFT OUTER JOIN dbo.[ApJournal] b
   on a.JournalIdNo = b.IdNo 
@@ -62,6 +69,7 @@ UNION
   on b.SupplierIdNo = c.IdNo 
   LEFT OUTER JOIN dbo.Account ch
   ON a.AccountIdNo = ch.IdNo
+  where cancelled = 0
 )
 UNION
 (SELECT 'AR' AS 'JournalCode'
@@ -72,7 +80,7 @@ UNION
 	  ,ch.AccountCode
       ,a.[Debit]
       ,a.[Credit]
-      ,[RevCostCenterIdNo]
+      ,a.[RevCostCenterIdNo]
       ,iif(a.[Notes] is Null or a.[Notes] = '',b.Notes,a.Notes)
       ,a.[Posted]
 	  ,[TransactionDate]
@@ -81,6 +89,7 @@ UNION
 	  ,[CustomerName]
 	  ,[CustomerNameAra]
 	  ,CAST(0 AS BIT)
+	  ,Cancelled
   FROM [dbo].[ArJournalItem] a
   LEFT OUTER JOIN dbo.ArJournal b
   on a.JournalIdNo = b.IdNo 
@@ -88,6 +97,7 @@ UNION
   on b.CustomerIdNo = c.IdNo 
   LEFT OUTER JOIN dbo.Account ch
   ON a.AccountIdNo = ch.IdNo
+  where cancelled = 0
 )
 UNION
 (SELECT 'ER' 
@@ -98,7 +108,7 @@ UNION
 	  ,ch.AccountCode
       ,a.[Debit]
       ,a.[Credit]
-      ,[RevCostCenterIdNo]
+      ,a.[RevCostCenterIdNo]
       ,iif(a.[Notes] is Null or a.[Notes] = '',b.Notes,a.Notes)
       ,a.[Posted]
 	  ,[TransactionDate]
@@ -107,6 +117,7 @@ UNION
 	  ,[EmployeeName]
 	  ,[EmployeeNameAra]
 	  ,CAST(0 AS BIT)
+  	  ,Cancelled
   FROM [dbo].[ErJournalItem] a
   LEFT OUTER JOIN dbo.ErJournal b
   on a.JournalIdNo = b.IdNo 
@@ -114,6 +125,7 @@ UNION
   on b.EmployeeIdNO = e.IdNo 
   LEFT OUTER JOIN dbo.Account ch
   ON a.AccountIdNo = ch.IdNo
+  where cancelled = 0
 )
 UNION
 (SELECT 'CK'
@@ -124,7 +136,7 @@ UNION
 	  ,ch.AccountCode
       ,a.[Debit]
       ,a.[Credit]
-	  ,[RevCostCenterIdNo]
+	  ,a.[RevCostCenterIdNo]
       ,a.[Notes]
 	  ,a.[Posted]
 	  ,[TransactionDate]
@@ -147,6 +159,7 @@ UNION
 			ELSE b.PayeeName
 	   END
 	   ,CAST(0 AS BIT)
+   	  ,Cancelled
   FROM [dbo].[CkJournalItem] a
   LEFT OUTER JOIN dbo.CkJournal b
   on a.JournalIdNo = b.IdNo
@@ -158,6 +171,7 @@ UNION
   on b.PayeeIdNo = e.IDNo 
   LEFT OUTER JOIN dbo.Account ch
   ON a.AccountIdNo = ch.IdNo
+  where cancelled = 0
 )
 UNION
 (SELECT 'CD'
@@ -168,7 +182,7 @@ UNION
 	  ,ch.AccountCode
       ,a.[Debit]
       ,a.[Credit]
-	  ,[RevCostCenterIdNo]
+	  ,a.[RevCostCenterIdNo]
       ,iif(a.[Notes] is Null or a.[Notes] = '',b.Notes,a.Notes)
 	  ,a.[Posted]
 	  ,[TransactionDate]
@@ -195,6 +209,7 @@ UNION
 			ELSE b.PayeeName
 	   END
 	  ,CAST(0 AS BIT)
+  	  ,Cancelled
   FROM [dbo].[CdJournalItem] a
   LEFT OUTER JOIN dbo.CdJournal b
   on a.JournalIdNo = b.IdNo
@@ -206,6 +221,7 @@ UNION
   on b.PayeeIdNo = e.IDNo 
   LEFT OUTER JOIN dbo.Account ch
   ON a.AccountIdNo = ch.IdNo
+  where cancelled = 0
 )
 UNION
 (SELECT 'CR'
@@ -216,7 +232,7 @@ UNION
 	  ,ch.AccountCode
       ,a.[Debit]
       ,a.[Credit]
-	  ,[RevCostCenterIdNo]
+	  ,a.[RevCostCenterIdNo]
       ,iif(a.[Notes] is Null or a.[Notes] = '',b.Notes,a.Notes)
 	  ,a.[Posted]
 	  ,[TransactionDate]
@@ -243,6 +259,7 @@ UNION
 			ELSE b.PayorName
 	   END
 	  ,CAST(0 AS BIT)
+	  ,Cancelled
   FROM [dbo].[CashReceiptJournalItem] a
   LEFT OUTER JOIN dbo.CashReceiptJournal b
   on a.JournalIdNo = b.IdNo
@@ -254,6 +271,7 @@ UNION
   on b.PayorIdNo = e.IDNo 
   LEFT OUTER JOIN dbo.Account ch
   ON a.AccountIdNo = ch.IdNo
+  where cancelled = 0
 )
 UNION
 (SELECT 'PC'
@@ -264,7 +282,7 @@ UNION
 	  ,ch.AccountCode
       ,a.[Debit]
       ,a.[Credit]
-	  ,[RevCostCenterIdNo]
+	  ,a.[RevCostCenterIdNo]
 	  ,iif(a.[Notes] is Null or a.[Notes] = '',b.Notes,a.Notes)
 	  ,a.[Posted]
 	  ,[TransactionDate]
@@ -287,6 +305,7 @@ UNION
 			ELSE b.PayeeName
 	   END
 	  ,CAST(0 AS BIT)
+	  ,Cancelled
   FROM [dbo].[PcJournalItem] a
   LEFT OUTER JOIN dbo.PcJournal b
   on a.JournalIdNo = b.IdNo
@@ -298,6 +317,7 @@ UNION
   on b.PayeeIdNo = e.IDNo 
   LEFT OUTER JOIN dbo.Account ch
   ON a.AccountIdNo = ch.IdNo
+  where cancelled = 0
 )
 UNION
 (SELECT 'SJ'
@@ -308,7 +328,7 @@ UNION
 	  ,ch.AccountCode
       ,a.[Debit]
       ,a.[Credit]
-	  ,[RevCostCenterIdNo]
+	  ,a.[RevCostCenterIdNo]
       ,a.[Notes]
 	  ,a.[Posted]
 	  ,[TransactionDate]
@@ -317,11 +337,13 @@ UNION
 	  ,LTrim(Coalesce(a.[Notes],' ', b.[Notes]))
 	  ,LTrim(Coalesce(a.[Notes],' ', b.[Notes]))
 	  ,CAST(0 AS BIT)
+	  ,Cancelled
   FROM [dbo].[SalesJournalItem] a
   LEFT OUTER JOIN dbo.SalesJournal b
   on a.JournalIdNo = b.Idno
   LEFT OUTER JOIN dbo.Account ch
   ON a.AccountIdNo = ch.IdNo
+  where cancelled = 0
 )
 UNION
 (SELECT 'BB'
@@ -341,6 +363,7 @@ UNION
 	  ,'Beginning Balance'
 	  ,'Beginning Balance'
 	  ,CAST(0 AS BIT)
+  	  ,CAST(0 AS BIT)
   FROM [dbo].ACCOUNTBALANCE a
   JOIN ACCOUNT b
   on a.AccountIdno = b.idno

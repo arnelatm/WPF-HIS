@@ -3,6 +3,7 @@ using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 /// <summary>
 /// A service class to manage database operations for translation data.
@@ -10,34 +11,28 @@ using System.Threading.Tasks;
 /// </summary>
 public class TranslationDbService
 {
-    // IMPORTANT: Replace this with your actual database connection string.
-    private readonly string _connectionString = "Data Source=YourServerName;Initial Catalog=YourDatabaseName;User ID=YourUsername;Password=YourPassword;";
+    // IMPORTANT: Replace with a secure connection string source in production.
+    // Quick fix for untrusted certs: TrustServerCertificate=True (keeps TLS, skips validation).
+    private readonly string _connectionString =
+        "Data Source=ibn-server;Initial Catalog=ispdata;User ID=IGroupAdmin;Password=igss@123;Encrypt=True;TrustServerCertificate=True;";
 
-    /// <summary>
-    /// Inserts or updates a translation record atomically using a SQL MERGE statement.
-    /// </summary>
-    /// <param name="dto">The TranslationDto object to upsert.</param>
-    /// <returns>The ID of the affected record.</returns>
     public async Task<int> UpsertTranslationAsync(TranslationDto dto)
     {
         using (var connection = new SqlConnection(_connectionString))
         {
             await connection.OpenAsync();
 
-            // The MERGE statement intelligently handles both INSERT and UPDATE.
-            // It finds a matching record based on the combination of OriginalString,
-            // ModuleName, UIIdentifier, and LanguageCode.
             var mergeCommand = @"
-                    MERGE INTO Localization AS T
-                    USING (VALUES (@OriginalString, @ModuleName, @UIIdentifier, @LanguageCode, @LocalizedString, GETDATE()))
-                    AS S (OriginalString, ModuleName, UIIdentifier, LanguageCode, LocalizedString, CreationDate)
-                    ON T.OriginalString = S.OriginalString AND T.LanguageCode = S.LanguageCode AND T.ModuleName = S.ModuleName AND T.UIIdentifier = S.UIIdentifier
-                    WHEN MATCHED THEN
-                        UPDATE SET T.LocalizedString = S.LocalizedString, T.CreationDate = S.CreationDate
-                    WHEN NOT MATCHED THEN
-                        INSERT (OriginalString, ModuleName, UIIdentifier, LanguageCode, LocalizedString, CreationDate)
-                        VALUES (S.OriginalString, S.ModuleName, S.UIIdentifier, S.LanguageCode, S.LocalizedString, S.CreationDate)
-                    OUTPUT inserted.ID;"; // This returns the ID of the affected row.
+                MERGE INTO Localization AS T
+                USING (VALUES (@OriginalString, @ModuleName, @UIIdentifier, @LanguageCode, @LocalizedString, GETDATE()))
+                AS S (OriginalString, ModuleName, UIIdentifier, LanguageCode, LocalizedString, CreationDate)
+                ON T.OriginalString = S.OriginalString AND T.LanguageCode = S.LanguageCode AND T.ModuleName = S.ModuleName AND T.UIIdentifier = S.UIIdentifier
+                WHEN MATCHED THEN
+                    UPDATE SET T.LocalizedString = S.LocalizedString, T.CreationDate = S.CreationDate
+                WHEN NOT MATCHED THEN
+                    INSERT (OriginalString, ModuleName, UIIdentifier, LanguageCode, LocalizedString, CreationDate)
+                    VALUES (S.OriginalString, S.ModuleName, S.UIIdentifier, S.LanguageCode, S.LocalizedString, S.CreationDate)
+                OUTPUT inserted.ID;";
 
             using (var command = new SqlCommand(mergeCommand, connection))
             {
@@ -51,6 +46,7 @@ public class TranslationDbService
             }
         }
     }
+
 
     /// <summary>
     /// Retrieves a single translation record by its unique ID.
@@ -106,21 +102,82 @@ public class TranslationDbService
     }
 
     /// <summary>
-    /// Deletes a translation record from the database by its ID.
+    /// Fetches all translations from the database.
     /// </summary>
-    /// <param name="id">The ID of the record to delete.</param>
-    public async Task DeleteTranslationAsync(int id)
+    /// <returns>A list of TranslationDto objects.</returns>
+    public async Task<List<TranslationDto>> GetAllTranslationsAsync()
     {
-        using (var connection = new SqlConnection(_connectionString))
+        var translations = new List<TranslationDto>();
+        string query = "SELECT ID, OriginalString, ModuleName, UIIdentifier, LanguageCode, LocalizedString, CreationDate FROM Translations";
+
+        try
         {
-            await connection.OpenAsync();
-            var query = "DELETE FROM Localization WHERE ID = @ID";
-            using (var command = new SqlCommand(query, connection))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                command.Parameters.AddWithValue("@ID", id);
-                await command.ExecuteNonQueryAsync();
+                await connection.OpenAsync();
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            translations.Add(new TranslationDto
+                            {
+                                ID = reader.GetInt32(reader.GetOrdinal("ID")),
+                                OriginalString = reader.GetString(reader.GetOrdinal("OriginalString")),
+                                ModuleName = reader.GetString(reader.GetOrdinal("ModuleName")),
+                                UIIdentifier = reader.GetString(reader.GetOrdinal("UIIdentifier")),
+                                LanguageCode = reader.GetString(reader.GetOrdinal("LanguageCode")),
+                                LocalizedString = reader.GetString(reader.GetOrdinal("LocalizedString")),
+                                CreationDate = reader.GetDateTime(reader.GetOrdinal("CreationDate"))
+                            });
+                        }
+                    }
+                }
             }
         }
+        catch (SqlException ex)
+        {
+            // Log the exception or show an error message.
+            MessageBox.Show($"Database error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            // Return an empty list on error.
+            return new List<TranslationDto>();
+        }
+
+        return translations;
+    }
+
+
+    /// <summary>
+    /// Deletes a translation record from the database.
+    /// </summary>
+    /// <returns>True if the record was deleted, false otherwise.</returns>
+    public async Task<bool> DeleteTranslationAsync(int id)
+    {
+        string deleteSql = "DELETE FROM Translations WHERE ID = @ID";
+        int rowsAffected = 0;
+
+        try
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+                using (SqlCommand command = new SqlCommand(deleteSql, connection))
+                {
+                    // Add the parameter to prevent SQL injection.
+                    command.Parameters.AddWithValue("@ID", id);
+                    rowsAffected = await command.ExecuteNonQueryAsync();
+                }
+            }
+        }
+        catch (SqlException ex)
+        {
+            MessageBox.Show($"Database error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return false;
+        }
+
+        // Return true if at least one row was deleted.
+        return rowsAffected > 0;
     }
 
     /// <summary>
@@ -140,38 +197,4 @@ public class TranslationDbService
         };
     }
 
-    ///// <summary>
-    ///// Deletes a translation record from the database by its ID.
-    ///// </summary>
-    ///// <param name="id">The ID of the record to delete.</param>
-    //public async Task DeleteTranslationAsync(int id)
-    //{
-    //    using (var connection = new SqlConnection(_connectionString))
-    //    {
-    //        await connection.OpenAsync();
-    //        var query = "DELETE FROM Localization WHERE ID = @ID";
-    //        using (var command = new SqlCommand(query, connection))
-    //        {
-    //            command.Parameters.AddWithValue("@ID", id);
-    //            await command.ExecuteNonQueryAsync();
-    //        }
-    //    }
-    //}
-
-    ///// <summary>
-    ///// Helper method to map a SqlDataReader row to a TranslationDto object.
-    ///// </summary>
-    //private TranslationDto MapToDto(SqlDataReader reader)
-    //{
-    //    return new TranslationDto
-    //    {
-    //        ID = reader.GetInt32(reader.GetOrdinal("ID")),
-    //        OriginalString = reader.GetString(reader.GetOrdinal("OriginalString")),
-    //        ModuleName = reader.GetString(reader.GetOrdinal("ModuleName")),
-    //        UIIdentifier = reader.GetString(reader.GetOrdinal("UIIdentifier")),
-    //        LanguageCode = reader.GetString(reader.GetOrdinal("LanguageCode")),
-    //        LocalizedString = reader.GetString(reader.GetOrdinal("LocalizedString")),
-    //        CreationDate = reader.GetDateTime(reader.GetOrdinal("CreationDate"))
-    //    };
-    //}
 }

@@ -15,6 +15,7 @@
 
 
 
+
 CREATE VIEW [dbo].[ARInvoices_View]	
   AS
 (SELECT 'AR' AS 'JournalCode'
@@ -31,7 +32,7 @@ CREATE VIEW [dbo].[ARInvoices_View]
   on a.JournalIdNo = b.IDNo 
   LEFT Outer Join [dbo].[Account] c
   on a.AccountIdNo = c.idno
-  where c.SpecialAccount='AR'
+  where c.SpecialAccount='AR' and b.Cancelled = 0
 )
 UNION
 (SELECT 'CR'
@@ -48,7 +49,7 @@ UNION
   on a.JournalIdNo = b.IDNo
   LEFT Outer Join [dbo].[Account] c
   on a.AccountIdNo = c.idno 
-  WHERE PayorType='A' AND B.UnApplied<>0 and (c.SpecialAccount='CA' OR c.SpecialAccount='AR')
+  WHERE PayorType='A' AND B.UnApplied<>0 and (c.SpecialAccount='CA' OR c.SpecialAccount='AR') and b.Cancelled = 0
 )
 UNION
 (SELECT 'CK'
@@ -65,7 +66,7 @@ UNION
   on a.JournalIdNo = b.IDNo
   LEFT Outer Join [dbo].[Account] c
   on a.AccountIdNo = c.idno
-  WHERE PaymentType='R' AND C.SpecialAccount='AR'
+  WHERE PaymentType='R' AND C.SpecialAccount='AR' and b.Cancelled = 0
 )
 UNION
 (SELECT 'CD'
@@ -82,7 +83,7 @@ UNION
   on a.JournalIdNo = b.IDNo
   LEFT Outer Join [dbo].[Account] c
   on a.AccountIdNo = c.idno
-  WHERE PaymentType='R' AND c.SpecialAccount='AR'
+  WHERE PaymentType='R' AND c.SpecialAccount='AR' and b.Cancelled = 0
 )
 UNION
 (SELECT 'PC'
@@ -99,7 +100,7 @@ UNION
   on a.JournalIdNo = b.IDNo
   LEFT Outer Join [dbo].[Account] c
   on a.AccountIdNo = c.idno
-  WHERE PaymentType='R' AND c.SpecialAccount='AR'
+  WHERE PaymentType='R' AND c.SpecialAccount='AR' and b.Cancelled = 0
 )
 UNION
 (SELECT 'BB' 

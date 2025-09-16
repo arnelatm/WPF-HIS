@@ -1,9 +1,11 @@
 ﻿CREATE VIEW dbo.PayrollDetail_View
 AS
-SELECT        dbo.PayrollDetail.PayrollIdNo, dbo.PayrollDetail.EmployeeIdNo, dbo.PayrollDetail.IdNo, dbo.Employee.EmployeeName, dbo.Employee.EmployeeNameAra, dbo.Employee.EmployeeCode, dbo.PayrollDetail.DateTimeStamp, 
-                         dbo.PayrollDetail.BankTransfer, dbo.Employee.PaymentMethod, dbo.Employee.SponsorType
-FROM            dbo.PayrollDetail INNER JOIN
-                         dbo.Employee ON dbo.PayrollDetail.EmployeeIdNo = dbo.Employee.IdNo
+SELECT dbo.PayrollDetail.PayrollIdNo, dbo.PayrollDetail.EmployeeIdNo, dbo.PayrollDetail.IdNo, dbo.Employee.EmployeeName, dbo.Employee.EmployeeNameAra, dbo.Employee.EmployeeCode, dbo.PayrollDetail.DateTimeStamp, 
+                  dbo.PayrollDetail.BankTransfer, dbo.Employee.PaymentMethod, dbo.Employee.SponsorType, dbo.Payroll.Posted, dbo.Payroll.StartDate, dbo.Payroll.EndDate, dbo.Payroll.PayrollName AS PayPeriodName, 
+                  dbo.Payroll.PayrollNameAra AS PayPeriodNameAra
+FROM     dbo.PayrollDetail INNER JOIN
+                  dbo.Employee ON dbo.PayrollDetail.EmployeeIdNo = dbo.Employee.IdNo INNER JOIN
+                  dbo.Payroll ON dbo.PayrollDetail.PayrollIdNo = dbo.Payroll.IdNo
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'PayrollDetail_View';
 
@@ -14,7 +16,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
+         Configuration = "(H (1[62] 4[17] 2[17] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -92,13 +94,23 @@ Begin DesignProperties =
          End
          Begin Table = "Employee"
             Begin Extent = 
-               Top = 6
-               Left = 459
-               Bottom = 220
-               Right = 657
+               Top = 225
+               Left = 38
+               Bottom = 534
+               Right = 236
             End
             DisplayFlags = 280
-            TopColumn = 33
+            TopColumn = 0
+         End
+         Begin Table = "Payroll"
+            Begin Extent = 
+               Top = 11
+               Left = 438
+               Bottom = 323
+               Right = 641
+            End
+            DisplayFlags = 280
+            TopColumn = 0
          End
       End
    End
@@ -110,16 +122,16 @@ Begin DesignProperties =
    End
    Begin CriteriaPane = 
       Begin ColumnWidths = 11
-         Column = 1440
-         Alias = 900
-         Table = 1170
+         Column = 2484
+         Alias = 2136
+         Table = 1176
          Output = 720
          Append = 1400
          NewValue = 1170
-         SortType = 1350
-         SortOrder = 1410
+         SortType = 1356
+         SortOrder = 1416
          GroupBy = 1350
-         Filter = 1350
+         Filter = 1356
          Or = 1350
          Or = 1350
          Or = 1350
@@ -127,6 +139,4 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'PayrollDetail_View';
-
-
 

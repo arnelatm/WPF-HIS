@@ -39,7 +39,7 @@ namespace AATM.Modules.Localization
     /// </summary>
         public void LoadTranslations(string languageCode)
         {
-            List<TranslationDTO> translations = _localizationRepository.GetLocalizedStrings(languageCode);
+            List<TranslationDto> translations = _localizationRepository.GetLocalizedStrings(languageCode);
             var viewTranslations = new List<(string original, string localized)>();
             foreach (var translation in translations)
                 viewTranslations.Add((translation.OriginalString, translation.LocalizedString));
@@ -97,7 +97,7 @@ namespace AATM.Modules.Localization
 // ''' Loads all translations for a selected language and populates the view.
 // ''' </summary>
 // Public Sub LoadTranslations(languageCode As String)
-// Dim translations As List(Of TranslationDTO) = _localizationRepository.GetLocalizedStrings(languageCode)
+// Dim translations As List(Of TranslationDto) = _localizationRepository.GetLocalizedStrings(languageCode)
 // Dim viewTranslations As New List(Of (original As String, localized As String))
 // For Each translation In translations
 // viewTranslations.Add((translation.OriginalString, translation.LocalizedString))
@@ -159,7 +159,7 @@ namespace AATM.Modules.Localization
 // ''' Loads all translations for a selected language and populates the view.
 // ''' </summary>
 // Public Sub LoadTranslations(languageCode As String)
-// Dim translations As List(Of TranslationDTO) = _localizationRepository.GetLocalizedStrings(languageCode)
+// Dim translations As List(Of TranslationDto) = _localizationRepository.GetLocalizedStrings(languageCode)
 // _view.DisplayTranslations(translations)
 // End Sub
 

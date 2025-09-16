@@ -8,10 +8,6 @@
     [Notes]                VARCHAR (255) NULL,
     [Doctor]               VARCHAR (20)  NULL,
     [DateTimeStamp]        ROWVERSION    NULL,
-    CONSTRAINT [PK_RevCostCenterIdNo] PRIMARY KEY CLUSTERED ([IDNo] ASC)
+    CONSTRAINT [PK_RevCostCenter] PRIMARY KEY CLUSTERED ([IDNo] ASC)
 );
-
-
-
-
 

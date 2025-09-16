@@ -7,6 +7,8 @@ using System.Data.SqlClient;
 using System.Linq;
 using Microsoft.VisualBasic.CompilerServices;
 using AATM.Contracts;
+using AATM.Contracts.Interfaces.Repositories;
+using AATM.Contracts.Dtos;
 
 
 namespace Localization.Sql
@@ -26,16 +28,16 @@ namespace Localization.Sql
     /// Retrieves a single localized string by its unique ID.
     /// </summary>
     /// <param name="id">The unique identifier of the translation record.</param>
-    /// <returns>The TranslationDTO object, or Nothing if not found.</returns>
-        public TranslationDTO GetLocalizationById(int id)
+    /// <returns>The TranslationDto object, or Nothing if not found.</returns>
+        public TranslationDto GetLocalizationById(int id)
         {
             string sql = "SELECT ID, OriginalString, ModuleName, UIIdentifier, LanguageCode, LocalizedString " + "FROM [dbo].[Localization] WHERE ID = @id";
 
             var parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@id", id));
 
-            // Define a function to map a data reader row to a TranslationDTO object.
-            Func<SqlDataReader, TranslationDTO> mapFunction = reader => new TranslationDTO()
+            // Define a function to map a data reader row to a TranslationDto object.
+            Func<SqlDataReader, TranslationDto> mapFunction = reader => new TranslationDto()
             {
                 ID = ReferenceEquals(reader["ID"], DBNull.Value) ? 0 : Conversions.ToInteger(reader["ID"]),
                 OriginalString = reader["OriginalString"].ToString(),
@@ -57,16 +59,16 @@ namespace Localization.Sql
     /// This method now uses a private helper function to manage the connection.
     /// </summary>
     /// <param name="languageCode">The culture code for the language (e.g., "en-US", "ar-SA").</param>
-    /// <returns>A list of TranslationDTO objects.</returns>
-        public List<TranslationDTO> GetLocalizedStrings(string languageCode)
+    /// <returns>A list of TranslationDto objects.</returns>
+        public List<TranslationDto> GetLocalizedStrings(string languageCode)
         {
             string sql = "SELECT ID, OriginalString, ModuleName, UIIdentifier, LanguageCode, LocalizedString " + "FROM [dbo].[Localization] WHERE LanguageCode = @languageCode";
 
             var parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@languageCode", languageCode));
 
-            // Define a function to map a data reader row to a TranslationDTO object.
-            Func<SqlDataReader, TranslationDTO> mapFunction = reader => new TranslationDTO()
+            // Define a function to map a data reader row to a TranslationDto object.
+            Func<SqlDataReader, TranslationDto> mapFunction = reader => new TranslationDto()
             {
                 ID = ReferenceEquals(reader["ID"], DBNull.Value) ? 0 : Conversions.ToInteger(reader["ID"]),
                 OriginalString = reader["OriginalString"].ToString(),
@@ -103,16 +105,16 @@ namespace Localization.Sql
     /// Searches for localized strings across multiple fields.
     /// </summary>
     /// <param name="searchString">The string to search for. The search is case-insensitive.</param>
-    /// <returns>A list of TranslationDTO objects that match the search criteria.</returns>
-        public List<TranslationDTO> SearchLocalizations(string searchString)
+    /// <returns>A list of TranslationDto objects that match the search criteria.</returns>
+        public List<TranslationDto> SearchLocalizations(string searchString)
         {
             string sql = "SELECT ID, OriginalString, ModuleName, UIIdentifier, LanguageCode, LocalizedString " + "FROM [dbo].[Localization] WHERE OriginalString LIKE @searchString OR ModuleName LIKE @searchString OR UIIdentifier LIKE @searchString";
 
             var parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@searchString", "%" + searchString + "%"));
 
-            // Define a function to map a data reader row to a TranslationDTO object.
-            Func<SqlDataReader, TranslationDTO> mapFunction = reader => new TranslationDTO()
+            // Define a function to map a data reader row to a TranslationDto object.
+            Func<SqlDataReader, TranslationDto> mapFunction = reader => new TranslationDto()
             {
                 ID = ReferenceEquals(reader["ID"], DBNull.Value) ? 0 : Conversions.ToInteger(reader["ID"]),
                 OriginalString = reader["OriginalString"].ToString(),
@@ -246,9 +248,9 @@ namespace Localization.Sql
 // ''' This method uses a parameterized query for security.
 // ''' </summary>
 // ''' <param name="languageCode">The culture code for the language (e.g., "en-US", "ar-SA").</param>
-// ''' <returns>A list of TranslationDTO objects.</returns>
-// Public Function GetLocalizedStrings(languageCode As String) As List(Of TranslationDTO) Implements ILocalizationRepository.GetLocalizedStrings
-// Dim translations As New List(Of TranslationDTO)()
+// ''' <returns>A list of TranslationDto objects.</returns>
+// Public Function GetLocalizedStrings(languageCode As String) As List(Of TranslationDto) Implements ILocalizationRepository.GetLocalizedStrings
+// Dim translations As New List(Of TranslationDto)()
 // Dim sql As String = "SELECT ID, OriginalString, ModuleName, UIIdentifier, LanguageCode, LocalizedString " &
 // "FROM [dbo].[Localization] WHERE LanguageCode = @languageCode"
 
@@ -259,7 +261,7 @@ namespace Localization.Sql
 // command.Parameters.AddWithValue("@languageCode", languageCode)
 // Using reader As SqlDataReader = command.ExecuteReader()
 // While reader.Read()
-// translations.Add(New TranslationDTO With {
+// translations.Add(New TranslationDto With {
 // .ID = If(reader("ID") Is DBNull.Value, 0, CInt(reader("ID"))),
 // .OriginalString = reader("OriginalString").ToString(),
 // .ModuleName = reader("ModuleName").ToString(),
@@ -338,9 +340,9 @@ namespace Localization.Sql
 // ''' This method uses a parameterized query for security.
 // ''' </summary>
 // ''' <param name="languageCode">The culture code for the language (e.g., "en-US", "ar-SA").</param>
-// ''' <returns>A list of TranslationDTO objects.</returns>
-// Public Function GetLocalizedStrings(languageCode As String) As List(Of TranslationDTO) Implements ILocalizationRepository.GetLocalizedStrings
-// Dim translations As New List(Of TranslationDTO)()
+// ''' <returns>A list of TranslationDto objects.</returns>
+// Public Function GetLocalizedStrings(languageCode As String) As List(Of TranslationDto) Implements ILocalizationRepository.GetLocalizedStrings
+// Dim translations As New List(Of TranslationDto)()
 // Dim sql As String = "SELECT ID, OriginalString, ModuleName, UIIdentifier, LanguageCode, LocalizedString " &
 // "FROM [dbo].[Localization] WHERE LanguageCode = @languageCode"
 
@@ -351,7 +353,7 @@ namespace Localization.Sql
 // command.Parameters.AddWithValue("@languageCode", languageCode)
 // Using reader As SqlDataReader = command.ExecuteReader()
 // While reader.Read()
-// translations.Add(New TranslationDTO With {
+// translations.Add(New TranslationDto With {
 // .ID = If(reader("ID") Is DBNull.Value, 0, CInt(reader("ID"))),
 // .OriginalString = reader("OriginalString").ToString(),
 // .ModuleName = reader("ModuleName").ToString(),

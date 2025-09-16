@@ -672,6 +672,24 @@
     <Build Include="dbo\Tables\ReportAccessOld.sql" />
     <Build Include="dbo\Views\ReportGroup_View.sql" />
     <Build Include="dbo\Tables\Localization.sql" />
+    <Build Include="dbo\Tables\UserAccess.sql" />
+    <Build Include="dbo\Tables\Translations.sql" />
+    <Build Include="dbo\Views\UserAccessResultant_View.sql" />
+    <Build Include="dbo\Views\SecurityObjectHierarchy_View.sql" />
+    <Build Include="dbo\Views\PayrollReportPosting_View.sql" />
+    <Build Include="dbo\Views\PayrollPostingPerRevCostCenter_View.sql" />
+    <Build Include="dbo\Views\PayrollPostingPerPayGroup_View.sql" />
+    <Build Include="dbo\Views\PayrollPostingPerEmployee_View.sql" />
+    <Build Include="dbo\Views\InventoryGivenDate_View.sql" />
+    <Build Include="dbo\Views\GroupNUserAccess_View.sql" />
+    <Build Include="dbo\Views\CSEContact_View.sql" />
+    <Build Include="dbo\Views\ApSummaryPharmacy_View.sql" />
+    <Build Include="Security\iGroupAdmin.sql" />
+    <Build Include="dbo\Stored Procedures\UpdateUserAccessTVP.sql" />
+    <Build Include="dbo\Stored Procedures\SearchNumAllTables.sql" />
+    <Build Include="dbo\Stored Procedures\InsertUserAccessTVP.sql" />
+    <Build Include="dbo\User Defined Types\UserAccessUpdate.sql" />
+    <Build Include="dbo\User Defined Types\UserAccessInsert.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />

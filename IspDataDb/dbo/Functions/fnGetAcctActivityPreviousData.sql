@@ -3,7 +3,7 @@
 -- Create date: 
 -- Description:	
 -- =============================================
-CREATE FUNCTION [fnGetAcctActivityPreviousData] 
+CREATE FUNCTION [dbo].[fnGetAcctActivityPreviousData] 
 (
 	-- Add the parameters for the function here
 	@BegDate Date, 
@@ -32,6 +32,7 @@ RETURNS
 	PayDescription nVarChar(300),
 	PayDescriptionAra nVarChar(300),
 	ClosingJournal bit,
+	Cancelled Bit,
 	Balance Money
 )
 AS
@@ -50,7 +51,7 @@ BEGIN
 	-- Fill the table variable with the rows for your result set
 	Insert @Results
 
-	select JournalCode,IdNo,[Sequence],JournalIdNo,AccountIdNo,AccountCode,Debit,Credit,RevCostCenterIdNo,Notes,Posted,TransactionDate,ReferenceNo,DocumentNumber,PayDescription,PayDescriptionAra,ClosingJournal,sum(debit-credit) 
+	select JournalCode,IdNo,[Sequence],JournalIdNo,AccountIdNo,AccountCode,Debit,Credit,RevCostCenterIdNo,Notes,Posted,TransactionDate,ReferenceNo,DocumentNumber,PayDescription,PayDescriptionAra,ClosingJournal,Cancelled,sum(debit-credit) 
 			OVER (PARTITION BY ACCOUNTIDNO ORDER BY TRANSACTIONDATE,JOURNALCODE,JOURNALIDNO,IDNO) AS balance from GlStatementNew_View 
 			WHERE (TransactionDate >= @BegDataDate and TransactionDate < @BegDate and AccountCode >= @BegAcctCode and AccountCode <= @EndAcctCode AND JournalCode<>'BB') 
 			   OR (JournalCode='BB' and TransactionDate = dATEfROMpARTS(YEAR(@BegDatadATE)-1,12,31) AND AccountCode >= @BegAcctCode and AccountCode <= @EndAcctCode)

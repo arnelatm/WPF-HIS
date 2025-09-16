@@ -1,12 +1,14 @@
 ﻿
+
+
 CREATE VIEW [dbo].[EmployeeAbsence_View]
 AS
 SELECT      dbo.EmployeeAbsence.EmployeeIdNo, dbo.EmployeeAbsence.PayrollIdNo, dbo.EmployeeAbsence.EquivalentHours, dbo.EmployeeAbsence.AbsenceType, dbo.EmployeeAbsence.AbsenceReason, 
             dbo.EmployeeAbsence.AddedByUser, dbo.EmployeeAbsence.DateCreated, dbo.EmployeeAbsence.IdNo, dbo.Payroll.PayrollName, dbo.Payroll.PayrollNameAra, dbo.Payroll.StartDate, dbo.Payroll.EndDate,
 			dbo.[User].UserName
 FROM        dbo.EmployeeAbsence 
-			INNER JOIN dbo.Payroll 
-			ON dbo.EmployeeAbsence.IdNo = dbo.Payroll.IdNo
+			Left JOIN dbo.Payroll 
+			ON dbo.EmployeeAbsence.PayrollIdNo = dbo.Payroll.IdNo
 			INNER JOIN dbo.[User]
 			on dbo.EmployeeAbsence.AddedByUser = dbo.[User].IdNo
 GO

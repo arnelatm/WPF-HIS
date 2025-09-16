@@ -1,4 +1,5 @@
 ﻿
+
 -- =============================================
 -- Author:		Arnel Marcelo
 -- Create date: 
@@ -32,6 +33,7 @@ RETURNS
 	PayDescription nVarChar(300),
 	PayDescriptionAra nVarChar(300),
 	ClosingJournal bit,
+	Cancelled bit,
 	Balance Money
 )
 AS
@@ -49,7 +51,7 @@ BEGIN
 		Begin Set @BegDataDate = DateFromParts(Year(@BegDate),1,1) End;
 	-- Fill the table variable with the rows for your result set
 	Insert @Results
-	Select JournalCode,IdNo,[Sequence],JournalIdNo,AccountIdNo,AccountCode,Debit,Credit,RevCostCenterIdNo,Notes,Posted,TransactionDate,ReferenceNo,DocumentNumber,PayDescription,PayDescriptionAra,ClosingJournal,0
+	Select JournalCode,IdNo,[Sequence],JournalIdNo,AccountIdNo,AccountCode,Debit,Credit,RevCostCenterIdNo,Notes,Posted,TransactionDate,ReferenceNo,DocumentNumber,PayDescription,PayDescriptionAra,ClosingJournal,Cancelled,0
 	from GlStatementNew_View 
 	WHERE (TransactionDate >= @BegDate and TransactionDate <= @EndDate and AccountIdNo = @AccountIdNo AND JournalCode<>'BB')
 	RETURN 

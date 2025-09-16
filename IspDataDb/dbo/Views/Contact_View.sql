@@ -2,15 +2,9 @@
 
 CREATE VIEW [dbo].[Contact_View]
 AS
-
-SELECT 'C' COLLATE SQL_Latin1_General_CP1_CI_AS as ContactType,IdNo as IdNo, CustomerCode as ContactCode, CustomerName as ContactName, CustomerNameAra as ContactNameAra
-FROM     dbo.Customer
-Union
-SELECT 'S' COLLATE SQL_Latin1_General_CP1_CI_AS,IdNo, SupplierCode, SupplierName, SupplierNameAra 
-FROM     dbo.Supplier
-Union
-SELECT 'E' COLLATE SQL_Latin1_General_CP1_CI_AS,IdNo, EmployeeCode, EmployeeName, EmployeeNameAra
-FROM     dbo.Employee
+SELECT     dbo.Contact.IdNo, dbo.Contact.CSEIdNo, dbo.Contact.CSECode, dbo.CSEContact_View.ContactName, dbo.CSEContact_View.ContactCode, dbo.CSEContact_View.ContactNameAra
+FROM       dbo.Contact INNER JOIN
+           dbo.CSEContact_View ON dbo.Contact.CSECode = dbo.CSEContact_View.CSECode AND dbo.Contact.CSEIdNo = dbo.CSEContact_View.ContactIdNo
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'Contact_View';
 
@@ -87,15 +81,25 @@ Begin DesignProperties =
          Left = 0
       End
       Begin Tables = 
-         Begin Table = "Customer"
+         Begin Table = "Contact"
             Begin Extent = 
                Top = 7
                Left = 48
-               Bottom = 170
-               Right = 286
+               Bottom = 315
+               Right = 242
             End
             DisplayFlags = 280
-            TopColumn = 2
+            TopColumn = 0
+         End
+         Begin Table = "CSEContact_View"
+            Begin Extent = 
+               Top = 7
+               Left = 290
+               Bottom = 312
+               Right = 1243
+            End
+            DisplayFlags = 280
+            TopColumn = 0
          End
       End
    End
@@ -109,14 +113,14 @@ Begin DesignProperties =
       Begin ColumnWidths = 11
          Column = 1440
          Alias = 900
-         Table = 1170
+         Table = 1176
          Output = 720
          Append = 1400
          NewValue = 1170
-         SortType = 1350
-         SortOrder = 1410
+         SortType = 1356
+         SortOrder = 1416
          GroupBy = 1350
-         Filter = 1350
+         Filter = 1356
          Or = 1350
          Or = 1350
          Or = 1350

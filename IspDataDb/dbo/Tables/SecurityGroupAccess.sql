@@ -2,10 +2,12 @@
     [IdNo]                INT      IDENTITY (1, 1) NOT NULL,
     [SecurityGroupIdNo]   SMALLINT NOT NULL,
     [SecurityControlIdNo] INT      NOT NULL,
-    [Viewalble]           BIT      NOT NULL,
+    [Visible]             BIT      NOT NULL,
     [Editable]            BIT      NOT NULL,
     CONSTRAINT [PK_SecurityGroupAccess] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 GO

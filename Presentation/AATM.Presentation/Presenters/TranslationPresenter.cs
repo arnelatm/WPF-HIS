@@ -177,14 +177,14 @@ namespace AATM.Presenters
 //            string targetLanguage = _view.GetTargetLanguage();
 
 //            // 2. Create a DTO (Data Transfer Object) from the retrieved data.
-//            var translationDto = new TranslationDto
+//            var TranslationDto = new TranslationDto
 //            {
 //                SourceText = sourceText,
 //                TargetLanguage = targetLanguage
 //            };
 
 //            // 3. Call the business service to perform the logic.
-//            string translatedText = _translationService.Translate(translationDto);
+//            string translatedText = _translationService.Translate(TranslationDto);
 
 //            // 4. Update the view with the result.
 //            _view.UpdateTranslationOutput(translatedText);
@@ -234,7 +234,7 @@ namespace AATM.Presenters
 //    /// </summary>
 //        public void LoadTranslations(string languageCode)
 //        {
-//            List<TranslationDTO> translations = _localizationRepository.GetLocalizedStrings(languageCode);
+//            List<TranslationDto> translations = _localizationRepository.GetLocalizedStrings(languageCode);
 //            var viewTranslations = new List<(string original, string localized)>();
 //            foreach (var translation in translations)
 //                viewTranslations.Add((translation.OriginalString, translation.LocalizedString));
@@ -292,7 +292,7 @@ namespace AATM.Presenters
 //// ''' Loads all translations for a selected language and populates the view.
 //// ''' </summary>
 //// Public Sub LoadTranslations(languageCode As String)
-//// Dim translations As List(Of TranslationDTO) = _localizationRepository.GetLocalizedStrings(languageCode)
+//// Dim translations As List(Of TranslationDto) = _localizationRepository.GetLocalizedStrings(languageCode)
 //// Dim viewTranslations As New List(Of (original As String, localized As String))
 //// For Each translation In translations
 //// viewTranslations.Add((translation.OriginalString, translation.LocalizedString))
@@ -354,7 +354,7 @@ namespace AATM.Presenters
 //// ''' Loads all translations for a selected language and populates the view.
 //// ''' </summary>
 //// Public Sub LoadTranslations(languageCode As String)
-//// Dim translations As List(Of TranslationDTO) = _localizationRepository.GetLocalizedStrings(languageCode)
+//// Dim translations As List(Of TranslationDto) = _localizationRepository.GetLocalizedStrings(languageCode)
 //// _view.DisplayTranslations(translations)
 //// End Sub
 

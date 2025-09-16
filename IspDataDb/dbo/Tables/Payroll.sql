@@ -6,9 +6,8 @@
     [PayrollName]    VARCHAR (50)  NULL,
     [PayrollNameAra] NVARCHAR (50) NULL,
     [PayrollCode]    VARCHAR (6)   NULL,
+    [Posted]         BIT           NULL,
     [DateTimeStamp]  ROWVERSION    NULL,
     CONSTRAINT [PK__PayrollID] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
-
-
 

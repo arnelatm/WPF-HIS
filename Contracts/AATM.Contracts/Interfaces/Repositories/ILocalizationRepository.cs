@@ -14,7 +14,7 @@ namespace AATM.Contracts.Interfaces.Repositories
     /// Gets a list of all localized strings for a given language.
     /// </summary>
     /// <param name="languageCode">The culture code for the language (e.g., "en-US", "ar-SA").</param>
-    /// <returns>A list of TranslationDTO objects.</returns>
+    /// <returns>A list of TranslationDto objects.</returns>
         List<TranslationDto> GetLocalizedStrings(string languageCode);
 
         /// <summary>

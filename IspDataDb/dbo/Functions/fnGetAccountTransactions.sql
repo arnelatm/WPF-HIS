@@ -32,12 +32,13 @@ RETURNS
 	PayDescription nVarChar(300),
 	PayDescriptionAra nVarChar(300),
 	ClosingJournal bit,
+	Cancelled Bit,
 	JournalCodeAra nChar(2)
 )
 AS
 BEGIN
 	Insert @Results
-	Select JournalCode,IdNo,[Sequence],JournalIdNo,AccountIdNo,AccountCode,Debit,Credit,RevCostCenterIdNo,Notes,Posted,TransactionDate,ReferenceNo,DocumentNumber,PayDescription,PayDescriptionAra,ClosingJournal,JournalCodeAra
+	Select JournalCode,IdNo,[Sequence],JournalIdNo,AccountIdNo,AccountCode,Debit,Credit,RevCostCenterIdNo,Notes,Posted,TransactionDate,ReferenceNo,DocumentNumber,PayDescription,PayDescriptionAra,ClosingJournal,Cancelled,JournalCodeAra
 	from GlStatement_View 
 	WHERE (TransactionDate >= @BegDate and TransactionDate <= @EndDate AND JournalCode<>'BB')
 	RETURN 

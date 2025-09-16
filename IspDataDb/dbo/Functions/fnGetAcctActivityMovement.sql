@@ -32,6 +32,7 @@ RETURNS
 	PayDescription nVarChar(300),
 	PayDescriptionAra nVarChar(300),
 	ClosingJournal bit,
+	Cancelled Bit,
 	Balance Money
 )
 AS
@@ -42,7 +43,7 @@ BEGIN
 	Declare @Balance Decimal(16,2)
 	Declare @BegBalance as Money
 	Insert @Results
-	select JournalCode,IdNo,[Sequence],JournalIdNo,AccountIdNo,AccountCode,Debit,Credit,RevCostCenterIdNo,Notes,Posted,TransactionDate,ReferenceNo,DocumentNumber,PayDescription,PayDescriptionAra,ClosingJournal,sum(debit-credit) 
+	select JournalCode,IdNo,[Sequence],JournalIdNo,AccountIdNo,AccountCode,Debit,Credit,RevCostCenterIdNo,Notes,Posted,TransactionDate,ReferenceNo,DocumentNumber,PayDescription,PayDescriptionAra,ClosingJournal,Cancelled,sum(debit-credit) 
 	OVER (PARTITION BY ACCOUNTIDNO ORDER BY TRANSACTIONDATE,JOURNALCODE,JOURNALIDNO,IDNO) AS balance from fnGetAcctActivityFullData(@BegDate,@EndDate,@BegAcctCode,@EndAcctCode)
 	order by accountcode,transactiondate,journalcode,journalidno,idno
 	Return

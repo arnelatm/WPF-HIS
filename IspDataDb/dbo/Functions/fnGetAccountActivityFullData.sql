@@ -31,6 +31,7 @@ RETURNS
 	PayDescription nVarChar(300),
 	PayDescriptionAra nVarChar(300),
 	ClosingJournal bit,
+	Cancelled Bit,
 	Balance Money
 )
 AS

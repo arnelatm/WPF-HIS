@@ -8,6 +8,8 @@
     [SelectorText1]          VARCHAR (20)  NULL,
     [SelectorText2]          VARCHAR (20)  NULL,
     [SelectorCount]          TINYINT       NULL,
+    [GroupCodeIdNo]          INT           NULL,
+    [DefaultValue]           VARCHAR (50)  NULL,
     CONSTRAINT [PK_InventorySettings] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
 
