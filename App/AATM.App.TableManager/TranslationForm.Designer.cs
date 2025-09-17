@@ -1,6 +1,8 @@
-﻿namespace AATM.App.TableManager
+﻿using System.Windows.Forms;
+
+namespace AATM.App.TableManager
 {
-    partial class TranslationForm
+    partial class TranslationForm : Form
     {
         /// <summary>
         /// Required designer variable.
@@ -9,6 +11,7 @@
 
         /// <summary>
         /// Clean up any resources being used.
+        /// Ensures we override Form.Dispose for proper cleanup.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
@@ -23,12 +26,13 @@
         #region Windows Form Designer generated code
 
         /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
+        /// Initialize WinForms designer components.
+        /// - Fix: Ensure class inherits from Form so AutoScaleMode exists.
         /// </summary>
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Text = "TranslationForm";

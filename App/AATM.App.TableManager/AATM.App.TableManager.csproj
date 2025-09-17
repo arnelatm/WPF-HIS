@@ -50,12 +50,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TranslationForm.cs">
@@ -88,7 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Contracts\AATM.Contracts\AATM.Contracts.csproj">
-      <Project>{464CDA63-DB4A-02B4-1AFA-7083EF503845}</Project>
+      <Project>{464cda63-db4a-02b4-1afa-7083ef503845}</Project>
       <Name>AATM.Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Libraries\MessagingLibrary\Messaging.vbproj">
