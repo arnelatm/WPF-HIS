@@ -44,7 +44,6 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Common", "Common\Common.vbp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{0598D101-4147-476C-98FF-8C78D96B971E}"
 	ProjectSection(SolutionItems) = preProject
-		AATM Project Structure.txt = AATM Project Structure.txt
 		App.config = App.config
 		C-Sharp to VB Net Translation.txt = C-Sharp to VB Net Translation.txt
 		ComputeClientFormSizeEqually.txt = ComputeClientFormSizeEqually.txt
@@ -117,7 +116,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8AD3DFDF-C6F0-4B21-8A40-902BAAFF6682}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
-		Rename-Assemblies.ps1 = Rename-Assemblies.ps1
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageBoxManager", "Libraries\MessageBoxManager\MessageBoxManager.csproj", "{0E9D874E-5354-465E-9EC3-F7A35C268A8A}"
@@ -943,17 +941,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platform", "Platform", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Design", "Design", "{61A224B6-BA57-44B7-81AD-540F2E146641}"
-	ProjectSection(SolutionItems) = preProject
-		CustomerModule.vb = CustomerModule.vb
-		CustomerPresenter.vb = CustomerPresenter.vb
-		Namespace and project Suggestion ChatGPT.txt = Namespace and project Suggestion ChatGPT.txt
-		Program.vb = Program.vb
-		SimpleDIContainer.vb = SimpleDIContainer.vb
-		StatusBarMessagingService.vb = StatusBarMessagingService.vb
-		TextFile1.txt = TextFile1.txt
-		WinForms VB.NET MVP Application Guide.md = WinForms VB.NET MVP Application Guide.md
-		WinformsMessageBoxService.vb = WinformsMessageBoxService.vb
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{B4F2ECE8-51A5-4A72-B503-5DDD564D7AD9}"
 EndProject
@@ -1444,7 +1431,6 @@ Global
 		{5DC97E00-8C55-479E-94C2-19679791F55C} = {0598D101-4147-476C-98FF-8C78D96B971E}
 		{6FD94599-A0DF-448F-BF82-CAB5948D5F53} = {0598D101-4147-476C-98FF-8C78D96B971E}
 		{0E9D874E-5354-465E-9EC3-F7A35C268A8A} = {A6C79BF6-2C34-4AEA-9845-360F48976962}
-		{84437202-3E38-4F75-B8C1-4125852FC4FF} = {A6C79BF6-2C34-4AEA-9845-360F48976962}
 		{5F7FCA73-07BA-444A-BE5D-6117B973AA3D} = {66D0E355-CA37-4EEF-B18D-D4A9093BB11C}
 		{E0336D98-67DC-4134-9508-7F5598295FEC} = {0598D101-4147-476C-98FF-8C78D96B971E}
 		{D0B2F203-4601-4F73-89C4-C5A6FF4D4B99} = {0598D101-4147-476C-98FF-8C78D96B971E}

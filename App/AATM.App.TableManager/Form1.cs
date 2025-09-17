@@ -28,116 +28,117 @@ public class TranslationForm : Form
     public TranslationForm()
     {
         _dbService = new TranslationDbService();
-        InitializeComponent();
+        //InitializeComponent();
+
         LoadTranslationsAsync();
     }
 
-    private void InitializeComponent()
-    {
-        // Form properties
-        Text = "Translation Management Dashboard";
-        Size = new Size(1000, 600);
-        StartPosition = FormStartPosition.CenterScreen;
-        Font = new Font("Segoe UI", 9);
+    //private void InitializeComponent()
+    //{
+    //    // Form properties
+    //    Text = "Translation Management Dashboard";
+    //    Size = new Size(1000, 600);
+    //    StartPosition = FormStartPosition.CenterScreen;
+    //    Font = new Font("Segoe UI", 9);
 
-        // Layout setup
-        TableLayoutPanel mainLayout = new TableLayoutPanel
-        {
-            Dock = DockStyle.Fill,
-            Padding = new Padding(10),
-            ColumnCount = 2,
-            RowCount = 2,
-        };
-        mainLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 60)); // Data grid column
-        mainLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40)); // Input panel column
-        mainLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
-        mainLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
-        Controls.Add(mainLayout);
+    //    // Layout setup
+    //    TableLayoutPanel mainLayout = new TableLayoutPanel
+    //    {
+    //        Dock = DockStyle.Fill,
+    //        Padding = new Padding(10),
+    //        ColumnCount = 2,
+    //        RowCount = 2,
+    //    };
+    //    mainLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 60)); // Data grid column
+    //    mainLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40)); // Input panel column
+    //    mainLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
+    //    mainLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
+    //    Controls.Add(mainLayout);
 
-        // --- Data Grid View (left panel) ---
-        _dataGridView = new DataGridView
-        {
-            Dock = DockStyle.Fill,
-            AllowUserToAddRows = false,
-            AllowUserToDeleteRows = false,
-            AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
-            MultiSelect = false,
-            ReadOnly = true,
-            SelectionMode = DataGridViewSelectionMode.FullRowSelect,
-            BorderStyle = BorderStyle.FixedSingle,
-            BackgroundColor = Color.White,
-        };
-        _dataGridView.DoubleClick += (sender, e) => {
-            if (_dataGridView.SelectedRows.Count > 0)
-            {
-                var selectedRow = _dataGridView.SelectedRows[0];
-                int id = (int)selectedRow.Cells["ID"].Value;
-                var selectedTranslation = _dbService.GetAllTranslationsAsync().Result.FirstOrDefault(t => t.ID == id);
-                if (selectedTranslation != null)
-                {
-                    PopulateFormFields(selectedTranslation);
-                }
-            }
-        };
-        mainLayout.Controls.Add(_dataGridView, 0, 0);
+    //    // --- Data Grid View (left panel) ---
+    //    _dataGridView = new DataGridView
+    //    {
+    //        Dock = DockStyle.Fill,
+    //        AllowUserToAddRows = false,
+    //        AllowUserToDeleteRows = false,
+    //        AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
+    //        MultiSelect = false,
+    //        ReadOnly = true,
+    //        SelectionMode = DataGridViewSelectionMode.FullRowSelect,
+    //        BorderStyle = BorderStyle.FixedSingle,
+    //        BackgroundColor = Color.White,
+    //    };
+    //    _dataGridView.DoubleClick += (sender, e) => {
+    //        if (_dataGridView.SelectedRows.Count > 0)
+    //        {
+    //            var selectedRow = _dataGridView.SelectedRows[0];
+    //            int id = (int)selectedRow.Cells["ID"].Value;
+    //            var selectedTranslation = _dbService.GetAllTranslationsAsync().Result.FirstOrDefault(t => t.ID == id);
+    //            if (selectedTranslation != null)
+    //            {
+    //                PopulateFormFields(selectedTranslation);
+    //            }
+    //        }
+    //    };
+    //    mainLayout.Controls.Add(_dataGridView, 0, 0);
 
-        // --- Input Panel (right panel) ---
-        TableLayoutPanel inputPanel = new TableLayoutPanel
-        {
-            Dock = DockStyle.Fill,
-            ColumnCount = 1,
-            RowCount = 10,
-            Padding = new Padding(10),
-        };
-        inputPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
-        inputPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-        inputPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-        inputPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-        inputPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-        inputPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-        inputPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-        inputPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-        inputPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-        inputPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-        inputPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-        mainLayout.Controls.Add(inputPanel, 1, 0);
+    //    // --- Input Panel (right panel) ---
+    //    TableLayoutPanel inputPanel = new TableLayoutPanel
+    //    {
+    //        Dock = DockStyle.Fill,
+    //        ColumnCount = 1,
+    //        RowCount = 10,
+    //        Padding = new Padding(10),
+    //    };
+    //    inputPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
+    //    inputPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+    //    inputPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+    //    inputPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+    //    inputPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+    //    inputPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+    //    inputPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+    //    inputPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+    //    inputPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+    //    inputPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+    //    inputPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+    //    mainLayout.Controls.Add(inputPanel, 1, 0);
 
-        // Add labels and text boxes
-        AddLabeledTextBox(inputPanel, "Module Name", ref _txtModuleName);
-        AddLabeledTextBox(inputPanel, "UI Identifier", ref _txtUIIdentifier);
-        AddLabeledTextBox(inputPanel, "Original String", ref _txtOriginalString, true);
-        AddLabeledTextBox(inputPanel, "Language Code", ref _txtLanguageCode);
-        AddLabeledTextBox(inputPanel, "Localized String", ref _txtLocalizedString, true);
+    //    // Add labels and text boxes
+    //    AddLabeledTextBox(inputPanel, "Module Name", ref _txtModuleName);
+    //    AddLabeledTextBox(inputPanel, "UI Identifier", ref _txtUIIdentifier);
+    //    AddLabeledTextBox(inputPanel, "Original String", ref _txtOriginalString, true);
+    //    AddLabeledTextBox(inputPanel, "Language Code", ref _txtLanguageCode);
+    //    AddLabeledTextBox(inputPanel, "Localized String", ref _txtLocalizedString, true);
 
-        // Add buttons
-        FlowLayoutPanel buttonPanel = new FlowLayoutPanel
-        {
-            Dock = DockStyle.Fill,
-            FlowDirection = FlowDirection.RightToLeft,
-        };
-        _btnNew = new Button { Text = "New", Width = 80, Height = 30 };
-        _btnNew.Click += (sender, e) => ClearFormFields();
-        _btnSave = new Button { Text = "Save", Width = 80, Height = 30 };
-        _btnSave.Click += (sender, e) => SaveOrUpdateTranslationAsync();
-        _btnDelete = new Button { Text = "Delete", Width = 80, Height = 30 };
-        _btnDelete.Click += (sender, e) => DeleteTranslationAsync();
+    //    // Add buttons
+    //    FlowLayoutPanel buttonPanel = new FlowLayoutPanel
+    //    {
+    //        Dock = DockStyle.Fill,
+    //        FlowDirection = FlowDirection.RightToLeft,
+    //    };
+    //    _btnNew = new Button { Text = "New", Width = 80, Height = 30 };
+    //    _btnNew.Click += (sender, e) => ClearFormFields();
+    //    _btnSave = new Button { Text = "Save", Width = 80, Height = 30 };
+    //    _btnSave.Click += (sender, e) => SaveOrUpdateTranslationAsync();
+    //    _btnDelete = new Button { Text = "Delete", Width = 80, Height = 30 };
+    //    _btnDelete.Click += (sender, e) => DeleteTranslationAsync();
 
-        buttonPanel.Controls.Add(_btnSave);
-        buttonPanel.Controls.Add(_btnDelete);
-        buttonPanel.Controls.Add(_btnNew);
-        inputPanel.Controls.Add(buttonPanel);
+    //    buttonPanel.Controls.Add(_btnSave);
+    //    buttonPanel.Controls.Add(_btnDelete);
+    //    buttonPanel.Controls.Add(_btnNew);
+    //    inputPanel.Controls.Add(buttonPanel);
 
-        // --- Status Label (bottom) ---
-        _statusLabel = new Label
-        {
-            Dock = DockStyle.Fill,
-            TextAlign = ContentAlignment.MiddleLeft,
-            Text = "Ready",
-            ForeColor = Color.DarkSlateGray
-        };
-        mainLayout.Controls.Add(_statusLabel, 0, 1);
-        mainLayout.SetColumnSpan(_statusLabel, 2);
-    }
+    //    // --- Status Label (bottom) ---
+    //    _statusLabel = new Label
+    //    {
+    //        Dock = DockStyle.Fill,
+    //        TextAlign = ContentAlignment.MiddleLeft,
+    //        Text = "Ready",
+    //        ForeColor = Color.DarkSlateGray
+    //    };
+    //    mainLayout.Controls.Add(_statusLabel, 0, 1);
+    //    mainLayout.SetColumnSpan(_statusLabel, 2);
+    //}
 
     private void AddLabeledTextBox(TableLayoutPanel panel, string labelText, ref TextBox textBox, bool multiline = false)
     {
