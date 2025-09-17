@@ -22,7 +22,7 @@ namespace Localization.Sql
     {
 
         // The connection string for the SQL Server database.
-        private readonly string _connectionString = "Server=localhost;Database=LocalizationDb;Integrated Security=SSPI;";
+        private readonly string _connectionString = "Server=Ibn-Server;Database=IspData;Integrated Security=SSPI;";
 
         /// <summary>
     /// Retrieves a single localized string by its unique ID.

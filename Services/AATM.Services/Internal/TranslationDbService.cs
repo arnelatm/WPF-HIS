@@ -10,7 +10,7 @@ using System.Windows.Forms;
 public class TranslationDbService
 {
     // WARNING: Replace this with your actual connection string.
-    private const string ConnectionString = "Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password=myPassword;";
+    private const string ConnectionString = "Server=Ibn-Server;Database=IspData;Integrated Security=SSPI;";
 
     /// <summary>
     /// Inserts or updates a translation record in the database.
