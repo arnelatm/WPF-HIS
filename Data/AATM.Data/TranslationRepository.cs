@@ -13,7 +13,7 @@ namespace AATM.Data
 {
     public class TranslationRepository
     {
-        private readonly string connectionString = "Server=Ibn-Server;Database=IspData;Integrated Security=SSPI;";
+        private readonly string connectionString = "Server=Ibn-Server;Database=IspData;User Id=iGroupAdmin;Password=igss@123;";
 
         /// <summary>
         /// Retrieves a translation from the database based on original string and language code.

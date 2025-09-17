@@ -1,0 +1,35 @@
+﻿Here’s a practical checklist to install a trusted SSL certificate for SQL Server (on-prem):
+1.	Get the right certificate
+•	Use a CA-issued cert (internal AD CS or public CA).
+•	Key length ≥ 2048, SHA-256, includes private key.
+•	EKU must include “Server Authentication” (OID 1.3.6.1.5.5.7.3.1).
+•	Subject/SAN must contain the SQL Server’s DNS name clients use (prefer the FQDN). Wildcards are OK if policy allows.
+•	For older SQL Server versions, ensure the key is usable for Key Exchange.
+2.	Install the certificate on the server
+•	Import into Local Computer > Personal store (certlm.msc), with private key.
+•	Ensure the full chain is present: put intermediates into “Intermediate Certification Authorities” and root into “Trusted Root Certification Authorities”.
+•	Grant the SQL Server service account read access to the certificate’s private key (Manage Private Keys).
+3.	Bind the certificate to SQL Server
+•	Open SQL Server Configuration Manager.
+•	SQL Server Network Configuration > Protocols for <Instance>.
+•	Properties > Certificate tab > select your cert (it must appear here; if not, EKU/placement/key spec is wrong).
+•	Optional: Flags > Force Encryption = Yes (server-side).
+•	Apply and restart the SQL Server service.
+4.	Fix SPN and name usage (to avoid name mismatch)
+•	Ensure clients connect using the exact DNS name in the cert (prefer FQDN).
+•	For domain accounts, ensure proper MSSQLSvc SPNs are registered for the service account.
+5.	Update client connection strings
+•	Use encryption with trust based on the CA (no bypass flags).
+•	Example: text Server=YourSqlFqdn;Database=YourDb;Encrypt=True;TrustServerCertificate=False;
+•	If using Microsoft.Data.SqlClient (default Encrypt=True), the above is already enforced; make sure the server name matches the cert.
+6.	Validate
+•	Restart SQL Server, check ERRORLOG for “The certificate [thumbprint] was successfully loaded for encryption.”
+•	From a client, connect and run: text SELECT encrypt_option FROM sys.dm_exec_connections WHERE session_id = @@SPID; -- Expect: TRUE
+•	Test CLI: sqlcmd -N -S YourSqlFqdn -d master
+Common gotchas
+•	Cert not visible in Configuration Manager: wrong store (must be Local Computer > Personal), missing Server Authentication EKU, or no private key.
+•	Name mismatch: using short name while cert has only FQDN (or vice versa). Align the Server= value with the cert SAN/CN.
+•	Untrusted CA on clients: deploy the CA root/intermediates to client machines (GPO or manual).
+•	Named instances/dynamic ports: does not affect cert subject; still use the host’s DNS name in the cert and connection.
+Security tip
+•	Avoid TrustServerCertificate=True in production. Use a CA-trusted cert, correct server name, and Encrypt=True;TrustServerCertificate=False.

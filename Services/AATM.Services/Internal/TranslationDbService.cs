@@ -9,8 +9,14 @@ using System.Windows.Forms;
 
 public class TranslationDbService
 {
+    // Ensure Microsoft.Data.SqlClient uses managed networking on .NET Framework to avoid native SNI initializer failures
+    static TranslationDbService()
+    {
+        AppContext.SetSwitch("Switch.Microsoft.Data.SqlClient.UseManagedNetworkingOnWindows", true);
+    }
+
     // WARNING: Replace this with your actual connection string.
-    private const string ConnectionString = "Server=Ibn-Server;Database=IspData;Integrated Security=SSPI;";
+    private const string ConnectionString = "Server=Ibn-Server;Database=IspData;User Id=iGroupAdmin;Password=igss@123;Encrypt=True;TrustServerCertificate=True;";
 
     /// <summary>
     /// Inserts or updates a translation record in the database.
@@ -53,6 +59,10 @@ OUTPUT inserted.ID;";
                 }
             }
         }
+        catch (TypeInitializationException ex)
+        {
+            MessageBox.Show("SqlClient initialization failed:\n" + (ex.GetBaseException()?.Message ?? ex.Message) + "\n\n" + ex, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
         catch (SqlException ex)
         {
             MessageBox.Show($"Database error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -94,6 +104,11 @@ OUTPUT inserted.ID;";
                 }
             }
         }
+        catch (TypeInitializationException ex)
+        {
+            MessageBox.Show("SqlClient initialization failed:\n" + (ex.GetBaseException()?.Message ?? ex.Message) + "\n\n" + ex, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return new List<TranslationDto>();
+        }
         catch (SqlException ex)
         {
             MessageBox.Show($"Database error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -121,6 +136,11 @@ OUTPUT inserted.ID;";
                     rowsAffected = await command.ExecuteNonQueryAsync();
                 }
             }
+        }
+        catch (TypeInitializationException ex)
+        {
+            MessageBox.Show("SqlClient initialization failed:\n" + (ex.GetBaseException()?.Message ?? ex.Message) + "\n\n" + ex, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return false;
         }
         catch (SqlException ex)
         {
