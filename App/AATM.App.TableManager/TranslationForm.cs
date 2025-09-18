@@ -1,168 +1,27 @@
-﻿using AATM.Contracts.Dtos;
+﻿// TranslationForm.cs
+using AATM.Contracts.Dtos;
 using System;
-using System.Drawing;
-using System.Windows.Forms;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using System.IO;
+using System.Windows.Forms;
 
-namespace AATM.App.TableManager
+namespace AATM.App.TableManager 
 {
-    public partial class TranslationForm 
+    public partial class TranslationForm : Form
     {
-        // UI controls
-        private DataGridView _dataGridView;
-        private TextBox _txtModuleName;
-        private TextBox _txtUIIdentifier;
-        private TextBox _txtOriginalString;
-        private TextBox _txtLanguageCode;
-        private TextBox _txtLocalizedString;
-        private Button _btnSave;
-        private Label _statusLabel;
-
-        // Toolbar controls
-        private ToolStrip _toolStrip;
-        private ToolStripButton _btnFirst;
-        private ToolStripButton _btnPrevious;
-        private ToolStripButton _btnNext;
-        private ToolStripButton _btnLast;
-        private ToolStripSeparator _toolStripSeparator1;
-        private ToolStripButton _btnAdd;
-        private ToolStripButton _btnDelete;
-        private ToolStripSeparator _toolStripSeparator2;
-        private ToolStripLabel _lblFind;
-        private ToolStripTextBox _txtFind;
-        private ToolStripButton _btnFind;
-        private ToolStripSeparator _toolStripSeparator3;
-        private ToolStripButton _btnImport;
-        private ToolStripButton _btnExport;
-
         private readonly TranslationDbService _dbService;
         private List<TranslationDto> _allTranslations;
+
 
         public TranslationForm()
         {
             _dbService = new TranslationDbService();
             InitializeComponent();
-            ThisInitializeComponent();
-            LoadTranslationsAsync();
-        }
-
-        private void ThisInitializeComponent()
-        {
-            this.Text = "Translation Management Dashboard";
-            this.Size = new Size(1000, 600);
-            this.StartPosition = FormStartPosition.CenterScreen;
-            this.Font = new Font("Segoe UI", 9);
-
-            // Main Layout Panel
-            TableLayoutPanel mainLayout = new TableLayoutPanel
-            {
-                Dock = DockStyle.Fill,
-                Padding = new Padding(10),
-                ColumnCount = 2,
-                RowCount = 3,
-            };
-            mainLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 60));
-            mainLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40));
-            mainLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30)); // Toolbar row
-            mainLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100)); // Content row
-            mainLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30)); // Status bar row
-            Controls.Add(mainLayout);
-
-            // --- Toolbar ---
-            _toolStrip = new ToolStrip();
-            _btnFirst = new ToolStripButton("|<") { Text = "First" };
-            _btnPrevious = new ToolStripButton("<") { Text = "Previous" };
-            _btnNext = new ToolStripButton(">") { Text = "Next" };
-            _btnLast = new ToolStripButton(">|") { Text = "Last" };
-            _btnAdd = new ToolStripButton("Add") { Text = "Add" };
-            _btnDelete = new ToolStripButton("Delete") { Text = "Delete" };
-            _lblFind = new ToolStripLabel("Find:");
-            _txtFind = new ToolStripTextBox();
-            _btnFind = new ToolStripButton("Find");
-            _btnImport = new ToolStripButton("Import");
-            _btnExport = new ToolStripButton("Export");
-            _toolStripSeparator1 = new ToolStripSeparator();
-            _toolStripSeparator2 = new ToolStripSeparator();
-            _toolStripSeparator3 = new ToolStripSeparator();
-
-            _toolStrip.Items.AddRange(new ToolStripItem[] {
-            _btnFirst, _btnPrevious, _btnNext, _btnLast, _toolStripSeparator1,
-            _btnAdd, _btnDelete, _toolStripSeparator2, _lblFind, _txtFind, _btnFind,
-            _toolStripSeparator3, _btnImport, _btnExport
-        });
-
-            _btnFirst.Click += (s, e) => NavigateToRow(0);
-            _btnPrevious.Click += (s, e) => NavigateToRow(_dataGridView.SelectedRows.Count > 0 ? _dataGridView.SelectedRows[0].Index - 1 : 0);
-            _btnNext.Click += (s, e) => NavigateToRow(_dataGridView.SelectedRows.Count > 0 ? _dataGridView.SelectedRows[0].Index + 1 : 0);
-            _btnLast.Click += (s, e) => NavigateToRow(_dataGridView.Rows.Count - 1);
-            _btnAdd.Click += (s, e) => ClearFormFields();
-            _btnDelete.Click += async (s, e) => await DeleteTranslationAsync();
-            _btnFind.Click += (s, e) => FindTranslation(_txtFind.Text);
-            _btnImport.Click += async (s, e) => await ImportTranslationsAsync();
-            _btnExport.Click += async (s, e) => await ExportTranslationsAsync();
-
-            mainLayout.Controls.Add(_toolStrip, 0, 0);
-            mainLayout.SetColumnSpan(_toolStrip, 2);
-
-            // --- Data Grid View (left panel) ---
-            _dataGridView = new DataGridView
-            {
-                Dock = DockStyle.Fill,
-                AllowUserToAddRows = false,
-                AllowUserToDeleteRows = false,
-                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
-                MultiSelect = false,
-                ReadOnly = true,
-                SelectionMode = DataGridViewSelectionMode.FullRowSelect,
-                BorderStyle = BorderStyle.FixedSingle,
-                BackgroundColor = Color.White,
-            };
-            _dataGridView.DoubleClick += (sender, e) =>
-            {
-                if (_dataGridView.SelectedRows.Count > 0)
-                {
-                    PopulateFormFieldsFromGrid(_dataGridView.SelectedRows[0].Index);
-                }
-            };
-            mainLayout.Controls.Add(_dataGridView, 0, 1);
-
-            // --- Input Panel (right panel) ---
-            TableLayoutPanel inputPanel = new TableLayoutPanel
-            {
-                Dock = DockStyle.Fill,
-                ColumnCount = 1,
-                RowCount = 10,
-                Padding = new Padding(10),
-            };
-            inputPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
-            inputPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-            inputPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-            inputPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-            inputPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-            inputPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-            inputPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-            inputPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-            inputPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-            inputPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-            inputPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-            mainLayout.Controls.Add(inputPanel, 1, 1);
-
-            // Add labels and text boxes
-            AddLabeledTextBox(inputPanel, "Module Name", ref _txtModuleName);
-            AddLabeledTextBox(inputPanel, "UI Identifier", ref _txtUIIdentifier);
-            AddLabeledTextBox(inputPanel, "Original String", ref _txtOriginalString, true);
-            AddLabeledTextBox(inputPanel, "Language Code", ref _txtLanguageCode);
-            AddLabeledTextBox(inputPanel, "Localized String", ref _txtLocalizedString, true);
-
-            // Add Save button
-            _btnSave = new Button { Text = "Save", Width = 80, Height = 30, Dock = DockStyle.Right };
-            _btnSave.Click += async (sender, e) => await SaveOrUpdateTranslationAsync();
-            inputPanel.Controls.Add(_btnSave);
-
             // --- Status Label (bottom) ---
+
             _statusLabel = new Label
             {
                 Dock = DockStyle.Fill,
@@ -170,26 +29,35 @@ namespace AATM.App.TableManager
                 Text = "Ready",
                 ForeColor = Color.DarkSlateGray
             };
-            mainLayout.Controls.Add(_statusLabel, 0, 2);
-            mainLayout.SetColumnSpan(_statusLabel, 2);
+            LoadTranslationsAsync();
         }
 
-        private void AddLabeledTextBox(TableLayoutPanel panel, string labelText, ref TextBox textBox, bool multiline = false)
+        // Plan (pseudocode):
+        // - Fix CS0201 caused by a bare method group `SaveOrUpdateTranslationAsync;` used as a statement.
+        // - Convert the event handler to async void and properly await the async method.
+        // - Keep method signature compatible with WinForms event handlers.
+
+        // Replacement for the BtnSave_Click event handler
+        private async void BtnSave_Click(object sender, EventArgs e)
         {
-            Label label = new Label { Text = labelText, Dock = DockStyle.Fill, TextAlign = ContentAlignment.BottomLeft };
-            textBox = new TextBox { Dock = DockStyle.Fill };
-            if (multiline)
-            {
-                textBox.Multiline = true;
-                textBox.ScrollBars = ScrollBars.Vertical;
-                textBox.Height = 80;
-            }
-            panel.Controls.Add(label);
-            panel.Controls.Add(textBox);
+            await SaveOrUpdateTranslationAsync();
+        }
+
+        // Replacement for the BtnDelete_Click event handler
+        private async void BtnDelete_Click(object sender, EventArgs e)
+        {
+            await DeleteTranslationAsync();
+        }
+
+        // Replacement for the BtnDelete_Click event handler
+        private async void DataGridView_DoubleClick(object sender, EventArgs e)
+        {
+            // await DeleteTranslationAsync();
         }
 
         private async void LoadTranslationsAsync()
         {
+            
             _statusLabel.Text = "Loading translations...";
             try
             {

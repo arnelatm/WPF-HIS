@@ -1,4 +1,5 @@
-﻿Imports AATM.Core.Logging
+﻿Imports AATM.Contracts
+Imports AATM.Core.Logging
 
 Module LoggingTest
     Sub Main()
