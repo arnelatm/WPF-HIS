@@ -277,5 +277,15 @@ namespace AATM.App.TableManager
                 }
             }
         }
+
+        private void _btnFirst_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void _tableLayoutPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

@@ -47,9 +47,9 @@ namespace AATM.App.TableManager
             this._btnPrevious = new System.Windows.Forms.ToolStripButton();
             this._btnNext = new System.Windows.Forms.ToolStripButton();
             this._btnLast = new System.Windows.Forms.ToolStripButton();
-            this._tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.tsbDelete = new System.Windows.Forms.ToolStripButton();
+            this._tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this._dataGridView)).BeginInit();
             this._toolStrip.SuspendLayout();
             this._tableLayoutPanel.SuspendLayout();
@@ -68,7 +68,7 @@ namespace AATM.App.TableManager
             // 
             this._btnSave.Location = new System.Drawing.Point(3, 103);
             this._btnSave.Name = "_btnSave";
-            this._btnSave.Size = new System.Drawing.Size(75, 23);
+            this._btnSave.Size = new System.Drawing.Size(75, 14);
             this._btnSave.TabIndex = 10;
             this._btnSave.Text = "Save";
             this._btnSave.Click += new System.EventHandler(this.BtnSave_Click);
@@ -77,7 +77,7 @@ namespace AATM.App.TableManager
             // 
             this._btnDelete.Location = new System.Drawing.Point(153, 103);
             this._btnDelete.Name = "_btnDelete";
-            this._btnDelete.Size = new System.Drawing.Size(100, 32);
+            this._btnDelete.Size = new System.Drawing.Size(100, 14);
             this._btnDelete.TabIndex = 11;
             this._btnDelete.Text = "Delete";
             this._btnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
@@ -176,6 +176,7 @@ namespace AATM.App.TableManager
             this._btnFirst.Name = "_btnFirst";
             this._btnFirst.Size = new System.Drawing.Size(23, 22);
             this._btnFirst.Text = "|<";
+            this._btnFirst.Click += new System.EventHandler(this._btnFirst_Click);
             // 
             // _btnPrevious
             // 
@@ -194,6 +195,24 @@ namespace AATM.App.TableManager
             this._btnLast.Name = "_btnLast";
             this._btnLast.Size = new System.Drawing.Size(23, 22);
             this._btnLast.Text = ">|";
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton1.Text = "tsbSave";
+            // 
+            // tsbDelete
+            // 
+            this.tsbDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbDelete.Image = ((System.Drawing.Image)(resources.GetObject("tsbDelete.Image")));
+            this.tsbDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbDelete.Name = "tsbDelete";
+            this.tsbDelete.Size = new System.Drawing.Size(23, 22);
+            this.tsbDelete.Text = "toolStripButton2";
             // 
             // _tableLayoutPanel
             // 
@@ -215,7 +234,8 @@ namespace AATM.App.TableManager
             this._tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this._tableLayoutPanel.Location = new System.Drawing.Point(0, 25);
             this._tableLayoutPanel.Name = "_tableLayoutPanel";
-            this._tableLayoutPanel.RowCount = 6;
+            this._tableLayoutPanel.RowCount = 7;
+            this._tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this._tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this._tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this._tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
@@ -224,24 +244,7 @@ namespace AATM.App.TableManager
             this._tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this._tableLayoutPanel.Size = new System.Drawing.Size(800, 171);
             this._tableLayoutPanel.TabIndex = 0;
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton1.Text = "tsbSave";
-            // 
-            // tsbDelete
-            // 
-            this.tsbDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbDelete.Image = ((System.Drawing.Image)(resources.GetObject("tsbDelete.Image")));
-            this.tsbDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbDelete.Name = "tsbDelete";
-            this.tsbDelete.Size = new System.Drawing.Size(23, 22);
-            this.tsbDelete.Text = "toolStripButton2";
+            this._tableLayoutPanel.Paint += new System.Windows.Forms.PaintEventHandler(this._tableLayoutPanel_Paint);
             // 
             // TranslationForm
             // 

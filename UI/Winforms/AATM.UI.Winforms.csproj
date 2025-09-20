@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{2902844F-CFD2-0F88-3515-7098759E42C4}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Winforms</RootNamespace>
-    <AssemblyName>Winforms</AssemblyName>
+    <RootNamespace>AATM.UI.Winforms</RootNamespace>
+    <AssemblyName>AATM.UI.Winforms</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsFormsWithCustomSubMain</MyType>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -19,7 +19,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>bin\Debug\Winforms.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\AATM.UI.Winforms.xml</DocumentationFile>
     <DefineConstants>TRACE;DEBUG;_MYFORMS=True</DefineConstants>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <PlatformTarget>x64</PlatformTarget>
@@ -28,7 +28,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>bin\Release\Winforms.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\AATM.UI.Winforms.xml</DocumentationFile>
     <DefineConstants>TRACE;_MYFORMS=True</DefineConstants>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
@@ -74,6 +74,9 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseControls\BaseGridCrudForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="My Project\MyNamespace.Dynamic.Designer.cs" />
     <Compile Include="My Project\MyNamespace.Static.1.Designer.cs" />
     <Compile Include="My Project\MyNamespace.Static.2.Designer.cs" />

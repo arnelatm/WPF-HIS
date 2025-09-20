@@ -78,6 +78,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ITranslationManagerView.cs" />
+    <Compile Include="TranslationCrudService.cs" />
     <Compile Include="TranslationPresenter.cs" />
     <Compile Include="My Project\AssemblyInfo.cs" />
     <Compile Include="My Project\Application.Designer.cs">
@@ -127,6 +128,10 @@
     <ProjectReference Include="..\..\Core\AATM.Core.Localization\AATM.Core.Localization.csproj">
       <Project>{3A2C0FF2-4410-0D3C-3F61-4EF5F503FC2F}</Project>
       <Name>AATM.Core.Localization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Services\AATM.Services\AATM.Services.csproj">
+      <Project>{A61DB83B-3127-4E8A-84CC-10642B454156}</Project>
+      <Name>AATM.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
