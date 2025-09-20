@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TranslationFrm));
             this._toolStrip = new System.Windows.Forms.ToolStrip();
             this._btnFirst = new System.Windows.Forms.ToolStripButton();
             this._btnPrevious = new System.Windows.Forms.ToolStripButton();
@@ -48,8 +47,6 @@
             this._txtUIIdentifier = new System.Windows.Forms.TextBox();
             this._lblModule = new System.Windows.Forms.Label();
             this._txtModuleName = new System.Windows.Forms.TextBox();
-            this._btnSave = new System.Windows.Forms.Button();
-            this._btnDelete = new System.Windows.Forms.Button();
             this._statusLabel = new System.Windows.Forms.Label();
             this._toolStrip.SuspendLayout();
             this._tableLayoutPanel.SuspendLayout();
@@ -100,22 +97,23 @@
             // 
             // tsbSave
             // 
-            this.tsbSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbSave.Image = ((System.Drawing.Image)(resources.GetObject("tsbSave.Image")));
             this.tsbSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbSave.Name = "tsbSave";
-            this.tsbSave.Size = new System.Drawing.Size(23, 22);
-            this.tsbSave.Text = "tsbSave";
-            this.tsbSave.Click += new System.EventHandler(this.toolStripButton1_Click);
+            this.tsbSave.Size = new System.Drawing.Size(35, 22);
+            this.tsbSave.Text = "Save";
+            this.tsbSave.Click += new System.EventHandler(this.tsbSave_Click);
             // 
             // tsbDelete
             // 
-            this.tsbDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbDelete.Image = ((System.Drawing.Image)(resources.GetObject("tsbDelete.Image")));
+            this.tsbDelete.AccessibleRole = System.Windows.Forms.AccessibleRole.ToolBar;
+            this.tsbDelete.BackColor = System.Drawing.Color.Transparent;
+            this.tsbDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbDelete.Name = "tsbDelete";
-            this.tsbDelete.Size = new System.Drawing.Size(23, 22);
-            this.tsbDelete.Text = "toolStripButton2";
+            this.tsbDelete.Size = new System.Drawing.Size(44, 22);
+            this.tsbDelete.Text = "Delete";
+            this.tsbDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.tsbDelete.Click += new System.EventHandler(this.tsbDelete_Click);
             // 
             // _tableLayoutPanel
             // 
@@ -133,8 +131,6 @@
             this._tableLayoutPanel.Controls.Add(this._txtUIIdentifier, 1, 3);
             this._tableLayoutPanel.Controls.Add(this._lblModule, 0, 4);
             this._tableLayoutPanel.Controls.Add(this._txtModuleName, 1, 4);
-            this._tableLayoutPanel.Controls.Add(this._btnSave, 0, 5);
-            this._tableLayoutPanel.Controls.Add(this._btnDelete, 1, 5);
             this._tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this._tableLayoutPanel.Location = new System.Drawing.Point(0, 25);
             this._tableLayoutPanel.Name = "_tableLayoutPanel";
@@ -148,7 +144,6 @@
             this._tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this._tableLayoutPanel.Size = new System.Drawing.Size(800, 355);
             this._tableLayoutPanel.TabIndex = 3;
-            this._tableLayoutPanel.Paint += new System.Windows.Forms.PaintEventHandler(this._tableLayoutPanel_Paint);
             // 
             // _lblOriginal
             // 
@@ -161,7 +156,7 @@
             // _dataGridView
             // 
             this._tableLayoutPanel.SetColumnSpan(this._dataGridView, 2);
-            this._dataGridView.Location = new System.Drawing.Point(3, 123);
+            this._dataGridView.Location = new System.Drawing.Point(3, 133);
             this._dataGridView.Name = "_dataGridView";
             this._dataGridView.Size = new System.Drawing.Size(794, 227);
             this._dataGridView.TabIndex = 4;
@@ -175,7 +170,7 @@
             // 
             // _lblLocalized
             // 
-            this._lblLocalized.Location = new System.Drawing.Point(3, 20);
+            this._lblLocalized.Location = new System.Drawing.Point(3, 26);
             this._lblLocalized.Name = "_lblLocalized";
             this._lblLocalized.Size = new System.Drawing.Size(144, 20);
             this._lblLocalized.TabIndex = 2;
@@ -183,14 +178,14 @@
             // 
             // _txtLocalizedString
             // 
-            this._txtLocalizedString.Location = new System.Drawing.Point(153, 23);
+            this._txtLocalizedString.Location = new System.Drawing.Point(153, 29);
             this._txtLocalizedString.Name = "_txtLocalizedString";
             this._txtLocalizedString.Size = new System.Drawing.Size(644, 20);
             this._txtLocalizedString.TabIndex = 3;
             // 
             // _lblLanguage
             // 
-            this._lblLanguage.Location = new System.Drawing.Point(3, 40);
+            this._lblLanguage.Location = new System.Drawing.Point(3, 52);
             this._lblLanguage.Name = "_lblLanguage";
             this._lblLanguage.Size = new System.Drawing.Size(144, 20);
             this._lblLanguage.TabIndex = 4;
@@ -198,14 +193,14 @@
             // 
             // _txtLanguageCode
             // 
-            this._txtLanguageCode.Location = new System.Drawing.Point(153, 43);
+            this._txtLanguageCode.Location = new System.Drawing.Point(153, 55);
             this._txtLanguageCode.Name = "_txtLanguageCode";
             this._txtLanguageCode.Size = new System.Drawing.Size(100, 20);
             this._txtLanguageCode.TabIndex = 5;
             // 
             // _lblUIIdentifier
             // 
-            this._lblUIIdentifier.Location = new System.Drawing.Point(3, 60);
+            this._lblUIIdentifier.Location = new System.Drawing.Point(3, 78);
             this._lblUIIdentifier.Name = "_lblUIIdentifier";
             this._lblUIIdentifier.Size = new System.Drawing.Size(144, 20);
             this._lblUIIdentifier.TabIndex = 6;
@@ -213,14 +208,14 @@
             // 
             // _txtUIIdentifier
             // 
-            this._txtUIIdentifier.Location = new System.Drawing.Point(153, 63);
+            this._txtUIIdentifier.Location = new System.Drawing.Point(153, 81);
             this._txtUIIdentifier.Name = "_txtUIIdentifier";
             this._txtUIIdentifier.Size = new System.Drawing.Size(322, 20);
             this._txtUIIdentifier.TabIndex = 7;
             // 
             // _lblModule
             // 
-            this._lblModule.Location = new System.Drawing.Point(3, 80);
+            this._lblModule.Location = new System.Drawing.Point(3, 104);
             this._lblModule.Name = "_lblModule";
             this._lblModule.Size = new System.Drawing.Size(144, 20);
             this._lblModule.TabIndex = 8;
@@ -228,27 +223,10 @@
             // 
             // _txtModuleName
             // 
-            this._txtModuleName.Location = new System.Drawing.Point(153, 83);
+            this._txtModuleName.Location = new System.Drawing.Point(153, 107);
             this._txtModuleName.Name = "_txtModuleName";
             this._txtModuleName.Size = new System.Drawing.Size(322, 20);
             this._txtModuleName.TabIndex = 9;
-            // 
-            // _btnSave
-            // 
-            this._btnSave.Location = new System.Drawing.Point(3, 103);
-            this._btnSave.Name = "_btnSave";
-            this._btnSave.Size = new System.Drawing.Size(75, 14);
-            this._btnSave.TabIndex = 10;
-            this._btnSave.Text = "Save";
-            this._btnSave.Click += new System.EventHandler(this._btnSave_Click);
-            // 
-            // _btnDelete
-            // 
-            this._btnDelete.Location = new System.Drawing.Point(153, 103);
-            this._btnDelete.Name = "_btnDelete";
-            this._btnDelete.Size = new System.Drawing.Size(100, 14);
-            this._btnDelete.TabIndex = 11;
-            this._btnDelete.Text = "Delete";
             // 
             // _statusLabel
             // 
@@ -270,7 +248,6 @@
             this.Controls.Add(this._toolStrip);
             this.Name = "TranslationFrm";
             this.Text = "TranslationFrm";
-            this.Load += new System.EventHandler(this.TranslationFrm_Load);
             this._toolStrip.ResumeLayout(false);
             this._toolStrip.PerformLayout();
             this._tableLayoutPanel.ResumeLayout(false);
@@ -301,8 +278,6 @@
         private System.Windows.Forms.TextBox _txtUIIdentifier;
         private System.Windows.Forms.Label _lblModule;
         private System.Windows.Forms.TextBox _txtModuleName;
-        private System.Windows.Forms.Button _btnSave;
-        private System.Windows.Forms.Button _btnDelete;
         private System.Windows.Forms.DataGridView _dataGridView;
         private System.Windows.Forms.Label _statusLabel;
     }
