@@ -1,4 +1,4 @@
-﻿using AATM.Contracts.Interfaces.Services; 
+﻿using AATM.Contracts.Interfaces.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +13,13 @@ namespace AATM.UI.Winforms.BaseControls
     {
         protected readonly ICrudService<T> _service;
         protected List<T> _items = new List<T>();
+
+        // Re-entrancy guards
+        private bool _isLoading;
+        private bool _isMutating;
+
+        // Cancellation support
+        private readonly CancellationTokenSource _cts = new CancellationTokenSource();
 
         // ADDED: parameterless ctor for the Designer (routes to factory ctor)
         protected BaseGridCrudForm() : this(() => new DesignTimeCrudService()) { }
@@ -50,70 +57,153 @@ namespace AATM.UI.Winforms.BaseControls
         }
 
         protected abstract DataGridView Grid { get; }
-        protected abstract Label StatusLabel { get; }
+
+        // CHANGED: make optional; derived forms can keep overriding if they have a Label
+        protected virtual Label StatusLabel { get { return null; } }
+        // ADDED: optional ToolStripStatusLabel support
+        protected virtual ToolStripStatusLabel StatusStripLabel { get { return null; } }
+
+        // Unified status writer
+        protected virtual void SetStatusText(string text)
+        {
+            if (StatusStripLabel != null)
+                StatusStripLabel.Text = text ?? string.Empty;
+            else if (StatusLabel != null)
+                StatusLabel.Text = text ?? string.Empty;
+        }
 
         protected abstract void PopulateFormFieldsFromGrid(int rowIndex);
         protected abstract T BuildModelFromForm(T current);
         protected abstract int GetEntityId(T entity);
         protected abstract void ClearFormFieldsCore();
 
-        // Pseudocode plan:
-        // - Problem: _service.GetAllAsync() returns IReadOnlyList<T>, but _items is List<T> causing CS0266.
-        // - Fix: Convert the returned IReadOnlyList<T> to List<T> using ToList().
-        // - Add null-coalescing to ensure _items is never null.
-        // - Keep rest of method logic unchanged.
+        // OPTIONAL: give derived forms a place to configure columns/formatting
+        protected virtual void ConfigureGrid(DataGridView grid) { }
+
+        // Hooks (override as needed)
+        protected virtual Task OnBeforeLoadAsync() { return Task.CompletedTask; }
+        protected virtual Task OnAfterLoadAsync() { return Task.CompletedTask; }
+        protected virtual Task OnBeforeSaveAsync() { return Task.CompletedTask; }
+        protected virtual Task OnAfterSaveAsync(T saved) { return Task.CompletedTask; }
+        protected virtual Task OnBeforeDeleteAsync(int id, T entity) { return Task.CompletedTask; }
+        protected virtual Task OnAfterDeleteAsync(int id, bool ok) { return Task.CompletedTask; }
+
+        // Confirmation abstraction
+        protected virtual DialogResult ConfirmDelete(string message)
+        {
+            return MessageBox.Show(message, "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+        }
 
         protected async Task LoadDataAsync()
         {
-            if (StatusLabel != null) StatusLabel.Text = "Loading...";
+            if (_isLoading) return;
+            _isLoading = true;
+            SetStatusText("Loading...");
             try
             {
-                var result = await _service.GetAllAsync();
-                _items = result?.ToList() ?? new List<T>();
+                await OnBeforeLoadAsync();
+
+                var result = await _service.GetAllAsync(_cts.Token);
+                _items = result != null ? result.ToList() : new List<T>();
 
                 Grid.DataSource = null;
-                Grid.AutoGenerateColumns = true;
+                // Let derived configure columns first; if none, allow auto-generate
+                ConfigureGrid(Grid);
+                if (Grid.Columns.Count == 0)
+                    Grid.AutoGenerateColumns = true;
+
                 Grid.DataSource = _items;
-                if (StatusLabel != null) StatusLabel.Text = $"Loaded {_items.Count} records.";
+
+                SetStatusText("Loaded " + _items.Count + " records.");
                 GoFirst();
+
+                await OnAfterLoadAsync();
+            }
+            catch (OperationCanceledException)
+            {
+                SetStatusText("Load canceled.");
             }
             catch (Exception ex)
             {
-                if (StatusLabel != null) StatusLabel.Text = $"Load failed: {ex.Message}";
+                SetStatusText("Load failed: " + ex.Message);
+            }
+            finally
+            {
+                _isLoading = false;
             }
         }
 
         protected void NavigateToRow(int rowIndex)
         {
             if (rowIndex < 0 || rowIndex >= Grid.Rows.Count) return;
+
             var row = Grid.Rows[rowIndex];
             if (row.IsNewRow) return;
 
             Grid.ClearSelection();
             row.Selected = true;
-            Grid.CurrentCell = row.Cells.Cast<DataGridViewCell>().FirstOrDefault(c => c.Visible);
+
+            var firstVisibleCell = row.Cells.Cast<DataGridViewCell>().FirstOrDefault(c => c.Visible);
+            if (firstVisibleCell != null)
+                Grid.CurrentCell = firstVisibleCell;
+
             Grid.FirstDisplayedScrollingRowIndex = rowIndex;
             PopulateFormFieldsFromGrid(rowIndex);
         }
 
+        // Convenience: navigate by predicate on T
+        protected bool NavigateToEntity(Predicate<T> match)
+        {
+            if (match == null || _items == null || _items.Count == 0) return false;
+            for (int i = 0; i < _items.Count; i++)
+            {
+                if (match(_items[i]))
+                {
+                    // Find matching bound row index (same ordering as _items with List<T> binding)
+                    NavigateToRow(i);
+                    return true;
+                }
+            }
+            return false;
+        }
+
         protected async Task SaveOrUpdateAsync()
         {
+            if (_isMutating) return;
+            _isMutating = true;
+
             try
             {
+                await OnBeforeSaveAsync();
+
                 var dto = BuildModelFromForm(null);
-                var saved = await _service.UpsertAsync(dto);
-                if (StatusLabel != null) StatusLabel.Text = $"Saved (ID={GetEntityId(saved)})";
+                var saved = await _service.UpsertAsync(dto, _cts.Token);
+                SetStatusText("Saved (ID=" + GetEntityId(saved) + ")");
+
+                await OnAfterSaveAsync(saved);
+
                 await LoadDataAsync();
                 ClearFormFields();
             }
+            catch (OperationCanceledException)
+            {
+                SetStatusText("Save canceled.");
+            }
             catch (Exception ex)
             {
-                if (StatusLabel != null) StatusLabel.Text = $"Save failed: {ex.Message}";
+                SetStatusText("Save failed: " + ex.Message);
+            }
+            finally
+            {
+                _isMutating = false;
             }
         }
 
         protected async Task DeleteSelectedAsync()
         {
+            if (_isMutating) return;
+            _isMutating = true;
+
             try
             {
                 if (Grid.SelectedRows.Count == 0 || Grid.SelectedRows[0].IsNewRow)
@@ -122,26 +212,46 @@ namespace AATM.UI.Winforms.BaseControls
                     return;
                 }
 
-                var index = Grid.SelectedRows[0].Index;
-                if (index < 0 || index >= _items.Count)
+                var selectedRow = Grid.SelectedRows[0];
+                var entity = selectedRow.DataBoundItem as T;
+
+                // Fallback if DataBoundItem is null (shouldn't happen with List<T> binding)
+                if (entity == null)
                 {
-                    MessageBox.Show("Invalid selection.", "Delete", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
+                    var index = selectedRow.Index;
+                    if (index < 0 || index >= _items.Count)
+                    {
+                        MessageBox.Show("Invalid selection.", "Delete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
+                    entity = _items[index];
                 }
 
-                var entity = _items[index];
                 var id = GetEntityId(entity);
 
-                if (MessageBox.Show("Delete selected record?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes)
+                if (ConfirmDelete("Delete selected record?") != DialogResult.Yes)
                     return;
 
-                var ok = await _service.DeleteAsync(id);
-                if (StatusLabel != null) StatusLabel.Text = ok ? $"Deleted (ID={id})" : $"Delete failed (ID={id})";
+                await OnBeforeDeleteAsync(id, entity);
+
+                var ok = await _service.DeleteAsync(id, _cts.Token);
+                SetStatusText(ok ? "Deleted (ID=" + id + ")" : "Delete failed (ID=" + id + ")");
+
+                await OnAfterDeleteAsync(id, ok);
+
                 await LoadDataAsync();
+            }
+            catch (OperationCanceledException)
+            {
+                SetStatusText("Delete canceled.");
             }
             catch (Exception ex)
             {
-                if (StatusLabel != null) StatusLabel.Text = $"Delete failed: {ex.Message}";
+                SetStatusText("Delete failed: " + ex.Message);
+            }
+            finally
+            {
+                _isMutating = false;
             }
         }
 
@@ -159,11 +269,11 @@ namespace AATM.UI.Winforms.BaseControls
                 if (!Grid.Rows[i].IsNewRow)
                 {
                     NavigateToRow(i);
-                    if (StatusLabel != null) StatusLabel.Text = "First record.";
+                    SetStatusText("First record.");
                     return;
                 }
             }
-            if (StatusLabel != null) StatusLabel.Text = "No records.";
+            SetStatusText("No records.");
         }
 
         protected void GoLast()
@@ -173,11 +283,11 @@ namespace AATM.UI.Winforms.BaseControls
                 if (!Grid.Rows[i].IsNewRow)
                 {
                     NavigateToRow(i);
-                    if (StatusLabel != null) StatusLabel.Text = "Last record.";
+                    SetStatusText("Last record.");
                     return;
                 }
             }
-            if (StatusLabel != null) StatusLabel.Text = "No records.";
+            SetStatusText("No records.");
         }
 
         protected void GoPrevious()
@@ -188,7 +298,7 @@ namespace AATM.UI.Winforms.BaseControls
             {
                 if (!rows[i].IsNewRow) { firstIndex = i; break; }
             }
-            if (firstIndex == -1) { if (StatusLabel != null) StatusLabel.Text = "No records."; return; }
+            if (firstIndex == -1) { SetStatusText("No records."); return; }
 
             int currentIndex = Grid.SelectedRows.Count > 0 ? Grid.SelectedRows[0].Index :
                                Grid.CurrentCell != null ? Grid.CurrentCell.RowIndex : firstIndex;
@@ -196,13 +306,13 @@ namespace AATM.UI.Winforms.BaseControls
             if (currentIndex <= firstIndex)
             {
                 NavigateToRow(firstIndex);
-                if (StatusLabel != null) StatusLabel.Text = "Already at first.";
+                SetStatusText("Already at first.");
                 return;
             }
 
             for (int i = currentIndex - 1; i >= firstIndex; i--)
             {
-                if (!rows[i].IsNewRow) { NavigateToRow(i); if (StatusLabel != null) StatusLabel.Text = "Previous record."; return; }
+                if (!rows[i].IsNewRow) { NavigateToRow(i); SetStatusText("Previous record."); return; }
             }
             NavigateToRow(firstIndex);
         }
@@ -216,7 +326,7 @@ namespace AATM.UI.Winforms.BaseControls
             {
                 if (!rows[i].IsNewRow) { lastIndex = i; break; }
             }
-            if (lastIndex == -1) { if (StatusLabel != null) StatusLabel.Text = "No records."; return; }
+            if (lastIndex == -1) { SetStatusText("No records."); return; }
 
             int currentIndex = Grid.SelectedRows.Count > 0 ? Grid.SelectedRows[0].Index :
                                Grid.CurrentCell != null ? Grid.CurrentCell.RowIndex : -1;
@@ -227,21 +337,37 @@ namespace AATM.UI.Winforms.BaseControls
                 {
                     if (!rows[i].IsNewRow) { currentIndex = i; break; }
                 }
-                if (currentIndex == -1) { if (StatusLabel != null) StatusLabel.Text = "No records."; return; }
+                if (currentIndex == -1) { SetStatusText("No records."); return; }
             }
 
             if (currentIndex >= lastIndex)
             {
                 NavigateToRow(lastIndex);
-                if (StatusLabel != null) StatusLabel.Text = "Already at last.";
+                SetStatusText("Already at last.");
                 return;
             }
 
             for (int i = currentIndex + 1; i <= lastIndex; i++)
             {
-                if (!rows[i].IsNewRow) { NavigateToRow(i); if (StatusLabel != null) StatusLabel.Text = "Next record."; return; }
+                if (!rows[i].IsNewRow) { NavigateToRow(i); SetStatusText("Next record."); return; }
             }
             NavigateToRow(lastIndex);
+        }
+
+        // OPTIONAL: helpers to auto-wire buttons in derived forms
+        protected void WireNavigationButtons(Button btnFirst, Button btnPrevious, Button btnNext, Button btnLast)
+        {
+            if (btnFirst != null) btnFirst.Click += (s, e) => GoFirst();
+            if (btnPrevious != null) btnPrevious.Click += (s, e) => GoPrevious();
+            if (btnNext != null) btnNext.Click += (s, e) => GoNext();
+            if (btnLast != null) btnLast.Click += (s, e) => GoLast();
+        }
+
+        protected void WireCrudButtons(Button btnSave, ToolStripButton tsbSave, ToolStripButton tsbDelete)
+        {
+            if (btnSave != null) btnSave.Click += async (s, e) => await SaveOrUpdateAsync();
+            if (tsbSave != null) tsbSave.Click += async (s, e) => await SaveOrUpdateAsync();
+            if (tsbDelete != null) tsbDelete.Click += async (s, e) => await DeleteSelectedAsync();
         }
 
         private void InitializeComponent()
@@ -260,6 +386,12 @@ namespace AATM.UI.Winforms.BaseControls
         private void BaseGridCrudForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            try { _cts.Cancel(); } catch { }
+            base.OnFormClosing(e);
         }
     }
 }
