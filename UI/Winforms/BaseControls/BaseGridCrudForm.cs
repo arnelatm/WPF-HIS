@@ -1,8 +1,9 @@
-﻿using AATM.Contracts.Interfaces.Services;
+﻿using AATM.Contracts.Interfaces.Services; 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -13,9 +14,39 @@ namespace AATM.UI.Winforms.BaseControls
         protected readonly ICrudService<T> _service;
         protected List<T> _items = new List<T>();
 
+        // ADDED: parameterless ctor for the Designer (routes to factory ctor)
+        protected BaseGridCrudForm() : this(() => new DesignTimeCrudService()) { }
+
+        // ADDED: factory-based ctor to avoid creating real services at design-time
+        protected BaseGridCrudForm(Func<ICrudService<T>> serviceFactory)
+        {
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
+            {
+                _service = new DesignTimeCrudService();
+            }
+            else
+            {
+                _service = (serviceFactory?.Invoke()) ?? new DesignTimeCrudService();
+            }
+        }
+
+        // EXISTING: runtime ctor remains for callers that pass a real service
         protected BaseGridCrudForm(ICrudService<T> service)
         {
             _service = service ?? throw new ArgumentNullException(nameof(service));
+        }
+
+        // ADDED: no-op service used at design-time
+        public sealed class DesignTimeCrudService : ICrudService<T>
+        {
+            public Task<IReadOnlyList<T>> GetAllAsync(CancellationToken ct = default)
+                => Task.FromResult((IReadOnlyList<T>)new List<T>());
+            public Task<T> GetByIdAsync(int id, CancellationToken ct = default)
+                => Task.FromResult(default(T));
+            public Task<T> UpsertAsync(T dto, CancellationToken ct = default)
+                => Task.FromResult(dto);
+            public Task<bool> DeleteAsync(int id, CancellationToken ct = default)
+                => Task.FromResult(false);
         }
 
         protected abstract DataGridView Grid { get; }
@@ -26,12 +57,20 @@ namespace AATM.UI.Winforms.BaseControls
         protected abstract int GetEntityId(T entity);
         protected abstract void ClearFormFieldsCore();
 
+        // Pseudocode plan:
+        // - Problem: _service.GetAllAsync() returns IReadOnlyList<T>, but _items is List<T> causing CS0266.
+        // - Fix: Convert the returned IReadOnlyList<T> to List<T> using ToList().
+        // - Add null-coalescing to ensure _items is never null.
+        // - Keep rest of method logic unchanged.
+
         protected async Task LoadDataAsync()
         {
             if (StatusLabel != null) StatusLabel.Text = "Loading...";
             try
             {
-                _items = await _service.GetAllAsync();
+                var result = await _service.GetAllAsync();
+                _items = result?.ToList() ?? new List<T>();
+
                 Grid.DataSource = null;
                 Grid.AutoGenerateColumns = true;
                 Grid.DataSource = _items;
@@ -203,6 +242,24 @@ namespace AATM.UI.Winforms.BaseControls
                 if (!rows[i].IsNewRow) { NavigateToRow(i); if (StatusLabel != null) StatusLabel.Text = "Next record."; return; }
             }
             NavigateToRow(lastIndex);
+        }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // BaseGridCrudForm
+            // 
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Name = "BaseGridCrudForm";
+            this.Load += new System.EventHandler(this.BaseGridCrudForm_Load);
+            this.ResumeLayout(false);
+
+        }
+
+        private void BaseGridCrudForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

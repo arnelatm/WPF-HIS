@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{2902844F-CFD2-0F88-3515-7098759E42C4}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Library</OutputType>
     <RootNamespace>AATM.UI.Winforms</RootNamespace>
     <AssemblyName>AATM.UI.Winforms</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -22,7 +22,7 @@
     <DocumentationFile>bin\Debug\AATM.UI.Winforms.xml</DocumentationFile>
     <DefineConstants>TRACE;DEBUG;_MYFORMS=True</DefineConstants>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -45,7 +45,8 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>Winforms.Program</StartupObject>
+    <StartupObject>
+    </StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
@@ -77,17 +78,12 @@
     <Compile Include="BaseControls\BaseGridCrudForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="My Project\MyNamespace.Dynamic.Designer.cs" />
+    <Compile Include="BaseControls\TranslationGridCrudForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="My Project\MyNamespace.Static.1.Designer.cs" />
     <Compile Include="My Project\MyNamespace.Static.2.Designer.cs" />
     <Compile Include="My Project\MyNamespace.Static.3.Designer.cs" />
-    <Compile Include="FrmCustomer.Designer.cs">
-      <DependentUpon>FrmCustomer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FrmCustomer.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Program.cs" />
     <Compile Include="My Project\Application.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
@@ -104,28 +100,17 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="TranslationForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UILocalizationManager.Designer.cs">
-      <DependentUpon>UILocalizationManager.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UILocalizationManager.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Service\TranslationCrudService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FrmCustomer.resx">
-      <DependentUpon>FrmCustomer.cs</DependentUpon>
+    <EmbeddedResource Include="BaseControls\BaseGridCrudForm.resx">
+      <DependentUpon>BaseGridCrudForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Winforms.My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UILocalizationManager.resx">
-      <DependentUpon>UILocalizationManager.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -177,9 +162,9 @@
       <Project>{161A1671-FF81-0C1D-3304-D104941735FD}</Project>
       <Name>AATM.Core.Configuration</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Module\AATM.Modules.Customers\AATM.Modules.Customers.csproj">
-      <Project>{28115980-A3B0-09B8-23F4-9BAF762B5C6E}</Project>
-      <Name>AATM.Modules.Customers</Name>
+    <ProjectReference Include="..\..\Services\AATM.Services\AATM.Services.csproj">
+      <Project>{A61DB83B-3127-4E8A-84CC-10642B454156}</Project>
+      <Name>AATM.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

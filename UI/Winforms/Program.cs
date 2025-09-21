@@ -4,7 +4,6 @@ using AATM.Core;
 using AATM.Core.Configuration;
 using AATM.Core.Localization;
 using AATM.Core.Logging;
-using AATM.Modules.Customers;
 using Microsoft.VisualBasic.CompilerServices;
 
 namespace Winforms

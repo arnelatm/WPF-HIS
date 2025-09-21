@@ -1,94 +1,116 @@
 ﻿using AATM.Contracts.Dtos;
+using AATM.UI.Winforms.BaseControls;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+using System.ComponentModel; 
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AATM.App.TableManager
 {
-    public partial class TranslationFrm : Form
+    public partial class TranslationFrm : TranslationGridCrudForm
     {
         private readonly TranslationDbService _dbService;
         private List<TranslationDto> _allTranslations;
 
-        public TranslationFrm()
+        // CHANGED: use factory-based base ctor so Designer uses a no-op service
+        public TranslationFrm() : base(() => new TranslationCrudService())
         {
-            _dbService = new TranslationDbService();
             InitializeComponent();
-            LoadTranslationsAsync();
+
+            if (!IsInDesignMode())
+            {
+                _dbService = new TranslationDbService(); // runtime only
+                LoadTranslationsAsync();
+            }
+            else
+            {
+                _dbService = null; // design-time
+            }
         }
 
-        // Plan (pseudocode):
-        // - Validate that there is at least one real data row (exclude the DataGridView's NewRow).
-        // - If none, update status and return.
-        // - Otherwise, call NavigateToRow(0) to select and display the first record.
-        // - Update status and handle any unexpected exceptions gracefully.
+        // BaseGridCrudForm<T> requirements
+        protected override DataGridView Grid => _dataGridView;
+        public  StatusStrip StatusStrip => statusStrip;
 
-        private void _btnFirst_Click(object sender, EventArgs e)
+        protected override void PopulateFormFieldsFromGrid(int rowIndex)
         {
-            try
+            var row = _dataGridView.Rows[rowIndex];
+            if (row == null || row.IsNewRow) return;
+
+            _txtModuleName.Text = row.Cells["ModuleName"].Value?.ToString() ?? string.Empty;
+            _txtUIIdentifier.Text = row.Cells["UIIdentifier"].Value?.ToString() ?? string.Empty;
+            _txtOriginalString.Text = row.Cells["OriginalString"].Value?.ToString() ?? string.Empty;
+            _txtLanguageCode.Text = row.Cells["LanguageCode"].Value?.ToString() ?? string.Empty;
+            _txtLocalizedString.Text = row.Cells["LocalizedString"].Value?.ToString() ?? string.Empty;
+        }
+
+        protected override TranslationDto BuildModelFromForm(TranslationDto current)
+        {
+            var dto = current ?? new TranslationDto();
+
+            if (_dataGridView.SelectedRows.Count > 0 && !_dataGridView.SelectedRows[0].IsNewRow)
             {
-                var hasRows = _dataGridView.Rows.Cast<DataGridViewRow>().Any(r => !r.IsNewRow);
-                if (!hasRows)
+                var cellValue = _dataGridView.SelectedRows[0].Cells["ID"].Value;
+                if (cellValue != null && int.TryParse(cellValue.ToString(), out var id))
                 {
-                    _statusLabel.Text = "No records to navigate.";
-                    return;
+                    dto.ID = id;
                 }
-
-                NavigateToRow(0);
-                _statusLabel.Text = "Navigated to first record.";
             }
-            catch (Exception ex)
-            {
-                _statusLabel.Text = $"Error navigating to first record: {ex.Message}";
-            }
+
+            dto.ModuleName = _txtModuleName.Text;
+            dto.UIIdentifier = _txtUIIdentifier.Text;
+            dto.OriginalString = _txtOriginalString.Text;
+            dto.LanguageCode = _txtLanguageCode.Text;
+            dto.LocalizedString = _txtLocalizedString.Text;
+            return dto;
         }
 
-        // Replacement for the BtnSave_Click event handler
-        private async void BtnSave_Click(object sender, EventArgs e)
+        protected override int GetEntityId(TranslationDto entity) => entity?.ID ?? 0;
+
+        protected override void ClearFormFieldsCore()
         {
-            await SaveOrUpdateTranslationAsync();
+            _txtModuleName.Text = string.Empty;
+            _txtUIIdentifier.Text = string.Empty;
+            _txtOriginalString.Text = string.Empty;
+            _txtLanguageCode.Text = string.Empty;
+            _txtLocalizedString.Text = string.Empty;
+            _dataGridView.ClearSelection();
         }
 
-        // Replacement for the BtnDelete_Click event handler
-        private async void BtnDelete_Click(object sender, EventArgs e)
-        {
-            await DeleteTranslationAsync();
-        }
+        // Helper to detect design-time
+        private static bool IsInDesignMode()
+            => LicenseManager.UsageMode == LicenseUsageMode.Designtime;
 
-        // Replacement for the BtnDelete_Click event handler
-        private async void DataGridView_DoubleClick(object sender, EventArgs e)
+        // FIX: remove unnecessary async to avoid CS1998
+        private void DataGridView_DoubleClick(object sender, EventArgs e)
         {
-            // await DeleteTranslationAsync();
+            // no-op
         }
 
         private async void LoadTranslationsAsync()
         {
-
-            _statusLabel.Text = "Loading translations...";
+            statusLabel.Text = "Loading translations...";
             try
             {
                 _allTranslations = await _dbService.GetAllTranslationsAsync();
                 _dataGridView.DataSource = _allTranslations;
-                _statusLabel.Text = $"Loaded {_allTranslations.Count} translations.";
+                statusLabel.Text = $"Loaded {_allTranslations.Count} translations.";
                 if (_allTranslations.Count > 0)
                 {
-                    NavigateToRow(0);
+                    base.NavigateToRow(0);
                 }
             }
             catch (Exception ex)
             {
-                _statusLabel.Text = $"Error loading data: {ex.Message}";
+                statusLabel.Text = $"Error loading data: {ex.Message}";
             }
         }
 
-        private void NavigateToRow(int rowIndex)
+        // Intentionally hide base NavigateToRow only if needed (now we call base.NavigateToRow directly)
+        private new void NavigateToRow(int rowIndex)
         {
             if (rowIndex >= 0 && rowIndex < _dataGridView.Rows.Count)
             {
@@ -114,22 +136,12 @@ namespace AATM.App.TableManager
             if (match != null)
             {
                 int rowIndex = _allTranslations.IndexOf(match);
-                NavigateToRow(rowIndex);
+                base.NavigateToRow(rowIndex);
             }
             else
             {
                 MessageBox.Show("No matching translation found.", "Search", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-        }
-
-        private void PopulateFormFieldsFromGrid(int rowIndex)
-        {
-            var row = _dataGridView.Rows[rowIndex];
-            _txtModuleName.Text = row.Cells["ModuleName"].Value?.ToString() ?? string.Empty;
-            _txtUIIdentifier.Text = row.Cells["UIIdentifier"].Value?.ToString() ?? string.Empty;
-            _txtOriginalString.Text = row.Cells["OriginalString"].Value?.ToString() ?? string.Empty;
-            _txtLanguageCode.Text = row.Cells["LanguageCode"].Value?.ToString() ?? string.Empty;
-            _txtLocalizedString.Text = row.Cells["LocalizedString"].Value?.ToString() ?? string.Empty;
         }
 
         private async Task SaveOrUpdateTranslationAsync()
@@ -152,13 +164,13 @@ namespace AATM.App.TableManager
             try
             {
                 var result = await _dbService.UpsertTranslationAsync(dto);
-                _statusLabel.Text = $"Translation with ID {result.ID} saved successfully.";
+                statusLabel.Text = $"Translation with ID {result.ID} saved successfully.";
                 LoadTranslationsAsync();
-                ClearFormFields();
+                ClearFormFields(); // Calls local (hidden) version intentionally
             }
             catch (Exception ex)
             {
-                _statusLabel.Text = $"Error saving translation: {ex.Message}";
+                statusLabel.Text = $"Error saving translation: {ex.Message}";
             }
         }
 
@@ -179,22 +191,23 @@ namespace AATM.App.TableManager
                     bool success = await _dbService.DeleteTranslationAsync(id);
                     if (success)
                     {
-                        _statusLabel.Text = $"Translation with ID {id} deleted successfully.";
+                        statusLabel.Text = $"Translation with ID {id} deleted successfully.";
                         LoadTranslationsAsync();
                     }
                     else
                     {
-                        _statusLabel.Text = $"Failed to delete translation with ID {id}.";
+                        statusLabel.Text = $"Failed to delete translation with ID {id}.";
                     }
                 }
                 catch (Exception ex)
                 {
-                    _statusLabel.Text = $"Error deleting translation: {ex.Message}";
+                    statusLabel.Text = $"Error deleting translation: {ex.Message}";
                 }
             }
         }
 
-        private void ClearFormFields()
+        // Intentionally hide base ClearFormFields (base uses ClearFormFieldsCore internally)
+        private new void ClearFormFields()
         {
             _txtModuleName.Text = string.Empty;
             _txtUIIdentifier.Text = string.Empty;
@@ -243,15 +256,15 @@ namespace AATM.App.TableManager
                         {
                             await _dbService.UpsertTranslationAsync(dto);
                             count++;
-                            _statusLabel.Text = $"Importing... {count} of {translationsToImport.Count} records.";
+                            statusLabel.Text = $"Importing... {count} of {translationsToImport.Count} records.";
                         }
 
                         LoadTranslationsAsync();
-                        _statusLabel.Text = $"Imported {count} translations successfully.";
+                        statusLabel.Text = $"Imported {count} translations successfully.";
                     }
                     catch (Exception ex)
                     {
-                        _statusLabel.Text = $"Error importing file: {ex.Message}";
+                        statusLabel.Text = $"Error importing file: {ex.Message}";
                     }
                 }
             }
@@ -281,11 +294,11 @@ namespace AATM.App.TableManager
                                 await writer.WriteLineAsync($"{t.ModuleName},{t.UIIdentifier},{t.OriginalString},{t.LanguageCode},{t.LocalizedString}");
                             }
                         }
-                        _statusLabel.Text = $"Exported {allTranslations.Count} translations successfully.";
+                        statusLabel.Text = $"Exported {allTranslations.Count} translations successfully.";
                     }
                     catch (Exception ex)
                     {
-                        _statusLabel.Text = $"Error exporting file: {ex.Message}";
+                        statusLabel.Text = $"Error exporting file: {ex.Message}";
                     }
                 }
             }
@@ -312,16 +325,50 @@ namespace AATM.App.TableManager
 
                 if (lastIndex == -1)
                 {
-                    _statusLabel.Text = "No records to navigate.";
+                    statusLabel.Text = "No records to navigate.";
                     return;
                 }
 
-                NavigateToRow(lastIndex);
-                _statusLabel.Text = "Navigated to last record.";
+                base.NavigateToRow(lastIndex);
+                statusLabel.Text = "Navigated to last record.";
             }
             catch (Exception ex)
             {
-                _statusLabel.Text = $"Error navigating to last record: {ex.Message}";
+                statusLabel.Text = $"Error navigating to last record: {ex.Message}";
+            }
+        }
+
+        // Plan (pseudocode) for _btnLast_Click:
+        // - Check if there is at least one non-new row.
+        // - Find the last non-new row index by iterating backwards.
+        // - Navigate to that row and update status.
+        // - Handle errors gracefully.
+        private void _btnFirst_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int lastIndex = -1;
+                for (int i = _dataGridView.Rows.Count - 1; i >= 0; i--)
+                {
+                    if (!_dataGridView.Rows[i].IsNewRow)
+                    {
+                        lastIndex = i;
+                        break;
+                    }
+                }
+
+                if (lastIndex == -1)
+                {
+                    statusLabel.Text = "No records to navigate.";
+                    return;
+                }
+
+                base.NavigateToRow(lastIndex);
+                statusLabel.Text = "Navigated to last record.";
+            }
+            catch (Exception ex)
+            {
+                statusLabel.Text = $"Error navigating to last record: {ex.Message}";
             }
         }
 
@@ -350,7 +397,7 @@ namespace AATM.App.TableManager
 
                 if (firstIndex == -1)
                 {
-                    _statusLabel.Text = "No records to navigate.";
+                    statusLabel.Text = "No records to navigate.";
                     return;
                 }
 
@@ -371,8 +418,8 @@ namespace AATM.App.TableManager
 
                 if (currentIndex <= firstIndex)
                 {
-                    NavigateToRow(firstIndex);
-                    _statusLabel.Text = "Already at first record.";
+                    base.NavigateToRow(firstIndex);
+                    statusLabel.Text = "Already at first record.";
                     return;
                 }
 
@@ -392,12 +439,12 @@ namespace AATM.App.TableManager
                     prevIndex = firstIndex;
                 }
 
-                NavigateToRow(prevIndex);
-                _statusLabel.Text = "Navigated to previous record.";
+                base.NavigateToRow(prevIndex);
+                statusLabel.Text = "Navigated to previous record.";
             }
             catch (Exception ex)
             {
-                _statusLabel.Text = $"Error navigating to previous record: {ex.Message}";
+                statusLabel.Text = $"Error navigating to previous record: {ex.Message}";
             }
         }
 
@@ -427,7 +474,7 @@ namespace AATM.App.TableManager
 
                 if (lastIndex == -1)
                 {
-                    _statusLabel.Text = "No records to navigate.";
+                    statusLabel.Text = "No records to navigate.";
                     return;
                 }
 
@@ -455,7 +502,7 @@ namespace AATM.App.TableManager
                     }
                     if (firstIndex == -1)
                     {
-                        _statusLabel.Text = "No records to navigate.";
+                        statusLabel.Text = "No records to navigate.";
                         return;
                     }
                     currentIndex = firstIndex;
@@ -463,8 +510,8 @@ namespace AATM.App.TableManager
 
                 if (currentIndex >= lastIndex)
                 {
-                    NavigateToRow(lastIndex);
-                    _statusLabel.Text = "Already at last record.";
+                    base.NavigateToRow(lastIndex);
+                    statusLabel.Text = "Already at last record.";
                     return;
                 }
 
@@ -484,12 +531,12 @@ namespace AATM.App.TableManager
                     nextIndex = lastIndex;
                 }
 
-                NavigateToRow(nextIndex);
-                _statusLabel.Text = "Navigated to next record.";
+                base.NavigateToRow(nextIndex);
+                statusLabel.Text = "Navigated to next record.";
             }
             catch (Exception ex)
             {
-                _statusLabel.Text = $"Error navigating to next record: {ex.Message}";
+                statusLabel.Text = $"Error navigating to next record: {ex.Message}";
             }
         }
 
@@ -504,6 +551,16 @@ namespace AATM.App.TableManager
         }
 
         private void tsbDelete_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void _statusLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void statusStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
         }

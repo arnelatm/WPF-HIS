@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using AATM.Contracts.Dtos;
 using Microsoft.VisualBasic.CompilerServices;
 
 namespace AATM.Modules.Localization
@@ -21,6 +22,7 @@ namespace AATM.Modules.Localization
 
         public delegate void SaveTranslationEventHandler(string originalString, string localizedString);
         public event LanguageChangedEventHandler LanguageChanged;
+        public event Action<string> LanguageSelected;
 
         public delegate void LanguageChangedEventHandler(string languageCode);
 
@@ -30,6 +32,19 @@ namespace AATM.Modules.Localization
             dgvTranslations = new DataGridView();
             btnSave = new Button();
             InitializeComponent();
+        }
+
+        event Action<string, string, string, string, string> ITranslationManagerView.SaveTranslation
+        {
+            add
+            {
+                throw new NotImplementedException();
+            }
+
+            remove
+            {
+                throw new NotImplementedException();
+            }
         }
 
         // Interface Methods
@@ -89,5 +104,29 @@ namespace AATM.Modules.Localization
             ShowSuccessMessage("Translations saved successfully!");
         }
 
+        public void DisplayTranslations(List<TranslationDto> translations)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ShowMessage(string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetSelectedLanguageCode()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetOriginalString()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetLocalizedString()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

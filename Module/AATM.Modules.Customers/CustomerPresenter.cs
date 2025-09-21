@@ -56,6 +56,7 @@
 using System;
 using System.Collections.Generic;
 using AATM.Contracts;
+using AATM.Contracts.Interfaces.Services;
 using AATM.Core.Localization;
 
 namespace AATM.Modules.Customers
@@ -151,13 +152,13 @@ namespace AATM.Modules.Customers
             var result = _service.SaveCustomer(customer);
             if (result.IsValid)
             {
-                _messagingService.ShowSuccess(_localizationService.GetString("CustomerSaved"));
+                _messagingService.ShowSuccess(_localizationService.GetString("Customer","Customer Saved"));
                 _view.ClearCustomerDetails();
                 OnLoadView(null, EventArgs.Empty);
             }
             else
             {
-                _messagingService.ShowError(_localizationService.GetString(result.ErrorMessage));
+                _messagingService.ShowError(_localizationService.GetString("Customer",result.ErrorMessage));
             }
         }
 
@@ -169,13 +170,13 @@ namespace AATM.Modules.Customers
             var result = _service.DeleteCustomer(customerID);
             if (result.IsValid)
             {
-                _messagingService.ShowSuccess(_localizationService.GetString("CustomerDeleted"));
+                _messagingService.ShowSuccess(_localizationService.GetString("Customer", "Customer Deleted"));
                 _view.ClearCustomerDetails();
                 OnLoadView(null, EventArgs.Empty);
             }
             else
             {
-                _messagingService.ShowError(_localizationService.GetString(result.ErrorMessage));
+                _messagingService.ShowError(_localizationService.GetString("Customer", result.ErrorMessage));
             }
         }
 

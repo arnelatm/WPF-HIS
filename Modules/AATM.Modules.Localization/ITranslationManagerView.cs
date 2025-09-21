@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AATM.Contracts.Dtos;
+using System;
 using System.Collections.Generic;
 
 namespace AATM.Modules.Localization

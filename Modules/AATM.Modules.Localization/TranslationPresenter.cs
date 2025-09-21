@@ -1,4 +1,8 @@
 ﻿using AATM.Contracts;
+using AATM.Contracts.Dtos;
+using AATM.Contracts.Interfaces.Repositories;
+using AATM.Contracts.Interfaces.Services;
+using System;
 using System.Collections.Generic;
 
 namespace AATM.Modules.Localization
@@ -23,10 +27,15 @@ namespace AATM.Modules.Localization
             _view.SaveTranslation += OnSaveTranslation;
         }
 
+        private void OnSaveTranslation(string arg1, string arg2, string arg3, string arg4, string arg5)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
-    /// Initializes the view by loading all available languages.
-    /// This should be called when the form is first displayed.
-    /// </summary>
+        /// Initializes the view by loading all available languages.
+        /// This should be called when the form is first displayed.
+        /// </summary>
         public void Initialize()
         {
             // Get the list of languages and populate the view's language dropdown
@@ -43,7 +52,7 @@ namespace AATM.Modules.Localization
             var viewTranslations = new List<(string original, string localized)>();
             foreach (var translation in translations)
                 viewTranslations.Add((translation.OriginalString, translation.LocalizedString));
-            _view.DisplayStrings(viewTranslations);
+            _view.DisplayStrings("Translation",viewTranslations);
         }
 
         private void OnSaveTranslation(string originalString, string localizedString)

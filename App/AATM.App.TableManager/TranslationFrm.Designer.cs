@@ -1,6 +1,6 @@
 ﻿namespace AATM.App.TableManager
 {
-    partial class TranslationFrm
+    public partial class TranslationFrm
     {
         /// <summary>
         /// Required designer variable.
@@ -47,10 +47,12 @@
             this._txtUIIdentifier = new System.Windows.Forms.TextBox();
             this._lblModule = new System.Windows.Forms.Label();
             this._txtModuleName = new System.Windows.Forms.TextBox();
-            this._statusLabel = new System.Windows.Forms.Label();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this._toolStrip.SuspendLayout();
             this._tableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._dataGridView)).BeginInit();
+            this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // _toolStrip
@@ -228,22 +230,29 @@
             this._txtModuleName.Size = new System.Drawing.Size(322, 20);
             this._txtModuleName.TabIndex = 9;
             // 
-            // _statusLabel
+            // statusStrip
             // 
-            this._statusLabel.AutoSize = true;
-            this._statusLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this._statusLabel.Location = new System.Drawing.Point(0, 389);
-            this._statusLabel.Name = "_statusLabel";
-            this._statusLabel.Size = new System.Drawing.Size(35, 13);
-            this._statusLabel.TabIndex = 5;
-            this._statusLabel.Text = "label1";
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusLabel});
+            this.statusStrip.Location = new System.Drawing.Point(0, 380);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(800, 22);
+            this.statusStrip.TabIndex = 6;
+            this.statusStrip.Text = "statusStrip";
+            this.statusStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.statusStrip_ItemClicked);
+            // 
+            // statusLabel
+            // 
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Size = new System.Drawing.Size(70, 17);
+            this.statusLabel.Text = "Status Label";
             // 
             // TranslationFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 402);
-            this.Controls.Add(this._statusLabel);
+            this.Controls.Add(this.statusStrip);
             this.Controls.Add(this._tableLayoutPanel);
             this.Controls.Add(this._toolStrip);
             this.Name = "TranslationFrm";
@@ -253,6 +262,8 @@
             this._tableLayoutPanel.ResumeLayout(false);
             this._tableLayoutPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this._dataGridView)).EndInit();
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -279,6 +290,7 @@
         private System.Windows.Forms.Label _lblModule;
         private System.Windows.Forms.TextBox _txtModuleName;
         private System.Windows.Forms.DataGridView _dataGridView;
-        private System.Windows.Forms.Label _statusLabel;
+        public System.Windows.Forms.StatusStrip statusStrip;
+        private System.Windows.Forms.ToolStripStatusLabel statusLabel;
     }
 }
