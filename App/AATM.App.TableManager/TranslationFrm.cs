@@ -13,6 +13,9 @@ namespace AATM.App.TableManager
         {
             InitializeComponent();
 
+            WireNavigationButtons( _btnFirst, _btnPrevious, _btnNext, _btnLast);
+            WireCrudButtons(null, tsbSave, tsbDelete);
+
             // Load data when the form is first shown (skips design-time)
             if (!IsInDesignMode())
             {

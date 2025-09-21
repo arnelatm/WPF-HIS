@@ -66,7 +66,7 @@
             this.tsbDelete});
             this._toolStrip.Location = new System.Drawing.Point(0, 0);
             this._toolStrip.Name = "_toolStrip";
-            this._toolStrip.Size = new System.Drawing.Size(800, 25);
+            this._toolStrip.Size = new System.Drawing.Size(800, 27);
             this._toolStrip.TabIndex = 2;
             // 
             // _btnFirst
@@ -74,28 +74,24 @@
             this._btnFirst.Name = "_btnFirst";
             this._btnFirst.Size = new System.Drawing.Size(23, 22);
             this._btnFirst.Text = "|<";
-            this._btnFirst.Click += new System.EventHandler(this._btnFirst_Click);
             // 
             // _btnPrevious
             // 
             this._btnPrevious.Name = "_btnPrevious";
             this._btnPrevious.Size = new System.Drawing.Size(23, 22);
             this._btnPrevious.Text = "<";
-            this._btnPrevious.Click += new System.EventHandler(this._btnPrevious_Click);
             // 
             // _btnNext
             // 
             this._btnNext.Name = "_btnNext";
             this._btnNext.Size = new System.Drawing.Size(23, 22);
             this._btnNext.Text = ">";
-            this._btnNext.Click += new System.EventHandler(this._btnNext_Click);
             // 
             // _btnLast
             // 
             this._btnLast.Name = "_btnLast";
             this._btnLast.Size = new System.Drawing.Size(23, 22);
             this._btnLast.Text = ">|";
-            this._btnLast.Click += new System.EventHandler(this._btnLast_Click);
             // 
             // tsbSave
             // 
@@ -103,7 +99,6 @@
             this.tsbSave.Name = "tsbSave";
             this.tsbSave.Size = new System.Drawing.Size(35, 22);
             this.tsbSave.Text = "Save";
-            this.tsbSave.Click += new System.EventHandler(this.tsbSave_Click);
             // 
             // tsbDelete
             // 
@@ -115,7 +110,6 @@
             this.tsbDelete.Size = new System.Drawing.Size(44, 22);
             this.tsbDelete.Text = "Delete";
             this.tsbDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.tsbDelete.Click += new System.EventHandler(this.tsbDelete_Click);
             // 
             // _tableLayoutPanel
             // 
@@ -239,7 +233,6 @@
             this.statusStrip.Size = new System.Drawing.Size(800, 22);
             this.statusStrip.TabIndex = 6;
             this.statusStrip.Text = "statusStrip";
-            this.statusStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.statusStrip_ItemClicked);
             // 
             // statusLabel
             // 

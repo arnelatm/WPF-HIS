@@ -355,7 +355,7 @@ namespace AATM.UI.Winforms.BaseControls
         }
 
         // OPTIONAL: helpers to auto-wire buttons in derived forms
-        protected void WireNavigationButtons(Button btnFirst, Button btnPrevious, Button btnNext, Button btnLast)
+        protected void WireNavigationButtons(ToolStripButton btnFirst, ToolStripButton btnPrevious, ToolStripButton btnNext, ToolStripButton btnLast)
         {
             if (btnFirst != null) btnFirst.Click += (s, e) => GoFirst();
             if (btnPrevious != null) btnPrevious.Click += (s, e) => GoPrevious();
