@@ -347,28 +347,19 @@ namespace AATM.App.TableManager
         {
             try
             {
-                int lastIndex = -1;
-                for (int i = _dataGridView.Rows.Count - 1; i >= 0; i--)
-                {
-                    if (!_dataGridView.Rows[i].IsNewRow)
-                    {
-                        lastIndex = i;
-                        break;
-                    }
-                }
-
-                if (lastIndex == -1)
+                var hasRows = _dataGridView.Rows.Cast<DataGridViewRow>().Any(r => !r.IsNewRow);
+                if (!hasRows)
                 {
                     statusLabel.Text = "No records to navigate.";
                     return;
                 }
 
-                base.NavigateToRow(lastIndex);
-                statusLabel.Text = "Navigated to last record.";
+                NavigateToRow(0);
+                statusLabel.Text = "Navigated to first record.";
             }
             catch (Exception ex)
             {
-                statusLabel.Text = $"Error navigating to last record: {ex.Message}";
+                statusLabel.Text = $"Error navigating to first record: {ex.Message}";
             }
         }
 
