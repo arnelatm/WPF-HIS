@@ -1,0 +1,662 @@
+My name is GitHub Copilot.
+
+```markdown
+# WinForms DataGridView CRUD – Full Reference
+
+Reusable patterns, best practices, and code snippets to build user-friendly, reusable DataGridView-based CRUD forms using BaseGridCrudForm<T> and a concrete TranslationFrm.
+
+How to print this guide
+- Visual Studio: open this file, then use __File > Print__ and select “Microsoft Print to PDF”.
+- Browser (Edge/Chrome): open this .md and press Ctrl+P, choose “Save as PDF”.
+
+Contents
+- 1) Overview and goals
+- 2) BaseGridCrudForm essentials and extensions
+- 3) TranslationFrm implementation
+- 4) ConfigureGrid: best practices and pitfalls
+- 5) Data binding and error handling
+- 6) Performance with large data
+- 7) Server-side paging: best practices, challenges, error handling
+- 8) Server-side sorting: best practices, pitfalls, implementation
+- 9) Server-side filtering: strategies and debounce
+- 10) User feedback: loading indicators, status messages, errors, retry
+- 11) Confirmation dialogs (delete/save)
+- 12) Full drop-in code (BaseGridCrudForm and TranslationFrm)
+- 13) Quick checklists
+
+--------------------------------------------------------------------------------
+1) Overview and goals
+
+- Provide a reusable WinForms base (BaseGridCrudForm<T>) that standardizes:
+  - Navigation (First/Prev/Next/Last)
+  - CRUD actions (Save/Delete)
+  - Data binding with a DataGridView
+  - Status messages and loading indicators
+  - Error handling and optional retry
+  - Designer safety via a design-time service
+
+- Keep derived forms lean: specify the grid, status label, how to map fields, and optional grid configuration.
+
+--------------------------------------------------------------------------------
+2) BaseGridCrudForm essentials and extensions
+
+Key responsibilities
+- Async load/save/delete with cancellation and re-entrancy guards.
+- Status routing to either a Label or ToolStripStatusLabel.
+- Navigation helpers: GoFirst, GoPrevious, GoNext, GoLast.
+- Wiring helpers for navigation and CRUD buttons (Button and ToolStripButton overloads).
+- Confirmation abstraction for deletes.
+
+Recommended extensions (implemented below)
+- ToolStrip navigation wiring overload.
+- SetBusy helper: wait cursor, disable controls, optional StatusStrip progress bar.
+- Friendly error mapping with an optional retry link on the StatusStrip label.
+- Wire DataGridView.DataError once; don’t throw.
+- Keep form fields in sync with grid selection (SelectionChanged).
+- GetSelectedEntity() to read the selected bound model.
+- Safer confirmation (owner-centered, default “No”).
+- Auto-load once on form Shown (skips design-time).
+
+--------------------------------------------------------------------------------
+3) TranslationFrm implementation
+
+What to override
+- Grid => return the DataGridView control.
+- StatusStripLabel => return the ToolStripStatusLabel for unified status.
+- (Optional) StatusProgress => return a ToolStripProgressBar added at runtime.
+- ConfigureGrid(grid) => define explicit columns and grid behavior once.
+- PopulateFormFieldsFromGrid(rowIndex) => copy from row to fields.
+- BuildModelFromForm(current) => copy from fields to dto (preserve ID for updates).
+- GetEntityId(entity) => return the primary key value.
+- ClearFormFieldsCore() => clear the form inputs.
+- (Optional) GetDeleteConfirmationText(entity) => enrich delete prompt with context.
+
+Wiring
+- WireNavigationButtons(_btnFirst, _btnPrevious, _btnNext, _btnLast).
+- WireCrudButtons(null, tsbSave, tsbDelete).
+- Auto-load on first show is handled by the base (AutoLoadOnShown = true by default).
+
+--------------------------------------------------------------------------------
+4) ConfigureGrid: best practices
+
+- Own the columns:
+  - grid.AutoGenerateColumns = false and define columns explicitly.
+  - Use nameof(Dto.Property) for Name and DataPropertyName to avoid typos.
+- Read-only DataGridView for list editing:
+  - ReadOnly = true; EditMode = EditProgrammatically
+  - SelectionMode = FullRowSelect; MultiSelect = false
+  - AllowUserToAddRows/DeleteRows = false; RowHeadersVisible = false
+- Formatting:
+  - DefaultCellStyle.NullValue = string.Empty
+  - Set ValueType for non-string columns; Format for dates/numbers if applicable
+- Stability:
+  - Wire DataError once, set e.ThrowException = false
+- Performance:
+  - Avoid AutoSizeRowsMode = AllCells for large lists
+  - Optional: enable DoubleBuffered via reflection to reduce flicker
+- Pitfalls to avoid:
+  - Duplicating columns (guard with if Columns.Count > 0 return)
+  - Mismatch Name vs DataPropertyName
+  - Sort glyphs without implementing real sorting
+  - Leaving the grid editable while also editing via form fields
+
+--------------------------------------------------------------------------------
+5) Data binding and error handling
+
+- Configure before binding.
+- Rebind via DataSource reset: set DataSource = null; then to your list/BindingSource.
+- Keep last good data visible on errors; only rebind after success.
+- Handle DataGridView.DataError once; never show MessageBox from it.
+- Provide concise status messages; stash technical details in ToolStripStatusLabel.ToolTipText.
+
+--------------------------------------------------------------------------------
+6) Performance with large data
+
+- Data access:
+  - Server-side paging, sorting, and filtering. Avoid loading the entire dataset.
+  - Project only necessary fields; avoid blobs.
+- Grid config:
+  - ReadOnly, FullRowSelect, no new row, no row headers
+  - Avoid expensive per-cell formatting
+- UI:
+  - SuspendLayout/ResumeLayout around bind; enable DoubleBuffered via reflection
+- Async:
+  - Cancellation-friendly; handle OperationCanceledException as normal
+
+VirtualMode (very large datasets)
+- Use VirtualMode with RowCount and CellValueNeeded; maintain a page cache and prefetch adjacent pages.
+
+--------------------------------------------------------------------------------
+7) Server-side paging
+
+Best practices
+- Service: GetPageAsync(pageIndex, pageSize, sortBy, sortDesc, filter, ct) => Items + TotalCount.
+- Stable ordering: always include a secondary key (e.g., ORDER BY Name, ID).
+- Reset to page 0 on filter/sort changes.
+- Show page info in status (“Showing 201–250 of 3,142 (Page 5/63)”).
+- Disable paging UI while loading; re-enable in finally.
+
+Challenges
+- Preserving selection: capture selected ID before reload; reselect afterward.
+- Race conditions: cancel in-flight requests and/or ignore stale responses.
+
+Error handling
+- Non-blocking messages; provide a retry link for idempotent operations.
+- Keep last good data bound after failures.
+
+--------------------------------------------------------------------------------
+8) Server-side sorting
+
+Best practices
+- Programmatic sorting (DataGridViewColumn.SortMode = Programmatic).
+- Map sortBy using column.DataPropertyName (not HeaderText).
+- Track _sortBy and _sortDesc; reset page to 0 on sort change.
+- Update glyphs manually to reflect current sort.
+
+Pitfalls
+- Not validating sortBy on the server (use a whitelist).
+- Unstable sorts (missing secondary key).
+- Overlapping requests (disable headers while loading or ignore stale responses).
+
+--------------------------------------------------------------------------------
+9) Server-side filtering
+
+Strategies
+- Filter DTO on the service; normalize inputs server-side; index filter columns.
+- Debounce user input (300–500 ms) to reduce requests.
+- Reset to page 0 when filters change.
+
+Async/race-safety
+- Cancel in-flight requests and treat OperationCanceledException as normal.
+- Use a requestId to ignore stale responses if needed.
+
+Binding
+- Rebind per response; configure columns once.
+
+--------------------------------------------------------------------------------
+10) User feedback: loading indicators, status, errors, retry
+
+Loading indicators
+- StatusStrip message (“Loading…”, then “Loaded N records.”)
+- ToolStripProgressBar (Marquee) while busy
+- Wait cursor; disable grid/toolbar to prevent re-entrancy
+- Wrap in a SetBusy helper; clear in finally
+
+Status messages
+- Consistent, concise messages: Loading…, Loaded…, Save canceled., Delete failed….
+- On error, short user-friendly text; put technical details in ToolTip.
+
+Error feedback
+- Avoid MessageBox for list/paging/filter/sort errors.
+- Show a retry link in the status label for idempotent operations.
+
+DataError safety
+- Handle DataGridView.DataError once; e.ThrowException = false.
+
+--------------------------------------------------------------------------------
+11) Confirmation dialogs (delete/save)
+
+- Confirm destructive actions (delete) by default; safe defaults: owner-centered, default button = No, warning icon.
+- Provide context in delete prompt (ID, Module, UI Identifier, Language, snippet).
+- For saves, avoid confirmation unless overwriting an existing record (ask in OnBeforeSaveAsync).
+
+--------------------------------------------------------------------------------
+12) Full drop-in code
+
+Note: These snippets are ready to integrate. Replace or extend your current implementations accordingly. Indentation denotes code.
+
+BaseGridCrudForm<T> (highlights)
+
+    // Fields, ctor(s), and service (including DesignTimeCrudService) remain as in your current base.
+    // Key additions are shown below.
+
+    // OPTIONAL: derived can supply a ToolStripStatusLabel and/or progress bar
+    protected virtual ToolStripStatusLabel StatusStripLabel { get { return null; } }
+    protected virtual ToolStripProgressBar StatusProgress { get { return null; } }
+
+    // OPTIONAL: derived can add more controls to disable while busy
+    protected virtual IEnumerable<Control> BusyControls { get { yield return Grid; } }
+
+    // Unified status writer
+    protected virtual void SetStatusText(string text)
+    {
+        if (StatusStripLabel != null)
+        {
+            StatusStripLabel.Text = text ?? string.Empty;
+            if (string.IsNullOrEmpty(StatusStripLabel.ToolTipText))
+                StatusStripLabel.ToolTipText = StatusStripLabel.Text;
+        }
+        else if (StatusLabel != null)
+        {
+            StatusLabel.Text = text ?? string.Empty;
+        }
+    }
+
+    // Busy UI helper
+    protected void SetBusy(bool busy, string message = null)
+    {
+        if (!string.IsNullOrEmpty(message)) SetStatusText(message);
+        try { UseWaitCursor = busy; } catch { /* ignore */ }
+
+        foreach (var c in BusyControls ?? Enumerable.Empty<Control>())
+            if (c != null) c.Enabled = !busy;
+
+        if (StatusProgress != null)
+        {
+            StatusProgress.Visible = busy;
+            StatusProgress.Style = busy ? ProgressBarStyle.Marquee : ProgressBarStyle.Blocks;
+        }
+    }
+
+    // Delete confirmation (safer defaults)
+    protected virtual DialogResult ConfirmDelete(string message)
+    {
+        return MessageBox.Show(this,
+            message ?? "Delete selected record?",
+            "Confirm delete",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Warning,
+            MessageBoxDefaultButton.Button2);
+    }
+
+    // Context-aware delete text (override to enrich)
+    protected virtual string GetDeleteConfirmationText(T entity)
+    {
+        int id = 0; try { id = entity != null ? GetEntityId(entity) : 0; } catch { }
+        return id > 0 ? "Delete selected record (ID=" + id + ")?" : "Delete selected record?";
+    }
+
+    // Friendly exception mapping
+    protected virtual string GetFriendlyErrorMessage(Exception ex)
+    {
+        if (ex == null) return "Unknown error.";
+        if (ex is OperationCanceledException || ex is TaskCanceledException) return "Operation canceled.";
+        if (ex is TimeoutException) return "The server took too long to respond.";
+        if (ex is System.Net.Http.HttpRequestException) return "Network error. Please check your connection.";
+        var msg = ex.Message;
+        return string.IsNullOrWhiteSpace(msg) ? ex.GetType().Name : msg;
+    }
+
+    // Status retry link
+    private EventHandler _statusRetryClickHandler;
+    protected void ShowError(string context, Exception ex, Func<Task> retryAsync)
+    {
+        var friendly = GetFriendlyErrorMessage(ex);
+        SetStatusText(context + " failed: " + friendly);
+
+        if (StatusStripLabel == null) return;
+        StatusStripLabel.ToolTipText = ex != null ? ex.Message : friendly;
+
+        if (_statusRetryClickHandler != null)
+        {
+            StatusStripLabel.Click -= _statusRetryClickHandler;
+            _statusRetryClickHandler = null;
+        }
+
+        if (retryAsync != null)
+        {
+            StatusStripLabel.IsLink = true;
+            _statusRetryClickHandler = async (s, e) =>
+            {
+                StatusStripLabel.IsLink = false;
+                try { await retryAsync(); }
+                catch (OperationCanceledException) { SetStatusText(context + " canceled."); }
+                catch (Exception ex2)
+                {
+                    SetStatusText(context + " failed: " + GetFriendlyErrorMessage(ex2));
+                    StatusStripLabel.IsLink = true;
+                    StatusStripLabel.ToolTipText = ex2.Message;
+                }
+            };
+            StatusStripLabel.Click += _statusRetryClickHandler;
+        }
+        else
+        {
+            StatusStripLabel.IsLink = false;
+        }
+    }
+
+    protected void ClearRetryLink()
+    {
+        if (StatusStripLabel == null) return;
+        if (_statusRetryClickHandler != null)
+        {
+            StatusStripLabel.Click -= _statusRetryClickHandler;
+            _statusRetryClickHandler = null;
+        }
+        StatusStripLabel.IsLink = false;
+    }
+
+    // One-time wiring for DataError
+    private bool _gridDataErrorWired;
+    protected void WireGridDataErrorOnce()
+    {
+        if (_gridDataErrorWired || Grid == null) return;
+        Grid.DataError += (s, e) =>
+        {
+            e.ThrowException = false;
+            SetStatusText("Display error in grid data.");
+            if (StatusStripLabel != null && e.Exception != null)
+                StatusStripLabel.ToolTipText = e.Exception.Message;
+        };
+        _gridDataErrorWired = true;
+    }
+
+    // Keep fields in sync with selection (wire once)
+    private bool _gridEventsWired;
+    private void WireGridSelectionEventsOnce()
+    {
+        if (_gridEventsWired || Grid == null) return;
+        var grid = Grid;
+        grid.SelectionChanged += (s, e) =>
+        {
+            try
+            {
+                int idx = -1;
+                if (grid.SelectedRows != null && grid.SelectedRows.Count > 0 && !grid.SelectedRows[0].IsNewRow)
+                    idx = grid.SelectedRows[0].Index;
+                else if (grid.CurrentCell != null && !grid.Rows[grid.CurrentCell.RowIndex].IsNewRow)
+                    idx = grid.CurrentCell.RowIndex;
+
+                if (idx >= 0) PopulateFormFieldsFromGrid(idx);
+            }
+            catch { /* ignore */ }
+        };
+        _gridEventsWired = true;
+    }
+
+    // Helper for selected entity
+    protected T GetSelectedEntity()
+    {
+        var grid = Grid;
+        if (grid == null) return null;
+
+        if (grid.SelectedRows?.Count > 0)
+        {
+            var row = grid.SelectedRows[0];
+            if (row != null && !row.IsNewRow) return row.DataBoundItem as T;
+        }
+        if (grid.CurrentCell != null)
+        {
+            var row = grid.Rows[grid.CurrentCell.RowIndex];
+            if (row != null && !row.IsNewRow) return row.DataBoundItem as T;
+        }
+        return null;
+    }
+
+    // Auto-load on Shown
+    private bool _hasLoadedOnce;
+    protected virtual bool AutoLoadOnShown { get { return true; } }
+    protected override void OnShown(EventArgs e)
+    {
+        base.OnShown(e);
+        if (LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;
+        if (AutoLoadOnShown && !_hasLoadedOnce)
+        {
+            var _ = LoadDataAsync();
+        }
+    }
+
+    // LoadDataAsync (with busy, configure before binding, selection wiring, and error retry)
+    protected async Task LoadDataAsync()
+    {
+        if (_isLoading) return;
+        _isLoading = true;
+        SetBusy(true, "Loading...");
+        try
+        {
+            await OnBeforeLoadAsync();
+
+            var result = await _service.GetAllAsync(_cts.Token);
+            _items = result != null ? result.ToList() : new List<T>();
+
+            var grid = Grid;
+            grid.SuspendLayout();
+            try
+            {
+                grid.DataSource = null;
+                ConfigureGrid(grid);
+                if (grid.Columns.Count == 0) grid.AutoGenerateColumns = true;
+                grid.DataSource = _items;
+
+                WireGridDataErrorOnce();
+                WireGridSelectionEventsOnce();
+            }
+            finally { grid.ResumeLayout(); }
+
+            SetStatusText("Loaded " + _items.Count + " records.");
+            ClearRetryLink();
+            GoFirst();
+
+            await OnAfterLoadAsync();
+        }
+        catch (OperationCanceledException)
+        {
+            SetStatusText("Load canceled.");
+        }
+        catch (Exception ex)
+        {
+            ShowError("Load", ex, async () => await LoadDataAsync());
+        }
+        finally
+        {
+            _isLoading = false;
+            _hasLoadedOnce = true;
+            SetBusy(false);
+        }
+    }
+
+    // Save and Delete wrap SetBusy and provide consistent status/cancel behavior
+    protected async Task SaveOrUpdateAsync()
+    {
+        if (_isMutating) return;
+        _isMutating = true;
+        SetBusy(true, "Saving...");
+        try
+        {
+            await OnBeforeSaveAsync();
+            var dto = BuildModelFromForm(GetSelectedEntity());
+            var saved = await _service.UpsertAsync(dto, _cts.Token);
+            SetStatusText("Saved (ID=" + GetEntityId(saved) + ")");
+            await OnAfterSaveAsync(saved);
+            await LoadDataAsync();
+            ClearFormFields();
+        }
+        catch (OperationCanceledException) { SetStatusText("Save canceled."); }
+        catch (Exception ex) { SetStatusText("Save failed: " + ex.Message); }
+        finally { _isMutating = false; SetBusy(false); }
+    }
+
+    protected async Task DeleteSelectedAsync()
+    {
+        if (_isMutating) return;
+        _isMutating = true;
+        SetBusy(true, "Deleting...");
+        try
+        {
+            var entity = GetSelectedEntity();
+            if (entity == null)
+            {
+                MessageBox.Show(this, "Select a row to delete.", "Delete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            var id = GetEntityId(entity);
+            if (ConfirmDelete(GetDeleteConfirmationText(entity)) != DialogResult.Yes) return;
+
+            await OnBeforeDeleteAsync(id, entity);
+            var ok = await _service.DeleteAsync(id, _cts.Token);
+            SetStatusText(ok ? "Deleted (ID=" + id + ")" : "Delete failed (ID=" + id + ")");
+            await OnAfterDeleteAsync(id, ok);
+            await LoadDataAsync();
+        }
+        catch (OperationCanceledException) { SetStatusText("Delete canceled."); }
+        catch (Exception ex) { SetStatusText("Delete failed: " + ex.Message); }
+        finally { _isMutating = false; SetBusy(false); }
+    }
+
+    // Navigation helpers and wiring overloads remain as in your existing base with no changes in logic.
+    // Add ToolStrip overload for convenience:
+    protected void WireNavigationButtons(ToolStripButton btnFirst, ToolStripButton btnPrevious, ToolStripButton btnNext, ToolStripButton btnLast)
+    {
+        if (btnFirst != null) btnFirst.Click += (s, e) => GoFirst();
+        if (btnPrevious != null) btnPrevious.Click += (s, e) => GoPrevious();
+        if (btnNext != null) btnNext.Click += (s, e) => GoNext();
+        if (btnLast != null) btnLast.Click += (s, e) => GoLast();
+    }
+
+TranslationFrm (highlights)
+
+    public partial class TranslationFrm : TranslationGridCrudForm
+    {
+        private ToolStripProgressBar _statusProgress;
+
+        public TranslationFrm() : base(() => new TranslationCrudService())
+        {
+            InitializeComponent();
+
+            // Wire toolbar buttons to base helpers
+            WireNavigationButtons(_btnFirst, _btnPrevious, _btnNext, _btnLast);
+            WireCrudButtons(null, tsbSave, tsbDelete);
+
+            // Add a marquee progress bar to the StatusStrip
+            _statusProgress = new ToolStripProgressBar
+            {
+                Name = "statusProgress",
+                Style = ProgressBarStyle.Marquee,
+                Visible = false
+            };
+            statusStrip.Items.Add(_statusProgress);
+        }
+
+        protected override DataGridView Grid => _dataGridView;
+        protected override ToolStripStatusLabel StatusStripLabel => statusLabel;
+        protected override ToolStripProgressBar StatusProgress => _statusProgress;
+
+        protected override void ConfigureGrid(DataGridView grid)
+        {
+            if (grid.Columns.Count > 0) return;
+
+            grid.AutoGenerateColumns = false;
+            grid.ReadOnly = true;
+            grid.MultiSelect = false;
+            grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            grid.EditMode = DataGridViewEditMode.EditProgrammatically;
+            grid.AllowUserToAddRows = false;
+            grid.AllowUserToDeleteRows = false;
+            grid.AllowUserToResizeRows = false;
+            grid.RowHeadersVisible = false;
+
+            // Optional flicker reduction
+            var pi = grid.GetType().GetProperty("DoubleBuffered",
+                System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+            pi?.SetValue(grid, true, null);
+
+            grid.Columns.Add(new DataGridViewTextBoxColumn { Name = nameof(TranslationDto.ID), DataPropertyName = nameof(TranslationDto.ID), HeaderText = "ID", Width = 60, Visible = false, ValueType = typeof(int) });
+            grid.Columns.Add(new DataGridViewTextBoxColumn { Name = nameof(TranslationDto.ModuleName), DataPropertyName = nameof(TranslationDto.ModuleName), HeaderText = "Module", Width = 140 });
+            grid.Columns.Add(new DataGridViewTextBoxColumn { Name = nameof(TranslationDto.UIIdentifier), DataPropertyName = nameof(TranslationDto.UIIdentifier), HeaderText = "UI Identifier", Width = 160 });
+            grid.Columns.Add(new DataGridViewTextBoxColumn { Name = nameof(TranslationDto.OriginalString), DataPropertyName = nameof(TranslationDto.OriginalString), HeaderText = "Original", AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill });
+            grid.Columns.Add(new DataGridViewTextBoxColumn { Name = nameof(TranslationDto.LanguageCode), DataPropertyName = nameof(TranslationDto.LanguageCode), HeaderText = "Lang", Width = 70 });
+            grid.Columns.Add(new DataGridViewTextBoxColumn { Name = nameof(TranslationDto.LocalizedString), DataPropertyName = nameof(TranslationDto.LocalizedString), HeaderText = "Localized", AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill });
+
+            foreach (DataGridViewColumn col in grid.Columns)
+                col.DefaultCellStyle.NullValue = string.Empty;
+        }
+
+        protected override void PopulateFormFieldsFromGrid(int rowIndex)
+        {
+            var row = _dataGridView.Rows[rowIndex];
+            if (row == null || row.IsNewRow) return;
+
+            _txtModuleName.Text = Convert.ToString(row.Cells[nameof(TranslationDto.ModuleName)].Value) ?? string.Empty;
+            _txtUIIdentifier.Text = Convert.ToString(row.Cells[nameof(TranslationDto.UIIdentifier)].Value) ?? string.Empty;
+            _txtOriginalString.Text = Convert.ToString(row.Cells[nameof(TranslationDto.OriginalString)].Value) ?? string.Empty;
+            _txtLanguageCode.Text = Convert.ToString(row.Cells[nameof(TranslationDto.LanguageCode)].Value) ?? string.Empty;
+            _txtLocalizedString.Text = Convert.ToString(row.Cells[nameof(TranslationDto.LocalizedString)].Value) ?? string.Empty;
+        }
+
+        protected override TranslationDto BuildModelFromForm(TranslationDto current)
+        {
+            var dto = current ?? new TranslationDto();
+
+            if (_dataGridView.SelectedRows.Count > 0 && !_dataGridView.SelectedRows[0].IsNewRow)
+            {
+                var cell = _dataGridView.SelectedRows[0].Cells[nameof(TranslationDto.ID)].Value;
+                int id;
+                if (cell != null && int.TryParse(Convert.ToString(cell), out id))
+                    dto.ID = id;
+            }
+
+            dto.ModuleName = _txtModuleName.Text;
+            dto.UIIdentifier = _txtUIIdentifier.Text;
+            dto.OriginalString = _txtOriginalString.Text;
+            dto.LanguageCode = _txtLanguageCode.Text;
+            dto.LocalizedString = _txtLocalizedString.Text;
+            return dto;
+        }
+
+        protected override int GetEntityId(TranslationDto entity) => entity?.ID ?? 0;
+
+        protected override void ClearFormFieldsCore()
+        {
+            _txtModuleName.Text = string.Empty;
+            _txtUIIdentifier.Text = string.Empty;
+            _txtOriginalString.Text = string.Empty;
+            _txtLanguageCode.Text = string.Empty;
+            _txtLocalizedString.Text = string.Empty;
+        }
+
+        protected override string GetDeleteConfirmationText(TranslationDto entity)
+        {
+            if (entity == null) return base.GetDeleteConfirmationText(null);
+
+            string original = entity.OriginalString ?? string.Empty;
+            if (original.Length > 80) original = original.Substring(0, 77) + "...";
+
+            return "Are you sure you want to delete this translation?" + Environment.NewLine + Environment.NewLine
+                + "ID: " + entity.ID + Environment.NewLine
+                + "Module: " + (entity.ModuleName ?? string.Empty) + Environment.NewLine
+                + "UI Identifier: " + (entity.UIIdentifier ?? string.Empty) + Environment.NewLine
+                + "Language: " + (entity.LanguageCode ?? string.Empty) + Environment.NewLine
+                + "Original: " + original;
+        }
+    }
+
+--------------------------------------------------------------------------------
+13) Quick checklists
+
+ConfigureGrid checklist
+- if (grid.Columns.Count > 0) return
+- AutoGenerateColumns = false
+- ReadOnly = true; EditMode = EditProgrammatically
+- SelectionMode = FullRowSelect; MultiSelect = false
+- AllowUserToAddRows/DeleteRows = false; RowHeadersVisible = false
+- Name and DataPropertyName use nameof(Dto.Property)
+- DefaultCellStyle.NullValue = string.Empty
+- Wire DataError once; e.ThrowException = false
+
+Loading indicators
+- SetBusy(true, "Loading...") before load; SetBusy(false) in finally
+- StatusStrip message + ToolStripProgressBar (Marquee)
+- Wait cursor; disable grid/toolbar
+
+Error handling
+- Non-blocking StatusStrip messages; tooltip for technical details
+- Retry link for idempotent failures (load/paging/filter/sort)
+- Keep last good DataSource on failures
+
+Paging/sorting/filtering
+- Server-side APIs; reset to page 0 on sort/filter changes
+- Debounce filter input; cancel in-flight requests
+- Programmatic sorting; stable secondary key on server
+
+Confirmation dialogs
+- Confirm delete with context; owner-centered, default “No”, warning icon
+- Avoid save confirmation unless overwriting; ask in OnBeforeSaveAsync if needed
+
+Printing
+- Visual Studio: __File > Print__ -> “Microsoft Print to PDF”
+- Browser: Ctrl+P -> “Save as PDF”
+
+End of document.
+```

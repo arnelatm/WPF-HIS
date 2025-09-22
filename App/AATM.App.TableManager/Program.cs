@@ -16,7 +16,7 @@ namespace AATM.App.TableManager
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new TranslationFrm());
+            Application.Run(new TranslationForm());
         }
     }
 }
