@@ -62,9 +62,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{
 		SampleHL7Message.txt = SampleHL7Message.txt
 		Steps to install a trusted SSL Certificate on my Sql server.txt = Steps to install a trusted SSL Certificate on my Sql server.txt
 		TextFile2.txt = TextFile2.txt
+		TextFile3.txt = TextFile3.txt
 		ToDo.txt = ToDo.txt
 		Translations.txt = Translations.txt
 		Update Approved Fields.sql = Update Approved Fields.sql
+		Winforms Grid CRUD Full Reference and Best Practice.html = Winforms Grid CRUD Full Reference and Best Practice.html
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Views", "Views", "{5DC97E00-8C55-479E-94C2-19679791F55C}"

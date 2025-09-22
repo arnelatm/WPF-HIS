@@ -8,27 +8,34 @@ namespace AATM.App.TableManager
 {
     public partial class TranslationFrm : TranslationGridCrudForm
     {
+        private ToolStripProgressBar _statusProgress;
+
         // Use factory so the base gets a real ICrudService at runtime and no-op at design-time
         public TranslationFrm() : base(() => new TranslationCrudService())
         {
             InitializeComponent();
 
-            WireNavigationButtons( _btnFirst, _btnPrevious, _btnNext, _btnLast);
+            // Wire toolbar buttons to base helpers
+            WireNavigationButtons(_btnFirst, _btnPrevious, _btnNext, _btnLast);
             WireCrudButtons(null, tsbSave, tsbDelete);
 
-            // Load data when the form is first shown (skips design-time)
-            if (!IsInDesignMode())
+            // Add a marquee progress bar to the StatusStrip (toggled by base SetBusy)
+            _statusProgress = new ToolStripProgressBar
             {
-                this.Shown += async (s, e) => await LoadDataAsync();
-            }
+                Name = "statusProgress",
+                Style = ProgressBarStyle.Marquee,
+                Visible = false
+            };
+            statusStrip.Items.Add(_statusProgress);
         }
 
         private static bool IsInDesignMode()
             => LicenseManager.UsageMode == LicenseUsageMode.Designtime;
 
         // Hook base to actual controls
-        protected override DataGridView Grid => _dataGridView;
-        protected override ToolStripStatusLabel StatusStripLabel => statusLabel;
+        protected override DataGridView Grid { get { return _dataGridView; } }
+        protected override ToolStripStatusLabel StatusStripLabel { get { return statusLabel; } }
+        protected override ToolStripProgressBar StatusProgress { get { return _statusProgress; } }
 
         // Optional: define grid columns/formatting once
         protected override void ConfigureGrid(DataGridView grid)
@@ -39,14 +46,28 @@ namespace AATM.App.TableManager
             grid.ReadOnly = true;
             grid.MultiSelect = false;
             grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            grid.EditMode = DataGridViewEditMode.EditProgrammatically;
             grid.AllowUserToAddRows = false;
+            grid.AllowUserToDeleteRows = false;
+            grid.AllowUserToResizeRows = false;
+            grid.RowHeadersVisible = false;
 
-            grid.Columns.Add(new DataGridViewTextBoxColumn { Name = "ID", DataPropertyName = "ID", HeaderText = "ID", Width = 60, Visible = false });
-            grid.Columns.Add(new DataGridViewTextBoxColumn { Name = "ModuleName", DataPropertyName = "ModuleName", HeaderText = "Module", Width = 140 });
-            grid.Columns.Add(new DataGridViewTextBoxColumn { Name = "UIIdentifier", DataPropertyName = "UIIdentifier", HeaderText = "UI Identifier", Width = 160 });
-            grid.Columns.Add(new DataGridViewTextBoxColumn { Name = "OriginalString", DataPropertyName = "OriginalString", HeaderText = "Original", AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill });
-            grid.Columns.Add(new DataGridViewTextBoxColumn { Name = "LanguageCode", DataPropertyName = "LanguageCode", HeaderText = "Lang", Width = 70 });
-            grid.Columns.Add(new DataGridViewTextBoxColumn { Name = "LocalizedString", DataPropertyName = "LocalizedString", HeaderText = "Localized", AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill });
+            // Optional: reduce flicker
+            var pi = grid.GetType().GetProperty("DoubleBuffered",
+                System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+            if (pi != null) pi.SetValue(grid, true, null);
+
+            grid.Columns.Add(new DataGridViewTextBoxColumn { Name = nameof(TranslationDto.ID), DataPropertyName = nameof(TranslationDto.ID), HeaderText = "ID", Width = 60, Visible = false, ValueType = typeof(int) });
+            grid.Columns.Add(new DataGridViewTextBoxColumn { Name = nameof(TranslationDto.ModuleName), DataPropertyName = nameof(TranslationDto.ModuleName), HeaderText = "Module", Width = 140 });
+            grid.Columns.Add(new DataGridViewTextBoxColumn { Name = nameof(TranslationDto.UIIdentifier), DataPropertyName = nameof(TranslationDto.UIIdentifier), HeaderText = "UI Identifier", Width = 160 });
+            grid.Columns.Add(new DataGridViewTextBoxColumn { Name = nameof(TranslationDto.OriginalString), DataPropertyName = nameof(TranslationDto.OriginalString), HeaderText = "Original", AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill });
+            grid.Columns.Add(new DataGridViewTextBoxColumn { Name = nameof(TranslationDto.LanguageCode), DataPropertyName = nameof(TranslationDto.LanguageCode), HeaderText = "Lang", Width = 70 });
+            grid.Columns.Add(new DataGridViewTextBoxColumn { Name = nameof(TranslationDto.LocalizedString), DataPropertyName = nameof(TranslationDto.LocalizedString), HeaderText = "Localized", AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill });
+
+            foreach (DataGridViewColumn col in grid.Columns)
+            {
+                col.DefaultCellStyle.NullValue = string.Empty;
+            }
         }
 
         // Map selected grid row -> form fields
@@ -55,11 +76,11 @@ namespace AATM.App.TableManager
             var row = _dataGridView.Rows[rowIndex];
             if (row == null || row.IsNewRow) return;
 
-            _txtModuleName.Text = row.Cells["ModuleName"].Value?.ToString() ?? string.Empty;
-            _txtUIIdentifier.Text = row.Cells["UIIdentifier"].Value?.ToString() ?? string.Empty;
-            _txtOriginalString.Text = row.Cells["OriginalString"].Value?.ToString() ?? string.Empty;
-            _txtLanguageCode.Text = row.Cells["LanguageCode"].Value?.ToString() ?? string.Empty;
-            _txtLocalizedString.Text = row.Cells["LocalizedString"].Value?.ToString() ?? string.Empty;
+            _txtModuleName.Text = Convert.ToString(row.Cells[nameof(TranslationDto.ModuleName)].Value) ?? string.Empty;
+            _txtUIIdentifier.Text = Convert.ToString(row.Cells[nameof(TranslationDto.UIIdentifier)].Value) ?? string.Empty;
+            _txtOriginalString.Text = Convert.ToString(row.Cells[nameof(TranslationDto.OriginalString)].Value) ?? string.Empty;
+            _txtLanguageCode.Text = Convert.ToString(row.Cells[nameof(TranslationDto.LanguageCode)].Value) ?? string.Empty;
+            _txtLocalizedString.Text = Convert.ToString(row.Cells[nameof(TranslationDto.LocalizedString)].Value) ?? string.Empty;
         }
 
         // Map form fields -> dto (include ID if a row is selected)
@@ -69,9 +90,9 @@ namespace AATM.App.TableManager
 
             if (_dataGridView.SelectedRows.Count > 0 && !_dataGridView.SelectedRows[0].IsNewRow)
             {
-                var cellValue = _dataGridView.SelectedRows[0].Cells["ID"].Value;
+                var cellValue = _dataGridView.SelectedRows[0].Cells[nameof(TranslationDto.ID)].Value;
                 int id;
-                if (cellValue != null && int.TryParse(cellValue.ToString(), out id))
+                if (cellValue != null && int.TryParse(Convert.ToString(cellValue), out id))
                     dto.ID = id;
             }
 
@@ -83,7 +104,7 @@ namespace AATM.App.TableManager
             return dto;
         }
 
-        protected override int GetEntityId(TranslationDto entity) => entity?.ID ?? 0;
+        protected override int GetEntityId(TranslationDto entity) { return entity != null ? entity.ID : 0; }
 
         protected override void ClearFormFieldsCore()
         {
@@ -94,17 +115,20 @@ namespace AATM.App.TableManager
             _txtLocalizedString.Text = string.Empty;
         }
 
-        // Designer already wires click events; delegate them to base helpers
+        // OPTIONAL: richer delete confirmation (contextual details)
+        protected override string GetDeleteConfirmationText(TranslationDto entity)
+        {
+            if (entity == null) return base.GetDeleteConfirmationText(null);
 
-        private void _btnFirst_Click(object sender, EventArgs e) => GoFirst();
-        private void _btnPrevious_Click(object sender, EventArgs e) => GoPrevious();
-        private void _btnNext_Click(object sender, EventArgs e) => GoNext();
-        private void _btnLast_Click(object sender, EventArgs e) => GoLast();
+            string original = entity.OriginalString ?? string.Empty;
+            if (original.Length > 80) original = original.Substring(0, 77) + "...";
 
-        private async void tsbSave_Click(object sender, EventArgs e) => await SaveOrUpdateAsync();
-        private async void tsbDelete_Click(object sender, EventArgs e) => await DeleteSelectedAsync();
-
-        // Present in designer; keep as no-op unless needed
-        private void statusStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e) { }
+            return "Are you sure you want to delete this translation?" + Environment.NewLine + Environment.NewLine
+                 + "ID: " + entity.ID + Environment.NewLine
+                 + "Module: " + (entity.ModuleName ?? string.Empty) + Environment.NewLine
+                 + "UI Identifier: " + (entity.UIIdentifier ?? string.Empty) + Environment.NewLine
+                 + "Language: " + (entity.LanguageCode ?? string.Empty) + Environment.NewLine
+                 + "Original: " + original;
+        }
     }
 }
