@@ -1,26 +1,38 @@
-﻿using AATM.Contracts.Dtos;
+﻿#if DEBUG
+#define DESIGN_TIME_SAFE
+#endif
+using AATM.Contracts.Dtos;
+using AATM.Contracts.Interfaces.Services;
 using AATM.Modules.Localization;
 using AATM.UI.Winforms.BaseControls;
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace AATM.App.TableManager
 {
-    public partial class TranslationForm : TranslationGridCrudForm
+#if DESIGN_TIME_SAFE
+    public partial class TranslationForm : BaseGridCrudForm<TranslationDto>
+
+#else
+    public partial class TranslationForm : StrictGridCrudForm<TranslationDto> 
+#endif
     {
         private ToolStripProgressBar _statusProgress;
 
-        // Use factory so the base gets a real ICrudService at runtime and no-op at design-time
-        public TranslationForm() : base(() => new TranslationCrudService())
+        public TranslationForm()
+            : base(() => GetCrudServiceSafe())
         {
             InitializeComponent();
 
-            // Wire toolbar buttons to base helpers
+            if (IsDesignTime())
+                return;
+
             WireNavigationButtons(_btnFirst, _btnPrevious, _btnNext, _btnLast);
             WireCrudButtons(null, tsbSave, tsbDelete);
 
-            // Add a marquee progress bar to the StatusStrip (toggled by base SetBusy)
             _statusProgress = new ToolStripProgressBar
             {
                 Name = "statusProgress",
@@ -30,15 +42,50 @@ namespace AATM.App.TableManager
             statusStrip.Items.Add(_statusProgress);
         }
 
-        private static bool IsInDesignMode()
-            => LicenseManager.UsageMode == LicenseUsageMode.Designtime;
+        // More reliable design-time detection than LicenseManager alone
+        private static bool IsDesignTime()
+        {
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
+                return true;
 
-        // Hook base to actual controls
-        protected override DataGridView Grid { get { return _dataGridView; } }
-        protected override ToolStripStatusLabel StatusStripLabel { get { return statusLabel; } }
-        protected override ToolStripProgressBar StatusProgress { get { return _statusProgress; } }
+            try
+            {
+                var proc = Process.GetCurrentProcess();
+                if (proc != null && proc.ProcessName.Equals("devenv", StringComparison.OrdinalIgnoreCase))
+                    return true;
 
-        // Optional: define grid columns/formatting once
+                // Heuristic: VS designer assemblies loaded
+                if (AppDomain.CurrentDomain.GetAssemblies()
+                      .Any(a => a.FullName.StartsWith("Microsoft.VisualStudio", StringComparison.OrdinalIgnoreCase)))
+                    return true;
+            }
+            catch { /* swallow – never block design mode */ }
+
+            return false;
+        }
+
+        private static ICrudService<TranslationDto> GetCrudServiceSafe()
+        {
+            if (IsDesignTime())
+                return new BaseGridCrudForm<TranslationDto>.DesignTimeCrudService();
+
+            try
+            {
+                // Only touch the real service in true runtime
+                return new TranslationCrudService();
+            }
+            catch (Exception)
+            {
+                // Fallback – never let designer or startup crash
+                return new BaseGridCrudForm<TranslationDto>.DesignTimeCrudService();
+            }
+        }
+
+        protected override DataGridView Grid => _dataGridView;
+        protected override ToolStripStatusLabel StatusStripLabel => statusLabel;
+        protected override ToolStripProgressBar StatusProgress => _statusProgress;
+        protected override bool AutoLoadOnShown => true;
+
         protected override void ConfigureGrid(DataGridView grid)
         {
             if (grid.Columns.Count > 0) return;
@@ -53,10 +100,9 @@ namespace AATM.App.TableManager
             grid.AllowUserToResizeRows = false;
             grid.RowHeadersVisible = false;
 
-            // Optional: reduce flicker
             var pi = grid.GetType().GetProperty("DoubleBuffered",
                 System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
-            if (pi != null) pi.SetValue(grid, true, null);
+            pi?.SetValue(grid, true, null);
 
             grid.Columns.Add(new DataGridViewTextBoxColumn { Name = nameof(TranslationDto.ID), DataPropertyName = nameof(TranslationDto.ID), HeaderText = "ID", Width = 60, Visible = false, ValueType = typeof(int) });
             grid.Columns.Add(new DataGridViewTextBoxColumn { Name = nameof(TranslationDto.ModuleName), DataPropertyName = nameof(TranslationDto.ModuleName), HeaderText = "Module", Width = 140 });
@@ -66,12 +112,9 @@ namespace AATM.App.TableManager
             grid.Columns.Add(new DataGridViewTextBoxColumn { Name = nameof(TranslationDto.LocalizedString), DataPropertyName = nameof(TranslationDto.LocalizedString), HeaderText = "Localized", AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill });
 
             foreach (DataGridViewColumn col in grid.Columns)
-            {
                 col.DefaultCellStyle.NullValue = string.Empty;
-            }
         }
 
-        // Map selected grid row -> form fields
         protected override void PopulateFormFieldsFromGrid(int rowIndex)
         {
             var row = _dataGridView.Rows[rowIndex];
@@ -84,7 +127,6 @@ namespace AATM.App.TableManager
             _txtLocalizedString.Text = Convert.ToString(row.Cells[nameof(TranslationDto.LocalizedString)].Value) ?? string.Empty;
         }
 
-        // Map form fields -> dto (include ID if a row is selected)
         protected override TranslationDto BuildModelFromForm(TranslationDto current)
         {
             var dto = current ?? new TranslationDto();
@@ -92,8 +134,7 @@ namespace AATM.App.TableManager
             if (_dataGridView.SelectedRows.Count > 0 && !_dataGridView.SelectedRows[0].IsNewRow)
             {
                 var cellValue = _dataGridView.SelectedRows[0].Cells[nameof(TranslationDto.ID)].Value;
-                int id;
-                if (cellValue != null && int.TryParse(Convert.ToString(cellValue), out id))
+                if (cellValue != null && int.TryParse(Convert.ToString(cellValue), out int id))
                     dto.ID = id;
             }
 
@@ -105,7 +146,7 @@ namespace AATM.App.TableManager
             return dto;
         }
 
-        protected override int GetEntityId(TranslationDto entity) { return entity != null ? entity.ID : 0; }
+        protected override int GetEntityId(TranslationDto entity) => entity?.ID ?? 0;
 
         protected override void ClearFormFieldsCore()
         {
@@ -116,7 +157,6 @@ namespace AATM.App.TableManager
             _txtLocalizedString.Text = string.Empty;
         }
 
-        // OPTIONAL: richer delete confirmation (contextual details)
         protected override string GetDeleteConfirmationText(TranslationDto entity)
         {
             if (entity == null) return base.GetDeleteConfirmationText(null);

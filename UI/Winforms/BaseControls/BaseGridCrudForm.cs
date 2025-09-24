@@ -10,32 +10,27 @@ using System.Windows.Forms;
 
 namespace AATM.UI.Winforms.BaseControls
 {
-    // Hide this abstract generic base from the Windows Forms Designer
+    // NOTE: Was abstract; made concrete to satisfy WinForms designer.
+    // Designer was emitting: "must create an instance of ... abstract" due to generic abstract base.
     [DesignTimeVisible(false)]
-    public abstract class BaseGridCrudForm<T> : Form where T : class
+    public class BaseGridCrudForm<T> : Form where T : class
     {
         protected readonly ICrudService<T> _service;
         protected List<T> _items = new List<T>();
 
-        // Re-entrancy guards
         private bool _isLoading;
         private bool _isMutating;
 
-        // One-time wiring flags
         private bool _gridEventsWired;
         private bool _gridDataErrorWired;
         private bool _hasLoadedOnce;
 
-        // Cancellation support
         private readonly CancellationTokenSource _cts = new CancellationTokenSource();
-
-        // Retry link handler
         private EventHandler _statusRetryClickHandler;
 
-        // ADDED: parameterless ctor for the Designer (routes to factory ctor)
+        // Parameterless ctor always provides design-time safe service
         protected BaseGridCrudForm() : this(() => new DesignTimeCrudService()) { }
 
-        // ADDED: factory-based ctor to avoid creating real services at design-time
         protected BaseGridCrudForm(Func<ICrudService<T>> serviceFactory)
         {
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
@@ -48,13 +43,12 @@ namespace AATM.UI.Winforms.BaseControls
             }
         }
 
-        // EXISTING: runtime ctor remains for callers that pass a real service
         protected BaseGridCrudForm(ICrudService<T> service)
         {
             _service = service ?? throw new ArgumentNullException(nameof(service));
         }
 
-        // ADDED: no-op service used at design-time
+        // Design-time no-op service
         public sealed class DesignTimeCrudService : ICrudService<T>
         {
             public Task<IReadOnlyList<T>> GetAllAsync(CancellationToken ct = default(CancellationToken))
@@ -67,24 +61,21 @@ namespace AATM.UI.Winforms.BaseControls
                 => Task.FromResult(false);
         }
 
-        protected abstract DataGridView Grid { get; }
+        // CHANGED: Formerly abstract. Provide safe virtual defaults so designer can instantiate the base.
+        protected virtual DataGridView Grid => null;
 
-        // OPTIONAL: derived can supply a Label instead of StatusStrip
         protected virtual Label StatusLabel { get { return null; } }
-        // OPTIONAL: derived can supply a ToolStripStatusLabel
         protected virtual ToolStripStatusLabel StatusStripLabel { get { return null; } }
-        // OPTIONAL: derived can supply a StatusStrip progress bar
         protected virtual ToolStripProgressBar StatusProgress { get { return null; } }
-        // OPTIONAL: derived can add more controls to disable when busy
+
         protected virtual IEnumerable<Control> BusyControls
         {
             get
             {
-                yield return Grid;
+                if (Grid != null) yield return Grid;
             }
         }
 
-        // Unified status writer
         protected virtual void SetStatusText(string text)
         {
             if (StatusStripLabel != null)
@@ -99,7 +90,6 @@ namespace AATM.UI.Winforms.BaseControls
             }
         }
 
-        // Busy UI helper
         protected void SetBusy(bool busy, string message = null)
         {
             if (!string.IsNullOrEmpty(message))
@@ -123,15 +113,14 @@ namespace AATM.UI.Winforms.BaseControls
             }
         }
 
-        protected abstract void PopulateFormFieldsFromGrid(int rowIndex);
-        protected abstract T BuildModelFromForm(T current);
-        protected abstract int GetEntityId(T entity);
-        protected abstract void ClearFormFieldsCore();
+        // CHANGED: Was abstract; now virtual no-op / placeholder
+        protected virtual void PopulateFormFieldsFromGrid(int rowIndex) { }
+        protected virtual T BuildModelFromForm(T current) { return current ?? Activator.CreateInstance<T>(); }
+        protected virtual int GetEntityId(T entity) { return 0; }
+        protected virtual void ClearFormFieldsCore() { }
 
-        // OPTIONAL: give derived forms a place to configure columns/formatting
         protected virtual void ConfigureGrid(DataGridView grid) { }
 
-        // Hooks (override as needed)
         protected virtual Task OnBeforeLoadAsync() { return Task.CompletedTask; }
         protected virtual Task OnAfterLoadAsync() { return Task.CompletedTask; }
         protected virtual Task OnBeforeSaveAsync() { return Task.CompletedTask; }
@@ -139,10 +128,8 @@ namespace AATM.UI.Winforms.BaseControls
         protected virtual Task OnBeforeDeleteAsync(int id, T entity) { return Task.CompletedTask; }
         protected virtual Task OnAfterDeleteAsync(int id, bool ok) { return Task.CompletedTask; }
 
-        // Auto-load on first show (runtime only)
         protected virtual bool AutoLoadOnShown { get { return true; } }
 
-        // Confirmation abstraction
         protected virtual DialogResult ConfirmDelete(string message)
         {
             return MessageBox.Show(this,
@@ -153,7 +140,6 @@ namespace AATM.UI.Winforms.BaseControls
                 MessageBoxDefaultButton.Button2);
         }
 
-        // Context-aware delete message (override to enrich details)
         protected virtual string GetDeleteConfirmationText(T entity)
         {
             int id = 0;
@@ -161,7 +147,6 @@ namespace AATM.UI.Winforms.BaseControls
             return id > 0 ? $"Delete selected record (ID={id})?" : "Delete selected record?";
         }
 
-        // Friendly exception -> short user text
         protected virtual string GetFriendlyErrorMessage(Exception ex)
         {
             if (ex == null) return "Unknown error.";
@@ -172,7 +157,6 @@ namespace AATM.UI.Winforms.BaseControls
             return string.IsNullOrWhiteSpace(msg) ? ex.GetType().Name : msg;
         }
 
-        // Show concise status + optional retry link
         protected void ShowError(string context, Exception ex, Func<Task> retryAsync)
         {
             var friendly = GetFriendlyErrorMessage(ex);
@@ -224,7 +208,6 @@ namespace AATM.UI.Winforms.BaseControls
             StatusStripLabel.IsLink = false;
         }
 
-        // Helper: get the current selection as T
         protected T GetSelectedEntity()
         {
             var grid = Grid;
@@ -250,6 +233,7 @@ namespace AATM.UI.Winforms.BaseControls
         protected async Task LoadDataAsync()
         {
             if (_isLoading) return;
+            if (Grid == null) return; // CHANGED: guard for design-time / base default
             _isLoading = true;
             SetBusy(true, "Loading...");
             try
@@ -266,7 +250,6 @@ namespace AATM.UI.Winforms.BaseControls
                 {
                     grid.DataSource = null;
 
-                    // Let derived configure columns first; if none, allow auto-generate
                     ConfigureGrid(grid);
                     if (grid.Columns.Count == 0)
                         grid.AutoGenerateColumns = true;
@@ -293,7 +276,6 @@ namespace AATM.UI.Winforms.BaseControls
             }
             catch (Exception ex)
             {
-                // Keep last good data; offer retry
                 ShowError("Load", ex, async () => await LoadDataAsync());
             }
             finally
@@ -350,6 +332,7 @@ namespace AATM.UI.Winforms.BaseControls
 
         protected void NavigateToRow(int rowIndex)
         {
+            if (Grid == null) return;
             if (rowIndex < 0 || rowIndex >= Grid.Rows.Count) return;
 
             var row = Grid.Rows[rowIndex];
@@ -366,7 +349,6 @@ namespace AATM.UI.Winforms.BaseControls
             PopulateFormFieldsFromGrid(rowIndex);
         }
 
-        // Convenience: navigate by predicate on T
         protected bool NavigateToEntity(Predicate<T> match)
         {
             if (match == null || _items == null || _items.Count == 0) return false;
@@ -384,6 +366,7 @@ namespace AATM.UI.Winforms.BaseControls
         protected async Task SaveOrUpdateAsync()
         {
             if (_isMutating) return;
+            if (Grid == null) return;
             _isMutating = true;
             SetBusy(true, "Saving...");
             try
@@ -418,6 +401,7 @@ namespace AATM.UI.Winforms.BaseControls
         protected async Task DeleteSelectedAsync()
         {
             if (_isMutating) return;
+            if (Grid == null) return;
             _isMutating = true;
             SetBusy(true, "Deleting...");
             try
@@ -461,12 +445,13 @@ namespace AATM.UI.Winforms.BaseControls
         protected void ClearFormFields()
         {
             ClearFormFieldsCore();
-            Grid.ClearSelection();
+            if (Grid != null)
+                Grid.ClearSelection();
         }
 
-        // Navigation helpers
         protected void GoFirst()
         {
+            if (Grid == null) return;
             for (int i = 0; i < Grid.Rows.Count; i++)
             {
                 if (!Grid.Rows[i].IsNewRow)
@@ -481,6 +466,7 @@ namespace AATM.UI.Winforms.BaseControls
 
         protected void GoLast()
         {
+            if (Grid == null) return;
             for (int i = Grid.Rows.Count - 1; i >= 0; i--)
             {
                 if (!Grid.Rows[i].IsNewRow)
@@ -495,6 +481,7 @@ namespace AATM.UI.Winforms.BaseControls
 
         protected void GoPrevious()
         {
+            if (Grid == null) return;
             var rows = Grid.Rows;
             int firstIndex = -1;
             for (int i = 0; i < rows.Count; i++)
@@ -522,6 +509,7 @@ namespace AATM.UI.Winforms.BaseControls
 
         protected void GoNext()
         {
+            if (Grid == null) return;
             var rows = Grid.Rows;
 
             int lastIndex = -1;
@@ -557,7 +545,6 @@ namespace AATM.UI.Winforms.BaseControls
             NavigateToRow(lastIndex);
         }
 
-        // OPTIONAL: helpers to auto-wire buttons in derived forms
         protected void WireNavigationButtons(Button btnFirst, Button btnPrevious, Button btnNext, Button btnLast)
         {
             if (btnFirst != null) btnFirst.Click += (s, e) => GoFirst();
@@ -566,7 +553,6 @@ namespace AATM.UI.Winforms.BaseControls
             if (btnLast != null) btnLast.Click += (s, e) => GoLast();
         }
 
-        // ADDED: ToolStrip overload
         protected void WireNavigationButtons(ToolStripButton btnFirst, ToolStripButton btnPrevious, ToolStripButton btnNext, ToolStripButton btnLast)
         {
             if (btnFirst != null) btnFirst.Click += (s, e) => GoFirst();
@@ -607,7 +593,6 @@ namespace AATM.UI.Winforms.BaseControls
             this.ClientSize = new System.Drawing.Size(680, 307);
             this.Name = "BaseGridCrudForm";
             this.ResumeLayout(false);
-
         }
     }
 }
