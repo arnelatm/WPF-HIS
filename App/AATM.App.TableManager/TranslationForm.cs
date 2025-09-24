@@ -13,12 +13,13 @@ using System.Windows.Forms;
 
 namespace AATM.App.TableManager
 {
+
 #if DESIGN_TIME_SAFE
     public partial class TranslationForm : BaseGridCrudForm<TranslationDto>
-
 #else
     public partial class TranslationForm : StrictGridCrudForm<TranslationDto> 
 #endif
+
     {
         private ToolStripProgressBar _statusProgress;
 

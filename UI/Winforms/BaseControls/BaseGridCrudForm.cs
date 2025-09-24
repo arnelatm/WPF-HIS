@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace AATM.UI.Winforms.BaseControls
 {
-    // NOTE: Was abstract; made concrete to satisfy WinForms designer.
-    // Designer was emitting: "must create an instance of ... abstract" due to generic abstract base.
+
     [DesignTimeVisible(false)]
+    [Obsolete("Do not inherit directly. Use StrictGridCrudForm<T>.", false)]
     public class BaseGridCrudForm<T> : Form where T : class
     {
         protected readonly ICrudService<T> _service;
