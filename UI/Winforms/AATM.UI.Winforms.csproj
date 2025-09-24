@@ -105,6 +105,9 @@
   <ItemGroup>
     <!-- Remove the resx for the abstract base -->
     <!-- Deleted: BaseControls\BaseGridCrudForm.resx -->
+    <EmbeddedResource Include="BaseControls\BaseGridCrudForm.resx">
+      <DependentUpon>BaseGridCrudForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

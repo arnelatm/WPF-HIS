@@ -597,5 +597,17 @@ namespace AATM.UI.Winforms.BaseControls
             try { _cts.Cancel(); } catch { }
             base.OnFormClosing(e);
         }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // BaseGridCrudForm
+            // 
+            this.ClientSize = new System.Drawing.Size(680, 307);
+            this.Name = "BaseGridCrudForm";
+            this.ResumeLayout(false);
+
+        }
     }
 }
