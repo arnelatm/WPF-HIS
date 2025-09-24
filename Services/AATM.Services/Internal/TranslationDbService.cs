@@ -149,4 +149,61 @@ OUTPUT inserted.ID;";
         }
         return rowsAffected > 0;
     }
+
+    // Pseudocode:
+    // - Wrap logic in try/catch to align with other methods and surface meaningful errors.
+    // - Open SqlConnection with configured connection string.
+    // - Prepare SELECT including CreationDate to fully populate DTO.
+    // - Use SqlCommand in using block; add @ID parameter.
+    // - Execute reader asynchronously; if a row is found, map columns via GetOrdinal.
+    // - Return populated TranslationDto; otherwise return null.
+    // - On TypeInitializationException or SqlException, show MessageBox and return null.
+
+    public async Task<TranslationDto> GetTranslationByIdAsync(int id)
+    {
+        try
+        {
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                await connection.OpenAsync();
+
+                const string query = "SELECT ID, OriginalString, ModuleName, UIIdentifier, LanguageCode, LocalizedString, CreationDate FROM Translations WHERE ID = @ID";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@ID", id);
+
+                    using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                    {
+                        if (await reader.ReadAsync())
+                        {
+                            return new TranslationDto
+                            {
+                                ID = reader.GetInt32(reader.GetOrdinal("ID")),
+                                OriginalString = reader.GetString(reader.GetOrdinal("OriginalString")),
+                                ModuleName = reader.GetString(reader.GetOrdinal("ModuleName")),
+                                UIIdentifier = reader.GetString(reader.GetOrdinal("UIIdentifier")),
+                                LanguageCode = reader.GetString(reader.GetOrdinal("LanguageCode")),
+                                LocalizedString = reader.GetString(reader.GetOrdinal("LocalizedString")),
+                                CreationDate = reader.GetDateTime(reader.GetOrdinal("CreationDate"))
+                            };
+                        }
+                    }
+                }
+            }
+        }
+        catch (TypeInitializationException ex)
+        {
+            MessageBox.Show("SqlClient initialization failed:\n" + (ex.GetBaseException()?.Message ?? ex.Message) + "\n\n" + ex, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return null;
+        }
+        catch (SqlException ex)
+        {
+            MessageBox.Show($"Database error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return null;
+        }
+
+        return null;
+    }
 }
+
+

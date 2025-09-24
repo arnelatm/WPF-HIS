@@ -124,16 +124,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Contracts\AATM.Contracts\AATM.Contracts.csproj">
-      <Project>{464CDA63-DB4A-02B4-1AFA-7083EF503845}</Project>
-      <Name>AATM.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AATM.Core.Logging\AATM.Core.Logging.vbproj">
-      <Project>{A04B8212-312F-05DE-3E76-E137D5560B02}</Project>
-      <Name>AATM.Core.Logging</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AATM.Core.vbproj">
-      <Project>{A529FE66-56F4-0D65-3915-68A73F89482A}</Project>
+    <ProjectReference Include="..\AATM.Core.csproj">
+      <Project>{a529fe66-56f4-0d65-3915-68a73f89482a}</Project>
       <Name>AATM.Core</Name>
     </ProjectReference>
   </ItemGroup>

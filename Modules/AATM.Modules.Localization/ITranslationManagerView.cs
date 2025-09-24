@@ -54,7 +54,7 @@ namespace AATM.Modules.Localization
     /// Gets the translated string entered by the user.
     /// </summary>
         string GetLocalizedString();
-
+        void DisplayStrings(string v, List<(string original, string localized)> viewTranslations);
     }
 }
 

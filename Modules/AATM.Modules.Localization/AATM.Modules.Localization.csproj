@@ -71,12 +71,6 @@
     <Compile Include="My Project\MyNamespace.Static.1.Designer.cs" />
     <Compile Include="My Project\MyNamespace.Static.2.Designer.cs" />
     <Compile Include="My Project\MyNamespace.Static.3.Designer.cs" />
-    <Compile Include="FrmTranslationManager.Designer.cs">
-      <DependentUpon>FrmTranslationManager.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FrmTranslationManager.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="ITranslationManagerView.cs" />
     <Compile Include="TranslationCrudService.cs" />
     <Compile Include="TranslationPresenter.cs" />

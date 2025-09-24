@@ -10,6 +10,8 @@ using System.Windows.Forms;
 
 namespace AATM.UI.Winforms.BaseControls
 {
+    // Hide this abstract generic base from the Windows Forms Designer
+    [DesignTimeVisible(false)]
     public abstract class BaseGridCrudForm<T> : Form where T : class
     {
         protected readonly ICrudService<T> _service;
@@ -62,7 +64,7 @@ namespace AATM.UI.Winforms.BaseControls
             public Task<T> UpsertAsync(T dto, CancellationToken ct = default(CancellationToken))
                 => Task.FromResult(dto);
             public Task<bool> DeleteAsync(int id, CancellationToken ct = default(CancellationToken))
-                => Task.FromResult(false);      
+                => Task.FromResult(false);
         }
 
         protected abstract DataGridView Grid { get; }
@@ -156,7 +158,7 @@ namespace AATM.UI.Winforms.BaseControls
         {
             int id = 0;
             try { id = entity != null ? GetEntityId(entity) : 0; } catch { }
-            return id > 0 ? "Delete selected record (ID=" + id + ")?" : "Delete selected record?";
+            return id > 0 ? $"Delete selected record (ID={id})?" : "Delete selected record?";
         }
 
         // Friendly exception -> short user text
@@ -174,7 +176,7 @@ namespace AATM.UI.Winforms.BaseControls
         protected void ShowError(string context, Exception ex, Func<Task> retryAsync)
         {
             var friendly = GetFriendlyErrorMessage(ex);
-            SetStatusText(context + " failed: " + friendly);
+            SetStatusText($"{context} failed: {friendly}");
 
             if (StatusStripLabel == null) return;
             StatusStripLabel.ToolTipText = ex != null ? ex.Message : friendly;
@@ -194,11 +196,11 @@ namespace AATM.UI.Winforms.BaseControls
                     try { await retryAsync(); }
                     catch (OperationCanceledException)
                     {
-                        SetStatusText(context + " canceled.");
+                        SetStatusText($"{context} canceled.");
                     }
                     catch (Exception ex2)
                     {
-                        SetStatusText(context + " failed: " + GetFriendlyErrorMessage(ex2));
+                        SetStatusText($"{context} failed: {GetFriendlyErrorMessage(ex2)}");
                         StatusStripLabel.IsLink = true;
                         StatusStripLabel.ToolTipText = ex2.Message;
                     }
@@ -279,7 +281,7 @@ namespace AATM.UI.Winforms.BaseControls
                     grid.ResumeLayout();
                 }
 
-                SetStatusText("Loaded " + _items.Count + " records.");
+                SetStatusText($"Loaded {_items.Count} records.");
                 ClearRetryLink();
                 GoFirst();
 
@@ -391,7 +393,7 @@ namespace AATM.UI.Winforms.BaseControls
                 var current = GetSelectedEntity();
                 var dto = BuildModelFromForm(current);
                 var saved = await _service.UpsertAsync(dto, _cts.Token);
-                SetStatusText("Saved (ID=" + GetEntityId(saved) + ")");
+                SetStatusText($"Saved (ID={GetEntityId(saved)})");
 
                 await OnAfterSaveAsync(saved);
 
@@ -435,7 +437,7 @@ namespace AATM.UI.Winforms.BaseControls
                 await OnBeforeDeleteAsync(id, entity);
 
                 var ok = await _service.DeleteAsync(id, _cts.Token);
-                SetStatusText(ok ? "Deleted (ID=" + id + ")" : "Delete failed (ID=" + id + ")");
+                SetStatusText(ok ? $"Deleted (ID={id})" : $"Delete failed (ID={id})");
 
                 await OnAfterDeleteAsync(id, ok);
 
@@ -578,24 +580,6 @@ namespace AATM.UI.Winforms.BaseControls
             if (btnSave != null) btnSave.Click += async (s, e) => await SaveOrUpdateAsync();
             if (tsbSave != null) tsbSave.Click += async (s, e) => await SaveOrUpdateAsync();
             if (tsbDelete != null) tsbDelete.Click += async (s, e) => await DeleteSelectedAsync();
-        }
-
-        private void InitializeComponent()
-        {
-            this.SuspendLayout();
-            // 
-            // BaseGridCrudForm
-            // 
-            this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Name = "BaseGridCrudForm";
-            this.Load += new System.EventHandler(this.BaseGridCrudForm_Load);
-            this.ResumeLayout(false);
-
-        }
-
-        private void BaseGridCrudForm_Load(object sender, EventArgs e)
-        {
-
         }
 
         protected override void OnShown(EventArgs e)

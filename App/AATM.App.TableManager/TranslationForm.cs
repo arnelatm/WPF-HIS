@@ -1,4 +1,5 @@
 ﻿using AATM.Contracts.Dtos;
+using AATM.Modules.Localization;
 using AATM.UI.Winforms.BaseControls;
 using System;
 using System.ComponentModel;

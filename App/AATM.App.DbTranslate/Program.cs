@@ -20,7 +20,7 @@ public class Program
             LanguageCode = "es-ES",
             LocalizedString = "Hola, mundo!"
         };
-        var newId = await dbService.UpsertTranslationAsync(newTranslation);
+        var newId = (await dbService.UpsertTranslationAsync(newTranslation)).ID;
         Console.WriteLine($"New translation upserted with ID: {newId}");
 
         // 2. Use UpsertTranslationAsync to update the existing record
@@ -34,7 +34,7 @@ public class Program
             LanguageCode = "es-ES",
             LocalizedString = "¡Hola, mundo!" // The updated value
         };
-        var updatedId = await dbService.UpsertTranslationAsync(updatedTranslation);
+        var updatedId = (await dbService.UpsertTranslationAsync(updatedTranslation)).ID;
         Console.WriteLine($"Existing translation updated with ID: {updatedId}");
 
         // 3. Get the updated translation by ID to verify

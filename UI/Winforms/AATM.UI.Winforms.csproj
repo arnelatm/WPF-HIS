@@ -75,6 +75,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <!-- Do NOT mark the abstract base as a Form -->
     <Compile Include="BaseControls\BaseGridCrudForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,12 +101,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Service\TranslationCrudService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="BaseControls\BaseGridCrudForm.resx">
-      <DependentUpon>BaseGridCrudForm.cs</DependentUpon>
-    </EmbeddedResource>
+    <!-- Remove the resx for the abstract base -->
+    <!-- Deleted: BaseControls\BaseGridCrudForm.resx -->
     <EmbeddedResource Include="Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -130,41 +129,12 @@
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Business\AATM.Business.Logic\AATM.Business.csproj">
-      <Project>{3C7BEC0F-17BB-0BA8-274F-A5196507CEBB}</Project>
-      <Name>AATM.Business</Name>
-    </ProjectReference>
+    <Folder Include="Service\" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\..\Contracts\AATM.Contracts\AATM.Contracts.csproj">
       <Project>{464CDA63-DB4A-02B4-1AFA-7083EF503845}</Project>
       <Name>AATM.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Core\AATM.Core.Localization\AATM.Core.Localization.csproj">
-      <Project>{3A2C0FF2-4410-0D3C-3F61-4EF5F503FC2F}</Project>
-      <Name>AATM.Core.Localization</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Core\AATM.Core.Logging\AATM.Core.Logging.csproj">
-      <Project>{A04B8212-312F-05DE-3E76-E137D5560B02}</Project>
-      <Name>AATM.Core.Logging</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Core\AATM.Core.Messaging.Cs\AATM.Core.Messaging.csproj">
-      <Project>{1bbc78f4-68d9-4352-b1d3-81dc7cfed56b}</Project>
-      <Name>AATM.Core.Messaging</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Core\AATM.Core.UI.Logging\AATM.Core.UI.Logging.csproj">
-      <Project>{D1BB0BF3-55FE-0C10-3A58-9F9AA014D889}</Project>
-      <Name>AATM.Core.UI.Logging</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Core\AATM.Core.csproj">
-      <Project>{A529FE66-56F4-0D65-3915-68A73F89482A}</Project>
-      <Name>AATM.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Core\Configuration\AATM.CORE.Configuration\AATM.Core.Configuration.csproj">
-      <Project>{161A1671-FF81-0C1D-3304-D104941735FD}</Project>
-      <Name>AATM.Core.Configuration</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Services\AATM.Services\AATM.Services.csproj">
-      <Project>{A61DB83B-3127-4E8A-84CC-10642B454156}</Project>
-      <Name>AATM.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

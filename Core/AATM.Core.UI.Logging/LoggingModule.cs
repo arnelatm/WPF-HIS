@@ -1,4 +1,5 @@
 ﻿
+using AATM.Core;
 namespace AATM.Core.UI.Logging
 {
     public class LoggingModule : IAppModule

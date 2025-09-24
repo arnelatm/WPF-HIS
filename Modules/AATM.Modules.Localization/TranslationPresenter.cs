@@ -63,7 +63,7 @@ namespace AATM.Modules.Localization
                                                                                                                                              // UIIdentifier is hard-coded for now
                                                                                                                                              // LanguageCode is hard-coded for now
 
-            _view.ShowSuccessMessage("Translation saved successfully!");
+            _view.ShowMessage("Translation saved successfully!");
 
             // After saving, reload the translations to refresh the grid
             LoadTranslations("en-US");

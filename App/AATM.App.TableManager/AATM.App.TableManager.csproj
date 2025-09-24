@@ -23,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -59,7 +60,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\TranslationCrudService.cs" />
     <Compile Include="TranslationForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +100,10 @@
       <Project>{84437202-3E38-4F75-B8C1-4125852FC4FF}</Project>
       <Name>Messaging</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Modules\AATM.Modules.Localization\AATM.Modules.Localization.csproj">
+      <Project>{D27C4E1D-852B-0E75-209D-0DE42B0C6F86}</Project>
+      <Name>AATM.Modules.Localization</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Services\AATM.Services\AATM.Services.csproj">
       <Project>{A61DB83B-3127-4E8A-84CC-10642B454156}</Project>
       <Name>AATM.Services</Name>
@@ -113,6 +117,9 @@
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.2" />
     <PackageReference Include="Microsoft.Data.SqlClient.SNI.runtime" Version="6.0.2" />
     <!-- Add other packages here, one per line -->
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
