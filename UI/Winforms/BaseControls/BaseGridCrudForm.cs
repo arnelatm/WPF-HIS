@@ -4,14 +4,15 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net.Http;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AATM.UI.Winforms.BaseControls
 {
-
     [DesignTimeVisible(false)]
     [Obsolete("Do not inherit directly. Use StrictGridCrudForm<T>.", false)]
     public class BaseGridCrudForm<T> : Form where T : class
@@ -21,27 +22,24 @@ namespace AATM.UI.Winforms.BaseControls
 
         private bool _isLoading;
         private bool _isMutating;
-
         private bool _gridEventsWired;
         private bool _gridDataErrorWired;
         private bool _hasLoadedOnce;
-
         private readonly CancellationTokenSource _cts = new CancellationTokenSource();
         private EventHandler _statusRetryClickHandler;
 
-        // Parameterless ctor always provides design-time safe service
+        // NEW: simple binding container
+        private readonly List<TextBinding> _textBindings = new List<TextBinding>();
+        private Func<T, int> _cachedIdGetter;   // reflection cache
+
         protected BaseGridCrudForm() : this(() => new DesignTimeCrudService()) { }
 
         protected BaseGridCrudForm(Func<ICrudService<T>> serviceFactory)
         {
-            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
-            {
+            if (IsDesignTime())
                 _service = new DesignTimeCrudService();
-            }
             else
-            {
                 _service = (serviceFactory != null ? serviceFactory() : null) ?? new DesignTimeCrudService();
-            }
         }
 
         protected BaseGridCrudForm(ICrudService<T> service)
@@ -49,22 +47,15 @@ namespace AATM.UI.Winforms.BaseControls
             _service = service ?? throw new ArgumentNullException(nameof(service));
         }
 
-        // Design-time no-op service
         public sealed class DesignTimeCrudService : ICrudService<T>
         {
-            public Task<IReadOnlyList<T>> GetAllAsync(CancellationToken ct = default(CancellationToken))
-                => Task.FromResult((IReadOnlyList<T>)new List<T>());
-            public Task<T> GetByIdAsync(int id, CancellationToken ct = default(CancellationToken))
-                => Task.FromResult(default(T));
-            public Task<T> UpsertAsync(T dto, CancellationToken ct = default(CancellationToken))
-                => Task.FromResult(dto);
-            public Task<bool> DeleteAsync(int id, CancellationToken ct = default(CancellationToken))
-                => Task.FromResult(false);
+            public Task<IReadOnlyList<T>> GetAllAsync(CancellationToken ct = default) => Task.FromResult((IReadOnlyList<T>)new List<T>());
+            public Task<T> GetByIdAsync(int id, CancellationToken ct = default) => Task.FromResult(default(T));
+            public Task<T> UpsertAsync(T dto, CancellationToken ct = default) => Task.FromResult(dto);
+            public Task<bool> DeleteAsync(int id, CancellationToken ct = default) => Task.FromResult(false);
         }
 
-        // CHANGED: Formerly abstract. Provide safe virtual defaults so designer can instantiate the base.
         protected virtual DataGridView Grid => null;
-
         protected virtual Label StatusLabel { get { return null; } }
         protected virtual ToolStripStatusLabel StatusStripLabel { get { return null; } }
         protected virtual ToolStripProgressBar StatusProgress { get { return null; } }
@@ -102,9 +93,7 @@ namespace AATM.UI.Winforms.BaseControls
             if (controls != null)
             {
                 foreach (var c in controls)
-                {
                     if (c != null) c.Enabled = !busy;
-                }
             }
 
             if (StatusProgress != null)
@@ -114,13 +103,182 @@ namespace AATM.UI.Winforms.BaseControls
             }
         }
 
-        // CHANGED: Was abstract; now virtual no-op / placeholder
-        protected virtual void PopulateFormFieldsFromGrid(int rowIndex) { }
-        protected virtual T BuildModelFromForm(T current) { return current ?? Activator.CreateInstance<T>(); }
-        protected virtual int GetEntityId(T entity) { return 0; }
-        protected virtual void ClearFormFieldsCore() { }
+        // -------------------- NEW BINDING SUPPORT --------------------
 
-        protected virtual void ConfigureGrid(DataGridView grid) { }
+        private sealed class TextBinding
+        {
+            public TextBox Box;
+            public Func<T, string> Getter;
+            public Action<T, string> Setter;
+        }
+
+        /// <summary>
+        /// Register a two-way text binding between a TextBox and a string property on T.
+        /// </summary>
+        protected void RegisterTextBinding(TextBox box, Expression<Func<T, string>> property)
+        {
+            if (box == null) throw new ArgumentNullException(nameof(box));
+            if (property == null) throw new ArgumentNullException(nameof(property));
+
+            var member = property.Body as MemberExpression;
+            if (member == null || !(member.Member is PropertyInfo pi))
+                throw new ArgumentException("Expression must be a simple property access", nameof(property));
+
+            if (!pi.CanRead || !pi.CanWrite)
+                throw new InvalidOperationException("Property must be readable and writable.");
+
+            var getter = property.Compile();
+
+            // Build setter
+            var dtoParam = Expression.Parameter(typeof(T), "dto");
+            var valParam = Expression.Parameter(typeof(string), "val");
+            var assign = Expression.Assign(Expression.Property(dtoParam, pi), valParam);
+            var setter = Expression.Lambda<Action<T, string>>(assign, dtoParam, valParam).Compile();
+
+            _textBindings.Add(new TextBinding
+            {
+                Box = box,
+                Getter = getter,
+                Setter = setter
+            });
+        }
+
+        // -------------------- DEFAULT IMPLEMENTATIONS USING BINDINGS --------------------
+
+        protected virtual void PopulateFormFieldsFromGrid(int rowIndex)
+        {
+            if (_textBindings.Count == 0) return;
+            if (Grid == null) return;
+            if (rowIndex < 0 || rowIndex >= Grid.Rows.Count) return;
+
+            var row = Grid.Rows[rowIndex];
+            if (row == null || row.IsNewRow) return;
+            var entity = row.DataBoundItem as T;
+            if (entity == null) return;
+
+            foreach (var b in _textBindings)
+                if (b.Box != null)
+                    b.Box.Text = b.Getter(entity) ?? string.Empty;
+        }
+
+        protected virtual T BuildModelFromForm(T current)
+        {
+            var dto = current ?? Activator.CreateInstance<T>();
+            foreach (var b in _textBindings)
+                if (b.Box != null)
+                    b.Setter(dto, b.Box.Text);
+            return dto;
+        }
+
+        protected virtual int GetEntityId(T entity)
+        {
+            if (entity == null) return 0;
+            if (_cachedIdGetter == null)
+            {
+                // Look for int ID or Id
+                var idProp = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                    .FirstOrDefault(p =>
+                        p.PropertyType == typeof(int) &&
+                        (string.Equals(p.Name, "ID", StringComparison.OrdinalIgnoreCase) ||
+                         string.Equals(p.Name, "Id", StringComparison.OrdinalIgnoreCase)));
+
+                if (idProp != null && idProp.CanRead)
+                {
+                    var param = Expression.Parameter(typeof(T), "e");
+                    var access = Expression.Property(param, idProp);
+                    var lambda = Expression.Lambda<Func<T, int>>(access, param);
+                    _cachedIdGetter = lambda.Compile();
+                }
+                else
+                {
+                    _cachedIdGetter = _ => 0;
+                }
+            }
+            return _cachedIdGetter(entity);
+        }
+
+        protected virtual void ClearFormFieldsCore()
+        {
+            foreach (var b in _textBindings)
+                if (b.Box != null)
+                    b.Box.Text = string.Empty;
+        }
+
+        // -------------------- COLUMN HELPERS & GRID CONFIG --------------------
+
+        /// <summary>
+        /// Override only if you want to *add* columns. Base will call this after applying default settings.
+        /// </summary>
+        protected virtual void DefineColumns(DataGridView grid) { }
+
+        /// <summary>
+        /// Extracted default grid setup (was repeated in derived forms)
+        /// </summary>
+        protected virtual void ApplyDefaultGridSettings(DataGridView grid)
+        {
+            grid.AutoGenerateColumns = false;
+            grid.ReadOnly = true;
+            grid.MultiSelect = false;
+            grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            grid.EditMode = DataGridViewEditMode.EditProgrammatically;
+            grid.AllowUserToAddRows = false;
+            grid.AllowUserToDeleteRows = false;
+            grid.AllowUserToResizeRows = false;
+            grid.RowHeadersVisible = false;
+
+            // Enable double buffering (reflection)
+            var pi = grid.GetType().GetProperty("DoubleBuffered",
+                System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+            pi?.SetValue(grid, true, null);
+        }
+
+        /// <summary>
+        /// Simplified configuration flow: Apply defaults then let derived add columns.
+        /// </summary>
+        protected virtual void ConfigureGrid(DataGridView grid)
+        {
+            if (grid.Columns.Count > 0) return;
+            ApplyDefaultGridSettings(grid);
+            DefineColumns(grid);
+
+            // If no columns were added, allow auto generation as fallback.
+            if (grid.Columns.Count == 0)
+                grid.AutoGenerateColumns = true;
+
+            foreach (DataGridViewColumn col in grid.Columns)
+                col.DefaultCellStyle.NullValue = string.Empty;
+        }
+
+        protected DataGridViewTextBoxColumn AddTextColumn(DataGridView grid, string dataProp, string header, int width = 100, bool fill = false)
+        {
+            var col = new DataGridViewTextBoxColumn
+            {
+                Name = dataProp,
+                DataPropertyName = dataProp,
+                HeaderText = header,
+                Width = width,
+                AutoSizeMode = fill ? DataGridViewAutoSizeColumnMode.Fill : DataGridViewAutoSizeColumnMode.None
+            };
+            grid.Columns.Add(col);
+            return col;
+        }
+
+        protected DataGridViewTextBoxColumn AddHiddenIdColumn(DataGridView grid, string name = "ID")
+        {
+            var col = new DataGridViewTextBoxColumn
+            {
+                Name = name,
+                DataPropertyName = name,
+                HeaderText = "ID",
+                Visible = false,
+                Width = 60,
+                ValueType = typeof(int)
+            };
+            grid.Columns.Add(col);
+            return col;
+        }
+
+        // -------------------- Lifecycle hooks (unchanged below this line except IsDesignTime / service helper moved) --------------------
 
         protected virtual Task OnBeforeLoadAsync() { return Task.CompletedTask; }
         protected virtual Task OnAfterLoadAsync() { return Task.CompletedTask; }
@@ -128,7 +286,6 @@ namespace AATM.UI.Winforms.BaseControls
         protected virtual Task OnAfterSaveAsync(T saved) { return Task.CompletedTask; }
         protected virtual Task OnBeforeDeleteAsync(int id, T entity) { return Task.CompletedTask; }
         protected virtual Task OnAfterDeleteAsync(int id, bool ok) { return Task.CompletedTask; }
-
         protected virtual bool AutoLoadOnShown { get { return true; } }
 
         protected virtual DialogResult ConfirmDelete(string message)
@@ -572,20 +729,14 @@ namespace AATM.UI.Winforms.BaseControls
         protected override void OnShown(EventArgs e)
         {
             base.OnShown(e);
-            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;
+            if (IsDesignTime()) return;
             if (AutoLoadOnShown && !_hasLoadedOnce)
             {
                 var _ = LoadDataAsync();
             }
         }
 
-        protected override void OnFormClosing(FormClosingEventArgs e)
-        {
-            try { _cts.Cancel(); } catch { }
-            base.OnFormClosing(e);
-        }
-
-        // More reliable design-time detection than LicenseManager alone
+        // -------------------- Shared design-time helpers --------------------
         protected static bool IsDesignTime()
         {
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
@@ -597,32 +748,23 @@ namespace AATM.UI.Winforms.BaseControls
                 if (proc != null && proc.ProcessName.Equals("devenv", StringComparison.OrdinalIgnoreCase))
                     return true;
 
-                // Heuristic: VS designer assemblies loaded
                 if (AppDomain.CurrentDomain.GetAssemblies()
                       .Any(a => a.FullName.StartsWith("Microsoft.VisualStudio", StringComparison.OrdinalIgnoreCase)))
                     return true;
             }
-            catch { /* swallow – never block design mode */ }
-
+            catch { }
             return false;
         }
 
-        /// <summary>
-        /// Returns a design-time safe CRUD service. At design-time (or if the runtime factory throws),
-        /// a no-op DesignTimeCrudService is returned. At runtime, the provided factory is invoked.
-        /// </summary>
         protected static ICrudService<T> GetCrudServiceSafe(Func<ICrudService<T>> runtimeFactory)
         {
             if (IsDesignTime())
                 return new DesignTimeCrudService();
-
             if (runtimeFactory == null)
                 return new DesignTimeCrudService();
-
             try
             {
-                var svc = runtimeFactory();
-                return svc ?? new DesignTimeCrudService();
+                return runtimeFactory() ?? new DesignTimeCrudService();
             }
             catch
             {
@@ -630,13 +772,9 @@ namespace AATM.UI.Winforms.BaseControls
             }
         }
 
-
         private void InitializeComponent()
         {
             this.SuspendLayout();
-            // 
-            // BaseGridCrudForm
-            // 
             this.ClientSize = new System.Drawing.Size(680, 307);
             this.Name = "BaseGridCrudForm";
             this.ResumeLayout(false);
