@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Threading;
@@ -583,6 +584,52 @@ namespace AATM.UI.Winforms.BaseControls
             try { _cts.Cancel(); } catch { }
             base.OnFormClosing(e);
         }
+
+        // More reliable design-time detection than LicenseManager alone
+        protected static bool IsDesignTime()
+        {
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
+                return true;
+
+            try
+            {
+                var proc = Process.GetCurrentProcess();
+                if (proc != null && proc.ProcessName.Equals("devenv", StringComparison.OrdinalIgnoreCase))
+                    return true;
+
+                // Heuristic: VS designer assemblies loaded
+                if (AppDomain.CurrentDomain.GetAssemblies()
+                      .Any(a => a.FullName.StartsWith("Microsoft.VisualStudio", StringComparison.OrdinalIgnoreCase)))
+                    return true;
+            }
+            catch { /* swallow – never block design mode */ }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Returns a design-time safe CRUD service. At design-time (or if the runtime factory throws),
+        /// a no-op DesignTimeCrudService is returned. At runtime, the provided factory is invoked.
+        /// </summary>
+        protected static ICrudService<T> GetCrudServiceSafe(Func<ICrudService<T>> runtimeFactory)
+        {
+            if (IsDesignTime())
+                return new DesignTimeCrudService();
+
+            if (runtimeFactory == null)
+                return new DesignTimeCrudService();
+
+            try
+            {
+                var svc = runtimeFactory();
+                return svc ?? new DesignTimeCrudService();
+            }
+            catch
+            {
+                return new DesignTimeCrudService();
+            }
+        }
+
 
         private void InitializeComponent()
         {

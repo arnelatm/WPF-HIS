@@ -2,13 +2,9 @@
 #define DESIGN_TIME_SAFE
 #endif
 using AATM.Contracts.Dtos;
-using AATM.Contracts.Interfaces.Services;
 using AATM.Modules.Localization;
 using AATM.UI.Winforms.BaseControls;
 using System;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace AATM.App.TableManager
@@ -17,14 +13,14 @@ namespace AATM.App.TableManager
 #if DESIGN_TIME_SAFE
     public partial class TranslationForm : BaseGridCrudForm<TranslationDto>
 #else
-    public partial class TranslationForm : StrictGridCrudForm<TranslationDto> 
+    public partial class TranslationForm : StrictGridCrudForm<TranslationDto>
 #endif
-
     {
         private ToolStripProgressBar _statusProgress;
 
         public TranslationForm()
-            : base(() => GetCrudServiceSafe())
+            : base(() => GetCrudServiceSafe(
+                () => new TranslationCrudService()))
         {
             InitializeComponent();
 
@@ -41,45 +37,6 @@ namespace AATM.App.TableManager
                 Visible = false
             };
             statusStrip.Items.Add(_statusProgress);
-        }
-
-        // More reliable design-time detection than LicenseManager alone
-        private static bool IsDesignTime()
-        {
-            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
-                return true;
-
-            try
-            {
-                var proc = Process.GetCurrentProcess();
-                if (proc != null && proc.ProcessName.Equals("devenv", StringComparison.OrdinalIgnoreCase))
-                    return true;
-
-                // Heuristic: VS designer assemblies loaded
-                if (AppDomain.CurrentDomain.GetAssemblies()
-                      .Any(a => a.FullName.StartsWith("Microsoft.VisualStudio", StringComparison.OrdinalIgnoreCase)))
-                    return true;
-            }
-            catch { /* swallow – never block design mode */ }
-
-            return false;
-        }
-
-        private static ICrudService<TranslationDto> GetCrudServiceSafe()
-        {
-            if (IsDesignTime())
-                return new BaseGridCrudForm<TranslationDto>.DesignTimeCrudService();
-
-            try
-            {
-                // Only touch the real service in true runtime
-                return new TranslationCrudService();
-            }
-            catch (Exception)
-            {
-                // Fallback – never let designer or startup crash
-                return new BaseGridCrudForm<TranslationDto>.DesignTimeCrudService();
-            }
         }
 
         protected override DataGridView Grid => _dataGridView;
