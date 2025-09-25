@@ -66,6 +66,8 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\FieldControlAttribute.cs" />
+    <Compile Include="Attributes\GridColumnAttribute.cs" />
     <Compile Include="Interfaces\Business\ITranslationService.cs" />
     <Compile Include="Interfaces\Services\ICrudService.cs" />
     <Compile Include="Interfaces\Services\IEntityWithId.cs" />

@@ -23,12 +23,15 @@ namespace AATM.App.TableManager
             InitializeComponent();
             if (IsDesignTime()) return;
 
-            // Register simple text bindings (eliminates manual populate/collect/clear code)
-            RegisterTextBinding(_txtModuleName, d => d.ModuleName);
-            RegisterTextBinding(_txtUIIdentifier, d => d.UIIdentifier);
-            RegisterTextBinding(_txtOriginalString, d => d.OriginalString);
-            RegisterTextBinding(_txtLanguageCode, d => d.LanguageCode);
-            RegisterTextBinding(_txtLocalizedString, d => d.LocalizedString);
+            // ** [OPTIMIZATION]: Single call replaces five lines of manual binding **
+            AutoBindFormFields();
+
+            //// Register simple text bindings (eliminates manual populate/collect/clear code)
+            //RegisterTextBinding(_txtModuleName, d => d.ModuleName);
+            //RegisterTextBinding(_txtUIIdentifier, d => d.UIIdentifier);
+            //RegisterTextBinding(_txtOriginalString, d => d.OriginalString);
+            //RegisterTextBinding(_txtLanguageCode, d => d.LanguageCode);
+            //RegisterTextBinding(_txtLocalizedString, d => d.LocalizedString);
 
             // Removed: manual wiring of navigation and CRUD buttons.
             // The BaseGridCrudForm now provides a BindingNavigator with First/Prev/Next/Last + Save/Delete/Refresh.

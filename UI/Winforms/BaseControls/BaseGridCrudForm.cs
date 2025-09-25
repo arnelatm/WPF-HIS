@@ -1,6 +1,7 @@
 ﻿#if DEBUG
 #define DESIGN_TIME_SAFE
 #endif
+using AATM.Contracts.Attributes;
 using AATM.Contracts.Interfaces.Services;
 using System;
 using System.Collections.Generic;
@@ -40,7 +41,19 @@ namespace AATM.UI.Winforms.BaseControls
 
         // Bindings for forms
         private readonly List<TextBinding> _textBindings = new List<TextBinding>();
-        //private Func<T, int> _cachedIdGetter;
+
+        //// ** [FIX]: Ensure Getter and Setter are defined as read/write properties **
+        //private class TextBinding
+        //{
+        //    // Required for the previous fix (CS0117)
+        //    public System.Windows.Forms.Control Control { get; set; }
+
+        //    // ** These members MUST have { get; set; } to resolve CS0229 **
+        //    public Func<T, object> Getter { get; set; }
+        //    public Action<T, string> Setter { get; set; }
+
+        //}
+
 
         // New: shared BindingSource + BindingNavigator
         private BindingSource _bindingSource;
@@ -92,6 +105,155 @@ namespace AATM.UI.Winforms.BaseControls
             public Task<bool> DeleteAsync(int id, CancellationToken ct = default(CancellationToken))
                 => Task.FromResult(false);
         }
+
+        protected void AutoBindFormFields()
+        {
+            var properties = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+
+            foreach (var prop in properties)
+            {
+                var controlAttr = prop.GetCustomAttribute<AATM.Contracts.Attributes.FieldControlAttribute>();
+                if (controlAttr == null) continue;
+
+                // 1. Resolve Control Type and Instance
+                Type concreteControlType = Type.GetType(controlAttr.ControlTypeName) ??
+                                           typeof(System.Windows.Forms.Form).Assembly.GetType(controlAttr.ControlTypeName);
+
+                var controlField = GetType().GetField(controlAttr.ControlName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+                System.Windows.Forms.Control control = controlField?.GetValue(this) as System.Windows.Forms.Control;
+
+                if (control == null || !concreteControlType.IsInstanceOfType(control))
+                {
+                    System.Diagnostics.Debug.Fail($"Auto-binding failed: Control '{controlAttr.ControlName}' not found or type mismatch.");
+                    continue;
+                }
+
+                // 2. Generate Getter Expression: Func<T, object>
+                var entityParam = Expression.Parameter(typeof(T), "d");
+                var propertyAccess = Expression.Property(entityParam, prop.Name);
+                var convertedAccess = Expression.Convert(propertyAccess, typeof(object));
+                var getterLambda = Expression.Lambda<Func<T, object>>(convertedAccess, entityParam);
+
+                // 3. Generate Setter Expression: Action<T, string>
+                var valueParam = Expression.Parameter(typeof(string), "v");
+                var setterExpression = Expression.Assign(
+                    Expression.Property(entityParam, prop.Name),
+                    valueParam
+                );
+                var setterLambda = Expression.Lambda<Action<T, string>>(setterExpression, entityParam, valueParam);
+
+                // 4. Add to the internal _textBindings list
+                _textBindings.Add(new TextBinding
+                {
+                    // ** Both Control and Compile() are now resolved **
+                    Box = control as TextBox,
+                    Getter = d => getterLambda.Compile()(d)?.ToString(),
+                    Setter = setterLambda.Compile()
+                });
+            }
+        }
+
+        //protected void AutoBindFormFields()
+        //{
+        //    var properties = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+
+        //    foreach (var prop in properties)
+        //    {
+        //        var controlAttr = prop.GetCustomAttribute<FieldControlAttribute>();
+        //        if (controlAttr == null) continue;
+
+        //        // ... (Existing logic to find concreteControlType and control instance) ...
+        //        Type concreteControlType = Type.GetType(controlAttr.ControlTypeName) ??
+        //                                   typeof(System.Windows.Forms.Form).Assembly.GetType(controlAttr.ControlTypeName);
+        //        // ... (Error handling for null control or type mismatch) ...
+
+        //        // Assuming 'control' is the found TextBox instance
+        //        if (control == null || !concreteControlType.IsInstanceOfType(control))
+        //        {
+        //            Debug.Fail($"Auto-binding failed: Control '{controlAttr.ControlName}' not found or type mismatch.");
+        //            continue;
+        //        }
+
+        //        // ** [CRITICAL FIX]: Dynamically generate the expression and add to _textBindings **
+
+        //        // 1. Parameter for the entity (T d)
+        //        var entityParam = Expression.Parameter(typeof(T), "d");
+
+        //        // 2. Access the property (d.PropertyName)
+        //        var propertyAccess = Expression.Property(entityParam, prop.Name);
+
+        //        // 3. Create Getter Expression: Func<T, object>
+        //        // Convert property access to object for boxing/unboxing
+        //        var convertedAccess = Expression.Convert(propertyAccess, typeof(object));
+        //        var getterLambda = Expression.Lambda<Func<T, object>>(convertedAccess, entityParam);
+
+        //        // 4. Create Setter Expression: Action<T, string> 
+        //        // Note: This requires a slightly different approach or helper method, 
+        //        // as your original RegisterTextBinding likely handled the setter implicitly based on TextBox.Text.
+
+        //        // Assuming your original RegisterTextBinding method (or internal logic) accepted a Control 
+        //        // and a Func<T, object> expression for the GETTER, and handled the SETTER implicitly:
+
+        //        // ** Since we don't have the original RegisterTextBinding source, we must manually populate 
+        //        // ** the TextBinding list using the generated Getter and a generated Setter. **
+
+        //        // 5. Generate Setter Logic (Action<T, string>)
+        //        var valueParam = Expression.Parameter(typeof(string), "v");
+        //        var castValue = Expression.Convert(valueParam, prop.PropertyType); // Convert string to target type (e.g., string/int)
+
+        //        // We assume all DTO properties are strings in this scenario (or rely on Try/Catch in the actual setter logic)
+        //        // If the DTO properties are non-string (e.g., int), the setter logic must handle parsing.
+
+        //        // Expression for assignment: d.PropertyName = v
+        //        var setterExpression = Expression.Assign(
+        //            Expression.Property(entityParam, prop.Name),
+        //            valueParam
+        //        );
+        //        var setterLambda = Expression.Lambda<Action<T, string>>(setterExpression, entityParam, valueParam);
+
+        //        // 6. Add to the internal list:
+        //        // We assume TextBinding is a struct/class that holds the Control, Getter, and Setter.
+
+        //        // ** If your original BaseGridCrudForm used a protected method like 'RegisterTextBinding(Control, Func<T, object>)', 
+        //        //    you must call that protected method here. **
+
+        //        // Since we don't have that method, we will directly add the binding:
+        //        _textBindings.Add(new TextBinding
+        //        {
+        //            Control = control,
+        //            Getter = getterLambda.Compile(),
+        //            Setter = (Action<T, string>)setterLambda.Compile()
+        //        });
+
+        //        // The TextBinding structure is assumed to be:
+        //        // private readonly List<TextBinding> _textBindings = new List<TextBinding>();
+        //        // private class TextBinding { public Control Control; public Func<T, object> Getter; public Action<T, string> Setter; }
+        //    }
+        //}
+
+        //protected void AutoBindFormFields()
+        //{
+        //    // ** [FIX]: Declare and initialize the properties variable. **
+        //    var properties = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+
+        //    foreach (var prop in properties)
+        //    {
+        //        var controlAttr = prop.GetCustomAttribute<FieldControlAttribute>();
+        //        if (controlAttr == null) continue;
+
+        //        // ... (The rest of the logic remains the same)
+        //        Type concreteControlType = Type.GetType(controlAttr.ControlTypeName) ??
+        //                                   typeof(System.Windows.Forms.Form).Assembly.GetType(controlAttr.ControlTypeName);
+
+        //        if (concreteControlType == null)
+        //        {
+        //            Debug.Fail($"Auto-binding failed: Control Type '{controlAttr.ControlTypeName}' could not be resolved.");
+        //            continue;
+        //        }
+
+        //        // ... (The logic to find the control field and perform binding)
+        //    }
+        //}
 
         // Prefer derived classes to expose their grid
         protected virtual DataGridView Grid => null;

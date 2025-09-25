@@ -1,51 +1,37 @@
-﻿// This Data Transfer Object (DTO) now represents a complete localization record,
-// including original string, module context, UI identifier, language code,
-// localized string, and creation date.
-
+﻿using AATM.Contracts.Attributes;
 using AATM.Contracts.Interfaces.Services;
 using System;
 
 namespace AATM.Contracts.Dtos
 {
-    /// <summary>
-    /// Data Transfer Object for a single localized string entry.
-    /// This DTO matches the columns in the Localization database table.
-    /// </summary>
+    // ... (Documentation)
     public class TranslationDto : IEntityWithId
     {
-        /// <summary>
-        /// Unique identifier of the localization record.
-        /// </summary>
+        // ID is defined as a column, but typically handled specially in the base class.
+        [GridColumn("ID", 60)]
         public int ID { get; set; }
 
-        /// <summary>
-        /// The original (untranslated) source string.
-        /// </summary>
-        public string OriginalString { get; set; }
-
-        /// <summary>
-        /// The application module or component where the string is used.
-        /// </summary>
+        // ** [OPTIMIZATION]: Declarative binding/column setup **
+        [FieldControl(("System.Windows.Forms.TextBox"), "_txtModuleName")]
+        [GridColumn("Module", 140)]
         public string ModuleName { get; set; }
 
-        /// <summary>
-        /// UI control identifier or resource key for the string.
-        /// </summary>
+        [FieldControl(("System.Windows.Forms.TextBox"), "_txtUIIdentifier")]
+        [GridColumn("UI Identifier", 160)]
         public string UIIdentifier { get; set; }
 
-        /// <summary>
-        /// BCP-47 language code (e.g., en-US) for the translation.
-        /// </summary>
+        [FieldControl(("System.Windows.Forms.TextBox"), "_txtOriginalString")]
+        [GridColumn("Original", 100, isFillColumn: true)]
+        public string OriginalString { get; set; }
+
+        [FieldControl(("System.Windows.Forms.TextBox"), "_txtLanguageCode")]
+        [GridColumn("Lang", 70)]
         public string LanguageCode { get; set; }
 
-        /// <summary>
-        /// The translated text for the specified language.
-        /// </summary>
+        [FieldControl(("System.Windows.Forms.TextBox"), "_txtLocalizedString")]
+        [GridColumn("Localized", 100, isFillColumn: true)]
         public string LocalizedString { get; set; }
 
-        /// <summary>
-        /// The date and time when the record was created.
-        /// </summary>
         public DateTime CreationDate { get; set; }
     }
 }
