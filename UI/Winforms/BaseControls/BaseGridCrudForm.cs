@@ -1,4 +1,7 @@
-﻿using AATM.Contracts.Interfaces.Services;
+﻿#if DEBUG
+#define DESIGN_TIME_SAFE
+#endif
+using AATM.Contracts.Interfaces.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,7 +19,11 @@ namespace AATM.UI.Winforms.BaseControls
 
     [DesignTimeVisible(false)]
     [Obsolete("Do not inherit directly. Use StrictGridCrudForm<T>.", false)]
-    public class BaseGridCrudForm<T> : Form where T : class, IEntityWithId
+#if DESIGN_TIME_SAFE
+    public class BaseGridCrudForm<T> : Form where T : class // No IEntityWithId constraint at Design Time
+#else
+    public class BaseGridCrudForm<T> : Form where T : class, IEntityWithId // IEntityWithId constraint at Runtime
+#endif
     {
         protected readonly ICrudService<T> _service;
         protected List<T> _items = new List<T>();
@@ -366,7 +373,14 @@ namespace AATM.UI.Winforms.BaseControls
         protected int GetEntityId(T entity)
         {
             if (entity == null) return 0;
-            return entity.ID;
+
+            // CS1061 fix: Safely cast 'entity' to the required interface.
+            if (entity is IEntityWithId entityWithId)
+            {
+                return entityWithId.ID;
+            }
+            // Fallback for types that somehow failed the constraint check (or if the constraint is removed at design time)
+            return 0;
         }
 
         //protected virtual int GetEntityId(T entity)

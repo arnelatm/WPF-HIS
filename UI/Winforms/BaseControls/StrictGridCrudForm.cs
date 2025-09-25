@@ -3,7 +3,12 @@ using System.Windows.Forms;
 
 namespace AATM.UI.Winforms.BaseControls
 {
+    //public abstract class StrictGridCrudForm<T> : BaseGridCrudForm<T> where T : class, IEntityWithId
+#if DESIGN_TIME_SAFE
+    public abstract class StrictGridCrudForm<T> : BaseGridCrudForm<T> where T : class
+#else
     public abstract class StrictGridCrudForm<T> : BaseGridCrudForm<T> where T : class, IEntityWithId
+#endif
     {
         protected StrictGridCrudForm() { }
         protected StrictGridCrudForm(System.Func<ICrudService<T>> factory) : base(factory) { }
