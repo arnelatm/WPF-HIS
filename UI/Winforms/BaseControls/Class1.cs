@@ -16,7 +16,7 @@ namespace AATM.UI.Winforms.BaseControls
 
     [DesignTimeVisible(false)]
     [Obsolete("Do not inherit directly. Use StrictGridCrudForm<T>.", false)]
-    public class BaseGridCrudForm<T> : Form where T : class, IEntityWithId
+    public class BaseGridCrudForm1<T> : Form where T : class
     {
         protected readonly ICrudService<T> _service;
         protected List<T> _items = new List<T>();
@@ -33,7 +33,7 @@ namespace AATM.UI.Winforms.BaseControls
 
         // Bindings for forms
         private readonly List<TextBinding> _textBindings = new List<TextBinding>();
-        //private Func<T, int> _cachedIdGetter;
+        private Func<T, int> _cachedIdGetter;
 
         // New: shared BindingSource + BindingNavigator
         private BindingSource _bindingSource;
@@ -276,136 +276,87 @@ namespace AATM.UI.Winforms.BaseControls
 
         // -------------------- DEFAULT IMPLEMENTATIONS USING BINDINGS --------------------
 
-        protected void PopulateFormFieldsFromGrid(int rowIndex)
+        protected virtual void PopulateFormFieldsFromGrid(int rowIndex)
         {
-            var entity = _bindingSource.Current as T;
+            if (_textBindings.Count == 0) return;
+            if (Grid == null) return;
+            if (rowIndex < 0 || rowIndex >= Grid.Rows.Count) return;
+
+            var row = Grid.Rows[rowIndex];
+            if (row == null || row.IsNewRow) return;
+            var entity = row.DataBoundItem as T;
             if (entity == null) return;
 
             foreach (var b in _textBindings)
-            {
                 if (b.Box != null)
                     b.Box.Text = b.Getter(entity) ?? string.Empty;
-            }
         }
 
-        //protected sealed override void PopulateFormFieldsFromGrid(int rowIndex)
-        //{
-        //    // rowIndex is ignored; using BindingSource.Current which is updated by the navigator/grid selection
-        //    var entity = _bindingSource.Current as T;
-        //    if (entity == null) return;
-
-        //    foreach (var b in _textBindings)
-        //    {
-        //        if (b.Box != null)
-        //            b.Box.Text = b.Getter(entity) ?? string.Empty;
-        //    }
-        //    //// Implementation uses _textBindings to set control text from DTO properties
-        //    //var entity = _bindingSource.Current as T;
-        //    //if (entity == null) return;
-
-        //    //foreach (var binding in _textBindings)
-        //    //{
-        //    //    if (binding.Box != null)
-        //    //        binding.Box.Text = binding.Getter(entity) ?? string.Empty;
-        //    //}
-        //}
-
-        //protected virtual T BuildModelFromForm(T current)
-
-        protected T BuildModelFromForm(T current)
+        protected virtual T BuildModelFromForm(T current)
         {
             var dto = current ?? Activator.CreateInstance<T>();
 
-            // Preserve ID from the selected entity using the IEntityWithId interface constraint
-            if (current != null && current is IEntityWithId currentWithId && dto is IEntityWithId newWithId)
+            // Preserve ID from the selected entity so the service performs an update
+            // rather than an insert or a no-op that ignores key changes.
+            if (current != null)
             {
-                newWithId.ID = currentWithId.ID;
+                var idProp = typeof(T).GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance)
+                    .FirstOrDefault(p =>
+                        p.PropertyType == typeof(int) &&
+                        (string.Equals(p.Name, "ID", StringComparison.OrdinalIgnoreCase) ||
+                         string.Equals(p.Name, "Id", StringComparison.OrdinalIgnoreCase)));
+
+                if (idProp != null && idProp.CanRead && idProp.CanWrite)
+                {
+                    try
+                    {
+                        var id = (int)(idProp.GetValue(current) ?? 0);
+                        idProp.SetValue(dto, id);
+                    }
+                    catch { /* swallow; keep DTO usable */ }
+                }
             }
 
             foreach (var b in _textBindings)
-            {
                 if (b.Box != null)
                     b.Setter(dto, b.Box.Text);
-            }
 
             return dto;
         }
 
-        //protected T BuildModelFromForm(T current)
-        //{
-        //    var dto = current ?? Activator.CreateInstance<T>();
-
-        //    //// Preserve ID from the selected entity so the service performs an update
-        //    //// rather than an insert or a no-op that ignores key changes.
-        //    //if (current != null)
-        //    //{
-        //    //    var idProp = typeof(T).GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance)
-        //    //        .FirstOrDefault(p =>
-        //    //            p.PropertyType == typeof(int) &&
-        //    //            (string.Equals(p.Name, "ID", StringComparison.OrdinalIgnoreCase) ||
-        //    //             string.Equals(p.Name, "Id", StringComparison.OrdinalIgnoreCase)));
-
-        //    //    if (idProp != null && idProp.CanRead && idProp.CanWrite)
-        //    //    {
-        //    //        try
-        //    //        {
-        //    //            var id = (int)(idProp.GetValue(current) ?? 0);
-        //    //            idProp.SetValue(dto, id);
-        //    //        }
-        //    //        catch { /* swallow; keep DTO usable */ }
-        //    //    }
-        //    //}
-
-        //    foreach (var b in _textBindings)
-        //        if (b.Box != null)
-        //            b.Setter(dto, b.Box.Text);
-
-        //    return dto;
-        //}
-
-        protected int GetEntityId(T entity)
+        protected virtual int GetEntityId(T entity)
         {
             if (entity == null) return 0;
-            return entity.ID;
+            if (_cachedIdGetter == null)
+            {
+                // Look for int ID or Id
+                var idProp = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                    .FirstOrDefault(p =>
+                        p.PropertyType == typeof(int) &&
+                        (string.Equals(p.Name, "ID", StringComparison.OrdinalIgnoreCase) ||
+                         string.Equals(p.Name, "Id", StringComparison.OrdinalIgnoreCase)));
+
+                if (idProp != null && idProp.CanRead)
+                {
+                    var param = Expression.Parameter(typeof(T), "e");
+                    var access = Expression.Property(param, idProp);
+                    var lambda = Expression.Lambda<Func<T, int>>(access, param);
+                    _cachedIdGetter = lambda.Compile();
+                }
+                else
+                {
+                    _cachedIdGetter = _ => 0;
+                }
+            }
+            return _cachedIdGetter(entity);
         }
 
-        //protected virtual int GetEntityId(T entity)
-        //{
-        //    if (entity == null) return 0;
-        //    // T is constrained to IEntityWithId, so direct access i
-        //    return entity.ID;
-        //    //if (entity == null) return 0;
-        //    //if (_cachedIdGetter == null)
-        //    //{
-        //    //    // Look for int ID or Id
-        //    //    var idProp = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance)
-        //    //        .FirstOrDefault(p =>
-        //    //            p.PropertyType == typeof(int) &&
-        //    //            (string.Equals(p.Name, "ID", StringComparison.OrdinalIgnoreCase) ||
-        //    //             string.Equals(p.Name, "Id", StringComparison.OrdinalIgnoreCase)));
-
-        //    //    if (idProp != null && idProp.CanRead)
-        //    //    {
-        //    //        var param = Expression.Parameter(typeof(T), "e");
-        //    //        var access = Expression.Property(param, idProp);
-        //    //        var lambda = Expression.Lambda<Func<T, int>>(access, param);
-        //    //        _cachedIdGetter = lambda.Compile();
-        //    //    }
-        //    //    else
-        //    //    {
-        //    //        _cachedIdGetter = _ => 0;
-        //    //    }
-        //    //}
-        //    //return _cachedIdGetter(entity);
-        //}
-
-
-        //protected virtual void ClearFormFieldsCore()
-        //{
-        //    foreach (var b in _textBindings)
-        //        if (b.Box != null)
-        //            b.Box.Text = string.Empty;
-        //}
+        protected virtual void ClearFormFieldsCore()
+        {
+            foreach (var b in _textBindings)
+                if (b.Box != null)
+                    b.Box.Text = string.Empty;
+        }
 
         // -------------------- COLUMN HELPERS & GRID CONFIG --------------------
 
@@ -814,13 +765,6 @@ namespace AATM.UI.Winforms.BaseControls
             ClearFormFieldsCore();
             if (Grid != null)
                 Grid.ClearSelection();
-        }
-
-        protected void ClearFormFieldsCore()
-        {
-            foreach (var b in _textBindings)
-                if (b.Box != null)
-                    b.Box.Text = string.Empty;
         }
 
         protected void GoFirst()

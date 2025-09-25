@@ -24,14 +24,14 @@ namespace AATM.App.TableManager
             if (IsDesignTime()) return;
 
             // Register simple text bindings (eliminates manual populate/collect/clear code)
-            RegisterTextBinding(_txtModuleName,     d => d.ModuleName);
-            RegisterTextBinding(_txtUIIdentifier,  d => d.UIIdentifier);
-            RegisterTextBinding(_txtOriginalString,d => d.OriginalString);
-            RegisterTextBinding(_txtLanguageCode,  d => d.LanguageCode);
-            RegisterTextBinding(_txtLocalizedString,d => d.LocalizedString);
+            RegisterTextBinding(_txtModuleName, d => d.ModuleName);
+            RegisterTextBinding(_txtUIIdentifier, d => d.UIIdentifier);
+            RegisterTextBinding(_txtOriginalString, d => d.OriginalString);
+            RegisterTextBinding(_txtLanguageCode, d => d.LanguageCode);
+            RegisterTextBinding(_txtLocalizedString, d => d.LocalizedString);
 
-            WireNavigationButtons(_btnFirst, _btnPrevious, _btnNext, _btnLast);
-            WireCrudButtons(null, tsbSave, tsbDelete);
+            // Removed: manual wiring of navigation and CRUD buttons.
+            // The BaseGridCrudForm now provides a BindingNavigator with First/Prev/Next/Last + Save/Delete/Refresh.
 
             _statusProgress = new ToolStripProgressBar
             {

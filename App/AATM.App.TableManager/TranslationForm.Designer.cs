@@ -28,13 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this._toolStrip = new System.Windows.Forms.ToolStrip();
-            this._btnFirst = new System.Windows.Forms.ToolStripButton();
-            this._btnPrevious = new System.Windows.Forms.ToolStripButton();
-            this._btnNext = new System.Windows.Forms.ToolStripButton();
-            this._btnLast = new System.Windows.Forms.ToolStripButton();
-            this.tsbSave = new System.Windows.Forms.ToolStripButton();
-            this.tsbDelete = new System.Windows.Forms.ToolStripButton();
             this._tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this._lblOriginal = new System.Windows.Forms.Label();
             this._dataGridView = new System.Windows.Forms.DataGridView();
@@ -56,67 +49,10 @@
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this._toolStrip.SuspendLayout();
             this._tableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._dataGridView)).BeginInit();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // _toolStrip
-            // 
-            this._toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this._btnFirst,
-            this._btnPrevious,
-            this._btnNext,
-            this._btnLast,
-            this.tsbSave,
-            this.tsbDelete});
-            this._toolStrip.Location = new System.Drawing.Point(0, 0);
-            this._toolStrip.Name = "_toolStrip";
-            this._toolStrip.Size = new System.Drawing.Size(800, 25);
-            this._toolStrip.TabIndex = 2;
-            // 
-            // _btnFirst
-            // 
-            this._btnFirst.Name = "_btnFirst";
-            this._btnFirst.Size = new System.Drawing.Size(23, 22);
-            this._btnFirst.Text = "|<";
-            // 
-            // _btnPrevious
-            // 
-            this._btnPrevious.Name = "_btnPrevious";
-            this._btnPrevious.Size = new System.Drawing.Size(23, 22);
-            this._btnPrevious.Text = "<";
-            // 
-            // _btnNext
-            // 
-            this._btnNext.Name = "_btnNext";
-            this._btnNext.Size = new System.Drawing.Size(23, 22);
-            this._btnNext.Text = ">";
-            // 
-            // _btnLast
-            // 
-            this._btnLast.Name = "_btnLast";
-            this._btnLast.Size = new System.Drawing.Size(23, 22);
-            this._btnLast.Text = ">|";
-            // 
-            // tsbSave
-            // 
-            this.tsbSave.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbSave.Name = "tsbSave";
-            this.tsbSave.Size = new System.Drawing.Size(35, 22);
-            this.tsbSave.Text = "Save";
-            // 
-            // tsbDelete
-            // 
-            this.tsbDelete.AccessibleRole = System.Windows.Forms.AccessibleRole.ToolBar;
-            this.tsbDelete.BackColor = System.Drawing.Color.Transparent;
-            this.tsbDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.tsbDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbDelete.Name = "tsbDelete";
-            this.tsbDelete.Size = new System.Drawing.Size(44, 22);
-            this.tsbDelete.Text = "Delete";
-            this.tsbDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             // 
             // _tableLayoutPanel
             // 
@@ -135,7 +71,7 @@
             this._tableLayoutPanel.Controls.Add(this._lblModule, 0, 4);
             this._tableLayoutPanel.Controls.Add(this._txtModuleName, 1, 4);
             this._tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this._tableLayoutPanel.Location = new System.Drawing.Point(0, 25);
+            this._tableLayoutPanel.Location = new System.Drawing.Point(0, 0);
             this._tableLayoutPanel.Name = "_tableLayoutPanel";
             this._tableLayoutPanel.RowCount = 7;
             this._tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -168,6 +104,7 @@
             // 
             this._txtOriginalString.Location = new System.Drawing.Point(153, 3);
             this._txtOriginalString.Name = "_txtOriginalString";
+            this._txtOriginalString.ReadOnly = true;
             this._txtOriginalString.Size = new System.Drawing.Size(644, 20);
             this._txtOriginalString.TabIndex = 1;
             // 
@@ -198,6 +135,7 @@
             // 
             this._txtLanguageCode.Location = new System.Drawing.Point(153, 55);
             this._txtLanguageCode.Name = "_txtLanguageCode";
+            this._txtLanguageCode.ReadOnly = true;
             this._txtLanguageCode.Size = new System.Drawing.Size(100, 20);
             this._txtLanguageCode.TabIndex = 5;
             // 
@@ -296,14 +234,8 @@
             this.ClientSize = new System.Drawing.Size(800, 402);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this._tableLayoutPanel);
-            this.Controls.Add(this._toolStrip);
             this.Name = "TranslationForm";
             this.Text = "TranslationFrm";
-            this.Controls.SetChildIndex(this._toolStrip, 0);
-            this.Controls.SetChildIndex(this._tableLayoutPanel, 0);
-            this.Controls.SetChildIndex(this.statusStrip, 0);
-            this._toolStrip.ResumeLayout(false);
-            this._toolStrip.PerformLayout();
             this._tableLayoutPanel.ResumeLayout(false);
             this._tableLayoutPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this._dataGridView)).EndInit();
@@ -315,14 +247,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.ToolStrip _toolStrip;
-        private System.Windows.Forms.ToolStripButton _btnFirst;
-        private System.Windows.Forms.ToolStripButton _btnPrevious;
-        private System.Windows.Forms.ToolStripButton _btnNext;
-        private System.Windows.Forms.ToolStripButton _btnLast;
-        private System.Windows.Forms.ToolStripButton tsbSave;
-        private System.Windows.Forms.ToolStripButton tsbDelete;
         private System.Windows.Forms.TableLayoutPanel _tableLayoutPanel;
         private System.Windows.Forms.Label _lblOriginal;
         private System.Windows.Forms.TextBox _txtOriginalString;

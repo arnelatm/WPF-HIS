@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="Interfaces\Business\ITranslationService.cs" />
     <Compile Include="Interfaces\Services\ICrudService.cs" />
+    <Compile Include="Interfaces\Services\IEntityWithId.cs" />
     <Compile Include="Interfaces\Views\ITranslationView.cs" />
     <Compile Include="My Project\MyNamespace.Static.1.Designer.cs" />
     <Compile Include="My Project\MyNamespace.Static.2.Designer.cs" />
@@ -113,6 +114,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Interfaces\Dtos\" />
     <Folder Include="Interfaces\Presentation\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -2,6 +2,7 @@
 // including original string, module context, UI identifier, language code,
 // localized string, and creation date.
 
+using AATM.Contracts.Interfaces.Services;
 using System;
 
 namespace AATM.Contracts.Dtos
@@ -10,7 +11,7 @@ namespace AATM.Contracts.Dtos
     /// Data Transfer Object for a single localized string entry.
     /// This DTO matches the columns in the Localization database table.
     /// </summary>
-    public class TranslationDto
+    public class TranslationDto : IEntityWithId
     {
         /// <summary>
         /// Unique identifier of the localization record.
