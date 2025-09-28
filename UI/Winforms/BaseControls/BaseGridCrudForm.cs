@@ -605,10 +605,10 @@ namespace AATM.UI.Winforms.BaseControls
             grid.AllowUserToResizeRows = false;
             grid.RowHeadersVisible = false;
 
-            // Enable double buffering (reflection)
-            var pi = grid.GetType().GetProperty("DoubleBuffered",
-                System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
-            pi?.SetValue(grid, true, null);
+            //// Enable double buffering (reflection)
+            //var pi = grid.GetType().GetProperty("DoubleBuffered",
+            //    System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+            //pi?.SetValue(grid, true, null);
         }
 
         /// <summary>

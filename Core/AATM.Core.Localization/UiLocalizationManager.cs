@@ -8,7 +8,7 @@ namespace AATM.Core.Localization
     /// <summary>
 /// Manages the retrieval of localized strings from the database with a caching layer.
 /// </summary>
-    public class LocalizationManager
+    public class UiLocalizationManager
     {
         // A private dictionary to cache the translations in memory.
         // The key is a composite string of the original string, module name, UI identifier, and language code.
@@ -95,7 +95,7 @@ namespace AATM.Core.Localization
         public static void Main()
         {
             // Create an instance of the localization manager.
-            var localizationManager = new LocalizationManager();
+            var localizationManager = new UiLocalizationManager();
 
             // Simulate an English user.
             string englishWelcome = localizationManager.GetLocalizedString("Welcome to the system", "Login", "WelcomeHeader", "en-US");

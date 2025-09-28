@@ -128,38 +128,7 @@ namespace AATM.App.TableManager
             ApplyLanguage(li.Code);
         }
 
-        private void ApplyLanguage(string languageCode)
-        {
-            if (_localizationService == null || _uiLocalizationManager == null) return;
 
-            // OPTIONAL: If your implementation needs to switch internal state,
-            // add a SetCurrentLanguage(languageCode) method to ILocalizationService.
-            // _localizationService.SetCurrentLanguage(languageCode);  // (Requires extension)
-
-            // Register any strings not yet in the store (only once per language)
-            try
-            {
-                _uiLocalizationManager.RegisterFormStrings(this, "TranslationModule", languageCode);
-            }
-            catch { /* ignore */ }
-
-            IDictionary<string, string> dict = null;
-            try { dict = _localizationService.GetLocalizedStrings(); } catch { }
-
-            if (dict != null && dict.Count > 0)
-            {
-                try
-                {
-                    _uiLocalizationManager.SetLocalizedText(this, dict.ToDictionary(k => k.Key, v => v.Value));
-                }
-                catch { /* ignore mapping issues */ }
-            }
-
-            // Adjust RightToLeft if Arabic (or service indicates RTL)
-            bool rtl = _localizationService.IsRightToLeft || languageCode.StartsWith("ar", StringComparison.OrdinalIgnoreCase);
-            ApplyRightToLeft(rtl);
-            statusLabel.Text = $"Language applied: {languageCode}";
-        }
 
         private void ApplyRightToLeft(bool rtl)
         {
@@ -176,15 +145,135 @@ namespace AATM.App.TableManager
 
         private ILocalizationService ResolveLocalizationService()
         {
-            // TODO: replace with real implementation / DI.
-            // Return null if not yet wired; the form will degrade gracefully.
-            return null;
+            // Example: Simple in-memory implementation for demonstration.
+            // Replace with DI or a real service in production.
+            return new InMemoryLocalizationService();
+        }
+
+        // Minimal in-memory implementation for demonstration purposes.
+        private class InMemoryLocalizationService : ILocalizationService
+        {
+            private readonly Dictionary<string, Dictionary<string, string>> _strings = new Dictionary<string, Dictionary<string, string>>();
+            private string _currentLanguage = "en-US";
+            public bool IsRightToLeft => _currentLanguage.StartsWith("ar", StringComparison.OrdinalIgnoreCase);
+
+            public void AddOrUpdateString(string moduleName, string uiIdentifier, string originalString, string languageCode, string localizedString)
+            {
+                var key = $"{moduleName}:{uiIdentifier}:{languageCode}";
+                if (!_strings.ContainsKey(key))
+                    _strings[key] = new Dictionary<string, string>();
+                _strings[key][originalString] = localizedString;
+            }
+
+            public string Translate(string sourceLang, string targetLang, string textToTranslate)
+            {
+                // Dummy translation: just returns the text for demonstration.
+                return textToTranslate;
+            }
+
+            public List<(string display, string code)> GetAvailableLanguages()
+            {
+                return new List<(string display, string code)>
+                {
+                    ("English", "en-US"),
+                    ("Arabic", "ar-SA")
+                };
+            }
+
+            public string GetString(string uiIdentifier, string originalString)
+            {
+                if (originalString == "Original") System.Diagnostics.Debugger.Break();
+                // Example breakpoint for debugging
+
+                var key = $"TranslationModule:{uiIdentifier}:{_currentLanguage}";
+                if (_strings.TryGetValue(key, out var dict) && dict.TryGetValue(originalString, out var localized))
+                    return localized;
+                return originalString;
+            }
+
+            public IDictionary<string, string> GetLocalizedStrings()
+            {
+                // Returns all strings for the current language.
+                var result = new Dictionary<string, string>();
+                foreach (var kvp in _strings)
+                {
+                    if (kvp.Key.EndsWith(_currentLanguage))
+                    {
+                        foreach (var strKvp in kvp.Value)
+                            result[strKvp.Key] = strKvp.Value;
+                    }
+                }
+                return result;
+            }
+
+            public void AddString(string moduleName, string text, string languageCode)
+            {
+                AddOrUpdateString(moduleName, text, text, languageCode, text);
+            }
+
+            public void SetLanguage(string languageCode)
+            {
+                if (string.IsNullOrWhiteSpace(languageCode))
+                    return;
+
+                _currentLanguage = languageCode;
+            }
         }
 
         private IUiLocalizationManager ResolveUiLocalizationManager()
         {
-            // TODO: replace with real implementation / DI.
-            return null;
+            // Simple in-memory implementation for demonstration.
+            // Replace with DI or a real service in production.
+            return new InMemoryUiLocalizationManager();
+        }
+
+        // Minimal in-memory implementation for demonstration purposes.
+        private class InMemoryUiLocalizationManager : IUiLocalizationManager
+        {
+            // Stores registered strings per form/module/language
+            private readonly Dictionary<string, Dictionary<string, string>> _registeredStrings =
+                new Dictionary<string, Dictionary<string, string>>();
+
+            public void RegisterFormStrings(Form form, string moduleName, string languageCode)
+            {
+                if (form == null) return;
+                var key = $"{moduleName}:{languageCode}";
+                if (!_registeredStrings.ContainsKey(key))
+                    _registeredStrings[key] = new Dictionary<string, string>();
+
+                foreach (Control c in GetAllControls(form))
+                {
+                    string uiId = c.Name;
+                    string original = c.Text;
+                    if (!string.IsNullOrWhiteSpace(uiId) && !string.IsNullOrWhiteSpace(original))
+                    {
+                        _registeredStrings[key][uiId] = original;
+                    }
+                }
+            }
+
+            public void SetLocalizedText(Form form, Dictionary<string, string> localizedStrings)
+            {
+                if (form == null || localizedStrings == null) return;
+                foreach (Control c in GetAllControls(form))
+                {
+                    string uiId = c.Name;
+                    if (!string.IsNullOrWhiteSpace(uiId) && localizedStrings.TryGetValue(uiId, out var localized))
+                    {
+                        c.Text = localized;
+                    }
+                }
+            }
+
+            private IEnumerable<Control> GetAllControls(Control parent)
+            {
+                foreach (Control c in parent.Controls)
+                {
+                    yield return c;
+                    foreach (var child in GetAllControls(c))
+                        yield return child;
+                }
+            }
         }
 
         protected override DataGridView Grid => _dataGridView;
@@ -216,6 +305,107 @@ namespace AATM.App.TableManager
                  + "UI Identifier: " + (entity.UIIdentifier ?? string.Empty) + Environment.NewLine
                  + "Language: " + (entity.LanguageCode ?? string.Empty) + Environment.NewLine
                  + "Original: " + original;
+        }
+
+        // Event handler for language change
+        private void ComboBoxLanguages_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Get selected language code from ComboBox
+            var li = _languageCombo != null && _languageCombo.SelectedItem is LanguageItem
+                ? (LanguageItem)_languageCombo.SelectedItem
+                : null;
+            if (li == null || string.IsNullOrWhiteSpace(li.Code))
+                return;
+
+            ApplyLanguage(li.Code);
+        }
+
+        // Add this method to TranslationForm to automate registration and application of localized strings.
+        private void RegisterAndApplyAllLocalizedStrings(string languageCode)
+        {
+            // Register all control strings for the current language if not already registered.
+            foreach (Control c in GetAllControls(this))
+            {
+                // Only register if not already present for this language.
+                var existing = _localizationService.GetString(c.Name, c.Text);
+                if (existing == c.Text)
+                {
+                    // Add default translation (could be extended to load from resources/database)
+                    _localizationService.AddOrUpdateString("TranslationModule", c.Name, c.Text, languageCode, c.Text);
+                }
+            }          
+
+        }
+
+        private IEnumerable<Control> GetAllControls(Control parent)
+        {
+            foreach (Control c in parent.Controls)
+            {
+                yield return c;
+                foreach (var child in GetAllControls(c))
+                    yield return child;
+            }
+        }
+
+        // Call this method in ApplyLanguage after setting the language:
+        private void ApplyLanguage(string languageCode)
+        {
+            if (_localizationService == null || _uiLocalizationManager == null) return;
+
+            _localizationService.SetLanguage(languageCode);
+
+            // Register and apply translations
+            ApplyAllTranslations();
+
+            bool rtl = _localizationService.IsRightToLeft || languageCode.StartsWith("ar", StringComparison.OrdinalIgnoreCase);
+            ApplyRightToLeft(rtl);
+            statusLabel.Text = $"Language applied: {languageCode}";
+
+            //if (_localizationService == null || _uiLocalizationManager == null) return;
+
+            //try
+            //{
+            //    _uiLocalizationManager.RegisterFormStrings(this, "TranslationModule", languageCode);
+            //}
+            //catch { /* ignore */ }
+
+            //IDictionary<string, string> dict = null;
+            //try { dict = _localizationService.GetLocalizedStrings(); } catch { }
+
+            //if (dict != null && dict.Count > 0)
+            //{
+            //    try
+            //    {
+            //        _uiLocalizationManager.SetLocalizedText(this, dict.ToDictionary(k => k.Key, v => v.Value));
+            //    }
+            //    catch { /* ignore mapping issues */ }
+            //}
+
+            //// NEW: Register and apply all localized strings for the selected language.
+            //RegisterAndApplyAllLocalizedStrings(languageCode);
+
+            //bool rtl = _localizationService.IsRightToLeft || languageCode.StartsWith("ar", StringComparison.OrdinalIgnoreCase);
+            //ApplyRightToLeft(rtl);
+            //statusLabel.Text = $"Language applied: {languageCode}";
+        }
+
+        private void ApplyAllTranslations()
+        {
+            // Translate all controls (labels, buttons, etc.)
+            foreach (Control c in GetAllControls(this))
+            {
+                var localized = _localizationService.GetString(c.Name, c.Text);
+                if (!string.IsNullOrEmpty(localized) && localized != c.Text)
+                    c.Text = localized;
+            }
+
+            // Translate grid column headers
+            foreach (DataGridViewColumn col in _dataGridView.Columns)
+            {
+                var localized = _localizationService.GetString(col.Name, col.HeaderText);
+                if (!string.IsNullOrEmpty(localized) && localized != col.HeaderText)
+                    col.HeaderText = localized;
+            }
         }
     }
 }

@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{2902844F-CFD2-0F88-3515-7098759E42C4}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>AATM.UI.Winforms</RootNamespace>
     <AssemblyName>AATM.UI.Winforms</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -23,6 +23,7 @@
     <DefineConstants>TRACE;DEBUG;_MYFORMS=True</DefineConstants>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <WarningLevel>0</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -45,8 +46,7 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>
-    </StartupObject>
+    <StartupObject>Winforms.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
@@ -82,6 +82,12 @@
     <Compile Include="BaseControls\StrictGridCrudForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FrmCustomer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCustomer.Designer.cs">
+      <DependentUpon>FrmCustomer.cs</DependentUpon>
+    </Compile>
     <Compile Include="My Project\MyNamespace.Static.1.Designer.cs" />
     <Compile Include="My Project\MyNamespace.Static.2.Designer.cs" />
     <Compile Include="My Project\MyNamespace.Static.3.Designer.cs" />
@@ -91,6 +97,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -101,6 +108,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="UILocalizationManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UILocalizationManager.Designer.cs">
+      <DependentUpon>UILocalizationManager.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <!-- Remove the resx for the abstract base -->
@@ -108,11 +121,17 @@
     <EmbeddedResource Include="BaseControls\BaseGridCrudForm.resx">
       <DependentUpon>BaseGridCrudForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmCustomer.resx">
+      <DependentUpon>FrmCustomer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Winforms.My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UILocalizationManager.resx">
+      <DependentUpon>UILocalizationManager.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -138,6 +157,30 @@
     <ProjectReference Include="..\..\Contracts\AATM.Contracts\AATM.Contracts.csproj">
       <Project>{464CDA63-DB4A-02B4-1AFA-7083EF503845}</Project>
       <Name>AATM.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\AATM.Core.csproj">
+      <Project>{A529FE66-56F4-0D65-3915-68A73F89482A}</Project>
+      <Name>AATM.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\AATM.Core.Localization\AATM.Core.Localization.csproj">
+      <Project>{3A2C0FF2-4410-0D3C-3F61-4EF5F503FC2F}</Project>
+      <Name>AATM.Core.Localization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\AATM.Core.Logging\AATM.Core.Logging.csproj">
+      <Project>{A04B8212-312F-05DE-3E76-E137D5560B02}</Project>
+      <Name>AATM.Core.Logging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\AATM.Core.Messaging.Cs\AATM.Core.Messaging.csproj">
+      <Project>{1BBC78F4-68D9-4352-B1D3-81DC7CFED56B}</Project>
+      <Name>AATM.Core.Messaging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Configuration\AATM.CORE.Configuration\AATM.Core.Configuration.csproj">
+      <Project>{161A1671-FF81-0C1D-3304-D104941735FD}</Project>
+      <Name>AATM.Core.Configuration</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Module\AATM.Modules.Customers\AATM.Modules.Customers.csproj">
+      <Project>{28115980-A3B0-09B8-23F4-9BAF762B5C6E}</Project>
+      <Name>AATM.Modules.Customers</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

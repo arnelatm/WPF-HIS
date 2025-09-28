@@ -14,8 +14,8 @@ namespace AATM.Core.Localization
     public class LocalizationService : ILocalizationService
     {
 
-        private readonly string _language;
-        private readonly IDictionary<string, string> _localizedStrings;
+        private string _language;
+        private IDictionary<string, string> _localizedStrings;
 
         /// <summary>
     /// Initializes a new instance of the LocalizationService.
@@ -113,12 +113,9 @@ namespace AATM.Core.Localization
     /// </summary>
         public void AddOrUpdateString(string moduleName, string uiIdentifier, string originalString, string languageCode, string localizedString)
         {
-            // =========================================================================
-            // TODO: Implement your database write logic here.
-            // You would check if a record with the same uiIdentifier and languageCode
-            // exists and either update it or insert a new record.
-            // =========================================================================
-            Console.WriteLine($"Simulating DB write: Added/Updated string for UIIdentifier: {uiIdentifier}, Language: {languageCode}");
+            // Simulate DB write...
+            var key = uiIdentifier; // or $"{moduleName}.{uiIdentifier}"
+            _localizedStrings[key] = localizedString;
         }
 
         /// <summary>
@@ -136,7 +133,33 @@ namespace AATM.Core.Localization
 
         public string Translate(string sourceLang, string targetLang, string textToTranslate)
         {
-            throw new NotImplementedException();
+            // Simple stub implementation for demonstration.
+            // In a real application, you would call an external translation API/service here.
+            // For example, you could use Microsoft Translator, Google Translate, or your own translation database.
+
+            // If the source and target languages are the same, return the original text.
+            if (string.Equals(sourceLang, targetLang, StringComparison.OrdinalIgnoreCase))
+                return textToTranslate;
+
+            // Simulate translation for demonstration purposes.
+            // You can expand this with actual translation logic or API calls.
+            if (sourceLang == "en-US" && targetLang == "es-ES")
+            {
+                if (textToTranslate == "Save") return "Guardar";
+                if (textToTranslate == "Cancel") return "Cancelar";
+                if (textToTranslate == "First Name:") return "Nombre:";
+                if (textToTranslate == "Are you sure you want to delete this record?") return "¿Estás seguro de que quieres eliminar este registro?";
+            }
+            else if (sourceLang == "es-ES" && targetLang == "en-US")
+            {
+                if (textToTranslate == "Guardar") return "Save";
+                if (textToTranslate == "Cancelar") return "Cancel";
+                if (textToTranslate == "Nombre:") return "First Name:";
+                if (textToTranslate == "¿Estás seguro de que quieres eliminar este registro?") return "Are you sure you want to delete this record?";
+            }
+
+            // Fallback: return the original text if no translation is found.
+            return textToTranslate;
         }
 
         /// <summary>
@@ -159,6 +182,41 @@ namespace AATM.Core.Localization
             }
         }
 
+        public void SetLanguage(string language)
+        {
+            if (string.IsNullOrWhiteSpace(language) || string.Equals(_language, language, StringComparison.OrdinalIgnoreCase))
+                return;
+            _language = language;
+            _localizedStrings = GetLocalizedStrings();
+        }
+
+        public void AddString(string moduleName, string text, string languageCode)
+        {
+            // Simulate adding a new localized string for the given module and language.
+            // In a real application, this would write to a database or persistent store.
+
+            // For this stub, we'll use the UI identifier as the text itself.
+            // If you have a specific UI identifier, you can pass it as a parameter.
+
+            // If the language is not the current one, reload the dictionary for that language.
+            if (!string.Equals(_language, languageCode, StringComparison.OrdinalIgnoreCase))
+            {
+                // Optionally, you could switch context or update another dictionary.
+                // For simplicity, we do nothing here.
+                return;
+            }
+
+            // Add the string to the in-memory dictionary if it doesn't exist.
+            if (!_localizedStrings.ContainsKey(text))
+            {
+                _localizedStrings.Add(text, text);
+            }
+            else
+            {
+                // Optionally, update the value if needed.
+                _localizedStrings[text] = text;
+            }
+        }
     }
 }
 

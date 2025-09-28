@@ -27,9 +27,31 @@ namespace AATM.Modules.Localization
             _view.SaveTranslation += OnSaveTranslation;
         }
 
-        private void OnSaveTranslation(string arg1, string arg2, string arg3, string arg4, string arg5)
+        private void OnSaveTranslation(string originalString, string moduleName, string uiIdentifier, string languageCode, string localizedString)
         {
-            throw new NotImplementedException();
+            // Validate input (optional, but recommended)
+            if (string.IsNullOrWhiteSpace(originalString) ||
+                string.IsNullOrWhiteSpace(moduleName) ||
+                string.IsNullOrWhiteSpace(uiIdentifier) ||
+                string.IsNullOrWhiteSpace(languageCode) ||
+                string.IsNullOrWhiteSpace(localizedString))
+            {
+                _view.ShowMessage("All fields must be filled in to save a translation.");
+                return;
+            }
+
+            // Save or update the translation
+            _localizationRepository.AddOrUpdateLocalization(
+                originalString,
+                moduleName,
+                uiIdentifier,
+                languageCode,
+                localizedString);
+
+            _view.ShowMessage("Translation saved successfully!");
+
+            // Refresh the translations grid for the selected language
+            LoadTranslations(languageCode);
         }
 
         /// <summary>

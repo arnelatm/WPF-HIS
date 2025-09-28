@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using AATM.Contracts;
 
-namespace AATM.Core
+namespace AATM.Core.Messaging
 {
     /// <summary>
     /// A concrete implementation of IMessagingService that displays messages

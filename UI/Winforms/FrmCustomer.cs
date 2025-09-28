@@ -17,8 +17,8 @@ namespace Winforms
         {
             InitializeComponent();
             // Populate the language dropdown
-            cmbLanguage.Items.Add(new { Text = "English", Value = "en-US" });
-            cmbLanguage.Items.Add(new { Text = "العربية", Value = "ar-SA" });
+            cmbLanguage.Items.Add(new LanguageItem { Text = "English", Value = "en-US" });
+            cmbLanguage.Items.Add(new LanguageItem { Text = "العربية", Value = "ar-SA" });
             cmbLanguage.DisplayMember = "Text";
             cmbLanguage.ValueMember = "Value";
             cmbLanguage.SelectedIndex = 0;
@@ -134,14 +134,18 @@ namespace Winforms
 
         public int GetSelectedCustomerID()
         {
-            throw new NotImplementedException();
+            if (dgvCustomers.CurrentRow != null && dgvCustomers.CurrentRow.DataBoundItem is CustomerDTO customer)
+            {
+                return customer.CustomerID;
+            }
+            return -1;
         }
 
         private void cmbLanguage_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbLanguage.SelectedItem is not null)
+            if (cmbLanguage.SelectedItem is LanguageItem item)
             {
-                string languageCode = Conversions.ToString(cmbLanguage.SelectedItem.Value);
+                string languageCode = item.Value;
                 LanguageChanged?.Invoke(languageCode);
             }
         }
@@ -232,5 +236,12 @@ namespace Winforms
         // End Sub
 
 
+    }
+
+    public class LanguageItem
+    {
+        public string Text { get; set; }
+        public string Value { get; set; }
+        public override string ToString() => Text;
     }
 }

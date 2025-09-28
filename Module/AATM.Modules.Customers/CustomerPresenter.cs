@@ -1,73 +1,19 @@
-﻿//// File: MyProject.Business/CustomerPresenter.cs
-////
-//// This presenter class is part of the business layer. It gets its translations
-//// by calling the TranslationService with the necessary context.
-
-//using System;
-//using AATM.Contracts;
-//using AATM.Business.Logic; // Assuming TranslationService is here
-
-//namespace MyProject.Business
-//{
-//    /// <summary>
-//    /// Handles the business logic for customer-related views.
-//    /// </summary>
-//    public class CustomerPresenter
-//    {
-//        private readonly TranslationService _translationService;
-
-//        public CustomerPresenter(TranslationService translationService)
-//        {
-//            _translationService = translationService ?? throw new ArgumentNullException(nameof(translationService));
-//        }
-
-//        /// <summary>
-//        /// Gets a translated string for a specific UI identifier.
-//        /// </summary>
-//        /// <param name="originalString">The string to translate.</param>
-//        /// <param name="languageCode">The target language code.</param>
-//        /// <param name="uiIdentifier">A unique identifier for the string in the UI.</param>
-//        /// <returns>The translated string.</returns>
-//        public string GetString(string originalString, string languageCode, string uiIdentifier)
-//        {
-//            var TranslationDto = _translationService.Translate(
-//                originalString: originalString,
-//                languageCode: languageCode,
-//                moduleName: this.GetType().Name, // Using the class name for the module identifier
-//                uiIdentifier: uiIdentifier
-//            );
-
-//            return TranslationDto.LocalizedString;
-//        }
-
-//        // Example of how to use the GetString method.
-//        public void LoadCustomerDetails(string languageCode)
-//        {
-//            string welcomeMessage = GetString("Welcome to the customer dashboard!", languageCode, "WelcomeMessageLabel");
-//            string saveButtonText = GetString("Save", languageCode, "SaveButton");
-
-//            // ... use the translated strings to update the UI
-//            // (e.g., this.welcomeLabel.Text = welcomeMessage;)
-//        }
-//    }
-//}
-
-
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using AATM.Contracts;
 using AATM.Contracts.Interfaces.Services;
 using AATM.Core.Localization;
 
 namespace AATM.Modules.Customers
 {
-
     /// <summary>
-    /// The Presenter for the customer management feature.
-    /// This class mediates between the View (the UI) and the Model (the business logic).
+    /// Presenter for the Customer management UI.
     /// </summary>
     public class CustomerPresenter
     {
+        private const string ModuleName = "CustomerModule";
+
         private readonly ICustomerView _view;
         private readonly ICustomerService _service;
         private readonly ILogger _logger;
@@ -75,536 +21,204 @@ namespace AATM.Modules.Customers
         private readonly ILocalizationService _localizationService;
         private readonly IUiLocalizationManager _uiLocalizationManager;
 
-        /// <summary>
-        /// Initializes a new instance of the CustomerPresenter class.
-        /// </summary>
-        /// <param name="view">The view that the presenter will manage.</param>
-        /// <param name="service">The service containing the customer business logic.</param>
-        /// <param name="logger">The logging service for recording application events.</param>
-        /// <param name="messagingService">The messaging service for user notifications.</param>
-        /// <param name="localizationService">The localization service for language strings.</param>
-        public CustomerPresenter(ICustomerView view, ICustomerService service, ILogger logger, IMessagingService messagingService, ILocalizationService localizationService, IUiLocalizationManager uiLocalizationManager)
+        public CustomerPresenter(
+            ICustomerView view,
+            ICustomerService service,
+            ILogger logger,
+            IMessagingService messagingService,
+            ILocalizationService localizationService,
+            IUiLocalizationManager uiLocalizationManager)
         {
-            _view = view;
-            _service = service;
-            _logger = logger;
-            _messagingService = messagingService;
-            _localizationService = localizationService;
-            _uiLocalizationManager = uiLocalizationManager;
-            _view.LoadView += OnLoadView;
-            _view.SaveCustomer += OnSaveCustomer;
-            _view.DeleteCustomer += OnDeleteCustomer;
-            _view.ClearView += OnClearView;
-            _view.EditCustomer += OnEditCustomer;
-            _view.LanguageChanged += OnLanguageChanged;
+            _view = view ?? throw new ArgumentNullException(nameof(view));
+            _service = service ?? throw new ArgumentNullException(nameof(service));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _messagingService = messagingService ?? throw new ArgumentNullException(nameof(messagingService));
+            _localizationService = localizationService ?? throw new ArgumentNullException(nameof(localizationService));
+            _uiLocalizationManager = uiLocalizationManager ?? throw new ArgumentNullException(nameof(uiLocalizationManager));
+
+            // NOTE: Your ICustomerView interface (as pasted) has no events.
+            // If events exist in the real interface, wire them here.
+            // Otherwise call the presenter methods explicitly from the view’s code-behind.
         }
 
-        /// <summary>
-        /// Handles the event when the view is loaded.
-        /// </summary>
-        private void OnLoadView(object sender, EventArgs e)
+        // Call this from the view once its WinForms Form handle is created (e.g. OnLoad).
+        public void Initialize()
         {
             try
             {
-                // Load initial data
-                var customers = _service.GetCustomers();
-                _view.DisplayCustomers(customers);
-                _view.ClearCustomerDetails();
-                _view.SetEditMode(false);
-
-                // Get available languages from the localization service and pass them to the view
-                var availableLanguages = _localizationService.GetAvailableLanguages();
-                _view.DisplayLanguages(availableLanguages);
-
-                // Set initial localized text and layout
-                Dictionary<string, string> localizedStrings = _localizationService.GetLocalizedStrings()["CustomerModule"];
-                _view.SetLocalizedText(_uiLocalizationManager, localizedStrings);
-                _view.SetRightToLeft(_localizationService.IsRightToLeft);
-
-                _logger.LogInfo("Customer view loaded successfully.");
+                LoadCustomersIntoView();
+                ProvideLanguagesToView();
+                ApplyLocalizationToView();
+                _logger.LogInfo("Customer view initialized.");
             }
             catch (Exception ex)
             {
                 _logger.LogException(ex);
-                _messagingService.ShowError("Error during view load: " + ex.Message);
+                _messagingService.ShowError("Failed to initialize Customer view: " + ex.Message);
             }
-            // Try
-            // ' Set the UI language and layout direction on form load.
-            // _view.SetRightToLeft(_localizationService.IsRightToLeft)
-
-            // ' Update all UI text based on the selected language.
-            // SetUIText()
-
-            // _logger.LogInfo("Loading customer view.")
-            // Dim customers As List(Of CustomerDTO) = _customerService.GetCustomers()
-            // _view.DisplayCustomers(customers)
-            // Catch ex As Exception
-            // _logger.LogException(ex)
-            // _messagingService.ShowError("An error occurred while loading customers.")
-            // End Try
         }
 
-        /// <summary>
-        /// Handles the event to save a customer.
-        /// </summary>
-        private void OnSaveCustomer(CustomerDTO customer)
+        public void ChangeLanguage(string languageCode)
         {
+            if (string.IsNullOrWhiteSpace(languageCode))
+                return;
+
+            try
+            {
+                // Assuming richer localization service with SetLanguage (unify contracts!)
+                TrySetLanguageIfSupported(languageCode);
+                ApplyLocalizationToView();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogException(ex);
+                _messagingService.ShowError("Language change failed: " + ex.Message);
+            }
+        }
+
+        public void SaveCustomer(CustomerDTO customer)
+        {
+            if (customer == null)
+            {
+                _messagingService.ShowError("No customer data.");
+                return;
+            }
+
             var result = _service.SaveCustomer(customer);
             if (result.IsValid)
             {
-                _messagingService.ShowSuccess(_localizationService.GetString("Customer","Customer Saved"));
+                _messagingService.ShowSuccess(LocalizeMessage("CustomerSaved", "Customer saved successfully."));
                 _view.ClearCustomerDetails();
-                OnLoadView(null, EventArgs.Empty);
+                LoadCustomersIntoView();
             }
             else
             {
-                _messagingService.ShowError(_localizationService.GetString("Customer",result.ErrorMessage));
+                _messagingService.ShowError(LocalizeMessage(result.ErrorMessage, result.ErrorMessage));
             }
         }
 
-        /// <summary>
-        /// Handles the event to delete a customer.
-        /// </summary>
-        private void OnDeleteCustomer(int customerID)
+        public void DeleteCustomer(int customerId)
         {
-            var result = _service.DeleteCustomer(customerID);
+            var result = _service.DeleteCustomer(customerId);
             if (result.IsValid)
             {
-                _messagingService.ShowSuccess(_localizationService.GetString("Customer", "Customer Deleted"));
+                _messagingService.ShowSuccess(LocalizeMessage("CustomerDeleted", "Customer deleted successfully."));
                 _view.ClearCustomerDetails();
-                OnLoadView(null, EventArgs.Empty);
+                LoadCustomersIntoView();
             }
             else
             {
-                _messagingService.ShowError(_localizationService.GetString("Customer", result.ErrorMessage));
+                _messagingService.ShowError(LocalizeMessage(result.ErrorMessage, result.ErrorMessage));
             }
         }
 
-        /// <summary>
-        /// Handles the event to clear the view.
-        /// </summary>
-        private void OnClearView(object sender, EventArgs e)
+        public void EditCustomer(CustomerDTO customer)
+        {
+            if (customer == null) return;
+            _view.DisplayCustomerDetails(customer);
+            _view.SetEditMode(true);
+        }
+
+        public void ClearEditing()
         {
             _view.ClearCustomerDetails();
             _view.SetEditMode(false);
         }
 
-        /// <summary>
-        /// Handles the event to edit a customer.
-        /// </summary>
-        private void OnEditCustomer(CustomerDTO customer)
+        // -------------------- Internal helpers --------------------
+
+        private void LoadCustomersIntoView()
         {
-            _view.DisplayCustomerDetails(customer);
-            _view.SetEditMode(true);
+            var customers = _service.GetCustomers() ?? new List<CustomerDTO>();
+            _view.DisplayCustomers(customers);
+            _view.SetEditMode(false);
         }
 
-        // ''' <summary>
-        // ''' Sets the UI text on the view using the localization service.
-        // ''' </summary>
-        // Private Sub SetUIText()
-        // _view.SetLocalizedText(_localizationService.GetLocalizedStrings("CustomerModule"))
-        // End Sub
-
-        /// <summary>
-        /// Handles the event when the user changes the language.
-        /// </summary>
-        private void OnLanguageChanged(string languageCode)
+        private void ProvideLanguagesToView()
         {
-            _localizationService.SetLanguage(languageCode);
-            Dictionary<string, string> localizedStrings = _localizationService.GetLocalizedStrings()["CustomerModule"];
-            _view.SetLocalizedText(_uiLocalizationManager, localizedStrings);
-            _view.SetRightToLeft(_localizationService.IsRightToLeft);
-            // _localizationService.SetLanguage(languageCode)
-            // _view.SetRightToLeft(_localizationService.IsRightToLeft)
-            // SetUIText()
+            List<(string display, string code)> langs;
+            try
+            {
+                langs = _localizationService.GetAvailableLanguages() ?? new List<(string, string)>();
+            }
+            catch
+            {
+                langs = new List<(string, string)> { ("English", "en-US") };
+            }
+            _view.DisplayLanguages(langs);
+        }
+
+        private void ApplyLocalizationToView()
+        {
+            // Register original texts (only needed once, safe to call again)
+            var viewAsForm = _view as System.Windows.Forms.Form;
+            if (viewAsForm != null)
+            {
+                _uiLocalizationManager.RegisterFormStrings(viewAsForm, ModuleName, GetCurrentLanguageCode());
+            }
+
+            var flat = SafeGetAllStrings();
+
+            // Extract module-specific subset (keys like CustomerModule.SomeKey)
+            var modulePairs = flat
+                .Where(kvp => kvp.Key.StartsWith(ModuleName + ".", StringComparison.OrdinalIgnoreCase))
+                .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+
+            _view.SetLocalizedText(_uiLocalizationManager, modulePairs);
+
+            // Apply RTL
+            bool rtl = TryGetRtl();
+            _view.SetRightToLeft(rtl);
+        }
+
+        private IDictionary<string, string> SafeGetAllStrings()
+        {
+            try
+            {
+                var dict = _localizationService.GetLocalizedStrings();
+                return dict ?? new Dictionary<string, string>();
+            }
+            catch
+            {
+                return new Dictionary<string, string>();
+            }
+        }
+
+        private string LocalizeMessage(string keyOrUiIdentifier, string fallback)
+        {
+            try
+            {
+                // If service supports module scoping via a compound key, look it up.
+                var fullKey = ModuleName + "." + keyOrUiIdentifier;
+                var all = SafeGetAllStrings();
+                if (all.TryGetValue(fullKey, out var v) && !string.IsNullOrEmpty(v))
+                    return v;
+
+                // Fall back to direct key
+                if (all.TryGetValue(keyOrUiIdentifier, out v) && !string.IsNullOrEmpty(v))
+                    return v;
+            }
+            catch { }
+            return fallback;
+        }
+
+        private bool TryGetRtl()
+        {
+            try { return _localizationService.IsRightToLeft; } catch { return false; }
+        }
+
+        private string GetCurrentLanguageCode()
+        {
+            // If using the richer LocalizationService, expose CurrentLanguageCode there.
+            // If not available, you may need to store an internal field when setting language.
+            var prop = _localizationService.GetType().GetProperty("CurrentLanguageCode");
+            return prop != null ? prop.GetValue(_localizationService) as string ?? "en-US" : "en-US";
+        }
+
+        private void TrySetLanguageIfSupported(string code)
+        {
+            var mi = _localizationService.GetType().GetMethod("SetLanguage");
+            if (mi != null) mi.Invoke(_localizationService, new object[] { code });
         }
     }
 }
-
-
-//// Imports AATM.Core.Logging
-//// Imports AATM.Core.Messaging
-//// Imports AATM.Core.Localization
-//// Imports AATM.Modules.Customers
-//// Imports System.Collections.Generic
-
-//// ''' <summary>
-//// ''' The Presenter for the customer management feature.
-//// ''' This class mediates between the View (the UI) and the Model (the business logic).
-//// ''' </summary>
-//// Public Class CustomerPresenter
-//// Private ReadOnly _view As ICustomerView
-//// Private ReadOnly _customerService As ICustomerService
-//// Private ReadOnly _logger As ILogger
-//// Private ReadOnly _messagingService As IMessagingService
-//// Private ReadOnly _localizationService As ILocalizationService
-
-//// ''' <summary>
-//// ''' Initializes a new instance of the CustomerPresenter class.
-//// ''' </summary>
-//// ''' <param name="view">The view that the presenter will manage.</param>
-//// ''' <param name="customerService">The service containing the customer business logic.</param>
-//// ''' <param name="logger">The logging service for recording application events.</param>
-//// ''' <param name="messagingService">The messaging service for user notifications.</param>
-//// ''' <param name="localizationService">The localization service for language strings.</param>
-//// Public Sub New(view As ICustomerView, customerService As ICustomerService, logger As ILogger, messagingService As IMessagingService, localizationService As ILocalizationService)
-//// _view = view
-//// _customerService = customerService
-//// _logger = logger
-//// _messagingService = messagingService
-//// _localizationService = localizationService
-//// AddHandler _view.LoadView, AddressOf OnLoadView
-//// AddHandler _view.SaveCustomer, AddressOf OnSaveCustomer
-//// AddHandler _view.DeleteCustomer, AddressOf OnDeleteCustomer
-//// AddHandler _view.ClearView, AddressOf OnClearView
-//// AddHandler _view.EditCustomer, AddressOf OnEditCustomer
-//// AddHandler _view.LanguageChanged, AddressOf OnLanguageChanged
-//// End Sub
-
-//// ''' <summary>
-//// ''' Handles the event when the view is loaded.
-//// ''' </summary>
-//// Private Sub OnLoadView(sender As Object, e As EventArgs)
-//// Try
-//// ' Set the UI language and layout direction on form load.
-//// _view.SetRightToLeft(_localizationService.IsRightToLeft)
-
-//// ' Update all UI text based on the selected language.
-//// SetUIText()
-
-//// _logger.LogInfo("Loading customer view.")
-//// Dim customers As List(Of CustomerDTO) = _customerService.GetCustomers()
-//// _view.DisplayCustomers(customers)
-//// Catch ex As Exception
-//// _logger.LogException(ex)
-//// _messagingService.ShowError("An error occurred while loading customers.")
-//// End Try
-//// End Sub
-
-//// ''' <summary>
-//// ''' Handles the event to save a customer.
-//// ''' </summary>
-//// Private Sub OnSaveCustomer(customer As CustomerDTO)
-//// Dim result As ValidationResult = _customerService.SaveCustomer(customer)
-//// If result.IsValid Then
-//// _messagingService.ShowSuccess(_localizationService.GetString("CustomerSaved"))
-//// _view.ClearCustomerDetails()
-//// OnLoadView(Nothing, EventArgs.Empty)
-//// Else
-//// _messagingService.ShowError(_localizationService.GetString(result.ErrorMessage))
-//// End If
-//// End Sub
-
-//// ''' <summary>
-//// ''' Handles the event to delete a customer.
-//// ''' </summary>
-//// Private Sub OnDeleteCustomer(customerID As Integer)
-//// Dim result As ValidationResult = _customerService.DeleteCustomer(customerID)
-//// If result.IsValid Then
-//// _messagingService.ShowSuccess(_localizationService.GetString("CustomerDeleted"))
-//// _view.ClearCustomerDetails()
-//// OnLoadView(Nothing, EventArgs.Empty)
-//// Else
-//// _messagingService.ShowError(_localizationService.GetString(result.ErrorMessage))
-//// End If
-//// End Sub
-
-//// ''' <summary>
-//// ''' Handles the event to clear the view.
-//// ''' </summary>
-//// Private Sub OnClearView(sender As Object, e As EventArgs)
-//// _view.ClearCustomerDetails()
-//// _view.SetEditMode(False)
-//// End Sub
-
-//// ''' <summary>
-//// ''' Handles the event to edit a customer.
-//// ''' </summary>
-//// Private Sub OnEditCustomer(customer As CustomerDTO)
-//// _view.DisplayCustomerDetails(customer)
-//// _view.SetEditMode(True)
-//// End Sub
-
-//// ''' <summary>
-//// ''' Sets the UI text on the view using the localization service.
-//// ''' </summary>
-//// Private Sub SetUIText()
-//// _view.SetLocalizedText(_localizationService.GetLocalizedStrings("CustomerModule"))
-//// End Sub
-
-//// ''' <summary>
-//// ''' Handles the event when the user changes the language.
-//// ''' </summary>
-//// Private Sub OnLanguageChanged(languageCode As String) Handles _view.LanguageChanged
-//// _localizationService.SetLanguage(languageCode)
-//// _view.SetRightToLeft(_localizationService.IsRightToLeft)
-//// SetUIText()
-//// End Sub
-//// End Class
-
-
-
-
-//// Imports AATM.Core.Localization
-//// Imports AATM.Core.Logging
-//// Imports AATM.Core.Messaging
-//// Imports AATM.Modules.Customers
-//// Imports System.Collections.Generic
-
-//// ''' <summary>
-//// ''' The Presenter for the customer management feature.
-//// ''' This class mediates between the View (the UI) and the Model (the business logic).
-//// ''' </summary>
-//// Public Class CustomerPresenter
-//// Private ReadOnly _view As ICustomerView
-//// Private ReadOnly _customerService As ICustomerService
-//// Private ReadOnly _logger As ILogger
-//// Private ReadOnly _messagingService As IMessagingService
-
-//// ''' <summary>
-//// ''' Initializes a new instance of the CustomerPresenter class.
-//// ''' </summary>
-//// ''' <param name="view">The view that the presenter will manage.</param>
-//// ''' <param name="customerService">The service containing the customer business logic.</param>
-//// ''' <param name="logger">The logging service for recording application events.</param>
-//// ''' <param name="messagingService">The messaging service for user notifications.</param>
-//// Public Sub New(view As ICustomerView, customerService As ICustomerService, logger As ILogger, messagingService As IMessagingService, localizationService As ILocalizationService)
-//// _view = view
-//// _customerService = customerService
-//// _logger = logger
-//// _messagingService = messagingService
-//// AddHandler _view.LoadView, AddressOf OnLoadView
-//// AddHandler _view.SaveCustomer, AddressOf OnSaveCustomer
-//// AddHandler _view.DeleteCustomer, AddressOf OnDeleteCustomer
-//// AddHandler _view.ClearView, AddressOf OnClearView
-//// AddHandler _view.EditCustomer, AddressOf OnEditCustomer
-//// End Sub
-
-//// ''' <summary>
-//// ''' Handles the event when the view is loaded.
-//// ''' </summary>
-//// Private Sub OnLoadView(sender As Object, e As EventArgs)
-//// Try
-//// _logger.LogInfo("Loading customer view.")
-//// Dim customers As List(Of CustomerDTO) = _customerService.GetCustomers()
-//// _view.DisplayCustomers(customers)
-//// Catch ex As Exception
-//// _logger.LogException(ex)
-//// _messagingService.ShowError("An error occurred while loading customers.")
-//// End Try
-//// End Sub
-
-//// ''' <summary>
-//// ''' Handles the event to save a customer.
-//// ''' </summary>
-//// Private Sub OnSaveCustomer(customer As CustomerDTO)
-//// Dim result As ValidationResult = _customerService.SaveCustomer(customer)
-//// If result.IsValid Then
-//// _messagingService.ShowSuccess("Customer saved successfully.")
-//// _view.ClearCustomerDetails()
-//// OnLoadView(Nothing, EventArgs.Empty)
-//// Else
-//// _messagingService.ShowError(result.ErrorMessage)
-//// End If
-//// End Sub
-
-//// ''' <summary>
-//// ''' Handles the event to delete a customer.
-//// ''' </summary>
-//// Private Sub OnDeleteCustomer(customerID As Integer)
-//// Dim result As ValidationResult = _customerService.DeleteCustomer(customerID)
-//// If result.IsValid Then
-//// _messagingService.ShowSuccess("Customer deleted successfully.")
-//// _view.ClearCustomerDetails()
-//// OnLoadView(Nothing, EventArgs.Empty)
-//// Else
-//// _messagingService.ShowError(result.ErrorMessage)
-//// End If
-//// End Sub
-
-//// ''' <summary>
-//// ''' Handles the event to clear the view.
-//// ''' </summary>
-//// Private Sub OnClearView(sender As Object, e As EventArgs)
-//// _view.ClearCustomerDetails()
-//// _view.SetEditMode(False)
-//// End Sub
-
-//// ''' <summary>
-//// ''' Handles the event to edit a customer.
-//// ''' </summary>
-//// Private Sub OnEditCustomer(customer As CustomerDTO)
-//// _view.DisplayCustomerDetails(customer)
-//// _view.SetEditMode(True)
-//// End Sub
-
-//// End Class
-
-
-//// Imports AATM.Core.Logging
-//// Imports AATM.Core.Messaging
-//// Imports AATM.Modules.Customers
-//// Imports System.Collections.Generic
-
-//// ''' <summary>
-//// ''' The Presenter for the customer management feature.
-//// ''' This class mediates between the View (the UI) and the Model (the business logic).
-//// ''' </summary>
-//// Public Class CustomerPresenter
-//// Private ReadOnly _view As ICustomerView
-//// Private ReadOnly _customerService As ICustomerService
-//// Private ReadOnly _logger As ILogger
-//// Private ReadOnly _messagingService As IMessagingService
-
-//// ''' <summary>
-//// ''' Initializes a new instance of the CustomerPresenter class.
-//// ''' </summary>
-//// ''' <param name="view">The view that the presenter will manage.</param>
-//// ''' <param name="customerService">The service containing the customer business logic.</param>
-//// ''' <param name="logger">The logging service for recording application events.</param>
-//// ''' <param name="messagingService">The messaging service for user notifications.</param>
-//// Public Sub New(view As ICustomerView, customerService As ICustomerService, logger As ILogger, messagingService As IMessagingService)
-//// _view = view
-//// _customerService = customerService
-//// _logger = logger
-//// _messagingService = messagingService
-//// AddHandler _view.LoadView, AddressOf OnLoadView
-//// AddHandler _view.SaveCustomer, AddressOf OnSaveCustomer
-//// AddHandler _view.DeleteCustomer, AddressOf OnDeleteCustomer
-//// AddHandler _view.ClearView, AddressOf OnClearView
-//// AddHandler _view.EditCustomer, AddressOf OnEditCustomer
-//// End Sub
-
-//// ''' <summary>
-//// ''' Handles the event when the view is loaded.
-//// ''' </summary>
-//// Private Sub OnLoadView(sender As Object, e As EventArgs)
-//// Try
-//// _logger.LogInfo("Loading customer view.")
-//// Dim customers As List(Of CustomerDTO) = _customerService.GetCustomers()
-//// _view.DisplayCustomers(customers)
-//// Catch ex As Exception
-//// _logger.LogException(ex)
-//// _messagingService.ShowError("An error occurred while loading customers.")
-//// End Try
-//// End Sub
-
-//// ''' <summary>
-//// ''' Handles the event to save a customer.
-//// ''' </summary>
-//// Private Sub OnSaveCustomer(customer As CustomerDTO)
-//// Dim result As ValidationResult = _customerService.SaveCustomer(customer)
-//// If result.IsValid Then
-//// _messagingService.ShowSuccess("Customer saved successfully.")
-//// OnLoadView(Nothing, EventArgs.Empty)
-//// Else
-//// _messagingService.ShowError(result.ErrorMessage)
-//// End If
-//// End Sub
-
-
-//// ''' <summary>
-//// ''' Handles the event to delete a customer.
-//// ''' </summary>
-//// Private Sub OnDeleteCustomer(customerID As Integer)
-//// Dim result As ValidationResult = _customerService.DeleteCustomer(customerID)
-//// If result.IsValid Then
-//// _messagingService.ShowSuccess("Customer deleted successfully.")
-//// _view.ClearCustomerDetails()
-//// OnLoadView(Nothing, EventArgs.Empty)
-//// Else
-//// _messagingService.ShowError(result.ErrorMessage)
-//// End If
-//// End Sub
-
-//// ''' <summary>
-//// ''' Handles the event to clear the view.
-//// ''' </summary>
-//// Private Sub OnClearView(sender As Object, e As EventArgs)
-//// _view.ClearCustomerDetails()
-//// _view.SetEditMode(False)
-//// End Sub
-
-//// ''' <summary>
-//// ''' Handles the event to edit a customer.
-//// ''' </summary>
-//// Private Sub OnEditCustomer(customer As CustomerDTO)
-//// _view.DisplayCustomerDetails(customer)
-//// _view.SetEditMode(True)
-//// End Sub
-
-//// End Class
-
-
-//// 'Imports AATM.Core.Logging
-//// 'Imports AATM.Core.Messaging
-
-//// '''' <summary>
-//// '''' The Presenter for the customer management feature. It mediates between the View and the Model.
-//// '''' </summary>
-//// 'Public Class CustomerPresenter
-
-//// '    Private ReadOnly _view As ICustomerView
-//// '    Private ReadOnly _customerService As ICustomerService
-//// '    Private ReadOnly _messagingService As IMessagingService
-//// '    Private ReadOnly _logger As ILogger
-
-//// '    ''' <summary>
-//// '    ''' Initializes a new instance of the CustomerPresenter class.
-//// '    ''' </summary>
-//// '    Public Sub New(view As ICustomerView, customerService As ICustomerService, messagingService As IMessagingService, logger As ILogger)
-//// '        _view = view
-//// '        _customerService = customerService
-//// '        _messagingService = messagingService
-//// '        _logger = logger
-
-//// '        ' Add handlers for events raised by the View
-//// '        AddHandler _view.LoadCustomers, AddressOf Me.OnLoadCustomers
-//// '        AddHandler _view.SaveCustomer, AddressOf Me.OnSaveCustomer
-//// '    End Sub
-
-//// '    Private Sub OnLoadCustomers(sender As Object, e As EventArgs)
-//// '        Try
-//// '            _view.EnableView(False) ' Disable the view during the operation
-//// '            _messagingService.ShowInformation("Loading customers...")
-
-//// '            Dim customers As List(Of CustomerDTO) = _customerService.GetCustomers()
-//// '            _view.DisplayCustomers(customers)
-
-//// '            _messagingService.ShowSuccess("Customers loaded successfully.")
-//// '            _logger.LogInfo("Customers loaded.")
-//// '        Catch ex As Exception
-//// '            _messagingService.ShowError("Failed to load customers.")
-//// '            _logger.LogException(ex)
-//// '        Finally
-//// '            _view.EnableView(True) ' Re-enable the view
-//// '        End Try
-//// '    End Sub
-
-//// '    Private Sub OnSaveCustomer(customer As CustomerDTO)
-//// '        Try
-//// '            _view.EnableView(False)
-//// '            _messagingService.ShowInformation("Saving customer...")
-
-//// '            ' Use type inference to avoid ambiguous type issues
-//// '            Dim result = _customerService.SaveCustomer(customer)
-
-//// '            If result.IsValid Then
-//// '                _messagingService.ShowSuccess("Customer saved successfully.")
-//// '                _logger.LogInfo("Customer saved successfully.")
-//// '                ' Refresh the customer list after saving.
-//// '                OnLoadCustomers(Nothing, EventArgs.Empty)
-//// '            Else
-//// '                _messagingService.ShowError("Validation Error: " & result.ErrorMessage)
-//// '                _logger.LogError("Validation Error: " & result.ErrorMessage)
-//// '            End If
-//// '        Catch ex As Exception
-//// '            _messagingService.ShowError("An error occurred while saving the customer.")
-//// '            _logger.LogException(ex)
-//// '        Finally
-//// '            _view.EnableView(True)
-//// '        End Try
-//// '    End Sub
-
-//// 'End Class
-
