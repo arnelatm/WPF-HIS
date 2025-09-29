@@ -145,9 +145,9 @@ namespace AATM.App.TableManager
 
         private ILocalizationService ResolveLocalizationService()
         {
-            // Example: Simple in-memory implementation for demonstration.
-            // Replace with DI or a real service in production.
-            return new InMemoryLocalizationService();
+            // Replace with your actual implementation from LocalizationService.cs
+            // For example, if your class is named LocalizationService and has a suitable constructor:
+            return new LocalizationService(_languageCombo?.SelectedItem is LanguageItem li ? li.Code : "en-US");
         }
 
         // Minimal in-memory implementation for demonstration purposes.
@@ -333,7 +333,7 @@ namespace AATM.App.TableManager
                     // Add default translation (could be extended to load from resources/database)
                     _localizationService.AddOrUpdateString("TranslationModule", c.Name, c.Text, languageCode, c.Text);
                 }
-            }          
+            }         
 
         }
 

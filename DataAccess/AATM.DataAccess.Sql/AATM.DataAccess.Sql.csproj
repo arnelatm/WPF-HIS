@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{031975CA-9C32-0B44-104C-364C9C4CF244}</ProjectGuid>
+    <ProjectGuid>{3BC79669-B374-4122-B4E1-E84CC4C26D4E}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>AATM.Data.Sql</RootNamespace>
-    <AssemblyName>AATM.Data.Sql</AssemblyName>
+    <RootNamespace>AATM.DataAccess.Sql</RootNamespace>
+    <AssemblyName>AATM.DataAccess.Sql</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -21,7 +21,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>bin\Debug\AATM.Data.Sql.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\AATM.DataAccess.Sql.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <DefineConstants>TRACE;DEBUG</DefineConstants>
   </PropertyGroup>
@@ -29,7 +29,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>bin\Release\AATM.Data.Sql.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\AATM.DataAccess.Sql.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <DefineConstants>TRACE</DefineConstants>
   </PropertyGroup>
@@ -113,6 +113,7 @@
       <HintPath>..\..\packages\System.ClientModel.1.0.0\lib\netstandard2.0\System.ClientModel.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=8.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Diagnostics.DiagnosticSource.8.0.1\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
@@ -201,6 +202,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="TranslationRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources.resx">
@@ -222,6 +224,16 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Contracts\AATM.Contracts\AATM.Contracts.csproj">
+      <Project>{464CDA63-DB4A-02B4-1AFA-7083EF503845}</Project>
+      <Name>AATM.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AATM.DataAccess\AATM.DataAccess.csproj">
+      <Project>{72dfff29-2590-00b6-1f3d-e5f62e08d951}</Project>
+      <Name>AATM.DataAccess</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\Microsoft.Data.SqlClient.SNI.6.0.2\build\net462\Microsoft.Data.SqlClient.SNI.targets" Condition="Exists('..\..\packages\Microsoft.Data.SqlClient.SNI.6.0.2\build\net462\Microsoft.Data.SqlClient.SNI.targets')" />

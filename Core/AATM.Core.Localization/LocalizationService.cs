@@ -1,89 +1,94 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using AATM.Contracts.Dtos;
+﻿using AATM.Contracts.Dtos;
 using AATM.Contracts.Interfaces.Services;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
+using System.Diagnostics.Eventing.Reader;
+using System.Globalization;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace AATM.Core.Localization
 {
 
     /// <summary>
-/// Provides localized strings by retrieving them from a database and managing them
-/// for a given language. This class implements the ILocalizationService interface.
-/// </summary>
+    /// Provides localized strings by retrieving them from a database and managing them
+    /// for a given language. This class implements the ILocalizationService interface.
+    /// </summary>
     public class LocalizationService : ILocalizationService
     {
 
         private string _language;
         private IDictionary<string, string> _localizedStrings;
-
+        private IDictionary<string, string> _localizedStringsByOriginal;
         /// <summary>
-    /// Initializes a new instance of the LocalizationService.
-    /// The constructor loads all localized strings for the specified language
-    /// into a local dictionary for fast retrieval.
-    /// </summary>
-    /// <param name="language">The language code for the strings to retrieve (e.g., "en-US").</param>
+        /// Initializes a new instance of the LocalizationService.
+        /// The constructor loads all localized strings for the specified language
+        /// into a local dictionary for fast retrieval.
+        /// </summary>
+        /// <param name="language">The language code for the strings to retrieve (e.g., "en-US").</param>
         public LocalizationService(string language)
         {
             _language = language;
-            _localizedStrings = GetLocalizedStrings();
+            GetLocalizedStrings();
+            //_localizedStrings = GetLocalizedStrings();
+            /// _localizedStringsByOriginal = _localizedStrings.ToDictionary(kvp => kvp.Value, kvp => kvp.Key); 
         }
 
         /// <summary>
-    /// Retrieves a dictionary of all localized strings for the current language.
-    /// This method simulates retrieving data from a database and mapping it
-    /// to the TranslationDto.
-    /// </summary>
-    /// <returns>A Dictionary where the key is the UI identifier and the value is the localized string.</returns>
+        /// Retrieves a dictionary of all localized strings for the current language.
+        /// This method simulates retrieving data from a database and mapping it
+        /// to the TranslationDto.
+        /// </summary>
+        /// <returns>A Dictionary where the key is the UI identifier and the value is the localized string.</returns>
         public IDictionary<string, string> GetLocalizedStrings()
         {
             var localizedStrings = new Dictionary<string, string>();
-            var TranslationDtos = new List<TranslationDto>();
+            var localizedStringsByOriginal = new Dictionary<string, string>();
 
-            // =========================================================================
-            // TODO: In a real application, replace this section with your actual
-            // database connection and query logic to populate the TranslationDtos list.
-            // =========================================================================
+            string connectionString = ConfigurationManager.ConnectionStrings["LocalizationDb"]?.ConnectionString;
 
-            // Placeholder data to simulate database records
-            switch (_language.ToLower() ?? "")
+            using (var connection = new SqlConnection(connectionString))
             {
-                case "en-us":
-                    {
-                        TranslationDtos.Add(new TranslationDto() { UIIdentifier = "btnSave_Text", LocalizedString = "Save" });
-                        TranslationDtos.Add(new TranslationDto() { UIIdentifier = "btnCancel_Text", LocalizedString = "Cancel" });
-                        TranslationDtos.Add(new TranslationDto() { UIIdentifier = "msgConfirmDelete", LocalizedString = "Are you sure you want to delete this record?" });
-                        TranslationDtos.Add(new TranslationDto() { UIIdentifier = "lblFirstName_Text", LocalizedString = "First Name:" });
-                        break;
-                    }
-
-                case "es-es":
-                    {
-                        TranslationDtos.Add(new TranslationDto() { UIIdentifier = "btnSave_Text", LocalizedString = "Guardar" });
-                        TranslationDtos.Add(new TranslationDto() { UIIdentifier = "btnCancel_Text", LocalizedString = "Cancelar" });
-                        TranslationDtos.Add(new TranslationDto() { UIIdentifier = "msgConfirmDelete", LocalizedString = "¿Estás seguro de que quieres eliminar este registro?" });
-                        TranslationDtos.Add(new TranslationDto() { UIIdentifier = "lblFirstName_Text", LocalizedString = "Nombre:" });
-                        break;
-                    }
-
-                default:
-                    {
-                        // You could implement a fallback to a default language here,
-                        // or simply return an empty dictionary.
-                        return new Dictionary<string, string>();
-                    }
-            }
-
-            // Convert the list of DTOs into a dictionary for quick lookups
-            foreach (var translation in TranslationDtos)
-            {
-                if (!localizedStrings.ContainsKey(translation.UIIdentifier))
+                connection.Open();
+                string query = "SELECT OriginalString, LocalizedString, UIIdentifier FROM Localization WHERE LanguageCode = @LanguageCode";
+                using (var command = new SqlCommand(query, connection))
                 {
-                    localizedStrings.Add(translation.UIIdentifier, translation.LocalizedString);
+                    command.Parameters.AddWithValue("@LanguageCode", _language);
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string uiIdentifier = reader["UIIdentifier"].ToString();
+                            string originalString = reader["OriginalString"].ToString();
+                            string localizedString = reader["LocalizedString"].ToString();
+                            if (!localizedStrings.ContainsKey(uiIdentifier))
+                                localizedStrings.Add(uiIdentifier, localizedString);
+
+                            if (!localizedStringsByOriginal.ContainsKey(originalString))
+                                localizedStringsByOriginal.Add(originalString, localizedString);
+
+                            if (!localizedStrings.ContainsKey(uiIdentifier))
+                            {
+                                localizedStrings.Add(uiIdentifier, localizedString);
+                            }
+                            else if (!localizedStringsByOriginal.ContainsKey(originalString))
+
+                            {
+                                localizedStringsByOriginal.Add(originalString, localizedString);
+                                // Optionally log a warning about duplicate UIIdentifier entries.
+                                // Console.WriteLine($"Warning: Duplicate UIIdentifier '{uiIdentifier}' found in localization data.");
+                            }
+                        }
+                    }
                 }
             }
 
-            return localizedStrings;
+            _localizedStrings = localizedStrings;
+            _localizedStringsByOriginal = localizedStringsByOriginal;
+            return _localizedStrings;
         }
 
         /// <summary>
@@ -92,25 +97,51 @@ namespace AATM.Core.Localization
     /// <returns>The localized string or the original string if the translation is not found.</returns>
         public string GetString(string uiIdentifier, string originalString)
         {
-            string localizedString = "";
-            if (_localizedStrings.TryGetValue(uiIdentifier, out localizedString))
+            if (originalString.Trim() == "Language")  System.Diagnostics.Debugger.Break();
+
+            if (_localizedStrings.TryGetValue(uiIdentifier, out var localizedString))
+            if (localizedString != null && localizedString.Trim() != originalString.Trim() ) return localizedString; 
+            _localizedStringsByOriginal.TryGetValue(originalString, out localizedString);
+            if (localizedString != null && localizedString.Trim() != originalString.Trim() ) return localizedString;          
+ 
+            // If not found, add to database as a new entry
+            AddMissingTranslationToDatabase(uiIdentifier, originalString, _language);
+
+            // Optionally, add to in-memory dictionary to avoid repeated DB writes
+            _localizedStrings[uiIdentifier] = originalString;
+            _localizedStringsByOriginal[originalString] = originalString;
+
+            // Log a warning that a translation was not found.
+            // Console.WriteLine($"Warning: Translation for '{uiIdentifier}' not found. Added to database as fallback.");
+            return originalString;
+            
+        }
+
+
+        // Helper method to add missing translation to the database
+        private void AddMissingTranslationToDatabase(string uiIdentifier, string originalString, string languageCode)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["LocalizationDb"]?.ConnectionString;
+            using (var connection = new SqlConnection(connectionString))
             {
-                return localizedString;
-            }
-            else
-            {
-                // Log a warning that a translation was not found.
-                // Consider implementing a mechanism to automatically add the new
-                // key to the database here if it's missing.
-                // Console.WriteLine($"Warning: Translation for '{uiIdentifier}' not found. Returning original string.")
-                return originalString;
+                connection.Open();
+                string query = @"INSERT INTO Localization (UIIdentifier, OriginalString, LocalizedString, LanguageCode)
+                         VALUES (@UIIdentifier, @OriginalString, @LocalizedString, @LanguageCode)";
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@UIIdentifier", uiIdentifier);
+                    command.Parameters.AddWithValue("@OriginalString", originalString);
+                    command.Parameters.AddWithValue("@LocalizedString", originalString); // fallback: original text
+                    command.Parameters.AddWithValue("@LanguageCode", languageCode);
+                    command.ExecuteNonQuery();
+                }
             }
         }
 
         /// <summary>
-    /// Adds or updates a localized string in the database.
-    /// This method simulates writing data to a database.
-    /// </summary>
+        /// Adds or updates a localized string in the database.
+        /// This method simulates writing data to a database.
+        /// </summary>
         public void AddOrUpdateString(string moduleName, string uiIdentifier, string originalString, string languageCode, string localizedString)
         {
             // Simulate DB write...
@@ -119,16 +150,44 @@ namespace AATM.Core.Localization
         }
 
         /// <summary>
-    /// Gets a list of available languages.
-    /// </summary>
-    /// <returns>A list of tuples with the display name and language code.</returns>
+        /// Gets a list of available languages.
+        /// </summary>
+        /// <returns>A list of tuples with the display name and language code.</returns>
         public List<(string display, string code)> GetAvailableLanguages()
         {
-            // =========================================================================
-            // TODO: Query your database for a list of unique language codes and their
-            // display names to populate this list dynamically.
-            // =========================================================================
-            return new List<(string, string)>() { ("English", "en-US"), ("Español", "es-ES") };
+            var languages = new List<(string display, string code)>();
+
+            // Add default language
+            languages.Add(("English", "en-US"));
+
+            // Replace with your actual connection string
+            string connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"]?.ConnectionString;
+
+            // Query the database for unique language codes and their display names
+            using (var connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                string query = "SELECT DISTINCT LanguageCode, DisplayName FROM Translation";
+                using (var command = new SqlCommand(query, connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string code = reader["LanguageCode"].ToString();
+                            string display = reader["DisplayName"].ToString();
+
+                            // Avoid adding duplicate default language
+                            if (!languages.Any(l => l.code == code))
+                            {
+                                languages.Add((display, code));
+                            }
+                        }
+                    }
+                }
+            }
+
+            return languages;
         }
 
         public string Translate(string sourceLang, string targetLang, string textToTranslate)
@@ -163,8 +222,8 @@ namespace AATM.Core.Localization
         }
 
         /// <summary>
-    /// Indicates whether the current language is a right-to-left language.
-    /// </summary>
+        /// Indicates whether the current language is a right-to-left language.
+        /// </summary>
         public bool IsRightToLeft
         {
             get

@@ -166,7 +166,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Database\DatabaseTranslationService.cs" />
-    <Compile Include="Internal\TranslationDbService.cs" />
+    <Compile Include="Database\TranslationDbService.cs" />
     <Compile Include="Mock\MockTranslationApi.cs" />
     <Compile Include="Mock\MockTranslationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -184,9 +184,13 @@
       <Project>{464CDA63-DB4A-02B4-1AFA-7083EF503845}</Project>
       <Name>AATM.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Data\AATM.Data\AATM.Data.csproj">
-      <Project>{72DFFF29-2590-00B6-1F3D-E5F62E08D951}</Project>
-      <Name>AATM.Data</Name>
+    <ProjectReference Include="..\..\DataAccess\AATM.DataAccess.Sql\AATM.DataAccess.Sql.csproj">
+      <Project>{3bc79669-b374-4122-b4e1-e84cc4c26d4e}</Project>
+      <Name>AATM.DataAccess.Sql</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DataAccess\AATM.DataAccess\AATM.DataAccess.csproj">
+      <Project>{72dfff29-2590-00b6-1f3d-e5f62e08d951}</Project>
+      <Name>AATM.DataAccess</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

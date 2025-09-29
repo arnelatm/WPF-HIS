@@ -4,9 +4,10 @@
 
 using System;
 using System.Globalization;
-using AATM.Data;
-using AATM.Contracts;
+using System.Threading.Tasks;
 using AATM.Contracts.Dtos;
+using AATM.DataAccess;
+
 
 namespace AATM.Services
 {
@@ -17,10 +18,10 @@ namespace AATM.Services
     {
         private const string DefaultSourceLanguage = "en";
 
-        private readonly TranslationRepository translationRepository;
+        private readonly ITranslationRepository translationRepository;
         private readonly TranslationApi translationApi;
 
-        public TranslationService(TranslationRepository repo, TranslationApi api)
+        public TranslationService(ITranslationRepository repo, TranslationApi api)
         {
             if (repo == null) throw new ArgumentNullException(nameof(repo));
             if (api == null) throw new ArgumentNullException(nameof(api));
@@ -33,7 +34,7 @@ namespace AATM.Services
         /// Translates the specified text into the given language, returning a TranslationDto.
         /// Attempts to read from the repository first, falling back to the external API and then persisting.
         /// </summary>
-        public TranslationDto Translate(string originalString, string languageCode, string moduleName, string uiIdentifier)
+        public async Task<TranslationDto> Translate(string originalString, string languageCode, string moduleName, string uiIdentifier)
         {
             // Validate text
             if (string.IsNullOrWhiteSpace(originalString))
@@ -62,13 +63,11 @@ namespace AATM.Services
             }
 
             // Try cache/database first
-            TranslationDto cachedDto = translationRepository.GetTranslationFromDb(originalString, normalizedLanguage);
-            if (cachedDto != null)
+            string cachedLocalizedString = await translationRepository.GetTranslationAsync(originalString, normalizedLanguage);
+            if (!string.IsNullOrEmpty(cachedLocalizedString))
             {
-                // This is a small improvement: we use the existing DTO and update the UI fields.
-                cachedDto.ModuleName = moduleName;
-                cachedDto.UIIdentifier = uiIdentifier;
-                return cachedDto;
+                // Build a new DTO using the cached localized string and update the UI fields.
+                return BuildDto(originalString, moduleName, uiIdentifier, normalizedLanguage, cachedLocalizedString);
             }
 
             // Not in DB: call external API
@@ -93,7 +92,83 @@ namespace AATM.Services
 
             // Persist and return
             var newDto = BuildDto(originalString, moduleName, uiIdentifier, normalizedLanguage, localizedString);
-            translationRepository.SaveTranslationToDb(newDto);
+            await translationRepository.UpsertTranslationAsync(newDto);
+
+            return newDto;
+        }
+
+        /// <summary>
+        /// Asynchronously translates the specified text into the given language, returning a TranslationDto.
+        /// Attempts to read from the repository first, falling back to the external API and then persisting.
+        /// </summary>
+        public async Task<TranslationDto> TranslateAsync(string originalString, string languageCode, string moduleName, string uiIdentifier)
+        {
+            if (string.IsNullOrWhiteSpace(originalString))
+            {
+                return new TranslationDto { LocalizedString = "[Error: Text to translate cannot be empty.]" };
+            }
+
+            originalString = originalString.Trim();
+            moduleName = moduleName?.Trim();
+            uiIdentifier = uiIdentifier?.Trim();
+
+            string normalizedLanguage = NormalizeLanguageCode(languageCode);
+            if (normalizedLanguage == null)
+            {
+                return new TranslationDto
+                {
+                    OriginalString = originalString,
+                    ModuleName = moduleName,
+                    UIIdentifier = uiIdentifier,
+                    LanguageCode = languageCode,
+                    LocalizedString = "[Error: Invalid language code.]",
+                    CreationDate = DateTime.UtcNow
+                };
+            }
+
+            // Try cache/database first
+            TranslationDto cachedDto = await translationRepository.GetTranslationAsync(originalString, normalizedLanguage)
+    .ContinueWith(t =>
+    {
+        if (t.Result == null)
+            return null;
+        return new TranslationDto
+        {
+            OriginalString = originalString,
+            ModuleName = moduleName,
+            UIIdentifier = uiIdentifier,
+            LanguageCode = normalizedLanguage,
+            LocalizedString = t.Result,
+            CreationDate = DateTime.UtcNow
+        };
+    });
+
+            if (cachedDto != null)
+            {
+                return cachedDto;
+            }
+
+            // Not in DB: call external API
+            string localizedString;
+            try
+            {
+                localizedString = translationApi.Translate(DefaultSourceLanguage, normalizedLanguage, originalString);
+            }
+            catch (Exception ex)
+            {
+                return new TranslationDto
+                {
+                    OriginalString = originalString,
+                    ModuleName = moduleName,
+                    UIIdentifier = uiIdentifier,
+                    LanguageCode = normalizedLanguage,
+                    LocalizedString = $"[Error: Translation service failed: {ex.Message}]",
+                    CreationDate = DateTime.UtcNow
+                };
+            }
+
+            var newDto = BuildDto(originalString, moduleName, uiIdentifier, normalizedLanguage, localizedString);
+            await translationRepository.UpsertTranslationAsync(newDto);
 
             return newDto;
         }

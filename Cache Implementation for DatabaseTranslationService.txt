@@ -1,0 +1,106 @@
+Here’s a concise guide and code changes to implement **in-memory caching** in your `DatabaseTranslationService` using `IMemoryCache` (as shown in your context):
+
+---
+
+## 1. **Add NuGet Package (if not already present)**
+- Install `Microsoft.Extensions.Caching.Memory` via NuGet.
+
+---
+
+## 2. **Update Constructor to Accept IMemoryCache**
+
+**Change:**
+- Add an `IMemoryCache` parameter to your constructor.
+- Store it in a private field.
+
+```csharp
+public DatabaseTranslationService(string connectionString, ITranslationApi translationApi, IMemoryCache cache)
+{
+    _connectionString = connectionString;
+    _translationApi = translationApi;
+    _cache = cache;
+}
+```
+
+---
+
+## 3. **Add/Update Private Fields**
+
+**Add:**
+```csharp
+private readonly IMemoryCache _cache;
+private readonly TimeSpan _cacheDuration = TimeSpan.FromMinutes(10); // or your preferred duration
+```
+
+---
+
+## 4. **Update `TranslateAsync` to Use Cache**
+
+**Change:**
+- Before querying the database, check the cache.
+- After getting the translation, store it in the cache.
+
+```csharp
+public async Task<string> TranslateAsync(string sourceText, string targetLanguage)
+{
+    string cacheKey = $"{sourceText}:{targetLanguage}";
+    string translatedText = _cache.Get(cacheKey) as string;
+
+    if (translatedText != null)
+        return translatedText;
+
+    // 1. Attempt to retrieve the translation from the database.
+    translatedText = await GetFromDatabaseAsync(sourceText, targetLanguage).ConfigureAwait(false);
+
+    if (string.IsNullOrEmpty(translatedText))
+    {
+        // 2. If not found in the database, fall back to the external API.
+        Console.WriteLine("Translation not found in database. Falling back to external API...");
+        translatedText = await _translationApi.GetTranslationAsync(sourceText, targetLanguage).ConfigureAwait(false);
+
+        if (!string.IsNullOrEmpty(translatedText))
+        {
+            // 3. Save the new translation back to the database for future use (caching).
+            await SaveToDatabaseAsync(sourceText, targetLanguage, translatedText).ConfigureAwait(false);
+        }
+    }
+
+    // Store in cache
+    if (!string.IsNullOrEmpty(translatedText))
+        _cache.Set(cacheKey, translatedText, DateTimeOffset.Now.Add(_cacheDuration));
+
+    return translatedText;
+}
+```
+
+---
+
+## 5. **Register IMemoryCache in Startup/Composition Root**
+
+If you use dependency injection (recommended), register `IMemoryCache` in your DI container.  
+For example, in ASP.NET Core:
+
+```csharp
+services.AddMemoryCache();
+```
+
+For manual instantiation:
+
+```csharp
+var cache = new MemoryCache(new MemoryCacheOptions());
+var service = new DatabaseTranslationService(connStr, translationApi, cache);
+```
+
+---
+
+## **Summary of Changes**
+
+- Add `IMemoryCache` as a dependency.
+- Check cache before DB/API.
+- Store results in cache after retrieval.
+- Set cache expiration as needed.
+
+---
+
+**No other changes are required in your existing logic.**  
+This pattern will efficiently add in-memory caching to your translation service.

@@ -1,7 +1,7 @@
 ﻿using System.Configuration;
 using System.Data.SqlClient;
 
-namespace AATM.Data
+namespace AATM.DataAccess
 {
 
     /// <summary>
