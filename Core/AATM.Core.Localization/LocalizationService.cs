@@ -20,6 +20,7 @@ namespace AATM.Core.Localization
     {
 
         private string _language;
+        private string _moduleName;
         private IDictionary<string, string> _localizedStrings;
         private IDictionary<string, string> _localizedStringsByOriginal;
         /// <summary>
@@ -28,9 +29,10 @@ namespace AATM.Core.Localization
         /// into a local dictionary for fast retrieval.
         /// </summary>
         /// <param name="language">The language code for the strings to retrieve (e.g., "en-US").</param>
-        public LocalizationService(string language)
+        public LocalizationService(string language, string moduleName)
         {
             _language = language;
+            _moduleName = moduleName;
             GetLocalizedStrings();
             //_localizedStrings = GetLocalizedStrings();
             /// _localizedStringsByOriginal = _localizedStrings.ToDictionary(kvp => kvp.Value, kvp => kvp.Key); 
@@ -52,11 +54,11 @@ namespace AATM.Core.Localization
             using (var connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                string query = "SELECT OriginalString, LocalizedString, UIIdentifier FROM Localization WHERE LanguageCode = @LanguageCode";
+                string query = "SELECT OriginalString, LocalizedString, UIIdentifier from Localization where LanguageCode = @LanguageCode and ModuleName = @ModuleName ";
                 using (var command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@LanguageCode", _language);
-
+                    command.Parameters.AddWithValue("@ModuleName", _moduleName);
                     using (var reader = command.ExecuteReader())
                     {
                         while (reader.Read())
@@ -64,15 +66,16 @@ namespace AATM.Core.Localization
                             string uiIdentifier = reader["UIIdentifier"].ToString();
                             string originalString = reader["OriginalString"].ToString();
                             string localizedString = reader["LocalizedString"].ToString();
-                            if (!localizedStrings.ContainsKey(uiIdentifier))
-                                localizedStrings.Add(uiIdentifier, localizedString);
+                            string key = $"{uiIdentifier}";
+                            if (!localizedStrings.ContainsKey(key))
+                                localizedStrings.Add(key, localizedString);
 
                             if (!localizedStringsByOriginal.ContainsKey(originalString))
                                 localizedStringsByOriginal.Add(originalString, localizedString);
 
-                            if (!localizedStrings.ContainsKey(uiIdentifier))
+                            if (!localizedStrings.ContainsKey(key))
                             {
-                                localizedStrings.Add(uiIdentifier, localizedString);
+                                localizedStrings.Add(key, localizedString);
                             }
                             else if (!localizedStringsByOriginal.ContainsKey(originalString))
 
@@ -91,21 +94,43 @@ namespace AATM.Core.Localization
             return _localizedStrings;
         }
 
-        /// <summary>
-    /// Gets a localized string from the pre-loaded dictionary.
-    /// </summary>
-    /// <returns>The localized string or the original string if the translation is not found.</returns>
-        public string GetString(string uiIdentifier, string originalString)
+        public IDictionary<string, string> GetAllLocalizedStrings(String languageCode)
         {
-            if (originalString.Trim() == "Language")  System.Diagnostics.Debugger.Break();
+            var localizedStringsByOriginal = new Dictionary<string, string>();
+            string connectionString = ConfigurationManager.ConnectionStrings["LocalizationDb"]?.ConnectionString;
+            using (var connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                string query = "SELECT OriginalString, LocalizedString where LanguageCode = @LanguageCode ";
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@LanguageCode", _language);
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            localizedStringsByOriginal.Add(reader["OriginalString"].ToString(), reader["LocalizedString"].ToString());
+                        }
+                    }
+                }
+            }
+            return localizedStringsByOriginal;
+        }
+        /// <summary>
+        /// Gets a localized string from the pre-loaded dictionary.
+        /// </summary>
+        /// <returns>The localized string or the original string if the translation is not found.</returns>
+        public string GetString(string moduleName, string uiIdentifier, string originalString)
+        {
+            if (originalString.Trim() == "Language") System.Diagnostics.Debugger.Break();
 
             if (_localizedStrings.TryGetValue(uiIdentifier, out var localizedString))
-            if (localizedString != null && localizedString.Trim() != originalString.Trim() ) return localizedString; 
+                if (localizedString != null && localizedString.Trim() != originalString.Trim()) return localizedString;
             _localizedStringsByOriginal.TryGetValue(originalString, out localizedString);
-            if (localizedString != null && localizedString.Trim() != originalString.Trim() ) return localizedString;          
- 
+            if (localizedString != null && localizedString.Trim() != originalString.Trim()) return localizedString;
+
             // If not found, add to database as a new entry
-            AddMissingTranslationToDatabase(uiIdentifier, originalString, _language);
+            AddMissingTranslationToDatabase(moduleName, uiIdentifier, originalString, _language);
 
             // Optionally, add to in-memory dictionary to avoid repeated DB writes
             _localizedStrings[uiIdentifier] = originalString;
@@ -114,21 +139,22 @@ namespace AATM.Core.Localization
             // Log a warning that a translation was not found.
             // Console.WriteLine($"Warning: Translation for '{uiIdentifier}' not found. Added to database as fallback.");
             return originalString;
-            
+
         }
 
 
         // Helper method to add missing translation to the database
-        private void AddMissingTranslationToDatabase(string uiIdentifier, string originalString, string languageCode)
+        private void AddMissingTranslationToDatabase(string moduleName, string uiIdentifier, string originalString, string languageCode)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["LocalizationDb"]?.ConnectionString;
             using (var connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                string query = @"INSERT INTO Localization (UIIdentifier, OriginalString, LocalizedString, LanguageCode)
-                         VALUES (@UIIdentifier, @OriginalString, @LocalizedString, @LanguageCode)";
+                string query = @"INSERT INTO Localization (ModuleName, UIIdentifier, OriginalString, LocalizedString, LanguageCode)
+                         VALUES (@ModuleName, @UIIdentifier, @OriginalString, @LocalizedString, @LanguageCode)";
                 using (var command = new SqlCommand(query, connection))
                 {
+                    command.Parameters.AddWithValue("@ModuleName", moduleName);
                     command.Parameters.AddWithValue("@UIIdentifier", uiIdentifier);
                     command.Parameters.AddWithValue("@OriginalString", originalString);
                     command.Parameters.AddWithValue("@LocalizedString", originalString); // fallback: original text

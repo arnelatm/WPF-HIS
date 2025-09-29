@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using System.Diagnostics.Eventing.Reader;
 
 namespace AATM.App.TableManager
 {
@@ -147,7 +148,7 @@ namespace AATM.App.TableManager
         {
             // Replace with your actual implementation from LocalizationService.cs
             // For example, if your class is named LocalizationService and has a suitable constructor:
-            return new LocalizationService(_languageCombo?.SelectedItem is LanguageItem li ? li.Code : "en-US");
+            return new LocalizationService(_languageCombo?.SelectedItem is LanguageItem li ? li.Code : "en-US", this.Name);
         }
 
         // Minimal in-memory implementation for demonstration purposes.
@@ -180,12 +181,11 @@ namespace AATM.App.TableManager
                 };
             }
 
-            public string GetString(string uiIdentifier, string originalString)
+            public string GetString(string moduleName, string uiIdentifier, string originalString)
             {
                 if (originalString == "Original") System.Diagnostics.Debugger.Break();
                 // Example breakpoint for debugging
-
-                var key = $"TranslationModule:{uiIdentifier}:{_currentLanguage}";
+                var key = $"{moduleName}:{uiIdentifier}:{_currentLanguage}";
                 if (_strings.TryGetValue(key, out var dict) && dict.TryGetValue(originalString, out var localized))
                     return localized;
                 return originalString;
@@ -327,13 +327,13 @@ namespace AATM.App.TableManager
             foreach (Control c in GetAllControls(this))
             {
                 // Only register if not already present for this language.
-                var existing = _localizationService.GetString(c.Name, c.Text);
+                var existing = _localizationService.GetString(this.GetType().Name, c.Name, c.Text);
                 if (existing == c.Text)
                 {
                     // Add default translation (could be extended to load from resources/database)
-                    _localizationService.AddOrUpdateString("TranslationModule", c.Name, c.Text, languageCode, c.Text);
+                    _localizationService.AddOrUpdateString(this.GetType().Name, c.Name, c.Text, languageCode, c.Text);
                 }
-            }         
+            }
 
         }
 
@@ -391,20 +391,42 @@ namespace AATM.App.TableManager
 
         private void ApplyAllTranslations()
         {
-            // Translate all controls (labels, buttons, etc.)
-            foreach (Control c in GetAllControls(this))
+            if (_languageCombo.SelectedItem is null || _languageCombo.SelectedItem.ToString() == "en-US")
             {
-                var localized = _localizationService.GetString(c.Name, c.Text);
-                if (!string.IsNullOrEmpty(localized) && localized != c.Text)
-                    c.Text = localized;
+                foreach (Control c in GetAllControls(this))
+                {
+                    if (c.Text != c.Tag.ToString())
+                    {
+                        c.Text = c.Tag?.ToString() ?? c.Text;
+                    }
+                }
+
+                // Translate grid column headers
+                foreach (DataGridViewColumn col in _dataGridView.Columns)
+                {
+                    col.HeaderText = col.Tag?.ToString() ?? col.HeaderText;
+                }
+
             }
 
-            // Translate grid column headers
-            foreach (DataGridViewColumn col in _dataGridView.Columns)
+            else
+
             {
-                var localized = _localizationService.GetString(col.Name, col.HeaderText);
-                if (!string.IsNullOrEmpty(localized) && localized != col.HeaderText)
-                    col.HeaderText = localized;
+                // Translate all controls (labels, buttons, etc.)
+                foreach (Control c in GetAllControls(this))
+                {
+                    var localized = _localizationService.GetString(this.GetType().Name, c.Name, c.Text);
+                    if (!string.IsNullOrEmpty(localized) && localized != c.Text)
+                        c.Text = localized;
+                }
+
+                // Translate grid column headers
+                foreach (DataGridViewColumn col in _dataGridView.Columns)
+                {
+                    var localized = _localizationService.GetString(this.GetType().Name, col.Name, col.HeaderText);
+                    if (!string.IsNullOrEmpty(localized) && localized != col.HeaderText)
+                        col.HeaderText = localized;
+                }
             }
         }
     }
