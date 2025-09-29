@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Globalization;
 using System.Resources;
@@ -21,10 +22,11 @@ namespace AATM.UI.Winforms.Localization
         private const int IDX_USERDATA = 1;
         private const int IDX_SENTINEL = 2;
         private const string LOC_SENTINEL = "__LOC_SENTINEL__";
-
+        private static string _languageCode;
         #region Public Orchestrators
-        public static void TranslateControls(Control root, IDictionary<string, string> translationDict, Action<ToolStripButton> toolStripButtonImageTranslator = null, ResourceManager imageResourceManager = null)
+        public static void TranslateControls(Control root, IDictionary<string, string> translationDict, string languageCode, Action<ToolStripButton> toolStripButtonImageTranslator = null, ResourceManager imageResourceManager = null)
         {
+            _languageCode = languageCode;
             if (root is null || translationDict is null)
                 return;
             var q = new Queue<Control>();
@@ -211,6 +213,39 @@ namespace AATM.UI.Winforms.Localization
         }
 
         private static string GetLookupKey(Control ctrl)
+        {
+
+            if (_languageCode == "en-US")
+            {
+                return GetLookupKeyOriginal(ctrl);
+            }
+            else
+            {
+                //if (!IsWrapped(ctrl.Tag))
+                //{
+                //    // Legacy behavior: plain Tag value or Name
+                //    if (ctrl.Tag is null)
+                //        return ctrl.Name;
+                //    return ctrl.Tag.ToString();
+                //}
+
+                //string original = GetOriginal(ctrl);
+                //var userPayload = GetUserPayload(ctrl);
+
+                //// If user payload is a non-empty string treat it as translation key
+                //string userKey = userPayload as string;
+                //if (!string.IsNullOrEmpty(userKey))
+                //    return userKey;
+
+                //// Fallback to original text
+                //if (!string.IsNullOrEmpty(original))
+                //    return original;
+
+                return ctrl.Name;
+            }
+        }
+
+        private static string GetLookupKeyOriginal(Control ctrl)
         {
             if (!IsWrapped(ctrl.Tag))
             {

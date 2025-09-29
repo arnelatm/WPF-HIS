@@ -33,6 +33,7 @@ namespace AATM.Core.Localization
         {
             _language = language;
             _moduleName = moduleName;
+            _localizedStringsByOriginal = GetAllLocalizedStrings(language);
             GetLocalizedStrings();
             //_localizedStrings = GetLocalizedStrings();
             /// _localizedStringsByOriginal = _localizedStrings.ToDictionary(kvp => kvp.Value, kvp => kvp.Key); 
@@ -47,10 +48,7 @@ namespace AATM.Core.Localization
         public IDictionary<string, string> GetLocalizedStrings()
         {
             var localizedStrings = new Dictionary<string, string>();
-            var localizedStringsByOriginal = new Dictionary<string, string>();
-
             string connectionString = ConfigurationManager.ConnectionStrings["LocalizationDb"]?.ConnectionString;
-
             using (var connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -69,20 +67,22 @@ namespace AATM.Core.Localization
                             string key = $"{uiIdentifier}";
                             if (!localizedStrings.ContainsKey(key))
                                 localizedStrings.Add(key, localizedString);
-
-                            if (!localizedStringsByOriginal.ContainsKey(originalString))
-                                localizedStringsByOriginal.Add(originalString, localizedString);
-
-                            if (!localizedStrings.ContainsKey(key))
+                            if (_language != "en-US")
                             {
-                                localizedStrings.Add(key, localizedString);
-                            }
-                            else if (!localizedStringsByOriginal.ContainsKey(originalString))
+                                if (!_localizedStringsByOriginal.ContainsKey(originalString))
+                                    _localizedStringsByOriginal.Add(originalString, localizedString);
 
-                            {
-                                localizedStringsByOriginal.Add(originalString, localizedString);
-                                // Optionally log a warning about duplicate UIIdentifier entries.
-                                // Console.WriteLine($"Warning: Duplicate UIIdentifier '{uiIdentifier}' found in localization data.");
+                                if (!localizedStrings.ContainsKey(key))
+                                {
+                                    localizedStrings.Add(key, localizedString);
+                                }
+                                else if (!_localizedStringsByOriginal.ContainsKey(originalString))
+
+                                {
+                                    _localizedStringsByOriginal.Add(originalString, localizedString);
+                                    // Optionally log a warning about duplicate UIIdentifier entries.
+                                    // Console.WriteLine($"Warning: Duplicate UIIdentifier '{uiIdentifier}' found in localization data.");
+                                }
                             }
                         }
                     }
@@ -90,7 +90,6 @@ namespace AATM.Core.Localization
             }
 
             _localizedStrings = localizedStrings;
-            _localizedStringsByOriginal = localizedStringsByOriginal;
             return _localizedStrings;
         }
 
@@ -101,7 +100,7 @@ namespace AATM.Core.Localization
             using (var connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                string query = "SELECT OriginalString, LocalizedString where LanguageCode = @LanguageCode ";
+                string query = "SELECT OriginalString, LocalizedString from Localization where LanguageCode = @LanguageCode ";
                 using (var command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@LanguageCode", _language);
@@ -109,7 +108,13 @@ namespace AATM.Core.Localization
                     {
                         while (reader.Read())
                         {
-                            localizedStringsByOriginal.Add(reader["OriginalString"].ToString(), reader["LocalizedString"].ToString());
+                            string originalString = reader["OriginalString"].ToString();
+                            string localizedString = reader["LocalizedString"].ToString();
+                            if (!localizedStringsByOriginal.ContainsKey(originalString))
+                            {
+                                localizedStringsByOriginal.Add(originalString, localizedString);
+                            }
+                            // Optionally, you could log or handle duplicates here if needed.
                         }
                     }
                 }

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using System.Diagnostics.Eventing.Reader;
+using AATM.UI.Winforms.Localization; // <-- Add this using for ControlLocalizer
 
 namespace AATM.App.TableManager
 {
@@ -128,8 +129,6 @@ namespace AATM.App.TableManager
             if (li == null) return;
             ApplyLanguage(li.Code);
         }
-
-
 
         private void ApplyRightToLeft(bool rtl)
         {
@@ -354,80 +353,31 @@ namespace AATM.App.TableManager
 
             _localizationService.SetLanguage(languageCode);
 
-            // Register and apply translations
-            ApplyAllTranslations();
+            // NEW: Use ControlLocalizer to apply translations to all controls
+            try
+            {
+                var translationDict = _localizationService.GetLocalizedStrings();
+                ControlLocalizer.TranslateControls(this, translationDict, languageCode, ControlLocalizer.TranslateToolStripButtonImage);
+            }
+            catch { /* ignore mapping issues */ }
+
+            // Translate grid column headers
+            try
+            {
+                var translationDict = _localizationService.GetLocalizedStrings();
+                foreach (DataGridViewColumn col in _dataGridView.Columns)
+                {
+                    var key = col.Tag != null ? col.Tag.ToString() : col.Name;
+                    if (translationDict.TryGetValue(key, out var localized) && !string.IsNullOrEmpty(localized) && localized != col.HeaderText)
+                        col.HeaderText = localized;
+                }
+            }
+            catch { /* ignore mapping issues */ }
 
             bool rtl = _localizationService.IsRightToLeft || languageCode.StartsWith("ar", StringComparison.OrdinalIgnoreCase);
             ApplyRightToLeft(rtl);
             statusLabel.Text = $"Language applied: {languageCode}";
-
-            //if (_localizationService == null || _uiLocalizationManager == null) return;
-
-            //try
-            //{
-            //    _uiLocalizationManager.RegisterFormStrings(this, "TranslationModule", languageCode);
-            //}
-            //catch { /* ignore */ }
-
-            //IDictionary<string, string> dict = null;
-            //try { dict = _localizationService.GetLocalizedStrings(); } catch { }
-
-            //if (dict != null && dict.Count > 0)
-            //{
-            //    try
-            //    {
-            //        _uiLocalizationManager.SetLocalizedText(this, dict.ToDictionary(k => k.Key, v => v.Value));
-            //    }
-            //    catch { /* ignore mapping issues */ }
-            //}
-
-            //// NEW: Register and apply all localized strings for the selected language.
-            //RegisterAndApplyAllLocalizedStrings(languageCode);
-
-            //bool rtl = _localizationService.IsRightToLeft || languageCode.StartsWith("ar", StringComparison.OrdinalIgnoreCase);
-            //ApplyRightToLeft(rtl);
-            //statusLabel.Text = $"Language applied: {languageCode}";
         }
 
-        private void ApplyAllTranslations()
-        {
-            if (_languageCombo.SelectedItem is null || _languageCombo.SelectedItem.ToString() == "en-US")
-            {
-                foreach (Control c in GetAllControls(this))
-                {
-                    if (c.Text != c.Tag.ToString())
-                    {
-                        c.Text = c.Tag?.ToString() ?? c.Text;
-                    }
-                }
-
-                // Translate grid column headers
-                foreach (DataGridViewColumn col in _dataGridView.Columns)
-                {
-                    col.HeaderText = col.Tag?.ToString() ?? col.HeaderText;
-                }
-
-            }
-
-            else
-
-            {
-                // Translate all controls (labels, buttons, etc.)
-                foreach (Control c in GetAllControls(this))
-                {
-                    var localized = _localizationService.GetString(this.GetType().Name, c.Name, c.Text);
-                    if (!string.IsNullOrEmpty(localized) && localized != c.Text)
-                        c.Text = localized;
-                }
-
-                // Translate grid column headers
-                foreach (DataGridViewColumn col in _dataGridView.Columns)
-                {
-                    var localized = _localizationService.GetString(this.GetType().Name, col.Name, col.HeaderText);
-                    if (!string.IsNullOrEmpty(localized) && localized != col.HeaderText)
-                        col.HeaderText = localized;
-                }
-            }
-        }
     }
 }
