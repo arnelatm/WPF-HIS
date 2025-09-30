@@ -1,19 +1,15 @@
-﻿#if DEBUG
-#define DESIGN_TIME_SAFE
-#endif
-using AATM.Contracts.Attributes;
-using AATM.Contracts.Interfaces.Services;
+﻿using AATM.Contracts.Interfaces.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Http;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace AATM.UI.Winforms.BaseControls
 {
@@ -21,9 +17,9 @@ namespace AATM.UI.Winforms.BaseControls
     [DesignTimeVisible(false)]
     [Obsolete("Do not inherit directly. Use StrictGridCrudForm<T>.", false)]
 #if DESIGN_TIME_SAFE
-    public class BaseGridCrudForm<T> : Form where T : class // No IEntityWithId constraint at Design Time
+    public class BaseGridCrudFrm<T> : Form where T : class // No IEntityWithId constraint at Design Time
 #else
-    public class BaseGridCrudForm<T> : Form where T : class, IEntityWithId // IEntityWithId constraint at Runtime
+    public class BaseGridCrudFrm<T> : Form where T : class, IEntityWithId // IEntityWithId constraint at Runtime
 #endif
     {
         protected readonly ICrudService<T> _service;
@@ -42,38 +38,25 @@ namespace AATM.UI.Winforms.BaseControls
         // Bindings for forms
         private readonly List<TextBinding> _textBindings = new List<TextBinding>();
 
-        //// ** [FIX]: Ensure Getter and Setter are defined as read/write properties **
-        //private class TextBinding
-        //{
-        //    // Required for the previous fix (CS0117)
-        //    public System.Windows.Forms.Control Control { get; set; }
-
-        //    // ** These members MUST have { get; set; } to resolve CS0229 **
-        //    public Func<T, object> Getter { get; set; }
-        //    public Action<T, string> Setter { get; set; }
-
-        //}
-
-
         // New: shared BindingSource + BindingNavigator
         private BindingSource _bindingSource;
         private BindingNavigator _navigator;
 
-        // Exposed navigator items for optional customization
-        protected ToolStripButton NavFirstButton { get; private set; }
-        protected ToolStripButton NavPrevButton { get; private set; }
-        protected ToolStripButton NavNextButton { get; private set; }
-        protected ToolStripButton NavLastButton { get; private set; }
-        protected ToolStripTextBox NavPositionTextBox { get; private set; }
-        protected ToolStripLabel NavCountLabel { get; private set; }
-        protected ToolStripButton SaveButton { get; private set; }
-        protected ToolStripButton DeleteButton { get; private set; }
-        protected ToolStripButton RefreshButton { get; private set; }
+        //// Exposed navigator items for optional customization
+        //protected ToolStripButton NavFirstButton { get; private set; }
+        //protected ToolStripButton NavPrevButton { get; private set; }
+        //protected ToolStripButton NavNextButton { get; private set; }
+        //protected ToolStripButton NavLastButton { get; private set; }
+        //protected ToolStripTextBox NavPositionTextBox { get; private set; }
+        //protected ToolStripLabel NavCountLabel { get; private set; }
+        //protected ToolStripButton SaveButton { get; private set; }
+        //protected ToolStripButton DeleteButton { get; private set; }
+        //protected ToolStripButton RefreshButton { get; private set; }
 
         // Parameterless ctor always provides design-time safe service
-        protected BaseGridCrudForm() : this(() => new DesignTimeCrudService()) { }
+        protected BaseGridCrudFrm() : this(() => new DesignTimeCrudService()) { }
 
-        protected BaseGridCrudForm(Func<ICrudService<T>> serviceFactory)
+        protected BaseGridCrudFrm(Func<ICrudService<T>> serviceFactory)
         {
             if (IsDesignTime())
             {
@@ -84,13 +67,13 @@ namespace AATM.UI.Winforms.BaseControls
                 _service = (serviceFactory != null ? serviceFactory() : null) ?? new DesignTimeCrudService();
             }
 
-            InitializeNavigatorIfNeeded();
+            // InitializeNavigatorIfNeeded();
         }
 
-        protected BaseGridCrudForm(ICrudService<T> service)
+        protected BaseGridCrudFrm(ICrudService<T> service)
         {
             _service = service ?? throw new ArgumentNullException(nameof(service));
-            InitializeNavigatorIfNeeded();
+            // InitializeNavigatorIfNeeded();
         }
 
         // Design-time no-op service
@@ -214,7 +197,7 @@ namespace AATM.UI.Winforms.BaseControls
         //        // 6. Add to the internal list:
         //        // We assume TextBinding is a struct/class that holds the Control, Getter, and Setter.
 
-        //        // ** If your original BaseGridCrudForm used a protected method like 'RegisterTextBinding(Control, Func<T, object>)', 
+        //        // ** If your original BaseGridCrudFrm used a protected method like 'RegisterTextBinding(Control, Func<T, object>)', 
         //        //    you must call that protected method here. **
 
         //        // Since we don't have that method, we will directly add the binding:
@@ -326,82 +309,82 @@ namespace AATM.UI.Winforms.BaseControls
         protected BindingSource DataBindingSource => _bindingSource;
         protected BindingNavigator Navigator => _navigator;
 
-        private void InitializeNavigatorIfNeeded()
-        {
-            if (IsDesignTime()) return;
-            if (!UseDefaultNavigator) return;
-            if (_navigator != null) return;
+        //private void InitializeNavigatorIfNeeded()
+        //{
+        //    if (IsDesignTime()) return;
+        //    if (!UseDefaultNavigator) return;
+        //    if (_navigator != null) return;
 
-            _bindingSource = new BindingSource();
+        //    _bindingSource = new BindingSource();
 
-            _navigator = new BindingNavigator(false)
-            {
-                GripStyle = ToolStripGripStyle.Hidden,
-                Dock = DockStyle.Top,
-                BindingSource = _bindingSource,
-                RenderMode = ToolStripRenderMode.System
-            };
+        //    _navigator = new BindingNavigator(false)
+        //    {
+        //        GripStyle = ToolStripGripStyle.Hidden,
+        //        Dock = DockStyle.Top,
+        //        BindingSource = _bindingSource,
+        //        RenderMode = ToolStripRenderMode.System
+        //    };
 
-            // Build navigation items
-            if (ShowNavigationButtons)
-            {
-                NavFirstButton = new ToolStripButton("|<") { ToolTipText = "First" };
-                NavPrevButton = new ToolStripButton("<") { ToolTipText = "Previous" };
-                NavPositionTextBox = new ToolStripTextBox { AutoSize = false, Width = 50, ToolTipText = "Position" };
-                NavCountLabel = new ToolStripLabel { ToolTipText = "Count" };
-                var sepNav1 = new ToolStripSeparator();
-                var sepNav2 = new ToolStripSeparator();
-                NavNextButton = new ToolStripButton(">") { ToolTipText = "Next" };
-                NavLastButton = new ToolStripButton(">|") { ToolTipText = "Last" };
+        //    // Build navigation items
+        //    if (ShowNavigationButtons)
+        //    {
+        //        NavFirstButton = new ToolStripButton("|<") { ToolTipText = "First" };
+        //        NavPrevButton = new ToolStripButton("<") { ToolTipText = "Previous" };
+        //        NavPositionTextBox = new ToolStripTextBox { AutoSize = false, Width = 50, ToolTipText = "Position" };
+        //        NavCountLabel = new ToolStripLabel { ToolTipText = "Count" };
+        //        var sepNav1 = new ToolStripSeparator();
+        //        var sepNav2 = new ToolStripSeparator();
+        //        NavNextButton = new ToolStripButton(">") { ToolTipText = "Next" };
+        //        NavLastButton = new ToolStripButton(">|") { ToolTipText = "Last" };
 
-                // Wire standard binding navigator semantics
-                _navigator.MoveFirstItem = NavFirstButton;
-                _navigator.MovePreviousItem = NavPrevButton;
-                _navigator.MoveNextItem = NavNextButton;
-                _navigator.MoveLastItem = NavLastButton;
-                _navigator.PositionItem = NavPositionTextBox;
-                _navigator.CountItem = NavCountLabel;
+        //        // Wire standard binding navigator semantics
+        //        _navigator.MoveFirstItem = NavFirstButton;
+        //        _navigator.MovePreviousItem = NavPrevButton;
+        //        _navigator.MoveNextItem = NavNextButton;
+        //        _navigator.MoveLastItem = NavLastButton;
+        //        _navigator.PositionItem = NavPositionTextBox;
+        //        _navigator.CountItem = NavCountLabel;
 
-                _navigator.Items.AddRange(new ToolStripItem[]
-                {
-                    NavFirstButton, NavPrevButton, sepNav1,
-                    NavPositionTextBox, NavCountLabel, sepNav2,
-                    NavNextButton, NavLastButton
-                });
-            }
+        //        _navigator.Items.AddRange(new ToolStripItem[]
+        //        {
+        //            NavFirstButton, NavPrevButton, sepNav1,
+        //            NavPositionTextBox, NavCountLabel, sepNav2,
+        //            NavNextButton, NavLastButton
+        //        });
+        //    }
 
-            if (ShowCrudButtons)
-            {
-                var sepCrud = new ToolStripSeparator();
-                SaveButton = new ToolStripButton("Save") { ToolTipText = "Save / Update", DisplayStyle = ToolStripItemDisplayStyle.Text };
-                DeleteButton = new ToolStripButton("Delete") { ToolTipText = "Delete selected", DisplayStyle = ToolStripItemDisplayStyle.Text };
-                SaveButton.Click += async (s, e) => await OnSaveRequestedAsync();
-                DeleteButton.Click += async (s, e) => await OnDeleteRequestedAsync();
+        //    if (ShowCrudButtons)
+        //    {
+        //        var sepCrud = new ToolStripSeparator();
+        //        SaveButton = new ToolStripButton("Save") { ToolTipText = "Save / Update", DisplayStyle = ToolStripItemDisplayStyle.Text };
+        //        DeleteButton = new ToolStripButton("Delete") { ToolTipText = "Delete selected", DisplayStyle = ToolStripItemDisplayStyle.Text };
+        //        SaveButton.Click += async (s, e) => await OnSaveRequestedAsync();
+        //        DeleteButton.Click += async (s, e) => await OnDeleteRequestedAsync();
 
-                _navigator.Items.AddRange(new ToolStripItem[]
-                {
-                    sepCrud, SaveButton, DeleteButton
-                });
-            }
+        //        _navigator.Items.AddRange(new ToolStripItem[]
+        //        {
+        //            sepCrud, SaveButton, DeleteButton
+        //        });
+        //    }
 
-            if (ShowRefreshButton)
-            {
-                var sepRefresh = new ToolStripSeparator();
-                RefreshButton = new ToolStripButton("Refresh") { ToolTipText = "Reload data", DisplayStyle = ToolStripItemDisplayStyle.Text };
-                RefreshButton.Click += async (s, e) => await OnRefreshRequestedAsync();
-                _navigator.Items.AddRange(new ToolStripItem[]
-                {
-                    sepRefresh, RefreshButton
-                });
-            }
+        //    if (ShowRefreshButton)
+        //    {
+        //        var sepRefresh = new ToolStripSeparator();
+        //        RefreshButton = new ToolStripButton("Refresh") { ToolTipText = "Reload data", DisplayStyle = ToolStripItemDisplayStyle.Text };
+        //        RefreshButton.Click += async (s, e) => await OnRefreshRequestedAsync();
+        //        _navigator.Items.AddRange(new ToolStripItem[]
+        //        {
+        //            sepRefresh, RefreshButton
+        //        });
+        //    }
 
-            // Let derived classes add more
-            OnCreateAdditionalNavigatorItems(_navigator);
+        //    // Let derived classes add more
+        //    OnCreateAdditionalNavigatorItems(_navigator);
 
-            // Insert into controls
-            Controls.Add(_navigator);
-            _navigator.BringToFront();
-        }
+        //    // Insert into controls
+        //    Controls.Add(_navigator);
+        //    _navigator.BringToFront();
+        //}
 
         // -------------------- NEW BINDING SUPPORT --------------------
 
@@ -457,29 +440,6 @@ namespace AATM.UI.Winforms.BaseControls
             }
         }
 
-        //protected sealed override void PopulateFormFieldsFromGrid(int rowIndex)
-        //{
-        //    // rowIndex is ignored; using BindingSource.Current which is updated by the navigator/grid selection
-        //    var entity = _bindingSource.Current as T;
-        //    if (entity == null) return;
-
-        //    foreach (var b in _textBindings)
-        //    {
-        //        if (b.Box != null)
-        //            b.Box.Text = b.Getter(entity) ?? string.Empty;
-        //    }
-        //    //// Implementation uses _textBindings to set control text from DTO properties
-        //    //var entity = _bindingSource.Current as T;
-        //    //if (entity == null) return;
-
-        //    //foreach (var binding in _textBindings)
-        //    //{
-        //    //    if (binding.Box != null)
-        //    //        binding.Box.Text = binding.Getter(entity) ?? string.Empty;
-        //    //}
-        //}
-
-        //protected virtual T BuildModelFromForm(T current)
 
         protected T BuildModelFromForm(T current)
         {
@@ -500,38 +460,6 @@ namespace AATM.UI.Winforms.BaseControls
             return dto;
         }
 
-        //protected T BuildModelFromForm(T current)
-        //{
-        //    var dto = current ?? Activator.CreateInstance<T>();
-
-        //    //// Preserve ID from the selected entity so the service performs an update
-        //    //// rather than an insert or a no-op that ignores key changes.
-        //    //if (current != null)
-        //    //{
-        //    //    var idProp = typeof(T).GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance)
-        //    //        .FirstOrDefault(p =>
-        //    //            p.PropertyType == typeof(int) &&
-        //    //            (string.Equals(p.Name, "ID", StringComparison.OrdinalIgnoreCase) ||
-        //    //             string.Equals(p.Name, "Id", StringComparison.OrdinalIgnoreCase)));
-
-        //    //    if (idProp != null && idProp.CanRead && idProp.CanWrite)
-        //    //    {
-        //    //        try
-        //    //        {
-        //    //            var id = (int)(idProp.GetValue(current) ?? 0);
-        //    //            idProp.SetValue(dto, id);
-        //    //        }
-        //    //        catch { /* swallow; keep DTO usable */ }
-        //    //    }
-        //    //}
-
-        //    foreach (var b in _textBindings)
-        //        if (b.Box != null)
-        //            b.Setter(dto, b.Box.Text);
-
-        //    return dto;
-        //}
-
         protected int GetEntityId(T entity)
         {
             if (entity == null) return 0;
@@ -544,44 +472,6 @@ namespace AATM.UI.Winforms.BaseControls
             // Fallback for types that somehow failed the constraint check (or if the constraint is removed at design time)
             return 0;
         }
-
-        //protected virtual int GetEntityId(T entity)
-        //{
-        //    if (entity == null) return 0;
-        //    // T is constrained to IEntityWithId, so direct access i
-        //    return entity.ID;
-        //    //if (entity == null) return 0;
-        //    //if (_cachedIdGetter == null)
-        //    //{
-        //    //    // Look for int ID or Id
-        //    //    var idProp = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance)
-        //    //        .FirstOrDefault(p =>
-        //    //            p.PropertyType == typeof(int) &&
-        //    //            (string.Equals(p.Name, "ID", StringComparison.OrdinalIgnoreCase) ||
-        //    //             string.Equals(p.Name, "Id", StringComparison.OrdinalIgnoreCase)));
-
-        //    //    if (idProp != null && idProp.CanRead)
-        //    //    {
-        //    //        var param = Expression.Parameter(typeof(T), "e");
-        //    //        var access = Expression.Property(param, idProp);
-        //    //        var lambda = Expression.Lambda<Func<T, int>>(access, param);
-        //    //        _cachedIdGetter = lambda.Compile();
-        //    //    }
-        //    //    else
-        //    //    {
-        //    //        _cachedIdGetter = _ => 0;
-        //    //    }
-        //    //}
-        //    //return _cachedIdGetter(entity);
-        //}
-
-
-        //protected virtual void ClearFormFieldsCore()
-        //{
-        //    foreach (var b in _textBindings)
-        //        if (b.Box != null)
-        //            b.Box.Text = string.Empty;
-        //}
 
         // -------------------- COLUMN HELPERS & GRID CONFIG --------------------
 
@@ -782,10 +672,6 @@ namespace AATM.UI.Winforms.BaseControls
                 _items = result != null ? result.ToList() : new List<T>();
 
                 var grid = Grid;
-
-                // Ensure navigator stack exists when enabled
-                if (UseDefaultNavigator && _navigator == null)
-                    InitializeNavigatorIfNeeded();
 
                 grid.SuspendLayout();
                 try
@@ -1160,11 +1046,16 @@ namespace AATM.UI.Winforms.BaseControls
         {
             this.SuspendLayout();
             // 
-            // BaseGridCrudForm
+            // BaseGridCrudFrm
             // 
             this.ClientSize = new System.Drawing.Size(680, 307);
-            this.Name = "BaseGridCrudForm";
+            this.Name = "BaseGridCrudFrm";
             this.ResumeLayout(false);
+
+        }
+
+        private void bindingNavigatorAddNewItem_Click(object sender, EventArgs e)
+        {
 
         }
     }

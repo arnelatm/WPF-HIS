@@ -81,6 +81,24 @@
     <Compile Include="BaseControls\BaseGridCrudForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="BaseControls\BaseGridCrudFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BaseControls\BaseGridCrudFrm.Designer.cs">
+      <DependentUpon>BaseGridCrudFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BaseControls\BaseCrudForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BaseControls\BaseCrudForm.Designer.cs">
+      <DependentUpon>BaseCrudForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BaseControls\Form2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BaseControls\Form2.Designer.cs">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </Compile>
     <Compile Include="BaseControls\StrictGridCrudForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -140,6 +158,9 @@
     <!-- Deleted: BaseControls\BaseGridCrudForm.resx -->
     <EmbeddedResource Include="BaseControls\BaseGridCrudForm.resx">
       <DependentUpon>BaseGridCrudForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BaseControls\BaseGridCrudFrm.resx">
+      <DependentUpon>BaseGridCrudFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmCustomer.resx">
       <DependentUpon>FrmCustomer.cs</DependentUpon>
@@ -207,6 +228,9 @@
       <Project>{28115980-A3B0-09B8-23F4-9BAF762B5C6E}</Project>
       <Name>AATM.Modules.Customers</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
