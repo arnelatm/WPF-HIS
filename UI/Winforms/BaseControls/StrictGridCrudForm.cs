@@ -1,49 +1,37 @@
+﻿#if DEBUG
+#define DESIGN_TIME_SAFE
+#endif
 using AATM.Contracts.Interfaces.Services;
+using System;
 using System.Windows.Forms;
 
 namespace AATM.UI.Winforms.BaseControls
 {
-    //public abstract class StrictGridCrudForm<T> : BaseGridCrudForm<T> where T : class, IEntityWithId
+    // Design-time safe DTO implementing IEntityWithId
 #if DESIGN_TIME_SAFE
-    public abstract class StrictGridCrudForm<T> : BaseGridCrudForm<T> where T : class
+    public abstract partial class StrictGridCrudForm : BaseGridCrudForm<DesignTimeDto>
 #else
     public abstract class StrictGridCrudForm<T> : BaseGridCrudForm<T> where T : class, IEntityWithId
 #endif
     {
-        protected StrictGridCrudForm() { }
+        public StrictGridCrudForm()
+        {
+            InitializeComponent();
+        }
+
+#if DESIGN_TIME_SAFE
+        protected StrictGridCrudForm(System.Func<ICrudService<DesignTimeDto>> factory) : base(factory) { }
+        protected StrictGridCrudForm(ICrudService<DesignTimeDto> service) : base(service) { }
+#else
         protected StrictGridCrudForm(System.Func<ICrudService<T>> factory) : base(factory) { }
         protected StrictGridCrudForm(ICrudService<T> service) : base(service) { }
-
+#endif
         protected abstract override DataGridView Grid { get; }
-        //protected abstract override void PopulateFormFieldsFromGrid(int rowIndex);
-        //protected abstract override T BuildModelFromForm(T current);
-        //protected abstract override int GetEntityId(T entity);
-        //protected abstract override void ClearFormFieldsCore();
+    }
 
-
-        protected override void OnCreateAdditionalNavigatorItems(BindingNavigator navigator)
-        {
-            //base.OnCreateAdditionalNavigatorItems(navigator);
-
-            //navigator.Items.Add(new ToolStripSeparator());
-
-            //_languageCombo = new ToolStripComboBox
-            //{
-            //    Name = "tscLanguage",
-            //    DropDownStyle = ComboBoxStyle.DropDownList,
-            //    ToolTipText = "Select UI language"
-            //};
-            //_languageCombo.SelectedIndexChanged += (s, e) => ApplySelectedLanguage();
-
-            //_applyLangButton = new ToolStripButton("Apply")
-            //{
-            //    ToolTipText = "Apply selected language to this form"
-            //};
-            //_applyLangButton.Click += (s, e) => ApplySelectedLanguage();
-
-            //navigator.Items.Add(new ToolStripLabel("Lang:"));
-            //navigator.Items.Add(_languageCombo);
-            //navigator.Items.Add(_applyLangButton);
-        }
+    public class DesignTimeDto : IEntityWithId
+    {
+        public int ID { get; set; }
+        // Add other properties if needed for design-time visualization
     }
 }
