@@ -8,18 +8,12 @@ using AATM.Contracts.Interfaces.Services;
 using AATM.Core.Localization;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
-using System.Diagnostics.Eventing.Reader;
 using AATM.UI.Winforms.Localization; // <-- Add this using for ControlLocalizer
 
 namespace AATM.App.TableManager
 {
-#if DESIGN_TIME_SAFE
-    public partial class TranslationForm : BaseGridCrudForm<TranslationDto>
-#else
-    public partial class TranslationForm : StrictGridCrudForm<TranslationDto>
-#endif
+    public partial class TranslationForm : BaseGridCrudForm
     {
         private ToolStripProgressBar _statusProgress;
 
@@ -28,6 +22,7 @@ namespace AATM.App.TableManager
         private readonly IUiLocalizationManager _uiLocalizationManager;
         private ToolStripComboBox _languageCombo;
         private ToolStripButton _applyLangButton;
+        private TranslationDto entity = new TranslationDto();
 
         private sealed class LanguageItem
         {
@@ -38,10 +33,11 @@ namespace AATM.App.TableManager
         }
 
         public TranslationForm()
-            : base(() => GetCrudServiceSafe(() => new TranslationCrudService()))
+            : base(() => GetCrudServiceSafe(() => (ICrudService<IEntityWithId>)(new TranslationCrudService() as ICrudService<TranslationDto>)))
         {
             InitializeComponent();
             if (IsDesignTime()) return;
+            LoadEntity(entity);
 
             // Resolve (or create) localization services.
             // Replace with your DI container resolution if available.
@@ -290,7 +286,7 @@ namespace AATM.App.TableManager
             AddTextColumn(grid, nameof(TranslationDto.LocalizedString), "Localized", 100, fill: true);
         }
 
-        protected override string GetDeleteConfirmationText(TranslationDto entity)
+        protected string GetDeleteConfirmationText(TranslationDto entity)
         {
             if (entity == null) return base.GetDeleteConfirmationText(null);
 

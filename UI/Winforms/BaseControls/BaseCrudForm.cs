@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace AATM.UI.Winforms.BaseControls
 {
-    public partial class BaseCrudForm : Form
+    public abstract partial class BaseCrudForm : Form 
     {
         public BaseCrudForm()
         {

@@ -19,15 +19,11 @@ namespace AATM.UI.Winforms.BaseControls
 {
 
     [DesignTimeVisible(false)]
-    [Obsolete("Do not inherit directly. Use StrictGridCrudForm<T>.", false)]
-#if DESIGN_TIME_SAFE
-    public class BaseGridCrudForm<T> : Form where T : class // No IEntityWithId constraint at Design Time
-#else
-    public class BaseGridCrudForm<T> : Form where T : class, IEntityWithId // IEntityWithId constraint at Runtime
-#endif
+    public class BaseGridCrudForm : Form // IEntityWithId constraint at Runtime
     {
-        protected readonly ICrudService<T> _service;
-        protected List<T> _items = new List<T>();
+        protected IEntityWithId _entity;
+        protected readonly ICrudService<IEntityWithId> _service;
+        protected List<IEntityWithId> _items = new List<IEntityWithId>();
 
         private bool _isLoading;
         private bool _isMutating;
@@ -49,8 +45,8 @@ namespace AATM.UI.Winforms.BaseControls
         //    public System.Windows.Forms.Control Control { get; set; }
 
         //    // ** These members MUST have { get; set; } to resolve CS0229 **
-        //    public Func<T, object> Getter { get; set; }
-        //    public Action<T, string> Setter { get; set; }
+        //    public Func<IEntityWithId, object> Getter { get; set; }
+        //    public Action<IEntityWithId, string> Setter { get; set; }
 
         //}
 
@@ -70,10 +66,21 @@ namespace AATM.UI.Winforms.BaseControls
         protected ToolStripButton DeleteButton { get; private set; }
         protected ToolStripButton RefreshButton { get; private set; }
 
+        public virtual void LoadEntity(IEntityWithId entity)
+        {
+            _entity = entity;
+        }
+
+        public virtual IEntityWithId GetEntity()
+        {
+            // TODO: Collect data from controls and return as IEntityDto
+            return _entity;
+        }
+
         // Parameterless ctor always provides design-time safe service
         protected BaseGridCrudForm() : this(() => new DesignTimeCrudService()) { }
 
-        protected BaseGridCrudForm(Func<ICrudService<T>> serviceFactory)
+        protected BaseGridCrudForm(Func<ICrudService<IEntityWithId>> serviceFactory)
         {
             if (IsDesignTime())
             {
@@ -87,20 +94,20 @@ namespace AATM.UI.Winforms.BaseControls
             InitializeNavigatorIfNeeded();
         }
 
-        protected BaseGridCrudForm(ICrudService<T> service)
+        protected BaseGridCrudForm(ICrudService<IEntityWithId> service)
         {
             _service = service ?? throw new ArgumentNullException(nameof(service));
             InitializeNavigatorIfNeeded();
         }
 
         // Design-time no-op service
-        public sealed class DesignTimeCrudService : ICrudService<T>
+        public sealed class DesignTimeCrudService : ICrudService<IEntityWithId>
         {
-            public Task<IReadOnlyList<T>> GetAllAsync(CancellationToken ct = default(CancellationToken))
-                => Task.FromResult((IReadOnlyList<T>)new List<T>());
-            public Task<T> GetByIdAsync(int id, CancellationToken ct = default(CancellationToken))
-                => Task.FromResult(default(T));
-            public Task<T> UpsertAsync(T dto, CancellationToken ct = default(CancellationToken))
+            public Task<IReadOnlyList<IEntityWithId>> GetAllAsync(CancellationToken ct = default(CancellationToken))
+                => Task.FromResult((IReadOnlyList<IEntityWithId>)new List<IEntityWithId>());
+            public Task<IEntityWithId> GetByIdAsync(int id, CancellationToken ct = default(CancellationToken))
+                => Task.FromResult(default(IEntityWithId));
+            public Task<IEntityWithId> UpsertAsync(IEntityWithId dto, CancellationToken ct = default(CancellationToken))
                 => Task.FromResult(dto);
             public Task<bool> DeleteAsync(int id, CancellationToken ct = default(CancellationToken))
                 => Task.FromResult(false);
@@ -108,7 +115,7 @@ namespace AATM.UI.Winforms.BaseControls
 
         protected void AutoBindFormFields()
         {
-            var properties = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            var properties = typeof(IEntityWithId).GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
             foreach (var prop in properties)
             {
@@ -128,19 +135,19 @@ namespace AATM.UI.Winforms.BaseControls
                     continue;
                 }
 
-                // 2. Generate Getter Expression: Func<T, object>
-                var entityParam = Expression.Parameter(typeof(T), "d");
+                // 2. Generate Getter Expression: Func<IEntityWithId, object>
+                var entityParam = Expression.Parameter(typeof(IEntityWithId), "d");
                 var propertyAccess = Expression.Property(entityParam, prop.Name);
                 var convertedAccess = Expression.Convert(propertyAccess, typeof(object));
-                var getterLambda = Expression.Lambda<Func<T, object>>(convertedAccess, entityParam);
+                var getterLambda = Expression.Lambda<Func<IEntityWithId, object>>(convertedAccess, entityParam);
 
-                // 3. Generate Setter Expression: Action<T, string>
+                // 3. Generate Setter Expression: Action<IEntityWithId, string>
                 var valueParam = Expression.Parameter(typeof(string), "v");
                 var setterExpression = Expression.Assign(
                     Expression.Property(entityParam, prop.Name),
                     valueParam
                 );
-                var setterLambda = Expression.Lambda<Action<T, string>>(setterExpression, entityParam, valueParam);
+                var setterLambda = Expression.Lambda<Action<IEntityWithId, string>>(setterExpression, entityParam, valueParam);
 
                 // 4. Add to the internal _textBindings list
                 _textBindings.Add(new TextBinding
@@ -155,7 +162,7 @@ namespace AATM.UI.Winforms.BaseControls
 
         //protected void AutoBindFormFields()
         //{
-        //    var properties = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+        //    var properties = typeof(IEntityWithId).GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
         //    foreach (var prop in properties)
         //    {
@@ -176,28 +183,28 @@ namespace AATM.UI.Winforms.BaseControls
 
         //        // ** [CRITICAL FIX]: Dynamically generate the expression and add to _textBindings **
 
-        //        // 1. Parameter for the entity (T d)
-        //        var entityParam = Expression.Parameter(typeof(T), "d");
+        //        // 1. Parameter for the entity (IEntityWithId d)
+        //        var entityParam = Expression.Parameter(typeof(IEntityWithId), "d");
 
         //        // 2. Access the property (d.PropertyName)
         //        var propertyAccess = Expression.Property(entityParam, prop.Name);
 
-        //        // 3. Create Getter Expression: Func<T, object>
+        //        // 3. Create Getter Expression: Func<IEntityWithId, object>
         //        // Convert property access to object for boxing/unboxing
         //        var convertedAccess = Expression.Convert(propertyAccess, typeof(object));
-        //        var getterLambda = Expression.Lambda<Func<T, object>>(convertedAccess, entityParam);
+        //        var getterLambda = Expression.Lambda<Func<IEntityWithId, object>>(convertedAccess, entityParam);
 
-        //        // 4. Create Setter Expression: Action<T, string> 
+        //        // 4. Create Setter Expression: Action<IEntityWithId, string> 
         //        // Note: This requires a slightly different approach or helper method, 
         //        // as your original RegisterTextBinding likely handled the setter implicitly based on TextBox.Text.
 
         //        // Assuming your original RegisterTextBinding method (or internal logic) accepted a Control 
-        //        // and a Func<T, object> expression for the GETTER, and handled the SETTER implicitly:
+        //        // and a Func<IEntityWithId, object> expression for the GETTER, and handled the SETTER implicitly:
 
-        //        // ** Since we don't have the original RegisterTextBinding source, we must manually populate 
+        //        // ** Since we don'IEntityWithId have the original RegisterTextBinding source, we must manually populate 
         //        // ** the TextBinding list using the generated Getter and a generated Setter. **
 
-        //        // 5. Generate Setter Logic (Action<T, string>)
+        //        // 5. Generate Setter Logic (Action<IEntityWithId, string>)
         //        var valueParam = Expression.Parameter(typeof(string), "v");
         //        var castValue = Expression.Convert(valueParam, prop.PropertyType); // Convert string to target type (e.g., string/int)
 
@@ -209,32 +216,32 @@ namespace AATM.UI.Winforms.BaseControls
         //            Expression.Property(entityParam, prop.Name),
         //            valueParam
         //        );
-        //        var setterLambda = Expression.Lambda<Action<T, string>>(setterExpression, entityParam, valueParam);
+        //        var setterLambda = Expression.Lambda<Action<IEntityWithId, string>>(setterExpression, entityParam, valueParam);
 
         //        // 6. Add to the internal list:
         //        // We assume TextBinding is a struct/class that holds the Control, Getter, and Setter.
 
-        //        // ** If your original BaseGridCrudForm used a protected method like 'RegisterTextBinding(Control, Func<T, object>)', 
+        //        // ** If your original BaseGridCrudForm used a protected method like 'RegisterTextBinding(Control, Func<IEntityWithId, object>)', 
         //        //    you must call that protected method here. **
 
-        //        // Since we don't have that method, we will directly add the binding:
+        //        // Since we don'IEntityWithId have that method, we will directly add the binding:
         //        _textBindings.Add(new TextBinding
         //        {
         //            Control = control,
         //            Getter = getterLambda.Compile(),
-        //            Setter = (Action<T, string>)setterLambda.Compile()
+        //            Setter = (Action<IEntityWithId, string>)setterLambda.Compile()
         //        });
 
         //        // The TextBinding structure is assumed to be:
         //        // private readonly List<TextBinding> _textBindings = new List<TextBinding>();
-        //        // private class TextBinding { public Control Control; public Func<T, object> Getter; public Action<T, string> Setter; }
+        //        // private class TextBinding { public Control Control; public Func<IEntityWithId, object> Getter; public Action<IEntityWithId, string> Setter; }
         //    }
         //}
 
         //protected void AutoBindFormFields()
         //{
         //    // ** [FIX]: Declare and initialize the properties variable. **
-        //    var properties = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+        //    var properties = typeof(IEntityWithId).GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
         //    foreach (var prop in properties)
         //    {
@@ -408,14 +415,14 @@ namespace AATM.UI.Winforms.BaseControls
         private sealed class TextBinding
         {
             public TextBox Box;
-            public Func<T, string> Getter;
-            public Action<T, string> Setter;
+            public Func<IEntityWithId, string> Getter;
+            public Action<IEntityWithId, string> Setter;
         }
 
         /// <summary>
-        /// Register a two-way text binding between a TextBox and a string property on T.
+        /// Register a two-way text binding between a TextBox and a string property on IEntityWithId.
         /// </summary>
-        protected void RegisterTextBinding(TextBox box, Expression<Func<T, string>> property)
+        protected void RegisterTextBinding(TextBox box, Expression<Func<IEntityWithId, string>> property)
         {
             if (box == null) throw new ArgumentNullException(nameof(box));
             if (property == null) throw new ArgumentNullException(nameof(property));
@@ -430,10 +437,10 @@ namespace AATM.UI.Winforms.BaseControls
             var getter = property.Compile();
 
             // Build setter
-            var dtoParam = Expression.Parameter(typeof(T), "dto");
+            var dtoParam = Expression.Parameter(typeof(IEntityWithId), "dto");
             var valParam = Expression.Parameter(typeof(string), "val");
             var assign = Expression.Assign(Expression.Property(dtoParam, pi), valParam);
-            var setter = Expression.Lambda<Action<T, string>>(assign, dtoParam, valParam).Compile();
+            var setter = Expression.Lambda<Action<IEntityWithId, string>>(assign, dtoParam, valParam).Compile();
 
             _textBindings.Add(new TextBinding
             {
@@ -447,7 +454,7 @@ namespace AATM.UI.Winforms.BaseControls
 
         protected void PopulateFormFieldsFromGrid(int rowIndex)
         {
-            var entity = _bindingSource.Current as T;
+            var entity = _bindingSource.Current as IEntityWithId;
             if (entity == null) return;
 
             foreach (var b in _textBindings)
@@ -460,7 +467,7 @@ namespace AATM.UI.Winforms.BaseControls
         //protected sealed override void PopulateFormFieldsFromGrid(int rowIndex)
         //{
         //    // rowIndex is ignored; using BindingSource.Current which is updated by the navigator/grid selection
-        //    var entity = _bindingSource.Current as T;
+        //    var entity = _bindingSource.Current as IEntityWithId;
         //    if (entity == null) return;
 
         //    foreach (var b in _textBindings)
@@ -469,7 +476,7 @@ namespace AATM.UI.Winforms.BaseControls
         //            b.Box.Text = b.Getter(entity) ?? string.Empty;
         //    }
         //    //// Implementation uses _textBindings to set control text from DTO properties
-        //    //var entity = _bindingSource.Current as T;
+        //    //var entity = _bindingSource.Current as IEntityWithId;
         //    //if (entity == null) return;
 
         //    //foreach (var binding in _textBindings)
@@ -479,11 +486,11 @@ namespace AATM.UI.Winforms.BaseControls
         //    //}
         //}
 
-        //protected virtual T BuildModelFromForm(T current)
+        //protected virtual IEntityWithId BuildModelFromForm(IEntityWithId current)
 
-        protected T BuildModelFromForm(T current)
+        protected IEntityWithId BuildModelFromForm(IEntityWithId current)
         {
-            var dto = current ?? Activator.CreateInstance<T>();
+            var dto = current ?? Activator.CreateInstance<IEntityWithId>();
 
             // Preserve ID from the selected entity using the IEntityWithId interface constraint
             if (current != null && current is IEntityWithId currentWithId && dto is IEntityWithId newWithId)
@@ -500,15 +507,15 @@ namespace AATM.UI.Winforms.BaseControls
             return dto;
         }
 
-        //protected T BuildModelFromForm(T current)
+        //protected IEntityWithId BuildModelFromForm(IEntityWithId current)
         //{
-        //    var dto = current ?? Activator.CreateInstance<T>();
+        //    var dto = current ?? Activator.CreateInstance<IEntityWithId>();
 
         //    //// Preserve ID from the selected entity so the service performs an update
         //    //// rather than an insert or a no-op that ignores key changes.
         //    //if (current != null)
         //    //{
-        //    //    var idProp = typeof(T).GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance)
+        //    //    var idProp = typeof(IEntityWithId).GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance)
         //    //        .FirstOrDefault(p =>
         //    //            p.PropertyType == typeof(int) &&
         //    //            (string.Equals(p.Name, "ID", StringComparison.OrdinalIgnoreCase) ||
@@ -532,7 +539,7 @@ namespace AATM.UI.Winforms.BaseControls
         //    return dto;
         //}
 
-        protected int GetEntityId(T entity)
+        protected int GetEntityId(IEntityWithId entity)
         {
             if (entity == null) return 0;
 
@@ -545,16 +552,16 @@ namespace AATM.UI.Winforms.BaseControls
             return 0;
         }
 
-        //protected virtual int GetEntityId(T entity)
+        //protected virtual int GetEntityId(IEntityWithId entity)
         //{
         //    if (entity == null) return 0;
-        //    // T is constrained to IEntityWithId, so direct access i
+        //    // IEntityWithId is constrained to IEntityWithId, so direct access i
         //    return entity.ID;
         //    //if (entity == null) return 0;
         //    //if (_cachedIdGetter == null)
         //    //{
         //    //    // Look for int ID or Id
-        //    //    var idProp = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance)
+        //    //    var idProp = typeof(IEntityWithId).GetProperties(BindingFlags.Public | BindingFlags.Instance)
         //    //        .FirstOrDefault(p =>
         //    //            p.PropertyType == typeof(int) &&
         //    //            (string.Equals(p.Name, "ID", StringComparison.OrdinalIgnoreCase) ||
@@ -562,9 +569,9 @@ namespace AATM.UI.Winforms.BaseControls
 
         //    //    if (idProp != null && idProp.CanRead)
         //    //    {
-        //    //        var param = Expression.Parameter(typeof(T), "e");
+        //    //        var param = Expression.Parameter(typeof(IEntityWithId), "e");
         //    //        var access = Expression.Property(param, idProp);
-        //    //        var lambda = Expression.Lambda<Func<T, int>>(access, param);
+        //    //        var lambda = Expression.Lambda<Func<IEntityWithId, int>>(access, param);
         //    //        _cachedIdGetter = lambda.Compile();
         //    //    }
         //    //    else
@@ -662,8 +669,8 @@ namespace AATM.UI.Winforms.BaseControls
         protected virtual Task OnBeforeLoadAsync() { return Task.CompletedTask; }
         protected virtual Task OnAfterLoadAsync() { return Task.CompletedTask; }
         protected virtual Task OnBeforeSaveAsync() { return Task.CompletedTask; }
-        protected virtual Task OnAfterSaveAsync(T saved) { return Task.CompletedTask; }
-        protected virtual Task OnBeforeDeleteAsync(int id, T entity) { return Task.CompletedTask; }
+        protected virtual Task OnAfterSaveAsync(IEntityWithId saved) { return Task.CompletedTask; }
+        protected virtual Task OnBeforeDeleteAsync(int id, IEntityWithId entity) { return Task.CompletedTask; }
         protected virtual Task OnAfterDeleteAsync(int id, bool ok) { return Task.CompletedTask; }
 
         protected virtual bool AutoLoadOnShown { get { return true; } }
@@ -678,7 +685,7 @@ namespace AATM.UI.Winforms.BaseControls
                 MessageBoxDefaultButton.Button2);
         }
 
-        protected virtual string GetDeleteConfirmationText(T entity)
+        protected virtual string GetDeleteConfirmationText(IEntityWithId entity)
         {
             int id = 0;
             try { id = entity != null ? GetEntityId(entity) : 0; } catch { }
@@ -746,7 +753,7 @@ namespace AATM.UI.Winforms.BaseControls
             StatusStripLabel.IsLink = false;
         }
 
-        protected T GetSelectedEntity()
+        protected IEntityWithId GetSelectedEntity()
         {
             var grid = Grid;
             if (grid == null) return null;
@@ -755,14 +762,14 @@ namespace AATM.UI.Winforms.BaseControls
             {
                 var row = grid.SelectedRows[0];
                 if (row != null && !row.IsNewRow)
-                    return row.DataBoundItem as T;
+                    return row.DataBoundItem as IEntityWithId;
             }
 
             if (grid.CurrentCell != null)
             {
                 var row = grid.Rows[grid.CurrentCell.RowIndex];
                 if (row != null && !row.IsNewRow)
-                    return row.DataBoundItem as T;
+                    return row.DataBoundItem as IEntityWithId;
             }
 
             return null;
@@ -779,7 +786,7 @@ namespace AATM.UI.Winforms.BaseControls
                 await OnBeforeLoadAsync();
 
                 var result = await _service.GetAllAsync(_cts.Token);
-                _items = result != null ? result.ToList() : new List<T>();
+                _items = result != null ? result.ToList() : new List<IEntityWithId>();
 
                 var grid = Grid;
 
@@ -892,7 +899,7 @@ namespace AATM.UI.Winforms.BaseControls
             PopulateFormFieldsFromGrid(rowIndex);
         }
 
-        protected bool NavigateToEntity(Predicate<T> match)
+        protected bool NavigateToEntity(Predicate<IEntityWithId> match)
         {
             if (match == null || _items == null || _items.Count == 0) return false;
             for (int i = 0; i < _items.Count; i++)
@@ -1137,7 +1144,7 @@ namespace AATM.UI.Winforms.BaseControls
         /// Returns a design-time safe CRUD service. At design-time (or if the runtime factory throws),
         /// a no-op DesignTimeCrudService is returned. At runtime, the provided factory is invoked.
         /// </summary>
-        protected static ICrudService<T> GetCrudServiceSafe(Func<ICrudService<T>> runtimeFactory)
+        protected static ICrudService<IEntityWithId> GetCrudServiceSafe(Func<ICrudService<IEntityWithId>> runtimeFactory)
         {
             if (IsDesignTime())
                 return new DesignTimeCrudService();

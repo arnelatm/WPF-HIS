@@ -21,7 +21,7 @@ namespace AATM.UI.Winforms
     }
 
     // Minimal concrete DTO for designer support
-    public class DesignTimeDto : IDto
+    public class DesignTimeDto : IEntityDto
     {
         public int ID { get; set; }
     }

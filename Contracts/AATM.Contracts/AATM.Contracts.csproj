@@ -70,7 +70,6 @@
     <Compile Include="Attributes\FieldControlAttribute.cs" />
     <Compile Include="Attributes\GridColumnAttribute.cs" />
     <Compile Include="Interfaces\Business\ITranslationService.cs" />
-    <Compile Include="Interfaces\Dtos\IDto.cs" />
     <Compile Include="Interfaces\Services\ICrudService.cs" />
     <Compile Include="Interfaces\Services\IEntityWithId.cs" />
     <Compile Include="Interfaces\Views\ITranslationView.cs" />
@@ -119,6 +118,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Interfaces\Dtos\" />
     <Folder Include="Interfaces\Presentation\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
