@@ -71,10 +71,15 @@ namespace AATM.UI.Winforms.BaseControls
             _entity = entity;
         }
 
-        public virtual IEntityWithId GetEntity()
+        public IEntityWithId GetEntity()
         {
-            // TODO: Collect data from controls and return as IEntityDto
-            return _entity;
+            // Collect data from bound controls and return as IEntityWithId
+            var current = _bindingSource?.Current as IEntityWithId;
+            if (current == null)
+                return _entity;
+
+            // Build a new model from form fields, preserving ID
+            return BuildModelFromForm(current);
         }
 
         // Parameterless ctor always provides design-time safe service

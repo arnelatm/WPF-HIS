@@ -37,7 +37,6 @@ namespace AATM.App.TableManager
         {
             InitializeComponent();
             if (IsDesignTime()) return;
-            LoadEntity(entity);
 
             // Resolve (or create) localization services.
             // Replace with your DI container resolution if available.
@@ -56,6 +55,11 @@ namespace AATM.App.TableManager
 
             InitializeLanguageUi();   // Populate language selector
         }
+
+        protected override DataGridView Grid => _dataGridView;
+        protected override ToolStripStatusLabel StatusStripLabel => statusLabel;
+        protected override ToolStripProgressBar StatusProgress => _statusProgress;
+        protected override bool AutoLoadOnShown => true;
 
         // Allow base navigator to be extended
         protected override void OnCreateAdditionalNavigatorItems(BindingNavigator navigator)
@@ -270,11 +274,6 @@ namespace AATM.App.TableManager
                 }
             }
         }
-
-        protected override DataGridView Grid => _dataGridView;
-        protected override ToolStripStatusLabel StatusStripLabel => statusLabel;
-        protected override ToolStripProgressBar StatusProgress => _statusProgress;
-        protected override bool AutoLoadOnShown => true;
 
         protected override void DefineColumns(DataGridView grid)
         {
