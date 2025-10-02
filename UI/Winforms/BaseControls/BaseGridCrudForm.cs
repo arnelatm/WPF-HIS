@@ -23,7 +23,7 @@ namespace AATM.UI.Winforms.BaseControls
     {
         protected IEntityWithId _entity;
         protected readonly ICrudService<IEntityWithId> _service;
-        protected List<IEntityWithId> _items = new List<IEntityWithId>();
+        protected BindingList<IEntityWithId> _items = new BindingList<IEntityWithId>();
         
         private bool _isLoading;
         private bool _isMutating;
@@ -584,7 +584,13 @@ namespace AATM.UI.Winforms.BaseControls
                 grid.AutoGenerateColumns = true;
 
             foreach (DataGridViewColumn col in grid.Columns)
+            {
                 col.DefaultCellStyle.NullValue = string.Empty;
+                col.SortMode = DataGridViewColumnSortMode.Automatic; // Enable sorting
+            }
+
+            // Optionally, handle custom sorting or icons
+            grid.ColumnHeaderMouseClick += Grid_ColumnHeaderMouseClick;
         }
 
         protected DataGridViewTextBoxColumn AddTextColumn(DataGridView grid, string dataProp, string header, int width = 100, bool fill = false)
@@ -738,7 +744,7 @@ namespace AATM.UI.Winforms.BaseControls
                 await OnBeforeLoadAsync();
 
                 var result = await _service.GetAllAsync(_cts.Token);
-                _items = result != null ? result.ToList() : new List<IEntityWithId>();
+                _items = result != null ? new BindingList<IEntityWithId>(result.ToList()) : new BindingList<IEntityWithId>();
 
                 var grid = Grid;
 
@@ -1146,6 +1152,27 @@ namespace AATM.UI.Winforms.BaseControls
             this.Name = "BaseGridCrudForm";
             this.ResumeLayout(false);
 
+        }
+
+        private void Grid_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            var grid = sender as DataGridView;
+            var column = grid.Columns[e.ColumnIndex];
+            var propertyName = column.DataPropertyName;
+
+            // Toggle sort direction
+            bool ascending = grid.SortOrder != SortOrder.Ascending;
+
+            // Sort the BindingList manually
+            var sorted = ascending
+                ? _items.OrderBy(x => x.GetType().GetProperty(propertyName)?.GetValue(x, null)).ToList()
+                : _items.OrderByDescending(x => x.GetType().GetProperty(propertyName)?.GetValue(x, null)).ToList();
+
+            _items.Clear();
+            foreach (var item in sorted)
+                _items.Add(item);
+
+            grid.Refresh();
         }
     }
 }

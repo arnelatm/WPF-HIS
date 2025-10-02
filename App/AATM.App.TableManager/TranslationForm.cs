@@ -9,6 +9,7 @@ using AATM.UI.Winforms.BaseControls;
 using AATM.UI.Winforms.Localization; // <-- Add this using for ControlLocalizer
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -25,6 +26,7 @@ namespace AATM.App.TableManager
         private ToolStripComboBox _languageCombo;
         private ToolStripButton _applyLangButton;
         private TranslationDto entity = new TranslationDto();
+        protected new BindingList<TranslationDto> _items = new BindingList<TranslationDto>();
 
         private sealed class LanguageItem
         {
@@ -57,7 +59,6 @@ namespace AATM.App.TableManager
             statusStrip.Items.Add(_statusProgress);
 
             InitializeLanguageUi();   // Populate language selector
-
 
             AutoBindFormFields(typeof(TranslationDto));
         }
@@ -298,18 +299,36 @@ namespace AATM.App.TableManager
             //AddTextColumn(grid, nameof(TranslationDto.LocalizedString), "Localized", 100, fill: true);
         }
 
-        // Ensure the grid is bound to the concrete DTO type
-        protected override async Task OnAfterLoadAsync()
-        {
-            // Cast _items to List<TranslationDto> for the grid
-            if (_items != null)
-            {
-                var dtoList = _items.OfType<TranslationDto>().ToList();
-                DataBindingSource.DataSource = dtoList;
-                Grid.DataSource = DataBindingSource;
-            }
-            await base.OnAfterLoadAsync();
-        }
+        // Load data into _items and bind to grid
+        //protected override async Task OnAfterLoadAsync()
+        //{
+        //    // Load from your service
+        //    var result = await ((TranslationCrudServiceAdapter)_service).GetAllAsync();
+        //    _items.Clear();
+        //    foreach (var dto in result)
+        //    {
+        //        var translation = dto as TranslationDto;
+        //        if (translation != null)
+        //            _items.Add(translation);
+        //    }
+
+        //    DataBindingSource.DataSource = _items;
+        //    Grid.DataSource = DataBindingSource;
+
+        //    await base.OnAfterLoadAsync();
+        //}
+        //// Ensure the grid is bound to the concrete DTO type
+        //protected override async Task OnAfterLoadAsync()
+        //{
+        //    // Cast _items to List<TranslationDto> for the grid
+        //    if (_items != null)
+        //    {
+        //        var dtoList = _items.OfType<TranslationDto>().ToList();
+        //        DataBindingSource.DataSource = dtoList;
+        //        Grid.DataSource = DataBindingSource;
+        //    }
+        //    await base.OnAfterLoadAsync();
+        //}
 
         protected string GetDeleteConfirmationText(TranslationDto entity)
         {
@@ -400,5 +419,38 @@ namespace AATM.App.TableManager
             statusLabel.Text = $"Language applied: {languageCode}";
         }
 
+        protected override async Task OnAfterLoadAsync()
+        {
+            var result = await ((TranslationCrudServiceAdapter)_service).GetAllAsync();
+            _items.Clear();
+            foreach (var dto in result)
+            {
+                var translation = dto as TranslationDto;
+                if (translation != null)
+                    _items.Add(translation);
+            }
+
+            DataBindingSource.DataSource = _items;
+            Grid.DataSource = DataBindingSource;
+
+            // Wire up custom sorting
+            Grid.ColumnHeaderMouseClick -= Grid_ColumnHeaderMouseClick;
+            Grid.ColumnHeaderMouseClick += Grid_ColumnHeaderMouseClick;
+
+            await base.OnAfterLoadAsync();
+        }
+
+        private void Grid_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            var column = Grid.Columns[e.ColumnIndex];
+            var propName = column.DataPropertyName;
+            if (string.IsNullOrEmpty(propName)) return;
+
+            // Sort ascending
+            var sorted = _items.OrderBy(x => x.GetType().GetProperty(propName)?.GetValue(x, null)).ToList();
+            _items.Clear();
+            foreach (var item in sorted)    
+                _items.Add(item);
+        }
     }
 }

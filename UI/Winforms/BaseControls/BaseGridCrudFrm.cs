@@ -23,7 +23,7 @@ namespace AATM.UI.Winforms.BaseControls
 #endif
     {
         protected readonly ICrudService<T> _service;
-        protected List<T> _items = new List<T>();
+        protected BindingList<IEntityWithId> _items = new BindingList<IEntityWithId>();
 
         private bool _isLoading;
         private bool _isMutating;
@@ -41,6 +41,9 @@ namespace AATM.UI.Winforms.BaseControls
         // New: shared BindingSource + BindingNavigator
         private BindingSource _bindingSource;
         private BindingNavigator _navigator;
+
+        private List<(string Property, ListSortDirection Direction)> _sortColumns = new List<(string, ListSortDirection)>();
+        private readonly Dictionary<string, SortOrder> _columnSortOrders = new Dictionary<string, SortOrder>();
 
         //// Exposed navigator items for optional customization
         //protected ToolStripButton NavFirstButton { get; private set; }
@@ -494,7 +497,7 @@ namespace AATM.UI.Winforms.BaseControls
             grid.AllowUserToDeleteRows = false;
             grid.AllowUserToResizeRows = false;
             grid.RowHeadersVisible = false;
-
+            grid.CellPainting += Grid_CellPainting;
             //// Enable double buffering (reflection)
             //var pi = grid.GetType().GetProperty("DoubleBuffered",
             //    System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
@@ -516,6 +519,31 @@ namespace AATM.UI.Winforms.BaseControls
 
             foreach (DataGridViewColumn col in grid.Columns)
                 col.DefaultCellStyle.NullValue = string.Empty;
+            col.SortMode = DataGridViewColumnSortMode.Automatic; // Enable sorting
+            // Optionally, handle custom sorting or icons
+            grid.ColumnHeaderMouseClick += Grid_ColumnHeaderMouseClick;
+        }
+
+        private void Grid_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            var grid = sender as DataGridView;
+            var column = grid.Columns[e.ColumnIndex];
+            var propertyName = column.DataPropertyName;
+
+            // Toggle sort direction
+            bool ascending = grid.SortOrder != SortOrder.Ascending;
+
+            // Sort the BindingList manually
+            var sorted = ascending
+                ? _items.OrderBy(x => x.GetType().GetProperty(propertyName)?.GetValue(x, null)).ToList()
+                : _items.OrderByDescending(x => x.GetType().GetProperty(propertyName)?.GetValue(x, null)).ToList();
+
+            // Update the BindingList
+            _items.Clear();
+            foreach (var item in sorted)
+                _items.Add(item);
+
+            grid.Refresh();
         }
 
         protected DataGridViewTextBoxColumn AddTextColumn(DataGridView grid, string dataProp, string header, int width = 100, bool fill = false)
@@ -669,7 +697,8 @@ namespace AATM.UI.Winforms.BaseControls
                 await OnBeforeLoadAsync();
 
                 var result = await _service.GetAllAsync(_cts.Token);
-                _items = result != null ? result.ToList() : new List<T>();
+                _items = result != null ? new BindingList<IEntityWithId>(result.ToList()) : new BindingList<IEntityWithId>();
+                _bindingSource.DataSource = _items;
 
                 var grid = Grid;
 
@@ -979,6 +1008,58 @@ namespace AATM.UI.Winforms.BaseControls
                 if (!rows[i].IsNewRow) { NavigateToRow(i); SetStatusText("Next record."); return; }
             }
             NavigateToRow(lastIndex);
+        }
+
+        private void Grid_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            var grid = sender as DataGridView;
+            var column = grid.Columns[e.ColumnIndex];
+            var propertyName = column.DataPropertyName;
+
+            // Toggle sort direction for this column
+            var direction = ListSortDirection.Ascending;
+            if (_columnSortOrders.TryGetValue(propertyName, out var currentOrder) && currentOrder == SortOrder.Ascending)
+                direction = ListSortDirection.Descending;
+
+            // Update sort state
+            _sortColumns.RemoveAll(x => x.Property == propertyName);
+            _sortColumns.Insert(0, (propertyName, direction));
+            _columnSortOrders[propertyName] = direction == ListSortDirection.Ascending ? SortOrder.Ascending : SortOrder.Descending;
+
+            // Multi-column sort using LINQ
+            IEnumerable<IEntityWithId> sorted = _items;
+            foreach (var sort in _sortColumns.AsEnumerable().Reverse())
+            {
+                var prop = typeof(T).GetProperty(sort.Property);
+                if (prop == null) continue;
+                sorted = sort.Direction == ListSortDirection.Ascending
+                    ? sorted.OrderBy(x => prop.GetValue(x, null))
+                    : sorted.OrderByDescending(x => prop.GetValue(x, null));
+            }
+
+            // Update BindingList
+            var sortedList = sorted.ToList();
+            _items.Clear();
+            foreach (var item in sortedList)
+                _items.Add(item);
+
+            // Update header icons
+            foreach (DataGridViewColumn col in grid.Columns)
+            {
+                col.HeaderCell.SortGlyphDirection = SortOrder.None;
+            }
+            column.HeaderCell.SortGlyphDirection = _columnSortOrders[propertyName];
+        }
+
+        private void Grid_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            var grid = sender as DataGridView;
+            if (e.RowIndex == -1 && _columnSortOrders.TryGetValue(grid.Columns[e.ColumnIndex].DataPropertyName, out var order))
+            {
+                // Draw your custom icon here based on 'order'
+                // Example: e.Graphics.DrawImage(yourIcon, e.CellBounds.X, e.CellBounds.Y);
+                // Don't forget to set e.Handled = true if you fully custom paint
+            }
         }
 
         protected override void OnShown(EventArgs e)
