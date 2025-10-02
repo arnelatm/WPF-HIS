@@ -74,6 +74,7 @@
     <Compile Include="My Project\MyNamespace.Static.3.Designer.cs" />
     <Compile Include="ITranslationManagerView.cs" />
     <Compile Include="TranslationCrudService.cs" />
+    <Compile Include="TranslationCrudServiceAdapter.cs" />
     <Compile Include="TranslationPresenter.cs" />
     <Compile Include="My Project\AssemblyInfo.cs" />
     <Compile Include="My Project\Application.Designer.cs">

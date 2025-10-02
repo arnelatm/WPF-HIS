@@ -24,7 +24,7 @@ namespace AATM.UI.Winforms.BaseControls
         protected IEntityWithId _entity;
         protected readonly ICrudService<IEntityWithId> _service;
         protected List<IEntityWithId> _items = new List<IEntityWithId>();
-
+        
         private bool _isLoading;
         private bool _isMutating;
 
@@ -118,154 +118,101 @@ namespace AATM.UI.Winforms.BaseControls
                 => Task.FromResult(false);
         }
 
-        protected void AutoBindFormFields()
+        /// <summary>
+        /// Automatically binds form fields (TextBox controls) to properties of the given DTO type.
+        /// For each property with a FieldControlAttribute, finds the corresponding control and creates
+        /// getter/setter delegates for two-way binding.
+        /// </summary>
+        protected void AutoBindFormFields(Type dtoType)
         {
-            var properties = typeof(IEntityWithId).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            // Get all public instance properties of the DTO type
+            var properties = dtoType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
             foreach (var prop in properties)
             {
+                // Look for the FieldControlAttribute on the property
                 var controlAttr = prop.GetCustomAttribute<AATM.Contracts.Attributes.FieldControlAttribute>();
-                if (controlAttr == null) continue;
+                if (controlAttr == null)
+                {
+                    // Skip properties without the attribute
+                    //System.Diagnostics.Debug.Fail($"Auto-binding failed: Property '{prop.Name}' does not have FieldControlAttribute.");
+                    continue;
+                }
 
-                // 1. Resolve Control Type and Instance
+                // Resolve the control type from the attribute
                 Type concreteControlType = Type.GetType(controlAttr.ControlTypeName) ??
                                            typeof(System.Windows.Forms.Form).Assembly.GetType(controlAttr.ControlTypeName);
 
+                // Find the control field in the current form by name
                 var controlField = GetType().GetField(controlAttr.ControlName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
                 System.Windows.Forms.Control control = controlField?.GetValue(this) as System.Windows.Forms.Control;
 
-                if (control == null || !concreteControlType.IsInstanceOfType(control))
+                // If the control is missing or the type does not match, skip this property
+                if (control == null || (concreteControlType != null && !concreteControlType.IsInstanceOfType(control)))
                 {
                     System.Diagnostics.Debug.Fail($"Auto-binding failed: Control '{controlAttr.ControlName}' not found or type mismatch.");
                     continue;
                 }
 
-                // 2. Generate Getter Expression: Func<IEntityWithId, object>
-                var entityParam = Expression.Parameter(typeof(IEntityWithId), "d");
-                var propertyAccess = Expression.Property(entityParam, prop.Name);
-                var convertedAccess = Expression.Convert(propertyAccess, typeof(object));
-                var getterLambda = Expression.Lambda<Func<IEntityWithId, object>>(convertedAccess, entityParam);
-
-                // 3. Generate Setter Expression: Action<IEntityWithId, string>
-                var valueParam = Expression.Parameter(typeof(string), "v");
-                var setterExpression = Expression.Assign(
-                    Expression.Property(entityParam, prop.Name),
-                    valueParam
+                // Build a getter delegate: Func<IEntityWithId, string>
+                // - Casts the entity to the DTO type
+                // - Accesses the property
+                // - Converts to string, handling nulls
+                var entityParam = Expression.Parameter(typeof(IEntityWithId), "entity");
+                var castedEntity = Expression.Convert(entityParam, dtoType); 
+                var propertyAccess = Expression.Property(castedEntity, prop.Name); 
+                var toStringCall = Expression.Call(propertyAccess, typeof(object).GetMethod("ToString"));
+                var nullCheck = Expression.Condition(
+                    Expression.Equal(propertyAccess, Expression.Constant(null, prop.PropertyType)),
+                    Expression.Constant(string.Empty),
+                    toStringCall
                 );
-                var setterLambda = Expression.Lambda<Action<IEntityWithId, string>>(setterExpression, entityParam, valueParam);
+                var getterLambda = Expression.Lambda<Func<IEntityWithId, string>>(nullCheck, entityParam); 
 
-                // 4. Add to the internal _textBindings list
+                // Build a setter delegate: Action<IEntityWithId, string>
+                // - Converts the string value to the property type
+                // - Assigns it to the property
+                var valueParam = Expression.Parameter(typeof(string), "value");
+                Expression valueConverted;
+                if (prop.PropertyType == typeof(string))
+                {
+                    valueConverted = valueParam;
+                }
+                else
+                {
+                    // Try to use a static Parse(string) method if available
+                    var parseMethod = prop.PropertyType.GetMethod("Parse", new[] { typeof(string) });
+                    if (parseMethod != null)
+                    {
+                        valueConverted = Expression.Call(parseMethod, valueParam);
+                    }
+                    // Otherwise, use Convert.ChangeType for value types
+                    else if (prop.PropertyType.IsValueType)
+                    {
+                        valueConverted = Expression.Convert(
+                            Expression.Call(typeof(Convert), "ChangeType", null, valueParam, Expression.Constant(prop.PropertyType)),
+                            prop.PropertyType
+                        );
+                    }
+                    // For reference types without Parse, assign null
+                    else
+                    {
+                        valueConverted = Expression.Constant(null, prop.PropertyType);
+                    }
+                }
+                // Assign the converted value to the property
+                var setterExpression = Expression.Assign(Expression.Property(castedEntity, prop.Name), valueConverted); 
+                var setterLambda = Expression.Lambda<Action<IEntityWithId, string>>(setterExpression, entityParam, valueParam); 
+
+                // Add the binding to the internal list for later use
                 _textBindings.Add(new TextBinding
                 {
-                    // ** Both Control and Compile() are now resolved **
                     Box = control as TextBox,
-                    Getter = d => getterLambda.Compile()(d)?.ToString(),
+                    Getter = getterLambda.Compile(),
                     Setter = setterLambda.Compile()
                 });
             }
         }
-
-        //protected void AutoBindFormFields()
-        //{
-        //    var properties = typeof(IEntityWithId).GetProperties(BindingFlags.Public | BindingFlags.Instance);
-
-        //    foreach (var prop in properties)
-        //    {
-        //        var controlAttr = prop.GetCustomAttribute<FieldControlAttribute>();
-        //        if (controlAttr == null) continue;
-
-        //        // ... (Existing logic to find concreteControlType and control instance) ...
-        //        Type concreteControlType = Type.GetType(controlAttr.ControlTypeName) ??
-        //                                   typeof(System.Windows.Forms.Form).Assembly.GetType(controlAttr.ControlTypeName);
-        //        // ... (Error handling for null control or type mismatch) ...
-
-        //        // Assuming 'control' is the found TextBox instance
-        //        if (control == null || !concreteControlType.IsInstanceOfType(control))
-        //        {
-        //            Debug.Fail($"Auto-binding failed: Control '{controlAttr.ControlName}' not found or type mismatch.");
-        //            continue;
-        //        }
-
-        //        // ** [CRITICAL FIX]: Dynamically generate the expression and add to _textBindings **
-
-        //        // 1. Parameter for the entity (IEntityWithId d)
-        //        var entityParam = Expression.Parameter(typeof(IEntityWithId), "d");
-
-        //        // 2. Access the property (d.PropertyName)
-        //        var propertyAccess = Expression.Property(entityParam, prop.Name);
-
-        //        // 3. Create Getter Expression: Func<IEntityWithId, object>
-        //        // Convert property access to object for boxing/unboxing
-        //        var convertedAccess = Expression.Convert(propertyAccess, typeof(object));
-        //        var getterLambda = Expression.Lambda<Func<IEntityWithId, object>>(convertedAccess, entityParam);
-
-        //        // 4. Create Setter Expression: Action<IEntityWithId, string> 
-        //        // Note: This requires a slightly different approach or helper method, 
-        //        // as your original RegisterTextBinding likely handled the setter implicitly based on TextBox.Text.
-
-        //        // Assuming your original RegisterTextBinding method (or internal logic) accepted a Control 
-        //        // and a Func<IEntityWithId, object> expression for the GETTER, and handled the SETTER implicitly:
-
-        //        // ** Since we don'IEntityWithId have the original RegisterTextBinding source, we must manually populate 
-        //        // ** the TextBinding list using the generated Getter and a generated Setter. **
-
-        //        // 5. Generate Setter Logic (Action<IEntityWithId, string>)
-        //        var valueParam = Expression.Parameter(typeof(string), "v");
-        //        var castValue = Expression.Convert(valueParam, prop.PropertyType); // Convert string to target type (e.g., string/int)
-
-        //        // We assume all DTO properties are strings in this scenario (or rely on Try/Catch in the actual setter logic)
-        //        // If the DTO properties are non-string (e.g., int), the setter logic must handle parsing.
-
-        //        // Expression for assignment: d.PropertyName = v
-        //        var setterExpression = Expression.Assign(
-        //            Expression.Property(entityParam, prop.Name),
-        //            valueParam
-        //        );
-        //        var setterLambda = Expression.Lambda<Action<IEntityWithId, string>>(setterExpression, entityParam, valueParam);
-
-        //        // 6. Add to the internal list:
-        //        // We assume TextBinding is a struct/class that holds the Control, Getter, and Setter.
-
-        //        // ** If your original BaseGridCrudForm used a protected method like 'RegisterTextBinding(Control, Func<IEntityWithId, object>)', 
-        //        //    you must call that protected method here. **
-
-        //        // Since we don'IEntityWithId have that method, we will directly add the binding:
-        //        _textBindings.Add(new TextBinding
-        //        {
-        //            Control = control,
-        //            Getter = getterLambda.Compile(),
-        //            Setter = (Action<IEntityWithId, string>)setterLambda.Compile()
-        //        });
-
-        //        // The TextBinding structure is assumed to be:
-        //        // private readonly List<TextBinding> _textBindings = new List<TextBinding>();
-        //        // private class TextBinding { public Control Control; public Func<IEntityWithId, object> Getter; public Action<IEntityWithId, string> Setter; }
-        //    }
-        //}
-
-        //protected void AutoBindFormFields()
-        //{
-        //    // ** [FIX]: Declare and initialize the properties variable. **
-        //    var properties = typeof(IEntityWithId).GetProperties(BindingFlags.Public | BindingFlags.Instance);
-
-        //    foreach (var prop in properties)
-        //    {
-        //        var controlAttr = prop.GetCustomAttribute<FieldControlAttribute>();
-        //        if (controlAttr == null) continue;
-
-        //        // ... (The rest of the logic remains the same)
-        //        Type concreteControlType = Type.GetType(controlAttr.ControlTypeName) ??
-        //                                   typeof(System.Windows.Forms.Form).Assembly.GetType(controlAttr.ControlTypeName);
-
-        //        if (concreteControlType == null)
-        //        {
-        //            Debug.Fail($"Auto-binding failed: Control Type '{controlAttr.ControlTypeName}' could not be resolved.");
-        //            continue;
-        //        }
-
-        //        // ... (The logic to find the control field and perform binding)
-        //    }
-        //}
 
         // Prefer derived classes to expose their grid
         protected virtual DataGridView Grid => null;
@@ -1110,7 +1057,7 @@ namespace AATM.UI.Winforms.BaseControls
         protected override void OnShown(EventArgs e)
         {
             base.OnShown(e);
-            if (IsDesignTime()) return;
+            if (IsReallyDesignTime) return;
             if (AutoLoadOnShown && !_hasLoadedOnce)
             {
                 var _ = LoadDataAsync();
@@ -1124,6 +1071,27 @@ namespace AATM.UI.Winforms.BaseControls
         }
 
         // -------------------- Shared design-time helpers --------------------
+
+        protected bool IsReallyDesignTime
+        {
+            get
+            {
+                // 1. LicenseManager (works in most cases)
+                if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
+                    return true;
+
+                // 2. DesignMode property (works after initialization)
+                if (this.DesignMode)
+                    return true;
+
+                // 3. Site.DesignMode (for controls in containers)
+                if (this.Site != null && this.Site.DesignMode)
+                    return true;
+
+                return false;
+            }
+        }
+
         protected static bool IsDesignTime()
         {
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
@@ -1135,10 +1103,10 @@ namespace AATM.UI.Winforms.BaseControls
                 if (proc != null && proc.ProcessName.Equals("devenv", StringComparison.OrdinalIgnoreCase))
                     return true;
 
-                // Heuristic: VS designer assemblies loaded
-                if (AppDomain.CurrentDomain.GetAssemblies()
-                      .Any(a => a.FullName.StartsWith("Microsoft.VisualStudio", StringComparison.OrdinalIgnoreCase)))
-                    return true;
+                //// Heuristic: VS designer assemblies loaded
+                //if (AppDomain.CurrentDomain.GetAssemblies()
+                //      .Any(a => a.FullName.StartsWith("Microsoft.VisualStudio", StringComparison.OrdinalIgnoreCase)))
+                //    return true;
             }
             catch { /* swallow – never block design mode */ }
 

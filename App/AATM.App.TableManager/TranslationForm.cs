@@ -2,14 +2,16 @@
 #define DESIGN_TIME_SAFE
 #endif
 using AATM.Contracts.Dtos;
-using AATM.Modules.Localization;
-using AATM.UI.Winforms.BaseControls;
 using AATM.Contracts.Interfaces.Services;
 using AATM.Core.Localization;
+using AATM.Modules.Localization;
+using AATM.UI.Winforms.BaseControls;
+using AATM.UI.Winforms.Localization; // <-- Add this using for ControlLocalizer
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-using AATM.UI.Winforms.Localization; // <-- Add this using for ControlLocalizer
 
 namespace AATM.App.TableManager
 {
@@ -32,8 +34,10 @@ namespace AATM.App.TableManager
             public override string ToString() => Display;
         }
 
+        //public TranslationForm()
+        //    : base(() => GetCrudServiceSafe(() => (ICrudService<IEntityWithId>)(new TranslationCrudService() as ICrudService<TranslationDto>)))
         public TranslationForm()
-            : base(() => GetCrudServiceSafe(() => (ICrudService<IEntityWithId>)(new TranslationCrudService() as ICrudService<TranslationDto>)))
+            : base(() => new TranslationCrudServiceAdapter(new TranslationCrudService()))
         {
             InitializeComponent();
             if (IsDesignTime()) return;
@@ -43,7 +47,6 @@ namespace AATM.App.TableManager
             _localizationService = ResolveLocalizationService();
             _uiLocalizationManager = ResolveUiLocalizationManager();
 
-            AutoBindFormFields();
 
             _statusProgress = new ToolStripProgressBar
             {
@@ -54,6 +57,9 @@ namespace AATM.App.TableManager
             statusStrip.Items.Add(_statusProgress);
 
             InitializeLanguageUi();   // Populate language selector
+
+
+            AutoBindFormFields(typeof(TranslationDto));
         }
 
         protected override DataGridView Grid => _dataGridView;
@@ -277,12 +283,32 @@ namespace AATM.App.TableManager
 
         protected override void DefineColumns(DataGridView grid)
         {
-            AddHiddenIdColumn(grid, nameof(TranslationDto.ID));
-            AddTextColumn(grid, nameof(TranslationDto.ModuleName), "Module", 140);
-            AddTextColumn(grid, nameof(TranslationDto.UIIdentifier), "UI Identifier", 160);
-            AddTextColumn(grid, nameof(TranslationDto.OriginalString), "Original", 100, fill: true);
-            AddTextColumn(grid, nameof(TranslationDto.LanguageCode), "Lang", 70);
-            AddTextColumn(grid, nameof(TranslationDto.LocalizedString), "Localized", 100, fill: true);
+            AddTextColumn(grid, "ID", "ID", 60);
+            AddTextColumn(grid, "ModuleName", "Module", 140);
+            AddTextColumn(grid, "UIIdentifier", "UI Identifier", 160);
+            AddTextColumn(grid, "OriginalString", "Original", 100, true);
+            AddTextColumn(grid, "LanguageCode", "Lang", 70);
+            AddTextColumn(grid, "LocalizedString", "Localized", 100, true);
+            AddTextColumn(grid, "CreationDate", "Creation Date", 120);       
+            //AddHiddenIdColumn(grid, nameof(TranslationDto.ID));
+            //AddTextColumn(grid, nameof(TranslationDto.ModuleName), "Module", 140);
+            //AddTextColumn(grid, nameof(TranslationDto.UIIdentifier), "UI Identifier", 160);
+            //AddTextColumn(grid, nameof(TranslationDto.OriginalString), "Original", 100, fill: true);
+            //AddTextColumn(grid, nameof(TranslationDto.LanguageCode), "Lang", 70);
+            //AddTextColumn(grid, nameof(TranslationDto.LocalizedString), "Localized", 100, fill: true);
+        }
+
+        // Ensure the grid is bound to the concrete DTO type
+        protected override async Task OnAfterLoadAsync()
+        {
+            // Cast _items to List<TranslationDto> for the grid
+            if (_items != null)
+            {
+                var dtoList = _items.OfType<TranslationDto>().ToList();
+                DataBindingSource.DataSource = dtoList;
+                Grid.DataSource = DataBindingSource;
+            }
+            await base.OnAfterLoadAsync();
         }
 
         protected string GetDeleteConfirmationText(TranslationDto entity)
