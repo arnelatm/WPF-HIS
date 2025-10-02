@@ -24,7 +24,10 @@ namespace AATM.UI.Winforms.BaseControls
         protected IEntityWithId _entity;
         protected readonly ICrudService<IEntityWithId> _service;
         protected BindingList<IEntityWithId> _items = new BindingList<IEntityWithId>();
-        
+        private ToolStripTextBox _searchBox;
+        private ToolStripButton _searchButton;
+        private List<IEntityWithId> _allItems = new List<IEntityWithId>();
+
         private bool _isLoading;
         private bool _isMutating;
 
@@ -354,12 +357,32 @@ namespace AATM.UI.Winforms.BaseControls
                 });
             }
 
+
+            // Add search controls
+            _searchBox = new ToolStripTextBox
+            {
+                Name = "tsSearchBox",
+                ToolTipText = "Search"
+            };
+            _searchButton = new ToolStripButton("Search")
+            {
+                ToolTipText = "Search"
+            };  
+            _searchButton.Click += (s, e) => ApplySearch();
+            _searchBox.KeyDown += (s, e) => { if (e.KeyCode == Keys.Enter) ApplySearch(); };
+
+            _navigator.Items.Add(new ToolStripSeparator());
+            _navigator.Items.Add(new ToolStripLabel("Search:"));
+            _navigator.Items.Add(_searchBox);
+            _navigator.Items.Add(_searchButton);
+
             // Let derived classes add more
             OnCreateAdditionalNavigatorItems(_navigator);
 
             // Insert into controls
             Controls.Add(_navigator);
             _navigator.BringToFront();
+
         }
 
         // -------------------- NEW BINDING SUPPORT --------------------
@@ -744,6 +767,7 @@ namespace AATM.UI.Winforms.BaseControls
                 await OnBeforeLoadAsync();
 
                 var result = await _service.GetAllAsync(_cts.Token);
+                _allItems = result != null ? result.ToList() : new List<IEntityWithId>();
                 _items = result != null ? new BindingList<IEntityWithId>(result.ToList()) : new BindingList<IEntityWithId>();
 
                 var grid = Grid;
@@ -1168,11 +1192,37 @@ namespace AATM.UI.Winforms.BaseControls
                 ? _items.OrderBy(x => x.GetType().GetProperty(propertyName)?.GetValue(x, null)).ToList()
                 : _items.OrderByDescending(x => x.GetType().GetProperty(propertyName)?.GetValue(x, null)).ToList();
 
+            // Update the BindingList
             _items.Clear();
             foreach (var item in sorted)
                 _items.Add(item);
 
             grid.Refresh();
+        }
+
+        private void ApplySearch()
+        {
+            string query = _searchBox.Text?.Trim();
+            if (string.IsNullOrEmpty(query))
+            {
+                // Show all
+                _items.Clear();
+                foreach (var item in _allItems)
+                    _items.Add(item);
+                return;
+            }
+
+            var filtered = _allItems.Where(x =>
+                x.GetType().GetProperties()
+                    .Any(p =>
+                        p.GetValue(x) != null &&
+                        p.GetValue(x).ToString().IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0
+                    )
+            ).ToList();
+
+            _items.Clear();
+            foreach (var item in filtered)
+                _items.Add(item);
         }
     }
 }
