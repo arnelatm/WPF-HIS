@@ -68,7 +68,7 @@ namespace AATM.UI.Winforms.Localization
             var service = _getLocalizationService();
             if (service == null || form == null || string.IsNullOrWhiteSpace(languageCode)) return;
 
-            service.SetLanguage(languageCode);
+            service.SetLanguage(languageCode, form.Name);
 
             try
             {

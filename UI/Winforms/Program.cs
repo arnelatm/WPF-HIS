@@ -44,7 +44,7 @@ namespace Winforms
                 var configService = new ConfigurationService();
                 container.Register(typeof(IConfigurationService), configService);
 
-                var localizationService = new LocalizationService("Main","en-US");
+                var localizationService = new LocalizationService("en-US", "CustomerModule");
                 container.Register(typeof(ILocalizationService), localizationService);
 
                 // 3. Create and Register UI and Messaging Services

@@ -19,10 +19,9 @@ namespace AATM.App.TableManager
         private readonly IUiLocalizationManager _uiLocalizationManager;
         private ToolStripComboBox _languageCombo;
         private ToolStripButton _applyLangButton;
-        private LanguageUiHelper _langHelper;
         private bool _languageUiNeedsInit; // flag to defer helper init until after ctor
 
-        public TranslationForm()
+        public TranslationForm() : base("TranslationForm")
         {
             InitializeComponent();
             if (IsDesignTime()) return;
@@ -55,60 +54,6 @@ namespace AATM.App.TableManager
         protected override ToolStripStatusLabel StatusStripLabel => statusLabel;
         protected override ToolStripProgressBar StatusProgress => _statusProgress;
         protected override bool AutoLoadOnShown => true;
-
-        //private void InitializeLanguageHelperIfNeeded()
-        //{
-        //    if (!_languageUiNeedsInit) return;
-        //    if (_langHelper != null) return;
-        //    if (_languageCombo == null) return; // safety
-
-        //    _langHelper = new LanguageUiHelper(() => _localizationService, () => _dataGridView, OnAfterLanguageApplied);
-        //    _langHelper.PopulateLanguages(_languageCombo);
-        //    _languageCombo.SelectedIndexChanged += (s, e) => _langHelper.ApplySelectedLanguage(this, _languageCombo);
-        //    _applyLangButton.Click += (s, e) => _langHelper.ApplySelectedLanguage(this, _languageCombo);
-        //    _languageUiNeedsInit = false;
-        //}
-
-        private void OnAfterLanguageApplied(string code)
-        {
-            ApplyLayoutDirectionFromLocalization();
-            statusLabel.Text = $"Language applied: {code}";
-        }
-
-        private void ApplyLayoutDirectionFromLocalization()
-        {
-            if (_localizationService == null) return;
-
-            bool rtl = _localizationService.IsRightToLeft;
-
-            // If your module already applies this globally you can remove this block entirely.
-            SuspendLayout();
-            try
-            {
-                RightToLeft = rtl ? RightToLeft.Yes : RightToLeft.No;
-                RightToLeftLayout = rtl;
-
-                // Ensure children inherit (only touch those that were hard‑coded differently)
-                foreach (Control c in Controls)
-                {
-                    if (c.RightToLeft != RightToLeft.Inherit && c.RightToLeft != RightToLeft)
-                        c.RightToLeft = RightToLeft.Inherit;
-                }
-            }
-            finally
-            {
-                ResumeLayout(true);
-            }
-
-            // Optional: if the localization module provides a built-in applier, prefer it:
-            // RtlLayoutApplier.Apply(this, _localizationService);
-        }
-
-        private ILocalizationService ResolveLocalizationService()
-            => new LocalizationService(_languageCombo?.SelectedItem is LanguageUiHelper.LanguageItem li ? li.Code : "en-US", Name);
-
-        private IUiLocalizationManager ResolveUiLocalizationManager()
-            => new InMemoryUiLocalizationManager();
 
         protected override string GetDeleteConfirmationText(IEntityWithId entity)
         {

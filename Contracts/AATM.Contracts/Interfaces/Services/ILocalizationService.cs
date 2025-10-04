@@ -14,6 +14,6 @@ namespace AATM.Contracts.Interfaces.Services
         string GetString(string moduleName, string uiIdentifier, string originalString);
         IDictionary<string, string> GetLocalizedStrings();
         void AddString(string moduleName, string text, string languageCode);
-        void SetLanguage(string languageCode);
+        void SetLanguage(string languageCode, string moduleName);
     }
 }

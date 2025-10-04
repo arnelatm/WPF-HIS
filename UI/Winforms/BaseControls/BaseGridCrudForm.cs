@@ -3,6 +3,8 @@
 #endif
 using AATM.Contracts.Attributes;
 using AATM.Contracts.Interfaces.Services;
+using AATM.Core.Localization;
+using AATM.UI.Winforms.Localization;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,6 +29,9 @@ namespace AATM.UI.Winforms.BaseControls
         private ToolStripTextBox _searchBox;
         private ToolStripButton _searchButton;
         private List<IEntityWithId> _allItems = new List<IEntityWithId>();
+        private LanguageUiHelper _langHelper;
+        protected string moduleName { get; private set; }
+
 
         private bool _isLoading;
         private bool _isMutating;
@@ -79,6 +84,12 @@ namespace AATM.UI.Winforms.BaseControls
         private BindingList<object> _typedBindingList; // mirror for BindingSource when typed  // Data exposed to BindingSource when typed mode active
         private bool IsTyped => _typedController != null;
 
+        // Initialize helper after combo is created
+        //_langHelper = new LanguageUiHelper(() => _localizationService, () => _dataGridView, OnAfterLanguageApplied);
+        //_langHelper.PopulateLanguages(_languageCombo);
+
+
+
         // Parameterless ctor always provides design-time safe service
         protected BaseGridCrudForm() : this(() => new DesignTimeCrudService()) { }
 
@@ -94,6 +105,12 @@ namespace AATM.UI.Winforms.BaseControls
             }
 
             InitializeNavigatorIfNeeded();
+        }
+
+        protected BaseGridCrudForm(string callingModule)
+            : this(() => new DesignTimeCrudService())
+        {
+            moduleName = callingModule;
         }
 
         protected BaseGridCrudForm(ICrudService<IEntityWithId> service)
@@ -507,9 +524,36 @@ namespace AATM.UI.Winforms.BaseControls
                 _navigator.Items.Add(new ToolStripLabel("Lang:"));
                 _navigator.Items.Add(LanguageComboBox);
                 _navigator.Items.Add(LanguageApplyButton);
+                var localizationService = ResolveLocalizationService();
+                //PopulateLanguageComboBox();
 
-                // Let derived form finish wiring (e.g., populate, helper attach)
+                // Optionally, wire up the Apply button
+                LanguageApplyButton.Click += (s, e) =>
+                {
+                    if (LanguageComboBox.SelectedItem is LanguageUiHelper.LanguageItem selected)
+                    {
+                        moduleName = this.GetType().Name;
+                        localizationService.SetLanguage(selected.Code, moduleName);
+                        OnAfterLanguageApplied(selected.Code);
+                    }
+                };
+
+                // Optionally, call OnLanguageSelectorCreated for further customization
                 OnLanguageSelectorCreated();
+                _langHelper = new LanguageUiHelper(() => localizationService, () => Grid, OnAfterLanguageApplied);
+
+                _langHelper.PopulateLanguages(LanguageComboBox);
+
+                //Let derived form finish wiring(e.g., populate, helper attach)
+                //    if (!_languageUiNeedsInit) return;
+                //if (_langHelper != null) return;
+                //if (_languageCombo == null) return; // safety
+
+                //_langHelper = new LanguageUiHelper(() => _localizationService, () => _dataGridView, OnAfterLanguageApplied);
+                //_langHelper.PopulateLanguages(_languageCombo);
+                LanguageComboBox.SelectedIndexChanged += (s, e) => _langHelper.ApplySelectedLanguage(this, LanguageComboBox);
+                LanguageApplyButton.Click += (s, e) => _langHelper.ApplySelectedLanguage(this, LanguageComboBox);
+                //_languageUiNeedsInit = false;
             }
 
             // Let derived classes add more
@@ -520,6 +564,49 @@ namespace AATM.UI.Winforms.BaseControls
             _navigator.BringToFront();
 
         }
+
+        private void InitializeLanguageHelperIfNeeded()
+        {
+            if (_langHelper != null) return;
+            //_langHelper = new LanguageUiHelper(() => _localizationService, () => _dataGridView, OnAfterLanguageApplied);
+            _langHelper.PopulateLanguages(LanguageComboBox);
+            //_languageCombo.SelectedIndexChanged += (s, e) => _langHelper.ApplySelectedLanguage(this, _languageCombo);
+            //_applyLangButton.Click += (s, e) => _langHelper.ApplySelectedLanguage(this, _languageCombo);
+            //_languageUiNeedsInit = false;
+        }
+
+        //protected void PopulateLanguageComboBox()
+        //{
+        //    if (LanguageComboBox == null)
+        //        return;
+
+        //    // Clear existing items
+        //    LanguageComboBox.Items.Clear();
+
+        //    // Get available languages from the localization service
+        //    var localizationService = ResolveLocalizationService();
+        //    var languages = localizationService?.GetAvailableLanguages();
+
+        //    if (languages != null)
+        //    {
+        //        foreach (var (display, code) in languages)
+        //        {
+        //            // You can use a tuple, or create a simple class for display/code if needed
+        //            LanguageComboBox.Items.Add(new _langHelper.LanguageItem { Display = display, Code = code });
+        //        }
+        //    }
+
+        //    // Optionally select the current language
+        //    var currentLang = localizationService != null ? localizationService.GetLocalizedStrings().FirstOrDefault().Key : "en-US";
+        //    for (int i = 0; i < LanguageComboBox.Items.Count; i++)
+        //    {
+        //        if (LanguageComboBox.Items[i] is LanguageUiHelper.LanguageItem item && item.Code == currentLang)
+        //        {
+        //            LanguageComboBox.SelectedIndex = i;
+        //            break;
+        //        }
+        //    }
+        //}
 
         // -------------------- NEW BINDING SUPPORT --------------------
 
@@ -1476,6 +1563,53 @@ namespace AATM.UI.Winforms.BaseControls
 
             return false;
         }
+
+        // Add these to BaseGridCrudForm
+
+        protected virtual void OnAfterLanguageApplied(string code)
+        {
+            ControlLocalizer.ApplyRightToLeftLayout(this, code);
+            StatusStripLabel.Text = $"Language applied: {code}";
+        }
+
+        //protected virtual void ApplyLayoutDirectionFromLocalization()
+        //{
+        //    var localizationService = LocalizationService;
+        //    if (localizationService == null) return;
+
+        //    bool rtl = localizationService.IsRightToLeft;
+
+        //    SuspendLayout();
+        //    try
+        //    {
+        //        RightToLeft = rtl ? RightToLeft.Yes : RightToLeft.No;
+        //        RightToLeftLayout = rtl;
+
+        //        foreach (Control c in Controls)
+        //        {
+        //            if (c.RightToLeft != RightToLeft.Inherit && c.RightToLeft != RightToLeft)
+        //                c.RightToLeft = RightToLeft.Inherit;
+        //        }
+        //    }
+        //    finally
+        //    {
+        //        ResumeLayout(true);
+        //    }
+
+        //    // Optional: if the localization module provides a built-in applier, prefer it:
+        //    // RtlLayoutApplier.Apply(this, localizationService);
+        //}
+
+        protected virtual ILocalizationService ResolveLocalizationService()
+            => new LocalizationService(LanguageComboBox?.SelectedItem is LanguageUiHelper.LanguageItem li ? li.Code : "en-US", this.GetType().Name);
+
+        protected virtual IUiLocalizationManager ResolveUiLocalizationManager()
+            => new InMemoryUiLocalizationManager();
+
+        // Add these properties to support the moved code
+        protected virtual ILocalizationService LocalizationService { get; private set; }
+        protected virtual IUiLocalizationManager UiLocalizationManager { get; private set; }
+
 
         /// <summary>
         /// Returns a design-time safe CRUD service. At design-time (or if the runtime factory throws),

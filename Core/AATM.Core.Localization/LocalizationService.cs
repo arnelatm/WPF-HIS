@@ -272,7 +272,7 @@ namespace AATM.Core.Localization
             }
         }
 
-        public void SetLanguage(string language)
+        public void SetLanguage(string language, string moduleName)
         {
             if (string.IsNullOrWhiteSpace(language) || string.Equals(_language, language, StringComparison.OrdinalIgnoreCase))
                 return;
