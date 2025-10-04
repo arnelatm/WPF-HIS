@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this._tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.txtErrors = new System.Windows.Forms.TextBox();
             this._lblOriginal = new System.Windows.Forms.Label();
             this._dataGridView = new System.Windows.Forms.DataGridView();
             this._txtOriginalString = new System.Windows.Forms.TextBox();
@@ -58,9 +59,10 @@
             // 
             this._tableLayoutPanel.ColumnCount = 2;
             this._tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
-            this._tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 650F));
+            this._tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 666F));
+            this._tableLayoutPanel.Controls.Add(this.txtErrors, 0, 5);
             this._tableLayoutPanel.Controls.Add(this._lblOriginal, 0, 0);
-            this._tableLayoutPanel.Controls.Add(this._dataGridView, 0, 6);
+            this._tableLayoutPanel.Controls.Add(this._dataGridView, 0, 7);
             this._tableLayoutPanel.Controls.Add(this._txtOriginalString, 1, 0);
             this._tableLayoutPanel.Controls.Add(this._lblLocalized, 0, 1);
             this._tableLayoutPanel.Controls.Add(this._txtLocalizedString, 1, 1);
@@ -73,16 +75,32 @@
             this._tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this._tableLayoutPanel.Location = new System.Drawing.Point(0, 0);
             this._tableLayoutPanel.Name = "_tableLayoutPanel";
-            this._tableLayoutPanel.RowCount = 7;
+            this._tableLayoutPanel.RowCount = 8;
             this._tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this._tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this._tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this._tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this._tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this._tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this._tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this._tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this._tableLayoutPanel.Size = new System.Drawing.Size(800, 355);
+            this._tableLayoutPanel.Size = new System.Drawing.Size(816, 355);
             this._tableLayoutPanel.TabIndex = 3;
+            // 
+            // txtErrors
+            // 
+            this.txtErrors.BackColor = System.Drawing.Color.MistyRose;
+            this.txtErrors.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this._tableLayoutPanel.SetColumnSpan(this.txtErrors, 2);
+            this.txtErrors.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtErrors.ForeColor = System.Drawing.Color.DarkRed;
+            this.txtErrors.Location = new System.Drawing.Point(3, 133);
+            this.txtErrors.Multiline = true;
+            this.txtErrors.Name = "txtErrors";
+            this.txtErrors.ReadOnly = true;
+            this.txtErrors.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtErrors.Size = new System.Drawing.Size(794, 44);
+            this.txtErrors.TabIndex = 999;
             // 
             // _lblOriginal
             // 
@@ -95,7 +113,7 @@
             // _dataGridView
             // 
             this._tableLayoutPanel.SetColumnSpan(this._dataGridView, 2);
-            this._dataGridView.Location = new System.Drawing.Point(3, 133);
+            this._dataGridView.Location = new System.Drawing.Point(3, 183);
             this._dataGridView.Name = "_dataGridView";
             this._dataGridView.Size = new System.Drawing.Size(794, 227);
             this._dataGridView.TabIndex = 4;
@@ -175,7 +193,7 @@
             this.statusLabel});
             this.statusStrip.Location = new System.Drawing.Point(0, 380);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(800, 22);
+            this.statusStrip.Size = new System.Drawing.Size(816, 22);
             this.statusStrip.TabIndex = 6;
             this.statusStrip.Text = "statusStrip";
             // 
@@ -231,7 +249,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 402);
+            this.ClientSize = new System.Drawing.Size(816, 402);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this._tableLayoutPanel);
             this.Name = "TranslationForm";
@@ -268,5 +286,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.TextBox txtErrors;
     }
 }

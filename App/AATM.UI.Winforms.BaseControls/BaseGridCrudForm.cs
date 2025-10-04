@@ -61,3 +61,21 @@ protected ILocalizationService ResolveLocalizationService()
 
 protected IUiLocalizationManager ResolveUiLocalizationManager()
     => new InMemoryUiLocalizationManager();
+
+protected virtual string GetDeleteConfirmationText(IEntityWithId entity)
+{
+    var t = entity as TranslationDto;
+    if (t == null) return base.GetDeleteConfirmationText(entity);
+
+    string original = t.OriginalString ?? string.Empty;
+    if (original.Length > 80)
+        original = original.Substring(0, 77) + "...";
+
+    return "Are you sure you want to delete this translation?"
+           + Environment.NewLine + Environment.NewLine
+           + "ID: " + t.ID + Environment.NewLine
+           + "Module: " + (t.ModuleName ?? string.Empty) + Environment.NewLine
+           + "UI Identifier: " + (t.UIIdentifier ?? string.Empty) + Environment.NewLine
+           + "Language: " + (t.LanguageCode ?? string.Empty) + Environment.NewLine
+           + "Original: " + original;
+}

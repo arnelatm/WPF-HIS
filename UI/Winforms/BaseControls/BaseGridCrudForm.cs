@@ -31,6 +31,7 @@ namespace AATM.UI.Winforms.BaseControls
         private List<IEntityWithId> _allItems = new List<IEntityWithId>();
         private LanguageUiHelper _langHelper;
         protected string moduleName { get; private set; }
+        protected Control ErrorDisplayControl { get; set; }
 
 
         private bool _isLoading;
@@ -47,7 +48,7 @@ namespace AATM.UI.Winforms.BaseControls
         private readonly List<TextBinding> _textBindings = new List<TextBinding>();
 
         // NEW (moved from TranslationForm): shared ErrorProvider for field-level validation
-        protected ErrorProvider errorProvider1;
+        protected ErrorProvider myErrorProvider;
 
         protected virtual bool AutoWireClearErrors => true;
 
@@ -384,16 +385,16 @@ namespace AATM.UI.Winforms.BaseControls
         // -------------------- NEW: Shared ErrorProvider helpers --------------------
         protected void EnsureErrorProvider()
         {
-            if (errorProvider1 == null)
+            if (myErrorProvider == null)
             {
-                errorProvider1 = new ErrorProvider
+                myErrorProvider = new ErrorProvider
                 {
                     BlinkStyle = ErrorBlinkStyle.NeverBlink,
                     ContainerControl = this
                 };
                 Disposed += (s, e) =>
                 {
-                    try { errorProvider1?.Dispose(); } catch { }
+                    try { myErrorProvider?.Dispose(); } catch { }
                 };
             }
         }
@@ -405,8 +406,8 @@ namespace AATM.UI.Winforms.BaseControls
                 BeginInvoke(new Action<Control, string>(SetFieldError), ctl, message);
                 return;
             }
-            if (errorProvider1 == null || ctl == null) return;
-            errorProvider1.SetError(ctl, string.IsNullOrWhiteSpace(message) ? string.Empty : message);
+            if (myErrorProvider == null || ctl == null) return;
+            myErrorProvider.SetError(ctl, string.IsNullOrWhiteSpace(message) ? string.Empty : message);
         }
 
         // -------------------- NEW: BindingNavigator + BindingSource --------------------
@@ -660,6 +661,8 @@ namespace AATM.UI.Winforms.BaseControls
                 if (b.Box != null)
                     b.Box.Text = b.Getter(entity) ?? string.Empty;
             }
+            ClearErrorDisplay();
+            myErrorProvider?.Clear();
         }
 
         //protected sealed override void PopulateFormFieldsFromGrid(int rowIndex)
@@ -1298,6 +1301,7 @@ namespace AATM.UI.Winforms.BaseControls
                     SetStatusText($"Saved (ID={_typedController.GetId(saved)})");
                     await OnAfterSaveAsync((IEntityWithId)saved);
                     await LoadDataAsync();
+                    ClearErrorDisplay();
                     ClearFormFields();
                     return;
                 }
@@ -1322,6 +1326,7 @@ namespace AATM.UI.Winforms.BaseControls
             catch (OperationCanceledException)
             {
                 SetStatusText("Save canceled.");
+                myErrorProvider.Clear();
             }
             catch (Exception ex)
             {
@@ -1730,6 +1735,20 @@ namespace AATM.UI.Winforms.BaseControls
             _items.Clear();
             foreach (var item in filteredLegacy)
                 _items.Add(item);
+        }
+
+        protected void SetErrorDisplay(string message)
+        {
+            if (ErrorDisplayControl == null) return;
+            if (ErrorDisplayControl is Label lbl)
+                lbl.Text = message ?? "";
+            else if (ErrorDisplayControl is TextBox txt)
+                txt.Text = message ?? "";
+        }
+
+        protected void ClearErrorDisplay()
+        {
+            SetErrorDisplay("");
         }
 
 
