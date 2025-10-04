@@ -18,10 +18,13 @@ namespace AATM.UI.Winforms.BaseControls
 
         private readonly PropertyInfo[] _simpleProps;
         private readonly Dictionary<string, Func<TDto, object>> _valueGetters;
+        private readonly BindingList<object> _untypedAdapter;
+        private readonly List<GridPropertyDescriptor> _gridPropertyDescriptors;
 
         public GridCrudController(ICrudService<TDto> service)
         {
             _service = service ?? throw new ArgumentNullException(nameof(service));
+
             _simpleProps = typeof(TDto)
                 .GetProperties(BindingFlags.Public | BindingFlags.Instance)
                 .Where(p => p.CanRead &&
@@ -30,12 +33,21 @@ namespace AATM.UI.Winforms.BaseControls
                 .ToArray();
 
             _valueGetters = _simpleProps.ToDictionary(p => p.Name, CompileGetter);
+
+            // Live adapter (no per-load copying)
+            _untypedAdapter = new BindingList<object>();
+            _typedItems.ListChanged += (_, __) => SyncUntypedAdapter();
+
+            _gridPropertyDescriptors = _simpleProps
+                .Select(p => new GridPropertyDescriptor(p.Name, p.PropertyType))
+                .ToList();
         }
 
         public Type DtoType => typeof(TDto);
 
-        public BindingList<object> UntypedItems =>
-            new BindingList<object>(_typedItems.Cast<object>().ToList());
+        public BindingList<object> LiveUntypedItems => _untypedAdapter;
+
+        public IReadOnlyList<GridPropertyDescriptor> GridProperties => _gridPropertyDescriptors;
 
         public async Task LoadAsync(CancellationToken ct)
         {
@@ -50,6 +62,23 @@ namespace AATM.UI.Winforms.BaseControls
             {
                 _typedItems.RaiseListChangedEvents = true;
                 _typedItems.ResetBindings();
+            }
+            SyncUntypedAdapter();
+        }
+
+        private void SyncUntypedAdapter()
+        {
+            _untypedAdapter.RaiseListChangedEvents = false;
+            try
+            {
+                _untypedAdapter.Clear();
+                foreach (var t in _typedItems)
+                    _untypedAdapter.Add(t);
+            }
+            finally
+            {
+                _untypedAdapter.RaiseListChangedEvents = true;
+                _untypedAdapter.ResetBindings();
             }
         }
 
@@ -67,8 +96,7 @@ namespace AATM.UI.Winforms.BaseControls
             return await _service.DeleteAsync(id, ct);
         }
 
-        public int GetId(object entity) =>
-            entity is TDto t ? t.ID : 0;
+        public int GetId(object entity) => entity is TDto t ? t.ID : 0;
 
         public IEnumerable<object> Filter(string query)
         {

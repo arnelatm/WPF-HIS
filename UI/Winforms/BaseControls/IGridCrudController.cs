@@ -1,18 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace AATM.UI.Winforms.BaseControls
 {
-    // Internal: isolates typed logic from designable base Form.
+    // Updated: added access to the live typed list + metadata for auto column generation.
     internal interface IGridCrudController
     {
         Type DtoType { get; }
 
-        // Underlying strongly typed list, but exposed as object list for reuse by BindingSource.
-        BindingList<object> UntypedItems { get; }
+        // Live strongly typed list exposed as non-generic for BindingSource.
+        BindingList<object> LiveUntypedItems { get; }
 
         // Load from service
         Task LoadAsync(CancellationToken ct);
@@ -26,13 +27,27 @@ namespace AATM.UI.Winforms.BaseControls
         // Delete by id
         Task<bool> DeleteAsync(int id, CancellationToken ct);
 
-        // Return filtered enumerable (NOT mutating internal list – caller repopulates binding list)
+        // Filtering (non‑mutating)
         IEnumerable<object> Filter(string query);
 
-        // Sort by property
+        // Sorting (non‑mutating)
         IEnumerable<object> Sort(string propertyName, bool ascending);
 
-        // Get ID (for IEntityWithId abstraction)
-        int GetId(object entity);   
+        // Get primary key
+        int GetId(object entity);
+
+        // Expose property descriptors for optional auto-column generation
+        IReadOnlyList<GridPropertyDescriptor> GridProperties { get; }
+    }
+
+    internal sealed class GridPropertyDescriptor
+    {
+        public string Name { get; }
+        public Type PropertyType { get; }
+        public GridPropertyDescriptor(string name, Type type)
+        {
+            Name = name;
+            PropertyType = type;
+        }
     }
 }

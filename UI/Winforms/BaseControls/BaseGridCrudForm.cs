@@ -260,6 +260,9 @@ namespace AATM.UI.Winforms.BaseControls
         protected virtual Task OnDeleteRequestedAsync() => DeleteSelectedAsync();
         protected virtual Task OnRefreshRequestedAsync() => LoadDataAsync();
 
+        // VALIDATION HOOK 
+        protected virtual string ValidateBeforeSave(IEntityWithId entity) => null;
+
         protected virtual IEnumerable<Control> BusyControls
         {
             get
@@ -792,22 +795,12 @@ namespace AATM.UI.Winforms.BaseControls
                 {
                     await _typedController.LoadAsync(_cts.Token);
 
-                    // Refresh BindingSource with controller list
-                    var fresh = _typedController.UntypedItems;
-                    _typedBindingList.RaiseListChangedEvents = false;
-                    try
-                    {
-                        _typedBindingList.Clear();
-                        foreach (var o in fresh) _typedBindingList.Add(o);
-                    }
-                    finally
-                    {
-                        _typedBindingList.RaiseListChangedEvents = true;
-                        _bindingSource.ResetBindings(false);
-                    }
-
                     if (UseDefaultNavigator && _navigator == null)
                         InitializeNavigatorIfNeeded();
+
+                    // LIVE_TYPED: bind directly to controller's live untyped list
+                    if (_bindingSource == null) _bindingSource = new BindingSource();
+                    _bindingSource.DataSource = _typedController.LiveUntypedItems;
 
                     ConfigureGrid(Grid);
                     if (Grid.DataSource != _bindingSource)
@@ -816,10 +809,9 @@ namespace AATM.UI.Winforms.BaseControls
                     WireGridDataErrorOnce();
                     WireGridSelectionEventsOnce();
 
-                    SetStatusText($"Loaded {_typedBindingList.Count} records.");
+                    SetStatusText($"Loaded {_typedController.LiveUntypedItems.Count} records.");
                     ClearRetryLink();
                     GoFirst();
-
                     await OnAfterLoadAsync();
                     return;
                 }
@@ -967,28 +959,39 @@ namespace AATM.UI.Winforms.BaseControls
                 if (IsTyped)
                 {
                     var currentObj = _bindingSource?.Current;
-                    // Create base entity (new or existing copy)
                     var model = currentObj ?? _typedController.CreateNew();
 
-                    // Rebuild from text bindings (works because they target IEntityWithId)
                     foreach (var b in _textBindings)
-                    {
                         if (b.Box != null)
                             b.Setter((IEntityWithId)model, b.Box.Text);
+
+                    // VALIDATION
+                    var validationMessage = ValidateBeforeSave((IEntityWithId)model);
+                    if (!string.IsNullOrEmpty(validationMessage))
+                    {
+                        SetStatusText("Validation failed: " + validationMessage);
+                        return;
                     }
 
                     var saved = await _typedController.SaveAsync(model, _cts.Token);
                     SetStatusText($"Saved (ID={_typedController.GetId(saved)})");
                     await OnAfterSaveAsync((IEntityWithId)saved);
-
                     await LoadDataAsync();
                     ClearFormFields();
                     return;
                 }
 
-                // Legacy path
+                // ... legacy path (add validation there too) ...
                 var current = GetSelectedEntity();
                 var dto = BuildModelFromForm(current);
+
+                var legacyValidation = ValidateBeforeSave(dto);
+                if (!string.IsNullOrEmpty(legacyValidation))
+                {
+                    SetStatusText("Validation failed: " + legacyValidation);
+                    return;
+                }
+
                 var savedLegacy = await _service.UpsertAsync(dto, _cts.Token);
                 SetStatusText($"Saved (ID={GetEntityId(savedLegacy)})");
                 await OnAfterSaveAsync(savedLegacy);
@@ -1360,5 +1363,7 @@ namespace AATM.UI.Winforms.BaseControls
             foreach (var item in filteredLegacy)
                 _items.Add(item);
         }
+
+
     }
 }
