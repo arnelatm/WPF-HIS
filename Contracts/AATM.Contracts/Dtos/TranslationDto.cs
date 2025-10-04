@@ -8,31 +8,34 @@ namespace AATM.Contracts.Dtos
     public class TranslationDto : IEntityWithId
     {
         // ID is defined as a column, but typically handled specially in the base class.
-        [GridColumn("ID", 60)]
+        [GridColumn("ID", Order = 0, Width = 60)]
         public int ID { get; set; }
 
         // ** [OPTIMIZATION]: Declarative binding/column setup **
         [FieldControl(("System.Windows.Forms.TextBox"), "_txtModuleName")]
-        [GridColumn("Module", 140)]
+        [GridColumn("Module", Order = 1, Width = 140)]
         public string ModuleName { get; set; }
 
         [FieldControl(("System.Windows.Forms.TextBox"), "_txtUIIdentifier")]
-        [GridColumn("UI Identifier", 160)]
+        [GridColumn("UI Identifier", Order = 2, Width = 160)]
         public string UIIdentifier { get; set; }
 
         [FieldControl(("System.Windows.Forms.TextBox"), "_txtOriginalString")]
-        [GridColumn("Original", 100, isFillColumn: true)]
+        [GridColumn("Original", Order = 3, Width = 120, Fill = true)]
         public string OriginalString { get; set; }
 
         [FieldControl(("System.Windows.Forms.TextBox"), "_txtLanguageCode")]
-        [GridColumn("Lang", 70)]
+        [GridColumn("Lang", Order = 4, Width = 70)]
         public string LanguageCode { get; set; }
 
         [FieldControl(("System.Windows.Forms.TextBox"), "_txtLocalizedString")]
-        [GridColumn("Localized", 100, isFillColumn: true)]
+        [GridColumn("Localized", Order = 5, Width = 120, Fill = true)]
         public string LocalizedString { get; set; }
 
+
+        [GridColumn("Creation Date", Order = 6, Width = 120)]
         public DateTime CreationDate { get; set; }
+
     }
 }
 //using AATM.Contracts.Attributes;

@@ -598,6 +598,29 @@ namespace AATM.UI.Winforms.BaseControls
         protected virtual void DefineColumns(DataGridView grid) { }
 
         /// <summary>
+        /// Enables automatic column generation from DTO property attributes when in typed mode
+        /// and no columns are defined explicitly.
+        /// </summary>
+        protected virtual bool AutoGenerateColumnsFromAttributes => true;
+
+        /// <summary>
+        /// Cache of generated column metadata per DTO type to avoid repeated reflection.
+        /// </summary>
+        private static readonly Dictionary<Type, List<GeneratedGridColumn>> _autoColumnCache =
+            new Dictionary<Type, List<GeneratedGridColumn>>();
+
+        private sealed class GeneratedGridColumn
+        {
+            public string Property;
+            public string Header;
+            public int Width;
+            public bool Fill;
+            public bool Hidden;
+            public bool ReadOnly;
+            public int Order;
+        }
+
+        /// <summary>
         /// Extracted default grid setup (common settings)
         /// </summary>
         protected virtual void ApplyDefaultGridSettings(DataGridView grid)
@@ -624,22 +647,32 @@ namespace AATM.UI.Winforms.BaseControls
         protected virtual void ConfigureGrid(DataGridView grid)
         {
             if (grid.Columns.Count > 0) return;
+
             ApplyDefaultGridSettings(grid);
+
+            // Let derived class define manually first
             DefineColumns(grid);
 
-            // Fallback: allow auto-generation if no columns were added
+            // Auto-generate if still empty and typed mode + enabled
+            if (grid.Columns.Count == 0 && IsTyped && AutoGenerateColumnsFromAttributes)
+            {
+                TryBuildAutoColumns(grid);
+            }
+
+            // Fallback: allow default auto-generation if still no columns (legacy/non-typed)
             if (grid.Columns.Count == 0)
                 grid.AutoGenerateColumns = true;
 
             foreach (DataGridViewColumn col in grid.Columns)
             {
                 col.DefaultCellStyle.NullValue = string.Empty;
-                col.SortMode = DataGridViewColumnSortMode.Automatic; // Enable sorting
+                col.SortMode = DataGridViewColumnSortMode.Automatic;
             }
 
-            // Optionally, handle custom sorting or icons
+            grid.ColumnHeaderMouseClick -= Grid_ColumnHeaderMouseClick;
             grid.ColumnHeaderMouseClick += Grid_ColumnHeaderMouseClick;
         }
+
 
         protected DataGridViewTextBoxColumn AddTextColumn(DataGridView grid, string dataProp, string header, int width = 100, bool fill = false)
         {
@@ -867,6 +900,96 @@ namespace AATM.UI.Winforms.BaseControls
                 _hasLoadedOnce = true;
                 SetBusy(false);
             }
+        }
+
+        private void TryBuildAutoColumns(DataGridView grid)
+        {
+            if (_typedController == null) return;
+            var dtoType = _typedController.DtoType;
+            if (dtoType == null) return;
+
+            List<GeneratedGridColumn> meta;
+            if (!_autoColumnCache.TryGetValue(dtoType, out meta))
+            {
+                meta = BuildColumnMetadata(dtoType);
+                _autoColumnCache[dtoType] = meta;
+            }
+
+            foreach (var m in meta.OrderBy(m => m.Order))
+            {
+                var col = new DataGridViewTextBoxColumn
+                {
+                    Name = m.Property,
+                    DataPropertyName = m.Property,
+                    HeaderText = m.Header,
+                    Width = m.Width,
+                    ReadOnly = m.ReadOnly,
+                    Visible = !m.Hidden,
+                    AutoSizeMode = m.Fill
+                        ? DataGridViewAutoSizeColumnMode.Fill
+                        : DataGridViewAutoSizeColumnMode.None
+                };
+                grid.Columns.Add(col);
+            }
+        }
+
+        private List<GeneratedGridColumn> BuildColumnMetadata(Type dtoType)
+        {
+            var list = new List<GeneratedGridColumn>();
+
+            // Prefer properties explicitly decorated.
+            var decorated = dtoType
+                .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .Select(p => new
+                {
+                    Prop = p,
+                    Attr = p.GetCustomAttribute<GridColumnAttribute>(inherit: true)
+                })
+                .Where(x => x.Attr != null)
+                .ToList();
+
+            if (decorated.Count > 0)
+            {
+                foreach (var d in decorated)
+                {
+                    list.Add(new GeneratedGridColumn
+                    {
+                        Property = d.Prop.Name,
+                        Header = string.IsNullOrWhiteSpace(d.Attr.Header) ? d.Prop.Name : d.Attr.Header,
+                        Order = d.Attr.Order,
+                        Width = d.Attr.Width <= 0 ? 100 : d.Attr.Width,
+                        Fill = d.Attr.Fill,
+                        Hidden = d.Attr.Hidden,
+                        ReadOnly = d.Attr.ReadOnly
+                    });
+                }
+                return list;
+            }
+
+            // If no attributes present, fall back to a simple heuristic (skip complex/reference types except string)
+            var simpleProps = dtoType
+                .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .Where(p =>
+                    p.CanRead &&
+                    (p.PropertyType.IsValueType || p.PropertyType == typeof(string)))
+                .ToList();
+
+            int order = 0;
+            foreach (var p in simpleProps)
+            {
+                list.Add(new GeneratedGridColumn
+                {
+                    Property = p.Name,
+                    Header = p.Name,
+                    Order = order++,
+                    Width = 100,
+                    Fill = false,
+                    Hidden = string.Equals(p.Name, "ID", StringComparison.OrdinalIgnoreCase) ? false : false,
+                    ReadOnly = true
+                });
+            }
+
+            return list;
         }
 
         private void WireGridSelectionEventsOnce()

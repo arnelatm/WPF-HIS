@@ -194,17 +194,6 @@ namespace AATM.App.TableManager
             }
         }
 
-        protected override void DefineColumns(DataGridView grid)
-        {
-            AddTextColumn(grid, "ID", "ID", 60);
-            AddTextColumn(grid, "ModuleName", "Module", 140);
-            AddTextColumn(grid, "UIIdentifier", "UI Identifier", 160);
-            AddTextColumn(grid, "OriginalString", "Original", 100, true);
-            AddTextColumn(grid, "LanguageCode", "Lang", 70);
-            AddTextColumn(grid, "LocalizedString", "Localized", 100, true);
-            AddTextColumn(grid, "CreationDate", "Creation Date", 120);
-        }
-
         protected override string GetDeleteConfirmationText(IEntityWithId entity)
         {
             var t = entity as TranslationDto;

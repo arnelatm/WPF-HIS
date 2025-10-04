@@ -3,20 +3,21 @@
 namespace AATM.Contracts.Attributes
 {
     /// <summary>
-    /// Defines a DataGridView column based on the DTO property.
+    /// Decorate DTO properties to drive automatic DataGridView column generation.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
-    public class GridColumnAttribute : Attribute
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
+    public sealed class GridColumnAttribute : Attribute
     {
-        public string HeaderText { get; }
-        public int Width { get; }
-        public bool IsFillColumn { get; }
+        public string Header { get; }
+        public int Order { get; set; } = 0;
+        public int Width { get; set; } = 100;
+        public bool Fill { get; set; }
+        public bool Hidden { get; set; }
+        public bool ReadOnly { get; set; } = true;
 
-        public GridColumnAttribute(string headerText, int width = 100, bool isFillColumn = false)
+        public GridColumnAttribute(string header)
         {
-            HeaderText = headerText;
-            Width = width;
-            IsFillColumn = isFillColumn;
+            Header = header;
         }
     }
 }
