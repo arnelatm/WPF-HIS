@@ -88,6 +88,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Business\AATM.Business.Logic\AATM.Business.csproj">
+      <Project>{3c7bec0f-17bb-0ba8-274f-a5196507cebb}</Project>
+      <Name>AATM.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Contracts\AATM.Contracts\AATM.Contracts.csproj">
       <Project>{464cda63-db4a-02b4-1afa-7083ef503845}</Project>
       <Name>AATM.Contracts</Name>

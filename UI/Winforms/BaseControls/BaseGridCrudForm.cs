@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Http;
@@ -32,7 +33,9 @@ namespace AATM.UI.Winforms.BaseControls
         private LanguageUiHelper _langHelper;
         protected string moduleName { get; private set; }
         protected Control ErrorDisplayControl { get; set; }
-
+        protected virtual bool ShowErrorsInStatusBar { get; set; } = true;
+        protected virtual bool ShowErrorsInStatusLabel { get; set; } = true;
+        protected virtual bool ShowValidationErrorsOnlyInValidationTextBox { get; set; } = true;
 
         private bool _isLoading;
         private bool _isMutating;
@@ -347,15 +350,19 @@ namespace AATM.UI.Winforms.BaseControls
 
         protected virtual void SetStatusText(string text)
         {
-            if (StatusStripLabel != null)
+            // Only show in status bar if allowed
+            if (ShowErrorsInStatusLabel)
             {
-                StatusStripLabel.Text = text ?? string.Empty;
-                if (string.IsNullOrEmpty(StatusStripLabel.ToolTipText))
-                    StatusStripLabel.ToolTipText = StatusStripLabel.Text;
-            }
-            else if (StatusLabel != null)
-            {
-                StatusLabel.Text = text ?? string.Empty;
+                if (StatusStripLabel != null)
+                {
+                    StatusStripLabel.Text = text ?? string.Empty;
+                    if (string.IsNullOrEmpty(StatusStripLabel.ToolTipText))
+                        StatusStripLabel.ToolTipText = StatusStripLabel.Text;
+                }
+                else if (StatusLabel != null)
+                {
+                    StatusLabel.Text = text ?? string.Empty;
+                }
             }
         }
 
@@ -663,6 +670,8 @@ namespace AATM.UI.Winforms.BaseControls
             }
             ClearErrorDisplay();
             myErrorProvider?.Clear();
+            SetStatusText("");
+            SetErrorDisplay("");
         }
 
         //protected sealed override void PopulateFormFieldsFromGrid(int rowIndex)
@@ -945,10 +954,15 @@ namespace AATM.UI.Winforms.BaseControls
         protected void ShowError(string context, Exception ex, Func<Task> retryAsync)
         {
             var friendly = GetFriendlyErrorMessage(ex);
-            SetStatusText($"{context} failed: {friendly}");
 
-            if (StatusStripLabel == null) return;
-            StatusStripLabel.ToolTipText = ex != null ? ex.Message : friendly;
+            // Only show in status bar if allowed
+            if (ShowErrorsInStatusBar)
+                SetStatusText($"{context} failed: {friendly}");
+
+            SetErrorDisplay(friendly);
+
+            if (StatusStripLabel == null || !ShowErrorsInStatusBar) return;
+            // StatusStripLabel.ToolTipText = ex != null ? ex.Message : friendly;
 
             if (_statusRetryClickHandler != null)
             {
@@ -1293,12 +1307,22 @@ namespace AATM.UI.Winforms.BaseControls
                     var validationMessage = ValidateBeforeSave((IEntityWithId)model);
                     if (!string.IsNullOrEmpty(validationMessage))
                     {
-                        SetStatusText("Validation failed: " + validationMessage);
+                        if (ShowValidationErrorsOnlyInValidationTextBox)
+                        {
+                            SetStatusText("Validation failed, record not saved!");
+                        }
+                        else
+                        {
+                            SetStatusText("Validation failed: " + validationMessage);
+                        }
                         return;
                     }
 
                     var saved = await _typedController.SaveAsync(model, _cts.Token);
                     SetStatusText($"Saved (ID={_typedController.GetId(saved)})");
+
+                    ErrorDisplayControl.Text = ""; // Clear error messages
+                    
                     await OnAfterSaveAsync((IEntityWithId)saved);
                     await LoadDataAsync();
                     ClearErrorDisplay();
@@ -1577,34 +1601,6 @@ namespace AATM.UI.Winforms.BaseControls
             StatusStripLabel.Text = $"Language applied: {code}";
         }
 
-        //protected virtual void ApplyLayoutDirectionFromLocalization()
-        //{
-        //    var localizationService = LocalizationService;
-        //    if (localizationService == null) return;
-
-        //    bool rtl = localizationService.IsRightToLeft;
-
-        //    SuspendLayout();
-        //    try
-        //    {
-        //        RightToLeft = rtl ? RightToLeft.Yes : RightToLeft.No;
-        //        RightToLeftLayout = rtl;
-
-        //        foreach (Control c in Controls)
-        //        {
-        //            if (c.RightToLeft != RightToLeft.Inherit && c.RightToLeft != RightToLeft)
-        //                c.RightToLeft = RightToLeft.Inherit;
-        //        }
-        //    }
-        //    finally
-        //    {
-        //        ResumeLayout(true);
-        //    }
-
-        //    // Optional: if the localization module provides a built-in applier, prefer it:
-        //    // RtlLayoutApplier.Apply(this, localizationService);
-        //}
-
         protected virtual ILocalizationService ResolveLocalizationService()
             => new LocalizationService(LanguageComboBox?.SelectedItem is LanguageUiHelper.LanguageItem li ? li.Code : "en-US", this.GetType().Name);
 
@@ -1751,6 +1747,24 @@ namespace AATM.UI.Winforms.BaseControls
             SetErrorDisplay("");
         }
 
+        protected bool AddValidationError(List<string> errors, Control control, string message)
+        {
+            SetFieldError(control, message);
+            errors.Add(message);
+            return false;
+        }
 
+        protected void ShowValidationErrors(IList<string> errors)
+        {
+            if (errors.Count > 0)
+            {
+                ErrorDisplayControl.Text = string.Join(Environment.NewLine, errors);
+            }
+            else
+            {
+                ErrorDisplayControl.Text = ""; // Clear previous errors
+            }
+
+        }
     }
 }
