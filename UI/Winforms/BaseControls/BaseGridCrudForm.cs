@@ -69,21 +69,10 @@ namespace AATM.UI.Winforms.BaseControls
         protected ToolStripButton DeleteButton { get; private set; }
         protected ToolStripButton RefreshButton { get; private set; }
 
-        public virtual void LoadEntity(IEntityWithId entity)
-        {
-            _entity = entity;
-        }
-
-        public IEntityWithId GetEntity()
-        {
-            // Collect data from bound controls and return as IEntityWithId
-            var current = _bindingSource?.Current as IEntityWithId;
-            if (current == null)
-                return _entity;
-
-            // Build a new model from form fields, preserving ID
-            return BuildModelFromForm(current);
-        }
+        // TYPED: controller support
+        private IGridCrudController _typedController;
+        private BindingList<object> _typedBindingList; // mirror for BindingSource when typed  // Data exposed to BindingSource when typed mode active
+        private bool IsTyped => _typedController != null;
 
         // Parameterless ctor always provides design-time safe service
         protected BaseGridCrudForm() : this(() => new DesignTimeCrudService()) { }
@@ -120,6 +109,39 @@ namespace AATM.UI.Winforms.BaseControls
             public Task<bool> DeleteAsync(int id, CancellationToken ct = default(CancellationToken))
                 => Task.FromResult(false);
         }
+
+
+        public virtual void LoadEntity(IEntityWithId entity)
+        {
+            _entity = entity;
+        }
+
+        public IEntityWithId GetEntity()
+        {
+            // Collect data from bound controls and return as IEntityWithId
+            var current = _bindingSource?.Current as IEntityWithId;
+            if (current == null)
+                return _entity;
+
+            // Build a new model from form fields, preserving ID
+            return BuildModelFromForm(current);
+        }
+
+        // ---------- Public/Protected Initialization for typed mode ----------
+        protected void InitializeTypedController<TDto>(Func<ICrudService<TDto>> factory)
+            where TDto : class, IEntityWithId, new()
+        {
+            if (factory == null) throw new ArgumentNullException(nameof(factory));
+            _typedController = new GridCrudController<TDto>(factory());
+
+            if (_bindingSource == null)
+                _bindingSource = new BindingSource();
+
+            _typedBindingList = new BindingList<object>();
+            _bindingSource.DataSource = _typedBindingList;
+        }
+
+
 
         /// <summary>
         /// Automatically binds form fields (TextBox controls) to properties of the given DTO type.
@@ -162,15 +184,15 @@ namespace AATM.UI.Winforms.BaseControls
                 // - Accesses the property
                 // - Converts to string, handling nulls
                 var entityParam = Expression.Parameter(typeof(IEntityWithId), "entity");
-                var castedEntity = Expression.Convert(entityParam, dtoType); 
-                var propertyAccess = Expression.Property(castedEntity, prop.Name); 
+                var castedEntity = Expression.Convert(entityParam, dtoType);
+                var propertyAccess = Expression.Property(castedEntity, prop.Name);
                 var toStringCall = Expression.Call(propertyAccess, typeof(object).GetMethod("ToString"));
                 var nullCheck = Expression.Condition(
                     Expression.Equal(propertyAccess, Expression.Constant(null, prop.PropertyType)),
                     Expression.Constant(string.Empty),
                     toStringCall
                 );
-                var getterLambda = Expression.Lambda<Func<IEntityWithId, string>>(nullCheck, entityParam); 
+                var getterLambda = Expression.Lambda<Func<IEntityWithId, string>>(nullCheck, entityParam);
 
                 // Build a setter delegate: Action<IEntityWithId, string>
                 // - Converts the string value to the property type
@@ -204,8 +226,8 @@ namespace AATM.UI.Winforms.BaseControls
                     }
                 }
                 // Assign the converted value to the property
-                var setterExpression = Expression.Assign(Expression.Property(castedEntity, prop.Name), valueConverted); 
-                var setterLambda = Expression.Lambda<Action<IEntityWithId, string>>(setterExpression, entityParam, valueParam); 
+                var setterExpression = Expression.Assign(Expression.Property(castedEntity, prop.Name), valueConverted);
+                var setterLambda = Expression.Lambda<Action<IEntityWithId, string>>(setterExpression, entityParam, valueParam);
 
                 // Add the binding to the internal list for later use
                 _textBindings.Add(new TextBinding
@@ -367,7 +389,7 @@ namespace AATM.UI.Winforms.BaseControls
             _searchButton = new ToolStripButton("Search")
             {
                 ToolTipText = "Search"
-            };  
+            };
             _searchButton.Click += (s, e) => ApplySearch();
             _searchBox.KeyDown += (s, e) => { if (e.KeyCode == Keys.Enter) ApplySearch(); };
 
@@ -766,6 +788,43 @@ namespace AATM.UI.Winforms.BaseControls
             {
                 await OnBeforeLoadAsync();
 
+                if (IsTyped)
+                {
+                    await _typedController.LoadAsync(_cts.Token);
+
+                    // Refresh BindingSource with controller list
+                    var fresh = _typedController.UntypedItems;
+                    _typedBindingList.RaiseListChangedEvents = false;
+                    try
+                    {
+                        _typedBindingList.Clear();
+                        foreach (var o in fresh) _typedBindingList.Add(o);
+                    }
+                    finally
+                    {
+                        _typedBindingList.RaiseListChangedEvents = true;
+                        _bindingSource.ResetBindings(false);
+                    }
+
+                    if (UseDefaultNavigator && _navigator == null)
+                        InitializeNavigatorIfNeeded();
+
+                    ConfigureGrid(Grid);
+                    if (Grid.DataSource != _bindingSource)
+                        Grid.DataSource = _bindingSource;
+
+                    WireGridDataErrorOnce();
+                    WireGridSelectionEventsOnce();
+
+                    SetStatusText($"Loaded {_typedBindingList.Count} records.");
+                    ClearRetryLink();
+                    GoFirst();
+
+                    await OnAfterLoadAsync();
+                    return;
+                }
+
+
                 var result = await _service.GetAllAsync(_cts.Token);
                 _allItems = result != null ? result.ToList() : new List<IEntityWithId>();
                 _items = result != null ? new BindingList<IEntityWithId>(result.ToList()) : new BindingList<IEntityWithId>();
@@ -905,13 +964,34 @@ namespace AATM.UI.Winforms.BaseControls
             {
                 await OnBeforeSaveAsync();
 
+                if (IsTyped)
+                {
+                    var currentObj = _bindingSource?.Current;
+                    // Create base entity (new or existing copy)
+                    var model = currentObj ?? _typedController.CreateNew();
+
+                    // Rebuild from text bindings (works because they target IEntityWithId)
+                    foreach (var b in _textBindings)
+                    {
+                        if (b.Box != null)
+                            b.Setter((IEntityWithId)model, b.Box.Text);
+                    }
+
+                    var saved = await _typedController.SaveAsync(model, _cts.Token);
+                    SetStatusText($"Saved (ID={_typedController.GetId(saved)})");
+                    await OnAfterSaveAsync((IEntityWithId)saved);
+
+                    await LoadDataAsync();
+                    ClearFormFields();
+                    return;
+                }
+
+                // Legacy path
                 var current = GetSelectedEntity();
                 var dto = BuildModelFromForm(current);
-                var saved = await _service.UpsertAsync(dto, _cts.Token);
-                SetStatusText($"Saved (ID={GetEntityId(saved)})");
-
-                await OnAfterSaveAsync(saved);
-
+                var savedLegacy = await _service.UpsertAsync(dto, _cts.Token);
+                SetStatusText($"Saved (ID={GetEntityId(savedLegacy)})");
+                await OnAfterSaveAsync(savedLegacy);
                 await LoadDataAsync();
                 ClearFormFields();
             }
@@ -938,25 +1018,42 @@ namespace AATM.UI.Winforms.BaseControls
             SetBusy(true, "Deleting...");
             try
             {
-                var entity = GetSelectedEntity();
-                if (entity == null)
+                if (IsTyped)
+                {
+                    var entity = _bindingSource?.Current;
+                    if (entity == null)
+                    {
+                        MessageBox.Show(this, "Select a row to delete.", "Delete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
+                    var id = _typedController.GetId(entity);
+                    if (ConfirmDelete(GetDeleteConfirmationText((IEntityWithId)entity)) != DialogResult.Yes)
+                        return;
+
+                    await OnBeforeDeleteAsync(id, (IEntityWithId)entity);
+                    var ok = await _typedController.DeleteAsync(id, _cts.Token);
+                    SetStatusText(ok ? $"Deleted (ID={id})" : $"Delete failed (ID={id})");
+                    await OnAfterDeleteAsync(id, ok);
+                    await LoadDataAsync();
+                    return;
+                }
+
+                // Legacy path
+                var entityLegacy = GetSelectedEntity();
+                if (entityLegacy == null)
                 {
                     MessageBox.Show(this, "Select a row to delete.", "Delete", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
-                var id = GetEntityId(entity);
-
-                if (ConfirmDelete(GetDeleteConfirmationText(entity)) != DialogResult.Yes)
+                var legacyId = GetEntityId(entityLegacy);
+                if (ConfirmDelete(GetDeleteConfirmationText(entityLegacy)) != DialogResult.Yes)
                     return;
 
-                await OnBeforeDeleteAsync(id, entity);
-
-                var ok = await _service.DeleteAsync(id, _cts.Token);
-                SetStatusText(ok ? $"Deleted (ID={id})" : $"Delete failed (ID={id})");
-
-                await OnAfterDeleteAsync(id, ok);
-
+                await OnBeforeDeleteAsync(legacyId, entityLegacy);
+                var okLegacy = await _service.DeleteAsync(legacyId, _cts.Token);
+                SetStatusText(okLegacy ? $"Deleted (ID={legacyId})" : $"Delete failed (ID={legacyId})");
+                await OnAfterDeleteAsync(legacyId, okLegacy);
                 await LoadDataAsync();
             }
             catch (OperationCanceledException)
@@ -1181,20 +1278,39 @@ namespace AATM.UI.Winforms.BaseControls
         private void Grid_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             var grid = sender as DataGridView;
+            if (grid == null) return;
+
             var column = grid.Columns[e.ColumnIndex];
             var propertyName = column.DataPropertyName;
 
-            // Toggle sort direction
-            bool ascending = grid.SortOrder != SortOrder.Ascending;
+            if (IsTyped)
+            {
+                bool ascending = grid.SortOrder != SortOrder.Ascending;
+                var sorted = _typedController.Sort(propertyName, ascending);
 
-            // Sort the BindingList manually
-            var sorted = ascending
+                _typedBindingList.RaiseListChangedEvents = false;
+                try
+                {
+                    _typedBindingList.Clear();
+                    foreach (var o in sorted) _typedBindingList.Add(o);
+                }
+                finally
+                {
+                    _typedBindingList.RaiseListChangedEvents = true;
+                    _bindingSource.ResetBindings(false);
+                }
+                return;
+            }
+
+            // Legacy path
+            // Toggle sort direction
+            bool asc = grid.SortOrder != SortOrder.Ascending;
+            var sortedLegacy = asc
                 ? _items.OrderBy(x => x.GetType().GetProperty(propertyName)?.GetValue(x, null)).ToList()
                 : _items.OrderByDescending(x => x.GetType().GetProperty(propertyName)?.GetValue(x, null)).ToList();
 
-            // Update the BindingList
             _items.Clear();
-            foreach (var item in sorted)
+            foreach (var item in sortedLegacy)
                 _items.Add(item);
 
             grid.Refresh();
@@ -1202,26 +1318,46 @@ namespace AATM.UI.Winforms.BaseControls
 
         private void ApplySearch()
         {
-            string query = _searchBox.Text?.Trim();
+            if (_searchBox == null) return;
+            var query = _searchBox.Text?.Trim();
+
+            if (IsTyped)
+            {
+                var filtered = _typedController.Filter(query);
+                _typedBindingList.RaiseListChangedEvents = false;
+                try
+                {
+                    _typedBindingList.Clear();
+                    foreach (var o in filtered) _typedBindingList.Add(o);
+                }
+                finally
+                {
+                    _typedBindingList.RaiseListChangedEvents = true;
+                    _bindingSource.ResetBindings(false);
+                }
+                return;
+            }
+
+            // Legacy path
             if (string.IsNullOrEmpty(query))
             {
-                // Show all
                 _items.Clear();
                 foreach (var item in _allItems)
                     _items.Add(item);
                 return;
             }
 
-            var filtered = _allItems.Where(x =>
+            var filteredLegacy = _allItems.Where(x =>
                 x.GetType().GetProperties()
                     .Any(p =>
-                        p.GetValue(x) != null &&
-                        p.GetValue(x).ToString().IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0
-                    )
-            ).ToList();
+                    {
+                        var v = p.GetValue(x);
+                        return v != null &&
+                               v.ToString().IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0;
+                    })).ToList();
 
             _items.Clear();
-            foreach (var item in filtered)
+            foreach (var item in filteredLegacy)
                 _items.Add(item);
         }
     }
