@@ -8,7 +8,6 @@ using AATM.Modules.Localization;
 using AATM.UI.Winforms.BaseControls;
 using AATM.UI.Winforms.Localization;
 using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace AATM.App.TableManager
@@ -16,28 +15,26 @@ namespace AATM.App.TableManager
     public partial class TranslationForm : BaseGridCrudForm
     {
         private ToolStripProgressBar _statusProgress;
-
         private readonly ILocalizationService _localizationService;
         private readonly IUiLocalizationManager _uiLocalizationManager;
         private ToolStripComboBox _languageCombo;
         private ToolStripButton _applyLangButton;
-
-        private sealed class LanguageItem
-        {
-            public string Display { get; }
-            public string Code { get; }
-            public LanguageItem(string display, string code) { Display = display; Code = code; }
-            public override string ToString() => Display;
-        }
+        private LanguageUiHelper _langHelper;
+        private bool _languageUiNeedsInit; // flag to defer helper init until after ctor
 
         public TranslationForm()
         {
             InitializeComponent();
             if (IsDesignTime()) return;
 
-            // Initialize typed controller (primary data path)
+            EnsureErrorProvider();
+
+            // Navigator (and thus language combo creation) happens in base ctor via virtual override below.
+            // So by the time we reach here, _languageCombo may already exist but helper not yet initialized.
+
             InitializeTypedController<TranslationDto>(() => new TranslationCrudService());
 
+            // Create localization service AFTER potential combo created, but before helper init.
             _localizationService = ResolveLocalizationService();
             _uiLocalizationManager = ResolveUiLocalizationManager();
 
@@ -49,8 +46,9 @@ namespace AATM.App.TableManager
             };
             statusStrip.Items.Add(_statusProgress);
 
-            InitializeLanguageUi();
             AutoBindFormFields(typeof(TranslationDto));
+
+            //InitializeLanguageHelperIfNeeded();
         }
 
         protected override DataGridView Grid => _dataGridView;
@@ -58,141 +56,59 @@ namespace AATM.App.TableManager
         protected override ToolStripProgressBar StatusProgress => _statusProgress;
         protected override bool AutoLoadOnShown => true;
 
-        protected override void OnCreateAdditionalNavigatorItems(BindingNavigator navigator)
+        //private void InitializeLanguageHelperIfNeeded()
+        //{
+        //    if (!_languageUiNeedsInit) return;
+        //    if (_langHelper != null) return;
+        //    if (_languageCombo == null) return; // safety
+
+        //    _langHelper = new LanguageUiHelper(() => _localizationService, () => _dataGridView, OnAfterLanguageApplied);
+        //    _langHelper.PopulateLanguages(_languageCombo);
+        //    _languageCombo.SelectedIndexChanged += (s, e) => _langHelper.ApplySelectedLanguage(this, _languageCombo);
+        //    _applyLangButton.Click += (s, e) => _langHelper.ApplySelectedLanguage(this, _languageCombo);
+        //    _languageUiNeedsInit = false;
+        //}
+
+        private void OnAfterLanguageApplied(string code)
         {
-            base.OnCreateAdditionalNavigatorItems(navigator);
-
-            navigator.Items.Add(new ToolStripSeparator());
-
-            _languageCombo = new ToolStripComboBox
-            {
-                Name = "tscLanguage",
-                DropDownStyle = ComboBoxStyle.DropDownList,
-                ToolTipText = "Select UI language"
-            };
-            _languageCombo.SelectedIndexChanged += (s, e) => ApplySelectedLanguage();
-
-            _applyLangButton = new ToolStripButton("Apply")
-            {
-                ToolTipText = "Apply selected language to this form"
-            };
-            _applyLangButton.Click += (s, e) => ApplySelectedLanguage();
-
-            navigator.Items.Add(new ToolStripLabel("Lang:"));
-            navigator.Items.Add(_languageCombo);
-            navigator.Items.Add(_applyLangButton);
+            ApplyLayoutDirectionFromLocalization();
+            statusLabel.Text = $"Language applied: {code}";
         }
 
-        private void InitializeLanguageUi()
+        private void ApplyLayoutDirectionFromLocalization()
         {
-            if (_languageCombo == null) return;
-            _languageCombo.Items.Clear();
+            if (_localizationService == null) return;
 
-            var langs = SafeGetLanguages();
-            foreach (var (display, code) in langs)
-                _languageCombo.Items.Add(new LanguageItem(display, code));
+            bool rtl = _localizationService.IsRightToLeft;
 
-            int idx = -1;
-            for (int i = 0; i < _languageCombo.Items.Count; i++)
-            {
-                var li = (LanguageItem)_languageCombo.Items[i];
-                if (li.Code.StartsWith("ar", StringComparison.OrdinalIgnoreCase)) { idx = i; break; }
-                if (idx == -1 && li.Code.StartsWith("en", StringComparison.OrdinalIgnoreCase)) idx = i;
-            }
-            if (idx == -1 && _languageCombo.Items.Count > 0) idx = 0;
-            if (idx >= 0) _languageCombo.SelectedIndex = idx;
-        }
-
-        private List<(string display, string code)> SafeGetLanguages()
-        {
+            // If your module already applies this globally you can remove this block entirely.
+            SuspendLayout();
             try
             {
-                return _localizationService?.GetAvailableLanguages()
-                       ?? new List<(string display, string code)>
-                          {
-                              ("English","en-US"),
-                              ("Arabic","ar-SA")
-                          };
-            }
-            catch
-            {
-                return new List<(string display, string code)>
+                RightToLeft = rtl ? RightToLeft.Yes : RightToLeft.No;
+                RightToLeftLayout = rtl;
+
+                // Ensure children inherit (only touch those that were hard‑coded differently)
+                foreach (Control c in Controls)
                 {
-                    ("English","en-US"),
-                    ("Arabic","ar-SA")
-                };
+                    if (c.RightToLeft != RightToLeft.Inherit && c.RightToLeft != RightToLeft)
+                        c.RightToLeft = RightToLeft.Inherit;
+                }
             }
-        }
-
-        private void ApplySelectedLanguage()
-        {
-            var li = _languageCombo?.SelectedItem as LanguageItem;
-            if (li == null) return;
-            ApplyLanguage(li.Code);
-        }
-
-        private void ApplyRightToLeft(bool rtl)
-        {
-            var mode = rtl ? RightToLeft.Yes : RightToLeft.No;
-            RightToLeft = mode;
-            RightToLeftLayout = rtl;
-
-            void Recurse(Control c)
+            finally
             {
-                c.RightToLeft = mode;
-                foreach (Control child in c.Controls) Recurse(child);
+                ResumeLayout(true);
             }
-            foreach (Control c in Controls) Recurse(c);
+
+            // Optional: if the localization module provides a built-in applier, prefer it:
+            // RtlLayoutApplier.Apply(this, _localizationService);
         }
 
         private ILocalizationService ResolveLocalizationService()
-            => new LocalizationService(_languageCombo?.SelectedItem is LanguageItem li ? li.Code : "en-US", Name);
+            => new LocalizationService(_languageCombo?.SelectedItem is LanguageUiHelper.LanguageItem li ? li.Code : "en-US", Name);
 
         private IUiLocalizationManager ResolveUiLocalizationManager()
             => new InMemoryUiLocalizationManager();
-
-        private class InMemoryUiLocalizationManager : IUiLocalizationManager
-        {
-            private readonly Dictionary<string, Dictionary<string, string>> _registeredStrings =
-                new Dictionary<string, Dictionary<string, string>>();
-
-            public void RegisterFormStrings(Form form, string moduleName, string languageCode)
-            {
-                if (form == null) return;
-                var key = $"{moduleName}:{languageCode}";
-                if (!_registeredStrings.ContainsKey(key))
-                    _registeredStrings[key] = new Dictionary<string, string>();
-
-                foreach (Control c in GetAllControls(form))
-                {
-                    var uiId = c.Name;
-                    var original = c.Text;
-                    if (!string.IsNullOrWhiteSpace(uiId) && !string.IsNullOrWhiteSpace(original))
-                        _registeredStrings[key][uiId] = original;
-                }
-            }
-
-            public void SetLocalizedText(Form form, Dictionary<string, string> localizedStrings)
-            {
-                if (form == null || localizedStrings == null) return;
-                foreach (Control c in GetAllControls(form))
-                {
-                    var uiId = c.Name;
-                    if (!string.IsNullOrWhiteSpace(uiId) && localizedStrings.TryGetValue(uiId, out var loc))
-                        c.Text = loc;
-                }
-            }
-
-            private static IEnumerable<Control> GetAllControls(Control parent)
-            {
-                foreach (Control c in parent.Controls)
-                {
-                    yield return c;
-                    foreach (var child in GetAllControls(c))
-                        yield return child;
-                }
-            }
-        }
 
         protected override string GetDeleteConfirmationText(IEntityWithId entity)
         {
@@ -212,36 +128,46 @@ namespace AATM.App.TableManager
                    + "Original: " + original;
         }
 
-        private void ApplyLanguage(string languageCode)
+        protected override string ValidateBeforeSave(IEntityWithId entity)
         {
-            if (_localizationService == null || _uiLocalizationManager == null) return;
+            EnsureErrorProvider();
+            errorProvider1?.Clear();
 
-            _localizationService.SetLanguage(languageCode);
+            var t = entity as TranslationDto;
+            if (t == null)
+                return "Invalid entity.";
 
-            try
+            if (t.ModuleName != null) t.ModuleName = t.ModuleName.Trim();
+            if (t.LocalizedString != null) t.LocalizedString = t.LocalizedString.Trim();
+            if (t.UIIdentifier != null) t.UIIdentifier = t.UIIdentifier.Trim();
+            if (t.LanguageCode != null) t.LanguageCode = t.LanguageCode.Trim();
+            if (t.OriginalString != null) t.OriginalString = t.OriginalString.Trim();
+
+            if (string.IsNullOrWhiteSpace(t.ModuleName)) { SetFieldError(_txtModuleName, "Module is required."); _txtModuleName?.Focus(); return "Module is required."; }
+            if (string.IsNullOrWhiteSpace(t.LocalizedString)) { SetFieldError(_txtLocalizedString, "Localized String is required."); _txtLocalizedString?.Focus(); return "Localized String is required."; }
+            if (string.IsNullOrWhiteSpace(t.UIIdentifier)) { SetFieldError(_txtUIIdentifier, "UI Identifier is required."); _txtUIIdentifier?.Focus(); return "UI Identifier is required."; }
+            if (string.IsNullOrWhiteSpace(t.LanguageCode)) { SetFieldError(_txtLanguageCode, "Language code is required."); _txtLanguageCode?.Focus(); return "Language code is required."; }
+            if (string.IsNullOrWhiteSpace(t.OriginalString)) { SetFieldError(_txtOriginalString, "Original text is required."); _txtOriginalString?.Focus(); return "Original text is required."; }
+
+            if (t.ModuleName.Length > 100) { SetFieldError(_txtModuleName, "Module exceeds 100 characters."); _txtModuleName?.Focus(); return "Module exceeds 100 characters."; }
+            if (t.UIIdentifier.Length > 150) { SetFieldError(_txtUIIdentifier, "UI Identifier exceeds 150 characters."); _txtUIIdentifier?.Focus(); return "UI Identifier exceeds 150 characters."; }
+            if (t.LanguageCode.Length > 10) { SetFieldError(_txtLanguageCode, "Language code exceeds 10 characters."); _txtLanguageCode?.Focus(); return "Language code exceeds 10 characters."; }
+
+            if (!System.Text.RegularExpressions.Regex.IsMatch(t.LanguageCode, @"^[a-z]{2,3}(-[A-Z]{2})?$") )
             {
-                var dict = _localizationService.GetLocalizedStrings();
-                ControlLocalizer.TranslateControls(this, dict, languageCode, ControlLocalizer.TranslateToolStripButtonImage);
+                SetFieldError(_txtLanguageCode, "Language code format invalid (e.g. en-US).");
+                _txtLanguageCode?.Focus();
+                return "Language code format invalid.";
             }
-            catch { /* ignore localization application errors */ }
 
-            try
+            if (string.Equals(t.ModuleName, t.UIIdentifier, StringComparison.OrdinalIgnoreCase))
             {
-                var dict = _localizationService.GetLocalizedStrings();
-                foreach (DataGridViewColumn col in _dataGridView.Columns)
-                {
-                    var key = col.Tag != null ? col.Tag.ToString() : col.Name;
-                    if (dict.TryGetValue(key, out var localized)
-                        && !string.IsNullOrEmpty(localized)
-                        && localized != col.HeaderText)
-                        col.HeaderText = localized;
-                }
+                SetFieldError(_txtUIIdentifier, "UI Identifier must differ from Module.");
+                _txtUIIdentifier?.Focus();
+                return "UI Identifier must differ from Module.";
             }
-            catch { /* ignore header localization errors */ }
 
-            bool rtl = _localizationService.IsRightToLeft || languageCode.StartsWith("ar", StringComparison.OrdinalIgnoreCase);
-            ApplyRightToLeft(rtl);
-            statusLabel.Text = $"Language applied: {languageCode}";
+            return null;
         }
     }
 }

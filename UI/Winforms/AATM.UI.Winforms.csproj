@@ -90,6 +90,7 @@
       <DependentUpon>FrmCustomer.cs</DependentUpon>
     </Compile>
     <Compile Include="Localization\ControlLocalizer.cs" />
+    <Compile Include="Localization\LanguageUiHelper.cs" />
     <Compile Include="My Project\MyNamespace.Static.1.Designer.cs" />
     <Compile Include="My Project\MyNamespace.Static.2.Designer.cs" />
     <Compile Include="My Project\MyNamespace.Static.3.Designer.cs" />

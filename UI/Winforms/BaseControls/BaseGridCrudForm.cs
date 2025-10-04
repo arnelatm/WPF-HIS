@@ -41,6 +41,11 @@ namespace AATM.UI.Winforms.BaseControls
         // Bindings for forms
         private readonly List<TextBinding> _textBindings = new List<TextBinding>();
 
+        // NEW (moved from TranslationForm): shared ErrorProvider for field-level validation
+        protected ErrorProvider errorProvider1;
+
+        protected virtual bool AutoWireClearErrors => true;
+
         //// ** [FIX]: Ensure Getter and Setter are defined as read/write properties **
         //private class TextBinding
         //{
@@ -236,6 +241,49 @@ namespace AATM.UI.Winforms.BaseControls
                     Getter = getterLambda.Compile(),
                     Setter = setterLambda.Compile()
                 });
+
+                // auto-wire error clearing for all bound textboxes
+                if (AutoWireClearErrors)
+                {
+                    var boxes = _textBindings
+                        .Where(b => b.Box != null)
+                        .Select(b => (Control)b.Box)
+                        .ToArray();
+
+                    if (boxes.Length > 0)
+                        WireClearFieldErrorsOnTextChanged(boxes);
+                }
+            }
+        }
+
+        // Central reusable helper
+        protected void WireClearFieldErrorsOnTextChanged(params Control[] controls)
+        {
+            if (controls == null) return;
+            foreach (var c in controls.Where(c => c != null))
+            {
+                // Avoid multiple subscriptions
+                c.TextChanged -= ClearErrorOnChange;
+                c.TextChanged += ClearErrorOnChange;
+            }
+
+            void ClearErrorOnChange(object sender, EventArgs e)
+            {
+                try
+                {
+                    // If you have an error provider field accessible (e.g. errorProvider1),
+                    // clear it here. Use reflection fallback if needed.
+                    var epField = GetType()
+                        .GetFields(System.Reflection.BindingFlags.Instance |
+                                   System.Reflection.BindingFlags.NonPublic |
+                                   System.Reflection.BindingFlags.Public)
+                        .FirstOrDefault(f => typeof(ErrorProvider).IsAssignableFrom(f.FieldType));
+
+                    var ep = epField?.GetValue(this) as ErrorProvider;
+                    if (ep != null && sender is Control ctl)
+                        ep.SetError(ctl, string.Empty);
+                }
+                catch { /* swallow */ }
             }
         }
 
@@ -259,6 +307,14 @@ namespace AATM.UI.Winforms.BaseControls
         protected virtual Task OnSaveRequestedAsync() => SaveOrUpdateAsync();
         protected virtual Task OnDeleteRequestedAsync() => DeleteSelectedAsync();
         protected virtual Task OnRefreshRequestedAsync() => LoadDataAsync();
+
+        // NEW: Language selector support (opt-in)
+        protected virtual bool ShowLanguageSelector => true;
+        protected ToolStripComboBox LanguageComboBox { get; private set; }
+        protected ToolStripButton LanguageApplyButton { get; private set; }
+
+        // Hook called after the language selector controls are created
+        protected virtual void OnLanguageSelectorCreated() { }
 
         // VALIDATION HOOK 
         protected virtual string ValidateBeforeSave(IEntityWithId entity) => null;
@@ -306,6 +362,34 @@ namespace AATM.UI.Winforms.BaseControls
                 StatusProgress.Visible = busy;
                 StatusProgress.Style = busy ? ProgressBarStyle.Marquee : ProgressBarStyle.Blocks;
             }
+        }
+
+        // -------------------- NEW: Shared ErrorProvider helpers --------------------
+        protected void EnsureErrorProvider()
+        {
+            if (errorProvider1 == null)
+            {
+                errorProvider1 = new ErrorProvider
+                {
+                    BlinkStyle = ErrorBlinkStyle.NeverBlink,
+                    ContainerControl = this
+                };
+                Disposed += (s, e) =>
+                {
+                    try { errorProvider1?.Dispose(); } catch { }
+                };
+            }
+        }
+
+        protected void SetFieldError(Control ctl, string message)
+        {
+            if (InvokeRequired)
+            {
+                BeginInvoke(new Action<Control, string>(SetFieldError), ctl, message);
+                return;
+            }
+            if (errorProvider1 == null || ctl == null) return;
+            errorProvider1.SetError(ctl, string.IsNullOrWhiteSpace(message) ? string.Empty : message);
         }
 
         // -------------------- NEW: BindingNavigator + BindingSource --------------------
@@ -400,6 +484,33 @@ namespace AATM.UI.Winforms.BaseControls
             _navigator.Items.Add(new ToolStripLabel("Search:"));
             _navigator.Items.Add(_searchBox);
             _navigator.Items.Add(_searchButton);
+
+            if (ShowLanguageSelector && LanguageComboBox == null)
+            {
+                _navigator.Items.Add(new ToolStripSeparator());
+
+                LanguageComboBox = new ToolStripComboBox
+                {
+                    Name = "tscLanguage",
+                    DropDownStyle = ComboBoxStyle.DropDownList,
+                    ToolTipText = "Select UI language",
+                    AutoSize = false,
+                    Width = 130
+                };
+
+                LanguageApplyButton = new ToolStripButton("Apply")
+                {
+                    ToolTipText = "Apply selected language to this form",
+                    DisplayStyle = ToolStripItemDisplayStyle.Text
+                };
+
+                _navigator.Items.Add(new ToolStripLabel("Lang:"));
+                _navigator.Items.Add(LanguageComboBox);
+                _navigator.Items.Add(LanguageApplyButton);
+
+                // Let derived form finish wiring (e.g., populate, helper attach)
+                OnLanguageSelectorCreated();
+            }
 
             // Let derived classes add more
             OnCreateAdditionalNavigatorItems(_navigator);

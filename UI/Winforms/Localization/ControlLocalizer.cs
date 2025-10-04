@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Globalization;
+using System.Linq;
 using System.Resources;
 using System.Windows.Forms;
 using Microsoft.VisualBasic.CompilerServices;
@@ -596,5 +597,77 @@ namespace AATM.UI.Winforms.Localization
 
         #endregion
 
+        // ---------------------------------------------------------------------------------
+        // NEW: Central Right-To-Left applier so forms don't re-implement layout toggling.
+        // ---------------------------------------------------------------------------------
+        /// <summary>
+        /// Applies (or clears) a Right-To-Left layout on the root control (Form or container)
+        /// and its immediate children, ensuring MenuStrip instances are also flipped using
+        /// existing TranslateMenuStrip infrastructure (without changing any text).
+        /// </summary>
+        /// <param name="root">Root form or container.</param>
+        /// <param name="languageCode">
+        /// The BCP-47 culture code (e.g. "ar-SA", "en-US"). Only used to infer RTL if <paramref name="rtlOverride"/> is null.
+        /// </param>
+        /// <param name="rtlOverride">
+        /// Optional explicit RTL flag. If null, culture's TextInfo.IsRightToLeft is used.
+        /// </param>
+        public static void ApplyRightToLeftLayout(Control root, string languageCode, bool? rtlOverride = null)
+        {
+            if (root == null)
+                return;
+
+            bool rtl = false;
+            if (rtlOverride.HasValue)
+            {
+                rtl = rtlOverride.Value;
+            }
+            else
+            {
+                try
+                {
+                    if (!string.IsNullOrWhiteSpace(languageCode))
+                    {
+                        var culture = new CultureInfo(languageCode);
+                        rtl = culture.TextInfo.IsRightToLeft;
+                    }
+                }
+                catch
+                {
+                    // Fallback: keep rtl = false
+                }
+            }
+
+            root.SuspendLayout();
+            try
+            {
+                root.RightToLeft = rtl ? RightToLeft.Yes : RightToLeft.No;
+
+                // Only forms have RightToLeftLayout
+                var form = root as Form;
+                if (form != null)
+                    form.RightToLeftLayout = rtl;
+
+                // Flip each direct child; let them inherit where possible
+                foreach (Control child in root.Controls)
+                {
+                    // Preserve explicit Inherit where developer set it; only force if different
+                    if (child.RightToLeft != RightToLeft.Inherit)
+                        child.RightToLeft = RightToLeft.Inherit;
+                }
+
+                // Handle any MenuStrip(s) using existing API so internal items follow direction.
+                // Empty dictionary = no text changes, only RTL application.
+                var empty = new Dictionary<string, string>();
+                foreach (var menu in root.Controls.OfType<MenuStrip>())
+                {
+                    TranslateMenuStrip(menu, empty, applyRtl: true, rightToLeft: rtl);
+                }
+            }
+            finally
+            {
+                root.ResumeLayout(true);
+            }
+        }
     }
 }
