@@ -17,9 +17,22 @@ using System.Windows.Forms;
 
 namespace AATM.UI.Winforms.BaseControls
 {
+    /// <summary>
+    /// Base WinForms CRUD form that supports:
+    /// - Legacy (untyped) CRUD via <see cref="ICrudService{IEntityWithId}"/>
+    /// - Typed runtime configuration (designer-safe) via <see cref="ConfigureCrudForm{TDto}"/> or fluent <see cref="ForDto{TDto}"/>
+    /// - Optional attribute-based auto configuration (<see cref="CrudFormAttribute"/>)
+    /// - Auto-binding of text fields via <see cref="FieldControlAttribute"/>
+    /// - Auto column generation via <see cref="GridColumnAttribute"/>
+    /// - Validation (structured + legacy) and status/error reporting
+    /// - Navigator (record navigation, search, refresh, language, CRUD buttons)
+    /// - Localization integration
+    /// </summary>
     [DesignTimeVisible(false)]
     public class BaseGridCrudForm : Form // IEntityWithId constraint at Runtime
     {
+        #region Private UI fields / state
+
         private StatusStrip _statusStrip;
         private ToolStripStatusLabel _statusStripLabel;
         private ToolStripProgressBar _statusProgress;
@@ -27,19 +40,14 @@ namespace AATM.UI.Winforms.BaseControls
         protected readonly ICrudService<IEntityWithId> _service;
         protected IEntityWithId _entity;
         protected BindingList<IEntityWithId> _items = new BindingList<IEntityWithId>();
-
-        // Shared ErrorProvider
         protected ErrorProvider myErrorProvider;
 
-        // Auto column cache
         private static readonly Dictionary<Type, List<GeneratedGridColumn>> _autoColumnCache =
             new Dictionary<Type, List<GeneratedGridColumn>>();
 
         private readonly CancellationTokenSource _cts = new CancellationTokenSource();
-
         private readonly List<TextBinding> _textBindings = new List<TextBinding>();
         private List<IEntityWithId> _allItems = new List<IEntityWithId>();
-
         private BindingSource _bindingSource;
         private Dictionary<string, Control> _fieldControlMap;
         private bool _gridDataErrorWired;
@@ -48,30 +56,46 @@ namespace AATM.UI.Winforms.BaseControls
         private bool _isLoading;
         private bool _isMutating;
         private LanguageUiHelper _langHelper;
-
         private BindingNavigator _navigator;
         private ToolStripTextBox _searchBox;
         private ToolStripButton _searchButton;
         private EventHandler _statusRetryClickHandler;
         private BindingList<object> _typedBindingList;
-
         private IGridCrudController _typedController;
 
-        // -------------------- HARDENED CRUD CONFIGURATION SUPPORT --------------------
+        #endregion
+
+        #region Configuration state
+
         private bool _crudConfigured;
         private Type _configuredDtoType;
+
+        /// <summary>
+        /// Indicates whether typed CRUD has been configured for this instance.
+        /// </summary>
         protected bool IsCrudConfigured { get { return _crudConfigured; } }
 
+        /// <summary>
+        /// Configuration container used to set up typed CRUD behavior without a generic base class.
+        /// </summary>
         protected sealed class CrudFormConfig<TDto>
             where TDto : class, IEntityWithId, new()
         {
+            /// <summary>Factory that returns a concrete <see cref="ICrudService{TDto}"/> instance.</summary>
             public Func<ICrudService<TDto>> ServiceFactory { get; set; }
+            /// <summary>Structured validator delegate returning zero or more <see cref="ValidationError"/>.</summary>
             public Func<TDto, IEnumerable<ValidationError>> Validator { get; set; }
+            /// <summary>Control (Label/TextBox/etc.) to display aggregated validation errors.</summary>
             public Control ErrorDisplayControl { get; set; }
+            /// <summary>If true, auto-binds <see cref="TextBox"/> controls discovered via <see cref="FieldControlAttribute"/>.</summary>
             public bool AutoBindFields { get; set; } = true;
             internal bool Applied;
         }
 
+        /// <summary>
+        /// One-shot configuration entry for typed DTO support (designer-safe).
+        /// Must be called after <c>InitializeComponent()</c>. Enforces single application.
+        /// </summary>
         protected void ConfigureCrudForm<TDto>(CrudFormConfig<TDto> cfg)
             where TDto : class, IEntityWithId, new()
         {
@@ -102,19 +126,32 @@ namespace AATM.UI.Winforms.BaseControls
 #endif
         }
 
+        /// <summary>
+        /// Ensures that if a typed controller is present, configuration was properly applied.
+        /// Throws if the contract is violated (debugging safety).
+        /// </summary>
         protected void EnsureCrudConfiguredIfTyped()
         {
             if (_typedController != null && !_crudConfigured)
                 throw new InvalidOperationException("Typed controller initialized without ConfigureCrudForm<> call.");
         }
 
-        // ================== FLUENT CONFIGURATION (optional helper) ==================
+        #endregion
+
+        #region Fluent configuration
+
+        /// <summary>
+        /// Fluent builder entry point for typed configuration (designer-safe generics).
+        /// </summary>
         public CrudFormFluent<TDto> ForDto<TDto>()
             where TDto : class, IEntityWithId, new()
         {
             return new CrudFormFluent<TDto>(this);
         }
 
+        /// <summary>
+        /// Fluent typed configuration wrapper around <see cref="ConfigureCrudForm{TDto}"/>.
+        /// </summary>
         public sealed class CrudFormFluent<TDto>
             where TDto : class, IEntityWithId, new()
         {
@@ -123,26 +160,35 @@ namespace AATM.UI.Winforms.BaseControls
             private bool _applied;
             internal CrudFormFluent(BaseGridCrudForm form) { _form = form; }
 
+            /// <summary>Sets a service factory.</summary>
             public CrudFormFluent<TDto> Service(Func<ICrudService<TDto>> factory)
             {
                 _cfg.ServiceFactory = factory;
                 return this;
             }
+
+            /// <summary>Sets a structured validator.</summary>
             public CrudFormFluent<TDto> Validator(Func<TDto, IEnumerable<ValidationError>> validator)
             {
                 _cfg.Validator = validator;
                 return this;
             }
+
+            /// <summary>Sets the error display control to show validation messages.</summary>
             public CrudFormFluent<TDto> ErrorDisplay(Control control)
             {
                 _cfg.ErrorDisplayControl = control;
                 return this;
             }
+
+            /// <summary>Enables/disables auto field binding.</summary>
             public CrudFormFluent<TDto> AutoBind(bool enabled = true)
             {
                 _cfg.AutoBindFields = enabled;
                 return this;
             }
+
+            /// <summary>Applies the configuration (one-shot).</summary>
             public void Apply()
             {
                 if (_applied) throw new InvalidOperationException("CrudFormFluent already applied.");
@@ -151,10 +197,17 @@ namespace AATM.UI.Winforms.BaseControls
             }
         }
 
-        // ================== OPTIONAL ATTRIBUTE AUTO-CONFIG (if DTO decorated) ==================
+        #endregion
+
+        #region Attribute auto-config
+
         private static readonly Dictionary<Type, CrudFormAttribute> _crudAttrCache =
             new Dictionary<Type, CrudFormAttribute>();
 
+        /// <summary>
+        /// Automatically configures the form for <typeparamref name="TDto"/> using <see cref="CrudFormAttribute"/> metadata.
+        /// Requires that the DTO is decorated with <see cref="CrudFormAttribute"/>.
+        /// </summary>
         protected void AutoConfigureFromDto<TDto>()
             where TDto : class, IEntityWithId, new()
         {
@@ -185,47 +238,34 @@ namespace AATM.UI.Winforms.BaseControls
                 object rulesObj = pi != null ? pi.GetValue(null, null) : (fi != null ? fi.GetValue(null) : null);
                 if (rulesObj == null)
                     throw new InvalidOperationException("Rules not found or null on " + attr.ValidatorRulesType.FullName);
+
+                // Flexible reflection-based validation invocation
                 validator = dto =>
                 {
                     if (rulesObj == null)
                         return Enumerable.Empty<ValidationError>();
 
                     var dtoValidatorType = typeof(DtoValidator);
-
-                    // Cacheable: find candidate static Validate methods with exactly 2 parameters
                     var candidates = dtoValidatorType
                         .GetMethods(BindingFlags.Public | BindingFlags.Static)
                         .Where(m => m.Name == "Validate" && m.GetParameters().Length == 2)
                         .ToList();
 
                     MethodInfo selected = null;
-
                     foreach (var m in candidates)
                     {
                         MethodInfo closed = m;
-
                         if (m.IsGenericMethodDefinition)
                         {
-                            // Only support single generic argument methods like Validate<T>(T dto, RulesType rules)
                             if (m.GetGenericArguments().Length != 1)
                                 continue;
-
-                            try
-                            {
-                                closed = m.MakeGenericMethod(typeof(TDto));
-                            }
-                            catch
-                            {
-                                continue;
-                            }
+                            try { closed = m.MakeGenericMethod(typeof(TDto)); }
+                            catch { continue; }
                         }
 
                         var pars = closed.GetParameters();
-                        // First param must accept TDto
                         if (!pars[0].ParameterType.IsAssignableFrom(typeof(TDto)))
                             continue;
-
-                        // Second param must accept the runtime rulesObj
                         if (rulesObj != null && !pars[1].ParameterType.IsInstanceOfType(rulesObj))
                             continue;
 
@@ -240,23 +280,15 @@ namespace AATM.UI.Winforms.BaseControls
                             var result = selected.Invoke(null, new object[] { dto, rulesObj });
                             return result as IEnumerable<ValidationError> ?? Enumerable.Empty<ValidationError>();
                         }
-                        catch
-                        {
-                            return Enumerable.Empty<ValidationError>();
-                        }
+                        catch { return Enumerable.Empty<ValidationError>(); }
                     }
 
 #if DEBUG
-                    // Optional: help diagnose missing / mismatched signatures during development
-                    System.Diagnostics.Debug.WriteLine(
-                        $"DtoValidator.Validate method not found for DTO '{typeof(TDto).Name}' and rules type '{rulesObj.GetType().FullName}'.");
+                    Debug.WriteLine($"DtoValidator.Validate method not found for DTO '{typeof(TDto).Name}' and rules '{rulesObj.GetType().FullName}'.");
 #endif
-
                     return Enumerable.Empty<ValidationError>();
-                };  
+                };
             }
-            ;  
-
 
             Control errorDisplay = null;
             if (!string.IsNullOrWhiteSpace(attr.ErrorDisplayControlName))
@@ -277,8 +309,18 @@ namespace AATM.UI.Winforms.BaseControls
             ConfigureCrudForm(cfg);
         }
 
-        // -------------------- Constructors --------------------
+        #endregion
+
+        #region Constructors
+
+        /// <summary>
+        /// Design-time safe constructor (uses <see cref="DesignTimeCrudService"/>).
+        /// </summary>
         protected BaseGridCrudForm() : this(() => new DesignTimeCrudService()) { }
+
+        /// <summary>
+        /// Constructor allowing runtime injection of a CRUD service factory.
+        /// </summary>
         protected BaseGridCrudForm(Func<ICrudService<IEntityWithId>> serviceFactory)
         {
             if (IsDesignTime())
@@ -289,17 +331,28 @@ namespace AATM.UI.Winforms.BaseControls
             InitializeStatusStripAndLabel();
             InitializeNavigatorIfNeeded();
         }
+
+        /// <summary>
+        /// Constructor that also records a logical module name (used by localization/status messages).
+        /// </summary>
         protected BaseGridCrudForm(string callingModule) : this(() => new DesignTimeCrudService())
         {
             moduleName = callingModule;
         }
+
+        /// <summary>
+        /// Constructor accepting an already constructed legacy (untyped) CRUD service.
+        /// </summary>
         protected BaseGridCrudForm(ICrudService<IEntityWithId> service)
         {
             _service = service ?? throw new ArgumentNullException("service");
             InitializeNavigatorIfNeeded();
         }
 
-        // -------------------- Virtual feature flags --------------------
+        #endregion
+
+        #region Feature flags (override points)
+
         protected virtual bool AutoGenerateColumnsFromAttributes { get { return true; } }
         protected virtual bool AutoLoadOnShown { get { return true; } }
         protected virtual bool AutoWireClearErrors { get { return true; } }
@@ -312,10 +365,19 @@ namespace AATM.UI.Winforms.BaseControls
         protected virtual bool ShowValidationErrorsOnlyInValidationTextBox { get; set; } = true;
         protected virtual bool UseDefaultNavigator { get { return true; } }
 
-        // -------------------- Core exposed members --------------------
+        #endregion
+
+        #region Core exposed members (virtual for flexibility)
+
+        /// <summary>Optional aggregated validation/error message output control.</summary>
         protected Control ErrorDisplayControl { get; set; }
+
+        /// <summary>DataGridView the form operates on. Override in derived form.</summary>
         protected virtual DataGridView Grid { get { return null; } }
+
+        /// <summary>Underlying <see cref="BindingSource"/> used for grid binding (typed or legacy).</summary>
         protected BindingSource DataBindingSource { get { return _bindingSource; } }
+
         protected ToolStripButton SaveButton { get; private set; }
         protected ToolStripButton DeleteButton { get; private set; }
         protected ToolStripButton RefreshButton { get; private set; }
@@ -334,8 +396,13 @@ namespace AATM.UI.Winforms.BaseControls
         protected virtual IUiLocalizationManager UiLocalizationManager { get; private set; }
         protected string moduleName { get; private set; }
 
+        /// <summary>Structured validator (if configured).</summary>
         protected Func<IEntityWithId, IEnumerable<ValidationError>> StructuredValidator { get; set; }
 
+        /// <summary>
+        /// Enumerates controls disabled while the form is 'busy'.
+        /// Override to add to disable-set (e.g., toolbar, edit panels).
+        /// </summary>
         protected virtual IEnumerable<Control> BusyControls
         {
             get
@@ -344,6 +411,9 @@ namespace AATM.UI.Winforms.BaseControls
             }
         }
 
+        /// <summary>
+        /// Design-time detection (robust: license mode / container design mode).
+        /// </summary>
         protected bool IsReallyDesignTime
         {
             get
@@ -355,13 +425,22 @@ namespace AATM.UI.Winforms.BaseControls
             }
         }
 
-        // -------------------- Initialization / Setup --------------------
+        #endregion
+
+        #region Error handling / initialization
+
+        /// <summary>
+        /// Ensures an <see cref="ErrorProvider"/> exists and optionally sets the display control for aggregate errors.
+        /// </summary>
         protected virtual void InitializeErrorHandling(Control errorDisplayControl = null)
         {
             EnsureErrorProvider();
             ErrorDisplayControl = errorDisplayControl;
         }
 
+        /// <summary>
+        /// Creates a shared <see cref="ErrorProvider"/> if missing (non-blinking).
+        /// </summary>
         protected void EnsureErrorProvider()
         {
             if (myErrorProvider != null) return;
@@ -373,7 +452,13 @@ namespace AATM.UI.Winforms.BaseControls
             Disposed += delegate { try { if (myErrorProvider != null) myErrorProvider.Dispose(); } catch { } };
         }
 
-        // -------------------- Typed Controller Init --------------------
+        #endregion
+
+        #region Typed controller initialization
+
+        /// <summary>
+        /// Initializes the typed CRUD controller (runtime generic) and binds a backing list.
+        /// </summary>
         protected void InitializeTypedController<TDto>(Func<ICrudService<TDto>> factory)
             where TDto : class, IEntityWithId, new()
         {
@@ -387,13 +472,21 @@ namespace AATM.UI.Winforms.BaseControls
             _bindingSource.DataSource = _typedBindingList;
         }
 
-        // -------------------- Auto-binding --------------------
+        #endregion
+
+        #region Auto field binding
+
+        /// <summary>
+        /// Discovers DTO properties decorated with <see cref="FieldControlAttribute"/> and builds
+        /// compiled getter/setter delegates to drive simple text field bindings.
+        /// </summary>
+        /// <param name="dtoType">Runtime DTO type.</param>
         protected void AutoBindFormFields(Type dtoType)
         {
             var properties = dtoType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
             foreach (var prop in properties)
             {
-                var controlAttr = prop.GetCustomAttribute<AATM.Contracts.Attributes.FieldControlAttribute>();
+                var controlAttr = prop.GetCustomAttribute<FieldControlAttribute>();
                 if (controlAttr == null) continue;
 
                 var controlField = GetType().GetField(controlAttr.ControlName,
@@ -456,6 +549,9 @@ namespace AATM.UI.Winforms.BaseControls
             }
         }
 
+        /// <summary>
+        /// Lazily builds a map of DTO property name -> bound control (using <see cref="FieldControlAttribute"/>).
+        /// </summary>
         protected virtual Dictionary<string, Control> FieldControlMap
         {
             get
@@ -467,7 +563,7 @@ namespace AATM.UI.Winforms.BaseControls
 
                 foreach (var prop in dtoType.GetProperties(BindingFlags.Public | BindingFlags.Instance))
                 {
-                    var fca = prop.GetCustomAttribute<AATM.Contracts.Attributes.FieldControlAttribute>();
+                    var fca = prop.GetCustomAttribute<FieldControlAttribute>();
                     if (fca == null) continue;
 
                     var ctlField = GetType().GetField(fca.ControlName,
@@ -482,7 +578,14 @@ namespace AATM.UI.Winforms.BaseControls
             }
         }
 
-        // -------------------- Data Loading --------------------
+        #endregion
+
+        #region Data loading
+
+        /// <summary>
+        /// Loads data either via typed controller (if configured) or via legacy service.
+        /// Wires grid events, builds columns, updates status.
+        /// </summary>
         protected async Task LoadDataAsync()
         {
             EnsureCrudConfiguredIfTyped();
@@ -568,7 +671,14 @@ namespace AATM.UI.Winforms.BaseControls
             }
         }
 
-        // -------------------- Save / Update --------------------
+        #endregion
+
+        #region Save / Update
+
+        /// <summary>
+        /// Persists the current entity (typed or legacy).
+        /// Performs validation before calling the service.
+        /// </summary>
         protected async Task SaveOrUpdateAsync()
         {
             EnsureCrudConfiguredIfTyped();
@@ -644,7 +754,13 @@ namespace AATM.UI.Winforms.BaseControls
             }
         }
 
-        // -------------------- Delete --------------------
+        #endregion
+
+        #region Delete
+
+        /// <summary>
+        /// Deletes the currently selected entity (typed or legacy) after confirmation.
+        /// </summary>
         protected async Task DeleteSelectedAsync()
         {
             EnsureCrudConfiguredIfTyped();
@@ -708,7 +824,13 @@ namespace AATM.UI.Winforms.BaseControls
             }
         }
 
-        // -------------------- Support / Utility Methods --------------------
+        #endregion
+
+        #region Public / model helpers
+
+        /// <summary>
+        /// Returns the current edited entity (built from bound fields if present).
+        /// </summary>
         public IEntityWithId GetEntity()
         {
             var current = _bindingSource != null ? _bindingSource.Current as IEntityWithId : null;
@@ -716,11 +838,17 @@ namespace AATM.UI.Winforms.BaseControls
             return BuildModelFromForm(current);
         }
 
+        /// <summary>
+        /// Loads an existing entity into the form (legacy path only).
+        /// </summary>
         public virtual void LoadEntity(IEntityWithId entity)
         {
             _entity = entity;
         }
 
+        /// <summary>
+        /// Builds a DTO instance from the current text bindings (preserving ID).
+        /// </summary>
         protected IEntityWithId BuildModelFromForm(IEntityWithId current)
         {
             var dto = current ?? Activator.CreateInstance<IEntityWithId>();
@@ -734,6 +862,7 @@ namespace AATM.UI.Winforms.BaseControls
             return dto;
         }
 
+        /// <summary>Clears all bound form fields and deselects grid.</summary>
         protected void ClearFormFields()
         {
             ClearFormFieldsCore();
@@ -741,6 +870,7 @@ namespace AATM.UI.Winforms.BaseControls
                 Grid.ClearSelection();
         }
 
+        /// <summary>Clears text in bound text boxes (internal step).</summary>
         protected void ClearFormFieldsCore()
         {
             foreach (var b in _textBindings)
@@ -748,11 +878,15 @@ namespace AATM.UI.Winforms.BaseControls
                     b.Box.Text = string.Empty;
         }
 
+        /// <summary>Clears aggregate error display.</summary>
         protected void ClearErrorDisplay()
         {
             SetErrorDisplay("");
         }
 
+        /// <summary>
+        /// Writes a message into the configured <see cref="ErrorDisplayControl"/>.
+        /// </summary>
         protected void SetErrorDisplay(string message)
         {
             if (ErrorDisplayControl == null) return;
@@ -762,6 +896,9 @@ namespace AATM.UI.Winforms.BaseControls
             if (txt != null) txt.Text = message ?? "";
         }
 
+        /// <summary>
+        /// Sets (or clears) error text on a specific control using the shared <see cref="ErrorProvider"/>.
+        /// </summary>
         protected void SetFieldError(Control ctl, string message)
         {
             if (InvokeRequired)
@@ -773,6 +910,14 @@ namespace AATM.UI.Winforms.BaseControls
             myErrorProvider.SetError(ctl, string.IsNullOrWhiteSpace(message) ? string.Empty : message);
         }
 
+        #endregion
+
+        #region Validation
+
+        /// <summary>
+        /// Runs structured validation (if available) or falls back to <see cref="ValidateBeforeSave"/>.
+        /// Returns null/empty if valid; otherwise a message (or aggregated messages).
+        /// </summary>
         protected virtual string RunValidation(IEntityWithId entity)
         {
             if (StructuredValidator != null && entity != null)
@@ -824,8 +969,14 @@ namespace AATM.UI.Winforms.BaseControls
             return ValidateBeforeSave(entity);
         }
 
+        /// <summary>
+        /// Legacy hook for subclasses (string-based validation). Prefer structured validator.
+        /// </summary>
         protected virtual string ValidateBeforeSave(IEntityWithId entity) { return null; }
 
+        /// <summary>
+        /// Displays aggregated validation errors in the configured error display control.
+        /// </summary>
         protected void ShowValidationErrors(IList<string> errors)
         {
             if (ErrorDisplayControl == null) return;
@@ -835,6 +986,13 @@ namespace AATM.UI.Winforms.BaseControls
                 ErrorDisplayControl.Text = "";
         }
 
+        #endregion
+
+        #region Busy / status / error display
+
+        /// <summary>
+        /// Toggles busy state (disables controls, shows wait cursor and progress bar). Optionally sets status text.
+        /// </summary>
         protected void SetBusy(bool busy, string message = null)
         {
             if (!string.IsNullOrEmpty(message))
@@ -852,6 +1010,9 @@ namespace AATM.UI.Winforms.BaseControls
             }
         }
 
+        /// <summary>
+        /// Updates status text (StatusStripLabel or custom label) if enabled.
+        /// </summary>
         protected virtual void SetStatusText(string text)
         {
             if (!ShowErrorsInStatusLabel) return;
@@ -868,6 +1029,9 @@ namespace AATM.UI.Winforms.BaseControls
             }
         }
 
+        /// <summary>
+        /// Central error reporting helper (sets status + error display + optional retry link).
+        /// </summary>
         protected void ShowError(string context, Exception ex, Func<Task> retryAsync)
         {
             var friendly = GetFriendlyErrorMessage(ex);
@@ -911,6 +1075,9 @@ namespace AATM.UI.Winforms.BaseControls
             }
         }
 
+        /// <summary>
+        /// Produces user-friendly error messages for known exception types.
+        /// </summary>
         protected virtual string GetFriendlyErrorMessage(Exception ex)
         {
             if (ex == null) return "Unknown error.";
@@ -920,6 +1087,10 @@ namespace AATM.UI.Winforms.BaseControls
             var msg = ex.Message;
             return string.IsNullOrWhiteSpace(msg) ? ex.GetType().Name : msg;
         }
+
+        #endregion
+
+        #region Navigation helpers (grid row / entity positioning)
 
         protected bool NavigateToEntity(Predicate<IEntityWithId> match)
         {
@@ -935,6 +1106,9 @@ namespace AATM.UI.Winforms.BaseControls
             return false;
         }
 
+        /// <summary>
+        /// Moves selection to a row by index (ignores new-row placeholder).
+        /// </summary>
         protected void NavigateToRow(int rowIndex)
         {
             if (Grid == null) return;
@@ -957,6 +1131,9 @@ namespace AATM.UI.Winforms.BaseControls
             PopulateFormFieldsFromGrid(rowIndex);
         }
 
+        /// <summary>
+        /// Copies the selected row entity into bound text boxes.
+        /// </summary>
         protected void PopulateFormFieldsFromGrid(int rowIndex)
         {
             var entity = _bindingSource != null ? _bindingSource.Current as IEntityWithId : null;
@@ -972,6 +1149,9 @@ namespace AATM.UI.Winforms.BaseControls
             SetErrorDisplay("");
         }
 
+        /// <summary>
+        /// Returns the currently selected entity from the grid (legacy binding path).
+        /// </summary>
         protected IEntityWithId GetSelectedEntity()
         {
             var grid = Grid;
@@ -993,6 +1173,9 @@ namespace AATM.UI.Winforms.BaseControls
             return null;
         }
 
+        /// <summary>
+        /// Returns the ID for the given entity (safe cast).
+        /// </summary>
         protected int GetEntityId(IEntityWithId entity)
         {
             if (entity == null) return 0;
@@ -1000,6 +1183,9 @@ namespace AATM.UI.Winforms.BaseControls
             return cast != null ? cast.ID : 0;
         }
 
+        /// <summary>
+        /// Builds a confirmation message for deletion (override to add custom tokens).
+        /// </summary>
         protected virtual string GetDeleteConfirmationText(IEntityWithId entity)
         {
             int id = 0;
@@ -1007,6 +1193,9 @@ namespace AATM.UI.Winforms.BaseControls
             return id > 0 ? "Delete selected record (ID=" + id + ")?" : "Delete selected record?";
         }
 
+        /// <summary>
+        /// Prompts the user to confirm deletion. Override to customize dialog.
+        /// </summary>
         protected virtual DialogResult ConfirmDelete(string message)
         {
             return MessageBox.Show(this,
@@ -1017,7 +1206,7 @@ namespace AATM.UI.Winforms.BaseControls
                 MessageBoxDefaultButton.Button2);
         }
 
-        // -------------------- Navigation helpers --------------------
+        /// <summary>Navigate to first non-new row, if present.</summary>
         protected void GoFirst()
         {
             if (Grid == null) return;
@@ -1033,6 +1222,7 @@ namespace AATM.UI.Winforms.BaseControls
             SetStatusText("No records.");
         }
 
+        /// <summary>Navigate to last non-new row, if present.</summary>
         protected void GoLast()
         {
             if (Grid == null) return;
@@ -1048,6 +1238,7 @@ namespace AATM.UI.Winforms.BaseControls
             SetStatusText("No records.");
         }
 
+        /// <summary>Navigate to next logical row (bounded).</summary>
         protected void GoNext()
         {
             if (Grid == null) return;
@@ -1081,6 +1272,7 @@ namespace AATM.UI.Winforms.BaseControls
             NavigateToRow(lastIndex);
         }
 
+        /// <summary>Navigate to previous logical row (bounded).</summary>
         protected void GoPrevious()
         {
             if (Grid == null) return;
@@ -1108,7 +1300,13 @@ namespace AATM.UI.Winforms.BaseControls
             NavigateToRow(firstIndex);
         }
 
-        // -------------------- Grid / Columns --------------------
+        #endregion
+
+        #region Grid / columns
+
+        /// <summary>
+        /// Applies default grid settings, defines custom columns, then optionally auto-generates columns from attributes.
+        /// </summary>
         protected virtual void ConfigureGrid(DataGridView grid)
         {
             if (grid.Columns.Count > 0) return;
@@ -1132,6 +1330,9 @@ namespace AATM.UI.Winforms.BaseControls
             grid.ColumnHeaderMouseClick += Grid_ColumnHeaderMouseClick;
         }
 
+        /// <summary>
+        /// Basic consistent grid styling (override to adjust).
+        /// </summary>
         protected virtual void ApplyDefaultGridSettings(DataGridView grid)
         {
             grid.AutoGenerateColumns = false;
@@ -1145,8 +1346,14 @@ namespace AATM.UI.Winforms.BaseControls
             grid.RowHeadersVisible = false;
         }
 
+        /// <summary>
+        /// Override to create custom columns manually. If none added, auto generation may occur.
+        /// </summary>
         protected virtual void DefineColumns(DataGridView grid) { }
 
+        /// <summary>
+        /// Builds columns from <see cref="GridColumnAttribute"/> metadata (cached).
+        /// </summary>
         private void TryBuildAutoColumns(DataGridView grid)
         {
             if (_typedController == null) return;
@@ -1178,6 +1385,9 @@ namespace AATM.UI.Winforms.BaseControls
             }
         }
 
+        /// <summary>
+        /// Builds metadata for grid columns from attributes or heuristics.
+        /// </summary>
         private List<GeneratedGridColumn> BuildColumnMetadata(Type dtoType)
         {
             var list = new List<GeneratedGridColumn>();
@@ -1234,6 +1444,9 @@ namespace AATM.UI.Winforms.BaseControls
             return list;
         }
 
+        /// <summary>
+        /// Handles header clicks to provide simple sorting (typed or legacy).
+        /// </summary>
         private void Grid_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             var grid = sender as DataGridView;
@@ -1273,7 +1486,13 @@ namespace AATM.UI.Winforms.BaseControls
             grid.Refresh();
         }
 
-        // -------------------- Search --------------------
+        #endregion
+
+        #region Search
+
+        /// <summary>
+        /// Applies filter text (simple contains across property string values) for typed or legacy mode.
+        /// </summary>
         private void ApplySearch()
         {
             if (_searchBox == null) return;
@@ -1318,7 +1537,13 @@ namespace AATM.UI.Winforms.BaseControls
                 _items.Add(item);
         }
 
-        // -------------------- Event Wiring --------------------
+        #endregion
+
+        #region Event wiring
+
+        /// <summary>
+        /// Wires grid selection events once (ignores row header pseudo rows).
+        /// </summary>
         private void WireGridSelectionEventsOnce()
         {
             if (_gridEventsWired) return;
@@ -1344,6 +1569,9 @@ namespace AATM.UI.Winforms.BaseControls
             _gridEventsWired = true;
         }
 
+        /// <summary>
+        /// Wires TextChanged handlers to clear per-field validation errors.
+        /// </summary>
         protected void WireClearFieldErrorsOnTextChanged(params Control[] controls)
         {
             if (controls == null) return;
@@ -1370,6 +1598,9 @@ namespace AATM.UI.Winforms.BaseControls
             }
         }
 
+        /// <summary>
+        /// Wires a global grid DataError handler to suppress exceptions and show status.
+        /// </summary>
         protected void WireGridDataErrorOnce()
         {
             if (_gridDataErrorWired) return;
@@ -1386,7 +1617,13 @@ namespace AATM.UI.Winforms.BaseControls
             _gridDataErrorWired = true;
         }
 
-        // -------------------- Navigator --------------------
+        #endregion
+
+        #region Navigator initialization
+
+        /// <summary>
+        /// Creates a binding navigator with navigation, CRUD, refresh, search, language (if enabled).
+        /// </summary>
         private void InitializeNavigatorIfNeeded()
         {
             if (IsDesignTime()) return;
@@ -1500,7 +1737,13 @@ namespace AATM.UI.Winforms.BaseControls
             _navigator.BringToFront();
         }
 
-        // -------------------- Status strip --------------------
+        #endregion
+
+        #region Status strip
+
+        /// <summary>
+        /// Ensures the status strip, progress bar and label exist.
+        /// </summary>
         protected void InitializeStatusStripAndLabel()
         {
             if (_statusStrip == null)
@@ -1533,7 +1776,10 @@ namespace AATM.UI.Winforms.BaseControls
             }
         }
 
-        // -------------------- Hooks (override points) --------------------
+        #endregion
+
+        #region Hooks / overrides
+
         protected virtual Task OnBeforeLoadAsync() { return Task.CompletedTask; }
         protected virtual Task OnAfterLoadAsync() { return Task.CompletedTask; }
         protected virtual Task OnBeforeSaveAsync() { return Task.CompletedTask; }
@@ -1551,7 +1797,13 @@ namespace AATM.UI.Winforms.BaseControls
         protected virtual Task OnDeleteRequestedAsync() { return DeleteSelectedAsync(); }
         protected virtual Task OnSaveRequestedAsync() { return SaveOrUpdateAsync(); }
 
-        // -------------------- Lifecycle --------------------
+        #endregion
+
+        #region Lifecycle
+
+        /// <summary>
+        /// Loads initial data automatically (unless disabled) when the form is first shown.
+        /// </summary>
         protected override void OnShown(EventArgs e)
         {
             base.OnShown(e);
@@ -1562,13 +1814,22 @@ namespace AATM.UI.Winforms.BaseControls
             }
         }
 
+        /// <summary>
+        /// Cancels outstanding work when form closes.
+        /// </summary>
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             try { _cts.Cancel(); } catch { }
             base.OnFormClosing(e);
         }
 
-        // -------------------- Misc Helpers --------------------
+        #endregion
+
+        #region Localization helpers
+
+        /// <summary>
+        /// Resolves an <see cref="ILocalizationService"/> (override to inject).
+        /// </summary>
         protected virtual ILocalizationService ResolveLocalizationService()
         {
             var li = LanguageComboBox != null && LanguageComboBox.SelectedItem is LanguageUiHelper.LanguageItem
@@ -1578,11 +1839,17 @@ namespace AATM.UI.Winforms.BaseControls
             return new LocalizationService(code, GetType().Name);
         }
 
+        /// <summary>
+        /// Resolves a UI localization manager (override for persistence/backing store).
+        /// </summary>
         protected virtual IUiLocalizationManager ResolveUiLocalizationManager()
         {
             return new InMemoryUiLocalizationManager();
         }
 
+        /// <summary>
+        /// Static design-time detection (IDE process heuristics).
+        /// </summary>
         protected static bool IsDesignTime()
         {
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
@@ -1597,7 +1864,10 @@ namespace AATM.UI.Winforms.BaseControls
             return false;
         }
 
-        // -------------------- Support Types --------------------
+        #endregion
+
+        #region Support types
+
         private sealed class GeneratedGridColumn
         {
             public string Property;
@@ -1616,7 +1886,9 @@ namespace AATM.UI.Winforms.BaseControls
             public Action<IEntityWithId, string> Setter;
         }
 
-        // -------------------- Design-time safe service --------------------
+        /// <summary>
+        /// Design-time (no-op) CRUD service; prevents designer crashes due to null service.
+        /// </summary>
         public sealed class DesignTimeCrudService : ICrudService<IEntityWithId>
         {
             public Task<bool> DeleteAsync(int id, CancellationToken ct = default(CancellationToken))
@@ -1637,7 +1909,13 @@ namespace AATM.UI.Winforms.BaseControls
             }
         }
 
-        // Simple InitializeComponent placeholder (base)
+        #endregion
+
+        #region Designer stub
+
+        /// <summary>
+        /// Minimal InitializeComponent stub (real forms override / provide their own).
+        /// </summary>
         private void InitializeComponent()
         {
             SuspendLayout();
@@ -1646,10 +1924,15 @@ namespace AATM.UI.Winforms.BaseControls
             ResumeLayout(false);
         }
 
-        // Add this helper (restored) somewhere near other private helpers in the class
+        #endregion
+
+        #region Retry link helper
+
+        /// <summary>
+        /// Removes an active retry link from the status label (if previously set by <see cref="ShowError"/>).
+        /// </summary>
         private void ClearRetryLink()
         {
-            // Safely remove previously wired retry link behavior on the status label
             if (StatusStripLabel == null)
                 return;
 
@@ -1660,10 +1943,10 @@ namespace AATM.UI.Winforms.BaseControls
             }
 
             StatusStripLabel.IsLink = false;
-            // Optionally clear tooltip so stale error/retry hints disappear
             if (!string.IsNullOrEmpty(StatusStripLabel.ToolTipText))
                 StatusStripLabel.ToolTipText = string.Empty;
         }
 
+        #endregion
     }
 }
