@@ -81,6 +81,9 @@
     <Compile Include="BaseControls\BaseGridCrudForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="BaseControls\BaseGridCrudForm.Generic.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="BaseControls\GridCrudController.cs" />
     <Compile Include="BaseControls\IGridCrudController.cs" />
     <Compile Include="FrmCustomer.cs">
