@@ -1,6 +1,4 @@
-﻿#if DEBUG
-#define DESIGN_TIME_SAFE
-#endif
+﻿using AATM.Business.Logic.Validators;
 using AATM.Contracts.Attributes;
 using AATM.Contracts.Interfaces.Services;
 using AATM.Core.Localization;
@@ -24,79 +22,56 @@ namespace AATM.UI.Winforms.BaseControls
     [DesignTimeVisible(false)]
     public class BaseGridCrudForm : Form // IEntityWithId constraint at Runtime
     {
-        protected IEntityWithId _entity;
+        private StatusStrip _statusStrip;
+        private ToolStripStatusLabel _statusStripLabel;
+        private ToolStripProgressBar _statusProgress;
+
         protected readonly ICrudService<IEntityWithId> _service;
+        protected IEntityWithId _entity;
         protected BindingList<IEntityWithId> _items = new BindingList<IEntityWithId>();
-        private ToolStripTextBox _searchBox;
-        private ToolStripButton _searchButton;
-        private List<IEntityWithId> _allItems = new List<IEntityWithId>();
-        private LanguageUiHelper _langHelper;
-        protected string moduleName { get; private set; }
-        protected Control ErrorDisplayControl { get; set; }
-        protected virtual bool ShowErrorsInStatusBar { get; set; } = true;
-        protected virtual bool ShowErrorsInStatusLabel { get; set; } = true;
-        protected virtual bool ShowValidationErrorsOnlyInValidationTextBox { get; set; } = true;
+        
+        // NEW (moved from TranslationForm): shared ErrorProvider for field-level validation
+        protected ErrorProvider myErrorProvider;
 
-        private bool _isLoading;
-        private bool _isMutating;
-
-        private bool _gridEventsWired;
-        private bool _gridDataErrorWired;
-        private bool _hasLoadedOnce;
+        /// <summary>
+        /// Cache of generated column metadata per DTO type to avoid repeated reflection.
+        /// </summary>
+        private static readonly Dictionary<Type, List<GeneratedGridColumn>> _autoColumnCache =
+            new Dictionary<Type, List<GeneratedGridColumn>>();
 
         private readonly CancellationTokenSource _cts = new CancellationTokenSource();
-        private EventHandler _statusRetryClickHandler;
 
         // Bindings for forms
         private readonly List<TextBinding> _textBindings = new List<TextBinding>();
 
-        // NEW (moved from TranslationForm): shared ErrorProvider for field-level validation
-        protected ErrorProvider myErrorProvider;
-
-        protected virtual bool AutoWireClearErrors => true;
-
-        //// ** [FIX]: Ensure Getter and Setter are defined as read/write properties **
-        //private class TextBinding
-        //{
-        //    // Required for the previous fix (CS0117)
-        //    public System.Windows.Forms.Control Control { get; set; }
-
-        //    // ** These members MUST have { get; set; } to resolve CS0229 **
-        //    public Func<IEntityWithId, object> Getter { get; set; }
-        //    public Action<IEntityWithId, string> Setter { get; set; }
-
-        //}
-
+        private List<IEntityWithId> _allItems = new List<IEntityWithId>();
 
         // New: shared BindingSource + BindingNavigator
         private BindingSource _bindingSource;
-        private BindingNavigator _navigator;
 
-        // Exposed navigator items for optional customization
-        protected ToolStripButton NavFirstButton { get; private set; }
-        protected ToolStripButton NavPrevButton { get; private set; }
-        protected ToolStripButton NavNextButton { get; private set; }
-        protected ToolStripButton NavLastButton { get; private set; }
-        protected ToolStripTextBox NavPositionTextBox { get; private set; }
-        protected ToolStripLabel NavCountLabel { get; private set; }
-        protected ToolStripButton SaveButton { get; private set; }
-        protected ToolStripButton DeleteButton { get; private set; }
-        protected ToolStripButton RefreshButton { get; private set; }
+        private Dictionary<string, Control> _fieldControlMap;
+        private bool _gridDataErrorWired;
+        private bool _gridEventsWired;
+        private bool _hasLoadedOnce;
+        private bool _isLoading;
+        private bool _isMutating;
+        private LanguageUiHelper _langHelper;
+
+        private BindingNavigator _navigator;
+        private ToolStripTextBox _searchBox;
+        private ToolStripButton _searchButton;
+        private EventHandler _statusRetryClickHandler;
+        private BindingList<object> _typedBindingList;
 
         // TYPED: controller support
         private IGridCrudController _typedController;
-        private BindingList<object> _typedBindingList; // mirror for BindingSource when typed  // Data exposed to BindingSource when typed mode active
-        private bool IsTyped => _typedController != null;
-
-        // Initialize helper after combo is created
-        //_langHelper = new LanguageUiHelper(() => _localizationService, () => _dataGridView, OnAfterLanguageApplied);
-        //_langHelper.PopulateLanguages(_languageCombo);
-
-
 
         // Parameterless ctor always provides design-time safe service
         protected BaseGridCrudForm() : this(() => new DesignTimeCrudService()) { }
 
+        // Initialize helper after combo is created
+        //_langHelper = new LanguageUiHelper(() => _localizationService, () => _dataGridView, OnAfterLanguageApplied);
+        //_langHelper.PopulateLanguages(_languageCombo);
         protected BaseGridCrudForm(Func<ICrudService<IEntityWithId>> serviceFactory)
         {
             if (IsDesignTime())
@@ -107,12 +82,12 @@ namespace AATM.UI.Winforms.BaseControls
             {
                 _service = (serviceFactory != null ? serviceFactory() : null) ?? new DesignTimeCrudService();
             }
-
+            InitializeStatusStripAndLabel();
             InitializeNavigatorIfNeeded();
         }
 
         protected BaseGridCrudForm(string callingModule)
-            : this(() => new DesignTimeCrudService())
+                    : this(() => new DesignTimeCrudService())
         {
             moduleName = callingModule;
         }
@@ -123,24 +98,140 @@ namespace AATM.UI.Winforms.BaseControls
             InitializeNavigatorIfNeeded();
         }
 
-        // Design-time no-op service
-        public sealed class DesignTimeCrudService : ICrudService<IEntityWithId>
+        /// <summary>
+        /// Enables automatic column generation from DTO property attributes when in typed mode
+        /// and no columns are defined explicitly.
+        /// </summary>
+        protected virtual bool AutoGenerateColumnsFromAttributes => true;
+
+        protected virtual bool AutoLoadOnShown
+        { get { return true; } }
+
+        protected virtual bool AutoWireClearErrors => true;
+
+        protected virtual void InitializeErrorHandling(Control errorDisplayControl = null)
         {
-            public Task<IReadOnlyList<IEntityWithId>> GetAllAsync(CancellationToken ct = default(CancellationToken))
-                => Task.FromResult((IReadOnlyList<IEntityWithId>)new List<IEntityWithId>());
-            public Task<IEntityWithId> GetByIdAsync(int id, CancellationToken ct = default(CancellationToken))
-                => Task.FromResult(default(IEntityWithId));
-            public Task<IEntityWithId> UpsertAsync(IEntityWithId dto, CancellationToken ct = default(CancellationToken))
-                => Task.FromResult(dto);
-            public Task<bool> DeleteAsync(int id, CancellationToken ct = default(CancellationToken))
-                => Task.FromResult(false);
+            EnsureErrorProvider();
+            ErrorDisplayControl = errorDisplayControl;
         }
 
-
-        public virtual void LoadEntity(IEntityWithId entity)
+        protected virtual IEnumerable<Control> BusyControls
         {
-            _entity = entity;
+            get
+            {
+                if (Grid != null) yield return Grid;
+            }
         }
+
+        protected BindingSource DataBindingSource => _bindingSource;
+
+        protected ToolStripButton DeleteButton { get; private set; }
+
+        protected Control ErrorDisplayControl { get; set; }
+
+        protected virtual Dictionary<string, Control> FieldControlMap
+        {
+            get
+            {
+                if (_fieldControlMap == null)
+                    _fieldControlMap = BuildDefaultFieldControlMap();
+                return _fieldControlMap;
+            }
+        }
+
+        // Prefer derived classes to expose their grid
+        protected virtual DataGridView Grid => null;
+
+        protected bool IsReallyDesignTime
+        {
+            get
+            {
+                // 1. LicenseManager (works in most cases)
+                if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
+                    return true;
+
+                // 2. DesignMode property (works after initialization)
+                if (this.DesignMode)
+                    return true;
+
+                // 3. Site.DesignMode (for controls in containers)
+                if (this.Site != null && this.Site.DesignMode)
+                    return true;
+
+                return false;
+            }
+        }
+
+        protected ToolStripButton LanguageApplyButton { get; private set; }
+
+        protected ToolStripComboBox LanguageComboBox { get; private set; }
+
+        // Add these properties to support the moved code
+        protected virtual ILocalizationService LocalizationService { get; private set; }
+
+        protected string moduleName { get; private set; }
+
+        protected ToolStripLabel NavCountLabel { get; private set; }
+
+        //    // ** These members MUST have { get; set; } to resolve CS0229 **
+        //    public Func<IEntityWithId, object> Getter { get; set; }
+        //    public Action<IEntityWithId, string> Setter { get; set; }
+        // Exposed navigator items for optional customization
+        protected ToolStripButton NavFirstButton { get; private set; }
+
+        // -------------------- NEW: BindingNavigator + BindingSource --------------------
+        protected BindingNavigator Navigator => _navigator;
+
+        protected ToolStripButton NavLastButton { get; private set; }
+
+        protected ToolStripButton NavNextButton { get; private set; }
+
+        protected ToolStripTextBox NavPositionTextBox { get; private set; }
+
+        //// ** [FIX]: Ensure Getter and Setter are defined as read/write properties **
+        //private class TextBinding
+        //{
+        //    // Required for the previous fix (CS0117)
+        //    public System.Windows.Forms.Control Control { get; set; }
+        protected ToolStripButton NavPrevButton { get; private set; }
+
+        protected ToolStripButton RefreshButton { get; private set; }
+
+        protected ToolStripButton SaveButton { get; private set; }
+
+        protected virtual bool ShowCrudButtons => true;
+
+        protected virtual bool ShowErrorsInStatusBar { get; set; } = true;
+
+        protected virtual bool ShowErrorsInStatusLabel { get; set; } = true;
+
+        // NEW: Language selector support (opt-in)
+        protected virtual bool ShowLanguageSelector => true;
+
+        protected virtual bool ShowNavigationButtons => true;
+
+        protected virtual bool ShowRefreshButton => true;
+
+        protected virtual bool ShowValidationErrorsOnlyInValidationTextBox { get; set; } = true;
+
+        protected virtual Label StatusLabel
+        { get { return null; } }
+
+        protected virtual ToolStripProgressBar StatusProgress
+        { get { return _statusProgress ; } }
+
+        protected virtual ToolStripStatusLabel StatusStripLabel
+        { get { return _statusStripLabel; } }
+
+        // Delegate for structured validation
+        protected Func<IEntityWithId, IEnumerable<ValidationError>> StructuredValidator { get; set; }
+        protected virtual IUiLocalizationManager UiLocalizationManager { get; private set; }
+
+        // New: allow opting out of the default BindingNavigator and its sections
+        protected virtual bool UseDefaultNavigator => true;
+
+        // mirror for BindingSource when typed  // Data exposed to BindingSource when typed mode active
+        private bool IsTyped => _typedController != null;
 
         public IEntityWithId GetEntity()
         {
@@ -153,21 +244,112 @@ namespace AATM.UI.Winforms.BaseControls
             return BuildModelFromForm(current);
         }
 
-        // ---------- Public/Protected Initialization for typed mode ----------
-        protected void InitializeTypedController<TDto>(Func<ICrudService<TDto>> factory)
-            where TDto : class, IEntityWithId, new()
+        public virtual void LoadEntity(IEntityWithId entity)
         {
-            if (factory == null) throw new ArgumentNullException(nameof(factory));
-            _typedController = new GridCrudController<TDto>(factory());
-
-            if (_bindingSource == null)
-                _bindingSource = new BindingSource();
-
-            _typedBindingList = new BindingList<object>();
-            _bindingSource.DataSource = _typedBindingList;
+            _entity = entity;
         }
 
+        /// <summary>
+        /// Returns a design-time safe CRUD service. At design-time (or if the runtime factory throws),
+        /// a no-op DesignTimeCrudService is returned. At runtime, the provided factory is invoked.
+        /// </summary>
+        protected static ICrudService<IEntityWithId> GetCrudServiceSafe(Func<ICrudService<IEntityWithId>> runtimeFactory)
+        {
+            if (IsDesignTime())
+                return new DesignTimeCrudService();
 
+            if (runtimeFactory == null)
+                return new DesignTimeCrudService();
+
+            try
+            {
+                var svc = runtimeFactory();
+                return svc ?? new DesignTimeCrudService();
+            }
+            catch
+            {
+                return new DesignTimeCrudService();
+            }
+        }
+
+        // -------------------- Shared design-time helpers --------------------
+        protected static bool IsDesignTime()
+        {
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
+                return true;
+
+            try
+            {
+                var proc = Process.GetCurrentProcess();
+                if (proc != null && proc.ProcessName.Equals("devenv", StringComparison.OrdinalIgnoreCase))
+                    return true;
+
+                //// Heuristic: VS designer assemblies loaded
+                //if (AppDomain.CurrentDomain.GetAssemblies()
+                //      .Any(a => a.FullName.StartsWith("Microsoft.VisualStudio", StringComparison.OrdinalIgnoreCase)))
+                //    return true;
+            }
+            catch { /* swallow – never block design mode */ }
+
+            return false;
+        }
+
+        protected DataGridViewTextBoxColumn AddHiddenIdColumn(DataGridView grid, string name = "ID")
+        {
+            var col = new DataGridViewTextBoxColumn
+            {
+                Name = name,
+                DataPropertyName = name,
+                HeaderText = "ID",
+                Visible = false,
+                Width = 60,
+                ValueType = typeof(int)
+            };
+            grid.Columns.Add(col);
+            return col;
+        }
+
+        protected DataGridViewTextBoxColumn AddTextColumn(DataGridView grid, string dataProp, string header, int width = 100, bool fill = false)
+        {
+            var col = new DataGridViewTextBoxColumn
+            {
+                Name = dataProp,
+                DataPropertyName = dataProp,
+                HeaderText = header,
+                Width = width,
+                AutoSizeMode = fill ? DataGridViewAutoSizeColumnMode.Fill : DataGridViewAutoSizeColumnMode.None
+            };
+            grid.Columns.Add(col);
+            return col;
+        }
+
+        protected bool AddValidationError(List<string> errors, Control control, string message)
+        {
+            SetFieldError(control, message);
+            errors.Add(message);
+            return false;
+        }
+
+        /// <summary>
+        /// Extracted default grid setup (common settings)
+        /// </summary>
+        protected virtual void ApplyDefaultGridSettings(DataGridView grid)
+        {
+            grid.AutoGenerateColumns = false;
+            grid.ReadOnly = true;
+            grid.MultiSelect = false;
+            grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            grid.EditMode = DataGridViewEditMode.EditProgrammatically;
+            grid.AllowUserToAddRows = false;
+            grid.AllowUserToDeleteRows = false;
+            grid.AllowUserToResizeRows = false;
+            grid.RowHeadersVisible = false;
+
+            //// Enable double buffering (reflection)
+            //var pi = grid.GetType().GetProperty("DoubleBuffered",
+            //    System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+            //pi?.SetValue(grid, true, null);
+        }
 
         /// <summary>
         /// Automatically binds form fields (TextBox controls) to properties of the given DTO type.
@@ -277,6 +459,849 @@ namespace AATM.UI.Winforms.BaseControls
             }
         }
 
+        // BuildDefaultFieldControlMap uses FieldControlAttribute
+        protected virtual Dictionary<string, Control> BuildDefaultFieldControlMap()
+        {
+            var map = new Dictionary<string, Control>(StringComparer.OrdinalIgnoreCase);
+            // Infer DTO type (when typed controller active)
+            var dtoType = _typedController?.DtoType;
+            if (dtoType == null) return map;
+
+            foreach (var prop in dtoType.GetProperties(BindingFlags.Public | BindingFlags.Instance))
+            {
+                var fca = prop.GetCustomAttribute<AATM.Contracts.Attributes.FieldControlAttribute>();
+                if (fca == null) continue;
+
+                var ctlField = GetType().GetField(fca.ControlName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+                if (ctlField == null) continue;
+
+                if (ctlField.GetValue(this) is Control ctl && !map.ContainsKey(prop.Name))
+                    map[prop.Name] = ctl;
+            }
+            return map;
+        }
+
+        protected IEntityWithId BuildModelFromForm(IEntityWithId current)
+        {
+            var dto = current ?? Activator.CreateInstance<IEntityWithId>();
+
+            // Preserve ID from the selected entity using the IEntityWithId interface constraint
+            if (current != null && current is IEntityWithId currentWithId && dto is IEntityWithId newWithId)
+            {
+                newWithId.ID = currentWithId.ID;
+            }
+
+            foreach (var b in _textBindings)
+            {
+                if (b.Box != null)
+                    b.Setter(dto, b.Box.Text);
+            }
+
+            return dto;
+        }
+
+        protected void ClearErrorDisplay()
+        {
+            SetErrorDisplay("");
+        }
+
+        protected void ClearFormFields()
+        {
+            ClearFormFieldsCore();
+            if (Grid != null)
+                Grid.ClearSelection();
+        }
+
+        protected void ClearFormFieldsCore()
+        {
+            foreach (var b in _textBindings)
+                if (b.Box != null)
+                    b.Box.Text = string.Empty;
+        }
+
+        protected void ClearRetryLink()
+        {
+            if (StatusStripLabel == null) return;
+            if (_statusRetryClickHandler != null)
+            {
+                StatusStripLabel.Click -= _statusRetryClickHandler;
+                _statusRetryClickHandler = null;
+            }
+            StatusStripLabel.IsLink = false;
+        }
+
+        /// <summary>
+        /// Simplified configuration flow: Apply defaults then let derived add columns.
+        /// </summary>
+        protected virtual void ConfigureGrid(DataGridView grid)
+        {
+            if (grid.Columns.Count > 0) return;
+
+            ApplyDefaultGridSettings(grid);
+
+            // Let derived class define manually first
+            DefineColumns(grid);
+
+            // Auto-generate if still empty and typed mode + enabled
+            if (grid.Columns.Count == 0 && IsTyped && AutoGenerateColumnsFromAttributes)
+            {
+                TryBuildAutoColumns(grid);
+            }
+
+            // Fallback: allow default auto-generation if still no columns (legacy/non-typed)
+            if (grid.Columns.Count == 0)
+                grid.AutoGenerateColumns = true;
+
+            foreach (DataGridViewColumn col in grid.Columns)
+            {
+                col.DefaultCellStyle.NullValue = string.Empty;
+                col.SortMode = DataGridViewColumnSortMode.Automatic;
+            }
+
+            grid.ColumnHeaderMouseClick -= Grid_ColumnHeaderMouseClick;
+            grid.ColumnHeaderMouseClick += Grid_ColumnHeaderMouseClick;
+        }
+
+        protected virtual DialogResult ConfirmDelete(string message)
+        {
+            return MessageBox.Show(this,
+                message ?? "Delete selected record?",
+                "Confirm delete",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning,
+                MessageBoxDefaultButton.Button2);
+        }
+
+        /// <summary>
+        /// Override only if you want to add columns. Base will call this after applying default settings.
+        /// </summary>
+        protected virtual void DefineColumns(DataGridView grid)
+        { }
+
+        protected async Task DeleteSelectedAsync()
+        {
+            if (_isMutating) return;
+            if (Grid == null) return;
+            _isMutating = true;
+            SetBusy(true, "Deleting...");
+            try
+            {
+                if (IsTyped)
+                {
+                    var entity = _bindingSource?.Current;
+                    if (entity == null)
+                    {
+                        MessageBox.Show(this, "Select a row to delete.", "Delete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
+                    var id = _typedController.GetId(entity);
+                    if (ConfirmDelete(GetDeleteConfirmationText((IEntityWithId)entity)) != DialogResult.Yes)
+                        return;
+
+                    await OnBeforeDeleteAsync(id, (IEntityWithId)entity);
+                    var ok = await _typedController.DeleteAsync(id, _cts.Token);
+                    SetStatusText(ok ? $"Deleted (ID={id})" : $"Delete failed (ID={id})");
+                    await OnAfterDeleteAsync(id, ok);
+                    await LoadDataAsync();
+                    return;
+                }
+
+                // Legacy path
+                var entityLegacy = GetSelectedEntity();
+                if (entityLegacy == null)
+                {
+                    MessageBox.Show(this, "Select a row to delete.", "Delete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                var legacyId = GetEntityId(entityLegacy);
+                if (ConfirmDelete(GetDeleteConfirmationText(entityLegacy)) != DialogResult.Yes)
+                    return;
+
+                await OnBeforeDeleteAsync(legacyId, entityLegacy);
+                var okLegacy = await _service.DeleteAsync(legacyId, _cts.Token);
+                SetStatusText(okLegacy ? $"Deleted (ID={legacyId})" : $"Delete failed (ID={legacyId})");
+                await OnAfterDeleteAsync(legacyId, okLegacy);
+                await LoadDataAsync();
+            }
+            catch (OperationCanceledException)
+            {
+                SetStatusText("Delete canceled.");
+            }
+            catch (Exception ex)
+            {
+                SetStatusText("Delete failed: " + ex.Message);
+            }
+            finally
+            {
+                _isMutating = false;
+                SetBusy(false);
+            }
+        }
+
+        // -------------------- NEW: Shared ErrorProvider helpers --------------------
+        protected void EnsureErrorProvider()
+        {
+            if (myErrorProvider == null)
+            {
+                myErrorProvider = new ErrorProvider
+                {
+                    BlinkStyle = ErrorBlinkStyle.NeverBlink,
+                    ContainerControl = this
+                };
+                Disposed += (s, e) =>
+                {
+                    try { myErrorProvider?.Dispose(); } catch { }
+                };
+            }
+        }
+
+        protected virtual string GetDeleteConfirmationText(IEntityWithId entity)
+        {
+            int id = 0;
+            try { id = entity != null ? GetEntityId(entity) : 0; } catch { }
+            return id > 0 ? $"Delete selected record (ID={id})?" : "Delete selected record?";
+        }
+
+        protected virtual string GetDeleteConfirmationTextComplete(IEntityWithId entity)
+        {
+            if (entity == null) return GetDeleteConfirmationText(entity);
+
+            var props = entity.GetType().GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+            var lines = props.Select(p => $"{p.Name}: {p.GetValue(entity) ?? ""}");
+            return "Are you sure you want to delete this record?\n\n" + string.Join("\n", lines);
+        }
+
+
+        protected int GetEntityId(IEntityWithId entity)
+        {
+            if (entity == null) return 0;
+
+            // CS1061 fix: Safely cast 'entity' to the required interface.
+            if (entity is IEntityWithId entityWithId)
+            {
+                return entityWithId.ID;
+            }
+            // Fallback for types that somehow failed the constraint check (or if the constraint is removed at design time)
+            return 0;
+        }
+
+        protected virtual string GetFriendlyErrorMessage(Exception ex)
+        {
+            if (ex == null) return "Unknown error.";
+            if (ex is OperationCanceledException || ex is TaskCanceledException) return "Operation canceled.";
+            if (ex is TimeoutException) return "The server took too long to respond.";
+            if (ex is HttpRequestException) return "Network error. Please check your connection.";
+            var msg = ex.Message;
+            return string.IsNullOrWhiteSpace(msg) ? ex.GetType().Name : msg;
+        }
+
+        protected IEntityWithId GetSelectedEntity()
+        {
+            var grid = Grid;
+            if (grid == null) return null;
+
+            if (grid.SelectedRows != null && grid.SelectedRows.Count > 0)
+            {
+                var row = grid.SelectedRows[0];
+                if (row != null && !row.IsNewRow)
+                    return row.DataBoundItem as IEntityWithId;
+            }
+
+            if (grid.CurrentCell != null)
+            {
+                var row = grid.Rows[grid.CurrentCell.RowIndex];
+                if (row != null && !row.IsNewRow)
+                    return row.DataBoundItem as IEntityWithId;
+            }
+
+            return null;
+        }
+
+        protected void GoFirst()
+        {
+            if (Grid == null) return;
+            for (int i = 0; i < Grid.Rows.Count; i++)
+            {
+                if (!Grid.Rows[i].IsNewRow)
+                {
+                    NavigateToRow(i);
+                    SetStatusText("First record.");
+                    return;
+                }
+            }
+            SetStatusText("No records.");
+        }
+
+        protected void GoLast()
+        {
+            if (Grid == null) return;
+            for (int i = Grid.Rows.Count - 1; i >= 0; i--)
+            {
+                if (!Grid.Rows[i].IsNewRow)
+                {
+                    NavigateToRow(i);
+                    SetStatusText("Last record.");
+                    return;
+                }
+            }
+            SetStatusText("No records.");
+        }
+
+        protected void GoNext()
+        {
+            if (Grid == null) return;
+            var rows = Grid.Rows;
+
+            int lastIndex = -1;
+            for (int i = rows.Count - 1; i >= 0; i--)
+            {
+                if (!rows[i].IsNewRow) { lastIndex = i; break; }
+            }
+            if (lastIndex == -1) { SetStatusText("No records."); return; }
+
+            int currentIndex = Grid.SelectedRows.Count > 0 ? Grid.SelectedRows[0].Index :
+                               Grid.CurrentCell != null ? Grid.CurrentCell.RowIndex : -1;
+
+            if (currentIndex == -1)
+            {
+                for (int i = 0; i < rows.Count; i++)
+                {
+                    if (!rows[i].IsNewRow) { currentIndex = i; break; }
+                }
+                if (currentIndex == -1) { SetStatusText("No records."); return; }
+            }
+
+            if (currentIndex >= lastIndex)
+            {
+                NavigateToRow(lastIndex);
+                SetStatusText("Already at last.");
+                return;
+            }
+
+            for (int i = currentIndex + 1; i <= lastIndex; i++)
+            {
+                if (!rows[i].IsNewRow) { NavigateToRow(i); SetStatusText("Next record."); return; }
+            }
+            NavigateToRow(lastIndex);
+        }
+
+        protected void GoPrevious()
+        {
+            if (Grid == null) return;
+            var rows = Grid.Rows;
+            int firstIndex = -1;
+            for (int i = 0; i < rows.Count; i++)
+            {
+                if (!rows[i].IsNewRow) { firstIndex = i; break; }
+            }
+            if (firstIndex == -1) { SetStatusText("No records."); return; }
+
+            int currentIndex = Grid.SelectedRows.Count > 0 ? Grid.SelectedRows[0].Index :
+                               Grid.CurrentCell != null ? Grid.CurrentCell.RowIndex : firstIndex;
+
+            if (currentIndex <= firstIndex)
+            {
+                NavigateToRow(firstIndex);
+                SetStatusText("Already at first.");
+                return;
+            }
+
+            for (int i = currentIndex - 1; i >= firstIndex; i--)
+            {
+                if (!rows[i].IsNewRow) { NavigateToRow(i); SetStatusText("Previous record."); return; }
+            }
+            NavigateToRow(firstIndex);
+        }
+
+        // ---------- Public/Protected Initialization for typed mode ----------
+        protected void InitializeTypedController<TDto>(Func<ICrudService<TDto>> factory)
+            where TDto : class, IEntityWithId, new()
+        {
+            if (factory == null) throw new ArgumentNullException(nameof(factory));
+            _typedController = new GridCrudController<TDto>(factory());
+
+            if (_bindingSource == null)
+                _bindingSource = new BindingSource();
+
+            _typedBindingList = new BindingList<object>();
+            _bindingSource.DataSource = _typedBindingList;
+        }
+
+        protected async Task LoadDataAsync()
+        {
+            if (_isLoading) return;
+            if (Grid == null) return;
+            _isLoading = true;
+            SetBusy(true, "Loading...");
+            try
+            {
+                await OnBeforeLoadAsync();
+
+                if (IsTyped)
+                {
+                    await _typedController.LoadAsync(_cts.Token);
+
+                    if (UseDefaultNavigator && _navigator == null)
+                        InitializeNavigatorIfNeeded();
+
+                    // LIVE_TYPED: bind directly to controller's live untyped list
+                    if (_bindingSource == null) _bindingSource = new BindingSource();
+                    _bindingSource.DataSource = _typedController.LiveUntypedItems;
+
+                    ConfigureGrid(Grid);
+                    if (Grid.DataSource != _bindingSource)
+                        Grid.DataSource = _bindingSource;
+
+                    WireGridDataErrorOnce();
+                    WireGridSelectionEventsOnce();
+
+                    SetStatusText($"Loaded {_typedController.LiveUntypedItems.Count} records.");
+                    ClearRetryLink();
+                    GoFirst();
+                    await OnAfterLoadAsync();
+                    return;
+                }
+
+                var result = await _service.GetAllAsync(_cts.Token);
+                _allItems = result != null ? result.ToList() : new List<IEntityWithId>();
+                _items = result != null ? new BindingList<IEntityWithId>(result.ToList()) : new BindingList<IEntityWithId>();
+
+                var grid = Grid;
+
+                // Ensure navigator stack exists when enabled
+                if (UseDefaultNavigator && _navigator == null)
+                    InitializeNavigatorIfNeeded();
+
+                grid.SuspendLayout();
+                try
+                {
+                    // Bind via BindingSource (preferred)
+                    if (_bindingSource == null) _bindingSource = new BindingSource();
+
+                    _bindingSource.DataSource = _items;
+
+                    ConfigureGrid(grid);
+                    if (grid.DataSource != _bindingSource)
+                        grid.DataSource = _bindingSource;
+
+                    WireGridDataErrorOnce();
+                    WireGridSelectionEventsOnce();
+                }
+                finally
+                {
+                    grid.ResumeLayout();
+                }
+
+                SetStatusText($"Loaded {_items.Count} records.");
+                ClearRetryLink();
+                GoFirst();
+
+                await OnAfterLoadAsync();
+            }
+            catch (OperationCanceledException)
+            {
+                SetStatusText("Load canceled.");
+            }
+            catch (Exception ex)
+            {
+                ShowError("Load", ex, async () => await LoadDataAsync());
+            }
+            finally
+            {
+                _isLoading = false;
+                _hasLoadedOnce = true;
+                SetBusy(false);
+            }
+        }
+
+        protected bool NavigateToEntity(Predicate<IEntityWithId> match)
+        {
+            if (match == null || _items == null || _items.Count == 0) return false;
+            for (int i = 0; i < _items.Count; i++)
+            {
+                if (match(_items[i]))
+                {
+                    NavigateToRow(i);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        protected void NavigateToRow(int rowIndex)
+        {
+            if (Grid == null) return;
+            if (rowIndex < 0 || rowIndex >= Grid.Rows.Count) return;
+
+            var row = Grid.Rows[rowIndex];
+            if (row.IsNewRow) return;
+
+            Grid.ClearSelection();
+            row.Selected = true;
+
+            var firstVisibleCell = row.Cells.Cast<DataGridViewCell>().FirstOrDefault(c => c.Visible);
+            if (firstVisibleCell != null)
+                Grid.CurrentCell = firstVisibleCell;
+
+            Grid.FirstDisplayedScrollingRowIndex = rowIndex;
+            PopulateFormFieldsFromGrid(rowIndex);
+        }
+
+        protected virtual Task OnAfterDeleteAsync(int id, bool ok)
+        { return Task.CompletedTask; }
+
+        protected virtual void OnAfterLanguageApplied(string code)
+        {
+            ControlLocalizer.ApplyRightToLeftLayout(this, code);
+            StatusStripLabel.Text = $"Language applied: {code}";
+        }
+
+        protected virtual Task OnAfterLoadAsync()
+        { return Task.CompletedTask; }
+
+        protected virtual Task OnAfterSaveAsync(IEntityWithId saved)
+        { return Task.CompletedTask; }
+
+        protected virtual Task OnBeforeDeleteAsync(int id, IEntityWithId entity)
+        { return Task.CompletedTask; }
+
+        protected virtual Task OnBeforeLoadAsync()
+        { return Task.CompletedTask; }
+
+        // -------------------- Lifecycle hooks & core operations --------------------
+        protected virtual Task OnBeforeSaveAsync()
+        { return Task.CompletedTask; }
+
+        // Hook for derived forms to append items after defaults
+        protected virtual void OnCreateAdditionalNavigatorItems(BindingNavigator navigator)
+        { }
+
+        protected virtual Task OnDeleteRequestedAsync() => DeleteSelectedAsync();
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            try { _cts.Cancel(); } catch { }
+            base.OnFormClosing(e);
+        }
+
+        // Hook called after the language selector controls are created
+        protected virtual void OnLanguageSelectorCreated()
+        { }
+
+        protected virtual Task OnRefreshRequestedAsync() => LoadDataAsync();
+
+        // Hooks to override CRUD actions if needed
+        protected virtual Task OnSaveRequestedAsync() => SaveOrUpdateAsync();
+
+        protected override void OnShown(EventArgs e)
+        {
+            base.OnShown(e);
+            if (IsReallyDesignTime) return;
+            if (AutoLoadOnShown && !_hasLoadedOnce)
+            {
+                var _ = LoadDataAsync();
+            }
+        }
+
+        protected void PopulateFormFieldsFromGrid(int rowIndex)
+        {
+            var entity = _bindingSource.Current as IEntityWithId;
+            if (entity == null) return;
+
+            foreach (var b in _textBindings)
+            {
+                if (b.Box != null)
+                    b.Box.Text = b.Getter(entity) ?? string.Empty;
+            }
+            ClearErrorDisplay();
+            myErrorProvider?.Clear();
+            SetStatusText("");
+            SetErrorDisplay("");
+        }
+
+        /// <summary>
+        /// Register a two-way text binding between a TextBox and a string property on IEntityWithId.
+        /// </summary>
+        protected void RegisterTextBinding(TextBox box, Expression<Func<IEntityWithId, string>> property)
+        {
+            if (box == null) throw new ArgumentNullException(nameof(box));
+            if (property == null) throw new ArgumentNullException(nameof(property));
+
+            var member = property.Body as MemberExpression;
+            if (member == null || !(member.Member is PropertyInfo pi))
+                throw new ArgumentException("Expression must be a simple property access", nameof(property));
+
+            if (!pi.CanRead || !pi.CanWrite)
+                throw new InvalidOperationException("Property must be readable and writable.");
+
+            var getter = property.Compile();
+
+            // Build setter
+            var dtoParam = Expression.Parameter(typeof(IEntityWithId), "dto");
+            var valParam = Expression.Parameter(typeof(string), "val");
+            var assign = Expression.Assign(Expression.Property(dtoParam, pi), valParam);
+            var setter = Expression.Lambda<Action<IEntityWithId, string>>(assign, dtoParam, valParam).Compile();
+
+            _textBindings.Add(new TextBinding
+            {
+                Box = box,
+                Getter = getter,
+                Setter = setter
+            });
+        }
+
+        // Add these to BaseGridCrudForm
+        protected virtual ILocalizationService ResolveLocalizationService()
+            => new LocalizationService(LanguageComboBox?.SelectedItem is LanguageUiHelper.LanguageItem li ? li.Code : "en-US", this.GetType().Name);
+
+        protected virtual IUiLocalizationManager ResolveUiLocalizationManager()
+                            => new InMemoryUiLocalizationManager();
+
+        // Central structured validation executor
+        protected virtual string RunValidation(IEntityWithId entity)
+        {
+            // 6a. Structured path first
+            if (StructuredValidator != null && entity != null)
+            {
+                EnsureErrorProvider();
+                myErrorProvider?.Clear();
+                ClearErrorDisplay();
+
+                var errors = StructuredValidator(entity)?.ToList() ?? new List<ValidationError>();
+                if (errors.Count == 0) return null;
+
+                var messages = new List<string>();
+                foreach (var err in errors)
+                {
+                    if (string.IsNullOrWhiteSpace(err?.Message)) continue;
+                    messages.Add(err.Message);
+
+                    if (!string.IsNullOrEmpty(err.Property) &&
+                        FieldControlMap.TryGetValue(err.Property, out var ctl) &&
+                        ctl != null)
+                    {
+                        myErrorProvider.SetIconAlignment(ctl, ErrorIconAlignment.MiddleRight);
+                        myErrorProvider.SetIconPadding(ctl, 0);
+                        SetFieldError(ctl, err.Message);
+                    }
+                }
+
+                if (messages.Count > 0)
+                {
+                    ShowValidationErrors(messages);
+                    // focus first
+                    var firstCtl = FieldControlMap.Values.FirstOrDefault(c => myErrorProvider.GetError(c) != "");
+                    firstCtl?.Focus();
+
+                    return ErrorDisplayControl?.Text ?? string.Join(Environment.NewLine, messages);
+                }
+                return null;
+            }
+
+            // 6b. Fallback legacy hook
+            return ValidateBeforeSave(entity);
+        }
+        protected async Task SaveOrUpdateAsync()
+        {
+            if (_isMutating) return;
+            if (Grid == null) return;
+            _isMutating = true;
+            SetBusy(true, "Saving...");
+            try
+            {
+                await OnBeforeSaveAsync();
+
+                if (IsTyped)
+                {
+                    var currentObj = _bindingSource?.Current;
+                    var model = currentObj ?? _typedController.CreateNew();
+
+                    foreach (var b in _textBindings)
+                        if (b.Box != null)
+                            b.Setter((IEntityWithId)model, b.Box.Text);
+
+                    // VALIDATION
+                    var validationMessage = RunValidation((IEntityWithId)model);
+                    if (!string.IsNullOrEmpty(validationMessage))
+                    {
+                        if (ShowValidationErrorsOnlyInValidationTextBox)
+                        {
+                            SetStatusText("Validation failed, record not saved!");
+                        }
+                        else
+                        {
+                            SetStatusText("Validation failed: " + validationMessage);
+                        }
+                        return;
+                    }
+
+                    var saved = await _typedController.SaveAsync(model, _cts.Token);
+                    SetStatusText($"Saved (ID={_typedController.GetId(saved)})");
+
+                    ErrorDisplayControl.Text = ""; // Clear error messages
+
+                    await OnAfterSaveAsync((IEntityWithId)saved);
+                    await LoadDataAsync();
+                    ClearErrorDisplay();
+                    ClearFormFields();
+                    return;
+                }
+
+                // ... legacy path (add validation there too) ...
+                var current = GetSelectedEntity();
+                var dto = BuildModelFromForm(current);
+
+                var legacyValidation = RunValidation(dto);
+                if (!string.IsNullOrEmpty(legacyValidation))
+                {
+                    SetStatusText("Validation failed: " + legacyValidation);
+                    return;
+                }
+
+                var savedLegacy = await _service.UpsertAsync(dto, _cts.Token);
+                SetStatusText($"Saved (ID={GetEntityId(savedLegacy)})");
+                await OnAfterSaveAsync(savedLegacy);
+                await LoadDataAsync();
+                ClearFormFields();
+            }
+            catch (OperationCanceledException)
+            {
+                SetStatusText("Save canceled.");
+                myErrorProvider.Clear();
+            }
+            catch (Exception ex)
+            {
+                SetStatusText("Save failed: " + ex.Message);
+            }
+            finally
+            {
+                _isMutating = false;
+                SetBusy(false);
+            }
+        }
+
+        protected void SetBusy(bool busy, string message = null)
+        {
+            if (!string.IsNullOrEmpty(message))
+                SetStatusText(message);
+
+            try { UseWaitCursor = busy; } catch { }
+
+            var controls = BusyControls;
+            if (controls != null)
+            {
+                foreach (var c in controls)
+                {
+                    if (c != null) c.Enabled = !busy;
+                }
+            }
+
+            if (StatusProgress != null)
+            {
+                StatusProgress.Visible = busy;
+                StatusProgress.Style = busy ? ProgressBarStyle.Marquee : ProgressBarStyle.Blocks;
+            }
+        }
+
+        protected void SetErrorDisplay(string message)
+        {
+            if (ErrorDisplayControl == null) return;
+            if (ErrorDisplayControl is Label lbl)
+                lbl.Text = message ?? "";
+            else if (ErrorDisplayControl is TextBox txt)
+                txt.Text = message ?? "";
+        }
+
+        protected void SetFieldError(Control ctl, string message)
+        {
+            if (InvokeRequired)
+            {
+                BeginInvoke(new Action<Control, string>(SetFieldError), ctl, message);
+                return;
+            }
+            if (myErrorProvider == null || ctl == null) return;
+            myErrorProvider.SetError(ctl, string.IsNullOrWhiteSpace(message) ? string.Empty : message);
+        }
+
+        protected virtual void SetStatusText(string text)
+        {
+            // Only show in status bar if allowed
+            if (ShowErrorsInStatusLabel)
+            {
+                if (StatusStripLabel != null)
+                {
+                    StatusStripLabel.Text = text ?? string.Empty;
+                    if (string.IsNullOrEmpty(StatusStripLabel.ToolTipText))
+                        StatusStripLabel.ToolTipText = StatusStripLabel.Text;
+                }
+                else if (StatusLabel != null)
+                {
+                    StatusLabel.Text = text ?? string.Empty;
+                }
+            }
+        }
+
+        protected void ShowError(string context, Exception ex, Func<Task> retryAsync)
+        {
+            var friendly = GetFriendlyErrorMessage(ex);
+
+            // Only show in status bar if allowed
+            if (ShowErrorsInStatusBar)
+                SetStatusText($"{context} failed: {friendly}");
+
+            SetErrorDisplay(friendly);
+
+            if (StatusStripLabel == null || !ShowErrorsInStatusBar) return;
+            // StatusStripLabel.ToolTipText = ex != null ? ex.Message : friendly;
+
+            if (_statusRetryClickHandler != null)
+            {
+                StatusStripLabel.Click -= _statusRetryClickHandler;
+                _statusRetryClickHandler = null;
+            }
+
+            if (retryAsync != null)
+            {
+                StatusStripLabel.IsLink = true;
+                _statusRetryClickHandler = async (s, e) =>
+                {
+                    StatusStripLabel.IsLink = false;
+                    try { await retryAsync(); }
+                    catch (OperationCanceledException)
+                    {
+                        SetStatusText($"{context} canceled.");
+                    }
+                    catch (Exception ex2)
+                    {
+                        SetStatusText($"{context} failed: {GetFriendlyErrorMessage(ex2)}");
+                        StatusStripLabel.IsLink = true;
+                        StatusStripLabel.ToolTipText = ex2.Message;
+                    }
+                };
+                StatusStripLabel.Click += _statusRetryClickHandler;
+            }
+            else
+            {
+                StatusStripLabel.IsLink = false;
+            }
+        }
+
+        protected void ShowValidationErrors(IList<string> errors)
+        {
+            if (errors.Count > 0)
+            {
+                ErrorDisplayControl.Text = string.Join(Environment.NewLine, errors);
+            }
+            else
+            {
+                ErrorDisplayControl.Text = ""; // Clear previous errors
+            }
+        }
+
+        // VALIDATION HOOK
+        protected virtual string ValidateBeforeSave(IEntityWithId entity) => null;
+
         // Central reusable helper
         protected void WireClearFieldErrorsOnTextChanged(params Control[] controls)
         {
@@ -308,119 +1333,187 @@ namespace AATM.UI.Winforms.BaseControls
             }
         }
 
-        // Prefer derived classes to expose their grid
-        protected virtual DataGridView Grid => null;
-
-        protected virtual Label StatusLabel { get { return null; } }
-        protected virtual ToolStripStatusLabel StatusStripLabel { get { return null; } }
-        protected virtual ToolStripProgressBar StatusProgress { get { return null; } }
-
-        // New: allow opting out of the default BindingNavigator and its sections
-        protected virtual bool UseDefaultNavigator => true;
-        protected virtual bool ShowNavigationButtons => true;
-        protected virtual bool ShowCrudButtons => true;
-        protected virtual bool ShowRefreshButton => true;
-
-        // Hook for derived forms to append items after defaults
-        protected virtual void OnCreateAdditionalNavigatorItems(BindingNavigator navigator) { }
-
-        // Hooks to override CRUD actions if needed
-        protected virtual Task OnSaveRequestedAsync() => SaveOrUpdateAsync();
-        protected virtual Task OnDeleteRequestedAsync() => DeleteSelectedAsync();
-        protected virtual Task OnRefreshRequestedAsync() => LoadDataAsync();
-
-        // NEW: Language selector support (opt-in)
-        protected virtual bool ShowLanguageSelector => true;
-        protected ToolStripComboBox LanguageComboBox { get; private set; }
-        protected ToolStripButton LanguageApplyButton { get; private set; }
-
-        // Hook called after the language selector controls are created
-        protected virtual void OnLanguageSelectorCreated() { }
-
-        // VALIDATION HOOK 
-        protected virtual string ValidateBeforeSave(IEntityWithId entity) => null;
-
-        protected virtual IEnumerable<Control> BusyControls
+        protected void WireGridDataErrorOnce()
         {
-            get
+            if (_gridDataErrorWired) return;
+            var grid = Grid;
+            if (grid == null) return;
+
+            grid.DataError += (s, e) =>
             {
-                if (Grid != null) yield return Grid;
-            }
+                e.ThrowException = false;
+                SetStatusText("Display error in grid data.");
+                if (StatusStripLabel != null && e.Exception != null)
+                    StatusStripLabel.ToolTipText = e.Exception.Message;
+            };
+            _gridDataErrorWired = true;
         }
 
-        protected virtual void SetStatusText(string text)
+        private void ApplySearch()
         {
-            // Only show in status bar if allowed
-            if (ShowErrorsInStatusLabel)
+            if (_searchBox == null) return;
+            var query = _searchBox.Text?.Trim();
+
+            if (IsTyped)
             {
-                if (StatusStripLabel != null)
+                var filtered = _typedController.Filter(query);
+                _typedBindingList.RaiseListChangedEvents = false;
+                try
                 {
-                    StatusStripLabel.Text = text ?? string.Empty;
-                    if (string.IsNullOrEmpty(StatusStripLabel.ToolTipText))
-                        StatusStripLabel.ToolTipText = StatusStripLabel.Text;
+                    _typedBindingList.Clear();
+                    foreach (var o in filtered) _typedBindingList.Add(o);
                 }
-                else if (StatusLabel != null)
+                finally
                 {
-                    StatusLabel.Text = text ?? string.Empty;
+                    _typedBindingList.RaiseListChangedEvents = true;
+                    _bindingSource.ResetBindings(false);
                 }
-            }
-        }
-
-        protected void SetBusy(bool busy, string message = null)
-        {
-            if (!string.IsNullOrEmpty(message))
-                SetStatusText(message);
-
-            try { UseWaitCursor = busy; } catch { }
-
-            var controls = BusyControls;
-            if (controls != null)
-            {
-                foreach (var c in controls)
-                {
-                    if (c != null) c.Enabled = !busy;
-                }
-            }
-
-            if (StatusProgress != null)
-            {
-                StatusProgress.Visible = busy;
-                StatusProgress.Style = busy ? ProgressBarStyle.Marquee : ProgressBarStyle.Blocks;
-            }
-        }
-
-        // -------------------- NEW: Shared ErrorProvider helpers --------------------
-        protected void EnsureErrorProvider()
-        {
-            if (myErrorProvider == null)
-            {
-                myErrorProvider = new ErrorProvider
-                {
-                    BlinkStyle = ErrorBlinkStyle.NeverBlink,
-                    ContainerControl = this
-                };
-                Disposed += (s, e) =>
-                {
-                    try { myErrorProvider?.Dispose(); } catch { }
-                };
-            }
-        }
-
-        protected void SetFieldError(Control ctl, string message)
-        {
-            if (InvokeRequired)
-            {
-                BeginInvoke(new Action<Control, string>(SetFieldError), ctl, message);
                 return;
             }
-            if (myErrorProvider == null || ctl == null) return;
-            myErrorProvider.SetError(ctl, string.IsNullOrWhiteSpace(message) ? string.Empty : message);
+
+            // Legacy path
+            if (string.IsNullOrEmpty(query))
+            {
+                _items.Clear();
+                foreach (var item in _allItems)
+                    _items.Add(item);
+                return;
+            }
+
+            var filteredLegacy = _allItems.Where(x =>
+                x.GetType().GetProperties()
+                    .Any(p =>
+                    {
+                        var v = p.GetValue(x);
+                        return v != null &&
+                               v.ToString().IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0;
+                    })).ToList();
+
+            _items.Clear();
+            foreach (var item in filteredLegacy)
+                _items.Add(item);
         }
 
-        // -------------------- NEW: BindingNavigator + BindingSource --------------------
+        private List<GeneratedGridColumn> BuildColumnMetadata(Type dtoType)
+        {
+            var list = new List<GeneratedGridColumn>();
 
-        protected BindingSource DataBindingSource => _bindingSource;
-        protected BindingNavigator Navigator => _navigator;
+            // Prefer properties explicitly decorated.
+            var decorated = dtoType
+                .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .Select(p => new
+                {
+                    Prop = p,
+                    Attr = p.GetCustomAttribute<GridColumnAttribute>(inherit: true)
+                })
+                .Where(x => x.Attr != null)
+                .ToList();
+
+            if (decorated.Count > 0)
+            {
+                foreach (var d in decorated)
+                {
+                    list.Add(new GeneratedGridColumn
+                    {
+                        Property = d.Prop.Name,
+                        Header = string.IsNullOrWhiteSpace(d.Attr.Header) ? d.Prop.Name : d.Attr.Header,
+                        Order = d.Attr.Order,
+                        Width = d.Attr.Width <= 0 ? 100 : d.Attr.Width,
+                        Fill = d.Attr.Fill,
+                        Hidden = d.Attr.Hidden,
+                        ReadOnly = d.Attr.ReadOnly
+                    });
+                }
+                return list;
+            }
+
+            // If no attributes present, fall back to a simple heuristic (skip complex/reference types except string)
+            var simpleProps = dtoType
+                .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .Where(p =>
+                    p.CanRead &&
+                    (p.PropertyType.IsValueType || p.PropertyType == typeof(string)))
+                .ToList();
+
+            int order = 0;
+            foreach (var p in simpleProps)
+            {
+                list.Add(new GeneratedGridColumn
+                {
+                    Property = p.Name,
+                    Header = p.Name,
+                    Order = order++,
+                    Width = 100,
+                    Fill = false,
+                    Hidden = string.Equals(p.Name, "ID", StringComparison.OrdinalIgnoreCase) ? false : false,
+                    ReadOnly = true
+                });
+            }
+
+            return list;
+        }
+
+        private void Grid_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            var grid = sender as DataGridView;
+            if (grid == null) return;
+
+            var column = grid.Columns[e.ColumnIndex];
+            var propertyName = column.DataPropertyName;
+
+            if (IsTyped)
+            {
+                bool ascending = grid.SortOrder != SortOrder.Ascending;
+                var sorted = _typedController.Sort(propertyName, ascending);
+
+                _typedBindingList.RaiseListChangedEvents = false;
+                try
+                {
+                    _typedBindingList.Clear();
+                    foreach (var o in sorted) _typedBindingList.Add(o);
+                }
+                finally
+                {
+                    _typedBindingList.RaiseListChangedEvents = true;
+                    _bindingSource.ResetBindings(false);
+                }
+                return;
+            }
+
+            // Legacy path
+            // Toggle sort direction
+            bool asc = grid.SortOrder != SortOrder.Ascending;
+            var sortedLegacy = asc
+                ? _items.OrderBy(x => x.GetType().GetProperty(propertyName)?.GetValue(x, null)).ToList()
+                : _items.OrderByDescending(x => x.GetType().GetProperty(propertyName)?.GetValue(x, null)).ToList();
+
+            _items.Clear();
+            foreach (var item in sortedLegacy)
+                _items.Add(item);
+
+            grid.Refresh();
+        }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            //
+            // BaseGridCrudForm
+            //
+            this.ClientSize = new System.Drawing.Size(680, 307);
+            this.Name = "BaseGridCrudForm";
+            this.ResumeLayout(false);
+        }
+
+        private void InitializeLanguageHelperIfNeeded()
+        {
+            if (_langHelper != null) return;
+            //_langHelper = new LanguageUiHelper(() => _localizationService, () => _dataGridView, OnAfterLanguageApplied);
+            _langHelper.PopulateLanguages(LanguageComboBox);
+            //_languageCombo.SelectedIndexChanged += (s, e) => _langHelper.ApplySelectedLanguage(this, _languageCombo);
+            //_applyLangButton.Click += (s, e) => _langHelper.ApplySelectedLanguage(this, _languageCombo);
+            //_languageUiNeedsInit = false;
+        }
 
         private void InitializeNavigatorIfNeeded()
         {
@@ -490,7 +1583,6 @@ namespace AATM.UI.Winforms.BaseControls
                     sepRefresh, RefreshButton
                 });
             }
-
 
             // Add search controls
             _searchBox = new ToolStripTextBox
@@ -570,17 +1662,81 @@ namespace AATM.UI.Winforms.BaseControls
             // Insert into controls
             Controls.Add(_navigator);
             _navigator.BringToFront();
-
         }
 
-        private void InitializeLanguageHelperIfNeeded()
+        private void TryBuildAutoColumns(DataGridView grid)
         {
-            if (_langHelper != null) return;
-            //_langHelper = new LanguageUiHelper(() => _localizationService, () => _dataGridView, OnAfterLanguageApplied);
-            _langHelper.PopulateLanguages(LanguageComboBox);
-            //_languageCombo.SelectedIndexChanged += (s, e) => _langHelper.ApplySelectedLanguage(this, _languageCombo);
-            //_applyLangButton.Click += (s, e) => _langHelper.ApplySelectedLanguage(this, _languageCombo);
-            //_languageUiNeedsInit = false;
+            if (_typedController == null) return;
+            var dtoType = _typedController.DtoType;
+            if (dtoType == null) return;
+
+            List<GeneratedGridColumn> meta;
+            if (!_autoColumnCache.TryGetValue(dtoType, out meta))
+            {
+                meta = BuildColumnMetadata(dtoType);
+                _autoColumnCache[dtoType] = meta;
+            }
+
+            foreach (var m in meta.OrderBy(m => m.Order))
+            {
+                var col = new DataGridViewTextBoxColumn
+                {
+                    Name = m.Property,
+                    DataPropertyName = m.Property,
+                    HeaderText = m.Header,
+                    Width = m.Width,
+                    ReadOnly = m.ReadOnly,
+                    Visible = !m.Hidden,
+                    AutoSizeMode = m.Fill
+                        ? DataGridViewAutoSizeColumnMode.Fill
+                        : DataGridViewAutoSizeColumnMode.None
+                };
+                grid.Columns.Add(col);
+            }
+        }
+
+        private void WireGridSelectionEventsOnce()
+        {
+            if (_gridEventsWired) return;
+            var grid = Grid;
+            if (grid == null) return;
+
+            grid.SelectionChanged += (s, e) =>
+            {
+                try
+                {
+                    int rowIndex = -1;
+
+                    if (grid.SelectedRows != null && grid.SelectedRows.Count > 0 && !grid.SelectedRows[0].IsNewRow)
+                        rowIndex = grid.SelectedRows[0].Index;
+                    else if (grid.CurrentCell != null && !grid.Rows[grid.CurrentCell.RowIndex].IsNewRow)
+                        rowIndex = grid.CurrentCell.RowIndex;
+
+                    if (rowIndex >= 0)
+                        PopulateFormFieldsFromGrid(rowIndex);
+                }
+                catch
+                {
+                    // ignore transient selection errors
+                }
+            };
+            _gridEventsWired = true;
+        }
+
+        // Design-time no-op service
+        public sealed class DesignTimeCrudService : ICrudService<IEntityWithId>
+        {
+            public Task<bool> DeleteAsync(int id, CancellationToken ct = default(CancellationToken))
+                => Task.FromResult(false);
+
+            public Task<IReadOnlyList<IEntityWithId>> GetAllAsync(CancellationToken ct = default(CancellationToken))
+                            => Task.FromResult((IReadOnlyList<IEntityWithId>)new List<IEntityWithId>());
+
+            public Task<IEntityWithId> GetByIdAsync(int id, CancellationToken ct = default(CancellationToken))
+                => Task.FromResult(default(IEntityWithId));
+
+            public Task<IEntityWithId> UpsertAsync(IEntityWithId dto, CancellationToken ct = default(CancellationToken))
+                => Task.FromResult(dto);
         }
 
         //protected void PopulateLanguageComboBox()
@@ -618,6 +1774,18 @@ namespace AATM.UI.Winforms.BaseControls
 
         // -------------------- NEW BINDING SUPPORT --------------------
 
+        // -------------------- COLUMN HELPERS & GRID CONFIG --------------------
+        private sealed class GeneratedGridColumn
+        {
+            public bool Fill;
+            public string Header;
+            public bool Hidden;
+            public int Order;
+            public string Property;
+            public bool ReadOnly;
+            public int Width;
+        }
+
         private sealed class TextBinding
         {
             public TextBox Box;
@@ -625,55 +1793,56 @@ namespace AATM.UI.Winforms.BaseControls
             public Action<IEntityWithId, string> Setter;
         }
 
-        /// <summary>
-        /// Register a two-way text binding between a TextBox and a string property on IEntityWithId.
-        /// </summary>
-        protected void RegisterTextBinding(TextBox box, Expression<Func<IEntityWithId, string>> property)
+        //private void InitializeStatusStripAndLabel()
+        //{
+        //    _statusStrip = new StatusStrip();
+        //    _statusLabel = new ToolStripStatusLabel { Name = "statusLabel", Spring = true };
+        //    _statusProgress = new ToolStripProgressBar { Name = "statusProgress", Visible = false };
+
+        //    _statusStrip.Items.Add(_statusLabel);
+        //    _statusStrip.Items.Add(_statusProgress);
+
+        //    Controls.Add(_statusStrip);
+        //    _statusStrip.Dock = DockStyle.Bottom;
+        //}
+
+        protected void InitializeStatusStripAndLabel()
         {
-            if (box == null) throw new ArgumentNullException(nameof(box));
-            if (property == null) throw new ArgumentNullException(nameof(property));
-
-            var member = property.Body as MemberExpression;
-            if (member == null || !(member.Member is PropertyInfo pi))
-                throw new ArgumentException("Expression must be a simple property access", nameof(property));
-
-            if (!pi.CanRead || !pi.CanWrite)
-                throw new InvalidOperationException("Property must be readable and writable.");
-
-            var getter = property.Compile();
-
-            // Build setter
-            var dtoParam = Expression.Parameter(typeof(IEntityWithId), "dto");
-            var valParam = Expression.Parameter(typeof(string), "val");
-            var assign = Expression.Assign(Expression.Property(dtoParam, pi), valParam);
-            var setter = Expression.Lambda<Action<IEntityWithId, string>>(assign, dtoParam, valParam).Compile();
-
-            _textBindings.Add(new TextBinding
+            if (_statusStrip == null)
             {
-                Box = box,
-                Getter = getter,
-                Setter = setter
-            });
+                _statusStrip = new StatusStrip();
+                this.Controls.Add(_statusStrip);
+                _statusStrip.BringToFront();
+            }
+
+            if (_statusProgress == null)
+            {
+                _statusProgress = new ToolStripProgressBar
+                {
+                    Name = "StatusProgress",
+                    Visible = false,
+                    Style = ProgressBarStyle.Blocks
+                };
+                _statusStrip.Items.Add(_statusProgress);
+
+            }
+
+
+            if (_statusStripLabel == null)
+            {
+                _statusStripLabel = new ToolStripStatusLabel
+                {
+                    Name = "StatusLabel",
+                    Text = "",
+                    Spring = false
+                };
+                _statusStrip.Items.Add(_statusStripLabel);
+            }
+
+
         }
 
         // -------------------- DEFAULT IMPLEMENTATIONS USING BINDINGS --------------------
-
-        protected void PopulateFormFieldsFromGrid(int rowIndex)
-        {
-            var entity = _bindingSource.Current as IEntityWithId;
-            if (entity == null) return;
-
-            foreach (var b in _textBindings)
-            {
-                if (b.Box != null)
-                    b.Box.Text = b.Getter(entity) ?? string.Empty;
-            }
-            ClearErrorDisplay();
-            myErrorProvider?.Clear();
-            SetStatusText("");
-            SetErrorDisplay("");
-        }
-
         //protected sealed override void PopulateFormFieldsFromGrid(int rowIndex)
         //{
         //    // rowIndex is ignored; using BindingSource.Current which is updated by the navigator/grid selection
@@ -697,26 +1866,6 @@ namespace AATM.UI.Winforms.BaseControls
         //}
 
         //protected virtual IEntityWithId BuildModelFromForm(IEntityWithId current)
-
-        protected IEntityWithId BuildModelFromForm(IEntityWithId current)
-        {
-            var dto = current ?? Activator.CreateInstance<IEntityWithId>();
-
-            // Preserve ID from the selected entity using the IEntityWithId interface constraint
-            if (current != null && current is IEntityWithId currentWithId && dto is IEntityWithId newWithId)
-            {
-                newWithId.ID = currentWithId.ID;
-            }
-
-            foreach (var b in _textBindings)
-            {
-                if (b.Box != null)
-                    b.Setter(dto, b.Box.Text);
-            }
-
-            return dto;
-        }
-
         //protected IEntityWithId BuildModelFromForm(IEntityWithId current)
         //{
         //    var dto = current ?? Activator.CreateInstance<IEntityWithId>();
@@ -748,20 +1897,6 @@ namespace AATM.UI.Winforms.BaseControls
 
         //    return dto;
         //}
-
-        protected int GetEntityId(IEntityWithId entity)
-        {
-            if (entity == null) return 0;
-
-            // CS1061 fix: Safely cast 'entity' to the required interface.
-            if (entity is IEntityWithId entityWithId)
-            {
-                return entityWithId.ID;
-            }
-            // Fallback for types that somehow failed the constraint check (or if the constraint is removed at design time)
-            return 0;
-        }
-
         //protected virtual int GetEntityId(IEntityWithId entity)
         //{
         //    if (entity == null) return 0;
@@ -792,979 +1927,11 @@ namespace AATM.UI.Winforms.BaseControls
         //    //return _cachedIdGetter(entity);
         //}
 
-
         //protected virtual void ClearFormFieldsCore()
         //{
         //    foreach (var b in _textBindings)
         //        if (b.Box != null)
         //            b.Box.Text = string.Empty;
         //}
-
-        // -------------------- COLUMN HELPERS & GRID CONFIG --------------------
-
-        /// <summary>
-        /// Override only if you want to add columns. Base will call this after applying default settings.
-        /// </summary>
-        protected virtual void DefineColumns(DataGridView grid) { }
-
-        /// <summary>
-        /// Enables automatic column generation from DTO property attributes when in typed mode
-        /// and no columns are defined explicitly.
-        /// </summary>
-        protected virtual bool AutoGenerateColumnsFromAttributes => true;
-
-        /// <summary>
-        /// Cache of generated column metadata per DTO type to avoid repeated reflection.
-        /// </summary>
-        private static readonly Dictionary<Type, List<GeneratedGridColumn>> _autoColumnCache =
-            new Dictionary<Type, List<GeneratedGridColumn>>();
-
-        private sealed class GeneratedGridColumn
-        {
-            public string Property;
-            public string Header;
-            public int Width;
-            public bool Fill;
-            public bool Hidden;
-            public bool ReadOnly;
-            public int Order;
-        }
-
-        /// <summary>
-        /// Extracted default grid setup (common settings)
-        /// </summary>
-        protected virtual void ApplyDefaultGridSettings(DataGridView grid)
-        {
-            grid.AutoGenerateColumns = false;
-            grid.ReadOnly = true;
-            grid.MultiSelect = false;
-            grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            grid.EditMode = DataGridViewEditMode.EditProgrammatically;
-            grid.AllowUserToAddRows = false;
-            grid.AllowUserToDeleteRows = false;
-            grid.AllowUserToResizeRows = false;
-            grid.RowHeadersVisible = false;
-
-            //// Enable double buffering (reflection)
-            //var pi = grid.GetType().GetProperty("DoubleBuffered",
-            //    System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
-            //pi?.SetValue(grid, true, null);
-        }
-
-        /// <summary>
-        /// Simplified configuration flow: Apply defaults then let derived add columns.
-        /// </summary>
-        protected virtual void ConfigureGrid(DataGridView grid)
-        {
-            if (grid.Columns.Count > 0) return;
-
-            ApplyDefaultGridSettings(grid);
-
-            // Let derived class define manually first
-            DefineColumns(grid);
-
-            // Auto-generate if still empty and typed mode + enabled
-            if (grid.Columns.Count == 0 && IsTyped && AutoGenerateColumnsFromAttributes)
-            {
-                TryBuildAutoColumns(grid);
-            }
-
-            // Fallback: allow default auto-generation if still no columns (legacy/non-typed)
-            if (grid.Columns.Count == 0)
-                grid.AutoGenerateColumns = true;
-
-            foreach (DataGridViewColumn col in grid.Columns)
-            {
-                col.DefaultCellStyle.NullValue = string.Empty;
-                col.SortMode = DataGridViewColumnSortMode.Automatic;
-            }
-
-            grid.ColumnHeaderMouseClick -= Grid_ColumnHeaderMouseClick;
-            grid.ColumnHeaderMouseClick += Grid_ColumnHeaderMouseClick;
-        }
-
-
-        protected DataGridViewTextBoxColumn AddTextColumn(DataGridView grid, string dataProp, string header, int width = 100, bool fill = false)
-        {
-            var col = new DataGridViewTextBoxColumn
-            {
-                Name = dataProp,
-                DataPropertyName = dataProp,
-                HeaderText = header,
-                Width = width,
-                AutoSizeMode = fill ? DataGridViewAutoSizeColumnMode.Fill : DataGridViewAutoSizeColumnMode.None
-            };
-            grid.Columns.Add(col);
-            return col;
-        }
-
-        protected DataGridViewTextBoxColumn AddHiddenIdColumn(DataGridView grid, string name = "ID")
-        {
-            var col = new DataGridViewTextBoxColumn
-            {
-                Name = name,
-                DataPropertyName = name,
-                HeaderText = "ID",
-                Visible = false,
-                Width = 60,
-                ValueType = typeof(int)
-            };
-            grid.Columns.Add(col);
-            return col;
-        }
-
-        // -------------------- Lifecycle hooks & core operations --------------------
-
-        protected virtual Task OnBeforeLoadAsync() { return Task.CompletedTask; }
-        protected virtual Task OnAfterLoadAsync() { return Task.CompletedTask; }
-        protected virtual Task OnBeforeSaveAsync() { return Task.CompletedTask; }
-        protected virtual Task OnAfterSaveAsync(IEntityWithId saved) { return Task.CompletedTask; }
-        protected virtual Task OnBeforeDeleteAsync(int id, IEntityWithId entity) { return Task.CompletedTask; }
-        protected virtual Task OnAfterDeleteAsync(int id, bool ok) { return Task.CompletedTask; }
-
-        protected virtual bool AutoLoadOnShown { get { return true; } }
-
-        protected virtual DialogResult ConfirmDelete(string message)
-        {
-            return MessageBox.Show(this,
-                message ?? "Delete selected record?",
-                "Confirm delete",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning,
-                MessageBoxDefaultButton.Button2);
-        }
-
-        protected virtual string GetDeleteConfirmationText(IEntityWithId entity)
-        {
-            int id = 0;
-            try { id = entity != null ? GetEntityId(entity) : 0; } catch { }
-            return id > 0 ? $"Delete selected record (ID={id})?" : "Delete selected record?";
-        }
-
-        protected virtual string GetFriendlyErrorMessage(Exception ex)
-        {
-            if (ex == null) return "Unknown error.";
-            if (ex is OperationCanceledException || ex is TaskCanceledException) return "Operation canceled.";
-            if (ex is TimeoutException) return "The server took too long to respond.";
-            if (ex is HttpRequestException) return "Network error. Please check your connection.";
-            var msg = ex.Message;
-            return string.IsNullOrWhiteSpace(msg) ? ex.GetType().Name : msg;
-        }
-
-        protected void ShowError(string context, Exception ex, Func<Task> retryAsync)
-        {
-            var friendly = GetFriendlyErrorMessage(ex);
-
-            // Only show in status bar if allowed
-            if (ShowErrorsInStatusBar)
-                SetStatusText($"{context} failed: {friendly}");
-
-            SetErrorDisplay(friendly);
-
-            if (StatusStripLabel == null || !ShowErrorsInStatusBar) return;
-            // StatusStripLabel.ToolTipText = ex != null ? ex.Message : friendly;
-
-            if (_statusRetryClickHandler != null)
-            {
-                StatusStripLabel.Click -= _statusRetryClickHandler;
-                _statusRetryClickHandler = null;
-            }
-
-            if (retryAsync != null)
-            {
-                StatusStripLabel.IsLink = true;
-                _statusRetryClickHandler = async (s, e) =>
-                {
-                    StatusStripLabel.IsLink = false;
-                    try { await retryAsync(); }
-                    catch (OperationCanceledException)
-                    {
-                        SetStatusText($"{context} canceled.");
-                    }
-                    catch (Exception ex2)
-                    {
-                        SetStatusText($"{context} failed: {GetFriendlyErrorMessage(ex2)}");
-                        StatusStripLabel.IsLink = true;
-                        StatusStripLabel.ToolTipText = ex2.Message;
-                    }
-                };
-                StatusStripLabel.Click += _statusRetryClickHandler;
-            }
-            else
-            {
-                StatusStripLabel.IsLink = false;
-            }
-        }
-
-        protected void ClearRetryLink()
-        {
-            if (StatusStripLabel == null) return;
-            if (_statusRetryClickHandler != null)
-            {
-                StatusStripLabel.Click -= _statusRetryClickHandler;
-                _statusRetryClickHandler = null;
-            }
-            StatusStripLabel.IsLink = false;
-        }
-
-        protected IEntityWithId GetSelectedEntity()
-        {
-            var grid = Grid;
-            if (grid == null) return null;
-
-            if (grid.SelectedRows != null && grid.SelectedRows.Count > 0)
-            {
-                var row = grid.SelectedRows[0];
-                if (row != null && !row.IsNewRow)
-                    return row.DataBoundItem as IEntityWithId;
-            }
-
-            if (grid.CurrentCell != null)
-            {
-                var row = grid.Rows[grid.CurrentCell.RowIndex];
-                if (row != null && !row.IsNewRow)
-                    return row.DataBoundItem as IEntityWithId;
-            }
-
-            return null;
-        }
-
-        protected async Task LoadDataAsync()
-        {
-            if (_isLoading) return;
-            if (Grid == null) return;
-            _isLoading = true;
-            SetBusy(true, "Loading...");
-            try
-            {
-                await OnBeforeLoadAsync();
-
-                if (IsTyped)
-                {
-                    await _typedController.LoadAsync(_cts.Token);
-
-                    if (UseDefaultNavigator && _navigator == null)
-                        InitializeNavigatorIfNeeded();
-
-                    // LIVE_TYPED: bind directly to controller's live untyped list
-                    if (_bindingSource == null) _bindingSource = new BindingSource();
-                    _bindingSource.DataSource = _typedController.LiveUntypedItems;
-
-                    ConfigureGrid(Grid);
-                    if (Grid.DataSource != _bindingSource)
-                        Grid.DataSource = _bindingSource;
-
-                    WireGridDataErrorOnce();
-                    WireGridSelectionEventsOnce();
-
-                    SetStatusText($"Loaded {_typedController.LiveUntypedItems.Count} records.");
-                    ClearRetryLink();
-                    GoFirst();
-                    await OnAfterLoadAsync();
-                    return;
-                }
-
-
-                var result = await _service.GetAllAsync(_cts.Token);
-                _allItems = result != null ? result.ToList() : new List<IEntityWithId>();
-                _items = result != null ? new BindingList<IEntityWithId>(result.ToList()) : new BindingList<IEntityWithId>();
-
-                var grid = Grid;
-
-                // Ensure navigator stack exists when enabled
-                if (UseDefaultNavigator && _navigator == null)
-                    InitializeNavigatorIfNeeded();
-
-                grid.SuspendLayout();
-                try
-                {
-                    // Bind via BindingSource (preferred)
-                    if (_bindingSource == null) _bindingSource = new BindingSource();
-
-                    _bindingSource.DataSource = _items;
-
-                    ConfigureGrid(grid);
-                    if (grid.DataSource != _bindingSource)
-                        grid.DataSource = _bindingSource;
-
-                    WireGridDataErrorOnce();
-                    WireGridSelectionEventsOnce();
-                }
-                finally
-                {
-                    grid.ResumeLayout();
-                }
-
-                SetStatusText($"Loaded {_items.Count} records.");
-                ClearRetryLink();
-                GoFirst();
-
-                await OnAfterLoadAsync();
-            }
-            catch (OperationCanceledException)
-            {
-                SetStatusText("Load canceled.");
-            }
-            catch (Exception ex)
-            {
-                ShowError("Load", ex, async () => await LoadDataAsync());
-            }
-            finally
-            {
-                _isLoading = false;
-                _hasLoadedOnce = true;
-                SetBusy(false);
-            }
-        }
-
-        private void TryBuildAutoColumns(DataGridView grid)
-        {
-            if (_typedController == null) return;
-            var dtoType = _typedController.DtoType;
-            if (dtoType == null) return;
-
-            List<GeneratedGridColumn> meta;
-            if (!_autoColumnCache.TryGetValue(dtoType, out meta))
-            {
-                meta = BuildColumnMetadata(dtoType);
-                _autoColumnCache[dtoType] = meta;
-            }
-
-            foreach (var m in meta.OrderBy(m => m.Order))
-            {
-                var col = new DataGridViewTextBoxColumn
-                {
-                    Name = m.Property,
-                    DataPropertyName = m.Property,
-                    HeaderText = m.Header,
-                    Width = m.Width,
-                    ReadOnly = m.ReadOnly,
-                    Visible = !m.Hidden,
-                    AutoSizeMode = m.Fill
-                        ? DataGridViewAutoSizeColumnMode.Fill
-                        : DataGridViewAutoSizeColumnMode.None
-                };
-                grid.Columns.Add(col);
-            }
-        }
-
-        private List<GeneratedGridColumn> BuildColumnMetadata(Type dtoType)
-        {
-            var list = new List<GeneratedGridColumn>();
-
-            // Prefer properties explicitly decorated.
-            var decorated = dtoType
-                .GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                .Select(p => new
-                {
-                    Prop = p,
-                    Attr = p.GetCustomAttribute<GridColumnAttribute>(inherit: true)
-                })
-                .Where(x => x.Attr != null)
-                .ToList();
-
-            if (decorated.Count > 0)
-            {
-                foreach (var d in decorated)
-                {
-                    list.Add(new GeneratedGridColumn
-                    {
-                        Property = d.Prop.Name,
-                        Header = string.IsNullOrWhiteSpace(d.Attr.Header) ? d.Prop.Name : d.Attr.Header,
-                        Order = d.Attr.Order,
-                        Width = d.Attr.Width <= 0 ? 100 : d.Attr.Width,
-                        Fill = d.Attr.Fill,
-                        Hidden = d.Attr.Hidden,
-                        ReadOnly = d.Attr.ReadOnly
-                    });
-                }
-                return list;
-            }
-
-            // If no attributes present, fall back to a simple heuristic (skip complex/reference types except string)
-            var simpleProps = dtoType
-                .GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                .Where(p =>
-                    p.CanRead &&
-                    (p.PropertyType.IsValueType || p.PropertyType == typeof(string)))
-                .ToList();
-
-            int order = 0;
-            foreach (var p in simpleProps)
-            {
-                list.Add(new GeneratedGridColumn
-                {
-                    Property = p.Name,
-                    Header = p.Name,
-                    Order = order++,
-                    Width = 100,
-                    Fill = false,
-                    Hidden = string.Equals(p.Name, "ID", StringComparison.OrdinalIgnoreCase) ? false : false,
-                    ReadOnly = true
-                });
-            }
-
-            return list;
-        }
-
-        private void WireGridSelectionEventsOnce()
-        {
-            if (_gridEventsWired) return;
-            var grid = Grid;
-            if (grid == null) return;
-
-            grid.SelectionChanged += (s, e) =>
-            {
-                try
-                {
-                    int rowIndex = -1;
-
-                    if (grid.SelectedRows != null && grid.SelectedRows.Count > 0 && !grid.SelectedRows[0].IsNewRow)
-                        rowIndex = grid.SelectedRows[0].Index;
-                    else if (grid.CurrentCell != null && !grid.Rows[grid.CurrentCell.RowIndex].IsNewRow)
-                        rowIndex = grid.CurrentCell.RowIndex;
-
-                    if (rowIndex >= 0)
-                        PopulateFormFieldsFromGrid(rowIndex);
-                }
-                catch
-                {
-                    // ignore transient selection errors
-                }
-            };
-            _gridEventsWired = true;
-        }
-
-        protected void WireGridDataErrorOnce()
-        {
-            if (_gridDataErrorWired) return;
-            var grid = Grid;
-            if (grid == null) return;
-
-            grid.DataError += (s, e) =>
-            {
-                e.ThrowException = false;
-                SetStatusText("Display error in grid data.");
-                if (StatusStripLabel != null && e.Exception != null)
-                    StatusStripLabel.ToolTipText = e.Exception.Message;
-            };
-            _gridDataErrorWired = true;
-        }
-
-        protected void NavigateToRow(int rowIndex)
-        {
-            if (Grid == null) return;
-            if (rowIndex < 0 || rowIndex >= Grid.Rows.Count) return;
-
-            var row = Grid.Rows[rowIndex];
-            if (row.IsNewRow) return;
-
-            Grid.ClearSelection();
-            row.Selected = true;
-
-            var firstVisibleCell = row.Cells.Cast<DataGridViewCell>().FirstOrDefault(c => c.Visible);
-            if (firstVisibleCell != null)
-                Grid.CurrentCell = firstVisibleCell;
-
-            Grid.FirstDisplayedScrollingRowIndex = rowIndex;
-            PopulateFormFieldsFromGrid(rowIndex);
-        }
-
-        protected bool NavigateToEntity(Predicate<IEntityWithId> match)
-        {
-            if (match == null || _items == null || _items.Count == 0) return false;
-            for (int i = 0; i < _items.Count; i++)
-            {
-                if (match(_items[i]))
-                {
-                    NavigateToRow(i);
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        protected async Task SaveOrUpdateAsync()
-        {
-            if (_isMutating) return;
-            if (Grid == null) return;
-            _isMutating = true;
-            SetBusy(true, "Saving...");
-            try
-            {
-                await OnBeforeSaveAsync();
-
-                if (IsTyped)
-                {
-                    var currentObj = _bindingSource?.Current;
-                    var model = currentObj ?? _typedController.CreateNew();
-
-                    foreach (var b in _textBindings)
-                        if (b.Box != null)
-                            b.Setter((IEntityWithId)model, b.Box.Text);
-
-                    // VALIDATION
-                    var validationMessage = ValidateBeforeSave((IEntityWithId)model);
-                    if (!string.IsNullOrEmpty(validationMessage))
-                    {
-                        if (ShowValidationErrorsOnlyInValidationTextBox)
-                        {
-                            SetStatusText("Validation failed, record not saved!");
-                        }
-                        else
-                        {
-                            SetStatusText("Validation failed: " + validationMessage);
-                        }
-                        return;
-                    }
-
-                    var saved = await _typedController.SaveAsync(model, _cts.Token);
-                    SetStatusText($"Saved (ID={_typedController.GetId(saved)})");
-
-                    ErrorDisplayControl.Text = ""; // Clear error messages
-                    
-                    await OnAfterSaveAsync((IEntityWithId)saved);
-                    await LoadDataAsync();
-                    ClearErrorDisplay();
-                    ClearFormFields();
-                    return;
-                }
-
-                // ... legacy path (add validation there too) ...
-                var current = GetSelectedEntity();
-                var dto = BuildModelFromForm(current);
-
-                var legacyValidation = ValidateBeforeSave(dto);
-                if (!string.IsNullOrEmpty(legacyValidation))
-                {
-                    SetStatusText("Validation failed: " + legacyValidation);
-                    return;
-                }
-
-                var savedLegacy = await _service.UpsertAsync(dto, _cts.Token);
-                SetStatusText($"Saved (ID={GetEntityId(savedLegacy)})");
-                await OnAfterSaveAsync(savedLegacy);
-                await LoadDataAsync();
-                ClearFormFields();
-            }
-            catch (OperationCanceledException)
-            {
-                SetStatusText("Save canceled.");
-                myErrorProvider.Clear();
-            }
-            catch (Exception ex)
-            {
-                SetStatusText("Save failed: " + ex.Message);
-            }
-            finally
-            {
-                _isMutating = false;
-                SetBusy(false);
-            }
-        }
-
-        protected async Task DeleteSelectedAsync()
-        {
-            if (_isMutating) return;
-            if (Grid == null) return;
-            _isMutating = true;
-            SetBusy(true, "Deleting...");
-            try
-            {
-                if (IsTyped)
-                {
-                    var entity = _bindingSource?.Current;
-                    if (entity == null)
-                    {
-                        MessageBox.Show(this, "Select a row to delete.", "Delete", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        return;
-                    }
-                    var id = _typedController.GetId(entity);
-                    if (ConfirmDelete(GetDeleteConfirmationText((IEntityWithId)entity)) != DialogResult.Yes)
-                        return;
-
-                    await OnBeforeDeleteAsync(id, (IEntityWithId)entity);
-                    var ok = await _typedController.DeleteAsync(id, _cts.Token);
-                    SetStatusText(ok ? $"Deleted (ID={id})" : $"Delete failed (ID={id})");
-                    await OnAfterDeleteAsync(id, ok);
-                    await LoadDataAsync();
-                    return;
-                }
-
-                // Legacy path
-                var entityLegacy = GetSelectedEntity();
-                if (entityLegacy == null)
-                {
-                    MessageBox.Show(this, "Select a row to delete.", "Delete", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
-
-                var legacyId = GetEntityId(entityLegacy);
-                if (ConfirmDelete(GetDeleteConfirmationText(entityLegacy)) != DialogResult.Yes)
-                    return;
-
-                await OnBeforeDeleteAsync(legacyId, entityLegacy);
-                var okLegacy = await _service.DeleteAsync(legacyId, _cts.Token);
-                SetStatusText(okLegacy ? $"Deleted (ID={legacyId})" : $"Delete failed (ID={legacyId})");
-                await OnAfterDeleteAsync(legacyId, okLegacy);
-                await LoadDataAsync();
-            }
-            catch (OperationCanceledException)
-            {
-                SetStatusText("Delete canceled.");
-            }
-            catch (Exception ex)
-            {
-                SetStatusText("Delete failed: " + ex.Message);
-            }
-            finally
-            {
-                _isMutating = false;
-                SetBusy(false);
-            }
-        }
-
-        protected void ClearFormFields()
-        {
-            ClearFormFieldsCore();
-            if (Grid != null)
-                Grid.ClearSelection();
-        }
-
-        protected void ClearFormFieldsCore()
-        {
-            foreach (var b in _textBindings)
-                if (b.Box != null)
-                    b.Box.Text = string.Empty;
-        }
-
-        protected void GoFirst()
-        {
-            if (Grid == null) return;
-            for (int i = 0; i < Grid.Rows.Count; i++)
-            {
-                if (!Grid.Rows[i].IsNewRow)
-                {
-                    NavigateToRow(i);
-                    SetStatusText("First record.");
-                    return;
-                }
-            }
-            SetStatusText("No records.");
-        }
-
-        protected void GoLast()
-        {
-            if (Grid == null) return;
-            for (int i = Grid.Rows.Count - 1; i >= 0; i--)
-            {
-                if (!Grid.Rows[i].IsNewRow)
-                {
-                    NavigateToRow(i);
-                    SetStatusText("Last record.");
-                    return;
-                }
-            }
-            SetStatusText("No records.");
-        }
-
-        protected void GoPrevious()
-        {
-            if (Grid == null) return;
-            var rows = Grid.Rows;
-            int firstIndex = -1;
-            for (int i = 0; i < rows.Count; i++)
-            {
-                if (!rows[i].IsNewRow) { firstIndex = i; break; }
-            }
-            if (firstIndex == -1) { SetStatusText("No records."); return; }
-
-            int currentIndex = Grid.SelectedRows.Count > 0 ? Grid.SelectedRows[0].Index :
-                               Grid.CurrentCell != null ? Grid.CurrentCell.RowIndex : firstIndex;
-
-            if (currentIndex <= firstIndex)
-            {
-                NavigateToRow(firstIndex);
-                SetStatusText("Already at first.");
-                return;
-            }
-
-            for (int i = currentIndex - 1; i >= firstIndex; i--)
-            {
-                if (!rows[i].IsNewRow) { NavigateToRow(i); SetStatusText("Previous record."); return; }
-            }
-            NavigateToRow(firstIndex);
-        }
-
-        protected void GoNext()
-        {
-            if (Grid == null) return;
-            var rows = Grid.Rows;
-
-            int lastIndex = -1;
-            for (int i = rows.Count - 1; i >= 0; i--)
-            {
-                if (!rows[i].IsNewRow) { lastIndex = i; break; }
-            }
-            if (lastIndex == -1) { SetStatusText("No records."); return; }
-
-            int currentIndex = Grid.SelectedRows.Count > 0 ? Grid.SelectedRows[0].Index :
-                               Grid.CurrentCell != null ? Grid.CurrentCell.RowIndex : -1;
-
-            if (currentIndex == -1)
-            {
-                for (int i = 0; i < rows.Count; i++)
-                {
-                    if (!rows[i].IsNewRow) { currentIndex = i; break; }
-                }
-                if (currentIndex == -1) { SetStatusText("No records."); return; }
-            }
-
-            if (currentIndex >= lastIndex)
-            {
-                NavigateToRow(lastIndex);
-                SetStatusText("Already at last.");
-                return;
-            }
-
-            for (int i = currentIndex + 1; i <= lastIndex; i++)
-            {
-                if (!rows[i].IsNewRow) { NavigateToRow(i); SetStatusText("Next record."); return; }
-            }
-            NavigateToRow(lastIndex);
-        }
-
-        protected override void OnShown(EventArgs e)
-        {
-            base.OnShown(e);
-            if (IsReallyDesignTime) return;
-            if (AutoLoadOnShown && !_hasLoadedOnce)
-            {
-                var _ = LoadDataAsync();
-            }
-        }
-
-        protected override void OnFormClosing(FormClosingEventArgs e)
-        {
-            try { _cts.Cancel(); } catch { }
-            base.OnFormClosing(e);
-        }
-
-        // -------------------- Shared design-time helpers --------------------
-
-        protected bool IsReallyDesignTime
-        {
-            get
-            {
-                // 1. LicenseManager (works in most cases)
-                if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
-                    return true;
-
-                // 2. DesignMode property (works after initialization)
-                if (this.DesignMode)
-                    return true;
-
-                // 3. Site.DesignMode (for controls in containers)
-                if (this.Site != null && this.Site.DesignMode)
-                    return true;
-
-                return false;
-            }
-        }
-
-        protected static bool IsDesignTime()
-        {
-            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
-                return true;
-
-            try
-            {
-                var proc = Process.GetCurrentProcess();
-                if (proc != null && proc.ProcessName.Equals("devenv", StringComparison.OrdinalIgnoreCase))
-                    return true;
-
-                //// Heuristic: VS designer assemblies loaded
-                //if (AppDomain.CurrentDomain.GetAssemblies()
-                //      .Any(a => a.FullName.StartsWith("Microsoft.VisualStudio", StringComparison.OrdinalIgnoreCase)))
-                //    return true;
-            }
-            catch { /* swallow – never block design mode */ }
-
-            return false;
-        }
-
-        // Add these to BaseGridCrudForm
-
-        protected virtual void OnAfterLanguageApplied(string code)
-        {
-            ControlLocalizer.ApplyRightToLeftLayout(this, code);
-            StatusStripLabel.Text = $"Language applied: {code}";
-        }
-
-        protected virtual ILocalizationService ResolveLocalizationService()
-            => new LocalizationService(LanguageComboBox?.SelectedItem is LanguageUiHelper.LanguageItem li ? li.Code : "en-US", this.GetType().Name);
-
-        protected virtual IUiLocalizationManager ResolveUiLocalizationManager()
-            => new InMemoryUiLocalizationManager();
-
-        // Add these properties to support the moved code
-        protected virtual ILocalizationService LocalizationService { get; private set; }
-        protected virtual IUiLocalizationManager UiLocalizationManager { get; private set; }
-
-
-        /// <summary>
-        /// Returns a design-time safe CRUD service. At design-time (or if the runtime factory throws),
-        /// a no-op DesignTimeCrudService is returned. At runtime, the provided factory is invoked.
-        /// </summary>
-        protected static ICrudService<IEntityWithId> GetCrudServiceSafe(Func<ICrudService<IEntityWithId>> runtimeFactory)
-        {
-            if (IsDesignTime())
-                return new DesignTimeCrudService();
-
-            if (runtimeFactory == null)
-                return new DesignTimeCrudService();
-
-            try
-            {
-                var svc = runtimeFactory();
-                return svc ?? new DesignTimeCrudService();
-            }
-            catch
-            {
-                return new DesignTimeCrudService();
-            }
-        }
-
-        private void InitializeComponent()
-        {
-            this.SuspendLayout();
-            // 
-            // BaseGridCrudForm
-            // 
-            this.ClientSize = new System.Drawing.Size(680, 307);
-            this.Name = "BaseGridCrudForm";
-            this.ResumeLayout(false);
-
-        }
-
-        private void Grid_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            var grid = sender as DataGridView;
-            if (grid == null) return;
-
-            var column = grid.Columns[e.ColumnIndex];
-            var propertyName = column.DataPropertyName;
-
-            if (IsTyped)
-            {
-                bool ascending = grid.SortOrder != SortOrder.Ascending;
-                var sorted = _typedController.Sort(propertyName, ascending);
-
-                _typedBindingList.RaiseListChangedEvents = false;
-                try
-                {
-                    _typedBindingList.Clear();
-                    foreach (var o in sorted) _typedBindingList.Add(o);
-                }
-                finally
-                {
-                    _typedBindingList.RaiseListChangedEvents = true;
-                    _bindingSource.ResetBindings(false);
-                }
-                return;
-            }
-
-            // Legacy path
-            // Toggle sort direction
-            bool asc = grid.SortOrder != SortOrder.Ascending;
-            var sortedLegacy = asc
-                ? _items.OrderBy(x => x.GetType().GetProperty(propertyName)?.GetValue(x, null)).ToList()
-                : _items.OrderByDescending(x => x.GetType().GetProperty(propertyName)?.GetValue(x, null)).ToList();
-
-            _items.Clear();
-            foreach (var item in sortedLegacy)
-                _items.Add(item);
-
-            grid.Refresh();
-        }
-
-        private void ApplySearch()
-        {
-            if (_searchBox == null) return;
-            var query = _searchBox.Text?.Trim();
-
-            if (IsTyped)
-            {
-                var filtered = _typedController.Filter(query);
-                _typedBindingList.RaiseListChangedEvents = false;
-                try
-                {
-                    _typedBindingList.Clear();
-                    foreach (var o in filtered) _typedBindingList.Add(o);
-                }
-                finally
-                {
-                    _typedBindingList.RaiseListChangedEvents = true;
-                    _bindingSource.ResetBindings(false);
-                }
-                return;
-            }
-
-            // Legacy path
-            if (string.IsNullOrEmpty(query))
-            {
-                _items.Clear();
-                foreach (var item in _allItems)
-                    _items.Add(item);
-                return;
-            }
-
-            var filteredLegacy = _allItems.Where(x =>
-                x.GetType().GetProperties()
-                    .Any(p =>
-                    {
-                        var v = p.GetValue(x);
-                        return v != null &&
-                               v.ToString().IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0;
-                    })).ToList();
-
-            _items.Clear();
-            foreach (var item in filteredLegacy)
-                _items.Add(item);
-        }
-
-        protected void SetErrorDisplay(string message)
-        {
-            if (ErrorDisplayControl == null) return;
-            if (ErrorDisplayControl is Label lbl)
-                lbl.Text = message ?? "";
-            else if (ErrorDisplayControl is TextBox txt)
-                txt.Text = message ?? "";
-        }
-
-        protected void ClearErrorDisplay()
-        {
-            SetErrorDisplay("");
-        }
-
-        protected bool AddValidationError(List<string> errors, Control control, string message)
-        {
-            SetFieldError(control, message);
-            errors.Add(message);
-            return false;
-        }
-
-        protected void ShowValidationErrors(IList<string> errors)
-        {
-            if (errors.Count > 0)
-            {
-                ErrorDisplayControl.Text = string.Join(Environment.NewLine, errors);
-            }
-            else
-            {
-                ErrorDisplayControl.Text = ""; // Clear previous errors
-            }
-
-        }
     }
 }

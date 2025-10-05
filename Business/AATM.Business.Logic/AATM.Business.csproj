@@ -67,7 +67,9 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Logic\Validators\TranslationDtoValidator.cs" />
+    <Compile Include="Logic\ValidatorRules\TranslationDtoValidationRules.cs" />
+    <Compile Include="Logic\Validators\DtoValidator.cs" />
+    <Compile Include="Logic\Validators\ValidationError.cs" />
     <Compile Include="My Project\MyNamespace.Static.1.Designer.cs" />
     <Compile Include="My Project\MyNamespace.Static.2.Designer.cs" />
     <Compile Include="My Project\MyNamespace.Static.3.Designer.cs" />
