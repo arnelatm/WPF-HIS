@@ -12,16 +12,19 @@ namespace AATM.App.TableManager
         {
             InitializeComponent();
 
-            InitializeErrorHandling(txtErrors); 
-
-            InitializeTypedController<TranslationDto>(() => new TranslationCrudService());
-
-            AutoBindFormFields(typeof(TranslationDto));
-
-            StructuredValidator = e => DtoValidator.Validate((TranslationDto)e, TranslationDtoValidationRules.Rules);
+            // Fluent configuration (designer-safe: method-level generics only)
+            ForDto<TranslationDto>()
+                .Service(() => new TranslationCrudService())
+                .Validator(d => DtoValidator.Validate(d, TranslationDtoValidationRules.Rules))
+                .ErrorDisplay(txtErrors)      // assumes a TextBox or Label named txtErrors exists on the form
+                .AutoBind(true)               // auto bind fields annotated with FieldControlAttribute
+                .Apply();
         }
 
-        protected override DataGridView Grid => _dataGridView;
-
+        // The grid used by BaseGridCrudForm (designer must define _dataGridView)
+        protected override DataGridView Grid
+        {
+            get { return _dataGridView; }
+        }       
     }
-}
+}       
