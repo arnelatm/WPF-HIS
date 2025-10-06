@@ -25,6 +25,7 @@ namespace AATM.App.TableManager
         protected override DataGridView Grid
         {
             get { return _dataGridView; }
-        }       
+        }
+
     }
 }       

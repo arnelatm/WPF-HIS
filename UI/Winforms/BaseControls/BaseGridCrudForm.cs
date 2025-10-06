@@ -7,29 +7,20 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing;                  // Added for colors (watermark)
 using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Http;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AATM.UI.Winforms.BaseControls
 {
-    /// <summary>
-    /// Base WinForms CRUD form that supports:
-    /// - Legacy (untyped) CRUD via <see cref="ICrudService{IEntityWithId}"/>
-    /// - Typed runtime configuration (designer-safe) via <see cref="ConfigureCrudForm{TDto}"/> or fluent <see cref="ForDto{TDto}"/>
-    /// - Optional attribute-based auto configuration (<see cref="CrudFormAttribute"/>)
-    /// - Auto-binding of text fields via <see cref="FieldControlAttribute"/>
-    /// - Auto column generation via <see cref="GridColumnAttribute"/>
-    /// - Validation (structured + legacy) and status/error reporting
-    /// - Navigator (record navigation, search, refresh, language, CRUD buttons)
-    /// - Localization integration
-    /// </summary>
     [DesignTimeVisible(false)]
-    public class BaseGridCrudForm : Form // IEntityWithId constraint at Runtime
+    public class BaseGridCrudForm : Form
     {
         #region Private UI fields / state
 
@@ -57,8 +48,27 @@ namespace AATM.UI.Winforms.BaseControls
         private bool _isMutating;
         private LanguageUiHelper _langHelper;
         private BindingNavigator _navigator;
+
+        // Original search controls
         private ToolStripTextBox _searchBox;
         private ToolStripButton _searchButton;
+
+        // --- Added search enhancement controls / state (features 1–7)
+        private ToolStripButton _searchClearButton;
+        private ToolStripDropDownButton _searchColumnsButton;
+        private ToolStripButton _searchLiveToggleButton;
+        private ToolStripDropDownButton _searchModeButton;
+        private enum SearchMode { Normal, Regex }
+        private SearchMode _searchMode = SearchMode.Normal;
+        private readonly HashSet<string> _searchSelectedColumns = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        private System.Windows.Forms.Timer _searchDebounceTimer;
+        private bool _liveSearchEnabled = true;
+        private bool _isWatermarkActive;
+        private bool _suppressProgrammaticSearch;
+        private const string SearchWatermark = "Type to search...";
+        private const int SearchDebounceMs = 350;
+        // -----------------------------------------------
+
         private EventHandler _statusRetryClickHandler;
         private BindingList<object> _typedBindingList;
         private IGridCrudController _typedController;
@@ -66,36 +76,22 @@ namespace AATM.UI.Winforms.BaseControls
         #endregion
 
         #region Configuration state
-
         private bool _crudConfigured;
         private Type _configuredDtoType;
-
-        /// <summary>
-        /// Indicates whether typed CRUD has been configured for this instance.
-        /// </summary>
         protected bool IsCrudConfigured { get { return _crudConfigured; } }
+        #endregion
 
-        /// <summary>
-        /// Configuration container used to set up typed CRUD behavior without a generic base class.
-        /// </summary>
+        #region CrudFormConfig / Fluent (unchanged)
         protected sealed class CrudFormConfig<TDto>
             where TDto : class, IEntityWithId, new()
         {
-            /// <summary>Factory that returns a concrete <see cref="ICrudService{TDto}"/> instance.</summary>
             public Func<ICrudService<TDto>> ServiceFactory { get; set; }
-            /// <summary>Structured validator delegate returning zero or more <see cref="ValidationError"/>.</summary>
             public Func<TDto, IEnumerable<ValidationError>> Validator { get; set; }
-            /// <summary>Control (Label/TextBox/etc.) to display aggregated validation errors.</summary>
             public Control ErrorDisplayControl { get; set; }
-            /// <summary>If true, auto-binds <see cref="TextBox"/> controls discovered via <see cref="FieldControlAttribute"/>.</summary>
             public bool AutoBindFields { get; set; } = true;
             internal bool Applied;
         }
 
-        /// <summary>
-        /// One-shot configuration entry for typed DTO support (designer-safe).
-        /// Must be called after <c>InitializeComponent()</c>. Enforces single application.
-        /// </summary>
         protected void ConfigureCrudForm<TDto>(CrudFormConfig<TDto> cfg)
             where TDto : class, IEntityWithId, new()
         {
@@ -118,7 +114,7 @@ namespace AATM.UI.Winforms.BaseControls
                 AutoBindFormFields(typeof(TDto));
 
             if (cfg.Validator != null)
-                StructuredValidator = delegate (IEntityWithId e) { return cfg.Validator((TDto)e); };
+                StructuredValidator = e => cfg.Validator((TDto)e);
 
 #if DEBUG
             if (_typedController != null && _typedController.DtoType != _configuredDtoType)
@@ -126,32 +122,18 @@ namespace AATM.UI.Winforms.BaseControls
 #endif
         }
 
-        /// <summary>
-        /// Ensures that if a typed controller is present, configuration was properly applied.
-        /// Throws if the contract is violated (debugging safety).
-        /// </summary>
         protected void EnsureCrudConfiguredIfTyped()
         {
             if (_typedController != null && !_crudConfigured)
                 throw new InvalidOperationException("Typed controller initialized without ConfigureCrudForm<> call.");
         }
 
-        #endregion
-
-        #region Fluent configuration
-
-        /// <summary>
-        /// Fluent builder entry point for typed configuration (designer-safe generics).
-        /// </summary>
         public CrudFormFluent<TDto> ForDto<TDto>()
             where TDto : class, IEntityWithId, new()
         {
             return new CrudFormFluent<TDto>(this);
         }
 
-        /// <summary>
-        /// Fluent typed configuration wrapper around <see cref="ConfigureCrudForm{TDto}"/>.
-        /// </summary>
         public sealed class CrudFormFluent<TDto>
             where TDto : class, IEntityWithId, new()
         {
@@ -159,36 +141,10 @@ namespace AATM.UI.Winforms.BaseControls
             private readonly CrudFormConfig<TDto> _cfg = new CrudFormConfig<TDto>();
             private bool _applied;
             internal CrudFormFluent(BaseGridCrudForm form) { _form = form; }
-
-            /// <summary>Sets a service factory.</summary>
-            public CrudFormFluent<TDto> Service(Func<ICrudService<TDto>> factory)
-            {
-                _cfg.ServiceFactory = factory;
-                return this;
-            }
-
-            /// <summary>Sets a structured validator.</summary>
-            public CrudFormFluent<TDto> Validator(Func<TDto, IEnumerable<ValidationError>> validator)
-            {
-                _cfg.Validator = validator;
-                return this;
-            }
-
-            /// <summary>Sets the error display control to show validation messages.</summary>
-            public CrudFormFluent<TDto> ErrorDisplay(Control control)
-            {
-                _cfg.ErrorDisplayControl = control;
-                return this;
-            }
-
-            /// <summary>Enables/disables auto field binding.</summary>
-            public CrudFormFluent<TDto> AutoBind(bool enabled = true)
-            {
-                _cfg.AutoBindFields = enabled;
-                return this;
-            }
-
-            /// <summary>Applies the configuration (one-shot).</summary>
+            public CrudFormFluent<TDto> Service(Func<ICrudService<TDto>> factory) { _cfg.ServiceFactory = factory; return this; }
+            public CrudFormFluent<TDto> Validator(Func<TDto, IEnumerable<ValidationError>> validator) { _cfg.Validator = validator; return this; }
+            public CrudFormFluent<TDto> ErrorDisplay(Control control) { _cfg.ErrorDisplayControl = control; return this; }
+            public CrudFormFluent<TDto> AutoBind(bool enabled = true) { _cfg.AutoBindFields = enabled; return this; }
             public void Apply()
             {
                 if (_applied) throw new InvalidOperationException("CrudFormFluent already applied.");
@@ -196,18 +152,12 @@ namespace AATM.UI.Winforms.BaseControls
                 _applied = true;
             }
         }
-
         #endregion
 
-        #region Attribute auto-config
-
+        #region Attribute auto-config (unchanged)
         private static readonly Dictionary<Type, CrudFormAttribute> _crudAttrCache =
             new Dictionary<Type, CrudFormAttribute>();
 
-        /// <summary>
-        /// Automatically configures the form for <typeparamref name="TDto"/> using <see cref="CrudFormAttribute"/> metadata.
-        /// Requires that the DTO is decorated with <see cref="CrudFormAttribute"/>.
-        /// </summary>
         protected void AutoConfigureFromDto<TDto>()
             where TDto : class, IEntityWithId, new()
         {
@@ -227,7 +177,7 @@ namespace AATM.UI.Winforms.BaseControls
                 throw new InvalidOperationException("ServiceType requires public parameterless constructor.");
 
             Func<ICrudService<TDto>> serviceFactory =
-                delegate { return (ICrudService<TDto>)Activator.CreateInstance(attr.ServiceType); };
+                () => (ICrudService<TDto>)Activator.CreateInstance(attr.ServiceType);
 
             Func<TDto, IEnumerable<ValidationError>> validator = null;
             if (attr.ValidatorRulesType != null)
@@ -239,18 +189,14 @@ namespace AATM.UI.Winforms.BaseControls
                 if (rulesObj == null)
                     throw new InvalidOperationException("Rules not found or null on " + attr.ValidatorRulesType.FullName);
 
-                // Flexible reflection-based validation invocation
                 validator = dto =>
                 {
-                    if (rulesObj == null)
-                        return Enumerable.Empty<ValidationError>();
-
+                    if (rulesObj == null) return Enumerable.Empty<ValidationError>();
                     var dtoValidatorType = typeof(DtoValidator);
                     var candidates = dtoValidatorType
                         .GetMethods(BindingFlags.Public | BindingFlags.Static)
                         .Where(m => m.Name == "Validate" && m.GetParameters().Length == 2)
                         .ToList();
-
                     MethodInfo selected = null;
                     foreach (var m in candidates)
                     {
@@ -259,16 +205,11 @@ namespace AATM.UI.Winforms.BaseControls
                         {
                             if (m.GetGenericArguments().Length != 1)
                                 continue;
-                            try { closed = m.MakeGenericMethod(typeof(TDto)); }
-                            catch { continue; }
+                            try { closed = m.MakeGenericMethod(typeof(TDto)); } catch { continue; }
                         }
-
                         var pars = closed.GetParameters();
-                        if (!pars[0].ParameterType.IsAssignableFrom(typeof(TDto)))
-                            continue;
-                        if (rulesObj != null && !pars[1].ParameterType.IsInstanceOfType(rulesObj))
-                            continue;
-
+                        if (!pars[0].ParameterType.IsAssignableFrom(typeof(TDto))) continue;
+                        if (rulesObj != null && !pars[1].ParameterType.IsInstanceOfType(rulesObj)) continue;
                         selected = closed;
                         break;
                     }
@@ -282,7 +223,6 @@ namespace AATM.UI.Winforms.BaseControls
                         }
                         catch { return Enumerable.Empty<ValidationError>(); }
                     }
-
 #if DEBUG
                     Debug.WriteLine($"DtoValidator.Validate method not found for DTO '{typeof(TDto).Name}' and rules '{rulesObj.GetType().FullName}'.");
 #endif
@@ -308,19 +248,10 @@ namespace AATM.UI.Winforms.BaseControls
             };
             ConfigureCrudForm(cfg);
         }
-
         #endregion
 
         #region Constructors
-
-        /// <summary>
-        /// Design-time safe constructor (uses <see cref="DesignTimeCrudService"/>).
-        /// </summary>
         protected BaseGridCrudForm() : this(() => new DesignTimeCrudService()) { }
-
-        /// <summary>
-        /// Constructor allowing runtime injection of a CRUD service factory.
-        /// </summary>
         protected BaseGridCrudForm(Func<ICrudService<IEntityWithId>> serviceFactory)
         {
             if (IsDesignTime())
@@ -331,28 +262,18 @@ namespace AATM.UI.Winforms.BaseControls
             InitializeStatusStripAndLabel();
             InitializeNavigatorIfNeeded();
         }
-
-        /// <summary>
-        /// Constructor that also records a logical module name (used by localization/status messages).
-        /// </summary>
         protected BaseGridCrudForm(string callingModule) : this(() => new DesignTimeCrudService())
         {
             moduleName = callingModule;
         }
-
-        /// <summary>
-        /// Constructor accepting an already constructed legacy (untyped) CRUD service.
-        /// </summary>
         protected BaseGridCrudForm(ICrudService<IEntityWithId> service)
         {
             _service = service ?? throw new ArgumentNullException("service");
             InitializeNavigatorIfNeeded();
         }
-
         #endregion
 
-        #region Feature flags (override points)
-
+        #region Feature flags
         protected virtual bool AutoGenerateColumnsFromAttributes { get { return true; } }
         protected virtual bool AutoLoadOnShown { get { return true; } }
         protected virtual bool AutoWireClearErrors { get { return true; } }
@@ -364,20 +285,12 @@ namespace AATM.UI.Winforms.BaseControls
         protected virtual bool ShowRefreshButton { get { return true; } }
         protected virtual bool ShowValidationErrorsOnlyInValidationTextBox { get; set; } = true;
         protected virtual bool UseDefaultNavigator { get { return true; } }
-
         #endregion
 
-        #region Core exposed members (virtual for flexibility)
-
-        /// <summary>Optional aggregated validation/error message output control.</summary>
+        #region Core exposed members
         protected Control ErrorDisplayControl { get; set; }
-
-        /// <summary>DataGridView the form operates on. Override in derived form.</summary>
         protected virtual DataGridView Grid { get { return null; } }
-
-        /// <summary>Underlying <see cref="BindingSource"/> used for grid binding (typed or legacy).</summary>
         protected BindingSource DataBindingSource { get { return _bindingSource; } }
-
         protected ToolStripButton SaveButton { get; private set; }
         protected ToolStripButton DeleteButton { get; private set; }
         protected ToolStripButton RefreshButton { get; private set; }
@@ -395,14 +308,8 @@ namespace AATM.UI.Winforms.BaseControls
         protected virtual ILocalizationService LocalizationService { get; private set; }
         protected virtual IUiLocalizationManager UiLocalizationManager { get; private set; }
         protected string moduleName { get; private set; }
-
-        /// <summary>Structured validator (if configured).</summary>
         protected Func<IEntityWithId, IEnumerable<ValidationError>> StructuredValidator { get; set; }
 
-        /// <summary>
-        /// Enumerates controls disabled while the form is 'busy'.
-        /// Override to add to disable-set (e.g., toolbar, edit panels).
-        /// </summary>
         protected virtual IEnumerable<Control> BusyControls
         {
             get
@@ -411,36 +318,25 @@ namespace AATM.UI.Winforms.BaseControls
             }
         }
 
-        /// <summary>
-        /// Design-time detection (robust: license mode / container design mode).
-        /// </summary>
         protected bool IsReallyDesignTime
         {
             get
             {
                 if (LicenseManager.UsageMode == LicenseUsageMode.Designtime) return true;
-                if (this.DesignMode) return true;
-                if (this.Site != null && this.Site.DesignMode) return true;
+                if (DesignMode) return true;
+                if (Site != null && Site.DesignMode) return true;
                 return false;
             }
         }
-
         #endregion
 
         #region Error handling / initialization
-
-        /// <summary>
-        /// Ensures an <see cref="ErrorProvider"/> exists and optionally sets the display control for aggregate errors.
-        /// </summary>
         protected virtual void InitializeErrorHandling(Control errorDisplayControl = null)
         {
             EnsureErrorProvider();
             ErrorDisplayControl = errorDisplayControl;
         }
 
-        /// <summary>
-        /// Creates a shared <see cref="ErrorProvider"/> if missing (non-blinking).
-        /// </summary>
         protected void EnsureErrorProvider()
         {
             if (myErrorProvider != null) return;
@@ -449,38 +345,24 @@ namespace AATM.UI.Winforms.BaseControls
                 BlinkStyle = ErrorBlinkStyle.NeverBlink,
                 ContainerControl = this
             };
-            Disposed += delegate { try { if (myErrorProvider != null) myErrorProvider.Dispose(); } catch { } };
+            Disposed += delegate { try { myErrorProvider?.Dispose(); } catch { } };
         }
-
         #endregion
 
         #region Typed controller initialization
-
-        /// <summary>
-        /// Initializes the typed CRUD controller (runtime generic) and binds a backing list.
-        /// </summary>
         protected void InitializeTypedController<TDto>(Func<ICrudService<TDto>> factory)
             where TDto : class, IEntityWithId, new()
         {
             if (factory == null) throw new ArgumentNullException("factory");
             _typedController = new GridCrudController<TDto>(factory());
-
             if (_bindingSource == null)
                 _bindingSource = new BindingSource();
-
             _typedBindingList = new BindingList<object>();
             _bindingSource.DataSource = _typedBindingList;
         }
-
         #endregion
 
         #region Auto field binding
-
-        /// <summary>
-        /// Discovers DTO properties decorated with <see cref="FieldControlAttribute"/> and builds
-        /// compiled getter/setter delegates to drive simple text field bindings.
-        /// </summary>
-        /// <param name="dtoType">Runtime DTO type.</param>
         protected void AutoBindFormFields(Type dtoType)
         {
             var properties = dtoType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
@@ -549,9 +431,6 @@ namespace AATM.UI.Winforms.BaseControls
             }
         }
 
-        /// <summary>
-        /// Lazily builds a map of DTO property name -> bound control (using <see cref="FieldControlAttribute"/>).
-        /// </summary>
         protected virtual Dictionary<string, Control> FieldControlMap
         {
             get
@@ -577,15 +456,9 @@ namespace AATM.UI.Winforms.BaseControls
                 return _fieldControlMap;
             }
         }
-
         #endregion
 
         #region Data loading
-
-        /// <summary>
-        /// Loads data either via typed controller (if configured) or via legacy service.
-        /// Wires grid events, builds columns, updates status.
-        /// </summary>
         protected async Task LoadDataAsync()
         {
             EnsureCrudConfiguredIfTyped();
@@ -608,11 +481,9 @@ namespace AATM.UI.Winforms.BaseControls
                     if (_bindingSource == null)
                         _bindingSource = new BindingSource();
 
-                    // Ensure working (filterable) list exists
                     if (_typedBindingList == null)
                         _typedBindingList = new BindingList<object>();
 
-                    // Re-sync working list from controller's live list
                     _typedBindingList.RaiseListChangedEvents = false;
                     _typedBindingList.Clear();
                     foreach (var o in _typedController.LiveUntypedItems)
@@ -624,8 +495,17 @@ namespace AATM.UI.Winforms.BaseControls
                     if (Grid.DataSource != _bindingSource)
                         Grid.DataSource = _bindingSource;
 
+                    // Ensure bindings fully push and establish a current item
+                    _bindingSource.ResetBindings(false);
+                    if (_bindingSource.Count > 0 && _bindingSource.Position < 0)
+                    {
+                        try { _bindingSource.Position = 0; } catch { /* log if desired */ }
+                    }
+
                     WireGridDataErrorOnce();
                     WireGridSelectionEventsOnce();
+
+                    RefreshSearchColumns(); // update column scope options
 
                     SetStatusText("Loaded " + _typedController.LiveUntypedItems.Count + " records.");
                     ClearRetryLink();
@@ -660,6 +540,8 @@ namespace AATM.UI.Winforms.BaseControls
                     Grid.ResumeLayout();
                 }
 
+                RefreshSearchColumns();
+
                 SetStatusText("Loaded " + _items.Count + " records.");
                 ClearRetryLink();
                 GoFirst();
@@ -680,15 +562,9 @@ namespace AATM.UI.Winforms.BaseControls
                 SetBusy(false);
             }
         }
-
         #endregion
 
-        #region Save / Update
-
-        /// <summary>
-        /// Persists the current entity (typed or legacy).
-        /// Performs validation before calling the service.
-        /// </summary>
+        #region Save / Update / Delete (unchanged logic except status)
         protected async Task SaveOrUpdateAsync()
         {
             EnsureCrudConfiguredIfTyped();
@@ -703,7 +579,7 @@ namespace AATM.UI.Winforms.BaseControls
 
                 if (_typedController != null)
                 {
-                    var currentObj = _bindingSource != null ? _bindingSource.Current : null;
+                    var currentObj = SafeCurrent();
                     var model = currentObj ?? _typedController.CreateNew();
 
                     foreach (var b in _textBindings)
@@ -731,7 +607,6 @@ namespace AATM.UI.Winforms.BaseControls
                     return;
                 }
 
-                // Legacy path
                 var current = GetSelectedEntity();
                 var dto = BuildModelFromForm(current);
 
@@ -751,7 +626,7 @@ namespace AATM.UI.Winforms.BaseControls
             catch (OperationCanceledException)
             {
                 SetStatusText("Save canceled.");
-                if (myErrorProvider != null) myErrorProvider.Clear();
+                myErrorProvider?.Clear();
             }
             catch (Exception ex)
             {
@@ -764,13 +639,6 @@ namespace AATM.UI.Winforms.BaseControls
             }
         }
 
-        #endregion
-
-        #region Delete
-
-        /// <summary>
-        /// Deletes the currently selected entity (typed or legacy) after confirmation.
-        /// </summary>
         protected async Task DeleteSelectedAsync()
         {
             EnsureCrudConfiguredIfTyped();
@@ -783,7 +651,7 @@ namespace AATM.UI.Winforms.BaseControls
             {
                 if (_typedController != null)
                 {
-                    var entity = _bindingSource != null ? _bindingSource.Current : null;
+                    var entity = SafeCurrent();
                     if (entity == null)
                     {
                         MessageBox.Show(this, "Select a row to delete.", "Delete",
@@ -833,32 +701,21 @@ namespace AATM.UI.Winforms.BaseControls
                 SetBusy(false);
             }
         }
-
         #endregion
 
         #region Public / model helpers
-
-        /// <summary>
-        /// Returns the current edited entity (built from bound fields if present).
-        /// </summary>
         public IEntityWithId GetEntity()
         {
-            var current = _bindingSource != null ? _bindingSource.Current as IEntityWithId : null;
+            var current = SafeCurrent() as IEntityWithId;
             if (current == null) return _entity;
             return BuildModelFromForm(current);
         }
 
-        /// <summary>
-        /// Loads an existing entity into the form (legacy path only).
-        /// </summary>
         public virtual void LoadEntity(IEntityWithId entity)
         {
             _entity = entity;
         }
 
-        /// <summary>
-        /// Builds a DTO instance from the current text bindings (preserving ID).
-        /// </summary>
         protected IEntityWithId BuildModelFromForm(IEntityWithId current)
         {
             var dto = current ?? Activator.CreateInstance<IEntityWithId>();
@@ -872,15 +729,12 @@ namespace AATM.UI.Winforms.BaseControls
             return dto;
         }
 
-        /// <summary>Clears all bound form fields and deselects grid.</summary>
         protected void ClearFormFields()
         {
             ClearFormFieldsCore();
-            if (Grid != null)
-                Grid.ClearSelection();
+            Grid?.ClearSelection();
         }
 
-        /// <summary>Clears text in bound text boxes (internal step).</summary>
         protected void ClearFormFieldsCore()
         {
             foreach (var b in _textBindings)
@@ -888,27 +742,20 @@ namespace AATM.UI.Winforms.BaseControls
                     b.Box.Text = string.Empty;
         }
 
-        /// <summary>Clears aggregate error display.</summary>
         protected void ClearErrorDisplay()
         {
             SetErrorDisplay("");
         }
 
-        /// <summary>
-        /// Writes a message into the configured <see cref="ErrorDisplayControl"/>.
-        /// </summary>
         protected void SetErrorDisplay(string message)
         {
             if (ErrorDisplayControl == null) return;
-            var lbl = ErrorDisplayControl as Label;
-            if (lbl != null) lbl.Text = message ?? "";
-            var txt = ErrorDisplayControl as TextBox;
-            if (txt != null) txt.Text = message ?? "";
+            if (ErrorDisplayControl is Label lbl)
+                lbl.Text = message ?? "";
+            else if (ErrorDisplayControl is TextBox txt)
+                txt.Text = message ?? "";
         }
 
-        /// <summary>
-        /// Sets (or clears) error text on a specific control using the shared <see cref="ErrorProvider"/>.
-        /// </summary>
         protected void SetFieldError(Control ctl, string message)
         {
             if (InvokeRequired)
@@ -919,21 +766,15 @@ namespace AATM.UI.Winforms.BaseControls
             if (myErrorProvider == null || ctl == null) return;
             myErrorProvider.SetError(ctl, string.IsNullOrWhiteSpace(message) ? string.Empty : message);
         }
-
         #endregion
 
         #region Validation
-
-        /// <summary>
-        /// Runs structured validation (if available) or falls back to <see cref="ValidateBeforeSave"/>.
-        /// Returns null/empty if valid; otherwise a message (or aggregated messages).
-        /// </summary>
         protected virtual string RunValidation(IEntityWithId entity)
         {
             if (StructuredValidator != null && entity != null)
             {
                 EnsureErrorProvider();
-                if (myErrorProvider != null) myErrorProvider.Clear();
+                myErrorProvider?.Clear();
                 ClearErrorDisplay();
 
                 var errors = StructuredValidator(entity);
@@ -941,16 +782,13 @@ namespace AATM.UI.Winforms.BaseControls
                 if (list.Count == 0) return null;
 
                 var messages = new List<string>();
-                for (int i = 0; i < list.Count; i++)
+                foreach (var err in list)
                 {
-                    var err = list[i];
                     if (err == null || string.IsNullOrWhiteSpace(err.Message)) continue;
                     messages.Add(err.Message);
-
                     if (!string.IsNullOrEmpty(err.Property))
                     {
-                        Control ctl;
-                        if (FieldControlMap.TryGetValue(err.Property, out ctl) && ctl != null)
+                        if (FieldControlMap.TryGetValue(err.Property, out var ctl) && ctl != null)
                         {
                             myErrorProvider.SetIconAlignment(ctl, ErrorIconAlignment.MiddleRight);
                             myErrorProvider.SetIconPadding(ctl, 0);
@@ -979,38 +817,25 @@ namespace AATM.UI.Winforms.BaseControls
             return ValidateBeforeSave(entity);
         }
 
-        /// <summary>
-        /// Legacy hook for subclasses (string-based validation). Prefer structured validator.
-        /// </summary>
         protected virtual string ValidateBeforeSave(IEntityWithId entity) { return null; }
 
-        /// <summary>
-        /// Displays aggregated validation errors in the configured error display control.
-        /// </summary>
         protected void ShowValidationErrors(IList<string> errors)
         {
             if (ErrorDisplayControl == null) return;
-            if (errors != null && errors.Count > 0)
-                ErrorDisplayControl.Text = string.Join(Environment.NewLine, errors);
-            else
-                ErrorDisplayControl.Text = "";
+            ErrorDisplayControl.Text = (errors != null && errors.Count > 0)
+                ? string.Join(Environment.NewLine, errors)
+                : "";
         }
-
         #endregion
 
         #region Busy / status / error display
-
-        /// <summary>
-        /// Toggles busy state (disables controls, shows wait cursor and progress bar). Optionally sets status text.
-        /// </summary>
         protected void SetBusy(bool busy, string message = null)
         {
             if (!string.IsNullOrEmpty(message))
                 SetStatusText(message);
 
             try { UseWaitCursor = busy; } catch { }
-            var controls = BusyControls;
-            foreach (var c in controls)
+            foreach (var c in BusyControls)
                 if (c != null) c.Enabled = !busy;
 
             if (StatusProgress != null)
@@ -1020,9 +845,6 @@ namespace AATM.UI.Winforms.BaseControls
             }
         }
 
-        /// <summary>
-        /// Updates status text (StatusStripLabel or custom label) if enabled.
-        /// </summary>
         protected virtual void SetStatusText(string text)
         {
             if (!ShowErrorsInStatusLabel) return;
@@ -1039,9 +861,6 @@ namespace AATM.UI.Winforms.BaseControls
             }
         }
 
-        /// <summary>
-        /// Central error reporting helper (sets status + error display + optional retry link).
-        /// </summary>
         protected void ShowError(string context, Exception ex, Func<Task> retryAsync)
         {
             var friendly = GetFriendlyErrorMessage(ex);
@@ -1085,9 +904,6 @@ namespace AATM.UI.Winforms.BaseControls
             }
         }
 
-        /// <summary>
-        /// Produces user-friendly error messages for known exception types.
-        /// </summary>
         protected virtual string GetFriendlyErrorMessage(Exception ex)
         {
             if (ex == null) return "Unknown error.";
@@ -1097,11 +913,9 @@ namespace AATM.UI.Winforms.BaseControls
             var msg = ex.Message;
             return string.IsNullOrWhiteSpace(msg) ? ex.GetType().Name : msg;
         }
-
         #endregion
 
-        #region Navigation helpers (grid row / entity positioning)
-
+        #region Navigation helpers
         protected bool NavigateToEntity(Predicate<IEntityWithId> match)
         {
             if (match == null || _items == null || _items.Count == 0) return false;
@@ -1116,37 +930,105 @@ namespace AATM.UI.Winforms.BaseControls
             return false;
         }
 
-        /// <summary>
-        /// Moves selection to a row by index (ignores new-row placeholder).
-        /// </summary>
+        // Replace existing NavigateToRow with this hardened version.
         protected void NavigateToRow(int rowIndex)
         {
-            if (Grid == null) return;
-            if (rowIndex < 0 || rowIndex >= Grid.Rows.Count) return;
+            var grid = Grid;
+            if (grid == null) return;
 
-            var row = Grid.Rows[rowIndex];
-            if (row.IsNewRow) return;
+            // Abort if a load/filter just cleared rows
+            if (rowIndex < 0 || rowIndex >= grid.Rows.Count) return;
 
-            Grid.ClearSelection();
+            var row = grid.Rows[rowIndex];
+            if (row == null || row.IsNewRow) return;
+
+            // If the BindingSource is data source ensure its position is coherent
+            if (_bindingSource != null && grid.DataSource == _bindingSource)
+            {
+                int count = _bindingSource.Count;
+                if (count == 0)
+                {
+                    // Nothing to navigate
+                    return;
+                }
+                if (rowIndex >= count)
+                {
+                    // Underlying list shrank; clamp or bail
+                    rowIndex = Math.Min(count - 1, grid.Rows.Count - 1);
+                    if (rowIndex < 0) return;
+                    row = grid.Rows[rowIndex];
+                    if (row.IsNewRow) return;
+                }
+
+                if (_bindingSource.Position != rowIndex)
+                {
+                    try { _bindingSource.Position = rowIndex; }
+                    catch { /* ignore – will re-validate below */ }
+                }
+            }
+
+            // Reconfirm after possible position adjustment
+            if (rowIndex < 0 || rowIndex >= grid.Rows.Count) return;
+
+            grid.ClearSelection();
             row.Selected = true;
 
             DataGridViewCell firstVisibleCell = null;
             foreach (DataGridViewCell c in row.Cells)
-                if (c.Visible) { firstVisibleCell = c; break; }
+                if (c.Visible)
+                {
+                    firstVisibleCell = c;
+                    break;
+                }
 
             if (firstVisibleCell != null)
-                Grid.CurrentCell = firstVisibleCell;
+            {
+                try
+                {
+                    grid.CurrentCell = firstVisibleCell; // May trigger data-binding re-sync
+                }
+                catch (ArgumentOutOfRangeException) { return; }
+                catch (InvalidOperationException) { return; }
+                catch (IndexOutOfRangeException) { return; }
+            }
 
-            Grid.FirstDisplayedScrollingRowIndex = rowIndex;
-            PopulateFormFieldsFromGrid(rowIndex);
+            // Safely set scrolling row (guard against "operation cannot be performed" during layout)
+            if (rowIndex >= 0 && rowIndex < grid.RowCount)
+            {
+                try { grid.FirstDisplayedScrollingRowIndex = rowIndex; } catch { }
+            }
+
+            // Only populate form fields if we still have a valid current entity
+            try
+            {
+                PopulateFormFieldsFromGrid(rowIndex);
+            }
+            catch { /* swallow to keep navigation safe */ }
         }
 
-        /// <summary>
-        /// Copies the selected row entity into bound text boxes.
-        /// </summary>
         protected void PopulateFormFieldsFromGrid(int rowIndex)
         {
-            var entity = _bindingSource != null ? _bindingSource.Current as IEntityWithId : null;
+            var entity = SafeCurrent() as IEntityWithId;
+
+            // Fallback: if BindingSource.Position is still -1, derive entity directly from the row
+            if (entity == null)
+            {
+                var grid = Grid;
+                if (grid != null &&
+                    rowIndex >= 0 &&
+                    rowIndex < grid.Rows.Count &&
+                    !grid.Rows[rowIndex].IsNewRow)
+                {
+                    entity = grid.Rows[rowIndex].DataBoundItem as IEntityWithId;
+
+                    // If we retrieved an entity, try to advance the BindingSource for future calls
+                    if (entity != null && _bindingSource != null && _bindingSource.Position < 0)
+                    {
+                        try { _bindingSource.Position = rowIndex; } catch { }
+                    }
+                }
+            }
+
             if (entity == null) return;
 
             foreach (var b in _textBindings)
@@ -1154,14 +1036,11 @@ namespace AATM.UI.Winforms.BaseControls
                     b.Box.Text = b.Getter(entity) ?? string.Empty;
 
             ClearErrorDisplay();
-            if (myErrorProvider != null) myErrorProvider.Clear();
+            myErrorProvider?.Clear();
             SetStatusText("");
             SetErrorDisplay("");
         }
 
-        /// <summary>
-        /// Returns the currently selected entity from the grid (legacy binding path).
-        /// </summary>
         protected IEntityWithId GetSelectedEntity()
         {
             var grid = Grid;
@@ -1183,9 +1062,6 @@ namespace AATM.UI.Winforms.BaseControls
             return null;
         }
 
-        /// <summary>
-        /// Returns the ID for the given entity (safe cast).
-        /// </summary>
         protected int GetEntityId(IEntityWithId entity)
         {
             if (entity == null) return 0;
@@ -1193,9 +1069,6 @@ namespace AATM.UI.Winforms.BaseControls
             return cast != null ? cast.ID : 0;
         }
 
-        /// <summary>
-        /// Builds a confirmation message for deletion (override to add custom tokens).
-        /// </summary>
         protected virtual string GetDeleteConfirmationText(IEntityWithId entity)
         {
             int id = 0;
@@ -1203,9 +1076,6 @@ namespace AATM.UI.Winforms.BaseControls
             return id > 0 ? "Delete selected record (ID=" + id + ")?" : "Delete selected record?";
         }
 
-        /// <summary>
-        /// Prompts the user to confirm deletion. Override to customize dialog.
-        /// </summary>
         protected virtual DialogResult ConfirmDelete(string message)
         {
             return MessageBox.Show(this,
@@ -1216,23 +1086,51 @@ namespace AATM.UI.Winforms.BaseControls
                 MessageBoxDefaultButton.Button2);
         }
 
-        /// <summary>Navigate to first non-new row, if present.</summary>
-        protected void GoFirst()
+        // Rationale:
+        // 1. Avoid selecting when the BindingSource has no items (Position would be -1).
+        // 2. If the grid has not yet materialized rows (Rows.Count == 0) after data binding,
+        //    defer selection via BeginInvoke so DataGridView can finish creating rows.
+        // 3. Only navigate when we find a non-new row.
+        // 4. Prevent premature SetStatusText("First record.") when there are actually no data rows.
+        protected void GoFirst(bool allowDefer = true)
         {
-            if (Grid == null) return;
-            for (int i = 0; i < Grid.Rows.Count; i++)
+            var grid = Grid;
+            if (grid == null)
             {
-                if (!Grid.Rows[i].IsNewRow)
+                SetStatusText("No grid.");
+                return;
+            }
+
+            // If there is a BindingSource, use its count as the authoritative source of items.
+            if (_bindingSource == null || _bindingSource.Count == 0)
+            {
+                SetStatusText("No records.");
+                return;
+            }
+
+            // If the binding source has items but the grid has not yet created rows, defer once.
+            if (grid.Rows.Count == 0 && allowDefer)
+            {
+                // Defer so DataGridView finishes its initial layout / row generation.
+                BeginInvoke(new Action(() => GoFirst(false)));
+                return;
+            }
+
+            for (int i = 0; i < grid.Rows.Count; i++)
+            {
+                var row = grid.Rows[i];
+                if (row != null && !row.IsNewRow)
                 {
                     NavigateToRow(i);
                     SetStatusText("First record.");
                     return;
                 }
             }
+
+            // If we reach here, either only the NewRow template exists or no usable rows appeared.
             SetStatusText("No records.");
         }
 
-        /// <summary>Navigate to last non-new row, if present.</summary>
         protected void GoLast()
         {
             if (Grid == null) return;
@@ -1248,7 +1146,6 @@ namespace AATM.UI.Winforms.BaseControls
             SetStatusText("No records.");
         }
 
-        /// <summary>Navigate to next logical row (bounded).</summary>
         protected void GoNext()
         {
             if (Grid == null) return;
@@ -1265,7 +1162,6 @@ namespace AATM.UI.Winforms.BaseControls
             {
                 for (int i = 0; i < rows.Count; i++)
                     if (!rows[i].IsNewRow) { currentIndex = i; break; }
-
                 if (currentIndex == -1) { SetStatusText("No records."); return; }
             }
 
@@ -1282,7 +1178,6 @@ namespace AATM.UI.Winforms.BaseControls
             NavigateToRow(lastIndex);
         }
 
-        /// <summary>Navigate to previous logical row (bounded).</summary>
         protected void GoPrevious()
         {
             if (Grid == null) return;
@@ -1309,14 +1204,9 @@ namespace AATM.UI.Winforms.BaseControls
 
             NavigateToRow(firstIndex);
         }
-
         #endregion
 
         #region Grid / columns
-
-        /// <summary>
-        /// Applies default grid settings, defines custom columns, then optionally auto-generates columns from attributes.
-        /// </summary>
         protected virtual void ConfigureGrid(DataGridView grid)
         {
             if (grid.Columns.Count > 0) return;
@@ -1340,9 +1230,6 @@ namespace AATM.UI.Winforms.BaseControls
             grid.ColumnHeaderMouseClick += Grid_ColumnHeaderMouseClick;
         }
 
-        /// <summary>
-        /// Basic consistent grid styling (override to adjust).
-        /// </summary>
         protected virtual void ApplyDefaultGridSettings(DataGridView grid)
         {
             grid.AutoGenerateColumns = false;
@@ -1356,22 +1243,15 @@ namespace AATM.UI.Winforms.BaseControls
             grid.RowHeadersVisible = false;
         }
 
-        /// <summary>
-        /// Override to create custom columns manually. If none added, auto generation may occur.
-        /// </summary>
         protected virtual void DefineColumns(DataGridView grid) { }
 
-        /// <summary>
-        /// Builds columns from <see cref="GridColumnAttribute"/> metadata (cached).
-        /// </summary>
         private void TryBuildAutoColumns(DataGridView grid)
         {
             if (_typedController == null) return;
             var dtoType = _typedController.DtoType;
             if (dtoType == null) return;
 
-            List<GeneratedGridColumn> meta;
-            if (!_autoColumnCache.TryGetValue(dtoType, out meta))
+            if (!_autoColumnCache.TryGetValue(dtoType, out var meta))
             {
                 meta = BuildColumnMetadata(dtoType);
                 _autoColumnCache[dtoType] = meta;
@@ -1387,28 +1267,19 @@ namespace AATM.UI.Winforms.BaseControls
                     Width = m.Width,
                     ReadOnly = m.ReadOnly,
                     Visible = !m.Hidden,
-                    AutoSizeMode = m.Fill
-                        ? DataGridViewAutoSizeColumnMode.Fill
-                        : DataGridViewAutoSizeColumnMode.None
+                    AutoSizeMode = m.Fill ? DataGridViewAutoSizeColumnMode.Fill : DataGridViewAutoSizeColumnMode.None
                 };
                 grid.Columns.Add(col);
             }
         }
 
-        /// <summary>
-        /// Builds metadata for grid columns from attributes or heuristics.
-        /// </summary>
         private List<GeneratedGridColumn> BuildColumnMetadata(Type dtoType)
         {
             var list = new List<GeneratedGridColumn>();
 
             var decorated = dtoType
                 .GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                .Select(p => new
-                {
-                    Prop = p,
-                    Attr = p.GetCustomAttribute<GridColumnAttribute>(true)
-                })
+                .Select(p => new { Prop = p, Attr = p.GetCustomAttribute<GridColumnAttribute>(true) })
                 .Where(x => x.Attr != null)
                 .ToList();
 
@@ -1432,9 +1303,7 @@ namespace AATM.UI.Winforms.BaseControls
 
             var simpleProps = dtoType
                 .GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                .Where(p =>
-                    p.CanRead &&
-                    (p.PropertyType.IsValueType || p.PropertyType == typeof(string)))
+                .Where(p => p.CanRead && (p.PropertyType.IsValueType || p.PropertyType == typeof(string)))
                 .ToList();
 
             int order = 0;
@@ -1454,9 +1323,6 @@ namespace AATM.UI.Winforms.BaseControls
             return list;
         }
 
-        /// <summary>
-        /// Handles header clicks to provide simple sorting (typed or legacy).
-        /// </summary>
         private void Grid_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             var grid = sender as DataGridView;
@@ -1495,39 +1361,87 @@ namespace AATM.UI.Winforms.BaseControls
 
             grid.Refresh();
         }
-
         #endregion
 
-        #region Search
-
-        /// <summary>
-        /// Applies filter text (simple contains across property string values) for typed or legacy mode.
-        /// </summary>
+        #region Search (Enhanced 1–7)
         private void ApplySearch()
         {
             if (_searchBox == null) return;
-            var query = (_searchBox.Text ?? string.Empty).Trim();
 
-            // -------- Typed path --------
+            var raw = _searchBox.Text ?? string.Empty;
+            if (_isWatermarkActive || string.Equals(raw, SearchWatermark, StringComparison.Ordinal))
+                raw = string.Empty;
+
+            var query = raw.Trim();
+            bool restrictColumns = _searchSelectedColumns.Count > 0;
+
+            // ---------- TYPED PATH ----------
             if (_typedController != null)
             {
-                // Make sure the grid is bound to the working (filterable) list.
+                if (_bindingSource == null)
+                    _bindingSource = new BindingSource();
+
                 if (_bindingSource.DataSource != _typedBindingList)
                     _bindingSource.DataSource = _typedBindingList;
 
-                // Remember current selection (by ID) to restore after filtering.
-                int selectedId = 0;
-                var currentObj = _bindingSource.Current;
-                if (currentObj != null)
+                int previouslySelectedId = 0;
+
+                // Safely capture currently selected entity ID (only if a valid current item exists)
+                if (_bindingSource.Count > 0 && _bindingSource.Position >= 0)
                 {
-                    try { selectedId = _typedController.GetId(currentObj); } catch { selectedId = 0; }
+                    object currentObj = null;
+                    try { currentObj = _bindingSource.Current; } catch { currentObj = null; }
+                    if (currentObj != null)
+                    {
+                        try { previouslySelectedId = _typedController.GetId(currentObj); } catch { previouslySelectedId = 0; }
+                    }
                 }
 
-                // Decide data source: full list (empty query) or filtered view.
-                IEnumerable<object> source = string.IsNullOrEmpty(query)
-                    ? _typedController.LiveUntypedItems // full reset
-                    : _typedController.Filter(query) ?? Enumerable.Empty<object>();
+                IEnumerable<object> source;
+                if (string.IsNullOrEmpty(query))
+                {
+                    source = _typedController.LiveUntypedItems;
+                }
+                else if (_searchMode == SearchMode.Regex)
+                {
+                    
+                    Regex regex = null;
+                    try
+                    {
+                        regex = new Regex(query, RegexOptions.IgnoreCase);
+                        _lastRegexInvalid = false;
+                        SetSearchBoxError(false, null);
+                    }
+                    catch (Exception ex)
+                    {
+                        if (!_lastRegexInvalid)
+                        {
+                            SetStatusText("Invalid regex pattern.");    
+                            SetSearchBoxError(true, ex.Message);
+                            _lastRegexInvalid = true;
+                        }
+                        // Show no results if regex is invalid
+                        _typedBindingList.Clear();
+                        _bindingSource.ResetBindings(false);
+                        //UpdateSearchStatus(0, _typedController.LiveUntypedItems.Count);
+                        return;
+                    }
 
+                    source = _typedController.LiveUntypedItems
+                        .Where(o => MatchesScopedRegex(o, regex, _typedController.DtoType));
+                }
+                else if (!restrictColumns)
+                {
+                    // Use controller filter for normal mode
+                    source = _typedController.Filter(query) ?? Enumerable.Empty<object>();
+                }
+                else
+                {
+                    source = _typedController.LiveUntypedItems
+                        .Where(o => MatchesScoped(o, query, _typedController.DtoType));
+                }
+
+                // Rebuild filtered list
                 _typedBindingList.RaiseListChangedEvents = false;
                 try
                 {
@@ -1541,51 +1455,59 @@ namespace AATM.UI.Winforms.BaseControls
                     _bindingSource.ResetBindings(false);
                 }
 
-                // Update status
-                if (_typedBindingList.Count == 0)
-                    SetStatusText("No matches.");
-                else
-                    SetStatusText(_typedBindingList.Count + " match(es).");
+                UpdateSearchStatus(_typedBindingList.Count, _typedController.LiveUntypedItems.Count);
 
-                // Try to restore previous selection by ID (if still present)
-                if (selectedId != 0 && _typedBindingList.Count > 0)
+                // Restore previous selection if still present
+                if (previouslySelectedId != 0 && _typedBindingList.Count > 0)
                 {
                     for (int i = 0; i < _typedBindingList.Count; i++)
                     {
-                        var id = 0;
+                        int id = 0;
                         try { id = _typedController.GetId(_typedBindingList[i]); } catch { }
-                        if (id == selectedId)
+                        if (id == previouslySelectedId)
                         {
                             _bindingSource.Position = i;
-                            break;
+                            goto TypedDone;
                         }
                     }
+                    // Fallback to first if old selection not found
+                    _bindingSource.Position = 0;
                 }
+                else if (_typedBindingList.Count > 0)
+                {
+                    // Nothing previously selected but we have results – select first
+                    _bindingSource.Position = 0;
+                }
+                else
+                {
+                    // No results – leave position at -1 (no current)
+                }
+
+            TypedDone:
                 return;
             }
 
-            // -------- Legacy path --------
-            // Note: _allItems holds the full list; _items is the bound (currently displayed) list.
-            int legacySelectedId = 0;
-            var legacyCurrent = _bindingSource != null ? _bindingSource.Current as IEntityWithId : null;
-            if (legacyCurrent != null) legacySelectedId = legacyCurrent.ID;
+            // ---------- LEGACY PATH ----------
+            if (_bindingSource == null)
+                _bindingSource = new BindingSource { DataSource = _items };
 
-            List<IEntityWithId> resultList;
+            int legacyPreviouslySelectedId = 0;
+            if (_bindingSource.Count > 0 && _bindingSource.Position >= 0)
+            {
+                var currentLegacy = _bindingSource.Current as IEntityWithId;
+                if (currentLegacy != null)
+                    legacyPreviouslySelectedId = currentLegacy.ID;
+            }
+
+            List<IEntityWithId> filtered;
             if (string.IsNullOrEmpty(query))
             {
-                resultList = _allItems;
+                filtered = _allItems;
             }
             else
             {
-                resultList = _allItems.Where(x =>
-                    x.GetType().GetProperties()
-                        .Any(p =>
-                        {
-                            object v;
-                            try { v = p.GetValue(x, null); } catch { return false; }
-                            return v != null &&
-                                   v.ToString().IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0;
-                        }))
+                filtered = _allItems
+                    .Where(x => MatchesScoped(x, query, x.GetType(), legacy: true))
                     .ToList();
             }
 
@@ -1593,41 +1515,118 @@ namespace AATM.UI.Winforms.BaseControls
             try
             {
                 _items.Clear();
-                foreach (var item in resultList)
+                foreach (var item in filtered)
                     _items.Add(item);
             }
             finally
             {
                 _items.RaiseListChangedEvents = true;
-                if (_bindingSource != null)
-                    _bindingSource.ResetBindings(false);
+                _bindingSource.ResetBindings(false);
             }
 
-            if (_items.Count == 0)
-                SetStatusText("No matches.");
-            else
-                SetStatusText(_items.Count + " match(es).");
+            UpdateSearchStatus(_items.Count, _allItems.Count);
 
-            // Restore selection if possible
-            if (legacySelectedId != 0 && _items.Count > 0)
+            if (legacyPreviouslySelectedId != 0 && _items.Count > 0)
             {
                 for (int i = 0; i < _items.Count; i++)
                 {
-                    if (_items[i].ID == legacySelectedId)
+                    if (_items[i].ID == legacyPreviouslySelectedId)
                     {
                         _bindingSource.Position = i;
-                        break;
+                        return;
                     }
                 }
+                // Previous not found – select first
+                _bindingSource.Position = 0;
+            }
+            else if (_items.Count > 0)
+            {
+                _bindingSource.Position = 0;
+            }
+            // else: no results -> Position remains -1
+        }
+
+        private bool _lastRegexInvalid = false;
+        private bool MatchesScoped(object obj, string query, Type type, bool legacy = false)
+        {
+            if (obj == null || string.IsNullOrWhiteSpace(query)) return false;
+            var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                            .Where(p => p.CanRead &&
+                                        (p.PropertyType.IsValueType || p.PropertyType == typeof(string)));
+
+            if (_searchSelectedColumns.Count > 0)
+                props = props.Where(p => _searchSelectedColumns.Contains(p.Name));
+
+            if (_searchMode == SearchMode.Regex)
+            {
+                // Regex should be compiled and error handled in ApplySearch, not here.
+                throw new InvalidOperationException("Regex mode should use MatchesScopedRegex.");
+            }
+            else
+            {
+                _lastRegexInvalid = false;
+                SetSearchBoxError(false, null);
+                foreach (var p in props)
+                {
+                    object v;
+                    try { v = p.GetValue(obj, null); } catch { continue; }
+                    if (v == null) continue;
+                    var str = v.ToString();
+                    if (str != null &&
+                        str.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0)
+                        return true;
+                }
+                return false;
             }
         }
+
+
+
+        // Helper to set visual error on the search box
+        private void SetSearchBoxError(bool isError, string tooltip)
+        {
+            if (_searchBox == null) return;
+            _searchBox.BackColor = isError ? Color.MistyRose : SystemColors.Window;
+            _searchBox.ToolTipText = isError ? (tooltip ?? "Invalid regex pattern.") : "Search";
+        }
+
+        private void UpdateSearchStatus(int filtered, int total)
+        {
+            if (filtered == 0)
+                SetStatusText($"No matches (0 of {total}).");
+            else
+                SetStatusText($"{filtered} match(es) of {total}.");
+        }
+
+        private void ClearSearch()
+        {
+            _suppressProgrammaticSearch = true;
+            try
+            {
+                _searchBox.Text = "";
+                ApplySearchWatermark();
+
+                // Reset selected columns (optional, if you want to clear column filters)
+                _searchSelectedColumns.Clear();
+                RefreshSearchColumns();
+
+                // Optionally reset search mode to Normal
+                _searchMode = SearchMode.Normal;
+                foreach (ToolStripMenuItem item in _searchModeButton.DropDownItems)
+                    item.Checked = item.Text == "Normal";
+
+                SetSearchBoxError(false, null);
+            }
+            finally
+            {
+                _suppressProgrammaticSearch = false;
+            }
+            ApplySearch();
+            _searchBox.Focus();
+        }   
         #endregion
 
-        #region Event wiring
-
-        /// <summary>
-        /// Wires grid selection events once (ignores row header pseudo rows).
-        /// </summary>
+        #region Event wiring (selection + clear errors)
         private void WireGridSelectionEventsOnce()
         {
             if (_gridEventsWired) return;
@@ -1639,7 +1638,6 @@ namespace AATM.UI.Winforms.BaseControls
                 try
                 {
                     int rowIndex = -1;
-
                     if (grid.SelectedRows != null && grid.SelectedRows.Count > 0 && !grid.SelectedRows[0].IsNewRow)
                         rowIndex = grid.SelectedRows[0].Index;
                     else if (grid.CurrentCell != null && !grid.Rows[grid.CurrentCell.RowIndex].IsNewRow)
@@ -1653,9 +1651,6 @@ namespace AATM.UI.Winforms.BaseControls
             _gridEventsWired = true;
         }
 
-        /// <summary>
-        /// Wires TextChanged handlers to clear per-field validation errors.
-        /// </summary>
         protected void WireClearFieldErrorsOnTextChanged(params Control[] controls)
         {
             if (controls == null) return;
@@ -1682,9 +1677,6 @@ namespace AATM.UI.Winforms.BaseControls
             }
         }
 
-        /// <summary>
-        /// Wires a global grid DataError handler to suppress exceptions and show status.
-        /// </summary>
         protected void WireGridDataErrorOnce()
         {
             if (_gridDataErrorWired) return;
@@ -1700,14 +1692,9 @@ namespace AATM.UI.Winforms.BaseControls
             };
             _gridDataErrorWired = true;
         }
-
         #endregion
 
-        #region Navigator initialization
-
-        /// <summary>
-        /// Creates a binding navigator with navigation, CRUD, refresh, search, language (if enabled).
-        /// </summary>
+        #region Navigator initialization (enhanced with search controls)
         private void InitializeNavigatorIfNeeded()
         {
             if (IsDesignTime()) return;
@@ -1774,17 +1761,102 @@ namespace AATM.UI.Winforms.BaseControls
                 });
             }
 
-            // Search
-            _searchBox = new ToolStripTextBox { Name = "tsSearchBox", ToolTipText = "Search" };
-            _searchButton = new ToolStripButton("Search") { ToolTipText = "Search" };
-            _searchButton.Click += (s, e) => ApplySearch();
-            _searchBox.KeyDown += (s, e) => { if (e.KeyCode == Keys.Enter) ApplySearch(); };
+            // Search controls
             _navigator.Items.Add(new ToolStripSeparator());
             _navigator.Items.Add(new ToolStripLabel("Search:"));
-            _navigator.Items.Add(_searchBox);
-            _navigator.Items.Add(_searchButton);
-            if (_items.Count == 0) SetStatusText("No matches.");
-            else SetStatusText(_items.Count + " match(es).");
+            _searchBox = new ToolStripTextBox { Name = "tsSearchBox", ToolTipText = "Search", AutoSize = false, Width = 160 };
+            _searchButton = new ToolStripButton("Search") { ToolTipText = "Execute search" };
+            _searchButton.Click += (s, e) => ApplySearch();
+            _searchBox.KeyDown += (s, e) =>
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+                    ApplySearch();
+                    Grid?.Focus();
+                }
+            };
+            _searchBox.GotFocus += (s, e) => RemoveWatermarkIfActive();
+            _searchBox.LostFocus += (s, e) => ApplySearchWatermark();
+            _searchBox.TextChanged += (s, e) =>
+            {
+                SetSearchBoxError(false, null); // Clear error as user edits
+                if (_suppressProgrammaticSearch) return;
+                if (_isWatermarkActive) return;
+                if (_liveSearchEnabled)
+                    RestartSearchDebounce();    
+            };
+
+            // Clear button (feature 1)
+            _searchClearButton = new ToolStripButton("X")
+            {
+                ToolTipText = "Clear search",
+                DisplayStyle = ToolStripItemDisplayStyle.Text
+            };
+            _searchClearButton.Click += (s, e) => ClearSearch();
+
+            // Columns selector (feature 6)
+            _searchColumnsButton = new ToolStripDropDownButton("Cols")
+            {
+                ToolTipText = "Select columns to search (unchecked = all)"
+            };
+            _searchColumnsButton.DropDownItemClicked += (s, e) =>
+            {
+                // Handled individually in item CheckedChanged.
+            };
+
+            // Live toggle (feature 7)
+            _searchLiveToggleButton = new ToolStripButton("Live")
+            {
+                CheckOnClick = true,
+                Checked = true,
+                ToolTipText = "Toggle live (debounced) search"
+            };
+            _searchLiveToggleButton.CheckedChanged += (s, e) =>
+            {
+                _liveSearchEnabled = _searchLiveToggleButton.Checked;
+                if (_liveSearchEnabled)
+                    RestartSearchDebounce();
+            };
+
+            _searchModeButton = new ToolStripDropDownButton("Mode")
+            {
+                ToolTipText = "Select search mode"
+            };
+            var normalItem = new ToolStripMenuItem("Normal") { Checked = true };
+            var regexItem = new ToolStripMenuItem("Regex");
+
+            normalItem.Click += (s, e) =>
+            {
+                _searchMode = SearchMode.Normal;
+                normalItem.Checked = true;
+                regexItem.Checked = false;
+                ApplySearch();
+            };
+            regexItem.Click += (s, e) =>
+            {
+                _searchMode = SearchMode.Regex;
+                normalItem.Checked = false;
+                regexItem.Checked = true;
+                ApplySearch();
+            };
+            _searchModeButton.DropDownItems.Add(normalItem);
+            _searchModeButton.DropDownItems.Add(regexItem);
+
+            _navigator.Items.AddRange(new ToolStripItem[]
+            {
+                _searchBox,
+                _searchButton,
+                _searchClearButton,
+                _searchColumnsButton,
+                _searchLiveToggleButton,
+                _searchModeButton
+            });
+
+            ApplySearchWatermark();
+            InitializeSearchDebounce();
+
             // Language selector
             if (ShowLanguageSelector && LanguageComboBox == null)
             {
@@ -1822,13 +1894,141 @@ namespace AATM.UI.Winforms.BaseControls
             _navigator.BringToFront();
         }
 
+        private void InitializeSearchDebounce()
+        {
+            _searchDebounceTimer = new System.Windows.Forms.Timer { Interval = SearchDebounceMs };
+            _searchDebounceTimer.Tick += (s, e) =>
+            {
+                _searchDebounceTimer.Stop();
+                ApplySearch();
+            };
+        }
+
+        private bool MatchesScopedRegex(object obj, Regex regex, Type type)
+        {
+            if (obj == null || regex == null) return false;
+            var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                            .Where(p => p.CanRead &&
+                                        (p.PropertyType.IsValueType || p.PropertyType == typeof(string)));
+
+            if (_searchSelectedColumns.Count > 0)
+                props = props.Where(p => _searchSelectedColumns.Contains(p.Name));
+
+            foreach (var p in props)
+            {
+                object v;
+                try { v = p.GetValue(obj, null); } catch { continue; }
+                if (v == null) continue;
+                var str = v.ToString();
+                if (str != null && regex.IsMatch(str))
+                    return true;
+            }
+            return false;
+        }
+
+        private void RestartSearchDebounce()
+        {
+            _searchDebounceTimer.Stop();
+            _searchDebounceTimer.Start();
+        }
+
+        private void ApplySearchWatermark()
+        {
+            if (_searchBox == null) return;
+            if (!string.IsNullOrWhiteSpace(_searchBox.Text)) return;
+            _isWatermarkActive = true;
+            _suppressProgrammaticSearch = true;
+            try
+            {
+                _searchBox.ForeColor = SystemColors.GrayText;
+                _searchBox.Text = SearchWatermark;
+            }
+            finally
+            {
+                _suppressProgrammaticSearch = false;
+            }
+        }
+
+        private void RemoveWatermarkIfActive()
+        {
+            if (!_isWatermarkActive) return;
+            _isWatermarkActive = false;
+            _suppressProgrammaticSearch = true;
+            try
+            {
+                _searchBox.Text = "";
+                _searchBox.ForeColor = SystemColors.WindowText;
+            }
+            finally
+            {
+                _suppressProgrammaticSearch = false;
+            }
+        }
+
+        private void RefreshSearchColumns()
+        {
+            if (_searchColumnsButton == null) return;
+            _searchColumnsButton.DropDownItems.Clear();
+
+            var names = GetSearchablePropertyNames();
+            // '(All)' item
+            var allItem = new ToolStripMenuItem("(All)")
+            {
+                Checked = _searchSelectedColumns.Count == 0
+            };
+            allItem.Click += (s, e) =>
+            {
+                _searchSelectedColumns.Clear();
+                RefreshSearchColumns();
+                ApplySearch();
+            };
+            _searchColumnsButton.DropDownItems.Add(allItem);
+            if (names != null)
+            {
+                foreach (var n in names)
+                {
+                    var itm = new ToolStripMenuItem(n)
+                    {
+                        Checked = _searchSelectedColumns.Contains(n),
+                        CheckOnClick = true
+                    };
+                    itm.CheckedChanged += (s, e) =>
+                    {
+                        if (itm.Checked) _searchSelectedColumns.Add(n);
+                        else _searchSelectedColumns.Remove(n);
+                        // Update '(All)'
+                        allItem.Checked = _searchSelectedColumns.Count == 0;
+                        // If live search, re-apply
+                        if (_liveSearchEnabled)
+                            RestartSearchDebounce();
+                    };
+                    _searchColumnsButton.DropDownItems.Add(itm);
+                }
+            }
+        }
+
+        private IEnumerable<string> GetSearchablePropertyNames()
+        {
+            Type t = null;
+            if (_typedController != null)
+                t = _typedController.DtoType;
+            else
+            {
+                var first = _allItems.FirstOrDefault() ?? _items.FirstOrDefault();
+                if (first != null) t = first.GetType();
+            }
+            if (t == null) return Enumerable.Empty<string>();
+
+            return t.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .Where(p => p.CanRead &&
+                            (p.PropertyType.IsValueType || p.PropertyType == typeof(string)))
+                .Select(p => p.Name)
+                .OrderBy(n => n)
+                .ToList();
+        }
         #endregion
 
         #region Status strip
-
-        /// <summary>
-        /// Ensures the status strip, progress bar and label exist.
-        /// </summary>
         protected void InitializeStatusStripAndLabel()
         {
             if (_statusStrip == null)
@@ -1860,11 +2060,9 @@ namespace AATM.UI.Winforms.BaseControls
                 _statusStrip.Items.Add(_statusStripLabel);
             }
         }
-
         #endregion
 
         #region Hooks / overrides
-
         protected virtual Task OnBeforeLoadAsync() { return Task.CompletedTask; }
         protected virtual Task OnAfterLoadAsync() { return Task.CompletedTask; }
         protected virtual Task OnBeforeSaveAsync() { return Task.CompletedTask; }
@@ -1881,14 +2079,9 @@ namespace AATM.UI.Winforms.BaseControls
         protected virtual Task OnRefreshRequestedAsync() { return LoadDataAsync(); }
         protected virtual Task OnDeleteRequestedAsync() { return DeleteSelectedAsync(); }
         protected virtual Task OnSaveRequestedAsync() { return SaveOrUpdateAsync(); }
-
         #endregion
 
         #region Lifecycle
-
-        /// <summary>
-        /// Loads initial data automatically (unless disabled) when the form is first shown.
-        /// </summary>
         protected override void OnShown(EventArgs e)
         {
             base.OnShown(e);
@@ -1899,22 +2092,14 @@ namespace AATM.UI.Winforms.BaseControls
             }
         }
 
-        /// <summary>
-        /// Cancels outstanding work when form closes.
-        /// </summary>
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             try { _cts.Cancel(); } catch { }
             base.OnFormClosing(e);
         }
-
         #endregion
 
         #region Localization helpers
-
-        /// <summary>
-        /// Resolves an <see cref="ILocalizationService"/> (override to inject).
-        /// </summary>
         protected virtual ILocalizationService ResolveLocalizationService()
         {
             var li = LanguageComboBox != null && LanguageComboBox.SelectedItem is LanguageUiHelper.LanguageItem
@@ -1923,18 +2108,10 @@ namespace AATM.UI.Winforms.BaseControls
             var code = li != null ? li.Code : "en-US";
             return new LocalizationService(code, GetType().Name);
         }
-
-        /// <summary>
-        /// Resolves a UI localization manager (override for persistence/backing store).
-        /// </summary>
         protected virtual IUiLocalizationManager ResolveUiLocalizationManager()
         {
             return new InMemoryUiLocalizationManager();
         }
-
-        /// <summary>
-        /// Static design-time detection (IDE process heuristics).
-        /// </summary>
         protected static bool IsDesignTime()
         {
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
@@ -1948,11 +2125,9 @@ namespace AATM.UI.Winforms.BaseControls
             catch { }
             return false;
         }
-
         #endregion
 
         #region Support types
-
         private sealed class GeneratedGridColumn
         {
             public string Property;
@@ -1971,36 +2146,20 @@ namespace AATM.UI.Winforms.BaseControls
             public Action<IEntityWithId, string> Setter;
         }
 
-        /// <summary>
-        /// Design-time (no-op) CRUD service; prevents designer crashes due to null service.
-        /// </summary>
         public sealed class DesignTimeCrudService : ICrudService<IEntityWithId>
         {
-            public Task<bool> DeleteAsync(int id, CancellationToken ct = default(CancellationToken))
-            {
-                return Task.FromResult(false);
-            }
-            public Task<IReadOnlyList<IEntityWithId>> GetAllAsync(CancellationToken ct = default(CancellationToken))
-            {
-                return Task.FromResult((IReadOnlyList<IEntityWithId>)new List<IEntityWithId>());
-            }
-            public Task<IEntityWithId> GetByIdAsync(int id, CancellationToken ct = default(CancellationToken))
-            {
-                return Task.FromResult<IEntityWithId>(null);
-            }
-            public Task<IEntityWithId> UpsertAsync(IEntityWithId dto, CancellationToken ct = default(CancellationToken))
-            {
-                return Task.FromResult(dto);
-            }
+            public Task<bool> DeleteAsync(int id, CancellationToken ct = default(CancellationToken)) =>
+                Task.FromResult(false);
+            public Task<IReadOnlyList<IEntityWithId>> GetAllAsync(CancellationToken ct = default(CancellationToken)) =>
+                Task.FromResult((IReadOnlyList<IEntityWithId>)new List<IEntityWithId>());
+            public Task<IEntityWithId> GetByIdAsync(int id, CancellationToken ct = default(CancellationToken)) =>
+                Task.FromResult<IEntityWithId>(null);
+            public Task<IEntityWithId> UpsertAsync(IEntityWithId dto, CancellationToken ct = default(CancellationToken)) =>
+                Task.FromResult(dto);
         }
-
         #endregion
 
         #region Designer stub
-
-        /// <summary>
-        /// Minimal InitializeComponent stub (real forms override / provide their own).
-        /// </summary>
         private void InitializeComponent()
         {
             SuspendLayout();
@@ -2008,14 +2167,9 @@ namespace AATM.UI.Winforms.BaseControls
             Name = "BaseGridCrudForm";
             ResumeLayout(false);
         }
-
         #endregion
 
         #region Retry link helper
-
-        /// <summary>
-        /// Removes an active retry link from the status label (if previously set by <see cref="ShowError"/>).
-        /// </summary>
         private void ClearRetryLink()
         {
             if (StatusStripLabel == null)
@@ -2031,7 +2185,51 @@ namespace AATM.UI.Winforms.BaseControls
             if (!string.IsNullOrEmpty(StatusStripLabel.ToolTipText))
                 StatusStripLabel.ToolTipText = string.Empty;
         }
-
         #endregion
+
+        #region Keyboard shortcuts (feature 5)
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Control | Keys.F))
+            {
+                _searchBox?.Focus();
+                if (_searchBox != null && !_isWatermarkActive)
+                    _searchBox.SelectAll();
+                return true;
+            }
+            if (keyData == Keys.Escape)
+            {
+                if (_searchBox != null && !_isWatermarkActive && !string.IsNullOrEmpty(_searchBox.Text))
+                {
+                    ClearSearch();
+                    return true;
+                }
+            }
+            if (keyData == Keys.Enter && _searchBox != null && _searchBox.Focused)
+            {
+                ApplySearch();
+                Grid?.Focus();
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+        #endregion
+
+        /// <summary>
+        /// Safely returns the current item in the BindingSource or null if there is
+        /// no valid current (Position == -1, list empty, or Current throws).
+        /// Centralizes the guard to eliminate "Index -1 does not have a value." errors.
+        /// </summary>
+        private object SafeCurrent()
+        {
+            if (_bindingSource == null) return null;
+            if (_bindingSource.Count == 0) return null;
+            if (_bindingSource.Position < 0) return null;
+            try { return _bindingSource.Current; }
+            catch { return null; }
+        }
+
+
+
     }
 }

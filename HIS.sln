@@ -1013,6 +1013,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AATM.DataAccess.Sql", "Data
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AATM.DataAccess", "DataAccess\AATM.DataAccess\AATM.DataAccess.csproj", "{72DFFF29-2590-00B6-1F3D-E5F62E08D951}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{740ABB06-3D3F-4317-A0F1-3D1F6B48C4C2}"
+	ProjectSection(SolutionItems) = preProject
+		BaseGridCrudForm and its key features.txt = BaseGridCrudForm and its key features.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug (.NET 3.5)|Any CPU = Debug (.NET 3.5)|Any CPU
@@ -1472,6 +1477,7 @@ Global
 		{96530E72-8706-4BEE-BA4B-30CB56F54971} = {B27DE984-FC99-4B6F-933D-2FB8934305C2}
 		{3BC79669-B374-4122-B4E1-E84CC4C26D4E} = {68B82970-4F3D-411C-A4DF-31E64C2F1DC0}
 		{72DFFF29-2590-00B6-1F3D-E5F62E08D951} = {68B82970-4F3D-411C-A4DF-31E64C2F1DC0}
+		{740ABB06-3D3F-4317-A0F1-3D1F6B48C4C2} = {0598D101-4147-476C-98FF-8C78D96B971E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {433E9001-0D97-4552-9BF4-6FED04B194AE}

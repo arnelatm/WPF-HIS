@@ -1,0 +1,102 @@
+Here’s a **condensed cheat sheet** for `BaseGridCrudForm` and its key features, plus guidance on extending auto-binding and search.
+
+---
+
+## BaseGridCrudForm – Developer Cheat Sheet
+
+### 1. CRUD Form Setup
+
+**Typical usage in your form:**
+```csharp
+ForDto<TranslationDto>()
+    .Service(() => new TranslationCrudService())
+    .Validator(d => DtoValidator.Validate(d, TranslationDtoValidationRules.Rules))
+    .ErrorDisplay(txtErrors)
+    .AutoBind(true)
+    .Apply();
+```
+- **Grid property:** Override `protected override DataGridView Grid => _dataGridView;`
+- **TextBoxes:** Use `[FieldControl("_txtFieldName", "System.Windows.Forms.TextBox")]` on DTO properties.
+
+---
+
+### 2. Search Toolbar Features
+
+| # | Capability      | Description                                                  |
+|---|-----------------|--------------------------------------------------------------|
+| 1 | Watermark       | “Type to search…” placeholder with gray style.               |
+| 2 | Live Search     | Debounced (350 ms) incremental filtering while typing.       |
+| 3 | Manual Search   | Press Enter or click “Search”.                               |
+| 4 | Clear           | “X” button resets query and restores full set.               |
+| 5 | Column Scope    | “Cols” dropdown: check specific fields; none checked = all.  |
+| 6 | Live Toggle     | “Live” button toggles debounced auto-search on/off.          |
+| 7 | Status Feedback | Shows “n match(es) of total” or “No matches (0 of total)”.   |
+
+---
+
+### 3. Navigation & CRUD
+
+- **Navigator:** First, Previous, Next, Last, Position, Count.
+- **Buttons:** Save, Delete, Refresh.
+- **Keyboard:** Ctrl+F (focus search), Enter (search), Esc (clear search).
+
+---
+
+### 4. Validation
+
+- **ErrorProvider:** Shows field errors next to controls.
+- **Aggregated errors:** Displayed in `txtErrors` or a label.
+- **Focus:** First invalid field is focused.
+
+---
+
+### 5. Localization
+
+- **Language selector:** ComboBox + Apply button.
+- **RTL support:** Layout switches for right-to-left languages.
+
+---
+
+### 6. Extending Auto-Binding (Add More Control Types)
+
+To support other controls (e.g., ComboBox, DateTimePicker):
+
+- Decorate DTO property with `[FieldControl("_comboBoxName", "System.Windows.Forms.ComboBox")]`
+- In `AutoBindFormFields`, add logic:
+    - If control type is ComboBox, create getter/setter for `SelectedValue` or `Text`.
+    - If DateTimePicker, bind to `Value` property.
+
+**Example:**
+```csharp
+if (control is ComboBox combo)
+{
+    // Getter: entity => combo.Text or combo.SelectedValue
+    // Setter: (entity, value) => combo.Text = value;
+}
+```
+
+---
+
+### 7. Extending Search (Regex/Fuzzy)
+
+- **Regex:** Replace string comparison in `MatchesScoped` with `Regex.IsMatch(str, pattern)`.
+- **Fuzzy:** Integrate a fuzzy matching library (e.g., [FuzzySharp](https://github.com/JakeBayer/FuzzySharp)) and use its scoring in the filter.
+
+**Example for Regex:**
+```csharp
+using System.Text.RegularExpressions;
+...
+if (Regex.IsMatch(str, query, RegexOptions.IgnoreCase))
+    return true;
+```
+
+**Example for Fuzzy:**
+```csharp
+using FuzzySharp;
+...
+if (Fuzz.Ratio(str, query) > 80)
+    return true;
+```
+
+---
+
