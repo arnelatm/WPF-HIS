@@ -56,7 +56,7 @@
             // 
             this._tableLayoutPanel.ColumnCount = 2;
             this._tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
-            this._tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 666F));
+            this._tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 951F));
             this._tableLayoutPanel.Controls.Add(this.txtErrors, 0, 5);
             this._tableLayoutPanel.Controls.Add(this._lblOriginal, 0, 0);
             this._tableLayoutPanel.Controls.Add(this._dataGridView, 0, 7);
@@ -81,7 +81,7 @@
             this._tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this._tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this._tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this._tableLayoutPanel.Size = new System.Drawing.Size(816, 355);
+            this._tableLayoutPanel.Size = new System.Drawing.Size(1095, 498);
             this._tableLayoutPanel.TabIndex = 3;
             // 
             // txtErrors
@@ -96,7 +96,7 @@
             this.txtErrors.Name = "txtErrors";
             this.txtErrors.ReadOnly = true;
             this.txtErrors.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtErrors.Size = new System.Drawing.Size(794, 44);
+            this.txtErrors.Size = new System.Drawing.Size(1074, 44);
             this.txtErrors.TabIndex = 999;
             // 
             // _lblOriginal
@@ -112,7 +112,7 @@
             this._tableLayoutPanel.SetColumnSpan(this._dataGridView, 2);
             this._dataGridView.Location = new System.Drawing.Point(3, 183);
             this._dataGridView.Name = "_dataGridView";
-            this._dataGridView.Size = new System.Drawing.Size(794, 227);
+            this._dataGridView.Size = new System.Drawing.Size(1074, 315);
             this._dataGridView.TabIndex = 4;
             // 
             // _txtOriginalString
@@ -120,7 +120,7 @@
             this._txtOriginalString.Location = new System.Drawing.Point(153, 3);
             this._txtOriginalString.Name = "_txtOriginalString";
             this._txtOriginalString.ReadOnly = true;
-            this._txtOriginalString.Size = new System.Drawing.Size(644, 20);
+            this._txtOriginalString.Size = new System.Drawing.Size(924, 20);
             this._txtOriginalString.TabIndex = 1;
             // 
             // _lblLocalized
@@ -135,7 +135,7 @@
             // 
             this._txtLocalizedString.Location = new System.Drawing.Point(153, 29);
             this._txtLocalizedString.Name = "_txtLocalizedString";
-            this._txtLocalizedString.Size = new System.Drawing.Size(644, 20);
+            this._txtLocalizedString.Size = new System.Drawing.Size(924, 20);
             this._txtLocalizedString.TabIndex = 3;
             // 
             // _lblLanguage
@@ -151,7 +151,7 @@
             this._txtLanguageCode.Location = new System.Drawing.Point(153, 55);
             this._txtLanguageCode.Name = "_txtLanguageCode";
             this._txtLanguageCode.ReadOnly = true;
-            this._txtLanguageCode.Size = new System.Drawing.Size(100, 20);
+            this._txtLanguageCode.Size = new System.Drawing.Size(191, 20);
             this._txtLanguageCode.TabIndex = 5;
             // 
             // _lblUIIdentifier
@@ -230,10 +230,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(816, 402);
+            this.ClientSize = new System.Drawing.Size(1095, 542);
             this.Controls.Add(this._tableLayoutPanel);
             this.Name = "TranslationForm";
             this.Text = "TranslationFrm";
+            this.Controls.SetChildIndex(this._tableLayoutPanel, 0);
             this._tableLayoutPanel.ResumeLayout(false);
             this._tableLayoutPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this._dataGridView)).EndInit();

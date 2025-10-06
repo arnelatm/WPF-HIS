@@ -58,7 +58,7 @@ namespace AATM.UI.Winforms.BaseControls
         private ToolStripDropDownButton _searchColumnsButton;
         private ToolStripButton _searchLiveToggleButton;
         private ToolStripDropDownButton _searchModeButton;
-        private enum SearchMode { Normal, Regex }
+        private enum SearchMode { Normal, Regex, Fuzzy }
         private SearchMode _searchMode = SearchMode.Normal;
         private readonly HashSet<string> _searchSelectedColumns = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
         private System.Windows.Forms.Timer _searchDebounceTimer;
@@ -1430,6 +1430,11 @@ namespace AATM.UI.Winforms.BaseControls
                     source = _typedController.LiveUntypedItems
                         .Where(o => MatchesScopedRegex(o, regex, _typedController.DtoType));
                 }
+                else if (_searchMode == SearchMode.Fuzzy)
+                {
+                    source = _typedController.LiveUntypedItems
+                        .Where(o => MatchesScopedFuzzy(o, query, _typedController.DtoType));
+                }
                 else if (!restrictColumns)
                 {
                     // Use controller filter for normal mode
@@ -1826,6 +1831,7 @@ namespace AATM.UI.Winforms.BaseControls
             };
             var normalItem = new ToolStripMenuItem("Normal") { Checked = true };
             var regexItem = new ToolStripMenuItem("Regex");
+            var fuzzyItem = new ToolStripMenuItem("Fuzzy");
 
             normalItem.Click += (s, e) =>
             {
@@ -1841,8 +1847,17 @@ namespace AATM.UI.Winforms.BaseControls
                 regexItem.Checked = true;
                 ApplySearch();
             };
+            fuzzyItem.Click += (s, e) =>
+            {
+                _searchMode = SearchMode.Fuzzy;
+                normalItem.Checked = false;
+                regexItem.Checked = false;
+                fuzzyItem.Checked = true;
+                ApplySearch();
+            };
             _searchModeButton.DropDownItems.Add(normalItem);
             _searchModeButton.DropDownItems.Add(regexItem);
+            _searchModeButton.DropDownItems.Add(fuzzyItem);
 
             _navigator.Items.AddRange(new ToolStripItem[]
             {
@@ -2213,6 +2228,53 @@ namespace AATM.UI.Winforms.BaseControls
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
+
+
+        //Implement Fuzzy Matching (Levenshtein Distance)
+        private int LevenshteinDistance(string a, string b)
+        {
+            if (string.IsNullOrEmpty(a)) return b?.Length ?? 0;
+            if (string.IsNullOrEmpty(b)) return a.Length;
+
+            int[,] d = new int[a.Length + 1, b.Length + 1];
+
+            for (int i = 0; i <= a.Length; i++) d[i, 0] = i;
+            for (int j = 0; j <= b.Length; j++) d[0, j] = j;
+
+            for (int i = 1; i <= a.Length; i++)
+            {
+                for (int j = 1; j <= b.Length; j++)
+                {
+                    int cost = (a[i - 1] == b[j - 1]) ? 0 : 1;
+                    d[i, j] = Math.Min(
+                        Math.Min(d[i - 1, j] + 1, d[i, j - 1] + 1),
+                        d[i - 1, j - 1] + cost);
+                }
+            }
+            return d[a.Length, b.Length];
+        }
+
+        private bool MatchesScopedFuzzy(object obj, string query, Type type, int maxDistance = 2)
+        {
+            if (obj == null || string.IsNullOrWhiteSpace(query)) return false;
+            var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .Where(p => p.CanRead && (p.PropertyType.IsValueType || p.PropertyType == typeof(string)));
+
+            if (_searchSelectedColumns.Count > 0)
+                props = props.Where(p => _searchSelectedColumns.Contains(p.Name));
+
+            foreach (var p in props)
+            {
+                object v;
+                try { v = p.GetValue(obj, null); } catch { continue; }
+                if (v == null) continue;
+                var str = v.ToString();
+                if (str != null && LevenshteinDistance(str.ToLowerInvariant(), query.ToLowerInvariant()) <= maxDistance)
+                    return true;
+            }
+            return false;
+        }
+
         #endregion
 
         /// <summary>
