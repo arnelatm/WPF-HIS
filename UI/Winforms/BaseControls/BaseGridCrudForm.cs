@@ -608,7 +608,17 @@ namespace AATM.UI.Winforms.BaseControls
                     if (_bindingSource == null)
                         _bindingSource = new BindingSource();
 
-                    _bindingSource.DataSource = _typedController.LiveUntypedItems;
+                    // Ensure working (filterable) list exists
+                    if (_typedBindingList == null)
+                        _typedBindingList = new BindingList<object>();
+
+                    // Re-sync working list from controller's live list
+                    _typedBindingList.RaiseListChangedEvents = false;
+                    _typedBindingList.Clear();
+                    foreach (var o in _typedController.LiveUntypedItems)
+                        _typedBindingList.Add(o);
+                    _typedBindingList.RaiseListChangedEvents = true;
+
                     ConfigureGrid(Grid);
 
                     if (Grid.DataSource != _bindingSource)
@@ -1496,47 +1506,121 @@ namespace AATM.UI.Winforms.BaseControls
         private void ApplySearch()
         {
             if (_searchBox == null) return;
-            var query = _searchBox.Text != null ? _searchBox.Text.Trim() : null;
+            var query = (_searchBox.Text ?? string.Empty).Trim();
 
+            // -------- Typed path --------
             if (_typedController != null)
             {
-                var filtered = _typedController.Filter(query);
+                // Make sure the grid is bound to the working (filterable) list.
+                if (_bindingSource.DataSource != _typedBindingList)
+                    _bindingSource.DataSource = _typedBindingList;
+
+                // Remember current selection (by ID) to restore after filtering.
+                int selectedId = 0;
+                var currentObj = _bindingSource.Current;
+                if (currentObj != null)
+                {
+                    try { selectedId = _typedController.GetId(currentObj); } catch { selectedId = 0; }
+                }
+
+                // Decide data source: full list (empty query) or filtered view.
+                IEnumerable<object> source = string.IsNullOrEmpty(query)
+                    ? _typedController.LiveUntypedItems // full reset
+                    : _typedController.Filter(query) ?? Enumerable.Empty<object>();
+
                 _typedBindingList.RaiseListChangedEvents = false;
                 try
                 {
                     _typedBindingList.Clear();
-                    foreach (var o in filtered) _typedBindingList.Add(o);
+                    foreach (var o in source)
+                        _typedBindingList.Add(o);
                 }
                 finally
                 {
                     _typedBindingList.RaiseListChangedEvents = true;
                     _bindingSource.ResetBindings(false);
                 }
+
+                // Update status
+                if (_typedBindingList.Count == 0)
+                    SetStatusText("No matches.");
+                else
+                    SetStatusText(_typedBindingList.Count + " match(es).");
+
+                // Try to restore previous selection by ID (if still present)
+                if (selectedId != 0 && _typedBindingList.Count > 0)
+                {
+                    for (int i = 0; i < _typedBindingList.Count; i++)
+                    {
+                        var id = 0;
+                        try { id = _typedController.GetId(_typedBindingList[i]); } catch { }
+                        if (id == selectedId)
+                        {
+                            _bindingSource.Position = i;
+                            break;
+                        }
+                    }
+                }
                 return;
             }
 
+            // -------- Legacy path --------
+            // Note: _allItems holds the full list; _items is the bound (currently displayed) list.
+            int legacySelectedId = 0;
+            var legacyCurrent = _bindingSource != null ? _bindingSource.Current as IEntityWithId : null;
+            if (legacyCurrent != null) legacySelectedId = legacyCurrent.ID;
+
+            List<IEntityWithId> resultList;
             if (string.IsNullOrEmpty(query))
             {
-                _items.Clear();
-                foreach (var item in _allItems)
-                    _items.Add(item);
-                return;
+                resultList = _allItems;
+            }
+            else
+            {
+                resultList = _allItems.Where(x =>
+                    x.GetType().GetProperties()
+                        .Any(p =>
+                        {
+                            object v;
+                            try { v = p.GetValue(x, null); } catch { return false; }
+                            return v != null &&
+                                   v.ToString().IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0;
+                        }))
+                    .ToList();
             }
 
-            var filteredLegacy = _allItems.Where(x =>
-                x.GetType().GetProperties()
-                    .Any(p =>
+            _items.RaiseListChangedEvents = false;
+            try
+            {
+                _items.Clear();
+                foreach (var item in resultList)
+                    _items.Add(item);
+            }
+            finally
+            {
+                _items.RaiseListChangedEvents = true;
+                if (_bindingSource != null)
+                    _bindingSource.ResetBindings(false);
+            }
+
+            if (_items.Count == 0)
+                SetStatusText("No matches.");
+            else
+                SetStatusText(_items.Count + " match(es).");
+
+            // Restore selection if possible
+            if (legacySelectedId != 0 && _items.Count > 0)
+            {
+                for (int i = 0; i < _items.Count; i++)
+                {
+                    if (_items[i].ID == legacySelectedId)
                     {
-                        var v = p.GetValue(x, null);
-                        return v != null &&
-                               v.ToString().IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0;
-                    })).ToList();
-
-            _items.Clear();
-            foreach (var item in filteredLegacy)
-                _items.Add(item);
+                        _bindingSource.Position = i;
+                        break;
+                    }
+                }
+            }
         }
-
         #endregion
 
         #region Event wiring
@@ -1699,7 +1783,8 @@ namespace AATM.UI.Winforms.BaseControls
             _navigator.Items.Add(new ToolStripLabel("Search:"));
             _navigator.Items.Add(_searchBox);
             _navigator.Items.Add(_searchButton);
-
+            if (_items.Count == 0) SetStatusText("No matches.");
+            else SetStatusText(_items.Count + " match(es).");
             // Language selector
             if (ShowLanguageSelector && LanguageComboBox == null)
             {
