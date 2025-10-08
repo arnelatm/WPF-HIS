@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Contracts\AATM.Contracts\AATM.Contracts.csproj" />
+    <ProjectReference Include="..\..\UI\BaseControls\AATM.Wpf.UI.BaseConrols\AATM.Wpf.UI.BaseConrols.csproj" />
+  </ItemGroup>
+
+</Project>

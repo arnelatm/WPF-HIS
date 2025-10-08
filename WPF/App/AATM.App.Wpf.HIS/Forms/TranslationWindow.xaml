@@ -1,0 +1,91 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AATM.Wpf.App.HIS.Forms"
+        xmlns:BaseConrols="clr-namespace:AATM.Wpf.UI.BaseConrols;assembly=AATM.Wpf.UI.BaseConrols" x:Class="AATM.Wpf.App.HIS.Forms.TranslationWindow"
+        mc:Ignorable="d"
+        Title="TranslationWindow" Height="542" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- NavigatorCrudControl -->
+            <RowDefinition Height="*"/>
+            <!-- Your Grid/DataGrid -->
+        </Grid.RowDefinitions>
+        <BaseConrols:NavigatorCrudControl HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Row="0"/>
+        <DockPanel Grid.Row="2">
+            <!-- Main Layout -->
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Original -->
+                <Label Content="Original" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtOriginalString" Grid.Row="0" Grid.Column="1" IsReadOnly="True" Margin="0,2"/>
+
+                <!-- Localized -->
+                <Label Content="Localized" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtLocalizedString" Grid.Row="1" Grid.Column="1" Margin="0,2"/>
+
+                <!-- Language -->
+                <Label Content="Language" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
+                <ComboBox x:Name="cmbLanguageCode" Grid.Row="2" Grid.Column="1" Margin="0,2"/>
+
+                <!-- UI Identifier -->
+                <Label Content="UI Identifier" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtUIIdentifier" Grid.Row="3" Grid.Column="1" Margin="0,2"/>
+
+                <!-- Module -->
+                <Label Content="Module" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtModuleName" Grid.Row="4" Grid.Column="1" Margin="0,2"/>
+
+                <!-- Spacer Row for layout -->
+                <Label Content="" Grid.Row="5" Grid.Column="0"/>
+                <Label Content="" Grid.Row="5" Grid.Column="1"/>
+
+                <TextBox x:Name="txtErrors"
+                         Grid.Row="5" Grid.ColumnSpan="2"
+                         Background="MistyRose"
+                         Foreground="DarkRed"
+                         FontWeight="Bold"
+                         IsReadOnly="True"
+                         Margin="5,0,0,0"
+                         Height="44"
+                         VerticalScrollBarVisibility="Auto"
+                         TextWrapping="Wrap"/>
+
+                <!-- DataGrid -->
+                <DataGrid x:Name="dataGridTranslations"
+                    Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"
+                    AutoGenerateColumns="False"
+                    Height="315"
+                    Margin="0,10,0,0">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding ID}" Width="60"/>
+                        <DataGridTextColumn Header="Original" Binding="{Binding OriginalString}" Width="120"/>
+                        <DataGridTextColumn Header="Module" Binding="{Binding ModuleName}" Width="140"/>
+                        <DataGridTextColumn Header="UI Identifier" Binding="{Binding UIIdentifier}" Width="160"/>
+                        <DataGridTextColumn Header="Lang" Binding="{Binding LanguageCode}" Width="70"/>
+                        <DataGridTextColumn Header="Localized" Binding="{Binding LocalizedString}" Width="120"/>
+                        <DataGridTextColumn Header="Creation Date" Binding="{Binding CreationDate}" Width="120"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </DockPanel>
+    </Grid>
+
+
+</Window>
