@@ -24,7 +24,7 @@ namespace AATM.Contracts.Dtos
         [GridColumn("Original", Order = 3, Width = 120, Fill = true)]
         public string OriginalString { get; set; }
 
-        [FieldControl(("System.Windows.Forms.TextBox"), "txtLanguageCode")]
+        [FieldControl(("System.Windows.Forms.ComboBox"), "cmbLanguageCode")]
         [GridColumn("Lang", Order = 4, Width = 70)]
         public string LanguageCode { get; set; }
 

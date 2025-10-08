@@ -386,14 +386,15 @@ namespace AATM.UI.Winforms.BaseControls
             _typedController = new GridCrudController<TDto>(factory());
             if (_bindingSource == null)
                 _bindingSource = new BindingSource();
-            _typedBindingList = new BindingList<object>();
-            _bindingSource.DataSource = _typedBindingList;
+            _bindingSource.DataSource = typeof(TDto);
+            _typedBindingList = new BindingList<object>();           
         }
         #endregion
 
         #region Auto field binding
         protected void AutoBindFormFields(Type dtoType, Dictionary<string, object> comboBoxDataSources = null)
         {
+            // if DataSource is still a Type, keep it (good for property discovery); do not overwrite here.
             var properties = dtoType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
             foreach (var prop in properties)
             {
@@ -406,9 +407,9 @@ namespace AATM.UI.Winforms.BaseControls
                 // --- ComboBox binding ---
                 if (control is ComboBox combo)
                 {
-                    if (comboBoxDataSources != null && comboBoxDataSources.TryGetValue(prop.Name, out var dataSource))
+                    if (comboBoxDataSources != null && comboBoxDataSources.TryGetValue(prop.Name, out var ds))
                     {
-                        combo.DataSource = dataSource;
+                        combo.DataSource = ds;
                         // Optionally set DisplayMember/ValueMember if your data source supports it
                         // combo.DisplayMember = "Display";
                         // combo.ValueMember = "Code";
@@ -534,6 +535,10 @@ namespace AATM.UI.Winforms.BaseControls
                     foreach (var o in _typedController.LiveUntypedItems)
                         _typedBindingList.Add(o);
                     _typedBindingList.RaiseListChangedEvents = true;
+
+                    // >>> MOD: once we have real items, switch DataSource from the Type to the actual list (only if still a Type placeholder)
+                    if (_bindingSource.DataSource is Type)
+                        _bindingSource.DataSource = _typedBindingList;
 
                     ConfigureGrid(Grid);
 

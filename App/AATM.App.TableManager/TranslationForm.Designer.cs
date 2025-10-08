@@ -47,7 +47,7 @@
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txtLanguageCode = new System.Windows.Forms.TextBox();
+            this.cmbLanguageCode = new System.Windows.Forms.ComboBox();
             this._tableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -57,7 +57,7 @@
             this._tableLayoutPanel.ColumnCount = 2;
             this._tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this._tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 951F));
-            this._tableLayoutPanel.Controls.Add(this.txtLanguageCode, 1, 2);
+            this._tableLayoutPanel.Controls.Add(this.cmbLanguageCode, 1, 2);
             this._tableLayoutPanel.Controls.Add(this.txtErrors, 0, 5);
             this._tableLayoutPanel.Controls.Add(this._lblOriginal, 0, 0);
             this._tableLayoutPanel.Controls.Add(this._dataGridView, 0, 7);
@@ -91,7 +91,7 @@
             this._tableLayoutPanel.SetColumnSpan(this.txtErrors, 2);
             this.txtErrors.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtErrors.ForeColor = System.Drawing.Color.DarkRed;
-            this.txtErrors.Location = new System.Drawing.Point(3, 133);
+            this.txtErrors.Location = new System.Drawing.Point(3, 134);
             this.txtErrors.Multiline = true;
             this.txtErrors.Name = "txtErrors";
             this.txtErrors.ReadOnly = true;
@@ -110,7 +110,7 @@
             // _dataGridView
             // 
             this._tableLayoutPanel.SetColumnSpan(this._dataGridView, 2);
-            this._dataGridView.Location = new System.Drawing.Point(3, 183);
+            this._dataGridView.Location = new System.Drawing.Point(3, 184);
             this._dataGridView.Name = "_dataGridView";
             this._dataGridView.Size = new System.Drawing.Size(1074, 315);
             this._dataGridView.TabIndex = 4;
@@ -148,7 +148,7 @@
             // 
             // _lblUIIdentifier
             // 
-            this._lblUIIdentifier.Location = new System.Drawing.Point(3, 78);
+            this._lblUIIdentifier.Location = new System.Drawing.Point(3, 79);
             this._lblUIIdentifier.Name = "_lblUIIdentifier";
             this._lblUIIdentifier.Size = new System.Drawing.Size(144, 20);
             this._lblUIIdentifier.TabIndex = 6;
@@ -156,14 +156,14 @@
             // 
             // txtUIIdentifier
             // 
-            this.txtUIIdentifier.Location = new System.Drawing.Point(153, 81);
+            this.txtUIIdentifier.Location = new System.Drawing.Point(153, 82);
             this.txtUIIdentifier.Name = "txtUIIdentifier";
             this.txtUIIdentifier.Size = new System.Drawing.Size(322, 20);
             this.txtUIIdentifier.TabIndex = 7;
             // 
             // _lblModule
             // 
-            this._lblModule.Location = new System.Drawing.Point(3, 104);
+            this._lblModule.Location = new System.Drawing.Point(3, 105);
             this._lblModule.Name = "_lblModule";
             this._lblModule.Size = new System.Drawing.Size(144, 20);
             this._lblModule.TabIndex = 8;
@@ -171,7 +171,7 @@
             // 
             // txtModuleName
             // 
-            this.txtModuleName.Location = new System.Drawing.Point(153, 107);
+            this.txtModuleName.Location = new System.Drawing.Point(153, 108);
             this.txtModuleName.Name = "txtModuleName";
             this.txtModuleName.Size = new System.Drawing.Size(322, 20);
             this.txtModuleName.TabIndex = 9;
@@ -218,12 +218,14 @@
             this.dataGridViewTextBoxColumn7.HeaderText = "CreationDate";
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             // 
-            // txtLanguageCode
+            // cmbLanguageCode
             // 
-            this.txtLanguageCode.Location = new System.Drawing.Point(153, 55);
-            this.txtLanguageCode.Name = "txtLanguageCode";
-            this.txtLanguageCode.Size = new System.Drawing.Size(322, 20);
-            this.txtLanguageCode.TabIndex = 1000;
+            this.cmbLanguageCode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbLanguageCode.FormattingEnabled = true;
+            this.cmbLanguageCode.Location = new System.Drawing.Point(153, 55);
+            this.cmbLanguageCode.Name = "cmbLanguageCode";
+            this.cmbLanguageCode.Size = new System.Drawing.Size(322, 21);
+            this.cmbLanguageCode.TabIndex = 4;
             // 
             // TranslationForm
             // 
@@ -262,6 +264,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private System.Windows.Forms.TextBox txtErrors;
-        private System.Windows.Forms.TextBox txtLanguageCode;
+        private System.Windows.Forms.ComboBox cmbLanguageCode;
     }
 }

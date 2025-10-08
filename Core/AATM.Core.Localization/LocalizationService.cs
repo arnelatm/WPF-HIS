@@ -222,9 +222,9 @@ namespace AATM.Core.Localization
             return languages;
         }
 
-        public List<(string display, string code)> GetWindowsAvailableLanguages()
+        public List<(string display, string languageCode)> GetWindowsAvailableLanguages()
         {
-            var languages = new List<(string display, string code)>();
+            var languages = new List<(string display, string languageCode)>();
 
             // Get all cultures installed on Windows
             var cultures = CultureInfo.GetCultures(CultureTypes.SpecificCultures | CultureTypes.NeutralCultures);
@@ -232,7 +232,7 @@ namespace AATM.Core.Localization
             foreach (var culture in cultures)
             {
                 // Avoid duplicates
-                if (!languages.Any(l => l.code == culture.Name))
+                if (!languages.Any(l => l.languageCode == culture.Name))
                 {
                     languages.Add((culture.EnglishName, culture.Name));
                 }
