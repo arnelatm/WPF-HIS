@@ -31,6 +31,7 @@ WHEN MATCHED THEN
     UPDATE SET
         ModuleName = Source.ModuleName,
         UIIdentifier = Source.UIIdentifier,
+        LanguageCode = Source.LanguageCode,
         LocalizedString = Source.LocalizedString
 WHEN NOT MATCHED BY TARGET THEN
     INSERT (OriginalString, ModuleName, UIIdentifier, LanguageCode, LocalizedString)

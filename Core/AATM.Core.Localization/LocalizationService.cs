@@ -232,7 +232,7 @@ namespace AATM.Core.Localization
             foreach (var culture in cultures)
             {
                 // Avoid duplicates
-                if (!languages.Any(l => l.languageCode == culture.Name))
+                if (!languages.Any(l => l.display == culture.Name))
                 {
                     languages.Add((culture.EnglishName, culture.Name));
                 }

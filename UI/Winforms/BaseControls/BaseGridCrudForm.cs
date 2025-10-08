@@ -154,130 +154,130 @@ namespace AATM.UI.Winforms.BaseControls
         }
         #endregion
 
-        #region Attribute auto-config (unchanged)
-        private static readonly Dictionary<Type, CrudFormAttribute> _crudAttrCache =
-            new Dictionary<Type, CrudFormAttribute>();
+//        #region Attribute auto-config (unchanged)
+//        private static readonly Dictionary<Type, CrudFormAttribute> _crudAttrCache =
+//            new Dictionary<Type, CrudFormAttribute>();
+//
+//        protected void AutoConfigureFromDto<TDto>(Dictionary<string, object> comboBoxDataSources = null)
+//            where TDto : class, IEntityWithId, new()
+//        {
+//            var dtoType = typeof(TDto);
+//            CrudFormAttribute attr;
+//            if (!_crudAttrCache.TryGetValue(dtoType, out attr))
+//            {
+//                attr = (CrudFormAttribute)Attribute.GetCustomAttribute(dtoType, typeof(CrudFormAttribute), false);
+//                _crudAttrCache[dtoType] = attr;
+//            }
+//            if (attr == null)
+//                throw new InvalidOperationException("CrudFormAttribute not found on DTO: " + dtoType.FullName);
 
-        protected void AutoConfigureFromDto<TDto>(Dictionary<string, object> comboBoxDataSources = null)
-            where TDto : class, IEntityWithId, new()
-        {
-            var dtoType = typeof(TDto);
-            CrudFormAttribute attr;
-            if (!_crudAttrCache.TryGetValue(dtoType, out attr))
-            {
-                attr = (CrudFormAttribute)Attribute.GetCustomAttribute(dtoType, typeof(CrudFormAttribute), false);
-                _crudAttrCache[dtoType] = attr;
-            }
-            if (attr == null)
-                throw new InvalidOperationException("CrudFormAttribute not found on DTO: " + dtoType.FullName);
+//            if (!typeof(ICrudService<TDto>).IsAssignableFrom(attr.ServiceType))
+//                throw new InvalidOperationException("ServiceType must implement ICrudService<" + dtoType.Name + ">");
+//            if (attr.ServiceType.GetConstructor(Type.EmptyTypes) == null)
+//                throw new InvalidOperationException("ServiceType requires public parameterless constructor.");
 
-            if (!typeof(ICrudService<TDto>).IsAssignableFrom(attr.ServiceType))
-                throw new InvalidOperationException("ServiceType must implement ICrudService<" + dtoType.Name + ">");
-            if (attr.ServiceType.GetConstructor(Type.EmptyTypes) == null)
-                throw new InvalidOperationException("ServiceType requires public parameterless constructor.");
+//            Func<ICrudService<TDto>> serviceFactory =
+//                () => (ICrudService<TDto>)Activator.CreateInstance(attr.ServiceType);
 
-            Func<ICrudService<TDto>> serviceFactory =
-                () => (ICrudService<TDto>)Activator.CreateInstance(attr.ServiceType);
+//            Func<TDto, IEnumerable<ValidationError>> validator = null;
+//            if (attr.ValidatorRulesType != null)
+//            {
+//                var flags = BindingFlags.Public | BindingFlags.Static;
+//                var pi = attr.ValidatorRulesType.GetProperty("Rules", flags);
+//                var fi = attr.ValidatorRulesType.GetField("Rules", flags);
+//                object rulesObj = pi != null ? pi.GetValue(null, null) : (fi != null ? fi.GetValue(null) : null);
+//                if (rulesObj == null)
+//                    throw new InvalidOperationException("Rules not found or null on " + attr.ValidatorRulesType.FullName);
 
-            Func<TDto, IEnumerable<ValidationError>> validator = null;
-            if (attr.ValidatorRulesType != null)
-            {
-                var flags = BindingFlags.Public | BindingFlags.Static;
-                var pi = attr.ValidatorRulesType.GetProperty("Rules", flags);
-                var fi = attr.ValidatorRulesType.GetField("Rules", flags);
-                object rulesObj = pi != null ? pi.GetValue(null, null) : (fi != null ? fi.GetValue(null) : null);
-                if (rulesObj == null)
-                    throw new InvalidOperationException("Rules not found or null on " + attr.ValidatorRulesType.FullName);
+//                validator = dto =>
+//                {
+//                    if (rulesObj == null) return Enumerable.Empty<ValidationError>();
+//                    var dtoValidatorType = typeof(DtoValidator);
+//                    var candidates = dtoValidatorType
+//                        .GetMethods(BindingFlags.Public | BindingFlags.Static)
+//                        .Where(m => m.Name == "Validate" && m.GetParameters().Length == 2)
+//                        .ToList();
+//                    MethodInfo selected = null;
+//                    foreach (var m in candidates)
+//                    {
+//                        MethodInfo closed = m;
+//                        if (m.IsGenericMethodDefinition)
+//                        {
+//                            if (m.GetGenericArguments().Length != 1)
+//                                continue;
+//                            try { closed = m.MakeGenericMethod(typeof(TDto)); } catch { continue; }
+//                        }
+//                        var pars = closed.GetParameters();
+//                        if (!pars[0].ParameterType.IsAssignableFrom(typeof(TDto))) continue;
+//                        if (rulesObj != null && !pars[1].ParameterType.IsInstanceOfType(rulesObj)) continue;
+//                        selected = closed;
+//                        break;
+//                    }
 
-                validator = dto =>
-                {
-                    if (rulesObj == null) return Enumerable.Empty<ValidationError>();
-                    var dtoValidatorType = typeof(DtoValidator);
-                    var candidates = dtoValidatorType
-                        .GetMethods(BindingFlags.Public | BindingFlags.Static)
-                        .Where(m => m.Name == "Validate" && m.GetParameters().Length == 2)
-                        .ToList();
-                    MethodInfo selected = null;
-                    foreach (var m in candidates)
-                    {
-                        MethodInfo closed = m;
-                        if (m.IsGenericMethodDefinition)
-                        {
-                            if (m.GetGenericArguments().Length != 1)
-                                continue;
-                            try { closed = m.MakeGenericMethod(typeof(TDto)); } catch { continue; }
-                        }
-                        var pars = closed.GetParameters();
-                        if (!pars[0].ParameterType.IsAssignableFrom(typeof(TDto))) continue;
-                        if (rulesObj != null && !pars[1].ParameterType.IsInstanceOfType(rulesObj)) continue;
-                        selected = closed;
-                        break;
-                    }
+//                    if (selected != null)
+//                    {
+//                        try
+//                        {
+//                            var result = selected.Invoke(null, new object[] { dto, rulesObj });
+//                            return result as IEnumerable<ValidationError> ?? Enumerable.Empty<ValidationError>();
+//                        }
+//                        catch { return Enumerable.Empty<ValidationError>(); }
+//                    }
+//#if DEBUG
+//                    Debug.WriteLine($"DtoValidator.Validate method not found for DTO '{typeof(TDto).Name}' and rules '{rulesObj.GetType().FullName}'.");
+//#endif
+//                    return Enumerable.Empty<ValidationError>();
+//                };
+//            }
 
-                    if (selected != null)
-                    {
-                        try
-                        {
-                            var result = selected.Invoke(null, new object[] { dto, rulesObj });
-                            return result as IEnumerable<ValidationError> ?? Enumerable.Empty<ValidationError>();
-                        }
-                        catch { return Enumerable.Empty<ValidationError>(); }
-                    }
-#if DEBUG
-                    Debug.WriteLine($"DtoValidator.Validate method not found for DTO '{typeof(TDto).Name}' and rules '{rulesObj.GetType().FullName}'.");
-#endif
-                    return Enumerable.Empty<ValidationError>();
-                };
-            }
+//            Control errorDisplay = null;
+//            if (!string.IsNullOrWhiteSpace(attr.ErrorDisplayControlName))
+//            {
+//                var ctlField = GetType().GetField(attr.ErrorDisplayControlName,
+//                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+//                if (ctlField != null)
+//                    errorDisplay = ctlField.GetValue(this) as Control;
+//            }
 
-            Control errorDisplay = null;
-            if (!string.IsNullOrWhiteSpace(attr.ErrorDisplayControlName))
-            {
-                var ctlField = GetType().GetField(attr.ErrorDisplayControlName,
-                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-                if (ctlField != null)
-                    errorDisplay = ctlField.GetValue(this) as Control;
-            }
+//            var cfg = new CrudFormConfig<TDto>
+//            {
+//                ServiceFactory = serviceFactory,
+//                Validator = validator,
+//                ErrorDisplayControl = errorDisplay,
+//                AutoBindFields = attr.AutoBindFields
+//            };
+//            ConfigureCrudForm(cfg);
 
-            var cfg = new CrudFormConfig<TDto>
-            {
-                ServiceFactory = serviceFactory,
-                Validator = validator,
-                ErrorDisplayControl = errorDisplay,
-                AutoBindFields = attr.AutoBindFields
-            };
-            ConfigureCrudForm(cfg);
+//            // --- Generic ComboBox binding support ---
+//            var properties = dtoType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+//            foreach (var prop in properties)
+//            {
+//                var controlAttr = prop.GetCustomAttribute<FieldControlAttribute>();
+//                if (controlAttr == null) continue;
 
-            // --- Generic ComboBox binding support ---
-            var properties = dtoType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-            foreach (var prop in properties)
-            {
-                var controlAttr = prop.GetCustomAttribute<FieldControlAttribute>();
-                if (controlAttr == null) continue;
+//                var controlField = GetType().GetField(controlAttr.ControlName,
+//                    BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+//                var control = controlField?.GetValue(this);
 
-                var controlField = GetType().GetField(controlAttr.ControlName,
-                    BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-                var control = controlField?.GetValue(this);
-
-                // ComboBox binding
-                if (control is ComboBox combo && comboBoxDataSources != null && comboBoxDataSources.TryGetValue(prop.Name, out var dataSource))
-                {
-                    combo.DataSource = dataSource;
-                    // Optionally set DisplayMember/ValueMember if your data source supports it
-                    // combo.DisplayMember = "Display";
-                    // combo.ValueMember = "Code";
-                    combo.DataBindings.Clear();
-                    combo.DataBindings.Add("SelectedValue", _bindingSource, prop.Name, true, DataSourceUpdateMode.OnPropertyChanged);
-                }
-                // TextBox binding (existing logic)
-                else if (control is TextBox textBox)
-                {
-                    textBox.DataBindings.Clear();
-                    textBox.DataBindings.Add("Text", _bindingSource, prop.Name, true, DataSourceUpdateMode.OnPropertyChanged);
-                }
-            }
-        }
-        #endregion
+//                // ComboBox binding
+//                if (control is ComboBox combo && comboBoxDataSources != null && comboBoxDataSources.TryGetValue(prop.Name, out var dataSource))
+//                {
+//                    combo.DataSource = dataSource;
+//                    // Optionally set DisplayMember/ValueMember if your data source supports it
+//                    // combo.DisplayMember = "Display";
+//                    // combo.ValueMember = "Code";
+//                    combo.DataBindings.Clear();
+//                    combo.DataBindings.Add("SelectedValue", _bindingSource, prop.Name, true, DataSourceUpdateMode.OnPropertyChanged);
+//                }
+//                // TextBox binding (existing logic)
+//                else if (control is TextBox textBox)
+//                {
+//                    textBox.DataBindings.Clear();
+//                    textBox.DataBindings.Add("Text", _bindingSource, prop.Name, true, DataSourceUpdateMode.OnPropertyChanged);
+//                }
+//            }
+//        }
+//       #endregion
 
         #region Constructors
         protected BaseGridCrudForm() : this(() => new DesignTimeCrudService()) { }
@@ -398,11 +398,33 @@ namespace AATM.UI.Winforms.BaseControls
             var properties = dtoType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
             foreach (var prop in properties)
             {
-                var controlAttr = prop.GetCustomAttribute<FieldControlAttribute>();
-                if (controlAttr == null) continue;
-                var controlField = GetType().GetField(controlAttr.ControlName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-                var control = controlField != null ? controlField.GetValue(this) as Control : null;
+                // Prefer FieldBindingAttribute, fallback to FieldControlAttribute, then convention
+                var bindingAttr = prop.GetCustomAttribute<FieldBindingAttribute>();
+                var controlName = bindingAttr?.ControlName
+                    ?? prop.GetCustomAttribute<FieldControlAttribute>()?.ControlName
+                    ?? $"txt{prop.Name}"; // convention: txt<PropertyName>
+
+                var controlField = GetType().GetField(controlName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+                var control = controlField?.GetValue(this) as Control;
                 if (control == null) continue;
+
+                string controlProperty = bindingAttr?.ControlProperty;
+
+                // Infer control property by type if not specified
+                if (string.IsNullOrEmpty(controlProperty))
+                {
+                    if (control is TextBox) controlProperty = "Text";
+                    else if (control is ComboBox) controlProperty = "SelectedValue";
+                    else if (control is CheckBox) controlProperty = "Checked";
+                    else if (control is DateTimePicker) controlProperty = "Value";
+                    // Add more as needed
+                }
+                    
+                //var controlAttr = prop.GetCustomAttribute<FieldControlAttribute>();
+                //if (controlAttr == null) continue;
+                //var controlField = GetType().GetField(controlAttr.ControlName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+                //var control = controlField != null ? controlField.GetValue(this) as Control : null;
+                //if (control == null) continue;
 
                 // --- ComboBox binding ---
                 if (control is ComboBox combo)
@@ -410,13 +432,20 @@ namespace AATM.UI.Winforms.BaseControls
                     if (comboBoxDataSources != null && comboBoxDataSources.TryGetValue(prop.Name, out var ds))
                     {
                         combo.DataSource = ds;
-                        // Optionally set DisplayMember/ValueMember if your data source supports it
-                        // combo.DisplayMember = "Display";
-                        // combo.ValueMember = "Code";
+                        var itemType = ds.GetType().GetGenericArguments().FirstOrDefault();
+                        if (itemType != null)
+                        {
+                            var displayProp = itemType.GetProperty("Name") ?? itemType.GetProperties().FirstOrDefault(p => p.PropertyType == typeof(string));
+                            var valueProp = itemType.GetProperty("Code") ?? itemType.GetProperties().Skip(1).FirstOrDefault(p => p.PropertyType == typeof(string));
+                            if (displayProp != null) combo.DisplayMember = displayProp.Name;
+                            if (valueProp != null) combo.ValueMember = valueProp.Name;
+                        }
                     }
                     combo.DataBindings.Clear();
-                    combo.DataBindings.Add("SelectedValue", _bindingSource, prop.Name, true, DataSourceUpdateMode.OnPropertyChanged);
-                    continue; // Skip TextBinding for ComboBox
+                    combo.DataBindings.Add(controlProperty, _bindingSource, prop.Name, true, DataSourceUpdateMode.OnPropertyChanged);
+                    continue;
+                    //combo.DataBindings.Add("SelectedValue", _bindingSource, prop.Name, true, DataSourceUpdateMode.OnPropertyChanged);
+                    //continue; // Skip TextBinding for ComboBox
                 }
                 // --- TextBox binding (existing logic) ---
                 if (control is TextBox textBox)

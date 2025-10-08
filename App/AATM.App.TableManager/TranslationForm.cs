@@ -19,7 +19,7 @@ namespace AATM.App.TableManager
 
             var localizationService = new LocalizationService("en-US", "TranslationForm");
             var languages = localizationService.GetWindowsAvailableLanguages()
-                .Select(l => new LanguageItem { Display = l.display, LanguageCode = l.languageCode })
+                .Select(l => new LanguageItem { Name = l.display, Code = l.languageCode })
                 .ToList();
 
             var comboBoxDataSources = new Dictionary<string, object>
@@ -38,13 +38,6 @@ namespace AATM.App.TableManager
             // Re-run auto binding WITH our comboBoxDataSources so the ComboBox gets a DataSource.
             // This safely clears previous bindings on the controls it processes.
             AutoBindFormFields(typeof(TranslationDto), comboBoxDataSources);
-
-            // Ensure proper members for display/value
-            cmbLanguageCode.DisplayMember = nameof(LanguageItem.Display);
-            cmbLanguageCode.ValueMember = nameof(LanguageItem.LanguageCode);
-
-            // (Optional) If you want an initial selection:
-            // cmbLanguageCode.SelectedValue = "en-US";
         }
 
         protected override DataGridView Grid => _dataGridView;
@@ -52,7 +45,7 @@ namespace AATM.App.TableManager
 
     public class LanguageItem
     {
-        public string Display { get; set; }
-        public string LanguageCode { get; set; }
+        public string Name { get; set; }
+        public string Code { get; set; }
     }
 }   
