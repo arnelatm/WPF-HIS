@@ -89,6 +89,7 @@ namespace AATM.UI.Winforms.BaseControls
             public Func<TDto, IEnumerable<ValidationError>> Validator { get; set; }
             public Control ErrorDisplayControl { get; set; }
             public bool AutoBindFields { get; set; } = true;
+            public Dictionary<string, object> ComboBoxDataSources { get; set; } 
             internal bool Applied;
         }
 
@@ -111,7 +112,7 @@ namespace AATM.UI.Winforms.BaseControls
             cfg.Applied = true;
 
             if (cfg.AutoBindFields)
-                AutoBindFormFields(typeof(TDto));
+                AutoBindFormFields(typeof(TDto), cfg.ComboBoxDataSources); 
 
             if (cfg.Validator != null)
                 StructuredValidator = e => cfg.Validator((TDto)e);
@@ -145,6 +146,7 @@ namespace AATM.UI.Winforms.BaseControls
             public CrudFormFluent<TDto> Validator(Func<TDto, IEnumerable<ValidationError>> validator) { _cfg.Validator = validator; return this; }
             public CrudFormFluent<TDto> ErrorDisplay(Control control) { _cfg.ErrorDisplayControl = control; return this; }
             public CrudFormFluent<TDto> AutoBind(bool enabled = true) { _cfg.AutoBindFields = enabled; return this; }
+            public CrudFormFluent<TDto> ComboBoxDataSources(Dictionary<string, object> sources) { _cfg.ComboBoxDataSources = sources; return this; } 
             public void Apply()
             {
                 if (_applied) throw new InvalidOperationException("CrudFormFluent already applied.");

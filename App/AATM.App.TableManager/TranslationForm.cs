@@ -26,18 +26,14 @@ namespace AATM.App.TableManager
             {
                 { nameof(TranslationDto.LanguageCode), languages }
             };
-
-            // Configure CRUD (this creates the internal BindingSource; we will re-bind ComboBox afterward)
+              
             ForDto<TranslationDto>()
                 .Service(() => new TranslationCrudService())
                 .Validator(d => DtoValidator.Validate(d, TranslationDtoValidationRules.Rules))
                 .ErrorDisplay(txtErrors)
-                .AutoBind(true) // initial auto-bind (will be corrected for the ComboBox below)
+                .AutoBind(true) 
+                .ComboBoxDataSources(comboBoxDataSources) 
                 .Apply();
-
-            // Re-run auto binding WITH our comboBoxDataSources so the ComboBox gets a DataSource.
-            // This safely clears previous bindings on the controls it processes.
-            AutoBindFormFields(typeof(TranslationDto), comboBoxDataSources);
         }
 
         protected override DataGridView Grid => _dataGridView;

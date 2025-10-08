@@ -30,7 +30,6 @@
         {
             this._tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.txtErrors = new System.Windows.Forms.TextBox();
-            this._lblOriginal = new System.Windows.Forms.Label();
             this._dataGridView = new System.Windows.Forms.DataGridView();
             this.txtOriginalString = new System.Windows.Forms.TextBox();
             this._lblLocalized = new System.Windows.Forms.Label();
@@ -47,6 +46,7 @@
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this._lblOriginal = new System.Windows.Forms.Label();
             this.cmbLanguageCode = new System.Windows.Forms.ComboBox();
             this._tableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._dataGridView)).BeginInit();
@@ -98,14 +98,6 @@
             this.txtErrors.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.txtErrors.Size = new System.Drawing.Size(1074, 44);
             this.txtErrors.TabIndex = 999;
-            // 
-            // _lblOriginal
-            // 
-            this._lblOriginal.Location = new System.Drawing.Point(3, 0);
-            this._lblOriginal.Name = "_lblOriginal";
-            this._lblOriginal.Size = new System.Drawing.Size(144, 20);
-            this._lblOriginal.TabIndex = 0;
-            this._lblOriginal.Text = "Original";
             // 
             // _dataGridView
             // 
@@ -218,6 +210,14 @@
             this.dataGridViewTextBoxColumn7.HeaderText = "CreationDate";
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             // 
+            // _lblOriginal
+            // 
+            this._lblOriginal.Location = new System.Drawing.Point(3, 0);
+            this._lblOriginal.Name = "_lblOriginal";
+            this._lblOriginal.Size = new System.Drawing.Size(144, 20);
+            this._lblOriginal.TabIndex = 0;
+            this._lblOriginal.Text = "Original";
+            // 
             // cmbLanguageCode
             // 
             this.cmbLanguageCode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -246,7 +246,6 @@
 
         #endregion
         private System.Windows.Forms.TableLayoutPanel _tableLayoutPanel;
-        private System.Windows.Forms.Label _lblOriginal;
         private System.Windows.Forms.TextBox txtOriginalString;
         private System.Windows.Forms.Label _lblLocalized;
         private System.Windows.Forms.TextBox txtLocalizedString;
@@ -265,5 +264,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private System.Windows.Forms.TextBox txtErrors;
         private System.Windows.Forms.ComboBox cmbLanguageCode;
+        private System.Windows.Forms.Label _lblOriginal;
     }
 }
