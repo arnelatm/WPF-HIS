@@ -158,7 +158,7 @@ namespace AATM.UI.Winforms.BaseControls
         private static readonly Dictionary<Type, CrudFormAttribute> _crudAttrCache =
             new Dictionary<Type, CrudFormAttribute>();
 
-        protected void AutoConfigureFromDto<TDto>()
+        protected void AutoConfigureFromDto<TDto>(Dictionary<string, object> comboBoxDataSources = null)
             where TDto : class, IEntityWithId, new()
         {
             var dtoType = typeof(TDto);
@@ -247,6 +247,35 @@ namespace AATM.UI.Winforms.BaseControls
                 AutoBindFields = attr.AutoBindFields
             };
             ConfigureCrudForm(cfg);
+
+            // --- Generic ComboBox binding support ---
+            var properties = dtoType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            foreach (var prop in properties)
+            {
+                var controlAttr = prop.GetCustomAttribute<FieldControlAttribute>();
+                if (controlAttr == null) continue;
+
+                var controlField = GetType().GetField(controlAttr.ControlName,
+                    BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+                var control = controlField?.GetValue(this);
+
+                // ComboBox binding
+                if (control is ComboBox combo && comboBoxDataSources != null && comboBoxDataSources.TryGetValue(prop.Name, out var dataSource))
+                {
+                    combo.DataSource = dataSource;
+                    // Optionally set DisplayMember/ValueMember if your data source supports it
+                    // combo.DisplayMember = "Display";
+                    // combo.ValueMember = "Code";
+                    combo.DataBindings.Clear();
+                    combo.DataBindings.Add("SelectedValue", _bindingSource, prop.Name, true, DataSourceUpdateMode.OnPropertyChanged);
+                }
+                // TextBox binding (existing logic)
+                else if (control is TextBox textBox)
+                {
+                    textBox.DataBindings.Clear();
+                    textBox.DataBindings.Add("Text", _bindingSource, prop.Name, true, DataSourceUpdateMode.OnPropertyChanged);
+                }
+            }
         }
         #endregion
 
@@ -363,73 +392,89 @@ namespace AATM.UI.Winforms.BaseControls
         #endregion
 
         #region Auto field binding
-        protected void AutoBindFormFields(Type dtoType)
+        protected void AutoBindFormFields(Type dtoType, Dictionary<string, object> comboBoxDataSources = null)
         {
             var properties = dtoType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
             foreach (var prop in properties)
             {
                 var controlAttr = prop.GetCustomAttribute<FieldControlAttribute>();
                 if (controlAttr == null) continue;
-
-                var controlField = GetType().GetField(controlAttr.ControlName,
-                    BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+                var controlField = GetType().GetField(controlAttr.ControlName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
                 var control = controlField != null ? controlField.GetValue(this) as Control : null;
                 if (control == null) continue;
 
-                var entityParam = Expression.Parameter(typeof(IEntityWithId), "entity");
-                var castedEntity = Expression.Convert(entityParam, dtoType);
-                var propertyAccess = Expression.Property(castedEntity, prop.Name);
-
-                Expression getterBody;
-                if (prop.PropertyType == typeof(string))
+                // --- ComboBox binding ---
+                if (control is ComboBox combo)
                 {
-                    getterBody = Expression.Coalesce(propertyAccess, Expression.Constant(string.Empty));
+                    if (comboBoxDataSources != null && comboBoxDataSources.TryGetValue(prop.Name, out var dataSource))
+                    {
+                        combo.DataSource = dataSource;
+                        // Optionally set DisplayMember/ValueMember if your data source supports it
+                        // combo.DisplayMember = "Display";
+                        // combo.ValueMember = "Code";
+                    }
+                    combo.DataBindings.Clear();
+                    combo.DataBindings.Add("SelectedValue", _bindingSource, prop.Name, true, DataSourceUpdateMode.OnPropertyChanged);
+                    continue; // Skip TextBinding for ComboBox
                 }
-                else
+                // --- TextBox binding (existing logic) ---
+                if (control is TextBox textBox)
                 {
-                    var toObj = Expression.Convert(propertyAccess, typeof(object));
-                    var toStringCall = Expression.Call(toObj, typeof(object).GetMethod("ToString"));
-                    getterBody = Expression.Condition(
-                        Expression.Equal(propertyAccess, Expression.Constant(null, prop.PropertyType)),
-                        Expression.Constant(string.Empty),
-                        toStringCall);
-                }
-                var getterLambda = Expression.Lambda<Func<IEntityWithId, string>>(getterBody, entityParam);
+                    var entityParam = Expression.Parameter(typeof(IEntityWithId), "entity");
+                    var castedEntity = Expression.Convert(entityParam, dtoType);
+                    var propertyAccess = Expression.Property(castedEntity, prop.Name);
 
-                var valueParam = Expression.Parameter(typeof(string), "value");
-                Expression valueConverted;
-                if (prop.PropertyType == typeof(string))
-                    valueConverted = valueParam;
-                else
-                {
-                    var parseMethod = prop.PropertyType.GetMethod("Parse", new Type[] { typeof(string) });
-                    if (parseMethod != null)
-                        valueConverted = Expression.Call(parseMethod, valueParam);
-                    else if (prop.PropertyType.IsValueType)
-                        valueConverted = Expression.Convert(
-                            Expression.Call(typeof(Convert), "ChangeType", null, valueParam,
-                                Expression.Constant(prop.PropertyType)),
-                            prop.PropertyType);
+                    Expression getterBody;
+                    if (prop.PropertyType == typeof(string))
+                    {
+                        getterBody = Expression.Coalesce(propertyAccess, Expression.Constant(string.Empty));
+                    }
                     else
-                        valueConverted = Expression.Constant(null, prop.PropertyType);
+                    {
+                        var toObj = Expression.Convert(propertyAccess, typeof(object));
+                        var toStringCall = Expression.Call(toObj, typeof(object).GetMethod("ToString"));
+                        getterBody = Expression.Condition(
+                            Expression.Equal(propertyAccess, Expression.Constant(null, prop.PropertyType)),
+                            Expression.Constant(string.Empty),
+                            toStringCall);
+                    }
+                    var getterLambda = Expression.Lambda<Func<IEntityWithId, string>>(getterBody, entityParam);
+
+                    var valueParam = Expression.Parameter(typeof(string), "value");
+                    Expression valueConverted;
+                    if (prop.PropertyType == typeof(string))
+                        valueConverted = valueParam;
+                    else
+                    {
+                        var parseMethod = prop.PropertyType.GetMethod("Parse", new Type[] { typeof(string) });
+                        if (parseMethod != null)
+                            valueConverted = Expression.Call(parseMethod, valueParam);
+                        else if (prop.PropertyType.IsValueType)
+                            valueConverted = Expression.Convert(
+                                Expression.Call(typeof(Convert), "ChangeType", null, valueParam,
+                                    Expression.Constant(prop.PropertyType)),
+                                prop.PropertyType);
+                        else
+                            valueConverted = Expression.Constant(null, prop.PropertyType);
+                    }
+                    var setterExpr = Expression.Assign(Expression.Property(castedEntity, prop.Name), valueConverted);
+                    var setterLambda = Expression.Lambda<Action<IEntityWithId, string>>(setterExpr, entityParam, valueParam);
+
+                    _textBindings.Add(new TextBinding
+                    {
+                        Box = control as TextBox,
+                        Getter = getterLambda.Compile(),
+                        Setter = setterLambda.Compile()
+                    });
                 }
-                var setterExpr = Expression.Assign(Expression.Property(castedEntity, prop.Name), valueConverted);
-                var setterLambda = Expression.Lambda<Action<IEntityWithId, string>>(setterExpr, entityParam, valueParam);
-
-                _textBindings.Add(new TextBinding
-                {
-                    Box = control as TextBox,
-                    Getter = getterLambda.Compile(),
-                    Setter = setterLambda.Compile()
-                });
             }
-
             if (AutoWireClearErrors)
             {
                 var boxes = _textBindings.Where(b => b.Box != null).Select(b => (Control)b.Box).ToArray();
                 if (boxes.Length > 0) WireClearFieldErrorsOnTextChanged(boxes);
-            }
+            };
         }
+
 
         protected virtual Dictionary<string, Control> FieldControlMap
         {
@@ -1404,7 +1449,7 @@ namespace AATM.UI.Winforms.BaseControls
                 }
                 else if (_searchMode == SearchMode.Regex)
                 {
-                    
+
                     Regex regex = null;
                     try
                     {
@@ -1416,7 +1461,7 @@ namespace AATM.UI.Winforms.BaseControls
                     {
                         if (!_lastRegexInvalid)
                         {
-                            SetStatusText("Invalid regex pattern.");    
+                            SetStatusText("Invalid regex pattern.");
                             SetSearchBoxError(true, ex.Message);
                             _lastRegexInvalid = true;
                         }
@@ -1628,7 +1673,7 @@ namespace AATM.UI.Winforms.BaseControls
             }
             ApplySearch();
             _searchBox.Focus();
-        }   
+        }
         #endregion
 
         #region Event wiring (selection + clear errors)
@@ -1790,7 +1835,7 @@ namespace AATM.UI.Winforms.BaseControls
                 if (_suppressProgrammaticSearch) return;
                 if (_isWatermarkActive) return;
                 if (_liveSearchEnabled)
-                    RestartSearchDebounce();    
+                    RestartSearchDebounce();
             };
 
             // Clear button (feature 1)

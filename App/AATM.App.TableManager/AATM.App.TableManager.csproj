@@ -39,6 +39,9 @@
     <StartupObject>AATM.App.TableManager.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AATM.Libraries.BaseControlsLibrary">
+      <HintPath>..\..\Libraries\BaseControlsLibrary\obj\Debug\AATM.Libraries.BaseControlsLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core" />

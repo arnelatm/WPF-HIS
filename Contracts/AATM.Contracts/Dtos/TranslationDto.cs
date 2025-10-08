@@ -12,23 +12,23 @@ namespace AATM.Contracts.Dtos
         public int ID { get; set; }
 
         // ** [OPTIMIZATION]: Declarative binding/column setup **
-        [FieldControl(("System.Windows.Forms.TextBox"), "_txtModuleName")]
+        [FieldControl(("System.Windows.Forms.TextBox"), "txtModuleName")]
         [GridColumn("Module", Order = 1, Width = 140)]
         public string ModuleName { get; set; }
 
-        [FieldControl(("System.Windows.Forms.TextBox"), "_txtUIIdentifier")]
+        [FieldControl(("System.Windows.Forms.TextBox"), "txtUIIdentifier")]
         [GridColumn("UI Identifier", Order = 2, Width = 160)]
         public string UIIdentifier { get; set; }
 
-        [FieldControl(("System.Windows.Forms.TextBox"), "_txtOriginalString")]
+        [FieldControl(("System.Windows.Forms.TextBox"), "txtOriginalString")]
         [GridColumn("Original", Order = 3, Width = 120, Fill = true)]
         public string OriginalString { get; set; }
 
-        [FieldControl(("System.Windows.Forms.TextBox"), "_txtLanguageCode")]
+        [FieldControl(("System.Windows.Forms.TextBox"), "txtLanguageCode")]
         [GridColumn("Lang", Order = 4, Width = 70)]
         public string LanguageCode { get; set; }
 
-        [FieldControl(("System.Windows.Forms.TextBox"), "_txtLocalizedString")]
+        [FieldControl(("System.Windows.Forms.TextBox"), "txtLocalizedString")]
         [GridColumn("Localized", Order = 5, Width = 120, Fill = true)]
         public string LocalizedString { get; set; }
 

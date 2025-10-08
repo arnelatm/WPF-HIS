@@ -198,7 +198,7 @@ namespace AATM.Core.Localization
             using (var connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                string query = "SELECT DISTINCT LanguageCode, DisplayName FROM Translation";
+                string query = "SELECT DISTINCT LanguageCode FROM Translations";
                 using (var command = new SqlCommand(query, connection))
                 {
                     using (var reader = command.ExecuteReader())
@@ -206,11 +206,12 @@ namespace AATM.Core.Localization
                         while (reader.Read())
                         {
                             string code = reader["LanguageCode"].ToString();
-                            string display = reader["DisplayName"].ToString();
 
                             // Avoid adding duplicate default language
                             if (!languages.Any(l => l.code == code))
                             {
+
+                                String display = GetWindowsLanguageDisplayName(code);
                                 languages.Add((display, code));
                             }
                         }
@@ -219,6 +220,38 @@ namespace AATM.Core.Localization
             }
 
             return languages;
+        }
+
+        public List<(string display, string code)> GetWindowsAvailableLanguages()
+        {
+            var languages = new List<(string display, string code)>();
+
+            // Get all cultures installed on Windows
+            var cultures = CultureInfo.GetCultures(CultureTypes.SpecificCultures | CultureTypes.NeutralCultures);
+
+            foreach (var culture in cultures)
+            {
+                // Avoid duplicates
+                if (!languages.Any(l => l.code == culture.Name))
+                {
+                    languages.Add((culture.EnglishName, culture.Name));
+                }
+            }
+
+            return languages;
+        }
+
+        public static string GetWindowsLanguageDisplayName(string languageCode)
+        {
+            try
+            {
+                var culture = new CultureInfo(languageCode);
+                return culture.EnglishName; // Or use culture.NativeName for the local name
+            }
+            catch (CultureNotFoundException)
+            {
+                return languageCode; // Fallback: return the code if not found
+            }
         }
 
         public string Translate(string sourceLang, string targetLang, string textToTranslate)

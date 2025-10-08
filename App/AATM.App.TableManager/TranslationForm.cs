@@ -2,16 +2,21 @@
 using AATM.Contracts.Dtos;
 using AATM.Modules.Localization;
 using AATM.UI.Winforms.BaseControls;
+using AATM.UI.Winforms.Localization;
+using System.Collections.Generic;
 using System.Windows.Forms;
+using static AATM.UI.Winforms.Localization.LanguageUiHelper;
 
 namespace AATM.App.TableManager
 {
     public partial class TranslationForm : BaseGridCrudForm
     {
+        private BindingSource bindingSource;
+
         public TranslationForm() : base(nameof(TranslationForm))
         {
             InitializeComponent();
-
+                   
             // Fluent configuration (designer-safe: method-level generics only)
             ForDto<TranslationDto>()
                 .Service(() => new TranslationCrudService())
@@ -28,4 +33,4 @@ namespace AATM.App.TableManager
         }
 
     }
-}       
+}
