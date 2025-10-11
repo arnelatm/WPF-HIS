@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AATM.Wpf.App.HIS.Forms"
         xmlns:BaseConrols="clr-namespace:AATM.Wpf.UI.BaseConrols;assembly=AATM.Wpf.UI.BaseConrols" x:Class="AATM.Wpf.App.HIS.Forms.TranslationWindow"
         mc:Ignorable="d"
-        Title="TranslationWindow" Height="542" Width="800">
+        Title="Translation Manager" Height="542" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -14,7 +14,11 @@
             <RowDefinition Height="*"/>
             <!-- Your Grid/DataGrid -->
         </Grid.RowDefinitions>
-        <BaseConrols:NavigatorCrudControl HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Row="0"/>
+        <BaseConrols:NavigatorCrudControl HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Row="0"
+                                          FirstCommand="{Binding FirstCommand}"
+                                          PreviousCommand="{Binding PreviousCommand}"
+                                          NextCommand="{Binding NextCommand}"
+                                          LastCommand="{Binding LastCommand}"/>
         <DockPanel Grid.Row="2">
             <!-- Main Layout -->
             <Grid Margin="10">
@@ -34,23 +38,23 @@
 
                 <!-- Original -->
                 <Label Content="Original" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
-                <TextBox x:Name="txtOriginalString" Grid.Row="0" Grid.Column="1" IsReadOnly="True" Margin="0,2"/>
+                <TextBox x:Name="txtOriginalString" Text="{Binding CurrentTranslation.OriginalString}" Grid.Row="0" Grid.Column="1" IsReadOnly="True" Margin="0,2"/>
 
                 <!-- Localized -->
                 <Label Content="Localized" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
-                <TextBox x:Name="txtLocalizedString" Grid.Row="1" Grid.Column="1" Margin="0,2"/>
+                <TextBox x:Name="txtLocalizedString" Text="{Binding CurrentTranslation.LocalizedString}" Grid.Row="1" Grid.Column="1" Margin="0,2"/>
 
                 <!-- Language -->
                 <Label Content="Language" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
-                <ComboBox x:Name="cmbLanguageCode" Grid.Row="2" Grid.Column="1" Margin="0,2"/>
+                <ComboBox x:Name="cmbLanguageCode" Text="{Binding CurrentTranslation.LanguageCode}" Grid.Row="2" Grid.Column="1" Margin="0,2"/>
 
                 <!-- UI Identifier -->
                 <Label Content="UI Identifier" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"/>
-                <TextBox x:Name="txtUIIdentifier" Grid.Row="3" Grid.Column="1" Margin="0,2"/>
+                <TextBox x:Name="txtUIIdentifier" Text="{Binding CurrentTranslation.UIIdentifier}" Grid.Row="3" Grid.Column="1" Margin="0,2"/>
 
                 <!-- Module -->
                 <Label Content="Module" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center"/>
-                <TextBox x:Name="txtModuleName" Grid.Row="4" Grid.Column="1" Margin="0,2"/>
+                <TextBox x:Name="txtModuleName" Text="{Binding CurrentTranslation.ModuleName}" Grid.Row="4" Grid.Column="1" Margin="0,2"/>
 
                 <!-- Spacer Row for layout -->
                 <Label Content="" Grid.Row="5" Grid.Column="0"/>

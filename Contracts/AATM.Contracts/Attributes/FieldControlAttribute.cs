@@ -1,7 +1,5 @@
 ﻿using System;
 
-using System;
-
 namespace AATM.Contracts.Attributes
 {
     /// <summary>

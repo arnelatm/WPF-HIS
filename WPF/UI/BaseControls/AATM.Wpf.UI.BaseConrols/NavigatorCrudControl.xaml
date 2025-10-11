@@ -3,20 +3,30 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              Height="40" MinWidth="300">
     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-        <Button x:Name="btnFirst" Content="First" Margin="2"/>
-        <Button x:Name="btnPrevious" Content="Prev" Margin="2"/>
-        <Label Content="Record:" Margin="8,0,2,0" VerticalAlignment="Center"/>
-        <TextBox x:Name="txtRecord" Width="40" Margin="2" VerticalAlignment="Center"/>
-        <Label Content="of " Margin="8,0,2,0" VerticalAlignment="Center"/>
-        <TextBox x:Name="txtCount" Width="40" Margin="2" VerticalAlignment="Center"/>
-        <Button x:Name="btnNext" Content="Next" Margin="2"/>
-        <Button x:Name="btnLast" Content="Last" Margin="2"/>
-        <Button x:Name="btnAdd" Content="Add" Margin="2"/>
-        <Button x:Name="btnDelete" Content="Delete" Margin="2"/>
-        <Button x:Name="btnModify" Content="Modify" Margin="2"/>
-        <Button x:Name="btnClear" Content="Clear" Margin="2"/>
-        <Button x:Name="btnSave" Content="Save" Margin="2"/>
-        <Button x:Name="btnUndo" Content="Undo" Margin="2"/>
-        <Button x:Name="btnFind" Content="Find" Margin="2"/>
+        <Button Content="First" Margin="2"
+                Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=FirstCommand}"/>
+        <Button Content="Prev" Margin="2"
+                Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=PreviousCommand}"/>
+        <Button Content="Next" Margin="2"
+                Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=NextCommand}"/>
+        <Button Content="Last" Margin="2"
+                Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=LastCommand}"/>
+
+        <Separator Margin="8,0"/>
+
+        <Button Content="Add" Margin="2"
+                Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=AddCommand}"/>
+        <Button Content="Delete" Margin="2"
+                Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DeleteCommand}"/>
+        <Button Content="Modify" Margin="2"
+                Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=ModifyCommand}"/>
+        <Button Content="Clear" Margin="2"
+                Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=ClearCommand}"/>
+        <Button Content="Save" Margin="2"
+                Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=SaveCommand}"/>
+        <Button Content="Undo" Margin="2"
+                Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=UndoCommand}"/>
+        <Button Content="Find" Margin="2"
+                Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=FindCommand}"/>
     </StackPanel>
 </UserControl>

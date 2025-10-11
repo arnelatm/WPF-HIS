@@ -1,4 +1,7 @@
-﻿using System;
+﻿using AATM.App.Wpf.HIS;
+using AATM.App.Wpf.HIS.ViewModels;
+using AATM.DataAccess.Sql;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +22,10 @@ namespace AATM.Wpf.App.HIS.Forms
     /// </summary>
     public partial class TranslationWindow : Window
     {
-        public TranslationWindow()
+        public TranslationWindow(TranslationViewModel vm)
         {
             InitializeComponent();
+            DataContext = vm;
         }
 
         private void NavigatorCrudControl_Loaded(object sender, RoutedEventArgs e)
