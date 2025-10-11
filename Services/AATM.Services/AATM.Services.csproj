@@ -23,5 +23,6 @@
 		<PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.1" Condition="'$(TargetFramework)'=='net8.0'" />
 		<!-- SNI is only needed on .NET Framework -->
 		<PackageReference Include="Microsoft.Data.SqlClient.SNI" Version="6.0.2" Condition="'$(TargetFramework)'=='net48'" />
+		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="8.0.1" />
 	</ItemGroup>
 </Project>

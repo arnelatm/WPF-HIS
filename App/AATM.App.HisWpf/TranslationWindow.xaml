@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AATM.App.HisWpf"
         mc:Ignorable="d"
-        Title="TranslationWindow" Height="450" Width="800">
+        Title="Translation Manager" Height="611" Width="800">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -23,20 +23,25 @@
         </Grid.ColumnDefinitions>
 
         <Label Grid.Column="0" Content="Original" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
-        <TextBox Grid.Row="0" Grid.Column="2" x:Name="txtOriginalString" IsReadOnly="True" Margin="0,2,0,2" />
+        <TextBox Grid.Row="0" Grid.Column="2" x:Name="txtOriginalString" IsReadOnly="True" Margin="0,2,0,2"
+                 Text="{Binding SelectedTranslation.OriginalString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
         <Label Grid.Row="1" Grid.Column="0" Content="Localized" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
-        <TextBox Grid.Row="1" Grid.Column="2" x:Name="txtLocalizedString" Margin="0,2,0,2" />
+        <TextBox Grid.Row="1" Grid.Column="2" x:Name="txtLocalizedString" Margin="0,2,0,2"
+                 Text="{Binding SelectedTranslation.LocalizedString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
         <Label Grid.Row="2" Grid.Column="0" Content="Language" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
         <ComboBox Grid.Row="2" Grid.Column="2" x:Name="cmbLanguageCode" Margin="0,2,0,2"
-                  ItemsSource="{Binding Languages}" DisplayMemberPath="Name" SelectedValuePath="Code" />
+                  ItemsSource="{Binding Languages}" DisplayMemberPath="Name" SelectedValuePath="Code"
+                  SelectedValue="{Binding SelectedTranslation.LanguageCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
         <Label Grid.Row="3" Grid.Column="0" Content="UI Identifier" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
-        <TextBox Grid.Row="3" Grid.Column="2" x:Name="txtUIIdentifier" Margin="0,2,0,2" />
+        <TextBox Grid.Row="3" Grid.Column="2" x:Name="txtUIIdentifier" Margin="0,2,0,2"
+                 Text="{Binding SelectedTranslation.UIIdentifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
         <Label Grid.Row="4" Grid.Column="0" Content="Module" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
-        <TextBox Grid.Row="4" Grid.Column="2" x:Name="txtModuleName" Margin="0,2,0,2" />
+        <TextBox Grid.Row="4" Grid.Column="2" x:Name="txtModuleName" Margin="0,2,0,2"
+                 Text="{Binding SelectedTranslation.ModuleName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
         <TextBox Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" x:Name="txtErrors"
                  Background="MistyRose" Foreground="DarkRed" FontWeight="Bold"
@@ -45,6 +50,7 @@
 
         <DataGrid Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3" x:Name="dataGrid"
                   ItemsSource="{Binding Translations}" AutoGenerateColumns="False"
+                  SelectedItem="{Binding SelectedTranslation, Mode=TwoWay}"
                   Margin="0,39,0,30" Height="315">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding ID}" Width="80"/>
