@@ -54,6 +54,51 @@ namespace AATM.WpfDataAccess.Sql
             return dto;
         }
 
+        Task<List<TranslationDto>> ITranslationRepository.GetTranslationsPageAsync(int pageNumber, int pageSize)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<(List<TranslationDto> Items, int TotalCount)> GetTranslationsPageAsync(int pageNumber, int pageSize)
+        {
+            var items = new List<TranslationDto>();
+            int totalCount = 0;
+            string sql = @"
+        SELECT COUNT(*) OVER() AS TotalCount, ID, OriginalString, ModuleName, UIIdentifier, LanguageCode, LocalizedString, CreationDate
+        FROM Translations
+        ORDER BY ID
+        OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY";
+            using (var conn = new SqlConnection(_connectionString))
+            {
+                await conn.OpenAsync();
+                using (var cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Offset", (pageNumber - 1) * pageSize);
+                    cmd.Parameters.AddWithValue("@PageSize", pageSize);
+                    using (var reader = await cmd.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            if (totalCount == 0)
+                                totalCount = reader.GetInt32(reader.GetOrdinal("TotalCount"));
+                            items.Add(new TranslationDto
+                            {
+                                ID = reader.GetInt32(reader.GetOrdinal("ID")),
+                                OriginalString = reader["OriginalString"].ToString(),
+                                ModuleName = reader["ModuleName"].ToString(),
+                                UIIdentifier = reader["UIIdentifier"].ToString(),
+                                LanguageCode = reader["LanguageCode"].ToString(),
+                                LocalizedString = reader["LocalizedString"].ToString(),
+                                CreationDate = reader.GetDateTime(reader.GetOrdinal("CreationDate"))
+                            });
+                        }
+                    }
+                }
+            }
+            return (items, totalCount);
+        }
+
+
         public async Task<List<TranslationDto>> GetAllTranslationsAsync()
         {
             var translations = new List<TranslationDto>();
@@ -143,5 +188,7 @@ namespace AATM.WpfDataAccess.Sql
                 }
             }
         }
+
+
     }
 }

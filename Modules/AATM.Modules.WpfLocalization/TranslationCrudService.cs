@@ -14,12 +14,16 @@ namespace AATM.Modules.Localization
             _db = new TranslationDbService(repository);
         }
 
+        public async Task<IReadOnlyList<TranslationDto>> GetPageAsync(int pageNumber, int pageSize)
+        {
+            return (await _db.GetTranslationsPageAsync(pageNumber, pageSize));
+        }
+
         public async Task<IReadOnlyList<TranslationDto>> GetAllAsync(CancellationToken ct = default)
             => (await _db.GetAllTranslationsAsync().ConfigureAwait(false));
 
         public async Task<TranslationDto> GetByIdAsync(int id, CancellationToken ct = default)
         {
-            // Use the DB service's GetTranslationByIdAsync, which returns nullable
             return await _db.GetTranslationByIdAsync(id).ConfigureAwait(false);
         }
 

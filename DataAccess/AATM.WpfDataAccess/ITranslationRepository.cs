@@ -11,6 +11,7 @@ namespace AATM.WpfDataAccess
         Task<bool> DeleteTranslationAsync(int id);
         Task<TranslationDto> GetTranslationByIdAsync(int id);
         Task<string> GetTranslationAsync(string originalString, string normalizedLanguage);
+        Task<List<TranslationDto>> GetTranslationsPageAsync(int pageNumber, int pageSize);
     }
 
 }

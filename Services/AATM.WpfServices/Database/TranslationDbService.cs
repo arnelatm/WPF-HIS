@@ -25,6 +25,15 @@ namespace AATM.WpfServices.Database
         }
 
         /// <summary>
+        /// Inserts or updates a translation record.
+        /// </summary>
+        public async Task<List<TranslationDto>> GetTranslationsPageAsync(int pageNumber, int pageSize)
+        {
+            return await _repository.GetTranslationsPageAsync(pageNumber, pageSize);
+        }
+
+
+        /// <summary>
         /// Fetches all translations.
         /// </summary>
         public async Task<List<TranslationDto>> GetAllTranslationsAsync()
