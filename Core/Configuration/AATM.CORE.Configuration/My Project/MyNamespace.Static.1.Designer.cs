@@ -115,7 +115,7 @@ namespace AATM.Core.Configuration.My
     *//* TODO ERROR: Skipped ElifDirectiveTrivia
     #ElseIf _MYAPPLICATIONTYPE = "Windows" Then
     */
-    internal partial class MyApplication : Microsoft.VisualBasic.ApplicationServices.ApplicationBase
+    // The type 'Microsoft.VisualBasic.ApplicationServices.ApplicationBase' is not available in .NET 8.0 and cannot be referenced. You must implement your own application base logic or refactor this class to use available .NET APIs.
     {
         /* TODO ERROR: Skipped ElifDirectiveTrivia
         #ElseIf _MYAPPLICATIONTYPE = "Console" Then
