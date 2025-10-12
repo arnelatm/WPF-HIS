@@ -16,9 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Contracts\AATM.Contracts\AATM.Contracts.csproj" />
-    <ProjectReference Include="..\..\..\DataAccess\AATM.DataAccess.Sql\AATM.DataAccess.Sql.csproj" />
-    <ProjectReference Include="..\..\..\Services\AATM.Services\AATM.Services.csproj" />
     <ProjectReference Include="..\..\UI\BaseControls\AATM.Wpf.UI.BaseConrols\AATM.Wpf.UI.BaseConrols.csproj" />
   </ItemGroup>
 

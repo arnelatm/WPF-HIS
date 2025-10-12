@@ -55,10 +55,6 @@
       <Project>{3C7BEC0F-17BB-0BA8-274F-A5196507CEBB}</Project>
       <Name>AATM.Business</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Contracts\AATM.Contracts\AATM.Contracts.csproj">
-      <Project>{464CDA63-DB4A-02B4-1AFA-7083EF503845}</Project>
-      <Name>AATM.Contracts</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

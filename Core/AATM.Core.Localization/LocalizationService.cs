@@ -1,13 +1,7 @@
-﻿using AATM.Contracts.Dtos;
-using AATM.Contracts.Interfaces.Services;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data.SqlClient;
-using System.Diagnostics.Eventing.Reader;
+﻿using AATM.Contracts.Interfaces.Services;
 using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.Data.SqlClient;
+using AATM.Core.Configuration;
 
 namespace AATM.Core.Localization
 {
@@ -48,7 +42,9 @@ namespace AATM.Core.Localization
         public IDictionary<string, string> GetLocalizedStrings()
         {
             var localizedStrings = new Dictionary<string, string>();
-            string connectionString = ConfigurationManager.ConnectionStrings["LocalizationDb"]?.ConnectionString;
+            var cs = new ConfigurationService();
+
+            string connectionString = cs.GetSetting("ISPADATA");
             using (var connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -95,8 +91,12 @@ namespace AATM.Core.Localization
 
         public IDictionary<string, string> GetAllLocalizedStrings(String languageCode)
         {
+
             var localizedStringsByOriginal = new Dictionary<string, string>();
-            string connectionString = ConfigurationManager.ConnectionStrings["LocalizationDb"]?.ConnectionString;
+            var cs = new ConfigurationService();
+            var connectionString = cs.GetSetting("ISPDATA");
+            if (string.IsNullOrWhiteSpace(connectionString))
+                throw new InvalidOperationException("Connection string 'ISPDATA' is not configured.");
             using (var connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -151,7 +151,9 @@ namespace AATM.Core.Localization
         // Helper method to add missing translation to the database
         private void AddMissingTranslationToDatabase(string moduleName, string uiIdentifier, string originalString, string languageCode)
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["LocalizationDb"]?.ConnectionString;
+            var cs = new ConfigurationService();
+
+            string connectionString = cs.GetSetting("ISPADATA");
             using (var connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -192,8 +194,9 @@ namespace AATM.Core.Localization
             languages.Add(("English", "en-US"));
 
             // Replace with your actual connection string
-            string connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"]?.ConnectionString;
-
+            var cs = new ConfigurationService();
+            string connectionString = cs.GetSetting("ISPADATA");
+            
             // Query the database for unique language codes and their display names
             using (var connection = new SqlConnection(connectionString))
             {

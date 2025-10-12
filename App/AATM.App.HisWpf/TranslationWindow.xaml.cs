@@ -1,4 +1,5 @@
 ﻿using AATM.App.HisWpf.ViewModels;
+using Microsoft.Extensions.Configuration;
 using System.Windows;
 
 namespace AATM.App.HisWpf
@@ -11,7 +12,13 @@ namespace AATM.App.HisWpf
         public TranslationWindow()
         {
             InitializeComponent();
-            DataContext = new TranslationViewModel();
+
+            var configuration = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddEnvironmentVariables()
+                .Build();
+
+            DataContext = new TranslationViewModel(configuration);
         }
     }
 }

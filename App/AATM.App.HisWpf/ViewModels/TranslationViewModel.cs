@@ -1,25 +1,26 @@
-// Pseudocode:
-// - Identify compile-time issue: `AppDomain` may be unresolved without `using System;`.
-// - Minimal, safe fix: fully qualify `AppDomain` to `System.AppDomain` in `.SetBasePath(...)`.
-// - Keep the rest of the file unchanged.
-
+using AATM.App.HisWpf.Helpers;
+using AATM.Contracts.Dtos;
+using AATM.Contracts.Interfaces.Services;
+using AATM.Core.Localization;
+using AATM.DataAccess.Sql;
+using AATM.Modules.Localization;
+using Microsoft.Extensions.Configuration;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Configuration;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using AATM.Contracts.Dtos;
-using AATM.Modules.Localization;
-using AATM.WpfDataAccess.Sql;
-using Microsoft.Extensions.Configuration;
-
 
 namespace AATM.App.HisWpf.ViewModels
 {
     public class TranslationViewModel : INotifyPropertyChanged
     {
         private readonly TranslationCrudService _service;
+        private readonly ILocalizationService _localizationService;
+        private readonly IConfiguration _cfg;
 
         public ObservableCollection<TranslationDto> Translations { get; set; } = new();
+        public ObservableCollection<string> AvailableLanguages { get; } = new();
         private TranslationDto? _selectedTranslation;
         public TranslationDto? SelectedTranslation
         {
@@ -39,18 +40,19 @@ namespace AATM.App.HisWpf.ViewModels
         public ICommand DeleteCommand { get; }
         public ICommand RefreshCommand { get; }
 
-        public TranslationViewModel()
+        public TranslationViewModel(IConfiguration cfg)
         {
-            var config = new ConfigurationBuilder()
-                .SetBasePath(System.AppDomain.CurrentDomain.BaseDirectory)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .Build();
+            _cfg = cfg;
 
-            var connectionString = config.GetConnectionString("ISPDATA")
-                ?? throw new InvalidOperationException("Connection string 'ISPDATA' is missing in appsettings.json.");
-
-            var repository = new TranslationRepository(connectionString);
+            var connectionString = _cfg.GetConnectionString("ISPDATA"); 
+            var repository = new TranslationRepository(connectionString ?? System.Configuration.ConfigurationManager.ConnectionStrings["ISPDATA"]?.ConnectionString ?? throw new System.InvalidOperationException("Connection string 'ISPDATA' is not configured."));
             _service = new TranslationCrudService(repository);
+            _localizationService = new LocalizationService("en-US", "Translation");
+
+            AvailableLanguages.Clear();
+            var langs = LocalizationHelper.SafeGetLanguages(_localizationService);
+            foreach (var (display, code) in langs)
+                AvailableLanguages.Add(display);
 
             SaveCommand = new RelayCommand(async _ => await Save(), _ => SelectedTranslation != null);
             DeleteCommand = new RelayCommand(async _ => await Delete(), _ => SelectedTranslation != null);
@@ -65,6 +67,11 @@ namespace AATM.App.HisWpf.ViewModels
             var items = await _service.GetAllAsync();
             foreach (var item in items)
                 Translations.Add(item);
+            // Set SelectedTranslation to the first item if available
+            if (Translations.Count > 0)
+                SelectedTranslation = Translations[0];
+            else
+                SelectedTranslation = null;
         }
 
         private async Task Save()
@@ -87,4 +94,17 @@ namespace AATM.App.HisWpf.ViewModels
         protected void OnPropertyChanged([CallerMemberName] string name = null)
             => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
+
+    public class LanguageItem
+    {
+        public string Display { get; }
+        public string Code { get; }
+        public LanguageItem(string display, string code)
+        {
+            Display = display;
+            Code = code;
+        }
+        public override string ToString() => Display;
+    }
+
 }

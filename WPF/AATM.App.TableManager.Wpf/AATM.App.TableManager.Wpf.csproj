@@ -106,14 +106,6 @@
       <Project>{3c7bec0f-17bb-0ba8-274f-a5196507cebb}</Project>
       <Name>AATM.Business</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Contracts\AATM.Contracts\AATM.Contracts.csproj">
-      <Project>{464cda63-db4a-02b4-1afa-7083ef503845}</Project>
-      <Name>AATM.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Core\AATM.Core.Localization\AATM.Core.Localization.csproj">
-      <Project>{3a2c0ff2-4410-0d3c-3f61-4ef5f503fc2f}</Project>
-      <Name>AATM.Core.Localization</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

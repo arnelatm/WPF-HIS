@@ -108,10 +108,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Contracts\AATM.Contracts\AATM.Contracts.csproj">
-      <Project>{464CDA63-DB4A-02B4-1AFA-7083EF503845}</Project>
-      <Name>AATM.Contracts</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Core\AATM.Core.Logging\AATM.Core.Logging.csproj">
       <Project>{A04B8212-312F-05DE-3E76-E137D5560B02}</Project>
       <Name>AATM.Core.Logging</Name>

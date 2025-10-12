@@ -1,24 +1,32 @@
 ﻿using AATM.Contracts.Dtos;
 using AATM.Contracts.Interfaces.Services;
+using AATM.DataAccess;
 using AATM.Services.Database;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
+
+
 
 namespace AATM.Modules.Localization
 {
     public sealed class TranslationCrudService : ICrudService<TranslationDto>
     {
-        private readonly TranslationDbService _db = new TranslationDbService();
+        private readonly TranslationDbService _db;
+
+        public TranslationCrudService(ITranslationRepository repository)
+        {
+            _db = new TranslationDbService(repository);
+        }
+
+        public async Task<IReadOnlyList<TranslationDto>> GetPageAsync(int pageNumber, int pageSize)
+        {
+            return (await _db.GetTranslationsPageAsync(pageNumber, pageSize));
+        }
 
         public async Task<IReadOnlyList<TranslationDto>> GetAllAsync(CancellationToken ct = default)
             => (await _db.GetAllTranslationsAsync().ConfigureAwait(false));
 
         public async Task<TranslationDto> GetByIdAsync(int id, CancellationToken ct = default)
         {
-            var all = await _db.GetAllTranslationsAsync().ConfigureAwait(false);
-            return all.FirstOrDefault(t => t.ID == id);
+            return await _db.GetTranslationByIdAsync(id).ConfigureAwait(false);
         }
 
         public Task<TranslationDto> UpsertAsync(TranslationDto dto, CancellationToken ct = default)

@@ -109,11 +109,5 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Contracts\AATM.Contracts\AATM.Contracts.csproj">
-      <Project>{464cda63-db4a-02b4-1afa-7083ef503845}</Project>
-      <Name>AATM.Contracts</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

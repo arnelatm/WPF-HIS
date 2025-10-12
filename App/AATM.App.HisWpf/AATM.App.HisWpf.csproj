@@ -12,19 +12,27 @@
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.9" />
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="9.0.9" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.9" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.9" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="9.0.9" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Contracts\AATM.Contracts\AATM.Contracts.csproj" />
-    <ProjectReference Include="..\..\DataAccess\AATM.WpfDataAccess.Sql\AATM.WpfDataAccess.Sql.csproj" />
-    <ProjectReference Include="..\..\Modules\AATM.Modules.WpfLocalization\AATM.Modules.WpfLocalization.csproj" />
-    <ProjectReference Include="..\..\Services\AATM.WpfServices\AATM.WpfServices.csproj" />
+    <ProjectReference Include="..\..\Core\AATM.Core.Localization\AATM.Core.Localization.csproj" />
+    <ProjectReference Include="..\..\DataAccess\AATM.DataAccess.Sql\AATM.DataAccess.Sql.csproj" />
+    <ProjectReference Include="..\..\DataAccess\AATM.DataAccess\AATM.DataAccess.csproj" />
+    <ProjectReference Include="..\..\Modules\AATM.Modules.Localization\AATM.Modules.Localization.csproj" />
+    <ProjectReference Include="..\..\Services\AATM.Services\AATM.Services.csproj" />
+    <ProjectReference Include="..\..\Wpf\AATM.Contracts\AATM.Contracts.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <None Update="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Helpers\" />
   </ItemGroup>
 
 </Project>

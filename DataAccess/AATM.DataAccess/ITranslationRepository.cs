@@ -1,8 +1,6 @@
-﻿using AATM.Contracts.Dtos;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using AATM.Contracts.Dtos;
 
-namespace AATM.DataAccess
+namespace AATM.DataAccess    
 {
     public interface ITranslationRepository
     {
@@ -11,6 +9,7 @@ namespace AATM.DataAccess
         Task<bool> DeleteTranslationAsync(int id);
         Task<TranslationDto> GetTranslationByIdAsync(int id);
         Task<string> GetTranslationAsync(string originalString, string normalizedLanguage);
+        Task<List<TranslationDto>> GetTranslationsPageAsync(int pageNumber, int pageSize);
     }
 
 }

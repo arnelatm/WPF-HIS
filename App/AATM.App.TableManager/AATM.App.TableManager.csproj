@@ -95,25 +95,9 @@
       <Project>{3c7bec0f-17bb-0ba8-274f-a5196507cebb}</Project>
       <Name>AATM.Business</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Contracts\AATM.Contracts\AATM.Contracts.csproj">
-      <Project>{464cda63-db4a-02b4-1afa-7083ef503845}</Project>
-      <Name>AATM.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Core\AATM.Core.Localization\AATM.Core.Localization.csproj">
-      <Project>{3A2C0FF2-4410-0D3C-3F61-4EF5F503FC2F}</Project>
-      <Name>AATM.Core.Localization</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Libraries\MessagingLibrary\Messaging.vbproj">
       <Project>{84437202-3E38-4F75-B8C1-4125852FC4FF}</Project>
       <Name>Messaging</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Modules\AATM.Modules.Localization\AATM.Modules.Localization.csproj">
-      <Project>{D27C4E1D-852B-0E75-209D-0DE42B0C6F86}</Project>
-      <Name>AATM.Modules.Localization</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Services\AATM.Services\AATM.Services.csproj">
-      <Project>{A61DB83B-3127-4E8A-84CC-10642B454156}</Project>
-      <Name>AATM.Services</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\UI\Winforms\AATM.UI.Winforms.csproj">
       <Project>{2902844f-cfd2-0f88-3515-7098759e42c4}</Project>
