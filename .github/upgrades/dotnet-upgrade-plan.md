@@ -126,3 +126,129 @@ NuGet packages changes:
 Other changes:
   - Replace packages.config with PackageReference during SDK-style conversion.
 
+#### Libraries\LocalizationUtilities\LocalizationUtilities.csproj modifications
+
+Project properties changes:
+  - Target framework should be changed to `net8.0-windows`
+  - Convert project file to SDK-style
+
+#### Core\AATM.Core.csproj modifications
+
+Project properties changes:
+  - Target framework should be changed to `net8.0`
+  - Convert project file to SDK-style
+
+#### Core\Utilities\AATM.Core.Utilities.csproj modifications
+
+Project properties changes:
+  - Target framework should be changed to `net8.0`
+  - Convert project file to SDK-style
+
+#### Core\AATM.Core.Logging\AATM.Core.Logging.csproj modifications
+
+Project properties changes:
+  - Target framework should be changed to `net8.0`
+  - Convert project file to SDK-style
+
+#### Core\AATM.Core.UI.Logging\AATM.Core.UI.Logging.csproj modifications
+
+Project properties changes:
+  - Target framework should be changed to `net8.0-windows`
+  - Convert project file to SDK-style
+
+#### UI\Winforms\AATM.UI.Winforms.csproj modifications
+
+Project properties changes:
+  - Target framework should be changed to `net8.0-windows`
+  - Convert project file to SDK-style
+
+#### Module\AATM.Modules.Customers\AATM.Modules.Customers.csproj modifications
+
+Project properties changes:
+  - Target framework should be changed to `net8.0-windows`
+  - Convert project file to SDK-style
+
+#### Business\AATM.Business.Logic\AATM.Business.csproj modifications
+
+Project properties changes:
+  - Target framework should be changed to `net8.0`
+  - Convert project file to SDK-style
+
+#### Shared\AATM.Shared\AATM.Shared.csproj modifications
+
+Project properties changes:
+  - Target framework should be changed to `net8.0`
+  - Convert project file to SDK-style
+
+#### Core\AATM.Core.Messaging.Cs\AATM.Core.Messaging.csproj modifications
+
+Project properties changes:
+  - Target framework should be changed to `net8.0-windows`
+  - Convert project file to SDK-style
+
+#### Presentation\AATM.Presentation\AATM.Presentation.csproj modifications
+
+Project properties changes:
+  - Target framework should be changed to `net8.0`
+  - Convert project file to SDK-style
+
+#### App\AATM.App\AATM.App.csproj modifications
+
+Project properties changes:
+  - Target framework should be changed to `net8.0`
+  - Convert project file to SDK-style
+
+#### App\AATM.App.Translation\AATM.App.Translation.csproj modifications
+
+Project properties changes:
+  - Target framework should be changed to `net8.0`
+  - Convert project file to SDK-style
+
+#### App\AATM.App.DbTranslate\AATM.App.DbTranslate.csproj modifications
+
+Project properties changes:
+  - Target framework should be changed to `net8.0-windows`
+  - Convert project file to SDK-style
+
+#### App\AATM.App.TableManager\AATM.App.TableManager.csproj modifications
+
+Project properties changes:
+  - Target framework should be changed to `net8.0-windows`
+  - Convert project file to SDK-style
+
+#### DataAccess\AATM.DataAccess\AATM.DataAccess.csproj modifications
+
+Project properties changes:
+  - Target framework should be changed to `net8.0`
+  - Convert project file to SDK-style
+
+#### WPF\AATM.App.TableManager.Wpf\AATM.App.TableManager.Wpf.csproj modifications
+
+Project properties changes:
+  - Target framework should be changed to `net8.0-windows`
+  - Convert project file to SDK-style
+
+#### Wpf\App\AATM.Wpf.HIS\AATM.Wpf.HISx.csproj modifications
+
+Project properties changes:
+  - Target framework should be changed to `net8.0-windows`
+  - Convert project file to SDK-style
+
+#### Wpf\App\AATM.App.Wpf.HIS\AATM.Wpf.App.HIS.csproj modifications
+
+Project properties changes:
+  - Target framework should be changed to `net8.0-windows`
+  - Convert project file to SDK-style
+
+#### Wpf\UI\BaseControls\AATM.Wpf.UI.BaseConrols\AATM.Wpf.UI.BaseConrols.csproj modifications
+
+Project properties changes:
+  - Target framework should be changed to `net8.0-windows`
+  - Convert project file to SDK-style
+
+#### App\AATM.App.HisWpf\AATM.App.HisWpf.csproj modifications
+
+Project properties changes:
+  - Target framework should be changed to `net8.0-windows`
+  - Convert project file to SDK-style
+
