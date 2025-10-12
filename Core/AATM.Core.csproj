@@ -4,16 +4,24 @@
     <OutputType>Library</OutputType>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.1" />
     <PackageReference Include="Microsoft.Extensions.Primitives" Version="8.0.0" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="AATM.Core.Localization\**\*.cs" />
+    <Compile Remove="AATM.Core.WpfLocalization\**\*.cs" />
+    <Compile Remove="AATM.Core.Messaging.Cs\**\*.cs" />
+    <Compile Remove="**\obj\**\*.cs" />
+    <Compile Remove="obj\**\*.cs" />
     <None Remove="My Project\Application.myapp" />
     <Compile Remove="My Project\Application.Designer.cs" />
     <None Remove="My Project\Settings.settings" />
