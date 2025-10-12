@@ -198,13 +198,6 @@ namespace AATM.Core.My
         */
         [System.ComponentModel.Design.HelpKeyword("My.User")]
         // TODO: The type 'Microsoft.VisualBasic.ApplicationServices.User' is not available in .NET 8.0 or project dependencies. You must implement or replace the 'User' property with a suitable alternative for user context.
-        {
-            [DebuggerHidden()]
-            get
-            {
-                return m_UserObjectProvider.GetInstance;
-            }
-        }
         // TODO: The type 'Microsoft.VisualBasic.ApplicationServices.User' is not available in .NET 8.0 or project dependencies. You must implement or replace 'm_UserObjectProvider' with a suitable alternative for user context.
         /* TODO ERROR: Skipped ElifDirectiveTrivia
         #ElseIf _MYUSERTYPE = "Web" Then
