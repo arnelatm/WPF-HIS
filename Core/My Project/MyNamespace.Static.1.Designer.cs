@@ -115,7 +115,7 @@ namespace AATM.Core.My
     *//* TODO ERROR: Skipped ElifDirectiveTrivia
     #ElseIf _MYAPPLICATIONTYPE = "Windows" Then
     */
-    internal partial class MyApplication : Microsoft.VisualBasic.ApplicationServices.ApplicationBase
+    // TODO: The type 'Microsoft.VisualBasic.ApplicationServices.ApplicationBase' is not available in .NET 8.0 or project dependencies. You must implement or replace 'MyApplication' with a suitable alternative for your application's startup logic.
     {
         /* TODO ERROR: Skipped ElifDirectiveTrivia
         #ElseIf _MYAPPLICATIONTYPE = "Console" Then
@@ -198,7 +198,7 @@ namespace AATM.Core.My
         #If _MYUSERTYPE = "Windows" Then
         */
         [System.ComponentModel.Design.HelpKeyword("My.User")]
-        internal static Microsoft.VisualBasic.ApplicationServices.User User
+        // TODO: The type 'Microsoft.VisualBasic.ApplicationServices.User' is not available in .NET 8.0 or project dependencies. You must implement or replace the 'User' property with a suitable alternative for user context.
         {
             [DebuggerHidden()]
             get
@@ -206,7 +206,7 @@ namespace AATM.Core.My
                 return m_UserObjectProvider.GetInstance;
             }
         }
-        private readonly static ThreadSafeObjectProvider<Microsoft.VisualBasic.ApplicationServices.User> m_UserObjectProvider = new ThreadSafeObjectProvider<Microsoft.VisualBasic.ApplicationServices.User>();
+        // TODO: The type 'Microsoft.VisualBasic.ApplicationServices.User' is not available in .NET 8.0 or project dependencies. You must implement or replace 'm_UserObjectProvider' with a suitable alternative for user context.
         /* TODO ERROR: Skipped ElifDirectiveTrivia
         #ElseIf _MYUSERTYPE = "Web" Then
         *//* TODO ERROR: Skipped DisabledTextTrivia
