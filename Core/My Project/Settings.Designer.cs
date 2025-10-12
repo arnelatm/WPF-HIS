@@ -24,3 +24,6 @@ namespace AATM.Core.My {
         }
     }
 }
+
+// Suppress compile of legacy settings designer in SDK-style
+// Intentionally empty placeholder to keep folder structure intact.
