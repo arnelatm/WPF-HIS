@@ -117,7 +117,6 @@ namespace AATM.Core.Configuration.My
     */
     // The type 'Microsoft.VisualBasic.ApplicationServices.ApplicationBase' is not available in .NET 8.0 and cannot be referenced. You must implement your own application base logic or refactor this class to use available .NET APIs.
     // The type 'Microsoft.VisualBasic.ApplicationServices.ApplicationBase' is not available in .NET 8.0 and cannot be referenced. You must implement your own application base logic or refactor this class to use available .NET APIs.
-    // Placeholder for missing implementation. Remove this stray opening brace to fix CS1022.
         /* TODO ERROR: Skipped ElifDirectiveTrivia
         #ElseIf _MYAPPLICATIONTYPE = "Console" Then
         *//* TODO ERROR: Skipped DisabledTextTrivia
