@@ -201,7 +201,7 @@ namespace AATM.Core.Configuration.My
         [System.ComponentModel.Design.HelpKeyword("My.User")]
         // The type 'Microsoft.VisualBasic.ApplicationServices.User' is not available in .NET 8.0. You must implement your own user logic or refactor this property to use available .NET APIs.
         // internal static Microsoft.VisualBasic.ApplicationServices.User User
-        {
+
             [DebuggerHidden()]
             get
             {
