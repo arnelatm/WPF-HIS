@@ -125,7 +125,7 @@ namespace AATM.Core.Configuration.My
         *//* TODO ERROR: Skipped EndIfDirectiveTrivia
         #End If '_MYAPPLICATIONTYPE = "WindowsForms"
         */
-    }
+
 
     /* TODO ERROR: Skipped EndIfDirectiveTrivia
     #End If '#If _MYAPPLICATIONTYPE = "WindowsForms" Or _MYAPPLICATIONTYPE = "Windows" or _MYAPPLICATIONTYPE = "Console"
