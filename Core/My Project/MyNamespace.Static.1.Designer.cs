@@ -116,7 +116,6 @@ namespace AATM.Core.My
     #ElseIf _MYAPPLICATIONTYPE = "Windows" Then
     */
     // TODO: The type 'Microsoft.VisualBasic.ApplicationServices.ApplicationBase' is not available in .NET 8.0 or project dependencies. You must implement or replace 'MyApplication' with a suitable alternative for your application's startup logic.
-    {
         /* TODO ERROR: Skipped ElifDirectiveTrivia
         #ElseIf _MYAPPLICATIONTYPE = "Console" Then
         *//* TODO ERROR: Skipped DisabledTextTrivia
