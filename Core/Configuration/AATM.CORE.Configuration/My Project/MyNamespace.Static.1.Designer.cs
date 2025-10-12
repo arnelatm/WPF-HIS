@@ -198,7 +198,8 @@ namespace AATM.Core.Configuration.My
         #If _MYUSERTYPE = "Windows" Then
         */
         [System.ComponentModel.Design.HelpKeyword("My.User")]
-        internal static Microsoft.VisualBasic.ApplicationServices.User User
+        // The type 'Microsoft.VisualBasic.ApplicationServices.User' is not available in .NET 8.0. You must implement your own user logic or refactor this property to use available .NET APIs.
+        // internal static Microsoft.VisualBasic.ApplicationServices.User User
         {
             [DebuggerHidden()]
             get
@@ -206,7 +207,7 @@ namespace AATM.Core.Configuration.My
                 return m_UserObjectProvider.GetInstance;
             }
         }
-        private readonly static ThreadSafeObjectProvider<Microsoft.VisualBasic.ApplicationServices.User> m_UserObjectProvider = new ThreadSafeObjectProvider<Microsoft.VisualBasic.ApplicationServices.User>();
+        // private readonly static ThreadSafeObjectProvider<Microsoft.VisualBasic.ApplicationServices.User> m_UserObjectProvider = new ThreadSafeObjectProvider<Microsoft.VisualBasic.ApplicationServices.User>();
         /* TODO ERROR: Skipped ElifDirectiveTrivia
         #ElseIf _MYUSERTYPE = "Web" Then
         *//* TODO ERROR: Skipped DisabledTextTrivia
