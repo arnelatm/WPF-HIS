@@ -6,13 +6,6 @@ namespace AATM.DataAccess.Sql
 {
     public class TranslationRepository : ITranslationRepository
     {
-#if NETFRAMEWORK
-        static TranslationRepository()
-        {
-            // Avoid native SNI issues on .NET Framework
-            AppContext.SetSwitch("Switch.Microsoft.Data.SqlClient.UseManagedNetworkingOnWindows", true);
-        }
-#endif
         private readonly string _connectionString;
 
         public TranslationRepository(string connectionString)
@@ -38,7 +31,7 @@ namespace AATM.DataAccess.Sql
 
             using (var conn = new SqlConnection(_connectionString))
             {
-                await conn.OpenAsync();
+                await conn.OpenAsync().ConfigureAwait(false);
                 using (var cmd = new SqlCommand(mergeSql, conn))
                 {
                     cmd.Parameters.AddWithValue("@OriginalString", dto.OriginalString);
@@ -47,7 +40,7 @@ namespace AATM.DataAccess.Sql
                     cmd.Parameters.AddWithValue("@LanguageCode", dto.LanguageCode);
                     cmd.Parameters.AddWithValue("@LocalizedString", dto.LocalizedString);
 
-                    var result = await cmd.ExecuteScalarAsync();
+                    var result = await cmd.ExecuteScalarAsync().ConfigureAwait(false);
                     if (result != null)
                         dto.ID = Convert.ToInt32(result);
                 }
@@ -64,21 +57,22 @@ namespace AATM.DataAccess.Sql
         {
             var items = new List<TranslationDto>();
             int totalCount = 0;
-            string sql = @"
-        SELECT COUNT(*) OVER() AS TotalCount, ID, OriginalString, ModuleName, UIIdentifier, LanguageCode, LocalizedString, CreationDate
-        FROM Translations
-        ORDER BY ID
-        OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY";
+            const string sql = @"
+SELECT COUNT(*) OVER() AS TotalCount, ID, OriginalString, ModuleName, UIIdentifier, LanguageCode, LocalizedString, CreationDate
+FROM Translations
+ORDER BY ID
+OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY";
+
             using (var conn = new SqlConnection(_connectionString))
             {
-                await conn.OpenAsync();
+                await conn.OpenAsync().ConfigureAwait(false);
                 using (var cmd = new SqlCommand(sql, conn))
                 {
                     cmd.Parameters.AddWithValue("@Offset", (pageNumber - 1) * pageSize);
                     cmd.Parameters.AddWithValue("@PageSize", pageSize);
-                    using (var reader = await cmd.ExecuteReaderAsync())
+                    using (var reader = await cmd.ExecuteReaderAsync().ConfigureAwait(false))
                     {
-                        while (await reader.ReadAsync())
+                        while (await reader.ReadAsync().ConfigureAwait(false))
                         {
                             if (totalCount == 0)
                                 totalCount = reader.GetInt32(reader.GetOrdinal("TotalCount"));
@@ -99,13 +93,12 @@ namespace AATM.DataAccess.Sql
             return (items, totalCount);
         }
 
-
         public async Task<List<TranslationDto>> GetAllTranslationsAsync()
         {
             var translations = new List<TranslationDto>();
             const string sql = "SELECT ID, OriginalString, ModuleName, UIIdentifier, LanguageCode, LocalizedString, CreationDate FROM Translations";
 
-            // Fail fast if connection cannot be opened within N seconds
+            // Optional: add timeout to fail fast if network/TLS causes stalls
             using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(15));
 
             try
@@ -113,7 +106,6 @@ namespace AATM.DataAccess.Sql
                 using (var conn = new SqlConnection(_connectionString))
                 {
                     await conn.OpenAsync(cts.Token).ConfigureAwait(false);
-
                     using (var cmd = new SqlCommand(sql, conn))
                     using (var reader = await cmd.ExecuteReaderAsync(cts.Token).ConfigureAwait(false))
                     {
@@ -138,11 +130,6 @@ namespace AATM.DataAccess.Sql
                 Debug.WriteLine("SqlConnection.OpenAsync timed out.");
                 throw new TimeoutException("Opening a SQL connection timed out. Check server reachability, port, and TLS settings.");
             }
-            catch (SqlException ex)
-            {
-                Debug.WriteLine(ex.ToString());
-                throw;
-            }
             return translations;
         }
 
@@ -151,11 +138,11 @@ namespace AATM.DataAccess.Sql
             const string sql = "DELETE FROM Translations WHERE ID = @ID";
             using (var conn = new SqlConnection(_connectionString))
             {
-                await conn.OpenAsync();
+                await conn.OpenAsync().ConfigureAwait(false);
                 using (var cmd = new SqlCommand(sql, conn))
                 {
                     cmd.Parameters.AddWithValue("@ID", id);
-                    var rowsAffected = await cmd.ExecuteNonQueryAsync();
+                    var rowsAffected = await cmd.ExecuteNonQueryAsync().ConfigureAwait(false);
                     return rowsAffected > 0;
                 }
             }
@@ -166,13 +153,13 @@ namespace AATM.DataAccess.Sql
             const string sql = "SELECT ID, OriginalString, ModuleName, UIIdentifier, LanguageCode, LocalizedString, CreationDate FROM Translations WHERE ID = @ID";
             using (var conn = new SqlConnection(_connectionString))
             {
-                await conn.OpenAsync();
+                await conn.OpenAsync().ConfigureAwait(false);
                 using (var cmd = new SqlCommand(sql, conn))
                 {
                     cmd.Parameters.AddWithValue("@ID", id);
-                    using (var reader = await cmd.ExecuteReaderAsync())
+                    using (var reader = await cmd.ExecuteReaderAsync().ConfigureAwait(false))
                     {
-                        if (await reader.ReadAsync())
+                        if (await reader.ReadAsync().ConfigureAwait(false))
                         {
                             return new TranslationDto
                             {
@@ -196,17 +183,15 @@ namespace AATM.DataAccess.Sql
             const string sql = "SELECT LocalizedString FROM Translations WHERE OriginalString = @OriginalString AND LanguageCode = @LanguageCode";
             using (var conn = new SqlConnection(_connectionString))
             {
-                await conn.OpenAsync();
+                await conn.OpenAsync().ConfigureAwait(false);
                 using (var cmd = new SqlCommand(sql, conn))
                 {
                     cmd.Parameters.AddWithValue("@OriginalString", originalString);
                     cmd.Parameters.AddWithValue("@LanguageCode", normalizedLanguage);
-                    var result = await cmd.ExecuteScalarAsync();
+                    var result = await cmd.ExecuteScalarAsync().ConfigureAwait(false);
                     return result?.ToString() ?? string.Empty;
                 }
             }
         }
-
-
     }
 }

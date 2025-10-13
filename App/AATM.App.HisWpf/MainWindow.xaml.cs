@@ -13,7 +13,7 @@ namespace AATM.App.HisWpf
             try
             {
                 var rows = await svc.GetAllAsync();
-                MessageBox.Show(this, $"DB returned {rows.Count} rows.", "Connectivity", MessageBoxButton.OK);
+                // MessageBox.Show(this, $"DB returned {rows.Count} rows.", "Connectivity", MessageBoxButton.OK);
             }
             catch (Exception ex)
             {
