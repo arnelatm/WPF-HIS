@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\AATM.Core.csproj" />
+    <ProjectReference Include="..\..\Core\AATM.Core.Localization\AATM.Core.Localization.csproj" />
+    <ProjectReference Include="..\..\Core\Configuration\AATM.CORE.Configuration\AATM.Core.Configuration.csproj" />
+    <ProjectReference Include="..\..\DataAccess\AATM.DataAccess.Sql\AATM.DataAccess.Sql.csproj" />
+    <ProjectReference Include="..\..\DataAccess\AATM.DataAccess\AATM.DataAccess.csproj" />
+    <ProjectReference Include="..\..\Modules\AATM.Modules.Localization\AATM.Modules.Localization.csproj" />
+    <ProjectReference Include="..\..\Services\AATM.Services\AATM.Services.csproj" />
+    <ProjectReference Include="..\..\Wpf\AATM.Contracts\AATM.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>
