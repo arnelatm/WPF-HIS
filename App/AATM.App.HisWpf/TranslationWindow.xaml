@@ -61,5 +61,6 @@
                 <DataGridTextColumn Header="CreationDate" Binding="{Binding CreationDate}" Width="120"/>
             </DataGrid.Columns>
         </DataGrid>
+        <ProgressBar IsIndeterminate="True" Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}}" />
     </Grid>
 </Window>

@@ -55,8 +55,11 @@ namespace AATM.App.HisWpf.ViewModels
             _ = Refresh();
         }
 
+        public bool IsBusy { get; set; }
         private async Task Refresh()
         {
+            IsBusy = true;
+            OnPropertyChanged(nameof(IsBusy));
             try
             {
                 Translations.Clear();
@@ -73,6 +76,11 @@ namespace AATM.App.HisWpf.ViewModels
             {
                 ErrorText = $"Load failed: {ex.Message}";
                 Debug.WriteLine(ex);
+            }
+            finally
+            {
+                IsBusy = false;
+                OnPropertyChanged(nameof(IsBusy));
             }
             OnPropertyChanged(nameof(ErrorText));
         }
