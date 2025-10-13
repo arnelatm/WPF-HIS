@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using AATM.Contracts.Dtos;
 using Microsoft.Data.SqlClient;
 
@@ -104,26 +105,43 @@ namespace AATM.DataAccess.Sql
             var translations = new List<TranslationDto>();
             const string sql = "SELECT ID, OriginalString, ModuleName, UIIdentifier, LanguageCode, LocalizedString, CreationDate FROM Translations";
 
-            using (var conn = new SqlConnection(_connectionString))
+            // Fail fast if connection cannot be opened within N seconds
+            using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(15));
+
+            try
             {
-                await conn.OpenAsync();
-                using (var cmd = new SqlCommand(sql, conn))
-                using (var reader = await cmd.ExecuteReaderAsync())
+                using (var conn = new SqlConnection(_connectionString))
                 {
-                    while (await reader.ReadAsync())
+                    await conn.OpenAsync(cts.Token).ConfigureAwait(false);
+
+                    using (var cmd = new SqlCommand(sql, conn))
+                    using (var reader = await cmd.ExecuteReaderAsync(cts.Token).ConfigureAwait(false))
                     {
-                        translations.Add(new TranslationDto
+                        while (await reader.ReadAsync(cts.Token).ConfigureAwait(false))
                         {
-                            ID = Convert.ToInt32(reader["ID"]),
-                            OriginalString = reader["OriginalString"].ToString(),
-                            ModuleName = reader["ModuleName"].ToString(),
-                            UIIdentifier = reader["UIIdentifier"].ToString(),
-                            LanguageCode = reader["LanguageCode"].ToString(),
-                            LocalizedString = reader["LocalizedString"].ToString(),
-                            CreationDate = Convert.ToDateTime(reader["CreationDate"])
-                        });
+                            translations.Add(new TranslationDto
+                            {
+                                ID = Convert.ToInt32(reader["ID"]),
+                                OriginalString = reader["OriginalString"].ToString(),
+                                ModuleName = reader["ModuleName"].ToString(),
+                                UIIdentifier = reader["UIIdentifier"].ToString(),
+                                LanguageCode = reader["LanguageCode"].ToString(),
+                                LocalizedString = reader["LocalizedString"].ToString(),
+                                CreationDate = Convert.ToDateTime(reader["CreationDate"])
+                            });
+                        }
                     }
                 }
+            }
+            catch (OperationCanceledException)
+            {
+                Debug.WriteLine("SqlConnection.OpenAsync timed out.");
+                throw new TimeoutException("Opening a SQL connection timed out. Check server reachability, port, and TLS settings.");
+            }
+            catch (SqlException ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                throw;
             }
             return translations;
         }

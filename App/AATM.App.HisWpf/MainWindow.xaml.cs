@@ -1,21 +1,29 @@
-﻿using System.Windows;
+﻿using AATM.Modules.Localization;
+using Microsoft.Extensions.DependencyInjection;
+using System.Threading.Tasks;
+using System.Windows;
 
 namespace AATM.App.HisWpf
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        private async void OpenTranslationManager_Click(object sender, RoutedEventArgs e)
         {
-            InitializeComponent();
-        }
+            var svc = App.Host.Services.GetRequiredService<TranslationCrudService>();
+            try
+            {
+                var rows = await svc.GetAllAsync();
+                MessageBox.Show(this, $"DB returned {rows.Count} rows.", "Connectivity", MessageBoxButton.OK);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, $"DB call failed:\n{ex}", "Connectivity", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
-        private void OpenTranslationManager_Click(object sender, RoutedEventArgs e)
-        {
-            var translationWindow = new TranslationWindow();
-            translationWindow.Show();
-        }   
+            var win = App.Host.Services.GetRequiredService<TranslationWindow>();
+            win.Owner = this;
+            win.Show();
+        }
     }
-}
+}   

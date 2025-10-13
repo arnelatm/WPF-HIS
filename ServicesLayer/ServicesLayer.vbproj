@@ -156,32 +156,6 @@
   <ItemGroup>
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BusinessLayer\BusinessLayer.vbproj">
-      <Project>{f1004885-d468-41ed-8572-5ba952b9c39e}</Project>
-      <Name>BusinessLayer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DataLayer\DataLayer.vbproj">
-      <Project>{440C4740-2584-4050-9086-543018EAC766}</Project>
-      <Name>DataLayer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Libraries\AatmInterfaces\AatmInterfaces.vbproj">
-      <Project>{DA82FB86-4F87-4E6E-B460-6141FE79AC23}</Project>
-      <Name>AatmInterfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Libraries\GlobalFuncNSub\GlobalFuncNSub.vbproj">
-      <Project>{b56fdcd3-8b48-4859-983b-07ffa242673d}</Project>
-      <Name>GlobalFuncNSub</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Libraries\HelperLibraries\HelperLibraries.vbproj">
-      <Project>{a7ee826e-e3b4-40a7-8754-285b373f4321}</Project>
-      <Name>HelperLibraries</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Libraries\MessagingLibrary\Messaging.vbproj">
-      <Project>{84437202-3E38-4F75-B8C1-4125852FC4FF}</Project>
-      <Name>Messaging</Name>
-    </ProjectReference>
-  </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Import Project="..\packages\EmptyFiles.4.4.0\build\EmptyFiles.targets" Condition="Exists('..\packages\EmptyFiles.4.4.0\build\EmptyFiles.targets')" />

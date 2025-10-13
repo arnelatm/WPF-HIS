@@ -1,11 +1,9 @@
 ﻿<Window x:Class="AATM.App.HisWpf.TranslationWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:AATM.App.HisWpf"
-        mc:Ignorable="d"
-        Title="Translation Manager" Height="611" Width="800">
+        Title="Translation Manager"
+        Height="611" Width="800"
+        WindowStartupLocation="CenterOwner">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -31,9 +29,10 @@
                  Text="{Binding SelectedTranslation.LocalizedString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
         <Label Grid.Row="2" Grid.Column="0" Content="Language" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+        <!-- VM exposes ObservableCollection<string> AvailableLanguages -->
         <ComboBox Grid.Row="2" Grid.Column="2" x:Name="cmbLanguageCode" Margin="0,2,0,2"
-                  ItemsSource="{Binding Languages}" DisplayMemberPath="Name" SelectedValuePath="Code"
-                  SelectedValue="{Binding SelectedTranslation.LanguageCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                  ItemsSource="{Binding AvailableLanguages}"
+                  SelectedItem="{Binding SelectedTranslation.LanguageCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
         <Label Grid.Row="3" Grid.Column="0" Content="UI Identifier" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
         <TextBox Grid.Row="3" Grid.Column="2" x:Name="txtUIIdentifier" Margin="0,2,0,2"

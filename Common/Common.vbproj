@@ -494,65 +494,13 @@
     <Folder Include="ServiceLayer\ActionServices\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BusinessLayer\BusinessLayer.vbproj">
-      <Project>{f1004885-d468-41ed-8572-5ba952b9c39e}</Project>
-      <Name>BusinessLayer</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DataLayer\DataLayer.vbproj">
       <Project>{440C4740-2584-4050-9086-543018EAC766}</Project>
       <Name>DataLayer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Libraries\AatmInterfaces\AatmInterfaces.vbproj">
-      <Project>{DA82FB86-4F87-4E6E-B460-6141FE79AC23}</Project>
-      <Name>AatmInterfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Libraries\BaseControlsLibrary\BaseControlsLibrary.vbproj">
-      <Project>{58F5EC33-2974-4823-AB62-1D4E5B3EF152}</Project>
-      <Name>BaseControlsLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Libraries\CBaseControlsLibrary\CBaseControlsLibrary.vbproj">
-      <Project>{F991561A-78F8-487C-A873-E6436B41D801}</Project>
-      <Name>CBaseControlsLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Libraries\CrystalReportsHelper\CrystalReportsHelper.vbproj">
-      <Project>{8F2BB05A-C065-4E1B-9B1A-D4F600C0DB62}</Project>
-      <Name>CrystalReportsHelper</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Libraries\GlobalFuncNSub\GlobalFuncNSub.vbproj">
-      <Project>{B56FDCD3-8B48-4859-983B-07FFA242673D}</Project>
-      <Name>GlobalFuncNSub</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Libraries\HelperLibraries\HelperLibraries.vbproj">
-      <Project>{A7EE826E-E3B4-40A7-8754-285B373F4321}</Project>
-      <Name>HelperLibraries</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Libraries\LocalizationUtilities\LocalizationUtilities.csproj">
-      <Project>{63AACD2C-A92E-4CF4-8F4D-49C774E2B1C6}</Project>
-      <Name>LocalizationUtilities</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Libraries\MessagingLibrary\Messaging.vbproj">
       <Project>{84437202-3e38-4f75-b8c1-4125852fc4ff}</Project>
       <Name>Messaging</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PresentationLayer\Events\Events.vbproj">
-      <Project>{5F7FCA73-07BA-444A-BE5D-6117B973AA3D}</Project>
-      <Name>Events</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PresentationLayer\Forms\Forms.vbproj">
-      <Project>{51DA927A-505F-49CF-9768-9E401219B91C}</Project>
-      <Name>Forms</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PresentationLayer\Models\Models.vbproj">
-      <Project>{6A8692E0-9B9B-4F31-8BA6-0C3DE257F9A4}</Project>
-      <Name>Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PresentationLayer\Presenters\Presenters.vbproj">
-      <Project>{021A8A1A-B69A-4254-9081-12357F20C01B}</Project>
-      <Name>Presenters</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PresentationLayer\Views\Views.vbproj">
-      <Project>{4EEDC5F0-DCA9-4CFB-8926-07D7E5B37FA0}</Project>
-      <Name>Views</Name>
     </ProjectReference>
     <ProjectReference Include="..\ServicesLayer\ServicesLayer.vbproj">
       <Project>{4B7A1168-E9FA-4360-9607-A2C98255E4C0}</Project>

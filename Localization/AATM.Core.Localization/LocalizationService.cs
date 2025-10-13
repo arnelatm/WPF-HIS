@@ -1,52 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
+﻿using System.Globalization;
 using AATM.Contracts.Dtos;
 using AATM.Contracts.Interfaces.Services;
 using AATM.DataAccess;
-using AATM.DataAccess.Sql;
 
 namespace AATM.Core.Localization
 {
-
     /// <summary>
     /// Provides localized strings by retrieving them from a repository and managing them
     /// for a given language. This class implements the ILocalizationService interface.
     /// </summary>
     public class LocalizationService : ILocalizationService
     {
-
         private string _language;
         private string _moduleName;
         private IDictionary<string, string> _localizedStrings = new Dictionary<string, string>();
         private IDictionary<string, string> _localizedStringsByOriginal = new Dictionary<string, string>();
         private readonly ITranslationRepository _translationRepository;
 
-        /// <summary>
-        /// Initializes a new instance of the LocalizationService.
-        /// The constructor loads all localized strings for the specified language
-        /// into a local dictionary for fast retrieval.
-        /// </summary>
-        /// <param name="language">The language code for the strings to retrieve (e.g., "en-US").</param>
-        public LocalizationService(string language, string moduleName, ITranslationRepository? translationRepository = null)
+        public LocalizationService(string language, string moduleName, ITranslationRepository translationRepository)
         {
             _language = language;
             _moduleName = moduleName;
+            _translationRepository = translationRepository ?? throw new ArgumentNullException(nameof(translationRepository));
 
-            _translationRepository = translationRepository ?? CreateDefaultRepository();
-
-            // Warm caches
             RefreshCaches();
-        }
-
-        private static ITranslationRepository CreateDefaultRepository()
-        {
-            // Try to get connection string from environment variables to avoid direct config dependency
-            var conn = Environment.GetEnvironmentVariable("ISPADATA")
-                       ?? Environment.GetEnvironmentVariable("ISPDATA")
-                       ?? string.Empty;
-            return new TranslationRepository(conn);
         }
 
         private void RefreshCaches()
@@ -54,7 +31,6 @@ namespace AATM.Core.Localization
             _localizedStrings.Clear();
             _localizedStringsByOriginal.Clear();
 
-            // Load all translations and filter by current language/module
             var all = _translationRepository.GetAllTranslationsAsync().GetAwaiter().GetResult();
             foreach (var t in all.Where(t => string.Equals(t.LanguageCode, _language, StringComparison.OrdinalIgnoreCase)
                                            && (string.IsNullOrWhiteSpace(_moduleName) || string.Equals(t.ModuleName, _moduleName, StringComparison.OrdinalIgnoreCase))))
@@ -72,10 +48,6 @@ namespace AATM.Core.Localization
             }
         }
 
-        /// <summary>
-        /// Retrieves a dictionary of all localized strings for the current language/module.
-        /// </summary>
-        /// <returns>A Dictionary where the key is the UI identifier and the value is the localized string.</returns>
         public IDictionary<string, string> GetLocalizedStrings()
         {
             if (_localizedStrings.Count == 0)
@@ -98,10 +70,6 @@ namespace AATM.Core.Localization
             return localizedStringsByOriginal;
         }
 
-        /// <summary>
-        /// Gets a localized string from the pre-loaded dictionary.
-        /// </summary>
-        /// <returns>The localized string or the original string if the translation is not found.</returns>
         public string GetString(string moduleName, string uiIdentifier, string originalString)
         {
             if (originalString is null)
@@ -126,7 +94,6 @@ namespace AATM.Core.Localization
             return originalString;
         }
 
-        // Upserts a missing translation using the repository
         private void AddMissingTranslation(string moduleName, string uiIdentifier, string originalString, string languageCode)
         {
             var dto = new TranslationDto
@@ -140,9 +107,6 @@ namespace AATM.Core.Localization
             _translationRepository.UpsertTranslationAsync(dto).GetAwaiter().GetResult();
         }
 
-        /// <summary>
-        /// Adds or updates a localized string via the repository and updates cache.
-        /// </summary>
         public void AddOrUpdateString(string moduleName, string uiIdentifier, string originalString, string languageCode, string localizedString)
         {
             var dto = new TranslationDto
@@ -155,14 +119,10 @@ namespace AATM.Core.Localization
             };
             _translationRepository.UpsertTranslationAsync(dto).GetAwaiter().GetResult();
 
-            var key = uiIdentifier;
-            _localizedStrings[key] = localizedString;
+            _localizedStrings[uiIdentifier] = localizedString;
             _localizedStringsByOriginal[originalString] = localizedString;
         }
 
-        /// <summary>
-        /// Gets a list of available languages from repository data.
-        /// </summary>
         public List<(string display, string code)> GetAvailableLanguages()
         {
             var languages = new List<(string display, string code)>();
@@ -234,9 +194,6 @@ namespace AATM.Core.Localization
             return textToTranslate;
         }
 
-        /// <summary>
-        /// Indicates whether the current language is a right-to-left language.
-        /// </summary>
         public bool IsRightToLeft
         {
             get
@@ -267,12 +224,11 @@ namespace AATM.Core.Localization
 
         public void AddString(string moduleName, string text, string languageCode)
         {
-            // Persist and update in-memory cache
             var dto = new TranslationDto
             {
                 OriginalString = text,
                 ModuleName = moduleName,
-                UIIdentifier = text, // if a specific UIIdentifier exists, pass it from caller
+                UIIdentifier = text,
                 LanguageCode = languageCode,
                 LocalizedString = text
             };
@@ -290,4 +246,3 @@ namespace AATM.Core.Localization
         }
     }
 }
-

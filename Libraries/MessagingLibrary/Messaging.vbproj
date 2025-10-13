@@ -172,12 +172,6 @@
   <ItemGroup>
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\GlobalFuncNSub\GlobalFuncNSub.vbproj">
-      <Project>{b56fdcd3-8b48-4859-983b-07ffa242673d}</Project>
-      <Name>GlobalFuncNSub</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Import Project="..\..\packages\EmptyFiles.4.4.0\build\EmptyFiles.targets" Condition="Exists('..\..\packages\EmptyFiles.4.4.0\build\EmptyFiles.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

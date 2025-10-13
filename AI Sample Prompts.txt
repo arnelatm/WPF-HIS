@@ -1,2 +1,5 @@
 CODE CODE REUSE - 
 	Below is a structured analysis of TranslationForm highlighting every repetitive or generalizable concern that can be moved into BaseGridCrudForm to maximize reuse and shrink derived form code. For each item you get: What it does now, Why it belongs in base, Suggested base API change, and Resulting simplification for TranslationForm.
+
+Format Code in c# Markdown Block
+	Please wrap the code in a C# Markdown block for proper syntax highlighting.

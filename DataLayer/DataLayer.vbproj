@@ -173,18 +173,6 @@
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BusinessLayer\BusinessLayer.vbproj">
-      <Project>{f1004885-d468-41ed-8572-5ba952b9c39e}</Project>
-      <Name>BusinessLayer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Libraries\AatmInterfaces\AatmInterfaces.vbproj">
-      <Project>{DA82FB86-4F87-4E6E-B460-6141FE79AC23}</Project>
-      <Name>AatmInterfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Libraries\GlobalFuncNSub\GlobalFuncNSub.vbproj">
-      <Project>{B56FDCD3-8B48-4859-983B-07FFA242673D}</Project>
-      <Name>GlobalFuncNSub</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Libraries\MessagingLibrary\Messaging.vbproj">
       <Project>{84437202-3e38-4f75-b8c1-4125852fc4ff}</Project>
       <Name>Messaging</Name>

@@ -1,12 +1,10 @@
-
 using AATM.Contracts.Dtos;
 using AATM.Contracts.Interfaces.Services;
 using AATM.Core.Localization;
-using AATM.DataAccess.Sql;
 using AATM.Modules.Localization;
-using Microsoft.Extensions.Configuration;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
@@ -16,10 +14,10 @@ namespace AATM.App.HisWpf.ViewModels
     {
         private readonly TranslationCrudService _service;
         private readonly ILocalizationService _localizationService;
-        private readonly IConfiguration _cfg;
 
-        public ObservableCollection<TranslationDto> Translations { get; set; } = new();
+        public ObservableCollection<TranslationDto> Translations { get; } = new();
         public ObservableCollection<string> AvailableLanguages { get; } = new();
+
         private TranslationDto? _selectedTranslation;
         public TranslationDto? SelectedTranslation
         {
@@ -33,20 +31,17 @@ namespace AATM.App.HisWpf.ViewModels
                 }
             }
         }
+
         public string? ErrorText { get; set; }
 
         public ICommand SaveCommand { get; }
         public ICommand DeleteCommand { get; }
         public ICommand RefreshCommand { get; }
 
-        public TranslationViewModel(IConfiguration cfg)
+        public TranslationViewModel(TranslationCrudService service, ILocalizationService localizationService)
         {
-            _cfg = cfg;
-
-            var connectionString = _cfg.GetConnectionString("ISPDATA"); 
-            var repository = new TranslationRepository(connectionString ?? System.Configuration.ConfigurationManager.ConnectionStrings["ISPDATA"]?.ConnectionString ?? throw new System.InvalidOperationException("Connection string 'ISPDATA' is not configured."));
-            _service = new TranslationCrudService(repository);
-            _localizationService = new LocalizationService("en-US", "Translation");
+            _service = service;
+            _localizationService = localizationService;
 
             AvailableLanguages.Clear();
             var langs = LocalizationHelper.SafeGetLanguages(_localizationService);
@@ -62,15 +57,24 @@ namespace AATM.App.HisWpf.ViewModels
 
         private async Task Refresh()
         {
-            Translations.Clear();
-            var items = await _service.GetAllAsync();
-            foreach (var item in items)
-                Translations.Add(item);
-            // Set SelectedTranslation to the first item if available
-            if (Translations.Count > 0)
-                SelectedTranslation = Translations[0];
-            else
-                SelectedTranslation = null;
+            try
+            {
+                Translations.Clear();
+                var items = await _service.GetAllAsync().ConfigureAwait(true);
+                foreach (var item in items)
+                    Translations.Add(item);
+
+                SelectedTranslation = Translations.Count > 0 ? Translations[0] : null;
+
+                ErrorText = $"Loaded {Translations.Count} translation(s).";
+                Debug.WriteLine(ErrorText);
+            }
+            catch (Exception ex)
+            {
+                ErrorText = $"Load failed: {ex.Message}";
+                Debug.WriteLine(ex);
+            }
+            OnPropertyChanged(nameof(ErrorText));
         }
 
         private async Task Save()
@@ -93,17 +97,4 @@ namespace AATM.App.HisWpf.ViewModels
         protected void OnPropertyChanged([CallerMemberName] string name = null)
             => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
-
-    public class LanguageItem
-    {
-        public string Display { get; }
-        public string Code { get; }
-        public LanguageItem(string display, string code)
-        {
-            Display = display;
-            Code = code;
-        }
-        public override string ToString() => Display;
-    }
-
 }

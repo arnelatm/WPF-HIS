@@ -13,9 +13,4 @@
 		<PackageReference Include="CompareNETObjects" Version="4.79.0" />
 		<PackageReference Include="DiffEngine" Version="11.3.0" />
 	</ItemGroup>
-
-	<ItemGroup>
-		<ProjectReference Include="..\..\Libraries\AatmInterfaces\AatmInterfaces.vbproj" />
-		<ProjectReference Include="..\..\Libraries\LocalizationUtilities\LocalizationUtilities.csproj" />
-	</ItemGroup>
 </Project>

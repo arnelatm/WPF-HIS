@@ -177,10 +177,6 @@
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Libraries\GlobalFuncNSub\GlobalFuncNSub.vbproj">
-      <Project>{b56fdcd3-8b48-4859-983b-07ffa242673d}</Project>
-      <Name>GlobalFuncNSub</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Libraries\MessagingLibrary\Messaging.vbproj">
       <Project>{84437202-3e38-4f75-b8c1-4125852fc4ff}</Project>
       <Name>Messaging</Name>
