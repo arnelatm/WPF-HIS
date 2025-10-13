@@ -21,8 +21,8 @@
         </Grid.ColumnDefinitions>
 
         <Label Grid.Column="0" Content="Original" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
-        <TextBox Grid.Row="0" Grid.Column="2" x:Name="txtOriginalString" IsReadOnly="True" Margin="0,2,0,2"
-                 Text="{Binding SelectedTranslation.OriginalString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Row="0" Grid.Column="2"
+                 Text="{Binding SelectedTranslation.OriginalString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
 
         <Label Grid.Row="1" Grid.Column="0" Content="Localized" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
         <TextBox Grid.Row="1" Grid.Column="2" x:Name="txtLocalizedString" Margin="0,2,0,2"

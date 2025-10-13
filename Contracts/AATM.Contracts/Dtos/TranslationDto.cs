@@ -20,5 +20,6 @@ namespace AATM.Contracts.Dtos
 
         public DateTime CreationDate { get; set; }
 
+        public bool HasErrors => _errors.Count > 0;
     }
 }
