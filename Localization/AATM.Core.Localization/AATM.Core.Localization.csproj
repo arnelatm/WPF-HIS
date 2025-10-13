@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Wpf\AATM.Contracts\AATM.Contracts.csproj" />
+    <ProjectReference Include="..\..\DataAccess\AATM.DataAccess\AATM.DataAccess.csproj" />
+    <ProjectReference Include="..\..\DataAccess\AATM.DataAccess.Sql\AATM.DataAccess.Sql.csproj" />
+  </ItemGroup>
+
+</Project>

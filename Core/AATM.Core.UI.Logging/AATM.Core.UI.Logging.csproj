@@ -122,11 +122,5 @@
     </None>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\AATM.Core.csproj">
-      <Project>{a529fe66-56f4-0d65-3915-68a73f89482a}</Project>
-      <Name>AATM.Core</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

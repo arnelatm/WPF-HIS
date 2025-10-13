@@ -1,4 +1,4 @@
-using AATM.App.HisWpf.Helpers;
+
 using AATM.Contracts.Dtos;
 using AATM.Contracts.Interfaces.Services;
 using AATM.Core.Localization;
@@ -7,7 +7,6 @@ using AATM.Modules.Localization;
 using Microsoft.Extensions.Configuration;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Configuration;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 

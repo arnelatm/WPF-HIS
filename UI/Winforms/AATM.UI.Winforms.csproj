@@ -171,10 +171,6 @@
       <Project>{3C7BEC0F-17BB-0BA8-274F-A5196507CEBB}</Project>
       <Name>AATM.Business</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Core\AATM.Core.csproj">
-      <Project>{A529FE66-56F4-0D65-3915-68A73F89482A}</Project>
-      <Name>AATM.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Core\AATM.Core.Logging\AATM.Core.Logging.csproj">
       <Project>{A04B8212-312F-05DE-3E76-E137D5560B02}</Project>
       <Name>AATM.Core.Logging</Name>
