@@ -115,7 +115,8 @@ namespace AATM.Business.Logic.My
     *//* TODO ERROR: Skipped ElifDirectiveTrivia
     #ElseIf _MYAPPLICATIONTYPE = "Windows" Then
     */
-    internal partial class MyApplication : Microsoft.VisualBasic.ApplicationServices.ApplicationBase
+    // TODO: The type 'Microsoft.VisualBasic.ApplicationServices.ApplicationBase' is not available in .NET 8.0. You may need to refactor this class to remove or replace its base type according to your application's requirements.
+    internal partial class MyApplication
     {
         /* TODO ERROR: Skipped ElifDirectiveTrivia
         #ElseIf _MYAPPLICATIONTYPE = "Console" Then
@@ -198,7 +199,8 @@ namespace AATM.Business.Logic.My
         #If _MYUSERTYPE = "Windows" Then
         */
         [System.ComponentModel.Design.HelpKeyword("My.User")]
-        internal static Microsoft.VisualBasic.ApplicationServices.User User
+        // TODO: The type 'Microsoft.VisualBasic.ApplicationServices.User' is not available in .NET 8.0. You may need to refactor this property to use a different type or remove it according to your application's requirements.
+        // internal static Microsoft.VisualBasic.ApplicationServices.User User
         {
             [DebuggerHidden()]
             get
@@ -206,7 +208,8 @@ namespace AATM.Business.Logic.My
                 return m_UserObjectProvider.GetInstance;
             }
         }
-        private readonly static ThreadSafeObjectProvider<Microsoft.VisualBasic.ApplicationServices.User> m_UserObjectProvider = new ThreadSafeObjectProvider<Microsoft.VisualBasic.ApplicationServices.User>();
+        // TODO: The type 'Microsoft.VisualBasic.ApplicationServices.User' is not available in .NET 8.0. You may need to refactor this field to use a different type or remove it according to your application's requirements.
+        // private readonly static ThreadSafeObjectProvider<Microsoft.VisualBasic.ApplicationServices.User> m_UserObjectProvider = new ThreadSafeObjectProvider<Microsoft.VisualBasic.ApplicationServices.User>();
         /* TODO ERROR: Skipped ElifDirectiveTrivia
         #ElseIf _MYUSERTYPE = "Web" Then
         *//* TODO ERROR: Skipped DisabledTextTrivia
