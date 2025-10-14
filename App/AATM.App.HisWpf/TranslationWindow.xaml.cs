@@ -54,10 +54,13 @@ namespace AATM.App.HisWpf
                 ViewModel.SelectedTranslation = ViewModel.Translations[ViewModel.Translations.Count - 1];
         }
 
-        private async void BtnSave_Click(object sender, RoutedEventArgs e)
+        private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-            if (ViewModel.SaveCommand.CanExecute(null))
+            bool canExecute = ViewModel.SaveCommand.CanExecute(null);
+            if (canExecute)
+            {
                 ViewModel.SaveCommand.Execute(null);
+            }
         }
 
         private async void BtnDelete_Click(object sender, RoutedEventArgs e)

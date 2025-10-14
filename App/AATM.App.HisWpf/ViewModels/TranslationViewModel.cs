@@ -1,4 +1,5 @@
-using AATM.App.HisWpf.ViewModels;
+using AATM.Business.Validation.ValidationRules;
+using AATM.Business.Validation.Validators;
 using AATM.Contracts.Dtos;
 using AATM.Contracts.Interfaces.Services;
 using AATM.Core.Localization;
@@ -9,6 +10,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using AATM.App.HisWpf.ViewModels;
 
 namespace AATM.App.HisWpf.ViewModels
 {
@@ -31,6 +33,9 @@ namespace AATM.App.HisWpf.ViewModels
                     _selectedTranslation = value;
                     OnPropertyChanged();
                     ValidateAllProperties();
+                    if (SaveCommand is AsyncRelayCommand asyncCmd)
+                        asyncCmd.RaiseCanExecuteChanged();
+                    ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs("TranslationDto"));
                 }
             }
         }
@@ -41,6 +46,9 @@ namespace AATM.App.HisWpf.ViewModels
         public ICommand DeleteCommand { get; }
         public ICommand RefreshCommand { get; }
 
+        private readonly DtoValidator<TranslationDto> _translationValidator =
+            new DtoValidator<TranslationDto>(TranslationDtoValidationRules.Validate);
+
         public TranslationViewModel(TranslationCrudService service, ILocalizationService localizationService)
         {
             _service = service;
@@ -50,9 +58,17 @@ namespace AATM.App.HisWpf.ViewModels
             foreach (var (display, code) in langs)
                 AvailableLanguages.Add(new LanguageItem(display, code));
 
-            SaveCommand = new RelayCommand(async _ => await Save(), _ => SelectedTranslation != null && !HasErrors);
-            DeleteCommand = new RelayCommand(async _ => await Delete(), _ => SelectedTranslation != null);
-            RefreshCommand = new RelayCommand(async _ => await Refresh());
+            SaveCommand = new AsyncRelayCommand(
+                async _ => await Save(),
+                _ => SelectedTranslation != null && !HasErrors
+            );
+            DeleteCommand = new AsyncRelayCommand(
+                async _ => await Delete(),
+                _ => SelectedTranslation != null
+            );
+            RefreshCommand = new AsyncRelayCommand(
+                async _ => await Refresh()
+            );
 
             _ = Refresh();
         }
@@ -89,7 +105,7 @@ namespace AATM.App.HisWpf.ViewModels
 
         private async Task Save()
         {
-            ValidateAllProperties();
+            ValidateAllProperties(); // Ensure errors are up-to-date
             if (HasErrors)
             {
                 ErrorText = "Please fix validation errors before saving.";
@@ -118,10 +134,8 @@ namespace AATM.App.HisWpf.ViewModels
 
         public IEnumerable GetErrors(string propertyName)
         {
-            // Return errors for the specified property, or all errors if propertyName is null or empty
             if (string.IsNullOrEmpty(propertyName))
             {
-                // Flatten all errors into a single list
                 return _errors.Values.SelectMany(e => e).ToList();
             }
             return _errors.TryGetValue(propertyName, out var errors) ? errors : Enumerable.Empty<string>();
@@ -134,6 +148,10 @@ namespace AATM.App.HisWpf.ViewModels
                 errors.Add("Original string is required.");
             if (propertyName == nameof(TranslationDto.LanguageCode) && string.IsNullOrWhiteSpace((string)value))
                 errors.Add("Language code is required.");
+            if (propertyName == nameof(TranslationDto.LocalizedString) && string.IsNullOrWhiteSpace((string)value))
+                errors.Add("Localized Text is required.");
+            if (propertyName == nameof(TranslationDto.ModuleName) && string.IsNullOrWhiteSpace((string)value))
+                errors.Add("Module Name is required.");
 
             if (errors.Count > 0)
                 _errors[propertyName] = errors;
@@ -148,10 +166,20 @@ namespace AATM.App.HisWpf.ViewModels
             _errors.Clear();
             if (SelectedTranslation != null)
             {
-                ValidateProperty(nameof(TranslationDto.OriginalString), SelectedTranslation.OriginalString);
-                ValidateProperty(nameof(TranslationDto.LanguageCode), SelectedTranslation.LanguageCode);
-                // Add more property validations as needed
+                var errors = _translationValidator.Validate(SelectedTranslation);
+                if (errors.Any())
+                {
+                    // You can associate errors with property names if needed, or just add them all under a general key
+                    _errors["TranslationDto"] = errors;
+                }
+                else
+                {
+                    _errors.Remove("TranslationDto");
+                }
             }
+            if (SaveCommand is AsyncRelayCommand asyncCmd)
+                asyncCmd.RaiseCanExecuteChanged();
+            ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs("TranslationDto"));
         }
 
         // INotifyPropertyChanged implementation

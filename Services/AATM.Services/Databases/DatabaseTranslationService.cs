@@ -38,6 +38,8 @@ namespace AATM.Services.Databases
                     await _repository.UpsertTranslationAsync(new TranslationDto
                     {
                         OriginalString = sourceText,
+                        ModuleName = sourceText,
+                        UIIdentifier = sourceText,
                         LanguageCode = targetLanguage,
                         LocalizedString = translatedText,
                         CreationDate = DateTime.Now

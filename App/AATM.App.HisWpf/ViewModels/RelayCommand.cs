@@ -1,29 +1,54 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace AATM.App.HisWpf.ViewModels
 {
-    public class RelayCommand : ICommand
+    public class AsyncRelayCommand : ICommand
     {
-        private readonly Action<object> _execute;
-        private readonly Predicate<object>? _canExecute;
+        private readonly Func<object?, Task> _executeAsync;
+        private readonly Predicate<object?>? _canExecute;
+        private bool _isExecuting;
 
-        // Add a parameterless constructor to satisfy CS8618, or initialize fields inline.
-        // Here, we use field initializers to ensure non-null assignment.
-        public RelayCommand(Action<object> execute, Predicate<object>? canExecute = null)
+        public AsyncRelayCommand(Func<object?, Task> executeAsync, Predicate<object?>? canExecute = null)
         {
-            _execute = execute ?? throw new ArgumentNullException(nameof(execute));
+            _executeAsync = executeAsync ?? throw new ArgumentNullException(nameof(executeAsync));
             _canExecute = canExecute;
         }
 
-        public bool CanExecute(object? parameter) => _canExecute == null || _canExecute(parameter!);
+        public bool CanExecute(object? parameter)
+        {
+            return !_isExecuting && (_canExecute == null || _canExecute(parameter));
+        }
 
-        public void Execute(object? parameter) => _execute(parameter!);
+        public async void Execute(object? parameter)
+        {
+            if (!CanExecute(parameter))
+                return;
+
+            _isExecuting = true;
+            RaiseCanExecuteChanged();
+
+            try
+            {
+                await _executeAsync(parameter);
+            }
+            finally
+            {
+                _isExecuting = false;
+                RaiseCanExecuteChanged();
+            }
+        }
 
         public event EventHandler? CanExecuteChanged
         {
             add => CommandManager.RequerySuggested += value;
             remove => CommandManager.RequerySuggested -= value;
         }
+
+        public void RaiseCanExecuteChanged()
+        {
+            CommandManager.InvalidateRequerySuggested();
+        }
     }
-}
+}   

@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Business\AATM.Business.Validation\AATM.Business.Validation.csproj" />
     <ProjectReference Include="..\..\DataAccess\AATM.DataAccess.Sql\AATM.DataAccess.Sql.csproj" />
     <ProjectReference Include="..\..\DataAccess\AATM.DataAccess\AATM.DataAccess.csproj" />
     <ProjectReference Include="..\..\Localization\AATM.Core.Localization\AATM.Core.Localization.csproj" />
