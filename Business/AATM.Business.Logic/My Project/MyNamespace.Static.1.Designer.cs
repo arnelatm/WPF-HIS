@@ -455,7 +455,7 @@ namespace AATM.Business.Logic.My
             /* TODO ERROR: Skipped IfDirectiveTrivia
             #If TARGET = "library" Then
             */
-            private readonly Microsoft.VisualBasic.MyServices.Internal.ContextValue<T> m_Context = new Microsoft.VisualBasic.MyServices.Internal.ContextValue<T>();
+            private readonly System.Threading.ThreadLocal<T> m_Context = new System.Threading.ThreadLocal<T>(() => new T());
             /* TODO ERROR: Skipped ElseDirectiveTrivia
             #Else
             *//* TODO ERROR: Skipped DisabledTextTrivia
