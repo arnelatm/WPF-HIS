@@ -207,7 +207,7 @@ namespace AATM.Business.Logic.My
             // {
             //     return m_UserObjectProvider.GetInstance;
             // }
-        }
+        // }
         // TODO: The type 'Microsoft.VisualBasic.ApplicationServices.User' is not available in .NET 8.0. You may need to refactor this field to use a different type or remove it according to your application's requirements.
         // private readonly static ThreadSafeObjectProvider<Microsoft.VisualBasic.ApplicationServices.User> m_UserObjectProvider = new ThreadSafeObjectProvider<Microsoft.VisualBasic.ApplicationServices.User>();
         /* TODO ERROR: Skipped ElifDirectiveTrivia
