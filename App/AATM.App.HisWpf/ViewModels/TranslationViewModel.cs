@@ -30,14 +30,29 @@ namespace AATM.App.HisWpf.ViewModels
             {
                 if (_selectedTranslation != value)
                 {
+                    if (_selectedTranslation is INotifyPropertyChanged oldNotify)
+                        oldNotify.PropertyChanged -= SelectedTranslation_PropertyChanged;
+
                     _selectedTranslation = value;
                     OnPropertyChanged();
+
+                    if (_selectedTranslation is INotifyPropertyChanged newNotify)
+                        newNotify.PropertyChanged += SelectedTranslation_PropertyChanged;
+
                     ValidateAllProperties();
                     if (SaveCommand is AsyncRelayCommand asyncCmd)
                         asyncCmd.RaiseCanExecuteChanged();
                     ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs("TranslationDto"));
                 }
             }
+        }
+
+        private void SelectedTranslation_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            ValidateAllProperties();
+            if (SaveCommand is AsyncRelayCommand asyncCmd)
+                asyncCmd.RaiseCanExecuteChanged();
+            ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(e.PropertyName));
         }
 
         public string? ErrorText { get; set; }
@@ -164,13 +179,14 @@ namespace AATM.App.HisWpf.ViewModels
         private void ValidateAllProperties()
         {
             _errors.Clear();
+            ErrorText = ""; // Clear previous error
             if (SelectedTranslation != null)
             {
                 var errors = _translationValidator.Validate(SelectedTranslation);
                 if (errors.Any())
                 {
-                    // You can associate errors with property names if needed, or just add them all under a general key
                     _errors["TranslationDto"] = errors;
+                    ErrorText = string.Join(Environment.NewLine, errors); // <-- Set error text here
                 }
                 else
                 {
@@ -180,6 +196,7 @@ namespace AATM.App.HisWpf.ViewModels
             if (SaveCommand is AsyncRelayCommand asyncCmd)
                 asyncCmd.RaiseCanExecuteChanged();
             ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs("TranslationDto"));
+            OnPropertyChanged(nameof(ErrorText)); // <-- Notify UI of change
         }
 
         // INotifyPropertyChanged implementation

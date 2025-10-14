@@ -41,14 +41,14 @@
 
         <Label Grid.Row="2" Grid.Column="0" Content="Localized" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
         <TextBox Grid.Row="2" Grid.Column="2" x:Name="txtLocalizedString" Margin="0,2,0,2"
-                 Text="{Binding SelectedTranslation.LocalizedString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                 Text="{Binding SelectedTranslation.LocalizedString, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
 
         <Label Grid.Row="3" Grid.Column="0" Content="Language" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
         <ComboBox Grid.Row="3" Grid.Column="2" x:Name="cmbLanguageCode" Margin="0,2,0,2"
           ItemsSource="{Binding AvailableLanguages}"
           SelectedValue="{Binding SelectedTranslation.LanguageCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
           SelectedValuePath="Code"
-          DisplayMemberPath="Display" />    
+          DisplayMemberPath="Display" />
 
         <Label Grid.Row="4" Grid.Column="0" Content="UI Identifier" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
         <TextBox Grid.Row="4" Grid.Column="2" x:Name="txtUIIdentifier" Margin="0,2,0,2"
@@ -59,9 +59,9 @@
                  Text="{Binding SelectedTranslation.ModuleName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
         <TextBox Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3" x:Name="txtErrors"
-                 Background="MistyRose" Foreground="DarkRed" FontWeight="Bold"
-                 IsReadOnly="True" Margin="0,5,0,1" Height="44" VerticalScrollBarVisibility="Auto"
-                 Text="{Binding ErrorText}" />
+            Background="MistyRose" Foreground="DarkRed" FontWeight="Bold"
+            IsReadOnly="True" Margin="0,5,0,1" Height="44" VerticalScrollBarVisibility="Auto"
+            Text="{Binding ErrorText}" />
 
         <DataGrid Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3" x:Name="dataGrid"
                   ItemsSource="{Binding Translations}" AutoGenerateColumns="False"
