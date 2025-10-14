@@ -201,7 +201,7 @@ namespace AATM.Business.Logic.My
         [System.ComponentModel.Design.HelpKeyword("My.User")]
         // TODO: The type 'Microsoft.VisualBasic.ApplicationServices.User' is not available in .NET 8.0. You may need to refactor this property to use a different type or remove it according to your application's requirements.
         // internal static Microsoft.VisualBasic.ApplicationServices.User User
-        {
+// Property definition for 'User' is commented out because the type 'Microsoft.VisualBasic.ApplicationServices.User' is not available in .NET 8.0. If you need similar functionality, consider implementing a custom user class or refactor your code accordingly.
             [DebuggerHidden()]
             get
             {
