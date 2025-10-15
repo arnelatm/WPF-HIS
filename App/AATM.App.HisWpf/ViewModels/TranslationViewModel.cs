@@ -21,6 +21,7 @@ namespace AATM.App.HisWpf.ViewModels
 
         public ObservableCollection<TranslationDto> Translations { get; } = new();
         public ObservableCollection<LanguageItem> AvailableLanguages { get; } = new();
+        public bool SelectedTranslationImplementsErrorInfo => SelectedTranslation is INotifyDataErrorInfo;
 
         private TranslationDto? _selectedTranslation;
         public TranslationDto? SelectedTranslation
@@ -35,6 +36,8 @@ namespace AATM.App.HisWpf.ViewModels
 
                     _selectedTranslation = value;
                     OnPropertyChanged();
+
+                    Debug.WriteLine($"SelectedTranslationImplementsErrorInfo: {SelectedTranslationImplementsErrorInfo}");
 
                     if (_selectedTranslation is INotifyPropertyChanged newNotify)
                         newNotify.PropertyChanged += SelectedTranslation_PropertyChanged;
@@ -101,6 +104,7 @@ namespace AATM.App.HisWpf.ViewModels
                     Translations.Add(item);
 
                 SelectedTranslation = Translations.Count > 0 ? Translations[0] : null;
+                Debug.WriteLine($"SelectedTranslationImplementsErrorInfo: {SelectedTranslationImplementsErrorInfo}");
 
                 ErrorText = $"Loaded {Translations.Count} translation(s).";
                 Debug.WriteLine(ErrorText);

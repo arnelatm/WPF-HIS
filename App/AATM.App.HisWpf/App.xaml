@@ -5,5 +5,54 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          <local:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" CollapseWhenFalse="True"/>
+    
+    <!-- TextBox validation error template -->
+        <Style TargetType="TextBox">
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <DockPanel LastChildFill="True">
+                            <TextBlock Foreground="Red" Margin="0,0,5,0"
+                               DockPanel.Dock="Right"
+                               Text="{Binding [0].ErrorContent, RelativeSource={RelativeSource AncestorType=AdornedElementPlaceholder}}"/>
+
+                            <Border BorderBrush="Red" BorderThickness="1">
+                                <AdornedElementPlaceholder/>
+                            </Border>
+                        </DockPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- ComboBox validation error template -->
+    <Style TargetType="ComboBox">
+        <Setter Property="Validation.ErrorTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <DockPanel LastChildFill="True">
+                        <TextBlock Foreground="Red" Margin="0,0,5,0"
+                                   Text="{Binding [0].ErrorContent, RelativeSource={RelativeSource AncestorType=AdornedElementPlaceholder}}"/>
+                        <AdornedElementPlaceholder/>
+                    </DockPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- PasswordBox validation error template -->
+    <Style TargetType="PasswordBox">
+        <Setter Property="Validation.ErrorTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <DockPanel LastChildFill="True">
+                        <TextBlock Foreground="Red" Margin="0,0,5,0"
+                                   Text="{Binding [0].ErrorContent, RelativeSource={RelativeSource AncestorType=AdornedElementPlaceholder}}"/>
+                        <AdornedElementPlaceholder/>
+                    </DockPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
     </Application.Resources>
 </Application>
