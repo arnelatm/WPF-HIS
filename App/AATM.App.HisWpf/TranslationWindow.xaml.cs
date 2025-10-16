@@ -27,6 +27,9 @@ namespace AATM.App.HisWpf
         private string _originalTitle = string.Empty;
         private readonly Dictionary<DataGridColumn, string> _originalColumnHeaders = new();
 
+        // NEW: current filter text
+        private string? _currentFilter;
+
         public TranslationWindow(TranslationViewModel vm, ILocalizationService localizationService)
         {
             InitializeComponent();
@@ -40,10 +43,72 @@ namespace AATM.App.HisWpf
             btnSave.Click += BtnSave_Click;
             btnDelete.Click += BtnDelete_Click;
             btnFind.Click += BtnFind_Click;
+            btnResetFilter.Click += BtnResetFilter_Click;
             btnSwitchLanguage.Click += BtnSwitchLanguage_Click;
 
             ViewModel.PropertyChanged += ViewModel_PropertyChanged;
             UpdateRecordIndicators();
+        }
+
+        private void BtnFind_Click(object sender, RoutedEventArgs e)
+        {
+            var input = Microsoft.VisualBasic.Interaction.InputBox("Enter text to filter:", "Filter Translations");
+            if (string.IsNullOrWhiteSpace(input))
+                return;
+
+            _currentFilter = input.Trim();
+            ApplyFilter(_currentFilter);
+        }
+
+        private void BtnResetFilter_Click(object sender, RoutedEventArgs e)
+        {
+            _currentFilter = null;
+            ApplyFilter(null);
+        }
+
+        private void ApplyFilter(string? term)
+        {
+            var view = CollectionViewSource.GetDefaultView(dataGrid.ItemsSource);
+            if (view == null) return;
+
+            if (string.IsNullOrWhiteSpace(term))
+            {
+                view.Filter = null;
+            }
+            else
+            {
+                var t = term.Trim();
+                view.Filter = o =>
+                {
+                    if (o is null) return false;
+                    // Try to access known properties safely (handles nulls)
+                    string GetString(Func<dynamic, object?> sel)
+                    {
+                        try { var v = sel((dynamic)o); return v?.ToString() ?? string.Empty; }
+                        catch { return string.Empty; }
+                    }
+
+                    return GetString(x => x.ID).IndexOf(t, StringComparison.OrdinalIgnoreCase) >= 0
+                        || GetString(x => x.OriginalString).IndexOf(t, StringComparison.OrdinalIgnoreCase) >= 0
+                        || GetString(x => x.LocalizedString).IndexOf(t, StringComparison.OrdinalIgnoreCase) >= 0
+                        || GetString(x => x.ModuleName).IndexOf(t, StringComparison.OrdinalIgnoreCase) >= 0
+                        || GetString(x => x.UIIdentifier).IndexOf(t, StringComparison.OrdinalIgnoreCase) >= 0
+                        || GetString(x => x.LanguageCode).IndexOf(t, StringComparison.OrdinalIgnoreCase) >= 0;
+                };
+            }
+
+            view.Refresh();
+
+            // Optional: select first row after filtering
+            if (dataGrid.Items.Count > 0)
+            {
+                var first = dataGrid.Items[0];
+                dataGrid.SelectedItem = first;
+                dataGrid.ScrollIntoView(first);
+            }
+
+            // Update indicators if you want to reflect filtered count (keeps existing behavior otherwise)
+            // txtRecordCount.Text = dataGrid.Items.Count.ToString();
         }
 
         private void BtnSwitchLanguage_Click(object sender, RoutedEventArgs e)
@@ -156,7 +221,6 @@ namespace AATM.App.HisWpf
                         if (btn.Content is not string content || IsGlyph(content)) continue;
 
                         var original = btn.Tag as string ?? content;
-                        // Ensure Tag is set for future toggles
                         if (btn.Tag is null) btn.Tag = original;
 
                         btn.Content = IsEnglish(lang)
@@ -219,36 +283,46 @@ namespace AATM.App.HisWpf
                 ViewModel.DeleteCommand.Execute(null);
         }
 
-        private void BtnFind_Click(object sender, RoutedEventArgs e)
+        private void BtnFind_Click_OLD(object sender, RoutedEventArgs e)
         {
-            // Example: Find by ID (prompt user for ID)
-            var input = Microsoft.VisualBasic.Interaction.InputBox("Enter ID to find:", "Find Translation");
-            if (int.TryParse(input, out int id))
-            {
-                var found = ViewModel.Translations.FirstOrDefault(t => t.ID == id);
-                if (found != null)
-                    ViewModel.SelectedTranslation = found;
-                else
-                    MessageBox.Show("Record not found.");
-            }
+            // kept for reference; replaced by ApplyFilter
+        }
+
+        private void BtnFindById_OLD()
+        {
+            // old logic removed
+        }
+
+        private void BtnFind_Click_ReplaceMe()
+        {
+            // placeholder removed
+        }
+
+        private void BtnFind_Click_AnotherOld()
+        {
+            // placeholder removed
+        }
+
+        private void BtnFind_Click_Legacy()
+        {
+            // placeholder removed
         }
 
         private void ViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(ViewModel.SelectedTranslation))
             {
-                // Scroll DataGrid to selected item
                 if (ViewModel.SelectedTranslation != null)
                 {
                     dataGrid.SelectedItem = ViewModel.SelectedTranslation;
                     dataGrid.ScrollIntoView(ViewModel.SelectedTranslation);
                 }
-                UpdateRecordIndicators(); // <-- Ensure this is called here
+                UpdateRecordIndicators();
             }
             if (e.PropertyName == nameof(ViewModel.Translations))
             {
                 UpdateRecordIndicators();
-            }   
+            }
         }
 
         private void UpdateRecordIndicators()
@@ -257,6 +331,5 @@ namespace AATM.App.HisWpf
             txtCurrentRecord.Text = (idx >= 0 ? (idx + 1).ToString() : "0");
             txtRecordCount.Text = ViewModel.Translations.Count.ToString();
         }
-
     }
 }

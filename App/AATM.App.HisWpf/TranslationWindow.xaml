@@ -36,6 +36,7 @@
             <Button x:Name="btnNext" Content=">" Width="40" Margin="2"/>
             <Button x:Name="btnLast" Content=">|" Width="40" Margin="2"/>
             <Button x:Name="btnFind" Content="Find" Width="60" Margin="10,2,2,2"/>
+            <Button x:Name="btnResetFilter" Content="Reset" Width="60" Margin="2"/>
             <Button x:Name="btnSave" Content="Save" Width="60" Margin="10,2,2,2"/>
             <Button x:Name="btnDelete" Content="Delete" Width="60" Margin="2"/>
             <Button x:Name="btnSwitchLanguage" Content="Switch Language" Width="120" Margin="10,2,2,2"/>
