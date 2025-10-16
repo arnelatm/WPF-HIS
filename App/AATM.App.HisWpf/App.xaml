@@ -128,5 +128,10 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+
+        <!-- Implicit DataGrid style to apply ErrorCellStyle globally -->
+        <Style TargetType="{x:Type DataGrid}">
+            <Setter Property="CellStyle" Value="{StaticResource ErrorCellStyle}"/>
+        </Style>
     </Application.Resources>
 </Application>
