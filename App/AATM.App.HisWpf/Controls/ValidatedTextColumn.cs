@@ -6,14 +6,11 @@ namespace AATM.App.HisWpf
 {
     /// <summary>
     /// DataGridTextColumn that applies common validation behavior and styles.
-    /// - Uses global styles for display and editing elements.
-    /// - Ensures bindings validate via IDataErrorInfo/INotifyDataErrorInfo and update on property changes.
     /// </summary>
     public class ValidatedTextColumn : DataGridTextColumn
     {
         public ValidatedTextColumn()
         {
-            // Apply shared styles if present in app resources
             ElementStyle = TryFindStyle("DataGridTextBlockErrorStyle");
             EditingElementStyle = TryFindStyle("DataGridCellErrorStyle");
         }
@@ -24,24 +21,19 @@ namespace AATM.App.HisWpf
 
             if (newBinding is Binding b)
             {
-                // Ensure validation flags and real-time updates are enabled
                 b.ValidatesOnDataErrors = true;
                 b.ValidatesOnNotifyDataErrors = true;
                 b.NotifyOnValidationError = true;
                 if (b.UpdateSourceTrigger == UpdateSourceTrigger.Default)
-                {
                     b.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
-                }
+
+                // Ensure null source values are displayed as empty strings
+                if (b.TargetNullValue == null)
+                    b.TargetNullValue = string.Empty;
             }
         }
 
         private static Style? TryFindStyle(object key)
-        {
-            if (Application.Current != null)
-            {
-                return Application.Current.TryFindResource(key) as Style;
-            }
-            return null;
-        }
+            => Application.Current?.TryFindResource(key) as Style;
     }
 }
