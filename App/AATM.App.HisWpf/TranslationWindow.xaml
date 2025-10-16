@@ -67,14 +67,38 @@
                   ItemsSource="{Binding Translations}" AutoGenerateColumns="False"
                   SelectedItem="{Binding SelectedTranslation, Mode=TwoWay}"
                   Margin="0,39,0,10">
+            <DataGrid.Resources>
+                <Style x:Key="DataGridCellErrorStyle" TargetType="TextBox">
+                    <Style.Triggers>
+                        <Trigger Property="Validation.HasError" Value="True">
+                            <Setter Property="ToolTip" 
+                            Value="{Binding RelativeSource={x:Static RelativeSource.Self}, 
+                                            Path=(Validation.Errors)[0].ErrorContent}"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>    
+                <Style x:Key="ErrorCellStyle" TargetType="DataGridCell">
+                    <Style.Triggers>
+                        <Trigger Property="Validation.HasError" Value="True">
+                            <Setter Property="ToolTip" 
+                            Value="{Binding RelativeSource={x:Static RelativeSource.Self}, 
+                                            Path=(Validation.Errors)[0].ErrorContent}" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+                
+            </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding ID}" Width="80"/>
-                <DataGridTextColumn Header="OriginalString" Binding="{Binding OriginalString}" Width="200"/>
-                <DataGridTextColumn Header="ModuleName" Binding="{Binding ModuleName}" Width="120"/>
-                <DataGridTextColumn Header="UIIdentifier" Binding="{Binding UIIdentifier}" Width="120"/>
-                <DataGridTextColumn Header="LanguageCode" Binding="{Binding LanguageCode}" Width="120"/>
-                <DataGridTextColumn Header="LocalizedString" Binding="{Binding LocalizedString}" Width="200"/>
-                <DataGridTextColumn Header="CreationDate" Binding="{Binding CreationDate}" Width="120"/>
+                <DataGridTextColumn Header="OriginalString" Binding="{Binding OriginalString}" Width="200" EditingElementStyle="{StaticResource DataGridCellErrorStyle}"/>
+                <DataGridTextColumn Header="ModuleName" Binding="{Binding ModuleName}" Width="120" EditingElementStyle="{StaticResource DataGridCellErrorStyle}"/>
+                <DataGridTextColumn Header="UIIdentifier" Binding="{Binding UIIdentifier}" Width="120" EditingElementStyle="{StaticResource DataGridCellErrorStyle}"/>
+                <DataGridTextColumn Header="LanguageCode" Binding="{Binding LanguageCode}" Width="120" EditingElementStyle="{StaticResource DataGridCellErrorStyle}"/>
+                <DataGridTextColumn Header="LocalizedString" 
+                        Binding="{Binding LocalizedString}" 
+                        Width="200"
+                        EditingElementStyle="{StaticResource DataGridCellErrorStyle}"
+                        CellStyle="{StaticResource ErrorCellStyle}"/>
             </DataGrid.Columns>
         </DataGrid>
         <ProgressBar IsIndeterminate="True" Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}}" />

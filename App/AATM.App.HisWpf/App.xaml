@@ -11,20 +11,21 @@
             <Setter Property="Validation.ErrorTemplate">
                 <Setter.Value>
                     <ControlTemplate>
-                        <DockPanel LastChildFill="True">
-                            <TextBlock Foreground="Red" Margin="0,0,5,0"
-                               DockPanel.Dock="Right"
-                               Text="{Binding [0].ErrorContent, RelativeSource={RelativeSource AncestorType=AdornedElementPlaceholder}}"/>
-
-                            <Border BorderBrush="Red" BorderThickness="1">
-                                <AdornedElementPlaceholder/>
-                            </Border>
-                        </DockPanel>
+                        <Border BorderBrush="Red" BorderThickness="1">
+                            <AdornedElementPlaceholder/>
+                        </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-        </Style>
 
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="ToolTip" 
+                    Value="{Binding RelativeSource={x:Static RelativeSource.Self}, 
+                                    Path=(Validation.Errors)[0].ErrorContent}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
         <!-- ComboBox validation error template -->
     <Style TargetType="ComboBox">
         <Setter Property="Validation.ErrorTemplate">
