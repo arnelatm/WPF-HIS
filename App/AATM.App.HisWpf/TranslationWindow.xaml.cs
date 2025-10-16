@@ -1,6 +1,8 @@
 ﻿using AATM.App.HisWpf.ViewModels;
 using AATM.Contracts.Interfaces.Services;
 using AATM.Core.Localization;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,7 +20,12 @@ namespace AATM.App.HisWpf
         private TranslationViewModel ViewModel => (TranslationViewModel)DataContext;
 
         private ILocalizationService _localizationService;
-        private string _moduleName = "TranslationWindow"; // module name for lookups
+        private readonly string _moduleName = "TranslationWindow";
+
+        // NEW: originals cache
+        private bool _originalsCached;
+        private string _originalTitle = string.Empty;
+        private readonly Dictionary<DataGridColumn, string> _originalColumnHeaders = new();
 
         public TranslationWindow(TranslationViewModel vm, ILocalizationService localizationService)
         {
@@ -49,20 +56,24 @@ namespace AATM.App.HisWpf
             this.Language = XmlLanguage.GetLanguage(newLang);
             this.FlowDirection = _localizationService.IsRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
 
-            // Only localize window chrome (labels/buttons outside the DataGrid)
-            LocalizeWindowChrome();
+            // Cache originals once
+            CacheOriginalWindowChrome();
+            CacheOriginalColumnHeaders();
 
-            // Translate DataGrid column headers only (do not touch DataGrid internals)
+            // Localize chrome using cached originals
+            LocalizeWindowChrome(newLang);
+
+            // Translate DataGrid column headers using cached originals
             foreach (var col in dataGrid.Columns)
             {
-                if (col.Header is string s && !string.IsNullOrWhiteSpace(s))
-                {
-                    col.Header = _localizationService.GetString(_moduleName, s, s);
-                }
-            }
+                if (!_originalColumnHeaders.TryGetValue(col, out var original) || string.IsNullOrWhiteSpace(original))
+                    continue;
 
-            // If your grid data is language-dependent, reload it
-            // ViewModel.RefreshCommand?.Execute(null);
+                if (IsEnglish(newLang))
+                    col.Header = original;
+                else
+                    col.Header = _localizationService.GetString(_moduleName, original, original);
+            }
 
             // Ensure DataGrid refreshes visuals after header/culture changes
             CollectionViewSource.GetDefaultView(dataGrid.ItemsSource)?.Refresh();
@@ -70,44 +81,100 @@ namespace AATM.App.HisWpf
             dataGrid.UpdateLayout();
         }
 
-        private void LocalizeWindowChrome()
-        {
-            // Localize the window title
-            if (!string.IsNullOrWhiteSpace(this.Title))
-                this.Title = _localizationService.GetString(_moduleName, "Title", this.Title);
+        private static bool IsEnglish(string lang)
+            => lang.StartsWith("en", StringComparison.OrdinalIgnoreCase);
 
-            static bool IsGlyph(string s)
-                => !string.IsNullOrWhiteSpace(s)
-                   && s.Length <= 3
-                   && s.All(ch => char.IsPunctuation(ch) || char.IsSymbol(ch));
+        private static bool IsGlyph(string s)
+            => !string.IsNullOrWhiteSpace(s)
+               && s.Length <= 3
+               && s.All(ch => char.IsPunctuation(ch) || char.IsSymbol(ch));
+
+        // Cache originals for window title, labels, and buttons (outside the grid)
+        private void CacheOriginalWindowChrome()
+        {
+            if (_originalsCached) return;
+            _originalTitle = this.Title ?? string.Empty;
+
+            if (this.Content is Grid root)
+            {
+                foreach (var child in root.Children)
+                {
+                    if (child is StackPanel sp)
+                    {
+                        foreach (var btn in sp.Children.OfType<Button>())
+                        {
+                            if (btn.Content is string content && !IsGlyph(content) && btn.Tag is null)
+                            {
+                                btn.Tag = content; // store original in Tag
+                            }
+                        }
+                        continue;
+                    }
+
+                    if (child is Label lbl && lbl.Content is string c && !IsGlyph(c) && lbl.Tag is null)
+                    {
+                        lbl.Tag = c; // store original in Tag
+                    }
+                }
+            }
+
+            _originalsCached = true;
+        }
+
+        // Cache original headers for columns once
+        private void CacheOriginalColumnHeaders()
+        {
+            foreach (var col in dataGrid.Columns)
+            {
+                if (_originalColumnHeaders.ContainsKey(col)) continue;
+                if (col.Header is string s && !string.IsNullOrWhiteSpace(s))
+                {
+                    _originalColumnHeaders[col] = s;
+                }
+            }
+        }
+
+        // Use cached originals to set text for current language
+        private void LocalizeWindowChrome(string lang)
+        {
+            // Title
+            if (!string.IsNullOrWhiteSpace(_originalTitle))
+            {
+                this.Title = IsEnglish(lang)
+                    ? _originalTitle
+                    : _localizationService.GetString(_moduleName, "Title", _originalTitle);
+            }
 
             if (this.Content is not Grid root) return;
 
             foreach (var child in root.Children)
             {
-                // Top buttons row
                 if (child is StackPanel sp)
                 {
-                    foreach (var btnObj in sp.Children.OfType<Button>())
+                    foreach (var btn in sp.Children.OfType<Button>())
                     {
-                        if (btnObj.Content is string content && !IsGlyph(content))
-                        {
-                            var key = string.IsNullOrWhiteSpace(btnObj.Name) ? content : btnObj.Name;
-                            btnObj.Content = _localizationService.GetString(_moduleName, key, content);
-                        }
+                        if (btn.Content is not string content || IsGlyph(content)) continue;
+
+                        var original = btn.Tag as string ?? content;
+                        // Ensure Tag is set for future toggles
+                        if (btn.Tag is null) btn.Tag = original;
+
+                        btn.Content = IsEnglish(lang)
+                            ? original
+                            : _localizationService.GetString(_moduleName, string.IsNullOrWhiteSpace(btn.Name) ? original : btn.Name, original);
                     }
                     continue;
                 }
 
-                // Form labels (outside the grid)
                 if (child is Label lbl && lbl.Content is string c && !IsGlyph(c))
                 {
-                    var key = string.IsNullOrWhiteSpace(lbl.Name) ? c : lbl.Name;
-                    lbl.Content = _localizationService.GetString(_moduleName, key, c);
-                }
+                    var original = lbl.Tag as string ?? c;
+                    if (lbl.Tag is null) lbl.Tag = original;
 
-                // Do not process DataGrid subtree or any other templated controls
-                // The grid is handled by headers loop above
+                    lbl.Content = IsEnglish(lang)
+                        ? original
+                        : _localizationService.GetString(_moduleName, string.IsNullOrWhiteSpace(lbl.Name) ? original : lbl.Name, original);
+                }
             }
         }
 
