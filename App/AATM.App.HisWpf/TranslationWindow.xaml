@@ -64,9 +64,9 @@
             Text="{Binding ErrorText}" />
 
         <DataGrid Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3" x:Name="dataGrid"
-                  ItemsSource="{Binding Translations}" AutoGenerateColumns="False"
-                  SelectedItem="{Binding SelectedTranslation, Mode=TwoWay}"
-                  Margin="0,39,0,10">
+          ItemsSource="{Binding Translations}" AutoGenerateColumns="False"
+          SelectedItem="{Binding SelectedTranslation, Mode=TwoWay}"
+          Margin="0,39,0,10">
             <DataGrid.Resources>
                 <Style x:Key="DataGridCellErrorStyle" TargetType="TextBox">
                     <Style.Triggers>
@@ -74,19 +74,24 @@
                             <Setter Property="ToolTip" 
                             Value="{Binding RelativeSource={x:Static RelativeSource.Self}, 
                                             Path=(Validation.Errors)[0].ErrorContent}"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>    
-                <Style x:Key="ErrorCellStyle" TargetType="DataGridCell">
-                    <Style.Triggers>
-                        <Trigger Property="Validation.HasError" Value="True">
-                            <Setter Property="ToolTip" 
-                            Value="{Binding RelativeSource={x:Static RelativeSource.Self}, 
-                                            Path=(Validation.Errors)[0].ErrorContent}" />
+                            <Setter Property="BorderBrush" Value="Red" />
+                            <Setter Property="BorderThickness" Value="1" />
                         </Trigger>
                     </Style.Triggers>
                 </Style>
-                
+                <Style x:Key="ErrorCellStyle" TargetType="DataGridCell">
+                    <Style.Triggers>
+                        <Trigger Property="Validation.HasError" Value="True">
+                            <Setter Property="ToolTipService.ToolTip">
+                                <Setter.Value>
+                                    <Binding Path="(Validation.Errors)[0].ErrorContent"
+                                     RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type DataGridRow}}" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+
             </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding ID}" Width="80"/>
@@ -95,10 +100,10 @@
                 <DataGridTextColumn Header="UIIdentifier" Binding="{Binding UIIdentifier}" Width="120" EditingElementStyle="{StaticResource DataGridCellErrorStyle}"/>
                 <DataGridTextColumn Header="LanguageCode" Binding="{Binding LanguageCode}" Width="120" EditingElementStyle="{StaticResource DataGridCellErrorStyle}"/>
                 <DataGridTextColumn Header="LocalizedString" 
-                        Binding="{Binding LocalizedString}" 
-                        Width="200"
-                        EditingElementStyle="{StaticResource DataGridCellErrorStyle}"
-                        CellStyle="{StaticResource ErrorCellStyle}"/>
+                    Binding="{Binding LocalizedString}" 
+                    Width="200"
+                    EditingElementStyle="{StaticResource DataGridCellErrorStyle}"
+                    CellStyle="{StaticResource ErrorCellStyle}"/>
             </DataGrid.Columns>
         </DataGrid>
         <ProgressBar IsIndeterminate="True" Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}}" />
