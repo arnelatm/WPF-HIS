@@ -21,6 +21,6 @@ namespace AATM.Contracts.Interfaces.Repositories
     /// Adds a new localized string to the data source.
     /// </summary>
         void AddOrUpdateLocalization(string originalString, string moduleName, string uiIdentifier, string languageCode, string localizedString);
-        TranslationDto GetLocalizationById(int id);
+        TranslationDto GetLocalizationById(int idNo);
     }
 }

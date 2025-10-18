@@ -4,16 +4,19 @@
         Title="AATM Main Menu" Height="400" Width="600">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="File">
+            <MenuItem Header="File" />
+            <MenuItem Header="Edit" />
+            <MenuItem Header="Masters">
                 <MenuItem Header="General" />
-                <MenuItem Header="Security" />
+                <MenuItem Header="Security">
+                    <MenuItem Header="Users"  Click="OpenUsersManager_Click" />
+                    <MenuItem Header="Groups" />
+                </MenuItem>
                 <MenuItem Header="Translations" />
                 <MenuItem Header="Employees" />
                 <MenuItem Header="Customers" />
                 <MenuItem Header="Suppliers" />
             </MenuItem>
-            <MenuItem Header="Edit" />
-            <MenuItem Header="Masters" />
             <MenuItem Header="Transactions" />
             <MenuItem Header="Reports" />
             <MenuItem Header="Utilities" />

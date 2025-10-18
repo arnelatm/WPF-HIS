@@ -26,6 +26,7 @@
     <ProjectReference Include="..\..\DataAccess\AATM.DataAccess\AATM.DataAccess.csproj" />
     <ProjectReference Include="..\..\Localization\AATM.Core.Localization\AATM.Core.Localization.csproj" />
     <ProjectReference Include="..\..\Modules\AATM.Modules.Localization\AATM.Modules.Localization.csproj" />
+    <ProjectReference Include="..\..\Modules\AATM.Modules.Security\AATM.Modules.Security.csproj" />
     <ProjectReference Include="..\..\Services\AATM.Services\AATM.Services.csproj" />
     <ProjectReference Include="..\..\Wpf\AATM.Contracts\AATM.Contracts.csproj" />
   </ItemGroup>

@@ -88,7 +88,7 @@ namespace AATM.App.HisWpf
                         catch { return string.Empty; }
                     }
 
-                    return GetString(x => x.ID).IndexOf(t, StringComparison.OrdinalIgnoreCase) >= 0
+                    return GetString(x => x.IdNo).IndexOf(t, StringComparison.OrdinalIgnoreCase) >= 0
                         || GetString(x => x.OriginalString).IndexOf(t, StringComparison.OrdinalIgnoreCase) >= 0
                         || GetString(x => x.LocalizedString).IndexOf(t, StringComparison.OrdinalIgnoreCase) >= 0
                         || GetString(x => x.ModuleName).IndexOf(t, StringComparison.OrdinalIgnoreCase) >= 0

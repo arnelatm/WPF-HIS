@@ -7,8 +7,8 @@ namespace AATM.DataAccess
     {
         Task<TranslationDto> UpsertTranslationAsync(TranslationDto dto);
         Task<List<TranslationDto>> GetAllTranslationsAsync();
-        Task<bool> DeleteTranslationAsync(int id);
-        Task<TranslationDto> GetTranslationByIdAsync(int id);
+        Task<bool> DeleteTranslationAsync(int idNo);
+        Task<TranslationDto> GetTranslationByIdAsync(int idNo);
         Task<string> GetTranslationAsync(string originalString, string normalizedLanguage);
         Task<List<TranslationDto>> GetTranslationsPageAsync(int pageNumber, int pageSize);
     }

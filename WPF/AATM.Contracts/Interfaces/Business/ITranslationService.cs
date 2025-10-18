@@ -3,7 +3,7 @@
 // loosely coupled from the actual implementation of the translation service.
 using System.Threading.Tasks;
 
-namespace AATM.Contracts.Interfaces.Services
+namespace AATM.Contracts.Interfaces.Business    
 {
     public interface ITranslationService
     {

@@ -4,6 +4,7 @@ using AATM.Core.Localization;
 using AATM.DataAccess;
 using AATM.DataAccess.Sql;
 using AATM.Modules.Localization;
+using AATM.Modules.Users;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -36,12 +37,12 @@ namespace AATM.App.HisWpf
                    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                    .AddEnvironmentVariables();
 
-            // Use the same connection string key everywhere: ISPDATA
+            // Use the same connection string key everywhere: IspDatabase
             builder.Services.AddSingleton<ITranslationRepository>(sp =>
             {
                 var cfg = sp.GetRequiredService<IConfiguration>();
-                var conn = cfg.GetConnectionString("ISPDATA")
-                          ?? throw new InvalidOperationException("Connection string 'ISPDATA' is missing.");
+                var conn = cfg.GetConnectionString("IspDatabase")
+                          ?? throw new InvalidOperationException("Connection string 'IspDatabase' is missing.");
                 return new TranslationRepository(conn);
             });
             builder.Services.AddSingleton<TranslationCrudService>();
@@ -56,6 +57,20 @@ namespace AATM.App.HisWpf
             // Views + ViewModels
             builder.Services.AddTransient<TranslationViewModel>();
             builder.Services.AddTransient<TranslationWindow>();
+
+            // Register the IUserRepository implementation (replace UserRepository with your actual implementation)
+            builder.Services.AddTransient<IUserRepository>(sp =>
+            {
+                var cfg = sp.GetRequiredService<IConfiguration>();
+                var conn = cfg.GetConnectionString("IspDatabase")
+                          ?? throw new InvalidOperationException("Connection string 'IspDatabase' is missing.");
+                return new UserRepository(conn);
+            });
+
+            // Register UserCrudService
+            builder.Services.AddSingleton<UserCrudService>();
+            builder.Services.AddTransient<UserViewModel>();
+            builder.Services.AddTransient<UserWindow>();
 
             return builder.Build();
         }

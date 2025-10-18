@@ -42,9 +42,9 @@
             <Button x:Name="btnSwitchLanguage" Content="Switch Language" Width="120" Margin="10,2,2,2"/>
         </StackPanel>
 
-        <Label Grid.Row="1" Grid.Column="0" Content="ID" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+        <Label Grid.Row="1" Grid.Column="0" Content="IdNo" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
         <TextBox Grid.Row="1" Grid.Column="2"
-           Text="{Binding SelectedTranslation.ID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}" />
+           Text="{Binding SelectedTranslation.IdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}" />
 
         <Label Grid.Row="2" Grid.Column="0" Content="Original" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
         <TextBox Grid.Row="2" Grid.Column="2"
@@ -83,7 +83,7 @@
           SelectedItem="{Binding SelectedTranslation, Mode=TwoWay}"
           Margin="0,5,0,10">
             <DataGrid.Columns>
-                <local:ValidatedTextColumn Header="ID" Binding="{Binding ID}" Width="80"/>
+                <local:ValidatedTextColumn Header="IdNo" Binding="{Binding IdNo}" Width="80"/>
                 <local:ValidatedTextColumn Header="OriginalString" Binding="{Binding OriginalString}" Width="200"/>
                 <local:ValidatedTextColumn Header="ModuleName" Binding="{Binding ModuleName}" Width="120"/>
                 <local:ValidatedTextColumn Header="UIIdentifier" Binding="{Binding UIIdentifier}" Width="120"/>

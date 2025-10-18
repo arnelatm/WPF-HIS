@@ -1,32 +1,32 @@
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using AATM.Contracts.Dtos;
 using Microsoft.Data.SqlClient;
 
 namespace AATM.DataAccess.Sql
 {
-    public class TranslationRepository : ITranslationRepository
+    public class UserRepository : IUserRepository
     {
         private readonly string _connectionString;
 
-        public TranslationRepository(string connectionString)
+        public UserRepository(string connectionString)
         {
             _connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
         }
 
-        public async Task<TranslationDto> UpsertTranslationAsync(TranslationDto dto)
+        public async Task<UserDto> UpsertUserAsync(UserDto dto)
         {
             const string mergeSql = @"
-                MERGE INTO [dbo].[Translations] AS Target
-                USING (SELECT @OriginalString AS OriginalString, @ModuleName AS ModuleName, @UIIdentifier AS UIIdentifier, @LanguageCode AS LanguageCode, @LocalizedString AS LocalizedString) AS Source
-                ON (Target.OriginalString = Source.OriginalString AND Target.LanguageCode = Source.LanguageCode)
+                MERGE INTO [dbo].[Users] AS Target
+                USING (SELECT @UserName AS UserName, @UserCode AS UserCode, @Password AS Password, @EmployeeIdNo AS EmployeeIdNo, @SecurityGroupIdNo AS SecurityGroupIdNo) AS Source
+                ON (Target.UserName = Source.UserName AND Target.EmployeeIdNo = Source.EmployeeIdNo)
                 WHEN MATCHED THEN
                     UPDATE SET
-                        ModuleName = Source.ModuleName,
-                        UIIdentifier = Source.UIIdentifier,
-                        LocalizedString = Source.LocalizedString
+                        UserCode = Source.UserCode,
+                        Password = Source.Password,
+                        SecurityGroupIdNo = Source.SecurityGroupIdNo
                 WHEN NOT MATCHED BY TARGET THEN
-                    INSERT (OriginalString, ModuleName, UIIdentifier, LanguageCode, LocalizedString)
-                    VALUES (Source.OriginalString, Source.ModuleName, Source.UIIdentifier, Source.LanguageCode, Source.LocalizedString)
+                    INSERT (UserName, UserCode, Password, EmployeeIdNo, SecurityGroupIdNo)
+                    VALUES (Source.UserName, Source.UserCode, Source.Password, Source.EmployeeIdNo, Source.SecurityGroupIdNo)
                 OUTPUT inserted.IdNo;";
 
             using (var conn = new SqlConnection(_connectionString))
@@ -34,11 +34,11 @@ namespace AATM.DataAccess.Sql
                 await conn.OpenAsync().ConfigureAwait(false);
                 using (var cmd = new SqlCommand(mergeSql, conn))
                 {
-                    cmd.Parameters.AddWithValue("@OriginalString", dto.OriginalString);
-                    cmd.Parameters.AddWithValue("@ModuleName", dto.ModuleName);
-                    cmd.Parameters.AddWithValue("@UIIdentifier", dto.UIIdentifier);
-                    cmd.Parameters.AddWithValue("@LanguageCode", dto.LanguageCode);
-                    cmd.Parameters.AddWithValue("@LocalizedString", dto.LocalizedString);
+                    cmd.Parameters.AddWithValue("@UserName", dto.UserName);
+                    cmd.Parameters.AddWithValue("@UserCode", dto.UserCode);
+                    cmd.Parameters.AddWithValue("@Password", dto.Password);
+                    cmd.Parameters.AddWithValue("@EmployeeIdNo", dto.EmployeeIdNo);
+                    cmd.Parameters.AddWithValue("@SecurityGroupIdNo", dto.SecurityGroupIdNo);
 
                     var result = await cmd.ExecuteScalarAsync().ConfigureAwait(false);
                     if (result != null)
@@ -48,18 +48,18 @@ namespace AATM.DataAccess.Sql
             return dto;
         }
 
-        Task<List<TranslationDto>> ITranslationRepository.GetTranslationsPageAsync(int pageNumber, int pageSize)
+        Task<List<UserDto>> IUserRepository.GetUsersPageAsync(int pageNumber, int pageSize)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<(List<TranslationDto> Items, int TotalCount)> GetTranslationsPageAsync(int pageNumber, int pageSize)
+        public async Task<(List<UserDto> Items, int TotalCount)> GetUsersPageAsync(int pageNumber, int pageSize)
         {
-            var items = new List<TranslationDto>();
+            var items = new List<UserDto>();
             int totalCount = 0;
             const string sql = @"
-SELECT COUNT(*) OVER() AS TotalCount, IdNo, OriginalString, ModuleName, UIIdentifier, LanguageCode, LocalizedString, CreationDate
-FROM Translations
+SELECT COUNT(*) OVER() AS TotalCount, IdNo, UserName, UserCode, Password, EmployeeIdNo, SecurityGroupIdNo, CreationDate
+FROM Users
 ORDER BY IdNo
 OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY";
 
@@ -76,15 +76,15 @@ OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY";
                         {
                             if (totalCount == 0)
                                 totalCount = reader.GetInt32(reader.GetOrdinal("TotalCount"));
-                            items.Add(new TranslationDto
+                            items.Add(new UserDto
                             {
                                 IdNo = reader.GetInt32(reader.GetOrdinal("IdNo")),
-                                OriginalString = reader["OriginalString"].ToString(),
-                                ModuleName = reader["ModuleName"].ToString(),
-                                UIIdentifier = reader["UIIdentifier"].ToString(),
-                                LanguageCode = reader["LanguageCode"].ToString(),
-                                LocalizedString = reader["LocalizedString"].ToString(),
-                                CreationDate = reader.GetDateTime(reader.GetOrdinal("CreationDate"))
+                                UserName = reader["UserName"] as string ?? string.Empty,
+                                UserCode = reader["UserCode"] as string,
+                                Password = reader["Password"] as string,
+                                EmployeeIdNo = reader["EmployeeIdNo"] as int?,
+                                SecurityGroupIdNo = reader["SecurityGroupIdNo"] as short?,
+                                Active = reader["Active"] as bool?
                             });
                         }
                     }
@@ -93,10 +93,10 @@ OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY";
             return (items, totalCount);
         }
 
-        public async Task<List<TranslationDto>> GetAllTranslationsAsync()
+        public async Task<List<UserDto>> GetAllUsersAsync()
         {
-            var translations = new List<TranslationDto>();
-            const string sql = "SELECT IdNo, OriginalString, ModuleName, UIIdentifier, LanguageCode, LocalizedString, CreationDate FROM Translations";
+            var Users = new List<UserDto>();
+            const string sql = "SELECT IdNo, UserName, UserCode, Password, EmployeeIdNo, SecurityGroupIdNo, CreationDate FROM Users";
 
             // Optional: add timeout to fail fast if network/TLS causes stalls
             using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(15));
@@ -111,15 +111,15 @@ OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY";
                     {
                         while (await reader.ReadAsync(cts.Token).ConfigureAwait(false))
                         {
-                            translations.Add(new TranslationDto
+                            Users.Add(new UserDto
                             {
                                 IdNo = Convert.ToInt32(reader["IdNo"]),
-                                OriginalString = reader["OriginalString"].ToString(),
-                                ModuleName = reader["ModuleName"].ToString(),
-                                UIIdentifier = reader["UIIdentifier"].ToString(),
-                                LanguageCode = reader["LanguageCode"].ToString(),
-                                LocalizedString = reader["LocalizedString"].ToString(),
-                                CreationDate = Convert.ToDateTime(reader["CreationDate"])
+                                UserName = reader["UserName"].ToString() ?? string.Empty,
+                                UserCode = reader["UserCode"].ToString() ?? string.Empty,
+                                Password = reader["Password"].ToString() ?? string.Empty,
+                                EmployeeIdNo = reader["EmployeeIdNo"] as int?,
+                                SecurityGroupIdNo = reader["SecurityGroupIdNo"] as short?,
+                                CreationDate = Convert.ToDateTime(reader["CreationDate"]) 
                             });
                         }
                     }
@@ -130,12 +130,12 @@ OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY";
                 Debug.WriteLine("SqlConnection.OpenAsync timed out.");
                 throw new TimeoutException("Opening a SQL connection timed out. Check server reachability, port, and TLS settings.");
             }
-            return translations;
+            return Users;
         }
 
-        public async Task<bool> DeleteTranslationAsync(int idNo)
+        public async Task<bool> DeleteUserAsync(int idNo)
         {
-            const string sql = "DELETE FROM Translations WHERE IdNo = @IdNo";
+            const string sql = "DELETE FROM Users WHERE ID = @ID";
             using (var conn = new SqlConnection(_connectionString))
             {
                 await conn.OpenAsync().ConfigureAwait(false);
@@ -148,9 +148,9 @@ OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY";
             }
         }
 
-        public async Task<TranslationDto> GetTranslationByIdAsync(int idNo)
+        public async Task<UserDto> GetUserByIdAsync(int idNo)
         {
-            const string sql = "SELECT IdNo, OriginalString, ModuleName, UIIdentifier, LanguageCode, LocalizedString, CreationDate FROM Translations WHERE IdNo = @IdNo";
+            const string sql = "SELECT IdNo, UserName, UserCode, Password, EmployeeIdNo, SecurityGroupIdNo, CreationDate FROM Users WHERE IdNo = @IdNo";
             using (var conn = new SqlConnection(_connectionString))
             {
                 await conn.OpenAsync().ConfigureAwait(false);
@@ -161,33 +161,33 @@ OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY";
                     {
                         if (await reader.ReadAsync().ConfigureAwait(false))
                         {
-                            return new TranslationDto
+                            return new UserDto
                             {
                                 IdNo = reader.GetInt32(reader.GetOrdinal("IdNo")),
-                                OriginalString = reader.GetString(reader.GetOrdinal("OriginalString")),
-                                ModuleName = reader.GetString(reader.GetOrdinal("ModuleName")),
-                                UIIdentifier = reader.GetString(reader.GetOrdinal("UIIdentifier")),
-                                LanguageCode = reader.GetString(reader.GetOrdinal("LanguageCode")),
-                                LocalizedString = reader.GetString(reader.GetOrdinal("LocalizedString")),
+                                UserName = reader.GetString(reader.GetOrdinal("UserName")),
+                                UserCode = reader.IsDBNull(reader.GetOrdinal("UserCode")) ? null : reader.GetString(reader.GetOrdinal("UserCode")),
+                                Password = reader.IsDBNull(reader.GetOrdinal("Password")) ? null : reader.GetString(reader.GetOrdinal("Password")),
+                                EmployeeIdNo = reader.IsDBNull(reader.GetOrdinal("EmployeeIdNo")) ? null : reader.GetInt32(reader.GetOrdinal("EmployeeIdNo")),
+                                SecurityGroupIdNo = reader.IsDBNull(reader.GetOrdinal("SecurityGroupIdNo")) ? null : reader.GetInt16(reader.GetOrdinal("SecurityGroupIdNo")),
                                 CreationDate = reader.GetDateTime(reader.GetOrdinal("CreationDate"))
                             };
                         }
                     }
                 }
             }
-            throw new KeyNotFoundException($"Translation with ID Number  {idNo} not found.");
+            throw new KeyNotFoundException($"User with ID Number {idNo} not found.");
         }
 
-        public async Task<string> GetTranslationAsync(string originalString, string normalizedLanguage)
+        public async Task<string> GetUserAsync(string UserName, string normalizedLanguage)
         {
-            const string sql = "SELECT LocalizedString FROM Translations WHERE OriginalString = @OriginalString AND LanguageCode = @LanguageCode";
+            const string sql = "SELECT SecurityGroupIdNo FROM Users WHERE UserName = @UserName AND EmployeeIdNo = @EmployeeIdNo";
             using (var conn = new SqlConnection(_connectionString))
             {
                 await conn.OpenAsync().ConfigureAwait(false);
                 using (var cmd = new SqlCommand(sql, conn))
                 {
-                    cmd.Parameters.AddWithValue("@OriginalString", originalString);
-                    cmd.Parameters.AddWithValue("@LanguageCode", normalizedLanguage);
+                    cmd.Parameters.AddWithValue("@UserName", UserName);
+                    cmd.Parameters.AddWithValue("@EmployeeIdNo", normalizedLanguage);
                     var result = await cmd.ExecuteScalarAsync().ConfigureAwait(false);
                     return result?.ToString() ?? string.Empty;
                 }

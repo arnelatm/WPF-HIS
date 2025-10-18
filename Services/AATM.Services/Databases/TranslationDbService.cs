@@ -44,17 +44,17 @@ namespace AATM.Services.Database
         /// <summary>
         /// Deletes a translation record.
         /// </summary>
-        public async Task<bool> DeleteTranslationAsync(int id)
+        public async Task<bool> DeleteTranslationAsync(int idNo)
         {
-            return await _repository.DeleteTranslationAsync(id);
+            return await _repository.DeleteTranslationAsync(idNo);
         }
 
         /// <summary>
-        /// Gets a translation by ID.
+        /// Gets a translation by IdNo.
         /// </summary>
-        public async Task<TranslationDto> GetTranslationByIdAsync(int id)
+        public async Task<TranslationDto> GetTranslationByIdAsync(int idNo)
         {
-            return await _repository.GetTranslationByIdAsync(id);
+            return await _repository.GetTranslationByIdAsync(idNo);
         }
 
         /// <summary>

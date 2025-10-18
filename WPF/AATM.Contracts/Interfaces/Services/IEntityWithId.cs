@@ -8,6 +8,6 @@ namespace AATM.Contracts.Interfaces.Services
 {
     public interface IEntityWithId
     {
-        int ID { get; set; }
+        int IdNo { get; set; }
     }
 }

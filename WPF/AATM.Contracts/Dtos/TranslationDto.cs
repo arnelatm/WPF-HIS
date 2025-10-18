@@ -11,11 +11,11 @@ namespace AATM.Contracts.Dtos
         public event PropertyChangedEventHandler? PropertyChanged;
         public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
 
-        private int _id;
-        public int ID
+        private int _idNo;
+        public int IdNo
         {
-            get => _id;
-            set { if (_id != value) { _id = value; OnPropertyChanged(nameof(ID)); } }
+            get => _idNo;
+            set { if (_idNo != value) { _idNo = value; OnPropertyChanged(nameof(IdNo)); } }
         }
 
         private string _moduleName = string.Empty;
