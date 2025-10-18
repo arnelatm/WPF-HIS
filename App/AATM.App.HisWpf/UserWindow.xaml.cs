@@ -1,10 +1,16 @@
+using AATM.App.HisWpf.ViewModels;
+using AATM.Contracts.Dtos;
+using AATM.Contracts.Interfaces.Services;
+using AATM.Modules.Localization;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.ComponentModel;
-using AATM.Contracts.Dtos;
-using AATM.App.HisWpf.ViewModels;
+using System.Windows.Markup;
 
 namespace AATM.App.HisWpf
 {
@@ -12,10 +18,22 @@ namespace AATM.App.HisWpf
     {
         private UserViewModel ViewModel => (UserViewModel)DataContext;
 
-        public UserWindow(UserViewModel vm)
+        private readonly ILocalizationService _localizationService;
+        private readonly string _moduleName = "UserWindow";
+
+        // Originals cache
+        private bool _originalsCached;
+        private string _originalTitle = string.Empty;
+        private readonly Dictionary<DataGridColumn, string> _originalColumnHeaders = new();
+
+        // Current filter (optional)
+        private string? _currentFilter;
+
+        public UserWindow(UserViewModel vm, ILocalizationService localizationService)
         {
             InitializeComponent();
             DataContext = vm;
+            _localizationService = localizationService;
 
             btnFirst.Click += BtnFirst_Click;
             btnPrev.Click += BtnPrev_Click;
@@ -25,6 +43,7 @@ namespace AATM.App.HisWpf
             btnDelete.Click += BtnDelete_Click;
             btnFind.Click += BtnFind_Click;
             btnResetFilter.Click += BtnResetFilter_Click;
+            btnSwitchLanguage.Click += BtnSwitchLanguage_Click;
 
             ViewModel.PropertyChanged += ViewModel_PropertyChanged;
             UpdateRecordIndicators();
@@ -77,11 +96,13 @@ namespace AATM.App.HisWpf
             if (string.IsNullOrWhiteSpace(input))
                 return;
 
-            ApplyFilter(input.Trim());
+            _currentFilter = input.Trim();
+            ApplyFilter(_currentFilter);
         }
 
         private void BtnResetFilter_Click(object sender, RoutedEventArgs e)
         {
+            _currentFilter = null;
             ApplyFilter(null);
         }
 
@@ -106,15 +127,15 @@ namespace AATM.App.HisWpf
                         catch { return string.Empty; }
                     }
 
-                    return GetString(x => x.IdNo).IndexOf(t, System.StringComparison.OrdinalIgnoreCase) >= 0
-                        || GetString(x => x.UserName).IndexOf(t, System.StringComparison.OrdinalIgnoreCase) >= 0
-                        || GetString(x => x.UserCode).IndexOf(t, System.StringComparison.OrdinalIgnoreCase) >= 0
-                        || GetString(x => x.FullName).IndexOf(t, System.StringComparison.OrdinalIgnoreCase) >= 0
-                        || GetString(x => x.FullNameAra).IndexOf(t, System.StringComparison.OrdinalIgnoreCase) >= 0
-                        || GetString(x => x.EmployeeIdNo).IndexOf(t, System.StringComparison.OrdinalIgnoreCase) >= 0
-                        || GetString(x => x.SecurityGroupIdNo).IndexOf(t, System.StringComparison.OrdinalIgnoreCase) >= 0
-                        || GetString(x => x.SecurityLevel).IndexOf(t, System.StringComparison.OrdinalIgnoreCase) >= 0
-                        || GetString(x => x.Active).IndexOf(t, System.StringComparison.OrdinalIgnoreCase) >= 0;
+                    return GetString(x => x.IdNo).IndexOf(t, StringComparison.OrdinalIgnoreCase) >= 0
+                        || GetString(x => x.UserName).IndexOf(t, StringComparison.OrdinalIgnoreCase) >= 0
+                        || GetString(x => x.UserCode).IndexOf(t, StringComparison.OrdinalIgnoreCase) >= 0
+                        || GetString(x => x.FullName).IndexOf(t, StringComparison.OrdinalIgnoreCase) >= 0
+                        || GetString(x => x.FullNameAra).IndexOf(t, StringComparison.OrdinalIgnoreCase) >= 0
+                        || GetString(x => x.EmployeeIdNo).IndexOf(t, StringComparison.OrdinalIgnoreCase) >= 0
+                        || GetString(x => x.SecurityGroupIdNo).IndexOf(t, StringComparison.OrdinalIgnoreCase) >= 0
+                        || GetString(x => x.SecurityLevel).IndexOf(t, StringComparison.OrdinalIgnoreCase) >= 0
+                        || GetString(x => x.Active).IndexOf(t, StringComparison.OrdinalIgnoreCase) >= 0;
                 };
             }
 
@@ -125,6 +146,113 @@ namespace AATM.App.HisWpf
                 var first = dataGrid.Items[0];
                 dataGrid.SelectedItem = first;
                 dataGrid.ScrollIntoView(first);
+            }
+        }
+
+        // New: switch language handler
+        private void BtnSwitchLanguage_Click(object sender, RoutedEventArgs e)
+        {
+            var newLang = _localizationService.IsRightToLeft ? "en-US" : "ar-SA";
+            _localizationService.SetLanguage(newLang, _moduleName);
+
+            // Apply culture and RTL at window level
+            this.Language = XmlLanguage.GetLanguage(newLang);
+            this.FlowDirection = _localizationService.IsRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
+
+            // Optionally, update UI text and DataGrid headers if you have localization logic
+            // LocalizeWindowChrome(newLang);
+            // UpdateDataGridHeaders(newLang);
+        }
+
+        private static bool IsEnglish(string lang)
+            => lang.StartsWith("en", StringComparison.OrdinalIgnoreCase);
+
+        private static bool IsGlyph(string s)
+            => !string.IsNullOrWhiteSpace(s)
+               && s.Length <= 3
+               && s.All(ch => char.IsPunctuation(ch) || char.IsSymbol(ch));
+
+        private void CacheOriginalWindowChrome()
+        {
+            if (_originalsCached) return;
+            _originalTitle = this.Title ?? string.Empty;
+
+            if (this.Content is Grid root)
+            {
+                foreach (var child in root.Children)
+                {
+                    if (child is StackPanel sp)
+                    {
+                        foreach (var btn in sp.Children.OfType<Button>())
+                        {
+                            if (btn.Content is string content && !IsGlyph(content) && btn.Tag is null)
+                            {
+                                btn.Tag = content; // store original in Tag
+                            }
+                        }
+                        continue;
+                    }
+
+                    if (child is Label lbl && lbl.Content is string c && !IsGlyph(c) && lbl.Tag is null)
+                    {
+                        lbl.Tag = c; // store original in Tag
+                    }
+                }
+            }
+
+            _originalsCached = true;
+        }
+
+        private void CacheOriginalColumnHeaders()
+        {
+            foreach (var col in dataGrid.Columns)
+            {
+                if (_originalColumnHeaders.ContainsKey(col)) continue;
+                if (col.Header is string s && !string.IsNullOrWhiteSpace(s))
+                {
+                    _originalColumnHeaders[col] = s;
+                }
+            }
+        }
+
+        private void LocalizeWindowChrome(string lang)
+        {
+            if (!string.IsNullOrWhiteSpace(_originalTitle))
+            {
+                this.Title = IsEnglish(lang)
+                    ? _originalTitle
+                    : _localizationService.GetString(_moduleName, "Title", _originalTitle);
+            }
+
+            if (this.Content is not Grid root) return;
+
+            foreach (var child in root.Children)
+            {
+                if (child is StackPanel sp)
+                {
+                    foreach (var btn in sp.Children.OfType<Button>())
+                    {
+                        if (btn.Content is not string content || IsGlyph(content)) continue;
+
+                        var original = btn.Tag as string ?? content;
+                        if (btn.Tag is null) btn.Tag = original;
+
+                        btn.Content = IsEnglish(lang)
+                            ? original
+                            : _localizationService.GetString(_moduleName, string.IsNullOrWhiteSpace(btn.Name) ? original : btn.Name, original);
+                    }
+                    continue;
+                }
+
+                if (child is Label lbl && lbl.Content is string c && !IsGlyph(c))
+                {
+                    var original = lbl.Tag as string ?? c;
+                    if (lbl.Tag is null) lbl.Tag = original;
+
+                    lbl.Content = IsEnglish(lang)
+                        ? original
+                        : _localizationService.GetString(_moduleName, string.IsNullOrWhiteSpace(lbl.Name) ? original : lbl.Name, original);
+                }
             }
         }
 

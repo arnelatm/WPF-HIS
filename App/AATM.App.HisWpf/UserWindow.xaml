@@ -38,6 +38,7 @@
             <Button x:Name="btnResetFilter" Content="Reset" Width="60" Margin="2"/>
             <Button x:Name="btnSave" Content="Save" Width="60" Margin="10,2,2,2"/>
             <Button x:Name="btnDelete" Content="Delete" Width="60" Margin="2"/>
+			<Button x:Name="btnSwitchLanguage" Content="🌐" Width="28" Height="28" ToolTip="Switch language" />
         </StackPanel>
 
         <Label Grid.Row="1" Grid.Column="0" Content="IdNo" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
