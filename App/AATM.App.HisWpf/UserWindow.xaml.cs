@@ -17,6 +17,21 @@ namespace AATM.App.HisWpf
     /// </summary>
     public partial class UserWindow : Window
     {
+        private readonly UserViewModel _viewModel;
+
+        public UserWindow(UserViewModel viewModel)
+        {
+            InitializeComponent();
+            DataContext = viewModel;
+            _viewModel = viewModel;
+            Loaded += UserWindow_Loaded;
+        }
+
+        private async void UserWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            await _viewModel.InitializeAsync();
+        }
+
         private UserViewModel ViewModel => (UserViewModel)DataContext;
 
         private ILocalizationService _localizationService;

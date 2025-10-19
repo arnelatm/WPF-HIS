@@ -10,9 +10,11 @@ namespace AATM.Contracts.Dtos
     public class UserDto : IEntityWithId, INotifyPropertyChanged, INotifyDataErrorInfo
     {
         public event PropertyChangedEventHandler? PropertyChanged;
+
         public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
 
         private int _idNo;
+
         public int IdNo
         {
             get => _idNo;
@@ -27,6 +29,7 @@ namespace AATM.Contracts.Dtos
         }
 
         private string _userName = string.Empty;
+
         public string UserName
         {
             get => _userName;
@@ -41,6 +44,7 @@ namespace AATM.Contracts.Dtos
         }
 
         private string? _password;
+
         public string? Password
         {
             get => _password;
@@ -55,6 +59,7 @@ namespace AATM.Contracts.Dtos
         }
 
         private int _employeeIdNo;
+
         public int EmployeeIdNo
         {
             get => _employeeIdNo;
@@ -69,6 +74,7 @@ namespace AATM.Contracts.Dtos
         }
 
         private int _SecurityGroupIdNo;
+
         public int SecurityGroupIdNo
         {
             get => _SecurityGroupIdNo;
@@ -82,8 +88,8 @@ namespace AATM.Contracts.Dtos
             }
         }
 
-
         private bool _active;
+
         public bool Active
         {
             get => _active;
@@ -97,20 +103,18 @@ namespace AATM.Contracts.Dtos
             }
         }
 
-
         private DateTime _creationDate = DateTime.Now;
+
         public DateTime CreationDate
         {
             get => _creationDate;
             set { if (_creationDate != value) { _creationDate = value; OnPropertyChanged(nameof(CreationDate)); } }
         }
 
-
         // Validation
         private readonly Dictionary<string, List<string>> _errors = new();
 
         public bool HasErrors => _errors.Count > 0;
-
 
         protected void OnPropertyChanged(string propertyName)
             => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

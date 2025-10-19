@@ -1,8 +1,6 @@
 ﻿using AATM.Contracts.Interfaces.Services;
 using System.Collections;
 using System.ComponentModel;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace AATM.Contracts.Dtos
 {

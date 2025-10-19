@@ -72,6 +72,15 @@ namespace AATM.App.HisWpf
             builder.Services.AddTransient<UserViewModel>();
             builder.Services.AddTransient<UserWindow>();
 
+            // Add this line for IEmployeeRepository
+            builder.Services.AddTransient<IEmployeeRepository>(sp =>
+            {
+                var cfg = sp.GetRequiredService<IConfiguration>();
+                var conn = cfg.GetConnectionString("IspDatabase")
+                          ?? throw new InvalidOperationException("Connection string 'IspDatabase' is missing.");
+                return new EmployeeRepository(conn); // Replace with your actual implementation
+            });
+
             return builder.Build();
         }
 

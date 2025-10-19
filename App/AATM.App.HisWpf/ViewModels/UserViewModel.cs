@@ -1,17 +1,18 @@
+using AATM.App.HisWpf.ViewModels;
 using AATM.Business.Validation.ValidationRules;
 using AATM.Business.Validation.Validators;
 using AATM.Contracts.Dtos;
 using AATM.Contracts.Interfaces.Services;
 using AATM.Core.Localization;
+using AATM.DataAccess;
 using AATM.Modules.Localization;
+using AATM.Modules.Users;
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using AATM.App.HisWpf.ViewModels;
-using AATM.Modules.Users;
 
 namespace AATM.App.HisWpf.ViewModels
 {
@@ -19,9 +20,11 @@ namespace AATM.App.HisWpf.ViewModels
     {
         private readonly UserCrudService _service;
         private readonly ILocalizationService _localizationService;
+        private readonly IEmployeeRepository _employeeRepo;
 
         public ObservableCollection<UserDto> Users { get; } = new();
         public ObservableCollection<LanguageItem> AvailableLanguages { get; } = new();
+        public ObservableCollection<EmployeeLookupDto> AvailableEmployees { get; } = new();
         public bool SelectedUserImplementsErrorInfo => SelectedUser is INotifyDataErrorInfo;
 
         private UserDto? _selectedUser;
@@ -68,10 +71,11 @@ namespace AATM.App.HisWpf.ViewModels
         private readonly DtoValidator<UserDto> _UserValidator =
             new DtoValidator<UserDto>(UserDtoValidationRules.Validate);
 
-        public UserViewModel(UserCrudService service, ILocalizationService localizationService)
+        public UserViewModel(UserCrudService service, ILocalizationService localizationService, IEmployeeRepository employeeRepo)
         {
             _service = service;
             _localizationService = localizationService;
+            _employeeRepo = employeeRepo;
 
             var langs = LocalizationHelper.SafeGetLanguages(_localizationService);
             foreach (var (display, code) in langs)
@@ -92,6 +96,16 @@ namespace AATM.App.HisWpf.ViewModels
             _ = Refresh();
         }
 
+        public async Task LoadEmployeesAsync()
+        {
+            var employees = await _employeeRepo.GetEmployeesLookupAsync().ConfigureAwait(false);
+            App.Current.Dispatcher.Invoke(() =>
+            {
+                AvailableEmployees.Clear();
+                foreach (var e in employees) AvailableEmployees.Add(e);
+            });
+        }
+            
         public bool IsBusy { get; set; }
         private async Task Refresh()
         {
@@ -215,6 +229,12 @@ namespace AATM.App.HisWpf.ViewModels
                 return _errors.Values.SelectMany(e => e).ToList();
             }
             return _errors.TryGetValue(propertyName, out var errors) ? errors : Enumerable.Empty<string>();
+        }
+
+        public async Task InitializeAsync()
+        {
+            await LoadEmployeesAsync();
+            await Refresh();
         }
     }
 }
