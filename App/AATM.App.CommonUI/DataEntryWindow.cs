@@ -1,37 +1,28 @@
-using AATM.Contracts.Interfaces.Services;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Markup;
+using AATM.Contracts.Interfaces.Services;
 
-public abstract class DataEntryWindow<TViewModel, TEntity> : Window
-    where TViewModel : class
+namespace AATM.App.CommonUI
 {
-    protected TViewModel ViewModel => (TViewModel)DataContext;
-    protected readonly ILocalizationService _localizationService;
-    protected readonly string _moduleName;
-    protected DataGrid dataGrid;
-    protected Button btnSwitchLanguage;
-    protected TextBox txtCurrentRecord, txtRecordCount;
-
-    // ... cache fields for localization ...
-
-    protected DataEntryWindow(TViewModel vm, ILocalizationService localizationService, string moduleName)
+    public partial class DataEntryWindowBase : Window
     {
-        DataContext = vm;
-        _localizationService = localizationService;
-        _moduleName = moduleName;
-        // Wire up common events in derived class after InitializeComponent
-    }
+        protected ILocalizationService LocalizationService { get; }
+        protected string ModuleName { get; }
 
-    protected void SwitchLanguage()
-    {
-        var newLang = _localizationService.IsRightToLeft ? "en-US" : "ar-SA";
-        _localizationService.SetLanguage(newLang, _moduleName);
-        this.Language = XmlLanguage.GetLanguage(newLang);
-        this.FlowDirection = _localizationService.IsRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
-        // Call localization helpers
-    }
+        public DataEntryWindowBase(ILocalizationService localizationService, string moduleName)
+        {
+            LocalizationService = localizationService;
+            ModuleName = moduleName;
+        }
 
-    // Add common navigation/filter/localization helpers here
+        protected void SwitchLanguage()
+        {
+            var newLang = LocalizationService.IsRightToLeft ? "en-US" : "ar-SA";
+            LocalizationService.SetLanguage(newLang, ModuleName);
+            this.Language = XmlLanguage.GetLanguage(newLang);
+            this.FlowDirection = LocalizationService.IsRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
+        }
+
+        // Add other shared logic here
+    }
 }

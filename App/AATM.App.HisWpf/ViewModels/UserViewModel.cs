@@ -166,8 +166,6 @@ namespace AATM.App.HisWpf.ViewModels
             var errors = new List<string>();
             if (propertyName == nameof(UserDto.UserName) && string.IsNullOrWhiteSpace((string)value))
                 errors.Add("User Name is required.");
-            if (propertyName == nameof(UserDto.UserCode) && string.IsNullOrWhiteSpace((string)value))
-                errors.Add("User Code is required.");
             if (propertyName == nameof(UserDto.SecurityGroupIdNo) && string.IsNullOrWhiteSpace((string)value))
                 errors.Add("Security Group ID is required.");
             if (propertyName == nameof(UserDto.EmployeeIdNo) && string.IsNullOrWhiteSpace((string)value))

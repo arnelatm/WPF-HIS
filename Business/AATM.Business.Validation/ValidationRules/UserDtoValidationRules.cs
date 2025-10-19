@@ -23,18 +23,6 @@ namespace AATM.Business.Validation.ValidationRules
             if (dto.UserName != null && dto.UserName.Length > 20)
                 errors.Add("User name cannot exceed 20 characters.");
 
-            if (!string.IsNullOrEmpty(dto.UserCode) && dto.UserCode.Length > 10)
-                errors.Add("User code cannot exceed 10 characters.");
-
-            if (!string.IsNullOrEmpty(dto.Password) && dto.Password.Length > 50)
-                errors.Add("Password cannot exceed 50 characters.");
-
-            if (!string.IsNullOrEmpty(dto.FullName) && dto.FullName.Length > 50)
-                errors.Add("Full name cannot exceed 50 characters.");
-
-            if (!string.IsNullOrEmpty(dto.FullNameAra) && dto.FullNameAra.Length > 50)
-                errors.Add("Full name (Arabic) cannot exceed 50 characters.");
-
             // SecurityLevel: byte? (tinyint), no range check unless business rule needed
 
             // Active: bool? (bit), no validation needed

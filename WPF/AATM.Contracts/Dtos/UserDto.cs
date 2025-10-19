@@ -12,7 +12,7 @@ namespace AATM.Contracts.Dtos
         public event PropertyChangedEventHandler? PropertyChanged;
         public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
 
-        private short _idNo;
+        private int _idNo;
         public int IdNo
         {
             get => _idNo;
@@ -20,7 +20,7 @@ namespace AATM.Contracts.Dtos
             {
                 if (_idNo != value)
                 {
-                    _idNo = (short)value;
+                    _idNo = (int)value;
                     OnPropertyChanged(nameof(IdNo));
                 }
             }
@@ -40,20 +40,6 @@ namespace AATM.Contracts.Dtos
             }
         }
 
-        private string? _userCode;
-        public string? UserCode
-        {
-            get => _userCode;
-            set
-            {
-                if (_userCode != value)
-                {
-                    _userCode = value;
-                    OnPropertyChanged(nameof(UserCode));
-                }
-            }
-        }
-
         private string? _password;
         public string? Password
         {
@@ -68,8 +54,8 @@ namespace AATM.Contracts.Dtos
             }
         }
 
-        private int? _employeeIdNo;
-        public int? EmployeeIdNo
+        private int _employeeIdNo;
+        public int EmployeeIdNo
         {
             get => _employeeIdNo;
             set
@@ -82,8 +68,8 @@ namespace AATM.Contracts.Dtos
             }
         }
 
-        private short? _SecurityGroupIdNo;
-        public short? SecurityGroupIdNo
+        private int _SecurityGroupIdNo;
+        public int SecurityGroupIdNo
         {
             get => _SecurityGroupIdNo;
             set
@@ -96,50 +82,9 @@ namespace AATM.Contracts.Dtos
             }
         }
 
-        private string? _fullName;
-        public string? FullName
-        {
-            get => _fullName;
-            set
-            {
-                if (_fullName != value)
-                {
-                    _fullName = value;
-                    OnPropertyChanged(nameof(FullName));
-                }
-            }
-        }
 
-        private string? _fullNameAra;
-        public string? FullNameAra
-        {
-            get => _fullNameAra;
-            set
-            {
-                if (_fullNameAra != value)
-                {
-                    _fullNameAra = value;
-                    OnPropertyChanged(nameof(FullNameAra));
-                }
-            }
-        }
-
-        private byte? _securityLevel;
-        public byte? SecurityLevel
-        {
-            get => _securityLevel;
-            set
-            {
-                if (_securityLevel != value)
-                {
-                    _securityLevel = value;
-                    OnPropertyChanged(nameof(SecurityLevel));
-                }
-            }
-        }
-
-        private bool? _active;
-        public bool? Active
+        private bool _active;
+        public bool Active
         {
             get => _active;
             set

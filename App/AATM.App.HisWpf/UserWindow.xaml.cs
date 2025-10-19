@@ -1,32 +1,33 @@
-using AATM.App.HisWpf.ViewModels;
-using AATM.Contracts.Dtos;
+﻿using AATM.App.HisWpf.ViewModels;
 using AATM.Contracts.Interfaces.Services;
-using AATM.Modules.Localization;
+using AATM.Core.Localization;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Markup;
+using System.Windows.Media;
 
 namespace AATM.App.HisWpf
 {
+    /// <summary>
+    /// Interaction logic for UserWindow.xaml
+    /// </summary>
     public partial class UserWindow : Window
     {
         private UserViewModel ViewModel => (UserViewModel)DataContext;
 
-        private readonly ILocalizationService _localizationService;
+        private ILocalizationService _localizationService;
         private readonly string _moduleName = "UserWindow";
 
-        // Originals cache
+        // NEW: originals cache
         private bool _originalsCached;
         private string _originalTitle = string.Empty;
         private readonly Dictionary<DataGridColumn, string> _originalColumnHeaders = new();
 
-        // Current filter (optional)
+        // NEW: current filter text
         private string? _currentFilter;
 
         public UserWindow(UserViewModel vm, ILocalizationService localizationService)
@@ -47,47 +48,6 @@ namespace AATM.App.HisWpf
 
             ViewModel.PropertyChanged += ViewModel_PropertyChanged;
             UpdateRecordIndicators();
-        }
-
-        private void BtnFirst_Click(object sender, RoutedEventArgs e)
-        {
-            if (ViewModel.Users.Count > 0)
-                ViewModel.SelectedUser = ViewModel.Users[0];
-        }
-
-        private void BtnPrev_Click(object sender, RoutedEventArgs e)
-        {
-            var idx = ViewModel.Users.IndexOf(ViewModel.SelectedUser);
-            if (idx > 0)
-                ViewModel.SelectedUser = ViewModel.Users[idx - 1];
-        }
-
-        private void BtnNext_Click(object sender, RoutedEventArgs e)
-        {
-            var idx = ViewModel.Users.IndexOf(ViewModel.SelectedUser);
-            if (idx < ViewModel.Users.Count - 1)
-                ViewModel.SelectedUser = ViewModel.Users[idx + 1];
-        }
-
-        private void BtnLast_Click(object sender, RoutedEventArgs e)
-        {
-            if (ViewModel.Users.Count > 0)
-                ViewModel.SelectedUser = ViewModel.Users[ViewModel.Users.Count - 1];
-        }
-
-        private void BtnSave_Click(object sender, RoutedEventArgs e)
-        {
-            bool canExecute = ViewModel.SaveCommand.CanExecute(null);
-            if (canExecute)
-            {
-                ViewModel.SaveCommand.Execute(null);
-            }
-        }
-
-        private void BtnDelete_Click(object sender, RoutedEventArgs e)
-        {
-            if (ViewModel.DeleteCommand.CanExecute(null))
-                ViewModel.DeleteCommand.Execute(null);
         }
 
         private void BtnFind_Click(object sender, RoutedEventArgs e)
@@ -121,37 +81,39 @@ namespace AATM.App.HisWpf
                 view.Filter = o =>
                 {
                     if (o is null) return false;
-                    string GetString(Func<UserDto, object?> sel)
+                    // Try to access known properties safely (handles nulls)
+                    string GetString(Func<dynamic, object?> sel)
                     {
-                        try { var v = sel((UserDto)o); return v?.ToString() ?? string.Empty; }
+                        try { var v = sel((dynamic)o); return v?.ToString() ?? string.Empty; }
                         catch { return string.Empty; }
                     }
 
                     return GetString(x => x.IdNo).IndexOf(t, StringComparison.OrdinalIgnoreCase) >= 0
-                        || GetString(x => x.UserName).IndexOf(t, StringComparison.OrdinalIgnoreCase) >= 0
-                        || GetString(x => x.UserCode).IndexOf(t, StringComparison.OrdinalIgnoreCase) >= 0
-                        || GetString(x => x.FullName).IndexOf(t, StringComparison.OrdinalIgnoreCase) >= 0
-                        || GetString(x => x.FullNameAra).IndexOf(t, StringComparison.OrdinalIgnoreCase) >= 0
-                        || GetString(x => x.EmployeeIdNo).IndexOf(t, StringComparison.OrdinalIgnoreCase) >= 0
-                        || GetString(x => x.SecurityGroupIdNo).IndexOf(t, StringComparison.OrdinalIgnoreCase) >= 0
-                        || GetString(x => x.SecurityLevel).IndexOf(t, StringComparison.OrdinalIgnoreCase) >= 0
-                        || GetString(x => x.Active).IndexOf(t, StringComparison.OrdinalIgnoreCase) >= 0;
+                        || GetString(x => x.OriginalString).IndexOf(t, StringComparison.OrdinalIgnoreCase) >= 0
+                        || GetString(x => x.LocalizedString).IndexOf(t, StringComparison.OrdinalIgnoreCase) >= 0
+                        || GetString(x => x.ModuleName).IndexOf(t, StringComparison.OrdinalIgnoreCase) >= 0
+                        || GetString(x => x.UIIdentifier).IndexOf(t, StringComparison.OrdinalIgnoreCase) >= 0
+                        || GetString(x => x.LanguageCode).IndexOf(t, StringComparison.OrdinalIgnoreCase) >= 0;
                 };
             }
 
             view.Refresh();
 
+            // Optional: select first row after filtering
             if (dataGrid.Items.Count > 0)
             {
                 var first = dataGrid.Items[0];
                 dataGrid.SelectedItem = first;
                 dataGrid.ScrollIntoView(first);
             }
+
+            // Update indicators if you want to reflect filtered count (keeps existing behavior otherwise)
+            // txtRecordCount.Text = dataGrid.Items.Count.ToString();
         }
 
-        // New: switch language handler
         private void BtnSwitchLanguage_Click(object sender, RoutedEventArgs e)
         {
+            // Switch to Arabic (ar-SA). If already Arabic, switch back to English.
             var newLang = _localizationService.IsRightToLeft ? "en-US" : "ar-SA";
             _localizationService.SetLanguage(newLang, _moduleName);
 
@@ -159,9 +121,29 @@ namespace AATM.App.HisWpf
             this.Language = XmlLanguage.GetLanguage(newLang);
             this.FlowDirection = _localizationService.IsRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
 
-            // Optionally, update UI text and DataGrid headers if you have localization logic
-            // LocalizeWindowChrome(newLang);
-            // UpdateDataGridHeaders(newLang);
+            // Cache originals once
+            CacheOriginalWindowChrome();
+            CacheOriginalColumnHeaders();
+
+            // Localize chrome using cached originals
+            LocalizeWindowChrome(newLang);
+
+            // Translate DataGrid column headers using cached originals
+            foreach (var col in dataGrid.Columns)
+            {
+                if (!_originalColumnHeaders.TryGetValue(col, out var original) || string.IsNullOrWhiteSpace(original))
+                    continue;
+
+                if (IsEnglish(newLang))
+                    col.Header = original;
+                else
+                    col.Header = _localizationService.GetString(_moduleName, original, original);
+            }
+
+            // Ensure DataGrid refreshes visuals after header/culture changes
+            CollectionViewSource.GetDefaultView(dataGrid.ItemsSource)?.Refresh();
+            dataGrid.Items.Refresh();
+            dataGrid.UpdateLayout();
         }
 
         private static bool IsEnglish(string lang)
@@ -172,6 +154,7 @@ namespace AATM.App.HisWpf
                && s.Length <= 3
                && s.All(ch => char.IsPunctuation(ch) || char.IsSymbol(ch));
 
+        // Cache originals for window title, labels, and buttons (outside the grid)
         private void CacheOriginalWindowChrome()
         {
             if (_originalsCached) return;
@@ -203,6 +186,7 @@ namespace AATM.App.HisWpf
             _originalsCached = true;
         }
 
+        // Cache original headers for columns once
         private void CacheOriginalColumnHeaders()
         {
             foreach (var col in dataGrid.Columns)
@@ -215,8 +199,10 @@ namespace AATM.App.HisWpf
             }
         }
 
+        // Use cached originals to set text for current language
         private void LocalizeWindowChrome(string lang)
         {
+            // Title
             if (!string.IsNullOrWhiteSpace(_originalTitle))
             {
                 this.Title = IsEnglish(lang)
@@ -256,7 +242,73 @@ namespace AATM.App.HisWpf
             }
         }
 
-        private void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void BtnFirst_Click(object sender, RoutedEventArgs e)
+        {
+            if (ViewModel.Users.Count > 0)
+                ViewModel.SelectedUser = ViewModel.Users[0];
+        }
+
+        private void BtnPrev_Click(object sender, RoutedEventArgs e)
+        {
+            var idx = ViewModel.Users.IndexOf(ViewModel.SelectedUser);
+            if (idx > 0)
+                ViewModel.SelectedUser = ViewModel.Users[idx - 1];
+        }
+
+        private void BtnNext_Click(object sender, RoutedEventArgs e)
+        {
+            var idx = ViewModel.Users.IndexOf(ViewModel.SelectedUser);
+            if (idx < ViewModel.Users.Count - 1)
+                ViewModel.SelectedUser = ViewModel.Users[idx + 1];
+        }
+
+        private void BtnLast_Click(object sender, RoutedEventArgs e)
+        {
+            if (ViewModel.Users.Count > 0)
+                ViewModel.SelectedUser = ViewModel.Users[ViewModel.Users.Count - 1];
+        }
+
+        private void BtnSave_Click(object sender, RoutedEventArgs e)
+        {
+            bool canExecute = ViewModel.SaveCommand.CanExecute(null);
+            if (canExecute)
+            {
+                ViewModel.SaveCommand.Execute(null);
+            }
+        }
+
+        private async void BtnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            if (ViewModel.DeleteCommand.CanExecute(null))
+                ViewModel.DeleteCommand.Execute(null);
+        }
+
+        private void BtnFind_Click_OLD(object sender, RoutedEventArgs e)
+        {
+            // kept for reference; replaced by ApplyFilter
+        }
+
+        private void BtnFindById_OLD()
+        {
+            // old logic removed
+        }
+
+        private void BtnFind_Click_ReplaceMe()
+        {
+            // placeholder removed
+        }
+
+        private void BtnFind_Click_AnotherOld()
+        {
+            // placeholder removed
+        }
+
+        private void BtnFind_Click_Legacy()
+        {
+            // placeholder removed
+        }
+
+        private void ViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(ViewModel.SelectedUser))
             {
