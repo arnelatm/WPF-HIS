@@ -21,20 +21,19 @@ namespace AATM.DataAccess.Sql
                 USING (
                     SELECT 
                         @UserName AS UserName, 
-                        @Password AS Password, 
                         @EmployeeIdNo AS EmployeeIdNo, 
                         @SecurityGroupIdNo AS SecurityGroupIdNo,
                         @Active AS Active
                 ) AS Source
-                ON (Target.UserName = Source.UserName AND Target.EmployeeIdNo = Source.EmployeeIdNo)
+                ON (Target.UserName = Source.UserName)
                 WHEN MATCHED THEN
                     UPDATE SET
-                        Password = Source.Password,
+                        EmployeeIdNo = Source.EmployeeIdNo,
                         SecurityGroupIdNo = Source.SecurityGroupIdNo,
                         Active = Source.Active
                 WHEN NOT MATCHED BY TARGET THEN
-                    INSERT (UserName, Password, EmployeeIdNo, SecurityGroupIdNo, Active)
-                    VALUES (Source.UserName, Source.Password, Source.EmployeeIdNo, Source.SecurityGroupIdNo, Source.Active)
+                    INSERT (UserName, EmployeeIdNo, SecurityGroupIdNo, Active)
+                    VALUES (Source.UserName, Source.EmployeeIdNo, Source.SecurityGroupIdNo, Source.Active)
                 OUTPUT inserted.IdNo;";
 
             using (var conn = new SqlConnection(_connectionString))
@@ -44,7 +43,6 @@ namespace AATM.DataAccess.Sql
                 {
                     // Prefer explicit typing over AddWithValue to avoid implicit conversions
                     cmd.Parameters.Add("@UserName", SqlDbType.NVarChar, 256).Value = dto.UserName ?? string.Empty;
-                    cmd.Parameters.Add("@Password", SqlDbType.NVarChar, -1).Value = (object?)dto.Password ?? DBNull.Value;
                     cmd.Parameters.Add("@EmployeeIdNo", SqlDbType.Int).Value = dto.EmployeeIdNo;
                     cmd.Parameters.Add("@SecurityGroupIdNo", SqlDbType.Int).Value = dto.SecurityGroupIdNo;
                     cmd.Parameters.Add("@Active", SqlDbType.Bit).Value = dto.Active;

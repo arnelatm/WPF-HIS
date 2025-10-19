@@ -93,7 +93,8 @@ namespace AATM.App.HisWpf.ViewModels
                 async _ => await Refresh()
             );
 
-            _ = Refresh();
+            // Load employees + users
+            _ = InitializeAsync(); // instead of: _ = Refresh();
         }
 
         public async Task LoadEmployeesAsync()
