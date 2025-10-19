@@ -48,26 +48,26 @@
 
         <Label Grid.Row="2" Grid.Column="0" Content="User Name" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
         <TextBox Grid.Row="2" Grid.Column="2"
-                 Text="{Binding SelectedUser.OriginalString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True, TargetNullValue=''}" />
+                 Text="{Binding SelectedUser.UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True, TargetNullValue=''}" />
 
-        <Label Grid.Row="3" Grid.Column="0" Content="Employee Name" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
-        <TextBox Grid.Row="3" Grid.Column="2" x:Name="txtLocalizedString" Margin="0,2,0,2"
-                 Text="{Binding SelectedUser.LocalizedString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True, TargetNullValue=''}" />
+        <Label Grid.Row="3" Grid.Column="0" Content="EmployeeIdNo" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+        <TextBox Grid.Row="3" Grid.Column="2" x:Name="txtEmployeeIdNo" Margin="0,2,0,2"
+                 Text="{Binding SelectedUser.EmployeeIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True, TargetNullValue=''}" />
 
-        <Label Grid.Row="4" Grid.Column="0" Content="Security Group Name" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
-        <ComboBox Grid.Row="4" Grid.Column="2" x:Name="cmbLanguageCode" Margin="0,2,0,2"
-          ItemsSource="{Binding AvailableLanguages}"
-          SelectedValue="{Binding SelectedUser.LanguageCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
-          SelectedValuePath="Code"
-          DisplayMemberPath="Display" />
+        <Label Grid.Row="4" Grid.Column="0" Content="SecurityGroupIdNo" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+        <ComboBox Grid.Row="4" Grid.Column="2" x:Name="cmbSecurityGroupIdNo" Margin="0,2,0,2"
+          ItemsSource="{Binding AvailableSecurityGroups}"
+          SelectedValue="{Binding SelectedUser.SecurityGroupIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
+          SelectedValuePath="IdNo"
+          DisplayMemberPath="Name" />
 
         <Label Grid.Row="5" Grid.Column="0" Content="Password" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
-        <TextBox Grid.Row="5" Grid.Column="2" x:Name="txtUIIdentifier" Margin="0,2,0,2"
-                 Text="{Binding SelectedUser.UIIdentifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True, TargetNullValue=''}" />
+        <TextBox Grid.Row="5" Grid.Column="2" x:Name="txtPassword" Margin="0,2,0,2"
+                 Text="{Binding SelectedUser.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True, TargetNullValue=''}" />
 
         <Label Grid.Row="6" Grid.Column="0" Content="Active?" VerticalAlignment="Center" Grid.ColumnSpan="2" Cursor=""/>
-        <TextBox Grid.Row="6" Grid.Column="2" x:Name="txtModuleName" Margin="0,2,0,2"
-                 Text="{Binding SelectedUser.ModuleName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True, TargetNullValue=''}" />
+        <TextBox Grid.Row="6" Grid.Column="2" x:Name="txtActive" Margin="0,2,0,2"
+                 Text="{Binding SelectedUser.Active, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True, TargetNullValue=''}" />
 
         <TextBox Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3" x:Name="txtErrors"
             Background="MistyRose" Foreground="DarkRed" FontWeight="Bold"
@@ -83,13 +83,12 @@
           SelectedItem="{Binding SelectedUser, Mode=TwoWay}"
           Margin="0,5,0,10">
             <DataGrid.Columns>
-                <local:ValidatedTextColumn Header="IdNo" Binding="{Binding IdNo}" Width="80"/>
-                <local:ValidatedTextColumn Header="OriginalString" Binding="{Binding OriginalString}" Width="200"/>
-                <local:ValidatedTextColumn Header="ModuleName" Binding="{Binding ModuleName}" Width="120"/>
-                <local:ValidatedTextColumn Header="UIIdentifier" Binding="{Binding UIIdentifier}" Width="120"/>
-                <local:ValidatedTextColumn Header="LanguageCode" Binding="{Binding LanguageCode}" Width="120"/>
-                <local:ValidatedTextColumn Header="LocalizedString" Binding="{Binding LocalizedString}" Width="200"/>
-            </DataGrid.Columns>
+                <local:ValidatedTextColumn Header="Id Number" Binding="{Binding IdNo}" Width="80"/>
+                <local:ValidatedTextColumn Header="User Name" Binding="{Binding UserName}" Width="200"/>
+                <local:ValidatedTextColumn Header="Employee Name" Binding="{Binding EmployeeIdNo}" Width="120"/>
+                <local:ValidatedTextColumn Header="Security Group" Binding="{Binding SecurityGroupIdNo}" Width="120"/>
+                <local:ValidatedTextColumn Header="Active" Binding="{Binding Active}" Width="120"/>
+                </DataGrid.Columns>
         </DataGrid>
     </Grid>
 </Window>

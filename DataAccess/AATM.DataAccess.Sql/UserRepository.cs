@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Data;
 using AATM.Contracts.Dtos;
 using Microsoft.Data.SqlClient;
 
@@ -17,15 +18,23 @@ namespace AATM.DataAccess.Sql
         {
             const string mergeSql = @"
                 MERGE INTO [dbo].[Users] AS Target
-                USING (SELECT @UserName AS UserName, @Password AS Password, @EmployeeIdNo AS EmployeeIdNo, @SecurityGroupIdNo AS SecurityGroupIdNo) AS Source
+                USING (
+                    SELECT 
+                        @UserName AS UserName, 
+                        @Password AS Password, 
+                        @EmployeeIdNo AS EmployeeIdNo, 
+                        @SecurityGroupIdNo AS SecurityGroupIdNo,
+                        @Active AS Active
+                ) AS Source
                 ON (Target.UserName = Source.UserName AND Target.EmployeeIdNo = Source.EmployeeIdNo)
                 WHEN MATCHED THEN
                     UPDATE SET
                         Password = Source.Password,
-                        SecurityGroupIdNo = Source.SecurityGroupIdNo
+                        SecurityGroupIdNo = Source.SecurityGroupIdNo,
+                        Active = Source.Active
                 WHEN NOT MATCHED BY TARGET THEN
-                    INSERT (UserName, Password, EmployeeIdNo, SecurityGroupIdNo)
-                    VALUES (Source.UserName, Source.Password, Source.EmployeeIdNo, Source.SecurityGroupIdNo)
+                    INSERT (UserName, Password, EmployeeIdNo, SecurityGroupIdNo, Active)
+                    VALUES (Source.UserName, Source.Password, Source.EmployeeIdNo, Source.SecurityGroupIdNo, Source.Active)
                 OUTPUT inserted.IdNo;";
 
             using (var conn = new SqlConnection(_connectionString))
@@ -33,23 +42,26 @@ namespace AATM.DataAccess.Sql
                 await conn.OpenAsync().ConfigureAwait(false);
                 using (var cmd = new SqlCommand(mergeSql, conn))
                 {
-                    cmd.Parameters.AddWithValue("@UserName", dto.UserName);
-                    cmd.Parameters.AddWithValue("@Password", dto.Password);
-                    cmd.Parameters.AddWithValue("@EmployeeIdNo", dto.EmployeeIdNo);
-                    cmd.Parameters.AddWithValue("@SecurityGroupIdNo", dto.SecurityGroupIdNo);
-                    cmd.Parameters.AddWithValue("@Active", dto.Active);
+                    // Prefer explicit typing over AddWithValue to avoid implicit conversions
+                    cmd.Parameters.Add("@UserName", SqlDbType.NVarChar, 256).Value = dto.UserName ?? string.Empty;
+                    cmd.Parameters.Add("@Password", SqlDbType.NVarChar, -1).Value = (object?)dto.Password ?? DBNull.Value;
+                    cmd.Parameters.Add("@EmployeeIdNo", SqlDbType.Int).Value = dto.EmployeeIdNo;
+                    cmd.Parameters.Add("@SecurityGroupIdNo", SqlDbType.Int).Value = dto.SecurityGroupIdNo;
+                    cmd.Parameters.Add("@Active", SqlDbType.Bit).Value = dto.Active;
 
                     var result = await cmd.ExecuteScalarAsync().ConfigureAwait(false);
-                    if (result != null)
-                        dto.IdNo = Convert.ToInt32(result);
+                    if (result != null && result != DBNull.Value)
+                        dto.IdNo = Convert.ToInt32(result, System.Globalization.CultureInfo.InvariantCulture);
                 }
             }
             return dto;
         }
 
-        Task<List<UserDto>> IUserRepository.GetUsersPageAsync(int pageNumber, int pageSize)
+        // Explicit interface implementation now returns just the items page
+        async Task<List<UserDto>> IUserRepository.GetUsersPageAsync(int pageNumber, int pageSize)
         {
-            throw new NotImplementedException();
+            var (items, _) = await GetUsersPageAsync(pageNumber, pageSize).ConfigureAwait(false);
+            return items;
         }
 
         public async Task<(List<UserDto> Items, int TotalCount)> GetUsersPageAsync(int pageNumber, int pageSize)
@@ -67,8 +79,9 @@ OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY";
                 await conn.OpenAsync().ConfigureAwait(false);
                 using (var cmd = new SqlCommand(sql, conn))
                 {
-                    cmd.Parameters.AddWithValue("@Offset", (pageNumber - 1) * pageSize);
-                    cmd.Parameters.AddWithValue("@PageSize", pageSize);
+                    cmd.Parameters.Add("@Offset", SqlDbType.Int).Value = (pageNumber - 1) * pageSize;
+                    cmd.Parameters.Add("@PageSize", SqlDbType.Int).Value = pageSize;
+
                     using (var reader = await cmd.ExecuteReaderAsync().ConfigureAwait(false))
                     {
                         while (await reader.ReadAsync().ConfigureAwait(false))
@@ -116,18 +129,18 @@ OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY";
 
         public async Task<bool> DeleteUserAsync(int idNo)
         {
-            const string sql = "DELETE FROM Users WHERE ID = @ID";
+            const string sql = "DELETE FROM Users WHERE IdNo = @IdNo";
             using (var conn = new SqlConnection(_connectionString))
             {
                 await conn.OpenAsync().ConfigureAwait(false);
                 using (var cmd = new SqlCommand(sql, conn))
                 {
-                    cmd.Parameters.AddWithValue("@IdNo", idNo);
+                    cmd.Parameters.Add("@IdNo", SqlDbType.Int).Value = idNo;
                     var rowsAffected = await cmd.ExecuteNonQueryAsync().ConfigureAwait(false);
                     return rowsAffected > 0;
                 }
             }
-        }
+        }   
 
         public async Task<UserDto> GetUserByIdAsync(int idNo)
         {
@@ -137,7 +150,7 @@ OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY";
                 await conn.OpenAsync().ConfigureAwait(false);
                 using (var cmd = new SqlCommand(sql, conn))
                 {
-                    cmd.Parameters.AddWithValue("@IdNo", idNo);
+                    cmd.Parameters.Add("@IdNo", SqlDbType.Int).Value = idNo;
                     using (var reader = await cmd.ExecuteReaderAsync().ConfigureAwait(false))
                     {
                         if (await reader.ReadAsync().ConfigureAwait(false))
@@ -150,7 +163,8 @@ OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY";
             throw new KeyNotFoundException($"User with ID Number {idNo} not found.");
         }
 
-        public async Task<string> GetUserAsync(string UserName, string normalizedLanguage)
+        // Signature preserved (per interface), but treat the second parameter as EmployeeIdNo
+        public async Task<string> GetUserAsync(string userName, string employeeIdNo)
         {
             const string sql = "SELECT SecurityGroupIdNo FROM Users WHERE UserName = @UserName AND EmployeeIdNo = @EmployeeIdNo";
             using (var conn = new SqlConnection(_connectionString))
@@ -158,25 +172,38 @@ OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY";
                 await conn.OpenAsync().ConfigureAwait(false);
                 using (var cmd = new SqlCommand(sql, conn))
                 {
-                    cmd.Parameters.AddWithValue("@UserName", UserName);
-                    cmd.Parameters.AddWithValue("@EmployeeIdNo", normalizedLanguage);
+                    cmd.Parameters.Add("@UserName", SqlDbType.NVarChar, 256).Value = userName ?? string.Empty;
+
+                    if (int.TryParse(employeeIdNo, out var empId))
+                        cmd.Parameters.Add("@EmployeeIdNo", SqlDbType.Int).Value = empId;
+                    else
+                        cmd.Parameters.Add("@EmployeeIdNo", SqlDbType.Int).Value = DBNull.Value;
+
                     var result = await cmd.ExecuteScalarAsync().ConfigureAwait(false);
-                    return result?.ToString() ?? string.Empty;
+                    return result == null || result == DBNull.Value ? string.Empty : Convert.ToString(result)!;
                 }
             }
         }
 
         private static UserDto MapUserDto(SqlDataReader reader)
         {
+            int ordIdNo = reader.GetOrdinal("IdNo");
+            int ordUserName = reader.GetOrdinal("UserName");
+            int ordPassword = reader.GetOrdinal("Password");
+            int ordEmployeeIdNo = reader.GetOrdinal("EmployeeIdNo");
+            int ordSecurityGroupIdNo = reader.GetOrdinal("SecurityGroupIdNo");
+            int ordActive = reader.GetOrdinal("Active");
+            int ordCreationDate = reader.GetOrdinal("CreationDate");
+
             return new UserDto
             {
-                IdNo = reader.GetInt32(reader.GetOrdinal("IdNo")),
-                UserName = reader.GetString(reader.GetOrdinal("UserName")),
-                Password = reader.IsDBNull(reader.GetOrdinal("Password")) ? null : reader.GetString(reader.GetOrdinal("Password")),
-                EmployeeIdNo = reader.GetInt32(reader.GetOrdinal("EmployeeIdNo")),
-                SecurityGroupIdNo = reader.GetInt32(reader.GetOrdinal("SecurityGroupIdNo")),
-                Active = reader.GetBoolean(reader.GetOrdinal("Active")),
-                CreationDate = reader.GetDateTime(reader.GetOrdinal("CreationDate"))
+                IdNo = reader.IsDBNull(ordIdNo) ? 0 : reader.GetInt32(ordIdNo),
+                UserName = reader.IsDBNull(ordUserName) ? string.Empty : reader.GetString(ordUserName),
+                Password = reader.IsDBNull(ordPassword) ? null : reader.GetString(ordPassword),
+                EmployeeIdNo = reader.IsDBNull(ordEmployeeIdNo) ? 0 : reader.GetInt32(ordEmployeeIdNo),
+                SecurityGroupIdNo = reader.IsDBNull(ordSecurityGroupIdNo) ? 0 : reader.GetInt32(ordSecurityGroupIdNo),
+                Active = reader.IsDBNull(ordActive) ? false : reader.GetBoolean(ordActive),
+                CreationDate = reader.IsDBNull(ordCreationDate) ? DateTime.Now : reader.GetDateTime(ordCreationDate)
             };
         }
     }
