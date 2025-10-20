@@ -13,6 +13,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using System.Threading;
 
 namespace AATM.App.HisWpf.ViewModels
 {
@@ -23,11 +24,11 @@ namespace AATM.App.HisWpf.ViewModels
         private readonly IEmployeeRepository _employeeRepo;
         private readonly ISecurityGroupRepository _securityGroupRepo;
 
-        public ObservableCollection<UserDto> Users { get; } = new();
         public ObservableCollection<LanguageItem> AvailableLanguages { get; } = new();
         public ObservableCollection<EmployeeLookupDto> AvailableEmployees { get; } = new();
         public bool SelectedUserImplementsErrorInfo => SelectedUser is INotifyDataErrorInfo;
         public ObservableCollection<SecurityGroupLookupDto> AvailableSecurityGroups { get; } = new();
+        public ObservableCollection<UserDto> Users { get; } = new();
 
         private UserDto? _selectedUser;
         public UserDto? SelectedUser
@@ -95,9 +96,6 @@ namespace AATM.App.HisWpf.ViewModels
             RefreshCommand = new AsyncRelayCommand(
                 async _ => await Refresh()
             );
-
-            // Load employees + users
-            _ = InitializeAsync(); // instead of: _ = Refresh();
         }
 
         public async Task LoadEmployeesAsync()
@@ -123,22 +121,25 @@ namespace AATM.App.HisWpf.ViewModels
         }
 
         public bool IsBusy { get; set; }
-        private async Task Refresh()
+        // Serialize loads and avoid duplicates
+        private async Task Refresh(bool reload = false)
         {
-            IsBusy = true;
-            OnPropertyChanged(nameof(IsBusy));
+            await _loadLock.WaitAsync();
             try
             {
-                Users.Clear();
-                var items = await _service.GetAllAsync().ConfigureAwait(true);
-                foreach (var item in items)
-                    Users.Add(item);
+                IsBusy = true;
+                OnPropertyChanged(nameof(IsBusy));
+
+                if (reload)
+                {
+                    Users.Clear();
+                    var items = await _service.GetAllAsync().ConfigureAwait(true);
+                    foreach (var item in items)
+                        Users.Add(item);
+                }
 
                 SelectedUser = Users.Count > 0 ? Users[0] : null;
-                Debug.WriteLine($"SelectedUserImplementsErrorInfo: {SelectedUserImplementsErrorInfo}");
-
                 ErrorText = $"Loaded {Users.Count} User(s).";
-                Debug.WriteLine(ErrorText);
             }
             catch (Exception ex)
             {
@@ -149,6 +150,7 @@ namespace AATM.App.HisWpf.ViewModels
             {
                 IsBusy = false;
                 OnPropertyChanged(nameof(IsBusy));
+                _loadLock.Release();
             }
             OnPropertyChanged(nameof(ErrorText));
         }
@@ -231,12 +233,15 @@ namespace AATM.App.HisWpf.ViewModels
             OnPropertyChanged(nameof(ErrorText)); // <-- Notify UI of change
         }
 
-        // Resilient initialization: don't let a failed lookup block Users load
+        // Make InitializeAsync idempotent
         public async Task InitializeAsync()
         {
+            if (Interlocked.Exchange(ref _initOnce, 1) == 1)
+                return; // already initialized
+
             var empTask = LoadEmployeesSafeAsync();
             var secTask = LoadSecurityGroupsSafeAsync();
-            await RefreshSafeAsync(); // Always try to load Users
+            await RefreshSafeAsync(); // load Users once
             await Task.WhenAll(empTask, secTask);
         }
 
@@ -264,7 +269,8 @@ namespace AATM.App.HisWpf.ViewModels
 
         private async Task RefreshSafeAsync()
         {
-            try { await Refresh().ConfigureAwait(true); }
+            try { await Refresh(true).ConfigureAwait(true);
+            }
             catch (Exception ex)
             {
                 ErrorText = $"Users load failed: {ex.Message}";
@@ -288,6 +294,9 @@ namespace AATM.App.HisWpf.ViewModels
             }
             return _errors.TryGetValue(propertyName, out var errors) ? errors : Enumerable.Empty<string>();
         }
+
+        private int _initOnce; // 0 = not started, 1 = started
+        private readonly SemaphoreSlim _loadLock = new(1, 1);
     }
 }
 //using System.Collections.ObjectModel;

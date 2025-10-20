@@ -27,12 +27,11 @@ namespace AATM.App.HisWpf
             InitializeComponent();
 
             _viewModel = vm;
-            _localizationService = localizationService;
-
-            DataContext = vm;
-
             // Ensure initialization always runs regardless of which ctor is used
             Loaded += async (_, __) => await _viewModel.InitializeAsync();
+            
+            _localizationService = localizationService;
+            DataContext = vm;
 
             btnFirst.Click += BtnFirst_Click;
             btnPrev.Click += BtnPrev_Click;

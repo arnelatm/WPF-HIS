@@ -60,9 +60,9 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <!-- Optional: Show selected employee's DisplayText below ComboBox -->
+        <!-- Optional: Show selected employee's DisplayText below ComboBox --><!--
         <TextBlock Grid.Row="3" Grid.Column="2" Margin="0,28,0,0" FontWeight="Bold" Foreground="DarkBlue"
-                   Text="{Binding SelectedEmployee.DisplayText}" />
+                   Text="{Binding SelectedEmployee.DisplayText}" />-->
 
         <Label Grid.Row="4" Grid.Column="0" Content="SecurityGroupIdNo" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
         <ComboBox Grid.Row="4" Grid.Column="2" x:Name="cmbSecurityGroupIdNo" Margin="0,2,0,2"
