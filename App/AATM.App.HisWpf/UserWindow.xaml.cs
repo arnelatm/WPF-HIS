@@ -33,6 +33,7 @@ namespace AATM.App.HisWpf
             _localizationService = localizationService;
             DataContext = vm;
 
+
             btnFirst.Click += BtnFirst_Click;
             btnPrev.Click += BtnPrev_Click;
             btnNext.Click += BtnNext_Click;

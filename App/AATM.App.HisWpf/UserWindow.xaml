@@ -20,8 +20,8 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0"/>
-            <ColumnDefinition Width="150"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="165"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
         <!-- Navigation and CRUD Controls at the top -->
@@ -40,65 +40,62 @@
             <Button x:Name="btnSwitchLanguage" Content="Switch Language" Width="120" Margin="10,2,2,2"/>
         </StackPanel>
 
-        <Label Grid.Row="1" Grid.Column="0" Content="IdNo" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+        <Label Grid.Row="1" Grid.Column="0" Content="IdNo" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="26"/>
         <TextBox Grid.Row="1" Grid.Column="2"
-           Text="{Binding SelectedUser.IdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}" />
+           Text="{Binding SelectedUser.IdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}" Height="18" Margin="0,6,0,0" VerticalAlignment="Top" />
 
-        <Label Grid.Row="2" Grid.Column="0" Content="User Name" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+        <Label Grid.Row="2" Grid.Column="0" Content="User Name" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="26"/>
         <TextBox Grid.Row="2" Grid.Column="2"
-                 Text="{Binding SelectedUser.UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True, TargetNullValue=''}" />
+                 Text="{Binding SelectedUser.UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True, TargetNullValue=''}" Height="18" Margin="0,6,0,0" VerticalAlignment="Top" />
 
-        <Label Grid.Row="3" Grid.Column="0" Content="EmployeeIdNo" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+        <Label Grid.Row="3" Grid.Column="0" Content="Employee Code - Name" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="26"/>
         <ComboBox Grid.Row="3" Grid.Column="2" x:Name="cmbEmployeeIdNo"
           ItemsSource="{Binding AvailableEmployees}"
           SelectedValue="{Binding SelectedUser.EmployeeIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
           SelectedValuePath="IdNo"
-          Margin="0,2,0,2">
+          Margin="0,5,0,0" Height="22" Grid.RowSpan="2" VerticalAlignment="Top">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding DisplayText}"/>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <!-- Optional: Show selected employee's DisplayText below ComboBox --><!--
+        <!-- Optional: Show selected employee's DisplayText below ComboBox -->
+        <!--
         <TextBlock Grid.Row="3" Grid.Column="2" Margin="0,28,0,0" FontWeight="Bold" Foreground="DarkBlue"
                    Text="{Binding SelectedEmployee.DisplayText}" />-->
 
-        <Label Grid.Row="4" Grid.Column="0" Content="SecurityGroupIdNo" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
-        <ComboBox Grid.Row="4" Grid.Column="2" x:Name="cmbSecurityGroupIdNo" Margin="0,2,0,2"
+        <Label Grid.Row="4" Grid.Column="0" Content="Security Group Code-Name" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="26"/>
+        <ComboBox Grid.Row="4" Grid.Column="2" x:Name="cmbSecurityGroupIdNo" 
           ItemsSource="{Binding AvailableSecurityGroups}"
           SelectedValue="{Binding SelectedUser.SecurityGroupIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
           SelectedValuePath="IdNo"
-          IsTextSearchEnabled="True">
+          IsTextSearchEnabled="True" Height="22" Margin="0,0,-5,0">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock>
-                        <TextBlock.Text>
-                            <PriorityBinding>
-                                <Binding Path="DisplayText"/>
-                                <Binding Path="SecurityGroupName"/>
-                                <Binding Path="SecurityGroupCode"/>
-                            </PriorityBinding>
-                        </TextBlock.Text>
-                    </TextBlock>
+                    <TextBlock Text="{Binding DisplayText}"/>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
+        <Label Grid.Row="5" Grid.Column="0" Content="Password" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="26"/>
+        <TextBox Grid.Row="5" Grid.Column="2" x:Name="txtPassword" Margin="0,6,0,0"
+                 Text="{Binding SelectedUser.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True, TargetNullValue=''}" Height="18" VerticalAlignment="Top" />
 
-        <Label Grid.Row="5" Grid.Column="0" Content="Password" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
-        <TextBox Grid.Row="5" Grid.Column="2" x:Name="txtPassword" Margin="0,2,0,2"
-                 Text="{Binding SelectedUser.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True, TargetNullValue=''}" />
+        <Label Grid.Row="6" Grid.Column="0" Content="Active?" VerticalAlignment="Center" Grid.ColumnSpan="2" Cursor="" Height="26"/>
+        <CheckBox Grid.Row="6" Grid.Column="2" x:Name="chkActive" Margin="0,2,0,2"
+          IsChecked="{Binding SelectedUser.Active, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}" 
+          Content="" />
 
-        <Label Grid.Row="6" Grid.Column="0" Content="Active?" VerticalAlignment="Center" Grid.ColumnSpan="2" Cursor=""/>
+        <!--<Label Grid.Row="6" Grid.Column="0" Content="Active?" VerticalAlignment="Center" Grid.ColumnSpan="2" Cursor=""/>
         <TextBox Grid.Row="6" Grid.Column="2" x:Name="txtActive" Margin="0,2,0,2"
-                 Text="{Binding SelectedUser.Active, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True, TargetNullValue=''}" />
+                 Text="{Binding SelectedUser.Active, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True, TargetNullValue=''}" />-->
 
         <TextBox Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3" x:Name="txtErrors"
             Background="MistyRose" Foreground="DarkRed" FontWeight="Bold"
             IsReadOnly="True" Height="44" VerticalScrollBarVisibility="Auto"
-            Text="{Binding ErrorText}" />
+            Text="{Binding ErrorText}" Grid.RowSpan="3" VerticalAlignment="Top" />
 
-        <ProgressBar Grid.Row="8" IsIndeterminate="True" Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}}" />
+        <ProgressBar Grid.Row="7" IsIndeterminate="True" Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}}" Grid.ColumnSpan="2" Margin="0,24,152,390" Grid.RowSpan="3" />
 
         <DataGrid Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="3" x:Name="dataGrid"
           ItemsSource="{Binding Users}" AutoGenerateColumns="False"
@@ -106,15 +103,12 @@
           Margin="0,5,0,10">
             <DataGrid.Columns>
                 <local:ValidatedTextColumn Header="Id Number" Binding="{Binding IdNo}" Width="80"/>
-                <local:ValidatedTextColumn Header="User Name" Binding="{Binding UserName}" Width="200"/>
-                <local:ValidatedTextColumn Header="Employee Name" Binding="{Binding EmployeeIdNo}" Width="120"/>
-                <local:ValidatedTextColumn Header="Security Group" Binding="{Binding SecurityGroupIdNo}" Width="120"/>
-                <local:ValidatedTextColumn Header="Active" Binding="{Binding Active}" Width="120"/>
-                <DataGridComboBoxColumn Header="Employee"
+                <local:ValidatedTextColumn Header="User Name" Binding="{Binding UserName}" Width="100"/>
+                <DataGridComboBoxColumn Header="Employee Name"
                     SelectedValueBinding="{Binding EmployeeIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     SelectedValuePath="IdNo"
                     DisplayMemberPath="DisplayText"
-                    Width="200">
+                    Width="*">
                     <DataGridComboBoxColumn.ElementStyle>
                         <Style TargetType="ComboBox">
                             <Setter Property="ItemsSource"
@@ -132,6 +126,35 @@
                         </Style>
                     </DataGridComboBoxColumn.EditingElementStyle>
                 </DataGridComboBoxColumn>
+                <DataGridComboBoxColumn Header="Security Group"
+                    SelectedValueBinding="{Binding SecurityGroupIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    SelectedValuePath="IdNo"
+                    DisplayMemberPath="DisplayText"
+                    Width="150">
+                    <DataGridComboBoxColumn.ElementStyle>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="ItemsSource"
+                                    Value="{Binding DataContext.AvailableSecurityGroups, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                            <Setter Property="IsReadOnly" Value="True"/>
+                            <Setter Property="IsHitTestVisible" Value="False"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Padding" Value="0"/>
+                        </Style>
+                    </DataGridComboBoxColumn.ElementStyle>
+                    <DataGridComboBoxColumn.EditingElementStyle>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="ItemsSource"
+                                    Value="{Binding DataContext.AvailableSecurityGroups, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                        </Style>
+                    </DataGridComboBoxColumn.EditingElementStyle>
+                </DataGridComboBoxColumn>
+                <DataGridTemplateColumn Header="Active" Width="45">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding Active, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>   
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
