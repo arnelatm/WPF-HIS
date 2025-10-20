@@ -21,11 +21,13 @@ namespace AATM.App.HisWpf.ViewModels
         private readonly UserCrudService _service;
         private readonly ILocalizationService _localizationService;
         private readonly IEmployeeRepository _employeeRepo;
+        private readonly ISecurityGroupRepository _securityGroupRepo;
 
         public ObservableCollection<UserDto> Users { get; } = new();
         public ObservableCollection<LanguageItem> AvailableLanguages { get; } = new();
         public ObservableCollection<EmployeeLookupDto> AvailableEmployees { get; } = new();
         public bool SelectedUserImplementsErrorInfo => SelectedUser is INotifyDataErrorInfo;
+        public ObservableCollection<SecurityGroupLookupDto> AvailableSecurityGroups { get; } = new();
 
         private UserDto? _selectedUser;
         public UserDto? SelectedUser
@@ -71,11 +73,12 @@ namespace AATM.App.HisWpf.ViewModels
         private readonly DtoValidator<UserDto> _UserValidator =
             new DtoValidator<UserDto>(UserDtoValidationRules.Validate);
 
-        public UserViewModel(UserCrudService service, ILocalizationService localizationService, IEmployeeRepository employeeRepo)
+        public UserViewModel(UserCrudService service, ILocalizationService localizationService, IEmployeeRepository employeeRepo, ISecurityGroupRepository securityGroupRepo)
         {
             _service = service;
             _localizationService = localizationService;
             _employeeRepo = employeeRepo;
+            _securityGroupRepo = securityGroupRepo;
 
             var langs = LocalizationHelper.SafeGetLanguages(_localizationService);
             foreach (var (display, code) in langs)
@@ -100,13 +103,25 @@ namespace AATM.App.HisWpf.ViewModels
         public async Task LoadEmployeesAsync()
         {
             var employees = await _employeeRepo.GetEmployeesLookupAsync().ConfigureAwait(false);
-            App.Current.Dispatcher.Invoke(() =>
+            await App.Current.Dispatcher.InvokeAsync(() =>
             {
                 AvailableEmployees.Clear();
                 foreach (var e in employees) AvailableEmployees.Add(e);
+                // Debug.WriteLine($"Employees loaded: {AvailableEmployees.Count}");
             });
         }
-            
+
+        public async Task LoadSecurityGroupsAsync()
+        {
+            var securityGroups = await _securityGroupRepo.GetSecurityGroupsLookupAsync().ConfigureAwait(false);
+            await App.Current.Dispatcher.InvokeAsync(() =>
+            {
+                AvailableSecurityGroups.Clear();
+                foreach (var sg in securityGroups) AvailableSecurityGroups.Add(sg);
+                // Debug.WriteLine($"Security groups loaded: {AvailableSecurityGroups.Count}");
+            });
+        }
+
         public bool IsBusy { get; set; }
         private async Task Refresh()
         {
@@ -216,6 +231,48 @@ namespace AATM.App.HisWpf.ViewModels
             OnPropertyChanged(nameof(ErrorText)); // <-- Notify UI of change
         }
 
+        // Resilient initialization: don't let a failed lookup block Users load
+        public async Task InitializeAsync()
+        {
+            var empTask = LoadEmployeesSafeAsync();
+            var secTask = LoadSecurityGroupsSafeAsync();
+            await RefreshSafeAsync(); // Always try to load Users
+            await Task.WhenAll(empTask, secTask);
+        }
+
+        private async Task LoadEmployeesSafeAsync()
+        {
+            try { await LoadEmployeesAsync().ConfigureAwait(false); }
+            catch (Exception ex)
+            {
+                ErrorText = $"Employees load failed: {ex.Message}";
+                OnPropertyChanged(nameof(ErrorText));
+                Debug.WriteLine(ex);
+            }
+        }
+
+        private async Task LoadSecurityGroupsSafeAsync()
+        {
+            try { await LoadSecurityGroupsAsync().ConfigureAwait(false); }
+            catch (Exception ex)
+            {
+                ErrorText = $"Security groups load failed: {ex.Message}";
+                OnPropertyChanged(nameof(ErrorText));
+                Debug.WriteLine(ex);
+            }
+        }
+
+        private async Task RefreshSafeAsync()
+        {
+            try { await Refresh().ConfigureAwait(true); }
+            catch (Exception ex)
+            {
+                ErrorText = $"Users load failed: {ex.Message}";
+                OnPropertyChanged(nameof(ErrorText));
+                Debug.WriteLine(ex);
+            }
+        }
+
         // INotifyPropertyChanged implementation
         public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string? name = null)
@@ -230,12 +287,6 @@ namespace AATM.App.HisWpf.ViewModels
                 return _errors.Values.SelectMany(e => e).ToList();
             }
             return _errors.TryGetValue(propertyName, out var errors) ? errors : Enumerable.Empty<string>();
-        }
-
-        public async Task InitializeAsync()
-        {
-            await LoadEmployeesAsync();
-            await Refresh();
         }
     }
 }

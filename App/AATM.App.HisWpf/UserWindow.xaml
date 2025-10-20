@@ -69,7 +69,21 @@
           ItemsSource="{Binding AvailableSecurityGroups}"
           SelectedValue="{Binding SelectedUser.SecurityGroupIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
           SelectedValuePath="IdNo"
-          DisplayMemberPath="Name" />
+          IsTextSearchEnabled="True">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <PriorityBinding>
+                                <Binding Path="DisplayText"/>
+                                <Binding Path="SecurityGroupName"/>
+                                <Binding Path="SecurityGroupCode"/>
+                            </PriorityBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
 
         <Label Grid.Row="5" Grid.Column="0" Content="Password" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
         <TextBox Grid.Row="5" Grid.Column="2" x:Name="txtPassword" Margin="0,2,0,2"

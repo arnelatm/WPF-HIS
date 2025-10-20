@@ -17,10 +17,10 @@ namespace AATM.DataAccess.Sql
         public async Task<List<SecurityGroupLookupDto>> GetSecurityGroupsLookupAsync()
         {
             var list = new List<SecurityGroupLookupDto>();
+            // Be permissive here so UI always has data; filter by Active at a higher layer if needed
             const string sql = @"
-SELECT IdNo, SecurityGroupCode, SecurityGroupName, (SecurityGroupCode + '-' + SecurityGroupName) AS DisplayText
+SELECT IdNo, SecurityGroupCode, SecurityGroupName
 FROM dbo.SecurityGroup
-WHERE Active = 1 OR Active IS NULL
 ORDER BY SecurityGroupName";
 
             using (var conn = new SqlConnection(_connectionString))

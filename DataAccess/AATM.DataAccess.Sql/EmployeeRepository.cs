@@ -17,10 +17,10 @@ namespace AATM.DataAccess.Sql
         public async Task<List<EmployeeLookupDto>> GetEmployeesLookupAsync()
         {
             var list = new List<EmployeeLookupDto>();
+            // Return all employees to ensure lookups can resolve existing User.EmployeeIdNo even if employee is inactive
             const string sql = @"
-SELECT IdNo, EmployeeCode, EmployeeName, (EmployeeCode + '-' + EmployeeName) AS DisplayText
+SELECT IdNo, EmployeeCode, EmployeeName
 FROM dbo.Employee
-WHERE Active = 1 OR Active IS NULL
 ORDER BY EmployeeName";
 
             using (var conn = new SqlConnection(_connectionString))

@@ -1,14 +1,10 @@
 ﻿using AATM.App.HisWpf.ViewModels;
 using AATM.Contracts.Interfaces.Services;
-using AATM.Core.Localization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Markup;
-using System.Windows.Media;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AATM.App.HisWpf
 {
@@ -19,37 +15,24 @@ namespace AATM.App.HisWpf
     {
         private readonly UserViewModel _viewModel;
 
+        // Prefer resolving via DI; this overload chains to the primary ctor
         public UserWindow(UserViewModel viewModel)
+            : this(viewModel, App.Host.Services.GetRequiredService<ILocalizationService>())
         {
-            InitializeComponent();
-            DataContext = viewModel;
-            _viewModel = viewModel;
-            Loaded += UserWindow_Loaded;
         }
 
-        private async void UserWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            await _viewModel.InitializeAsync();
-        }
-
-        private UserViewModel ViewModel => (UserViewModel)DataContext;
-
-        private ILocalizationService _localizationService;
-        private readonly string _moduleName = "UserWindow";
-
-        // NEW: originals cache
-        private bool _originalsCached;
-        private string _originalTitle = string.Empty;
-        private readonly Dictionary<DataGridColumn, string> _originalColumnHeaders = new();
-
-        // NEW: current filter text
-        private string? _currentFilter;
-
+        // Primary constructor used by DI
         public UserWindow(UserViewModel vm, ILocalizationService localizationService)
         {
             InitializeComponent();
-            DataContext = vm;
+
+            _viewModel = vm;
             _localizationService = localizationService;
+
+            DataContext = vm;
+
+            // Ensure initialization always runs regardless of which ctor is used
+            Loaded += async (_, __) => await _viewModel.InitializeAsync();
 
             btnFirst.Click += BtnFirst_Click;
             btnPrev.Click += BtnPrev_Click;
@@ -64,6 +47,19 @@ namespace AATM.App.HisWpf
             ViewModel.PropertyChanged += ViewModel_PropertyChanged;
             UpdateRecordIndicators();
         }
+
+        private UserViewModel ViewModel => (UserViewModel)DataContext;
+
+        private ILocalizationService _localizationService;
+        private readonly string _moduleName = "UserWindow";
+
+        // NEW: originals cache
+        private bool _originalsCached;
+        private string _originalTitle = string.Empty;
+        private readonly Dictionary<DataGridColumn, string> _originalColumnHeaders = new();
+
+        // NEW: current filter text
+        private string? _currentFilter;
 
         private void BtnFind_Click(object sender, RoutedEventArgs e)
         {
