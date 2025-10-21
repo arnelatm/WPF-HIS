@@ -57,7 +57,8 @@
           IsEditable="True"
           IsTextSearchEnabled="False"
           StaysOpenOnEdit="True"
-          Grid.RowSpan="2" VerticalAlignment="Top">
+          Grid.RowSpan="2" VerticalAlignment="Top"
+          PreviewKeyDown="cmbEmployeeIdNo_PreviewKeyDown">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding DisplayText}"/>

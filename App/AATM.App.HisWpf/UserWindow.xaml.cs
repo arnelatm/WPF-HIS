@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Markup;
 using Microsoft.Extensions.DependencyInjection;
+using System.Windows.Input; // Add if not present
 
 namespace AATM.App.HisWpf
 {
@@ -58,6 +59,8 @@ namespace AATM.App.HisWpf
                 // Optional: clear filter when the dropdown closes so list resets next time
                 ViewModel.EmployeeFilterText = string.Empty;
             };
+
+            cmbEmployeeIdNo.PreviewKeyDown += cmbEmployeeIdNo_PreviewKeyDown;
         }
 
         private UserViewModel ViewModel => (UserViewModel)DataContext;
@@ -360,6 +363,49 @@ namespace AATM.App.HisWpf
             if (!cmbEmployeeIdNo.IsKeyboardFocusWithin) return;
             ViewModel.EmployeeFilterText = cmbEmployeeIdNo.Text ?? string.Empty;
             if (!cmbEmployeeIdNo.IsDropDownOpen) cmbEmployeeIdNo.IsDropDownOpen = true;
+        }
+
+        private void cmbEmployeeIdNo_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Down)
+            {
+                if (!cmbEmployeeIdNo.IsDropDownOpen)
+                {
+                    cmbEmployeeIdNo.IsDropDownOpen = true;
+                    e.Handled = true;
+                    return;
+                }
+
+                var items = cmbEmployeeIdNo.Items;
+                if (items.Count == 0) return;
+
+                int currentIndex = cmbEmployeeIdNo.SelectedIndex;
+
+                // If nothing is selected, select the first item
+                if (currentIndex < 0)
+                {
+                    cmbEmployeeIdNo.SelectedIndex = 0;
+                    cmbEmployeeIdNo.Items.MoveCurrentToFirst();
+                }
+                else
+                {
+                    // Move to next item, but don't wrap
+                    int nextIndex = currentIndex + 1;
+                    if (nextIndex < items.Count)
+                    {
+                        cmbEmployeeIdNo.SelectedIndex = nextIndex;
+                        cmbEmployeeIdNo.Items.MoveCurrentTo(nextIndex);
+                    }
+                }
+
+                // Ensure the selected item is visible
+                if (cmbEmployeeIdNo.SelectedItem != null)
+                {
+                    var itemContainer = cmbEmployeeIdNo.ItemContainerGenerator.ContainerFromItem(cmbEmployeeIdNo.SelectedItem) as FrameworkElement;
+                    itemContainer?.BringIntoView();
+                }
+                e.Handled = true;
+            }
         }
     }
 }
