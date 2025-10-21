@@ -342,5 +342,6 @@ namespace AATM.App.HisWpf
             txtCurrentRecord.Text = (idx >= 0 ? (idx + 1).ToString() : "0");
             txtRecordCount.Text = ViewModel.Users.Count.ToString();
         }
+
     }
 }

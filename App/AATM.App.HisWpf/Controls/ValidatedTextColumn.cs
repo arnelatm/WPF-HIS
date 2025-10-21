@@ -9,13 +9,31 @@ namespace AATM.App.HisWpf
     /// </summary>
     public class ValidatedTextColumn : DataGridTextColumn
     {
-        public ValidatedTextColumn()
+        private bool _stylesApplied;
+
+        // Apply styles lazily when cells are generated (avoids ctor-time resource lookup)
+        protected override FrameworkElement GenerateElement(DataGridCell cell, object dataItem)
         {
-            ElementStyle = TryFindStyle("DataGridTextBlockErrorStyle");
-            EditingElementStyle = TryFindStyle("DataGridCellErrorStyle");
+            EnsureStylesApplied();
+            return base.GenerateElement(cell, dataItem);
         }
 
-        protected override void OnBindingChanged(BindingBase oldBinding, BindingBase newBinding)
+        protected override FrameworkElement GenerateEditingElement(DataGridCell cell, object dataItem)
+        {
+            EnsureStylesApplied();
+            return base.GenerateEditingElement(cell, dataItem);
+        }
+
+        private void EnsureStylesApplied()
+        {
+            if (_stylesApplied || Application.Current is null) return;
+
+            ElementStyle = TryFindStyle("DataGridTextBlockErrorStyle");
+            EditingElementStyle = TryFindStyle("DataGridCellErrorStyle");
+            _stylesApplied = true;
+        }
+
+        protected override void OnBindingChanged(BindingBase? oldBinding, BindingBase? newBinding)
         {
             base.OnBindingChanged(oldBinding, newBinding);
 

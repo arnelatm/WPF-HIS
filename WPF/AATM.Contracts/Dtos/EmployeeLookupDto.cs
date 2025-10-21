@@ -43,5 +43,9 @@ namespace AATM.Contracts.Dtos
         public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged(string propertyName) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        public override string ToString()
+        {
+            return DisplayText; // Or whatever property you want to show
+        }   
     }
 }

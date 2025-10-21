@@ -4,11 +4,20 @@
              xmlns:local="clr-namespace:AATM.App.HisWpf"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        <Style TargetType="Label">
+            <Setter Property="Height" Value="Auto"/>
+            <Setter Property="MinHeight" Value="22"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="CheckBox">
+            <Setter Property="Height" Value="Auto"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
         <!-- BoolToVisibilityConverter -->
         <local:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" CollapseWhenFalse="True"/>
 
         <!-- Validation styles (keyed) -->
-        <Style x:Key="TextBoxValidationStyle" TargetType="TextBox">
+        <Style x:Key="TextBoxValidationStyle" TargetType="{x:Type TextBox}">
             <!-- Make validation tooltip appear immediately and stay visible longer -->
             <Setter Property="ToolTipService.InitialShowDelay" Value="0"/>
             <Setter Property="ToolTipService.BetweenShowDelay" Value="0"/>
@@ -24,14 +33,13 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="Validation.HasError" Value="True">
-                    <Setter Property="ToolTip"
-                            Value="{Binding RelativeSource={x:Static RelativeSource.Self},
-                                            Path=(Validation.Errors)[0].ErrorContent}" />
+                    <Setter Property="ToolTipService.ToolTip"
+                            Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}" />
                 </Trigger>
             </Style.Triggers>
         </Style>
 
-        <Style x:Key="ComboBoxValidationStyle" TargetType="ComboBox">
+        <Style x:Key="ComboBoxValidationStyle" TargetType="{x:Type ComboBox}">
             <!-- Make validation tooltip appear immediately and stay visible longer -->
             <Setter Property="ToolTipService.InitialShowDelay" Value="0"/>
             <Setter Property="ToolTipService.BetweenShowDelay" Value="0"/>
@@ -70,13 +78,17 @@
 
         <!-- Restore implicit styles so they apply to generated controls (e.g., DataGrid editing TextBox/ComboBox) -->
         <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource TextBoxValidationStyle}">
-            <Setter Property="Margin" Value="0,5,0,0"/>
+            <Setter Property="Height" Value="Auto"/>
+            <Setter Property="MinHeight" Value="22"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,5,0,0"/>
         </Style>
 
         <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource ComboBoxValidationStyle}">
             <Setter Property="Margin" Value="0,5,0,0"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Height" Value="Auto"/>
+            <Setter Property="MinHeight" Value="22"/>
         </Style>
 
         <!-- DataGrid error visuals: show first error as tooltip on the cell and add visual cue -->
