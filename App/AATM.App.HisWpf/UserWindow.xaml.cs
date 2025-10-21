@@ -46,6 +46,18 @@ namespace AATM.App.HisWpf
 
             ViewModel.PropertyChanged += ViewModel_PropertyChanged;
             UpdateRecordIndicators();
+
+            cmbEmployeeIdNo.IsEditable = true;
+            cmbEmployeeIdNo.IsTextSearchEnabled = false;
+            cmbEmployeeIdNo.StaysOpenOnEdit = true;
+            // Update filter as user types and keep the dropdown open
+            cmbEmployeeIdNo.AddHandler(System.Windows.Controls.Primitives.TextBoxBase.TextChangedEvent,
+                new TextChangedEventHandler(CmbEmployeeIdNo_TextChanged));
+            cmbEmployeeIdNo.DropDownClosed += (_, __) =>
+            {
+                // Optional: clear filter when the dropdown closes so list resets next time
+                ViewModel.EmployeeFilterText = string.Empty;
+            };
         }
 
         private UserViewModel ViewModel => (UserViewModel)DataContext;
@@ -343,5 +355,11 @@ namespace AATM.App.HisWpf
             txtRecordCount.Text = ViewModel.Users.Count.ToString();
         }
 
+        private void CmbEmployeeIdNo_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!cmbEmployeeIdNo.IsKeyboardFocusWithin) return;
+            ViewModel.EmployeeFilterText = cmbEmployeeIdNo.Text ?? string.Empty;
+            if (!cmbEmployeeIdNo.IsDropDownOpen) cmbEmployeeIdNo.IsDropDownOpen = true;
+        }
     }
 }

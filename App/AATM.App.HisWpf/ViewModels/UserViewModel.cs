@@ -26,6 +26,7 @@ namespace AATM.App.HisWpf.ViewModels
 
         public ObservableCollection<LanguageItem> AvailableLanguages { get; } = new();
         public ObservableCollection<EmployeeLookupDto> AvailableEmployees { get; } = new();
+        public ObservableCollection<EmployeeLookupDto> FilteredEmployees { get; } = new();
         public bool SelectedUserImplementsErrorInfo => SelectedUser is INotifyDataErrorInfo;
         public ObservableCollection<SecurityGroupLookupDto> AvailableSecurityGroups { get; } = new();
         public ObservableCollection<UserDto> Users { get; } = new();
@@ -98,6 +99,52 @@ namespace AATM.App.HisWpf.ViewModels
             );
         }
 
+        // Employee filter
+        private string _employeeFilterText = "";
+        public string EmployeeFilterText
+        {
+            get => _employeeFilterText;
+            set
+            {
+                if (_employeeFilterText != value)
+                {
+                    _employeeFilterText = value;
+                    OnPropertyChanged();
+                    FilterEmployees();
+                }
+            }
+        }
+
+        // Call this after AvailableEmployees changes or when filter text changes
+        private void FilterEmployees()
+        {
+            // Ensure UI-thread updates for bound ObservableCollection
+            if (!App.Current.Dispatcher.CheckAccess())
+            {
+                App.Current.Dispatcher.Invoke(FilterEmployees);
+                return;
+            }
+
+            FilteredEmployees.Clear();
+            var filter = EmployeeFilterText?.Trim() ?? string.Empty;
+
+            foreach (var emp in AvailableEmployees)
+            {
+                if (string.IsNullOrEmpty(filter)
+                    || Contains(emp.DisplayText, filter)
+                    || Contains(emp.EmployeeName, filter)
+                    || Contains(emp.EmployeeCode, filter))
+                {
+                    FilteredEmployees.Add(emp);
+                }
+            }
+
+            static bool Contains(string? source, string needle) =>
+                !string.IsNullOrEmpty(source)
+                && !string.IsNullOrEmpty(needle)
+                && source.IndexOf(needle, StringComparison.OrdinalIgnoreCase) >= 0;
+        }
+
         public async Task LoadEmployeesAsync()
         {
             var employees = await _employeeRepo.GetEmployeesLookupAsync().ConfigureAwait(false);
@@ -105,7 +152,9 @@ namespace AATM.App.HisWpf.ViewModels
             {
                 AvailableEmployees.Clear();
                 foreach (var e in employees) AvailableEmployees.Add(e);
-                // Debug.WriteLine($"Employees loaded: {AvailableEmployees.Count}");
+
+                // Initialize the filtered view
+                FilterEmployees();
             });
         }
 

@@ -49,12 +49,14 @@
                  Text="{Binding SelectedUser.UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True, TargetNullValue=''}"/>
 
         <Label Grid.Row="3" Grid.Column="0" Content="Employee Code - Name" Grid.ColumnSpan="2"/>
+        <!-- Replace the Employee ComboBox with this self-filtering version -->
         <ComboBox Grid.Row="3" Grid.Column="2" x:Name="cmbEmployeeIdNo"
-          ItemsSource="{Binding AvailableEmployees}"
+          ItemsSource="{Binding FilteredEmployees}"
           SelectedValue="{Binding SelectedUser.EmployeeIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
           SelectedValuePath="IdNo"
           IsEditable="True"
-          IsTextSearchEnabled="True"
+          IsTextSearchEnabled="False"
+          StaysOpenOnEdit="True"
           Grid.RowSpan="2" VerticalAlignment="Top">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
