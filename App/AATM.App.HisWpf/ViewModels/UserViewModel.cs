@@ -125,6 +125,11 @@ namespace AATM.App.HisWpf.ViewModels
                 return;
             }
 
+            // CRITICAL FIX: Preserve the CollectionView's current position during filtering
+            var view = System.Windows.Data.CollectionViewSource.GetDefaultView(FilteredEmployees);
+            var currentItem = view?.CurrentItem;
+            var currentPosition = view?.CurrentPosition ?? -1;
+
             FilteredEmployees.Clear();
             var filter = EmployeeFilterText?.Trim() ?? string.Empty;
 
@@ -136,6 +141,27 @@ namespace AATM.App.HisWpf.ViewModels
                     || Contains(emp.EmployeeCode, filter))
                 {
                     FilteredEmployees.Add(emp);
+                }
+            }
+
+            // CRITICAL FIX: Restore the CollectionView's current position after filtering
+            if (view != null && currentItem != null)
+            {
+                var newIndex = FilteredEmployees.IndexOf(currentItem as EmployeeLookupDto);
+                if (newIndex >= 0)
+                {
+                    // Item still exists in filtered list, restore position
+                    view.MoveCurrentToPosition(newIndex);
+                }
+                else if (currentPosition >= 0 && currentPosition < FilteredEmployees.Count)
+                {
+                    // Item was filtered out, try to maintain position
+                    view.MoveCurrentToPosition(currentPosition);
+                }
+                else if (FilteredEmployees.Count > 0)
+                {
+                    // Fallback: move to first item
+                    view.MoveCurrentToFirst();
                 }
             }
 
