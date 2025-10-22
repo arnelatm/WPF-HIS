@@ -1,0 +1,136 @@
+﻿using AATM.App.HisWpf.ViewModels;
+using System.Globalization;
+using System.Windows.Data;
+using System.Linq;
+using System.Collections;
+
+namespace AATM.App.HisWpf.Converter
+{
+    public class EmployeeIdNoToDisplayTextConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is int idNo && System.Windows.Application.Current.MainWindow?.DataContext is UserViewModel vm)
+            {
+                var emp = vm.AvailableEmployees?.FirstOrDefault(e => e.IdNo == idNo);
+                return emp?.DisplayText ?? string.Empty;
+            }
+            return string.Empty;
+        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => throw new NotImplementedException();
+    }
+
+    public class SecurityGroupIdNoToDisplayTextConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is int idNo && System.Windows.Application.Current.MainWindow.DataContext is UserViewModel vm)
+            {
+                var sg = vm.AvailableSecurityGroups.FirstOrDefault(s => s.IdNo == idNo);
+                return sg?.DisplayText ?? "";
+            }
+            return "";
+        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => throw new NotImplementedException();
+    }
+
+    // New multi-value converters: accept id and either the collection (IEnumerable) OR the collection Count (int)
+    public class EmployeeIdNoToDisplayTextMultiConverter : IMultiValueConverter
+    {
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (values == null || values.Length < 2) return string.Empty;
+            var idObj = values[0];
+            var collectionObj = values[1];
+
+            if (!(idObj is int idNo)) return string.Empty;
+
+            // If caller passed the collection itself, search it
+            if (collectionObj is IEnumerable list)
+            {
+                foreach (var item in list)
+                {
+                    dynamic d = item;
+                    try
+                    {
+                        if ((int)d.IdNo == idNo)
+                            return (string)d.DisplayText ?? string.Empty;
+                    }
+                    catch { }
+                }
+                return string.Empty;
+            }
+
+            // If caller passed a Count (int) or other placeholder, fall back to the main VM lookup
+            if (System.Windows.Application.Current.MainWindow?.DataContext is UserViewModel vm)
+            {
+                var emp = vm.AvailableEmployees?.FirstOrDefault(e => e.IdNo == idNo);
+                return emp?.DisplayText ?? string.Empty;
+            }
+
+            return string.Empty;
+        }
+
+
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture) => throw new NotImplementedException();
+    }
+
+    public class SecurityGroupIdNoToDisplayTextMultiConverter : IMultiValueConverter
+    {
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (values == null || values.Length < 2) return string.Empty;
+            var idObj = values[0];
+            var collectionObj = values[1];
+
+            if (!(idObj is int idNo)) return string.Empty;
+
+            if (collectionObj is IEnumerable list)
+            {
+                foreach (var item in list)
+                {
+                    dynamic d = item;
+                    try
+                    {
+                        if ((int)d.IdNo == idNo)
+                            return (string)d.DisplayText ?? string.Empty;
+                    }
+                    catch { }
+                }
+                return string.Empty;
+            }
+
+            if (System.Windows.Application.Current.MainWindow?.DataContext is UserViewModel vm)
+            {
+                var sg = vm.AvailableSecurityGroups?.FirstOrDefault(s => s.IdNo == idNo);
+                return sg?.DisplayText ?? string.Empty;
+            }
+
+            return string.Empty;
+        }
+
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture) => throw new NotImplementedException();
+    }
+
+    // Converter to bridge string/int mismatch for SelectedValue bindings
+    public class StringToIntConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            // source -> target: convert string (UserDto.EmployeeIdNo) to int for SelectedValue
+            if (value == null) return 0;
+            if (value is int i) return i;
+            if (value is string s && int.TryParse(s, out var v)) return v;
+            return 0;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            // target -> source: convert selected int back to string (UserDto expects string)
+            if (value == null) return string.Empty;
+            if (value is int i) return i.ToString();
+            if (value is string s) return s;
+            return string.Empty;
+        }
+    }
+}

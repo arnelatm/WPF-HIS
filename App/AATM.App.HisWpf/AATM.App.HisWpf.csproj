@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Converter\LookupDisplayTextConverters.cs" />
     <Compile Remove="ViewModels\TranslationDto.cs" />
   </ItemGroup>
 

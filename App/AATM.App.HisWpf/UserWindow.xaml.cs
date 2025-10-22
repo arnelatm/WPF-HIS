@@ -32,7 +32,7 @@ namespace AATM.App.HisWpf
             // Ensure initialization always runs regardless of which ctor is used
             Loaded += async (_, __) => await _viewModel.InitializeAsync();
             
-            _localizationService = localizationService;
+            _localization_service = localizationService;
             DataContext = vm;
 
 
@@ -61,7 +61,23 @@ namespace AATM.App.HisWpf
                 // Optional: clear filter when the dropdown closes so list resets next time
                 ViewModel.EmployeeFilterText = string.Empty;
             };
+
+            cmbSecurityGroupIdNo.IsEditable = true;
+            cmbSecurityGroupIdNo.IsTextSearchEnabled = false;
+            cmbSecurityGroupIdNo.StaysOpenOnEdit = true;
+
+            cmbSecurityGroupIdNo.AddHandler(System.Windows.Controls.Primitives.TextBoxBase.TextChangedEvent,
+                new TextChangedEventHandler(CmbSecurityGroupIdNo_TextChanged));
+            cmbSecurityGroupIdNo.DropDownClosed += (_, __) =>
+            {
+                ViewModel.SecurityGroupFilterText = string.Empty;
+            };
+
+            // PreparingCellForEdit no longer required with template columns
+            // dataGrid.PreparingCellForEdit += DataGrid_PreparingCellForEdit;
         }
+
+        // DataGrid_PreparingCellForEdit and Combo_DropDownOpened_Refresh removed
 
         // Helper method to find child controls in the visual tree
         private static T? FindVisualChild<T>(DependencyObject parent) where T : DependencyObject
@@ -81,7 +97,7 @@ namespace AATM.App.HisWpf
 
         private UserViewModel ViewModel => (UserViewModel)DataContext;
 
-        private ILocalizationService _localizationService;
+        private ILocalizationService _localization_service;
         private readonly string _moduleName = "UserWindow";
 
         // NEW: originals cache
@@ -156,12 +172,12 @@ namespace AATM.App.HisWpf
         private void BtnSwitchLanguage_Click(object sender, RoutedEventArgs e)
         {
             // Switch to Arabic (ar-SA). If already Arabic, switch back to English.
-            var newLang = _localizationService.IsRightToLeft ? "en-US" : "ar-SA";
-            _localizationService.SetLanguage(newLang, _moduleName);
+            var newLang = _localization_service.IsRightToLeft ? "en-US" : "ar-SA";
+            _localization_service.SetLanguage(newLang, _moduleName);
 
             // Apply culture and RTL at window level
             this.Language = XmlLanguage.GetLanguage(newLang);
-            this.FlowDirection = _localizationService.IsRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
+            this.FlowDirection = _localization_service.IsRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
 
             // Cache originals once
             CacheOriginalWindowChrome();
@@ -179,7 +195,7 @@ namespace AATM.App.HisWpf
                 if (IsEnglish(newLang))
                     col.Header = original;
                 else
-                    col.Header = _localizationService.GetString(_moduleName, original, original);
+                    col.Header = _localization_service.GetString(_moduleName, original, original);
             }
 
             // Ensure DataGrid refreshes visuals after header/culture changes
@@ -249,7 +265,7 @@ namespace AATM.App.HisWpf
             {
                 this.Title = IsEnglish(lang)
                     ? _originalTitle
-                    : _localizationService.GetString(_moduleName, "Title", _originalTitle);
+                    : _localization_service.GetString(_moduleName, "Title", _originalTitle);
             }
 
             if (this.Content is not Grid root) return;
@@ -267,7 +283,7 @@ namespace AATM.App.HisWpf
 
                         btn.Content = IsEnglish(lang)
                             ? original
-                            : _localizationService.GetString(_moduleName, string.IsNullOrWhiteSpace(btn.Name) ? original : btn.Name, original);
+                            : _localization_service.GetString(_moduleName, string.IsNullOrWhiteSpace(btn.Name) ? original : btn.Name, original);
                     }
                     continue;
                 }
@@ -279,7 +295,7 @@ namespace AATM.App.HisWpf
 
                     lbl.Content = IsEnglish(lang)
                         ? original
-                        : _localizationService.GetString(_moduleName, string.IsNullOrWhiteSpace(lbl.Name) ? original : lbl.Name, original);
+                        : _localization_service.GetString(_moduleName, string.IsNullOrWhiteSpace(lbl.Name) ? original : lbl.Name, original);
                 }
             }
         }
@@ -384,6 +400,14 @@ namespace AATM.App.HisWpf
             
             ViewModel.EmployeeFilterText = cmbEmployeeIdNo.Text ?? string.Empty;
             if (!cmbEmployeeIdNo.IsDropDownOpen) cmbEmployeeIdNo.IsDropDownOpen = true;
+        }
+
+        private void CmbSecurityGroupIdNo_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!cmbSecurityGroupIdNo.IsKeyboardFocusWithin) return;
+            if (e.Changes.Count == 0) return;
+            ViewModel.SecurityGroupFilterText = cmbSecurityGroupIdNo.Text ?? string.Empty;
+            if (!cmbSecurityGroupIdNo.IsDropDownOpen) cmbSecurityGroupIdNo.IsDropDownOpen = true;
         }
 
         // Helper method to find parent controls in the visual tree

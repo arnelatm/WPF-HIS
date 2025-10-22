@@ -29,6 +29,7 @@ namespace AATM.App.HisWpf.ViewModels
         public ObservableCollection<EmployeeLookupDto> FilteredEmployees { get; } = new();
         public bool SelectedUserImplementsErrorInfo => SelectedUser is INotifyDataErrorInfo;
         public ObservableCollection<SecurityGroupLookupDto> AvailableSecurityGroups { get; } = new();
+        public ObservableCollection<SecurityGroupLookupDto> FilteredSecurityGroups { get; } = new();
         public ObservableCollection<UserDto> Users { get; } = new();
 
         private UserDto? _selectedUser;
@@ -115,6 +116,22 @@ namespace AATM.App.HisWpf.ViewModels
             }
         }
 
+        // Security group filter
+        private string _securityGroupFilterText = "";
+        public string SecurityGroupFilterText
+        {
+            get => _securityGroupFilterText;
+            set
+            {
+                if (_securityGroupFilterText != value)
+                {
+                    _securityGroupFilterText = value;
+                    OnPropertyChanged();
+                    FilterSecurityGroups();
+                }
+            }
+        }
+
         // Call this after AvailableEmployees changes or when filter text changes
         private void FilterEmployees()
         {
@@ -144,6 +161,25 @@ namespace AATM.App.HisWpf.ViewModels
                 }
             }
 
+            // Ensure selected user's employee is present in filtered list so ComboBox can display it
+            try
+            {
+                if (SelectedUser != null)
+                {
+                    var selId = SelectedUser.EmployeeIdNo;
+                    if (selId != 0 && !FilteredEmployees.Any(e => e.IdNo == selId))
+                    {
+                        var found = AvailableEmployees.FirstOrDefault(e => e.IdNo == selId);
+                        if (found != null)
+                        {
+                            // insert at start so it's visible
+                            FilteredEmployees.Insert(0, found);
+                        }
+                    }
+                }
+            }
+            catch { /* defensive - don't let UI break */ }
+
             // CRITICAL FIX: Restore the CollectionView's current position after filtering
             if (view != null && currentItem != null)
             {
@@ -159,6 +195,80 @@ namespace AATM.App.HisWpf.ViewModels
                     view.MoveCurrentToPosition(currentPosition);
                 }
                 else if (FilteredEmployees.Count > 0)
+                {
+                    // Fallback: move to first item
+                    view.MoveCurrentToFirst();
+                }
+            }
+
+            static bool Contains(string? source, string needle) =>
+                !string.IsNullOrEmpty(source)
+                && !string.IsNullOrEmpty(needle)
+                && source.IndexOf(needle, StringComparison.OrdinalIgnoreCase) >= 0;
+        }
+
+        // Call this after AvailableSecurityGroups changes or when filter text changes
+        private void FilterSecurityGroups()
+        {
+            // Ensure UI-thread updates for bound ObservableCollection
+            if (!App.Current.Dispatcher.CheckAccess())
+            {
+                App.Current.Dispatcher.Invoke(FilterSecurityGroups);
+                return;
+            }
+
+            // CRITICAL FIX: Preserve the CollectionView's current position during filtering
+            var view = System.Windows.Data.CollectionViewSource.GetDefaultView(FilteredSecurityGroups);
+            var currentItem = view?.CurrentItem;
+            var currentPosition = view?.CurrentPosition ?? -1;
+
+            FilteredSecurityGroups.Clear();
+            var filter = SecurityGroupFilterText?.Trim() ?? string.Empty;
+
+            foreach (var group in AvailableSecurityGroups)
+            {
+                if (string.IsNullOrEmpty(filter)
+                    || Contains(group.DisplayText, filter)
+                    || Contains(group.SecurityGroupName, filter)
+                    || Contains(group.SecurityGroupCode, filter))
+                {
+                    FilteredSecurityGroups.Add(group);
+                }
+            }
+
+            // Ensure selected user's security group is present in filtered list so ComboBox can display it
+            try
+            {
+                if (SelectedUser != null)
+                {
+                    var selId = SelectedUser.SecurityGroupIdNo;
+                    if (selId != 0 && !FilteredSecurityGroups.Any(s => s.IdNo == selId))
+                    {
+                        var found = AvailableSecurityGroups.FirstOrDefault(s => s.IdNo == selId);
+                        if (found != null)
+                        {
+                            FilteredSecurityGroups.Insert(0, found);
+                        }
+                    }
+                }
+            }
+            catch { /* defensive */ }
+
+            // CRITICAL FIX: Restore the CollectionView's current position after filtering
+            if (view != null && currentItem != null)
+            {
+                var newIndex = FilteredSecurityGroups.IndexOf(currentItem as SecurityGroupLookupDto);
+                if (newIndex >= 0)
+                {
+                    // Item still exists in filtered list, restore position
+                    view.MoveCurrentToPosition(newIndex);
+                }
+                else if (currentPosition >= 0 && currentPosition < FilteredSecurityGroups.Count)
+                {
+                    // Item was filtered out, try to maintain position
+                    view.MoveCurrentToPosition(currentPosition);
+                }
+                else if (FilteredSecurityGroups.Count > 0)
                 {
                     // Fallback: move to first item
                     view.MoveCurrentToFirst();
@@ -191,7 +301,7 @@ namespace AATM.App.HisWpf.ViewModels
             {
                 AvailableSecurityGroups.Clear();
                 foreach (var sg in securityGroups) AvailableSecurityGroups.Add(sg);
-                // Debug.WriteLine($"Security groups loaded: {AvailableSecurityGroups.Count}");
+                FilterSecurityGroups();
             });
         }
 
@@ -314,10 +424,12 @@ namespace AATM.App.HisWpf.ViewModels
             if (Interlocked.Exchange(ref _initOnce, 1) == 1)
                 return; // already initialized
 
-            var empTask = LoadEmployeesSafeAsync();
-            var secTask = LoadSecurityGroupsSafeAsync();
-            await RefreshSafeAsync(); // load Users once
-            await Task.WhenAll(empTask, secTask);
+            // Start loading lookup data and wait for them to complete first
+            await LoadEmployeesSafeAsync();
+            await LoadSecurityGroupsSafeAsync();
+
+            // Now load users (depends on lookups to be available for correct display)
+            await RefreshSafeAsync();
         }
 
         private async Task LoadEmployeesSafeAsync()
