@@ -1,0 +1,83 @@
+﻿using System;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+
+namespace AATM.App.HisWpf.Helpers
+{
+    internal sealed class ComboBoxHandlerBundle
+    {
+        public TextChangedEventHandler? TextHandler;
+        public EventHandler? DropDownClosedHandler;
+        public SelectionChangedEventHandler? SelectionChangedHandler;
+        public KeyEventHandler? PreviewKeyDownHandler;
+    }
+
+    public static class ComboBoxManager
+    {
+        private static readonly DependencyProperty BundleProperty =
+            DependencyProperty.RegisterAttached("Bundle", typeof(ComboBoxHandlerBundle), typeof(ComboBoxManager), new PropertyMetadata(null));
+
+        public static void Attach(
+            ComboBox combo,
+            Action<ComboBox, string>? onTextChanged = null,
+            Action<ComboBox, SelectionChangedEventArgs>? onSelectionChanged = null,
+            Action<ComboBox, KeyEventArgs>? onPreviewKeyDown = null,
+            Action<ComboBox>? onDropDownClosed = null)
+        {
+            if (combo == null) return;
+
+            Detach(combo); // ensure clean state
+
+            var bundle = new ComboBoxHandlerBundle();
+
+            // TextChanged: the sender will be the inner TextBox. Use captured `combo` to get Text.
+            bundle.TextHandler = (s, e) =>
+            {
+                if (onTextChanged != null)
+                    onTextChanged(combo, combo.Text ?? string.Empty);
+            };
+            combo.AddHandler(TextBox.TextChangedEvent, bundle.TextHandler);
+
+            // DropDownClosed uses EventHandler (object, EventArgs)
+            bundle.DropDownClosedHandler = (_, __) => onDropDownClosed?.Invoke(combo);
+            combo.DropDownClosed += bundle.DropDownClosedHandler;
+
+            bundle.SelectionChangedHandler = (s, e) =>
+            {
+                onSelectionChanged?.Invoke(combo, e);
+            };
+            combo.SelectionChanged += bundle.SelectionChangedHandler;
+
+            bundle.PreviewKeyDownHandler = (s, e) =>
+            {
+                onPreviewKeyDown?.Invoke(combo, e);
+            };
+            combo.PreviewKeyDown += bundle.PreviewKeyDownHandler;
+
+            combo.SetValue(BundleProperty, bundle);
+        }
+
+        public static void Detach(ComboBox combo)
+        {
+            if (combo == null) return;
+
+            var bundle = combo.GetValue(BundleProperty) as ComboBoxHandlerBundle;
+            if (bundle == null) return;
+
+            if (bundle.TextHandler != null)
+                combo.RemoveHandler(TextBox.TextChangedEvent, bundle.TextHandler);
+
+            if (bundle.DropDownClosedHandler != null)
+                combo.DropDownClosed -= bundle.DropDownClosedHandler;
+
+            if (bundle.SelectionChangedHandler != null)
+                combo.SelectionChanged -= bundle.SelectionChangedHandler;
+
+            if (bundle.PreviewKeyDownHandler != null)
+                combo.PreviewKeyDown -= bundle.PreviewKeyDownHandler;
+
+            combo.ClearValue(BundleProperty);
+        }
+    }
+}

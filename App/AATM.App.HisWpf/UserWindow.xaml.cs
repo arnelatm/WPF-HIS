@@ -6,7 +6,6 @@ using System.Windows.Data;
 using System.Windows.Markup;
 using Microsoft.Extensions.DependencyInjection;
 using System.Windows.Input;
-using System.Windows.Media;
 using AATM.Contracts.Dtos;
 using System.Linq;
 using AATM.App.HisWpf.Behaviors;
@@ -42,7 +41,6 @@ namespace AATM.App.HisWpf
             _localization_service = localizationService;
             DataContext = vm;
 
-
             btnFirst.Click += BtnFirst_Click;
             btnPrev.Click += BtnPrev_Click;
             btnNext.Click += BtnNext_Click;
@@ -63,9 +61,37 @@ namespace AATM.App.HisWpf
             ComboBoxKeyboardBehavior.SetEnableKeyboardNavigation(cmbSecurityGroupIdNo, true);
             cmbSecurityGroupIdNo.SelectedValuePath = nameof(SecurityGroupLookupDto.IdNo);
 
-            // Attach unified handlers so logic is shared for both ComboBoxes
-            AttachComboBoxHandlers(cmbEmployeeIdNo);
-            AttachComboBoxHandlers(cmbSecurityGroupIdNo);
+            // Use shared ComboBox manager to minimize local wiring
+            ComboBoxManager.Attach(cmbEmployeeIdNo,
+                onTextChanged: (c, text) => ViewModel.EmployeeFilterText = text,
+                onSelectionChanged: (c, e) =>
+                {
+                    if (e.AddedItems?.Count > 0 && e.AddedItems[0] is EmployeeLookupDto emp)
+                    {
+                        if (ViewModel.SelectedUser != null) ViewModel.SelectedUser.EmployeeIdNo = emp.IdNo;
+                        ViewModel.EmployeeFilterText = emp.DisplayText ?? string.Empty;
+                    }
+                },
+                onPreviewKeyDown: (c, ke) =>
+                {
+                    // keep any small preview-key logic you need here (Backspace/Escape/Enter handling)
+                },
+                onDropDownClosed: c => ComboBoxHelpers.ClearFilterAndRefresh(c, clearFilterText: false)
+            );
+
+            ComboBoxManager.Attach(cmbSecurityGroupIdNo,
+                onTextChanged: (c, text) => ViewModel.SecurityGroupFilterText = text,
+                onSelectionChanged: (c, e) =>
+                {
+                    if (e.AddedItems?.Count > 0 && e.AddedItems[0] is SecurityGroupLookupDto sg)
+                    {
+                        if (ViewModel.SelectedUser != null) ViewModel.SelectedUser.SecurityGroupIdNo = sg.IdNo;
+                        ViewModel.SecurityGroupFilterText = sg.DisplayText ?? string.Empty;
+                    }
+                },
+                onPreviewKeyDown: (c, ke) => { /* small custom logic if needed */ },
+                onDropDownClosed: c => ComboBoxHelpers.ClearFilterAndRefresh(c, clearFilterText: true)
+            );
         }
 
         private UserViewModel ViewModel => (UserViewModel)DataContext;
@@ -97,46 +123,10 @@ namespace AATM.App.HisWpf
             ApplyFilter(null);
         }
 
+        // Minimal forwarder to centralized filtering helper
         private void ApplyFilter(string? term)
         {
-            var view = CollectionViewSource.GetDefaultView(dataGrid.ItemsSource);
-            if (view == null) return;
-
-            if (string.IsNullOrWhiteSpace(term))
-            {
-                view.Filter = null;
-            }
-            else
-            {
-                var t = term.Trim();
-                view.Filter = o =>
-                {
-                    if (o is null) return false;
-                    // Try to access known properties safely (handles nulls)
-                    string GetString(Func<dynamic, object?> sel)
-                    {
-                        try { var v = sel((dynamic)o); return v?.ToString() ?? string.Empty; }
-                        catch { return string.Empty; }
-                    }
-
-                    return GetString(x => x.IdNo).IndexOf(t, StringComparison.OrdinalIgnoreCase) >= 0
-                        || GetString(x => x.OriginalString).IndexOf(t, StringComparison.OrdinalIgnoreCase) >= 0
-                        || GetString(x => x.LocalizedString).IndexOf(t, StringComparison.OrdinalIgnoreCase) >= 0
-                        || GetString(x => x.ModuleName).IndexOf(t, StringComparison.OrdinalIgnoreCase) >= 0
-                        || GetString(x => x.UIIdentifier).IndexOf(t, StringComparison.OrdinalIgnoreCase) >= 0
-                        || GetString(x => x.LanguageCode).IndexOf(t, StringComparison.OrdinalIgnoreCase) >= 0;
-                };
-            }
-
-            view.Refresh();
-
-            // Optional: select first row after filtering
-            if (dataGrid.Items.Count > 0)
-            {
-                var first = dataGrid.Items[0];
-                dataGrid.SelectedItem = first;
-                dataGrid.ScrollIntoView(first);
-            }
+            DataGridFilterHelper.ApplyTextFilter(dataGrid, term);
         }
 
         private void BtnSwitchLanguage_Click(object sender, RoutedEventArgs e)
@@ -325,21 +315,18 @@ namespace AATM.App.HisWpf
                 // Synchronize ComboBoxes with the selected user
                 try
                 {
-                    cmbEmployeeIdNo.SelectedValue = ViewModel.SelectedUser?.EmployeeIdNo;
-                    cmbSecurityGroupIdNo.SelectedValue = ViewModel.SelectedUser?.SecurityGroupIdNo;
+                    // NOTE: SelectedValue is bound in XAML (TwoWay).  Remove manual SelectedValue assignments to avoid races.
 
-                    // Use helper to find display text (prefer generic overloads when we have strongly-typed collections)
+                    // Use fast lookup map first, fallback to helper if needed
                     var selEmpId = ViewModel.SelectedUser?.EmployeeIdNo ?? 0;
                     if (selEmpId != 0)
                     {
-                        // Fast path: use ViewModel map built by BuildLookupMaps()
                         if (ViewModel.EmployeeMap.TryGetValue(selEmpId, out var disp) && !string.IsNullOrWhiteSpace(disp))
                         {
                             ViewModel.EmployeeFilterText = disp;
                         }
                         else
                         {
-                            // Fallback: use SelectionDisplayHelper convenience overloads
                             string? display =
                                 SelectionDisplayHelper.GetDisplayTextById<EmployeeLookupDto>(
                                     selEmpId,
@@ -399,200 +386,35 @@ namespace AATM.App.HisWpf
             txtRecordCount.Text = ViewModel.Users.Count.ToString();
         }
 
-        // Attach common handlers for editable, filterable ComboBoxes
-        private void AttachComboBoxHandlers(ComboBox combo)
+        // Add this override to unsubscribe event handlers when the window closes
+        protected override void OnClosed(System.EventArgs e)
         {
-            // TextChanged occurs on the inner TextBox; subscribe via routed event
-            combo.RemoveHandler(System.Windows.Controls.TextBox.TextChangedEvent, new TextChangedEventHandler(ComboBox_TextChanged));
-            combo.AddHandler(System.Windows.Controls.TextBox.TextChangedEvent, new TextChangedEventHandler(ComboBox_TextChanged));
+            // Unsubscribe UI event handlers to avoid leaks
+            try { ViewModel.PropertyChanged -= ViewModel_PropertyChanged; } catch { }
 
-            combo.DropDownClosed -= ComboBox_DropDownClosed;
-            combo.DropDownClosed += ComboBox_DropDownClosed;
-
-            combo.SelectionChanged -= ComboBox_SelectionChanged;
-            combo.SelectionChanged += ComboBox_SelectionChanged;
-
-            combo.PreviewKeyDown -= ComboBox_PreviewKeyDown;
-            combo.PreviewKeyDown += ComboBox_PreviewKeyDown;
-        }
-
-        private void ComboBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (e.Changes.Count == 0) return;
-            if (sender is not ComboBox combo) return;
-
-            if (combo == cmbEmployeeIdNo)
-            {
-                ViewModel.EmployeeFilterText = combo.Text ?? string.Empty;
-                ComboBoxHelpers.EnsureDropDownOpen(combo);
-            }
-            else if (combo == cmbSecurityGroupIdNo)
-            {
-                ViewModel.SecurityGroupFilterText = combo.Text ?? string.Empty;
-                ComboBoxHelpers.EnsureDropDownOpen(combo);
-            }
-        }
-
-        private void ComboBox_DropDownClosed(object? sender, EventArgs e)
-        {
-            if (sender is not ComboBox combo) return;
-
-            // Always clear temporary view filters when dropdown closes
-            ComboBoxHelpers.ClearFilterAndRefresh(combo, clearFilterText: combo == cmbSecurityGroupIdNo);
-
-            // leave EmployeeFilterText intact so manual edits persist
-        }
-
-        private void ComboBox_SelectionChanged(object? sender, SelectionChangedEventArgs e)
-        {
             try
             {
-                if (sender is not ComboBox combo) return;
-
-                if (e.AddedItems != null && e.AddedItems.Count > 0)
-                {
-                    if (combo == cmbEmployeeIdNo && e.AddedItems[0] is EmployeeLookupDto emp)
-                    {
-                        if (ViewModel.SelectedUser != null)
-                            ViewModel.SelectedUser.EmployeeIdNo = emp.IdNo;
-
-                        ViewModel.EmployeeFilterText = emp.DisplayText ?? string.Empty;
-                    }
-                    else if (combo == cmbSecurityGroupIdNo && e.AddedItems[0] is SecurityGroupLookupDto sg)
-                    {
-                        if (ViewModel.SelectedUser != null)
-                            ViewModel.SelectedUser.SecurityGroupIdNo = sg.IdNo;
-
-                        ViewModel.SecurityGroupFilterText = sg.DisplayText ?? string.Empty;
-                    }
-                }
-                else
-                {
-                    if (combo.SelectedItem == null)
-                    {
-                        if (combo == cmbEmployeeIdNo)
-                            ViewModel.EmployeeFilterText = string.Empty;
-                        else if (combo == cmbSecurityGroupIdNo)
-                            ViewModel.SecurityGroupFilterText = string.Empty;
-                    }
-                }
-
-                // Postpone clearing the temporary filter to allow ComboBox to commit selection
-                Dispatcher.BeginInvoke((Action)(() => ComboBoxHelpers.ClearFilterAndRefresh(combo)), System.Windows.Threading.DispatcherPriority.Background);
-
-                if (combo.IsDropDownOpen)
-                    combo.IsDropDownOpen = false;
+                btnFirst.Click -= BtnFirst_Click;
+                btnPrev.Click -= BtnPrev_Click;
+                btnNext.Click -= BtnNext_Click;
+                btnLast.Click -= BtnLast_Click;
+                btnSave.Click -= BtnSave_Click;
+                btnDelete.Click -= BtnDelete_Click;
+                btnFind.Click -= BtnFind_Click;
+                btnResetFilter.Click -= BtnResetFilter_Click;
+                btnSwitchLanguage.Click -= BtnSwitchLanguage_Click;
             }
-            catch
-            {
-                // keep UI resilient
-            }
-        }
+            catch { }
 
-        // Unified PreviewKeyDown handler that supports both Employee and SecurityGroup ComboBoxes
-        private void ComboBox_PreviewKeyDown(object? sender, KeyEventArgs e)
-        {
+            // Detach combo handlers (use shared manager)
             try
             {
-                if (sender is not ComboBox combo) return;
-
-                // Handle Backspace/Delete to clear full selection when entire text is selected
-                if (e.Key == Key.Back || e.Key == Key.Delete)
-                {
-                    var tb = ComboBoxHelpers.FindVisualChild<TextBox>(combo);
-                    if (tb != null)
-                    {
-                        var textLength = tb.Text?.Length ?? 0;
-                        if (tb.SelectionLength > 0 && tb.SelectionLength == textLength)
-                        {
-                            tb.Clear();
-                            if (combo == cmbEmployeeIdNo)
-                                ViewModel.EmployeeFilterText = string.Empty;
-                            else if (combo == cmbSecurityGroupIdNo)
-                                ViewModel.SecurityGroupFilterText = string.Empty;
-
-                            combo.SelectedItem = null;
-
-                            ComboBoxHelpers.ClearFilterAndRefresh(combo);
-
-                            e.Handled = true;
-                            return;
-                        }
-                    }
-                }
-
-                if (e.Key == Key.Enter)
-                {
-                    if (combo.SelectedItem != null)
-                    {
-                        // already selected -> ensure model sync
-                        if (combo == cmbEmployeeIdNo && combo.SelectedItem is EmployeeLookupDto emp)
-                        {
-                            if (ViewModel.SelectedUser != null)
-                                ViewModel.SelectedUser.EmployeeIdNo = emp.IdNo;
-
-                            ViewModel.EmployeeFilterText = emp.DisplayText ?? string.Empty;
-                        }
-                        else if (combo == cmbSecurityGroupIdNo && combo.SelectedItem is SecurityGroupLookupDto sg)
-                        {
-                            if (ViewModel.SelectedUser != null)
-                                ViewModel.SelectedUser.SecurityGroupIdNo = sg.IdNo;
-
-                            ViewModel.SecurityGroupFilterText = sg.DisplayText ?? string.Empty;
-                        }
-                    }
-                    else
-                    {
-                        var typed = combo.Text?.Trim() ?? string.Empty;
-                        if (!string.IsNullOrEmpty(typed))
-                        {
-                            if (combo == cmbEmployeeIdNo)
-                            {
-                                if (ComboBoxHelpers.TryMatchByText(cmbEmployeeIdNo, typed, out var mEmpObj) && mEmpObj is EmployeeLookupDto mEmp)
-                                {
-                                    if (ViewModel.SelectedUser != null)
-                                        ViewModel.SelectedUser.EmployeeIdNo = mEmp.IdNo;
-
-                                    ViewModel.EmployeeFilterText = mEmp.DisplayText ?? string.Empty;
-                                    combo.SelectedValue = mEmp.IdNo;
-                                }
-                            }
-                            else if (combo == cmbSecurityGroupIdNo)
-                            {
-                                if (ComboBoxHelpers.TryMatchByText(cmbSecurityGroupIdNo, typed, out var mSecObj) && mSecObj is SecurityGroupLookupDto mSec)
-                                {
-                                    if (ViewModel.SelectedUser != null)
-                                        ViewModel.SelectedUser.SecurityGroupIdNo = mSec.IdNo;
-
-                                    ViewModel.SecurityGroupFilterText = mSec.DisplayText ?? string.Empty;
-                                    combo.SelectedValue = mSec.IdNo;
-                                }
-                            }
-                        }
-                    }
-
-                    ComboBoxHelpers.ClearFilterAndRefresh(combo);
-
-                    if (combo.IsDropDownOpen) combo.IsDropDownOpen = false;
-                    e.Handled = true;
-                }
-                else if (e.Key == Key.Escape)
-                {
-                    if (combo.IsDropDownOpen) combo.IsDropDownOpen = false;
-
-                    combo.SelectedItem = null;
-                    if (combo == cmbEmployeeIdNo) ViewModel.EmployeeFilterText = string.Empty;
-                    else if (combo == cmbSecurityGroupIdNo) ViewModel.SecurityGroupFilterText = string.Empty;
-
-                    ComboBoxHelpers.ClearFilterAndRefresh(combo);
-
-                    e.Handled = true;
-                }
+                ComboBoxManager.Detach(cmbEmployeeIdNo);
+                ComboBoxManager.Detach(cmbSecurityGroupIdNo);
             }
-            catch
-            {
-                // ignore
-            }
+            catch { }
+
+            base.OnClosed(e);
         }
     }
 }

@@ -1,3 +1,16 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Windows.Input;
+using System.Threading;
+using System.Windows.Data;
+using System.Collections.Specialized;
+using System.Threading.Tasks;
+using Timer = System.Timers.Timer;
 using AATM.App.HisWpf.ViewModels;
 using AATM.Business.Validation.ValidationRules;
 using AATM.Business.Validation.Validators;
@@ -7,15 +20,6 @@ using AATM.Core.Localization;
 using AATM.DataAccess;
 using AATM.Modules.Localization;
 using AATM.Modules.Users;
-using System.Collections;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows.Input;
-using System.Threading;
-using System.Windows.Data;
-using System.Collections.Specialized;
-using Timer = System.Timers.Timer;
 
 namespace AATM.App.HisWpf.ViewModels
 {
@@ -103,12 +107,12 @@ namespace AATM.App.HisWpf.ViewModels
             _securityViewSource.Source = AvailableSecurityGroups;
             _securityViewSource.Filter += (_, args) => args.Accepted = SecurityGroupFilterPredicate(args.Item as SecurityGroupLookupDto);
 
-            // setup debounce timers
+            // setup debounce timers (async fetch handlers)
             _employeeFilterTimer = new Timer(FilterDebounceMs) { AutoReset = false };
-            _employeeFilterTimer.Elapsed += (s, e) => App.Current.Dispatcher.Invoke(ApplyEmployeeFilter);
+            _employeeFilterTimer.Elapsed += async (_, __) => await ApplyEmployeeFilterAsync().ConfigureAwait(false);
 
             _securityFilterTimer = new Timer(FilterDebounceMs) { AutoReset = false };
-            _securityFilterTimer.Elapsed += (s, e) => App.Current.Dispatcher.Invoke(ApplySecurityGroupFilter);
+            _securityFilterTimer.Elapsed += async (_, __) => await ApplySecurityGroupFilterAsync().ConfigureAwait(false);
 
             SaveCommand = new AsyncRelayCommand(
                 async _ => await Save(),
@@ -185,80 +189,127 @@ namespace AATM.App.HisWpf.ViewModels
             }
         }
 
-        private void ApplyEmployeeFilter()
+        // Async-safe filter methods: fetch missing lookup from repository and insert into Available* collections on UI thread.
+        private async Task ApplyEmployeeFilterAsync()
         {
-            // Ensure view refresh happens on UI thread
-            if (!App.Current.Dispatcher.CheckAccess())
+            try
             {
-                App.Current.Dispatcher.Invoke(ApplyEmployeeFilter);
-                return;
-            }
-
-            var view = _employeeViewSource.View;
-            if (view != null)
-            {
-                using (view.DeferRefresh())
+                var dispatcher = App.Current?.Dispatcher;
+                if (dispatcher == null)
                 {
-                    // refresh will be deferred until Dispose
+                    // No dispatcher available (possibly design-time), nothing to do.
+                    return;
                 }
-                // Ensure selected user's employee is present in available list
+
+                // Capture selected id and quick "exists" check on the UI thread to avoid races.
+                var (selId, alreadyExists) = await dispatcher.InvokeAsync(() =>
+                {
+                    int id = SelectedUser?.EmployeeIdNo ?? 0;
+                    bool exists = id != 0 && AvailableEmployees.Any(e => e.IdNo == id);
+                    return (id, exists);
+                });
+
+                if (selId == 0 || alreadyExists)
+                    return;
+
+                // Fetch from repository off UI thread
+                EmployeeLookupDto? found = null;
                 try
                 {
-                    if (SelectedUser != null)
-                    {
-                        var selId = SelectedUser.EmployeeIdNo;
-                        if (selId != 0 && !AvailableEmployees.Any(e => e.IdNo == selId))
-                        {
-                            var found = AvailableEmployees.FirstOrDefault(e => e.IdNo == selId);
-                            if (found != null)
-                            {
-                                AvailableEmployees.Insert(0, found);
-                                // keep map in sync
-                                BuildLookupMaps();
-                                OnPropertyChanged(nameof(EmployeeMap));
-                            }
-                        }
-                    }
+                    var list = await _employeeRepo.GetEmployeesLookupAsync().ConfigureAwait(false);
+                    found = list.FirstOrDefault(e => e.IdNo == selId);
                 }
-                catch { }
+                catch
+                {
+                    // repository failure - swallow (optional: log). We'll surface a friendly error later if needed.
+                }
+
+                if (found != null)
+                {
+                    // Insert on UI thread
+                    await dispatcher.InvokeAsync(() =>
+                    {
+                        if (!AvailableEmployees.Any(e => e.IdNo == selId))
+                        {
+                            AvailableEmployees.Insert(0, found);
+                            BuildLookupMaps();
+                            OnPropertyChanged(nameof(EmployeeMap));
+                            _employeeViewSource.View?.Refresh();
+                        }
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorText = $"Employee lookup failed: {ex.Message}";
+                OnPropertyChanged(nameof(ErrorText));
             }
         }
 
-        private void ApplySecurityGroupFilter()
-        {
-            if (!App.Current.Dispatcher.CheckAccess())
-            {
-                App.Current.Dispatcher.Invoke(ApplySecurityGroupFilter);
-                return;
-            }
+        // Pseudocode / Plan:
+        // 1. Get the application's Dispatcher; if null, return (design-time or no UI).
+        // 2. On the UI thread capture the currently selected SecurityGroupId and whether that id already exists
+        //    in the AvailableSecurityGroups collection (do both reads in one dispatcher invocation to avoid races).
+        // 3. If id is 0 or already exists, return.
+        // 4. Off the UI thread, call repository to fetch lookup list and try to find the item with the id.
+        // 5. If found, invoke back on UI thread to insert the item at position 0 (only if still missing), rebuild maps,
+        //    notify property changed, and refresh the collection view.
+        // 6. Catch and report errors into ErrorText and notify UI.
 
-            var view = _securityViewSource.View;
-            if (view != null)
+        // Replaces the existing ApplySecurityGroupFilterAsync implementation.
+        private async Task ApplySecurityGroupFilterAsync()
+        {
+            try
             {
-                using (view.DeferRefresh())
+                var dispatcher = App.Current?.Dispatcher;
+                if (dispatcher == null)
                 {
-                    // deferred
+                    // No dispatcher available (possibly design-time), nothing to do.
+                    return;
                 }
 
+                // Capture selected id and quick "exists" check on the UI thread to avoid races.
+                var (selId, alreadyExists) = await dispatcher.InvokeAsync(() =>
+                {
+                    int id = SelectedUser?.SecurityGroupIdNo ?? 0;
+                    bool exists = id != 0 && AvailableSecurityGroups.Any(s => s.IdNo == id);
+                    return (id, exists);
+                });
+
+                if (selId == 0 || alreadyExists)
+                    return;
+
+                // Fetch from repository off UI thread
+                SecurityGroupLookupDto? found = null;
                 try
                 {
-                    if (SelectedUser != null)
-                    {
-                        var selId = SelectedUser.SecurityGroupIdNo;
-                        if (selId != 0 && !AvailableSecurityGroups.Any(s => s.IdNo == selId))
-                        {
-                            var found = AvailableSecurityGroups.FirstOrDefault(s => s.IdNo == selId);
-                            if (found != null)
-                            {
-                                AvailableSecurityGroups.Insert(0, found);
-                                // keep map in sync
-                                BuildLookupMaps();
-                                OnPropertyChanged(nameof(SecurityMap));
-                            }
-                        }
-                    }
+                    var list = await _securityGroupRepo.GetSecurityGroupsLookupAsync().ConfigureAwait(false);
+                    found = list.FirstOrDefault(s => s.IdNo == selId);
                 }
-                catch { }
+                catch
+                {
+                    // repository failure - swallow (optional: log). We'll surface a friendly error later if needed.
+                }
+
+                if (found != null)
+                {
+                    // Insert on UI thread
+                    await dispatcher.InvokeAsync(() =>
+                    {
+                        if (!AvailableSecurityGroups.Any(s => s.IdNo == selId))
+                        {
+                            AvailableSecurityGroups.Insert(0, found);
+                            BuildLookupMaps();
+                            OnPropertyChanged(nameof(SecurityMap));
+                            _securityViewSource.View?.Refresh();
+                        }
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorText = $"Security group lookup failed: {ex.Message}";
+                OnPropertyChanged(nameof(ErrorText));
             }
         }
 
@@ -355,24 +406,42 @@ namespace AATM.App.HisWpf.ViewModels
         public bool HasErrors => _errors.Count > 0;
         public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
 
-        public IEnumerable GetErrors(string propertyName)
-        {
-            if (string.IsNullOrEmpty(propertyName))
-            {
-                return _errors.Values.SelectMany(e => e).ToList();
-            }
-            return _errors.TryGetValue(propertyName, out var errors) ? errors : Enumerable.Empty<string>();
-        }
-
-        private void ValidateProperty(string propertyName, object value)
+        private void ValidateProperty(string propertyName, object? value)
         {
             var errors = new List<string>();
-            if (propertyName == nameof(UserDto.UserName) && string.IsNullOrWhiteSpace((string)value))
-                errors.Add("User Name is required.");
-            if (propertyName == nameof(UserDto.SecurityGroupIdNo) && string.IsNullOrWhiteSpace((string)value))
-                errors.Add("Security Group ID is required.");
-            if (propertyName == nameof(UserDto.EmployeeIdNo) && string.IsNullOrWhiteSpace((string)value))
-                errors.Add("Employee ID Number is required.");
+
+            if (propertyName == nameof(UserDto.UserName))
+            {
+                var str = value switch
+                {
+                    null => string.Empty,
+                    string s => s,
+                    _ => Convert.ToString(value) ?? string.Empty
+                };
+
+                if (string.IsNullOrWhiteSpace(str))
+                    errors.Add("User Name is required.");
+            }
+            else if (propertyName == nameof(UserDto.SecurityGroupIdNo))
+            {
+                // Accept int or string convertible to int, treat 0 as missing
+                var valid = false;
+                if (value is int i) valid = i != 0;
+                else if (value != null && int.TryParse(Convert.ToString(value), out var parsed)) valid = parsed != 0;
+
+                if (!valid)
+                    errors.Add("Security Group ID is required.");
+            }
+            else if (propertyName == nameof(UserDto.EmployeeIdNo))
+            {
+                var valid = false;
+                if (value is int i) valid = i != 0;
+                else if (value != null && int.TryParse(Convert.ToString(value), out var parsed)) valid = parsed != 0;
+
+                if (!valid)
+                    errors.Add("Employee ID Number is required.");
+            }
+
             if (errors.Count > 0)
                 _errors[propertyName] = errors;
             else
