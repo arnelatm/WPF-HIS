@@ -14,6 +14,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using System.Threading;
 using System.Windows.Data;
+using System.Collections.Specialized;
 using Timer = System.Timers.Timer;
 
 namespace AATM.App.HisWpf.ViewModels
@@ -120,6 +121,12 @@ namespace AATM.App.HisWpf.ViewModels
             RefreshCommand = new AsyncRelayCommand(
                 async _ => await Refresh()
             );
+
+            AvailableEmployees.CollectionChanged += AvailableEmployees_CollectionChanged;
+            AvailableSecurityGroups.CollectionChanged += AvailableSecurityGroups_CollectionChanged;
+
+            foreach (var e in AvailableEmployees) AttachEmployeeItemHandlers(e);
+            foreach (var s in AvailableSecurityGroups) AttachSecurityItemHandlers(s);
         }
 
         private bool EmployeeFilterPredicate(EmployeeLookupDto? emp)
@@ -204,7 +211,12 @@ namespace AATM.App.HisWpf.ViewModels
                         {
                             var found = AvailableEmployees.FirstOrDefault(e => e.IdNo == selId);
                             if (found != null)
+                            {
                                 AvailableEmployees.Insert(0, found);
+                                // keep map in sync
+                                BuildLookupMaps();
+                                OnPropertyChanged(nameof(EmployeeMap));
+                            }
                         }
                     }
                 }
@@ -237,7 +249,12 @@ namespace AATM.App.HisWpf.ViewModels
                         {
                             var found = AvailableSecurityGroups.FirstOrDefault(s => s.IdNo == selId);
                             if (found != null)
+                            {
                                 AvailableSecurityGroups.Insert(0, found);
+                                // keep map in sync
+                                BuildLookupMaps();
+                                OnPropertyChanged(nameof(SecurityMap));
+                            }
                         }
                     }
                 }
@@ -253,6 +270,10 @@ namespace AATM.App.HisWpf.ViewModels
                 AvailableEmployees.Clear();
                 foreach (var e in employees) AvailableEmployees.Add(e);
                 _employeeViewSource.View?.Refresh();
+
+                // rebuild lookup map and notify consumers
+                BuildLookupMaps();
+                OnPropertyChanged(nameof(EmployeeMap));
             });
         }
 
@@ -264,6 +285,10 @@ namespace AATM.App.HisWpf.ViewModels
                 AvailableSecurityGroups.Clear();
                 foreach (var sg in securityGroups) AvailableSecurityGroups.Add(sg);
                 _securityViewSource.View?.Refresh();
+
+                // rebuild lookup map and notify consumers
+                BuildLookupMaps();
+                OnPropertyChanged(nameof(SecurityMap));
             });
         }
 
@@ -442,5 +467,159 @@ namespace AATM.App.HisWpf.ViewModels
 
         private int _initOnce; // 0 = not started, 1 = started
         private readonly SemaphoreSlim _loadLock = new(1, 1);
+
+        // add members
+        private Dictionary<int, string> _employeeMap = new();
+        public IReadOnlyDictionary<int, string> EmployeeMap => _employeeMap;
+        private Dictionary<int, string> _securityMap = new();
+        public IReadOnlyDictionary<int, string> SecurityMap => _securityMap;
+
+        // populate after loading lists
+        private void BuildLookupMaps()
+        {
+            _employeeMap = AvailableEmployees
+                .Where(e => e != null)
+                .ToDictionary(e => e.IdNo, e => e.DisplayText ?? string.Empty);
+
+            _securityMap = AvailableSecurityGroups
+                .Where(s => s != null)
+                .ToDictionary(s => s.IdNo, s => s.DisplayText ?? string.Empty);
+        }
+
+        private void AvailableEmployees_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    if (e.NewItems != null)
+                    {
+                        foreach (EmployeeLookupDto? item in e.NewItems.OfType<EmployeeLookupDto>())
+                            if (item != null)
+                                AttachEmployeeItemHandlers(item);
+                        BuildLookupMaps();
+                        OnPropertyChanged(nameof(EmployeeMap));
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    if (e.OldItems != null)
+                    {
+                        foreach (EmployeeLookupDto? item in e.OldItems.OfType<EmployeeLookupDto>())
+                            if (item != null)
+                                DetachEmployeeItemHandlers(item);
+                        BuildLookupMaps();
+                        OnPropertyChanged(nameof(EmployeeMap));
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Replace:
+                case NotifyCollectionChangedAction.Move:
+                    BuildLookupMaps();
+                    OnPropertyChanged(nameof(EmployeeMap));
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+                    foreach (var it in AvailableEmployees) DetachEmployeeItemHandlers(it);
+                    foreach (var it in AvailableEmployees) AttachEmployeeItemHandlers(it);
+                    BuildLookupMaps();
+                    OnPropertyChanged(nameof(EmployeeMap));
+                    break;
+            }
+        }
+
+        private void AvailableSecurityGroups_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    if (e.NewItems != null)
+                    {
+                        foreach (SecurityGroupLookupDto? item in e.NewItems.OfType<SecurityGroupLookupDto>())
+                            if (item != null)
+                                AttachSecurityItemHandlers(item);
+                        BuildLookupMaps();
+                        OnPropertyChanged(nameof(SecurityMap));
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    if (e.OldItems != null)
+                    {
+                        foreach (SecurityGroupLookupDto? item in e.OldItems.OfType<SecurityGroupLookupDto>())
+                            if (item != null)
+                                DetachSecurityItemHandlers(item);
+                        BuildLookupMaps();
+                        OnPropertyChanged(nameof(SecurityMap));
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Replace:
+                case NotifyCollectionChangedAction.Move:
+                    BuildLookupMaps();
+                    OnPropertyChanged(nameof(SecurityMap));
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+                    foreach (var it in AvailableSecurityGroups) DetachSecurityItemHandlers(it);
+                    foreach (var it in AvailableSecurityGroups) AttachSecurityItemHandlers(it);
+                    BuildLookupMaps();
+                    OnPropertyChanged(nameof(SecurityMap));
+                    break;
+            }
+        }
+
+        private void AttachEmployeeItemHandlers(EmployeeLookupDto item)
+        {
+            if (item is INotifyPropertyChanged npc)
+                npc.PropertyChanged += EmployeeItem_PropertyChanged;
+        }
+
+        private void DetachEmployeeItemHandlers(EmployeeLookupDto item)
+        {
+            if (item is INotifyPropertyChanged npc)
+                npc.PropertyChanged -= EmployeeItem_PropertyChanged;
+        }
+
+        private void AttachSecurityItemHandlers(SecurityGroupLookupDto item)
+        {
+            if (item is INotifyPropertyChanged npc)
+                npc.PropertyChanged += SecurityItem_PropertyChanged;
+        }
+
+        private void DetachSecurityItemHandlers(SecurityGroupLookupDto item)
+        {
+            if (item is INotifyPropertyChanged npc)
+                npc.PropertyChanged -= SecurityItem_PropertyChanged;
+        }
+
+        private void EmployeeItem_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            if (sender is not EmployeeLookupDto item) return;
+
+            if (e.PropertyName == nameof(EmployeeLookupDto.IdNo))
+            {
+                BuildLookupMaps();
+                OnPropertyChanged(nameof(EmployeeMap));
+                return;
+            }
+
+            if (e.PropertyName == nameof(EmployeeLookupDto.DisplayText) || string.IsNullOrEmpty(e.PropertyName))
+            {
+                _employeeMap[item.IdNo] = item.DisplayText ?? string.Empty;
+                OnPropertyChanged(nameof(EmployeeMap));
+            }
+        }
+
+        private void SecurityItem_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            if (sender is not SecurityGroupLookupDto item) return;
+
+            if (e.PropertyName == nameof(SecurityGroupLookupDto.IdNo))
+            {
+                BuildLookupMaps();
+                OnPropertyChanged(nameof(SecurityMap));
+                return;
+            }
+
+            if (e.PropertyName == nameof(SecurityGroupLookupDto.DisplayText) || string.IsNullOrEmpty(e.PropertyName))
+            {
+                _securityMap[item.IdNo] = item.DisplayText ?? string.Empty;
+                OnPropertyChanged(nameof(SecurityMap));
+            }
+        }
     }
 }

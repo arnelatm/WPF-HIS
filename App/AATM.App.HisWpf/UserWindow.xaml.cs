@@ -328,23 +328,57 @@ namespace AATM.App.HisWpf
                     cmbEmployeeIdNo.SelectedValue = ViewModel.SelectedUser?.EmployeeIdNo;
                     cmbSecurityGroupIdNo.SelectedValue = ViewModel.SelectedUser?.SecurityGroupIdNo;
 
-                    // Use helper to find display text
+                    // Use helper to find display text (prefer generic overloads when we have strongly-typed collections)
                     var selEmpId = ViewModel.SelectedUser?.EmployeeIdNo ?? 0;
                     if (selEmpId != 0)
                     {
-                        var display = SelectionDisplayHelper.GetDisplayTextById(ViewModel.EmployeeView, selEmpId)
-                                      ?? SelectionDisplayHelper.GetDisplayTextById(ViewModel.AvailableEmployees, selEmpId);
-                        if (!string.IsNullOrEmpty(display))
-                            ViewModel.EmployeeFilterText = display;
+                        // Fast path: use ViewModel map built by BuildLookupMaps()
+                        if (ViewModel.EmployeeMap.TryGetValue(selEmpId, out var disp) && !string.IsNullOrWhiteSpace(disp))
+                        {
+                            ViewModel.EmployeeFilterText = disp;
+                        }
+                        else
+                        {
+                            // Fallback: use SelectionDisplayHelper convenience overloads
+                            string? display =
+                                SelectionDisplayHelper.GetDisplayTextById<EmployeeLookupDto>(
+                                    selEmpId,
+                                    ViewModel.EmployeeView as System.Collections.Generic.IEnumerable<EmployeeLookupDto>,
+                                    ViewModel.AvailableEmployees)
+                                ?? SelectionDisplayHelper.GetDisplayTextById(
+                                    selEmpId,
+                                    ViewModel.EmployeeView,
+                                    ViewModel.AvailableEmployees);
+
+                            if (!string.IsNullOrEmpty(display))
+                                ViewModel.EmployeeFilterText = display;
+                        }
                     }
 
                     var selSecId = ViewModel.SelectedUser?.SecurityGroupIdNo ?? 0;
                     if (selSecId != 0)
                     {
-                        var display = SelectionDisplayHelper.GetDisplayTextById(ViewModel.SecurityGroupView, selSecId)
-                                      ?? SelectionDisplayHelper.GetDisplayTextById(ViewModel.AvailableSecurityGroups, selSecId);
-                        if (!string.IsNullOrEmpty(display))
-                            ViewModel.SecurityGroupFilterText = display;
+                        // Fast path: use ViewModel map built by BuildLookupMaps()
+                        if (ViewModel.SecurityMap.TryGetValue(selSecId, out var disp) && !string.IsNullOrWhiteSpace(disp))
+                        {
+                            ViewModel.SecurityGroupFilterText = disp;
+                        }
+                        else
+                        {
+                            // Fallback: use SelectionDisplayHelper convenience overloads (keeps backwards compatibility)
+                            string? display =
+                                SelectionDisplayHelper.GetDisplayTextById<SecurityGroupLookupDto>(
+                                    selSecId,
+                                    ViewModel.SecurityGroupView as System.Collections.Generic.IEnumerable<SecurityGroupLookupDto>,
+                                    ViewModel.AvailableSecurityGroups)
+                                ?? SelectionDisplayHelper.GetDisplayTextById(
+                                    selSecId,
+                                    ViewModel.SecurityGroupView,
+                                    ViewModel.AvailableSecurityGroups);
+
+                            if (!string.IsNullOrEmpty(display))
+                                ViewModel.SecurityGroupFilterText = display;
+                        }
                     }
                 }
                 catch

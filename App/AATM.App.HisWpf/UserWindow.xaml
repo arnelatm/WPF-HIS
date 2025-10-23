@@ -66,54 +66,20 @@
         <Label Grid.Row="3" Grid.Column="0" Content="Employee Code - Name" Grid.ColumnSpan="2"/>
         <!-- Replace the Employee ComboBox with this self-filtering version -->
         <ComboBox Grid.Row="3" Grid.Column="2" x:Name="cmbEmployeeIdNo"
-          ItemsSource="{Binding EmployeeView}"
-          SelectedValue="{Binding SelectedUser.EmployeeIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
-          SelectedValuePath="IdNo"
           IsEditable="True"
-          IsTextSearchEnabled="False"
-          StaysOpenOnEdit="True"
-          behaviors:ComboBoxKeyboardBehavior.EnableKeyboardNavigation="True"
-          ItemContainerStyle="{StaticResource KeyboardNavigableComboBoxItemStyle}"
-          Grid.RowSpan="2" VerticalAlignment="Top"
-          behaviors:FilterableComboBoxHelper.EnableFiltering="True"
-          behaviors:FilterableComboBoxHelper.FilterPropertyName="EmployeeFilterText"
-          Text="{Binding EmployeeFilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-            <ComboBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <VirtualizingStackPanel IsItemsHost="True" VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling" />
-                </ItemsPanelTemplate>
-            </ComboBox.ItemsPanel>
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding DisplayText}"/>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
+          SelectedValuePath="IdNo"
+          SelectedValue="{Binding SelectedUser.EmployeeIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
+          Text="{Binding EmployeeFilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          ItemsSource="{Binding EmployeeView}" />
 
         <Label Grid.Row="4" Grid.Column="0" Content="Security Group Code-Name" Grid.ColumnSpan="2"/>
-        <ComboBox Grid.Row="4" Grid.Column="2" x:Name="cmbSecurityGroupIdNo" 
-          ItemsSource="{Binding SecurityGroupView}"
-          SelectedValue="{Binding SelectedUser.SecurityGroupIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
-          SelectedValuePath="IdNo"
+        <ComboBox Grid.Row="4" Grid.Column="2" x:Name="cmbSecurityGroupIdNo"
           IsEditable="True"
-          IsTextSearchEnabled="False"
-          StaysOpenOnEdit="True"
-          behaviors:ComboBoxKeyboardBehavior.EnableKeyboardNavigation="True"
-          ItemContainerStyle="{StaticResource KeyboardNavigableComboBoxItemStyle}"
-          behaviors:FilterableComboBoxHelper.EnableFiltering="True"
-          behaviors:FilterableComboBoxHelper.FilterPropertyName="SecurityGroupFilterText"
-          Text="{Binding SecurityGroupFilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-            <ComboBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <VirtualizingStackPanel IsItemsHost="True" VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling" />
-                </ItemsPanelTemplate>
-            </ComboBox.ItemsPanel>
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding DisplayText}"/>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
+          SelectedValuePath="IdNo"
+          SelectedValue="{Binding SelectedUser.SecurityGroupIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          Text="{Binding SecurityGroupFilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          ItemsSource="{Binding SecurityGroupView}" />
+
         <Label Grid.Row="5" Grid.Column="0" Content="Password" Grid.ColumnSpan="2"/>
         <TextBox Grid.Row="5" Grid.Column="2" x:Name="txtPassword"
                  Text="{Binding SelectedUser.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True, TargetNullValue=''}"/>
@@ -130,9 +96,16 @@
         <ProgressBar Grid.Row="7" IsIndeterminate="True" Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}}" Grid.ColumnSpan="2" Margin="0,24,152,390" Grid.RowSpan="3" />
 
         <DataGrid Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="3" x:Name="dataGrid"
-          ItemsSource="{Binding Users}" AutoGenerateColumns="False"
-          SelectedItem="{Binding SelectedUser, Mode=TwoWay}"
-          Margin="0,5,0,10">
+                  ItemsSource="{Binding Users}" AutoGenerateColumns="False"
+                  SelectedItem="{Binding SelectedUser, Mode=TwoWay}"
+                  Margin="0,5,0,10"
+                  EnableRowVirtualization="True"
+                  EnableColumnVirtualization="True"
+                  VirtualizingPanel.IsVirtualizing="True"
+                  VirtualizingPanel.VirtualizationMode="Recycling"
+                  VirtualizingPanel.IsVirtualizingWhenGrouping="True"
+                  ScrollViewer.CanContentScroll="True"
+                  RowHeight="28">
             <DataGrid.Columns>
                 <local:ValidatedTextColumn Header="Id Number" Binding="{Binding IdNo}" Width="80"/>
                 <local:ValidatedTextColumn Header="User Name" Binding="{Binding UserName}" Width="100"/>
