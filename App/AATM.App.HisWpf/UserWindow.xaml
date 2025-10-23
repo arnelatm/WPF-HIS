@@ -70,16 +70,22 @@
           SelectedValuePath="IdNo"
           DisplayMemberPath="DisplayText"
           SelectedValue="{Binding SelectedUser.EmployeeIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
-          ItemsSource="{Binding AvailableEmployees}" />
+          Text="{Binding EmployeeFilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          ItemsSource="{Binding AvailableEmployees}"
+          local:ComboBoxHelpers.FilterText="{Binding EmployeeFilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          local:ComboBoxHelpers.FilterMemberPaths="DisplayText,EmployeeCode,EmployeeName" />
 
         <Label Grid.Row="4" Grid.Column="0" Content="Security Group Code-Name" Grid.ColumnSpan="2"/>
-        <!-- Security group top-level ComboBox: ViewModel-managed filtering -->
+        <!-- Security group (top-level) : bind to master list but enable per-combo filtering -->
         <ComboBox Grid.Row="4" Grid.Column="2" x:Name="cmbSecurityGroupIdNo"
           IsEditable="True"
           SelectedValuePath="IdNo"
           DisplayMemberPath="DisplayText"
           SelectedValue="{Binding SelectedUser.SecurityGroupIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          ItemsSource="{Binding AvailableSecurityGroups}" />
+          Text="{Binding SecurityGroupFilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          ItemsSource="{Binding AvailableSecurityGroups}"
+          local:ComboBoxHelpers.FilterText="{Binding SecurityGroupFilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          local:ComboBoxHelpers.FilterMemberPaths="DisplayText,Code,Name" />
 
         <Label Grid.Row="5" Grid.Column="0" Content="Password" Grid.ColumnSpan="2"/>
         <TextBox Grid.Row="5" Grid.Column="2" x:Name="txtPassword"
