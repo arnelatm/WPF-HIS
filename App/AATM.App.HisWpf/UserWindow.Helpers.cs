@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Media;
 using AATM.Contracts.Dtos;
 
@@ -10,9 +9,6 @@ namespace AATM.App.HisWpf
 {
     public partial class UserWindow
     {
-        // Suppress reopening the popup while we are programmatically clearing / refreshing bindings
-        private bool _suppressEnsureDropDownOpen;
-
         // Helper method to find child controls in the visual tree
         private static T? FindVisualChild<T>(DependencyObject parent) where T : DependencyObject
         {
@@ -43,67 +39,20 @@ namespace AATM.App.HisWpf
             return null;
         }
 
-        // Helper to get the ICollectionView for a ComboBox's ItemsSource
-        private static System.ComponentModel.ICollectionView? GetComboView(ComboBox combo)
-        {
-            return CollectionViewSource.GetDefaultView(combo.ItemsSource);
-        }
-
         // Helper to clear a combo's temporary filter and refresh on the UI thread
+        // Delegates the work to the reusable ComboBoxHelpers.
         private void ClearComboFilterAndRefresh(ComboBox combo, bool clearFilterText = false)
         {
-            var view = GetComboView(combo);
+            if (combo == null) return;
 
-            // Mark suppression so any TextChanged/PropertyChanged handlers triggered
-            // while we update bindings do not try to reopen the popup.
-            _suppressEnsureDropDownOpen = true;
-
-            if (view != null)
-            {
-                // Perform filter clear + refresh and optional ViewModel text clear asynchronously
-                Dispatcher.BeginInvoke((Action)(() =>
-                {
-                    try
-                    {
-                        view.Filter = null;
-                        view.Refresh();
-                    }
-                    catch
-                    {
-                        // swallow refresh/filter exceptions
-                    }
-
-                    if (clearFilterText)
-                    {
-                        if (combo == cmbEmployeeIdNo)
-                            ViewModel.EmployeeFilterText = string.Empty;
-                        else if (combo == cmbSecurityGroupIdNo)
-                            ViewModel.SecurityGroupFilterText = string.Empty;
-                    }
-                }), System.Windows.Threading.DispatcherPriority.Background)
-                .Task.ContinueWith(_ => { _suppressEnsureDropDownOpen = false; }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
-            }
-            else
-            {
-                // Ensure clearing filter text is always asynchronous so it doesn't run in the ComboBox Closed handler
-                Dispatcher.BeginInvoke((Action)(() =>
-                {
-                    if (clearFilterText)
-                    {
-                        if (combo == cmbEmployeeIdNo)
-                            ViewModel.EmployeeFilterText = string.Empty;
-                        else if (combo == cmbSecurityGroupIdNo)
-                            ViewModel.SecurityGroupFilterText = string.Empty;
-                    }
-                }), System.Windows.Threading.DispatcherPriority.Background)
-                .Task.ContinueWith(_ => { _suppressEnsureDropDownOpen = false; }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
-            }
+            // Delegate actual clearing/refresh to the reusable helper
+            ComboBoxHelpers.ClearFilterAndRefresh(combo, clearFilterText);
         }
 
         private void EnsureDropDownOpen(ComboBox combo)
         {
-            // Don't attempt to reopen if we are suppressing (programmatic update)
-            if (_suppressEnsureDropDownOpen)
+            // Don't attempt to reopen if the combo helper is suppressing programmatic updates
+            if (ComboBoxHelpers.IsSuppressingEnsureDropDownOpen(combo))
                 return;
 
             // Only open when the user is focused in the control (avoid opening during initialization)
@@ -119,7 +68,7 @@ namespace AATM.App.HisWpf
             {
                 try
                 {
-                    if (!_suppressEnsureDropDownOpen && !combo.IsDropDownOpen)
+                    if (!ComboBoxHelpers.IsSuppressingEnsureDropDownOpen(combo) && !combo.IsDropDownOpen)
                         combo.IsDropDownOpen = true;
                 }
                 catch (InvalidOperationException)
@@ -134,12 +83,15 @@ namespace AATM.App.HisWpf
         {
             match = null;
             if (string.IsNullOrWhiteSpace(typed)) return false;
-            match = ViewModel.AvailableEmployees.FirstOrDefault(em =>
-                (!string.IsNullOrEmpty(em.DisplayText) && string.Equals(em.DisplayText, typed, StringComparison.OrdinalIgnoreCase))
-                || (!string.IsNullOrEmpty(em.EmployeeCode) && string.Equals(em.EmployeeCode, typed, StringComparison.OrdinalIgnoreCase))
-                || (!string.IsNullOrEmpty(em.EmployeeName) && string.Equals(em.EmployeeName, typed, StringComparison.OrdinalIgnoreCase))
-            );
-            return match != null;
+
+            // Delegate matching to the reusable helper which inspects configured member paths / ToString
+            if (ComboBoxHelpers.TryMatchByText(cmbEmployeeIdNo, typed, out var obj) && obj is EmployeeLookupDto dto)
+            {
+                match = dto;
+                return true;
+            }
+
+            return false;
         }
 
         // Try to locate a security group matching typed text (code/name/display)
@@ -147,12 +99,15 @@ namespace AATM.App.HisWpf
         {
             match = null;
             if (string.IsNullOrWhiteSpace(typed)) return false;
-            match = ViewModel.AvailableSecurityGroups.FirstOrDefault(sg =>
-                (!string.IsNullOrEmpty(sg.DisplayText) && string.Equals(sg.DisplayText, typed, StringComparison.OrdinalIgnoreCase))
-                || (!string.IsNullOrEmpty(sg.SecurityGroupCode) && string.Equals(sg.SecurityGroupCode, typed, StringComparison.OrdinalIgnoreCase))
-                || (!string.IsNullOrEmpty(sg.SecurityGroupName) && string.Equals(sg.SecurityGroupName, typed, StringComparison.OrdinalIgnoreCase))
-            );
-            return match != null;
+
+            // Delegate matching to the reusable helper
+            if (ComboBoxHelpers.TryMatchByText(cmbSecurityGroupIdNo, typed, out var obj) && obj is SecurityGroupLookupDto dto)
+            {
+                match = dto;
+                return true;
+            }
+
+            return false;
         }
     }
 }

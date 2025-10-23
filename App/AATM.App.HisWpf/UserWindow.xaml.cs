@@ -38,7 +38,7 @@ namespace AATM.App.HisWpf
             {
                 await _viewModel.InitializeAsync();
             };
-            
+
             _localization_service = localizationService;
             DataContext = vm;
 
@@ -390,12 +390,12 @@ namespace AATM.App.HisWpf
             if (combo == cmbEmployeeIdNo)
             {
                 ViewModel.EmployeeFilterText = combo.Text ?? string.Empty;
-                EnsureDropDownOpen(combo);
+                EnsureDropDownOpen(combo); // delegated to UserWindow.Helpers.cs
             }
             else if (combo == cmbSecurityGroupIdNo)
             {
                 ViewModel.SecurityGroupFilterText = combo.Text ?? string.Empty;
-                EnsureDropDownOpen(combo);
+                EnsureDropDownOpen(combo); // delegated to UserWindow.Helpers.cs
             }
         }
 
@@ -404,9 +404,7 @@ namespace AATM.App.HisWpf
             if (sender is not ComboBox combo) return;
 
             // Always clear temporary view filters when dropdown closes
-            ClearComboFilterAndRefresh(combo, clearFilterText: combo == cmbSecurityGroupIdNo);
-
-            // leave EmployeeFilterText intact so manual edits persist
+            ClearComboFilterAndRefresh(combo, clearFilterText: combo == cmbSecurityGroupIdNo); // delegated
         }
 
         private void ComboBox_SelectionChanged(object? sender, SelectionChangedEventArgs e)
@@ -444,11 +442,7 @@ namespace AATM.App.HisWpf
                 }
 
                 // Postpone clearing the temporary filter to allow ComboBox to commit selection
-                var view = GetComboView(combo);
-                if (view != null)
-                {
-                    Dispatcher.BeginInvoke((Action)(() => ClearComboFilterAndRefresh(combo)), System.Windows.Threading.DispatcherPriority.Background);
-                }
+                Dispatcher.BeginInvoke((Action)(() => ClearComboFilterAndRefresh(combo)), System.Windows.Threading.DispatcherPriority.Background);
 
                 if (combo.IsDropDownOpen)
                     combo.IsDropDownOpen = false;
@@ -466,13 +460,14 @@ namespace AATM.App.HisWpf
             {
                 if (sender is not ComboBox combo) return;
 
-                // Handle Backspace/Delete to clear full selection
+                // Handle Backspace/Delete to clear full selection when entire text is selected
                 if (e.Key == Key.Back || e.Key == Key.Delete)
                 {
-                    var tb = FindVisualChild<TextBox>(combo);
+                    var tb = FindVisualChild<TextBox>(combo); // delegated to UserWindow.Helpers.cs
                     if (tb != null)
                     {
-                        if (tb.SelectionLength > 0 && tb.SelectionLength == (tb.Text?.Length ?? 0))
+                        var textLength = tb.Text?.Length ?? 0;
+                        if (tb.SelectionLength > 0 && tb.SelectionLength == textLength)
                         {
                             tb.Clear();
                             if (combo == cmbEmployeeIdNo)
@@ -482,7 +477,7 @@ namespace AATM.App.HisWpf
 
                             combo.SelectedItem = null;
 
-                            ClearComboFilterAndRefresh(combo);
+                            ClearComboFilterAndRefresh(combo); // delegated
 
                             e.Handled = true;
                             return;
@@ -494,7 +489,7 @@ namespace AATM.App.HisWpf
                 {
                     if (combo.SelectedItem != null)
                     {
-                        // already selected
+                        // already selected -> ensure model sync
                         if (combo == cmbEmployeeIdNo && combo.SelectedItem is EmployeeLookupDto emp)
                         {
                             if (ViewModel.SelectedUser != null)
@@ -517,30 +512,30 @@ namespace AATM.App.HisWpf
                         {
                             if (combo == cmbEmployeeIdNo)
                             {
-                                if (TryMatchEmployeeByText(typed, out var mEmp))
+                                if (TryMatchEmployeeByText(typed, out var mEmp) && mEmp != null) // delegated
                                 {
                                     if (ViewModel.SelectedUser != null)
-                                        ViewModel.SelectedUser.EmployeeIdNo = mEmp!.IdNo;
+                                        ViewModel.SelectedUser.EmployeeIdNo = mEmp.IdNo;
 
-                                    ViewModel.EmployeeFilterText = mEmp!.DisplayText ?? string.Empty;
+                                    ViewModel.EmployeeFilterText = mEmp.DisplayText ?? string.Empty;
                                     combo.SelectedValue = mEmp.IdNo;
                                 }
                             }
                             else if (combo == cmbSecurityGroupIdNo)
                             {
-                                if (TryMatchSecurityGroupByText(typed, out var mSec))
+                                if (TryMatchSecurityGroupByText(typed, out var mSec) && mSec != null) // delegated
                                 {
                                     if (ViewModel.SelectedUser != null)
-                                        ViewModel.SelectedUser.SecurityGroupIdNo = mSec!.IdNo;
+                                        ViewModel.SelectedUser.SecurityGroupIdNo = mSec.IdNo;
 
-                                    ViewModel.SecurityGroupFilterText = mSec!.DisplayText ?? string.Empty;
+                                    ViewModel.SecurityGroupFilterText = mSec.DisplayText ?? string.Empty;
                                     combo.SelectedValue = mSec.IdNo;
                                 }
                             }
                         }
                     }
 
-                    ClearComboFilterAndRefresh(combo);
+                    ClearComboFilterAndRefresh(combo); // delegated
 
                     if (combo.IsDropDownOpen) combo.IsDropDownOpen = false;
                     e.Handled = true;
@@ -553,7 +548,7 @@ namespace AATM.App.HisWpf
                     if (combo == cmbEmployeeIdNo) ViewModel.EmployeeFilterText = string.Empty;
                     else if (combo == cmbSecurityGroupIdNo) ViewModel.SecurityGroupFilterText = string.Empty;
 
-                    ClearComboFilterAndRefresh(combo);
+                    ClearComboFilterAndRefresh(combo); // delegated
 
                     e.Handled = true;
                 }
@@ -564,5 +559,15 @@ namespace AATM.App.HisWpf
             }
         }
 
+        // NOTE:
+        // Several helper methods previously implemented inline here were removed in favor of the
+        // implementations in `UserWindow.Helpers.cs`. Those helpers include:
+        // - FindVisualChild<T>
+        // - ClearComboFilterAndRefresh
+        // - EnsureDropDownOpen
+        // - TryMatchEmployeeByText
+        // - TryMatchSecurityGroupByText
+        //
+        // Keep using those helpers via the partial class `UserWindow` (they are defined in UserWindow.Helpers.cs).
     }
 }
