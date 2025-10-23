@@ -64,21 +64,22 @@
                  Text="{Binding SelectedUser.UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True, TargetNullValue=''}"/>
 
         <Label Grid.Row="3" Grid.Column="0" Content="Employee Code - Name" Grid.ColumnSpan="2"/>
-        <!-- Replace the Employee ComboBox with this self-filtering version -->
+        <!-- Replace the Employee ComboBox with this self-filtering version (ViewModel-based filtering) -->
         <ComboBox Grid.Row="3" Grid.Column="2" x:Name="cmbEmployeeIdNo"
           IsEditable="True"
           SelectedValuePath="IdNo"
+          DisplayMemberPath="DisplayText"
           SelectedValue="{Binding SelectedUser.EmployeeIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
-          Text="{Binding EmployeeFilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          ItemsSource="{Binding EmployeeView}" />
+          ItemsSource="{Binding AvailableEmployees}" />
 
         <Label Grid.Row="4" Grid.Column="0" Content="Security Group Code-Name" Grid.ColumnSpan="2"/>
+        <!-- Security group top-level ComboBox: ViewModel-managed filtering -->
         <ComboBox Grid.Row="4" Grid.Column="2" x:Name="cmbSecurityGroupIdNo"
           IsEditable="True"
           SelectedValuePath="IdNo"
+          DisplayMemberPath="DisplayText"
           SelectedValue="{Binding SelectedUser.SecurityGroupIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          Text="{Binding SecurityGroupFilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          ItemsSource="{Binding SecurityGroupView}" />
+          ItemsSource="{Binding AvailableSecurityGroups}" />
 
         <Label Grid.Row="5" Grid.Column="0" Content="Password" Grid.ColumnSpan="2"/>
         <TextBox Grid.Row="5" Grid.Column="2" x:Name="txtPassword"
@@ -128,18 +129,18 @@
                     <DataGridTemplateColumn.CellEditingTemplate>
                         <DataTemplate>
                             <ComboBox
-                              ItemsSource="{Binding DataContext.EmployeeView, ElementName=dataGrid}"
-                              SelectedValue="{Binding EmployeeIdNo, Mode=TwoWay}"
-                              SelectedValuePath="IdNo"
-                              DisplayMemberPath="DisplayText"
-                              IsEditable="True"
-                              IsTextSearchEnabled="False"
-                              StaysOpenOnEdit="True"
-                              behaviors:ComboBoxKeyboardBehavior.EnableKeyboardNavigation="True"
-                              ItemContainerStyle="{StaticResource KeyboardNavigableComboBoxItemStyle}"
-                              behaviors:FilterableComboBoxHelper.EnableFiltering="True"
-                              behaviors:FilterableComboBoxHelper.FilterPropertyName="EmployeeFilterText"
-                              Text="{Binding DataContext.EmployeeFilterText, ElementName=dataGrid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                ItemsSource="{Binding DataContext.EmployeeView, ElementName=dataGrid}"
+                                SelectedValue="{Binding EmployeeIdNo, Mode=TwoWay}"
+                                SelectedValuePath="IdNo"
+                                DisplayMemberPath="DisplayText"
+                                IsEditable="True"
+                                IsTextSearchEnabled="False"
+                                StaysOpenOnEdit="True"
+                                behaviors:ComboBoxKeyboardBehavior.EnableKeyboardNavigation="True"
+                                ItemContainerStyle="{StaticResource KeyboardNavigableComboBoxItemStyle}"
+                                behaviors:FilterableComboBoxHelper.EnableFiltering="True"
+                                behaviors:FilterableComboBoxHelper.FilterPropertyName="EmployeeFilterText"
+                                Text="{Binding DataContext.EmployeeFilterText, ElementName=dataGrid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <ComboBox.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <VirtualizingStackPanel IsItemsHost="True" VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling" />
@@ -156,12 +157,12 @@
                         <DataTemplate>
                             <!-- Fixed: use the resource key as declared in Window.Resources -->
                             <TextBlock>
-                              <TextBlock.Text>
-                                <MultiBinding Converter="{StaticResource IdToDisplayTextMultiConverter}">
-                                  <Binding Path="SecurityGroupIdNo"/>
-                                  <Binding ElementName="dataGrid" Path="DataContext.AvailableSecurityGroups"/>
-                                </MultiBinding>
-                              </TextBlock.Text>
+                                <TextBlock.Text>
+                                    <MultiBinding Converter="{StaticResource IdToDisplayTextMultiConverter}">
+                                        <Binding Path="SecurityGroupIdNo"/>
+                                        <Binding ElementName="dataGrid" Path="DataContext.AvailableSecurityGroups"/>
+                                    </MultiBinding>
+                                </TextBlock.Text>
                             </TextBlock>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -179,7 +180,7 @@
                                 ItemContainerStyle="{StaticResource KeyboardNavigableComboBoxItemStyle}"
                                 behaviors:FilterableComboBoxHelper.EnableFiltering="True"
                                 behaviors:FilterableComboBoxHelper.FilterPropertyName="SecurityGroupFilterText"
-                                Text="{Binding DataContext.SecurityGroupFilterText, ElementName=dataGrid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                Text="{Binding DataContext.SecurityGroupFilterText, ElementName=datagrid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <ComboBox.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <VirtualizingStackPanel IsItemsHost="True" VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling" />

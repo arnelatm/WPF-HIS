@@ -91,10 +91,16 @@ namespace AATM.App.HisWpf
 
             // Build filter using reflection and configured member names
             var terms = newText.Trim();
+            // Split into terms so "john sm" can match items containing both tokens (optional)
+            var searchTerms = terms.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
+                                   .Select(t => t.Trim())
+                                   .Where(t => !string.IsNullOrEmpty(t))
+                                   .ToArray();
+
             var memberNames = memberPaths.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                                         .Select(s => s.Trim())
-                                         .Where(s => !string.IsNullOrEmpty(s))
-                                         .ToArray();
+                                       .Select(s => s.Trim())
+                                       .Where(s => !string.IsNullOrEmpty(s))
+                                       .ToArray();
 
             combo.Dispatcher.BeginInvoke((Action)(() =>
             {
@@ -104,20 +110,23 @@ namespace AATM.App.HisWpf
                     {
                         if (item == null) return false;
 
-                        // If item has a ToString that returns meaningful text, include it
+                        // Combine primary textual candidates to check against search terms:
+                        // 1) item's ToString()
+                        // 2) any configured member/field values
+                        var candidates = new List<string>(capacity: 4);
+
                         var toStringVal = item.ToString();
-                        if (!string.IsNullOrEmpty(toStringVal) && string.Equals(toStringVal, terms, StringComparison.OrdinalIgnoreCase))
-                            return true;
+                        if (!string.IsNullOrEmpty(toStringVal))
+                            candidates.Add(toStringVal);
 
                         foreach (var name in memberNames)
                         {
-                            // Try property then field
                             var prop = item.GetType().GetProperty(name, BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance);
                             if (prop != null)
                             {
                                 var val = prop.GetValue(item)?.ToString();
-                                if (!string.IsNullOrEmpty(val) && string.Equals(val, terms, StringComparison.OrdinalIgnoreCase))
-                                    return true;
+                                if (!string.IsNullOrEmpty(val))
+                                    candidates.Add(val);
                                 continue;
                             }
 
@@ -125,12 +134,21 @@ namespace AATM.App.HisWpf
                             if (field != null)
                             {
                                 var val = field.GetValue(item)?.ToString();
-                                if (!string.IsNullOrEmpty(val) && string.Equals(val, terms, StringComparison.OrdinalIgnoreCase))
-                                    return true;
+                                if (!string.IsNullOrEmpty(val))
+                                    candidates.Add(val);
                             }
                         }
 
-                        return false;
+                        if (candidates.Count == 0) return false;
+
+                        // For each search term require that at least one candidate contains it (AND across terms).
+                        foreach (var term in searchTerms)
+                        {
+                            var matchedTerm = candidates.Any(c => c != null && c.IndexOf(term, StringComparison.OrdinalIgnoreCase) >= 0);
+                            if (!matchedTerm) return false;
+                        }
+
+                        return true;
                     };
 
                     view.Refresh();

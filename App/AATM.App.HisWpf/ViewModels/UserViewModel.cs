@@ -10,7 +10,6 @@ using System.Threading;
 using System.Windows.Data;
 using System.Collections.Specialized;
 using System.Threading.Tasks;
-using Timer = System.Timers.Timer;
 using AATM.App.HisWpf.ViewModels;
 using AATM.Business.Validation.ValidationRules;
 using AATM.Business.Validation.Validators;
@@ -84,10 +83,10 @@ namespace AATM.App.HisWpf.ViewModels
         private readonly DtoValidator<UserDto> _UserValidator =
             new DtoValidator<UserDto>(UserDtoValidationRules.Validate);
 
-        // debounce timers to reduce frequent refreshes while typing
-        private readonly Timer _employeeFilterTimer;
-        private readonly Timer _securityFilterTimer;
-        private const double FilterDebounceMs = 300;
+        // debounce + cancellation token support for async filtering
+        private CancellationTokenSource? _employeeFilterCts;
+        private CancellationTokenSource? _securityFilterCts;
+        private readonly TimeSpan _filterDebounce = TimeSpan.FromMilliseconds(300);
 
         public UserViewModel(UserCrudService service, ILocalizationService localizationService, IEmployeeRepository employeeRepo, ISecurityGroupRepository securityGroupRepo)
         {
@@ -106,13 +105,6 @@ namespace AATM.App.HisWpf.ViewModels
 
             _securityViewSource.Source = AvailableSecurityGroups;
             _securityViewSource.Filter += (_, args) => args.Accepted = SecurityGroupFilterPredicate(args.Item as SecurityGroupLookupDto);
-
-            // setup debounce timers (async fetch handlers)
-            _employeeFilterTimer = new Timer(FilterDebounceMs) { AutoReset = false };
-            _employeeFilterTimer.Elapsed += async (_, __) => await ApplyEmployeeFilterAsync().ConfigureAwait(false);
-
-            _securityFilterTimer = new Timer(FilterDebounceMs) { AutoReset = false };
-            _securityFilterTimer.Elapsed += async (_, __) => await ApplySecurityGroupFilterAsync().ConfigureAwait(false);
 
             SaveCommand = new AsyncRelayCommand(
                 async _ => await Save(),
@@ -164,9 +156,21 @@ namespace AATM.App.HisWpf.ViewModels
                 {
                     _employeeFilterText = value;
                     OnPropertyChanged();
-                    // debounce
-                    _employeeFilterTimer.Stop();
-                    _employeeFilterTimer.Start();
+
+                    // cancel previous, debounce, run async filter
+                    _employeeFilterCts?.Cancel();
+                    _employeeFilterCts?.Dispose();
+                    _employeeFilterCts = new CancellationTokenSource();
+                    var token = _employeeFilterCts.Token;
+                    _ = Task.Run(async () =>
+                    {
+                        try
+                        {
+                            await Task.Delay(_filterDebounce, token).ConfigureAwait(false);
+                            await ApplyEmployeeFilterAsync(token).ConfigureAwait(false);
+                        }
+                        catch (OperationCanceledException) { }
+                    });
                 }
             }
         }
@@ -182,133 +186,140 @@ namespace AATM.App.HisWpf.ViewModels
                 {
                     _securityGroupFilterText = value;
                     OnPropertyChanged();
-                    // debounce
-                    _securityFilterTimer.Stop();
-                    _securityFilterTimer.Start();
+
+                    // cancel previous, debounce, run async filter
+                    _securityFilterCts?.Cancel();
+                    _securityFilterCts?.Dispose();
+                    _securityFilterCts = new CancellationTokenSource();
+                    var token = _securityFilterCts.Token;
+                    _ = Task.Run(async () =>
+                    {
+                        try
+                        {
+                            await Task.Delay(_filterDebounce, token).ConfigureAwait(false);
+                            await ApplySecurityGroupFilterAsync(token).ConfigureAwait(false);
+                        }
+                        catch (OperationCanceledException) { }
+                    });
                 }
             }
         }
 
-        // Async-safe filter methods: fetch missing lookup from repository and insert into Available* collections on UI thread.
-        private async Task ApplyEmployeeFilterAsync()
+        // Async-safe filter methods: ensure selected item present and refresh the view.
+        // IMPORTANT: do NOT clear or replace AvailableEmployees — the master list must remain intact
+        private async Task ApplyEmployeeFilterAsync(CancellationToken token)
         {
+            if (token.IsCancellationRequested) return;
+
             try
             {
                 var dispatcher = App.Current?.Dispatcher;
-                if (dispatcher == null)
-                {
-                    // No dispatcher available (possibly design-time), nothing to do.
-                    return;
-                }
+                if (dispatcher == null) return;
 
-                // Capture selected id and quick "exists" check on the UI thread to avoid races.
-                var (selId, alreadyExists) = await dispatcher.InvokeAsync(() =>
+                // Capture current filter and selected id on UI thread to avoid races
+                (string filter, int selId) = await dispatcher.InvokeAsync(() =>
                 {
-                    int id = SelectedUser?.EmployeeIdNo ?? 0;
-                    bool exists = id != 0 && AvailableEmployees.Any(e => e.IdNo == id);
-                    return (id, exists);
+                    return (EmployeeFilterText ?? string.Empty, SelectedUser?.EmployeeIdNo ?? 0);
                 });
 
-                if (selId == 0 || alreadyExists)
+                if (token.IsCancellationRequested) return;
+
+                // If filter empty just refresh the view (view.Filter reads EmployeeFilterText)
+                if (string.IsNullOrWhiteSpace(filter))
+                {
+                    await dispatcher.InvokeAsync(() => _employeeViewSource.View?.Refresh());
                     return;
-
-                // Fetch from repository off UI thread
-                EmployeeLookupDto? found = null;
-                try
-                {
-                    var list = await _employeeRepo.GetEmployeesLookupAsync().ConfigureAwait(false);
-                    found = list.FirstOrDefault(e => e.IdNo == selId);
-                }
-                catch
-                {
-                    // repository failure - swallow (optional: log). We'll surface a friendly error later if needed.
                 }
 
-                if (found != null)
+                // Try to ensure selected item is present: fetch single item by id if necessary.
+                if (selId != 0 && !AvailableEmployees.Any(e => e.IdNo == selId))
                 {
-                    // Insert on UI thread
-                    await dispatcher.InvokeAsync(() =>
+                    try
                     {
-                        if (!AvailableEmployees.Any(e => e.IdNo == selId))
+                        var fetched = await _employeeRepo.GetEmployeesLookupAsync().ConfigureAwait(false);
+                        var found = fetched?.FirstOrDefault(e => e.IdNo == selId);
+                        if (found != null && !token.IsCancellationRequested)
                         {
-                            AvailableEmployees.Insert(0, found);
-                            BuildLookupMaps();
-                            OnPropertyChanged(nameof(EmployeeMap));
-                            _employeeViewSource.View?.Refresh();
+                            await dispatcher.InvokeAsync(() =>
+                            {
+                                // Insert missing selected item, do not clear master list
+                                if (!AvailableEmployees.Any(x => x.IdNo == selId))
+                                {
+                                    AvailableEmployees.Insert(0, found);
+                                    BuildLookupMaps();
+                                    OnPropertyChanged(nameof(EmployeeMap));
+                                }
+                            });
                         }
-                    });
+                    }
+                    catch
+                    {
+                        // ignore repository errors; fall back to client-side filtering
+                    }
                 }
+
+                // Finally refresh the view so editors reflect the new filter term
+                await dispatcher.InvokeAsync(() => _employeeViewSource.View?.Refresh());
             }
             catch (Exception ex)
             {
-                ErrorText = $"Employee lookup failed: {ex.Message}";
+                ErrorText = $"Employee filter failed: {ex.Message}";
                 OnPropertyChanged(nameof(ErrorText));
             }
         }
 
-        // Pseudocode / Plan:
-        // 1. Get the application's Dispatcher; if null, return (design-time or no UI).
-        // 2. On the UI thread capture the currently selected SecurityGroupId and whether that id already exists
-        //    in the AvailableSecurityGroups collection (do both reads in one dispatcher invocation to avoid races).
-        // 3. If id is 0 or already exists, return.
-        // 4. Off the UI thread, call repository to fetch lookup list and try to find the item with the id.
-        // 5. If found, invoke back on UI thread to insert the item at position 0 (only if still missing), rebuild maps,
-        //    notify property changed, and refresh the collection view.
-        // 6. Catch and report errors into ErrorText and notify UI.
-
-        // Replaces the existing ApplySecurityGroupFilterAsync implementation.
-        private async Task ApplySecurityGroupFilterAsync()
+        private async Task ApplySecurityGroupFilterAsync(CancellationToken token)
         {
+            if (token.IsCancellationRequested) return;
+
             try
             {
                 var dispatcher = App.Current?.Dispatcher;
-                if (dispatcher == null)
-                {
-                    // No dispatcher available (possibly design-time), nothing to do.
-                    return;
-                }
+                if (dispatcher == null) return;
 
-                // Capture selected id and quick "exists" check on the UI thread to avoid races.
-                var (selId, alreadyExists) = await dispatcher.InvokeAsync(() =>
+                (string filter, int selId) = await dispatcher.InvokeAsync(() =>
                 {
-                    int id = SelectedUser?.SecurityGroupIdNo ?? 0;
-                    bool exists = id != 0 && AvailableSecurityGroups.Any(s => s.IdNo == id);
-                    return (id, exists);
+                    return (SecurityGroupFilterText ?? string.Empty, SelectedUser?.SecurityGroupIdNo ?? 0);
                 });
 
-                if (selId == 0 || alreadyExists)
+                if (token.IsCancellationRequested) return;
+
+                if (string.IsNullOrWhiteSpace(filter))
+                {
+                    await dispatcher.InvokeAsync(() => _securityViewSource.View?.Refresh());
                     return;
-
-                // Fetch from repository off UI thread
-                SecurityGroupLookupDto? found = null;
-                try
-                {
-                    var list = await _securityGroupRepo.GetSecurityGroupsLookupAsync().ConfigureAwait(false);
-                    found = list.FirstOrDefault(s => s.IdNo == selId);
-                }
-                catch
-                {
-                    // repository failure - swallow (optional: log). We'll surface a friendly error later if needed.
                 }
 
-                if (found != null)
+                if (selId != 0 && !AvailableSecurityGroups.Any(s => s.IdNo == selId))
                 {
-                    // Insert on UI thread
-                    await dispatcher.InvokeAsync(() =>
+                    try
                     {
-                        if (!AvailableSecurityGroups.Any(s => s.IdNo == selId))
+                        var fetched = await _securityGroupRepo.GetSecurityGroupsLookupAsync().ConfigureAwait(false);
+                        var found = fetched?.FirstOrDefault(s => s.IdNo == selId);
+                        if (found != null && !token.IsCancellationRequested)
                         {
-                            AvailableSecurityGroups.Insert(0, found);
-                            BuildLookupMaps();
-                            OnPropertyChanged(nameof(SecurityMap));
-                            _securityViewSource.View?.Refresh();
+                            await dispatcher.InvokeAsync(() =>
+                            {
+                                if (!AvailableSecurityGroups.Any(x => x.IdNo == selId))
+                                {
+                                    AvailableSecurityGroups.Insert(0, found);
+                                    BuildLookupMaps();
+                                    OnPropertyChanged(nameof(SecurityMap));
+                                }
+                            });
                         }
-                    });
+                    }
+                    catch
+                    {
+                        // ignore
+                    }
                 }
+
+                await dispatcher.InvokeAsync(() => _securityViewSource.View?.Refresh());
             }
             catch (Exception ex)
             {
-                ErrorText = $"Security group lookup failed: {ex.Message}";
+                ErrorText = $"Security group filter failed: {ex.Message}";
                 OnPropertyChanged(nameof(ErrorText));
             }
         }
