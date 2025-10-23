@@ -2,85 +2,21 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:AATM.App.HisWpf"
-        xmlns:behaviors="clr-namespace:AATM.App.HisWpf.Behaviors" 
+        xmlns:behaviors="clr-namespace:AATM.App.HisWpf.Behaviors"
         xmlns:local1="clr-namespace:AATM.App.HisWpf.Converter"
         Title="User Manager"
         Height="668" Width="800"
         WindowStartupLocation="CenterOwner">
     <Window.Resources>
         <ResourceDictionary>
-            <!-- Define the style directly in Window.Resources -->
-            <Style x:Key="KeyboardNavigableComboBoxItemStyle" TargetType="{x:Type ComboBoxItem}">
-                <Setter Property="SnapsToDevicePixels" Value="True"/>
-                <Setter Property="Padding" Value="4,2"/>
-                <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
-                <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
-                <Setter Property="Background" Value="Transparent"/>
-                <Setter Property="BorderBrush" Value="Transparent"/>
-                <Setter Property="BorderThickness" Value="1"/>
-                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type ComboBoxItem}">
-                            <Border x:Name="Bd"
-                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                    BorderThickness="{TemplateBinding BorderThickness}"
-                                    Background="{TemplateBinding Background}"
-                                    Padding="{TemplateBinding Padding}"
-                                    SnapsToDevicePixels="true">
-                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                            </Border>
-                            <ControlTemplate.Triggers>
-                                <!-- KEYBOARD NAVIGATION HIGHLIGHT - HIGHEST PRIORITY -->
-                                <Trigger Property="behaviors:ComboBoxKeyboardBehavior.IsKeyboardHighlighted" Value="True">
-                                    <Setter TargetName="Bd" Property="Background" Value="#0078D7"/>
-                                    <Setter Property="Foreground" Value="White"/>
-                                    <Setter TargetName="Bd" Property="BorderBrush" Value="#0078D7"/>
-                                </Trigger>
-
-                                <!-- Disabled state - SECOND PRIORITY -->
-                                <Trigger Property="IsEnabled" Value="False">
-                                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
-                                </Trigger>
-
-                                <!-- LOWER PRIORITY TRIGGERS - These should NOT override keyboard highlight -->
-                                <MultiTrigger>
-                                    <MultiTrigger.Conditions>
-                                        <Condition Property="behaviors:ComboBoxKeyboardBehavior.IsKeyboardHighlighted" Value="False"/>
-                                        <Condition Property="IsMouseOver" Value="True"/>
-                                    </MultiTrigger.Conditions>
-                                    <Setter TargetName="Bd" Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
-                                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
-                                </MultiTrigger>
-
-                                <MultiTrigger>
-                                    <MultiTrigger.Conditions>
-                                        <Condition Property="behaviors:ComboBoxKeyboardBehavior.IsKeyboardHighlighted" Value="False"/>
-                                        <Condition Property="IsSelected" Value="True"/>
-                                    </MultiTrigger.Conditions>
-                                    <Setter TargetName="Bd" Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
-                                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
-                                </MultiTrigger>
-
-                                <MultiTrigger>
-                                    <MultiTrigger.Conditions>
-                                        <Condition Property="behaviors:ComboBoxKeyboardBehavior.IsKeyboardHighlighted" Value="False"/>
-                                        <Condition Property="IsHighlighted" Value="True"/>
-                                    </MultiTrigger.Conditions>
-                                    <Setter TargetName="Bd" Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
-                                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
-                                </MultiTrigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/ComboBoxKeyboardNavigationStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
 
             <local1:EmployeeIdNoToDisplayTextConverter x:Key="EmployeeIdNoToDisplayTextConverter"/>
             <local1:SecurityGroupIdNoToDisplayTextConverter x:Key="SecurityGroupIdNoToDisplayTextConverter"/>
+            <local1:IdToDisplayTextMultiConverter x:Key="IdToDisplayTextMultiConverter"/>
+            <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
         </ResourceDictionary>
     </Window.Resources>
 
@@ -130,7 +66,7 @@
         <Label Grid.Row="3" Grid.Column="0" Content="Employee Code - Name" Grid.ColumnSpan="2"/>
         <!-- Replace the Employee ComboBox with this self-filtering version -->
         <ComboBox Grid.Row="3" Grid.Column="2" x:Name="cmbEmployeeIdNo"
-          ItemsSource="{Binding AvailableEmployees}"
+          ItemsSource="{Binding EmployeeView}"
           SelectedValue="{Binding SelectedUser.EmployeeIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
           SelectedValuePath="IdNo"
           IsEditable="True"
@@ -139,7 +75,14 @@
           behaviors:ComboBoxKeyboardBehavior.EnableKeyboardNavigation="True"
           ItemContainerStyle="{StaticResource KeyboardNavigableComboBoxItemStyle}"
           Grid.RowSpan="2" VerticalAlignment="Top"
+          behaviors:FilterableComboBoxHelper.EnableFiltering="True"
+          behaviors:FilterableComboBoxHelper.FilterPropertyName="EmployeeFilterText"
           Text="{Binding EmployeeFilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <ComboBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel IsItemsHost="True" VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling" />
+                </ItemsPanelTemplate>
+            </ComboBox.ItemsPanel>
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding DisplayText}"/>
@@ -149,7 +92,7 @@
 
         <Label Grid.Row="4" Grid.Column="0" Content="Security Group Code-Name" Grid.ColumnSpan="2"/>
         <ComboBox Grid.Row="4" Grid.Column="2" x:Name="cmbSecurityGroupIdNo" 
-          ItemsSource="{Binding AvailableSecurityGroups}"
+          ItemsSource="{Binding SecurityGroupView}"
           SelectedValue="{Binding SelectedUser.SecurityGroupIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
           SelectedValuePath="IdNo"
           IsEditable="True"
@@ -157,7 +100,14 @@
           StaysOpenOnEdit="True"
           behaviors:ComboBoxKeyboardBehavior.EnableKeyboardNavigation="True"
           ItemContainerStyle="{StaticResource KeyboardNavigableComboBoxItemStyle}"
+          behaviors:FilterableComboBoxHelper.EnableFiltering="True"
+          behaviors:FilterableComboBoxHelper.FilterPropertyName="SecurityGroupFilterText"
           Text="{Binding SecurityGroupFilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <ComboBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel IsItemsHost="True" VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling" />
+                </ItemsPanelTemplate>
+            </ComboBox.ItemsPanel>
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding DisplayText}"/>
@@ -205,7 +155,7 @@
                     <DataGridTemplateColumn.CellEditingTemplate>
                         <DataTemplate>
                             <ComboBox
-                              ItemsSource="{Binding DataContext.AvailableEmployees, ElementName=dataGrid}"
+                              ItemsSource="{Binding DataContext.EmployeeView, ElementName=dataGrid}"
                               SelectedValue="{Binding EmployeeIdNo, Mode=TwoWay}"
                               SelectedValuePath="IdNo"
                               DisplayMemberPath="DisplayText"
@@ -214,7 +164,15 @@
                               StaysOpenOnEdit="True"
                               behaviors:ComboBoxKeyboardBehavior.EnableKeyboardNavigation="True"
                               ItemContainerStyle="{StaticResource KeyboardNavigableComboBoxItemStyle}"
-                              Text="{Binding DataContext.EmployeeFilterText, ElementName=dataGrid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                              behaviors:FilterableComboBoxHelper.EnableFiltering="True"
+                              behaviors:FilterableComboBoxHelper.FilterPropertyName="EmployeeFilterText"
+                              Text="{Binding DataContext.EmployeeFilterText, ElementName=dataGrid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <ComboBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <VirtualizingStackPanel IsItemsHost="True" VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling" />
+                                    </ItemsPanelTemplate>
+                                </ComboBox.ItemsPanel>
+                            </ComboBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
@@ -237,7 +195,7 @@
                     <DataGridTemplateColumn.CellEditingTemplate>
                         <DataTemplate>
                             <ComboBox
-                                ItemsSource="{Binding DataContext.AvailableSecurityGroups, ElementName=dataGrid}"
+                                ItemsSource="{Binding DataContext.SecurityGroupView, ElementName=dataGrid}"
                                 SelectedValue="{Binding SecurityGroupIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 SelectedValuePath="IdNo"
                                 DisplayMemberPath="DisplayText"
@@ -246,7 +204,15 @@
                                 StaysOpenOnEdit="True"
                                 behaviors:ComboBoxKeyboardBehavior.EnableKeyboardNavigation="True"
                                 ItemContainerStyle="{StaticResource KeyboardNavigableComboBoxItemStyle}"
-                                Text="{Binding DataContext.SecurityGroupFilterText, ElementName=datagrid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                behaviors:FilterableComboBoxHelper.EnableFiltering="True"
+                                behaviors:FilterableComboBoxHelper.FilterPropertyName="SecurityGroupFilterText"
+                                Text="{Binding DataContext.SecurityGroupFilterText, ElementName=dataGrid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <ComboBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <VirtualizingStackPanel IsItemsHost="True" VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling" />
+                                    </ItemsPanelTemplate>
+                                </ComboBox.ItemsPanel>
+                            </ComboBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>

@@ -150,7 +150,8 @@ namespace AATM.Core.Localization
             var cultures = CultureInfo.GetCultures(CultureTypes.SpecificCultures | CultureTypes.NeutralCultures);
             foreach (var culture in cultures)
             {
-                if (!languages.Any(l => l.display == culture.Name))
+                // Avoid duplicates by language code (culture.Name)
+                if (!languages.Any(l => string.Equals(l.languageCode, culture.Name, StringComparison.OrdinalIgnoreCase)))
                 {
                     languages.Add((culture.EnglishName, culture.Name));
                 }
@@ -160,14 +161,33 @@ namespace AATM.Core.Localization
 
         public static string GetWindowsLanguageDisplayName(string languageCode)
         {
+            if (TryCreateCulture(languageCode, out var culture))
+                return culture!.EnglishName;
+
+            return languageCode;
+        }
+
+        private static bool TryCreateCulture(string? languageCode, out CultureInfo? culture)
+        {
+            culture = null;
+            if (string.IsNullOrWhiteSpace(languageCode))
+                return false;
+
             try
             {
-                var culture = new CultureInfo(languageCode);
-                return culture.EnglishName;
+                culture = new CultureInfo(languageCode!);
+                return true;
             }
             catch (CultureNotFoundException)
             {
-                return languageCode;
+                // Not a recognized culture name; caller can fallback to using the raw code
+                culture = null;
+                return false;
+            }
+            catch (ArgumentException)
+            {
+                culture = null;
+                return false;
             }
         }
 
@@ -198,15 +218,11 @@ namespace AATM.Core.Localization
         {
             get
             {
-                try
+                if (TryCreateCulture(_language, out var culture) && culture is not null)
                 {
-                    var culture = new CultureInfo(_language);
                     return culture.TextInfo.IsRightToLeft;
                 }
-                catch
-                {
-                    return false;
-                }
+                return false;
             }
         }
 

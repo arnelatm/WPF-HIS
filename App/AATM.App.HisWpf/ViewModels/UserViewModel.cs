@@ -10,10 +10,11 @@ using AATM.Modules.Users;
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using System.Threading;
+using System.Windows.Data;
+using Timer = System.Timers.Timer;
 
 namespace AATM.App.HisWpf.ViewModels
 {
@@ -26,10 +27,14 @@ namespace AATM.App.HisWpf.ViewModels
 
         public ObservableCollection<LanguageItem> AvailableLanguages { get; } = new();
         public ObservableCollection<EmployeeLookupDto> AvailableEmployees { get; } = new();
-        public ObservableCollection<EmployeeLookupDto> FilteredEmployees { get; } = new();
+        private readonly CollectionViewSource _employeeViewSource = new();
+        public ICollectionView EmployeeView => _employeeViewSource.View;
+
         public bool SelectedUserImplementsErrorInfo => SelectedUser is INotifyDataErrorInfo;
         public ObservableCollection<SecurityGroupLookupDto> AvailableSecurityGroups { get; } = new();
-        public ObservableCollection<SecurityGroupLookupDto> FilteredSecurityGroups { get; } = new();
+        private readonly CollectionViewSource _securityViewSource = new();
+        public ICollectionView SecurityGroupView => _securityViewSource.View;
+
         public ObservableCollection<UserDto> Users { get; } = new();
 
         private UserDto? _selectedUser;
@@ -45,8 +50,6 @@ namespace AATM.App.HisWpf.ViewModels
 
                     _selectedUser = value;
                     OnPropertyChanged();
-
-                    Debug.WriteLine($"SelectedUserImplementsErrorInfo: {SelectedUserImplementsErrorInfo}");
 
                     if (_selectedUser is INotifyPropertyChanged newNotify)
                         newNotify.PropertyChanged += SelectedUser_PropertyChanged;
@@ -76,6 +79,11 @@ namespace AATM.App.HisWpf.ViewModels
         private readonly DtoValidator<UserDto> _UserValidator =
             new DtoValidator<UserDto>(UserDtoValidationRules.Validate);
 
+        // debounce timers to reduce frequent refreshes while typing
+        private readonly Timer _employeeFilterTimer;
+        private readonly Timer _securityFilterTimer;
+        private const double FilterDebounceMs = 300;
+
         public UserViewModel(UserCrudService service, ILocalizationService localizationService, IEmployeeRepository employeeRepo, ISecurityGroupRepository securityGroupRepo)
         {
             _service = service;
@@ -86,6 +94,20 @@ namespace AATM.App.HisWpf.ViewModels
             var langs = LocalizationHelper.SafeGetLanguages(_localizationService);
             foreach (var (display, code) in langs)
                 AvailableLanguages.Add(new LanguageItem(display, code));
+
+            // Initialize CollectionViewSources
+            _employeeViewSource.Source = AvailableEmployees;
+            _employeeViewSource.Filter += (_, args) => args.Accepted = EmployeeFilterPredicate(args.Item as EmployeeLookupDto);
+
+            _securityViewSource.Source = AvailableSecurityGroups;
+            _securityViewSource.Filter += (_, args) => args.Accepted = SecurityGroupFilterPredicate(args.Item as SecurityGroupLookupDto);
+
+            // setup debounce timers
+            _employeeFilterTimer = new Timer(FilterDebounceMs) { AutoReset = false };
+            _employeeFilterTimer.Elapsed += (s, e) => App.Current.Dispatcher.Invoke(ApplyEmployeeFilter);
+
+            _securityFilterTimer = new Timer(FilterDebounceMs) { AutoReset = false };
+            _securityFilterTimer.Elapsed += (s, e) => App.Current.Dispatcher.Invoke(ApplySecurityGroupFilter);
 
             SaveCommand = new AsyncRelayCommand(
                 async _ => await Save(),
@@ -100,6 +122,26 @@ namespace AATM.App.HisWpf.ViewModels
             );
         }
 
+        private bool EmployeeFilterPredicate(EmployeeLookupDto? emp)
+        {
+            if (emp == null) return false;
+            var filter = EmployeeFilterText?.Trim() ?? string.Empty;
+            if (string.IsNullOrEmpty(filter)) return true;
+            return (!string.IsNullOrEmpty(emp.DisplayText) && emp.DisplayText.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0)
+                || (!string.IsNullOrEmpty(emp.EmployeeName) && emp.EmployeeName.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0)
+                || (!string.IsNullOrEmpty(emp.EmployeeCode) && emp.EmployeeCode.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0);
+        }
+
+        private bool SecurityGroupFilterPredicate(SecurityGroupLookupDto? sg)
+        {
+            if (sg == null) return false;
+            var filter = SecurityGroupFilterText?.Trim() ?? string.Empty;
+            if (string.IsNullOrEmpty(filter)) return true;
+            return (!string.IsNullOrEmpty(sg.DisplayText) && sg.DisplayText.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0)
+                || (!string.IsNullOrEmpty(sg.SecurityGroupName) && sg.SecurityGroupName.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0)
+                || (!string.IsNullOrEmpty(sg.SecurityGroupCode) && sg.SecurityGroupCode.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0);
+        }
+
         // Employee filter
         private string _employeeFilterText = "";
         public string EmployeeFilterText
@@ -111,8 +153,9 @@ namespace AATM.App.HisWpf.ViewModels
                 {
                     _employeeFilterText = value;
                     OnPropertyChanged();
-                    Debug.WriteLine($"EmployeeFilterText set to: '{_employeeFilterText}'");
-                    FilterEmployees();
+                    // debounce
+                    _employeeFilterTimer.Stop();
+                    _employeeFilterTimer.Start();
                 }
             }
         }
@@ -128,161 +171,78 @@ namespace AATM.App.HisWpf.ViewModels
                 {
                     _securityGroupFilterText = value;
                     OnPropertyChanged();
-                    Debug.WriteLine($"SecurityGroupFilterText set to: '{_securityGroupFilterText}'");
-                    FilterSecurityGroups();
+                    // debounce
+                    _securityFilterTimer.Stop();
+                    _securityFilterTimer.Start();
                 }
             }
         }
 
-        // Call this after AvailableEmployees changes or when filter text changes
-        private void FilterEmployees()
+        private void ApplyEmployeeFilter()
         {
-            Debug.WriteLine($"FilterEmployees: Available={AvailableEmployees.Count}, Filter='{EmployeeFilterText}'");
-            // Ensure UI-thread updates for bound ObservableCollection
+            // Ensure view refresh happens on UI thread
             if (!App.Current.Dispatcher.CheckAccess())
             {
-                App.Current.Dispatcher.Invoke(FilterEmployees);
+                App.Current.Dispatcher.Invoke(ApplyEmployeeFilter);
                 return;
             }
 
-            // CRITICAL FIX: Preserve the CollectionView's current position during filtering
-            var view = System.Windows.Data.CollectionViewSource.GetDefaultView(FilteredEmployees);
-            var currentItem = view?.CurrentItem;
-            var currentPosition = view?.CurrentPosition ?? -1;
-
-            FilteredEmployees.Clear();
-            var filter = EmployeeFilterText?.Trim() ?? string.Empty;
-
-            foreach (var emp in AvailableEmployees)
+            var view = _employeeViewSource.View;
+            if (view != null)
             {
-                if (string.IsNullOrEmpty(filter)
-                    || Contains(emp.DisplayText, filter)
-                    || Contains(emp.EmployeeName, filter)
-                    || Contains(emp.EmployeeCode, filter))
+                using (view.DeferRefresh())
                 {
-                    FilteredEmployees.Add(emp);
+                    // refresh will be deferred until Dispose
                 }
-            }
-
-            // Ensure selected user's employee is present in filtered list so ComboBox can display it
-            try
-            {
-                if (SelectedUser != null)
+                // Ensure selected user's employee is present in available list
+                try
                 {
-                    var selId = SelectedUser.EmployeeIdNo;
-                    if (selId != 0 && !FilteredEmployees.Any(e => e.IdNo == selId))
+                    if (SelectedUser != null)
                     {
-                        var found = AvailableEmployees.FirstOrDefault(e => e.IdNo == selId);
-                        if (found != null)
+                        var selId = SelectedUser.EmployeeIdNo;
+                        if (selId != 0 && !AvailableEmployees.Any(e => e.IdNo == selId))
                         {
-                            // insert at start so it's visible
-                            FilteredEmployees.Insert(0, found);
+                            var found = AvailableEmployees.FirstOrDefault(e => e.IdNo == selId);
+                            if (found != null)
+                                AvailableEmployees.Insert(0, found);
                         }
                     }
                 }
+                catch { }
             }
-            catch { /* defensive - don't let UI break */ }
-
-            // CRITICAL FIX: Restore the CollectionView's current position after filtering
-            if (view != null && currentItem != null)
-            {
-                var newIndex = FilteredEmployees.IndexOf(currentItem as EmployeeLookupDto);
-                if (newIndex >= 0)
-                {
-                    // Item still exists in filtered list, restore position
-                    view.MoveCurrentToPosition(newIndex);
-                }
-                else if (currentPosition >= 0 && currentPosition < FilteredEmployees.Count)
-                {
-                    // Item was filtered out, try to maintain position
-                    view.MoveCurrentToPosition(currentPosition);
-                }
-                else if (FilteredEmployees.Count > 0)
-                {
-                    // Fallback: move to first item
-                    view.MoveCurrentToFirst();
-                }
-            }
-
-            static bool Contains(string? source, string needle) =>
-                !string.IsNullOrEmpty(source)
-                && !string.IsNullOrEmpty(needle)
-                && source.IndexOf(needle, StringComparison.OrdinalIgnoreCase) >= 0;
         }
 
-        // Call this after AvailableSecurityGroups changes or when filter text changes
-        private void FilterSecurityGroups()
+        private void ApplySecurityGroupFilter()
         {
-            Debug.WriteLine($"FilterSecurityGroups: Available={AvailableSecurityGroups.Count}, Filter='{SecurityGroupFilterText}'");
-            // Ensure UI-thread updates for bound ObservableCollection
             if (!App.Current.Dispatcher.CheckAccess())
             {
-                App.Current.Dispatcher.Invoke(FilterSecurityGroups);
+                App.Current.Dispatcher.Invoke(ApplySecurityGroupFilter);
                 return;
             }
 
-            // CRITICAL FIX: Preserve the CollectionView's current position during filtering
-            var view = System.Windows.Data.CollectionViewSource.GetDefaultView(FilteredSecurityGroups);
-            var currentItem = view?.CurrentItem;
-            var currentPosition = view?.CurrentPosition ?? -1;
-
-            FilteredSecurityGroups.Clear();
-            var filter = SecurityGroupFilterText?.Trim() ?? string.Empty;
-
-            foreach (var group in AvailableSecurityGroups)
+            var view = _securityViewSource.View;
+            if (view != null)
             {
-                if (string.IsNullOrEmpty(filter)
-                    || Contains(group.DisplayText, filter)
-                    || Contains(group.SecurityGroupName, filter)
-                    || Contains(group.SecurityGroupCode, filter))
+                using (view.DeferRefresh())
                 {
-                    FilteredSecurityGroups.Add(group);
+                    // deferred
                 }
-            }
 
-            // Ensure selected user's security group is present in filtered list so ComboBox can display it
-            try
-            {
-                if (SelectedUser != null)
+                try
                 {
-                    var selId = SelectedUser.SecurityGroupIdNo;
-                    if (selId != 0 && !FilteredSecurityGroups.Any(s => s.IdNo == selId))
+                    if (SelectedUser != null)
                     {
-                        var found = AvailableSecurityGroups.FirstOrDefault(s => s.IdNo == selId);
-                        if (found != null)
+                        var selId = SelectedUser.SecurityGroupIdNo;
+                        if (selId != 0 && !AvailableSecurityGroups.Any(s => s.IdNo == selId))
                         {
-                            FilteredSecurityGroups.Insert(0, found);
+                            var found = AvailableSecurityGroups.FirstOrDefault(s => s.IdNo == selId);
+                            if (found != null)
+                                AvailableSecurityGroups.Insert(0, found);
                         }
                     }
                 }
+                catch { }
             }
-            catch { /* defensive */ }
-
-            // CRITICAL FIX: Restore the CollectionView's current position after filtering
-            if (view != null && currentItem != null)
-            {
-                var newIndex = FilteredSecurityGroups.IndexOf(currentItem as SecurityGroupLookupDto);
-                if (newIndex >= 0)
-                {
-                    // Item still exists in filtered list, restore position
-                    view.MoveCurrentToPosition(newIndex);
-                }
-                else if (currentPosition >= 0 && currentPosition < FilteredSecurityGroups.Count)
-                {
-                    // Item was filtered out, try to maintain position
-                    view.MoveCurrentToPosition(currentPosition);
-                }
-                else if (FilteredSecurityGroups.Count > 0)
-                {
-                    // Fallback: move to first item
-                    view.MoveCurrentToFirst();
-                }
-            }
-
-            static bool Contains(string? source, string needle) =>
-                !string.IsNullOrEmpty(source)
-                && !string.IsNullOrEmpty(needle)
-                && source.IndexOf(needle, StringComparison.OrdinalIgnoreCase) >= 0;
         }
 
         public async Task LoadEmployeesAsync()
@@ -292,9 +252,7 @@ namespace AATM.App.HisWpf.ViewModels
             {
                 AvailableEmployees.Clear();
                 foreach (var e in employees) AvailableEmployees.Add(e);
-
-                // Initialize the filtered view
-                FilterEmployees();
+                _employeeViewSource.View?.Refresh();
             });
         }
 
@@ -305,7 +263,7 @@ namespace AATM.App.HisWpf.ViewModels
             {
                 AvailableSecurityGroups.Clear();
                 foreach (var sg in securityGroups) AvailableSecurityGroups.Add(sg);
-                FilterSecurityGroups();
+                _securityViewSource.View?.Refresh();
             });
         }
 
@@ -333,7 +291,6 @@ namespace AATM.App.HisWpf.ViewModels
             catch (Exception ex)
             {
                 ErrorText = $"Load failed: {ex.Message}";
-                Debug.WriteLine(ex);
             }
             finally
             {
@@ -443,7 +400,6 @@ namespace AATM.App.HisWpf.ViewModels
             {
                 ErrorText = $"Employees load failed: {ex.Message}";
                 OnPropertyChanged(nameof(ErrorText));
-                Debug.WriteLine(ex);
             }
         }
 
@@ -454,7 +410,6 @@ namespace AATM.App.HisWpf.ViewModels
             {
                 ErrorText = $"Security groups load failed: {ex.Message}";
                 OnPropertyChanged(nameof(ErrorText));
-                Debug.WriteLine(ex);
             }
         }
 
@@ -466,7 +421,6 @@ namespace AATM.App.HisWpf.ViewModels
             {
                 ErrorText = $"Users load failed: {ex.Message}";
                 OnPropertyChanged(nameof(ErrorText));
-                Debug.WriteLine(ex);
             }
         }
 
@@ -490,97 +444,3 @@ namespace AATM.App.HisWpf.ViewModels
         private readonly SemaphoreSlim _loadLock = new(1, 1);
     }
 }
-//using System.Collections.ObjectModel;
-//using System.ComponentModel;
-//using System.Runtime.CompilerServices;
-//using System.Windows.Input;
-//using AATM.Contracts.Dtos;
-
-//namespace AATM.App.HisWpf.ViewModels
-//{
-//    public class UserViewModel : INotifyPropertyChanged
-//    {
-//        public ObservableCollection<UserDto> User { get; } = new();
-//        private UserDto? _selectedUser;
-//        public UserDto? SelectedUser
-//        {
-//            get => _selectedUser;
-//            set
-//            {
-//                if (_selectedUser != value)
-//                {
-//                    _selectedUser = value;
-//                    OnPropertyChanged();
-//                }
-//            }
-//        }
-
-//        private bool _isBusy;
-//        public bool IsBusy
-//        {
-//            get => _isBusy;
-//            set { if (_isBusy != value) { _isBusy = value; OnPropertyChanged(); } }
-//        }
-
-//        public ICommand SaveCommand { get; }
-//        public ICommand DeleteCommand { get; }
-
-//        public event PropertyChangedEventHandler? PropertyChanged;
-
-//        public UserViewModel()
-//        {
-//            // Example data for design-time/testing
-//            if (DesignerProperties.GetIsInDesignMode(new System.Windows.DependencyObject()))
-//            {
-//                User.Add(new UserDto { ID = 1, UserName = "admin", FullName = "Admin User" });
-//                User.Add(new UserDto { ID = 2, UserName = "jdoe", FullName = "John Doe" });
-//                SelectedUser = User.FirstOrDefault();
-//            }
-
-//            SaveCommand = new RelayCommand(_ => Save(), _ => SelectedUser != null && !SelectedUser.HasErrors);
-//            DeleteCommand = new RelayCommand(_ => Delete(), _ => SelectedUser != null);
-//        }
-
-//        private void Save()
-//        {
-//            if (SelectedUser == null) return;
-//            // Save logic here (e.g., update DB, call service)
-//            // For demo, just ensure it's in the collection
-//            if (!User.Contains(SelectedUser))
-//                User.Add(SelectedUser);
-//        }
-
-//        private void Delete()
-//        {
-//            if (SelectedUser == null) return;
-//            var toRemove = SelectedUser;
-//            if (User.Contains(toRemove))
-//            {
-//                User.Remove(toRemove);
-//                SelectedUser = User.FirstOrDefault();
-//            }
-//        }
-
-//        protected void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-//            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-//    }
-
-//    // Simple RelayCommand implementation for demo purposes
-//    public class RelayCommand : ICommand
-//    {
-//        private readonly Action<object?> _execute;
-//        private readonly Predicate<object?>? _canExecute;
-//        public RelayCommand(Action<object?> execute, Predicate<object?>? canExecute = null)
-//        {
-//            _execute = execute;
-//            _canExecute = canExecute;
-//        }
-//        public bool CanExecute(object? parameter) => _canExecute == null || _canExecute(parameter);
-//        public void Execute(object? parameter) => _execute(parameter);
-//        public event System.EventHandler? CanExecuteChanged
-//        {
-//            add { CommandManager.RequerySuggested += value; }
-//            remove { CommandManager.RequerySuggested -= value; }
-//        }
-//    }
-//}

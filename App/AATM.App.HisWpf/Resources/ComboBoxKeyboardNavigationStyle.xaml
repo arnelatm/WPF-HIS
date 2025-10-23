@@ -7,8 +7,10 @@
         <!-- Base style setters -->
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="Padding" Value="4,2"/>
-        <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
-        <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+        <!-- Do NOT attempt to bind to the ComboBox ancestor here - popup-hosted items can't find that ancestor.
+             Rely on the ContentPresenter's TemplateBinding inside the ControlTemplate instead. -->
+        <!--<Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}"/>
+        <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}"/>-->
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="1"/>
@@ -30,9 +32,9 @@
                     <ControlTemplate.Triggers>
                         <!-- KEYBOARD NAVIGATION HIGHLIGHT - HIGHEST PRIORITY -->
                         <Trigger Property="behaviors:ComboBoxKeyboardBehavior.IsKeyboardHighlighted" Value="True">
-                            <Setter TargetName="Bd" Property="Background" Value="#0078D7"/>
+                            <Setter TargetName="Bd" Property="Background" Value="#FF0078D7"/>
                             <Setter Property="Foreground" Value="White"/>
-                            <Setter TargetName="Bd" Property="BorderBrush" Value="#0078D7"/>
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="#FF0078D7"/>
                         </Trigger>
                         
                         <!-- Mouse hover highlight -->
