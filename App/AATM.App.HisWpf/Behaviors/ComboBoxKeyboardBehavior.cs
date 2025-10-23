@@ -82,10 +82,101 @@ namespace AATM.App.HisWpf.Behaviors
                 e.Handled = true;
 
                 var view = CollectionViewSource.GetDefaultView(comboBox.ItemsSource);
+                object? chosen = null;
                 if (view?.CurrentItem != null)
                 {
-                    System.Diagnostics.Debug.WriteLine($"[ComboBox_PreviewKeyDown] Selecting item: {view.CurrentItem}");
-                    comboBox.SelectedItem = view.CurrentItem;
+                    System.Diagnostics.Debug.WriteLine($"[ComboBox_PreviewKeyDown] CurrentItem: {view.CurrentItem}");
+                    chosen = view.CurrentItem;
+                    // Prefer setting SelectedValue when possible so SelectedValue binding (SelectedUser.EmployeeIdNo) updates.
+                    try
+                    {
+                        var current = view.CurrentItem;
+                        var idProp = current.GetType().GetProperty("IdNo");
+                        if (idProp != null)
+                        {
+                            var idVal = idProp.GetValue(current);
+                            System.Diagnostics.Debug.WriteLine($"[ComboBox_PreviewKeyDown] Setting SelectedValue to: {idVal}");
+                            comboBox.SelectedValue = idVal;
+                        }
+                        else
+                        {
+                            System.Diagnostics.Debug.WriteLine($"[ComboBox_PreviewKeyDown] IdNo not found - setting SelectedItem");
+                            comboBox.SelectedItem = view.CurrentItem;
+                        }
+                    }
+                    catch (System.Exception ex)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"[ComboBox_PreviewKeyDown] Exception selecting current item: {ex}");
+                        comboBox.SelectedItem = view.CurrentItem;
+                    }
+                }
+                else
+                {
+                    // Fallback: if no current item set, select the first available item
+                    if (comboBox.Items.Count > 0)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"[ComboBox_PreviewKeyDown] No CurrentItem - selecting first item");
+                        if (view != null)
+                        {
+                            view.MoveCurrentToFirst();
+                            if (view.CurrentItem != null)
+                            {
+                                chosen = view.CurrentItem;
+                                try
+                                {
+                                    var current = view.CurrentItem;
+                                    var idProp = current.GetType().GetProperty("IdNo");
+                                    if (idProp != null)
+                                    {
+                                        var idVal = idProp.GetValue(current);
+                                        comboBox.SelectedValue = idVal;
+                                    }
+                                    else
+                                    {
+                                        comboBox.SelectedIndex = 0;
+                                    }
+                                }
+                                catch { comboBox.SelectedIndex = 0; }
+                            }
+                        }
+                        else
+                        {
+                            comboBox.SelectedIndex = 0;
+                            chosen = comboBox.Items.Count > 0 ? comboBox.Items[0] : null;
+                        }
+                    }
+                }
+
+                // After selection, update the editable text to show the selected display text and restore focus
+                if (chosen != null)
+                {
+                    try
+                    {
+                        var dispProp = chosen.GetType().GetProperty("DisplayText");
+                        var display = dispProp != null ? dispProp.GetValue(chosen)?.ToString() : chosen.ToString();
+
+                        // Set Text and restore focus to the inner TextBox to allow further typing or confirm selection
+                        comboBox.Dispatcher.BeginInvoke(new Action(() =>
+                        {
+                            try
+                            {
+                                comboBox.Text = display ?? string.Empty;
+                                // Place caret at end of text
+                                var inner = FindVisualChild<TextBox>(comboBox);
+                                if (inner != null)
+                                {
+                                    inner.SelectionStart = inner.Text?.Length ?? 0;
+                                    inner.Focus();
+                                }
+                                else
+                                {
+                                    comboBox.Focus();
+                                }
+                            }
+                            catch { /* ignore UI focus/set issues */ }
+                        }));
+                    }
+                    catch { /* ignore reflection/focus errors */ }
                 }
 
                 comboBox.IsDropDownOpen = false;
@@ -239,6 +330,20 @@ namespace AATM.App.HisWpf.Behaviors
                 }
             }
             comboBox.SetValue(HighlightedIndexProperty, -1);
+        }
+
+        // Helper to find inner TextBox for editable ComboBox
+        private static T? FindVisualChild<T>(DependencyObject parent) where T : DependencyObject
+        {
+            if (parent == null) return null;
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+            {
+                var child = VisualTreeHelper.GetChild(parent, i);
+                if (child is T typed) return typed;
+                var result = FindVisualChild<T>(child);
+                if (result != null) return result;
+            }
+            return null;
         }
     }
 }

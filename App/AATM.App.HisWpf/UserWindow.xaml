@@ -130,7 +130,7 @@
         <Label Grid.Row="3" Grid.Column="0" Content="Employee Code - Name" Grid.ColumnSpan="2"/>
         <!-- Replace the Employee ComboBox with this self-filtering version -->
         <ComboBox Grid.Row="3" Grid.Column="2" x:Name="cmbEmployeeIdNo"
-          ItemsSource="{Binding FilteredEmployees}"
+          ItemsSource="{Binding AvailableEmployees}"
           SelectedValue="{Binding SelectedUser.EmployeeIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
           SelectedValuePath="IdNo"
           IsEditable="True"
@@ -138,7 +138,8 @@
           StaysOpenOnEdit="True"
           behaviors:ComboBoxKeyboardBehavior.EnableKeyboardNavigation="True"
           ItemContainerStyle="{StaticResource KeyboardNavigableComboBoxItemStyle}"
-          Grid.RowSpan="2" VerticalAlignment="Top">
+          Grid.RowSpan="2" VerticalAlignment="Top"
+          Text="{Binding EmployeeFilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding DisplayText}"/>
@@ -148,14 +149,15 @@
 
         <Label Grid.Row="4" Grid.Column="0" Content="Security Group Code-Name" Grid.ColumnSpan="2"/>
         <ComboBox Grid.Row="4" Grid.Column="2" x:Name="cmbSecurityGroupIdNo" 
-          ItemsSource="{Binding FilteredSecurityGroups}"
+          ItemsSource="{Binding AvailableSecurityGroups}"
           SelectedValue="{Binding SelectedUser.SecurityGroupIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
           SelectedValuePath="IdNo"
           IsEditable="True"
           IsTextSearchEnabled="False"
           StaysOpenOnEdit="True"
           behaviors:ComboBoxKeyboardBehavior.EnableKeyboardNavigation="True"
-          ItemContainerStyle="{StaticResource KeyboardNavigableComboBoxItemStyle}">
+          ItemContainerStyle="{StaticResource KeyboardNavigableComboBoxItemStyle}"
+          Text="{Binding SecurityGroupFilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding DisplayText}"/>
@@ -169,10 +171,6 @@
         <CheckBox Grid.Row="6" Grid.Column="2" x:Name="chkActive"
           IsChecked="{Binding SelectedUser.Active, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}" 
           Content="" />
-
-        <!--<Label Grid.Row="6" Grid.Column="0" Content="Active?" VerticalAlignment="Center" Grid.ColumnSpan="2" Cursor=""/>
-        <TextBox Grid.Row="6" Grid.Column="2" x:Name="txtActive" Margin="0,2,0,2"
-                 Text="{Binding SelectedUser.Active, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True, TargetNullValue=''}" />-->
 
         <TextBox Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3" x:Name="txtErrors"
             Background="MistyRose" Foreground="DarkRed" FontWeight="Bold"
@@ -189,16 +187,16 @@
                 <local:ValidatedTextColumn Header="Id Number" Binding="{Binding IdNo}" Width="80"/>
                 <local:ValidatedTextColumn Header="User Name" Binding="{Binding UserName}" Width="100"/>
 
-                <!-- Employee template column: display via shared multi-converter, edit via ComboBox bound to FilteredEmployees -->
+                <!-- Employee template column: display via shared multi-converter, edit via ComboBox bound to AvailableEmployees -->
                 <DataGridTemplateColumn Header="Employee Name" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <!-- Use the shared IdToDisplayTextMultiConverter with the grid's FilteredEmployees collection -->
+                            <!-- Use the shared IdToDisplayTextMultiConverter with the grid's AvailableEmployees collection -->
                             <TextBlock>
                                 <TextBlock.Text>
                                     <MultiBinding Converter="{StaticResource IdToDisplayTextMultiConverter}" FallbackValue="">
                                         <Binding Path="EmployeeIdNo"/>
-                                        <Binding ElementName="dataGrid" Path="DataContext.FilteredEmployees"/>
+                                        <Binding ElementName="dataGrid" Path="DataContext.AvailableEmployees"/>
                                     </MultiBinding>
                                 </TextBlock.Text>
                             </TextBlock>
@@ -207,7 +205,7 @@
                     <DataGridTemplateColumn.CellEditingTemplate>
                         <DataTemplate>
                             <ComboBox
-                              ItemsSource="{Binding DataContext.FilteredEmployees, ElementName=dataGrid}"
+                              ItemsSource="{Binding DataContext.AvailableEmployees, ElementName=dataGrid}"
                               SelectedValue="{Binding EmployeeIdNo, Mode=TwoWay}"
                               SelectedValuePath="IdNo"
                               DisplayMemberPath="DisplayText"
@@ -215,7 +213,8 @@
                               IsTextSearchEnabled="False"
                               StaysOpenOnEdit="True"
                               behaviors:ComboBoxKeyboardBehavior.EnableKeyboardNavigation="True"
-                              ItemContainerStyle="{StaticResource KeyboardNavigableComboBoxItemStyle}" />
+                              ItemContainerStyle="{StaticResource KeyboardNavigableComboBoxItemStyle}"
+                              Text="{Binding DataContext.EmployeeFilterText, ElementName=dataGrid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
@@ -229,7 +228,7 @@
                               <TextBlock.Text>
                                 <MultiBinding Converter="{StaticResource IdToDisplayTextMultiConverter}">
                                   <Binding Path="SecurityGroupIdNo"/>
-                                  <Binding ElementName="dataGrid" Path="DataContext.FilteredSecurityGroups"/>
+                                  <Binding ElementName="dataGrid" Path="DataContext.AvailableSecurityGroups"/>
                                 </MultiBinding>
                               </TextBlock.Text>
                             </TextBlock>
@@ -238,7 +237,7 @@
                     <DataGridTemplateColumn.CellEditingTemplate>
                         <DataTemplate>
                             <ComboBox
-                                ItemsSource="{Binding DataContext.FilteredSecurityGroups, ElementName=dataGrid}"
+                                ItemsSource="{Binding DataContext.AvailableSecurityGroups, ElementName=dataGrid}"
                                 SelectedValue="{Binding SecurityGroupIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 SelectedValuePath="IdNo"
                                 DisplayMemberPath="DisplayText"
@@ -246,7 +245,8 @@
                                 IsTextSearchEnabled="False"
                                 StaysOpenOnEdit="True"
                                 behaviors:ComboBoxKeyboardBehavior.EnableKeyboardNavigation="True"
-                                ItemContainerStyle="{StaticResource KeyboardNavigableComboBoxItemStyle}" />
+                                ItemContainerStyle="{StaticResource KeyboardNavigableComboBoxItemStyle}"
+                                Text="{Binding DataContext.SecurityGroupFilterText, ElementName=datagrid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>

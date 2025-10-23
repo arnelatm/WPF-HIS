@@ -111,6 +111,7 @@ namespace AATM.App.HisWpf.ViewModels
                 {
                     _employeeFilterText = value;
                     OnPropertyChanged();
+                    Debug.WriteLine($"EmployeeFilterText set to: '{_employeeFilterText}'");
                     FilterEmployees();
                 }
             }
@@ -127,6 +128,7 @@ namespace AATM.App.HisWpf.ViewModels
                 {
                     _securityGroupFilterText = value;
                     OnPropertyChanged();
+                    Debug.WriteLine($"SecurityGroupFilterText set to: '{_securityGroupFilterText}'");
                     FilterSecurityGroups();
                 }
             }
@@ -135,6 +137,7 @@ namespace AATM.App.HisWpf.ViewModels
         // Call this after AvailableEmployees changes or when filter text changes
         private void FilterEmployees()
         {
+            Debug.WriteLine($"FilterEmployees: Available={AvailableEmployees.Count}, Filter='{EmployeeFilterText}'");
             // Ensure UI-thread updates for bound ObservableCollection
             if (!App.Current.Dispatcher.CheckAccess())
             {
@@ -210,6 +213,7 @@ namespace AATM.App.HisWpf.ViewModels
         // Call this after AvailableSecurityGroups changes or when filter text changes
         private void FilterSecurityGroups()
         {
+            Debug.WriteLine($"FilterSecurityGroups: Available={AvailableSecurityGroups.Count}, Filter='{SecurityGroupFilterText}'");
             // Ensure UI-thread updates for bound ObservableCollection
             if (!App.Current.Dispatcher.CheckAccess())
             {
