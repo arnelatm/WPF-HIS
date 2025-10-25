@@ -8,7 +8,6 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Windows.Input;
 using AATM.Contracts.Dtos;
 using System.Linq;
-using AATM.App.HisWpf.Behaviors;
 using AATM.App.HisWpf.Helpers;
 
 namespace AATM.App.HisWpf
@@ -54,84 +53,7 @@ namespace AATM.App.HisWpf
             ViewModel.PropertyChanged += ViewModel_PropertyChanged;
             UpdateRecordIndicators();
 
-            // Apply behavior to ComboBoxes
-            ComboBoxKeyboardBehavior.SetEnableKeyboardNavigation(cmbEmployeeIdNo, true);
-            cmbEmployeeIdNo.SelectedValuePath = nameof(EmployeeLookupDto.IdNo);
-
-            ComboBoxKeyboardBehavior.SetEnableKeyboardNavigation(cmbSecurityGroupIdNo, true);
-            cmbSecurityGroupIdNo.SelectedValuePath = nameof(SecurityGroupLookupDto.IdNo);
-
-            // Use shared ComboBox manager to minimize local wiring
-            ComboBoxManager.Attach(cmbEmployeeIdNo,
-                onTextChanged: (c, text) =>
-                {
-                    // update VM filter immediately
-                    ViewModel.EmployeeFilterText = text ?? string.Empty;
-
-                    // open the dropdown so user sees filtered results
-                    c.Dispatcher.BeginInvoke((Action)(() =>
-                    {
-                        try
-                        {
-                            ComboBoxHelpers.EnsureDropDownOpen(c);
-                        }
-                        catch
-                        {
-                            // ignore any popup timing exceptions
-                        }
-                    }), System.Windows.Threading.DispatcherPriority.ApplicationIdle);
-                },
-                onSelectionChanged: (c, e) =>
-                {
-                    if (e.AddedItems?.Count > 0 && e.AddedItems[0] is EmployeeLookupDto emp)
-                    {
-                        if (ViewModel.SelectedUser != null) ViewModel.SelectedUser.EmployeeIdNo = emp.IdNo;
-                        ViewModel.EmployeeFilterText = emp.DisplayText ?? string.Empty;
-                    }
-                },
-                onPreviewKeyDown: (c, ke) =>
-                {
-                    // keep any small preview-key logic you need here (Backspace/Escape/Enter handling)
-                },
-                onDropDownClosed: c => {
-                    // no ComboBoxHelpers.ClearFilterAndRefresh here — VM controls filtering.
-                    // Optionally clear the filter text when dropdown closes:
-                    // ViewModel.EmployeeFilterText = string.Empty;
-                }
-            );
-
-            ComboBoxManager.Attach(cmbSecurityGroupIdNo,
-                onTextChanged: (c, text) =>
-                {
-                    ViewModel.SecurityGroupFilterText = text ?? string.Empty;
-
-                    c.Dispatcher.BeginInvoke((Action)(() =>
-                    {
-                        try
-                        {
-                            ComboBoxHelpers.EnsureDropDownOpen(c);
-                        }
-                        catch
-                        {
-                            // ignore
-                        }
-                    }), System.Windows.Threading.DispatcherPriority.ApplicationIdle);
-                },
-                onSelectionChanged: (c, e) =>
-                {
-                    if (e.AddedItems?.Count > 0 && e.AddedItems[0] is SecurityGroupLookupDto sg)
-                    {
-                        if (ViewModel.SelectedUser != null) ViewModel.SelectedUser.SecurityGroupIdNo = sg.IdNo;
-                        ViewModel.SecurityGroupFilterText = sg.DisplayText ?? string.Empty;
-                    }
-                },
-                onPreviewKeyDown: (c, ke) => { /* custom logic if needed */ },
-                onDropDownClosed: c =>
-                {
-                    // Optionally clear filter text on close:
-                    // ViewModel.SecurityGroupFilterText = string.Empty;
-                }
-            );
+            // Note: removed custom ComboBoxManager attachments and filtering helpers to restore default ComboBox behavior.
         }
 
         private UserViewModel ViewModel => (UserViewModel)DataContext;
@@ -352,66 +274,7 @@ namespace AATM.App.HisWpf
                 }
                 UpdateRecordIndicators();
 
-                // Synchronize ComboBoxes with the selected user
-                try
-                {
-                    // NOTE: SelectedValue is bound in XAML (TwoWay).  Remove manual SelectedValue assignments to avoid races.
-
-                    // Use fast lookup map first, fallback to helper if needed
-                    var selEmpId = ViewModel.SelectedUser?.EmployeeIdNo ?? 0;
-                    if (selEmpId != 0)
-                    {
-                        if (ViewModel.EmployeeMap.TryGetValue(selEmpId, out var disp) && !string.IsNullOrWhiteSpace(disp))
-                        {
-                            ViewModel.EmployeeFilterText = disp;
-                        }
-                        else
-                        {
-                            string? display =
-                                SelectionDisplayHelper.GetDisplayTextById<EmployeeLookupDto>(
-                                    selEmpId,
-                                    ViewModel.EmployeeView as System.Collections.Generic.IEnumerable<EmployeeLookupDto>,
-                                    ViewModel.AvailableEmployees)
-                                ?? SelectionDisplayHelper.GetDisplayTextById(
-                                    selEmpId,
-                                    ViewModel.EmployeeView,
-                                    ViewModel.AvailableEmployees);
-
-                            if (!string.IsNullOrEmpty(display))
-                                ViewModel.EmployeeFilterText = display;
-                        }
-                    }
-
-                    var selSecId = ViewModel.SelectedUser?.SecurityGroupIdNo ?? 0;
-                    if (selSecId != 0)
-                    {
-                        // Fast path: use ViewModel map built by BuildLookupMaps()
-                        if (ViewModel.SecurityMap.TryGetValue(selSecId, out var disp) && !string.IsNullOrWhiteSpace(disp))
-                        {
-                            ViewModel.SecurityGroupFilterText = disp;
-                        }
-                        else
-                        {
-                            // Fallback: use SelectionDisplayHelper convenience overloads (keeps backwards compatibility)
-                            string? display =
-                                SelectionDisplayHelper.GetDisplayTextById<SecurityGroupLookupDto>(
-                                    selSecId,
-                                    ViewModel.SecurityGroupView as System.Collections.Generic.IEnumerable<SecurityGroupLookupDto>,
-                                    ViewModel.AvailableSecurityGroups)
-                                ?? SelectionDisplayHelper.GetDisplayTextById(
-                                    selSecId,
-                                    ViewModel.SecurityGroupView,
-                                    ViewModel.AvailableSecurityGroups);
-
-                            if (!string.IsNullOrEmpty(display))
-                                ViewModel.SecurityGroupFilterText = display;
-                        }
-                    }
-                }
-                catch
-                {
-                    // ignore if combo not yet initialized
-                }
+                // Removed synchronization logic that depended on removed filtering/view helpers.
             }
             if (e.PropertyName == nameof(ViewModel.Users))
             {
@@ -443,14 +306,6 @@ namespace AATM.App.HisWpf
                 btnFind.Click -= BtnFind_Click;
                 btnResetFilter.Click -= BtnResetFilter_Click;
                 btnSwitchLanguage.Click -= BtnSwitchLanguage_Click;
-            }
-            catch { }
-
-            // Detach combo handlers (use shared manager)
-            try
-            {
-                ComboBoxManager.Detach(cmbEmployeeIdNo);
-                ComboBoxManager.Detach(cmbSecurityGroupIdNo);
             }
             catch { }
 

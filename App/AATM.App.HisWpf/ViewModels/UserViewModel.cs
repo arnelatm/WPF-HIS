@@ -7,7 +7,6 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using System.Threading;
-using System.Windows.Data;
 using System.Collections.Specialized;
 using System.Threading.Tasks;
 using AATM.App.HisWpf.ViewModels;
@@ -31,13 +30,9 @@ namespace AATM.App.HisWpf.ViewModels
 
         public ObservableCollection<LanguageItem> AvailableLanguages { get; } = new();
         public ObservableCollection<EmployeeLookupDto> AvailableEmployees { get; } = new();
-        private readonly CollectionViewSource _employeeViewSource = new();
-        public ICollectionView EmployeeView => _employeeViewSource.View;
 
         public bool SelectedUserImplementsErrorInfo => SelectedUser is INotifyDataErrorInfo;
         public ObservableCollection<SecurityGroupLookupDto> AvailableSecurityGroups { get; } = new();
-        private readonly CollectionViewSource _securityViewSource = new();
-        public ICollectionView SecurityGroupView => _securityViewSource.View;
 
         public ObservableCollection<UserDto> Users { get; } = new();
 
@@ -83,11 +78,6 @@ namespace AATM.App.HisWpf.ViewModels
         private readonly DtoValidator<UserDto> _UserValidator =
             new DtoValidator<UserDto>(UserDtoValidationRules.Validate);
 
-        // debounce + cancellation token support for async filtering
-        private CancellationTokenSource? _employeeFilterCts;
-        private CancellationTokenSource? _securityFilterCts;
-        private readonly TimeSpan _filterDebounce = TimeSpan.FromMilliseconds(300);
-
         public UserViewModel(UserCrudService service, ILocalizationService localizationService, IEmployeeRepository employeeRepo, ISecurityGroupRepository securityGroupRepo)
         {
             _service = service;
@@ -98,13 +88,6 @@ namespace AATM.App.HisWpf.ViewModels
             var langs = LocalizationHelper.SafeGetLanguages(_localizationService);
             foreach (var (display, code) in langs)
                 AvailableLanguages.Add(new LanguageItem(display, code));
-
-            // Initialize CollectionViewSources
-            _employeeViewSource.Source = AvailableEmployees;
-            _employeeViewSource.Filter += (_, args) => args.Accepted = EmployeeFilterPredicate(args.Item as EmployeeLookupDto);
-
-            _securityViewSource.Source = AvailableSecurityGroups;
-            _securityViewSource.Filter += (_, args) => args.Accepted = SecurityGroupFilterPredicate(args.Item as SecurityGroupLookupDto);
 
             SaveCommand = new AsyncRelayCommand(
                 async _ => await Save(),
@@ -125,211 +108,6 @@ namespace AATM.App.HisWpf.ViewModels
             foreach (var s in AvailableSecurityGroups) AttachSecurityItemHandlers(s);
         }
 
-        private bool EmployeeFilterPredicate(EmployeeLookupDto? emp)
-        {
-            if (emp == null) return false;
-            var filter = EmployeeFilterText?.Trim() ?? string.Empty;
-            if (string.IsNullOrEmpty(filter)) return true;
-            return (!string.IsNullOrEmpty(emp.DisplayText) && emp.DisplayText.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0)
-                || (!string.IsNullOrEmpty(emp.EmployeeName) && emp.EmployeeName.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0)
-                || (!string.IsNullOrEmpty(emp.EmployeeCode) && emp.EmployeeCode.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0);
-        }
-
-        private bool SecurityGroupFilterPredicate(SecurityGroupLookupDto? sg)
-        {
-            if (sg == null) return false;
-            var filter = SecurityGroupFilterText?.Trim() ?? string.Empty;
-            if (string.IsNullOrEmpty(filter)) return true;
-            return (!string.IsNullOrEmpty(sg.DisplayText) && sg.DisplayText.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0)
-                || (!string.IsNullOrEmpty(sg.SecurityGroupName) && sg.SecurityGroupName.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0)
-                || (!string.IsNullOrEmpty(sg.SecurityGroupCode) && sg.SecurityGroupCode.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0);
-        }
-
-        // Employee filter
-        private string _employeeFilterText = "";
-        public string EmployeeFilterText
-        {
-            get => _employeeFilterText;
-            set
-            {
-                if (_employeeFilterText == value) return;
-                _employeeFilterText = value;
-                OnPropertyChanged();
-
-                // Immediately refresh the view so dropdown narrows as user types
-                var dispatcher = App.Current?.Dispatcher;
-                if (dispatcher != null)
-                {
-                    // Use BeginInvoke so UI stays responsive
-                    dispatcher.BeginInvoke((Action)(() => _employeeViewSource.View?.Refresh()), System.Windows.Threading.DispatcherPriority.Background);
-                }
-
-                // Keep async fetch (debounced) only for ensuring selected item presence in master list
-                _employeeFilterCts?.Cancel();
-                _employeeFilterCts?.Dispose();
-                _employeeFilterCts = new CancellationTokenSource();
-                var token = _employeeFilterCts.Token;
-                _ = Task.Run(async () =>
-                {
-                    try
-                    {
-                        await Task.Delay(_filterDebounce, token).ConfigureAwait(false);
-                        await ApplyEmployeeFilterAsync(token).ConfigureAwait(false); // will only try to fetch/ensure selected item
-                    }
-                    catch (OperationCanceledException) { }
-                });
-            }
-        }
-
-        // Security group filter
-        private string _securityGroupFilterText = "";
-        public string SecurityGroupFilterText
-        {
-            get => _securityGroupFilterText;
-            set
-            {
-                if (_securityGroupFilterText != value)
-                {
-                    _securityGroupFilterText = value;
-                    OnPropertyChanged();
-
-                    // cancel previous, debounce, run async filter
-                    _securityFilterCts?.Cancel();
-                    _securityFilterCts?.Dispose();
-                    _securityFilterCts = new CancellationTokenSource();
-                    var token = _securityFilterCts.Token;
-                    _ = Task.Run(async () =>
-                    {
-                        try
-                        {
-                            await Task.Delay(_filterDebounce, token).ConfigureAwait(false);
-                            await ApplySecurityGroupFilterAsync(token).ConfigureAwait(false);
-                        }
-                        catch (OperationCanceledException) { }
-                    });
-                }
-            }
-        }
-
-        // Async-safe filter methods: ensure selected item present and refresh the view.
-        // IMPORTANT: do NOT clear or replace AvailableEmployees — the master list must remain intact
-        private async Task ApplyEmployeeFilterAsync(CancellationToken token)
-        {
-            if (token.IsCancellationRequested) return;
-
-            try
-            {
-                var dispatcher = App.Current?.Dispatcher;
-                if (dispatcher == null) return;
-
-                // Capture current filter and selected id on UI thread to avoid races
-                (string filter, int selId) = await dispatcher.InvokeAsync(() =>
-                {
-                    return (EmployeeFilterText ?? string.Empty, SelectedUser?.EmployeeIdNo ?? 0);
-                });
-
-                if (token.IsCancellationRequested) return;
-
-                // If filter empty just refresh the view (view.Filter reads EmployeeFilterText)
-                if (string.IsNullOrWhiteSpace(filter))
-                {
-                    await dispatcher.InvokeAsync(() => _employeeViewSource.View?.Refresh());
-                    return;
-                }
-
-                // Try to ensure selected item is present: fetch single item by id if necessary.
-                if (selId != 0 && !AvailableEmployees.Any(e => e.IdNo == selId))
-                {
-                    try
-                    {
-                        var fetched = await _employeeRepo.GetEmployeesLookupAsync().ConfigureAwait(false);
-                        var found = fetched?.FirstOrDefault(e => e.IdNo == selId);
-                        if (found != null && !token.IsCancellationRequested)
-                        {
-                            await dispatcher.InvokeAsync(() =>
-                            {
-                                // Insert missing selected item, do not clear master list
-                                if (!AvailableEmployees.Any(x => x.IdNo == selId))
-                                {
-                                    AvailableEmployees.Insert(0, found);
-                                    BuildLookupMaps();
-                                    OnPropertyChanged(nameof(EmployeeMap));
-                                }
-                            });
-                        }
-                    }
-                    catch
-                    {
-                        // ignore repository errors; fall back to client-side filtering
-                    }
-                }
-
-                // Finally refresh the view so editors reflect the new filter term
-                await dispatcher.InvokeAsync(() => _employeeViewSource.View?.Refresh());
-            }
-            catch (Exception ex)
-            {
-                ErrorText = $"Employee filter failed: {ex.Message}";
-                OnPropertyChanged(nameof(ErrorText));
-            }
-        }
-
-        private async Task ApplySecurityGroupFilterAsync(CancellationToken token)
-        {
-            if (token.IsCancellationRequested) return;
-
-            try
-            {
-                var dispatcher = App.Current?.Dispatcher;
-                if (dispatcher == null) return;
-
-                (string filter, int selId) = await dispatcher.InvokeAsync(() =>
-                {
-                    return (SecurityGroupFilterText ?? string.Empty, SelectedUser?.SecurityGroupIdNo ?? 0);
-                });
-
-                if (token.IsCancellationRequested) return;
-
-                if (string.IsNullOrWhiteSpace(filter))
-                {
-                    await dispatcher.InvokeAsync(() => _securityViewSource.View?.Refresh());
-                    return;
-                }
-
-                if (selId != 0 && !AvailableSecurityGroups.Any(s => s.IdNo == selId))
-                {
-                    try
-                    {
-                        var fetched = await _securityGroupRepo.GetSecurityGroupsLookupAsync().ConfigureAwait(false);
-                        var found = fetched?.FirstOrDefault(s => s.IdNo == selId);
-                        if (found != null && !token.IsCancellationRequested)
-                        {
-                            await dispatcher.InvokeAsync(() =>
-                            {
-                                if (!AvailableSecurityGroups.Any(x => x.IdNo == selId))
-                                {
-                                    AvailableSecurityGroups.Insert(0, found);
-                                    BuildLookupMaps();
-                                    OnPropertyChanged(nameof(SecurityMap));
-                                }
-                            });
-                        }
-                    }
-                    catch
-                    {
-                        // ignore
-                    }
-                }
-
-                await dispatcher.InvokeAsync(() => _securityViewSource.View?.Refresh());
-            }
-            catch (Exception ex)
-            {
-                ErrorText = $"Security group filter failed: {ex.Message}";
-                OnPropertyChanged(nameof(ErrorText));
-            }
-        }
-
         public async Task LoadEmployeesAsync()
         {
             var employees = await _employeeRepo.GetEmployeesLookupAsync().ConfigureAwait(false);
@@ -337,7 +115,6 @@ namespace AATM.App.HisWpf.ViewModels
             {
                 AvailableEmployees.Clear();
                 foreach (var e in employees) AvailableEmployees.Add(e);
-                _employeeViewSource.View?.Refresh();
 
                 // rebuild lookup map and notify consumers
                 BuildLookupMaps();
@@ -347,17 +124,30 @@ namespace AATM.App.HisWpf.ViewModels
 
         public async Task LoadSecurityGroupsAsync()
         {
-            var securityGroups = await _securityGroupRepo.GetSecurityGroupsLookupAsync().ConfigureAwait(false);
+            var securityGroups = await _security_group_repo_safe().ConfigureAwait(false);
             await App.Current.Dispatcher.InvokeAsync(() =>
             {
                 AvailableSecurityGroups.Clear();
                 foreach (var sg in securityGroups) AvailableSecurityGroups.Add(sg);
-                _securityViewSource.View?.Refresh();
 
                 // rebuild lookup map and notify consumers
                 BuildLookupMaps();
                 OnPropertyChanged(nameof(SecurityMap));
             });
+        }
+
+        // Helper to call repo safely (keeps code compact)
+        private async Task<IEnumerable<SecurityGroupLookupDto>> _security_group_repo_safe()
+        {
+            try
+            {
+                var list = await _securityGroupRepo.GetSecurityGroupsLookupAsync().ConfigureAwait(false);
+                return list ?? Enumerable.Empty<SecurityGroupLookupDto>();
+            }
+            catch
+            {
+                return Enumerable.Empty<SecurityGroupLookupDto>();
+            }
         }
 
         public bool IsBusy { get; set; }
@@ -558,7 +348,7 @@ namespace AATM.App.HisWpf.ViewModels
         private Dictionary<int, string> _employeeMap = new();
         public IReadOnlyDictionary<int, string> EmployeeMap => _employeeMap;
         private Dictionary<int, string> _securityMap = new();
-        public IReadOnlyDictionary<int, string> SecurityMap => _securityMap;
+        public IReadOnlyDictionary<int, string> SecurityMap => _security_map_safe();
 
         // populate after loading lists
         private void BuildLookupMaps()
@@ -570,6 +360,11 @@ namespace AATM.App.HisWpf.ViewModels
             _securityMap = AvailableSecurityGroups
                 .Where(s => s != null)
                 .ToDictionary(s => s.IdNo, s => s.DisplayText ?? string.Empty);
+        }
+
+        private IReadOnlyDictionary<int, string> _security_map_safe()
+        {
+            return _securityMap;
         }
 
         private void AvailableEmployees_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
