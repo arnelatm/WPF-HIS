@@ -2,6 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:AATM.App.HisWpf"
+        xmlns:behaviors="clr-namespace:AATM.App.HisWpf.Behaviors"
         xmlns:local1="clr-namespace:AATM.App.HisWpf.Converter"
         Title="User Manager"
         Height="668" Width="800"
@@ -64,23 +65,45 @@
 
         <Label Grid.Row="3" Grid.Column="0" Content="Employee Code - Name" Grid.ColumnSpan="2"/>
         <!-- Top-level ComboBox: editable, bound to master list -->
-        <ComboBox Grid.Row="3" Grid.Column="2" x:Name="cmbEmployeeIdNo"
-          IsEditable="True"
-          StaysOpenOnEdit="True"
-          SelectedValuePath="IdNo"
-          DisplayMemberPath="DisplayText"
-          SelectedValue="{Binding SelectedUser.EmployeeIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          ItemsSource="{Binding AvailableEmployees}" />
+        <Grid Grid.Row="3" Grid.Column="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <ComboBox Grid.Column="0" x:Name="cmbEmployeeIdNo"
+              IsEditable="True"
+              IsTextSearchEnabled="False"
+              StaysOpenOnEdit="True"
+              behaviors:ComboBoxClearOnFullSelectionBehavior.IsEnabled="True"
+              Text="{Binding EmployeeDisplayText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              SelectedValuePath="IdNo"
+              DisplayMemberPath="DisplayText"
+              SelectedValue="{Binding SelectedUser.EmployeeIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+              IsSynchronizedWithCurrentItem="False"
+              ItemsSource="{Binding AvailableEmployees}" />
+            <ProgressBar Grid.Column="1" x:Name="pbEmployeeFiltering" Width="18" Height="18" Margin="6,0,0,0" IsIndeterminate="True" Visibility="Collapsed"/>
+        </Grid>
 
         <Label Grid.Row="4" Grid.Column="0" Content="Security Group Code-Name" Grid.ColumnSpan="2"/>
         <!-- Top-level Security ComboBox: editable, bound to master list -->
-        <ComboBox Grid.Row="4" Grid.Column="2" x:Name="cmbSecurityGroupIdNo"
-          IsEditable="True"
-          StaysOpenOnEdit="True"
-          SelectedValuePath="IdNo"
-          DisplayMemberPath="DisplayText"
-          SelectedValue="{Binding SelectedUser.SecurityGroupIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          ItemsSource="{Binding AvailableSecurityGroups}" />
+        <Grid Grid.Row="4" Grid.Column="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <ComboBox Grid.Column="0" x:Name="cmbSecurityGroupIdNo"
+              IsEditable="True"
+              IsTextSearchEnabled="False"
+              StaysOpenOnEdit="True"
+              behaviors:ComboBoxClearOnFullSelectionBehavior.IsEnabled="True"
+              Text="{Binding SecurityGroupDisplayText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              SelectedValuePath="IdNo"
+              DisplayMemberPath="DisplayText"
+              SelectedValue="{Binding SelectedUser.SecurityGroupIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+              IsSynchronizedWithCurrentItem="False"
+              ItemsSource="{Binding AvailableSecurityGroups}" />
+            <ProgressBar Grid.Column="1" x:Name="pbSecurityFiltering" Width="18" Height="18" Margin="6,0,0,0" IsIndeterminate="True" Visibility="Collapsed"/>
+        </Grid>
 
         <Label Grid.Row="5" Grid.Column="0" Content="Password" Grid.ColumnSpan="2"/>
         <TextBox Grid.Row="5" Grid.Column="2" x:Name="txtPassword"
@@ -135,7 +158,7 @@
                                 SelectedValuePath="IdNo"
                                 DisplayMemberPath="DisplayText"
                                 IsEditable="True"
-                                IsTextSearchEnabled="True"
+                                IsTextSearchEnabled="False"
                                 StaysOpenOnEdit="False"
                                 ItemContainerStyle="{StaticResource KeyboardNavigableComboBoxItemStyle}">
                                 <ComboBox.ItemsPanel>
@@ -171,7 +194,7 @@
                                 SelectedValuePath="IdNo"
                                 DisplayMemberPath="DisplayText"
                                 IsEditable="True"
-                                IsTextSearchEnabled="True"
+                                IsTextSearchEnabled="False"
                                 StaysOpenOnEdit="False"
                                 ItemContainerStyle="{StaticResource KeyboardNavigableComboBoxItemStyle}">
                                 <ComboBox.ItemsPanel>

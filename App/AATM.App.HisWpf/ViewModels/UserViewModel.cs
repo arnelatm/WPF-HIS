@@ -22,7 +22,7 @@ using AATM.Modules.Users;
 
 namespace AATM.App.HisWpf.ViewModels
 {
-    public class UserViewModel : INotifyPropertyChanged, INotifyDataErrorInfo
+    public partial class UserViewModel : INotifyPropertyChanged, INotifyDataErrorInfo
     {
         private readonly UserCrudService _service;
         private readonly ILocalizationService _localizationService;
@@ -41,6 +41,95 @@ namespace AATM.App.HisWpf.ViewModels
 
         public ObservableCollection<UserDto> Users { get; } = new();
 
+        public void ClearEmployeeSelection()
+        {
+            if (SelectedUser != null)
+            {
+                // Block notifications temporarily
+                var oldNotify = SelectedUser as INotifyPropertyChanged;
+                if (oldNotify != null)
+                    oldNotify.PropertyChanged -= SelectedUser_PropertyChanged;
+
+                // Clear ID and display text
+                SelectedUser.EmployeeIdNo = 0;
+                EmployeeDisplayText = string.Empty;
+
+                // Reattach and notify
+                if (oldNotify != null)
+                    oldNotify.PropertyChanged += SelectedUser_PropertyChanged;
+
+                // Notify all relevant properties
+                OnPropertyChanged(nameof(SelectedUser));
+                OnPropertyChanged(nameof(EmployeeDisplayText));
+                ValidateAllProperties();
+            }
+        }
+
+        public void ClearSecurityGroupSelection()
+        {
+            if (SelectedUser != null)
+            {
+                // Block notifications temporarily
+                var oldNotify = SelectedUser as INotifyPropertyChanged;
+                if (oldNotify != null)
+                    oldNotify.PropertyChanged -= SelectedUser_PropertyChanged;
+
+                // Clear ID and display text
+                SelectedUser.SecurityGroupIdNo = 0;
+                SecurityGroupDisplayText = string.Empty;
+
+                // Reattach and notify
+                if (oldNotify != null)
+                    oldNotify.PropertyChanged += SelectedUser_PropertyChanged;
+
+                // Notify all relevant properties
+                OnPropertyChanged(nameof(SelectedUser));
+                OnPropertyChanged(nameof(SecurityGroupDisplayText));
+                ValidateAllProperties();
+            }
+        }
+
+        // Add properties to handle ComboBox display text
+        private string _employeeDisplayText = string.Empty;
+        public string EmployeeDisplayText
+        {
+            get => _employeeDisplayText;
+            set
+            {
+                if (_employeeDisplayText != value)
+                {
+                    _employeeDisplayText = value;
+                    OnPropertyChanged();
+
+                    // If text is cleared and we're not in the middle of a selection change
+                    if (string.IsNullOrEmpty(value) && SelectedUser?.EmployeeIdNo != 0)
+                    {
+                        ClearEmployeeSelection();
+                    }
+                }
+            }
+        }
+
+        private string _securityGroupDisplayText = string.Empty;
+        public string SecurityGroupDisplayText
+        {
+            get => _securityGroupDisplayText;
+            set
+            {
+                if (_securityGroupDisplayText != value)
+                {
+                    _securityGroupDisplayText = value;
+                    OnPropertyChanged();
+
+                    // If text is cleared and we're not in the middle of a selection change
+                    if (string.IsNullOrEmpty(value) && SelectedUser?.SecurityGroupIdNo != 0)
+                    {
+                        ClearSecurityGroupSelection();
+                    }
+                }
+            }
+        }
+
         private UserDto? _selectedUser;
         public UserDto? SelectedUser
         {
@@ -55,8 +144,38 @@ namespace AATM.App.HisWpf.ViewModels
                     _selectedUser = value;
                     OnPropertyChanged();
 
+                    // Update display text from lookup maps when selection changes
+                    if (_selectedUser != null)
+                    {
+                        if (_employeeMap.TryGetValue(_selectedUser.EmployeeIdNo, out var empText))
+                            EmployeeDisplayText = empText;
+                        if (_securityMap.TryGetValue(_selectedUser.SecurityGroupIdNo, out var secText))
+                            SecurityGroupDisplayText = secText;
+                    }
+                    else
+                    {
+                        EmployeeDisplayText = string.Empty;
+                        SecurityGroupDisplayText = string.Empty;
+                    }
+
                     if (_selectedUser is INotifyPropertyChanged newNotify)
+                    {
                         newNotify.PropertyChanged += SelectedUser_PropertyChanged;
+                        // Also handle changes to the specific properties
+                        newNotify.PropertyChanged += (s, e) =>
+                        {
+                            if (e.PropertyName == nameof(UserDto.EmployeeIdNo))
+                            {
+                                if (_employeeMap.TryGetValue(_selectedUser.EmployeeIdNo, out var text))
+                                    EmployeeDisplayText = text;
+                            }
+                            else if (e.PropertyName == nameof(UserDto.SecurityGroupIdNo))
+                            {
+                                if (_securityMap.TryGetValue(_selectedUser.SecurityGroupIdNo, out var text))
+                                    SecurityGroupDisplayText = text;
+                            }
+                        };
+                    }
 
                     ValidateAllProperties();
                     if (SaveCommand is AsyncRelayCommand asyncCmd)
@@ -539,12 +658,22 @@ namespace AATM.App.HisWpf.ViewModels
             {
                 BuildLookupMaps();
                 OnPropertyChanged(nameof(EmployeeMap));
+                
+                // Update display text if this is the selected employee
+                if (SelectedUser?.EmployeeIdNo == item.IdNo)
+                    EmployeeDisplayText = item.DisplayText ?? string.Empty;
+                
                 return;
             }
 
             if (e.PropertyName == nameof(EmployeeLookupDto.DisplayText) || string.IsNullOrEmpty(e.PropertyName))
             {
                 _employeeMap[item.IdNo] = item.DisplayText ?? string.Empty;
+                
+                // Update display text if this is the selected employee
+                if (SelectedUser?.EmployeeIdNo == item.IdNo)
+                    EmployeeDisplayText = item.DisplayText ?? string.Empty;
+                
                 OnPropertyChanged(nameof(EmployeeMap));
             }
         }
@@ -557,12 +686,22 @@ namespace AATM.App.HisWpf.ViewModels
             {
                 BuildLookupMaps();
                 OnPropertyChanged(nameof(SecurityMap));
+                
+                // Update display text if this is the selected security group
+                if (SelectedUser?.SecurityGroupIdNo == item.IdNo)
+                    SecurityGroupDisplayText = item.DisplayText ?? string.Empty;
+                
                 return;
             }
 
             if (e.PropertyName == nameof(SecurityGroupLookupDto.DisplayText) || string.IsNullOrEmpty(e.PropertyName))
             {
                 _securityMap[item.IdNo] = item.DisplayText ?? string.Empty;
+                
+                // Update display text if this is the selected security group
+                if (SelectedUser?.SecurityGroupIdNo == item.IdNo)
+                    SecurityGroupDisplayText = item.DisplayText ?? string.Empty;
+                
                 OnPropertyChanged(nameof(SecurityMap));
             }
         }

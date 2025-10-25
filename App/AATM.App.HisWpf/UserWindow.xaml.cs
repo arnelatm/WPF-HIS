@@ -9,11 +9,11 @@ using System.Windows.Input;
 using AATM.Contracts.Dtos;
 using System.Linq;
 using AATM.App.HisWpf.Helpers;
-using System.Windows.Controls.Primitives;
-using System.Windows.Threading;
+using System.Threading.Tasks;
+using System.Threading;
+using System.Collections.Generic;
 using System.ComponentModel;
-using System.Collections;
-using System.Windows.Controls;
+using System;
 
 namespace AATM.App.HisWpf
 {
@@ -23,6 +23,27 @@ namespace AATM.App.HisWpf
     public partial class UserWindow : Window
     {
         private readonly UserViewModel _viewModel;
+
+        // transient edit-mode views for per-combo filtering
+        private ListCollectionView? _employeeEditView;
+        private ListCollectionView? _securityEditView;
+
+        // debounce/cancellation tokens to avoid filtering on every keystroke
+        private CancellationTokenSource? _employeeFilterCts;
+        private CancellationTokenSource? _securityFilterCts;
+
+        // configurable debounce in milliseconds
+        private int _filterDebounceMs = 120; // default shorter debounce
+
+        private ILocalizationService _localization_service;
+        private readonly string _moduleName = "UserWindow";
+
+        // UI cache for localization
+        private bool _originalsCached;
+        private string _originalTitle = string.Empty;
+        private readonly Dictionary<DataGridColumn, string> _originalColumnHeaders = new();
+
+        private string? _currentFilter;
 
         // Prefer resolving via DI; this overload chains to the primary ctor
         public UserWindow(UserViewModel viewmodel)
@@ -45,6 +66,7 @@ namespace AATM.App.HisWpf
             _localization_service = localizationService;
             DataContext = vm;
 
+            // Wire buttons
             btnFirst.Click += BtnFirst_Click;
             btnPrev.Click += BtnPrev_Click;
             btnNext.Click += BtnNext_Click;
@@ -58,37 +80,225 @@ namespace AATM.App.HisWpf
             ViewModel.PropertyChanged += ViewModel_PropertyChanged;
             UpdateRecordIndicators();
 
-            // Note: removed custom ComboBoxManager attachments and filtering helpers to restore default ComboBox behavior.
-
             // Wire per-combo edit-mode filtering (transient view so master list is not changed)
-            cmbEmployeeIdNo.GotKeyboardFocus += (s, e) => EnsureEmployeeEditView();
-            cmbEmployeeIdNo.PreviewMouseDown += (s, e) => { if (!cmbEmployeeIdNo.IsDropDownOpen) EnsureEmployeeEditView(); };
+            cmbEmployeeIdNo.GotKeyboardFocus += (s, e) => OnEmployeeGotFocus();
+            cmbEmployeeIdNo.PreviewMouseDown += (s, e) => { if (!cmbEmployeeIdNo.IsDropDownOpen) OnEmployeeGotFocus(); };
             cmbEmployeeIdNo.DropDownClosed += (s, e) => RestoreEmployeeItemsSource();
             cmbEmployeeIdNo.AddHandler(TextBox.TextChangedEvent, new TextChangedEventHandler((s, e) => OnEmployeeTextChanged()));
+            // Use attached behavior instead of code-behind handler
+            // Behavior usage requires XAML change to set the attached property
 
-            cmbSecurityGroupIdNo.GotKeyboardFocus += (s, e) => EnsureSecurityEditView();
-            cmbSecurityGroupIdNo.PreviewMouseDown += (s, e) => { if (!cmbSecurityGroupIdNo.IsDropDownOpen) EnsureSecurityEditView(); };
+            cmbSecurityGroupIdNo.GotKeyboardFocus += (s, e) => OnSecurityGotFocus();
+            cmbSecurityGroupIdNo.PreviewMouseDown += (s, e) => { if (!cmbSecurityGroupIdNo.IsDropDownOpen) OnSecurityGotFocus(); };
             cmbSecurityGroupIdNo.DropDownClosed += (s, e) => RestoreSecurityItemsSource();
             cmbSecurityGroupIdNo.AddHandler(TextBox.TextChangedEvent, new TextChangedEventHandler((s, e) => OnSecurityTextChanged()));
         }
 
         private UserViewModel ViewModel => (UserViewModel)DataContext;
 
-        private ILocalizationService _localization_service;
-        private readonly string _moduleName = "UserWindow";
+        // ---------- ComboBox filtering (debounced, off-UI-thread) ----------
+        private void OnEmployeeGotFocus()
+        {
+            // Cancel any pending security filter work
+            _securityFilterCts?.Cancel();
+            _securityFilterCts?.Dispose();
+            _securityFilterCts = null;
 
-        // NEW: originals cache
-        private bool _originalsCached;
-        private string _originalTitle = string.Empty;
-        private readonly Dictionary<DataGridColumn, string> _originalColumnHeaders = new();
+            if (_employeeEditView == null)
+            {
+                var master = (IEnumerable<EmployeeLookupDto>?)ViewModel?.AvailableEmployees ?? Enumerable.Empty<EmployeeLookupDto>();
+                var snapshot = master.ToList();
+                _employeeEditView = new ListCollectionView((System.Collections.IList)snapshot);
+                cmbEmployeeIdNo.ItemsSource = _employeeEditView;
+            }
+        }
 
-        // NEW: current filter text
-        private string? _currentFilter;
+        private void OnSecurityGotFocus()
+        {
+            _employeeFilterCts?.Cancel();
+            _employeeFilterCts?.Dispose();
+            _employeeFilterCts = null;
 
-        // transient edit-mode views for per-combo filtering
-        private ListCollectionView? _employeeEditView;
-        private ListCollectionView? _securityEditView;
+            if (_securityEditView == null)
+            {
+                var master = (IEnumerable<SecurityGroupLookupDto>?)ViewModel?.AvailableSecurityGroups ?? Enumerable.Empty<SecurityGroupLookupDto>();
+                var snapshot = master.ToList();
+                _securityEditView = new ListCollectionView((System.Collections.IList)snapshot);
+                cmbSecurityGroupIdNo.ItemsSource = _securityEditView;
+            }
+        }
 
+        private void OnEmployeeTextChanged()
+        {
+            _employeeFilterCts?.Cancel();
+            _employeeFilterCts?.Dispose();
+            _employeeFilterCts = new CancellationTokenSource();
+            var token = _employeeFilterCts.Token;
+            var text = cmbEmployeeIdNo.Text ?? string.Empty;
+
+            // take a snapshot of the master list on the UI thread to avoid cross-thread enumeration
+            var masterSnapshot = Dispatcher.Invoke(() => ViewModel?.AvailableEmployees?.ToList() ?? new List<EmployeeLookupDto>());
+
+            // show spinner immediately (UX feedback)
+            Dispatcher.Invoke(() => pbEmployeeFiltering.Visibility = Visibility.Visible);
+
+            _ = Task.Run(async () =>
+            {
+                try
+                {
+                    await Task.Delay(_filterDebounceMs, token).ConfigureAwait(false); // debounce
+
+                    List<EmployeeLookupDto> result;
+                    var f = text.Trim();
+                    if (string.IsNullOrEmpty(f)) result = masterSnapshot.ToList();
+                    else
+                    {
+                        // filter the snapshot off the UI thread
+                        result = masterSnapshot.Where(emp =>
+                            (!string.IsNullOrEmpty(emp.DisplayText) && emp.DisplayText.IndexOf(f, StringComparison.OrdinalIgnoreCase) >= 0)
+                            || (!string.IsNullOrEmpty(emp.EmployeeName) && emp.EmployeeName.IndexOf(f, StringComparison.OrdinalIgnoreCase) >= 0)
+                            || (!string.IsNullOrEmpty(emp.EmployeeCode) && emp.EmployeeCode.IndexOf(f, StringComparison.OrdinalIgnoreCase) >= 0)
+                        ).ToList();
+                    }
+
+                    await Dispatcher.BeginInvoke((Action)(() =>
+                    {
+                        if (token.IsCancellationRequested)
+                        {
+                            pbEmployeeFiltering.Visibility = Visibility.Collapsed;
+                            return;
+                        }
+
+                        var snapshot = result.ToList();
+                        _employeeEditView = new ListCollectionView((System.Collections.IList)snapshot);
+                        cmbEmployeeIdNo.ItemsSource = _employeeEditView;
+                        cmbEmployeeIdNo.IsDropDownOpen = true;
+
+                        var tb = cmbEmployeeIdNo.Template.FindName("PART_EditableTextBox", cmbEmployeeIdNo) as TextBox;
+                        if (tb != null)
+                        {
+                            tb.SelectionStart = tb.Text?.Length ?? 0;
+                            tb.SelectionLength = 0;
+                            tb.Focus();
+                        }
+
+                        // hide spinner
+                        pbEmployeeFiltering.Visibility = Visibility.Collapsed;
+                    }), System.Windows.Threading.DispatcherPriority.Background).Task.ConfigureAwait(false);
+                }
+                catch (OperationCanceledException)
+                {
+                    Dispatcher.Invoke(() => pbEmployeeFiltering.Visibility = Visibility.Collapsed);
+                }
+                catch
+                {
+                    Dispatcher.Invoke(() => pbEmployeeFiltering.Visibility = Visibility.Collapsed);
+                }
+            });
+        }
+
+        private void OnSecurityTextChanged()
+        {
+            _securityFilterCts?.Cancel();
+            _securityFilterCts?.Dispose();
+            _securityFilterCts = new CancellationTokenSource();
+            var token = _securityFilterCts.Token;
+            var text = cmbSecurityGroupIdNo.Text ?? string.Empty;
+
+            // take snapshot on UI thread
+            var masterSnapshot = Dispatcher.Invoke(() => ViewModel?.AvailableSecurityGroups?.ToList() ?? new List<SecurityGroupLookupDto>());
+
+            Dispatcher.Invoke(() => pbSecurityFiltering.Visibility = Visibility.Visible);
+
+            _ = Task.Run(async () =>
+            {
+                try
+                {
+                    await Task.Delay(_filterDebounceMs, token).ConfigureAwait(false);
+
+                    List<SecurityGroupLookupDto> result;
+                    var f = text.Trim();
+                    if (string.IsNullOrEmpty(f)) result = masterSnapshot.ToList();
+                    else
+                    {
+                        result = masterSnapshot.Where(sg =>
+                            (!string.IsNullOrEmpty(sg.DisplayText) && sg.DisplayText.IndexOf(f, StringComparison.OrdinalIgnoreCase) >= 0)
+                            || (!string.IsNullOrEmpty(sg.SecurityGroupName) && sg.SecurityGroupName.IndexOf(f, StringComparison.OrdinalIgnoreCase) >= 0)
+                            || (!string.IsNullOrEmpty(sg.SecurityGroupCode) && sg.SecurityGroupCode.IndexOf(f, StringComparison.OrdinalIgnoreCase) >= 0)
+                        ).ToList();
+                    }
+
+                    await Dispatcher.BeginInvoke((Action)(() =>
+                    {
+                        if (token.IsCancellationRequested)
+                        {
+                            pbSecurityFiltering.Visibility = Visibility.Collapsed;
+                            return;
+                        }
+
+                        var snapshot = result.ToList();
+                        _securityEditView = new ListCollectionView((System.Collections.IList)snapshot);
+                        cmbSecurityGroupIdNo.ItemsSource = _securityEditView;
+                        cmbSecurityGroupIdNo.IsDropDownOpen = true;
+
+                        var tb = cmbSecurityGroupIdNo.Template.FindName("PART_EditableTextBox", cmbSecurityGroupIdNo) as TextBox;
+                        if (tb != null)
+                        {
+                            tb.SelectionStart = tb.Text?.Length ?? 0;
+                            tb.SelectionLength = 0;
+                            tb.Focus();
+                        }
+
+                        pbSecurityFiltering.Visibility = Visibility.Collapsed;
+                    }), System.Windows.Threading.DispatcherPriority.Background).Task.ConfigureAwait(false);
+                }
+                catch (OperationCanceledException)
+                {
+                    Dispatcher.Invoke(() => pbSecurityFiltering.Visibility = Visibility.Collapsed);
+                }
+                catch
+                {
+                    Dispatcher.Invoke(() => pbSecurityFiltering.Visibility = Visibility.Collapsed);
+                }
+            });
+        }
+
+        // Allow runtime configuration of debounce
+        public int FilterDebounceMilliseconds
+        {
+            get => _filterDebounceMs;
+            set { _filterDebounceMs = Math.Max(25, value); } // lower bound
+        }
+
+        private void RestoreEmployeeItemsSource()
+        {
+            try
+            {
+                _employeeFilterCts?.Cancel();
+                _employeeFilterCts?.Dispose();
+                _employeeFilterCts = null;
+
+                cmbEmployeeIdNo.ItemsSource = ViewModel?.AvailableEmployees;
+                _employeeEditView = null;
+            }
+            catch { }
+        }
+
+        private void RestoreSecurityItemsSource()
+        {
+            try
+            {
+                _securityFilterCts?.Cancel();
+                _securityFilterCts?.Dispose();
+                _securityFilterCts = null;
+
+                cmbSecurityGroupIdNo.ItemsSource = ViewModel?.AvailableSecurityGroups;
+                _securityEditView = null;
+            }
+            catch { }
+        }
+
+        // ---------- Other UI handlers ----------
         private void BtnFind_Click(object sender, RoutedEventArgs e)
         {
             var input = Microsoft.VisualBasic.Interaction.InputBox("Enter text to filter:", "Filter Users");
@@ -105,7 +315,6 @@ namespace AATM.App.HisWpf
             ApplyFilter(null);
         }
 
-        // Minimal forwarder to centralized filtering helper
         private void ApplyFilter(string? term)
         {
             DataGridFilterHelper.ApplyTextFilter(dataGrid, term);
@@ -113,53 +322,37 @@ namespace AATM.App.HisWpf
 
         private void BtnSwitchLanguage_Click(object sender, RoutedEventArgs e)
         {
-            // Switch to Arabic (ar-SA). If already Arabic, switch back to English.
             var newLang = _localization_service.IsRightToLeft ? "en-US" : "ar-SA";
             _localization_service.SetLanguage(newLang, _moduleName);
 
-            // Apply culture and RTL at window level
             this.Language = XmlLanguage.GetLanguage(newLang);
             this.FlowDirection = _localization_service.IsRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
 
-            // Cache originals once
             CacheOriginalWindowChrome();
             CacheOriginalColumnHeaders();
 
-            // Localize chrome using cached originals
             LocalizeWindowChrome(newLang);
 
-            // Translate DataGrid column headers using cached originals
             foreach (var col in dataGrid.Columns)
             {
                 if (!_originalColumnHeaders.TryGetValue(col, out var original) || string.IsNullOrWhiteSpace(original))
                     continue;
 
-                if (IsEnglish(newLang))
-                    col.Header = original;
-                else
-                    col.Header = _localization_service.GetString(_moduleName, original, original);
+                col.Header = IsEnglish(newLang) ? original : _localization_service.GetString(_moduleName, original, original);
             }
 
-            // Ensure DataGrid refreshes visuals after header/culture changes
             CollectionViewSource.GetDefaultView(dataGrid.ItemsSource)?.Refresh();
             dataGrid.Items.Refresh();
             dataGrid.UpdateLayout();
         }
 
-        private static bool IsEnglish(string lang)
-            => lang.StartsWith("en", StringComparison.OrdinalIgnoreCase);
+        private static bool IsEnglish(string lang) => lang.StartsWith("en", StringComparison.OrdinalIgnoreCase);
+        private static bool IsGlyph(string s) => !string.IsNullOrWhiteSpace(s) && s.Length <= 3 && s.All(ch => char.IsPunctuation(ch) || char.IsSymbol(ch));
 
-        private static bool IsGlyph(string s)
-            => !string.IsNullOrWhiteSpace(s)
-               && s.Length <= 3
-               && s.All(ch => char.IsPunctuation(ch) || char.IsSymbol(ch));
-
-        // Cache originals for window title, labels, and buttons (outside the grid)
         private void CacheOriginalWindowChrome()
         {
             if (_originalsCached) return;
             _originalTitle = this.Title ?? string.Empty;
-
             if (this.Content is Grid root)
             {
                 foreach (var child in root.Children)
@@ -169,49 +362,33 @@ namespace AATM.App.HisWpf
                         foreach (var btn in sp.Children.OfType<Button>())
                         {
                             if (btn.Content is string content && !IsGlyph(content) && btn.Tag is null)
-                            {
-                                btn.Tag = content; // store original in Tag
-                            }
+                                btn.Tag = content;
                         }
                         continue;
                     }
 
                     if (child is Label lbl && lbl.Content is string c && !IsGlyph(c) && lbl.Tag is null)
-                    {
-                        lbl.Tag = c; // store original in Tag
-                    }
+                        lbl.Tag = c;
                 }
             }
-
             _originalsCached = true;
         }
 
-        // Cache original headers for columns once
         private void CacheOriginalColumnHeaders()
         {
             foreach (var col in dataGrid.Columns)
             {
                 if (_originalColumnHeaders.ContainsKey(col)) continue;
-                if (col.Header is string s && !string.IsNullOrWhiteSpace(s))
-                {
-                    _originalColumnHeaders[col] = s;
-                }
+                if (col.Header is string s && !string.IsNullOrWhiteSpace(s)) _originalColumnHeaders[col] = s;
             }
         }
 
-        // Use cached originals to set text for current language
         private void LocalizeWindowChrome(string lang)
         {
-            // Title
             if (!string.IsNullOrWhiteSpace(_originalTitle))
-            {
-                this.Title = IsEnglish(lang)
-                    ? _originalTitle
-                    : _localization_service.GetString(_moduleName, "Title", _originalTitle);
-            }
+                this.Title = IsEnglish(lang) ? _originalTitle : _localization_service.GetString(_moduleName, "Title", _originalTitle);
 
             if (this.Content is not Grid root) return;
-
             foreach (var child in root.Children)
             {
                 if (child is StackPanel sp)
@@ -219,71 +396,29 @@ namespace AATM.App.HisWpf
                     foreach (var btn in sp.Children.OfType<Button>())
                     {
                         if (btn.Content is not string content || IsGlyph(content)) continue;
-
                         var original = btn.Tag as string ?? content;
                         if (btn.Tag is null) btn.Tag = original;
-
-                        btn.Content = IsEnglish(lang)
-                            ? original
-                            : _localization_service.GetString(_moduleName, string.IsNullOrWhiteSpace(btn.Name) ? original : btn.Name, original);
+                        btn.Content = IsEnglish(lang) ? original : _localization_service.GetString(_moduleName, string.IsNullOrWhiteSpace(btn.Name) ? original : btn.Name, original);
                     }
                     continue;
                 }
-
                 if (child is Label lbl && lbl.Content is string c && !IsGlyph(c))
                 {
                     var original = lbl.Tag as string ?? c;
                     if (lbl.Tag is null) lbl.Tag = original;
-
-                    lbl.Content = IsEnglish(lang)
-                        ? original
-                        : _localization_service.GetString(_moduleName, string.IsNullOrWhiteSpace(lbl.Name) ? original : lbl.Name, original);
+                    lbl.Content = IsEnglish(lang) ? original : _localization_service.GetString(_moduleName, string.IsNullOrWhiteSpace(lbl.Name) ? original : lbl.Name, original);
                 }
             }
         }
 
-        private void BtnFirst_Click(object sender, RoutedEventArgs e)
-        {
-            if (ViewModel.Users.Count > 0)
-                ViewModel.SelectedUser = ViewModel.Users[0];
-        }
+        private void BtnFirst_Click(object sender, RoutedEventArgs e) { if (ViewModel.Users.Count > 0) ViewModel.SelectedUser = ViewModel.Users[0]; }
+        private void BtnPrev_Click(object sender, RoutedEventArgs e) { var idx = ViewModel.Users.IndexOf(ViewModel.SelectedUser); if (idx > 0) ViewModel.SelectedUser = ViewModel.Users[idx - 1]; }
+        private void BtnNext_Click(object sender, RoutedEventArgs e) { var idx = ViewModel.Users.IndexOf(ViewModel.SelectedUser); if (idx < ViewModel.Users.Count - 1) ViewModel.SelectedUser = ViewModel.Users[idx + 1]; }
+        private void BtnLast_Click(object sender, RoutedEventArgs e) { if (ViewModel.Users.Count > 0) ViewModel.SelectedUser = ViewModel.Users[ViewModel.Users.Count - 1]; }
+        private void BtnSave_Click(object sender, RoutedEventArgs e) { if (ViewModel.SaveCommand.CanExecute(null)) ViewModel.SaveCommand.Execute(null); }
+        private void BtnDelete_Click(object sender, RoutedEventArgs e) { if (ViewModel.DeleteCommand.CanExecute(null)) ViewModel.DeleteCommand.Execute(null); }
 
-        private void BtnPrev_Click(object sender, RoutedEventArgs e)
-        {
-            var idx = ViewModel.Users.IndexOf(ViewModel.SelectedUser);
-            if (idx > 0)
-                ViewModel.SelectedUser = ViewModel.Users[idx - 1];
-        }
-
-        private void BtnNext_Click(object sender, RoutedEventArgs e)
-        {
-            var idx = ViewModel.Users.IndexOf(ViewModel.SelectedUser);
-            if (idx < ViewModel.Users.Count - 1)
-                ViewModel.SelectedUser = ViewModel.Users[idx + 1];
-        }
-
-        private void BtnLast_Click(object sender, RoutedEventArgs e)
-        {
-            if (ViewModel.Users.Count > 0)
-                ViewModel.SelectedUser = ViewModel.Users[ViewModel.Users.Count - 1];
-        }
-
-        private void BtnSave_Click(object sender, RoutedEventArgs e)
-        {
-            bool canExecute = ViewModel.SaveCommand.CanExecute(null);
-            if (canExecute)
-            {
-                ViewModel.SaveCommand.Execute(null);
-            }
-        }
-
-        private async void BtnDelete_Click(object sender, RoutedEventArgs e)
-        {
-            if (ViewModel.DeleteCommand.CanExecute(null))
-                ViewModel.DeleteCommand.Execute(null);
-        }
-
-        private void ViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(ViewModel.SelectedUser))
             {
@@ -293,13 +428,8 @@ namespace AATM.App.HisWpf
                     dataGrid.ScrollIntoView(ViewModel.SelectedUser);
                 }
                 UpdateRecordIndicators();
-
-                // Removed synchronization logic that depended on removed filtering/view helpers.
             }
-            if (e.PropertyName == nameof(ViewModel.Users))
-            {
-                UpdateRecordIndicators();
-            }
+            if (e.PropertyName == nameof(ViewModel.Users)) UpdateRecordIndicators();
         }
 
         private void UpdateRecordIndicators()
@@ -307,109 +437,6 @@ namespace AATM.App.HisWpf
             var idx = ViewModel.Users.IndexOf(ViewModel.SelectedUser);
             txtCurrentRecord.Text = (idx >= 0 ? (idx + 1).ToString() : "0");
             txtRecordCount.Text = ViewModel.Users.Count.ToString();
-        }
-
-        private void EnsureEmployeeEditView()
-        {
-            try
-            {
-                if (_employeeEditView != null) return; // already using transient view
-                if (ViewModel == null) return;
-
-                // create a per-control view over the master collection so other consumers are unaffected
-                _employeeEditView = new ListCollectionView(ViewModel.AvailableEmployees);
-                cmbEmployeeIdNo.ItemsSource = _employeeEditView;
-            }
-            catch { }
-        }
-
-        private void OnEmployeeTextChanged()
-        {
-            try
-            {
-                if (_employeeEditView == null) return;
-                var filter = cmbEmployeeIdNo.Text ?? string.Empty;
-                if (string.IsNullOrWhiteSpace(filter))
-                {
-                    _employeeEditView.Filter = null;
-                }
-                else
-                {
-                    var f = filter.Trim();
-                    _employeeEditView.Filter = o =>
-                    {
-                        if (o is not AATM.Contracts.Dtos.EmployeeLookupDto emp) return false;
-                        return (!string.IsNullOrEmpty(emp.DisplayText) && emp.DisplayText.IndexOf(f, StringComparison.OrdinalIgnoreCase) >= 0)
-                            || (!string.IsNullOrEmpty(emp.EmployeeName) && emp.EmployeeName.IndexOf(f, StringComparison.OrdinalIgnoreCase) >= 0)
-                            || (!string.IsNullOrEmpty(emp.EmployeeCode) && emp.EmployeeCode.IndexOf(f, StringComparison.OrdinalIgnoreCase) >= 0);
-                    };
-                }
-                _employeeEditView.Refresh();
-
-                // ensure dropdown open so user sees filtered results
-                Dispatcher.BeginInvoke((Action)(() => cmbEmployeeIdNo.IsDropDownOpen = true), DispatcherPriority.Input);
-            }
-            catch { }
-        }
-
-        private void RestoreEmployeeItemsSource()
-        {
-            try
-            {
-                // restore original master collection as ItemsSource
-                cmbEmployeeIdNo.ItemsSource = ViewModel?.AvailableEmployees;
-                _employeeEditView = null;
-            }
-            catch { }
-        }
-
-        private void EnsureSecurityEditView()
-        {
-            try
-            {
-                if (_securityEditView != null) return;
-                if (ViewModel == null) return;
-                _securityEditView = new ListCollectionView(ViewModel.AvailableSecurityGroups);
-                cmbSecurityGroupIdNo.ItemsSource = _securityEditView;
-            }
-            catch { }
-        }
-
-        private void OnSecurityTextChanged()
-        {
-            try
-            {
-                if (_securityEditView == null) return;
-                var filter = cmbSecurityGroupIdNo.Text ?? string.Empty;
-                if (string.IsNullOrWhiteSpace(filter))
-                {
-                    _securityEditView.Filter = null;
-                }
-                else
-                {
-                    var f = filter.Trim();
-                    _securityEditView.Filter = o =>
-                    {
-                        if (o is not AATM.Contracts.Dtos.SecurityGroupLookupDto sg) return false;
-                        return (!string.IsNullOrEmpty(sg.DisplayText) && sg.DisplayText.IndexOf(f, StringComparison.OrdinalIgnoreCase) >= 0)
-                            || (!string.IsNullOrEmpty(sg.SecurityGroupName) && sg.SecurityGroupName.IndexOf(f, StringComparison.OrdinalIgnoreCase) >= 0)
-                            || (!string.IsNullOrEmpty(sg.SecurityGroupCode) && sg.SecurityGroupCode.IndexOf(f, StringComparison.OrdinalIgnoreCase) >= 0);
-                    };
-                }
-                _securityEditView.Refresh();
-                Dispatcher.BeginInvoke((Action)(() => cmbSecurityGroupIdNo.IsDropDownOpen = true), DispatcherPriority.Input);
-            }
-            catch { }
-        }
-
-        private void RestoreSecurityItemsSource()
-        {
-            try
-            {
-                cmbSecurityGroupIdNo.ItemsSource = ViewModel?.AvailableSecurityGroups;
-                _securityEditView = null;
-            }
-            catch { }
         }
 
         // Add this override to unsubscribe event handlers when the window closes
@@ -434,5 +461,7 @@ namespace AATM.App.HisWpf
 
             base.OnClosed(e);
         }
+
+        // Note: removed code-behind preview key handler in favor of attached behavior at XAML level
     }
 }
