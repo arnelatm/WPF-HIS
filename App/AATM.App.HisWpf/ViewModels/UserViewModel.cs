@@ -152,26 +152,32 @@ namespace AATM.App.HisWpf.ViewModels
             get => _employeeFilterText;
             set
             {
-                if (_employeeFilterText != value)
-                {
-                    _employeeFilterText = value;
-                    OnPropertyChanged();
+                if (_employeeFilterText == value) return;
+                _employeeFilterText = value;
+                OnPropertyChanged();
 
-                    // cancel previous, debounce, run async filter
-                    _employeeFilterCts?.Cancel();
-                    _employeeFilterCts?.Dispose();
-                    _employeeFilterCts = new CancellationTokenSource();
-                    var token = _employeeFilterCts.Token;
-                    _ = Task.Run(async () =>
-                    {
-                        try
-                        {
-                            await Task.Delay(_filterDebounce, token).ConfigureAwait(false);
-                            await ApplyEmployeeFilterAsync(token).ConfigureAwait(false);
-                        }
-                        catch (OperationCanceledException) { }
-                    });
+                // Immediately refresh the view so dropdown narrows as user types
+                var dispatcher = App.Current?.Dispatcher;
+                if (dispatcher != null)
+                {
+                    // Use BeginInvoke so UI stays responsive
+                    dispatcher.BeginInvoke((Action)(() => _employeeViewSource.View?.Refresh()), System.Windows.Threading.DispatcherPriority.Background);
                 }
+
+                // Keep async fetch (debounced) only for ensuring selected item presence in master list
+                _employeeFilterCts?.Cancel();
+                _employeeFilterCts?.Dispose();
+                _employeeFilterCts = new CancellationTokenSource();
+                var token = _employeeFilterCts.Token;
+                _ = Task.Run(async () =>
+                {
+                    try
+                    {
+                        await Task.Delay(_filterDebounce, token).ConfigureAwait(false);
+                        await ApplyEmployeeFilterAsync(token).ConfigureAwait(false); // will only try to fetch/ensure selected item
+                    }
+                    catch (OperationCanceledException) { }
+                });
             }
         }
 

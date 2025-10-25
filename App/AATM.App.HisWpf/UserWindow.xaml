@@ -64,28 +64,25 @@
                  Text="{Binding SelectedUser.UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True, TargetNullValue=''}"/>
 
         <Label Grid.Row="3" Grid.Column="0" Content="Employee Code - Name" Grid.ColumnSpan="2"/>
-        <!-- Replace the Employee ComboBox with this self-filtering version (ViewModel-based filtering) -->
+        <!-- Top-level ComboBox now uses VM-managed view (EmployeeView). Filtering driven entirely by VM. 
+             ComboBoxHelpers is kept in project but not used here. -->
         <ComboBox Grid.Row="3" Grid.Column="2" x:Name="cmbEmployeeIdNo"
           IsEditable="True"
           SelectedValuePath="IdNo"
           DisplayMemberPath="DisplayText"
           SelectedValue="{Binding SelectedUser.EmployeeIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
           Text="{Binding EmployeeFilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          ItemsSource="{Binding AvailableEmployees}"
-          local:ComboBoxHelpers.FilterText="{Binding EmployeeFilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          local:ComboBoxHelpers.FilterMemberPaths="DisplayText,EmployeeCode,EmployeeName" />
+          ItemsSource="{Binding EmployeeView}" />
 
         <Label Grid.Row="4" Grid.Column="0" Content="Security Group Code-Name" Grid.ColumnSpan="2"/>
-        <!-- Security group (top-level) : bind to master list but enable per-combo filtering -->
+        <!-- Top-level Security ComboBox bound to VM view -->
         <ComboBox Grid.Row="4" Grid.Column="2" x:Name="cmbSecurityGroupIdNo"
           IsEditable="True"
           SelectedValuePath="IdNo"
           DisplayMemberPath="DisplayText"
           SelectedValue="{Binding SelectedUser.SecurityGroupIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
           Text="{Binding SecurityGroupFilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          ItemsSource="{Binding AvailableSecurityGroups}"
-          local:ComboBoxHelpers.FilterText="{Binding SecurityGroupFilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          local:ComboBoxHelpers.FilterMemberPaths="DisplayText,Code,Name" />
+          ItemsSource="{Binding SecurityGroupView}" />
 
         <Label Grid.Row="5" Grid.Column="0" Content="Password" Grid.ColumnSpan="2"/>
         <TextBox Grid.Row="5" Grid.Column="2" x:Name="txtPassword"
@@ -117,7 +114,7 @@
                 <local:ValidatedTextColumn Header="Id Number" Binding="{Binding IdNo}" Width="80"/>
                 <local:ValidatedTextColumn Header="User Name" Binding="{Binding UserName}" Width="100"/>
 
-                <!-- Employee template column: display via shared multi-converter, edit via ComboBox bound to AvailableEmployees -->
+                <!-- Employee template column: display via shared multi-converter, edit via ComboBox bound to EmployeeView -->
                 <DataGridTemplateColumn Header="Employee Name" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -146,7 +143,7 @@
                                 ItemContainerStyle="{StaticResource KeyboardNavigableComboBoxItemStyle}"
                                 behaviors:FilterableComboBoxHelper.EnableFiltering="True"
                                 behaviors:FilterableComboBoxHelper.FilterPropertyName="EmployeeFilterText"
-                                Text="{Binding DataContext.EmployeeFilterText, ElementName=dataGrid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                Text="{Binding DataContext.EmployeeFilterText, ElementName=datagrid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <ComboBox.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <VirtualizingStackPanel IsItemsHost="True" VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling" />
@@ -166,7 +163,7 @@
                                 <TextBlock.Text>
                                     <MultiBinding Converter="{StaticResource IdToDisplayTextMultiConverter}">
                                         <Binding Path="SecurityGroupIdNo"/>
-                                        <Binding ElementName="dataGrid" Path="DataContext.AvailableSecurityGroups"/>
+                                        <Binding ElementName="datagrid" Path="DataContext.AvailableSecurityGroups"/>
                                     </MultiBinding>
                                 </TextBlock.Text>
                             </TextBlock>
@@ -175,7 +172,7 @@
                     <DataGridTemplateColumn.CellEditingTemplate>
                         <DataTemplate>
                             <ComboBox
-                                ItemsSource="{Binding DataContext.SecurityGroupView, ElementName=dataGrid}"
+                                ItemsSource="{Binding DataContext.SecurityGroupView, ElementName=datagrid}"
                                 SelectedValue="{Binding SecurityGroupIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 SelectedValuePath="IdNo"
                                 DisplayMemberPath="DisplayText"

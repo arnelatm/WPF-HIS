@@ -63,7 +63,24 @@ namespace AATM.App.HisWpf
 
             // Use shared ComboBox manager to minimize local wiring
             ComboBoxManager.Attach(cmbEmployeeIdNo,
-                onTextChanged: (c, text) => ViewModel.EmployeeFilterText = text,
+                onTextChanged: (c, text) =>
+                {
+                    // update VM filter immediately
+                    ViewModel.EmployeeFilterText = text ?? string.Empty;
+
+                    // open the dropdown so user sees filtered results
+                    c.Dispatcher.BeginInvoke((Action)(() =>
+                    {
+                        try
+                        {
+                            ComboBoxHelpers.EnsureDropDownOpen(c);
+                        }
+                        catch
+                        {
+                            // ignore any popup timing exceptions
+                        }
+                    }), System.Windows.Threading.DispatcherPriority.ApplicationIdle);
+                },
                 onSelectionChanged: (c, e) =>
                 {
                     if (e.AddedItems?.Count > 0 && e.AddedItems[0] is EmployeeLookupDto emp)
@@ -76,11 +93,30 @@ namespace AATM.App.HisWpf
                 {
                     // keep any small preview-key logic you need here (Backspace/Escape/Enter handling)
                 },
-                onDropDownClosed: c => ComboBoxHelpers.ClearFilterAndRefresh(c, clearFilterText: false)
+                onDropDownClosed: c => {
+                    // no ComboBoxHelpers.ClearFilterAndRefresh here — VM controls filtering.
+                    // Optionally clear the filter text when dropdown closes:
+                    // ViewModel.EmployeeFilterText = string.Empty;
+                }
             );
 
             ComboBoxManager.Attach(cmbSecurityGroupIdNo,
-                onTextChanged: (c, text) => ViewModel.SecurityGroupFilterText = text,
+                onTextChanged: (c, text) =>
+                {
+                    ViewModel.SecurityGroupFilterText = text ?? string.Empty;
+
+                    c.Dispatcher.BeginInvoke((Action)(() =>
+                    {
+                        try
+                        {
+                            ComboBoxHelpers.EnsureDropDownOpen(c);
+                        }
+                        catch
+                        {
+                            // ignore
+                        }
+                    }), System.Windows.Threading.DispatcherPriority.ApplicationIdle);
+                },
                 onSelectionChanged: (c, e) =>
                 {
                     if (e.AddedItems?.Count > 0 && e.AddedItems[0] is SecurityGroupLookupDto sg)
@@ -89,8 +125,12 @@ namespace AATM.App.HisWpf
                         ViewModel.SecurityGroupFilterText = sg.DisplayText ?? string.Empty;
                     }
                 },
-                onPreviewKeyDown: (c, ke) => { /* small custom logic if needed */ },
-                onDropDownClosed: c => ComboBoxHelpers.ClearFilterAndRefresh(c, clearFilterText: true)
+                onPreviewKeyDown: (c, ke) => { /* custom logic if needed */ },
+                onDropDownClosed: c =>
+                {
+                    // Optionally clear filter text on close:
+                    // ViewModel.SecurityGroupFilterText = string.Empty;
+                }
             );
         }
 
