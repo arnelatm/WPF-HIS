@@ -1,7 +1,6 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Data;
 using AATM.App.HisWpf.ViewModels;
 
 namespace AATM.App.HisWpf.Behaviors
@@ -40,7 +39,7 @@ namespace AATM.App.HisWpf.Behaviors
         private static void Combo_TextInput(object sender, TextCompositionEventArgs e)
         {
             if (sender is not ComboBox combo || !combo.IsEditable) return;
-            
+
             // After text input, ensure bindings are updated
             var beText = combo.GetBindingExpression(ComboBox.TextProperty);
             beText?.UpdateSource();
@@ -49,7 +48,7 @@ namespace AATM.App.HisWpf.Behaviors
         private static void Combo_LostFocus(object sender, RoutedEventArgs e)
         {
             if (sender is not ComboBox combo) return;
-            
+
             if (string.IsNullOrEmpty(combo.Text))
             {
                 ClearComboBoxValue(combo);
