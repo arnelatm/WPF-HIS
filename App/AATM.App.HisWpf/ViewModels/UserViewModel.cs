@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using System.Threading;
+using System.Windows.Data;
 using System.Collections.Specialized;
 using System.Threading.Tasks;
 using AATM.App.HisWpf.ViewModels;
@@ -30,9 +31,13 @@ namespace AATM.App.HisWpf.ViewModels
 
         public ObservableCollection<LanguageItem> AvailableLanguages { get; } = new();
         public ObservableCollection<EmployeeLookupDto> AvailableEmployees { get; } = new();
+        private readonly CollectionViewSource _employeeViewSource = new();
+        public ICollectionView EmployeeView => _employeeViewSource.View;
 
         public bool SelectedUserImplementsErrorInfo => SelectedUser is INotifyDataErrorInfo;
         public ObservableCollection<SecurityGroupLookupDto> AvailableSecurityGroups { get; } = new();
+        private readonly CollectionViewSource _securityViewSource = new();
+        public ICollectionView SecurityGroupView => _securityViewSource.View;
 
         public ObservableCollection<UserDto> Users { get; } = new();
 
@@ -89,6 +94,13 @@ namespace AATM.App.HisWpf.ViewModels
             foreach (var (display, code) in langs)
                 AvailableLanguages.Add(new LanguageItem(display, code));
 
+            // Initialize CollectionViewSources
+            _employeeViewSource.Source = AvailableEmployees;
+            _employeeViewSource.Filter += (_, args) => args.Accepted = EmployeeFilterPredicate(args.Item as EmployeeLookupDto);
+
+            _securityViewSource.Source = AvailableSecurityGroups;
+            _securityViewSource.Filter += (_, args) => args.Accepted = SecurityGroupFilterPredicate(args.Item as SecurityGroupLookupDto);
+
             SaveCommand = new AsyncRelayCommand(
                 async _ => await Save(),
                 _ => SelectedUser != null && !HasErrors
@@ -108,6 +120,56 @@ namespace AATM.App.HisWpf.ViewModels
             foreach (var s in AvailableSecurityGroups) AttachSecurityItemHandlers(s);
         }
 
+        private bool EmployeeFilterPredicate(EmployeeLookupDto? emp)
+        {
+            if (emp == null) return false;
+            var filter = EmployeeFilterText?.Trim() ?? string.Empty;
+            if (string.IsNullOrEmpty(filter)) return true;
+            return (!string.IsNullOrEmpty(emp.DisplayText) && emp.DisplayText.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0)
+                || (!string.IsNullOrEmpty(emp.EmployeeName) && emp.EmployeeName.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0)
+                || (!string.IsNullOrEmpty(emp.EmployeeCode) && emp.EmployeeCode.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0);
+        }
+
+        private bool SecurityGroupFilterPredicate(SecurityGroupLookupDto? sg)
+        {
+            if (sg == null) return false;
+            var filter = SecurityGroupFilterText?.Trim() ?? string.Empty;
+            if (string.IsNullOrEmpty(filter)) return true;
+            return (!string.IsNullOrEmpty(sg.DisplayText) && sg.DisplayText.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0)
+                || (!string.IsNullOrEmpty(sg.SecurityGroupName) && sg.SecurityGroupName.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0)
+                || (!string.IsNullOrEmpty(sg.SecurityGroupCode) && sg.SecurityGroupCode.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0);
+        }
+
+        // Employee filter
+        private string _employeeFilterText = "";
+        public string EmployeeFilterText
+        {
+            get => _employeeFilterText;
+            set
+            {
+                if (_employeeFilterText == value) return;
+                _employeeFilterText = value;
+                OnPropertyChanged();
+                try { _employeeViewSource.View?.Refresh(); } catch { }
+            }
+        }
+
+        // Security group filter
+        private string _securityGroupFilterText = "";
+        public string SecurityGroupFilterText
+        {
+            get => _securityGroupFilterText;
+            set
+            {
+                if (_securityGroupFilterText != value)
+                {
+                    _securityGroupFilterText = value;
+                    OnPropertyChanged();
+                    try { _securityViewSource.View?.Refresh(); } catch { }
+                }
+            }
+        }
+
         public async Task LoadEmployeesAsync()
         {
             var employees = await _employeeRepo.GetEmployeesLookupAsync().ConfigureAwait(false);
@@ -115,6 +177,7 @@ namespace AATM.App.HisWpf.ViewModels
             {
                 AvailableEmployees.Clear();
                 foreach (var e in employees) AvailableEmployees.Add(e);
+                _employeeViewSource.View?.Refresh();
 
                 // rebuild lookup map and notify consumers
                 BuildLookupMaps();
@@ -129,6 +192,7 @@ namespace AATM.App.HisWpf.ViewModels
             {
                 AvailableSecurityGroups.Clear();
                 foreach (var sg in securityGroups) AvailableSecurityGroups.Add(sg);
+                _securityViewSource.View?.Refresh();
 
                 // rebuild lookup map and notify consumers
                 BuildLookupMaps();

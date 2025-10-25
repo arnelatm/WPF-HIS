@@ -9,6 +9,11 @@ using System.Windows.Input;
 using AATM.Contracts.Dtos;
 using System.Linq;
 using AATM.App.HisWpf.Helpers;
+using System.Windows.Controls.Primitives;
+using System.Windows.Threading;
+using System.ComponentModel;
+using System.Collections;
+using System.Windows.Controls;
 
 namespace AATM.App.HisWpf
 {
@@ -54,6 +59,17 @@ namespace AATM.App.HisWpf
             UpdateRecordIndicators();
 
             // Note: removed custom ComboBoxManager attachments and filtering helpers to restore default ComboBox behavior.
+
+            // Wire per-combo edit-mode filtering (transient view so master list is not changed)
+            cmbEmployeeIdNo.GotKeyboardFocus += (s, e) => EnsureEmployeeEditView();
+            cmbEmployeeIdNo.PreviewMouseDown += (s, e) => { if (!cmbEmployeeIdNo.IsDropDownOpen) EnsureEmployeeEditView(); };
+            cmbEmployeeIdNo.DropDownClosed += (s, e) => RestoreEmployeeItemsSource();
+            cmbEmployeeIdNo.AddHandler(TextBox.TextChangedEvent, new TextChangedEventHandler((s, e) => OnEmployeeTextChanged()));
+
+            cmbSecurityGroupIdNo.GotKeyboardFocus += (s, e) => EnsureSecurityEditView();
+            cmbSecurityGroupIdNo.PreviewMouseDown += (s, e) => { if (!cmbSecurityGroupIdNo.IsDropDownOpen) EnsureSecurityEditView(); };
+            cmbSecurityGroupIdNo.DropDownClosed += (s, e) => RestoreSecurityItemsSource();
+            cmbSecurityGroupIdNo.AddHandler(TextBox.TextChangedEvent, new TextChangedEventHandler((s, e) => OnSecurityTextChanged()));
         }
 
         private UserViewModel ViewModel => (UserViewModel)DataContext;
@@ -68,6 +84,10 @@ namespace AATM.App.HisWpf
 
         // NEW: current filter text
         private string? _currentFilter;
+
+        // transient edit-mode views for per-combo filtering
+        private ListCollectionView? _employeeEditView;
+        private ListCollectionView? _securityEditView;
 
         private void BtnFind_Click(object sender, RoutedEventArgs e)
         {
@@ -287,6 +307,109 @@ namespace AATM.App.HisWpf
             var idx = ViewModel.Users.IndexOf(ViewModel.SelectedUser);
             txtCurrentRecord.Text = (idx >= 0 ? (idx + 1).ToString() : "0");
             txtRecordCount.Text = ViewModel.Users.Count.ToString();
+        }
+
+        private void EnsureEmployeeEditView()
+        {
+            try
+            {
+                if (_employeeEditView != null) return; // already using transient view
+                if (ViewModel == null) return;
+
+                // create a per-control view over the master collection so other consumers are unaffected
+                _employeeEditView = new ListCollectionView(ViewModel.AvailableEmployees);
+                cmbEmployeeIdNo.ItemsSource = _employeeEditView;
+            }
+            catch { }
+        }
+
+        private void OnEmployeeTextChanged()
+        {
+            try
+            {
+                if (_employeeEditView == null) return;
+                var filter = cmbEmployeeIdNo.Text ?? string.Empty;
+                if (string.IsNullOrWhiteSpace(filter))
+                {
+                    _employeeEditView.Filter = null;
+                }
+                else
+                {
+                    var f = filter.Trim();
+                    _employeeEditView.Filter = o =>
+                    {
+                        if (o is not AATM.Contracts.Dtos.EmployeeLookupDto emp) return false;
+                        return (!string.IsNullOrEmpty(emp.DisplayText) && emp.DisplayText.IndexOf(f, StringComparison.OrdinalIgnoreCase) >= 0)
+                            || (!string.IsNullOrEmpty(emp.EmployeeName) && emp.EmployeeName.IndexOf(f, StringComparison.OrdinalIgnoreCase) >= 0)
+                            || (!string.IsNullOrEmpty(emp.EmployeeCode) && emp.EmployeeCode.IndexOf(f, StringComparison.OrdinalIgnoreCase) >= 0);
+                    };
+                }
+                _employeeEditView.Refresh();
+
+                // ensure dropdown open so user sees filtered results
+                Dispatcher.BeginInvoke((Action)(() => cmbEmployeeIdNo.IsDropDownOpen = true), DispatcherPriority.Input);
+            }
+            catch { }
+        }
+
+        private void RestoreEmployeeItemsSource()
+        {
+            try
+            {
+                // restore original master collection as ItemsSource
+                cmbEmployeeIdNo.ItemsSource = ViewModel?.AvailableEmployees;
+                _employeeEditView = null;
+            }
+            catch { }
+        }
+
+        private void EnsureSecurityEditView()
+        {
+            try
+            {
+                if (_securityEditView != null) return;
+                if (ViewModel == null) return;
+                _securityEditView = new ListCollectionView(ViewModel.AvailableSecurityGroups);
+                cmbSecurityGroupIdNo.ItemsSource = _securityEditView;
+            }
+            catch { }
+        }
+
+        private void OnSecurityTextChanged()
+        {
+            try
+            {
+                if (_securityEditView == null) return;
+                var filter = cmbSecurityGroupIdNo.Text ?? string.Empty;
+                if (string.IsNullOrWhiteSpace(filter))
+                {
+                    _securityEditView.Filter = null;
+                }
+                else
+                {
+                    var f = filter.Trim();
+                    _securityEditView.Filter = o =>
+                    {
+                        if (o is not AATM.Contracts.Dtos.SecurityGroupLookupDto sg) return false;
+                        return (!string.IsNullOrEmpty(sg.DisplayText) && sg.DisplayText.IndexOf(f, StringComparison.OrdinalIgnoreCase) >= 0)
+                            || (!string.IsNullOrEmpty(sg.SecurityGroupName) && sg.SecurityGroupName.IndexOf(f, StringComparison.OrdinalIgnoreCase) >= 0)
+                            || (!string.IsNullOrEmpty(sg.SecurityGroupCode) && sg.SecurityGroupCode.IndexOf(f, StringComparison.OrdinalIgnoreCase) >= 0);
+                    };
+                }
+                _securityEditView.Refresh();
+                Dispatcher.BeginInvoke((Action)(() => cmbSecurityGroupIdNo.IsDropDownOpen = true), DispatcherPriority.Input);
+            }
+            catch { }
+        }
+
+        private void RestoreSecurityItemsSource()
+        {
+            try
+            {
+                cmbSecurityGroupIdNo.ItemsSource = ViewModel?.AvailableSecurityGroups;
+                _securityEditView = null;
+            }
+            catch { }
         }
 
         // Add this override to unsubscribe event handlers when the window closes
