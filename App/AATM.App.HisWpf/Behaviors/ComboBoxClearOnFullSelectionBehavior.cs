@@ -76,13 +76,36 @@ namespace AATM.App.HisWpf.Behaviors
             var tb = combo.Template.FindName("PART_EditableTextBox", combo) as TextBox;
             if (tb == null) return;
 
+            // Handle Delete or Backspace
             if (e.Key == Key.Delete || e.Key == Key.Back)
             {
-                if (string.IsNullOrEmpty(tb.Text) || tb.SelectionLength == tb.Text.Length)
+                // Prevent SelectedValue/SelectedItem from restoring text:
+                combo.SelectedItem = null;
+                combo.SelectedValue = null;
+                combo.GetBindingExpression(ComboBox.SelectedValueProperty)?.UpdateSource();
+
+                // If some text is selected, remove it immediately and update bindings
+                if (tb.SelectionLength > 0)
                 {
-                    ClearComboBoxValue(combo);
-                    e.Handled = true;
+                    var start = tb.SelectionStart;
+                    tb.Text = tb.Text.Remove(start, tb.SelectionLength);
+                    tb.SelectionStart = start;
+                    tb.SelectionLength = 0;
+
+                    combo.GetBindingExpression(ComboBox.TextProperty)?.UpdateSource();
+                    e.Handled = true; // we handled the edit
+                    return;
                 }
+
+                // No selection: allow default deletion to happen but ensure SelectedValue doesn't restore text.
+                // Defer clearing/update to run after the control's own processing to avoid interfering with default edit.
+                combo.Dispatcher.BeginInvoke((Action)(() =>
+                {
+                    combo.SelectedItem = null;
+                    combo.SelectedValue = null;
+                    combo.GetBindingExpression(ComboBox.SelectedValueProperty)?.UpdateSource();
+                    combo.GetBindingExpression(ComboBox.TextProperty)?.UpdateSource();
+                }), System.Windows.Threading.DispatcherPriority.Input);
             }
         }
 
