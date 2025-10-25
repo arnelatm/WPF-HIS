@@ -1,7 +1,5 @@
 ﻿using AATM.App.HisWpf.ViewModels;
-using System;
 using System.Globalization;
-using System.Linq;
 using System.Windows;
 using System.Windows.Data;
 

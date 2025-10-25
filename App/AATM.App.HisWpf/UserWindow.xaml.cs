@@ -1,19 +1,13 @@
-﻿using AATM.App.HisWpf.ViewModels;
+﻿using AATM.App.HisWpf.Helpers;
+using AATM.App.HisWpf.ViewModels;
+using AATM.Contracts.Dtos;
 using AATM.Contracts.Interfaces.Services;
+using Microsoft.Extensions.DependencyInjection;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Markup;
-using Microsoft.Extensions.DependencyInjection;
-using System.Windows.Input;
-using AATM.Contracts.Dtos;
-using System.Linq;
-using AATM.App.HisWpf.Helpers;
-using System.Threading.Tasks;
-using System.Threading;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System;
 
 namespace AATM.App.HisWpf
 {

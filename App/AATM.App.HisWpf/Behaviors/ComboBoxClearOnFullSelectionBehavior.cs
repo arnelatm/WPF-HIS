@@ -1,7 +1,7 @@
+using AATM.App.HisWpf.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using AATM.App.HisWpf.ViewModels;
 
 namespace AATM.App.HisWpf.Behaviors
 {

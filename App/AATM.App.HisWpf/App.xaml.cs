@@ -1,5 +1,4 @@
 ﻿using AATM.App.HisWpf.ViewModels;
-using AATM.Contracts.Interfaces.Services;
 using AATM.Core.Localization;
 using AATM.DataAccess;
 using AATM.DataAccess.Sql;
@@ -8,7 +7,6 @@ using AATM.Modules.Users;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
 using System.Windows;
 
 namespace AATM.App.HisWpf

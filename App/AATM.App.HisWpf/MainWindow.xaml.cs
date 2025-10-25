@@ -1,7 +1,6 @@
 ﻿using AATM.Modules.Localization;
 using AATM.Modules.Users;
 using Microsoft.Extensions.DependencyInjection;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace AATM.App.HisWpf
@@ -47,4 +46,4 @@ namespace AATM.App.HisWpf
         }
 
     }
-}   
+}

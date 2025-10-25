@@ -1,14 +1,9 @@
 ﻿using AATM.App.HisWpf.ViewModels;
 using AATM.Contracts.Interfaces.Services;
-using AATM.Core.Localization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Markup;
-using System.Windows.Media;
 
 namespace AATM.App.HisWpf
 {

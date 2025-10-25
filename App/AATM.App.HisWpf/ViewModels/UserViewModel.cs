@@ -1,16 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Windows.Input;
-using System.Threading;
-using System.Windows.Data;
-using System.Collections.Specialized;
-using System.Threading.Tasks;
-using AATM.App.HisWpf.ViewModels;
 using AATM.Business.Validation.ValidationRules;
 using AATM.Business.Validation.Validators;
 using AATM.Contracts.Dtos;
@@ -19,6 +6,12 @@ using AATM.Core.Localization;
 using AATM.DataAccess;
 using AATM.Modules.Localization;
 using AATM.Modules.Users;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Windows.Data;
+using System.Windows.Input;
 
 namespace AATM.App.HisWpf.ViewModels
 {
@@ -499,7 +492,9 @@ namespace AATM.App.HisWpf.ViewModels
 
         private async Task RefreshSafeAsync()
         {
-            try { await Refresh(true).ConfigureAwait(true);
+            try
+            {
+                await Refresh(true).ConfigureAwait(true);
             }
             catch (Exception ex)
             {
@@ -658,22 +653,22 @@ namespace AATM.App.HisWpf.ViewModels
             {
                 BuildLookupMaps();
                 OnPropertyChanged(nameof(EmployeeMap));
-                
+
                 // Update display text if this is the selected employee
                 if (SelectedUser?.EmployeeIdNo == item.IdNo)
                     EmployeeDisplayText = item.DisplayText ?? string.Empty;
-                
+
                 return;
             }
 
             if (e.PropertyName == nameof(EmployeeLookupDto.DisplayText) || string.IsNullOrEmpty(e.PropertyName))
             {
                 _employeeMap[item.IdNo] = item.DisplayText ?? string.Empty;
-                
+
                 // Update display text if this is the selected employee
                 if (SelectedUser?.EmployeeIdNo == item.IdNo)
                     EmployeeDisplayText = item.DisplayText ?? string.Empty;
-                
+
                 OnPropertyChanged(nameof(EmployeeMap));
             }
         }
@@ -686,22 +681,22 @@ namespace AATM.App.HisWpf.ViewModels
             {
                 BuildLookupMaps();
                 OnPropertyChanged(nameof(SecurityMap));
-                
+
                 // Update display text if this is the selected security group
                 if (SelectedUser?.SecurityGroupIdNo == item.IdNo)
                     SecurityGroupDisplayText = item.DisplayText ?? string.Empty;
-                
+
                 return;
             }
 
             if (e.PropertyName == nameof(SecurityGroupLookupDto.DisplayText) || string.IsNullOrEmpty(e.PropertyName))
             {
                 _securityMap[item.IdNo] = item.DisplayText ?? string.Empty;
-                
+
                 // Update display text if this is the selected security group
                 if (SelectedUser?.SecurityGroupIdNo == item.IdNo)
                     SecurityGroupDisplayText = item.DisplayText ?? string.Empty;
-                
+
                 OnPropertyChanged(nameof(SecurityMap));
             }
         }

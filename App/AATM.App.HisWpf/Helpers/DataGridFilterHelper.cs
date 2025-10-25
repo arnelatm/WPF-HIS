@@ -1,7 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Windows.Controls;
 using System.Windows.Data;
 

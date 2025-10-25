@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
 namespace AATM.App.HisWpf.ViewModels
 {
@@ -51,4 +49,4 @@ namespace AATM.App.HisWpf.ViewModels
             CommandManager.InvalidateRequerySuggested();
         }
     }
-}   
+}
