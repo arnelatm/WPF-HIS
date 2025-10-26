@@ -4,7 +4,6 @@ using AATM.Contracts.Dtos;
 using AATM.Contracts.Interfaces.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,15 +20,7 @@ namespace AATM.App.HisWpf
     {
         private readonly UserViewModel _viewModel;
 
-        // transient edit-mode views for per-combo filtering
-        private ListCollectionView? _employeeEditView;
-        private ListCollectionView? _securityEditView;
-
-        // debounce/cancellation tokens to avoid filtering on every keystroke
-        private CancellationTokenSource? _employeeFilterCts;
-        private CancellationTokenSource? _securityFilterCts;
-
-        // configurable debounce in milliseconds
+        // configurable debounce in milliseconds (kept for XAML binding)
         private int _filterDebounceMs = 120; // default shorter debounce
 
         private ILocalizationService _localization_service;
@@ -41,9 +32,6 @@ namespace AATM.App.HisWpf
         private readonly Dictionary<DataGridColumn, string> _originalColumnHeaders = new();
 
         private string? _currentFilter;
-
-        // store the runtime keyboard focus handler so it can be removed on close
-        private KeyboardFocusChangedEventHandler? _keyboardFocusHandler;
 
         // Prefer resolving via DI; this overload chains to the primary ctor
         public UserWindow(UserViewModel viewmodel)
@@ -80,89 +68,17 @@ namespace AATM.App.HisWpf
             ViewModel.PropertyChanged += ViewModel_PropertyChanged;
             UpdateRecordIndicators();
 
-            // Wire per-combo edit-mode filtering (transient view so master list is not changed)
-            cmbEmployeeIdNo.GotKeyboardFocus += (s, e) => OnEmployeeGotFocus();
-            cmbEmployeeIdNo.PreviewMouseDown += (s, e) => { if (!cmbEmployeeIdNo.IsDropDownOpen) OnEmployeeGotFocus(); };
-            cmbEmployeeIdNo.DropDownClosed += (s, e) => RestoreEmployeeItemsSource();
-            // Use attached behavior instead of code-behind handler
-            // Behavior usage requires XAML change to set the attached property
-
-            cmbSecurityGroupIdNo.GotKeyboardFocus += (s, e) => OnSecurityGotFocus();
-            cmbSecurityGroupIdNo.PreviewMouseDown += (s, e) => { if (!cmbSecurityGroupIdNo.IsDropDownOpen) OnSecurityGotFocus(); };
-            cmbSecurityGroupIdNo.DropDownClosed += (s, e) => RestoreSecurityItemsSource();
-            //cmbSecurityGroupIdNo.AddHandler(TextBox.TextChangedEvent, new TextChangedEventHandler((s, e) => OnSecurityTextChanged()));
+            // Note:
+            // Per-combo edit-mode filtering is now handled by the attached FilteredComboBoxBehavior
+            // Top-level combo boxes are configured in XAML to use the behavior; remove code-behind
+            // handlers to avoid focus-stealing or duplicate behavior.
         }
 
         private UserViewModel ViewModel => (UserViewModel)DataContext;
 
-        // ---------- ComboBox filtering (debounced, off-UI-thread) ----------
-        private void OnEmployeeGotFocus()
-        {
-            // Cancel any pending security filter work
-            _securityFilterCts?.Cancel();
-            _securityFilterCts?.Dispose();
-            _securityFilterCts = null;
-
-            if (_employeeEditView == null)
-            {
-                var master = (IEnumerable<EmployeeLookupDto>?)ViewModel?.AvailableEmployees ?? Enumerable.Empty<EmployeeLookupDto>();
-                var snapshot = master.ToList();
-                _employeeEditView = new ListCollectionView((System.Collections.IList)snapshot);
-                cmbEmployeeIdNo.ItemsSource = _employeeEditView;
-            }
-        }
-
-        private void OnSecurityGotFocus()
-        {
-            _employeeFilterCts?.Cancel();
-            _employeeFilterCts?.Dispose();
-            _employeeFilterCts = null;
-
-            if (_securityEditView == null)
-            {
-                var master = (IEnumerable<SecurityGroupLookupDto>?)ViewModel?.AvailableSecurityGroups ?? Enumerable.Empty<SecurityGroupLookupDto>();
-                var snapshot = master.ToList();
-                _securityEditView = new ListCollectionView((System.Collections.IList)snapshot);
-                cmbSecurityGroupIdNo.ItemsSource = _securityEditView;
-            }
-        }
-
-        // Allow runtime configuration of debounce
-        public int FilterDebounceMilliseconds
-        {
-            get => _filterDebounceMs;
-            set { _filterDebounceMs = Math.Max(25, value); } // lower bound
-        }
-
-        private void RestoreEmployeeItemsSource()
-        {
-            try
-            {
-                _employeeFilterCts?.Cancel();
-                _employeeFilterCts?.Dispose();
-                _employeeFilterCts = null;
-
-                cmbEmployeeIdNo.ItemsSource = ViewModel?.AvailableEmployees;
-                _employeeEditView = null;
-            }
-            catch { }
-        }
-
-        private void RestoreSecurityItemsSource()
-        {
-            try
-            {
-                _securityFilterCts?.Cancel();
-                _securityFilterCts?.Dispose();
-                _securityFilterCts = null;
-
-                cmbSecurityGroupIdNo.ItemsSource = ViewModel?.AvailableSecurityGroups;
-                _securityEditView = null;
-            }
-            catch { }
-        }
-
         // ---------- Other UI handlers ----------
+
+        // ---------- Localization and UI chrome ----------
         private void BtnFind_Click(object sender, RoutedEventArgs e)
         {
             var input = Microsoft.VisualBasic.Interaction.InputBox("Enter text to filter:", "Filter Users");
@@ -202,9 +118,8 @@ namespace AATM.App.HisWpf
                 this.Language = XmlLanguage.GetLanguage(ci.Name);
                 this.FlowDirection = ci.TextInfo.IsRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
             }
-            catch (CultureNotFoundException cnf)
+            catch (CultureNotFoundException)
             {
-                Debug.WriteLine($"Invalid culture '{culture}': {cnf.Message}");
                 MessageBox.Show($"Requested language '{culture}' is not available. Falling back to 'en-US'.", "Localization", MessageBoxButton.OK, MessageBoxImage.Warning);
 
                 // Fallback to en-US
@@ -216,16 +131,9 @@ namespace AATM.App.HisWpf
                     this.Language = XmlLanguage.GetLanguage(fallback.Name);
                     this.FlowDirection = fallback.TextInfo.IsRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
                 }
-                catch (Exception ex2)
-                {
-                    Debug.WriteLine($"Localization fallback failed: {ex2}");
-                }
+                catch { /* swallow fallback failures - non-fatal for UI */ }
             }
-            catch (Exception ex)
-            {
-                // If SetLanguage or GetLanguage throws for other reasons, log and continue safely.
-                Debug.WriteLine($"Error while switching language to '{culture}': {ex}");
-            }
+            catch { /* swallow localization errors - non-fatal for UI */ }
 
             // Update UI chrome / headers using the (possibly fallback) culture state
             try
@@ -247,10 +155,7 @@ namespace AATM.App.HisWpf
                 dataGrid.Items.Refresh();
                 dataGrid.UpdateLayout();
             }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Error updating localized UI chrome: {ex}");
-            }
+            catch { /* ignore UI update failures */ }
         }
 
         private static bool IsEnglish(string lang) => lang.StartsWith("en", StringComparison.OrdinalIgnoreCase);
@@ -355,19 +260,11 @@ namespace AATM.App.HisWpf
             // Runtime-only wiring: guard so the XAML designer won't execute these.
             if (!DesignerProperties.GetIsInDesignMode(this))
             {
-                _keyboardFocusHandler = new KeyboardFocusChangedEventHandler(OnGotKeyboardFocus);
-                this.AddHandler(UIElement.GotKeyboardFocusEvent, _keyboardFocusHandler, true);
-
                 // Attach DataGrid edit hooks to disable/reenable top combobox behaviors
                 dataGrid.BeginningEdit += DataGrid_BeginningEdit;
                 dataGrid.CellEditEnding += DataGrid_CellEditEnding;
                 dataGrid.LostFocus += DataGrid_LostFocus;
             }
-        }
-
-        private void OnGotKeyboardFocus(object? sender, KeyboardFocusChangedEventArgs e)
-        {
-            Debug.WriteLine($"Focus: Old={e.OldFocus?.GetType().Name} New={e.NewFocus?.GetType().Name} Source={e.OriginalSource?.GetType().Name}");
         }
 
         private void DataGrid_BeginningEdit(object? sender, DataGridBeginningEditEventArgs e)
@@ -394,7 +291,6 @@ namespace AATM.App.HisWpf
             var prop = Behaviors.FilteredComboBoxBehavior.IsEnabledProperty;
             cmbEmployeeIdNo.SetValue(prop, enabled);
             cmbSecurityGroupIdNo.SetValue(prop, enabled);
-            Debug.WriteLine($"Filtered behaviors {(enabled ? "enabled" : "disabled")}");
         }
 
         // Add this override to unsubscribe event handlers when the window closes
@@ -419,12 +315,6 @@ namespace AATM.App.HisWpf
 
             try
             {
-                if (_keyboardFocusHandler is not null)
-                {
-                    this.RemoveHandler(UIElement.GotKeyboardFocusEvent, _keyboardFocusHandler);
-                    _keyboardFocusHandler = null;
-                }
-
                 dataGrid.BeginningEdit -= DataGrid_BeginningEdit;
                 dataGrid.CellEditEnding -= DataGrid_CellEditEnding;
                 dataGrid.LostFocus -= DataGrid_LostFocus;
@@ -432,6 +322,13 @@ namespace AATM.App.HisWpf
             catch { }
 
             base.OnClosed(e);
+        }
+
+        // Allow runtime configuration of debounce
+        public int FilterDebounceMilliseconds
+        {
+            get => _filterDebounceMs;
+            set { _filterDebounceMs = Math.Max(25, value); } // lower bound
         }
     }
 }
