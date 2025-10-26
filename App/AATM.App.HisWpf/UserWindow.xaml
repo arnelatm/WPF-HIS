@@ -162,14 +162,13 @@
                                 <!-- no explicit Style now: implicit DataGrid-scoped ComboBox style will apply -->
                                 <ComboBox x:Name="cmbGridEmployee" Grid.Column="0"
                                           Style="{StaticResource GridFilteringComboBoxStyle}"
-                                          behaviors:FilteredComboBoxBehavior.IsEnabled="True"
-                                          ItemsSource="{Binding DataContext.AvailableEmployees, ElementName=dataGrid}"
+                                          ItemsSource="{Binding DataContext.AvailableEmployees, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                           SelectedValue="{Binding EmployeeIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                                           SelectedValuePath="IdNo"
                                           DisplayMemberPath="DisplayText"
-                                          behaviors:FilteredComboBoxBehavior.MasterItemsSource="{Binding DataContext.AvailableEmployees, ElementName=dataGrid}"
-                                          behaviors:FilteredComboBoxBehavior.FilterDebounceMilliseconds="{Binding FilterDebounceMilliseconds, RelativeSource={RelativeSource AncestorType=Window}}"/>
-
+                                          behaviors:FilteredComboBoxBehavior.MasterItemsSource="{Binding DataContext.AvailableEmployees, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                          behaviors:FilteredComboBoxBehavior.FilterDebounceMilliseconds="{Binding FilterDebounceMilliseconds, RelativeSource={RelativeSource AncestorType=Window}}"
+                                          behaviors:FilteredComboBoxBehavior.IsEnabled="True"/>
                                 <ProgressBar Grid.Column="1" Width="18" Height="18" Margin="6,0,0,0" IsIndeterminate="True"
                                              Visibility="{Binding Path=(behaviors:FilteredComboBoxBehavior.IsBusy), ElementName=cmbGridEmployee, Converter={StaticResource BoolToVisibilityConverter}}"/>
                             </Grid>
@@ -203,13 +202,13 @@
                                 <!-- no explicit Style now: implicit DataGrid-scoped ComboBox style will apply -->
                                 <ComboBox x:Name="cmbGridSecurity" Grid.Column="0"
                                           Style="{StaticResource GridFilteringComboBoxStyle}"
-                                          behaviors:FilteredComboBoxBehavior.IsEnabled="True"
-                                          ItemsSource="{Binding DataContext.AvailableSecurityGroups, ElementName=dataGrid}"
+                                          ItemsSource="{Binding DataContext.AvailableSecurityGroups, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                           SelectedValue="{Binding SecurityGroupIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                                           SelectedValuePath="IdNo"
                                           DisplayMemberPath="DisplayText"
-                                          behaviors:FilteredComboBoxBehavior.MasterItemsSource="{Binding DataContext.AvailableSecurityGroups, ElementName=dataGrid}"
-                                          behaviors:FilteredComboBoxBehavior.FilterDebounceMilliseconds="{Binding FilterDebounceMilliseconds, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                                          behaviors:FilteredComboBoxBehavior.MasterItemsSource="{Binding DataContext.AvailableSecurityGroups, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                          behaviors:FilteredComboBoxBehavior.FilterDebounceMilliseconds="{Binding FilterDebounceMilliseconds, RelativeSource={RelativeSource AncestorType=Window}}"
+                                          behaviors:FilteredComboBoxBehavior.IsEnabled="True"/>
 
                                 <ProgressBar Grid.Column="1" Width="18" Height="18" Margin="6,0,0,0" IsIndeterminate="True"
                                              Visibility="{Binding Path=(behaviors:FilteredComboBoxBehavior.IsBusy), ElementName=cmbGridSecurity, Converter={StaticResource BoolToVisibilityConverter}}"/>
