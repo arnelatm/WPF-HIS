@@ -64,7 +64,7 @@
                  Text="{Binding SelectedUser.UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True, TargetNullValue=''}"/>
 
         <Label Grid.Row="3" Grid.Column="0" Content="Employee Code - Name" Grid.ColumnSpan="2"/>
-        <!-- Top-level ComboBox: editable, bound to master list -->
+        <!-- Top-level ComboBox: editable, bound to master list via behavior -->
         <Grid Grid.Row="3" Grid.Column="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -80,12 +80,15 @@
               DisplayMemberPath="DisplayText"
               SelectedValue="{Binding SelectedUser.EmployeeIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
               IsSynchronizedWithCurrentItem="False"
-              ItemsSource="{Binding AvailableEmployees}" />
-            <ProgressBar Grid.Column="1" x:Name="pbEmployeeFiltering" Width="18" Height="18" Margin="6,0,0,0" IsIndeterminate="True" Visibility="Collapsed"/>
+              behaviors:FilteredComboBoxBehavior.IsEnabled="True"
+              behaviors:FilteredComboBoxBehavior.MasterItemsSource="{Binding AvailableEmployees}"
+              behaviors:FilteredComboBoxBehavior.FilterDebounceMilliseconds="120" />
+            <ProgressBar Grid.Column="1" x:Name="pbEmployeeFiltering" Width="18" Height="18" Margin="6,0,0,0" IsIndeterminate="True"
+                         Visibility="{Binding Path=(behaviors:FilteredComboBoxBehavior.IsBusy), ElementName=cmbEmployeeIdNo, Converter={StaticResource BoolToVisibilityConverter}}"/>
         </Grid>
 
         <Label Grid.Row="4" Grid.Column="0" Content="Security Group Code-Name" Grid.ColumnSpan="2"/>
-        <!-- Top-level Security ComboBox: editable, bound to master list -->
+        <!-- Top-level Security ComboBox: editable, bound to master list via behavior -->
         <Grid Grid.Row="4" Grid.Column="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -101,8 +104,11 @@
               DisplayMemberPath="DisplayText"
               SelectedValue="{Binding SelectedUser.SecurityGroupIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
               IsSynchronizedWithCurrentItem="False"
-              ItemsSource="{Binding AvailableSecurityGroups}" />
-            <ProgressBar Grid.Column="1" x:Name="pbSecurityFiltering" Width="18" Height="18" Margin="6,0,0,0" IsIndeterminate="True" Visibility="Collapsed"/>
+              behaviors:FilteredComboBoxBehavior.IsEnabled="True"
+              behaviors:FilteredComboBoxBehavior.MasterItemsSource="{Binding AvailableSecurityGroups}"
+              behaviors:FilteredComboBoxBehavior.FilterDebounceMilliseconds="120" />
+            <ProgressBar Grid.Column="1" x:Name="pbSecurityFiltering" Width="18" Height="18" Margin="6,0,0,0" IsIndeterminate="True"
+                         Visibility="{Binding Path=(behaviors:FilteredComboBoxBehavior.IsBusy), ElementName=cmbSecurityGroupIdNo, Converter={StaticResource BoolToVisibilityConverter}}"/>
         </Grid>
 
         <Label Grid.Row="5" Grid.Column="0" Content="Password" Grid.ColumnSpan="2"/>
@@ -153,7 +159,7 @@
                     <DataGridTemplateColumn.CellEditingTemplate>
                         <DataTemplate>
                             <ComboBox
-                                ItemsSource="{Binding DataContext.AvailableEmployees, ElementName=datagrid}"
+                                ItemsSource="{Binding DataContext.AvailableEmployees, ElementName=dataGrid}"
                                 SelectedValue="{Binding EmployeeIdNo, Mode=TwoWay}"
                                 SelectedValuePath="IdNo"
                                 DisplayMemberPath="DisplayText"
@@ -180,7 +186,7 @@
                                 <TextBlock.Text>
                                     <MultiBinding Converter="{StaticResource IdToDisplayTextMultiConverter}">
                                         <Binding Path="SecurityGroupIdNo"/>
-                                        <Binding ElementName="datagrid" Path="DataContext.AvailableSecurityGroups"/>
+                                        <Binding ElementName="dataGrid" Path="DataContext.AvailableSecurityGroups"/>
                                     </MultiBinding>
                                 </TextBlock.Text>
                             </TextBlock>
@@ -189,7 +195,7 @@
                     <DataGridTemplateColumn.CellEditingTemplate>
                         <DataTemplate>
                             <ComboBox
-                                ItemsSource="{Binding DataContext.AvailableSecurityGroups, ElementName=datagrid}"
+                                ItemsSource="{Binding DataContext.AvailableSecurityGroups, ElementName=dataGrid}"
                                 SelectedValue="{Binding SecurityGroupIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 SelectedValuePath="IdNo"
                                 DisplayMemberPath="DisplayText"
