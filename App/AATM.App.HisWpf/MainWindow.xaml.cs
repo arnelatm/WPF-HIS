@@ -7,7 +7,7 @@ namespace AATM.App.HisWpf
 {
     public partial class MainWindow : Window
     {
-        private async void OpenTranslationManager_Click(object sender, RoutedEventArgs e)
+        private void OpenTranslationManager_Click(object sender, RoutedEventArgs e)
         {
             var svc = App.Host.Services.GetRequiredService<TranslationCrudService>();
             //try
@@ -26,7 +26,7 @@ namespace AATM.App.HisWpf
             win.Show();
         }
 
-        private async void OpenUsersManager_Click(object sender, RoutedEventArgs e)
+        private void OpenUsersManager_Click(object sender, RoutedEventArgs e)
         {
             var svc = App.Host.Services.GetRequiredService<UserCrudService>();
             //try

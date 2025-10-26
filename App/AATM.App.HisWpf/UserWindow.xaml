@@ -70,19 +70,13 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <ComboBox Grid.Column="0" x:Name="cmbEmployeeIdNo"
-              IsEditable="True"
-              IsTextSearchEnabled="False"
-              StaysOpenOnEdit="True"
-              behaviors:ComboBoxClearOnFullSelectionBehavior.IsEnabled="True"
-              Text="{Binding EmployeeDisplayText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-              SelectedValuePath="IdNo"
-              DisplayMemberPath="DisplayText"
-              SelectedValue="{Binding SelectedUser.EmployeeIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-              IsSynchronizedWithCurrentItem="False"
-              behaviors:FilteredComboBoxBehavior.IsEnabled="True"
-              behaviors:FilteredComboBoxBehavior.MasterItemsSource="{Binding AvailableEmployees}"
-              behaviors:FilteredComboBoxBehavior.FilterDebounceMilliseconds="{Binding FilterDebounceMilliseconds, RelativeSource={RelativeSource AncestorType=Window}}" />
+            <ComboBox Grid.Column="0" x:Name="cmbEmployeeIdNo" Style="{StaticResource FilteringComboBoxStyle}"
+                  Text="{Binding EmployeeDisplayText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedValuePath="IdNo"
+                  DisplayMemberPath="DisplayText"
+                  SelectedValue="{Binding SelectedUser.EmployeeIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                  behaviors:FilteredComboBoxBehavior.MasterItemsSource="{Binding AvailableEmployees}"
+                  behaviors:FilteredComboBoxBehavior.FilterDebounceMilliseconds="{Binding FilterDebounceMilliseconds, RelativeSource={RelativeSource AncestorType=Window}}" />
             <ProgressBar Grid.Column="1" x:Name="pbEmployeeFiltering" Width="18" Height="18" Margin="6,0,0,0" IsIndeterminate="True"
                          Visibility="{Binding Path=(behaviors:FilteredComboBoxBehavior.IsBusy), ElementName=cmbEmployeeIdNo, Converter={StaticResource BoolToVisibilityConverter}}"/>
         </Grid>
@@ -94,19 +88,13 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <ComboBox Grid.Column="0" x:Name="cmbSecurityGroupIdNo"
-              IsEditable="True"
-              IsTextSearchEnabled="False"
-              StaysOpenOnEdit="True"
-              behaviors:ComboBoxClearOnFullSelectionBehavior.IsEnabled="True"
-              Text="{Binding SecurityGroupDisplayText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-              SelectedValuePath="IdNo"
-              DisplayMemberPath="DisplayText"
-              SelectedValue="{Binding SelectedUser.SecurityGroupIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-              IsSynchronizedWithCurrentItem="False"
-              behaviors:FilteredComboBoxBehavior.IsEnabled="True"
-              behaviors:FilteredComboBoxBehavior.MasterItemsSource="{Binding AvailableSecurityGroups}"
-              behaviors:FilteredComboBoxBehavior.FilterDebounceMilliseconds="{Binding FilterDebounceMilliseconds, RelativeSource={RelativeSource AncestorType=Window}}" />
+            <ComboBox Grid.Column="0" x:Name="cmbSecurityGroupIdNo" Style="{StaticResource FilteringComboBoxStyle}"
+                  Text="{Binding SecurityGroupDisplayText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedValuePath="IdNo"
+                  DisplayMemberPath="DisplayText"
+                  SelectedValue="{Binding SelectedUser.SecurityGroupIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                  behaviors:FilteredComboBoxBehavior.MasterItemsSource="{Binding AvailableSecurityGroups}"
+                  behaviors:FilteredComboBoxBehavior.FilterDebounceMilliseconds="{Binding FilterDebounceMilliseconds, RelativeSource={RelativeSource AncestorType=Window}}" />
             <ProgressBar Grid.Column="1" x:Name="pbSecurityFiltering" Width="18" Height="18" Margin="6,0,0,0" IsIndeterminate="True"
                          Visibility="{Binding Path=(behaviors:FilteredComboBoxBehavior.IsBusy), ElementName=cmbSecurityGroupIdNo, Converter={StaticResource BoolToVisibilityConverter}}"/>
         </Grid>
@@ -164,6 +152,7 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
+                                <!-- Edited: explicitly mirror the working security ComboBox properties -->
                                 <ComboBox x:Name="cmbGridEmployee" Grid.Column="0"
                           ItemsSource="{Binding DataContext.AvailableEmployees, ElementName=dataGrid}"
                           SelectedValue="{Binding EmployeeIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
@@ -175,7 +164,7 @@
                           IsSynchronizedWithCurrentItem="False"
                           ItemContainerStyle="{StaticResource KeyboardNavigableComboBoxItemStyle}"
                           behaviors:FilteredComboBoxBehavior.IsEnabled="True"
-                          behaviors:FilteredComboBoxBehavior.MasterItemsSource="{Binding DataContext.AvailableEmployees, ElementName=datagrid}"
+                          behaviors:FilteredComboBoxBehavior.MasterItemsSource="{Binding DataContext.AvailableEmployees, ElementName=dataGrid}"
                           behaviors:FilteredComboBoxBehavior.FilterDebounceMilliseconds="{Binding FilterDebounceMilliseconds, RelativeSource={RelativeSource AncestorType=Window}}"
                           behaviors:ComboBoxClearOnFullSelectionBehavior.IsEnabled="True">
                     <ComboBox.ItemsPanel>
