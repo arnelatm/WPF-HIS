@@ -82,7 +82,7 @@
               IsSynchronizedWithCurrentItem="False"
               behaviors:FilteredComboBoxBehavior.IsEnabled="True"
               behaviors:FilteredComboBoxBehavior.MasterItemsSource="{Binding AvailableEmployees}"
-              behaviors:FilteredComboBoxBehavior.FilterDebounceMilliseconds="120" />
+              behaviors:FilteredComboBoxBehavior.FilterDebounceMilliseconds="{Binding FilterDebounceMilliseconds, RelativeSource={RelativeSource AncestorType=Window}}" />
             <ProgressBar Grid.Column="1" x:Name="pbEmployeeFiltering" Width="18" Height="18" Margin="6,0,0,0" IsIndeterminate="True"
                          Visibility="{Binding Path=(behaviors:FilteredComboBoxBehavior.IsBusy), ElementName=cmbEmployeeIdNo, Converter={StaticResource BoolToVisibilityConverter}}"/>
         </Grid>
@@ -106,7 +106,7 @@
               IsSynchronizedWithCurrentItem="False"
               behaviors:FilteredComboBoxBehavior.IsEnabled="True"
               behaviors:FilteredComboBoxBehavior.MasterItemsSource="{Binding AvailableSecurityGroups}"
-              behaviors:FilteredComboBoxBehavior.FilterDebounceMilliseconds="120" />
+              behaviors:FilteredComboBoxBehavior.FilterDebounceMilliseconds="{Binding FilterDebounceMilliseconds, RelativeSource={RelativeSource AncestorType=Window}}" />
             <ProgressBar Grid.Column="1" x:Name="pbSecurityFiltering" Width="18" Height="18" Margin="6,0,0,0" IsIndeterminate="True"
                          Visibility="{Binding Path=(behaviors:FilteredComboBoxBehavior.IsBusy), ElementName=cmbSecurityGroupIdNo, Converter={StaticResource BoolToVisibilityConverter}}"/>
         </Grid>

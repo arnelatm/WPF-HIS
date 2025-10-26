@@ -41,6 +41,8 @@ namespace AATM.App.HisWpf.Behaviors
             public ListCollectionView? EditView;
             public CancellationTokenSource? Cts;
             public IEnumerable? MasterSnapshot;
+            // store the TextChanged handler so it can be removed on detach
+            public TextChangedEventHandler? TextChangedHandler;
         }
 
         private static readonly DependencyProperty StateProperty =
@@ -78,7 +80,7 @@ namespace AATM.App.HisWpf.Behaviors
             // If not editing, show master source
             var state = GetState(cb) ?? new State();
             cb.ItemsSource = e.NewValue as IEnumerable;
-            state.MasterSnapshot = e.NewValue as IEnumerable; 
+            state.MasterSnapshot = e.NewValue as IEnumerable;
             SetState(cb, state);
         }
 
@@ -88,10 +90,14 @@ namespace AATM.App.HisWpf.Behaviors
             var s = new State();
             SetState(cb, s);
 
-            cb.GotKeyboardFocus += Cb_GotKeyboardFocus;
+            cb.GotKeyboardFocus += Cb_GotKeyboardFocus;  
             cb.PreviewMouseDown += Cb_PreviewMouseDown;
             cb.DropDownClosed += Cb_DropDownClosed;
-            cb.AddHandler(TextBox.TextChangedEvent, new TextChangedEventHandler((s2, e) => OnEditableTextChanged(cb)));
+
+            // create and store the TextChanged handler so it can be removed cleanly later
+            TextChangedEventHandler handler = (s2, e) => OnEditableTextChanged(cb);
+            s.TextChangedHandler = handler;
+            cb.AddHandler(TextBox.TextChangedEvent, handler);
         }
 
         private static void Detach(ComboBox cb)
@@ -99,9 +105,29 @@ namespace AATM.App.HisWpf.Behaviors
             cb.GotKeyboardFocus -= Cb_GotKeyboardFocus;
             cb.PreviewMouseDown -= Cb_PreviewMouseDown;
             cb.DropDownClosed -= Cb_DropDownClosed;
-            // cancel outstanding work
+            // cancel outstanding work (use atomic swap to avoid races)
             var state = GetState(cb);
-            state?.Cts?.Cancel();
+            if (state != null)
+            {
+                // remove stored TextChanged handler if present
+                try
+                {
+                    if (state.TextChangedHandler is not null)
+                    {
+                        cb.RemoveHandler(TextBox.TextChangedEvent, state.TextChangedHandler);
+                        state.TextChangedHandler = null;
+                    }
+                }
+                catch { /* ignore removal failures */ }
+
+                var cts = Interlocked.Exchange(ref state.Cts, null);
+                if (cts != null)
+                {
+                    try { cts.Cancel(); }
+                    catch (ObjectDisposedException) { /* already disposed - ignore */ }
+                    try { cts.Dispose(); } catch { /* ignore */ }
+                }
+            }
             SetState(cb, null);
         }
 
@@ -166,21 +192,25 @@ namespace AATM.App.HisWpf.Behaviors
             var tb = cb.Template.FindName("PART_EditableTextBox", cb) as TextBox;
             if (tb == null) return;
 
+            // Only start filtering for user-driven edits (textbox has keyboard focus).
+            // This prevents binding/VM updates (e.g. selecting rows in DataGrid) from
+            // triggering filtering and stealing focus.
+            if (!tb.IsFocused) return;
+
             var text = tb.Text ?? string.Empty;
             var state = GetState(cb)!;
 
-            // safer pattern: capture old instance, then operate on it
-            var old = state.Cts;
+            // create and assign new CTS atomically and dispose the previous one
+            var newCts = new CancellationTokenSource();
+            var old = Interlocked.Exchange(ref state.Cts, newCts);
             if (old != null)
             {
                 try { old.Cancel(); }
                 catch (ObjectDisposedException) { /* already disposed - ok */ }
-                old.Dispose();
+                try { old.Dispose(); } catch { /* ignore */ }
             }
 
-            // create and assign new CTS when you need one
-            state.Cts = new CancellationTokenSource();
-            var token = state.Cts.Token;
+            var token = newCts.Token;
             SetIsBusy(cb, true);
             var debounce = GetFilterDebounceMilliseconds(cb);
 
@@ -230,14 +260,27 @@ namespace AATM.App.HisWpf.Behaviors
                         var snapshot = results.ToList();
                         state.EditView = new ListCollectionView((System.Collections.IList)snapshot);
                         cb.ItemsSource = state.EditView;
-                        cb.IsDropDownOpen = true;
-                        // keep caret at end
-                        var tb2 = cb.Template.FindName("PART_EditableTextBox", cb) as TextBox;
-                        if (tb2 != null)
+
+                        // Only open dropdown and adjust caret if the combobox still has keyboard focus.
+                        if (cb.IsKeyboardFocusWithin)
                         {
-                            tb2.SelectionStart = tb2.Text?.Length ?? 0;
-                            tb2.SelectionLength = 0;
-                            tb2.Focus();
+                            cb.IsDropDownOpen = true;
+
+                            var tb2 = cb.Template.FindName("PART_EditableTextBox", cb) as TextBox;
+                            if (tb2 != null)
+                            {
+                                // move caret to end if the text box already has focus; do not force focus
+                                if (tb2.IsFocused)
+                                {
+                                    tb2.SelectionStart = tb2.Text?.Length ?? 0;
+                                    tb2.SelectionLength = 0;
+                                }
+                                else
+                                {
+                                    tb2.SelectionStart = tb2.Text?.Length ?? 0;
+                                    tb2.SelectionLength = 0;
+                                }
+                            }
                         }
 
                         SetIsBusy(cb, false);

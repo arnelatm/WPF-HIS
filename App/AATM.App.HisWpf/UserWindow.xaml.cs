@@ -4,9 +4,12 @@ using AATM.Contracts.Dtos;
 using AATM.Contracts.Interfaces.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Input;
 using System.Windows.Markup;
 
 namespace AATM.App.HisWpf
@@ -38,6 +41,9 @@ namespace AATM.App.HisWpf
         private readonly Dictionary<DataGridColumn, string> _originalColumnHeaders = new();
 
         private string? _currentFilter;
+
+        // store the runtime keyboard focus handler so it can be removed on close
+        private KeyboardFocusChangedEventHandler? _keyboardFocusHandler;
 
         // Prefer resolving via DI; this overload chains to the primary ctor
         public UserWindow(UserViewModel viewmodel)
@@ -78,14 +84,13 @@ namespace AATM.App.HisWpf
             cmbEmployeeIdNo.GotKeyboardFocus += (s, e) => OnEmployeeGotFocus();
             cmbEmployeeIdNo.PreviewMouseDown += (s, e) => { if (!cmbEmployeeIdNo.IsDropDownOpen) OnEmployeeGotFocus(); };
             cmbEmployeeIdNo.DropDownClosed += (s, e) => RestoreEmployeeItemsSource();
-            cmbEmployeeIdNo.AddHandler(TextBox.TextChangedEvent, new TextChangedEventHandler((s, e) => OnEmployeeTextChanged()));
             // Use attached behavior instead of code-behind handler
             // Behavior usage requires XAML change to set the attached property
 
             cmbSecurityGroupIdNo.GotKeyboardFocus += (s, e) => OnSecurityGotFocus();
             cmbSecurityGroupIdNo.PreviewMouseDown += (s, e) => { if (!cmbSecurityGroupIdNo.IsDropDownOpen) OnSecurityGotFocus(); };
             cmbSecurityGroupIdNo.DropDownClosed += (s, e) => RestoreSecurityItemsSource();
-            cmbSecurityGroupIdNo.AddHandler(TextBox.TextChangedEvent, new TextChangedEventHandler((s, e) => OnSecurityTextChanged()));
+            //cmbSecurityGroupIdNo.AddHandler(TextBox.TextChangedEvent, new TextChangedEventHandler((s, e) => OnSecurityTextChanged()));
         }
 
         private UserViewModel ViewModel => (UserViewModel)DataContext;
@@ -120,141 +125,6 @@ namespace AATM.App.HisWpf
                 _securityEditView = new ListCollectionView((System.Collections.IList)snapshot);
                 cmbSecurityGroupIdNo.ItemsSource = _securityEditView;
             }
-        }
-
-        private void OnEmployeeTextChanged()
-        {
-            _employeeFilterCts?.Cancel();
-            _employeeFilterCts?.Dispose();
-            _employeeFilterCts = new CancellationTokenSource();
-            var token = _employeeFilterCts.Token;
-            var text = cmbEmployeeIdNo.Text ?? string.Empty;
-
-            // take a snapshot of the master list on the UI thread to avoid cross-thread enumeration
-            var masterSnapshot = Dispatcher.Invoke(() => ViewModel?.AvailableEmployees?.ToList() ?? new List<EmployeeLookupDto>());
-
-            // show spinner immediately (UX feedback)
-            Dispatcher.Invoke(() => pbEmployeeFiltering.Visibility = Visibility.Visible);
-
-            _ = Task.Run(async () =>
-            {
-                try
-                {
-                    await Task.Delay(_filterDebounceMs, token).ConfigureAwait(false); // debounce
-
-                    List<EmployeeLookupDto> result;
-                    var f = text.Trim();
-                    if (string.IsNullOrEmpty(f)) result = masterSnapshot.ToList();
-                    else
-                    {
-                        // filter the snapshot off the UI thread
-                        result = masterSnapshot.Where(emp =>
-                            (!string.IsNullOrEmpty(emp.DisplayText) && emp.DisplayText.IndexOf(f, StringComparison.OrdinalIgnoreCase) >= 0)
-                            || (!string.IsNullOrEmpty(emp.EmployeeName) && emp.EmployeeName.IndexOf(f, StringComparison.OrdinalIgnoreCase) >= 0)
-                            || (!string.IsNullOrEmpty(emp.EmployeeCode) && emp.EmployeeCode.IndexOf(f, StringComparison.OrdinalIgnoreCase) >= 0)
-                        ).ToList();
-                    }
-
-                    await Dispatcher.BeginInvoke((Action)(() =>
-                    {
-                        if (token.IsCancellationRequested)
-                        {
-                            pbEmployeeFiltering.Visibility = Visibility.Collapsed;
-                            return;
-                        }
-
-                        var snapshot = result.ToList();
-                        _employeeEditView = new ListCollectionView((System.Collections.IList)snapshot);
-                        cmbEmployeeIdNo.ItemsSource = _employeeEditView;
-                        cmbEmployeeIdNo.IsDropDownOpen = true;
-
-                        var tb = cmbEmployeeIdNo.Template.FindName("PART_EditableTextBox", cmbEmployeeIdNo) as TextBox;
-                        if (tb != null)
-                        {
-                            tb.SelectionStart = tb.Text?.Length ?? 0;
-                            tb.SelectionLength = 0;
-                            tb.Focus();
-                        }
-
-                        // hide spinner
-                        pbEmployeeFiltering.Visibility = Visibility.Collapsed;
-                    }), System.Windows.Threading.DispatcherPriority.Background).Task.ConfigureAwait(false);
-                }
-                catch (OperationCanceledException)
-                {
-                    Dispatcher.Invoke(() => pbEmployeeFiltering.Visibility = Visibility.Collapsed);
-                }
-                catch
-                {
-                    Dispatcher.Invoke(() => pbEmployeeFiltering.Visibility = Visibility.Collapsed);
-                }
-            });
-        }
-
-        private void OnSecurityTextChanged()
-        {
-            _securityFilterCts?.Cancel();
-            _securityFilterCts?.Dispose();
-            _securityFilterCts = new CancellationTokenSource();
-            var token = _securityFilterCts.Token;
-            var text = cmbSecurityGroupIdNo.Text ?? string.Empty;
-
-            // take snapshot on UI thread
-            var masterSnapshot = Dispatcher.Invoke(() => ViewModel?.AvailableSecurityGroups?.ToList() ?? new List<SecurityGroupLookupDto>());
-
-            Dispatcher.Invoke(() => pbSecurityFiltering.Visibility = Visibility.Visible);
-
-            _ = Task.Run(async () =>
-            {
-                try
-                {
-                    await Task.Delay(_filterDebounceMs, token).ConfigureAwait(false);
-
-                    List<SecurityGroupLookupDto> result;
-                    var f = text.Trim();
-                    if (string.IsNullOrEmpty(f)) result = masterSnapshot.ToList();
-                    else
-                    {
-                        result = masterSnapshot.Where(sg =>
-                            (!string.IsNullOrEmpty(sg.DisplayText) && sg.DisplayText.IndexOf(f, StringComparison.OrdinalIgnoreCase) >= 0)
-                            || (!string.IsNullOrEmpty(sg.SecurityGroupName) && sg.SecurityGroupName.IndexOf(f, StringComparison.OrdinalIgnoreCase) >= 0)
-                            || (!string.IsNullOrEmpty(sg.SecurityGroupCode) && sg.SecurityGroupCode.IndexOf(f, StringComparison.OrdinalIgnoreCase) >= 0)
-                        ).ToList();
-                    }
-
-                    await Dispatcher.BeginInvoke((Action)(() =>
-                    {
-                        if (token.IsCancellationRequested)
-                        {
-                            pbSecurityFiltering.Visibility = Visibility.Collapsed;
-                            return;
-                        }
-
-                        var snapshot = result.ToList();
-                        _securityEditView = new ListCollectionView((System.Collections.IList)snapshot);
-                        cmbSecurityGroupIdNo.ItemsSource = _securityEditView;
-                        cmbSecurityGroupIdNo.IsDropDownOpen = true;
-
-                        var tb = cmbSecurityGroupIdNo.Template.FindName("PART_EditableTextBox", cmbSecurityGroupIdNo) as TextBox;
-                        if (tb != null)
-                        {
-                            tb.SelectionStart = tb.Text?.Length ?? 0;
-                            tb.SelectionLength = 0;
-                            tb.Focus();
-                        }
-
-                        pbSecurityFiltering.Visibility = Visibility.Collapsed;
-                    }), System.Windows.Threading.DispatcherPriority.Background).Task.ConfigureAwait(false);
-                }
-                catch (OperationCanceledException)
-                {
-                    Dispatcher.Invoke(() => pbSecurityFiltering.Visibility = Visibility.Collapsed);
-                }
-                catch
-                {
-                    Dispatcher.Invoke(() => pbSecurityFiltering.Visibility = Visibility.Collapsed);
-                }
-            });
         }
 
         // Allow runtime configuration of debounce
@@ -316,28 +186,71 @@ namespace AATM.App.HisWpf
 
         private void BtnSwitchLanguage_Click(object sender, RoutedEventArgs e)
         {
-            var newLang = _localization_service.IsRightToLeft ? "en-US" : "ar-SA";
-            _localization_service.SetLanguage(newLang, _moduleName);
+            // decide requested culture
+            var requested = _localization_service.IsRightToLeft ? "en-US" : "ar-SA";
+            var culture = requested;
 
-            this.Language = XmlLanguage.GetLanguage(newLang);
-            this.FlowDirection = _localization_service.IsRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
-
-            CacheOriginalWindowChrome();
-            CacheOriginalColumnHeaders();
-
-            LocalizeWindowChrome(newLang);
-
-            foreach (var col in dataGrid.Columns)
+            try
             {
-                if (!_originalColumnHeaders.TryGetValue(col, out var original) || string.IsNullOrWhiteSpace(original))
-                    continue;
+                // Validate the culture string before using it (will throw CultureNotFoundException if invalid)
+                var ci = CultureInfo.GetCultureInfo(culture);
 
-                col.Header = IsEnglish(newLang) ? original : _localization_service.GetString(_moduleName, original, original);
+                // Ask service to set language (may itself throw)
+                _localization_service.SetLanguage(ci.Name, _moduleName);
+
+                // Apply to WPF window
+                this.Language = XmlLanguage.GetLanguage(ci.Name);
+                this.FlowDirection = ci.TextInfo.IsRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
+            }
+            catch (CultureNotFoundException cnf)
+            {
+                Debug.WriteLine($"Invalid culture '{culture}': {cnf.Message}");
+                MessageBox.Show($"Requested language '{culture}' is not available. Falling back to 'en-US'.", "Localization", MessageBoxButton.OK, MessageBoxImage.Warning);
+
+                // Fallback to en-US
+                culture = "en-US";
+                try
+                {
+                    var fallback = CultureInfo.GetCultureInfo(culture);
+                    _localization_service.SetLanguage(fallback.Name, _moduleName);
+                    this.Language = XmlLanguage.GetLanguage(fallback.Name);
+                    this.FlowDirection = fallback.TextInfo.IsRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
+                }
+                catch (Exception ex2)
+                {
+                    Debug.WriteLine($"Localization fallback failed: {ex2}");
+                }
+            }
+            catch (Exception ex)
+            {
+                // If SetLanguage or GetLanguage throws for other reasons, log and continue safely.
+                Debug.WriteLine($"Error while switching language to '{culture}': {ex}");
             }
 
-            CollectionViewSource.GetDefaultView(dataGrid.ItemsSource)?.Refresh();
-            dataGrid.Items.Refresh();
-            dataGrid.UpdateLayout();
+            // Update UI chrome / headers using the (possibly fallback) culture state
+            try
+            {
+                CacheOriginalWindowChrome();
+                CacheOriginalColumnHeaders();
+
+                LocalizeWindowChrome(culture);
+
+                foreach (var col in dataGrid.Columns)
+                {
+                    if (!_originalColumnHeaders.TryGetValue(col, out var original) || string.IsNullOrWhiteSpace(original))
+                        continue;
+
+                    col.Header = IsEnglish(culture) ? original : _localization_service.GetString(_moduleName, original, original);
+                }
+
+                CollectionViewSource.GetDefaultView(dataGrid.ItemsSource)?.Refresh();
+                dataGrid.Items.Refresh();
+                dataGrid.UpdateLayout();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error updating localized UI chrome: {ex}");
+            }
         }
 
         private static bool IsEnglish(string lang) => lang.StartsWith("en", StringComparison.OrdinalIgnoreCase);
@@ -434,10 +347,54 @@ namespace AATM.App.HisWpf
         }
 
         // Add this constructor to allow the XAML designer to instantiate the window
+        // and to set up runtime-only handlers guarded by design-mode checks.
         public UserWindow()
         {
             // Only initialize the visual tree. Avoid running DI or runtime-only logic here.
             InitializeComponent();
+            // Runtime-only wiring: guard so the XAML designer won't execute these.
+            if (!DesignerProperties.GetIsInDesignMode(this))
+            {
+                _keyboardFocusHandler = new KeyboardFocusChangedEventHandler(OnGotKeyboardFocus);
+                this.AddHandler(UIElement.GotKeyboardFocusEvent, _keyboardFocusHandler, true);
+
+                // Attach DataGrid edit hooks to disable/reenable top combobox behaviors
+                dataGrid.BeginningEdit += DataGrid_BeginningEdit;
+                dataGrid.CellEditEnding += DataGrid_CellEditEnding;
+                dataGrid.LostFocus += DataGrid_LostFocus;
+            }
+        }
+
+        private void OnGotKeyboardFocus(object? sender, KeyboardFocusChangedEventArgs e)
+        {
+            Debug.WriteLine($"Focus: Old={e.OldFocus?.GetType().Name} New={e.NewFocus?.GetType().Name} Source={e.OriginalSource?.GetType().Name}");
+        }
+
+        private void DataGrid_BeginningEdit(object? sender, DataGridBeginningEditEventArgs e)
+        {
+            // Temporarily disable top combobox filtering behavior so nothing in background can open/pop or steal focus.
+            SetTopFilteredBehaviorEnabled(false);
+        }
+
+        private void DataGrid_CellEditEnding(object? sender, DataGridCellEditEndingEventArgs e)
+        {
+            // Re-enable after edit finishes. Use Dispatcher to ensure edit completion first.
+            Dispatcher.BeginInvoke(new Action(() => SetTopFilteredBehaviorEnabled(true)));
+        }
+
+        private void DataGrid_LostFocus(object? sender, RoutedEventArgs e)
+        {
+            // Safety: re-enable if something went wrong
+            SetTopFilteredBehaviorEnabled(true);
+        }
+
+        private void SetTopFilteredBehaviorEnabled(bool enabled)
+        {
+            // Names match XAML: cmbEmployeeIdNo and cmbSecurityGroupIdNo
+            var prop = Behaviors.FilteredComboBoxBehavior.IsEnabledProperty;
+            cmbEmployeeIdNo.SetValue(prop, enabled);
+            cmbSecurityGroupIdNo.SetValue(prop, enabled);
+            Debug.WriteLine($"Filtered behaviors {(enabled ? "enabled" : "disabled")}");
         }
 
         // Add this override to unsubscribe event handlers when the window closes
@@ -460,9 +417,21 @@ namespace AATM.App.HisWpf
             }
             catch { }
 
+            try
+            {
+                if (_keyboardFocusHandler is not null)
+                {
+                    this.RemoveHandler(UIElement.GotKeyboardFocusEvent, _keyboardFocusHandler);
+                    _keyboardFocusHandler = null;
+                }
+
+                dataGrid.BeginningEdit -= DataGrid_BeginningEdit;
+                dataGrid.CellEditEnding -= DataGrid_CellEditEnding;
+                dataGrid.LostFocus -= DataGrid_LostFocus;
+            }
+            catch { }
+
             base.OnClosed(e);
         }
-
-        // Note: removed code-behind preview key handler in favor of attached behavior at XAML level
     }
 }
