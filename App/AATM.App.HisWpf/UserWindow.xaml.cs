@@ -433,6 +433,13 @@ namespace AATM.App.HisWpf
             txtRecordCount.Text = ViewModel.Users.Count.ToString();
         }
 
+        // Add this constructor to allow the XAML designer to instantiate the window
+        public UserWindow()
+        {
+            // Only initialize the visual tree. Avoid running DI or runtime-only logic here.
+            InitializeComponent();
+        }
+
         // Add this override to unsubscribe event handlers when the window closes
         protected override void OnClosed(System.EventArgs e)
         {

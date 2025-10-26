@@ -1,4 +1,3 @@
-using AATM.App.HisWpf.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -15,6 +14,26 @@ namespace AATM.App.HisWpf.Behaviors
 
         public static void SetIsEnabled(DependencyObject element, bool value) => element.SetValue(IsEnabledProperty, value);
         public static bool GetIsEnabled(DependencyObject element) => (bool)element.GetValue(IsEnabledProperty);
+
+        // New: ICommand to execute when the behavior clears the selection/value
+        public static readonly DependencyProperty ClearCommandProperty = DependencyProperty.RegisterAttached(
+            "ClearCommand",
+            typeof(ICommand),
+            typeof(ComboBoxClearOnFullSelectionBehavior),
+            new PropertyMetadata(null));
+
+        public static void SetClearCommand(DependencyObject element, ICommand value) => element.SetValue(ClearCommandProperty, value);
+        public static ICommand GetClearCommand(DependencyObject element) => (ICommand)element.GetValue(ClearCommandProperty);
+
+        // New: Optional parameter for the ClearCommand
+        public static readonly DependencyProperty ClearCommandParameterProperty = DependencyProperty.RegisterAttached(
+            "ClearCommandParameter",
+            typeof(object),
+            typeof(ComboBoxClearOnFullSelectionBehavior),
+            new PropertyMetadata(null));
+
+        public static void SetClearCommandParameter(DependencyObject element, object value) => element.SetValue(ClearCommandParameterProperty, value);
+        public static object GetClearCommandParameter(DependencyObject element) => element.GetValue(ClearCommandParameterProperty);
 
         private static void OnIsEnabledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -110,16 +129,13 @@ namespace AATM.App.HisWpf.Behaviors
 
         private static void ClearComboBoxValue(ComboBox combo)
         {
-            if (combo.DataContext is not UserViewModel vm) return;
+            // Execute an optional ICommand instead of calling a concrete ViewModel method.
+            var command = GetClearCommand(combo);
+            var parameter = GetClearCommandParameter(combo) ?? combo.DataContext;
 
-            // Clear through ViewModel
-            if (combo.Name == "cmbEmployeeIdNo")
+            if (command != null && command.CanExecute(parameter))
             {
-                vm.ClearEmployeeSelection();
-            }
-            else if (combo.Name == "cmbSecurityGroupIdNo")
-            {
-                vm.ClearSecurityGroupSelection();
+                command.Execute(parameter);
             }
 
             // Ensure UI reflects changes

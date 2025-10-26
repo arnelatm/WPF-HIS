@@ -12,6 +12,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Threading.Tasks;
 
 namespace AATM.App.HisWpf.ViewModels
 {
@@ -33,6 +34,9 @@ namespace AATM.App.HisWpf.ViewModels
         public ICollectionView SecurityGroupView => _securityViewSource.View;
 
         public ObservableCollection<UserDto> Users { get; } = new();
+
+        public ICommand ClearEmployeeSelectionCommand { get; }
+        public ICommand ClearSecurityGroupSelectionCommand { get; }
 
         public void ClearEmployeeSelection()
         {
@@ -224,6 +228,18 @@ namespace AATM.App.HisWpf.ViewModels
             RefreshCommand = new AsyncRelayCommand(
                 async _ => await Refresh()
             );
+
+            ClearEmployeeSelectionCommand = new AsyncRelayCommand(_ =>
+            {
+                ClearEmployeeSelection();
+                return Task.CompletedTask;
+            });
+
+            ClearSecurityGroupSelectionCommand = new AsyncRelayCommand(_ =>
+            {
+                ClearSecurityGroupSelection();
+                return Task.CompletedTask;
+            });
 
             AvailableEmployees.CollectionChanged += AvailableEmployees_CollectionChanged;
             AvailableSecurityGroups.CollectionChanged += AvailableSecurityGroups_CollectionChanged;
