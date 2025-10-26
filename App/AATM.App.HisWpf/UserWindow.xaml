@@ -145,7 +145,6 @@
                 <DataGridTemplateColumn Header="Employee Name" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <!-- Use the shared IdToDisplayTextMultiConverter with the grid's AvailableEmployees collection -->
                             <TextBlock>
                                 <TextBlock.Text>
                                     <MultiBinding Converter="{StaticResource IdToDisplayTextMultiConverter}" FallbackValue="">
@@ -156,26 +155,42 @@
                             </TextBlock>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
+
                     <DataGridTemplateColumn.CellEditingTemplate>
                         <DataTemplate>
-                            <ComboBox
-                                ItemsSource="{Binding DataContext.AvailableEmployees, ElementName=dataGrid}"
-                                SelectedValue="{Binding EmployeeIdNo, Mode=TwoWay}"
-                                SelectedValuePath="IdNo"
-                                DisplayMemberPath="DisplayText"
-                                IsEditable="True"
-                                IsTextSearchEnabled="False"
-                                StaysOpenOnEdit="False"
-                                ItemContainerStyle="{StaticResource KeyboardNavigableComboBoxItemStyle}">
-                                <ComboBox.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <VirtualizingStackPanel IsItemsHost="True" VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling" />
-                                    </ItemsPanelTemplate>
-                                </ComboBox.ItemsPanel>
-                            </ComboBox>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellEditingTemplate>
-                </DataGridTemplateColumn>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <ComboBox x:Name="cmbGridEmployee" Grid.Column="0"
+                          ItemsSource="{Binding DataContext.AvailableEmployees, ElementName=dataGrid}"
+                          SelectedValue="{Binding EmployeeIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                          SelectedValuePath="IdNo"
+                          DisplayMemberPath="DisplayText"
+                          IsEditable="True"
+                          IsTextSearchEnabled="False"
+                          StaysOpenOnEdit="True"
+                          IsSynchronizedWithCurrentItem="False"
+                          ItemContainerStyle="{StaticResource KeyboardNavigableComboBoxItemStyle}"
+                          behaviors:FilteredComboBoxBehavior.IsEnabled="True"
+                          behaviors:FilteredComboBoxBehavior.MasterItemsSource="{Binding DataContext.AvailableEmployees, ElementName=datagrid}"
+                          behaviors:FilteredComboBoxBehavior.FilterDebounceMilliseconds="{Binding FilterDebounceMilliseconds, RelativeSource={RelativeSource AncestorType=Window}}"
+                          behaviors:ComboBoxClearOnFullSelectionBehavior.IsEnabled="True">
+                    <ComboBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel IsItemsHost="True" VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling" />
+                        </ItemsPanelTemplate>
+                    </ComboBox.ItemsPanel>
+                </ComboBox>
+
+                <ProgressBar Grid.Column="1" Width="18" Height="18" Margin="6,0,0,0" IsIndeterminate="True"
+                             Visibility="{Binding Path=(behaviors:FilteredComboBoxBehavior.IsBusy), ElementName=cmbGridEmployee, Converter={StaticResource BoolToVisibilityConverter}}"/>
+            </Grid>
+        </DataTemplate>
+    </DataGridTemplateColumn.CellEditingTemplate>
+</DataGridTemplateColumn>
 
                 <!-- Security group template column -->
                 <DataGridTemplateColumn Header="Security Group" Width="150">
@@ -194,24 +209,39 @@
                     </DataGridTemplateColumn.CellTemplate>
                     <DataGridTemplateColumn.CellEditingTemplate>
                         <DataTemplate>
-                            <ComboBox
-                                ItemsSource="{Binding DataContext.AvailableSecurityGroups, ElementName=dataGrid}"
-                                SelectedValue="{Binding SecurityGroupIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                SelectedValuePath="IdNo"
-                                DisplayMemberPath="DisplayText"
-                                IsEditable="True"
-                                IsTextSearchEnabled="False"
-                                StaysOpenOnEdit="False"
-                                ItemContainerStyle="{StaticResource KeyboardNavigableComboBoxItemStyle}">
-                                <ComboBox.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <VirtualizingStackPanel IsItemsHost="True" VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling" />
-                                    </ItemsPanelTemplate>
-                                </ComboBox.ItemsPanel>
-                            </ComboBox>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellEditingTemplate>
-                </DataGridTemplateColumn>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <ComboBox x:Name="cmbGridSecurity" Grid.Column="0"
+                          ItemsSource="{Binding DataContext.AvailableSecurityGroups, ElementName=dataGrid}"
+                          SelectedValue="{Binding SecurityGroupIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                          SelectedValuePath="IdNo"
+                          DisplayMemberPath="DisplayText"
+                          IsEditable="True"
+                          IsTextSearchEnabled="False"
+                          StaysOpenOnEdit="True"
+                          IsSynchronizedWithCurrentItem="False"
+                          ItemContainerStyle="{StaticResource KeyboardNavigableComboBoxItemStyle}"
+                          behaviors:FilteredComboBoxBehavior.IsEnabled="True"
+                          behaviors:FilteredComboBoxBehavior.MasterItemsSource="{Binding DataContext.AvailableSecurityGroups, ElementName=dataGrid}"
+                          behaviors:FilteredComboBoxBehavior.FilterDebounceMilliseconds="{Binding FilterDebounceMilliseconds, RelativeSource={RelativeSource AncestorType=Window}}"
+                          behaviors:ComboBoxClearOnFullSelectionBehavior.IsEnabled="True">
+                    <ComboBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel IsItemsHost="True" VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling" />
+                        </ItemsPanelTemplate>
+                    </ComboBox.ItemsPanel>
+                </ComboBox>
+
+                <ProgressBar Grid.Column="1" Width="18" Height="18" Margin="6,0,0,0" IsIndeterminate="True"
+                             Visibility="{Binding Path=(behaviors:FilteredComboBoxBehavior.IsBusy), ElementName=cmbGridSecurity, Converter={StaticResource BoolToVisibilityConverter}}"/>
+            </Grid>
+        </DataTemplate>
+    </DataGridTemplateColumn.CellEditingTemplate>
+</DataGridTemplateColumn>
 
                 <DataGridTemplateColumn Header="Active" Width="45">
                     <DataGridTemplateColumn.CellTemplate>
