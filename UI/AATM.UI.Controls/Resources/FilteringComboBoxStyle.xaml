@@ -1,6 +1,14 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:behaviors="clr-namespace:AATM.App.HisWpf.Behaviors">
+                    xmlns:behaviors="clr-namespace:AATM.UI.Controls;assembly=AATM.UI.Controls"
+                    xmlns:controls="clr-namespace:AATM.UI.Controls;assembly=AATM.UI.Controls"
+                    xmlns:conv="clr-namespace:AATM.UI.Controls">
+    <!-- Add a default KeyboardNavigableComboBoxItemStyle to resolve XDG-0001 -->
+    <Style x:Key="KeyboardNavigableComboBoxItemStyle" TargetType="ComboBoxItem">
+        <!-- You can customize setters as needed -->
+        <Setter Property="IsTabStop" Value="True"/>
+    </Style>
+
     <!-- Reusable style for editable ComboBoxes that should use filtering + clear-on-full-selection -->
     <Style x:Key="FilteringComboBoxStyle" TargetType="ComboBox">
         <Setter Property="IsEditable" Value="True"/>
@@ -35,4 +43,21 @@
         <Setter Property="behaviors:ComboBoxClearOnFullSelectionBehavior.IsEnabled" Value="True"/>
         <Setter Property="behaviors:FilteredComboBoxBehavior.FilterDebounceMilliseconds" Value="120"/>
     </Style>
+
+    <!-- Basic ComboBox style used by the filtering controls (expand to match your original styles) -->
+    <Style x:Key="FilteringComboBoxBaseStyle" TargetType="{x:Type ComboBox}">
+        <Setter Property="IsEditable" Value="True"/>
+        <Setter Property="MinWidth" Value="120"/>
+        <Setter Property="Padding" Value="2"/>
+    </Style>
+
+    <!-- Default style for the user control (optional) 
+         NOTE: using a keyed style avoids referencing the control CLR type at compile-time,
+         which prevents the MC3066 error due to build-order/type resolution in resource dictionaries. -->
+    <Style x:Key="FilteringComboBoxWithProgressStyle" BasedOn="{StaticResource FilteringComboBoxBaseStyle}" TargetType="{x:Type UserControl}">
+        <!-- Add extra setters if needed -->
+    </Style>
+
+    <!-- If you had keyed brushes, templates or converters used by the control, put them here -->
+    <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
 </ResourceDictionary>

@@ -2,17 +2,13 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:AATM.App.HisWpf"
-        xmlns:behaviors="clr-namespace:AATM.App.HisWpf.Behaviors"
-        xmlns:local1="clr-namespace:AATM.App.HisWpf.Converter"
+        xmlns:local1="clr-namespace:AATM.App.HisWpf"
+        xmlns:behaviors="clr-namespace:AATM.UI.Controls;assembly=AATM.UI.Controls"
         Title="User Manager"
         Height="668" Width="800"
         WindowStartupLocation="CenterOwner">
     <Window.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resources/ComboBoxKeyboardNavigationStyle.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-
             <local1:EmployeeIdNoToDisplayTextConverter x:Key="EmployeeIdNoToDisplayTextConverter"/>
             <local1:SecurityGroupIdNoToDisplayTextConverter x:Key="SecurityGroupIdNoToDisplayTextConverter"/>
             <local1:IdToDisplayTextMultiConverter x:Key="IdToDisplayTextMultiConverter"/>
@@ -75,8 +71,10 @@
                   SelectedValuePath="IdNo"
                   DisplayMemberPath="DisplayText"
                   SelectedValue="{Binding SelectedUser.EmployeeIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                  behaviors:FilteredComboBoxBehavior.MasterItemsSource="{Binding AvailableEmployees}"
-                  behaviors:FilteredComboBoxBehavior.FilterDebounceMilliseconds="{Binding FilterDebounceMilliseconds, RelativeSource={RelativeSource AncestorType=Window}}" />
+                  behaviors:FilteredComboBoxBehavior.MasterItemsSource="{Binding AvailableEmployees}" 
+                  behaviors:FilteredComboBoxBehavior.FilterDebounceMilliseconds="{Binding FilterDebounceMilliseconds, RelativeSource={RelativeSource AncestorType=Window}}" 
+                  behaviors:FilteredComboBoxBehavior.IsEnabled="True"
+                  />
             <ProgressBar Grid.Column="1" x:Name="pbEmployeeFiltering" Width="18" Height="18" Margin="6,0,0,0" IsIndeterminate="True"
                          Visibility="{Binding Path=(behaviors:FilteredComboBoxBehavior.IsBusy), ElementName=cmbEmployeeIdNo, Converter={StaticResource BoolToVisibilityConverter}}"/>
         </Grid>
@@ -93,8 +91,10 @@
                   SelectedValuePath="IdNo"
                   DisplayMemberPath="DisplayText"
                   SelectedValue="{Binding SelectedUser.SecurityGroupIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                  behaviors:FilteredComboBoxBehavior.MasterItemsSource="{Binding AvailableSecurityGroups}"
-                  behaviors:FilteredComboBoxBehavior.FilterDebounceMilliseconds="{Binding FilterDebounceMilliseconds, RelativeSource={RelativeSource AncestorType=Window}}" />
+                  behaviors:FilteredComboBoxBehavior.MasterItemsSource="{Binding AvailableSecurityGroups}" 
+                  behaviors:FilteredComboBoxBehavior.FilterDebounceMilliseconds="{Binding FilterDebounceMilliseconds, RelativeSource={RelativeSource AncestorType=Window}}" 
+                  behaviors:FilteredComboBoxBehavior.IsEnabled="True"
+                  />
             <ProgressBar Grid.Column="1" x:Name="pbSecurityFiltering" Width="18" Height="18" Margin="6,0,0,0" IsIndeterminate="True"
                          Visibility="{Binding Path=(behaviors:FilteredComboBoxBehavior.IsBusy), ElementName=cmbSecurityGroupIdNo, Converter={StaticResource BoolToVisibilityConverter}}"/>
         </Grid>
@@ -167,7 +167,7 @@
                                           SelectedValuePath="IdNo"
                                           DisplayMemberPath="DisplayText"
                                           behaviors:FilteredComboBoxBehavior.MasterItemsSource="{Binding DataContext.AvailableEmployees, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                          behaviors:FilteredComboBoxBehavior.FilterDebounceMilliseconds="{Binding FilterDebounceMilliseconds, RelativeSource={RelativeSource AncestorType=Window}}"
+                                          behaviors:FilteredComboBoxBehavior.FilterDebounceMilliseconds="{Binding FilterDebounceMilliseconds, RelativeSource={RelativeSource AncestorType=Window}}" 
                                           behaviors:FilteredComboBoxBehavior.IsEnabled="True"/>
                                 <ProgressBar Grid.Column="1" Width="18" Height="18" Margin="6,0,0,0" IsIndeterminate="True"
                                              Visibility="{Binding Path=(behaviors:FilteredComboBoxBehavior.IsBusy), ElementName=cmbGridEmployee, Converter={StaticResource BoolToVisibilityConverter}}"/>
@@ -206,8 +206,8 @@
                                           SelectedValue="{Binding SecurityGroupIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                                           SelectedValuePath="IdNo"
                                           DisplayMemberPath="DisplayText"
-                                          behaviors:FilteredComboBoxBehavior.MasterItemsSource="{Binding DataContext.AvailableSecurityGroups, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                          behaviors:FilteredComboBoxBehavior.FilterDebounceMilliseconds="{Binding FilterDebounceMilliseconds, RelativeSource={RelativeSource AncestorType=Window}}"
+                                          behaviors:FilteredComboBoxBehavior.MasterItemsSource="{Binding DataContext.AvailableSecurityGroups, RelativeSource={RelativeSource AncestorType=DataGrid}}" 
+                                          behaviors:FilteredComboBoxBehavior.FilterDebounceMilliseconds="{Binding FilterDebounceMilliseconds, RelativeSource={RelativeSource AncestorType=Window}}" 
                                           behaviors:FilteredComboBoxBehavior.IsEnabled="True"/>
 
                                 <ProgressBar Grid.Column="1" Width="18" Height="18" Margin="6,0,0,0" IsIndeterminate="True"

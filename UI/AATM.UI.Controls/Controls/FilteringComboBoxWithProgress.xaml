@@ -1,0 +1,26 @@
+<UserControl x:Class="AATM.UI.Controls.FilteringComboBoxWithProgress"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:behaviors="clr-namespace:AATM.UI.Controls"
+             x:Name="root">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <ComboBox x:Name="PART_Combo" Grid.Column="0"
+                  Style="{DynamicResource GridFilteringComboBoxStyle}"
+                  ItemsSource="{Binding ItemsSource, ElementName=root}"
+                  SelectedValue="{Binding SelectedValue, ElementName=root, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
+                  SelectedValuePath="{Binding SelectedValuePath, ElementName=root}"
+                  DisplayMemberPath="{Binding DisplayMemberPath, ElementName=root}"
+                  Text="{Binding Text, ElementName=root, Mode=TwoWay}"
+                  behaviors:FilteredComboBoxBehavior.MasterItemsSource="{Binding MasterItemsSource, ElementName=root}"
+                  behaviors:FilteredComboBoxBehavior.FilterDebounceMilliseconds="{Binding FilterDebounceMilliseconds, ElementName=root}"
+                  behaviors:FilteredComboBoxBehavior.IsEnabled="{Binding IsBehaviorEnabled, ElementName=root}" />
+
+        <ProgressBar Grid.Column="1" Width="18" Height="18" Margin="6,0,0,0" IsIndeterminate="True"
+                     Visibility="{Binding IsBusy, ElementName=root, Converter={StaticResource BoolToVisibilityConverter}}" />
+    </Grid>
+</UserControl>

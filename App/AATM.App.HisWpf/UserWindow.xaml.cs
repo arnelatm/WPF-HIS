@@ -288,7 +288,8 @@ namespace AATM.App.HisWpf
         private void SetTopFilteredBehaviorEnabled(bool enabled)
         {
             // Names match XAML: cmbEmployeeIdNo and cmbSecurityGroupIdNo
-            var prop = Behaviors.FilteredComboBoxBehavior.IsEnabledProperty;
+            // Use the behavior type from the shared controls assembly (fully-qualified to avoid ambiguity)
+            var prop = AATM.UI.Controls.FilteredComboBoxBehavior.IsEnabledProperty;
             cmbEmployeeIdNo.SetValue(prop, enabled);
             cmbSecurityGroupIdNo.SetValue(prop, enabled);
         }

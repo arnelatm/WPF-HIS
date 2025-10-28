@@ -1,0 +1,308 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Input;
+using System.Windows.Threading;
+
+namespace AATM.UI.Controls
+{
+    /// <summary>
+    /// Implements text filtering for ComboBox using attached properties.
+    /// </summary>
+    public static class FilteredComboBoxBehavior
+    {
+        // MasterItemsSource attached DP
+        public static readonly DependencyProperty MasterItemsSourceProperty =
+            DependencyProperty.RegisterAttached(
+                "MasterItemsSource",
+                typeof(IEnumerable),
+                typeof(FilteredComboBoxBehavior),
+                new PropertyMetadata(null, OnMasterItemsSourceChanged));
+
+        public static void SetMasterItemsSource(DependencyObject element, IEnumerable? value)
+            => element.SetValue(MasterItemsSourceProperty, value);
+
+        public static IEnumerable? GetMasterItemsSource(DependencyObject element)
+            => (IEnumerable?)element.GetValue(MasterItemsSourceProperty);
+
+        private static void OnMasterItemsSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            // When master list changes, reset filter if needed
+            if (d is ComboBox cb && GetIsEnabled(cb))
+            {
+                ApplyFilter(cb, cb.Text);
+            }
+        }
+
+        // IsEnabled attached DP
+        public static readonly DependencyProperty IsEnabledProperty =
+            DependencyProperty.RegisterAttached(
+                "IsEnabled",
+                typeof(bool),
+                typeof(FilteredComboBoxBehavior),
+                new PropertyMetadata(false, OnIsEnabledChanged));
+
+        public static void SetIsEnabled(DependencyObject element, bool value)
+            => element.SetValue(IsEnabledProperty, value);
+
+        public static bool GetIsEnabled(DependencyObject element)
+            => (bool)element.GetValue(IsEnabledProperty);
+
+        private static void OnIsEnabledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is ComboBox cb)
+            {
+                if ((bool)e.NewValue)
+                {
+                    cb.Loaded += ComboBox_Loaded;
+                    cb.Unloaded += ComboBox_Unloaded;
+                }
+                else
+                {
+                    cb.Loaded -= ComboBox_Loaded;
+                    cb.Unloaded -= ComboBox_Unloaded;
+                    DetachHandlers(cb);
+                }
+            }
+        }
+
+        // Filter debounce attached DP
+        public static readonly DependencyProperty FilterDebounceMillisecondsProperty =
+            DependencyProperty.RegisterAttached(
+                "FilterDebounceMilliseconds",
+                typeof(int),
+                typeof(FilteredComboBoxBehavior),
+                new PropertyMetadata(120));
+
+        public static void SetFilterDebounceMilliseconds(DependencyObject element, int value)
+            => element.SetValue(FilterDebounceMillisecondsProperty, value);
+
+        public static int GetFilterDebounceMilliseconds(DependencyObject element)
+            => (int)element.GetValue(FilterDebounceMillisecondsProperty);
+
+        // IsBusy attached DP
+        public static readonly DependencyProperty IsBusyProperty =
+            DependencyProperty.RegisterAttached(
+                "IsBusy",
+                typeof(bool),
+                typeof(FilteredComboBoxBehavior),
+                new PropertyMetadata(false));
+
+        public static bool GetIsBusy(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(IsBusyProperty);
+        }
+
+        public static void SetIsBusy(DependencyObject obj, bool value)
+        {
+            obj.SetValue(IsBusyProperty, value);
+        }
+
+        // --- Filtering logic ---
+        private static readonly Dictionary<ComboBox, DispatcherTimer> _debounceTimers = new();
+        private static readonly Dictionary<ComboBox, string> _lastFilterText = new();
+        private static readonly HashSet<ComboBox> _suppressFilterOnDropDownOpen = new();
+
+        private static void ComboBox_Loaded(object? sender, RoutedEventArgs e)
+        {
+            if (sender is ComboBox cb)
+            {
+                AttachHandlers(cb);
+            }
+        }
+
+        private static void ComboBox_Unloaded(object? sender, RoutedEventArgs e)
+        {
+            if (sender is ComboBox cb)
+            {
+                DetachHandlers(cb);
+            }
+        }
+
+        private static void AttachHandlers(ComboBox cb)
+        {
+            cb.DropDownOpened += Cb_DropDownOpened;
+            cb.DropDownClosed += Cb_DropDownClosed;
+            cb.IsEditable = true;
+            cb.SetCurrentValue(ComboBox.IsTextSearchEnabledProperty, false); // Disable built-in search
+            cb.ApplyTemplate();
+            var textBox = GetEditableTextBox(cb);
+            if (textBox != null)
+            {
+                textBox.TextChanged -= EditableTextBox_TextChanged;
+                textBox.TextChanged += EditableTextBox_TextChanged;
+            }
+
+            // Also listen for preview input on the ComboBox to ensure dropdown opens
+            cb.PreviewTextInput -= Combo_PreviewTextInput;
+            cb.PreviewTextInput += Combo_PreviewTextInput;
+            cb.PreviewKeyDown -= Combo_PreviewKeyDown;
+            cb.PreviewKeyDown += Combo_PreviewKeyDown;
+        }
+
+        private static void DetachHandlers(ComboBox cb)
+        {
+            cb.DropDownOpened -= Cb_DropDownOpened;
+            cb.DropDownClosed -= Cb_DropDownClosed;
+            var textBox = GetEditableTextBox(cb);
+            if (textBox != null)
+            {
+                textBox.TextChanged -= EditableTextBox_TextChanged;
+            }
+            cb.PreviewTextInput -= Combo_PreviewTextInput;
+            cb.PreviewKeyDown -= Combo_PreviewKeyDown;
+            if (_debounceTimers.TryGetValue(cb, out var timer))
+            {
+                timer.Stop();
+                _debounceTimers.Remove(cb);
+            }
+            _lastFilterText.Remove(cb);
+        }
+
+        private static void Combo_PreviewTextInput(object? sender, TextCompositionEventArgs e)
+        {
+            if (sender is not ComboBox cb) return;
+            // Open dropdown immediately
+            cb.IsDropDownOpen = true;
+            // Schedule filtering after input processed so TextBox.Text is updated
+            cb.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                var tb = GetEditableTextBox(cb);
+                var txt = tb?.Text ?? cb.Text;
+                ApplyFilter(cb, txt);
+            }), DispatcherPriority.Input);
+        }
+
+        private static void Combo_PreviewKeyDown(object? sender, KeyEventArgs e)
+        {
+            if (sender is not ComboBox cb) return;
+            // For keys like Backspace/Delete/Space, ensure dropdown opens and filter updates
+            if (e.Key == Key.Back || e.Key == Key.Delete || e.Key == Key.Space)
+            {
+                cb.IsDropDownOpen = true;
+                cb.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    var tb = GetEditableTextBox(cb);
+                    var txt = tb?.Text ?? cb.Text;
+                    ApplyFilter(cb, txt);
+                }), DispatcherPriority.Input);
+            }
+        }
+
+        private static void Cb_DropDownOpened(object? sender, EventArgs e)
+        {
+            if (sender is ComboBox cb)
+            {
+                cb.ApplyTemplate();
+                var textBox = GetEditableTextBox(cb);
+                if (textBox != null)
+                {
+                    textBox.TextChanged -= EditableTextBox_TextChanged; // Avoid duplicate
+                    textBox.TextChanged += EditableTextBox_TextChanged;
+                }
+                // Set flag to force show all
+                _suppressFilterOnDropDownOpen.Add(cb);
+                ApplyFilter(cb, cb.Text, forceShowAll: true);
+                _suppressFilterOnDropDownOpen.Remove(cb);
+            }
+        }
+
+        private static void Cb_DropDownClosed(object? sender, EventArgs e)
+        {
+            if (sender is ComboBox cb)
+            {
+                var textBox = GetEditableTextBox(cb);
+                if (textBox != null)
+                {
+                    textBox.TextChanged -= EditableTextBox_TextChanged;
+                }
+            }
+        }
+
+        private static void EditableTextBox_TextChanged(object? sender, TextChangedEventArgs e)
+        {
+            if (sender is TextBox textBox && textBox.TemplatedParent is ComboBox cb)
+            {
+                // Ensure dropdown opens immediately
+                try
+                {
+                    cb.IsDropDownOpen = true;
+                }
+                catch { }
+
+                // Apply filter immediately so the dropdown shows filtered results as you type
+                try
+                {
+                    ApplyFilter(cb, textBox.Text);
+                }
+                catch { }
+
+                // Remove any existing debounce timer since we're applying immediately
+                if (_debounceTimers.TryGetValue(cb, out var existing))
+                {
+                    existing.Stop();
+                    _debounceTimers.Remove(cb);
+                }
+            }
+        }
+
+        private static void ApplyFilter(ComboBox cb, string? filterText, bool forceShowAll = false)
+        {
+            var master = GetMasterItemsSource(cb);
+            if (master == null)
+                return;
+
+            // Only skip filtering if the text is exactly the same and not forced
+            if (!forceShowAll && _lastFilterText.TryGetValue(cb, out var last) && last == filterText)
+                return;
+
+            // Always update the cache to the current text
+            _lastFilterText[cb] = filterText ?? string.Empty;
+
+            // Set busy
+            SetIsBusy(cb, true);
+
+            // Filtering logic
+            var displayMemberPath = cb.DisplayMemberPath;
+            var filtered = new List<object>();
+            foreach (var item in master)
+            {
+                string value = item?.ToString() ?? string.Empty;
+                if (!string.IsNullOrEmpty(displayMemberPath) && item != null)
+                {
+                    var prop = item.GetType().GetProperty(displayMemberPath);
+                    if (prop != null)
+                    {
+                        var propValue = prop.GetValue(item);
+                        value = propValue?.ToString() ?? string.Empty;
+                    }
+                }
+                if (forceShowAll || string.IsNullOrWhiteSpace(filterText) || value.Contains(filterText, StringComparison.CurrentCultureIgnoreCase))
+                {
+                    filtered.Add(item);
+                }
+            }
+            cb.ItemsSource = filtered;
+            SetIsBusy(cb, false);
+
+            // Ensure dropdown is open and updates in real time as user types
+            if (cb.IsEditable && cb.IsKeyboardFocusWithin && !cb.IsDropDownOpen)
+            {
+                cb.IsDropDownOpen = true;
+            }
+        }
+
+        private static TextBox? GetEditableTextBox(ComboBox comboBox)
+        {
+            if (!comboBox.IsEditable)
+                return null;
+            comboBox.ApplyTemplate();
+            return comboBox.Template.FindName("PART_EditableTextBox", comboBox) as TextBox;
+        }
+    }
+}

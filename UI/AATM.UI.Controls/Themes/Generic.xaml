@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:AATM.UI.Controls;assembly=AATM.UI.Controls">
+
+    <!-- Merge existing resource dictionaries from this assembly -->
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/AATM.UI.Controls;component/Resources/FilteringComboBoxStyle.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <!-- Removed direct TargetType reference to controls:FilteringComboBoxWithProgress to avoid
+       MC3066 at compile-time. If you need a default implicit style for the UserControl,
+       either provide it in the merged resource with a key and apply it where used, or
+       ensure the control is a compiled custom control (Control-derived) instead of a UserControl. -->
+</ResourceDictionary>

@@ -272,7 +272,7 @@ namespace AATM.App.HisWpf
             }
         }
 
-        private async void BtnDelete_Click(object sender, RoutedEventArgs e)
+        private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
             if (ViewModel.DeleteCommand.CanExecute(null))
                 ViewModel.DeleteCommand.Execute(null);

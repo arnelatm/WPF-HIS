@@ -1,15 +1,19 @@
 ﻿<Application x:Class="AATM.App.HisWpf.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:AATM.App.HisWpf" xmlns:local1="clr-namespace:AATM.App.HisWpf.Converter"
+             xmlns:local="clr-namespace:AATM.App.HisWpf"
+             xmlns:local1="clr-namespace:AATM.App.HisWpf" 
+             xmlns:local11="clr-namespace:AATM.UI.Controls;assembly=AATM.UI.Controls"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
 
             <!-- Merge shared dictionaries first -->
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resources/ComboBoxKeyboardNavigationStyle.xaml"/>
-                <ResourceDictionary Source="Resources/FilteringComboBoxStyle.xaml"/>
+                <!-- Controls library Generic (contains styles) -->
+                <ResourceDictionary Source="/AATM.UI.Controls;component/Themes/Generic.xaml" />
+                <!-- If you have additional resource files -->
+                <ResourceDictionary Source="/AATM.UI.Controls;component/Resources/FilteringComboBoxStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <!-- Implicit and keyed styles -->
@@ -152,11 +156,11 @@
                 <Setter Property="CellStyle" Value="{StaticResource ErrorCellStyle}"/>
             </Style>
 
-            <!-- Global converters (make sure namespace prefix local1 = clr-namespace:AATM.App.HisWpf.Converter) -->
+            <!-- Global converters (make sure namespace prefix local1 = clr-namespace:AATM.App.HisWpf.Converters) -->
             <local1:EmployeeIdNoToDisplayTextConverter x:Key="EmployeeIdNoToDisplayTextConverter"/>
             <local1:SecurityGroupIdNoToDisplayTextConverter x:Key="SecurityGroupIdNoToDisplayTextConverter"/>
             <local1:IdToDisplayTextMultiConverter x:Key="IdToDisplayTextMultiConverter"/>
-            <local1:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+            <local11:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
 
         </ResourceDictionary>
     </Application.Resources>

@@ -2,7 +2,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace AATM.App.HisWpf.Behaviors
+namespace AATM.UI.Controls
 {
     public static class ComboBoxClearOnFullSelectionBehavior
     {
@@ -15,7 +15,6 @@ namespace AATM.App.HisWpf.Behaviors
         public static void SetIsEnabled(DependencyObject element, bool value) => element.SetValue(IsEnabledProperty, value);
         public static bool GetIsEnabled(DependencyObject element) => (bool)element.GetValue(IsEnabledProperty);
 
-        // New: ICommand to execute when the behavior clears the selection/value
         public static readonly DependencyProperty ClearCommandProperty = DependencyProperty.RegisterAttached(
             "ClearCommand",
             typeof(ICommand),
@@ -25,7 +24,6 @@ namespace AATM.App.HisWpf.Behaviors
         public static void SetClearCommand(DependencyObject element, ICommand value) => element.SetValue(ClearCommandProperty, value);
         public static ICommand GetClearCommand(DependencyObject element) => (ICommand)element.GetValue(ClearCommandProperty);
 
-        // New: Optional parameter for the ClearCommand
         public static readonly DependencyProperty ClearCommandParameterProperty = DependencyProperty.RegisterAttached(
             "ClearCommandParameter",
             typeof(object),
