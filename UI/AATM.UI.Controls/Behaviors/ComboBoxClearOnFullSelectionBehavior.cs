@@ -76,12 +76,21 @@ namespace AATM.UI.Controls
         {
             if (sender is not ComboBox combo || !combo.IsEditable) return;
 
+            // Ignore empty input (IME composition or non-character input)
+            if (string.IsNullOrEmpty(e.Text)) return;
+
             var tb = combo.Template.FindName("PART_EditableTextBox", combo) as TextBox;
             if (tb == null) return;
 
-            if (!string.IsNullOrEmpty(tb.Text) && tb.SelectionLength == tb.Text.Length)
+            // Only clear when the entire text is selected, the TextBox actually has keyboard focus
+            // (prevents clearing when the user merely clicks to open the dropdown), and the input is a printable char.
+            if (!string.IsNullOrEmpty(tb.Text) && tb.SelectionLength == tb.Text.Length && tb.IsKeyboardFocusWithin)
             {
-                ClearComboBoxValue(combo);
+                var ch = e.Text[0];
+                if (!char.IsControl(ch))
+                {
+                    ClearComboBoxValue(combo);
+                }
             }
         }
 
