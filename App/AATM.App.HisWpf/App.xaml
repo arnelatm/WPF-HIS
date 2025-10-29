@@ -159,7 +159,7 @@
             <conv:EmployeeIdNoToDisplayTextConverter x:Key="EmployeeIdNoToDisplayTextConverter"/>
             <conv:SecurityGroupIdNoToDisplayTextConverter x:Key="SecurityGroupIdNoToDisplayTextConverter"/>
             <conv:IdToDisplayTextMultiConverter x:Key="IdToDisplayTextMultiConverter"/>
-            <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+            <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -228,14 +228,21 @@ namespace AATM.UI.Controls
         {
             if (sender is TextBox textBox && textBox.TemplatedParent is ComboBox cb)
             {
-                // Ensure dropdown opens immediately
+                // Only treat this as user input when the editable TextBox actually has keyboard focus
+                // (prevents programmatic Text property changes during initialization from opening the dropdown)
+                var focusedElement = System.Windows.Input.Keyboard.FocusedElement;
+                var isUserEdit = focusedElement == textBox || textBox.IsKeyboardFocusWithin || cb.IsKeyboardFocusWithin;
+                if (!isUserEdit)
+                    return;
+
+                // Ensure dropdown opens when the user types
                 try
                 {
                     cb.IsDropDownOpen = true;
                 }
                 catch { }
 
-                // Apply filter immediately so the dropdown shows filtered results as you type
+                // Apply filter based on current text
                 try
                 {
                     ApplyFilter(cb, textBox.Text);
