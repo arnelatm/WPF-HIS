@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace AATM.App.HisWpf
+namespace AATM.UI.Controls.Converters
 {
     public class IdToDisplayTextMultiConverter : IMultiValueConverter
     {

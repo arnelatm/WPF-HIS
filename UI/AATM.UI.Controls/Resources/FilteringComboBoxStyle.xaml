@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:behaviors="clr-namespace:AATM.UI.Controls;assembly=AATM.UI.Controls"
                     xmlns:controls="clr-namespace:AATM.UI.Controls;assembly=AATM.UI.Controls"
-                    xmlns:conv="clr-namespace:AATM.UI.Controls">
+                    xmlns:conv="clr-namespace:AATM.UI.Controls.Converters">
     <!-- Add a default KeyboardNavigableComboBoxItemStyle to resolve XDG-0001 -->
     <Style x:Key="KeyboardNavigableComboBoxItemStyle" TargetType="ComboBoxItem">
         <!-- You can customize setters as needed -->

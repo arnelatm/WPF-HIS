@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-namespace AATM.UI.Controls
+namespace AATM.UI.Controls.Converters
 {
     public class BoolToVisibilityConverter : IValueConverter
     {

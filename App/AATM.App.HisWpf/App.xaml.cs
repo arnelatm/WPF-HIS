@@ -24,7 +24,9 @@ namespace AATM.App.HisWpf
             catch { /* ignore */ }
         }
 
-        public static IHost Host { get; } = CreateHost();
+        // Make Host lazy so the designer does not execute CreateHost() when it loads App type
+        private static IHost? _host;
+        public static IHost Host => _host ??= CreateHost();
 
         private static IHost CreateHost()
         {
@@ -92,6 +94,7 @@ namespace AATM.App.HisWpf
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+            // Host is created/started here at runtime, not at design-time
             Host.Start();
         }
     }
