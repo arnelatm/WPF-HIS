@@ -74,6 +74,7 @@
                   behaviors:FilteredComboBoxBehavior.MasterItemsSource="{Binding AvailableEmployees}" 
                   behaviors:FilteredComboBoxBehavior.FilterDebounceMilliseconds="{Binding FilterDebounceMilliseconds, RelativeSource={RelativeSource AncestorType=Window}}" 
                   behaviors:FilteredComboBoxBehavior.IsEnabled="True"
+                  behaviors:ComboBoxKeyboardSelectionBehavior.IsEnabled="True"
                   />
             <ProgressBar Grid.Column="1" x:Name="pbEmployeeFiltering" Width="18" Height="18" Margin="6,0,0,0" IsIndeterminate="True"
                          Visibility="{Binding Path=(behaviors:FilteredComboBoxBehavior.IsBusy), ElementName=cmbEmployeeIdNo, Converter={StaticResource BoolToVisibilityConverter}}"/>

@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Threading;
+using System.Diagnostics;
 
 namespace AATM.UI.Controls
 {
@@ -35,6 +36,7 @@ namespace AATM.UI.Controls
             // When master list changes, reset filter if needed
             if (d is ComboBox cb && GetIsEnabled(cb))
             {
+                Log($"OnMasterItemsSourceChanged for {GetName(cb)}");
                 ApplyFilter(cb, cb.Text);
             }
         }
@@ -57,6 +59,7 @@ namespace AATM.UI.Controls
         {
             if (d is ComboBox cb)
             {
+                Log($"OnIsEnabledChanged {GetName(cb)} -> {(bool)e.NewValue}");
                 if ((bool)e.NewValue)
                 {
                     cb.Loaded += ComboBox_Loaded;
@@ -107,11 +110,27 @@ namespace AATM.UI.Controls
         private static readonly Dictionary<ComboBox, DispatcherTimer> _debounceTimers = new();
         private static readonly Dictionary<ComboBox, string> _lastFilterText = new();
         private static readonly HashSet<ComboBox> _suppressFilterOnDropDownOpen = new();
+        private static readonly Dictionary<ComboBox, Popup?> _popupMap = new();
+        private static readonly Dictionary<ComboBox, PreProcessInputEventHandler> _preInputHandlers = new();
+
+        // mouse-suppression maps and window map
+        private static readonly Dictionary<ComboBox, bool> _suppressNextMouseDown = new();
+        private static readonly Dictionary<ComboBox, Window?> _windowMap = new();
+
+        // timed suppression (preferred)
+        private static readonly Dictionary<ComboBox, DateTime> _suppressMouseUntil = new();
+        // increased suppression to avoid immediate accidental clicks after keyboard navigation
+        private static readonly TimeSpan _mouseSuppressDuration = TimeSpan.FromMilliseconds(1000);
+
+        // Diagnostic: track last key event and timestamp so DropDownClosed can correlate
+        private static Key? _lastKey = null;
+        private static DateTime _lastKeyTime = DateTime.MinValue;
 
         private static void ComboBox_Loaded(object? sender, RoutedEventArgs e)
         {
             if (sender is ComboBox cb)
             {
+                Log($"ComboBox_Loaded {GetName(cb)}");
                 AttachHandlers(cb);
             }
         }
@@ -120,12 +139,14 @@ namespace AATM.UI.Controls
         {
             if (sender is ComboBox cb)
             {
+                Log($"ComboBox_Unloaded {GetName(cb)}");
                 DetachHandlers(cb);
             }
         }
 
         private static void AttachHandlers(ComboBox cb)
         {
+            Log($"AttachHandlers {GetName(cb)}");
             cb.DropDownOpened += Cb_DropDownOpened;
             cb.DropDownClosed += Cb_DropDownClosed;
             cb.IsEditable = true;
@@ -136,6 +157,10 @@ namespace AATM.UI.Controls
             {
                 textBox.TextChanged -= EditableTextBox_TextChanged;
                 textBox.TextChanged += EditableTextBox_TextChanged;
+
+                // handle arrow keys when editing text
+                textBox.PreviewKeyDown -= TextBox_PreviewKeyDown;
+                textBox.PreviewKeyDown += TextBox_PreviewKeyDown;
             }
 
             // Also listen for preview input on the ComboBox to ensure dropdown opens
@@ -143,16 +168,44 @@ namespace AATM.UI.Controls
             cb.PreviewTextInput += Combo_PreviewTextInput;
             cb.PreviewKeyDown -= Combo_PreviewKeyDown;
             cb.PreviewKeyDown += Combo_PreviewKeyDown;
+
+            // Register window-level mouse handlers early so suppression works immediately
+            try
+            {
+                var window = Window.GetWindow(cb);
+                if (window != null)
+                {
+                    // store so we can remove later
+                    _windowMap[cb] = window;
+                    // ensure we don't add multiple handlers
+                    window.PreviewMouseDown -= Window_PreviewMouseDown;
+                    window.PreviewMouseDown += Window_PreviewMouseDown;
+                    window.PreviewMouseUp -= Window_PreviewMouseUp;
+                    window.PreviewMouseUp += Window_PreviewMouseUp;
+                    Log($"Early-registered Window.PreviewMouseDown/Up for {GetName(cb)}");
+                    RecordRecentEvent(cb, "Early-registered Window.PreviewMouseDown/Up");
+                }
+            }
+            catch (Exception ex)
+            {
+                Log($"Failed to early-register window mouse handler: {ex.Message}");
+                RecordRecentEvent(cb, $"Failed to early-register window mouse handler: {ex.Message}");
+            }
+
+            // debug
+            RecordRecentEvent(cb, "AttachHandlers: handlers attached");
         }
 
         private static void DetachHandlers(ComboBox cb)
         {
+            Log($"DetachHandlers {GetName(cb)}");
             cb.DropDownOpened -= Cb_DropDownOpened;
             cb.DropDownClosed -= Cb_DropDownClosed;
             var textBox = GetEditableTextBox(cb);
             if (textBox != null)
             {
                 textBox.TextChanged -= EditableTextBox_TextChanged;
+                textBox.PreviewKeyDown -= TextBox_PreviewKeyDown;
             }
             cb.PreviewTextInput -= Combo_PreviewTextInput;
             cb.PreviewKeyDown -= Combo_PreviewKeyDown;
@@ -162,11 +215,37 @@ namespace AATM.UI.Controls
                 _debounceTimers.Remove(cb);
             }
             _lastFilterText.Remove(cb);
+
+            // Unregister any window handlers registered earlier
+            try
+            {
+                if (_windowMap.TryGetValue(cb, out var w) && w != null)
+                {
+                    w.PreviewMouseDown -= Window_PreviewMouseDown;
+                    w.PreviewMouseUp -= Window_PreviewMouseUp;
+                    _windowMap.Remove(cb);
+                    Log($"Unregistered Window.PreviewMouseDown/Up (from DetachHandlers) for {GetName(cb)}");
+                    RecordRecentEvent(cb, "Unregistered Window.PreviewMouseDown/Up (from DetachHandlers)");
+                }
+            }
+            catch (Exception ex)
+            {
+                Log($"Failed to unregister window mouse handler in DetachHandlers: {ex.Message}");
+                RecordRecentEvent(cb, $"Failed to unregister window mouse handler in DetachHandlers: {ex.Message}");
+            }
+
+            // debug
+            RecordRecentEvent(cb, "DetachHandlers: handlers removed");
         }
 
         private static void Combo_PreviewTextInput(object? sender, TextCompositionEventArgs e)
         {
             if (sender is not ComboBox cb) return;
+            // record event time for diagnostics (do NOT clear _lastKey so DropDownClosed can see last key)
+            _lastKeyTime = DateTime.Now;
+            Log($"Combo_PreviewTextInput KeyText='{e.Text}' IsDropDownOpen={cb.IsDropDownOpen} {GetName(cb)}");
+            RecordRecentEvent(cb, $"PreviewTextInput KeyText='{e.Text}' IsDropDownOpen={cb.IsDropDownOpen}");
+
             // Open dropdown immediately
             cb.IsDropDownOpen = true;
             // Schedule filtering after input processed so TextBox.Text is updated
@@ -174,6 +253,7 @@ namespace AATM.UI.Controls
             {
                 var tb = GetEditableTextBox(cb);
                 var txt = tb?.Text ?? cb.Text;
+                Log($"Combo_PreviewTextInput scheduling ApplyFilter txt='{txt}'");
                 ApplyFilter(cb, txt);
             }), DispatcherPriority.Input);
         }
@@ -181,6 +261,16 @@ namespace AATM.UI.Controls
         private static void Combo_PreviewKeyDown(object? sender, KeyEventArgs e)
         {
             if (sender is not ComboBox cb) return;
+
+            // record event for diagnostics
+            _lastKey = e.Key;
+            _lastKeyTime = DateTime.Now;
+
+            Log($"Combo_PreviewKeyDown Key={e.Key} IsDropDownOpen={cb.IsDropDownOpen} {GetName(cb)}");
+
+            // In Combo_PreviewKeyDown (after you set _lastKey/_lastKeyTime)
+            RecordRecentEvent(cb, $"PreviewKeyDown Key={e.Key} IsDropDownOpen={cb.IsDropDownOpen} Handled={e.Handled}");
+
             // For keys like Backspace/Delete/Space, ensure dropdown opens and filter updates
             if (e.Key == Key.Back || e.Key == Key.Delete || e.Key == Key.Space)
             {
@@ -189,39 +279,281 @@ namespace AATM.UI.Controls
                 {
                     var tb = GetEditableTextBox(cb);
                     var txt = tb?.Text ?? cb.Text;
+                    Log($"Combo_PreviewKeyDown scheduling ApplyFilter txt='{txt}'");
                     ApplyFilter(cb, txt);
                 }), DispatcherPriority.Input);
+                return;
+            }
+
+            // Handle Up/Down for navigating filtered items; ComboBox itself may not have keyboard focus when editing,
+            // but this covers the case where the ComboBox receives the key.
+            if (e.Key == Key.Down || e.Key == Key.Up)
+            {
+                // ensure dropdown is open and items filtered
+                var tb = GetEditableTextBox(cb);
+                var currentText = tb?.Text ?? cb.Text;
+                Log($"Combo_PreviewKeyDown navigation Key={e.Key} currentText='{currentText}'");
+                // If dropdown isn't open, open and force show all filtered results based on current text
+                if (!cb.IsDropDownOpen)
+                {
+                    cb.IsDropDownOpen = true;
+                    // Apply filter (forceShowAll = false so filter uses currentText)
+                    ApplyFilter(cb, currentText);
+                }
+
+                // request timed suppression of mouse events (avoid accidental popup close)
+                _suppressMouseUntil[cb] = DateTime.Now + _mouseSuppressDuration;
+                RecordRecentEvent(cb, $"Set _suppressMouseUntil until={_suppressMouseUntil[cb]:O}");
+                // fallback single-event suppression
+                _suppressNextMouseDown[cb] = true;
+                RecordRecentEvent(cb, $"Set _suppressNextMouseDown=true");
+
+                // Navigate selection within the filtered items without committing text
+                NavigateSelection(cb, e.Key == Key.Down ? 1 : -1);
+
+                // prevent default handling (focus move)
+                e.Handled = true;
+            }
+        }
+
+        // Handle key input coming from the editable TextBox (when it has keyboard focus)
+        private static void TextBox_PreviewKeyDown(object? sender, KeyEventArgs e)
+        {
+            if (sender is not TextBox tb || tb.TemplatedParent is not ComboBox cb) return;
+
+            // record event for diagnostics
+            _lastKey = e.Key;
+            _lastKeyTime = DateTime.Now;
+
+            Log($"TextBox_PreviewKeyDown Key={e.Key} IsDropDownOpen={cb.IsDropDownOpen} {GetName(cb)}");
+            RecordRecentEvent(cb, $"TextBox_PreviewKeyDown Key={e.Key} IsDropDownOpen={cb.IsDropDownOpen}");
+
+            // For Backspace/Delete/Space allow the existing logic to open and filter
+            if (e.Key == Key.Back || e.Key == Key.Delete || e.Key == Key.Space)
+            {
+                cb.IsDropDownOpen = true;
+                cb.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    Log($"TextBox_PreviewKeyDown scheduling ApplyFilter tb.Text='{tb.Text}'");
+                    ApplyFilter(cb, tb.Text);
+                }), DispatcherPriority.Input);
+                return;
+            }
+
+            // Navigate with Up/Down: highlight items but keep dropdown open and do not commit text
+            if (e.Key == Key.Down || e.Key == Key.Up)
+            {
+                Log($"TextBox_PreviewKeyDown navigation Key={e.Key} tb.Text='{tb.Text}'");
+                // ensure dropdown is open and items filtered
+                if (!cb.IsDropDownOpen)
+                {
+                    cb.IsDropDownOpen = true;
+                    ApplyFilter(cb, tb.Text);
+                }
+                else
+                {
+                    // make sure filter is up-to-date before navigating
+                    ApplyFilter(cb, tb.Text);
+                }
+
+                // request timed suppression of mouse events (avoid accidental popup close)
+                _suppressMouseUntil[cb] = DateTime.Now + _mouseSuppressDuration;
+                RecordRecentEvent(cb, $"Set _suppressMouseUntil until={_suppressMouseUntil[cb]:O}");
+                // fallback single-event suppression
+                _suppressNextMouseDown[cb] = true;
+                RecordRecentEvent(cb, $"Set _suppressNextMouseDown=true");
+
+                // Navigate the selection highlight without changing the editable text
+                NavigateSelectionPreserveText(cb, e.Key == Key.Down ? 1 : -1);
+
+                // prevent the TextBox from moving focus or caret for arrow navigation
+                e.Handled = true;
+                return;
+            }
+
+            // Commit selection on Enter: set Text and SelectedItem, then close dropdown
+            if (e.Key == Key.Enter)
+            {
+                Log($"TextBox_PreviewKeyDown Enter - SelectedIndex={cb.SelectedIndex}");
+                if (cb.SelectedIndex >= 0)
+                {
+                    CommitSelection(cb);
+                    e.Handled = true;
+                }
+                return;
+            }
+
+            // Commit selection on Tab but allow focus to move away; ensure selection is applied first
+            if (e.Key == Key.Tab)
+            {
+                Log($"TextBox_PreviewKeyDown Tab - SelectedIndex={cb.SelectedIndex}");
+                if (cb.SelectedIndex >= 0)
+                {
+                    CommitSelection(cb);
+                }
+                // don't set e.Handled so focus moves naturally
             }
         }
 
         private static void Cb_DropDownOpened(object? sender, EventArgs e)
         {
-            if (sender is ComboBox cb)
+            if (sender is not ComboBox cb) return;
+
+            Log($"Cb_DropDownOpened {GetName(cb)}");
+
+            // clear recent events for this combo so dump is focused on the new session
+            if (_recentEvents.TryGetValue(cb, out var q)) q.Clear();
+            RecordRecentEvent(cb, "DropDownOpened");
+
+            // Ensure handlers and text box wiring as before
+            cb.ApplyTemplate();
+            var textBox = GetEditableTextBox(cb);
+            if (textBox != null)
             {
-                cb.ApplyTemplate();
-                var textBox = GetEditableTextBox(cb);
-                if (textBox != null)
+                textBox.TextChanged -= EditableTextBox_TextChanged; // Avoid duplicate
+                textBox.TextChanged += EditableTextBox_TextChanged;
+                textBox.PreviewKeyDown -= TextBox_PreviewKeyDown;
+                textBox.PreviewKeyDown += TextBox_PreviewKeyDown;
+            }
+
+            // Force the ComboBox's popup to stay open while navigating via keyboard.
+            try
+            {
+                var popup = cb.Template.FindName("PART_Popup", cb) as Popup;
+                if (popup != null)
                 {
-                    textBox.TextChanged -= EditableTextBox_TextChanged; // Avoid duplicate
-                    textBox.TextChanged += EditableTextBox_TextChanged;
+                    // store reference so we can restore on close
+                    _popupMap[cb] = popup;
+
+                    // Temporarily force it to stay open while user navigates
+                    Log($"Setting Popup.StaysOpen=true for {GetName(cb)}");
+                    popup.StaysOpen = true;
+                    RecordRecentEvent(cb, $"Popup.StaysOpen set true (popup found)");
                 }
-                // Set flag to force show all
-                _suppressFilterOnDropDownOpen.Add(cb);
-                ApplyFilter(cb, cb.Text, forceShowAll: true);
-                _suppressFilterOnDropDownOpen.Remove(cb);
+                else
+                {
+                    _popupMap[cb] = null;
+                    Log($"PART_Popup not found for {GetName(cb)}");
+                    RecordRecentEvent(cb, "PART_Popup not found");
+                }
+            }
+            catch (Exception ex)
+            {
+                _popupMap[cb] = null;
+                Log($"Exception finding PART_Popup: {ex.Message}");
+                RecordRecentEvent(cb, $"Exception finding PART_Popup: {ex.Message}");
+            }
+
+            // Set flag to force show all and run initial filter
+            _suppressFilterOnDropDownOpen.Add(cb);
+            ApplyFilter(cb, cb.Text, forceShowAll: true);
+            _suppressFilterOnDropDownOpen.Remove(cb);
+
+            // Register pre-process input handler
+            try
+            {
+                var handler = new PreProcessInputEventHandler((sender, args) => PreProcessInputHandler(cb, args));
+                _preInputHandlers[cb] = handler;
+                InputManager.Current.PreProcessInput += handler;
+                Log($"Registered PreProcessInput handler for {GetName(cb)}");
+                RecordRecentEvent(cb, "Registered PreProcessInput handler");
+            }
+            catch (Exception ex)
+            {
+                Log($"Failed to register PreProcessInput: {ex.Message}");
+                RecordRecentEvent(cb, $"Failed to register PreProcessInput: {ex.Message}");
             }
         }
 
         private static void Cb_DropDownClosed(object? sender, EventArgs e)
         {
-            if (sender is ComboBox cb)
+            if (sender is not ComboBox cb) return;
+
+            // capture current input state for diagnostics
+            var now = DateTime.Now;
+            var lastKey = _lastKey?.ToString() ?? "<none>";
+            var lastKeyDeltaMs = _lastKeyTime == DateTime.MinValue ? "<never>" : (now - _lastKeyTime).TotalMilliseconds.ToString("F0");
+            var mouseLeft = System.Windows.Input.Mouse.LeftButton;
+            var focused = Keyboard.FocusedElement?.ToString() ?? "<null>";
+
+            Log($"Cb_DropDownClosed {GetName(cb)} SelectedIndex={cb.SelectedIndex} SelectedItem={(cb.SelectedItem ?? "null")} IsDropDownOpen={cb.IsDropDownOpen}");
+            Log($"DropDownClosed input state: lastKey={lastKey} lastKeyDeltaMs={lastKeyDeltaMs} MouseLeft={mouseLeft} FocusedElement={focused}");
+
+            // Dump recent events and internal maps for debugging
+            Log($"Recent events for {GetName(cb)}:\n{GetRecentEventsDump(cb)}");
+            var suppressUntil = _suppressMouseUntil.TryGetValue(cb, out var untilVal) ? untilVal.ToString("O") : "<none>";
+            var suppressNext = _suppressNextMouseDown.TryGetValue(cb, out var sn) ? sn.ToString() : "<none>";
+            var hasPreHandler = _preInputHandlers.ContainsKey(cb);
+            var hasWindow = _windowMap.ContainsKey(cb);
+            var popupInfo = _popupMap.TryGetValue(cb, out var p) && p != null ? $"StaysOpen={p.StaysOpen}" : "<no popup>";
+            var itemsCount = (cb.ItemsSource as ICollection)?.Count ?? cb.Items.Count;
+            Log($"Maps: suppressUntil={suppressUntil} suppressNext={suppressNext} preInputHandler={hasPreHandler} windowHandler={hasWindow} popup={popupInfo} itemsCount={itemsCount}");
+            RecordRecentEvent(cb, $"DropDownClosed: suppressUntil={suppressUntil} suppressNext={suppressNext} preHandler={hasPreHandler} window={hasWindow} popup={popupInfo} items={itemsCount}");
+
+            // detach text handlers as before
+            var textBox = GetEditableTextBox(cb);
+            if (textBox != null)
             {
-                var textBox = GetEditableTextBox(cb);
-                if (textBox != null)
+                textBox.TextChanged -= EditableTextBox_TextChanged;
+                textBox.PreviewKeyDown -= TextBox_PreviewKeyDown;
+            }
+
+            // Restore Popup.StaysOpen to default (false) if we changed it
+            try
+            {
+                if (_popupMap.TryGetValue(cb, out var popup) && popup != null)
                 {
-                    textBox.TextChanged -= EditableTextBox_TextChanged;
+                    Log($"Restoring Popup.StaysOpen=false for {GetName(cb)}");
+                    popup.StaysOpen = false;
                 }
             }
+            catch (Exception ex)
+            {
+                Log($"Exception restoring popup StaysOpen: {ex.Message}");
+                RecordRecentEvent(cb, $"Exception restoring popup StaysOpen: {ex.Message}");
+            }
+            finally
+            {
+                _popupMap.Remove(cb);
+            }
+
+            // Unregister pre-process input handler
+            try
+            {
+                if (_preInputHandlers.TryGetValue(cb, out var handler))
+                {
+                    InputManager.Current.PreProcessInput -= handler;
+                    _preInputHandlers.Remove(cb);
+                    Log($"Unregistered PreProcessInput handler for {GetName(cb)}");
+                    RecordRecentEvent(cb, "Unregistered PreProcessInput handler");
+                }
+            }
+            catch (Exception ex)
+            {
+                Log($"Failed to unregister PreProcessInput: {ex.Message}");
+                RecordRecentEvent(cb, $"Failed to unregister PreProcessInput: {ex.Message}");
+            }
+
+            // Unregister window-level mouse handler
+            try
+            {
+                if (_windowMap.TryGetValue(cb, out var w) && w != null)
+                {
+                    w.PreviewMouseDown -= Window_PreviewMouseDown;
+                    w.PreviewMouseUp -= Window_PreviewMouseUp;
+                    _windowMap.Remove(cb);
+                    Log($"Unregistered Window.PreviewMouseDown/Up for {GetName(cb)}");
+                    RecordRecentEvent(cb, "Unregistered Window.PreviewMouseDown/Up");
+                }
+            }
+            catch (Exception ex)
+            {
+                Log($"Failed to unregister window mouse handler: {ex.Message}");
+                RecordRecentEvent(cb, $"Failed to unregister window mouse handler: {ex.Message}");
+            }
+
+            // Attempt to log call stack for diagnostics
+            Log($"DropDownClosed stack:\n{Environment.StackTrace}");
         }
 
         private static void EditableTextBox_TextChanged(object? sender, TextChangedEventArgs e)
@@ -238,6 +570,8 @@ namespace AATM.UI.Controls
                 // Ensure dropdown opens when the user types
                 try
                 {
+                    Log($"EditableTextBox_TextChanged txt='{textBox.Text}' IsDropDownOpen={cb.IsDropDownOpen}");
+                    RecordRecentEvent(cb, $"EditableTextBox_TextChanged txt='{textBox.Text}' isUserEdit={isUserEdit}");
                     cb.IsDropDownOpen = true;
                 }
                 catch { }
@@ -260,13 +594,30 @@ namespace AATM.UI.Controls
 
         private static void ApplyFilter(ComboBox cb, string? filterText, bool forceShowAll = false)
         {
+            Log($"ApplyFilter start for {GetName(cb)} filterText='{filterText}' forceShowAll={forceShowAll}");
             var master = GetMasterItemsSource(cb);
             if (master == null)
+            {
+                Log("ApplyFilter master == null");
+                RecordRecentEvent(cb, "ApplyFilter: master == null");
                 return;
+            }
+
+            // record master count for diagnostics (DEBUG-only)
+            try
+            {
+                var masterCount = master.Cast<object>().Count();
+                RecordRecentEvent(cb, $"ApplyFilter start filterText='{filterText}' forceShowAll={forceShowAll} masterCount={masterCount}");
+            }
+            catch { RecordRecentEvent(cb, $"ApplyFilter start filterText='{filterText}' forceShowAll={forceShowAll} masterCount=<error>"); }
 
             // Only skip filtering if the text is exactly the same and not forced
             if (!forceShowAll && _lastFilterText.TryGetValue(cb, out var last) && last == filterText)
+            {
+                Log("ApplyFilter skipped (same text)");
+                RecordRecentEvent(cb, "ApplyFilter skipped (same text)");
                 return;
+            }
 
             // Always update the cache to the current text
             _lastFilterText[cb] = filterText ?? string.Empty;
@@ -294,12 +645,16 @@ namespace AATM.UI.Controls
                     filtered.Add(item);
                 }
             }
+
+            Log($"ApplyFilter produced {filtered.Count} items");
+            RecordRecentEvent(cb, $"ApplyFilter produced {filtered.Count} items");
             cb.ItemsSource = filtered;
             SetIsBusy(cb, false);
 
             // Ensure dropdown is open and updates in real time as user types
             if (cb.IsEditable && cb.IsKeyboardFocusWithin && !cb.IsDropDownOpen)
             {
+                Log($"ApplyFilter opening dropdown for {GetName(cb)}");
                 cb.IsDropDownOpen = true;
             }
         }
@@ -310,6 +665,342 @@ namespace AATM.UI.Controls
                 return null;
             comboBox.ApplyTemplate();
             return comboBox.Template.FindName("PART_EditableTextBox", comboBox) as TextBox;
+        }
+
+        // Navigate selection inside the ComboBox's filtered item list.
+        // direction: +1 = down, -1 = up
+        private static void NavigateSelection(ComboBox cb, int direction)
+        {
+            Log($"NavigateSelection start KeyDirection={direction} {GetName(cb)} SelectedIndex={cb.SelectedIndex}");
+            if (cb.ItemsSource == null) return;
+
+            var items = cb.ItemsSource as IList ?? cb.Items.Cast<object>().ToList();
+            if (items == null || items.Count == 0) return;
+
+            int idx = cb.SelectedIndex;
+            if (idx < 0)
+            {
+                idx = direction > 0 ? 0 : items.Count - 1;
+            }
+            else
+            {
+                idx = Math.Max(0, Math.Min(items.Count - 1, idx + direction));
+            }
+
+            // Update SelectedIndex (this updates selection model)
+            try
+            {
+                Log($"NavigateSelection setting SelectedIndex={idx}");
+                RecordRecentEvent(cb, $"NavigateSelection setting SelectedIndex={idx}");
+                cb.SelectedIndex = idx;
+            }
+            catch (Exception ex)
+            {
+                Log($"NavigateSelection set SelectedIndex exception: {ex.Message}");
+                RecordRecentEvent(cb, $"NavigateSelection set SelectedIndex exception: {ex.Message}");
+            }
+
+            // Ensure the generated container is visible and the popup stays open.
+            // Do NOT focus the container (focusing it closes the popup in some templates).
+            cb.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                try
+                {
+                    var container = cb.ItemContainerGenerator.ContainerFromIndex(idx) as ComboBoxItem;
+                    if (container != null)
+                    {
+                        container.IsSelected = true;       // visual highlight
+                        container.BringIntoView();         // ensure visible
+                    }
+
+                    // keep dropdown open
+                    cb.IsDropDownOpen = true;
+
+                    // restore focus to editable textbox so keyboard remains usable there
+                    var tb = GetEditableTextBox(cb);
+                    if (tb != null)
+                    {
+                        tb.Focus();
+                        tb.CaretIndex = tb.Text?.Length ?? 0;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log($"NavigateSelection dispatcher action exception: {ex.Message}");
+                    RecordRecentEvent(cb, $"NavigateSelection dispatcher action exception: {ex.Message}");
+                }
+            }), DispatcherPriority.Background);
+        }
+
+        // Navigate selection but preserve the editable text (do not commit the item text into the textbox)
+        private static void NavigateSelectionPreserveText(ComboBox cb, int direction)
+        {
+            Log($"NavigateSelectionPreserveText {GetName(cb)}");
+            if (cb.ItemsSource == null) return;
+
+            var tb = GetEditableTextBox(cb);
+            var currentText = tb?.Text ?? cb.Text;
+
+            // Navigate selection (will set SelectedIndex and highlight, but won't focus the item)
+            NavigateSelection(cb, direction);
+
+            // Restore the editable text so it is not overwritten by SelectedItem.
+            cb.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                try
+                {
+                    var editable = GetEditableTextBox(cb);
+                    if (editable != null)
+                    {
+                        editable.Text = currentText;
+                        editable.CaretIndex = editable.Text?.Length ?? 0;
+                        editable.Focus();
+                    }
+                    else
+                    {
+                        cb.Text = currentText;
+                    }
+
+                    cb.IsDropDownOpen = true;
+                }
+                catch (Exception ex)
+                {
+                    Log($"NavigateSelectionPreserveText exception: {ex.Message}");
+                    RecordRecentEvent(cb, $"NavigateSelectionPreserveText exception: {ex.Message}");
+                }
+            }), DispatcherPriority.Input);
+        }
+
+        // Commit the current selected item into the editable text and close the dropdown
+        private static void CommitSelection(ComboBox cb)
+        {
+            Log($"CommitSelection start {GetName(cb)} SelectedIndex={cb.SelectedIndex}");
+            RecordRecentEvent(cb, $"CommitSelection start SelectedIndex={cb.SelectedIndex}");
+            if (cb.ItemsSource == null || cb.SelectedIndex < 0) return;
+
+            var items = cb.ItemsSource as IList ?? cb.Items.Cast<object>().ToList();
+            if (items == null || cb.SelectedIndex >= items.Count) return;
+
+            var item = items[cb.SelectedIndex];
+
+            // Set text based on DisplayMemberPath if available
+            try
+            {
+                if (!string.IsNullOrEmpty(cb.DisplayMemberPath) && item != null)
+                {
+                    var prop = item.GetType().GetProperty(cb.DisplayMemberPath);
+                    cb.Text = prop != null ? prop.GetValue(item)?.ToString() ?? string.Empty : item?.ToString() ?? string.Empty;
+                }
+                else
+                {
+                    cb.Text = item?.ToString() ?? string.Empty;
+                }
+
+                // Commit the selection to SelectedItem so bindings update
+                cb.SelectedItem = item;
+                RecordRecentEvent(cb, $"CommitSelection committed item='{cb.Text}'");
+            }
+            catch (Exception ex)
+            {
+                Log($"CommitSelection exception: {ex.Message}");
+                RecordRecentEvent(cb, $"CommitSelection exception: {ex.Message}");
+            }
+
+            // Close dropdown after commit
+            cb.IsDropDownOpen = false;
+            Log($"CommitSelection closed dropdown {GetName(cb)}");
+            RecordRecentEvent(cb, "CommitSelection closed dropdown");
+
+            // move caret to end and restore focus to Combo editable textbox
+            cb.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                try
+                {
+                    var tb = GetEditableTextBox(cb);
+                    if (tb != null)
+                    {
+                        tb.CaretIndex = tb.Text.Length;
+                        tb.Focus();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log($"CommitSelection dispatcher exception: {ex.Message}");
+                }
+            }), DispatcherPriority.Background);
+        }
+
+        // Simple helper for logging (DEBUG only).
+        [Conditional("DEBUG")]
+        private static void Log(string message)
+        {
+            try
+            {
+                Debug.WriteLine($"[FilteredComboBoxBehavior] {DateTime.Now:HH:mm:ss.fff} - {message}");
+            }
+            catch { /* swallow logging errors in release scenarios */ }
+        }
+
+        // DEBUG-only small per-combo ring buffer for recent events
+        private static readonly Dictionary<ComboBox, Queue<string>> _recentEvents = new();
+
+        [Conditional("DEBUG")]
+        private static void RecordRecentEvent(ComboBox cb, string message)
+        {
+            try
+            {
+                if (cb == null) return;
+                if (!_recentEvents.TryGetValue(cb, out var q))
+                {
+                    q = new Queue<string>();
+                    _recentEvents[cb] = q;
+                }
+                q.Enqueue($"{DateTime.Now:HH:mm:ss.fff} - {message}");
+                while (q.Count > 60) q.Dequeue(); // keep last 60
+            }
+            catch { }
+        }
+
+        private static string GetRecentEventsDump(ComboBox cb)
+        {
+            try
+            {
+                if (cb == null || !_recentEvents.TryGetValue(cb, out var q) || q.Count == 0)
+                    return "<no recent events>";
+                return string.Join("\n", q.ToArray());
+            }
+            catch { return "<error dumping recent events>"; }
+        }
+
+        private static string GetName(ComboBox cb)
+        {
+            try { return !string.IsNullOrEmpty(cb.Name) ? cb.Name : cb.ToString(); }
+            catch { return "<unknown>"; }
+        }
+
+        private static void PreProcessInputHandler(ComboBox cb, PreProcessInputEventArgs e)
+        {
+            try
+            {
+                var input = e.StagingItem.Input;
+                if (input == null) return;
+
+                // Filter out very noisy / low-value input event types that flood logs:
+                // - InputReportEventArgs: low-level reports used internally by WPF
+                // - QueryCursorEventArgs: cursor queries
+                // - MouseEventArgs (non-button): general mouse move/etc.
+                if (input is InputReportEventArgs || input is QueryCursorEventArgs)
+                    return;
+
+                if (input is MouseEventArgs && !(input is MouseButtonEventArgs))
+                    return;
+
+                var typeName = input.GetType().Name;
+                string detail = typeName;
+                if (input is KeyEventArgs ke)
+                {
+                    detail = $"KeyEvent Key={ke.Key} IsDown={ke.IsDown} IsUp={ke.IsUp} IsRepeat={ke.IsRepeat}";
+                }
+                else if (input is TextCompositionEventArgs te)
+                {
+                    detail = $"TextComp Text='{te.Text}'";
+                }
+                else if (input is MouseButtonEventArgs me)
+                {
+                    detail = $"Mouse Button={me.ChangedButton} State={me.ButtonState} ClickCount={me.ClickCount} Position={me.GetPosition(null)}";
+                }
+                else
+                {
+                    // Unknown but not noisy — keep a short trace
+                    detail = typeName;
+                }
+
+                RecordRecentEvent(cb, $"PreProcessInput {detail}");
+                Log($"PreProcessInput {detail} for {GetName(cb)}");
+            }
+            catch (Exception ex)
+            {
+                Log($"PreProcessInputHandler exception: {ex.Message}");
+                RecordRecentEvent(cb, $"PreProcessInputHandler exception: {ex.Message}");
+            }
+        }
+
+        // Swallow the first mouse-down/up if suppression requested (timed or single-event).
+        private static void Window_PreviewMouseDown(object? sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                if (sender is not Window window) return;
+
+                // find combo(s) associated with this window
+                foreach (var kv in _windowMap)
+                {
+                    var combo = kv.Key;
+                    if (kv.Value != window) continue;
+
+                    // timed suppression
+                    if (_suppressMouseUntil.TryGetValue(combo, out var until) && DateTime.Now < until)
+                    {
+                        Log($"Window_PreviewMouseDown swallowed (timed) for {GetName(combo)}; button={e.ChangedButton}");
+                        RecordRecentEvent(combo, $"Window_PreviewMouseDown swallowed (timed) button={e.ChangedButton} pos={e.GetPosition(window)} mods={Keyboard.Modifiers}");
+                        _suppressMouseUntil.Remove(combo);
+                        e.Handled = true;
+                        return;
+                    }
+
+                    // fallback single-event suppression
+                    if (_suppressNextMouseDown.TryGetValue(combo, out var shouldSuppress) && shouldSuppress)
+                    {
+                        Log($"Window_PreviewMouseDown swallowed (single) for {GetName(combo)}; button={e.ChangedButton}");
+                        RecordRecentEvent(combo, $"Window_PreviewMouseDown swallowed (single) button={e.ChangedButton} pos={e.GetPosition(window)} mods={Keyboard.Modifiers}");
+                        _suppressNextMouseDown[combo] = false;
+                        e.Handled = true;
+                        return;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log($"Window_PreviewMouseDown exception: {ex.Message}");
+            }
+        }
+
+        private static void Window_PreviewMouseUp(object? sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                if (sender is not Window window) return;
+
+                foreach (var kv in _windowMap)
+                {
+                    var combo = kv.Key;
+                    if (kv.Value != window) continue;
+
+                    // timed suppression
+                    if (_suppressMouseUntil.TryGetValue(combo, out var until) && DateTime.Now < until)
+                    {
+                        Log($"Window_PreviewMouseUp swallowed (timed) for {GetName(combo)}; button={e.ChangedButton}");
+                        RecordRecentEvent(combo, $"Window_PreviewMouseUp swallowed (timed) button={e.ChangedButton} pos={e.GetPosition(window)} mods={Keyboard.Modifiers}");
+                        _suppressMouseUntil.Remove(combo);
+                        e.Handled = true;
+                        return;
+                    }
+
+                    // fallback single-event suppression
+                    if (_suppressNextMouseDown.TryGetValue(combo, out var shouldSuppress) && shouldSuppress)
+                    {
+                        Log($"Window_PreviewMouseUp swallowed (single) for {GetName(combo)}; button={e.ChangedButton}");
+                        RecordRecentEvent(combo, $"Window_PreviewMouseUp swallowed (single) button={e.ChangedButton} pos={e.GetPosition(window)} mods={Keyboard.Modifiers}");
+                        _suppressNextMouseDown[combo] = false;
+                        e.Handled = true;
+                        return;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log($"Window_PreviewMouseUp exception: {ex.Message}");
+            }
         }
     }
 }
