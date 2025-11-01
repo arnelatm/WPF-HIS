@@ -4,113 +4,220 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Shapes;
 
-namespace WpfApp1
+namespace YourNamespace
 {
     public partial class FilteredComboBox : UserControl
     {
-        public static readonly DependencyProperty ItemsSourceProperty =
-            DependencyProperty.Register(nameof(ItemsSource), typeof(IEnumerable<string>), typeof(FilteredComboBox),
-                new PropertyMetadata(null));
-
-        public static readonly DependencyProperty TextProperty =
-            DependencyProperty.Register(nameof(Text), typeof(string), typeof(FilteredComboBox),
-                new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+        private List<string> _items = new();
+        private int _currentIndex = -1;
 
         public IEnumerable<string> ItemsSource
         {
-            get => (IEnumerable<string>)GetValue(ItemsSourceProperty);
-            set => SetValue(ItemsSourceProperty, value);
+            get => _items;
+            set
+            {
+                _items = value?.ToList() ?? new List<string>();
+                listBoxSuggestions.ItemsSource = _items;
+            }
         }
 
         public string Text
         {
-            get => (string)GetValue(TextProperty);
-            set => SetValue(TextProperty, value);
+            get => txtFilter.Text;
+            set => txtFilter.Text = value;
         }
-
-        public event EventHandler<string>? ItemSelected;
 
         public FilteredComboBox()
         {
             InitializeComponent();
+            txtPlaceholder.Visibility = Visibility.Visible;
         }
 
+        // --- Text Changed Filtering ---
         private void txtFilter_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Text = txtFilter.Text;
-            UpdateFilter();
+            txtPlaceholder.Visibility = string.IsNullOrEmpty(txtFilter.Text)
+                ? Visibility.Visible
+                : Visibility.Collapsed;
+
+            var filtered = _items
+                .Where(i => i.IndexOf(txtFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0)
+                .ToList();
+
+            listBoxSuggestions.ItemsSource = filtered;
+            popupSuggestions.IsOpen = filtered.Any();
+            if (popupSuggestions.IsOpen)
+                _currentIndex = -1;
         }
 
-        private void UpdateFilter()
+        // --- Keyboard Control ---
+        private void txtFilter_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (ItemsSource == null)
+            if (!popupSuggestions.IsOpen && e.Key == Key.Down)
             {
-                lstSuggestions.ItemsSource = null;
-                popupSuggestions.IsOpen = false;
+                if (_items.Count > 0)
+                {
+                    listBoxSuggestions.ItemsSource = _items;
+                    popupSuggestions.IsOpen = true;
+                }
+                e.Handled = true;
                 return;
             }
 
-            string filter = txtFilter.Text?.Trim() ?? string.Empty;
-            var filtered = string.IsNullOrEmpty(filter)
-                ? new List<string>() // show only when typing
-                : ItemsSource.Where(i => i.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
-
-            lstSuggestions.ItemsSource = filtered;
-
-            popupSuggestions.IsOpen = filtered.Any();
-            if (filtered.Any())
-                lstSuggestions.SelectedIndex = 0;
-        }
-
-        private void txtFilter_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Down && lstSuggestions.Items.Count > 0)
+            if (popupSuggestions.IsOpen)
             {
-                e.Handled = true;
-                popupSuggestions.IsOpen = true;
-                lstSuggestions.Focus();
-                lstSuggestions.SelectedIndex = 0;
-                (lstSuggestions.ItemContainerGenerator.ContainerFromIndex(0) as ListBoxItem)?.Focus();
-            }
-            else if (e.Key == Key.Escape)
-            {
-                popupSuggestions.IsOpen = false;
-                e.Handled = true;
-            }
-        }
-
-        private void lstSuggestions_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter && lstSuggestions.SelectedItem != null)
-            {
-                CommitSelection();
-                e.Handled = true;
-            }
-            else if (e.Key == Key.Escape)
-            {
-                popupSuggestions.IsOpen = false;
-                txtFilter.Focus();
-                e.Handled = true;
+                if (e.Key == Key.Down)
+                {
+                    if (_currentIndex < listBoxSuggestions.Items.Count - 1)
+                        _currentIndex++;
+                    UpdateSelection();
+                    e.Handled = true;
+                }
+                else if (e.Key == Key.Up)
+                {
+                    if (_currentIndex > 0)
+                        _currentIndex--;
+                    UpdateSelection();
+                    e.Handled = true;
+                }
+                else if (e.Key == Key.Enter)
+                {
+                    CommitSelection();
+                    e.Handled = true;
+                }
+                else if (e.Key == Key.Escape)
+                {
+                    popupSuggestions.IsOpen = false;
+                    e.Handled = true;
+                }
             }
         }
 
-        private void lstSuggestions_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void UpdateSelection()
         {
-            if (lstSuggestions.SelectedItem != null)
-                CommitSelection();
+            if (_currentIndex >= 0 && _currentIndex < listBoxSuggestions.Items.Count)
+            {
+                listBoxSuggestions.SelectedIndex = _currentIndex;
+                listBoxSuggestions.ScrollIntoView(listBoxSuggestions.SelectedItem);
+            }
         }
 
         private void CommitSelection()
         {
-            if (lstSuggestions.SelectedItem is not string selected)
-                return;
+            if (listBoxSuggestions.SelectedItem is string selected)
+            {
+                txtFilter.Text = selected;
+                popupSuggestions.IsOpen = false;
+                txtFilter.CaretIndex = txtFilter.Text.Length;
+                txtFilter.Focus();
+            }
+        }
 
-            txtFilter.Text = selected;
-            popupSuggestions.IsOpen = false;
-            txtFilter.CaretIndex = txtFilter.Text.Length;
-            txtFilter.Focus();
-            ItemSelected?.Invoke(this, selected);
+        private void listBoxSuggestions_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            CommitSelection();
+        }
+
+        private void listBoxSuggestions_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            _currentIndex = listBoxSuggestions.SelectedIndex;
+        }
+
+        private void txtFilter_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtPlaceholder.Visibility = string.IsNullOrEmpty(txtFilter.Text)
+                ? Visibility.Visible
+                : Visibility.Collapsed;
+        }
+
+        private void txtFilter_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (!popupSuggestions.IsOpen && string.IsNullOrEmpty(txtFilter.Text))
+                txtPlaceholder.Visibility = Visibility.Visible;
+        }
+
+        private void btnDropdown_Click(object sender, RoutedEventArgs e)
+        {
+            if (popupSuggestions.IsOpen)
+                popupSuggestions.IsOpen = false;
+            else
+            {
+                listBoxSuggestions.ItemsSource = _items;
+                popupSuggestions.IsOpen = _items.Any();
+            }
+        }
+
+        // --- Popup Animations ---
+        private void PopupSuggestions_Opened(object sender, EventArgs e)
+        {
+            popupBorder.RenderTransform ??= new TranslateTransform();
+
+            var fadeIn = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(160))
+            {
+                EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut }
+            };
+            var slideDown = new DoubleAnimation(-5, 0, TimeSpan.FromMilliseconds(160))
+            {
+                EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut }
+            };
+
+            popupBorder.BeginAnimation(OpacityProperty, fadeIn);
+            (popupBorder.RenderTransform as TranslateTransform)?.BeginAnimation(TranslateTransform.YProperty, slideDown);
+            AnimateArrowRotation(0, 180);
+        }
+
+        private void PopupSuggestions_Closed(object sender, EventArgs e)
+        {
+            popupBorder.RenderTransform ??= new TranslateTransform();
+
+            var fadeOut = new DoubleAnimation(popupBorder.Opacity, 0, TimeSpan.FromMilliseconds(130))
+            {
+                EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseIn }
+            };
+            var slideUp = new DoubleAnimation(0, -5, TimeSpan.FromMilliseconds(130))
+            {
+                EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseIn }
+            };
+
+            popupBorder.BeginAnimation(OpacityProperty, fadeOut);
+            (popupBorder.RenderTransform as TranslateTransform)?.BeginAnimation(TranslateTransform.YProperty, slideUp);
+            AnimateArrowRotation(180, 0);
+        }
+
+        // --- Arrow rotation fix ---
+        private Path? GetArrowPath()
+        {
+            return btnDropdown.Template.FindName("arrowPath", btnDropdown) as Path;
+        }
+
+        private void AnimateArrowRotation(double fromAngle, double toAngle)
+        {
+            var arrow = GetArrowPath();
+            if (arrow == null) return;
+
+            var originalTransform = arrow.RenderTransform as RotateTransform;
+            if (originalTransform == null) return;
+
+            if (originalTransform.IsFrozen)
+            {
+                var clone = originalTransform.CloneCurrentValue();
+                arrow.RenderTransform = clone;
+                originalTransform = clone;
+            }
+
+            var anim = new DoubleAnimation
+            {
+                From = fromAngle,
+                To = toAngle,
+                Duration = TimeSpan.FromMilliseconds(180),
+                EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseInOut }
+            };
+
+            originalTransform.BeginAnimation(RotateTransform.AngleProperty, anim);
         }
     }
 }
