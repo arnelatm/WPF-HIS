@@ -4,98 +4,96 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Threading;
 
-namespace FilteredComboBoxDemo
+namespace WpfApp1
 {
     public partial class MainWindow : Window
     {
-        private List<string> _allItems;
-        private bool _suppressTextChanged = false;
+        private readonly List<string> _masterList = new()
+        {
+            "Apple","Apricot","Avocado","Banana","Blackberry","Blueberry",
+            "Cherry","Coconut","Date","Fig","Grape","Guava","Kiwi",
+            "Lemon","Lime","Mango","Melon","Orange","Papaya","Peach",
+            "Pear","Pineapple","Plum","Raspberry","Strawberry","Watermelon"
+        };
 
         public MainWindow()
         {
             InitializeComponent();
-
-            // Full list of items to display in ComboBox
-            _allItems = new List<string>
-            {
-                "Apple", "Apricot", "Avocado", "Banana", "Blackberry",
-                "Blueberry", "Cherry", "Coconut", "Date", "Dragonfruit",
-                "Grapes", "Guava", "Lemon", "Mango", "Orange",
-                "Papaya", "Peach", "Pear", "Pineapple", "Watermelon"
-            };
-
-            // Initialize ComboBox items
-            comboBox.ItemsSource = _allItems;
-
-            // Events
-            comboBox.PreviewKeyDown += ComboBox_PreviewKeyDown;
-            comboBox.AddHandler(TextBox.TextChangedEvent, new TextChangedEventHandler(ComboBox_TextChanged));
         }
 
-        // Filter the ComboBox items when the user types
-        private void ComboBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void txtFilter_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (_suppressTextChanged) return;
+            string input = txtFilter.Text.Trim();
 
-            string text = comboBox.Text ?? string.Empty;
-
-            // You can change StartsWith to Contains for flexible filtering
-            var filtered = _allItems
-                .Where(i => i.StartsWith(text, StringComparison.InvariantCultureIgnoreCase))
+            var filtered = _masterList
+                .Where(x => x.Contains(input, StringComparison.OrdinalIgnoreCase))
                 .ToList();
 
-            _suppressTextChanged = true;
-            comboBox.ItemsSource = filtered;
-            comboBox.IsDropDownOpen = true;
-            comboBox.Text = text;
+            lstSuggestions.ItemsSource = filtered;
 
-            // Move caret to end of text
-            var textBox = (TextBox)comboBox.Template.FindName("PART_EditableTextBox", comboBox);
-            if (textBox != null)
-            {
-                textBox.SelectionStart = textBox.Text.Length;
-                textBox.SelectionLength = 0;
-            }
+            // Automatically open dropdown if there are results
+            borderSuggestions.Visibility = filtered.Any() ? Visibility.Visible : Visibility.Collapsed;
 
-            _suppressTextChanged = false;
+            if (filtered.Any())
+                lstSuggestions.SelectedIndex = 0;
         }
 
-        // Handle Up, Down, and Enter keys
-        private void ComboBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        private void txtFilter_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Down)
+            if (e.Key == Key.Down && lstSuggestions.Visibility == Visibility.Visible && lstSuggestions.Items.Count > 0)
             {
-                if (!comboBox.IsDropDownOpen)
+                e.Handled = true;
+                Dispatcher.BeginInvoke(new Action(() =>
                 {
-                    comboBox.IsDropDownOpen = true;
-                }
-                else
-                {
-                    int nextIndex = comboBox.SelectedIndex + 1;
-                    if (nextIndex < comboBox.Items.Count)
-                        comboBox.SelectedIndex = nextIndex;
-                }
-                e.Handled = true;
-            }
-            else if (e.Key == Key.Up)
-            {
-                int prevIndex = comboBox.SelectedIndex - 1;
-                if (prevIndex >= 0)
-                    comboBox.SelectedIndex = prevIndex;
-                e.Handled = true;
-            }
-            else if (e.Key == Key.Enter && comboBox.SelectedItem != null)
-            {
-                comboBox.Text = comboBox.SelectedItem.ToString();
-                comboBox.IsDropDownOpen = false;
+                    lstSuggestions.Focus();
+                    lstSuggestions.SelectedIndex = 0;
 
-                var textBox = (TextBox)comboBox.Template.FindName("PART_EditableTextBox", comboBox);
-                if (textBox != null)
-                    textBox.CaretIndex = comboBox.Text.Length;
-
+                    if (lstSuggestions.ItemContainerGenerator.ContainerFromIndex(0) is ListBoxItem item)
+                        item.Focus();
+                }), DispatcherPriority.Input);
+            }
+            else if (e.Key == Key.Escape)
+            {
+                borderSuggestions.Visibility = Visibility.Collapsed;
                 e.Handled = true;
             }
+        }
+
+        private void lstSuggestions_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter && lstSuggestions.SelectedItem != null)
+            {
+                txtFilter.Text = lstSuggestions.SelectedItem.ToString();
+                borderSuggestions.Visibility = Visibility.Collapsed;
+                txtFilter.CaretIndex = txtFilter.Text.Length;
+                txtFilter.Focus();
+                e.Handled = true;
+            }
+            else if (e.Key == Key.Escape)
+            {
+                borderSuggestions.Visibility = Visibility.Collapsed;
+                txtFilter.Focus();
+                e.Handled = true;
+            }
+        }
+
+        private void lstSuggestions_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (lstSuggestions.SelectedItem != null)
+            {
+                txtFilter.Text = lstSuggestions.SelectedItem.ToString();
+                borderSuggestions.Visibility = Visibility.Collapsed;
+                txtFilter.Focus();
+                txtFilter.CaretIndex = txtFilter.Text.Length;
+            }
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (!borderSuggestions.IsMouseOver && !txtFilter.IsMouseOver)
+                borderSuggestions.Visibility = Visibility.Collapsed;
         }
     }
 }
