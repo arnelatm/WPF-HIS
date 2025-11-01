@@ -1,0 +1,74 @@
+﻿<UserControl x:Class="WpfApp1.FilteredComboBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:WpfApp1"
+             Height="Auto" Width="Auto">
+    <UserControl.Resources>
+        <local:EmptyToVisibilityConverter x:Key="EmptyToVisibilityConverter"/>
+    </UserControl.Resources>
+
+    <Grid>
+        <!-- Search box -->
+        <Border Background="White"
+                CornerRadius="6"
+                BorderBrush="#D0D7DE"
+                BorderThickness="1"
+                Padding="5">
+            <Grid>
+                <TextBox x:Name="txtFilter"
+                         FontSize="14"
+                         Padding="6,4"
+                         BorderThickness="0"
+                         VerticalContentAlignment="Center"
+                         TextChanged="txtFilter_TextChanged"
+                         PreviewKeyDown="txtFilter_PreviewKeyDown"/>
+
+                <TextBlock Text="Type to search..."
+                           Foreground="#999"
+                           Margin="10,0,0,0"
+                           VerticalAlignment="Center"
+                           IsHitTestVisible="False"
+                           Visibility="{Binding Text, ElementName=txtFilter, Converter={StaticResource EmptyToVisibilityConverter}}"/>
+            </Grid>
+        </Border>
+
+        <!-- Real popup dropdown -->
+        <Popup x:Name="popupSuggestions"
+               Placement="Bottom"
+               PlacementTarget="{Binding ElementName=txtFilter}"
+               AllowsTransparency="True"
+               StaysOpen="False">
+            <Border Background="White"
+                    BorderBrush="#D0D7DE"
+                    BorderThickness="1"
+                    CornerRadius="0 0 6 6"
+                    Width="{Binding ActualWidth, ElementName=txtFilter}">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="150">
+                    <ListBox x:Name="lstSuggestions"
+                             KeyboardNavigation.TabNavigation="None"
+                             KeyboardNavigation.DirectionalNavigation="Cycle"
+                             BorderThickness="0"
+                             MouseDoubleClick="lstSuggestions_MouseDoubleClick"
+                             KeyDown="lstSuggestions_KeyDown">
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="Padding" Value="8,4"/>
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="Focusable" Value="True"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#EEF6FF"/>
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="#CFE2FF"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                    </ListBox>
+                </ScrollViewer>
+            </Border>
+        </Popup>
+    </Grid>
+</UserControl>
