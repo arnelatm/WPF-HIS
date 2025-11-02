@@ -1,28 +1,51 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
 
-namespace YourNamespace.Controls
+namespace AATM.UI.Controls
 {
+    /// <summary>
+    /// Hybrid SmartComboBox:
+    /// - local async filtering (in-memory) when ItemsSource is small
+    /// - remote async SQL fetching when UseRemoteFetch = true OR local is too big
+    /// - exposes SelectedId, SelectedCode, SelectedName
+    /// - expects columns/properties named: IdNo, Code, Name (SQL should alias to these)
+    /// </summary>
     [TemplatePart(Name = "PART_TextBox", Type = typeof(TextBox))]
     [TemplatePart(Name = "PART_ListBox", Type = typeof(ListBox))]
     [TemplatePart(Name = "PART_Button", Type = typeof(Button))]
     [TemplatePart(Name = "PART_Popup", Type = typeof(Popup))]
     [TemplatePart(Name = "PART_Arrow", Type = typeof(System.Windows.Shapes.Path))]
+    [TemplatePart(Name = "PART_BusyText", Type = typeof(TextBlock))]
     public class SmartComboBox : Control
     {
         private TextBox _textBox;
         private ListBox _listBox;
         private Button _button;
         private Popup _popup;
-        private System.Windows.Shapes.Path _arrow;
+        private TextBlock _busyText;
+
+        // local master copy for in-memory filtering
+        private List<ComboRecord> _localMaster = new();
+
+        // current cancellation for async ops
+        private CancellationTokenSource _cts;
+
+        // small debounce to avoid hammering SQL on every keystroke
+        private readonly TimeSpan _typingDelay = TimeSpan.FromMilliseconds(220);
+
+        // threshold to auto-switch to remote mode (if local list too big)
+        private const int AutoRemoteThreshold = 50000;
 
         static SmartComboBox()
         {
@@ -32,13 +55,172 @@ namespace YourNamespace.Controls
 
         public SmartComboBox()
         {
-            Loaded += SmartComboBox_Loaded;
+            // default values
+            RemoteTake = 200;
         }
 
-        private void SmartComboBox_Loaded(object sender, RoutedEventArgs e)
+        #region Dependency Properties
+
+        public static readonly DependencyProperty ItemsSourceProperty =
+            DependencyProperty.Register(
+                nameof(ItemsSource),
+                typeof(IEnumerable),
+                typeof(SmartComboBox),
+                new PropertyMetadata(null, OnItemsSourceChanged));
+
+        public IEnumerable ItemsSource
         {
-            UpdatePlaceholderVisibility();
+            get => (IEnumerable)GetValue(ItemsSourceProperty);
+            set => SetValue(ItemsSourceProperty, value);
         }
+
+        private static void OnItemsSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is SmartComboBox scb)
+            {
+                scb.BuildLocalMasterFromItemsSource();
+            }
+        }
+
+        public static readonly DependencyProperty UseRemoteFetchProperty =
+            DependencyProperty.Register(
+                nameof(UseRemoteFetch),
+                typeof(bool),
+                typeof(SmartComboBox),
+                new PropertyMetadata(false));
+
+        /// <summary>
+        /// If true, will query SQL instead of/local plus local filtering.
+        /// </summary>
+        public bool UseRemoteFetch
+        {
+            get => (bool)GetValue(UseRemoteFetchProperty);
+            set => SetValue(UseRemoteFetchProperty, value);
+        }
+
+        public static readonly DependencyProperty ConnectionStringProperty =
+            DependencyProperty.Register(
+                nameof(ConnectionString),
+                typeof(string),
+                typeof(SmartComboBox),
+                new PropertyMetadata(string.Empty));
+
+        /// <summary>
+        /// SQL Server connection string
+        /// </summary>
+        public string ConnectionString
+        {
+            get => (string)GetValue(ConnectionStringProperty);
+            set => SetValue(ConnectionStringProperty, value);
+        }
+
+        public static readonly DependencyProperty SqlQueryTemplateProperty =
+            DependencyProperty.Register(
+                nameof(SqlQueryTemplate),
+                typeof(string),
+                typeof(SmartComboBox),
+                new PropertyMetadata(string.Empty));
+
+        /// <summary>
+        /// SQL text to run. Must contain column names/aliases: IdNo, Code, Name.
+        /// Must accept parameter @filter (we will add it).
+        /// Example:
+        /// SELECT TOP 100 CustomerId AS IdNo, CustCode AS Code, CustName AS Name
+        /// FROM Customers
+        /// WHERE CustCode LIKE @filter + '%' OR CustName LIKE @filter + '%'
+        /// ORDER BY CustName
+        /// </summary>
+        public string SqlQueryTemplate
+        {
+            get => (string)GetValue(SqlQueryTemplateProperty);
+            set => SetValue(SqlQueryTemplateProperty, value);
+        }
+
+        public static readonly DependencyProperty RemoteTakeProperty =
+            DependencyProperty.Register(
+                nameof(RemoteTake),
+                typeof(int),
+                typeof(SmartComboBox),
+                new PropertyMetadata(200));
+
+        /// <summary>
+        /// Max rows to fetch from remote SQL.
+        /// </summary>
+        public int RemoteTake
+        {
+            get => (int)GetValue(RemoteTakeProperty);
+            set => SetValue(RemoteTakeProperty, value);
+        }
+
+        // Selected values (output)
+        public static readonly DependencyProperty SelectedIdProperty =
+            DependencyProperty.Register(
+                nameof(SelectedId),
+                typeof(object),
+                typeof(SmartComboBox),
+                new PropertyMetadata(null));
+
+        public object SelectedId
+        {
+            get => GetValue(SelectedIdProperty);
+            set => SetValue(SelectedIdProperty, value);
+        }
+
+        public static readonly DependencyProperty SelectedCodeProperty =
+            DependencyProperty.Register(
+                nameof(SelectedCode),
+                typeof(string),
+                typeof(SmartComboBox),
+                new PropertyMetadata(string.Empty));
+
+        public string SelectedCode
+        {
+            get => (string)GetValue(SelectedCodeProperty);
+            set => SetValue(SelectedCodeProperty, value);
+        }
+
+        public static readonly DependencyProperty SelectedNameProperty =
+            DependencyProperty.Register(
+                nameof(SelectedName),
+                typeof(string),
+                typeof(SmartComboBox),
+                new PropertyMetadata(string.Empty));
+
+        public string SelectedName
+        {
+            get => (string)GetValue(SelectedNameProperty);
+            set => SetValue(SelectedNameProperty, value);
+        }
+
+        // Placeholder (already in your XAML)
+        public static readonly DependencyProperty PlaceholderProperty =
+            DependencyProperty.Register(
+                nameof(Placeholder),
+                typeof(string),
+                typeof(SmartComboBox),
+                new PropertyMetadata("Type to search..."));
+
+        public string Placeholder
+        {
+            get => (string)GetValue(PlaceholderProperty);
+            set => SetValue(PlaceholderProperty, value);
+        }
+
+        // Busy flag for "Searching..." in popup
+        public static readonly DependencyProperty IsBusyProperty =
+            DependencyProperty.Register(
+                nameof(IsBusy),
+                typeof(bool),
+                typeof(SmartComboBox),
+                new PropertyMetadata(false));
+
+        public bool IsBusy
+        {
+            get => (bool)GetValue(IsBusyProperty);
+            set => SetValue(IsBusyProperty, value);
+        }
+
+        #endregion
 
         public override void OnApplyTemplate()
         {
@@ -48,7 +230,7 @@ namespace YourNamespace.Controls
             _listBox = GetTemplateChild("PART_ListBox") as ListBox;
             _button = GetTemplateChild("PART_Button") as Button;
             _popup = GetTemplateChild("PART_Popup") as Popup;
-            _arrow = GetTemplateChild("PART_Arrow") as System.Windows.Shapes.Path;
+            _busyText = GetTemplateChild("PART_BusyText") as TextBlock;
 
             if (_textBox != null)
             {
@@ -57,120 +239,71 @@ namespace YourNamespace.Controls
             }
 
             if (_button != null)
-                _button.Click += Button_Click;
+            {
+                _button.Click += (s, e) =>
+                {
+                    if (_popup != null)
+                    {
+                        if (_popup.IsOpen)
+                        {
+                            _popup.IsOpen = false;
+                        }
+                        else
+                        {
+                            // show all local items if any
+                            if (_localMaster.Any())
+                            {
+                                _listBox.ItemsSource = _localMaster;
+                                _popup.IsOpen = true;
+                            }
+                            else
+                            {
+                                // if no local items but remote is enabled, trigger empty search
+                                if (UseRemoteFetch)
+                                    _ = RunSearchAsync(string.Empty);
+                                _popup.IsOpen = true;
+                            }
+                        }
+                    }
+                };
+            }
 
             if (_listBox != null)
             {
                 _listBox.MouseLeftButtonUp += (s, e) => CommitSelection();
                 _listBox.SelectionChanged += (s, e) =>
                 {
-                    if (_listBox.SelectedIndex >= 0)
-                        SelectedItem = _listBox.SelectedItem;
+                    if (_listBox.SelectedItem is ComboRecord cr)
+                    {
+                        SelectedId = cr.IdNo;
+                        SelectedCode = cr.Code;
+                        SelectedName = cr.Name;
+                    }
                 };
             }
 
-            if (_popup != null)
-            {
-                _popup.Opened += (s, e) => AnimatePopup(true);
-                _popup.Closed += (s, e) => AnimatePopup(false);
-            }
-        }
-
-        #region Dependency Properties
-
-        public static readonly DependencyProperty ItemsSourceProperty =
-            DependencyProperty.Register(nameof(ItemsSource), typeof(IEnumerable),
-                typeof(SmartComboBox), new PropertyMetadata(null));
-
-        public IEnumerable ItemsSource
-        {
-            get => (IEnumerable)GetValue(ItemsSourceProperty);
-            set => SetValue(ItemsSourceProperty, value);
-        }
-
-        public static readonly DependencyProperty SelectedItemProperty =
-            DependencyProperty.Register(nameof(SelectedItem), typeof(object),
-                typeof(SmartComboBox), new PropertyMetadata(null));
-
-        public object SelectedItem
-        {
-            get => GetValue(SelectedItemProperty);
-            set => SetValue(SelectedItemProperty, value);
-        }
-
-        public static readonly DependencyProperty TextProperty =
-            DependencyProperty.Register(nameof(Text), typeof(string),
-                typeof(SmartComboBox), new PropertyMetadata(string.Empty));
-
-        public string Text
-        {
-            get => (string)GetValue(TextProperty);
-            set => SetValue(TextProperty, value);
-        }
-
-        public static readonly DependencyProperty PlaceholderProperty =
-            DependencyProperty.Register(nameof(Placeholder), typeof(string),
-                typeof(SmartComboBox), new PropertyMetadata("Type to search..."));
-
-        public string Placeholder
-        {
-            get => (string)GetValue(PlaceholderProperty);
-            set => SetValue(PlaceholderProperty, value);
-        }
-
-        #endregion
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            if (_popup == null) return;
-
-            if (_popup.IsOpen)
-                _popup.IsOpen = false;
-            else
-            {
-                _listBox.ItemsSource = ItemsSource;
-                _popup.IsOpen = true;
-            }
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Text = _textBox.Text;
-            UpdatePlaceholderVisibility();
-
-            if (ItemsSource == null) return;
-
-            var filtered = ItemsSource.Cast<object>()
-                .Where(x => x.ToString().IndexOf(Text, StringComparison.OrdinalIgnoreCase) >= 0)
-                .ToList();
-
-            _listBox.ItemsSource = filtered;
-            _popup.IsOpen = filtered.Any();
-        }
-
-        private void UpdatePlaceholderVisibility()
-        {
-            var placeholder = GetTemplateChild("PART_Placeholder") as TextBlock;
-            if (placeholder != null)
-                placeholder.Visibility = string.IsNullOrEmpty(Text) ? Visibility.Visible : Visibility.Collapsed;
+            // rebuild local list if ItemsSource already set
+            BuildLocalMasterFromItemsSource();
         }
 
         private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (_listBox == null || !_popup.IsOpen)
-                return;
+            if (_popup == null || _listBox == null) return;
 
             if (e.Key == Key.Down)
             {
-                _listBox.Focus();
-                _listBox.SelectedIndex = Math.Min(_listBox.SelectedIndex + 1, _listBox.Items.Count - 1);
-                _listBox.ScrollIntoView(_listBox.SelectedItem);
-                e.Handled = true;
-            }
-            else if (e.Key == Key.Up)
-            {
-                _listBox.SelectedIndex = Math.Max(_listBox.SelectedIndex - 1, 0);
-                _listBox.ScrollIntoView(_listBox.SelectedItem);
+                if (!_popup.IsOpen)
+                {
+                    _popup.IsOpen = true;
+                }
+
+                if (_listBox.Items.Count > 0)
+                {
+                    _listBox.Focus();
+                    if (_listBox.SelectedIndex < 0) _listBox.SelectedIndex = 0;
+                    _listBox.ScrollIntoView(_listBox.SelectedItem);
+                }
+
                 e.Handled = true;
             }
             else if (e.Key == Key.Enter)
@@ -178,45 +311,259 @@ namespace YourNamespace.Controls
                 CommitSelection();
                 e.Handled = true;
             }
+            else if (e.Key == Key.Escape)
+            {
+                _popup.IsOpen = false;
+                e.Handled = true;
+            }
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            // debounce and run hybrid search
+            var text = _textBox.Text ?? string.Empty;
+            _ = DebouncedSearchAsync(text);
+
+            // show popup as the user types
+            if (_popup != null && !_popup.IsOpen)
+                _popup.IsOpen = true;
+
+            // show/hide placeholder (in template we set it via code)
+            var placeholder = GetTemplateChild("PART_Placeholder") as TextBlock;
+            if (placeholder != null)
+                placeholder.Visibility = string.IsNullOrEmpty(text) ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private async Task DebouncedSearchAsync(string filter)
+        {
+            _cts?.Cancel();
+            _cts = new CancellationTokenSource();
+            var token = _cts.Token;
+
+            try
+            {
+                await Task.Delay(_typingDelay, token); // debounce
+                await RunSearchAsync(filter, token);
+            }
+            catch (TaskCanceledException)
+            {
+                // ignore
+            }
+        }
+
+        private async Task RunSearchAsync(string filter, CancellationToken token = default)
+        {
+            IsBusy = true;
+
+            try
+            {
+                // decide mode
+                bool mustUseRemote = UseRemoteFetch;
+                if (!mustUseRemote && _localMaster.Count > AutoRemoteThreshold)
+                    mustUseRemote = true;
+
+                List<ComboRecord> results;
+                if (mustUseRemote)
+                {
+                    results = await FetchFromSqlAsync(filter, token);
+                }
+                else
+                {
+                    // local filtering
+                    results = await Task.Run(() =>
+                    {
+                        return _localMaster
+                            .Where(r => r.Matches(filter))
+                            .Take(500) // cap for UI
+                            .ToList();
+                    }, token);
+                }
+
+                if (token.IsCancellationRequested) return;
+
+                // update list in UI thread
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    if (_listBox != null)
+                    {
+                        _listBox.ItemsSource = results;
+                        if (results.Count > 0)
+                            _listBox.SelectedIndex = 0;
+                    }
+                });
+            }
+            catch (TaskCanceledException)
+            {
+                // user typed again
+            }
+            catch (Exception ex)
+            {
+                // you could log here
+                System.Diagnostics.Debug.WriteLine("SmartComboBox search error: " + ex.Message);
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+
+        private async Task<List<ComboRecord>> FetchFromSqlAsync(string filter, CancellationToken token)
+        {
+            var list = new List<ComboRecord>();
+
+            // if no connection or no query, return empty list (but don’t crash)
+            if (string.IsNullOrWhiteSpace(ConnectionString) || string.IsNullOrWhiteSpace(SqlQueryTemplate))
+                return list;
+
+            // enforce TOP if user forgot
+            string sql = SqlQueryTemplate;
+            // we assume user will alias properly: IdNo, Code, Name
+
+            using var conn = new SqlConnection(ConnectionString);
+            using var cmd = new SqlCommand(sql, conn);
+            cmd.Parameters.Add(new SqlParameter("@filter", SqlDbType.NVarChar, 200) { Value = filter ?? string.Empty });
+
+            await conn.OpenAsync(token);
+            using var reader = await cmd.ExecuteReaderAsync(token);
+            while (await reader.ReadAsync(token))
+            {
+                var rec = new ComboRecord
+                {
+                    IdNo = SafeGet(reader, "IdNo"),
+                    Code = SafeGet(reader, "Code")?.ToString() ?? string.Empty,
+                    Name = SafeGet(reader, "Name")?.ToString() ?? string.Empty
+                };
+                list.Add(rec);
+                if (list.Count >= RemoteTake) break;
+            }
+
+            return list;
+        }
+
+        private object SafeGet(IDataRecord r, string field)
+        {
+            try
+            {
+                int ord = r.GetOrdinal(field);
+                if (r.IsDBNull(ord)) return null;
+                return r.GetValue(ord);
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         private void CommitSelection()
         {
-            if (_listBox?.SelectedItem != null)
+            if (_listBox?.SelectedItem is ComboRecord cr)
             {
-                Text = _listBox.SelectedItem.ToString();
-                SelectedItem = _listBox.SelectedItem;
-                _popup.IsOpen = false;
+                SelectedId = cr.IdNo;
+                SelectedCode = cr.Code;
+                SelectedName = cr.Name;
+
+                if (_textBox != null)
+                {
+                    _textBox.Text = cr.Display;
+                    _textBox.CaretIndex = _textBox.Text.Length;
+                    _textBox.Focus();
+                }
+
+                if (_popup != null)
+                    _popup.IsOpen = false;
             }
         }
 
-        private void AnimatePopup(bool opening)
+        private void BuildLocalMasterFromItemsSource()
         {
-            if (_popup?.Child is not FrameworkElement child) return;
+            _localMaster.Clear();
 
-            child.RenderTransform ??= new TranslateTransform();
-            var fade = new DoubleAnimation(opening ? 0 : 1, opening ? 1 : 0, TimeSpan.FromMilliseconds(150));
-            var slide = new DoubleAnimation(opening ? -5 : 0, opening ? 0 : -5, TimeSpan.FromMilliseconds(150));
-            child.BeginAnimation(OpacityProperty, fade);
-            (child.RenderTransform as TranslateTransform)?.BeginAnimation(TranslateTransform.YProperty, slide);
+            if (ItemsSource == null) return;
 
-            AnimateArrow(opening);
+            foreach (var item in ItemsSource)
+            {
+                // item could be: DataRowView, anonymous, DTO, your own entity, etc.
+                var rec = ComboRecord.FromUnknown(item);
+                if (rec != null)
+                    _localMaster.Add(rec);
+            }
+
+            // if textbox text already has something, refilter
+            if (_textBox != null && !string.IsNullOrEmpty(_textBox.Text))
+            {
+                _ = DebouncedSearchAsync(_textBox.Text);
+            }
         }
 
-        private void AnimateArrow(bool opening)
+        // Internal representation
+        private class ComboRecord
         {
-            if (_arrow == null) return;
+            public object IdNo { get; set; }
+            public string Code { get; set; } = string.Empty;
+            public string Name { get; set; } = string.Empty;
 
-            var transform = _arrow.RenderTransform as RotateTransform ?? new RotateTransform(0);
-            if (transform.IsFrozen)
-                transform = transform.CloneCurrentValue();
+            public string Display => string.IsNullOrEmpty(Code) ? Name : $"{Code} - {Name}";
 
-            _arrow.RenderTransform = transform;
-            var anim = new DoubleAnimation(opening ? 0 : 180, opening ? 180 : 0, TimeSpan.FromMilliseconds(180))
+            public bool Matches(string filter)
             {
-                EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseInOut }
-            };
-            transform.BeginAnimation(RotateTransform.AngleProperty, anim);
+                if (string.IsNullOrEmpty(filter)) return true;
+                return (Code?.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0)
+                    || (Name?.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0);
+            }
+
+            public static ComboRecord FromUnknown(object obj)
+            {
+                if (obj == null) return null;
+
+                // if it's already our record
+                if (obj is ComboRecord cr)
+                    return cr;
+
+                // DataRowView
+                if (obj is DataRowView drv)
+                {
+                    return new ComboRecord
+                    {
+                        IdNo = drv["IdNo"],
+                        Code = drv["Code"]?.ToString() ?? string.Empty,
+                        Name = drv["Name"]?.ToString() ?? string.Empty
+                    };
+                }
+
+                // DataRow
+                if (obj is DataRow dr)
+                {
+                    return new ComboRecord
+                    {
+                        IdNo = dr["IdNo"],
+                        Code = dr["Code"]?.ToString() ?? string.Empty,
+                        Name = dr["Name"]?.ToString() ?? string.Empty
+                    };
+                }
+
+                // POCO with IdNo/Code/Name
+                var t = obj.GetType();
+                var pId = t.GetProperty("IdNo");
+                var pCode = t.GetProperty("Code");
+                var pName = t.GetProperty("Name");
+                if (pId != null || pCode != null || pName != null)
+                {
+                    return new ComboRecord
+                    {
+                        IdNo = pId?.GetValue(obj),
+                        Code = pCode?.GetValue(obj)?.ToString() ?? string.Empty,
+                        Name = pName?.GetValue(obj)?.ToString() ?? string.Empty
+                    };
+                }
+
+                // fallback: treat as string
+                return new ComboRecord
+                {
+                    IdNo = obj,
+                    Code = string.Empty,
+                    Name = obj.ToString() ?? string.Empty
+                };
+            }
         }
     }
 }
