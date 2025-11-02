@@ -1,14 +1,29 @@
-﻿<Window x:Class="WpfApp1.MainWindow"
+﻿<Window x:Class="AATM.Sample"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:local="clr-namespace:YourNamespace"
-        Title="Smart ComboBox Demo"
-        Height="300" Width="400"
-        Background="#f8f8f8">
-    <Grid>
-        <local:FilteredComboBox x:Name="smartCombo"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Center"
-                                Width="250"/>
-    </Grid>
+        xmlns:local="clr-namespace:AATM.UI.Controls;assembly=AATM.UI.Controls"
+        Title="SmartComboBox SQL Demo" Height="250" Width="400">
+
+    <StackPanel Margin="20">
+        <TextBlock Text="SQL Mode ComboBox" FontWeight="Bold" Margin="0,0,0,8"/>
+
+        <local:SmartComboBox x:Name="sqlCombo"
+                         Placeholder="Search customer..."
+                         UseRemoteFetch="True"
+                         Height="36"
+                         ConnectionString="Server=Ibn-Server;Database=IspData;User Id=iGroupAdmin;Password=igss@123;Encrypt=True;TrustServerCertificate=True;"
+                         SqlQueryTemplate="SELECT TOP 100 IdNo, ProductCode AS Code, ProductName AS Name FROM Product
+                         WHERE ProductCode + ProductName LIKE '%' + @filter + '%' ORDER BY ProductName"
+                         SelectedId="{Binding SelectedCustomerId, Mode=TwoWay}"
+                         SelectedCode="{Binding SelectedCustomerCode, Mode=TwoWay}"
+                         SelectedName="{Binding SelectedCustomerName, Mode=TwoWay}"
+                         Margin="0,0,0,12"/>
+
+        <StackPanel Margin="0,8,0,0">
+            <TextBlock Text="Selected:" FontWeight="Bold"/>
+            <TextBlock Text="{Binding SelectedCustomerCode}" Margin="0,2,0,0"/>
+            <TextBlock Text="{Binding SelectedCustomerName}" Margin="0,2,0,0"/>
+        </StackPanel>
+    </StackPanel>
+
 </Window>

@@ -112,7 +112,7 @@
                                     CornerRadius="0,0,6,6"
                                     BorderBrush="{DynamicResource ComboBorder}"
                                     BorderThickness="1"
-                                    Opacity="0"
+                                    Opacity="1"
                                     RenderTransformOrigin="0.5,0">
                                 <Border.RenderTransform>
                                     <TranslateTransform Y="-5"/>

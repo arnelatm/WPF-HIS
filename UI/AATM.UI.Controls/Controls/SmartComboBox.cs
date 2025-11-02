@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,6 +10,8 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
+using Microsoft.Data.SqlClient;
+
 
 namespace AATM.UI.Controls
 {
@@ -498,7 +499,7 @@ namespace AATM.UI.Controls
         // Internal representation
         private class ComboRecord
         {
-            public object IdNo { get; set; }
+            public object IdNo { get; set; } = new object();
             public string Code { get; set; } = string.Empty;
             public string Name { get; set; } = string.Empty;
 

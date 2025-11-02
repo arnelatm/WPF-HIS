@@ -877,44 +877,44 @@ namespace AATM.UI.Controls
             try { return !string.IsNullOrEmpty(cb.Name) ? cb.Name : cb.ToString(); }
             catch { return "<unknown>"; }
         }
-
         private static void PreProcessInputHandler(ComboBox cb, PreProcessInputEventArgs e)
         {
             try
             {
                 var input = e.StagingItem.Input;
-                if (input == null) return;
-
-                // Filter out very noisy / low-value input event types that flood logs:
-                // - InputReportEventArgs: low-level reports used internally by WPF
-                // - QueryCursorEventArgs: cursor queries
-                // - MouseEventArgs (non-button): general mouse move/etc.
-                if (input is InputReportEventArgs || input is QueryCursorEventArgs)
+                if (input == null)
                     return;
 
-                if (input is MouseEventArgs && !(input is MouseButtonEventArgs))
+                // Safely detect internal noisy events without referencing internal types
+                string inputTypeName = input.GetType().Name;
+
+                if (inputTypeName == "InputReportEventArgs" ||
+                    inputTypeName == "QueryCursorEventArgs" ||
+                    (input is MouseEventArgs me && me is not MouseButtonEventArgs))
                     return;
 
-                var typeName = input.GetType().Name;
-                string detail = typeName;
-                if (input is KeyEventArgs ke)
+                // Describe details for debug logging
+                string detail;
+                switch (input)
                 {
-                    detail = $"KeyEvent Key={ke.Key} IsDown={ke.IsDown} IsUp={ke.IsUp} IsRepeat={ke.IsRepeat}";
-                }
-                else if (input is TextCompositionEventArgs te)
-                {
-                    detail = $"TextComp Text='{te.Text}'";
-                }
-                else if (input is MouseButtonEventArgs me)
-                {
-                    detail = $"Mouse Button={me.ChangedButton} State={me.ButtonState} ClickCount={me.ClickCount} Position={me.GetPosition(null)}";
-                }
-                else
-                {
-                    // Unknown but not noisy — keep a short trace
-                    detail = typeName;
+                    case KeyEventArgs ke:
+                        detail = $"KeyEvent Key={ke.Key} IsDown={ke.IsDown} IsUp={ke.IsUp} IsRepeat={ke.IsRepeat}";
+                        break;
+
+                    case TextCompositionEventArgs te:
+                        detail = $"TextComp Text='{te.Text}'";
+                        break;
+
+                    case MouseButtonEventArgs meb:
+                        detail = $"Mouse Button={meb.ChangedButton} State={meb.ButtonState} ClickCount={meb.ClickCount}";
+                        break;
+
+                    default:
+                        detail = inputTypeName;
+                        break;
                 }
 
+                // Log the event (if debug)
                 RecordRecentEvent(cb, $"PreProcessInput {detail}");
                 Log($"PreProcessInput {detail} for {GetName(cb)}");
             }
@@ -924,6 +924,7 @@ namespace AATM.UI.Controls
                 RecordRecentEvent(cb, $"PreProcessInputHandler exception: {ex.Message}");
             }
         }
+
 
         // Swallow the first mouse-down/up if suppression requested (timed or single-event).
         private static void Window_PreviewMouseDown(object? sender, MouseButtonEventArgs e)
