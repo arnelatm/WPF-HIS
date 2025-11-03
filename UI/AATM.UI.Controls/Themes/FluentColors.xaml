@@ -1,0 +1,25 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Light theme colors -->
+    <Color x:Key="FluentLightBackgroundColor">#FFFDFDFD</Color>
+    <Color x:Key="FluentLightTextColor">#222222</Color>
+    <Color x:Key="FluentLightTextSecondaryColor">#666666</Color>
+
+    <!-- Dark theme colors -->
+    <Color x:Key="FluentDarkBackgroundColor">#1E1E1E</Color>
+    <Color x:Key="FluentDarkTextColor">#FFFFFF</Color>
+    <Color x:Key="FluentDarkTextSecondaryColor">#BBBBBB</Color>
+
+    <!-- Brushes that auto-switch based on system theme -->
+    <SolidColorBrush x:Key="FluentWindowBackground"
+                     Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
+    <SolidColorBrush x:Key="FluentTextPrimary"
+                     Color="{DynamicResource {x:Static SystemColors.WindowTextColorKey}}" />
+    <SolidColorBrush x:Key="FluentTextSecondary"
+                     Color="{DynamicResource {x:Static SystemColors.GrayTextColorKey}}" />
+
+    <!-- Optional fixed fallback (if system theme not supported) -->
+    <SolidColorBrush x:Key="FallbackLightBackground" Color="{StaticResource FluentLightBackgroundColor}" />
+    <SolidColorBrush x:Key="FallbackDarkBackground" Color="{StaticResource FluentDarkBackgroundColor}" />
+</ResourceDictionary>
