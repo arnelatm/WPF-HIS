@@ -42,9 +42,6 @@ namespace AATM.UI.Controls
         // current cancellation for async ops
         private CancellationTokenSource _cts;
 
-        // small debounce to avoid hammering SQL on every keystroke
-        private readonly TimeSpan _typingDelay = TimeSpan.FromMilliseconds(220);
-
         // threshold to auto-switch to remote mode (if local list too big)
         private const int AutoRemoteThreshold = 50000;
 
@@ -80,6 +77,7 @@ namespace AATM.UI.Controls
             if (d is SmartComboBox scb)
             {
                 scb.BuildLocalMasterFromItemsSource();
+                scb.TrySelectBySelectedValue();
             }
         }
 
@@ -159,7 +157,7 @@ namespace AATM.UI.Controls
                 nameof(SelectedId),
                 typeof(object),
                 typeof(SmartComboBox),
-                new PropertyMetadata(null));
+                new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public object SelectedId
         {
@@ -172,7 +170,7 @@ namespace AATM.UI.Controls
                 nameof(SelectedCode),
                 typeof(string),
                 typeof(SmartComboBox),
-                new PropertyMetadata(string.Empty));
+                new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public string SelectedCode
         {
@@ -185,7 +183,7 @@ namespace AATM.UI.Controls
                 nameof(SelectedName),
                 typeof(string),
                 typeof(SmartComboBox),
-                new PropertyMetadata(string.Empty));
+                new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public string SelectedName
         {
@@ -221,6 +219,101 @@ namespace AATM.UI.Controls
             set => SetValue(IsBusyProperty, value);
         }
 
+        // Added: debounce milliseconds (configurable)
+        public static readonly DependencyProperty DebounceMillisecondsProperty =
+            DependencyProperty.Register(
+                nameof(DebounceMilliseconds),
+                typeof(int),
+                typeof(SmartComboBox),
+                new PropertyMetadata(220));
+
+        public int DebounceMilliseconds
+        {
+            get => (int)GetValue(DebounceMillisecondsProperty);
+            set => SetValue(DebounceMillisecondsProperty, value);
+        }
+
+        // Added: Text DP to expose current text
+        public static readonly DependencyProperty TextProperty =
+            DependencyProperty.Register(
+                nameof(Text),
+                typeof(string),
+                typeof(SmartComboBox),
+                new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnTextChanged));
+
+        public string Text
+        {
+            get => (string)GetValue(TextProperty);
+            set => SetValue(TextProperty, value);
+        }
+
+        private static void OnTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is SmartComboBox scb && scb._textBox != null)
+            {
+                var newText = e.NewValue as string ?? string.Empty;
+                if (scb._textBox.Text != newText)
+                    scb._textBox.Text = newText;
+            }
+        }
+
+        // Added: SelectedValue/SelectedValuePath for classic ComboBox compatibility
+        public static readonly DependencyProperty SelectedValuePathProperty =
+            DependencyProperty.Register(
+                nameof(SelectedValuePath),
+                typeof(string),
+                typeof(SmartComboBox),
+                new PropertyMetadata(null, OnSelectedValuePathChanged));
+
+        public string SelectedValuePath
+        {
+            get => (string)GetValue(SelectedValuePathProperty);
+            set => SetValue(SelectedValuePathProperty, value);
+        }
+
+        private static void OnSelectedValuePathChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is SmartComboBox scb)
+            {
+                scb.TrySelectBySelectedValue();
+            }
+        }
+
+        public static readonly DependencyProperty SelectedValueProperty =
+            DependencyProperty.Register(
+                nameof(SelectedValue),
+                typeof(object),
+                typeof(SmartComboBox),
+                new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectedValueChanged));
+
+        public object SelectedValue
+        {
+            get => GetValue(SelectedValueProperty);
+            set => SetValue(SelectedValueProperty, value);
+        }
+
+        private static void OnSelectedValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is SmartComboBox scb)
+            {
+                scb.TrySelectBySelectedValue();
+            }
+        }
+
+        // Added: DisplayMemberPath for display control
+        public static readonly DependencyProperty DisplayMemberPathProperty =
+            DependencyProperty.Register(
+                nameof(DisplayMemberPath),
+                typeof(string),
+                typeof(SmartComboBox),
+                new PropertyMetadata(null));
+
+        public string DisplayMemberPath
+        {
+            get => (string)GetValue(DisplayMemberPathProperty);
+            set => SetValue(DisplayMemberPathProperty, value);
+        }
+
         #endregion
 
         public override void OnApplyTemplate()
@@ -237,6 +330,10 @@ namespace AATM.UI.Controls
             {
                 _textBox.TextChanged += TextBox_TextChanged;
                 _textBox.PreviewKeyDown += TextBox_PreviewKeyDown;
+                // sync initial Text DP to textbox
+                var text = Text ?? string.Empty;
+                if (_textBox.Text != text)
+                    _textBox.Text = text;
             }
 
             if (_button != null)
@@ -279,12 +376,14 @@ namespace AATM.UI.Controls
                         SelectedId = cr.IdNo;
                         SelectedCode = cr.Code;
                         SelectedName = cr.Name;
+                        UpdateSelectedValueFromRecord(cr);
                     }
                 };
             }
 
             // rebuild local list if ItemsSource already set
             BuildLocalMasterFromItemsSource();
+            TrySelectBySelectedValue();
         }
 
         private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -321,6 +420,11 @@ namespace AATM.UI.Controls
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
+            // keep Text DP in sync
+            var current = _textBox.Text ?? string.Empty;
+            if (Text != current)
+                Text = current;
+
             // debounce and run hybrid search
             var text = _textBox.Text ?? string.Empty;
             _ = DebouncedSearchAsync(text);
@@ -343,7 +447,8 @@ namespace AATM.UI.Controls
 
             try
             {
-                await Task.Delay(_typingDelay, token); // debounce
+                var delay = Math.Max(0, DebounceMilliseconds);
+                await Task.Delay(TimeSpan.FromMilliseconds(delay), token); // debounce
                 await RunSearchAsync(filter, token);
             }
             catch (TaskCanceledException)
@@ -430,6 +535,7 @@ namespace AATM.UI.Controls
             {
                 var rec = new ComboRecord
                 {
+                    Raw = reader, // raw reference for display path via SafeGet
                     IdNo = SafeGet(reader, "IdNo"),
                     Code = SafeGet(reader, "Code")?.ToString() ?? string.Empty,
                     Name = SafeGet(reader, "Name")?.ToString() ?? string.Empty
@@ -462,10 +568,13 @@ namespace AATM.UI.Controls
                 SelectedId = cr.IdNo;
                 SelectedCode = cr.Code;
                 SelectedName = cr.Name;
+                UpdateSelectedValueFromRecord(cr);
 
                 if (_textBox != null)
                 {
-                    _textBox.Text = cr.Display;
+                    var display = GetDisplayText(cr);
+                    _textBox.Text = display;
+                    Text = display;
                     _textBox.CaretIndex = _textBox.Text.Length;
                     _textBox.Focus();
                 }
@@ -496,9 +605,117 @@ namespace AATM.UI.Controls
             }
         }
 
+        private void UpdateSelectedValueFromRecord(ComboRecord cr)
+        {
+            var path = SelectedValuePath;
+            if (string.IsNullOrWhiteSpace(path)) return;
+
+            var value = GetValueByPath(cr, path);
+            SelectedValue = value;
+        }
+
+        private object GetValueByPath(ComboRecord cr, string path)
+        {
+            if (string.IsNullOrWhiteSpace(path)) return null;
+
+            // common shortcuts
+            if (path.Equals("IdNo", StringComparison.OrdinalIgnoreCase)) return cr.IdNo;
+            if (path.Equals("Code", StringComparison.OrdinalIgnoreCase)) return cr.Code;
+            if (path.Equals("Name", StringComparison.OrdinalIgnoreCase)) return cr.Name;
+
+            // try Raw item reflection / data row access
+            var raw = cr.Raw;
+            if (raw is DataRowView drv)
+            {
+                if (drv.Row.Table.Columns.Contains(path)) return drv[path];
+            }
+            else if (raw is DataRow dr)
+            {
+                if (dr.Table.Columns.Contains(path)) return dr[path];
+            }
+            else if (raw != null)
+            {
+                var t = raw.GetType();
+                var p = t.GetProperty(path);
+                if (p != null)
+                    return p.GetValue(raw);
+            }
+
+            // fallback: try on record itself
+            var rType = cr.GetType();
+            var pr = rType.GetProperty(path);
+            if (pr != null)
+                return pr.GetValue(cr);
+
+            return null;
+        }
+
+        private string GetDisplayText(ComboRecord cr)
+        {
+            var dmp = DisplayMemberPath;
+            if (!string.IsNullOrWhiteSpace(dmp))
+            {
+                var val = GetValueByPath(cr, dmp);
+                if (val != null) return val.ToString();
+            }
+            return cr.Display;
+        }
+
+        private void TrySelectBySelectedValue()
+        {
+            if (_listBox == null) return;
+
+            var path = SelectedValuePath;
+            var selVal = SelectedValue;
+            if (string.IsNullOrWhiteSpace(path) || selVal == null) return;
+
+            // search in local master
+            var match = _localMaster.FirstOrDefault(r =>
+            {
+                var v = GetValueByPath(r, path);
+                return EqualsSafe(v, selVal);
+            });
+
+            if (match != null)
+            {
+                _listBox.ItemsSource = _localMaster;
+                _listBox.SelectedItem = match;
+                var display = GetDisplayText(match);
+                if (_textBox != null)
+                {
+                    _textBox.Text = display;
+                    Text = display;
+                }
+                SelectedId = match.IdNo;
+                SelectedCode = match.Code;
+                SelectedName = match.Name;
+            }
+            else
+            {
+                // keep Text roughly synchronized if we can't resolve an item
+                if (_textBox != null && selVal != null)
+                {
+                    var display = selVal.ToString();
+                    if (!string.IsNullOrEmpty(display))
+                    {
+                        _textBox.Text = display;
+                        Text = display;
+                    }
+                }
+            }
+        }
+
+        private bool EqualsSafe(object a, object b)
+        {
+            if (a == null && b == null) return true;
+            if (a == null || b == null) return false;
+            return a.Equals(b);
+        }
+
         // Internal representation
         private class ComboRecord
         {
+            public object Raw { get; set; }
             public object IdNo { get; set; } = new object();
             public string Code { get; set; } = string.Empty;
             public string Name { get; set; } = string.Empty;
@@ -525,6 +742,7 @@ namespace AATM.UI.Controls
                 {
                     return new ComboRecord
                     {
+                        Raw = obj,
                         IdNo = drv["IdNo"],
                         Code = drv["Code"]?.ToString() ?? string.Empty,
                         Name = drv["Name"]?.ToString() ?? string.Empty
@@ -536,6 +754,7 @@ namespace AATM.UI.Controls
                 {
                     return new ComboRecord
                     {
+                        Raw = obj,
                         IdNo = dr["IdNo"],
                         Code = dr["Code"]?.ToString() ?? string.Empty,
                         Name = dr["Name"]?.ToString() ?? string.Empty
@@ -551,6 +770,7 @@ namespace AATM.UI.Controls
                 {
                     return new ComboRecord
                     {
+                        Raw = obj,
                         IdNo = pId?.GetValue(obj),
                         Code = pCode?.GetValue(obj)?.ToString() ?? string.Empty,
                         Name = pName?.GetValue(obj)?.ToString() ?? string.Empty
@@ -560,6 +780,7 @@ namespace AATM.UI.Controls
                 // fallback: treat as string
                 return new ComboRecord
                 {
+                    Raw = obj,
                     IdNo = obj,
                     Code = string.Empty,
                     Name = obj.ToString() ?? string.Empty
