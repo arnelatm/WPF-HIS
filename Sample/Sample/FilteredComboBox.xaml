@@ -4,7 +4,7 @@
              Height="36" Width="250">
 
     <Grid>
-        <!-- Main border -->
+        <!-- Main border --> 
         <Border x:Name="RootBorder"
                 Background="White"
                 CornerRadius="6"

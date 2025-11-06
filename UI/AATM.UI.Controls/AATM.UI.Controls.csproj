@@ -9,6 +9,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controls\FilteringComboBoxWithProgress.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="Controls\FilteringComboBoxWithProgress.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.2" />
   </ItemGroup>
 
