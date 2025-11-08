@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -21,7 +22,7 @@ namespace AATM.UI.Controls
     /// - remote async SQL fetching when UseRemoteFetch = true OR local is too big
     /// - exposes SelectedId, SelectedCode, SelectedName
     /// - expects columns/properties named: IdNo, Code, Name (SQL should alias to these)
-    /// </summary>
+    /// </summary   
     [TemplatePart(Name = "PART_TextBox", Type = typeof(TextBox))]
     [TemplatePart(Name = "PART_ListBox", Type = typeof(ListBox))]
     [TemplatePart(Name = "PART_Button", Type = typeof(Button))]
@@ -314,23 +315,66 @@ namespace AATM.UI.Controls
             set => SetValue(DisplayMemberPathProperty, value);
         }
 
+        // Add these properties to SmartComboBox for paging
+        public static readonly DependencyProperty PageIndexProperty =
+            DependencyProperty.Register(
+                nameof(PageIndex),
+                typeof(int),
+                typeof(SmartComboBox),
+                new PropertyMetadata(0, OnPageIndexChanged));
+
+        public int PageIndex
+        {
+            get => (int)GetValue(PageIndexProperty);
+            set => SetValue(PageIndexProperty, value);
+        }
+
+        public static readonly DependencyProperty HasNextPageProperty =
+            DependencyProperty.Register(
+                nameof(HasNextPage),
+                typeof(bool),
+                typeof(SmartComboBox),
+                new PropertyMetadata(false));
+
+        public bool HasNextPage
+        {
+            get => (bool)GetValue(HasNextPageProperty);
+            set => SetValue(HasNextPageProperty, value);
+        }
+
+        private bool _suppressPageIndexChanged;
+        private string _lastFilter = string.Empty;
+
+        private static void OnPageIndexChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is SmartComboBox scb && !scb._suppressPageIndexChanged)
+            {
+                _ = scb.RunSearchAsync(scb.Text);
+            }
+        }
+
         #endregion
 
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
 
-            _textBox = GetTemplateChild("PART_TextBox") as TextBox;
-            _listBox = GetTemplateChild("PART_ListBox") as ListBox;
-            _button = GetTemplateChild("PART_Button") as Button;
-            _popup = GetTemplateChild("PART_Popup") as Popup;
+            _textBox  = GetTemplateChild("PART_TextBox")  as TextBox;
+            _listBox  = GetTemplateChild("PART_ListBox")  as ListBox;
+            _button   = GetTemplateChild("PART_Button")   as Button;
+            _popup    = GetTemplateChild("PART_Popup")    as Popup;
             _busyText = GetTemplateChild("PART_BusyText") as TextBlock;
+
+            // Ensure ListBox has something to display for ComboRecord
+            if (_listBox != null && string.IsNullOrEmpty(_listBox.DisplayMemberPath))
+            {
+                _listBox.DisplayMemberPath = "Display";
+            }
 
             if (_textBox != null)
             {
                 _textBox.TextChanged += TextBox_TextChanged;
                 _textBox.PreviewKeyDown += TextBox_PreviewKeyDown;
-                // sync initial Text DP to textbox
                 var text = Text ?? string.Empty;
                 if (_textBox.Text != text)
                     _textBox.Text = text;
@@ -340,28 +384,25 @@ namespace AATM.UI.Controls
             {
                 _button.Click += (s, e) =>
                 {
-                    if (_popup != null)
+                    if (_popup == null) return;
+
+                    if (_popup.IsOpen)
                     {
-                        if (_popup.IsOpen)
-                        {
-                            _popup.IsOpen = false;
-                        }
-                        else
-                        {
-                            // show all local items if any
-                            if (_localMaster.Any())
-                            {
-                                _listBox.ItemsSource = _localMaster;
-                                _popup.IsOpen = true;
-                            }
-                            else
-                            {
-                                // if no local items but remote is enabled, trigger empty search
-                                if (UseRemoteFetch)
-                                    _ = RunSearchAsync(string.Empty);
-                                _popup.IsOpen = true;
-                            }
-                        }
+                        _popup.IsOpen = false;
+                        return;
+                    }
+
+                    if (_localMaster.Any())
+                    {
+                        // show full local list
+                        SetListBoxItems(_localMaster);
+                        _popup.IsOpen = true;
+                    }
+                    else
+                    {
+                        if (UseRemoteFetch || IsRemoteConfigured)
+                            _ = RunSearchAsync(_textBox?.Text ?? string.Empty);
+                        _popup.IsOpen = true;
                     }
                 };
             }
@@ -373,7 +414,7 @@ namespace AATM.UI.Controls
                 {
                     if (_listBox.SelectedItem is ComboRecord cr)
                     {
-                        SelectedId = cr.IdNo;
+                        SelectedId   = cr.IdNo;
                         SelectedCode = cr.Code;
                         SelectedName = cr.Name;
                         UpdateSelectedValueFromRecord(cr);
@@ -381,9 +422,16 @@ namespace AATM.UI.Controls
                 };
             }
 
-            // rebuild local list if ItemsSource already set
             BuildLocalMasterFromItemsSource();
             TrySelectBySelectedValue();
+        }
+
+        private void SetListBoxItems(IList<ComboRecord> items)
+        {
+            if (_listBox == null) return;
+            _listBox.ItemsSource = items;
+            if (items.Count > 0)
+                _listBox.SelectedIndex = 0;
         }
 
         private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -420,23 +468,27 @@ namespace AATM.UI.Controls
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            // keep Text DP in sync
             var current = _textBox.Text ?? string.Empty;
             if (Text != current)
                 Text = current;
 
-            // debounce and run hybrid search
-            var text = _textBox.Text ?? string.Empty;
-            _ = DebouncedSearchAsync(text);
+            // reset to first page when user changes filter
+            if (PageIndex != 0)
+            {
+                _suppressPageIndexChanged = true;
+                PageIndex = 0;
+                _suppressPageIndexChanged = false;
+            }
 
-            // show popup as the user types
+            // run debounced search
+            _ = DebouncedSearchAsync(current);
+
             if (_popup != null && !_popup.IsOpen)
                 _popup.IsOpen = true;
 
-            // show/hide placeholder (in template we set it via code)
             var placeholder = GetTemplateChild("PART_Placeholder") as TextBlock;
             if (placeholder != null)
-                placeholder.Visibility = string.IsNullOrEmpty(text) ? Visibility.Visible : Visibility.Collapsed;
+                placeholder.Visibility = string.IsNullOrEmpty(current) ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private async Task DebouncedSearchAsync(string filter)
@@ -460,52 +512,54 @@ namespace AATM.UI.Controls
         private async Task RunSearchAsync(string filter, CancellationToken token = default)
         {
             IsBusy = true;
-
             try
             {
-                // decide mode
-                bool mustUseRemote = UseRemoteFetch;
-                if (!mustUseRemote && _localMaster.Count > AutoRemoteThreshold)
-                    mustUseRemote = true;
+                // if filter changed outside of TextChanged path (e.g., programmatically), reset page
+                if (!string.Equals(_lastFilter, filter, StringComparison.Ordinal))
+                {
+                    _lastFilter = filter ?? string.Empty;
+                    if (PageIndex != 0)
+                    {
+                        _suppressPageIndexChanged = true;
+                        PageIndex = 0;
+                        _suppressPageIndexChanged = false;
+                    }
+                }
+
+                bool mustUseRemote =
+                    UseRemoteFetch ||
+                    (_localMaster.Count == 0 && IsRemoteConfigured) ||
+                    _localMaster.Count > AutoRemoteThreshold;
 
                 List<ComboRecord> results;
                 if (mustUseRemote)
                 {
-                    results = await FetchFromSqlAsync(filter, token);
+                    try
+                    {
+                        results = await FetchFromSqlAsync(filter, token, PageIndex);
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine($"SmartComboBox remote fetch error: {ex.Message}");
+                        results = new List<ComboRecord>();
+                    }
+                    HasNextPage = results.Count == RemoteTake;
                 }
                 else
                 {
-                    // local filtering
                     results = await Task.Run(() =>
-                    {
-                        return _localMaster
+                        _localMaster
                             .Where(r => r.Matches(filter))
-                            .Take(500) // cap for UI
-                            .ToList();
-                    }, token);
+                            .Skip(PageIndex * RemoteTake)
+                            .Take(RemoteTake)
+                            .ToList(), token);
+
+                    HasNextPage = results.Count == RemoteTake;
                 }
 
                 if (token.IsCancellationRequested) return;
 
-                // update list in UI thread
-                Application.Current.Dispatcher.Invoke(() =>
-                {
-                    if (_listBox != null)
-                    {
-                        _listBox.ItemsSource = results;
-                        if (results.Count > 0)
-                            _listBox.SelectedIndex = 0;
-                    }
-                });
-            }
-            catch (TaskCanceledException)
-            {
-                // user typed again
-            }
-            catch (Exception ex)
-            {
-                // you could log here
-                System.Diagnostics.Debug.WriteLine("SmartComboBox search error: " + ex.Message);
+                Dispatcher.Invoke(() => SetListBoxItems(results));
             }
             finally
             {
@@ -513,35 +567,59 @@ namespace AATM.UI.Controls
             }
         }
 
-        private async Task<List<ComboRecord>> FetchFromSqlAsync(string filter, CancellationToken token)
+        // make OFFSET/FETCH robust if template lacks ORDER BY
+        private async Task<List<ComboRecord>> FetchFromSqlAsync(string filter, CancellationToken token, int pageIndex = 0)
         {
             var list = new List<ComboRecord>();
-
-            // if no connection or no query, return empty list (but don’t crash)
             if (string.IsNullOrWhiteSpace(ConnectionString) || string.IsNullOrWhiteSpace(SqlQueryTemplate))
                 return list;
 
-            // enforce TOP if user forgot
-            string sql = SqlQueryTemplate;
-            // we assume user will alias properly: IdNo, Code, Name
+            string baseSql = SqlQueryTemplate.Trim().TrimEnd(';');
+            bool hasTop = baseSql.IndexOf(" top ", StringComparison.OrdinalIgnoreCase) >= 0;
+            bool hasOffset = baseSql.IndexOf(" offset ", StringComparison.OrdinalIgnoreCase) >= 0;
+
+            string sqlToRun = baseSql;
+
+            // Only append OFFSET/FETCH when query has no TOP and no existing OFFSET
+            if (!hasTop && !hasOffset)
+            {
+                if (baseSql.IndexOf("order by", StringComparison.OrdinalIgnoreCase) < 0)
+                    baseSql += " ORDER BY 1";
+                sqlToRun = $"{baseSql} OFFSET {pageIndex * RemoteTake} ROWS FETCH NEXT {RemoteTake} ROWS ONLY";
+            }
 
             using var conn = new SqlConnection(ConnectionString);
-            using var cmd = new SqlCommand(sql, conn);
-            cmd.Parameters.Add(new SqlParameter("@filter", SqlDbType.NVarChar, 200) { Value = filter ?? string.Empty });
-
             await conn.OpenAsync(token);
-            using var reader = await cmd.ExecuteReaderAsync(token);
-            while (await reader.ReadAsync(token))
+
+            async Task ExecuteAndFillAsync(string sql)
             {
-                var rec = new ComboRecord
+                using var cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.Add(new SqlParameter("@filter", SqlDbType.NVarChar, 200) { Value = filter ?? string.Empty });
+                using var reader = await cmd.ExecuteReaderAsync(token);
+                while (await reader.ReadAsync(token))
                 {
-                    Raw = reader, // raw reference for display path via SafeGet
-                    IdNo = SafeGet(reader, "IdNo"),
-                    Code = SafeGet(reader, "Code")?.ToString() ?? string.Empty,
-                    Name = SafeGet(reader, "Name")?.ToString() ?? string.Empty
-                };
-                list.Add(rec);
-                if (list.Count >= RemoteTake) break;
+                    var rec = new ComboRecord
+                    {
+                        Raw = reader,
+                        IdNo = SafeGet(reader, "IdNo"),
+                        Code = SafeGet(reader, "Code")?.ToString() ?? string.Empty,
+                        Name = SafeGet(reader, "Name")?.ToString() ?? string.Empty
+                    };
+                    list.Add(rec);
+                    if (list.Count >= RemoteTake) break; // cap to RemoteTake even without paging
+                }
+            }
+
+            try
+            {
+                await ExecuteAndFillAsync(sqlToRun);
+            }
+            catch (SqlException ex)
+            {
+                // Fallback: run base SQL without OFFSET/FETCH (handles queries with TOP)
+                Debug.WriteLine($"SmartComboBox paging SQL failed, fallback without OFFSET: {ex.Message}");
+                list.Clear();
+                await ExecuteAndFillAsync(baseSql);
             }
 
             return list;
@@ -729,63 +807,62 @@ namespace AATM.UI.Controls
                     || (Name?.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0);
             }
 
+            public override string ToString() => Display; // Ensures ListBox renders text even without DisplayMemberPath.
+
             public static ComboRecord FromUnknown(object obj)
             {
                 if (obj == null) return null;
+                if (obj is ComboRecord cr) return cr;
 
-                // if it's already our record
-                if (obj is ComboRecord cr)
-                    return cr;
-
-                // DataRowView
                 if (obj is DataRowView drv)
                 {
                     return new ComboRecord
                     {
-                        Raw = obj,
+                        Raw  = obj,
                         IdNo = drv["IdNo"],
                         Code = drv["Code"]?.ToString() ?? string.Empty,
                         Name = drv["Name"]?.ToString() ?? string.Empty
                     };
                 }
 
-                // DataRow
                 if (obj is DataRow dr)
                 {
                     return new ComboRecord
                     {
-                        Raw = obj,
+                        Raw  = obj,
                         IdNo = dr["IdNo"],
                         Code = dr["Code"]?.ToString() ?? string.Empty,
                         Name = dr["Name"]?.ToString() ?? string.Empty
                     };
                 }
 
-                // POCO with IdNo/Code/Name
                 var t = obj.GetType();
-                var pId = t.GetProperty("IdNo");
+                var pId   = t.GetProperty("IdNo");
                 var pCode = t.GetProperty("Code");
                 var pName = t.GetProperty("Name");
                 if (pId != null || pCode != null || pName != null)
                 {
                     return new ComboRecord
                     {
-                        Raw = obj,
+                        Raw  = obj,
                         IdNo = pId?.GetValue(obj),
                         Code = pCode?.GetValue(obj)?.ToString() ?? string.Empty,
                         Name = pName?.GetValue(obj)?.ToString() ?? string.Empty
                     };
                 }
 
-                // fallback: treat as string
                 return new ComboRecord
                 {
-                    Raw = obj,
+                    Raw  = obj,
                     IdNo = obj,
                     Code = string.Empty,
                     Name = obj.ToString() ?? string.Empty
                 };
             }
         }
+
+        private bool IsRemoteConfigured =>
+            !string.IsNullOrWhiteSpace(ConnectionString) &&
+            !string.IsNullOrWhiteSpace(SqlQueryTemplate);
     }
 }
