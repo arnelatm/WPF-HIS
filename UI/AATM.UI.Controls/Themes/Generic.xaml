@@ -124,11 +124,9 @@
                                 <Grid>
                                     <!-- list -->
                                     <ListBox x:Name="PART_ListBox"
-                                             MinHeight="40"
-                                             MaxHeight="300"
-                                             ScrollViewer.VerticalScrollBarVisibility="Auto"
                                              VirtualizingStackPanel.IsVirtualizing="True"
                                              VirtualizingStackPanel.VirtualizationMode="Recycling"
+                                             ScrollViewer.CanContentScroll="True"
                                              SnapsToDevicePixels="True"
                                              DisplayMemberPath="Display">
                                         <ListBox.ItemContainerStyle>
