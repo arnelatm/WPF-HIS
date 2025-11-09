@@ -7,13 +7,12 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;               
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 using Microsoft.Data.SqlClient;
-
 
 namespace AATM.UI.Controls
 {
@@ -23,7 +22,7 @@ namespace AATM.UI.Controls
     /// - remote async SQL fetching when UseRemoteFetch = true OR local is too big
     /// - exposes SelectedId, SelectedCode, SelectedName
     /// - expects columns/properties named: IdNo, Code, Name (SQL should alias to these)
-    /// </summary   
+    /// </summary>
     [TemplatePart(Name = "PART_TextBox", Type = typeof(TextBox))]
     [TemplatePart(Name = "PART_ListBox", Type = typeof(ListBox))]
     [TemplatePart(Name = "PART_Button", Type = typeof(Button))]
@@ -47,20 +46,34 @@ namespace AATM.UI.Controls
         private const int AutoRemoteThreshold = 50000;
         private bool _suppressPageIndexChanged;
         private string _lastFilter = string.Empty;
+        private bool _pendingPageDown;
 
         static SmartComboBox()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(SmartComboBox),
-                new FrameworkPropertyMetadata(typeof(SmartComboBox)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(SmartComboBox), new FrameworkPropertyMetadata(typeof(SmartComboBox)));
         }
 
-        public SmartComboBox() => RemoteTake = 200;
+        public SmartComboBox()
+        {
+            RemoteTake = 20;
+            _currentItems.CollectionChanged += CurrentItems_CollectionChanged;
+        }
+
+        private void CurrentItems_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (_listBox != null && _currentItems.Count > 0 && _pendingPageDown)
+            {
+                _listBox.SelectedIndex = 0;
+                _listBox.Focus();
+                _listBox.ScrollIntoView(_listBox.SelectedItem);
+                _pendingPageDown = false;
+            }
+        }
 
         #region Dependency Properties (removed DisplayMemberPath as unused)
 
         public static readonly DependencyProperty ItemsSourceProperty =
-            DependencyProperty.Register(nameof(ItemsSource), typeof(IEnumerable), typeof(SmartComboBox),
-                new PropertyMetadata(null, OnItemsSourceChanged));
+        DependencyProperty.Register(nameof(ItemsSource), typeof(IEnumerable), typeof(SmartComboBox), new PropertyMetadata(null, OnItemsSourceChanged));
 
         public IEnumerable ItemsSource
         {
@@ -78,8 +91,7 @@ namespace AATM.UI.Controls
         }
 
         public static readonly DependencyProperty UseRemoteFetchProperty =
-            DependencyProperty.Register(nameof(UseRemoteFetch), typeof(bool), typeof(SmartComboBox),
-                new PropertyMetadata(false));
+        DependencyProperty.Register(nameof(UseRemoteFetch), typeof(bool), typeof(SmartComboBox), new PropertyMetadata(false));
 
         public bool UseRemoteFetch
         {
@@ -88,8 +100,7 @@ namespace AATM.UI.Controls
         }
 
         public static readonly DependencyProperty ConnectionStringProperty =
-            DependencyProperty.Register(nameof(ConnectionString), typeof(string), typeof(SmartComboBox),
-                new PropertyMetadata(string.Empty));
+        DependencyProperty.Register(nameof(ConnectionString), typeof(string), typeof(SmartComboBox), new PropertyMetadata(string.Empty));
 
         public string ConnectionString
         {
@@ -98,8 +109,7 @@ namespace AATM.UI.Controls
         }
 
         public static readonly DependencyProperty SqlQueryTemplateProperty =
-            DependencyProperty.Register(nameof(SqlQueryTemplate), typeof(string), typeof(SmartComboBox),
-                new PropertyMetadata(string.Empty));
+        DependencyProperty.Register(nameof(SqlQueryTemplate), typeof(string), typeof(SmartComboBox), new PropertyMetadata(string.Empty));
 
         public string SqlQueryTemplate
         {
@@ -108,8 +118,7 @@ namespace AATM.UI.Controls
         }
 
         public static readonly DependencyProperty RemoteTakeProperty =
-            DependencyProperty.Register(nameof(RemoteTake), typeof(int), typeof(SmartComboBox),
-                new PropertyMetadata(200));
+        DependencyProperty.Register(nameof(RemoteTake), typeof(int), typeof(SmartComboBox), new PropertyMetadata(20));
 
         public int RemoteTake
         {
@@ -118,8 +127,7 @@ namespace AATM.UI.Controls
         }
 
         public static readonly DependencyProperty SelectedIdProperty =
-            DependencyProperty.Register(nameof(SelectedId), typeof(object), typeof(SmartComboBox),
-                new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+        DependencyProperty.Register(nameof(SelectedId), typeof(object), typeof(SmartComboBox), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public object SelectedId
         {
@@ -128,8 +136,7 @@ namespace AATM.UI.Controls
         }
 
         public static readonly DependencyProperty SelectedCodeProperty =
-            DependencyProperty.Register(nameof(SelectedCode), typeof(string), typeof(SmartComboBox),
-                new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+        DependencyProperty.Register(nameof(SelectedCode), typeof(string), typeof(SmartComboBox), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public string SelectedCode
         {
@@ -138,8 +145,7 @@ namespace AATM.UI.Controls
         }
 
         public static readonly DependencyProperty SelectedNameProperty =
-            DependencyProperty.Register(nameof(SelectedName), typeof(string), typeof(SmartComboBox),
-                new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+        DependencyProperty.Register(nameof(SelectedName), typeof(string), typeof(SmartComboBox), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public string SelectedName
         {
@@ -148,8 +154,7 @@ namespace AATM.UI.Controls
         }
 
         public static readonly DependencyProperty PlaceholderProperty =
-            DependencyProperty.Register(nameof(Placeholder), typeof(string), typeof(SmartComboBox),
-                new PropertyMetadata("Type to search..."));
+        DependencyProperty.Register(nameof(Placeholder), typeof(string), typeof(SmartComboBox), new PropertyMetadata("Type to search..."));
 
         public string Placeholder
         {
@@ -158,8 +163,7 @@ namespace AATM.UI.Controls
         }
 
         public static readonly DependencyProperty IsBusyProperty =
-            DependencyProperty.Register(nameof(IsBusy), typeof(bool), typeof(SmartComboBox),
-                new PropertyMetadata(false));
+        DependencyProperty.Register(nameof(IsBusy), typeof(bool), typeof(SmartComboBox), new PropertyMetadata(false));
 
         public bool IsBusy
         {
@@ -168,8 +172,7 @@ namespace AATM.UI.Controls
         }
 
         public static readonly DependencyProperty DebounceMillisecondsProperty =
-            DependencyProperty.Register(nameof(DebounceMilliseconds), typeof(int), typeof(SmartComboBox),
-                new PropertyMetadata(220));
+        DependencyProperty.Register(nameof(DebounceMilliseconds), typeof(int), typeof(SmartComboBox), new PropertyMetadata(220));
 
         public int DebounceMilliseconds
         {
@@ -178,8 +181,7 @@ namespace AATM.UI.Controls
         }
 
         public static readonly DependencyProperty TextProperty =
-            DependencyProperty.Register(nameof(Text), typeof(string), typeof(SmartComboBox),
-                new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnTextChanged));
+        DependencyProperty.Register(nameof(Text), typeof(string), typeof(SmartComboBox), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnTextChanged));
 
         public string Text
         {
@@ -198,8 +200,7 @@ namespace AATM.UI.Controls
         }
 
         public static readonly DependencyProperty SelectedValuePathProperty =
-            DependencyProperty.Register(nameof(SelectedValuePath), typeof(string), typeof(SmartComboBox),
-                new PropertyMetadata(null, OnSelectedValuePathChanged));
+        DependencyProperty.Register(nameof(SelectedValuePath), typeof(string), typeof(SmartComboBox), new PropertyMetadata(null, OnSelectedValuePathChanged));
 
         public string SelectedValuePath
         {
@@ -213,8 +214,7 @@ namespace AATM.UI.Controls
         }
 
         public static readonly DependencyProperty SelectedValueProperty =
-            DependencyProperty.Register(nameof(SelectedValue), typeof(object), typeof(SmartComboBox),
-                new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectedValueChanged));
+        DependencyProperty.Register(nameof(SelectedValue), typeof(object), typeof(SmartComboBox), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectedValueChanged));
 
         public object SelectedValue
         {
@@ -228,8 +228,7 @@ namespace AATM.UI.Controls
         }
 
         public static readonly DependencyProperty PageIndexProperty =
-            DependencyProperty.Register(nameof(PageIndex), typeof(int), typeof(SmartComboBox),
-                new PropertyMetadata(0, OnPageIndexChanged));
+        DependencyProperty.Register(nameof(PageIndex), typeof(int), typeof(SmartComboBox), new PropertyMetadata(0, OnPageIndexChanged));
 
         public int PageIndex
         {
@@ -238,8 +237,7 @@ namespace AATM.UI.Controls
         }
 
         public static readonly DependencyProperty HasNextPageProperty =
-            DependencyProperty.Register(nameof(HasNextPage), typeof(bool), typeof(SmartComboBox),
-                new PropertyMetadata(false));
+        DependencyProperty.Register(nameof(HasNextPage), typeof(bool), typeof(SmartComboBox), new PropertyMetadata(false));
 
         public bool HasNextPage
         {
@@ -247,11 +245,42 @@ namespace AATM.UI.Controls
             set => SetValue(HasNextPageProperty, value);
         }
 
+        // New: Minimum characters required before any search/paging occurs
+        public static readonly DependencyProperty MinSearchLengthProperty =
+        DependencyProperty.Register(nameof(MinSearchLength), typeof(int), typeof(SmartComboBox), new PropertyMetadata(2));
+
+        public int MinSearchLength
+        {
+            get => (int)GetValue(MinSearchLengthProperty);
+            set => SetValue(MinSearchLengthProperty, value);
+        }
+
+        // NEW: Toggle automatic paging when user scrolls to bottom (default disabled to prevent continuous paging)
+        public static readonly DependencyProperty EnableAutoScrollPagingProperty =
+        DependencyProperty.Register(nameof(EnableAutoScrollPaging), typeof(bool), typeof(SmartComboBox), new PropertyMetadata(false, OnEnableAutoScrollPagingChanged));
+
+        public bool EnableAutoScrollPaging
+        {
+            get => (bool)GetValue(EnableAutoScrollPagingProperty);
+            set => SetValue(EnableAutoScrollPagingProperty, value);
+        }
+
+        private static void OnEnableAutoScrollPagingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is SmartComboBox scb && scb._scrollViewer != null)
+            {
+                scb._scrollViewer.ScrollChanged -= scb.ScrollViewer_ScrollChanged;
+                if ((bool)e.NewValue)
+                {
+                    scb._scrollViewer.ScrollChanged += scb.ScrollViewer_ScrollChanged;
+                }
+            }
+        }
+
         private static void OnPageIndexChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is SmartComboBox scb && !scb._suppressPageIndexChanged)
             {
-                // Only load page if already have initial filter context
                 _ = scb.AppendPageAsync(scb.PageIndex);
             }
         }
@@ -259,8 +288,8 @@ namespace AATM.UI.Controls
         #endregion
 
         private bool IsRemoteConfigured =>
-            !string.IsNullOrWhiteSpace(ConnectionString) &&
-            !string.IsNullOrWhiteSpace(SqlQueryTemplate);
+        !string.IsNullOrWhiteSpace(ConnectionString) &&
+        !string.IsNullOrWhiteSpace(SqlQueryTemplate);
 
         public override void OnApplyTemplate()
         {
@@ -287,6 +316,7 @@ namespace AATM.UI.Controls
                     }
                 };
                 _listBox.Loaded += (_, _) => AttachScrollViewer();
+                _listBox.PreviewKeyDown += ListBox_PreviewKeyDown;
             }
 
             if (_textBox != null)
@@ -302,7 +332,7 @@ namespace AATM.UI.Controls
                 {
                     if (_popup == null) return;
                     _popup.IsOpen = !_popup.IsOpen;
-                    if (_popup.IsOpen && _currentItems.Count == 0)
+                    if (_popup.IsOpen)
                         _ = RunInitialSearchAsync(_textBox?.Text ?? string.Empty);
                 };
             }
@@ -311,19 +341,61 @@ namespace AATM.UI.Controls
             TrySelectBySelectedValue();
         }
 
+        private void ListBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (_listBox == null) return;
+
+            if (e.Key == Key.Down)
+            {
+                if (_listBox.SelectedIndex == _currentItems.Count - 1 && HasNextPage)
+                {
+                    _pendingPageDown = true;
+                    PageIndex++;
+                    e.Handled = true;
+                    return;
+                }
+            }
+            else if (e.Key == Key.Up)
+            {
+                if (_listBox.SelectedIndex == 0 && PageIndex > 0)
+                {
+                    _pendingPageDown = false;
+                    PageIndex--;
+                    e.Handled = true;
+                    return;
+                }
+            }
+            else if (e.Key == Key.Enter)
+            {
+                CommitSelection();
+                e.Handled = true;
+            }
+            else if (e.Key == Key.Escape)
+            {
+                if (_popup != null)
+                    _popup.IsOpen = false;
+                if (_textBox != null)
+                    _textBox.Focus();
+                e.Handled = true;
+            }
+        }
+
         private void AttachScrollViewer()
         {
             if (_listBox == null) return;
             _scrollViewer = FindDescendant<ScrollViewer>(_listBox);
             if (_scrollViewer != null)
             {
-                _scrollViewer.ScrollChanged += ScrollViewer_ScrollChanged;
+                // attach only if enabled
+                if (EnableAutoScrollPaging)
+                    _scrollViewer.ScrollChanged += ScrollViewer_ScrollChanged;
             }
         }
 
         private void ScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
-            if (e.VerticalOffset + e.ViewportHeight >= e.ExtentHeight - 2) // near bottom
+            if (!EnableAutoScrollPaging) return;
+            if (e.VerticalOffset + e.ViewportHeight >= e.ExtentHeight - 2)
             {
                 if (HasNextPage)
                 {
@@ -391,32 +463,81 @@ namespace AATM.UI.Controls
             }
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            var current = _textBox.Text ?? string.Empty;
-            if (Text != current) Text = current;
-
-            _ = RunInitialSearchAsync(current);
-
-            if (_popup != null && !_popup.IsOpen)
-                _popup.IsOpen = true;
-        }
-
         private async Task RunInitialSearchAsync(string filter)
         {
-            // reset everything for new filter
             _cts?.Cancel();
             _pageCache.Clear();
             _currentItems.Clear();
-            _lastFilter = filter;
+
+            var trimmed = (filter ?? string.Empty).Trim();
+            _lastFilter = trimmed;
+
             _suppressPageIndexChanged = true;
-            PageIndex = 0;
+            PageIndex =0;
             _suppressPageIndexChanged = false;
+
+            // Only show first page; prevent auto continuation here
+            if (trimmed.Length < MinSearchLength)
+            {
+                bool remote = UseRemoteFetch || (_localMaster.Count ==0 && IsRemoteConfigured) || _localMaster.Count > AutoRemoteThreshold;
+                if (remote)
+                {
+                    var first = await FetchFromSqlAsync(string.Empty, CancellationToken.None,0);
+                    _pageCache[0] = first;
+                    AppendToCurrent(first);
+                    UpdateHasNext(0, first.Count);
+                }
+                else if (_localMaster.Count >0)
+                {
+                    _totalFilteredCount = _localMaster.Count;
+                    var pageData = _localMaster.Take(RemoteTake).ToList();
+                    _pageCache[0] = pageData;
+                    _pageCache[-1] = new List<ComboRecord>();
+                    AppendToCurrent(pageData);
+                    UpdateHasNext(0, pageData.Count);
+                }
+                else
+                {
+                    HasNextPage = false;
+                    AppendToCurrent(Array.Empty<ComboRecord>());
+                }
+                return;
+            }
+
+            // filtered flow
             await AppendPageAsync(0);
         }
 
         private async Task AppendPageAsync(int pageIndex)
         {
+            // allow remote unfiltered fetch when below MinSearchLength
+            if ((_lastFilter ?? string.Empty).Trim().Length < MinSearchLength)
+            {
+                bool remote = UseRemoteFetch || (_localMaster.Count == 0 && IsRemoteConfigured) || _localMaster.Count > AutoRemoteThreshold;
+                if (remote)
+                {
+                    var pageDataRemote = await FetchFromSqlAsync(string.Empty, CancellationToken.None, pageIndex);
+                    _pageCache[pageIndex] = pageDataRemote;
+                    UpdateHasNext(pageIndex, pageDataRemote.Count);
+                    AppendToCurrent(pageDataRemote);
+                }
+                else if (_localMaster.Count > 0)
+                {
+                    _totalFilteredCount = _localMaster.Count;
+                    var pageDataLocal = _localMaster.Skip(pageIndex * RemoteTake).Take(RemoteTake).ToList();
+                    _pageCache[pageIndex] = pageDataLocal;
+                    _pageCache[-1] = new List<ComboRecord>();
+                    UpdateHasNext(pageIndex, pageDataLocal.Count);
+                    AppendToCurrent(pageDataLocal);
+                }
+                else
+                {
+                    HasNextPage = false;
+                    AppendToCurrent(Array.Empty<ComboRecord>());
+                }
+                return;
+            }
+
             // already cached?
             if (_pageCache.TryGetValue(pageIndex, out var cached))
             {
@@ -428,51 +549,32 @@ namespace AATM.UI.Controls
             IsBusy = true;
             try
             {
-                bool remote =
-                    UseRemoteFetch ||
-                    (_localMaster.Count == 0 && IsRemoteConfigured) ||
-                    _localMaster.Count > AutoRemoteThreshold;
+                bool remote = UseRemoteFetch || (_localMaster.Count == 0 && IsRemoteConfigured) || _localMaster.Count > AutoRemoteThreshold;
 
                 List<ComboRecord> pageData;
                 if (remote)
                 {
+                    // Always fetch the correct page from SQL
                     pageData = await FetchFromSqlAsync(_lastFilter, CancellationToken.None, pageIndex);
+                    // Client-side filter as a safety net when template does not filter by @filter
+                    if (!string.IsNullOrWhiteSpace(_lastFilter))
+                    {
+                        pageData = pageData.Where(r => r.Matches(_lastFilter)).ToList();
+                    }
                     _pageCache[pageIndex] = pageData;
                     UpdateHasNext(pageIndex, pageData.Count);
                 }
                 else
                 {
-                    // local filtering once per initial search to compute total
-                    if (pageIndex == 0)
-                    {
-                        var all = _localMaster
-                            .Where(r => r.Matches(_lastFilter))
-                            .ToList();
-                        _totalFilteredCount = all.Count;
-                        // slice page 0
-                        pageData = all.Take(RemoteTake).ToList();
-                        _pageCache[0] = pageData;
-                        // cache subsequent pages lazily
-                        _pageCache[-1] = all; // store entire filtered list under -1 key for quick slicing
-                        UpdateHasNext(pageIndex, pageData.Count);
-                    }
-                    else
-                    {
-                        if (_pageCache.TryGetValue(-1, out var allFiltered))
-                        {
-                            pageData = allFiltered
-                                .Skip(pageIndex * RemoteTake)
-                                .Take(RemoteTake)
-                                .ToList();
-                            _pageCache[pageIndex] = pageData;
-                            UpdateHasNext(pageIndex, pageData.Count);
-                        }
-                        else
-                        {
-                            pageData = new();
-                            HasNextPage = false;
-                        }
-                    }
+                    // Always filter and slice for the correct page
+                    var allFiltered = _localMaster.Where(r => r.Matches(_lastFilter)).ToList();
+                    _totalFilteredCount = allFiltered.Count;
+                    var pageDataLocal = allFiltered.Skip(pageIndex * RemoteTake).Take(RemoteTake).ToList();
+                    pageData = pageDataLocal;
+                    _pageCache[pageIndex] = pageDataLocal;
+                    // sentinel to signal local mode for UpdateHasNext
+                    _pageCache[-1] = new List<ComboRecord>();
+                    UpdateHasNext(pageIndex, pageDataLocal.Count);
                 }
 
                 AppendToCurrent(pageData);
@@ -485,10 +587,9 @@ namespace AATM.UI.Controls
 
         private void AppendToCurrent(IEnumerable<ComboRecord> records)
         {
+            _currentItems.Clear();
             foreach (var r in records)
                 _currentItems.Add(r);
-            if (_currentItems.Count > 0 && _listBox != null && _listBox.SelectedIndex < 0)
-                _listBox.SelectedIndex = 0;
         }
 
         private void UpdateHasNext(int pageIndex, int pageCount)
@@ -524,24 +625,64 @@ namespace AATM.UI.Controls
                 return list;
 
             string baseSql = SqlQueryTemplate.Trim().TrimEnd(';');
-            bool hasTop = baseSql.IndexOf(" top ", StringComparison.OrdinalIgnoreCase) >= 0;
-            bool hasOffset = baseSql.IndexOf(" offset ", StringComparison.OrdinalIgnoreCase) >= 0;
-            string sqlToRun = baseSql;
 
-            if (!hasTop && !hasOffset)
+            // Detect existing paging
+            bool hasTop = baseSql.IndexOf(" top ", StringComparison.OrdinalIgnoreCase) >=0;
+            bool hasOffset = baseSql.IndexOf(" offset ", StringComparison.OrdinalIgnoreCase) >=0;
+            bool hasFilterParameter = baseSql.IndexOf("@filter", StringComparison.OrdinalIgnoreCase) >=0;
+
+            // Ensure an ORDER BY exists for OFFSET/FETCH (required). If missing add one on IdNo (or Name as fallback).
+            bool hasOrderBy = baseSql.IndexOf(" order by ", StringComparison.OrdinalIgnoreCase) >=0;
+            if (!hasOrderBy)
             {
-                if (baseSql.IndexOf("order by", StringComparison.OrdinalIgnoreCase) < 0)
-                    baseSql += " ORDER BY 1";
-                sqlToRun = $"{baseSql} OFFSET {pageIndex * RemoteTake} ROWS FETCH NEXT {RemoteTake} ROWS ONLY";
+                baseSql += " ORDER BY IdNo"; // assume IdNo exists per control contract
+                hasOrderBy = true;
             }
 
-            using var conn = new SqlConnection(ConnectionString);
-            await conn.OpenAsync(token);
-
-            async Task ExecuteAndFillAsync(string sql)
+            // Inject filter only if template did not already include @filter
+            if (!hasFilterParameter)
             {
-                using var cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.Add(new SqlParameter("@filter", SqlDbType.NVarChar, 200) { Value = filter ?? string.Empty });
+                // We cannot safely assume alias names; use Code/Name aliases if present else raw column names.
+                // Prefer using aliases Code / Name (user should alias them). If not, fall back to column names ProductCode/ProductName pattern.
+                bool hasCodeAlias = baseSql.IndexOf(" Code", StringComparison.OrdinalIgnoreCase) >=0;
+                bool hasNameAlias = baseSql.IndexOf(" Name", StringComparison.OrdinalIgnoreCase) >=0;
+                string filterExpr = hasCodeAlias && hasNameAlias
+                    ? "(@filter = '' OR Code LIKE @pattern OR Name LIKE @pattern)"
+                    : "(@filter = '' OR ProductCode LIKE @pattern OR ProductName LIKE @pattern)"; // heuristic fallback
+
+                int orderPos = baseSql.LastIndexOf(" order by ", StringComparison.OrdinalIgnoreCase);
+                if (orderPos >=0)
+                {
+                    string beforeOrder = baseSql.Substring(0, orderPos);
+                    string orderClause = baseSql.Substring(orderPos);
+                    bool beforeHasWhere = beforeOrder.IndexOf(" where ", StringComparison.OrdinalIgnoreCase) >=0;
+                    beforeOrder += beforeHasWhere ? " AND " + filterExpr : " WHERE " + filterExpr;
+                    baseSql = beforeOrder + " " + orderClause;
+                }
+                else
+                {
+                    // should not happen due to addition above, but fallback
+                    baseSql += " WHERE " + filterExpr;
+                }
+            }
+
+            // Add paging if missing
+            if (!hasTop && !hasOffset)
+            {
+                baseSql += $" OFFSET {pageIndex * RemoteTake} ROWS FETCH NEXT {RemoteTake} ROWS ONLY";
+            }
+
+            Debug.WriteLine($"SmartComboBox SQL (final): {baseSql}");
+            Debug.WriteLine($"SmartComboBox SQL @filter: {filter}");
+
+            try
+            {
+                using var conn = new SqlConnection(ConnectionString);
+                await conn.OpenAsync(token);
+                using var cmd = new SqlCommand(baseSql, conn);
+                cmd.Parameters.Add(new SqlParameter("@filter", SqlDbType.NVarChar,200) { Value = filter ?? string.Empty });
+                cmd.Parameters.Add(new SqlParameter("@pattern", SqlDbType.NVarChar,200) { Value = string.IsNullOrEmpty(filter) ? string.Empty : $"%{filter}%" });
+
                 using var reader = await cmd.ExecuteReaderAsync(token);
                 while (await reader.ReadAsync(token))
                 {
@@ -553,19 +694,16 @@ namespace AATM.UI.Controls
                         Name = SafeGet(reader, "Name")?.ToString() ?? string.Empty
                     };
                     list.Add(rec);
-                    if (list.Count >= RemoteTake) break;
+                    if (list.Count >= RemoteTake) break; // safeguard if query returns extra
                 }
-            }
-
-            try
-            {
-                await ExecuteAndFillAsync(sqlToRun);
             }
             catch (SqlException ex)
             {
-                Debug.WriteLine($"SmartComboBox paging SQL failed: {ex.Message}");
-                list.Clear();
-                await ExecuteAndFillAsync(baseSql);
+                Debug.WriteLine("SmartComboBox SQL ERROR: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("SmartComboBox (unexpected) ERROR: " + ex.Message);
             }
 
             return list;
@@ -671,6 +809,7 @@ namespace AATM.UI.Controls
                     _textBox.Text = display;
                     Text = display;
                 }
+                HasNextPage = false;
             }
         }
 
@@ -686,8 +825,7 @@ namespace AATM.UI.Controls
             public bool Matches(string filter)
             {
                 if (string.IsNullOrEmpty(filter)) return true;
-                return (Code?.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0) ||
-                       (Name?.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0);
+                return (Code?.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0) || (Name?.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0);
             }
             public override string ToString() => Display;
             public static ComboRecord FromUnknown(object obj)
@@ -739,6 +877,22 @@ namespace AATM.UI.Controls
                     Name = obj.ToString() ?? ""
                 };
             }
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (_textBox == null) return;
+            var text = _textBox.Text ?? string.Empty;
+            Text = text;
+
+            if (_popup != null)
+            {
+                // Open popup for remote fetch even with short filter, or for local when length criteria met
+                if (UseRemoteFetch || text.Trim().Length >= MinSearchLength)
+                    _popup.IsOpen = true;
+            }
+
+            _ = RunInitialSearchAsync(text);
         }
     }
 }

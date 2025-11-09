@@ -12,8 +12,7 @@
                          UseRemoteFetch="True"
                          Height="36"
                          ConnectionString="Server=Ibn-Server;Database=IspData;User Id=iGroupAdmin;Password=igss@123;Encrypt=True;TrustServerCertificate=True;"
-                         SqlQueryTemplate="SELECT TOP 100 IdNo, ProductCode AS Code, ProductName AS Name FROM Product
-                         WHERE ProductCode + ProductName LIKE '%' + @filter + '%' ORDER BY ProductName"
+                         SqlQueryTemplate="SELECT IdNo, ProductCode AS Code, ProductName AS Name FROM Product WHERE ProductCode + ProductName LIKE '%' + @filter + '%' ORDER BY ProductName"
                          SelectedId="{Binding SelectedCustomerId, Mode=TwoWay}"
                          SelectedCode="{Binding SelectedCustomerCode, Mode=TwoWay}"
                          SelectedName="{Binding SelectedCustomerName, Mode=TwoWay}"
