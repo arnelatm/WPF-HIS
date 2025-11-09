@@ -51,8 +51,12 @@ namespace AATM.UI.Controls
         private bool _suppressPageIndexChanged;
         private string _lastFilter = string.Empty;
         private bool _pendingPageDown;
+        private bool _pendingPageUp; // new: track upward paging intent
         private bool _ignorePopupSync;
         private int _appendInsertIndex = -1; // index where newly appended items start
+        private int _lastPageIndex =0; // new: remember last page index
+        private bool _pagingDown = true; // new: direction flag
+        private bool _forceFirstSelectionOnLoad; // new: select first item after initial search results
 
         public Action<string> Logger { get; set; }
         private void Log(string msg)
@@ -80,16 +84,27 @@ namespace AATM.UI.Controls
 
         private void CurrentItems_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            if (_listBox != null && _currentItems.Count >0 && _pendingPageDown)
+            if (_listBox != null && _currentItems.Count >0)
             {
-                var targetIndex = (_appendInsertIndex >=0 && _appendInsertIndex < _currentItems.Count)
-                    ? _appendInsertIndex
-                    :0;
-                _listBox.SelectedIndex = targetIndex;
-                _listBox.Focus();
-                _listBox.ScrollIntoView(_listBox.SelectedItem);
-                _pendingPageDown = false;
-                _appendInsertIndex = -1;
+                if (_pendingPageDown)
+                {
+                    var targetIndex = (_appendInsertIndex >=0 && _appendInsertIndex < _currentItems.Count)
+                        ? _appendInsertIndex
+                        :0;
+                    _listBox.SelectedIndex = targetIndex;
+                    _listBox.Focus();
+                    _listBox.ScrollIntoView(_listBox.SelectedItem);
+                    _pendingPageDown = false;
+                    _appendInsertIndex = -1;
+                }
+                else if (_pendingPageUp)
+                {
+                    // after loading previous page (replace), select last item
+                    _listBox.SelectedIndex = _currentItems.Count -1;
+                    _listBox.Focus();
+                    _listBox.ScrollIntoView(_listBox.SelectedItem);
+                    _pendingPageUp = false;
+                }
             }
         }
 
@@ -270,7 +285,7 @@ namespace AATM.UI.Controls
 
         // New: Minimum characters required before any search/paging occurs
         public static readonly DependencyProperty MinSearchLengthProperty =
-        DependencyProperty.Register(nameof(MinSearchLength), typeof(int), typeof(SmartComboBox), new PropertyMetadata(2));
+        DependencyProperty.Register(nameof(MinSearchLength), typeof(int), typeof(SmartComboBox), new PropertyMetadata(3)); // was2 -> now3
 
         public int MinSearchLength
         {
@@ -306,7 +321,13 @@ namespace AATM.UI.Controls
             }
         }
 
-        public void Open() => IsDropDownOpen = true;
+        public void Open()
+        {
+            // Only allow opening if current text meets minimum
+            var len = _textBox?.Text?.Trim().Length ??0;
+            if (len >= MinSearchLength)
+                IsDropDownOpen = true;
+        }
         public void Close() => IsDropDownOpen = false;
 
         public static readonly DependencyProperty MaxDropDownHeightProperty =
@@ -334,6 +355,10 @@ namespace AATM.UI.Controls
         {
             if (d is SmartComboBox scb && !scb._suppressPageIndexChanged)
             {
+                int oldIndex = e.OldValue is int oi ? oi : scb._lastPageIndex;
+                int newIndex = e.NewValue is int ni ? ni : scb.PageIndex;
+                scb._pagingDown = newIndex > oldIndex;
+                scb._lastPageIndex = newIndex;
                 _ = scb.AppendPageAsync(scb.PageIndex, scb._cts?.Token ?? CancellationToken.None);
             }
         }
@@ -372,22 +397,39 @@ namespace AATM.UI.Controls
 
             if (_popup != null)
             {
+                // Prevent auto-close when focus momentarily shifts (e.g., arrow at edges)
+                _popup.StaysOpen = true;
                 _popup.Opened += (_, __) =>
                 {
                     if (_ignorePopupSync) return;
                     _ignorePopupSync = true; IsDropDownOpen = true; _ignorePopupSync = false;
+                    // Ensure current selection is highlighted / first item selected.
+                    EnsureListBoxSelection();
+
+                    // Constrain navigation within popup visual tree
+                    if (_popup.Child is UIElement child)
+                    {
+                        KeyboardNavigation.SetDirectionalNavigation(child, KeyboardNavigationMode.Contained);
+                        KeyboardNavigation.SetTabNavigation(child, KeyboardNavigationMode.Contained);
+                    }
                 };
                 _popup.Closed += (_, __) =>
                 {
                     if (_ignorePopupSync) return;
                     _ignorePopupSync = true; IsDropDownOpen = false; _ignorePopupSync = false;
                 };
+                // Swallow edge arrow keys so focus does not leave and popup does not close
+                _popup.PreviewKeyDown += Popup_PreviewKeyDown;
                 SyncPopupOpenState(IsDropDownOpen);
             }
 
             if (_listBox != null)
             {
                 _listBox.ItemsSource = _currentItems;
+                // Use Contained to prevent focus from leaving and avoid implicit wrapping
+                KeyboardNavigation.SetDirectionalNavigation(_listBox, KeyboardNavigationMode.Contained);
+                KeyboardNavigation.SetTabNavigation(_listBox, KeyboardNavigationMode.Contained);
+
                 _listBox.MouseLeftButtonUp += (s, e) => CommitSelection();
                 _listBox.SelectionChanged += (s, e) =>
                 {
@@ -414,9 +456,21 @@ namespace AATM.UI.Controls
             {
                 _button.Click += (s, e) =>
                 {
-                    IsDropDownOpen = !IsDropDownOpen;
-                    if (IsDropDownOpen)
+                    if (!IsDropDownOpen)
+                    {
+                        var len = _textBox?.Text?.Trim().Length ??0;
+                        if (len < MinSearchLength)
+                        {
+                            // Do not open; ignore click until threshold met
+                            return;
+                        }
+                        IsDropDownOpen = true;
                         _ = StartSearchAsync(_textBox?.Text ?? string.Empty);
+                    }
+                    else
+                    {
+                        IsDropDownOpen = false;
+                    }
                 };
             }
 
@@ -438,24 +492,105 @@ namespace AATM.UI.Controls
 
             if (e.Key == Key.Down)
             {
-                if (_listBox.SelectedIndex == _currentItems.Count -1 && HasNextPage)
+                // If at last item
+                if (_listBox.SelectedIndex == _currentItems.Count -1)
                 {
-                    _pendingPageDown = true;
-                    _appendInsertIndex = _currentItems.Count;
-                    PageIndex++;
+                    if (HasNextPage)
+                    {
+                        _pendingPageDown = true;
+                        _appendInsertIndex = _currentItems.Count;
+                        PageIndex++;
+                        e.Handled = true;
+                        return;
+                    }
+                    e.Handled = true; // stay at last
+                    return;
+                }
+                if (_listBox.SelectedIndex < _currentItems.Count -1 && _listBox.SelectedIndex >=0)
+                {
+                    _listBox.SelectedIndex++;
+                    _listBox.ScrollIntoView(_listBox.SelectedItem);
+                    e.Handled = true;
+                    return;
+                }
+                if (_listBox.SelectedIndex <0 && _currentItems.Count >0)
+                {
+                    _listBox.SelectedIndex =0;
+                    _listBox.ScrollIntoView(_listBox.SelectedItem);
                     e.Handled = true;
                     return;
                 }
             }
             else if (e.Key == Key.Up)
             {
+                // At top of first page: lock selection at0
+                if (_listBox.SelectedIndex <=0 && PageIndex ==0)
+                {
+                    if (_listBox.SelectedIndex !=0 && _currentItems.Count >0)
+                    {
+                        _listBox.SelectedIndex =0;
+                        _listBox.ScrollIntoView(_listBox.SelectedItem);
+                    }
+                    e.Handled = true;
+                    return;
+                }
+                // Previous page
                 if (_listBox.SelectedIndex ==0 && PageIndex >0)
                 {
                     _pendingPageDown = false;
+                    _pendingPageUp = true;
                     PageIndex--;
                     e.Handled = true;
                     return;
                 }
+                // Move up within page
+                if (_listBox.SelectedIndex >0)
+                {
+                    _listBox.SelectedIndex--;
+                    _listBox.ScrollIntoView(_listBox.SelectedItem);
+                    e.Handled = true;
+                    return;
+                }
+            }
+            else if (e.Key == Key.PageDown)
+            {
+                if (_listBox.SelectedIndex == _currentItems.Count -1)
+                {
+                    if (HasNextPage)
+                    {
+                        _pendingPageDown = true;
+                        _appendInsertIndex = _currentItems.Count;
+                        PageIndex++;
+                    }
+                    e.Handled = true;
+                    return;
+                }
+                int chunk = Math.Max(5, Math.Min(RemoteTake, _currentItems.Count));
+                int target = Math.Min(_currentItems.Count -1, Math.Max(0, _listBox.SelectedIndex) + chunk);
+                _listBox.SelectedIndex = target;
+                _listBox.ScrollIntoView(_listBox.SelectedItem);
+                e.Handled = true;
+                return;
+            }
+            else if (e.Key == Key.PageUp)
+            {
+                if (_listBox.SelectedIndex <=0)
+                {
+                    if (PageIndex >0)
+                    {
+                        _pendingPageDown = false;
+                        _pendingPageUp = true;
+                        PageIndex--;
+                    }
+                    e.Handled = true;
+                    return;
+                }
+                int chunk = Math.Max(5, Math.Min(RemoteTake, _currentItems.Count));
+                int target = Math.Max(0, _listBox.SelectedIndex - chunk);
+                _listBox.SelectedIndex = target;
+                _listBox.ScrollIntoView(_listBox.SelectedItem);
+                e.Handled = true;
+                return;
             }
             else if (e.Key == Key.Enter)
             {
@@ -470,6 +605,22 @@ namespace AATM.UI.Controls
                     _textBox.Focus();
                 e.Handled = true;
             }
+        }
+
+        protected override void OnPreviewKeyDown(KeyEventArgs e)
+        {
+            // At top, user wants pointer/highlighter to move to last item instead of staying at first
+            if (IsDropDownOpen && e.Key == Key.Up && _listBox != null && PageIndex ==0 && _listBox.SelectedIndex <=0)
+            {
+                if (_currentItems.Count >0)
+                {
+                    _listBox.SelectedIndex = _currentItems.Count -1; // move highlight to last record
+                    _listBox.ScrollIntoView(_listBox.SelectedItem);
+                }
+                e.Handled = true;
+                return;
+            }
+            base.OnPreviewKeyDown(e);
         }
 
         private void AttachScrollViewer()
@@ -514,20 +665,53 @@ namespace AATM.UI.Controls
         private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             if (_popup == null || _listBox == null) return;
+            var currentText = _textBox?.Text ?? string.Empty;
 
-            if (e.Key == Key.Down)
+            if (e.Key == Key.Up)
             {
-                if (!IsDropDownOpen) IsDropDownOpen = true;
+                if (IsDropDownOpen)
+                {
+                    _listBox.Focus();
+                    if (_listBox.Items.Count >0 && _listBox.SelectedIndex <0)
+                        _listBox.SelectedIndex =0;
+                    _listBox.ScrollIntoView(_listBox.SelectedItem);
+                    e.Handled = true;
+                    return;
+                }
+            }
+            else if (e.Key == Key.Down)
+            {
+                // Only open with Down if threshold met
+                if (!IsDropDownOpen)
+                {
+                    if (!ShouldActivateDropDown(currentText))
+                    {
+                        e.Handled = true; // swallow to prevent focus jumping
+                        return;
+                    }
+                    IsDropDownOpen = true;
+                    _ = StartSearchAsync(currentText);
+                }
                 if (_listBox.Items.Count >0)
                 {
                     _listBox.Focus();
-                    if (_listBox.SelectedIndex <0) _listBox.SelectedIndex =0;
+                    // Always highlight first record when entering list from textbox via Down
+                    _listBox.SelectedIndex =0;
+                    var first = _listBox.SelectedItem as ComboRecord;
+                    if (first != null)
+                    {
+                        SelectedId = first.IdNo;
+                        SelectedCode = first.Code;
+                        SelectedName = first.Name;
+                        UpdateSelectedValueFromRecord(first);
+                    }
                     _listBox.ScrollIntoView(_listBox.SelectedItem);
                 }
                 e.Handled = true;
             }
             else if (e.Key == Key.PageDown)
             {
+                if (!ShouldActivateDropDown(currentText)) { e.Handled = true; return; }
                 if (HasNextPage)
                 {
                     _pendingPageDown = true;
@@ -538,6 +722,7 @@ namespace AATM.UI.Controls
             }
             else if (e.Key == Key.PageUp)
             {
+                if (!ShouldActivateDropDown(currentText)) { e.Handled = true; return; }
                 if (PageIndex >0)
                 {
                     _suppressPageIndexChanged = true;
@@ -548,6 +733,7 @@ namespace AATM.UI.Controls
             }
             else if (e.Key == Key.Enter)
             {
+                if (!ShouldActivateDropDown(currentText)) { e.Handled = true; return; }
                 CommitSelection();
                 e.Handled = true;
             }
@@ -558,10 +744,16 @@ namespace AATM.UI.Controls
             }
         }
 
+        private bool ShouldActivateDropDown(string txt)
+        {
+            return (txt?.Trim().Length ??0) >= MinSearchLength;
+        }
+
         private async Task StartSearchAsync(string filter)
         {
             var old = Interlocked.Exchange(ref _cts, new CancellationTokenSource());
             try { old?.Cancel(); } finally { old?.Dispose(); }
+            _forceFirstSelectionOnLoad = true; // next population should select first result
             await RunInitialSearchAsync(filter, _cts.Token);
         }
 
@@ -579,128 +771,166 @@ namespace AATM.UI.Controls
 
             if (token.IsCancellationRequested) return;
 
-            // Only show first page; prevent auto continuation here
+            // If below threshold do not populate list
             if (trimmed.Length < MinSearchLength)
             {
-                bool remote = UseRemoteFetch || (_localMaster.Count ==0 && IsRemoteConfigured) || _localMaster.Count > AutoRemoteThreshold;
-                if (remote)
-                {
-                    var first = await FetchFromSqlAsync(string.Empty, token,0);
-                    if (token.IsCancellationRequested) return;
-                    _pageCache[0] = first;
-                    AppendToCurrent(first, append: false);
-                    UpdateHasNext(0, first.Count);
-                }
-                else if (_localMaster.Count >0)
-                {
-                    _totalFilteredCount = _localMaster.Count;
-                    var pageData = _localMaster.Take(RemoteTake).ToList();
-                    _pageCache[0] = pageData;
-                    _pageCache[-1] = new List<ComboRecord>();
-                    AppendToCurrent(pageData, append: false);
-                    UpdateHasNext(0, pageData.Count);
-                }
-                else
-                {
-                    HasNextPage = false;
-                    AppendToCurrent(Array.Empty<ComboRecord>(), append: false);
-                }
+                HasNextPage = false;
                 return;
             }
 
             await AppendPageAsync(0, token);
+
+            // Ensure first record is selected/highlighted after load
+            if (!token.IsCancellationRequested && _listBox != null && _currentItems.Count >0 && _listBox.SelectedIndex <0)
+            {
+                _listBox.SelectedIndex =0;
+                var first = _currentItems[0];
+                SelectedId = first.IdNo;
+                SelectedCode = first.Code;
+                SelectedName = first.Name;
+                UpdateSelectedValueFromRecord(first);
+                _listBox.ScrollIntoView(first);
+            }
         }
 
         private async Task AppendPageAsync(int pageIndex, CancellationToken token = default)
         {
             if (token.IsCancellationRequested) return;
 
-            // allow remote unfiltered fetch when below MinSearchLength
+            // abort if current filter below threshold
             if ((_lastFilter ?? string.Empty).Trim().Length < MinSearchLength)
             {
-                bool remote = UseRemoteFetch || (_localMaster.Count ==0 && IsRemoteConfigured) || _localMaster.Count > AutoRemoteThreshold;
-                bool appendMode = pageIndex >0;
-                if (appendMode) _appendInsertIndex = _currentItems.Count;
-
-                if (remote)
-                {
-                    var pageDataRemote = await FetchFromSqlAsync(string.Empty, token, pageIndex);
-                    if (token.IsCancellationRequested) return;
-                    _pageCache[pageIndex] = pageDataRemote;
-                    UpdateHasNext(pageIndex, pageDataRemote.Count);
-                    AppendToCurrent(pageDataRemote, append: appendMode);
-                }
-                else if (_localMaster.Count >0)
-                {
-                    _totalFilteredCount = _localMaster.Count;
-                    var pageDataLocal = _localMaster.Skip(pageIndex * RemoteTake).Take(RemoteTake).ToList();
-                    _pageCache[pageIndex] = pageDataLocal;
-                    _pageCache[-1] = new List<ComboRecord>();
-                    UpdateHasNext(pageIndex, pageDataLocal.Count);
-                    AppendToCurrent(pageDataLocal, append: appendMode);
-                }
-                else
-                {
-                    HasNextPage = false;
-                    AppendToCurrent(Array.Empty<ComboRecord>(), append: false);
-                }
+                HasNextPage = false;
                 return;
             }
+            // For pages >0 do not auto-select first
+            if (pageIndex >0) _forceFirstSelectionOnLoad = false;
+            // Decide mode once per call
+            bool remote = UseRemoteFetch || (_localMaster.Count ==0 && IsRemoteConfigured) || _localMaster.Count > AutoRemoteThreshold;
 
-            // already cached?
-            if (_pageCache.TryGetValue(pageIndex, out var cached))
+            if (remote)
             {
-                bool appendMode = pageIndex >0;
-                if (appendMode) _appendInsertIndex = _currentItems.Count;
-                AppendToCurrent(cached, append: appendMode);
-                UpdateHasNext(pageIndex, cached.Count);
-                return;
-            }
-
-            IsBusy = true;
-            try
-            {
-                bool remote = UseRemoteFetch || (_localMaster.Count ==0 && IsRemoteConfigured) || _localMaster.Count > AutoRemoteThreshold;
-
-                List<ComboRecord> pageData;
-                if (remote)
+                IsBusy = true;
+                try
                 {
-                    pageData = await FetchFromSqlAsync(_lastFilter, token, pageIndex);
-                    if (!string.IsNullOrWhiteSpace(_lastFilter))
-                    {
-                        pageData = pageData.Where(r => r.Matches(_lastFilter)).ToList();
-                    }
+                    List<ComboRecord> pageData = await FetchFromSqlAsync(_lastFilter, token, pageIndex);
                     if (token.IsCancellationRequested) return;
+                    // Avoid redundant extra in-memory filtering for remote data
                     _pageCache[pageIndex] = pageData;
                     UpdateHasNext(pageIndex, pageData.Count);
-                }
-                else
-                {
-                    var allFiltered = _localMaster.Where(r => r.Matches(_lastFilter)).ToList();
-                    _totalFilteredCount = allFiltered.Count;
-                    var pageDataLocal = allFiltered.Skip(pageIndex * RemoteTake).Take(RemoteTake).ToList();
-                    pageData = pageDataLocal;
-                    _pageCache[pageIndex] = pageDataLocal;
-                    _pageCache[-1] = new List<ComboRecord>();
-                    UpdateHasNext(pageIndex, pageDataLocal.Count);
-                }
 
-                bool appendMode = pageIndex >0;
-                if (appendMode) _appendInsertIndex = _currentItems.Count;
-                AppendToCurrent(pageData, append: appendMode);
+                    bool appendMode = _pagingDown && pageIndex >0;
+                    if (appendMode) _appendInsertIndex = _currentItems.Count;
+                    AppendToCurrent(pageData, append: appendMode);
+                }
+                finally
+                {
+                    IsBusy = false;
+                }
             }
-            finally
+            else
             {
-                IsBusy = false;
+                // Local filtering off the UI thread; keep current items visible until complete
+                var filterSnapshot = _lastFilter;
+                var indexSnapshot = pageIndex;
+                IsBusy = true;
+
+                await Task.Run(() =>
+                {
+                    var allFiltered = _localMaster.Where(r => r.Matches(filterSnapshot)).ToList();
+                    var pageDataLocal = allFiltered.Skip(indexSnapshot * RemoteTake).Take(RemoteTake).ToList();
+                    return (total: allFiltered.Count, page: pageDataLocal);
+                }).ContinueWith(t =>
+                {
+                    try
+                    {
+                        if (token.IsCancellationRequested || filterSnapshot != _lastFilter) return;
+
+                        _totalFilteredCount = t.Result.total;
+                        var pageDataLocal = t.Result.page;
+                        _pageCache[indexSnapshot] = pageDataLocal;
+                        _pageCache[-1] = new List<ComboRecord>();
+                        UpdateHasNext(indexSnapshot, pageDataLocal.Count);
+
+                        bool appendMode = _pagingDown && indexSnapshot >0;
+                        if (appendMode) _appendInsertIndex = _currentItems.Count;
+                        AppendToCurrent(pageDataLocal, append: appendMode);
+                    }
+                    finally
+                    {
+                        IsBusy = false;
+                    }
+                }, TaskScheduler.FromCurrentSynchronizationContext());
             }
+        }
+
+        private void EnsureListBoxSelection(object previousId = null)
+        {
+            if (_listBox == null) return;
+            if (_currentItems.Count ==0)
+            {
+                _listBox.SelectedIndex = -1;
+                return;
+            }
+
+            // Try restore previous by Id
+            if (previousId != null)
+            {
+                var restored = _currentItems.FirstOrDefault(r => EqualsSafe(r.IdNo, previousId));
+                if (restored != null)
+                {
+                    _listBox.SelectedItem = restored;
+                    _listBox.ScrollIntoView(restored);
+                    return;
+                }
+            }
+
+            // Keep existing selection if still present
+            if (_listBox.SelectedItem is ComboRecord existing && _currentItems.Contains(existing))
+            {
+                _listBox.ScrollIntoView(existing);
+                return;
+            }
+
+            // If externally bound SelectedId matches any item select it
+            if (SelectedId != null)
+            {
+                var match = _currentItems.FirstOrDefault(r => EqualsSafe(r.IdNo, SelectedId));
+                if (match != null)
+                {
+                    _listBox.SelectedItem = match;
+                    _listBox.ScrollIntoView(match);
+                    return;
+                }
+            }
+
+            // Do NOT force select first item anymore; leave no selection for clarity
+            _listBox.SelectedIndex = -1;
         }
 
         private void AppendToCurrent(IEnumerable<ComboRecord> records, bool append = false)
         {
+            object previousId = SelectedId; // try retain selection across refresh
             if (!append)
                 _currentItems.Clear();
             foreach (var r in records)
                 _currentItems.Add(r);
+
+            if (_listBox != null && _forceFirstSelectionOnLoad && !append && _currentItems.Count >0)
+            {
+                var first = _currentItems[0];
+                _listBox.SelectedIndex =0;
+                SelectedId = first.IdNo;
+                SelectedCode = first.Code;
+                SelectedName = first.Name;
+                UpdateSelectedValueFromRecord(first);
+                _listBox.ScrollIntoView(first);
+                _forceFirstSelectionOnLoad = false; // consumed
+                return; // explicit selection done
+            }
+
+            // After updating collection ensure a selection exists / restored
+            EnsureListBoxSelection(previousId);
         }
 
         private void UpdateHasNext(int pageIndex, int pageCount)
@@ -924,7 +1154,7 @@ namespace AATM.UI.Controls
             if (_listBox == null) return;
             var path = SelectedValuePath;
             var selVal = SelectedValue;
-            if (string.IsNullOrWhiteSpace(path) || selVal == null) return;
+            if (string.IsNullOrWhiteSpace(path) || selVal == null) { EnsureListBoxSelection(); return; }
 
             var match = _localMaster.FirstOrDefault(r => EqualsSafe(GetValueByPath(r, path), selVal));
             if (match != null)
@@ -941,6 +1171,7 @@ namespace AATM.UI.Controls
                     Text = display;
                 }
                 HasNextPage = false;
+                EnsureListBoxSelection();
             }
         }
 
@@ -1016,8 +1247,15 @@ namespace AATM.UI.Controls
             var text = _textBox.Text ?? string.Empty;
             Text = text;
 
-            if (UseRemoteFetch || text.Trim().Length >= MinSearchLength)
-                IsDropDownOpen = true;
+            // Below threshold: ensure dropdown closed and do not search
+            if (!ShouldActivateDropDown(text))
+            {
+                if (IsDropDownOpen) IsDropDownOpen = false;
+                _debounce?.Stop();
+                return;
+            }
+
+            if (!IsDropDownOpen) IsDropDownOpen = true;
 
             if (_debounce == null)
             {
@@ -1034,6 +1272,28 @@ namespace AATM.UI.Controls
             }
             _debounce.Stop();
             _debounce.Start();
+        }
+
+        private void Popup_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (_listBox == null) return;
+            if (e.Key == Key.Up)
+            {
+                // if ((_listBox.SelectedIndex <=0) && PageIndex ==0)
+                if (_listBox.SelectedIndex <= 0) 
+                {
+                    // at very top: keep dropdown open and selection fixed
+                    e.Handled = true;
+                }
+            }
+            else if (e.Key == Key.Down)
+            {
+                if ((_listBox.SelectedIndex >= _currentItems.Count -1) && !HasNextPage)
+                {
+                    // at very bottom: keep dropdown open and selection fixed
+                    e.Handled = true;
+                }
+            }
         }
     }
 }
