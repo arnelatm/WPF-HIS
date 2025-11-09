@@ -576,12 +576,12 @@ namespace AATM.UI.Controls
             {
                 if (_listBox.SelectedIndex <=0)
                 {
-                    if (PageIndex >0)
-                    {
-                        _pendingPageDown = false;
-                        _pendingPageUp = true;
-                        PageIndex--;
-                    }
+                    //if (PageIndex >0)
+                    //{
+                    //    _pendingPageDown = false;
+                    //    _pendingPageUp = true;
+                    //    PageIndex--;
+                    //}
                     e.Handled = true;
                     return;
                 }
