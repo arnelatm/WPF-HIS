@@ -46,6 +46,8 @@
                                                Margin="4,2"/>
                                     <ListBox x:Name="PART_ListBox"
                                              IsSynchronizedWithCurrentItem="True"
+                                             VirtualizingStackPanel.VirtualizationMode="Recycling"
+                                             ScrollViewer.CanContentScroll="True"
                                              KeyboardNavigation.TabNavigation="Continue"
                                              />
                                 </StackPanel>
