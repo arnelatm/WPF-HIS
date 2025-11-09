@@ -38,19 +38,35 @@
                                Focusable="False">
                             <Border Background="White" BorderBrush="Gray" BorderThickness="1"
                                     MinWidth="{Binding ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SmartComboBox}}">
-                                <StackPanel>
-                                    <TextBlock x:Name="PART_BusyText"
-                                               Foreground="Gray"
-                                               FontStyle="Italic"
-                                               Visibility="Collapsed"
-                                               Margin="4,2"/>
-                                    <ListBox x:Name="PART_ListBox"
-                                             IsSynchronizedWithCurrentItem="True"
-                                             VirtualizingStackPanel.VirtualizationMode="Recycling"
-                                             ScrollViewer.CanContentScroll="True"
-                                             KeyboardNavigation.TabNavigation="Continue"
-                                             />
-                                </StackPanel>
+                                <DockPanel LastChildFill="True"
+                                           MaxHeight="{Binding MaxDropDownHeight, RelativeSource={RelativeSource TemplatedParent}}">
+                                    <StackPanel DockPanel.Dock="Top">
+                                        <TextBlock x:Name="PART_BusyText"
+                                                   Foreground="Gray"
+                                                   FontStyle="Italic"
+                                                   Visibility="Collapsed"
+                                                   Margin="4,2"/>
+                                    </StackPanel>
+                                    <!-- ScrollViewer ensures vertical scrollbar is available -->
+                                    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                                                  HorizontalScrollBarVisibility="Disabled"
+                                                  CanContentScroll="True">
+                                        <ListBox x:Name="PART_ListBox"
+                                                 IsSynchronizedWithCurrentItem="True"
+                                                 VirtualizingStackPanel.IsVirtualizing="True"
+                                                 VirtualizingStackPanel.VirtualizationMode="Recycling"
+                                                 ScrollViewer.CanContentScroll="True"
+                                                 KeyboardNavigation.TabNavigation="Continue"/>
+                                    </ScrollViewer>
+                                    <!-- Hide load more button completely -->
+                                    <Button x:Name="PART_LoadMore"
+                                            Content="Load more"
+                                            Margin="4,2,4,4"
+                                            Height="0"
+                                            Visibility="Collapsed"
+                                            IsEnabled="False"
+                                            HorizontalAlignment="Stretch"/>
+                                </DockPanel>
                             </Border>
                         </Popup>
                     </Grid>
