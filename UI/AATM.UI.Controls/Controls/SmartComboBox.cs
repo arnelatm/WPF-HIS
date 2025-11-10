@@ -432,8 +432,8 @@ namespace AATM.UI.Controls
                         KeyboardNavigation.SetDirectionalNavigation(child, KeyboardNavigationMode.Contained);
                         KeyboardNavigation.SetTabNavigation(child, KeyboardNavigationMode.Contained);
                     }
-                    // Align popup to keep right edge fixed and ensure min width
-                    AlignPopupRightEdge();
+                    // Align popup to keep right edge fixed and ensure min width (deferred so layout can settle)
+                    AlignPopupRightEdgeDeferred();
                 };
                 _popup.Closed += (_, __) =>
                 {
@@ -467,6 +467,8 @@ namespace AATM.UI.Controls
                 _listBox.PreviewKeyDown += ListBox_PreviewKeyDown;
                 // Keep popup aligned when list content size changes
                 _listBox.SizeChanged += (_, __) => AlignPopupRightEdgeDeferred();
+                if (_listBorder != null)
+                _listBorder.SizeChanged += (_, __) => AlignPopupRightEdgeDeferred();
             }
 
             if (_textBox != null)
@@ -1396,22 +1398,28 @@ namespace AATM.UI.Controls
 
                 // Ensure popup is placed relative to the entire control so right edge aligns with control (includes button)
                 _popup.PlacementTarget = this;
+                _popup.Placement = PlacementMode.Bottom;
 
                 // Ensure min width equals control width so dropdown never narrower than the full control (textbox + button)
                 _listBorder.MinWidth = this.ActualWidth;
 
-                // If border hasn't been measured yet, force a measure pass
+                // If border hasn't been measured yet, force a measure/layout pass
                 if (double.IsNaN(_listBorder.ActualWidth) || _listBorder.ActualWidth ==0)
                 {
                     _listBorder.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+                    _listBorder.UpdateLayout();
                 }
 
-                // Compute horizontal offset so right edges align: offset = controlWidth - listWidth
+                // Compute horizontal placement so right edges align.
                 var ctrlWidth = this.ActualWidth;
                 var listWidth = Math.Max(_listBorder.ActualWidth, ctrlWidth);
-                var offset = ctrlWidth - listWidth;
-                // Apply offset to popup so it grows left when wider than control
-                _popup.HorizontalOffset = offset;
+
+                // Use PlacementRectangle anchored inside the target so the popup's right edge matches control's right edge.
+                // PlacementRectangle.X is relative to PlacementTarget; set it so rectangle's right == ctrlWidth.
+                double rectX = ctrlWidth - listWidth; // typically negative when list wider
+                _popup.PlacementRectangle = new Rect(rectX,0, listWidth,0);
+                // Clear any manual horizontal offset
+                _popup.HorizontalOffset =0;
             }
             catch (Exception ex)
             {
