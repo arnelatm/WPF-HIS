@@ -78,7 +78,7 @@ namespace AATM.UI.Controls
 
         public SmartComboBox()
         {
-            RemoteTake =20;
+            RemoteTake = 20;
             _currentItems.CollectionChanged += CurrentItems_CollectionChanged;
         }
 
@@ -331,7 +331,7 @@ namespace AATM.UI.Controls
         public void Close() => IsDropDownOpen = false;
 
         public static readonly DependencyProperty MaxDropDownHeightProperty =
-        DependencyProperty.Register(nameof(MaxDropDownHeight), typeof(double), typeof(SmartComboBox), new PropertyMetadata(300.0));
+        DependencyProperty.Register(nameof(MaxDropDownHeight), typeof(double), typeof(SmartComboBox), new PropertyMetadata(480.0));
 
         public double MaxDropDownHeight
         {
@@ -361,6 +361,16 @@ namespace AATM.UI.Controls
                 scb._lastPageIndex = newIndex;
                 _ = scb.AppendPageAsync(scb.PageIndex, scb._cts?.Token ?? CancellationToken.None);
             }
+        }
+
+        // 1. Add the dependency property
+        public static readonly DependencyProperty ShowAllOnBlankProperty =
+        DependencyProperty.Register(nameof(ShowAllOnBlank), typeof(bool), typeof(SmartComboBox), new PropertyMetadata(false));
+
+        public bool ShowAllOnBlank
+        {
+            get => (bool)GetValue(ShowAllOnBlankProperty);
+            set => SetValue(ShowAllOnBlankProperty, value);
         }
 
         #endregion
@@ -456,16 +466,23 @@ namespace AATM.UI.Controls
             {
                 _button.Click += (s, e) =>
                 {
+                    var text = _textBox?.Text?.Trim() ?? string.Empty;
                     if (!IsDropDownOpen)
                     {
-                        var len = _textBox?.Text?.Trim().Length ??0;
-                        if (len < MinSearchLength)
+                        // Show all records if ShowAllOnBlank is enabled and textbox is blank
+                        if (ShowAllOnBlank && string.IsNullOrEmpty(text))
+                        {
+                            IsDropDownOpen = true;
+                            _ = StartSearchAsync(string.Empty); // triggers search with empty filter
+                            return;
+                        }
+                        if (text.Length < MinSearchLength)
                         {
                             // Do not open; ignore click until threshold met
                             return;
                         }
                         IsDropDownOpen = true;
-                        _ = StartSearchAsync(_textBox?.Text ?? string.Empty);
+                        _ = StartSearchAsync(text);
                     }
                     else
                     {
@@ -766,13 +783,13 @@ namespace AATM.UI.Controls
             _lastFilter = trimmed;
 
             _suppressPageIndexChanged = true;
-            PageIndex =0;
+            PageIndex = 0;
             _suppressPageIndexChanged = false;
 
             if (token.IsCancellationRequested) return;
 
-            // If below threshold do not populate list
-            if (trimmed.Length < MinSearchLength)
+            // If below threshold do not populate list, unless ShowAllOnBlank is true and filter is blank
+            if (trimmed.Length < MinSearchLength && !(ShowAllOnBlank && string.IsNullOrEmpty(trimmed)))
             {
                 HasNextPage = false;
                 return;
@@ -781,9 +798,9 @@ namespace AATM.UI.Controls
             await AppendPageAsync(0, token);
 
             // Ensure first record is selected/highlighted after load
-            if (!token.IsCancellationRequested && _listBox != null && _currentItems.Count >0 && _listBox.SelectedIndex <0)
+            if (!token.IsCancellationRequested && _listBox != null && _currentItems.Count > 0 && _listBox.SelectedIndex < 0)
             {
-                _listBox.SelectedIndex =0;
+                _listBox.SelectedIndex = 0;
                 var first = _currentItems[0];
                 SelectedId = first.IdNo;
                 SelectedCode = first.Code;
@@ -797,8 +814,8 @@ namespace AATM.UI.Controls
         {
             if (token.IsCancellationRequested) return;
 
-            // abort if current filter below threshold
-            if ((_lastFilter ?? string.Empty).Trim().Length < MinSearchLength)
+            // abort if current filter below threshold, unless ShowAllOnBlank is true and filter is blank
+            if ((_lastFilter ?? string.Empty).Trim().Length < MinSearchLength && !(ShowAllOnBlank && string.IsNullOrEmpty(_lastFilter)))
             {
                 HasNextPage = false;
                 return;

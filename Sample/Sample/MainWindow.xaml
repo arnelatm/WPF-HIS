@@ -10,13 +10,16 @@
         <local:SmartComboBox x:Name="sqlCombo"
                          Placeholder="Search customer..."
                          UseRemoteFetch="True"
-                         Height="36"
+                         RemoteTake="20"
+                         Height="30"
+                         MaxDropDownHeight="240"
                          ConnectionString="Server=Ibn-Server;Database=IspData;User Id=iGroupAdmin;Password=igss@123;Encrypt=True;TrustServerCertificate=True;"
                          SqlQueryTemplate="SELECT IdNo, ProductCode AS Code, ProductName AS Name FROM Product WHERE ProductCode + ProductName LIKE '%' + @filter + '%' ORDER BY ProductName"
                          SelectedId="{Binding SelectedCustomerId, Mode=TwoWay}"
                          SelectedCode="{Binding SelectedCustomerCode, Mode=TwoWay}"
                          SelectedName="{Binding SelectedCustomerName, Mode=TwoWay}"
-                         Margin="0,0,0,12"/>
+                         Margin="0,0,0,12"
+                         DebounceMilliseconds="300"/>
 
         <StackPanel Margin="0,8,0,0">
             <TextBlock Text="Selected:" FontWeight="Bold"/>
