@@ -41,7 +41,7 @@ namespace AATM.UI.Controls
 
         private CancellationTokenSource _cts;
         private List<ComboRecord> _localMaster = new();
-        private ObservableCollection<ComboRecord> _currentItems = new();
+        private BulkObservableCollection<ComboRecord> _currentItems = new();
         private readonly Dictionary<int, List<ComboRecord>> _pageCache = new();
         private int _totalFilteredCount;
         private ScrollViewer _scrollViewer;
@@ -84,6 +84,8 @@ namespace AATM.UI.Controls
 
         private void CurrentItems_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
+            if (_suspendCollectionChangedEvents) return; // skip heavy UI actions when batching
+
             if (_listBox != null && _currentItems.Count >0)
             {
                 if (_pendingPageDown)
@@ -93,7 +95,8 @@ namespace AATM.UI.Controls
                         :0;
                     _listBox.SelectedIndex = targetIndex;
                     _listBox.Focus();
-                    _listBox.ScrollIntoView(_listBox.SelectedItem);
+                    // Defer ScrollIntoView to let layout batch
+                    _ = _listBox.Dispatcher.BeginInvoke((Action)(() => _listBox.ScrollIntoView(_listBox.SelectedItem)), System.Windows.Threading.DispatcherPriority.Background);
                     _pendingPageDown = false;
                     _appendInsertIndex = -1;
                 }
@@ -102,9 +105,13 @@ namespace AATM.UI.Controls
                     // after loading previous page (replace), select last item
                     _listBox.SelectedIndex = _currentItems.Count -1;
                     _listBox.Focus();
-                    _listBox.ScrollIntoView(_listBox.SelectedItem);
+                    _ = _listBox.Dispatcher.BeginInvoke((Action)(() => _listBox.ScrollIntoView(_listBox.SelectedItem)), System.Windows.Threading.DispatcherPriority.Background);
                     _pendingPageUp = false;
                 }
+            }
+            else if (_listBox != null && _currentItems.Count ==0)
+            {
+                _listBox.SelectedIndex = -1;
             }
         }
 
@@ -389,6 +396,9 @@ namespace AATM.UI.Controls
             _popup = GetTemplateChild("PART_Popup") as Popup;
             _busyText = GetTemplateChild("PART_BusyText") as TextBlock;
             _loadMoreButton = GetTemplateChild("PART_LoadMore") as Button; // cache
+            // new: named border used to control popup width/alignment
+            var listBorder = GetTemplateChild("PART_ListBorder") as Border;
+            _listBorder = listBorder;
 
             if (_loadMoreButton != null)
             {
@@ -422,6 +432,8 @@ namespace AATM.UI.Controls
                         KeyboardNavigation.SetDirectionalNavigation(child, KeyboardNavigationMode.Contained);
                         KeyboardNavigation.SetTabNavigation(child, KeyboardNavigationMode.Contained);
                     }
+                    // Align popup to keep right edge fixed and ensure min width
+                    AlignPopupRightEdge();
                 };
                 _popup.Closed += (_, __) =>
                 {
@@ -453,6 +465,8 @@ namespace AATM.UI.Controls
                 };
                 _listBox.Loaded += (_, _) => AttachScrollViewer();
                 _listBox.PreviewKeyDown += ListBox_PreviewKeyDown;
+                // Keep popup aligned when list content size changes
+                _listBox.SizeChanged += (_, __) => AlignPopupRightEdgeDeferred();
             }
 
             if (_textBox != null)
@@ -460,6 +474,8 @@ namespace AATM.UI.Controls
                 _textBox.TextChanged += TextBox_TextChanged;
                 _textBox.PreviewKeyDown += TextBox_PreviewKeyDown;
                 if (_textBox.Text != Text) _textBox.Text = Text;
+                // Recalculate popup alignment when control size changes (align to control right edge including button)
+                this.SizeChanged += (_, __) => AlignPopupRightEdgeDeferred();
             }
 
             if (_button != null)
@@ -509,8 +525,7 @@ namespace AATM.UI.Controls
 
             if (e.Key == Key.Down)
             {
-                // If at last item
-                if (_listBox.SelectedIndex == _currentItems.Count -1)
+                if (_listBox.SelectedIndex == _currentItems.Count - 1)
                 {
                     if (HasNextPage)
                     {
@@ -518,21 +533,24 @@ namespace AATM.UI.Controls
                         _appendInsertIndex = _currentItems.Count;
                         PageIndex++;
                         e.Handled = true;
-                        return;
                     }
-                    e.Handled = true; // stay at last
+                    else
+                    {
+                        // At last item, do nothing
+                        e.Handled = true;
+                    }
                     return;
                 }
-                if (_listBox.SelectedIndex < _currentItems.Count -1 && _listBox.SelectedIndex >=0)
+                if (_listBox.SelectedIndex < _currentItems.Count - 1 && _listBox.SelectedIndex >= 0)
                 {
                     _listBox.SelectedIndex++;
                     _listBox.ScrollIntoView(_listBox.SelectedItem);
                     e.Handled = true;
                     return;
                 }
-                if (_listBox.SelectedIndex <0 && _currentItems.Count >0)
+                if (_listBox.SelectedIndex < 0 && _currentItems.Count > 0)
                 {
-                    _listBox.SelectedIndex =0;
+                    _listBox.SelectedIndex = 0;
                     _listBox.ScrollIntoView(_listBox.SelectedItem);
                     e.Handled = true;
                     return;
@@ -540,19 +558,19 @@ namespace AATM.UI.Controls
             }
             else if (e.Key == Key.Up)
             {
-                // At top of first page: lock selection at0
-                if (_listBox.SelectedIndex <=0 && PageIndex ==0)
+                if (_listBox.SelectedIndex <= 0 && PageIndex == 0)
                 {
-                    if (_listBox.SelectedIndex !=0 && _currentItems.Count >0)
+                    // Only set selection if not already at 0
+                    if (_listBox.SelectedIndex != 0 && _currentItems.Count > 0)
                     {
-                        _listBox.SelectedIndex =0;
+                        _listBox.SelectedIndex = 0;
                         _listBox.ScrollIntoView(_listBox.SelectedItem);
                     }
+                    // Do NOT set focus or scroll again if already at 0
                     e.Handled = true;
                     return;
                 }
-                // Previous page
-                if (_listBox.SelectedIndex ==0 && PageIndex >0)
+                if (_listBox.SelectedIndex == 0 && PageIndex > 0)
                 {
                     _pendingPageDown = false;
                     _pendingPageUp = true;
@@ -560,8 +578,7 @@ namespace AATM.UI.Controls
                     e.Handled = true;
                     return;
                 }
-                // Move up within page
-                if (_listBox.SelectedIndex >0)
+                if (_listBox.SelectedIndex > 0)
                 {
                     _listBox.SelectedIndex--;
                     _listBox.ScrollIntoView(_listBox.SelectedItem);
@@ -624,21 +641,21 @@ namespace AATM.UI.Controls
             }
         }
 
-        protected override void OnPreviewKeyDown(KeyEventArgs e)
-        {
-            // At top, user wants pointer/highlighter to move to last item instead of staying at first
-            if (IsDropDownOpen && e.Key == Key.Up && _listBox != null && PageIndex ==0 && _listBox.SelectedIndex <=0)
-            {
-                if (_currentItems.Count >0)
-                {
-                    _listBox.SelectedIndex = _currentItems.Count -1; // move highlight to last record
-                    _listBox.ScrollIntoView(_listBox.SelectedItem);
-                }
-                e.Handled = true;
-                return;
-            }
-            base.OnPreviewKeyDown(e);
-        }
+        //protected override void OnPreviewKeyDown(KeyEventArgs e)
+        //{
+        //    // At top, user wants pointer/highlighter to move to last item instead of staying at first
+        //    if (IsDropDownOpen && e.Key == Key.Up && _listBox != null && PageIndex ==0 && _listBox.SelectedIndex <=0)
+        //    {
+        //        if (_currentItems.Count >0)
+        //        {
+        //            _listBox.SelectedIndex = _currentItems.Count -1; // move highlight to last record
+        //            _listBox.ScrollIntoView(_listBox.SelectedItem);
+        //        }
+        //        e.Handled = true;
+        //        return;
+        //    }
+        //    base.OnPreviewKeyDown(e);
+        //}
 
         private void AttachScrollViewer()
         {
@@ -925,14 +942,35 @@ namespace AATM.UI.Controls
             _listBox.SelectedIndex = -1;
         }
 
+        private bool _suspendCollectionChangedEvents = false; // new: suppress handler during bulk updates
+
         private void AppendToCurrent(IEnumerable<ComboRecord> records, bool append = false)
         {
             object previousId = SelectedId; // try retain selection across refresh
-            if (!append)
-                _currentItems.Clear();
-            foreach (var r in records)
-                _currentItems.Add(r);
 
+            var newList = records?.ToList() ?? new List<ComboRecord>();
+
+            // If there is nothing to add and not replacing, leave as-is
+            if (!append && newList.Count ==0)
+            {
+                // ensure selection restored
+                EnsureListBoxSelection(previousId);
+                return;
+            }
+
+            // Use BulkObservableCollection operations so the ListBox receives a single Reset notification
+            if (!append)
+            {
+                _currentItems.ReplaceAll(newList);
+            }
+            else
+            {
+                // remember where append starts so selection can be restored
+                _appendInsertIndex = _currentItems.Count;
+                _currentItems.AddRange(newList);
+            }
+
+            // After replacing collection, perform selection logic on UI thread and defer ScrollIntoView
             if (_listBox != null && _forceFirstSelectionOnLoad && !append && _currentItems.Count >0)
             {
                 var first = _currentItems[0];
@@ -941,13 +979,41 @@ namespace AATM.UI.Controls
                 SelectedCode = first.Code;
                 SelectedName = first.Name;
                 UpdateSelectedValueFromRecord(first);
-                _listBox.ScrollIntoView(first);
+                // Defer scrolling to batch layout
+                _ = _listBox.Dispatcher.BeginInvoke((Action)(() => _listBox.ScrollIntoView(first)), System.Windows.Threading.DispatcherPriority.Background);
                 _forceFirstSelectionOnLoad = false; // consumed
                 return; // explicit selection done
             }
 
-            // After updating collection ensure a selection exists / restored
-            EnsureListBoxSelection(previousId);
+            // If a pending page-down/up intent exists, ensure selection reflects that immediately
+            if (_listBox != null)
+            {
+                if (_pendingPageDown)
+                {
+                    var targetIndex = (_appendInsertIndex >=0 && _appendInsertIndex < _currentItems.Count) ? _appendInsertIndex :0;
+                    _listBox.SelectedIndex = targetIndex;
+                    _listBox.Focus();
+                    _ = _listBox.Dispatcher.BeginInvoke((Action)(() => _listBox.ScrollIntoView(_listBox.SelectedItem)), System.Windows.Threading.DispatcherPriority.Background);
+                    _pendingPageDown = false;
+                    _appendInsertIndex = -1;
+                }
+                else if (_pendingPageUp)
+                {
+                    _listBox.SelectedIndex = _currentItems.Count -1;
+                    _listBox.Focus();
+                    _ = _listBox.Dispatcher.BeginInvoke((Action)(() => _listBox.ScrollIntoView(_listBox.SelectedItem)), System.Windows.Threading.DispatcherPriority.Background);
+                    _pendingPageUp = false;
+                }
+                else
+                {
+                    // Defer EnsureListBoxSelection to allow the ItemsSource change to settle
+                    _ = _listBox.Dispatcher.BeginInvoke((Action)(() => EnsureListBoxSelection(previousId)), System.Windows.Threading.DispatcherPriority.Background);
+                }
+            }
+            else
+            {
+                EnsureListBoxSelection(previousId);
+            }
         }
 
         private void UpdateHasNext(int pageIndex, int pageCount)
@@ -1312,5 +1378,77 @@ namespace AATM.UI.Controls
                 }
             }
         }
+
+        private Border _listBorder;
+        
+        private void AlignPopupRightEdgeDeferred()
+        {
+            // run later so layout has settled
+            if (_popup == null) return;
+            _ = Dispatcher.BeginInvoke((Action)(() => AlignPopupRightEdge()), DispatcherPriority.Background);
+        }
+        
+        private void AlignPopupRightEdge()
+        {
+            try
+            {
+                if (_popup == null || _listBorder == null) return;
+
+                // Ensure popup is placed relative to the entire control so right edge aligns with control (includes button)
+                _popup.PlacementTarget = this;
+
+                // Ensure min width equals control width so dropdown never narrower than the full control (textbox + button)
+                _listBorder.MinWidth = this.ActualWidth;
+
+                // If border hasn't been measured yet, force a measure pass
+                if (double.IsNaN(_listBorder.ActualWidth) || _listBorder.ActualWidth ==0)
+                {
+                    _listBorder.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+                }
+
+                // Compute horizontal offset so right edges align: offset = controlWidth - listWidth
+                var ctrlWidth = this.ActualWidth;
+                var listWidth = Math.Max(_listBorder.ActualWidth, ctrlWidth);
+                var offset = ctrlWidth - listWidth;
+                // Apply offset to popup so it grows left when wider than control
+                _popup.HorizontalOffset = offset;
+            }
+            catch (Exception ex)
+            {
+                Log("AlignPopupRightEdge error: " + ex.Message);
+            }
+        }
+
+        // BulkObservableCollection supports AddRange/Reset with a single notification
+        private class BulkObservableCollection<T> : ObservableCollection<T>
+        {
+            public void AddRange(IEnumerable<T> items)
+            {
+                if (items == null) return;
+                CheckReentrancy();
+                bool any = false;
+                foreach (var it in items)
+                {
+                    Items.Add(it);
+                    any = true;
+                }
+                if (any)
+                {
+                    OnCollectionChanged(new System.Collections.Specialized.NotifyCollectionChangedEventArgs(System.Collections.Specialized.NotifyCollectionChangedAction.Reset));
+                }
+            }
+
+            public void ReplaceAll(IEnumerable<T> items)
+            {
+                CheckReentrancy();
+                Items.Clear();
+                if (items != null)
+                {
+                    foreach (var it in items) Items.Add(it);
+                }
+                OnCollectionChanged(new System.Collections.Specialized.NotifyCollectionChangedEventArgs(System.Collections.Specialized.NotifyCollectionChangedAction.Reset));
+            }
+        }
+
     }
 }

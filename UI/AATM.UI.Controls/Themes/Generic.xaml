@@ -40,7 +40,8 @@
                                StaysOpen="False"
                                AllowsTransparency="True"
                                Focusable="False">
-                            <Border Background="White" BorderBrush="Gray" BorderThickness="1"
+                            <!-- Name the border so code-behind can measure and align right edge -->
+                            <Border x:Name="PART_ListBorder" Background="White" BorderBrush="Gray" BorderThickness="1"
                                     MinWidth="{Binding ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SmartComboBox}}">
                                 <DockPanel LastChildFill="True"
                                            MaxHeight="{Binding MaxDropDownHeight, RelativeSource={RelativeSource TemplatedParent}}">
@@ -51,23 +52,21 @@
                                                    Visibility="Collapsed"
                                                    Margin="4,2"/>
                                     </StackPanel>
-                                    <!-- ScrollViewer ensures vertical scrollbar is available -->
-                                    <ScrollViewer VerticalScrollBarVisibility="Auto"
-                                                  HorizontalScrollBarVisibility="Disabled"
-                                                  CanContentScroll="True">
-                                        <ListBox x:Name="PART_ListBox"
-                                                 IsSynchronizedWithCurrentItem="True"
-                                                 VirtualizingStackPanel.IsVirtualizing="True"
-                                                 VirtualizingStackPanel.VirtualizationMode="Recycling"
-                                                 ScrollViewer.CanContentScroll="True"
-                                                 KeyboardNavigation.TabNavigation="Continue">
-                                            <ListBox.ItemContainerStyle>
-                                                <Style TargetType="ListBoxItem">
-                                                    <Setter Property="Height" Value="24"/> <!-- Set your desired row height here -->
-                                                </Style>
-                                            </ListBox.ItemContainerStyle>
-                                        </ListBox>
-                                    </ScrollViewer>
+                                    <!-- Use ListBox directly (do not wrap in external ScrollViewer) so virtualization works -->
+                                    <ListBox x:Name="PART_ListBox"
+                                             IsSynchronizedWithCurrentItem="True"
+                                             VirtualizingStackPanel.IsVirtualizing="True"
+                                             VirtualizingStackPanel.VirtualizationMode="Recycling"
+                                             ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                             ScrollViewer.CanContentScroll="True"
+                                             KeyboardNavigation.TabNavigation="Continue"
+                                             MaxHeight="{Binding MaxDropDownHeight, RelativeSource={RelativeSource TemplatedParent}}">
+                                        <ListBox.ItemContainerStyle>
+                                            <Style TargetType="ListBoxItem">
+                                                <Setter Property="Height" Value="24"/> <!-- Set your desired row height here -->
+                                            </Style>
+                                        </ListBox.ItemContainerStyle>
+                                    </ListBox>
                                     <!-- Hide load more button completely -->
                                     <Button x:Name="PART_LoadMore"
                                             Content="Load more"
