@@ -14,6 +14,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
 using Microsoft.Data.SqlClient;
+using System.Collections.Concurrent;
+using System.Reflection;
 
 namespace AATM.UI.Controls
 {
@@ -1217,12 +1219,10 @@ namespace AATM.UI.Controls
 
             if (raw != null)
             {
-                var p = raw.GetType().GetProperty(path);
-                if (p != null) return p.GetValue(raw);
+                if (ReflectionCache.TryGetPropValue(raw, path, out var val)) return val;
             }
 
-            var pr = cr.GetType().GetProperty(path);
-            if (pr != null) return pr.GetValue(cr);
+            if (ReflectionCache.TryGetPropValue(cr, path, out var selfVal)) return selfVal;
             return null;
         }
 
@@ -1325,18 +1325,16 @@ namespace AATM.UI.Controls
                     };
                 }
 
-                var t = obj.GetType();
-                var pId = t.GetProperty("IdNo");
-                var pCode = t.GetProperty("Code");
-                var pName = t.GetProperty("Name");
-                if (pId != null || pCode != null || pName != null)
+                // Cached reflection path
+                var map = ReflectionCache.Get(obj.GetType());
+                if (map.IdNoProp != null || map.CodeProp != null || map.NameProp != null)
                 {
                     return new ComboRecord
                     {
                         Raw = obj,
-                        IdNo = pId?.GetValue(obj),
-                        Code = pCode?.GetValue(obj)?.ToString() ?? "",
-                        Name = pName?.GetValue(obj)?.ToString() ?? ""
+                        IdNo = map.IdNoProp?.GetValue(obj),
+                        Code = map.CodeProp?.GetValue(obj)?.ToString() ?? "",
+                        Name = map.NameProp?.GetValue(obj)?.ToString() ?? ""
                     };
                 }
 
@@ -1433,6 +1431,47 @@ namespace AATM.UI.Controls
                     foreach (var it in items) Items.Add(it);
                 }
                 OnCollectionChanged(new System.Collections.Specialized.NotifyCollectionChangedEventArgs(System.Collections.Specialized.NotifyCollectionChangedAction.Reset));
+            }
+        }
+
+        // Reflection cache for fast property access
+        private static class ReflectionCache
+        {
+            internal sealed class CachedMap
+            {
+                public CachedMap(Type t)
+                {
+                    var props = t.GetProperties(BindingFlags.Instance | BindingFlags.Public);
+                    var dict = new Dictionary<string, PropertyInfo>(StringComparer.OrdinalIgnoreCase);
+                    foreach (var p in props)
+                    {
+                        dict[p.Name] = p;
+                        if (string.Equals(p.Name, "IdNo", StringComparison.OrdinalIgnoreCase)) IdNoProp = p;
+                        else if (string.Equals(p.Name, "Code", StringComparison.OrdinalIgnoreCase)) CodeProp = p;
+                        else if (string.Equals(p.Name, "Name", StringComparison.OrdinalIgnoreCase)) NameProp = p;
+                    }
+                    AllProps = dict;
+                }
+                public PropertyInfo IdNoProp { get; }
+                public PropertyInfo CodeProp { get; }
+                public PropertyInfo NameProp { get; }
+                public Dictionary<string, PropertyInfo> AllProps { get; }
+            }
+
+            private static readonly ConcurrentDictionary<Type, CachedMap> _maps = new();
+            public static CachedMap Get(Type t) => _maps.GetOrAdd(t, static tt => new CachedMap(tt));
+
+            public static bool TryGetPropValue(object obj, string propName, out object value)
+            {
+                value = null;
+                if (obj == null || string.IsNullOrWhiteSpace(propName)) return false;
+                var map = Get(obj.GetType());
+                if (map.AllProps.TryGetValue(propName, out var pi))
+                {
+                    value = pi.GetValue(obj);
+                    return true;
+                }
+                return false;
             }
         }
 
