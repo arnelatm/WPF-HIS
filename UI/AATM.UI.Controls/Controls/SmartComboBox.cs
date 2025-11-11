@@ -30,6 +30,7 @@ namespace AATM.UI.Controls
     [TemplatePart(Name = "PART_Popup", Type = typeof(Popup))]
     [TemplatePart(Name = "PART_BusyText", Type = typeof(TextBlock))]
     [TemplatePart(Name = "PART_LoadMore", Type = typeof(Button))] // added for load more paging
+    [TemplatePart(Name = "PART_ListBorder", Type = typeof(Border))] // ensure declared for template lookup
     public class SmartComboBox : Control
     {
         private TextBox _textBox;
@@ -38,6 +39,7 @@ namespace AATM.UI.Controls
         private Popup _popup;
         private TextBlock _busyText;
         private Button _loadMoreButton; // backing field for PART_LoadMore (kept for compatibility)
+        private Border _listBorder;
 
         private CancellationTokenSource _cts;
         private List<ComboRecord> _localMaster = new();
@@ -78,7 +80,7 @@ namespace AATM.UI.Controls
 
         public SmartComboBox()
         {
-            RemoteTake = 20;
+            RemoteTake =20;
             _currentItems.CollectionChanged += CurrentItems_CollectionChanged;
         }
 
@@ -396,9 +398,7 @@ namespace AATM.UI.Controls
             _popup = GetTemplateChild("PART_Popup") as Popup;
             _busyText = GetTemplateChild("PART_BusyText") as TextBlock;
             _loadMoreButton = GetTemplateChild("PART_LoadMore") as Button; // cache
-            // new: named border used to control popup width/alignment
-            var listBorder = GetTemplateChild("PART_ListBorder") as Border;
-            _listBorder = listBorder;
+            _listBorder = GetTemplateChild("PART_ListBorder") as Border;
 
             if (_loadMoreButton != null)
             {
@@ -432,8 +432,6 @@ namespace AATM.UI.Controls
                         KeyboardNavigation.SetDirectionalNavigation(child, KeyboardNavigationMode.Contained);
                         KeyboardNavigation.SetTabNavigation(child, KeyboardNavigationMode.Contained);
                     }
-                    // Align popup to keep right edge fixed and ensure min width (deferred so layout can settle)
-                    AlignPopupRightEdgeDeferred();
                 };
                 _popup.Closed += (_, __) =>
                 {
@@ -465,10 +463,6 @@ namespace AATM.UI.Controls
                 };
                 _listBox.Loaded += (_, _) => AttachScrollViewer();
                 _listBox.PreviewKeyDown += ListBox_PreviewKeyDown;
-                // Keep popup aligned when list content size changes
-                _listBox.SizeChanged += (_, __) => AlignPopupRightEdgeDeferred();
-                if (_listBorder != null)
-                _listBorder.SizeChanged += (_, __) => AlignPopupRightEdgeDeferred();
             }
 
             if (_textBox != null)
@@ -476,8 +470,6 @@ namespace AATM.UI.Controls
                 _textBox.TextChanged += TextBox_TextChanged;
                 _textBox.PreviewKeyDown += TextBox_PreviewKeyDown;
                 if (_textBox.Text != Text) _textBox.Text = Text;
-                // Recalculate popup alignment when control size changes (align to control right edge including button)
-                this.SizeChanged += (_, __) => AlignPopupRightEdgeDeferred();
             }
 
             if (_button != null)
@@ -527,7 +519,7 @@ namespace AATM.UI.Controls
 
             if (e.Key == Key.Down)
             {
-                if (_listBox.SelectedIndex == _currentItems.Count - 1)
+                if (_listBox.SelectedIndex == _currentItems.Count -1)
                 {
                     if (HasNextPage)
                     {
@@ -543,14 +535,14 @@ namespace AATM.UI.Controls
                     }
                     return;
                 }
-                if (_listBox.SelectedIndex < _currentItems.Count - 1 && _listBox.SelectedIndex >= 0)
+                if (_listBox.SelectedIndex < _currentItems.Count -1 && _listBox.SelectedIndex >=0)
                 {
                     _listBox.SelectedIndex++;
                     _listBox.ScrollIntoView(_listBox.SelectedItem);
                     e.Handled = true;
                     return;
                 }
-                if (_listBox.SelectedIndex < 0 && _currentItems.Count > 0)
+                if (_listBox.SelectedIndex <0 && _currentItems.Count >0)
                 {
                     _listBox.SelectedIndex = 0;
                     _listBox.ScrollIntoView(_listBox.SelectedItem);
@@ -560,7 +552,7 @@ namespace AATM.UI.Controls
             }
             else if (e.Key == Key.Up)
             {
-                if (_listBox.SelectedIndex <= 0 && PageIndex == 0)
+                if (_listBox.SelectedIndex <=0 && PageIndex ==0)
                 {
                     // Only set selection if not already at 0
                     if (_listBox.SelectedIndex != 0 && _currentItems.Count > 0)
@@ -1365,7 +1357,7 @@ namespace AATM.UI.Controls
             if (e.Key == Key.Up)
             {
                 // if ((_listBox.SelectedIndex <=0) && PageIndex ==0)
-                if (_listBox.SelectedIndex <= 0) 
+                if (_listBox.SelectedIndex <=0) 
                 {
                     // at very top: keep dropdown open and selection fixed
                     e.Handled = true;
@@ -1378,52 +1370,6 @@ namespace AATM.UI.Controls
                     // at very bottom: keep dropdown open and selection fixed
                     e.Handled = true;
                 }
-            }
-        }
-
-        private Border _listBorder;
-        
-        private void AlignPopupRightEdgeDeferred()
-        {
-            // run later so layout has settled
-            if (_popup == null) return;
-            _ = Dispatcher.BeginInvoke((Action)(() => AlignPopupRightEdge()), DispatcherPriority.Background);
-        }
-        
-        private void AlignPopupRightEdge()
-        {
-            try
-            {
-                if (_popup == null || _listBorder == null) return;
-
-                // Ensure popup is placed relative to the entire control so right edge aligns with control (includes button)
-                _popup.PlacementTarget = this;
-                _popup.Placement = PlacementMode.Bottom;
-
-                // Ensure min width equals control width so dropdown never narrower than the full control (textbox + button)
-                _listBorder.MinWidth = this.ActualWidth;
-
-                // If border hasn't been measured yet, force a measure/layout pass
-                if (double.IsNaN(_listBorder.ActualWidth) || _listBorder.ActualWidth ==0)
-                {
-                    _listBorder.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
-                    _listBorder.UpdateLayout();
-                }
-
-                // Compute horizontal placement so right edges align.
-                var ctrlWidth = this.ActualWidth;
-                var listWidth = Math.Max(_listBorder.ActualWidth, ctrlWidth);
-
-                // Use PlacementRectangle anchored inside the target so the popup's right edge matches control's right edge.
-                // PlacementRectangle.X is relative to PlacementTarget; set it so rectangle's right == ctrlWidth.
-                double rectX = ctrlWidth - listWidth; // typically negative when list wider
-                _popup.PlacementRectangle = new Rect(rectX,0, listWidth,0);
-                // Clear any manual horizontal offset
-                _popup.HorizontalOffset =0;
-            }
-            catch (Exception ex)
-            {
-                Log("AlignPopupRightEdge error: " + ex.Message);
             }
         }
 
