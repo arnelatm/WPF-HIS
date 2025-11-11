@@ -368,7 +368,9 @@ namespace AATM.UI.Controls
                 int newIndex = e.NewValue is int ni ? ni : scb.PageIndex;
                 scb._pagingDown = newIndex > oldIndex;
                 scb._lastPageIndex = newIndex;
-                _ = scb.AppendPageAsync(scb.PageIndex, scb._cts?.Token ?? CancellationToken.None);
+                // Important: use a non-cancellable token when paging via keyboard/scroll
+                // to avoid stale, cancelled CTS from previous searches blocking page fetch.
+                _ = scb.AppendPageAsync(scb.PageIndex, CancellationToken.None);
             }
         }
 
