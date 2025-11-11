@@ -867,17 +867,17 @@ namespace AATM.UI.Controls
 
                 await Task.Run(() =>
                 {
-                    var allFiltered = _localMaster.Where(r => r.Matches(filterSnapshot)).ToList();
-                    var pageDataLocal = allFiltered.Skip(indexSnapshot * RemoteTake).Take(RemoteTake).ToList();
-                    return (total: allFiltered.Count, page: pageDataLocal);
+                    var skip = indexSnapshot * RemoteTake;
+                    var result = FilterEngine.FilterPage(_localMaster, filterSnapshot, skip, RemoteTake);
+                    return result;
                 }).ContinueWith(t =>
                 {
                     try
                     {
                         if (token.IsCancellationRequested || filterSnapshot != _lastFilter) return;
 
-                        _totalFilteredCount = t.Result.total;
-                        var pageDataLocal = t.Result.page;
+                        _totalFilteredCount = t.Result.Total;
+                        var pageDataLocal = t.Result.Page;
                         _pageCache[indexSnapshot] = pageDataLocal;
                         _pageCache[-1] = new List<ComboRecord>();
                         UpdateHasNext(indexSnapshot, pageDataLocal.Count);
@@ -1260,14 +1260,44 @@ namespace AATM.UI.Controls
         {
             public object Raw { get; set; }
             public object IdNo { get; set; } = new object();
-            public string Code { get; set; } = string.Empty;
-            public string Name { get; set; } = string.Empty;
+
+            private string _code = string.Empty;
+            private string _name = string.Empty;
+
+            // Precomputed invariant-case versions to speed up matching
+            public string CodeUpper { get; private set; } = string.Empty;
+            public string NameUpper { get; private set; } = string.Empty;
+
+            public string Code
+            {
+                get => _code;
+                set
+                {
+                    _code = value ?? string.Empty;
+                    CodeUpper = _code.ToUpperInvariant();
+                }
+            }
+
+            public string Name
+            {
+                get => _name;
+                set
+                {
+                    _name = value ?? string.Empty;
+                    NameUpper = _name.ToUpperInvariant();
+                }
+            }
+
             public string Display => string.IsNullOrEmpty(Code) ? Name : $"{Code} - {Name}";
+
             public bool Matches(string filter)
             {
                 if (string.IsNullOrEmpty(filter)) return true;
-                return (Code?.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >=0) || (Name?.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >=0);
+                // Use precomputed invariant strings to keep comparisons fast and allocation-free per call
+                var f = filter.ToUpperInvariant();
+                return CodeUpper.AsSpan().IndexOf(f.AsSpan()) >=0 || NameUpper.AsSpan().IndexOf(f.AsSpan()) >=0;
             }
+
             public override string ToString() => Display;
             public static ComboRecord FromUnknown(object obj)
             {
@@ -1403,6 +1433,51 @@ namespace AATM.UI.Controls
                     foreach (var it in items) Items.Add(it);
                 }
                 OnCollectionChanged(new System.Collections.Specialized.NotifyCollectionChangedEventArgs(System.Collections.Specialized.NotifyCollectionChangedAction.Reset));
+            }
+        }
+
+        // Dedicated single-pass filter engine for local filtering
+        private static class FilterEngine
+        {
+            internal readonly struct Result
+            {
+                public Result(int total, List<ComboRecord> page)
+                {
+                    Total = total;
+                    Page = page;
+                }
+                public int Total { get; }
+                public List<ComboRecord> Page { get; }
+            }
+
+            public static Result FilterPage(List<ComboRecord> source, string filter, int skip, int take)
+            {
+                if (source == null || source.Count ==0)
+                    return new Result(0, new List<ComboRecord>());
+
+                // Normalize filter once (invariant, ordinal)
+                var fUpper = (filter ?? string.Empty).ToUpperInvariant();
+                var f = fUpper.AsSpan();
+                bool noFilter = f.Length ==0;
+
+                int total =0;
+                var page = new List<ComboRecord>(Math.Max(0, take));
+
+                for (int i =0; i < source.Count; i++)
+                {
+                    var rec = source[i];
+                    bool match = noFilter || rec.CodeUpper.AsSpan().IndexOf(f) >=0 || rec.NameUpper.AsSpan().IndexOf(f) >=0;
+                    if (!match) continue;
+
+                    // It's a match
+                    if (total >= skip && page.Count < take)
+                    {
+                        page.Add(rec);
+                    }
+                    total++;
+                }
+
+                return new Result(total, page);
             }
         }
 
