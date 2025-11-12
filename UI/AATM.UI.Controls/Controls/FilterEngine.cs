@@ -12,8 +12,14 @@ namespace AATM.UI.Controls
      Total = total;
  Page = page;
  }
+ /// <summary>
+ /// Gets the total number of matches for the filter.
+ /// </summary>
  public int Total { get; }
-   public List<ComboRecord> Page { get; }
+ /// <summary>
+ /// Gets the page of filtered ComboRecord results.
+ /// </summary>
+ public List<ComboRecord> Page { get; }
         }
 
    public static Result FilterPage(List<ComboRecord> source, string filter, int skip, int take)

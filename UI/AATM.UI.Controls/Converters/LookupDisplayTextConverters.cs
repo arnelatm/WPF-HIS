@@ -63,7 +63,9 @@ namespace AATM.UI.Controls.Converters
 
     public class EmployeeIdNoToDisplayTextConverter : IValueConverter
     {
-        // parameter optionally may be the collection (IEnumerable) if you update bindings later.
+        /// <summary>
+        /// Converts an employee IdNo to its display text using the provided collection or main ViewModel.
+        /// </summary>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (!(value is int idNo)) return string.Empty;
@@ -86,7 +88,9 @@ namespace AATM.UI.Controls.Converters
 
     public class SecurityGroupIdNoToDisplayTextConverter : IValueConverter
     {
-        // parameter optionally may be the collection (IEnumerable)
+        /// <summary>
+        /// Converts a security group IdNo to its display text using the provided collection or main ViewModel.
+        /// </summary>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (!(value is int idNo)) return string.Empty;
@@ -108,6 +112,9 @@ namespace AATM.UI.Controls.Converters
     // IMultiValueConverter variants: accept [id, collection]
     public class EmployeeIdNoToDisplayTextMultiConverter : IMultiValueConverter
     {
+        /// <summary>
+        /// Converts an employee IdNo to its display text using a collection (multi-binding).
+        /// </summary>
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             if (values == null || values.Length < 1) return string.Empty;
@@ -129,6 +136,9 @@ namespace AATM.UI.Controls.Converters
 
     public class SecurityGroupIdNoToDisplayTextMultiConverter : IMultiValueConverter
     {
+        /// <summary>
+        /// Converts a security group IdNo to its display text using a collection (multi-binding).
+        /// </summary>
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             if (values == null || values.Length < 1) return string.Empty;
@@ -150,7 +160,9 @@ namespace AATM.UI.Controls.Converters
 
     public class StringToIntConverter : IValueConverter
     {
-        // source -> target: convert string (UserDto.EmployeeIdNo) to int for SelectedValue
+        /// <summary>
+        /// Converts a string to int for SelectedValue binding.
+        /// </summary>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value == null) return 0;
@@ -159,7 +171,9 @@ namespace AATM.UI.Controls.Converters
             return 0;
         }
 
-        // target -> source: convert selected int back to string (UserDto expects string)
+        /// <summary>
+        /// Converts an int back to string for SelectedValue binding.
+        /// </summary>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value == null) return string.Empty;

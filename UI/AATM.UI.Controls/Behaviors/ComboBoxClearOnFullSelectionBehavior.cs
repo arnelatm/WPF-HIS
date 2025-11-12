@@ -12,7 +12,14 @@ namespace AATM.UI.Controls
             typeof(ComboBoxClearOnFullSelectionBehavior),
             new PropertyMetadata(false, OnIsEnabledChanged));
 
+        /// <summary>
+        /// Enables or disables clear-on-full-selection behavior for ComboBox.
+        /// </summary>
         public static void SetIsEnabled(DependencyObject element, bool value) => element.SetValue(IsEnabledProperty, value);
+
+        /// <summary>
+        /// Gets whether clear-on-full-selection behavior is enabled for ComboBox.
+        /// </summary>
         public static bool GetIsEnabled(DependencyObject element) => (bool)element.GetValue(IsEnabledProperty);
 
         public static readonly DependencyProperty ClearCommandProperty = DependencyProperty.RegisterAttached(
@@ -21,7 +28,14 @@ namespace AATM.UI.Controls
             typeof(ComboBoxClearOnFullSelectionBehavior),
             new PropertyMetadata(null));
 
+        /// <summary>
+        /// Sets the ICommand to execute when clearing the ComboBox value.
+        /// </summary>
         public static void SetClearCommand(DependencyObject element, ICommand value) => element.SetValue(ClearCommandProperty, value);
+
+        /// <summary>
+        /// Gets the ICommand to execute when clearing the ComboBox value.
+        /// </summary>
         public static ICommand GetClearCommand(DependencyObject element) => (ICommand)element.GetValue(ClearCommandProperty);
 
         public static readonly DependencyProperty ClearCommandParameterProperty = DependencyProperty.RegisterAttached(
@@ -30,7 +44,14 @@ namespace AATM.UI.Controls
             typeof(ComboBoxClearOnFullSelectionBehavior),
             new PropertyMetadata(null));
 
+        /// <summary>
+        /// Sets the command parameter for the clear command.
+        /// </summary>
         public static void SetClearCommandParameter(DependencyObject element, object value) => element.SetValue(ClearCommandParameterProperty, value);
+
+        /// <summary>
+        /// Gets the command parameter for the clear command.
+        /// </summary>
         public static object GetClearCommandParameter(DependencyObject element) => element.GetValue(ClearCommandParameterProperty);
 
         private static void OnIsEnabledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

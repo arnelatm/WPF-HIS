@@ -25,12 +25,21 @@ namespace AATM.UI.Controls
                 typeof(FilteredComboBoxBehavior),
                 new PropertyMetadata(null, OnMasterItemsSourceChanged));
 
+        /// <summary>
+        /// Gets or sets the master items source for filtering.
+        /// </summary>
         public static void SetMasterItemsSource(DependencyObject element, IEnumerable? value)
             => element.SetValue(MasterItemsSourceProperty, value);
 
+        /// <summary>
+        /// Gets the master items source for filtering.
+        /// </summary>
         public static IEnumerable? GetMasterItemsSource(DependencyObject element)
             => (IEnumerable?)element.GetValue(MasterItemsSourceProperty);
 
+        /// <summary>
+        /// Handles changes to the master items source and triggers filtering.
+        /// </summary>
         private static void OnMasterItemsSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             // When master list changes, reset filter if needed
@@ -49,12 +58,21 @@ namespace AATM.UI.Controls
                 typeof(FilteredComboBoxBehavior),
                 new PropertyMetadata(false, OnIsEnabledChanged));
 
+        /// <summary>
+        /// Enables or disables the filtered ComboBox behavior.
+        /// </summary>
         public static void SetIsEnabled(DependencyObject element, bool value)
             => element.SetValue(IsEnabledProperty, value);
 
+        /// <summary>
+        /// Gets whether the filtered ComboBox behavior is enabled.
+        /// </summary>
         public static bool GetIsEnabled(DependencyObject element)
             => (bool)element.GetValue(IsEnabledProperty);
 
+        /// <summary>
+        /// Handles changes to the IsEnabled attached property and attaches or detaches event handlers.
+        /// </summary>
         private static void OnIsEnabledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is ComboBox cb)
@@ -82,9 +100,15 @@ namespace AATM.UI.Controls
                 typeof(FilteredComboBoxBehavior),
                 new PropertyMetadata(120));
 
+        /// <summary>
+        /// Sets the debounce interval for filtering in milliseconds.
+        /// </summary>
         public static void SetFilterDebounceMilliseconds(DependencyObject element, int value)
             => element.SetValue(FilterDebounceMillisecondsProperty, value);
 
+        /// <summary>
+        /// Gets the debounce interval for filtering in milliseconds.
+        /// </summary>
         public static int GetFilterDebounceMilliseconds(DependencyObject element)
             => (int)element.GetValue(FilterDebounceMillisecondsProperty);
 
@@ -96,11 +120,17 @@ namespace AATM.UI.Controls
                 typeof(FilteredComboBoxBehavior),
                 new PropertyMetadata(false));
 
+        /// <summary>
+        /// Gets whether the ComboBox is busy filtering.
+        /// </summary>
         public static bool GetIsBusy(DependencyObject obj)
         {
             return (bool)obj.GetValue(IsBusyProperty);
         }
 
+        /// <summary>
+        /// Sets whether the ComboBox is busy filtering.
+        /// </summary>
         public static void SetIsBusy(DependencyObject obj, bool value)
         {
             obj.SetValue(IsBusyProperty, value);
@@ -112,6 +142,7 @@ namespace AATM.UI.Controls
         private static readonly HashSet<ComboBox> _suppressFilterOnDropDownOpen = new();
         private static readonly Dictionary<ComboBox, Popup?> _popupMap = new();
         private static readonly Dictionary<ComboBox, PreProcessInputEventHandler> _preInputHandlers = new();
+        private static readonly Dictionary<ComboBox, Queue<string>> _recentEvents = new();
 
         // mouse-suppression maps and window map
         private static readonly Dictionary<ComboBox, bool> _suppressNextMouseDown = new();
@@ -126,6 +157,9 @@ namespace AATM.UI.Controls
         private static Key? _lastKey = null;
         private static DateTime _lastKeyTime = DateTime.MinValue;
 
+        /// <summary>
+        /// Handles the ComboBox Loaded event and attaches filtering handlers.
+        /// </summary>
         private static void ComboBox_Loaded(object? sender, RoutedEventArgs e)
         {
             if (sender is ComboBox cb)
@@ -135,6 +169,9 @@ namespace AATM.UI.Controls
             }
         }
 
+        /// <summary>
+        /// Handles the ComboBox Unloaded event and detaches filtering handlers.
+        /// </summary>
         private static void ComboBox_Unloaded(object? sender, RoutedEventArgs e)
         {
             if (sender is ComboBox cb)
@@ -144,6 +181,9 @@ namespace AATM.UI.Controls
             }
         }
 
+        /// <summary>
+        /// Attaches all necessary event handlers for filtering and keyboard/mouse logic.
+        /// </summary>
         private static void AttachHandlers(ComboBox cb)
         {
             Log($"AttachHandlers {GetName(cb)}");
@@ -196,6 +236,9 @@ namespace AATM.UI.Controls
             RecordRecentEvent(cb, "AttachHandlers: handlers attached");
         }
 
+        /// <summary>
+        /// Detaches all event handlers and cleans up resources for the ComboBox.
+        /// </summary>
         private static void DetachHandlers(ComboBox cb)
         {
             Log($"DetachHandlers {GetName(cb)}");
@@ -238,6 +281,9 @@ namespace AATM.UI.Controls
             RecordRecentEvent(cb, "DetachHandlers: handlers removed");
         }
 
+        /// <summary>
+        /// Handles text input events to trigger filtering and open the dropdown.
+        /// </summary>
         private static void Combo_PreviewTextInput(object? sender, TextCompositionEventArgs e)
         {
             if (sender is not ComboBox cb) return;
@@ -258,6 +304,9 @@ namespace AATM.UI.Controls
             }), DispatcherPriority.Input);
         }
 
+        /// <summary>
+        /// Handles key down events on the ComboBox to support navigation and filtering.
+        /// </summary>
         private static void Combo_PreviewKeyDown(object? sender, KeyEventArgs e)
         {
             if (sender is not ComboBox cb) return;
@@ -316,7 +365,9 @@ namespace AATM.UI.Controls
             }
         }
 
-        // Handle key input coming from the editable TextBox (when it has keyboard focus)
+        /// <summary>
+        /// Handles key down events on the editable TextBox for navigation and filtering.
+        /// </summary>
         private static void TextBox_PreviewKeyDown(object? sender, KeyEventArgs e)
         {
             if (sender is not TextBox tb || tb.TemplatedParent is not ComboBox cb) return;
@@ -395,6 +446,9 @@ namespace AATM.UI.Controls
             }
         }
 
+        /// <summary>
+        /// Handles the ComboBox DropDownOpened event to set up filtering and popup logic.
+        /// </summary>
         private static void Cb_DropDownOpened(object? sender, EventArgs e)
         {
             if (sender is not ComboBox cb) return;
@@ -465,6 +519,9 @@ namespace AATM.UI.Controls
             }
         }
 
+        /// <summary>
+        /// Handles the ComboBox DropDownClosed event to clean up popup and input handlers.
+        /// </summary>
         private static void Cb_DropDownClosed(object? sender, EventArgs e)
         {
             if (sender is not ComboBox cb) return;
@@ -556,6 +613,9 @@ namespace AATM.UI.Controls
             Log($"DropDownClosed stack:\n{Environment.StackTrace}");
         }
 
+        /// <summary>
+        /// Handles text changes in the editable TextBox and triggers filtering.
+        /// </summary>
         private static void EditableTextBox_TextChanged(object? sender, TextChangedEventArgs e)
         {
             if (sender is TextBox textBox && textBox.TemplatedParent is ComboBox cb)
@@ -592,6 +652,9 @@ namespace AATM.UI.Controls
             }
         }
 
+        /// <summary>
+        /// Applies the filter to the ComboBox items based on the current text.
+        /// </summary>
         private static void ApplyFilter(ComboBox cb, string? filterText, bool forceShowAll = false)
         {
             Log($"ApplyFilter start for {GetName(cb)} filterText='{filterText}' forceShowAll={forceShowAll}");
@@ -659,6 +722,9 @@ namespace AATM.UI.Controls
             }
         }
 
+        /// <summary>
+        /// Gets the editable TextBox from a ComboBox, if present.
+        /// </summary>
         private static TextBox? GetEditableTextBox(ComboBox comboBox)
         {
             if (!comboBox.IsEditable)
@@ -667,8 +733,9 @@ namespace AATM.UI.Controls
             return comboBox.Template.FindName("PART_EditableTextBox", comboBox) as TextBox;
         }
 
-        // Navigate selection inside the ComboBox's filtered item list.
-        // direction: +1 = down, -1 = up
+        /// <summary>
+        /// Navigates the selection highlight in the ComboBox's filtered item list.
+        /// </summary>
         private static void NavigateSelection(ComboBox cb, int direction)
         {
             Log($"NavigateSelection start KeyDirection={direction} {GetName(cb)} SelectedIndex={cb.SelectedIndex}");
@@ -732,7 +799,9 @@ namespace AATM.UI.Controls
             }), DispatcherPriority.Background);
         }
 
-        // Navigate selection but preserve the editable text (do not commit the item text into the textbox)
+        /// <summary>
+        /// Navigates selection but preserves the editable text in the ComboBox.
+        /// </summary>
         private static void NavigateSelectionPreserveText(ComboBox cb, int direction)
         {
             Log($"NavigateSelectionPreserveText {GetName(cb)}");
@@ -771,7 +840,9 @@ namespace AATM.UI.Controls
             }), DispatcherPriority.Input);
         }
 
-        // Commit the current selected item into the editable text and close the dropdown
+        /// <summary>
+        /// Commits the current selected item into the editable text and closes the dropdown.
+        /// </summary>
         private static void CommitSelection(ComboBox cb)
         {
             Log($"CommitSelection start {GetName(cb)} SelectedIndex={cb.SelectedIndex}");
@@ -830,7 +901,11 @@ namespace AATM.UI.Controls
             }), DispatcherPriority.Background);
         }
 
-        // Simple helper for logging (DEBUG only).
+        // --- Debugging and diagnostics ---
+
+        /// <summary>
+        /// Logs debug messages (only in DEBUG builds).
+        /// </summary>
         [Conditional("DEBUG")]
         private static void Log(string message)
         {
@@ -841,9 +916,9 @@ namespace AATM.UI.Controls
             catch { /* swallow logging errors in release scenarios */ }
         }
 
-        // DEBUG-only small per-combo ring buffer for recent events
-        private static readonly Dictionary<ComboBox, Queue<string>> _recentEvents = new();
-
+        /// <summary>
+        /// Records recent debug events for diagnostics (only in DEBUG builds).
+        /// </summary>
         [Conditional("DEBUG")]
         private static void RecordRecentEvent(ComboBox cb, string message)
         {
@@ -861,6 +936,9 @@ namespace AATM.UI.Controls
             catch { }
         }
 
+        /// <summary>
+        /// Gets a dump of recent debug events for diagnostics.
+        /// </summary>
         private static string GetRecentEventsDump(ComboBox cb)
         {
             try
@@ -872,11 +950,18 @@ namespace AATM.UI.Controls
             catch { return "<error dumping recent events>"; }
         }
 
+        /// <summary>
+        /// Gets the name of the ComboBox for diagnostics.
+        /// </summary>
         private static string GetName(ComboBox cb)
         {
             try { return !string.IsNullOrEmpty(cb.Name) ? cb.Name : cb.ToString(); }
             catch { return "<unknown>"; }
         }
+
+        /// <summary>
+        /// Handles pre-process input events for advanced diagnostics.
+        /// </summary>
         private static void PreProcessInputHandler(ComboBox cb, PreProcessInputEventArgs e)
         {
             try
@@ -925,20 +1010,15 @@ namespace AATM.UI.Controls
             }
         }
 
-
-        // Swallow the first mouse-down/up if suppression requested (timed or single-event).
         private static void Window_PreviewMouseDown(object? sender, MouseButtonEventArgs e)
         {
             try
             {
                 if (sender is not Window window) return;
-
-                // find combo(s) associated with this window
                 foreach (var kv in _windowMap)
                 {
                     var combo = kv.Key;
                     if (kv.Value != window) continue;
-
                     // timed suppression
                     if (_suppressMouseUntil.TryGetValue(combo, out var until) && DateTime.Now < until)
                     {
@@ -948,7 +1028,6 @@ namespace AATM.UI.Controls
                         e.Handled = true;
                         return;
                     }
-
                     // fallback single-event suppression
                     if (_suppressNextMouseDown.TryGetValue(combo, out var shouldSuppress) && shouldSuppress)
                     {
@@ -971,12 +1050,10 @@ namespace AATM.UI.Controls
             try
             {
                 if (sender is not Window window) return;
-
                 foreach (var kv in _windowMap)
                 {
                     var combo = kv.Key;
                     if (kv.Value != window) continue;
-
                     // timed suppression
                     if (_suppressMouseUntil.TryGetValue(combo, out var until) && DateTime.Now < until)
                     {
@@ -986,7 +1063,6 @@ namespace AATM.UI.Controls
                         e.Handled = true;
                         return;
                     }
-
                     // fallback single-event suppression
                     if (_suppressNextMouseDown.TryGetValue(combo, out var shouldSuppress) && shouldSuppress)
                     {

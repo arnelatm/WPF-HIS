@@ -16,6 +16,9 @@ namespace AATM.UI.Controls
         private static readonly Lazy<ThemeManager> _instance =
             new(() => new ThemeManager());
 
+        /// <summary>
+        /// Gets the singleton instance of ThemeManager.
+        /// </summary>
         public static ThemeManager Instance => _instance.Value;
 
         private ThemeManager() { }

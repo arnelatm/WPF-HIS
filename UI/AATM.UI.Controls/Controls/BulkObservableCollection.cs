@@ -6,7 +6,10 @@ namespace AATM.UI.Controls
 {
 internal class BulkObservableCollection<T> : ObservableCollection<T>
     {
-        public void AddRange(IEnumerable<T> items)
+ /// <summary>
+ /// Adds a range of items to the collection and raises a single reset event.
+ /// </summary>
+ public void AddRange(IEnumerable<T> items)
     {
   if (items == null) return;
  CheckReentrancy();
@@ -22,7 +25,10 @@ internal class BulkObservableCollection<T> : ObservableCollection<T>
  }
    }
 
-   public void ReplaceAll(IEnumerable<T> items)
+ /// <summary>
+ /// Replaces all items in the collection and raises a single reset event.
+ /// </summary>
+ public void ReplaceAll(IEnumerable<T> items)
     {
   CheckReentrancy();
   Items.Clear();

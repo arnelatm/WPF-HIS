@@ -138,6 +138,9 @@ namespace AATM.UI.Controls
         public static readonly DependencyProperty ItemsSourceProperty =
         DependencyProperty.Register(nameof(ItemsSource), typeof(IEnumerable), typeof(SmartComboBox), new PropertyMetadata(null, OnItemsSourceChanged));
 
+        /// <summary>
+        /// Gets or sets the collection used as the source for items in the SmartComboBox.
+        /// </summary>
         public IEnumerable ItemsSource
         {
             get => (IEnumerable)GetValue(ItemsSourceProperty);
@@ -157,6 +160,9 @@ namespace AATM.UI.Controls
         public static readonly DependencyProperty UseRemoteFetchProperty =
         DependencyProperty.Register(nameof(UseRemoteFetch), typeof(bool), typeof(SmartComboBox), new PropertyMetadata(false));
 
+        /// <summary>
+        /// Gets or sets a value indicating whether remote SQL fetching is enabled.
+        /// </summary>
         public bool UseRemoteFetch
         {
             get => (bool)GetValue(UseRemoteFetchProperty);
@@ -166,6 +172,9 @@ namespace AATM.UI.Controls
         public static readonly DependencyProperty ConnectionStringProperty =
         DependencyProperty.Register(nameof(ConnectionString), typeof(string), typeof(SmartComboBox), new PropertyMetadata(string.Empty));
 
+        /// <summary>
+        /// Gets or sets the SQL connection string for remote fetching.
+        /// </summary>
         public string ConnectionString
         {
             get => (string)GetValue(ConnectionStringProperty);
@@ -175,6 +184,9 @@ namespace AATM.UI.Controls
         public static readonly DependencyProperty SqlQueryTemplateProperty =
         DependencyProperty.Register(nameof(SqlQueryTemplate), typeof(string), typeof(SmartComboBox), new PropertyMetadata(string.Empty));
 
+        /// <summary>
+        /// Gets or sets the SQL query template for remote fetching.
+        /// </summary>
         public string SqlQueryTemplate
         {
             get => (string)GetValue(SqlQueryTemplateProperty);
@@ -184,6 +196,9 @@ namespace AATM.UI.Controls
         public static readonly DependencyProperty RemoteTakeProperty =
         DependencyProperty.Register(nameof(RemoteTake), typeof(int), typeof(SmartComboBox), new PropertyMetadata(20));
 
+        /// <summary>
+        /// Gets or sets the number of records to fetch per page in remote mode.
+        /// </summary>
         public int RemoteTake
         {
             get => (int)GetValue(RemoteTakeProperty);
@@ -193,6 +208,9 @@ namespace AATM.UI.Controls
         public static readonly DependencyProperty SelectedIdProperty =
         DependencyProperty.Register(nameof(SelectedId), typeof(object), typeof(SmartComboBox), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
+        /// <summary>
+        /// Gets or sets the selected item's Id value.
+        /// </summary>
         public object SelectedId
         {
             get => GetValue(SelectedIdProperty);
@@ -202,6 +220,9 @@ namespace AATM.UI.Controls
         public static readonly DependencyProperty SelectedCodeProperty =
         DependencyProperty.Register(nameof(SelectedCode), typeof(string), typeof(SmartComboBox), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
+        /// <summary>
+        /// Gets or sets the selected item's Code value.
+        /// </summary>
         public string SelectedCode
         {
             get => (string)GetValue(SelectedCodeProperty);
@@ -211,6 +232,9 @@ namespace AATM.UI.Controls
         public static readonly DependencyProperty SelectedNameProperty =
         DependencyProperty.Register(nameof(SelectedName), typeof(string), typeof(SmartComboBox), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
+        /// <summary>
+        /// Gets or sets the selected item's Name value.
+        /// </summary>
         public string SelectedName
         {
             get => (string)GetValue(SelectedNameProperty);
@@ -220,6 +244,9 @@ namespace AATM.UI.Controls
         public static readonly DependencyProperty PlaceholderProperty =
         DependencyProperty.Register(nameof(Placeholder), typeof(string), typeof(SmartComboBox), new PropertyMetadata("Type to search..."));
 
+        /// <summary>
+        /// Gets or sets the placeholder text shown when the input is empty.
+        /// </summary>
         public string Placeholder
         {
             get => (string)GetValue(PlaceholderProperty);
@@ -229,6 +256,9 @@ namespace AATM.UI.Controls
         public static readonly DependencyProperty IsBusyProperty =
         DependencyProperty.Register(nameof(IsBusy), typeof(bool), typeof(SmartComboBox), new PropertyMetadata(false));
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the control is busy loading data.
+        /// </summary>
         public bool IsBusy
         {
             get => (bool)GetValue(IsBusyProperty);
@@ -238,6 +268,9 @@ namespace AATM.UI.Controls
         public static readonly DependencyProperty DebounceMillisecondsProperty =
         DependencyProperty.Register(nameof(DebounceMilliseconds), typeof(int), typeof(SmartComboBox), new PropertyMetadata(220));
 
+        /// <summary>
+        /// Gets or sets the debounce interval in milliseconds for search/filtering.
+        /// </summary>
         public int DebounceMilliseconds
         {
             get => (int)GetValue(DebounceMillisecondsProperty);
@@ -247,6 +280,9 @@ namespace AATM.UI.Controls
         public static readonly DependencyProperty TextProperty =
         DependencyProperty.Register(nameof(Text), typeof(string), typeof(SmartComboBox), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnTextChanged));
 
+        /// <summary>
+        /// Gets or sets the current text in the input box.
+        /// </summary>
         public string Text
         {
             get => (string)GetValue(TextProperty);
@@ -266,6 +302,9 @@ namespace AATM.UI.Controls
         public static readonly DependencyProperty SelectedValuePathProperty =
         DependencyProperty.Register(nameof(SelectedValuePath), typeof(string), typeof(SmartComboBox), new PropertyMetadata(null, OnSelectedValuePathChanged));
 
+        /// <summary>
+        /// Gets or sets the property name used for SelectedValue binding.
+        /// </summary>
         public string SelectedValuePath
         {
             get => (string)GetValue(SelectedValuePathProperty);
@@ -280,6 +319,9 @@ namespace AATM.UI.Controls
         public static readonly DependencyProperty SelectedValueProperty =
         DependencyProperty.Register(nameof(SelectedValue), typeof(object), typeof(SmartComboBox), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectedValueChanged));
 
+        /// <summary>
+        /// Gets or sets the selected value for the control.
+        /// </summary>
         public object SelectedValue
         {
             get => GetValue(SelectedValueProperty);
@@ -294,6 +336,9 @@ namespace AATM.UI.Controls
         public static readonly DependencyProperty PageIndexProperty =
         DependencyProperty.Register(nameof(PageIndex), typeof(int), typeof(SmartComboBox), new PropertyMetadata(0, OnPageIndexChanged));
 
+        /// <summary>
+        /// Gets or sets the current page index for paging.
+        /// </summary>
         public int PageIndex
         {
             get => (int)GetValue(PageIndexProperty);
@@ -303,6 +348,9 @@ namespace AATM.UI.Controls
         public static readonly DependencyProperty HasNextPageProperty =
         DependencyProperty.Register(nameof(HasNextPage), typeof(bool), typeof(SmartComboBox), new PropertyMetadata(false));
 
+        /// <summary>
+        /// Gets or sets a value indicating whether there is a next page available.
+        /// </summary>
         public bool HasNextPage
         {
             get => (bool)GetValue(HasNextPageProperty);
@@ -313,6 +361,9 @@ namespace AATM.UI.Controls
         public static readonly DependencyProperty MinSearchLengthProperty =
         DependencyProperty.Register(nameof(MinSearchLength), typeof(int), typeof(SmartComboBox), new PropertyMetadata(3)); // was2 -> now3
 
+        /// <summary>
+        /// Gets or sets the minimum number of characters required before search/paging occurs.
+        /// </summary>
         public int MinSearchLength
         {
             get => (int)GetValue(MinSearchLengthProperty);
@@ -323,6 +374,9 @@ namespace AATM.UI.Controls
         public static readonly DependencyProperty EnableAutoScrollPagingProperty =
         DependencyProperty.Register(nameof(EnableAutoScrollPaging), typeof(bool), typeof(SmartComboBox), new PropertyMetadata(false, OnEnableAutoScrollPagingChanged));
 
+        /// <summary>
+        /// Gets or sets a value indicating whether automatic paging is enabled when scrolling.
+        /// </summary>
         public bool EnableAutoScrollPaging
         {
             get => (bool)GetValue(EnableAutoScrollPagingProperty);
@@ -333,6 +387,9 @@ namespace AATM.UI.Controls
         public static readonly DependencyProperty IsDropDownOpenProperty =
         DependencyProperty.Register(nameof(IsDropDownOpen), typeof(bool), typeof(SmartComboBox), new PropertyMetadata(false, OnIsDropDownOpenChanged));
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the dropdown is open.
+        /// </summary>
         public bool IsDropDownOpen
         {
             get => (bool)GetValue(IsDropDownOpenProperty);
@@ -359,6 +416,9 @@ namespace AATM.UI.Controls
         public static readonly DependencyProperty MaxDropDownHeightProperty =
         DependencyProperty.Register(nameof(MaxDropDownHeight), typeof(double), typeof(SmartComboBox), new PropertyMetadata(480.0));
 
+        /// <summary>
+        /// Gets or sets the maximum height of the dropdown list.
+        /// </summary>
         public double MaxDropDownHeight
         {
             get => (double)GetValue(MaxDropDownHeightProperty);
@@ -394,6 +454,9 @@ namespace AATM.UI.Controls
         public static readonly DependencyProperty ShowAllOnBlankProperty =
         DependencyProperty.Register(nameof(ShowAllOnBlank), typeof(bool), typeof(SmartComboBox), new PropertyMetadata(false));
 
+        /// <summary>
+        /// Gets or sets a value indicating whether all items should be shown when the input is blank.
+        /// </summary>
         public bool ShowAllOnBlank
         {
             get => (bool)GetValue(ShowAllOnBlankProperty);
@@ -404,6 +467,9 @@ namespace AATM.UI.Controls
         public static readonly DependencyProperty ItemTemplateProperty =
         DependencyProperty.Register(nameof(ItemTemplate), typeof(DataTemplate), typeof(SmartComboBox), new PropertyMetadata(null, OnItemTemplateChanged));
 
+        /// <summary>
+        /// Gets or sets the DataTemplate used to display items in the dropdown list.
+        /// </summary>
         public DataTemplate ItemTemplate
         {
             get => (DataTemplate)GetValue(ItemTemplateProperty);
@@ -421,6 +487,9 @@ namespace AATM.UI.Controls
         public static readonly DependencyProperty ItemTemplateSelectorProperty =
         DependencyProperty.Register(nameof(ItemTemplateSelector), typeof(DataTemplateSelector), typeof(SmartComboBox), new PropertyMetadata(null, OnItemTemplateSelectorChanged));
 
+        /// <summary>
+        /// Gets or sets the DataTemplateSelector used to choose a template for each item.
+        /// </summary>
         public DataTemplateSelector ItemTemplateSelector
         {
             get => (DataTemplateSelector)GetValue(ItemTemplateSelectorProperty);
@@ -439,6 +508,9 @@ namespace AATM.UI.Controls
         public static readonly DependencyProperty SelectedItemProperty =
         DependencyProperty.Register(nameof(SelectedItem), typeof(object), typeof(SmartComboBox), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectedItemChanged));
 
+        /// <summary>
+        /// Gets or sets the selected item object.
+        /// </summary>
         public object SelectedItem
         {
             get => GetValue(SelectedItemProperty);

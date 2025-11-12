@@ -18,9 +18,15 @@ namespace AATM.UI.Controls
                 typeof(ComboBoxKeyboardSelectionBehavior),
                 new PropertyMetadata(false, OnIsEnabledChanged));
 
+        /// <summary>
+        /// Enables or disables keyboard selection behavior for ComboBox.
+        /// </summary>
         public static void SetIsEnabled(DependencyObject element, bool value)
             => element.SetValue(IsEnabledProperty, value);
 
+        /// <summary>
+        /// Gets whether keyboard selection behavior is enabled for ComboBox.
+        /// </summary>
         public static bool GetIsEnabled(DependencyObject element)
             => (bool)element.GetValue(IsEnabledProperty);
 
