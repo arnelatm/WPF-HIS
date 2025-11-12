@@ -3,3 +3,11 @@ CODE CODE REUSE -
 
 Format Code in c# Markdown Block
 	Please wrap the code in a C# Markdown block for proper syntax highlighting.
+
+
+Git Commit Message:
+Summarize all un-committed changes since the last push for a commit message.
+Summarize all un-pushed changes since the last push for a commit message.
+or
+Generate a commit summary for all current not-committed changes since last push.
+Generate a commit summary for all current unpushed-changes since last push.
