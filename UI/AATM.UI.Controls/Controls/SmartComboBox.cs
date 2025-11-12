@@ -555,6 +555,58 @@ namespace AATM.UI.Controls
             set => SetValue(ErrorMessageProperty, value);
         }
 
+        // PAGE SIZE //
+
+        public static readonly DependencyProperty PageSizeProperty =
+        DependencyProperty.Register(nameof(PageSize), typeof(int), typeof(SmartComboBox), new PropertyMetadata(0));
+        /// <summary>
+        /// Gets or sets the logical page size used for paging (overrides RemoteTake if >0).
+        /// </summary>
+        public int PageSize
+        {
+            get => (int)GetValue(PageSizeProperty);
+            set => SetValue(PageSizeProperty, value);
+        }
+
+        // CACHE LIMIT //
+
+        public static readonly DependencyProperty CachePageLimitProperty =
+        DependencyProperty.Register(nameof(CachePageLimit), typeof(int), typeof(SmartComboBox), new PropertyMetadata(50));
+        /// <summary>
+        /// Gets or sets the maximum number of pages retained in the in-memory page cache. Older pages are evicted once exceeded.
+        /// </summary>
+        public int CachePageLimit
+        {
+            get => (int)GetValue(CachePageLimitProperty);
+            set => SetValue(CachePageLimitProperty, value);
+        }
+
+        // TOTAL COUNT //
+
+        public static readonly DependencyProperty TotalCountProperty =
+        DependencyProperty.Register(nameof(TotalCount), typeof(int), typeof(SmartComboBox), new PropertyMetadata(0));
+        /// <summary>
+        /// Gets the total number of filtered records (local filter mode) or last remote reported size if available.
+        /// </summary>
+        public int TotalCount
+        {
+            get => (int)GetValue(TotalCountProperty);
+            private set => SetValue(TotalCountProperty, value);
+        }
+
+        // BACKGROUND FILTERING //
+
+        public static readonly DependencyProperty UseBackgroundFilteringProperty =
+        DependencyProperty.Register(nameof(UseBackgroundFiltering), typeof(bool), typeof(SmartComboBox), new PropertyMetadata(true));
+        /// <summary>
+        /// Gets or sets whether local filtering work is performed on a background thread (recommended for large lists).
+        /// </summary>
+        public bool UseBackgroundFiltering
+        {
+            get => (bool)GetValue(UseBackgroundFilteringProperty);
+            set => SetValue(UseBackgroundFilteringProperty, value);
+        }
+
         #endregion
 
         private bool IsRemoteConfigured =>
@@ -698,9 +750,10 @@ namespace AATM.UI.Controls
         {
             if (_listBox == null) return;
 
+            int pageSize = EffectivePageSize;
             if (e.Key == Key.Down)
             {
-                if (_listBox.SelectedIndex == _currentItems.Count - 1)
+                if (_listBox.SelectedIndex == _currentItems.Count -1)
                 {
                     if (HasNextPage)
                     {
@@ -716,16 +769,16 @@ namespace AATM.UI.Controls
                     }
                     return;
                 }
-                if (_listBox.SelectedIndex < _currentItems.Count - 1 && _listBox.SelectedIndex >= 0)
+                if (_listBox.SelectedIndex < _currentItems.Count -1 && _listBox.SelectedIndex >=0)
                 {
                     _listBox.SelectedIndex++;
                     _listBox.ScrollIntoView(_listBox.SelectedItem);
                     e.Handled = true;
                     return;
                 }
-                if (_listBox.SelectedIndex < 0 && _currentItems.Count > 0)
+                if (_listBox.SelectedIndex <0 && _currentItems.Count >0)
                 {
-                    _listBox.SelectedIndex = 0;
+                    _listBox.SelectedIndex =0;
                     _listBox.ScrollIntoView(_listBox.SelectedItem);
                     e.Handled = true;
                     return;
@@ -733,19 +786,19 @@ namespace AATM.UI.Controls
             }
             else if (e.Key == Key.Up)
             {
-                if (_listBox.SelectedIndex <= 0 && PageIndex == 0)
+                if (_listBox.SelectedIndex <=0 && PageIndex ==0)
                 {
                     // Only set selection if not already at0
-                    if (_listBox.SelectedIndex != 0 && _currentItems.Count > 0)
+                    if (_listBox.SelectedIndex !=0 && _currentItems.Count >0)
                     {
-                        _listBox.SelectedIndex = 0;
+                        _listBox.SelectedIndex =0;
                         _listBox.ScrollIntoView(_listBox.SelectedItem);
                     }
                     // Do NOT set focus or scroll again if already at0
                     e.Handled = true;
                     return;
                 }
-                if (_listBox.SelectedIndex == 0 && PageIndex > 0)
+                if (_listBox.SelectedIndex ==0 && PageIndex >0)
                 {
                     _pendingPageDown = false;
                     _pendingPageUp = true;
@@ -753,7 +806,7 @@ namespace AATM.UI.Controls
                     e.Handled = true;
                     return;
                 }
-                if (_listBox.SelectedIndex > 0)
+                if (_listBox.SelectedIndex >0)
                 {
                     _listBox.SelectedIndex--;
                     _listBox.ScrollIntoView(_listBox.SelectedItem);
@@ -763,7 +816,7 @@ namespace AATM.UI.Controls
             }
             else if (e.Key == Key.PageDown)
             {
-                if (_listBox.SelectedIndex == _currentItems.Count - 1)
+                if (_listBox.SelectedIndex == _currentItems.Count -1)
                 {
                     if (HasNextPage)
                     {
@@ -774,8 +827,8 @@ namespace AATM.UI.Controls
                     e.Handled = true;
                     return;
                 }
-                int chunk = Math.Max(5, Math.Min(RemoteTake, _currentItems.Count));
-                int target = Math.Min(_currentItems.Count - 1, Math.Max(0, _listBox.SelectedIndex) + chunk);
+                int chunk = Math.Max(5, Math.Min(pageSize, _currentItems.Count));
+                int target = Math.Min(_currentItems.Count -1, Math.Max(0, _listBox.SelectedIndex) + chunk);
                 _listBox.SelectedIndex = target;
                 _listBox.ScrollIntoView(_listBox.SelectedItem);
                 e.Handled = true;
@@ -783,12 +836,12 @@ namespace AATM.UI.Controls
             }
             else if (e.Key == Key.PageUp)
             {
-                if (_listBox.SelectedIndex <= 0)
+                if (_listBox.SelectedIndex <=0)
                 {
                     e.Handled = true;
                     return;
                 }
-                int chunk = Math.Max(5, Math.Min(RemoteTake, _currentItems.Count));
+                int chunk = Math.Max(5, Math.Min(pageSize, _currentItems.Count));
                 int target = Math.Max(0, _listBox.SelectedIndex - chunk);
                 _listBox.SelectedIndex = target;
                 _listBox.ScrollIntoView(_listBox.SelectedItem);
@@ -824,7 +877,7 @@ namespace AATM.UI.Controls
         private void ScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
             if (!EnableAutoScrollPaging) return;
-            if (e.VerticalOffset + e.ViewportHeight >= e.ExtentHeight - 2)
+            if (e.VerticalOffset + e.ViewportHeight >= e.ExtentHeight -2)
             {
                 if (HasNextPage)
                 {
@@ -853,14 +906,15 @@ namespace AATM.UI.Controls
         {
             if (_popup == null || _listBox == null) return;
             var currentText = _textBox?.Text ?? string.Empty;
+            int pageSize = EffectivePageSize;
 
             if (e.Key == Key.Up)
             {
                 if (IsDropDownOpen)
                 {
                     _listBox.Focus();
-                    if (_listBox.Items.Count > 0 && _listBox.SelectedIndex < 0)
-                        _listBox.SelectedIndex = 0;
+                    if (_listBox.Items.Count >0 && _listBox.SelectedIndex <0)
+                        _listBox.SelectedIndex =0;
                     _listBox.ScrollIntoView(_listBox.SelectedItem);
                     e.Handled = true;
                     return;
@@ -879,11 +933,11 @@ namespace AATM.UI.Controls
                     IsDropDownOpen = true;
                     _ = StartSearchAsync(currentText);
                 }
-                if (_listBox.Items.Count > 0)
+                if (_listBox.Items.Count >0)
                 {
                     _listBox.Focus();
                     // Always highlight first record when entering list from textbox via Down
-                    _listBox.SelectedIndex = 0;
+                    _listBox.SelectedIndex =0;
                     var first = _listBox.SelectedItem as ComboRecord;
                     if (first != null)
                     {
@@ -913,7 +967,7 @@ namespace AATM.UI.Controls
             else if (e.Key == Key.PageUp)
             {
                 if (!ShouldActivateDropDown(currentText)) { e.Handled = true; return; }
-                if (PageIndex > 0)
+                if (PageIndex >0)
                 {
                     _suppressPageIndexChanged = true;
                     PageIndex--;
@@ -997,70 +1051,92 @@ namespace AATM.UI.Controls
                 return;
             }
             // For pages >0 do not auto-select first
-            if (pageIndex > 0) _forceFirstSelectionOnLoad = false;
+            if (pageIndex >0) _forceFirstSelectionOnLoad = false;
             // Decide mode once per call
-            bool remote = UseRemoteFetch || (_localMaster.Count == 0 && IsRemoteConfigured) || _localMaster.Count > AutoRemoteThreshold;
+            bool remote = UseRemoteFetch || (_localMaster.Count ==0 && IsRemoteConfigured) || _localMaster.Count > AutoRemoteThreshold;
+            int pageSize = EffectivePageSize;
 
             if (remote)
             {
                 IsBusy = true;
                 try
                 {
-                    List<ComboRecord> pageData = await FetchFromSqlAsync(_lastFilter, token, pageIndex);
+                    List<ComboRecord> pageData = await FetchFromSqlAsync(_lastFilter, token, pageIndex, pageSize).ConfigureAwait(false);
                     if (token.IsCancellationRequested) return;
                     _pageCache[pageIndex] = pageData;
-                    UpdateHasNext(pageIndex, pageData.Count);
-
-                    bool appendMode = _pagingDown && pageIndex > 0;
-                    if (appendMode) _appendInsertIndex = _currentItems.Count;
-                    AppendToCurrent(pageData, append: appendMode);
+                    EvictCacheIfNeeded();
+                    // back to UI thread
+                    await Application.Current.Dispatcher.InvokeAsync(() =>
+                    {
+                        UpdateHasNext(pageIndex, pageData.Count, pageSize);
+                        bool appendMode = _pagingDown && pageIndex >0;
+                        if (appendMode) _appendInsertIndex = _currentItems.Count;
+                        AppendToCurrent(pageData, append: appendMode);
+                    });
                 }
                 catch (Exception ex)
                 {
-                    SetError($"Error fetching data: {ex.Message}");
+                    await Application.Current.Dispatcher.InvokeAsync(() => SetError($"Error fetching data: {ex.Message}"));
                 }
                 finally
                 {
-                    IsBusy = false;
+                    await Application.Current.Dispatcher.InvokeAsync(() => IsBusy = false);
                 }
             }
             else
             {
-                // Local filtering off the UI thread; keep current items visible until complete
+                // Local filtering; optionally run on background thread
                 var filterSnapshot = _lastFilter;
                 var indexSnapshot = pageIndex;
                 IsBusy = true;
 
-                await Task.Run(() =>
+                if (UseBackgroundFiltering)
                 {
-                    var skip = indexSnapshot * RemoteTake;
-                    var result = FilterEngine.FilterPage(_localMaster, filterSnapshot, skip, RemoteTake);
-                    return result;
-                }).ContinueWith(t =>
+                    await Task.Run(() =>
+                    {
+                        var skip = indexSnapshot * pageSize;
+                        var result = FilterEngine.FilterPage(_localMaster, filterSnapshot, skip, pageSize);
+                        return result;
+                    }).ContinueWith(t =>
+                    {
+                        try
+                        {
+                            if (token.IsCancellationRequested || filterSnapshot != _lastFilter) return;
+
+                            _totalFilteredCount = t.Result.Total;
+                            TotalCount = _totalFilteredCount;
+                            var pageDataLocal = t.Result.Page;
+                            _pageCache[indexSnapshot] = pageDataLocal;
+                            _pageCache[-1] = new List<ComboRecord>();
+                            EvictCacheIfNeeded();
+                            UpdateHasNext(indexSnapshot, pageDataLocal.Count, pageSize);
+
+                            bool appendMode = _pagingDown && indexSnapshot >0;
+                            if (appendMode) _appendInsertIndex = _currentItems.Count;
+                            AppendToCurrent(pageDataLocal, append: appendMode);
+                        }
+                        finally
+                        {
+                            IsBusy = false;
+                        }
+                    }, TaskScheduler.FromCurrentSynchronizationContext());
+                }
+                else
                 {
-                    try
-                    {
-                        if (token.IsCancellationRequested || filterSnapshot != _lastFilter) return;
-
-                        _totalFilteredCount = t.Result.Total;
-                        var pageDataLocal = t.Result.Page;
-                        _pageCache[indexSnapshot] = pageDataLocal;
-                        _pageCache[-1] = new List<ComboRecord>();
-                        UpdateHasNext(indexSnapshot, pageDataLocal.Count);
-
-                        bool appendMode = _pagingDown && indexSnapshot > 0;
-                        if (appendMode) _appendInsertIndex = _currentItems.Count;
-                        AppendToCurrent(pageDataLocal, append: appendMode);
-                    }
-                    catch (Exception ex)
-                    {
-                        SetError($"Error filtering data: {ex.Message}");
-                    }
-                    finally
-                    {
-                        IsBusy = false;
-                    }
-                }, TaskScheduler.FromCurrentSynchronizationContext());
+                    var skip = indexSnapshot * pageSize;
+                    var result = FilterEngine.FilterPage(_localMaster, filterSnapshot, skip, pageSize);
+                    _totalFilteredCount = result.Total;
+                    TotalCount = _totalFilteredCount;
+                    var pageDataLocal = result.Page;
+                    _pageCache[indexSnapshot] = pageDataLocal;
+                    _pageCache[-1] = new List<ComboRecord>();
+                    EvictCacheIfNeeded();
+                    UpdateHasNext(indexSnapshot, pageDataLocal.Count, pageSize);
+                    bool appendMode = _pagingDown && indexSnapshot >0;
+                    if (appendMode) _appendInsertIndex = _currentItems.Count;
+                    AppendToCurrent(pageDataLocal, append: appendMode);
+                    IsBusy = false;
+                }
             }
         }
 
@@ -1185,23 +1261,28 @@ namespace AATM.UI.Controls
 
         private void UpdateHasNext(int pageIndex, int pageCount)
         {
-            if (pageCount < RemoteTake)
+            UpdateHasNext(pageIndex, pageCount, EffectivePageSize);
+        }
+
+        private void UpdateHasNext(int pageIndex, int pageCount, int pageSize)
+        {
+            if (pageCount < pageSize)
             {
                 HasNextPage = false;
                 UpdateLoadMoreVisibility();
                 return;
             }
 
-            if (_pageCache.ContainsKey(pageIndex + 1))
+            if (_pageCache.ContainsKey(pageIndex +1))
             {
-                HasNextPage = _pageCache[pageIndex + 1].Count > 0;
+                HasNextPage = _pageCache[pageIndex +1].Count >0;
                 UpdateLoadMoreVisibility();
                 return;
             }
 
             if (_pageCache.ContainsKey(-1))
             {
-                HasNextPage = (pageIndex + 1) * RemoteTake < _totalFilteredCount;
+                HasNextPage = (pageIndex +1) * pageSize < _totalFilteredCount;
             }
             else
             {
@@ -1238,17 +1319,22 @@ namespace AATM.UI.Controls
 
         private async Task<List<ComboRecord>> FetchFromSqlAsync(string filter, CancellationToken token, int pageIndex)
         {
+            return await FetchFromSqlAsync(filter, token, pageIndex, EffectivePageSize);
+        }
+
+        private async Task<List<ComboRecord>> FetchFromSqlAsync(string filter, CancellationToken token, int pageIndex, int pageSize)
+        {
             var list = new List<ComboRecord>();
             if (string.IsNullOrWhiteSpace(ConnectionString) || string.IsNullOrWhiteSpace(SqlQueryTemplate))
                 return list;
 
             string baseSql = SqlQueryTemplate.Trim().TrimEnd(';');
 
-            bool hasTop = baseSql.IndexOf(" top ", StringComparison.OrdinalIgnoreCase) >= 0;
-            bool hasOffset = baseSql.IndexOf(" offset ", StringComparison.OrdinalIgnoreCase) >= 0;
-            bool hasFilterParameter = baseSql.IndexOf("@filter", StringComparison.OrdinalIgnoreCase) >= 0;
+            bool hasTop = baseSql.IndexOf(" top ", StringComparison.OrdinalIgnoreCase) >=0;
+            bool hasOffset = baseSql.IndexOf(" offset ", StringComparison.OrdinalIgnoreCase) >=0;
+            bool hasFilterParameter = baseSql.IndexOf("@filter", StringComparison.OrdinalIgnoreCase) >=0;
 
-            bool hasOrderBy = baseSql.IndexOf(" order by ", StringComparison.OrdinalIgnoreCase) >= 0;
+            bool hasOrderBy = baseSql.IndexOf(" order by ", StringComparison.OrdinalIgnoreCase) >=0;
             if (!hasOrderBy)
             {
                 baseSql += " ORDER BY IdNo";
@@ -1257,18 +1343,18 @@ namespace AATM.UI.Controls
 
             if (!hasFilterParameter)
             {
-                bool hasCodeAlias = baseSql.IndexOf(" Code", StringComparison.OrdinalIgnoreCase) >= 0;
-                bool hasNameAlias = baseSql.IndexOf(" Name", StringComparison.OrdinalIgnoreCase) >= 0;
+                bool hasCodeAlias = baseSql.IndexOf(" Code", StringComparison.OrdinalIgnoreCase) >=0;
+                bool hasNameAlias = baseSql.IndexOf(" Name", StringComparison.OrdinalIgnoreCase) >=0;
                 string filterExpr = hasCodeAlias && hasNameAlias
                 ? "(@filter = '' OR Code LIKE @pattern OR Name LIKE @pattern)"
                 : "(@filter = '' OR ProductCode LIKE @pattern OR ProductName LIKE @pattern)";
 
                 int orderPos = baseSql.LastIndexOf(" order by ", StringComparison.OrdinalIgnoreCase);
-                if (orderPos >= 0)
+                if (orderPos >=0)
                 {
                     string beforeOrder = baseSql.Substring(0, orderPos);
                     string orderClause = baseSql.Substring(orderPos);
-                    bool beforeHasWhere = beforeOrder.IndexOf(" where ", StringComparison.OrdinalIgnoreCase) >= 0;
+                    bool beforeHasWhere = beforeOrder.IndexOf(" where ", StringComparison.OrdinalIgnoreCase) >=0;
                     beforeOrder += beforeHasWhere ? " AND " + filterExpr : " WHERE " + filterExpr;
                     baseSql = beforeOrder + " " + orderClause;
                 }
@@ -1280,7 +1366,7 @@ namespace AATM.UI.Controls
 
             if (!hasTop && !hasOffset)
             {
-                baseSql += $" OFFSET {pageIndex * RemoteTake} ROWS FETCH NEXT {RemoteTake} ROWS ONLY";
+                baseSql += $" OFFSET {pageIndex * pageSize} ROWS FETCH NEXT {pageSize} ROWS ONLY";
             }
 
             Log($"SmartComboBox SQL (final): {baseSql}");
@@ -1289,13 +1375,13 @@ namespace AATM.UI.Controls
             try
             {
                 using var conn = new SqlConnection(ConnectionString);
-                await conn.OpenAsync(token);
+                await conn.OpenAsync(token).ConfigureAwait(false);
                 using var cmd = new SqlCommand(baseSql, conn);
-                cmd.Parameters.Add(new SqlParameter("@filter", SqlDbType.NVarChar, 200) { Value = filter ?? string.Empty });
-                cmd.Parameters.Add(new SqlParameter("@pattern", SqlDbType.NVarChar, 200) { Value = string.IsNullOrEmpty(filter) ? string.Empty : $"%{filter}%" });
+                cmd.Parameters.Add(new SqlParameter("@filter", SqlDbType.NVarChar,200) { Value = filter ?? string.Empty });
+                cmd.Parameters.Add(new SqlParameter("@pattern", SqlDbType.NVarChar,200) { Value = string.IsNullOrEmpty(filter) ? string.Empty : $"%{filter}%" });
 
-                using var reader = await cmd.ExecuteReaderAsync(token);
-                while (await reader.ReadAsync(token))
+                using var reader = await cmd.ExecuteReaderAsync(token).ConfigureAwait(false);
+                while (await reader.ReadAsync(token).ConfigureAwait(false))
                 {
                     var rec = new ComboRecord
                     {
@@ -1305,7 +1391,7 @@ namespace AATM.UI.Controls
                         Name = SafeGet(reader, "Name")?.ToString() ?? string.Empty
                     };
                     list.Add(rec);
-                    if (list.Count >= RemoteTake) break;
+                    if (list.Count >= pageSize) break;
                 }
             }
             catch (SqlException ex)
@@ -1390,11 +1476,7 @@ namespace AATM.UI.Controls
             if (raw is DataRowView drv && drv.Row.Table.Columns.Contains(path)) return drv[path];
             if (raw is DataRow dr && dr.Table.Columns.Contains(path)) return dr[path];
 
-            if (raw != null)
-            {
-                if (ReflectionCache.TryGetPropValue(raw, path, out var val)) return val;
-            }
-
+            if (ReflectionCache.TryGetPropValue(raw, path, out var val)) return val;
             if (ReflectionCache.TryGetPropValue(cr, path, out var selfVal)) return selfVal;
             return null;
         }
@@ -1556,6 +1638,27 @@ namespace AATM.UI.Controls
         {
             HasError = false;
             ErrorMessage = string.Empty;
+        }
+
+        private int EffectivePageSize => PageSize >0 ? PageSize : RemoteTake;
+
+        public void ClearPageCache()
+        {
+            _pageCache.Clear();
+            HasNextPage = false;
+        }
+
+        private void EvictCacheIfNeeded()
+        {
+            if (CachePageLimit <=0) return;
+            // Exclude special key -1 used for total meta page
+            var normalKeys = _pageCache.Keys.Where(k => k >=0).OrderBy(k => k).ToList();
+            if (normalKeys.Count <= CachePageLimit) return;
+            int removeCount = normalKeys.Count - CachePageLimit;
+            foreach (var k in normalKeys.Take(removeCount))
+            {
+                _pageCache.Remove(k);
+            }
         }
     }
 }

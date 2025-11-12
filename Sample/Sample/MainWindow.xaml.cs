@@ -1,27 +1,39 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
 
 namespace AATM.Sample
 {
     public partial class MainWindow : Window
     {
+        public List<object> TestItems { get; }
+
         public MainWindow()
         {
             InitializeComponent();
+
+            // Build local test data
+            TestItems = Enumerable.Range(1, 100)
+                .Select(i => new { IdNo = i, Code = $"C{i}", Name = $"Name {i}" })
+                .Cast<object>()
+                .ToList();
+
+            DataContext = this;
 
             btnSave.Click += BtnSave_Click;
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-            // Check if selection is empty
-            if (sqlCombo.SelectedId == null || string.IsNullOrWhiteSpace(sqlCombo.SelectedId?.ToString()))
+            // Validate both for demo; prefer testCombo for local test
+            if (testCombo.SelectedId == null || string.IsNullOrWhiteSpace(testCombo.SelectedId?.ToString()))
             {
-                sqlCombo.SetError("Selection is required.");
+                testCombo.SetError("Selection is required.");
                 return;
             }
 
-            sqlCombo.ClearError();
-            MessageBox.Show("Saved successfully!", "Info");
+            testCombo.ClearError();
+            MessageBox.Show($"Saved: {testCombo.SelectedCode} - {testCombo.SelectedName}", "Info");
         }
     }
 }
