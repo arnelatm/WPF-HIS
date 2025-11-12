@@ -1,4 +1,4 @@
-﻿<Window x:Class="AATM.Sample"
+﻿<Window x:Class="AATM.Sample.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:AATM.UI.Controls;assembly=AATM.UI.Controls"
@@ -22,6 +22,8 @@
                          DebounceMilliseconds="300"
                          BorderBrush="Black"
                          BorderThickness="1"/>
+
+        <Button x:Name="btnSave" Content="Save" Height="32" Width="100" Margin="0,0,0,8"/>
 
         <StackPanel Margin="0,8,0,0">
             <TextBlock Text="Selected:" FontWeight="Bold"/>

@@ -533,6 +533,28 @@ namespace AATM.UI.Controls
             finally { _updatingSelectedItem = false; }
         }
 
+        public static readonly DependencyProperty HasErrorProperty =
+        DependencyProperty.Register(nameof(HasError), typeof(bool), typeof(SmartComboBox), new PropertyMetadata(false));
+        /// <summary>
+        /// Gets or sets a value indicating whether the control is in an error state.
+        /// </summary>
+        public bool HasError
+        {
+            get => (bool)GetValue(HasErrorProperty);
+            set => SetValue(HasErrorProperty, value);
+        }
+
+        public static readonly DependencyProperty ErrorMessageProperty =
+        DependencyProperty.Register(nameof(ErrorMessage), typeof(string), typeof(SmartComboBox), new PropertyMetadata(string.Empty));
+        /// <summary>
+        /// Gets or sets the error message to display as a tooltip when in error state.
+        /// </summary>
+        public string ErrorMessage
+        {
+            get => (string)GetValue(ErrorMessageProperty);
+            set => SetValue(ErrorMessageProperty, value);
+        }
+
         #endregion
 
         private bool IsRemoteConfigured =>
@@ -993,6 +1015,10 @@ namespace AATM.UI.Controls
                     if (appendMode) _appendInsertIndex = _currentItems.Count;
                     AppendToCurrent(pageData, append: appendMode);
                 }
+                catch (Exception ex)
+                {
+                    SetError($"Error fetching data: {ex.Message}");
+                }
                 finally
                 {
                     IsBusy = false;
@@ -1025,6 +1051,10 @@ namespace AATM.UI.Controls
                         bool appendMode = _pagingDown && indexSnapshot > 0;
                         if (appendMode) _appendInsertIndex = _currentItems.Count;
                         AppendToCurrent(pageDataLocal, append: appendMode);
+                    }
+                    catch (Exception ex)
+                    {
+                        SetError($"Error filtering data: {ex.Message}");
                     }
                     finally
                     {
@@ -1514,6 +1544,18 @@ namespace AATM.UI.Controls
                     e.Handled = true;
                 }
             }
+        }
+
+        public void SetError(string message)
+        {
+            HasError = true;
+            ErrorMessage = message;
+        }
+
+        public void ClearError()
+        {
+            HasError = false;
+            ErrorMessage = string.Empty;
         }
     }
 }

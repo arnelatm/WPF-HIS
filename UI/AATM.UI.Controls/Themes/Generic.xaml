@@ -11,7 +11,8 @@
  <ControlTemplate TargetType="{x:Type local:SmartComboBox}">
  <Grid>
  <!-- Main border wraps textbox and arrow -->
- <Border x:Name="PART_ComboBorder" BorderBrush="Gray" BorderThickness="1,1,1,0" CornerRadius="2" Background="White" SnapsToDevicePixels="True">
+ <Border x:Name="PART_ComboBorder" BorderBrush="Gray" BorderThickness="1,1,1,0" CornerRadius="2" Background="White" SnapsToDevicePixels="True"
+ ToolTip="{TemplateBinding ErrorMessage}">
  <Grid>
  <Grid.ColumnDefinitions>
  <ColumnDefinition Width="*"/>
@@ -26,6 +27,7 @@
  BorderThickness="0"
  Background="Transparent"
  HorizontalAlignment="Stretch"
+ ToolTip="{TemplateBinding ErrorMessage}"
  AutomationProperties.Name="ComboBox Input"/>
  <!-- Watermark -->
  <TextBlock x:Name="PART_Watermark"
@@ -120,6 +122,11 @@
  <!-- Busy text visibility -->
  <Trigger Property="IsBusy" Value="True">
  <Setter TargetName="PART_BusyText" Property="Visibility" Value="Visible"/>
+ </Trigger>
+ <!-- Error state: red border and tooltip available -->
+ <Trigger Property="HasError" Value="True">
+ <Setter TargetName="PART_ComboBorder" Property="BorderBrush" Value="Red"/>
+ <Setter TargetName="PART_ComboBorder" Property="BorderThickness" Value="2"/>
  </Trigger>
  </ControlTemplate.Triggers>
  </ControlTemplate>

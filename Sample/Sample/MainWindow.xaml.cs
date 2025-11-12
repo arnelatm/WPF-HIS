@@ -1,26 +1,27 @@
-﻿//using System.Collections.Generic;
-//using System.Windows;
+﻿using System.Windows;
 
-//namespace WpfApp1
-//{
-//    public partial class MainWindow : Window
-//    {
-//        public MainWindow()
-//        {
-//            InitializeComponent();
+namespace AATM.Sample
+{
+    public partial class MainWindow : Window
+    {
+        public MainWindow()
+        {
+            InitializeComponent();
 
-//            // set ItemsSource on the named control smartCombo
-//            smartCombo.ItemsSource = new List<string>
-//            {
-//                "Apple","Apricot","Avocado","Banana","Blueberry","Cherry",
-//                "Date","Fig","Grape","Kiwi","Lemon","Mango","Orange",
-//                "Peach","Pear","Pineapple","Raspberry","Strawberry","Watermelon"
-//            };
-//        }
+            btnSave.Click += BtnSave_Click;
+        }
 
-//        private void SmartCombo_ItemSelected(object sender, string selected)
-//        {
-//            MessageBox.Show($"You selected: {selected}", "Selected");
-//        }
-//    }
-//}
+        private void BtnSave_Click(object sender, RoutedEventArgs e)
+        {
+            // Check if selection is empty
+            if (sqlCombo.SelectedId == null || string.IsNullOrWhiteSpace(sqlCombo.SelectedId?.ToString()))
+            {
+                sqlCombo.SetError("Selection is required.");
+                return;
+            }
+
+            sqlCombo.ClearError();
+            MessageBox.Show("Saved successfully!", "Info");
+        }
+    }
+}
