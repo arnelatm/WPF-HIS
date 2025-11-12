@@ -1,0 +1,36 @@
+using System.Collections.ObjectModel;
+using System.Collections.Generic;
+using System;
+
+namespace AATM.UI.Controls
+{
+internal class BulkObservableCollection<T> : ObservableCollection<T>
+    {
+        public void AddRange(IEnumerable<T> items)
+    {
+  if (items == null) return;
+ CheckReentrancy();
+      bool any = false;
+  foreach (var it in items)
+       {
+     Items.Add(it);
+ any = true;
+       }
+       if (any)
+  {
+ OnCollectionChanged(new System.Collections.Specialized.NotifyCollectionChangedEventArgs(System.Collections.Specialized.NotifyCollectionChangedAction.Reset));
+ }
+   }
+
+   public void ReplaceAll(IEnumerable<T> items)
+    {
+  CheckReentrancy();
+  Items.Clear();
+  if (items != null)
+  {
+ foreach (var it in items) Items.Add(it);
+  }
+  OnCollectionChanged(new System.Collections.Specialized.NotifyCollectionChangedEventArgs(System.Collections.Specialized.NotifyCollectionChangedAction.Reset));
+    }
+    }
+}
