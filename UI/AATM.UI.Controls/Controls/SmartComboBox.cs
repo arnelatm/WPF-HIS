@@ -1408,7 +1408,11 @@ namespace AATM.UI.Controls
                 _debounce.Tick += async (_, __) =>
                 {
                     _debounce.Stop();
+                    int caret = _textBox.CaretIndex; // Save caret position
                     await StartSearchAsync(Text);
+                    // Restore focus and caret after filtering
+                    _textBox.Focus();
+                    _textBox.CaretIndex = Math.Min(caret, _textBox.Text.Length);
                 };
             }
             else
