@@ -11,3 +11,8 @@ Summarize all un-pushed changes since the last push for a commit message.
 or
 Generate a commit summary for all current not-committed changes since last push.
 Generate a commit summary for all current unpushed-changes since last push.
+
+
+XML Comments: Add more XML comments for public properties/methods.
+Usage Samples: Provide sample XAML usage for common scenarios (local, remote, paging, custom templates).
+

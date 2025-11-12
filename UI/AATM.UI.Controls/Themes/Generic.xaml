@@ -25,7 +25,8 @@
  Padding="4,2,4,2"
  BorderThickness="0"
  Background="Transparent"
- HorizontalAlignment="Stretch"/>
+ HorizontalAlignment="Stretch"
+ AutomationProperties.Name="ComboBox Input"/>
  <!-- Watermark -->
  <TextBlock x:Name="PART_Watermark"
  Grid.Column="0"
@@ -34,7 +35,8 @@
  IsHitTestVisible="False"
  Text="{TemplateBinding Placeholder}"
  VerticalAlignment="Center"
- Visibility="Collapsed"/>
+ Visibility="Collapsed"
+ AutomationProperties.HelpText="{TemplateBinding Placeholder}"/>
  <!-- Drop arrow button -->
  <Button x:Name="PART_Button"
  Grid.Column="1"
@@ -45,7 +47,8 @@
  Focusable="False"
  Background="Transparent"
  BorderThickness="0"
- Visibility="Visible">
+ Visibility="Visible"
+ AutomationProperties.Name="Open Dropdown">
  <Grid>
  <Path Data="M0,0 L12,0 L6,8 Z"
  Fill="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
@@ -77,7 +80,8 @@
  FontStyle="Italic"
  Visibility="Collapsed"
  Margin="4,2"
- Text="Loading..."/>
+ Text="Loading..."
+ AutomationProperties.HelpText="Loading data"/>
  <Button x:Name="PART_LoadMore"
  DockPanel.Dock="Bottom"
  Content="Load more"
@@ -85,7 +89,8 @@
  Height="24"
  Visibility="Collapsed"
  IsEnabled="False"
- HorizontalAlignment="Stretch"/>
+ HorizontalAlignment="Stretch"
+ AutomationProperties.Name="Load More"/>
  <ListBox x:Name="PART_ListBox"
  IsSynchronizedWithCurrentItem="True"
  VirtualizingStackPanel.IsVirtualizing="True"
@@ -97,7 +102,8 @@
  HorizontalAlignment="Stretch"
  SnapsToDevicePixels="True"
  ItemTemplate="{TemplateBinding ItemTemplate}"
- ItemTemplateSelector="{TemplateBinding ItemTemplateSelector}" />
+ ItemTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+ AutomationProperties.Name="ComboBox List" />
  </DockPanel>
  </Border>
  </Popup>
