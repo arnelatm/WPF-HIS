@@ -7,6 +7,9 @@ namespace AATM.Sample
     public partial class MainWindow : Window
     {
         public List<object> TestItems { get; }
+        public object SelectedCustomerId { get; set; }
+        public string SelectedCustomerCode { get; set; }
+        public string SelectedCustomerName { get; set; }
 
         public MainWindow()
         {
@@ -25,15 +28,15 @@ namespace AATM.Sample
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-            // Validate both for demo; prefer testCombo for local test
-            if (testCombo.SelectedId == null || string.IsNullOrWhiteSpace(testCombo.SelectedId?.ToString()))
+            // Validate remote SQL combo
+            if (sqlCombo.SelectedId == null || string.IsNullOrWhiteSpace(sqlCombo.SelectedId?.ToString()))
             {
-                testCombo.SetError("Selection is required.");
+                sqlCombo.SetError("Selection is required.");
                 return;
             }
 
-            testCombo.ClearError();
-            MessageBox.Show($"Saved: {testCombo.SelectedCode} - {testCombo.SelectedName}", "Info");
+            sqlCombo.ClearError();
+            MessageBox.Show($"Saved: {sqlCombo.SelectedCode} - {sqlCombo.SelectedName}", "Info");
         }
     }
 }

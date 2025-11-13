@@ -65,19 +65,6 @@ namespace AATM.UI.Controls
         private bool _suspendCollectionChangedEvents = false; // suppress handler during bulk updates
         private bool _updatingSelectedItem; // guard reentrancy for SelectedItem
 
-        public Action<string> Logger { get; set; }
-        private void Log(string msg)
-        {
-            if (Logger != null)
-            {
-                Logger.Invoke(msg);
-            }
-            else
-            {
-                Debug.WriteLine(msg);
-            }
-        }
-
         static SmartComboBox()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(SmartComboBox), new FrameworkPropertyMetadata(typeof(SmartComboBox)));
@@ -607,6 +594,29 @@ namespace AATM.UI.Controls
             set => SetValue(UseBackgroundFilteringProperty, value);
         }
 
+        // NEW: Field names for remote filtering
+        public static readonly DependencyProperty FilterCodeFieldProperty =
+        DependencyProperty.Register(nameof(FilterCodeField), typeof(string), typeof(SmartComboBox), new PropertyMetadata("ProductCode"));
+        /// <summary>
+        /// Gets or sets the field name used for code filtering in remote SQL mode.
+        /// </summary>
+        public string FilterCodeField
+        {
+            get => (string)GetValue(FilterCodeFieldProperty);
+            set => SetValue(FilterCodeFieldProperty, value);
+        }
+
+        public static readonly DependencyProperty FilterNameFieldProperty =
+        DependencyProperty.Register(nameof(FilterNameField), typeof(string), typeof(SmartComboBox), new PropertyMetadata("ProductName"));
+        /// <summary>
+        /// Gets or sets the field name used for name filtering in remote SQL mode.
+        /// </summary>
+        public string FilterNameField
+        {
+            get => (string)GetValue(FilterNameFieldProperty);
+            set => SetValue(FilterNameFieldProperty, value);
+        }
+
         #endregion
 
         private bool IsRemoteConfigured =>
@@ -1058,13 +1068,15 @@ namespace AATM.UI.Controls
 
             if (remote)
             {
-                IsBusy = true;
                 try
                 {
+                    // Set IsBusy on UI thread before starting async work
+                    await Application.Current.Dispatcher.InvokeAsync(() => IsBusy = true);
+
                     List<ComboRecord> pageData = await FetchFromSqlAsync(_lastFilter, token, pageIndex, pageSize).ConfigureAwait(false);
                     if (token.IsCancellationRequested) return;
                     _pageCache[pageIndex] = pageData;
-                    EvictCacheIfNeeded();
+                    await Application.Current.Dispatcher.InvokeAsync(() => EvictCacheIfNeeded());
                     // back to UI thread
                     await Application.Current.Dispatcher.InvokeAsync(() =>
                     {
@@ -1140,6 +1152,19 @@ namespace AATM.UI.Controls
             }
         }
 
+        /// <summary>
+        /// Updates the HasNextPage property based on the current page, number of items, and page size.
+        /// </summary>
+        /// <param name="pageIndex">The current page index.</param>
+        /// <param name="itemCount">The number of items returned for the current page.</param>
+        /// <param name="pageSize">The configured page size.</param>
+        private void UpdateHasNext(int pageIndex, int itemCount, int pageSize)
+        {
+            // If the number of items returned equals the page size, assume there may be a next page.
+            HasNextPage = itemCount >= pageSize;
+            UpdateLoadMoreVisibility();
+        }
+
         private void EnsureListBoxSelection(object previousId = null)
         {
             if (_listBox == null) return;
@@ -1191,7 +1216,7 @@ namespace AATM.UI.Controls
             var newList = records?.ToList() ?? new List<ComboRecord>();
 
             // If there is nothing to add and not replacing, leave as-is
-            if (!append && newList.Count == 0)
+            if (!append && newList.Count ==0)
             {
                 // ensure selection restored
                 EnsureListBoxSelection(previousId);
@@ -1211,10 +1236,10 @@ namespace AATM.UI.Controls
             }
 
             // After replacing collection, perform selection logic on UI thread and defer ScrollIntoView
-            if (_listBox != null && _forceFirstSelectionOnLoad && !append && _currentItems.Count > 0)
+            if (_listBox != null && _forceFirstSelectionOnLoad && !append && _currentItems.Count >0)
             {
                 var first = _currentItems[0];
-                _listBox.SelectedIndex = 0;
+                _listBox.SelectedIndex =0;
                 SelectedId = first.IdNo;
                 SelectedCode = first.Code;
                 SelectedName = first.Name;
@@ -1233,7 +1258,7 @@ namespace AATM.UI.Controls
             {
                 if (_pendingPageDown)
                 {
-                    var targetIndex = (_appendInsertIndex >= 0 && _appendInsertIndex < _currentItems.Count) ? _appendInsertIndex : 0;
+                    var targetIndex = (_appendInsertIndex >=0 && _appendInsertIndex < _currentItems.Count) ? _appendInsertIndex :0;
                     _listBox.SelectedIndex = targetIndex;
                     _listBox.Focus();
                     _ = _listBox.Dispatcher.BeginInvoke((Action)(() => _listBox.ScrollIntoView(_listBox.SelectedItem)), DispatcherPriority.Background);
@@ -1242,7 +1267,7 @@ namespace AATM.UI.Controls
                 }
                 else if (_pendingPageUp)
                 {
-                    _listBox.SelectedIndex = _currentItems.Count - 1;
+                    _listBox.SelectedIndex = _currentItems.Count -1;
                     _listBox.Focus();
                     _ = _listBox.Dispatcher.BeginInvoke((Action)(() => _listBox.ScrollIntoView(_listBox.SelectedItem)), DispatcherPriority.Background);
                     _pendingPageUp = false;
@@ -1257,164 +1282,6 @@ namespace AATM.UI.Controls
             {
                 EnsureListBoxSelection(previousId);
             }
-        }
-
-        private void UpdateHasNext(int pageIndex, int pageCount)
-        {
-            UpdateHasNext(pageIndex, pageCount, EffectivePageSize);
-        }
-
-        private void UpdateHasNext(int pageIndex, int pageCount, int pageSize)
-        {
-            if (pageCount < pageSize)
-            {
-                HasNextPage = false;
-                UpdateLoadMoreVisibility();
-                return;
-            }
-
-            if (_pageCache.ContainsKey(pageIndex +1))
-            {
-                HasNextPage = _pageCache[pageIndex +1].Count >0;
-                UpdateLoadMoreVisibility();
-                return;
-            }
-
-            if (_pageCache.ContainsKey(-1))
-            {
-                HasNextPage = (pageIndex +1) * pageSize < _totalFilteredCount;
-            }
-            else
-            {
-                HasNextPage = true;
-            }
-            UpdateLoadMoreVisibility();
-        }
-
-        private void RefreshLoadMoreButton()
-        {
-            if (_popup == null) return;
-            if (_loadMoreButton != null)
-            {
-                _loadMoreButton.Visibility =
-                (!EnableAutoScrollPaging && HasNextPage)
-                ? Visibility.Visible
-                : Visibility.Collapsed;
-            }
-        }
-
-        // Added caching safety + lazy resolve of template part
-        private void UpdateLoadMoreVisibility()
-        {
-            if (_loadMoreButton == null)
-                _loadMoreButton = GetTemplateChild("PART_LoadMore") as Button;
-
-            if (_loadMoreButton == null)
-                return;
-
-            // Force hidden/disabled per user request to disable appearance
-            _loadMoreButton.Visibility = Visibility.Collapsed;
-            _loadMoreButton.IsEnabled = false;
-        }
-
-        private async Task<List<ComboRecord>> FetchFromSqlAsync(string filter, CancellationToken token, int pageIndex)
-        {
-            return await FetchFromSqlAsync(filter, token, pageIndex, EffectivePageSize);
-        }
-
-        private async Task<List<ComboRecord>> FetchFromSqlAsync(string filter, CancellationToken token, int pageIndex, int pageSize)
-        {
-            var list = new List<ComboRecord>();
-            if (string.IsNullOrWhiteSpace(ConnectionString) || string.IsNullOrWhiteSpace(SqlQueryTemplate))
-                return list;
-
-            string baseSql = SqlQueryTemplate.Trim().TrimEnd(';');
-
-            bool hasTop = baseSql.IndexOf(" top ", StringComparison.OrdinalIgnoreCase) >=0;
-            bool hasOffset = baseSql.IndexOf(" offset ", StringComparison.OrdinalIgnoreCase) >=0;
-            bool hasFilterParameter = baseSql.IndexOf("@filter", StringComparison.OrdinalIgnoreCase) >=0;
-
-            bool hasOrderBy = baseSql.IndexOf(" order by ", StringComparison.OrdinalIgnoreCase) >=0;
-            if (!hasOrderBy)
-            {
-                baseSql += " ORDER BY IdNo";
-                hasOrderBy = true;
-            }
-
-            if (!hasFilterParameter)
-            {
-                bool hasCodeAlias = baseSql.IndexOf(" Code", StringComparison.OrdinalIgnoreCase) >=0;
-                bool hasNameAlias = baseSql.IndexOf(" Name", StringComparison.OrdinalIgnoreCase) >=0;
-                string filterExpr = hasCodeAlias && hasNameAlias
-                ? "(@filter = '' OR Code LIKE @pattern OR Name LIKE @pattern)"
-                : "(@filter = '' OR ProductCode LIKE @pattern OR ProductName LIKE @pattern)";
-
-                int orderPos = baseSql.LastIndexOf(" order by ", StringComparison.OrdinalIgnoreCase);
-                if (orderPos >=0)
-                {
-                    string beforeOrder = baseSql.Substring(0, orderPos);
-                    string orderClause = baseSql.Substring(orderPos);
-                    bool beforeHasWhere = beforeOrder.IndexOf(" where ", StringComparison.OrdinalIgnoreCase) >=0;
-                    beforeOrder += beforeHasWhere ? " AND " + filterExpr : " WHERE " + filterExpr;
-                    baseSql = beforeOrder + " " + orderClause;
-                }
-                else
-                {
-                    baseSql += " WHERE " + filterExpr;
-                }
-            }
-
-            if (!hasTop && !hasOffset)
-            {
-                baseSql += $" OFFSET {pageIndex * pageSize} ROWS FETCH NEXT {pageSize} ROWS ONLY";
-            }
-
-            Log($"SmartComboBox SQL (final): {baseSql}");
-            Log($"SmartComboBox SQL @filter: {filter}");
-
-            try
-            {
-                using var conn = new SqlConnection(ConnectionString);
-                await conn.OpenAsync(token).ConfigureAwait(false);
-                using var cmd = new SqlCommand(baseSql, conn);
-                cmd.Parameters.Add(new SqlParameter("@filter", SqlDbType.NVarChar,200) { Value = filter ?? string.Empty });
-                cmd.Parameters.Add(new SqlParameter("@pattern", SqlDbType.NVarChar,200) { Value = string.IsNullOrEmpty(filter) ? string.Empty : $"%{filter}%" });
-
-                using var reader = await cmd.ExecuteReaderAsync(token).ConfigureAwait(false);
-                while (await reader.ReadAsync(token).ConfigureAwait(false))
-                {
-                    var rec = new ComboRecord
-                    {
-                        Raw = reader,
-                        IdNo = SafeGet(reader, "IdNo"),
-                        Code = SafeGet(reader, "Code")?.ToString() ?? string.Empty,
-                        Name = SafeGet(reader, "Name")?.ToString() ?? string.Empty
-                    };
-                    list.Add(rec);
-                    if (list.Count >= pageSize) break;
-                }
-            }
-            catch (SqlException ex)
-            {
-                Log("SmartComboBox SQL ERROR: " + ex.Message);
-            }
-            catch (Exception ex)
-            {
-                Log("SmartComboBox (unexpected) ERROR: " + ex.Message);
-            }
-
-            return list;
-        }
-
-        private object SafeGet(IDataRecord r, string field)
-        {
-            try
-            {
-                int ord = r.GetOrdinal(field);
-                if (r.IsDBNull(ord)) return null;
-                return r.GetValue(ord);
-            }
-            catch { return null; }
         }
 
         private void CommitSelection()
@@ -1436,7 +1303,9 @@ namespace AATM.UI.Controls
                 }
 
                 _updatingSelectedItem = true;
-                try { SelectedItem = cr.Raw ?? (object)cr; }
+                try {
+                    SelectedItem = cr.Raw ?? (object)cr;
+                }
                 finally { _updatingSelectedItem = false; }
 
                 if (_popup != null)
@@ -1659,6 +1528,122 @@ namespace AATM.UI.Controls
             {
                 _pageCache.Remove(k);
             }
+        }
+
+        private void UpdateLoadMoreVisibility()
+        {
+            if (_loadMoreButton == null) return;
+            // Show the button only if there is a next page and the dropdown is open
+            _loadMoreButton.Visibility = HasNextPage && IsDropDownOpen
+                ? Visibility.Visible
+                : Visibility.Collapsed;
+        }
+
+        // Add this method to the SmartComboBox class
+
+        /// <summary>
+        /// Asynchronously fetches a page of ComboRecord items from SQL using the configured query template.
+        /// </summary>
+        /// <param name="filter">The filter string to apply.</param>
+        /// <param name="token">Cancellation token.</param>
+        /// <param name="pageIndex">The page index to fetch.</param>
+        /// <param name="pageSize">The number of records per page.</param>
+        /// <returns>A list of ComboRecord objects.</returns>
+        // ... inside SmartComboBox class ...
+
+        private async Task<List<ComboRecord>> FetchFromSqlAsync(string filter, CancellationToken token, int pageIndex, int pageSize)
+        {
+            var results = new List<ComboRecord>();
+            if (!IsRemoteConfigured)
+                return results;
+
+            // Build parameterized WHERE clause (only when filter supplied)
+            string whereClause = string.Empty;
+            if (!string.IsNullOrWhiteSpace(filter))
+            {
+                // Wrap OR conditions in parentheses for safety if later combined
+                whereClause = $"WHERE ([{FilterCodeField}] LIKE '%' + @Filter + '%' OR [{FilterNameField}] LIKE '%' + @Filter + '%')";
+            }
+
+            // Start from template
+            string query = SqlQueryTemplate ?? string.Empty;
+
+            // Replace {Where} token if present; otherwise attempt smart insertion before ORDER BY (if filter exists and template lacks any WHERE)
+            if (query.Contains("{Where}", StringComparison.OrdinalIgnoreCase))
+            {
+                query = query.Replace("{Where}", whereClause);
+            }
+            else if (!string.IsNullOrWhiteSpace(whereClause))
+            {
+                // If template already has a WHERE we do not inject another; otherwise insert before ORDER BY if possible
+                if (!query.Contains(" WHERE ", StringComparison.OrdinalIgnoreCase))
+                {
+                    int orderByIndex = query.IndexOf("ORDER BY", StringComparison.OrdinalIgnoreCase);
+                    if (orderByIndex >=0)
+                    {
+                        // Insert whereClause right before ORDER BY
+                        query = query.Substring(0, orderByIndex).TrimEnd() + " " + whereClause + " " + query.Substring(orderByIndex);
+                    }
+                    else
+                    {
+                        // Append at end
+                        query = query.TrimEnd() + " " + whereClause;
+                    }
+                }
+            }
+
+            // Support paging tokens: replace {Skip}/{Take} with parameter names if present
+            if (query.Contains("{Skip}", StringComparison.OrdinalIgnoreCase))
+                query = query.Replace("{Skip}", "@Skip");
+            if (query.Contains("{Take}", StringComparison.OrdinalIgnoreCase))
+                query = query.Replace("{Take}", "@Take");
+
+            try
+            {
+                using var conn = new SqlConnection(ConnectionString);
+                using var cmd = new SqlCommand(query, conn)
+                {
+                    CommandTimeout =30
+                };
+
+                // Add paging parameters even if template may not use them (harmless)
+                cmd.Parameters.Add("@Skip", System.Data.SqlDbType.Int).Value = pageIndex * pageSize;
+                cmd.Parameters.Add("@Take", System.Data.SqlDbType.Int).Value = pageSize;
+
+                if (!string.IsNullOrWhiteSpace(filter) && query.Contains("@Filter", StringComparison.OrdinalIgnoreCase))
+                {
+                    cmd.Parameters.Add("@Filter", System.Data.SqlDbType.NVarChar, Math.Max(filter.Length,50)).Value = filter;
+                }
+
+                await conn.OpenAsync(token).ConfigureAwait(false);
+                using var reader = await cmd.ExecuteReaderAsync(token).ConfigureAwait(false);
+
+                while (await reader.ReadAsync(token).ConfigureAwait(false))
+                {
+                    if (token.IsCancellationRequested) break;
+
+                    var idNo = reader["IdNo"];
+                    var code = reader["Code"] as string ?? string.Empty;
+                    var name = reader["Name"] as string ?? string.Empty;
+
+                    var rec = new ComboRecord
+                    {
+                        IdNo = idNo,
+                        Code = code,
+                        Name = name,
+                        Raw = null // avoid holding onto reader; raw could be a lightweight object if needed
+                    };
+                    // Display is managed by ComboRecord (assumed) else compute here
+                    // rec.Display = !string.IsNullOrEmpty(code) ? $"{code} - {name}" : name; (uncomment if not auto-populated)
+                    results.Add(rec);
+                }
+            }
+            catch (Exception ex)
+            {
+                SetError($"Error fetching data: {ex.Message}");
+            }
+
+            return results;
         }
     }
 }

@@ -19,3 +19,4 @@ Usage Samples: Provide sample XAML usage for common scenarios (local, remote, pa
 
 
 
+Summarize all un-committed changes in a concise but informative commit summary ideally wrapped at 72 characters per line.
