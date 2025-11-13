@@ -692,6 +692,11 @@ namespace AATM.UI.Controls
 
         public void SetError(string message)
         {
+            if (!Dispatcher.CheckAccess())
+            {
+                Dispatcher.Invoke(() => SetError(message));
+                return;
+            }
             HasError = true;
             ErrorMessage = message;
         }

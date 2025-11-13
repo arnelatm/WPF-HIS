@@ -62,7 +62,17 @@ namespace AATM.UI.Controls
                 try
                 {
                     await Application.Current.Dispatcher.InvokeAsync(() => IsBusy = true);
-                    List<ComboRecord> pageData = await FetchFromSqlAsync(_lastFilter, token, pageIndex, pageSize).ConfigureAwait(false);
+                    List<ComboRecord> pageData = null;
+                    try
+                    {
+                        pageData = await FetchFromSqlAsync(_lastFilter, token, pageIndex, pageSize).ConfigureAwait(false);
+                    }
+                    catch (OperationCanceledException)
+                    {
+                        // Suppress error: cancellation is expected when a new search starts
+                        await Application.Current.Dispatcher.InvokeAsync(() => ClearError());
+                        return;
+                    }
                     if (token.IsCancellationRequested) return;
                     _pageCache[pageIndex] = pageData;
                     await Application.Current.Dispatcher.InvokeAsync(() => EvictCacheIfNeeded());

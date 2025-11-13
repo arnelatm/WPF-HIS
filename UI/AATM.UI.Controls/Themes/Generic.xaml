@@ -11,7 +11,7 @@
                 <ControlTemplate TargetType="{x:Type local:SmartComboBox}">
                     <Grid>
                         <!-- Main border wraps textbox and arrow -->
-                        <Border x:Name="PART_ComboBorder" BorderBrush="Gray" BorderThickness="1,1,1,0" CornerRadius="2" Background="White" SnapsToDevicePixels="True"
+                        <Border x:Name="PART_ComboBorder" BorderBrush="Gray" BorderThickness="1,1,1,1" CornerRadius="2" Background="White" SnapsToDevicePixels="True"
                             ToolTip="{TemplateBinding ErrorMessage}">
                             <Grid>
                                 <Grid.ColumnDefinitions>
