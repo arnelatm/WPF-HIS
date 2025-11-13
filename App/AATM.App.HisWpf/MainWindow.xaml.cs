@@ -2,11 +2,28 @@
 using AATM.Modules.Users;
 using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
+using System.Windows.Input;
 
 namespace AATM.App.HisWpf
 {
     public partial class MainWindow : Window
     {
+        public MainWindow()
+        {
+            InitializeComponent();
+
+            this.PreviewKeyDown += MainWindow_PreviewKeyDown;
+        }
+
+        private void MainWindow_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine($"[WINDOW] PreviewKeyDown: Key={e.Key}, IsDown={e.IsDown}, IsUp={e.IsUp}, Handled={e.Handled}");
+            if (e.Key == Key.Down)
+            {
+                System.Diagnostics.Debug.WriteLine("[WINDOW] DOWN ARROW PRESSED!");
+            }
+        }
+
         private void OpenTranslationManager_Click(object sender, RoutedEventArgs e)
         {
             var svc = App.Host.Services.GetRequiredService<TranslationCrudService>();
