@@ -11,18 +11,8 @@ namespace AATM.App.HisWpf
         public MainWindow()
         {
             InitializeComponent();
-
-            this.PreviewKeyDown += MainWindow_PreviewKeyDown;
         }
 
-        private void MainWindow_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
-            System.Diagnostics.Debug.WriteLine($"[WINDOW] PreviewKeyDown: Key={e.Key}, IsDown={e.IsDown}, IsUp={e.IsUp}, Handled={e.Handled}");
-            if (e.Key == Key.Down)
-            {
-                System.Diagnostics.Debug.WriteLine("[WINDOW] DOWN ARROW PRESSED!");
-            }
-        }
 
         private void OpenTranslationManager_Click(object sender, RoutedEventArgs e)
         {
