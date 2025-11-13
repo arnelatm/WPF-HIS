@@ -31,7 +31,7 @@ namespace AATM.UI.Controls
         private bool _suspendCollectionChangedEvents = false;
         private bool _updatingSelectedItem;
         private string _lastFilter = string.Empty;
-        private int _lastPageIndex = 0;
+        private int _lastPageIndex =0;
         private bool _pagingDown = true;
         private bool _forceFirstSelectionOnLoad;
         private int _appendInsertIndex = -1;
@@ -42,7 +42,7 @@ namespace AATM.UI.Controls
         private int _totalFilteredCount;
         private bool _pendingPageDown;
         private bool _pendingPageUp;
-        private const int AutoRemoteThreshold = 50000;
+        private const int AutoRemoteThreshold =50000;
         private bool _suppressPageIndexChanged;
         private bool _ignoreMinLengthOnce;
         private bool _focusListOnSearchComplete;
@@ -56,7 +56,7 @@ namespace AATM.UI.Controls
         public SmartComboBox()
         {
             System.Diagnostics.Debug.WriteLine("[SmartComboBox] Constructor called.");
-            RemoteTake = 20;
+            RemoteTake =20;
             _currentItems.CollectionChanged += CurrentItems_CollectionChanged;
             this.Unloaded += SmartComboBox_Unloaded;
         }
@@ -449,7 +449,7 @@ namespace AATM.UI.Controls
             base.OnApplyTemplate();
 
             _textBox = GetTemplateChild("PART_TextBox") as TextBox;
-            System.Diagnostics.Debug.WriteLine($"[SmartComboBox] _textBox is {(_textBox == null ? "null" : "not null")}");
+            System.Diagnostics.Debug.WriteLine($"[SmartComboBox] _textBox is {( _textBox == null ? "null" : "not null")}");
 
             _listBox = GetTemplateChild("PART_ListBox") as ListBox;
             _button = GetTemplateChild("PART_Button") as Button;
@@ -575,14 +575,14 @@ namespace AATM.UI.Controls
                 // allow showing results even if below MinSearchLength and focus list after search
                 _ignoreMinLengthOnce = true;
                 _focusListOnSearchComplete = true;
-                _pendingMoveDelta = e.Key == Key.Down ? 1 : -1;
+                _pendingMoveDelta = e.Key == Key.Down ?1 : -1;
                 EnsureDropDownAndSearch(txt, forceOpen: true);
 
                 // if items already present, move selection and focus immediately
-                if (_listBox != null && _currentItems.Count > 0)
+                if (_listBox != null && _currentItems.Count >0)
                 {
                     FocusListAndEnsureSelection(_pendingMoveDelta);
-                    _pendingMoveDelta = 0;
+                    _pendingMoveDelta =0;
                 }
                 e.Handled = true;
                 return;
@@ -652,7 +652,7 @@ namespace AATM.UI.Controls
             OpenPopup();
 
             // If no items yet or filter changed, start initial search
-            if (_currentItems.Count == 0 || !string.Equals(_lastFilter, (txt ?? string.Empty).Trim(), StringComparison.Ordinal))
+            if (_currentItems.Count ==0 || !string.Equals(_lastFilter, (txt ?? string.Empty).Trim(), StringComparison.Ordinal))
             {
                 _ = StartSearchAsync(txt ?? string.Empty);
             }
@@ -670,7 +670,7 @@ namespace AATM.UI.Controls
         {
             if (root == null) return null;
             int count = VisualTreeHelper.GetChildrenCount(root);
-            for (int i = 0; i < count; i++)
+            for (int i =0; i < count; i++)
             {
                 var child = VisualTreeHelper.GetChild(root, i);
                 if (child is T t) return t;
@@ -698,7 +698,7 @@ namespace AATM.UI.Controls
             var newList = records?.ToList() ?? new List<ComboRecord>();
             System.Diagnostics.Debug.WriteLine($"[SmartComboBox] AppendToCurrent: newList.Count={newList.Count}, append={append}");
             object previousId = SelectedId;
-            if (!append && newList.Count == 0)
+            if (!append && newList.Count ==0)
             {
                 EnsureListBoxSelection(previousId);
                 return;
@@ -713,26 +713,12 @@ namespace AATM.UI.Controls
                 _currentItems.AddRange(newList);
             }
             System.Diagnostics.Debug.WriteLine($"[SmartComboBox] _currentItems.Count after update: {_currentItems.Count}");
-            if (_listBox != null && _forceFirstSelectionOnLoad && !append && _currentItems.Count > 0)
-            {
-                var first = _currentItems[0];
-                _listBox.SelectedIndex = 0;
-                SelectedId = first.IdNo;
-                SelectedCode = first.Code;
-                SelectedName = first.Name;
-                UpdateSelectedValueFromRecord(first);
-                _updatingSelectedItem = true;
-                try { SelectedItem = first.Raw ?? (object)first; }
-                finally { _updatingSelectedItem = false; }
-                _ = _listBox.Dispatcher.BeginInvoke((Action)(() => _listBox.ScrollIntoView(first)), DispatcherPriority.Background);
-                _forceFirstSelectionOnLoad = false;
-                return;
-            }
+            // Do not auto-select any item here; leave selection empty until user navigates.
             if (_listBox != null)
             {
                 if (_pendingPageDown)
                 {
-                    var targetIndex = (_appendInsertIndex >= 0 && _appendInsertIndex < _currentItems.Count) ? _appendInsertIndex : 0;
+                    var targetIndex = (_appendInsertIndex >=0 && _appendInsertIndex < _currentItems.Count) ? _appendInsertIndex :0;
                     _listBox.SelectedIndex = targetIndex;
                     _listBox.Focus();
                     _ = _listBox.Dispatcher.BeginInvoke((Action)(() => _listBox.ScrollIntoView(_listBox.SelectedItem)), DispatcherPriority.Background);
@@ -741,7 +727,7 @@ namespace AATM.UI.Controls
                 }
                 else if (_pendingPageUp)
                 {
-                    _listBox.SelectedIndex = _currentItems.Count - 1;
+                    _listBox.SelectedIndex = _currentItems.Count -1;
                     _listBox.Focus();
                     _ = _listBox.Dispatcher.BeginInvoke((Action)(() => _listBox.ScrollIntoView(_listBox.SelectedItem)), DispatcherPriority.Background);
                     _pendingPageUp = false;
@@ -769,7 +755,8 @@ namespace AATM.UI.Controls
         {
             _localMaster.Clear();
             if (ItemsSource == null) return;
-            foreach (var item in ItemsSource)
+            foreach (var item in ItemsSource
+            )
             {
                 var rec = ComboRecord.FromUnknown(item);
                 if (rec != null) _localMaster.Add(rec);
@@ -779,13 +766,13 @@ namespace AATM.UI.Controls
         private void CurrentItems_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             if (_suspendCollectionChangedEvents) return;
-            if (_listBox != null && _currentItems.Count > 0)
+            if (_listBox != null && _currentItems.Count >0)
             {
                 if (_pendingPageDown)
                 {
-                    var targetIndex = (_appendInsertIndex >= 0 && _appendInsertIndex < _currentItems.Count)
+                    var targetIndex = (_appendInsertIndex >=0 && _appendInsertIndex < _currentItems.Count)
                     ? _appendInsertIndex
-                    : 0;
+                    :0;
                     _listBox.SelectedIndex = targetIndex;
                     _listBox.Focus();
                     _ = _listBox.Dispatcher.BeginInvoke((Action)(() => _listBox.ScrollIntoView(_listBox.SelectedItem)), DispatcherPriority.Background);
@@ -794,13 +781,13 @@ namespace AATM.UI.Controls
                 }
                 else if (_pendingPageUp)
                 {
-                    _listBox.SelectedIndex = _currentItems.Count - 1;
+                    _listBox.SelectedIndex = _currentItems.Count -1;
                     _listBox.Focus();
                     _ = _listBox.Dispatcher.BeginInvoke((Action)(() => _listBox.ScrollIntoView(_listBox.SelectedItem)), DispatcherPriority.Background);
                     _pendingPageUp = false;
                 }
             }
-            else if (_listBox != null && _currentItems.Count == 0)
+            else if (_listBox != null && _currentItems.Count ==0)
             {
                 _listBox.SelectedIndex = -1;
             }
@@ -841,7 +828,7 @@ namespace AATM.UI.Controls
 
         private bool ShouldActivateDropDown(string txt)
         {
-            return (txt?.Trim().Length ?? 0) >= MinSearchLength;
+            return (txt?.Trim().Length ??0) >= MinSearchLength;
         }
 
         private async Task StartSearchAsync(string filter)
@@ -853,9 +840,9 @@ namespace AATM.UI.Controls
             _lastFilter = (filter ?? string.Empty).Trim();
             _currentItems.Clear();
             _pageCache.Clear();
-            _forceFirstSelectionOnLoad = true;
-            _lastPageIndex = 0;
-            PageIndex = 0;
+            _forceFirstSelectionOnLoad = false; // do not auto-select on initial load
+            _lastPageIndex =0;
+            PageIndex =0;
             HasNextPage = false;
             await RunInitialSearchAsync(_lastFilter, _cts?.Token ?? CancellationToken.None);
         }
@@ -867,7 +854,7 @@ namespace AATM.UI.Controls
             var trimmed = (filter ?? string.Empty).Trim();
             _lastFilter = trimmed;
             _suppressPageIndexChanged = true;
-            PageIndex = 0;
+            PageIndex =0;
             _suppressPageIndexChanged = false;
             if (token.IsCancellationRequested) return;
             if (trimmed.Length < MinSearchLength && !(ShowAllOnBlank && string.IsNullOrEmpty(trimmed)) && !_ignoreMinLengthOnce)
@@ -876,23 +863,11 @@ namespace AATM.UI.Controls
                 return;
             }
             await AppendPageAsync(0, token);
-            if (!token.IsCancellationRequested && _listBox != null && _currentItems.Count > 0 && _listBox.SelectedIndex < 0)
-            {
-                _listBox.SelectedIndex = 0;
-                var first = _currentItems[0];
-                SelectedId = first.IdNo;
-                SelectedCode = first.Code;
-                SelectedName = first.Name;
-                UpdateSelectedValueFromRecord(first);
-                _updatingSelectedItem = true;
-                try { SelectedItem = first.Raw ?? (object)first; }
-                finally { _updatingSelectedItem = false; }
-                _listBox.ScrollIntoView(first);
-            }
+            // Do not auto-select here; let arrow navigation decide.
             if (_focusListOnSearchComplete)
             {
                 FocusListAndEnsureSelection(_pendingMoveDelta);
-                _pendingMoveDelta = 0;
+                _pendingMoveDelta =0;
             }
             // reset one-shot flags
             _ignoreMinLengthOnce = false;
@@ -949,10 +924,10 @@ namespace AATM.UI.Controls
 
         private void FocusListAndEnsureSelection(int moveDelta)
         {
-            if (_listBox == null || _currentItems.Count == 0) return;
+            if (_listBox == null || _currentItems.Count ==0) return;
             int idx = _listBox.SelectedIndex;
-            if (idx < 0) idx = 0;
-            else idx = Math.Max(0, Math.Min(_currentItems.Count - 1, idx + moveDelta));
+            if (idx <0) idx =0; // first navigation selects first item
+            else idx = Math.Max(0, Math.Min(_currentItems.Count -1, idx + moveDelta));
             _listBox.SelectedIndex = idx;
             var item = _listBox.SelectedItem;
             if (item != null) _listBox.ScrollIntoView(item);
