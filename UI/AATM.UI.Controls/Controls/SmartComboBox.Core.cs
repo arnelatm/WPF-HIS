@@ -449,7 +449,7 @@ namespace AATM.UI.Controls
             base.OnApplyTemplate();
 
             _textBox = GetTemplateChild("PART_TextBox") as TextBox;
-            System.Diagnostics.Debug.WriteLine($"[SmartComboBox] _textBox is {( _textBox == null ? "null" : "not null")}");
+            System.Diagnostics.Debug.WriteLine($"[SmartComboBox] _textBox is {( _textBox == null ? "null" : "not null")} ");
 
             _listBox = GetTemplateChild("PART_ListBox") as ListBox;
             _button = GetTemplateChild("PART_Button") as Button;
@@ -629,7 +629,17 @@ namespace AATM.UI.Controls
                 e.Handled = true;
                 return;
             }
-            // Let Up/Down/PageUp/PageDown/Home/End be handled by ListBox default behavior
+            if (e.Key == Key.Up)
+            {
+                // When at the top of the list, move focus back to the textbox and place caret at the end
+                if (_listBox != null && _listBox.SelectedIndex <=0)
+                {
+                    e.Handled = true;
+                    FocusTextBoxAtEnd();
+                    return;
+                }
+            }
+            // Let other navigation keys (Up/Down/PageUp/PageDown/Home/End) use default behavior
         }
 
         private void EnsureDropDownAndSearch(string txt, bool forceOpen = false)
@@ -946,6 +956,16 @@ namespace AATM.UI.Controls
                     else Keyboard.Focus(_listBox);
                 }), DispatcherPriority.Input);
             }
+        }
+
+        private void FocusTextBoxAtEnd()
+        {
+            if (_textBox == null) return;
+            _textBox.Focus();
+            var len = _textBox.Text?.Length ??0;
+            _textBox.CaretIndex = len;
+            // Ensure no selection remains
+            _textBox.Select(len,0);
         }
     }
 }
