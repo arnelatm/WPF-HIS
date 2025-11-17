@@ -398,12 +398,12 @@ namespace AATM.UI.Controls
             set => SetValue(ConnectionStringProperty, value);
         }
 
-        public static readonly DependencyProperty SqlQueryTemplateProperty =
-         DependencyProperty.Register(nameof(SqlQueryTemplate), typeof(string), typeof(SmartComboBox), new PropertyMetadata(string.Empty));
-        public string SqlQueryTemplate
+        public static readonly DependencyProperty RemoteQueryTemplateProperty =
+         DependencyProperty.Register(nameof(RemoteQueryTemplate), typeof(string), typeof(SmartComboBox), new PropertyMetadata(string.Empty));
+        public string RemoteQueryTemplate
         {
-            get => (string)GetValue(SqlQueryTemplateProperty);
-            set => SetValue(SqlQueryTemplateProperty, value);
+            get => (string)GetValue(RemoteQueryTemplateProperty);
+            set => SetValue(RemoteQueryTemplateProperty, value);
         }
 
         public static readonly DependencyProperty FilterCodeFieldProperty =

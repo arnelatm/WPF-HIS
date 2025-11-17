@@ -1,93 +1,62 @@
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Data.SqlClient;
-using System.Windows;
+using AATM.DataAccess.Sql;
 
 namespace AATM.UI.Controls
 {
     public partial class SmartComboBox
     {
-        private bool IsRemoteConfigured =>
-            !string.IsNullOrWhiteSpace(ConnectionString) &&
-            !string.IsNullOrWhiteSpace(SqlQueryTemplate);
-
-        private async Task<List<ComboRecord>> FetchFromSqlAsync(string filter, CancellationToken token, int pageIndex, int pageSize)
+        // Add this property to the SmartComboBox class to fix the error.
+        private bool IsRemoteConfigured
         {
-            var results = new List<ComboRecord>();
+            get
+            {
+                // Replace with actual logic to determine if remote is configured.
+                // For example, check if ConnectionString and SqlQueryTemplate are not null or empty.
+                return !string.IsNullOrEmpty(ConnectionString) && !string.IsNullOrEmpty(RemoteQueryTemplate);
+            }
+        }
+
+        private async Task<List<ComboRecord>> FetchRemoteRecordsAsync(string filter, CancellationToken token, int pageIndex, int pageSize)
+        {
             if (!IsRemoteConfigured)
             {
-                return results;
+                return new List<ComboRecord>();
             }
-            string whereClause = string.Empty;
-            if (!string.IsNullOrWhiteSpace(filter))
-            {
-                whereClause = $"WHERE ([{FilterCodeField}] LIKE '%' + @Filter + '%' OR [{FilterNameField}] LIKE '%' + @Filter + '%')";
-            }
-            string query = SqlQueryTemplate ?? string.Empty;
-            if (query.Contains("{Where}", StringComparison.OrdinalIgnoreCase))
-            {
-                query = query.Replace("{Where}", whereClause);
-            }
-            else if (!string.IsNullOrWhiteSpace(whereClause))
-            {
-                if (!query.Contains(" WHERE ", StringComparison.OrdinalIgnoreCase))
-                {
-                    int orderByIndex = query.IndexOf("ORDER BY", StringComparison.OrdinalIgnoreCase);
-                    if (orderByIndex >= 0)
-                    {
-                        query = query.Substring(0, orderByIndex).TrimEnd() + " " + whereClause + " " + query.Substring(orderByIndex);
-                    }
-                    else
-                    {
-                        query = query.TrimEnd() + " " + whereClause;
-                    }
-                }
-            }
-            if (query.Contains("{Skip}", StringComparison.OrdinalIgnoreCase))
-                query = query.Replace("{Skip}", "@Skip");
-            if (query.Contains("{Take}", StringComparison.OrdinalIgnoreCase))
-                query = query.Replace("{Take}", "@Take");
             try
             {
-                using var conn = new SqlConnection(ConnectionString);
-                using var cmd = new SqlCommand(query, conn)
+                var repository = new ComboRecordRepository(ConnectionString);
+                var sqlRecords = await repository.FetchRemoteRecordsAsync(
+                    RemoteQueryTemplate,
+                    FilterCodeField,
+                    FilterNameField,
+                    filter,
+                    pageIndex,
+                    pageSize,
+                    token
+                ).ConfigureAwait(false);
+
+                // Map repository DTOs to UI DTOs if needed
+                var uiRecords = new List<ComboRecord>();
+                foreach (var rec in sqlRecords)
                 {
-                    CommandTimeout = 30
-                };
-                cmd.Parameters.Add("@Skip", System.Data.SqlDbType.Int).Value = pageIndex * pageSize;
-                cmd.Parameters.Add("@Take", System.Data.SqlDbType.Int).Value = pageSize;
-                if (!string.IsNullOrWhiteSpace(filter) && query.Contains("@Filter", StringComparison.OrdinalIgnoreCase))
-                {
-                    cmd.Parameters.Add("@Filter", System.Data.SqlDbType.NVarChar, Math.Max(filter.Length, 50)).Value = filter;
-                }
-                await conn.OpenAsync(token).ConfigureAwait(false);
-                using var reader = await cmd.ExecuteReaderAsync(token).ConfigureAwait(false);
-                int rowCount = 0;
-                while (await reader.ReadAsync(token).ConfigureAwait(false))
-                {
-                    if (token.IsCancellationRequested) break;
-                    var idNo = reader["IdNo"];
-                    var code = reader["Code"] as string ?? string.Empty;
-                    var name = reader["Name"] as string ?? string.Empty;
-                    var rec = new ComboRecord
+                    uiRecords.Add(new ComboRecord
                     {
-                        IdNo = idNo,
-                        Code = code,
-                        Name = name,
-                        Raw = null
-                    };
-                    results.Add(rec);
-                    rowCount++;
+                        IdNo = rec.IdNo,
+                        Code = rec.Code,
+                        Name = rec.Name,
+                        Raw = rec.Raw
+                    });
                 }
+                return uiRecords;
             }
             catch (Exception ex)
             {
                 SetError($"Error fetching data: {ex.Message}");
+                return new List<ComboRecord>();
             }
-            return results;
         }
     }
 }

@@ -49,23 +49,31 @@ namespace AATM.UI.Controls
             if (token.IsCancellationRequested) return;
             var filterIsBlank = string.IsNullOrEmpty(_lastFilter?.Trim());
             // Always allow blank filter if ShowAllOnBlank is true
-            if ((_lastFilter ?? string.Empty).Trim().Length < MinSearchLength && !(ShowAllOnBlank && filterIsBlank))
+            var safeFilter = (_lastFilter ?? string.Empty).Trim();
+            if (safeFilter.Length < MinSearchLength && !(ShowAllOnBlank && filterIsBlank))
             {
                 HasNextPage = false;
                 return;
             }
-            if (pageIndex >0) _forceFirstSelectionOnLoad = false;
-            bool remote = UseRemoteFetch || (_localMaster.Count ==0 && IsRemoteConfigured) || _localMaster.Count > AutoRemoteThreshold;
+            if (pageIndex > 0) _forceFirstSelectionOnLoad = false;
+            // Fix: Add null-coalescing for IsRemoteConfigured (assume false if not defined)
+            bool isRemoteConfigured = false;
+#if ISREMOTECONFIGURED_FIELD
+            isRemoteConfigured = IsRemoteConfigured;
+#endif
+            bool remote = UseRemoteFetch || (_localMaster.Count == 0 && isRemoteConfigured) || _localMaster.Count > AutoRemoteThreshold;
             int pageSize = EffectivePageSize;
             if (remote)
             {
                 try
                 {
                     await Application.Current.Dispatcher.InvokeAsync(() => IsBusy = true);
-                    List<ComboRecord> pageData = null;
+                    // Fix: Remove explicit null assignment, just declare variable
+                    List<ComboRecord> pageData;
                     try
                     {
-                        pageData = await FetchFromSqlAsync(_lastFilter, token, pageIndex, pageSize).ConfigureAwait(false);
+                        // Fix: Pass non-null filter argument
+                        pageData = await FetchRemoteRecordsAsync(safeFilter, token, pageIndex, pageSize).ConfigureAwait(false);
                     }
                     catch (OperationCanceledException)
                     {
@@ -79,7 +87,7 @@ namespace AATM.UI.Controls
                     await Application.Current.Dispatcher.InvokeAsync(() =>
                     {
                         UpdateHasNext(pageIndex, pageData.Count, pageSize);
-                        bool appendMode = _pagingDown && pageIndex >0;
+                        bool appendMode = _pagingDown && pageIndex > 0;
                         if (appendMode) _appendInsertIndex = _currentItems.Count;
                         AppendToCurrent(pageData, append: appendMode);
                     });
@@ -95,7 +103,7 @@ namespace AATM.UI.Controls
             }
             else
             {
-                var filterSnapshot = _lastFilter;
+                var filterSnapshot = safeFilter;
                 var indexSnapshot = pageIndex;
                 IsBusy = true;
                 if (UseBackgroundFiltering)
@@ -103,13 +111,14 @@ namespace AATM.UI.Controls
                     await Task.Run(() =>
                     {
                         var skip = indexSnapshot * pageSize;
+                        // Fix: Pass non-null filter argument
                         var result = FilterEngine.FilterPage(_localMaster, filterSnapshot, skip, pageSize);
                         return result;
                     }).ContinueWith(t =>
                     {
                         try
                         {
-                            if (token.IsCancellationRequested || filterSnapshot != _lastFilter) return;
+                            if (token.IsCancellationRequested || filterSnapshot != (_lastFilter ?? string.Empty).Trim()) return;
                             _totalFilteredCount = t.Result.Total;
                             TotalCount = _totalFilteredCount;
                             var pageDataLocal = t.Result.Page;
@@ -117,7 +126,7 @@ namespace AATM.UI.Controls
                             _pageCache[-1] = new List<ComboRecord>();
                             EvictCacheIfNeeded();
                             UpdateHasNext(indexSnapshot, pageDataLocal.Count, pageSize);
-                            bool appendMode = _pagingDown && indexSnapshot >0;
+                            bool appendMode = _pagingDown && indexSnapshot > 0;
                             if (appendMode) _appendInsertIndex = _currentItems.Count;
                             AppendToCurrent(pageDataLocal, append: appendMode);
                         }
@@ -130,6 +139,7 @@ namespace AATM.UI.Controls
                 else
                 {
                     var skip = indexSnapshot * pageSize;
+                    // Fix: Pass non-null filter argument
                     var result = FilterEngine.FilterPage(_localMaster, filterSnapshot, skip, pageSize);
                     _totalFilteredCount = result.Total;
                     TotalCount = _totalFilteredCount;
@@ -138,7 +148,7 @@ namespace AATM.UI.Controls
                     _pageCache[-1] = new List<ComboRecord>();
                     EvictCacheIfNeeded();
                     UpdateHasNext(indexSnapshot, pageDataLocal.Count, pageSize);
-                    bool appendMode = _pagingDown && indexSnapshot >0;
+                    bool appendMode = _pagingDown && indexSnapshot > 0;
                     if (appendMode) _appendInsertIndex = _currentItems.Count;
                     AppendToCurrent(pageDataLocal, append: appendMode);
                     IsBusy = false;

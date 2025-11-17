@@ -1,42 +1,29 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Windows;
+﻿using System.Windows;
+using AATM.DataAccess.Sql;
+using AATM.DataAccess;
 
 namespace AATM.Sample
 {
     public partial class MainWindow : Window
     {
-        public List<object> TestItems { get; }
-        public object SelectedCustomerId { get; set; }
-        public string SelectedCustomerCode { get; set; }
-        public string SelectedCustomerName { get; set; }
-
         public MainWindow()
         {
             InitializeComponent();
-
-            // Build local test data
-            TestItems = Enumerable.Range(1, 100)
-                .Select(i => new { IdNo = i, Code = $"C{i}", Name = $"Name {i}" })
-                .Cast<object>()
-                .ToList();
-
-            DataContext = this;
-
+            DataContext = new MainWindowViewModel();
             btnSave.Click += BtnSave_Click;
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-            // Validate remote SQL combo
-            if (sqlCombo.SelectedId == null || string.IsNullOrWhiteSpace(sqlCombo.SelectedId?.ToString()))
+            // Validate remote combo
+            if (remoteCombo.SelectedId == null || string.IsNullOrWhiteSpace(remoteCombo.SelectedId?.ToString()))
             {
-                sqlCombo.SetError("Selection is required.");
+                remoteCombo.SetError("Selection is required.");
                 return;
             }
 
-            sqlCombo.ClearError();
-            MessageBox.Show($"Saved: {sqlCombo.SelectedCode} - {sqlCombo.SelectedName}", "Info");
+            remoteCombo.ClearError();
+            MessageBox.Show($"Saved: {remoteCombo.SelectedCode} - {remoteCombo.SelectedName}", "Info");
         }
     }
 }

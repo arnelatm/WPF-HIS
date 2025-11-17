@@ -2,22 +2,16 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:AATM.UI.Controls;assembly=AATM.UI.Controls"
-        Title="SmartComboBox SQL Demo" Height="350" Width="500">
+        Title="SmartComboBox Demo" Height="350" Width="500">
 
     <StackPanel Margin="20">
-        <TextBlock Text="SQL Mode ComboBox" FontWeight="Bold"/>
+        <TextBlock Text="Remote Mode ComboBox" FontWeight="Bold"/>
         <local:SmartComboBox
-            x:Name="sqlCombo"
-            UseRemoteFetch="True"
-            ShowAllOnBlank="True"
-            RemoteTake="20"
+            x:Name="remoteCombo"
             Height="30"
             MaxDropDownHeight="240"
             Visibility="Visible"
-            ConnectionString="Server=Ibn-Server;Database=IspData;User Id=iGroupAdmin;Password=igss@123;Encrypt=True;TrustServerCertificate=True;"
-            SqlQueryTemplate="SELECT IdNo, ProductCode AS Code, ProductName AS Name FROM Product ORDER BY ProductName"
-            FilterCodeField="ProductCode"
-            FilterNameField="ProductName"
+            ItemsSource="{Binding Products}"
             SelectedId="{Binding SelectedCustomerId, Mode=TwoWay}"
             SelectedCode="{Binding SelectedCustomerCode, Mode=TwoWay}"
             SelectedName="{Binding SelectedCustomerName, Mode=TwoWay}"

@@ -1,0 +1,14 @@
+using System.Collections.Generic;
+
+namespace AATM.DataAccess
+{
+    public interface IProductRepository
+    {
+        IEnumerable<Product> GetProducts(string connectionString);
+        // Add more signatures as needed, e.g.:
+        // Product GetProductById(int idNo);
+        // void AddProduct(Product product);
+        // void UpdateProduct(Product product);
+        // void DeleteProduct(int idNo);
+    }
+}

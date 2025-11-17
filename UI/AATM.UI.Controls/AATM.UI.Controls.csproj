@@ -20,4 +20,9 @@
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\DataAccess\AATM.DataAccess.Sql\AATM.DataAccess.Sql.csproj" />
+    <ProjectReference Include="..\..\DataAccess\AATM.DataAccess\AATM.DataAccess.csproj" />
+  </ItemGroup>
+
 </Project>
