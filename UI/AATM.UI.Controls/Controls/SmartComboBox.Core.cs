@@ -48,6 +48,8 @@ namespace AATM.UI.Controls
         private bool _focusListOnSearchComplete;
         private int _pendingMoveDelta;
 
+        private const int MaxPageCacheSize =10; // Maximum number of pages to cache
+
         static SmartComboBox()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(SmartComboBox), new FrameworkPropertyMetadata(typeof(SmartComboBox)));
@@ -68,6 +70,16 @@ namespace AATM.UI.Controls
                 _debounce.Stop();
                 _debounce.Tick -= async (_, __) => { };
                 _debounce = null;
+            }
+        }
+
+        private void TrimPageCache()
+        {
+            while (_pageCache.Count > MaxPageCacheSize)
+            {
+                // Remove the oldest page (lowest key)
+                var oldestKey = _pageCache.Keys.Min();
+                _pageCache.Remove(oldestKey);
             }
         }
 
@@ -756,6 +768,7 @@ namespace AATM.UI.Controls
             {
                 EnsureListBoxSelection(previousId);
             }
+            TrimPageCache();
         }
 
         private void UpdateSelectedValueFromRecord(ComboRecord cr)
@@ -848,7 +861,6 @@ namespace AATM.UI.Controls
 
         private async Task StartSearchAsync(string filter)
         {
-            System.Diagnostics.Debug.WriteLine($"[SmartComboBox] StartSearchAsync: filter='{filter}', _localMaster.Count={_localMaster.Count}");
             var old = Interlocked.Exchange(ref _cts, new CancellationTokenSource());
             try { old?.Cancel(); } finally { old?.Dispose(); }
             // Always reset filter, items, and paging state before search
