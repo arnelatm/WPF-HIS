@@ -17,10 +17,8 @@ namespace AATM.UI.Controls
         private async Task<List<ComboRecord>> FetchFromSqlAsync(string filter, CancellationToken token, int pageIndex, int pageSize)
         {
             var results = new List<ComboRecord>();
-            System.Diagnostics.Debug.WriteLine($"[SmartComboBox] SQL: Connecting to {ConnectionString}");
             if (!IsRemoteConfigured)
             {
-                System.Diagnostics.Debug.WriteLine("[SmartComboBox] SQL: Not configured.");
                 return results;
             }
             string whereClause = string.Empty;
@@ -52,7 +50,6 @@ namespace AATM.UI.Controls
                 query = query.Replace("{Skip}", "@Skip");
             if (query.Contains("{Take}", StringComparison.OrdinalIgnoreCase))
                 query = query.Replace("{Take}", "@Take");
-            System.Diagnostics.Debug.WriteLine($"[SmartComboBox] SQL: Query: {query}");
             try
             {
                 using var conn = new SqlConnection(ConnectionString);
@@ -67,7 +64,6 @@ namespace AATM.UI.Controls
                     cmd.Parameters.Add("@Filter", System.Data.SqlDbType.NVarChar, Math.Max(filter.Length, 50)).Value = filter;
                 }
                 await conn.OpenAsync(token).ConfigureAwait(false);
-                System.Diagnostics.Debug.WriteLine("[SmartComboBox] SQL: Connection opened.");
                 using var reader = await cmd.ExecuteReaderAsync(token).ConfigureAwait(false);
                 int rowCount = 0;
                 while (await reader.ReadAsync(token).ConfigureAwait(false))
@@ -86,11 +82,9 @@ namespace AATM.UI.Controls
                     results.Add(rec);
                     rowCount++;
                 }
-                System.Diagnostics.Debug.WriteLine($"[SmartComboBox] SQL: Rows fetched: {rowCount}");
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"[SmartComboBox] SQL ERROR: {ex}");
                 SetError($"Error fetching data: {ex.Message}");
             }
             return results;
