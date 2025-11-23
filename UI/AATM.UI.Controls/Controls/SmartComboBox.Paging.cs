@@ -12,81 +12,49 @@ namespace AATM.UI.Controls
     public partial class SmartComboBox
     {
         // Paging logic only. All fields are defined in SmartComboBox.Core.cs
-
-        //private async Task RunInitialSearchAsync(string filter, CancellationToken token = default)
-        //{
-        //    _pageCache.Clear();
-        //    _currentItems.Clear();
-        //    var trimmed = (filter ?? string.Empty).Trim();
-        //    _lastFilter = trimmed;
-        //    _suppressPageIndexChanged = true;
-        //    PageIndex =0;
-        //    _suppressPageIndexChanged = false;
-        //    if (token.IsCancellationRequested) return;
-        //    if (trimmed.Length < MinSearchLength && !(ShowAllOnBlank && string.IsNullOrEmpty(trimmed)))
-        //    {
-        //        HasNextPage = false;
-        //        return;
-        //    }
-        //    await AppendPageAsync(0, token);
-        //    if (!token.IsCancellationRequested && _listBox != null && _currentItems.Count >0 && _listBox.SelectedIndex <0)
-        //    {
-        //        _listBox.SelectedIndex =0;
-        //        var first = _currentItems[0];
-        //        SelectedId = first.IdNo;
-        //        SelectedCode = first.Code;
-        //        SelectedName = first.Name;
-        //        UpdateSelectedValueFromRecord(first);
-        //        _updatingSelectedItem = true;
-        //        try { SelectedItem = first.Raw ?? (object)first; }
-        //        finally { _updatingSelectedItem = false; }
-        //        _listBox.ScrollIntoView(first);
-        //    }
-        //}
+        private Task _localBackgroundFillTask; // background fill for local mode
 
         private async Task AppendPageAsync(int pageIndex, CancellationToken token = default)
         {
             if (token.IsCancellationRequested) return;
             var filterIsBlank = string.IsNullOrEmpty(_lastFilter?.Trim());
-            // Always allow blank filter if ShowAllOnBlank is true
             var safeFilter = (_lastFilter ?? string.Empty).Trim();
-            if (safeFilter.Length < MinSearchLength && !(ShowAllOnBlank && filterIsBlank))
+            if (safeFilter.Length < MinSearchLength && !(ShowAllOnBlank && filterIsBlank) && !(LoadAllOnBlank && filterIsBlank))
             {
                 HasNextPage = false;
                 return;
             }
             if (pageIndex > 0) _forceFirstSelectionOnLoad = false;
-            // Fix: Add null-coalescing for IsRemoteConfigured (assume false if not defined)
-            bool isRemoteConfigured = false;
-#if ISREMOTECONFIGURED_FIELD
-            isRemoteConfigured = IsRemoteConfigured;
-#endif
-            bool remote = UseRemoteFetch || (_localMaster.Count == 0 && isRemoteConfigured) || _localMaster.Count > AutoRemoteThreshold;
+
+            bool remote = IsRemoteConfigured && (UseRemoteFetch || _localMaster.Count == 0 || _localMaster.Count > AutoRemoteThreshold);
             int pageSize = EffectivePageSize;
+
             if (remote)
             {
+                bool showBusy = pageIndex == 0; // only show busy spinner for first page
                 try
                 {
-                    await Application.Current.Dispatcher.InvokeAsync(() => IsBusy = true);
-                    // Fix: Remove explicit null assignment, just declare variable
+                    if (showBusy)
+                        await Application.Current.Dispatcher.InvokeAsync(() => IsBusy = true);
+
                     List<ComboRecord> pageData;
                     try
                     {
-                        // Fix: Pass non-null filter argument
                         pageData = await FetchRemoteRecordsAsync(safeFilter, token, pageIndex, pageSize).ConfigureAwait(false);
                     }
                     catch (OperationCanceledException)
                     {
-                        // Suppress error: cancellation is expected when a new search starts
-                        await Application.Current.Dispatcher.InvokeAsync(() => ClearError());
+                        if (showBusy)
+                            await Application.Current.Dispatcher.InvokeAsync(() => ClearError());
                         return;
                     }
                     if (token.IsCancellationRequested) return;
-                    _pageCache[pageIndex] = pageData;
-                    await Application.Current.Dispatcher.InvokeAsync(() => EvictCacheIfNeeded());
+
                     await Application.Current.Dispatcher.InvokeAsync(() =>
                     {
-                        UpdateHasNext(pageIndex, pageData.Count, pageSize);
+                        _pageCache[pageIndex] = pageData;
+                        EvictCacheIfNeeded();
+                        RecalculateHasNextRemote(pageIndex, pageData.Count, pageSize);
                         bool appendMode = _pagingDown && pageIndex > 0;
                         if (appendMode) _appendInsertIndex = _currentItems.Count;
                         AppendToCurrent(pageData, append: appendMode);
@@ -98,22 +66,23 @@ namespace AATM.UI.Controls
                 }
                 finally
                 {
-                    await Application.Current.Dispatcher.InvokeAsync(() => IsBusy = false);
+                    if (showBusy)
+                        await Application.Current.Dispatcher.InvokeAsync(() => IsBusy = false);
                 }
             }
             else
             {
                 var filterSnapshot = safeFilter;
                 var indexSnapshot = pageIndex;
-                IsBusy = true;
+                bool showBusy = pageIndex == 0;
+                if (showBusy) IsBusy = true;
+
                 if (UseBackgroundFiltering)
                 {
                     await Task.Run(() =>
                     {
                         var skip = indexSnapshot * pageSize;
-                        // Fix: Pass non-null filter argument
-                        var result = FilterEngine.FilterPage(_localMaster, filterSnapshot, skip, pageSize);
-                        return result;
+                        return FilterEngine.FilterPage(_localMaster, filterSnapshot, skip, pageSize);
                     }).ContinueWith(t =>
                     {
                         try
@@ -125,21 +94,26 @@ namespace AATM.UI.Controls
                             _pageCache[indexSnapshot] = pageDataLocal;
                             _pageCache[-1] = new List<ComboRecord>();
                             EvictCacheIfNeeded();
-                            UpdateHasNext(indexSnapshot, pageDataLocal.Count, pageSize);
+                            UpdateHasNextLocal(indexSnapshot, pageDataLocal.Count, pageSize, _totalFilteredCount);
                             bool appendMode = _pagingDown && indexSnapshot > 0;
                             if (appendMode) _appendInsertIndex = _currentItems.Count;
                             AppendToCurrent(pageDataLocal, append: appendMode);
+
+                            // Kick off background fill of remaining pages for local mode if enabled and first page
+                            if ((AutoBackgroundFill || (LoadAllOnBlank && filterIsBlank)) && indexSnapshot == 0 && _localBackgroundFillTask == null)
+                            {
+                                _localBackgroundFillTask = PrefillRemainingLocalPagesAsync(filterSnapshot, pageSize, _totalFilteredCount, token);
+                            }
                         }
                         finally
                         {
-                            IsBusy = false;
+                            if (showBusy) IsBusy = false;
                         }
                     }, TaskScheduler.FromCurrentSynchronizationContext());
                 }
                 else
                 {
                     var skip = indexSnapshot * pageSize;
-                    // Fix: Pass non-null filter argument
                     var result = FilterEngine.FilterPage(_localMaster, filterSnapshot, skip, pageSize);
                     _totalFilteredCount = result.Total;
                     TotalCount = _totalFilteredCount;
@@ -147,18 +121,71 @@ namespace AATM.UI.Controls
                     _pageCache[indexSnapshot] = pageDataLocal;
                     _pageCache[-1] = new List<ComboRecord>();
                     EvictCacheIfNeeded();
-                    UpdateHasNext(indexSnapshot, pageDataLocal.Count, pageSize);
+                    UpdateHasNextLocal(indexSnapshot, pageDataLocal.Count, pageSize, _totalFilteredCount);
                     bool appendMode = _pagingDown && indexSnapshot > 0;
                     if (appendMode) _appendInsertIndex = _currentItems.Count;
                     AppendToCurrent(pageDataLocal, append: appendMode);
-                    IsBusy = false;
+                    if (showBusy) IsBusy = false;
+
+                    if (AutoBackgroundFill && indexSnapshot == 0 && _localBackgroundFillTask == null)
+                    {
+                        _localBackgroundFillTask = PrefillRemainingLocalPagesAsync(filterSnapshot, pageSize, _totalFilteredCount, token);
+                    }
                 }
             }
         }
 
-        private void UpdateHasNext(int pageIndex, int itemCount, int pageSize)
+        private async Task PrefillRemainingLocalPagesAsync(string filter, int pageSize, int totalFiltered, CancellationToken token)
         {
-            HasNextPage = itemCount >= pageSize;
+            // Background fill remaining pages sequentially
+            try
+            {
+                for (int p = 1; !token.IsCancellationRequested; p++)
+                {
+                    int skip = p * pageSize;
+                    if (skip >= totalFiltered) break;
+                    var result = FilterEngine.FilterPage(_localMaster, filter, skip, pageSize);
+                    if (token.IsCancellationRequested) break;
+                    var pageData = result.Page;
+                    if (pageData.Count == 0) break;
+
+                    await Application.Current.Dispatcher.InvokeAsync(() =>
+                    {
+                        _pageCache[p] = pageData;
+                        EvictCacheIfNeeded();
+                        // Always append when background filling
+                        _pagingDown = true;
+                        _appendInsertIndex = _currentItems.Count;
+                        AppendToCurrent(pageData, append: true);
+                        UpdateHasNextLocal(p, pageData.Count, pageSize, totalFiltered);
+                    });
+                }
+            }
+            finally
+            {
+                _localBackgroundFillTask = null;
+            }
+        }
+
+        private void RecalculateHasNextRemote(int pageIndex, int itemCount, int pageSize)
+        {
+            if (_remoteTotal >= 0)
+            {
+                int fetchedSoFar = (pageIndex * pageSize) + itemCount;
+                HasNextPage = fetchedSoFar < _remoteTotal;
+            }
+            else
+            {
+                // fallback heuristic: if we got a full page assume more may exist
+                HasNextPage = itemCount == pageSize;
+            }
+            UpdateLoadMoreVisibility();
+        }
+
+        private void UpdateHasNextLocal(int pageIndex, int itemCount, int pageSize, int totalFiltered)
+        {
+            int fetchedSoFar = (pageIndex * pageSize) + itemCount;
+            HasNextPage = fetchedSoFar < totalFiltered;
             UpdateLoadMoreVisibility();
         }
 
@@ -170,8 +197,8 @@ namespace AATM.UI.Controls
 
         private void EvictCacheIfNeeded()
         {
-            if (CachePageLimit <=0) return;
-            var normalKeys = _pageCache.Keys.Where(k => k >=0).OrderBy(k => k).ToList();
+            if (CachePageLimit <= 0) return;
+            var normalKeys = _pageCache.Keys.Where(k => k >= 0).OrderBy(k => k).ToList();
             if (normalKeys.Count <= CachePageLimit) return;
             int removeCount = normalKeys.Count - CachePageLimit;
             foreach (var k in normalKeys.Take(removeCount))
@@ -180,6 +207,6 @@ namespace AATM.UI.Controls
             }
         }
 
-        private int EffectivePageSize => PageSize >0 ? PageSize : RemoteTake;
+        private int EffectivePageSize => PageSize > 0 ? PageSize : RemoteTake;
     }
 }
