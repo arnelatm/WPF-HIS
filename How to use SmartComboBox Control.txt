@@ -1,0 +1,42 @@
+Step-by-step: how to use SmartComboBox
+1.	Add the control project to your UI project
+•	Add a ProjectReference to AATM.UI.Controls (already done in this workspace).
+•	Add the xmlns in XAML where you want to use it, e.g. xmlns:ui="clr-namespace:AATM.UI.Controls;assembly=AATM.UI.Controls".
+2.	Place the control in XAML
+•	Basic: <ui:SmartComboBox x:Name="cmb" />
+•	Set templates or styles if you need custom item appearance (use ItemTemplate / ItemTemplateSelector).
+3.	Choose data mode
+•	Local (in-memory): set ItemsSource to an IEnumerable of your objects (control converts via ComboRecord.FromUnknown) and set UseBackgroundFiltering as desired.
+•	Remote (paged): provide a fetch delegate described below and set PageSize or RemoteTake.
+4.	Provide remote fetch logic (RDBMS-agnostic)
+•	Implement an async function in your app/service that accepts (string filter, int pageIndex, int pageSize, CancellationToken token) and returns (IEnumerable<ComboRecord> Records, int TotalCount).
+•	Example assign (code-behind or ViewModel): cmb.RemoteFetchAsync = async (filter, pageIndex, pageSize, token) => await myRepo.FetchComboRecordsAsync(filter, pageIndex, pageSize, token);
+•	Your myRepo can use SQL Server, MySQL, PostgreSQL, SQLite, REST API, EF, Dapper or plain ADO.NET — any backend. The control is agnostic.
+5.	Implement fetch function example (pseudocode)
+•	Query total count (for HasNextPage).
+•	Query paged rows (OFFSET/FETCH or LIMIT/OFFSET) using filter.
+•	Map to ComboRecord objects: new ComboRecord { IdNo = r.Id, Code = r.Code, Name = r.Name, Raw = r }
+•	Return (records, totalCount).
+6.	Configure control behavior
+•	PageSize or RemoteTake controls page size.
+•	PrefetchPages controls background prefetch.
+•	AutoBackgroundFill / LoadAllOnBlank to fetch more pages automatically.
+•	DebounceMilliseconds for typing debounce.
+•	EnableAutoScrollPaging will auto-load next page when scrolling near the bottom.
+7.	Bind selection/reading values
+•	Read SelectedItem, SelectedId, SelectedCode, SelectedName, or SelectedValue (if you set SelectedValuePath).
+•	You can bind these DPs to your ViewModel.
+8.	Local mode usage
+•	Set ItemsSource to your full collection: cmb.ItemsSource = myProducts;
+•	Or populate ItemsSource in XAML binding.
+•	Optionally use UseBackgroundFiltering to filter in background.
+9.	Error & cancellation handling
+•	The control passes a CancellationToken to your delegate — cancel long-running fetches if token.IsCancellationRequested.
+•	Throwing exceptions will be caught; SmartComboBox calls SetError(string) to show errors—also return empty list on cancellation.
+10.	Switching table (Product -> Supplier)
+•	Change only your fetch function to query the Supplier table and map to ComboRecord. Re-assign RemoteFetchAsync. No changes in the control.
+11.	Cleanup
+•	If you create resources (DB connections/repos) in the delegate, ensure proper disposal.
+•	If you attach long-lived event handlers to the control, remove them on unload.
+Quick example assignment in ViewModel/Window: myCombo.RemoteFetchAsync = async (filter, pageIndex, pageSize, token) => { var (rows, total) = await repo.FetchSuppliersAsync(filter, pageIndex, pageSize, token); return (rows.Select(r => new ComboRecord{ IdNo=r.Id, Code=r.Code, Name=r.Name, Raw=r }), total); };
+That’s all — SmartComboBox handles UI, paging, selection and presentation; you supply the data access function and mapping to ComboRecord.

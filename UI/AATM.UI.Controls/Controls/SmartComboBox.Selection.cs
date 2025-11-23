@@ -9,10 +9,15 @@ namespace AATM.UI.Controls
     {
         // Selection logic: TrySelectBySelectedValue, TrySelectBySelectedItem, CommitSelection, EnsureListBoxSelection, etc.
 
-        private void EnsureListBoxSelection(object previousId = null)
+        private void EnsureListBoxSelection()
+        {
+            EnsureListBoxSelection(null);
+        }
+
+        private void EnsureListBoxSelection(object previousId)
         {
             if (_listBox == null) return;
-            if (_currentItems.Count ==0)
+            if (_currentItems.Count == 0)
             {
                 _listBox.SelectedIndex = -1;
                 return;

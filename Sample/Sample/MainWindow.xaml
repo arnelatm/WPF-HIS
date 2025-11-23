@@ -12,9 +12,9 @@
             MaxDropDownHeight="240"
             Visibility="Visible"
             ItemsSource="{Binding Products}"
-            SelectedId="{Binding SelectedCustomerId, Mode=TwoWay}"
-            SelectedCode="{Binding SelectedCustomerCode, Mode=TwoWay}"
-            SelectedName="{Binding SelectedCustomerName, Mode=TwoWay}"
+            SelectedId="{Binding SelectedProductId, Mode=TwoWay}"
+            SelectedCode="{Binding SelectedProductCode, Mode=TwoWay}"
+            SelectedName="{Binding SelectedProductName, Mode=TwoWay}"
             DebounceMilliseconds="300"
             BorderBrush="Black"
             BorderThickness="1"/>
@@ -23,8 +23,8 @@
 
         <StackPanel>
             <TextBlock Text="Selected:" FontWeight="Bold"/>
-            <TextBlock Text="{Binding SelectedCustomerCode}"/>
-            <TextBlock Text="{Binding SelectedCustomerName}"/>
+            <TextBlock x:Name="SelectedProduct" Text="{Binding SelectedProductDisplay}"/>
+            <TextBlock Text="{Binding SelectedProductName}"/>
         </StackPanel>
     </StackPanel>
 

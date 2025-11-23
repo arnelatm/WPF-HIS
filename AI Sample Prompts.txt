@@ -6,7 +6,7 @@ Format Code in c# Markdown Block
 
 
 Git Commit Message:
-Summarize all un-committed chagnes in a concise but informative commit summary ideally wrapped at 72 characters per line.
+Summarize all un-committed changes in a concise but informative commit summary ideally wrapped at 72 characters per line.
 Summarize all un-committed changes since the last push for a commit message.
 Summarize all un-pushed changes since the last push for a commit message.
 or
@@ -16,7 +16,5 @@ Generate a commit summary for all current unpushed-changes since last push.
 
 XML Comments: Add more XML comments for public properties/methods.
 Usage Samples: Provide sample XAML usage for common scenarios (local, remote, paging, custom templates).
-
-
 
 Summarize all uncommitted changes since the last push into a concise commit message, wrapped at 72 characters per line. Output only the message.

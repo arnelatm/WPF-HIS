@@ -195,6 +195,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{740ABB06-3D3F-4317-A0F1-3D1F6B48C4C2}"
 	ProjectSection(SolutionItems) = preProject
 		BaseGridCrudForm and its key features.txt = BaseGridCrudForm and its key features.txt
+		How to use SmartComboBox Control.txt = How to use SmartComboBox Control.txt
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AATM.App.HisWpf", "App\AATM.App.HisWpf\AATM.App.HisWpf.csproj", "{09365B55-0F44-4247-8543-F794CB5D71AF}"

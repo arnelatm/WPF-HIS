@@ -3,7 +3,7 @@ using System.Data;
 
 namespace AATM.UI.Controls
 {
-    internal class ComboRecord
+    public class ComboRecord
     {
         /// <summary>
         /// Gets or sets the raw underlying data object for this record.
