@@ -613,11 +613,6 @@ namespace AATM.UI.Controls
         private void TextBox_KeyDown(object sender, KeyEventArgs e)
         {
             System.Diagnostics.Debug.WriteLine($"[SmartComboBox] TextBox_KeyDown: Key={e.Key}, IsDown={e.IsDown}, IsUp={e.IsUp}");
-            if (e.Key == Key.Down)
-            {
-                System.Diagnostics.Debug.WriteLine("[SmartComboBox] TextBox_KeyDown DOWN ARROW PRESSED!");
-            }
-            // Handle commit on Enter
             if (e.Key == Key.Enter)
             {
                 CommitSelection();
@@ -626,19 +621,21 @@ namespace AATM.UI.Controls
             }
         }
 
+        private bool _isForwardingKey;
+
         private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine($"[SmartComboBox] TextBox_PreviewKeyDown: Key={e.Key}, IsDown={e.IsDown}, IsUp={e.IsUp}, Handled={e.Handled}");
-            if (e.Key == Key.Down || e.Key == Key.Up)
+            System.Diagnostics.Debug.WriteLine($"[SmartComboBox] TextBox_PreviewKeyDown: Key={e.Key}, Handled={e.Handled}");
+
+            // Handle PageUp/PageDown directly on the ListBox
+            if ((e.Key == Key.PageDown || e.Key == Key.PageUp) && IsDropDownOpen && _listBox != null && _currentItems.Count > 0)
             {
-                var txt = _textBox?.Text ?? string.Empty;
-                // allow showing results even if below MinSearchLength and focus list after search
                 _ignoreMinLengthOnce = true;
                 _focusListOnSearchComplete = true;
-                _pendingMoveDelta = e.Key == Key.Down ? 1 : -1;
-                EnsureDropDownAndSearch(txt, forceOpen: true);
+                _pendingMoveDelta = e.Key == Key.PageDown ? int.MaxValue : int.MinValue;
+                EnsureDropDownAndSearch(_textBox?.Text ?? string.Empty, forceOpen: true);
 
-                // if items already present, move selection and focus immediately
+                // Move selection and focus immediately if items present
                 if (_listBox != null && _currentItems.Count > 0)
                 {
                     FocusListAndEnsureSelection(_pendingMoveDelta);
@@ -646,6 +643,23 @@ namespace AATM.UI.Controls
                 }
                 e.Handled = true;
                 return;
+            }
+            if (e.Key == Key.Down || e.Key == Key.Up)
+            {
+                // Only take over if dropdown is open and we have items; otherwise let default caret movement
+                if (!IsDropDownOpen)
+                {
+                    EnsureDropDownAndSearch(_textBox?.Text ?? string.Empty, forceOpen: true);
+                }
+                if (_listBox != null && _currentItems.Count > 0)
+                {
+                    _pendingMoveDelta = e.Key == Key.Down ? 1 : -1;
+                    FocusListAndEnsureSelection(_pendingMoveDelta);
+                    _pendingMoveDelta = 0;
+                    e.Handled = true;
+                    return;
+                }
+                // no items yet: allow default behavior
             }
             if (e.Key == Key.Enter)
             {
@@ -674,6 +688,31 @@ namespace AATM.UI.Controls
             }
             CommitSelection();
             e.Handled = true;
+        }
+
+        private (int first, int last, int pageSize) GetVisibleRange()
+        {
+            if (_scrollViewer == null || _listBox == null || _currentItems.Count == 0)
+                return (0, Math.Min(_currentItems.Count - 1, 0), Math.Min(_currentItems.Count, 1));
+
+            // Try a realized item for height
+            double itemHeight = 0;
+            for (int i = 0; i < _currentItems.Count; i++)
+            {
+                if (_listBox.ItemContainerGenerator.ContainerFromIndex(i) is ListBoxItem li && li.ActualHeight > 0)
+                {
+                    itemHeight = li.ActualHeight;
+                    break;
+                }
+            }
+            if (itemHeight <= 0) itemHeight = 18.0; // fallback
+            double offset = _scrollViewer.VerticalOffset;
+            double viewport = _scrollViewer.ViewportHeight > 0 ? _scrollViewer.ViewportHeight : MaxDropDownHeight;
+            int first = (int)Math.Floor(offset / itemHeight);
+            int pageSize = (int)Math.Max(1, Math.Floor(viewport / itemHeight));
+            int last = Math.Min(_currentItems.Count - 1, first + pageSize - 1);
+            if (first < 0) first = 0;
+            return (first, last, pageSize);
         }
 
         private void ListBox_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -707,7 +746,6 @@ namespace AATM.UI.Controls
             }
             if (e.Key == Key.End)
             {
-                // If more pages remain, attempt burst fetch to reach end quickly
                 if (HasNextPage)
                 {
                     int lastFetched = _pageCache.Keys.Where(k => k >= 0).DefaultIfEmpty(-1).Max();
@@ -726,7 +764,6 @@ namespace AATM.UI.Controls
                         _ = AppendPageAsync(p, _cts?.Token ?? CancellationToken.None);
                     }
                 }
-                // Move selection to last currently loaded item
                 if (_currentItems.Count > 0)
                 {
                     _listBox.SelectedIndex = _currentItems.Count - 1;
@@ -747,17 +784,16 @@ namespace AATM.UI.Controls
             if (e.Key == Key.PageDown)
             {
                 e.Handled = true;
-                int itemsPerViewport = EstimateItemsPerViewport();
-                int target = Math.Min(_currentItems.Count - 1, _listBox.SelectedIndex + itemsPerViewport);
-                // If near end and more pages exist, fetch next page(s) first
-                if (HasNextPage && (_listBox.SelectedIndex >= _currentItems.Count - itemsPerViewport))
+                if (_currentItems.Count == 0) return;
+                // Prefetch if near end
+                var range = GetVisibleRange();
+                if (HasNextPage && range.last >= _currentItems.Count - 1)
                 {
                     _pagingDown = true;
-                    int nextIndex = _pageCache.Keys.Where(k => k >= 0).DefaultIfEmpty(-1).Max() + 1;
-                    if (nextIndex <= 0) nextIndex = 1;
-                    // Fetch multiple pages to keep scroll smooth
+                    int nextPageIndex = _pageCache.Keys.Where(k => k >= 0).DefaultIfEmpty(-1).Max() + 1;
+                    if (nextPageIndex <= 0) nextPageIndex = 1;
                     int burst = Math.Max(1, PrefetchPages);
-                    for (int p = nextIndex; HasNextPage && p < nextIndex + burst; p++)
+                    for (int p = nextPageIndex; HasNextPage && p < nextPageIndex + burst; p++)
                     {
                         if (_pageCache.TryGetValue(p, out var cached) && cached.Count > 0)
                         {
@@ -770,8 +806,11 @@ namespace AATM.UI.Controls
                             _ = AppendPageAsync(p, _cts?.Token ?? CancellationToken.None);
                         }
                     }
-                    target = _currentItems.Count - 1; // move to last appended
                 }
+                int pageSize = EstimateItemsPerViewport();
+                int target = Math.Min(_currentItems.Count - 1, _listBox.SelectedIndex + pageSize);
+                if (target == _listBox.SelectedIndex && _listBox.SelectedIndex < _currentItems.Count - 1)
+                    target = Math.Min(_currentItems.Count - 1, _listBox.SelectedIndex + 1); // safety fallback
                 _listBox.SelectedIndex = target;
                 _listBox.ScrollIntoView(_listBox.SelectedItem);
                 return;
@@ -779,8 +818,11 @@ namespace AATM.UI.Controls
             if (e.Key == Key.PageUp)
             {
                 e.Handled = true;
-                int itemsPerViewport = EstimateItemsPerViewport();
-                int target = Math.Max(0, _listBox.SelectedIndex - itemsPerViewport);
+                if (_currentItems.Count == 0) return;
+                int pageSize = EstimateItemsPerViewport();
+                int target = Math.Max(0, _listBox.SelectedIndex - pageSize);
+                if (target == _listBox.SelectedIndex && _listBox.SelectedIndex > 0)
+                    target = Math.Max(0, _listBox.SelectedIndex - 1); // safety fallback
                 _listBox.SelectedIndex = target;
                 _listBox.ScrollIntoView(_listBox.SelectedItem);
                 if (target == 0)
@@ -795,7 +837,6 @@ namespace AATM.UI.Controls
                 bool rapid = (now - _lastDownKeyTime).TotalMilliseconds <= RapidDownThresholdMs;
                 _lastDownKeyTime = now;
 
-                // If already at last item and no more pages, consume key and keep anchored
                 if (_listBox != null && _listBox.SelectedIndex == _currentItems.Count - 1 && !HasNextPage)
                 {
                     _listBox.SelectedIndex = _currentItems.Count - 1;
@@ -804,7 +845,6 @@ namespace AATM.UI.Controls
                     e.Handled = true;
                     return;
                 }
-                // Rapid down and near end: proactively fetch next page(s)
                 if (rapid && HasNextPage && _listBox.SelectedIndex >= _currentItems.Count - 3)
                 {
                     int nextIndex = _pageCache.Keys.Where(k => k >= 0).DefaultIfEmpty(-1).Max() + 1;
@@ -824,7 +864,6 @@ namespace AATM.UI.Controls
                         }
                     }
                 }
-                // When at bottom and more pages available, fetch next page normal path
                 if (_listBox != null && _listBox.SelectedIndex == _currentItems.Count - 1 && HasNextPage)
                 {
                     e.Handled = true;
@@ -852,10 +891,20 @@ namespace AATM.UI.Controls
 
         private int EstimateItemsPerViewport()
         {
-            if (_scrollViewer == null || _listBox == null || _currentItems.Count == 0) return 10;
-            int probeIndex = Math.Min(_listBox.SelectedIndex >= 0 ? _listBox.SelectedIndex : 0, _currentItems.Count - 1);
-            var container = _listBox.ItemContainerGenerator.ContainerFromIndex(probeIndex) as ListBoxItem;
-            double itemHeight = container?.ActualHeight ?? 18.0;
+            if (_scrollViewer == null || _listBox == null || _currentItems.Count == 0)
+                return 10; // fallback default
+
+            // Try to find a realized (visible) ListBoxItem
+            int probeIndex = _listBox.SelectedIndex >= 0 ? _listBox.SelectedIndex : 0;
+            ListBoxItem container = null;
+            // Search for the first realized item in the viewport
+            for (int i = 0; i < _currentItems.Count; i++)
+            {
+                container = _listBox.ItemContainerGenerator.ContainerFromIndex(i) as ListBoxItem;
+                if (container != null && container.ActualHeight > 0)
+                    break;
+            }
+            double itemHeight = container?.ActualHeight > 0 ? container.ActualHeight : 18.0;
             double viewport = _scrollViewer.ViewportHeight > 0 ? _scrollViewer.ViewportHeight : 200.0;
             int per = (int)Math.Max(1, Math.Floor(viewport / itemHeight));
             return per;
@@ -886,7 +935,7 @@ namespace AATM.UI.Controls
         private void BuildLocalMasterFromItemsSource()
         {
             _localMaster.Clear();
-            if (ItemsSource == null) return; // fixed syntax
+            if (ItemsSource == null) return;
             foreach (var item in ItemsSource)
             {
                 var rec = ComboRecord.FromUnknown(item);
@@ -1164,16 +1213,45 @@ namespace AATM.UI.Controls
             if (_listBox == null) return;
             if (_currentItems.Count == 0) return;
             if (_listBox.SelectedIndex < 0) _listBox.SelectedIndex = 0;
-            int newIndex = _listBox.SelectedIndex + moveDelta;
-            newIndex = Math.Max(0, Math.Min(_currentItems.Count - 1, newIndex));
+
+            int newIndex = _listBox.SelectedIndex;
+
+            // Move by a page if PageUp/PageDown
+            if (moveDelta == int.MaxValue) // PageDown
+            {
+                var range = GetVisibleRange();
+                newIndex = Math.Min(_currentItems.Count - 1, range.last + 1);
+            }
+            else if (moveDelta == int.MinValue) // PageUp
+            {
+                var range = GetVisibleRange();
+                newIndex = Math.Max(0, range.first - range.pageSize);
+            }
+            else
+            {
+                newIndex = Math.Max(0, Math.Min(_currentItems.Count - 1, _listBox.SelectedIndex + moveDelta));
+            }
+
             _listBox.SelectedIndex = newIndex;
             _listBox.Focus();
+            // Only force scroll positioning for page moves; for single-item moves rely on default behavior
+            if (_scrollViewer != null && (moveDelta == int.MaxValue || moveDelta == int.MinValue))
+            {
+                double itemHeight = (_listBox.ItemContainerGenerator.ContainerFromIndex(newIndex) as ListBoxItem)?.ActualHeight ?? 18.0;
+                _scrollViewer.ScrollToVerticalOffset(newIndex * itemHeight);
+            }
             _listBox.ScrollIntoView(_listBox.SelectedItem);
         }
 
-        private void CurrentItems_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) // added missing void
+        private void CurrentItems_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (_suspendCollectionChangedEvents) return;
+            if (_currentItems.Count == 0)
+            {
+                _pendingMoveDelta = 0;
+                _focusListOnSearchComplete = false;
+                return;
+            }
             if (_focusListOnSearchComplete && _pendingMoveDelta != 0 && _currentItems.Count > 0)
             {
                 FocusListAndEnsureSelection(_pendingMoveDelta);
