@@ -7,10 +7,11 @@ Imports CrystalDecisions.CrystalReports.Engine
 Imports CrystalDecisions.Shared
 Imports CrystalDecisions.Windows.Forms
 Imports PaperSize = CrystalDecisions.Shared.PaperSize
+Imports System.IO
 
 Public Class CrystalReportPrinter
     Private Const DefaultConnection As String = "ISPDATA"
-    Private ReadOnly _report As New ReportDocument
+    Private _report As ReportDocument
 
     Private _reportPath As String
     Private _uid As String
@@ -21,20 +22,23 @@ Public Class CrystalReportPrinter
     Public Sub New()
     End Sub
 
-    Public Sub New(pReportFileName As String, Optional pDataBaseConnectionName As String = DefaultConnection, Optional pArgs() As Object = Nothing)
+    Public Sub New(pReportFileName As String,
+               Optional pDataBaseConnectionName As String = DefaultConnection,
+               Optional pArgs() As Object = Nothing,
+               Optional promptForParametersWhenMissing As Boolean = False)
+
         ReportFileName = pReportFileName
         DataBaseConnectionName = IIf(pDataBaseConnectionName Is Nothing Or pDataBaseConnectionName = "", DefaultConnection, pDataBaseConnectionName)
         SetReportProperties(pReportFileName)
+
         If pArgs IsNot Nothing Then
             SetParameterValue(pArgs)
-        Else
-            ' If the report has parameter fields and no args were supplied, show the parameter prompt
+        ElseIf promptForParametersWhenMissing Then
             Try
                 If _report IsNot Nothing AndAlso _report.DataDefinition IsNot Nothing AndAlso _report.DataDefinition.ParameterFields.Count > 0 Then
                     PromptForParameters()
                 End If
             Catch
-                ' swallow to maintain previous behavior; parameter prompt is best-effort
             End Try
         End If
     End Sub
@@ -61,6 +65,24 @@ Public Class CrystalReportPrinter
     End Sub
 
 
+    Private Sub ResetReportDocument()
+        If _report IsNot Nothing Then
+            Try
+                _report.Close()
+            Catch
+            End Try
+
+            Try
+                _report.Dispose()
+            Catch
+            End Try
+
+            _report = Nothing
+        End If
+
+        _report = New ReportDocument()
+    End Sub
+
     Public Sub SetReportProperties(pReportFileName As String)
         Select Case DataBaseConnectionName.ToUpper()
             Case Nothing
@@ -76,8 +98,12 @@ Public Class CrystalReportPrinter
                 Debugger.Break()
                 Return
         End Select
-        Dim fileSpecification As String = _reportPath & pReportFileName
-        _report.Load(fileSpecification)
+
+        ResetReportDocument()
+
+        Dim fileSpecification As String = Path.Combine(_reportPath, pReportFileName)
+        _report.Load(fileSpecification, OpenReportMethod.OpenReportByTempCopy)
+
         If _report.DataSourceConnections.Count > 0 Then
             _report.DataSourceConnections(0).SetConnection(_server, _database, _uid, _pwd)
         End If
@@ -257,6 +283,27 @@ Public Class CrystalReportPrinter
         Next
     End Sub
 
+    Private Sub ClearParameterValues()
+        If _report Is Nothing OrElse _report.DataDefinition Is Nothing Then
+            Return
+        End If
+
+        For Each pf As ParameterFieldDefinition In _report.DataDefinition.ParameterFields
+            Try
+                ' Skip parameters that Crystal manages internally (often start with ?)
+                ' If you have no such params, you can remove this check.
+                If pf.ParameterFieldName IsNot Nothing AndAlso pf.ParameterFieldName.StartsWith("?", StringComparison.Ordinal) Then
+                    Continue For
+                End If
+
+                ' Reset value so Crystal considers it "missing" and prompts again
+                _report.SetParameterValue(pf.ParameterFieldName, DBNull.Value)
+            Catch
+                ' Some parameter types / subreport parameters may throw; best-effort
+            End Try
+        Next
+    End Sub
+
     Public Sub ClearDataSourceConnections()
         _report.DataSourceConnections.Clear()
     End Sub
@@ -295,45 +342,52 @@ Public Class CrystalReportPrinter
                 Throw New InvalidOperationException("Report document is not loaded.")
             End If
 
-            ' Only show prompt if there are parameters defined
             If _report.DataDefinition Is Nothing OrElse _report.DataDefinition.ParameterFields.Count = 0 Then
                 Return
             End If
 
+            ClearParameterValues()
+
             Using frm As New Form()
-                Dim viewer As New CrystalDecisions.Windows.Forms.CrystalReportViewer()
-                viewer.Dock = DockStyle.Fill
-                viewer.ReportSource = _report
-                viewer.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None
+                Using viewer As New CrystalDecisions.Windows.Forms.CrystalReportViewer()
+                    viewer.Dock = DockStyle.Fill
+                    viewer.ReportSource = _report
+                    viewer.ToolPanelView = ToolPanelViewType.ParameterPanel
+                    viewer.ShowParameterPanelButton = True
 
-                ' Some Crystal Reports versions do not expose the EnableParameterPrompt property.
-                ' Use reflection to set it when available, otherwise try to enable the parameter panel button as a fallback.
-                Try
-                    Dim pi = viewer.GetType().GetProperty("EnableParameterPrompt")
-                    If pi IsNot Nothing AndAlso pi.CanWrite Then
-                        pi.SetValue(viewer, True, Nothing)
-                    Else
-                        Dim pfb = viewer.GetType().GetProperty("ShowParameterPanelButton")
-                        If pfb IsNot Nothing AndAlso pfb.CanWrite Then
-                            pfb.SetValue(viewer, True, Nothing)
+                    ' Best-effort for versions that have it
+                    Try
+                        Dim pi = viewer.GetType().GetProperty("EnableParameterPrompt")
+                        If pi IsNot Nothing AndAlso pi.CanWrite Then
+                            pi.SetValue(viewer, True, Nothing)
                         End If
-                    End If
-                Catch
-                    ' Swallow reflection errors; parameter prompt is best-effort.
-                End Try
+                    Catch
+                    End Try
 
-                viewer.ShowCloseButton = False ' Keep viewer simple
-                frm.Text = If(String.IsNullOrEmpty(PrintJobName), ReportFileName, PrintJobName) & " - Parameters"
-                frm.StartPosition = FormStartPosition.CenterParent
-                frm.Width = 900
-                frm.Height = 700
-                frm.Controls.Add(viewer)
-                If owner IsNot Nothing Then
-                    frm.ShowDialog(owner)
-                Else
-                    frm.ShowDialog()
-                End If
+                    frm.Text = If(String.IsNullOrEmpty(PrintJobName), ReportFileName, PrintJobName) & " - Parameters"
+                    frm.StartPosition = FormStartPosition.CenterParent
+                    frm.Width = 900
+                    frm.Height = 700
+                    frm.Controls.Add(viewer)
+
+                    ' Trigger the prompt by refreshing once the form is displayed
+                    AddHandler frm.Shown,
+                    Sub(sender, e)
+                        Try
+                            viewer.RefreshReport()
+                        Catch
+                            ' If refresh fails, the user can still input via parameter panel
+                        End Try
+                    End Sub
+
+                    If owner IsNot Nothing Then
+                        frm.ShowDialog(owner)
+                    Else
+                        frm.ShowDialog()
+                    End If
+                End Using
             End Using
+
         Catch ex As Exception
             MessageBox.Show($"Unable to prompt for parameters: {ex.Message}", "Parameter Prompt Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         End Try
