@@ -1,12 +1,15 @@
-﻿Imports AATM.Accounts.Accounts.PresentationLayer.Views.Forms
+﻿Imports System.Globalization
+Imports System.Reflection
+Imports AATM.Accounts.Accounts.PresentationLayer.Views.Forms
+Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters.Views.Forms
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Common.ServiceLayer
+Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
 Imports AATM.Libraries.GlobalFuncNSub
-Imports System.Reflection
 
 Namespace PresentationLayer.Presenters
 
@@ -83,6 +86,51 @@ Namespace PresentationLayer.Presenters
                         Dim formToRun As New DateTimeRangeForm(report)
                         formToRun.Presenter = New DateTimeRangePresenter(Of ReportModel)(formToRun, report)
                         formToRun.Show()
+                    Case Else
+                        Dim fileName As String = report.ReportFileName
+                        If Not fileName.ToLower().EndsWith(".rpt") Then fileName &= ".rpt"
+
+                        Dim reportArgs As New CrPrintableArgs
+                        Dim reportTitle As String
+                        'reportTitle = Libraries.MessagingLibrary.Messaging.SelectReportName(_reportModel.ReportTitle, beginningDate, endingDate, curCulture, "T")
+                        'If _reportModel.QueryParameters IsNot Nothing AndAlso _reportModel.QueryParameters <> "" Then
+                        '    Dim qParameters As String = _reportModel.QueryParameters
+                        '    Dim lParameters As String() = qParameters.Split(","c)
+                        '    For Each item In lParameters
+                        '        reportArgs.ReportParameters.Add(item)
+                        '    Next
+                        'End If
+                        reportArgs.DataBaseConnectionName = "Kizen" ' _reportModel.DatabaseName
+                        Dim p As New PrintReportPresenter(Of AccountModel)
+                        p.ViewReport(fileName, reportArgs, False)
+
+
+                        'Dim fullPath As String = If(IO.Path.IsPathRooted(fileName), fileName, IO.Path.Combine(Application.StartupPath, fileName))
+
+                        'If Not IO.File.Exists(fullPath) Then
+                        '    MessageBox.Show("Report file not found: " & fullPath)
+                        '    Return
+                        'End If
+
+                        'Dim rptDoc As New CrystalDecisions.CrystalReports.Engine.ReportDocument()
+                        'rptDoc.Load(fullPath)
+
+                        'Dim frm As New Form()
+                        'Dim viewer As New CrystalDecisions.Windows.Forms.CrystalReportViewer()
+                        'viewer.Dock = DockStyle.Fill
+                        'viewer.ReportSource = rptDoc
+                        'frm.Controls.Add(viewer)
+                        'frm.Text = If(String.IsNullOrEmpty(report.ReportName), IO.Path.GetFileNameWithoutExtension(fullPath), report.ReportName)
+
+                        'AddHandler frm.FormClosed, Sub(s, e)
+                        '                               Try
+                        '                                   rptDoc.Close()
+                        '                                   rptDoc.Dispose()
+                        '                               Catch
+                        '                               End Try
+                        '                           End Sub
+
+                        'frm.Show()
                 End Select
 
             End If

@@ -5,6 +5,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary.Messaging
 Imports CrystalDecisions.CrystalReports.Engine
 Imports CrystalDecisions.Shared
+Imports CrystalDecisions.Windows.Forms
 Imports PaperSize = CrystalDecisions.Shared.PaperSize
 
 Public Class CrystalReportPrinter
@@ -26,6 +27,15 @@ Public Class CrystalReportPrinter
         SetReportProperties(pReportFileName)
         If pArgs IsNot Nothing Then
             SetParameterValue(pArgs)
+        Else
+            ' If the report has parameter fields and no args were supplied, show the parameter prompt
+            Try
+                If _report IsNot Nothing AndAlso _report.DataDefinition IsNot Nothing AndAlso _report.DataDefinition.ParameterFields.Count > 0 Then
+                    PromptForParameters()
+                End If
+            Catch
+                ' swallow to maintain previous behavior; parameter prompt is best-effort
+            End Try
         End If
     End Sub
 
@@ -230,11 +240,13 @@ Public Class CrystalReportPrinter
     End Sub
 
     Public Sub SetParameterValue(args() As Object)
-        For i = 0 To args.Length - 1 Step 2
-            Dim value As Object = GlobalFunctions.ConvertObjectToType(args(i))
-            Dim name As String = args(i + 1).ToString()
-            _report.SetParameterValue(name, value)
-        Next
+        If args IsNot Nothing Then
+            For i = 0 To args.Length - 1 Step 2
+                Dim value As Object = GlobalFunctions.ConvertObjectToType(args(i))
+                Dim name As String = args(i + 1).ToString()
+                _report.SetParameterValue(name, value)
+            Next
+        End If
     End Sub
 
     Public Sub SetParameterValues(args() As Object)
@@ -272,6 +284,60 @@ Public Class CrystalReportPrinter
         End If
         Return PrinterSettings.InstalledPrinters.Cast(Of String)().Any(Function(name) printerName.ToUpper().Trim() = name.ToUpper().Trim())
     End Function
+
+    ''' <summary>
+    ''' Show a modal dialog with a CrystalReportViewer configured to prompt for missing parameter values.
+    ''' Call this when you want the user to be prompted for parameters instead of setting them programmatically.
+    ''' </summary>
+    Public Sub PromptForParameters(Optional owner As IWin32Window = Nothing)
+        Try
+            If _report Is Nothing Then
+                Throw New InvalidOperationException("Report document is not loaded.")
+            End If
+
+            ' Only show prompt if there are parameters defined
+            If _report.DataDefinition Is Nothing OrElse _report.DataDefinition.ParameterFields.Count = 0 Then
+                Return
+            End If
+
+            Using frm As New Form()
+                Dim viewer As New CrystalDecisions.Windows.Forms.CrystalReportViewer()
+                viewer.Dock = DockStyle.Fill
+                viewer.ReportSource = _report
+                viewer.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None
+
+                ' Some Crystal Reports versions do not expose the EnableParameterPrompt property.
+                ' Use reflection to set it when available, otherwise try to enable the parameter panel button as a fallback.
+                Try
+                    Dim pi = viewer.GetType().GetProperty("EnableParameterPrompt")
+                    If pi IsNot Nothing AndAlso pi.CanWrite Then
+                        pi.SetValue(viewer, True, Nothing)
+                    Else
+                        Dim pfb = viewer.GetType().GetProperty("ShowParameterPanelButton")
+                        If pfb IsNot Nothing AndAlso pfb.CanWrite Then
+                            pfb.SetValue(viewer, True, Nothing)
+                        End If
+                    End If
+                Catch
+                    ' Swallow reflection errors; parameter prompt is best-effort.
+                End Try
+
+                viewer.ShowCloseButton = False ' Keep viewer simple
+                frm.Text = If(String.IsNullOrEmpty(PrintJobName), ReportFileName, PrintJobName) & " - Parameters"
+                frm.StartPosition = FormStartPosition.CenterParent
+                frm.Width = 900
+                frm.Height = 700
+                frm.Controls.Add(viewer)
+                If owner IsNot Nothing Then
+                    frm.ShowDialog(owner)
+                Else
+                    frm.ShowDialog()
+                End If
+            End Using
+        Catch ex As Exception
+            MessageBox.Show($"Unable to prompt for parameters: {ex.Message}", "Parameter Prompt Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        End Try
+    End Sub
 
 
     Public Class CrPrintableArgs
