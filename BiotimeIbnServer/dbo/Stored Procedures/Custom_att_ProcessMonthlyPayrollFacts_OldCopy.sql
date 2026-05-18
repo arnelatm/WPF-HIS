@@ -813,7 +813,3 @@ BEGIN
     WHERE att_date BETWEEN @DateFrom AND @DateTo
       AND (@EmpID IS NULL OR emp_id = @EmpID);
 END;
-
-
-
-
