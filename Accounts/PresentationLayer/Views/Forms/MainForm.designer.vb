@@ -163,6 +163,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemBaladiyaResultEntryIGroup = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemDiagnosticSamples = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemClinicSamples = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemLabReportStatus = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPharmacy = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemDrugSale = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemDrugAcceptance = New System.Windows.Forms.ToolStripMenuItem()
@@ -183,6 +184,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemTBSemestral = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemTBYearly = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemTBCustom = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemTBClosingYear = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemBalanceSheet = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemBSYearly = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemBSMonthly = New System.Windows.Forms.ToolStripMenuItem()
@@ -266,7 +268,7 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-            Me.ToolStripMenuItemLabReportStatus = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemBSClosingYear = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.AccountsMenu.SuspendLayout()
@@ -975,6 +977,11 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemClinicSamples.Name = "ToolStripMenuItemClinicSamples"
             resources.ApplyResources(Me.ToolStripMenuItemClinicSamples, "ToolStripMenuItemClinicSamples")
             '
+            'ToolStripMenuItemLabReportStatus
+            '
+            Me.ToolStripMenuItemLabReportStatus.Name = "ToolStripMenuItemLabReportStatus"
+            resources.ApplyResources(Me.ToolStripMenuItemLabReportStatus, "ToolStripMenuItemLabReportStatus")
+            '
             'ToolStripMenuItemPharmacy
             '
             Me.ToolStripMenuItemPharmacy.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemDrugSale, Me.ToolStripMenuItemDrugAcceptance, Me.ToolStripMenuItemItemMatcher, Me.ToolStripMenuItemDosagePrinting})
@@ -1049,7 +1056,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemTrialBalance
             '
-            Me.ToolStripMenuItemTrialBalance.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemTBMonthly, Me.ToolStripMenuItemTBQuarterly, Me.ToolStripMenuItemTBSemestral, Me.ToolStripMenuItemTBYearly, Me.ToolStripMenuItemTBCustom})
+            Me.ToolStripMenuItemTrialBalance.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemTBMonthly, Me.ToolStripMenuItemTBQuarterly, Me.ToolStripMenuItemTBSemestral, Me.ToolStripMenuItemTBYearly, Me.ToolStripMenuItemTBCustom, Me.ToolStripMenuItemTBClosingYear})
             Me.ToolStripMenuItemTrialBalance.Name = "ToolStripMenuItemTrialBalance"
             resources.ApplyResources(Me.ToolStripMenuItemTrialBalance, "ToolStripMenuItemTrialBalance")
             '
@@ -1078,9 +1085,14 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemTBCustom.Name = "ToolStripMenuItemTBCustom"
             resources.ApplyResources(Me.ToolStripMenuItemTBCustom, "ToolStripMenuItemTBCustom")
             '
+            'ToolStripMenuItemTBClosingYear
+            '
+            Me.ToolStripMenuItemTBClosingYear.Name = "ToolStripMenuItemTBClosingYear"
+            resources.ApplyResources(Me.ToolStripMenuItemTBClosingYear, "ToolStripMenuItemTBClosingYear")
+            '
             'ToolStripMenuItemBalanceSheet
             '
-            Me.ToolStripMenuItemBalanceSheet.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemBSYearly, Me.ToolStripMenuItemBSMonthly, Me.ToolStripMenuItemBSQuarterly, Me.ToolStripMenuItemBSSemestral, Me.ToolStripMenuItemBSCustom})
+            Me.ToolStripMenuItemBalanceSheet.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemBSYearly, Me.ToolStripMenuItemBSMonthly, Me.ToolStripMenuItemBSQuarterly, Me.ToolStripMenuItemBSSemestral, Me.ToolStripMenuItemBSCustom, Me.ToolStripMenuItemBSClosingYear})
             Me.ToolStripMenuItemBalanceSheet.Name = "ToolStripMenuItemBalanceSheet"
             resources.ApplyResources(Me.ToolStripMenuItemBalanceSheet, "ToolStripMenuItemBalanceSheet")
             '
@@ -1512,10 +1524,10 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
             '
-            'ToolStripMenuItemLabReportStatus
+            'ToolStripMenuItemBSClosingYear
             '
-            Me.ToolStripMenuItemLabReportStatus.Name = "ToolStripMenuItemLabReportStatus"
-            resources.ApplyResources(Me.ToolStripMenuItemLabReportStatus, "ToolStripMenuItemLabReportStatus")
+            Me.ToolStripMenuItemBSClosingYear.Name = "ToolStripMenuItemBSClosingYear"
+            resources.ApplyResources(Me.ToolStripMenuItemBSClosingYear, "ToolStripMenuItemBSClosingYear")
             '
             'MainForm
             '
@@ -1781,5 +1793,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ToolStripMenuItemBaladiyaResultEntryIGroup As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemInvoiceNoteEditor As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemLabReportStatus As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemTBClosingYear As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemBSClosingYear As ToolStripMenuItem
     End Class
 End NameSpace

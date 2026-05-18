@@ -2841,9 +2841,12 @@
     </None>
     <None Include="app -  ibn-server - Kizen %28local ispadmin2%29.config" />
     <None Include="app - Copy.config" />
+    <None Include="app-Ibn-Server - Copy.config" />
+    <None Include="app-ibn-server-orig.config" />
+    <None Include="app-ibn-server-copy1.config" />
     <None Include="app.config" />
+    <None Include="app-ispadmin2-backp.config" />
     <None Include="app-kizen.config" />
-    <None Include="app-Isp-Server - Copy - Copy.config" />
     <None Include="app-Isp-Server - Copy.config" />
     <None Include="app-ISP-SERVERNEW.config" />
     <None Include="app-ibn-server-test.config" />

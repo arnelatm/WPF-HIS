@@ -57,6 +57,14 @@ Public Class FinancialReportPresenter(Of TM As New)
                 _reportFileName = "Summary of Employee Loans.Rpt"
                 View.WithZeroBalanceQuery = True
                 _withFiscalYearDateRequirement = False
+            Case "BalanceSheetClosing"
+                _reportName = "Balance Sheet Closing Year"
+                _reportFileName = "Balance Sheet Closing.Rpt"
+                _withFiscalYearDateRequirement = True
+            Case "TrialBalanceClosing"
+                _reportName = "Trial Balance Closing Year"
+                _reportFileName = "Trial Balance Closing.Rpt"
+                _withFiscalYearDateRequirement = True
         End Select
     End Sub
 
@@ -84,7 +92,7 @@ Public Class FinancialReportPresenter(Of TM As New)
                 AccountBalanceYear = Year(beginningDate)
                 begDataDate = beginningDate
             Else
-                If View.ReportCode = "TrialBalance" Then
+                If View.ReportCode = "TrialBalance" Or View.ReportCode = "TrialBalanceClosing" Then
                     AccountBalanceYear = GetFieldOnMaxField("Year", "AccountBalance", "Year")
                 Else
                     AccountBalanceYear = Year(lastFiscalYearDate)
@@ -111,7 +119,7 @@ Public Class FinancialReportPresenter(Of TM As New)
             Dim eDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(endingDate, CultureInfo.CreateSpecificCulture("en-GB"))
             reportTitle = Libraries.MessagingLibrary.Messaging.SelectReportName(reportName, beginningDate, endingDate, curCulture, View.Period)
             Select Case View.ReportCode
-                Case "BalanceSheet"
+                Case "BalanceSheet", "BalanceSheetClosing"
                     reportArgs.ReportParameters = {beginningDate, "BeginningDate",
                                   endingDate, "EndingDate",
                                   AccountBalanceYear, "AccountBalanceYear",
@@ -121,7 +129,7 @@ Public Class FinancialReportPresenter(Of TM As New)
                                   reportTitle, "ReportTitle",
                                   language, "Language"
                                   }
-                Case "TrialBalance"
+                Case "TrialBalance", "TrialBalanceClosing"
                     reportArgs.ReportParameters = {beginningDate, "BeginningDate",
                                       endingDate, "EndingDate",
                                       AccountBalanceYear, "AccountBalanceYear",

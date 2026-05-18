@@ -154,6 +154,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UsefulQueries", "UsefulQuer
 		Query compare total from one table to total from a sub table.sql = Query compare total from one table to total from a sub table.sql
 		Query Sql Database for a certain name.sql = Query Sql Database for a certain name.sql
 		Query tables for Creation Date.sql = Query tables for Creation Date.sql
+		Query to check for wrong CDOIITEM - CDJournal.sql = Query to check for wrong CDOIITEM - CDJournal.sql
 		QueryAvailableIdentityFieldSpace.sql = QueryAvailableIdentityFieldSpace.sql
 		QueryWrongAccountsInReconciliation.sql = QueryWrongAccountsInReconciliation.sql
 		REplace field with a sequential number.sql = REplace field with a sequential number.sql
@@ -936,6 +937,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{
 		EntryFields.vb = EntryFields.vb
 	EndProjectSection
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "BioTime.SchemaSnapShot", "BioTime.Reporting.Database\BioTime.SchemaSnapShot.sqlproj", "{96C73BB9-FAA6-4CB0-B278-E17F1E68ADAD}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "BioTime.Reporting.ViewsOnly.Deploy", "BioTime.Reporting.ViewsOnly.Deploy,\BioTime.Reporting.ViewsOnly.Deploy.sqlproj", "{BA386CDC-9065-492A-87E5-AB2F36CB4507}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "BiotimeIbnServer", "BiotimeIbnServer\BiotimeIbnServer.sqlproj", "{F6620EED-7142-4DAB-B1CD-84547463A91C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug (.NET 3.5)|Any CPU = Debug (.NET 3.5)|Any CPU
@@ -1148,6 +1155,42 @@ Global
 		{5FC553F1-5E77-4F35-B61A-5FC98A5D0E82}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
 		{5FC553F1-5E77-4F35-B61A-5FC98A5D0E82}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5FC553F1-5E77-4F35-B61A-5FC98A5D0E82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96C73BB9-FAA6-4CB0-B278-E17F1E68ADAD}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{96C73BB9-FAA6-4CB0-B278-E17F1E68ADAD}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
+		{96C73BB9-FAA6-4CB0-B278-E17F1E68ADAD}.Debug (.NET 3.5)|Any CPU.Deploy.0 = Debug|Any CPU
+		{96C73BB9-FAA6-4CB0-B278-E17F1E68ADAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96C73BB9-FAA6-4CB0-B278-E17F1E68ADAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96C73BB9-FAA6-4CB0-B278-E17F1E68ADAD}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{96C73BB9-FAA6-4CB0-B278-E17F1E68ADAD}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{96C73BB9-FAA6-4CB0-B278-E17F1E68ADAD}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
+		{96C73BB9-FAA6-4CB0-B278-E17F1E68ADAD}.Release (.NET 3.5)|Any CPU.Deploy.0 = Release|Any CPU
+		{96C73BB9-FAA6-4CB0-B278-E17F1E68ADAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96C73BB9-FAA6-4CB0-B278-E17F1E68ADAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96C73BB9-FAA6-4CB0-B278-E17F1E68ADAD}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{BA386CDC-9065-492A-87E5-AB2F36CB4507}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA386CDC-9065-492A-87E5-AB2F36CB4507}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
+		{BA386CDC-9065-492A-87E5-AB2F36CB4507}.Debug (.NET 3.5)|Any CPU.Deploy.0 = Debug|Any CPU
+		{BA386CDC-9065-492A-87E5-AB2F36CB4507}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA386CDC-9065-492A-87E5-AB2F36CB4507}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA386CDC-9065-492A-87E5-AB2F36CB4507}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{BA386CDC-9065-492A-87E5-AB2F36CB4507}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{BA386CDC-9065-492A-87E5-AB2F36CB4507}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
+		{BA386CDC-9065-492A-87E5-AB2F36CB4507}.Release (.NET 3.5)|Any CPU.Deploy.0 = Release|Any CPU
+		{BA386CDC-9065-492A-87E5-AB2F36CB4507}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA386CDC-9065-492A-87E5-AB2F36CB4507}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA386CDC-9065-492A-87E5-AB2F36CB4507}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{F6620EED-7142-4DAB-B1CD-84547463A91C}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6620EED-7142-4DAB-B1CD-84547463A91C}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug|Any CPU
+		{F6620EED-7142-4DAB-B1CD-84547463A91C}.Debug (.NET 3.5)|Any CPU.Deploy.0 = Debug|Any CPU
+		{F6620EED-7142-4DAB-B1CD-84547463A91C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6620EED-7142-4DAB-B1CD-84547463A91C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6620EED-7142-4DAB-B1CD-84547463A91C}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{F6620EED-7142-4DAB-B1CD-84547463A91C}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release|Any CPU
+		{F6620EED-7142-4DAB-B1CD-84547463A91C}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
+		{F6620EED-7142-4DAB-B1CD-84547463A91C}.Release (.NET 3.5)|Any CPU.Deploy.0 = Release|Any CPU
+		{F6620EED-7142-4DAB-B1CD-84547463A91C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6620EED-7142-4DAB-B1CD-84547463A91C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6620EED-7142-4DAB-B1CD-84547463A91C}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

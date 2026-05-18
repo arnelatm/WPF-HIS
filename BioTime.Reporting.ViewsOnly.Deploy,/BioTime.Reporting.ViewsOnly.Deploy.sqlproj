@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>BioTime.Reporting.ViewsOnly.Deploy</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{ba386cdc-9065-492a-87e5-ab2f36cb4507}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql160DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>BioTime.Reporting.ViewsOnly.Deploy_</RootNamespace>
+    <AssemblyName>BioTime.Reporting.ViewsOnly.Deploy_</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="dbo" />
+    <Folder Include="dbo\Views" />
+    <Folder Include="dbo\Functions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Views\custom_att_DailyAttendanceSummary.sql" />
+    <Build Include="dbo\Views\custom_att_DailyAttendanceSummaryOld.sql" />
+    <Build Include="dbo\Views\custom_att_DailyAttendanceSummaryVer1.sql" />
+    <Build Include="dbo\Views\custom_att_DailyAttendanceSummaryVer2.sql" />
+    <Build Include="dbo\Views\custom_att_DailyAttendanceSummaryVer3.sql" />
+    <Build Include="dbo\Views\custom_att_DailyAttendanceSummaryVer4.sql" />
+    <Build Include="dbo\Views\custom_att_DailyAttendanceSummaryVer5.sql" />
+    <Build Include="dbo\Views\custom_att_DailyAttendanceSummaryVer6.sql" />
+    <Build Include="dbo\Views\custom_att_DailyAttendanceSummaryVer7.sql" />
+    <Build Include="dbo\Views\custom_att_DailyPunchCount.sql" />
+    <Build Include="dbo\Views\custom_att_DailyPunchSlots.sql" />
+    <Build Include="dbo\Views\custom_att_MissingPunchDays.sql" />
+    <Build Include="dbo\Views\custom_att_MonthlyAttendanceSummary.sql" />
+    <Build Include="dbo\Views\custom_att_MonthlyAttendanceSummaryOld.sql" />
+    <Build Include="dbo\Views\custom_att_MonthlyAttendanceSummaryVer1.sql" />
+    <Build Include="dbo\Views\custom_att_MonthlyAttendanceSummaryVer2.sql" />
+    <Build Include="dbo\Views\custom_att_MonthlyAttendanceSummaryVer3.sql" />
+    <Build Include="dbo\Views\custom_att_NormalizedPunches.sql" />
+    <Build Include="dbo\Views\custom_att_NormalizedPunchesOrig.sql" />
+    <Build Include="dbo\Views\custom_att_PunchDetail.sql" />
+    <Build Include="dbo\Views\custom_rpt_PunchExceptionsBasic.sql" />
+    <Build Include="dbo\Views\custom_rpt_PunchExceptionsBasicOrig.sql" />
+    <Build Include="dbo\Views\vw_EmployeeSchedule_Basic.sql" />
+  </ItemGroup>
+</Project>

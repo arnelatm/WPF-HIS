@@ -1,0 +1,27 @@
+﻿CREATE TABLE [dbo].[personnel_company] (
+    [id]           INT            IDENTITY (1, 1) NOT NULL,
+    [create_time]  DATETIME2 (7)  NULL,
+    [create_user]  NVARCHAR (150) NULL,
+    [change_time]  DATETIME2 (7)  NULL,
+    [change_user]  NVARCHAR (150) NULL,
+    [status]       SMALLINT       NOT NULL,
+    [logo]         NVARCHAR (200) NULL,
+    [country]      NVARCHAR (10)  NULL,
+    [city]         NVARCHAR (10)  NULL,
+    [fax]          NVARCHAR (20)  NULL,
+    [email]        NVARCHAR (50)  NULL,
+    [state]        NVARCHAR (20)  NULL,
+    [phone]        NVARCHAR (20)  NULL,
+    [website]      NVARCHAR (50)  NULL,
+    [postal_code]  NVARCHAR (20)  NULL,
+    [address]      NVARCHAR (200) NULL,
+    [address2]     NVARCHAR (200) NULL,
+    [logo_pos]     SMALLINT       NOT NULL,
+    [name_pos]     SMALLINT       NOT NULL,
+    [company_code] NVARCHAR (50)  NOT NULL,
+    [company_name] NVARCHAR (100) NOT NULL,
+    [is_default]   BIT            NOT NULL,
+    PRIMARY KEY CLUSTERED ([id] ASC),
+    UNIQUE NONCLUSTERED ([company_code] ASC)
+);
+

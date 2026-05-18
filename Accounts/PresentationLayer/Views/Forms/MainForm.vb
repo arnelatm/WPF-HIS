@@ -1375,6 +1375,14 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ToolStripMenuItemLabReportStatus_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemLabReportStatus.Click
             RunForm(Of LabReportStatusForm, LabReportStatusPresenter(Of LabReportStatusModel))()
         End Sub
+
+        Private Sub ToolStripMenuItemBSClosingYear_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemBSClosingYear.Click
+            RunForm(Of FinancialReport, FinancialReportPresenter(Of AccountModel), String, String)("BalanceSheetClosing", "Y")
+        End Sub
+
+        Private Sub ToolStripMenuItemTBClosingYear_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemTBClosingYear.Click
+            RunForm(Of FinancialReport, FinancialReportPresenter(Of AccountModel), String, String)("TrialBalanceClosing", "Y")
+        End Sub
     End Class
 
 End Namespace
