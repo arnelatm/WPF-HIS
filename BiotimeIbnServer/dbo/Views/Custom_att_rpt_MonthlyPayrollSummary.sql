@@ -4,8 +4,8 @@ CREATE VIEW [dbo].[Custom_att_rpt_MonthlyPayrollSummary]
 AS
 SELECT
     f.emp_id,
-	e.Emp_code,
-	e.First_name
+	e.emp_code,
+	e.first_name
 	year_no,
     month_no,
 
@@ -32,7 +32,7 @@ SELECT
 
     SUM(CASE WHEN needs_payroll_review = 1 THEN 1 ELSE 0 END) AS payroll_review_days
 
-FROM dbo.Custom_att_fact_DailyAttendance f
+FROM dbo.custom_att_fact_DailyAttendance f
 left join personnel_employee e
 on f.emp_id = e.id
 WHERE DAY(att_date) BETWEEN 1 AND 29 and month_no=4  -- 🔴 Key addition

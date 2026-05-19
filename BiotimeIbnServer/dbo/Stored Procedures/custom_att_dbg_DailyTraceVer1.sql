@@ -76,7 +76,7 @@ BEGIN
 
 	-- 9) Final fact table
 	SELECT '09_FactDailyAttendance' AS step, *
-	FROM dbo.Custom_att_fact_DailyAttendance
+	FROM dbo.custom_att_fact_DailyAttendance
 	WHERE emp_id = @EmpID
 	  AND att_date = @AttDate;
 END

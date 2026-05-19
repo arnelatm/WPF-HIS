@@ -11,6 +11,6 @@ as
       ,e.[last_name]
       ,e.[gender]    
 	  ,d.[dept_name] as Department
-  FROM [BioTime].[dbo].[personnel_employee] e
-  left join [BioTime].[dbo].[personnel_department] d
+  FROM [dbo].[personnel_employee] e
+  left join [dbo].[personnel_department] d
   on e.department_id = d.id

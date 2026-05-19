@@ -95,7 +95,7 @@ BEGIN
 
     PRINT '09_FactDailyAttendance';
     SELECT '09_FactDailyAttendance' AS step, *
-    FROM dbo.Custom_att_fact_DailyAttendance
+    FROM dbo.custom_att_fact_DailyAttendance
     WHERE emp_id = @pEmpID
       AND att_date = @pAttDate
     OPTION (RECOMPILE);

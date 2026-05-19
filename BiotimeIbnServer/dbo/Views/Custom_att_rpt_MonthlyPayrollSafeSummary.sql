@@ -35,7 +35,7 @@ SELECT
 	  
     SUM(CASE WHEN anomaly_flag = 'IncompletePunchPair' THEN 1 ELSE 0 END) AS incomplete_punch_pair_days
 
-FROM dbo.Custom_att_fact_DailyAttendance where year_no=2026 and month_no = 4 and day(att_date) > 0 and day(att_date)<30
+FROM dbo.custom_att_fact_DailyAttendance where year_no=2026 and month_no = 4 and day(att_date) > 0 and day(att_date)<30
 GROUP BY
     emp_id,
     year_no,

@@ -46,7 +46,7 @@ BEGIN
     --------------------------------------------------
     -- 0. Insert missing fact rows
     --------------------------------------------------
-    INSERT INTO dbo.Custom_att_fact_DailyAttendance (
+    INSERT INTO dbo.custom_att_fact_DailyAttendance (
         emp_id,
         att_date,
         year_no,
@@ -58,7 +58,7 @@ BEGIN
         YEAR(b.att_date),
         MONTH(b.att_date)
     FROM #DailyBase b
-    LEFT JOIN dbo.Custom_att_fact_DailyAttendance f WITH (UPDLOCK, HOLDLOCK)
+    LEFT JOIN dbo.custom_att_fact_DailyAttendance f WITH (UPDLOCK, HOLDLOCK)
         ON f.emp_id = b.emp_id
        AND f.att_date = b.att_date
     WHERE f.emp_id IS NULL;
@@ -709,7 +709,7 @@ BEGIN
             CASE WHEN ISNULL(s.comp_leave_minutes, 0) > 0 THEN 1 ELSE 0 END,
         f.comp_leave_minutes = ISNULL(s.comp_leave_minutes, 0),
         f.comp_leave_hours = CAST(ISNULL(s.comp_leave_minutes, 0) / 60.0 AS decimal(10,2))
-    FROM dbo.Custom_att_fact_DailyAttendance f
+    FROM dbo.custom_att_fact_DailyAttendance f
     JOIN #PayrollSrc s
         ON s.emp_id = f.emp_id
        AND s.att_date = f.att_date;
@@ -730,7 +730,7 @@ BEGIN
 
         SUM(ISNULL(late_minutes, 0)) AS total_late_minutes,
         SUM(ISNULL(early_out_minutes, 0)) AS total_early_out_minutes
-    FROM dbo.Custom_att_fact_DailyAttendance
+    FROM dbo.custom_att_fact_DailyAttendance
     WHERE att_date BETWEEN @DateFrom AND @DateTo
       AND (@EmpID IS NULL OR emp_id = @EmpID);
 END;

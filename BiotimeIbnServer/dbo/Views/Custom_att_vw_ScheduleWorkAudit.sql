@@ -100,7 +100,7 @@ SELECT
         ELSE 'Review'
     END AS audit_reason
 
-FROM dbo.Custom_att_fact_DailyAttendance f
+FROM dbo.custom_att_fact_DailyAttendance f
 LEFT JOIN dbo.custom_att_fnd_EffectiveScheduleResolved es
     ON es.emp_id = f.emp_id
    AND es.att_date = f.att_date

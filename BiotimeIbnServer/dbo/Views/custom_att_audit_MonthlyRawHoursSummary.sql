@@ -91,7 +91,7 @@ daily_rollup AS
 SELECT
     dr.emp_id,
     e.first_name,
-    e.department,
+    e.Department,
     dr.year_no,
     dr.month_no,
     SUM(dr.day_present) AS days_present,
@@ -111,6 +111,6 @@ LEFT JOIN vw_employees e
 GROUP BY
     dr.emp_id,
     e.first_name,
-    e.department,
+    e.Department,
     dr.year_no,
     dr.month_no;

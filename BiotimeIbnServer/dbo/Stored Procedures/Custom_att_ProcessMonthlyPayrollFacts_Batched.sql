@@ -40,6 +40,6 @@ BEGIN
         COUNT(DISTINCT emp_id) AS employees_processed,
         MIN(att_date) AS min_date,
         MAX(att_date) AS max_date
-    FROM dbo.Custom_att_fact_DailyAttendance
+    FROM dbo.custom_att_fact_DailyAttendance
     WHERE att_date BETWEEN @DateFrom AND @DateTo;
 END;

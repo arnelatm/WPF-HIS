@@ -278,6 +278,7 @@
     <Build Include="dbo\Tables\workflow_nodeinstance.sql" />
     <Build Include="dbo\Tables\meeting_meetingtransaction.sql" />
     <Build Include="dbo\Views\custom_att_calc_DailyMetricsVer1.sql" />
+    <Build Include="dbo\Views\custom_att_calc_DailyMetrics.sql" />
     <Build Include="dbo\Views\Custom_att_vw_ScheduleWorkAudit.sql" />
     <Build Include="dbo\Views\custom_att_rpt_CrystalMonthlyAttendanceSource.sql" />
     <Build Include="dbo\Views\custom_att_fnd_NormalizedPunches.sql" />
@@ -296,6 +297,7 @@
     <Build Include="dbo\Views\custom_att_rpt_MonthlyAttendanceRollup.sql" />
     <Build Include="dbo\Views\custom_att_audit_MonthlyRawHoursSummary.sql" />
     <Build Include="dbo\Views\custom_att_calc_DailyAttendanceSummary_disabled.sql" />
+    <Build Include="dbo\Views\custom_att_calc_DailyAttendanceSummary.sql" />
     <Build Include="dbo\Views\custom_att_audit_DailyPairingSummary.sql" />
     <Build Include="dbo\Views\custom_att_calc_DailyMetrics_OLD.sql" />
     <Build Include="dbo\Views\custom_att_calc_DailyMetrics_Disabled.sql" />
@@ -318,6 +320,7 @@
     <Build Include="dbo\Views\custom_att_fnd_SegmentPairs.sql" />
     <Build Include="dbo\Views\custom_att_fnd_ScheduledWorkSegments.sql" />
     <Build Include="dbo\Views\custom_att_calc_DailyDayClassification_disabled.sql" />
+    <Build Include="dbo\Views\custom_att_calc_DailyDayClassification.sql" />
     <Build Include="Security\IBN-SINA_ISPADMIN.sql" />
     <Build Include="Security\IBN-SINA_ispadmin_1.sql" />
     <Build Include="Security\BiotimeUser.sql" />
@@ -348,5 +351,12 @@
     <Build Include="dbo\Views\custom_att_fnd_CleanedPunchesVer2.sql" />
     <Build Include="dbo\Stored Procedures\Custom_att_ProcessMonthlyPayrollFacts_Batched.sql" />
     <Build Include="dbo\Stored Procedures\custom_att_dbg_DailyTraceVer1.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <ArtifactReference Include="$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\160\SQLSchemas\master.dacpac">
+      <HintPath>$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\160\SQLSchemas\master.dacpac</HintPath>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+      <DatabaseVariableLiteralValue>master</DatabaseVariableLiteralValue>
+    </ArtifactReference>
   </ItemGroup>
 </Project>
