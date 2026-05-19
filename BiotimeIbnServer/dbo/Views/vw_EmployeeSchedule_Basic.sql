@@ -5,7 +5,12 @@ WITH Numbers AS
 (
     SELECT TOP (1000)
         ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) - 1 AS n
-    FROM sys.all_objects
+    FROM
+    (
+        SELECT 1 AS n FROM (VALUES (0),(0),(0),(0),(0),(0),(0),(0),(0),(0)) AS a(n)
+        CROSS JOIN (VALUES (0),(0),(0),(0),(0),(0),(0),(0),(0),(0)) AS b(n)
+        CROSS JOIN (VALUES (0),(0),(0),(0),(0),(0),(0),(0),(0),(0)) AS c(n)
+    ) AS tally
 ),
 ExpandedSchedule AS
 (
