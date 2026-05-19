@@ -1,4 +1,8 @@
 ﻿
+
+
+
+
 CREATE VIEW [dbo].[custom_att_fnd_EffectiveScheduleResolved]
 AS
 WITH Numbers AS
@@ -158,13 +162,25 @@ ChosenWithShift AS
             WHEN c.effective_shift_id IS NULL THEN NULL
 
             WHEN ISNULL(sh.shift_cycle, 1) > 1
-            THEN
-                (
-                    (DATEDIFF(DAY, c.schedule_anchor_date, c.att_date) + 6)
-                    % NULLIF(ISNULL(sh.shift_cycle, 1) * 7, 0)
-                    + NULLIF(ISNULL(sh.shift_cycle, 1) * 7, 0)
-                )
-                % NULLIF(ISNULL(sh.shift_cycle, 1) * 7, 0)
+			THEN
+				(
+					(
+						(
+							DATEDIFF(
+								DAY,
+								DATEADD(
+									DAY,
+									-((DATEDIFF(DAY, '19000107', c.schedule_anchor_date) % 7 + 7) % 7),
+									c.schedule_anchor_date
+								),
+								c.att_date
+							) / 7
+						)
+						% ISNULL(sh.shift_cycle, 1)
+					) * 7
+				)
+				+
+				((DATEDIFF(DAY, '19000107', c.att_date) % 7 + 7) % 7)
 
             ELSE
                 (
@@ -191,13 +207,25 @@ BaseWithShift AS
             WHEN bc.effective_shift_id IS NULL THEN NULL
 
             WHEN ISNULL(sh.shift_cycle, 1) > 1
-            THEN
-                (
-                    (DATEDIFF(DAY, bc.schedule_anchor_date, bc.att_date) + 6)
-                    % NULLIF(ISNULL(sh.shift_cycle, 1) * 7, 0)
-                    + NULLIF(ISNULL(sh.shift_cycle, 1) * 7, 0)
-                )
-                % NULLIF(ISNULL(sh.shift_cycle, 1) * 7, 0)
+			THEN
+				(
+					(
+						(
+							DATEDIFF(
+								DAY,
+								DATEADD(
+									DAY,
+									-((DATEDIFF(DAY, '19000107', bc.schedule_anchor_date) % 7 + 7) % 7),
+									bc.schedule_anchor_date
+								),
+								bc.att_date
+							) / 7
+						)
+						% ISNULL(sh.shift_cycle, 1)
+					) * 7
+				)
+				+
+				((DATEDIFF(DAY, '19000107', bc.att_date) % 7 + 7) % 7)
 
             ELSE
                 (
