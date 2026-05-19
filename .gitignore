@@ -10,3 +10,7 @@ packages/
 TestResults/
 Logs/
 *.log
+WPF-HIS-github-verify/
+WPF-HIS-origin-verify/
+WPF-HIS-verify/
+WPF-HIS-verify.backup/
