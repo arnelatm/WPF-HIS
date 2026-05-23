@@ -1,3 +1,0 @@
-﻿CREATE LOGIN [IBN-SINA\ispadmin]
-    FROM WINDOWS WITH DEFAULT_LANGUAGE = [us_english];
-

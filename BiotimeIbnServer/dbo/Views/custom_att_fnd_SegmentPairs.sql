@@ -76,6 +76,19 @@ outs AS
     WHERE c.norm_punch_state = 1
 ),
 
+punch_counts AS
+(
+    SELECT
+        c.emp_id,
+        c.work_date,
+        SUM(CASE WHEN c.norm_punch_state = 0 THEN 1 ELSE 0 END) AS in_count,
+        SUM(CASE WHEN c.norm_punch_state = 1 THEN 1 ELSE 0 END) AS out_count
+    FROM cleaned c
+    GROUP BY
+        c.emp_id,
+        c.work_date
+),
+
 matched AS
 (
     SELECT
@@ -90,9 +103,20 @@ matched AS
         ROW_NUMBER() OVER
         (
             PARTITION BY i.emp_id, i.work_date, i.in_no
-            ORDER BY o.out_time, o.out_punch_id
+            ORDER BY
+                CASE
+                    WHEN pc.in_count = 1
+                     AND pc.out_count > 1
+                    THEN o.out_time
+                    ELSE NULL
+                END DESC,
+                o.out_time,
+                o.out_punch_id
         ) AS rn
     FROM ins i
+    INNER JOIN punch_counts pc
+        ON pc.emp_id = i.emp_id
+       AND pc.work_date = i.work_date
     LEFT JOIN outs o
         ON o.emp_id = i.emp_id
        AND o.work_date = i.work_date

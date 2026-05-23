@@ -33,12 +33,29 @@ BEGIN
     IF OBJECT_ID('tempdb..#DailyBase') IS NOT NULL
         DROP TABLE #DailyBase;
 
-	SELECT *
-	INTO #DailyBase
-	FROM dbo.custom_att_calc_DailyBase
-	WHERE att_date BETWEEN @DateFrom AND @DateTo
-	  AND (@EmpID IS NULL OR emp_id = @EmpID)
-	OPTION (RECOMPILE);
+    SELECT
+        emp_id,
+        att_date,
+        date_type,
+        first_clock_in,
+        last_clock_out,
+        recomputed_worked_minutes,
+        ot_minutes,
+        use_mode,
+        scheduled_ot_cap_minutes,
+        required_work_minutes
+    INTO #DailyBase
+    FROM dbo.custom_att_calc_DailyBase
+    WHERE att_date BETWEEN @DateFrom AND @DateTo
+      AND (@EmpID IS NULL OR emp_id = @EmpID)
+      AND NOT EXISTS
+      (
+          SELECT 1
+          FROM dbo.personnel_resign r
+          WHERE r.employee_id = custom_att_calc_DailyBase.emp_id
+            AND custom_att_calc_DailyBase.att_date > r.resign_date
+      )
+    OPTION (RECOMPILE);
 
     CREATE INDEX IX_DailyBase_EmpDate
     ON #DailyBase(emp_id, att_date);
@@ -70,24 +87,21 @@ BEGIN
         DROP TABLE #PunchAgg;
 
     SELECT
-        dwm.emp_id,
-        dwm.work_date AS att_date,
+        b.emp_id,
+        b.att_date,
         0 AS corrected_punch_count,
-        dwm.first_clock_in,
-        dwm.last_clock_out,
-        ISNULL(dwm.total_worked_minutes, 0) AS paired_worked_minutes,
+        b.first_clock_in,
+        b.last_clock_out,
+        ISNULL(b.recomputed_worked_minutes, 0) AS paired_worked_minutes,
         CASE
-            WHEN dwm.first_clock_in IS NOT NULL
-             AND dwm.last_clock_out IS NULL
+            WHEN b.first_clock_in IS NOT NULL
+             AND b.last_clock_out IS NULL
             THEN 1
             ELSE 0
         END AS open_pair_count,
-        ISNULL(dwm.worked_interval_count, 0) AS segment_count
+        0 AS segment_count
     INTO #PunchAgg
-    FROM dbo.custom_att_fnd_DailyWorkedMinutes dwm
-    WHERE dwm.work_date BETWEEN @DateFrom AND @DateTo
-      AND (@EmpID IS NULL OR dwm.emp_id = @EmpID)
-    OPTION (RECOMPILE);
+    FROM #DailyBase b;
     CREATE INDEX IX_PunchAgg_EmpDate
     ON #PunchAgg(emp_id, att_date);
 
@@ -97,32 +111,71 @@ BEGIN
     IF OBJECT_ID('tempdb..#RawPunchAgg') IS NOT NULL
         DROP TABLE #RawPunchAgg;
 
-    ;WITH x AS (
-        SELECT
-            t.emp_id,
-            CAST(t.punch_time AS date) AS att_date,
-            t.punch_time,
-            t.punch_state,
-            ROW_NUMBER() OVER (
-                PARTITION BY t.emp_id, CAST(t.punch_time AS date)
-                ORDER BY t.punch_time DESC
-            ) AS rn
-        FROM dbo.iclock_transaction t
-        WHERE t.punch_time >= @DateFrom
-          AND t.punch_time < DATEADD(DAY, 1, @DateTo)
-          AND (@EmpID IS NULL OR t.emp_id = @EmpID)
-    )
     SELECT
-        emp_id,
-        att_date,
-        punch_time AS latest_punch_time,
-        punch_state AS latest_punch_state
+        b.emp_id,
+        b.att_date,
+        rp.punch_time AS latest_punch_time,
+        rp.punch_state AS latest_punch_state,
+        fp.punch_time AS first_raw_punch_time,
+        pc.raw_punch_count
     INTO #RawPunchAgg
-    FROM x
-    WHERE rn = 1;
+    FROM #DailyBase b
+    OUTER APPLY
+    (
+        SELECT TOP (1)
+            t.punch_time,
+            t.punch_state
+        FROM dbo.iclock_transaction t
+        WHERE t.emp_id = b.emp_id
+          AND t.punch_time >= b.att_date
+          AND t.punch_time < DATEADD(DAY, 1, b.att_date)
+        ORDER BY t.punch_time DESC, t.id DESC
+    ) rp
+    OUTER APPLY
+    (
+        SELECT TOP (1)
+            t.punch_time
+        FROM dbo.iclock_transaction t
+        WHERE t.emp_id = b.emp_id
+          AND t.punch_time >= b.att_date
+          AND t.punch_time < DATEADD(DAY, 1, b.att_date)
+        ORDER BY t.punch_time, t.id
+    ) fp
+    OUTER APPLY
+    (
+        SELECT COUNT_BIG(*) AS raw_punch_count
+        FROM dbo.iclock_transaction t
+        WHERE t.emp_id = b.emp_id
+          AND t.punch_time >= b.att_date
+          AND t.punch_time < DATEADD(DAY, 1, b.att_date)
+    ) pc
+    WHERE rp.punch_time IS NOT NULL;
 
     CREATE INDEX IX_RawPunchAgg_EmpDate
     ON #RawPunchAgg(emp_id, att_date);
+
+    --------------------------------------------------
+    -- B.0 Worked intervals for split-duty comparison
+    --------------------------------------------------
+    IF OBJECT_ID('tempdb..#WorkedIntervals') IS NOT NULL
+        DROP TABLE #WorkedIntervals;
+
+    SELECT
+        wi.emp_id,
+        wi.work_date AS att_date,
+        wi.in_segment_no,
+        wi.out_segment_no,
+        wi.in_time,
+        wi.out_time,
+        wi.worked_minutes
+    INTO #WorkedIntervals
+    FROM dbo.custom_att_fnd_WorkedIntervals wi
+    WHERE wi.work_date BETWEEN @DateFrom AND @DateTo
+      AND (@EmpID IS NULL OR wi.emp_id = @EmpID)
+    OPTION (RECOMPILE);
+
+    CREATE INDEX IX_WorkedIntervals_EmpDate
+    ON #WorkedIntervals(emp_id, att_date);
 
     --------------------------------------------------
     -- B.1 Approved Compensatory Leave
@@ -151,6 +204,31 @@ BEGIN
 
     CREATE INDEX IX_CompLeave_EmpDate
     ON #CompLeave(emp_id, att_date);
+
+    --------------------------------------------------
+    -- B.2 Materialize effective schedule once
+    --------------------------------------------------
+    IF OBJECT_ID('tempdb..#EffectiveSchedule') IS NOT NULL
+        DROP TABLE #EffectiveSchedule;
+
+    SELECT
+        es.emp_id,
+        es.att_date,
+        es.effective_schedule_source,
+        es.resolved_is_off_day,
+        es.base_is_off_day,
+        es.effective_required_work_minutes,
+        es.effective_time_interval_id,
+        es.effective_scheduled_in_datetime,
+        es.effective_scheduled_out_datetime
+    INTO #EffectiveSchedule
+    FROM dbo.custom_att_fnd_EffectiveScheduleResolved es
+    WHERE es.att_date BETWEEN @DateFrom AND @DateTo
+      AND (@EmpID IS NULL OR es.emp_id = @EmpID)
+    OPTION (RECOMPILE);
+
+    CREATE INDEX IX_EffectiveSchedule_EmpDate
+    ON #EffectiveSchedule(emp_id, att_date);
 
     --------------------------------------------------
     -- 1. Build payroll source
@@ -194,6 +272,15 @@ BEGIN
 
         rp.latest_punch_time,
         rp.latest_punch_state,
+        rp.first_raw_punch_time,
+        ISNULL(rp.raw_punch_count, 0) AS raw_punch_count,
+        CASE
+            WHEN rp.first_raw_punch_time IS NOT NULL
+             AND COALESCE(p.first_clock_in, b.first_clock_in) IS NOT NULL
+             AND rp.first_raw_punch_time < COALESCE(p.first_clock_in, b.first_clock_in)
+            THEN 1
+            ELSE 0
+        END AS has_raw_punch_before_first_in,
 
         base_date_type =
             CASE
@@ -271,7 +358,7 @@ BEGIN
 
     INTO #PayrollSrc
     FROM #DailyBase b
-    LEFT JOIN dbo.custom_att_fnd_EffectiveScheduleResolved es
+    LEFT JOIN #EffectiveSchedule es
         ON es.emp_id = b.emp_id
        AND es.att_date = b.att_date
     LEFT JOIN dbo.att_timeinterval ti
@@ -291,6 +378,213 @@ BEGIN
     ON #PayrollSrc(emp_id, att_date);
 
     --------------------------------------------------
+    -- 1A. Split-duty schedule segments
+    --------------------------------------------------
+    IF OBJECT_ID('tempdb..#ScheduleSegments') IS NOT NULL
+        DROP TABLE #ScheduleSegments;
+
+    ;WITH WorkDays AS
+    (
+        SELECT
+            s.emp_id,
+            s.att_date,
+            es.effective_time_interval_id,
+            es.effective_scheduled_in_datetime AS schedule_start_datetime,
+            es.effective_scheduled_out_datetime AS schedule_end_datetime,
+            ti.in_time
+        FROM #PayrollSrc s
+        INNER JOIN #EffectiveSchedule es
+            ON es.emp_id = s.emp_id
+           AND es.att_date = s.att_date
+        INNER JOIN dbo.att_timeinterval ti
+            ON ti.id = es.effective_time_interval_id
+        WHERE s.required_minutes > 0
+          AND ISNULL(s.use_mode, 0) <> 1
+          AND es.effective_scheduled_in_datetime IS NOT NULL
+          AND es.effective_scheduled_out_datetime IS NOT NULL
+    ),
+    Breaks AS
+    (
+        SELECT
+            wd.emp_id,
+            wd.att_date,
+            DATEADD(
+                MINUTE,
+                CASE
+                    WHEN DATEDIFF(MINUTE, wd.in_time, bt.period_start) < 0
+                    THEN DATEDIFF(MINUTE, wd.in_time, bt.period_start) + 1440
+                    ELSE DATEDIFF(MINUTE, wd.in_time, bt.period_start)
+                END,
+                wd.schedule_start_datetime
+            ) AS break_start_datetime,
+            DATEADD(
+                MINUTE,
+                CASE
+                    WHEN DATEDIFF(MINUTE, wd.in_time, bt.period_start) < 0
+                    THEN DATEDIFF(MINUTE, wd.in_time, bt.period_start) + 1440
+                    ELSE DATEDIFF(MINUTE, wd.in_time, bt.period_start)
+                END + ISNULL(bt.duration, 0),
+                wd.schedule_start_datetime
+            ) AS break_end_datetime
+        FROM WorkDays wd
+        INNER JOIN dbo.att_timeinterval_break_time tib
+            ON tib.timeinterval_id = wd.effective_time_interval_id
+        INNER JOIN dbo.att_breaktime bt
+            ON bt.id = tib.breaktime_id
+    ),
+    ValidBreaks AS
+    (
+        SELECT
+            b.emp_id,
+            b.att_date,
+            b.break_start_datetime,
+            b.break_end_datetime,
+            ROW_NUMBER() OVER
+            (
+                PARTITION BY b.emp_id, b.att_date
+                ORDER BY b.break_start_datetime, b.break_end_datetime
+            ) AS break_no,
+            LAG(b.break_end_datetime) OVER
+            (
+                PARTITION BY b.emp_id, b.att_date
+                ORDER BY b.break_start_datetime, b.break_end_datetime
+            ) AS previous_break_end_datetime
+        FROM Breaks b
+        INNER JOIN WorkDays wd
+            ON wd.emp_id = b.emp_id
+           AND wd.att_date = b.att_date
+        WHERE b.break_start_datetime > wd.schedule_start_datetime
+          AND b.break_start_datetime < wd.schedule_end_datetime
+          AND b.break_end_datetime > b.break_start_datetime
+          AND b.break_end_datetime < wd.schedule_end_datetime
+    ),
+    Segments AS
+    (
+        SELECT
+            wd.emp_id,
+            wd.att_date,
+            vb.break_no AS segment_no,
+            COALESCE(vb.previous_break_end_datetime, wd.schedule_start_datetime) AS segment_start_datetime,
+            vb.break_start_datetime AS segment_end_datetime
+        FROM ValidBreaks vb
+        INNER JOIN WorkDays wd
+            ON wd.emp_id = vb.emp_id
+           AND wd.att_date = vb.att_date
+
+        UNION ALL
+
+        SELECT
+            wd.emp_id,
+            wd.att_date,
+            ISNULL(MAX(vb.break_no), 0) + 1 AS segment_no,
+            COALESCE(MAX(vb.break_end_datetime), wd.schedule_start_datetime) AS segment_start_datetime,
+            wd.schedule_end_datetime AS segment_end_datetime
+        FROM WorkDays wd
+        LEFT JOIN ValidBreaks vb
+            ON vb.emp_id = wd.emp_id
+           AND vb.att_date = wd.att_date
+        GROUP BY
+            wd.emp_id,
+            wd.att_date,
+            wd.schedule_start_datetime,
+            wd.schedule_end_datetime
+    )
+    SELECT
+        s.emp_id,
+        s.att_date,
+        s.segment_no,
+        s.segment_start_datetime,
+        s.segment_end_datetime
+    INTO #ScheduleSegments
+    FROM Segments s
+    WHERE s.segment_end_datetime > s.segment_start_datetime;
+
+    CREATE INDEX IX_ScheduleSegments_EmpDate
+    ON #ScheduleSegments(emp_id, att_date);
+
+    IF OBJECT_ID('tempdb..#SegmentTiming') IS NOT NULL
+        DROP TABLE #SegmentTiming;
+
+    SELECT
+        ss.emp_id,
+        ss.att_date,
+        COUNT(*) AS schedule_segment_count,
+
+        SUM(
+            CASE
+                WHEN wi.in_time IS NOT NULL
+                 AND wi.in_time > DATEADD(MINUTE, @LateGraceMinutes, ss.segment_start_datetime)
+                THEN DATEDIFF(MINUTE, DATEADD(MINUTE, @LateGraceMinutes, ss.segment_start_datetime), wi.in_time)
+                ELSE 0
+            END
+        ) AS final_late_minutes,
+
+        SUM(
+            CASE
+                WHEN wi.in_time IS NOT NULL
+                 AND wi.in_time > ss.segment_start_datetime
+                THEN DATEDIFF(MINUTE, ss.segment_start_datetime, wi.in_time)
+                ELSE 0
+            END
+        ) AS actual_late_minutes,
+
+        SUM(
+            CASE
+                WHEN wi.out_time IS NOT NULL
+                 AND wi.out_time < DATEADD(MINUTE, -@EarlyOutGraceMinutes, ss.segment_end_datetime)
+                THEN DATEDIFF(MINUTE, wi.out_time, DATEADD(MINUTE, -@EarlyOutGraceMinutes, ss.segment_end_datetime))
+                ELSE 0
+            END
+        ) AS final_early_out_minutes,
+
+        SUM(
+            CASE
+                WHEN wi.out_time IS NOT NULL
+                 AND wi.out_time < ss.segment_end_datetime
+                THEN DATEDIFF(MINUTE, wi.out_time, ss.segment_end_datetime)
+                ELSE 0
+            END
+        ) AS actual_early_out_minutes,
+
+        SUM(CASE WHEN wi.in_time IS NULL THEN 1 ELSE 0 END) AS unmatched_segment_count
+    INTO #SegmentTiming
+    FROM #ScheduleSegments ss
+    OUTER APPLY
+    (
+        SELECT TOP (1)
+            wi.in_time,
+            wi.out_time
+        FROM #WorkedIntervals wi
+        WHERE wi.emp_id = ss.emp_id
+          AND wi.att_date = ss.att_date
+          AND wi.out_time > ss.segment_start_datetime
+          AND wi.in_time < ss.segment_end_datetime
+        ORDER BY
+            CASE
+                WHEN
+                    DATEDIFF(
+                        MINUTE,
+                        CASE WHEN wi.in_time > ss.segment_start_datetime THEN wi.in_time ELSE ss.segment_start_datetime END,
+                        CASE WHEN wi.out_time < ss.segment_end_datetime THEN wi.out_time ELSE ss.segment_end_datetime END
+                    ) < 0
+                THEN 0
+                ELSE
+                    DATEDIFF(
+                        MINUTE,
+                        CASE WHEN wi.in_time > ss.segment_start_datetime THEN wi.in_time ELSE ss.segment_start_datetime END,
+                        CASE WHEN wi.out_time < ss.segment_end_datetime THEN wi.out_time ELSE ss.segment_end_datetime END
+                    )
+            END DESC,
+            wi.in_time
+    ) wi
+    GROUP BY
+        ss.emp_id,
+        ss.att_date;
+
+    CREATE INDEX IX_SegmentTiming_EmpDate
+    ON #SegmentTiming(emp_id, att_date);
+
+    --------------------------------------------------
     -- 2. Add calculated fields
     --------------------------------------------------
     ALTER TABLE #PayrollSrc ADD
@@ -301,17 +595,20 @@ BEGIN
         actual_late_minutes decimal(10,2) NULL,
         final_early_out_minutes decimal(10,2) NULL,
         actual_early_out_minutes decimal(10,2) NULL,
+        schedule_segment_count int NULL,
+        unmatched_schedule_segment_count int NULL,
         attendance_status_final varchar(50) NULL,
         anomaly_flag_final varchar(100) NULL,
         needs_payroll_review_final bit NULL,
         schedule_label_final varchar(100) NULL,
+        actual_excess_minutes decimal(10,2) NULL,
         excess_minutes decimal(10,2) NULL,
         reconciliation_variance_minutes decimal(10,2) NULL,
         reconciliation_status varchar(50) NULL,
         work_gap_minutes decimal(10,2) NULL;
 
     --------------------------------------------------
-    -- 2A. Shortfall and absence
+    -- 2A. Shortfall, absence, and OT
     --------------------------------------------------
     UPDATE s
     SET
@@ -335,14 +632,8 @@ BEGIN
                 THEN s.required_minutes - s.worked_minutes - ISNULL(s.comp_leave_minutes, 0)
 
                 ELSE 0
-            END
-    FROM #PayrollSrc s;
+            END,
 
-    --------------------------------------------------
-    -- 2B. OT calculation
-    --------------------------------------------------
-    UPDATE s
-    SET
         final_ot_minutes =
             CASE
                 WHEN s.required_minutes = 0
@@ -382,6 +673,14 @@ BEGIN
     --------------------------------------------------
     UPDATE s
     SET
+        actual_excess_minutes =
+            CASE
+                WHEN s.required_minutes > 0
+                 AND s.worked_minutes - s.required_minutes - ISNULL(s.final_ot_minutes, 0) > 0
+                THEN s.worked_minutes - s.required_minutes - ISNULL(s.final_ot_minutes, 0)
+                ELSE 0
+            END,
+
         excess_minutes =
             CASE
                 WHEN s.required_minutes > 0
@@ -455,12 +754,17 @@ BEGIN
     FROM #PayrollSrc s;
 
     --------------------------------------------------
-    -- 2C. True early-out calculation
+    -- 2C. True early-out and late calculation
     --------------------------------------------------
     UPDATE s
     SET
+        schedule_segment_count = ISNULL(st.schedule_segment_count, 1),
+        unmatched_schedule_segment_count = ISNULL(st.unmatched_segment_count, 0),
+
         final_early_out_minutes =
             CASE
+                WHEN ISNULL(st.schedule_segment_count, 1) > 1
+                THEN ISNULL(st.final_early_out_minutes, 0)
                 WHEN s.required_minutes <= 0 THEN 0
                 WHEN s.worked_minutes <= 0 THEN 0
                 WHEN s.use_mode = 1 THEN 0
@@ -479,6 +783,8 @@ BEGIN
 
         actual_early_out_minutes =
             CASE
+                WHEN ISNULL(st.schedule_segment_count, 1) > 1
+                THEN ISNULL(st.actual_early_out_minutes, 0)
                 WHEN s.required_minutes <= 0 THEN 0
                 WHEN s.worked_minutes <= 0 THEN 0
                 WHEN s.use_mode = 1 THEN 0
@@ -489,20 +795,19 @@ BEGIN
                 WHEN s.latest_punch_time < s.effective_scheduled_out_datetime
                 THEN DATEDIFF(MINUTE, s.latest_punch_time, s.effective_scheduled_out_datetime)
                 ELSE 0
-            END
-    FROM #PayrollSrc s;
+            END,
 
-    --------------------------------------------------
-    -- 2D. Late calculation
-    --------------------------------------------------
-    UPDATE s
-    SET
         final_late_minutes =
             CASE
+                WHEN ISNULL(st.schedule_segment_count, 1) > 1
+                THEN ISNULL(st.final_late_minutes, 0)
                 WHEN s.required_minutes <= 0 THEN 0
                 WHEN s.effective_scheduled_in_datetime IS NULL THEN 0
                 WHEN s.first_clock_in IS NULL THEN 0
                 WHEN s.use_mode = 1 THEN 0
+                WHEN s.has_raw_punch_before_first_in = 1
+                 AND s.first_clock_in > DATEADD(MINUTE, @LateGraceMinutes, s.effective_scheduled_in_datetime)
+                THEN 0
                 WHEN s.first_clock_in > DATEADD(MINUTE, @LateGraceMinutes, s.effective_scheduled_in_datetime)
                 THEN DATEDIFF(MINUTE, DATEADD(MINUTE, @LateGraceMinutes, s.effective_scheduled_in_datetime), s.first_clock_in)
                 ELSE 0
@@ -510,15 +815,23 @@ BEGIN
 
         actual_late_minutes =
             CASE
+                WHEN ISNULL(st.schedule_segment_count, 1) > 1
+                THEN ISNULL(st.actual_late_minutes, 0)
                 WHEN s.required_minutes <= 0 THEN 0
                 WHEN s.effective_scheduled_in_datetime IS NULL THEN 0
                 WHEN s.first_clock_in IS NULL THEN 0
                 WHEN s.use_mode = 1 THEN 0
+                WHEN s.has_raw_punch_before_first_in = 1
+                 AND s.first_clock_in > s.effective_scheduled_in_datetime
+                THEN 0
                 WHEN s.first_clock_in > s.effective_scheduled_in_datetime
                 THEN DATEDIFF(MINUTE, s.effective_scheduled_in_datetime, s.first_clock_in)
                 ELSE 0
             END
-    FROM #PayrollSrc s;
+    FROM #PayrollSrc s
+    LEFT JOIN #SegmentTiming st
+        ON st.emp_id = s.emp_id
+       AND st.att_date = s.att_date;
 
     --------------------------------------------------
     -- 2E. Status, anomaly, review flag, label
@@ -553,7 +866,11 @@ BEGIN
 
                 WHEN s.required_minutes > 0
                  AND s.worked_minutes = 0
-                 AND (s.first_clock_in IS NOT NULL OR s.last_clock_out IS NOT NULL)
+                 AND (
+                        s.first_clock_in IS NOT NULL
+                     OR s.last_clock_out IS NOT NULL
+                     OR s.latest_punch_time IS NOT NULL
+                 )
                     THEN 'Partial'
 
                 WHEN s.required_minutes > 0 AND s.worked_minutes = 0
@@ -574,6 +891,7 @@ BEGIN
                  AND s.worked_minutes = 0
                  AND s.first_clock_in IS NULL
                  AND s.last_clock_out IS NULL
+                 AND s.latest_punch_time IS NULL
                     THEN 'AbsentNoPunch'
 
                 WHEN s.first_clock_in IS NOT NULL AND s.last_clock_out IS NULL
@@ -581,6 +899,33 @@ BEGIN
 
                 WHEN s.first_clock_in IS NULL AND s.last_clock_out IS NOT NULL
                     THEN 'MissingIn'
+
+                WHEN s.required_minutes > 0
+                 AND s.worked_minutes = 0
+                 AND s.first_clock_in IS NULL
+                 AND s.last_clock_out IS NULL
+                 AND s.latest_punch_time IS NOT NULL
+                 AND s.latest_punch_state = 1
+                    THEN 'MissingIn'
+
+                WHEN s.required_minutes > 0
+                 AND s.worked_minutes = 0
+                 AND s.first_clock_in IS NULL
+                 AND s.last_clock_out IS NULL
+                 AND s.latest_punch_time IS NOT NULL
+                    THEN 'MissingOut'
+
+                WHEN s.required_minutes > 0
+                 AND ISNULL(s.schedule_segment_count, 1) > 1
+                 AND ISNULL(s.unmatched_schedule_segment_count, 0) > 0
+                 AND s.worked_minutes > 0
+                    THEN 'IncompleteSplitDuty'
+
+                WHEN s.required_minutes > 0
+                 AND ISNULL(s.has_raw_punch_before_first_in, 0) = 1
+                 AND s.effective_scheduled_in_datetime IS NOT NULL
+                 AND s.first_clock_in > DATEADD(MINUTE, @LateGraceMinutes, s.effective_scheduled_in_datetime)
+                    THEN 'UnpairedEarlyPunch'
 
                 WHEN ISNULL(s.open_pair_count, 0) > 0
                     THEN 'IncompletePunchPair'
@@ -614,6 +959,18 @@ BEGIN
                     THEN 0
 
                 WHEN s.required_minutes > 0
+                 AND ISNULL(s.schedule_segment_count, 1) > 1
+                 AND ISNULL(s.unmatched_schedule_segment_count, 0) > 0
+                 AND s.worked_minutes > 0
+                    THEN 1
+
+                WHEN s.required_minutes > 0
+                 AND ISNULL(s.has_raw_punch_before_first_in, 0) = 1
+                 AND s.effective_scheduled_in_datetime IS NOT NULL
+                 AND s.first_clock_in > DATEADD(MINUTE, @LateGraceMinutes, s.effective_scheduled_in_datetime)
+                    THEN 1
+
+                WHEN s.required_minutes > 0
                  AND s.worked_minutes + ISNULL(s.comp_leave_minutes, 0) >= s.required_minutes
                     THEN 0
 
@@ -621,6 +978,9 @@ BEGIN
                 WHEN ISNULL(s.open_pair_count, 0) > 0 THEN 1
                 WHEN s.first_clock_in IS NOT NULL AND s.last_clock_out IS NULL THEN 1
                 WHEN s.first_clock_in IS NULL AND s.last_clock_out IS NOT NULL THEN 1
+                WHEN s.required_minutes > 0
+                 AND s.worked_minutes = 0
+                 AND s.latest_punch_time IS NOT NULL THEN 1
 
                 WHEN s.required_minutes > 0
                  AND s.required_minutes - s.worked_minutes - ISNULL(s.comp_leave_minutes, 0) > @WorkCompletionToleranceMinutes
@@ -658,12 +1018,31 @@ BEGIN
     --------------------------------------------------
     UPDATE f
     SET
-        f.first_clock_in = s.first_clock_in,
-        f.last_clock_out = s.last_clock_out,
+        f.first_clock_in =
+            COALESCE(
+                s.first_clock_in,
+                CASE
+                    WHEN s.worked_minutes = 0
+                     AND s.latest_punch_time IS NOT NULL
+                     AND s.latest_punch_state <> 1
+                    THEN s.latest_punch_time
+                END
+            ),
+        f.last_clock_out =
+            COALESCE(
+                s.last_clock_out,
+                CASE
+                    WHEN s.worked_minutes = 0
+                     AND s.latest_punch_time IS NOT NULL
+                     AND s.latest_punch_state = 1
+                    THEN s.latest_punch_time
+                END
+            ),
 
         f.recomputed_worked_minutes = s.worked_minutes,
         f.worked_hours = CAST(s.worked_minutes / 60.0 AS decimal(10,2)),
 
+        f.actual_excess_minutes = s.actual_excess_minutes,
         f.excess_minutes = s.excess_minutes,
         f.excess_hours = CAST(s.excess_minutes / 60.0 AS decimal(10,2)),
 
@@ -732,5 +1111,12 @@ BEGIN
         SUM(ISNULL(early_out_minutes, 0)) AS total_early_out_minutes
     FROM dbo.custom_att_fact_DailyAttendance
     WHERE att_date BETWEEN @DateFrom AND @DateTo
-      AND (@EmpID IS NULL OR emp_id = @EmpID);
+      AND (@EmpID IS NULL OR emp_id = @EmpID)
+      AND NOT EXISTS
+      (
+          SELECT 1
+          FROM dbo.personnel_resign r
+          WHERE r.employee_id = custom_att_fact_DailyAttendance.emp_id
+            AND custom_att_fact_DailyAttendance.att_date > r.resign_date
+      );
 END;

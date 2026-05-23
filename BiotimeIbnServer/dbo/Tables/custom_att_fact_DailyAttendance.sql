@@ -26,6 +26,7 @@
     [comp_leave_eligible_flag]        INT             NULL,
     [comp_leave_minutes]              DECIMAL (10, 2) NULL,
     [comp_leave_hours]                DECIMAL (10, 2) NULL,
+    [actual_excess_minutes]           DECIMAL (10, 2) CONSTRAINT [DF_custom_att_fact_DailyAttendance_actual_excess_minutes] DEFAULT ((0)) NOT NULL,
     [excess_minutes]                  DECIMAL (10, 2) NULL,
     [excess_hours]                    DECIMAL (10, 2) NULL,
     [shortfall_minutes]               DECIMAL (10, 2) NULL,

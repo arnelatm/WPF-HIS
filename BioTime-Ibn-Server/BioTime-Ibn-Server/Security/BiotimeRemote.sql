@@ -1,2 +1,0 @@
-﻿CREATE USER [BiotimeRemote] WITHOUT LOGIN;
-
