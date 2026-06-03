@@ -170,8 +170,26 @@ ChosenWithShift AS
         CASE
             WHEN c.effective_shift_id IS NULL THEN NULL
             WHEN ISNULL(sh.shift_cycle, 1) > 1
-                THEN DATEDIFF(DAY, c.schedule_anchor_date, c.att_date) % (sh.shift_cycle * 7)
-            ELSE DATEDIFF(DAY, '19000107', c.att_date) % 7
+                THEN
+                    (
+                        (
+                            (
+                                DATEDIFF(
+                                DAY,
+                                DATEADD(
+                                    DAY,
+                                    -((DATEDIFF(DAY, '19000101', c.schedule_anchor_date) % 7 + 7) % 7),
+                                    c.schedule_anchor_date
+                                ),
+                                c.att_date
+                                ) / 7
+                            ) % ISNULL(sh.shift_cycle, 1)
+                    ) * 7
+                    + ((DATEDIFF(DAY, '19000101', c.att_date) % 7 + 7) % 7)
+                    + 1
+                )
+                % (ISNULL(sh.shift_cycle, 1) * 7)
+            ELSE (DATEDIFF(DAY, '19000107', c.att_date) % 7 + 7) % 7
         END AS resolved_day_index
     FROM Chosen c
     LEFT JOIN dbo.att_attshift sh
@@ -191,8 +209,26 @@ BaseWithShift AS
         CASE
             WHEN bc.effective_shift_id IS NULL THEN NULL
             WHEN ISNULL(sh.shift_cycle, 1) > 1
-                THEN DATEDIFF(DAY, bc.schedule_anchor_date, bc.att_date) % (sh.shift_cycle * 7)
-            ELSE DATEDIFF(DAY, '19000107', bc.att_date) % 7
+                THEN
+                    (
+                        (
+                            (
+                                DATEDIFF(
+                                DAY,
+                                DATEADD(
+                                    DAY,
+                                    -((DATEDIFF(DAY, '19000101', bc.schedule_anchor_date) % 7 + 7) % 7),
+                                    bc.schedule_anchor_date
+                                ),
+                                bc.att_date
+                                ) / 7
+                            ) % ISNULL(sh.shift_cycle, 1)
+                    ) * 7
+                    + ((DATEDIFF(DAY, '19000101', bc.att_date) % 7 + 7) % 7)
+                    + 1
+                )
+                % (ISNULL(sh.shift_cycle, 1) * 7)
+            ELSE (DATEDIFF(DAY, '19000107', bc.att_date) % 7 + 7) % 7
         END AS base_day_index
     FROM BaseChosen bc
     LEFT JOIN dbo.att_attshift sh
