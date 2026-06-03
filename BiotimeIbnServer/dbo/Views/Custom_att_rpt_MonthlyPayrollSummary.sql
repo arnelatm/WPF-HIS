@@ -20,10 +20,7 @@ SELECT
     CAST(SUM(ISNULL(recomputed_worked_minutes, 0)) / 60.0 AS decimal(10,2)) AS worked_hours,
     CAST(SUM(ISNULL(ot_minutes, 0)) / 60.0 AS decimal(10,2)) AS ot_hours,
 
-    CAST(
-        (SUM(ISNULL(recomputed_worked_minutes, 0)) - SUM(ISNULL(ot_minutes, 0))) / 60.0
-        AS decimal(10,2)
-    ) AS regular_worked_hours,
+    CAST(SUM(ISNULL(regular_worked_minutes, 0)) / 60.0 AS decimal(10,2)) AS regular_worked_hours,
 
     CAST(SUM(ISNULL(recomputed_absence_hours, 0)) AS decimal(10,2)) AS absence_hours,
 

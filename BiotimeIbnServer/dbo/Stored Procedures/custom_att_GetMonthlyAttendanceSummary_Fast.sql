@@ -44,7 +44,7 @@ BEGIN
             / NULLIF(SUM(CASE WHEN ISNULL(f.required_scheduled_hours, 0) > 0 THEN 1 ELSE 0 END), 0)
         AS decimal(6,2)) AS absence_percentage,
 
-        CAST(SUM(CASE WHEN ISNULL(f.required_scheduled_hours, 0) > 0 THEN ISNULL(f.worked_hours, 0) ELSE 0 END) AS decimal(10,2)) AS regular_worked_hours,
+        CAST(SUM(CASE WHEN ISNULL(f.required_scheduled_hours, 0) > 0 THEN ISNULL(f.regular_worked_hours, 0) ELSE 0 END) AS decimal(10,2)) AS regular_worked_hours,
         CAST(SUM(CASE WHEN ISNULL(f.required_scheduled_hours, 0) > 0 THEN ISNULL(f.required_scheduled_hours, 0) ELSE 0 END) AS decimal(10,2)) AS regular_required_hours,
         CAST(SUM(CASE WHEN ISNULL(f.required_scheduled_hours, 0) > 0 THEN ISNULL(f.ot_hours, 0) ELSE 0 END) AS decimal(10,2)) AS normal_ot_hours,
         CAST(SUM(CASE WHEN ISNULL(f.required_scheduled_hours, 0) = 0 AND ISNULL(f.ot_hours, 0) > 0 THEN ISNULL(f.ot_hours, 0) ELSE 0 END) AS decimal(10,2)) AS pure_ot_hours,

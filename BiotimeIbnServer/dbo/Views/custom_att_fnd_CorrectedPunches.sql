@@ -44,6 +44,19 @@ SELECT
     x.norm_punch_state,
     corrected_punch_state =
         CASE
+            -- exactly 2 cleaned punches marked OUT, IN;
+            -- treat them as chronological IN, OUT when duration is reasonable
+            WHEN x.daily_punch_count = 2
+             AND x.first_punch_state = 1
+             AND x.last_punch_state = 0
+             AND x.daily_span_minutes BETWEEN 240 AND 960
+            THEN
+                CASE x.rn
+                    WHEN 1 THEN 0
+                    WHEN 2 THEN 1
+                    ELSE x.norm_punch_state
+                END
+
             -- exactly 2 cleaned punches, both OUT;
             -- treat first as IN when duration is reasonable
             WHEN x.daily_punch_count = 2
@@ -57,6 +70,12 @@ SELECT
         END,
     corrected_punch_flag =
         CASE
+            WHEN x.daily_punch_count = 2
+             AND x.first_punch_state = 1
+             AND x.last_punch_state = 0
+             AND x.daily_span_minutes BETWEEN 240 AND 960
+            THEN 1
+
             WHEN x.daily_punch_count = 2
              AND x.first_punch_state = 1
              AND x.last_punch_state = 1

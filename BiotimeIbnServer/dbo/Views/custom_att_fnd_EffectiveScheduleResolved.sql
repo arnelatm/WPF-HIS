@@ -176,7 +176,7 @@ ChosenWithShift AS
 								DAY,
 								DATEADD(
 									DAY,
-									-((DATEDIFF(DAY, '19000107', c.schedule_anchor_date) % 7 + 7) % 7),
+									-((DATEDIFF(DAY, '19000101', c.schedule_anchor_date) % 7 + 7) % 7),
 									c.schedule_anchor_date
 								),
 								c.att_date
@@ -184,9 +184,11 @@ ChosenWithShift AS
 						)
 						% ISNULL(sh.shift_cycle, 1)
 					) * 7
-				)
 				+
-				((DATEDIFF(DAY, '19000107', c.att_date) % 7 + 7) % 7)
+				((DATEDIFF(DAY, '19000101', c.att_date) % 7 + 7) % 7)
+				+ 1
+			)
+			% (ISNULL(sh.shift_cycle, 1) * 7)
 
             ELSE
                 (
@@ -221,7 +223,7 @@ BaseWithShift AS
 								DAY,
 								DATEADD(
 									DAY,
-									-((DATEDIFF(DAY, '19000107', bc.schedule_anchor_date) % 7 + 7) % 7),
+									-((DATEDIFF(DAY, '19000101', bc.schedule_anchor_date) % 7 + 7) % 7),
 									bc.schedule_anchor_date
 								),
 								bc.att_date
@@ -229,9 +231,11 @@ BaseWithShift AS
 						)
 						% ISNULL(sh.shift_cycle, 1)
 					) * 7
-				)
 				+
-				((DATEDIFF(DAY, '19000107', bc.att_date) % 7 + 7) % 7)
+				((DATEDIFF(DAY, '19000101', bc.att_date) % 7 + 7) % 7)
+				+ 1
+			)
+			% (ISNULL(sh.shift_cycle, 1) * 7)
 
             ELSE
                 (

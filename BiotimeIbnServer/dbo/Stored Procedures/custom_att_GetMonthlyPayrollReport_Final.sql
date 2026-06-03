@@ -72,6 +72,11 @@ BEGIN
                 THEN 1 ELSE 0 
             END) AS partial_days,
 
+            SUM(CASE
+                WHEN ISNULL(f.[Leaves], 0) > 0
+                THEN 1 ELSE 0
+            END) AS leave_days,
+
             CAST(SUM(ISNULL(f.required_scheduled_hours, 0)) AS decimal(10,2)) AS total_required_hours,
             CAST(SUM(ISNULL(f.worked_hours, 0)) AS decimal(10,2)) AS total_worked_hours,
             CAST(SUM(ISNULL(f.ot_hours, 0)) AS decimal(10,2)) AS total_ot_hours,
@@ -122,6 +127,11 @@ BEGIN
                  AND f.anomaly_flag IN ('MissingIn', 'MissingOut', 'IncompletePunchPair')
                 THEN 1 ELSE 0
             END) AS incomplete_punch_days,
+
+            SUM(CASE
+                WHEN f.anomaly_flag = 'IncompletePunchPair'
+                THEN 1 ELSE 0
+            END) AS incomplete_punch_pair_days,
 
             SUM(CASE
                 WHEN ISNULL(f.required_scheduled_hours, 0) > 0
@@ -274,6 +284,7 @@ BEGIN
         END AS payroll_audit_status,
         m.calendar_days,
         m.regular_days,
+        m.leave_days,
         m.holiday_days,
         m.rest_days,
         m.required_work_days,
@@ -302,6 +313,7 @@ BEGIN
         m.review_days,
         m.no_punch_in_or_out_days,
         m.incomplete_punch_days,
+        m.incomplete_punch_pair_days,
         m.schedule_in_mismatch_days,
         m.schedule_out_mismatch_days,
         m.schedule_window_mismatch_days,

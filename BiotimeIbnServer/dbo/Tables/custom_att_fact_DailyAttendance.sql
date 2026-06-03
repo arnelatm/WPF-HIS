@@ -12,9 +12,11 @@
     [first_clock_in]                  DATETIME        NULL,
     [last_clock_out]                  DATETIME        NULL,
     [recomputed_worked_minutes]       DECIMAL (10, 2) NULL,
+    [regular_worked_minutes]          DECIMAL (10, 2) NULL,
     [ot_minutes]                      DECIMAL (10, 2) NULL,
     [required_scheduled_hours]        DECIMAL (10, 2) NULL,
     [worked_hours]                    DECIMAL (10, 2) NULL,
+    [regular_worked_hours]            DECIMAL (10, 2) NULL,
     [ot_hours]                        DECIMAL (10, 2) NULL,
     [punch_status]                    VARCHAR (50)    NULL,
     [schedule_label]                  VARCHAR (100)   NULL,
@@ -23,6 +25,7 @@
     [recomputed_absence_hours]        DECIMAL (10, 2) NULL,
     [work_completion_pct]             DECIMAL (10, 2) NULL,
     [date_type]                       INT             NULL,
+    [Leaves]                          INT             NULL,
     [comp_leave_eligible_flag]        INT             NULL,
     [comp_leave_minutes]              DECIMAL (10, 2) NULL,
     [comp_leave_hours]                DECIMAL (10, 2) NULL,
@@ -36,6 +39,11 @@
     [work_gap_minutes]                DECIMAL (10, 2) NULL,
     [actual_late_minutes]             DECIMAL (10, 2) CONSTRAINT [DF_custom_att_fact_DailyAttendance_actual_late_minutes] DEFAULT ((0)) NOT NULL,
     [actual_early_out_minutes]        DECIMAL (10, 2) NULL,
+    [corrected]                       BIT             CONSTRAINT [DF_custom_att_fact_DailyAttendance_corrected] DEFAULT ((0)) NOT NULL,
+    [effective_punch_in1]             DATETIME2 (7)   NULL,
+    [effective_punch_out1]            DATETIME2 (7)   NULL,
+    [effective_punch_in2]             DATETIME2 (7)   NULL,
+    [effective_punch_out2]            DATETIME2 (7)   NULL,
     CONSTRAINT [PK_custom_att_fact_DailyAttendance] PRIMARY KEY CLUSTERED ([emp_id] ASC, [att_date] ASC)
 );
 

@@ -71,7 +71,12 @@ outs AS
         (
             PARTITION BY c.emp_id, c.work_date
             ORDER BY c.punch_time, c.id
-        ) AS out_no
+        ) AS out_no,
+        LAG(c.punch_time) OVER
+        (
+            PARTITION BY c.emp_id, c.work_date
+            ORDER BY c.punch_time, c.id
+        ) AS previous_out_time
     FROM cleaned c
     WHERE c.norm_punch_state = 1
 ),
@@ -89,39 +94,83 @@ punch_counts AS
         c.work_date
 ),
 
-matched AS
+single_in_multi_out_pairs AS
 (
     SELECT
         i.emp_id,
         i.work_date,
-        i.in_no,
-        i.in_punch_id,
+        i.in_no AS in_segment_no,
+        o.out_no AS out_segment_no,
         i.in_time,
-        o.out_no,
-        o.out_punch_id,
         o.out_time,
-        ROW_NUMBER() OVER
-        (
-            PARTITION BY i.emp_id, i.work_date, i.in_no
-            ORDER BY
-                CASE
-                    WHEN pc.in_count = 1
-                     AND pc.out_count > 1
-                    THEN o.out_time
-                    ELSE NULL
-                END DESC,
-                o.out_time,
-                o.out_punch_id
-        ) AS rn
+        i.in_punch_id,
+        o.out_punch_id
     FROM ins i
     INNER JOIN punch_counts pc
         ON pc.emp_id = i.emp_id
        AND pc.work_date = i.work_date
-    LEFT JOIN outs o
-        ON o.emp_id = i.emp_id
-       AND o.work_date = i.work_date
-       AND o.out_time > i.in_time
-       AND o.out_no >= i.in_no
+    OUTER APPLY
+    (
+        SELECT TOP (1)
+            o.out_no,
+            o.out_punch_id,
+            o.out_time
+        FROM outs o
+        WHERE o.emp_id = i.emp_id
+          AND o.work_date = i.work_date
+          AND o.out_time > i.in_time
+        ORDER BY
+            o.out_time DESC,
+            o.out_punch_id DESC
+    ) o
+    WHERE pc.in_count = 1
+      AND pc.out_count > 1
+      AND o.out_time IS NOT NULL
+),
+
+out_closed_pairs AS
+(
+    SELECT
+        o.emp_id,
+        o.work_date,
+        i.in_no AS in_segment_no,
+        o.out_no AS out_segment_no,
+        i.in_time,
+        o.out_time,
+        i.in_punch_id,
+        o.out_punch_id
+    FROM outs o
+    INNER JOIN punch_counts pc
+        ON pc.emp_id = o.emp_id
+       AND pc.work_date = o.work_date
+    OUTER APPLY
+    (
+        SELECT TOP (1)
+            i.in_no,
+            i.in_punch_id,
+            i.in_time
+        FROM ins i
+        WHERE i.emp_id = o.emp_id
+          AND i.work_date = o.work_date
+          AND i.in_time < o.out_time
+          AND i.in_time > ISNULL(o.previous_out_time, CONVERT(datetime2(7), '19000101'))
+        ORDER BY
+            i.in_time DESC,
+            i.in_punch_id DESC
+    ) i
+    WHERE NOT (pc.in_count = 1 AND pc.out_count > 1)
+      AND i.in_time IS NOT NULL
+),
+
+matched_pairs AS
+(
+    SELECT *
+    FROM single_in_multi_out_pairs
+
+    UNION ALL
+
+    SELECT *
+    FROM out_closed_pairs
 ),
 
 normal_pairs AS
@@ -130,8 +179,8 @@ normal_pairs AS
         emp_id,
         work_date,
 
-        in_no AS in_segment_no,
-        out_no AS out_segment_no,
+        in_segment_no,
+        out_segment_no,
 
         in_time,
         out_time,
@@ -160,8 +209,45 @@ normal_pairs AS
                 THEN DATEDIFF(SECOND, in_time, out_time)
             ELSE NULL
         END AS paired_seconds
-    FROM matched
-    WHERE rn = 1 OR rn IS NULL
+    FROM matched_pairs
+),
+
+open_pairs AS
+(
+    SELECT
+        i.emp_id,
+        i.work_date,
+
+        i.in_no AS in_segment_no,
+        CAST(NULL AS bigint) AS out_segment_no,
+
+        i.in_time,
+        CAST(NULL AS datetime2(7)) AS out_time,
+
+        i.in_time AS in_segment_end_time,
+        CAST(NULL AS datetime2(7)) AS out_segment_start_time,
+
+        1 AS in_segment_punch_count,
+        CAST(NULL AS int) AS out_segment_punch_count,
+
+        i.in_punch_id AS in_first_punch_id,
+        i.in_punch_id AS in_last_punch_id,
+        CAST(NULL AS int) AS out_first_punch_id,
+        CAST(NULL AS int) AS out_last_punch_id,
+
+        1 AS is_open_pair,
+
+        CAST(NULL AS int) AS paired_minutes,
+        CAST(NULL AS int) AS paired_seconds
+    FROM ins i
+    WHERE NOT EXISTS
+    (
+        SELECT 1
+        FROM matched_pairs mp
+        WHERE mp.emp_id = i.emp_id
+          AND mp.work_date = i.work_date
+          AND mp.in_punch_id = i.in_punch_id
+    )
 ),
 
 /* Fallback: no OUT punch, but at least 2 valid punches.
@@ -201,6 +287,11 @@ fallback_pairs AS
 
 SELECT *
 FROM normal_pairs
+
+UNION ALL
+
+SELECT *
+FROM open_pairs
 
 UNION ALL
 

@@ -134,8 +134,8 @@ calc AS
         tc.emp_id,
         tc.att_date,
 		CASE
-			WHEN ISNULL(r.resolved_is_off_day, 0) = 1 THEN 2
 			WHEN h.id IS NOT NULL THEN 1
+			WHEN ISNULL(r.resolved_is_off_day, 0) = 1 THEN 2
 			ELSE 0
 		END AS date_type,
         tc.present_flag,
@@ -195,7 +195,8 @@ calc AS
 		WHERE tc.att_date >= CAST(h.start_date AS date)
 		  AND tc.att_date <= CAST(h.end_date AS date)
 		  AND (
-				h.att_group_id = ae.group_id
+				(h.att_group_id IS NULL AND h.department_id IS NULL)
+				OR h.att_group_id = ae.group_id
 				OR h.department_id = pe.department_id
 			  )
 		ORDER BY h.id
