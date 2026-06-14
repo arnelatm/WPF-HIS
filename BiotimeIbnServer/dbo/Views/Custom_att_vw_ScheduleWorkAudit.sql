@@ -3,6 +3,7 @@ CREATE VIEW [dbo].[Custom_att_vw_ScheduleWorkAudit]
 AS
 SELECT
     f.emp_id,
+    f.emp_code,
     p.first_name,
     f.att_date,
     f.year_no,

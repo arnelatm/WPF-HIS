@@ -31,6 +31,7 @@ BEGIN
 
     SELECT
         d.emp_id,
+        d.emp_code,
         d.att_date,
         d.year_no,
         d.month_no,

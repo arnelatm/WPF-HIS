@@ -95,8 +95,8 @@ BEGIN
         ON #AttendanceReportSource (emp_id, year_no, month_no, att_date);
 
     SELECT
-        r.emp_id AS IdNo,
-        pe.emp_code AS [Employee Code],
+        r.emp_id AS emp_id,
+        pe.emp_code AS emp_code,
         pe.first_name AS [Employee Name],
         d.dept_name AS [Employee Department],
         r.year_no,

@@ -4,6 +4,7 @@ WITH normalized AS
 (
     SELECT
         np.emp_id,
+        np.emp_code,
         np.work_date,
         np.punch_time,
         np.punch_state,
@@ -19,6 +20,7 @@ ordered AS
 (
     SELECT
         n.emp_id,
+        n.emp_code,
         n.work_date,
         n.punch_time,
         n.punch_state,
@@ -58,6 +60,7 @@ collapsed AS
 (
     SELECT
         emp_id,
+        emp_code,
         work_date,
         norm_punch_state,
         burst_no,
@@ -68,6 +71,7 @@ collapsed AS
     FROM bursted
     GROUP BY
         emp_id,
+        emp_code,
         work_date,
         norm_punch_state,
         burst_no
@@ -126,6 +130,7 @@ corrected AS
 (
     SELECT
         d.emp_id,
+        d.emp_code,
         d.work_date,
         d.cleaned_punch_time AS punch_time,
         d.original_punch_state AS punch_state,
@@ -177,6 +182,7 @@ corrected AS
 )
 SELECT
     emp_id,
+    emp_code,
     work_date,
     punch_time,
     punch_state,

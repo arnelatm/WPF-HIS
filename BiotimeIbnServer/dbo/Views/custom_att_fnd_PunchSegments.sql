@@ -5,6 +5,7 @@ WITH burst_rep AS
 (
     SELECT
         cp.emp_id,
+        cp.emp_code,
         cp.work_date,
         cp.id,
         cp.punch_time,
@@ -22,6 +23,7 @@ base AS
 (
     SELECT
         br.emp_id,
+        br.emp_code,
         br.work_date,
         br.id,
         br.punch_time,
@@ -33,6 +35,7 @@ base AS
 )
 SELECT
     b.emp_id,
+    b.emp_code,
     b.work_date,
     b.id,
     b.punch_time,

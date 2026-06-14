@@ -38,6 +38,7 @@ WITH x AS
 )
 SELECT
     x.emp_id,
+    x.emp_code,
     x.work_date,
     x.punch_time,
     x.punch_state,

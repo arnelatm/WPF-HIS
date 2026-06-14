@@ -1,5 +1,5 @@
 CREATE PROCEDURE dbo.custom_att_GetEmployeeMonthlyAttendanceAudit_Fast
-    @EmployeeId       int,
+    @EmpID            int,
     @AttendanceYear   int,
     @AttendanceMonth  int
 AS
@@ -13,7 +13,8 @@ BEGIN
     (
         SELECT
             dav.emp_id,
-            dav.EmployeeIdCodeName,
+            dav.emp_code,
+            dav.emp_code_name,
             dav.att_date,
             dav.year_no,
             dav.month_no,
@@ -44,7 +45,7 @@ BEGIN
             dav.anomaly_flag,
             dav.reconciliation_status
         FROM dbo.Custom_att_fact_dailyAttendance_View dav
-        WHERE dav.emp_id = @EmployeeId
+        WHERE dav.emp_id = @EmpID
           AND dav.att_date >= @DateFrom
           AND dav.att_date < @DateToExclusive
     )
@@ -52,8 +53,9 @@ BEGIN
         d.att_date AS [Date of Attendance],
         d.year_no AS AttendanceYear,
         d.month_no AS AttendanceMonth,
-        d.emp_id AS EmployeeId,
-        d.EmployeeIdCodeName,
+        d.emp_id AS emp_id,
+        d.emp_code,
+        d.emp_code_name,
 
         d.effective_timetable_name AS EffectiveScheduleAlias,
         d.effective_scheduled_in_datetime AS EffectiveScheduledIn,

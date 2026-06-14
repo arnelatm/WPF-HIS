@@ -2,6 +2,7 @@
 AS
 SELECT
     p.emp_id,
+    e.emp_code,
     p.att_date,
     COUNT(*) AS pair_rows,
     SUM(CASE WHEN p.in_trans_id IS NULL OR p.out_trans_id IS NULL THEN 1 ELSE 0 END) AS missing_pair_rows,
@@ -11,6 +12,9 @@ SELECT
     SUM(ISNULL(p.duration, 0)) AS paired_duration_seconds,
     SUM(ISNULL(p.worked_duration, 0)) AS paired_worked_duration_seconds
 FROM dbo.att_payloadparing p
+LEFT JOIN dbo.personnel_employee e
+    ON e.id = p.emp_id
 GROUP BY
     p.emp_id,
+    e.emp_code,
     p.att_date;

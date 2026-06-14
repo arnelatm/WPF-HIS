@@ -5,6 +5,7 @@ WITH numbered_punches AS
 (
     SELECT
         ps.emp_id,
+        ps.emp_code,
         ps.work_date,
         YEAR(ps.work_date) AS year_no,
         MONTH(ps.work_date) AS month_no,
@@ -16,6 +17,7 @@ present_days AS
 (
     SELECT
         np.emp_id,
+        np.emp_code,
         np.work_date,
         np.year_no,
         np.month_no,
@@ -23,6 +25,7 @@ present_days AS
     FROM numbered_punches np
     GROUP BY
         np.emp_id,
+        np.emp_code,
         np.work_date,
         np.year_no,
         np.month_no
@@ -31,6 +34,7 @@ paired_segments AS
 (
     SELECT
         p1.emp_id,
+        p1.emp_code,
         p1.work_date,
         p1.year_no,
         p1.month_no,
@@ -61,6 +65,7 @@ daily_pairs AS
 (
     SELECT
         ps.emp_id,
+        ps.emp_code,
         ps.work_date,
         ps.year_no,
         ps.month_no,
@@ -69,6 +74,7 @@ daily_pairs AS
     FROM paired_segments ps
     GROUP BY
         ps.emp_id,
+        ps.emp_code,
         ps.work_date,
         ps.year_no,
         ps.month_no
@@ -77,6 +83,7 @@ daily_rollup AS
 (
     SELECT
         pd.emp_id,
+        pd.emp_code,
         pd.work_date,
         pd.year_no,
         pd.month_no,
@@ -90,6 +97,7 @@ daily_rollup AS
 )
 SELECT
     dr.emp_id,
+    dr.emp_code,
     e.first_name,
     e.Department,
     dr.year_no,
@@ -110,6 +118,7 @@ LEFT JOIN vw_employees e
     ON dr.emp_id = e.id
 GROUP BY
     dr.emp_id,
+    dr.emp_code,
     e.first_name,
     e.Department,
     dr.year_no,

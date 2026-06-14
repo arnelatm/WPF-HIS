@@ -656,6 +656,7 @@ BEGIN
     (
         SELECT
             tc.emp_id,
+            pe.emp_code,
             tc.att_date,
             CASE
                 WHEN h.id IS NOT NULL THEN 1
@@ -721,6 +722,7 @@ BEGIN
     )
     SELECT
         l.emp_id,
+        l.emp_code,
         l.att_date,
         l.date_type,
         l.first_clock_in,
@@ -791,12 +793,14 @@ BEGIN
     --------------------------------------------------
     INSERT INTO dbo.custom_att_fact_DailyAttendance (
         emp_id,
+        emp_code,
         att_date,
         year_no,
         month_no
     )
     SELECT
         b.emp_id,
+        b.emp_code,
         b.att_date,
         YEAR(b.att_date),
         MONTH(b.att_date)
@@ -945,6 +949,7 @@ BEGIN
 
     SELECT
         b.emp_id,
+        b.emp_code,
         b.att_date,
 
         COALESCE(p.first_clock_in, b.first_clock_in) AS first_clock_in,
@@ -1849,6 +1854,7 @@ BEGIN
     --------------------------------------------------
     UPDATE f
     SET
+        f.emp_code = s.emp_code,
         f.first_clock_in =
             COALESCE(
                 s.first_clock_in,
@@ -1874,6 +1880,27 @@ BEGIN
         f.worked_hours = CAST(s.worked_minutes / 60.0 AS decimal(10,2)),
         f.regular_worked_minutes = s.regular_worked_minutes,
         f.regular_worked_hours = CAST(s.regular_worked_minutes / 60.0 AS decimal(10,2)),
+        f.work_completion_pct =
+            CASE
+                WHEN s.required_minutes > 0
+                THEN CAST(
+                    CASE
+                        WHEN (
+                                (
+                                    ISNULL(s.regular_worked_minutes, s.worked_minutes)
+                                    + ISNULL(s.comp_leave_minutes, 0)
+                                ) * 100.0 / s.required_minutes
+                             ) > 100
+                        THEN 100
+                        ELSE
+                            (
+                                ISNULL(s.regular_worked_minutes, s.worked_minutes)
+                                + ISNULL(s.comp_leave_minutes, 0)
+                            ) * 100.0 / s.required_minutes
+                    END AS decimal(10,2)
+                )
+                ELSE CAST(0 AS decimal(10,2))
+            END,
 
         f.actual_excess_minutes =
             CASE WHEN ISNULL(s.[Leaves], 0) > 0 THEN 0 ELSE s.actual_excess_minutes END,
@@ -1927,6 +1954,37 @@ BEGIN
 
                 ELSE 'RestDay'
             END,
+        f.business_day_type =
+            CASE
+                WHEN ISNULL(s.required_minutes, 0) = 0
+                 AND ISNULL(s.worked_minutes, 0) > 0
+                THEN
+                    CASE
+                        WHEN s.schedule_source IN ('Temporary', 'Employee', 'Group', 'Department')
+                            THEN 'RegularDay'
+                        WHEN s.base_date_type = 2 THEN 'RestDayOT'
+                        WHEN s.base_date_type = 1 THEN 'HolidayOT'
+                        ELSE 'RegularDayOT'
+                    END
+
+                WHEN s.base_date_type = 2
+                 AND ISNULL(s.final_ot_minutes, 0) > 0
+                 AND s.schedule_source = 'Unscheduled'
+                    THEN 'RestDayOT'
+
+                WHEN s.base_date_type = 1
+                 AND ISNULL(s.final_ot_minutes, 0) > 0
+                 AND s.schedule_source = 'Unscheduled'
+                    THEN 'HolidayOT'
+
+                WHEN s.base_date_type = 0
+                 AND ISNULL(s.final_ot_minutes, 0) > 0
+                    THEN 'RegularDayWithOT'
+
+                WHEN s.base_date_type = 2 THEN 'RestDay'
+                WHEN s.base_date_type = 1 THEN 'Holiday'
+                ELSE 'RegularDay'
+            END,
 
         f.attendance_status =
             CASE WHEN ISNULL(s.[Leaves], 0) > 0 THEN 'On Leave' ELSE s.attendance_status_final END,
@@ -1935,8 +1993,42 @@ BEGIN
         f.required_scheduled_hours = CAST(s.required_minutes / 60.0 AS decimal(10,2)),
         f.schedule_label =
             CASE WHEN ISNULL(s.[Leaves], 0) > 0 THEN 'Approved Leave' ELSE s.schedule_label_final END,
+        f.punch_status =
+            CASE
+                WHEN ISNULL(s.[Leaves], 0) > 0 THEN 'OK'
+                WHEN ISNULL(s.worked_minutes, 0) > 0 THEN 'OK'
+                WHEN s.first_clock_in IS NULL AND s.last_clock_out IS NULL THEN 'NoPunch'
+                WHEN s.first_clock_in IS NOT NULL AND s.last_clock_out IS NULL THEN 'MissingOut'
+                WHEN s.first_clock_in IS NULL AND s.last_clock_out IS NOT NULL THEN 'MissingIn'
+                ELSE 'OK'
+            END,
         f.anomaly_flag =
             CASE WHEN ISNULL(s.[Leaves], 0) > 0 THEN 'Normal' ELSE s.anomaly_flag_final END,
+        f.anomaly_group =
+            CASE
+                WHEN ISNULL(s.[Leaves], 0) > 0 THEN 'Normal'
+                WHEN ISNULL(s.anomaly_flag_final, 'Normal') = 'Normal' THEN 'Normal'
+                WHEN s.anomaly_flag_final IN
+                (
+                    'AbsentNoPunch',
+                    'MissingOut',
+                    'MissingIn',
+                    'IncompleteSplitDuty',
+                    'UnpairedEarlyPunch',
+                    'IncompletePunchPair',
+                    'AutoCorrectedOK',
+                    'AutoCorrectedPunchState'
+                )
+                    THEN 'PunchIssue'
+                WHEN s.anomaly_flag_final IN
+                (
+                    'ExcessiveWorkHours',
+                    'WorkedOutsideSchedule',
+                    'IncompleteWork'
+                )
+                    THEN 'BusinessRule'
+                ELSE 'Other'
+            END,
         f.work_gap_minutes =
             CASE WHEN ISNULL(s.[Leaves], 0) > 0 THEN 0 ELSE s.work_gap_minutes END,
         f.comp_leave_eligible_flag =

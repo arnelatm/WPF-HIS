@@ -4,6 +4,7 @@ CREATE   VIEW [dbo].[custom_att_audit_RecomputedWorkHours]
 AS
 SELECT
     tp.emp_id,
+    tp.emp_code,
     tp.att_date,
 
     COUNT(*) AS recomputed_pair_rows,
@@ -23,4 +24,5 @@ SELECT
 FROM dbo.custom_att_audit_TruePunchPairs tp
 GROUP BY
     tp.emp_id,
+    tp.emp_code,
     tp.att_date;

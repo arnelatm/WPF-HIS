@@ -4,7 +4,8 @@ WITH Base AS
 (
     SELECT
         f.emp_id,
-        CONCAT(e.emp_code, '-', e.first_name) AS EmployeeIdCodeName,
+        f.emp_code,
+        CONCAT(f.emp_code, '-', e.first_name) AS emp_code_name,
         f.att_date,
         ti.alias AS effective_timetable_name,
         f.daily_status,
@@ -300,7 +301,8 @@ SegmentAudit AS
 )
 SELECT
     b.emp_id,
-    b.EmployeeIdCodeName,
+    b.emp_code,
+    b.emp_code_name,
     b.att_date,
     b.effective_timetable_name,
     raw_punches.raw_punch_times,

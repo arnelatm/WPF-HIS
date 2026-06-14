@@ -7,8 +7,8 @@ BEGIN
     SET NOCOUNT ON;
 
     SELECT
-        f.emp_id AS IdNo,
-        pe.emp_code AS [Employee Code],
+        f.emp_id AS emp_id,
+        f.emp_code AS emp_code,
         pe.first_name AS [Employee Name],
         d.dept_name AS [Employee Department],
         f.year_no,
@@ -38,7 +38,7 @@ BEGIN
       AND (@EmpID IS NULL OR f.emp_id = @EmpID)
     GROUP BY
         f.emp_id,
-        pe.emp_code,
+        f.emp_code,
         pe.first_name,
         d.dept_name,
         f.year_no,

@@ -61,6 +61,7 @@ dwm AS
 (
     SELECT
         d.emp_id,
+        d.emp_code,
         d.work_date AS att_date,
         d.first_clock_in,
         d.last_clock_out,
@@ -84,6 +85,7 @@ resolved AS
 (
     SELECT
         esr.emp_id,
+        esr.emp_code,
         esr.att_date,
         esr.effective_schedule_source,
         esr.effective_shift_id,
@@ -132,6 +134,7 @@ calc AS
 (
     SELECT
         tc.emp_id,
+        pe.emp_code,
         tc.att_date,
 		CASE
 			WHEN h.id IS NOT NULL THEN 1
@@ -227,6 +230,7 @@ logic AS
 )
 SELECT
     l.emp_id,
+    l.emp_code,
     l.att_date,
     l.date_type,
     l.present_flag,

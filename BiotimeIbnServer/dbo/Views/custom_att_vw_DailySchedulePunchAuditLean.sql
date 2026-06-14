@@ -2,8 +2,9 @@ CREATE VIEW [dbo].[custom_att_vw_DailySchedulePunchAuditLean]
 AS
 SELECT
     f.att_date AS [Date],
-    f.emp_id AS EmployeeId,
-    f.EmployeeIdCodeName,
+    f.emp_id AS emp_id,
+    f.emp_code,
+    f.emp_code_name,
     f.effective_timetable_name AS EffectiveScheduleAlias,
 
     CONVERT(varchar(8), CAST(f.effective_scheduled_in_datetime AS time), 108) AS ScheduledIn,

@@ -260,6 +260,7 @@ ti_break AS
 
 SELECT
     cws.emp_id,
+    pe.emp_code,
     cws.att_date,
 
     cws.effective_schedule_source,
@@ -338,6 +339,9 @@ SELECT
     ) AS effective_scheduled_out_datetime
 
 FROM ChosenWithShift cws
+
+LEFT JOIN dbo.personnel_employee pe
+    ON pe.id = cws.emp_id
 
 LEFT JOIN BaseWithShift bws
     ON bws.emp_id = cws.emp_id

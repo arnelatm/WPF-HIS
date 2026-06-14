@@ -1,7 +1,7 @@
 CREATE PROCEDURE [dbo].[custom_att_GetDailySchedulePunchAudit]
     @BeginningDate date,
     @EndDate date,
-    @Emp_Id int = NULL,
+    @EmpID int = NULL,
     @IssuesOnly bit = 0
 AS
 BEGIN
@@ -17,8 +17,9 @@ BEGIN
     CREATE TABLE #Facts
     (
         emp_id int NOT NULL,
+        emp_code nvarchar(20) NULL,
         att_date date NOT NULL,
-        EmployeeIdCodeName nvarchar(250) NULL,
+        emp_code_name nvarchar(250) NULL,
         department_id int NULL,
         group_id int NULL,
         required_scheduled_hours decimal(10,2) NULL,
@@ -36,8 +37,9 @@ BEGIN
     INSERT INTO #Facts
     (
         emp_id,
+        emp_code,
         att_date,
-        EmployeeIdCodeName,
+        emp_code_name,
         department_id,
         group_id,
         required_scheduled_hours,
@@ -52,8 +54,9 @@ BEGIN
     )
     SELECT
         f.emp_id,
+        f.emp_code,
         f.att_date,
-        CONCAT(e.emp_code, '-', e.first_name) AS EmployeeIdCodeName,
+        CONCAT(e.emp_code, '-', e.first_name) AS emp_code_name,
         e.department_id,
         ae.group_id,
         f.required_scheduled_hours,
@@ -71,7 +74,14 @@ BEGIN
     LEFT JOIN dbo.att_attemployee ae
         ON ae.emp_id = f.emp_id
     WHERE f.att_date BETWEEN @BeginningDate AND @EndDate
-      AND (@Emp_Id IS NULL OR f.emp_id = @Emp_Id)
+      AND (@EmpID IS NULL OR f.emp_id = @EmpID)
+      AND NOT EXISTS
+      (
+          SELECT 1
+          FROM dbo.personnel_resign r
+          WHERE r.employee_id = f.emp_id
+            AND f.att_date > r.resign_date
+      )
     OPTION (RECOMPILE);
 
     CREATE TABLE #Punches
@@ -639,8 +649,9 @@ BEGIN
     (
         SELECT
             f.att_date AS [Date],
-            f.emp_id AS Emp_Id,
-            f.EmployeeIdCodeName,
+            f.emp_id AS emp_id,
+            f.emp_code,
+            f.emp_code_name,
             rs.EffectiveScheduleAlias,
             CONVERT(varchar(8), CAST(rs.effective_scheduled_in_datetime AS time), 108) AS ScheduledIn,
             CONVERT(varchar(8), CAST(rs.effective_scheduled_out_datetime AS time), 108) AS ScheduledOut,
@@ -923,5 +934,5 @@ BEGIN
         )
     ORDER BY
         [Date],
-        EmployeeIdCodeName;
+        emp_code_name;
 END;

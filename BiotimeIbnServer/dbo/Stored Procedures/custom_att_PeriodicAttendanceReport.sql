@@ -132,8 +132,8 @@ BEGIN
             d.dept_name
     )
     SELECT
-        p.emp_id AS [Employee ID No],
-        p.emp_code AS [Code],
+        p.emp_id AS emp_id,
+        p.emp_code AS emp_code,
         p.first_name AS [First Name],
         p.department_name AS [Department],
         p.required_work_days + p.rest_days + p.holiday_days AS [Total Days],

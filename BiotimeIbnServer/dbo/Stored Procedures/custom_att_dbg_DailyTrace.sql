@@ -54,6 +54,7 @@ BEGIN
 	SELECT
 		'06_EffectiveScheduleResolved' AS step,
 		es.emp_id,
+		es.emp_code,
 		es.att_date,
 		es.effective_schedule_source,
 		es.base_is_off_day,
@@ -76,7 +77,7 @@ BEGIN
 
     PRINT '07_DailyBase';
     SELECT '07_DailyBase' AS step,
-        emp_id, att_date, date_type, schedule_source,
+        emp_id, emp_code, att_date, date_type, schedule_source,
         effective_scheduled_in, effective_scheduled_out,
         effective_required_work_minutes,
         worked_minutes, recomputed_worked_minutes,

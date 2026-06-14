@@ -12,7 +12,7 @@ BEGIN
         year_no int,
         month_no int,
         emp_id int,
-        employee_code nvarchar(50),
+        emp_code nvarchar(50),
         employee_name nvarchar(200),
         department_name nvarchar(200),
         need_present_days int,
@@ -80,7 +80,7 @@ BEGIN
 
     SELECT TOP (@TopN)
         emp_id,
-        employee_code,
+        emp_code,
         employee_name,
         department_name,
 

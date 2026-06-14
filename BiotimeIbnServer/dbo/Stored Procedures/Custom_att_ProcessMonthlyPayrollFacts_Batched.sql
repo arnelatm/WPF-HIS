@@ -38,6 +38,7 @@ BEGIN
         @DateTo AS date_to,
         COUNT(*) AS rows_processed,
         COUNT(DISTINCT emp_id) AS employees_processed,
+        COUNT(DISTINCT emp_code) AS emp_codes_processed,
         MIN(att_date) AS min_date,
         MAX(att_date) AS max_date
     FROM dbo.custom_att_fact_DailyAttendance

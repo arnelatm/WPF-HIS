@@ -31,6 +31,7 @@ Notes:
 */
 SELECT
     wi.emp_id,
+    wi.emp_code,
     wi.work_date,
     COUNT(*) AS worked_interval_count,
     MIN(wi.in_time) AS first_clock_in,
@@ -40,4 +41,5 @@ SELECT
 FROM dbo.custom_att_fnd_WorkedIntervals wi
 GROUP BY
     wi.emp_id,
+    wi.emp_code,
     wi.work_date;

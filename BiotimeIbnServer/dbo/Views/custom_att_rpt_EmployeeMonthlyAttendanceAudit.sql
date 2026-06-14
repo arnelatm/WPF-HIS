@@ -13,8 +13,9 @@ SELECT
     dav.att_date AS [Date],
     dav.year_no AS AttendanceYear,
     dav.month_no AS AttendanceMonth,
-    dav.emp_id AS EmployeeId,
-    dav.EmployeeIdCodeName,
+    dav.emp_id AS emp_id,
+    dav.emp_code,
+    dav.emp_code_name,
 
     dav.effective_timetable_name AS EffectiveScheduleAlias,
     dav.effective_scheduled_in_datetime AS EffectiveScheduledIn,

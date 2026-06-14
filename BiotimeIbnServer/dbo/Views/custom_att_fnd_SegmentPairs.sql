@@ -6,6 +6,7 @@ WITH cleaned AS
 (
     SELECT
         emp_id,
+        emp_code,
         work_date,
         id,
         punch_time,
@@ -19,6 +20,7 @@ daily_stats AS
 (
     SELECT
         emp_id,
+        emp_code,
         work_date,
         COUNT(*) AS punch_count,
         MIN(punch_time) AS first_punch_time,
@@ -30,6 +32,7 @@ daily_stats AS
     FROM cleaned
     GROUP BY
         emp_id,
+        emp_code,
         work_date
 ),
 
@@ -38,6 +41,7 @@ ins AS
 (
     SELECT
         c.emp_id,
+        c.emp_code,
         c.work_date,
         c.id AS in_punch_id,
         c.punch_time AS in_time,
@@ -64,6 +68,7 @@ outs AS
 (
     SELECT
         c.emp_id,
+        c.emp_code,
         c.work_date,
         c.id AS out_punch_id,
         c.punch_time AS out_time,
@@ -85,12 +90,14 @@ punch_counts AS
 (
     SELECT
         c.emp_id,
+        c.emp_code,
         c.work_date,
         SUM(CASE WHEN c.norm_punch_state = 0 THEN 1 ELSE 0 END) AS in_count,
         SUM(CASE WHEN c.norm_punch_state = 1 THEN 1 ELSE 0 END) AS out_count
     FROM cleaned c
     GROUP BY
         c.emp_id,
+        c.emp_code,
         c.work_date
 ),
 
@@ -98,6 +105,7 @@ single_in_multi_out_pairs AS
 (
     SELECT
         i.emp_id,
+        i.emp_code,
         i.work_date,
         i.in_no AS in_segment_no,
         o.out_no AS out_segment_no,
@@ -132,6 +140,7 @@ out_closed_pairs AS
 (
     SELECT
         o.emp_id,
+        o.emp_code,
         o.work_date,
         i.in_no AS in_segment_no,
         o.out_no AS out_segment_no,
@@ -177,6 +186,7 @@ normal_pairs AS
 (
     SELECT
         emp_id,
+        emp_code,
         work_date,
 
         in_segment_no,
@@ -216,6 +226,7 @@ open_pairs AS
 (
     SELECT
         i.emp_id,
+        i.emp_code,
         i.work_date,
 
         i.in_no AS in_segment_no,
@@ -256,6 +267,7 @@ fallback_pairs AS
 (
     SELECT
         ds.emp_id,
+        ds.emp_code,
         ds.work_date,
 
         1 AS in_segment_no,

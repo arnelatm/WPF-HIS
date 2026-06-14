@@ -47,6 +47,7 @@ seq AS
 (
     SELECT
         cp.emp_id,
+        cp.emp_code,
         cp.work_date,
         cp.id,
         cp.punch_time,
@@ -65,6 +66,7 @@ odd_punches AS
 (
     SELECT
         s.emp_id,
+        s.emp_code,
         s.work_date,
         s.id AS in_trans_id,
         s.punch_time AS in_time,
@@ -77,6 +79,7 @@ even_punches AS
 (
     SELECT
         s.emp_id,
+        s.emp_code,
         s.work_date,
         s.id AS out_trans_id,
         s.punch_time AS out_time,
@@ -86,6 +89,7 @@ even_punches AS
 )
 SELECT
     o.emp_id,
+    o.emp_code,
     o.work_date AS att_date,
     ((o.seq_no + 1) / 2) AS pair_no,
 

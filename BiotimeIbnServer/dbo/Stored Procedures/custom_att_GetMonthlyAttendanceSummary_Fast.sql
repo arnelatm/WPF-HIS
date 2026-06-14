@@ -11,7 +11,7 @@ BEGIN
         f.year_no,
         f.month_no,
         f.emp_id,
-        pe.emp_code AS employee_code,
+        f.emp_code,
         LTRIM(RTRIM(
             ISNULL(pe.first_name, '') +
             CASE
@@ -110,7 +110,7 @@ BEGIN
         f.year_no,
         f.month_no,
         f.emp_id,
-        pe.emp_code,
+        f.emp_code,
         pe.first_name,
         pe.last_name,
         d.dept_name

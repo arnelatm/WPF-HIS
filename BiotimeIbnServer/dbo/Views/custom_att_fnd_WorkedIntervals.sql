@@ -4,6 +4,7 @@ CREATE VIEW [dbo].[custom_att_fnd_WorkedIntervals]
 AS
 SELECT
     sp.emp_id,
+    sp.emp_code,
     sp.work_date,
     sp.in_segment_no,
     sp.out_segment_no,

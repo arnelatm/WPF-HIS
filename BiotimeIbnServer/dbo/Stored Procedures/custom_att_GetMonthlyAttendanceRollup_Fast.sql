@@ -9,6 +9,7 @@ BEGIN
 
     SELECT
         f.emp_id,
+        f.emp_code,
         f.year_no,
         f.month_no,
 
@@ -45,10 +46,12 @@ BEGIN
       AND (@EmpID IS NULL OR f.emp_id = @EmpID)
     GROUP BY
         f.emp_id,
+        f.emp_code,
         f.year_no,
         f.month_no
     ORDER BY
         f.emp_id,
+        f.emp_code,
         f.year_no,
         f.month_no;
 END
