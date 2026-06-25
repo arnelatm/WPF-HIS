@@ -831,6 +831,214 @@ BEGIN
           AND ISNULL(f.required_scheduled_hours, 0) > 0;
     END;
 
+    IF @NeedSchedule = 1
+       AND (@IssueArea IS NULL OR @IssueArea = 'Schedule')
+       AND
+       (
+           @IssueCode IS NULL
+        OR @IssueCode IN
+           (
+               'WorkedOnNonWorkingDay',
+               'WorkedWithoutRequiredSchedule',
+               'AbsentWithoutPunches',
+               'WorkedMuchLongerThanSchedule',
+               'WorkedMuchShorterThanSchedule',
+               'ClockInFarFromSchedule'
+           )
+       )
+    BEGIN
+        ;WITH ScheduleWorkIssues AS
+        (
+            SELECT
+                f.emp_id,
+                f.emp_code,
+                f.employee_name,
+                f.department_id,
+                f.dept_code,
+                f.dept_name,
+                f.group_id,
+                f.group_code,
+                f.group_name,
+                f.att_date,
+                CAST('WorkedOnNonWorkingDay' AS varchar(60)) AS issue_code,
+                CAST('High' AS varchar(20)) AS severity,
+                CAST('Employee worked on a rest day or holiday that is not cleanly classified as OT work.' AS varchar(250)) AS issue_message,
+                CAST('No regular work on rest day or holiday' AS varchar(100)) AS expected_value,
+                CAST(ISNULL(f.daily_status, 'Unknown') + ', worked_hours=' + CAST(CAST(ISNULL(f.worked_hours, 0) AS decimal(10,2)) AS varchar(20)) AS varchar(100)) AS actual_value,
+                CAST(1 AS bit) AS needs_payroll_block
+            FROM #Facts f
+            WHERE f.daily_status IN ('RestDay', 'Holiday')
+              AND ISNULL(f.worked_hours, 0) > 0
+              AND NOT
+              (
+                  f.attendance_status = 'OT Day'
+              AND f.reconciliation_status = 'OT Work'
+              AND ISNULL(f.needs_payroll_review, 0) = 0
+              )
+
+            UNION ALL
+
+            SELECT
+                f.emp_id,
+                f.emp_code,
+                f.employee_name,
+                f.department_id,
+                f.dept_code,
+                f.dept_name,
+                f.group_id,
+                f.group_code,
+                f.group_name,
+                f.att_date,
+                CAST('WorkedWithoutRequiredSchedule' AS varchar(60)),
+                CAST('High' AS varchar(20)),
+                CAST('Employee has worked hours but zero required scheduled hours outside a temporary schedule.' AS varchar(250)),
+                CAST('Required schedule or temporary OT schedule' AS varchar(100)),
+                CAST(ISNULL(rs.effective_schedule_source, 'No schedule') + ', worked_hours=' + CAST(CAST(ISNULL(f.worked_hours, 0) AS decimal(10,2)) AS varchar(20)) AS varchar(100)),
+                CAST(1 AS bit)
+            FROM #Facts f
+            LEFT JOIN #ResolvedSchedule rs
+                ON rs.emp_id = f.emp_id
+               AND rs.att_date = f.att_date
+            WHERE ISNULL(f.required_scheduled_hours, 0) = 0
+              AND ISNULL(f.worked_hours, 0) > 0
+              AND ISNULL(rs.effective_schedule_source, '') <> 'Temporary'
+              AND NOT
+              (
+                  f.attendance_status = 'OT Day'
+              AND f.reconciliation_status = 'OT Work'
+              AND ISNULL(f.needs_payroll_review, 0) = 0
+              )
+
+            UNION ALL
+
+            SELECT
+                f.emp_id,
+                f.emp_code,
+                f.employee_name,
+                f.department_id,
+                f.dept_code,
+                f.dept_name,
+                f.group_id,
+                f.group_code,
+                f.group_name,
+                f.att_date,
+                CAST('AbsentWithoutPunches' AS varchar(60)),
+                CAST('Critical' AS varchar(20)),
+                CAST('Regular scheduled work day has no punches and no worked hours.' AS varchar(250)),
+                CAST('Punches or approved leave/absence handling' AS varchar(100)),
+                CAST('No punches, worked_hours=0' AS varchar(100)),
+                CAST(1 AS bit)
+            FROM #Facts f
+            WHERE f.daily_status = 'RegularDay'
+              AND ISNULL(f.required_scheduled_hours, 0) > 0
+              AND ISNULL(f.worked_hours, 0) = 0
+              AND f.first_clock_in IS NULL
+              AND f.last_clock_out IS NULL
+
+            UNION ALL
+
+            SELECT
+                f.emp_id,
+                f.emp_code,
+                f.employee_name,
+                f.department_id,
+                f.dept_code,
+                f.dept_name,
+                f.group_id,
+                f.group_code,
+                f.group_name,
+                f.att_date,
+                CAST('WorkedMuchLongerThanSchedule' AS varchar(60)),
+                CAST('Medium' AS varchar(20)),
+                CAST('Worked hours exceed required scheduled hours by at least four hours.' AS varchar(250)),
+                CAST('Worked hours near required schedule' AS varchar(100)),
+                CAST('required=' + CAST(CAST(ISNULL(f.required_scheduled_hours, 0) AS decimal(10,2)) AS varchar(20)) + ', worked=' + CAST(CAST(ISNULL(f.worked_hours, 0) AS decimal(10,2)) AS varchar(20)) AS varchar(100)),
+                CAST(0 AS bit)
+            FROM #Facts f
+            WHERE ISNULL(f.worked_hours, 0) >= ISNULL(f.required_scheduled_hours, 0) + 4
+              AND NOT
+              (
+                  f.attendance_status = 'OT Day'
+              AND f.reconciliation_status = 'OT Work'
+              AND ISNULL(f.needs_payroll_review, 0) = 0
+              )
+
+            UNION ALL
+
+            SELECT
+                f.emp_id,
+                f.emp_code,
+                f.employee_name,
+                f.department_id,
+                f.dept_code,
+                f.dept_name,
+                f.group_id,
+                f.group_code,
+                f.group_name,
+                f.att_date,
+                CAST('WorkedMuchShorterThanSchedule' AS varchar(60)),
+                CAST('High' AS varchar(20)),
+                CAST('Employee worked three hours or less on a day requiring at least six hours.' AS varchar(250)),
+                CAST('Worked hours near required schedule' AS varchar(100)),
+                CAST('required=' + CAST(CAST(ISNULL(f.required_scheduled_hours, 0) AS decimal(10,2)) AS varchar(20)) + ', worked=' + CAST(CAST(ISNULL(f.worked_hours, 0) AS decimal(10,2)) AS varchar(20)) AS varchar(100)),
+                CAST(1 AS bit)
+            FROM #Facts f
+            WHERE ISNULL(f.required_scheduled_hours, 0) >= 6
+              AND ISNULL(f.worked_hours, 0) <= 3
+              AND ISNULL(f.worked_hours, 0) > 0
+
+            UNION ALL
+
+            SELECT
+                f.emp_id,
+                f.emp_code,
+                f.employee_name,
+                f.department_id,
+                f.dept_code,
+                f.dept_name,
+                f.group_id,
+                f.group_code,
+                f.group_name,
+                f.att_date,
+                CAST('ClockInFarFromSchedule' AS varchar(60)),
+                CAST('High' AS varchar(20)),
+                CAST('First clock-in is at least three hours away from scheduled IN.' AS varchar(250)),
+                CAST(CONVERT(varchar(16), rs.effective_scheduled_in_datetime, 120) AS varchar(100)),
+                CAST(CONVERT(varchar(16), f.first_clock_in, 120) AS varchar(100)),
+                CAST(1 AS bit)
+            FROM #Facts f
+            INNER JOIN #ResolvedSchedule rs
+                ON rs.emp_id = f.emp_id
+               AND rs.att_date = f.att_date
+            WHERE f.first_clock_in IS NOT NULL
+              AND rs.effective_scheduled_in_datetime IS NOT NULL
+              AND ISNULL(rs.schedule_use_mode, 0) <> 1
+              AND ABS(DATEDIFF(MINUTE, rs.effective_scheduled_in_datetime, f.first_clock_in)) >= 180
+        )
+        INSERT INTO #Issues
+        SELECT
+            swi.emp_id,
+            swi.emp_code,
+            swi.employee_name,
+            swi.department_id,
+            swi.dept_code,
+            swi.dept_name,
+            swi.group_id,
+            swi.group_code,
+            swi.group_name,
+            swi.att_date,
+            'Schedule',
+            swi.issue_code,
+            swi.severity,
+            swi.issue_message,
+            swi.expected_value,
+            swi.actual_value,
+            swi.needs_payroll_block
+        FROM ScheduleWorkIssues swi
+        WHERE (@IssueCode IS NULL OR swi.issue_code = @IssueCode)
+          AND (@Severity IS NULL OR swi.severity = @Severity);
+    END;
+
     IF (@IssueArea IS NULL OR @IssueArea = 'Punch')
        AND
        (

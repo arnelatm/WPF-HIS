@@ -22,7 +22,8 @@ Key Outputs:
 - total_worked_hours
 
 Used by:
-- dbo.custom_att_calc_DailyBase
+- dbo.Custom_att_ProcessMonthlyPayrollFacts
+- dbo.custom_att_GetMonthlyFactVsRawWorkedHours
 
 Notes:
 - This is the main worked-time fact source for the attendance pipeline

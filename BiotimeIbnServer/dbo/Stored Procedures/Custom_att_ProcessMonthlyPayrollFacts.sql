@@ -841,45 +841,36 @@ BEGIN
     IF OBJECT_ID('tempdb..#RawPunchAgg') IS NOT NULL
         DROP TABLE #RawPunchAgg;
 
+    ;WITH RankedRawPunches AS
+    (
+        SELECT
+            rp.emp_id,
+            rp.att_date,
+            rp.punch_time,
+            rp.norm_punch_state,
+            ROW_NUMBER() OVER
+            (
+                PARTITION BY rp.emp_id, rp.att_date
+                ORDER BY rp.punch_time DESC, rp.id DESC
+            ) AS latest_punch_no,
+            COUNT_BIG(*) OVER
+            (
+                PARTITION BY rp.emp_id, rp.att_date
+            ) AS raw_punch_count
+        FROM #RawPunches rp
+    )
     SELECT
-        b.emp_id,
-        b.att_date,
-        rp.punch_time AS latest_punch_time,
-        rp.punch_state AS latest_punch_state,
-        fp.punch_time AS first_raw_punch_time,
-        pc.raw_punch_count
+        rp.emp_id,
+        rp.att_date,
+        MAX(CASE WHEN rp.latest_punch_no = 1 THEN rp.punch_time END) AS latest_punch_time,
+        MAX(CASE WHEN rp.latest_punch_no = 1 THEN rp.norm_punch_state END) AS latest_punch_state,
+        MIN(rp.punch_time) AS first_raw_punch_time,
+        MAX(rp.raw_punch_count) AS raw_punch_count
     INTO #RawPunchAgg
-    FROM #DailyBase b
-    OUTER APPLY
-    (
-        SELECT TOP (1)
-            t.punch_time,
-            t.punch_state
-        FROM dbo.iclock_transaction t
-        WHERE t.emp_id = b.emp_id
-          AND t.punch_time >= b.att_date
-          AND t.punch_time < DATEADD(DAY, 1, b.att_date)
-        ORDER BY t.punch_time DESC, t.id DESC
-    ) rp
-    OUTER APPLY
-    (
-        SELECT TOP (1)
-            t.punch_time
-        FROM dbo.iclock_transaction t
-        WHERE t.emp_id = b.emp_id
-          AND t.punch_time >= b.att_date
-          AND t.punch_time < DATEADD(DAY, 1, b.att_date)
-        ORDER BY t.punch_time, t.id
-    ) fp
-    OUTER APPLY
-    (
-        SELECT COUNT_BIG(*) AS raw_punch_count
-        FROM dbo.iclock_transaction t
-        WHERE t.emp_id = b.emp_id
-          AND t.punch_time >= b.att_date
-          AND t.punch_time < DATEADD(DAY, 1, b.att_date)
-    ) pc
-    WHERE rp.punch_time IS NOT NULL;
+    FROM RankedRawPunches rp
+    GROUP BY
+        rp.emp_id,
+        rp.att_date;
 
     CREATE INDEX IX_RawPunchAgg_EmpDate
     ON #RawPunchAgg(emp_id, att_date);

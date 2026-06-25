@@ -53,3 +53,20 @@ GO
 CREATE NONCLUSTERED INDEX [IX_CustomFact_EmpDate]
     ON [dbo].[custom_att_fact_DailyAttendance]([emp_id] ASC, [att_date] ASC);
 
+GO
+CREATE NONCLUSTERED INDEX [IX_CustomFact_AttDateEmp]
+    ON [dbo].[custom_att_fact_DailyAttendance]([att_date] ASC, [emp_id] ASC)
+    INCLUDE (
+        [emp_code],
+        [effective_punch_in1],
+        [effective_punch_out1],
+        [effective_punch_in2],
+        [effective_punch_out2],
+        [required_scheduled_hours],
+        [worked_hours],
+        [recomputed_worked_minutes],
+        [attendance_status],
+        [anomaly_flag],
+        [needs_payroll_review],
+        [reconciliation_status]
+    );

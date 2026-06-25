@@ -653,79 +653,137 @@ BEGIN
             f.emp_code,
             f.emp_code_name,
             rs.EffectiveScheduleAlias,
-            CONVERT(varchar(8), CAST(rs.effective_scheduled_in_datetime AS time), 108) AS ScheduledIn,
-            CONVERT(varchar(8), CAST(rs.effective_scheduled_out_datetime AS time), 108) AS ScheduledOut,
-            CONVERT(varchar(8), CAST(
+            FORMAT(rs.effective_scheduled_in_datetime, 'hh:mm tt', 'en-US') AS ScheduledIn,
+            FORMAT(rs.effective_scheduled_out_datetime, 'hh:mm tt', 'en-US') AS ScheduledOut,
+            FORMAT(
                 CASE
                     WHEN ISNULL(sa.schedule_segment_count, 1) > 1
                      AND ISNULL(sa.unmatched_segment_count, 0) = 0
                      AND ISNULL(sa.segment_worked_minutes, 0) > 0
                     THEN sa.effective_punch_in1
                     ELSE f.fact_punch_in1
-                END AS time
-            ), 108) AS EffectivePunchIn1,
-            CONVERT(varchar(8), CAST(
+                END,
+                'hh:mm tt',
+                'en-US'
+            ) AS EffectivePunchIn1,
+            FORMAT(
                 CASE
                     WHEN ISNULL(sa.schedule_segment_count, 1) > 1
                      AND ISNULL(sa.unmatched_segment_count, 0) = 0
                      AND ISNULL(sa.segment_worked_minutes, 0) > 0
                     THEN sa.effective_punch_out1
                     ELSE f.fact_punch_out1
-                END AS time
-            ), 108) AS EffectivePunchOut1,
-            CONVERT(varchar(8), CAST(
+                END,
+                'hh:mm tt',
+                'en-US'
+            ) AS EffectivePunchOut1,
+            FORMAT(
                 CASE
                     WHEN ISNULL(sa.schedule_segment_count, 1) > 1
                      AND ISNULL(sa.unmatched_segment_count, 0) = 0
                      AND ISNULL(sa.segment_worked_minutes, 0) > 0
                     THEN sa.effective_punch_in2
                     ELSE f.fact_punch_in2
-                END AS time
-            ), 108) AS EffectivePunchIn2,
-            CONVERT(varchar(8), CAST(
+                END,
+                'hh:mm tt',
+                'en-US'
+            ) AS EffectivePunchIn2,
+            FORMAT(
                 CASE
                     WHEN ISNULL(sa.schedule_segment_count, 1) > 1
                      AND ISNULL(sa.unmatched_segment_count, 0) = 0
                      AND ISNULL(sa.segment_worked_minutes, 0) > 0
                     THEN sa.effective_punch_out2
                     ELSE f.fact_punch_out2
-                END AS time
-            ), 108) AS EffectivePunchOut2,
+                END,
+                'hh:mm tt',
+                'en-US'
+            ) AS EffectivePunchOut2,
             punch_lists.AllPunches,
-            DATEDIFF(
-                MINUTE,
-                rs.effective_scheduled_in_datetime,
-                CASE
-                    WHEN ISNULL(sa.schedule_segment_count, 1) > 1
-                     AND ISNULL(sa.unmatched_segment_count, 0) = 0
-                     AND ISNULL(sa.segment_worked_minutes, 0) > 0
-                    THEN sa.effective_punch_in1
-                    ELSE f.fact_punch_in1
-                END
-            ) AS InOffsetMinutes,
-            DATEDIFF(
-                MINUTE,
-                rs.effective_scheduled_out_datetime,
-                COALESCE(
+            CASE
+                WHEN ISNULL(rs.schedule_use_mode, 0) = 1
+                  OR ISNULL(rs.EffectiveScheduleAlias, '') LIKE '%Flex%'
+                THEN NULL
+                ELSE DATEDIFF(
+                    MINUTE,
+                    rs.effective_scheduled_in_datetime,
                     CASE
                         WHEN ISNULL(sa.schedule_segment_count, 1) > 1
                          AND ISNULL(sa.unmatched_segment_count, 0) = 0
                          AND ISNULL(sa.segment_worked_minutes, 0) > 0
-                        THEN sa.effective_punch_out2
-                        ELSE f.fact_punch_out2
-                    END,
+                        THEN sa.effective_punch_in1
+                        ELSE f.fact_punch_in1
+                    END
+                )
+            END AS InOffsetMinutes,
+            CASE
+                WHEN ISNULL(rs.schedule_use_mode, 0) = 1
+                  OR ISNULL(rs.EffectiveScheduleAlias, '') LIKE '%Flex%'
+                THEN NULL
+                ELSE DATEDIFF(
+                    MINUTE,
+                    rs.effective_scheduled_out_datetime,
+                    COALESCE(
+                        CASE
+                            WHEN ISNULL(sa.schedule_segment_count, 1) > 1
+                             AND ISNULL(sa.unmatched_segment_count, 0) = 0
+                             AND ISNULL(sa.segment_worked_minutes, 0) > 0
+                            THEN sa.effective_punch_out2
+                            ELSE f.fact_punch_out2
+                        END,
+                        CASE
+                            WHEN ISNULL(sa.schedule_segment_count, 1) > 1
+                             AND ISNULL(sa.unmatched_segment_count, 0) = 0
+                             AND ISNULL(sa.segment_worked_minutes, 0) > 0
+                            THEN sa.effective_punch_out1
+                            ELSE f.fact_punch_out1
+                        END
+                    )
+                )
+            END AS OutOffsetMinutes,
+            CASE
+                WHEN rs.emp_id IS NULL
+                THEN 'MissingSchedule'
+
+                WHEN ISNULL(rs.schedule_use_mode, 0) = 1
+                  OR ISNULL(rs.EffectiveScheduleAlias, '') LIKE '%Flex%'
+                THEN 'OK'
+
+                WHEN ISNULL(f.attendance_status, '') = 'On Leave'
+                 AND ISNULL(f.worked_hours, 0) = 0
+                 AND
+                    CASE
+                        WHEN ISNULL(sa.schedule_segment_count, 1) > 1
+                         AND ISNULL(sa.unmatched_segment_count, 0) = 0
+                         AND ISNULL(sa.segment_worked_minutes, 0) > 0
+                        THEN sa.effective_punch_in1
+                        ELSE f.fact_punch_in1
+                    END IS NULL
+                 AND
                     CASE
                         WHEN ISNULL(sa.schedule_segment_count, 1) > 1
                          AND ISNULL(sa.unmatched_segment_count, 0) = 0
                          AND ISNULL(sa.segment_worked_minutes, 0) > 0
                         THEN sa.effective_punch_out1
                         ELSE f.fact_punch_out1
-                    END
-                )
-            ) AS OutOffsetMinutes,
-            CASE
-                WHEN rs.emp_id IS NULL
-                THEN 'MissingSchedule'
+                    END IS NULL
+                 AND
+                    CASE
+                        WHEN ISNULL(sa.schedule_segment_count, 1) > 1
+                         AND ISNULL(sa.unmatched_segment_count, 0) = 0
+                         AND ISNULL(sa.segment_worked_minutes, 0) > 0
+                        THEN sa.effective_punch_in2
+                        ELSE f.fact_punch_in2
+                    END IS NULL
+                 AND
+                    CASE
+                        WHEN ISNULL(sa.schedule_segment_count, 1) > 1
+                         AND ISNULL(sa.unmatched_segment_count, 0) = 0
+                         AND ISNULL(sa.segment_worked_minutes, 0) > 0
+                        THEN sa.effective_punch_out2
+                        ELSE f.fact_punch_out2
+                    END IS NULL
+                THEN 'OK'
 
                 WHEN
                     CASE
@@ -901,7 +959,7 @@ BEGIN
                 STUFF(
                     (
                         SELECT
-                            ',' + CONVERT(varchar(8), CAST(p.punch_time AS time), 108)
+                            ',' + FORMAT(p.punch_time, 'hh:mm tt', 'en-US')
                             + '('
                             + CASE
                                 WHEN p.punch_state IN (0, 4) THEN 'IN'
@@ -931,6 +989,14 @@ BEGIN
         (
             SchedulePunchCheck <> 'OK'
             AND ISNULL(EffectiveScheduleAlias, '') NOT LIKE '%Flexi%'
+            AND NOT
+            (
+                SchedulePunchCheck = 'NoEffectivePunches'
+                AND ISNULL(AttendanceStatus, '') = 'NotRequired'
+                AND ISNULL(RequiredScheduledHours, 0) = 0
+                AND ISNULL(WorkedHours, 0) = 0
+                AND AllPunches IS NULL
+            )
         )
     ORDER BY
         [Date],

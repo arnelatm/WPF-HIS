@@ -1,4 +1,4 @@
-﻿CREATE VIEW [dbo].[custom_att_Audit_TimeIntervals]
+CREATE VIEW [dbo].[custom_att_audit_TimeIntervals]
 AS
 WITH break_agg AS
 (
@@ -41,8 +41,8 @@ SELECT
 
     CASE
         WHEN ISNULL(ti.work_type, 0) IN (1, 2) THEN 0
-        WHEN 
-            ISNULL(ti.duration, 0) 
+        WHEN
+            ISNULL(ti.duration, 0)
             - ISNULL(ba.break_duration, 0)
             - CASE
                 WHEN ISNULL(ti.enable_overtime, 0) = 1
@@ -52,7 +52,7 @@ SELECT
               END < 0
         THEN 0
         ELSE
-            ISNULL(ti.duration, 0) 
+            ISNULL(ti.duration, 0)
             - ISNULL(ba.break_duration, 0)
             - CASE
                 WHEN ISNULL(ti.enable_overtime, 0) = 1

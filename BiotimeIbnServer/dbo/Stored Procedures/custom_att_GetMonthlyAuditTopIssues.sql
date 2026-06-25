@@ -7,83 +7,58 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-    CREATE TABLE #t
+    ;WITH MonthlySummary AS
     (
-        year_no int,
-        month_no int,
-        emp_id int,
-        emp_code nvarchar(50),
-        employee_name nvarchar(200),
-        department_name nvarchar(200),
-        need_present_days int,
-        holiday_days int,
-        rest_days int,
-        actual_present_days int,
-        actual_absence_days int,
-        computed_present_days int,
-        computed_absence_days int,
-        present_days int,
-        partial_days int,
-        absent_days int,
-        presence_percentage decimal(10,2),
-        absence_percentage decimal(10,2),
-        regular_worked_hours decimal(10,2),
-        regular_required_hours decimal(10,2),
-        normal_ot_hours decimal(10,2),
-        pure_ot_hours decimal(10,2),
-        total_ot_hours decimal(10,2),
-        late_minutes decimal(10,2),
-        early_out_minutes decimal(10,2),
-        late_hours decimal(10,2),
-        early_out_hours decimal(10,2),
-        absence_hours decimal(10,2),
-        total_worked_hours decimal(10,2),
-        holiday_worked_hours decimal(10,2),
-        restday_worked_hours decimal(10,2),
-        special_day_ot_hours decimal(10,2),
-        Regular_Days_with_OT int,
-        Pure_Ot_Days int,
-        Holiday_OT_Days int,
-        RestDay_OT_Days int,
-        no_punch_days int,
-        missing_out_days int,
-        missing_in_days int,
-        invalid_punch_days int,
-        holiday_work_days int,
-        restday_work_days int,
-        holiday_unscheduled_work_days int,
-        unscheduled_work_days int,
-        worked_on_assigned_off_day_days int,
-        temporary_pure_ot_days int,
-        holiday_worked_unscheduled_days int,
-        worked_on_assigned_off_day_anomaly_days int,
-        worked_on_true_unscheduled_day_days int,
-        excess_work_no_ot_days int,
-        anomaly_no_punch_days int,
-        anomaly_missing_out_days int,
-        anomaly_missing_in_days int,
-        excessive_work_hours_days int,
-        missing_schedule_days int,
-        comp_leave_eligible_days int,
-        comp_leave_minutes decimal(10,2),
-        comp_leave_hours decimal(10,2),
-        anomaly_days int,
-        review_days int,
-        avg_work_completion_pct decimal(10,2)
-    );
+        SELECT
+            f.year_no,
+            f.month_no,
+            f.emp_id,
+            pe.emp_code,
+            LTRIM(RTRIM(
+                ISNULL(pe.first_name, '') +
+                CASE
+                    WHEN ISNULL(pe.last_name, '') = '' THEN ''
+                    ELSE ' ' + pe.last_name
+                END
+            )) AS employee_name,
+            d.dept_name AS department_name,
 
-    INSERT INTO #t
-    EXEC dbo.custom_att_GetMonthlyAttendanceSummary_Fast
-        @DateFrom = @DateFrom,
-        @DateTo   = @DateTo,
-        @EmpID    = NULL;
+            CAST(SUM(CASE WHEN ISNULL(f.required_scheduled_hours, 0) > 0 THEN ISNULL(f.recomputed_absence_hours, 0) ELSE 0 END) AS decimal(10,2)) AS absence_hours,
+            CAST(SUM(CASE WHEN ISNULL(f.required_scheduled_hours, 0) > 0 THEN ISNULL(f.late_minutes, 0) ELSE 0 END) / 60.0 AS decimal(10,2)) AS late_hours,
+            CAST(SUM(CASE WHEN ISNULL(f.required_scheduled_hours, 0) > 0 THEN ISNULL(f.early_out_minutes, 0) ELSE 0 END) / 60.0 AS decimal(10,2)) AS early_out_hours,
 
+            CAST(SUM(ISNULL(f.worked_hours, 0)) AS decimal(10,2)) AS total_worked_hours,
+            CAST(SUM(ISNULL(f.ot_hours, 0)) AS decimal(10,2)) AS total_ot_hours,
+
+            SUM(CASE WHEN ISNULL(f.required_scheduled_hours, 0) > 0 AND f.punch_status = 'NoPunch' THEN 1 ELSE 0 END) AS no_punch_days,
+            SUM(CASE WHEN ISNULL(f.required_scheduled_hours, 0) > 0 AND f.punch_status = 'MissingOut' THEN 1 ELSE 0 END) AS missing_out_days,
+            SUM(CASE WHEN ISNULL(f.required_scheduled_hours, 0) > 0 AND f.punch_status = 'MissingIn' THEN 1 ELSE 0 END) AS missing_in_days,
+            SUM(CASE WHEN f.anomaly_flag = 'ExcessWorkNoOT' THEN 1 ELSE 0 END) AS excess_work_no_ot_days,
+            SUM(CASE WHEN ISNULL(f.anomaly_flag, 'Normal') <> 'Normal' THEN 1 ELSE 0 END) AS anomaly_days,
+            SUM(CASE WHEN ISNULL(f.needs_payroll_review, 0) = 1 THEN 1 ELSE 0 END) AS review_days,
+
+            CAST(AVG(CASE WHEN ISNULL(f.required_scheduled_hours, 0) > 0 THEN f.work_completion_pct END) AS decimal(10,2)) AS avg_work_completion_pct
+        FROM dbo.custom_att_fact_DailyAttendance f
+        LEFT JOIN dbo.personnel_employee pe
+            ON pe.id = f.emp_id
+        LEFT JOIN dbo.personnel_department d
+            ON d.id = pe.department_id
+        WHERE f.att_date >= @DateFrom
+          AND f.att_date <= @DateTo
+        GROUP BY
+            f.year_no,
+            f.month_no,
+            f.emp_id,
+            pe.emp_code,
+            pe.first_name,
+            pe.last_name,
+            d.dept_name
+    )
     SELECT TOP (@TopN)
         emp_id,
         emp_code,
         employee_name,
         department_name,
-
         review_days,
         anomaly_days,
         no_punch_days,
@@ -93,12 +68,10 @@ BEGIN
         absence_hours,
         late_hours,
         early_out_hours,
-
         total_worked_hours,
         total_ot_hours,
         avg_work_completion_pct
-
-    FROM #t
+    FROM MonthlySummary
     ORDER BY
         review_days DESC,
         anomaly_days DESC,

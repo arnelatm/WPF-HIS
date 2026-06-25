@@ -1,4 +1,4 @@
-CREATE VIEW [dbo].[Custom_att_vw_ScheduleMismatchEmployees]
+CREATE VIEW [dbo].[custom_att_audit_ScheduleMismatchEmployees]
 AS
 WITH ScheduleRows AS
 (
