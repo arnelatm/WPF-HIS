@@ -33,33 +33,140 @@ BEGIN
     IF OBJECT_ID('tempdb..#TimeCard') IS NOT NULL
         DROP TABLE #TimeCard;
 
+    ;WITH PayloadTimeCard AS
+    (
+        SELECT
+            t.emp_id,
+            t.att_date,
+            MAX(t.date_type) AS payload_date_type,
+            MAX(t.present) AS present_flag,
+            MAX(t.full_attendance) AS full_attendance_flag,
+            MIN(t.check_in) AS scheduled_in,
+            MAX(t.check_out) AS scheduled_out,
+            SUM(dbo.custom_ExtractPayloadMinutes(t.payload, 'total_ot')) AS payload_ot_minutes,
+            SUM(dbo.custom_ExtractPayloadMinutes(t.payload, 'remaining')) AS payload_absence_minutes,
+            SUM(dbo.custom_ExtractPayloadMinutes(t.payload, 'worked_hrs'))
+                + SUM(dbo.custom_ExtractPayloadMinutes(t.payload, 'remaining')) AS payload_required_work_minutes
+        FROM dbo.att_payloadtimecard t
+        WHERE t.att_date BETWEEN @DateFrom AND @DateTo
+          AND (@EmpID IS NULL OR t.emp_id = @EmpID)
+          AND NOT EXISTS
+          (
+              SELECT 1
+              FROM dbo.personnel_resign r
+              WHERE r.employee_id = t.emp_id
+                AND t.att_date > r.resign_date
+          )
+        GROUP BY
+            t.emp_id,
+            t.att_date
+    ),
+    ApprovedLeaveRanges AS
+    (
+        SELECT
+            wi.employee_id AS emp_id,
+            CASE
+                WHEN CAST(l.start_time AS date) < @DateFrom THEN @DateFrom
+                ELSE CAST(l.start_time AS date)
+            END AS start_date,
+            CASE
+                WHEN CASE
+                         WHEN CAST(l.end_time AS time) = CAST('00:00:00' AS time)
+                         THEN DATEADD(DAY, -1, CAST(l.end_time AS date))
+                         ELSE CAST(l.end_time AS date)
+                     END > @DateTo THEN @DateTo
+                ELSE CASE
+                         WHEN CAST(l.end_time AS time) = CAST('00:00:00' AS time)
+                         THEN DATEADD(DAY, -1, CAST(l.end_time AS date))
+                         ELSE CAST(l.end_time AS date)
+                     END
+            END AS end_date
+        FROM dbo.workflow_workflowinstance wi
+        INNER JOIN dbo.att_leave l
+            ON l.workflowinstance_ptr_id = wi.id
+        WHERE ISNULL(wi.approval_status, 0) = 2
+          AND l.start_time < DATEADD(DAY, 1, CAST(@DateTo AS datetime2(0)))
+          AND l.end_time > CAST(@DateFrom AS datetime2(0))
+          AND (@EmpID IS NULL OR wi.employee_id = @EmpID)
+    ),
+    ApprovedLeaveDates AS
+    (
+        SELECT
+            alr.emp_id,
+            alr.start_date AS att_date,
+            alr.end_date
+        FROM ApprovedLeaveRanges alr
+
+        UNION ALL
+
+        SELECT
+            ald.emp_id,
+            CAST(DATEADD(DAY, 1, ald.att_date) AS date),
+            ald.end_date
+        FROM ApprovedLeaveDates ald
+        WHERE ald.att_date < ald.end_date
+    ),
+    MonthScope AS
+    (
+        SELECT
+            pt.emp_id,
+            pt.att_date,
+            pt.payload_date_type,
+            pt.present_flag,
+            pt.full_attendance_flag,
+            pt.scheduled_in,
+            pt.scheduled_out,
+            pt.payload_ot_minutes,
+            pt.payload_absence_minutes,
+            pt.payload_required_work_minutes
+        FROM PayloadTimeCard pt
+
+        UNION ALL
+
+        SELECT
+            ald.emp_id,
+            ald.att_date,
+            NULL AS payload_date_type,
+            NULL AS present_flag,
+            NULL AS full_attendance_flag,
+            NULL AS scheduled_in,
+            NULL AS scheduled_out,
+            0 AS payload_ot_minutes,
+            0 AS payload_absence_minutes,
+            0 AS payload_required_work_minutes
+        FROM ApprovedLeaveDates ald
+        WHERE NOT EXISTS
+        (
+            SELECT 1
+            FROM PayloadTimeCard pt
+            WHERE pt.emp_id = ald.emp_id
+              AND pt.att_date = ald.att_date
+        )
+          AND NOT EXISTS
+          (
+              SELECT 1
+              FROM dbo.personnel_resign r
+              WHERE r.employee_id = ald.emp_id
+                AND ald.att_date > r.resign_date
+          )
+    )
     SELECT
-        t.emp_id,
-        t.att_date,
-        MAX(t.date_type) AS payload_date_type,
-        MAX(t.present) AS present_flag,
-        MAX(t.full_attendance) AS full_attendance_flag,
-        MIN(t.check_in) AS scheduled_in,
-        MAX(t.check_out) AS scheduled_out,
-        SUM(dbo.custom_ExtractPayloadMinutes(t.payload, 'total_ot')) AS payload_ot_minutes,
-        SUM(dbo.custom_ExtractPayloadMinutes(t.payload, 'remaining')) AS payload_absence_minutes,
-        SUM(dbo.custom_ExtractPayloadMinutes(t.payload, 'worked_hrs'))
-            + SUM(dbo.custom_ExtractPayloadMinutes(t.payload, 'remaining')) AS payload_required_work_minutes
+        ms.emp_id,
+        ms.att_date,
+        MAX(ms.payload_date_type) AS payload_date_type,
+        MAX(ms.present_flag) AS present_flag,
+        MAX(ms.full_attendance_flag) AS full_attendance_flag,
+        MIN(ms.scheduled_in) AS scheduled_in,
+        MAX(ms.scheduled_out) AS scheduled_out,
+        SUM(ms.payload_ot_minutes) AS payload_ot_minutes,
+        SUM(ms.payload_absence_minutes) AS payload_absence_minutes,
+        SUM(ms.payload_required_work_minutes) AS payload_required_work_minutes
     INTO #TimeCard
-    FROM dbo.att_payloadtimecard t
-    WHERE t.att_date BETWEEN @DateFrom AND @DateTo
-      AND (@EmpID IS NULL OR t.emp_id = @EmpID)
-      AND NOT EXISTS
-      (
-          SELECT 1
-          FROM dbo.personnel_resign r
-          WHERE r.employee_id = t.emp_id
-            AND t.att_date > r.resign_date
-      )
+    FROM MonthScope ms
     GROUP BY
-        t.emp_id,
-        t.att_date
-    OPTION (RECOMPILE);
+        ms.emp_id,
+        ms.att_date
+    OPTION (MAXRECURSION 32767, RECOMPILE);
 
     CREATE INDEX IX_TimeCard_EmpDate
     ON #TimeCard(emp_id, att_date);
@@ -884,18 +991,74 @@ BEGIN
     SELECT
         b.emp_id,
         b.att_date,
-        CAST(COUNT_BIG(*) AS int) AS [Leaves]
+        CAST(SUM(
+            CASE
+                WHEN pc.code IN ('CP', 'CPL') THEN
+                    CASE
+                        WHEN ISNULL(b.required_work_minutes, 0) <= 0 THEN 0
+                        WHEN
+                            (
+                                CAST(ISNULL(l.leave_day, 0) AS decimal(10,2))
+                                / NULLIF(
+                                    DATEDIFF(
+                                        DAY,
+                                        CAST(l.start_time AS date),
+                                        CASE
+                                            WHEN CAST(l.end_time AS time) = CAST('00:00:00' AS time)
+                                            THEN DATEADD(DAY, -1, CAST(l.end_time AS date))
+                                            ELSE CAST(l.end_time AS date)
+                                        END
+                                    ) + 1,
+                                    0
+                                  )
+                            ) / (CAST(b.required_work_minutes AS decimal(10,2)) / 60.0) > 1
+                        THEN 1
+                        ELSE
+                            (
+                                CAST(ISNULL(l.leave_day, 0) AS decimal(10,2))
+                                / NULLIF(
+                                    DATEDIFF(
+                                        DAY,
+                                        CAST(l.start_time AS date),
+                                        CASE
+                                            WHEN CAST(l.end_time AS time) = CAST('00:00:00' AS time)
+                                            THEN DATEADD(DAY, -1, CAST(l.end_time AS date))
+                                            ELSE CAST(l.end_time AS date)
+                                        END
+                                    ) + 1,
+                                    0
+                                  )
+                            ) / (CAST(b.required_work_minutes AS decimal(10,2)) / 60.0)
+                    END
+                ELSE
+                    CAST(ISNULL(l.leave_day, 0) AS decimal(10,2))
+                    / NULLIF(
+                        DATEDIFF(
+                            DAY,
+                            CAST(l.start_time AS date),
+                            CASE
+                                WHEN CAST(l.end_time AS time) = CAST('00:00:00' AS time)
+                                THEN DATEADD(DAY, -1, CAST(l.end_time AS date))
+                                ELSE CAST(l.end_time AS date)
+                            END
+                        ) + 1,
+                        0
+                      )
+            END
+        ) AS decimal(10,2)) AS [Leaves]
     INTO #ApprovedLeaves
     FROM #DailyBase b
     INNER JOIN dbo.workflow_workflowinstance wi
         ON wi.employee_id = b.emp_id
     INNER JOIN dbo.att_leave l
         ON l.workflowinstance_ptr_id = wi.id
+    LEFT JOIN dbo.att_paycode pc
+        ON pc.id = l.pay_code_id
     WHERE ISNULL(wi.approval_status, 0) = 2
       AND l.start_time < DATEADD(DAY, 1, CAST(b.att_date AS datetime2(0)))
-      AND l.end_time >= CAST(b.att_date AS datetime2(0))
+      AND l.end_time > CAST(b.att_date AS datetime2(0))
       AND l.start_time < DATEADD(DAY, 1, CAST(@DateTo AS datetime2(0)))
-      AND l.end_time >= CAST(@DateFrom AS datetime2(0))
+      AND l.end_time > CAST(@DateFrom AS datetime2(0))
       AND (@EmpID IS NULL OR wi.employee_id = @EmpID)
     GROUP BY
         b.emp_id,
@@ -1925,6 +2088,21 @@ BEGIN
         f.actual_early_out_minutes =
             CASE WHEN ISNULL(s.[Leaves], 0) > 0 THEN 0 ELSE s.actual_early_out_minutes END,
         f.date_type = s.base_date_type,
+        f.is_flex_duty =
+            CASE
+                WHEN ISNULL(s.use_mode, 0) = 1
+                 AND ISNULL(s.resolved_is_off_day, 0) = 0
+                 AND ISNULL(s.required_minutes, 0) > 0
+                THEN 1 ELSE 0
+            END,
+        f.flex_duty_minutes =
+            CASE
+                WHEN ISNULL(s.use_mode, 0) = 1
+                 AND ISNULL(s.resolved_is_off_day, 0) = 0
+                 AND ISNULL(s.required_minutes, 0) > 0
+                THEN CAST(ISNULL(s.worked_minutes, 0) AS decimal(10,2))
+                ELSE CAST(0 AS decimal(10,2))
+            END,
         f.[Leaves] = ISNULL(s.[Leaves], 0),
 
         f.daily_status =
@@ -2052,6 +2230,9 @@ BEGIN
         CAST(SUM(ISNULL(recomputed_worked_minutes, 0)) / 60.0 AS decimal(10,2)) AS total_worked_hours,
         CAST(SUM(ISNULL(ot_minutes, 0)) / 60.0 AS decimal(10,2)) AS total_ot_hours,
         CAST(SUM(ISNULL(recomputed_absence_hours, 0)) AS decimal(10,2)) AS total_absence_hours,
+        CAST(SUM(ISNULL([Leaves], 0)) AS decimal(10,2)) AS total_leave_days,
+        SUM(CASE WHEN ISNULL(is_flex_duty, 0) = 1 THEN 1 ELSE 0 END) AS total_flex_duty_days,
+        CAST(SUM(ISNULL(flex_duty_minutes, 0)) AS decimal(10,2)) AS total_flex_duty_minutes,
 
         SUM(ISNULL(late_minutes, 0)) AS total_late_minutes,
         SUM(ISNULL(early_out_minutes, 0)) AS total_early_out_minutes

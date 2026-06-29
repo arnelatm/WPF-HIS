@@ -32,6 +32,7 @@ BEGIN
         dpa.PunchIn2 AS EffectivePunchIn2,
         dpa.PunchOut2 AS EffectivePunchOut2,
         dpa.AllRawPunches,
+        dpa.AllRawPunches AS AllPunches,
         dpa.AllEffectivePunches,
         dpa.TotalPunches,
         dpa.RawPunch1,

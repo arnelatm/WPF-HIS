@@ -2841,10 +2841,10 @@
     </None>
     <None Include="app -  ibn-server - Kizen %28local ispadmin2%29.config" />
     <None Include="app - Copy.config" />
-    <None Include="app-Ibn-Server - Copy.config" />
+    <None Include="app-Ibn-Server - Copy %282%29.config" />
+    <None Include="app.config" />
     <None Include="app-ibn-server-orig.config" />
     <None Include="app-ibn-server-copy1.config" />
-    <None Include="app.config" />
     <None Include="app-ispadmin2-backp.config" />
     <None Include="app-kizen.config" />
     <None Include="app-Isp-Server - Copy.config" />
@@ -2942,6 +2942,8 @@
     </None>
     <None Include="packages.config" />
     <None Include="PresentationLayer\Views\app-Ibn-Server.config" />
+    <None Include="Reports\BioTime\Daily Employee Punch Audit Report - Crystal Setup.md" />
+    <None Include="Reports\BioTime\Periodic Attendance Report - Crystal Setup.md" />
     <None Include="Reports\IGroup\DosageLabel.rpt" />
     <None Include="ServiceLayer\app-Ibn-Server.config" />
   </ItemGroup>
@@ -3103,6 +3105,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Reports\VAT\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports\BioTime\Daily Employee Punch Audit Report - Report Registration.sql" />
+    <Content Include="Reports\BioTime\Periodic Attendance Report - Report Registration.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

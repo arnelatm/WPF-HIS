@@ -46,6 +46,31 @@ SELECT
     sh.alias AS EffectiveShiftAlias,
     ti.alias AS EffectiveTimeTableAlias,
     es.effective_schedule_source AS ScheduleType,
+    ISNULL(
+        f.is_flex_duty,
+        CASE
+            WHEN ISNULL(ti.use_mode, 0) = 1
+             AND ISNULL(es.resolved_is_off_day, 0) = 0
+             AND ISNULL(es.effective_required_work_minutes, 0) > 0
+                THEN CAST(1 AS bit)
+            ELSE CAST(0 AS bit)
+        END
+    ) AS IsFlexDuty,
+    CASE
+        WHEN ISNULL(
+            f.is_flex_duty,
+            CASE
+                WHEN ISNULL(ti.use_mode, 0) = 1
+                 AND ISNULL(es.resolved_is_off_day, 0) = 0
+                 AND ISNULL(es.effective_required_work_minutes, 0) > 0
+                    THEN CAST(1 AS bit)
+                ELSE CAST(0 AS bit)
+            END
+        ) = 1 THEN 'Yes'
+        ELSE 'No'
+    END AS FlexDuty,
+    ISNULL(f.flex_duty_minutes, 0) AS FlexDutyMinutes,
+    ISNULL(ti.use_mode, 0) AS TimeTableUseMode,
 
     f.late_minutes AS LateMinutes,
     f.early_out_minutes AS EarlyOutMinutes,
@@ -108,14 +133,12 @@ OUTER APPLY
         STUFF(
             (
                 SELECT
-                    ',' + CONVERT(varchar(8), CAST(t.punch_time AS time), 108)
-                    + '('
+                    ',' + CONVERT(varchar(5), CAST(t.punch_time AS time), 108)
                     + CASE
-                        WHEN t.punch_state IN ('0', '4') THEN 'IN'
-                        WHEN t.punch_state IN ('1', '5') THEN 'OUT'
+                        WHEN t.punch_state IN ('0', '4') THEN 'i'
+                        WHEN t.punch_state IN ('1', '5') THEN 'o'
                         ELSE CONVERT(varchar(10), t.punch_state)
                       END
-                    + ')'
                 FROM dbo.iclock_transaction t
                 WHERE t.emp_id = f.emp_id
                   AND t.punch_time >= DATEADD(HOUR, 3, CAST(f.att_date AS datetime2(0)))

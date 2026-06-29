@@ -73,7 +73,7 @@ BEGIN
         reconciliation_status varchar(50) NULL,
         reconciliation_variance_minutes decimal(10,2) NULL,
         work_gap_minutes decimal(10,2) NULL,
-        [Leaves] int NULL,
+        [Leaves] decimal(10,2) NULL,
         interval_worked_minutes int NULL,
         CONSTRAINT PK_TempFacts PRIMARY KEY CLUSTERED (emp_id, att_date)
     );

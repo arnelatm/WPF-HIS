@@ -630,7 +630,7 @@
       </PropertyElementName>
       <PropertyElementName>
         <Name>DoNotDropStoredProcedures</Name>
-        <Value>False</Value>
+        <Value>True</Value>
       </PropertyElementName>
       <PropertyElementName>
         <Name>DoNotDropSymmetricKeys</Name>

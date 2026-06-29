@@ -14,6 +14,10 @@ BEGIN
             e.first_name,
             d.dept_name AS department_name,
 
+            MAX(CASE WHEN ISNULL(f.is_flex_duty, 0) = 1 THEN 1 ELSE 0 END) AS has_flex_duty,
+            SUM(CASE WHEN ISNULL(f.is_flex_duty, 0) = 1 THEN 1 ELSE 0 END) AS flex_duty_days,
+            CAST(SUM(ISNULL(f.flex_duty_minutes, 0)) AS decimal(10,2)) AS total_flex_duty_minutes,
+
             SUM(CASE WHEN f.daily_status = 'RestDay' THEN 1 ELSE 0 END) AS rest_days,
             SUM(CASE
                 WHEN ISNULL(f.required_scheduled_hours, 0) = 0
@@ -44,6 +48,8 @@ BEGIN
                 WHEN f.attendance_status = 'Absent'
                 THEN 1 ELSE 0
             END) AS absence_days,
+
+            CAST(SUM(ISNULL(f.[Leaves], 0)) AS decimal(10,2)) AS total_leave_days,
 
             CAST(SUM(
                 CASE
@@ -114,6 +120,9 @@ BEGIN
         FROM dbo.custom_att_fact_DailyAttendance f
         LEFT JOIN dbo.personnel_employee e
             ON f.emp_id = e.id
+        INNER JOIN dbo.att_attemployee ae
+            ON ae.emp_id = f.emp_id
+           AND ae.enable_attendance = 1
         LEFT JOIN dbo.personnel_department d
             ON e.department_id = d.id
         WHERE f.att_date BETWEEN @DateFrom AND @DateTo
@@ -136,12 +145,16 @@ BEGIN
         p.emp_code AS emp_code,
         p.first_name AS [First Name],
         p.department_name AS [Department],
+        CASE WHEN p.has_flex_duty = 1 THEN 'Yes' ELSE 'No' END AS [Flex Duty],
+        p.flex_duty_days AS [Flex Duty Days],
+        p.total_flex_duty_minutes AS [Flex Duty Minutes],
         p.required_work_days + p.rest_days + p.holiday_days AS [Total Days],
         p.rest_days AS [Rest Days],
         p.holiday_days AS [Holiday],
         p.required_work_days AS [Required Work Days],
         p.actual_required_days_present AS [Actual Required Days Present],
         p.absence_days AS [Absence Days],
+        p.total_leave_days AS [Total Leave Days],
         CAST(
             CASE
                 WHEN p.required_work_days > 0

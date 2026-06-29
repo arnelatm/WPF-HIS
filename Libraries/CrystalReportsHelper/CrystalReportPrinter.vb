@@ -53,6 +53,8 @@ Public Class CrystalReportPrinter
                 UseIGroupConnection()
             Case $"KIZEN"
                 UseKizenConnection()
+            Case $"BIOTIME"
+                UseBioTimeConnection()
             Case Else
                 MessageBox.Show($"No database connection specified or connection name not recognized.")
                 Debugger.Break()
@@ -93,6 +95,8 @@ Public Class CrystalReportPrinter
                 UseIGroupConnection()
             Case $"KIZEN"
                 UseKizenConnection()
+            Case $"BIOTIME"
+                UseBioTimeConnection()
             Case Else
                 MessageBox.Show($"No database connection specified or connection name not recognized.")
                 Debugger.Break()
@@ -133,6 +137,13 @@ Public Class CrystalReportPrinter
         _database = ConfigurationManager.AppSettings.Get("DatabaseKizen")
     End Sub
 
+    Private Sub UseBioTimeConnection()
+        _reportPath = ConfigurationManager.AppSettings.Get("ReportPathsBioTime")
+        _uid = ConfigurationManager.AppSettings.Get("UIDBioTime")
+        _pwd = ConfigurationManager.AppSettings.Get("PWDBioTime")
+        _server = ConfigurationManager.AppSettings.Get("ServerTranslatorBioTime")
+        _database = ConfigurationManager.AppSettings.Get("DatabaseBioTime")
+    End Sub
     Public Property ReportFileName() As String
 
     Public Property PrintJobName() As String
@@ -270,7 +281,7 @@ Public Class CrystalReportPrinter
             For i = 0 To args.Length - 1 Step 2
                 Dim value As Object = GlobalFunctions.ConvertObjectToType(args(i))
                 Dim name As String = args(i + 1).ToString()
-                _report.SetParameterValue(name, value)
+                SetReportParameterValue(name, value)
             Next
         End If
     End Sub
@@ -279,9 +290,78 @@ Public Class CrystalReportPrinter
         For i = 0 To args.Length - 1 Step 2
             Dim value As Object = GlobalFunctions.ConvertObjectToType(args(i))
             Dim name As String = args(i + 1).ToString()
-            _report.SetParameterValue(name, value)
+            SetReportParameterValue(name, value)
         Next
     End Sub
+
+    Private Sub SetReportParameterValue(name As String, value As Object)
+        Dim resolvedName As String = ResolveParameterName(name)
+
+        If resolvedName Is Nothing Then
+            If IsOptionalReportParameter(name) Then
+                Return
+            End If
+
+            Throw New ArgumentException(
+                $"Crystal report parameter '{name}' was not found. Available parameters: {GetAvailableParameterNames()}")
+        End If
+
+        _report.SetParameterValue(resolvedName, value)
+    End Sub
+
+    Private Function ResolveParameterName(name As String) As String
+        If _report Is Nothing OrElse _report.DataDefinition Is Nothing Then
+            Return name
+        End If
+
+        For Each pf As ParameterFieldDefinition In _report.DataDefinition.ParameterFields
+            If String.Equals(pf.ParameterFieldName, name, StringComparison.OrdinalIgnoreCase) Then
+                Return pf.ParameterFieldName
+            End If
+        Next
+
+        Dim alternateName As String
+        If name.StartsWith("@", StringComparison.Ordinal) Then
+            alternateName = name.Substring(1)
+        Else
+            alternateName = "@" & name
+        End If
+
+        For Each pf As ParameterFieldDefinition In _report.DataDefinition.ParameterFields
+            If String.Equals(pf.ParameterFieldName, alternateName, StringComparison.OrdinalIgnoreCase) Then
+                Return pf.ParameterFieldName
+            End If
+        Next
+
+        For Each pf As ParameterFieldDefinition In _report.DataDefinition.ParameterFields
+            Dim normalizedParameterName As String = pf.ParameterFieldName.TrimStart("@"c)
+            Dim normalizedRequestedName As String = name.TrimStart("@"c)
+            If String.Equals(normalizedParameterName, normalizedRequestedName, StringComparison.OrdinalIgnoreCase) Then
+                Return pf.ParameterFieldName
+            End If
+        Next
+
+        Return Nothing
+    End Function
+
+    Private Function IsOptionalReportParameter(name As String) As Boolean
+        Return String.Equals(name, "ReportTitle", StringComparison.OrdinalIgnoreCase) OrElse
+               String.Equals(name, "EstablishmentName", StringComparison.OrdinalIgnoreCase) OrElse
+               String.Equals(name, "Language", StringComparison.OrdinalIgnoreCase)
+    End Function
+
+    Private Function GetAvailableParameterNames() As String
+        If _report Is Nothing OrElse _report.DataDefinition Is Nothing Then
+            Return String.Empty
+        End If
+
+        Dim names As New System.Collections.Generic.List(Of String)
+        For Each pf As ParameterFieldDefinition In _report.DataDefinition.ParameterFields
+            names.Add(pf.ParameterFieldName)
+        Next
+
+        Return String.Join(", ", names)
+    End Function
 
     Private Sub ClearParameterValues()
         If _report Is Nothing OrElse _report.DataDefinition Is Nothing Then

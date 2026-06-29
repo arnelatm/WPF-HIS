@@ -2,10 +2,13 @@ CREATE PROCEDURE [dbo].[custom_att_GetDailySchedulePunchAudit]
     @BeginningDate date,
     @EndDate date,
     @EmpID int = NULL,
-    @IssuesOnly bit = 0
+    @IssuesOnly bit = 0,
+    @EmpCode nvarchar(20) = NULL
 AS
 BEGIN
     SET NOCOUNT ON;
+
+    SET @EmpCode = NULLIF(LTRIM(RTRIM(@EmpCode)), '');
 
     IF @BeginningDate > @EndDate
     BEGIN
@@ -75,6 +78,7 @@ BEGIN
         ON ae.emp_id = f.emp_id
     WHERE f.att_date BETWEEN @BeginningDate AND @EndDate
       AND (@EmpID IS NULL OR f.emp_id = @EmpID)
+      AND (@EmpCode IS NULL OR f.emp_code = @EmpCode OR e.emp_code = @EmpCode)
       AND NOT EXISTS
       (
           SELECT 1
@@ -700,6 +704,7 @@ BEGIN
                 'en-US'
             ) AS EffectivePunchOut2,
             punch_lists.AllPunches,
+            punch_lists.AllPunches AS AllRawPunches,
             CASE
                 WHEN ISNULL(rs.schedule_use_mode, 0) = 1
                   OR ISNULL(rs.EffectiveScheduleAlias, '') LIKE '%Flex%'
@@ -959,14 +964,12 @@ BEGIN
                 STUFF(
                     (
                         SELECT
-                            ',' + FORMAT(p.punch_time, 'hh:mm tt', 'en-US')
-                            + '('
+                            ',' + FORMAT(p.punch_time, 'HH:mm', 'en-US')
                             + CASE
-                                WHEN p.punch_state IN (0, 4) THEN 'IN'
-                                WHEN p.punch_state IN (1, 5) THEN 'OUT'
+                                WHEN p.punch_state IN (0, 4) THEN 'i'
+                                WHEN p.punch_state IN (1, 5) THEN 'o'
                                 ELSE CONVERT(varchar(10), p.punch_state)
                               END
-                            + ')'
                         FROM #Punches p
                         WHERE p.emp_id = f.emp_id
                           AND p.work_date = f.att_date

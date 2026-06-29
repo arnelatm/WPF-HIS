@@ -59,7 +59,7 @@ BEGIN
         reconciliation_variance_minutes decimal(10,2) NULL,
         work_gap_minutes decimal(10,2) NULL,
         corrected bit NULL,
-        [Leaves] int NULL,
+        [Leaves] decimal(10,2) NULL,
         CONSTRAINT PK_TempDailyTraceFact PRIMARY KEY CLUSTERED (emp_id, att_date)
     );
 

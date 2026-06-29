@@ -1303,6 +1303,10 @@ Namespace PresentationLayer.Views.Forms
             RunReportNew(Of PayrollPrinting)()
         End Sub
 
+        Private Sub ToolStripMenuItemAttendanceReports_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemAttendanceReports.Click
+            RunForm(Of ReportSelectorForm, ReportSelectorPresenter(Of ReportSelectorModel), String)("Attendance")
+        End Sub
+
         Private Sub ToolStripMenuItemPurchaseOrderApproval_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPurchaseOrderApproval.Click
             RunForm(Of PurchaseOrderApprovalForm, PurchaseOrderApprovalPresenter(Of PurchaseModel))()
         End Sub

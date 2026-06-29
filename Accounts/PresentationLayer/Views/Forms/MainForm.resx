@@ -4888,6 +4888,12 @@
   <data name="ToolStripMenuItemBankTransferReport.Text" xml:space="preserve">
     <value>Bank Transfer Report</value>
   </data>
+  <data name="ToolStripMenuItemAttendanceReports.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 22</value>
+  </data>
+  <data name="ToolStripMenuItemAttendanceReports.Text" xml:space="preserve">
+    <value>Attendance Reports</value>
+  </data>
   <data name="ToolStripMenuItemEmployeeIDPrinting.Size" type="System.Drawing.Size, System.Drawing">
     <value>209, 22</value>
   </data>
@@ -7751,6 +7757,12 @@
     <value>ToolStripMenuItemBankTransferReport</value>
   </data>
   <data name="&gt;&gt;ToolStripMenuItemBankTransferReport.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolStripMenuItemAttendanceReports.Name" xml:space="preserve">
+    <value>ToolStripMenuItemAttendanceReports</value>
+  </data>
+  <data name="&gt;&gt;ToolStripMenuItemAttendanceReports.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ToolStripMenuItemHRReports.Name" xml:space="preserve">

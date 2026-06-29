@@ -45,7 +45,7 @@ Public Class CrViewer
         ReportPrinter.ReportFileName = reportFileName
         SetParameters(reportArgs, AddDefaultParameters)
         ReportPrinter.ClearDataSourceConnections()
-        SetupCrViewer()
+        SetupCrViewer(ShouldPromptForParameters(reportArgs, AddDefaultParameters))
 
     End Sub
 
@@ -60,6 +60,15 @@ Public Class CrViewer
             ReportPrinter.SetParameterValue({reportArgs.Language, "Language"})
         End If
     End Sub
+
+    Private Function ShouldPromptForParameters(reportArgs As CrPrintableArgs, addDefaultParameters As Boolean) As Boolean
+        If addDefaultParameters Then
+            Return False
+        End If
+
+        Return reportArgs IsNot Nothing AndAlso
+               (reportArgs.ReportParameters Is Nothing OrElse reportArgs.ReportParameters.Length = 0)
+    End Function
 
     Private Sub SetParameters(reportTitle As String, formCulture As CultureInfo, args As Object)
         Dim language As String
@@ -88,7 +97,7 @@ Public Class CrViewer
     '    Report.SetReportProperties()
     'End Sub
 
-    Protected Sub SetupCrViewer()
+    Protected Sub SetupCrViewer(Optional promptForParameters As Boolean = False)
         WindowState = FormWindowState.Maximized
         Dim ceCulture As CeLocale
         If Me.FormCulture.Name.ToLower().Remove(2) = "ar" Then
@@ -102,9 +111,27 @@ Public Class CrViewer
             .BringToFront()
             .ReportSource = ReportPrinter.GetReportSource()
             .SetProductLocale(CInt(ceCulture))
-            .Refresh()
+            If promptForParameters Then
+                .ToolPanelView = Global.CrystalDecisions.Windows.Forms.ToolPanelViewType.ParameterPanel
+                .ShowParameterPanelButton = True
+                SetViewerPropertyIfAvailable(CrystalReportViewer1, "EnableParameterPrompt", True)
+                SetViewerPropertyIfAvailable(CrystalReportViewer1, "ReuseParameterValuesOnRefresh", False)
+                .RefreshReport()
+            Else
+                .Refresh()
+            End If
         End With
         btnQuit.Visible = True
+    End Sub
+
+    Private Sub SetViewerPropertyIfAvailable(viewer As Global.CrystalDecisions.Windows.Forms.CrystalReportViewer, propertyName As String, value As Object)
+        Try
+            Dim pi = viewer.GetType().GetProperty(propertyName)
+            If pi IsNot Nothing AndAlso pi.CanWrite Then
+                pi.SetValue(viewer, value, Nothing)
+            End If
+        Catch
+        End Try
     End Sub
 
     Public Sub SetDb(Optional dbCName As String = Nothing)

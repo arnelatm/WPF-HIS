@@ -34,7 +34,14 @@ Namespace PresentationLayer.Presenters
         Protected Overrides Sub CreateDataSources()
             Dim reportGroupList As List(Of ReportGroupModel) = Service.GetList(Of ReportGroupModel)
             GlobalVariables.Mapper.Map(reportGroupList, View.ReportGroupList)
-            UpdateReportList(View.ReportGroupList(0).IdNo)
+            Dim selectedGroup = reportGroupList.Find(Function(rg) rg.ReportGroupCode = _reportGroupCode)
+            If selectedGroup Is Nothing AndAlso reportGroupList.Count > 0 Then
+                selectedGroup = reportGroupList(0)
+            End If
+
+            If selectedGroup IsNot Nothing Then
+                UpdateReportList(selectedGroup.IdNo)
+            End If
         End Sub
 
         Private Sub UpdateReportList(reportGroupIdNo As Int16)
@@ -60,80 +67,78 @@ Namespace PresentationLayer.Presenters
 
         Public Sub OnReportDoubleClickEvent(reportIdNo As Int16)
             Dim report As ReportModel = Service.GetRecordByIdNo(Of ReportModel)(reportIdNo)
-            Dim queryForm As String = report.QueryForm
+            Dim queryForm As String = If(report.QueryForm, "")
             report.ReportFileName = IIf(Strings.Right(report.ReportFileName, 4).ToLower() = $".rpt", report.ReportFileName, report.ReportFileName + ".rpt")
-            If queryForm Is Nothing Then
-                MessageBox.Show("Missing QueryForm Parameter on Report")
-                'Dim cForm = New ReportFormIGroup(report.ReportFileName + ".rpt", CultureInfo.CurrentCulture, If(parameters.Count() = 0, Nothing, parameters))
-                'cForm.Show()
-            Else
-                'Dim formToRun As Form= Activator.CreateInstance(GetType(DocumentEntryTv))
-                'Dim pType As Type
-                'formToRun.Presenter = Activator.CreateInstance(pType, {formToRun})
-                'formToRun.AddOnOpen = True
-                'formToRun.QuitOnSave = True
-                'formToRun.Show()
-                Select Case queryForm
-                    Case "ContactDateRangeForm"
-                        Dim formToRun As New ContactDateRangeForm(report)
-                        formToRun.Presenter = New ContactDateRangePresenter(Of ReportModel)(formToRun, report)
-                        formToRun.Show()
-                    Case "DateRangeForm"
-                        Dim formToRun As New DateRangeForm(report)
-                        formToRun.Presenter = New DateRangePresenter(Of ReportModel)(formToRun, report)
-                        formToRun.Show()
-                    Case "DateTimeRangeForm"
-                        Dim formToRun As New DateTimeRangeForm(report)
-                        formToRun.Presenter = New DateTimeRangePresenter(Of ReportModel)(formToRun, report)
-                        formToRun.Show()
-                    Case Else
-                        Dim fileName As String = report.ReportFileName
-                        If Not fileName.ToLower().EndsWith(".rpt") Then fileName &= ".rpt"
+            'Dim formToRun As Form= Activator.CreateInstance(GetType(DocumentEntryTv))
+            'Dim pType As Type
+            'formToRun.Presenter = Activator.CreateInstance(pType, {formToRun})
+            'formToRun.AddOnOpen = True
+            'formToRun.QuitOnSave = True
+            'formToRun.Show()
+            Select Case queryForm.Trim()
+                Case "ContactDateRangeForm"
+                    Dim formToRun As New ContactDateRangeForm(report)
+                    formToRun.Presenter = New ContactDateRangePresenter(Of ReportModel)(formToRun, report)
+                    formToRun.Show()
+                Case "DateRangeForm"
+                    Dim formToRun As New DateRangeForm(report)
+                    formToRun.Presenter = New DateRangePresenter(Of ReportModel)(formToRun, report)
+                    formToRun.Show()
+                Case "DateTimeRangeForm"
+                    Dim formToRun As New DateTimeRangeForm(report)
+                    formToRun.Presenter = New DateTimeRangePresenter(Of ReportModel)(formToRun, report)
+                    formToRun.Show()
+                Case Else
+                    Dim fileName As String = report.ReportFileName
+                    If Not fileName.ToLower().EndsWith(".rpt") Then fileName &= ".rpt"
 
-                        Dim reportArgs As New CrPrintableArgs
-                        Dim reportTitle As String
-                        'reportTitle = Libraries.MessagingLibrary.Messaging.SelectReportName(_reportModel.ReportTitle, beginningDate, endingDate, curCulture, "T")
-                        'If _reportModel.QueryParameters IsNot Nothing AndAlso _reportModel.QueryParameters <> "" Then
-                        '    Dim qParameters As String = _reportModel.QueryParameters
-                        '    Dim lParameters As String() = qParameters.Split(","c)
-                        '    For Each item In lParameters
-                        '        reportArgs.ReportParameters.Add(item)
-                        '    Next
-                        'End If
+                    Dim reportArgs As New CrPrintableArgs
+                    Dim reportTitle As String
+                    'reportTitle = Libraries.MessagingLibrary.Messaging.SelectReportName(_reportModel.ReportTitle, beginningDate, endingDate, curCulture, "T")
+                    'If _reportModel.QueryParameters IsNot Nothing AndAlso _reportModel.QueryParameters <> "" Then
+                    '    Dim qParameters As String = _reportModel.QueryParameters
+                    '    Dim lParameters As String() = qParameters.Split(","c)
+                    '    For Each item In lParameters
+                    '        reportArgs.ReportParameters.Add(item)
+                    '    Next
+                    'End If
+                    If report.DatabaseName = "" Then
                         reportArgs.DataBaseConnectionName = "Kizen" ' _reportModel.DatabaseName
-                        Dim p As New PrintReportPresenter(Of AccountModel)
-                        p.ViewReport(fileName, reportArgs, False)
+                    Else
+                        reportArgs.DataBaseConnectionName = report.DatabaseName
+                    End If
+
+                    Dim p As New PrintReportPresenter(Of AccountModel)
+                    p.ViewReport(fileName, reportArgs, False)
 
 
-                        'Dim fullPath As String = If(IO.Path.IsPathRooted(fileName), fileName, IO.Path.Combine(Application.StartupPath, fileName))
+                    'Dim fullPath As String = If(IO.Path.IsPathRooted(fileName), fileName, IO.Path.Combine(Application.StartupPath, fileName))
 
-                        'If Not IO.File.Exists(fullPath) Then
-                        '    MessageBox.Show("Report file not found: " & fullPath)
-                        '    Return
-                        'End If
+                    'If Not IO.File.Exists(fullPath) Then
+                    '    MessageBox.Show("Report file not found: " & fullPath)
+                    '    Return
+                    'End If
 
-                        'Dim rptDoc As New CrystalDecisions.CrystalReports.Engine.ReportDocument()
-                        'rptDoc.Load(fullPath)
+                    'Dim rptDoc As New CrystalDecisions.CrystalReports.Engine.ReportDocument()
+                    'rptDoc.Load(fullPath)
 
-                        'Dim frm As New Form()
-                        'Dim viewer As New CrystalDecisions.Windows.Forms.CrystalReportViewer()
-                        'viewer.Dock = DockStyle.Fill
-                        'viewer.ReportSource = rptDoc
-                        'frm.Controls.Add(viewer)
-                        'frm.Text = If(String.IsNullOrEmpty(report.ReportName), IO.Path.GetFileNameWithoutExtension(fullPath), report.ReportName)
+                    'Dim frm As New Form()
+                    'Dim viewer As New CrystalDecisions.Windows.Forms.CrystalReportViewer()
+                    'viewer.Dock = DockStyle.Fill
+                    'viewer.ReportSource = rptDoc
+                    'frm.Controls.Add(viewer)
+                    'frm.Text = If(String.IsNullOrEmpty(report.ReportName), IO.Path.GetFileNameWithoutExtension(fullPath), report.ReportName)
 
-                        'AddHandler frm.FormClosed, Sub(s, e)
-                        '                               Try
-                        '                                   rptDoc.Close()
-                        '                                   rptDoc.Dispose()
-                        '                               Catch
-                        '                               End Try
-                        '                           End Sub
+                    'AddHandler frm.FormClosed, Sub(s, e)
+                    '                               Try
+                    '                                   rptDoc.Close()
+                    '                                   rptDoc.Dispose()
+                    '                               Catch
+                    '                               End Try
+                    '                           End Sub
 
-                        'frm.Show()
-                End Select
-
-            End If
+                    'frm.Show()
+            End Select
 
         End Sub
 

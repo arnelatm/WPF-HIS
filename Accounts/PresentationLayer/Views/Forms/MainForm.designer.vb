@@ -206,6 +206,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemPayrollReport = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPeriodicPayroll = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemBankTransferReport = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemAttendanceReports = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemHRReports = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemEmployeeIDPrinting = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemEmployeeLeaveReport = New System.Windows.Forms.ToolStripMenuItem()
@@ -1020,7 +1021,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemReports
             '
-            Me.ToolStripMenuItemReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemStatementOfAccountsPayable, Me.ToolStripMenuItemStatementOfAccountsReceivable, Me.ToolStripMenuItemStatementOfEmployeeLoans, Me.ToolStripMenuItemSummaryOfEmployeeLoans, Me.ToolStripMenuItemSummaryOfAccountsPayable, Me.ToolStripMenuItemSummaryOfAccountsReceivable, Me.ToolStripMenuItemTrialBalance, Me.ToolStripMenuItemBalanceSheet, Me.ToolStripMenuItemIncomeStatement, Me.ToolStripMenuItemAccountingtLists, Me.ToolStripMenuItemARAging, Me.ToolStripMenuItemAPAging, Me.ToolStripMenuItemCheckPrinting, Me.ToolStripMenuItemPayrollReport, Me.ToolStripMenuItemHRReports, Me.ToolStripMenuItemReceptionReports, Me.ToolStripMenuItemAccountingReports, Me.ToolStripMenuItemLaboratoryReports, Me.ToolStripMenuItemPMRReports, Me.ToolStripMenuItemPharmacyReports, Me.ToolStripMenuItemClinicReports, Me.ToolStripMenuItemInventoryReports, Me.ToolStripMenuItemOtherReports})
+            Me.ToolStripMenuItemReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemStatementOfAccountsPayable, Me.ToolStripMenuItemStatementOfAccountsReceivable, Me.ToolStripMenuItemStatementOfEmployeeLoans, Me.ToolStripMenuItemSummaryOfEmployeeLoans, Me.ToolStripMenuItemSummaryOfAccountsPayable, Me.ToolStripMenuItemSummaryOfAccountsReceivable, Me.ToolStripMenuItemTrialBalance, Me.ToolStripMenuItemBalanceSheet, Me.ToolStripMenuItemIncomeStatement, Me.ToolStripMenuItemAccountingtLists, Me.ToolStripMenuItemARAging, Me.ToolStripMenuItemAPAging, Me.ToolStripMenuItemCheckPrinting, Me.ToolStripMenuItemPayrollReport, Me.ToolStripMenuItemAttendanceReports, Me.ToolStripMenuItemHRReports, Me.ToolStripMenuItemReceptionReports, Me.ToolStripMenuItemAccountingReports, Me.ToolStripMenuItemLaboratoryReports, Me.ToolStripMenuItemPMRReports, Me.ToolStripMenuItemPharmacyReports, Me.ToolStripMenuItemClinicReports, Me.ToolStripMenuItemInventoryReports, Me.ToolStripMenuItemOtherReports})
             Me.ToolStripMenuItemReports.Name = "ToolStripMenuItemReports"
             resources.ApplyResources(Me.ToolStripMenuItemReports, "ToolStripMenuItemReports")
             '
@@ -1198,6 +1199,11 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.ToolStripMenuItemBankTransferReport.Name = "ToolStripMenuItemBankTransferReport"
             resources.ApplyResources(Me.ToolStripMenuItemBankTransferReport, "ToolStripMenuItemBankTransferReport")
+            '
+            'ToolStripMenuItemAttendanceReports
+            '
+            Me.ToolStripMenuItemAttendanceReports.Name = "ToolStripMenuItemAttendanceReports"
+            resources.ApplyResources(Me.ToolStripMenuItemAttendanceReports, "ToolStripMenuItemAttendanceReports")
             '
             'ToolStripMenuItemHRReports
             '
@@ -1688,6 +1694,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ToolStripMenuItemTransactionNotesTranslator As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemPayrollReport As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemPeriodicPayroll As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemAttendanceReports As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemRecurringPayrollEntry As ToolStripMenuItem
         Friend WithEvents ToolStripButtonDebug As ToolStripButton
         Friend WithEvents ToolStripMenuItemAccountActivity As ToolStripMenuItem

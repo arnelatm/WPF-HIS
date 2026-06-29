@@ -642,6 +642,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reports", "Reports", "{56B6
 		IGroup\Reports\XrayPlainReport.rpt = IGroup\Reports\XrayPlainReport.rpt
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BioTime", "BioTime", "{3B9C15A8-3A4B-450A-B72A-195E4D8386B5}"
+	ProjectSection(SolutionItems) = preProject
+		Accounts\Reports\BioTime\Daily Employee Punch Audit Report - Crystal Setup.md = Accounts\Reports\BioTime\Daily Employee Punch Audit Report - Crystal Setup.md
+		Accounts\Reports\BioTime\Daily Employee Punch Audit Report - Report Registration.sql = Accounts\Reports\BioTime\Daily Employee Punch Audit Report - Report Registration.sql
+		Accounts\Reports\BioTime\Periodic Attendance Report - Crystal Setup.md = Accounts\Reports\BioTime\Periodic Attendance Report - Crystal Setup.md
+		Accounts\Reports\BioTime\Periodic Attendance Report - Report Registration.sql = Accounts\Reports\BioTime\Periodic Attendance Report - Report Registration.sql
+	EndProjectSection
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Report", "Report", "{0F2DC3EB-C8B5-4343-B129-FB9FE8B2678E}"
 	ProjectSection(SolutionItems) = preProject
 		IGroup\Report\BarcodePharmacy.rpt = IGroup\Report\BarcodePharmacy.rpt
@@ -1222,6 +1230,7 @@ Global
 		{0F2DC3EB-C8B5-4343-B129-FB9FE8B2678E} = {295B8E01-53F1-4E27-BA10-FFCAF2EED4F5}
 		{286516EF-7800-4C1C-99C3-90AC5DB4E755} = {0F2DC3EB-C8B5-4343-B129-FB9FE8B2678E}
 		{4799C1DD-2CC8-4C8D-BB72-4A583E379DFA} = {56B69066-4EA7-454D-BE37-C492DD319E9C}
+		{3B9C15A8-3A4B-450A-B72A-195E4D8386B5} = {56B69066-4EA7-454D-BE37-C492DD319E9C}
 		{76360FEE-5350-4B1E-80DC-344F996590C2} = {56B69066-4EA7-454D-BE37-C492DD319E9C}
 		{549000D0-E128-4B80-AEDA-C6AF4FCC2989} = {56B69066-4EA7-454D-BE37-C492DD319E9C}
 		{97BC084A-8046-4C51-94FB-D9B89535C87C} = {56B69066-4EA7-454D-BE37-C492DD319E9C}

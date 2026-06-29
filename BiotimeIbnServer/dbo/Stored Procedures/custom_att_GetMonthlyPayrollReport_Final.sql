@@ -72,10 +72,7 @@ BEGIN
                 THEN 1 ELSE 0 
             END) AS partial_days,
 
-            SUM(CASE
-                WHEN ISNULL(f.[Leaves], 0) > 0
-                THEN 1 ELSE 0
-            END) AS leave_days,
+            CAST(SUM(ISNULL(f.[Leaves], 0)) AS decimal(10,2)) AS leave_days,
 
             CAST(SUM(ISNULL(f.required_scheduled_hours, 0)) AS decimal(10,2)) AS total_required_hours,
             CAST(SUM(ISNULL(f.worked_hours, 0)) AS decimal(10,2)) AS total_worked_hours,
