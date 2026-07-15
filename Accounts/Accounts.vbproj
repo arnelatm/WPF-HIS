@@ -2943,6 +2943,7 @@
     <None Include="packages.config" />
     <None Include="PresentationLayer\Views\app-Ibn-Server.config" />
     <None Include="Reports\BioTime\Daily Employee Punch Audit Report - Crystal Setup.md" />
+    <None Include="Reports\BioTime\Employee Absence &amp; Leave Report.rpt" />
     <None Include="Reports\BioTime\Periodic Attendance Report - Crystal Setup.md" />
     <None Include="Reports\IGroup\DosageLabel.rpt" />
     <None Include="ServiceLayer\app-Ibn-Server.config" />
