@@ -6,13 +6,59 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-    ;WITH Periodic AS
+    ;WITH FactScope AS
     (
         SELECT
             f.emp_id,
+            f.att_date,
             e.emp_code,
             e.first_name,
             d.dept_name AS department_name,
+            f.is_flex_duty,
+            f.flex_duty_minutes,
+            f.daily_status,
+            f.required_scheduled_hours,
+            f.date_type,
+            f.attendance_status,
+            f.worked_hours,
+            f.sick_leave_days,
+            f.annual_leave_days,
+            f.compensatory_leave_days,
+            f.other_paid_leave_days,
+            f.unpaid_leave_days,
+            f.regular_worked_minutes,
+            f.ot_minutes,
+            f.late_minutes,
+            f.actual_late_minutes,
+            f.early_out_minutes,
+            f.actual_early_out_minutes,
+            f.actual_excess_minutes,
+            f.anomaly_flag
+        FROM dbo.custom_att_fact_DailyAttendance f
+        LEFT JOIN dbo.personnel_employee e
+            ON f.emp_id = e.id
+        INNER JOIN dbo.att_attemployee ae
+            ON ae.emp_id = f.emp_id
+           AND ae.enable_attendance = 1
+        LEFT JOIN dbo.personnel_department d
+            ON e.department_id = d.id
+        WHERE f.att_date BETWEEN @DateFrom AND @DateTo
+          AND (@EmpID IS NULL OR f.emp_id = @EmpID)
+          AND NOT EXISTS
+          (
+              SELECT 1
+              FROM dbo.personnel_resign r
+              WHERE r.employee_id = f.emp_id
+                AND f.att_date > r.resign_date
+          )
+    ),
+    Periodic AS
+    (
+        SELECT
+            f.emp_id,
+            f.emp_code,
+            f.first_name,
+            f.department_name,
 
             MAX(CASE WHEN ISNULL(f.is_flex_duty, 0) = 1 THEN 1 ELSE 0 END) AS has_flex_duty,
             SUM(CASE WHEN ISNULL(f.is_flex_duty, 0) = 1 THEN 1 ELSE 0 END) AS flex_duty_days,
@@ -49,7 +95,17 @@ BEGIN
                 THEN 1 ELSE 0
             END) AS absence_days,
 
-            CAST(SUM(ISNULL(f.[Leaves], 0)) AS decimal(10,2)) AS total_leave_days,
+            CAST(SUM(ISNULL(f.sick_leave_days, 0)) AS decimal(10,2)) AS sick_leave_days,
+            CAST(SUM(ISNULL(f.annual_leave_days, 0)) AS decimal(10,2)) AS annual_leave_days,
+            CAST(SUM(ISNULL(f.compensatory_leave_days, 0)) AS decimal(10,2)) AS compensatory_leave_days,
+            CAST(SUM(ISNULL(f.other_paid_leave_days, 0)) AS decimal(10,2)) AS other_paid_leave_days,
+            CAST(SUM(ISNULL(f.unpaid_leave_days, 0)) AS decimal(10,2)) AS unpaid_leave_days,
+            CAST(SUM(
+                ISNULL(f.sick_leave_days, 0)
+                + ISNULL(f.annual_leave_days, 0)
+                + ISNULL(f.compensatory_leave_days, 0)
+                + ISNULL(f.other_paid_leave_days, 0)
+            ) AS decimal(10,2)) AS total_leave_days,
 
             CAST(SUM(
                 CASE
@@ -117,28 +173,12 @@ BEGIN
                  AND f.anomaly_flag IN ('MissingIn', 'MissingOut', 'NoPunch', 'IncompletePunchPair')
                 THEN 1 ELSE 0
             END) AS incomplete_punch_in_or_out_days
-        FROM dbo.custom_att_fact_DailyAttendance f
-        LEFT JOIN dbo.personnel_employee e
-            ON f.emp_id = e.id
-        INNER JOIN dbo.att_attemployee ae
-            ON ae.emp_id = f.emp_id
-           AND ae.enable_attendance = 1
-        LEFT JOIN dbo.personnel_department d
-            ON e.department_id = d.id
-        WHERE f.att_date BETWEEN @DateFrom AND @DateTo
-          AND (@EmpID IS NULL OR f.emp_id = @EmpID)
-          AND NOT EXISTS
-          (
-              SELECT 1
-              FROM dbo.personnel_resign r
-              WHERE r.employee_id = f.emp_id
-                AND f.att_date > r.resign_date
-          )
+        FROM FactScope f
         GROUP BY
             f.emp_id,
-            e.emp_code,
-            e.first_name,
-            d.dept_name
+            f.emp_code,
+            f.first_name,
+            f.department_name
     )
     SELECT
         p.emp_id AS emp_id,
@@ -153,7 +193,12 @@ BEGIN
         p.holiday_days AS [Holiday],
         p.required_work_days AS [Required Work Days],
         p.actual_required_days_present AS [Actual Required Days Present],
-        p.absence_days AS [Absence Days],
+        CAST(p.absence_days + ISNULL(p.unpaid_leave_days, 0) AS decimal(10,2)) AS [Absence Days],
+        ISNULL(p.sick_leave_days, 0) AS [Sick Leave Days],
+        ISNULL(p.annual_leave_days, 0) AS [Annual Leave Days],
+        ISNULL(p.compensatory_leave_days, 0) AS [Compensatory Leave Days],
+        ISNULL(p.other_paid_leave_days, 0) AS [Other Paid Leave Days],
+        ISNULL(p.unpaid_leave_days, 0) AS [Unpaid Leave Days],
         p.total_leave_days AS [Total Leave Days],
         CAST(
             CASE
@@ -165,7 +210,7 @@ BEGIN
         CAST(
             CASE
                 WHEN p.required_work_days > 0
-                THEN p.absence_days * 100.0 / p.required_work_days
+                THEN (p.absence_days + ISNULL(p.unpaid_leave_days, 0)) * 100.0 / p.required_work_days
                 ELSE 0
             END AS decimal(10,2)
         ) AS [Absent %],

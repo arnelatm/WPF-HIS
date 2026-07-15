@@ -33,13 +33,13 @@ BEGIN
         @EmpID,
         @StartTime,
         'Running',
-        'Started dbo.Custom_att_ProcessMonthlyPayrollFacts.'
+        'Started dbo.custom_att_processPayrollFacts.'
     );
 
     SET @LogID = SCOPE_IDENTITY();
 
     BEGIN TRY
-        EXEC dbo.Custom_att_ProcessMonthlyPayrollFacts
+        EXEC dbo.custom_att_processPayrollFacts
             @DateFrom = @DateFrom,
             @DateTo   = @DateTo,
             @EmpID    = @EmpID;
@@ -56,7 +56,7 @@ BEGIN
             duration_seconds = DATEDIFF(SECOND, @StartTime, GETDATE()),
             rows_loaded = @RowsLoaded,
             status = 'Succeeded',
-            remarks = 'Completed dbo.Custom_att_ProcessMonthlyPayrollFacts.'
+            remarks = 'Completed dbo.custom_att_processPayrollFacts.'
         WHERE id = @LogID;
 
         SELECT
@@ -90,5 +90,3 @@ BEGIN
         THROW;
     END CATCH;
 END;
-
-GO

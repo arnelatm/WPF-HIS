@@ -22,7 +22,8 @@ Key Outputs:
 - total_worked_hours
 
 Used by:
-- dbo.Custom_att_ProcessMonthlyPayrollFacts
+- dbo.custom_att_processPayrollFacts
+- dbo.Custom_att_ProcessMonthlyPayrollFacts wrapper
 - dbo.custom_att_GetMonthlyFactVsRawWorkedHours
 
 Notes:

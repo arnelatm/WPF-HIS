@@ -1,0 +1,301 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>BioTime Migration Guide - ISPADMIN2 to IBN-SERVER</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: #1f2933;
+      font-size: 13px;
+      line-height: 1.45;
+      margin: 28px 34px;
+    }
+    h1 {
+      font-size: 24px;
+      margin: 0 0 6px;
+      color: #102a43;
+    }
+    h2 {
+      font-size: 17px;
+      margin: 22px 0 8px;
+      color: #243b53;
+      border-bottom: 1px solid #d9e2ec;
+      padding-bottom: 4px;
+    }
+    h3 {
+      font-size: 14px;
+      margin: 16px 0 6px;
+      color: #334e68;
+    }
+    p {
+      margin: 6px 0;
+    }
+    .meta {
+      margin: 10px 0 18px;
+      padding: 10px 12px;
+      background: #f0f4f8;
+      border: 1px solid #d9e2ec;
+    }
+    .warning {
+      margin: 12px 0;
+      padding: 10px 12px;
+      background: #fff8e6;
+      border: 1px solid #f0c36d;
+    }
+    ol {
+      margin: 8px 0 8px 22px;
+      padding: 0;
+    }
+    ul {
+      margin: 6px 0 8px 20px;
+      padding: 0;
+    }
+    li {
+      margin: 5px 0;
+    }
+    code, pre {
+      font-family: Consolas, "Courier New", monospace;
+    }
+    code {
+      background: #f5f7fa;
+      border: 1px solid #e4e7eb;
+      padding: 1px 4px;
+    }
+    pre {
+      background: #f5f7fa;
+      border: 1px solid #d9e2ec;
+      padding: 9px 10px;
+      margin: 8px 0 12px;
+      white-space: pre-wrap;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 8px 0 12px;
+    }
+    th, td {
+      border: 1px solid #d9e2ec;
+      padding: 7px 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: #eef2f7;
+    }
+    .checklist li {
+      list-style-type: square;
+    }
+  </style>
+</head>
+<body>
+  <h1>BioTime Migration Guide</h1>
+  <p><strong>Migration from ISPADMIN2 to IBN-SERVER</strong></p>
+
+  <div class="meta">
+    <table>
+      <tr><th>Item</th><th>Value</th></tr>
+      <tr><td>Old live machine</td><td>ISPADMIN2</td></tr>
+      <tr><td>New server</td><td>IBN-SERVER</td></tr>
+      <tr><td>BioTime URL on new server</td><td>http://192.168.64.4:8081</td></tr>
+      <tr><td>Database name</td><td>biotime</td></tr>
+      <tr><td>SQL login</td><td>ISPAdmin</td></tr>
+      <tr><td>Migration method</td><td>Schema Compare + Data Compare, because backup/restore is blocked by SQL Server version difference</td></tr>
+    </table>
+  </div>
+
+  <div class="warning">
+    <strong>Important:</strong> During final migration, do not let ISPADMIN2 and IBN-SERVER both receive live attendance punches at the same time. Stop the old BioTime system first, then sync schema/data, then start the new server.
+  </div>
+
+  <h2>Before Migration</h2>
+  <ol>
+    <li>Confirm BioTime opens on IBN-SERVER at <code>http://192.168.64.4:8081</code>.</li>
+    <li>Confirm these services are running on IBN-SERVER:</li>
+  </ol>
+  <pre>bio-redis    Running
+bio-cache    Running
+bio-monitor  Running</pre>
+
+  <ol start="3">
+    <li>Confirm the SQL login exists and is enabled on IBN-SERVER:</li>
+  </ol>
+  <pre>USE master;
+GO
+
+SELECT name, is_disabled
+FROM sys.sql_logins
+WHERE name = 'ISPAdmin';
+GO</pre>
+
+  <p>If the login is disabled:</p>
+  <pre>USE master;
+GO
+
+ALTER LOGIN ISPAdmin ENABLE;
+GO</pre>
+
+  <ol start="4">
+    <li>Keep a rollback copy of the current IBN-SERVER database if needed. If the current database is only a test database, rename it before final sync:</li>
+  </ol>
+  <pre>ALTER DATABASE biotime MODIFY NAME = biotime_before_migration;
+GO</pre>
+
+  <h2>Final Migration Steps</h2>
+  <ol>
+    <li><strong>Choose a quiet time.</strong> Do the final migration when no employees/devices are actively sending attendance punches.</li>
+    <li><strong>Stop BioTime services on ISPADMIN2.</strong> Open Command Prompt as Administrator on ISPADMIN2:</li>
+  </ol>
+  <pre>net stop bio-monitor
+net stop bio-cache
+net stop bio-redis</pre>
+
+  <p>If there are other BioTime or ZKTeco services, stop them also.</p>
+
+  <ol start="3">
+    <li><strong>Stop BioTime services on IBN-SERVER.</strong> Open Command Prompt as Administrator on IBN-SERVER:</li>
+  </ol>
+  <pre>net stop bio-monitor
+net stop bio-cache
+net stop bio-redis</pre>
+
+  <ol start="4">
+    <li><strong>Run Schema Compare.</strong> In Visual Studio or SQL Compare:</li>
+  </ol>
+  <table>
+    <tr><th>Side</th><th>Database</th></tr>
+    <tr><td>Source</td><td>ISPADMIN2 live biotime database</td></tr>
+    <tr><td>Target</td><td>IBN-SERVER biotime database</td></tr>
+  </table>
+  <p>Include these object types:</p>
+  <ul class="checklist">
+    <li>Tables</li>
+    <li>Views</li>
+    <li>Stored procedures</li>
+    <li>Functions</li>
+    <li>Triggers</li>
+    <li>Indexes</li>
+    <li>Primary keys</li>
+    <li>Foreign keys</li>
+    <li>Default constraints</li>
+    <li>Check constraints</li>
+    <li>Schemas</li>
+    <li>User-defined types</li>
+    <li>Sequences, if any</li>
+  </ul>
+  <p>Apply the schema update to IBN-SERVER.</p>
+
+  <ol start="5">
+    <li><strong>Run Data Compare.</strong></li>
+  </ol>
+  <table>
+    <tr><th>Side</th><th>Database</th></tr>
+    <tr><td>Source</td><td>ISPADMIN2 live biotime database</td></tr>
+    <tr><td>Target</td><td>IBN-SERVER biotime database</td></tr>
+  </table>
+  <p>Copy/sync all BioTime tables, not only attendance tables. Include:</p>
+  <ul class="checklist">
+    <li>Employees/personnel</li>
+    <li>Attendance transactions</li>
+    <li>Devices</li>
+    <li>Schedules/shifts</li>
+    <li>Holidays/leaves</li>
+    <li>Departments/areas</li>
+    <li>User accounts</li>
+    <li>System settings/configuration</li>
+    <li>Calculation/result tables</li>
+  </ul>
+
+  <ol start="6">
+    <li><strong>Fix SQL user mapping on IBN-SERVER.</strong></li>
+  </ol>
+  <pre>USE biotime;
+GO
+
+ALTER USER ISPAdmin WITH LOGIN = ISPAdmin;
+GO
+
+ALTER ROLE db_owner ADD MEMBER ISPAdmin;
+GO</pre>
+
+  <ol start="7">
+    <li><strong>Update statistics on IBN-SERVER.</strong></li>
+  </ol>
+  <pre>USE biotime;
+GO
+
+EXEC sp_updatestats;
+GO</pre>
+
+  <ol start="8">
+    <li><strong>Optional but recommended: check database integrity.</strong></li>
+  </ol>
+  <pre>USE master;
+GO
+
+DBCC CHECKDB ('biotime') WITH NO_INFOMSGS;
+GO</pre>
+  <p>No output means no detected errors.</p>
+
+  <ol start="9">
+    <li><strong>Clear Redis cache/queue on IBN-SERVER.</strong> This prevents old queue data from affecting the newly migrated database.</li>
+  </ol>
+  <pre>cd /d C:\ZKBioTime\redis
+
+ren appendonlydir appendonlydir_bak_migration
+mkdir appendonlydir</pre>
+
+  <p>If these files exist, rename them also:</p>
+  <pre>ren appendonly.aof appendonly.aof.bak_migration
+ren dump.rdb dump.rdb.bak_migration</pre>
+
+  <ol start="10">
+    <li><strong>Start BioTime services on IBN-SERVER.</strong></li>
+  </ol>
+  <pre>net start bio-redis
+net start bio-cache
+net start bio-monitor</pre>
+
+  <p>Confirm in Services:</p>
+  <pre>bio-redis    Running
+bio-cache    Running
+bio-monitor  Running</pre>
+
+  <ol start="11">
+    <li><strong>Test BioTime on IBN-SERVER.</strong> Open <code>http://192.168.64.4:8081</code> and test:</li>
+  </ol>
+  <ul class="checklist">
+    <li>Login</li>
+    <li>Employees open correctly</li>
+    <li>Devices open correctly</li>
+    <li>Attendance records exist</li>
+    <li>Manual correction works</li>
+    <li>Attendance recalculation works</li>
+    <li>Reports generate correctly</li>
+  </ul>
+
+  <ol start="12">
+    <li><strong>Redirect devices/users to IBN-SERVER.</strong></li>
+  </ol>
+  <pre>Server IP: 192.168.64.4
+BioTime URL: http://192.168.64.4:8081</pre>
+
+  <ol start="13">
+    <li><strong>Keep ISPADMIN2 stopped as rollback.</strong> Keep the old PC unchanged for a few days, but do not allow it to receive new live attendance punches.</li>
+  </ol>
+
+  <h2>Final Rule</h2>
+  <pre>Stop old BioTime
+Sync schema
+Sync data
+Fix SQL user mapping
+Clear Redis queue on new server
+Start new BioTime
+Test
+Redirect devices/users</pre>
+
+  <div class="warning">
+    If there is any problem after migration, point users/devices back to ISPADMIN2 only if IBN-SERVER has been stopped first. Avoid running both systems as live systems at the same time.
+  </div>
+</body>
+</html>

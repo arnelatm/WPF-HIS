@@ -132,8 +132,18 @@ BEGIN
           FROM dbo.personnel_resign r
           WHERE r.employee_id = f.emp_id
             AND f.att_date > r.resign_date
-      )
+    )
     OPTION (RECOMPILE);
+
+    CREATE NONCLUSTERED INDEX IX_TempSchedulePunchMismatchFacts_GroupDate
+        ON #Facts (group_id, att_date)
+        INCLUDE (emp_id)
+        WHERE group_id IS NOT NULL;
+
+    CREATE NONCLUSTERED INDEX IX_TempSchedulePunchMismatchFacts_DepartmentDate
+        ON #Facts (department_id, att_date)
+        INCLUDE (emp_id)
+        WHERE department_id IS NOT NULL;
 
     CREATE TABLE #ScheduleCandidates
     (
@@ -161,7 +171,7 @@ BEGIN
     INNER JOIN #Facts f
         ON f.emp_id = ts.employee_id
        AND f.att_date = ts.att_date
-    WHERE ISNULL(ts.status, 0) = 0
+    WHERE ts.status = 0
       AND ts.employee_id IS NOT NULL
       AND ts.att_date IS NOT NULL;
 
@@ -196,7 +206,7 @@ BEGIN
     INNER JOIN #Facts f
         ON f.group_id = gs.group_id
        AND f.att_date BETWEEN gs.start_date AND gs.end_date
-    WHERE ISNULL(gs.status, 0) = 0
+    WHERE gs.status = 0
       AND gs.shift_id IS NOT NULL;
 
     INSERT INTO #ScheduleCandidates
@@ -213,7 +223,7 @@ BEGIN
     INNER JOIN #Facts f
         ON f.department_id = ds.department_id
        AND f.att_date BETWEEN ds.start_date AND ds.end_date
-    WHERE ISNULL(ds.status, 0) = 0
+    WHERE ds.status = 0
       AND ds.shift_id IS NOT NULL;
 
     CREATE CLUSTERED INDEX IX_TempSchedulePunchMismatchCandidates
@@ -528,171 +538,226 @@ BEGIN
     GROUP BY df.emp_id
     HAVING COUNT(*) >= @MinimumMismatchDays;
 
+    SELECT
+        df.*,
+        emc.mismatch_days AS employee_mismatch_days_in_period,
+        emc.employee_worst_in_offset_minutes,
+        emc.employee_worst_out_offset_minutes
+    INTO #ResultFindings
+    FROM #DailyFindings df
+    INNER JOIN #EmployeeMismatchCounts emc
+        ON emc.emp_id = df.emp_id;
+
+    CREATE CLUSTERED INDEX IX_TempSchedulePunchMismatchResult
+        ON #ResultFindings (emp_id, att_date);
+
+    CREATE TABLE #RawPunchRows
+    (
+        emp_id int NOT NULL,
+        att_date date NOT NULL,
+        punch_time datetime2(7) NOT NULL,
+        id int NOT NULL,
+        punch_state nvarchar(5) NOT NULL,
+        CONSTRAINT PK_TempSchedulePunchMismatchRawPunchRows PRIMARY KEY CLUSTERED (emp_id, att_date, punch_time, id)
+    );
+
+    INSERT INTO #RawPunchRows
+    SELECT
+        rf.emp_id,
+        rf.att_date,
+        t.punch_time,
+        t.id,
+        t.punch_state
+    FROM #ResultFindings rf
+    INNER JOIN dbo.iclock_transaction t
+        ON t.emp_id = rf.emp_id
+       AND t.punch_time >= DATEADD(HOUR, 3, CAST(rf.att_date AS datetime2(7)))
+       AND t.punch_time < DATEADD(HOUR, 3, DATEADD(DAY, 1, CAST(rf.att_date AS datetime2(7))))
+    OPTION (RECOMPILE);
+
+    CREATE TABLE #RawPunchLists
+    (
+        emp_id int NOT NULL,
+        att_date date NOT NULL,
+        raw_punches nvarchar(max) NULL,
+        CONSTRAINT PK_TempSchedulePunchMismatchRawPunchLists PRIMARY KEY CLUSTERED (emp_id, att_date)
+    );
+
+    INSERT INTO #RawPunchLists
+    SELECT
+        rf.emp_id,
+        rf.att_date,
+        STUFF(
+            (
+                SELECT
+                    ',' + CONVERT(varchar(8), CAST(rpr.punch_time AS time), 108)
+                    + '('
+                    + CASE
+                        WHEN rpr.punch_state IN (N'0', N'4') THEN 'IN'
+                        WHEN rpr.punch_state IN (N'1', N'5') THEN 'OUT'
+                        ELSE CONVERT(varchar(10), rpr.punch_state)
+                      END
+                    + ')'
+                FROM #RawPunchRows rpr
+                WHERE rpr.emp_id = rf.emp_id
+                  AND rpr.att_date = rf.att_date
+                ORDER BY
+                    rpr.punch_time,
+                    rpr.id
+                FOR XML PATH(''), TYPE
+            ).value('.', 'nvarchar(max)'),
+            1,
+            1,
+            ''
+        ) AS raw_punches
+    FROM #ResultFindings rf;
+
     IF UPPER(ISNULL(@ResultMode, 'Full')) = 'SIMPLE'
     BEGIN
         SELECT
-            df.att_date,
-            df.emp_id,
-            df.emp_code,
-            df.employee_name AS Employee_name,
-            df.effective_schedule_alias,
-            CONVERT(varchar(8), CAST(df.effective_punch_in1 AS time), 108) AS effective_punch_in1_time,
-            CONVERT(varchar(8), CAST(df.effective_punch_out1 AS time), 108) AS effective_punch_out1_time,
-            CONVERT(varchar(8), CAST(df.effective_punch_in2 AS time), 108) AS effective_punch_in2_time,
-            CONVERT(varchar(8), CAST(df.effective_punch_out2 AS time), 108) AS effective_punch_out2,
-            punch_lists.raw_punches
-        FROM #DailyFindings df
-        INNER JOIN #EmployeeMismatchCounts emc
-            ON emc.emp_id = df.emp_id
-        OUTER APPLY
-        (
-            SELECT
-                STUFF(
-                    (
-                        SELECT
-                            ',' + CONVERT(varchar(8), CAST(np.punch_time AS time), 108)
-                            + '('
-                            + CASE
-                                WHEN np.punch_state IN (0, 4) THEN 'IN'
-                                WHEN np.punch_state IN (1, 5) THEN 'OUT'
-                                ELSE CONVERT(varchar(10), np.punch_state)
-                              END
-                            + ')'
-                        FROM dbo.custom_att_fnd_NormalizedPunches np
-                        WHERE np.emp_id = df.emp_id
-                          AND np.work_date = df.att_date
-                        ORDER BY
-                            np.punch_time,
-                            np.id
-                        FOR XML PATH('')
-                    ),
-                    1,
-                    1,
-                    ''
-                ) AS raw_punches
-        ) punch_lists
+            rf.att_date,
+            rf.emp_id,
+            rf.emp_code,
+            rf.employee_name AS Employee_name,
+            rf.effective_schedule_alias,
+            CONVERT(varchar(8), CAST(rf.effective_punch_in1 AS time), 108) AS effective_punch_in1_time,
+            CONVERT(varchar(8), CAST(rf.effective_punch_out1 AS time), 108) AS effective_punch_out1_time,
+            CONVERT(varchar(8), CAST(rf.effective_punch_in2 AS time), 108) AS effective_punch_in2_time,
+            CONVERT(varchar(8), CAST(rf.effective_punch_out2 AS time), 108) AS effective_punch_out2,
+            rpl.raw_punches
+        FROM #ResultFindings rf
+        LEFT JOIN #RawPunchLists rpl
+            ON rpl.emp_id = rf.emp_id
+           AND rpl.att_date = rf.att_date
         ORDER BY
-            df.att_date,
-            df.emp_code;
+            rf.employee_name,
+            rf.att_date,
+            rf.emp_code,
+            rf.emp_id;
 
         RETURN;
     END;
 
+    CREATE TABLE #CorrectedPunchRows
+    (
+        emp_id int NOT NULL,
+        work_date date NOT NULL,
+        punch_time datetime2(7) NOT NULL,
+        id int NOT NULL,
+        corrected_punch_state int NOT NULL,
+        corrected_punch_flag int NOT NULL,
+        CONSTRAINT PK_TempSchedulePunchMismatchCorrectedPunchRows PRIMARY KEY CLUSTERED (emp_id, work_date, punch_time, id)
+    );
+
+    INSERT INTO #CorrectedPunchRows
     SELECT
-        df.att_date,
-        df.emp_id,
-        df.emp_code,
-        df.employee_name,
-        df.department_id,
-        df.dept_code,
-        df.dept_name,
-        df.group_id,
-        df.group_code,
-        df.group_name,
-        df.severity,
-        df.audit_reason,
-        df.effective_schedule_source,
-        df.effective_schedule_alias,
-        df.effective_scheduled_in_datetime,
-        df.effective_scheduled_out_datetime,
-        CONVERT(varchar(8), CAST(df.effective_scheduled_in_datetime AS time), 108) AS scheduled_in,
-        CONVERT(varchar(8), CAST(df.effective_scheduled_out_datetime AS time), 108) AS scheduled_out,
-        df.effective_punch_in1,
-        df.effective_punch_out1,
-        df.effective_punch_in2,
-        df.effective_punch_out2,
-        CONVERT(varchar(8), CAST(df.effective_punch_in1 AS time), 108) AS effective_punch_in1_time,
-        CONVERT(varchar(8), CAST(df.effective_punch_out1 AS time), 108) AS effective_punch_out1_time,
-        CONVERT(varchar(8), CAST(df.effective_punch_in2 AS time), 108) AS effective_punch_in2_time,
-        CONVERT(varchar(8), CAST(df.effective_punch_out2 AS time), 108) AS effective_punch_out2_time,
-        df.first_clock_in,
-        df.last_clock_out,
-        CONVERT(varchar(8), CAST(df.first_clock_in AS time), 108) AS actual_first_clock_in,
-        CONVERT(varchar(8), CAST(df.last_clock_out AS time), 108) AS actual_last_clock_out,
-        df.in_offset_minutes,
-        df.out_offset_minutes,
-        ABS(ISNULL(df.in_offset_minutes, 0)) AS abs_in_offset_minutes,
-        ABS(ISNULL(df.out_offset_minutes, 0)) AS abs_out_offset_minutes,
-        punch_lists.raw_punches,
-        corrected_punches.corrected_punches,
-        df.required_scheduled_hours,
-        df.worked_hours,
-        df.recomputed_worked_minutes,
-        df.attendance_status,
-        df.anomaly_flag,
-        df.needs_payroll_review,
-        df.reconciliation_status,
-        emc.mismatch_days AS employee_mismatch_days_in_period,
-        emc.employee_worst_in_offset_minutes,
-        emc.employee_worst_out_offset_minutes
-    FROM #DailyFindings df
-    INNER JOIN #EmployeeMismatchCounts emc
-        ON emc.emp_id = df.emp_id
-    OUTER APPLY
+        cp.emp_id,
+        cp.work_date,
+        cp.punch_time,
+        cp.id,
+        cp.corrected_punch_state,
+        cp.corrected_punch_flag
+    FROM dbo.custom_att_fnd_CorrectedPunches cp
+    INNER JOIN #ResultFindings rf
+        ON rf.emp_id = cp.emp_id
+       AND rf.att_date = cp.work_date
+    OPTION (RECOMPILE);
+
+    CREATE TABLE #CorrectedPunchLists
     (
-        SELECT
-            STUFF(
-                (
-                    SELECT
-                        ',' + CONVERT(varchar(8), CAST(np.punch_time AS time), 108)
-                        + '('
-                        + CASE
-                            WHEN np.punch_state IN (0, 4) THEN 'IN'
-                            WHEN np.punch_state IN (1, 5) THEN 'OUT'
-                            ELSE CONVERT(varchar(10), np.punch_state)
-                          END
-                        + ')'
-                    FROM dbo.custom_att_fnd_NormalizedPunches np
-                    WHERE np.emp_id = df.emp_id
-                      AND np.work_date = df.att_date
-                    ORDER BY
-                        np.punch_time,
-                        np.id
-                    FOR XML PATH('')
-                ),
-                1,
-                1,
-                ''
-            ) AS raw_punches
-    ) punch_lists
-    OUTER APPLY
-    (
-        SELECT
-            STUFF(
-                (
-                    SELECT
-                        ',' + CONVERT(varchar(8), CAST(cp.punch_time AS time), 108)
-                        + '('
-                        + CASE
-                            WHEN cp.corrected_punch_state = 0 THEN 'IN'
-                            WHEN cp.corrected_punch_state = 1 THEN 'OUT'
-                            ELSE CONVERT(varchar(10), cp.corrected_punch_state)
-                          END
-                        + CASE WHEN ISNULL(cp.corrected_punch_flag, 0) = 1 THEN '*' ELSE '' END
-                        + ')'
-                    FROM dbo.custom_att_fnd_CorrectedPunches cp
-                    WHERE cp.emp_id = df.emp_id
-                      AND cp.work_date = df.att_date
-                    ORDER BY
-                        cp.punch_time,
-                        cp.id
-                    FOR XML PATH('')
-                ),
-                1,
-                1,
-                ''
-            ) AS corrected_punches
-    ) corrected_punches
+        emp_id int NOT NULL,
+        att_date date NOT NULL,
+        corrected_punches nvarchar(max) NULL,
+        CONSTRAINT PK_TempSchedulePunchMismatchCorrectedPunchLists PRIMARY KEY CLUSTERED (emp_id, att_date)
+    );
+
+    INSERT INTO #CorrectedPunchLists
+    SELECT
+        rf.emp_id,
+        rf.att_date,
+        STUFF(
+            (
+                SELECT
+                    ',' + CONVERT(varchar(8), CAST(cpr.punch_time AS time), 108)
+                    + '('
+                    + CASE
+                        WHEN cpr.corrected_punch_state = 0 THEN 'IN'
+                        WHEN cpr.corrected_punch_state = 1 THEN 'OUT'
+                        ELSE CONVERT(varchar(10), cpr.corrected_punch_state)
+                      END
+                    + CASE WHEN ISNULL(cpr.corrected_punch_flag, 0) = 1 THEN '*' ELSE '' END
+                    + ')'
+                FROM #CorrectedPunchRows cpr
+                WHERE cpr.emp_id = rf.emp_id
+                  AND cpr.work_date = rf.att_date
+                ORDER BY
+                    cpr.punch_time,
+                    cpr.id
+                FOR XML PATH(''), TYPE
+            ).value('.', 'nvarchar(max)'),
+            1,
+            1,
+            ''
+        ) AS corrected_punches
+    FROM #ResultFindings rf;
+
+    SELECT
+        rf.att_date,
+        rf.emp_id,
+        rf.emp_code,
+        rf.employee_name,
+        rf.department_id,
+        rf.dept_code,
+        rf.dept_name,
+        rf.group_id,
+        rf.group_code,
+        rf.group_name,
+        rf.severity,
+        rf.audit_reason,
+        rf.effective_schedule_source,
+        rf.effective_schedule_alias,
+        rf.effective_scheduled_in_datetime,
+        rf.effective_scheduled_out_datetime,
+        CONVERT(varchar(8), CAST(rf.effective_scheduled_in_datetime AS time), 108) AS scheduled_in,
+        CONVERT(varchar(8), CAST(rf.effective_scheduled_out_datetime AS time), 108) AS scheduled_out,
+        rf.effective_punch_in1,
+        rf.effective_punch_out1,
+        rf.effective_punch_in2,
+        rf.effective_punch_out2,
+        CONVERT(varchar(8), CAST(rf.effective_punch_in1 AS time), 108) AS effective_punch_in1_time,
+        CONVERT(varchar(8), CAST(rf.effective_punch_out1 AS time), 108) AS effective_punch_out1_time,
+        CONVERT(varchar(8), CAST(rf.effective_punch_in2 AS time), 108) AS effective_punch_in2_time,
+        CONVERT(varchar(8), CAST(rf.effective_punch_out2 AS time), 108) AS effective_punch_out2_time,
+        rf.first_clock_in,
+        rf.last_clock_out,
+        CONVERT(varchar(8), CAST(rf.first_clock_in AS time), 108) AS actual_first_clock_in,
+        CONVERT(varchar(8), CAST(rf.last_clock_out AS time), 108) AS actual_last_clock_out,
+        rf.in_offset_minutes,
+        rf.out_offset_minutes,
+        ABS(ISNULL(rf.in_offset_minutes, 0)) AS abs_in_offset_minutes,
+        ABS(ISNULL(rf.out_offset_minutes, 0)) AS abs_out_offset_minutes,
+        rpl.raw_punches,
+        cpl.corrected_punches,
+        rf.required_scheduled_hours,
+        rf.worked_hours,
+        rf.recomputed_worked_minutes,
+        rf.attendance_status,
+        rf.anomaly_flag,
+        rf.needs_payroll_review,
+        rf.reconciliation_status,
+        rf.employee_mismatch_days_in_period,
+        rf.employee_worst_in_offset_minutes,
+        rf.employee_worst_out_offset_minutes
+    FROM #ResultFindings rf
+    LEFT JOIN #RawPunchLists rpl
+        ON rpl.emp_id = rf.emp_id
+       AND rpl.att_date = rf.att_date
+    LEFT JOIN #CorrectedPunchLists cpl
+        ON cpl.emp_id = rf.emp_id
+       AND cpl.att_date = rf.att_date
     ORDER BY
-        df.severity_rank,
-        emc.mismatch_days DESC,
-        CASE
-            WHEN ABS(ISNULL(df.in_offset_minutes, 0)) >= ABS(ISNULL(df.out_offset_minutes, 0))
-            THEN ABS(ISNULL(df.in_offset_minutes, 0))
-            ELSE ABS(ISNULL(df.out_offset_minutes, 0))
-        END DESC,
-        df.att_date,
-        df.dept_name,
-        df.group_name,
-        df.emp_code;
+        rf.employee_name,
+        rf.att_date,
+        rf.emp_code,
+        rf.emp_id;
 END;
