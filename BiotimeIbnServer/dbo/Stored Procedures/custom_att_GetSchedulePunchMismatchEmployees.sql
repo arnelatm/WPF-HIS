@@ -518,7 +518,14 @@ BEGIN
         mr.needs_payroll_review,
         mr.reconciliation_status
     FROM MarkedRows mr
-    WHERE mr.audit_reason <> 'OK';
+    WHERE mr.audit_reason <> 'OK'
+      AND NOT
+      (
+          mr.attendance_status = 'On Leave'
+          AND ISNULL(mr.needs_payroll_review, 0) = 0
+          AND ISNULL(mr.reconciliation_status, '') = 'Balanced'
+          AND ISNULL(mr.anomaly_flag, 'Normal') = 'Normal'
+      );
 
     CREATE TABLE #EmployeeMismatchCounts
     (

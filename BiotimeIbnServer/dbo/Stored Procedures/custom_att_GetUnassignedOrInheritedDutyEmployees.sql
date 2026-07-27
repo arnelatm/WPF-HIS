@@ -28,6 +28,8 @@ Filters:
 - @GroupID: att_attemployee.group_id.
 - @DepartmentSearch: optional department code/name contains search.
 - @GroupSearch: optional attendance group code/name contains search.
+- Attendance and schedule must both be enabled in att_attemployee.
+- Attendance dates before personnel_employee.hire_date are excluded.
 */
 BEGIN
     SET NOCOUNT ON;
@@ -91,6 +93,9 @@ BEGIN
         LEFT JOIN dbo.att_attgroup ag
             ON ag.id = ae.group_id
         WHERE e.is_active = 1
+          AND ISNULL(ae.enable_attendance, CONVERT(bit, 0)) = 1
+          AND ISNULL(ae.enable_schedule, CONVERT(bit, 0)) = 1
+          AND (e.hire_date IS NULL OR dt.att_date >= e.hire_date)
           AND (@EmpID IS NULL OR e.id = @EmpID)
           AND (@DepartmentID IS NULL OR e.department_id = @DepartmentID)
           AND (@GroupID IS NULL OR ae.group_id = @GroupID)

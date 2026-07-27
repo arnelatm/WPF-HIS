@@ -56,6 +56,31 @@
     [SeperateDetailsType]                                      INT             NULL,
     [ENumber]                                                  NVARCHAR (127)  NULL,
     [EId]                                                      INT             NULL,
+    [VATNote]                                                  NVARCHAR (MAX)  NULL,
+    [IgnoreZatca]                                              BIT             NULL,
+    [HideInvoicesReturns]                                      BIT             NULL,
+    [HideZeroRows]                                             BIT             NULL,
+    [RecordType]                                               INT             NULL,
     CONSTRAINT [PK_InsuranceInvoice] PRIMARY KEY CLUSTERED ([ID] ASC)
 );
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_InsuranceInvoice_Status]
+    ON [dbo].[InsuranceInvoice]([Status] ASC);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_InsuranceInvoice_JZ_CompanyId]
+    ON [dbo].[InsuranceInvoice]([JZ_CompanyId] ASC);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_InsuranceInvoice_InvoiceIssueDate]
+    ON [dbo].[InsuranceInvoice]([InvoiceIssueDate] ASC);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_InsuranceInvoice_EId]
+    ON [dbo].[InsuranceInvoice]([EId] ASC);
 

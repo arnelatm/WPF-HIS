@@ -11,8 +11,11 @@
     [SetAsFavorite]  BIT            NULL,
     [FavoriteNote]   NVARCHAR (MAX) NULL,
     [Invoiced]       BIT            NULL,
+    [JME_Selected]   BIT            NULL,
     CONSTRAINT [PK_Prescription] PRIMARY KEY CLUSTERED ([ID] ASC)
 );
+
+
 
 
 GO

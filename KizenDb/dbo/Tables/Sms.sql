@@ -19,3 +19,9 @@
     CONSTRAINT [PK_Sms] PRIMARY KEY CLUSTERED ([SmsID] ASC)
 );
 
+
+GO
+CREATE NONCLUSTERED INDEX [IX_sms_AppLookup]
+    ON [dbo].[Sms]([SmsAppID] ASC, [SmsType] ASC)
+    INCLUDE([Code], [Time], [SmsDateTime], [SmsStatue]) WHERE ([SmsAppID] IS NOT NULL AND [SmsType] IS NOT NULL);
+

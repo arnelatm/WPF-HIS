@@ -26,6 +26,8 @@
     [SQLWhereClause]        VARCHAR (500)  NULL,
     [SQLGroupClause]        VARCHAR (500)  NULL,
     [QueryParameters]       VARCHAR (250)  NULL,
+    [PromptParameterNames]  VARCHAR (500)  NULL,
+    [RepeatPromptAfterClose] BIT           NULL,
     [SQLOrderByClause]      VARCHAR (250)  NULL,
     [ReportUsedFunction]    VARCHAR (50)   NULL,
     [ReportDescription]     VARCHAR (300)  NULL,

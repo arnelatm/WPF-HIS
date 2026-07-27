@@ -21,11 +21,20 @@
     [ReceivedUser]    NVARCHAR (255) NULL,
     [CollectedDate]   DATETIME       NULL,
     [CollectedUser]   NVARCHAR (255) NULL,
+    [JME_Selected]    BIT            NULL,
+    [VersionNumber]   NVARCHAR (50)  NULL,
     CONSTRAINT [PK_AnalysesData] PRIMARY KEY CLUSTERED ([ID] ASC)
 );
+
+
 
 
 GO
 CREATE NONCLUSTERED INDEX [IX_VisitAnalysesData_OrderID]
     ON [dbo].[VisitAnalysesData]([OrderID] ASC);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_VisitAnalysesData_RegDate_RegTime]
+    ON [dbo].[VisitAnalysesData]([RegDate] ASC, [RegTime] ASC);
 

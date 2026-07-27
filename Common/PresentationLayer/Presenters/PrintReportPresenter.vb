@@ -1,6 +1,8 @@
-﻿Imports System.Data.Entity.Design.PluralizationServices
+﻿Imports System.Collections.Generic
+Imports System.Data.Entity.Design.PluralizationServices
 Imports System.Dynamic
 Imports System.Globalization
+Imports System.Windows.Forms
 Imports AATM.Common.Models
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.ServiceLayer
@@ -64,13 +66,15 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Sub ProcessReport(reportFileName As String, printArgs As CrPrintableArgs, printDirectly As Boolean, Optional addDefaultParameters As Boolean = False)
+            ApplyPromptSettingsFromReportTable(reportFileName, printArgs)
+
             Dim crReport As CrystalReportPrinter
             crReport = GetPrinterSetup(reportFileName, printArgs.DataBaseConnectionName, printArgs.ReportParameters)
             If printDirectly Then
                 crReport.PrintReport(printArgs.Copies, printArgs.Collate, printArgs.StartPage, printArgs.EndPage)
             Else
                 Dim crViewer As New CrViewer(reportFileName, printArgs, addDefaultParameters, crReport)
-                crViewer.Show()
+                ShowReportViewer(crViewer, reportFileName, printArgs, addDefaultParameters)
             End If
         End Sub
 
@@ -91,9 +95,181 @@ Namespace PresentationLayer.Presenters
                 reportArgs.ReportParameters = args
                 reportArgs.CultureInfo = CultureInfo.CurrentCulture.Name
                 reportArgs.DataBaseConnectionName = databaseConnectionName
+                ApplyPromptSettingsFromReportTable(reportFileName, reportArgs)
                 ViewReport(reportFileName, reportArgs)
             End If
         End Sub
+
+        Private Sub ShowReportViewer(crViewer As CrViewer, reportFileName As String, reportArgs As CrPrintableArgs, addDefaultParameters As Boolean)
+            If ShouldRepeatPromptAfterClose(reportArgs) Then
+                AddHandler crViewer.FormClosed,
+                    Sub(sender, e)
+                        Dim repeat = MessageBox.Show(
+                            "Run this report again with different prompted parameters?",
+                            "Run Report Again",
+                            MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Question)
+
+                        If repeat = DialogResult.Yes Then
+                            ProcessReport(reportFileName, reportArgs, False, addDefaultParameters)
+                        End If
+                    End Sub
+            End If
+
+            crViewer.Show()
+        End Sub
+
+        Private Shared Function ShouldRepeatPromptAfterClose(reportArgs As CrPrintableArgs) As Boolean
+            Return reportArgs IsNot Nothing AndAlso
+                   reportArgs.RepeatPromptAfterClose AndAlso
+                   reportArgs.PromptParameterNames IsNot Nothing AndAlso
+                   reportArgs.PromptParameterNames.Length > 0
+        End Function
+
+        Private Sub ApplyPromptSettingsFromReportTable(reportFileName As String, reportArgs As CrPrintableArgs)
+            If reportArgs Is Nothing Then
+                Return
+            End If
+
+            If reportArgs.PromptParameterNames Is Nothing OrElse reportArgs.PromptParameterNames.Length = 0 Then
+                Dim promptParameterNames As String = GetPromptParameterNamesFromReportTable(reportFileName)
+                reportArgs.PromptParameterNames = SplitPromptParameterNames(promptParameterNames)
+            End If
+
+            If Not reportArgs.RepeatPromptAfterClose Then
+                reportArgs.RepeatPromptAfterClose = GetRepeatPromptAfterCloseFromReportTable(reportFileName)
+            End If
+        End Sub
+
+        Private Function GetPromptParameterNamesFromReportTable(reportFileName As String) As String
+            For Each lookupReportFileName As String In GetReportFileNameLookupKeys(reportFileName)
+                Dim promptParameterNames As String = GetPromptParameterNames(lookupReportFileName)
+
+                If Not String.IsNullOrWhiteSpace(promptParameterNames) Then
+                    Return promptParameterNames
+                End If
+            Next
+
+            Return Nothing
+        End Function
+
+        Private Function GetRepeatPromptAfterCloseFromReportTable(reportFileName As String) As Boolean
+            For Each lookupReportFileName As String In GetReportFileNameLookupKeys(reportFileName)
+                Dim repeatPromptAfterClose As Boolean
+
+                If TryGetRepeatPromptAfterClose(lookupReportFileName, repeatPromptAfterClose) Then
+                    Return repeatPromptAfterClose
+                End If
+            Next
+
+            Return False
+        End Function
+
+        Private Function GetPromptParameterNames(reportFileName As String) As String
+            If String.IsNullOrWhiteSpace(reportFileName) Then
+                Return Nothing
+            End If
+
+            Try
+                Return _psService.GetRecordFieldWithKeyG(Of String, String)(reportFileName, "Report", "ReportFileName", "PromptParameterNames")
+            Catch
+                Return Nothing
+            End Try
+        End Function
+
+        Private Function TryGetRepeatPromptAfterClose(reportFileName As String, ByRef repeatPromptAfterClose As Boolean) As Boolean
+            If String.IsNullOrWhiteSpace(reportFileName) Then
+                Return False
+            End If
+
+            Try
+                Dim matchedReportFileName As String =
+                    _psService.GetRecordFieldWithKeyG(Of String, String)(reportFileName, "Report", "ReportFileName", "ReportFileName")
+
+                If String.IsNullOrWhiteSpace(matchedReportFileName) Then
+                    Return False
+                End If
+
+                repeatPromptAfterClose = GetRepeatPromptAfterClose(reportFileName)
+                Return True
+            Catch
+                Return False
+            End Try
+        End Function
+
+        Private Function GetRepeatPromptAfterClose(reportFileName As String) As Boolean
+            If String.IsNullOrWhiteSpace(reportFileName) Then
+                Return False
+            End If
+
+            Try
+                Return _psService.GetRecordFieldWithKeyG(Of Boolean, String)(reportFileName, "Report", "ReportFileName", "RepeatPromptAfterClose")
+            Catch
+                Return False
+            End Try
+        End Function
+
+        Private Shared Function GetReportFileNameLookupKeys(reportFileName As String) As IEnumerable(Of String)
+            Dim lookupKeys As New List(Of String)
+
+            AddReportFileNameLookupKey(lookupKeys, reportFileName)
+
+            If String.IsNullOrWhiteSpace(reportFileName) Then
+                Return lookupKeys
+            End If
+
+            Dim trimmedReportFileName As String = reportFileName.Trim()
+            Dim fileNameOnly As String = trimmedReportFileName
+
+            Try
+                fileNameOnly = IO.Path.GetFileName(trimmedReportFileName)
+            Catch
+            End Try
+
+            AddReportFileNameLookupKey(lookupKeys, fileNameOnly)
+
+            If trimmedReportFileName.EndsWith(".rpt", StringComparison.OrdinalIgnoreCase) Then
+                Try
+                    AddReportFileNameLookupKey(lookupKeys, IO.Path.GetFileNameWithoutExtension(trimmedReportFileName))
+                Catch
+                End Try
+            Else
+                AddReportFileNameLookupKey(lookupKeys, trimmedReportFileName & ".rpt")
+
+                If Not String.Equals(fileNameOnly, trimmedReportFileName, StringComparison.OrdinalIgnoreCase) Then
+                    AddReportFileNameLookupKey(lookupKeys, fileNameOnly & ".rpt")
+                End If
+            End If
+
+            Return lookupKeys
+        End Function
+
+        Private Shared Sub AddReportFileNameLookupKey(lookupKeys As List(Of String), lookupKey As String)
+            If String.IsNullOrWhiteSpace(lookupKey) Then
+                Return
+            End If
+
+            Dim normalizedLookupKey As String = lookupKey.Trim()
+
+            For Each existingLookupKey As String In lookupKeys
+                If String.Equals(existingLookupKey, normalizedLookupKey, StringComparison.OrdinalIgnoreCase) Then
+                    Return
+                End If
+            Next
+
+            lookupKeys.Add(normalizedLookupKey)
+        End Sub
+
+        Private Shared Function SplitPromptParameterNames(value As String) As String()
+            If String.IsNullOrWhiteSpace(value) Then
+                Return Nothing
+            End If
+
+            Return value.Split(New Char() {","c, ";"c, ControlChars.Cr, ControlChars.Lf}, StringSplitOptions.RemoveEmptyEntries).
+                Select(Function(parameterName) parameterName.Trim()).
+                Where(Function(parameterName) parameterName <> "").
+                ToArray()
+        End Function
 
 
         Private Function GetPrinterSetup(reportFileName As String, databaseConnectionName As String, args() As Object) As CrystalReportPrinter

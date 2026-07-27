@@ -13,3 +13,8 @@
     CONSTRAINT [PK_InsuranceInvoiceReturnDetail] PRIMARY KEY CLUSTERED ([ID] ASC)
 );
 
+
+GO
+CREATE NONCLUSTERED INDEX [IX_InsuranceInvoiceReturnDetail_InsuranceInvoiceReturnID]
+    ON [dbo].[InsuranceInvoiceReturnDetail]([InsuranceInvoiceReturnID] ASC);
+

@@ -10,9 +10,13 @@
     [LastEditDateTime] DATETIME        NULL,
     [LastEditUserId]   INT             NULL,
     [LastEditUserName] NVARCHAR (255)  NULL,
+    [DoctorId]         INT             NULL,
+    [DoctorName]       NVARCHAR (MAX)  NULL,
     CONSTRAINT [PK_dbo.JC_CD_TemplateDocument] PRIMARY KEY CLUSTERED ([Id] ASC),
     CONSTRAINT [FK_dbo.JC_CD_TemplateDocument_dbo.JC_CD_Template_TemplateId] FOREIGN KEY ([TemplateId]) REFERENCES [dbo].[JC_CD_Template] ([Id]) ON DELETE CASCADE
 );
+
+
 
 
 GO

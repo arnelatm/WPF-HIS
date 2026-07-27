@@ -23,7 +23,7 @@ BEGIN
 			LEFT OUTER JOIN 
 			(SELECT  OrderID,SUM(Net) AS InvoiceNet, SUM(isnull(VatValue,0)) AS InvoiceTotalVatValue FROM  A1_PurchaseInvocesWorks as tt
 			where tt.net > 0 or (Select Count(Id) From A1_PurchaseInvocesWorks Where OrderID = tt.OrderID and Net > 0) = 0 GROUP BY OrderID  ) AS d1 ON d1.OrderID = d.ID
-			where @SourceID = d.SupplierID and (@PurchaseInvocesID = d.InvoiceID or  d.InvoiceID in (select * from dbo.splitstring(@PurchaseInvocesID)))			
+			where @SourceID = d.SupplierID and (@PurchaseInvocesID = d.InvoiceID or @PurchaseInvocesID like '%,'+d.InvoiceID+',%' or @PurchaseInvocesID like '%,'+d.InvoiceID  or @PurchaseInvocesID like  d.InvoiceID+',%')			
 		End
 	else
 		if(@SourceType = 'LabOrders')
@@ -33,7 +33,7 @@ BEGIN
 				LEFT OUTER JOIN 
 				(SELECT  OrderID,SUM(Net) AS InvoiceNet, SUM(isnull(VatValue,0)) AS InvoiceTotalVatValue FROM  DL_LabOrderWorks as tt
 				where tt.net > 0  or (Select Count(Id) From DL_LabOrderWorks Where OrderID = tt.OrderID and Net > 0) = 0 GROUP BY OrderID  ) AS d1 ON d1.OrderID = d.ID
-				where @SourceID = d.LabName and (@PurchaseInvocesID = CONVERT(nvarchar, d.LabOrderNum) or CONVERT(nvarchar, d.LabOrderNum) in (select * from dbo.splitstring(@PurchaseInvocesID)))
+				where @SourceID = d.LabName and (@PurchaseInvocesID = CONVERT(nvarchar, d.LabOrderNum) or @PurchaseInvocesID like '%,'+ CONVERT(nvarchar, d.LabOrderNum) +',%' or @PurchaseInvocesID like '%,'+ CONVERT(nvarchar, d.LabOrderNum)  or @PurchaseInvocesID like  CONVERT(nvarchar, d.LabOrderNum)+',%')
 			End			
 		else
 			begin	if(@VATEnb = 1) set @Res = @VATValue else set @Res = 0 	end

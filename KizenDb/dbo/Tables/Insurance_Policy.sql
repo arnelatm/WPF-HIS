@@ -27,8 +27,23 @@
     [Code4]              NVARCHAR (100)  NULL,
     [CompanyCode4]       NVARCHAR (100)  NULL,
     [Class4]             NVARCHAR (55)   NULL,
+    [CreateKind]         INT             NULL,
+    [CreateDateTime]     DATETIME        NULL,
+    [CreateUserID]       INT             NULL,
+    [CreateUserName]     NVARCHAR (255)  NULL,
+    [EditDateTime]       DATETIME        NULL,
+    [EditUserID]         INT             NULL,
+    [EditUserName]       NVARCHAR (255)  NULL,
+    [ReviewEnb]          BIT             NULL,
+    [ReviewDateTime]     DATETIME        NULL,
+    [ReviewUserID]       INT             NULL,
+    [ReviewUserName]     NVARCHAR (255)  NULL,
+    [CreateAPIJSON]      NVARCHAR (MAX)  NULL,
+    [CreateAPIErrors]    NVARCHAR (MAX)  NULL,
     CONSTRAINT [PK_Insurance_Policy] PRIMARY KEY CLUSTERED ([ID] ASC)
 );
+
+
 
 
 GO

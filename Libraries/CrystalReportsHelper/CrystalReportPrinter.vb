@@ -384,6 +384,27 @@ Public Class CrystalReportPrinter
         Next
     End Sub
 
+    Public Sub ClearParameterValues(parameterNames As IEnumerable(Of String))
+        If parameterNames Is Nothing OrElse _report Is Nothing OrElse _report.DataDefinition Is Nothing Then
+            Return
+        End If
+
+        For Each name As String In parameterNames
+            Dim resolvedName As String = ResolveParameterName(name)
+
+            If resolvedName Is Nothing Then
+                Continue For
+            End If
+
+            Try
+                Dim parameterDefinition As ParameterFieldDefinition = _report.DataDefinition.ParameterFields(resolvedName)
+                Dim emptyValues As New ParameterValues()
+                parameterDefinition.ApplyCurrentValues(emptyValues)
+            Catch
+            End Try
+        Next
+    End Sub
+
     Public Sub ClearDataSourceConnections()
         _report.DataSourceConnections.Clear()
     End Sub
@@ -486,6 +507,8 @@ Public Class CrystalReportPrinter
         Public Property StartPage As Integer = 0
         Public Property EndPage As Integer = 0
         Public Property ReportTitle As String = ""
+        Public Property PromptParameterNames As String()
+        Public Property RepeatPromptAfterClose As Boolean = False
 
 
     End Class

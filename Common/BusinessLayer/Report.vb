@@ -26,6 +26,8 @@ Namespace BusinessLayer
         Public Property QueryForm As String
         Public Property QueryFormParameters As String
         Public Property QueryParameters As String
+        Public Property PromptParameterNames As String
+        Public Property RepeatPromptAfterClose As Boolean
         Public Property ReportCode As String
         Public Property ReportFileName As String
         Public Property ReportGroupIdNo As Int16

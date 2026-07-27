@@ -25,8 +25,11 @@
     [SalaryID]          INT             NULL,
     [DrID]              INT             NULL,
     [BoxID]             INT             NULL,
+    [JZ_CompanyId]      INT             NULL,
     CONSTRAINT [PK_A1_Expenses] PRIMARY KEY CLUSTERED ([ID] ASC)
 );
+
+
 
 
 GO

@@ -37,6 +37,8 @@
 );
 
 
+
+
 GO
 CREATE NONCLUSTERED INDEX [IX_A1_PurchaseInvocesWorks_OrderID]
     ON [dbo].[A1_PurchaseInvocesWorks]([OrderID] ASC);
@@ -45,4 +47,14 @@ CREATE NONCLUSTERED INDEX [IX_A1_PurchaseInvocesWorks_OrderID]
 GO
 CREATE NONCLUSTERED INDEX [IX_A1_PurchaseInvocesWorks_WorkID]
     ON [dbo].[A1_PurchaseInvocesWorks]([WorkID] ASC);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_A1_PurchaseInvocesWorks_OrderID_Net]
+    ON [dbo].[A1_PurchaseInvocesWorks]([OrderID] ASC, [Net] ASC);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_A1_PurchaseInvocesWorks_Net]
+    ON [dbo].[A1_PurchaseInvocesWorks]([Net] ASC);
 

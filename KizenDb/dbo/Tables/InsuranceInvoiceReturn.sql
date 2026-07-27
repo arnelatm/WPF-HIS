@@ -34,3 +34,23 @@
     CONSTRAINT [PK_InsuranceInvoiceReturn] PRIMARY KEY CLUSTERED ([ID] ASC)
 );
 
+
+GO
+CREATE NONCLUSTERED INDEX [IX_InsuranceInvoiceReturn_Status]
+    ON [dbo].[InsuranceInvoiceReturn]([Status] ASC);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_InsuranceInvoiceReturn_JZ_CompanyId]
+    ON [dbo].[InsuranceInvoiceReturn]([JZ_CompanyId] ASC);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_InsuranceInvoiceReturn_InvoiceIssueDate]
+    ON [dbo].[InsuranceInvoiceReturn]([InvoiceIssueDate] ASC);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_InsuranceInvoiceReturn_EId]
+    ON [dbo].[InsuranceInvoiceReturn]([EId] ASC);
+

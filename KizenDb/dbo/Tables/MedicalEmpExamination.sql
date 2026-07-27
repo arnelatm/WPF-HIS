@@ -21,6 +21,7 @@
     [SampleDate]               DATETIME       NULL,
     [IsFinish]                 BIT            NULL,
     [Serial]                   INT            NULL,
+    [SampleUser]               NVARCHAR (255) NULL,
     CONSTRAINT [PK_MedicalEmpExamination] PRIMARY KEY CLUSTERED ([ID] ASC)
 );
 

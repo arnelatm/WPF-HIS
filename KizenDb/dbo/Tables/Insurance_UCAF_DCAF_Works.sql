@@ -31,6 +31,9 @@
     [ScientificCode]                 NVARCHAR (255)  NULL,
     [ICD10]                          NVARCHAR (50)   NULL,
     [DrugSelectionReason]            NVARCHAR (255)  NULL,
+    [Morphology]                     NVARCHAR (50)   NULL,
+    [IsMaternity]                    BIT             NULL,
+    [LastMenstrualPeriod]            DATETIME        NULL,
     CONSTRAINT [PK_Insurance_UCAF_DCAF_Works] PRIMARY KEY CLUSTERED ([ID] ASC)
 );
 

@@ -6,6 +6,8 @@
     [Rsd_UserName] NVARCHAR (255) NULL,
     [Rsd_Password] NVARCHAR (255) NULL,
     [Rsd_GLN]      NVARCHAR (255) NULL,
+    [JZ_CompanyId] INT            NULL,
+    [ParentId]     INT            NULL,
     CONSTRAINT [PK_A1_Store] PRIMARY KEY CLUSTERED ([ID] ASC)
 );
 

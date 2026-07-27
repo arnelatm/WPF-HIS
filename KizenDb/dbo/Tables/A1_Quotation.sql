@@ -42,6 +42,7 @@
     [IsFavorite]            BIT             NULL,
     [FavoriteNote]          NVARCHAR (255)  NULL,
     [SpecialtieID]          INT             NULL,
+    [InvoiceSourceID]       INT             NULL,
     CONSTRAINT [PK_A1_Quotation_1] PRIMARY KEY CLUSTERED ([ID] ASC)
 );
 

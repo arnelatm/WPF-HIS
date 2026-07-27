@@ -1,0 +1,2 @@
+﻿CREATE USER [Rec1] FOR LOGIN [Rec1];
+

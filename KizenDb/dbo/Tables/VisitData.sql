@@ -12,8 +12,11 @@
     [SpecializationID] INT            NULL,
     [DrID]             INT            NULL,
     [DrName]           NVARCHAR (MAX) NULL,
+    [JME_Selected]     BIT            NULL,
     CONSTRAINT [PK_VisitData] PRIMARY KEY CLUSTERED ([ID] ASC)
 );
+
+
 
 
 GO

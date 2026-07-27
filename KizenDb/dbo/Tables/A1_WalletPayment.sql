@@ -11,8 +11,11 @@
     [BankID]            INT             NULL,
     [BankTransactionNo] NVARCHAR (MAX)  NULL,
     [BoxId]             INT             NULL,
+    [BankTranID]        INT             NULL,
     CONSTRAINT [PK_A1_WalletPayment] PRIMARY KEY CLUSTERED ([ID] ASC)
 );
+
+
 
 
 GO

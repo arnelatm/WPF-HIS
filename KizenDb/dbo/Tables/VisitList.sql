@@ -9,6 +9,8 @@
     [PaintingImage]         IMAGE          NULL,
     [PaintingImageMode]     INT            NULL,
     [PaintingImageFontSize] INT            NULL,
+    [JC_CH_EnableSend]      BIT            NULL,
+    [IsUserAuthEnabled]     BIT            NULL,
     CONSTRAINT [PK_VisitList] PRIMARY KEY CLUSTERED ([ID] ASC)
 );
 

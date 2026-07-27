@@ -6,3 +6,13 @@
     CONSTRAINT [PK_InsuranceInvoicePaymentLink] PRIMARY KEY CLUSTERED ([ID] ASC)
 );
 
+
+GO
+CREATE NONCLUSTERED INDEX [IX_InsuranceInvoicePaymentLink_InsuranceInvoicePaymentID]
+    ON [dbo].[InsuranceInvoicePaymentLink]([InsuranceInvoicePaymentID] ASC);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_InsuranceInvoicePaymentLink_InsuranceInvoiceID]
+    ON [dbo].[InsuranceInvoicePaymentLink]([InsuranceInvoiceID] ASC);
+

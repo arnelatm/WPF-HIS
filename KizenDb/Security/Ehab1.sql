@@ -1,0 +1,2 @@
+﻿CREATE USER [Ehab1] FOR LOGIN [Ehab1];
+

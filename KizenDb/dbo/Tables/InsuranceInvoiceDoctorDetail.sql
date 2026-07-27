@@ -19,6 +19,12 @@
     [TotalInsuranceCarryWithVAT]                 DECIMAL (18, 2) NULL,
     [ItemId]                                     INT             NULL,
     [ItemName]                                   NVARCHAR (MAX)  NULL,
+    [VATNote]                                    NVARCHAR (MAX)  NULL,
     CONSTRAINT [PK_InsuranceInvoiceDoctorDetail] PRIMARY KEY CLUSTERED ([ID] ASC)
 );
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_InsuranceInvoiceDoctorDetail_InsuranceInvoiceID]
+    ON [dbo].[InsuranceInvoiceDoctorDetail]([InsuranceInvoiceID] ASC);
 

@@ -21,8 +21,15 @@
     [NextVisit]              NVARCHAR (MAX) NULL,
     [ProphylaxisAntibiotic]  NVARCHAR (MAX) NULL,
     [PatientFamilyEducation] NVARCHAR (MAX) NULL,
+    [OralExam]               NVARCHAR (MAX) NULL,
+    [TreatmentPlans]         NVARCHAR (MAX) NULL,
+    [ToothSurface]           NVARCHAR (255) NULL,
+    [GoalOfTreatment]        NVARCHAR (MAX) NULL,
+    [JME_Selected]           BIT            NULL,
     CONSTRAINT [PK_ThtEvents] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
+
+
 
 
 GO

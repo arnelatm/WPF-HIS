@@ -28,8 +28,11 @@
     [UserName]               NVARCHAR (255) NULL,
     [InsuranceApprovalType]  NVARCHAR (4)   NULL,
     [InsuranceApprovalID]    INT            NULL,
+    [OperativeNote]          NVARCHAR (MAX) NULL,
     CONSTRAINT [PK_AdmissionDischargeRep] PRIMARY KEY CLUSTERED ([ID] ASC)
 );
+
+
 
 
 GO

@@ -21,6 +21,7 @@
     [DelegateName]         NVARCHAR (255) NULL,
     [DelegateMobile]       NVARCHAR (255) NULL,
     [VATNumber]            NVARCHAR (MAX) NULL,
+    [NotTaxRegistered]     BIT            NULL,
     CONSTRAINT [PK_DL_LabNames] PRIMARY KEY CLUSTERED ([ID] ASC)
 );
 

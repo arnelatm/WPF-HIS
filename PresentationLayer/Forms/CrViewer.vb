@@ -45,6 +45,7 @@ Public Class CrViewer
         ReportPrinter.ReportFileName = reportFileName
         SetParameters(reportArgs, AddDefaultParameters)
         ReportPrinter.ClearDataSourceConnections()
+        ClearPromptedParameterValues(reportArgs)
         SetupCrViewer(ShouldPromptForParameters(reportArgs, AddDefaultParameters))
 
     End Sub
@@ -62,13 +63,28 @@ Public Class CrViewer
     End Sub
 
     Private Function ShouldPromptForParameters(reportArgs As CrPrintableArgs, addDefaultParameters As Boolean) As Boolean
-        If addDefaultParameters Then
+        If reportArgs Is Nothing Then
             Return False
         End If
 
-        Return reportArgs IsNot Nothing AndAlso
-               (reportArgs.ReportParameters Is Nothing OrElse reportArgs.ReportParameters.Length = 0)
+        Dim hasPromptedParameters As Boolean =
+            reportArgs.PromptParameterNames IsNot Nothing AndAlso
+            reportArgs.PromptParameterNames.Length > 0
+
+        Return hasPromptedParameters OrElse
+               (Not addDefaultParameters AndAlso
+                (reportArgs.ReportParameters Is Nothing OrElse reportArgs.ReportParameters.Length = 0))
     End Function
+
+    Private Sub ClearPromptedParameterValues(reportArgs As CrPrintableArgs)
+        If reportArgs Is Nothing OrElse
+           reportArgs.PromptParameterNames Is Nothing OrElse
+           reportArgs.PromptParameterNames.Length = 0 Then
+            Return
+        End If
+
+        ReportPrinter.ClearParameterValues(reportArgs.PromptParameterNames)
+    End Sub
 
     Private Sub SetParameters(reportTitle As String, formCulture As CultureInfo, args As Object)
         Dim language As String
@@ -147,12 +163,10 @@ Public Class CrViewer
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        Dispose()
         Close()
     End Sub
 
     Private Sub CButton1_Click(sender As Object, e As EventArgs) Handles btnQuit.Click
-        Dispose()
         Close()
     End Sub
 

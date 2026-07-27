@@ -44,6 +44,14 @@
     [Type]                         INT             NULL,
     [OfferID]                      INT             NULL,
     [Teeth]                        NVARCHAR (255)  NULL,
+    [Priority]                     INT             NULL,
+    [IsInstallment]                BIT             NULL,
+    [IsVatExempted]                BIT             NULL,
     CONSTRAINT [PK_A1_QuotationWroks] PRIMARY KEY CLUSTERED ([ID] ASC)
 );
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_A1_QuotationWroks_OrderID]
+    ON [dbo].[A1_QuotationWroks]([OrderID] ASC);
 

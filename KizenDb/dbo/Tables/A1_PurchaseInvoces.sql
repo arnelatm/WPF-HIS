@@ -15,8 +15,12 @@
     [GeneralDiscount]     DECIMAL (19, 4) NULL,
     [GeneralDiscountType] INT             NULL,
     [StoreSerialNumber]   INT             NULL,
+    [DueDate]             DATE            NULL,
+    [IsReturn]            BIT             CONSTRAINT [DF_A1_PurchaseInvoces_IsReturn] DEFAULT ((0)) NOT NULL,
     CONSTRAINT [PK_A1_PurchaseInvoces] PRIMARY KEY CLUSTERED ([ID] ASC)
 );
+
+
 
 
 GO

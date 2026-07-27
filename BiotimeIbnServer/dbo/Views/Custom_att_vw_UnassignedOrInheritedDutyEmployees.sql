@@ -101,6 +101,9 @@ EmployeeDates AS
     LEFT JOIN dbo.att_attgroup ag
         ON ag.id = ae.group_id
     WHERE e.is_active = 1
+      AND ISNULL(ae.enable_attendance, CONVERT(bit, 0)) = 1
+      AND ISNULL(ae.enable_schedule, CONVERT(bit, 0)) = 1
+      AND (e.hire_date IS NULL OR dt.att_date >= e.hire_date)
       AND NOT EXISTS
       (
           SELECT 1

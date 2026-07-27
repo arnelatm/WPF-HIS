@@ -1,6 +1,7 @@
 ﻿
 
 
+
  CREATE View [dbo].[EmploymentTests_View]
  as 
   SELECT  a.PatName as PatientName
@@ -31,4 +32,5 @@
  on b.Id = f.ParentId
  left join kizenClinic.dbo.Customers g
  on b.CustID = g.CustId
- WHERE  b.IsReturn=0 and IsNull(d.FullNumber,'') <> '' and f.ParentId Is Null
+ WHERE  b.IsReturn=0 and IsNull(d.FullNumber,'') <> '' and f.ParentId Is Null and
+     (c.WorkID = N'T2' or c.WorkID = N'T3' or c.WorkID = N'T5')

@@ -62,8 +62,15 @@
     [RequestedERDateTime]              DATETIME        NULL,
     [RequestedXRayUserName]            NVARCHAR (255)  NULL,
     [RequestedXRayDateTime]            DATETIME        NULL,
+    [HideFromInsurance]                BIT             NULL,
+    [IsB2B]                            BIT             NULL,
+    [JZ_IsScheduledStatus]             INT             NULL,
+    [ChangeDrManually]                 BIT             NULL,
+    [VersionNumber]                    NVARCHAR (50)   NULL,
     CONSTRAINT [PK_A1_Invoces] PRIMARY KEY CLUSTERED ([ID] ASC)
 );
+
+
 
 
 GO
@@ -129,4 +136,9 @@ CREATE NONCLUSTERED INDEX [IX_A1_Invoces_InsuranceApprovalNo]
 GO
 CREATE NONCLUSTERED INDEX [IX_A1_Invoces_ParentId]
     ON [dbo].[A1_Invoces]([ParentId] ASC);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_A1_Invoces_EId]
+    ON [dbo].[A1_Invoces]([EId] ASC);
 

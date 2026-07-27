@@ -12,3 +12,28 @@
     CONSTRAINT [PK_Session] PRIMARY KEY CLUSTERED ([ID] ASC)
 );
 
+
+GO
+CREATE NONCLUSTERED INDEX [IX_UserSession_UserID]
+    ON [dbo].[UserSession]([UserID] ASC);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_UserSession_TimeOut]
+    ON [dbo].[UserSession]([TimeOut] ASC);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_UserSession_LocalIP]
+    ON [dbo].[UserSession]([LocalIP] ASC);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_UserSession_ComputerName]
+    ON [dbo].[UserSession]([ComputerName] ASC);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_UserSession_ComputerFriendlyName]
+    ON [dbo].[UserSession]([ComputerFriendlyName] ASC);
+

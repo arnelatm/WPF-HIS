@@ -89,8 +89,12 @@
     [SessionExpireDays]            INT             NULL,
     [SessionTerms]                 NVARCHAR (MAX)  NULL,
     [SessionNote]                  NVARCHAR (MAX)  NULL,
+    [IsConsultation]               BIT             NULL,
+    [ForceOneAsAmount]             BIT             NULL,
     CONSTRAINT [PK_A1_Works] PRIMARY KEY CLUSTERED ([ID] ASC)
 );
+
+
 
 
 GO
@@ -111,4 +115,10 @@ CREATE NONCLUSTERED INDEX [IX_A1_Works_Number]
 GO
 CREATE NONCLUSTERED INDEX [IX_A1_Works_ScientificCode]
     ON [dbo].[A1_Works]([ScientificCode] ASC);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_A1_Works_SourceBarCode]
+    ON [dbo].[A1_Works]([SourceBarCode] ASC)
+    INCLUDE([ID], [Code]);
 

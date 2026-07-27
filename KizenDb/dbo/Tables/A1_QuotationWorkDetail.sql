@@ -1,0 +1,25 @@
+﻿CREATE TABLE [dbo].[A1_QuotationWorkDetail] (
+    [ID]                       INT             IDENTITY (1, 1) NOT NULL,
+    [QuotationWorkID]          INT             NULL,
+    [ExpectedDate]             DATETIME        NULL,
+    [Price]                    FLOAT (53)      NULL,
+    [Count]                    FLOAT (53)      NULL,
+    [Total]                    FLOAT (53)      NULL,
+    [Disc]                     DECIMAL (19, 4) NULL,
+    [DiscNet]                  DECIMAL (18, 2) NULL,
+    [Net]                      DECIMAL (18, 2) NULL,
+    [Note]                     NVARCHAR (MAX)  NULL,
+    [InsuranceTahamal]         DECIMAL (18, 2) NULL,
+    [PatientTahamalPer]        DECIMAL (18, 2) NULL,
+    [InsuranceTahamalStatic]   DECIMAL (18, 2) NULL,
+    [VATPer]                   DECIMAL (18, 2) NULL,
+    [VatValue]                 DECIMAL (18, 2) NULL,
+    [TotalNoVAT]               DECIMAL (18, 2) NULL,
+    [VatExemption]             DECIMAL (18, 2) NULL,
+    [InsuranceTahamalVATPer]   DECIMAL (18, 2) NULL,
+    [InsuranceTahamalVATValue] DECIMAL (18, 2) NULL,
+    [InsuranceTahamalAfterVAT] DECIMAL (18, 2) NULL,
+    [IsVatExempted]            BIT             NULL,
+    CONSTRAINT [PK_A1_QuotationWorkDetail] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+

@@ -295,7 +295,7 @@ BEGIN
             norm_punch_state,
             burst_no
     ),
-    day_ordered AS
+    day_numbered AS
     (
         SELECT
             c.*,
@@ -309,6 +309,36 @@ BEGIN
                 PARTITION BY c.emp_id, c.att_date
             ) AS daily_punch_count
         FROM collapsed c
+    ),
+    day_ordered AS
+    (
+        SELECT
+            dn.*,
+            MAX(CASE WHEN dn.punch_order = 1 THEN dn.norm_punch_state END) OVER
+            (
+                PARTITION BY dn.emp_id, dn.att_date
+            ) AS punch_1_state,
+            MAX(CASE WHEN dn.punch_order = 2 THEN dn.norm_punch_state END) OVER
+            (
+                PARTITION BY dn.emp_id, dn.att_date
+            ) AS punch_2_state,
+            MAX(CASE WHEN dn.punch_order = 3 THEN dn.norm_punch_state END) OVER
+            (
+                PARTITION BY dn.emp_id, dn.att_date
+            ) AS punch_3_state,
+            MAX(CASE WHEN dn.punch_order = 1 THEN dn.punch_time END) OVER
+            (
+                PARTITION BY dn.emp_id, dn.att_date
+            ) AS punch_1_time,
+            MAX(CASE WHEN dn.punch_order = 2 THEN dn.punch_time END) OVER
+            (
+                PARTITION BY dn.emp_id, dn.att_date
+            ) AS punch_2_time,
+            MAX(CASE WHEN dn.punch_order = 3 THEN dn.punch_time END) OVER
+            (
+                PARTITION BY dn.emp_id, dn.att_date
+            ) AS punch_3_time
+        FROM day_numbered dn
     ),
     ti_break AS
     (
@@ -326,6 +356,9 @@ BEGIN
         SELECT
             es.emp_id,
             es.att_date,
+            es.effective_required_work_minutes,
+            es.effective_scheduled_in_datetime,
+            es.effective_scheduled_out_datetime,
             CASE
                 WHEN ISNULL(tb.break_minutes, 0) > 0
                   OR ISNULL(ti.duration, 0) > ISNULL(ti.work_time_duration, 0)
@@ -356,6 +389,23 @@ BEGIN
                         WHEN 4 THEN 1
                         ELSE d.norm_punch_state
                     END
+
+                WHEN ISNULL(sc.is_split_shift, 0) = 0
+                 AND ISNULL(sc.effective_required_work_minutes, 0) > 0
+                 AND sc.effective_scheduled_in_datetime IS NOT NULL
+                 AND sc.effective_scheduled_out_datetime IS NOT NULL
+                 AND d.daily_punch_count = 3
+                 AND d.punch_1_state = 0
+                 AND d.punch_2_state = 1
+                 AND d.punch_3_state = 0
+                 AND d.punch_1_time >= DATEADD(HOUR, -2, sc.effective_scheduled_in_datetime)
+                 AND d.punch_1_time <= DATEADD(MINUTE, @LateGraceMinutes, sc.effective_scheduled_in_datetime)
+                 AND d.punch_2_time < DATEADD(MINUTE, -@WorkCompletionToleranceMinutes, sc.effective_scheduled_out_datetime)
+                 AND d.punch_3_time >= DATEADD(MINUTE, -@EarlyOutGraceMinutes, sc.effective_scheduled_out_datetime)
+                 AND d.punch_3_time <= DATEADD(MINUTE, @WorkCompletionToleranceMinutes, sc.effective_scheduled_out_datetime)
+                 AND d.punch_order = 3
+                THEN 1
+
                 ELSE d.norm_punch_state
             END AS norm_punch_state,
             CASE
@@ -370,6 +420,24 @@ BEGIN
                         ELSE d.norm_punch_state
                     END
                 THEN 1
+
+                WHEN ISNULL(sc.is_split_shift, 0) = 0
+                 AND ISNULL(sc.effective_required_work_minutes, 0) > 0
+                 AND sc.effective_scheduled_in_datetime IS NOT NULL
+                 AND sc.effective_scheduled_out_datetime IS NOT NULL
+                 AND d.daily_punch_count = 3
+                 AND d.punch_1_state = 0
+                 AND d.punch_2_state = 1
+                 AND d.punch_3_state = 0
+                 AND d.punch_1_time >= DATEADD(HOUR, -2, sc.effective_scheduled_in_datetime)
+                 AND d.punch_1_time <= DATEADD(MINUTE, @LateGraceMinutes, sc.effective_scheduled_in_datetime)
+                 AND d.punch_2_time < DATEADD(MINUTE, -@WorkCompletionToleranceMinutes, sc.effective_scheduled_out_datetime)
+                 AND d.punch_3_time >= DATEADD(MINUTE, -@EarlyOutGraceMinutes, sc.effective_scheduled_out_datetime)
+                 AND d.punch_3_time <= DATEADD(MINUTE, @WorkCompletionToleranceMinutes, sc.effective_scheduled_out_datetime)
+                 AND d.punch_order = 3
+                 AND d.norm_punch_state <> 1
+                THEN 1
+
                 ELSE 0
             END AS auto_corrected_state
         FROM day_ordered d

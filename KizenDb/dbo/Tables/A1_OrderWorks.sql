@@ -78,8 +78,18 @@
     [ScientificCode]                 NVARCHAR (255)  NULL,
     [IsSessionWork]                  BIT             NULL,
     [DrugSelectionReason]            NVARCHAR (255)  NULL,
+    [Priority]                       INT             NULL,
+    [Morphology]                     NVARCHAR (50)   NULL,
+    [IsMaternity]                    BIT             NULL,
+    [LastMenstrualPeriod]            DATETIME        NULL,
+    [WorkType]                       INT             NULL,
+    [IsVatExempted]                  BIT             NULL,
+    [QuotationWorkDetailID]          INT             NULL,
+    [HideFromInsurance]              BIT             NULL,
     CONSTRAINT [PK_A1_OrderWorks] PRIMARY KEY CLUSTERED ([ID] ASC)
 );
+
+
 
 
 GO

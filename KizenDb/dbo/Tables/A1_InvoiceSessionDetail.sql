@@ -14,8 +14,18 @@
     [Note]                   NVARCHAR (MAX) NULL,
     [AttendanceDate]         DATETIME       NULL,
     [FollowUpAttendanceDate] DATETIME       NULL,
+    [SessionNote]            NVARCHAR (MAX) NULL,
+    [SessionNoteUserId]      INT            NULL,
+    [SessionNoteUserName]    NVARCHAR (255) NULL,
+    [SessionNoteDate]        DATETIME       NULL,
+    [FollowUpNote]           NVARCHAR (MAX) NULL,
+    [FollowUpNoteUserId]     INT            NULL,
+    [FollowUpNoteUserName]   NVARCHAR (255) NULL,
+    [FollowUpNoteDate]       DATETIME       NULL,
     CONSTRAINT [PK_A1_InvoiceSessionDetail] PRIMARY KEY CLUSTERED ([ID] ASC)
 );
+
+
 
 
 GO

@@ -88,11 +88,35 @@
     [BaldiNo]                    NVARCHAR (50)   NULL,
     [InsuranceRelation]          NVARCHAR (50)   NULL,
     [GLN]                        NVARCHAR (255)  NULL,
+    [AddressDistrict]            NVARCHAR (127)  NULL,
+    [AddressStreet]              NVARCHAR (1000) NULL,
+    [AddressBuildingNumber]      NVARCHAR (50)   NULL,
+    [AddressPostalCode]          NVARCHAR (200)  NULL,
+    [IsTaxRegistered]            BIT             NULL,
+    [IsNewBorn]                  BIT             NULL,
+    [JME_Relationship]           INT             CONSTRAINT [DF_Customers_JME_Relationship] DEFAULT ((0)) NULL,
     CONSTRAINT [PK_Customers] PRIMARY KEY CLUSTERED ([CustID] ASC)
 );
+
+
 
 
 GO
 CREATE NONCLUSTERED INDEX [IX_Customers_CustNat]
     ON [dbo].[Customers]([CustNat] ASC);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_Customers_CustMobile2]
+    ON [dbo].[Customers]([CustMobile2] ASC);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_Customers_CustMobile1]
+    ON [dbo].[Customers]([CustMobile1] ASC);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_Customers_CustFacbook]
+    ON [dbo].[Customers]([CustFacbook] ASC);
 

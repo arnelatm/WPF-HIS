@@ -542,6 +542,7 @@
     <Build Include="dbo\Tables\Purchase.sql" />
     <Build Include="dbo\Views\PurchaseDetail_View.sql" />
     <Build Include="dbo\Views\Product_View.sql" />
+    <Build Include="dbo\Views\ProductView.sql" />
     <Build Include="dbo\Tables\PrintSetup.sql" />
     <Build Include="dbo\Views\PrintSetup_View.sql" />
     <Build Include="dbo\Tables\ProductOld.sql" />
