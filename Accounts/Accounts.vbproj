@@ -245,6 +245,7 @@
     <Compile Include="BusinessLayer\IGroup\StockInventory.vb" />
     <Compile Include="BusinessLayer\Kizen\LabReportStatus.vb" />
     <Compile Include="BusinessLayer\Kizen\InvMedNotes.vb" />
+    <Compile Include="BusinessLayer\MedicalFitnessReport.vb" />
     <Compile Include="BusinessLayer\SupplierProduct.vb" />
     <Compile Include="BusinessLayer\PurchaseOrderDetail.vb" />
     <Compile Include="BusinessLayer\InvTransaction.vb" />
@@ -351,6 +352,7 @@
     <Compile Include="DataLayer\AdoNet\IGroup\PrescriptionItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\Kizen\LabReportStatusDao.vb" />
     <Compile Include="DataLayer\AdoNet\Kizen\InvMedNotesDao.vb" />
+    <Compile Include="DataLayer\AdoNet\MedicalFitnessReportDao.vb" />
     <Compile Include="DataLayer\AdoNet\SupplierProductDao.vb" />
     <Compile Include="DataLayer\AdoNet\PurchaseOrderApprovalDetailDao.vb" />
     <Compile Include="DataLayer\AdoNet\InvRequestDetailDao.vb" />
@@ -506,6 +508,7 @@
     <Compile Include="PresentationLayer\Models\InventoryModel.vb" />
     <Compile Include="PresentationLayer\Models\Kizen\LabReportStatusModel.vb" />
     <Compile Include="PresentationLayer\Models\Kizen\InvMedNotesModel.vb" />
+    <Compile Include="PresentationLayer\Models\MedicalFitnessReportModel.vb" />
     <Compile Include="PresentationLayer\Models\SupplierProductModel.vb" />
     <Compile Include="PresentationLayer\Models\PurchaseOrderDetailModel.vb" />
     <Compile Include="PresentationLayer\Models\InvTransactionModel.vb" />
@@ -581,6 +584,7 @@
     <Compile Include="PresentationLayer\Presenters\IGroup\IbLabSamplePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\Kizen\LabReportStatusPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\Kizen\InvMedNotesPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\MedicalFitnessReportPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\SupplierProductPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PurchaseOrderApprovalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\UtilityPresenter.vb" />
@@ -723,6 +727,12 @@
     <Compile Include="PresentationLayer\Views\Forms\Kizen\InvMedNotesForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\MedicalFitnessReportForm.Designer.vb">
+      <DependentUpon>MedicalFitnessReportForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\MedicalFitnessReportForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\ProductBaseUnitChanger.Designer.vb">
       <DependentUpon>ProductBaseUnitChanger.vb</DependentUpon>
     </Compile>
@@ -780,6 +790,7 @@
     <Compile Include="PresentationLayer\Views\ClinicLabSampleDetailView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\Kizen\ILabReportStatusView.vb" />
     <Compile Include="PresentationLayer\Views\InvMedNotesDetailView.vb" />
+    <Compile Include="PresentationLayer\Views\MedicalFitnessReportTestResultView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IApArEmReportView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IContactDateRangeView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeLeaveEarnedView.vb" />
@@ -919,6 +930,7 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IStockRequestApprovalView.vb" />
     <Compile Include="PresentationLayer\Views\IbLabSampleDetailView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\Kizen\IInvMedNotesView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IMedicalFitnessReportView.vb" />
     <Compile Include="PresentationLayer\Views\PurchaseOrderDetailView.vb" />
     <Compile Include="PresentationLayer\Views\ProductUnitView.vb" />
     <Compile Include="PresentationLayer\Views\Forms\ApJournalEntry.designer.vb">
@@ -2161,6 +2173,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Kizen\InvMedNotesForm.resx">
       <DependentUpon>InvMedNotesForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\MedicalFitnessReportForm.resx">
+      <DependentUpon>MedicalFitnessReportForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\ProductBaseUnitChanger.resx">
       <DependentUpon>ProductBaseUnitChanger.vb</DependentUpon>

@@ -228,7 +228,6 @@ Namespace PresentationLayer.Presenters
             Dim employees = GetRecords("Employee", "EmployeeName", {"IdNo", "EmployeeName", "HiredDate", "ReleasedDate", "DutyHours", "ActualDutyHours"}, employeeFilter)
             Dim numberOfEmployees = Int(employees.Count() / 6)
             Dim daysInPeriod As Long
-            Dim daysOffInPeriod As Long
             Dim seq As Integer
             Dim dateHired As Date
             Dim dateReleased As Date?
@@ -241,7 +240,6 @@ Namespace PresentationLayer.Presenters
             Dim absences As List(Of EmployeeAbsenceModel) = absenceService.GetRecordsWithGroupIdNo(Of EmployeeAbsenceModel)(View.IdNo, "IdNo")
             'seq = View.PayrollAttendance.Count() + absences.Count() + 1
             daysInPeriod = DateDiff(DateInterval.Day, Convert.ToDateTime(View.StartDate), Convert.ToDateTime(View.EndDate)) + 1
-            daysOffInPeriod = ComputeDaysOff(View.StartDate, View.EndDate)
             If View.PayrollAttendance.Any() Then
                 _reinitialize = True
             Else
@@ -270,12 +268,12 @@ Namespace PresentationLayer.Presenters
                         empAttendance = currentEmpAttendance.Find(Function(c) c.EmployeeIdNo = empId)
                         If empAttendance IsNot Nothing Then
                             If empAttendance.Selected Then
-                                UpdateEmployeeAttendance(empAttendance, dateHired, dateReleased, empId, empName, daysInPeriod, daysOffInPeriod, seq)
+                                UpdateEmployeeAttendance(empAttendance, dateHired, dateReleased, empId, empName, daysInPeriod, seq)
                             Else
                                 View.PayrollAttendance.Add(empAttendance)
                             End If
                         Else
-                            AddEmployeeAttendance(dateHired, dateReleased, empId, empName, daysInPeriod, daysOffInPeriod, seq)
+                            AddEmployeeAttendance(dateHired, dateReleased, empId, empName, daysInPeriod, seq)
                         End If
                         seq = seq + 1
                     Else
@@ -304,7 +302,7 @@ Namespace PresentationLayer.Presenters
                     dutyHours = employees(i * 6 - 2)
                     actualDutyHours = employees(i * 6 - 1)
                     If dateHired <= View.EndDate AndAlso (dateReleased Is Nothing OrElse dateReleased >= View.StartDate OrElse dateReleased > View.EndDate) Then
-                        AddEmployeeAttendance(dateHired, dateReleased, empId, empName, daysInPeriod, daysOffInPeriod, seq)
+                        AddEmployeeAttendance(dateHired, dateReleased, empId, empName, daysInPeriod, seq)
                         seq = seq + 1
                     End If
                     counter = counter + 1
@@ -388,82 +386,41 @@ Namespace PresentationLayer.Presenters
             Messaging.Show(True, "MsgOvertimeInitializationCompleted")
         End Sub
 
-        Public Sub AddEmployeeAttendance(ByVal dateHired As Date, ByVal dateReleased As Date?, ByVal empId As Int16, ByVal empName As String, ByVal daysInPeriod As Int16, ByVal daysOffInPeriod As Int16, ByVal seq As Int16)
+        Public Sub AddEmployeeAttendance(ByVal dateHired As Date, ByVal dateReleased As Date?, ByVal empId As Int16, ByVal empName As String, ByVal daysInPeriod As Int16, ByVal seq As Int16)
             Dim empAttendance As New AttendanceItemView
             Dim daysOff As Int16
             Dim daysTotal As Int16
-            ComputeTotalDaysNOff(daysTotal, daysOff, dateHired, dateReleased, daysInPeriod, daysOffInPeriod)
-            empAttendance.DaysTotal = daysTotal
-            empAttendance.DaysOff = daysOff
+            Dim daysAbsentWithoutPay As Decimal
             empAttendance.PayrollIdNo = View.IdNo
             empAttendance.EmployeeIdNo = empId
             empAttendance.EmployeeName = empName
             empAttendance.Sequence = seq
-            'If empId = 232 Then
-            '    Debugger.Break()
-            'End If
-            If dateHired <= View.StartDate AndAlso (dateReleased Is Nothing OrElse dateReleased > View.EndDate) Then
-                empAttendance.DaysAbsentWithoutPay = 0
-                empAttendance.DaysAbsentWithPay = 0
-                empAttendance.DaysVacationLeave = 0
-                empAttendance.DaysPresent = daysTotal - daysOff
-            Else
-                If dateReleased Is Nothing OrElse dateReleased > View.EndDate Then
-                    Dim sDate As Date
-                    sDate = View.StartDate
-                    empAttendance.DaysAbsentWithoutPay = DateDiff(DateInterval.Day, sDate, dateHired)
-                    empAttendance.DaysAbsentWithPay = 0
-                    empAttendance.DaysVacationLeave = 0
-                    empAttendance.DaysPresent = daysTotal - empAttendance.DaysAbsentWithoutPay - daysOff
-                Else
-                    Dim rDate As Date ' need to do this because Date? type is not accepted by DateAdd function
-                    Dim eDate As Date
-                    rDate = dateReleased
-                    eDate = View.EndDate
-                    empAttendance.DaysAbsentWithoutPay = DateDiff(DateInterval.Day, rDate, eDate) + 1
-                    empAttendance.DaysAbsentWithPay = 0
-                    empAttendance.DaysVacationLeave = 0
-                    empAttendance.DaysPresent = daysTotal - empAttendance.DaysAbsentWithoutPay - daysOff
-                End If
-            End If
+            ComputeEmployeePeriodAttendance(daysTotal, daysOff, daysAbsentWithoutPay, dateHired, dateReleased, daysInPeriod)
+            empAttendance.DaysTotal = daysTotal
+            empAttendance.DaysOff = daysOff
+            empAttendance.DaysAbsentWithoutPay = daysAbsentWithoutPay
+            empAttendance.DaysAbsentWithPay = 0
+            empAttendance.DaysVacationLeave = 0
+            empAttendance.DaysPresent = daysTotal - empAttendance.DaysAbsentWithoutPay - daysOff
             View.PayrollAttendance.Add(empAttendance)
         End Sub
 
-        Public Sub UpdateEmployeeAttendance(ByVal empAttendance As AttendanceItemView, ByVal dateHired As Date, ByVal dateReleased As Date?, ByVal empId As Int16, ByVal empName As String, ByVal daysInPeriod As Int16, ByVal daysOffInPeriod As Int16, ByVal seq As Int16)
+        Public Sub UpdateEmployeeAttendance(ByVal empAttendance As AttendanceItemView, ByVal dateHired As Date, ByVal dateReleased As Date?, ByVal empId As Int16, ByVal empName As String, ByVal daysInPeriod As Int16, ByVal seq As Int16)
             Dim daysOff As Int16
             Dim daysTotal As Int16
-            ComputeTotalDaysNOff(daysTotal, daysOff, dateHired, dateReleased, daysInPeriod, daysOffInPeriod)
-            empAttendance.DaysTotal = daysTotal
-            empAttendance.DaysOff = daysOff
+            Dim daysAbsentWithoutPay As Decimal
             empAttendance.PayrollIdNo = View.IdNo
             empAttendance.EmployeeIdNo = empId
             empAttendance.EmployeeName = empName
             empAttendance.Sequence = seq
 
-            If dateHired <= View.StartDate AndAlso (dateReleased Is Nothing OrElse dateReleased > View.EndDate) Then
-                empAttendance.DaysAbsentWithoutPay = 0
-                empAttendance.DaysAbsentWithPay = 0
-                empAttendance.DaysVacationLeave = 0
-                empAttendance.DaysPresent = daysTotal - daysOff
-            Else
-                If dateReleased Is Nothing OrElse dateReleased > View.EndDate Then
-                    Dim sDate As Date
-                    sDate = View.StartDate
-                    empAttendance.DaysAbsentWithoutPay = DateDiff(DateInterval.Day, sDate, dateHired)
-                    empAttendance.DaysAbsentWithPay = 0
-                    empAttendance.DaysVacationLeave = 0
-                    empAttendance.DaysPresent = daysTotal - empAttendance.DaysAbsentWithoutPay - daysOff
-                Else
-                    Dim rDate As Date ' need to do this because Date? type is not accepted by DateAdd function
-                    Dim eDate As Date
-                    rDate = dateReleased
-                    eDate = View.EndDate
-                    empAttendance.DaysAbsentWithoutPay = DateDiff(DateInterval.Day, rDate, eDate) + 1
-                    empAttendance.DaysAbsentWithPay = 0
-                    empAttendance.DaysVacationLeave = 0
-                    empAttendance.DaysPresent = daysTotal - empAttendance.DaysAbsentWithoutPay - daysOff
-                End If
-            End If
+            ComputeEmployeePeriodAttendance(daysTotal, daysOff, daysAbsentWithoutPay, dateHired, dateReleased, daysInPeriod)
+            empAttendance.DaysTotal = daysTotal
+            empAttendance.DaysOff = daysOff
+            empAttendance.DaysAbsentWithoutPay = daysAbsentWithoutPay
+            empAttendance.DaysAbsentWithPay = 0
+            empAttendance.DaysVacationLeave = 0
+            empAttendance.DaysPresent = daysTotal - empAttendance.DaysAbsentWithoutPay - daysOff
             View.PayrollAttendance.Add(empAttendance)
         End Sub
 
@@ -486,25 +443,26 @@ Namespace PresentationLayer.Presenters
         '    empAttendance.DaysPresent = empAttendance.DaysTotal - empAttendance.DaysOff - empAttendance.DaysAbsentWithPay - empAttendance.DaysAbsentWithoutPay - empAttendance.DaysVacationLeave
         'End Sub
 
-        Private Sub ComputeTotalDaysNOff(ByRef daysTotal As Int16, ByRef daysOff As Int16, ByVal dateHired As Date, ByVal dateReleased As Date?, ByVal daysInPeriod As Int16, ByVal daysOffInPeriod As Int16)
-            Dim eDate As Date
-            If dateHired <= View.StartDate AndAlso (dateReleased Is Nothing OrElse dateReleased > View.EndDate) Then
-                daysOff = daysOffInPeriod
-                daysTotal = daysInPeriod
-            Else
-                If dateReleased Is Nothing OrElse dateReleased > View.EndDate Then
-                    eDate = View.EndDate
-                    daysTotal = DateDiff(DateInterval.Day, dateHired, eDate) + 1
-                    daysOff = ComputeDaysOff(dateHired, eDate)
-                Else
-                    Dim rDate As Date ' need to do this because Date? type is not accepted by DateAdd function
-                    Dim sDate As Date
-                    sDate = View.StartDate
-                    rDate = dateReleased
-                    daysTotal = daysInPeriod
-                    daysOff = ComputeDaysOff(sDate, rDate)
-                End If
+        Private Sub ComputeEmployeePeriodAttendance(ByRef daysTotal As Int16, ByRef daysOff As Int16, ByRef daysAbsentWithoutPay As Decimal, ByVal dateHired As Date, ByVal dateReleased As Date?, ByVal daysInPeriod As Int16)
+            Dim periodStart As Date = View.StartDate
+            Dim periodEnd As Date = View.EndDate
+            Dim activeStart As Date = If(dateHired > periodStart, dateHired, periodStart)
+            Dim activeEnd As Date = periodEnd
+            Dim daysBeforeHire As Integer = 0
+            Dim daysAfterRelease As Integer = 0
+
+            If dateHired > periodStart Then
+                daysBeforeHire = DateDiff(DateInterval.Day, periodStart, dateHired)
             End If
+
+            If dateReleased.HasValue AndAlso dateReleased.Value <= periodEnd Then
+                activeEnd = dateReleased.Value.AddDays(-1)
+                daysAfterRelease = DateDiff(DateInterval.Day, dateReleased.Value, periodEnd) + 1
+            End If
+
+            daysTotal = daysInPeriod
+            daysAbsentWithoutPay = daysBeforeHire + daysAfterRelease
+            daysOff = ComputeDaysOff(activeStart, activeEnd)
         End Sub
 
         Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
@@ -552,7 +510,10 @@ Namespace PresentationLayer.Presenters
         Public Shared Function ComputeDaysOff(ByVal begDate As Date, endDate As Date) As Integer
             Dim count As Integer
             Dim d As DateTime = begDate
-            Do Until d = endDate
+            If begDate > endDate Then
+                Return 0
+            End If
+            Do While d <= endDate
                 ' for now assume everyone has Days off on Friday
                 If d.DayOfWeek = DayOfWeek.Friday Then
                     count += 1

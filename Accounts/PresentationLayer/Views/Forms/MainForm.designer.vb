@@ -163,6 +163,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemBaladiyaResultEntryIGroup = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemDiagnosticSamples = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemClinicSamples = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemMedicalFitnessReport = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemLabReportStatus = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPharmacy = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemDrugSale = New System.Windows.Forms.ToolStripMenuItem()
@@ -929,7 +930,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemLaboratory
             '
-            Me.ToolStripMenuItemLaboratory.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemCbcResultRetrieval, Me.ToolStripMenuItemCbcResultRetrievalSampleId, Me.ToolStripMenuItemIqamaResultEntryKizen, Me.ToolStripMenuItemBaladiyaResultEntryKizen, Me.ToolStripMenuItemDiagnosticSamplesKizen, Me.ToolStripMenuItemIqamaResultEntryIGroup, Me.ToolStripMenuItemBaladiyaResultEntryIGroup, Me.ToolStripMenuItemDiagnosticSamples, Me.ToolStripMenuItemClinicSamples, Me.ToolStripMenuItemLabReportStatus})
+            Me.ToolStripMenuItemLaboratory.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemCbcResultRetrieval, Me.ToolStripMenuItemCbcResultRetrievalSampleId, Me.ToolStripMenuItemIqamaResultEntryKizen, Me.ToolStripMenuItemBaladiyaResultEntryKizen, Me.ToolStripMenuItemDiagnosticSamplesKizen, Me.ToolStripMenuItemIqamaResultEntryIGroup, Me.ToolStripMenuItemBaladiyaResultEntryIGroup, Me.ToolStripMenuItemDiagnosticSamples, Me.ToolStripMenuItemClinicSamples, Me.ToolStripMenuItemMedicalFitnessReport, Me.ToolStripMenuItemLabReportStatus})
             Me.ToolStripMenuItemLaboratory.Name = "ToolStripMenuItemLaboratory"
             resources.ApplyResources(Me.ToolStripMenuItemLaboratory, "ToolStripMenuItemLaboratory")
             '
@@ -977,6 +978,11 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.ToolStripMenuItemClinicSamples.Name = "ToolStripMenuItemClinicSamples"
             resources.ApplyResources(Me.ToolStripMenuItemClinicSamples, "ToolStripMenuItemClinicSamples")
+            '
+            'ToolStripMenuItemMedicalFitnessReport
+            '
+            Me.ToolStripMenuItemMedicalFitnessReport.Name = "ToolStripMenuItemMedicalFitnessReport"
+            resources.ApplyResources(Me.ToolStripMenuItemMedicalFitnessReport, "ToolStripMenuItemMedicalFitnessReport")
             '
             'ToolStripMenuItemLabReportStatus
             '
@@ -1799,6 +1805,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ToolStripMenuItemBaladiyaResultEntryKizen As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemBaladiyaResultEntryIGroup As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemInvoiceNoteEditor As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemMedicalFitnessReport As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemLabReportStatus As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemTBClosingYear As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemBSClosingYear As ToolStripMenuItem

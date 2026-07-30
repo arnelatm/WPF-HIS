@@ -1376,6 +1376,10 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of InvMedNotesForm, InvMedNotesPresenter(Of InvMedNotesModel))()
         End Sub
 
+        Private Sub ToolStripMenuItemMedicalFitnessReport_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemMedicalFitnessReport.Click
+            RunForm(Of MedicalFitnessReportForm, MedicalFitnessReportPresenter(Of MedicalFitnessReportModel))()
+        End Sub
+
         Private Sub ToolStripMenuItemLabReportStatus_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemLabReportStatus.Click
             RunForm(Of LabReportStatusForm, LabReportStatusPresenter(Of LabReportStatusModel))()
         End Sub

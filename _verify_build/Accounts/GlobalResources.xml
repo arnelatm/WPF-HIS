@@ -1,0 +1,226 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+GlobalResources
+</name>
+</assembly>
+<members>
+<member name="T:AATM.Libraries.GlobalResources.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalResources.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalResources.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalResources.My.Resources.Resources.arabic">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalResources.My.Resources.Resources.btnadd">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalResources.My.Resources.Resources.btndelete">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalResources.My.Resources.Resources.btnedit">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalResources.My.Resources.Resources.btnfind">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalResources.My.Resources.Resources.btnfirst">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalResources.My.Resources.Resources.btnfirst_ar_sa">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalResources.My.Resources.Resources.btnlast">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalResources.My.Resources.Resources.btnlast_ar_sa">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalResources.My.Resources.Resources.btnnext">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalResources.My.Resources.Resources.btnnext_ar_sa">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalResources.My.Resources.Resources.btnprev">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalResources.My.Resources.Resources.btnprev_ar_sa">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalResources.My.Resources.Resources.btnquit">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalResources.My.Resources.Resources.btnquit_ar_sa">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalResources.My.Resources.Resources.btnsave">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalResources.My.Resources.Resources.btnundo">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalResources.My.Resources.Resources.btnundo_ar_sa">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalResources.My.Resources.Resources.ButtonBackGround">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalResources.My.Resources.Resources.CompanyName">
+<summary>
+  Looks up a localized string similar to Ibn Sina Polyclinic.
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalResources.My.Resources.Resources.english">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalResources.My.Resources.Resources.GreenGradientBackgroundLarge">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalResources.My.Resources.Resources.GreenPlainBackGroundLarge">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalResources.My.Resources.Resources.GreenPlainBackGroundSmall">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalResources.My.Resources.Resources.GregorianCalendarMarker">
+<summary>
+  Looks up a localized string similar to G.
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalResources.My.Resources.Resources.HijriCalendarMarker">
+<summary>
+  Looks up a localized string similar to H.
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalResources.My.Resources.Resources.Icon1">
+<summary>
+  Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalResources.My.Resources.Resources.insertrow">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalResources.My.Resources.Resources.loading">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalResources.My.Resources.Resources.Lock">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalResources.My.Resources.Resources.openbriefcase">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalResources.My.Resources.Resources.Translate">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalResources.My.Resources.Resources.TreeNode">
+<summary>
+  Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalResources.My.Resources.Resources.UmAlQuraCalendarMarker">
+<summary>
+  Looks up a localized string similar to هـ.
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalResources.My.Resources.Resources.Unlock">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalResources.My.Resources.Resources.YellowButtonBackGround">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalResources.My.Resources.Resources.YellowGradientBackgroundLarge">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalResources.My.Resources.Resources.YellowGradientButton">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalResources.My.Resources.Resources.YellowPlainBackgroundLarge">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalResources.My.Resources.Resources.YellowPlainBackgroundSmall">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+</members>
+</doc>

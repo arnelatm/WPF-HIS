@@ -1,0 +1,46 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+Presenters
+</name>
+</assembly>
+<members>
+<member name="T:AATM.PresentationLayer.Presenters.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:AATM.PresentationLayer.Presenters.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:AATM.PresentationLayer.Presenters.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="T:AATM.PresentationLayer.Presenters.PresenterBase`2">
+ <summary>
+     Base class for all presenter classes. Keeps track of Service and View classes.
+     Notice that Service is static and View is set in the constructor.
+ </summary>
+ <remarks>
+     MV Patterns: MVP design pattern.
+ </remarks>
+ <typeparam name="TV">Type of itemView.</typeparam>
+</member>
+<member name="T:AATM.PresentationLayer.Presenters.Presenter`2">
+ <summary>
+     Base class for all presenter classes. Keeps track of Service and View classes.
+     Notice that Service is static and View is set in the constructor.
+ </summary>
+ <remarks>
+     MV Patterns: MVP design pattern.
+ </remarks>
+ <typeparam name="TV">Type of itemView.</typeparam>
+</member>
+</members>
+</doc>

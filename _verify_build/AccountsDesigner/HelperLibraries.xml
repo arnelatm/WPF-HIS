@@ -1,0 +1,105 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+HelperLibraries
+</name>
+</assembly>
+<members>
+<member name="T:AATM.Libraries.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:AATM.Libraries.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:AATM.Libraries.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="P:AATM.Libraries.My.Resources.Resources.loading">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="T:AATM.Libraries.WaitWindow">
+ <summary>
+     Displays a window telling the user to wait while a process is executing.
+ </summary>
+</member>
+<member name="M:AATM.Libraries.WaitWindow.Show(System.EventHandler{AATM.Libraries.WaitWindowEventArgs})">
+ <summary>
+     Shows a wait window with the text 'Please wait...' while executing the passed method.
+ </summary>
+ <param name="workerMethod">Pointer to the method to execute while displaying the wait window.</param>
+ <returns>The result argument from the worker method.</returns>
+</member>
+<member name="M:AATM.Libraries.WaitWindow.Show(System.EventHandler{AATM.Libraries.WaitWindowEventArgs},System.String)">
+ <summary>
+     Shows a wait window with the specified text while executing the passed method.
+ </summary>
+ <param name="workerMethod">Pointer to the method to execute while displaying the wait window.</param>
+ <param name="message">The text to display.</param>
+ <returns>The result argument from the worker method.</returns>
+</member>
+<member name="M:AATM.Libraries.WaitWindow.Show(System.EventHandler{AATM.Libraries.WaitWindowEventArgs},System.String,System.Object[])">
+ <summary>
+     Shows a wait window with the specified text while executing the passed method.
+ </summary>
+ <param name="workerMethod">Pointer to the method to execute while displaying the wait window.</param>
+ <param name="message">The text to display.</param>
+ <param name="args">Arguments to pass to the worker method.</param>
+ <returns>The result argument from the worker method.</returns>
+</member>
+<member name="P:AATM.Libraries.WaitWindow.Message">
+ <summary>
+     Updates the message displayed in the wait window.
+ </summary>
+</member>
+<member name="M:AATM.Libraries.WaitWindow.Cancel">
+ <summary>
+     Cancels the work and exits the wait windows immediately
+ </summary>
+</member>
+<member name="T:AATM.Libraries.WaitWindowEventArgs">
+ <summary>
+     Provides data for the WaitWindow events.
+ </summary>
+</member>
+<member name="M:AATM.Libraries.WaitWindowEventArgs.#ctor(AATM.Libraries.WaitWindow,System.Collections.Generic.List{System.Object})">
+ <summary>
+     Initialises a new intance of the WaitWindowEventArgs class.
+ </summary>
+ <param name="GUI">The associated WaitWindow instance.</param>
+ <param name="args">A list of arguments to be passed.</param>
+</member>
+<member name="T:AATM.Libraries.WaitWindowGui">
+ <summary>
+     The dialogue displayed by a WaitWindow instance.
+ </summary>
+</member>
+<member name="F:AATM.Libraries.WaitWindowGui.components">
+ <summary>
+ Designer variable used to keep track of non-visual components.
+ </summary>
+</member>
+<member name="M:AATM.Libraries.WaitWindowGui.Dispose(System.Boolean)">
+ <summary>
+ Disposes resources used by the form.
+ </summary>
+ <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+</member>
+<member name="M:AATM.Libraries.WaitWindowGui.InitializeComponent">
+ <summary>
+ This method is required for Windows Forms designer support.
+ Do not change the method contents inside the source code editor. The Forms designer might
+ not be able to load this method if it was changed manually.
+ </summary>
+</member>
+</members>
+</doc>

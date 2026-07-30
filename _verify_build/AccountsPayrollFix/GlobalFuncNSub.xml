@@ -1,0 +1,552 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+GlobalFuncNSub
+</name>
+</assembly>
+<members>
+<member name="T:AATM.Libraries.GlobalFuncNSub.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalFuncNSub.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalFuncNSub.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="P:AATM.Libraries.GlobalFuncNSub.CurrencyInfo.CurrencyID">
+ <summary>
+ Currency ID
+ </summary>
+</member>
+<member name="P:AATM.Libraries.GlobalFuncNSub.CurrencyInfo.CurrencyCode">
+ <summary>
+ Standard Code
+ Syrian Pound: SYP
+ UAE Dirham: AED
+ </summary>
+</member>
+<member name="P:AATM.Libraries.GlobalFuncNSub.CurrencyInfo.IsCurrencyNameFeminine">
+ <summary>
+ Is the currency name feminine ( Mua'anath مؤنث)
+ ليرة سورية : مؤنث = true
+ درهم : مذكر = false
+ </summary>
+</member>
+<member name="P:AATM.Libraries.GlobalFuncNSub.CurrencyInfo.EnglishCurrencyName">
+ <summary>
+ English Currency Name for single use
+ Syrian Pound
+ UAE Dirham
+ </summary>
+</member>
+<member name="P:AATM.Libraries.GlobalFuncNSub.CurrencyInfo.EnglishPluralCurrencyName">
+ <summary>
+ English Plural Currency Name for Numbers over 1
+ Syrian Pounds
+ UAE Dirhams
+ </summary>
+</member>
+<member name="P:AATM.Libraries.GlobalFuncNSub.CurrencyInfo.Arabic1CurrencyName">
+ <summary>
+ Arabic Currency Name for 1 unit only
+ ليرة سورية
+ درهم إماراتي
+ </summary>
+</member>
+<member name="P:AATM.Libraries.GlobalFuncNSub.CurrencyInfo.Arabic2CurrencyName">
+ <summary>
+ Arabic Currency Name for 2 units only
+ ليرتان سوريتان
+ درهمان إماراتيان
+ </summary>
+</member>
+<member name="P:AATM.Libraries.GlobalFuncNSub.CurrencyInfo.Arabic310CurrencyName">
+ <summary>
+ Arabic Currency Name for 3 to 10 units
+ خمس ليرات سورية
+ خمسة دراهم إماراتية
+ </summary>
+</member>
+<member name="P:AATM.Libraries.GlobalFuncNSub.CurrencyInfo.Arabic1199CurrencyName">
+ <summary>
+ Arabic Currency Name for 11 to 99 units
+ خمس و سبعون ليرةً سوريةً
+ خمسة و سبعون درهماً إماراتياً
+ </summary>
+</member>
+<member name="P:AATM.Libraries.GlobalFuncNSub.CurrencyInfo.PartPrecision">
+ <summary>
+ Decimal Part Precision
+ for Syrian Pounds: 2 ( 1 SP = 100 parts)
+ for Tunisian Dinars: 3 ( 1 TND = 1000 parts)
+ </summary>
+</member>
+<member name="P:AATM.Libraries.GlobalFuncNSub.CurrencyInfo.IsCurrencyPartNameFeminine">
+ <summary>
+ Is the currency part name feminine ( Mua'anath مؤنث)
+ هللة : مؤنث = true
+ قرش : مذكر = false
+ </summary>
+</member>
+<member name="P:AATM.Libraries.GlobalFuncNSub.CurrencyInfo.EnglishCurrencyPartName">
+ <summary>
+ English Currency Part Name for single use
+ Piaster
+ Fils
+ </summary>
+</member>
+<member name="P:AATM.Libraries.GlobalFuncNSub.CurrencyInfo.EnglishPluralCurrencyPartName">
+ <summary>
+ English Currency Part Name for Plural
+ Piasters
+ Fils
+ </summary>
+</member>
+<member name="P:AATM.Libraries.GlobalFuncNSub.CurrencyInfo.Arabic1CurrencyPartName">
+ <summary>
+ Arabic Currency Part Name for 1 unit only
+ قرش
+ هللة
+ </summary>
+</member>
+<member name="P:AATM.Libraries.GlobalFuncNSub.CurrencyInfo.Arabic2CurrencyPartName">
+ <summary>
+ Arabic Currency Part Name for 2 unit only
+ قرشان
+ هللتان
+ </summary>
+</member>
+<member name="P:AATM.Libraries.GlobalFuncNSub.CurrencyInfo.Arabic310CurrencyPartName">
+ <summary>
+ Arabic Currency Part Name for 3 to 10 units
+ قروش
+ هللات
+ </summary>
+</member>
+<member name="P:AATM.Libraries.GlobalFuncNSub.CurrencyInfo.Arabic1199CurrencyPartName">
+ <summary>
+ Arabic Currency Part Name for 11 to 99 units
+ قرشاً
+ هللةً
+ </summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.CalendarDateToShortDateString(System.Nullable{System.DateTime},System.Globalization.CultureInfo)">
+<summary>
+Converts a given date value to short date string in the requested targetculture
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.CultureSupportHijri(System.Globalization.CultureInfo)">
+<summary>
+Checks if the given CultureInfo supports the Hijri Calendar
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.CultureSupportUmAlQura(System.Globalization.CultureInfo)">
+<summary>
+Checks if the given CultureInfo supports the Um-Al-Qura Calendar
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.DateStringSpecificCultureToDate(System.String,System.Globalization.CultureInfo)">
+<summary>
+Converts the given Date String to the requested TargetCulture
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.DateStringSpecificCultureToDateTime(System.String,System.Globalization.CultureInfo)">
+<summary>
+Converts the given Date String to the requested TargetCulture
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.DateToSpecificCultureShortDateString(System.Nullable{System.DateTime},System.Globalization.CultureInfo)">
+<summary>
+Converts a given Date Value to the desired shortDateString for the targetCulture
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.DateTimeToSpecificCultureShortDateTimeString(System.Nullable{System.DateTime},System.Globalization.CultureInfo)">
+<summary>
+Converts a given Date Value to the desired shortDateString for the targetCulture
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.DtoS(System.DateTime)">
+<summary>
+Converts a string in the format 'yyyymmdd' to a gregorian date
+<para>minValue is returned and the MaxValue is passed by reference</para>
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.FormatMoney(System.Decimal)">
+<summary>
+Converts a given Decimal Amount  into a string Currency format
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.FormatDecimalNumber(System.Decimal)">
+<summary>
+Converts a given Decimal Amount  into a string Number format
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.FormatDecimalNumber(System.Decimal,System.Int16)">
+<summary>
+Converts a given Decimal Amount into a string Decimal format with the desired decimal places
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.GbDateSerial(System.Int16,System.Int16,System.Int16)">
+<summary>
+Converts a given serial date (year,month,day) into a gregorian date regardless of current culture
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.MakeDate(System.Int16,System.Int16,System.Int16)">
+<summary>
+Converts a given string to date (year,month,day) into a date regardless of current culture
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.GetCalendarName(System.Globalization.Calendar)">
+<summary>
+Get the Calendar Name for a given Calendar
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.GetDescription(System.Object,System.String)">
+<summary>
+Gets the description for a given enum
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.EnumToCode(System.Object)">
+<summary>
+Converts a given Enum Value to its Coded Value
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.CodeToEnum``1(System.String)">
+<summary>
+Converts the Coded Value of an Enum to its Enum Value
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.GetMonthNameInCulture(System.Int32,System.Globalization.CultureInfo@,System.Globalization.CultureInfo@)">
+<summary>
+Get the month name for the given culture
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.GetMonthNamesInCulture(System.Globalization.CultureInfo@)">
+<summary>
+Get the month names for the target Culture
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.GetPropertyName``1(System.Linq.Expressions.Expression{System.Func{``0}})">
+<summary>
+Get the property name for the current expression
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.GetPropertyValue(System.Object,System.String)">
+<summary>
+Get the value of a property in the target object
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.GetTranslatedField(System.String)">
+<summary>
+Get the Arabic Translated property field name for the requested property
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.GetVatPercentage">
+<summary>
+ Returns the current Vat Percentage for sales
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.GregorianDay(System.Nullable{System.DateTime})">
+<summary>
+Returns the day number in a given date for the gregorian calendar
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.GregorianMonth(System.Nullable{System.DateTime})">
+<summary>
+Returns the month number for the gregorian calendar for a given date
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.GregorianMonthName(System.Int16)">
+<summary>
+Returns the month name for the gregorian calendar for a given month number
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.GregorianMonthNameArabic(System.Int16)">
+<summary>
+Returns the month name for the gregorian calendar for a given month number
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.GregorianYear(System.Nullable{System.DateTime})">
+<summary>
+Returns the year in the gregorian calendar for a given date
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.GregorianDateSerial(System.Int32,System.Int32,System.Int32)">
+<summary>
+Converts a Date to Gregorian Date given the year,month,and day.
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.GregorianDateTimeSerial(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+<summary>
+Converts a Date to Gregorian Date given the year,month,and day.
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.HijriMonthInEnglish(System.Int16)">
+<summary>
+Returns the Hijri month (in English) for the given month number.
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.IsCultureOk(System.String)">
+<summary>
+Checks if a given culture code is a valid culture
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.IsDateValidForTargetCulture(System.String,System.Globalization.CultureInfo@)">
+<summary>
+Checks if a given date (in string format) is valid for the given target culture
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.IsEmpty(System.Object)">
+<summary>
+Checks if a given value is empty
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.IsRightToLeft(System.String)">
+<summary>
+Checks if a given culture string is a Right To Left Culture
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.NeedToTranslateText(System.String,System.String)">
+ <summary>
+ Checks if there is a need to translate a given text
+ </summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.NullString(System.String)">
+ <summary>
+     handles null or blank values for string type
+ </summary>
+ <param name="argStr">string value to handle</param>
+ <returns>returns string</returns>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.NullValue(System.Double)">
+<summary>
+Converts a Double number to zero if null
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.NumParser``1(System.String@)">
+<summary>
+Converts a given number in string format to the desired number format.
+<para>returns zero(0) if not convertible to number.</para>
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.DateParser``1(System.String@)">
+<summary>
+Converts a given date in string format to the desired date format.
+<para>returns zero(0) if not convertible to number.</para>
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.BoolParser``1(System.String@)">
+<summary>
+Converts a given Boolean in string format to the desired Bool format.
+<para>returns false (0) if not convertible to boolean.</para>
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.ObjectsCompare(System.Object,System.Object)">
+<summary>
+Compares two objects if the same
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.PadWithZeroSingleDigitDate(System.String)">
+<summary>
+converts a date string to double digits say 1/1/2012 -> 01/01/2012
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.PropertyExists(System.Object,System.String)">
+<summary>
+Checks if a given property exists in the queried object
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.SetCulture(System.String)">
+<summary>
+Sets the current culture to the given culture Code
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.GetMinMaxValue(System.TypeCode,System.Double@)">
+<summary>
+Returns the minimum and maximum value for a given typecode
+<para>minValue is returned and the MaxValue is passed by reference</para>
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.ConvertObjectToType(System.Object)">
+<summary>
+Converts an object to its type
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.NumTypeIsInteger(System.TypeCode)">
+<summary>
+Checks if the given typeCodeValue is an integer
+</summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.ConvertTextToImage(System.String,System.String,System.Int32,System.Drawing.Color,System.Drawing.Color,System.Int32,System.Int32)">
+ <summary>
+ Responsive for creating a error image
+ </summary>
+ <param name="pMessageText"></param>
+ <param name="pFontName"></param>
+ <param name="pFontSize"></param>
+ <param name="pBackColor"></param>
+ <param name="pForeColor"></param>
+ <param name="pWidth"></param>
+ <param name="pHeight"></param>
+ <returns></returns>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.NoDbNull(System.Object)">
+ <summary>
+     handles null or blank values for string type
+ </summary>
+ <param name="argObj">string value to handle</param>
+ <returns>returns string</returns>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.GetFraction(System.Double)">
+ <summary>
+ Return a fraction string from a double.
+ </summary>
+ <param name="d">The double to convert.</param>
+ <returns>The converted string.</returns>
+ <remarks>Code written by Troy Lundin on May 3, 2007</remarks>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.NumberToWordEnglish(System.Decimal,System.Boolean)">
+ <summary>
+ Convert stored number to words using selected currency
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.GlobalFunctions.ProcessGroup(System.Int32,System.Boolean)">
+ <summary>
+ Process a group of 3 digits
+ </summary>
+ <param name="groupNumber">The group number to process</param>
+ <returns></returns>
+</member>
+<member name="F:AATM.Libraries.GlobalFuncNSub.ToWord._intergerValue">
+ <summary>
+ integer part
+ </summary>
+</member>
+<member name="F:AATM.Libraries.GlobalFuncNSub.ToWord._decimalValue">
+ <summary>
+ Decimal Part
+ </summary>
+</member>
+<member name="P:AATM.Libraries.GlobalFuncNSub.ToWord.Number">
+ <summary>
+ Number to be converted
+ </summary>
+</member>
+<member name="P:AATM.Libraries.GlobalFuncNSub.ToWord.Currency">
+ <summary>
+ Currency to use
+ </summary>
+</member>
+<member name="P:AATM.Libraries.GlobalFuncNSub.ToWord.EnglishPrefixText">
+ <summary>
+ English text to be placed before the generated text
+ </summary>
+</member>
+<member name="P:AATM.Libraries.GlobalFuncNSub.ToWord.EnglishSuffixText">
+ <summary>
+ English text to be placed after the generated text
+ </summary>
+</member>
+<member name="P:AATM.Libraries.GlobalFuncNSub.ToWord.ArabicPrefixText">
+ <summary>
+ Arabic text to be placed before the generated text
+ </summary>
+</member>
+<member name="P:AATM.Libraries.GlobalFuncNSub.ToWord.ArabicSuffixText">
+ <summary>
+ Arabic text to be placed after the generated text
+ </summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.ToWord.#ctor(System.Decimal,AATM.Libraries.GlobalFuncNSub.CurrencyInfo)">
+ <summary>
+ Constructor: short version
+ </summary>
+ <param name="number">Number to be converted</param>
+ <param name="currency">Currency to use</param>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.ToWord.#ctor(System.Decimal,AATM.Libraries.GlobalFuncNSub.CurrencyInfo,System.String,System.String,System.String,System.String)">
+ <summary>
+ Constructor: Full Version
+ </summary>
+ <param name="number">Number to be converted</param>
+ <param name="currency">Currency to use</param>
+ <param name="englishPrefixText">English text to be placed before the generated text</param>
+ <param name="englishSuffixText">English text to be placed after the generated text</param>
+ <param name="arabicPrefixText">Arabic text to be placed before the generated text</param>
+ <param name="arabicSuffixText">Arabic text to be placed after the generated text</param>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.ToWord.InitializeClass(System.Decimal,AATM.Libraries.GlobalFuncNSub.CurrencyInfo,System.String,System.String,System.String,System.String)">
+ <summary>
+ Initialize Class Variables
+ </summary>
+ <param name="number1">Number to be converted</param>
+ <param name="currency2">Currency to use</param>
+ <param name="englishPrefixText3">English text to be placed before the generated text</param>
+ <param name="englishSuffixText4">English text to be placed after the generated text</param>
+ <param name="arabicPrefixText5">Arabic text to be placed before the generated text</param>
+ <param name="arabicSuffixText6">Arabic text to be placed after the generated text</param>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.ToWord.InitializeClass(System.Decimal)">
+ <summary>
+ Initialize Class Variables
+ </summary>
+ <param name="number1">Number to be converted</param>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.ToWord.GetDecimalValue(System.String)">
+ <summary>
+ Get Proper Decimal Value
+ </summary>
+ <param name="decimalPart">Decimal Part as a String</param>
+ <returns></returns>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.ToWord.ExtractIntegerAndDecimalParts">
+ <summary>
+ Eextract Interger and Decimal parts
+ </summary>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.ToWord.ProcessGroup(System.Int32)">
+ <summary>
+ Process a group of 3 digits
+ </summary>
+ <param name="groupNumber">The group number to process</param>
+ <returns></returns>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.ToWord.ConvertToEnglish(System.Boolean)">
+ <summary>
+ Convert stored number to words using selected currency
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.ToWord.GetDigitFeminineStatus(System.Int32,System.Int32)">
+ <summary>
+ Get Feminine Status of one digit
+ </summary>
+ <param name="digit">The Digit to check its Feminine status</param>
+ <param name="groupLevel">Group Level</param>
+ <returns></returns>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.ToWord.ProcessArabicGroup(System.Int32,System.Int32,System.Decimal)">
+ <summary>
+ Process a group of 3 digits
+ </summary>
+ <param name="groupNumber">The group number to process</param>
+ <returns></returns>
+</member>
+<member name="M:AATM.Libraries.GlobalFuncNSub.ToWord.ConvertToArabic(System.Boolean)">
+ <summary>
+ Convert stored number to words using selected currency
+ </summary>
+ <returns></returns>
+</member>
+</members>
+</doc>

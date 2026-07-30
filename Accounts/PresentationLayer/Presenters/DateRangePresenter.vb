@@ -217,46 +217,55 @@ End Class
 
 Friend Module DateRangeModule
 
+    ''' <summary>
+    ''' Converts a report date-code from <see cref="ReportModel.QueryFormParameters"/> into a concrete Gregorian date.
+    ''' The returned date is a base date relative to <see cref="Today"/>; <see cref="SetInitialDates"/> may then normalize
+    ''' that base date to the beginning or end of a day, month, year, quarter, or semester depending on the report period.
+    ''' </summary>
+    ''' <param name="dateCode">A relative date token such as CD, PM, CY, or PQ.</param>
+    ''' <returns>
+    ''' The resolved Gregorian date for the token. Unknown, blank, or Nothing codes fall back to Today().
+    ''' </returns>
     Friend Function GetCodedDate(dateCode As String) As Date
         Dim value As Date
         Dim now As Date = Today()
         value = GlobalFunctions.GregorianDateSerial(now.Year, 1, 1).AddYears(-1)
         Select Case dateCode
-            Case "CD"
+            Case "CD" ' current day
                 value = GlobalFunctions.GregorianDateSerial(now.Year, now.Month, now.Day)
-            Case "PD"
+            Case "PD" ' previous day
                 value = GlobalFunctions.GregorianDateSerial(now.Year, now.Month, now.Day).AddDays(-1)
-            Case "ND"
+            Case "ND" ' next day
                 value = GlobalFunctions.GregorianDateSerial(now.Year, now.Month, now.Day).AddDays(1)
-            Case "CM"
+            Case "CM" ' current month start
                 value = GlobalFunctions.GregorianDateSerial(now.Year, now.Month, 1)
-            Case "CME"
+            Case "CME" ' current month end
                 value = GlobalFunctions.GregorianDateSerial(now.Year, now.Month, 1).AddMonths(1).AddDays(-1)
-            Case = "PM"
+            Case = "PM" ' previous month start
                 value = GlobalFunctions.GregorianDateSerial(now.Year, now.Month, 1).AddMonths(-1)
-            Case = "PME"
+            Case = "PME" ' previous month end
                 value = GlobalFunctions.GregorianDateSerial(now.Year, now.Month, 1).AddDays(-1)
-            Case = "NM"
+            Case = "NM" ' next month start
                 value = GlobalFunctions.GregorianDateSerial(now.Year, now.Month, 1).AddMonths(1)
-            Case = "CY"
+            Case = "CY" ' current year start
                 value = GlobalFunctions.GregorianDateSerial(now.Year, 1, 1)
-            Case = "PY"
+            Case = "PY" ' previous year start
                 value = GlobalFunctions.GregorianDateSerial(now.Year, 1, 1).AddYears(-1)
-            Case = "NY"
+            Case = "NY" ' next year start
                 value = GlobalFunctions.GregorianDateSerial(now.Year, 1, 1).AddYears(1)
-            Case "PQ"
+            Case "PQ" ' previous quarter reference date
                 value = GlobalFunctions.GregorianDateSerial(now.Year, now.Month, now.Day).AddMonths(-3)
-            Case "CQ"
+            Case "CQ" ' current quarter reference date
                 value = GlobalFunctions.GregorianDateSerial(now.Year, now.Month, now.Day)
-            Case "NQ"
+            Case "NQ" ' next quarter reference date
                 value = GlobalFunctions.GregorianDateSerial(now.Year, now.Month, now.Day).AddMonths(3)
-            Case "PS"
+            Case "PS" ' previous semester reference date
                 value = GlobalFunctions.GregorianDateSerial(now.Year, now.Month, now.Day).AddMonths(-6)
-            Case "CS"
+            Case "CS" ' current semester reference date
                 value = GlobalFunctions.GregorianDateSerial(now.Year, now.Month, now.Day)
-            Case "NS"
+            Case "NS" ' next semester reference date
                 value = GlobalFunctions.GregorianDateSerial(now.Year, now.Month, now.Day).AddMonths(6)
-            Case Else
+            Case Else ' unknown date code
                 value = now
         End Select
         Return value

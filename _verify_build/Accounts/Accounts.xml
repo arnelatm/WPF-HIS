@@ -1,0 +1,1386 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+Accounts
+</name>
+</assembly>
+<members>
+<member name="T:AATM.Accounts.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.AccountGroupSelection_Asset">
+<summary>
+  Looks up a localized string similar to Asset.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.AccountGroupSelection_Equity">
+<summary>
+  Looks up a localized string similar to Equity.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.AccountGroupSelection_Expense">
+<summary>
+  Looks up a localized string similar to Expenses.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.AccountGroupSelection_Liability">
+<summary>
+  Looks up a localized string similar to Liability.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.AccountGroupSelection_None">
+<summary>
+  Looks up a localized string similar to None.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.AccountGroupSelection_Revenue">
+<summary>
+  Looks up a localized string similar to Revenue.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.AccountGroupSelection_RevExpSummary">
+<summary>
+  Looks up a localized string similar to RevExpSummary.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.AccountStatusSelection_CashOnly">
+<summary>
+  Looks up a localized string similar to CashOnly.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.AccountStatusSelection_ExceededCreditLimit">
+<summary>
+  Looks up a localized string similar to ExceededCreditLimit.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.AccountStatusSelection_NewAccount">
+<summary>
+  Looks up a localized string similar to NewAccount.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.AccountStatusSelection_OnHold">
+<summary>
+  Looks up a localized string similar to OnHold.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.AccountStatusSelection_Open">
+<summary>
+  Looks up a localized string similar to Open.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.AccountStatusSelection_Prospect">
+<summary>
+  Looks up a localized string similar to Prospect.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.AccountStatusSelection_SeeNote">
+<summary>
+  Looks up a localized string similar to SeeNote.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.btnfind">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.DebitCreditSelection_Credit">
+<summary>
+  Looks up a localized string similar to Credit.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.DebitCreditSelection_Debit">
+<summary>
+  Looks up a localized string similar to Debit.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.DebitCreditSelection_None">
+<summary>
+  Looks up a localized string similar to None.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.DocumentTypeSelection_Client">
+<summary>
+  Looks up a localized string similar to Client.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.DocumentTypeSelection_Employee">
+<summary>
+  Looks up a localized string similar to Employee.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.DocumentTypeSelection_Establishment">
+<summary>
+  Looks up a localized string similar to Establishment.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.DocumentTypeSelection_None">
+<summary>
+  Looks up a localized string similar to None.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.DocumentTypeSelection_Others">
+<summary>
+  Looks up a localized string similar to Others.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.DocumentTypeSelection_Patient">
+<summary>
+  Looks up a localized string similar to Patient.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.DocumentTypeSelection_Supplier">
+<summary>
+  Looks up a localized string similar to Supplier.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.Dose">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.Dose1">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.GreenGradientBackgroundLarge">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.ImageTypeSelection_Bmp">
+<summary>
+  Looks up a localized string similar to Bmp.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.ImageTypeSelection_Jpg">
+<summary>
+  Looks up a localized string similar to Jpg.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.ImageTypeSelection_None">
+<summary>
+  Looks up a localized string similar to None.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.ImageTypeSelection_Pdf">
+<summary>
+  Looks up a localized string similar to Pdf.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.Lock">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.MaleFemaleSelection_Female">
+<summary>
+  Looks up a localized string similar to Female.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.MaleFemaleSelection_Male">
+<summary>
+  Looks up a localized string similar to Male.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.MaleFemaleSelection_None">
+<summary>
+  Looks up a localized string similar to None.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.MaritalStatusSelection_Divorced">
+<summary>
+  Looks up a localized string similar to Divorced.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.MaritalStatusSelection_Married">
+<summary>
+  Looks up a localized string similar to Married.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.MaritalStatusSelection_None">
+<summary>
+  Looks up a localized string similar to None.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.MaritalStatusSelection_Single">
+<summary>
+  Looks up a localized string similar to Single.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.MaritalStatusSelection_Widowed">
+<summary>
+  Looks up a localized string similar to Widowed.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.PayeeTypeSelection_Customer">
+<summary>
+  Looks up a localized string similar to Customer.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.PayeeTypeSelection_Employee">
+<summary>
+  Looks up a localized string similar to Employee.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.PayeeTypeSelection_None">
+<summary>
+  Looks up a localized string similar to None.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.PayeeTypeSelection_Others">
+<summary>
+  Looks up a localized string similar to Others.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.PayeeTypeSelection_Supplier">
+<summary>
+  Looks up a localized string similar to Supplier.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.PaymentMethodSelection_BankTransfer">
+<summary>
+  Looks up a localized string similar to BankTransfer.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.PaymentMethodSelection_BitCoin">
+<summary>
+  Looks up a localized string similar to BitCoin.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.PaymentMethodSelection_Cash">
+<summary>
+  Looks up a localized string similar to Cash.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.PaymentMethodSelection_Check">
+<summary>
+  Looks up a localized string similar to Check.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.PaymentMethodSelection_CreditCard">
+<summary>
+  Looks up a localized string similar to CreditCard.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.PaymentMethodSelection_DebitCard">
+<summary>
+  Looks up a localized string similar to DebitCard.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.PaymentMethodSelection_Mixed">
+<summary>
+  Looks up a localized string similar to Mixed.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.PaymentMethodSelection_MobileTransfer">
+<summary>
+  Looks up a localized string similar to MobileTransfer.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.PaymentMethodSelection_None">
+<summary>
+  Looks up a localized string similar to None.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.PaymentMethodSelection_Others">
+<summary>
+  Looks up a localized string similar to Others.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.PaymentMethodSelection_Paypal">
+<summary>
+  Looks up a localized string similar to Paypal.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.PaymentMethodSelection_WireTransfer">
+<summary>
+  Looks up a localized string similar to WireTransfer.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.PaymentTypeSelection_AccountsPayable">
+<summary>
+  Looks up a localized string similar to AccountsPayable.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.PaymentTypeSelection_CustomerRefund">
+<summary>
+  Looks up a localized string similar to CustomerRefund.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.PaymentTypeSelection_Employee">
+<summary>
+  Looks up a localized string similar to Employee.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.PaymentTypeSelection_None">
+<summary>
+  Looks up a localized string similar to None.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.PaymentTypeSelection_Others">
+<summary>
+  Looks up a localized string similar to Others.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.PaymentTypeSelection_Supplier">
+<summary>
+  Looks up a localized string similar to Supplier.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.Prescription">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.ReceiptTypeSelection_AccountsReceivable">
+<summary>
+  Looks up a localized string similar to AccountsReceivable.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.ReceiptTypeSelection_Customer">
+<summary>
+  Looks up a localized string similar to Customer.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.ReceiptTypeSelection_Employee">
+<summary>
+  Looks up a localized string similar to Employee.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.ReceiptTypeSelection_None">
+<summary>
+  Looks up a localized string similar to None.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.ReceiptTypeSelection_Others">
+<summary>
+  Looks up a localized string similar to Others.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.ReceiptTypeSelection_SupplierRefund">
+<summary>
+  Looks up a localized string similar to SupplierRefund.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.RevCostCenterTypeSelection_Direct">
+<summary>
+  Looks up a localized string similar to Direct.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.RevCostCenterTypeSelection_Shared">
+<summary>
+  Looks up a localized string similar to Shared.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.SecurityLevelSelection_Administrator1">
+<summary>
+  Looks up a localized string similar to Administrator1.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.SecurityLevelSelection_Administrator2">
+<summary>
+  Looks up a localized string similar to Administrator2.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.SecurityLevelSelection_Administrator3">
+<summary>
+  Looks up a localized string similar to Administrator3.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.SecurityLevelSelection_Guest">
+<summary>
+  Looks up a localized string similar to Guest.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.SecurityLevelSelection_Manager1">
+<summary>
+  Looks up a localized string similar to Manager1.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.SecurityLevelSelection_Manager2">
+<summary>
+  Looks up a localized string similar to Manager2.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.SecurityLevelSelection_Manager3">
+<summary>
+  Looks up a localized string similar to Manager3.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.SecurityLevelSelection_None">
+<summary>
+  Looks up a localized string similar to None.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.SecurityLevelSelection_User1">
+<summary>
+  Looks up a localized string similar to User1.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.SecurityLevelSelection_User2">
+<summary>
+  Looks up a localized string similar to User2.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.SecurityLevelSelection_User3">
+<summary>
+  Looks up a localized string similar to User3.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.sfdasale">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.SpecialAccountSelection_AccountsPayable">
+<summary>
+  Looks up a localized string similar to AccountsPayable.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.SpecialAccountSelection_AccountsPayableDiscount">
+<summary>
+  Looks up a localized string similar to AccountsPayableDiscount.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.SpecialAccountSelection_AccountsReceivable">
+<summary>
+  Looks up a localized string similar to AccountsReceivable.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.SpecialAccountSelection_AccountsReceivableDiscount">
+<summary>
+  Looks up a localized string similar to AccountsReceivableDiscount.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.SpecialAccountSelection_AdvancesToSupplier">
+<summary>
+  Looks up a localized string similar to AdvancesToSupplier.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.SpecialAccountSelection_Bank">
+<summary>
+  Looks up a localized string similar to Bank.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.SpecialAccountSelection_Cash">
+<summary>
+  Looks up a localized string similar to Cash.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.SpecialAccountSelection_CheckingAccount">
+<summary>
+  Looks up a localized string similar to CheckingAccount.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.SpecialAccountSelection_CustomerAdvances">
+<summary>
+  Looks up a localized string similar to CustomerAdvances.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.SpecialAccountSelection_EmployeeLoan">
+<summary>
+  Looks up a localized string similar to EmployeeLoan.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.SpecialAccountSelection_None">
+<summary>
+  Looks up a localized string similar to None.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.SpecialAccountSelection_PettyCashAccount">
+<summary>
+  Looks up a localized string similar to PettyCashAccount.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.SpecialAccountSelection_Sales">
+<summary>
+  Looks up a localized string similar to Sales.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.SpecialAccountSelection_VatInput">
+<summary>
+  Looks up a localized string similar to VatInput.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.SpecialAccountSelection_VatOutput">
+<summary>
+  Looks up a localized string similar to VatOutput.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.TransactionTypeSelection_Credit">
+<summary>
+  Looks up a localized string similar to Credit.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.TransactionTypeSelection_Debit">
+<summary>
+  Looks up a localized string similar to Debit.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.TransactionTypeSelection_Invoice">
+<summary>
+  Looks up a localized string similar to Invoice.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.TransactionTypeSelection_None">
+<summary>
+  Looks up a localized string similar to None.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.Unlock">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.YearMonthDaySelection_Day">
+<summary>
+  Looks up a localized string similar to Day.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.YearMonthDaySelection_Month">
+<summary>
+  Looks up a localized string similar to Month.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.YearMonthDaySelection_None">
+<summary>
+  Looks up a localized string similar to None.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.YearMonthDaySelection_Year">
+<summary>
+  Looks up a localized string similar to Year.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.YellowGradientBackgroundLarge">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.YellowGradientBackgroundLarge1">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:AATM.Accounts.My.Resources.Resources.YellowGradientBackgroundLarge2">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="T:AATM.Accounts.ISPDATADataSet">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:AATM.Accounts.ISPDATADataSet.ProductDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:AATM.Accounts.ISPDATADataSet.ProductUnitDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:AATM.Accounts.ISPDATADataSet.PurchaseDetailDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:AATM.Accounts.ISPDATADataSet.ProductRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:AATM.Accounts.ISPDATADataSet.ProductUnitRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:AATM.Accounts.ISPDATADataSet.PurchaseDetailRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:AATM.Accounts.ISPDATADataSet.ProductRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:AATM.Accounts.ISPDATADataSet.ProductUnitRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:AATM.Accounts.ISPDATADataSet.PurchaseDetailRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:AATM.Accounts.ISPDATADataSetTableAdapters.ProductTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:AATM.Accounts.ISPDATADataSetTableAdapters.ProductUnitTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:AATM.Accounts.ISPDATADataSetTableAdapters.PurchaseDetailTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:AATM.Accounts.ISPDATADataSetTableAdapters.QueriesTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:AATM.Accounts.ISPDATADataSetTableAdapters.TableAdapterManager">
+<summary>
+TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
+</summary>
+</member>
+<member name="M:AATM.Accounts.ISPDATADataSetTableAdapters.TableAdapterManager.UpdateUpdatedRows(AATM.Accounts.ISPDATADataSet,System.Collections.Generic.List{System.Data.DataRow},System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Update rows in top-down order.
+</summary>
+</member>
+<member name="M:AATM.Accounts.ISPDATADataSetTableAdapters.TableAdapterManager.UpdateInsertedRows(AATM.Accounts.ISPDATADataSet,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Insert rows in top-down order.
+</summary>
+</member>
+<member name="M:AATM.Accounts.ISPDATADataSetTableAdapters.TableAdapterManager.UpdateDeletedRows(AATM.Accounts.ISPDATADataSet,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Delete rows in bottom-up order.
+</summary>
+</member>
+<member name="M:AATM.Accounts.ISPDATADataSetTableAdapters.TableAdapterManager.GetRealUpdatedRows(System.Data.DataRow[],System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
+</summary>
+</member>
+<member name="M:AATM.Accounts.ISPDATADataSetTableAdapters.TableAdapterManager.UpdateAll(AATM.Accounts.ISPDATADataSet)">
+<summary>
+Update all changes to the dataset.
+</summary>
+</member>
+<member name="T:AATM.Accounts.ISPDATADataSetTableAdapters.TableAdapterManager.UpdateOrderOption">
+<summary>
+Update Order Option
+</summary>
+</member>
+<member name="T:AATM.Accounts.ISPDATADataSetTableAdapters.TableAdapterManager.SelfReferenceComparer">
+<summary>
+Used to sort self-referenced table's rows
+</summary>
+</member>
+<member name="F:AATM.Accounts.Main.IdleTimer">
+ <summary>
+ The main entry point for the application.
+ </summary>
+ 
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.AppSettingModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.DocumentDetailModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.EmployeeLeaveEarnedModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.DurationListModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.DrugAcceptModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.DosageModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.DosageMasterListModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.DrugSaleModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.GTinMatcherModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.PrescriptionItemModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.PmrPrescriptionModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.StockInventoryModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.SupplierProductModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.PurchaseOrderDetailModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.InvTransactionModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.InvTransTypeModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.SettingModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.ItemCodeModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.CodeGroupModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.DoctorModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.DataImageModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.DocumentModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.EmployeeDocumentModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.HolidayAvailmentHistoryModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.EmployeeLeaveApprovalItemModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.EmployeeLeaveApprovalHistoryModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.EmployeeLeaveApprovalModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.HolidayTransferItemModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.HolidayAvailmentModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.HolidayTransferModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.HolidayTransferAvailmentModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.PatientModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.PmrInvestigationModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.DoctorsPatientModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.ItemDetailsModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.InvTransactionDetailModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.SaleDetailModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.PurchaseDetailModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.SaleModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.ReportSelectorModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.ShiftSummaryModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.EmployeePayElementModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.HolidayModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.JournalPrefixModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.EmployeeLeaveModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.EmployeeAbsenceModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.EmployeeLeaveCreditModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.RecurringPayElementModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.TransactionNotesModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.PayElementItemModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.PayElementModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.OtWorkHourModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.BasicModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.PayElementAccountModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.PayrollPayElementModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.PayrollDetailModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.PettyCashClosingModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.DisbursementJournalModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.DjOiItemModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.AttendanceItemModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.OpInvItemModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.EmployeePhoneModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.PayCycleModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.PayGroupModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.PayrollModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.LeaveModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.PensionProviderModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.PensionSchemeModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.AccountReconciliationItemModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.AccountReconciliationModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.ApJournalModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.ApOpenInvoiceModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.ErJournalModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.ArJournalModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.ArOpenInvoiceModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.DepositTypeModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.CashReceiptJournalModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.CategoryModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.AccountModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.CsrOiItemModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.CustomerModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.DesignationModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.DistributionSchemeModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.EmployeeModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.GeneralJournalModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.ProductModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.PurchaseModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.ReconciledModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.SalesDepositModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.SalesJournalModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Models.SupplierModel">
+ <summary>
+     The Model in MVP design pattern.
+     Implements IModel and communicates with WCF Service.
+ </summary>
+</member>
+<member name="M:AATM.Accounts.PresentationLayer.Presenters.HolidayTransferPresenter`1.Display(System.Int32)">
+ <summary>
+     Displays list of  Journal Items.
+ </summary>
+ <param name="journalIdNo">JournalIdNo id to display.</param>
+</member>
+<member name="M:AATM.Accounts.PresentationLayer.Presenters.PensionRatesPresenter`1.Display(System.Int32)">
+ <summary>
+     Displays list of Pension Scheme Rates.
+ </summary>
+ <param name="pensionSchemeIdNo">PensionSchemeIdNo id to display.</param>
+</member>
+<member name="M:AATM.Accounts.PresentationLayer.Presenters.CashReceiptJournalItemsPresenter`1.Display(System.Int32)">
+ <summary>
+     Displays list of Cash Receipt Journal Items.
+ </summary>
+ <param name="journalIdNo">JournalIdNo id to display.</param>
+</member>
+<member name="M:AATM.Accounts.PresentationLayer.Presenters.DistributionSchemeItemsPresenter.Display(System.Int32)">
+ <summary>
+     Displays list of DistributionScheme Items.
+ </summary>
+ <param name="DistributionSchemeIdNo">DistributionSchemeIdNo id to display.</param>
+</member>
+<member name="M:AATM.Accounts.PresentationLayer.Presenters.GeneralJournalItemsPresenter`1.Display(System.Int32)">
+ <summary>
+     Displays list of  Journal Items.
+ </summary>
+ <param name="journalIdNo">JournalIdNo id to display.</param>
+</member>
+<member name="M:AATM.Accounts.PresentationLayer.Presenters.SalesJournalItemsPresenter`1.Display(System.Int32)">
+ <summary>
+     Displays list of Cheque Disbursement Journal Items.
+ </summary>
+ <param name="journalIdNo">JournalIdNo id to display.</param>
+</member>
+<member name="T:AATM.Accounts.PresentationLayer.Views.Forms.MainForm">
+ <summary>
+     Main window for Windows Forms application. Most business logic resides
+     in this window as it responds to local control events, menu events, and
+     closed dialog events. This is usually the preferred model, unless the
+     child windows have significant processing requirements, then they handle
+     that themselves.
+ </summary>
+ <remarks>
+     All communications required for this application runs via the Service layer.
+     The application uses the Model View Presenter design pattern. Each of these
+     reside in its own Visual Studio project.
+     MV Patterns: MVP design pattern is used throughout this WinForms application.
+ </remarks>
+</member>
+<member name="F:AATM.Accounts.PresentationLayer.Views.Forms.MainForm.components">
+ <summary>
+ Required designer variable.
+ </summary>
+</member>
+<member name="M:AATM.Accounts.PresentationLayer.Views.Forms.MainForm.Dispose(System.Boolean)">
+ <summary>
+ Clean up any resources being used.
+ </summary>
+ <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+</member>
+<member name="M:AATM.Accounts.PresentationLayer.Views.Forms.MainForm.InitializeComponent">
+ <summary>
+ Required method for Designer support - do not modify
+ the contents of this method with the code editor.
+ </summary>
+</member>
+<member name="M:AATM.Accounts.PresentationLayer.Views.Forms.MainForm.#ctor">
+ <summary>
+     Default form constructor.
+ </summary>
+</member>
+<member name="M:AATM.Accounts.PresentationLayer.Views.Forms.MainForm.AboutToolStripMenuItem_Click(System.Object,System.EventArgs)">
+ <summary>
+     Opens the about dialog window.
+ </summary>
+</member>
+<member name="M:AATM.Accounts.PresentationLayer.Views.Forms.MainForm.IndexToolStripMenuItem_Click(System.Object,System.EventArgs)">
+ <summary>
+     Help menu item event handler.
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:AATM.Accounts.PresentationLayer.Views.Forms.MainForm.ExitToolStripMenuItem_Click(System.Object,System.EventArgs)">
+ <summary>
+     Exits application.
+ </summary>
+</member>
+<member name="M:AATM.Accounts.PresentationLayer.Views.Forms.MainForm.LoginToolStripMenuItem_Click(System.Object,System.EventArgs)">
+ <summary>
+     Displays login dialog box and loads member list in treeview.
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:AATM.Accounts.PresentationLayer.Views.Forms.MainForm.LogoutToolStripMenuItem_Click(System.Object,System.EventArgs)">
+ <summary>
+     Logoff user, empties datagridviews, and disables menus.
+ </summary>
+</member>
+<member name="M:AATM.Accounts.PresentationLayer.Views.Forms.MainForm.ToolStripButtonLogin_Click(System.Object,System.EventArgs)">
+ <summary>
+     Redirects login request to equivalent menu event handler.
+ </summary>
+</member>
+<member name="M:AATM.Accounts.PresentationLayer.Views.Forms.MainForm.ToolStripButtonLogout_Click(System.Object,System.EventArgs)">
+ <summary>
+     Redirects logout request to equivalent menu event handler.
+ </summary>
+</member>
+<member name="M:AATM.Accounts.DateRangeModule.GetCodedDate(System.String)">
+ <summary>
+ Converts a report date-code from <see cref="P:AATM.Common.PresentationLayer.Models.ReportModel.QueryFormParameters"/> into a concrete Gregorian date.
+ The returned date is a base date relative to <see cref="P:Microsoft.VisualBasic.DateAndTime.Today"/>; <see cref="M:AATM.Accounts.DateRangeModule.SetInitialDates(System.String,System.String,System.String,System.Nullable{System.DateTime}@,System.Nullable{System.DateTime}@)"/> may then normalize
+ that base date to the beginning or end of a day, month, year, quarter, or semester depending on the report period.
+ </summary>
+ <param name="dateCode">A relative date token such as CD, PM, CY, or PQ.</param>
+ <returns>
+ The resolved Gregorian date for the token. Unknown, blank, or Nothing codes fall back to Today().
+ </returns>
+</member>
+<member name="F:AATM.Accounts.StatesList._States">
+
+</member>
+<member name="F:AATM.Accounts.DeductionComputationRule._deductionRule">
+
+</member>
+<member name="F:AATM.Accounts.TranslateInitializerMode._translationInitializer">
+
+</member>
+<member name="F:AATM.Accounts.PreferredLanguage._preferredLanguage">
+
+</member>
+<member name="F:AATM.Accounts.LaboratoryResultDirectory._laboratoryResultDirectory">
+
+</member>
+</members>
+</doc>
