@@ -1,0 +1,66 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows;
+using AATM.DataAccess.Sql;
+
+namespace AATM.UI.Controls
+{
+    public partial class SmartComboBox
+    {
+        private bool IsRemoteConfigured => !string.IsNullOrEmpty(ConnectionString) && !string.IsNullOrEmpty(RemoteQueryTemplate);
+
+        private int _remoteTotal = -1; // cache total rows for current filter
+        private Task _prefetchTask; // background prefetch of next page
+
+        private async Task<List<ComboRecord>> FetchRemoteRecordsAsync(string filter, CancellationToken token, int pageIndex, int pageSize)
+        {
+            if (!IsRemoteConfigured) return new List<ComboRecord>();
+            try
+            {
+                var repo = new ComboRecordRepository(ConnectionString);
+                // Load total count first time for filter
+                if (pageIndex == 0)
+                {
+                    _remoteTotal = await repo.FetchTotalCountAsync(RemoteQueryTemplate, FilterCodeField, FilterNameField, filter ?? string.Empty, token).ConfigureAwait(false);
+                    await Application.Current.Dispatcher.InvokeAsync(() => TotalCount = _remoteTotal);
+                }
+                var page = await repo.FetchRemoteRecordsAsync(RemoteQueryTemplate, FilterCodeField, FilterNameField, filter ?? string.Empty, pageIndex, pageSize, token).ConfigureAwait(false);
+                // Decide if HasNextPage based on total (if known)
+                if (_remoteTotal >= 0)
+                {
+                    int fetchedSoFar = (pageIndex * pageSize) + page.Count;
+                    bool hasNext = fetchedSoFar < _remoteTotal;
+                    await Application.Current.Dispatcher.InvokeAsync(() => HasNextPage = hasNext);
+                    // Prefetch next page if hasNext and not already started
+                    if (hasNext && _prefetchTask == null && !_pagingDown)
+                    {
+                        int nextIndex = pageIndex + 1;
+                        _prefetchTask = Task.Run(async () =>
+                        {
+                            try
+                            {
+                                var nextPage = await repo.FetchRemoteRecordsAsync(RemoteQueryTemplate, FilterCodeField, FilterNameField, filter ?? string.Empty, nextIndex, pageSize, token).ConfigureAwait(false);
+                                if (token.IsCancellationRequested || nextPage.Count == 0) return;
+                                _pageCache[nextIndex] = nextPage;
+                            }
+                            catch { }
+                            finally { _prefetchTask = null; }
+                        }, token);
+                    }
+                }
+                return page;
+            }
+            catch (OperationCanceledException)
+            {
+                return new List<ComboRecord>();
+            }
+            catch (Exception ex)
+            {
+                SetError($"Error fetching data: {ex.Message}");
+                return new List<ComboRecord>();
+            }
+        }
+    }
+}

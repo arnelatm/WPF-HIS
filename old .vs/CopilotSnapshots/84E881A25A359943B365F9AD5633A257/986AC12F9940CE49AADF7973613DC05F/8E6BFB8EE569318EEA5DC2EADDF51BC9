@@ -1,0 +1,325 @@
+﻿using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Data;
+using System.Windows.Input;
+using System.Windows.Media;
+
+namespace AATM.App.HisWpf.Behaviors
+{
+    public static class ComboBoxKeyboardBehavior
+    {
+        public static readonly DependencyProperty EnableKeyboardNavigationProperty =
+            DependencyProperty.RegisterAttached(
+                "EnableKeyboardNavigation",
+                typeof(bool),
+                typeof(ComboBoxKeyboardBehavior),
+                new PropertyMetadata(false, OnEnableKeyboardNavigationChanged));
+
+        public static bool GetEnableKeyboardNavigation(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(EnableKeyboardNavigationProperty);
+        }
+
+        public static void SetEnableKeyboardNavigation(DependencyObject obj, bool value)
+        {
+            obj.SetValue(EnableKeyboardNavigationProperty, value);
+        }
+
+        private static void OnEnableKeyboardNavigationChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is ComboBox comboBox && (bool)e.NewValue)
+            {
+                // Register class handler to intercept ALL keyboard events before any instance handlers
+                EventManager.RegisterClassHandler(
+                    typeof(ComboBox),
+                    UIElement.PreviewKeyDownEvent,
+                    new KeyEventHandler(ComboBox_ClassPreviewKeyDown),
+                    handledEventsToo: true);
+
+                comboBox.Loaded += ComboBox_Loaded;
+                comboBox.DropDownOpened += ComboBox_DropDownOpened;
+            }
+        }
+
+        private static void ComboBox_ClassPreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (sender is ComboBox comboBox && GetEnableKeyboardNavigation(comboBox))
+            {
+                if (e.Key == Key.Down || e.Key == Key.Up)
+                {
+                    // Mark as handled to prevent ComboBox from processing
+                    e.Handled = true;
+                }
+            }
+        }
+
+        private static void ComboBox_Loaded(object sender, RoutedEventArgs e)
+        {
+            var comboBox = (ComboBox)sender;
+            comboBox.Loaded -= ComboBox_Loaded;
+
+            // Find the TextBox inside and the Popup
+            var textBox = FindVisualChild<TextBox>(comboBox);
+            var popup = FindVisualChild<Popup>(comboBox);
+
+            if (textBox != null)
+            {
+                // Remove any existing handlers first
+                textBox.PreviewKeyDown -= TextBox_PreviewKeyDown;
+                textBox.KeyDown -= TextBox_KeyDown;
+                
+                // Add our handlers
+                textBox.PreviewKeyDown += TextBox_PreviewKeyDown;
+                textBox.KeyDown += TextBox_KeyDown;
+            }
+
+            if (popup != null)
+            {
+                // Store the popup reference
+                comboBox.SetValue(PopupProperty, popup);
+            }
+        }
+
+        private static readonly DependencyProperty PopupProperty =
+            DependencyProperty.RegisterAttached("Popup", typeof(Popup), typeof(ComboBoxKeyboardBehavior));
+
+        private static readonly DependencyProperty ItemsPresenterProperty =
+            DependencyProperty.RegisterAttached("ItemsPresenter", typeof(ItemsPresenter), typeof(ComboBoxKeyboardBehavior));
+
+        private static readonly DependencyProperty ScrollViewerProperty =
+            DependencyProperty.RegisterAttached("ScrollViewer", typeof(ScrollViewer), typeof(ComboBoxKeyboardBehavior));
+
+        private static void ComboBox_DropDownOpened(object sender, EventArgs e)
+        {
+            var comboBox = (ComboBox)sender;
+            
+            // Find the popup and its content
+            var popup = comboBox.GetValue(PopupProperty) as Popup;
+            if (popup?.Child != null)
+            {
+                System.Diagnostics.Debug.WriteLine("Popup found, searching for items container...");
+                System.Diagnostics.Debug.WriteLine($"Popup.Child type: {popup.Child.GetType().Name}");
+                
+                // Let's see what's actually in the visual tree
+                PrintVisualTree(popup.Child, 0);
+                
+                // Try to find various possible containers
+                var itemsPresenter = FindVisualChild<ItemsPresenter>(popup.Child);
+                var scrollViewer = FindVisualChild<ScrollViewer>(popup.Child);
+                var border = FindVisualChild<Border>(popup.Child);
+                
+                if (itemsPresenter != null)
+                {
+                    System.Diagnostics.Debug.WriteLine($"Found ItemsPresenter");
+                    comboBox.SetValue(ItemsPresenterProperty, itemsPresenter);
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine("WARNING: Could not find ItemsPresenter in ComboBox popup");
+                }
+                
+                // Store ScrollViewer for scrolling
+                if (scrollViewer != null)
+                {
+                    System.Diagnostics.Debug.WriteLine($"Found ScrollViewer");
+                    comboBox.SetValue(ScrollViewerProperty, scrollViewer);
+                }
+                
+                // Initialize selection in the CollectionView
+                comboBox.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    var view = CollectionViewSource.GetDefaultView(comboBox.ItemsSource);
+                    if (view != null)
+                    {
+                        if (comboBox.SelectedItem != null)
+                        {
+                            view.MoveCurrentTo(comboBox.SelectedItem);
+                            System.Diagnostics.Debug.WriteLine($"Synced CollectionView to: {comboBox.SelectedItem}");
+                        }
+                        else if (view.CurrentItem == null && comboBox.Items.Count > 0)
+                        {
+                            view.MoveCurrentToFirst();
+                            System.Diagnostics.Debug.WriteLine($"Selected first item in CollectionView: {view.CurrentItem}");
+                        }
+                    }
+                }), System.Windows.Threading.DispatcherPriority.Loaded);
+            }
+        }
+
+        // Helper to print the visual tree for debugging
+        private static void PrintVisualTree(DependencyObject element, int indent)
+        {
+            if (element == null) return;
+            
+            var indentStr = new string(' ', indent * 2);
+            System.Diagnostics.Debug.WriteLine($"{indentStr}{element.GetType().Name}");
+            
+            int count = VisualTreeHelper.GetChildrenCount(element);
+            if (count > 0 && indent < 5) // Limit depth to avoid too much output
+            {
+                for (int i = 0; i < count; i++)
+                {
+                    var child = VisualTreeHelper.GetChild(element, i);
+                    PrintVisualTree(child, indent + 1);
+                }
+            }
+        }
+
+        private static void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            var textBox = (TextBox)sender;
+            var comboBox = FindParent<ComboBox>(textBox);
+            if (comboBox == null) return;
+
+            switch (e.Key)
+            {
+                case Key.Down:
+                case Key.Up:
+                    e.Handled = true;
+                    
+                    if (!comboBox.IsDropDownOpen)
+                    {
+                        comboBox.IsDropDownOpen = true;
+                    }
+                    else
+                    {
+                        // Work directly with the ComboBox's CollectionView
+                        var view = CollectionViewSource.GetDefaultView(comboBox.ItemsSource);
+                        if (view != null && comboBox.Items.Count > 0)
+                        {
+                            int currentIndex = view.CurrentPosition;
+                            int newIndex = currentIndex;
+                            
+                            if (e.Key == Key.Down)
+                            {
+                                if (currentIndex < comboBox.Items.Count - 1)
+                                {
+                                    newIndex = currentIndex + 1;
+                                }
+                                else if (currentIndex == -1 && comboBox.Items.Count > 0)
+                                {
+                                    newIndex = 0;
+                                }
+                            }
+                            else // Key.Up
+                            {
+                                if (currentIndex > 0)
+                                {
+                                    newIndex = currentIndex - 1;
+                                }
+                                else if (currentIndex == -1 && comboBox.Items.Count > 0)
+                                {
+                                    newIndex = comboBox.Items.Count - 1;
+                                }
+                            }
+                            
+                            if (newIndex != currentIndex && newIndex >= 0 && newIndex < comboBox.Items.Count)
+                            {
+                                System.Diagnostics.Debug.WriteLine($"Moving selection from {currentIndex} to {newIndex}");
+                                
+                                var item = comboBox.Items[newIndex];
+                                view.MoveCurrentToPosition(newIndex);
+                                
+                                // Scroll the item into view using the ScrollViewer
+                                var scrollViewer = comboBox.GetValue(ScrollViewerProperty) as ScrollViewer;
+                                if (scrollViewer != null && item != null)
+                                {
+                                    var container = comboBox.ItemContainerGenerator.ContainerFromIndex(newIndex) as FrameworkElement;
+                                    if (container != null)
+                                    {
+                                        container.BringIntoView();
+                                        System.Diagnostics.Debug.WriteLine($"Brought item into view: {item}");
+                                    }
+                                }
+                                
+                                System.Diagnostics.Debug.WriteLine($"Current item: {view.CurrentItem}");
+                            }
+                            else
+                            {
+                                System.Diagnostics.Debug.WriteLine($"No index change: current={currentIndex}, new={newIndex}");
+                            }
+                        }
+                        else
+                        {
+                            System.Diagnostics.Debug.WriteLine($"View is null or no items");
+                        }
+                    }
+                    break;
+
+                case Key.Enter:
+                    e.Handled = true;
+                    if (comboBox.IsDropDownOpen)
+                    {
+                        var view = CollectionViewSource.GetDefaultView(comboBox.ItemsSource);
+                        if (view?.CurrentItem != null)
+                        {
+                            comboBox.SelectedItem = view.CurrentItem;
+                        }
+                        comboBox.IsDropDownOpen = false;
+                        textBox.Focus();
+                    }
+                    break;
+
+                case Key.Tab:
+                    if (comboBox.IsDropDownOpen)
+                    {
+                        var view = CollectionViewSource.GetDefaultView(comboBox.ItemsSource);
+                        if (view?.CurrentItem != null)
+                        {
+                            comboBox.SelectedItem = view.CurrentItem;
+                        }
+                        comboBox.IsDropDownOpen = false;
+                        // Don't handle Tab - let it move focus naturally
+                    }
+                    break;
+
+                case Key.Escape:
+                    e.Handled = true;
+                    if (comboBox.IsDropDownOpen)
+                    {
+                        comboBox.IsDropDownOpen = false;
+                        textBox.Focus();
+                    }
+                    break;
+            }
+        }
+
+        private static void TextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            // CRITICAL: Block arrow keys completely from ComboBox
+            if (e.Key == Key.Down || e.Key == Key.Up)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private static T? FindVisualChild<T>(DependencyObject parent) where T : DependencyObject
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+            {
+                var child = VisualTreeHelper.GetChild(parent, i);
+                if (child is T typedChild)
+                    return typedChild;
+
+                var result = FindVisualChild<T>(child);
+                if (result != null)
+                    return result;
+            }
+            return null;
+        }
+
+        private static T? FindParent<T>(DependencyObject child) where T : DependencyObject
+        {
+            var parent = VisualTreeHelper.GetParent(child);
+            while (parent != null)
+            {
+                if (parent is T typedParent)
+                    return typedParent;
+
+                parent = VisualTreeHelper.GetParent(parent);
+            }
+            return null;
+        }
+    }
+}

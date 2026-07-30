@@ -1,0 +1,176 @@
+﻿using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Data;
+using System.Windows.Input;
+using System.Windows.Media;
+
+namespace AATM.App.HisWpf.Behaviors
+{
+    /// <summary>
+    /// Enables keyboard navigation in editable ComboBox dropdowns while maintaining filter capability.
+    /// </summary>
+    public static class ComboBoxKeyboardBehavior
+    {
+        public static readonly DependencyProperty EnableKeyboardNavigationProperty =
+            DependencyProperty.RegisterAttached(
+                "EnableKeyboardNavigation",
+                typeof(bool),
+                typeof(ComboBoxKeyboardBehavior),
+                new PropertyMetadata(false, OnEnableKeyboardNavigationChanged));
+
+        public static bool GetEnableKeyboardNavigation(DependencyObject obj) => (bool)obj.GetValue(EnableKeyboardNavigationProperty);
+        public static void SetEnableKeyboardNavigation(DependencyObject obj, bool value) => obj.SetValue(EnableKeyboardNavigationProperty, value);
+
+        // Track highlighted index
+        private static readonly DependencyProperty HighlightedIndexProperty =
+            DependencyProperty.RegisterAttached("HighlightedIndex", typeof(int), typeof(ComboBoxKeyboardBehavior), new PropertyMetadata(-1));
+
+        // Visual highlighting property that XAML triggers watch
+        public static readonly DependencyProperty IsKeyboardHighlightedProperty =
+            DependencyProperty.RegisterAttached("IsKeyboardHighlighted", typeof(bool), typeof(ComboBoxKeyboardBehavior), new PropertyMetadata(false));
+
+        public static bool GetIsKeyboardHighlighted(DependencyObject obj) => (bool)obj.GetValue(IsKeyboardHighlightedProperty);
+        public static void SetIsKeyboardHighlighted(DependencyObject obj, bool value) => obj.SetValue(IsKeyboardHighlightedProperty, value);
+
+        private static void OnEnableKeyboardNavigationChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is not ComboBox comboBox || (bool)e.NewValue == false) return;
+
+            System.Diagnostics.Debug.WriteLine($"[Behavior] Attaching to ComboBox: {comboBox.Name}");
+
+            // CRITICAL: Use AddHandler with handledEventsToo=true to intercept even if event is already handled
+            comboBox.AddHandler(UIElement.PreviewKeyDownEvent, new KeyEventHandler(ComboBox_PreviewKeyDown), handledEventsToo: true);
+            comboBox.AddHandler(UIElement.KeyDownEvent, new KeyEventHandler(ComboBox_KeyDown), handledEventsToo: true);
+            
+            comboBox.DropDownOpened += ComboBox_DropDownOpened;
+            comboBox.DropDownClosed += ComboBox_DropDownClosed;
+
+            System.Diagnostics.Debug.WriteLine($"[Behavior] Handlers attached successfully");
+        }
+
+        private static void ComboBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine($"[ComboBox_KeyDown] Key: {e.Key}, Handled: {e.Handled}");
+        }
+
+        private static void ComboBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine($"[ComboBox_PreviewKeyDown] Key: {e.Key}, Handled: {e.Handled}");
+
+            if (sender is not ComboBox comboBox) return;
+
+            System.Diagnostics.Debug.WriteLine($"[ComboBox_PreviewKeyDown] IsDropDownOpen: {comboBox.IsDropDownOpen}");
+
+            // Only handle arrow keys when dropdown is open
+            if (!comboBox.IsDropDownOpen || (e.Key != Key.Down && e.Key != Key.Up)) return;
+
+            System.Diagnostics.Debug.WriteLine($"[ComboBox_PreviewKeyDown] Processing arrow key: {e.Key}");
+
+            e.Handled = true; // Prevent default behavior
+
+            var view = CollectionViewSource.GetDefaultView(comboBox.ItemsSource);
+            if (view == null || comboBox.Items.Count == 0)
+            {
+                System.Diagnostics.Debug.WriteLine($"[ComboBox_PreviewKeyDown] Cannot navigate - view or items null");
+                return;
+            }
+
+            int currentIndex = view.CurrentPosition;
+            int newIndex = currentIndex;
+
+            if (e.Key == Key.Down)
+            {
+                newIndex = currentIndex < comboBox.Items.Count - 1 ? currentIndex + 1 : currentIndex;
+            }
+            else // Key.Up
+            {
+                newIndex = currentIndex > 0 ? currentIndex - 1 : currentIndex;
+            }
+
+            System.Diagnostics.Debug.WriteLine($"[ComboBox_PreviewKeyDown] Moving from {currentIndex} to {newIndex}");
+
+            if (newIndex != currentIndex)
+            {
+                view.MoveCurrentToPosition(newIndex);
+                HighlightItem(comboBox, newIndex);
+            }
+        }
+
+        private static void ComboBox_DropDownOpened(object sender, EventArgs e)
+        {
+            if (sender is not ComboBox comboBox) return;
+
+            System.Diagnostics.Debug.WriteLine($"[DropDownOpened] Initializing highlight");
+
+            comboBox.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                var view = CollectionViewSource.GetDefaultView(comboBox.ItemsSource);
+                if (view == null) return;
+
+                int indexToHighlight = comboBox.SelectedItem != null
+                    ? comboBox.Items.IndexOf(comboBox.SelectedItem)
+                    : (comboBox.Items.Count > 0 ? 0 : -1);
+
+                if (indexToHighlight >= 0)
+                {
+                    view.MoveCurrentToPosition(indexToHighlight);
+                    HighlightItem(comboBox, indexToHighlight);
+                }
+            }), System.Windows.Threading.DispatcherPriority.Background);
+        }
+
+        private static void ComboBox_DropDownClosed(object sender, EventArgs e)
+        {
+            if (sender is not ComboBox comboBox) return;
+            ClearHighlight(comboBox);
+        }
+
+        private static void HighlightItem(ComboBox comboBox, int index)
+        {
+            if (index < 0 || index >= comboBox.Items.Count) return;
+
+            System.Diagnostics.Debug.WriteLine($"[HighlightItem] Index: {index}");
+
+            // Clear previous
+            int previousIndex = (int)comboBox.GetValue(HighlightedIndexProperty);
+            if (previousIndex >= 0 && previousIndex != index)
+            {
+                var previousContainer = comboBox.ItemContainerGenerator.ContainerFromIndex(previousIndex) as ComboBoxItem;
+                if (previousContainer != null)
+                {
+                    SetIsKeyboardHighlighted(previousContainer, false);
+                }
+            }
+
+            // Set new
+            comboBox.UpdateLayout();
+            var container = comboBox.ItemContainerGenerator.ContainerFromIndex(index) as ComboBoxItem;
+            if (container != null)
+            {
+                comboBox.SetValue(HighlightedIndexProperty, index);
+                SetIsKeyboardHighlighted(container, true);
+                container.BringIntoView();
+                System.Diagnostics.Debug.WriteLine($"[HighlightItem] Successfully highlighted index {index}");
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine($"[HighlightItem] WARNING: Could not get container for index {index}");
+            }
+        }
+
+        private static void ClearHighlight(ComboBox comboBox)
+        {
+            int previousIndex = (int)comboBox.GetValue(HighlightedIndexProperty);
+            if (previousIndex >= 0 && previousIndex < comboBox.Items.Count)
+            {
+                var previousContainer = comboBox.ItemContainerGenerator.ContainerFromIndex(previousIndex) as ComboBoxItem;
+                if (previousContainer != null)
+                {
+                    SetIsKeyboardHighlighted(previousContainer, false);
+                }
+            }
+            comboBox.SetValue(HighlightedIndexProperty, -1);
+        }
+    }
+}

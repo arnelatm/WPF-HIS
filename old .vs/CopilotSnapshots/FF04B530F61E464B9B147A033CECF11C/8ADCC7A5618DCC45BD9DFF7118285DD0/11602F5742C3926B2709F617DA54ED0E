@@ -1,0 +1,311 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Linq;
+using System.Windows.Controls;
+using System.Windows.Threading;
+using System.Windows;
+
+namespace AATM.UI.Controls
+{
+    public partial class SmartComboBox
+    {
+        // Paging logic only. All fields are defined in SmartComboBox.Core.cs
+
+        //private async Task RunInitialSearchAsync(string filter, CancellationToken token = default)
+        //{
+        //    _pageCache.Clear();
+        //    _currentItems.Clear();
+        //    var trimmed = (filter ?? string.Empty).Trim();
+        //    _lastFilter = trimmed;
+        //    _suppressPageIndexChanged = true;
+        //    PageIndex =0;
+        //    _suppressPageIndexChanged = false;
+        //    if (token.IsCancellationRequested) return;
+        //    if (trimmed.Length < MinSearchLength && !(ShowAllOnBlank && string.IsNullOrEmpty(trimmed)))
+        //    {
+        //        HasNextPage = false;
+        //        return;
+        //    }
+        //    await AppendPageAsync(0, token);
+        //    if (!token.IsCancellationRequested && _listBox != null && _currentItems.Count >0 && _listBox.SelectedIndex <0)
+        //    {
+        //        _listBox.SelectedIndex =0;
+        //        var first = _currentItems[0];
+        //        SelectedId = first.IdNo;
+        //        SelectedCode = first.Code;
+        //        SelectedName = first.Name;
+        //        UpdateSelectedValueFromRecord(first);
+        //        _updatingSelectedItem = true;
+        //        try { SelectedItem = first.Raw ?? (object)first; }
+        //        finally { _updatingSelectedItem = false; }
+        //        _listBox.ScrollIntoView(first);
+        //    }
+        //}
+
+        private bool _autoFillInProgress;
+        private const int AutoFillMaxPages = 200; // safety cap
+        private const int AutoFillTotalItemThreshold = 2000; // only auto-fill if total expected < threshold
+
+        private async Task AppendPageAsync(int pageIndex, CancellationToken token = default)
+        {
+            if (token.IsCancellationRequested) return;
+            var filterIsBlank = string.IsNullOrEmpty(_lastFilter?.Trim());
+            var safeFilter = (_lastFilter ?? string.Empty).Trim();
+            bool allowBelowMinLength = (ShowAllOnBlank && filterIsBlank) || _ignoreMinLengthOnce;
+            if (safeFilter.Length < MinSearchLength && !allowBelowMinLength)
+            {
+                HasNextPage = false;
+                return;
+            }
+            if (pageIndex > 0) _forceFirstSelectionOnLoad = false;
+            bool isRemoteConfigured = IsRemoteConfigured;
+            bool remote = UseRemoteFetch || (_localMaster.Count == 0 && isRemoteConfigured) || _localMaster.Count > AutoRemoteThreshold;
+            int pageSize = EffectivePageSize;
+            if (remote)
+            {
+                try
+                {
+                    await Application.Current.Dispatcher.InvokeAsync(() => IsBusy = true);
+                    List<ComboRecord> pageData;
+                    try
+                    {
+                        pageData = await FetchRemoteRecordsAsync(safeFilter, token, pageIndex, pageSize).ConfigureAwait(false);
+                    }
+                    catch (OperationCanceledException)
+                    {
+                        await Application.Current.Dispatcher.InvokeAsync(() => ClearError());
+                        return;
+                    }
+                    if (token.IsCancellationRequested) return;
+                    _pageCache[pageIndex] = pageData;
+                    await Application.Current.Dispatcher.InvokeAsync(() => EvictCacheIfNeeded());
+                    await Application.Current.Dispatcher.InvokeAsync(() =>
+                    {
+                        // Remote: unknown total => fallback itemCount >= pageSize
+                        HasNextPage = pageData.Count >= pageSize;
+                        UpdateLoadMoreVisibility();
+                        bool appendMode = _pagingDown && pageIndex > 0;
+                        if (appendMode) _appendInsertIndex = _currentItems.Count;
+                        AppendToCurrent(pageData, append: appendMode);
+                        _lastPageIndex = pageIndex;
+                    });
+                }
+                catch (Exception ex)
+                {
+                    await Application.Current.Dispatcher.InvokeAsync(() => SetError($"Error fetching data: {ex.Message}"));
+                }
+                finally
+                {
+                    await Application.Current.Dispatcher.InvokeAsync(() =>
+                    {
+                        IsBusy = false;
+                        MaybeAutoFetchNextIfAlreadyAtBottom();
+                        MaybeAutoFillAllPages();
+                    });
+                }
+            }
+            else
+            {
+                var filterSnapshot = safeFilter;
+                var indexSnapshot = pageIndex;
+                IsBusy = true;
+                if (UseBackgroundFiltering)
+                {
+                    await Task.Run(() =>
+                    {
+                        var skip = indexSnapshot * pageSize;
+                        return FilterEngine.FilterPage(_localMaster, filterSnapshot, skip, pageSize);
+                    }).ContinueWith(t =>
+                    {
+                        try
+                        {
+                            if (token.IsCancellationRequested || filterSnapshot != (_lastFilter ?? string.Empty).Trim()) return;
+                            _totalFilteredCount = t.Result.Total;
+                            TotalCount = _totalFilteredCount;
+                            var pageDataLocal = t.Result.Page;
+                            _pageCache[indexSnapshot] = pageDataLocal;
+                            _pageCache[-1] = new List<ComboRecord>();
+                            EvictCacheIfNeeded();
+                            // Local: precise total
+                            HasNextPage = _currentItems.Count + pageDataLocal.Count < _totalFilteredCount;
+                            UpdateLoadMoreVisibility();
+                            bool appendMode = _pagingDown && indexSnapshot > 0;
+                            if (appendMode) _appendInsertIndex = _currentItems.Count;
+                            AppendToCurrent(pageDataLocal, append: appendMode);
+                            _lastPageIndex = indexSnapshot;
+                        }
+                        finally
+                        {
+                            IsBusy = false;
+                            MaybeAutoFetchNextIfAlreadyAtBottom();
+                            MaybeAutoFillAllPages();
+                        }
+                    }, TaskScheduler.FromCurrentSynchronizationContext());
+                }
+                else
+                {
+                    var skip = indexSnapshot * pageSize;
+                    var result = FilterEngine.FilterPage(_localMaster, filterSnapshot, skip, pageSize);
+                    _totalFilteredCount = result.Total;
+                    TotalCount = _totalFilteredCount;
+                    var pageDataLocal = result.Page;
+                    _pageCache[indexSnapshot] = pageDataLocal;
+                    _pageCache[-1] = new List<ComboRecord>();
+                    EvictCacheIfNeeded();
+                    HasNextPage = _currentItems.Count + pageDataLocal.Count < _totalFilteredCount;
+                    UpdateLoadMoreVisibility();
+                    bool appendMode = _pagingDown && indexSnapshot > 0;
+                    if (appendMode) _appendInsertIndex = _currentItems.Count;
+                    AppendToCurrent(pageDataLocal, append: appendMode);
+                    _lastPageIndex = indexSnapshot;
+                    IsBusy = false;
+                    MaybeAutoFetchNextIfAlreadyAtBottom();
+                    MaybeAutoFillAllPages();
+                }
+            }
+        }
+
+        private void MaybeAutoFillAllPages()
+        {
+            if (_autoFillInProgress) return;
+            if (!IsDropDownOpen) return;
+            if (IsBusy) return;
+            if (!HasNextPage) return;
+            // Only auto-fill when user forced open (blank) or filter blank AND total under threshold
+            if (!string.IsNullOrEmpty(_lastFilter)) return;
+            if (TotalCount > 0 && TotalCount > AutoFillTotalItemThreshold) return;
+            _ = AutoFillAsync();
+        }
+
+        private async Task AutoFillAsync()
+        {
+            _autoFillInProgress = true;
+            try
+            {
+                int guard = 0;
+                while (HasNextPage && !IsBusy && guard < AutoFillMaxPages)
+                {
+                    guard++;
+                    var nextPage = PageIndex + 1;
+                    _pagingDown = true;
+                    _pendingPageDown = true;
+                    _suppressPageIndexChanged = true;
+                    PageIndex = nextPage;
+                    _suppressPageIndexChanged = false;
+                    _ignoreMinLengthOnce = true;
+                    await AppendPageAsync(nextPage, _cts?.Token ?? CancellationToken.None);
+                }
+            }
+            finally
+            {
+                _autoFillInProgress = false;
+            }
+        }
+
+        private void MaybeAutoFetchNextIfAlreadyAtBottom()
+        {
+            if (_scrollViewer == null || _listBox == null) return;
+            if (!IsDropDownOpen) return;
+            if (IsBusy) return;
+            if (!HasNextPage) return;
+            double remaining = (_scrollViewer.ExtentHeight - _scrollViewer.VerticalOffset) - _scrollViewer.ViewportHeight;
+            if (remaining <= 2.0)
+            {
+                var nextPage = PageIndex + 1;
+                _pagingDown = true;
+                _pendingPageDown = true;
+                _suppressPageIndexChanged = true;
+                PageIndex = nextPage;
+                _suppressPageIndexChanged = false;
+                _ignoreMinLengthOnce = true;
+                _ = AppendPageAsync(nextPage);
+            }
+        }
+
+        private void UpdateHasNext(int pageIndex, int itemCount, int pageSize)
+        {
+            HasNextPage = itemCount >= pageSize;
+            UpdateLoadMoreVisibility();
+        }
+
+        // MISSING MEMBERS IMPLEMENTATION
+        private void OpenPopup()
+        {
+            if (IsDropDownOpen) return;
+            IsDropDownOpen = true;
+            SyncPopupOpenState(true);
+        }
+
+        private void ClosePopup()
+        {
+            if (!IsDropDownOpen) return;
+            IsDropDownOpen = false;
+            SyncPopupOpenState(false);
+        }
+
+        private void FocusListAndEnsureSelection(int moveDelta)
+        {
+            if (_listBox == null || _currentItems.Count == 0) return;
+            int idx = _listBox.SelectedIndex;
+            if (idx < 0)
+            {
+                idx = moveDelta >= 0 ? 0 : _currentItems.Count - 1;
+            }
+            else if (moveDelta != 0)
+            {
+                idx = Math.Max(0, Math.Min(_currentItems.Count - 1, idx + moveDelta));
+            }
+            _listBox.SelectedIndex = idx;
+            _listBox.Focus();
+            var item = _listBox.SelectedItem;
+            if (item != null) _listBox.ScrollIntoView(item);
+        }
+
+        private void FocusTextBoxAtEnd()
+        {
+            if (_textBox == null) return;
+            _textBox.Focus();
+            _textBox.CaretIndex = _textBox.Text?.Length ?? 0;
+        }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (_listBox == null) return;
+            if (IsBusy) return;
+            if (_currentItems.Count == 0) return;
+            if (_listBox.SelectedIndex == _currentItems.Count - 1 && HasNextPage)
+            {
+                _pagingDown = true;
+                _pendingPageDown = true;
+                int nextPage = PageIndex + 1;
+                _suppressPageIndexChanged = true;
+                PageIndex = nextPage;
+                _suppressPageIndexChanged = false;
+                _ignoreMinLengthOnce = true;
+                _ = AppendPageAsync(nextPage);
+            }
+        }
+
+        private int EffectivePageSize => PageSize > 0 ? PageSize : RemoteTake;
+
+        private void EvictCacheIfNeeded()
+        {
+            if (CachePageLimit <= 0) return;
+            var normalKeys = _pageCache.Keys.Where(k => k >= 0).OrderBy(k => k).ToList();
+            if (normalKeys.Count <= CachePageLimit) return;
+            int removeCount = normalKeys.Count - CachePageLimit;
+            foreach (var k in normalKeys.Take(removeCount))
+            {
+                _pageCache.Remove(k);
+            }
+        }
+
+        public void ClearPageCache()
+        {
+            _pageCache.Clear();
+            HasNextPage = false;
+        }
+    }
+}

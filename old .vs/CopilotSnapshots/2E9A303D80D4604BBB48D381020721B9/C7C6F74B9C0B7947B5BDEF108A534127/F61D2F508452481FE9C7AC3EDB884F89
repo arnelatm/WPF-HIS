@@ -1,0 +1,31 @@
+﻿using System.Windows;
+using AATM.DataAccess.Sql;
+using AATM.DataAccess;
+
+namespace AATM.Sample
+{
+    public partial class MainWindow : Window
+    {
+        public MainWindow()
+        {
+            InitializeComponent();
+            var vm = new MainWindowViewModel();
+            DataContext = vm;
+            Loaded += async (s, e) => await vm.LoadProductsAsync();
+            btnSave.Click += BtnSave_Click;
+        }
+
+        private void BtnSave_Click(object sender, RoutedEventArgs e)
+        {
+            // Validate remote combo
+            if (remoteCombo.SelectedId == null || string.IsNullOrWhiteSpace(remoteCombo.SelectedId?.ToString()))
+            {
+                remoteCombo.SetError("Selection is required.");
+                return;
+            }
+
+            remoteCombo.ClearError();
+            MessageBox.Show($"Saved: {remoteCombo.SelectedCode} - {remoteCombo.SelectedName}", "Info");
+        }
+    }
+}

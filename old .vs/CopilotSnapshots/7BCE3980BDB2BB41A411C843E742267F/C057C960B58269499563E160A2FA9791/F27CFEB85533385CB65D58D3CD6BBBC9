@@ -1,0 +1,52 @@
+﻿using System;
+using System.Collections;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Threading;
+using System.Linq;
+using System.Collections.Generic;
+using System.Data;
+using AATM.UI.Controls;
+
+namespace AATM.UI.Controls
+{
+    public partial class SmartComboBox : Control
+    {
+        // Core fields
+    private TextBox _textBox;
+   private ListBox _listBox;
+  private Button _button;
+    private Popup _popup;
+    private TextBlock _busyText;
+        private Button _loadMoreButton;
+   private Border _listBorder;
+  private ScrollViewer _scrollViewer;
+  private DispatcherTimer _debounce;
+  private bool _ignorePopupSync;
+   private bool _suspendCollectionChangedEvents = false;
+        private bool _updatingSelectedItem;
+        private string _lastFilter = string.Empty;
+    private int _lastPageIndex = 0;
+  private bool _pagingDown = true;
+        private bool _forceFirstSelectionOnLoad;
+    private int _appendInsertIndex = -1;
+
+    static SmartComboBox()
+   {
+   DefaultStyleKeyProperty.OverrideMetadata(typeof(SmartComboBox), new FrameworkPropertyMetadata(typeof(SmartComboBox)));
+  }
+
+  public SmartComboBox()
+  {
+      RemoteTake = 20;
+      _currentItems.CollectionChanged += CurrentItems_CollectionChanged;
+        this.Unloaded += SmartComboBox_Unloaded;
+   }
+
+   // Dependency properties and OnApplyTemplate
+    // ...existing dependency properties and OnApplyTemplate logic...
+    }
+}

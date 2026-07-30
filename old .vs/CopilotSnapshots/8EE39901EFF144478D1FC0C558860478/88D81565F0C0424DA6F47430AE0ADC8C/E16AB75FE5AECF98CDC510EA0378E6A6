@@ -1,0 +1,131 @@
+﻿using System;
+using System.Collections;
+using System.Windows;
+using System.Windows.Controls;
+
+namespace AATM.UI.Controls
+{
+    /// <summary>
+    /// Lightweight attached properties used by FilteringComboBoxWithProgress XAML.
+    /// Extend this class to implement actual filtering behavior.
+    /// </summary>
+    public static class FilteredComboBoxBehavior
+    {
+        // MasterItemsSource attached DP
+        public static readonly DependencyProperty MasterItemsSourceProperty =
+            DependencyProperty.RegisterAttached(
+                "MasterItemsSource",
+                typeof(IEnumerable),
+                typeof(FilteredComboBoxBehavior),
+                new PropertyMetadata(null, OnMasterItemsSourceChanged));
+
+        public static void SetMasterItemsSource(DependencyObject element, IEnumerable? value)
+            => element.SetValue(MasterItemsSourceProperty, value);
+
+        public static IEnumerable? GetMasterItemsSource(DependencyObject element)
+            => (IEnumerable?)element.GetValue(MasterItemsSourceProperty);
+
+        private static void OnMasterItemsSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            // No-op for now. Extend to refresh any filters when master list changes.
+        }
+
+        // IsEnabled attached DP
+        public static readonly DependencyProperty IsEnabledProperty =
+            DependencyProperty.RegisterAttached(
+                "IsEnabled",
+                typeof(bool),
+                typeof(FilteredComboBoxBehavior),
+                new PropertyMetadata(false, OnIsEnabledChanged));
+
+        public static void SetIsEnabled(DependencyObject element, bool value)
+            => element.SetValue(IsEnabledProperty, value);
+
+        public static bool GetIsEnabled(DependencyObject element)
+            => (bool)element.GetValue(IsEnabledProperty);
+
+        private static void OnIsEnabledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is ComboBox cb)
+            {
+                if ((bool)e.NewValue)
+                {
+                    cb.Loaded += ComboBox_Loaded;
+                    cb.Unloaded += ComboBox_Unloaded;
+                }
+                else
+                {
+                    cb.Loaded -= ComboBox_Loaded;
+                    cb.Unloaded -= ComboBox_Unloaded;
+                    DetachHandlers(cb);
+                }
+            }
+        }
+
+        // Filter debounce attached DP
+        public static readonly DependencyProperty FilterDebounceMillisecondsProperty =
+            DependencyProperty.RegisterAttached(
+                "FilterDebounceMilliseconds",
+                typeof(int),
+                typeof(FilteredComboBoxBehavior),
+                new PropertyMetadata(120));
+
+        public static void SetFilterDebounceMilliseconds(DependencyObject element, int value)
+            => element.SetValue(FilterDebounceMillisecondsProperty, value);
+
+        public static int GetFilterDebounceMilliseconds(DependencyObject element)
+            => (int)element.GetValue(FilterDebounceMillisecondsProperty);
+
+        // IsBusy attached DP
+        public static readonly DependencyProperty IsBusyProperty =
+            DependencyProperty.RegisterAttached(
+                "IsBusy",
+                typeof(bool),
+                typeof(FilteredComboBoxBehavior),
+                new PropertyMetadata(false));
+
+        public static bool GetIsBusy(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(IsBusyProperty);
+        }
+
+        public static void SetIsBusy(DependencyObject obj, bool value)
+        {
+            obj.SetValue(IsBusyProperty, value);
+        }
+
+        private static void ComboBox_Loaded(object? sender, RoutedEventArgs e)
+        {
+            if (sender is ComboBox cb)
+            {
+                AttachHandlers(cb);
+            }
+        }
+
+        private static void ComboBox_Unloaded(object? sender, RoutedEventArgs e)
+        {
+            if (sender is ComboBox cb)
+            {
+                DetachHandlers(cb);
+            }
+        }
+
+        private static void AttachHandlers(ComboBox cb)
+        {
+            // Minimal wiring so behavior is compilable and non-invasive.
+            // Extend to hook PART_EditableTextBox.TextChanged or PreviewKey events.
+            cb.DropDownOpened += Cb_DropDownOpened;
+        }
+
+        private static void DetachHandlers(ComboBox cb)
+        {
+            cb.DropDownOpened -= Cb_DropDownOpened;
+        }
+
+        private static void Cb_DropDownOpened(object? sender, EventArgs e)
+        {
+            // Placeholder: when dropdown opens you could refresh items from MasterItemsSource.
+            // Keep empty to avoid side effects.
+        }
+    }
+}

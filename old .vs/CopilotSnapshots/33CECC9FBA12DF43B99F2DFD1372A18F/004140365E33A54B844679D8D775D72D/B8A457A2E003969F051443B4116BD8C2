@@ -1,0 +1,203 @@
+﻿#if DEBUG
+#define DESIGN_TIME_SAFE
+#endif
+using AATM.Contracts.Dtos;
+using AATM.Contracts.Interfaces.Services;
+using AATM.Core.Localization;
+using AATM.Modules.Localization;
+using AATM.UI.Winforms.BaseControls;
+using AATM.UI.Winforms.Localization;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
+
+namespace AATM.App.TableManager
+{
+    public partial class TranslationForm : BaseGridCrudForm
+    {
+        private ToolStripProgressBar _statusProgress;
+        private readonly ILocalizationService _localizationService;
+        private readonly IUiLocalizationManager _uiLocalizationManager;
+        private ToolStripComboBox _languageCombo;
+        private ToolStripButton _applyLangButton;
+        private LanguageUiHelper _langHelper;
+
+        private sealed class LanguageItem
+        {
+            public string Display { get; }
+            public string Code { get; }
+            public LanguageItem(string display, string code) { Display = display; Code = code; }
+            public override string ToString() => Display;
+        }
+
+        public TranslationForm()
+        {
+            InitializeComponent();
+            if (IsDesignTime()) return;
+
+            EnsureErrorProvider();
+            InitializeTypedController<TranslationDto>(() => new TranslationCrudService());
+            _localizationService = ResolveLocalizationService();
+            _uiLocalizationManager = ResolveUiLocalizationManager();
+
+            _statusProgress = new ToolStripProgressBar
+            {
+                Name = "statusProgress",
+                Style = ProgressBarStyle.Marquee,
+                Visible = false
+            };
+            statusStrip.Items.Add(_statusProgress);
+
+            AutoBindFormFields(typeof(TranslationDto));
+            WireClearFieldErrorsOnTextChanged(_txtModuleName, _txtUIIdentifier, _txtLanguageCode, _txtOriginalString);
+        }
+
+        protected override DataGridView Grid => _dataGridView;
+        protected override ToolStripStatusLabel StatusStripLabel => statusLabel;
+        protected override ToolStripProgressBar StatusProgress => _statusProgress;
+        protected override bool AutoLoadOnShown => true;
+
+        protected override void OnCreateAdditionalNavigatorItems(BindingNavigator navigator)
+        {
+            base.OnCreateAdditionalNavigatorItems(navigator);
+            navigator.Items.Add(new ToolStripSeparator());
+
+            _languageCombo = new ToolStripComboBox
+            {
+                Name = "tscLanguage",
+                DropDownStyle = ComboBoxStyle.DropDownList,
+                ToolTipText = "Select UI language"
+            };
+
+            _applyLangButton = new ToolStripButton("Apply")
+            {
+                ToolTipText = "Apply selected language to this form"
+            };
+
+            navigator.Items.Add(new ToolStripLabel("Lang:"));
+            navigator.Items.Add(_languageCombo);
+            navigator.Items.Add(_applyLangButton);
+
+            // Initialize helper after combo is created
+            _langHelper = new LanguageUiHelper(() => _localizationService, () => _dataGridView, OnAfterLanguageApplied);
+            _langHelper.PopulateLanguages(_languageCombo);
+
+            _languageCombo.SelectedIndexChanged += (s, e) => _langHelper.ApplySelectedLanguage(this, _languageCombo);
+            _applyLangButton.Click += (s, e) => _langHelper.ApplySelectedLanguage(this, _languageCombo);
+        }
+
+        private void OnAfterLanguageApplied(string code)
+        {
+            bool rtl = _localizationService.IsRightToLeft || code.StartsWith("ar", StringComparison.OrdinalIgnoreCase);
+            ApplyRightToLeftRecursive(rtl);
+            statusLabel.Text = $"Language applied: {code}";
+        }
+
+        private ILocalizationService ResolveLocalizationService()
+            => new LocalizationService(_languageCombo?.SelectedItem is LanguageItem li ? li.Code : "en-US", Name);
+
+        private IUiLocalizationManager ResolveUiLocalizationManager()
+            => new InMemoryUiLocalizationManager();
+
+        private class InMemoryUiLocalizationManager : IUiLocalizationManager
+        {
+            private readonly Dictionary<string, Dictionary<string, string>> _registeredStrings =
+                new Dictionary<string, Dictionary<string, string>>();
+
+            public void RegisterFormStrings(Form form, string moduleName, string languageCode)
+            {
+                if (form == null) return;
+                var key = $"{moduleName}:{languageCode}";
+                if (!_registeredStrings.ContainsKey(key))
+                    _registeredStrings[key] = new Dictionary<string, string>();
+
+                foreach (Control c in GetAllControls(form))
+                {
+                    var uiId = c.Name;
+                    var original = c.Text;
+                    if (!string.IsNullOrWhiteSpace(uiId) && !string.IsNullOrWhiteSpace(original))
+                        _registeredStrings[key][uiId] = original;
+                }
+            }
+
+            public void SetLocalizedText(Form form, Dictionary<string, string> localizedStrings)
+            {
+                if (form == null || localizedStrings == null) return;
+                foreach (Control c in GetAllControls(form))
+                {
+                    var uiId = c.Name;
+                    if (!string.IsNullOrWhiteSpace(uiId) && localizedStrings.TryGetValue(uiId, out var loc))
+                        c.Text = loc;
+                }
+            }
+
+            private static IEnumerable<Control> GetAllControls(Control parent)
+            {
+                foreach (Control c in parent.Controls)
+                {
+                    yield return c;
+                    foreach (var child in GetAllControls(c))
+                        yield return child;
+                }
+            }
+        }
+
+        protected override string GetDeleteConfirmationText(IEntityWithId entity)
+        {
+            var t = entity as TranslationDto;
+            if (t == null) return base.GetDeleteConfirmationText(entity);
+
+            string original = t.OriginalString ?? string.Empty;
+            if (original.Length > 80)
+                original = original.Substring(0, 77) + "...";
+
+            return "Are you sure you want to delete this translation?"
+                   + Environment.NewLine + Environment.NewLine
+                   + "ID: " + t.ID + Environment.NewLine
+                   + "Module: " + (t.ModuleName ?? string.Empty) + Environment.NewLine
+                   + "UI Identifier: " + (t.UIIdentifier ?? string.Empty) + Environment.NewLine
+                   + "Language: " + (t.LanguageCode ?? string.Empty) + Environment.NewLine
+                   + "Original: " + original;
+        }
+
+        protected override string ValidateBeforeSave(IEntityWithId entity)
+        {
+            EnsureErrorProvider();
+            errorProvider1?.Clear();
+
+            var t = entity as TranslationDto;
+            if (t == null)
+                return "Invalid entity.";
+
+            if (t.ModuleName != null) t.ModuleName = t.ModuleName.Trim();
+            if (t.UIIdentifier != null) t.UIIdentifier = t.UIIdentifier.Trim();
+            if (t.LanguageCode != null) t.LanguageCode = t.LanguageCode.Trim();
+            if (t.OriginalString != null) t.OriginalString = t.OriginalString.Trim();
+
+            if (string.IsNullOrWhiteSpace(t.ModuleName)) { SetFieldError(_txtModuleName, "Module is required."); _txtModuleName?.Focus(); return "Module is required."; }
+            if (string.IsNullOrWhiteSpace(t.UIIdentifier)) { SetFieldError(_txtUIIdentifier, "UI Identifier is required."); _txtUIIdentifier?.Focus(); return "UI Identifier is required."; }
+            if (string.IsNullOrWhiteSpace(t.LanguageCode)) { SetFieldError(_txtLanguageCode, "Language code is required."); _txtLanguageCode?.Focus(); return "Language code is required."; }
+            if (string.IsNullOrWhiteSpace(t.OriginalString)) { SetFieldError(_txtOriginalString, "Original text is required."); _txtOriginalString?.Focus(); return "Original text is required."; }
+
+            if (t.ModuleName.Length > 100) { SetFieldError(_txtModuleName, "Module exceeds 100 characters."); _txtModuleName?.Focus(); return "Module exceeds 100 characters."; }
+            if (t.UIIdentifier.Length > 150) { SetFieldError(_txtUIIdentifier, "UI Identifier exceeds 150 characters."); _txtUIIdentifier?.Focus(); return "UI Identifier exceeds 150 characters."; }
+            if (t.LanguageCode.Length > 10) { SetFieldError(_txtLanguageCode, "Language code exceeds 10 characters."); _txtLanguageCode?.Focus(); return "Language code exceeds 10 characters."; }
+
+            if (!System.Text.RegularExpressions.Regex.IsMatch(t.LanguageCode, @"^[a-z]{2,3}(-[A-Z]{2})?$") )
+            {
+                SetFieldError(_txtLanguageCode, "Language code format invalid (e.g. en-US).");
+                _txtLanguageCode?.Focus();
+                return "Language code format invalid.";
+            }
+
+            if (string.Equals(t.ModuleName, t.UIIdentifier, StringComparison.OrdinalIgnoreCase))
+            {
+                SetFieldError(_txtUIIdentifier, "UI Identifier must differ from Module.");
+                _txtUIIdentifier?.Focus();
+                return "UI Identifier must differ from Module.";
+            }
+
+            return null;
+        }
+    }
+}

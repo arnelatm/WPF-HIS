@@ -1,0 +1,28 @@
+﻿using System.Collections.Generic;
+using Microsoft.Data.SqlClient;
+
+namespace AATM.DataAccess.Sql
+{
+    public class ProductRepository : AATM.DataAccess.IProductRepository
+    {
+        public IEnumerable<Product> GetProducts(string connectionString)
+        {
+            var products = new List<Product>();
+            const string query = "SELECT IdNo, ProductCode AS Code, ProductName AS Name FROM Product ORDER BY ProductName";
+            using var conn = new SqlConnection(connectionString);
+            using var cmd = new SqlCommand(query, conn);
+            conn.Open();
+            using var reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                products.Add(new Product
+                {
+                    IdNo = reader.GetInt32(0),
+                    Code = reader.GetString(1),
+                    Name = reader.GetString(2)
+                });
+            }
+            return products;
+        }
+    }
+}

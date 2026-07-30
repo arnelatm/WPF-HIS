@@ -1,0 +1,62 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using AATM.DataAccess.Sql;
+
+namespace AATM.UI.Controls
+{
+    public partial class SmartComboBox
+    {
+        // Add this property to the SmartComboBox class to fix the error.
+        private bool IsRemoteConfigured
+        {
+            get
+            {
+                // Replace with actual logic to determine if remote is configured.
+                // For example, check if ConnectionString and SqlQueryTemplate are not null or empty.
+                return !string.IsNullOrEmpty(ConnectionString) && !string.IsNullOrEmpty(SqlQueryTemplate);
+            }
+        }
+
+        private async Task<List<ComboRecord>> FetchFromSqlAsync(string filter, CancellationToken token, int pageIndex, int pageSize)
+        {
+            if (!IsRemoteConfigured)
+            {
+                return new List<ComboRecord>();
+            }
+            try
+            {
+                var repository = new ComboRecordRepository(ConnectionString);
+                var sqlRecords = await repository.FetchFromSqlAsync(
+                    SqlQueryTemplate,
+                    FilterCodeField,
+                    FilterNameField,
+                    filter,
+                    pageIndex,
+                    pageSize,
+                    token
+                ).ConfigureAwait(false);
+
+                // Map repository DTOs to UI DTOs if needed
+                var uiRecords = new List<ComboRecord>();
+                foreach (var rec in sqlRecords)
+                {
+                    uiRecords.Add(new ComboRecord
+                    {
+                        IdNo = rec.IdNo,
+                        Code = rec.Code,
+                        Name = rec.Name,
+                        Raw = rec.Raw
+                    });
+                }
+                return uiRecords;
+            }
+            catch (Exception ex)
+            {
+                SetError($"Error fetching data: {ex.Message}");
+                return new List<ComboRecord>();
+            }
+        }
+    }
+}

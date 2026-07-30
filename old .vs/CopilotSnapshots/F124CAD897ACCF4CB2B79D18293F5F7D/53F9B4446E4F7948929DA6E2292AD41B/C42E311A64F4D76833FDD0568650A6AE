@@ -1,0 +1,136 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:local="clr-namespace:AATM.UI.Controls">
+
+ <Style TargetType="{x:Type local:SmartComboBox}">
+ <Setter Property="EnableAutoScrollPaging" Value="True"/>
+ <Setter Property="MinSearchLength" Value="2"/>
+ <Setter Property="ShowAllOnBlank" Value="True"/>
+ <Setter Property="Template">
+ <Setter.Value>
+ <ControlTemplate TargetType="{x:Type local:SmartComboBox}">
+ <Grid>
+ <!-- Main border wraps textbox and arrow -->
+ <Border x:Name="PART_ComboBorder" BorderBrush="Gray" BorderThickness="1,1,1,0" CornerRadius="2" Background="White" SnapsToDevicePixels="True"
+ ToolTip="{TemplateBinding ErrorMessage}">
+ <Grid>
+ <Grid.ColumnDefinitions>
+ <ColumnDefinition Width="*"/>
+ <ColumnDefinition Width="24"/>
+ </Grid.ColumnDefinitions>
+ <!-- TextBox -->
+ <TextBox x:Name="PART_TextBox"
+ Grid.Column="0"
+ VerticalAlignment="Stretch"
+ Margin="0"
+ Padding="4,2,4,2"
+ BorderThickness="0"
+ Background="Transparent"
+ HorizontalAlignment="Stretch"
+ ToolTip="{TemplateBinding ErrorMessage}"
+ AutomationProperties.Name="ComboBox Input"/>
+ <!-- Watermark -->
+ <TextBlock x:Name="PART_Watermark"
+ Grid.Column="0"
+ Margin="4,2,4,2"
+ Foreground="#99000000"
+ IsHitTestVisible="False"
+ Text="{TemplateBinding Placeholder}"
+ VerticalAlignment="Center"
+ Visibility="Collapsed"
+ AutomationProperties.HelpText="{TemplateBinding Placeholder}"/>
+ <!-- Drop arrow button -->
+ <Button x:Name="PART_Button"
+ Grid.Column="1"
+ Width="24"
+ VerticalAlignment="Stretch"
+ Margin="0"
+ Padding="0"
+ Focusable="False"
+ Background="Transparent"
+ BorderThickness="0"
+ Visibility="Visible"
+ AutomationProperties.Name="Open Dropdown">
+ <Grid>
+ <Path Data="M0,0 L12,0 L6,8 Z"
+ Fill="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
+ Width="12"
+ Height="8"
+ HorizontalAlignment="Center"
+ VerticalAlignment="Center"
+ Visibility="Visible"/>
+ </Grid>
+ </Button>
+ </Grid>
+ </Border>
+ <!-- Popup for dropdown list -->
+ <Popup x:Name="PART_Popup"
+ Placement="Bottom"
+ PlacementTarget="{Binding ElementName=PART_ComboBorder}"
+ StaysOpen="False"
+ AllowsTransparency="True"
+ Focusable="False"
+ PopupAnimation="Slide">
+ <Border x:Name="PART_ListBorder" Background="White" BorderBrush="Gray" BorderThickness="1"
+ MinWidth="{Binding ActualWidth, ElementName=PART_ComboBorder}"
+ SnapsToDevicePixels="True">
+ <DockPanel LastChildFill="True"
+ MaxHeight="{Binding MaxDropDownHeight, RelativeSource={RelativeSource TemplatedParent}}">
+ <TextBlock x:Name="PART_BusyText"
+ DockPanel.Dock="Bottom"
+ Foreground="Gray"
+ FontStyle="Italic"
+ Visibility="Collapsed"
+ Margin="4,2"
+ Text="Loading..."
+ AutomationProperties.HelpText="Loading data"/>
+ <Button x:Name="PART_LoadMore"
+ DockPanel.Dock="Bottom"
+ Content="Load more"
+ Margin="4,2,4,4"
+ Height="24"
+ Visibility="Collapsed"
+ IsEnabled="False"
+ HorizontalAlignment="Stretch"
+ AutomationProperties.Name="Load More"/>
+ <ListBox x:Name="PART_ListBox"
+ IsSynchronizedWithCurrentItem="True"
+ VirtualizingStackPanel.IsVirtualizing="True"
+ VirtualizingStackPanel.VirtualizationMode="Recycling"
+ ScrollViewer.VerticalScrollBarVisibility="Auto"
+ ScrollViewer.CanContentScroll="True"
+ KeyboardNavigation.TabNavigation="Continue"
+ MaxHeight="{Binding MaxDropDownHeight, RelativeSource={RelativeSource TemplatedParent}}"
+ HorizontalAlignment="Stretch"
+ SnapsToDevicePixels="True"
+ ItemTemplate="{TemplateBinding ItemTemplate}"
+ ItemTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+ AutomationProperties.Name="ComboBox List" />
+ </DockPanel>
+ </Border>
+ </Popup>
+ </Grid>
+ <ControlTemplate.Triggers>
+ <!-- Watermark visible when Text is empty and control not focused -->
+ <MultiTrigger>
+ <MultiTrigger.Conditions>
+ <Condition Property="Text" Value=""/>
+ <Condition Property="IsKeyboardFocusWithin" Value="False"/>
+ </MultiTrigger.Conditions>
+ <Setter TargetName="PART_Watermark" Property="Visibility" Value="Visible"/>
+ </MultiTrigger>
+ <!-- Busy text visibility -->
+ <Trigger Property="IsBusy" Value="True">
+ <Setter TargetName="PART_BusyText" Property="Visibility" Value="Visible"/>
+ </Trigger>
+ <!-- Error state: red border and tooltip available -->
+ <Trigger Property="HasError" Value="True">
+ <Setter TargetName="PART_ComboBorder" Property="BorderBrush" Value="Red"/>
+ <Setter TargetName="PART_ComboBorder" Property="BorderThickness" Value="2"/>
+ </Trigger>
+ </ControlTemplate.Triggers>
+ </ControlTemplate>
+ </Setter.Value>
+ </Setter>
+ </Style>
+</ResourceDictionary>

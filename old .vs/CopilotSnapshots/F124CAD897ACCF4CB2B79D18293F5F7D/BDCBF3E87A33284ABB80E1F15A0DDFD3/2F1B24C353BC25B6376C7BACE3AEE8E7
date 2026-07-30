@@ -1,0 +1,47 @@
+﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Reflection;
+
+namespace AATM.UI.Controls
+{
+    internal static class ReflectionCache
+    {
+    internal sealed class CachedMap
+    {
+  public CachedMap(Type t)
+   {
+ var props = t.GetProperties(BindingFlags.Instance | BindingFlags.Public);
+     var dict = new Dictionary<string, PropertyInfo>(StringComparer.OrdinalIgnoreCase);
+       foreach (var p in props)
+ {
+     dict[p.Name] = p;
+     if (string.Equals(p.Name, "IdNo", StringComparison.OrdinalIgnoreCase)) IdNoProp = p;
+     else if (string.Equals(p.Name, "Code", StringComparison.OrdinalIgnoreCase)) CodeProp = p;
+     else if (string.Equals(p.Name, "Name", StringComparison.OrdinalIgnoreCase)) NameProp = p;
+       }
+ AllProps = dict;
+ }
+ public PropertyInfo IdNoProp { get; }
+  public PropertyInfo CodeProp { get; }
+   public PropertyInfo NameProp { get; }
+      public Dictionary<string, PropertyInfo> AllProps { get; }
+   }
+
+    private static readonly ConcurrentDictionary<Type, CachedMap> _maps = new();
+    public static CachedMap Get(Type t) => _maps.GetOrAdd(t, static tt => new CachedMap(tt));
+
+  public static bool TryGetPropValue(object obj, string propName, out object value)
+  {
+ value = null;
+       if (obj == null || string.IsNullOrWhiteSpace(propName)) return false;
+  var map = Get(obj.GetType());
+  if (map.AllProps.TryGetValue(propName, out var pi))
+   {
+       value = pi.GetValue(obj);
+       return true;
+        }
+        return false;
+  }
+    }
+}

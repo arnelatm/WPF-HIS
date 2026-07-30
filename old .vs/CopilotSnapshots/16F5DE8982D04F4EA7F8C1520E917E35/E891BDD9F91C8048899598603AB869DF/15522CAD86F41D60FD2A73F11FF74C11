@@ -1,0 +1,46 @@
+﻿using System.Data;
+using AATM.Contracts.Dtos;
+using AATM.DataAccess;
+using Microsoft.Data.SqlClient;
+
+namespace AATM.DataAccess.Sql
+{
+    public class SecurityGroupRepository : ISecurityGroupRepository
+    {
+        private readonly string _connectionString;
+
+        public SecurityGroupRepository(string connectionString)
+        {
+            _connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
+        }
+
+        public async Task<List<SecurityGroupLookupDto>> GetSecurityGroupsLookupAsync()
+        {
+            var list = new List<SecurityGroupLookupDto>();
+            const string sql = @"
+SELECT IdNo, SecurityGroupCode, SecurityGroupName, (SecurityGroupCode + '-' + SecurityGroupName) AS DisplayText
+FROM dbo.SecurityGroup
+ORDER BY SecurityGroupName";
+
+            using (var conn = new SqlConnection(_connectionString))
+            {
+                await conn.OpenAsync().ConfigureAwait(false);
+                using (var cmd = new SqlCommand(sql, conn))
+                using (var reader = await cmd.ExecuteReaderAsync().ConfigureAwait(false))
+                {
+                    while (await reader.ReadAsync().ConfigureAwait(false))
+                    {
+                        var dto = new SecurityGroupLookupDto
+                        {
+                            IdNo = reader.IsDBNull(0) ? 0 : reader.GetInt32(0),
+                            SecurityGroupCode = reader.IsDBNull(1) ? string.Empty : reader.GetString(1),
+                            SecurityGroupName = reader.IsDBNull(2) ? string.Empty : reader.GetString(2)
+                        };
+                        list.Add(dto);
+                    }
+                }
+            }
+            return list;
+        }
+    }
+}

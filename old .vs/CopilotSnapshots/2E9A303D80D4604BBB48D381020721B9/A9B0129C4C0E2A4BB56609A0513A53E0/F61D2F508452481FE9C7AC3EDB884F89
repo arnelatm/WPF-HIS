@@ -1,0 +1,42 @@
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
+
+namespace AATM.Sample
+{
+    public partial class MainWindow : Window
+    {
+        public List<object> TestItems { get; }
+        public object SelectedProductId { get; set; }
+        public string SelectedProductCode { get; set; }
+        public string SelectedProductName { get; set; }
+
+        public MainWindow()
+        {
+            InitializeComponent();
+
+            // Build local test data
+            TestItems = Enumerable.Range(1, 100)
+                .Select(i => new { IdNo = i, Code = $"C{i}", Name = $"Name {i}" })
+                .Cast<object>()
+                .ToList();
+
+            DataContext = this;
+
+            btnSave.Click += BtnSave_Click;
+        }
+
+        private void BtnSave_Click(object sender, RoutedEventArgs e)
+        {
+            // Validate remote combo
+            if (remoteCombo.SelectedId == null || string.IsNullOrWhiteSpace(remoteCombo.SelectedId?.ToString()))
+            {
+                remoteCombo.SetError("Selection is required.");
+                return;
+            }
+
+            remoteCombo.ClearError();
+            MessageBox.Show($"Saved: {remoteCombo.SelectedCode} - {remoteCombo.SelectedName}", "Info");
+        }
+    }
+}

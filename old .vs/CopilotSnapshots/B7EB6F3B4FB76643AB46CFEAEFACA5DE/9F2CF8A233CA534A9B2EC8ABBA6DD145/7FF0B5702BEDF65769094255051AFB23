@@ -1,0 +1,167 @@
+﻿using System;
+using System.Linq;
+using System.Windows.Controls;
+using System.Data;
+
+namespace AATM.UI.Controls
+{
+    public partial class SmartComboBox
+    {
+        // Selection logic: TrySelectBySelectedValue, TrySelectBySelectedItem, CommitSelection, EnsureListBoxSelection, etc.
+
+        private void EnsureListBoxSelection(object previousId)
+        {
+            if (_listBox == null) return;
+            if (_currentItems.Count == 0)
+            {
+                _listBox.SelectedIndex = -1;
+                return;
+            }
+            if (previousId != null)
+            {
+                var restored = _currentItems.FirstOrDefault(r => EqualsSafe(r.IdNo, previousId));
+                if (restored != null)
+                {
+                    _listBox.SelectedItem = restored;
+                    _listBox.ScrollIntoView(restored);
+                    return;
+                }
+            }
+            if (_listBox.SelectedItem is ComboRecord existing && _currentItems.Contains(existing))
+            {
+                _listBox.ScrollIntoView(existing);
+                return;
+            }
+            if (SelectedId != null)
+            {
+                var match = _currentItems.FirstOrDefault(r => EqualsSafe(r.IdNo, SelectedId));
+                if (match != null)
+                {
+                    _listBox.SelectedItem = match;
+                    _listBox.ScrollIntoView(match);
+                    return;
+                }
+            }
+            _listBox.SelectedIndex = -1;
+        }
+
+        private void CommitSelection()
+        {
+            if (_listBox?.SelectedItem is ComboRecord cr)
+            {
+                SelectedId = cr.IdNo;
+                SelectedCode = cr.Code;
+                SelectedName = cr.Name;
+                UpdateSelectedValueFromRecord(cr);
+                if (_textBox != null)
+                {
+                    var display = GetDisplayText(cr);
+                    _textBox.Text = display;
+                    Text = display;
+                    _textBox.CaretIndex = _textBox.Text.Length;
+                    _textBox.Focus();
+                }
+                _updatingSelectedItem = true;
+                try {
+                    SelectedItem = cr.Raw ?? (object)cr;
+                }
+                finally { _updatingSelectedItem = false; }
+                if (_popup != null)
+                    IsDropDownOpen = false;
+            }
+        }
+
+        private void TrySelectBySelectedValue()
+        {
+            if (_listBox == null) return;
+            var path = SelectedValuePath;
+            var selVal = SelectedValue;
+            if (string.IsNullOrWhiteSpace(path) || selVal == null) { EnsureListBoxSelection(); return; }
+            var match = _localMaster.FirstOrDefault(r => EqualsSafe(GetValueByPath(r, path), selVal));
+            if (match != null)
+            {
+                _currentItems.Clear();
+                _currentItems.Add(match);
+                SelectedId = match.IdNo;
+                SelectedCode = match.Code;
+                SelectedName = match.Name;
+                if (_textBox != null)
+                {
+                    var display = GetDisplayText(match);
+                    _textBox.Text = display;
+                    Text = display;
+                }
+                _updatingSelectedItem = true;
+                try { SelectedItem = match.Raw ?? (object)match; } finally { _updatingSelectedItem = false; }
+                HasNextPage = false;
+                EnsureListBoxSelection();
+            }
+        }
+
+        private void TrySelectBySelectedItem(object sel = null)
+        {
+            if (_listBox == null) return;
+            var target = sel ?? SelectedItem;
+            if (target == null) { EnsureListBoxSelection(); return; }
+            var rec = _currentItems.FirstOrDefault(r => ReferenceEquals(r.Raw, target) || EqualsSafe(r.Raw, target) || EqualsSafe(r.IdNo, GetIdFromUnknown(target)));
+            if (rec == null)
+            {
+                rec = _localMaster.FirstOrDefault(r => ReferenceEquals(r.Raw, target) || EqualsSafe(r.Raw, target) || EqualsSafe(r.IdNo, GetIdFromUnknown(target)));
+            }
+            if (rec != null)
+            {
+                if (!_currentItems.Contains(rec))
+                {
+                    _currentItems.Clear();
+                    _currentItems.Add(rec);
+                }
+                _listBox.SelectedItem = rec;
+                _listBox.ScrollIntoView(rec);
+                SelectedId = rec.IdNo;
+                SelectedCode = rec.Code;
+                SelectedName = rec.Name;
+                UpdateSelectedValueFromRecord(rec);
+                if (_textBox != null)
+                {
+                    var display = GetDisplayText(rec);
+                    _textBox.Text = display;
+                    Text = display;
+                }
+            }
+        }
+
+        private object GetValueByPath(ComboRecord cr, string path)
+        {
+            if (string.IsNullOrWhiteSpace(path)) return null;
+            if (path.Equals("IdNo", StringComparison.OrdinalIgnoreCase)) return cr.IdNo;
+            if (path.Equals("Code", StringComparison.OrdinalIgnoreCase)) return cr.Code;
+            if (path.Equals("Name", StringComparison.OrdinalIgnoreCase)) return cr.Name;
+            var raw = cr.Raw;
+            if (raw is DataRowView drv && drv.Row.Table.Columns.Contains(path)) return drv[path];
+            if (raw is DataRow dr && dr.Table.Columns.Contains(path)) return dr[path];
+            if (ReflectionCache.TryGetPropValue(raw, path, out var val)) return val;
+            if (ReflectionCache.TryGetPropValue(cr, path, out var selfVal)) return selfVal;
+            return null;
+        }
+
+        private object GetIdFromUnknown(object obj)
+        {
+            if (obj == null) return null;
+            if (obj is ComboRecord cr) return cr.IdNo;
+            if (obj is DataRowView drv)
+            {
+                try { return drv["IdNo"]; } catch { return null; }
+            }
+            if (obj is DataRow dr)
+            {
+                try { return dr["IdNo"]; } catch { return null; }
+            }
+            var map = ReflectionCache.Get(obj.GetType());
+            return map.IdNoProp?.GetValue(obj);
+        }
+
+        private bool EqualsSafe(object a, object b) => a == null && b == null || a != null && a.Equals(b);
+
+        private string GetDisplayText(ComboRecord cr) => cr.Display;
+    }
+}

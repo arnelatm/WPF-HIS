@@ -1,0 +1,218 @@
+﻿<Window x:Class="AATM.App.HisWpf.UserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:AATM.App.HisWpf"
+        xmlns:behaviors="clr-namespace:AATM.App.HisWpf.Behaviors"
+        xmlns:local1="clr-namespace:AATM.App.HisWpf.Converter"
+        Title="User Manager"
+        Height="668" Width="800"
+        WindowStartupLocation="CenterOwner">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/ComboBoxKeyboardNavigationStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <local1:EmployeeIdNoToDisplayTextConverter x:Key="EmployeeIdNoToDisplayTextConverter"/>
+            <local1:SecurityGroupIdNoToDisplayTextConverter x:Key="SecurityGroupIdNoToDisplayTextConverter"/>
+            <local1:IdToDisplayTextMultiConverter x:Key="IdToDisplayTextMultiConverter"/>
+            <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0"/>
+            <ColumnDefinition Width="165"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Navigation and CRUD Controls at the top -->
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal" Margin="0,0,0,10">
+            <Button x:Name="btnFirst" Content="|&lt;" Width="40" Margin="2"/>
+            <Button x:Name="btnPrev" Content="&lt;" Width="40" Margin="2"/>
+            <TextBox x:Name="txtCurrentRecord" Width="40" Margin="2" IsReadOnly="True" HorizontalContentAlignment="Center"/>
+            <TextBlock Text="/" VerticalAlignment="Center" Margin="2"/>
+            <TextBox x:Name="txtRecordCount" Width="40" Margin="2" IsReadOnly="True" HorizontalContentAlignment="Center"/>
+            <Button x:Name="btnNext" Content=">" Width="40" Margin="2"/>
+            <Button x:Name="btnLast" Content=">|" Width="40" Margin="2"/>
+            <Button x:Name="btnFind" Content="Find" Width="60" Margin="10,2,2,2"/>
+            <Button x:Name="btnResetFilter" Content="Reset" Width="60" Margin="2"/>
+            <Button x:Name="btnSave" Content="Save" Width="60" Margin="10,2,2,2"/>
+            <Button x:Name="btnDelete" Content="Delete" Width="60" Margin="2"/>
+            <Button x:Name="btnSwitchLanguage" Content="Switch Language" Width="120" Margin="10,2,2,2"/>
+        </StackPanel>
+
+        <Label Grid.Row="1" Grid.Column="0" Content="IdNo" Grid.ColumnSpan="2"/>
+        <TextBox Grid.Row="1" Grid.Column="2"
+           Text="{Binding SelectedUser.IdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}" />
+
+        <Label Grid.Row="2" Grid.Column="0" Content="User Name" Grid.ColumnSpan="2"/>
+        <TextBox Grid.Row="2" Grid.Column="2"
+                 Text="{Binding SelectedUser.UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True, TargetNullValue=''}"/>
+
+        <Label Grid.Row="3" Grid.Column="0" Content="Employee Code - Name" Grid.ColumnSpan="2"/>
+        <!-- Top-level ComboBox: editable, bound to master list -->
+        <Grid Grid.Row="3" Grid.Column="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <ComboBox Grid.Column="0" x:Name="cmbEmployeeIdNo"
+                IsEditable="True"
+                IsTextSearchEnabled="False"
+                StaysOpenOnEdit="True"
+                behaviors:ComboBoxClearOnFullSelectionBehavior.IsEnabled="True"
+                Text="{Binding EmployeeDisplayText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                SelectedValuePath="IdNo"
+                DisplayMemberPath="DisplayText"
+                SelectedValue="{Binding SelectedUser.EmployeeIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                ItemsSource="{Binding AvailableEmployees}" />
+            <ProgressBar Grid.Column="1" x:Name="pbEmployeeFiltering" Width="18" Height="18" Margin="6,0,0,0" IsIndeterminate="True" Visibility="Collapsed"/>
+        </Grid>
+
+        <Label Grid.Row="4" Grid.Column="0" Content="Security Group Code-Name" Grid.ColumnSpan="2"/>
+        <!-- Top-level Security ComboBox: editable, bound to master list -->
+        <Grid Grid.Row="4" Grid.Column="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <ComboBox Grid.Column="0" x:Name="cmbSecurityGroupIdNo"
+                IsEditable="True"
+                IsTextSearchEnabled="False"
+                StaysOpenOnEdit="True"
+                behaviors:ComboBoxClearOnFullSelectionBehavior.IsEnabled="True"
+                Text="{Binding SecurityGroupDisplayText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                SelectedValuePath="IdNo"
+                DisplayMemberPath="DisplayText"
+                SelectedValue="{Binding SelectedUser.SecurityGroupIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                ItemsSource="{Binding AvailableSecurityGroups}" />
+            <ProgressBar Grid.Column="1" x:Name="pbSecurityFiltering" Width="18" Height="18" Margin="6,0,0,0" IsIndeterminate="True" Visibility="Collapsed"/>
+        </Grid>
+
+        <Label Grid.Row="5" Grid.Column="0" Content="Password" Grid.ColumnSpan="2"/>
+        <TextBox Grid.Row="5" Grid.Column="2" x:Name="txtPassword"
+                 Text="{Binding SelectedUser.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True, TargetNullValue=''}"/>
+        <Label Grid.Row="6" Grid.Column="0" Content="Active?" Grid.ColumnSpan="2" Cursor=""/>
+        <CheckBox Grid.Row="6" Grid.Column="2" x:Name="chkActive"
+          IsChecked="{Binding SelectedUser.Active, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}" 
+          Content="" />
+
+        <TextBox Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3" x:Name="txtErrors"
+            Background="MistyRose" Foreground="DarkRed" FontWeight="Bold"
+            IsReadOnly="True" Height="44" VerticalScrollBarVisibility="Auto"
+            Text="{Binding ErrorText}" Grid.RowSpan="3" VerticalAlignment="Top" />
+
+        <ProgressBar Grid.Row="7" IsIndeterminate="True" Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}}" Grid.ColumnSpan="2" Margin="0,24,152,390" Grid.RowSpan="3" />
+
+        <DataGrid Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="3" x:Name="dataGrid"
+                  ItemsSource="{Binding Users}" AutoGenerateColumns="False"
+                  SelectedItem="{Binding SelectedUser, Mode=TwoWay}"
+                  Margin="0,5,0,10"
+                  EnableRowVirtualization="True"
+                  EnableColumnVirtualization="True"
+                  VirtualizingPanel.IsVirtualizing="True"
+                  VirtualizingPanel.VirtualizationMode="Recycling"
+                  VirtualizingPanel.IsVirtualizingWhenGrouping="True"
+                  ScrollViewer.CanContentScroll="True"
+                  RowHeight="28">
+            <DataGrid.Columns>
+                <local:ValidatedTextColumn Header="Id Number" Binding="{Binding IdNo}" Width="80"/>
+                <local:ValidatedTextColumn Header="User Name" Binding="{Binding UserName}" Width="100"/>
+
+                <!-- Employee template column: display via shared multi-converter, edit via ComboBox bound to AvailableEmployees -->
+                <DataGridTemplateColumn Header="Employee Name" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <!-- Use the shared IdToDisplayTextMultiConverter with the grid's AvailableEmployees collection -->
+                            <TextBlock>
+                                <TextBlock.Text>
+                                    <MultiBinding Converter="{StaticResource IdToDisplayTextMultiConverter}" FallbackValue="">
+                                        <Binding Path="EmployeeIdNo"/>
+                                        <Binding ElementName="dataGrid" Path="DataContext.AvailableEmployees"/>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <ComboBox
+                                ItemsSource="{Binding DataContext.AvailableEmployees, ElementName=datagrid}"
+                                SelectedValue="{Binding EmployeeIdNo, Mode=TwoWay}"
+                                SelectedValuePath="IdNo"
+                                DisplayMemberPath="DisplayText"
+                                IsEditable="True"
+                                IsTextSearchEnabled="False"
+                                StaysOpenOnEdit="False"
+                                ItemContainerStyle="{StaticResource KeyboardNavigableComboBoxItemStyle}">
+                                <ComboBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <VirtualizingStackPanel IsItemsHost="True" VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling" />
+                                    </ItemsPanelTemplate>
+                                </ComboBox.ItemsPanel>
+                            </ComboBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
+
+                <!-- Security group template column -->
+                <DataGridTemplateColumn Header="Security Group" Width="150">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <!-- Fixed: use the resource key as declared in Window.Resources -->
+                            <TextBlock>
+                                <TextBlock.Text>
+                                    <MultiBinding Converter="{StaticResource IdToDisplayTextMultiConverter}">
+                                        <Binding Path="SecurityGroupIdNo"/>
+                                        <Binding ElementName="datagrid" Path="DataContext.AvailableSecurityGroups"/>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <ComboBox
+                                ItemsSource="{Binding DataContext.AvailableSecurityGroups, ElementName=datagrid}"
+                                SelectedValue="{Binding SecurityGroupIdNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                SelectedValuePath="IdNo"
+                                DisplayMemberPath="DisplayText"
+                                IsEditable="True"
+                                IsTextSearchEnabled="False"
+                                StaysOpenOnEdit="False"
+                                ItemContainerStyle="{StaticResource KeyboardNavigableComboBoxItemStyle}">
+                                <ComboBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <VirtualizingStackPanel IsItemsHost="True" VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling" />
+                                    </ItemsPanelTemplate>
+                                </ComboBox.ItemsPanel>
+                            </ComboBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Active" Width="45">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding Active, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

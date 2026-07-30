@@ -1,0 +1,104 @@
+﻿using System;
+using System.Collections;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Threading;
+using System.Linq;
+using System.Collections.Generic;
+using System.Data;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace AATM.UI.Controls
+{
+ public partial class SmartComboBox : Control
+ {
+ // core fields (declared for use across partials)
+ private TextBox _textBox;
+ private ListBox _listBox;
+ private Button _button;
+ private Popup _popup;
+ private TextBlock _busyText;
+ private Button _loadMoreButton;
+ private Border _listBorder;
+ private ScrollViewer _scrollViewer;
+ private DispatcherTimer _debounce;
+ private bool _ignorePopupSync;
+ private bool _suspendCollectionChangedEvents;
+ private bool _updatingSelectedItem;
+ private string _lastFilter;
+ private int _lastPageIndex;
+ private bool _pagingDown;
+ private bool _forceFirstSelectionOnLoad;
+ private int _appendInsertIndex;
+ private CancellationTokenSource _cts;
+ private List<ComboRecord> _localMaster;
+ private BulkObservableCollection<ComboRecord> _currentItems;
+ private readonly Dictionary<int, List<ComboRecord>> _pageCache;
+ private int _totalFilteredCount;
+ private bool _pendingPageDown;
+ private bool _pendingPageUp;
+ private const int AutoRemoteThreshold =50000;
+ private bool _suppressPageIndexChanged;
+ private bool _ignoreMinLengthOnce;
+ private bool _focusListOnSearchComplete;
+ private int _pendingMoveDelta;
+
+ // Method signatures (implementations live in other partials)
+ private void SmartComboBox_Unloaded(object sender, RoutedEventArgs e) { }
+ public override void OnApplyTemplate() { }
+ private void EnsureDebounce() { }
+ private void TextBox_TextChanged(object sender, TextChangedEventArgs e) { }
+ private void DropButton_Click(object sender, RoutedEventArgs e) { }
+ private void TextBox_KeyDown(object sender, KeyEventArgs e) { }
+ private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e) { }
+ private void ListBox_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) { }
+ private void ListBox_PreviewKeyDown(object sender, KeyEventArgs e) { }
+ private void EnsureDropDownAndSearch(string txt, bool forceOpen = false) { }
+ private void SyncPopupOpenState(bool open) { }
+ private void Popup_Opened(object sender, EventArgs e) { }
+ private void Popup_Closed(object sender, EventArgs e) { }
+ private void OpenPopup() { }
+ private void ClosePopup() { }
+ private void FocusListAndEnsureSelection(int moveDelta) { }
+ private void FocusTextBoxAtEnd() { }
+
+ // Stub properties/fields for missing references
+ public int MinSearchLength { get; set; } =0;
+ public bool ShowAllOnBlank { get; set; } = false;
+ public bool HasNextPage { get; set; } = false;
+ public bool UseRemoteFetch { get; set; } = false;
+ public bool IsBusy { get; set; } = false;
+ public bool UseBackgroundFiltering { get; set; } = false;
+ public int TotalCount { get; set; } =0;
+ public int PageSize { get; set; } =50;
+ public int RemoteTake { get; set; } =50;
+ public int CachePageLimit { get; set; } =10;
+
+ // Selection-related stubs
+ public object SelectedId { get; set; }
+ public string SelectedCode { get; set; }
+ public string SelectedName { get; set; }
+ public object SelectedItem { get; set; }
+ public string Text { get; set; }
+ public bool IsDropDownOpen { get; set; }
+ public string SelectedValuePath { get; set; }
+ public object SelectedValue { get; set; }
+ private void UpdateSelectedValueFromRecord(object rec) { /* stub */ }
+
+ // Remote-related stubs
+ public string ConnectionString { get; set; }
+ public string SqlQueryTemplate { get; set; }
+ public string FilterCodeField { get; set; }
+ public string FilterNameField { get; set; }
+
+ // Stub methods for missing references
+ private void ClearError() { /* stub */ }
+ private void AppendToCurrent(List<ComboRecord> items, bool append = false) { /* stub */ }
+ private void SetError(string message) { /* stub */ }
+ private void UpdateLoadMoreVisibility() { /* stub */ }
+ }
+}

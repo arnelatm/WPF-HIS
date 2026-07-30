@@ -1,0 +1,40 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using BenchmarkDotNet.Attributes;
+
+namespace Benchmarks
+{
+    public class SmartComboBoxFilterBenchmarks
+    {
+        private List<Record> _data = null !;
+        private string _filter = "abc";
+        [GlobalSetup]
+        public void Setup()
+        {
+            _data = new List<Record>(100000);
+            for (int i = 0; i < 100000; i++)
+            {
+                _data.Add(new Record { Code = "Code" + i, Name = "Name" + i });
+            }
+
+            // introduce some matches
+            for (int i = 0; i < 1000; i++)
+            {
+                _data[(i * 97) % _data.Count].Name = "abcName" + i;
+            }
+        }
+
+        [Benchmark]
+        public List<Record> LinqFilter()
+        {
+            return _data.Where(r => (!string.IsNullOrEmpty(r.Code) && r.Code.IndexOf(_filter, StringComparison.OrdinalIgnoreCase) >= 0) || (!string.IsNullOrEmpty(r.Name) && r.Name.IndexOf(_filter, StringComparison.OrdinalIgnoreCase) >= 0)).ToList();
+        }
+
+        public class Record
+        {
+            public string? Code { get; set; }
+            public string? Name { get; set; }
+        }
+    }
+}

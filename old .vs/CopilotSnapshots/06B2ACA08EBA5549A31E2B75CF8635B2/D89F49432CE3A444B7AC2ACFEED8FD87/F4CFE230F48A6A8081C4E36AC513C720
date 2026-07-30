@@ -1,0 +1,104 @@
+﻿using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Data;
+
+namespace AATM.App.HisWpf.Behaviors
+{
+    /// <summary>
+    /// Attached behavior for editable ComboBox: when the entire text is selected
+    /// and the user types or presses Delete/Backspace, make sure the ComboBox
+    /// does not restore its Text from SelectedItem/SelectedValue. Clears selection
+    /// and updates bindings so typed input or delete works as expected.
+    /// </summary>
+    public static class ComboBoxClearOnFullSelectionBehavior
+    {
+        public static readonly DependencyProperty IsEnabledProperty = DependencyProperty.RegisterAttached(
+            "IsEnabled",
+            typeof(bool),
+            typeof(ComboBoxClearOnFullSelectionBehavior),
+            new PropertyMetadata(false, OnIsEnabledChanged));
+
+        public static void SetIsEnabled(DependencyObject element, bool value) => element.SetValue(IsEnabledProperty, value);
+        public static bool GetIsEnabled(DependencyObject element) => (bool)element.GetValue(IsEnabledProperty);
+
+        private static void OnIsEnabledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is not ComboBox combo) return;
+
+            if ((bool)e.NewValue)
+            {
+                combo.PreviewKeyDown += Combo_PreviewKeyDown;
+                combo.PreviewTextInput += Combo_PreviewTextInput;
+                combo.Loaded += Combo_Loaded;
+            }
+            else
+            {
+                combo.PreviewKeyDown -= Combo_PreviewKeyDown;
+                combo.PreviewTextInput -= Combo_PreviewTextInput;
+                combo.Loaded -= Combo_Loaded;
+            }
+        }
+
+        private static void Combo_Loaded(object? sender, RoutedEventArgs e)
+        {
+            // No-op to ensure template is applied
+        }
+
+        private static void Combo_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (sender is not ComboBox combo || !combo.IsEditable) return;
+
+            var tb = combo.Template.FindName("PART_EditableTextBox", combo) as TextBox;
+            if (tb == null) return;
+
+            // If all text is selected, typing should replace it. Prevent SelectedValue/SelectedItem from restoring.
+            if (!string.IsNullOrEmpty(tb.Text) && tb.SelectionLength == tb.Text.Length)
+            {
+                // Clear SelectedItem/SelectedValue so ComboBox won't re-apply SelectedItem -> Text
+                combo.SelectedItem = null;
+                combo.SelectedValue = null;
+
+                // If there's a binding on SelectedValue, push null to the source immediately
+                var beSel = combo.GetBindingExpression(ComboBox.SelectedValueProperty);
+                beSel?.UpdateSource();
+
+                // Let the text input proceed normally (don't mark handled)
+            }
+        }
+
+        private static void Combo_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (sender is not ComboBox combo || !combo.IsEditable) return;
+
+            var tb = combo.Template.FindName("PART_EditableTextBox", combo) as TextBox;
+            if (tb == null) return;
+
+            if (string.IsNullOrEmpty(tb.Text) || tb.SelectionLength != tb.Text.Length) return;
+
+            // If the entire text is selected and the user presses Delete or Backspace, clear everything.
+            if (e.Key == Key.Delete || e.Key == Key.Back)
+            {
+                // Clear the editable text
+                tb.Text = string.Empty;
+
+                // Clear SelectedItem/SelectedValue so ItemsSource/selection logic doesn't repopulate the Text
+                combo.SelectedItem = null;
+                combo.SelectedValue = null;
+
+                // Update bindings: Text and SelectedValue
+                var beText = combo.GetBindingExpression(ComboBox.TextProperty);
+                beText?.UpdateSource();
+
+                var beSel = combo.GetBindingExpression(ComboBox.SelectedValueProperty);
+                beSel?.UpdateSource();
+
+                // Prevent further processing
+                e.Handled = true;
+                return;
+            }
+
+            // For other keys we let PreviewTextInput handle clearing SelectedValue when full selection
+        }
+    }
+}

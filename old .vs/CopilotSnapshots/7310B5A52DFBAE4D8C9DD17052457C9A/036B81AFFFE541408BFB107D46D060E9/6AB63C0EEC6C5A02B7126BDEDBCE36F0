@@ -1,0 +1,446 @@
+﻿using AATM.App.HisWpf.ViewModels;
+using AATM.Business.Validation.ValidationRules;
+using AATM.Business.Validation.Validators;
+using AATM.Contracts.Dtos;
+using AATM.Contracts.Interfaces.Services;
+using AATM.Core.Localization;
+using AATM.DataAccess;
+using AATM.Modules.Localization;
+using AATM.Modules.Users;
+using System.Collections;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Windows.Input;
+using System.Threading;
+using System.Windows.Data;
+using Timer = System.Timers.Timer;
+
+namespace AATM.App.HisWpf.ViewModels
+{
+    public class UserViewModel : INotifyPropertyChanged, INotifyDataErrorInfo
+    {
+        private readonly UserCrudService _service;
+        private readonly ILocalizationService _localizationService;
+        private readonly IEmployeeRepository _employeeRepo;
+        private readonly ISecurityGroupRepository _securityGroupRepo;
+
+        public ObservableCollection<LanguageItem> AvailableLanguages { get; } = new();
+        public ObservableCollection<EmployeeLookupDto> AvailableEmployees { get; } = new();
+        private readonly CollectionViewSource _employeeViewSource = new();
+        public ICollectionView EmployeeView => _employeeViewSource.View;
+
+        public bool SelectedUserImplementsErrorInfo => SelectedUser is INotifyDataErrorInfo;
+        public ObservableCollection<SecurityGroupLookupDto> AvailableSecurityGroups { get; } = new();
+        private readonly CollectionViewSource _securityViewSource = new();
+        public ICollectionView SecurityGroupView => _securityViewSource.View;
+
+        public ObservableCollection<UserDto> Users { get; } = new();
+
+        private UserDto? _selectedUser;
+        public UserDto? SelectedUser
+        {
+            get => _selectedUser;
+            set
+            {
+                if (_selectedUser != value)
+                {
+                    if (_selectedUser is INotifyPropertyChanged oldNotify)
+                        oldNotify.PropertyChanged -= SelectedUser_PropertyChanged;
+
+                    _selectedUser = value;
+                    OnPropertyChanged();
+
+                    if (_selectedUser is INotifyPropertyChanged newNotify)
+                        newNotify.PropertyChanged += SelectedUser_PropertyChanged;
+
+                    ValidateAllProperties();
+                    if (SaveCommand is AsyncRelayCommand asyncCmd)
+                        asyncCmd.RaiseCanExecuteChanged();
+                    ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs("UserDto"));
+                }
+            }
+        }
+
+        private void SelectedUser_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            ValidateAllProperties();
+            if (SaveCommand is AsyncRelayCommand asyncCmd)
+                asyncCmd.RaiseCanExecuteChanged();
+            ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(e.PropertyName));
+        }
+
+        public string? ErrorText { get; set; }
+
+        public ICommand SaveCommand { get; }
+        public ICommand DeleteCommand { get; }
+        public ICommand RefreshCommand { get; }
+
+        private readonly DtoValidator<UserDto> _UserValidator =
+            new DtoValidator<UserDto>(UserDtoValidationRules.Validate);
+
+        // debounce timers to reduce frequent refreshes while typing
+        private readonly Timer _employeeFilterTimer;
+        private readonly Timer _securityFilterTimer;
+        private const double FilterDebounceMs = 300;
+
+        public UserViewModel(UserCrudService service, ILocalizationService localizationService, IEmployeeRepository employeeRepo, ISecurityGroupRepository securityGroupRepo)
+        {
+            _service = service;
+            _localizationService = localizationService;
+            _employeeRepo = employeeRepo;
+            _securityGroupRepo = securityGroupRepo;
+
+            var langs = LocalizationHelper.SafeGetLanguages(_localizationService);
+            foreach (var (display, code) in langs)
+                AvailableLanguages.Add(new LanguageItem(display, code));
+
+            // Initialize CollectionViewSources
+            _employeeViewSource.Source = AvailableEmployees;
+            _employeeViewSource.Filter += (_, args) => args.Accepted = EmployeeFilterPredicate(args.Item as EmployeeLookupDto);
+
+            _securityViewSource.Source = AvailableSecurityGroups;
+            _securityViewSource.Filter += (_, args) => args.Accepted = SecurityGroupFilterPredicate(args.Item as SecurityGroupLookupDto);
+
+            // setup debounce timers
+            _employeeFilterTimer = new Timer(FilterDebounceMs) { AutoReset = false };
+            _employeeFilterTimer.Elapsed += (s, e) => App.Current.Dispatcher.Invoke(ApplyEmployeeFilter);
+
+            _securityFilterTimer = new Timer(FilterDebounceMs) { AutoReset = false };
+            _securityFilterTimer.Elapsed += (s, e) => App.Current.Dispatcher.Invoke(ApplySecurityGroupFilter);
+
+            SaveCommand = new AsyncRelayCommand(
+                async _ => await Save(),
+                _ => SelectedUser != null && !HasErrors
+            );
+            DeleteCommand = new AsyncRelayCommand(
+                async _ => await Delete(),
+                _ => SelectedUser != null
+            );
+            RefreshCommand = new AsyncRelayCommand(
+                async _ => await Refresh()
+            );
+        }
+
+        private bool EmployeeFilterPredicate(EmployeeLookupDto? emp)
+        {
+            if (emp == null) return false;
+            var filter = EmployeeFilterText?.Trim() ?? string.Empty;
+            if (string.IsNullOrEmpty(filter)) return true;
+            return (!string.IsNullOrEmpty(emp.DisplayText) && emp.DisplayText.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0)
+                || (!string.IsNullOrEmpty(emp.EmployeeName) && emp.EmployeeName.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0)
+                || (!string.IsNullOrEmpty(emp.EmployeeCode) && emp.EmployeeCode.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0);
+        }
+
+        private bool SecurityGroupFilterPredicate(SecurityGroupLookupDto? sg)
+        {
+            if (sg == null) return false;
+            var filter = SecurityGroupFilterText?.Trim() ?? string.Empty;
+            if (string.IsNullOrEmpty(filter)) return true;
+            return (!string.IsNullOrEmpty(sg.DisplayText) && sg.DisplayText.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0)
+                || (!string.IsNullOrEmpty(sg.SecurityGroupName) && sg.SecurityGroupName.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0)
+                || (!string.IsNullOrEmpty(sg.SecurityGroupCode) && sg.SecurityGroupCode.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0);
+        }
+
+        // Employee filter
+        private string _employeeFilterText = "";
+        public string EmployeeFilterText
+        {
+            get => _employeeFilterText;
+            set
+            {
+                if (_employeeFilterText != value)
+                {
+                    _employeeFilterText = value;
+                    OnPropertyChanged();
+                    // debounce
+                    _employeeFilterTimer.Stop();
+                    _employeeFilterTimer.Start();
+                }
+            }
+        }
+
+        // Security group filter
+        private string _securityGroupFilterText = "";
+        public string SecurityGroupFilterText
+        {
+            get => _securityGroupFilterText;
+            set
+            {
+                if (_securityGroupFilterText != value)
+                {
+                    _securityGroupFilterText = value;
+                    OnPropertyChanged();
+                    // debounce
+                    _securityFilterTimer.Stop();
+                    _securityFilterTimer.Start();
+                }
+            }
+        }
+
+        private void ApplyEmployeeFilter()
+        {
+            // Ensure view refresh happens on UI thread
+            if (!App.Current.Dispatcher.CheckAccess())
+            {
+                App.Current.Dispatcher.Invoke(ApplyEmployeeFilter);
+                return;
+            }
+
+            var view = _employeeViewSource.View;
+            if (view != null)
+            {
+                using (view.DeferRefresh())
+                {
+                    // refresh will be deferred until Dispose
+                }
+                // Ensure selected user's employee is present in available list
+                try
+                {
+                    if (SelectedUser != null)
+                    {
+                        var selId = SelectedUser.EmployeeIdNo;
+                        if (selId != 0 && !AvailableEmployees.Any(e => e.IdNo == selId))
+                        {
+                            var found = AvailableEmployees.FirstOrDefault(e => e.IdNo == selId);
+                            if (found != null)
+                                AvailableEmployees.Insert(0, found);
+                        }
+                    }
+                }
+                catch { }
+            }
+        }
+
+        private void ApplySecurityGroupFilter()
+        {
+            if (!App.Current.Dispatcher.CheckAccess())
+            {
+                App.Current.Dispatcher.Invoke(ApplySecurityGroupFilter);
+                return;
+            }
+
+            var view = _securityViewSource.View;
+            if (view != null)
+            {
+                using (view.DeferRefresh())
+                {
+                    // deferred
+                }
+
+                try
+                {
+                    if (SelectedUser != null)
+                    {
+                        var selId = SelectedUser.SecurityGroupIdNo;
+                        if (selId != 0 && !AvailableSecurityGroups.Any(s => s.IdNo == selId))
+                        {
+                            var found = AvailableSecurityGroups.FirstOrDefault(s => s.IdNo == selId);
+                            if (found != null)
+                                AvailableSecurityGroups.Insert(0, found);
+                        }
+                    }
+                }
+                catch { }
+            }
+        }
+
+        public async Task LoadEmployeesAsync()
+        {
+            var employees = await _employeeRepo.GetEmployeesLookupAsync().ConfigureAwait(false);
+            await App.Current.Dispatcher.InvokeAsync(() =>
+            {
+                AvailableEmployees.Clear();
+                foreach (var e in employees) AvailableEmployees.Add(e);
+                _employeeViewSource.View?.Refresh();
+            });
+        }
+
+        public async Task LoadSecurityGroupsAsync()
+        {
+            var securityGroups = await _securityGroupRepo.GetSecurityGroupsLookupAsync().ConfigureAwait(false);
+            await App.Current.Dispatcher.InvokeAsync(() =>
+            {
+                AvailableSecurityGroups.Clear();
+                foreach (var sg in securityGroups) AvailableSecurityGroups.Add(sg);
+                _securityViewSource.View?.Refresh();
+            });
+        }
+
+        public bool IsBusy { get; set; }
+        // Serialize loads and avoid duplicates
+        private async Task Refresh(bool reload = false)
+        {
+            await _loadLock.WaitAsync();
+            try
+            {
+                IsBusy = true;
+                OnPropertyChanged(nameof(IsBusy));
+
+                if (reload)
+                {
+                    Users.Clear();
+                    var items = await _service.GetAllAsync().ConfigureAwait(true);
+                    foreach (var item in items)
+                        Users.Add(item);
+                }
+
+                SelectedUser = Users.Count > 0 ? Users[0] : null;
+                ErrorText = $"Loaded {Users.Count} User(s).";
+            }
+            catch (Exception ex)
+            {
+                ErrorText = $"Load failed: {ex.Message}";
+            }
+            finally
+            {
+                IsBusy = false;
+                OnPropertyChanged(nameof(IsBusy));
+                _loadLock.Release();
+            }
+            OnPropertyChanged(nameof(ErrorText));
+        }
+
+        private async Task Save()
+        {
+            ValidateAllProperties(); // Ensure errors are up-to-date
+            if (HasErrors)
+            {
+                ErrorText = "Please fix validation errors before saving.";
+                OnPropertyChanged(nameof(ErrorText));
+                return;
+            }
+            if (SelectedUser == null) return;
+            var saved = await _service.UpsertAsync(SelectedUser);
+            ErrorText = saved != null ? "" : "Save failed";
+            await Refresh();
+        }
+
+        private async Task Delete()
+        {
+            if (SelectedUser == null) return;
+            var ok = await _service.DeleteAsync(SelectedUser.IdNo);
+            ErrorText = ok ? "" : "Delete failed";
+            await Refresh();
+        }
+
+        // Validation logic
+        private readonly Dictionary<string, List<string>> _errors = new();
+
+        public bool HasErrors => _errors.Count > 0;
+        public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
+
+        public IEnumerable GetErrors(string propertyName)
+        {
+            if (string.IsNullOrEmpty(propertyName))
+            {
+                return _errors.Values.SelectMany(e => e).ToList();
+            }
+            return _errors.TryGetValue(propertyName, out var errors) ? errors : Enumerable.Empty<string>();
+        }
+
+        private void ValidateProperty(string propertyName, object value)
+        {
+            var errors = new List<string>();
+            if (propertyName == nameof(UserDto.UserName) && string.IsNullOrWhiteSpace((string)value))
+                errors.Add("User Name is required.");
+            if (propertyName == nameof(UserDto.SecurityGroupIdNo) && string.IsNullOrWhiteSpace((string)value))
+                errors.Add("Security Group ID is required.");
+            if (propertyName == nameof(UserDto.EmployeeIdNo) && string.IsNullOrWhiteSpace((string)value))
+                errors.Add("Employee ID Number is required.");
+            if (errors.Count > 0)
+                _errors[propertyName] = errors;
+            else
+                _errors.Remove(propertyName);
+
+            ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
+        }
+
+        private void ValidateAllProperties()
+        {
+            _errors.Clear();
+            ErrorText = ""; // Clear previous error
+            if (SelectedUser != null)
+            {
+                var errors = _UserValidator.Validate(SelectedUser);
+                if (errors.Any())
+                {
+                    _errors["UserDto"] = errors;
+                    ErrorText = string.Join(Environment.NewLine, errors); // <-- Set error text here
+                }
+                else
+                {
+                    _errors.Remove("UserDto");
+                }
+            }
+            if (SaveCommand is AsyncRelayCommand asyncCmd)
+                asyncCmd.RaiseCanExecuteChanged();
+            ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs("UserDto"));
+            OnPropertyChanged(nameof(ErrorText)); // <-- Notify UI of change
+        }
+
+        // Make InitializeAsync idempotent
+        public async Task InitializeAsync()
+        {
+            if (Interlocked.Exchange(ref _initOnce, 1) == 1)
+                return; // already initialized
+
+            // Start loading lookup data and wait for them to complete first
+            await LoadEmployeesSafeAsync();
+            await LoadSecurityGroupsSafeAsync();
+
+            // Now load users (depends on lookups to be available for correct display)
+            await RefreshSafeAsync();
+        }
+
+        private async Task LoadEmployeesSafeAsync()
+        {
+            try { await LoadEmployeesAsync().ConfigureAwait(false); }
+            catch (Exception ex)
+            {
+                ErrorText = $"Employees load failed: {ex.Message}";
+                OnPropertyChanged(nameof(ErrorText));
+            }
+        }
+
+        private async Task LoadSecurityGroupsSafeAsync()
+        {
+            try { await LoadSecurityGroupsAsync().ConfigureAwait(false); }
+            catch (Exception ex)
+            {
+                ErrorText = $"Security groups load failed: {ex.Message}";
+                OnPropertyChanged(nameof(ErrorText));
+            }
+        }
+
+        private async Task RefreshSafeAsync()
+        {
+            try { await Refresh(true).ConfigureAwait(true);
+            }
+            catch (Exception ex)
+            {
+                ErrorText = $"Users load failed: {ex.Message}";
+                OnPropertyChanged(nameof(ErrorText));
+            }
+        }
+
+        // INotifyPropertyChanged implementation
+        public event PropertyChangedEventHandler? PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string? name = null)
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+
+        System.Collections.IEnumerable INotifyDataErrorInfo.GetErrors(string? propertyName)
+        {
+            // Return errors for the specified property, or all errors if propertyName is null or empty
+            if (string.IsNullOrEmpty(propertyName))
+            {
+                // Flatten all errors into a single list
+                return _errors.Values.SelectMany(e => e).ToList();
+            }
+            return _errors.TryGetValue(propertyName, out var errors) ? errors : Enumerable.Empty<string>();
+        }
+
+        private int _initOnce; // 0 = not started, 1 = started
+        private readonly SemaphoreSlim _loadLock = new(1, 1);
+    }
+}

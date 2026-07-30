@@ -1,0 +1,418 @@
+﻿using AATM.App.HisWpf.ViewModels;
+using AATM.Contracts.Interfaces.Services;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Markup;
+using Microsoft.Extensions.DependencyInjection;
+using System.Windows.Input;
+using AATM.Contracts.Dtos;
+using System.Linq;
+using AATM.App.HisWpf.Helpers;
+using System.Threading.Tasks;
+using System.Threading;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System;
+
+namespace AATM.App.HisWpf
+{
+    /// <summary>
+    /// Interaction logic for UserWindow.xaml
+    /// </summary>
+    public partial class UserWindow : Window
+    {
+        private readonly UserViewModel _viewModel;
+
+        // transient edit-mode views for per-combo filtering
+        private ListCollectionView? _employeeEditView;
+        private ListCollectionView? _securityEditView;
+
+        // debounce/cancellation tokens to avoid filtering on every keystroke
+        private CancellationTokenSource? _employeeFilterCts;
+        private CancellationTokenSource? _securityFilterCts;
+
+        private ILocalizationService _localization_service;
+        private readonly string _moduleName = "UserWindow";
+
+        // UI cache for localization
+        private bool _originalsCached;
+        private string _originalTitle = string.Empty;
+        private readonly Dictionary<DataGridColumn, string> _originalColumnHeaders = new();
+
+        private string? _currentFilter;
+
+        // Prefer resolving via DI; this overload chains to the primary ctor
+        public UserWindow(UserViewModel viewmodel)
+            : this(vm: viewmodel, localizationService: App.Host.Services.GetRequiredService<ILocalizationService>())
+        {
+        }
+
+        // Primary constructor used by DI
+        public UserWindow(UserViewModel vm, ILocalizationService localizationService)
+        {
+            InitializeComponent();
+
+            _viewModel = vm;
+            // Ensure initialization always runs regardless of which ctor is used
+            Loaded += async (_, __) =>
+            {
+                await _viewModel.InitializeAsync();
+            };
+
+            _localization_service = localizationService;
+            DataContext = vm;
+
+            // Wire buttons
+            btnFirst.Click += BtnFirst_Click;
+            btnPrev.Click += BtnPrev_Click;
+            btnNext.Click += BtnNext_Click;
+            btnLast.Click += BtnLast_Click;
+            btnSave.Click += BtnSave_Click;
+            btnDelete.Click += BtnDelete_Click;
+            btnFind.Click += BtnFind_Click;
+            btnResetFilter.Click += BtnResetFilter_Click;
+            btnSwitchLanguage.Click += BtnSwitchLanguage_Click;
+
+            ViewModel.PropertyChanged += ViewModel_PropertyChanged;
+            UpdateRecordIndicators();
+
+            // Wire per-combo edit-mode filtering (transient view so master list is not changed)
+            cmbEmployeeIdNo.GotKeyboardFocus += (s, e) => OnEmployeeGotFocus();
+            cmbEmployeeIdNo.PreviewMouseDown += (s, e) => { if (!cmbEmployeeIdNo.IsDropDownOpen) OnEmployeeGotFocus(); };
+            cmbEmployeeIdNo.DropDownClosed += (s, e) => RestoreEmployeeItemsSource();
+            cmbEmployeeIdNo.AddHandler(TextBox.TextChangedEvent, new TextChangedEventHandler((s, e) => OnEmployeeTextChanged()));
+
+            cmbSecurityGroupIdNo.GotKeyboardFocus += (s, e) => OnSecurityGotFocus();
+            cmbSecurityGroupIdNo.PreviewMouseDown += (s, e) => { if (!cmbSecurityGroupIdNo.IsDropDownOpen) OnSecurityGotFocus(); };
+            cmbSecurityGroupIdNo.DropDownClosed += (s, e) => RestoreSecurityItemsSource();
+            cmbSecurityGroupIdNo.AddHandler(TextBox.TextChangedEvent, new TextChangedEventHandler((s, e) => OnSecurityTextChanged()));
+        }
+
+        private UserViewModel ViewModel => (UserViewModel)DataContext;
+
+        // ---------- ComboBox filtering (debounced, off-UI-thread) ----------
+        private void OnEmployeeGotFocus()
+        {
+            // Cancel any pending security filter work
+            _securityFilterCts?.Cancel();
+            _securityFilterCts?.Dispose();
+            _securityFilterCts = null;
+
+            if (_employeeEditView == null)
+            {
+                var master = (IEnumerable<EmployeeLookupDto>?)ViewModel?.AvailableEmployees ?? Enumerable.Empty<EmployeeLookupDto>();
+                var snapshot = master.ToList();
+                _employeeEditView = new ListCollectionView((IList)snapshot);
+                cmbEmployeeIdNo.ItemsSource = _employeeEditView;
+            }
+        }
+
+        private void OnSecurityGotFocus()
+        {
+            _employeeFilterCts?.Cancel();
+            _employeeFilterCts?.Dispose();
+            _employeeFilterCts = null;
+
+            if (_securityEditView == null)
+            {
+                var master = (IEnumerable<SecurityGroupLookupDto>?)ViewModel?.AvailableSecurityGroups ?? Enumerable.Empty<SecurityGroupLookupDto>();
+                var snapshot = master.ToList();
+                _securityEditView = new ListCollectionView((IList)snapshot);
+                cmbSecurityGroupIdNo.ItemsSource = _securityEditView;
+            }
+        }
+
+        private void OnEmployeeTextChanged()
+        {
+            _employeeFilterCts?.Cancel();
+            _employeeFilterCts?.Dispose();
+            _employeeFilterCts = new CancellationTokenSource();
+            var token = _employeeFilterCts.Token;
+            var text = cmbEmployeeIdNo.Text ?? string.Empty;
+
+            _ = Task.Run(async () =>
+            {
+                try
+                {
+                    await Task.Delay(150, token).ConfigureAwait(false); // debounce
+
+                    var master = ViewModel?.AvailableEmployees;
+                    if (master == null) return;
+
+                    List<EmployeeLookupDto> result;
+                    var f = text.Trim();
+                    if (string.IsNullOrEmpty(f)) result = master.ToList();
+                    else
+                    {
+                        result = master.Where(emp =>
+                            (!string.IsNullOrEmpty(emp.DisplayText) && emp.DisplayText.IndexOf(f, StringComparison.OrdinalIgnoreCase) >= 0)
+                            || (!string.IsNullOrEmpty(emp.EmployeeName) && emp.EmployeeName.IndexOf(f, StringComparison.OrdinalIgnoreCase) >= 0)
+                            || (!string.IsNullOrEmpty(emp.EmployeeCode) && emp.EmployeeCode.IndexOf(f, StringComparison.OrdinalIgnoreCase) >= 0)
+                        ).ToList();
+                    }
+
+                    await Dispatcher.BeginInvoke((Action)(() =>
+                    {
+                        if (token.IsCancellationRequested) return;
+                        var snapshot = result.ToList();
+                        _employeeEditView = new ListCollectionView((IList)snapshot);
+                        cmbEmployeeIdNo.ItemsSource = _employeeEditView;
+                        cmbEmployeeIdNo.IsDropDownOpen = true;
+                        var tb = cmbEmployeeIdNo.Template.FindName("PART_EditableTextBox", cmbEmployeeIdNo) as TextBox;
+                        if (tb != null)
+                        {
+                            tb.SelectionStart = tb.Text?.Length ?? 0;
+                            tb.SelectionLength = 0;
+                            tb.Focus();
+                        }
+                    }), System.Windows.Threading.DispatcherPriority.Background).Task.ConfigureAwait(false);
+                }
+                catch (OperationCanceledException) { }
+                catch { }
+            });
+        }
+
+        private void OnSecurityTextChanged()
+        {
+            _securityFilterCts?.Cancel();
+            _securityFilterCts?.Dispose();
+            _securityFilterCts = new CancellationTokenSource();
+            var token = _securityFilterCts.Token;
+            var text = cmbSecurityGroupIdNo.Text ?? string.Empty;
+
+            _ = Task.Run(async () =>
+            {
+                try
+                {
+                    await Task.Delay(150, token).ConfigureAwait(false);
+
+                    var master = ViewModel?.AvailableSecurityGroups;
+                    if (master == null) return;
+
+                    List<SecurityGroupLookupDto> result;
+                    var f = text.Trim();
+                    if (string.IsNullOrEmpty(f)) result = master.ToList();
+                    else
+                    {
+                        result = master.Where(sg =>
+                            (!string.IsNullOrEmpty(sg.DisplayText) && sg.DisplayText.IndexOf(f, StringComparison.OrdinalIgnoreCase) >= 0)
+                            || (!string.IsNullOrEmpty(sg.SecurityGroupName) && sg.SecurityGroupName.IndexOf(f, StringComparison.OrdinalIgnoreCase) >= 0)
+                            || (!string.IsNullOrEmpty(sg.SecurityGroupCode) && sg.SecurityGroupCode.IndexOf(f, StringComparison.OrdinalIgnoreCase) >= 0)
+                        ).ToList();
+                    }
+
+                    await Dispatcher.BeginInvoke((Action)(() =>
+                    {
+                        if (token.IsCancellationRequested) return;
+                        var snapshot = result.ToList();
+                        _securityEditView = new ListCollectionView((IList)snapshot);
+                        cmbSecurityGroupIdNo.ItemsSource = _securityEditView;
+                        cmbSecurityGroupIdNo.IsDropDownOpen = true;
+                        var tb = cmbSecurityGroupIdNo.Template.FindName("PART_EditableTextBox", cmbSecurityGroupIdNo) as TextBox;
+                        if (tb != null)
+                        {
+                            tb.SelectionStart = tb.Text?.Length ?? 0;
+                            tb.SelectionLength = 0;
+                            tb.Focus();
+                        }
+                    }), System.Windows.Threading.DispatcherPriority.Background).Task.ConfigureAwait(false);
+                }
+                catch (OperationCanceledException) { }
+                catch { }
+            });
+        }
+
+        private void RestoreEmployeeItemsSource()
+        {
+            try
+            {
+                _employeeFilterCts?.Cancel();
+                _employeeFilterCts?.Dispose();
+                _employeeFilterCts = null;
+
+                cmbEmployeeIdNo.ItemsSource = ViewModel?.AvailableEmployees;
+                _employeeEditView = null;
+            }
+            catch { }
+        }
+
+        private void RestoreSecurityItemsSource()
+        {
+            try
+            {
+                _securityFilterCts?.Cancel();
+                _securityFilterCts?.Dispose();
+                _securityFilterCts = null;
+
+                cmbSecurityGroupIdNo.ItemsSource = ViewModel?.AvailableSecurityGroups;
+                _securityEditView = null;
+            }
+            catch { }
+        }
+
+        // ---------- Other UI handlers ----------
+        private void BtnFind_Click(object sender, RoutedEventArgs e)
+        {
+            var input = Microsoft.VisualBasic.Interaction.InputBox("Enter text to filter:", "Filter Users");
+            if (string.IsNullOrWhiteSpace(input))
+                return;
+
+            _currentFilter = input.Trim();
+            ApplyFilter(_currentFilter);
+        }
+
+        private void BtnResetFilter_Click(object sender, RoutedEventArgs e)
+        {
+            _currentFilter = null;
+            ApplyFilter(null);
+        }
+
+        private void ApplyFilter(string? term)
+        {
+            DataGridFilterHelper.ApplyTextFilter(dataGrid, term);
+        }
+
+        private void BtnSwitchLanguage_Click(object sender, RoutedEventArgs e)
+        {
+            var newLang = _localization_service.IsRightToLeft ? "en-US" : "ar-SA";
+            _localization_service.SetLanguage(newLang, _moduleName);
+
+            this.Language = XmlLanguage.GetLanguage(newLang);
+            this.FlowDirection = _localization_service.IsRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
+
+            CacheOriginalWindowChrome();
+            CacheOriginalColumnHeaders();
+
+            LocalizeWindowChrome(newLang);
+
+            foreach (var col in dataGrid.Columns)
+            {
+                if (!_originalColumnHeaders.TryGetValue(col, out var original) || string.IsNullOrWhiteSpace(original))
+                    continue;
+
+                col.Header = IsEnglish(newLang) ? original : _localization_service.GetString(_moduleName, original, original);
+            }
+
+            CollectionViewSource.GetDefaultView(dataGrid.ItemsSource)?.Refresh();
+            dataGrid.Items.Refresh();
+            dataGrid.UpdateLayout();
+        }
+
+        private static bool IsEnglish(string lang) => lang.StartsWith("en", StringComparison.OrdinalIgnoreCase);
+        private static bool IsGlyph(string s) => !string.IsNullOrWhiteSpace(s) && s.Length <= 3 && s.All(ch => char.IsPunctuation(ch) || char.IsSymbol(ch));
+
+        private void CacheOriginalWindowChrome()
+        {
+            if (_originalsCached) return;
+            _originalTitle = this.Title ?? string.Empty;
+            if (this.Content is Grid root)
+            {
+                foreach (var child in root.Children)
+                {
+                    if (child is StackPanel sp)
+                    {
+                        foreach (var btn in sp.Children.OfType<Button>())
+                        {
+                            if (btn.Content is string content && !IsGlyph(content) && btn.Tag is null)
+                                btn.Tag = content;
+                        }
+                        continue;
+                    }
+
+                    if (child is Label lbl && lbl.Content is string c && !IsGlyph(c) && lbl.Tag is null)
+                        lbl.Tag = c;
+                }
+            }
+            _originalsCached = true;
+        }
+
+        private void CacheOriginalColumnHeaders()
+        {
+            foreach (var col in dataGrid.Columns)
+            {
+                if (_originalColumnHeaders.ContainsKey(col)) continue;
+                if (col.Header is string s && !string.IsNullOrWhiteSpace(s)) _originalColumnHeaders[col] = s;
+            }
+        }
+
+        private void LocalizeWindowChrome(string lang)
+        {
+            if (!string.IsNullOrWhiteSpace(_originalTitle))
+                this.Title = IsEnglish(lang) ? _originalTitle : _localization_service.GetString(_moduleName, "Title", _originalTitle);
+
+            if (this.Content is not Grid root) return;
+            foreach (var child in root.Children)
+            {
+                if (child is StackPanel sp)
+                {
+                    foreach (var btn in sp.Children.OfType<Button>())
+                    {
+                        if (btn.Content is not string content || IsGlyph(content)) continue;
+                        var original = btn.Tag as string ?? content;
+                        if (btn.Tag is null) btn.Tag = original;
+                        btn.Content = IsEnglish(lang) ? original : _localization_service.GetString(_moduleName, string.IsNullOrWhiteSpace(btn.Name) ? original : btn.Name, original);
+                    }
+                    continue;
+                }
+                if (child is Label lbl && lbl.Content is string c && !IsGlyph(c))
+                {
+                    var original = lbl.Tag as string ?? c;
+                    if (lbl.Tag is null) lbl.Tag = original;
+                    lbl.Content = IsEnglish(lang) ? original : _localization_service.GetString(_moduleName, string.IsNullOrWhiteSpace(lbl.Name) ? original : lbl.Name, original);
+                }
+            }
+        }
+
+        private void BtnFirst_Click(object sender, RoutedEventArgs e) { if (ViewModel.Users.Count > 0) ViewModel.SelectedUser = ViewModel.Users[0]; }
+        private void BtnPrev_Click(object sender, RoutedEventArgs e) { var idx = ViewModel.Users.IndexOf(ViewModel.SelectedUser); if (idx > 0) ViewModel.SelectedUser = ViewModel.Users[idx - 1]; }
+        private void BtnNext_Click(object sender, RoutedEventArgs e) { var idx = ViewModel.Users.IndexOf(ViewModel.SelectedUser); if (idx < ViewModel.Users.Count - 1) ViewModel.SelectedUser = ViewModel.Users[idx + 1]; }
+        private void BtnLast_Click(object sender, RoutedEventArgs e) { if (ViewModel.Users.Count > 0) ViewModel.SelectedUser = ViewModel.Users[ViewModel.Users.Count - 1]; }
+        private void BtnSave_Click(object sender, RoutedEventArgs e) { if (ViewModel.SaveCommand.CanExecute(null)) ViewModel.SaveCommand.Execute(null); }
+        private void BtnDelete_Click(object sender, RoutedEventArgs e) { if (ViewModel.DeleteCommand.CanExecute(null)) ViewModel.DeleteCommand.Execute(null); }
+
+        private void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(ViewModel.SelectedUser))
+            {
+                if (ViewModel.SelectedUser != null)
+                {
+                    dataGrid.SelectedItem = ViewModel.SelectedUser;
+                    dataGrid.ScrollIntoView(ViewModel.SelectedUser);
+                }
+                UpdateRecordIndicators();
+            }
+            if (e.PropertyName == nameof(ViewModel.Users)) UpdateRecordIndicators();
+        }
+
+        private void UpdateRecordIndicators()
+        {
+            var idx = ViewModel.Users.IndexOf(ViewModel.SelectedUser);
+            txtCurrentRecord.Text = (idx >= 0 ? (idx + 1).ToString() : "0");
+            txtRecordCount.Text = ViewModel.Users.Count.ToString();
+        }
+
+        // Add this override to unsubscribe event handlers when the window closes
+        protected override void OnClosed(System.EventArgs e)
+        {
+            // Unsubscribe UI event handlers to avoid leaks
+            try { ViewModel.PropertyChanged -= ViewModel_PropertyChanged; } catch { }
+
+            try
+            {
+                btnFirst.Click -= BtnFirst_Click;
+                btnPrev.Click -= BtnPrev_Click;
+                btnNext.Click -= BtnNext_Click;
+                btnLast.Click -= BtnLast_Click;
+                btnSave.Click -= BtnSave_Click;
+                btnDelete.Click -= BtnDelete_Click;
+                btnFind.Click -= BtnFind_Click;
+                btnResetFilter.Click -= BtnResetFilter_Click;
+                btnSwitchLanguage.Click -= BtnSwitchLanguage_Click;
+            }
+            catch { }
+
+            base.OnClosed(e);
+        }
+    }
+}

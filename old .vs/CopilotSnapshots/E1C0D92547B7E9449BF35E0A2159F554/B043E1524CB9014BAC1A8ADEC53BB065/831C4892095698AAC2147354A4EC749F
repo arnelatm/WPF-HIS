@@ -1,0 +1,1463 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Threading;
+using Microsoft.Data.SqlClient;
+
+namespace AATM.UI.Controls
+{
+    /// <summary>
+    /// Hybrid SmartComboBox:
+    /// - local async filtering (in-memory) when ItemsSource is small
+    /// - remote async SQL fetching when UseRemoteFetch = true OR local is too big
+    /// - exposes SelectedId, SelectedCode, SelectedName
+    /// - expects columns/properties named: IdNo, Code, Name (SQL should alias to these)
+    /// </summary>
+    [TemplatePart(Name = "PART_TextBox", Type = typeof(TextBox))]
+    [TemplatePart(Name = "PART_ListBox", Type = typeof(ListBox))]
+    [TemplatePart(Name = "PART_Button", Type = typeof(Button))]
+    [TemplatePart(Name = "PART_Popup", Type = typeof(Popup))]
+    [TemplatePart(Name = "PART_BusyText", Type = typeof(TextBlock))]
+    [TemplatePart(Name = "PART_LoadMore", Type = typeof(Button))] // added for load more paging
+    [TemplatePart(Name = "PART_ListBorder", Type = typeof(Border))] // ensure declared for template lookup
+    public class SmartComboBox : Control
+    {
+        private TextBox _textBox;
+        private ListBox _listBox;
+        private Button _button;
+        private Popup _popup;
+        private TextBlock _busyText;
+        private Button _loadMoreButton; // backing field for PART_LoadMore (kept for compatibility)
+
+        private CancellationTokenSource _cts;
+        private List<ComboRecord> _localMaster = new();
+        private BulkObservableCollection<ComboRecord> _currentItems = new();
+        private readonly Dictionary<int, List<ComboRecord>> _pageCache = new();
+        private int _totalFilteredCount;
+        private ScrollViewer _scrollViewer;
+        private DispatcherTimer _debounce;
+
+        private const int AutoRemoteThreshold =50000;
+        private bool _suppressPageIndexChanged;
+        private string _lastFilter = string.Empty;
+        private bool _pendingPageDown;
+        private bool _pendingPageUp; // new: track upward paging intent
+        private bool _ignorePopupSync;
+        private int _appendInsertIndex = -1; // index where newly appended items start
+        private int _lastPageIndex =0; // new: remember last page index
+        private bool _pagingDown = true; // new: direction flag
+        private bool _forceFirstSelectionOnLoad; // new: select first item after initial search results
+
+        public Action<string> Logger { get; set; }
+        private void Log(string msg)
+        {
+            if (Logger != null)
+            {
+                Logger.Invoke(msg);
+            }
+            else
+            {
+                Debug.WriteLine(msg);
+            }
+        }
+
+        static SmartComboBox()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(SmartComboBox), new FrameworkPropertyMetadata(typeof(SmartComboBox)));
+        }
+
+        public SmartComboBox()
+        {
+            RemoteTake =20;
+            _currentItems.CollectionChanged += CurrentItems_CollectionChanged;
+        }
+
+        private void CurrentItems_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (_suspendCollectionChangedEvents) return; // skip heavy UI actions when batching
+
+            if (_listBox != null && _currentItems.Count >0)
+            {
+                if (_pendingPageDown)
+                {
+                    var targetIndex = (_appendInsertIndex >=0 && _appendInsertIndex < _currentItems.Count)
+                        ? _appendInsertIndex
+                        :0;
+                    _listBox.SelectedIndex = targetIndex;
+                    _listBox.Focus();
+                    // Defer ScrollIntoView to let layout batch
+                    _ = _listBox.Dispatcher.BeginInvoke((Action)(() => _listBox.ScrollIntoView(_listBox.SelectedItem)), System.Windows.Threading.DispatcherPriority.Background);
+                    _pendingPageDown = false;
+                    _appendInsertIndex = -1;
+                }
+                else if (_pendingPageUp)
+                {
+                    // after loading previous page (replace), select last item
+                    _listBox.SelectedIndex = _currentItems.Count -1;
+                    _listBox.Focus();
+                    _ = _listBox.Dispatcher.BeginInvoke((Action)(() => _listBox.ScrollIntoView(_listBox.SelectedItem)), System.Windows.Threading.DispatcherPriority.Background);
+                    _pendingPageUp = false;
+                }
+            }
+            else if (_listBox != null && _currentItems.Count ==0)
+            {
+                _listBox.SelectedIndex = -1;
+            }
+        }
+
+        #region Dependency Properties (removed DisplayMemberPath as unused)
+
+        public static readonly DependencyProperty ItemsSourceProperty =
+        DependencyProperty.Register(nameof(ItemsSource), typeof(IEnumerable), typeof(SmartComboBox), new PropertyMetadata(null, OnItemsSourceChanged));
+
+        public IEnumerable ItemsSource
+        {
+            get => (IEnumerable)GetValue(ItemsSourceProperty);
+            set => SetValue(ItemsSourceProperty, value);
+        }
+
+        private static void OnItemsSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is SmartComboBox scb)
+            {
+                scb.BuildLocalMasterFromItemsSource();
+                scb.TrySelectBySelectedValue();
+            }
+        }
+
+        public static readonly DependencyProperty UseRemoteFetchProperty =
+        DependencyProperty.Register(nameof(UseRemoteFetch), typeof(bool), typeof(SmartComboBox), new PropertyMetadata(false));
+
+        public bool UseRemoteFetch
+        {
+            get => (bool)GetValue(UseRemoteFetchProperty);
+            set => SetValue(UseRemoteFetchProperty, value);
+        }
+
+        public static readonly DependencyProperty ConnectionStringProperty =
+        DependencyProperty.Register(nameof(ConnectionString), typeof(string), typeof(SmartComboBox), new PropertyMetadata(string.Empty));
+
+        public string ConnectionString
+        {
+            get => (string)GetValue(ConnectionStringProperty);
+            set => SetValue(ConnectionStringProperty, value);
+        }
+
+        public static readonly DependencyProperty SqlQueryTemplateProperty =
+        DependencyProperty.Register(nameof(SqlQueryTemplate), typeof(string), typeof(SmartComboBox), new PropertyMetadata(string.Empty));
+
+        public string SqlQueryTemplate
+        {
+            get => (string)GetValue(SqlQueryTemplateProperty);
+            set => SetValue(SqlQueryTemplateProperty, value);
+        }
+
+        public static readonly DependencyProperty RemoteTakeProperty =
+        DependencyProperty.Register(nameof(RemoteTake), typeof(int), typeof(SmartComboBox), new PropertyMetadata(20));
+
+        public int RemoteTake
+        {
+            get => (int)GetValue(RemoteTakeProperty);
+            set => SetValue(RemoteTakeProperty, value);
+        }
+
+        public static readonly DependencyProperty SelectedIdProperty =
+        DependencyProperty.Register(nameof(SelectedId), typeof(object), typeof(SmartComboBox), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
+        public object SelectedId
+        {
+            get => GetValue(SelectedIdProperty);
+            set => SetValue(SelectedIdProperty, value);
+        }
+
+        public static readonly DependencyProperty SelectedCodeProperty =
+        DependencyProperty.Register(nameof(SelectedCode), typeof(string), typeof(SmartComboBox), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
+        public string SelectedCode
+        {
+            get => (string)GetValue(SelectedCodeProperty);
+            set => SetValue(SelectedCodeProperty, value);
+        }
+
+        public static readonly DependencyProperty SelectedNameProperty =
+        DependencyProperty.Register(nameof(SelectedName), typeof(string), typeof(SmartComboBox), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
+        public string SelectedName
+        {
+            get => (string)GetValue(SelectedNameProperty);
+            set => SetValue(SelectedNameProperty, value);
+        }
+
+        public static readonly DependencyProperty PlaceholderProperty =
+        DependencyProperty.Register(nameof(Placeholder), typeof(string), typeof(SmartComboBox), new PropertyMetadata("Type to search..."));
+
+        public string Placeholder
+        {
+            get => (string)GetValue(PlaceholderProperty);
+            set => SetValue(PlaceholderProperty, value);
+        }
+
+        public static readonly DependencyProperty IsBusyProperty =
+        DependencyProperty.Register(nameof(IsBusy), typeof(bool), typeof(SmartComboBox), new PropertyMetadata(false));
+
+        public bool IsBusy
+        {
+            get => (bool)GetValue(IsBusyProperty);
+            set => SetValue(IsBusyProperty, value);
+        }
+
+        public static readonly DependencyProperty DebounceMillisecondsProperty =
+        DependencyProperty.Register(nameof(DebounceMilliseconds), typeof(int), typeof(SmartComboBox), new PropertyMetadata(220));
+
+        public int DebounceMilliseconds
+        {
+            get => (int)GetValue(DebounceMillisecondsProperty);
+            set => SetValue(DebounceMillisecondsProperty, value);
+        }
+
+        public static readonly DependencyProperty TextProperty =
+        DependencyProperty.Register(nameof(Text), typeof(string), typeof(SmartComboBox), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnTextChanged));
+
+        public string Text
+        {
+            get => (string)GetValue(TextProperty);
+            set => SetValue(TextProperty, value);
+        }
+
+        private static void OnTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is SmartComboBox scb && scb._textBox != null)
+            {
+                var newText = e.NewValue as string ?? string.Empty;
+                if (scb._textBox.Text != newText)
+                    scb._textBox.Text = newText;
+            }
+        }
+
+        public static readonly DependencyProperty SelectedValuePathProperty =
+        DependencyProperty.Register(nameof(SelectedValuePath), typeof(string), typeof(SmartComboBox), new PropertyMetadata(null, OnSelectedValuePathChanged));
+
+        public string SelectedValuePath
+        {
+            get => (string)GetValue(SelectedValuePathProperty);
+            set => SetValue(SelectedValuePathProperty, value);
+        }
+
+        private static void OnSelectedValuePathChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is SmartComboBox scb) scb.TrySelectBySelectedValue();
+        }
+
+        public static readonly DependencyProperty SelectedValueProperty =
+        DependencyProperty.Register(nameof(SelectedValue), typeof(object), typeof(SmartComboBox), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectedValueChanged));
+
+        public object SelectedValue
+        {
+            get => GetValue(SelectedValueProperty);
+            set => SetValue(SelectedValueProperty, value);
+        }
+
+        private static void OnSelectedValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is SmartComboBox scb) scb.TrySelectBySelectedValue();
+        }
+
+        public static readonly DependencyProperty PageIndexProperty =
+        DependencyProperty.Register(nameof(PageIndex), typeof(int), typeof(SmartComboBox), new PropertyMetadata(0, OnPageIndexChanged));
+
+        public int PageIndex
+        {
+            get => (int)GetValue(PageIndexProperty);
+            set => SetValue(PageIndexProperty, value);
+        }
+
+        public static readonly DependencyProperty HasNextPageProperty =
+        DependencyProperty.Register(nameof(HasNextPage), typeof(bool), typeof(SmartComboBox), new PropertyMetadata(false));
+
+        public bool HasNextPage
+        {
+            get => (bool)GetValue(HasNextPageProperty);
+            set => SetValue(HasNextPageProperty, value);
+        }
+
+        // New: Minimum characters required before any search/paging occurs
+        public static readonly DependencyProperty MinSearchLengthProperty =
+        DependencyProperty.Register(nameof(MinSearchLength), typeof(int), typeof(SmartComboBox), new PropertyMetadata(3)); // was2 -> now3
+
+        public int MinSearchLength
+        {
+            get => (int)GetValue(MinSearchLengthProperty);
+            set => SetValue(MinSearchLengthProperty, value);
+        }
+
+        // NEW: Toggle automatic paging when user scrolls to bottom (default disabled to prevent continuous paging)
+        public static readonly DependencyProperty EnableAutoScrollPagingProperty =
+        DependencyProperty.Register(nameof(EnableAutoScrollPaging), typeof(bool), typeof(SmartComboBox), new PropertyMetadata(false, OnEnableAutoScrollPagingChanged));
+
+        public bool EnableAutoScrollPaging
+        {
+            get => (bool)GetValue(EnableAutoScrollPagingProperty);
+            set => SetValue(EnableAutoScrollPagingProperty, value);
+        }
+
+        // NEW: IsDropDownOpen DP with methods
+        public static readonly DependencyProperty IsDropDownOpenProperty =
+        DependencyProperty.Register(nameof(IsDropDownOpen), typeof(bool), typeof(SmartComboBox), new PropertyMetadata(false, OnIsDropDownOpenChanged));
+
+        public bool IsDropDownOpen
+        {
+            get => (bool)GetValue(IsDropDownOpenProperty);
+            set => SetValue(IsDropDownOpenProperty, value);
+        }
+
+        private static void OnIsDropDownOpenChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is SmartComboBox scb)
+            {
+                scb.SyncPopupOpenState((bool)e.NewValue);
+            }
+        }
+
+        public void Open()
+        {
+            // Only allow opening if current text meets minimum
+            var len = _textBox?.Text?.Trim().Length ??0;
+            if (len >= MinSearchLength)
+                IsDropDownOpen = true;
+        }
+        public void Close() => IsDropDownOpen = false;
+
+        public static readonly DependencyProperty MaxDropDownHeightProperty =
+        DependencyProperty.Register(nameof(MaxDropDownHeight), typeof(double), typeof(SmartComboBox), new PropertyMetadata(480.0));
+
+        public double MaxDropDownHeight
+        {
+            get => (double)GetValue(MaxDropDownHeightProperty);
+            set => SetValue(MaxDropDownHeightProperty, value);
+        }
+
+        private static void OnEnableAutoScrollPagingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is SmartComboBox scb && scb._scrollViewer != null)
+            {
+                scb._scrollViewer.ScrollChanged -= scb.ScrollViewer_ScrollChanged;
+                if ((bool)e.NewValue)
+                {
+                    scb._scrollViewer.ScrollChanged += scb.ScrollViewer_ScrollChanged;
+                }
+            }
+        }
+
+        private static void OnPageIndexChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is SmartComboBox scb && !scb._suppressPageIndexChanged)
+            {
+                int oldIndex = e.OldValue is int oi ? oi : scb._lastPageIndex;
+                int newIndex = e.NewValue is int ni ? ni : scb.PageIndex;
+                scb._pagingDown = newIndex > oldIndex;
+                scb._lastPageIndex = newIndex;
+                _ = scb.AppendPageAsync(scb.PageIndex, scb._cts?.Token ?? CancellationToken.None);
+            }
+        }
+
+        // 1. Add the dependency property
+        public static readonly DependencyProperty ShowAllOnBlankProperty =
+        DependencyProperty.Register(nameof(ShowAllOnBlank), typeof(bool), typeof(SmartComboBox), new PropertyMetadata(false));
+
+        public bool ShowAllOnBlank
+        {
+            get => (bool)GetValue(ShowAllOnBlankProperty);
+            set => SetValue(ShowAllOnBlankProperty, value);
+        }
+
+        #endregion
+
+        private bool IsRemoteConfigured =>
+        !string.IsNullOrWhiteSpace(ConnectionString) &&
+        !string.IsNullOrWhiteSpace(SqlQueryTemplate);
+
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            _textBox = GetTemplateChild("PART_TextBox") as TextBox;
+            _listBox = GetTemplateChild("PART_ListBox") as ListBox;
+            _button = GetTemplateChild("PART_Button") as Button;
+            _popup = GetTemplateChild("PART_Popup") as Popup;
+            _busyText = GetTemplateChild("PART_BusyText") as TextBlock;
+            _loadMoreButton = GetTemplateChild("PART_LoadMore") as Button; // cache
+            // new: named border used to control popup width/alignment
+            var listBorder = GetTemplateChild("PART_ListBorder") as Border;
+            _listBorder = listBorder;
+
+            if (_loadMoreButton != null)
+            {
+                _loadMoreButton.Click += async (_, _) =>
+                {
+                    if (HasNextPage)
+                    {
+                        _pendingPageDown = true;
+                        _appendInsertIndex = _currentItems.Count;
+                        PageIndex++;
+                        await AppendPageAsync(PageIndex, _cts?.Token ?? CancellationToken.None);
+                    }
+                };
+                UpdateLoadMoreVisibility();
+            }
+
+            if (_popup != null)
+            {
+                // Prevent auto-close when focus momentarily shifts (e.g., arrow at edges)
+                _popup.StaysOpen = true;
+                _popup.Opened += (_, __) =>
+                {
+                    if (_ignorePopupSync) return;
+                    _ignorePopupSync = true; IsDropDownOpen = true; _ignorePopupSync = false;
+                    // Ensure current selection is highlighted / first item selected.
+                    EnsureListBoxSelection();
+
+                    // Constrain navigation within popup visual tree
+                    if (_popup.Child is UIElement child)
+                    {
+                        KeyboardNavigation.SetDirectionalNavigation(child, KeyboardNavigationMode.Contained);
+                        KeyboardNavigation.SetTabNavigation(child, KeyboardNavigationMode.Contained);
+                    }
+                    // Align popup to keep right edge fixed and ensure min width (deferred so layout can settle)
+                    AlignPopupRightEdgeDeferred();
+                };
+                _popup.Closed += (_, __) =>
+                {
+                    if (_ignorePopupSync) return;
+                    _ignorePopupSync = true; IsDropDownOpen = false; _ignorePopupSync = false;
+                };
+                // Swallow edge arrow keys so focus does not leave and popup does not close
+                _popup.PreviewKeyDown += Popup_PreviewKeyDown;
+                SyncPopupOpenState(IsDropDownOpen);
+            }
+
+            if (_listBox != null)
+            {
+                _listBox.ItemsSource = _currentItems;
+                // Use Contained to prevent focus from leaving and avoid implicit wrapping
+                KeyboardNavigation.SetDirectionalNavigation(_listBox, KeyboardNavigationMode.Contained);
+                KeyboardNavigation.SetTabNavigation(_listBox, KeyboardNavigationMode.Contained);
+
+                _listBox.MouseLeftButtonUp += (s, e) => CommitSelection();
+                _listBox.SelectionChanged += (s, e) =>
+                {
+                    if (_listBox.SelectedItem is ComboRecord cr)
+                    {
+                        SelectedId = cr.IdNo;
+                        SelectedCode = cr.Code;
+                        SelectedName = cr.Name;
+                        UpdateSelectedValueFromRecord(cr);
+                    }
+                };
+                _listBox.Loaded += (_, _) => AttachScrollViewer();
+                _listBox.PreviewKeyDown += ListBox_PreviewKeyDown;
+                // Keep popup aligned when list content size changes
+                _listBox.SizeChanged += (_, __) => AlignPopupRightEdgeDeferred();
+                if (_listBorder != null)
+                _listBorder.SizeChanged += (_, __) => AlignPopupRightEdgeDeferred();
+            }
+
+            if (_textBox != null)
+            {
+                _textBox.TextChanged += TextBox_TextChanged;
+                _textBox.PreviewKeyDown += TextBox_PreviewKeyDown;
+                if (_textBox.Text != Text) _textBox.Text = Text;
+                // Recalculate popup alignment when control size changes (align to control right edge including button)
+                this.SizeChanged += (_, __) => AlignPopupRightEdgeDeferred();
+            }
+
+            if (_button != null)
+            {
+                _button.Click += (s, e) =>
+                {
+                    var text = _textBox?.Text?.Trim() ?? string.Empty;
+                    if (!IsDropDownOpen)
+                    {
+                        // Show all records if ShowAllOnBlank is enabled and textbox is blank
+                        if (ShowAllOnBlank && string.IsNullOrEmpty(text))
+                        {
+                            IsDropDownOpen = true;
+                            _ = StartSearchAsync(string.Empty); // triggers search with empty filter
+                            return;
+                        }
+                        if (text.Length < MinSearchLength)
+                        {
+                            // Do not open; ignore click until threshold met
+                            return;
+                        }
+                        IsDropDownOpen = true;
+                        _ = StartSearchAsync(text);
+                    }
+                    else
+                    {
+                        IsDropDownOpen = false;
+                    }
+                };
+            }
+
+            BuildLocalMasterFromItemsSource();
+            TrySelectBySelectedValue();
+        }
+
+        private void SyncPopupOpenState(bool open)
+        {
+            if (_popup == null) return;
+            _ignorePopupSync = true;
+            _popup.IsOpen = open;
+            _ignorePopupSync = false;
+        }
+
+        private void ListBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (_listBox == null) return;
+
+            if (e.Key == Key.Down)
+            {
+                if (_listBox.SelectedIndex == _currentItems.Count -1)
+                {
+                    if (HasNextPage)
+                    {
+                        _pendingPageDown = true;
+                        _appendInsertIndex = _currentItems.Count;
+                        PageIndex++;
+                        e.Handled = true;
+                    }
+                    else
+                    {
+                        // At last item, do nothing
+                        e.Handled = true;
+                    }
+                    return;
+                }
+                if (_listBox.SelectedIndex < _currentItems.Count - 1 && _listBox.SelectedIndex >= 0)
+                {
+                    _listBox.SelectedIndex++;
+                    _listBox.ScrollIntoView(_listBox.SelectedItem);
+                    e.Handled = true;
+                    return;
+                }
+                if (_listBox.SelectedIndex < 0 && _currentItems.Count > 0)
+                {
+                    _listBox.SelectedIndex = 0;
+                    _listBox.ScrollIntoView(_listBox.SelectedItem);
+                    e.Handled = true;
+                    return;
+                }
+            }
+            else if (e.Key == Key.Up)
+            {
+                if (_listBox.SelectedIndex <= 0 && PageIndex == 0)
+                {
+                    // Only set selection if not already at 0
+                    if (_listBox.SelectedIndex != 0 && _currentItems.Count > 0)
+                    {
+                        _listBox.SelectedIndex = 0;
+                        _listBox.ScrollIntoView(_listBox.SelectedItem);
+                    }
+                    // Do NOT set focus or scroll again if already at 0
+                    e.Handled = true;
+                    return;
+                }
+                if (_listBox.SelectedIndex == 0 && PageIndex > 0)
+                {
+                    _pendingPageDown = false;
+                    _pendingPageUp = true;
+                    PageIndex--;
+                    e.Handled = true;
+                    return;
+                }
+                if (_listBox.SelectedIndex > 0)
+                {
+                    _listBox.SelectedIndex--;
+                    _listBox.ScrollIntoView(_listBox.SelectedItem);
+                    e.Handled = true;
+                    return;
+                }
+            }
+            else if (e.Key == Key.PageDown)
+            {
+                if (_listBox.SelectedIndex == _currentItems.Count -1)
+                {
+                    if (HasNextPage)
+                    {
+                        _pendingPageDown = true;
+                        _appendInsertIndex = _currentItems.Count;
+                        PageIndex++;
+                    }
+                    e.Handled = true;
+                    return;
+                }
+                int chunk = Math.Max(5, Math.Min(RemoteTake, _currentItems.Count));
+                int target = Math.Min(_currentItems.Count -1, Math.Max(0, _listBox.SelectedIndex) + chunk);
+                _listBox.SelectedIndex = target;
+                _listBox.ScrollIntoView(_listBox.SelectedItem);
+                e.Handled = true;
+                return;
+            }
+            else if (e.Key == Key.PageUp)
+            {
+                if (_listBox.SelectedIndex <=0)
+                {
+                    //if (PageIndex >0)
+                    //{
+                    //    _pendingPageDown = false;
+                    //    _pendingPageUp = true;
+                    //    PageIndex--;
+                    //}
+                    e.Handled = true;
+                    return;
+                }
+                int chunk = Math.Max(5, Math.Min(RemoteTake, _currentItems.Count));
+                int target = Math.Max(0, _listBox.SelectedIndex - chunk);
+                _listBox.SelectedIndex = target;
+                _listBox.ScrollIntoView(_listBox.SelectedItem);
+                e.Handled = true;
+                return;
+            }
+            else if (e.Key == Key.Enter)
+            {
+                CommitSelection();
+                e.Handled = true;
+            }
+            else if (e.Key == Key.Escape)
+            {
+                if (_popup != null)
+                    IsDropDownOpen = false;
+                if (_textBox != null)
+                    _textBox.Focus();
+                e.Handled = true;
+            }
+        }
+
+        //protected override void OnPreviewKeyDown(KeyEventArgs e)
+        //{
+        //    // At top, user wants pointer/highlighter to move to last item instead of staying at first
+        //    if (IsDropDownOpen && e.Key == Key.Up && _listBox != null && PageIndex ==0 && _listBox.SelectedIndex <=0)
+        //    {
+        //        if (_currentItems.Count >0)
+        //        {
+        //            _listBox.SelectedIndex = _currentItems.Count -1; // move highlight to last record
+        //            _listBox.ScrollIntoView(_listBox.SelectedItem);
+        //        }
+        //        e.Handled = true;
+        //        return;
+        //    }
+        //    base.OnPreviewKeyDown(e);
+        //}
+
+        private void AttachScrollViewer()
+        {
+            if (_listBox == null) return;
+            _scrollViewer = FindDescendant<ScrollViewer>(_listBox);
+            if (_scrollViewer != null)
+            {
+                if (EnableAutoScrollPaging)
+                    _scrollViewer.ScrollChanged += ScrollViewer_ScrollChanged;
+            }
+        }
+
+        private void ScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        {
+            if (!EnableAutoScrollPaging) return;
+            if (e.VerticalOffset + e.ViewportHeight >= e.ExtentHeight -2)
+            {
+                if (HasNextPage)
+                {
+                    _pendingPageDown = true;
+                    _appendInsertIndex = _currentItems.Count;
+                    PageIndex++;
+                }
+            }
+        }
+
+        private T FindDescendant<T>(DependencyObject root) where T : DependencyObject
+        {
+            if (root == null) return null;
+            int count = VisualTreeHelper.GetChildrenCount(root);
+            for (int i =0; i < count; i++)
+            {
+                var child = VisualTreeHelper.GetChild(root, i);
+                if (child is T t) return t;
+                var result = FindDescendant<T>(child);
+                if (result != null) return result;
+            }
+            return null;
+        }
+
+        private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (_popup == null || _listBox == null) return;
+            var currentText = _textBox?.Text ?? string.Empty;
+
+            if (e.Key == Key.Up)
+            {
+                if (IsDropDownOpen)
+                {
+                    _listBox.Focus();
+                    if (_listBox.Items.Count >0 && _listBox.SelectedIndex <0)
+                        _listBox.SelectedIndex =0;
+                    _listBox.ScrollIntoView(_listBox.SelectedItem);
+                    e.Handled = true;
+                    return;
+                }
+            }
+            else if (e.Key == Key.Down)
+            {
+                // Only open with Down if threshold met
+                if (!IsDropDownOpen)
+                {
+                    if (!ShouldActivateDropDown(currentText))
+                    {
+                        e.Handled = true; // swallow to prevent focus jumping
+                        return;
+                    }
+                    IsDropDownOpen = true;
+                    _ = StartSearchAsync(currentText);
+                }
+                if (_listBox.Items.Count >0)
+                {
+                    _listBox.Focus();
+                    // Always highlight first record when entering list from textbox via Down
+                    _listBox.SelectedIndex =0;
+                    var first = _listBox.SelectedItem as ComboRecord;
+                    if (first != null)
+                    {
+                        SelectedId = first.IdNo;
+                        SelectedCode = first.Code;
+                        SelectedName = first.Name;
+                        UpdateSelectedValueFromRecord(first);
+                    }
+                    _listBox.ScrollIntoView(_listBox.SelectedItem);
+                }
+                e.Handled = true;
+            }
+            else if (e.Key == Key.PageDown)
+            {
+                if (!ShouldActivateDropDown(currentText)) { e.Handled = true; return; }
+                if (HasNextPage)
+                {
+                    _pendingPageDown = true;
+                    _appendInsertIndex = _currentItems.Count;
+                    PageIndex++;
+                    e.Handled = true;
+                }
+            }
+            else if (e.Key == Key.PageUp)
+            {
+                if (!ShouldActivateDropDown(currentText)) { e.Handled = true; return; }
+                if (PageIndex >0)
+                {
+                    _suppressPageIndexChanged = true;
+                    PageIndex--;
+                    _suppressPageIndexChanged = false;
+                    e.Handled = true;
+                }
+            }
+            else if (e.Key == Key.Enter)
+            {
+                if (!ShouldActivateDropDown(currentText)) { e.Handled = true; return; }
+                CommitSelection();
+                e.Handled = true;
+            }
+            else if (e.Key == Key.Escape)
+            {
+                IsDropDownOpen = false;
+                e.Handled = true;
+            }
+        }
+
+        private bool ShouldActivateDropDown(string txt)
+        {
+            return (txt?.Trim().Length ??0) >= MinSearchLength;
+        }
+
+        private async Task StartSearchAsync(string filter)
+        {
+            var old = Interlocked.Exchange(ref _cts, new CancellationTokenSource());
+            try { old?.Cancel(); } finally { old?.Dispose(); }
+            _forceFirstSelectionOnLoad = true; // next population should select first result
+            await RunInitialSearchAsync(filter, _cts.Token);
+        }
+
+        private async Task RunInitialSearchAsync(string filter, CancellationToken token = default)
+        {
+            _pageCache.Clear();
+            _currentItems.Clear();
+
+            var trimmed = (filter ?? string.Empty).Trim();
+            _lastFilter = trimmed;
+
+            _suppressPageIndexChanged = true;
+            PageIndex = 0;
+            _suppressPageIndexChanged = false;
+
+            if (token.IsCancellationRequested) return;
+
+            // If below threshold do not populate list, unless ShowAllOnBlank is true and filter is blank
+            if (trimmed.Length < MinSearchLength && !(ShowAllOnBlank && string.IsNullOrEmpty(trimmed)))
+            {
+                HasNextPage = false;
+                return;
+            }
+
+            await AppendPageAsync(0, token);
+
+            // Ensure first record is selected/highlighted after load
+            if (!token.IsCancellationRequested && _listBox != null && _currentItems.Count > 0 && _listBox.SelectedIndex < 0)
+            {
+                _listBox.SelectedIndex = 0;
+                var first = _currentItems[0];
+                SelectedId = first.IdNo;
+                SelectedCode = first.Code;
+                SelectedName = first.Name;
+                UpdateSelectedValueFromRecord(first);
+                _listBox.ScrollIntoView(first);
+            }
+        }
+
+        private async Task AppendPageAsync(int pageIndex, CancellationToken token = default)
+        {
+            if (token.IsCancellationRequested) return;
+
+            // abort if current filter below threshold, unless ShowAllOnBlank is true and filter is blank
+            if ((_lastFilter ?? string.Empty).Trim().Length < MinSearchLength && !(ShowAllOnBlank && string.IsNullOrEmpty(_lastFilter)))
+            {
+                HasNextPage = false;
+                return;
+            }
+            // For pages >0 do not auto-select first
+            if (pageIndex >0) _forceFirstSelectionOnLoad = false;
+            // Decide mode once per call
+            bool remote = UseRemoteFetch || (_localMaster.Count ==0 && IsRemoteConfigured) || _localMaster.Count > AutoRemoteThreshold;
+
+            if (remote)
+            {
+                IsBusy = true;
+                try
+                {
+                    List<ComboRecord> pageData = await FetchFromSqlAsync(_lastFilter, token, pageIndex);
+                    if (token.IsCancellationRequested) return;
+                    // Avoid redundant extra in-memory filtering for remote data
+                    _pageCache[pageIndex] = pageData;
+                    UpdateHasNext(pageIndex, pageData.Count);
+
+                    bool appendMode = _pagingDown && pageIndex >0;
+                    if (appendMode) _appendInsertIndex = _currentItems.Count;
+                    AppendToCurrent(pageData, append: appendMode);
+                }
+                finally
+                {
+                    IsBusy = false;
+                }
+            }
+            else
+            {
+                // Local filtering off the UI thread; keep current items visible until complete
+                var filterSnapshot = _lastFilter;
+                var indexSnapshot = pageIndex;
+                IsBusy = true;
+
+                await Task.Run(() =>
+                {
+                    var allFiltered = _localMaster.Where(r => r.Matches(filterSnapshot)).ToList();
+                    var pageDataLocal = allFiltered.Skip(indexSnapshot * RemoteTake).Take(RemoteTake).ToList();
+                    return (total: allFiltered.Count, page: pageDataLocal);
+                }).ContinueWith(t =>
+                {
+                    try
+                    {
+                        if (token.IsCancellationRequested || filterSnapshot != _lastFilter) return;
+
+                        _totalFilteredCount = t.Result.total;
+                        var pageDataLocal = t.Result.page;
+                        _pageCache[indexSnapshot] = pageDataLocal;
+                        _pageCache[-1] = new List<ComboRecord>();
+                        UpdateHasNext(indexSnapshot, pageDataLocal.Count);
+
+                        bool appendMode = _pagingDown && indexSnapshot >0;
+                        if (appendMode) _appendInsertIndex = _currentItems.Count;
+                        AppendToCurrent(pageDataLocal, append: appendMode);
+                    }
+                    finally
+                    {
+                        IsBusy = false;
+                    }
+                }, TaskScheduler.FromCurrentSynchronizationContext());
+            }
+        }
+
+        private void EnsureListBoxSelection(object previousId = null)
+        {
+            if (_listBox == null) return;
+            if (_currentItems.Count ==0)
+            {
+                _listBox.SelectedIndex = -1;
+                return;
+            }
+
+            // Try restore previous by Id
+            if (previousId != null)
+            {
+                var restored = _currentItems.FirstOrDefault(r => EqualsSafe(r.IdNo, previousId));
+                if (restored != null)
+                {
+                    _listBox.SelectedItem = restored;
+                    _listBox.ScrollIntoView(restored);
+                    return;
+                }
+            }
+
+            // Keep existing selection if still present
+            if (_listBox.SelectedItem is ComboRecord existing && _currentItems.Contains(existing))
+            {
+                _listBox.ScrollIntoView(existing);
+                return;
+            }
+
+            // If externally bound SelectedId matches any item select it
+            if (SelectedId != null)
+            {
+                var match = _currentItems.FirstOrDefault(r => EqualsSafe(r.IdNo, SelectedId));
+                if (match != null)
+                {
+                    _listBox.SelectedItem = match;
+                    _listBox.ScrollIntoView(match);
+                    return;
+                }
+            }
+
+            // Do NOT force select first item anymore; leave no selection for clarity
+            _listBox.SelectedIndex = -1;
+        }
+
+        private bool _suspendCollectionChangedEvents = false; // new: suppress handler during bulk updates
+
+        private void AppendToCurrent(IEnumerable<ComboRecord> records, bool append = false)
+        {
+            object previousId = SelectedId; // try retain selection across refresh
+
+            var newList = records?.ToList() ?? new List<ComboRecord>();
+
+            // If there is nothing to add and not replacing, leave as-is
+            if (!append && newList.Count ==0)
+            {
+                // ensure selection restored
+                EnsureListBoxSelection(previousId);
+                return;
+            }
+
+            // Use BulkObservableCollection operations so the ListBox receives a single Reset notification
+            if (!append)
+            {
+                _currentItems.ReplaceAll(newList);
+            }
+            else
+            {
+                // remember where append starts so selection can be restored
+                _appendInsertIndex = _currentItems.Count;
+                _currentItems.AddRange(newList);
+            }
+
+            // After replacing collection, perform selection logic on UI thread and defer ScrollIntoView
+            if (_listBox != null && _forceFirstSelectionOnLoad && !append && _currentItems.Count >0)
+            {
+                var first = _currentItems[0];
+                _listBox.SelectedIndex =0;
+                SelectedId = first.IdNo;
+                SelectedCode = first.Code;
+                SelectedName = first.Name;
+                UpdateSelectedValueFromRecord(first);
+                // Defer scrolling to batch layout
+                _ = _listBox.Dispatcher.BeginInvoke((Action)(() => _listBox.ScrollIntoView(first)), System.Windows.Threading.DispatcherPriority.Background);
+                _forceFirstSelectionOnLoad = false; // consumed
+                return; // explicit selection done
+            }
+
+            // If a pending page-down/up intent exists, ensure selection reflects that immediately
+            if (_listBox != null)
+            {
+                if (_pendingPageDown)
+                {
+                    var targetIndex = (_appendInsertIndex >=0 && _appendInsertIndex < _currentItems.Count) ? _appendInsertIndex :0;
+                    _listBox.SelectedIndex = targetIndex;
+                    _listBox.Focus();
+                    _ = _listBox.Dispatcher.BeginInvoke((Action)(() => _listBox.ScrollIntoView(_listBox.SelectedItem)), System.Windows.Threading.DispatcherPriority.Background);
+                    _pendingPageDown = false;
+                    _appendInsertIndex = -1;
+                }
+                else if (_pendingPageUp)
+                {
+                    _listBox.SelectedIndex = _currentItems.Count -1;
+                    _listBox.Focus();
+                    _ = _listBox.Dispatcher.BeginInvoke((Action)(() => _listBox.ScrollIntoView(_listBox.SelectedItem)), System.Windows.Threading.DispatcherPriority.Background);
+                    _pendingPageUp = false;
+                }
+                else
+                {
+                    // Defer EnsureListBoxSelection to allow the ItemsSource change to settle
+                    _ = _listBox.Dispatcher.BeginInvoke((Action)(() => EnsureListBoxSelection(previousId)), System.Windows.Threading.DispatcherPriority.Background);
+                }
+            }
+            else
+            {
+                EnsureListBoxSelection(previousId);
+            }
+        }
+
+        private void UpdateHasNext(int pageIndex, int pageCount)
+        {
+            if (pageCount < RemoteTake)
+            {
+                HasNextPage = false;
+                UpdateLoadMoreVisibility();
+                return;
+            }
+
+            if (_pageCache.ContainsKey(pageIndex +1))
+            {
+                HasNextPage = _pageCache[pageIndex +1].Count >0;
+                UpdateLoadMoreVisibility();
+                return;
+            }
+
+            if (_pageCache.ContainsKey(-1))
+            {
+                HasNextPage = (pageIndex +1) * RemoteTake < _totalFilteredCount;
+            }
+            else
+            {
+                HasNextPage = true;
+            }
+            UpdateLoadMoreVisibility();
+        }
+
+        private void RefreshLoadMoreButton()
+        {
+            if (_popup == null) return;
+            if (_loadMoreButton != null)
+            {
+                _loadMoreButton.Visibility =
+                    (!EnableAutoScrollPaging && HasNextPage)
+                        ? Visibility.Visible
+                        : Visibility.Collapsed;
+            }
+        }
+
+        // Added caching safety + lazy resolve of template part
+        private void UpdateLoadMoreVisibility()
+        {
+            if (_loadMoreButton == null)
+                _loadMoreButton = GetTemplateChild("PART_LoadMore") as Button;
+
+            if (_loadMoreButton == null)
+                return;
+
+            // Force hidden/disabled per user request to disable appearance
+            _loadMoreButton.Visibility = Visibility.Collapsed;
+            _loadMoreButton.IsEnabled = false;
+        }
+
+        private async Task<List<ComboRecord>> FetchFromSqlAsync(string filter, CancellationToken token, int pageIndex)
+        {
+            var list = new List<ComboRecord>();
+            if (string.IsNullOrWhiteSpace(ConnectionString) || string.IsNullOrWhiteSpace(SqlQueryTemplate))
+                return list;
+
+            string baseSql = SqlQueryTemplate.Trim().TrimEnd(';');
+
+            bool hasTop = baseSql.IndexOf(" top ", StringComparison.OrdinalIgnoreCase) >=0;
+            bool hasOffset = baseSql.IndexOf(" offset ", StringComparison.OrdinalIgnoreCase) >=0;
+            bool hasFilterParameter = baseSql.IndexOf("@filter", StringComparison.OrdinalIgnoreCase) >=0;
+
+            bool hasOrderBy = baseSql.IndexOf(" order by ", StringComparison.OrdinalIgnoreCase) >=0;
+            if (!hasOrderBy)
+            {
+                baseSql += " ORDER BY IdNo";
+                hasOrderBy = true;
+            }
+
+            if (!hasFilterParameter)
+            {
+                bool hasCodeAlias = baseSql.IndexOf(" Code", StringComparison.OrdinalIgnoreCase) >=0;
+                bool hasNameAlias = baseSql.IndexOf(" Name", StringComparison.OrdinalIgnoreCase) >=0;
+                string filterExpr = hasCodeAlias && hasNameAlias
+                ? "(@filter = '' OR Code LIKE @pattern OR Name LIKE @pattern)"
+                : "(@filter = '' OR ProductCode LIKE @pattern OR ProductName LIKE @pattern)";
+
+                int orderPos = baseSql.LastIndexOf(" order by ", StringComparison.OrdinalIgnoreCase);
+                if (orderPos >=0)
+                {
+                    string beforeOrder = baseSql.Substring(0, orderPos);
+                    string orderClause = baseSql.Substring(orderPos);
+                    bool beforeHasWhere = beforeOrder.IndexOf(" where ", StringComparison.OrdinalIgnoreCase) >=0;
+                    beforeOrder += beforeHasWhere ? " AND " + filterExpr : " WHERE " + filterExpr;
+                    baseSql = beforeOrder + " " + orderClause;
+                }
+                else
+                {
+                    baseSql += " WHERE " + filterExpr;
+                }
+            }
+
+            if (!hasTop && !hasOffset)
+            {
+                baseSql += $" OFFSET {pageIndex * RemoteTake} ROWS FETCH NEXT {RemoteTake} ROWS ONLY";
+            }
+
+            Log($"SmartComboBox SQL (final): {baseSql}");
+            Log($"SmartComboBox SQL @filter: {filter}");
+
+            try
+            {
+                using var conn = new SqlConnection(ConnectionString);
+                await conn.OpenAsync(token);
+                using var cmd = new SqlCommand(baseSql, conn);
+                cmd.Parameters.Add(new SqlParameter("@filter", SqlDbType.NVarChar,200) { Value = filter ?? string.Empty });
+                cmd.Parameters.Add(new SqlParameter("@pattern", SqlDbType.NVarChar,200) { Value = string.IsNullOrEmpty(filter) ? string.Empty : $"%{filter}%" });
+
+                using var reader = await cmd.ExecuteReaderAsync(token);
+                while (await reader.ReadAsync(token))
+                {
+                    var rec = new ComboRecord
+                    {
+                        Raw = reader,
+                        IdNo = SafeGet(reader, "IdNo"),
+                        Code = SafeGet(reader, "Code")?.ToString() ?? string.Empty,
+                        Name = SafeGet(reader, "Name")?.ToString() ?? string.Empty
+                    };
+                    list.Add(rec);
+                    if (list.Count >= RemoteTake) break;
+                }
+            }
+            catch (SqlException ex)
+            {
+                Log("SmartComboBox SQL ERROR: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Log("SmartComboBox (unexpected) ERROR: " + ex.Message);
+            }
+
+            return list;
+        }
+
+        private object SafeGet(IDataRecord r, string field)
+        {
+            try
+            {
+                int ord = r.GetOrdinal(field);
+                if (r.IsDBNull(ord)) return null;
+                return r.GetValue(ord);
+            }
+            catch { return null; }
+        }
+
+        private void CommitSelection()
+        {
+            if (_listBox?.SelectedItem is ComboRecord cr)
+            {
+                SelectedId = cr.IdNo;
+                SelectedCode = cr.Code;
+                SelectedName = cr.Name;
+                UpdateSelectedValueFromRecord(cr);
+
+                if (_textBox != null)
+                {
+                    var display = GetDisplayText(cr);
+                    _textBox.Text = display;
+                    Text = display;
+                    _textBox.CaretIndex = _textBox.Text.Length;
+                    _textBox.Focus();
+                }
+
+                if (_popup != null)
+                    IsDropDownOpen = false;
+            }
+        }
+
+        private void BuildLocalMasterFromItemsSource()
+        {
+            _localMaster.Clear();
+            if (ItemsSource == null) return;
+
+            foreach (var item in ItemsSource)
+            {
+                var rec = ComboRecord.FromUnknown(item);
+                if (rec != null) _localMaster.Add(rec);
+            }
+        }
+
+        private void UpdateSelectedValueFromRecord(ComboRecord cr)
+        {
+            var path = SelectedValuePath;
+            if (string.IsNullOrWhiteSpace(path)) return;
+
+            var value = GetValueByPath(cr, path);
+            SelectedValue = value;
+        }
+
+        private object GetValueByPath(ComboRecord cr, string path)
+        {
+            if (string.IsNullOrWhiteSpace(path)) return null;
+            if (path.Equals("IdNo", StringComparison.OrdinalIgnoreCase)) return cr.IdNo;
+            if (path.Equals("Code", StringComparison.OrdinalIgnoreCase)) return cr.Code;
+            if (path.Equals("Name", StringComparison.OrdinalIgnoreCase)) return cr.Name;
+
+            var raw = cr.Raw;
+            if (raw is DataRowView drv && drv.Row.Table.Columns.Contains(path)) return drv[path];
+            if (raw is DataRow dr && dr.Table.Columns.Contains(path)) return dr[path];
+
+            if (raw != null)
+            {
+                var p = raw.GetType().GetProperty(path);
+                if (p != null) return p.GetValue(raw);
+            }
+
+            var pr = cr.GetType().GetProperty(path);
+            if (pr != null) return pr.GetValue(cr);
+            return null;
+        }
+
+        private string GetDisplayText(ComboRecord cr) => cr.Display;
+
+        private void TrySelectBySelectedValue()
+        {
+            if (_listBox == null) return;
+            var path = SelectedValuePath;
+            var selVal = SelectedValue;
+            if (string.IsNullOrWhiteSpace(path) || selVal == null) { EnsureListBoxSelection(); return; }
+
+            var match = _localMaster.FirstOrDefault(r => EqualsSafe(GetValueByPath(r, path), selVal));
+            if (match != null)
+            {
+                _currentItems.Clear();
+                _currentItems.Add(match);
+                SelectedId = match.IdNo;
+                SelectedCode = match.Code;
+                SelectedName = match.Name;
+                if (_textBox != null)
+                {
+                    var display = GetDisplayText(match);
+                    _textBox.Text = display;
+                    Text = display;
+                }
+                HasNextPage = false;
+                EnsureListBoxSelection();
+            }
+        }
+
+        private bool EqualsSafe(object a, object b) => a == null && b == null || a != null && a.Equals(b);
+
+        private class ComboRecord
+        {
+            public object Raw { get; set; }
+            public object IdNo { get; set; } = new object();
+            public string Code { get; set; } = string.Empty;
+            public string Name { get; set; } = string.Empty;
+            public string Display => string.IsNullOrEmpty(Code) ? Name : $"{Code} - {Name}";
+            public bool Matches(string filter)
+            {
+                if (string.IsNullOrEmpty(filter)) return true;
+                return (Code?.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >=0) || (Name?.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >=0);
+            }
+            public override string ToString() => Display;
+            public static ComboRecord FromUnknown(object obj)
+            {
+                if (obj == null) return null;
+                if (obj is ComboRecord c) return c;
+
+                if (obj is DataRowView drv)
+                {
+                    return new ComboRecord
+                    {
+                        Raw = obj,
+                        IdNo = drv["IdNo"],
+                        Code = drv["Code"]?.ToString() ?? "",
+                        Name = drv["Name"]?.ToString() ?? ""
+                    };
+                }
+                if (obj is DataRow dr)
+                {
+                    return new ComboRecord
+                    {
+                        Raw = obj,
+                        IdNo = dr["IdNo"],
+                        Code = dr["Code"]?.ToString() ?? "",
+                        Name = dr["Name"]?.ToString() ?? ""
+                    };
+                }
+
+                var t = obj.GetType();
+                var pId = t.GetProperty("IdNo");
+                var pCode = t.GetProperty("Code");
+                var pName = t.GetProperty("Name");
+                if (pId != null || pCode != null || pName != null)
+                {
+                    return new ComboRecord
+                    {
+                        Raw = obj,
+                        IdNo = pId?.GetValue(obj),
+                        Code = pCode?.GetValue(obj)?.ToString() ?? "",
+                        Name = pName?.GetValue(obj)?.ToString() ?? ""
+                    };
+                }
+
+                return new ComboRecord
+                {
+                    Raw = obj,
+                    IdNo = obj,
+                    Code = "",
+                    Name = obj.ToString() ?? ""
+                };
+            }
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (_textBox == null) return;
+            var text = _textBox.Text ?? string.Empty;
+            Text = text;
+
+            // Below threshold: ensure dropdown closed and do not search
+            if (!ShouldActivateDropDown(text))
+            {
+                if (IsDropDownOpen) IsDropDownOpen = false;
+                _debounce?.Stop();
+                return;
+            }
+
+            if (!IsDropDownOpen) IsDropDownOpen = true;
+
+            if (_debounce == null)
+            {
+                _debounce = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(DebounceMilliseconds) };
+                _debounce.Tick += async (_, __) =>
+                {
+                    _debounce.Stop();
+                    await StartSearchAsync(Text);
+                };
+            }
+            else
+            {
+                _debounce.Interval = TimeSpan.FromMilliseconds(DebounceMilliseconds);
+            }
+            _debounce.Stop();
+            _debounce.Start();
+        }
+
+        private void Popup_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (_listBox == null) return;
+            if (e.Key == Key.Up)
+            {
+                // if ((_listBox.SelectedIndex <=0) && PageIndex ==0)
+                if (_listBox.SelectedIndex <= 0) 
+                {
+                    // at very top: keep dropdown open and selection fixed
+                    e.Handled = true;
+                }
+            }
+            else if (e.Key == Key.Down)
+            {
+                if ((_listBox.SelectedIndex >= _currentItems.Count -1) && !HasNextPage)
+                {
+                    // at very bottom: keep dropdown open and selection fixed
+                    e.Handled = true;
+                }
+            }
+        }
+
+        private Border _listBorder;
+        
+        private void AlignPopupRightEdgeDeferred()
+        {
+            // run later so layout has settled
+            if (_popup == null) return;
+            _ = Dispatcher.BeginInvoke((Action)(() => AlignPopupRightEdge()), DispatcherPriority.Background);
+        }
+        
+        private void AlignPopupRightEdge()
+        {
+            try
+            {
+                if (_popup == null || _listBorder == null) return;
+
+                // Ensure popup is placed relative to the entire control so right edge aligns with control (includes button)
+                _popup.PlacementTarget = this;
+                _popup.Placement = PlacementMode.Bottom;
+
+                // Ensure min width equals control width so dropdown never narrower than the full control (textbox + button)
+                _listBorder.MinWidth = this.ActualWidth;
+
+                // If border hasn't been measured yet, force a measure/layout pass
+                if (double.IsNaN(_listBorder.ActualWidth) || _listBorder.ActualWidth ==0)
+                {
+                    _listBorder.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+                    _listBorder.UpdateLayout();
+                }
+
+                // Compute horizontal placement so right edges align.
+                var ctrlWidth = this.ActualWidth;
+                var listWidth = Math.Max(_listBorder.ActualWidth, ctrlWidth);
+
+                // Use PlacementRectangle anchored inside the target so the popup's right edge matches control's right edge.
+                // PlacementRectangle.X is relative to PlacementTarget; set it so rectangle's right == ctrlWidth.
+                double rectX = ctrlWidth - listWidth; // typically negative when list wider
+                _popup.PlacementRectangle = new Rect(rectX,0, listWidth,0);
+                // Clear any manual horizontal offset
+                _popup.HorizontalOffset =0;
+            }
+            catch (Exception ex)
+            {
+                Log("AlignPopupRightEdge error: " + ex.Message);
+            }
+        }
+
+        // BulkObservableCollection supports AddRange/Reset with a single notification
+        private class BulkObservableCollection<T> : ObservableCollection<T>
+        {
+            public void AddRange(IEnumerable<T> items)
+            {
+                if (items == null) return;
+                CheckReentrancy();
+                bool any = false;
+                foreach (var it in items)
+                {
+                    Items.Add(it);
+                    any = true;
+                }
+                if (any)
+                {
+                    OnCollectionChanged(new System.Collections.Specialized.NotifyCollectionChangedEventArgs(System.Collections.Specialized.NotifyCollectionChangedAction.Reset));
+                }
+            }
+
+            public void ReplaceAll(IEnumerable<T> items)
+            {
+                CheckReentrancy();
+                Items.Clear();
+                if (items != null)
+                {
+                    foreach (var it in items) Items.Add(it);
+                }
+                OnCollectionChanged(new System.Collections.Specialized.NotifyCollectionChangedEventArgs(System.Collections.Specialized.NotifyCollectionChangedAction.Reset));
+            }
+        }
+
+    }
+}

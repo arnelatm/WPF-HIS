@@ -1,0 +1,41 @@
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Data.SqlClient;
+
+namespace AATM.Sample
+{
+    public class MainWindowViewModel : INotifyPropertyChanged
+{
+  public ObservableCollection<Product> Products { get; set; } = new();
+        public int? SelectedCustomerId { get; set; }
+   public string SelectedCustomerCode { get; set; }
+   public string SelectedCustomerName { get; set; }
+
+   public MainWindowViewModel()
+        {
+      LoadProducts();
+        }
+
+   private void LoadProducts()
+        {
+      string connectionString = "Server=Ibn-Server;Database=IspData;User Id=iGroupAdmin;Password=igss@123;Encrypt=True;TrustServerCertificate=True;";
+   string query = "SELECT IdNo, ProductCode AS Code, ProductName AS Name FROM Product ORDER BY ProductName";
+       using SqlConnection conn = new(connectionString);
+ using SqlCommand cmd = new(query, conn);
+   conn.Open();
+  using SqlDataReader reader = cmd.ExecuteReader();
+   while (reader.Read())
+       {
+     Products.Add(new Product
+ {
+     IdNo = reader.GetInt32(0),
+     Code = reader.GetString(1),
+     Name = reader.GetString(2)
+       });
+ }
+   }
+
+   public event PropertyChangedEventHandler PropertyChanged;
+  protected void OnPropertyChanged(string propertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+}
+}

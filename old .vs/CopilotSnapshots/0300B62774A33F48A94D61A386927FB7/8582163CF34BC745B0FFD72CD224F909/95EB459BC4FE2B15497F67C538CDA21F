@@ -1,0 +1,1189 @@
+﻿using System;
+using System.Collections;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Threading;
+using System.Linq;
+using System.Collections.Generic;
+using System.Data;
+using AATM.UI.Controls;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Collections.Specialized; // added for CollectionChanged
+
+namespace AATM.UI.Controls
+{
+    public partial class SmartComboBox : Control
+    {
+        // Core fields
+        private TextBox _textBox;
+        private ListBox _listBox;
+        private Button _button;
+        private Popup _popup;
+        private TextBlock _busyText;
+        private Button _loadMoreButton;
+        private Border _listBorder;
+        private ScrollViewer _scrollViewer; // ensure we can detect scroll changes
+        private DispatcherTimer _debounce;
+        private bool _ignorePopupSync;
+        private bool _suspendCollectionChangedEvents = false;
+        private bool _updatingSelectedItem;
+        private string _lastFilter = string.Empty;
+        private int _lastPageIndex = 0;
+        private bool _pagingDown = true;
+        private bool _forceFirstSelectionOnLoad;
+        private int _appendInsertIndex = -1;
+        private CancellationTokenSource _cts;
+        private List<ComboRecord> _localMaster = new();
+        private BulkObservableCollection<ComboRecord> _currentItems = new();
+        private readonly Dictionary<int, List<ComboRecord>> _pageCache = new();
+        private int _totalFilteredCount;
+        private bool _pendingPageDown;
+        private bool _pendingPageUp;
+        private const int AutoRemoteThreshold = 50000;
+        private bool _suppressPageIndexChanged;
+        private bool _ignoreMinLengthOnce;
+        private bool _focusListOnSearchComplete;
+        private int _pendingMoveDelta;
+
+        private const int MaxPageCacheSize = 10; // Maximum number of pages to cache
+        // Added missing fields used for rapid Down key acceleration
+        private DateTime _lastDownKeyTime = DateTime.MinValue;
+        private const int RapidDownThresholdMs = 120;
+
+        static SmartComboBox()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(SmartComboBox), new FrameworkPropertyMetadata(typeof(SmartComboBox)));
+        }
+
+        public SmartComboBox()
+        {
+            System.Diagnostics.Debug.WriteLine("[SmartComboBox] Constructor called.");
+            RemoteTake = 20;
+            _currentItems.CollectionChanged += CurrentItems_CollectionChanged;
+            this.Unloaded += SmartComboBox_Unloaded;
+        }
+
+        private void SmartComboBox_Unloaded(object sender, RoutedEventArgs e)
+        {
+            if (_debounce != null)
+            {
+                _debounce.Stop();
+                _debounce.Tick -= async (_, __) => { };
+                _debounce = null;
+            }
+        }
+
+        private void TrimPageCache()
+        {
+            while (_pageCache.Count > MaxPageCacheSize)
+            {
+                // Remove the oldest page (lowest key)
+                var oldestKey = _pageCache.Keys.Min();
+                _pageCache.Remove(oldestKey);
+            }
+        }
+
+        #region Dependency Properties
+        public static readonly DependencyProperty ItemsSourceProperty =
+     DependencyProperty.Register(nameof(ItemsSource), typeof(IEnumerable), typeof(SmartComboBox), new PropertyMetadata(null, OnItemsSourceChanged));
+        public IEnumerable ItemsSource
+        {
+            get => (IEnumerable)GetValue(ItemsSourceProperty);
+            set => SetValue(ItemsSourceProperty, value);
+        }
+
+        public static readonly DependencyProperty SelectedItemProperty =
+                DependencyProperty.Register(nameof(SelectedItem), typeof(object), typeof(SmartComboBox), new PropertyMetadata(null, OnSelectedItemChanged));
+
+        public object SelectedItem
+        {
+            get => GetValue(SelectedItemProperty);
+            set => SetValue(SelectedItemProperty, value);
+        }
+
+        public static readonly DependencyProperty SelectedValueProperty =
+            DependencyProperty.Register(nameof(SelectedValue), typeof(object), typeof(SmartComboBox), new PropertyMetadata(null, OnSelectedValueChanged));
+
+        public object SelectedValue
+        {
+            get => GetValue(SelectedValueProperty);
+            set => SetValue(SelectedValueProperty, value);
+        }
+
+        public static readonly DependencyProperty DisplayMemberPathProperty =
+            DependencyProperty.Register(nameof(DisplayMemberPath), typeof(string), typeof(SmartComboBox), new PropertyMetadata(string.Empty));
+
+        public string DisplayMemberPath
+        {
+            get => (string)GetValue(DisplayMemberPathProperty);
+            set => SetValue(DisplayMemberPathProperty, value);
+        }
+
+        public static readonly DependencyProperty ValueMemberPathProperty =
+            DependencyProperty.Register(nameof(ValueMemberPath), typeof(string), typeof(SmartComboBox), new PropertyMetadata(string.Empty));
+
+        public string ValueMemberPath
+        {
+            get => (string)GetValue(ValueMemberPathProperty);
+            set => SetValue(ValueMemberPathProperty, value);
+        }
+
+        public static readonly DependencyProperty RemoteSearchProperty =
+            DependencyProperty.Register(nameof(RemoteSearch), typeof(bool), typeof(SmartComboBox), new PropertyMetadata(false));
+
+        public bool RemoteSearch
+        {
+            get => (bool)GetValue(RemoteSearchProperty);
+            set => SetValue(RemoteSearchProperty, value);
+        }
+
+        public static readonly DependencyProperty SelectedIdProperty =
+     DependencyProperty.Register(nameof(SelectedId), typeof(object), typeof(SmartComboBox), new PropertyMetadata(null));
+        public object SelectedId
+        {
+            get => GetValue(SelectedIdProperty);
+            set => SetValue(SelectedIdProperty, value);
+        }
+
+        public static readonly DependencyProperty SelectedCodeProperty =
+         DependencyProperty.Register(nameof(SelectedCode), typeof(string), typeof(SmartComboBox), new PropertyMetadata(string.Empty));
+        public string SelectedCode
+        {
+            get => (string)GetValue(SelectedCodeProperty);
+            set => SetValue(SelectedCodeProperty, value);
+        }
+
+        public static readonly DependencyProperty SelectedNameProperty =
+         DependencyProperty.Register(nameof(SelectedName), typeof(string), typeof(SmartComboBox), new PropertyMetadata(string.Empty));
+        public string SelectedName
+        {
+            get => (string)GetValue(SelectedNameProperty);
+            set => SetValue(SelectedNameProperty, value);
+        }
+
+        public static readonly DependencyProperty TextProperty =
+         DependencyProperty.Register(nameof(Text), typeof(string), typeof(SmartComboBox), new PropertyMetadata(string.Empty));
+        public string Text
+        {
+            get => (string)GetValue(TextProperty);
+            set => SetValue(TextProperty, value);
+        }
+
+        public static readonly DependencyProperty IsDropDownOpenProperty =
+         DependencyProperty.Register(nameof(IsDropDownOpen), typeof(bool), typeof(SmartComboBox), new PropertyMetadata(false, OnIsDropDownOpenChanged));
+        public bool IsDropDownOpen
+        {
+            get => (bool)GetValue(IsDropDownOpenProperty);
+            set => SetValue(IsDropDownOpenProperty, value);
+        }
+
+        private static void OnIsDropDownOpenChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is SmartComboBox scb)
+            {
+                scb.SyncPopupOpenState((bool)e.NewValue);
+            }
+        }
+
+        public static readonly DependencyProperty HasNextPageProperty =
+         DependencyProperty.Register(nameof(HasNextPage), typeof(bool), typeof(SmartComboBox), new PropertyMetadata(false));
+        public bool HasNextPage
+        {
+            get => (bool)GetValue(HasNextPageProperty);
+            set => SetValue(HasNextPageProperty, value);
+        }
+
+        public static readonly DependencyProperty MinSearchLengthProperty =
+         DependencyProperty.Register(nameof(MinSearchLength), typeof(int), typeof(SmartComboBox), new PropertyMetadata(3));
+        public int MinSearchLength
+        {
+            get => (int)GetValue(MinSearchLengthProperty);
+            set => SetValue(MinSearchLengthProperty, value);
+        }
+
+        public static readonly DependencyProperty ShowAllOnBlankProperty =
+         DependencyProperty.Register(nameof(ShowAllOnBlank), typeof(bool), typeof(SmartComboBox), new PropertyMetadata(false));
+        public bool ShowAllOnBlank
+        {
+            get => (bool)GetValue(ShowAllOnBlankProperty);
+            set => SetValue(ShowAllOnBlankProperty, value);
+        }
+
+        public static readonly DependencyProperty UseRemoteFetchProperty =
+         DependencyProperty.Register(nameof(UseRemoteFetch), typeof(bool), typeof(SmartComboBox), new PropertyMetadata(false));
+        public bool UseRemoteFetch
+        {
+            get => (bool)GetValue(UseRemoteFetchProperty);
+            set => SetValue(UseRemoteFetchProperty, value);
+        }
+
+        public static readonly DependencyProperty IsBusyProperty =
+         DependencyProperty.Register(nameof(IsBusy), typeof(bool), typeof(SmartComboBox), new PropertyMetadata(false));
+        public bool IsBusy
+        {
+            get => (bool)GetValue(IsBusyProperty);
+            set => SetValue(IsBusyProperty, value);
+        }
+
+        public static readonly DependencyProperty UseBackgroundFilteringProperty =
+         DependencyProperty.Register(nameof(UseBackgroundFiltering), typeof(bool), typeof(SmartComboBox), new PropertyMetadata(true));
+        public bool UseBackgroundFiltering
+        {
+            get => (bool)GetValue(UseBackgroundFilteringProperty);
+            set => SetValue(UseBackgroundFilteringProperty, value);
+        }
+
+        public static readonly DependencyProperty TotalCountProperty =
+         DependencyProperty.Register(nameof(TotalCount), typeof(int), typeof(SmartComboBox), new PropertyMetadata(0));
+        public int TotalCount
+        {
+            get => (int)GetValue(TotalCountProperty);
+            set => SetValue(TotalCountProperty, value);
+        }
+
+        public static readonly DependencyProperty CachePageLimitProperty =
+         DependencyProperty.Register(nameof(CachePageLimit), typeof(int), typeof(SmartComboBox), new PropertyMetadata(50));
+        public int CachePageLimit
+        {
+            get => (int)GetValue(CachePageLimitProperty);
+            set => SetValue(CachePageLimitProperty, value);
+        }
+
+        public static readonly DependencyProperty PageSizeProperty =
+         DependencyProperty.Register(nameof(PageSize), typeof(int), typeof(SmartComboBox), new PropertyMetadata(0));
+        public int PageSize
+        {
+            get => (int)GetValue(PageSizeProperty);
+            set => SetValue(PageSizeProperty, value);
+        }
+
+        public static readonly DependencyProperty RemoteTakeProperty =
+         DependencyProperty.Register(nameof(RemoteTake), typeof(int), typeof(SmartComboBox), new PropertyMetadata(20));
+        public int RemoteTake
+        {
+            get => (int)GetValue(RemoteTakeProperty);
+            set => SetValue(RemoteTakeProperty, value);
+        }
+
+        public static readonly DependencyProperty SelectedValuePathProperty =
+         DependencyProperty.Register(nameof(SelectedValuePath), typeof(string), typeof(SmartComboBox), new PropertyMetadata(string.Empty));
+        public string SelectedValuePath
+        {
+            get => (string)GetValue(SelectedValuePathProperty);
+            set => SetValue(SelectedValuePathProperty, value);
+        }
+
+        public static readonly DependencyProperty IsLoadingProperty =
+                DependencyProperty.Register(nameof(IsLoading), typeof(bool), typeof(SmartComboBox), new PropertyMetadata(false));
+
+        public bool IsLoading
+        {
+            get => (bool)GetValue(IsLoadingProperty);
+            set => SetValue(IsLoadingProperty, value);
+        }
+
+        public static readonly DependencyProperty HasErrorProperty =
+            DependencyProperty.Register(nameof(HasError), typeof(bool), typeof(SmartComboBox), new PropertyMetadata(false));
+
+        public bool HasError
+        {
+            get => (bool)GetValue(HasErrorProperty);
+            set => SetValue(HasErrorProperty, value);
+        }
+
+        public static readonly DependencyProperty ErrorMessageProperty =
+            DependencyProperty.Register(nameof(ErrorMessage), typeof(string), typeof(SmartComboBox), new PropertyMetadata(string.Empty));
+
+        public string ErrorMessage
+        {
+            get => (string)GetValue(ErrorMessageProperty);
+            set => SetValue(ErrorMessageProperty, value);
+        }
+
+        public static readonly DependencyProperty EmptyTextProperty =
+            DependencyProperty.Register(nameof(EmptyText), typeof(string), typeof(SmartComboBox), new PropertyMetadata("No items found."));
+
+        public string EmptyText
+        {
+            get => (string)GetValue(EmptyTextProperty);
+            set => SetValue(EmptyTextProperty, value);
+        }
+
+        public static readonly DependencyProperty NoItemsTemplateProperty =
+            DependencyProperty.Register(nameof(NoItemsTemplate), typeof(DataTemplate), typeof(SmartComboBox), new PropertyMetadata(null));
+
+        public DataTemplate NoItemsTemplate
+        {
+            get => (DataTemplate)GetValue(NoItemsTemplateProperty);
+            set => SetValue(NoItemsTemplateProperty, value);
+        }
+
+        public static readonly DependencyProperty LoadingTemplateProperty =
+            DependencyProperty.Register(nameof(LoadingTemplate), typeof(DataTemplate), typeof(SmartComboBox), new PropertyMetadata(null));
+
+        public DataTemplate LoadingTemplate
+        {
+            get => (DataTemplate)GetValue(LoadingTemplateProperty);
+            set => SetValue(LoadingTemplateProperty, value);
+        }
+
+        public static readonly DependencyProperty ItemTemplateProperty =
+            DependencyProperty.Register(nameof(ItemTemplate), typeof(DataTemplate), typeof(SmartComboBox), new PropertyMetadata(null));
+
+        public DataTemplate ItemTemplate
+        {
+            get => (DataTemplate)GetValue(ItemTemplateProperty);
+            set => SetValue(ItemTemplateProperty, value);
+        }
+
+        public static readonly DependencyProperty ItemTemplateSelectorProperty =
+            DependencyProperty.Register(nameof(ItemTemplateSelector), typeof(DataTemplateSelector), typeof(SmartComboBox), new PropertyMetadata(null));
+
+        public DataTemplateSelector ItemTemplateSelector
+        {
+            get => (DataTemplateSelector)GetValue(ItemTemplateSelectorProperty);
+            set => SetValue(ItemTemplateSelectorProperty, value);
+        }
+
+        public static readonly DependencyProperty PopupAnimationProperty =
+            DependencyProperty.Register(nameof(PopupAnimation), typeof(PopupAnimation), typeof(SmartComboBox), new PropertyMetadata(PopupAnimation.None));
+
+        public PopupAnimation PopupAnimation
+        {
+            get => (PopupAnimation)GetValue(PopupAnimationProperty);
+            set => SetValue(PopupAnimationProperty, value);
+        }
+
+        public static readonly DependencyProperty StaysOpenProperty =
+            DependencyProperty.Register(nameof(StaysOpen), typeof(bool), typeof(SmartComboBox), new PropertyMetadata(false));
+
+        public bool StaysOpen
+        {
+            get => (bool)GetValue(StaysOpenProperty);
+            set => SetValue(StaysOpenProperty, value);
+        }
+
+        public static readonly DependencyProperty MaxDropDownHeightProperty =
+            DependencyProperty.Register(nameof(MaxDropDownHeight), typeof(double), typeof(SmartComboBox), new PropertyMetadata(200.0));
+
+        public double MaxDropDownHeight
+        {
+            get => (double)GetValue(MaxDropDownHeightProperty);
+            set => SetValue(MaxDropDownHeightProperty, value);
+        }
+
+        public static readonly DependencyProperty DropDownOpenedEventProperty =
+            DependencyProperty.Register(nameof(DropDownOpenedEvent), typeof(RoutedEventHandler), typeof(SmartComboBox), new PropertyMetadata(null));
+
+        public RoutedEventHandler DropDownOpenedEvent
+        {
+            get => (RoutedEventHandler)GetValue(DropDownOpenedEventProperty);
+            set => SetValue(DropDownOpenedEventProperty, value);
+        }
+
+        public static readonly DependencyProperty DropDownClosedEventProperty =
+            DependencyProperty.Register(nameof(DropDownClosedEvent), typeof(RoutedEventHandler), typeof(SmartComboBox), new PropertyMetadata(null));
+
+        public RoutedEventHandler DropDownClosedEvent
+        {
+            get => (RoutedEventHandler)GetValue(DropDownClosedEventProperty);
+            set => SetValue(DropDownClosedEventProperty, value);
+        }
+
+        public static readonly DependencyProperty ConnectionStringProperty =
+     DependencyProperty.Register(nameof(ConnectionString), typeof(string), typeof(SmartComboBox), new PropertyMetadata(string.Empty));
+        public string ConnectionString
+        {
+            get => (string)GetValue(ConnectionStringProperty);
+            set => SetValue(ConnectionStringProperty, value);
+        }
+
+        public static readonly DependencyProperty RemoteQueryTemplateProperty =
+         DependencyProperty.Register(nameof(RemoteQueryTemplate), typeof(string), typeof(SmartComboBox), new PropertyMetadata(string.Empty));
+        public string RemoteQueryTemplate
+        {
+            get => (string)GetValue(RemoteQueryTemplateProperty);
+            set => SetValue(RemoteQueryTemplateProperty, value);
+        }
+
+        public static readonly DependencyProperty FilterCodeFieldProperty =
+         DependencyProperty.Register(nameof(FilterCodeField), typeof(string), typeof(SmartComboBox), new PropertyMetadata("ProductCode"));
+        public string FilterCodeField
+        {
+            get => (string)GetValue(FilterCodeFieldProperty);
+            set => SetValue(FilterCodeFieldProperty, value);
+        }
+
+        public static readonly DependencyProperty FilterNameFieldProperty =
+         DependencyProperty.Register(nameof(FilterNameField), typeof(string), typeof(SmartComboBox), new PropertyMetadata("ProductName"));
+        public string FilterNameField
+        {
+            get => (string)GetValue(FilterNameFieldProperty);
+            set => SetValue(FilterNameFieldProperty, value);
+        }
+
+        public static readonly DependencyProperty PageIndexProperty =
+         DependencyProperty.Register(nameof(PageIndex), typeof(int), typeof(SmartComboBox), new PropertyMetadata(0));
+        public int PageIndex
+        {
+            get => (int)GetValue(PageIndexProperty);
+            set => SetValue(PageIndexProperty, value);
+        }
+
+        public static readonly DependencyProperty EnableAutoScrollPagingProperty =
+         DependencyProperty.Register(nameof(EnableAutoScrollPaging), typeof(bool), typeof(SmartComboBox), new PropertyMetadata(false));
+        public bool EnableAutoScrollPaging
+        {
+            get => (bool)GetValue(EnableAutoScrollPagingProperty);
+            set => SetValue(EnableAutoScrollPagingProperty, value);
+        }
+
+        public static readonly DependencyProperty PlaceholderProperty =
+     DependencyProperty.Register(nameof(Placeholder), typeof(string), typeof(SmartComboBox), new PropertyMetadata("Type to search..."));
+        public string Placeholder
+        {
+            get => (string)GetValue(PlaceholderProperty);
+            set => SetValue(PlaceholderProperty, value);
+        }
+
+        public static readonly DependencyProperty DebounceMillisecondsProperty =
+     DependencyProperty.Register(nameof(DebounceMilliseconds), typeof(int), typeof(SmartComboBox), new PropertyMetadata(220));
+        public int DebounceMilliseconds
+        {
+            get => (int)GetValue(DebounceMillisecondsProperty);
+            set => SetValue(DebounceMillisecondsProperty, value);
+        }
+
+        // Add AutoBackgroundFill DP (optional background fill of remaining pages)
+        public static readonly DependencyProperty AutoBackgroundFillProperty =
+            DependencyProperty.Register(nameof(AutoBackgroundFill), typeof(bool), typeof(SmartComboBox), new PropertyMetadata(true)); // changed default from false to true
+        public bool AutoBackgroundFill
+        {
+            get => (bool)GetValue(AutoBackgroundFillProperty);
+            set => SetValue(AutoBackgroundFillProperty, value);
+        }
+
+        public static readonly DependencyProperty PrefetchPagesProperty =
+            DependencyProperty.Register(nameof(PrefetchPages), typeof(int), typeof(SmartComboBox), new PropertyMetadata(2));
+        public int PrefetchPages
+        {
+            get => (int)GetValue(PrefetchPagesProperty);
+            set => SetValue(PrefetchPagesProperty, value);
+        }
+        #endregion
+
+        private ScrollBar _verticalScrollBar; // vertical scrollbar within list
+        private bool _scrollDrag;
+
+        public override void OnApplyTemplate()
+        {
+            System.Diagnostics.Debug.WriteLine("[SmartComboBox] OnApplyTemplate called.");
+            base.OnApplyTemplate();
+
+            _textBox = GetTemplateChild("PART_TextBox") as TextBox;
+            System.Diagnostics.Debug.WriteLine($"[SmartComboBox] _textBox is {(_textBox == null ? "null" : "not null")} ");
+
+            _listBox = GetTemplateChild("PART_ListBox") as ListBox;
+            _button = GetTemplateChild("PART_Button") as Button;
+            _popup = GetTemplateChild("PART_Popup") as Popup;
+            _busyText = GetTemplateChild("PART_BusyText") as TextBlock;
+            _loadMoreButton = GetTemplateChild("PART_LoadMore") as Button;
+            _listBorder = GetTemplateChild("PART_ListBorder") as Border;
+
+            if (_popup != null)
+            {
+                _popup.StaysOpen = true; // ensure popup does not auto-close when focus changes
+            }
+
+            if (_listBox != null)
+            {
+                _listBox.ItemsSource = _currentItems;
+                // Commit selection on mouse click and enable keyboard commit from list
+                _listBox.PreviewMouseLeftButtonUp -= ListBox_PreviewMouseLeftButtonUp;
+                _listBox.PreviewMouseLeftButtonUp += ListBox_PreviewMouseLeftButtonUp;
+                _listBox.PreviewKeyDown -= ListBox_PreviewKeyDown;
+                _listBox.PreviewKeyDown += ListBox_PreviewKeyDown;
+                // Hook Loaded to acquire ScrollViewer for auto-paging
+                _listBox.Loaded -= ListBox_Loaded;
+                _listBox.Loaded += ListBox_Loaded;
+            }
+
+            if (_textBox != null)
+            {
+                _textBox.PreviewKeyDown += TextBox_PreviewKeyDown;
+                _textBox.KeyDown += TextBox_KeyDown;
+                _textBox.TextChanged += TextBox_TextChanged; // trigger filter on typing
+                _textBox.GotFocus += (s, e) => System.Diagnostics.Debug.WriteLine("[SmartComboBox] _textBox GotFocus");
+            }
+            if (_button != null)
+            {
+                _button.Click -= DropButton_Click;
+                _button.Click += DropButton_Click;
+            }
+            if (_popup != null)
+            {
+                _popup.Opened -= Popup_Opened;
+                _popup.Closed -= Popup_Closed;
+                _popup.Opened += Popup_Opened;
+                _popup.Closed += Popup_Closed;
+            }
+
+            if (_loadMoreButton != null)
+            {
+                _loadMoreButton.Click -= LoadMoreButton_Click;
+                _loadMoreButton.Click += LoadMoreButton_Click;
+            }
+
+            // Keep DP and popup in sync on template reapply
+            SyncPopupOpenState(IsDropDownOpen);
+
+            BuildLocalMasterFromItemsSource();
+            TrySelectBySelectedValue();
+            TrySelectBySelectedItem();
+            UpdateLoadMoreVisibility();
+        }
+
+        private void EnsureDebounce()
+        {
+            if (_debounce == null)
+            {
+                _debounce = new DispatcherTimer(DispatcherPriority.Background)
+                {
+                    Interval = TimeSpan.FromMilliseconds(Math.Max(0, DebounceMilliseconds))
+                };
+                _debounce.Tick += (s, e) =>
+                {
+                    _debounce.Stop();
+                    var txt = _textBox?.Text ?? string.Empty;
+                    Text = txt; // keep DP in sync for triggers
+
+                    var trimmed = (txt ?? string.Empty).Trim();
+                    if (ShowAllOnBlank && string.IsNullOrEmpty(trimmed))
+                    {
+                        EnsureDropDownAndSearch(trimmed, forceOpen: true);
+                    }
+                    else if (ShouldActivateDropDown(txt))
+                    {
+                        EnsureDropDownAndSearch(txt);
+                    }
+                    else
+                    {
+                        // below threshold, optionally close dropdown
+                        IsDropDownOpen = false;
+                    }
+                };
+            }
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            // Debounce filtering while typing
+            EnsureDebounce();
+            _debounce.Stop();
+            _debounce.Interval = TimeSpan.FromMilliseconds(Math.Max(0, DebounceMilliseconds));
+            _debounce.Start();
+        }
+
+        private void DropButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Toggle behavior: close if already open
+            if ((_popup?.IsOpen ?? false) || IsDropDownOpen)
+            {
+                ClosePopup();
+                return;
+            }
+            _lastFilter = string.Empty; // Reset filter to force refresh
+            var txt = _textBox?.Text ?? string.Empty;
+            EnsureDropDownAndSearch(txt, forceOpen: true);
+        }
+
+        private void TextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine($"[SmartComboBox] TextBox_KeyDown: Key={e.Key}, IsDown={e.IsDown}, IsUp={e.IsUp}");
+            if (e.Key == Key.Down)
+            {
+                System.Diagnostics.Debug.WriteLine("[SmartComboBox] TextBox_KeyDown DOWN ARROW PRESSED!");
+            }
+            // Handle commit on Enter
+            if (e.Key == Key.Enter)
+            {
+                CommitSelection();
+                e.Handled = true;
+                return;
+            }
+        }
+
+        private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine($"[SmartComboBox] TextBox_PreviewKeyDown: Key={e.Key}, IsDown={e.IsDown}, IsUp={e.IsUp}, Handled={e.Handled}");
+            if (e.Key == Key.Down || e.Key == Key.Up)
+            {
+                var txt = _textBox?.Text ?? string.Empty;
+                // allow showing results even if below MinSearchLength and focus list after search
+                _ignoreMinLengthOnce = true;
+                _focusListOnSearchComplete = true;
+                _pendingMoveDelta = e.Key == Key.Down ? 1 : -1;
+                EnsureDropDownAndSearch(txt, forceOpen: true);
+
+                // if items already present, move selection and focus immediately
+                if (_listBox != null && _currentItems.Count > 0)
+                {
+                    FocusListAndEnsureSelection(_pendingMoveDelta);
+                    _pendingMoveDelta = 0;
+                }
+                e.Handled = true;
+                return;
+            }
+            if (e.Key == Key.Enter)
+            {
+                CommitSelection();
+                e.Handled = true;
+                return;
+            }
+            if (e.Key == Key.Tab)
+            {
+                // Commit current highlight but let focus continue to next control
+                CommitSelection();
+                // do not set e.Handled so tab moves focus naturally
+            }
+        }
+
+        private void ListBox_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            // Commit selection when user clicks an item
+            CommitSelection();
+            e.Handled = true;
+        }
+
+        private void ListBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                CommitSelection();
+                e.Handled = true;
+                return;
+            }
+            if (e.Key == Key.Tab)
+            {
+                CommitSelection();
+                return;
+            }
+            if (e.Key == Key.Escape)
+            {
+                ClosePopup();
+                e.Handled = true;
+                return;
+            }
+            if (e.Key == Key.Home)
+            {
+                if (_currentItems.Count > 0)
+                {
+                    _listBox.SelectedIndex = 0;
+                    _listBox.ScrollIntoView(_listBox.SelectedItem);
+                }
+                e.Handled = true;
+                return;
+            }
+            if (e.Key == Key.End)
+            {
+                // If more pages remain, attempt burst fetch to reach end quickly
+                if (HasNextPage)
+                {
+                    int lastFetched = _pageCache.Keys.Where(k => k >= 0).DefaultIfEmpty(-1).Max();
+                    int burstStart = lastFetched + 1;
+                    int burst = Math.Max(1, PrefetchPages);
+                    _pagingDown = true;
+                    for (int p = burstStart; HasNextPage && p < burstStart + burst; p++)
+                    {
+                        if (_pageCache.TryGetValue(p, out var cachedPage) && cachedPage.Count > 0)
+                        {
+                            _appendInsertIndex = _currentItems.Count;
+                            AppendToCurrent(cachedPage, append: true);
+                            RecalculateHasNextRemote(p, cachedPage.Count, EffectivePageSize);
+                            continue;
+                        }
+                        _ = AppendPageAsync(p, _cts?.Token ?? CancellationToken.None);
+                    }
+                }
+                // Move selection to last currently loaded item
+                if (_currentItems.Count > 0)
+                {
+                    _listBox.SelectedIndex = _currentItems.Count - 1;
+                    _listBox.ScrollIntoView(_listBox.SelectedItem);
+                }
+                e.Handled = true;
+                return;
+            }
+            if (e.Key == Key.Up)
+            {
+                if (_listBox != null && _listBox.SelectedIndex <= 0)
+                {
+                    e.Handled = true;
+                    FocusTextBoxAtEnd();
+                    return;
+                }
+            }
+            if (e.Key == Key.PageDown)
+            {
+                e.Handled = true;
+                int itemsPerViewport = EstimateItemsPerViewport();
+                int target = Math.Min(_currentItems.Count - 1, _listBox.SelectedIndex + itemsPerViewport);
+                // If near end and more pages exist, fetch next page(s) first
+                if (HasNextPage && (_listBox.SelectedIndex >= _currentItems.Count - itemsPerViewport))
+                {
+                    _pagingDown = true;
+                    int nextIndex = _pageCache.Keys.Where(k => k >= 0).DefaultIfEmpty(-1).Max() + 1;
+                    if (nextIndex <= 0) nextIndex = 1;
+                    // Fetch multiple pages to keep scroll smooth
+                    int burst = Math.Max(1, PrefetchPages);
+                    for (int p = nextIndex; HasNextPage && p < nextIndex + burst; p++)
+                    {
+                        if (_pageCache.TryGetValue(p, out var cached) && cached.Count > 0)
+                        {
+                            _appendInsertIndex = _currentItems.Count;
+                            AppendToCurrent(cached, append: true);
+                            RecalculateHasNextRemote(p, cached.Count, EffectivePageSize);
+                        }
+                        else
+                        {
+                            _ = AppendPageAsync(p, _cts?.Token ?? CancellationToken.None);
+                        }
+                    }
+                    target = _currentItems.Count - 1; // move to last appended
+                }
+                _listBox.SelectedIndex = target;
+                _listBox.ScrollIntoView(_listBox.SelectedItem);
+                return;
+            }
+            if (e.Key == Key.PageUp)
+            {
+                e.Handled = true;
+                int itemsPerViewport = EstimateItemsPerViewport();
+                int target = Math.Max(0, _listBox.SelectedIndex - itemsPerViewport);
+                _listBox.SelectedIndex = target;
+                _listBox.ScrollIntoView(_listBox.SelectedItem);
+                if (target == 0)
+                {
+                    FocusTextBoxAtEnd();
+                }
+                return;
+            }
+            if (e.Key == Key.Down)
+            {
+                var now = DateTime.UtcNow;
+                bool rapid = (now - _lastDownKeyTime).TotalMilliseconds <= RapidDownThresholdMs;
+                _lastDownKeyTime = now;
+
+                // If already at last item and no more pages, consume key and keep anchored
+                if (_listBox != null && _listBox.SelectedIndex == _currentItems.Count - 1 && !HasNextPage)
+                {
+                    _listBox.SelectedIndex = _currentItems.Count - 1;
+                    if (_listBox.SelectedItem != null)
+                        _listBox.ScrollIntoView(_listBox.SelectedItem);
+                    e.Handled = true;
+                    return;
+                }
+                // Rapid down and near end: proactively fetch next page(s)
+                if (rapid && HasNextPage && _listBox.SelectedIndex >= _currentItems.Count - 3)
+                {
+                    int nextIndex = _pageCache.Keys.Where(k => k >= 0).DefaultIfEmpty(-1).Max() + 1;
+                    if (nextIndex <= 0) nextIndex = 1;
+                    int burst = Math.Max(1, PrefetchPages);
+                    for (int p = nextIndex; HasNextPage && p < nextIndex + burst; p++)
+                    {
+                        if (_pageCache.TryGetValue(p, out var cachedRapid) && cachedRapid.Count > 0)
+                        {
+                            _appendInsertIndex = _currentItems.Count;
+                            AppendToCurrent(cachedRapid, append: true);
+                            RecalculateHasNextRemote(p, cachedRapid.Count, EffectivePageSize);
+                        }
+                        else
+                        {
+                            _ = AppendPageAsync(p, _cts?.Token ?? CancellationToken.None);
+                        }
+                    }
+                }
+                // When at bottom and more pages available, fetch next page normal path
+                if (_listBox != null && _listBox.SelectedIndex == _currentItems.Count - 1 && HasNextPage)
+                {
+                    e.Handled = true;
+                    _pagingDown = true;
+                    int nextIndex = _pageCache.Keys.Where(k => k >= 0).DefaultIfEmpty(-1).Max() + 1;
+                    if (nextIndex <= 0) nextIndex = 1;
+                    if (_pageCache.TryGetValue(nextIndex, out var cached))
+                    {
+                        if (cached.Count > 0)
+                        {
+                            _appendInsertIndex = _currentItems.Count;
+                            AppendToCurrent(cached, append: true);
+                            UpdateHasNext(nextIndex, cached.Count, EffectivePageSize);
+                        }
+                    }
+                    else
+                    {
+                        _ = AppendPageAsync(nextIndex, _cts?.Token ?? CancellationToken.None);
+                    }
+                    return;
+                }
+            }
+            // Let other navigation keys use default behavior
+        }
+
+        private int EstimateItemsPerViewport()
+        {
+            if (_scrollViewer == null || _listBox == null || _currentItems.Count == 0) return 10;
+            int probeIndex = Math.Min(_listBox.SelectedIndex >= 0 ? _listBox.SelectedIndex : 0, _currentItems.Count - 1);
+            var container = _listBox.ItemContainerGenerator.ContainerFromIndex(probeIndex) as ListBoxItem;
+            double itemHeight = container?.ActualHeight ?? 18.0;
+            double viewport = _scrollViewer.ViewportHeight > 0 ? _scrollViewer.ViewportHeight : 200.0;
+            int per = (int)Math.Max(1, Math.Floor(viewport / itemHeight));
+            return per;
+        }
+        #region Missing Helpers Restored
+        public void SetError(string message)
+        {
+            HasError = true;
+            ErrorMessage = message ?? string.Empty;
+        }
+        public void ClearError()
+        {
+            HasError = false;
+            ErrorMessage = string.Empty;
+        }
+        private void SyncPopupOpenState(bool open)
+        {
+            if (_popup == null) return;
+            if (_popup.IsOpen == open) return;
+            _ignorePopupSync = true;
+            _popup.IsOpen = open;
+            _ignorePopupSync = false;
+        }
+        private bool ShouldActivateDropDown(string txt)
+        {
+            return (txt?.Trim().Length ?? 0) >= MinSearchLength || _ignoreMinLengthOnce;
+        }
+        private void BuildLocalMasterFromItemsSource()
+        {
+            _localMaster.Clear();
+            if (ItemsSource == null) return;
+            foreach (var item in ItemsSource)
+            {
+                var rec = ComboRecord.FromUnknown(item);
+                if (rec != null) _localMaster.Add(rec);
+            }
+        }
+        private void UpdateSelectedValueFromRecord(ComboRecord rec)
+        {
+            if (rec == null || string.IsNullOrEmpty(SelectedValuePath)) return;
+            SelectedValue = GetValueByPath(rec, SelectedValuePath);
+        }
+        private void EnsureDropDownAndSearch(string txt, bool forceOpen = false)
+        {
+            bool shouldOpen = forceOpen || ShouldActivateDropDown(txt) || (ShowAllOnBlank && string.IsNullOrWhiteSpace(txt));
+            if (!shouldOpen) return;
+            OpenPopup();
+            // start new search if filter changed
+            if (!string.Equals(_lastFilter, (txt ?? string.Empty).Trim(), StringComparison.Ordinal) || _currentItems.Count == 0)
+            {
+                _ = StartSearchAsync(txt ?? string.Empty);
+            }
+        }
+        private async Task StartSearchAsync(string filter)
+        {
+            var old = Interlocked.Exchange(ref _cts, new CancellationTokenSource());
+            try { old?.Cancel(); old?.Dispose(); } catch { }
+            _lastFilter = (filter ?? string.Empty).Trim();
+            _currentItems.Clear();
+            _pageCache.Clear();
+            _forceFirstSelectionOnLoad = false;
+            HasNextPage = false;
+            await RunInitialSearchAsync(_lastFilter, _cts.Token);
+        }
+        private async Task RunInitialSearchAsync(string filter, CancellationToken token)
+        {
+            if (token.IsCancellationRequested) return;
+            if (filter.Length < MinSearchLength && !(ShowAllOnBlank && string.IsNullOrEmpty(filter)) && !_ignoreMinLengthOnce)
+            {
+                HasNextPage = false;
+                return;
+            }
+            await AppendPageAsync(0, token);
+            if (_listBox != null && _currentItems.Count > 0 && _listBox.SelectedIndex < 0)
+            {
+                _listBox.SelectedIndex = 0;
+                var first = _currentItems[0];
+                SelectedId = first.IdNo;
+                SelectedCode = first.Code;
+                SelectedName = first.Name;
+                UpdateSelectedValueFromRecord(first);
+                _updatingSelectedItem = true;
+                try { SelectedItem = first.Raw ?? (object)first; }
+                finally { _updatingSelectedItem = false; }
+                _listBox.ScrollIntoView(first);
+            }
+            _ignoreMinLengthOnce = false; // reset after initial search
+            if (_focusListOnSearchComplete && _pendingMoveDelta != 0)
+            {
+                FocusListAndEnsureSelection(_pendingMoveDelta);
+                _pendingMoveDelta = 0;
+                _focusListOnSearchComplete = false;
+            }
+        }
+        private void AppendToCurrent(IEnumerable<ComboRecord> records, bool append)
+        {
+            var list = records?.ToList() ?? new List<ComboRecord>();
+            if (!append) _currentItems.ReplaceAll(list); else _currentItems.AddRange(list);
+            if (_listBox != null && _listBox.SelectedIndex < 0 && _currentItems.Count > 0)
+            {
+                _listBox.SelectedIndex = 0;
+            }
+        }
+        private void FocusTextBoxAtEnd()
+        {
+            if (_textBox == null) return;
+            _textBox.Focus();
+            int len = _textBox.Text?.Length ?? 0;
+            _textBox.CaretIndex = len;
+            _textBox.Select(len, 0);
+        }
+        private void ListBox_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (_listBox == null) return;
+            _scrollViewer = FindDescendant<ScrollViewer>(_listBox);
+            if (_scrollViewer != null)
+            {
+                _scrollViewer.ScrollChanged -= ScrollViewer_ScrollChanged;
+                _scrollViewer.ScrollChanged += ScrollViewer_ScrollChanged;
+                _verticalScrollBar ??= FindDescendant<ScrollBar>(_scrollViewer);
+                if (_verticalScrollBar != null)
+                {
+                    // Base mouse handlers
+                    _verticalScrollBar.PreviewMouseLeftButtonDown -= ScrollBar_PreviewMouseLeftButtonDown;
+                    _verticalScrollBar.PreviewMouseLeftButtonDown += ScrollBar_PreviewMouseLeftButtonDown;
+                    _verticalScrollBar.PreviewMouseLeftButtonUp -= ScrollBar_PreviewMouseLeftButtonUp;
+                    _verticalScrollBar.PreviewMouseLeftButtonUp += ScrollBar_PreviewMouseLeftButtonUp;
+                    _verticalScrollBar.LostMouseCapture -= ScrollBar_LostMouseCapture;
+                    _verticalScrollBar.LostMouseCapture += ScrollBar_LostMouseCapture;
+                    _verticalScrollBar.MouseLeave -= ScrollBar_MouseLeave;
+                    _verticalScrollBar.MouseLeave += ScrollBar_MouseLeave;
+
+                    // Hook Thumb drag events for more precise tracking
+                    var track = _verticalScrollBar.Template?.FindName("PART_Track", _verticalScrollBar) as Track;
+                    var thumb = track?.Thumb;
+                    if (thumb != null)
+                    {
+                        thumb.DragStarted -= Thumb_DragStarted;
+                        thumb.DragStarted += Thumb_DragStarted;
+                        thumb.DragCompleted -= Thumb_DragCompleted;
+                        thumb.DragCompleted += Thumb_DragCompleted;
+                    }
+                }
+            }
+        }
+
+        // Centralized flag update
+        private void SetScrollDrag(bool isDragging)
+        {
+            _scrollDrag = isDragging;
+        }
+
+        private void ScrollBar_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            // Only set drag if actual Thumb is involved (prevents clicks in track from latching drag state)
+            if (IsThumbSource(e.OriginalSource))
+                SetScrollDrag(true);
+        }
+
+        private void ScrollBar_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            // Mouse up ends drag; schedule reopen if it was closed mid drag (handled elsewhere)
+            SetScrollDrag(false);
+        }
+
+        private void ScrollBar_LostMouseCapture(object sender, MouseEventArgs e)
+        {
+            SetScrollDrag(false);
+        }
+
+        private void ScrollBar_MouseLeave(object sender, MouseEventArgs e)
+        {
+            // If mouse leaves while still holding button, keep drag; otherwise clear
+            if (!Mouse.LeftButton.HasFlag(MouseButtonState.Pressed))
+                SetScrollDrag(false);
+        }
+
+        private void Thumb_DragStarted(object sender, DragStartedEventArgs e)
+        {
+            SetScrollDrag(true);
+        }
+
+        private void Thumb_DragCompleted(object sender, DragCompletedEventArgs e)
+        {
+            SetScrollDrag(false);
+        }
+
+        private bool IsThumbSource(object source)
+        {
+            if (source is Thumb) return true;
+            var dep = source as DependencyObject;
+            while (dep != null)
+            {
+                if (dep is Thumb) return true;
+                dep = VisualTreeHelper.GetParent(dep);
+            }
+            return false;
+        }
+
+        private void Popup_Closed(object sender, EventArgs e)
+        {
+            DropDownClosedEvent?.Invoke(this, new RoutedEventArgs());
+
+            if (_scrollDrag)
+            {
+                // Capture current drag state then clear to avoid repeated reopen loops
+                bool wasDragging = _scrollDrag;
+                SetScrollDrag(false);
+
+                Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    if (wasDragging && _popup != null && !_popup.IsOpen)
+                    {
+                        OpenPopup();
+                    }
+                }), DispatcherPriority.Background);
+            }
+        }
+        #endregion // Missing Helpers Restored
+
+        // ================= Missing implementations added =================
+        private static void OnItemsSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is not SmartComboBox scb) return;
+            scb.BuildLocalMasterFromItemsSource();
+            scb.ClearError();
+            scb._pageCache.Clear();
+            scb.HasNextPage = false;
+            scb.TrySelectBySelectedValue();
+            scb.TrySelectBySelectedItem();
+            scb.UpdateLoadMoreVisibility();
+        }
+
+        private static void OnSelectedItemChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is not SmartComboBox scb) return;
+            if (scb._updatingSelectedItem) return;
+            scb.TrySelectBySelectedItem(e.NewValue);
+        }
+
+        private static void OnSelectedValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is not SmartComboBox scb) return;
+            if (scb._updatingSelectedItem) return;
+            scb.TrySelectBySelectedValue();
+        }
+
+        private void Popup_Opened(object sender, EventArgs e)
+        {
+            DropDownOpenedEvent?.Invoke(this, new RoutedEventArgs());
+            UpdateLoadMoreVisibility();
+        }
+
+        private void LoadMoreButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!HasNextPage) return;
+            _pagingDown = true;
+            int nextIndex = _pageCache.Keys.Where(k => k >= 0).DefaultIfEmpty(-1).Max() + 1;
+            if (nextIndex <= 0) nextIndex = 1;
+            if (_pageCache.TryGetValue(nextIndex, out var cached) && cached.Count > 0)
+            {
+                _appendInsertIndex = _currentItems.Count;
+                AppendToCurrent(cached, append: true);
+                UpdateHasNext(nextIndex, cached.Count, EffectivePageSize);
+            }
+            else
+            {
+                _ = AppendPageAsync(nextIndex, _cts?.Token ?? CancellationToken.None);
+            }
+        }
+
+        private void UpdateLoadMoreVisibility()
+        {
+            if (_loadMoreButton == null) return;
+            _loadMoreButton.Visibility = HasNextPage ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private void OpenPopup()
+        {
+            IsDropDownOpen = true;
+            if (_popup != null && !_popup.IsOpen) _popup.IsOpen = true;
+        }
+
+        private void ClosePopup()
+        {
+            IsDropDownOpen = false;
+            if (_popup != null && _popup.IsOpen) _popup.IsOpen = false;
+        }
+
+        private void FocusListAndEnsureSelection(int moveDelta)
+        {
+            if (_listBox == null) return;
+            if (_currentItems.Count == 0) return;
+            if (_listBox.SelectedIndex < 0) _listBox.SelectedIndex = 0;
+            int newIndex = _listBox.SelectedIndex + moveDelta;
+            newIndex = Math.Max(0, Math.Min(_currentItems.Count - 1, newIndex));
+            _listBox.SelectedIndex = newIndex;
+            _listBox.Focus();
+            _listBox.ScrollIntoView(_listBox.SelectedItem);
+        }
+
+        private void CurrentItems_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (_suspendCollectionChangedEvents) return;
+            if (_focusListOnSearchComplete && _pendingMoveDelta != 0 && _currentItems.Count > 0)
+            {
+                FocusListAndEnsureSelection(_pendingMoveDelta);
+                _pendingMoveDelta = 0;
+                _focusListOnSearchComplete = false;
+            }
+        }
+
+        private void ScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        {
+            if (!EnableAutoScrollPaging) return;
+            if (!HasNextPage) return;
+            // Near bottom?
+            double remaining = e.ExtentHeight - (e.VerticalOffset + e.ViewportHeight);
+            if (remaining <= 5) // threshold
+            {
+                if (_pendingPageDown) return;
+                _pendingPageDown = true;
+                _pagingDown = true;
+                int nextIndex = _pageCache.Keys.Where(k => k >= 0).DefaultIfEmpty(-1).Max() + 1;
+                if (nextIndex <= 0) nextIndex = 1;
+                _ = AppendPageAsync(nextIndex, _cts?.Token ?? CancellationToken.None).ContinueWith(_ =>
+                {
+                    _pendingPageDown = false;
+                }, TaskScheduler.FromCurrentSynchronizationContext());
+            }
+        }
+
+        private static T FindDescendant<T>(DependencyObject root) where T : DependencyObject
+        {
+            if (root == null) return null;
+            int count = VisualTreeHelper.GetChildrenCount(root);
+            for (int i = 0; i < count; i++)
+            {
+                var child = VisualTreeHelper.GetChild(root, i);
+                if (child is T wanted) return wanted;
+                var deeper = FindDescendant<T>(child);
+                if (deeper != null) return deeper;
+            }
+            return null;
+        }
+        // ================================================================
+    }
+}
