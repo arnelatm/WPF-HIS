@@ -188,6 +188,8 @@ Namespace PresentationLayer.Presenters
             Dim maxRecord As PayrollModel
             Dim payMonthText As String = "Payroll for the Month of"
             Dim PayrollText As String = "Payroll for the Period"
+            View.PayrollAttendance = New List(Of AttendanceItemView)
+            View.PayrollOvertime = New List(Of OtWorkHourView)
             nIdNoMax = Service.GetFieldOnMaxField("EndDate", "Payroll", "IdNo", "PayCycleIdNo = 1") ' + View.PayCycleIdNo.ToString())
             If nIdNoMax = 0 Then
                 Dim now As Date = Today()
@@ -213,6 +215,17 @@ Namespace PresentationLayer.Presenters
                 View.PayrollNameAra = Messaging.TranslateCaption(PayrollText, "ar-SA") & " " & GetMonthNamesInCulture(arabicCulture)(Month(View.EndDate)) & " " & Year(View.EndDate).ToString()
             End If
             View.PayrollCode = "M" + CDate(View.EndDate).ToString("yyMM")
+        End Sub
+
+        Private Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
+            If View.IdNo <= 0 Then
+                View.PayrollAttendance = New List(Of AttendanceItemView)
+                View.PayrollOvertime = New List(Of OtWorkHourView)
+                Return
+            End If
+
+            View.PayrollAttendance = _attendanceItemService.GetRecordsWithGroupIdNo(Of AttendanceItemView)(View.IdNo, "Sequence")
+            View.PayrollOvertime = _otWorkHourService.GetRecordsWithGroupIdNo(Of OtWorkHourView)(View.IdNo, "Sequence")
         End Sub
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave

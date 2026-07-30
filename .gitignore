@@ -10,6 +10,11 @@ packages/
 TestResults/
 Logs/
 *.log
+_verify_build/
+old .vs/
+.vs.bad-gt-cache-*/
+*.bundle
+*.patch
 WPF-HIS-github-verify/
 WPF-HIS-origin-verify/
 WPF-HIS-verify/
