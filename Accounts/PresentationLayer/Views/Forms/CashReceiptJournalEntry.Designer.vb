@@ -1597,7 +1597,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'btnViewGL
             '
-            Me.btnViewGL.DesignerSelected = False
+            Me.btnViewGL.DesignerSelected = True
             resources.ApplyResources(Me.btnViewGL, "btnViewGL")
             Me.btnViewGL.ImageIndex = 0
             Me.btnViewGL.Name = "btnViewGL"

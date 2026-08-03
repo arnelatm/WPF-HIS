@@ -21,6 +21,8 @@ Namespace PresentationLayer.Views.Forms
         Private _jiFooter As DgvFooter
         Private _journalItems As List(Of JournalItemView)
         Private _defaultAccount As Int16
+        Private ReadOnly _txtAccountIdNoDisplay As TextBox
+        Private ReadOnly _txtDiscountAccountIdNoDisplay As TextBox
 
         Public Event AutoApplyAmount(bsDjOiItem As BindingSource) Implements ICashReceiptJournalView.AutoApplyAmount
         Public Event AddCustomerOpenInvoices() Implements ICashReceiptJournalView.AddCustomerOpenInvoices
@@ -33,6 +35,8 @@ Namespace PresentationLayer.Views.Forms
             ' This call is required by the designer.
             InitializeComponent()
             ' Add any initialization after the InitializeComponent() call.
+            _txtAccountIdNoDisplay = CreateLookupDisplayTextBox(cboAccountIdNo)
+            _txtDiscountAccountIdNoDisplay = CreateLookupDisplayTextBox(cboDiscountAccountIdNo)
             FirstControl = cboPayorType
             _nfi.NumberDecimalDigits = 2
             _payorOrigWidth = Math.Max(cboPayorIdNo.Width, floPayor.Width - cboPayorIdNo.Margin.Horizontal)
@@ -79,6 +83,7 @@ Namespace PresentationLayer.Views.Forms
             Set
                 _currentAccountIdNo = Value
                 cboAccountIdNo.SetValue(Value)
+                SetLookupDisplayText(_txtAccountIdNoDisplay, cboAccountIdNo, Value)
             End Set
         End Property
 
@@ -152,6 +157,7 @@ Namespace PresentationLayer.Views.Forms
             Set
                 _currentDiscountAccountIdNo = Value
                 cboDiscountAccountIdNo.SetValue(Value)
+                SetLookupDisplayText(_txtDiscountAccountIdNoDisplay, cboDiscountAccountIdNo, Value)
             End Set
         End Property
 
@@ -421,6 +427,7 @@ Namespace PresentationLayer.Views.Forms
             End If
             BindCsrOiItem()
             BindJournalItem()
+            FitGridsToJournalItemsPanel()
         End Sub
 
         Private Sub BindCsrOiItem()
@@ -447,6 +454,7 @@ Namespace PresentationLayer.Views.Forms
                 End If
             End With
             UpdateTotals()
+            FitGridsToJournalItemsPanel()
             ResumeLayout()
         End Sub
 
@@ -473,6 +481,7 @@ Namespace PresentationLayer.Views.Forms
                 dgvRevCostCenterIdNo.ValueMember = "idNo"
                 dgvRevCostCenterIdNo.DisplayStyleForCurrentCellOnly = True
             End With
+            FitGridsToJournalItemsPanel()
             ResumeLayout()
         End Sub
 
@@ -690,7 +699,7 @@ Namespace PresentationLayer.Views.Forms
                 btnViewGL.Text = Messaging.TranslateCaption("View Journal Entry")
                 ShowOpenInvoicesDataGrid()
             Else
-                btnViewGL.Text = Messaging.TranslateCaption("Show Journal Entry")
+                btnViewGL.Text = Messaging.TranslateCaption("Hide Journal Entry")
                 ShowJournalItemDataGrid()
             End If
         End Sub
@@ -711,6 +720,7 @@ Namespace PresentationLayer.Views.Forms
                 DiscountTaken = 0
             End If
             ShowPayor()
+            UpdateHeaderLookupDisplay()
             UpdateTotals()
             If Presenter.EditMode Or Presenter.AddMode Then
                 If OpenInvoiceMode Then
@@ -720,6 +730,43 @@ Namespace PresentationLayer.Views.Forms
                 End If
             End If
             ResumeLayout()
+        End Sub
+
+        Private Function CreateLookupDisplayTextBox(combo As CtComboBox) As TextBox
+            Dim displayTextBox = New TextBox With {
+                .Anchor = combo.Anchor,
+                .BackColor = combo.BackColor,
+                .BorderStyle = BorderStyle.FixedSingle,
+                .Font = combo.Font,
+                .ForeColor = combo.ForeColor,
+                .Margin = combo.Margin,
+                .ReadOnly = True,
+                .TabStop = False,
+                .Visible = False
+            }
+
+            TableLayoutPanel1.Controls.Add(displayTextBox, TableLayoutPanel1.GetColumn(combo), TableLayoutPanel1.GetRow(combo))
+            TableLayoutPanel1.SetColumnSpan(displayTextBox, TableLayoutPanel1.GetColumnSpan(combo))
+            displayTextBox.Size = combo.Size
+            Return displayTextBox
+        End Function
+
+        Private Sub UpdateHeaderLookupDisplay()
+            If _txtAccountIdNoDisplay Is Nothing OrElse _txtDiscountAccountIdNoDisplay Is Nothing Then
+                Return
+            End If
+
+            Dim showLookup = Presenter.EditMode OrElse Presenter.AddMode
+            UpdateLookupDisplay(cboAccountIdNo, _txtAccountIdNoDisplay, CurrentAccountToDebitIdNo(), showLookup)
+            UpdateLookupDisplay(cboDiscountAccountIdNo, _txtDiscountAccountIdNoDisplay, _currentDiscountAccountIdNo, showLookup)
+        End Sub
+
+        Private Sub UpdateLookupDisplay(combo As CtComboBox, displayTextBox As TextBox, value As Int16?, showLookup As Boolean)
+            combo.Visible = showLookup
+            displayTextBox.Visible = Not showLookup
+            If Not showLookup Then
+                SetLookupDisplayText(displayTextBox, combo, value)
+            End If
         End Sub
 
         Private Sub ShowPayor()
@@ -755,8 +802,8 @@ Namespace PresentationLayer.Views.Forms
         End Function
 
         Private Sub OnInputsTurnedOff() Handles MyBase.InputsTurnedOff
-            RestoreHeaderLookupSelections()
             ShowPayor()
+            UpdateHeaderLookupDisplay()
             If OpenInvoiceMode Then
                 btnViewGL.Visible = True
                 btnViewGL.Text = Messaging.TranslateCaption("View Journal Entry")
@@ -766,44 +813,87 @@ Namespace PresentationLayer.Views.Forms
             btnAutoApply.Visible = False
         End Sub
 
-        Private Sub RestoreHeaderLookupSelections()
-            RestoreComboSelection(cboAccountIdNo, _currentAccountIdNo)
-            RestoreComboSelection(cboDiscountAccountIdNo, _currentDiscountAccountIdNo)
+        Private Sub FitGridsToJournalItemsPanel()
+            FitGridToParent(DataGridViewJournalItems)
+            FitGridToParent(DataGridViewCsrOiItems)
         End Sub
 
-        Private Sub RestoreComboSelection(combo As CtComboBox, value As Int16?)
+        Private Sub FitGridToParent(grid As CtDataGridView)
+            If grid Is Nothing OrElse grid.Parent Is Nothing Then
+                Return
+            End If
+
+            Dim width = grid.Parent.ClientSize.Width - grid.Margin.Horizontal
+            Dim height = grid.Parent.ClientSize.Height - grid.Margin.Vertical
+            If width > 0 Then
+                grid.Width = width
+            End If
+            If height > 0 Then
+                grid.Height = height
+            End If
+        End Sub
+
+        Private Sub FloPurchaseJournalItems_Resize(sender As Object, e As EventArgs) Handles floPurchaseJournalItems.Resize
+            FitGridsToJournalItemsPanel()
+        End Sub
+
+        Private Function CurrentAccountToDebitIdNo() As Int16?
+            If _currentAccountIdNo.HasValue AndAlso _currentAccountIdNo.Value > 0 Then
+                Return _currentAccountIdNo
+            End If
+            If JournalItems IsNot Nothing Then
+                For Each item In JournalItems.OrderBy(Function(ji) ji.Sequence)
+                    If item.AccountIdNo.HasValue AndAlso item.AccountIdNo.Value > 0 AndAlso item.Debit <> 0 Then
+                        _currentAccountIdNo = item.AccountIdNo
+                        Return _currentAccountIdNo
+                    End If
+                Next
+                For Each item In JournalItems.OrderBy(Function(ji) ji.Sequence)
+                    If item.AccountIdNo.HasValue AndAlso item.AccountIdNo.Value > 0 Then
+                        _currentAccountIdNo = item.AccountIdNo
+                        Return _currentAccountIdNo
+                    End If
+                Next
+            End If
+            Return _currentAccountIdNo
+        End Function
+
+        Private Sub SetLookupDisplayText(displayTextBox As TextBox, combo As CtComboBox, value As Int16?)
+            If displayTextBox Is Nothing Then
+                Return
+            End If
+
+            displayTextBox.Text = GetLookupDisplayText(combo, value)
+        End Sub
+
+        Private Function GetLookupDisplayText(combo As CtComboBox, value As Int16?) As String
             If Not value.HasValue Then
-                combo.SelectedIndex = -1
-                Return
-            End If
-
-            combo.SetValue(value.Value)
-            If combo.SelectedIndex <> -1 Then
-                SetComboDisplayText(combo)
-                Return
-            End If
-
-            Dim table = TryCast(combo.DataSource, System.Data.DataTable)
-            If table Is Nothing Then
-                Return
+                Return ""
             End If
 
             Dim valueMember = If(String.IsNullOrEmpty(combo.ValueMember), "IdNo", combo.ValueMember)
-            For Each row As System.Data.DataRow In table.Rows
-                If row.Table.Columns.Contains(valueMember) AndAlso Not row.IsNull(valueMember) AndAlso CInt(row(valueMember)) = value.Value Then
-                    combo.SelectedValue = value.Value
-                    combo.Text = row(combo.DisplayMember).ToString()
-                    Exit For
+            Dim displayMember = combo.DisplayMember
+            For Each item As Object In combo.Items
+                Dim rowView = TryCast(item, System.Data.DataRowView)
+                If rowView IsNot Nothing AndAlso
+                   rowView.Row.Table.Columns.Contains(valueMember) AndAlso
+                   Not rowView.Row.IsNull(valueMember) AndAlso
+                   ComboValuesMatch(rowView.Row(valueMember), value.Value) Then
+                    Return If(rowView.Row.Table.Columns.Contains(displayMember), rowView.Row(displayMember).ToString(), combo.Text)
                 End If
             Next
-        End Sub
 
-        Private Sub SetComboDisplayText(combo As CtComboBox)
-            Dim rowView = TryCast(combo.SelectedItem, System.Data.DataRowView)
-            If rowView IsNot Nothing AndAlso rowView.Row.Table.Columns.Contains(combo.DisplayMember) Then
-                combo.Text = rowView.Row(combo.DisplayMember).ToString()
+            Return combo.Text
+        End Function
+
+        Private Function ComboValuesMatch(leftValue As Object, rightValue As Object) As Boolean
+            If leftValue Is Nothing OrElse leftValue Is DBNull.Value OrElse rightValue Is Nothing OrElse rightValue Is DBNull.Value Then
+                Return False
             End If
-        End Sub
+            Return String.Equals(Convert.ToString(leftValue, CultureInfo.InvariantCulture),
+                                 Convert.ToString(rightValue, CultureInfo.InvariantCulture),
+                                 StringComparison.OrdinalIgnoreCase)
+        End Function
 
         Private Sub OnInputsTurnedOn() Handles MyBase.InputsTurnedOn
             bsJournalItems.ResetBindings(False)

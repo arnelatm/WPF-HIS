@@ -16,6 +16,9 @@ Public Class DgvFooter
 
 #Region "Private Class Members"
 
+    Private Const DefaultFooterHeight As Integer = 26
+    Private Const FooterVerticalPadding As Integer = 4
+
     ''' <summary>
     ''' Holds our parent DGV, to which DGVfooter is bound to as footer.
     ''' </summary>
@@ -127,7 +130,7 @@ Public Class DgvFooter
     ''' <remarks></remarks>
     Private Sub SetBaseProperties()
         MyBase.RowHeadersVisible = False
-        Height = 22
+        Height = DefaultFooterHeight
         Width = _parentDgv.Width
         AllowUserToAddRows = False
         AllowUserToDeleteRows = False
@@ -135,6 +138,7 @@ Public Class DgvFooter
         AllowUserToResizeColumns = False
         AllowUserToResizeRows = False
         ScrollBars = ScrollBars.None
+        ColumnHeadersVisible = False
         DefaultCellStyle.SelectionBackColor = _parentDgv.DefaultCellStyle.BackColor
         DefaultCellStyle.SelectionForeColor = _parentDgv.ForeColor
         DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -142,6 +146,7 @@ Public Class DgvFooter
         Width = Width
         Dock = DockStyle.Bottom
         Show()
+        BringToFront()
 
         If _parentDgv.ColumnCount > 0 Then
             SetColumns(_parentDgv)
@@ -208,6 +213,7 @@ Public Class DgvFooter
             Exit Sub
         End If
 
+        ApplyFooterHeight()
         SetHeader()
 
         MyBase.OnRowsAdded(e)
@@ -236,6 +242,11 @@ Public Class DgvFooter
                 Columns.Remove(e.Column)
             End If
         End If
+    End Sub
+
+    Protected Overrides Sub OnFontChanged(e As EventArgs)
+        MyBase.OnFontChanged(e)
+        ApplyFooterHeight()
     End Sub
 
     ''' <summary>
@@ -402,6 +413,16 @@ Public Class DgvFooter
         Next
     End Sub
 
+    Private Sub ParentRowHeightChanged(sender As Object, e As DataGridViewRowEventArgs) Handles _parentDgv.RowHeightChanged
+        ApplyFooterHeight()
+    End Sub
+
+    Private Sub ParentSizeChanged(sender As Object, e As EventArgs) Handles _parentDgv.SizeChanged
+        ApplyFooterHeight()
+        CheckParentVScrollBar()
+        BringToFront()
+    End Sub
+
     ''' <summary>
     ''' Adds columns when columns are added to parent DGV.
     ''' </summary>
@@ -552,12 +573,29 @@ Public Class DgvFooter
     Private Sub CheckParentVScrollBar()
         Dim dgvVerticalScroll As VScrollBar = _parentDgv.Controls.OfType(Of VScrollBar).SingleOrDefault
 
-        If dgvVerticalScroll.Visible Then
+        If dgvVerticalScroll IsNot Nothing AndAlso dgvVerticalScroll.Visible Then
             Width = _parentDgv.Width + dgvVerticalScroll.Width
         Else
             Width = _parentDgv.Width
         End If
 
+    End Sub
+
+    Private Sub ApplyFooterHeight()
+        Dim rowHeight = If(_parentDgv IsNot Nothing, _parentDgv.RowTemplate.Height, 22)
+
+        If _parentDgv IsNot Nothing AndAlso _parentDgv.Rows.Count > 0 Then
+            rowHeight = Math.Max(rowHeight, _parentDgv.Rows(0).Height)
+        End If
+
+        Dim targetHeight = Math.Max(DefaultFooterHeight, rowHeight + FooterVerticalPadding)
+        If Height <> targetHeight Then
+            Height = targetHeight
+        End If
+
+        If Rows.Count > 0 AndAlso Rows(0).Height <> rowHeight Then
+            Rows(0).Height = rowHeight
+        End If
     End Sub
 
     ''' <summary>
