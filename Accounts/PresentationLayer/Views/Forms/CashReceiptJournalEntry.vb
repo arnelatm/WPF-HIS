@@ -11,9 +11,13 @@ Namespace PresentationLayer.Views.Forms
 
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
         Private ReadOnly _payorOrigWidth As Integer
+        Private ReadOnly _payorPanelOrigWidth As Integer
 
         Private _arFooter As DgvFooter
+        Private _currentAccountIdNo As Int16?
+        Private _currentDiscountAccountIdNo As Int16?
         Private _csrOiItems As List(Of CsrOiItemView)
+        Private _currentPayorType As String = ""
         Private _jiFooter As DgvFooter
         Private _journalItems As List(Of JournalItemView)
         Private _defaultAccount As Int16
@@ -31,7 +35,9 @@ Namespace PresentationLayer.Views.Forms
             ' Add any initialization after the InitializeComponent() call.
             FirstControl = cboPayorType
             _nfi.NumberDecimalDigits = 2
-            _payorOrigWidth = cboPayorIdNo.Width
+            _payorOrigWidth = Math.Max(cboPayorIdNo.Width, floPayor.Width - cboPayorIdNo.Margin.Horizontal)
+            _payorPanelOrigWidth = floPayor.Width
+            floPayor.AutoSize = False
             cboPayorIdNo.EditingMode = False
             SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
         End Sub
@@ -49,7 +55,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private ReadOnly Property OpenInvoiceMode As Boolean
             Get
-                Dim receiptTypeEnum = CodeToEnum(Of ReceiptTypeSelection)(cboPayorType.SelectedValue)
+                Dim receiptTypeEnum = CurrentReceiptType()
                 If receiptTypeEnum = ReceiptTypeSelection.AccountsReceivable Then
                     Return True
                 Else
@@ -71,6 +77,7 @@ Namespace PresentationLayer.Views.Forms
                 Return cboAccountIdNo.GetNullableValue(Of Int16)
             End Get
             Set
+                _currentAccountIdNo = Value
                 cboAccountIdNo.SetValue(Value)
             End Set
         End Property
@@ -143,6 +150,7 @@ Namespace PresentationLayer.Views.Forms
                 Return cboDiscountAccountIdNo.GetNullableValue(Of Int16)
             End Get
             Set
+                _currentDiscountAccountIdNo = Value
                 cboDiscountAccountIdNo.SetValue(Value)
             End Set
         End Property
@@ -213,6 +221,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 txtPayorName.Text = Value
+                ShowPayor()
             End Set
         End Property
 
@@ -222,6 +231,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 cboPayorType.SetValue(Value)
+                _currentPayorType = Value
             End Set
         End Property
 
@@ -254,14 +264,22 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set(value As Object)
                 _payorDataSource = value
+                Dim payorHasLookup = value IsNot Nothing
                 cboPayorIdNo.ValueMember = "IdNo"
                 cboPayorIdNo.DisplayMember = "Name"
+                If value Is Nothing Then
+                    cboPayorIdNo.PropertySelector = Function(collection) collection.Cast(Of String)()
+                ElseIf TypeOf value Is System.Data.DataTable Then
+                    cboPayorIdNo.PropertySelector = Function(collection) collection.Cast(Of System.Data.DataRowView)().
+                        Select(Function(rowView) rowView.Row("Name").ToString())
+                End If
                 cboPayorIdNo.DataSource = value
                 cboPayorIdNo.SetValue(PayorIdNo)
                 cboPayorIdNo.BackColor = cboPayorType.BackColor
                 cboPayorIdNo.MaxDropDownItems = 8
                 cboPayorIdNo.DropDownHeight = 106
                 cboPayorIdNo.Refresh()
+                SetPayorLookupMode(payorHasLookup)
             End Set
         End Property
         Public Property Posted As Boolean Implements ICashReceiptJournalView.Posted
@@ -483,7 +501,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub CboPayorIdNo_ValueChanged(sender As Object, e As EventArgs) Handles cboPayorIdNo.Validated, cboPayorIdNo.SelectedIndexChanged
-            If FormShown Then
+            If FormShown AndAlso (Presenter.EditMode OrElse Presenter.AddMode) Then
                 If OpenInvoiceMode Then
                     UpdateOpenInvoicesDisplay()
                 End If
@@ -492,7 +510,23 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub CboPayorType_ValueChanged(sender As Object, e As EventArgs) Handles cboPayorType.Validated, cboPayorType.SelectionChangeCommitted
             If FormShown Then
-                RaiseEvent ReceiptTypeChanged(PayorType)
+                Dim selectedPayorType = CurrentPayorTypeCode()
+                If Not (Presenter.EditMode OrElse Presenter.AddMode) Then
+                    _currentPayorType = selectedPayorType
+                    ShowPayor()
+                    Return
+                End If
+                If selectedPayorType = _currentPayorType AndAlso Not cboPayorType.ValueChanged() Then
+                    Return
+                End If
+                _currentPayorType = selectedPayorType
+                PayorIdNo = Nothing
+                PayorName = ""
+                If CsrOiItems IsNot Nothing Then
+                    CsrOiItems.Clear()
+                End If
+                bsCsrOiItems.Clear()
+                RaiseEvent ReceiptTypeChanged(selectedPayorType)
                 If OpenInvoiceMode Then
                     UpdateOpenInvoicesDisplay()
                     If cboPayorIdNo.SelectedIndex = -1 Then
@@ -507,7 +541,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub CboAccountIdNo_Changed(sender As Object, e As EventArgs) Handles cboAccountIdNo.Validated, cboAccountIdNo.SelectedIndexChanged
-            If FormShown Then
+            If FormShown AndAlso (Presenter.EditMode OrElse Presenter.AddMode) Then
                 UpdateFirstLine()
             End If
         End Sub
@@ -605,7 +639,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewJournalItems.UserDeletedRow
             RaiseEvent UserDeletedRow()
             UpdateTotals()
-            Dim payorTypeEnum = CodeToEnum(Of ReceiptTypeSelection)(cboPayorType.SelectedIndex)
+            Dim payorTypeEnum = CurrentReceiptType()
             If payorTypeEnum = ReceiptTypeSelection.AccountsReceivable Or payorTypeEnum = ReceiptTypeSelection.Customer Then
                 UpdateOutputVatAmount()
             ElseIf payorTypeEnum = ReceiptTypeSelection.SupplierRefund Then
@@ -689,22 +723,40 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ShowPayor()
-            Dim payorTypeEnum = CodeToEnum(Of ReceiptTypeSelection)(cboPayorType.SelectedValue)
-            If payorTypeEnum = ReceiptTypeSelection.Others Or payorTypeEnum = ReceiptTypeSelection.NotSpecified Then
-                cboPayorIdNo.Visible = False
-                txtPayorName.Visible = True
-                txtPayorName.Width = _payorOrigWidth
-                cboPayorIdNo.SelectedIndex = -1
-                cboPayorIdNo.Width = 0
-            Else
-                cboPayorIdNo.Visible = True
-                txtPayorName.Visible = False
-                cboPayorIdNo.Width = _payorOrigWidth
-                txtPayorName.Width = 0
-            End If
+            SetPayorLookupMode(PayorDataSource IsNot Nothing)
         End Sub
 
+        Private Sub SetPayorLookupMode(hasLookup As Boolean)
+            floPayor.AutoSize = False
+            floPayor.Width = Math.Max(_payorPanelOrigWidth, _payorOrigWidth)
+            cboPayorIdNo.Width = _payorOrigWidth
+            txtPayorName.Width = _payorOrigWidth
+            cboPayorIdNo.Visible = hasLookup
+            txtPayorName.Visible = Not hasLookup
+            If Not hasLookup Then
+                cboPayorIdNo.SelectedIndex = -1
+            End If
+            floPayor.PerformLayout()
+        End Sub
+
+        Private Function CurrentReceiptType() As ReceiptTypeSelection
+            Return CodeToEnum(Of ReceiptTypeSelection)(CurrentPayorTypeCode())
+        End Function
+
+        Private Function CurrentPayorTypeCode() As String
+            For Each item As Object In cboPayorType.Items
+                Dim rowView = TryCast(item, System.Data.DataRowView)
+                If rowView IsNot Nothing AndAlso String.Equals(rowView.Row("Name").ToString(), cboPayorType.Text, StringComparison.CurrentCultureIgnoreCase) Then
+                    Return rowView.Row("Code").ToString()
+                End If
+            Next
+            Dim payorTypeCode = PayorType
+            Return If(String.IsNullOrEmpty(payorTypeCode), _currentPayorType, payorTypeCode)
+        End Function
+
         Private Sub OnInputsTurnedOff() Handles MyBase.InputsTurnedOff
+            RestoreHeaderLookupSelections()
+            ShowPayor()
             If OpenInvoiceMode Then
                 btnViewGL.Visible = True
                 btnViewGL.Text = Messaging.TranslateCaption("View Journal Entry")
@@ -712,6 +764,45 @@ Namespace PresentationLayer.Views.Forms
                 btnViewGL.Visible = False
             End If
             btnAutoApply.Visible = False
+        End Sub
+
+        Private Sub RestoreHeaderLookupSelections()
+            RestoreComboSelection(cboAccountIdNo, _currentAccountIdNo)
+            RestoreComboSelection(cboDiscountAccountIdNo, _currentDiscountAccountIdNo)
+        End Sub
+
+        Private Sub RestoreComboSelection(combo As CtComboBox, value As Int16?)
+            If Not value.HasValue Then
+                combo.SelectedIndex = -1
+                Return
+            End If
+
+            combo.SetValue(value.Value)
+            If combo.SelectedIndex <> -1 Then
+                SetComboDisplayText(combo)
+                Return
+            End If
+
+            Dim table = TryCast(combo.DataSource, System.Data.DataTable)
+            If table Is Nothing Then
+                Return
+            End If
+
+            Dim valueMember = If(String.IsNullOrEmpty(combo.ValueMember), "IdNo", combo.ValueMember)
+            For Each row As System.Data.DataRow In table.Rows
+                If row.Table.Columns.Contains(valueMember) AndAlso Not row.IsNull(valueMember) AndAlso CInt(row(valueMember)) = value.Value Then
+                    combo.SelectedValue = value.Value
+                    combo.Text = row(combo.DisplayMember).ToString()
+                    Exit For
+                End If
+            Next
+        End Sub
+
+        Private Sub SetComboDisplayText(combo As CtComboBox)
+            Dim rowView = TryCast(combo.SelectedItem, System.Data.DataRowView)
+            If rowView IsNot Nothing AndAlso rowView.Row.Table.Columns.Contains(combo.DisplayMember) Then
+                combo.Text = rowView.Row(combo.DisplayMember).ToString()
+            End If
         End Sub
 
         Private Sub OnInputsTurnedOn() Handles MyBase.InputsTurnedOn

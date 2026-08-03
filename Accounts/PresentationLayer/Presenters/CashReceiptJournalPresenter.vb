@@ -112,8 +112,8 @@ Namespace PresentationLayer.Presenters
                         retVal = GetRecordFieldWithKey(EnumToCode(SpecialAccountSelection.Bank), "Account",
                                                        "SpecialAccount", "IdNo")
                         If retVal Is Nothing Then
-                            GetRecordFieldWithKey(EnumToCode(SpecialAccountSelection.Cash), "Account", "SpecialAccount",
-                                                  "IdNo")
+                            retVal = GetRecordFieldWithKey(EnumToCode(SpecialAccountSelection.Cash), "Account", "SpecialAccount",
+                                                           "IdNo")
                         End If
                     Else
                         Return 0
@@ -588,7 +588,7 @@ Namespace PresentationLayer.Presenters
         Private Function JournalItemDataIsValid() As Boolean
             Dim retValue = True
             For Each item In View.JournalItems
-                If CodeToEnum(Of PaymentTypeSelection)(View.PayorType) <> ReceiptTypeSelection.AccountsReceivable Then
+                If CodeToEnum(Of ReceiptTypeSelection)(View.PayorType) <> ReceiptTypeSelection.AccountsReceivable Then
                     If _
                         (item.AccountIdNo Is Nothing OrElse item.AccountIdNo = 0) AndAlso
                         (item.Debit <> 0 Or item.Credit <> 0) Then
@@ -1047,12 +1047,11 @@ Namespace PresentationLayer.Presenters
                     MakeVarDataSources({New Object() {"Customer", "PayorDataSource", Nothing, Nothing}})
                 Case ReceiptTypeSelection.Employee
                     MakeVarDataSources({New Object() {"Employee", "PayorDataSource", Nothing, Nothing}})
-                Case ReceiptTypeSelection.Customer, ReceiptTypeSelection.AccountsReceivable
+                Case ReceiptTypeSelection.Customer
                     MakeVarDataSources({New Object() {"Customer", "PayorDataSource", Nothing, Nothing}})
                 Case ReceiptTypeSelection.SupplierRefund
                     MakeVarDataSources({New Object() {"Supplier", "PayorDataSource", Nothing, Nothing}})
                 Case Else
-                    MakeVarDataSources({New Object() {"Customer", "PayorDataSource", Nothing, Nothing}})
                     View.PayorDataSource = Nothing
             End Select
         End Sub
