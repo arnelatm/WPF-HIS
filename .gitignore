@@ -19,3 +19,6 @@ WPF-HIS-github-verify/
 WPF-HIS-origin-verify/
 WPF-HIS-verify/
 WPF-HIS-verify.backup/
+tmp/
+output/
+docs/Accounts-System-Handover.md
