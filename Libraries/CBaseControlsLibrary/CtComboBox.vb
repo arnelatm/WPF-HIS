@@ -449,7 +449,10 @@ Public Class CtComboBox
             'If TypeOf DataSource IsNot DataView Then
             '    Debugger.Break()
             'End If
-            Dim data As DataTable = DataSource
+            Dim data = TryCast(DataSource, DataTable)
+            If data Is Nothing Then
+                Return
+            End If
             Dim dataView As DataView = data.DefaultView
             Dim colCount As Int16 = 0
             colCount = dataView.Table.Columns.Count
@@ -561,7 +564,7 @@ Public Class CtComboBox
             For Each item As DataRow In DataSource.Rows()
                 If item(ValueMember) = value Then
                     'If Visible Then
-                    SelectedItem = item
+                    SelectedValue = value
                     'Else
                     '    SelectedItem = DataSource(i)
                     'End If
@@ -588,7 +591,7 @@ Public Class CtComboBox
         If DataSource IsNot Nothing Then
             For Each item In DataSource
                 If item.Code = value Then
-                    SelectedItem = DataSource(i).Code
+                    SelectedItem = DataSource(i)
                     found = True
                     Exit For
                 End If
@@ -611,7 +614,7 @@ Public Class CtComboBox
         If DataSource IsNot Nothing Then
             For Each item In DataSource
                 If item.Name = value Then
-                    SelectedItem = DataSource(i).Name
+                    SelectedItem = DataSource(i)
                     found = True
                     Exit For
                 End If

@@ -465,18 +465,15 @@ Public Class CComboBox
         Try
             'SuspendLayout()
             Dim newList As Object()
+            If _originalList Is Nothing Then
+                _originalList = Items.Cast(Of Object)().ToArray()
+            End If
             If String.IsNullOrEmpty(_currentSearchTerm) Then
                 If Items.Count = _originalList.Length Then
                     Return
                 End If
                 newList = _originalList
             Else
-                If _originalList Is Nothing Then
-                    'If Not _changingSearchValueOnly then
-                    '    OriginalDataSource = DataSource
-                    'end if
-                    _originalList = Items.Cast(Of Object)().ToArray()
-                End If
                 newList = _originalList.Where(Function(x) x.ToString().ToLowerInvariant().Contains(_currentSearchTerm)).ToArray()
             End If
             _changingSearchValueOnly = True
