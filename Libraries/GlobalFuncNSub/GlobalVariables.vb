@@ -329,7 +329,10 @@ Public Class GlobalVariables
 
     Public Shared Property DacFileName As String
         Get
-            _dacFileName = GetRequiredAppSetting("FileNameTranslator") ' MDB, DBF
+            _dacFileName = ConfigurationManager.AppSettings.Get("FileNameTranslator") ' MDB, DBF
+            If _dacFileName Is Nothing Then
+                _dacFileName = ""
+            End If
             Return _dacFileName
         End Get
         Set(value As String)
