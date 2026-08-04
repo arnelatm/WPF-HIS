@@ -1,7 +1,6 @@
 ﻿Imports System.Configuration
 Imports System.Drawing
 Imports System.Globalization
-Imports System.Windows.Forms
 Imports Autofac
 
 Public Class GlobalVariables
@@ -37,6 +36,14 @@ Public Class GlobalVariables
     Private Shared _defaultFormControlEditingBackgroundColor As Nullable(Of Color)
     Private Shared _defaultFormControlEditingForegroundColor As Nullable(Of Color)
     Private Shared _defaultAlternatingBackGroundColor As Nullable(Of Color)
+
+    Private Shared Function GetRequiredAppSetting(settingName As String) As String
+        Dim value = ConfigurationManager.AppSettings.Get(settingName)
+        If String.IsNullOrWhiteSpace(value) Then
+            Throw New ConfigurationErrorsException($"Missing appSetting '{settingName}'.")
+        End If
+        Return value
+    End Function
 
     Public Shared ReadOnly Property OriginalAppTextLanguage As String = "en-PH"
 
@@ -272,22 +279,7 @@ Public Class GlobalVariables
 
     Public Shared Property DacServer As String
         Get
-            Try
-                _dacServer = ConfigurationManager.AppSettings.Get("ServerTranslator") ' SQL only
-                If _dacServer Is Nothing Or _dacServer = "" Then
-                    MessageBox.Show("Error, Invalid Configuration File. Missing 'ServerTranslator'")
-                    'Dim computerName = System.Windows.Forms.SystemInformation.ComputerName
-                    'If computerName = $"ISPADMIN2" Then
-                    '    _dacServer = ConfigurationManager.AppSettings.Get("ServerTranslator2")
-                    'ElseIf computerName = "MARCELO-DELL" Then
-                    '    _dacServer = ConfigurationManager.AppSettings.Get("ServerTranslator3")
-                    'Else
-                    '    _dacServer = "IBN-SERVER"
-                    'End If
-                End If
-            Catch
-                MessageBox.Show("Error, Invalid Configuration File. Missing 'ServerTranslator'")
-            End Try
+            _dacServer = GetRequiredAppSetting("ServerTranslator") ' SQL only
             Return _dacServer
         End Get
         Set(value As String)
@@ -297,22 +289,7 @@ Public Class GlobalVariables
 
     Public Shared Property DacServerType As String
         Get
-            Try
-                _dacServerType = ConfigurationManager.AppSettings.Get("ServerType") ' SQL only
-                If _dacServerType Is Nothing Or _dacServerType = "" Then
-                    MessageBox.Show("Error, Invalid Configuration File. Missing 'ServerType'")
-                    'Dim computerName = System.Windows.Forms.SystemInformation.ComputerName
-                    'If computerName = $"ISPADMIN2" Then
-                    '    _dacServerType = ConfigurationManager.AppSettings.Get("ServerType2")
-                    'ElseIf computerName = "MARCELO-DELL" Then
-                    '    _dacServerType = ConfigurationManager.AppSettings.Get("ServerType3")
-                    'Else
-                    '    _dacServerType = "server"
-                    'End If
-                End If
-            Catch
-                MessageBox.Show("Error, Invalid Configuration File. Missing 'ServerType'")
-            End Try
+            _dacServerType = GetRequiredAppSetting("ServerType") ' SQL only
             Return _dacServerType
         End Get
         Set(value As String)
@@ -322,23 +299,7 @@ Public Class GlobalVariables
 
     Public Shared Property DacDatabase As String
         Get
-            Try
-                _dacDatabase = ConfigurationManager.AppSettings.Get("Database")
-                If _dacDatabase Is Nothing Or _dacDatabase = "" Then
-                    MessageBox.Show("Error, Invalid Configuration File. Missing 'Database'")
-                    'Dim computerName = System.Windows.Forms.SystemInformation.ComputerName
-                    'If computerName = $"ISPADMIN2" Then
-                    '    _dacDatabase = ConfigurationManager.AppSettings.Get("DatabaseTranslator2")
-                    'ElseIf computerName = "MARCELO-DELL" Then
-                    '    _dacDatabase = ConfigurationManager.AppSettings.Get("DatabaseTranslator3")
-                    'Else
-                    '    _dacDatabase = "ISPDATA"
-                    'End If
-                End If
-            Catch
-                MessageBox.Show("Error, Invalid Configuration File. Missing 'Database'")
-                '_dacDatabase = "ISPDATA"
-            End Try
+            _dacDatabase = GetRequiredAppSetting("Database")
             Return _dacDatabase
         End Get
         Set(value As String)
@@ -348,15 +309,7 @@ Public Class GlobalVariables
 
     Public Shared Property DacUid As String
         Get
-            Try
-                _dacUid = ConfigurationManager.AppSettings.Get("UIDTranslator") ' SQL, MDB
-                If _dacUid Is Nothing Then
-                    MessageBox.Show("Error, Invalid Configuration File. Missing 'UIDTranslator'")
-                End If
-            Catch
-                MessageBox.Show("Error, Invalid Configuration File. Missing 'UIDTranslator'")
-                '_dacUid = "iGroupAdmin"
-            End Try
+            _dacUid = GetRequiredAppSetting("UIDTranslator") ' SQL, MDB
             Return _dacUid
         End Get
         Set(value As String)
@@ -366,17 +319,7 @@ Public Class GlobalVariables
 
     Public Shared Property DacPassword As String
         Get
-            Try
-                _dacPassword = ConfigurationManager.AppSettings.Get("PWDTranslator") ' SQL, MDB
-                
-                If _dacPassword Is Nothing Then
-                    MessageBox.Show("Error, Invalid Configuration File. Missing 'PWDTranslator'")
-                    '_dacPassword = "igss@123"
-                End If
-            Catch
-                MessageBox.Show("Error, Invalid Configuration File. Missing 'PWDTranslator'")
-                '_dacPassword = "igss@123"
-            End Try
+            _dacPassword = GetRequiredAppSetting("PWDTranslator") ' SQL, MDB
             Return _dacPassword
         End Get
         Set(value As String)
@@ -386,15 +329,7 @@ Public Class GlobalVariables
 
     Public Shared Property DacFileName As String
         Get
-            Try
-                _dacFileName = ConfigurationManager.AppSettings.Get("FileNameTranslator") ' MDB, DBF
-                If _dacFileName Is Nothing Then
-                    MessageBox.Show("Error, Invalid Configuration File. Missing 'FileNameTranslator'")
-                End If
-            Catch
-                MessageBox.Show("Error, Invalid Configuration File. Missing 'FileNameTranslator'")
-                '_dacFileName = ""
-            End Try
+            _dacFileName = GetRequiredAppSetting("FileNameTranslator") ' MDB, DBF
             Return _dacFileName
         End Get
         Set(value As String)
