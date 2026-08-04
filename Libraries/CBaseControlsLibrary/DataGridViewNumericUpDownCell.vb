@@ -178,7 +178,7 @@ Public Class DataGridViewNumericUpDownCell
         End Set
     End Property
 
-    Public Property [ReadOnly]() As Boolean
+    Public Shadows Property [ReadOnly]() As Boolean
         Get
             Return Me.m_readOnly
         End Get

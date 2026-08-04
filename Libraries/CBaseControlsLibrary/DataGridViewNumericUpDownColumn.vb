@@ -179,7 +179,7 @@ Public Class DataGridViewNumericUpDownColumn
         End Set
     End Property
 
-    Public Property [Readonly]() As Boolean
+    Public Shadows Property [Readonly]() As Boolean
         Get
             If Me.NumericUpDownCellTemplate Is Nothing Then
                 Throw New InvalidOperationException("Operation cannot be completed because this DataGridViewColumn does not have a CellTemplate.")
