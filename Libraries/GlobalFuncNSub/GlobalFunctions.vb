@@ -15,6 +15,8 @@ Imports AATM.Libraries.AatmInterfaces
 
 Public Module GlobalFunctions
 
+    Private ReadOnly GregorianCulture As New CultureInfo("en-GB", False)
+
     '''<summary>
     '''Converts a given date value to short date string in the requested targetculture
     '''</summary>
@@ -23,20 +25,18 @@ Public Module GlobalFunctions
             Return Nothing
         End If
         Dim givenDate As DateTime = dateValue
-        Dim shortDateString As String
-        Dim curCulture As CultureInfo = CultureInfo.CurrentCulture
-        CultureInfo.CurrentCulture = targetCulture
+        If targetCulture Is Nothing Then
+            Return givenDate.ToShortDateString()
+        End If
+        Dim formatCulture = DirectCast(targetCulture.Clone(), CultureInfo)
+        If TypeOf formatCulture.Calendar Is System.Globalization.UmAlQuraCalendar OrElse TypeOf formatCulture.Calendar Is System.Globalization.HijriCalendar Then
+            formatCulture.DateTimeFormat.ShortDatePattern = "dd/MM/yyyy"
+        End If
         Try
-            If TypeOf targetCulture.Calendar Is System.Globalization.UmAlQuraCalendar Or TypeOf targetCulture.Calendar Is System.Globalization.HijriCalendar Then
-                targetCulture.DateTimeFormat.ShortDatePattern = "dd/MM/yyyy"
-            End If
-            shortDateString = givenDate.ToShortDateString()
+            Return givenDate.ToString("d", formatCulture)
         Catch ex As Exception
-            shortDateString = Nothing
-        Finally
-            CultureInfo.CurrentCulture = curCulture
+            Return Nothing
         End Try
-        Return shortDateString
     End Function
 
     '''<summary>
@@ -71,34 +71,28 @@ Public Module GlobalFunctions
     '''Converts the given Date String to the requested TargetCulture
     '''</summary>
     Public Function DateStringSpecificCultureToDate(dateString As String, targetCultureInfo As CultureInfo) As Date?
-        Dim retDate As Date?
-        Dim curCulture = CultureInfo.CurrentCulture
-        Try
-            CultureInfo.CurrentCulture = targetCultureInfo
-            retDate = Convert.ToDateTime(dateString)
-        Catch ex As Exception
-            retDate = Nothing
-        Finally
-            CultureInfo.CurrentCulture = curCulture
-        End Try
-        Return retDate
+        If String.IsNullOrWhiteSpace(dateString) Then
+            Return Nothing
+        End If
+        Dim parsedDate As DateTime
+        If DateTime.TryParse(dateString, targetCultureInfo, DateTimeStyles.None, parsedDate) Then
+            Return parsedDate
+        End If
+        Return Nothing
     End Function
 
     '''<summary>
     '''Converts the given Date String to the requested TargetCulture
     '''</summary>
     Public Function DateStringSpecificCultureToDateTime(dateString As String, targetCultureInfo As CultureInfo) As DateTime?
-        Dim retDate As DateTime?
-        Dim curCulture = CultureInfo.CurrentCulture
-        Try
-            CultureInfo.CurrentCulture = targetCultureInfo
-            retDate = Convert.ToDateTime(dateString)
-        Catch ex As Exception
-            retDate = Nothing
-        Finally
-            CultureInfo.CurrentCulture = curCulture
-        End Try
-        Return retDate
+        If String.IsNullOrWhiteSpace(dateString) Then
+            Return Nothing
+        End If
+        Dim parsedDate As DateTime
+        If DateTime.TryParse(dateString, targetCultureInfo, DateTimeStyles.None, parsedDate) Then
+            Return parsedDate
+        End If
+        Return Nothing
     End Function
 
     '''<summary>
@@ -109,19 +103,14 @@ Public Module GlobalFunctions
             Return Nothing
         End If
         Dim givenDate As DateTime = dateValue
-        Dim shortDateString As String
-        Dim curCulture As CultureInfo = CultureInfo.CurrentCulture
-        If targetCulture IsNot Nothing Then
-            CultureInfo.CurrentCulture = targetCulture
-        End If
         Try
-            shortDateString = givenDate.ToShortDateString()
+            If targetCulture IsNot Nothing Then
+                Return givenDate.ToString("d", targetCulture)
+            End If
+            Return givenDate.ToShortDateString()
         Catch ex As Exception
-            shortDateString = Nothing
-        Finally
-            CultureInfo.CurrentCulture = curCulture
+            Return Nothing
         End Try
-        Return shortDateString
     End Function
 
     '''<summary>
@@ -132,19 +121,14 @@ Public Module GlobalFunctions
             Return Nothing
         End If
         Dim givenDate As DateTime = dateValue
-        Dim shortDateTimeString As String
-        Dim curCulture As CultureInfo = CultureInfo.CurrentCulture
-        If targetCulture IsNot Nothing Then
-            CultureInfo.CurrentCulture = targetCulture
-        End If
         Try
-            shortDateTimeString = givenDate.ToShortDateString() + " " + givenDate.ToString("hh:mm tt")
+            If targetCulture IsNot Nothing Then
+                Return givenDate.ToString("d", targetCulture) + " " + givenDate.ToString("hh:mm tt", targetCulture)
+            End If
+            Return givenDate.ToShortDateString() + " " + givenDate.ToString("hh:mm tt")
         Catch ex As Exception
-            shortDateTimeString = Nothing
-        Finally
-            CultureInfo.CurrentCulture = curCulture
+            Return Nothing
         End Try
-        Return shortDateTimeString
     End Function
 
     '''<summary>
@@ -154,11 +138,14 @@ Public Module GlobalFunctions
     Public Function DtoS(ByVal dateValue As Date) As String
         Dim retValue As String
         Dim curCulture = CultureInfo.CurrentCulture
-        CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
-        retValue = Year(dateValue).ToString() &
+        Try
+            CultureInfo.CurrentCulture = GregorianCulture
+            retValue = Year(dateValue).ToString() &
                 Strings.Right("00" & Month(dateValue).ToString().TrimEnd().TrimStart(), 2) &
                 Strings.Right("00" & DateAndTime.Day(dateValue).ToString().TrimStart().TrimEnd(), 2)
-        CultureInfo.CurrentCulture = curCulture
+        Finally
+            CultureInfo.CurrentCulture = curCulture
+        End Try
         Return retValue
     End Function
 
@@ -232,9 +219,12 @@ Public Module GlobalFunctions
     Public Function GbDateSerial(ByVal year As Int16, ByVal month As Int16, ByVal day As Int16) As Date?
         Dim value As Date?
         Dim curCulture = CultureInfo.CurrentCulture
-        CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
-        value = DateSerial(year, month, day)
-        CultureInfo.CurrentCulture = curCulture
+        Try
+            CultureInfo.CurrentCulture = GregorianCulture
+            value = DateSerial(year, month, day)
+        Finally
+            CultureInfo.CurrentCulture = curCulture
+        End Try
         Return value
     End Function
 
@@ -244,9 +234,12 @@ Public Module GlobalFunctions
     Public Function MakeDate(ByVal year As Int16, ByVal month As Int16, ByVal day As Int16) As Date?
         Dim value As Date?
         Dim curCulture = CultureInfo.CurrentCulture
-        CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
-        value = DateSerial(year, month, day)
-        CultureInfo.CurrentCulture = curCulture
+        Try
+            CultureInfo.CurrentCulture = GregorianCulture
+            value = DateSerial(year, month, day)
+        Finally
+            CultureInfo.CurrentCulture = curCulture
+        End Try
         Return value
     End Function
 
@@ -399,9 +392,12 @@ Public Module GlobalFunctions
     Public Function GregorianDay(ByVal pDate As Date?) As Int16
         Dim value As Int16
         Dim curCulture = CultureInfo.CurrentCulture
-        CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
-        value = Microsoft.VisualBasic.DateAndTime.Day(pDate)
-        CultureInfo.CurrentCulture = curCulture
+        Try
+            CultureInfo.CurrentCulture = GregorianCulture
+            value = Microsoft.VisualBasic.DateAndTime.Day(pDate)
+        Finally
+            CultureInfo.CurrentCulture = curCulture
+        End Try
         Return value
     End Function
 
@@ -411,9 +407,12 @@ Public Module GlobalFunctions
     Public Function GregorianMonth(ByVal pDate As Date?) As Int16
         Dim value As Int16
         Dim curCulture = CultureInfo.CurrentCulture
-        CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
-        value = Month(pDate)
-        CultureInfo.CurrentCulture = curCulture
+        Try
+            CultureInfo.CurrentCulture = GregorianCulture
+            value = Month(pDate)
+        Finally
+            CultureInfo.CurrentCulture = curCulture
+        End Try
         Return value
     End Function
 
@@ -423,18 +422,24 @@ Public Module GlobalFunctions
     Public Function GregorianMonthName(ByVal pMonthNumber As Int16) As String
         Dim value As String
         Dim curCulture = CultureInfo.CurrentCulture
-        CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
-        value = Microsoft.VisualBasic.DateAndTime.MonthName(pMonthNumber)
-        CultureInfo.CurrentCulture = curCulture
+        Try
+            CultureInfo.CurrentCulture = GregorianCulture
+            value = Microsoft.VisualBasic.DateAndTime.MonthName(pMonthNumber)
+        Finally
+            CultureInfo.CurrentCulture = curCulture
+        End Try
         Return value
     End Function
 
     Public Function GregorianShortDateString(dateToFormat As Object) As String
         Dim value As String
         Dim curCulture = CultureInfo.CurrentCulture
-        CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
-        value = FormatDateTime(dateToFormat, DateFormat.ShortDate)
-        CultureInfo.CurrentCulture = curCulture
+        Try
+            CultureInfo.CurrentCulture = GregorianCulture
+            value = FormatDateTime(dateToFormat, DateFormat.ShortDate)
+        Finally
+            CultureInfo.CurrentCulture = curCulture
+        End Try
         Return value
     End Function
 
@@ -442,9 +447,12 @@ Public Module GlobalFunctions
     Public Function GregorianLongDateString(dateToFormat As Object) As String
         Dim value As String
         Dim curCulture = CultureInfo.CurrentCulture
-        CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
-        value = FormatDateTime(dateToFormat, DateFormat.LongDate)
-        CultureInfo.CurrentCulture = curCulture
+        Try
+            CultureInfo.CurrentCulture = GregorianCulture
+            value = FormatDateTime(dateToFormat, DateFormat.LongDate)
+        Finally
+            CultureInfo.CurrentCulture = curCulture
+        End Try
         Return value
     End Function
 
@@ -455,9 +463,12 @@ Public Module GlobalFunctions
     Public Function GregorianMonthNameArabic(ByVal pMonthNumber As Int16) As String
         Dim value As String
         Dim curCulture = CultureInfo.CurrentCulture
-        CultureInfo.CurrentCulture = New CultureInfo("ar-AE", False)
-        value = Microsoft.VisualBasic.DateAndTime.MonthName(pMonthNumber)
-        CultureInfo.CurrentCulture = curCulture
+        Try
+            CultureInfo.CurrentCulture = New CultureInfo("ar-AE", False)
+            value = Microsoft.VisualBasic.DateAndTime.MonthName(pMonthNumber)
+        Finally
+            CultureInfo.CurrentCulture = curCulture
+        End Try
         Return value
     End Function
 
@@ -467,9 +478,12 @@ Public Module GlobalFunctions
     Public Function GregorianYear(ByVal pDate As Date?) As Int16
         Dim value As Int16
         Dim curCulture = CultureInfo.CurrentCulture
-        CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
-        value = Year(pDate)
-        CultureInfo.CurrentCulture = curCulture
+        Try
+            CultureInfo.CurrentCulture = GregorianCulture
+            value = Year(pDate)
+        Finally
+            CultureInfo.CurrentCulture = curCulture
+        End Try
         Return value
     End Function
 
@@ -487,9 +501,12 @@ Public Module GlobalFunctions
     Public Function GregorianDateSerial(ByVal nYear As Integer, nMonth As Integer, nDay As Integer) As DateTime
         Dim value As DateTime
         Dim curCulture = CultureInfo.CurrentCulture
-        CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
-        value = DateSerial(nYear, nMonth, nDay)
-        CultureInfo.CurrentCulture = curCulture
+        Try
+            CultureInfo.CurrentCulture = GregorianCulture
+            value = DateSerial(nYear, nMonth, nDay)
+        Finally
+            CultureInfo.CurrentCulture = curCulture
+        End Try
         Return value
     End Function
 
@@ -499,10 +516,13 @@ Public Module GlobalFunctions
     Public Function GregorianDateTimeSerial(ByVal nYear As Integer, nMonth As Integer, nDay As Integer, Optional nHour As Integer = 0, Optional nMinute As Integer = 0, Optional nSeconds As Integer = 0) As DateTime
         Dim value As DateTime
         Dim curCulture = CultureInfo.CurrentCulture
-        CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
-        value = DateSerial(nYear, nMonth, nDay).AddHours(nHour).AddMinutes(nMinute)
-        value = value.AddSeconds(nSeconds)
-        CultureInfo.CurrentCulture = curCulture
+        Try
+            CultureInfo.CurrentCulture = GregorianCulture
+            value = DateSerial(nYear, nMonth, nDay).AddHours(nHour).AddMinutes(nMinute)
+            value = value.AddSeconds(nSeconds)
+        Finally
+            CultureInfo.CurrentCulture = curCulture
+        End Try
         Return value
     End Function
 
@@ -562,16 +582,8 @@ Public Module GlobalFunctions
     Public Function IsDateValidForTargetCulture(strDate As String, ByRef targetCulture As CultureInfo) As Boolean
         ' checks if the strDate is a valid date in the
         ' targetculture format
-        Dim curCulture = CultureInfo.CurrentCulture
-        Dim retVal As Boolean
-        CultureInfo.CurrentCulture = targetCulture
-        If IsDate(strDate) Then
-            retVal = True
-        Else
-            retVal = False
-        End If
-        CultureInfo.CurrentCulture = curCulture
-        Return retVal
+        Dim parsedDate As DateTime
+        Return DateTime.TryParse(strDate, targetCulture, DateTimeStyles.None, parsedDate)
     End Function
 
     '''<summary>
@@ -614,26 +626,19 @@ Public Module GlobalFunctions
     '''Checks if a given culture string is a Right To Left Culture
     '''</summary>
     Public Function IsRightToLeft(ByVal pCultureInfoString As String) As Boolean
-        Dim isCultureRightToLeft As Boolean
-        Dim curCulture = CultureInfo.CurrentCulture
         'If pCultureInfoString = GlobalVariables.OriginalAppTextLanguage THEN
         '    pCultureInfoString = GlobalVariables.OriginalAppLanguage
         'End If
         Try
-            CultureInfo.CurrentCulture = New CultureInfo(pCultureInfoString, False)
-            isCultureRightToLeft = Globalization.CultureInfo.CurrentCulture.TextInfo.IsRightToLeft
-            CultureInfo.CurrentCulture = curCulture
-            If isCultureRightToLeft Then
-                GlobalVariables.RightToLeftLayout = True
-            Else
-                GlobalVariables.RightToLeftLayout = False
-            End If
+            Dim culture = New CultureInfo(pCultureInfoString, False)
+            Dim isCultureRightToLeft = culture.TextInfo.IsRightToLeft
+            GlobalVariables.RightToLeftLayout = isCultureRightToLeft
+            Return isCultureRightToLeft
         Catch ex As Exception
             ' missing culture info string? therefore assume that it is not right to left
-            isCultureRightToLeft = False
             GlobalVariables.RightToLeftLayout = False
+            Return False
         End Try
-        Return isCultureRightToLeft
     End Function
 
     ''' <summary>
@@ -1602,7 +1607,6 @@ Public Module GlobalFunctions
     Public Function DateIsBetween(dateToCheck As Object, begDate As Object, endDate As Object)
         If Not (TypeOf dateToCheck Is Date Or TypeOf dateToCheck Is Date?) And (TypeOf begDate Is Date Or TypeOf begDate Is Date?) And (TypeOf endDate Is Date Or TypeOf endDate Is Date?) Then
             MessageBox.Show("One of the passed date is not a valid date type.")
-            Debugger.Break()
             Return False
         End If
         If TypeOf dateToCheck Is Date And TypeOf begDate Is Date And TypeOf endDate Is Date Then

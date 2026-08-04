@@ -237,25 +237,12 @@ Public Class GlobalVariables
 
     Public Shared Property DacConnectionString As String
         Get
-            Try
-                If _dacConnectionString Is Nothing Then
-                    _dacConnectionString = ConfigurationManager.ConnectionStrings("ISPDATA").ConnectionString
-                    'If _dacConnectionString Is Nothing Or _dacConnectionString = "" Then
-                    '    Dim computerName = System.Windows.Forms.SystemInformation.ComputerName
-                    '    If computerName = $"ISPADMIN2" Then
-                    '        _dacConnectionString = ConfigurationManager.ConnectionStrings("ISPDATA2").ConnectionString
-                    '    ElseIf computerName = "MARCELO-DELL" Then
-                    '        _dacConnectionString = ConfigurationManager.ConnectionStrings("ISPDATA3").ConnectionString
-                    '    Else
-                    '        _dacConnectionString = "Data Source=IBN-SERVER;Initial Catalog=ISPDATA;Persist Security Info=True;User ID=igroupadmin;Password=igss@123"
-                    '    End If
-                    'End If
+            If String.IsNullOrWhiteSpace(_dacConnectionString) Then
+                Dim connectionStringSettings = ConfigurationManager.ConnectionStrings("ISPDATA")
+                If connectionStringSettings Is Nothing OrElse String.IsNullOrWhiteSpace(connectionStringSettings.ConnectionString) Then
+                    Throw New ConfigurationErrorsException("Missing connection string 'ISPDATA'.")
                 End If
-            Catch
-                _dacConnectionString = "Data Source=IBN-SERVER;Initial Catalog=ISPDATA;Persist Security Info=True;User ID=igroupadmin;Password=igss@123"
-            End Try
-            If _dacConnectionString Is Nothing Then
-                Debugger.Break()
+                _dacConnectionString = connectionStringSettings.ConnectionString
             End If
             Return _dacConnectionString
         End Get
@@ -288,7 +275,6 @@ Public Class GlobalVariables
             Try
                 _dacServer = ConfigurationManager.AppSettings.Get("ServerTranslator") ' SQL only
                 If _dacServer Is Nothing Or _dacServer = "" Then
-                    Debugger.Break()
                     MessageBox.Show("Error, Invalid Configuration File. Missing 'ServerTranslator'")
                     'Dim computerName = System.Windows.Forms.SystemInformation.ComputerName
                     'If computerName = $"ISPADMIN2" Then
@@ -421,7 +407,7 @@ Public Class GlobalVariables
             Try
                 Dim useComputerCultureInfo As Boolean
                 Dim cultureInfoStr As String
-                useComputerCultureInfo = ConfigurationManager.AppSettings("UseComputerCultureInfo")
+                Boolean.TryParse(ConfigurationManager.AppSettings("UseComputerCultureInfo"), useComputerCultureInfo)
                 If useComputerCultureInfo Then
                     CultureInfo.DefaultThreadCurrentCulture = CultureInfo.CurrentCulture
                     cultureInfoStr = CultureInfo.CurrentCulture.Name
@@ -520,7 +506,7 @@ Public Class GlobalVariables
             Try
                 Dim useComputerCultureInfo As Boolean
                 Dim cultureInfoStr As String
-                useComputerCultureInfo = ConfigurationManager.AppSettings("UseComputerCultureInfo")
+                Boolean.TryParse(ConfigurationManager.AppSettings("UseComputerCultureInfo"), useComputerCultureInfo)
                 If useComputerCultureInfo Then
                     CultureInfo.DefaultThreadCurrentCulture = CultureInfo.CurrentCulture
                     cultureInfoStr = CultureInfo.CurrentCulture.Name
@@ -559,7 +545,7 @@ Public Class GlobalVariables
                 If _defaultUnMirroredCultureInfoStr Is Nothing Then
                     Dim useComputerCultureInfo As Boolean
 
-                    useComputerCultureInfo = ConfigurationManager.AppSettings("UseComputerCultureInfo")
+                    Boolean.TryParse(ConfigurationManager.AppSettings("UseComputerCultureInfo"), useComputerCultureInfo)
                     If useComputerCultureInfo Then
                         If Not CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
                             cultureInfoStr = CultureInfo.CurrentCulture.Name
@@ -603,7 +589,7 @@ Public Class GlobalVariables
                 If _defaultMirroredCultureInfoStr Is Nothing Then
                     Dim useComputerCultureInfo As Boolean
 
-                    useComputerCultureInfo = ConfigurationManager.AppSettings("UseComputerCultureInfo")
+                    Boolean.TryParse(ConfigurationManager.AppSettings("UseComputerCultureInfo"), useComputerCultureInfo)
                     If useComputerCultureInfo Then
                         If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
                             cultureInfoStr = CultureInfo.CurrentCulture.Name
