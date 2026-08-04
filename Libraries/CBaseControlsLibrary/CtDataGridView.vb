@@ -981,8 +981,8 @@ Public Class CtDataGridView
 
     Public Sub MakeHeaderToolTips()
         'dgvAge.DisplayOnly = True
-        For Each col In Columns
-            Dim headerCell As DataGridViewColumnHeaderCell = headerCell
+        For Each col As DataGridViewColumn In Columns
+            Dim headerCell As DataGridViewColumnHeaderCell = col.HeaderCell
             headerCell.ToolTipText = col.HeaderText
         Next
     End Sub
