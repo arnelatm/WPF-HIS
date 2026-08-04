@@ -237,7 +237,7 @@ Public Class CDgvComboBoxEditingControl
         End If
     End Sub
 
-    Public Function GetValue()
+    Public Overloads Function GetValue() As Object
         Return SelectedValue
     End Function
 
