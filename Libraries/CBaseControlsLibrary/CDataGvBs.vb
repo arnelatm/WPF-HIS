@@ -293,6 +293,8 @@ Public Class CDataGvBs
                 End If
 
                 If (TypeOf (e.Exception) Is ConstraintException) Then
+                    If e.RowIndex < 0 OrElse e.ColumnIndex < 0 Then Return
+
                     Dim view As DataGridView = CType(sender, DataGridView)
                     view.Rows(e.RowIndex).ErrorText = "an error"
                     view.Rows(e.RowIndex).Cells(e.ColumnIndex).ErrorText = "an error"
@@ -303,6 +305,8 @@ Public Class CDataGvBs
     End Sub
 
     Private Sub dataGridView1_RowHeaderMouseClick(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles Me.RowHeaderMouseClick
+        If e.RowIndex < 0 Then Return
+
         SelectionMode = DataGridViewSelectionMode.RowHeaderSelect
         Rows(e.RowIndex).Selected = True
     End Sub

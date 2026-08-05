@@ -308,6 +308,8 @@ Public Class CtDataGridView
 
     Private Sub Me_CellValidated(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles Me.CellValidated
         ' Clear any error messages that may have been set in cell validation.
+        If e.RowIndex < 0 Then Return
+
         Me.Rows(e.RowIndex).ErrorText = Nothing
 
     End Sub
@@ -391,6 +393,8 @@ Public Class CtDataGridView
     End Sub
 
     Private Sub DataGridView1_RowHeaderMouseClick(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles Me.RowHeaderMouseClick
+        If e.RowIndex < 0 Then Return
+
         SelectionMode = DataGridViewSelectionMode.RowHeaderSelect
         Rows(e.RowIndex).Selected = True
     End Sub
