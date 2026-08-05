@@ -418,7 +418,7 @@
     <Compile Include="DateTimeControls\DropDowngTimeEditor.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ErrorProviderExendedOrig.vb" />
+    <Compile Include="LegacyCompiledStubs\ErrorProviderExendedOrig.vb" />
     <Compile Include="Core\ErrorProviderExtended.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -492,7 +492,7 @@
     <Compile Include="FormsAndDialogs\SplashScreen1.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SR.vb" />
+    <Compile Include="LegacyCompiledStubs\sR.vb" />
     <Compile Include="Strings.Designer.vb">
       <DependentUpon>Strings.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -504,7 +504,7 @@
     <Compile Include="DateTimeControls\tdpGregorian.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="TestEditingControl.vb" />
+    <Compile Include="LegacyCompiledStubs\TestEditingControl.vb" />
     <Compile Include="DateTimeControls\TimeColors.vb" />
     <Compile Include="DesignersAndEditors\TimeColorsUIEditor.vb" />
     <Compile Include="DesignersAndEditors\TimeUIEditor.vb" />
