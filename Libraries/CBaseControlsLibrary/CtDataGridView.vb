@@ -547,7 +547,6 @@ Public Class CtDataGridView
         'If current Then cell Of grid Is dirty, commits edit
         If Me.IsCurrentCellDirty Then
             If TypeOf CurrentCell Is CDgvCheckboxCell Then
-                Debugger.Break()
                 CommitEdit(DataGridViewDataErrorContexts.Commit)
             End If
         End If

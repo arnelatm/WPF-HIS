@@ -41,7 +41,6 @@ Public NotInheritable Class Invoker
         Try
             Return oObject.GetType().InvokeMember(sName, SetPublicNonPublicPropertyFieldFlags, Nothing, oObject, yArguments)
         Catch ex As Exception
-            Debugger.Break()
             Return Nothing
         End Try
     End Function
@@ -51,7 +50,6 @@ Public NotInheritable Class Invoker
         Try
             Return cControl.GetType().InvokeMember(sName, SetPublicNonPublicPropertyFieldFlags, Nothing, cControl, yArguments)
         Catch ex As Exception
-            Debugger.Break()
             Return Nothing
         End Try
     End Function
@@ -75,7 +73,6 @@ Public NotInheritable Class Invoker
         Try
             Return oObject.GetType().InvokeMember(sName, SetPublicFieldFlags, Nothing, oObject, yArguments)
         Catch ex As Exception
-            Debugger.Break()
             Return Nothing
         End Try
         Return Nothing

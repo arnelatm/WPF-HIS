@@ -449,7 +449,7 @@ Public Class CFormBase
         PasteText()
     End Sub
 
-    Protected Overridable Sub SwitchUiLanguage(originalUi As Boolean)
+    Protected Overrides Sub SwitchUiLanguage(originalUi As Boolean)
         SuspendDrawing()
         Dim sw As Integer = 0
         If originalUi Then

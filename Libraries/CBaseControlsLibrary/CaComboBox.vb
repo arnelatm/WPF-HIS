@@ -498,7 +498,6 @@ Public Class CaComboBox
                 Case "Name"
                     NameSearch(value)
                 Case Else
-                    Debugger.Break()
             End Select
 
             'SelectedIndex = FindString(value)

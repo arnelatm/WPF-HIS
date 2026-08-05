@@ -276,13 +276,10 @@ Public Class CDataGvBs
         Try
         Catch ex As Exception
             If (e.Context = DataGridViewDataErrorContexts.Formatting) OrElse (e.Context = DataGridViewDataErrorContexts.PreferredSize) OrElse (e.Context = DataGridViewDataErrorContexts.Display) OrElse (e.Context = DataGridViewDataErrorContexts.Display) Then
-                Debugger.Break()
                 ' ignore error
             Else
-                Debugger.Break()
                 Forms.MessageBox.Show("Error happened " & e.Context.ToString())
                 If (e.Context = DataGridViewDataErrorContexts.Commit) Then
-                    Debugger.Break()
                     Forms.MessageBox.Show("Commit error")
                 End If
                 If (e.Context = DataGridViewDataErrorContexts.CurrentCellChange) Then
@@ -292,12 +289,10 @@ Public Class CDataGvBs
                     Forms.MessageBox.Show("parsing error")
                 End If
                 If (e.Context = DataGridViewDataErrorContexts.LeaveControl) Then
-                    Debugger.Break()
                     Forms.MessageBox.Show("leave control error")
                 End If
 
                 If (TypeOf (e.Exception) Is ConstraintException) Then
-                    Debugger.Break()
                     Dim view As DataGridView = CType(sender, DataGridView)
                     view.Rows(e.RowIndex).ErrorText = "an error"
                     view.Rows(e.RowIndex).Cells(e.ColumnIndex).ErrorText = "an error"
