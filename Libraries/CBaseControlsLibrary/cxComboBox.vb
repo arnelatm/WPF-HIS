@@ -7,6 +7,8 @@ Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.BaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 
+<Obsolete("Apparently unused legacy/experimental combo control. Prefer CtComboBox for new code.", False)>
+<System.ComponentModel.ToolboxItem(False)>
 Public Class CxComboBox
     Inherits BCombobox
     Implements IEntryControl, ILinkedLabel, IFindableControl

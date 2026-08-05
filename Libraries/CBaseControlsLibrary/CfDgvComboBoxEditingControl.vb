@@ -5,6 +5,8 @@ Imports System.Threading
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 
+<Obsolete("Apparently unused legacy/experimental grid combo editing control. Prefer CtComboBoxEditingControl for new code.", False)>
+<System.ComponentModel.ToolboxItem(False)>
 Public Class CfDgvComboBoxEditingControl
     Inherits DataGridViewComboBoxEditingControl
 

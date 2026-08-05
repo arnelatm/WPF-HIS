@@ -2,6 +2,8 @@
 Imports Microsoft.VisualBasic.PowerPacks
 Imports System.Windows.Forms
 
+<Obsolete("Apparently unused legacy/experimental grid combo cell. Prefer CDgvComboBoxCell for new code.", False)>
+<System.ComponentModel.ToolboxItem(False)>
 Public Class MyDgvComboboxCell
     Inherits DataGridViewComboBoxCell
 
@@ -40,6 +42,8 @@ Public Class MyDgvComboboxCell
 End Class
 
 ' This is the class that represents your column which can use your cell class
+<Obsolete("Apparently unused legacy/experimental grid combo column. Prefer CDgvComboBoxColumn for new code.", False)>
+<System.ComponentModel.ToolboxItem(False)>
 Public Class MyDataGridViewComboBoxColumn
     Inherits DataGridViewComboBoxColumn
 

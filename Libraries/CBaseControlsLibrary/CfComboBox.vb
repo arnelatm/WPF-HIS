@@ -4,6 +4,8 @@ Imports System.Windows.Forms
 Imports AATM.Libraries.BaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 
+<Obsolete("Apparently unused legacy/experimental combo control. Prefer CtComboBox for new code.", False)>
+<System.ComponentModel.ToolboxItem(False)>
 Public Class CfComboBox
     Inherits BCombobox
     Implements IEntryControl, ILinkedLabel

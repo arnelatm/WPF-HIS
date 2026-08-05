@@ -5,6 +5,8 @@ Imports System.Threading
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 
+<Obsolete("Apparently unused legacy/experimental suggest-filter combo control. Prefer CtComboBox for new code.", False)>
+<System.ComponentModel.ToolboxItem(False)>
 Public Class CSuggestFilterComboBox
     Inherits ComboBox
 

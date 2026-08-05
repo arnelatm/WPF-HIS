@@ -3,6 +3,8 @@ Imports System.ComponentModel
 Imports System.Drawing
 Imports System.Windows.Forms
 
+<Obsolete("Apparently unused legacy/experimental grid combo cell. Prefer CDgvComboBoxCell for new code.", False)>
+<System.ComponentModel.ToolboxItem(False)>
 Public Class CfDgvComboBoxCell
     Inherits DataGridViewComboBoxCell
 

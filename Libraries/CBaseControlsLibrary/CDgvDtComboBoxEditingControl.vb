@@ -4,6 +4,8 @@ Imports System.Linq.Expressions
 Imports System.Threading
 Imports System.Windows.Forms
 
+<Obsolete("Apparently unused legacy/experimental grid combo editing control. Prefer CtComboBoxEditingControl for new code.", False)>
+<System.ComponentModel.ToolboxItem(False)>
 Public Class CDgvDtComboBoxEditingControl
     Inherits DataGridViewComboBoxEditingControl
 
