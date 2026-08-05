@@ -273,35 +273,34 @@ Public Class CDataGvBs
 
     Private Sub DataGridView_DataError(ByVal sender As Object, ByVal e As DataGridViewDataErrorEventArgs) Handles Me.DataError
 
-        Try
-        Catch ex As Exception
-            If (e.Context = DataGridViewDataErrorContexts.Formatting) OrElse (e.Context = DataGridViewDataErrorContexts.PreferredSize) OrElse (e.Context = DataGridViewDataErrorContexts.Display) OrElse (e.Context = DataGridViewDataErrorContexts.Display) Then
-                ' ignore error
-            Else
-                Forms.MessageBox.Show("Error happened " & e.Context.ToString())
-                If (e.Context = DataGridViewDataErrorContexts.Commit) Then
-                    Forms.MessageBox.Show("Commit error")
-                End If
-                If (e.Context = DataGridViewDataErrorContexts.CurrentCellChange) Then
-                    Forms.MessageBox.Show("Cell change")
-                End If
-                If (e.Context = DataGridViewDataErrorContexts.Parsing) Then
-                    Forms.MessageBox.Show("parsing error")
-                End If
-                If (e.Context = DataGridViewDataErrorContexts.LeaveControl) Then
-                    Forms.MessageBox.Show("leave control error")
-                End If
+        e.ThrowException = False
 
-                If (TypeOf (e.Exception) Is ConstraintException) Then
-                    If e.RowIndex < 0 OrElse e.ColumnIndex < 0 Then Return
+        If e.Context = DataGridViewDataErrorContexts.Formatting OrElse
+           e.Context = DataGridViewDataErrorContexts.PreferredSize OrElse
+           e.Context = DataGridViewDataErrorContexts.Display Then
+            Return
+        End If
 
-                    Dim view As DataGridView = CType(sender, DataGridView)
-                    view.Rows(e.RowIndex).ErrorText = "an error"
-                    view.Rows(e.RowIndex).Cells(e.ColumnIndex).ErrorText = "an error"
-                    e.ThrowException = False
-                End If
-            End If
-        End Try
+        If e.RowIndex < 0 Then Return
+
+        Dim errorMessage As String = "Invalid value."
+        If e.Exception IsNot Nothing AndAlso Not String.IsNullOrEmpty(e.Exception.Message) Then
+            errorMessage = e.Exception.Message
+        End If
+
+        Rows(e.RowIndex).ErrorText = errorMessage
+        If e.ColumnIndex >= 0 Then
+            Rows(e.RowIndex).Cells(e.ColumnIndex).ErrorText = errorMessage
+        End If
+    End Sub
+
+    Private Sub DataGridView_CellValidated(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles Me.CellValidated
+        If e.RowIndex < 0 Then Return
+
+        Rows(e.RowIndex).ErrorText = Nothing
+        If e.ColumnIndex >= 0 Then
+            Rows(e.RowIndex).Cells(e.ColumnIndex).ErrorText = Nothing
+        End If
     End Sub
 
     Private Sub dataGridView1_RowHeaderMouseClick(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles Me.RowHeaderMouseClick
