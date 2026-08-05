@@ -93,7 +93,6 @@ Namespace PresentationLayer.Presenters
                     If Not fileName.ToLower().EndsWith(".rpt") Then fileName &= ".rpt"
 
                     Dim reportArgs As New CrPrintableArgs
-                    Dim reportTitle As String
                     'reportTitle = Libraries.MessagingLibrary.Messaging.SelectReportName(_reportModel.ReportTitle, beginningDate, endingDate, curCulture, "T")
                     'If _reportModel.QueryParameters IsNot Nothing AndAlso _reportModel.QueryParameters <> "" Then
                     '    Dim qParameters As String = _reportModel.QueryParameters

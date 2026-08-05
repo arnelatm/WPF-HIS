@@ -109,7 +109,6 @@ Namespace DataLayer.AdoNet
             Dim sql As String
             Dim data As New IbLabResult
             Dim transactionDateString As String = transactionDate.ToString("yyyy/MM/dd")
-            Dim ibType As String
             data.TransactionDate = transactionDate
             Dim params() As Object = {"@TransactionDate", transactionDateString, "@IBType", IIf(parameter(1) = "Iqama", "1", "2")}
             If parameter(1) = "Iqama" Then
