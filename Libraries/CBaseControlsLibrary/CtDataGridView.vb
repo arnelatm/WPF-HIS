@@ -241,7 +241,9 @@ Public Class CtDataGridView
     Public Sub ReSequenceDgvAfterDelete()
         If CurrentCell IsNot Nothing Then
             Dim i = CurrentCell.RowIndex()
-            Dim myBindingSource = CType(DataSource, BindingSource)
+            Dim myBindingSource = TryCast(DataSource, BindingSource)
+            If myBindingSource Is Nothing Then Return
+
             Try
                 If Invoker.GetProperty(myBindingSource.Current, SequenceFieldName) IsNot Nothing Then
                     For Each record In myBindingSource
@@ -259,8 +261,12 @@ Public Class CtDataGridView
     End Sub
 
     Public Sub ReSequenceDgvAfterInsert()
+        If CurrentCell Is Nothing Then Return
+
         Dim i = CurrentCell.RowIndex()
-        Dim myBindingSource = CType(DataSource, BindingSource)
+        Dim myBindingSource = TryCast(DataSource, BindingSource)
+        If myBindingSource Is Nothing Then Return
+
         Try
             If Invoker.GetProperty(myBindingSource.Current, SequenceFieldName) IsNot Nothing Then
                 For Each o In myBindingSource
@@ -353,6 +359,47 @@ Public Class CtDataGridView
         Return Decimal.TryParse(formattedValue, NumberStyles.Number, CultureInfo.CurrentCulture, amount) OrElse
                Decimal.TryParse(formattedValue, NumberStyles.Number, CultureInfo.InvariantCulture, amount)
     End Function
+
+    Private Shared Function TryGetDateCellValue(value As Object, ByRef dateValue As Date) As Boolean
+        If value Is Nothing OrElse value Is DBNull.Value Then Return False
+        If TypeOf value Is Date Then
+            dateValue = DirectCast(value, Date)
+            Return True
+        End If
+
+        Dim formattedValue = Convert.ToString(value, CultureInfo.CurrentCulture)
+        If String.IsNullOrWhiteSpace(formattedValue) Then Return False
+
+        Return Date.TryParse(formattedValue, CultureInfo.CurrentCulture, DateTimeStyles.None, dateValue) OrElse
+               Date.TryParse(formattedValue, CultureInfo.InvariantCulture, DateTimeStyles.None, dateValue)
+    End Function
+
+    Private Shared Function TryGetDecimalCellValue(value As Object, ByRef decimalValue As Decimal) As Boolean
+        If value Is Nothing OrElse value Is DBNull.Value Then Return False
+
+        Dim formattedValue = Convert.ToString(value, CultureInfo.CurrentCulture)
+        If String.IsNullOrWhiteSpace(formattedValue) Then Return False
+
+        Return Decimal.TryParse(formattedValue, NumberStyles.Number, CultureInfo.CurrentCulture, decimalValue) OrElse
+               Decimal.TryParse(formattedValue, NumberStyles.Number, CultureInfo.InvariantCulture, decimalValue)
+    End Function
+
+    Private Shared Function TryGetBooleanCellValue(value As Object, ByRef booleanValue As Boolean) As Boolean
+        If value Is Nothing OrElse value Is DBNull.Value Then Return False
+        If TypeOf value Is Boolean Then
+            booleanValue = DirectCast(value, Boolean)
+            Return True
+        End If
+
+        Return Boolean.TryParse(Convert.ToString(value, CultureInfo.InvariantCulture), booleanValue)
+    End Function
+
+    Private Shared Sub ShowSearchValidationError()
+        MessageBox.Show("Search could not be completed. Please check the values in this column and try again.",
+                        "Invalid Search",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning)
+    End Sub
 
     Private Sub RestoreEditingControlValue()
         If EditingControl Is Nothing Then Return
@@ -752,11 +799,13 @@ Public Class CtDataGridView
 
     Public Sub ValidateExpiryDate(ByRef e As DataGridViewCellValidatingEventArgs, Optional AllowBlanks As Boolean = False)
         'Validate the input using the editing format and the display format.
-        If AllowBlanks AndAlso (e.FormattedValue.Trim() = "" OrElse e.FormattedValue = "    /  " OrElse e.FormattedValue Is Nothing) Then
+        Dim formattedValue = Convert.ToString(e.FormattedValue, CultureInfo.CurrentCulture)
+
+        If AllowBlanks AndAlso (String.IsNullOrWhiteSpace(formattedValue) OrElse formattedValue = "    /  ") Then
             Me.CurrentCell.Value = Nothing
         Else
             Dim value As Date
-            e.Cancel = Not Date.TryParseExact(CStr(e.FormattedValue),
+            e.Cancel = Not Date.TryParseExact(formattedValue,
                                                       {"yyyyMMdd", "yyyy/MM/dd", "yyyy-MM-dd", "yyyyMM", "yyyy/MM", "yyyy-MM"},
                                                       Nothing,
                                                       DateTimeStyles.None,
@@ -985,8 +1034,8 @@ Public Class CtDataGridView
                         End If
                     End If
                 Next
-            Catch exc As Exception
-                MessageBox.Show(exc.Message)
+            Catch
+                ShowSearchValidationError()
             End Try
         ElseIf nMode = 2 Then
             Dim dBegDate As Date? = _previousBegDateSearch
@@ -997,7 +1046,9 @@ Public Class CtDataGridView
                 Dim firstRowMatchSw As Int16 = 0
 
                 For Each row As DataGridViewRow In Rows
-                    Dim colDate As Date = row.Cells(columnNo).Value
+                    Dim colDate As Date
+                    If Not TryGetDateCellValue(row.Cells(columnNo).Value, colDate) Then Continue For
+
                     If DateIsBetween(colDate, dBegDate, dEndDate) Then
                         row.Selected = True
                         If firstRowMatchSw = 0 Then
@@ -1010,8 +1061,8 @@ Public Class CtDataGridView
                         End If
                     End If
                 Next
-            Catch exc As Exception
-                MessageBox.Show(exc.Message)
+            Catch
+                ShowSearchValidationError()
             End Try
         ElseIf nMode = 3 Then
             Dim dBegValue As Decimal? = _previousBegValueSearch
@@ -1019,7 +1070,9 @@ Public Class CtDataGridView
             SelectionMode = DataGridViewSelectionMode.FullRowSelect
             Try
                 For Each row As DataGridViewRow In Rows
-                    Dim colValue As Decimal = row.Cells(columnNo).Value
+                    Dim colValue As Decimal
+                    If Not TryGetDecimalCellValue(row.Cells(columnNo).Value, colValue) Then Continue For
+
                     If colValue >= dBegValue AndAlso colValue <= dEndValue Then
                         row.Selected = True
                         If row.Index > _previousSelectedRow AndAlso Not Rows(row.Index).Displayed Then
@@ -1030,15 +1083,17 @@ Public Class CtDataGridView
                         End If
                     End If
                 Next
-            Catch exc As Exception
-                MessageBox.Show(exc.Message)
+            Catch
+                ShowSearchValidationError()
             End Try
         ElseIf nMode = 4 Then
             Dim dBegValue As Boolean = _previousBegValueSearch
             SelectionMode = DataGridViewSelectionMode.FullRowSelect
             Try
                 For Each row As DataGridViewRow In Rows
-                    Dim colValue As Boolean = row.Cells(columnNo).Value
+                    Dim colValue As Boolean
+                    If Not TryGetBooleanCellValue(row.Cells(columnNo).Value, colValue) Then Continue For
+
                     If colValue = dBegValue Then
                         row.Selected = True
                         If row.Index > _previousSelectedRow AndAlso Not Rows(row.Index).Displayed Then
@@ -1049,8 +1104,8 @@ Public Class CtDataGridView
                         End If
                     End If
                 Next
-            Catch exc As Exception
-                MessageBox.Show(exc.Message)
+            Catch
+                ShowSearchValidationError()
             End Try
         End If
         If matchSw = 0 Then
