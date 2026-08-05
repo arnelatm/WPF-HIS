@@ -247,13 +247,13 @@ Namespace PresentationLayer.Presenters
                             gAmt = .GrossAmount
                             If .AmtBefVat <= .GrossAmount Then
                                 .DiscountAmount = .GrossAmount - .AmtBefVat
-                                .DiscountPercent = IIf(.GrossAmount = 0, 0, .DiscountAmount / .GrossAmount * 100)
+                                .DiscountPercent = If(.GrossAmount = 0, 0D, .DiscountAmount / .GrossAmount * 100D)
                                 .VatAmount = .AmtBefVat * .VatPercent / 100
                                 .NetAmount = GetNetAmount(SaleDetail)
                             Else
                                 .GrossAmount = .AmtBefVat - .DiscountAmount
-                                .Price = IIf(.Quantity = 0, 0, .GrossAmount / .Quantity)
-                                .DiscountPercent = IIf(.GrossAmount = 0, 0, .DiscountAmount / .GrossAmount * 100)
+                                .Price = If(.Quantity = 0, 0D, .GrossAmount / .Quantity)
+                                .DiscountPercent = If(.GrossAmount = 0, 0D, .DiscountAmount / .GrossAmount * 100D)
                                 .VatAmount = GetVatAmount(SaleDetail)
                                 .NetAmount = GetNetAmount(SaleDetail)
                             End If
@@ -262,7 +262,7 @@ Namespace PresentationLayer.Presenters
                             .VatAmount = .NetAmount - .AmtBefVat
                             .GrossAmount = .AmtBefVat / (1 - .DiscountPercent / 100)
                             .DiscountAmount = .GrossAmount - .AmtBefVat
-                            .Price = IIf(.Quantity = 0, 0, .GrossAmount / .Quantity)
+                            .Price = If(.Quantity = 0, 0D, .GrossAmount / .Quantity)
                     End Select
                     .UnitCost = GetUnitCost(SaleDetail)
                     eventType.BindingSource.ResetItem(eventType.Row)
@@ -340,19 +340,19 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Private Function GetUnitCost(SaleDetail As SaleDetailView) As Decimal
-            Return IIf(SaleDetail.Quantity = 0, 0, SaleDetail.NetAmount / SaleDetail.Quantity)
+            Return If(SaleDetail.Quantity = 0, 0D, SaleDetail.NetAmount / SaleDetail.Quantity)
         End Function
 
         Private Function RecomputeDiscountPercentage(SaleDetail As SaleDetailView) As Decimal
-            Return Math.Round(IIf(SaleDetail.GrossAmount = 0, 0, SaleDetail.DiscountAmount / SaleDetail.GrossAmount * 100), 2)
+            Return Math.Round(If(SaleDetail.GrossAmount = 0, 0D, SaleDetail.DiscountAmount / SaleDetail.GrossAmount * 100D), 2)
         End Function
 
         Private Function RecomputePrice(SaleDetail As SaleDetailView) As Decimal
-            Return Math.Round(IIf(SaleDetail.Quantity = 0, 0, SaleDetail.GrossAmount / SaleDetail.Quantity), 2)
+            Return Math.Round(If(SaleDetail.Quantity = 0, 0D, SaleDetail.GrossAmount / SaleDetail.Quantity), 2)
         End Function
 
         Private Function RecomputeVatPercentage(SaleDetail As SaleDetailView) As Decimal
-            Return IIf(SaleDetail.GrossAmount - SaleDetail.DiscountAmount = 0, 0, SaleDetail.VatAmount / (SaleDetail.GrossAmount - SaleDetail.DiscountAmount) * 100)
+            Return If(SaleDetail.GrossAmount - SaleDetail.DiscountAmount = 0, 0D, SaleDetail.VatAmount / (SaleDetail.GrossAmount - SaleDetail.DiscountAmount) * 100D)
         End Function
 
         Private Function GetProductModel(productCode As String) As ProductModel
@@ -443,14 +443,14 @@ Namespace PresentationLayer.Presenters
                 Else
                     unitQty = Service.GetRecordFieldWith2KeyG(Of Int32, Int16, Int32)(productIdNo, oldUnit, "ProductUnit", "ProductIdNo", "UnitIdNo", "UnitQty")
                     baseQty = Service.GetRecordFieldWith2KeyG(Of Int32, Int16, Int32)(productIdNo, oldUnit, "ProductUnit", "ProductIdNo", "UnitIdNo", "BaseQty")
-                    basePrice = Math.Ceiling(IIf(baseQty = 0, 0, unitQty / baseQty) * SaleDetail.Price * 100D) / 100D
+                    basePrice = Math.Ceiling(If(baseQty = 0, 0D, unitQty / baseQty) * SaleDetail.Price * 100D) / 100D
                 End If
                 If newUnit = productModel.BaseUnitIdNo Then
                     newPrice = basePrice
                 Else
                     unitQty = Service.GetRecordFieldWith2KeyG(Of Int32, Int16, Int32)(productIdNo, newUnit, "ProductUnit", "ProductIdNo", "UnitIdNo", "UnitQty")
                     baseQty = Service.GetRecordFieldWith2KeyG(Of Int32, Int16, Int32)(productIdNo, newUnit, "ProductUnit", "ProductIdNo", "UnitIdNo", "BaseQty")
-                    newPrice = Math.Ceiling(IIf(baseQty = 0, 0, basePrice * baseQty / unitQty) * 100D) / 100D
+                    newPrice = Math.Ceiling(If(unitQty = 0, 0D, basePrice * baseQty / unitQty) * 100D) / 100D
                 End If
                 SaleDetail.Price = newPrice
                 SetAmounts(SaleDetail)

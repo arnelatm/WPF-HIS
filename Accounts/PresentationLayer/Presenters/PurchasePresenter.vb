@@ -278,13 +278,13 @@ Namespace PresentationLayer.Presenters
                             gAmt = .GrossAmount
                             If .AmtBefVat <= .GrossAmount Then
                                 .DiscountAmount = .GrossAmount - .AmtBefVat
-                                .DiscountPercent = IIf(.GrossAmount = 0, 0, .DiscountAmount / .GrossAmount * 100)
+                                .DiscountPercent = If(.GrossAmount = 0, 0D, .DiscountAmount / .GrossAmount * 100D)
                                 .VatAmount = .AmtBefVat * .VatPercent / 100
                                 .NetAmount = GetNetAmount(purchaseDetail)
                             Else
                                 .GrossAmount = .AmtBefVat - .DiscountAmount
-                                .Price = IIf(.Quantity = 0, 0, .GrossAmount / .Quantity)
-                                .DiscountPercent = IIf(.GrossAmount = 0, 0, .DiscountAmount / .GrossAmount * 100)
+                                .Price = If(.Quantity = 0, 0D, .GrossAmount / .Quantity)
+                                .DiscountPercent = If(.GrossAmount = 0, 0D, .DiscountAmount / .GrossAmount * 100D)
                                 .VatAmount = GetVatAmount(purchaseDetail)
                                 .NetAmount = GetNetAmount(purchaseDetail)
                             End If
@@ -293,7 +293,7 @@ Namespace PresentationLayer.Presenters
                             .VatAmount = .NetAmount - .AmtBefVat
                             .GrossAmount = .AmtBefVat / (1 - .DiscountPercent / 100)
                             .DiscountAmount = .GrossAmount - .AmtBefVat
-                            .Price = IIf(.Quantity = 0, 0, .GrossAmount / .Quantity)
+                            .Price = If(.Quantity = 0, 0D, .GrossAmount / .Quantity)
                         Case "UnitIdNo"
                             If .Price <> 0 Then
                                 .Price = RecomputeNewPrice(eventType.BindingSource.Current)
@@ -447,11 +447,11 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Private Function RecomputeDiscountPercentage(purchaseDetail As PurchaseDetailView) As Decimal
-            Return Math.Round(IIf(purchaseDetail.GrossAmount = 0, 0, purchaseDetail.DiscountAmount / purchaseDetail.GrossAmount * 100), 2)
+            Return Math.Round(If(purchaseDetail.GrossAmount = 0, 0D, purchaseDetail.DiscountAmount / purchaseDetail.GrossAmount * 100D), 2)
         End Function
 
         Private Function RecomputePrice(purchaseDetail As PurchaseDetailView) As Decimal
-            Return Math.Round(IIf(purchaseDetail.Quantity = 0, 0, purchaseDetail.GrossAmount / purchaseDetail.Quantity), 2)
+            Return Math.Round(If(purchaseDetail.Quantity = 0, 0D, purchaseDetail.GrossAmount / purchaseDetail.Quantity), 2)
         End Function
 
         Private Function RecomputeNewPrice(purchaseDetail As PurchaseDetailView) As Decimal
@@ -469,7 +469,7 @@ Namespace PresentationLayer.Presenters
                 If pUnitInfo Is Nothing Then
                     newPrice = 0
                 Else
-                    newPrice = IIf(pUnitInfo.UnitQty = 0, 0, baseUnitPrice * pUnitInfo.BaseQty / pUnitInfo.UnitQty)
+                    newPrice = If(pUnitInfo.UnitQty = 0, 0D, baseUnitPrice * pUnitInfo.BaseQty / pUnitInfo.UnitQty)
                 End If
             End If
             Return newPrice
@@ -482,13 +482,13 @@ Namespace PresentationLayer.Presenters
             Else
                 Dim productUnitIdNo As Int32 = Service.GetRecordFieldWith2KeyG(Of Int32, Int16, Int32)(product.IdNo, lastPurchaseInfo.UnitIdNo, "ProductUnit", "ProductIdNo", "UnitIdNo", "IdNo")
                 Dim pUnitInfo = Service.GetFieldsWithIdNo(productUnitIdNo, "ProductUnit", "UnitQty,BaseQty")
-                baseUnitPrice = IIf(pUnitInfo.BaseQty = 0, 0, lastPurchaseInfo.Price * pUnitInfo.Unitqty / pUnitInfo.BaseQty)
+                baseUnitPrice = If(pUnitInfo.BaseQty = 0, 0D, lastPurchaseInfo.Price * pUnitInfo.Unitqty / pUnitInfo.BaseQty)
             End If
             Return baseUnitPrice
         End Function
 
         Private Function RecomputeVatPercentage(purchaseDetail As PurchaseDetailView) As Decimal
-            Return IIf(purchaseDetail.GrossAmount - purchaseDetail.DiscountAmount = 0, 0, purchaseDetail.VatAmount / (purchaseDetail.GrossAmount - purchaseDetail.DiscountAmount) * 100)
+            Return If(purchaseDetail.GrossAmount - purchaseDetail.DiscountAmount = 0, 0D, purchaseDetail.VatAmount / (purchaseDetail.GrossAmount - purchaseDetail.DiscountAmount) * 100D)
         End Function
 
         Private Function GetProductCodeFromGTin(gTin As String) As String
@@ -586,14 +586,14 @@ Namespace PresentationLayer.Presenters
                 Else
                     unitQty = Service.GetRecordFieldWith2KeyG(Of Int32, Int16, Int32)(productIdNo, oldUnit, "ProductUnit", "ProductIdNo", "UnitIdNo", "UnitQty")
                     baseQty = Service.GetRecordFieldWith2KeyG(Of Int32, Int16, Int32)(productIdNo, oldUnit, "ProductUnit", "ProductIdNo", "UnitIdNo", "BaseQty")
-                    basePrice = Math.Ceiling(IIf(baseQty = 0, 0, unitQty / baseQty) * purchaseDetail.Price * 100D) / 100D
+                    basePrice = Math.Ceiling(If(baseQty = 0, 0D, unitQty / baseQty) * purchaseDetail.Price * 100D) / 100D
                 End If
                 If newUnit = productModel.BaseUnitIdNo Then
                     newPrice = basePrice
                 Else
                     unitQty = Service.GetRecordFieldWith2KeyG(Of Int32, Int16, Int32)(productIdNo, newUnit, "ProductUnit", "ProductIdNo", "UnitIdNo", "UnitQty")
                     baseQty = Service.GetRecordFieldWith2KeyG(Of Int32, Int16, Int32)(productIdNo, newUnit, "ProductUnit", "ProductIdNo", "UnitIdNo", "BaseQty")
-                    newPrice = Math.Ceiling(IIf(baseQty = 0, 0, basePrice * baseQty / unitQty) * 100D) / 100D
+                    newPrice = Math.Ceiling(If(unitQty = 0, 0D, basePrice * baseQty / unitQty) * 100D) / 100D
                 End If
                 purchaseDetail.Price = newPrice
                 SetAmounts(purchaseDetail)

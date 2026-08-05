@@ -243,7 +243,7 @@ Namespace PresentationLayer.Presenters
                         If pUnitInfo Is Nothing Then
                             invTransactionDetail.UnitCost = 0
                         Else
-                            invTransactionDetail.UnitCost = IIf(pUnitInfo.UnitQty = 0, 0, baseUnitCost * pUnitInfo.BaseQty / pUnitInfo.UnitQty)
+                            invTransactionDetail.UnitCost = If(pUnitInfo.UnitQty = 0, 0D, baseUnitCost * pUnitInfo.BaseQty / pUnitInfo.UnitQty)
                         End If
                     End If
                 Else
@@ -257,7 +257,7 @@ Namespace PresentationLayer.Presenters
                         If pUnitInfo Is Nothing Then
                             invTransactionDetail.UnitCost = 0
                         Else
-                            invTransactionDetail.UnitCost = IIf(pUnitInfo.UnitQty = 0, 0, lastCost * pUnitInfo.BaseQty / pUnitInfo.UnitQty)
+                            invTransactionDetail.UnitCost = If(pUnitInfo.UnitQty = 0, 0D, lastCost * pUnitInfo.BaseQty / pUnitInfo.UnitQty)
                         End If
                     End If
                 End If
@@ -297,7 +297,7 @@ Namespace PresentationLayer.Presenters
             Else
                 Dim productUnitIdNo As Int32 = Service.GetRecordFieldWith2KeyG(Of Int32, Int16, Int32)(product.IdNo, invTransactionDetail.UnitIdNo, "ProductUnit", "ProductIdNo", "UnitIdNo", "IdNo")
                 Dim pUnitInfo = Service.GetFieldsWithIdNo(productUnitIdNo, "ProductUnit", "UnitQty,BaseQty")
-                baseUnitPrice = IIf(pUnitInfo.BaseQty = 0, 0, invTransactionDetail.UnitCost * pUnitInfo.BaseQty / pUnitInfo.UnitQty)
+                baseUnitPrice = If(pUnitInfo.UnitQty = 0, 0D, invTransactionDetail.UnitCost * pUnitInfo.BaseQty / pUnitInfo.UnitQty)
             End If
             Return baseUnitPrice
         End Function

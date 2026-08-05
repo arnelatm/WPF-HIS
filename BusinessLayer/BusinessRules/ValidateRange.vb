@@ -51,28 +51,28 @@ Namespace BusinessRules
 
                         Dim iMin As Integer = Integer.Parse(Min.ToString())
                         Dim iMax As Integer = Integer.Parse(Max.ToString())
-                        Dim iVal As Integer = IIf(value Is Nothing, 0, Integer.Parse(value.ToString()))
+                        Dim iVal As Integer = If(value Is Nothing, 0, Integer.Parse(value.ToString()))
 
                         Return (iVal >= iMin AndAlso iVal <= iMax)
 
                     Case ValidationDataType.Double
                         Dim dMin As Double = Double.Parse(Min.ToString())
                         Dim dMax As Double = Double.Parse(Max.ToString())
-                        Dim dVal As Double = IIf(value Is Nothing, 0, Double.Parse(value))
+                        Dim dVal As Double = If(value Is Nothing, 0, Double.Parse(value))
 
                         Return (dVal >= dMin AndAlso dVal <= dMax)
 
                     Case ValidationDataType.Decimal
                         Dim cMin As Decimal = Decimal.Parse(Min.ToString())
                         Dim cMax As Decimal = Decimal.Parse(Max.ToString())
-                        Dim cVal As Decimal = IIf(value Is Nothing, 0, Decimal.Parse(value))
+                        Dim cVal As Decimal = If(value Is Nothing, 0, Decimal.Parse(value))
 
                         Return (cVal >= cMin AndAlso cVal <= cMax)
 
                     Case ValidationDataType.Date
                         Dim tMin As Date = Date.Parse(Min.ToString())
                         Dim tMax As Date = Date.Parse(Max.ToString())
-                        Dim tVal As Date = IIf(value Is Nothing, Date.MinValue, Date.Parse(value))
+                        Dim tVal As Date = If(value Is Nothing, Date.MinValue, Date.Parse(value))
                         Return (tVal.TrimMilliseconds() >= tMin.TrimMilliseconds() AndAlso tVal.TrimMilliseconds() <= tMax.TrimMilliseconds())
 
                     Case ValidationDataType.String
@@ -80,8 +80,8 @@ Namespace BusinessRules
                         Dim sMin As String = Min.ToString()
                         Dim sMax As String = Max.ToString()
 
-                        Dim result1 As Integer = String.Compare(sMin, IIf(value Is Nothing, "", value))
-                        Dim result2 As Integer = String.Compare(sMax, IIf(value Is Nothing, "", value))
+                        Dim result1 As Integer = String.Compare(sMin, If(value Is Nothing, "", value.ToString()))
+                        Dim result2 As Integer = String.Compare(sMax, If(value Is Nothing, "", value.ToString()))
 
                         Return result1 <= 0 AndAlso result2 >= 0
                 End Select
