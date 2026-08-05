@@ -132,8 +132,8 @@
     <Compile Include="BFGregorianCalendar.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BlendItemsConverter.vb" />
-    <Compile Include="BlendTypeEditor.vb" />
+    <Compile Include="DesignersAndEditors\BlendItemsConverter.vb" />
+    <Compile Include="DesignersAndEditors\BlendTypeEditor.vb" />
     <Compile Include="CDgvComboBoxEditingControl.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -177,8 +177,8 @@
     <Compile Include="CbComboBox.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="cBlendItems.vb" />
-    <Compile Include="cblPointer.vb" />
+    <Compile Include="DesignersAndEditors\cBlendItems.vb" />
+    <Compile Include="DesignersAndEditors\cblPointer.vb" />
     <Compile Include="CDateTimePickerNullable.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -275,7 +275,7 @@
     <Compile Include="CFlowLayout.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="cFocalPoints.vb" />
+    <Compile Include="DesignersAndEditors\cFocalPoints.vb" />
     <Compile Include="CForm.Designer.vb">
       <DependentUpon>CForm.vb</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -305,7 +305,7 @@
     <Compile Include="CHijriCalendar.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ChooseGlyph.vb" />
+    <Compile Include="DesignersAndEditors\ChooseGlyph.vb" />
     <Compile Include="CLabel.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -351,9 +351,9 @@
     <Compile Include="ComboIcon.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CornerConverter.vb" />
-    <Compile Include="CornerGlyph.vb" />
-    <Compile Include="CornersProperty.vb" />
+    <Compile Include="DesignersAndEditors\CornerConverter.vb" />
+    <Compile Include="DesignersAndEditors\CornerGlyph.vb" />
+    <Compile Include="DesignersAndEditors\CornersProperty.vb" />
     <Compile Include="CTabControl.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -419,11 +419,11 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ErrorProviderExendedOrig.vb" />
-    <Compile Include="ErrorProviderExtended.vb">
+    <Compile Include="Core\ErrorProviderExtended.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="FocalPointsConverter.vb" />
-    <Compile Include="FocalPtGlyph.vb" />
+    <Compile Include="DesignersAndEditors\FocalPointsConverter.vb" />
+    <Compile Include="DesignersAndEditors\FocalPtGlyph.vb" />
     <Compile Include="DisplayProgressForm.Designer.vb">
       <DependentUpon>DisplayProgressForm.vb</DependentUpon>
     </Compile>
@@ -455,13 +455,13 @@
     <Compile Include="gTimePickerCntrl.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="HatchStyleEditor.vb" />
-    <Compile Include="HatchStyleListBox.vb">
+    <Compile Include="DesignersAndEditors\HatchStyleEditor.vb" />
+    <Compile Include="DesignersAndEditors\HatchStyleListBox.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="HijriDates.vb" />
-    <Compile Include="ISequencedData.vb" />
-    <Compile Include="IEntryControl.vb" />
+    <Compile Include="Core\ISequencedData.vb" />
+    <Compile Include="Core\IEntryControl.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -484,8 +484,8 @@
     <Compile Include="NullableDateTimeDropDown.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="NullableDateTimeTypeEditor.vb" />
-    <Compile Include="PadGlyph.vb" />
+    <Compile Include="DesignersAndEditors\NullableDateTimeTypeEditor.vb" />
+    <Compile Include="DesignersAndEditors\PadGlyph.vb" />
     <Compile Include="SplashScreen1.Designer.vb">
       <DependentUpon>SplashScreen1.vb</DependentUpon>
     </Compile>
@@ -506,8 +506,8 @@
     </Compile>
     <Compile Include="TestEditingControl.vb" />
     <Compile Include="TimeColors.vb" />
-    <Compile Include="TimeColorsUIEditor.vb" />
-    <Compile Include="TimeUIEditor.vb" />
+    <Compile Include="DesignersAndEditors\TimeColorsUIEditor.vb" />
+    <Compile Include="DesignersAndEditors\TimeUIEditor.vb" />
     <Compile Include="TxtComboBox.Designer.vb">
       <DependentUpon>TxtComboBox.vb</DependentUpon>
     </Compile>
@@ -520,8 +520,8 @@
     <Compile Include="UcCheckBox.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ValidationControl.vb" />
-    <Compile Include="ValidationControlCollection.vb" />
+    <Compile Include="Core\ValidationControl.vb" />
+    <Compile Include="Core\ValidationControlCollection.vb" />
     <Compile Include="VirtualDataGridView.vb" />
   </ItemGroup>
   <ItemGroup>
