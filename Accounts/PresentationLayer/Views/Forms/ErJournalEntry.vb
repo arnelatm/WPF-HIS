@@ -247,6 +247,7 @@ Namespace PresentationLayer.Views.Forms
                 dgvRevCostCenterIdNo.DataSource = _RevCostCentersByCode
                 dgvRevCostCenterIdNo.DisplayMember = "Name"
                 dgvRevCostCenterIdNo.ValueMember = "idNo"
+                dgvRevCostCenterIdNo.TreatZeroAsBlank = True
                 dgvRevCostCenterIdNo.DisplayStyleForCurrentCellOnly = True
             End With
             ResumeLayout()

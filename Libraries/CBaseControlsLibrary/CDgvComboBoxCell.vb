@@ -1,6 +1,7 @@
 ﻿' This is the class that represents your cell which can use your ComboBox class
 Imports System.ComponentModel
 Imports System.Drawing
+Imports System.Globalization
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 
@@ -62,6 +63,41 @@ Public Class CDgvComboBoxCell
         End Set
     End Property
 
+    Public Property TreatZeroAsBlank As Boolean
+
+    Protected Overrides Function GetFormattedValue(value As Object,
+                                                   rowIndex As Integer,
+                                                   ByRef cellStyle As DataGridViewCellStyle,
+                                                   valueTypeConverter As TypeConverter,
+                                                   formattedValueTypeConverter As TypeConverter,
+                                                   context As DataGridViewDataErrorContexts) As Object
+        If TreatZeroAsBlank AndAlso IsZeroValue(value) Then
+            Return String.Empty
+        End If
+
+        Return MyBase.GetFormattedValue(value, rowIndex, cellStyle, valueTypeConverter, formattedValueTypeConverter, context)
+    End Function
+
+    Public Overrides Function Clone() As Object
+        Dim copy As CDgvComboBoxCell = TryCast(MyBase.Clone(), CDgvComboBoxCell)
+        If copy IsNot Nothing Then
+            copy.DisplayOnly = DisplayOnly
+            copy.EditingMode = EditingMode
+            copy.Translatable = Translatable
+            copy.TreatZeroAsBlank = TreatZeroAsBlank
+        End If
+
+        Return copy
+    End Function
+
+    Private Shared Function IsZeroValue(value As Object) As Boolean
+        If value Is Nothing OrElse value Is DBNull.Value Then Return False
+
+        Dim numericValue As Decimal
+        Return Decimal.TryParse(Convert.ToString(value, CultureInfo.InvariantCulture), NumberStyles.Number, CultureInfo.InvariantCulture, numericValue) AndAlso
+               numericValue = 0D
+    End Function
+
 
 
     ' You must also override this method to initialize the ComboBox instance...
@@ -73,17 +109,6 @@ Public Class CDgvComboBoxCell
         CellEditingControl = CType(DataGridView.EditingControl, CtComboBoxEditingControl)
         DataGridView.ResumeDrawingNew()
     End Sub
-
-    'Public Overrides Function Clone() As Object
-
-    '    Dim copy As CtComboBoxCell = TryCast(MyBase.Clone(), CtComboBoxCell)
-    '    'copy.DisplayOnly = CellEditingControl.DisplayOnly
-    '    'copy.EditingMode = CellEditingControl.EditingMode
-    '    'copy.Translatable = CellEditingControl.Translatable
-    '    'copy.DisplayMember = CellEditingControl.DisplayMember
-    '    'copy.ValueMember = CellEditingControl.ValueMember
-    '    Return copy
-    'End Function
 
     Public Property CellEditingControl As CtComboBoxEditingControl
 

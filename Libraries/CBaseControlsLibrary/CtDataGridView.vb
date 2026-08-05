@@ -81,7 +81,7 @@ Public Class CtDataGridView
 
     Public Property Ea As EventAggregator
 
-    Private Sub DataGridView_DataSourceChanged(sender As Object, e As EventArgs) Handles Me.DataSourceChanged
+    Private Sub CtDataGridView_DataSourceChanged(sender As Object, e As EventArgs) Handles Me.DataSourceChanged
         If Columns(SequenceColumn) IsNot Nothing Then
             CallByName(Columns(SequenceColumn), "DisplayOnly", CallType.Set, True)
         End If
@@ -307,7 +307,7 @@ Public Class CtDataGridView
         Return MyBase.ProcessDataGridViewKey(e)
     End Function
 
-    Private Sub Me_CellValidated(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles Me.CellValidated
+    Private Sub CtDataGridView_CellValidated(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles Me.CellValidated
         ' Clear any error messages that may have been set in cell validation.
         If e.RowIndex < 0 Then Return
 
@@ -318,30 +318,19 @@ Public Class CtDataGridView
                 Return
             End If
 
-            _dataErrorCells.Remove(errorKey)
-            Me.Rows(e.RowIndex).Cells(e.ColumnIndex).ErrorText = Nothing
-        End If
-
-        If Not RowHasDataErrors(e.RowIndex) Then
-            Me.Rows(e.RowIndex).ErrorText = Nothing
+            ClearCellError(e.RowIndex, e.ColumnIndex)
         End If
 
     End Sub
 
-    Private Sub Me_CellValidating(sender As Object, e As DataGridViewCellValidatingEventArgs) Handles Me.CellValidating
+    Private Sub CtDataGridView_CellValidating(sender As Object, e As DataGridViewCellValidatingEventArgs) Handles Me.CellValidating
         If e.RowIndex < 0 OrElse e.ColumnIndex < 0 Then Return
 
         Dim column = Columns(e.ColumnIndex)
-        If Not TypeOf column Is CdgvMoneyColumn AndAlso Not TypeOf column Is CDgvDecimalColumn Then Return
+        If Not IsDecimalAmountColumn(column) Then Return
 
-        Dim formattedValue = Convert.ToString(e.FormattedValue, CultureInfo.CurrentCulture)
-        If String.IsNullOrWhiteSpace(formattedValue) Then Return
-
-        Dim decimalValue As Decimal
-        If Decimal.TryParse(formattedValue, NumberStyles.Number, CultureInfo.CurrentCulture, decimalValue) OrElse
-           Decimal.TryParse(formattedValue, NumberStyles.Number, CultureInfo.InvariantCulture, decimalValue) Then
-            Return
-        End If
+        Dim amount As Decimal
+        If TryParseAmount(e.FormattedValue, amount) Then Return
 
         Beep()
         MessageBox.Show("Please enter a valid amount.", "Invalid Amount", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -351,6 +340,18 @@ Public Class CtDataGridView
 
     Private Shared Function GetDataErrorCellKey(rowIndex As Integer, columnIndex As Integer) As String
         Return rowIndex.ToString(CultureInfo.InvariantCulture) & ":" & columnIndex.ToString(CultureInfo.InvariantCulture)
+    End Function
+
+    Private Shared Function IsDecimalAmountColumn(column As DataGridViewColumn) As Boolean
+        Return TypeOf column Is CdgvMoneyColumn OrElse TypeOf column Is CDgvDecimalColumn
+    End Function
+
+    Private Shared Function TryParseAmount(value As Object, ByRef amount As Decimal) As Boolean
+        Dim formattedValue = Convert.ToString(value, CultureInfo.CurrentCulture)
+        If String.IsNullOrWhiteSpace(formattedValue) Then Return True
+
+        Return Decimal.TryParse(formattedValue, NumberStyles.Number, CultureInfo.CurrentCulture, amount) OrElse
+               Decimal.TryParse(formattedValue, NumberStyles.Number, CultureInfo.InvariantCulture, amount)
     End Function
 
     Private Sub RestoreEditingControlValue()
@@ -371,6 +372,17 @@ Public Class CtDataGridView
             _dataErrorCells.Add(errorKey)
             _dataErrorCellsSetDuringValidation.Add(errorKey)
             Rows(rowIndex).Cells(columnIndex).ErrorText = errorMessage
+        End If
+    End Sub
+
+    Private Sub ClearCellError(rowIndex As Integer, columnIndex As Integer)
+        If columnIndex >= 0 Then
+            _dataErrorCells.Remove(GetDataErrorCellKey(rowIndex, columnIndex))
+            Rows(rowIndex).Cells(columnIndex).ErrorText = Nothing
+        End If
+
+        If Not RowHasDataErrors(rowIndex) Then
+            Rows(rowIndex).ErrorText = Nothing
         End If
     End Sub
 
@@ -404,7 +416,7 @@ Public Class CtDataGridView
         Return Me.ProcessTabKey(keyData)
     End Function
 
-    Private Sub ctDataGridView_DefaultValuesNeeded(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewRowEventArgs) Handles Me.DefaultValuesNeeded
+    Private Sub CtDataGridView_DefaultValuesNeeded(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewRowEventArgs) Handles Me.DefaultValuesNeeded
         If (SequenceColumn IsNot Nothing AndAlso SequenceColumn <> "") Then
             If Columns(SequenceColumn) IsNot Nothing Then
                 Dim nRowColumn = Columns(SequenceColumn).Index()
@@ -446,11 +458,11 @@ Public Class CtDataGridView
     End Sub
 
 
-    Private Sub DataGridView_DataError(ByVal sender As Object, ByVal e As DataGridViewDataErrorEventArgs) Handles Me.DataError
+    Private Sub CtDataGridView_DataError(ByVal sender As Object, ByVal e As DataGridViewDataErrorEventArgs) Handles Me.DataError
 
         e.ThrowException = False
 
-        If (e.Context = DataGridViewDataErrorContexts.Formatting) OrElse (e.Context = DataGridViewDataErrorContexts.PreferredSize) OrElse (e.Context = DataGridViewDataErrorContexts.Display) OrElse (e.Context = DataGridViewDataErrorContexts.Display) Then
+        If e.Context = DataGridViewDataErrorContexts.Formatting OrElse e.Context = DataGridViewDataErrorContexts.PreferredSize OrElse e.Context = DataGridViewDataErrorContexts.Display Then
             Return
         End If
 
@@ -475,7 +487,7 @@ Public Class CtDataGridView
         End If
     End Sub
 
-    Private Sub DataGridView1_RowHeaderMouseClick(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles Me.RowHeaderMouseClick
+    Private Sub CtDataGridView_RowHeaderMouseClick(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles Me.RowHeaderMouseClick
         If e.RowIndex < 0 Then Return
 
         SelectionMode = DataGridViewSelectionMode.RowHeaderSelect
@@ -554,7 +566,7 @@ Public Class CtDataGridView
         Return Nothing
     End Function
 
-    Private Sub DataGridView1_EditingControlShowing(ByVal sender As Object, ByVal e As DataGridViewEditingControlShowingEventArgs) Handles MyBase.EditingControlShowing
+    Private Sub CtDataGridView_EditingControlShowing(ByVal sender As Object, ByVal e As DataGridViewEditingControlShowingEventArgs) Handles MyBase.EditingControlShowing
         If TypeOf e.Control Is CtComboBoxEditingControl Then
             'Me.EditingMode = True
             Me.SuspendDrawingNew()
@@ -606,7 +618,7 @@ Public Class CtDataGridView
         End If
     End Sub
 
-    Private Sub On_CellPainting(ByVal sender As Object, ByVal e As DataGridViewCellPaintingEventArgs) Handles Me.CellPainting
+    Private Sub CtDataGridView_CellPainting(ByVal sender As Object, ByVal e As DataGridViewCellPaintingEventArgs) Handles Me.CellPainting
         If (e.ColumnIndex >= 0 AndAlso e.RowIndex >= 0) Then
             If TypeOf Me.Columns(e.ColumnIndex) Is CDgvCheckBoxColumn Then
                 Dim value As Boolean
@@ -634,7 +646,7 @@ Public Class CtDataGridView
     <Browsable(True)>
     Public Property SecurityKey As String = ""
 
-    Private Sub EndEditMode(sender As System.Object, e As EventArgs) Handles MyBase.CurrentCellDirtyStateChanged
+    Private Sub CtDataGridView_CurrentCellDirtyStateChanged(sender As System.Object, e As EventArgs) Handles MyBase.CurrentCellDirtyStateChanged
         'If current Then cell Of grid Is dirty, commits edit
         If Me.IsCurrentCellDirty Then
             If TypeOf CurrentCell Is CDgvCheckboxCell Then
@@ -655,7 +667,7 @@ Public Class CtDataGridView
     Private _existingFind As Boolean
 
     'Executes when Cell Value on a DataGridView changes
-    Private Sub DataGridCellValueChanged(sender As DataGridView, e As DataGridViewCellEventArgs) Handles MyBase.CellValueChanged
+    Private Sub CtDataGridView_CellValueChanged(sender As DataGridView, e As DataGridViewCellEventArgs) Handles MyBase.CellValueChanged
         'check that row isn't -1, i.e. creating datagrid header
         If e.RowIndex = -1 Then Exit Sub
         'mark as dirty
@@ -700,13 +712,13 @@ Public Class CtDataGridView
         AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells)
     End Sub
 
-    Private Sub dataGridView_CellValueNeeded(ByVal sender As Object, ByVal e As DataGridViewCellValueEventArgs) Handles MyBase.CellValueNeeded
+    Private Sub CtDataGridView_CellValueNeeded(ByVal sender As Object, ByVal e As DataGridViewCellValueEventArgs) Handles MyBase.CellValueNeeded
         If Cached Then
             e.Value = _memoryCache.RetrieveElement(e.RowIndex, e.ColumnIndex)
         End If
     End Sub
 
-    Private Sub DataGridView_MouseUp(sender As Object, e As MouseEventArgs) Handles Me.MouseUp
+    Private Sub CtDataGridView_MouseUp(sender As Object, e As MouseEventArgs) Handles Me.MouseUp
         Dim hitTestInfo As DataGridView.HitTestInfo
         Dim continueSearch As Boolean = False
         Dim matchFound As Integer = -1
@@ -1055,11 +1067,11 @@ Public Class CtDataGridView
 
     Public Property OldCellValue As Object
 
-    Private Sub MyCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles MyBase.CellBeginEdit
+    Private Sub CtDataGridView_CellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles MyBase.CellBeginEdit
         OldCellValue = Me.CurrentCell.Value
     End Sub
 
-    Private Sub OnCtDataGridView_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles MyBase.CellContentClick
+    Private Sub CtDataGridView_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles MyBase.CellContentClick
         If CurrentCell IsNot Nothing AndAlso TypeOf CurrentCell Is IEntryControl Then
             If TypeOf CurrentCell Is CDgvCheckboxCell Then
                 If e.ColumnIndex < 0 OrElse e.RowIndex < 0 Then Exit Sub

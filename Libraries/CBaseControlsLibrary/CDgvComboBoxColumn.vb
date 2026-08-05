@@ -9,6 +9,7 @@ Public Class CDgvComboBoxColumn
     Private _displayOnly As Boolean
     Private _editingMode As Boolean
     Private _translatable As Boolean = False
+    Private _treatZeroAsBlank As Boolean = False
 
     Public Sub New()
         '' Specify the column to use your custom cell class...
@@ -25,6 +26,9 @@ Public Class CDgvComboBoxColumn
             Dim dataGridViewComboBoxCell As CDgvComboBoxCell = TryCast(value, CDgvComboBoxCell)
             If value IsNot Nothing AndAlso dataGridViewComboBoxCell Is Nothing Then
                 Throw New InvalidCastException("Must be a CDgvComboBoxCell")
+            End If
+            If dataGridViewComboBoxCell IsNot Nothing Then
+                dataGridViewComboBoxCell.TreatZeroAsBlank = _treatZeroAsBlank
             End If
             MyBase.CellTemplate = value
         End Set
@@ -85,12 +89,44 @@ Public Class CDgvComboBoxColumn
 
     Public Property SuggestCharCount As Integer
 
-    'Public Overrides Function Clone() As Object
-    '    Dim copy As CtComboBoxColumn = TryCast(MyBase.Clone(), CtComboBoxColumn)
-    '    'copy.DisplayOnly = DisplayOnly
-    '    'copy.EditingMode = EditingMode
-    '    'copy.Translatable = Translatable
-    '    Return copy
-    'End Function
+    <Category("Custom Properties")>
+    <DefaultValue(False)>
+    <Description("Treats a bound value of zero as blank instead of showing a combo-box lookup error.")>
+    Public Property TreatZeroAsBlank As Boolean
+        Get
+            Return _treatZeroAsBlank
+        End Get
+        Set(value As Boolean)
+            _treatZeroAsBlank = value
+            ApplyTreatZeroAsBlankToCells()
+        End Set
+    End Property
+
+    Public Overrides Function Clone() As Object
+        Dim copy As CDgvComboBoxColumn = TryCast(MyBase.Clone(), CDgvComboBoxColumn)
+        If copy IsNot Nothing Then
+            copy.TreatZeroAsBlank = TreatZeroAsBlank
+        End If
+
+        Return copy
+    End Function
+
+    Private Sub ApplyTreatZeroAsBlankToCells()
+        Dim template = TryCast(CellTemplate, CDgvComboBoxCell)
+        If template IsNot Nothing Then
+            template.TreatZeroAsBlank = _treatZeroAsBlank
+        End If
+
+        If DataGridView Is Nothing Then Return
+
+        For Each row As DataGridViewRow In DataGridView.Rows
+            Dim cell = TryCast(row.Cells(Index), CDgvComboBoxCell)
+            If cell IsNot Nothing Then
+                cell.TreatZeroAsBlank = _treatZeroAsBlank
+            End If
+        Next
+
+        DataGridView.InvalidateColumn(Index)
+    End Sub
 
 End Class
