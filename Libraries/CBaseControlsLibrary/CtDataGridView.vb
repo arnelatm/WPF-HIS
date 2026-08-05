@@ -251,7 +251,6 @@ Public Class CtDataGridView
                 End If
             Catch ex As Exception
                 ' missing member
-                Dim x = ex
             End Try
 
         End If
@@ -325,7 +324,7 @@ Public Class CtDataGridView
                     'Select the last row.
                     Rows(RowCount() - 1).Selected = True
                     CurrentCell = Me(FirstEditableColumn, CurrentCell.RowIndex() + 1)
-                    Return (keyData)
+                    Return True
                 End If
             End If
         End If
