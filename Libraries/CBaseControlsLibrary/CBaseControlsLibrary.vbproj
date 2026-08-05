@@ -134,15 +134,15 @@
     </Compile>
     <Compile Include="DesignersAndEditors\BlendItemsConverter.vb" />
     <Compile Include="DesignersAndEditors\BlendTypeEditor.vb" />
-    <Compile Include="CDgvComboBoxEditingControl.vb">
+    <Compile Include="DataGridViewControls\EditingControls\CDgvComboBoxEditingControl.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CDgvDtComboBoxEditingControl.vb">
+    <Compile Include="DataGridViewControls\EditingControls\CDgvDtComboBoxEditingControl.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CDgvExpiryColumn.vb" />
-    <Compile Include="CDgvExpiryCell.vb" />
-    <Compile Include="CDvCheckBoxEditingControl.vb">
+    <Compile Include="DataGridViewControls\Columns\CDgvExpiryColumn.vb" />
+    <Compile Include="DataGridViewControls\Cells\CDgvExpiryCell.vb" />
+    <Compile Include="DataGridViewControls\EditingControls\CDvCheckBoxEditingControl.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CfComboBox.vb">
@@ -151,21 +151,21 @@
     <Compile Include="CFindGridForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CfDgvComboBoxCell.vb" />
-    <Compile Include="CfDgvComboBoxColumn.vb" />
+    <Compile Include="DataGridViewControls\Cells\CfDgvComboBoxCell.vb" />
+    <Compile Include="DataGridViewControls\Columns\CfDgvComboBoxColumn.vb" />
     <Compile Include="CtComboBoxEditingControl.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CDgvComboBoxCell.vb" />
-    <Compile Include="CDgvComboBoxColumn.vb" />
+    <Compile Include="DataGridViewControls\Cells\CDgvComboBoxCell.vb" />
+    <Compile Include="DataGridViewControls\Columns\CDgvComboBoxColumn.vb" />
     <Compile Include="cxComboBox.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CfDgvComboBoxEditingControl.vb">
+    <Compile Include="DataGridViewControls\EditingControls\CfDgvComboBoxEditingControl.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CtDgvDtpColumn.vb" />
-    <Compile Include="CtDataGridView.vb">
+    <Compile Include="DataGridViewControls\Columns\CtDgvDtpColumn.vb" />
+    <Compile Include="DataGridViewControls\CtDataGridView.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CtComboBox.vb">
@@ -182,9 +182,9 @@
     <Compile Include="CDateTimePickerNullable.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CDgvDtpCalendarUnused.vb" />
-    <Compile Include="CDgvCalendar.vb" />
-    <Compile Include="CDgvDtpColumn.vb" />
+    <Compile Include="DataGridViewControls\Columns\CDgvDtpCalendarUnused.vb" />
+    <Compile Include="DataGridViewControls\Columns\CDgvCalendar.vb" />
+    <Compile Include="DataGridViewControls\Columns\CDgvDtpColumn.vb" />
     <Compile Include="CListSelector.designer.vb">
       <DependentUpon>CListSelector.vb</DependentUpon>
     </Compile>
@@ -226,18 +226,18 @@
     <Compile Include="CCustomDateTimePicker.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="cDataGridViewWithFooter.vb">
+    <Compile Include="DataGridViewControls\cDataGridViewWithFooter.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CDataGvBs.vb">
+    <Compile Include="DataGridViewControls\CDataGvBs.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CDgvButtonColumn.vb" />
-    <Compile Include="CDgvCheckboxCell.vb" />
-    <Compile Include="CDgvButtonCell.vb" />
-    <Compile Include="CDgvDecimalCell.vb" />
-    <Compile Include="CDgvCheckBoxColumn.vb" />
-    <Compile Include="CdgvDecimalColumn.vb" />
+    <Compile Include="DataGridViewControls\Columns\CDgvButtonColumn.vb" />
+    <Compile Include="DataGridViewControls\Cells\CDgvCheckboxCell.vb" />
+    <Compile Include="DataGridViewControls\Cells\CDgvButtonCell.vb" />
+    <Compile Include="DataGridViewControls\Cells\CDgvDecimalCell.vb" />
+    <Compile Include="DataGridViewControls\Columns\CDgvCheckBoxColumn.vb" />
+    <Compile Include="DataGridViewControls\Columns\CdgvDecimalColumn.vb" />
     <Compile Include="cbsComboBox.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -250,10 +250,10 @@
     <Compile Include="CDateTimePicker.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CDgvMoneyCell.vb" />
-    <Compile Include="CDgvTextBoxCell.vb" />
-    <Compile Include="CdgvMoneyColumn.vb" />
-    <Compile Include="CDgvTextColumn.vb" />
+    <Compile Include="DataGridViewControls\Cells\CDgvMoneyCell.vb" />
+    <Compile Include="DataGridViewControls\Cells\CDgvTextBoxCell.vb" />
+    <Compile Include="DataGridViewControls\Columns\CdgvMoneyColumn.vb" />
+    <Compile Include="DataGridViewControls\Columns\CDgvTextColumn.vb" />
     <Compile Include="CDtpGregorianDate.Designer.vb">
       <DependentUpon>CDtpGregorianDate.vb</DependentUpon>
     </Compile>
@@ -386,9 +386,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CustomComboBox.vb" />
-    <Compile Include="DataGridViewNumericUpDownCell.vb" />
-    <Compile Include="DataGridViewNumericUpDownColumn.vb" />
-    <Compile Include="DataGridViewNumericUpDownEditingControl.vb">
+    <Compile Include="DataGridViewControls\Cells\DataGridViewNumericUpDownCell.vb" />
+    <Compile Include="DataGridViewControls\Columns\DataGridViewNumericUpDownColumn.vb" />
+    <Compile Include="DataGridViewControls\EditingControls\DataGridViewNumericUpDownEditingControl.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="DateRangeControl.Designer.vb">
@@ -397,7 +397,7 @@
     <Compile Include="DateRangeControl.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="dgvfooter.vb">
+    <Compile Include="DataGridViewControls\dgvfooter.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="dlgTimeColors.designer.vb">
@@ -477,7 +477,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="MyDgvComboboxCell.vb" />
+    <Compile Include="DataGridViewControls\Cells\MyDgvComboboxCell.vb" />
     <Compile Include="NullableDateTimeDropDown.designer.vb">
       <DependentUpon>NullableDateTimeDropDown.vb</DependentUpon>
     </Compile>
@@ -522,7 +522,7 @@
     </Compile>
     <Compile Include="Core\ValidationControl.vb" />
     <Compile Include="Core\ValidationControlCollection.vb" />
-    <Compile Include="VirtualDataGridView.vb" />
+    <Compile Include="DataGridViewControls\VirtualDataGridView.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ATabPage.resx">
