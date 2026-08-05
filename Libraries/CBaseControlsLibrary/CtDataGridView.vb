@@ -25,6 +25,8 @@ Public Class CtDataGridView
     Private _memoryCache As Cache
     Private ReadOnly _origEditMode As DataGridViewEditMode
     Private _findColumnNo As Integer
+    Private ReadOnly _dataErrorCells As New System.Collections.Generic.HashSet(Of String)
+    Private ReadOnly _dataErrorCellsSetDuringValidation As New System.Collections.Generic.HashSet(Of String)
 
     Public Sub New()
         MyBase.New()
@@ -309,9 +311,80 @@ Public Class CtDataGridView
         ' Clear any error messages that may have been set in cell validation.
         If e.RowIndex < 0 Then Return
 
-        Me.Rows(e.RowIndex).ErrorText = Nothing
+        If e.ColumnIndex >= 0 Then
+            Dim errorKey = GetDataErrorCellKey(e.RowIndex, e.ColumnIndex)
+            If _dataErrorCellsSetDuringValidation.Contains(errorKey) Then
+                _dataErrorCellsSetDuringValidation.Remove(errorKey)
+                Return
+            End If
+
+            _dataErrorCells.Remove(errorKey)
+            Me.Rows(e.RowIndex).Cells(e.ColumnIndex).ErrorText = Nothing
+        End If
+
+        If Not RowHasDataErrors(e.RowIndex) Then
+            Me.Rows(e.RowIndex).ErrorText = Nothing
+        End If
 
     End Sub
+
+    Private Sub Me_CellValidating(sender As Object, e As DataGridViewCellValidatingEventArgs) Handles Me.CellValidating
+        If e.RowIndex < 0 OrElse e.ColumnIndex < 0 Then Return
+
+        Dim column = Columns(e.ColumnIndex)
+        If Not TypeOf column Is CdgvMoneyColumn AndAlso Not TypeOf column Is CDgvDecimalColumn Then Return
+
+        Dim formattedValue = Convert.ToString(e.FormattedValue, CultureInfo.CurrentCulture)
+        If String.IsNullOrWhiteSpace(formattedValue) Then Return
+
+        Dim decimalValue As Decimal
+        If Decimal.TryParse(formattedValue, NumberStyles.Number, CultureInfo.CurrentCulture, decimalValue) OrElse
+           Decimal.TryParse(formattedValue, NumberStyles.Number, CultureInfo.InvariantCulture, decimalValue) Then
+            Return
+        End If
+
+        Beep()
+        MessageBox.Show("Please enter a valid amount.", "Invalid Amount", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        RestoreEditingControlValue()
+        e.Cancel = True
+    End Sub
+
+    Private Shared Function GetDataErrorCellKey(rowIndex As Integer, columnIndex As Integer) As String
+        Return rowIndex.ToString(CultureInfo.InvariantCulture) & ":" & columnIndex.ToString(CultureInfo.InvariantCulture)
+    End Function
+
+    Private Sub RestoreEditingControlValue()
+        If EditingControl Is Nothing Then Return
+
+        Dim textEditingControl = TryCast(EditingControl, TextBoxBase)
+        If textEditingControl Is Nothing Then Return
+
+        textEditingControl.Text = Convert.ToString(OldCellValue, CultureInfo.CurrentCulture)
+        textEditingControl.SelectAll()
+    End Sub
+
+    Private Sub SetCellError(rowIndex As Integer, columnIndex As Integer, errorMessage As String)
+        Rows(rowIndex).ErrorText = errorMessage
+
+        If columnIndex >= 0 Then
+            Dim errorKey = GetDataErrorCellKey(rowIndex, columnIndex)
+            _dataErrorCells.Add(errorKey)
+            _dataErrorCellsSetDuringValidation.Add(errorKey)
+            Rows(rowIndex).Cells(columnIndex).ErrorText = errorMessage
+        End If
+    End Sub
+
+    Private Function RowHasDataErrors(rowIndex As Integer) As Boolean
+        Dim rowPrefix = rowIndex.ToString(CultureInfo.InvariantCulture) & ":"
+
+        For Each errorKey In _dataErrorCells
+            If errorKey.StartsWith(rowPrefix, StringComparison.Ordinal) Then
+                Return True
+            End If
+        Next
+
+        Return False
+    End Function
 
     Private Function MoveToNextCell(keyData As Keys) As Boolean
         If Not IsCurrentCellDirty() Then
@@ -375,19 +448,30 @@ Public Class CtDataGridView
 
     Private Sub DataGridView_DataError(ByVal sender As Object, ByVal e As DataGridViewDataErrorEventArgs) Handles Me.DataError
 
-        'Try
-        'Catch ex As Exception
+        e.ThrowException = False
+
         If (e.Context = DataGridViewDataErrorContexts.Formatting) OrElse (e.Context = DataGridViewDataErrorContexts.PreferredSize) OrElse (e.Context = DataGridViewDataErrorContexts.Display) OrElse (e.Context = DataGridViewDataErrorContexts.Display) Then
-            'Debugger.Break()
-            ' ignore error
-        Else
-            If e.Context.HasFlag(DataGridViewDataErrorContexts.Parsing) Then
-                Dim editControl As Object = Me.EditingControl
-                If TypeOf (editControl) Is CtDgvDtpEditingControl Then
-                    Dim x As CtDgvDtpEditingControl = DirectCast(editControl, CtDgvDtpEditingControl)
-                    x.InformUserOfInvalidDate()
-                End If
+            Return
+        End If
+
+        If e.Context.HasFlag(DataGridViewDataErrorContexts.Parsing) Then
+            Dim editControl As Object = Me.EditingControl
+            If TypeOf (editControl) Is CtDgvDtpEditingControl Then
+                Dim x As CtDgvDtpEditingControl = DirectCast(editControl, CtDgvDtpEditingControl)
+                x.InformUserOfInvalidDate()
             End If
+        End If
+
+        If e.RowIndex < 0 Then Return
+
+        Dim errorMessage As String = "Invalid value."
+        If e.Exception IsNot Nothing AndAlso Not String.IsNullOrEmpty(e.Exception.Message) Then
+            errorMessage = e.Exception.Message
+        End If
+
+        Rows(e.RowIndex).ErrorText = errorMessage
+        If e.ColumnIndex >= 0 Then
+            SetCellError(e.RowIndex, e.ColumnIndex, errorMessage)
         End If
     End Sub
 
@@ -525,10 +609,13 @@ Public Class CtDataGridView
     Private Sub On_CellPainting(ByVal sender As Object, ByVal e As DataGridViewCellPaintingEventArgs) Handles Me.CellPainting
         If (e.ColumnIndex >= 0 AndAlso e.RowIndex >= 0) Then
             If TypeOf Me.Columns(e.ColumnIndex) Is CDgvCheckBoxColumn Then
-                Dim value = DirectCast(e.FormattedValue, Nullable(Of Boolean))
+                Dim value As Boolean
+                If e.FormattedValue IsNot Nothing AndAlso e.FormattedValue IsNot DBNull.Value Then
+                    Boolean.TryParse(Convert.ToString(e.FormattedValue, CultureInfo.InvariantCulture), value)
+                End If
                 If Not EditingMode Then
                     e.Paint(e.CellBounds, DataGridViewPaintParts.All And Not (DataGridViewPaintParts.ContentForeground))
-                    Dim state = IIf((value.HasValue And value.Value), VisualStyles.CheckBoxState.CheckedDisabled, VisualStyles.CheckBoxState.UncheckedDisabled)
+                    Dim state = If(value, VisualStyles.CheckBoxState.CheckedDisabled, VisualStyles.CheckBoxState.UncheckedDisabled)
                     Dim size = RadioButtonRenderer.GetGlyphSize(e.Graphics, state)
                     Dim location = New Point((e.CellBounds.Width - size.Width) / 2, (e.CellBounds.Height - size.Height) / 2)
                     location.Offset(e.CellBounds.Location)
@@ -976,7 +1063,17 @@ Public Class CtDataGridView
         If CurrentCell IsNot Nothing AndAlso TypeOf CurrentCell Is IEntryControl Then
             If TypeOf CurrentCell Is CDgvCheckboxCell Then
                 If e.ColumnIndex < 0 OrElse e.RowIndex < 0 Then Exit Sub
-                CurrentCell.Value = Not CurrentCell.Value
+                Dim checkBoxColumn = TryCast(Columns(e.ColumnIndex), DataGridViewCheckBoxColumn)
+                If checkBoxColumn Is Nothing OrElse Not checkBoxColumn.ThreeState Then
+                    Dim currentValue = CurrentCell.Value
+                    Dim currentChecked As Boolean
+
+                    If currentValue IsNot Nothing AndAlso currentValue IsNot DBNull.Value Then
+                        Boolean.TryParse(Convert.ToString(currentValue, CultureInfo.InvariantCulture), currentChecked)
+                    End If
+
+                    CurrentCell.Value = Not currentChecked
+                End If
                 CommitEdit(DataGridViewDataErrorContexts.Commit)
             End If
         End If
