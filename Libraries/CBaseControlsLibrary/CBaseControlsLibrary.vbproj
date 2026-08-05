@@ -108,28 +108,28 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ATabPage.Designer.vb">
+    <Compile Include="StandardControls\ATabPage.Designer.vb">
       <DependentUpon>ATabPage.vb</DependentUpon>
     </Compile>
-    <Compile Include="ATabPage.vb">
+    <Compile Include="StandardControls\ATabPage.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="BackgroundWorkerForm.Designer.vb">
+    <Compile Include="FormsAndDialogs\BackgroundWorkerForm.Designer.vb">
       <DependentUpon>BackgroundWorkerForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="BackgroundWorkerForm.vb">
+    <Compile Include="FormsAndDialogs\BackgroundWorkerForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BFCalendarUmAlQura.Designer.vb">
+    <Compile Include="CalendarControls\BFCalendarUmAlQura.Designer.vb">
       <DependentUpon>BFCalendarUmAlQura.vb</DependentUpon>
     </Compile>
-    <Compile Include="BFCalendarUmAlQura.vb">
+    <Compile Include="CalendarControls\BFCalendarUmAlQura.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BFGregorianCalendar.Designer.vb">
+    <Compile Include="CalendarControls\BFGregorianCalendar.Designer.vb">
       <DependentUpon>BFGregorianCalendar.vb</DependentUpon>
     </Compile>
-    <Compile Include="BFGregorianCalendar.vb">
+    <Compile Include="CalendarControls\BFGregorianCalendar.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="DesignersAndEditors\BlendItemsConverter.vb" />
@@ -145,20 +145,20 @@
     <Compile Include="DataGridViewControls\EditingControls\CDvCheckBoxEditingControl.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CfComboBox.vb">
+    <Compile Include="ComboBoxControls\ObsoleteCompiled\CfComboBox.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CFindGridForm.vb">
+    <Compile Include="FormsAndDialogs\CFindGridForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="DataGridViewControls\Cells\CfDgvComboBoxCell.vb" />
     <Compile Include="DataGridViewControls\Columns\CfDgvComboBoxColumn.vb" />
-    <Compile Include="CtComboBoxEditingControl.vb">
+    <Compile Include="ComboBoxControls\Active\CtComboBoxEditingControl.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="DataGridViewControls\Cells\CDgvComboBoxCell.vb" />
     <Compile Include="DataGridViewControls\Columns\CDgvComboBoxColumn.vb" />
-    <Compile Include="cxComboBox.vb">
+    <Compile Include="ComboBoxControls\ObsoleteCompiled\cxComboBox.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="DataGridViewControls\EditingControls\CfDgvComboBoxEditingControl.vb">
@@ -168,62 +168,62 @@
     <Compile Include="DataGridViewControls\CtDataGridView.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CtComboBox.vb">
+    <Compile Include="ComboBoxControls\Active\CtComboBox.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CdComboBox.vb">
+    <Compile Include="ComboBoxControls\ObsoleteCompiled\CdComboBox.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CbComboBox.vb">
+    <Compile Include="ComboBoxControls\ObsoleteCompiled\CbComboBox.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="DesignersAndEditors\cBlendItems.vb" />
     <Compile Include="DesignersAndEditors\cblPointer.vb" />
-    <Compile Include="CDateTimePickerNullable.vb">
+    <Compile Include="DateTimeControls\CDateTimePickerNullable.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="DataGridViewControls\Columns\CDgvDtpCalendarUnused.vb" />
     <Compile Include="DataGridViewControls\Columns\CDgvCalendar.vb" />
     <Compile Include="DataGridViewControls\Columns\CDgvDtpColumn.vb" />
-    <Compile Include="CListSelector.designer.vb">
+    <Compile Include="StandardControls\CListSelector.designer.vb">
       <DependentUpon>CListSelector.vb</DependentUpon>
     </Compile>
-    <Compile Include="CListSelector.vb">
+    <Compile Include="StandardControls\CListSelector.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CPictureBox.Designer.vb">
+    <Compile Include="StandardControls\CPictureBox.Designer.vb">
       <DependentUpon>CPictureBox.vb</DependentUpon>
     </Compile>
-    <Compile Include="CPictureBox.vb">
+    <Compile Include="StandardControls\CPictureBox.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CButton.Designer.vb">
+    <Compile Include="StandardControls\CButton.Designer.vb">
       <DependentUpon>CButton.vb</DependentUpon>
     </Compile>
-    <Compile Include="CButton.vb">
+    <Compile Include="StandardControls\CButton.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CButtonActionList.vb" />
-    <Compile Include="CButtonDesigner.vb" />
-    <Compile Include="CCalendar.Designer.vb">
+    <Compile Include="StandardControls\CButtonActionList.vb" />
+    <Compile Include="StandardControls\CButtonDesigner.vb" />
+    <Compile Include="CalendarControls\CCalendar.Designer.vb">
       <DependentUpon>CCalendar.vb</DependentUpon>
     </Compile>
-    <Compile Include="CCalendar.vb">
+    <Compile Include="CalendarControls\CCalendar.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CCalendarGregorian.Designer.vb">
+    <Compile Include="CalendarControls\CCalendarGregorian.Designer.vb">
       <DependentUpon>CCalendarGregorian.vb</DependentUpon>
     </Compile>
-    <Compile Include="CCalendarGregorian.vb">
+    <Compile Include="CalendarControls\CCalendarGregorian.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CCheckBoxNew.vb">
+    <Compile Include="StandardControls\CCheckBoxNew.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CCustomDateTimePicker.Designer.vb">
+    <Compile Include="DateTimeControls\CCustomDateTimePicker.Designer.vb">
       <DependentUpon>CCustomDateTimePicker.vb</DependentUpon>
     </Compile>
-    <Compile Include="CCustomDateTimePicker.vb">
+    <Compile Include="DateTimeControls\CCustomDateTimePicker.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="DataGridViewControls\cDataGridViewWithFooter.vb">
@@ -238,184 +238,184 @@
     <Compile Include="DataGridViewControls\Cells\CDgvDecimalCell.vb" />
     <Compile Include="DataGridViewControls\Columns\CDgvCheckBoxColumn.vb" />
     <Compile Include="DataGridViewControls\Columns\CdgvDecimalColumn.vb" />
-    <Compile Include="cbsComboBox.vb">
+    <Compile Include="ComboBoxControls\ObsoleteCompiled\cbsComboBox.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CCheckBox.vb">
+    <Compile Include="StandardControls\CCheckBox.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CComboBox.vb">
+    <Compile Include="ComboBoxControls\Active\CComboBox.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CDateTimePicker.vb">
+    <Compile Include="DateTimeControls\CDateTimePicker.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="DataGridViewControls\Cells\CDgvMoneyCell.vb" />
     <Compile Include="DataGridViewControls\Cells\CDgvTextBoxCell.vb" />
     <Compile Include="DataGridViewControls\Columns\CdgvMoneyColumn.vb" />
     <Compile Include="DataGridViewControls\Columns\CDgvTextColumn.vb" />
-    <Compile Include="CDtpGregorianDate.Designer.vb">
+    <Compile Include="DateTimeControls\CDtpGregorianDate.Designer.vb">
       <DependentUpon>CDtpGregorianDate.vb</DependentUpon>
     </Compile>
-    <Compile Include="CDtpGregorianDate.vb">
+    <Compile Include="DateTimeControls\CDtpGregorianDate.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CDTPHijriDate.Designer.vb">
+    <Compile Include="DateTimeControls\CDTPHijriDate.Designer.vb">
       <DependentUpon>CDTPHijriDate.vb</DependentUpon>
     </Compile>
-    <Compile Include="CDTPHijriDate.vb">
+    <Compile Include="DateTimeControls\CDTPHijriDate.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CFindForm.designer.vb">
+    <Compile Include="FormsAndDialogs\CFindForm.designer.vb">
       <DependentUpon>CFindForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="CFindForm.vb">
+    <Compile Include="FormsAndDialogs\CFindForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CFlowLayout.vb">
+    <Compile Include="StandardControls\CFlowLayout.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="DesignersAndEditors\cFocalPoints.vb" />
-    <Compile Include="CForm.Designer.vb">
+    <Compile Include="FormsAndDialogs\CForm.Designer.vb">
       <DependentUpon>CForm.vb</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="CForm.vb">
+    <Compile Include="FormsAndDialogs\CForm.vb">
       <SubType>Form</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="CForm1.Designer.vb">
+    <Compile Include="FormsAndDialogs\CForm1.Designer.vb">
       <DependentUpon>CForm.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="CGDateTimePicker.Designer.vb">
+    <Compile Include="DateTimeControls\CGDateTimePicker.Designer.vb">
       <DependentUpon>CGDateTimePicker.vb</DependentUpon>
     </Compile>
-    <Compile Include="CGDateTimePicker.vb">
+    <Compile Include="DateTimeControls\CGDateTimePicker.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CGroupBox.vb">
+    <Compile Include="StandardControls\CGroupBox.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CHijriCalendar.Designer.vb">
+    <Compile Include="CalendarControls\CHijriCalendar.Designer.vb">
       <DependentUpon>CHijriCalendar.vb</DependentUpon>
     </Compile>
-    <Compile Include="CHijriCalendar.vb">
+    <Compile Include="CalendarControls\CHijriCalendar.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="DesignersAndEditors\ChooseGlyph.vb" />
-    <Compile Include="CLabel.vb">
+    <Compile Include="StandardControls\CLabel.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CListBox.vb">
+    <Compile Include="StandardControls\CListBox.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CListBoxForm.Designer.vb">
+    <Compile Include="FormsAndDialogs\CListBoxForm.Designer.vb">
       <DependentUpon>CListBoxForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="CListBoxForm.vb">
+    <Compile Include="FormsAndDialogs\CListBoxForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CMaskedTextBox.vb">
+    <Compile Include="StandardControls\CMaskedTextBox.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CMessageBox.Designer.vb">
+    <Compile Include="FormsAndDialogs\CMessageBox.Designer.vb">
       <DependentUpon>CMessageBox.vb</DependentUpon>
     </Compile>
-    <Compile Include="CMessageBox.vb">
+    <Compile Include="FormsAndDialogs\CMessageBox.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CModalForm.Designer.vb">
+    <Compile Include="FormsAndDialogs\CModalForm.Designer.vb">
       <DependentUpon>CModalForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="CModalForm.vb">
+    <Compile Include="FormsAndDialogs\CModalForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CMonthPicker.Designer.vb">
+    <Compile Include="DateTimeControls\CMonthPicker.Designer.vb">
       <DependentUpon>CMonthPicker.vb</DependentUpon>
     </Compile>
-    <Compile Include="CMonthPicker.vb">
+    <Compile Include="DateTimeControls\CMonthPicker.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CNewTabControl.vb">
+    <Compile Include="StandardControls\CNewTabControl.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ColorComboBox.designer.vb">
+    <Compile Include="ComboBoxControls\Active\ColorComboBox.Designer.vb">
       <DependentUpon>ColorComboBox.vb</DependentUpon>
     </Compile>
-    <Compile Include="ColorComboBox.vb">
+    <Compile Include="ComboBoxControls\Active\ColorComboBox.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ComboIcon.vb">
+    <Compile Include="ComboBoxControls\Active\ComboIcon.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="DesignersAndEditors\CornerConverter.vb" />
     <Compile Include="DesignersAndEditors\CornerGlyph.vb" />
     <Compile Include="DesignersAndEditors\CornersProperty.vb" />
-    <Compile Include="CTabControl.vb">
+    <Compile Include="StandardControls\CTabControl.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CRadioButton.vb">
+    <Compile Include="StandardControls\CRadioButton.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CTabPage.vb">
+    <Compile Include="StandardControls\CTabPage.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CTextBox.vb">
+    <Compile Include="StandardControls\CTextBox.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CTextBoxArabic.vb">
+    <Compile Include="StandardControls\CTextBoxArabic.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CTextBoxIdNo.vb">
+    <Compile Include="StandardControls\CTextBoxIdNo.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CToolStripMenu.Designer.vb">
+    <Compile Include="StandardControls\CToolStripMenu.Designer.vb">
       <DependentUpon>CToolStripMenu.vb</DependentUpon>
     </Compile>
-    <Compile Include="CToolStripMenu.vb" />
-    <Compile Include="CTreeView.vb">
+    <Compile Include="StandardControls\CToolStripMenu.vb" />
+    <Compile Include="StandardControls\CTreeView.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CTreeViewOld.Designer.vb">
+    <Compile Include="StandardControls\CTreeViewOld.Designer.vb">
       <DependentUpon>CTreeViewOld.vb</DependentUpon>
     </Compile>
-    <Compile Include="CTreeViewOld.vb">
+    <Compile Include="StandardControls\CTreeViewOld.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CustomComboBox.vb" />
+    <Compile Include="ComboBoxControls\ObsoleteCompiled\CustomComboBox.vb" />
     <Compile Include="DataGridViewControls\Cells\DataGridViewNumericUpDownCell.vb" />
     <Compile Include="DataGridViewControls\Columns\DataGridViewNumericUpDownColumn.vb" />
     <Compile Include="DataGridViewControls\EditingControls\DataGridViewNumericUpDownEditingControl.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="DateRangeControl.Designer.vb">
+    <Compile Include="DateTimeControls\DateRangeControl.Designer.vb">
       <DependentUpon>DateRangeControl.vb</DependentUpon>
     </Compile>
-    <Compile Include="DateRangeControl.vb">
+    <Compile Include="DateTimeControls\DateRangeControl.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="DataGridViewControls\dgvfooter.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="dlgTimeColors.designer.vb">
+    <Compile Include="DateTimeControls\dlgTimeColors.Designer.vb">
       <DependentUpon>dlgTimeColors.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgTimeColors.vb">
+    <Compile Include="DateTimeControls\dlgTimeColors.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DropdownColorBlender.designer.vb">
+    <Compile Include="FormsAndDialogs\DropdownColorBlender.designer.vb">
       <DependentUpon>DropdownColorBlender.vb</DependentUpon>
     </Compile>
-    <Compile Include="DropdownColorBlender.vb">
+    <Compile Include="FormsAndDialogs\DropdownColorBlender.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="DropDowngTimeEditor.designer.vb">
+    <Compile Include="DateTimeControls\DropDowngTimeEditor.Designer.vb">
       <DependentUpon>DropDowngTimeEditor.vb</DependentUpon>
     </Compile>
-    <Compile Include="DropDowngTimeEditor.vb">
+    <Compile Include="DateTimeControls\DropDowngTimeEditor.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ErrorProviderExendedOrig.vb" />
@@ -424,42 +424,42 @@
     </Compile>
     <Compile Include="DesignersAndEditors\FocalPointsConverter.vb" />
     <Compile Include="DesignersAndEditors\FocalPtGlyph.vb" />
-    <Compile Include="DisplayProgressForm.Designer.vb">
+    <Compile Include="FormsAndDialogs\DisplayProgressForm.Designer.vb">
       <DependentUpon>DisplayProgressForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="DisplayProgressForm.vb">
+    <Compile Include="FormsAndDialogs\DisplayProgressForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="gDateTimePicker.designer.vb">
+    <Compile Include="DateTimeControls\gDateTimePicker.Designer.vb">
       <DependentUpon>gDateTimePicker.vb</DependentUpon>
     </Compile>
-    <Compile Include="gDateTimePicker.vb">
+    <Compile Include="DateTimeControls\gDateTimePicker.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="GregorianDates.vb" />
-    <Compile Include="gTimeBox.designer.vb">
+    <Compile Include="CalendarControls\GregorianDates.vb" />
+    <Compile Include="DateTimeControls\gTimeBox.Designer.vb">
       <DependentUpon>gTimeBox.vb</DependentUpon>
     </Compile>
-    <Compile Include="gTimeBox.vb">
+    <Compile Include="DateTimeControls\gTimeBox.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="gTimePicker.designer.vb">
+    <Compile Include="DateTimeControls\gTimePicker.Designer.vb">
       <DependentUpon>gTimePicker.vb</DependentUpon>
     </Compile>
-    <Compile Include="gTimePicker.vb">
+    <Compile Include="DateTimeControls\gTimePicker.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="gTimePickerCntrl.designer.vb">
+    <Compile Include="DateTimeControls\gTimePickerCntrl.Designer.vb">
       <DependentUpon>gTimePickerCntrl.vb</DependentUpon>
     </Compile>
-    <Compile Include="gTimePickerCntrl.vb">
+    <Compile Include="DateTimeControls\gTimePickerCntrl.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="DesignersAndEditors\HatchStyleEditor.vb" />
     <Compile Include="DesignersAndEditors\HatchStyleListBox.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="HijriDates.vb" />
+    <Compile Include="CalendarControls\HijriDates.vb" />
     <Compile Include="Core\ISequencedData.vb" />
     <Compile Include="Core\IEntryControl.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -478,18 +478,18 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="DataGridViewControls\Cells\MyDgvComboboxCell.vb" />
-    <Compile Include="NullableDateTimeDropDown.designer.vb">
+    <Compile Include="DateTimeControls\NullableDateTimeDropDown.Designer.vb">
       <DependentUpon>NullableDateTimeDropDown.vb</DependentUpon>
     </Compile>
-    <Compile Include="NullableDateTimeDropDown.vb">
+    <Compile Include="DateTimeControls\NullableDateTimeDropDown.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="DesignersAndEditors\NullableDateTimeTypeEditor.vb" />
     <Compile Include="DesignersAndEditors\PadGlyph.vb" />
-    <Compile Include="SplashScreen1.Designer.vb">
+    <Compile Include="FormsAndDialogs\SplashScreen1.Designer.vb">
       <DependentUpon>SplashScreen1.vb</DependentUpon>
     </Compile>
-    <Compile Include="SplashScreen1.vb">
+    <Compile Include="FormsAndDialogs\SplashScreen1.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="SR.vb" />
@@ -498,26 +498,26 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="tdpGregorian.Designer.vb">
+    <Compile Include="DateTimeControls\tdpGregorian.Designer.vb">
       <DependentUpon>tdpGregorian.vb</DependentUpon>
     </Compile>
-    <Compile Include="tdpGregorian.vb">
+    <Compile Include="DateTimeControls\tdpGregorian.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="TestEditingControl.vb" />
-    <Compile Include="TimeColors.vb" />
+    <Compile Include="DateTimeControls\TimeColors.vb" />
     <Compile Include="DesignersAndEditors\TimeColorsUIEditor.vb" />
     <Compile Include="DesignersAndEditors\TimeUIEditor.vb" />
-    <Compile Include="TxtComboBox.Designer.vb">
+    <Compile Include="ComboBoxControls\Active\TxtComboBox.Designer.vb">
       <DependentUpon>TxtComboBox.vb</DependentUpon>
     </Compile>
-    <Compile Include="TxtComboBox.vb">
+    <Compile Include="ComboBoxControls\Active\TxtComboBox.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UcCheckBox.Designer.vb">
+    <Compile Include="StandardControls\UcCheckBox.Designer.vb">
       <DependentUpon>UcCheckBox.vb</DependentUpon>
     </Compile>
-    <Compile Include="UcCheckBox.vb">
+    <Compile Include="StandardControls\UcCheckBox.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Core\ValidationControl.vb" />
@@ -525,109 +525,109 @@
     <Compile Include="DataGridViewControls\VirtualDataGridView.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ATabPage.resx">
+    <EmbeddedResource Include="StandardControls\ATabPage.resx">
       <DependentUpon>ATabPage.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="BackgroundWorkerForm.resx">
+    <EmbeddedResource Include="FormsAndDialogs\BackgroundWorkerForm.resx">
       <DependentUpon>BackgroundWorkerForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="BFCalendarUmAlQura.ar-SA.resx">
+    <EmbeddedResource Include="CalendarControls\BFCalendarUmAlQura.ar-SA.resx">
       <DependentUpon>BFCalendarUmAlQura.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="BFCalendarUmAlQura.ar.resx">
+    <EmbeddedResource Include="CalendarControls\BFCalendarUmAlQura.ar.resx">
       <DependentUpon>BFCalendarUmAlQura.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="BFCalendarUmAlQura.en-GB.resx">
+    <EmbeddedResource Include="CalendarControls\BFCalendarUmAlQura.en-GB.resx">
       <DependentUpon>BFCalendarUmAlQura.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="BFCalendarUmAlQura.resx">
+    <EmbeddedResource Include="CalendarControls\BFCalendarUmAlQura.resx">
       <DependentUpon>BFCalendarUmAlQura.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="BFGregorianCalendar.resx">
+    <EmbeddedResource Include="CalendarControls\BFGregorianCalendar.resx">
       <DependentUpon>BFGregorianCalendar.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CListSelector.resx">
+    <EmbeddedResource Include="StandardControls\CListSelector.resx">
       <DependentUpon>CListSelector.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CPictureBox.resx">
+    <EmbeddedResource Include="StandardControls\CPictureBox.resx">
       <DependentUpon>CPictureBox.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="CButton.resx">
+    <EmbeddedResource Include="StandardControls\CButton.resx">
       <DependentUpon>CButton.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="CCalendar.resx">
+    <EmbeddedResource Include="CalendarControls\CCalendar.resx">
       <DependentUpon>CCalendar.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CCalendarGregorian.resx">
+    <EmbeddedResource Include="CalendarControls\CCalendarGregorian.resx">
       <DependentUpon>CCalendarGregorian.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CComboBox.resx">
+    <EmbeddedResource Include="ComboBoxControls\Active\CComboBox.resx">
       <DependentUpon>CComboBox.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CCustomDateTimePicker.resx">
+    <EmbeddedResource Include="DateTimeControls\CCustomDateTimePicker.resx">
       <DependentUpon>CCustomDateTimePicker.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CDtpGregorianDate.resx">
+    <EmbeddedResource Include="DateTimeControls\CDtpGregorianDate.resx">
       <DependentUpon>CDtpGregorianDate.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CDTPHijriDate.resx">
+    <EmbeddedResource Include="DateTimeControls\CDTPHijriDate.resx">
       <DependentUpon>CDTPHijriDate.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CFindForm.resx">
+    <EmbeddedResource Include="FormsAndDialogs\CFindForm.resx">
       <DependentUpon>CFindForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CForm.resx">
+    <EmbeddedResource Include="FormsAndDialogs\CForm.resx">
       <DependentUpon>CForm.vb</DependentUpon>
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>CForm1.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="CGDateTimePicker.resx">
+    <EmbeddedResource Include="DateTimeControls\CGDateTimePicker.resx">
       <DependentUpon>CGDateTimePicker.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CHijriCalendar.resx">
+    <EmbeddedResource Include="CalendarControls\CHijriCalendar.resx">
       <DependentUpon>CHijriCalendar.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CListBoxForm.resx">
+    <EmbeddedResource Include="FormsAndDialogs\CListBoxForm.resx">
       <DependentUpon>CListBoxForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CMonthPicker.resx">
+    <EmbeddedResource Include="DateTimeControls\CMonthPicker.resx">
       <DependentUpon>CMonthPicker.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CTextBox.resx">
+    <EmbeddedResource Include="StandardControls\CTextBox.resx">
       <DependentUpon>CTextBox.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="CToolStripMenu.resx">
+    <EmbeddedResource Include="StandardControls\CToolStripMenu.resx">
       <DependentUpon>CToolStripMenu.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CTreeViewOld.resx">
+    <EmbeddedResource Include="StandardControls\CTreeViewOld.resx">
       <DependentUpon>CTreeViewOld.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DateRangeControl.resx">
+    <EmbeddedResource Include="DateTimeControls\DateRangeControl.resx">
       <DependentUpon>DateRangeControl.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgTimeColors.resx">
+    <EmbeddedResource Include="DateTimeControls\dlgTimeColors.resx">
       <DependentUpon>dlgTimeColors.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DropdownColorBlender.resx">
+    <EmbeddedResource Include="FormsAndDialogs\DropdownColorBlender.resx">
       <DependentUpon>DropdownColorBlender.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="DisplayProgressForm.resx">
+    <EmbeddedResource Include="FormsAndDialogs\DisplayProgressForm.resx">
       <DependentUpon>DisplayProgressForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DropDowngTimeEditor.resx">
+    <EmbeddedResource Include="DateTimeControls\DropDowngTimeEditor.resx">
       <DependentUpon>DropDowngTimeEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="gTimePicker.resx">
+    <EmbeddedResource Include="DateTimeControls\gTimePicker.resx">
       <DependentUpon>gTimePicker.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="gTimePickerCntrl.resx">
+    <EmbeddedResource Include="DateTimeControls\gTimePickerCntrl.resx">
       <DependentUpon>gTimePickerCntrl.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -636,10 +636,10 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NullableDateTimeDropDown.resx">
+    <EmbeddedResource Include="DateTimeControls\NullableDateTimeDropDown.resx">
       <DependentUpon>NullableDateTimeDropDown.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SplashScreen1.resx">
+    <EmbeddedResource Include="FormsAndDialogs\SplashScreen1.resx">
       <DependentUpon>SplashScreen1.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Strings.resx">
@@ -647,13 +647,13 @@
       <LastGenOutput>Strings.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
     </EmbeddedResource>
-    <EmbeddedResource Include="tdpGregorian.resx">
+    <EmbeddedResource Include="DateTimeControls\tdpGregorian.resx">
       <DependentUpon>tdpGregorian.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TxtComboBox.resx">
+    <EmbeddedResource Include="ComboBoxControls\Active\TxtComboBox.resx">
       <DependentUpon>TxtComboBox.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UcCheckBox.resx">
+    <EmbeddedResource Include="StandardControls\UcCheckBox.resx">
       <DependentUpon>UcCheckBox.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
@@ -707,7 +707,7 @@
     <Service Include="{94E38DFF-614B-4CBD-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="CButton.bmp" />
+    <EmbeddedResource Include="StandardControls\CButton.bmp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\btnprevious_ar.png" />
@@ -719,8 +719,8 @@
     <None Include="Resources\Calendar18x18.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="gTimePicker.bmp" />
-    <Content Include="gTimePickerCntrl.bmp" />
+    <Content Include="DateTimeControls\gTimePicker.bmp" />
+    <Content Include="DateTimeControls\gTimePickerCntrl.bmp" />
     <Content Include="Resources\downArrow.png" />
     <None Include="Resources\rightarrow_ar.PNG" />
     <None Include="Resources\rightarrow.png" />
