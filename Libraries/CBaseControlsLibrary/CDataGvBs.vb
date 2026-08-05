@@ -6,6 +6,9 @@ Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.GlobalResources
 Imports AATM.Libraries.MessagingLibrary
 
+' NOTE: This control appears to be legacy/unused.
+' As of 2026-08-05, repository search found no forms or designers instantiating CDataGvBs.
+' Keep compiled for compatibility until confirmed safe to remove.
 Public Class CDataGvBs
     Inherits DataGridView
     Implements IEntryControl
