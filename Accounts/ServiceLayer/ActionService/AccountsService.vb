@@ -48,7 +48,7 @@ Namespace ServiceLayer.ActionService
             End If
             If DataDao IsNot Nothing Then
                 If objectName = "Basic" Then
-                    If daoParam Is Nothing AndAlso daoParam.Length > 0 Then
+                    If daoParam Is Nothing OrElse daoParam.Length = 0 Then
                         MessageBox.Show("Please provide BasicDao table or itemView name.")
                         Debugger.Break()
                     End If

@@ -29,7 +29,6 @@ Namespace BusinessRules
             Dim errorMessage = Messaging.GetParametrizedMessage(True, "MsgInvalidRange", {"fieldName", fieldName, "minimumValue", minFieldValue, "maximumValue", maxFieldValue})
             Me.Min = min
             Me.Max = max
-            Me.Operator = [Operator]
             Me.DataType = dataType
             [Error] = errorMessage
         End Sub
@@ -39,6 +38,7 @@ Namespace BusinessRules
         Public Sub New(propertyName As String, errorMessage As String, min As Object, max As Object,
                        [operator] As ValidationOperator, dataType As ValidationDataType)
             Me.New(propertyName, min, max, dataType)
+            Me.Operator = [operator]
             [Error] = errorMessage
         End Sub
 
