@@ -448,19 +448,20 @@ Public Class CtDataGridView
             dgvControl = TryCast(CurrentCell, Libraries.CBaseControlsLibrary.CDgvComboBoxCell)
             If dgvControl IsNot Nothing Then
                 If dgvControl.CellEditingControl.SelectedItem IsNot Nothing Then
+                    Dim selectedRow = TryCast(dgvControl.CellEditingControl.SelectedItem, DataRowView)
+                    If selectedRow Is Nothing Then Return CurrentCell.Value
+
                     Select Case field.ToLower()
                         Case $"code"
-                            Dim x = DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CDgvComboBoxCell).CellEditingControl.SelectedItem, DataRowView).Row("Code")
-                            Return x
+                            If selectedRow.Row.Table.Columns.Contains("Code") Then Return selectedRow.Row("Code")
                         Case $"name"
-                            Dim x = DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CDgvComboBoxCell).CellEditingControl.SelectedItem, DataRowView).Row("Name")
-                            Return x
+                            If selectedRow.Row.Table.Columns.Contains("Name") Then Return selectedRow.Row("Name")
                         Case $"idno"
-                            Dim x = DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CDgvComboBoxCell).CellEditingControl.SelectedItem, DataRowView).Row("IdNo")
-                            Return x
+                            If selectedRow.Row.Table.Columns.Contains("IdNo") Then Return selectedRow.Row("IdNo")
                         Case Else
                             Return CurrentCell.Value
                     End Select
+                    Return CurrentCell.Value
                 Else
                     Return CurrentCell.Value
                 End If
