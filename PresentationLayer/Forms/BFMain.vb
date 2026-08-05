@@ -425,8 +425,7 @@ Public Class BfMain
                     TranslateButton(cCtrl)
                 ElseIf TypeOf cCtrl Is CTabControl Then
                     Dim tc = CType(cCtrl, CTabControl)
-                    tc.RightToLeft = If(GlobalVariables.RightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
-                    tc.RightToLeftLayout = GlobalVariables.RightToLeftLayout
+                    tc.SetRightToLeftLayoutSafe(GlobalVariables.RightToLeftLayout)
                 End If
             ElseIf TypeOf cCtrl Is CTextBox Then
                 Dim tc = CType(cCtrl, CTextBox)

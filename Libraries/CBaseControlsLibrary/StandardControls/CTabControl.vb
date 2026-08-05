@@ -20,18 +20,53 @@ Public Class CTabControl
     <Browsable(True)>
     Public Property SecurityKey As String
 
+    Public Sub SetRightToLeftLayoutSafe(useRightToLeftLayout As Boolean)
+        Dim originalSelectedIndex = SelectedIndex
+        Dim desiredRightToLeft = If(useRightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
+
+        SuspendLayout()
+        Try
+            EnsureSelectedTab()
+
+            If RightToLeftLayout <> useRightToLeftLayout Then
+                RightToLeftLayout = useRightToLeftLayout
+            End If
+
+            If RightToLeft <> desiredRightToLeft Then
+                RightToLeft = desiredRightToLeft
+            End If
+
+            RestoreSelectedTab(originalSelectedIndex)
+        Finally
+            ResumeLayout()
+        End Try
+    End Sub
+
     Private Sub CTabControl_Paint(sender As Object, e As PaintEventArgs) Handles Me.Paint
-        If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft And BackgroundImage IsNot Nothing Then
+        If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
             ' this routine is needed for righttoleft languages because the backgroundimage is
             ' not redrawn for this culture.  So need to manually repaint the background form with
             ' this procedure.
-            RightToLeftLayout = True
-            RightToLeft = RightToLeft.Yes
-            Dim r As Rectangle = ClientRectangle
-            e.Graphics.DrawImage(BackgroundImage, r)
+            SetRightToLeftLayoutSafe(True)
+            If BackgroundImage IsNot Nothing Then
+                Dim r As Rectangle = ClientRectangle
+                e.Graphics.DrawImage(BackgroundImage, r)
+            End If
         Else
-            RightToLeftLayout = False
-            RightToLeft = RightToLeft.No
+            SetRightToLeftLayoutSafe(False)
+        End If
+    End Sub
+
+    Private Sub EnsureSelectedTab()
+        If TabPages.Count > 0 AndAlso (SelectedIndex < 0 OrElse SelectedIndex >= TabPages.Count) Then
+            SelectedIndex = 0
+        End If
+    End Sub
+
+    Private Sub RestoreSelectedTab(originalSelectedIndex As Integer)
+        If originalSelectedIndex >= 0 AndAlso originalSelectedIndex < TabPages.Count AndAlso
+           SelectedIndex <> originalSelectedIndex Then
+            SelectedIndex = originalSelectedIndex
         End If
     End Sub
 
