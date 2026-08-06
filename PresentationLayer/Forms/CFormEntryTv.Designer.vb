@@ -34,19 +34,15 @@ Partial Class CFormEntryTv
         Me.SplitContainer1.SuspendLayout
         Me.SuspendLayout
         '
-        'TranslatorDAC
-        '
-        Me.TranslatorDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
-        '
         'AppDataDAC
         '
         Me.AppDataDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
         '
         'SplitContainer1
         '
-        Me.SplitContainer1.BackgroundImage = CType(resources.GetObject("SplitContainer1.BackgroundImage"),System.Drawing.Image)
+        Me.SplitContainer1.BackgroundImage = CType(resources.GetObject("SplitContainer1.BackgroundImage"), System.Drawing.Image)
         Me.SplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SplitContainer1.Location = New System.Drawing.Point(0, 53)
+        Me.SplitContainer1.Location = New System.Drawing.Point(0, 55)
         Me.SplitContainer1.Name = "SplitContainer1"
         '
         'SplitContainer1.Panel1
@@ -59,22 +55,22 @@ Partial Class CFormEntryTv
         '
         Me.SplitContainer1.Panel2.BackColor = System.Drawing.Color.Transparent
         Me.SplitContainer1.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.SplitContainer1.Size = New System.Drawing.Size(800, 494)
+        Me.SplitContainer1.Size = New System.Drawing.Size(800, 492)
         Me.SplitContainer1.SplitterDistance = 266
         Me.SplitContainer1.SplitterWidth = 10
         Me.SplitContainer1.TabIndex = 4
         '
         'FormTreeView
         '
-        Me.FormTreeView.BackColor = System.Drawing.Color.FromArgb(CType(CType(192,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(192,Byte),Integer))
+        Me.FormTreeView.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.FormTreeView.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.FormTreeView.HotTracking = true
+        Me.FormTreeView.HotTracking = True
         Me.FormTreeView.Location = New System.Drawing.Point(0, 0)
         Me.FormTreeView.Name = "FormTreeView"
         TreeNode1.Name = "Node0"
         TreeNode1.Text = "root"
         Me.FormTreeView.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode1})
-        Me.FormTreeView.Size = New System.Drawing.Size(266, 494)
+        Me.FormTreeView.Size = New System.Drawing.Size(266, 492)
         Me.FormTreeView.TabIndex = 0
         Me.FormTreeView.Tag = "root"
         '

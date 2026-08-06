@@ -50,7 +50,7 @@ Public Class BfMain
 
     Protected Overridable ReadOnly Property MirrorLayoutWhenSwitchingLanguage As Boolean
         Get
-            Return True
+            Return False
         End Get
     End Property
 

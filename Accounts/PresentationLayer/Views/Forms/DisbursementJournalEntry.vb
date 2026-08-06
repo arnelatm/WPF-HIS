@@ -37,10 +37,10 @@ Namespace PresentationLayer.Views.Forms
             If tableName = "CdJournal" Then
                 ViewDisplayName = "CdJournalEntry"
                 DisplayPrintCheckButton(PayType)
-                Me.Text = Messaging.TranslateCaption("Cash Disbursement Journal")
+                Me.Text = "Cash Disbursement Journal"
             Else
                 ViewDisplayName = "PcJournalEntry"
-                Me.Text = Messaging.TranslateCaption("Petty Cash Disbursement Journal")
+                Me.Text = "Petty Cash Disbursement Journal"
                 btnPrintCheck.Visible = False
                 btnPrintPcReplenishment.Visible = False
                 cboPayType.Visible = False
