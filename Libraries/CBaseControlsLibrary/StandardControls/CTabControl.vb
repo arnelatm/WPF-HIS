@@ -43,17 +43,12 @@ Public Class CTabControl
     End Sub
 
     Private Sub CTabControl_Paint(sender As Object, e As PaintEventArgs) Handles Me.Paint
-        If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
+        If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft AndAlso BackgroundImage IsNot Nothing Then
             ' this routine is needed for righttoleft languages because the backgroundimage is
             ' not redrawn for this culture.  So need to manually repaint the background form with
             ' this procedure.
-            SetRightToLeftLayoutSafe(True)
-            If BackgroundImage IsNot Nothing Then
-                Dim r As Rectangle = ClientRectangle
-                e.Graphics.DrawImage(BackgroundImage, r)
-            End If
-        Else
-            SetRightToLeftLayoutSafe(False)
+            Dim r As Rectangle = ClientRectangle
+            e.Graphics.DrawImage(BackgroundImage, r)
         End If
     End Sub
 

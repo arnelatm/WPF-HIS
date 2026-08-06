@@ -25,6 +25,10 @@ Public Class BfMain
     Private _formCulture As CultureInfo
     Private _systemViewIdNo As Int32
     Private _firstLoadSwitch As Int32 = 0
+    Private ReadOnly _targetLanguageIdNoCache As New Dictionary(Of String, Short)(StringComparer.OrdinalIgnoreCase)
+    Private ReadOnly _translationViewCache As New Dictionary(Of Integer, DataView)
+    Private _originalFormCaption As String
+    Private ReadOnly _originalTabCaptions As New Dictionary(Of TabPage, String)
 
     'Private _myPresenter As UserPresenter
     Protected CaptionCollection As New Collection
@@ -43,6 +47,12 @@ Public Class BfMain
     Public Event AfterTranslateForm()
 
     Public Event BeforeLoad()
+
+    Protected Overridable ReadOnly Property MirrorLayoutWhenSwitchingLanguage As Boolean
+        Get
+            Return True
+        End Get
+    End Property
 
     Public Sub New()
 
@@ -187,31 +197,39 @@ Public Class BfMain
     End Sub
 
     Protected Overridable Sub SwitchUiLanguage(originalUi As Boolean)
-        Visible = False
-        Dim sw As Integer = 0
-        If originalUi Then
-            If TextDisplayLanguage <> GlobalVariables.DefaultUnmirroredCultureInfoStr Then
-                TextDisplayLanguage = GlobalVariables.DefaultUnmirroredCultureInfoStr
-                sw = 1
+        Dim targetLanguage = If(originalUi,
+                                GlobalVariables.DefaultUnmirroredCultureInfoStr,
+                                GlobalVariables.DefaultMirroredCultureInfoStr)
+        Dim languageChanged = Not String.Equals(TextDisplayLanguage,
+                                                targetLanguage,
+                                                StringComparison.OrdinalIgnoreCase)
+
+        Me.SuspendDrawingNew()
+        SuspendLayout()
+        Try
+            If languageChanged Then
+                TextDisplayLanguage = targetLanguage
+            ElseIf Not String.Equals(CultureInfo.CurrentCulture.Name,
+                                     targetLanguage,
+                                     StringComparison.OrdinalIgnoreCase) Then
+                SetCulture(targetLanguage)
             End If
-            GlobalVariables.RightToLeftLayout = True
-            RightToLeft = RightToLeft.No
-        Else
-            If TextDisplayLanguage <> GlobalVariables.DefaultMirroredCultureInfoStr Then
-                TextDisplayLanguage = GlobalVariables.DefaultMirroredCultureInfoStr
-                sw = 1
+
+            GlobalVariables.RightToLeftLayout = CultureInfo.CurrentCulture.TextInfo.IsRightToLeft
+            Dim desiredRightToLeft = If(GlobalVariables.RightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
+            If (MirrorLayoutWhenSwitchingLanguage OrElse Not FormShown) AndAlso RightToLeft <> desiredRightToLeft Then
+                RightToLeft = desiredRightToLeft
             End If
-            GlobalVariables.RightToLeftLayout = True
-            RightToLeft = RightToLeft.Yes
-        End If
-        TranslateForm()
-        If sw = 1 Then
-            CultureInfo.CurrentCulture = New CultureInfo(TextDisplayLanguage, False)
-            If Ea IsNot Nothing Then
+
+            TranslateForm()
+
+            If languageChanged AndAlso Ea IsNot Nothing Then
                 Ea.PublishEvent(New LanguageChanged(Me))
             End If
-        End If
-        Visible = True
+        Finally
+            ResumeLayout(True)
+            Me.ResumeDrawingNew()
+        End Try
     End Sub
 
     Public Sub TranslateForm()
@@ -220,6 +238,7 @@ Public Class BfMain
             Dim settings As New SettingsSaver
             Dim allCtrl As New List(Of Control)
             allCtrl = FindControlRecursive(allCtrl, Me)
+            CaptureOriginalCaptions(allCtrl)
             settings.SaveSetting(Me)
             ' form location is being changed when Resetting RightToLeftLayout so need to save values
             ' to restore form with the same size and location
@@ -234,21 +253,67 @@ Public Class BfMain
         End If
     End Sub
 
+    Private Sub CaptureOriginalCaptions(ByRef allCtrl As List(Of Control))
+        If _originalFormCaption Is Nothing Then
+            _originalFormCaption = Text
+        End If
+
+        For Each cCtrl As Control In allCtrl
+            Dim tabPage = TryCast(cCtrl, TabPage)
+            If tabPage IsNot Nothing AndAlso Not _originalTabCaptions.ContainsKey(tabPage) Then
+                _originalTabCaptions(tabPage) = tabPage.Text
+            End If
+        Next
+    End Sub
+
     Protected Sub SetControlLayout(ByRef allCtrl As List(Of Control))
         Dim myImage As Bitmap
         myImage = BackgroundImage
         BackgroundImage = Nothing
-        If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
-            GlobalVariables.RightToLeftLayout = True
-            RightToLeft = RightToLeft.Yes
-            RightToLeftLayout = True
-        Else
-            GlobalVariables.RightToLeftLayout = False
-            RightToLeft = RightToLeft.No
-            RightToLeftLayout = False
+        Dim desiredRightToLeftLayout = CultureInfo.CurrentCulture.TextInfo.IsRightToLeft
+        Dim desiredRightToLeft = If(desiredRightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
+        Dim mirrorLayoutNow = MirrorLayoutWhenSwitchingLanguage OrElse Not FormShown
+
+        GlobalVariables.RightToLeftLayout = desiredRightToLeftLayout
+        If mirrorLayoutNow AndAlso RightToLeft <> desiredRightToLeft Then
+            RightToLeft = desiredRightToLeft
+        End If
+        If mirrorLayoutNow AndAlso RightToLeftLayout <> desiredRightToLeftLayout Then
+            RightToLeftLayout = desiredRightToLeftLayout
         End If
         LayOutControls(allCtrl)
+        If Not mirrorLayoutNow Then
+            ApplyFastLanguageLayout(allCtrl)
+        End If
         BackgroundImage = myImage
+    End Sub
+
+    Protected Overridable Sub ApplyFastLanguageLayout(ByRef allCtrl As List(Of Control))
+        Dim rightToLeftLayout = GlobalVariables.RightToLeftLayout
+        Dim targetFlowDirection As FlowDirection = If(rightToLeftLayout,
+                                                      FlowDirection.RightToLeft,
+                                                      FlowDirection.LeftToRight)
+        Dim targetRightToLeft As RightToLeft = If(rightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
+
+        For Each cCtrl In allCtrl
+            If TypeOf cCtrl Is FlowLayoutPanel Then
+                SetFlowDirection(DirectCast(cCtrl, FlowLayoutPanel), targetFlowDirection)
+            ElseIf TypeOf cCtrl Is TableLayoutPanel Then
+                SetTableRightToLeft(DirectCast(cCtrl, TableLayoutPanel), targetRightToLeft)
+            End If
+        Next
+    End Sub
+
+    Private Shared Sub SetFlowDirection(flowLayout As FlowLayoutPanel, flowDirection As FlowDirection)
+        If flowLayout IsNot Nothing AndAlso flowLayout.FlowDirection <> flowDirection Then
+            flowLayout.FlowDirection = flowDirection
+        End If
+    End Sub
+
+    Private Shared Sub SetTableRightToLeft(tableLayout As TableLayoutPanel, rightToLeft As RightToLeft)
+        If tableLayout IsNot Nothing AndAlso tableLayout.RightToLeft <> rightToLeft Then
+            tableLayout.RightToLeft = rightToLeft
+        End If
     End Sub
 
     Protected Sub RunTranslator(ByVal nSystemViewIdNo)
@@ -295,9 +360,9 @@ Public Class BfMain
             If (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
                 ' continue
             Else
-                Dim targetLanguageIdNo As Short = GetTargetLanguageIdNo(desiredLanguage, allowFallBack)
+                Dim targetLanguageIdNo As Short = GetCachedTargetLanguageIdNo(desiredLanguage, allowFallBack)
                 If targetLanguageIdNo = 0 Then
-                    UseOriginalCaptions()
+                    UseOriginalCaptions(allCtrl)
                 Else
                     TranslateToLanguageIdNo(allCtrl, targetLanguageIdNo)
                 End If
@@ -306,6 +371,21 @@ Public Class BfMain
 
         End Try
     End Sub
+
+    Private Function GetCachedTargetLanguageIdNo(desiredLanguage As String, allowFallBack As Boolean) As Short
+        If GlobalVariables.TranslationMode Then
+            Return GetTargetLanguageIdNo(desiredLanguage, allowFallBack)
+        End If
+
+        Dim cacheKey = desiredLanguage + "|" + allowFallBack.ToString()
+        If _targetLanguageIdNoCache.ContainsKey(cacheKey) Then
+            Return _targetLanguageIdNoCache(cacheKey)
+        End If
+
+        Dim targetLanguageIdNo = GetTargetLanguageIdNo(desiredLanguage, allowFallBack)
+        _targetLanguageIdNoCache(cacheKey) = targetLanguageIdNo
+        Return targetLanguageIdNo
+    End Function
 
     Private Function GetTargetLanguageIdNo(desiredLanguage As String, allowFallBack As Boolean) As Short
         Dim cmd As String
@@ -341,19 +421,20 @@ Public Class BfMain
     End Function
 
     Protected Sub TranslateToLanguageIdNo(ByRef allCtrl As List(Of Control), targetLanguageIdNo As Integer)
-        Dim translations As DataSet = GetTranslations(targetLanguageIdNo)
-        Dv = translations.Tables(0).DefaultView
-        Dv.Sort = "Caption"
+        Dv = GetTranslationView(targetLanguageIdNo)
         Dim r As Integer
-        If Tag Is Nothing Then
+        If String.IsNullOrEmpty(_originalFormCaption) Then
+            _originalFormCaption = If(Tag Is Nothing, Text, Tag.ToString())
+        End If
+        If String.IsNullOrWhiteSpace(_originalFormCaption) Then
             r = 0
         Else
-            r = Dv.Find(Tag.ToString.TrimEnd)
+            r = Dv.Find(_originalFormCaption.TrimEnd())
         End If
-        If r > 0 Then
+        If r >= 0 Then
             Text = Dv(r).Item("translatedCaption")
         Else
-            Text = Tag
+            Text = _originalFormCaption
         End If
         For Each cCtrl As Control In allCtrl
             If IsTranslatable(cCtrl) Then
@@ -400,6 +481,7 @@ Public Class BfMain
     End Sub
 
     Protected Sub LayOutControls(ByRef allCtrl As List(Of Control))
+        Dim mirrorLayoutNow = MirrorLayoutWhenSwitchingLanguage OrElse Not FormShown
         For Each cCtrl As Control In allCtrl
             If IsTranslatable(cCtrl) Then
                 If TypeOf cCtrl Is ToolStrip Then
@@ -418,14 +500,23 @@ Public Class BfMain
                     Next
                 ElseIf TypeOf cCtrl Is CTreeViewOld Or TypeOf cCtrl Is TreeView Or TypeOf cCtrl Is CTreeView Then
                     Dim cT = CType(cCtrl, TreeView)
-                    cT.ExpandAll()
-                    cT.RightToLeftLayout = GlobalVariables.RightToLeftLayout
-                    cT.RightToLeft = If(GlobalVariables.RightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
+                    If Not FormShown Then
+                        cT.ExpandAll()
+                    End If
+                    Dim desiredTreeRightToLeft = If(GlobalVariables.RightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
+                    If mirrorLayoutNow AndAlso cT.RightToLeftLayout <> GlobalVariables.RightToLeftLayout Then
+                        cT.RightToLeftLayout = GlobalVariables.RightToLeftLayout
+                    End If
+                    If mirrorLayoutNow AndAlso cT.RightToLeft <> desiredTreeRightToLeft Then
+                        cT.RightToLeft = desiredTreeRightToLeft
+                    End If
                 ElseIf TypeOf cCtrl Is CButton Then
                     TranslateButton(cCtrl)
                 ElseIf TypeOf cCtrl Is CTabControl Then
                     Dim tc = CType(cCtrl, CTabControl)
-                    tc.SetRightToLeftLayoutSafe(GlobalVariables.RightToLeftLayout)
+                    If mirrorLayoutNow Then
+                        tc.SetRightToLeftLayoutSafe(GlobalVariables.RightToLeftLayout)
+                    End If
                 End If
             ElseIf TypeOf cCtrl Is CTextBox Then
                 Dim tc = CType(cCtrl, CTextBox)
@@ -444,6 +535,22 @@ Public Class BfMain
         Next
     End Sub
 
+    Private Function GetTranslationView(targetLanguageIdNo As Integer) As DataView
+        If Not GlobalVariables.TranslationMode AndAlso _translationViewCache.ContainsKey(targetLanguageIdNo) Then
+            Return _translationViewCache(targetLanguageIdNo)
+        End If
+
+        Dim translations As DataSet = GetTranslations(targetLanguageIdNo)
+        Dim translationView = translations.Tables(0).DefaultView
+        translationView.Sort = "Caption"
+
+        If Not GlobalVariables.TranslationMode Then
+            _translationViewCache(targetLanguageIdNo) = translationView
+        End If
+
+        Return translationView
+    End Function
+
     Protected Function GetTranslations(targetLanguageIdNo As Integer) As DataSet
         Dim cmd As String = "Select Caption, translatedCaption from SystemViewItemOriginal_view where LanguageIdNo = " + targetLanguageIdNo.ToString() + " and SystemViewIdNo = " + GetSystemViewIdNo.ToString()
         Dim translations As DataSet
@@ -452,12 +559,17 @@ Public Class BfMain
     End Function
 
     Protected Function GetSystemViewIdNo()
+        If _systemViewIdNo <> 0 Then
+            Return _systemViewIdNo
+        End If
+
         Dim cmd As String
         If ViewDisplayName Is Nothing Or ViewDisplayName = "" Then
             ViewDisplayName = Name
         End If
         cmd = "SELECT IdNo FROM SystemView where SystemViewName ='" + ViewDisplayName.Trim() + "'"
-        Return TranslatorDAC.ExecScalar(Of Int16)(cmd)
+        _systemViewIdNo = TranslatorDAC.ExecScalar(Of Int16)(cmd)
+        Return _systemViewIdNo
     End Function
 
     'Protected Sub TranslateControls(targetLanguageIdNo As Integer)
@@ -588,12 +700,16 @@ Public Class BfMain
 
     Private Sub TranslateTabControl(ByRef cTabControl As CTabControl)
         For Each tabPage As TabPage In cTabControl.TabPages
-            Dim r As Int16
-            r = Dv.Find(tabPage.Tag)
-            If r > 0 Then
+            Dim originalCaption As String = Nothing
+            If Not _originalTabCaptions.TryGetValue(tabPage, originalCaption) Then
+                originalCaption = If(tabPage.Tag Is Nothing, tabPage.Text, tabPage.Tag.ToString())
+            End If
+
+            Dim r As Integer = If(String.IsNullOrWhiteSpace(originalCaption), -1, Dv.Find(originalCaption.TrimEnd()))
+            If r >= 0 Then
                 tabPage.Text = Dv(r).Item("translatedCaption")
             Else
-                tabPage.Text = tabPage.Tag
+                tabPage.Text = originalCaption
             End If
         Next
     End Sub
@@ -1086,7 +1202,16 @@ Public Class BfMain
 
     Private Sub UseOriginalCaptions()
         Dim allCtrl As New List(Of Control)
-        For Each cCtrl As Control In FindControlRecursive(allCtrl, Me)
+        UseOriginalCaptions(FindControlRecursive(allCtrl, Me))
+    End Sub
+
+    Private Sub UseOriginalCaptions(ByVal allCtrl As List(Of Control))
+        If String.IsNullOrEmpty(_originalFormCaption) Then
+            _originalFormCaption = If(Tag Is Nothing, Text, Tag.ToString())
+        End If
+        Text = _originalFormCaption
+
+        For Each cCtrl As Control In allCtrl
             If IsTranslatable(cCtrl) Then
                 If TypeOf cCtrl Is MenuStrip Then
                     Dim subMenuName = ""
@@ -1098,6 +1223,8 @@ Public Class BfMain
                     UseOriginalDataGridView(cCtrl)
                 ElseIf TypeOf cCtrl Is DataGrid Then
                     CType(cCtrl, DataGrid).CaptionText = cCtrl.Tag
+                ElseIf TypeOf cCtrl Is CTabControl Then
+                    UseOriginalTabControl(DirectCast(cCtrl, CTabControl))
                 Else
                     If TypeOf cCtrl Is CButton Then
                         UseOriginalButtonText(cCtrl)
@@ -1105,6 +1232,16 @@ Public Class BfMain
                     cCtrl.Text = cCtrl.Tag
                 End If
             End If
+        Next
+    End Sub
+
+    Private Sub UseOriginalTabControl(tabControl As CTabControl)
+        For Each tabPage As TabPage In tabControl.TabPages
+            Dim originalCaption As String = Nothing
+            If Not _originalTabCaptions.TryGetValue(tabPage, originalCaption) Then
+                originalCaption = If(tabPage.Tag Is Nothing, tabPage.Text, tabPage.Tag.ToString())
+            End If
+            tabPage.Text = originalCaption
         Next
     End Sub
 

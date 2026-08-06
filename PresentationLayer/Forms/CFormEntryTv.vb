@@ -1,5 +1,11 @@
 ﻿Public Class CFormEntryTv
 
+    Protected Overrides ReadOnly Property MirrorLayoutWhenSwitchingLanguage As Boolean
+        Get
+            Return False
+        End Get
+    End Property
+
     Public Sub New()
 
         ' This call is required by the designer.

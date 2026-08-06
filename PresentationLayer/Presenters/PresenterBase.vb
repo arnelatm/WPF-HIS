@@ -285,6 +285,10 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         End Set
     End Property
 
+    Protected Sub SetRecordPositionNumberWithoutNavigation(value As Integer)
+        _recordPositionNumber = value
+    End Sub
+
     Public Property TableName As String
     Public Property TableBaseName As String
 

@@ -151,24 +151,29 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
 
     Public Sub DisplayTree(Optional IdNo As Int64 = 0)
         If WithTreeView And FormTreeView IsNot Nothing Then
-            Dim root As TreeNode = FormTreeView.Nodes(0)
-            root.Nodes.Clear()
-            Dim treeViewData As Object = GetTreeViewData()
-            root.Text = Messaging.TranslateCaption(TableName)
-            If ParentFieldName Is Nothing OrElse ParentFieldName = "" Then
-                For Each dataNode In treeViewData
-                    AddRecordToTree(dataNode)
-                Next
-            Else
-                For Each dataNode In treeViewData
-                    AddRecordToTreeHierarchical(dataNode, True, FormTreeView)
-                Next
-            End If
-            FormTreeView.ExpandAll()
-            If IdNo <> 0 Then
-                TargetIdNo = IdNo
-            End If
-            GotoRecordInTreeView()
+            FormTreeView.BeginUpdate()
+            Try
+                Dim root As TreeNode = FormTreeView.Nodes(0)
+                root.Nodes.Clear()
+                Dim treeViewData As Object = GetTreeViewData()
+                root.Text = Messaging.TranslateCaption(TableName)
+                If ParentFieldName Is Nothing OrElse ParentFieldName = "" Then
+                    For Each dataNode In treeViewData
+                        AddRecordToTree(dataNode)
+                    Next
+                Else
+                    For Each dataNode In treeViewData
+                        AddRecordToTreeHierarchical(dataNode, True, FormTreeView)
+                    Next
+                End If
+                FormTreeView.ExpandAll()
+                If IdNo <> 0 Then
+                    TargetIdNo = IdNo
+                End If
+                GotoRecordInTreeView()
+            Finally
+                FormTreeView.EndUpdate()
+            End Try
         End If
     End Sub
 
@@ -366,12 +371,12 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
 
     'Public Sub OnPresenter_LanguageChangedEventHandler(ByRef eventType As LanguageChanged) Implements ISubscriber(Of LanguageChanged).OnEventHandler
     Public Sub OnLanguageChanged() Handles MyBase.LanguageChanged
+        Dim idNo = CInt(CallByName(View, IdFieldName, CallType.Get))
         If _WithTreeView Then
             DisplayTree()
         End If
-        Dim idNo = CallByName(View, IdFieldName, CallType.Get)
-        TargetIdNo = idNo
-        RecordPositionNumber = GetSortedRecordPosition(idNo)
+        SetRecordPositionNumberWithoutNavigation(GetSortedRecordPosition(idNo))
+        UpdateViewDisplay()
     End Sub
 
     Public Sub FindFieldNew(findableControl As IFindableControl)

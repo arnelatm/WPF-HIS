@@ -40,6 +40,7 @@ Public Class CFormEntry
     Private _displayOnly As Boolean = False
     Private _translatable As Boolean = True
     Private _firstLoadSwitch As UInt16 = 0
+    Private _suppressLanguageChangedNotification As Boolean = False
 
     Public Event AfterUpdateView()
     Public Property AddOnOpen As Boolean = False
@@ -238,7 +239,9 @@ Public Class CFormEntry
     Protected Overridable Sub OnTextDisplayLanguageChanged() Handles Me.TextDisplayLanguageChanged
         CultureInfo.CurrentCulture = New CultureInfo(TextDisplayLanguage, False)
         'CreateDataSources()
-        PublishEvent(New LanguageChanged(Me))
+        If Not _suppressLanguageChangedNotification Then
+            PublishEvent(New LanguageChanged(Me))
+        End If
     End Sub
 
     Protected Sub UpdateNavigationButtonDisplay(editing As Boolean, adding As Boolean, recordPositionNumber As Integer, recordCount As Integer)
@@ -731,49 +734,52 @@ Public Class CFormEntry
     End Sub
 
     Protected Overrides Sub SwitchUiLanguage(originalUi As Boolean)
-        'Me.SuspendDrawingNew()
         If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
-            'SuspendLayout()
-            'SuspendDrawing()
-            'Visible = False
-            Dim sw As Integer = 0
-            If originalUi Then
-                If TextDisplayLanguage <> GlobalVariables.DefaultUnmirroredCultureInfoStr Then
-                    TextDisplayLanguage = GlobalVariables.DefaultUnmirroredCultureInfoStr
-                    sw = 1
+            Dim targetLanguage = If(originalUi,
+                                    GlobalVariables.DefaultUnmirroredCultureInfoStr,
+                                    GlobalVariables.DefaultMirroredCultureInfoStr)
+            Dim languageChanged = Not String.Equals(TextDisplayLanguage,
+                                                    targetLanguage,
+                                                    StringComparison.OrdinalIgnoreCase)
+
+            Me.SuspendDrawingNew()
+            SuspendLayout()
+            Try
+                If languageChanged Then
+                    _suppressLanguageChangedNotification = True
+                    Try
+                        TextDisplayLanguage = targetLanguage
+                    Finally
+                        _suppressLanguageChangedNotification = False
+                    End Try
+                ElseIf Not String.Equals(CultureInfo.CurrentCulture.Name,
+                                         targetLanguage,
+                                         StringComparison.OrdinalIgnoreCase) Then
+                    SetCulture(targetLanguage)
                 End If
-                GlobalVariables.RightToLeftLayout = True
-                RightToLeft = RightToLeft.No
-            Else
-                If TextDisplayLanguage <> GlobalVariables.DefaultMirroredCultureInfoStr Then
-                    TextDisplayLanguage = GlobalVariables.DefaultMirroredCultureInfoStr
-                    sw = 1
+
+                GlobalVariables.RightToLeftLayout = CultureInfo.CurrentCulture.TextInfo.IsRightToLeft
+                Dim desiredRightToLeft = If(GlobalVariables.RightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
+                If (MirrorLayoutWhenSwitchingLanguage OrElse Not FormShown) AndAlso RightToLeft <> desiredRightToLeft Then
+                    RightToLeft = desiredRightToLeft
                 End If
-                GlobalVariables.RightToLeftLayout = False
-                RightToLeft = RightToLeft.Yes
-            End If
-            TranslateForm()
-            If sw = 1 Then
-                CultureInfo.CurrentCulture = New CultureInfo(TextDisplayLanguage, False)
-                'If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
-                '    GlobalVariables.RightToLeftLayout = True
-                'Else
-                '    GlobalVariables.RightToLeftLayout = False
-                'End If
-                'TranslateForm()
-                btnArabic.Visible = originalUi
-                btnOriginal.Visible = Not originalUi
-                btnArabic.Enabled = originalUi
-                btnOriginal.Enabled = Not originalUi
-                If Ea IsNot Nothing Then
-                    Ea.PublishEvent(New LanguageChanged(Me))
+
+                TranslateForm()
+
+                If languageChanged Then
+                    btnArabic.Visible = originalUi
+                    btnOriginal.Visible = Not originalUi
+                    btnArabic.Enabled = originalUi
+                    btnOriginal.Enabled = Not originalUi
+                    If Ea IsNot Nothing Then
+                        Ea.PublishEvent(New LanguageChanged(Me))
+                    End If
                 End If
-            End If
-            'Visible = True
+            Finally
+                ResumeLayout(True)
+                Me.ResumeDrawingNew()
+            End Try
         End If
-        'ResumeDrawing()
-        'ResumeLayout()
-        'Me.ResumeDrawingNew()
     End Sub
 
     'Private Sub tsbCurrentRecord_VisibleChanged(sender As Object, e As EventArgs) Handles tsbCurrentRecord.VisibleChanged
