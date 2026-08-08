@@ -3125,6 +3125,8 @@
   <ItemGroup>
     <Content Include="Reports\BioTime\Daily Employee Punch Audit Report - Report Registration.sql" />
     <Content Include="Reports\BioTime\Periodic Attendance Report - Report Registration.sql" />
+    <None Include="Resources\Earning.png" />
+    <None Include="Resources\Deduction.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

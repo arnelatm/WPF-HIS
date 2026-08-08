@@ -75,7 +75,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set(value As List(Of IHolidayAvailmentApprovalHistoryView))
                 _approvalHistory = value
-                BindApprovalLeaveHistory()
+                RunOrDeferViewDataBinding(AddressOf BindApprovalLeaveHistory)
             End Set
         End Property
 

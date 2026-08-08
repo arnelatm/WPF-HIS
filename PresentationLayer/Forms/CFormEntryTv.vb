@@ -1,12 +1,38 @@
-﻿Public Class CFormEntryTv
+﻿Imports System.Reflection
+Imports System.Windows.Forms
+
+Public Class CFormEntryTv
+
+    Private Shared ReadOnly DoubleBufferedProperty As PropertyInfo =
+        GetType(Control).GetProperty("DoubleBuffered", BindingFlags.Instance Or BindingFlags.NonPublic)
+
+    Protected Overrides ReadOnly Property UseFastLanguageLayoutOnInitialDisplay As Boolean
+        Get
+            Return True
+        End Get
+    End Property
 
     Public Sub New()
 
         ' This call is required by the designer.
         InitializeComponent()
 
+        If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
+            EnableDoubleBuffering(SplitContainer1)
+            EnableDoubleBuffering(SplitContainer1.Panel1)
+            EnableDoubleBuffering(SplitContainer1.Panel2)
+            EnableDoubleBuffering(FormTreeView)
+            ApplyFormLanguageDirection()
+        End If
+
         ' Add any initialization after the InitializeComponent() call.
 
+    End Sub
+
+    Private Shared Sub EnableDoubleBuffering(control As Control)
+        If control IsNot Nothing AndAlso DoubleBufferedProperty IsNot Nothing Then
+            DoubleBufferedProperty.SetValue(control, True, Nothing)
+        End If
     End Sub
 
     Public Property TreeViewData As New Object

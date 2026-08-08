@@ -70,6 +70,7 @@ Partial Class CPlainFormEntry
         Me.lblFormDescription.Size = New System.Drawing.Size(865, 28)
         Me.lblFormDescription.TabIndex = 2
         Me.lblFormDescription.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblFormDescription.Translatable = False
         '
         'FormToolStrip
         '

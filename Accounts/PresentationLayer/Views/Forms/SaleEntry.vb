@@ -102,7 +102,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 _SaleDetails = Value
-                BindSaleDetail()
+                RunOrDeferViewDataBinding(AddressOf BindSaleDetail)
             End Set
         End Property
 

@@ -59,7 +59,7 @@ Public Class EmployeeLeaveEarnedApprovalEntry
         End Get
         Set
             _employeeLeaveEarnedApprovalItems = Value
-            BindEmployeeLeaveEarnedList()
+            RunOrDeferViewDataBinding(AddressOf BindEmployeeLeaveEarnedList)
         End Set
     End Property
 

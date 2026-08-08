@@ -89,7 +89,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 _journalItems = Value
-                BindJournalItem()
+                RunOrDeferViewDataBinding(AddressOf BindJournalItem)
             End Set
         End Property
 
@@ -178,28 +178,50 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub BindJournalItem()
-            bsJournalItems.DataSource = Nothing
-            DataGridViewJournalItems.Refresh()
-            bsJournalItems.DataSource = JournalItems
-            bsJournalItems.AllowNew = True
-            With DataGridViewJournalItems
-                .Refresh()
-                .AutoGenerateColumns = False
-                .DataSource = bsJournalItems
-                .Refresh()
-            End With
-            With DataGridViewJournalItems.Columns
-                dgvSequence.DisplayOnly = True
-                dgvAccountIdNo.DataSource = _AccountsByCode
-                dgvAccountIdNo.DisplayMember = "Name"
-                dgvAccountIdNo.ValueMember = "IdNo"
-                dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
-                dgvRevCostCenterIdNo.DataSource = RevCostCentersByCode
-                dgvRevCostCenterIdNo.DisplayMember = "Name"
-                dgvRevCostCenterIdNo.ValueMember = "idNo"
-                dgvRevCostCenterIdNo.TreatZeroAsBlank = True
-                dgvRevCostCenterIdNo.DisplayStyleForCurrentCellOnly = True
-            End With
+            SuspendLayout()
+            Try
+                ' Configure lookup columns before rebinding. Otherwise the grid can
+                ' temporarily format bound values without their lookup sources and
+                ' retain a DataGridView error glyph after the first load/navigation.
+                With DataGridViewJournalItems.Columns
+                    dgvSequence.DisplayOnly = True
+
+                    dgvAccountIdNo.DisplayMember = "Name"
+                    dgvAccountIdNo.ValueMember = "IdNo"
+                    dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
+                    If Not ReferenceEquals(dgvAccountIdNo.DataSource, AccountsByCode) Then
+                        dgvAccountIdNo.DataSource = AccountsByCode
+                    End If
+
+                    dgvRevCostCenterIdNo.DisplayMember = "Name"
+                    dgvRevCostCenterIdNo.ValueMember = "idNo"
+                    dgvRevCostCenterIdNo.TreatZeroAsBlank = True
+                    dgvRevCostCenterIdNo.DisplayStyleForCurrentCellOnly = True
+                    If Not ReferenceEquals(dgvRevCostCenterIdNo.DataSource, RevCostCentersByCode) Then
+                        dgvRevCostCenterIdNo.DataSource = RevCostCentersByCode
+                    End If
+
+                    dgvPayIdNo.DisplayMember = "Name"
+                    dgvPayIdNo.ValueMember = "IdNo"
+                    dgvPayIdNo.TreatZeroAsBlank = True
+                    dgvPayIdNo.DisplayStyleForCurrentCellOnly = True
+                    If Not ReferenceEquals(dgvPayIdNo.DataSource, PayeeByCode) Then
+                        dgvPayIdNo.DataSource = PayeeByCode
+                    End If
+                End With
+
+                bsJournalItems.DataSource = Nothing
+                DataGridViewJournalItems.Refresh()
+                bsJournalItems.DataSource = JournalItems
+                bsJournalItems.AllowNew = True
+
+                With DataGridViewJournalItems
+                    .AutoGenerateColumns = False
+                    .DataSource = bsJournalItems
+                End With
+            Finally
+                ResumeLayout()
+            End Try
         End Sub
 
         Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewJournalItems.UserDeletedRow

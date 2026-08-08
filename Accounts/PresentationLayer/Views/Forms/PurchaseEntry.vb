@@ -137,7 +137,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 _purchaseDetails = Value
-                BindPurchaseDetail()
+                RunOrDeferViewDataBinding(AddressOf BindPurchaseDetail)
             End Set
         End Property
 
@@ -147,7 +147,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 _purchaseHistory = Value
-                BindPurchaseHistory()
+                RunOrDeferViewDataBinding(AddressOf BindPurchaseHistory)
             End Set
         End Property
 

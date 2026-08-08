@@ -121,7 +121,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 _distributionSchemeItems = Value
-                BindDistributionSchemeItem()
+                RunOrDeferViewDataBinding(AddressOf BindDistributionSchemeItem)
             End Set
         End Property
 

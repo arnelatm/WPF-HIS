@@ -245,7 +245,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 _payElementItems = Value
-                BindPayElementItems()
+                RunOrDeferViewDataBinding(AddressOf BindPayElementItems)
             End Set
         End Property
 
@@ -255,7 +255,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 _payElementAccounts = Value
-                BindPayElementAccounts()
+                RunOrDeferViewDataBinding(AddressOf BindPayElementAccounts)
             End Set
         End Property
 
@@ -549,8 +549,9 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub PayElementEntryTv_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            ImageListTreeView.Images.Add(Image.FromFile("Resources\Deduction.png"))
-            ImageListTreeView.Images.Add(Image.FromFile("Resources\Earning.png"))
+            ' Use embedded resources instead of loading files from disk
+            ImageListTreeView.Images.Add(My.Resources.Deduction)
+            ImageListTreeView.Images.Add(My.Resources.Earning)
             FormTreeView.ImageList = ImageListTreeView
             UpdateReportGroup()
         End Sub

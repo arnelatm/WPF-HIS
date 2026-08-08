@@ -118,7 +118,6 @@
             'FormTreeView
             '
             Me.FormTreeView.LineColor = System.Drawing.Color.Black
-            Me.FormTreeView.RightToLeft = System.Windows.Forms.RightToLeft.No
             Me.FormTreeView.Size = New System.Drawing.Size(335, 502)
             '
             'ImageListTreeView
@@ -2014,7 +2013,6 @@
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
             Me.ClientSize = New System.Drawing.Size(1078, 555)
             Me.Name = "SupplierEntryTv"
-            Me.RightToLeft = System.Windows.Forms.RightToLeft.No
             Me.Text = "Supplier Maintenance Form"
             Me.SplitContainer1.Panel1.ResumeLayout(False)
             Me.SplitContainer1.Panel2.ResumeLayout(False)

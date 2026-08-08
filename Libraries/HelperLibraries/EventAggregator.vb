@@ -1,4 +1,5 @@
 ﻿Imports System.Threading
+Imports System.Threading.Tasks
 
 '<DebuggerStepThrough()>
 Public Class EventAggregator
@@ -8,89 +9,146 @@ Public Class EventAggregator
     Private ReadOnly _lockSubscriberDictionary As Object = New Object()
 
     Public Sub PublishEvent(Of TEventType)(ByVal eventToPublish As TEventType) Implements IEventAggregator.PublishEvent
-        PublishTheEvent(eventToPublish, False)
+        PublishTheEvent(eventToPublish, asynchronous:=False)
     End Sub
 
     Public Sub PublishEvent(Of TEventType, TE)(ByVal eventToPublish As TEventType) Implements IEventAggregator.PublishEvent
-        PublishTheEvent(eventToPublish, False)
+        PublishTheEvent(eventToPublish, asynchronous:=False)
     End Sub
 
     Public Sub PublishEventAsync(Of TEventType)(ByVal eventToPublish As TEventType) Implements IEventAggregator.PublishEventAsync
-        PublishTheEvent(eventToPublish, True)
+        PublishTheEvent(eventToPublish, asynchronous:=True)
     End Sub
 
-    Private Sub PublishTheEvent(Of TEventType)(ByRef eventToPublish As TEventType, asynchronous As Boolean)
-
+    Private Sub PublishTheEvent(Of TEventType)(ByVal eventToPublish As TEventType, asynchronous As Boolean)
         Dim subscriberType = GetType(ISubscriber(Of)).MakeGenericType(GetType(TEventType))
-        Dim subscribers = GetSubscriberList(subscriberType)
-        Dim subscribersToBeRemoved As List(Of WeakReference) = New List(Of WeakReference)()
 
-        For Each weaksubscriber In subscribers
+        Dim subscribersList As List(Of WeakReference) = Nothing
 
-            If weaksubscriber.IsAlive Then
-                Dim subscriber = CType(weaksubscriber.Target, ISubscriber(Of TEventType))
-                InvokeSubscriberEvent(Of TEventType)(eventToPublish, subscriber, asynchronous)
-            Else
-                subscribersToBeRemoved.Add(weaksubscriber)
+        ' Get the actual list reference (create if missing) then take a snapshot for safe iteration
+        SyncLock _lockSubscriberDictionary
+            If Not _eventSubscribers.TryGetValue(subscriberType, subscribersList) Then
+                subscribersList = New List(Of WeakReference)()
+                _eventSubscribers.Add(subscriberType, subscribersList)
             End If
-        Next
-        CheckSubscribersToBeRemoved(subscribers, subscribersToBeRemoved)
+            ' create snapshot to iterate without holding the lock
+            Dim snapshot = subscribersList.ToList()
+            ' iterate outside lock
+            For Each weaksubscriber In snapshot
+                Dim target = TryCast(weaksubscriber.Target, Object)
+                If target Is Nothing Then
+                    ' mark for cleanup below
+                    Continue For
+                End If
+
+                Dim subscriber = TryCast(target, ISubscriber(Of TEventType))
+                If subscriber Is Nothing Then
+                    Continue For
+                End If
+
+                InvokeSubscriberEvent(Of TEventType)(eventToPublish, subscriber, asynchronous)
+            Next
+        End SyncLock
+
+        ' Clean dead weak refs (do separately under lock)
+        CleanupDeadSubscribers(subscriberType)
     End Sub
 
-    Private Sub CheckSubscribersToBeRemoved(subscribers As List(Of WeakReference), subscribersToBeRemoved As List(Of WeakReference))
-
-        If subscribersToBeRemoved.Any() Then
-
-            SyncLock _lockSubscriberDictionary
-
-                For Each remove In subscribersToBeRemoved
-                    subscribers.Remove(remove)
-                Next
-            End SyncLock
-        End If
+    Private Sub CleanupDeadSubscribers(subscriberType As Type)
+        SyncLock _lockSubscriberDictionary
+            Dim existing As List(Of WeakReference) = Nothing
+            If _eventSubscribers.TryGetValue(subscriberType, existing) Then
+                existing.RemoveAll(Function(wr) Not wr.IsAlive)
+                If existing.Count = 0 Then
+                    ' optionally remove empty lists to reduce dictionary size
+                    _eventSubscribers.Remove(subscriberType)
+                End If
+            End If
+        End SyncLock
     End Sub
 
     Public Sub SubscribeEvent(ByVal subscriber As Object) Implements IEventAggregator.SubscribeEvent
+        If subscriber Is Nothing Then
+            Return
+        End If
+
         SyncLock _lockSubscriberDictionary
-            ' ReSharper disable once VBPossibleMistakenCallToGetType.2
             Dim subscriberTypes = subscriber.[GetType]().GetInterfaces().Where(Function(i) i.IsGenericType AndAlso i.GetGenericTypeDefinition() = GetType(ISubscriber(Of)))
             Dim weakReference As WeakReference = New WeakReference(subscriber)
 
             For Each subscriberType In subscriberTypes
-                Dim subscribers As List(Of WeakReference) = GetSubscriberList(subscriberType)
-                subscribers.Add(weakReference)
+                Dim subscribers As List(Of WeakReference) = Nothing
+                If Not _eventSubscribers.TryGetValue(subscriberType, subscribers) Then
+                    subscribers = New List(Of WeakReference)()
+                    _eventSubscribers.Add(subscriberType, subscribers)
+                End If
+
+                ' prevent duplicate subscription by same instance (optional)
+                If Not subscribers.Any(Function(wr) wr.IsAlive AndAlso Object.ReferenceEquals(wr.Target, subscriber)) Then
+                    subscribers.Add(weakReference)
+                End If
             Next
         End SyncLock
     End Sub
 
-    Private Sub InvokeSubscriberEvent(Of TEventType)(ByRef eventToPublish As TEventType, ByVal subscriber As ISubscriber(Of TEventType), ByVal asynchronous As Boolean)
+    Private Sub InvokeSubscriberEvent(Of TEventType)(ByVal eventToPublish As TEventType, ByVal subscriber As ISubscriber(Of TEventType), ByVal asynchronous As Boolean)
+        If subscriber Is Nothing Then
+            Return
+        End If
+
         Dim syncContext As SynchronizationContext = SynchronizationContext.Current
-        If syncContext Is Nothing Then
-            syncContext = New SynchronizationContext()
-        End If
-        Dim lEventToPublish = eventToPublish
-        If Not asynchronous Then
-            syncContext.Send(Sub(s) subscriber.OnEventHandler(lEventToPublish), Nothing)
+
+        Dim safeInvoke = Sub()
+                             Try
+                                 subscriber.OnEventHandler(eventToPublish)
+                             Catch ex As Exception
+                                 ' Log or handle subscriber exception.
+                                 ' Swallowing here to avoid one subscriber breaking others.
+                                 ' Consider exposing an error handler/ILogger in future.
+                             End Try
+                         End Sub
+
+        If asynchronous Then
+            If syncContext IsNot Nothing Then
+                Try
+                    syncContext.Post(Sub(s) safeInvoke(), Nothing)
+                Catch
+                    ' If posting to context fails, fall back to thread pool
+                    Task.Run(Sub() safeInvoke())
+                End Try
+            Else
+                Task.Run(Sub() safeInvoke())
+            End If
         Else
-            syncContext.Post(Sub(s) subscriber.OnEventHandler(lEventToPublish), Nothing)
+            If syncContext IsNot Nothing Then
+                Try
+                    syncContext.Send(Sub(s) safeInvoke(), Nothing)
+                Catch ex As Exception
+                    ' If Send fails (rare), invoke directly to avoid losing the event
+                    Try
+                        safeInvoke()
+                    Catch
+                        ' swallow - already handled in safeInvoke
+                    End Try
+                End Try
+            Else
+                ' No synchronization context — call directly
+                safeInvoke()
+            End If
         End If
-        eventToPublish = lEventToPublish
     End Sub
 
-    Private Function GetSubscriberList(ByVal subscriberType As Type) As List(Of WeakReference)
-        Dim subscribersList As List(Of WeakReference) = Nothing
+    Private Sub CheckSubscribersToBeRemoved(subscribers As List(Of WeakReference), subscribersToBeRemoved As List(Of WeakReference))
+        If subscribersToBeRemoved Is Nothing OrElse Not subscribersToBeRemoved.Any() Then
+            Return
+        End If
 
         SyncLock _lockSubscriberDictionary
-            Dim found As Boolean = _eventSubscribers.TryGetValue(subscriberType, subscribersList)
-
-            If Not found Then
-                subscribersList = New List(Of WeakReference)()
-                _eventSubscribers.Add(subscriberType, subscribersList)
-            End If
+            For Each remove In subscribersToBeRemoved
+                subscribers.Remove(remove)
+            Next
         End SyncLock
-
-        Return subscribersList
-    End Function
+    End Sub
 
 End Class
 

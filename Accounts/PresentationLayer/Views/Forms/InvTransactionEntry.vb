@@ -88,7 +88,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 _invTransactionDetails = Value
-                BindInvTransactionDetail()
+                RunOrDeferViewDataBinding(AddressOf BindInvTransactionDetail)
             End Set
         End Property
 

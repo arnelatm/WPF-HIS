@@ -41,6 +41,15 @@ Public Class CFormEntry
     Private _translatable As Boolean = True
     Private _firstLoadSwitch As UInt16 = 0
     Private _suppressLanguageChangedNotification As Boolean = False
+    Private _initialLanguageApplied As Boolean = False
+    Private _holdInitialRedraw As Boolean = False
+    Private _initialRedrawReleaseQueued As Boolean = False
+    Private _initialOpacity As Double = 1.0R
+    Private _initialOpacityHidden As Boolean = False
+    Private _initialDisplayControls As List(Of Control)
+    Private _viewDataUpdateDepth As Integer = 0
+    Private _deferViewDataBindings As Boolean = False
+    Private ReadOnly _deferredViewDataBindings As New List(Of Action)
 
     Public Event AfterUpdateView()
     Public Property AddOnOpen As Boolean = False
@@ -63,6 +72,20 @@ Public Class CFormEntry
         ' Add any initialization after the InitializeComponent() call.
     End Sub
 
+    Protected Overrides Sub ApplyFastLanguageLayout(ByRef allCtrl As List(Of Control))
+        ApplyFormLanguageDirection()
+        MyBase.ApplyFastLanguageLayout(allCtrl)
+    End Sub
+
+    Protected Sub ApplyFormLanguageDirection()
+        Dim desiredRightToLeft = If(CultureInfo.CurrentCulture.TextInfo.IsRightToLeft,
+                                    RightToLeft.Yes,
+                                    RightToLeft.No)
+        If RightToLeft <> desiredRightToLeft Then
+            RightToLeft = desiredRightToLeft
+        End If
+    End Sub
+
     Delegate Sub SafeCallDelegate(ByRef controlObject As Control, textString As String)
 
     Private Declare Function SetProcessWorkingSetSize Lib "kernel32.dll" (hProcess As IntPtr,
@@ -79,19 +102,92 @@ Public Class CFormEntry
 
     Protected Property FormTitleCaption As String = ""
 
-    Private Sub OnCFormEntryNewShown() Handles MyBase.Shown
-        'SuspendDrawing()
+    Protected Overrides Sub OnLoad(e As EventArgs)
+        BeginInitialDisplayUpdate()
+        Try
+            MyBase.OnLoad(e)
+            ApplyInitialLanguageBeforeDisplay()
+        Catch
+            CompleteInitialDisplayUpdate()
+            Throw
+        End Try
+    End Sub
+
+    Protected Overrides Sub OnShown(e As EventArgs)
+        Try
+            MyBase.OnShown(e)
+        Finally
+            QueueInitialDisplayUpdateCompletion()
+        End Try
+    End Sub
+
+    Private Sub BeginInitialDisplayUpdate()
+        If _holdInitialRedraw Then
+            Return
+        End If
+
+        _holdInitialRedraw = True
+        _initialDisplayControls = New List(Of Control)
+        FindControlRecursive(_initialDisplayControls, Me)
+        If TopLevel AndAlso MdiParent Is Nothing Then
+            _initialOpacity = Opacity
+            If _initialOpacity > 0 Then
+                Opacity = 0
+                _initialOpacityHidden = True
+            End If
+        End If
+        SuspendControlTreeRendering(_initialDisplayControls)
+    End Sub
+
+    Private Sub QueueInitialDisplayUpdateCompletion()
+        If Not _holdInitialRedraw OrElse _initialRedrawReleaseQueued OrElse IsDisposed Then
+            Return
+        End If
+
+        _initialRedrawReleaseQueued = True
+        BeginInvoke(New MethodInvoker(AddressOf CompleteInitialDisplayUpdate))
+    End Sub
+
+    Private Sub CompleteInitialDisplayUpdate()
+        If Not _holdInitialRedraw Then
+            Return
+        End If
+
+        _holdInitialRedraw = False
+        _initialRedrawReleaseQueued = False
+        If Not IsDisposed Then
+            If _initialDisplayControls Is Nothing Then
+                _initialDisplayControls = New List(Of Control)
+                FindControlRecursive(_initialDisplayControls, Me)
+            End If
+            ResumeControlTreeRendering(_initialDisplayControls)
+            _initialDisplayControls = Nothing
+            If _initialOpacityHidden Then
+                Opacity = _initialOpacity
+                _initialOpacityHidden = False
+            End If
+        End If
+    End Sub
+
+    Private Sub ApplyInitialLanguageBeforeDisplay()
+        If _initialLanguageApplied Then
+            Return
+        End If
+
         If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
             If btnArabic.Enabled Then
-                'btnArabic.PerformClick()
                 SwitchUiLanguage(False)
             End If
         Else
             If Not btnArabic.Enabled Then
-                'btnOriginal.PerformClick()
                 SwitchUiLanguage(True)
             End If
         End If
+        _initialLanguageApplied = True
+    End Sub
+
+    Private Sub OnCFormEntryNewShown() Handles MyBase.Shown
+        ApplyInitialLanguageBeforeDisplay()
         Me.Activate()
         'Dim allCtrl As New List(Of Control)
         'allCtrl = FindControlRecursive(allCtrl, Me)
@@ -143,8 +239,74 @@ Public Class CFormEntry
         Else
             TurnOffInputs()
         End If
+        ApplyDeferredViewDataBindings()
         RaiseEvent AfterUpdateView()
         'Me.ResumeDrawingNew
+    End Sub
+
+    Public Sub BeginViewDataUpdate()
+        If _viewDataUpdateDepth = 0 Then
+            _deferredViewDataBindings.Clear()
+            _deferViewDataBindings = True
+        End If
+        _viewDataUpdateDepth += 1
+    End Sub
+
+    Public Sub EndViewDataUpdate()
+        If _viewDataUpdateDepth > 0 Then
+            _viewDataUpdateDepth -= 1
+        End If
+        If _viewDataUpdateDepth = 0 Then
+            _deferViewDataBindings = False
+        End If
+    End Sub
+
+    Protected Sub RunOrDeferViewDataBinding(bindingAction As Action)
+        If bindingAction Is Nothing Then
+            Return
+        End If
+
+        If Not _deferViewDataBindings Then
+            bindingAction()
+            Return
+        End If
+
+        If Not _deferredViewDataBindings.Exists(Function(existingAction) existingAction.Equals(bindingAction)) Then
+            _deferredViewDataBindings.Add(bindingAction)
+        End If
+    End Sub
+
+    Private Sub ApplyDeferredViewDataBindings()
+        _deferViewDataBindings = False
+        If _deferredViewDataBindings.Count = 0 Then
+            Return
+        End If
+
+        Dim pendingBindings = _deferredViewDataBindings.ToArray()
+        _deferredViewDataBindings.Clear()
+        Dim firstBindingException As Exception = Nothing
+        For Each bindingAction In pendingBindings
+            Try
+                bindingAction()
+            Catch ex As Exception
+                If firstBindingException Is Nothing Then
+                    firstBindingException = ex
+                End If
+            End Try
+        Next
+        If firstBindingException IsNot Nothing Then
+            Throw firstBindingException
+        End If
+    End Sub
+
+    Public Overridable Sub UpdateLanguageViewDisplay(editMode As Boolean, addMode As Boolean, recordPositionNumber As Integer, targetIdNo As Integer, recordCount As Integer)
+        If HideNavigatorButtons Then
+            Return
+        End If
+
+        tsbCurrentRecord.Text = recordPositionNumber.ToString()
+        tsbTotalRecords.Text = recordCount.ToString()
+        UpdateNavigationButtonDisplay(editMode, addMode, recordPositionNumber, recordCount)
     End Sub
 
     'Protected Overridable Sub OnAfterRecordChanged() Handles Me.AfterUpdateView
@@ -198,6 +360,12 @@ Public Class CFormEntry
         lblFormDescription.Left = 0
         lblFormDescription.Width = Width
         lblFormDescription.TextAlign = ContentAlignment.MiddleCenter
+    End Sub
+
+    Private Sub OnFormTitleChanged(sender As Object, e As EventArgs) Handles MyBase.TextChanged
+        If lblFormDescription IsNot Nothing Then
+            SetFormTitleCaption()
+        End If
     End Sub
 
     Public Sub ShowFormTitle()
@@ -742,8 +910,16 @@ Public Class CFormEntry
                                                     targetLanguage,
                                                     StringComparison.OrdinalIgnoreCase)
 
-            Me.SuspendDrawingNew()
-            SuspendLayout()
+            Dim allCtrl As New List(Of Control)
+            FindControlRecursive(allCtrl, Me)
+            Dim manageDrawing = Not _holdInitialRedraw
+            Dim visibilityState As AtomicDisplayVisibilityState
+            Dim renderingSuspended = False
+            If manageDrawing Then
+                visibilityState = HideForAtomicDisplay()
+                renderingSuspended = True
+                SuspendControlTreeRendering(allCtrl)
+            End If
             Try
                 If languageChanged Then
                     _suppressLanguageChangedNotification = True
@@ -760,11 +936,11 @@ Public Class CFormEntry
 
                 GlobalVariables.RightToLeftLayout = CultureInfo.CurrentCulture.TextInfo.IsRightToLeft
                 Dim desiredRightToLeft = If(GlobalVariables.RightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
-                If (MirrorLayoutWhenSwitchingLanguage OrElse Not FormShown) AndAlso RightToLeft <> desiredRightToLeft Then
+                If MirrorLanguageLayoutNow AndAlso RightToLeft <> desiredRightToLeft Then
                     RightToLeft = desiredRightToLeft
                 End If
 
-                TranslateForm()
+                TranslateForm(allCtrl)
 
                 If languageChanged Then
                     btnArabic.Visible = originalUi
@@ -776,8 +952,12 @@ Public Class CFormEntry
                     End If
                 End If
             Finally
-                ResumeLayout(True)
-                Me.ResumeDrawingNew()
+                If manageDrawing Then
+                    If renderingSuspended Then
+                        ResumeControlTreeRendering(allCtrl)
+                    End If
+                    RestoreAfterAtomicDisplay(visibilityState)
+                End If
             End Try
         End If
     End Sub

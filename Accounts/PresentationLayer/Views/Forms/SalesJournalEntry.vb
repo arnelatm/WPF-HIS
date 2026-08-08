@@ -14,9 +14,9 @@ Namespace PresentationLayer.Views.Forms
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
 
         Private _slFooter As DgvFooter
-        Private _salesDeposits As List(Of SalesDepositView)
+        Private _salesDeposits As New List(Of SalesDepositView)
         Private _jiFooter As DgvFooter
-        Private _journalItems As List(Of JournalItemView)
+        Private _journalItems As New List(Of JournalItemView)
 
         Private _journalMode As Boolean = False
 
@@ -92,8 +92,7 @@ Namespace PresentationLayer.Views.Forms
                 Return _journalItems
             End Get
             Set
-                _journalItems = Value
-                BindJournalItem()
+                _journalItems = If(Value, New List(Of JournalItemView))
             End Set
         End Property
 
@@ -129,8 +128,7 @@ Namespace PresentationLayer.Views.Forms
                 Return _salesDeposits
             End Get
             Set
-                _salesDeposits = Value
-                BindSalesDeposit()
+                _salesDeposits = If(Value, New List(Of SalesDepositView))
             End Set
         End Property
 
@@ -212,65 +210,78 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Protected Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
+            BindJournalItem()
+            BindSalesDeposit()
             UpdateTotals()
         End Sub
 
         Private Sub BindJournalItem()
             SuspendLayout()
-            bsJournalItems.DataSource = Nothing
-            DataGridViewJournalItems.Refresh()
-            bsJournalItems.DataSource = JournalItems
-            bsJournalItems.AllowNew = True
-            With DataGridViewJournalItems
-                .Refresh()
-                .AutoGenerateColumns = False
-                .DataSource = bsJournalItems
-                .Refresh()
-            End With
-            With DataGridViewJournalItems.Columns
-                If dgvSequence IsNot Nothing Then
+            Try
+                With DataGridViewJournalItems.Columns
                     dgvSequence.DisplayOnly = True
-                    dgvAccountIdNo.DataSource = AccountsByCode
+
                     dgvAccountIdNo.DisplayMember = "Name"
                     dgvAccountIdNo.ValueMember = "IdNo"
                     dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
-                    dgvRevCostCenterIdNo.DataSource = RevCostCentersByCode
+                    If Not ReferenceEquals(dgvAccountIdNo.DataSource, AccountsByCode) Then
+                        dgvAccountIdNo.DataSource = AccountsByCode
+                    End If
+
                     dgvRevCostCenterIdNo.DisplayMember = "Name"
-                    dgvRevCostCenterIdNo.ValueMember = "idNo"
+                    dgvRevCostCenterIdNo.ValueMember = "IdNo"
                     dgvRevCostCenterIdNo.TreatZeroAsBlank = True
                     dgvRevCostCenterIdNo.DisplayStyleForCurrentCellOnly = True
+                    If Not ReferenceEquals(dgvRevCostCenterIdNo.DataSource, RevCostCentersByCode) Then
+                        dgvRevCostCenterIdNo.DataSource = RevCostCentersByCode
+                    End If
+                End With
+
+                If Not ReferenceEquals(DataGridViewJournalItems.DataSource, bsJournalItems) Then
+                    DataGridViewJournalItems.AutoGenerateColumns = False
+                    DataGridViewJournalItems.DataSource = bsJournalItems
                 End If
-            End With
-            ResumeLayout()
+
+                bsJournalItems.DataSource = Nothing
+                bsJournalItems.DataSource = _journalItems
+                bsJournalItems.AllowNew = True
+                bsJournalItems.ResetBindings(False)
+            Finally
+                ResumeLayout(True)
+            End Try
         End Sub
 
         Private Sub BindSalesDeposit()
             SuspendLayout()
-            bsSalesDeposits.DataSource = Nothing
-            DataGridViewSalesDeposits.Refresh()
-            bsSalesDeposits.DataSource = SalesDeposits
-            bsSalesDeposits.AllowNew = True
-            With DataGridViewSalesDeposits
-                .Refresh()
-                .AutoGenerateColumns = False
-                .DataSource = bsSalesDeposits
-                .Refresh()
-            End With
-            With DataGridViewSalesDeposits.Columns
-                If dgvDepositTypeIdNo IsNot Nothing Then
-                    dgvDepositTypeIdNo.DataSource = DepositTypesByCode
+            Try
+                With DataGridViewSalesDeposits.Columns
                     dgvDepositTypeIdNo.DisplayMember = "Name"
                     dgvDepositTypeIdNo.ValueMember = "IdNo"
                     dgvDepositTypeIdNo.DisplayStyleForCurrentCellOnly = True
+                    If Not ReferenceEquals(dgvDepositTypeIdNo.DataSource, DepositTypesByCode) Then
+                        dgvDepositTypeIdNo.DataSource = DepositTypesByCode
+                    End If
+
                     dgvComputedBankCharge.DisplayOnly = True
                     dgvComputedVat.DisplayOnly = True
                     dgvRate.DisplayOnly = True
                     dgvBankChargeDifference.DisplayOnly = True
                     dgvVatDifference.DisplayOnly = True
                     dgvActualBankCharge.DisplayOnly = True
+                End With
+
+                If Not ReferenceEquals(DataGridViewSalesDeposits.DataSource, bsSalesDeposits) Then
+                    DataGridViewSalesDeposits.AutoGenerateColumns = False
+                    DataGridViewSalesDeposits.DataSource = bsSalesDeposits
                 End If
-            End With
-            ResumeLayout()
+
+                bsSalesDeposits.DataSource = Nothing
+                bsSalesDeposits.DataSource = _salesDeposits
+                bsSalesDeposits.AllowNew = True
+                bsSalesDeposits.ResetBindings(False)
+            Finally
+                ResumeLayout(True)
+            End Try
         End Sub
 
         Private Sub BtnViewGL_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnViewGL.ClickButtonArea

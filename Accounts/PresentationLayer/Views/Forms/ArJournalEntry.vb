@@ -139,7 +139,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 _journalItems = Value
-                BindJournalItem()
+                RunOrDeferViewDataBinding(AddressOf BindJournalItem)
             End Set
         End Property
 

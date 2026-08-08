@@ -128,7 +128,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set(value As List(Of PayrollPayElementView))
                 _payrollEarnings = value
-                BindPayrollEarnings()
+                RunOrDeferViewDataBinding(AddressOf BindPayrollEarnings)
             End Set
         End Property
 
@@ -138,7 +138,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set(value As List(Of PayrollPayElementView))
                 _payrollDeductions = value
-                BindPayrollDeductions()
+                RunOrDeferViewDataBinding(AddressOf BindPayrollDeductions)
             End Set
         End Property
 

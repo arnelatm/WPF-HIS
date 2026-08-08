@@ -25,8 +25,9 @@ Public Class BfMain
     Private _formCulture As CultureInfo
     Private _systemViewIdNo As Int32
     Private _firstLoadSwitch As Int32 = 0
-    Private ReadOnly _targetLanguageIdNoCache As New Dictionary(Of String, Short)(StringComparer.OrdinalIgnoreCase)
-    Private ReadOnly _translationViewCache As New Dictionary(Of Integer, DataView)
+    Private Shared ReadOnly TranslationCacheSync As New Object()
+    Private Shared ReadOnly _targetLanguageIdNoCache As New Dictionary(Of String, Short)(StringComparer.OrdinalIgnoreCase)
+    Private Shared ReadOnly _translationViewCache As New Dictionary(Of String, DataView)(StringComparer.OrdinalIgnoreCase)
     Private _originalFormCaption As String
     Private ReadOnly _originalTabCaptions As New Dictionary(Of TabPage, String)
 
@@ -51,6 +52,19 @@ Public Class BfMain
     Protected Overridable ReadOnly Property MirrorLayoutWhenSwitchingLanguage As Boolean
         Get
             Return False
+        End Get
+    End Property
+
+    Protected Overridable ReadOnly Property UseFastLanguageLayoutOnInitialDisplay As Boolean
+        Get
+            Return False
+        End Get
+    End Property
+
+    Protected ReadOnly Property MirrorLanguageLayoutNow As Boolean
+        Get
+            Return MirrorLayoutWhenSwitchingLanguage OrElse
+                   (Not FormShown AndAlso Not UseFastLanguageLayoutOnInitialDisplay)
         End Get
     End Property
 
@@ -183,6 +197,12 @@ Public Class BfMain
     End Function
 
     Private Sub OnCFormEntryNewShown() Handles MyBase.Shown
+        ' CFormEntry owns language initialization for entry forms. Running it here as
+        ' well creates two competing Shown-time translation passes.
+        If TypeOf Me Is CFormEntry Then
+            Return
+        End If
+
         'SuspendDrawing()
         If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
             SwitchUiLanguage(False)
@@ -204,9 +224,12 @@ Public Class BfMain
                                                 targetLanguage,
                                                 StringComparison.OrdinalIgnoreCase)
 
-        Me.SuspendDrawingNew()
-        SuspendLayout()
+        Dim allCtrl As New List(Of Control)
+        FindControlRecursive(allCtrl, Me)
+        Dim visibilityState = HideForAtomicDisplay()
+        Dim renderingSuspended = True
         Try
+            SuspendControlTreeRendering(allCtrl)
             If languageChanged Then
                 TextDisplayLanguage = targetLanguage
             ElseIf Not String.Equals(CultureInfo.CurrentCulture.Name,
@@ -217,27 +240,33 @@ Public Class BfMain
 
             GlobalVariables.RightToLeftLayout = CultureInfo.CurrentCulture.TextInfo.IsRightToLeft
             Dim desiredRightToLeft = If(GlobalVariables.RightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
-            If (MirrorLayoutWhenSwitchingLanguage OrElse Not FormShown) AndAlso RightToLeft <> desiredRightToLeft Then
+            If MirrorLanguageLayoutNow AndAlso RightToLeft <> desiredRightToLeft Then
                 RightToLeft = desiredRightToLeft
             End If
 
-            TranslateForm()
+            TranslateForm(allCtrl)
 
             If languageChanged AndAlso Ea IsNot Nothing Then
                 Ea.PublishEvent(New LanguageChanged(Me))
             End If
         Finally
-            ResumeLayout(True)
-            Me.ResumeDrawingNew()
+            If renderingSuspended Then
+                ResumeControlTreeRendering(allCtrl)
+            End If
+            RestoreAfterAtomicDisplay(visibilityState)
         End Try
     End Sub
 
     Public Sub TranslateForm()
+        Dim allCtrl As New List(Of Control)
+        FindControlRecursive(allCtrl, Me)
+        TranslateForm(allCtrl)
+    End Sub
+
+    Protected Sub TranslateForm(ByRef allCtrl As List(Of Control))
         If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
             'SuspendDrawing()
             Dim settings As New SettingsSaver
-            Dim allCtrl As New List(Of Control)
-            allCtrl = FindControlRecursive(allCtrl, Me)
             CaptureOriginalCaptions(allCtrl)
             settings.SaveSetting(Me)
             ' form location is being changed when Resetting RightToLeftLayout so need to save values
@@ -250,6 +279,88 @@ Public Class BfMain
             If GlobalVariables.TranslationMode Then
                 RaiseEvent AfterTranslateForm()
             End If
+        End If
+    End Sub
+
+    Protected Sub SuspendControlTreeRendering(ByVal allCtrl As List(Of Control))
+        For Each control In allCtrl
+            If control Is Nothing OrElse control.IsDisposed Then
+                Continue For
+            End If
+
+            If control.HasChildren Then
+                control.SuspendLayout()
+            End If
+            If control.IsHandleCreated Then
+                control.SuspendDrawingNew()
+            End If
+        Next
+    End Sub
+
+    Protected Sub ResumeControlTreeRendering(ByVal allCtrl As List(Of Control))
+        For index = allCtrl.Count - 1 To 0 Step -1
+            Dim control = allCtrl(index)
+            If control Is Nothing OrElse control.IsDisposed Then
+                Continue For
+            End If
+
+            If control.HasChildren Then
+                control.ResumeLayout(True)
+            End If
+            If control.IsHandleCreated Then
+                control.ResumeDrawingNew(False)
+            End If
+        Next
+
+        If Not IsDisposed AndAlso IsHandleCreated Then
+            Me.RedrawWithChildren()
+        End If
+    End Sub
+
+    Protected Structure AtomicDisplayVisibilityState
+        Public WasVisible As Boolean
+        Public UsedOpacity As Boolean
+        Public UsedVisibility As Boolean
+        Public OriginalOpacity As Double
+    End Structure
+
+    Protected Function HideForAtomicDisplay() As AtomicDisplayVisibilityState
+        Dim state As New AtomicDisplayVisibilityState With {
+            .WasVisible = Visible,
+            .OriginalOpacity = Opacity
+        }
+        If Not state.WasVisible Then
+            Return state
+        End If
+
+        If TopLevel AndAlso MdiParent Is Nothing AndAlso state.OriginalOpacity > 0 Then
+            Try
+                Opacity = 0
+                state.UsedOpacity = True
+                Return state
+            Catch ex As InvalidOperationException
+                ' MDI and restricted window styles cannot use layered opacity.
+            End Try
+        End If
+
+        Visible = False
+        state.UsedVisibility = True
+        Return state
+    End Function
+
+    Protected Sub RestoreAfterAtomicDisplay(state As AtomicDisplayVisibilityState)
+        If IsDisposed Then
+            Return
+        End If
+
+        If state.UsedOpacity Then
+            Opacity = state.OriginalOpacity
+        ElseIf state.UsedVisibility Then
+            Visible = state.WasVisible
+        End If
+
+        If state.WasVisible AndAlso Visible Then
+            Activate()
         End If
     End Sub
 
@@ -272,7 +383,7 @@ Public Class BfMain
         BackgroundImage = Nothing
         Dim desiredRightToLeftLayout = CultureInfo.CurrentCulture.TextInfo.IsRightToLeft
         Dim desiredRightToLeft = If(desiredRightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
-        Dim mirrorLayoutNow = MirrorLayoutWhenSwitchingLanguage OrElse Not FormShown
+        Dim mirrorLayoutNow = MirrorLanguageLayoutNow
 
         GlobalVariables.RightToLeftLayout = desiredRightToLeftLayout
         If mirrorLayoutNow AndAlso RightToLeft <> desiredRightToLeft Then
@@ -290,24 +401,22 @@ Public Class BfMain
 
     Protected Overridable Sub ApplyFastLanguageLayout(ByRef allCtrl As List(Of Control))
         Dim rightToLeftLayout = GlobalVariables.RightToLeftLayout
-        Dim targetFlowDirection As FlowDirection = If(rightToLeftLayout,
-                                                      FlowDirection.RightToLeft,
-                                                      FlowDirection.LeftToRight)
         Dim targetRightToLeft As RightToLeft = If(rightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
-
         For Each cCtrl In allCtrl
-            If TypeOf cCtrl Is FlowLayoutPanel Then
-                SetFlowDirection(DirectCast(cCtrl, FlowLayoutPanel), targetFlowDirection)
+            If TypeOf cCtrl Is CFlowLayout Then
+                DirectCast(cCtrl, CFlowLayout).ApplyLanguageLayout(targetRightToLeft)
+            ElseIf TypeOf cCtrl Is ToolStrip Then
+                DirectCast(cCtrl, ToolStrip).RightToLeft = targetRightToLeft
+            ElseIf TypeOf cCtrl Is CTreeViewOld OrElse
+                   TypeOf cCtrl Is TreeView OrElse
+                   TypeOf cCtrl Is CTreeView Then
+                Dim treeView = DirectCast(cCtrl, TreeView)
+                treeView.RightToLeftLayout = rightToLeftLayout
+                treeView.RightToLeft = targetRightToLeft
             ElseIf TypeOf cCtrl Is TableLayoutPanel Then
                 SetTableRightToLeft(DirectCast(cCtrl, TableLayoutPanel), targetRightToLeft)
             End If
         Next
-    End Sub
-
-    Private Shared Sub SetFlowDirection(flowLayout As FlowLayoutPanel, flowDirection As FlowDirection)
-        If flowLayout IsNot Nothing AndAlso flowLayout.FlowDirection <> flowDirection Then
-            flowLayout.FlowDirection = flowDirection
-        End If
     End Sub
 
     Private Shared Sub SetTableRightToLeft(tableLayout As TableLayoutPanel, rightToLeft As RightToLeft)
@@ -378,12 +487,17 @@ Public Class BfMain
         End If
 
         Dim cacheKey = desiredLanguage + "|" + allowFallBack.ToString()
-        If _targetLanguageIdNoCache.ContainsKey(cacheKey) Then
-            Return _targetLanguageIdNoCache(cacheKey)
-        End If
+        Dim cachedLanguageIdNo As Short
+        SyncLock TranslationCacheSync
+            If _targetLanguageIdNoCache.TryGetValue(cacheKey, cachedLanguageIdNo) Then
+                Return cachedLanguageIdNo
+            End If
+        End SyncLock
 
         Dim targetLanguageIdNo = GetTargetLanguageIdNo(desiredLanguage, allowFallBack)
-        _targetLanguageIdNoCache(cacheKey) = targetLanguageIdNo
+        SyncLock TranslationCacheSync
+            _targetLanguageIdNoCache(cacheKey) = targetLanguageIdNo
+        End SyncLock
         Return targetLanguageIdNo
     End Function
 
@@ -481,8 +595,18 @@ Public Class BfMain
     End Sub
 
     Protected Sub LayOutControls(ByRef allCtrl As List(Of Control))
-        Dim mirrorLayoutNow = MirrorLayoutWhenSwitchingLanguage OrElse Not FormShown
+        Dim mirrorLayoutNow = MirrorLanguageLayoutNow
         For Each cCtrl As Control In allCtrl
+            If TypeOf cCtrl Is SplitContainer Then
+                SetSplitContainerRightToLeft(DirectCast(cCtrl, SplitContainer), GlobalVariables.RightToLeftLayout)
+            ElseIf TypeOf cCtrl Is ToolStrip Then
+                Dim toolStrip = DirectCast(cCtrl, ToolStrip)
+                Dim targetRightToLeft = If(GlobalVariables.RightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
+                If toolStrip.RightToLeft <> targetRightToLeft Then
+                    toolStrip.RightToLeft = targetRightToLeft
+                End If
+            End If
+
             If IsTranslatable(cCtrl) Then
                 If TypeOf cCtrl Is ToolStrip Then
                     Dim cToolStrip As ToolStrip = cCtrl
@@ -500,9 +624,6 @@ Public Class BfMain
                     Next
                 ElseIf TypeOf cCtrl Is CTreeViewOld Or TypeOf cCtrl Is TreeView Or TypeOf cCtrl Is CTreeView Then
                     Dim cT = CType(cCtrl, TreeView)
-                    If Not FormShown Then
-                        cT.ExpandAll()
-                    End If
                     Dim desiredTreeRightToLeft = If(GlobalVariables.RightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
                     If mirrorLayoutNow AndAlso cT.RightToLeftLayout <> GlobalVariables.RightToLeftLayout Then
                         cT.RightToLeftLayout = GlobalVariables.RightToLeftLayout
@@ -535,9 +656,30 @@ Public Class BfMain
         Next
     End Sub
 
+    Private Shared Sub SetSplitContainerRightToLeft(splitContainer As SplitContainer, rightToLeftLayout As Boolean)
+        If splitContainer Is Nothing Then Return
+
+        Dim targetRightToLeft = If(rightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
+        If splitContainer.RightToLeft <> targetRightToLeft Then
+            splitContainer.RightToLeft = targetRightToLeft
+        End If
+        If splitContainer.Panel1.RightToLeft <> targetRightToLeft Then
+            splitContainer.Panel1.RightToLeft = targetRightToLeft
+        End If
+        If splitContainer.Panel2.RightToLeft <> targetRightToLeft Then
+            splitContainer.Panel2.RightToLeft = targetRightToLeft
+        End If
+    End Sub
+
     Private Function GetTranslationView(targetLanguageIdNo As Integer) As DataView
-        If Not GlobalVariables.TranslationMode AndAlso _translationViewCache.ContainsKey(targetLanguageIdNo) Then
-            Return _translationViewCache(targetLanguageIdNo)
+        Dim cacheKey = GetTranslationCacheKey(targetLanguageIdNo)
+        If Not GlobalVariables.TranslationMode Then
+            Dim cachedView As DataView = Nothing
+            SyncLock TranslationCacheSync
+                If _translationViewCache.TryGetValue(cacheKey, cachedView) Then
+                    Return cachedView
+                End If
+            End SyncLock
         End If
 
         Dim translations As DataSet = GetTranslations(targetLanguageIdNo)
@@ -545,10 +687,17 @@ Public Class BfMain
         translationView.Sort = "Caption"
 
         If Not GlobalVariables.TranslationMode Then
-            _translationViewCache(targetLanguageIdNo) = translationView
+            SyncLock TranslationCacheSync
+                _translationViewCache(cacheKey) = translationView
+            End SyncLock
         End If
 
         Return translationView
+    End Function
+
+    Private Function GetTranslationCacheKey(targetLanguageIdNo As Integer) As String
+        Dim viewName = If(String.IsNullOrWhiteSpace(ViewDisplayName), Name, ViewDisplayName.Trim())
+        Return viewName + "|" + targetLanguageIdNo.ToString()
     End Function
 
     Protected Function GetTranslations(targetLanguageIdNo As Integer) As DataSet
@@ -888,9 +1037,8 @@ Public Class BfMain
 
     Public Sub GetNSaveCaptions() 'control As Control)
         DoubleBuffered = True
+        CaptionCollection = StoreCaptions1.StoreTranslation(Me)
         If GlobalVariables.TranslationMode Then
-            CaptionCollection = StoreCaptions1.StoreTranslation(Me)
-            StoreCaptions1.SaveControlsOriginalText(Me)
             DefaultMirroredLanguageIdNo = TranslatorDAC.DefaultMirroredLanguageIdNo
             If ViewDisplayName Is Nothing Or ViewDisplayName = "" Then
                 ViewDisplayName = Name

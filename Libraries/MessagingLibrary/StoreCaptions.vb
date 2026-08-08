@@ -106,9 +106,11 @@ Public Class StoreCaptions
         Else
             viewDisplayName = frm.ViewDisplayName
         End If
-        InsertForm(viewDisplayName)
-        systemViewIdNo = GetSystemViewIdNo(viewDisplayName)
-        InsertTranslation(frm.Text, systemViewIdNo)
+        If GlobalVariables.TranslationMode Then
+            InsertForm(viewDisplayName)
+            systemViewIdNo = GetSystemViewIdNo(viewDisplayName)
+            InsertTranslation(frm.Text, systemViewIdNo)
+        End If
         Dim t As String
         Dim allCtrl As New List(Of Control)
         For Each cCtrl As Control In FindControlRecursive(allCtrl, frm)
@@ -131,7 +133,9 @@ Public Class StoreCaptions
                     StoreDataGridViewTranslation(systemViewIdNo, c, col)
                 Next
             ElseIf TypeOf cCtrl Is DataGrid Then
-                Captions.Add(cCtrl.Text, cCtrl.Name)
+                t = CType(cCtrl, DataGrid).CaptionText
+                SaveOriginalText(cCtrl, t)
+                Captions.Add(t, cCtrl.Name)
             Else
                 Try
                     If TypeOf cCtrl Is TextBox OrElse
@@ -155,6 +159,7 @@ Public Class StoreCaptions
                         '    Debugger.Break()
                         'End If
                         If Not String.IsNullOrWhiteSpace(t) Then
+                            SaveOriginalText(cCtrl, t)
                             Captions.Add(cCtrl.Text, cCtrl.Name)
                             InsertTranslation(t, systemViewIdNo)
                         End If
@@ -194,6 +199,7 @@ Public Class StoreCaptions
     Private Sub StoreToolStripTranslation(systemViewIdNo As Short, c As ToolStrip, obj As Object)
         Dim t As String
         Try
+            SaveOriginalText(obj, {obj.Text, obj.ToolTipText})
             If Not String.IsNullOrEmpty(obj.Text) Then
                 t = obj.Text
                 Captions.Add(t, c.Name + "." + obj.Name + ".Text")
@@ -225,11 +231,10 @@ Public Class StoreCaptions
     Private Sub TranslateDataGridView(systemViewIdNo As Short, c As DataGridView, obj As Object)
         Dim t As String
         Try
-            For Each col As DataGridViewColumn In c.Columns
-                t = col.HeaderText
-                Captions.Add(t, c.Name + "." + col.HeaderText)
-                InsertTranslation(t, systemViewIdNo)
-            Next
+            Dim col = DirectCast(obj, DataGridViewColumn)
+            t = col.HeaderText
+            Captions.Add(t, c.Name + "." + col.HeaderText)
+            InsertTranslation(t, systemViewIdNo)
         Catch ex As Exception
 
         End Try
@@ -238,11 +243,11 @@ Public Class StoreCaptions
     Private Sub StoreDataGridViewTranslation(systemViewIdNo As Short, c As DataGridView, obj As Object)
         Dim t As String
         Try
-            For Each col As DataGridViewColumn In c.Columns
-                t = col.HeaderText
-                Captions.Add(t, c.Name + "." + col.HeaderText)
-                InsertTranslation(t, systemViewIdNo)
-            Next
+            Dim col = DirectCast(obj, DataGridViewColumn)
+            t = col.HeaderText
+            SaveOriginalText(col, t)
+            Captions.Add(t, c.Name + "." + col.HeaderText)
+            InsertTranslation(t, systemViewIdNo)
         Catch ex As Exception
 
         End Try
@@ -279,6 +284,7 @@ Public Class StoreCaptions
                 Dim subMenu = TryCast(obj, ToolStripMenuItem)
                 If subMenu IsNot Nothing Then
                     subMenuName = subMenuName + "." + obj.Name
+                    SaveOriginalText(obj, obj.Text)
                     If Not String.IsNullOrEmpty(obj.Text) Then
                         Captions.Add(obj.text, subMenuName)
                         InsertTranslation(obj.Text, systemViewIdNo)

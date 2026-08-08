@@ -10,6 +10,7 @@ Public Class CTabControl
 
     Public Sub New()
         MyBase.New()
+        DoubleBuffered = True
         Width = 200
         Height = 100
     End Sub

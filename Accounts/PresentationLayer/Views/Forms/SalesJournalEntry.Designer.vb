@@ -740,7 +740,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'bsJournalItems
             '
-            Me.bsJournalItems.DataSource = GetType(AATM.Accounts.BusinessLayer.SalesJournal)
+            Me.bsJournalItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.JournalItemModel)
             '
             'DataGridViewSalesDeposits
             '

@@ -251,7 +251,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 _earningsSummary = Value
-                BindEarningsSummary()
+                RunOrDeferViewDataBinding(AddressOf BindEarningsSummary)
             End Set
         End Property
 
@@ -261,7 +261,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 _payrollEarnAccounts = Value
-                BindPayrollEarnAccounts()
+                RunOrDeferViewDataBinding(AddressOf BindPayrollEarnAccounts)
             End Set
         End Property
 

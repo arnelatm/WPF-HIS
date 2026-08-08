@@ -305,8 +305,15 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     End Property
 
     Protected Sub UpdateView(value As Integer)
-        UpdateViewData(value)
-        UpdateViewDisplay()
+        Dim endViewDataUpdateMethod = BeginViewDataUpdate()
+        Try
+            UpdateViewData(value)
+            UpdateViewDisplay()
+        Finally
+            If endViewDataUpdateMethod IsNot Nothing Then
+                endViewDataUpdateMethod.Invoke(View, Nothing)
+            End If
+        End Try
         RaiseEvent AfterUpdateView()
     End Sub
 
@@ -1003,8 +1010,32 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         ClearAllErrorMessages()
     End Sub
 
+    Private Function BeginViewDataUpdate() As MethodInfo
+        Dim beginMethod = View.GetType().GetMethod("BeginViewDataUpdate", Type.EmptyTypes)
+        Dim endMethod = View.GetType().GetMethod("EndViewDataUpdate", Type.EmptyTypes)
+        If beginMethod Is Nothing OrElse endMethod Is Nothing Then
+            Return Nothing
+        End If
+
+        beginMethod.Invoke(View, Nothing)
+        Return endMethod
+    End Function
+
     Protected Overridable Sub UpdateViewDisplay()
         Invoker.InvokeFunction(View, "UpdateViewDisplay", {EditMode, AddMode, RecordPositionNumber, TargetIdNo, RecordCount})
+    End Sub
+
+    Protected Sub UpdateLanguageViewDisplay(Optional knownRecordCount As Integer? = Nothing)
+        Dim languageDisplayMethod = View.GetType().GetMethod("UpdateLanguageViewDisplay")
+        If languageDisplayMethod Is Nothing Then
+            UpdateViewDisplay()
+            Return
+        End If
+
+        Dim displayRecordCount = If(knownRecordCount.HasValue, knownRecordCount.Value, RecordCount)
+        Invoker.InvokeFunction(View,
+                               "UpdateLanguageViewDisplay",
+                               {EditMode, AddMode, RecordPositionNumber, TargetIdNo, displayRecordCount})
     End Sub
 
     Public Function UsePayGroups()

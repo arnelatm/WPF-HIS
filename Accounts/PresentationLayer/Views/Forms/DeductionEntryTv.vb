@@ -150,7 +150,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 _payrollDeductAccounts = Value
-                BindPayrollDeductAccounts()
+                RunOrDeferViewDataBinding(AddressOf BindPayrollDeductAccounts)
             End Set
         End Property
 

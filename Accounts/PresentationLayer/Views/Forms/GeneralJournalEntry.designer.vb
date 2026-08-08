@@ -748,7 +748,9 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.CFlowLayout4, "CFlowLayout4")
             Me.CFlowLayout4.BackColor = System.Drawing.Color.Transparent
             Me.CFlowLayout4.Controls.Add(Me.floJournalHeader)
+            Me.CFlowLayout4.SetFlowBreak(Me.floJournalHeader, True)
             Me.CFlowLayout4.Controls.Add(Me.DataGridViewJournalItems)
+            Me.CFlowLayout4.SetFlowBreak(Me.DataGridViewJournalItems, True)
             Me.CFlowLayout4.Controls.Add(Me.txtTotalCredits)
             Me.CFlowLayout4.Controls.Add(Me.txtTotalDebits)
             Me.CFlowLayout4.Name = "CFlowLayout4"

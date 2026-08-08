@@ -212,7 +212,7 @@ Namespace PresentationLayer.Views.Forms
             Set
                 _journalItems = Value
                 'bsJournalItems.ResetBindings(True)
-                BindJournalItem()
+                RunOrDeferViewDataBinding(AddressOf BindJournalItem)
             End Set
         End Property
 
@@ -271,7 +271,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set(value As List(Of DjOiItemView))
                 _djOiItems = value
-                BindDjOiItem()
+                RunOrDeferViewDataBinding(AddressOf BindDjOiItem)
                 'bsJournalItems.ResetBindings(True)
             End Set
         End Property
@@ -765,7 +765,7 @@ Namespace PresentationLayer.Views.Forms
                 ShowJournalItemDataGrid()
                 btnViewGL.Visible = False
                 cboDiscountAccountIdNo.Enabled = False
-                BindJournalItem()
+                RunOrDeferViewDataBinding(AddressOf BindJournalItem)
                 Applied = Amount
                 UnApplied = 0
                 DiscountTaken = 0

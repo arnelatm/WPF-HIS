@@ -105,7 +105,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 _accountReconciliations = Value
-                BindAccountReconciliation()
+                RunOrDeferViewDataBinding(AddressOf BindAccountReconciliation)
             End Set
         End Property
 

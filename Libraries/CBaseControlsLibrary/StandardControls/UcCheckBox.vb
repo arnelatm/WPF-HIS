@@ -22,6 +22,7 @@ Public Class UcCheckBox
 
         ' Add any initialization after the InitializeComponent() call.
         Translatable = True
+        CFlowLayout1.PreserveLanguageLayout = True
         'If GlobalVariables.RightToLeftLayout Then
         RightToLeft = RightToLeft.No
         checkBox.BoxSize = New Size(12, 12)

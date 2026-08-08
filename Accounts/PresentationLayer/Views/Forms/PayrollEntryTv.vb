@@ -116,7 +116,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 _payrollOvertime = Value
-                BindPayrollOvertime()
+                RunOrDeferViewDataBinding(AddressOf BindPayrollOvertime)
             End Set
         End Property
 
@@ -128,7 +128,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 _payrollAttendance = Value
-                BindPayrollAttendance()
+                RunOrDeferViewDataBinding(AddressOf BindPayrollAttendance)
             End Set
         End Property
 

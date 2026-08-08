@@ -69,7 +69,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set(value As List(Of HolidayTransferItemView))
                 _holidayTransferItems = value
-                BindHolidayTransferItems()
+                RunOrDeferViewDataBinding(AddressOf BindHolidayTransferItems)
             End Set
         End Property
 

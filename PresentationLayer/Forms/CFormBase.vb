@@ -124,6 +124,12 @@ Public Class CFormBase
         lblFormDescription.TextAlign = ContentAlignment.MiddleCenter
     End Sub
 
+    Private Sub OnFormTitleChanged(sender As Object, e As EventArgs) Handles MyBase.TextChanged
+        If lblFormDescription IsNot Nothing Then
+            SetFormTitleCaption()
+        End If
+    End Sub
+
     Public Sub ShowFormTitle()
         lblFormDescription.Text = FormTitleCaption
         lblFormDescription.Width = Width

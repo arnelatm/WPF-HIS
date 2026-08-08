@@ -114,7 +114,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 _prescriptionDetails = Value
-                BindPrescriptionDetails()
+                RunOrDeferViewDataBinding(AddressOf BindPrescriptionDetails)
             End Set
         End Property
 

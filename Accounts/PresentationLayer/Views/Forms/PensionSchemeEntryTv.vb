@@ -78,7 +78,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 _pensionRates = Value
-                BindPensionRates()
+                RunOrDeferViewDataBinding(AddressOf BindPensionRates)
             End Set
         End Property
 

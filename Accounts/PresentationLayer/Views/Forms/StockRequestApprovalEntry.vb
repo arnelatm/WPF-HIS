@@ -23,7 +23,7 @@ Public Class StockRequestApprovalEntry
         End Get
         Set(value As List(Of InvTransaction))
             _invTransactionRequests = value
-            BindStockRequestList()
+            RunOrDeferViewDataBinding(AddressOf BindStockRequestList)
         End Set
     End Property
 

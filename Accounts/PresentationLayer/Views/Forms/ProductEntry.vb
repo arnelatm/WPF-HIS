@@ -132,7 +132,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 _productUnits = Value
-                BindProductUnits()
+                RunOrDeferViewDataBinding(AddressOf BindProductUnits)
             End Set
         End Property
 

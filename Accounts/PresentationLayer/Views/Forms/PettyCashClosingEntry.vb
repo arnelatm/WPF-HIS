@@ -227,7 +227,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 _pcClosingJournals = Value
-                BindPcJournals()
+                RunOrDeferViewDataBinding(AddressOf BindPcJournals)
             End Set
         End Property
 

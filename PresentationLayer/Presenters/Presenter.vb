@@ -372,12 +372,35 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
     'Public Sub OnPresenter_LanguageChangedEventHandler(ByRef eventType As LanguageChanged) Implements ISubscriber(Of LanguageChanged).OnEventHandler
     Public Sub OnLanguageChanged() Handles MyBase.LanguageChanged
         Dim idNo = CInt(CallByName(View, IdFieldName, CallType.Get))
+        Dim knownRecordCount As Integer? = Nothing
+        Dim positionWasReadFromTree = False
         If _WithTreeView Then
             DisplayTree()
+            positionWasReadFromTree = TryGetFlatTreePosition(idNo, knownRecordCount)
         End If
-        SetRecordPositionNumberWithoutNavigation(GetSortedRecordPosition(idNo))
-        UpdateViewDisplay()
+        If Not positionWasReadFromTree Then
+            SetRecordPositionNumberWithoutNavigation(GetSortedRecordPosition(idNo))
+        End If
+        UpdateLanguageViewDisplay(knownRecordCount)
     End Sub
+
+    Private Function TryGetFlatTreePosition(idNo As Integer, ByRef recordCount As Integer?) As Boolean
+        If Not String.IsNullOrEmpty(ParentFieldName) OrElse
+           FormTreeView Is Nothing OrElse
+           FormTreeView.Nodes.Count = 0 Then
+            Return False
+        End If
+
+        Dim root = FormTreeView.Nodes(0)
+        recordCount = root.Nodes.Count
+        Dim matchingNodes = root.Nodes.Find(idNo.ToString(), False)
+        If matchingNodes.Length = 0 Then
+            Return False
+        End If
+
+        SetRecordPositionNumberWithoutNavigation(matchingNodes(0).Index + 1)
+        Return True
+    End Function
 
     Public Sub FindFieldNew(findableControl As IFindableControl)
         Dim idNo = Service.FindFieldNew(TableName, findableControl, SortOrderKey, DataFilter)

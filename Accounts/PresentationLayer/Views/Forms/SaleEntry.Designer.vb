@@ -56,7 +56,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblJournalIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtJournalIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
+            Me.FlowLayoutPanel1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.CFlowLayout3 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -1985,7 +1985,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents chkPosted As UcCheckBox
         Friend WithEvents lblDateAdded As CLabel
         Friend WithEvents txtDateCreated As CTextBox
-        Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
+        Friend WithEvents FlowLayoutPanel1 As CFlowLayout
         Friend WithEvents CFlowLayout3 As CFlowLayout
         Friend WithEvents lblIdNo As CLabel
         Friend WithEvents TxtIdNo As CTextBox

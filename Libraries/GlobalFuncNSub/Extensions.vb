@@ -209,7 +209,19 @@ Public Module Extensions
     Private Function SendMessage(ByVal hWnd As IntPtr, ByVal msg As Integer, ByVal wParam As Boolean, ByVal lParam As IntPtr) As Integer
     End Function
 
+    <DllImport("user32.dll")>
+    Private Function RedrawWindow(ByVal hWnd As IntPtr,
+                                  ByVal updateRectangle As IntPtr,
+                                  ByVal updateRegion As IntPtr,
+                                  ByVal flags As UInteger) As Boolean
+    End Function
+
     Private Const WM_SETREDRAW As Integer = 11
+    Private Const RDW_INVALIDATE As UInteger = &H1UI
+    Private Const RDW_ERASE As UInteger = &H4UI
+    Private Const RDW_ALLCHILDREN As UInteger = &H80UI
+    Private Const RDW_UPDATENOW As UInteger = &H100UI
+    Private Const RDW_FRAME As UInteger = &H400UI
 
     ' Extension methods for Control
     <Extension()>
@@ -250,7 +262,7 @@ Public Module Extensions
 
     '' Extension methods for Control
     <Extension()>
-    Public Sub ResumeDrawingNew(ByVal Target As Control)
+    Public Sub ResumeDrawingNew(ByVal Target As Control, Optional refreshTarget As Boolean = True)
         If Target IsNot Nothing Then
             SendMessage(Target.Handle, WM_SETREDRAW, True, IntPtr.Zero)
         End If
@@ -261,7 +273,9 @@ Public Module Extensions
         '    t.Refresh()
         'End If
         'If Redraw Then
-        Target.Refresh()
+        If refreshTarget Then
+            Target.Refresh()
+        End If
         'End If
     End Sub
 
@@ -270,6 +284,18 @@ Public Module Extensions
         If Target IsNot Nothing Then
             SendMessage(Target.Handle, WM_SETREDRAW, False, IntPtr.Zero)
         End If
+    End Sub
+
+    <Extension()>
+    Public Sub RedrawWithChildren(ByVal target As Control)
+        If target Is Nothing OrElse target.IsDisposed OrElse Not target.IsHandleCreated Then
+            Return
+        End If
+
+        RedrawWindow(target.Handle,
+                     IntPtr.Zero,
+                     IntPtr.Zero,
+                     RDW_INVALIDATE Or RDW_ERASE Or RDW_ALLCHILDREN Or RDW_UPDATENOW Or RDW_FRAME)
     End Sub
 
     <Extension()>
