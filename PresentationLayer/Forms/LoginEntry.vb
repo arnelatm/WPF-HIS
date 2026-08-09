@@ -86,6 +86,17 @@ Public Class LoginEntry
             floPasswordEntry.Height = 413 - 46
         End If
 
+        ApplyPasswordModeVisibility()
+
+    End Sub
+
+    Private Sub ApplyPasswordModeVisibility()
+        textNewPassword.Visible = _changingPassword
+        textConfirmation.Visible = _changingPassword
+        lblNewPassword.Visible = _changingPassword
+        lblConfirmation.Visible = _changingPassword
+        textNewPassword.TabStop = _changingPassword
+        textConfirmation.TabStop = _changingPassword
     End Sub
 
     Public Property MainTableName As String = "User"
@@ -222,12 +233,14 @@ Public Class LoginEntry
         _textBoxPassword.DisplayOnly = False
         _textNewPassword.DisplayOnly = False
         _textConfirmation.DisplayOnly = False
+        ApplyPasswordModeVisibility()
     End Sub
 
 
     Public MainFieldsDictionary As New Dictionary(Of String, Object)
 
     Private Sub FormLogin_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        ApplyPasswordModeVisibility()
         If _cancelLogin Then
             Close()
         End If
