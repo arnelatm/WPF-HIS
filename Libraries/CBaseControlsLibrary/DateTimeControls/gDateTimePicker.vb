@@ -323,14 +323,21 @@ Public Class gDateTimePicker
                     'erased when something else covers part of the control
                     Dim meRect As Rectangle = New Rectangle(ClientRectangle.X, ClientRectangle.Y,
                         ClientRectangle.Width - 18, ClientRectangle.Height)
-                    g.FillRectangle(New SolidBrush(_BackFillColor), meRect)
-
-                    If Not _NullTextInFront Then g.DrawString(_NullText,
-                        New Font(Font.Name, Font.Size, FontStyle.Bold), New SolidBrush(_NullTextColor), 0, 0)
-                    g.FillRectangle(New HatchBrush(_NullHatchStyle, Color.FromArgb(_NullAlpha, _NullColorA),
-                    Color.FromArgb(_NullAlpha, _NullColorB)), meRect)
-                    If _NullTextInFront Then g.DrawString(_NullText,
-                        New Font(Font.Name, Font.Size, FontStyle.Bold), New SolidBrush(_NullTextColor), 0, 0)
+                    Using backBrush As New SolidBrush(_BackFillColor),
+                        nullTextFont As New Font(Font.Name, Font.Size, FontStyle.Bold),
+                        nullTextBrush As New SolidBrush(_NullTextColor),
+                        hatchBrush As New HatchBrush(_NullHatchStyle,
+                                                     Color.FromArgb(_NullAlpha, _NullColorA),
+                                                     Color.FromArgb(_NullAlpha, _NullColorB))
+                        g.FillRectangle(backBrush, meRect)
+                        If Not _NullTextInFront Then
+                            g.DrawString(_NullText, nullTextFont, nullTextBrush, 0, 0)
+                        End If
+                        g.FillRectangle(hatchBrush, meRect)
+                        If _NullTextInFront Then
+                            g.DrawString(_NullText, nullTextFont, nullTextBrush, 0, 0)
+                        End If
+                    End Using
                 End If
             End Using
             Return

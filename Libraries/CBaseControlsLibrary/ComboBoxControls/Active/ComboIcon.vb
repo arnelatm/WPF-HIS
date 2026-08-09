@@ -22,28 +22,24 @@ Public Class ComboIcon
         imageSize = _imageList.ImageSize
         Dim bounds As New Rectangle
         bounds = e.Bounds
-        Try
-            item = Items(e.Index)
-            If (item.ImageIndex <> -1) Then
-                _imageList.Draw(e.Graphics, bounds.Left,
-                                bounds.Top, item.ImageIndex)
-                e.Graphics.DrawString(item.Text, e.Font,
-                                      New SolidBrush(e.ForeColor), bounds.Left +
-                                                                   imageSize.Width, bounds.Top)
-            Else
-                e.Graphics.DrawString(item.Text, e.Font,
-                                      New SolidBrush(e.ForeColor), bounds.Left,
-                                      bounds.Top)
-            End If
-        Catch ex As Exception
-            If (e.Index <> -1) Then
-                e.Graphics.DrawString(Items(e.Index).ToString(), e.Font,
-                                      New SolidBrush(e.ForeColor), bounds.Left, bounds.Top)
-            Else
-                e.Graphics.DrawString(Text, e.Font,
-                                      New SolidBrush(e.ForeColor), bounds.Left, bounds.Top)
-            End If
-        End Try
+        Using textBrush As New SolidBrush(e.ForeColor)
+            Try
+                item = Items(e.Index)
+                If (item.ImageIndex <> -1) Then
+                    _imageList.Draw(e.Graphics, bounds.Left,
+                                    bounds.Top, item.ImageIndex)
+                    e.Graphics.DrawString(item.Text, e.Font, textBrush, bounds.Left + imageSize.Width, bounds.Top)
+                Else
+                    e.Graphics.DrawString(item.Text, e.Font, textBrush, bounds.Left, bounds.Top)
+                End If
+            Catch ex As Exception
+                If (e.Index <> -1) Then
+                    e.Graphics.DrawString(Items(e.Index).ToString(), e.Font, textBrush, bounds.Left, bounds.Top)
+                Else
+                    e.Graphics.DrawString(Text, e.Font, textBrush, bounds.Left, bounds.Top)
+                End If
+            End Try
+        End Using
         MyBase.OnDrawItem(e)
     End Sub
 

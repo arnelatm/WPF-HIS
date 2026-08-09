@@ -170,8 +170,9 @@ Public Class CHijriCalendar
             Dim Day = TryCast(sender, Label)
 
             If IsToday(Convert.ToInt32(Day.Name), m_iMonth, m_iYear) Then
-                Dim RedPen = New Pen(Color.Red, 1)
-                e.Graphics.DrawRectangle(RedPen, New Rectangle(0, 0, Day.Width - 1, Day.Height - 1))
+                Using redPen As New Pen(Color.Red, 1)
+                    e.Graphics.DrawRectangle(redPen, New Rectangle(0, 0, Day.Width - 1, Day.Height - 1))
+                End Using
             End If
 
             If IsSelectedDay(Convert.ToInt32(Day.Name), m_iMonth, m_iYear) Then
@@ -328,8 +329,9 @@ Public Class CHijriCalendar
 
     Private Sub lblTodayMark_Paint(sender As Object, e As PaintEventArgs)
         Dim Mark = TryCast(sender, Label)
-        Dim RedPen = New Pen(Color.Red, 1)
-        e.Graphics.DrawRectangle(RedPen, New Rectangle(0, 0, Mark.Width - 1, Mark.Height - 1))
+        Using redPen As New Pen(Color.Red, 1)
+            e.Graphics.DrawRectangle(redPen, New Rectangle(0, 0, Mark.Width - 1, Mark.Height - 1))
+        End Using
     End Sub
 
     Private Sub lblTodayMark_Click(sender As Object, e As EventArgs)

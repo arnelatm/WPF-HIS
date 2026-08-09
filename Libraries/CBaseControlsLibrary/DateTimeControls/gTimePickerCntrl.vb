@@ -573,8 +573,11 @@ Public Class gTimePickerCntrl
             MinPen.EndCap = Drawing2D.LineCap.Triangle
 
             If _Time = String.Empty Then
-                e.Graphics.FillEllipse(New SolidBrush(HrPen.Color), Center.X - 4, Center.Y - 4, 8, 8)
-                e.Graphics.FillEllipse(New SolidBrush(MinPen.Color), Center.X - 2, Center.Y - 2, 4, 4)
+                Using hourBrush As New SolidBrush(HrPen.Color),
+                    minuteBrush As New SolidBrush(MinPen.Color)
+                    e.Graphics.FillEllipse(hourBrush, Center.X - 4, Center.Y - 4, 8, 8)
+                    e.Graphics.FillEllipse(minuteBrush, Center.X - 2, Center.Y - 2, 4, 4)
+                End Using
             Else
 
                 Dim HourAngle As Single = 90 - (CSng(30 * (Val(_Time.Substring(0, 2))) +
@@ -584,8 +587,10 @@ Public Class gTimePickerCntrl
                 e.Graphics.DrawLine(HrPen, Center, GetPoint(Center, 35, HourAngle))
                 e.Graphics.DrawLine(MinPen, Center, GetPoint(Center, 60, MinAngle))
 
-                e.Graphics.DrawString(_Time, New Font("Arial", 14, FontStyle.Bold),
-                    New SolidBrush(TimeColors.DisplayTime), New Rectangle(7, 8, 59, 21), sf)
+                Using displayFont As New Font("Arial", 14, FontStyle.Bold),
+                    displayBrush As New SolidBrush(TimeColors.DisplayTime)
+                    e.Graphics.DrawString(_Time, displayFont, displayBrush, New Rectangle(7, 8, 59, 21), sf)
+                End Using
             End If
 
         End Using
@@ -686,19 +691,20 @@ Public Class gTimePickerCntrl
         blend.Positions = bPts
 
         ' Create a PathGradientBrush
-        Dim gp As New GraphicsPath
-        gp.AddEllipse(rect)
-        Using br As New PathGradientBrush(gp)
+        Using gp As New GraphicsPath
+            gp.AddEllipse(rect)
+            Using br As New PathGradientBrush(gp),
+                framePen As New Pen(TimeColors.FrameOuter)
 
-            'Blend the colors into the Brush
-            br.InterpolationColors = blend
+                'Blend the colors into the Brush
+                br.InterpolationColors = blend
 
-            'Fill the rect with the blend
-            g.FillEllipse(br, rect)
-            g.DrawEllipse(New Pen(TimeColors.FrameOuter), rect)
+                'Fill the rect with the blend
+                g.FillEllipse(br, rect)
+                g.DrawEllipse(framePen, rect)
 
+            End Using
         End Using
-        gp.Dispose()
     End Sub
 
     Private Sub DrawRect(ByRef g As Graphics, ByVal rect As Rectangle, ByVal FocusScale As PointF, ByVal bPts As Single())
@@ -720,21 +726,21 @@ Public Class gTimePickerCntrl
         blend.Positions = bPts
 
         ' Create a PathGradientBrush
-        Dim gp As New GraphicsPath
-        gp.AddRectangle(rect) '(New Rectangle(rect.X, rect.Y, rect.Width, rect.Height + 2))
+        Using gp As New GraphicsPath
+            gp.AddRectangle(rect) '(New Rectangle(rect.X, rect.Y, rect.Width, rect.Height + 2))
+            Using br As New PathGradientBrush(gp),
+                framePen As New Pen(TimeColors.FrameOuter)
 
-        Using br As New PathGradientBrush(gp)
+                'Blend the colors into the Brush
+                br.InterpolationColors = blend
+                br.FocusScales = FocusScale
 
-            'Blend the colors into the Brush
-            br.InterpolationColors = blend
-            br.FocusScales = FocusScale
+                'Fill the rect with the blend
+                g.FillRectangle(br, rect)
+                g.DrawRectangle(framePen, rect)
 
-            'Fill the rect with the blend
-            g.FillRectangle(br, rect)
-            g.DrawRectangle(New Pen(TimeColors.FrameOuter), rect)
-
+            End Using
         End Using
-        gp.Dispose()
     End Sub
 
 #End Region

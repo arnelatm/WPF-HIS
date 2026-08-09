@@ -312,8 +312,9 @@ Public Class CCheckBoxNewOrig
         End If
         Dim rect As Rectangle = New Rectangle(pt, New Size(10, 10))
         Dim cBoxColorFill As Color
-        Dim cBrush = New SolidBrush(cBoxColorFill)
-        pEvent.Graphics.FillRectangle(cBrush, rect)
+        Using cBrush As New SolidBrush(cBoxColorFill)
+            pEvent.Graphics.FillRectangle(cBrush, rect)
+        End Using
         If RightToLeft Then
             pEvent.Graphics.DrawRectangle(Pens.Black, New Rectangle(Width - 10, 4, 10, 10))
         Else

@@ -80,21 +80,28 @@ Public Class HatchStyleListBox
 
             Dim displayText As String = Me.Items(e.Index).ToString()
             Dim hs As HatchStyle = CType(System.Enum.Parse(GetType(HatchStyle), displayText, True), HatchStyle)
-            Dim hb As HatchBrush = New HatchBrush(hs, ColorFore, ColorBack)
-
-            Dim sf As StringFormat = New StringFormat()
-            sf.Alignment = StringAlignment.Near
-            sf.LineAlignment = StringAlignment.Center
-            sf.FormatFlags = StringFormatFlags.NoWrap
-            If (e.State And DrawItemState.Focus) = 0 Then
-                g.FillRectangle(New SolidBrush(SystemColors.Window), sampletext)
-                g.DrawString(displayText, Me.Font, New SolidBrush(SystemColors.WindowText), sampletext, sf)
-            Else
-                g.FillRectangle(New SolidBrush(SystemColors.Highlight), sampletext)
-                g.DrawString(displayText, Me.Font, New SolidBrush(SystemColors.HighlightText), sampletext, sf)
-            End If
-            g.FillRectangle(hb, sample)
-            g.DrawRectangle(New Pen(Color.Black, 1), sample)
+            Using hb As New HatchBrush(hs, ColorFore, ColorBack),
+                sf As New StringFormat With {
+                    .Alignment = StringAlignment.Near,
+                    .LineAlignment = StringAlignment.Center,
+                    .FormatFlags = StringFormatFlags.NoWrap
+                }, borderPen As New Pen(Color.Black, 1)
+                If (e.State And DrawItemState.Focus) = 0 Then
+                    Using backgroundBrush As New SolidBrush(SystemColors.Window),
+                        textBrush As New SolidBrush(SystemColors.WindowText)
+                        g.FillRectangle(backgroundBrush, sampletext)
+                        g.DrawString(displayText, Me.Font, textBrush, sampletext, sf)
+                    End Using
+                Else
+                    Using backgroundBrush As New SolidBrush(SystemColors.Highlight),
+                        textBrush As New SolidBrush(SystemColors.HighlightText)
+                        g.FillRectangle(backgroundBrush, sampletext)
+                        g.DrawString(displayText, Me.Font, textBrush, sampletext, sf)
+                    End Using
+                End If
+                g.FillRectangle(hb, sample)
+                g.DrawRectangle(borderPen, sample)
+            End Using
         End If
         e.DrawFocusRectangle()
 

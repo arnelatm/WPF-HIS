@@ -734,60 +734,61 @@ Public Class gTimePicker
             pn.StartCap = LineCap.Round
             pn.EndCap = LineCap.Round
 
-            Dim gp As New GraphicsPath
-            Dim gpButton As New GraphicsPath
-            Dim gpAMPM As New GraphicsPath
-            gpButton.AddRectangle(rectDropDownButton)
-            gpAMPM.AddRectangle(rectAMPM)
-            If IsPopupOpen Then
-                gp.AddLine(rectDropDownButton.X + 5,
-                           CInt(rectDropDownButton.Y + (rectDropDownButton.Height / 2) + 2),
-                           CInt(rectDropDownButton.X + (rectDropDownButton.Width / 2)),
-                           CInt(rectDropDownButton.Y + (rectDropDownButton.Height / 2) - 2))
-                gp.AddLine(CInt(rectDropDownButton.X + (rectDropDownButton.Width / 2)),
-                           CInt(rectDropDownButton.Y + (rectDropDownButton.Height / 2) - 2),
-                           rectDropDownButton.X + rectDropDownButton.Width - 5,
-                           CInt(rectDropDownButton.Y + (rectDropDownButton.Height / 2) + 2))
-            Else
-                gp.AddLine(rectDropDownButton.X + 5,
-                           CInt(rectDropDownButton.Y + (rectDropDownButton.Height / 2) - 2),
-                           CInt(rectDropDownButton.X + (rectDropDownButton.Width / 2)),
-                           CInt(rectDropDownButton.Y + (rectDropDownButton.Height / 2) + 2))
-                gp.AddLine(CInt(rectDropDownButton.X + (rectDropDownButton.Width / 2)),
-                           CInt(rectDropDownButton.Y + (rectDropDownButton.Height / 2) + 2),
-                           rectDropDownButton.X + rectDropDownButton.Width - 5,
-                           CInt(rectDropDownButton.Y + (rectDropDownButton.Height / 2) - 2))
-            End If
-            Using pgbr As PathGradientBrush = New PathGradientBrush(gpButton)
-                pgbr.CenterColor = hColor
-                pgbr.CenterPoint = New PointF(rectDropDownButton.X + ButtonHighlightAdjust.X,
-                                              rectDropDownButton.Y + ButtonHighlightAdjust.Y)
-                pgbr.SurroundColors = New Color() {sColor}
-                g.FillPath(pgbr, gpButton)
-            End Using
-            Using pgbr As PathGradientBrush = New PathGradientBrush(gpAMPM)
-                pgbr.CenterColor = hColor
-                pgbr.CenterPoint = New PointF(CSng(rectAMPM.X + AMPMHighlightAdjust.X),
-                                              CSng(rectAMPM.Y + AMPMHighlightAdjust.Y))
-                pgbr.SurroundColors = New Color() {sColor}
-                g.FillPath(pgbr, gpAMPM)
-
-            End Using
-            g.DrawPath(pn, gp)
-            g.DrawPath(New Pen(bcolor), gpButton)
-            g.DrawPath(New Pen(bcolor), gpAMPM)
-            Dim cAmPm As String
-            cAmPm = TimeAMPM.ToString()
-            If txbTime.EditingMode Then
+            Using gp As New GraphicsPath,
+                gpButton As New GraphicsPath,
+                gpAMPM As New GraphicsPath,
+                borderPen As New Pen(bcolor),
+                amPmFont As New Font("Arial", 10, FontStyle.Bold)
+                gpButton.AddRectangle(rectDropDownButton)
+                gpAMPM.AddRectangle(rectAMPM)
+                If IsPopupOpen Then
+                    gp.AddLine(rectDropDownButton.X + 5,
+                               CInt(rectDropDownButton.Y + (rectDropDownButton.Height / 2) + 2),
+                               CInt(rectDropDownButton.X + (rectDropDownButton.Width / 2)),
+                               CInt(rectDropDownButton.Y + (rectDropDownButton.Height / 2) - 2))
+                    gp.AddLine(CInt(rectDropDownButton.X + (rectDropDownButton.Width / 2)),
+                               CInt(rectDropDownButton.Y + (rectDropDownButton.Height / 2) - 2),
+                               rectDropDownButton.X + rectDropDownButton.Width - 5,
+                               CInt(rectDropDownButton.Y + (rectDropDownButton.Height / 2) + 2))
+                Else
+                    gp.AddLine(rectDropDownButton.X + 5,
+                               CInt(rectDropDownButton.Y + (rectDropDownButton.Height / 2) - 2),
+                               CInt(rectDropDownButton.X + (rectDropDownButton.Width / 2)),
+                               CInt(rectDropDownButton.Y + (rectDropDownButton.Height / 2) + 2))
+                    gp.AddLine(CInt(rectDropDownButton.X + (rectDropDownButton.Width / 2)),
+                               CInt(rectDropDownButton.Y + (rectDropDownButton.Height / 2) + 2),
+                               rectDropDownButton.X + rectDropDownButton.Width - 5,
+                               CInt(rectDropDownButton.Y + (rectDropDownButton.Height / 2) - 2))
+                End If
+                Using pgbr As PathGradientBrush = New PathGradientBrush(gpButton)
+                    pgbr.CenterColor = hColor
+                    pgbr.CenterPoint = New PointF(rectDropDownButton.X + ButtonHighlightAdjust.X,
+                                                  rectDropDownButton.Y + ButtonHighlightAdjust.Y)
+                    pgbr.SurroundColors = New Color() {sColor}
+                    g.FillPath(pgbr, gpButton)
+                End Using
+                Using pgbr As PathGradientBrush = New PathGradientBrush(gpAMPM)
+                    pgbr.CenterColor = hColor
+                    pgbr.CenterPoint = New PointF(CSng(rectAMPM.X + AMPMHighlightAdjust.X),
+                                                  CSng(rectAMPM.Y + AMPMHighlightAdjust.Y))
+                    pgbr.SurroundColors = New Color() {sColor}
+                    g.FillPath(pgbr, gpAMPM)
+                End Using
+                g.DrawPath(pn, gp)
+                g.DrawPath(borderPen, gpButton)
+                g.DrawPath(borderPen, gpAMPM)
+                Dim cAmPm As String
                 cAmPm = TimeAMPM.ToString()
-            Else
-                cAmPm = oldTimeAmPM.ToString()
-            End If
-            'oldTimeAmPM = TimeAMPM
-            DrawRotatedText(g, IIf(_Font.Size < 10, cAmPm.Chars(0),
-                                   cAmPm.ToString).ToString,
-                            New Rectangle(Width - _rectDropDownButtonWidth - _rectAmPmWidth - 2, 0, rectAMPM.Height, rectAMPM.Width),
-                            0, New Font("Arial", 10, FontStyle.Bold), fcolor)
+                If txbTime.EditingMode Then
+                    cAmPm = TimeAMPM.ToString()
+                Else
+                    cAmPm = oldTimeAmPM.ToString()
+                End If
+                'oldTimeAmPM = TimeAMPM
+                DrawRotatedText(g, IIf(_Font.Size < 10, cAmPm.Chars(0),
+                                       cAmPm.ToString).ToString,
+                                New Rectangle(Width - _rectDropDownButtonWidth - _rectAmPmWidth - 2, 0, rectAMPM.Height, rectAMPM.Width),
+                                0, amPmFont, fcolor)
             'DrawRotatedText(g, IIf(_Font.Size < 10, cAmPm.Chars(0),
             '    cAmPm.ToString).ToString,
             '    New Rectangle(0, 0, rectAMPM.Height, rectAMPM.Width),
@@ -795,21 +796,18 @@ Public Class gTimePicker
             'New Rectangle(1, rectAMPM.Height, rectAMPM.Height, rectAMPM.Width),
             '-50, New Font("Arial", 10, FontStyle.Bold), fcolor)
 
-            gpButton.Dispose()
-            gpAMPM.Dispose()
-            gp.Dispose()
+            End Using
         End Using
 
     End Sub
 
     Public Shared Sub DrawRotatedText(ByRef g As Graphics, ByVal TheString As String, ByVal rect As Rectangle, ByVal angle As Single, ByVal UseFont As Font, ByVal inColor As Color)
         ' Make a GraphicsPath that draws the text at (x, y).
-        Dim sf As New StringFormat
-        sf.Alignment = StringAlignment.Center
-        sf.LineAlignment = StringAlignment.Center
-        Using graphics_path As New Drawing2D.GraphicsPath(Drawing.Drawing2D.FillMode.Winding)
-            graphics_path.AddString(TheString, UseFont.FontFamily, UseFont.Style, UseFont.Size,
-            rect, sf)
+        Using sf As New StringFormat With {
+            .Alignment = StringAlignment.Center,
+            .LineAlignment = StringAlignment.Center
+        }, graphics_path As New Drawing2D.GraphicsPath(Drawing.Drawing2D.FillMode.Winding)
+            graphics_path.AddString(TheString, UseFont.FontFamily, UseFont.Style, UseFont.Size, rect, sf)
             ' Make a rotation matrix representing rotation around the point (x, y).
             Using rotation_matrix As New Drawing2D.Matrix()
                 rotation_matrix.RotateAt(angle, New PointF(rect.X, rect.Y))
@@ -852,11 +850,12 @@ Public Class gTimePicker
     End Sub
 
     Private Sub ResizeMe()
-        Dim g As Graphics = CreateGraphics()
-        Dim tsz As SizeF = g.MeasureString(txbTime.Text, txbTime.Font)
-        If Width < (_rectAmPmWidth + _rectDropDownButtonWidth + tsz.Width + 2) Then
-            Width = CInt(_rectAmPmWidth + _rectDropDownButtonWidth + tsz.Width + 2)
-        End If
+        Using g As Graphics = CreateGraphics()
+            Dim tsz As SizeF = g.MeasureString(txbTime.Text, txbTime.Font)
+            If Width < (_rectAmPmWidth + _rectDropDownButtonWidth + tsz.Width + 2) Then
+                Width = CInt(_rectAmPmWidth + _rectDropDownButtonWidth + tsz.Width + 2)
+            End If
+        End Using
         Height = txbTime.Height
         txbTime.Left = 1
         txbTime.Width = Width - _rectAmPmWidth - _rectDropDownButtonWidth

@@ -191,7 +191,7 @@ Namespace PresentationLayer.Views.Forms
         ''' </summary>
         Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemAbout.Click
             Dim form = New FormAbout()
-            form.ShowDialog()
+            form.ShowDialog(Me)
         End Sub
 
         Private Sub AccountReconciliationToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemAccountReconciliation.Click
@@ -220,7 +220,7 @@ Namespace PresentationLayer.Views.Forms
                 estName = GlobalVariables.EstablishmentNameAra
             End If
             Dim cForm As New ReportForm("Aging of Accounts Receivable.Rpt", reportTitle, "ReportTitle", estName, "EstablishmentName", language, "Language")
-            cForm.Show()
+            ShowOwnedForm(cForm)
         End Sub
 
         Private Sub AgingOfAccountsPayableToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemAPAging.Click
@@ -238,13 +238,13 @@ Namespace PresentationLayer.Views.Forms
             End If
             Dim cForm As New ReportForm("Aging of Accounts Payable.Rpt", reportTitle, "ReportTitle", language, "Language", estName, "EstablishmentName")
             cForm.Presenter = New PrintReportPresenter(Of ReportModel)
-            cForm.Show()
+            ShowOwnedForm(cForm)
         End Sub
 
         Private Sub BankTransferToolStripMenuItem_Click(sender As Object, e As EventArgs)
             Dim formToRun = New DisbursementJournalEntry("CdJournal")
             formToRun.Presenter = New DisbursementJournalPresenter(Of DisbursementJournalModel)(formToRun, "CdJournal")
-            formToRun.Show()
+            ShowOwnedForm(formToRun)
         End Sub
 
         Private Sub BranchesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemBranches.Click
@@ -254,7 +254,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub CashDisbursementEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCashDisbursementEntry.Click
             Dim formToRun = New DisbursementJournalEntry("CdJournal")
             formToRun.Presenter = New DisbursementJournalPresenter(Of DisbursementJournalModel)(formToRun, "CdJournal")
-            formToRun.Show()
+            ShowOwnedForm(formToRun)
         End Sub
 
         Private Sub CashIncomePerDoctorServiceToolStripMenuItem_Click(sender As Object, e As EventArgs)
@@ -273,7 +273,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub CheckPrintingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCheckPrinting.Click
             Dim formToRun As CheckPrinter
             formToRun = New CheckPrinter()
-            formToRun.Show()
+            ShowOwnedForm(formToRun)
         End Sub
 
         Private Sub ClosePettyCashFundToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemClosePettyCashFund.Click
@@ -463,7 +463,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub TestToolStripMenuItem1_Click(sender As Object, e As EventArgs)
             Dim cForm As New ReportFormTest("Blank Report.Rpt")
-            cForm.Show()
+            ShowOwnedForm(cForm)
         End Sub
 
         Private Sub ToolStripButtonTranslate_Click(sender As Object, e As EventArgs) Handles ToolStripButtonTranslate.Click
@@ -472,7 +472,7 @@ Namespace PresentationLayer.Views.Forms
                     .AppDataDAC = AppDataDAC,
                     .TranslatorDAC = TranslatorDAC
                     }
-            frm.Show()
+            ShowOwnedForm(frm)
         End Sub
 
         Private Sub ToolStripMenuItemCaptions_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCaptions.Click
@@ -520,7 +520,7 @@ Namespace PresentationLayer.Views.Forms
                 .AppDataDAC = AppDataDAC,
                 .TranslatorDAC = TranslatorDAC
             }
-            frm.Show()
+            ShowOwnedForm(frm)
         End Sub
 
         Private Sub TranslationsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCaptionsBatchEdit.Click
@@ -529,7 +529,7 @@ Namespace PresentationLayer.Views.Forms
                 .AppDataDAC = AppDataDAC,
                 .TranslatorDAC = TranslatorDAC
             }
-            frm.Show()
+            ShowOwnedForm(frm)
         End Sub
 
         Private Sub YearlyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemTBYearly.Click
@@ -701,7 +701,7 @@ Namespace PresentationLayer.Views.Forms
             'RunForm(Of UserEntryTv, UserPresenter(Of UserModel))()
             Using form As New LoginEntry(False)
                 Try
-                    If form.ShowDialog() = DialogResult.OK Then
+                    If form.ShowDialog(Me) = DialogResult.OK Then
                         If form.LoginOk Then
                             LogStatus = LoginStatus.LoggedIn
                         Else
@@ -787,12 +787,29 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
+        Private Sub ShowOwnedForm(formToShow As Form)
+            If formToShow Is Nothing Then Return
+
+            If formToShow.Visible Then
+                formToShow.Activate()
+            ElseIf formToShow.Owner Is Nothing Then
+                formToShow.Show(Me)
+            Else
+                formToShow.Show()
+            End If
+        End Sub
+
         Private Sub ShowEntryForm(Of T As New)(ByRef formEntry As T)
-            If (MdiChildren.Length > GlobalVariables.MaximumOpenForms - 1) Then
+            If OwnedForms.Length >= GlobalVariables.MaximumOpenForms Then
                 Dim maxOpenForms As String = GlobalVariables.MaximumOpenForms.ToString()
                 Messaging.Show(True, "MsgTooManyFormsOpen", "Too many forms open. You can only open up to {maxOpenForms} forms at the same time.", "Too many forms open", {"maxOpenForms", maxOpenForms})
             Else
-                Invoker.InvokeFunction(formEntry, "Show")
+                Dim entryForm = TryCast(DirectCast(formEntry, Object), Form)
+                If entryForm IsNot Nothing Then
+                    ShowOwnedForm(entryForm)
+                Else
+                    Invoker.InvokeFunction(formEntry, "Show")
+                End If
             End If
         End Sub
 
@@ -874,7 +891,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ToolStripMenuItemChangePassword_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemChangePassword.Click
             Using form As New LoginEntry(True)
                 Try
-                    If form.ShowDialog() = DialogResult.OK Then
+                    If form.ShowDialog(Me) = DialogResult.OK Then
                         If form.LoginOk Then
                             LogStatus = LoginStatus.LoggedIn
                         Else
@@ -931,12 +948,7 @@ Namespace PresentationLayer.Views.Forms
             Dim formToRun = Activator.CreateInstance(GetType(TV))
             Dim pType As Type = GetType(TP)
             formToRun.Presenter = Activator.CreateInstance(pType, {formToRun})
-            Dim form As Form = formToRun
-            'form.SuspendLayout()
-            'form.SuspendDrawingNew()
-            Invoker.InvokeFunction(formToRun, "Show")
-            'form.ResumeDrawingNew()
-            'form.ResumeLayout()
+            ShowEntryForm(formToRun)
         End Sub
 
         Private Overloads Sub RunForm(Of TV, TP, TX)(param As TX)
@@ -956,7 +968,7 @@ Namespace PresentationLayer.Views.Forms
         Private Overloads Sub RunReportNew(Of TV)()
             Dim formToRun = Activator.CreateInstance(GetType(TV))
             formToRun.Presenter = New PrintReportPresenter(Of ReportModel)(formToRun)
-            Invoker.InvokeFunction(formToRun, "Show")
+            ShowEntryForm(formToRun)
         End Sub
 
 
@@ -972,7 +984,7 @@ Namespace PresentationLayer.Views.Forms
             Dim formToRun = Activator.CreateInstance(GetType(TV))
             Dim pType As Type = GetType(PrintReportPresenter(Of ReportModel))
             formToRun.Presenter = Activator.CreateInstance(pType, {formToRun})
-            Invoker.InvokeFunction(formToRun, "Show")
+            ShowEntryForm(formToRun)
         End Sub
 
         Private Sub UpdateMenuSecurityObjectsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemUpdateMenuSecurityObjects.Click
@@ -1068,7 +1080,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub SimplePasswordGeneratorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSimplePasswordGenerator.Click
-            PasswordGenerator.Show()
+            ShowOwnedForm(PasswordGenerator)
         End Sub
 
         'Private Sub LaboratoryReportsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemLaboratoryReports.Click
@@ -1101,7 +1113,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub TestFormToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemTestForm.Click
             Dim form As New TestForm3
-            form.Show()
+            ShowOwnedForm(form)
             'Dim formToRun = Activator.CreateInstance(GetType(TestForm))
             'formToRun.Presenter = New DepartmentPresenter(Of DepartmentModel)(formToRun)
             'formToRun.Show()
@@ -1217,7 +1229,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ToolStripMenuItemPurchase_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPurchase.Click
             Dim formToRun = New PurchaseEntry(False, False)
             formToRun.Presenter = New PurchasePresenter(Of PurchaseModel)(formToRun, {False, False})
-            formToRun.Show()
+            ShowOwnedForm(formToRun)
         End Sub
 
         Private Sub ToolStripMenuItemSalesEntry_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSalesEntry.Click
@@ -1279,7 +1291,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ToolStripMenuItemPurchaseOrder_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPurchaseOrder.Click
             Dim formToRun = New PurchaseEntry(True, False)
             formToRun.Presenter = New PurchasePresenter(Of PurchaseModel)(formToRun, {True, False})
-            formToRun.Show()
+            ShowOwnedForm(formToRun)
             'RunForm(Of PurchaseOrderEntry, PurchaseOrderPresenter(Of PurchaseOrderModel))()
         End Sub
 
@@ -1294,7 +1306,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ToolStripMenuItemPurchaseReturn_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPurchaseReturn.Click
             Dim formToRun = New PurchaseEntry(False, True)
             formToRun.Presenter = New PurchasePresenter(Of PurchaseModel)(formToRun, {False, True})
-            formToRun.Show()
+            ShowOwnedForm(formToRun)
         End Sub
 
         Private Sub ListToolStripMenuItemDocumentExpiry_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDocumentExpiryList.Click

@@ -12,11 +12,9 @@ Public Class CustomCheckBox
     Protected Overrides Sub OnPaint(ByVal pevent As PaintEventArgs)
         MyBase.OnPaint(pevent)
 
-        If Me.Checked Then
-            pevent.Graphics.FillRectangle(New SolidBrush(Color.Blue), New Rectangle(0, 0, 16, 16))
-        Else
-            pevent.Graphics.FillRectangle(New SolidBrush(Color.Red), New Rectangle(0, 0, 16, 16))
-        End If
+        Using fillBrush As New SolidBrush(If(Me.Checked, Color.Blue, Color.Red))
+            pevent.Graphics.FillRectangle(fillBrush, New Rectangle(0, 0, 16, 16))
+        End Using
     End Sub
 End Class
 

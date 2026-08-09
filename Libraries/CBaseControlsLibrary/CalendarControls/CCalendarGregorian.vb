@@ -188,8 +188,9 @@ Public Class CCalendarGregorian
             Dim day = TryCast(sender, Label)
 
             If IsToday(Convert.ToInt32(day.Name), _Month, _Year) Then
-                Dim redPen = New Pen(Color.Red, 1)
-                e.Graphics.DrawRectangle(redPen, New Rectangle(0, 0, day.Width - 1, day.Height - 1))
+                Using redPen As New Pen(Color.Red, 1)
+                    e.Graphics.DrawRectangle(redPen, New Rectangle(0, 0, day.Width - 1, day.Height - 1))
+                End Using
             End If
 
             If IsSelectedDay(Convert.ToInt32(day.Name), _Month, _Year) Then
@@ -275,8 +276,9 @@ Public Class CCalendarGregorian
 
     Private Sub lblTodayMark_Paint(sender As Object, e As PaintEventArgs) Handles lblTodayMark.Paint
         Dim Mark = TryCast(sender, Label)
-        Dim RedPen = New Pen(Color.Red, 1)
-        e.Graphics.DrawRectangle(RedPen, New Rectangle(0, 0, Mark.Width - 1, Mark.Height - 1))
+        Using redPen As New Pen(Color.Red, 1)
+            e.Graphics.DrawRectangle(redPen, New Rectangle(0, 0, Mark.Width - 1, Mark.Height - 1))
+        End Using
     End Sub
 
     Public Delegate Sub DateChangedHandler(sender As Object, e As EventArgs)

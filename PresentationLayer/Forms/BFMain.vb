@@ -30,6 +30,7 @@ Public Class BfMain
     Private Shared ReadOnly _translationViewCache As New Dictionary(Of String, DataView)(StringComparer.OrdinalIgnoreCase)
     Private _originalFormCaption As String
     Private ReadOnly _originalTabCaptions As New Dictionary(Of TabPage, String)
+    Private ReadOnly _originalDataGridViewColumnCaptions As New Dictionary(Of DataGridViewColumn, String)
 
     'Private _myPresenter As UserPresenter
     Protected CaptionCollection As New Collection
@@ -173,6 +174,7 @@ Public Class BfMain
                TypeOf ctrl Is CCheckBox OrElse
                TypeOf ctrl Is CRadioButton OrElse
                TypeOf ctrl Is CtDataGridView OrElse
+               TypeOf ctrl Is DataGridView OrElse
                TypeOf ctrl Is CGroupBox OrElse
                TypeOf ctrl Is CTabControl OrElse
                TypeOf ctrl Is CTreeViewOld OrElse
@@ -374,6 +376,13 @@ Public Class BfMain
             If tabPage IsNot Nothing AndAlso Not _originalTabCaptions.ContainsKey(tabPage) Then
                 _originalTabCaptions(tabPage) = tabPage.Text
             End If
+
+            Dim dataGridView = TryCast(cCtrl, DataGridView)
+            If dataGridView IsNot Nothing Then
+                For Each column As DataGridViewColumn In dataGridView.Columns
+                    CaptureOriginalDataGridViewColumnCaption(column)
+                Next
+            End If
         Next
     End Sub
 
@@ -413,6 +422,11 @@ Public Class BfMain
                 Dim treeView = DirectCast(cCtrl, TreeView)
                 treeView.RightToLeftLayout = rightToLeftLayout
                 treeView.RightToLeft = targetRightToLeft
+            ElseIf TypeOf cCtrl Is DataGridView Then
+                Dim dataGridView = DirectCast(cCtrl, DataGridView)
+                If dataGridView.RightToLeft <> targetRightToLeft Then
+                    dataGridView.RightToLeft = targetRightToLeft
+                End If
             ElseIf TypeOf cCtrl Is TableLayoutPanel Then
                 SetTableRightToLeft(DirectCast(cCtrl, TableLayoutPanel), targetRightToLeft)
             End If
@@ -825,27 +839,40 @@ Public Class BfMain
 
     Private Sub UseOriginalDataGridView(ByRef CtDataGridView As DataGridView)
         For Each col As DataGridViewColumn In CtDataGridView.Columns
-            If col.Tag Is Nothing Then
-                col.Tag = col.HeaderText
-            Else
-                col.HeaderText = col.Tag
-            End If
-
+            col.HeaderText = CaptureOriginalDataGridViewColumnCaption(col)
         Next
     End Sub
 
     Private Sub TranslateDataGridView(ByRef CtDataGridView As DataGridView)
         Dim cGrid As DataGridView = CtDataGridView
-        Dim r As String
+        Dim r As Integer
         For Each column As DataGridViewColumn In cGrid.Columns
-            r = Dv.Find(column.HeaderText)
+            Dim originalCaption = CaptureOriginalDataGridViewColumnCaption(column)
+            r = Dv.Find(originalCaption)
+            If r < 0 AndAlso Not String.IsNullOrEmpty(originalCaption) Then
+                Dim trimmedCaption = originalCaption.TrimEnd()
+                If trimmedCaption.Length <> originalCaption.Length Then
+                    r = Dv.Find(trimmedCaption)
+                End If
+            End If
             If r >= 0 Then
                 column.HeaderText = Dv(r).Item("TranslatedCaption")
             Else
-                column.HeaderText = column.Tag
+                column.HeaderText = originalCaption
             End If
         Next
     End Sub
+
+    Private Function CaptureOriginalDataGridViewColumnCaption(column As DataGridViewColumn) As String
+        Dim originalCaption As String = Nothing
+        If _originalDataGridViewColumnCaptions.TryGetValue(column, originalCaption) Then
+            Return originalCaption
+        End If
+
+        originalCaption = If(column.Tag Is Nothing, column.HeaderText, Convert.ToString(column.Tag))
+        _originalDataGridViewColumnCaptions(column) = originalCaption
+        Return originalCaption
+    End Function
 
     Private Sub TranslateTabControl(ByRef cTabControl As CTabControl)
         For Each tabPage As TabPage In cTabControl.TabPages

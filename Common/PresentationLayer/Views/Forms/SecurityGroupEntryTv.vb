@@ -3,6 +3,8 @@ Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Views
 Imports AATM.PresentationLayer.Views.Interfaces
+Imports System.Drawing
+Imports System.Windows.Forms
 
 Namespace PresentationLayer.Views.Forms
 
@@ -11,6 +13,9 @@ Namespace PresentationLayer.Views.Forms
 
         Private WithEvents _dgvSecurityGroup As CtDataGridView
         Private _groupAccesses As List(Of GroupAccessView)
+        Private ReadOnly _securityGroupOriginalLeftPositions As New Dictionary(Of Control, Integer)
+        Private _securityGroupLayoutCaptured As Boolean
+        Private _securityGroupLayoutRightToLeft As Boolean
 
         Public Sub New()
 
@@ -22,6 +27,63 @@ Namespace PresentationLayer.Views.Forms
             FirstControl = SecurityGroupView.txtSecurityGroupCode
             _dgvSecurityGroup = SecurityGroupView.DataGridViewGroupAccesses
 
+        End Sub
+
+        Protected Overrides Sub ApplyFastLanguageLayout(ByRef allCtrl As List(Of Control))
+            MyBase.ApplyFastLanguageLayout(allCtrl)
+            ApplySecurityGroupLanguageLayout(GlobalVariables.RightToLeftLayout)
+        End Sub
+
+        Private Sub ApplySecurityGroupLanguageLayout(rightToLeftLayout As Boolean)
+            If SecurityGroupView Is Nothing Then
+                Return
+            End If
+
+            CaptureSecurityGroupLayout()
+            Dim targetRightToLeft = If(rightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
+            Dim labelAlignment = If(rightToLeftLayout,
+                                    ContentAlignment.MiddleRight,
+                                    ContentAlignment.MiddleLeft)
+
+            SecurityGroupView.SuspendLayout()
+            Try
+                SecurityGroupView.RightToLeft = targetRightToLeft
+                For Each item In _securityGroupOriginalLeftPositions
+                    Dim child = item.Key
+                    Dim targetLeft = item.Value
+                    If rightToLeftLayout Then
+                        targetLeft = SecurityGroupView.ClientSize.Width - item.Value - child.Width
+                    End If
+                    If child.Left <> targetLeft Then
+                        child.Left = targetLeft
+                    End If
+
+                    Dim label = TryCast(child, Label)
+                    If label IsNot Nothing AndAlso label.TextAlign <> labelAlignment Then
+                        label.TextAlign = labelAlignment
+                    End If
+                Next
+                _securityGroupLayoutRightToLeft = rightToLeftLayout
+            Finally
+                SecurityGroupView.ResumeLayout(False)
+            End Try
+        End Sub
+
+        Private Sub CaptureSecurityGroupLayout()
+            If _securityGroupLayoutCaptured Then
+                Return
+            End If
+
+            For Each child As Control In SecurityGroupView.Controls
+                _securityGroupOriginalLeftPositions(child) = child.Left
+            Next
+            _securityGroupLayoutCaptured = True
+        End Sub
+
+        Private Sub SecurityGroupView_SizeChanged(sender As Object, e As EventArgs) Handles SecurityGroupView.SizeChanged
+            If _securityGroupLayoutCaptured AndAlso _securityGroupLayoutRightToLeft Then
+                ApplySecurityGroupLanguageLayout(True)
+            End If
         End Sub
 
 #Region "SecurityGroupFields"

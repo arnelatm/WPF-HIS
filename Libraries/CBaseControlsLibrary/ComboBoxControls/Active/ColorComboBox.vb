@@ -70,27 +70,29 @@ Public Class ColorComboBox
         Dim itemString As String = CType(CBox.Items(e.Index), String)
 
         Dim rect As Rectangle
-        If (e.State And DrawItemState.ComboBoxEdit) = DrawItemState.ComboBoxEdit Then
-            e.Graphics.FillRectangle(New SolidBrush(BackColor), e.Bounds)
+        Using backgroundBrush As New SolidBrush(BackColor)
+            If (e.State And DrawItemState.ComboBoxEdit) = DrawItemState.ComboBoxEdit Then
+                e.Graphics.FillRectangle(backgroundBrush, e.Bounds)
 
-        ElseIf (e.State And DrawItemState.Selected) = DrawItemState.Selected Then
-            rect = New Rectangle(e.Bounds.X + 1, e.Bounds.Y, e.Bounds.Width - 3, e.Bounds.Height - 2)
-            e.Graphics.FillRectangle(Brushes.Beige, rect)
-            e.Graphics.DrawRectangle(Pens.Blue, rect)
-            RaiseEvent HoverSelect(Me, itemString)
-        Else
-            e.Graphics.FillRectangle(New SolidBrush(BackColor), e.Bounds)
-        End If
+            ElseIf (e.State And DrawItemState.Selected) = DrawItemState.Selected Then
+                rect = New Rectangle(e.Bounds.X + 1, e.Bounds.Y, e.Bounds.Width - 3, e.Bounds.Height - 2)
+                e.Graphics.FillRectangle(Brushes.Beige, rect)
+                e.Graphics.DrawRectangle(Pens.Blue, rect)
+                RaiseEvent HoverSelect(Me, itemString)
+            Else
+                e.Graphics.FillRectangle(backgroundBrush, e.Bounds)
+            End If
+        End Using
 
         'Draw a Color Swatch
-        Using myBrush As New SolidBrush(Color.FromName(itemString))
+        Using myBrush As New SolidBrush(Color.FromName(itemString)),
+            itemFont As New Font("Microsoft Sans Serif", 8.25)
 
             e.Graphics.FillRectangle(myBrush, e.Bounds.X + 3, e.Bounds.Y + 2, 20, e.Bounds.Height - 5)
             e.Graphics.DrawRectangle(Pens.Black, e.Bounds.X + 3, e.Bounds.Y + 2, 19, e.Bounds.Height - 6)
 
             ' Draw the text in the item.
-            e.Graphics.DrawString(itemString, New Font("Microsoft Sans Serif", 8.25),
-                Brushes.Black, e.Bounds.X + 25, e.Bounds.Y + 1)
+            e.Graphics.DrawString(itemString, itemFont, Brushes.Black, e.Bounds.X + 25, e.Bounds.Y + 1)
         End Using
     End Sub
 

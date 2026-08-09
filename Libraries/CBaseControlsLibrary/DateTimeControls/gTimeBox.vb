@@ -136,14 +136,19 @@ Public Class gTimeBox
                 g.SmoothingMode = SmoothingMode.AntiAlias
                 g.TextRenderingHint = Drawing.Text.TextRenderingHint.AntiAlias
                 g.Clear(BackColor)
-                If Not _NullTextInFront Then _
-                    g.DrawString(_NullText, New Font(Font.Name, Font.Size, FontStyle.Bold),
-                    New SolidBrush(_NullTextColor), 0, 0)
-                g.FillRectangle(New HatchBrush(_NullHatchStyle, Color.FromArgb(_NullAlpha, _NullColorA),
-                    Color.FromArgb(_NullAlpha, _NullColorB)), ClientRectangle)
-                If _NullTextInFront Then _
-                    g.DrawString(_NullText, New Font(Font.Name, Font.Size, FontStyle.Bold),
-                    New SolidBrush(_NullTextColor), 0, 0)
+                Using nullTextFont As New Font(Font.Name, Font.Size, FontStyle.Bold),
+                    nullTextBrush As New SolidBrush(_NullTextColor),
+                    hatchBrush As New HatchBrush(_NullHatchStyle,
+                                                 Color.FromArgb(_NullAlpha, _NullColorA),
+                                                 Color.FromArgb(_NullAlpha, _NullColorB))
+                    If Not _NullTextInFront Then
+                        g.DrawString(_NullText, nullTextFont, nullTextBrush, 0, 0)
+                    End If
+                    g.FillRectangle(hatchBrush, ClientRectangle)
+                    If _NullTextInFront Then
+                        g.DrawString(_NullText, nullTextFont, nullTextBrush, 0, 0)
+                    End If
+                End Using
             End Using
         End If
     End Sub

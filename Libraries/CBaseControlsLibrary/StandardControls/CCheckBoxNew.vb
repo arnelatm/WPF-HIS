@@ -316,8 +316,9 @@ Public Class CCheckBoxNew
             cBoxColorFill = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
         End If
         Dim rect As Rectangle = New Rectangle(pt, New Size(BoxSize.Width, BoxSize.Height))
-        Dim cBrush = New SolidBrush(cBoxColorFill)
-        pEvent.Graphics.FillRectangle(cBrush, rect)
+        Using cBrush As New SolidBrush(cBoxColorFill)
+            pEvent.Graphics.FillRectangle(cBrush, rect)
+        End Using
         pEvent.Graphics.DrawRectangle(Pens.Black, New Rectangle(pt, New Size(BoxSize.Width, BoxSize.Height)))
         If Checked Then
             Dim cCol As Color

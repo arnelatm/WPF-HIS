@@ -139,9 +139,9 @@ Public Class ChooseGlyph
 
     Public Overrides Sub Paint(ByVal pe As PaintEventArgs)
         If Object.ReferenceEquals(selectionSvc.PrimarySelection, relatedControl) Then
-            Using pn As New Pen(Brushes.DarkGray, 1) With {.DashStyle = Drawing2D.DashStyle.Solid}
-                Dim fnt As Font = New Font("Arial", 8)
-                Dim sf As New StringFormat() With {.Alignment = StringAlignment.Center, .LineAlignment = StringAlignment.Center}
+            Using pn As New Pen(Brushes.DarkGray, 1) With {.DashStyle = Drawing2D.DashStyle.Solid},
+                fnt As New Font("Arial", 8),
+                sf As New StringFormat With {.Alignment = StringAlignment.Center, .LineAlignment = StringAlignment.Center}
                 pe.Graphics.FillRectangle(boxFillColor, selectBox)
                 pe.Graphics.DrawRectangle(pn, selectBox)
                 pn.DashStyle = Drawing2D.DashStyle.Dot

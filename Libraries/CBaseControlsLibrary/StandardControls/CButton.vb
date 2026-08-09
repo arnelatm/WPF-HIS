@@ -1042,7 +1042,9 @@ Public Class CButton
 
                 If MyBase.Focused AndAlso ShowFocus = eFocus.Dot Then
                     Using focusPen As Pen = New Pen(Brushes.Black, 1) With {.DashStyle = DashStyle.Dot}
-                        e.Graphics.DrawPath(focusPen, GetPath(-1, -1))
+                        Using focusPath As GraphicsPath = GetPath(-1, -1)
+                            e.Graphics.DrawPath(focusPen, focusPath)
+                        End Using
                     End Using
                 End If
 
@@ -1052,7 +1054,10 @@ Public Class CButton
 
             End Using
 
-            Dim ipt As PointF = ImageLocation(GetStringFormat(SideImageAlign), Size, SideImageSize)
+            Dim ipt As PointF
+            Using sideImageFormat As StringFormat = GetStringFormat(SideImageAlign)
+                ipt = ImageLocation(sideImageFormat, Size, SideImageSize)
+            End Using
 
             rectSideImage = New Rectangle(CInt(ipt.X), CInt(ipt.Y), SideImageSize.Width, SideImageSize.Height)
 
@@ -1062,7 +1067,9 @@ Public Class CButton
                     e.Graphics.SmoothingMode = SmoothingMode.None
                     e.Graphics.DrawImage(SideImage, ipt.X, ipt.Y, SideImageSize.Width, SideImageSize.Height)
                 Else
-                    ControlPaint.DrawImageDisabled(e.Graphics, New Bitmap(SideImage, SideImageSize.Width, SideImageSize.Height), CInt(ipt.X), CInt(ipt.Y), BackColor)
+                    Using disabledImage As New Bitmap(SideImage, SideImageSize.Width, SideImageSize.Height)
+                        ControlPaint.DrawImageDisabled(e.Graphics, disabledImage, CInt(ipt.X), CInt(ipt.Y), BackColor)
+                    End Using
                 End If
             End If
 
@@ -1073,17 +1080,25 @@ Public Class CButton
                 If Enabled Then
                     e.Graphics.DrawImage(Image, Imagept.X, Imagept.Y, ImageSize.Width, ImageSize.Height)
                 Else
-                    ControlPaint.DrawImageDisabled(e.Graphics, New Bitmap(Image, ImageSize.Width, ImageSize.Height), CInt(Imagept.X), CInt(Imagept.Y), BackColor)
+                    Using disabledImage As New Bitmap(Image, ImageSize.Width, ImageSize.Height)
+                        ControlPaint.DrawImageDisabled(e.Graphics, disabledImage, CInt(Imagept.X), CInt(Imagept.Y), BackColor)
+                    End Using
                 End If
             End If
 
             'Draw the Text and Shadow
-            If TextShadowShow Then
-                TextArea.Offset(1, 1)
-                e.Graphics.DrawString(Text, Font, New SolidBrush(tsColor), TextArea, GetStringFormat(TextAlign))
-                TextArea.Offset(-1, -1)
-            End If
-            e.Graphics.DrawString(Text, Font, New SolidBrush(tColor), TextArea, GetStringFormat(TextAlign))
+            Using textFormat As StringFormat = GetStringFormat(TextAlign)
+                If TextShadowShow Then
+                    TextArea.Offset(1, 1)
+                    Using shadowBrush As New SolidBrush(tsColor)
+                        e.Graphics.DrawString(Text, Font, shadowBrush, TextArea, textFormat)
+                    End Using
+                    TextArea.Offset(-1, -1)
+                End If
+                Using textBrush As New SolidBrush(tColor)
+                    e.Graphics.DrawString(Text, Font, textBrush, TextArea, textFormat)
+                End Using
+            End Using
 
             'Put the SideImage in front of the Text
             If Not SideImageBehindText AndAlso Not SideImage Is Nothing Then
@@ -1091,7 +1106,9 @@ Public Class CButton
                     e.Graphics.SmoothingMode = SmoothingMode.None
                     e.Graphics.DrawImage(SideImage, ipt.X, ipt.Y, SideImageSize.Width, SideImageSize.Height)
                 Else
-                    ControlPaint.DrawImageDisabled(e.Graphics, New Bitmap(SideImage, SideImageSize.Width, SideImageSize.Height), CInt(ipt.X), CInt(ipt.Y), BackColor)
+                    Using disabledImage As New Bitmap(SideImage, SideImageSize.Width, SideImageSize.Height)
+                        ControlPaint.DrawImageDisabled(e.Graphics, disabledImage, CInt(ipt.X), CInt(ipt.Y), BackColor)
+                    End Using
                 End If
             End If
 
@@ -1192,7 +1209,9 @@ Public Class CButton
                 TextArea = AdjustRect(ButtonArea, TextMargin)
                 ImageArea = ButtonArea
                 TextArea.Y += PressedOffset
-                Imagept = ImageLocation(GetStringFormat(ImageAlign), ButtonArea.Size, ImageSizeUse)
+                Using imageFormat As StringFormat = GetStringFormat(ImageAlign)
+                    Imagept = ImageLocation(imageFormat, ButtonArea.Size, ImageSizeUse)
+                End Using
                 Imagept.X += ButtonArea.X
             Case Windows.Forms.TextImageRelation.ImageBeforeText
                 Dim TextSize As SizeF = g.MeasureString(Text, Font)
@@ -1200,19 +1219,23 @@ Public Class CButton
                 TextArea.Width -= ImageSizeUse.Width - 4
                 TextArea.Y += PressedOffset
                 ImageArea = New RectangleF(TextArea.X - ImageSizeUse.Width, ButtonArea.Y, ImageSizeUse.Width, ImageSizeUse.Height)
-                Imagept = ImageLocation(GetStringFormat(ImageAlign), ButtonArea.Size, ImageArea.Size)
+                Using imageFormat As StringFormat = GetStringFormat(ImageAlign)
+                    Imagept = ImageLocation(imageFormat, ButtonArea.Size, ImageArea.Size)
+                End Using
 
-                Select Case GetStringFormat(TextAlign).Alignment
-                    Case StringAlignment.Center
-                        Imagept.X = ButtonArea.X + ((ButtonArea.Width - TextSize.Width - ImageSizeUse.Width) / 2)
-                        TextArea.X = ButtonArea.X + ImageSizeUse.Width
-                    Case StringAlignment.Near
-                        Imagept.X = ButtonArea.X + 4
-                        TextArea.X = ButtonArea.X + ImageSizeUse.Width + 4
-                    Case StringAlignment.Far
-                        Imagept.X = ButtonArea.X + TextArea.Width - TextSize.Width - 12
-                        TextArea.X = ButtonArea.X + ImageSizeUse.Width - 8
-                End Select
+                Using textFormat As StringFormat = GetStringFormat(TextAlign)
+                    Select Case textFormat.Alignment
+                        Case StringAlignment.Center
+                            Imagept.X = ButtonArea.X + ((ButtonArea.Width - TextSize.Width - ImageSizeUse.Width) / 2)
+                            TextArea.X = ButtonArea.X + ImageSizeUse.Width
+                        Case StringAlignment.Near
+                            Imagept.X = ButtonArea.X + 4
+                            TextArea.X = ButtonArea.X + ImageSizeUse.Width + 4
+                        Case StringAlignment.Far
+                            Imagept.X = ButtonArea.X + TextArea.Width - TextSize.Width - 12
+                            TextArea.X = ButtonArea.X + ImageSizeUse.Width - 8
+                    End Select
+                End Using
 
             Case Windows.Forms.TextImageRelation.TextBeforeImage
                 Dim TextSize As SizeF = g.MeasureString(Text, Font)
@@ -1220,19 +1243,23 @@ Public Class CButton
                 TextArea.Width -= ImageSizeUse.Width - 8
                 TextArea.Y += PressedOffset
                 ImageArea = New RectangleF(TextArea.X, ButtonArea.Y, ImageSizeUse.Width, ImageSizeUse.Height)
-                Imagept = ImageLocation(GetStringFormat(ImageAlign), ButtonArea.Size, ImageArea.Size)
+                Using imageFormat As StringFormat = GetStringFormat(ImageAlign)
+                    Imagept = ImageLocation(imageFormat, ButtonArea.Size, ImageArea.Size)
+                End Using
 
-                Select Case GetStringFormat(TextAlign).Alignment
-                    Case StringAlignment.Center
-                        Imagept.X = ((TextArea.Width - TextSize.Width) / 2) + TextSize.Width
-                        TextArea.X = -4
-                    Case StringAlignment.Near
-                        Imagept.X = TextSize.Width + 8
-                        TextArea.X = 4
-                    Case StringAlignment.Far
-                        Imagept.X = TextArea.Width - 12
-                        TextArea.X = -16
-                End Select
+                Using textFormat As StringFormat = GetStringFormat(TextAlign)
+                    Select Case textFormat.Alignment
+                        Case StringAlignment.Center
+                            Imagept.X = ((TextArea.Width - TextSize.Width) / 2) + TextSize.Width
+                            TextArea.X = -4
+                        Case StringAlignment.Near
+                            Imagept.X = TextSize.Width + 8
+                            TextArea.X = 4
+                        Case StringAlignment.Far
+                            Imagept.X = TextArea.Width - 12
+                            TextArea.X = -16
+                    End Select
+                End Using
 
         End Select
         Imagept.Y += PressedOffset + ButtonArea.Y

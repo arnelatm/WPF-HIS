@@ -12,10 +12,16 @@ Namespace PresentationLayer.Views.Forms
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
 
         Private _apFooter As DgvFooter
+        Private _checkDateDisplaySize As Size
         Private _djOiItems As List(Of DjOiItemView)
         Private _jiFooter As DgvFooter
         Private _journalItems As List(Of JournalItemView)
         Private _tableName As String = ""
+        Private _conditionalControlUpdatePending As Boolean
+        Private _editOrAddMode As Boolean
+        Private _hiddenCheckInfoHost As Panel
+        Private _openInvoiceMode As Boolean
+        Private _updatingConditionalControlVisibility As Boolean
 
         Public Event PrintCheck() Implements IDisbursementJournalView.PrintCheck
         Public Event SetSupplierVatNumber(ByRef currentVatNumber As String, ByVal idNo As String, ByVal override As Boolean) Implements IDisbursementJournalView.SetSupplierVatNumber
@@ -31,6 +37,20 @@ Namespace PresentationLayer.Views.Forms
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
+            _hiddenCheckInfoHost = New Panel With {
+                .Location = New Point(-1, -1),
+                .Name = "pnlHiddenCheckInfoHost",
+                .Size = New Size(1, 1),
+                .TabStop = False,
+                .Visible = False
+            }
+            Controls.Add(_hiddenCheckInfoHost)
+            _checkDateDisplaySize = dtpCheckDate.Size
+            dtpCheckDate.AutoSize = False
+            dtpCheckDate.ShowTime = False
+            dtpCheckDate.Size = _checkDateDisplaySize
+            btnAutoApply.Visible = False
+            ParkCheckInfoControls()
             _tableName = tableName
             EnableDoubleBuff(tlpDisbursement)
             ' Add any initialization after the InitializeComponent() call.
@@ -52,7 +72,24 @@ Namespace PresentationLayer.Views.Forms
             Height = 860
         End Sub
 
+        Protected Overrides Sub ApplyFastLanguageLayout(ByRef allCtrl As List(Of Control))
+            MyBase.ApplyFastLanguageLayout(allCtrl)
+            UpdateConditionalControlVisibility()
+            QueueConditionalControlVisibilityUpdate()
+        End Sub
+
         Public Property OpenInvoiceMode As Boolean Implements IDisbursementJournalView.OpenInvoiceMode
+            Get
+                Return _openInvoiceMode
+            End Get
+            Set(value As Boolean)
+                _openInvoiceMode = value
+                If IsHandleCreated Then
+                    UpdateConditionalControlVisibility()
+                    QueueConditionalControlVisibilityUpdate()
+                End If
+            End Set
+        End Property
 
 #Region "Field Items"
 
@@ -513,25 +550,168 @@ Namespace PresentationLayer.Views.Forms
             UpdateActionButtons(True)
         End Sub
 
-        Private Sub CboPayType_ValueChanged(sender As Object, e As EventArgs) Handles cboPayType.SelectionChangeCommitted '  ,cboPayType.Validated, cboPayType.SelectedValueChanged 
+        Private Sub CboPayType_ValueChanged(sender As Object, e As EventArgs) Handles cboPayType.SelectionChangeCommitted, cboPayType.SelectedValueChanged, cboPayType.TextChanged
             If FormShown Then
-
-                DisplayPrintCheckButton(cboPayType.SelectedValue)
-                DisplayCheckInfo()
+                UpdateConditionalControlVisibility()
+                QueueConditionalControlVisibilityUpdate()
             End If
         End Sub
 
-        Private Sub DisplayCheckInfo()
-            If _tableName = "CdJournal" AndAlso cboPayType.SelectedValue = EnumToCode(PayTypeSelection.CheckPayment) Then
-                dtpCheckDate.Visible = True
-                lblCheckDate.Visible = True
+        Private Sub UpdateConditionalControlVisibility()
+            Dim showCheckInfo = ShouldShowCheckInfo()
+            Dim showOpenInvoiceActions = ShouldShowOpenInvoiceActions()
+            _updatingConditionalControlVisibility = True
+            Try
+                SetCheckInfoControlsDisplayed(showCheckInfo)
+                btnAutoApply.Visible = showOpenInvoiceActions AndAlso _editOrAddMode
+                btnViewGL.Visible = showOpenInvoiceActions AndAlso Not _editOrAddMode
+                DisplayPrintCheckButton(GetDisplayedPayTypeCode())
+                tlpDisbursement.PerformLayout()
+            Finally
+                _updatingConditionalControlVisibility = False
+            End Try
+
+            If btnViewGL.Visible Then
+                UpdateViewGLBtnDisplay()
+            End If
+        End Sub
+
+        Private Sub SetCheckInfoControlsDisplayed(showCheckInfo As Boolean)
+            If showCheckInfo Then
+                dtpCheckDate.AutoSize = False
+                dtpCheckDate.ShowTime = False
+                dtpCheckDate.Size = _checkDateDisplaySize
+                If txtCheckNumber.Parent IsNot tlpDisbursement Then
+                    tlpDisbursement.Controls.Add(lblCheckNumber, 6, 4)
+                    tlpDisbursement.SetColumnSpan(lblCheckNumber, 2)
+                    tlpDisbursement.Controls.Add(txtCheckNumber, 8, 4)
+                    tlpDisbursement.Controls.Add(lblCheckDate, 6, 5)
+                    tlpDisbursement.SetColumnSpan(lblCheckDate, 2)
+                    tlpDisbursement.Controls.Add(dtpCheckDate, 8, 5)
+                End If
+
                 lblCheckNumber.Visible = True
                 txtCheckNumber.Visible = True
+                lblCheckDate.Visible = True
+                dtpCheckDate.Visible = True
+                txtCheckNumber.EditingMode = _editOrAddMode
+                dtpCheckDate.EditingMode = _editOrAddMode
             Else
-                dtpCheckDate.Visible = False
-                lblCheckDate.Visible = False
-                lblCheckNumber.Visible = False
-                txtCheckNumber.Visible = False
+                ParkCheckInfoControls()
+            End If
+        End Sub
+
+        Private Sub ParkCheckInfoControls()
+            lblCheckNumber.Visible = False
+            txtCheckNumber.Visible = False
+            lblCheckDate.Visible = False
+            dtpCheckDate.Visible = False
+
+            If _hiddenCheckInfoHost IsNot Nothing Then
+                _hiddenCheckInfoHost.Controls.Add(lblCheckNumber)
+                _hiddenCheckInfoHost.Controls.Add(txtCheckNumber)
+                _hiddenCheckInfoHost.Controls.Add(lblCheckDate)
+                _hiddenCheckInfoHost.Controls.Add(dtpCheckDate)
+            End If
+        End Sub
+
+        Private Function ShouldShowCheckInfo() As Boolean
+            Return _tableName = "CdJournal" AndAlso
+                   String.Equals(GetDisplayedPayTypeCode(),
+                                 EnumToCode(PayTypeSelection.CheckPayment),
+                                 StringComparison.OrdinalIgnoreCase)
+        End Function
+
+        Private Function ShouldShowOpenInvoiceActions() As Boolean
+            Return OpenInvoiceMode AndAlso
+                   String.Equals(GetDisplayedPaymentTypeCode(),
+                                 EnumToCode(PaymentTypeSelection.AccountsPayable),
+                                 StringComparison.OrdinalIgnoreCase)
+        End Function
+
+        Private Sub ConditionalControl_VisibleChanged(sender As Object, e As EventArgs) Handles dtpCheckDate.VisibleChanged,
+                                                                                              lblCheckDate.VisibleChanged,
+                                                                                              lblCheckNumber.VisibleChanged,
+                                                                                              txtCheckNumber.VisibleChanged,
+                                                                                              btnAutoApply.VisibleChanged,
+                                                                                              btnViewGL.VisibleChanged
+            If Not FormShown OrElse _updatingConditionalControlVisibility Then
+                Return
+            End If
+
+            Dim control = TryCast(sender, Control)
+            If control Is Nothing OrElse Not control.Visible Then
+                Return
+            End If
+
+            Dim isCheckInfoControl = control Is dtpCheckDate OrElse
+                                     control Is lblCheckDate OrElse
+                                     control Is lblCheckNumber OrElse
+                                     control Is txtCheckNumber
+            If (isCheckInfoControl AndAlso Not ShouldShowCheckInfo()) OrElse
+               (control Is btnAutoApply AndAlso (Not ShouldShowOpenInvoiceActions() OrElse Not _editOrAddMode)) OrElse
+               (control Is btnViewGL AndAlso (Not ShouldShowOpenInvoiceActions() OrElse _editOrAddMode)) Then
+                UpdateConditionalControlVisibility()
+            End If
+        End Sub
+
+        Private Function GetDisplayedPayTypeCode() As String
+            Dim displayedPayType = cboPayType.Text.Trim()
+            If displayedPayType <> "" Then
+                For Each payType As PayTypeSelection In [Enum].GetValues(GetType(PayTypeSelection))
+                    Dim caption = payType.ToString().SplitCamelCase()
+                    If String.Equals(displayedPayType, caption, StringComparison.CurrentCultureIgnoreCase) Then
+                        Return EnumToCode(payType)
+                    End If
+                Next
+
+                For Each payType As PayTypeSelection In [Enum].GetValues(GetType(PayTypeSelection))
+                    Dim translatedCaption = Messaging.TranslateCaption(payType.ToString().SplitCamelCase())
+                    If String.Equals(displayedPayType, translatedCaption, StringComparison.CurrentCultureIgnoreCase) Then
+                        Return EnumToCode(payType)
+                    End If
+                Next
+            End If
+            Return Convert.ToString(cboPayType.SelectedValue)
+        End Function
+
+        Private Function GetDisplayedPaymentTypeCode() As String
+            Dim displayedPaymentType = cboPaymentType.Text.Trim()
+            If displayedPaymentType <> "" Then
+                For Each paymentType As PaymentTypeSelection In [Enum].GetValues(GetType(PaymentTypeSelection))
+                    Dim caption = paymentType.ToString().SplitCamelCase()
+                    If String.Equals(displayedPaymentType, caption, StringComparison.CurrentCultureIgnoreCase) Then
+                        Return EnumToCode(paymentType)
+                    End If
+                Next
+
+                For Each paymentType As PaymentTypeSelection In [Enum].GetValues(GetType(PaymentTypeSelection))
+                    Dim translatedCaption = Messaging.TranslateCaption(paymentType.ToString().SplitCamelCase())
+                    If String.Equals(displayedPaymentType, translatedCaption, StringComparison.CurrentCultureIgnoreCase) Then
+                        Return EnumToCode(paymentType)
+                    End If
+                Next
+            End If
+            Return Convert.ToString(cboPaymentType.SelectedValue)
+        End Function
+
+        Private Sub QueueConditionalControlVisibilityUpdate()
+            If _conditionalControlUpdatePending OrElse Not IsHandleCreated OrElse IsDisposed OrElse Disposing Then
+                Return
+            End If
+
+            _conditionalControlUpdatePending = True
+            Try
+                BeginInvoke(New MethodInvoker(AddressOf ApplyQueuedConditionalControlVisibility))
+            Catch ex As InvalidOperationException
+                _conditionalControlUpdatePending = False
+            End Try
+        End Sub
+
+        Private Sub ApplyQueuedConditionalControlVisibility()
+            _conditionalControlUpdatePending = False
+            If Not IsDisposed AndAlso Not Disposing Then
+                UpdateConditionalControlVisibility()
             End If
         End Sub
 
@@ -650,12 +830,14 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Public Overrides Sub UpdateViewDisplay(editMode As Boolean, addMode As Boolean, recordPositionNumber As Integer, targetIdNo As Integer, recordCount As Integer)
+            _editOrAddMode = editMode Or addMode
             SuspendLayout()
             UpdatePayeeDisplay()
             UpdateDataGridDisplay()
             UpdateTotalsDisplay()
-            DisplayPrintCheckButton(PayType)
-            DisplayCheckInfo()
+            ' The base update pumps pending UI messages, so conditional controls must
+            ' already have their final visibility before it can reveal the form.
+            UpdateConditionalControlVisibility()
             ResumeLayout()
             MyBase.UpdateViewDisplay(editMode, addMode, recordPositionNumber, targetIdNo, recordCount)
             UpdateActionButtons(editMode Or addMode)
@@ -670,28 +852,13 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub UpdateActionButtons(editOrAddMode As Boolean)
-            If OpenInvoiceMode Then
-                UpdateViewGLBtnDisplay()
-                If editOrAddMode Then
-                    btnAutoApply.Visible = True
-                    btnViewGL.Visible = False
-                Else
-                    btnAutoApply.Visible = False
-                    btnViewGL.Visible = True
-                End If
-            Else
-                btnAutoApply.Visible = False
-                btnViewGL.Visible = False
-            End If
+            _editOrAddMode = editOrAddMode
+            UpdateConditionalControlVisibility()
+            QueueConditionalControlVisibilityUpdate()
         End Sub
 
         Public Sub OnInputsTurnedOn() Handles MyBase.InputsTurnedOn
-            btnViewGL.Visible = False
-            If DataGridViewDjOiItems.Visible Then
-                btnAutoApply.Visible = True
-            Else
-                btnAutoApply.Visible = False
-            End If
+            UpdateActionButtons(True)
             'For Each control In Controls
             '    If TypeOf control Is CtComboBox Then
             '        Dim x As CtComboBox = control
@@ -702,13 +869,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Public Sub OnInputsTurnedOff() Handles MyBase.InputsTurnedOff
-            btnAutoApply.Visible = False
-            If OpenInvoiceMode Then
-                btnViewGL.Visible = True
-                UpdateViewGLBtnDisplay()
-            Else
-                btnViewGL.Visible = False
-            End If
+            UpdateActionButtons(False)
         End Sub
 
 
@@ -809,19 +970,14 @@ Namespace PresentationLayer.Views.Forms
             If cboAccountIdNo.SelectedValue Is Nothing OrElse cboAccountIdNo.SelectedValue <= 0 Then
                 cboAccountIdNo.SelectedValue = DefaultAccount
             End If
-            DisplayCheckInfo()
+            UpdateConditionalControlVisibility()
+            QueueConditionalControlVisibilityUpdate()
         End Sub
 
         Private Sub AfterSave_Handler() Handles MyBase.AfterSave
             EditingMode = False
             AddingMode = False
-            If OpenInvoiceMode Then
-                btnViewGL.Visible = True
-                UpdateViewGLBtnDisplay()
-            Else
-                btnViewGL.Visible = False
-            End If
-            btnAutoApply.Visible = False
+            UpdateActionButtons(False)
         End Sub
 
     End Class

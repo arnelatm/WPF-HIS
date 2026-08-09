@@ -361,41 +361,41 @@ Public Class DropdownColorBlender
         BuildABlend()
 
         'Create a canvas to aint on the same size as the control
-        Dim bitmapBuffer As Bitmap = New Bitmap(Width, Height)
-        Dim g As Graphics = Graphics.FromImage(bitmapBuffer)
-        g.Clear(BackColor)
-        g.SmoothingMode = SmoothingMode.AntiAlias
+        Using bitmapBuffer As New Bitmap(Width, Height),
+            g As Graphics = Graphics.FromImage(bitmapBuffer)
+            g.Clear(BackColor)
+            g.SmoothingMode = SmoothingMode.AntiAlias
 
-        ' Paint the ColorBlender Bar with the Linear Brush
-        Dim barRect As Rectangle = New Rectangle(10, TopMargin, ClientSize.Width - 20, BarHeight)
-        Dim br As Brush = LinearBrush(barRect, LinearGradientMode.Horizontal)
-        g.FillRectangle(br, barRect)
+            ' Paint the ColorBlender Bar with the Linear Brush
+            Dim barRect As Rectangle = New Rectangle(10, TopMargin, ClientSize.Width - 20, BarHeight)
+            Using br As Brush = LinearBrush(barRect, LinearGradientMode.Horizontal)
+                g.FillRectangle(br, barRect)
+            End Using
 
-        'Draw all the cblPointers in their Color at their Position along the Bar
-        Using pn As New Pen(Color.Gray, 1)
-            pn.DashStyle = DashStyle.Dash
-            g.DrawLine(pn, 10, TopMargin + BarHeight + 7, ClientSize.Width - 15, TopMargin + BarHeight + 7)
+            'Draw all the cblPointers in their Color at their Position along the Bar
+            Using pn As New Pen(Color.Gray, 1)
+                pn.DashStyle = DashStyle.Dash
+                g.DrawLine(pn, 10, TopMargin + BarHeight + 7, ClientSize.Width - 15, TopMargin + BarHeight + 7)
 
-            pn.Color = Color.Black
-            pn.DashStyle = DashStyle.Solid
+                pn.Color = Color.Black
+                pn.DashStyle = DashStyle.Solid
 
-            DrawPointer(g, StartPointer.pColor, 0, StartPointer.pIsCurr)
-            DrawPointer(g, EndPointer.pColor, 1, EndPointer.pIsCurr)
+                DrawPointer(g, StartPointer.pColor, 0, StartPointer.pIsCurr)
+                DrawPointer(g, EndPointer.pColor, 1, EndPointer.pIsCurr)
 
-            If MiddlePointers IsNot Nothing Then
-                For I As Integer = 1 To MiddlePointers.Count
-                    DrawPointer(g, CType(MiddlePointers(I), cblPointer).pColor,
-                                CType(MiddlePointers(I), cblPointer).pPos, I = CurrPointer)
-                Next
-            End If
+                If MiddlePointers IsNot Nothing Then
+                    For I As Integer = 1 To MiddlePointers.Count
+                        DrawPointer(g, CType(MiddlePointers(I), cblPointer).pColor,
+                                    CType(MiddlePointers(I), cblPointer).pPos, I = CurrPointer)
+                    Next
+                End If
+            End Using
 
+            'Draw the entire image to the control in one shot to eliminate flicker
+            Using renderedBuffer As Bitmap = CType(bitmapBuffer.Clone(), Bitmap)
+                e.Graphics.DrawImage(renderedBuffer, 0, 0)
+            End Using
         End Using
-        'Draw the entire image to the control in one shot to eliminate flicker
-        e.Graphics.DrawImage(CType(bitmapBuffer.Clone, Bitmap), 0, 0)
-
-        bitmapBuffer.Dispose()
-        br.Dispose()
-        g.Dispose()
 
         If TheSample.FillType = CButton.eFillType.GradientPath Then
             TheSample.Refresh()
