@@ -1,5 +1,6 @@
 Imports System.ComponentModel
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.GlobalFuncNSub
 
@@ -233,6 +234,21 @@ Namespace PresentationLayer.Views.Forms
             dgvResults.EndEdit()
             _bindingSource.EndEdit()
             RaiseEvent SaveRequested()
+        End Sub
+
+        Private Sub btnPrintReport_Click(sender As Object, e As EventArgs) Handles btnPrintReport.Click
+            If InvoiceNo = 0 Then
+                MessageBox.Show("Please retrieve an invoice before printing.")
+                Return
+            End If
+
+            If ReportIdNo = 0 Then
+                MessageBox.Show("Please save the medical report before printing.")
+                Return
+            End If
+
+            Dim reportForm As New ReportForm("Medical Fitness Report.Rpt", InvoiceNo, "InvoiceNo")
+            reportForm.Show()
         End Sub
 
         Private Sub txtInvoiceNo_Validated(sender As Object, e As EventArgs) Handles txtInvoiceNo.Validated

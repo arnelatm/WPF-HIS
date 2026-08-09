@@ -50,5 +50,12 @@ Namespace BusinessLayer
 
     End Class
 
-End Namespace
+    Public Class MedicalFitnessReportLabAnalysis
+        Inherits BusinessObject
 
+        Public Property TestCode As String
+        Public Property TestNameEnglish As String
+
+    End Class
+
+End Namespace

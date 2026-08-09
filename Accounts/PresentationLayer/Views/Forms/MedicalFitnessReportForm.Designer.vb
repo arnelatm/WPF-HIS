@@ -11,6 +11,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtInvoiceNo = New System.Windows.Forms.TextBox()
             Me.btnRetrieve = New System.Windows.Forms.Button()
             Me.btnSaveReport = New System.Windows.Forms.Button()
+            Me.btnPrintReport = New System.Windows.Forms.Button()
             Me.dgvResults = New System.Windows.Forms.DataGridView()
             Me.finalPanel = New System.Windows.Forms.FlowLayoutPanel()
             Me.chkFinalFit = New System.Windows.Forms.CheckBox()
@@ -72,6 +73,7 @@ Namespace PresentationLayer.Views.Forms
             Me.invoicePanel.Controls.Add(Me.txtInvoiceNo)
             Me.invoicePanel.Controls.Add(Me.btnRetrieve)
             Me.invoicePanel.Controls.Add(Me.btnSaveReport)
+            Me.invoicePanel.Controls.Add(Me.btnPrintReport)
             Me.invoicePanel.Dock = System.Windows.Forms.DockStyle.Fill
             Me.invoicePanel.Location = New System.Drawing.Point(11, 11)
             Me.invoicePanel.Name = "invoicePanel"
@@ -113,6 +115,15 @@ Namespace PresentationLayer.Views.Forms
             Me.btnSaveReport.TabIndex = 3
             Me.btnSaveReport.Text = "Save"
             Me.btnSaveReport.UseVisualStyleBackColor = True
+            '
+            'btnPrintReport
+            '
+            Me.btnPrintReport.Location = New System.Drawing.Point(389, 3)
+            Me.btnPrintReport.Name = "btnPrintReport"
+            Me.btnPrintReport.Size = New System.Drawing.Size(100, 23)
+            Me.btnPrintReport.TabIndex = 4
+            Me.btnPrintReport.Text = "Print Report"
+            Me.btnPrintReport.UseVisualStyleBackColor = True
             '
             'dgvResults
             '
@@ -418,6 +429,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents txtInvoiceNo As Global.System.Windows.Forms.TextBox
         Friend WithEvents btnRetrieve As Global.System.Windows.Forms.Button
         Friend WithEvents btnSaveReport As Global.System.Windows.Forms.Button
+        Friend WithEvents btnPrintReport As Global.System.Windows.Forms.Button
         Friend WithEvents headerPanel As Global.System.Windows.Forms.TableLayoutPanel
         Friend WithEvents lblPatientName As Global.System.Windows.Forms.Label
         Friend WithEvents txtPatientName As Global.System.Windows.Forms.TextBox

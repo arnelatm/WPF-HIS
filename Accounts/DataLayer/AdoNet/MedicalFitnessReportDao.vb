@@ -46,6 +46,31 @@ Namespace DataLayer.AdoNet
             Return _kizenDb.Read(sql, MakeKizenInvoice, "@InvoiceNo", invoiceNo).FirstOrDefault()
         End Function
 
+        Public Function GetKizenLabAnalyses(invoiceNo As Int32) As List(Of MedicalFitnessReportLabAnalysis)
+            Dim sql As String =
+                "WITH InvoiceLabAnalyses AS (" &
+                "SELECT r.ID, d.ID AS VisitAnalysesID, " &
+                "COALESCE(NULLIF(LTRIM(RTRIM(r.Code)), N''), N'KIZEN_' + CONVERT(nvarchar(20), r.ID)) AS TestCode, " &
+                "CONVERT(nvarchar(1000), LTRIM(RTRIM(r.Name))) AS TestNameEnglish, " &
+                "CASE WHEN CHARINDEX(CONVERT(nvarchar(1000), LTRIM(RTRIM(r.Name))), d.ReqNote) = 0 THEN 2147483647 " &
+                "ELSE CHARINDEX(CONVERT(nvarchar(1000), LTRIM(RTRIM(r.Name))), d.ReqNote) END AS RequestedPosition, " &
+                "ROW_NUMBER() OVER (" &
+                "PARTITION BY COALESCE(NULLIF(LTRIM(RTRIM(r.Code)), N''), CONVERT(nvarchar(1000), LTRIM(RTRIM(r.Name)))) " &
+                "ORDER BY d.ID DESC, r.ID) AS DuplicateNumber " &
+                "FROM dbo.VisitAnalysesData d " &
+                "INNER JOIN dbo.VisitAnalysesResult r ON r.VisitAnalysesID = d.ID " &
+                "WHERE d.OrderID = @InvoiceNo " &
+                "AND NULLIF(CONVERT(nvarchar(1000), LTRIM(RTRIM(r.Name))), N'') IS NOT NULL " &
+                "AND r.Parent LIKE N'Group[_]%' " &
+                "AND ISNULL(r.IsHide, 0) = 0) " &
+                "SELECT TestCode, TestNameEnglish " &
+                "FROM InvoiceLabAnalyses " &
+                "WHERE DuplicateNumber = 1 " &
+                "ORDER BY VisitAnalysesID DESC, RequestedPosition, ID"
+
+            Return _kizenDb.Read(sql, MakeKizenLabAnalysis, "@InvoiceNo", invoiceNo).ToList()
+        End Function
+
         Public Function GetActiveLabTemplates() As List(Of MedicalFitnessReportLabTemplate)
             Dim sql As String =
                 "SELECT IdNo,TestCode,TestNameEnglish,TestNameArabic,DisplayOrder,Active " &
@@ -228,6 +253,11 @@ Namespace DataLayer.AdoNet
                 .TestNameArabic = Extensions.AsString(reader("TestNameArabic")),
                 .DisplayOrder = Extensions.AsInt(Of Int32)(reader("DisplayOrder")),
                 .Active = Convert.ToBoolean(reader("Active"))}
+
+        Private Shared ReadOnly MakeKizenLabAnalysis As Func(Of IDataReader, MedicalFitnessReportLabAnalysis) =
+            Function(reader) New MedicalFitnessReportLabAnalysis() With {
+                .TestCode = Extensions.AsString(reader("TestCode")),
+                .TestNameEnglish = Extensions.AsString(reader("TestNameEnglish"))}
 
     End Class
 

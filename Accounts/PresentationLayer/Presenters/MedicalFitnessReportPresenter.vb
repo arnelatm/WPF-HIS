@@ -1,4 +1,5 @@
 Imports System.ComponentModel
+Imports System.Linq
 Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Views
@@ -40,7 +41,9 @@ Namespace PresentationLayer.Presenters
                     ClearView()
                     Return
                 End If
-                report.Details = CreateDefaultDetails()
+                report.Details = CreateDefaultDetails(report.InvoiceNo)
+            Else
+                report.Details = SynchronizeLabDetails(report.Details, report.InvoiceNo)
             End If
 
             DisplayReport(report)
@@ -109,7 +112,7 @@ Namespace PresentationLayer.Presenters
             View.TestResults = New BindingList(Of MedicalFitnessReportTestResultView)()
         End Sub
 
-        Private Function CreateDefaultDetails() As List(Of MedicalFitnessReportTestResult)
+        Private Function CreateDefaultDetails(invoiceNo As Int32) As List(Of MedicalFitnessReportTestResult)
             Dim rows As New List(Of MedicalFitnessReportTestResult)
 
             AddRow(rows, "CLINICAL", "HEIGHT", "Height", "قياس الطول", 10)
@@ -126,17 +129,58 @@ Namespace PresentationLayer.Presenters
             AddRow(rows, "SPIROMETRY", "SPIROMETRY", "Spirometry", "قياس التنفس", 130)
 
             Dim displayOrder = 200
-            Dim templates = _dao.GetActiveLabTemplates()
-            If templates.Count = 0 Then
-                AddRow(rows, "LAB", "RBS", "Random Blood Sugar", "السكر العشوائي", displayOrder)
-            Else
-                For Each template In templates
-                    AddRow(rows, "LAB", template.TestCode, template.TestNameEnglish, template.TestNameArabic, displayOrder)
+            Dim analyses = _dao.GetKizenLabAnalyses(invoiceNo)
+            If analyses.Count > 0 Then
+                For Each analysis In analyses
+                    AddRow(rows, "LAB", analysis.TestCode, analysis.TestNameEnglish, Nothing, displayOrder)
                     displayOrder += 10
                 Next
+            Else
+                Dim templates = _dao.GetActiveLabTemplates()
+                If templates.Count = 0 Then
+                    AddRow(rows, "LAB", "RBS", "Random Blood Sugar", "السكر العشوائي", displayOrder)
+                Else
+                    For Each template In templates
+                        AddRow(rows, "LAB", template.TestCode, template.TestNameEnglish, template.TestNameArabic, displayOrder)
+                        displayOrder += 10
+                    Next
+                End If
             End If
 
             Return rows
+        End Function
+
+        Private Function SynchronizeLabDetails(rows As List(Of MedicalFitnessReportTestResult), invoiceNo As Int32) As List(Of MedicalFitnessReportTestResult)
+            Dim analyses = _dao.GetKizenLabAnalyses(invoiceNo)
+            If analyses.Count = 0 Then
+                Return If(rows, New List(Of MedicalFitnessReportTestResult)())
+            End If
+
+            Dim existingRows = If(rows, New List(Of MedicalFitnessReportTestResult)())
+            Dim synchronizedRows = existingRows.
+                Where(Function(row) Not String.Equals(row.SectionCode, "LAB", StringComparison.OrdinalIgnoreCase)).
+                ToList()
+            Dim displayOrder = 200
+
+            For Each analysis In analyses
+                Dim matchingRow = existingRows.FirstOrDefault(
+                    Function(row) String.Equals(row.SectionCode, "LAB", StringComparison.OrdinalIgnoreCase) AndAlso
+                        (String.Equals(row.TestCode, analysis.TestCode, StringComparison.OrdinalIgnoreCase) OrElse
+                         String.Equals(row.TestNameEnglish, analysis.TestNameEnglish, StringComparison.OrdinalIgnoreCase)))
+
+                If matchingRow Is Nothing Then
+                    matchingRow = New MedicalFitnessReportTestResult()
+                End If
+
+                matchingRow.SectionCode = "LAB"
+                matchingRow.TestCode = analysis.TestCode
+                matchingRow.TestNameEnglish = analysis.TestNameEnglish
+                matchingRow.DisplayOrder = displayOrder
+                synchronizedRows.Add(matchingRow)
+                displayOrder += 10
+            Next
+
+            Return synchronizedRows.OrderBy(Function(row) row.DisplayOrder).ToList()
         End Function
 
         Private Shared Sub AddRow(rows As List(Of MedicalFitnessReportTestResult), sectionCode As String, testCode As String, testNameEnglish As String, testNameArabic As String, displayOrder As Int32)
