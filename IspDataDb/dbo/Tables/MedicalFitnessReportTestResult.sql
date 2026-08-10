@@ -6,6 +6,7 @@ CREATE TABLE [dbo].[MedicalFitnessReportTestResult] (
     [TestNameEnglish]        NVARCHAR (255) NOT NULL,
     [TestNameArabic]         NVARCHAR (255) NULL,
     [DisplayOrder]           INT            NOT NULL,
+    [Sequence]               AS ([DisplayOrder]),
     [ResultStatus]           CHAR (1)       NULL,
     [ResultText]             NVARCHAR (MAX) NULL,
     [Remarks]                NVARCHAR (MAX) NULL,
@@ -17,4 +18,3 @@ CREATE TABLE [dbo].[MedicalFitnessReportTestResult] (
 GO
 CREATE NONCLUSTERED INDEX [IX_MedicalFitnessReportTestResult_ReportDisplay]
     ON [dbo].[MedicalFitnessReportTestResult]([MedicalFitnessReportIdNo] ASC, [DisplayOrder] ASC);
-

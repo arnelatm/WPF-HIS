@@ -1,4 +1,5 @@
 Imports System.ComponentModel
+Imports System.Linq
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
@@ -162,7 +163,11 @@ Namespace PresentationLayer.Views.Forms
                 Return _testResults
             End Get
             Set(value As BindingList(Of MedicalFitnessReportTestResultView))
-                _testResults = If(value, New BindingList(Of MedicalFitnessReportTestResultView)())
+                Dim rows = If(value, New BindingList(Of MedicalFitnessReportTestResultView)())
+                _testResults = New BindingList(Of MedicalFitnessReportTestResultView)(
+                    rows.OrderBy(Function(row) row.Sequence).
+                         ThenBy(Function(row) row.IdNo).
+                         ToList())
                 BindGrid()
             End Set
         End Property
@@ -173,6 +178,38 @@ Namespace PresentationLayer.Views.Forms
             End If
             _bindingSource.DataSource = _testResults
             dgvResults.DataSource = _bindingSource
+            ApplyResultEntryModes()
+        End Sub
+
+        Private Sub ApplyResultEntryModes()
+            If dgvResults Is Nothing OrElse dgvResults.Columns.Count = 0 Then
+                Return
+            End If
+
+            For Each gridRow As DataGridViewRow In dgvResults.Rows
+                Dim result = TryCast(gridRow.DataBoundItem, MedicalFitnessReportTestResultView)
+                If result Is Nothing Then
+                    Continue For
+                End If
+
+                If result.IsResultTextOnly Then
+                    result.ResultStatus = Nothing
+                Else
+                    result.ResultText = Nothing
+                End If
+
+                SetEntryCellEnabled(gridRow.Cells(colResultText.Index), result.IsResultTextOnly)
+                SetEntryCellEnabled(gridRow.Cells(colFit.Index), Not result.IsResultTextOnly)
+                SetEntryCellEnabled(gridRow.Cells(colUnfit.Index), Not result.IsResultTextOnly)
+            Next
+        End Sub
+
+        Private Shared Sub SetEntryCellEnabled(cell As DataGridViewCell, enabled As Boolean)
+            cell.ReadOnly = Not enabled
+            cell.Style.BackColor = If(enabled, SystemColors.Window, SystemColors.Control)
+            cell.Style.ForeColor = If(enabled, SystemColors.WindowText, SystemColors.GrayText)
+            cell.Style.SelectionBackColor = If(enabled, SystemColors.Highlight, SystemColors.ControlDark)
+            cell.Style.SelectionForeColor = If(enabled, SystemColors.HighlightText, SystemColors.GrayText)
         End Sub
 
         Private Sub ConfigureGridColumns()
@@ -182,6 +219,11 @@ Namespace PresentationLayer.Views.Forms
 
             dgvResults.AutoGenerateColumns = False
 
+            colSequence = New DataGridViewTextBoxColumn With {
+                .DataPropertyName = "Sequence",
+                .HeaderText = "Sequence",
+                .Name = "colSequence",
+                .FillWeight = 55}
             colSection = New DataGridViewTextBoxColumn With {
                 .DataPropertyName = "SectionCode",
                 .HeaderText = "Section",
@@ -218,6 +260,7 @@ Namespace PresentationLayer.Views.Forms
                 .FillWeight = 140}
 
             dgvResults.Columns.AddRange(New DataGridViewColumn() {
+                colSequence,
                 colSection,
                 colTest,
                 colResultText,
@@ -247,8 +290,13 @@ Namespace PresentationLayer.Views.Forms
                 Return
             End If
 
-            Dim reportForm As New ReportForm("Medical Fitness Report.Rpt", InvoiceNo, "InvoiceNo")
-            reportForm.Show()
+            Dim medicalReportForm = ReportForm.CreateSorted(
+                "Medical Fitness Report.Rpt",
+                "MedicalFitnessReportPrint_View",
+                "Sequence",
+                InvoiceNo,
+                "InvoiceNo")
+            medicalReportForm.Show()
         End Sub
 
         Private Sub txtInvoiceNo_Validated(sender As Object, e As EventArgs) Handles txtInvoiceNo.Validated
@@ -258,7 +306,9 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub dgvResults_CurrentCellDirtyStateChanged(sender As Object, e As EventArgs) Handles dgvResults.CurrentCellDirtyStateChanged
-            If dgvResults.IsCurrentCellDirty Then
+            If dgvResults.IsCurrentCellDirty AndAlso
+               dgvResults.CurrentCell IsNot Nothing AndAlso
+               TypeOf dgvResults.CurrentCell.OwningColumn Is DataGridViewCheckBoxColumn Then
                 dgvResults.CommitEdit(DataGridViewDataErrorContexts.Commit)
             End If
         End Sub
@@ -280,6 +330,10 @@ Namespace PresentationLayer.Views.Forms
                 row.IsFit = False
             End If
             dgvResults.InvalidateRow(e.RowIndex)
+        End Sub
+
+        Private Sub dgvResults_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs) Handles dgvResults.DataBindingComplete
+            ApplyResultEntryModes()
         End Sub
 
         Private Sub chkFinalFit_CheckedChanged(sender As Object, e As EventArgs) Handles chkFinalFit.CheckedChanged

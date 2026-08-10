@@ -152,7 +152,7 @@ Namespace DataLayer.AdoNet
                 "INSERT INTO MedicalFitnessReportTestResult " &
                 "(MedicalFitnessReportIdNo,SectionCode,TestCode,TestNameEnglish,TestNameArabic,DisplayOrder,ResultStatus,ResultText,Remarks) " &
                 "VALUES " &
-                "(@MedicalFitnessReportIdNo,@SectionCode,@TestCode,@TestNameEnglish,@TestNameArabic,@DisplayOrder,@ResultStatus,@ResultText,@Remarks); " &
+                "(@MedicalFitnessReportIdNo,@SectionCode,@TestCode,@TestNameEnglish,@TestNameArabic,@Sequence,@ResultStatus,@ResultText,@Remarks); " &
                 "SELECT CONVERT(int, SCOPE_IDENTITY());"
 
             Return Convert.ToInt32(_ispDataDb.Scalar(sql, TakeDetail(detail)))
@@ -160,7 +160,7 @@ Namespace DataLayer.AdoNet
 
         Private Function GetReportDetails(reportIdNo As Int32) As List(Of MedicalFitnessReportTestResult)
             Dim sql As String =
-                "SELECT IdNo,MedicalFitnessReportIdNo,SectionCode,TestCode,TestNameEnglish,TestNameArabic,DisplayOrder,ResultStatus,ResultText,Remarks " &
+                "SELECT IdNo,MedicalFitnessReportIdNo,SectionCode,TestCode,TestNameEnglish,TestNameArabic,DisplayOrder AS Sequence,ResultStatus,ResultText,Remarks " &
                 "FROM MedicalFitnessReportTestResult " &
                 "WHERE MedicalFitnessReportIdNo = @MedicalFitnessReportIdNo " &
                 "ORDER BY DisplayOrder, IdNo"
@@ -198,7 +198,7 @@ Namespace DataLayer.AdoNet
                 "@TestCode", detail.TestCode,
                 "@TestNameEnglish", detail.TestNameEnglish,
                 "@TestNameArabic", DbValue(detail.TestNameArabic),
-                "@DisplayOrder", detail.DisplayOrder,
+                "@Sequence", detail.Sequence,
                 "@ResultStatus", DbValue(detail.ResultStatus),
                 "@ResultText", DbValue(detail.ResultText),
                 "@Remarks", DbValue(detail.Remarks)}
@@ -240,7 +240,7 @@ Namespace DataLayer.AdoNet
                 .TestCode = Extensions.AsString(reader("TestCode")),
                 .TestNameEnglish = Extensions.AsString(reader("TestNameEnglish")),
                 .TestNameArabic = Extensions.AsString(reader("TestNameArabic")),
-                .DisplayOrder = Extensions.AsInt(Of Int32)(reader("DisplayOrder")),
+                .Sequence = Extensions.AsInt(Of Int32)(reader("Sequence")),
                 .ResultStatus = Extensions.AsString(reader("ResultStatus")),
                 .ResultText = Extensions.AsString(reader("ResultText")),
                 .Remarks = Extensions.AsString(reader("Remarks"))}

@@ -11,18 +11,40 @@ Namespace PresentationLayer.Views
         Public Property TestCode As String
         Public Property TestNameEnglish As String
         Public Property TestNameArabic As String
+        Public Property Sequence As Int32
+
         Public Property DisplayOrder As Int32
+            Get
+                Return Sequence
+            End Get
+            Set(value As Int32)
+                Sequence = value
+            End Set
+        End Property
+
         Public Property ResultStatus As String
         Public Property ResultText As String
         Public Property Remarks As String
         Public Property Errors As List(Of String) Implements IView.Errors
         Public Property DataFilter As String Implements IView.DataFilter
 
+        Public ReadOnly Property IsResultTextOnly As Boolean
+            Get
+                Return String.Equals(TestCode, "HEIGHT", StringComparison.OrdinalIgnoreCase) OrElse
+                       String.Equals(TestCode, "WEIGHT", StringComparison.OrdinalIgnoreCase)
+            End Get
+        End Property
+
         Public Property IsFit As Boolean
             Get
-                Return ResultStatus = "F"
+                Return Not IsResultTextOnly AndAlso ResultStatus = "F"
             End Get
             Set(value As Boolean)
+                If IsResultTextOnly Then
+                    ResultStatus = Nothing
+                    Return
+                End If
+
                 If value Then
                     ResultStatus = "F"
                 ElseIf ResultStatus = "F" Then
@@ -33,9 +55,14 @@ Namespace PresentationLayer.Views
 
         Public Property IsUnfit As Boolean
             Get
-                Return ResultStatus = "U"
+                Return Not IsResultTextOnly AndAlso ResultStatus = "U"
             End Get
             Set(value As Boolean)
+                If IsResultTextOnly Then
+                    ResultStatus = Nothing
+                    Return
+                End If
+
                 If value Then
                     ResultStatus = "U"
                 ElseIf ResultStatus = "U" Then

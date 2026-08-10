@@ -450,6 +450,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblBloodType As Global.System.Windows.Forms.Label
         Friend WithEvents cboBloodType As Global.System.Windows.Forms.ComboBox
         Friend WithEvents dgvResults As Global.System.Windows.Forms.DataGridView
+        Friend WithEvents colSequence As Global.System.Windows.Forms.DataGridViewTextBoxColumn
         Friend WithEvents colSection As Global.System.Windows.Forms.DataGridViewTextBoxColumn
         Friend WithEvents colTest As Global.System.Windows.Forms.DataGridViewTextBoxColumn
         Friend WithEvents colResultText As Global.System.Windows.Forms.DataGridViewTextBoxColumn

@@ -123,26 +123,26 @@ Namespace PresentationLayer.Presenters
             AddRow(rows, "CLINICAL", "CHEST_HEART", "Chest / Heart", "القلب والصدر", 60)
             AddRow(rows, "CLINICAL", "ABDOMEN_DERMATOLOGICAL", "Abdomen/Dermatological", "الباطنية والجلدية والتناسلية", 70)
             AddRow(rows, "CLINICAL", "NEUROLOGICAL", "Neurological Disorder", "الامراض النفسية والعصبية", 80)
-            AddRow(rows, "CHEST_XRAY", "CHEST_XRAY", "Chest X-Ray", "الأشعة على الصدر", 100)
-            AddRow(rows, "ECG", "ECG", "ECG", "رسم القلب", 110)
-            AddRow(rows, "AUDIOMETRY", "AUDIOMETRY", "Audiometry", "قياس السمع", 120)
-            AddRow(rows, "SPIROMETRY", "SPIROMETRY", "Spirometry", "قياس التنفس", 130)
+            AddRow(rows, "CLINICALCHEST", "CHEST_XRAY", "Chest X-Ray", "الأشعة على الصدر", 100)
+            AddRow(rows, "CLINICALECG", "ECG", "ECG", "رسم القلب", 110)
+            AddRow(rows, "CLINICALSPYROAUDIO", "AUDIOMETRY", "Audiometry", "قياس السمع", 120)
+            AddRow(rows, "CLINICALSPYROAUDIO", "SPIROMETRY", "Spirometry", "قياس التنفس", 130)
 
-            Dim displayOrder = 200
+            Dim sequence = 200
             Dim analyses = _dao.GetKizenLabAnalyses(invoiceNo)
             If analyses.Count > 0 Then
                 For Each analysis In analyses
-                    AddRow(rows, "LAB", analysis.TestCode, analysis.TestNameEnglish, Nothing, displayOrder)
-                    displayOrder += 10
+                    AddRow(rows, "LAB", analysis.TestCode, analysis.TestNameEnglish, Nothing, sequence)
+                    sequence += 10
                 Next
             Else
                 Dim templates = _dao.GetActiveLabTemplates()
                 If templates.Count = 0 Then
-                    AddRow(rows, "LAB", "RBS", "Random Blood Sugar", "السكر العشوائي", displayOrder)
+                    AddRow(rows, "LAB", "RBS", "Random Blood Sugar", "السكر العشوائي", sequence)
                 Else
                     For Each template In templates
-                        AddRow(rows, "LAB", template.TestCode, template.TestNameEnglish, template.TestNameArabic, displayOrder)
-                        displayOrder += 10
+                        AddRow(rows, "LAB", template.TestCode, template.TestNameEnglish, template.TestNameArabic, sequence)
+                        sequence += 10
                     Next
                 End If
             End If
@@ -160,7 +160,9 @@ Namespace PresentationLayer.Presenters
             Dim synchronizedRows = existingRows.
                 Where(Function(row) Not String.Equals(row.SectionCode, "LAB", StringComparison.OrdinalIgnoreCase)).
                 ToList()
-            Dim displayOrder = 200
+            Dim nextSequence = If(existingRows.Count = 0,
+                                  200,
+                                  Math.Max(200, existingRows.Max(Function(row) row.Sequence) + 10))
 
             For Each analysis In analyses
                 Dim matchingRow = existingRows.FirstOrDefault(
@@ -169,27 +171,33 @@ Namespace PresentationLayer.Presenters
                          String.Equals(row.TestNameEnglish, analysis.TestNameEnglish, StringComparison.OrdinalIgnoreCase)))
 
                 If matchingRow Is Nothing Then
-                    matchingRow = New MedicalFitnessReportTestResult()
+                    matchingRow = New MedicalFitnessReportTestResult With {
+                        .Sequence = nextSequence}
+                    nextSequence += 10
+                ElseIf matchingRow.Sequence <= 0 Then
+                    matchingRow.Sequence = nextSequence
+                    nextSequence += 10
                 End If
 
                 matchingRow.SectionCode = "LAB"
                 matchingRow.TestCode = analysis.TestCode
                 matchingRow.TestNameEnglish = analysis.TestNameEnglish
-                matchingRow.DisplayOrder = displayOrder
                 synchronizedRows.Add(matchingRow)
-                displayOrder += 10
             Next
 
-            Return synchronizedRows.OrderBy(Function(row) row.DisplayOrder).ToList()
+            Return synchronizedRows.
+                OrderBy(Function(row) row.Sequence).
+                ThenBy(Function(row) row.IdNo).
+                ToList()
         End Function
 
-        Private Shared Sub AddRow(rows As List(Of MedicalFitnessReportTestResult), sectionCode As String, testCode As String, testNameEnglish As String, testNameArabic As String, displayOrder As Int32)
+        Private Shared Sub AddRow(rows As List(Of MedicalFitnessReportTestResult), sectionCode As String, testCode As String, testNameEnglish As String, testNameArabic As String, sequence As Int32)
             rows.Add(New MedicalFitnessReportTestResult With {
-                .SectionCode = sectionCode,
-                .TestCode = testCode,
-                .TestNameEnglish = testNameEnglish,
-                .TestNameArabic = testNameArabic,
-                .DisplayOrder = displayOrder})
+                .sectionCode = sectionCode,
+                .testCode = testCode,
+                .testNameEnglish = testNameEnglish,
+                .testNameArabic = testNameArabic,
+                .sequence = sequence})
         End Sub
 
         Private Shared Function ToViewRows(rows As List(Of MedicalFitnessReportTestResult)) As BindingList(Of MedicalFitnessReportTestResultView)
@@ -198,7 +206,7 @@ Namespace PresentationLayer.Presenters
                 Return list
             End If
 
-            For Each row In rows
+            For Each row In rows.OrderBy(Function(item) item.Sequence).ThenBy(Function(item) item.IdNo)
                 list.Add(New MedicalFitnessReportTestResultView With {
                     .IdNo = row.IdNo,
                     .MedicalFitnessReportIdNo = row.MedicalFitnessReportIdNo,
@@ -206,7 +214,7 @@ Namespace PresentationLayer.Presenters
                     .TestCode = row.TestCode,
                     .TestNameEnglish = row.TestNameEnglish,
                     .TestNameArabic = row.TestNameArabic,
-                    .DisplayOrder = row.DisplayOrder,
+                    .Sequence = row.Sequence,
                     .ResultStatus = row.ResultStatus,
                     .ResultText = row.ResultText,
                     .Remarks = row.Remarks})
@@ -221,7 +229,7 @@ Namespace PresentationLayer.Presenters
                 Return list
             End If
 
-            For Each row In rows
+            For Each row In rows.OrderBy(Function(item) item.Sequence).ThenBy(Function(item) item.IdNo)
                 list.Add(New MedicalFitnessReportTestResult With {
                     .IdNo = row.IdNo,
                     .MedicalFitnessReportIdNo = row.MedicalFitnessReportIdNo,
@@ -229,9 +237,9 @@ Namespace PresentationLayer.Presenters
                     .TestCode = row.TestCode,
                     .TestNameEnglish = row.TestNameEnglish,
                     .TestNameArabic = row.TestNameArabic,
-                    .DisplayOrder = row.DisplayOrder,
-                    .ResultStatus = row.ResultStatus,
-                    .ResultText = row.ResultText,
+                    .Sequence = row.Sequence,
+                    .ResultStatus = If(row.IsResultTextOnly, Nothing, row.ResultStatus),
+                    .ResultText = If(row.IsResultTextOnly, row.ResultText, Nothing),
                     .Remarks = row.Remarks})
             Next
 

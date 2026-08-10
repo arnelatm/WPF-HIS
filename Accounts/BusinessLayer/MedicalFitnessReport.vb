@@ -31,7 +31,17 @@ Namespace BusinessLayer
         Public Property TestCode As String
         Public Property TestNameEnglish As String
         Public Property TestNameArabic As String
+        Public Property Sequence As Int32
+
         Public Property DisplayOrder As Int32
+            Get
+                Return Sequence
+            End Get
+            Set(value As Int32)
+                Sequence = value
+            End Set
+        End Property
+
         Public Property ResultStatus As String
         Public Property ResultText As String
         Public Property Remarks As String

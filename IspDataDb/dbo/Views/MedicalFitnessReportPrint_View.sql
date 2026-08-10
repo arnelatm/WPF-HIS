@@ -19,10 +19,10 @@ SELECT
     d.TestNameEnglish,
     d.TestNameArabic,
     d.DisplayOrder,
+    d.[Sequence],
     d.ResultStatus,
     d.ResultText,
     d.Remarks AS DetailRemarks
 FROM dbo.MedicalFitnessReport h
 LEFT JOIN dbo.MedicalFitnessReportTestResult d
     ON d.MedicalFitnessReportIdNo = h.IdNo;
-
