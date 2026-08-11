@@ -2,6 +2,43 @@
 # Set default behavior to automatically normalize line endings.
 * text=auto
 
+# Keep Visual Studio and Windows development files consistent in the working tree.
+*.vb       text eol=crlf
+*.cs       text eol=crlf
+*.sln      text eol=crlf
+*.vbproj   text eol=crlf
+*.csproj   text eol=crlf
+*.sqlproj  text eol=crlf
+*.props    text eol=crlf
+*.targets  text eol=crlf
+*.config   text eol=crlf
+*.xml      text eol=crlf
+*.resx     text eol=crlf
+*.settings text eol=crlf
+*.xsd      text eol=crlf
+*.sql      text eol=crlf
+*.ps1      text eol=crlf
+*.cmd      text eol=crlf
+*.bat      text eol=crlf
+
+# Crystal Reports and compiled/archive assets must never be line-normalized.
+*.rpt  binary
+# Legacy generated VB source stored with an .rpt extension.
+"Accounts/Reports/Trial BalanceTest.rpt" text eol=crlf
+*.dll  binary
+*.exe  binary
+*.pdb  binary
+*.zip  binary
+*.rar  binary
+*.7z   binary
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.bmp  binary
+*.ico  binary
+*.pdf  binary
+
 # Set default behavior for command prompt diff.
 #
 # This is need for earlier builds of msysgit that does not have it on by

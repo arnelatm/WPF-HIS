@@ -1,4 +1,9 @@
-﻿[*.vb]
+root = true
+
+[*.{vb,cs,sln,vbproj,csproj,sqlproj,props,targets,config,xml,resx,settings,xsd,sql,ps1,cmd,bat}]
+end_of_line = crlf
+
+[*.vb]
 
 # BC42105: Function doesn't return a value on all code paths
 dotnet_diagnostic.BC42105.severity = suggestion
