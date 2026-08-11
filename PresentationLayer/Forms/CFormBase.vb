@@ -60,17 +60,6 @@ Public Class CFormBase
 
     Private Sub OnCFormEntryNewShown() Handles MyBase.Shown
         SuspendDrawing()
-        If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
-            If btnArabic.Enabled Then
-                'btnArabic.PerformClick()
-                SwitchUiLanguage(False)
-            End If
-        Else
-            If Not btnArabic.Enabled Then
-                'btnOriginal.PerformClick()
-                SwitchUiLanguage(True)
-            End If
-        End If
         If QueryOnly Or SingleData Then
             TurnOnInputs()
             btnSave.Visible = False
@@ -456,35 +445,11 @@ Public Class CFormBase
     End Sub
 
     Protected Overrides Sub SwitchUiLanguage(originalUi As Boolean)
-        SuspendDrawing()
-        Dim sw As Integer = 0
-        If originalUi Then
-            If TextDisplayLanguage <> GlobalVariables.DefaultUnmirroredCultureInfoStr Then
-                TextDisplayLanguage = GlobalVariables.DefaultUnmirroredCultureInfoStr
-                sw = 1
-            End If
-            GlobalVariables.RightToLeftLayout = True
-            RightToLeft = RightToLeft.No
-        Else
-            If TextDisplayLanguage <> GlobalVariables.DefaultMirroredCultureInfoStr Then
-                TextDisplayLanguage = GlobalVariables.DefaultMirroredCultureInfoStr
-                sw = 1
-            End If
-            GlobalVariables.RightToLeftLayout = False
-            RightToLeft = RightToLeft.Yes
-        End If
-        TranslateForm()
-        If sw = 1 Then
-            CultureInfo.CurrentCulture = New CultureInfo(TextDisplayLanguage, False)
-            btnArabic.Visible = originalUi
-            btnOriginal.Visible = Not originalUi
-            btnArabic.Enabled = originalUi
-            btnOriginal.Enabled = Not originalUi
-            If Ea IsNot Nothing Then
-                Ea.PublishEvent(New LanguageChanged(Me))
-            End If
-        End If
-        ResumeDrawing()
+        MyBase.SwitchUiLanguage(originalUi)
+        btnArabic.Visible = originalUi
+        btnOriginal.Visible = Not originalUi
+        btnArabic.Enabled = originalUi
+        btnOriginal.Enabled = Not originalUi
     End Sub
 
 End Class

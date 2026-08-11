@@ -11,6 +11,12 @@ Namespace PresentationLayer.Views.Forms
         Inherits AATM.PresentationLayer.Forms.CFormBase
         Implements IMedicalFitnessReportView
 
+        Protected Overrides ReadOnly Property UseFastLanguageLayoutOnInitialDisplay As Boolean
+            Get
+                Return True
+            End Get
+        End Property
+
         Private _reportIdNo As Int32
         Private _invoiceDate As Date?
         Private _testResults As New BindingList(Of MedicalFitnessReportTestResultView)
