@@ -300,6 +300,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub DosagePrinting_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            BackgroundImage = Global.AATM.Libraries.GlobalResources.My.Resources.Resources.EntryFormBackground
             btnAdd.Visible = False
             btnDelete.Visible = False
             btnFilter.Visible = False

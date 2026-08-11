@@ -481,6 +481,10 @@ Namespace PresentationLayer.Views.Forms
         '    End If
         'End Sub
 
+        Private Sub CustomerEntryTv_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            floDataDisplay.BackgroundImage = Global.AATM.Libraries.GlobalResources.My.Resources.Resources.EntryFormBackground
+        End Sub
+
     End Class
 
 End Namespace

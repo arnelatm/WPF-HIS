@@ -600,7 +600,6 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"),System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile
         Me.ClientSize = New System.Drawing.Size(1274, 533)
         Me.MinimumSize = New System.Drawing.Size(16, 100)

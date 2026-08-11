@@ -260,6 +260,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub PcClosing_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            BackgroundImage = Global.AATM.Libraries.GlobalResources.My.Resources.Resources.EntryFormBackground
             _defaultAccount = Presenter.DefaultPcAccount()
             'Presenter.UpdateViewData(0)
             DataGridViewPcJournals.Refresh()

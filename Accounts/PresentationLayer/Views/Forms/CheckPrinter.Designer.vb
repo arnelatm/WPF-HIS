@@ -472,7 +472,6 @@ Namespace PresentationLayer.Views.Forms
             'CheckPrinter
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
-            Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
             Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile
             Me.ClientSize = New System.Drawing.Size(909, 304)
             Me.Controls.Add(Me.tlpDisbursement)

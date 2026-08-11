@@ -278,6 +278,16 @@ Namespace My.Resources
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
+
+        '''<summary>
+        '''  Looks up the shared lossless background used by Accounts entry forms.
+        '''</summary>
+        Public ReadOnly Property EntryFormBackground() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("EntryFormBackground", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
         
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.

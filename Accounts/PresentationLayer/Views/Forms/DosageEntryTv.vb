@@ -128,6 +128,10 @@ Namespace PresentationLayer.Views.Forms
                 }
         End Sub
 
+        Private Sub DosageEntryTv_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            BackgroundImage = Global.AATM.Libraries.GlobalResources.My.Resources.Resources.EntryFormBackground
+        End Sub
+
 
     End Class
 

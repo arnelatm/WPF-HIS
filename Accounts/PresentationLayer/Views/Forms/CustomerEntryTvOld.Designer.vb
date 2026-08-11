@@ -1100,6 +1100,7 @@ Namespace PresentationLayer.Views.Forms
             'floDataDisplay
             '
             resources.ApplyResources(Me.floDataDisplay, "floDataDisplay")
+            Me.floDataDisplay.BackgroundImage = Global.AATM.Libraries.GlobalResources.My.Resources.Resources.EntryFormBackground
             Me.floDataDisplay.BackColor = System.Drawing.Color.Transparent
             Me.floDataDisplay.Controls.Add(Me.lblIdNo)
             Me.floDataDisplay.Controls.Add(Me.TxtIdNo)

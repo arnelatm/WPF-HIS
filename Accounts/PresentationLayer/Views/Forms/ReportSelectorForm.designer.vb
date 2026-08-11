@@ -241,7 +241,6 @@ Namespace PresentationLayer.Views.Forms
             'ReportSelectorForm
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
-            Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
             Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile
             Me.ClientSize = New System.Drawing.Size(672, 668)
             Me.Controls.Add(Me.DataGridViewReportGroupList)
