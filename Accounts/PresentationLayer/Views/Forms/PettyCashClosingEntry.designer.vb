@@ -1088,7 +1088,6 @@ Namespace PresentationLayer.Views.Forms
             'PettyCashClosingEntry
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-            Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
             Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile
             Me.ClientSize = New System.Drawing.Size(1008, 659)
             Me.Controls.Add(Me.TableLayoutPanel1)

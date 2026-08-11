@@ -307,6 +307,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub SalesJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            BackgroundImage = Global.AATM.Libraries.GlobalResources.My.Resources.Resources.EntryFormBackground
             If GlobalVariables.RightToLeftLayout Then
                 txtJournalCode.Text = Presenter.GetLocalizedPrefix("SJ")
             Else

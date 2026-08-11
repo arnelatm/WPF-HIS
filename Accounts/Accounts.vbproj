@@ -146,7 +146,6 @@
       <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
     </Reference>
-    <Reference Include="GlobalResources, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="KellermanSoftware.Compare-NET-Objects, Version=4.79.0.0, Culture=neutral, PublicKeyToken=d970ace04cc85217, processorArchitecture=MSIL">
       <HintPath>..\packages\CompareNETObjects.4.79.0\lib\net472\KellermanSoftware.Compare-NET-Objects.dll</HintPath>
     </Reference>
@@ -3004,6 +3003,10 @@
     <ProjectReference Include="..\Libraries\GlobalFuncNSub\GlobalFuncNSub.vbproj">
       <Project>{b56fdcd3-8b48-4859-983b-07ffa242673d}</Project>
       <Name>GlobalFuncNSub</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Libraries\GlobalResources\GlobalResources.vbproj">
+      <Project>{821ee93b-1de7-414d-9612-960288f355fe}</Project>
+      <Name>GlobalResources</Name>
     </ProjectReference>
     <ProjectReference Include="..\Libraries\HelperLibraries\HelperLibraries.vbproj">
       <Project>{a7ee826e-e3b4-40a7-8754-285b373f4321}</Project>

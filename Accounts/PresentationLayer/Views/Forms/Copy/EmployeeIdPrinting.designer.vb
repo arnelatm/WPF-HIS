@@ -257,7 +257,7 @@ Namespace PresentationLayer.Views.Forms
         'EmployeeIdPrinting
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
-        Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"),System.Drawing.Image)
+        Me.BackgroundImage = Global.AATM.Libraries.GlobalResources.My.Resources.Resources.EntryFormBackground
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile
         Me.ClientSize = New System.Drawing.Size(1008, 563)
         Me.Controls.Add(Me.TableLayoutPanel1)

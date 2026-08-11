@@ -297,6 +297,10 @@ Namespace PresentationLayer.Views.Forms
             Presenter.CreateEnumDataSource(Of PaymentTypeSelection)("PaymentType")
             'Presenter.MakeEnumComboList(Of PaymentTypeSelection)("PaymentType")
         End Sub
+
+        Private Sub CheckPrinter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            BackgroundImage = Global.AATM.Libraries.GlobalResources.My.Resources.Resources.EntryFormBackground
+        End Sub
     End Class
 
 End Namespace
