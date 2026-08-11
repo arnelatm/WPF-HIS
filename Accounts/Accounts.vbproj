@@ -513,7 +513,7 @@
     <Compile Include="PresentationLayer\Models\PurchaseOrderDetailModel.vb" />
     <Compile Include="PresentationLayer\Models\InvTransactionModel.vb" />
     <Compile Include="PresentationLayer\Models\InvTransTypeModel.vb" />
-    <Compile Include="PresentationLayer\Models\SettingModel.vb" />
+    <Compile Include="_Quarantine\UnusedCandidates_2026-08-11\SettingModel.vb" />
     <Compile Include="PresentationLayer\Models\ItemCodeModel.vb" />
     <Compile Include="PresentationLayer\Models\CodeGroupModel.vb" />
     <Compile Include="PresentationLayer\Models\DoctorModel.vb" />
@@ -560,7 +560,7 @@
     <Compile Include="PresentationLayer\Models\DisbursementJournalModel.vb" />
     <Compile Include="PresentationLayer\Models\DjOiItemModel.vb" />
     <Compile Include="PresentationLayer\Models\AttendanceItemModel.vb" />
-    <Compile Include="PresentationLayer\Models\OpInvItemModel.vb" />
+    <Compile Include="_Quarantine\UnusedCandidates_2026-08-11\OpInvItemModel.vb" />
     <Compile Include="PresentationLayer\Models\EmployeePhoneModel.vb" />
     <Compile Include="PresentationLayer\Models\PcClosingJournalModel.vb" />
     <Compile Include="PresentationLayer\Models\PensionRateModel.vb" />
@@ -570,7 +570,7 @@
     <Compile Include="PresentationLayer\Models\LeaveModel.vb" />
     <Compile Include="PresentationLayer\Models\PensionProviderModel.vb" />
     <Compile Include="PresentationLayer\Models\PensionSchemeModel.vb" />
-    <Compile Include="PresentationLayer\Presenters\AccountEvents.vb" />
+    <Compile Include="_Quarantine\UnusedCandidates_2026-08-11\AccountEvents.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\AppSettingPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ApArEmReportPresenter.vb" />
@@ -592,7 +592,7 @@
     <Compile Include="PresentationLayer\Presenters\StockRequestApprovalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\FinancialReportPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DocumentDetailPresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\PresenterHelper.vb" />
+    <Compile Include="_Quarantine\UnusedCandidates_2026-08-11\PresenterHelper.vb" />
     <Compile Include="PresentationLayer\Presenters\ProductFinderPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\InventorySelectorPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\InvTransTypePresenter.vb" />
@@ -1491,10 +1491,10 @@
     <Compile Include="PresentationLayer\Models\GeneralJournalModel.vb" />
     <Compile Include="PresentationLayer\Models\GlLedgerItemModel.vb" />
     <Compile Include="PresentationLayer\Models\JournalItemModel.vb" />
-    <Compile Include="PresentationLayer\Models\MainModel.vb" />
+    <Compile Include="_Quarantine\UnusedCandidates_2026-08-11\MainModel.vb" />
     <Compile Include="PresentationLayer\Models\ProductModel.vb" />
     <Compile Include="PresentationLayer\Models\PurchaseModel.vb" />
-    <Compile Include="PresentationLayer\Models\ReconciledModel.vb" />
+    <Compile Include="_Quarantine\UnusedCandidates_2026-08-11\ReconciledModel.vb" />
     <Compile Include="PresentationLayer\Models\SalesDepositModel.vb" />
     <Compile Include="PresentationLayer\Models\SalesJournalModel.vb" />
     <Compile Include="PresentationLayer\Models\SupplierModel.vb" />
@@ -1513,7 +1513,8 @@
     <Compile Include="PresentationLayer\Presenters\DistributionSchemePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\GeneralJournalItemsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\GeneralJournalPresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\MainPresenter.vb" />
+    <Compile Include="_Quarantine\UnusedCandidates_2026-08-11\MainPresenter.vb" />
+    <Compile Include="_Quarantine\UnusedCandidates_2026-08-11\LabReportStatusDetail.vb" />
     <Compile Include="PresentationLayer\Presenters\PettyCashClosingPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ProductPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\SalesJournalItemPresenter.vb" />

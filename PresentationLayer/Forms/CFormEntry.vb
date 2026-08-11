@@ -40,8 +40,6 @@ Public Class CFormEntry
     Private _displayOnly As Boolean = False
     Private _translatable As Boolean = True
     Private _firstLoadSwitch As UInt16 = 0
-    Private _suppressLanguageChangedNotification As Boolean = False
-    Private _initialLanguageApplied As Boolean = False
     Private _holdInitialRedraw As Boolean = False
     Private _initialRedrawReleaseQueued As Boolean = False
     Private _initialOpacity As Double = 1.0R
@@ -106,7 +104,7 @@ Public Class CFormEntry
         BeginInitialDisplayUpdate()
         Try
             MyBase.OnLoad(e)
-            ApplyInitialLanguageBeforeDisplay()
+            EnsureInitialLanguageApplied()
         Catch
             CompleteInitialDisplayUpdate()
             Throw
@@ -169,25 +167,7 @@ Public Class CFormEntry
         End If
     End Sub
 
-    Private Sub ApplyInitialLanguageBeforeDisplay()
-        If _initialLanguageApplied Then
-            Return
-        End If
-
-        If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
-            If btnArabic.Enabled Then
-                SwitchUiLanguage(False)
-            End If
-        Else
-            If Not btnArabic.Enabled Then
-                SwitchUiLanguage(True)
-            End If
-        End If
-        _initialLanguageApplied = True
-    End Sub
-
     Private Sub OnCFormEntryNewShown() Handles MyBase.Shown
-        ApplyInitialLanguageBeforeDisplay()
         Me.Activate()
         'Dim allCtrl As New List(Of Control)
         'allCtrl = FindControlRecursive(allCtrl, Me)
@@ -198,7 +178,6 @@ Public Class CFormEntry
         '        dgv.MakeGridSearchable()
         '    End If
         'Next
-        FormShown = True
         PublishClickedButton(ButtonClicked.Last)
         SetFormTitleCaption()
         'ResumeDrawing()
@@ -402,14 +381,6 @@ Public Class CFormEntry
 
     Protected Overridable Sub CreateMainFieldsDictionary()
         '
-    End Sub
-
-    Protected Overridable Sub OnTextDisplayLanguageChanged() Handles Me.TextDisplayLanguageChanged
-        CultureInfo.CurrentCulture = New CultureInfo(TextDisplayLanguage, False)
-        'CreateDataSources()
-        If Not _suppressLanguageChangedNotification Then
-            PublishEvent(New LanguageChanged(Me))
-        End If
     End Sub
 
     Protected Sub UpdateNavigationButtonDisplay(editing As Boolean, adding As Boolean, recordPositionNumber As Integer, recordCount As Integer)
@@ -748,7 +719,6 @@ Public Class CFormEntry
         'End If
         If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
             'AddHandler TextDisplayLanguageChanged, AddressOf OnTextDisplayLanguageChanged
-            TextDisplayLanguage = CultureInfo.CurrentCulture.Name
             'CreateDataSources()
             CreateMainFieldsDictionary()
             Dim formLoaded As New EntryFormLoaded(Me)
@@ -783,15 +753,6 @@ Public Class CFormEntry
                 tssNavigator2.Visible = False
                 tssnavigator1.Visible = False
                 btnOf.Visible = False
-            End If
-            If GlobalVariables.RightToLeftLayout Then
-                btnArabic.Visible = False
-                btnOriginal.Visible = True
-                btnOriginal.Enabled = True
-            Else
-                btnArabic.Visible = True
-                btnOriginal.Visible = False
-                btnArabic.Enabled = True
             End If
             If FirstControl IsNot Nothing Then
                 FirstControl.Focus()
@@ -901,65 +862,15 @@ Public Class CFormEntry
         PasteText()
     End Sub
 
-    Protected Overrides Sub SwitchUiLanguage(originalUi As Boolean)
-        If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
-            Dim targetLanguage = If(originalUi,
-                                    GlobalVariables.DefaultUnmirroredCultureInfoStr,
-                                    GlobalVariables.DefaultMirroredCultureInfoStr)
-            Dim languageChanged = Not String.Equals(TextDisplayLanguage,
-                                                    targetLanguage,
-                                                    StringComparison.OrdinalIgnoreCase)
+    Protected Overrides Function ShouldManageLanguageSwitchRendering(context As LanguageSwitchContext) As Boolean
+        Return Not _holdInitialRedraw
+    End Function
 
-            Dim allCtrl As New List(Of Control)
-            FindControlRecursive(allCtrl, Me)
-            Dim manageDrawing = Not _holdInitialRedraw
-            Dim visibilityState As AtomicDisplayVisibilityState
-            Dim renderingSuspended = False
-            If manageDrawing Then
-                visibilityState = HideForAtomicDisplay()
-                renderingSuspended = True
-                SuspendControlTreeRendering(allCtrl)
-            End If
-            Try
-                If languageChanged Then
-                    _suppressLanguageChangedNotification = True
-                    Try
-                        TextDisplayLanguage = targetLanguage
-                    Finally
-                        _suppressLanguageChangedNotification = False
-                    End Try
-                ElseIf Not String.Equals(CultureInfo.CurrentCulture.Name,
-                                         targetLanguage,
-                                         StringComparison.OrdinalIgnoreCase) Then
-                    SetCulture(targetLanguage)
-                End If
-
-                GlobalVariables.RightToLeftLayout = CultureInfo.CurrentCulture.TextInfo.IsRightToLeft
-                Dim desiredRightToLeft = If(GlobalVariables.RightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
-                If MirrorLanguageLayoutNow AndAlso RightToLeft <> desiredRightToLeft Then
-                    RightToLeft = desiredRightToLeft
-                End If
-
-                TranslateForm(allCtrl)
-
-                If languageChanged Then
-                    btnArabic.Visible = originalUi
-                    btnOriginal.Visible = Not originalUi
-                    btnArabic.Enabled = originalUi
-                    btnOriginal.Enabled = Not originalUi
-                    If Ea IsNot Nothing Then
-                        Ea.PublishEvent(New LanguageChanged(Me))
-                    End If
-                End If
-            Finally
-                If manageDrawing Then
-                    If renderingSuspended Then
-                        ResumeControlTreeRendering(allCtrl)
-                    End If
-                    RestoreAfterAtomicDisplay(visibilityState)
-                End If
-            End Try
-        End If
+    Protected Overrides Sub UpdateLanguageSelector(context As LanguageSwitchContext)
+        btnArabic.Visible = context.OriginalUi
+        btnOriginal.Visible = Not context.OriginalUi
+        btnArabic.Enabled = context.OriginalUi
+        btnOriginal.Enabled = Not context.OriginalUi
     End Sub
 
     'Private Sub tsbCurrentRecord_VisibleChanged(sender As Object, e As EventArgs) Handles tsbCurrentRecord.VisibleChanged

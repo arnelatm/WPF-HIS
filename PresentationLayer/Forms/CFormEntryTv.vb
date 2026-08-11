@@ -6,9 +6,9 @@ Public Class CFormEntryTv
     Private Shared ReadOnly DoubleBufferedProperty As PropertyInfo =
         GetType(Control).GetProperty("DoubleBuffered", BindingFlags.Instance Or BindingFlags.NonPublic)
 
-    Protected Overrides ReadOnly Property UseFastLanguageLayoutOnInitialDisplay As Boolean
+    Protected Overrides ReadOnly Property LanguageLayoutMode As LanguageLayoutPolicy
         Get
-            Return True
+            Return LanguageLayoutPolicy.Fast
         End Get
     End Property
 
@@ -57,14 +57,5 @@ Public Class CFormEntryTv
     '    'FormTreeView.ExpandAll()
     '    'GetNSaveCaptions()
     'End Sub
-
-    'Protected Overrides Sub SwitchUiLanguage(originalUi As Boolean)
-    '    MyBase.SwitchUiLanguage(originalUi)
-    '    If Ea IsNot Nothing Then
-    '        Ea.PublishEvent(New LanguageChanged(Me))
-    '    End If
-    'End Sub
-
-
 
 End Class

@@ -31,6 +31,10 @@ Public Class BfMain
     Private _originalFormCaption As String
     Private ReadOnly _originalTabCaptions As New Dictionary(Of TabPage, String)
     Private ReadOnly _originalDataGridViewColumnCaptions As New Dictionary(Of DataGridViewColumn, String)
+    Private _languageInitialized As Boolean
+    Private _languageSwitchInProgress As Boolean
+    Private _captionTranslationService As IFormCaptionTranslationService = New DefaultFormCaptionTranslationService()
+    Private _languageLayoutService As IFormLanguageLayoutService = New DefaultFormLanguageLayoutService()
 
     'Private _myPresenter As UserPresenter
     Protected CaptionCollection As New Collection
@@ -50,23 +54,43 @@ Public Class BfMain
 
     Public Event BeforeLoad()
 
-    Protected Overridable ReadOnly Property MirrorLayoutWhenSwitchingLanguage As Boolean
+    Protected Overridable ReadOnly Property LanguageLayoutMode As LanguageLayoutPolicy
         Get
-            Return False
-        End Get
-    End Property
-
-    Protected Overridable ReadOnly Property UseFastLanguageLayoutOnInitialDisplay As Boolean
-        Get
-            Return False
+            Return LanguageLayoutPolicy.FullInitialThenFast
         End Get
     End Property
 
     Protected ReadOnly Property MirrorLanguageLayoutNow As Boolean
         Get
-            Return MirrorLayoutWhenSwitchingLanguage OrElse
-                   (Not FormShown AndAlso Not UseFastLanguageLayoutOnInitialDisplay)
+            Select Case LanguageLayoutMode
+                Case LanguageLayoutPolicy.AlwaysFull
+                    Return True
+                Case LanguageLayoutPolicy.FullInitialThenFast
+                    Return Not FormShown
+                Case Else
+                    Return False
+            End Select
         End Get
+    End Property
+
+    Protected Property CaptionTranslationService As IFormCaptionTranslationService
+        Get
+            Return _captionTranslationService
+        End Get
+        Set(value As IFormCaptionTranslationService)
+            If value Is Nothing Then Throw New ArgumentNullException(NameOf(value))
+            _captionTranslationService = value
+        End Set
+    End Property
+
+    Protected Property LanguageLayoutService As IFormLanguageLayoutService
+        Get
+            Return _languageLayoutService
+        End Get
+        Set(value As IFormLanguageLayoutService)
+            If value Is Nothing Then Throw New ArgumentNullException(NameOf(value))
+            _languageLayoutService = value
+        End Set
     End Property
 
     Public Sub New()
@@ -199,26 +223,32 @@ Public Class BfMain
     End Function
 
     Private Sub OnCFormEntryNewShown() Handles MyBase.Shown
-        ' CFormEntry owns language initialization for entry forms. Running it here as
-        ' well creates two competing Shown-time translation passes.
-        If TypeOf Me Is CFormEntry Then
-            Return
-        End If
-
-        'SuspendDrawing()
-        If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
-            SwitchUiLanguage(False)
-        Else
-            SwitchUiLanguage(True)
-        End If
+        EnsureInitialLanguageApplied()
         Me.Activate()
-        Dim allCtrl As New List(Of Control)
-        allCtrl = FindControlRecursive(allCtrl, Me)
-        'ResumeDrawing()
         FormShown = True
     End Sub
 
-    Protected Overridable Sub SwitchUiLanguage(originalUi As Boolean)
+    Protected Sub EnsureInitialLanguageApplied()
+        If _languageInitialized OrElse
+           LicenseManager.UsageMode = LicenseUsageMode.Designtime Then
+            Return
+        End If
+
+        _languageInitialized = True
+        Try
+            SwitchUiLanguage(Not CultureInfo.CurrentCulture.TextInfo.IsRightToLeft)
+        Catch
+            _languageInitialized = False
+            Throw
+        End Try
+    End Sub
+
+    Protected Sub SwitchUiLanguage(originalUi As Boolean)
+        If LicenseManager.UsageMode = LicenseUsageMode.Designtime OrElse
+           _languageSwitchInProgress Then
+            Return
+        End If
+
         Dim targetLanguage = If(originalUi,
                                 GlobalVariables.DefaultUnmirroredCultureInfoStr,
                                 GlobalVariables.DefaultMirroredCultureInfoStr)
@@ -228,10 +258,25 @@ Public Class BfMain
 
         Dim allCtrl As New List(Of Control)
         FindControlRecursive(allCtrl, Me)
-        Dim visibilityState = HideForAtomicDisplay()
-        Dim renderingSuspended = True
+        Dim targetCulture = New CultureInfo(targetLanguage, False)
+        Dim context = New LanguageSwitchContext(originalUi,
+                                                targetLanguage,
+                                                targetCulture,
+                                                languageChanged,
+                                                Not FormShown,
+                                                allCtrl)
+        Dim manageRendering = ShouldManageLanguageSwitchRendering(context)
+        Dim visibilityState As AtomicDisplayVisibilityState
+        Dim renderingSuspended = False
+        _languageSwitchInProgress = True
         Try
-            SuspendControlTreeRendering(allCtrl)
+            If manageRendering Then
+                visibilityState = HideForAtomicDisplay()
+                SuspendControlTreeRendering(allCtrl)
+                renderingSuspended = True
+            End If
+
+            OnBeforeLanguageSwitch(context)
             If languageChanged Then
                 TextDisplayLanguage = targetLanguage
             ElseIf Not String.Equals(CultureInfo.CurrentCulture.Name,
@@ -247,6 +292,11 @@ Public Class BfMain
             End If
 
             TranslateForm(allCtrl)
+            UpdateLanguageSelector(context)
+            OnAfterLanguageSwitch(context)
+            If Not FormShown Then
+                _languageInitialized = True
+            End If
 
             If languageChanged AndAlso Ea IsNot Nothing Then
                 Ea.PublishEvent(New LanguageChanged(Me))
@@ -255,17 +305,27 @@ Public Class BfMain
             If renderingSuspended Then
                 ResumeControlTreeRendering(allCtrl)
             End If
-            RestoreAfterAtomicDisplay(visibilityState)
+            If manageRendering Then
+                RestoreAfterAtomicDisplay(visibilityState)
+            End If
+            _languageSwitchInProgress = False
         End Try
     End Sub
 
-    Public Sub TranslateForm()
-        Dim allCtrl As New List(Of Control)
-        FindControlRecursive(allCtrl, Me)
-        TranslateForm(allCtrl)
+    Protected Overridable Function ShouldManageLanguageSwitchRendering(context As LanguageSwitchContext) As Boolean
+        Return True
+    End Function
+
+    Protected Overridable Sub OnBeforeLanguageSwitch(context As LanguageSwitchContext)
     End Sub
 
-    Protected Sub TranslateForm(ByRef allCtrl As List(Of Control))
+    Protected Overridable Sub OnAfterLanguageSwitch(context As LanguageSwitchContext)
+    End Sub
+
+    Protected Overridable Sub UpdateLanguageSelector(context As LanguageSwitchContext)
+    End Sub
+
+    Private Sub TranslateForm(ByRef allCtrl As List(Of Control))
         If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
             'SuspendDrawing()
             Dim settings As New SettingsSaver
@@ -274,14 +334,22 @@ Public Class BfMain
             ' form location is being changed when Resetting RightToLeftLayout so need to save values
             ' to restore form with the same size and location
             DoubleBuffered = True
-            TranslateCaptions(allCtrl, TextDisplayLanguage)
-            SetControlLayout(allCtrl)
+            CaptionTranslationService.Translate(Me, allCtrl, TextDisplayLanguage)
+            LanguageLayoutService.Apply(Me, allCtrl)
             settings.RestoreSetting(Me)
             'ResumeDrawing()
             If GlobalVariables.TranslationMode Then
                 RaiseEvent AfterTranslateForm()
             End If
         End If
+    End Sub
+
+    Friend Sub TranslateCaptionsFromService(allCtrl As List(Of Control), targetLanguage As String)
+        TranslateCaptions(allCtrl, targetLanguage)
+    End Sub
+
+    Friend Sub ApplyLanguageLayoutFromService(allCtrl As List(Of Control))
+        SetControlLayout(allCtrl)
     End Sub
 
     Protected Sub SuspendControlTreeRendering(ByVal allCtrl As List(Of Control))
@@ -387,6 +455,10 @@ Public Class BfMain
     End Sub
 
     Protected Sub SetControlLayout(ByRef allCtrl As List(Of Control))
+        If LanguageLayoutMode = LanguageLayoutPolicy.Fixed Then
+            Return
+        End If
+
         Dim myImage As Bitmap
         myImage = BackgroundImage
         BackgroundImage = Nothing

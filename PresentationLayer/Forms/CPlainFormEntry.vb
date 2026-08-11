@@ -466,12 +466,6 @@ Public Class CPlainFormEntry
     End Sub
 
     Protected Overridable Sub OnTextDisplayLanguageChanged() Handles Me.TextDisplayLanguageChanged
-        CultureInfo.CurrentCulture = New CultureInfo(TextDisplayLanguage, False)
-        If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
-            GlobalVariables.RightToLeftLayout = True
-        Else
-            GlobalVariables.RightToLeftLayout = False
-        End If
         CreateDataSources()
     End Sub
 
@@ -1020,22 +1014,20 @@ Public Class CPlainFormEntry
         End If
     End Sub
 
-    Private Sub SwitchUiLanguage(originalUi As Boolean)
-        If _debugSwitch Then
-            Debugger.Break()
+    Protected Overrides Sub UpdateLanguageSelector(context As LanguageSwitchContext)
+        btnArabic.Visible = context.OriginalUi
+        btnOriginal.Visible = Not context.OriginalUi
+    End Sub
+
+    Protected Overrides Sub OnAfterLanguageSwitch(context As LanguageSwitchContext)
+        If context.IsInitialDisplay OrElse PresenterObj Is Nothing Then
+            Return
         End If
-        If originalUi Then
-            TextDisplayLanguage = GlobalVariables.DefaultUnmirroredCultureInfoStr
-        Else
-            TextDisplayLanguage = GlobalVariables.DefaultMirroredCultureInfoStr
-        End If
-        TranslateForm()
+
         UpdateRecordCounter()
         If PresenterObj.EditMode Or PresenterObj.AddMode Then
             PresenterObj.Undo()
         End If
-        btnArabic.Visible = originalUi
-        btnOriginal.Visible = Not originalUi
         PresenterObj.UpdateViewDisplay(PresenterObj.TargetIdNo)
     End Sub
 

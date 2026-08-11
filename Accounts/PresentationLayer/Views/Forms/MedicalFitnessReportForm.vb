@@ -11,9 +11,9 @@ Namespace PresentationLayer.Views.Forms
         Inherits AATM.PresentationLayer.Forms.CFormBase
         Implements IMedicalFitnessReportView
 
-        Protected Overrides ReadOnly Property UseFastLanguageLayoutOnInitialDisplay As Boolean
+        Protected Overrides ReadOnly Property LanguageLayoutMode As AATM.PresentationLayer.Forms.LanguageLayoutPolicy
             Get
-                Return True
+                Return AATM.PresentationLayer.Forms.LanguageLayoutPolicy.Fast
             End Get
         End Property
 

@@ -147,12 +147,6 @@ Public Class CFormBase
         '
     End Sub
 
-    Protected Overridable Sub OnTextDisplayLanguageChanged() Handles Me.TextDisplayLanguageChanged
-        CultureInfo.CurrentCulture = New CultureInfo(TextDisplayLanguage, False)
-        'CreateDataSources()
-        PublishEvent(New LanguageChanged(Me))
-    End Sub
-
     Protected Sub UpdateNavigationButtonDisplay(editing As Boolean, adding As Boolean, recordPositionNumber As Integer, recordCount As Integer)
         If SingleData Or QueryOnly Then
             HideNavigatorButtons = True
@@ -347,22 +341,12 @@ Public Class CFormBase
         '    _firstLoadSwitch = 1
         'End If
         If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
-            TextDisplayLanguage = CultureInfo.CurrentCulture.Name
             'CreateDataSources()
             CreateMainFieldsDictionary()
             If Ea IsNot Nothing Then
                 Ea.PublishEvent(New EntryFormLoaded(Me))
             End If
             Inputs(False)
-            If GlobalVariables.RightToLeftLayout Then
-                btnArabic.Visible = False
-                btnOriginal.Visible = True
-                btnOriginal.Enabled = True
-            Else
-                btnArabic.Visible = True
-                btnOriginal.Visible = False
-                btnArabic.Enabled = True
-            End If
             If FirstControl IsNot Nothing Then
                 FirstControl.Focus()
             End If
@@ -444,12 +428,11 @@ Public Class CFormBase
         PasteText()
     End Sub
 
-    Protected Overrides Sub SwitchUiLanguage(originalUi As Boolean)
-        MyBase.SwitchUiLanguage(originalUi)
-        btnArabic.Visible = originalUi
-        btnOriginal.Visible = Not originalUi
-        btnArabic.Enabled = originalUi
-        btnOriginal.Enabled = Not originalUi
+    Protected Overrides Sub UpdateLanguageSelector(context As LanguageSwitchContext)
+        btnArabic.Visible = context.OriginalUi
+        btnOriginal.Visible = Not context.OriginalUi
+        btnArabic.Enabled = context.OriginalUi
+        btnOriginal.Enabled = Not context.OriginalUi
     End Sub
 
 End Class

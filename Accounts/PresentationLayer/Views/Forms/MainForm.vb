@@ -39,11 +39,18 @@ Namespace PresentationLayer.Views.Forms
     Partial Public Class MainForm
         Implements IUserView
 
-        Protected Overrides ReadOnly Property MirrorLayoutWhenSwitchingLanguage As Boolean
+        Protected Overrides ReadOnly Property LanguageLayoutMode As LanguageLayoutPolicy
             Get
-                Return True
+                Return LanguageLayoutPolicy.AlwaysFull
             End Get
         End Property
+
+        Protected Overrides Sub UpdateLanguageSelector(context As LanguageSwitchContext)
+            ToolStripButtonArabic.Visible = Not context.IsRightToLeft
+            ToolStripButtonArabic.Enabled = True
+            ToolStripButtonEnglish.Visible = context.IsRightToLeft
+            ToolStripButtonEnglish.Enabled = True
+        End Sub
 
         Public IdleTimer As New System.Windows.Forms.Timer()
         Const MinuteMicroseconds As Integer = 10000
@@ -71,11 +78,6 @@ Namespace PresentationLayer.Views.Forms
                 GlobalFunctions.SetCulture(GlobalVariables.AppCultureInfo.ToString())
                 GlobalVariables.AppCultureInfo = CultureInfo.CurrentCulture
                 GlobalVariables.AppCurrentCultureInfo = CultureInfo.CurrentCulture
-                If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
-                    GlobalVariables.RightToLeftLayout = True
-                Else
-                    GlobalVariables.RightToLeftLayout = False
-                End If
                 SetLanguageChangeButtons()
                 SetupMapper()
                 Presenter = New UserPresenter(Of UserModel)(Me)
@@ -578,17 +580,6 @@ Namespace PresentationLayer.Views.Forms
 
 #End Region
 
-        'Protected Sub SwitchUiLanguage(originalUi As Boolean)
-        '    If originalUi Then
-        '        TextDisplayLanguage = GlobalVariables.DefaultUnmirroredCultureInfoStr
-        '    Else
-        '        TextDisplayLanguage = GlobalVariables.DefaultMirroredCultureInfoStr
-        '    End If
-        '    TranslateForm()
-        '    ToolStripButtonEnglish.Visible = Not originalUi
-        '    ToolStripButtonArabic.Visible = originalUi
-        'End Sub
-
         Private Sub AddChildMenuSecurityObjects(dropDownItems As ToolStripItemCollection, pParentMenuName As String, pParentIdNo As Int32)
             Dim parentIdNo As Int32
             For Each dropDownItem As Object In dropDownItems
@@ -683,8 +674,6 @@ Namespace PresentationLayer.Views.Forms
             Dim mySettings = AppSettings.Load()
             Dim mirroredLanguage = My.Settings.MirroredLanguage
             If mirroredLanguage Then
-                GlobalFunctions.SetCulture(GlobalVariables.DefaultMirroredCultureInfoStr)
-                SetLanguageChangeButtons()
                 SwitchUiLanguage(False)
             End If
             '_appSettings = PropertyGrid.SelectedObject
@@ -713,8 +702,6 @@ Namespace PresentationLayer.Views.Forms
                     If LogStatus = LoginStatus.LoggedIn Then
                         Dim mirroredLanguage = My.Settings.MirroredLanguage
                         If mirroredLanguage Then
-                            GlobalFunctions.SetCulture(GlobalVariables.DefaultMirroredCultureInfoStr)
-                            SetLanguageChangeButtons()
                             SwitchUiLanguage(False)
                         End If
                     End If
@@ -865,11 +852,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripButtonLTR_Click(sender As Object, e As EventArgs) Handles ToolStripButtonEnglish.Click
-            'If GlobalVariables.RightToLeftLayout Then
-            GlobalVariables.RightToLeftLayout = False
-            'End If
             SwitchUiLanguage(True)
-            SetLanguageChangeButtons()
             'ToolStripButtonArabic.Visible = True
             'ToolStripButtonArabic.Enabled = True
             'ToolStripButtonEnglish.Visible = False
@@ -877,11 +860,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripButtonRTL_Click(sender As Object, e As EventArgs) Handles ToolStripButtonArabic.Click
-            'If Not GlobalVariables.RightToLeftLayout Then
-            GlobalVariables.RightToLeftLayout = True
-            'End If
             SwitchUiLanguage(False)
-            SetLanguageChangeButtons()
             'ToolStripButtonArabic.Visible = False
             'ToolStripButtonArabic.Enabled = False
             'ToolStripButtonEnglish.Visible = True

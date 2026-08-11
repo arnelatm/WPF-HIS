@@ -247,10 +247,10 @@
     <Compile Include="PresentationLayer\Views\Forms\BranchEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\CommonForm.Designer.vb">
+    <Compile Include="_Quarantine\UnusedCandidates_2026-08-11\CommonForm.Designer.vb">
       <DependentUpon>CommonForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\CommonForm.vb">
+    <Compile Include="_Quarantine\UnusedCandidates_2026-08-11\CommonForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\ReportGroupEntry.Designer.vb">
