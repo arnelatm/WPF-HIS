@@ -208,101 +208,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IGroup", "IGroup", "{295B8E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reports", "Reports", "{56B69066-4EA7-454D-BE37-C492DD319E9C}"
 	ProjectSection(SolutionItems) = preProject
-		IGroup\Reports\BarcodeLabSample.rpt = IGroup\Reports\BarcodeLabSample.rpt
-		IGroup\Reports\BarcodeLabSamplePrinting.rpt = IGroup\Reports\BarcodeLabSamplePrinting.rpt
-		IGroup\Reports\BarcodePharmacy.rpt = IGroup\Reports\BarcodePharmacy.rpt
-		IGroup\Reports\ClinicBillPrint.rpt = IGroup\Reports\ClinicBillPrint.rpt
-		IGroup\Reports\ClinicBillPrintDC.rpt = IGroup\Reports\ClinicBillPrintDC.rpt
-		IGroup\Reports\ClinicBillPrintTest.rpt = IGroup\Reports\ClinicBillPrintTest.rpt
-		IGroup\Reports\ClinicDailyReceptionInvoiceOld.rpt = IGroup\Reports\ClinicDailyReceptionInvoiceOld.rpt
-		IGroup\Reports\ClinicDoctorWiseTimeFrame Original Copy.rpt = IGroup\Reports\ClinicDoctorWiseTimeFrame Original Copy.rpt
-		IGroup\Reports\ClinicDoctorWiseTimeFrameTrial.rpt = IGroup\Reports\ClinicDoctorWiseTimeFrameTrial.rpt
-		IGroup\Reports\ClinicIBCombinedUserWiseSummaryTest.rpt = IGroup\Reports\ClinicIBCombinedUserWiseSummaryTest.rpt
-		IGroup\Reports\ClinicPatientProfile.rpt = IGroup\Reports\ClinicPatientProfile.rpt
-		IGroup\Reports\ClinicServiceWiseSalesHistory.rpt = IGroup\Reports\ClinicServiceWiseSalesHistory.rpt
 		IGroup\Reports\CoLogo.jpg = IGroup\Reports\CoLogo.jpg
-		IGroup\Reports\CombinedSummaryStatementDateWise Latest.rpt = IGroup\Reports\CombinedSummaryStatementDateWise Latest.rpt
-		IGroup\Reports\CombinedSummaryStatementDateWise Old.rpt = IGroup\Reports\CombinedSummaryStatementDateWise Old.rpt
-		IGroup\Reports\CombinedSummaryStatementDateWise Summary Latest.rpt = IGroup\Reports\CombinedSummaryStatementDateWise Summary Latest.rpt
-		IGroup\Reports\CombinedSummaryStatementDateWiseOld.rpt = IGroup\Reports\CombinedSummaryStatementDateWiseOld.rpt
-		IGroup\Reports\CombinedSummaryStatementDateWiseTest.rpt = IGroup\Reports\CombinedSummaryStatementDateWiseTest.rpt
-		IGroup\Reports\CompanyInvoice.rpt = IGroup\Reports\CompanyInvoice.rpt
-		IGroup\Reports\CreditCoMonthlySubmission.rpt = IGroup\Reports\CreditCoMonthlySubmission.rpt
-		IGroup\Reports\CreditCoMonthlySubmissionTest.rpt = IGroup\Reports\CreditCoMonthlySubmissionTest.rpt
-		IGroup\Reports\CreditCoMonthlySubmissionTransferredToDeleted.rpt = IGroup\Reports\CreditCoMonthlySubmissionTransferredToDeleted.rpt
-		IGroup\Reports\DCBillPrint Original Latest Copy.rpt = IGroup\Reports\DCBillPrint Original Latest Copy.rpt
-		IGroup\Reports\DCBillPrint Original No Print Time.rpt = IGroup\Reports\DCBillPrint Original No Print Time.rpt
-		IGroup\Reports\DCBillPrint.rpt = IGroup\Reports\DCBillPrint.rpt
-		IGroup\Reports\DCBillPrintGroup.rpt = IGroup\Reports\DCBillPrintGroup.rpt
-		IGroup\Reports\DCBillPrintIbnSinaPolyclinic.rpt = IGroup\Reports\DCBillPrintIbnSinaPolyclinic.rpt
 		IGroup\Reports\DCHealthCardForm.rptorig = IGroup\Reports\DCHealthCardForm.rptorig
-		IGroup\Reports\DCIqamaForm.rpt = IGroup\Reports\DCIqamaForm.rpt
 		IGroup\Reports\DCIqamaForm.rpt2 = IGroup\Reports\DCIqamaForm.rpt2
 		IGroup\Reports\DCIqamaForm.rptnew = IGroup\Reports\DCIqamaForm.rptnew
-		IGroup\Reports\DCMedicalReportFormBackup.rpt = IGroup\Reports\DCMedicalReportFormBackup.rpt
-		IGroup\Reports\DCMedicalReportFormOriginal.rpt = IGroup\Reports\DCMedicalReportFormOriginal.rpt
-		IGroup\Reports\Diagnostic Test Summary.rpt = IGroup\Reports\Diagnostic Test Summary.rpt
-		IGroup\Reports\DoctorsDailyIncomeReport old.rpt = IGroup\Reports\DoctorsDailyIncomeReport old.rpt
-		IGroup\Reports\ExpiryListOriginal.rpt = IGroup\Reports\ExpiryListOriginal.rpt
-		IGroup\Reports\ExpiryListPeriodicOriginal.rpt = IGroup\Reports\ExpiryListPeriodicOriginal.rpt
-		IGroup\Reports\HR Employee Info Testing Only.rpt = IGroup\Reports\HR Employee Info Testing Only.rpt
-		IGroup\Reports\HR Employee Info.rpt = IGroup\Reports\HR Employee Info.rpt
-		IGroup\Reports\HREmployeeList Old.rpt = IGroup\Reports\HREmployeeList Old.rpt
-		IGroup\Reports\IBClinicServiceWiseSalesHistory.rpt = IGroup\Reports\IBClinicServiceWiseSalesHistory.rpt
-		IGroup\Reports\IBCombinedUserWiseSummaryStatementTest.rpt = IGroup\Reports\IBCombinedUserWiseSummaryStatementTest.rpt
-		IGroup\Reports\IBEditingVatAdjustment.rpt = IGroup\Reports\IBEditingVatAdjustment.rpt
-		IGroup\Reports\IBFoodDeliverySummary.rpt = IGroup\Reports\IBFoodDeliverySummary.rpt
-		IGroup\Reports\IBLabSamplePrinting.rpt = IGroup\Reports\IBLabSamplePrinting.rpt
-		IGroup\Reports\IBLabSamplePrintingOriginal - Copy.rpt = IGroup\Reports\IBLabSamplePrintingOriginal - Copy.rpt
-		IGroup\Reports\IBLabSamplePrintingOriginal.rpt = IGroup\Reports\IBLabSamplePrintingOriginal.rpt
-		IGroup\Reports\IBLabSamplePrintingTest.rpt = IGroup\Reports\IBLabSamplePrintingTest.rpt
 		IGroup\Reports\Ibn Sina Logo New with arabic - Copy.jpg = IGroup\Reports\Ibn Sina Logo New with arabic - Copy.jpg
 		IGroup\Reports\Ibn Sina Logo New with arabic.jpg = IGroup\Reports\Ibn Sina Logo New with arabic.jpg
-		IGroup\Reports\IBSalesManSummaryTest.rpt = IGroup\Reports\IBSalesManSummaryTest.rpt
-		IGroup\Reports\Injection Consumption (based on invoice items).rpt = IGroup\Reports\Injection Consumption (based on invoice items).rpt
-		IGroup\Reports\Inventory Report for a specified Ending Date Pharmacy.rpt = IGroup\Reports\Inventory Report for a specified Ending Date Pharmacy.rpt
-		IGroup\Reports\Laboratory Tests Done for a given Period.rpt = IGroup\Reports\Laboratory Tests Done for a given Period.rpt
 		IGroup\Reports\Logo.jpg = IGroup\Reports\Logo.jpg
-		IGroup\Reports\MOH IB Report Final - Copy.rpt = IGroup\Reports\MOH IB Report Final - Copy.rpt
-		IGroup\Reports\MOH IB Report Final.rpt = IGroup\Reports\MOH IB Report Final.rpt
-		IGroup\Reports\MOH Report Final per doctor.rpt = IGroup\Reports\MOH Report Final per doctor.rpt
-		IGroup\Reports\MOH Report Final.rpt = IGroup\Reports\MOH Report Final.rpt
-		IGroup\Reports\No of Consultation & Followup Service per Doctor.rpt = IGroup\Reports\No of Consultation & Followup Service per Doctor.rpt
-		IGroup\Reports\No of Diagnosis Services per Day.rpt = IGroup\Reports\No of Diagnosis Services per Day.rpt
-		IGroup\Reports\No of Diagnosis Services per Month.rpt = IGroup\Reports\No of Diagnosis Services per Month.rpt
-		IGroup\Reports\No of Iqama-Baladiya Services per Month.rpt = IGroup\Reports\No of Iqama-Baladiya Services per Month.rpt
-		IGroup\Reports\No of Lab-Xray services-patients per Month per clinic.rpt = IGroup\Reports\No of Lab-Xray services-patients per Month per clinic.rpt
-		IGroup\Reports\No of New Patients Consultation & Followup Service per Doctor.rpt = IGroup\Reports\No of New Patients Consultation & Followup Service per Doctor.rpt
-		IGroup\Reports\No of New Patients Per week Per Month Doctor.rpt = IGroup\Reports\No of New Patients Per week Per Month Doctor.rpt
-		IGroup\Reports\No of Patients Consultation & Followup Service per Doctor.rpt = IGroup\Reports\No of Patients Consultation & Followup Service per Doctor.rpt
-		IGroup\Reports\No of services per Month per clinic.rpt = IGroup\Reports\No of services per Month per clinic.rpt
-		IGroup\Reports\No of services per Month per single clinic.rpt = IGroup\Reports\No of services per Month per single clinic.rpt
-		IGroup\Reports\No of services-invoice per Month per clinic.rpt = IGroup\Reports\No of services-invoice per Month per clinic.rpt
-		IGroup\Reports\No of services-invoice per Month Single Doctor.rpt = IGroup\Reports\No of services-invoice per Month Single Doctor.rpt
-		IGroup\Reports\No of services-patients per Month per clinic.rpt = IGroup\Reports\No of services-patients per Month per clinic.rpt
-		IGroup\Reports\No of services-patients per Month Single Doctor.rpt = IGroup\Reports\No of services-patients per Month Single Doctor.rpt
-		IGroup\Reports\No of services-patients per Month Single Doctorrpt.rpt = IGroup\Reports\No of services-patients per Month Single Doctorrpt.rpt
-		IGroup\Reports\PatientCaseSheet.rpt = IGroup\Reports\PatientCaseSheet.rpt
-		IGroup\Reports\PatientCaseSheetOrig.rpt = IGroup\Reports\PatientCaseSheetOrig.rpt
-		IGroup\Reports\PharmacyDailySalesInvoice - Copy.rpt = IGroup\Reports\PharmacyDailySalesInvoice - Copy.rpt
-		IGroup\Reports\PharmacyInvoicePrintBig.rpt = IGroup\Reports\PharmacyInvoicePrintBig.rpt
 		IGroup\Reports\PhoneNumbersArabic.JPG = IGroup\Reports\PhoneNumbersArabic.JPG
-		IGroup\Reports\PMRLaboratoryTestRequest.rpt = IGroup\Reports\PMRLaboratoryTestRequest.rpt
-		IGroup\Reports\PMRPatientProfile.rpt = IGroup\Reports\PMRPatientProfile.rpt
-		IGroup\Reports\PMRPatientProfileNewTest.rpt = IGroup\Reports\PMRPatientProfileNewTest.rpt
-		IGroup\Reports\PMRPatientProfileOriginalOld.rpt = IGroup\Reports\PMRPatientProfileOriginalOld.rpt
-		IGroup\Reports\PMRPatientProfileTest.rpt = IGroup\Reports\PMRPatientProfileTest.rpt
-		IGroup\Reports\PMRPharmacyMedicinePrescription.rpt = IGroup\Reports\PMRPharmacyMedicinePrescription.rpt
-		IGroup\Reports\PMRUcafTest.rpt = IGroup\Reports\PMRUcafTest.rpt
-		IGroup\Reports\PurchaseSummaryClinic.rpt = IGroup\Reports\PurchaseSummaryClinic.rpt
-		IGroup\Reports\PurchaseSummaryReport.rpt = IGroup\Reports\PurchaseSummaryReport.rpt
-		IGroup\Reports\QrCodeTest.rpt = IGroup\Reports\QrCodeTest.rpt
-		IGroup\Reports\Report1.rpt = IGroup\Reports\Report1.rpt
-		IGroup\Reports\Stock Consumption Average Cost Method.rpt = IGroup\Reports\Stock Consumption Average Cost Method.rpt
-		IGroup\Reports\Stock Consumption AverageCost.rpt = IGroup\Reports\Stock Consumption AverageCost.rpt
-		IGroup\Reports\Stock Consumption Final.rpt = IGroup\Reports\Stock Consumption Final.rpt
-		IGroup\Reports\Stock Consumption New Test.rpt = IGroup\Reports\Stock Consumption New Test.rpt
-		IGroup\Reports\Stock Consumption New.rpt = IGroup\Reports\Stock Consumption New.rpt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BioTime", "BioTime", "{3B9C15A8-3A4B-450A-B72A-195E4D8386B5}"
@@ -331,52 +244,30 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Accounts", "Accounts", "{47
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ISP", "ISP", "{76360FEE-5350-4B1E-80DC-344F996590C2}"
 	ProjectSection(SolutionItems) = preProject
-		IGroup\Reports\ISP\ATM-Cash Income Summary Statement Per Month Post Final Summary Per Department per ServiceTest.rpt = IGroup\Reports\ISP\ATM-Cash Income Summary Statement Per Month Post Final Summary Per Department per ServiceTest.rpt
-		IGroup\Reports\ISP\ATM-ClinicDailyReceptionInvoiceSummaryTest.rpt = IGroup\Reports\ISP\ATM-ClinicDailyReceptionInvoiceSummaryTest.rpt
-		IGroup\Reports\ISP\ATM-IBCombinedUserWiseSummaryStatementTest.rpt = IGroup\Reports\ISP\ATM-IBCombinedUserWiseSummaryStatementTest.rpt
-		IGroup\Reports\ISP\TEST.rpt = IGroup\Reports\ISP\TEST.rpt
-		IGroup\Reports\ISP\test2.rpt = IGroup\Reports\ISP\test2.rpt
-		IGroup\Reports\ISP\trial.rpt = IGroup\Reports\ISP\trial.rpt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mine", "Mine", "{549000D0-E128-4B80-AEDA-C6AF4FCC2989}"
 	ProjectSection(SolutionItems) = preProject
-		IGroup\Reports\Mine\ClinicDailyReceptionInvoice (2).rpt = IGroup\Reports\Mine\ClinicDailyReceptionInvoice (2).rpt
-		IGroup\Reports\Mine\Medical Services Price List.rpt = IGroup\Reports\Mine\Medical Services Price List.rpt
-		IGroup\Reports\Mine\PharmacyDailySalesInvoice (2).rpt = IGroup\Reports\Mine\PharmacyDailySalesInvoice (2).rpt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Posting", "Posting", "{97BC084A-8046-4C51-94FB-D9B89535C87C}"
 	ProjectSection(SolutionItems) = preProject
-		IGroup\Reports\Posting\Credit Income Summary per Cost Center per Department per Company Small Font Trial.rpt = IGroup\Reports\Posting\Credit Income Summary per Cost Center per Department per Company Small Font Trial.rpt
-		IGroup\Reports\Posting\Credit Income Summary per Cost Center per Department per Company.rpt = IGroup\Reports\Posting\Credit Income Summary per Cost Center per Department per Company.rpt
-		IGroup\Reports\Posting\test.rpt = IGroup\Reports\Posting\test.rpt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RevenuePosting", "RevenuePosting", "{8C611AC8-B043-492B-AD3D-4D8B7EE334D7}"
 	ProjectSection(SolutionItems) = preProject
-		IGroup\Reports\RevenuePosting\Combined Total Income per Company Cost Center.rpt = IGroup\Reports\RevenuePosting\Combined Total Income per Company Cost Center.rpt
-		IGroup\Reports\RevenuePosting\test.rpt = IGroup\Reports\RevenuePosting\test.rpt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SamplePrintingLab", "SamplePrintingLab", "{491C1CC5-C518-4078-A3EE-9A781C4D4989}"
 	ProjectSection(SolutionItems) = preProject
-		IGroup\Reports\SamplePrintingLab\BarcodeLabSamplePrinting.rpt = IGroup\Reports\SamplePrintingLab\BarcodeLabSamplePrinting.rpt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Vat", "Vat", "{C90D3B3E-01F4-401D-8649-0563028668C7}"
 	ProjectSection(SolutionItems) = preProject
-		IGroup\Reports\Vat\01-Simplified Combined Total Income & Vat Summary Report All Tester.rpt = IGroup\Reports\Vat\01-Simplified Combined Total Income & Vat Summary Report All Tester.rpt
-		IGroup\Reports\Vat\01-Simplified Combined Total Income & Vat Summary Report All.rpt = IGroup\Reports\Vat\01-Simplified Combined Total Income & Vat Summary Report All.rpt
-		IGroup\Reports\Vat\02-Total Output VAT Report Detailed.rpt = IGroup\Reports\Vat\02-Total Output VAT Report Detailed.rpt
-		IGroup\Reports\Vat\02-Total Output VAT Report Summary.rpt = IGroup\Reports\Vat\02-Total Output VAT Report Summary.rpt
-		IGroup\Reports\Vat\03-Total Purchases Report Detailed.rpt = IGroup\Reports\Vat\03-Total Purchases Report Detailed.rpt
-		IGroup\Reports\Vat\03-Total Purchases Report Summary.rpt = IGroup\Reports\Vat\03-Total Purchases Report Summary.rpt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Vat New", "Vat New", "{2CC5D6D4-CEA0-4991-8859-559BDF3FC1C4}"
 	ProjectSection(SolutionItems) = preProject
-		IGroup\Reports\Vat\Vat New\01-Simplified Combined Total Income & Vat Summary Report All.rpt = IGroup\Reports\Vat\Vat New\01-Simplified Combined Total Income & Vat Summary Report All.rpt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Final", "Final", "{B721D695-0745-49EA-9FED-FF713FBE7792}"
