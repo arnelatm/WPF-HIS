@@ -17,6 +17,8 @@ Namespace Interfaces
 
         Event UncheckAllEvent(propertyName As String)
 
+        Event GroupAccessChanged(groupAccess As GroupAccessView, propertyName As String, value As Boolean)
+
     End Interface
 
 End Namespace

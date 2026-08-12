@@ -2,7 +2,6 @@
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Events
 Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Views
 Imports AATM.PresentationLayer.Views.Interfaces
@@ -10,7 +9,6 @@ Imports AATM.ServicesLayer.Services
 
 Public Class SecurityGroupPresenter(Of TM As New)
     Inherits Presenter(Of ISecurityGroupView, TM)
-    Implements ISubscriber(Of DgvItemsChanged)
 
     Protected DtInsertTable As New DataTable
     Protected DtUpdateTable As New DataTable
@@ -41,6 +39,7 @@ Public Class SecurityGroupPresenter(Of TM As New)
 
         AddHandler View.CheckAllEvent, AddressOf OnCheckAllHandler
         AddHandler View.UncheckAllEvent, AddressOf OnUnCheckAllHandler
+        AddHandler View.GroupAccessChanged, AddressOf OnGroupAccessChanged
 
     End Sub
 
@@ -103,44 +102,56 @@ Public Class SecurityGroupPresenter(Of TM As New)
         Next
     End Sub
 
-    Public Sub ProcessChildren(index As Integer, visibleColumn As Boolean)
-        Dim key = View.GroupAccesses(index).SecurityObjectName
-        Dim keyLength = Len(key)
-        Dim visible = View.GroupAccesses(index).Visible
-        Dim editable = View.GroupAccesses(index).Editable
-        For Each groupAccess In View.GroupAccesses
-            If Left(groupAccess.SecurityObjectName, keyLength) = key Then
-                If visibleColumn Then
-                    groupAccess.Visible = visible
-                Else
-                    groupAccess.Editable = editable
-                End If
-            End If
-        Next
-        If (visibleColumn And visible) Or (Not visibleColumn And editable) Then
-            ' update parent only when Visible or Editable is True, otherwise don't
-            UpdateParent(key, keyLength, visibleColumn, visible, editable)
+    Public Sub ProcessChildren(selectedAccess As GroupAccessView, propertyName As String, selectedValue As Boolean)
+        If View.GroupAccesses Is Nothing OrElse selectedAccess Is Nothing Then
+            Return
         End If
 
-    End Sub
+        Dim key = If(selectedAccess.SecurityObjectName, String.Empty).Trim()
+        If key.Length = 0 Then
+            Return
+        End If
 
-    Private Sub UpdateParent(key As String, keyLength As Integer, visibleColumn As Boolean, visible As Boolean, editable As Boolean)
+        Dim visibleColumn = propertyName = "Visible"
+        Dim descendantPrefix = key & " > "
+
         For Each groupAccess In View.GroupAccesses
-            Dim index As Integer = key.LastIndexOf(" > ", StringComparison.Ordinal)
-            If index > 0 Then
-                Dim parentKey = Left(key, index)
-                If Left(groupAccess.SecurityObjectName, keyLength) = parentKey Then
-                    If visibleColumn Then
-                        groupAccess.Visible = visible
-                    Else
-                        groupAccess.Editable = editable
-                    End If
-                    Dim curKey As String = parentKey
-                    Dim curKeyLength As Integer = Len(curKey)
-                    UpdateParent(curKey, curKeyLength, visibleColumn, visible, editable)
+            Dim securityObjectName = If(groupAccess.SecurityObjectName, String.Empty).Trim()
+            If String.Equals(securityObjectName, key, StringComparison.Ordinal) OrElse
+               securityObjectName.StartsWith(descendantPrefix, StringComparison.Ordinal) Then
+                If visibleColumn Then
+                    groupAccess.Visible = selectedValue
+                Else
+                    groupAccess.Editable = selectedValue
                 End If
             End If
         Next
+
+        If selectedValue Then
+            UpdateParents(key, visibleColumn)
+        End If
+    End Sub
+
+    Private Sub UpdateParents(key As String, visibleColumn As Boolean)
+        Dim separatorIndex = key.LastIndexOf(" > ", StringComparison.Ordinal)
+
+        While separatorIndex > 0
+            Dim parentKey = key.Substring(0, separatorIndex)
+            For Each groupAccess In View.GroupAccesses
+                Dim securityObjectName = If(groupAccess.SecurityObjectName, String.Empty).Trim()
+                If String.Equals(securityObjectName, parentKey, StringComparison.Ordinal) Then
+                    If visibleColumn Then
+                        groupAccess.Visible = True
+                    Else
+                        groupAccess.Editable = True
+                    End If
+                    Exit For
+                End If
+            Next
+
+            key = parentKey
+            separatorIndex = key.LastIndexOf(" > ", StringComparison.Ordinal)
+        End While
     End Sub
 
     Private Sub OnCheckAllHandler(propertyName As String)
@@ -151,12 +162,13 @@ Public Class SecurityGroupPresenter(Of TM As New)
         ProcessRows(propertyName, False)
     End Sub
 
-    Public Sub OndgvItemsChangedEventHandler(ByRef eventType As DgvItemsChanged) Implements ISubscriber(Of DgvItemsChanged).OnEventHandler
-        If eventType.PropertyName = "Visible" Then
-            ProcessChildren(eventType.Row, True)
-        Else
-            ProcessChildren(eventType.Row, False)
-        End If
+    Private Sub OnGroupAccessChanged(groupAccess As GroupAccessView, propertyName As String, value As Boolean)
+        Select Case propertyName
+            Case "Visible"
+                ProcessChildren(groupAccess, propertyName, value)
+            Case "Editable"
+                ProcessChildren(groupAccess, propertyName, value)
+        End Select
     End Sub
 
 End Class

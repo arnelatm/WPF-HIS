@@ -163,6 +163,8 @@ Namespace PresentationLayer.Views.Forms
 
         Public Event UncheckAllEvent(propertyName As String) Implements ISecurityGroupView.UncheckAllEvent
 
+        Public Event GroupAccessChanged(groupAccess As GroupAccessView, propertyName As String, value As Boolean) Implements ISecurityGroupView.GroupAccessChanged
+
         Private Sub OnBtnCheckAllVisible() Handles btnCheckAllVisible.ClickButtonArea
             RaiseEvent CheckAllEvent("Visible")
             SecurityGroupView.bsGroupAccesses.ResetBindings(False)
@@ -222,20 +224,33 @@ Namespace PresentationLayer.Views.Forms
             btnUncheckAllVisible.Enabled = True
         End Sub
 
-        Private Sub gridCategories_CellMouseUp(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles _dgvSecurityGroup.CellMouseUp
-            ' needs this because after clicking a cell the CellEndEdit doesn't trigger for checkbox unless focus moves to another control
-            ' so this sub will trigger the CellEndEdit for checkBoxes DgvVisible and DgvEditable
-            If e.ColumnIndex = _dgvSecurityGroup.Columns("DgvVisible").Index Or e.ColumnIndex = _dgvSecurityGroup.Columns("DgvEditable").Index Then
-                ' endEdit to trigger checkbox change
-                _dgvSecurityGroup.EndEdit()
+        Private Sub DgvGroupAccess_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles _dgvSecurityGroup.CellContentClick
+            If e.RowIndex < 0 OrElse e.ColumnIndex < 0 Then
+                Return
             End If
-        End Sub
 
-        Private Sub DgvGroupAccess_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles _dgvSecurityGroup.CellEndEdit
+            Dim propertyName = _dgvSecurityGroup.Columns(e.ColumnIndex).DataPropertyName
+            If propertyName <> "Visible" AndAlso propertyName <> "Editable" Then
+                Return
+            End If
+
+            Dim groupAccess = TryCast(_dgvSecurityGroup.Rows(e.RowIndex).DataBoundItem, GroupAccessView)
+            If groupAccess Is Nothing Then
+                Return
+            End If
+
+            Dim value As Boolean
+            Boolean.TryParse(Convert.ToString(_dgvSecurityGroup.Rows(e.RowIndex).Cells(e.ColumnIndex).Value), value)
+
             Dim firstDisplayedRow = _dgvSecurityGroup.FirstDisplayedScrollingRowIndex
-            ProcessCellEndEdit(_dgvSecurityGroup, SecurityGroupView.bsGroupAccesses)
-            'SecurityGroupView.bsGroupAccesses.ResetBindings(False)
-            SecurityGroupView.DataGridViewGroupAccesses.FirstDisplayedScrollingRowIndex = firstDisplayedRow
+            _dgvSecurityGroup.EndEdit()
+            SecurityGroupView.bsGroupAccesses.EndEdit()
+            RaiseEvent GroupAccessChanged(groupAccess, propertyName, value)
+            SecurityGroupView.bsGroupAccesses.ResetBindings(False)
+
+            If firstDisplayedRow >= 0 AndAlso firstDisplayedRow < _dgvSecurityGroup.Rows.Count Then
+                _dgvSecurityGroup.FirstDisplayedScrollingRowIndex = firstDisplayedRow
+            End If
         End Sub
 
         Protected Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
