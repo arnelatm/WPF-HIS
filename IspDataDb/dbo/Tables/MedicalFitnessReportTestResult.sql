@@ -1,4 +1,4 @@
-CREATE TABLE [dbo].[MedicalFitnessReportTestResult] (
+﻿CREATE TABLE [dbo].[MedicalFitnessReportTestResult] (
     [IdNo]                   INT            IDENTITY (1, 1) NOT NULL,
     [MedicalFitnessReportIdNo] INT          NOT NULL,
     [SectionCode]            VARCHAR (30)   NOT NULL,
@@ -9,10 +9,16 @@ CREATE TABLE [dbo].[MedicalFitnessReportTestResult] (
     [Sequence]               AS ([DisplayOrder]),
     [ResultStatus]           CHAR (1)       NULL,
     [ResultText]             NVARCHAR (MAX) NULL,
+    [LabResult]              NVARCHAR (MAX) NULL,
+    [LabReferenceValue]      NVARCHAR (MAX) NULL,
+    [LabUnit]                NVARCHAR (100) NULL,
+    [LabAssessment]          VARCHAR (30)   NULL,
+    [ResultStatusSource]     CHAR (1)       NULL,
     [Remarks]                NVARCHAR (MAX) NULL,
     CONSTRAINT [PK_MedicalFitnessReportTestResult] PRIMARY KEY CLUSTERED ([IdNo] ASC),
     CONSTRAINT [FK_MedicalFitnessReportTestResult_MedicalFitnessReport] FOREIGN KEY ([MedicalFitnessReportIdNo]) REFERENCES [dbo].[MedicalFitnessReport] ([IdNo]) ON DELETE CASCADE,
-    CONSTRAINT [CK_MedicalFitnessReportTestResult_ResultStatus] CHECK ([ResultStatus] IS NULL OR [ResultStatus] IN ('F', 'U'))
+    CONSTRAINT [CK_MedicalFitnessReportTestResult_ResultStatus] CHECK ([ResultStatus] IS NULL OR [ResultStatus] IN ('F', 'U')),
+    CONSTRAINT [CK_MedicalFitnessReportTestResult_ResultStatusSource] CHECK ([ResultStatusSource] IS NULL OR [ResultStatusSource] IN ('A', 'M'))
 );
 
 GO

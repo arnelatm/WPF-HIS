@@ -1,4 +1,4 @@
-Imports System.ComponentModel
+﻿Imports System.ComponentModel
 Imports System.Linq
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
@@ -23,7 +23,9 @@ Namespace PresentationLayer.Views.Forms
         Private ReadOnly _bindingSource As New BindingSource()
 
         Public Event RetrieveRequested() Implements IMedicalFitnessReportView.RetrieveRequested
+        Public Event RefreshLabResultsRequested() Implements IMedicalFitnessReportView.RefreshLabResultsRequested
         Public Event SaveRequested() Implements IMedicalFitnessReportView.SaveRequested
+        Public Event DeleteRequested() Implements IMedicalFitnessReportView.DeleteRequested
 
         Public Sub New()
             InitializeComponent()
@@ -241,12 +243,42 @@ Namespace PresentationLayer.Views.Forms
                 .HeaderText = "Test",
                 .Name = "colTest",
                 .ReadOnly = True,
-                .FillWeight = 160}
+                .FillWeight = 140}
+            colLabResult = New DataGridViewTextBoxColumn With {
+                .DataPropertyName = "LabResult",
+                .HeaderText = "Kizen Result",
+                .Name = "colLabResult",
+                .ReadOnly = True,
+                .FillWeight = 75}
+            colLabReferenceValue = New DataGridViewTextBoxColumn With {
+                .DataPropertyName = "LabReferenceValue",
+                .HeaderText = "Reference Value",
+                .Name = "colLabReferenceValue",
+                .ReadOnly = True,
+                .FillWeight = 110}
+            colLabUnit = New DataGridViewTextBoxColumn With {
+                .DataPropertyName = "LabUnit",
+                .HeaderText = "Unit",
+                .Name = "colLabUnit",
+                .ReadOnly = True,
+                .FillWeight = 50}
+            colLabAssessment = New DataGridViewTextBoxColumn With {
+                .DataPropertyName = "LabAssessment",
+                .HeaderText = "Assessment",
+                .Name = "colLabAssessment",
+                .ReadOnly = True,
+                .FillWeight = 80}
+            colResultStatusSource = New DataGridViewTextBoxColumn With {
+                .DataPropertyName = "ResultStatusSourceDisplay",
+                .HeaderText = "Status Source",
+                .Name = "colResultStatusSource",
+                .ReadOnly = True,
+                .FillWeight = 70}
             colResultText = New DataGridViewTextBoxColumn With {
                 .DataPropertyName = "ResultText",
-                .HeaderText = "Result",
+                .HeaderText = "Entry Result",
                 .Name = "colResultText",
-                .FillWeight = 120}
+                .FillWeight = 75}
             colFit = New DataGridViewCheckBoxColumn With {
                 .DataPropertyName = "IsFit",
                 .HeaderText = "Fit",
@@ -269,6 +301,11 @@ Namespace PresentationLayer.Views.Forms
                 colSequence,
                 colSection,
                 colTest,
+                colLabResult,
+                colLabReferenceValue,
+                colLabUnit,
+                colLabAssessment,
+                colResultStatusSource,
                 colResultText,
                 colFit,
                 colUnfit,
@@ -279,10 +316,20 @@ Namespace PresentationLayer.Views.Forms
             RaiseEvent RetrieveRequested()
         End Sub
 
+        Private Sub btnRefreshLabResults_Click(sender As Object, e As EventArgs) Handles btnRefreshLabResults.Click
+            dgvResults.EndEdit()
+            _bindingSource.EndEdit()
+            RaiseEvent RefreshLabResultsRequested()
+        End Sub
+
         Private Sub btnSaveReport_Click(sender As Object, e As EventArgs) Handles btnSaveReport.Click
             dgvResults.EndEdit()
             _bindingSource.EndEdit()
             RaiseEvent SaveRequested()
+        End Sub
+
+        Private Sub btnDeleteReport_Click(sender As Object, e As EventArgs) Handles btnDeleteReport.Click
+            RaiseEvent DeleteRequested()
         End Sub
 
         Private Sub btnPrintReport_Click(sender As Object, e As EventArgs) Handles btnPrintReport.Click
@@ -335,6 +382,7 @@ Namespace PresentationLayer.Views.Forms
             ElseIf columnName = "IsUnfit" AndAlso row.IsUnfit Then
                 row.IsFit = False
             End If
+            dgvResults.Rows(e.RowIndex).Cells(colResultStatusSource.Index).Value = row.ResultStatusSourceDisplay
             dgvResults.InvalidateRow(e.RowIndex)
         End Sub
 

@@ -1,4 +1,4 @@
-Imports AATM.Accounts.BusinessLayer
+﻿Imports AATM.Accounts.BusinessLayer
 Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.DataLayer.AdoNet
 
@@ -48,25 +48,57 @@ Namespace DataLayer.AdoNet
 
         Public Function GetKizenLabAnalyses(invoiceNo As Int32) As List(Of MedicalFitnessReportLabAnalysis)
             Dim sql As String =
-                "WITH InvoiceLabAnalyses AS (" &
-                "SELECT r.ID, d.ID AS VisitAnalysesID, " &
+                "WITH SourceRows AS (" &
+                "SELECT r.ID, d.ID AS VisitAnalysesID, d.OrderID, " &
                 "COALESCE(NULLIF(LTRIM(RTRIM(r.Code)), N''), N'KIZEN_' + CONVERT(nvarchar(20), r.ID)) AS TestCode, " &
+                "COALESCE(NULLIF(LTRIM(RTRIM(r.Code)), N''), CONVERT(nvarchar(1000), LTRIM(RTRIM(r.Name)))) AS DuplicateKey, " &
                 "CONVERT(nvarchar(1000), LTRIM(RTRIM(r.Name))) AS TestNameEnglish, " &
-                "CASE WHEN CHARINDEX(CONVERT(nvarchar(1000), LTRIM(RTRIM(r.Name))), d.ReqNote) = 0 THEN 2147483647 " &
-                "ELSE CHARINDEX(CONVERT(nvarchar(1000), LTRIM(RTRIM(r.Name))), d.ReqNote) END AS RequestedPosition, " &
-                "ROW_NUMBER() OVER (" &
-                "PARTITION BY COALESCE(NULLIF(LTRIM(RTRIM(r.Code)), N''), CONVERT(nvarchar(1000), LTRIM(RTRIM(r.Name)))) " &
-                "ORDER BY d.ID DESC, r.ID) AS DuplicateNumber " &
+                "CONVERT(nvarchar(max), r.Data) AS ResultValue, " &
+                "CONVERT(nvarchar(max), r.RV) AS ReferenceValue, " &
+                "CONVERT(nvarchar(100), r.Unit) AS UnitValue, " &
+                "CONVERT(nvarchar(1000), r.Parent) AS ParentCode, " &
+                "CONVERT(nvarchar(1000), r.Code) AS ResultCode, " &
+                "CONVERT(nvarchar(max), d.ReqNote) AS ReqNote " &
                 "FROM dbo.VisitAnalysesData d " &
                 "INNER JOIN dbo.VisitAnalysesResult r ON r.VisitAnalysesID = d.ID " &
                 "WHERE d.OrderID = @InvoiceNo " &
                 "AND NULLIF(CONVERT(nvarchar(1000), LTRIM(RTRIM(r.Name))), N'') IS NOT NULL " &
-                "AND r.Parent LIKE N'Group[_]%' " &
-                "AND ISNULL(r.IsHide, 0) = 0) " &
-                "SELECT TestCode, TestNameEnglish " &
+                "AND ISNULL(r.IsHide, 0) = 0), " &
+                "MedicalReportOrders AS (" &
+                "SELECT DISTINCT OrderID " &
+                "FROM SourceRows " &
+                "WHERE ParentCode LIKE N'Group[_]%' " &
+                "AND TestNameEnglish LIKE N'Medical Report%'), " &
+                "IncludedRows AS (" &
+                "SELECT source.ID, source.VisitAnalysesID, source.TestCode, source.DuplicateKey, source.TestNameEnglish, " &
+                "source.ResultValue, source.ReferenceValue, source.UnitValue, " &
+                "source.ID AS RootID, 0 AS HierarchyOrder, " &
+                "CASE WHEN CHARINDEX(source.TestNameEnglish, source.ReqNote) = 0 THEN 2147483647 " &
+                "ELSE CHARINDEX(source.TestNameEnglish, source.ReqNote) END AS RequestedPosition " &
+                "FROM SourceRows source " &
+                "WHERE source.ParentCode LIKE N'Group[_]%' " &
+                "UNION ALL " &
+                "SELECT child.ID, child.VisitAnalysesID, child.TestCode, child.DuplicateKey, child.TestNameEnglish, " &
+                "child.ResultValue, child.ReferenceValue, child.UnitValue, " &
+                "root.ID AS RootID, 1 AS HierarchyOrder, " &
+                "CASE WHEN CHARINDEX(root.TestNameEnglish, root.ReqNote) = 0 THEN 2147483647 " &
+                "ELSE CHARINDEX(root.TestNameEnglish, root.ReqNote) END AS RequestedPosition " &
+                "FROM SourceRows child " &
+                "INNER JOIN SourceRows root ON root.VisitAnalysesID = child.VisitAnalysesID " &
+                "INNER JOIN MedicalReportOrders medicalReport ON medicalReport.OrderID = child.OrderID " &
+                "WHERE root.ParentCode LIKE N'Group[_]%' " &
+                "AND (root.TestNameEnglish LIKE N'Medical Report%' OR root.TestNameEnglish = N'Lipids Profile') " &
+                "AND LEFT(child.ParentCode, LEN(root.ResultCode) + 1) = root.ResultCode + N'_'), " &
+                "InvoiceLabAnalyses AS (" &
+                "SELECT included.*, " &
+                "ROW_NUMBER() OVER (" &
+                "PARTITION BY included.DuplicateKey " &
+                "ORDER BY included.VisitAnalysesID DESC, included.RequestedPosition, included.RootID, included.HierarchyOrder, included.ID) AS DuplicateNumber " &
+                "FROM IncludedRows included) " &
+                "SELECT TestCode, TestNameEnglish, ResultValue, ReferenceValue, UnitValue " &
                 "FROM InvoiceLabAnalyses " &
                 "WHERE DuplicateNumber = 1 " &
-                "ORDER BY VisitAnalysesID DESC, RequestedPosition, ID"
+                "ORDER BY VisitAnalysesID DESC, RequestedPosition, RootID, HierarchyOrder, ID"
 
             Return _kizenDb.Read(sql, MakeKizenLabAnalysis, "@InvoiceNo", invoiceNo).ToList()
         End Function
@@ -100,6 +132,17 @@ Namespace DataLayer.AdoNet
             ReplaceDetails(report)
             Return report.IdNo
         End Function
+
+        Public Sub DeleteReport(reportIdNo As Int32)
+            Dim sql As String =
+                "SET XACT_ABORT ON; " &
+                "BEGIN TRANSACTION; " &
+                "DELETE FROM MedicalFitnessReportTestResult WHERE MedicalFitnessReportIdNo = @IdNo; " &
+                "DELETE FROM MedicalFitnessReport WHERE IdNo = @IdNo; " &
+                "COMMIT TRANSACTION;"
+
+            _ispDataDb.Update(sql, "@IdNo", reportIdNo)
+        End Sub
 
         Private Function InsertReport(report As MedicalFitnessReport) As Int32
             Dim sql As String =
@@ -150,9 +193,11 @@ Namespace DataLayer.AdoNet
         Private Function InsertDetail(detail As MedicalFitnessReportTestResult) As Int32
             Dim sql As String =
                 "INSERT INTO MedicalFitnessReportTestResult " &
-                "(MedicalFitnessReportIdNo,SectionCode,TestCode,TestNameEnglish,TestNameArabic,DisplayOrder,ResultStatus,ResultText,Remarks) " &
+                "(MedicalFitnessReportIdNo,SectionCode,TestCode,TestNameEnglish,TestNameArabic,DisplayOrder,ResultStatus,ResultText," &
+                "LabResult,LabReferenceValue,LabUnit,LabAssessment,ResultStatusSource,Remarks) " &
                 "VALUES " &
-                "(@MedicalFitnessReportIdNo,@SectionCode,@TestCode,@TestNameEnglish,@TestNameArabic,@Sequence,@ResultStatus,@ResultText,@Remarks); " &
+                "(@MedicalFitnessReportIdNo,@SectionCode,@TestCode,@TestNameEnglish,@TestNameArabic,@Sequence,@ResultStatus,@ResultText," &
+                "@LabResult,@LabReferenceValue,@LabUnit,@LabAssessment,@ResultStatusSource,@Remarks); " &
                 "SELECT CONVERT(int, SCOPE_IDENTITY());"
 
             Return Convert.ToInt32(_ispDataDb.Scalar(sql, TakeDetail(detail)))
@@ -160,7 +205,8 @@ Namespace DataLayer.AdoNet
 
         Private Function GetReportDetails(reportIdNo As Int32) As List(Of MedicalFitnessReportTestResult)
             Dim sql As String =
-                "SELECT IdNo,MedicalFitnessReportIdNo,SectionCode,TestCode,TestNameEnglish,TestNameArabic,DisplayOrder AS Sequence,ResultStatus,ResultText,Remarks " &
+                "SELECT IdNo,MedicalFitnessReportIdNo,SectionCode,TestCode,TestNameEnglish,TestNameArabic,DisplayOrder AS Sequence," &
+                "ResultStatus,ResultText,LabResult,LabReferenceValue,LabUnit,LabAssessment,ResultStatusSource,Remarks " &
                 "FROM MedicalFitnessReportTestResult " &
                 "WHERE MedicalFitnessReportIdNo = @MedicalFitnessReportIdNo " &
                 "ORDER BY DisplayOrder, IdNo"
@@ -201,6 +247,11 @@ Namespace DataLayer.AdoNet
                 "@Sequence", detail.Sequence,
                 "@ResultStatus", DbValue(detail.ResultStatus),
                 "@ResultText", DbValue(detail.ResultText),
+                "@LabResult", DbValue(detail.LabResult),
+                "@LabReferenceValue", DbValue(detail.LabReferenceValue),
+                "@LabUnit", DbValue(detail.LabUnit),
+                "@LabAssessment", DbValue(detail.LabAssessment),
+                "@ResultStatusSource", DbValue(detail.ResultStatusSource),
                 "@Remarks", DbValue(detail.Remarks)}
         End Function
 
@@ -243,6 +294,11 @@ Namespace DataLayer.AdoNet
                 .Sequence = Extensions.AsInt(Of Int32)(reader("Sequence")),
                 .ResultStatus = Extensions.AsString(reader("ResultStatus")),
                 .ResultText = Extensions.AsString(reader("ResultText")),
+                .LabResult = Extensions.AsString(reader("LabResult")),
+                .LabReferenceValue = Extensions.AsString(reader("LabReferenceValue")),
+                .LabUnit = Extensions.AsString(reader("LabUnit")),
+                .LabAssessment = Extensions.AsString(reader("LabAssessment")),
+                .ResultStatusSource = Extensions.AsString(reader("ResultStatusSource")),
                 .Remarks = Extensions.AsString(reader("Remarks"))}
 
         Private Shared ReadOnly MakeLabTemplate As Func(Of IDataReader, MedicalFitnessReportLabTemplate) =
@@ -257,7 +313,10 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly MakeKizenLabAnalysis As Func(Of IDataReader, MedicalFitnessReportLabAnalysis) =
             Function(reader) New MedicalFitnessReportLabAnalysis() With {
                 .TestCode = Extensions.AsString(reader("TestCode")),
-                .TestNameEnglish = Extensions.AsString(reader("TestNameEnglish"))}
+                .TestNameEnglish = Extensions.AsString(reader("TestNameEnglish")),
+                .ResultValue = Extensions.AsString(reader("ResultValue")),
+                .ReferenceValue = Extensions.AsString(reader("ReferenceValue")),
+                .Unit = Extensions.AsString(reader("UnitValue"))}
 
     End Class
 

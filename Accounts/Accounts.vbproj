@@ -245,6 +245,7 @@
     <Compile Include="BusinessLayer\Kizen\LabReportStatus.vb" />
     <Compile Include="BusinessLayer\Kizen\InvMedNotes.vb" />
     <Compile Include="BusinessLayer\MedicalFitnessReport.vb" />
+    <Compile Include="BusinessLayer\MedicalFitnessLabResultEvaluator.vb" />
     <Compile Include="BusinessLayer\SupplierProduct.vb" />
     <Compile Include="BusinessLayer\PurchaseOrderDetail.vb" />
     <Compile Include="BusinessLayer\InvTransaction.vb" />

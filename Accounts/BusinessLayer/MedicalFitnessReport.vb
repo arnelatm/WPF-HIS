@@ -1,4 +1,4 @@
-Imports AATM.BusinessLayer
+﻿Imports AATM.BusinessLayer
 
 Namespace BusinessLayer
 
@@ -44,6 +44,11 @@ Namespace BusinessLayer
 
         Public Property ResultStatus As String
         Public Property ResultText As String
+        Public Property LabResult As String
+        Public Property LabReferenceValue As String
+        Public Property LabUnit As String
+        Public Property LabAssessment As String
+        Public Property ResultStatusSource As String
         Public Property Remarks As String
 
     End Class
@@ -65,6 +70,9 @@ Namespace BusinessLayer
 
         Public Property TestCode As String
         Public Property TestNameEnglish As String
+        Public Property ResultValue As String
+        Public Property ReferenceValue As String
+        Public Property Unit As String
 
     End Class
 

@@ -1,4 +1,4 @@
-Imports AATM.PresentationLayer.Views
+﻿Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views
 
@@ -24,6 +24,11 @@ Namespace PresentationLayer.Views
 
         Public Property ResultStatus As String
         Public Property ResultText As String
+        Public Property LabResult As String
+        Public Property LabReferenceValue As String
+        Public Property LabUnit As String
+        Public Property LabAssessment As String
+        Public Property ResultStatusSource As String
         Public Property Remarks As String
         Public Property Errors As List(Of String) Implements IView.Errors
         Public Property DataFilter As String Implements IView.DataFilter
@@ -32,6 +37,18 @@ Namespace PresentationLayer.Views
             Get
                 Return String.Equals(TestCode, "HEIGHT", StringComparison.OrdinalIgnoreCase) OrElse
                        String.Equals(TestCode, "WEIGHT", StringComparison.OrdinalIgnoreCase)
+            End Get
+        End Property
+
+        Public ReadOnly Property ResultStatusSourceDisplay As String
+            Get
+                If String.Equals(ResultStatusSource, "A", StringComparison.OrdinalIgnoreCase) Then
+                    Return "Automatic"
+                End If
+                If String.Equals(ResultStatusSource, "M", StringComparison.OrdinalIgnoreCase) Then
+                    Return "Manual"
+                End If
+                Return ""
             End Get
         End Property
 
@@ -47,8 +64,10 @@ Namespace PresentationLayer.Views
 
                 If value Then
                     ResultStatus = "F"
+                    ResultStatusSource = "M"
                 ElseIf ResultStatus = "F" Then
                     ResultStatus = Nothing
+                    ResultStatusSource = "M"
                 End If
             End Set
         End Property
@@ -65,8 +84,10 @@ Namespace PresentationLayer.Views
 
                 If value Then
                     ResultStatus = "U"
+                    ResultStatusSource = "M"
                 ElseIf ResultStatus = "U" Then
                     ResultStatus = Nothing
+                    ResultStatusSource = "M"
                 End If
             End Set
         End Property

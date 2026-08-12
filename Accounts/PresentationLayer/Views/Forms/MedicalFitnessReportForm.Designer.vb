@@ -1,4 +1,4 @@
-Namespace PresentationLayer.Views.Forms
+﻿Namespace PresentationLayer.Views.Forms
 
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
     Partial Public Class MedicalFitnessReportForm
@@ -10,7 +10,9 @@ Namespace PresentationLayer.Views.Forms
             Me.lblInvoiceNo = New System.Windows.Forms.Label()
             Me.txtInvoiceNo = New System.Windows.Forms.TextBox()
             Me.btnRetrieve = New System.Windows.Forms.Button()
+            Me.btnRefreshLabResults = New System.Windows.Forms.Button()
             Me.btnSaveReport = New System.Windows.Forms.Button()
+            Me.btnDeleteReport = New System.Windows.Forms.Button()
             Me.btnPrintReport = New System.Windows.Forms.Button()
             Me.dgvResults = New System.Windows.Forms.DataGridView()
             Me.finalPanel = New System.Windows.Forms.FlowLayoutPanel()
@@ -72,7 +74,9 @@ Namespace PresentationLayer.Views.Forms
             Me.invoicePanel.Controls.Add(Me.lblInvoiceNo)
             Me.invoicePanel.Controls.Add(Me.txtInvoiceNo)
             Me.invoicePanel.Controls.Add(Me.btnRetrieve)
+            Me.invoicePanel.Controls.Add(Me.btnRefreshLabResults)
             Me.invoicePanel.Controls.Add(Me.btnSaveReport)
+            Me.invoicePanel.Controls.Add(Me.btnDeleteReport)
             Me.invoicePanel.Controls.Add(Me.btnPrintReport)
             Me.invoicePanel.Dock = System.Windows.Forms.DockStyle.Fill
             Me.invoicePanel.Location = New System.Drawing.Point(11, 11)
@@ -107,21 +111,39 @@ Namespace PresentationLayer.Views.Forms
             Me.btnRetrieve.Text = "Retrieve"
             Me.btnRetrieve.UseVisualStyleBackColor = True
             '
+            'btnRefreshLabResults
+            '
+            Me.btnRefreshLabResults.Location = New System.Drawing.Point(293, 3)
+            Me.btnRefreshLabResults.Name = "btnRefreshLabResults"
+            Me.btnRefreshLabResults.Size = New System.Drawing.Size(120, 23)
+            Me.btnRefreshLabResults.TabIndex = 3
+            Me.btnRefreshLabResults.Text = "Refresh Lab Results"
+            Me.btnRefreshLabResults.UseVisualStyleBackColor = True
+            '
             'btnSaveReport
             '
-            Me.btnSaveReport.Location = New System.Drawing.Point(293, 3)
+            Me.btnSaveReport.Location = New System.Drawing.Point(419, 3)
             Me.btnSaveReport.Name = "btnSaveReport"
             Me.btnSaveReport.Size = New System.Drawing.Size(90, 23)
-            Me.btnSaveReport.TabIndex = 3
+            Me.btnSaveReport.TabIndex = 4
             Me.btnSaveReport.Text = "Save"
             Me.btnSaveReport.UseVisualStyleBackColor = True
             '
+            'btnDeleteReport
+            '
+            Me.btnDeleteReport.Location = New System.Drawing.Point(515, 3)
+            Me.btnDeleteReport.Name = "btnDeleteReport"
+            Me.btnDeleteReport.Size = New System.Drawing.Size(90, 23)
+            Me.btnDeleteReport.TabIndex = 5
+            Me.btnDeleteReport.Text = "Delete Report"
+            Me.btnDeleteReport.UseVisualStyleBackColor = True
+            '
             'btnPrintReport
             '
-            Me.btnPrintReport.Location = New System.Drawing.Point(389, 3)
+            Me.btnPrintReport.Location = New System.Drawing.Point(611, 3)
             Me.btnPrintReport.Name = "btnPrintReport"
             Me.btnPrintReport.Size = New System.Drawing.Size(100, 23)
-            Me.btnPrintReport.TabIndex = 4
+            Me.btnPrintReport.TabIndex = 6
             Me.btnPrintReport.Text = "Print Report"
             Me.btnPrintReport.UseVisualStyleBackColor = True
             '
@@ -428,7 +450,9 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblInvoiceNo As Global.System.Windows.Forms.Label
         Friend WithEvents txtInvoiceNo As Global.System.Windows.Forms.TextBox
         Friend WithEvents btnRetrieve As Global.System.Windows.Forms.Button
+        Friend WithEvents btnRefreshLabResults As Global.System.Windows.Forms.Button
         Friend WithEvents btnSaveReport As Global.System.Windows.Forms.Button
+        Friend WithEvents btnDeleteReport As Global.System.Windows.Forms.Button
         Friend WithEvents btnPrintReport As Global.System.Windows.Forms.Button
         Friend WithEvents headerPanel As Global.System.Windows.Forms.TableLayoutPanel
         Friend WithEvents lblPatientName As Global.System.Windows.Forms.Label
@@ -453,6 +477,11 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents colSequence As Global.System.Windows.Forms.DataGridViewTextBoxColumn
         Friend WithEvents colSection As Global.System.Windows.Forms.DataGridViewTextBoxColumn
         Friend WithEvents colTest As Global.System.Windows.Forms.DataGridViewTextBoxColumn
+        Friend WithEvents colLabResult As Global.System.Windows.Forms.DataGridViewTextBoxColumn
+        Friend WithEvents colLabReferenceValue As Global.System.Windows.Forms.DataGridViewTextBoxColumn
+        Friend WithEvents colLabUnit As Global.System.Windows.Forms.DataGridViewTextBoxColumn
+        Friend WithEvents colLabAssessment As Global.System.Windows.Forms.DataGridViewTextBoxColumn
+        Friend WithEvents colResultStatusSource As Global.System.Windows.Forms.DataGridViewTextBoxColumn
         Friend WithEvents colResultText As Global.System.Windows.Forms.DataGridViewTextBoxColumn
         Friend WithEvents colFit As Global.System.Windows.Forms.DataGridViewCheckBoxColumn
         Friend WithEvents colUnfit As Global.System.Windows.Forms.DataGridViewCheckBoxColumn

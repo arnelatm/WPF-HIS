@@ -1,4 +1,4 @@
-CREATE VIEW [dbo].[MedicalFitnessReportPrint_View]
+﻿CREATE VIEW [dbo].[MedicalFitnessReportPrint_View]
 AS
 SELECT
     h.IdNo,
@@ -22,6 +22,11 @@ SELECT
     d.[Sequence],
     d.ResultStatus,
     d.ResultText,
+    d.LabResult,
+    d.LabReferenceValue,
+    d.LabUnit,
+    d.LabAssessment,
+    d.ResultStatusSource,
     d.Remarks AS DetailRemarks
 FROM dbo.MedicalFitnessReport h
 LEFT JOIN dbo.MedicalFitnessReportTestResult d

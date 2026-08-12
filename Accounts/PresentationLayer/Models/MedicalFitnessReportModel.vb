@@ -1,4 +1,4 @@
-Namespace PresentationLayer.Models
+﻿Namespace PresentationLayer.Models
 
     Public Class MedicalFitnessReportModel
         Public Property IdNo As Int32
@@ -37,6 +37,11 @@ Namespace PresentationLayer.Models
 
         Public Property ResultStatus As String
         Public Property ResultText As String
+        Public Property LabResult As String
+        Public Property LabReferenceValue As String
+        Public Property LabUnit As String
+        Public Property LabAssessment As String
+        Public Property ResultStatusSource As String
         Public Property Remarks As String
     End Class
 

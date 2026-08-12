@@ -1,4 +1,4 @@
-Imports System.ComponentModel
+﻿Imports System.ComponentModel
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.PresentationLayer.Views
 
@@ -23,7 +23,9 @@ Namespace PresentationLayer.Views.Interfaces
         Property TestResults As BindingList(Of MedicalFitnessReportTestResultView)
 
         Event RetrieveRequested()
+        Event RefreshLabResultsRequested()
         Event SaveRequested()
+        Event DeleteRequested()
 
     End Interface
 
