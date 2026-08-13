@@ -3,6 +3,7 @@ Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.ServiceLayer
 Imports AATM.Libraries
 Imports AATM.Libraries.CrystalReportsHelper
+Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Events
 Imports AATM.PresentationLayer.Forms
 Imports AATM.PresentationLayer.Views
@@ -68,7 +69,7 @@ Namespace PresentationLayer.Presenters
         Public Sub OnPrintReport(sender As IReportPrinterView) 'reportFileName As String, databaseConnectionName As String, Optional args() As Object = Nothing, Optional copies As Integer = 1, Optional collate As Boolean = False, Optional startPage As Integer = 1, Optional endPage As Integer = 100000)
             Dim args As Object() = sender.Args
             'AddToArray(args, sender.FileName, "FileName")
-            Dim establishmentName = Service.GetRecordField("Establishment", "EstablishmentName")
+            Dim establishmentName = GlobalVariables.GetEstablishmentName(sender.FormCultureLanguage)
             AddToArray(args, establishmentName, "EstablishmentName")
             AddToArray(args, sender.FormCultureLanguage, "Language")
             AddToArray(args, IIf(sender.ReportTitle Is Nothing, "", sender.ReportTitle), "ReportTitle")
@@ -143,12 +144,7 @@ Namespace PresentationLayer.Presenters
 
         Private Sub PrintReport(ByVal sender As IReportPrinterView)
             Dim language = sender.FormCultureLanguage
-            Dim EstablishmentName As String
-            If language <> "ar" Then
-                EstablishmentName = Service.GetRecordField("Establishment", "EstablishmentName")
-            Else
-                EstablishmentName = Service.GetRecordField("Establishment", "EstablishmentNameAra")
-            End If
+            Dim establishmentName = GlobalVariables.GetEstablishmentName(language)
             Dim reportTitle As String = sender.ReportTitle
             Dim args As Array = sender.Args
             ProcessReport(sender.FileName, "", True, args)

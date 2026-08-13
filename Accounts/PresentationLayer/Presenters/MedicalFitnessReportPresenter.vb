@@ -25,6 +25,7 @@ Namespace PresentationLayer.Presenters
             WithTreeView = False
             AddHandler View.RetrieveRequested, AddressOf RetrieveReport
             AddHandler View.RefreshLabResultsRequested, AddressOf RefreshLabResults
+            AddHandler View.ViewKizenResultsRequested, AddressOf ViewKizenResults
             AddHandler View.SaveRequested, AddressOf SaveReport
             AddHandler View.DeleteRequested, AddressOf DeleteReport
         End Sub
@@ -73,6 +74,55 @@ Namespace PresentationLayer.Presenters
             Dim refreshedRows = SynchronizeLabDetails(currentRows, View.InvoiceNo, True)
             View.TestResults = ToViewRows(refreshedRows)
             MessageBox.Show("Lab results refreshed.")
+        End Sub
+
+        Private Sub ViewKizenResults()
+            If View.InvoiceNo = 0 Then
+                MessageBox.Show("Please retrieve an invoice before viewing Kizen results.")
+                Return
+            End If
+
+            Dim selectedRow = View.SelectedTestResult
+            If selectedRow Is Nothing OrElse
+               Not String.Equals(selectedRow.SectionCode, "LAB", StringComparison.OrdinalIgnoreCase) Then
+                MessageBox.Show("Please select a laboratory result.")
+                Return
+            End If
+
+            If String.IsNullOrWhiteSpace(selectedRow.TestCode) Then
+                MessageBox.Show("The selected laboratory result does not have a Kizen test code.")
+                Return
+            End If
+
+            Try
+                Dim details = _dao.GetKizenGroupedLabResults(View.InvoiceNo, selectedRow.TestCode)
+                If details.Count = 0 Then
+                    MessageBox.Show("No visible Kizen result details were found for the selected analysis.")
+                    Return
+                End If
+
+                Dim displayRows As New BindingList(Of MedicalFitnessGroupedLabResultView)
+                For Each detail In details.OrderBy(Function(item) item.Sequence)
+                    Dim evaluation = MedicalFitnessLabResultEvaluator.Evaluate(detail.ResultValue, detail.ReferenceValue)
+                    displayRows.Add(New MedicalFitnessGroupedLabResultView With {
+                        .Sequence = detail.Sequence,
+                        .GroupName = detail.GroupName,
+                        .TestCode = detail.TestCode,
+                        .TestName = detail.TestName,
+                        .ResultValue = detail.ResultValue,
+                        .ReferenceValue = detail.ReferenceValue,
+                        .Unit = detail.Unit,
+                        .Assessment = evaluation.Assessment})
+                Next
+
+                View.ShowKizenGroupedResults(selectedRow.TestNameEnglish, displayRows)
+            Catch ex As Exception
+                MessageBox.Show(
+                    "Unable to read the selected results from Kizen." & Environment.NewLine & ex.Message,
+                    "Kizen Results",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error)
+            End Try
         End Sub
 
         Private Sub DeleteReport()
@@ -322,13 +372,13 @@ Namespace PresentationLayer.Presenters
                     .TestNameEnglish = row.TestNameEnglish,
                     .TestNameArabic = row.TestNameArabic,
                     .Sequence = row.Sequence,
-                    .ResultStatus = If(row.IsResultTextOnly, Nothing, row.ResultStatus),
-                    .ResultText = If(row.IsResultTextOnly, row.ResultText, Nothing),
+                    .ResultStatus = row.ResultStatus,
+                    .ResultText = row.ResultText,
                     .LabResult = row.LabResult,
                     .LabReferenceValue = row.LabReferenceValue,
                     .LabUnit = row.LabUnit,
                     .LabAssessment = row.LabAssessment,
-                    .ResultStatusSource = If(row.IsResultTextOnly, Nothing, row.ResultStatusSource),
+                    .ResultStatusSource = row.ResultStatusSource,
                     .Remarks = row.Remarks})
             Next
 

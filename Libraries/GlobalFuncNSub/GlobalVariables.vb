@@ -36,6 +36,9 @@ Public Class GlobalVariables
     Private Shared _defaultFormControlEditingBackgroundColor As Nullable(Of Color)
     Private Shared _defaultFormControlEditingForegroundColor As Nullable(Of Color)
     Private Shared _defaultAlternatingBackGroundColor As Nullable(Of Color)
+    Private Shared _establishmentName As String
+    Private Shared _establishmentNameArabic As String
+    Private Shared _establishmentInformationInitialized As Boolean
 
     Private Shared Function GetRequiredAppSetting(settingName As String) As String
         Dim value = ConfigurationManager.AppSettings.Get(settingName)
@@ -67,8 +70,70 @@ Public Class GlobalVariables
     Public Shared Property UserIdNo As Int16
     Public Shared Property BranchIdNo As Int16
 
-    Public Shared Property EstablishmentName As String
-    Public Shared Property EstablishmentNameAra As String
+    Public Shared ReadOnly Property EstablishmentName As String
+        Get
+            EnsureEstablishmentInformationInitialized()
+            Return _establishmentName
+        End Get
+    End Property
+
+    Public Shared ReadOnly Property EstablishmentNameAra As String
+        Get
+            EnsureEstablishmentInformationInitialized()
+            Return _establishmentNameArabic
+        End Get
+    End Property
+
+    Public Shared ReadOnly Property EstablishmentInformationInitialized As Boolean
+        Get
+            Return _establishmentInformationInitialized
+        End Get
+    End Property
+
+    Public Shared Sub SetEstablishmentNames(englishName As String, arabicName As String)
+        If String.IsNullOrWhiteSpace(englishName) Then
+            Throw New ConfigurationErrorsException(
+                "dbo.Establishment (IdNo = 1) does not contain an English establishment name.")
+        End If
+        If String.IsNullOrWhiteSpace(arabicName) Then
+            Throw New ConfigurationErrorsException(
+                "dbo.Establishment (IdNo = 1) does not contain an Arabic establishment name.")
+        End If
+
+        _establishmentName = englishName.Trim()
+        _establishmentNameArabic = arabicName.Trim()
+        _establishmentInformationInitialized = True
+    End Sub
+
+    Public Shared Function GetEstablishmentName(Optional languageOrCultureName As String = Nothing) As String
+        Dim requestedLanguage = languageOrCultureName
+        If String.IsNullOrWhiteSpace(requestedLanguage) Then
+            requestedLanguage = CultureInfo.CurrentCulture.Name
+        End If
+
+        Dim language = requestedLanguage.Trim()
+        Dim separatorIndex = language.IndexOf("-"c)
+        If separatorIndex >= 0 Then
+            language = language.Substring(0, separatorIndex)
+        End If
+
+        If String.Equals(language, "ar", StringComparison.OrdinalIgnoreCase) Then
+            Return EstablishmentNameAra
+        End If
+
+        Return EstablishmentName
+    End Function
+
+    Public Shared Function GetEstablishmentName(culture As CultureInfo) As String
+        Return GetEstablishmentName(If(culture Is Nothing, Nothing, culture.Name))
+    End Function
+
+    Private Shared Sub EnsureEstablishmentInformationInitialized()
+        If Not _establishmentInformationInitialized Then
+            Throw New ConfigurationErrorsException(
+                "Establishment information has not been initialized from dbo.Establishment (IdNo = 1).")
+        End If
+    End Sub
 
 
 #Region "Colors"

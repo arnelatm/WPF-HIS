@@ -42,11 +42,7 @@ Namespace PresentationLayer.Presenters
             CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
             language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
 
-            If language <> "ar" Then
-                establishmentName = GetRecordField("Establishment", "EstablishmentName")
-            Else
-                establishmentName = GetRecordField("Establishment", "EstablishmentNameAra")
-            End If
+            establishmentName = GlobalVariables.GetEstablishmentName(language)
 
             Dim cForm As New ReportForm("Shift Summary Report.Rpt", View.IdNo.ToString(), "TransactionIdNo", reportTitle, "ReportTitle", language, "Language", establishmentName, "EstablishmentName", reportTitle, "ReportTitle")
             cForm.Show()

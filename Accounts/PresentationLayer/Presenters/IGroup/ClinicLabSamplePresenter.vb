@@ -68,7 +68,7 @@ Namespace PresentationLayer.Presenters
                 dateString = tempDate.ToString("yyyy/MM/dd")
                 Dim reportTitle As String = AATM.Libraries.MessagingLibrary.Messaging.TranslateCaption("Diagnostic Test Samples Taken Report for ") + dateString
                 reportArgs.ReportParameters = {dateString, "TransactionDate",
-                                               GlobalVariables.EstablishmentName, "EstablishmentName",
+                                               GlobalVariables.GetEstablishmentName(), "EstablishmentName",
                                                reportTitle, "ReportTitle"}
                 reportArgs.DataBaseConnectionName = "IGroupClinic"
                 Dim reportFileName As String = "IB Lab Sample Daily Report.Rpt"

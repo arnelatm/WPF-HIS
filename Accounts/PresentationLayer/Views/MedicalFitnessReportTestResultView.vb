@@ -33,13 +33,6 @@ Namespace PresentationLayer.Views
         Public Property Errors As List(Of String) Implements IView.Errors
         Public Property DataFilter As String Implements IView.DataFilter
 
-        Public ReadOnly Property IsResultTextOnly As Boolean
-            Get
-                Return String.Equals(TestCode, "HEIGHT", StringComparison.OrdinalIgnoreCase) OrElse
-                       String.Equals(TestCode, "WEIGHT", StringComparison.OrdinalIgnoreCase)
-            End Get
-        End Property
-
         Public ReadOnly Property ResultStatusSourceDisplay As String
             Get
                 If String.Equals(ResultStatusSource, "A", StringComparison.OrdinalIgnoreCase) Then
@@ -54,14 +47,9 @@ Namespace PresentationLayer.Views
 
         Public Property IsFit As Boolean
             Get
-                Return Not IsResultTextOnly AndAlso ResultStatus = "F"
+                Return ResultStatus = "F"
             End Get
             Set(value As Boolean)
-                If IsResultTextOnly Then
-                    ResultStatus = Nothing
-                    Return
-                End If
-
                 If value Then
                     ResultStatus = "F"
                     ResultStatusSource = "M"
@@ -74,14 +62,9 @@ Namespace PresentationLayer.Views
 
         Public Property IsUnfit As Boolean
             Get
-                Return Not IsResultTextOnly AndAlso ResultStatus = "U"
+                Return ResultStatus = "U"
             End Get
             Set(value As Boolean)
-                If IsResultTextOnly Then
-                    ResultStatus = Nothing
-                    Return
-                End If
-
                 If value Then
                     ResultStatus = "U"
                     ResultStatusSource = "M"
@@ -91,6 +74,19 @@ Namespace PresentationLayer.Views
                 End If
             End Set
         End Property
+
+    End Class
+
+    Public Class MedicalFitnessGroupedLabResultView
+
+        Public Property Sequence As Int32
+        Public Property GroupName As String
+        Public Property TestCode As String
+        Public Property TestName As String
+        Public Property ResultValue As String
+        Public Property ReferenceValue As String
+        Public Property Unit As String
+        Public Property Assessment As String
 
     End Class
 

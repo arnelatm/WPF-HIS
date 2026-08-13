@@ -1,5 +1,7 @@
 ﻿Imports System.IO
 
+Imports AATM.Libraries.GlobalFuncNSub
+
 Namespace PresentationLayer.Views.Forms
 
     Public NotInheritable Class FormAbout
@@ -19,7 +21,7 @@ Namespace PresentationLayer.Views.Forms
             LabelProductName.Text = My.Application.Info.ProductName
             LabelVersion.Text = String.Format("Version {0}", My.Application.Info.Version.ToString)
             LabelCopyright.Text = My.Application.Info.Copyright
-            LabelCompanyName.Text = My.Application.Info.CompanyName
+            LabelCompanyName.Text = GlobalVariables.GetEstablishmentName()
             TextBoxDescription.Text = My.Application.Info.Description
         End Sub
 

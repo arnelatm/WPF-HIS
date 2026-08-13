@@ -114,11 +114,7 @@ Namespace PresentationLayer.Presenters
             Dim language As String
             Dim estName As String
             language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
-            If language = "ar" Then
-                estName = GlobalVariables.EstablishmentNameAra
-            Else
-                estName = GlobalVariables.EstablishmentName
-            End If
+            estName = GlobalVariables.GetEstablishmentName(language)
             Dim cForm As New ReportForm(reportName, reportTitle, "ReportTitle", language, "Language", estName, "EstablishmentName", View.PayrollIdNo, "PayrollIdNo")
             cForm.Show()
         End Sub

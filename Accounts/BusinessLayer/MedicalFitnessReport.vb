@@ -76,4 +76,17 @@ Namespace BusinessLayer
 
     End Class
 
+    Public Class MedicalFitnessGroupedLabResult
+        Inherits BusinessObject
+
+        Public Property Sequence As Int32
+        Public Property GroupName As String
+        Public Property TestCode As String
+        Public Property TestName As String
+        Public Property ResultValue As String
+        Public Property ReferenceValue As String
+        Public Property Unit As String
+
+    End Class
+
 End Namespace

@@ -447,18 +447,6 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
         End If
     End Sub
 
-    Public ReadOnly Property EstablishmentName As String
-        Get
-            Return GetRecordField("Establishment", "EstablishmentName")
-        End Get
-    End Property
-
-    Public ReadOnly Property EstablishmentNameAra As String
-        Get
-            Return GetRecordField("Establishment", "EstablishmentNameAra")
-        End Get
-    End Property
-
     Public ReadOnly Property EditingAllowed As Boolean
         Get
             Dim accessName = "Table" + TableName + "Editing"

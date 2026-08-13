@@ -103,6 +103,61 @@ Namespace DataLayer.AdoNet
             Return _kizenDb.Read(sql, MakeKizenLabAnalysis, "@InvoiceNo", invoiceNo).ToList()
         End Function
 
+        ''' <summary>
+        ''' Reads the selected analysis and all of its visible descendants directly from Kizen.
+        ''' This method is intentionally read-only and never writes to the Kizen database.
+        ''' </summary>
+        Public Function GetKizenGroupedLabResults(invoiceNo As Int32, testCode As String) As List(Of MedicalFitnessGroupedLabResult)
+            If invoiceNo = 0 OrElse String.IsNullOrWhiteSpace(testCode) Then
+                Return New List(Of MedicalFitnessGroupedLabResult)()
+            End If
+
+            Dim sql As String =
+                "WITH SourceRows AS (" &
+                "SELECT d.ID AS VisitAnalysesID, r.ID, " &
+                "COALESCE(NULLIF(CONVERT(nvarchar(1000), LTRIM(RTRIM(r.Code))), N''), N'KIZEN_' + CONVERT(nvarchar(20), r.ID)) AS TestCode, " &
+                "CONVERT(nvarchar(1000), LTRIM(RTRIM(r.Code))) AS ResultCode, " &
+                "CONVERT(nvarchar(1000), LTRIM(RTRIM(r.Parent))) AS ParentCode, " &
+                "CONVERT(nvarchar(1000), LTRIM(RTRIM(r.Name))) AS TestName, " &
+                "CONVERT(nvarchar(max), r.Data) AS ResultValue, " &
+                "CONVERT(nvarchar(max), r.RV) AS ReferenceValue, " &
+                "CONVERT(nvarchar(100), r.Unit) AS UnitValue " &
+                "FROM dbo.VisitAnalysesData d " &
+                "INNER JOIN dbo.VisitAnalysesResult r ON r.VisitAnalysesID = d.ID " &
+                "WHERE d.OrderID = @InvoiceNo " &
+                "AND ISNULL(r.IsHide, 0) = 0 " &
+                "AND NULLIF(CONVERT(nvarchar(1000), LTRIM(RTRIM(r.Name))), N'') IS NOT NULL), " &
+                "RankedRoots AS (" &
+                "SELECT source.*, ROW_NUMBER() OVER (ORDER BY source.VisitAnalysesID DESC, source.ID DESC) AS RootNumber " &
+                "FROM SourceRows source " &
+                "WHERE source.TestCode = @TestCode), " &
+                "SelectedRoot AS (" &
+                "SELECT * FROM RankedRoots WHERE RootNumber = 1), " &
+                "ChildRows AS (" &
+                "SELECT child.ID, child.TestCode, child.TestName, child.ResultValue, child.ReferenceValue, child.UnitValue, " &
+                "CASE WHEN LEN(child.ParentCode) > LEN(root.ResultCode) + 1 " &
+                "THEN REPLACE(REPLACE(SUBSTRING(child.ParentCode, LEN(root.ResultCode) + 2, 1000), N'PropertyGroup_', N''), N'_', N' ') " &
+                "ELSE root.TestName END AS GroupName " &
+                "FROM SourceRows child " &
+                "INNER JOIN SelectedRoot root ON root.VisitAnalysesID = child.VisitAnalysesID " &
+                "WHERE NULLIF(root.ResultCode, N'') IS NOT NULL " &
+                "AND LEFT(child.ParentCode, LEN(root.ResultCode) + 1) = root.ResultCode + N'_'), " &
+                "DisplayRows AS (" &
+                "SELECT ID, TestCode, TestName, ResultValue, ReferenceValue, UnitValue, GroupName FROM ChildRows " &
+                "UNION ALL " &
+                "SELECT root.ID, root.TestCode, root.TestName, root.ResultValue, root.ReferenceValue, root.UnitValue, root.TestName " &
+                "FROM SelectedRoot root WHERE NOT EXISTS (SELECT 1 FROM ChildRows)) " &
+                "SELECT CONVERT(int, ROW_NUMBER() OVER (ORDER BY ID)) AS Sequence, " &
+                "GroupName, TestCode, TestName, ResultValue, ReferenceValue, UnitValue " &
+                "FROM DisplayRows ORDER BY ID"
+
+            Return _kizenDb.Read(
+                sql,
+                MakeKizenGroupedLabResult,
+                "@InvoiceNo", invoiceNo,
+                "@TestCode", testCode.Trim()).ToList()
+        End Function
+
         Public Function GetActiveLabTemplates() As List(Of MedicalFitnessReportLabTemplate)
             Dim sql As String =
                 "SELECT IdNo,TestCode,TestNameEnglish,TestNameArabic,DisplayOrder,Active " &
@@ -314,6 +369,16 @@ Namespace DataLayer.AdoNet
             Function(reader) New MedicalFitnessReportLabAnalysis() With {
                 .TestCode = Extensions.AsString(reader("TestCode")),
                 .TestNameEnglish = Extensions.AsString(reader("TestNameEnglish")),
+                .ResultValue = Extensions.AsString(reader("ResultValue")),
+                .ReferenceValue = Extensions.AsString(reader("ReferenceValue")),
+                .Unit = Extensions.AsString(reader("UnitValue"))}
+
+        Private Shared ReadOnly MakeKizenGroupedLabResult As Func(Of IDataReader, MedicalFitnessGroupedLabResult) =
+            Function(reader) New MedicalFitnessGroupedLabResult() With {
+                .Sequence = Extensions.AsInt(Of Int32)(reader("Sequence")),
+                .GroupName = Extensions.AsString(reader("GroupName")),
+                .TestCode = Extensions.AsString(reader("TestCode")),
+                .TestName = Extensions.AsString(reader("TestName")),
                 .ResultValue = Extensions.AsString(reader("ResultValue")),
                 .ReferenceValue = Extensions.AsString(reader("ReferenceValue")),
                 .Unit = Extensions.AsString(reader("UnitValue"))}

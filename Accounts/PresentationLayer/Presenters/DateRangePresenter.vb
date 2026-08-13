@@ -31,22 +31,11 @@ Public Class DateRangePresenter(Of TM As New)
 
     Private Sub OnFormLoaded()
         Dim qParameters As String = _reportModel.QueryFormParameters
-        Dim lParameters As String()
         Dim period As String = Nothing
-        Dim defStart = Nothing ' default start date
-        Dim defEnd = Nothing  ' default end date
-        Dim contactName As String
-        If qParameters IsNot Nothing Then
-            lParameters = qParameters.Split(","c)
-            period = lParameters(0) ' D for daily, M for monthly, Y for yearly etc.
-            defStart = lParameters(1) ' default start date
-            defEnd = lParameters(2) ' default end date
-            If lParameters.Count() = 4 Then
-                contactName = lParameters(3)
-            Else
-                contactName = ""
-            End If
-        End If
+        Dim defStart As String = Nothing
+        Dim defEnd As String = Nothing
+        Dim contactName As String = Nothing
+        ParseQueryFormParameters(qParameters, period, defStart, defEnd, contactName)
         SetInitialDates(period, defStart, defEnd, View.BeginningDate, View.EndingDate)
     End Sub
 
@@ -60,11 +49,7 @@ Public Class DateRangePresenter(Of TM As New)
         Dim endingDate As Date?
         Dim estName As String
 
-        If View.Language = "ar" Then
-            estName = GlobalVariables.EstablishmentNameAra
-        Else
-            estName = GlobalVariables.EstablishmentName
-        End If
+        estName = GlobalVariables.GetEstablishmentName(View.Language)
         beginningDate = View.BeginningDate
         endingDate = View.EndingDate
         Dim reportName = Libraries.MessagingLibrary.Messaging.TranslateCaption(_reportName)
@@ -86,7 +71,7 @@ Public Class DateRangePresenter(Of TM As New)
                                             beginningDate.Value, "BeginningDate",
                                             endingDate.Value, "EndingDate",
                                             _reportModel.ReportTitle, "ReportTitle",
-                                            GlobalVariables.EstablishmentName, "EstablishmentName",
+                                            GlobalVariables.GetEstablishmentName(language), "EstablishmentName",
                                             language, "Language"}
             If _reportModel.QueryParameters IsNot Nothing AndAlso _reportModel.QueryParameters <> "" Then
                 Dim qParameters As String = _reportModel.QueryParameters
@@ -133,11 +118,7 @@ Public Class ContactDateRangePresenter(Of TM As New)
         Dim endingDate As Date?
         Dim estName As String
 
-        If View.Language = "ar" Then
-            estName = GlobalVariables.EstablishmentNameAra
-        Else
-            estName = GlobalVariables.EstablishmentName
-        End If
+        estName = GlobalVariables.GetEstablishmentName(View.Language)
         beginningDate = View.BeginningDate
         endingDate = View.EndingDate
         Dim reportName = Libraries.MessagingLibrary.Messaging.TranslateCaption(_reportName)
@@ -161,7 +142,7 @@ Public Class ContactDateRangePresenter(Of TM As New)
                                             endingDate.Value, "EndingDate",
                                             View.IdNo, "IdNo",
                                             _reportModel.ReportTitle, "ReportTitle",
-                                            GlobalVariables.EstablishmentName, "EstablishmentName",
+                                            GlobalVariables.GetEstablishmentName(language), "EstablishmentName",
                                             language, "Language"}
             reportArgs.DataBaseConnectionName = _reportModel.DatabaseName
             Dim p As New PrintReportPresenter(Of AccountModel)
@@ -173,19 +154,11 @@ Public Class ContactDateRangePresenter(Of TM As New)
 
     Private Sub ContactDateRangeFormLoaded()
         Dim qParameters As String = _reportModel.QueryFormParameters
-        Dim lParameters As String() = qParameters.Split(","c)
-        Dim period As String
-        period = lParameters(0) ' D for daily, M for monthly, Y for yearly etc.
-        Dim defStart = lParameters(1) ' default start date
-        Dim defEnd = lParameters(2) ' default end date
-        Dim contactName As String
-        If lParameters.Count() = 4 Then
-            contactName = lParameters(3)
-        Else
-            contactName = ""
-        End If
-        Dim dStart As Date = GetCodedDate(defStart)
-        Dim dEnd As Date = GetCodedDate(defEnd)
+        Dim period As String = Nothing
+        Dim defStart As String = Nothing
+        Dim defEnd As String = Nothing
+        Dim contactName As String = Nothing
+        ParseQueryFormParameters(qParameters, period, defStart, defEnd, contactName)
         SetInitialDates(period, defStart, defEnd, View.BeginningDate, View.EndingDate)
         If contactName <> "" And Not (_reportModel.DatabaseName Is Nothing OrElse _reportModel.DatabaseName = "") Then
             Service.SaveConnectionString()
@@ -217,6 +190,33 @@ End Class
 
 Friend Module DateRangeModule
 
+    Friend Sub ParseQueryFormParameters(queryFormParameters As String,
+                                        ByRef period As String,
+                                        ByRef defaultStart As String,
+                                        ByRef defaultEnd As String,
+                                        ByRef contactName As String)
+        period = "D"
+        defaultStart = "CD"
+        defaultEnd = "CD"
+        contactName = ""
+
+        If String.IsNullOrWhiteSpace(queryFormParameters) Then
+            Return
+        End If
+
+        Dim parameters As String() = queryFormParameters.Split(","c).Select(Function(item) item.Trim()).ToArray()
+        If parameters.Length < 3 Then
+            Return
+        End If
+
+        period = parameters(0).ToUpperInvariant()
+        defaultStart = parameters(1).ToUpperInvariant()
+        defaultEnd = parameters(2).ToUpperInvariant()
+        If parameters.Length >= 4 Then
+            contactName = parameters(3)
+        End If
+    End Sub
+
     ''' <summary>
     ''' Converts a report date-code from <see cref="ReportModel.QueryFormParameters"/> into a concrete Gregorian date.
     ''' The returned date is a base date relative to <see cref="Today"/>; <see cref="SetInitialDates"/> may then normalize
@@ -231,13 +231,13 @@ Friend Module DateRangeModule
         Dim now As Date = Today()
         value = GlobalFunctions.GregorianDateSerial(now.Year, 1, 1).AddYears(-1)
         Select Case dateCode
-            Case "CD" ' current day
+            Case "CD", "ED" ' current/end day
                 value = GlobalFunctions.GregorianDateSerial(now.Year, now.Month, now.Day)
             Case "PD" ' previous day
                 value = GlobalFunctions.GregorianDateSerial(now.Year, now.Month, now.Day).AddDays(-1)
             Case "ND" ' next day
                 value = GlobalFunctions.GregorianDateSerial(now.Year, now.Month, now.Day).AddDays(1)
-            Case "CM" ' current month start
+            Case "CM", "BM" ' current/beginning month
                 value = GlobalFunctions.GregorianDateSerial(now.Year, now.Month, 1)
             Case "CME" ' current month end
                 value = GlobalFunctions.GregorianDateSerial(now.Year, now.Month, 1).AddMonths(1).AddDays(-1)

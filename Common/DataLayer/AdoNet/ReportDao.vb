@@ -33,6 +33,7 @@ Namespace DataLayer.AdoNet
                                   "ReportFileName," &
                                   "ReportName," &
                                   "ReportNameAra," &
+                                  "ReportOrder," &
                                   "ReportTitle," &
                                   "ReportTitleAra"
 
@@ -56,6 +57,7 @@ Namespace DataLayer.AdoNet
             .ReportGroupIdNo = Extensions.AsInt(Of Int16)(reader("ReportGroupIdNo")),
             .ReportName = Extensions.AsString(reader("ReportName")),
             .ReportNameAra = Extensions.AsString(reader("ReportNameAra")),
+            .ReportOrder = Extensions.AsInt(Of Int32)(reader("ReportOrder")),
             .ReportTitle = Extensions.AsString(reader("ReportTitle")),
             .ReportTitleAra = Extensions.AsString(reader("ReportTitleAra"))
             }
@@ -67,8 +69,8 @@ Namespace DataLayer.AdoNet
             '        " VALUES (@QueryForm,@QueryFormParameters,@QueryParameters,@ReportCode,@ReportFileName,@ReportName,@ReportNameAra,@ReportTitle,@ReportTitleAra)"
             Dim sql As String =
                     " INSERT INTO Report " &
-                    " (Active,BranchIdNo,DatabaseName,PrintJobIdNo,QueryForm,QueryFormParameters,QueryParameters,PromptParameterNames,RepeatPromptAfterClose,ReportCode,ReportFileName,ReportGroupIdNo,ReportName,ReportNameAra,ReportTitle,ReportTitleAra) " &
-                    " VALUES (@Active,@BranchIdNo,@DatabaseName,@PrintJobIdNo,@QueryForm,@QueryFormParameters,@QueryParameters,@PromptParameterNames,@RepeatPromptAfterClose,@ReportCode,@ReportFileName,@ReportGroupIdNo,@ReportName,@ReportNameAra,@ReportTitle,@ReportTitleAra)"
+                    " (Active,BranchIdNo,DatabaseName,PrintJobIdNo,QueryForm,QueryFormParameters,QueryParameters,PromptParameterNames,RepeatPromptAfterClose,ReportCode,ReportFileName,ReportGroupIdNo,ReportName,ReportNameAra,ReportOrder,ReportTitle,ReportTitleAra) " &
+                    " VALUES (@Active,@BranchIdNo,@DatabaseName,@PrintJobIdNo,@QueryForm,@QueryFormParameters,@QueryParameters,@PromptParameterNames,@RepeatPromptAfterClose,@ReportCode,@ReportFileName,@ReportGroupIdNo,@ReportName,@ReportNameAra,@ReportOrder,@ReportTitle,@ReportTitleAra)"
             Return _db.Insert(sql, Take(report))
         End Function
 
@@ -89,6 +91,7 @@ Namespace DataLayer.AdoNet
                                     "ReportGroupIdNo", report.ReportGroupIdNo,
                                     "ReportName", report.ReportName,
                                     "ReportNameAra", report.ReportNameAra,
+                                    "ReportOrder", report.ReportOrder,
                                     "ReportTitle", report.ReportTitle,
                                     "ReportTitleAra", report.ReportTitleAra
                                 }
@@ -111,6 +114,7 @@ Namespace DataLayer.AdoNet
                     "ReportGroupIdNo = @ReportGroupIdNo, " &
                     "ReportName = @ReportName, " &
                     "ReportNameAra = @ReportNameAra, " &
+                    "ReportOrder = @ReportOrder, " &
                     "ReportTitle = @ReportTitle, " &
                     "ReportTitleAra = @ReportTitleAra " &
                     "WHERE IdNo = @IdNo"

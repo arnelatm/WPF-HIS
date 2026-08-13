@@ -35,15 +35,11 @@ Namespace PresentationLayer.Views.Forms.Reports
             Dim reportFileName As String = "Payroll Report.Rpt"
             Dim estName As String
             language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
-            If language = "ar" Then
-                estName = GlobalVariables.EstablishmentNameAra
-            Else
-                estName = GlobalVariables.EstablishmentName
-            End If
+            estName = GlobalVariables.GetEstablishmentName(language)
             crArgs.Language = CultureInfo.CurrentCulture.Name
             crArgs.ReportParameters = {reportTitle, "ReportTitle",
                                         CultureInfo.CurrentCulture.Name, "Language",
-                                        GlobalVariables.EstablishmentName, "EstablishmentName",
+                                        estName, "EstablishmentName",
                                         cboPayroll.SelectedValue, "PayrollIdNo"}
 
             RaiseEvent PrintReport(reportFileName, crArgs, False)

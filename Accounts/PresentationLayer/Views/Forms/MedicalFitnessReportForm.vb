@@ -24,6 +24,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Event RetrieveRequested() Implements IMedicalFitnessReportView.RetrieveRequested
         Public Event RefreshLabResultsRequested() Implements IMedicalFitnessReportView.RefreshLabResultsRequested
+        Public Event ViewKizenResultsRequested() Implements IMedicalFitnessReportView.ViewKizenResultsRequested
         Public Event SaveRequested() Implements IMedicalFitnessReportView.SaveRequested
         Public Event DeleteRequested() Implements IMedicalFitnessReportView.DeleteRequested
 
@@ -180,6 +181,23 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public ReadOnly Property SelectedTestResult As MedicalFitnessReportTestResultView Implements IMedicalFitnessReportView.SelectedTestResult
+            Get
+                If dgvResults Is Nothing OrElse dgvResults.CurrentRow Is Nothing Then
+                    Return Nothing
+                End If
+
+                Return TryCast(dgvResults.CurrentRow.DataBoundItem, MedicalFitnessReportTestResultView)
+            End Get
+        End Property
+
+        Public Sub ShowKizenGroupedResults(testName As String,
+                                           results As BindingList(Of MedicalFitnessGroupedLabResultView)) Implements IMedicalFitnessReportView.ShowKizenGroupedResults
+            Using resultForm As New KizenGroupedLabResultsForm(InvoiceNo, testName, results)
+                resultForm.ShowDialog(Me)
+            End Using
+        End Sub
+
         Private Sub BindGrid()
             If _bindingSource Is Nothing OrElse dgvResults Is Nothing Then
                 Return
@@ -187,6 +205,7 @@ Namespace PresentationLayer.Views.Forms
             _bindingSource.DataSource = _testResults
             dgvResults.DataSource = _bindingSource
             ApplyResultEntryModes()
+            UpdateViewKizenResultsButton()
         End Sub
 
         Private Sub ApplyResultEntryModes()
@@ -200,15 +219,9 @@ Namespace PresentationLayer.Views.Forms
                     Continue For
                 End If
 
-                If result.IsResultTextOnly Then
-                    result.ResultStatus = Nothing
-                Else
-                    result.ResultText = Nothing
-                End If
-
-                SetEntryCellEnabled(gridRow.Cells(colResultText.Index), result.IsResultTextOnly)
-                SetEntryCellEnabled(gridRow.Cells(colFit.Index), Not result.IsResultTextOnly)
-                SetEntryCellEnabled(gridRow.Cells(colUnfit.Index), Not result.IsResultTextOnly)
+                SetEntryCellEnabled(gridRow.Cells(colResultText.Index), True)
+                SetEntryCellEnabled(gridRow.Cells(colFit.Index), True)
+                SetEntryCellEnabled(gridRow.Cells(colUnfit.Index), True)
             Next
         End Sub
 
@@ -322,6 +335,10 @@ Namespace PresentationLayer.Views.Forms
             RaiseEvent RefreshLabResultsRequested()
         End Sub
 
+        Private Sub btnViewKizenResults_Click(sender As Object, e As EventArgs) Handles btnViewKizenResults.Click
+            RaiseEvent ViewKizenResultsRequested()
+        End Sub
+
         Private Sub btnSaveReport_Click(sender As Object, e As EventArgs) Handles btnSaveReport.Click
             dgvResults.EndEdit()
             _bindingSource.EndEdit()
@@ -388,7 +405,41 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub dgvResults_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs) Handles dgvResults.DataBindingComplete
             ApplyResultEntryModes()
+            UpdateViewKizenResultsButton()
         End Sub
+
+        Private Sub dgvResults_SelectionChanged(sender As Object, e As EventArgs) Handles dgvResults.SelectionChanged
+            UpdateViewKizenResultsButton()
+        End Sub
+
+        Private Sub dgvResults_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvResults.CellDoubleClick
+            If e.RowIndex < 0 OrElse e.ColumnIndex < 0 Then
+                Return
+            End If
+
+            Dim selectedRow = TryCast(dgvResults.Rows(e.RowIndex).DataBoundItem, MedicalFitnessReportTestResultView)
+            If Not CanViewKizenResults(selectedRow) Then
+                Return
+            End If
+
+            dgvResults.CurrentCell = dgvResults.Rows(e.RowIndex).Cells(e.ColumnIndex)
+            RaiseEvent ViewKizenResultsRequested()
+        End Sub
+
+        Private Sub UpdateViewKizenResultsButton()
+            If btnViewKizenResults Is Nothing Then
+                Return
+            End If
+
+            btnViewKizenResults.Enabled = CanViewKizenResults(SelectedTestResult)
+        End Sub
+
+        Private Function CanViewKizenResults(selectedRow As MedicalFitnessReportTestResultView) As Boolean
+            Return InvoiceNo <> 0 AndAlso
+                selectedRow IsNot Nothing AndAlso
+                String.Equals(selectedRow.SectionCode, "LAB", StringComparison.OrdinalIgnoreCase) AndAlso
+                Not String.IsNullOrWhiteSpace(selectedRow.TestCode)
+        End Function
 
         Private Sub chkFinalFit_CheckedChanged(sender As Object, e As EventArgs) Handles chkFinalFit.CheckedChanged
             If chkFinalFit.Checked Then

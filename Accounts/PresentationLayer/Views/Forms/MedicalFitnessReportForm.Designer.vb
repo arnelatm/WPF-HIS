@@ -11,6 +11,7 @@
             Me.txtInvoiceNo = New System.Windows.Forms.TextBox()
             Me.btnRetrieve = New System.Windows.Forms.Button()
             Me.btnRefreshLabResults = New System.Windows.Forms.Button()
+            Me.btnViewKizenResults = New System.Windows.Forms.Button()
             Me.btnSaveReport = New System.Windows.Forms.Button()
             Me.btnDeleteReport = New System.Windows.Forms.Button()
             Me.btnPrintReport = New System.Windows.Forms.Button()
@@ -75,6 +76,7 @@
             Me.invoicePanel.Controls.Add(Me.txtInvoiceNo)
             Me.invoicePanel.Controls.Add(Me.btnRetrieve)
             Me.invoicePanel.Controls.Add(Me.btnRefreshLabResults)
+            Me.invoicePanel.Controls.Add(Me.btnViewKizenResults)
             Me.invoicePanel.Controls.Add(Me.btnSaveReport)
             Me.invoicePanel.Controls.Add(Me.btnDeleteReport)
             Me.invoicePanel.Controls.Add(Me.btnPrintReport)
@@ -120,30 +122,40 @@
             Me.btnRefreshLabResults.Text = "Refresh Lab Results"
             Me.btnRefreshLabResults.UseVisualStyleBackColor = True
             '
+            'btnViewKizenResults
+            '
+            Me.btnViewKizenResults.Enabled = False
+            Me.btnViewKizenResults.Location = New System.Drawing.Point(419, 3)
+            Me.btnViewKizenResults.Name = "btnViewKizenResults"
+            Me.btnViewKizenResults.Size = New System.Drawing.Size(125, 23)
+            Me.btnViewKizenResults.TabIndex = 4
+            Me.btnViewKizenResults.Text = "View Kizen Results"
+            Me.btnViewKizenResults.UseVisualStyleBackColor = True
+            '
             'btnSaveReport
             '
-            Me.btnSaveReport.Location = New System.Drawing.Point(419, 3)
+            Me.btnSaveReport.Location = New System.Drawing.Point(550, 3)
             Me.btnSaveReport.Name = "btnSaveReport"
             Me.btnSaveReport.Size = New System.Drawing.Size(90, 23)
-            Me.btnSaveReport.TabIndex = 4
+            Me.btnSaveReport.TabIndex = 5
             Me.btnSaveReport.Text = "Save"
             Me.btnSaveReport.UseVisualStyleBackColor = True
             '
             'btnDeleteReport
             '
-            Me.btnDeleteReport.Location = New System.Drawing.Point(515, 3)
+            Me.btnDeleteReport.Location = New System.Drawing.Point(646, 3)
             Me.btnDeleteReport.Name = "btnDeleteReport"
             Me.btnDeleteReport.Size = New System.Drawing.Size(90, 23)
-            Me.btnDeleteReport.TabIndex = 5
+            Me.btnDeleteReport.TabIndex = 6
             Me.btnDeleteReport.Text = "Delete Report"
             Me.btnDeleteReport.UseVisualStyleBackColor = True
             '
             'btnPrintReport
             '
-            Me.btnPrintReport.Location = New System.Drawing.Point(611, 3)
+            Me.btnPrintReport.Location = New System.Drawing.Point(742, 3)
             Me.btnPrintReport.Name = "btnPrintReport"
             Me.btnPrintReport.Size = New System.Drawing.Size(100, 23)
-            Me.btnPrintReport.TabIndex = 6
+            Me.btnPrintReport.TabIndex = 7
             Me.btnPrintReport.Text = "Print Report"
             Me.btnPrintReport.UseVisualStyleBackColor = True
             '
@@ -451,6 +463,7 @@
         Friend WithEvents txtInvoiceNo As Global.System.Windows.Forms.TextBox
         Friend WithEvents btnRetrieve As Global.System.Windows.Forms.Button
         Friend WithEvents btnRefreshLabResults As Global.System.Windows.Forms.Button
+        Friend WithEvents btnViewKizenResults As Global.System.Windows.Forms.Button
         Friend WithEvents btnSaveReport As Global.System.Windows.Forms.Button
         Friend WithEvents btnDeleteReport As Global.System.Windows.Forms.Button
         Friend WithEvents btnPrintReport As Global.System.Windows.Forms.Button

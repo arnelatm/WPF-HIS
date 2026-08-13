@@ -14,12 +14,15 @@ Namespace PresentationLayer.Presenters
         Inherits CommonPresenter(Of IReportView, TM)
         Implements ISubscriber(Of ShowReportRequested)
 
+        Private Const ActiveReportsFilter As String = "Active = 1"
+
         Public Sub New(view As IView)
             MyBase.New(view)
             TableName = "Report"
             Service = New CommonService("Report")
             TreeViewMainField = "ReportName"
             SortOrderKey = "ReportName"
+            DataFilter = ActiveReportsFilter
             WithTreeView = True
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
@@ -44,6 +47,36 @@ Namespace PresentationLayer.Presenters
         Protected Overrides Sub CreateDataSources()
             MakeControlDataSources({New Object() {"PrintJob", "PrintJobIdNo", Nothing, Nothing},
                                     New Object() {"ReportGroup", "ReportGroupIdNo", Nothing}})
+        End Sub
+
+        Private Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
+            View.Active = True
+            View.DatabaseName = "ISPDATA"
+            View.ReportOrder = 0
+            View.QueryForm = ""
+        End Sub
+
+        Private Sub OnBeforeValidate() Handles MyBase.BeforeValidate
+            ' Reassign through the view properties so all values use the same
+            ' canonical format before validation, comparison, and persistence.
+            View.DatabaseName = View.DatabaseName
+            View.QueryForm = View.QueryForm
+            View.QueryFormParameters = View.QueryFormParameters
+            View.QueryParameters = View.QueryParameters
+            View.PromptParameterNames = View.PromptParameterNames
+            View.ReportCode = View.ReportCode
+            View.ReportFileName = View.ReportFileName
+        End Sub
+
+        Public Overrides Sub GoFilter()
+            If String.Equals(DataFilter, ActiveReportsFilter, StringComparison.OrdinalIgnoreCase) Then
+                DataFilter = ""
+            Else
+                DataFilter = ActiveReportsFilter
+            End If
+
+            DisplayTree()
+            GoFirstRecord()
         End Sub
 
 

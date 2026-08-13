@@ -53,7 +53,7 @@ Public Class CrViewer
     Private Sub SetParameters(reportArgs As CrPrintableArgs, Optional addDefaultParameters As Boolean = False)
         Dim language As String
         language = Microsoft.VisualBasic.Strings.Left(reportArgs.Language, FormCulture.Name.IndexOf("-", StringComparison.Ordinal))
-        Dim establishmentName As String = GetEstablishmentName(FormCulture, language)
+        Dim establishmentName As String = GlobalVariables.GetEstablishmentName(FormCulture)
         ReportPrinter.SetParameterValue(reportArgs.ReportParameters)
         If addDefaultParameters Then
             ReportPrinter.SetParameterValue({reportArgs.ReportTitle, "ReportTitle"})
@@ -89,23 +89,12 @@ Public Class CrViewer
     Private Sub SetParameters(reportTitle As String, formCulture As CultureInfo, args As Object)
         Dim language As String
         language = Microsoft.VisualBasic.Strings.Left(formCulture.Name, formCulture.Name.IndexOf("-", StringComparison.Ordinal))
-        Dim establishmentName As String = GetEstablishmentName(formCulture, language)
+        Dim establishmentName As String = GlobalVariables.GetEstablishmentName(formCulture)
         ReportPrinter.SetParameterValue(args)
         ReportPrinter.SetParameterValue({reportTitle, "ReportTitle"})
         ReportPrinter.SetParameterValue({establishmentName, "EstablishmentName"})
         ReportPrinter.SetParameterValue({language, "Language"})
     End Sub
-
-    Private Function GetEstablishmentName(cFormCulture As CultureInfo, language As String) As String
-        Dim establishmentName As String
-        language = Microsoft.VisualBasic.Strings.Left(cFormCulture.Name, cFormCulture.Name.IndexOf("-", StringComparison.Ordinal))
-        If language <> "ar" Then
-            establishmentName = GlobalVariables.EstablishmentName
-        Else
-            establishmentName = GlobalVariables.EstablishmentNameAra
-        End If
-        Return establishmentName
-    End Function
 
     'Public Property ReportFileName As String
 

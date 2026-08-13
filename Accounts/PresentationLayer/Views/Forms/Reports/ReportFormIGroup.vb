@@ -28,7 +28,7 @@ Namespace PresentationLayer.Views.Forms.Reports
                 Next
             End If
             ReportDocument.SetParameterValue("Language", language)
-            ReportDocument.SetParameterValue("EstablishmentName", GlobalVariables.EstablishmentName)
+            ReportDocument.SetParameterValue("EstablishmentName", GlobalVariables.GetEstablishmentName(language))
             ReportDocument.DataSourceConnections.Clear()
             SetPrintOption(printJobName)
             ProcessReport()

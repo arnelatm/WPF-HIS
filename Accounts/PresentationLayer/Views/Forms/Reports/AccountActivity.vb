@@ -80,11 +80,7 @@ Namespace PresentationLayer.Views.Forms.Reports
                 Dim reportArgs As New CrPrintableArgs
                 Dim reportParameters As New Object
                 Dim estName As String
-                If language = "ar" Then
-                    estName = GlobalVariables.EstablishmentNameAra
-                Else
-                    estName = GlobalVariables.EstablishmentName
-                End If
+                estName = GlobalVariables.GetEstablishmentName(language)
                 reportArgs.ReportParameters = {reportTitle, "ReportTitle",
                                                language, "Language",
                                                dtpBeginningDate.Value, "BeginningDate",

@@ -14,11 +14,14 @@ Namespace PresentationLayer.Views.Interfaces
         Property QueryForm As String
         Property QueryFormParameters As String
         Property QueryParameters As String
+        Property PromptParameterNames As String
+        Property RepeatPromptAfterClose As Boolean
         Property ReportCode As String
         Property ReportFileName As String
         Property ReportGroupIdNo As Int16
         Property ReportName As String
         Property ReportNameAra As String
+        Property ReportOrder As Int32
         Property ReportTitle As String
         Property ReportTitleAra As String
 

@@ -42,11 +42,7 @@ Namespace PresentationLayer.Views.Forms.Reports
                 Dim reportParameters As New Object
                 Dim estName As String
                 Dim language = Strings.Left(CultureInfo.CurrentCulture.Name, CultureInfo.CurrentCulture.Name.IndexOf("-"))
-                If language = "ar" Then
-                    estName = GlobalVariables.EstablishmentNameAra
-                Else
-                    estName = GlobalVariables.EstablishmentName
-                End If
+                estName = GlobalVariables.GetEstablishmentName(language)
                 reportFileName = $"Diagnostic Test Summary.Rpt"
                 selection = cboReportSelector.SelectedIndex + 1
                 If selection > 0 Then

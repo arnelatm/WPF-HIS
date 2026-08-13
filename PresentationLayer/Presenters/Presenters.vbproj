@@ -108,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DefaultFieldValuePresenter.vb" />
+    <Compile Include="EstablishmentInformationProvider.vb" />
     <Compile Include="IViewDataEntry.vb" />
     <Compile Include="LoginPresenter.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />

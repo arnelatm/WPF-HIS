@@ -78,11 +78,7 @@ Public Class FinancialReportPresenter(Of TM As New)
         Dim AccountBalanceYear As Integer
         Dim begDataDate As Date
         Dim estName As String
-        If language = "ar" Then
-            estName = GlobalVariables.EstablishmentNameAra
-        Else
-            estName = GlobalVariables.EstablishmentName
-        End If
+        estName = GlobalVariables.GetEstablishmentName(language)
         If _withFiscalYearDateRequirement Then
             lastFiscalYearDate = Service.GetRecordFieldWithKeyG(Of Date)("LastFiscalYearEnd", "LastPosting", "TransactionName", "lastPostingDate")
             beginningDate = IIf(View.BeginningDate Is Nothing, View.EndingDate, View.BeginningDate)

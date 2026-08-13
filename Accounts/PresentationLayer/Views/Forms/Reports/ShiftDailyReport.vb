@@ -48,7 +48,7 @@ Namespace PresentationLayer.Views.Forms.Reports
                 Dim reportArgs As New CrPrintableArgs
                 Dim reportParameters As New Object
                 reportArgs.ReportParameters = {CultureInfo.CurrentCulture.Name, "Language",
-                                               GlobalVariables.EstablishmentName, "EstablishmentName",
+                                               GlobalVariables.GetEstablishmentName(CultureInfo.CurrentCulture), "EstablishmentName",
                                                reportTitle, "ReportTitle",
                                                dtpBeginningDate.Value, "BeginningDate",
                                                dtpEndingDate.Value, "EndingDate"

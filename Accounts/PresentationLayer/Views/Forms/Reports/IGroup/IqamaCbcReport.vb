@@ -49,11 +49,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Dim reportParameters As New Object
             Dim estName As String
             Dim language = Strings.Left(CultureInfo.CurrentCulture.Name, CultureInfo.CurrentCulture.Name.IndexOf("-"))
-            If language = "ar" Then
-                estName = GlobalVariables.EstablishmentNameAra
-            Else
-                estName = GlobalVariables.EstablishmentName
-            End If
+            estName = GlobalVariables.GetEstablishmentName(language)
             If _mode = "SampleNo" Then
                 parameters.Add({"SampleNo", txtSampleNo.GetValue(Of Int32)})
                 reportFileName = "CBCReportDyMindBySampleNo.Rpt"

@@ -1,4 +1,5 @@
 ﻿Imports System.ComponentModel
+Imports System.Configuration
 Imports System.Globalization
 Imports System.Threading
 Imports AATM.Accounts.PresentationLayer.Models
@@ -81,9 +82,21 @@ Namespace PresentationLayer.Views.Forms
                 SetLanguageChangeButtons()
                 SetupMapper()
                 Presenter = New UserPresenter(Of UserModel)(Me)
-                GlobalVariables.EstablishmentName = Presenter.EstablishmentName
-                GlobalVariables.EstablishmentNameAra = Presenter.EstablishmentNameAra
+                InitializeEstablishmentInformation()
             End If
+        End Sub
+
+        Private Sub InitializeEstablishmentInformation()
+            Try
+                Dim dataService = DirectCast(Presenter.Service, AATM.ServicesLayer.Services.IService)
+                Dim establishment = EstablishmentInformationProvider.Load(dataService)
+                GlobalVariables.SetEstablishmentNames(establishment.EnglishName, establishment.ArabicName)
+            Catch ex As Exception
+                Throw New ConfigurationErrorsException(
+                    "Unable to initialize establishment information from dbo.Establishment (IdNo = 1). " &
+                    "Verify that the record exists and that EstablishmentName and EstablishmentNameAra are populated.",
+                    ex)
+            End Try
         End Sub
 
         Public Event FormCultureChanged()
@@ -216,11 +229,7 @@ Namespace PresentationLayer.Views.Forms
             Dim language As String
             Dim estName As String
             language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
-            If language = "ar" Then
-                estName = GlobalVariables.EstablishmentName
-            Else
-                estName = GlobalVariables.EstablishmentNameAra
-            End If
+            estName = GlobalVariables.GetEstablishmentName(language)
             Dim cForm As New ReportForm("Aging of Accounts Receivable.Rpt", reportTitle, "ReportTitle", estName, "EstablishmentName", language, "Language")
             ShowOwnedForm(cForm)
         End Sub
@@ -233,11 +242,7 @@ Namespace PresentationLayer.Views.Forms
             Dim language As String
             Dim estName As String
             language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
-            If language = "ar" Then
-                estName = GlobalVariables.EstablishmentName
-            Else
-                estName = GlobalVariables.EstablishmentNameAra
-            End If
+            estName = GlobalVariables.GetEstablishmentName(language)
             Dim cForm As New ReportForm("Aging of Accounts Payable.Rpt", reportTitle, "ReportTitle", language, "Language", estName, "EstablishmentName")
             cForm.Presenter = New PrintReportPresenter(Of ReportModel)
             ShowOwnedForm(cForm)

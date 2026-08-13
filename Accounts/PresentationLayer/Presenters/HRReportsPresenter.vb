@@ -46,11 +46,7 @@ Public Class HRReportsPresenter(Of TM As New)
         Dim curCulture = CultureInfo.CurrentCulture
         CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
         Dim estName As String
-        If View.Language = "ar" Then
-            estName = GlobalVariables.EstablishmentNameAra
-        Else
-            estName = GlobalVariables.EstablishmentName
-        End If
+        estName = GlobalVariables.GetEstablishmentName(View.Language)
         Dim reportTitle As String
         Dim reportArgs As New CrPrintableArgs
         Dim reportName As String = View.ReportName

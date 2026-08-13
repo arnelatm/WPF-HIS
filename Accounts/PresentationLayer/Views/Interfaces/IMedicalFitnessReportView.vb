@@ -21,11 +21,15 @@ Namespace PresentationLayer.Views.Interfaces
         Property FinalResultStatus As String
         Property Remarks As String
         Property TestResults As BindingList(Of MedicalFitnessReportTestResultView)
+        ReadOnly Property SelectedTestResult As MedicalFitnessReportTestResultView
 
         Event RetrieveRequested()
         Event RefreshLabResultsRequested()
+        Event ViewKizenResultsRequested()
         Event SaveRequested()
         Event DeleteRequested()
+
+        Sub ShowKizenGroupedResults(testName As String, results As BindingList(Of MedicalFitnessGroupedLabResultView))
 
     End Interface
 

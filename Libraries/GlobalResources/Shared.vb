@@ -130,12 +130,6 @@ End Class
 
 Public Class Strings
 
-    Public Shared ReadOnly Property CompanyName() As String
-        Get
-            Return My.Resources.CompanyName
-        End Get
-    End Property
-
     Public Shared ReadOnly Property HijriCalendarMarker() As String
         Get
             Return My.Resources.HijriCalendarMarker

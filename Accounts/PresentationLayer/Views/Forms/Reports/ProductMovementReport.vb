@@ -42,7 +42,7 @@ Namespace PresentationLayer.Views.Forms.Reports
                 reportArgs.ReportParameters = {cboProductIdNo.SelectedItem("IdNo"), "ProductIdNo",
                                                cboWarehouseIdNo.SelectedItem("IdNo"), "WarehouseIdNo",
                                                reportTitle, "ReportTitle",
-                                               GlobalVariables.EstablishmentName, "EstablishmentName",
+                                               GlobalVariables.GetEstablishmentName(CultureInfo.CurrentCulture), "EstablishmentName",
                                                CultureInfo.CurrentCulture.Name, "Language",
                                                cboWarehouseIdNo.SelectedItem("Name"), "WarehouseName",
                                                dtpBeginningDate.Value, "BeginningDate",

@@ -62,7 +62,14 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Private Function GetPrintJobIdNo(reportFileName) As Int16
-            Return _psService.GetRecordFieldWithKeyG(Of Int16, String)(reportFileName, "Report", "ReportFileName", "PrintJobIdNo")
+            For Each lookupReportFileName As String In GetReportFileNameLookupKeys(reportFileName)
+                Dim printJobIdNo As Int16 = _psService.GetRecordFieldWithKeyG(Of Int16, String)(lookupReportFileName, "Report", "ReportFileName", "PrintJobIdNo")
+                If printJobIdNo > 0 Then
+                    Return printJobIdNo
+                End If
+            Next
+
+            Return 0
         End Function
 
         Public Sub ProcessReport(reportFileName As String, printArgs As CrPrintableArgs, printDirectly As Boolean, Optional addDefaultParameters As Boolean = False)

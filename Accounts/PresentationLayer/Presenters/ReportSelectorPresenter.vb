@@ -102,9 +102,9 @@ Namespace PresentationLayer.Presenters
                     '    Next
                     'End If
                     If report.DatabaseName = "" Then
-                        reportArgs.DataBaseConnectionName = "Kizen" ' _reportModel.DatabaseName
+                        reportArgs.DataBaseConnectionName = "ISPDATA"
                     Else
-                        reportArgs.DataBaseConnectionName = report.DatabaseName
+                        reportArgs.DataBaseConnectionName = report.DatabaseName.Trim().ToUpperInvariant()
                     End If
 
                     Dim p As New PrintReportPresenter(Of AccountModel)

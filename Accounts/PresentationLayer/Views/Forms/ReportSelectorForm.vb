@@ -58,7 +58,10 @@ Namespace PresentationLayer.Views.Forms
         Public Property ReportTitleAra As String Implements IReportSelectorView.ReportTitleAra
         Public Property QueryFormParameters As String Implements IReportView.QueryFormParameters
         Public Property QueryParameters As String Implements IReportView.QueryParameters
+        Public Property PromptParameterNames As String Implements IReportView.PromptParameterNames
+        Public Property RepeatPromptAfterClose As Boolean Implements IReportView.RepeatPromptAfterClose
         Public Property PrintJobIdNo As Short Implements IReportView.PrintJobIdNo
+        Public Property ReportOrder As Integer Implements IReportView.ReportOrder
         Public Property Active As Boolean Implements IReportView.Active
         Public Property BranchIdNo As Short Implements IReportView.BranchIdNo
         Public Property DateCreated As Date Implements IReportView.DateCreated

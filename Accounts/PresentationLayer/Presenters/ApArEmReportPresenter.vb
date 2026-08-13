@@ -86,11 +86,7 @@ Public Class ApArEmReportPresenter(Of TM As New)
         Dim endingDate As Date?
         Dim estName As String
 
-        If View.Language = "ar" Then
-            estName = GlobalVariables.EstablishmentNameAra
-        Else
-            estName = GlobalVariables.EstablishmentName
-        End If
+        estName = GlobalVariables.GetEstablishmentName(View.Language)
         beginningDate = View.BeginningDate
         endingDate = View.EndingDate
         Dim reportName = Libraries.MessagingLibrary.Messaging.TranslateCaption(_reportName)
@@ -115,7 +111,7 @@ Public Class ApArEmReportPresenter(Of TM As New)
                         View.IdNo, "SupplierIdNo",
                         View.PersonSelectorControl.Text, "DisplayName",
                         reportTitle, "ReportTitle",
-                        GlobalVariables.EstablishmentName, "EstablishmentName",
+                        estName, "EstablishmentName",
                         View.Language, "Language"}
                 Case "ArStatement"
                     reportArgs.ReportParameters = {beginningDate.Value, "BeginningDate",
@@ -123,7 +119,7 @@ Public Class ApArEmReportPresenter(Of TM As New)
                         View.IdNo, "CustomerIdNo",
                         View.PersonSelectorControl.Text, "DisplayName",
                         reportTitle, "ReportTitle",
-                        GlobalVariables.EstablishmentName, "EstablishmentName",
+                        estName, "EstablishmentName",
                         View.Language, "Language"}
                 Case "ErStatement"
                     reportArgs.ReportParameters = {beginningDate.Value, "BeginningDate",
@@ -131,7 +127,7 @@ Public Class ApArEmReportPresenter(Of TM As New)
                         View.IdNo, "EmployeeIdNo",
                         View.PersonSelectorControl.Text, "DisplayName",
                         reportTitle, "ReportTitle",
-                        GlobalVariables.EstablishmentName, "EstablishmentName",
+                        estName, "EstablishmentName",
                         View.Language, "Language"}
                 Case "EmployeeInfo"
                     reportArgs.ReportParameters = {View.IdNo, "EmployeeIdNo"}
@@ -140,7 +136,7 @@ Public Class ApArEmReportPresenter(Of TM As New)
                         endingDate.Value, "EndingDate",
                         View.IdNo, "EmployeeIdNo",
                         reportTitle, "ReportTitle",
-                        GlobalVariables.EstablishmentName, "EstablishmentName",
+                        estName, "EstablishmentName",
                         View.Language, "Language"}
             End Select
             Dim p As New PrintReportPresenter(Of AccountModel)

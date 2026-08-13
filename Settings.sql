@@ -1,6 +1,9 @@
 ﻿USE [ISPDATA]
 GO
-INSERT [dbo].[Setting] ([IdNo], [Group], [SettingCode], [ValueType], [Value], [Notes]) VALUES (1, N'Company', N'NAME', N'S', N'Ibn Sina Polyclinic', NULL)
+INSERT [dbo].[Setting] ([IdNo], [Group], [SettingCode], [ValueType], [Value], [Notes])
+SELECT TOP (1) 1, N'Company', N'NAME', N'S', [EstablishmentName], NULL
+FROM [dbo].[Establishment]
+ORDER BY [IdNo]
 GO
 INSERT [dbo].[Setting] ([IdNo], [Group], [SettingCode], [ValueType], [Value], [Notes]) VALUES (2, N'Company', N'ADDR', N'S', N'Al-Odabaa St., Al-Azizia District, Jeddah', NULL)
 GO
