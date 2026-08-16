@@ -16,7 +16,7 @@ Namespace AdoNet
 
         Public Function GetRecordByIdNo(idNo) As User Implements IDao(Of User).GetRecordByIdNo
             Dim sql As String =
-                    " SELECT IdNo, UserName, EmployeeIdNo, Password, SecurityGroupIdNo, Active " &
+                    " SELECT IdNo, UserName, EmployeeIdNo, Password, SecurityLevel, SecurityGroupIdNo, Active " &
                     "   FROM [User]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
@@ -30,8 +30,8 @@ Namespace AdoNet
         Public Function AddRecord(ByRef user As User) As Integer Implements IDao(Of User).AddRecord
             Dim sql As String =
                     " INSERT INTO [User] " &
-                    " (UserName,Password,EmployeeIdNo,SecurityGroupIdNo,Active) " &
-                    " VALUES (@UserName,@Password,@EmployeeIdNo,@SecurityGroupIdNo,@Active)"
+                    " (UserName,Password,EmployeeIdNo,SecurityLevel,SecurityGroupIdNo,Active) " &
+                    " VALUES (@UserName,@Password,@EmployeeIdNo,@SecurityLevel,@SecurityGroupIdNo,@Active)"
             Return Db.Insert(sql, Take(user))
         End Function
 
@@ -41,6 +41,7 @@ Namespace AdoNet
                     "    SET UserName = @UserName," &
                     "        EmployeeIdNo = @EmployeeIdNo," &
                     "        Password = @Password," &
+                    "        SecurityLevel = @SecurityLevel," &
                     "        SecurityGroupIdNo = @SecurityGroupIdNo," &
                     "        Active = @Active" &
                     "  WHERE IdNo = @IdNo"
@@ -54,6 +55,7 @@ Namespace AdoNet
             .EmployeeIdNo = Extensions.AsNullable(Of Int32?)(reader("EmployeeIdNo")),
             .Password = Extensions.AsString(reader("Password")),
             .Active = Extensions.AsBool(reader("Active")),
+            .SecurityLevel = Extensions.AsInt(Of Int16)(reader("SecurityLevel")),
             .SecurityGroupIdNo = Extensions.AsInt(Of Int16)(reader("SecurityGroupIdNo"))}
 
         Private Function Take(user As User) As Object()
@@ -62,6 +64,7 @@ Namespace AdoNet
                                     "@UserName", user.UserName,
                                     "@EmployeeIdNo", user.EmployeeIdNo,
                                     "@Password", user.Password,
+                                    "@SecurityLevel", user.SecurityLevel,
                                     "@SecurityGroupIdNo", user.SecurityGroupIdNo,
                                     "@Active", user.Active}
         End Function

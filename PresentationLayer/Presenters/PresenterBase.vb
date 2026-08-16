@@ -2105,13 +2105,13 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Return lookupObj
     End Function
 
-    Public Sub CreateEnumDataSource(Of TE)(ByVal fieldName As String)
+    Public Sub CreateEnumDataSource(Of TE)(ByVal fieldName As String, Optional ByVal valueMember As String = "Code")
         Dim control As CtComboBox = Nothing
         Dim x = MainFieldsDictionary
         If MainFieldsDictionary.TryGetValue(fieldName, control) Then
             control.DataSource = GetEnumData(Of TE)()
             control.DisplayMember = "Name"
-            control.ValueMember = "Code"
+            control.ValueMember = valueMember
         Else
             Debugger.Break()
             MessageBox.Show($"Field '" & fieldName & $"' is not valid!")

@@ -6,12 +6,29 @@
         Public Property InvoiceDate As Date?
         Public Property FileNo As Int32?
         Public Property PatientName As String
+        Public Property CompanyName As String
+        Public Property PassportNo As String
         Public Property Gender As String
         Public Property Age As String
         Public Property Nationality As String
         Public Property IdentityNo As String
         Public Property DoctorName As String
         Public Property BloodType As String
+        Public Property ExamTemperature As String
+        Public Property ExamBloodPressure As String
+        Public Property ExamPulse As String
+        Public Property ExamRespiratorySystem As String
+        Public Property ExamCardiovascularSystem As String
+        Public Property ExamNervousSystem As String
+        Public Property ExamAbdomen As String
+        Public Property ExamWeight As String
+        Public Property ExamHeight As String
+        Public Property ExamExtremities As String
+        Public Property ExamChestXRay As String
+        Public Property ExamRightEye As String
+        Public Property ExamLeftEye As String
+        Public Property ExamRightEar As String
+        Public Property ExamLeftEar As String
         Public Property FinalResultStatus As String
         Public Property Remarks As String
         Public Property Details As List(Of MedicalFitnessReportTestResultModel)

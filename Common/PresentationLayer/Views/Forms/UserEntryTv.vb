@@ -55,7 +55,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property SecurityGroupIdNo As Int16 Implements IUserView.SecurityGroupIdNo
             Get
-                Return cacSecurityGroupIdNo.GetValue()
+                Return GetInt16Value(cacSecurityGroupIdNo.GetValue())
             End Get
             Set
                 cacSecurityGroupIdNo.SetValue(Value)
@@ -64,7 +64,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property SecurityLevel As Int16 Implements IUserView.SecurityLevel
             Get
-                Return cacSecurityLevel.GetValue()
+                Return GetInt16Value(cacSecurityLevel.GetValue())
             End Get
             Set
                 cacSecurityLevel.SetValue(Value)
@@ -94,6 +94,14 @@ Namespace PresentationLayer.Views.Forms
                 {"Active", lblActive}
                 }
         End Sub
+
+        Private Shared Function GetInt16Value(value As Object) As Int16
+            If value Is Nothing OrElse Convert.IsDBNull(value) Then
+                Return 0S
+            End If
+
+            Return Convert.ToInt16(value)
+        End Function
 
     End Class
 

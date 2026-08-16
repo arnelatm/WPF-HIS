@@ -21,6 +21,24 @@ Namespace PresentationLayer.Views.Forms
         Private _invoiceDate As Date?
         Private _testResults As New BindingList(Of MedicalFitnessReportTestResultView)
         Private ReadOnly _bindingSource As New BindingSource()
+        Private txtCompanyName As TextBox
+        Private txtPassportNo As TextBox
+        Private generalExamGroup As GroupBox
+        Private txtExamTemperature As TextBox
+        Private txtExamBloodPressure As TextBox
+        Private txtExamPulse As TextBox
+        Private txtExamRespiratorySystem As TextBox
+        Private txtExamCardiovascularSystem As TextBox
+        Private txtExamNervousSystem As TextBox
+        Private txtExamAbdomen As TextBox
+        Private txtExamWeight As TextBox
+        Private txtExamHeight As TextBox
+        Private txtExamExtremities As TextBox
+        Private txtExamChestXRay As TextBox
+        Private txtExamRightEye As TextBox
+        Private txtExamLeftEye As TextBox
+        Private txtExamRightEar As TextBox
+        Private txtExamLeftEar As TextBox
 
         Public Event RetrieveRequested() Implements IMedicalFitnessReportView.RetrieveRequested
         Public Event RefreshLabResultsRequested() Implements IMedicalFitnessReportView.RefreshLabResultsRequested
@@ -32,9 +50,132 @@ Namespace PresentationLayer.Views.Forms
             InitializeComponent()
             SingleData = True
             QueryOnly = False
+            ConfigureAdditionalPatientFields()
+            ConfigureGeneralExamPanel()
             ConfigureGridColumns()
             BindGrid()
+            ConfigureParentActionButtons()
         End Sub
+
+        Protected Overrides Sub OnShown(e As EventArgs)
+            MyBase.OnShown(e)
+            ConfigureParentActionButtons()
+        End Sub
+
+        Private Sub ConfigureParentActionButtons()
+            btnSave.Visible = True
+            btnSave.Enabled = True
+            btnSave.ToolTipText = "Save medical fitness report"
+            btnPrint.Visible = True
+            btnPrint.Enabled = True
+            btnPrint.ToolTipText = "Print medical fitness report"
+            btnDelete.Visible = True
+            btnDelete.Enabled = True
+            btnDelete.ToolTipText = "Delete medical fitness report"
+        End Sub
+
+        Private Sub ConfigureAdditionalPatientFields()
+            headerPanel.RowCount = 4
+            headerPanel.RowStyles.Add(New RowStyle(SizeType.AutoSize))
+
+            Dim companyLabel As New Label With {
+                .AutoSize = True,
+                .Margin = New Padding(3, 6, 3, 3),
+                .Text = "Company Name"}
+            txtCompanyName = New TextBox With {
+                .Dock = DockStyle.Fill,
+                .ReadOnly = True}
+
+            Dim passportLabel As New Label With {
+                .AutoSize = True,
+                .Margin = New Padding(3, 6, 3, 3),
+                .Text = "Passport No."}
+            txtPassportNo = New TextBox With {
+                .BackColor = Color.LightYellow,
+                .Dock = DockStyle.Fill,
+                .MaxLength = 100}
+
+            headerPanel.Controls.Add(companyLabel, 0, 3)
+            headerPanel.Controls.Add(txtCompanyName, 1, 3)
+            headerPanel.SetColumnSpan(txtCompanyName, 3)
+            headerPanel.Controls.Add(passportLabel, 4, 3)
+            headerPanel.Controls.Add(txtPassportNo, 5, 3)
+        End Sub
+
+        Private Sub ConfigureGeneralExamPanel()
+            generalExamGroup = New GroupBox With {
+                .Dock = DockStyle.Fill,
+                .Height = 220,
+                .Padding = New Padding(6),
+                .Text = "General Medical Examination / الفحص الطبي العام"}
+
+            Dim examLayout As New TableLayoutPanel With {
+                .ColumnCount = 6,
+                .Dock = DockStyle.Fill,
+                .RowCount = 6}
+            For columnIndex = 0 To 5
+                examLayout.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 16.6667!))
+            Next
+            For rowIndex = 0 To 5
+                examLayout.RowStyles.Add(New RowStyle(SizeType.Percent, 16.6667!))
+            Next
+
+            txtExamTemperature = AddExamEntry(examLayout, "Temp / درجة الحرارة", 0, 0)
+            txtExamBloodPressure = AddExamEntry(examLayout, "B.P / ضغط الدم", 2, 0)
+            txtExamPulse = AddExamEntry(examLayout, "Pulse / النبض", 4, 0)
+            txtExamRespiratorySystem = AddExamEntry(examLayout, "Resp. System / الجهاز التنفسي", 0, 1)
+            txtExamCardiovascularSystem = AddExamEntry(examLayout, "CVS / فحص القلب", 2, 1)
+            txtExamAbdomen = AddExamEntry(examLayout, "Abdomen / فحص الباطني", 4, 1)
+            txtExamNervousSystem = AddExamEntry(examLayout, "Nervous System / الجهاز العصبي", 0, 2)
+            txtExamExtremities = AddExamEntry(examLayout, "Extremities / فحص الأطراف", 2, 2)
+            txtExamChestXRay = AddExamEntry(examLayout, "Chest X-ray / الأشعة الصدرية", 4, 2)
+            txtExamWeight = AddExamEntry(examLayout, "Weight / الوزن", 0, 3)
+            txtExamHeight = AddExamEntry(examLayout, "Height / الطول", 2, 3)
+            txtExamRightEye = AddExamEntry(examLayout, "Right Eye / العين اليمنى", 0, 4)
+            txtExamLeftEye = AddExamEntry(examLayout, "Left Eye / العين اليسرى", 2, 4)
+            txtExamRightEar = AddExamEntry(examLayout, "Right Ear / الأذن اليمنى", 0, 5)
+            txtExamLeftEar = AddExamEntry(examLayout, "Left Ear / الأذن اليسرى", 2, 5)
+
+            generalExamGroup.Controls.Add(examLayout)
+            mainPanel.RowCount = 5
+            mainPanel.RowStyles.Clear()
+            mainPanel.RowStyles.Add(New RowStyle(SizeType.AutoSize))
+            mainPanel.RowStyles.Add(New RowStyle(SizeType.AutoSize))
+            mainPanel.RowStyles.Add(New RowStyle(SizeType.Absolute, 220.0!))
+            mainPanel.RowStyles.Add(New RowStyle(SizeType.Percent, 100.0!))
+            mainPanel.RowStyles.Add(New RowStyle(SizeType.AutoSize))
+            mainPanel.Controls.Add(generalExamGroup, 0, 2)
+            mainPanel.SetRow(dgvResults, 3)
+            mainPanel.SetRow(finalPanel, 4)
+        End Sub
+
+        Private Shared Function AddExamEntry(layout As TableLayoutPanel,
+                                             labelText As String,
+                                             columnIndex As Int32,
+                                             rowIndex As Int32) As TextBox
+            Dim label = CreateExamLabel(labelText)
+            Dim textBox = CreateExamTextBox()
+            layout.Controls.Add(label, columnIndex, rowIndex)
+            layout.Controls.Add(textBox, columnIndex + 1, rowIndex)
+            Return textBox
+        End Function
+
+        Private Shared Function CreateExamLabel(text As String) As Label
+            Return New Label With {
+                .AutoEllipsis = True,
+                .Dock = DockStyle.Fill,
+                .Margin = New Padding(3, 6, 3, 3),
+                .Text = text,
+                .TextAlign = ContentAlignment.MiddleLeft}
+        End Function
+
+        Private Shared Function CreateExamTextBox() As TextBox
+            Return New TextBox With {
+                .BackColor = Color.LightYellow,
+                .Dock = DockStyle.Fill,
+                .MaxLength = 255,
+                .Margin = New Padding(3, 5, 3, 3)}
+        End Function
 
         Public Property ReportIdNo As Integer Implements IMedicalFitnessReportView.ReportIdNo
             Get
@@ -142,6 +283,159 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Shadows Property CompanyName As String Implements IMedicalFitnessReportView.CompanyName
+            Get
+                Return txtCompanyName.Text.Trim()
+            End Get
+            Set(value As String)
+                txtCompanyName.Text = If(value, "")
+            End Set
+        End Property
+
+        Public Property PassportNo As String Implements IMedicalFitnessReportView.PassportNo
+            Get
+                Return txtPassportNo.Text.Trim()
+            End Get
+            Set(value As String)
+                txtPassportNo.Text = If(value, "")
+            End Set
+        End Property
+
+        Public Property ExamTemperature As String Implements IMedicalFitnessReportView.ExamTemperature
+            Get
+                Return txtExamTemperature.Text.Trim()
+            End Get
+            Set(value As String)
+                txtExamTemperature.Text = If(value, "")
+            End Set
+        End Property
+
+        Public Property ExamBloodPressure As String Implements IMedicalFitnessReportView.ExamBloodPressure
+            Get
+                Return txtExamBloodPressure.Text.Trim()
+            End Get
+            Set(value As String)
+                txtExamBloodPressure.Text = If(value, "")
+            End Set
+        End Property
+
+        Public Property ExamPulse As String Implements IMedicalFitnessReportView.ExamPulse
+            Get
+                Return txtExamPulse.Text.Trim()
+            End Get
+            Set(value As String)
+                txtExamPulse.Text = If(value, "")
+            End Set
+        End Property
+
+        Public Property ExamRespiratorySystem As String Implements IMedicalFitnessReportView.ExamRespiratorySystem
+            Get
+                Return txtExamRespiratorySystem.Text.Trim()
+            End Get
+            Set(value As String)
+                txtExamRespiratorySystem.Text = If(value, "")
+            End Set
+        End Property
+
+        Public Property ExamCardiovascularSystem As String Implements IMedicalFitnessReportView.ExamCardiovascularSystem
+            Get
+                Return txtExamCardiovascularSystem.Text.Trim()
+            End Get
+            Set(value As String)
+                txtExamCardiovascularSystem.Text = If(value, "")
+            End Set
+        End Property
+
+        Public Property ExamNervousSystem As String Implements IMedicalFitnessReportView.ExamNervousSystem
+            Get
+                Return txtExamNervousSystem.Text.Trim()
+            End Get
+            Set(value As String)
+                txtExamNervousSystem.Text = If(value, "")
+            End Set
+        End Property
+
+        Public Property ExamAbdomen As String Implements IMedicalFitnessReportView.ExamAbdomen
+            Get
+                Return txtExamAbdomen.Text.Trim()
+            End Get
+            Set(value As String)
+                txtExamAbdomen.Text = If(value, "")
+            End Set
+        End Property
+
+        Public Property ExamWeight As String Implements IMedicalFitnessReportView.ExamWeight
+            Get
+                Return txtExamWeight.Text.Trim()
+            End Get
+            Set(value As String)
+                txtExamWeight.Text = If(value, "")
+            End Set
+        End Property
+
+        Public Property ExamHeight As String Implements IMedicalFitnessReportView.ExamHeight
+            Get
+                Return txtExamHeight.Text.Trim()
+            End Get
+            Set(value As String)
+                txtExamHeight.Text = If(value, "")
+            End Set
+        End Property
+
+        Public Property ExamExtremities As String Implements IMedicalFitnessReportView.ExamExtremities
+            Get
+                Return txtExamExtremities.Text.Trim()
+            End Get
+            Set(value As String)
+                txtExamExtremities.Text = If(value, "")
+            End Set
+        End Property
+
+        Public Property ExamChestXRay As String Implements IMedicalFitnessReportView.ExamChestXRay
+            Get
+                Return txtExamChestXRay.Text.Trim()
+            End Get
+            Set(value As String)
+                txtExamChestXRay.Text = If(value, "")
+            End Set
+        End Property
+
+        Public Property ExamRightEye As String Implements IMedicalFitnessReportView.ExamRightEye
+            Get
+                Return txtExamRightEye.Text.Trim()
+            End Get
+            Set(value As String)
+                txtExamRightEye.Text = If(value, "")
+            End Set
+        End Property
+
+        Public Property ExamLeftEye As String Implements IMedicalFitnessReportView.ExamLeftEye
+            Get
+                Return txtExamLeftEye.Text.Trim()
+            End Get
+            Set(value As String)
+                txtExamLeftEye.Text = If(value, "")
+            End Set
+        End Property
+
+        Public Property ExamRightEar As String Implements IMedicalFitnessReportView.ExamRightEar
+            Get
+                Return txtExamRightEar.Text.Trim()
+            End Get
+            Set(value As String)
+                txtExamRightEar.Text = If(value, "")
+            End Set
+        End Property
+
+        Public Property ExamLeftEar As String Implements IMedicalFitnessReportView.ExamLeftEar
+            Get
+                Return txtExamLeftEar.Text.Trim()
+            End Get
+            Set(value As String)
+                txtExamLeftEar.Text = If(value, "")
+            End Set
+        End Property
+
         Public Property FinalResultStatus As String Implements IMedicalFitnessReportView.FinalResultStatus
             Get
                 If chkFinalFit.Checked Then
@@ -246,7 +540,7 @@ Namespace PresentationLayer.Views.Forms
                 .Name = "colSequence",
                 .FillWeight = 55}
             colSection = New DataGridViewTextBoxColumn With {
-                .DataPropertyName = "SectionCode",
+                .DataPropertyName = "SectionDisplay",
                 .HeaderText = "Section",
                 .Name = "colSection",
                 .ReadOnly = True,
@@ -339,25 +633,31 @@ Namespace PresentationLayer.Views.Forms
             RaiseEvent ViewKizenResultsRequested()
         End Sub
 
-        Private Sub btnSaveReport_Click(sender As Object, e As EventArgs) Handles btnSaveReport.Click
+        Protected Overrides Function HandleSaveButtonClick() As Boolean
             dgvResults.EndEdit()
             _bindingSource.EndEdit()
             RaiseEvent SaveRequested()
-        End Sub
+            Return True
+        End Function
 
-        Private Sub btnDeleteReport_Click(sender As Object, e As EventArgs) Handles btnDeleteReport.Click
+        Protected Overrides Function HandleDeleteButtonClick() As Boolean
             RaiseEvent DeleteRequested()
-        End Sub
+            Return True
+        End Function
 
-        Private Sub btnPrintReport_Click(sender As Object, e As EventArgs) Handles btnPrintReport.Click
+        Protected Overrides Function HandlePrintButtonClick() As Boolean
             If InvoiceNo = 0 Then
                 MessageBox.Show("Please retrieve an invoice before printing.")
-                Return
+                Return True
             End If
 
             If ReportIdNo = 0 Then
                 MessageBox.Show("Please save the medical report before printing.")
-                Return
+                Return True
+            End If
+
+            If Not ValidateRequiredEntries("printing") Then
+                Return True
             End If
 
             Dim medicalReportForm = ReportForm.CreateSorted(
@@ -367,6 +667,37 @@ Namespace PresentationLayer.Views.Forms
                 InvoiceNo,
                 "InvoiceNo")
             medicalReportForm.Show()
+            Return True
+        End Function
+
+        Public Function ValidateRequiredEntries(actionName As String) As Boolean Implements IMedicalFitnessReportView.ValidateRequiredEntries
+            Dim missing = GetMissingRequiredEntries()
+            If missing.Count = 0 Then
+                Return True
+            End If
+
+            MessageBox.Show(
+                "Complete the following required entries before " & actionName & ":" &
+                Environment.NewLine & String.Join(", ", missing),
+                "Required Medical Fitness Entries",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning)
+            Return False
+        End Function
+
+        Private Function GetMissingRequiredEntries() As List(Of String)
+            Dim missing As New List(Of String)
+            AddMissingExamination(missing, "Temperature", ExamTemperature)
+            AddMissingExamination(missing, "Blood Pressure", ExamBloodPressure)
+            AddMissingExamination(missing, "Pulse", ExamPulse)
+            AddMissingExamination(missing, "Final Result", FinalResultStatus)
+            Return missing
+        End Function
+
+        Private Shared Sub AddMissingExamination(missing As List(Of String), displayName As String, value As String)
+            If String.IsNullOrWhiteSpace(value) Then
+                missing.Add(displayName)
+            End If
         End Sub
 
         Private Sub txtInvoiceNo_Validated(sender As Object, e As EventArgs) Handles txtInvoiceNo.Validated

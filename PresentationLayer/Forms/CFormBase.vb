@@ -232,6 +232,16 @@ Public Class CFormBase
         'End If
     End Sub
 
+    Private Sub BtnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        If _debugSwitch = 1 Then
+            Debugger.Break()
+        End If
+        If HandleDeleteButtonClick() Then
+            Return
+        End If
+        PublishClickedButton(ButtonClicked.Delete)
+    End Sub
+
     Private Sub BtnOriginal_Click(sender As Object, e As EventArgs) Handles btnOriginal.Click
         If _debugSwitch = 1 Then
             Debugger.Break()
@@ -260,6 +270,9 @@ Public Class CFormBase
                 cGrid.EndEdit()
             End If
         Next
+        If HandleSaveButtonClick() Then
+            Return
+        End If
         Dim saveData As New SaveDataRequested(Me)
         If Ea IsNot Nothing Then
             Ea.PublishEvent(saveData)
@@ -279,8 +292,23 @@ Public Class CFormBase
         If _debugSwitch = 1 Then
             Debugger.Break()
         End If
+        If HandlePrintButtonClick() Then
+            Return
+        End If
         PublishClickedButton(ButtonClicked.Print)
     End Sub
+
+    Protected Overridable Function HandleSaveButtonClick() As Boolean
+        Return False
+    End Function
+
+    Protected Overridable Function HandlePrintButtonClick() As Boolean
+        Return False
+    End Function
+
+    Protected Overridable Function HandleDeleteButtonClick() As Boolean
+        Return False
+    End Function
 
     Private Sub BtnTranslate_Click(sender As Object, e As EventArgs) Handles btnTranslate.Click
         If _debugSwitch Then

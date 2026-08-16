@@ -16,7 +16,10 @@ Namespace DataLayer.AdoNet
 
         Public Function GetSavedReportByInvoiceNo(invoiceNo As Int32) As MedicalFitnessReport
             Dim sql As String =
-                "SELECT IdNo,InvoiceNo,InvoiceDate,FileNo,PatientName,Gender,Age,Nationality,IdentityNo,DoctorName,BloodType,FinalResultStatus,Remarks " &
+                "SELECT IdNo,InvoiceNo,InvoiceDate,FileNo,PatientName,CompanyName,PassportNo,Gender,Age,Nationality,IdentityNo,DoctorName,BloodType," &
+                "ExamTemperature,ExamBloodPressure,ExamPulse,ExamRespiratorySystem,ExamCardiovascularSystem,ExamNervousSystem," &
+                "ExamAbdomen,ExamWeight,ExamHeight,ExamExtremities,ExamChestXRay,ExamRightEye,ExamLeftEye,ExamRightEar,ExamLeftEar," &
+                "FinalResultStatus,Remarks " &
                 "FROM MedicalFitnessReport " &
                 "WHERE InvoiceNo = @InvoiceNo"
 
@@ -34,8 +37,11 @@ Namespace DataLayer.AdoNet
                 "i.Date AS InvoiceDate, " &
                 "i.CustID AS FileNo, " &
                 "i.CustName AS PatientName, " &
+                "(SELECT TOP (1) v.CompanyName FROM dbo.Invoices_View v " &
+                " WHERE v.InvoiceNo = i.ID AND NULLIF(LTRIM(RTRIM(v.CompanyName)), N'') IS NOT NULL) AS CompanyName, " &
                 "c.CustGender AS Gender, " &
-                "dbo.DateToAge(c.CustBirthday, i.Date) AS Age, " &
+                "c.CustBirthday AS BirthDate, " &
+                "dbo.DateToAge(c.CustBirthday, i.Date) AS AgeLong, " &
                 "i.CustNat AS Nationality, " &
                 "i.CustIdentity AS IdentityNo, " &
                 "i.DrName AS DoctorName " &
@@ -202,9 +208,15 @@ Namespace DataLayer.AdoNet
         Private Function InsertReport(report As MedicalFitnessReport) As Int32
             Dim sql As String =
                 "INSERT INTO MedicalFitnessReport " &
-                "(InvoiceNo,InvoiceDate,FileNo,PatientName,Gender,Age,Nationality,IdentityNo,DoctorName,BloodType,FinalResultStatus,Remarks) " &
+                "(InvoiceNo,InvoiceDate,FileNo,PatientName,CompanyName,PassportNo,Gender,Age,Nationality,IdentityNo,DoctorName,BloodType," &
+                "ExamTemperature,ExamBloodPressure,ExamPulse,ExamRespiratorySystem,ExamCardiovascularSystem,ExamNervousSystem," &
+                "ExamAbdomen,ExamWeight,ExamHeight,ExamExtremities,ExamChestXRay,ExamRightEye,ExamLeftEye,ExamRightEar,ExamLeftEar," &
+                "FinalResultStatus,Remarks) " &
                 "VALUES " &
-                "(@InvoiceNo,@InvoiceDate,@FileNo,@PatientName,@Gender,@Age,@Nationality,@IdentityNo,@DoctorName,@BloodType,@FinalResultStatus,@Remarks); " &
+                "(@InvoiceNo,@InvoiceDate,@FileNo,@PatientName,@CompanyName,@PassportNo,@Gender,@Age,@Nationality,@IdentityNo,@DoctorName,@BloodType," &
+                "@ExamTemperature,@ExamBloodPressure,@ExamPulse,@ExamRespiratorySystem,@ExamCardiovascularSystem,@ExamNervousSystem," &
+                "@ExamAbdomen,@ExamWeight,@ExamHeight,@ExamExtremities,@ExamChestXRay,@ExamRightEye,@ExamLeftEye,@ExamRightEar,@ExamLeftEar," &
+                "@FinalResultStatus,@Remarks); " &
                 "SELECT CONVERT(int, SCOPE_IDENTITY());"
 
             Return Convert.ToInt32(_ispDataDb.Scalar(sql, TakeReport(report)))
@@ -217,12 +229,29 @@ Namespace DataLayer.AdoNet
                 "InvoiceDate = @InvoiceDate, " &
                 "FileNo = @FileNo, " &
                 "PatientName = @PatientName, " &
+                "CompanyName = @CompanyName, " &
+                "PassportNo = @PassportNo, " &
                 "Gender = @Gender, " &
                 "Age = @Age, " &
                 "Nationality = @Nationality, " &
                 "IdentityNo = @IdentityNo, " &
                 "DoctorName = @DoctorName, " &
                 "BloodType = @BloodType, " &
+                "ExamTemperature = @ExamTemperature, " &
+                "ExamBloodPressure = @ExamBloodPressure, " &
+                "ExamPulse = @ExamPulse, " &
+                "ExamRespiratorySystem = @ExamRespiratorySystem, " &
+                "ExamCardiovascularSystem = @ExamCardiovascularSystem, " &
+                "ExamNervousSystem = @ExamNervousSystem, " &
+                "ExamAbdomen = @ExamAbdomen, " &
+                "ExamWeight = @ExamWeight, " &
+                "ExamHeight = @ExamHeight, " &
+                "ExamExtremities = @ExamExtremities, " &
+                "ExamChestXRay = @ExamChestXRay, " &
+                "ExamRightEye = @ExamRightEye, " &
+                "ExamLeftEye = @ExamLeftEye, " &
+                "ExamRightEar = @ExamRightEar, " &
+                "ExamLeftEar = @ExamLeftEar, " &
                 "FinalResultStatus = @FinalResultStatus, " &
                 "Remarks = @Remarks " &
                 "WHERE IdNo = @IdNo"
@@ -233,17 +262,47 @@ Namespace DataLayer.AdoNet
         End Function
 
         Private Sub ReplaceDetails(report As MedicalFitnessReport)
-            _ispDataDb.Update("DELETE FROM MedicalFitnessReportTestResult WHERE MedicalFitnessReportIdNo = @IdNo", "@IdNo", report.IdNo)
-
             If report.Details Is Nothing Then
+                _ispDataDb.Update("DELETE FROM MedicalFitnessReportTestResult WHERE MedicalFitnessReportIdNo = @IdNo", "@IdNo", report.IdNo)
                 Return
             End If
 
             For Each detail In report.Details
                 detail.MedicalFitnessReportIdNo = report.IdNo
+                detail.SectionCode = GetRequiredSectionCode(detail)
+                If String.IsNullOrWhiteSpace(detail.TestCode) Then
+                    Throw New InvalidOperationException("A medical fitness result is missing its test code.")
+                End If
+                If String.IsNullOrWhiteSpace(detail.TestNameEnglish) Then
+                    Throw New InvalidOperationException("A medical fitness result is missing its test name.")
+                End If
+            Next
+
+            ' Validate and normalize every row before removing the saved details so
+            ' invalid input cannot leave a report with all of its rows deleted.
+            _ispDataDb.Update("DELETE FROM MedicalFitnessReportTestResult WHERE MedicalFitnessReportIdNo = @IdNo", "@IdNo", report.IdNo)
+
+            For Each detail In report.Details
                 InsertDetail(detail)
             Next
         End Sub
+
+        Private Shared Function GetRequiredSectionCode(detail As MedicalFitnessReportTestResult) As String
+            If Not String.IsNullOrWhiteSpace(detail.SectionCode) Then
+                Return detail.SectionCode.Trim()
+            End If
+
+            Select Case If(detail.TestCode, "").Trim().ToUpperInvariant()
+                Case "ECG", "AUDIOMETRY", "SPIROMETRY"
+                    Return "DETAIL"
+                Case Else
+                    Dim hasLabData = detail.Sequence >= 200 OrElse
+                                     Not String.IsNullOrWhiteSpace(detail.LabResult) OrElse
+                                     Not String.IsNullOrWhiteSpace(detail.LabReferenceValue) OrElse
+                                     Not String.IsNullOrWhiteSpace(detail.LabUnit)
+                    Return If(hasLabData, "LAB", "GENERAL")
+            End Select
+        End Function
 
         Private Function InsertDetail(detail As MedicalFitnessReportTestResult) As Int32
             Dim sql As String =
@@ -282,12 +341,29 @@ Namespace DataLayer.AdoNet
                 "@InvoiceDate", DbValue(report.InvoiceDate),
                 "@FileNo", DbValue(report.FileNo),
                 "@PatientName", DbValue(report.PatientName),
+                "@CompanyName", DbValue(report.CompanyName),
+                "@PassportNo", DbValue(report.PassportNo),
                 "@Gender", DbValue(report.Gender),
                 "@Age", DbValue(report.Age),
                 "@Nationality", DbValue(report.Nationality),
                 "@IdentityNo", DbValue(report.IdentityNo),
                 "@DoctorName", DbValue(report.DoctorName),
                 "@BloodType", DbValue(report.BloodType),
+                "@ExamTemperature", DbValue(report.ExamTemperature),
+                "@ExamBloodPressure", DbValue(report.ExamBloodPressure),
+                "@ExamPulse", DbValue(report.ExamPulse),
+                "@ExamRespiratorySystem", DbValue(report.ExamRespiratorySystem),
+                "@ExamCardiovascularSystem", DbValue(report.ExamCardiovascularSystem),
+                "@ExamNervousSystem", DbValue(report.ExamNervousSystem),
+                "@ExamAbdomen", DbValue(report.ExamAbdomen),
+                "@ExamWeight", DbValue(report.ExamWeight),
+                "@ExamHeight", DbValue(report.ExamHeight),
+                "@ExamExtremities", DbValue(report.ExamExtremities),
+                "@ExamChestXRay", DbValue(report.ExamChestXRay),
+                "@ExamRightEye", DbValue(report.ExamRightEye),
+                "@ExamLeftEye", DbValue(report.ExamLeftEye),
+                "@ExamRightEar", DbValue(report.ExamRightEar),
+                "@ExamLeftEar", DbValue(report.ExamLeftEar),
                 "@FinalResultStatus", DbValue(report.FinalResultStatus),
                 "@Remarks", DbValue(report.Remarks)}
         End Function
@@ -317,12 +393,29 @@ Namespace DataLayer.AdoNet
                 .InvoiceDate = Extensions.AsNullable(Of DateTime?)(reader("InvoiceDate")),
                 .FileNo = Extensions.AsNullable(Of Int32?)(reader("FileNo")),
                 .PatientName = Extensions.AsString(reader("PatientName")),
+                .CompanyName = Extensions.AsString(reader("CompanyName")),
+                .PassportNo = Extensions.AsString(reader("PassportNo")),
                 .Gender = Extensions.AsString(reader("Gender")),
                 .Age = Extensions.AsString(reader("Age")),
                 .Nationality = Extensions.AsString(reader("Nationality")),
                 .IdentityNo = Extensions.AsString(reader("IdentityNo")),
                 .DoctorName = Extensions.AsString(reader("DoctorName")),
                 .BloodType = Extensions.AsString(reader("BloodType")),
+                .ExamTemperature = Extensions.AsString(reader("ExamTemperature")),
+                .ExamBloodPressure = Extensions.AsString(reader("ExamBloodPressure")),
+                .ExamPulse = Extensions.AsString(reader("ExamPulse")),
+                .ExamRespiratorySystem = Extensions.AsString(reader("ExamRespiratorySystem")),
+                .ExamCardiovascularSystem = Extensions.AsString(reader("ExamCardiovascularSystem")),
+                .ExamNervousSystem = Extensions.AsString(reader("ExamNervousSystem")),
+                .ExamAbdomen = Extensions.AsString(reader("ExamAbdomen")),
+                .ExamWeight = Extensions.AsString(reader("ExamWeight")),
+                .ExamHeight = Extensions.AsString(reader("ExamHeight")),
+                .ExamExtremities = Extensions.AsString(reader("ExamExtremities")),
+                .ExamChestXRay = Extensions.AsString(reader("ExamChestXRay")),
+                .ExamRightEye = Extensions.AsString(reader("ExamRightEye")),
+                .ExamLeftEye = Extensions.AsString(reader("ExamLeftEye")),
+                .ExamRightEar = Extensions.AsString(reader("ExamRightEar")),
+                .ExamLeftEar = Extensions.AsString(reader("ExamLeftEar")),
                 .FinalResultStatus = Extensions.AsString(reader("FinalResultStatus")),
                 .Remarks = Extensions.AsString(reader("Remarks"))}
 
@@ -332,11 +425,45 @@ Namespace DataLayer.AdoNet
                 .InvoiceDate = Extensions.AsNullable(Of DateTime?)(reader("InvoiceDate")),
                 .FileNo = Extensions.AsNullable(Of Int32?)(reader("FileNo")),
                 .PatientName = Extensions.AsString(reader("PatientName")),
+                .CompanyName = Extensions.AsString(reader("CompanyName")),
                 .Gender = Extensions.AsString(reader("Gender")),
-                .Age = Extensions.AsString(reader("Age")),
+                .Age = GetMedicalFitnessAge(reader),
                 .Nationality = Extensions.AsString(reader("Nationality")),
                 .IdentityNo = Extensions.AsString(reader("IdentityNo")),
                 .DoctorName = Extensions.AsString(reader("DoctorName"))}
+
+        Private Shared Function GetMedicalFitnessAge(reader As IDataReader) As String
+            Dim birthDate = Extensions.AsNullable(Of DateTime?)(reader("BirthDate"))
+            Dim invoiceDate = Extensions.AsNullable(Of DateTime?)(reader("InvoiceDate"))
+            If Not birthDate.HasValue OrElse Not invoiceDate.HasValue Then
+                Return Extensions.AsString(reader("AgeLong"))
+            End If
+
+            Dim born = birthDate.Value.Date
+            Dim asOfDate = invoiceDate.Value.Date
+            If asOfDate < born Then
+                Return ""
+            End If
+
+            Dim completedYears = asOfDate.Year - born.Year
+            If born.AddYears(completedYears) > asOfDate Then
+                completedYears -= 1
+            End If
+            If completedYears >= 1 Then
+                Return completedYears.ToString() & If(completedYears = 1, " year", " years")
+            End If
+
+            Dim completedMonths = ((asOfDate.Year - born.Year) * 12) + asOfDate.Month - born.Month
+            If born.AddMonths(completedMonths) > asOfDate Then
+                completedMonths -= 1
+            End If
+            If completedMonths >= 1 Then
+                Return completedMonths.ToString() & If(completedMonths = 1, " month", " months")
+            End If
+
+            Dim completedDays = CInt((asOfDate - born).TotalDays)
+            Return completedDays.ToString() & If(completedDays = 1, " day", " days")
+        End Function
 
         Private Shared ReadOnly MakeDetail As Func(Of IDataReader, MedicalFitnessReportTestResult) =
             Function(reader) New MedicalFitnessReportTestResult() With {

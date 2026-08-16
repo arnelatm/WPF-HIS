@@ -23,11 +23,11 @@ Namespace PresentationLayer.Presenters
             TableName = "MedicalFitnessReport"
             SortOrderKey = "IdNo"
             WithTreeView = False
-            AddHandler View.RetrieveRequested, AddressOf RetrieveReport
-            AddHandler View.RefreshLabResultsRequested, AddressOf RefreshLabResults
-            AddHandler View.ViewKizenResultsRequested, AddressOf ViewKizenResults
-            AddHandler View.SaveRequested, AddressOf SaveReport
-            AddHandler View.DeleteRequested, AddressOf DeleteReport
+            AddHandler view.RetrieveRequested, AddressOf RetrieveReport
+            AddHandler view.RefreshLabResultsRequested, AddressOf RefreshLabResults
+            AddHandler view.ViewKizenResultsRequested, AddressOf ViewKizenResults
+            AddHandler view.SaveRequested, AddressOf SaveReport
+            AddHandler view.DeleteRequested, AddressOf DeleteReport
         End Sub
 
         Private Sub RetrieveReport()
@@ -45,7 +45,14 @@ Namespace PresentationLayer.Presenters
                     Return
                 End If
                 report.Details = CreateDefaultDetails(report.InvoiceNo)
+                ApplyNewReportDefaults(report)
             Else
+                Dim kizenInvoice = _dao.GetKizenInvoice(report.InvoiceNo)
+                If kizenInvoice IsNot Nothing Then
+                    report.CompanyName = kizenInvoice.CompanyName
+                    report.Age = kizenInvoice.Age
+                End If
+                report.Details = EnsureStandardDetailRows(report.Details)
                 report.Details = SynchronizeLabDetails(report.Details, report.InvoiceNo)
             End If
 
@@ -55,6 +62,10 @@ Namespace PresentationLayer.Presenters
         Private Sub SaveReport()
             If View.InvoiceNo = 0 Then
                 MessageBox.Show("Please retrieve an invoice before saving.")
+                Return
+            End If
+
+            If Not View.ValidateRequiredEntries("saving") Then
                 Return
             End If
 
@@ -152,12 +163,29 @@ Namespace PresentationLayer.Presenters
             View.InvoiceDate = report.InvoiceDate
             View.FileNo = report.FileNo
             View.PatientName = report.PatientName
+            View.CompanyName = report.CompanyName
+            View.PassportNo = report.PassportNo
             View.Gender = report.Gender
             View.Age = report.Age
             View.Nationality = report.Nationality
             View.IdentityNo = report.IdentityNo
             View.DoctorName = report.DoctorName
             View.BloodType = report.BloodType
+            View.ExamTemperature = report.ExamTemperature
+            View.ExamBloodPressure = report.ExamBloodPressure
+            View.ExamPulse = report.ExamPulse
+            View.ExamRespiratorySystem = report.ExamRespiratorySystem
+            View.ExamCardiovascularSystem = report.ExamCardiovascularSystem
+            View.ExamNervousSystem = report.ExamNervousSystem
+            View.ExamAbdomen = report.ExamAbdomen
+            View.ExamWeight = report.ExamWeight
+            View.ExamHeight = report.ExamHeight
+            View.ExamExtremities = report.ExamExtremities
+            View.ExamChestXRay = report.ExamChestXRay
+            View.ExamRightEye = report.ExamRightEye
+            View.ExamLeftEye = report.ExamLeftEye
+            View.ExamRightEar = report.ExamRightEar
+            View.ExamLeftEar = report.ExamLeftEar
             View.FinalResultStatus = report.FinalResultStatus
             View.Remarks = report.Remarks
             View.TestResults = ToViewRows(report.Details)
@@ -170,12 +198,29 @@ Namespace PresentationLayer.Presenters
                 .InvoiceDate = View.InvoiceDate,
                 .FileNo = View.FileNo,
                 .PatientName = View.PatientName,
+                .CompanyName = View.CompanyName,
+                .PassportNo = View.PassportNo,
                 .Gender = View.Gender,
                 .Age = View.Age,
                 .Nationality = View.Nationality,
                 .IdentityNo = View.IdentityNo,
                 .DoctorName = View.DoctorName,
                 .BloodType = View.BloodType,
+                .ExamTemperature = View.ExamTemperature,
+                .ExamBloodPressure = View.ExamBloodPressure,
+                .ExamPulse = View.ExamPulse,
+                .ExamRespiratorySystem = View.ExamRespiratorySystem,
+                .ExamCardiovascularSystem = View.ExamCardiovascularSystem,
+                .ExamNervousSystem = View.ExamNervousSystem,
+                .ExamAbdomen = View.ExamAbdomen,
+                .ExamWeight = View.ExamWeight,
+                .ExamHeight = View.ExamHeight,
+                .ExamExtremities = View.ExamExtremities,
+                .ExamChestXRay = View.ExamChestXRay,
+                .ExamRightEye = View.ExamRightEye,
+                .ExamLeftEye = View.ExamLeftEye,
+                .ExamRightEar = View.ExamRightEar,
+                .ExamLeftEar = View.ExamLeftEar,
                 .FinalResultStatus = View.FinalResultStatus,
                 .Remarks = View.Remarks,
                 .Details = ToBusinessRows(View.TestResults)}
@@ -186,12 +231,29 @@ Namespace PresentationLayer.Presenters
             View.InvoiceDate = Nothing
             View.FileNo = Nothing
             View.PatientName = ""
+            View.CompanyName = ""
+            View.PassportNo = ""
             View.Gender = ""
             View.Age = ""
             View.Nationality = ""
             View.IdentityNo = ""
             View.DoctorName = ""
             View.BloodType = ""
+            View.ExamTemperature = ""
+            View.ExamBloodPressure = ""
+            View.ExamPulse = ""
+            View.ExamRespiratorySystem = ""
+            View.ExamCardiovascularSystem = ""
+            View.ExamNervousSystem = ""
+            View.ExamAbdomen = ""
+            View.ExamWeight = ""
+            View.ExamHeight = ""
+            View.ExamExtremities = ""
+            View.ExamChestXRay = ""
+            View.ExamRightEye = ""
+            View.ExamLeftEye = ""
+            View.ExamRightEar = ""
+            View.ExamLeftEar = ""
             View.FinalResultStatus = Nothing
             View.Remarks = ""
             View.TestResults = New BindingList(Of MedicalFitnessReportTestResultView)()
@@ -200,18 +262,9 @@ Namespace PresentationLayer.Presenters
         Private Function CreateDefaultDetails(invoiceNo As Int32) As List(Of MedicalFitnessReportTestResult)
             Dim rows As New List(Of MedicalFitnessReportTestResult)
 
-            AddRow(rows, "CLINICAL", "HEIGHT", "Height", "قياس الطول", 10)
-            AddRow(rows, "CLINICAL", "WEIGHT", "Weight", "قياس الوزن", 20)
-            AddRow(rows, "CLINICAL", "VISION", "Vision", "النظر", 30)
-            AddRow(rows, "CLINICAL", "HEARING", "Hearing", "السمع", 40)
-            AddRow(rows, "CLINICAL", "BLOOD_PRESSURE_PULSE", "Blood Pressure / Pulse", "النبض و ضغط الدم", 50)
-            AddRow(rows, "CLINICAL", "CHEST_HEART", "Chest / Heart", "القلب والصدر", 60)
-            AddRow(rows, "CLINICAL", "ABDOMEN_DERMATOLOGICAL", "Abdomen/Dermatological", "الباطنية والجلدية والتناسلية", 70)
-            AddRow(rows, "CLINICAL", "NEUROLOGICAL", "Neurological Disorder", "الامراض النفسية والعصبية", 80)
-            AddRow(rows, "CLINICALCHEST", "CHEST_XRAY", "Chest X-Ray", "الأشعة على الصدر", 100)
-            AddRow(rows, "CLINICALECG", "ECG", "ECG", "رسم القلب", 110)
-            AddRow(rows, "CLINICALSPYROAUDIO", "AUDIOMETRY", "Audiometry", "قياس السمع", 120)
-            AddRow(rows, "CLINICALSPYROAUDIO", "SPIROMETRY", "Spirometry", "قياس التنفس", 130)
+            AddRow(rows, "DETAIL", "ECG", "ECG", "رسم القلب", 110)
+            AddRow(rows, "DETAIL", "AUDIOMETRY", "Audiometry", "قياس السمع", 120)
+            AddRow(rows, "DETAIL", "SPIROMETRY", "Spirometry", "قياس التنفس", 130)
 
             Dim sequence = 200
             Dim analyses = _dao.GetKizenLabAnalyses(invoiceNo)
@@ -234,6 +287,46 @@ Namespace PresentationLayer.Presenters
 
             Return rows
         End Function
+
+        Private Shared Sub ApplyNewReportDefaults(report As MedicalFitnessReport)
+            report.ExamRespiratorySystem = "NAD"
+            report.ExamCardiovascularSystem = "NAD"
+            report.ExamNervousSystem = "NAD"
+            report.ExamAbdomen = "NAD"
+            report.ExamExtremities = "NAD"
+            report.ExamChestXRay = "NORMAL"
+            report.ExamRightEye = "NAD"
+            report.ExamLeftEye = "NAD"
+            report.ExamRightEar = "NAD"
+            report.ExamLeftEar = "NAD"
+        End Sub
+
+        Private Shared Function EnsureStandardDetailRows(rows As List(Of MedicalFitnessReportTestResult)) As List(Of MedicalFitnessReportTestResult)
+            Dim result = If(rows, New List(Of MedicalFitnessReportTestResult)())
+            EnsureStandardDetailRow(result, "DETAIL", "ECG", "ECG", "رسم القلب", 110)
+            EnsureStandardDetailRow(result, "DETAIL", "AUDIOMETRY", "Audiometry", "قياس السمع", 120)
+            EnsureStandardDetailRow(result, "DETAIL", "SPIROMETRY", "Spirometry", "قياس التنفس", 130)
+            Return result
+        End Function
+
+        Private Shared Sub EnsureStandardDetailRow(rows As List(Of MedicalFitnessReportTestResult),
+                                                    sectionCode As String,
+                                                    testCode As String,
+                                                    testNameEnglish As String,
+                                                    testNameArabic As String,
+                                                    sequence As Int32)
+            Dim existing = rows.FirstOrDefault(
+                Function(row) String.Equals(row.TestCode, testCode, StringComparison.OrdinalIgnoreCase))
+            If existing Is Nothing Then
+                AddRow(rows, sectionCode, testCode, testNameEnglish, testNameArabic, sequence)
+                Return
+            End If
+
+            existing.SectionCode = sectionCode
+            If existing.Sequence <= 0 Then
+                existing.Sequence = sequence
+            End If
+        End Sub
 
         Private Function SynchronizeLabDetails(rows As List(Of MedicalFitnessReportTestResult), invoiceNo As Int32, Optional removeMissingWhenEmpty As Boolean = False) As List(Of MedicalFitnessReportTestResult)
             Dim analyses = _dao.GetKizenLabAnalyses(invoiceNo)
@@ -288,11 +381,11 @@ Namespace PresentationLayer.Presenters
 
         Private Shared Sub AddRow(rows As List(Of MedicalFitnessReportTestResult), sectionCode As String, testCode As String, testNameEnglish As String, testNameArabic As String, sequence As Int32)
             rows.Add(New MedicalFitnessReportTestResult With {
-                .sectionCode = sectionCode,
-                .testCode = testCode,
-                .testNameEnglish = testNameEnglish,
-                .testNameArabic = testNameArabic,
-                .sequence = sequence})
+                .SectionCode = sectionCode,
+                .TestCode = testCode,
+                .TestNameEnglish = testNameEnglish,
+                .TestNameArabic = testNameArabic,
+                .Sequence = sequence})
         End Sub
 
         Private Shared Sub AddLabRow(rows As List(Of MedicalFitnessReportTestResult), analysis As MedicalFitnessReportLabAnalysis, sequence As Int32)

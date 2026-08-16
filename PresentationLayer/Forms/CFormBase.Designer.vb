@@ -26,6 +26,7 @@ Partial Class CFormBase
         Me.lblFormDescription = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.FormToolStrip = New System.Windows.Forms.ToolStrip()
         Me.btnEdit = New System.Windows.Forms.ToolStripButton()
+        Me.btnDelete = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.btnSave = New System.Windows.Forms.ToolStripButton()
         Me.btnUndo = New System.Windows.Forms.ToolStripButton()
@@ -67,7 +68,7 @@ Partial Class CFormBase
         'FormToolStrip
         '
         Me.FormToolStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.FormToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnEdit, Me.ToolStripSeparator4, Me.btnSave, Me.btnUndo, Me.btnDebug, Me.CutToolStripButton, Me.CopyToolStripButton, Me.PasteToolStripButton, Me.btnPrint, Me.toolStripSeparator, Me.toolStripSeparator5, Me.btnOpen, Me.btnNew, Me.btnFilter, Me.HelpToolStripButton, Me.btnArabic, Me.btnTranslate, Me.btnOriginal, Me.btnQuit})
+        Me.FormToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnEdit, Me.btnDelete, Me.ToolStripSeparator4, Me.btnSave, Me.btnUndo, Me.btnDebug, Me.CutToolStripButton, Me.CopyToolStripButton, Me.PasteToolStripButton, Me.btnPrint, Me.toolStripSeparator, Me.toolStripSeparator5, Me.btnOpen, Me.btnNew, Me.btnFilter, Me.HelpToolStripButton, Me.btnArabic, Me.btnTranslate, Me.btnOriginal, Me.btnQuit})
         Me.FormToolStrip.Location = New System.Drawing.Point(0, 0)
         Me.FormToolStrip.Name = "FormToolStrip"
         Me.FormToolStrip.Size = New System.Drawing.Size(865, 31)
@@ -83,6 +84,16 @@ Partial Class CFormBase
         Me.btnEdit.Name = "btnEdit"
         Me.btnEdit.Size = New System.Drawing.Size(29, 28)
         Me.btnEdit.Text = "Edit current record"
+        '
+        'btnDelete
+        '
+        Me.btnDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.btnDelete.Image = CType(resources.GetObject("btnDelete.Image"), System.Drawing.Image)
+        Me.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(29, 28)
+        Me.btnDelete.Text = "Delete current record"
+        Me.btnDelete.Visible = False
         '
         'ToolStripSeparator4
         '
@@ -261,6 +272,7 @@ End Sub
     Friend WithEvents lblFormDescription As Libraries.CBaseControlsLibrary.CLabel
     Public WithEvents FormToolStrip As Windows.Forms.ToolStrip
     Protected WithEvents btnEdit As Windows.Forms.ToolStripButton
+    Public WithEvents btnDelete As Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator4 As Windows.Forms.ToolStripSeparator
     Public WithEvents btnSave As Windows.Forms.ToolStripButton
     Friend WithEvents btnDebug As Windows.Forms.ToolStripButton

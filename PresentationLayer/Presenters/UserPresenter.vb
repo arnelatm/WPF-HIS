@@ -21,7 +21,7 @@ Public Class UserPresenter(Of TM As New)
     Protected Overrides Sub CreateDataSources()
         MakeControlDataSources({New Object() {"SecurityGroup", "SecurityGroupIdNo", Nothing, Nothing},
                              New Object() {"Employee", "EmployeeIdNo", Nothing, Nothing}})
-        CreateEnumDataSource(Of SecurityLevelSelection)("SecurityLevel")
+        CreateEnumDataSource(Of SecurityLevelSelection)("SecurityLevel", "IdNo")
     End Sub
 
     Public Sub CreateBranchSource()

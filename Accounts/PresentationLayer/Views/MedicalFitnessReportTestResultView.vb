@@ -8,6 +8,16 @@ Namespace PresentationLayer.Views
         Public Property IdNo As Int32
         Public Property MedicalFitnessReportIdNo As Int32
         Public Property SectionCode As String
+
+        Public ReadOnly Property SectionDisplay As String
+            Get
+                If String.Equals(SectionCode, "DETAIL", StringComparison.OrdinalIgnoreCase) Then
+                    Return ""
+                End If
+                Return SectionCode
+            End Get
+        End Property
+
         Public Property TestCode As String
         Public Property TestNameEnglish As String
         Public Property TestNameArabic As String
