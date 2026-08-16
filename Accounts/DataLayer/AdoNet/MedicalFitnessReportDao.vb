@@ -44,9 +44,66 @@ Namespace DataLayer.AdoNet
                 "dbo.DateToAge(c.CustBirthday, i.Date) AS AgeLong, " &
                 "i.CustNat AS Nationality, " &
                 "i.CustIdentity AS IdentityNo, " &
-                "i.DrName AS DoctorName " &
+                "i.DrName AS DoctorName, " &
+                "vitalTemperature.Txt AS ExamTemperature, " &
+                "vitalBloodPressure.Txt AS ExamBloodPressure, " &
+                "vitalPulse.Txt AS ExamPulse, " &
+                "vitalWeight.Txt AS ExamWeight, " &
+                "vitalHeight.Txt AS ExamHeight " &
                 "FROM dbo.A1_Invoces i " &
                 "LEFT JOIN dbo.Customers c ON i.CustID = c.CustID " &
+                "OUTER APPLY (" &
+                " SELECT TOP (1) v.ID AS VisitID " &
+                " FROM dbo.VisitData v " &
+                " WHERE v.CustID = i.CustID " &
+                " AND v.Date = CONVERT(date, i.Date) " &
+                " AND EXISTS (" &
+                "  SELECT 1 FROM dbo.VisitInput vitalInput " &
+                "  INNER JOIN dbo.VisitType vitalType ON vitalType.ID = vitalInput.VisitTypeID " &
+                "  WHERE vitalInput.VisitID = v.ID " &
+                "  AND NULLIF(LTRIM(RTRIM(vitalInput.Txt)), N'') IS NOT NULL " &
+                "  AND LOWER(LTRIM(RTRIM(vitalType.NameLatin))) IN " &
+                "      (N'temperature', N'blood pressure', N'heart beat', N'heart beat rate', N'heart rate', N'pulse rate', N'weight', N'height', N'length')" &
+                " ) " &
+                " ORDER BY CASE WHEN v.DrID = i.DrID THEN 0 ELSE 1 END, " &
+                " ABS(DATEDIFF(second, i.Date, CAST(v.Date AS datetime) + CAST(ISNULL(v.Time, CAST('00:00:00' AS time)) AS datetime))), " &
+                " v.ID DESC" &
+                ") vitalVisit " &
+                "OUTER APPLY (" &
+                " SELECT TOP (1) NULLIF(LTRIM(RTRIM(vi.Txt)), N'') AS Txt " &
+                " FROM dbo.VisitInput vi INNER JOIN dbo.VisitType vt ON vt.ID = vi.VisitTypeID " &
+                " WHERE vi.VisitID = vitalVisit.VisitID " &
+                " AND LOWER(LTRIM(RTRIM(vt.NameLatin))) = N'temperature' " &
+                " ORDER BY vi.ID DESC" &
+                ") vitalTemperature " &
+                "OUTER APPLY (" &
+                " SELECT TOP (1) NULLIF(LTRIM(RTRIM(vi.Txt)), N'') AS Txt " &
+                " FROM dbo.VisitInput vi INNER JOIN dbo.VisitType vt ON vt.ID = vi.VisitTypeID " &
+                " WHERE vi.VisitID = vitalVisit.VisitID " &
+                " AND LOWER(LTRIM(RTRIM(vt.NameLatin))) = N'blood pressure' " &
+                " ORDER BY vi.ID DESC" &
+                ") vitalBloodPressure " &
+                "OUTER APPLY (" &
+                " SELECT TOP (1) NULLIF(LTRIM(RTRIM(vi.Txt)), N'') AS Txt " &
+                " FROM dbo.VisitInput vi INNER JOIN dbo.VisitType vt ON vt.ID = vi.VisitTypeID " &
+                " WHERE vi.VisitID = vitalVisit.VisitID " &
+                " AND LOWER(LTRIM(RTRIM(vt.NameLatin))) IN (N'heart beat', N'heart beat rate', N'heart rate', N'pulse rate') " &
+                " ORDER BY vi.ID DESC" &
+                ") vitalPulse " &
+                "OUTER APPLY (" &
+                " SELECT TOP (1) NULLIF(LTRIM(RTRIM(vi.Txt)), N'') AS Txt " &
+                " FROM dbo.VisitInput vi INNER JOIN dbo.VisitType vt ON vt.ID = vi.VisitTypeID " &
+                " WHERE vi.VisitID = vitalVisit.VisitID " &
+                " AND LOWER(LTRIM(RTRIM(vt.NameLatin))) = N'weight' " &
+                " ORDER BY vi.ID DESC" &
+                ") vitalWeight " &
+                "OUTER APPLY (" &
+                " SELECT TOP (1) NULLIF(LTRIM(RTRIM(vi.Txt)), N'') AS Txt " &
+                " FROM dbo.VisitInput vi INNER JOIN dbo.VisitType vt ON vt.ID = vi.VisitTypeID " &
+                " WHERE vi.VisitID = vitalVisit.VisitID " &
+                " AND LOWER(LTRIM(RTRIM(vt.NameLatin))) IN (N'height', N'length') " &
+                " ORDER BY vi.ID DESC" &
+                ") vitalHeight " &
                 "WHERE i.ID = @InvoiceNo"
 
             Return _kizenDb.Read(sql, MakeKizenInvoice, "@InvoiceNo", invoiceNo).FirstOrDefault()
@@ -430,7 +487,12 @@ Namespace DataLayer.AdoNet
                 .Age = GetMedicalFitnessAge(reader),
                 .Nationality = Extensions.AsString(reader("Nationality")),
                 .IdentityNo = Extensions.AsString(reader("IdentityNo")),
-                .DoctorName = Extensions.AsString(reader("DoctorName"))}
+                .DoctorName = Extensions.AsString(reader("DoctorName")),
+                .ExamTemperature = Extensions.AsString(reader("ExamTemperature")),
+                .ExamBloodPressure = Extensions.AsString(reader("ExamBloodPressure")),
+                .ExamPulse = Extensions.AsString(reader("ExamPulse")),
+                .ExamWeight = Extensions.AsString(reader("ExamWeight")),
+                .ExamHeight = Extensions.AsString(reader("ExamHeight"))}
 
         Private Shared Function GetMedicalFitnessAge(reader As IDataReader) As String
             Dim birthDate = Extensions.AsNullable(Of DateTime?)(reader("BirthDate"))

@@ -120,7 +120,7 @@ Namespace PresentationLayer.Views.Forms
                 examLayout.RowStyles.Add(New RowStyle(SizeType.Percent, 16.6667!))
             Next
 
-            txtExamTemperature = AddExamEntry(examLayout, "Temp / درجة الحرارة", 0, 0)
+            txtExamTemperature = AddExamEntry(examLayout, "Temp (°C) / درجة الحرارة", 0, 0)
             txtExamBloodPressure = AddExamEntry(examLayout, "B.P / ضغط الدم", 2, 0)
             txtExamPulse = AddExamEntry(examLayout, "Pulse / النبض", 4, 0)
             txtExamRespiratorySystem = AddExamEntry(examLayout, "Resp. System / الجهاز التنفسي", 0, 1)
@@ -129,8 +129,8 @@ Namespace PresentationLayer.Views.Forms
             txtExamNervousSystem = AddExamEntry(examLayout, "Nervous System / الجهاز العصبي", 0, 2)
             txtExamExtremities = AddExamEntry(examLayout, "Extremities / فحص الأطراف", 2, 2)
             txtExamChestXRay = AddExamEntry(examLayout, "Chest X-ray / الأشعة الصدرية", 4, 2)
-            txtExamWeight = AddExamEntry(examLayout, "Weight / الوزن", 0, 3)
-            txtExamHeight = AddExamEntry(examLayout, "Height / الطول", 2, 3)
+            txtExamWeight = AddExamEntry(examLayout, "Weight (kg) / الوزن", 0, 3)
+            txtExamHeight = AddExamEntry(examLayout, "Height (cm) / الطول", 2, 3)
             txtExamRightEye = AddExamEntry(examLayout, "Right Eye / العين اليمنى", 0, 4)
             txtExamLeftEye = AddExamEntry(examLayout, "Left Eye / العين اليسرى", 2, 4)
             txtExamRightEar = AddExamEntry(examLayout, "Right Ear / الأذن اليمنى", 0, 5)

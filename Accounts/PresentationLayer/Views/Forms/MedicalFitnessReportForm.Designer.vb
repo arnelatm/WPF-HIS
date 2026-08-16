@@ -63,7 +63,7 @@
             Me.mainPanel.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.mainPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
             Me.mainPanel.RowStyles.Add(New System.Windows.Forms.RowStyle())
-            Me.mainPanel.Size = New System.Drawing.Size(984, 624)
+            Me.mainPanel.Size = New System.Drawing.Size(1100, 765)
             Me.mainPanel.TabIndex = 0
             '
             'invoicePanel
@@ -77,7 +77,7 @@
             Me.invoicePanel.Dock = System.Windows.Forms.DockStyle.Fill
             Me.invoicePanel.Location = New System.Drawing.Point(11, 11)
             Me.invoicePanel.Name = "invoicePanel"
-            Me.invoicePanel.Size = New System.Drawing.Size(962, 29)
+            Me.invoicePanel.Size = New System.Drawing.Size(1078, 29)
             Me.invoicePanel.TabIndex = 0
             Me.invoicePanel.WrapContents = False
             '
@@ -132,11 +132,11 @@
             Me.dgvResults.AllowUserToDeleteRows = False
             Me.dgvResults.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
             Me.dgvResults.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.dgvResults.Location = New System.Drawing.Point(11, 157)
+            Me.dgvResults.Location = New System.Drawing.Point(11, 131)
             Me.dgvResults.Name = "dgvResults"
             Me.dgvResults.RowHeadersVisible = False
             Me.dgvResults.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-            Me.dgvResults.Size = New System.Drawing.Size(962, 424)
+            Me.dgvResults.Size = New System.Drawing.Size(1078, 591)
             Me.dgvResults.TabIndex = 2
             '
             'finalPanel
@@ -147,9 +147,9 @@
             Me.finalPanel.Controls.Add(Me.lblRemarks)
             Me.finalPanel.Controls.Add(Me.txtRemarks)
             Me.finalPanel.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.finalPanel.Location = New System.Drawing.Point(11, 587)
+            Me.finalPanel.Location = New System.Drawing.Point(11, 728)
             Me.finalPanel.Name = "finalPanel"
-            Me.finalPanel.Size = New System.Drawing.Size(962, 26)
+            Me.finalPanel.Size = New System.Drawing.Size(1078, 26)
             Me.finalPanel.TabIndex = 3
             '
             'chkFinalFit
@@ -224,22 +224,22 @@
             Me.headerPanel.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.headerPanel.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.headerPanel.RowStyles.Add(New System.Windows.Forms.RowStyle())
-            Me.headerPanel.Size = New System.Drawing.Size(962, 105)
+            Me.headerPanel.Size = New System.Drawing.Size(1078, 79)
             Me.headerPanel.TabIndex = 1
             '
             'txtPatientName
             '
             Me.txtPatientName.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.txtPatientName.Location = New System.Drawing.Point(163, 3)
+            Me.txtPatientName.Location = New System.Drawing.Point(182, 3)
             Me.txtPatientName.Name = "txtPatientName"
             Me.txtPatientName.ReadOnly = True
-            Me.txtPatientName.Size = New System.Drawing.Size(154, 20)
+            Me.txtPatientName.Size = New System.Drawing.Size(173, 20)
             Me.txtPatientName.TabIndex = 1
             '
             'lblGender
             '
             Me.lblGender.AutoSize = True
-            Me.lblGender.Location = New System.Drawing.Point(323, 6)
+            Me.lblGender.Location = New System.Drawing.Point(361, 6)
             Me.lblGender.Margin = New System.Windows.Forms.Padding(3, 6, 3, 3)
             Me.lblGender.Name = "lblGender"
             Me.lblGender.Size = New System.Drawing.Size(42, 13)
@@ -249,16 +249,16 @@
             'txtGender
             '
             Me.txtGender.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.txtGender.Location = New System.Drawing.Point(483, 3)
+            Me.txtGender.Location = New System.Drawing.Point(540, 3)
             Me.txtGender.Name = "txtGender"
             Me.txtGender.ReadOnly = True
-            Me.txtGender.Size = New System.Drawing.Size(154, 20)
+            Me.txtGender.Size = New System.Drawing.Size(173, 20)
             Me.txtGender.TabIndex = 3
             '
             'lblAge
             '
             Me.lblAge.AutoSize = True
-            Me.lblAge.Location = New System.Drawing.Point(643, 6)
+            Me.lblAge.Location = New System.Drawing.Point(719, 6)
             Me.lblAge.Margin = New System.Windows.Forms.Padding(3, 6, 3, 3)
             Me.lblAge.Name = "lblAge"
             Me.lblAge.Size = New System.Drawing.Size(26, 13)
@@ -268,10 +268,10 @@
             'txtAge
             '
             Me.txtAge.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.txtAge.Location = New System.Drawing.Point(803, 3)
+            Me.txtAge.Location = New System.Drawing.Point(898, 3)
             Me.txtAge.Name = "txtAge"
             Me.txtAge.ReadOnly = True
-            Me.txtAge.Size = New System.Drawing.Size(156, 20)
+            Me.txtAge.Size = New System.Drawing.Size(177, 20)
             Me.txtAge.TabIndex = 5
             '
             'lblNationality
@@ -287,16 +287,16 @@
             'txtNationality
             '
             Me.txtNationality.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.txtNationality.Location = New System.Drawing.Point(163, 29)
+            Me.txtNationality.Location = New System.Drawing.Point(182, 29)
             Me.txtNationality.Name = "txtNationality"
             Me.txtNationality.ReadOnly = True
-            Me.txtNationality.Size = New System.Drawing.Size(154, 20)
+            Me.txtNationality.Size = New System.Drawing.Size(173, 20)
             Me.txtNationality.TabIndex = 7
             '
             'lblIdentityNo
             '
             Me.lblIdentityNo.AutoSize = True
-            Me.lblIdentityNo.Location = New System.Drawing.Point(323, 32)
+            Me.lblIdentityNo.Location = New System.Drawing.Point(361, 32)
             Me.lblIdentityNo.Margin = New System.Windows.Forms.Padding(3, 6, 3, 3)
             Me.lblIdentityNo.Name = "lblIdentityNo"
             Me.lblIdentityNo.Size = New System.Drawing.Size(38, 13)
@@ -306,16 +306,16 @@
             'txtIdentityNo
             '
             Me.txtIdentityNo.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.txtIdentityNo.Location = New System.Drawing.Point(483, 29)
+            Me.txtIdentityNo.Location = New System.Drawing.Point(540, 29)
             Me.txtIdentityNo.Name = "txtIdentityNo"
             Me.txtIdentityNo.ReadOnly = True
-            Me.txtIdentityNo.Size = New System.Drawing.Size(154, 20)
+            Me.txtIdentityNo.Size = New System.Drawing.Size(173, 20)
             Me.txtIdentityNo.TabIndex = 9
             '
             'lblFileNo
             '
             Me.lblFileNo.AutoSize = True
-            Me.lblFileNo.Location = New System.Drawing.Point(643, 32)
+            Me.lblFileNo.Location = New System.Drawing.Point(719, 32)
             Me.lblFileNo.Margin = New System.Windows.Forms.Padding(3, 6, 3, 3)
             Me.lblFileNo.Name = "lblFileNo"
             Me.lblFileNo.Size = New System.Drawing.Size(43, 13)
@@ -325,10 +325,10 @@
             'txtFileNo
             '
             Me.txtFileNo.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.txtFileNo.Location = New System.Drawing.Point(803, 29)
+            Me.txtFileNo.Location = New System.Drawing.Point(898, 29)
             Me.txtFileNo.Name = "txtFileNo"
             Me.txtFileNo.ReadOnly = True
-            Me.txtFileNo.Size = New System.Drawing.Size(156, 20)
+            Me.txtFileNo.Size = New System.Drawing.Size(177, 20)
             Me.txtFileNo.TabIndex = 11
             '
             'lblInvoiceDate
@@ -344,16 +344,16 @@
             'txtInvoiceDate
             '
             Me.txtInvoiceDate.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.txtInvoiceDate.Location = New System.Drawing.Point(163, 55)
+            Me.txtInvoiceDate.Location = New System.Drawing.Point(182, 55)
             Me.txtInvoiceDate.Name = "txtInvoiceDate"
             Me.txtInvoiceDate.ReadOnly = True
-            Me.txtInvoiceDate.Size = New System.Drawing.Size(154, 20)
+            Me.txtInvoiceDate.Size = New System.Drawing.Size(173, 20)
             Me.txtInvoiceDate.TabIndex = 13
             '
             'lblDoctorName
             '
             Me.lblDoctorName.AutoSize = True
-            Me.lblDoctorName.Location = New System.Drawing.Point(323, 58)
+            Me.lblDoctorName.Location = New System.Drawing.Point(361, 58)
             Me.lblDoctorName.Margin = New System.Windows.Forms.Padding(3, 6, 3, 3)
             Me.lblDoctorName.Name = "lblDoctorName"
             Me.lblDoctorName.Size = New System.Drawing.Size(39, 13)
@@ -363,16 +363,16 @@
             'txtDoctorName
             '
             Me.txtDoctorName.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.txtDoctorName.Location = New System.Drawing.Point(483, 55)
+            Me.txtDoctorName.Location = New System.Drawing.Point(540, 55)
             Me.txtDoctorName.Name = "txtDoctorName"
             Me.txtDoctorName.ReadOnly = True
-            Me.txtDoctorName.Size = New System.Drawing.Size(154, 20)
+            Me.txtDoctorName.Size = New System.Drawing.Size(173, 20)
             Me.txtDoctorName.TabIndex = 15
             '
             'lblBloodType
             '
             Me.lblBloodType.AutoSize = True
-            Me.lblBloodType.Location = New System.Drawing.Point(643, 58)
+            Me.lblBloodType.Location = New System.Drawing.Point(719, 58)
             Me.lblBloodType.Margin = New System.Windows.Forms.Padding(3, 6, 3, 3)
             Me.lblBloodType.Name = "lblBloodType"
             Me.lblBloodType.Size = New System.Drawing.Size(61, 13)
@@ -384,9 +384,9 @@
             Me.cboBloodType.Dock = System.Windows.Forms.DockStyle.Fill
             Me.cboBloodType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
             Me.cboBloodType.Items.AddRange(New Object() {"", "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"})
-            Me.cboBloodType.Location = New System.Drawing.Point(803, 55)
+            Me.cboBloodType.Location = New System.Drawing.Point(898, 55)
             Me.cboBloodType.Name = "cboBloodType"
-            Me.cboBloodType.Size = New System.Drawing.Size(156, 21)
+            Me.cboBloodType.Size = New System.Drawing.Size(177, 21)
             Me.cboBloodType.TabIndex = 17
             '
             'lblPatientName
