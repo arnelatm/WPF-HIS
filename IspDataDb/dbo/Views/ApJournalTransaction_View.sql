@@ -1,4 +1,4 @@
-﻿
+
 
 
 CREATE VIEW [dbo].[ApJournalTransaction_View]
@@ -17,14 +17,20 @@ FROM          dbo.ApJournalItem
 			  INNER JOIN dbo.Supplier 
 			  ON dbo.ApJournal.SupplierIdNo = dbo.Supplier.IdNo 
 			  ON dbo.ApJournalItem.JournalIdNo = dbo.ApJournal.IDNo
-GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 2, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ApJournalTransaction_View';
-
 
 GO
+
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'    Or = 1350
       End
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ApJournalTransaction_View';
+
+
+GO
+
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 2, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ApJournalTransaction_View';
+
+
+GO
 

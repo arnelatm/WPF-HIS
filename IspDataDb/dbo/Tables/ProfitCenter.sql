@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[ProfitCenter] (
+CREATE TABLE [dbo].[ProfitCenter] (
     [IdNo]                SMALLINT      NOT NULL,
     [ProfitCenterCode]    VARCHAR (5)   COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [ProfitCenterName]    VARCHAR (50)  COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
@@ -15,11 +15,16 @@
 
 
 GO
+
+CREATE UNIQUE NONCLUSTERED INDEX [IX_ProfitCenterName]
+    ON [dbo].[ProfitCenter]([ProfitCenterName] ASC);
+
+
+GO
+
 CREATE NONCLUSTERED INDEX [IX_ProfitCenterParent]
     ON [dbo].[ProfitCenter]([ParentIdNo] ASC);
 
 
 GO
-CREATE UNIQUE NONCLUSTERED INDEX [IX_ProfitCenterName]
-    ON [dbo].[ProfitCenter]([ProfitCenterName] ASC);
 

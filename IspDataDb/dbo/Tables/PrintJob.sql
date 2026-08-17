@@ -1,11 +1,18 @@
-﻿CREATE TABLE [dbo].[PrintJobAssignment] (
-    [id]               INT           IDENTITY (1, 1) NOT NULL,
-    [PrintJobName]     VARCHAR (20)  NOT NULL,
-    [ComputerName]     VARCHAR (30)  NOT NULL,
-    [PrinterName]      VARCHAR (100) NOT NULL,
-    [PaperSource]      TINYINT       CONSTRAINT [DF__PrintingJ__Paper__0015E5C7] DEFAULT ((7)) NULL,
-    [PaperOrientation] TINYINT       CONSTRAINT [DF__PrintingJ__Orien__010A0A00] DEFAULT ((0)) NULL,
-    [PaperSize]        INT           NULL,
-    CONSTRAINT [PK_PrintJobAssignment] PRIMARY KEY CLUSTERED ([id] ASC)
+CREATE TABLE [dbo].[PrintJob] (
+    [IdNo]             INT           IDENTITY (1, 1) NOT NULL,
+    [PrintJobCode]     VARCHAR (10)  NOT NULL,
+    [PrintJobName]     VARCHAR (50)  NOT NULL,
+    [PrintJobNameAra]  NVARCHAR (50) NULL,
+    [PrinterIdNo]      SMALLINT      NULL,
+    [PaperSource]      SMALLINT      NULL,
+    [PaperOrientation] SMALLINT      NULL,
+    [PaperSize]        SMALLINT      NULL,
+    [ComputerIdNo]     SMALLINT      NULL,
+    [PrintSetupIdNo]   SMALLINT      NULL,
+    [DateTimeStamp]    ROWVERSION    NULL,
+    CONSTRAINT [PK_PrintJob] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
+GO
 

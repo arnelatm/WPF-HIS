@@ -1,15 +1,13 @@
-﻿CREATE VIEW dbo.ShiftSummary_View
+CREATE VIEW dbo.ShiftSummary_View
 AS
 SELECT        dbo.ShiftSummary.IdNo, dbo.ShiftSummary.UserIdNo, dbo.ShiftSummary.DateStart, dbo.ShiftSummary.DateEnd, dbo.ShiftSummary.Cash, dbo.ShiftSummary.Cards, dbo.[User].UserName, dbo.Employee.EmployeeName, 
                          dbo.Employee.EmployeeNameAra, dbo.Employee.EmployeeCode AS UserCode
 FROM            dbo.ShiftSummary INNER JOIN
                          dbo.[User] ON dbo.ShiftSummary.UserIdNo = dbo.[User].IdNo INNER JOIN
                          dbo.Employee ON dbo.[User].EmployeeIdNo = dbo.Employee.IdNo
-GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ShiftSummary_View';
-
 
 GO
+
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 
    Begin PaneConfigurations = 
@@ -138,4 +136,12 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ShiftSummary_View';
+
+
+GO
+
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ShiftSummary_View';
+
+
+GO
 

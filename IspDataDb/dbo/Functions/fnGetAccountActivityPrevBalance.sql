@@ -1,4 +1,4 @@
-﻿
+
 -- =============================================
 -- Author:		Arnel Marcelo
 -- Create date: 
@@ -32,6 +32,7 @@ RETURNS
 	PayDescription nVarChar(300),
 	PayDescriptionAra nVarChar(300),
 	ClosingJournal bit,
+	Cancelled Bit,
 	Balance Money
 )
 AS
@@ -51,7 +52,10 @@ BEGIN
 	Insert @Results
 	Select 'BB' as JournalCode,0 as IdNo,0 as [Sequence],0 as JournalIdNo,AccountIdNo,AccountCode,Iif(Sum(debit-Credit)>0,Sum(Debit-Credit),0) as Debit,IIf(SUm(Debit-Credit)<0,Sum(Debit-Credit)*-1,0) as Credit,
 		0 as RevCostCenterIdNo,'Beginning Balance' as Notes,0 as Posted,DateAdd(day,-1,@BegDate) as TransactionDate,'BB' as ReferenceNo,'' as DocumentnUMBER,
-		'Beginning Balance' AS PayDescription,'Beginning Balance' as PayDescriptionAra,0 as ClosingJournal,Sum(debit-Credit) as Balance
-	from fnGetAccountActivityPreviousData(@BegDate,@EndDate,@AccountIdNo) Group by AccountIdNo,AccountCode
+		'Beginning Balance' AS PayDescription,'Beginning Balance' as PayDescriptionAra,0 as ClosingJournal,Cancelled,Sum(debit-Credit) as Balance
+	from fnGetAccountActivityPreviousData(@BegDate,@EndDate,@AccountIdNo) Group by AccountIdNo,AccountCode,Cancelled
 	Return
 END
+
+GO
+

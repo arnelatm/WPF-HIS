@@ -1,0 +1,5 @@
+CREATE USER [iGroupAdmin] WITHOUT LOGIN;
+
+
+GO
+

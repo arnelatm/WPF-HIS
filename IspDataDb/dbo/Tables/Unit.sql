@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[Unit] (
+CREATE TABLE [dbo].[Unit] (
     [IdNo]          SMALLINT      IDENTITY (1, 1) NOT NULL,
     [UnitCode]      NVARCHAR (10) NULL,
     [UnitName]      VARCHAR (20)  NOT NULL,
@@ -8,27 +8,23 @@
 );
 
 
+GO
 
-
-
-
-
-
-
-
+CREATE UNIQUE NONCLUSTERED INDEX [IX_UnitCode]
+    ON [dbo].[Unit]([UnitCode] ASC);
 
 
 GO
-CREATE UNIQUE NONCLUSTERED INDEX [IX_UnitNameAra]
-    ON [dbo].[Unit]([UnitNameAra] ASC);
 
-
-GO
 CREATE UNIQUE NONCLUSTERED INDEX [IX_UnitName]
     ON [dbo].[Unit]([UnitName] ASC);
 
 
 GO
-CREATE UNIQUE NONCLUSTERED INDEX [IX_UnitCode]
-    ON [dbo].[Unit]([UnitCode] ASC);
+
+CREATE UNIQUE NONCLUSTERED INDEX [IX_UnitNameAra]
+    ON [dbo].[Unit]([UnitNameAra] ASC);
+
+
+GO
 

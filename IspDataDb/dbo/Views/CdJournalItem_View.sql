@@ -1,4 +1,4 @@
-﻿CREATE VIEW dbo.CdJournalItem_View
+CREATE VIEW dbo.CdJournalItem_View
 AS
 SELECT        dbo.CdJournalItem.AccountIdNo, dbo.CdJournalItem.Credit, dbo.CdJournalItem.Debit, dbo.CdJournalItem.IdNo, dbo.CdJournalItem.JournalIdNo, dbo.CdJournalItem.Notes, dbo.CdJournalItem.RevCostCenterIdNo, 
                          dbo.CdJournalItem.Sequence, dbo.Account.AccountName, dbo.CdJournalItem.Debit - dbo.CdJournalItem.Credit AS OriginalAmount, dbo.Account.PayeeType, dbo.Account.SpecialAccount, 0 AS OpenInvoiceIdNo, 0 AS PaidAmount, 
@@ -7,11 +7,9 @@ FROM            dbo.CdJournal LEFT OUTER JOIN
                          dbo.CdJournalItem ON dbo.CdJournal.IdNo = dbo.CdJournalItem.JournalIdNo LEFT OUTER JOIN
                          dbo.Account ON dbo.CdJournalItem.AccountIdNo = dbo.Account.IdNo LEFT OUTER JOIN
                          dbo.ApOpenInvoice ON dbo.CdJournalItem.JournalIdNo = dbo.ApOpenInvoice.JournalItemIdNo
-GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'CdJournalItem_View';
-
 
 GO
+
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 
    Begin PaneConfigurations = 
@@ -150,4 +148,12 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'CdJournalItem_View';
+
+
+GO
+
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'CdJournalItem_View';
+
+
+GO
 

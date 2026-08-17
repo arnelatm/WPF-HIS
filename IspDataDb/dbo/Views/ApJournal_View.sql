@@ -1,15 +1,14 @@
-﻿CREATE VIEW dbo.ApJournal_View
+
+CREATE VIEW [dbo].[ApJournal_View]
 AS
-SELECT        TOP (1000) a.IDNo, a.SupplierIdNo, a.TransactionDate, a.ReferenceNo, a.TransactionType, a.Amount, a.AccountIdNo, a.DueDate, a.SettlementDueDate, a.SettlementDiscount, a.InvoiceNo, a.InvoiceDate, a.VatNumber, 
-                         a.VatAmount, a.Notes, a.Posted, a.Cancelled, a.DateCreated, a.DateTimeStamp, dbo.currency_conversion(a.Amount) AS WordAmount, s.SupplierCode, s.SupplierNameAra, a.Approved
-FROM            dbo.ApJournal AS a LEFT OUTER JOIN
-                         dbo.Supplier AS s ON a.SupplierIdNo = s.IdNo
+SELECT a.IDNo, a.SupplierIdNo, a.TransactionDate, a.ReferenceNo, a.TransactionType, a.Amount, a.AccountIdNo, a.DueDate, a.SettlementDueDate, a.SettlementDiscount, a.InvoiceNo, a.InvoiceDate, a.VatNumber, 
+       a.VatAmount, a.Notes, a.Posted, a.Cancelled, a.DateCreated, a.DateTimeStamp, dbo.currency_conversion(a.Amount) AS WordAmount, s.SupplierCode, s.SupplierNameAra, a.Approved
+FROM   dbo.ApJournal AS a LEFT OUTER JOIN
+       dbo.Supplier AS s ON a.SupplierIdNo = s.IdNo
+	   where a.Cancelled = 0
 
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ApJournal_View';
 
-
-GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 
    Begin PaneConfigurations = 
@@ -128,4 +127,12 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ApJournal_View';
+
+
+GO
+
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ApJournal_View';
+
+
+GO
 

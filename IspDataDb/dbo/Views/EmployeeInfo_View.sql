@@ -1,4 +1,4 @@
-﻿CREATE VIEW dbo.EmployeeInfo_View
+CREATE VIEW dbo.EmployeeInfo_View
 AS
 SELECT        dbo.Employee.IdNo, dbo.Employee.EmployeeCode, dbo.Employee.Title, dbo.Employee.EmployeeName, dbo.Employee.EmployeeNameAra, dbo.Employee.Gender, dbo.Employee.MaritalStatus, dbo.Employee.NationalityCode, 
                          dbo.Employee.NationalityId, dbo.Employee.ReligionIdNo, dbo.Employee.ReligionId, dbo.Employee.NationalIdNo, dbo.Employee.Street, dbo.Employee.District, dbo.Employee.TownCity, dbo.Employee.ProvinceState, 
@@ -21,76 +21,9 @@ FROM            dbo.Employee LEFT OUTER JOIN
                          dbo.Country AS Country_1 ON dbo.Employee.CountryCode = Country_1.CountryCode COLLATE SQL_Latin1_General_CP1_CI_AS LEFT OUTER JOIN
                          dbo.Country ON dbo.Employee.NationalityCode = dbo.Country.CountryCode COLLATE SQL_Latin1_General_CP1_CI_AS LEFT OUTER JOIN
                          dbo.Employee AS Employee_1 ON dbo.Employee.SupervisorIdNo = Employee_1.IdNo
-GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 2, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeInfo_View';
-
 
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'DisplayFlags = 280
-            TopColumn = 0
-         End
-         Begin Table = "Country"
-            Begin Extent = 
-               Top = 290
-               Left = 1040
-               Bottom = 517
-               Right = 1222
-            End
-            DisplayFlags = 280
-            TopColumn = 0
-         End
-         Begin Table = "Employee_1"
-            Begin Extent = 
-               Top = 482
-               Left = 437
-               Bottom = 704
-               Right = 635
-            End
-            DisplayFlags = 280
-            TopColumn = 2
-         End
-         Begin Table = "PayGroup"
-            Begin Extent = 
-               Top = 6
-               Left = 356
-               Bottom = 136
-               Right = 547
-            End
-            DisplayFlags = 280
-            TopColumn = 2
-         End
-      End
-   End
-   Begin SQLPane = 
-   End
-   Begin DataPane = 
-      Begin ParameterDefaults = ""
-      End
-   End
-   Begin CriteriaPane = 
-      Begin ColumnWidths = 11
-         Column = 1860
-         Alias = 1320
-         Table = 1170
-         Output = 720
-         Append = 1400
-         NewValue = 1170
-         SortType = 1350
-         SortOrder = 1410
-         GroupBy = 1350
-         Filter = 1350
-         Or = 1350
-         Or = 1350
-         Or = 1350
-      End
-   End
-End
-', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeInfo_View';
 
-
-
-
-GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 
    Begin PaneConfigurations = 
@@ -232,4 +165,74 @@ Begin DesignProperties =
             ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeInfo_View';
 
 
+GO
+
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "Country"
+            Begin Extent = 
+               Top = 290
+               Left = 1040
+               Bottom = 517
+               Right = 1222
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "Employee_1"
+            Begin Extent = 
+               Top = 482
+               Left = 437
+               Bottom = 704
+               Right = 635
+            End
+            DisplayFlags = 280
+            TopColumn = 2
+         End
+         Begin Table = "PayGroup"
+            Begin Extent = 
+               Top = 6
+               Left = 356
+               Bottom = 136
+               Right = 547
+            End
+            DisplayFlags = 280
+            TopColumn = 2
+         End
+      End
+   End
+   Begin SQLPane = 
+   End
+   Begin DataPane = 
+      Begin ParameterDefaults = ""
+      End
+   End
+   Begin CriteriaPane = 
+      Begin ColumnWidths = 11
+         Column = 1860
+         Alias = 1320
+         Table = 1170
+         Output = 720
+         Append = 1400
+         NewValue = 1170
+         SortType = 1350
+         SortOrder = 1410
+         GroupBy = 1350
+         Filter = 1350
+         Or = 1350
+         Or = 1350
+         Or = 1350
+      End
+   End
+End
+', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeInfo_View';
+
+
+GO
+
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 2, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeInfo_View';
+
+
+GO
 

@@ -1,4 +1,5 @@
-﻿
+
+
 
 
 
@@ -46,6 +47,7 @@ With FirstRecord(FirstRecordDate) as (Select LastPostingDate from LastPosting wh
   FROM [ApJournalItem] aS ai
   LEFT OUTER JOIN ApJournal AS b
   on ai.JournalIdNo = b.IDNo 
+  where b.Cancelled = 0
 )
 UNION
 (SELECT 'CD'
@@ -69,7 +71,7 @@ UNION
   FROM [CdJournalItem] ai
   LEFT OUTER JOIN dbo.CdJournal b
   on ai.JournalIdNo = b.IDNo
-  WHERE PaymentType='A'
+  WHERE PaymentType='A' and b.Cancelled = 0
 )
 UNION
 (SELECT 'PC'
@@ -93,7 +95,7 @@ UNION
   FROM [PcJournalItem] as ai
   LEFT OUTER JOIN PcJournal as b
   on ai.JournalIdNo = b.IDNo
-  WHERE PaymentType='A'
+  WHERE PaymentType='A' and b.Cancelled = 0
 )
 UNION
 (SELECT 'CR'
@@ -117,7 +119,7 @@ UNION
   FROM [CashReceiptJournalItem] as ai
   LEFT OUTER JOIN dbo.CashReceiptJournal as b
   on ai.JournalIdNo = b.IDNo
-  WHERE PayorType='R'
+  WHERE PayorType='R' and b.Cancelled = 0
 )
 UNION
 (SELECT 'BB' 
@@ -146,3 +148,6 @@ UNION
 	  ,(Select FirstRecordDate from FirstRecord)
   FROM [dbo].Supplier 
 )
+
+GO
+

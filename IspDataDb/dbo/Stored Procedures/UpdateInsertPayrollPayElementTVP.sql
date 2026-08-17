@@ -1,4 +1,8 @@
-﻿
+
+
+
+
+
 
 
 
@@ -18,16 +22,21 @@ DELETE A
 FROM [DBO].PayrollPayElement A 
 Left Join [DBO].PayrollDetail D
 On A.PayrollDetailIdNo = D.IdNo 
-WHERE (D.IdNo is Null) or (D.PayrollIdNo = @GroupIdNo and NOT EXISTS (SELECT * FROM @MParam1 where IdNo = A.IdNo ) )
+WHERE (payrollIdNo is Null) or (D.PayrollIdNo = @GroupIdNo and NOT EXISTS (SELECT * FROM @MParam1 where IdNo = A.IdNo ) )
 
 -- Update existing PayElements
 UPDATE a 
 SET a.Amount = B.Amount,
+    a.[Generated] = b.[Generated],
 	a.PayElementIdNo = B.PayElementIdNo,
-	a.PayrollDetailIdNo = b.PayrollPayDetailIdNo
+	a.PayrollDetailIdNo = b.PayrollDetailIdNo,
+	a.RecurringPayElementIdNo = b.RecurringPayElementIdNo
 from PayrollPayElement a INNER JOIN @MParam1 As b
 on a.IdNo = b.IdNo
 
 EXEC dbo.InsertPayrollPayElementTVP @MParam2  
 
 END
+
+GO
+

@@ -1,14 +1,12 @@
-﻿CREATE VIEW dbo.Doctor_View
+CREATE VIEW dbo.Doctor_View
 AS
 SELECT        dbo.Doctor.EmployeeIdNo, dbo.Doctor.DoctorCode, dbo.Doctor.IdNo, dbo.Doctor.SpecialtyIdNo, dbo.Doctor.Active, dbo.Doctor.DateCreated, dbo.Employee.EmployeeName AS DoctorName, 
                          dbo.Employee.EmployeeNameAra AS DoctorNameAra, dbo.Doctor.DateTimeStamp
 FROM            dbo.Doctor INNER JOIN
                          dbo.Employee ON dbo.Doctor.EmployeeIdNo = dbo.Employee.IdNo
-GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'Doctor_View';
-
 
 GO
+
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 
    Begin PaneConfigurations = 
@@ -127,4 +125,12 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'Doctor_View';
+
+
+GO
+
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'Doctor_View';
+
+
+GO
 

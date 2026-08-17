@@ -1,4 +1,6 @@
-﻿
+
+
+
 CREATE VIEW [dbo].[GlLedgersSummmary_View]	
   AS
 (SELECT 'GJ' Collate SQL_Latin1_General_CP1_CI_AS AS 'JournalCode'
@@ -9,7 +11,7 @@ CREATE VIEW [dbo].[GlLedgersSummmary_View]
 	  ,ch.[AccountCode]
       ,a.[Debit]
       ,a.[Credit]
-	  ,[RevCostCenterIdNo]
+	  ,a.[RevCostCenterIdNo]
 	  ,a.[Posted]
 	  ,b.[TransactionDate] 
 	  ,[ClosingJournal]
@@ -18,6 +20,7 @@ CREATE VIEW [dbo].[GlLedgersSummmary_View]
   on a.JournalIdNo = b.IdNo
   LEFT OUTER JOIN dbo.Account ch
   ON a.AccountIdNo = ch.IdNo
+  where b.Cancelled = 0
 )
 UNION
 (SELECT 'AP' Collate SQL_Latin1_General_CP1_CI_AS
@@ -28,7 +31,7 @@ UNION
 	  ,ch.AccountCode
       ,a.[Debit]
       ,a.[Credit]
-      ,[RevCostCenterIdNo]
+      ,a.[RevCostCenterIdNo]
       ,a.[Posted]
 	  ,[TransactionDate]
       ,CAST(0 AS BIT) 
@@ -37,6 +40,7 @@ UNION
   on a.JournalIdNo = b.IdNo 
   LEFT OUTER JOIN dbo.Account ch
   ON a.AccountIdNo = ch.IdNo
+  where b.Cancelled = 0
 )
 UNION
 (SELECT 'AR' Collate SQL_Latin1_General_CP1_CI_AS
@@ -47,7 +51,7 @@ UNION
 	  ,ch.AccountCode
       ,a.[Debit]
       ,a.[Credit]
-      ,[RevCostCenterIdNo]
+      ,a.[RevCostCenterIdNo]
 	  ,a.[Posted]
 	  ,[TransactionDate]
       ,CAST(0 AS BIT)
@@ -58,6 +62,7 @@ UNION
   on b.CustomerIdNo = c.IdNo 
   LEFT OUTER JOIN dbo.Account ch
   ON a.AccountIdNo = ch.IdNo
+  where b.Cancelled = 0
 )
 UNION
 (SELECT 'ER' Collate SQL_Latin1_General_CP1_CI_AS
@@ -68,7 +73,7 @@ UNION
 	  ,ch.AccountCode
       ,a.[Debit]
       ,a.[Credit]
-      ,[RevCostCenterIdNo]
+      ,a.[RevCostCenterIdNo]
       ,a.[Posted]
 	  ,[TransactionDate]
       ,CAST(0 AS BIT)
@@ -77,6 +82,7 @@ UNION
   on a.JournalIdNo = b.IdNo 
   LEFT OUTER JOIN dbo.Account ch
   ON a.AccountIdNo = ch.IdNo
+  where b.Cancelled = 0
 )
 UNION
 (SELECT 'CK' Collate SQL_Latin1_General_CP1_CI_AS
@@ -87,7 +93,7 @@ UNION
 	  ,ch.AccountCode
       ,a.[Debit]
       ,a.[Credit]
-	  ,[RevCostCenterIdNo]
+	  ,a.[RevCostCenterIdNo]
 	  ,a.[Posted]
 	  ,[TransactionDate]
       ,CAST(0 AS BIT)	
@@ -102,6 +108,7 @@ UNION
   on b.PayeeIdNo = e.IDNo 
   LEFT OUTER JOIN dbo.Account ch
   ON a.AccountIdNo = ch.IdNo
+  where b.Cancelled = 0
 )
 UNION
 (SELECT 'CD' Collate SQL_Latin1_General_CP1_CI_AS
@@ -112,7 +119,7 @@ UNION
 	  ,ch.AccountCode
       ,a.[Debit]
       ,a.[Credit]
-	  ,[RevCostCenterIdNo]
+	  ,a.[RevCostCenterIdNo]
       ,a.[Posted]
 	  ,[TransactionDate]
       ,CAST(0 AS BIT)  
@@ -121,6 +128,7 @@ UNION
   on a.JournalIdNo = b.IdNo
   LEFT OUTER JOIN dbo.Account ch
   ON a.AccountIdNo = ch.IdNo
+  where b.Cancelled = 0
 )
 UNION
 (SELECT 'CR' Collate SQL_Latin1_General_CP1_CI_AS
@@ -131,7 +139,7 @@ UNION
 	  ,ch.AccountCode
       ,a.[Debit]
       ,a.[Credit]
-	  ,[RevCostCenterIdNo]
+	  ,a.[RevCostCenterIdNo]
       ,a.[Posted]
 	  ,[TransactionDate]
       ,CAST(0 AS BIT)
@@ -140,6 +148,7 @@ UNION
   on a.JournalIdNo = b.IdNo
   LEFT OUTER JOIN dbo.Account ch
   ON a.AccountIdNo = ch.IdNo
+  where b.Cancelled = 0
 )
 UNION
 (SELECT 'PC'
@@ -150,7 +159,7 @@ UNION
 	  ,ch.AccountCode
       ,a.[Debit]
       ,a.[Credit]
-	  ,[RevCostCenterIdNo]
+	  ,a.[RevCostCenterIdNo]
 	  ,a.[Posted]
 	  ,[TransactionDate]
       ,CAST(0 AS BIT)  
@@ -159,6 +168,7 @@ UNION
   on a.JournalIdNo = b.IdNo
   LEFT OUTER JOIN dbo.Account ch
   ON a.AccountIdNo = ch.IdNo
+  where b.Cancelled = 0
 )
 UNION
 (SELECT 'SJ'
@@ -169,7 +179,7 @@ UNION
 	  ,ch.AccountCode
       ,a.[Debit]
       ,a.[Credit]
-	  ,[RevCostCenterIdNo]
+	  ,a.[RevCostCenterIdNo]
 	  ,a.[Posted]
 	  ,[TransactionDate]
       ,CAST(0 AS BIT)	  
@@ -178,4 +188,8 @@ UNION
   on a.JournalIdNo = b.Idno
   LEFT OUTER JOIN dbo.Account ch
   ON a.AccountIdNo = ch.IdNo
+  where b.Cancelled = 0
 )
+
+GO
+

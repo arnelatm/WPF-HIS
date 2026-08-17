@@ -1,15 +1,13 @@
-﻿CREATE VIEW dbo.ReportGroup_View
+CREATE VIEW dbo.ReportGroup_View
 AS
 SELECT dbo.ReportGroup.ReportGroupCode, dbo.ReportGroup.ReportGroupName, dbo.ReportGroup.ReportGroupNameAra, dbo.Report.ReportName, dbo.SecurityReportAccess.ReportGroupIdNo, dbo.SecurityReportAccess.SecurityGroupIdNo, 
                   dbo.SecurityReportAccess.UserIdNo, dbo.Report.IdNo AS ReportIdNo, dbo.ReportGroup.IdNo
 FROM     dbo.Report INNER JOIN
                   dbo.ReportGroup ON dbo.Report.ReportGroupIdNo = dbo.ReportGroup.IdNo INNER JOIN
                   dbo.SecurityReportAccess ON dbo.ReportGroup.IdNo = dbo.SecurityReportAccess.ReportGroupIdNo
-GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ReportGroup_View';
-
 
 GO
+
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 
    Begin PaneConfigurations = 
@@ -138,4 +136,12 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ReportGroup_View';
+
+
+GO
+
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ReportGroup_View';
+
+
+GO
 

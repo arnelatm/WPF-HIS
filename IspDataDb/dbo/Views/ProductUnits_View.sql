@@ -1,4 +1,4 @@
-﻿CREATE VIEW dbo.ProductUnits_View
+CREATE VIEW dbo.ProductUnits_View
 AS
 SELECT   dbo.Unit.UnitName, dbo.Product.ProductName, dbo.Product.ProductCode, dbo.Product.BaseUnitIdNo, Unit_1.UnitName AS BaseUnitName, dbo.ProductUnit.UnitIdNo, dbo.Unit.UnitCode, 
                          Unit_1.UnitCode AS Expr2, dbo.ProductUnit.UnitQty, dbo.ProductUnit.BaseQty, dbo.Product.IdNo
@@ -6,11 +6,9 @@ FROM         dbo.Unit AS Unit_1 INNER JOIN
                          dbo.Product ON Unit_1.IdNo = dbo.Product.BaseUnitIdNo INNER JOIN
                          dbo.ProductUnit INNER JOIN
                          dbo.Unit ON dbo.ProductUnit.UnitIdNo = dbo.Unit.IdNo ON dbo.Product.IdNo = dbo.ProductUnit.ProductIdNo
-GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ProductUnits_View';
-
 
 GO
+
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 
    Begin PaneConfigurations = 
@@ -149,4 +147,12 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ProductUnits_View';
+
+
+GO
+
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ProductUnits_View';
+
+
+GO
 

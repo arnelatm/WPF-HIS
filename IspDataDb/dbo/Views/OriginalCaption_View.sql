@@ -1,13 +1,11 @@
-﻿CREATE VIEW dbo.OriginalCaption_View
+CREATE VIEW dbo.OriginalCaption_View
 AS
 SELECT        dbo.OriginalCaptions.idno, dbo.OriginalCaptions.Caption, dbo.TranslatedCaption.LanguageIdNo, dbo.TranslatedCaption.CaptionIdNo, dbo.TranslatedCaption.TranslatedCaption
 FROM            dbo.OriginalCaptions LEFT OUTER JOIN
                          dbo.TranslatedCaption ON dbo.OriginalCaptions.idno = dbo.TranslatedCaption.CaptionIdNo
-GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'OriginalCaption_View';
-
 
 GO
+
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 
    Begin PaneConfigurations = 
@@ -126,4 +124,12 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'OriginalCaption_View';
+
+
+GO
+
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'OriginalCaption_View';
+
+
+GO
 

@@ -1,4 +1,4 @@
-﻿CREATE VIEW dbo.SecurityReportAccess_View
+CREATE VIEW dbo.SecurityReportAccess_View
 AS
 SELECT     dbo.SecurityReportAccess.IdNo, dbo.SecurityGroup.SecurityGroupName, dbo.[User].UserName, dbo.SecurityReportAccess.ReportGroupIdNo AS Expr1, dbo.SecurityReportAccess.SecurityGroupIdNo, dbo.SecurityReportAccess.UserIdNo, dbo.ReportGroup.ReportGroupName, 
                   dbo.ReportGroup.ReportGroupNameAra, dbo.Report.ReportName, dbo.Report.ReportNameAra, dbo.Report.ReportGroupIdNo, dbo.ReportGroup.ReportGroupCode
@@ -7,19 +7,9 @@ FROM        dbo.[User] RIGHT OUTER JOIN
                   dbo.SecurityGroup ON dbo.SecurityReportAccess.SecurityGroupIdNo = dbo.SecurityGroup.IdNo ON dbo.[User].IdNo = dbo.SecurityReportAccess.UserIdNo LEFT OUTER JOIN
                   dbo.Report LEFT OUTER JOIN
                   dbo.ReportGroup ON dbo.Report.ReportGroupIdNo = dbo.ReportGroup.IdNo ON dbo.SecurityReportAccess.ReportGroupIdNo = dbo.ReportGroup.IdNo
-GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 2, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'SecurityReportAccess_View';
-
 
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'       Or = 1350
-      End
-   End
-End
-', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'SecurityReportAccess_View';
 
-
-GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 
    Begin PaneConfigurations = 
@@ -164,4 +154,21 @@ Begin DesignProperties =
          Or = 1350
          Or = 1350
   ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'SecurityReportAccess_View';
+
+
+GO
+
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'       Or = 1350
+      End
+   End
+End
+', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'SecurityReportAccess_View';
+
+
+GO
+
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 2, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'SecurityReportAccess_View';
+
+
+GO
 

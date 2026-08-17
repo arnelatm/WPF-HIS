@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[RevCostCenter] (
+CREATE TABLE [dbo].[RevCostCenter] (
     [IDNo]                 SMALLINT      IDENTITY (1, 1) NOT NULL,
     [RevCostCenterCode]    VARCHAR (5)   NOT NULL,
     [RevCostCenterName]    VARCHAR (50)  NOT NULL,
@@ -8,10 +8,11 @@
     [Notes]                VARCHAR (255) NULL,
     [Doctor]               VARCHAR (20)  NULL,
     [DateTimeStamp]        ROWVERSION    NULL,
-    CONSTRAINT [PK_RevCostCenterIdNo] PRIMARY KEY CLUSTERED ([IDNo] ASC)
+    [RCPostName]           NVARCHAR (50) NULL,
+    [RevCostGroupName]     VARCHAR (50)  NULL,
+    CONSTRAINT [PK_RevCostCenter] PRIMARY KEY CLUSTERED ([IDNo] ASC)
 );
 
 
-
-
+GO
 

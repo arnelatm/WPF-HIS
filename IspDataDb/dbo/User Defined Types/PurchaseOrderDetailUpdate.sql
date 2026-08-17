@@ -1,8 +1,8 @@
-﻿CREATE TYPE [dbo].[PurchaseOrderDetailUpdate] AS TABLE (
+CREATE TYPE [dbo].[PurchaseOrderDetailUpdate] AS TABLE (
     [BonusQuantity]     DECIMAL (12, 4) NOT NULL,
     [DiscountAmount]    DECIMAL (9, 2)  NOT NULL,
     [IdNo]              INT             NOT NULL,
-    [NetAmount]         DECIMAL (9, 2) NOT NULL,
+    [NetAmount]         DECIMAL (9, 2)  NOT NULL,
     [Price]             DECIMAL (9, 2)  NOT NULL,
     [ProductIdNo]       INT             NOT NULL,
     [PurchaseOrderIdNo] INT             NOT NULL,
@@ -14,4 +14,5 @@
     PRIMARY KEY CLUSTERED ([IdNo] ASC));
 
 
+GO
 

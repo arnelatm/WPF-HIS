@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[OTWorkHour] (
+CREATE TABLE [dbo].[OtWorkHour] (
     [IdNo]            INT            IDENTITY (1, 1) NOT NULL,
     [EmployeeIdNo]    INT            NULL,
     [PayrollIdNo]     SMALLINT       NULL,
@@ -11,12 +11,5 @@
 );
 
 
-
-
-
-
-
-
-
-
+GO
 

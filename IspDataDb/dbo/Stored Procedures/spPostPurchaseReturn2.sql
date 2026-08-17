@@ -1,8 +1,10 @@
-﻿CREATE PROCEDURE [dbo].[spPostPurchaseReturn2] 
+
+CREATE PROCEDURE [dbo].[spPostPurchaseReturn2] 
 	@PurchaseIdNo Int,
 	@BranchIdNo TinyInt,
 	@WarehouseIdNo SmallInt
 AS
+
 BEGIN
 
 	--	Declare @NewInvTransactionIdNo as Int
@@ -115,3 +117,6 @@ BEGIN
 	DEALLOCATE PurchaseReturnItems_Cursor	
 	if @Switch = 1 Update Purchase Set Posted = 1 where IdNo = @PurchaseIdNo
 END
+
+GO
+

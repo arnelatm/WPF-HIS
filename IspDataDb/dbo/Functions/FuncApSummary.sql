@@ -1,4 +1,4 @@
-﻿
+
 
 
 
@@ -39,8 +39,11 @@ RETURN
 	)
 	Union
 	(SELECT dbo.Supplier.IdNo,
-			ISNULL((Select sum(Credit-Debit) from ApStatement_View where transactiondate < @BeginningDate and ApStatement_View.SupplierIdNo = dbo.Supplier.IdNo and ApStatement_View.SpecialAccount='AP'),0),
+			ISNULL((Select sum(Credit-Debit) from ApStatement_View where transactiondate < @BeginningDate and ApStatement_View.SupplierIdNo = dbo.Supplier.IdNo and (ApStatement_View.SpecialAccount='AP' or ApStatement_View.SPecialAccount='AS')),0),
            'B'
 	 From dbo.Supplier Inner Join dbo.ApStatement_View on dbo.Supplier.IdNo = dbo.ApStatement_View.SupplierIdNo
 	)
 )
+
+GO
+

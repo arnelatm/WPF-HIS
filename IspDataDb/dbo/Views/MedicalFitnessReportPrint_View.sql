@@ -1,4 +1,5 @@
-﻿CREATE VIEW [dbo].[MedicalFitnessReportPrint_View]
+
+CREATE VIEW dbo.MedicalFitnessReportPrint_View
 AS
 SELECT
     h.IdNo,
@@ -48,3 +49,6 @@ SELECT
 FROM dbo.MedicalFitnessReport h
 LEFT JOIN dbo.MedicalFitnessReportTestResult d
     ON d.MedicalFitnessReportIdNo = h.IdNo;
+
+GO
+

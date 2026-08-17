@@ -1,10 +1,10 @@
-﻿CREATE TYPE [dbo].[PurchaseDetailUpdate] AS TABLE (
+CREATE TYPE [dbo].[PurchaseDetailUpdate] AS TABLE (
     [BatchNo]        VARCHAR (20)    NULL,
     [BonusQuantity]  DECIMAL (12, 4) NOT NULL,
     [DiscountAmount] DECIMAL (9, 2)  NOT NULL,
     [ExpiryDate]     DATE            NULL,
     [IdNo]           INT             NOT NULL,
-    [NetAmount]      DECIMAL (9, 2) NOT NULL,
+    [NetAmount]      DECIMAL (9, 2)  NOT NULL,
     [Price]          DECIMAL (9, 2)  NOT NULL,
     [ProductIdNo]    INT             NOT NULL,
     [PurchaseIdNo]   INT             NOT NULL,
@@ -17,4 +17,5 @@
     PRIMARY KEY CLUSTERED ([IdNo] ASC));
 
 
+GO
 

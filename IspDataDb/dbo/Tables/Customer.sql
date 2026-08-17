@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[Customer] (
+CREATE TABLE [dbo].[Customer] (
     [IdNo]               INT            IDENTITY (1, 1) NOT NULL,
     [CustomerCode]       NVARCHAR (50)  COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [CustomerName]       NVARCHAR (50)  COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
@@ -43,36 +43,35 @@
 );
 
 
-
-
-
-
-
-
-
-
 GO
+
 CREATE UNIQUE NONCLUSTERED INDEX [IX_CustomerCode]
     ON [dbo].[Customer]([CustomerCode] ASC);
 
 
 GO
-CREATE UNIQUE NONCLUSTERED INDEX [IX_CustomerNameAra]
-    ON [dbo].[Customer]([CustomerNameAra] ASC);
 
-
-GO
 CREATE UNIQUE NONCLUSTERED INDEX [IX_CustomerName]
     ON [dbo].[Customer]([CustomerName] ASC);
 
 
 GO
+
+CREATE UNIQUE NONCLUSTERED INDEX [IX_CustomerNameAra]
+    ON [dbo].[Customer]([CustomerNameAra] ASC);
+
+
+GO
+
 CREATE TRIGGER [dbo].[TR_Customer_Add] ON [dbo].[Customer]
 FOR INSERT
 AS
 
 INSERT INTO Contact
-        (PayeeIdNo, PayeeType)
+        (CSEIdNo, CSECode)
     SELECT
         IdNo, 'C'
         FROM inserted
+
+GO
+

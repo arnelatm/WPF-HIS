@@ -1,4 +1,5 @@
-﻿CREATE VIEW dbo.EmployeeLeaveCredit_View
+
+CREATE VIEW [dbo].[EmployeeLeaveCredit_View]
 AS
 SELECT        dbo.EmployeeLeaveCredit.LeaveIdNo, dbo.EmployeeLeaveCredit.IdNo, dbo.EmployeeLeaveCredit.EmployeeIdNo, dbo.EmployeeLeaveCredit.LeaveAllowed, dbo.EmployeeLeaveCredit.PaidPercent, 
                          dbo.EmployeeLeaveCredit.MaxCarryOver, dbo.EmployeeLeaveCredit.Cumulative, dbo.EmployeeLeaveCredit.MaxLimit, dbo.EmployeeLeaveCredit.AccumulatedLeave, dbo.Leave.LeaveCode, dbo.Leave.LeaveNameAra, 
@@ -6,11 +7,9 @@ SELECT        dbo.EmployeeLeaveCredit.LeaveIdNo, dbo.EmployeeLeaveCredit.IdNo, d
                          dbo.Leave.MaxLimit AS DefaultMaxLimit, dbo.EmployeeLeaveCredit.Sequence, dbo.EmployeeLeaveCredit.NoMaxLimit, dbo.Leave.NoMaxLimit AS DefaultNoMaxLimit, dbo.Leave.Holiday, dbo.Leave.LeaveType
 FROM            dbo.EmployeeLeaveCredit INNER JOIN
                          dbo.Leave ON dbo.EmployeeLeaveCredit.LeaveIdNo = dbo.Leave.IdNo
-GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeaveCredit_View';
-
 
 GO
+
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 
    Begin PaneConfigurations = 
@@ -131,6 +130,10 @@ End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeaveCredit_View';
 
 
+GO
+
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeaveCredit_View';
 
 
+GO
 

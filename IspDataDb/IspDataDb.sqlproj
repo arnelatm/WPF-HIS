@@ -88,7 +88,6 @@
     <Build Include="dbo\Tables\Document.sql" />
     <Build Include="dbo\Tables\EmployeeOld.sql" />
     <Build Include="dbo\Tables\RevCostCenter.sql" />
-    <Build Include="dbo\Tables\RevCostCenter.sql" />
     <Build Include="dbo\Tables\NumberSeries.sql" />
     <Build Include="dbo\Tables\Patient.sql" />
     <Build Include="dbo\Tables\DefaultFieldValue.sql" />
@@ -157,7 +156,6 @@
     <Build Include="dbo\Views\ApInvoices_View.sql" />
     <Build Include="dbo\Views\RevCostCenter_View.sql" />
     <Build Include="dbo\Views\UnpaidOpenInvoices_View.sql" />
-    <Build Include="dbo\Views\RevCostCenter_View.sql" />
     <Build Include="dbo\Views\RevenueGroup_View.sql" />
     <Build Include="dbo\Views\AccountReconciliationItem_View.sql" />
     <Build Include="dbo\Views\InputVatAccountTypes.sql" />
@@ -169,7 +167,6 @@
     <Build Include="dbo\Views\SalesJournalItem_View.sql" />
     <Build Include="dbo\Views\CsrOiItem_View.sql" />
     <Build Include="Security\Arnel.sql" />
-    <Build Include="Security\RoleMemberships.sql" />
     <Build Include="dbo\Functions\arabic_convert_single.sql" />
     <Build Include="dbo\Functions\convert_handreds.sql" />
     <Build Include="dbo\Functions\convert_last_two_digits.sql" />
@@ -247,9 +244,7 @@
     <Build Include="dbo\Functions\FuncAcctStatement.sql" />
     <Build Include="dbo\Views\IncomeStatementLayout_View.sql" />
     <Build Include="dbo\Functions\FuncGlIncomeStatement.sql" />
-    <Build Include="dbo\Tables\RevCostCenter.sql" />
     <Build Include="dbo\Tables\CostCenter.sql" />
-    <Build Include="dbo\Views\RevCostCenter_View.sql" />
     <Build Include="dbo\Views\GeneralJournalTransaction_View.sql" />
     <Build Include="dbo\Views\ErJournalTransaction_View.sql" />
     <Build Include="dbo\Views\CostCenter_View.sql" />
@@ -280,7 +275,6 @@
     <Build Include="dbo\Stored Procedures\InsertEmployeePhoneTVP.sql" />
     <Build Include="dbo\User Defined Types\EmployeePhoneUpdate.sql" />
     <Build Include="dbo\User Defined Types\EmployeePhoneInsert.sql" />
-    <Build Include="dbo\Tables\Payroll.sql" />
     <Build Include="dbo\Tables\PayCycle.sql" />
     <Build Include="dbo\Tables\Setting.sql" />
     <Build Include="dbo\Tables\PensionProvider.sql" />
@@ -290,12 +284,6 @@
     <Build Include="dbo\Stored Procedures\InsertPensionRateTVP.sql" />
     <Build Include="dbo\User Defined Types\PensionRateUpdate.sql" />
     <Build Include="dbo\User Defined Types\PensionRateInsert.sql" />
-    <Build Include="dbo\Tables\SalesDeposit.sql" />
-    <Build Include="dbo\Views\SalesDeposit_View.sql" />
-    <Build Include="dbo\Stored Procedures\UpdateSalesDepositTVP.sql" />
-    <Build Include="dbo\Stored Procedures\InsertSalesDepositTVP.sql" />
-    <Build Include="dbo\User Defined Types\SalesDepositUpdate.sql" />
-    <Build Include="dbo\User Defined Types\SalesDepositInsert.sql" />
     <Build Include="dbo\Tables\BankCharge.sql" />
     <Build Include="dbo\Tables\DepositType.sql" />
     <Build Include="dbo\Tables\PatientNoGaps.sql" />
@@ -396,12 +384,6 @@
     <Build Include="dbo\Stored Procedures\InsertPayrollPayElementTVP.sql" />
     <Build Include="dbo\User Defined Types\PayrollPayElementUpdate.sql" />
     <Build Include="dbo\User Defined Types\PayrollPayElementInsert.sql" />
-    <Build Include="dbo\Stored Procedures\UpdatePayrollDetailTVP_1.sql" />
-    <Build Include="dbo\Stored Procedures\UpdateInsertPayrollPayElementTVP_1.sql" />
-    <Build Include="dbo\Stored Procedures\UpdateInsertPayrollDetailTVP_1.sql" />
-    <Build Include="dbo\Stored Procedures\InsertPayrollDetailTVP_1.sql" />
-    <Build Include="dbo\User Defined Types\PayrollDetailUpdate_1.sql" />
-    <Build Include="dbo\User Defined Types\PayrollDetailInsert_1.sql" />
     <Build Include="dbo\Stored Procedures\UpdateInsertEmployeePayrollPayElementTVP.sql" />
     <Build Include="dbo\Tables\PayElementGroup.sql" />
     <Build Include="dbo\Views\PayrollReportRollUp_View.sql" />
@@ -443,8 +425,6 @@
     <Build Include="dbo\Views\RecurringPayElement_View.sql" />
     <Build Include="dbo\Views\PayrollCsvReport_View.sql" />
     <Build Include="dbo\Functions\fnGetBankPayrollCsv.sql" />
-    <Build Include="dbo\Functions\FuncErSummary_2.sql" />
-    <Build Include="dbo\Stored Procedures\InsertPayElementItemTvp_1.sql" />
     <Build Include="dbo\Tables\EmployeeAbsence.sql" />
     <Build Include="dbo\Views\EmployeeAbsence_View.sql" />
     <Build Include="dbo\Tables\EmployeeLeaveCredit.sql" />
@@ -462,9 +442,7 @@
     <Build Include="dbo\Tables\EmployeeIdPrinting.sql" />
     <Build Include="dbo\Stored Procedures\InsertEmployeeIdPrintingTvp.sql" />
     <Build Include="dbo\User Defined Types\EmployeeIdPrintingInsert.sql" />
-    <Build Include="dbo\Tables\EmployeeLeaveStatus.sql" />
     <Build Include="dbo\Views\EmployeeLeave_View.sql" />
-    <Build Include="dbo\Views\EmployeeLeaveStatusList_View.sql" />
     <Build Include="dbo\Views\EmployeeIdPrinting_View.sql" />
     <Build Include="dbo\Tables\EmployeeLeaveApprovalItem.sql" />
     <Build Include="dbo\Views\EmployeeLeaveApproval_View.sql" />
@@ -495,17 +473,7 @@
     <Build Include="dbo\User Defined Types\EmployeeLeaveApprovalItemUpdate.sql" />
     <Build Include="dbo\Views\LatestApproval_View.sql" />
     <Build Include="dbo\Views\EmployeeInfo_View.sql" />
-    <Build Include="dbo\Tables\ListGroup_1.sql" />
-    <Build Include="dbo\Tables\ListCoded_1.sql" />
-    <Build Include="dbo\Tables\List_1.sql" />
     <Build Include="dbo\Tables\EstablishmentName.sql" />
-    <Build Include="dbo\Tables\Payee_2.sql" />
-    <Build Include="dbo\Views\Payee_View_2.sql" />
-    <Build Include="dbo\Views\GlLedgersSCE_View_1.sql" />
-    <Build Include="dbo\Views\GlLedgersAp_View_1.sql" />
-    <Build Include="dbo\Views\EmployeeInfo_View3_2.sql" />
-    <Build Include="dbo\Views\EmployeeInfo_View2_2.sql" />
-    <Build Include="dbo\Views\EmployeeIdPrintinData_View_1.sql" />
     <Build Include="dbo\Tables\EmployeeDocument.sql" />
     <Build Include="dbo\Stored Procedures\UpdateEmployeeDocumentTVP.sql" />
     <Build Include="dbo\Stored Procedures\InsertEmployeeDocumentTVP.sql" />
@@ -517,7 +485,6 @@
     <Build Include="dbo\Tables\ItemCode.sql" />
     <Build Include="dbo\Tables\Doctor.sql" />
     <Build Include="dbo\Views\Doctor_View.sql" />
-    <Build Include="dbo\Tables\PrintJob_1.sql" />
     <Build Include="dbo\Tables\Printer.sql" />
     <Build Include="dbo\Tables\Computer.sql" />
     <Build Include="dbo\Tables\ReportFile.sql" />
@@ -606,7 +573,6 @@
     <Build Include="dbo\Tables\Utilities.sql" />
     <Build Include="dbo\Stored Procedures\spProductBaseUnitChanger.sql" />
     <Build Include="dbo\Views\InventoryCount_View.sql" />
-    <Build Include="dbo\Views\InventoryCount_View.sql" />
     <Build Include="dbo\Views\ProductMovement_View.sql" />
     <Build Include="dbo\Stored Procedures\spProductMovement.sql" />
     <Build Include="dbo\Tables\BeginningInventory.sql" />
@@ -620,7 +586,6 @@
     <Build Include="dbo\Tables\PurchaseOrderSupplied.sql" />
     <Build Include="dbo\Views\PurchaseOrderApprovalDetail_View.sql" />
     <Build Include="dbo\Views\ItemInventoryDetailsQty_View.sql" />
-    <Build Include="dbo\Stored Procedures\spPostPurchaseReturn2_1.sql" />
     <Build Include="dbo\Stored Procedures\spPostPurchaseOrder.sql" />
     <Build Include="dbo\User Defined Types\PurchaseOrderSuppliedInsertType.sql" />
     <Build Include="dbo\Stored Procedures\spPostInvTransaction.sql" />
@@ -633,7 +598,6 @@
     <Build Include="dbo\Views\ProductMovement_ViewTest.sql" />
     <Build Include="dbo\Views\ProductMovement_TestView.sql" />
     <Build Include="dbo\Stored Procedures\spGetLastPurchaseCostX.sql" />
-    <Build Include="dbo\Stored Procedures\spGetLastPurchaseCost_1.sql" />
     <Build Include="dbo\Views\WrongInventory_View.sql" />
     <Build Include="dbo\Views\ProductMovementCount_View.sql" />
     <Build Include="dbo\Views\MovementVsInventory_View.sql" />
@@ -646,7 +610,6 @@
     <Build Include="dbo\Stored Procedures\spPostInvTransactionBackup.sql" />
     <Build Include="dbo\Tables\EmployeeLeaveEarnedApprovalItem.sql" />
     <Build Include="dbo\Tables\EmployeeLeaveEarnedApproval.sql" />
-    <Build Include="dbo\Views\LeaveEarnedLatestApproval_View_1.sql" />
     <Build Include="dbo\Views\EmployeeLeaveEarned_View.sql" />
     <Build Include="dbo\Tables\LabTest.sql" />
     <Build Include="dbo\Tables\LabResultTypeDetails.sql" />
@@ -676,6 +639,75 @@
     <Build Include="dbo\Tables\ReportAccessOld.sql" />
     <Build Include="dbo\Views\ReportGroup_View.sql" />
     <Build Include="dbo\Views\MedicalFitnessReportPrint_View.sql" />
+    <Build Include="dbo\Functions\fnGetAccountTransactionsNoRC.sql" />
+    <Build Include="dbo\Functions\FuncErSummary.sql" />
+    <Build Include="dbo\Functions\FuncGlBalanceSheetClosing.sql" />
+    <Build Include="dbo\Stored Procedures\InsertPayElementItemTvp.sql" />
+    <Build Include="dbo\Stored Procedures\InsertPayrollDetailTVP.sql" />
+    <Build Include="dbo\Stored Procedures\InsertUserAccessTVP.sql" />
+    <Build Include="dbo\Stored Procedures\SearchNumAllTables.sql" />
+    <Build Include="dbo\Stored Procedures\spGetLastPurchaseCostBaseUnit.sql" />
+    <Build Include="dbo\Stored Procedures\spPostPurchaseReturn2.sql" />
+    <Build Include="dbo\Stored Procedures\spProductMovementSummary.sql" />
+    <Build Include="dbo\Stored Procedures\spProductMovementSummaryVer1.sql" />
+    <Build Include="dbo\Stored Procedures\UpdateInsertPayrollDetailTVP.sql" />
+    <Build Include="dbo\Stored Procedures\UpdateInsertPayrollPayElementTVP.sql" />
+    <Build Include="dbo\Stored Procedures\UpdatePayrollDetailTVP.sql" />
+    <Build Include="dbo\Stored Procedures\UpdateUserAccessTVP.sql" />
+    <Build Include="dbo\Tables\EmployeeLeaveApproval.sql" />
+    <Build Include="dbo\Tables\List.sql" />
+    <Build Include="dbo\Tables\ListCoded.sql" />
+    <Build Include="dbo\Tables\ListGroup.sql" />
+    <Build Include="dbo\Tables\Localization.sql" />
+    <Build Include="dbo\Tables\Payee.sql" />
+    <Build Include="dbo\Tables\PrintJob.sql" />
+    <Build Include="dbo\Tables\Translations.sql" />
+    <Build Include="dbo\Tables\UserAccess.sql" />
+    <Build Include="dbo\User Defined Types\PayrollDetailInsert.sql" />
+    <Build Include="dbo\User Defined Types\PayrollDetailUpdate.sql" />
+    <Build Include="dbo\User Defined Types\UserAccessInsert.sql" />
+    <Build Include="dbo\User Defined Types\UserAccessUpdate.sql" />
+    <Build Include="dbo\Views\ApSummaryPharmacy_View.sql" />
+    <Build Include="dbo\Views\CSEContact_View.sql" />
+    <Build Include="dbo\Views\Employe_Kizen_View.sql" />
+    <Build Include="dbo\Views\Employee_Kizen_View.sql" />
+    <Build Include="dbo\Views\EmployeeData_View.sql" />
+    <Build Include="dbo\Views\EmployeeIdPrintinData_View.sql" />
+    <Build Include="dbo\Views\EmployeeInfo_View2.sql" />
+    <Build Include="dbo\Views\EmployeeInfo_View3.sql" />
+    <Build Include="dbo\Views\EmployeeLeaveApprovalList_View.sql" />
+    <Build Include="dbo\Views\GlLedgersAp_View.sql" />
+    <Build Include="dbo\Views\GlLedgersEmployee_View.sql" />
+    <Build Include="dbo\Views\GlLedgersSCE_View.sql" />
+    <Build Include="dbo\Views\GLStatementNoRC_View.sql" />
+    <Build Include="dbo\Views\GroupNUserAccess_View.sql" />
+    <Build Include="dbo\Views\InventoryGivenDate_View.sql" />
+    <Build Include="dbo\Views\LeaveEarnedLatestApproval_View.sql" />
+    <Build Include="dbo\Views\Payee_View.sql" />
+    <Build Include="dbo\Views\PayrollPostingPerEmployee_View.sql" />
+    <Build Include="dbo\Views\PayrollPostingPerPayGroup_View.sql" />
+    <Build Include="dbo\Views\PayrollPostingPerRevCostCenter_View.sql" />
+    <Build Include="dbo\Views\PayrollReportPosting_View.sql" />
+    <Build Include="dbo\Views\SecurityObjectHierarchy_View.sql" />
+    <Build Include="dbo\Views\UserAccessResultant_View.sql" />
+    <Build Include="dbo\Views\vEmployee_WithPhone.sql" />
+    <Build Include="dbo\Views\vw_ChartOfAccounts_Organized.sql" />
+    <Build Include="dbo\Views\vw_ChartOfAccounts_ReportTree.sql" />
+    <Build Include="Security\db_accessadmin for Arnel.sql" />
+    <Build Include="Security\db_backupoperator for Arnel.sql" />
+    <Build Include="Security\db_datareader for Arnel.sql" />
+    <Build Include="Security\db_datawriter for Arnel.sql" />
+    <Build Include="Security\db_ddladmin for Arnel.sql" />
+    <Build Include="Security\db_owner for Arnel.sql" />
+    <Build Include="Security\db_securityadmin for Arnel.sql" />
+    <Build Include="Security\iGroupAdmin.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <ArtifactReference Include="Snapshots\IspDataDb_IBN-SERVER_20260816.dacpac">
+      <HintPath>Snapshots\IspDataDb_IBN-SERVER_20260816.dacpac</HintPath>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+      <DatabaseVariableLiteralValue>ISPDATA</DatabaseVariableLiteralValue>
+    </ArtifactReference>
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />

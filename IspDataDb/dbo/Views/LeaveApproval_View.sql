@@ -1,4 +1,4 @@
-﻿
+
 
 CREATE VIEW [dbo].[LeaveApproval_View]
 AS
@@ -30,13 +30,9 @@ FROM    dbo.EmployeeLeaveApproval RIGHT OUTER JOIN
 		ON dbo.EmployeeLeave.EmployeeIdNo = dbo.Employee.IdNo 
 		LEFT OUTER JOIN dbo.[User] 
 		ON dbo.EmployeeLeaveApproval.ApprovedBy = dbo.[User].IdNo
-GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 2, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'LeaveApproval_View';
-
-
-
 
 GO
+
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 
    Begin PaneConfigurations = 
@@ -182,17 +178,20 @@ Begin DesignProperties =
    ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'LeaveApproval_View';
 
 
-
-
-
-
-
-
 GO
+
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'      Or = 1350
          Or = 1350
       End
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'LeaveApproval_View';
+
+
+GO
+
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 2, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'LeaveApproval_View';
+
+
+GO
 

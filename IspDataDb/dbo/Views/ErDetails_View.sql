@@ -1,4 +1,5 @@
-﻿
+
+
 
 
 
@@ -115,7 +116,7 @@ UNION
       ,1
 	  ,IdNo
 	  ,'Beg.Bal.'
-	  ,(Select LastPostingDate from LastPosting where TransactionName = 'First Record')
+	  ,(Select LastPostingDate from LastPosting where TransactionName = 'First ER Date')
       ,'Beg.Bal.'
 	  ,case 
 		when OpeningBalance >=0 then 'D'
@@ -124,3 +125,6 @@ UNION
 	  ,'Beginning Balance'
   FROM [dbo].Employee 
 )
+
+GO
+

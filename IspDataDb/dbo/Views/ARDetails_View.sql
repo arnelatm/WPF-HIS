@@ -1,4 +1,5 @@
-﻿
+
+
 
 
 
@@ -39,6 +40,7 @@ With FirstRecord(FirstRecordDate) as (Select LastPostingDate from LastPosting wh
   FROM [dbo].[ArJournalItem] a
   RIGHT OUTER JOIN dbo.ArJournal b
   on a.JournalIdNo = b.IDNo 
+  where b.Cancelled = 0
 )
 UNION
 (SELECT 'CR'
@@ -61,7 +63,7 @@ UNION
   FROM [dbo].[CashReceiptJournalItem] A
   RIGHT OUTER JOIN dbo.CashReceiptJournal b
   on a.JournalIdNo = b.IDNo
-  WHERE PayorType='A'
+  WHERE PayorType='A' and b.Cancelled = 0
 )
 UNION
 (SELECT 'CD'
@@ -84,7 +86,7 @@ UNION
   FROM [dbo].[CdJournalItem] A
   LEFT OUTER JOIN dbo.CdJournal b
   on a.JournalIdNo = b.IDNo
-  WHERE PaymentType='R'
+  WHERE PaymentType='R' and b.Cancelled = 0
 )
 UNION
 (SELECT 'PC'
@@ -107,7 +109,7 @@ UNION
   FROM [dbo].[PcJournalItem] A
   LEFT OUTER JOIN dbo.PcJournal b
   on a.JournalIdNo = b.IDNo
-  WHERE PaymentType='R'
+  WHERE PaymentType='R' and b.Cancelled = 0
 )
 UNION
 (SELECT 'BB' 
@@ -135,3 +137,6 @@ UNION
 	  ,(Select FirstRecordDate from FirstRecord)
   FROM [dbo].Customer 
 )
+
+GO
+

@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[Employee] (
+CREATE TABLE [dbo].[Employee] (
     [IdNo]                INT             IDENTITY (1, 1) NOT NULL,
     [EmployeeCode]        VARCHAR (10)    COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [Title]               TINYINT         NULL,
@@ -45,6 +45,7 @@
     [OTRateSpecial]       DECIMAL (7, 2)  NULL,
     [DutyHours]           DECIMAL (5, 2)  NULL,
     [ActualDutyHours]     DECIMAL (5, 2)  NULL,
+    [RevCostCenterIdNo]   SMALLINT        NULL,
     [BloodType]           CHAR (3)        NULL,
     [Supervisor]          BIT             NULL,
     [SupervisorIdNo]      INT             NULL,
@@ -56,78 +57,35 @@
 );
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 GO
-CREATE UNIQUE NONCLUSTERED INDEX [IX_EmployeeNameAra]
-    ON [dbo].[Employee]([EmployeeNameAra] ASC);
 
-
-GO
-CREATE UNIQUE NONCLUSTERED INDEX [IX_EmployeeName]
-    ON [dbo].[Employee]([EmployeeName] ASC);
-
-
-GO
 CREATE UNIQUE NONCLUSTERED INDEX [IX_EmployeeCode]
     ON [dbo].[Employee]([EmployeeCode] ASC);
 
 
 GO
-CREATE TRIGGER [dbo].[TR_Employee_Add] ON [dbo].[Employee]
+
+CREATE UNIQUE NONCLUSTERED INDEX [IX_EmployeeName]
+    ON [dbo].[Employee]([EmployeeName] ASC);
+
+
+GO
+
+CREATE UNIQUE NONCLUSTERED INDEX [IX_EmployeeNameAra]
+    ON [dbo].[Employee]([EmployeeNameAra] ASC);
+
+
+GO
+
+CREATE TRIGGER [dbo].[TR_Employee_Add] ON dbo.Employee
 FOR INSERT
 AS
 
 INSERT INTO Contact
-        (PayeeIdNo, PayeeType)
+        (CSEIdNo, CSECode)
     SELECT
         IdNo, 'E'
         FROM inserted
+
+GO
+

@@ -1,4 +1,4 @@
-﻿CREATE VIEW dbo.EmployeeInfo_View3
+CREATE VIEW dbo.EmployeeInfo_View3
 AS
 SELECT        dbo.Employee.IdNo, dbo.Employee.EmployeeCode, dbo.Employee.Title, dbo.Employee.EmployeeName, dbo.Employee.EmployeeNameAra, dbo.Employee.Gender, dbo.Employee.MaritalStatus, dbo.Employee.NationalityCode, 
                          dbo.Employee.NationalityId, dbo.Employee.ReligionIdNo, dbo.Employee.ReligionId, dbo.Employee.NationalIdNo, dbo.Employee.Street, dbo.Employee.District, dbo.Employee.TownCity, dbo.Employee.ProvinceState, 
@@ -12,11 +12,9 @@ FROM            dbo.Employee LEFT OUTER JOIN
                          dbo.Country AS Country_1 ON dbo.Employee.CountryCode = Country_1.CountryCode COLLATE SQL_Latin1_General_CP1_CI_AS LEFT OUTER JOIN
                          dbo.Country ON dbo.Employee.NationalityCode = dbo.Country.CountryCode COLLATE SQL_Latin1_General_CP1_CI_AS LEFT OUTER JOIN
                          dbo.Employee AS Employee_1 ON dbo.Employee.SupervisorIdNo = Employee_1.IdNo
-GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeInfo_View3';
-
 
 GO
+
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 
    Begin PaneConfigurations = 
@@ -155,4 +153,12 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeInfo_View3';
+
+
+GO
+
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeInfo_View3';
+
+
+GO
 

@@ -1,4 +1,4 @@
-﻿CREATE VIEW dbo.EmployeeIdPrintinData_View
+CREATE VIEW dbo.EmployeeIdPrintinData_View
 AS
 SELECT        dbo.Employee.EmployeeCode, dbo.Employee.EmployeeName, dbo.Employee.EmployeeNameAra, dbo.Employee.Gender, dbo.Employee.NationalIdNo, dbo.Employee.BloodType, dbo.Country.NationalityAra, 
                          dbo.Employee.NationalityCode, dbo.Employee.DesignationIdNo, dbo.Designation.DesignationNameAra, ISNULL(dbo.Designation.DesignationNameFemaleAra, dbo.Designation.DesignationNameFemaleAra) 
@@ -8,11 +8,9 @@ FROM            dbo.Employee LEFT OUTER JOIN
                          dbo.List ON dbo.Employee.Title = dbo.List.IdNo AND dbo.List.ListIdNo = 1 LEFT OUTER JOIN
                          dbo.Country ON dbo.Employee.NationalityCode = dbo.Country.CountryCode LEFT OUTER JOIN
                          dbo.Designation ON dbo.Employee.DesignationIdNo = dbo.Designation.IdNo
-GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeIdPrintinData_View';
-
 
 GO
+
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 
    Begin PaneConfigurations = 
@@ -151,4 +149,12 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeIdPrintinData_View';
+
+
+GO
+
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeIdPrintinData_View';
+
+
+GO
 

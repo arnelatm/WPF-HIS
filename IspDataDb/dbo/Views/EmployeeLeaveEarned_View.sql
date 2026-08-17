@@ -1,4 +1,4 @@
-﻿
+
 CREATE VIEW [dbo].[EmployeeLeaveEarned_View]
 AS
 SELECT dbo.EmployeeLeaveEarned.EmployeeIdNo, dbo.EmployeeLeaveEarned.IdNo, dbo.EmployeeLeaveEarned.LeaveIdNo, dbo.EmployeeLeaveEarned.StartDate, dbo.EmployeeLeaveEarned.EndDate, dbo.EmployeeLeaveEarned.DaysEarned, 
@@ -10,13 +10,9 @@ FROM     dbo.EmployeeLeaveEarned LEFT OUTER JOIN
                   dbo.Employee ON dbo.EmployeeLeaveEarned.EmployeeIdNo = dbo.Employee.IdNo LEFT OUTER JOIN
                   dbo.Leave ON dbo.EmployeeLeaveEarned.LeaveIdNo = dbo.Leave.IdNo LEFT OUTER JOIN
                   dbo.EmployeeLeaveEarnedApproval ON dbo.EmployeeLeaveEarnedApprovalItem.EmployeeLeaveEarnedApprovalIdNo = dbo.EmployeeLeaveEarnedApproval.IdNo
-GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 2, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeaveEarned_View';
-
-
-
 
 GO
+
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 
    Begin PaneConfigurations = 
@@ -160,9 +156,8 @@ Begin DesignProperties =
          Filter = 135', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeaveEarned_View';
 
 
-
-
 GO
+
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'6
          Or = 1350
          Or = 1350
@@ -171,4 +166,12 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'6
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeaveEarned_View';
+
+
+GO
+
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 2, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeaveEarned_View';
+
+
+GO
 

@@ -1,4 +1,4 @@
-﻿CREATE VIEW dbo.InvTransactionRequest_View
+CREATE VIEW dbo.InvTransactionRequest_View
 AS
 SELECT     dbo.InvTransaction.IdNo, dbo.InvTransaction.BranchIdNo, dbo.InvTransaction.ReferenceNo, dbo.InvTransaction.TransactionDate, dbo.InvTransaction.InvTransTypeIdNo, dbo.InvTransaction.WarehouseIdNo, dbo.InvTransaction.WarehouseToIdNo, dbo.InvTransaction.Amount, 
                   dbo.InvTransaction.Cancelled, dbo.InvTransaction.Notes, dbo.InvTransaction.Posted, dbo.InvTransaction.DateCreated, dbo.InvTransaction.UserIdNo, dbo.InvTransaction.DateTimeStamp, dbo.Warehouse.WarehouseCode, dbo.Warehouse.WarehouseName, dbo.[User].UserName, 
@@ -8,11 +8,9 @@ FROM        dbo.Warehouse RIGHT OUTER JOIN
                   dbo.Employee RIGHT OUTER JOIN
                   dbo.[User] ON dbo.Employee.IdNo = dbo.[User].EmployeeIdNo ON dbo.InvTransaction.UserIdNo = dbo.[User].IdNo
 WHERE     (dbo.InvTransaction.InvTransTypeIdNo = 15)
-GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'InvTransactionRequest_View';
-
 
 GO
+
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 
    Begin PaneConfigurations = 
@@ -151,4 +149,12 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'InvTransactionRequest_View';
+
+
+GO
+
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'InvTransactionRequest_View';
+
+
+GO
 

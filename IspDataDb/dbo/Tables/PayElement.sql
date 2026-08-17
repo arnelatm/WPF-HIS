@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[PayElement] (
+CREATE TABLE [dbo].[PayElement] (
     [IdNo]              SMALLINT        IDENTITY (1, 1) NOT NULL,
     [PayElementKind]    CHAR (1)        NULL,
     [PayElementCode]    VARCHAR (10)    NULL,
@@ -17,7 +17,7 @@
     [Taxable]           BIT             NULL,
     [Unit]              CHAR (1)        NULL,
     [QuantityType]      CHAR (1)        NULL,
-    [UsePayGroups]      BIT             NULL,
+    [UsePayGroups]      BIT             NOT NULL,
     [ReportGroupIdNo]   TINYINT         NULL,
     [Notes]             NVARCHAR (100)  NULL,
     [DateTimeStamp]     ROWVERSION      NULL,
@@ -27,6 +27,5 @@
 );
 
 
-
-
+GO
 

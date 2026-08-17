@@ -1,19 +1,19 @@
-﻿
+
+
+
 CREATE VIEW [dbo].[EmployeeAbsence_View]
 AS
 SELECT      dbo.EmployeeAbsence.EmployeeIdNo, dbo.EmployeeAbsence.PayrollIdNo, dbo.EmployeeAbsence.EquivalentHours, dbo.EmployeeAbsence.AbsenceType, dbo.EmployeeAbsence.AbsenceReason, 
             dbo.EmployeeAbsence.AddedByUser, dbo.EmployeeAbsence.DateCreated, dbo.EmployeeAbsence.IdNo, dbo.Payroll.PayrollName, dbo.Payroll.PayrollNameAra, dbo.Payroll.StartDate, dbo.Payroll.EndDate,
 			dbo.[User].UserName
 FROM        dbo.EmployeeAbsence 
-			INNER JOIN dbo.Payroll 
-			ON dbo.EmployeeAbsence.IdNo = dbo.Payroll.IdNo
+			Left JOIN dbo.Payroll 
+			ON dbo.EmployeeAbsence.PayrollIdNo = dbo.Payroll.IdNo
 			INNER JOIN dbo.[User]
 			on dbo.EmployeeAbsence.AddedByUser = dbo.[User].IdNo
-GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeAbsence_View';
-
 
 GO
+
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 
    Begin PaneConfigurations = 
@@ -132,4 +132,12 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeAbsence_View';
+
+
+GO
+
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeAbsence_View';
+
+
+GO
 

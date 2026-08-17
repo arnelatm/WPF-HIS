@@ -1,4 +1,3 @@
-﻿
 
 
 
@@ -22,11 +21,9 @@ FROM            dbo.EmployeePhone INNER JOIN
                          dbo.Employee ON dbo.EmployeePhone.EmployeeIdNo = dbo.Employee.IdNo LEFT OUTER JOIN
                          dbo.Country ON dbo.EmployeePhone.CountryTelIdNo = dbo.Country.IDNo LEFT OUTER JOIN
                          dbo.PhoneType ON dbo.EmployeePhone.PhoneTypeIdNo = dbo.PhoneType.IdNo
-GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeePhone_View';
-
 
 GO
+
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 
    Begin PaneConfigurations = 
@@ -167,6 +164,10 @@ End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeePhone_View';
 
 
+GO
+
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeePhone_View';
 
 
+GO
 

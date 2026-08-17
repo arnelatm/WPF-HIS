@@ -1,15 +1,13 @@
-﻿CREATE VIEW dbo.PayrollPayElement_View
+CREATE VIEW dbo.PayrollPayElement_View
 AS
 SELECT        dbo.PayrollPayElement.IdNo, dbo.PayrollPayElement.PayrollDetailIdNo, dbo.PayrollPayElement.PayElementIdNo, dbo.PayrollPayElement.Amount, dbo.PayrollDetail.PayrollIdNo, dbo.PayrollDetail.EmployeeIdNo, 
                          dbo.PayElement.PayElementKind, dbo.PayrollPayElement.RecurringPayElementIdNo, dbo.PayrollPayElement.Generated, dbo.PayrollPayElement.Active
 FROM            dbo.PayrollPayElement INNER JOIN
                          dbo.PayrollDetail ON dbo.PayrollPayElement.PayrollDetailIdNo = dbo.PayrollDetail.IdNo INNER JOIN
                          dbo.PayElement ON dbo.PayrollPayElement.PayElementIdNo = dbo.PayElement.IdNo
-GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'PayrollPayElement_View';
-
 
 GO
+
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 
    Begin PaneConfigurations = 
@@ -140,6 +138,10 @@ End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'PayrollPayElement_View';
 
 
+GO
+
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'PayrollPayElement_View';
 
 
+GO
 

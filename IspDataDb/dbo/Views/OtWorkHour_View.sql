@@ -1,14 +1,12 @@
-﻿CREATE VIEW dbo.OtWorkHour_View
+CREATE VIEW dbo.OtWorkHour_View
 AS
 SELECT        dbo.Employee.EmployeeCode, dbo.Employee.EmployeeName, dbo.Employee.EmployeeNameAra, dbo.OTWorkHour.IdNo, dbo.OTWorkHour.EmployeeIdNo, dbo.OTWorkHour.PayrollIdNo, dbo.OTWorkHour.OvertimeRegular, 
                          dbo.OTWorkHour.OvertimeHoliday, dbo.OTWorkHour.OvertimeSpecial, dbo.OTWorkHour.HoursWorked, dbo.OTWorkHour.Sequence
 FROM            dbo.Employee INNER JOIN
                          dbo.OTWorkHour ON dbo.Employee.IdNo = dbo.OTWorkHour.EmployeeIdNo
-GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'OtWorkHour_View';
-
 
 GO
+
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 
    Begin PaneConfigurations = 
@@ -127,4 +125,12 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'OtWorkHour_View';
+
+
+GO
+
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'OtWorkHour_View';
+
+
+GO
 

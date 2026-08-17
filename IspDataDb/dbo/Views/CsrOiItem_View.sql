@@ -1,4 +1,4 @@
-﻿CREATE VIEW dbo.CsrOiItem_View
+CREATE VIEW [dbo].[CsrOiItem_View]
 AS
 SELECT        dbo.CsrOiItem.Sequence, dbo.ArOpenInvoice_View.InvoiceNo, dbo.ArOpenInvoice_View.TransactionDate, 
                          dbo.ArOpenInvoice_View.Balance + dbo.CsrOiItem.Amount + dbo.CsrOiItem.DiscountTaken AS PreviousBalance, dbo.CsrOiItem.Amount, dbo.CsrOiItem.DiscountTaken, dbo.ArOpenInvoice_View.Balance, 
@@ -9,6 +9,7 @@ FROM            dbo.CsrOiItem LEFT OUTER JOIN
                          dbo.ArOpenInvoice_View ON dbo.CsrOiItem.ArOpenInvoiceIdNo = dbo.ArOpenInvoice_View.IdNo
 
 GO
+
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 
    Begin PaneConfigurations = 
@@ -129,8 +130,10 @@ End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'CsrOiItem_View';
 
 
+GO
+
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'CsrOiItem_View';
 
 
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'CsrOiItem_View';
 

@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[Supplier] (
+CREATE TABLE [dbo].[Supplier] (
     [IdNo]               INT            IDENTITY (1, 1) NOT NULL,
     [SupplierCode]       VARCHAR (15)   COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [SupplierName]       VARCHAR (50)   COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
@@ -42,42 +42,35 @@
 );
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 GO
-CREATE UNIQUE NONCLUSTERED INDEX [IX_SupplierName]
-    ON [dbo].[Supplier]([SupplierName] ASC);
 
-
-GO
 CREATE UNIQUE NONCLUSTERED INDEX [IX_SupplierCode]
     ON [dbo].[Supplier]([SupplierCode] ASC);
 
 
 GO
+
+CREATE UNIQUE NONCLUSTERED INDEX [IX_SupplierName]
+    ON [dbo].[Supplier]([SupplierName] ASC);
+
+
+GO
+
 CREATE UNIQUE NONCLUSTERED INDEX [IX_SupplierNameAra]
     ON [dbo].[Supplier]([SupplierNameAra] ASC);
 
 
 GO
+
 CREATE TRIGGER [dbo].[TR_Supplier_Add] ON [dbo].[Supplier]
 FOR INSERT
 AS
 
 INSERT INTO Contact
-        (PayeeIdNo, PayeeType)
+        (CSEIdNo, CSECode)
     SELECT
         IdNo, 'S'
         FROM inserted
+
+GO
+

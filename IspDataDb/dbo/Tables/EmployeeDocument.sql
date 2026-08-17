@@ -1,14 +1,15 @@
-﻿CREATE TABLE [dbo].[EmployeeDocument] (
-    [IdNo]           INT             IDENTITY (1, 1) NOT NULL,
-    [EmployeeIdNo]   INT             NULL,
-    [Sequence]       SMALLINT        NULL,
-    [DocumentIdNo]   SMALLINT        NULL,
-    [DataImageIdNo]  Int             NULL, 
-    [DocumentNumber] VARCHAR (30)    NULL,
-    [IssueDate]      DATE            NULL,
-    [ExpiryDate]     DATE            NULL
+CREATE TABLE [dbo].[EmployeeDocument] (
+    [IdNo]           INT          IDENTITY (1, 1) NOT NULL,
+    [EmployeeIdNo]   INT          NULL,
+    [Sequence]       SMALLINT     NULL,
+    [DocumentIdNo]   SMALLINT     NULL,
+    [DataImageIdNo]  INT          NULL,
+    [DocumentNumber] VARCHAR (30) NULL,
+    [IssueDate]      DATE         NULL,
+    [ExpiryDate]     DATE         NULL,
     CONSTRAINT [PK_EmployeeDocument] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
 
 
+GO
 

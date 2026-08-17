@@ -1,4 +1,4 @@
-﻿CREATE VIEW dbo.InvTransactionDetail_View
+CREATE VIEW dbo.InvTransactionDetail_View
 AS
 SELECT     dbo.InvTransactionDetail.IdNo, dbo.InvTransactionDetail.Sequence, dbo.InvTransactionDetail.InvTransactionIdNo, dbo.InvTransactionDetail.ProductIdNo, dbo.InvTransactionDetail.Quantity, dbo.InvTransactionDetail.ExpiryDate, dbo.InvTransactionDetail.UnitIdNo, 
                   dbo.InvTransactionDetail.BatchNo, dbo.InvTransactionDetail.NetAmount, dbo.Product.ProductCode, dbo.Product.ProductName, dbo.Product.ProductNameAra, dbo.Product.Barcode, dbo.Product.GTIN, dbo.Product.BaseUnitIdNo, dbo.Unit.UnitCode, dbo.Unit.UnitName, dbo.Unit.UnitNameAra, 
@@ -10,11 +10,9 @@ FROM        dbo.InvTransactionDetail LEFT OUTER JOIN
                   dbo.Unit ON dbo.InvTransactionDetail.UnitIdNo = dbo.Unit.IdNo LEFT OUTER JOIN
                   dbo.Product ON dbo.InvTransactionDetail.ProductIdNo = dbo.Product.IdNo LEFT OUTER JOIN
                   dbo.Category ON dbo.Product.CategoryIdNo = dbo.Category.IdNo
-GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'InvTransactionDetail_View';
-
 
 GO
+
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 
    Begin PaneConfigurations = 
@@ -153,4 +151,12 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'InvTransactionDetail_View';
+
+
+GO
+
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'InvTransactionDetail_View';
+
+
+GO
 

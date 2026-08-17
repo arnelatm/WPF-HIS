@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[CdJournal] (
+CREATE TABLE [dbo].[CdJournal] (
     [IdNo]                INT            IDENTITY (1, 1) NOT NULL,
     [TransactionDate]     DATE           NOT NULL,
     [ReferenceNo]         VARCHAR (15)   COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
@@ -22,18 +22,11 @@
     [Approved]            BIT            NULL,
     [Posted]              BIT            NULL,
     [DateCreated]         DATETIME       CONSTRAINT [DF_CashDisbursementJournal_DateCreated] DEFAULT (getdate()) NULL,
-    [Cancelled]           BIT            NULL,
+    [Cancelled]           BIT            CONSTRAINT [DF_CdJournal_Cancelled] DEFAULT ((0)) NULL,
     [DateTimeStamp]       ROWVERSION     NULL,
     CONSTRAINT [PK_CashDisbursementJournal1] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
 
 
-
-
-
-
-
-
-
-
+GO
 

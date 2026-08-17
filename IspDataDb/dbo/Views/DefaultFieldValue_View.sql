@@ -1,4 +1,4 @@
-﻿
+
 CREATE VIEW [dbo].[DefaultFieldValue_View]
 AS
 SELECT        dbo.DefaultFieldValue.IdNo, dbo.DefaultFieldValue.SystemViewIdNo, dbo.DefaultFieldValue.FieldName, dbo.DefaultFieldValue.DataType, dbo.DefaultFieldValue.Length, dbo.DefaultFieldValue.DecimalPart, 
@@ -8,11 +8,9 @@ SELECT        dbo.DefaultFieldValue.IdNo, dbo.DefaultFieldValue.SystemViewIdNo, 
                          dbo.SystemView.SystemViewName collate SQL_Latin1_General_CP1_CI_AS 'SystemViewName', dbo.SystemView.SystemViewNameAra, dbo.SystemView.DefaultValuesEnable
 FROM            dbo.DefaultFieldValue INNER JOIN
                          dbo.SystemView ON dbo.DefaultFieldValue.SystemViewIdNo = dbo.SystemView.IdNo
-GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'DefaultFieldValue_View';
-
 
 GO
+
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 
    Begin PaneConfigurations = 
@@ -131,4 +129,12 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'DefaultFieldValue_View';
+
+
+GO
+
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'DefaultFieldValue_View';
+
+
+GO
 

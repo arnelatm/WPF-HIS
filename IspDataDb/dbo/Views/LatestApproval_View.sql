@@ -1,4 +1,4 @@
-﻿
+
 
 CREATE VIEW [dbo].[LatestApproval_View]
 AS
@@ -11,11 +11,9 @@ FROM	dbo.EmployeeLeaveApprovalItem AS a
 					 INNER JOIN dbo.EmployeeLeaveApproval AS c 
 					 ON b.EmployeeLeaveApprovalIdNo = c.IdNo 
                      GROUP BY b.EmployeeLeaveIdNo) AS d ON a.EmployeeLeaveIdNo = d.EmployeeLeaveIdNo AND e.DateCreated = d.MaxDate
-GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'LatestApproval_View';
-
 
 GO
+
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 
    Begin PaneConfigurations = 
@@ -146,4 +144,10 @@ End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'LatestApproval_View';
 
 
+GO
+
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'LatestApproval_View';
+
+
+GO
 
