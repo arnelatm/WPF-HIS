@@ -132,11 +132,11 @@
             Me.dgvResults.AllowUserToDeleteRows = False
             Me.dgvResults.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
             Me.dgvResults.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.dgvResults.Location = New System.Drawing.Point(11, 131)
+            Me.dgvResults.Location = New System.Drawing.Point(11, 157)
             Me.dgvResults.Name = "dgvResults"
             Me.dgvResults.RowHeadersVisible = False
             Me.dgvResults.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-            Me.dgvResults.Size = New System.Drawing.Size(1078, 591)
+            Me.dgvResults.Size = New System.Drawing.Size(1078, 565)
             Me.dgvResults.TabIndex = 2
             '
             'finalPanel
@@ -224,7 +224,7 @@
             Me.headerPanel.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.headerPanel.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.headerPanel.RowStyles.Add(New System.Windows.Forms.RowStyle())
-            Me.headerPanel.Size = New System.Drawing.Size(1078, 79)
+            Me.headerPanel.Size = New System.Drawing.Size(1078, 105)
             Me.headerPanel.TabIndex = 1
             '
             'txtPatientName

@@ -2859,22 +2859,19 @@
       <Link>.editorconfig</Link>
     </None>
     <None Include="app -  ibn-server - Kizen %28local ispadmin2%29.config" />
+    <None Include="app - ibn-server.config" />
     <None Include="app - Copy.config" />
-    <None Include="app-Ibn-Server - Copy %282%29.config" />
     <None Include="app.config" />
-    <None Include="app-ibn-server-orig.config" />
-    <None Include="app-ibn-server-copy1.config" />
+    <None Include="app.config.bak" />
     <None Include="app-ispadmin2-backp.config" />
     <None Include="app-kizen.config" />
     <None Include="app-Isp-Server - Copy.config" />
     <None Include="app-ISP-SERVERNEW.config" />
-    <None Include="app-ibn-server-test.config" />
     <None Include="app-IBNSINAP.config" />
     <None Include="app-ISPADMIN2.config" />
     <None Include="app-Marcelo-Dell.config" />
     <None Include="app-Isp-Server.config" />
     <None Include="appx.config" />
-    <None Include="app-Ibn-Server.config" />
     <None Include="appOrig.config" />
     <None Include="ISPDATADataSet.xsc">
       <DependentUpon>ISPDATADataSet.xsd</DependentUpon>
