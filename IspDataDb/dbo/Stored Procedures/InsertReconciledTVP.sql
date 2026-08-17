@@ -58,6 +58,8 @@ BEGIN
         ReconciliationDate date NOT NULL
     );
 
+    SET NOCOUNT ON;
+
     INSERT INTO @SourceValidation (
         JournalCode,
         JournalItemIdNo,
@@ -83,6 +85,8 @@ BEGIN
     LEFT JOIN dbo.GlLedgers_View AS ledger
         ON ledger.JournalCode = source.JournalCode COLLATE SQL_Latin1_General_CP1_CI_AS
        AND ledger.IdNo = source.JournalItemIdNo;
+
+    SET NOCOUNT OFF;
 
     IF EXISTS (
         SELECT 1
