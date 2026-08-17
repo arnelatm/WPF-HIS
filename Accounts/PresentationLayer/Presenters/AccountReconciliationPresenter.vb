@@ -110,31 +110,58 @@ Namespace PresentationLayer.Presenters
 
         Public Sub PostReconciliation(ByVal idNo As Int32, ByVal bsAccountReconciliationItems As BindingSource)
             Try
+                If idNo <= 0 Then
+                    Throw New InvalidOperationException("Save the reconciliation before posting it.")
+                End If
+                If View.Posted Then
+                    Throw New InvalidOperationException("This reconciliation has already been posted.")
+                End If
+
                 Using scope As New TransactionScope(TransactionScopeOption.Required, New TimeSpan(0, 1, 0))
                     Dim dtInsertReconciledTable As New DataTable
                     dtInsertReconciledTable.Columns.Add("JournalCode", GetType(String))
                     dtInsertReconciledTable.Columns.Add("JournalItemIdNo", GetType(Int32))
                     dtInsertReconciledTable.Columns.Add("ReconciliationIdNo", GetType(Int32))
-                    For Each item In bsAccountReconciliationItems
+                    Dim reconciledKeys As New HashSet(Of String)(StringComparer.OrdinalIgnoreCase)
+                    For Each item As AccountReconciliationItemView In bsAccountReconciliationItems
                         Dim workRow As DataRow
                         If item.Cleared Then
+                            Dim journalCode = If(item.JournalCode, String.Empty).Trim()
+                            If journalCode = String.Empty OrElse item.JournalItemIdNo <= 0 Then
+                                Throw New InvalidOperationException("A cleared reconciliation item has an invalid journal reference.")
+                            End If
+                            Dim reconciledKey = journalCode & "|" & item.JournalItemIdNo.ToString(CultureInfo.InvariantCulture)
+                            If Not reconciledKeys.Add(reconciledKey) Then
+                                Throw New InvalidOperationException("The reconciliation contains a duplicate cleared transaction.")
+                            End If
+
                             workRow = dtInsertReconciledTable.NewRow()
-                            workRow("JournalCode") = item.JournalCode
+                            workRow("JournalCode") = journalCode
                             workRow("JournalItemIdNo") = item.JournalItemIdNo
                             workRow("ReconciliationIdNo") = idNo
                             dtInsertReconciledTable.Rows.Add(workRow)
                         End If
                     Next
-                    SaveReconciliation(dtInsertReconciledTable, idNo)
-                    Service.UpdateRecordWithIdNo(Of Boolean)(idNo, "AccountReconciliation", "Posted", True)
+
+                    Dim insertedCount = SaveReconciliation(dtInsertReconciledTable, idNo)
+                    If insertedCount <> dtInsertReconciledTable.Rows.Count Then
+                        Throw New InvalidOperationException(
+                            $"Posting inserted {insertedCount} of {dtInsertReconciledTable.Rows.Count} reconciliation markers.")
+                    End If
+
+                    Dim posted = True
+                    Dim updatedCount = Service.UpdateRecordWithIdNo(Of Boolean)(idNo, "AccountReconciliation", "Posted", posted)
+                    If updatedCount <> 1 Then
+                        Throw New InvalidOperationException("The reconciliation could not be marked as posted.")
+                    End If
                     scope.Complete()
                 End Using
                 Messaging.Show(True, "MsgRecordSuccessfullyPosted")
                 View.Posted = True
             Catch ex As TransactionAbortedException
-                MessageBox.Show(ex.Message, "Transaction Aborted")
+                System.Windows.Forms.MessageBox.Show(ex.Message, "Posting Transaction Aborted", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Catch oEx As Exception
-                Debugger.Break()
+                System.Windows.Forms.MessageBox.Show(oEx.Message, "Reconciliation Posting Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
 
         End Sub
@@ -416,6 +443,14 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub OnReconciliationPostingRequestEvent(sender As Object, bsAccountReconciliationItem As BindingSource)
+            If AddMode OrElse EditMode OrElse View.IdNo <= 0 Then
+                Messaging.Show(False, "MsgSaveReconFirstBeforePosting")
+                Return
+            End If
+            If View.Posted Then
+                Messaging.Show(False, "MsgReconciliationAlreadyPosted")
+                Return
+            End If
             If View.UnreconciledDifference = 0 Then
                 Dim caption = Messaging.TranslateCaption("Please confirm.")
                 Dim action As String = Messaging.TranslateCaption("post")
