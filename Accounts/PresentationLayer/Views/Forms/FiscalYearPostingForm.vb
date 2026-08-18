@@ -14,6 +14,7 @@ Namespace PresentationLayer.Views.Forms
         Private ReadOnly _fiscalYear As New NumericUpDown()
         Private ReadOnly _previewButton As New Button()
         Private ReadOnly _executeButton As New Button()
+        Private ReadOnly _monthlyButton As New Button()
         Private ReadOnly _closeButton As New Button()
         Private ReadOnly _statusLabel As New Label()
         Private ReadOnly _summaryGrid As New DataGridView()
@@ -76,6 +77,17 @@ Namespace PresentationLayer.Views.Forms
             _closeButton.Margin = New Padding(4)
             AddHandler _closeButton.Click, Sub(sender, e) Close()
             commandPanel.Controls.Add(_closeButton)
+
+            _monthlyButton.Text = "Monthly Posting"
+            _monthlyButton.Width = 125
+            _monthlyButton.Margin = New Padding(4)
+            AddHandler _monthlyButton.Click,
+                Sub(sender, e)
+                    Using monthlyForm As New MonthlyPostingForm()
+                        monthlyForm.ShowDialog(Me)
+                    End Using
+                End Sub
+            commandPanel.Controls.Add(_monthlyButton)
 
             _statusLabel.Text = "Preview is required before execution."
             _statusLabel.AutoSize = True
