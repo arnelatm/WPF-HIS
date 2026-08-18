@@ -24,6 +24,8 @@ BEGIN
     DECLARE @BlockingErrorCount int;
     DECLARE @HeadersChanged int = 0;
     DECLARE @ItemsChanged int = 0;
+    DECLARE @PreviousMonthUnpostedHeaders int = 0;
+    DECLARE @PreviousMonthUnpostedItems int = 0;
     DECLARE @LockResult int;
     DECLARE @LockResource nvarchar(255) = N'ISPDATA:MonthlyJournalPosting:' + CONVERT(nvarchar(4), @FiscalYear) + N'-' + RIGHT(N'0' + CONVERT(nvarchar(2), @Month), 2);
 
@@ -70,6 +72,31 @@ BEGIN
     UNION ALL SELECT 'PC', i.IdNo, i.JournalIdNo, i.AccountIdNo, i.Posted, i.Debit, i.Credit, h.Cancelled FROM dbo.PcJournalItem i INNER JOIN #Headers h ON h.JournalCode = 'PC' AND h.JournalIdNo = i.JournalIdNo
     UNION ALL SELECT 'SJ', i.IdNo, i.JournalIdNo, i.AccountIdNo, i.Posted, i.Debit, i.Credit, h.Cancelled FROM dbo.SalesJournalItem i INNER JOIN #Headers h ON h.JournalCode = 'SJ' AND h.JournalIdNo = i.JournalIdNo;
 
+    IF @Month > 1
+    BEGIN
+        DECLARE @PreviousPeriodStart date = DATEADD(month, -1, @PeriodStart);
+        SELECT @PreviousMonthUnpostedHeaders =
+            (SELECT COUNT(*) FROM dbo.ApJournal WHERE TransactionDate >= @PreviousPeriodStart AND TransactionDate < @PeriodStart AND ISNULL(Posted, 0) = 0) +
+            (SELECT COUNT(*) FROM dbo.ArJournal WHERE TransactionDate >= @PreviousPeriodStart AND TransactionDate < @PeriodStart AND ISNULL(Posted, 0) = 0) +
+            (SELECT COUNT(*) FROM dbo.CdJournal WHERE TransactionDate >= @PreviousPeriodStart AND TransactionDate < @PeriodStart AND ISNULL(Posted, 0) = 0) +
+            (SELECT COUNT(*) FROM dbo.CkJournal WHERE TransactionDate >= @PreviousPeriodStart AND TransactionDate < @PeriodStart AND ISNULL(Posted, 0) = 0) +
+            (SELECT COUNT(*) FROM dbo.CashReceiptJournal WHERE TransactionDate >= @PreviousPeriodStart AND TransactionDate < @PeriodStart AND ISNULL(Posted, 0) = 0) +
+            (SELECT COUNT(*) FROM dbo.ErJournal WHERE TransactionDate >= @PreviousPeriodStart AND TransactionDate < @PeriodStart AND ISNULL(Posted, 0) = 0) +
+            (SELECT COUNT(*) FROM dbo.GeneralJournal WHERE TransactionDate >= @PreviousPeriodStart AND TransactionDate < @PeriodStart AND ISNULL(Posted, 0) = 0) +
+            (SELECT COUNT(*) FROM dbo.PcJournal WHERE TransactionDate >= @PreviousPeriodStart AND TransactionDate < @PeriodStart AND ISNULL(Posted, 0) = 0) +
+            (SELECT COUNT(*) FROM dbo.SalesJournal WHERE TransactionDate >= @PreviousPeriodStart AND TransactionDate < @PeriodStart AND ISNULL(Posted, 0) = 0),
+            @PreviousMonthUnpostedItems =
+            (SELECT COUNT(*) FROM dbo.ApJournalItem i INNER JOIN dbo.ApJournal h ON h.IdNo = i.JournalIdNo WHERE h.TransactionDate >= @PreviousPeriodStart AND h.TransactionDate < @PeriodStart AND i.Posted = 0) +
+            (SELECT COUNT(*) FROM dbo.ArJournalItem i INNER JOIN dbo.ArJournal h ON h.IdNo = i.JournalIdNo WHERE h.TransactionDate >= @PreviousPeriodStart AND h.TransactionDate < @PeriodStart AND i.Posted = 0) +
+            (SELECT COUNT(*) FROM dbo.CdJournalItem i INNER JOIN dbo.CdJournal h ON h.IdNo = i.JournalIdNo WHERE h.TransactionDate >= @PreviousPeriodStart AND h.TransactionDate < @PeriodStart AND i.Posted = 0) +
+            (SELECT COUNT(*) FROM dbo.CkJournalItem i INNER JOIN dbo.CkJournal h ON h.IdNo = i.JournalIdNo WHERE h.TransactionDate >= @PreviousPeriodStart AND h.TransactionDate < @PeriodStart AND i.Posted = 0) +
+            (SELECT COUNT(*) FROM dbo.CashReceiptJournalItem i INNER JOIN dbo.CashReceiptJournal h ON h.IdNo = i.JournalIdNo WHERE h.TransactionDate >= @PreviousPeriodStart AND h.TransactionDate < @PeriodStart AND i.Posted = 0) +
+            (SELECT COUNT(*) FROM dbo.ErJournalItem i INNER JOIN dbo.ErJournal h ON h.IdNo = i.JournalIdNo WHERE h.TransactionDate >= @PreviousPeriodStart AND h.TransactionDate < @PeriodStart AND i.Posted = 0) +
+            (SELECT COUNT(*) FROM dbo.GeneralJournalItem i INNER JOIN dbo.GeneralJournal h ON h.IdNo = i.JournalIdNo WHERE h.TransactionDate >= @PreviousPeriodStart AND h.TransactionDate < @PeriodStart AND i.Posted = 0) +
+            (SELECT COUNT(*) FROM dbo.PcJournalItem i INNER JOIN dbo.PcJournal h ON h.IdNo = i.JournalIdNo WHERE h.TransactionDate >= @PreviousPeriodStart AND h.TransactionDate < @PeriodStart AND i.Posted = 0) +
+            (SELECT COUNT(*) FROM dbo.SalesJournalItem i INNER JOIN dbo.SalesJournal h ON h.IdNo = i.JournalIdNo WHERE h.TransactionDate >= @PreviousPeriodStart AND h.TransactionDate < @PeriodStart AND i.Posted = 0);
+    END;
+
     CREATE TABLE #Unbalanced (JournalCode char(2) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL, JournalIdNo int NOT NULL, Debit decimal(19,4) NOT NULL, Credit decimal(19,4) NOT NULL, PRIMARY KEY (JournalCode, JournalIdNo));
     INSERT INTO #Unbalanced (JournalCode, JournalIdNo, Debit, Credit)
     SELECT JournalCode, JournalIdNo, SUM(CONVERT(decimal(19,4), Debit)), SUM(CONVERT(decimal(19,4), Credit))
@@ -91,6 +118,9 @@ BEGIN
 
     IF @ExecutePosting = 0
         RETURN;
+
+    IF @Month > 1 AND (@PreviousMonthUnpostedHeaders > 0 OR @PreviousMonthUnpostedItems > 0)
+        THROW 52207, 'The previous month must be fully posted before this month can be executed.', 1;
 
     IF @ClosedThrough IS NULL OR @ClosedThrough < @PeriodEnd
         THROW 52205, 'The month must be period-locked through its last day before posting can execute.', 1;
