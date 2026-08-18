@@ -4658,10 +4658,22 @@
     <value>Employee Leaves Earned Approval</value>
   </data>
   <data name="ToolStripMenuItemClosing.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 22</value>
+    <value>220, 22</value>
   </data>
   <data name="ToolStripMenuItemClosing.Text" xml:space="preserve">
+    <value>Accounting Closing</value>
+  </data>
+  <data name="ToolStripMenuItemClosingEntry.Size" type="System.Drawing.Size, System.Drawing">
+    <value>220, 22</value>
+  </data>
+  <data name="ToolStripMenuItemClosingEntry.Text" xml:space="preserve">
     <value>Closing Entry</value>
+  </data>
+  <data name="ToolStripMenuItemFiscalYearPosting.Size" type="System.Drawing.Size, System.Drawing">
+    <value>220, 22</value>
+  </data>
+  <data name="ToolStripMenuItemFiscalYearPosting.Text" xml:space="preserve">
+    <value>Fiscal-Year Journal Posting</value>
   </data>
   <data name="ToolStripMenuItemPayrollTransaction.Size" type="System.Drawing.Size, System.Drawing">
     <value>204, 22</value>

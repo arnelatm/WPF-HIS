@@ -147,6 +147,8 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemEmployeeLeaveEarned = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemEmployeeLeavesEarnedApproval = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemClosing = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemClosingEntry = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemFiscalYearPosting = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPayrollTransaction = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPayrollEntry = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemRecurringPayrollEntry = New System.Windows.Forms.ToolStripMenuItem()
@@ -894,8 +896,19 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemClosing
             '
+            Me.ToolStripMenuItemClosing.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemClosingEntry, Me.ToolStripMenuItemFiscalYearPosting})
             Me.ToolStripMenuItemClosing.Name = "ToolStripMenuItemClosing"
             resources.ApplyResources(Me.ToolStripMenuItemClosing, "ToolStripMenuItemClosing")
+            '
+            'ToolStripMenuItemClosingEntry
+            '
+            Me.ToolStripMenuItemClosingEntry.Name = "ToolStripMenuItemClosingEntry"
+            resources.ApplyResources(Me.ToolStripMenuItemClosingEntry, "ToolStripMenuItemClosingEntry")
+            '
+            'ToolStripMenuItemFiscalYearPosting
+            '
+            Me.ToolStripMenuItemFiscalYearPosting.Name = "ToolStripMenuItemFiscalYearPosting"
+            resources.ApplyResources(Me.ToolStripMenuItemFiscalYearPosting, "ToolStripMenuItemFiscalYearPosting")
             '
             'ToolStripMenuItemPayrollTransaction
             '
@@ -1664,6 +1677,8 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ToolStripMenuItemStatementOfEmployeeLoans As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemSummaryOfAccountsPayable As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemClosing As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemClosingEntry As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemFiscalYearPosting As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemTBMonthly As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemTBQuarterly As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemTBSemestral As ToolStripMenuItem
