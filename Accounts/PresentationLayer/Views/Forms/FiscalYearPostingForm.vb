@@ -18,6 +18,7 @@ Namespace PresentationLayer.Views.Forms
         Private ReadOnly _statusLabel As New Label()
         Private ReadOnly _summaryGrid As New DataGridView()
         Private ReadOnly _journalGrid As New DataGridView()
+        Private ReadOnly _summaryInfo As New TextBox()
         Private ReadOnly _detailsText As New TextBox()
         Private _lastPreview As DataSet
 
@@ -82,18 +83,44 @@ Namespace PresentationLayer.Views.Forms
             commandPanel.Controls.Add(_statusLabel)
             Controls.Add(commandPanel)
 
-            Dim tabs As New TabControl With {.Dock = DockStyle.Fill}
+            Dim tabs As New TabControl With {
+                .Dock = DockStyle.Fill,
+                .Visible = True,
+                .Appearance = TabAppearance.Normal,
+                .SizeMode = TabSizeMode.Fixed,
+                .ItemSize = New Size(170, 28),
+                .Padding = New Point(10, 3),
+                .BackColor = Color.White,
+                .ForeColor = Color.Black,
+                .Font = New Font("Microsoft Sans Serif", 9.0!, FontStyle.Regular)
+            }
             Dim summaryPage As New TabPage("Validation summary")
+            summaryPage.BackColor = Color.White
+            summaryPage.ForeColor = Color.Black
             ConfigureGrid(_summaryGrid)
+            _summaryInfo.Multiline = True
+            _summaryInfo.ReadOnly = True
+            _summaryInfo.ScrollBars = ScrollBars.Horizontal
+            _summaryInfo.Dock = DockStyle.Top
+            _summaryInfo.Height = 58
+            _summaryInfo.BackColor = Color.White
+            _summaryInfo.ForeColor = Color.Black
+            _summaryInfo.BorderStyle = BorderStyle.FixedSingle
+            _summaryInfo.Font = New Font("Consolas", 9.0!, FontStyle.Regular)
             summaryPage.Controls.Add(_summaryGrid)
+            summaryPage.Controls.Add(_summaryInfo)
             tabs.TabPages.Add(summaryPage)
 
             Dim journalPage As New TabPage("Journal batches")
+            journalPage.BackColor = Color.White
+            journalPage.ForeColor = Color.Black
             ConfigureGrid(_journalGrid)
             journalPage.Controls.Add(_journalGrid)
             tabs.TabPages.Add(journalPage)
 
             Dim detailsPage As New TabPage("Validation details")
+            detailsPage.BackColor = Color.White
+            detailsPage.ForeColor = Color.Black
             _detailsText.Multiline = True
             _detailsText.ReadOnly = True
             _detailsText.ScrollBars = ScrollBars.Both
@@ -113,6 +140,20 @@ Namespace PresentationLayer.Views.Forms
             grid.AutoGenerateColumns = True
             grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells
             grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+            grid.Visible = True
+            grid.BackgroundColor = Color.White
+            grid.ForeColor = Color.Black
+            grid.GridColor = Color.Silver
+            grid.BorderStyle = BorderStyle.FixedSingle
+            grid.ColumnHeadersVisible = True
+            grid.RowHeadersVisible = False
+            grid.EnableHeadersVisualStyles = False
+            grid.ColumnHeadersDefaultCellStyle.BackColor = Color.LightSteelBlue
+            grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black
+            grid.DefaultCellStyle.BackColor = Color.White
+            grid.DefaultCellStyle.ForeColor = Color.Black
+            grid.DefaultCellStyle.SelectionBackColor = Color.LightBlue
+            grid.DefaultCellStyle.SelectionForeColor = Color.Black
         End Sub
 
         Private Sub PreviewButton_Click(sender As Object, e As EventArgs)
@@ -184,12 +225,22 @@ Namespace PresentationLayer.Views.Forms
         Private Sub BindResults(data As DataSet)
             _summaryGrid.DataSource = Nothing
             _journalGrid.DataSource = Nothing
+            _summaryInfo.Clear()
             _detailsText.Clear()
 
             If data Is Nothing OrElse data.Tables.Count = 0 Then Return
 
             _summaryGrid.DataSource = data.Tables(0)
             If data.Tables.Count > 1 Then _journalGrid.DataSource = data.Tables(1)
+
+            If data.Tables(0).Rows.Count > 0 Then
+                Dim summaryRow = data.Tables(0).Rows(0)
+                Dim summaryValues = data.Tables(0).Columns.Cast(Of DataColumn)().
+                    Select(Function(column) column.ColumnName & "=" & If(summaryRow(column) Is DBNull.Value, "", summaryRow(column).ToString()))
+                _summaryInfo.Text = String.Join("  |  ", summaryValues)
+            Else
+                _summaryInfo.Text = "No validation summary was returned."
+            End If
 
             For tableIndex As Integer = 2 To data.Tables.Count - 1
                 _detailsText.AppendText("Result set " & tableIndex.ToString() & Environment.NewLine)
