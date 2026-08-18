@@ -11,16 +11,6 @@ Namespace PresentationLayer.Views.Forms
     Partial Public Class FiscalYearPostingForm
         Inherits BFMain
 
-        Private ReadOnly _fiscalYear As New NumericUpDown()
-        Private ReadOnly _previewButton As New Button()
-        Private ReadOnly _executeButton As New Button()
-        Private ReadOnly _monthlyButton As New Button()
-        Private ReadOnly _closeButton As New Button()
-        Private ReadOnly _statusLabel As New Label()
-        Private ReadOnly _summaryGrid As New DataGridView()
-        Private ReadOnly _journalGrid As New DataGridView()
-        Private ReadOnly _summaryInfo As New TextBox()
-        Private ReadOnly _detailsText As New TextBox()
         Private _lastPreview As DataSet
 
         Public Sub New()
