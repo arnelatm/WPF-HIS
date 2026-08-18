@@ -14,17 +14,11 @@ Namespace PresentationLayer.Views.Forms
             Dim commandPanel As New FlowLayoutPanel With {.Dock = DockStyle.Top, .Height = 52, .Padding = New Padding(8), .FlowDirection = FlowDirection.LeftToRight, .WrapContents = False}
             commandPanel.Controls.Add(New Label With {.Text = "Fiscal year:", .AutoSize = True, .Margin = New Padding(4, 8, 4, 0)})
             _fiscalYear.Minimum = 2000 : _fiscalYear.Maximum = 2099 : _fiscalYear.Width = 80 : _fiscalYear.Margin = New Padding(4, 4, 12, 4) : commandPanel.Controls.Add(_fiscalYear)
-            _previewButton.Text = "Preview" : _previewButton.Width = 110 : _previewButton.Margin = New Padding(4) : AddHandler _previewButton.Click, AddressOf PreviewButton_Click : commandPanel.Controls.Add(_previewButton)
-            _executeButton.Text = "Execute Posting" : _executeButton.Width = 130 : _executeButton.Margin = New Padding(4) : AddHandler _executeButton.Click, AddressOf ExecuteButton_Click : commandPanel.Controls.Add(_executeButton)
+            _previewButton.Text = "Preview" : _previewButton.Width = 110 : _previewButton.Margin = New Padding(4) : commandPanel.Controls.Add(_previewButton)
+            _executeButton.Text = "Execute Posting" : _executeButton.Width = 130 : _executeButton.Margin = New Padding(4) : commandPanel.Controls.Add(_executeButton)
             _closeButton.Text = "Close" : _closeButton.Width = 90 : _closeButton.Margin = New Padding(4)
-            AddHandler _closeButton.Click, Sub(sender, e) Close()
             commandPanel.Controls.Add(_closeButton)
             _monthlyButton.Text = "Monthly Posting" : _monthlyButton.Width = 125 : _monthlyButton.Margin = New Padding(4)
-            AddHandler _monthlyButton.Click, Sub(sender, e)
-                                                 Using monthlyForm As New MonthlyPostingForm()
-                                                     monthlyForm.ShowDialog(Me)
-                                                 End Using
-                                             End Sub
             commandPanel.Controls.Add(_monthlyButton)
             _statusLabel.Text = "Preview is required before execution." : _statusLabel.AutoSize = True : _statusLabel.Margin = New Padding(16, 8, 4, 0) : commandPanel.Controls.Add(_statusLabel)
             Controls.Add(commandPanel)

@@ -25,6 +25,15 @@ Namespace PresentationLayer.Views.Forms
 
         Public Sub New()
             InitializeComponent()
+            AddHandler _previewButton.Click, AddressOf PreviewButton_Click
+            AddHandler _executeButton.Click, AddressOf ExecuteButton_Click
+            AddHandler _closeButton.Click, Sub(sender, e) Close()
+            AddHandler _monthlyButton.Click,
+                Sub(sender, e)
+                    Using monthlyForm As New MonthlyPostingForm()
+                        monthlyForm.ShowDialog(Me)
+                    End Using
+                End Sub
             _fiscalYear.Value = Math.Max(_fiscalYear.Minimum, Date.Today.Year - 1)
             _executeButton.Enabled = False
         End Sub
