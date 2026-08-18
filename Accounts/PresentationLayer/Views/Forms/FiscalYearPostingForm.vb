@@ -1,8 +1,9 @@
 Imports System.Data
 Imports System.Drawing
 Imports System.Linq
+Imports System.Data.SqlClient
 Imports System.Windows.Forms
-Imports AATM.Accounts.ServiceLayer.ActionService
+Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Views.Forms
@@ -10,7 +11,6 @@ Namespace PresentationLayer.Views.Forms
     Public Class FiscalYearPostingForm
         Inherits BFMain
 
-        Private ReadOnly _service As AccountsService
         Private ReadOnly _fiscalYear As New NumericUpDown()
         Private ReadOnly _previewButton As New Button()
         Private ReadOnly _executeButton As New Button()
@@ -22,7 +22,6 @@ Namespace PresentationLayer.Views.Forms
         Private _lastPreview As DataSet
 
         Public Sub New()
-            _service = New AccountsService("GeneralJournal")
             InitializeComponent()
             _fiscalYear.Value = Math.Max(_fiscalYear.Minimum, Date.Today.Year - 1)
             _executeButton.Enabled = False
@@ -139,9 +138,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub LoadPosting(executePosting As Boolean)
             Try
                 Cursor = Cursors.WaitCursor
-                Dim data = _service.GetDataSet(
-                    "PostFiscalYearJournalEntries",
-                    {"@FiscalYear", Convert.ToInt32(_fiscalYear.Value), "@ExecutePosting", executePosting})
+                Dim data = ExecutePostingProcedure(executePosting)
 
                 _lastPreview = data
                 BindResults(data)
@@ -166,6 +163,23 @@ Namespace PresentationLayer.Views.Forms
                 Cursor = Cursors.Default
             End Try
         End Sub
+
+        Private Function ExecutePostingProcedure(executePosting As Boolean) As DataSet
+            Using connection As New SqlConnection(GlobalVariables.DacConnectionString)
+                Using command As New SqlCommand("dbo.PostFiscalYearJournalEntries", connection)
+                    command.CommandType = CommandType.StoredProcedure
+                    command.CommandTimeout = 120
+                    command.Parameters.Add("@FiscalYear", SqlDbType.Int).Value = Convert.ToInt32(_fiscalYear.Value)
+                    command.Parameters.Add("@ExecutePosting", SqlDbType.Bit).Value = executePosting
+
+                    Using adapter As New SqlDataAdapter(command)
+                        Dim result As New DataSet()
+                        adapter.Fill(result)
+                        Return result
+                    End Using
+                End Using
+            End Using
+        End Function
 
         Private Sub BindResults(data As DataSet)
             _summaryGrid.DataSource = Nothing
