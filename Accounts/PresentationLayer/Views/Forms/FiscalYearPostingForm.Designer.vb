@@ -30,10 +30,12 @@ Namespace PresentationLayer.Views.Forms
             StartPosition = FormStartPosition.CenterScreen
             ClientSize = New Size(980, 620)
             MinimumSize = New Size(820, 500)
+            BackColor = Color.White
+            BackgroundImage = Nothing
 
             Dim header As New Label With {.Text = "Fiscal-Year Journal Posting", .BackColor = Color.Green, .ForeColor = Color.White, .Font = New Font("Microsoft Sans Serif", 14.25!), .TextAlign = ContentAlignment.MiddleCenter, .Dock = DockStyle.Top, .Height = 36}
             Controls.Add(header)
-            Dim commandPanel As New FlowLayoutPanel With {.Dock = DockStyle.Top, .Height = 52, .Padding = New Padding(8), .FlowDirection = FlowDirection.LeftToRight, .WrapContents = False}
+            Dim commandPanel As New FlowLayoutPanel With {.Dock = DockStyle.Top, .Height = 52, .Padding = New Padding(8), .FlowDirection = FlowDirection.LeftToRight, .WrapContents = False, .BackColor = Color.White, .ForeColor = Color.Black}
             commandPanel.Controls.Add(New Label With {.Text = "Fiscal year:", .AutoSize = True, .Margin = New Padding(4, 8, 4, 0)})
             _fiscalYear.Minimum = 2000 : _fiscalYear.Maximum = 2099 : _fiscalYear.Width = 80 : _fiscalYear.Margin = New Padding(4, 4, 12, 4) : commandPanel.Controls.Add(_fiscalYear)
             _previewButton.Text = "Preview" : _previewButton.Width = 110 : _previewButton.Margin = New Padding(4) : commandPanel.Controls.Add(_previewButton)
