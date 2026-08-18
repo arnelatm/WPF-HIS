@@ -54,7 +54,7 @@ Namespace PresentationLayer.Views.Forms
             Controls.Add(commands)
 
             Dim tabs As New TabControl With {.Dock = DockStyle.Fill, .BackColor = Color.White, .ForeColor = Color.Black}
-            Dim summaryPage As New TabPage("Journal batches") With {.BackColor = Color.White}
+            Dim summaryPage As New TabPage("Journal batches") With {.BackColor = Color.White, .Padding = New Padding(0, 28, 0, 0)}
             ConfigureGrid(_summary)
             _summaryHeader.Text = "JournalCode    Headers    HeadersToPost    EmptyHeaders    Items    ItemsToPost    ZeroAmountItems    CancelledHeaders    Debit    Credit"
             _summaryHeader.Dock = DockStyle.Top
