@@ -440,6 +440,10 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of FiscalYearPostingForm)()
         End Sub
 
+        Private Sub MonthlyPostingMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemMonthlyPosting.Click
+            RunForm(Of MonthlyPostingForm)()
+        End Sub
+
         Private Sub SalesJournalEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSalesJournalEntry.Click
             RunForm(Of SalesJournalEntry, SalesJournalPresenter(Of SalesJournalModel))()
         End Sub

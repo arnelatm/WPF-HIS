@@ -149,6 +149,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemClosing = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemClosingEntry = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemFiscalYearPosting = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemMonthlyPosting = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPayrollTransaction = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPayrollEntry = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemRecurringPayrollEntry = New System.Windows.Forms.ToolStripMenuItem()
@@ -896,7 +897,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemClosing
             '
-            Me.ToolStripMenuItemClosing.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemClosingEntry, Me.ToolStripMenuItemFiscalYearPosting})
+            Me.ToolStripMenuItemClosing.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemClosingEntry, Me.ToolStripMenuItemMonthlyPosting, Me.ToolStripMenuItemFiscalYearPosting})
             Me.ToolStripMenuItemClosing.Name = "ToolStripMenuItemClosing"
             resources.ApplyResources(Me.ToolStripMenuItemClosing, "ToolStripMenuItemClosing")
             '
@@ -909,6 +910,12 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.ToolStripMenuItemFiscalYearPosting.Name = "ToolStripMenuItemFiscalYearPosting"
             resources.ApplyResources(Me.ToolStripMenuItemFiscalYearPosting, "ToolStripMenuItemFiscalYearPosting")
+            '
+            'ToolStripMenuItemMonthlyPosting
+            '
+            Me.ToolStripMenuItemMonthlyPosting.Name = "ToolStripMenuItemMonthlyPosting"
+            Me.ToolStripMenuItemMonthlyPosting.Text = "Monthly Journal Posting"
+            Me.ToolStripMenuItemMonthlyPosting.Size = New System.Drawing.Size(220, 22)
             '
             'ToolStripMenuItemPayrollTransaction
             '
@@ -1824,5 +1831,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ToolStripMenuItemLabReportStatus As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemTBClosingYear As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemBSClosingYear As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemMonthlyPosting As ToolStripMenuItem
     End Class
 End NameSpace
