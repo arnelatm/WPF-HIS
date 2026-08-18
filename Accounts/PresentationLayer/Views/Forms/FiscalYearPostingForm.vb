@@ -158,10 +158,13 @@ Namespace PresentationLayer.Views.Forms
             grid.GridColor = Color.Silver
             grid.BorderStyle = BorderStyle.FixedSingle
             grid.ColumnHeadersVisible = True
+            grid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing
+            grid.ColumnHeadersHeight = 28
             grid.RowHeadersVisible = False
             grid.EnableHeadersVisualStyles = False
             grid.ColumnHeadersDefaultCellStyle.BackColor = Color.LightSteelBlue
             grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black
+            grid.ColumnHeadersDefaultCellStyle.Font = New Font("Microsoft Sans Serif", 8.25!, FontStyle.Bold)
             grid.DefaultCellStyle.BackColor = Color.White
             grid.DefaultCellStyle.ForeColor = Color.Black
             grid.DefaultCellStyle.SelectionBackColor = Color.LightBlue

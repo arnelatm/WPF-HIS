@@ -64,8 +64,9 @@ Namespace PresentationLayer.Views.Forms
         Private Shared Sub ConfigureGrid(grid As DataGridView)
             grid.Dock = DockStyle.Fill : grid.ReadOnly = True : grid.AllowUserToAddRows = False : grid.AllowUserToDeleteRows = False
             grid.AutoGenerateColumns = True : grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells : grid.RowHeadersVisible = False
+            grid.ColumnHeadersVisible = True : grid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing : grid.ColumnHeadersHeight = 28
             grid.BackgroundColor = Color.White : grid.ForeColor = Color.Black : grid.GridColor = Color.Silver : grid.EnableHeadersVisualStyles = False
-            grid.ColumnHeadersDefaultCellStyle.BackColor = Color.LightSteelBlue : grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black
+            grid.ColumnHeadersDefaultCellStyle.BackColor = Color.LightSteelBlue : grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black : grid.ColumnHeadersDefaultCellStyle.Font = New Font("Microsoft Sans Serif", 8.25!, FontStyle.Bold)
             grid.DefaultCellStyle.BackColor = Color.White : grid.DefaultCellStyle.ForeColor = Color.Black
         End Sub
 
