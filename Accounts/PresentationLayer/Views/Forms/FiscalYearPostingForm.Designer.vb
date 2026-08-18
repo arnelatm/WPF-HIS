@@ -3,18 +3,29 @@ Imports System.Windows.Forms
 
 Namespace PresentationLayer.Views.Forms
     Partial Public Class FiscalYearPostingForm
-        Friend WithEvents _fiscalYear As New NumericUpDown()
-        Friend WithEvents _previewButton As New Button()
-        Friend WithEvents _executeButton As New Button()
-        Friend WithEvents _monthlyButton As New Button()
-        Friend WithEvents _closeButton As New Button()
-        Friend WithEvents _statusLabel As New Label()
-        Friend WithEvents _summaryGrid As New DataGridView()
-        Friend WithEvents _journalGrid As New DataGridView()
-        Friend WithEvents _summaryInfo As New TextBox()
-        Friend WithEvents _detailsText As New TextBox()
+        Friend WithEvents _fiscalYear As NumericUpDown
+        Friend WithEvents _previewButton As Button
+        Friend WithEvents _executeButton As Button
+        Friend WithEvents _monthlyButton As Button
+        Friend WithEvents _closeButton As Button
+        Friend WithEvents _statusLabel As Label
+        Friend WithEvents _summaryGrid As DataGridView
+        Friend WithEvents _journalGrid As DataGridView
+        Friend WithEvents _summaryInfo As TextBox
+        Friend WithEvents _detailsText As TextBox
 
         Private Sub InitializeComponent()
+            _fiscalYear = New NumericUpDown()
+            _previewButton = New Button()
+            _executeButton = New Button()
+            _monthlyButton = New Button()
+            _closeButton = New Button()
+            _statusLabel = New Label()
+            _summaryGrid = New DataGridView()
+            _journalGrid = New DataGridView()
+            _summaryInfo = New TextBox()
+            _detailsText = New TextBox()
+
             Text = "Fiscal-Year Journal Posting"
             StartPosition = FormStartPosition.CenterScreen
             ClientSize = New Size(980, 620)
