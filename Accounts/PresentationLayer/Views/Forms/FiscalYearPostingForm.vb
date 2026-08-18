@@ -28,33 +28,6 @@ Namespace PresentationLayer.Views.Forms
             _executeButton.Enabled = False
         End Sub
 
-        Private Shared Sub ConfigureGrid(grid As DataGridView)
-            grid.Dock = DockStyle.Fill
-            grid.ReadOnly = True
-            grid.AllowUserToAddRows = False
-            grid.AllowUserToDeleteRows = False
-            grid.AutoGenerateColumns = True
-            grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells
-            grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-            grid.Visible = True
-            grid.BackgroundColor = Color.White
-            grid.ForeColor = Color.Black
-            grid.GridColor = Color.Silver
-            grid.BorderStyle = BorderStyle.FixedSingle
-            grid.ColumnHeadersVisible = True
-            grid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing
-            grid.ColumnHeadersHeight = 28
-            grid.RowHeadersVisible = False
-            grid.EnableHeadersVisualStyles = False
-            grid.ColumnHeadersDefaultCellStyle.BackColor = Color.LightSteelBlue
-            grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black
-            grid.ColumnHeadersDefaultCellStyle.Font = New Font("Microsoft Sans Serif", 8.25!, FontStyle.Bold)
-            grid.DefaultCellStyle.BackColor = Color.White
-            grid.DefaultCellStyle.ForeColor = Color.Black
-            grid.DefaultCellStyle.SelectionBackColor = Color.LightBlue
-            grid.DefaultCellStyle.SelectionForeColor = Color.Black
-        End Sub
-
         Private Sub PreviewButton_Click(sender As Object, e As EventArgs)
             LoadPosting(False)
         End Sub
