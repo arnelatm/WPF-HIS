@@ -14,33 +14,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents _summaryInfo As TextBox
         Friend WithEvents _detailsText As TextBox
 
-        Private Shared Sub ConfigureGrid(grid As DataGridView)
-            grid.Dock = DockStyle.Fill
-            grid.ReadOnly = True
-            grid.AllowUserToAddRows = False
-            grid.AllowUserToDeleteRows = False
-            grid.AutoGenerateColumns = True
-            grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells
-            grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-            grid.Visible = True
-            grid.BackgroundColor = Color.White
-            grid.ForeColor = Color.Black
-            grid.GridColor = Color.Silver
-            grid.BorderStyle = BorderStyle.FixedSingle
-            grid.ColumnHeadersVisible = True
-            grid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing
-            grid.ColumnHeadersHeight = 28
-            grid.RowHeadersVisible = False
-            grid.EnableHeadersVisualStyles = False
-            grid.ColumnHeadersDefaultCellStyle.BackColor = Color.LightSteelBlue
-            grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black
-            grid.ColumnHeadersDefaultCellStyle.Font = New Font("Microsoft Sans Serif", 8.25!, FontStyle.Bold)
-            grid.DefaultCellStyle.BackColor = Color.White
-            grid.DefaultCellStyle.ForeColor = Color.Black
-            grid.DefaultCellStyle.SelectionBackColor = Color.LightBlue
-            grid.DefaultCellStyle.SelectionForeColor = Color.Black
-        End Sub
-
         Private Sub InitializeComponent()
             _fiscalYear = New NumericUpDown()
             _previewButton = New Button()
@@ -74,11 +47,11 @@ Namespace PresentationLayer.Views.Forms
 
             Dim tabs As New TabControl With {.Dock = DockStyle.Fill, .Visible = True, .Appearance = TabAppearance.Normal, .SizeMode = TabSizeMode.Fixed, .ItemSize = New Size(170, 28), .Padding = New Point(10, 3), .BackColor = Color.White, .ForeColor = Color.Black, .Font = New Font("Microsoft Sans Serif", 9.0!)}
             Dim summaryPage As New TabPage("Validation summary") With {.BackColor = Color.White, .ForeColor = Color.Black}
-            ConfigureGrid(_summaryGrid)
+            _summaryGrid.Dock = DockStyle.Fill : _summaryGrid.ReadOnly = True : _summaryGrid.AllowUserToAddRows = False : _summaryGrid.AllowUserToDeleteRows = False : _summaryGrid.AutoGenerateColumns = True : _summaryGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells : _summaryGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect : _summaryGrid.Visible = True : _summaryGrid.BackgroundColor = Color.White : _summaryGrid.ForeColor = Color.Black : _summaryGrid.GridColor = Color.Silver : _summaryGrid.BorderStyle = BorderStyle.FixedSingle : _summaryGrid.ColumnHeadersVisible = True : _summaryGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing : _summaryGrid.ColumnHeadersHeight = 28 : _summaryGrid.RowHeadersVisible = False : _summaryGrid.EnableHeadersVisualStyles = False
             _summaryInfo.Multiline = True : _summaryInfo.ReadOnly = True : _summaryInfo.ScrollBars = ScrollBars.Horizontal : _summaryInfo.Dock = DockStyle.Top : _summaryInfo.Height = 58 : _summaryInfo.BackColor = Color.White : _summaryInfo.ForeColor = Color.Black : _summaryInfo.BorderStyle = BorderStyle.FixedSingle : _summaryInfo.Font = New Font("Consolas", 9.0!)
             summaryPage.Controls.Add(_summaryGrid) : summaryPage.Controls.Add(_summaryInfo) : tabs.TabPages.Add(summaryPage)
             Dim journalPage As New TabPage("Journal batches") With {.BackColor = Color.White, .ForeColor = Color.Black}
-            ConfigureGrid(_journalGrid) : journalPage.Controls.Add(_journalGrid) : tabs.TabPages.Add(journalPage)
+            _journalGrid.Dock = DockStyle.Fill : _journalGrid.ReadOnly = True : _journalGrid.AllowUserToAddRows = False : _journalGrid.AllowUserToDeleteRows = False : _journalGrid.AutoGenerateColumns = True : _journalGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells : _journalGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect : _journalGrid.Visible = True : _journalGrid.BackgroundColor = Color.White : _journalGrid.ForeColor = Color.Black : _journalGrid.GridColor = Color.Silver : _journalGrid.BorderStyle = BorderStyle.FixedSingle : _journalGrid.ColumnHeadersVisible = True : _journalGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing : _journalGrid.ColumnHeadersHeight = 28 : _journalGrid.RowHeadersVisible = False : _journalGrid.EnableHeadersVisualStyles = False : journalPage.Controls.Add(_journalGrid) : tabs.TabPages.Add(journalPage)
             Dim detailsPage As New TabPage("Validation details") With {.BackColor = Color.White, .ForeColor = Color.Black}
             _detailsText.Multiline = True : _detailsText.ReadOnly = True : _detailsText.ScrollBars = ScrollBars.Both : _detailsText.Dock = DockStyle.Fill : _detailsText.Font = New Font("Consolas", 9.0!)
             detailsPage.Controls.Add(_detailsText) : tabs.TabPages.Add(detailsPage)
