@@ -16,6 +16,7 @@ Namespace PresentationLayer.Views.Forms
         Private ReadOnly _execute As New Button()
         Private ReadOnly _close As New Button()
         Private ReadOnly _status As New Label()
+        Private ReadOnly _summaryHeader As New Label()
         Private ReadOnly _summary As New DataGridView()
         Private ReadOnly _details As New TextBox()
         Private _lastPreview As DataSet
@@ -54,7 +55,18 @@ Namespace PresentationLayer.Views.Forms
 
             Dim tabs As New TabControl With {.Dock = DockStyle.Fill, .BackColor = Color.White, .ForeColor = Color.Black}
             Dim summaryPage As New TabPage("Journal batches") With {.BackColor = Color.White}
-            ConfigureGrid(_summary) : summaryPage.Controls.Add(_summary) : tabs.TabPages.Add(summaryPage)
+            ConfigureGrid(_summary)
+            _summaryHeader.Text = "JournalCode    Headers    HeadersToPost    EmptyHeaders    Items    ItemsToPost    ZeroAmountItems    CancelledHeaders    Debit    Credit"
+            _summaryHeader.Dock = DockStyle.Top
+            _summaryHeader.Height = 28
+            _summaryHeader.BackColor = Color.LightSteelBlue
+            _summaryHeader.ForeColor = Color.Black
+            _summaryHeader.Font = New Font("Consolas", 8.25!, FontStyle.Bold)
+            _summaryHeader.TextAlign = ContentAlignment.MiddleLeft
+            _summaryHeader.AutoEllipsis = True
+            summaryPage.Controls.Add(_summary)
+            summaryPage.Controls.Add(_summaryHeader)
+            tabs.TabPages.Add(summaryPage)
             Dim detailsPage As New TabPage("Validation details") With {.BackColor = Color.White}
             _details.Multiline = True : _details.ReadOnly = True : _details.ScrollBars = ScrollBars.Both : _details.Dock = DockStyle.Fill : _details.Font = New Font("Consolas", 9.0!)
             detailsPage.Controls.Add(_details) : tabs.TabPages.Add(detailsPage)
