@@ -1,6 +1,7 @@
 ﻿Imports System.ComponentModel
 Imports System.Configuration
 Imports System.Globalization
+Imports System.Linq
 Imports System.Threading
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
@@ -83,7 +84,24 @@ Namespace PresentationLayer.Views.Forms
                 SetupMapper()
                 Presenter = New UserPresenter(Of UserModel)(Me)
                 InitializeEstablishmentInformation()
+                AddFiscalYearPostingMenuItem()
             End If
+        End Sub
+
+        Private Sub AddFiscalYearPostingMenuItem()
+            If ToolStripMenuItemClosing Is Nothing Then Return
+            If ToolStripMenuItemClosing.DropDownItems.OfType(Of ToolStripMenuItem)().Any(Function(menuEntry) menuEntry.Name = "ToolStripMenuItemFiscalYearPosting") Then Return
+
+            Dim item As New ToolStripMenuItem With {
+                .Name = "ToolStripMenuItemFiscalYearPosting",
+                .Text = "Fiscal-Year Journal Posting"
+            }
+            AddHandler item.Click, AddressOf FiscalYearPostingMenuItem_Click
+            ToolStripMenuItemClosing.DropDownItems.Add(item)
+        End Sub
+
+        Private Sub FiscalYearPostingMenuItem_Click(sender As Object, e As EventArgs)
+            RunForm(Of FiscalYearPostingForm)()
         End Sub
 
         Private Sub InitializeEstablishmentInformation()

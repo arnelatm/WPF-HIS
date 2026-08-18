@@ -661,6 +661,9 @@
     <Compile Include="PresentationLayer\Views\Forms\DateRangeForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\FiscalYearPostingForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\EmployeeEntryTv.designer.vb">
       <DependentUpon>EmployeeEntryTv.vb</DependentUpon>
     </Compile>
