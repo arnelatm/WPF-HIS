@@ -666,6 +666,7 @@
     <Build Include="dbo\Tables\FiscalYearJournalPostingRun.sql" />
     <Build Include="dbo\Tables\FiscalYearJournalPostingChange.sql" />
     <Build Include="dbo\Stored Procedures\PostFiscalYearJournalEntries.sql" />
+    <Build Include="dbo\Stored Procedures\PreviewFiscalYearClose.sql" />
     <Build Include="dbo\User Defined Types\PayrollDetailInsert.sql" />
     <Build Include="dbo\User Defined Types\PayrollDetailUpdate.sql" />
     <Build Include="dbo\User Defined Types\UserAccessInsert.sql" />
