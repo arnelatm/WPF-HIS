@@ -12,6 +12,15 @@ BEGIN
     EXEC dbo.InitializeMonthlyCloseChecklist @FiscalYear, @FiscalMonth;
     IF EXISTS (SELECT 1 FROM dbo.MonthlyClosePeriod WHERE FiscalYear = @FiscalYear AND FiscalMonth = @FiscalMonth AND Status <> 'Open')
         THROW 52313, 'The monthly close is already approved or closed.', 1;
+    IF @FiscalMonth > 1 AND NOT EXISTS (
+        SELECT 1
+        FROM dbo.MonthlyCloseChecklist
+        WHERE FiscalYear = @FiscalYear
+          AND FiscalMonth = @FiscalMonth - 1
+          AND ChecklistCode = @ChecklistCode
+          AND Completed = 1
+    )
+        THROW 52315, 'The corresponding checklist item in the previous month must be completed first.', 1;
     UPDATE dbo.MonthlyCloseChecklist SET Completed = @Completed, CompletedBy = CASE WHEN @Completed = 1 THEN ORIGINAL_LOGIN() ELSE NULL END, CompletedAt = CASE WHEN @Completed = 1 THEN SYSDATETIME() ELSE NULL END, Notes = @Notes
     WHERE FiscalYear = @FiscalYear AND FiscalMonth = @FiscalMonth AND ChecklistCode = @ChecklistCode;
     IF @@ROWCOUNT = 0 THROW 52314, 'Unknown monthly close checklist code.', 1;
