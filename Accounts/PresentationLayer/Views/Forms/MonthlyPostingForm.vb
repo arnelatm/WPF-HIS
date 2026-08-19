@@ -22,6 +22,7 @@ Namespace PresentationLayer.Views.Forms
         Private ReadOnly _summaryHeader As New Label()
         Private ReadOnly _summary As New DataGridView()
         Private ReadOnly _checklist As New DataGridView()
+        Private ReadOnly _checklistHeader As New Label()
         Private ReadOnly _tabs As New TabControl()
         Private ReadOnly _details As New TextBox()
         Private _lastPreview As DataSet
@@ -77,9 +78,12 @@ Namespace PresentationLayer.Views.Forms
             summaryPage.Controls.Add(_summary)
             summaryPage.Controls.Add(_summaryHeader)
             _tabs.TabPages.Add(summaryPage)
-            Dim checklistPage As New TabPage("Close checklist") With {.BackColor = Color.White}
+            Dim checklistPage As New TabPage("Close checklist") With {.BackColor = Color.White, .Padding = New Padding(0, 28, 0, 0)}
             ConfigureGrid(_checklist)
+            _checklistHeader.Text = "FiscalYear    FiscalMonth    Status    ChecklistCode    Completed    CompletedBy    CompletedAt    Notes"
+            _checklistHeader.Dock = DockStyle.Top : _checklistHeader.Height = 28 : _checklistHeader.BackColor = Color.LightSteelBlue : _checklistHeader.ForeColor = Color.Black : _checklistHeader.Font = New Font("Consolas", 8.25!, FontStyle.Bold) : _checklistHeader.TextAlign = ContentAlignment.MiddleLeft : _checklistHeader.AutoEllipsis = True
             checklistPage.Controls.Add(_checklist)
+            checklistPage.Controls.Add(_checklistHeader)
             _tabs.TabPages.Add(checklistPage)
             Dim detailsPage As New TabPage("Validation details") With {.BackColor = Color.White}
             _details.Multiline = True : _details.ReadOnly = True : _details.ScrollBars = ScrollBars.Both : _details.Dock = DockStyle.Fill : _details.Font = New Font("Consolas", 9.0!)
