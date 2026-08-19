@@ -22,6 +22,7 @@ Namespace PresentationLayer.Views.Forms
         Private ReadOnly _summaryHeader As New Label()
         Private ReadOnly _summary As New DataGridView()
         Private ReadOnly _checklist As New DataGridView()
+        Private ReadOnly _tabs As New TabControl()
         Private ReadOnly _details As New TextBox()
         Private _lastPreview As DataSet
 
@@ -62,7 +63,7 @@ Namespace PresentationLayer.Views.Forms
             _status.Text = "Preview is required before execution." : _status.AutoSize = True : _status.Margin = New Padding(12, 8, 4, 0) : commands.Controls.Add(_status)
             Controls.Add(commands)
 
-            Dim tabs As New TabControl With {.Dock = DockStyle.Fill, .BackColor = Color.White, .ForeColor = Color.Black}
+            _tabs.Dock = DockStyle.Fill : _tabs.BackColor = Color.White : _tabs.ForeColor = Color.Black
             Dim summaryPage As New TabPage("Journal batches") With {.BackColor = Color.White, .Padding = New Padding(0, 28, 0, 0)}
             ConfigureGrid(_summary)
             _summaryHeader.Text = "JournalCode    Headers    HeadersToPost    EmptyHeaders    Items    ItemsToPost    ZeroAmountItems    CancelledHeaders    Debit    Credit"
@@ -75,15 +76,15 @@ Namespace PresentationLayer.Views.Forms
             _summaryHeader.AutoEllipsis = True
             summaryPage.Controls.Add(_summary)
             summaryPage.Controls.Add(_summaryHeader)
-            tabs.TabPages.Add(summaryPage)
+            _tabs.TabPages.Add(summaryPage)
             Dim checklistPage As New TabPage("Close checklist") With {.BackColor = Color.White}
             ConfigureGrid(_checklist)
             checklistPage.Controls.Add(_checklist)
-            tabs.TabPages.Add(checklistPage)
+            _tabs.TabPages.Add(checklistPage)
             Dim detailsPage As New TabPage("Validation details") With {.BackColor = Color.White}
             _details.Multiline = True : _details.ReadOnly = True : _details.ScrollBars = ScrollBars.Both : _details.Dock = DockStyle.Fill : _details.Font = New Font("Consolas", 9.0!)
-            detailsPage.Controls.Add(_details) : tabs.TabPages.Add(detailsPage)
-            Controls.Add(tabs)
+            detailsPage.Controls.Add(_details) : _tabs.TabPages.Add(detailsPage)
+            Controls.Add(_tabs)
         End Sub
 
         Private Shared Sub ConfigureGrid(grid As DataGridView)
@@ -135,7 +136,11 @@ Namespace PresentationLayer.Views.Forms
         Private Sub LoadChecklist()
             Try
                 Dim data = ExecuteChecklistProcedure("dbo.InitializeMonthlyCloseChecklist")
-                If data.Tables.Count > 0 Then _checklist.DataSource = data.Tables(0)
+                If data.Tables.Count > 0 Then
+                    _checklist.DataSource = data.Tables(0)
+                    _tabs.SelectedIndex = 1
+                    _status.Text = "Checklist loaded: " & data.Tables(0).Rows.Count.ToString() & " items. Select an item and click Complete Item."
+                End If
             Catch ex As Exception
                 _status.Text = "Checklist load failed."
             End Try
