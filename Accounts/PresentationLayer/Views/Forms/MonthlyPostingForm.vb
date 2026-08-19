@@ -23,6 +23,8 @@ Namespace PresentationLayer.Views.Forms
         Private ReadOnly _summary As New DataGridView()
         Private ReadOnly _checklist As New DataGridView()
         Private ReadOnly _checklistHeader As New Label()
+        Private ReadOnly _checklistNotesLabel As New Label()
+        Private ReadOnly _checklistNotes As New TextBox()
         Private ReadOnly _tabs As New TabControl()
         Private ReadOnly _details As New TextBox()
         Private _lastPreview As DataSet
@@ -80,10 +82,16 @@ Namespace PresentationLayer.Views.Forms
             _tabs.TabPages.Add(summaryPage)
             Dim checklistPage As New TabPage("Close checklist") With {.BackColor = Color.White, .Padding = New Padding(0, 28, 0, 0)}
             ConfigureGrid(_checklist)
+            AddHandler _checklist.SelectionChanged, AddressOf Checklist_SelectionChanged
             _checklistHeader.Text = "FiscalYear    FiscalMonth    Status    ChecklistCode    Completed    CompletedBy    CompletedAt    Notes"
             _checklistHeader.Dock = DockStyle.Top : _checklistHeader.Height = 28 : _checklistHeader.BackColor = Color.LightSteelBlue : _checklistHeader.ForeColor = Color.Black : _checklistHeader.Font = New Font("Consolas", 8.25!, FontStyle.Bold) : _checklistHeader.TextAlign = ContentAlignment.MiddleLeft : _checklistHeader.AutoEllipsis = True
             checklistPage.Controls.Add(_checklist)
             checklistPage.Controls.Add(_checklistHeader)
+            _checklistNotesLabel.Text = "Notes for selected checklist item:"
+            _checklistNotesLabel.Dock = DockStyle.Bottom : _checklistNotesLabel.Height = 20 : _checklistNotesLabel.BackColor = Color.White : _checklistNotesLabel.ForeColor = Color.Black
+            _checklistNotes.Multiline = True : _checklistNotes.ScrollBars = ScrollBars.Vertical : _checklistNotes.Dock = DockStyle.Bottom : _checklistNotes.Height = 48 : _checklistNotes.BackColor = Color.White : _checklistNotes.ForeColor = Color.Black
+            checklistPage.Controls.Add(_checklistNotes)
+            checklistPage.Controls.Add(_checklistNotesLabel)
             _tabs.TabPages.Add(checklistPage)
             Dim detailsPage As New TabPage("Validation details") With {.BackColor = Color.White}
             _details.Multiline = True : _details.ReadOnly = True : _details.ScrollBars = ScrollBars.Both : _details.Dock = DockStyle.Fill : _details.Font = New Font("Consolas", 9.0!)
@@ -120,11 +128,17 @@ Namespace PresentationLayer.Views.Forms
             Dim code = Convert.ToString(_checklist.CurrentRow.Cells("ChecklistCode").Value)
             If String.IsNullOrWhiteSpace(code) Then Return
             Try
-                Dim data = ExecuteChecklistProcedure("dbo.SetMonthlyCloseChecklistItem", code, True)
+                Dim data = ExecuteChecklistProcedure("dbo.SetMonthlyCloseChecklistItem", code, True, _checklistNotes.Text)
                 _checklist.DataSource = data.Tables(0)
             Catch ex As Exception
                 MessageBox.Show(ex.Message, "Monthly Close Checklist", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
+        End Sub
+
+        Private Sub Checklist_SelectionChanged(sender As Object, e As EventArgs)
+            If _checklist.CurrentRow Is Nothing OrElse Not _checklist.Columns.Contains("Notes") Then Return
+            Dim value = _checklist.CurrentRow.Cells("Notes").Value
+            _checklistNotes.Text = If(value Is Nothing OrElse value Is DBNull.Value, "", value.ToString())
         End Sub
 
         Private Sub ApproveMonth_Click(sender As Object, e As EventArgs)
@@ -150,7 +164,7 @@ Namespace PresentationLayer.Views.Forms
             End Try
         End Sub
 
-        Private Function ExecuteChecklistProcedure(procedureName As String, Optional checklistCode As String = Nothing, Optional completed As Boolean = False) As DataSet
+        Private Function ExecuteChecklistProcedure(procedureName As String, Optional checklistCode As String = Nothing, Optional completed As Boolean = False, Optional notes As String = Nothing) As DataSet
             Using connection As New SqlConnection(GlobalVariables.DacConnectionString)
                 Using command As New SqlCommand(procedureName, connection)
                     command.CommandType = CommandType.StoredProcedure : command.CommandTimeout = 120
@@ -159,6 +173,7 @@ Namespace PresentationLayer.Views.Forms
                     If procedureName.EndsWith("SetMonthlyCloseChecklistItem", StringComparison.OrdinalIgnoreCase) Then
                         command.Parameters.Add("@ChecklistCode", SqlDbType.VarChar, 40).Value = checklistCode
                         command.Parameters.Add("@Completed", SqlDbType.Bit).Value = completed
+                        command.Parameters.Add("@Notes", SqlDbType.NVarChar, 500).Value = If(notes, "")
                         command.Parameters.Add("@ApplicationUser", SqlDbType.NVarChar, 128).Value = GlobalVariables.UserName
                     ElseIf procedureName.EndsWith("ApproveMonthlyClose", StringComparison.OrdinalIgnoreCase) Then
                         command.Parameters.Add("@ApplicationUser", SqlDbType.NVarChar, 128).Value = GlobalVariables.UserName
