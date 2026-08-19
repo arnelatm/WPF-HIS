@@ -129,7 +129,8 @@ Namespace PresentationLayer.Views.Forms
             If String.IsNullOrWhiteSpace(code) Then Return
             Try
                 Dim data = ExecuteChecklistProcedure("dbo.SetMonthlyCloseChecklistItem", code, True, _checklistNotes.Text)
-                _checklist.DataSource = data.Tables(0)
+                _checklist.DataSource = data.Tables(data.Tables.Count - 1)
+                _checklistNotes.Clear()
             Catch ex As Exception
                 MessageBox.Show(ex.Message, "Monthly Close Checklist", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
