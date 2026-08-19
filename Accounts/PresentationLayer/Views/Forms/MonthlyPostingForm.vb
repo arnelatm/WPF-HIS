@@ -127,6 +127,11 @@ Namespace PresentationLayer.Views.Forms
             If _checklist.CurrentRow Is Nothing Then Return
             Dim code = Convert.ToString(_checklist.CurrentRow.Cells("ChecklistCode").Value)
             If String.IsNullOrWhiteSpace(code) Then Return
+            If String.IsNullOrWhiteSpace(_checklistNotes.Text) Then
+                MessageBox.Show("Enter a note before completing this checklist item.", "Monthly Close Checklist", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                _checklistNotes.Focus()
+                Return
+            End If
             Try
                 Dim data = ExecuteChecklistProcedure("dbo.SetMonthlyCloseChecklistItem", code, True, _checklistNotes.Text)
                 _checklist.DataSource = data.Tables(data.Tables.Count - 1)

@@ -11,6 +11,7 @@ BEGIN
     IF @FiscalYear NOT BETWEEN 2000 AND 2099 THROW 52311, 'FiscalYear must be between 2000 and 2099.', 1;
     IF @FiscalMonth NOT BETWEEN 1 AND 12 THROW 52312, 'FiscalMonth must be between 1 and 12.', 1;
     IF NULLIF(LTRIM(RTRIM(@ApplicationUser)), '') IS NULL THROW 52316, 'ApplicationUser is required.', 1;
+    IF @Completed = 1 AND NULLIF(LTRIM(RTRIM(@Notes)), '') IS NULL THROW 52317, 'A note is required before completing a checklist item.', 1;
     EXEC dbo.InitializeMonthlyCloseChecklist @FiscalYear, @FiscalMonth;
     IF EXISTS (SELECT 1 FROM dbo.MonthlyClosePeriod WHERE FiscalYear = @FiscalYear AND FiscalMonth = @FiscalMonth AND Status <> 'Open')
         THROW 52313, 'The monthly close is already approved or closed.', 1;
