@@ -159,6 +159,9 @@ Namespace PresentationLayer.Views.Forms
                     If procedureName.EndsWith("SetMonthlyCloseChecklistItem", StringComparison.OrdinalIgnoreCase) Then
                         command.Parameters.Add("@ChecklistCode", SqlDbType.VarChar, 40).Value = checklistCode
                         command.Parameters.Add("@Completed", SqlDbType.Bit).Value = completed
+                        command.Parameters.Add("@ApplicationUser", SqlDbType.NVarChar, 128).Value = GlobalVariables.UserName
+                    ElseIf procedureName.EndsWith("ApproveMonthlyClose", StringComparison.OrdinalIgnoreCase) Then
+                        command.Parameters.Add("@ApplicationUser", SqlDbType.NVarChar, 128).Value = GlobalVariables.UserName
                     End If
                     Using adapter As New SqlDataAdapter(command)
                         Dim result As New DataSet() : adapter.Fill(result) : Return result
