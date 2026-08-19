@@ -15,9 +15,13 @@ Namespace PresentationLayer.Views.Forms
         Private ReadOnly _preview As New Button()
         Private ReadOnly _execute As New Button()
         Private ReadOnly _close As New Button()
+        Private ReadOnly _initializeChecklist As New Button()
+        Private ReadOnly _completeChecklist As New Button()
+        Private ReadOnly _approveMonth As New Button()
         Private ReadOnly _status As New Label()
         Private ReadOnly _summaryHeader As New Label()
         Private ReadOnly _summary As New DataGridView()
+        Private ReadOnly _checklist As New DataGridView()
         Private ReadOnly _details As New TextBox()
         Private _lastPreview As DataSet
 
@@ -26,7 +30,9 @@ Namespace PresentationLayer.Views.Forms
             _year.Value = Math.Max(_year.Minimum, Date.Today.Year - 1)
             _month.SelectedIndex = Date.Today.Month - 2
             If _month.SelectedIndex < 0 Then _month.SelectedIndex = 11
+            AddHandler _month.SelectedIndexChanged, Sub(sender, e) LoadChecklist()
             _execute.Enabled = False
+            LoadChecklist()
         End Sub
 
         Private Sub InitializeComponent()
@@ -50,6 +56,9 @@ Namespace PresentationLayer.Views.Forms
             _close.Text = "Close" : _close.Width = 80 : _close.Margin = New Padding(4)
             AddHandler _close.Click, Sub(sender, e) Close()
             commands.Controls.Add(_close)
+            _initializeChecklist.Text = "Load Checklist" : _initializeChecklist.Width = 105 : _initializeChecklist.Margin = New Padding(4) : AddHandler _initializeChecklist.Click, AddressOf InitializeChecklist_Click : commands.Controls.Add(_initializeChecklist)
+            _completeChecklist.Text = "Complete Item" : _completeChecklist.Width = 105 : _completeChecklist.Margin = New Padding(4) : AddHandler _completeChecklist.Click, AddressOf CompleteChecklist_Click : commands.Controls.Add(_completeChecklist)
+            _approveMonth.Text = "Approve Month" : _approveMonth.Width = 105 : _approveMonth.Margin = New Padding(4) : AddHandler _approveMonth.Click, AddressOf ApproveMonth_Click : commands.Controls.Add(_approveMonth)
             _status.Text = "Preview is required before execution." : _status.AutoSize = True : _status.Margin = New Padding(12, 8, 4, 0) : commands.Controls.Add(_status)
             Controls.Add(commands)
 
@@ -67,6 +76,10 @@ Namespace PresentationLayer.Views.Forms
             summaryPage.Controls.Add(_summary)
             summaryPage.Controls.Add(_summaryHeader)
             tabs.TabPages.Add(summaryPage)
+            Dim checklistPage As New TabPage("Close checklist") With {.BackColor = Color.White}
+            ConfigureGrid(_checklist)
+            checklistPage.Controls.Add(_checklist)
+            tabs.TabPages.Add(checklistPage)
             Dim detailsPage As New TabPage("Validation details") With {.BackColor = Color.White}
             _details.Multiline = True : _details.ReadOnly = True : _details.ScrollBars = ScrollBars.Both : _details.Dock = DockStyle.Fill : _details.Font = New Font("Consolas", 9.0!)
             detailsPage.Controls.Add(_details) : tabs.TabPages.Add(detailsPage)
@@ -93,6 +106,58 @@ Namespace PresentationLayer.Views.Forms
             If MessageBox.Show("Post all valid journals for " & _month.Text & " " & _year.Value.ToString() & "?", "Confirm monthly posting", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = DialogResult.Yes Then LoadPosting(True)
         End Sub
 
+        Private Sub InitializeChecklist_Click(sender As Object, e As EventArgs)
+            LoadChecklist()
+        End Sub
+
+        Private Sub CompleteChecklist_Click(sender As Object, e As EventArgs)
+            If _checklist.CurrentRow Is Nothing Then Return
+            Dim code = Convert.ToString(_checklist.CurrentRow.Cells("ChecklistCode").Value)
+            If String.IsNullOrWhiteSpace(code) Then Return
+            Try
+                Dim data = ExecuteChecklistProcedure("dbo.SetMonthlyCloseChecklistItem", code, True)
+                _checklist.DataSource = data.Tables(0)
+            Catch ex As Exception
+                MessageBox.Show(ex.Message, "Monthly Close Checklist", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End Sub
+
+        Private Sub ApproveMonth_Click(sender As Object, e As EventArgs)
+            Try
+                Dim data = ExecuteChecklistProcedure("dbo.ApproveMonthlyClose")
+                MessageBox.Show("Month approved. You may now run Monthly Posting.", "Monthly Close", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                LoadChecklist()
+            Catch ex As Exception
+                MessageBox.Show(ex.Message, "Monthly Close", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            End Try
+        End Sub
+
+        Private Sub LoadChecklist()
+            Try
+                Dim data = ExecuteChecklistProcedure("dbo.InitializeMonthlyCloseChecklist")
+                If data.Tables.Count > 0 Then _checklist.DataSource = data.Tables(0)
+            Catch ex As Exception
+                _status.Text = "Checklist load failed."
+            End Try
+        End Sub
+
+        Private Function ExecuteChecklistProcedure(procedureName As String, Optional checklistCode As String = Nothing, Optional completed As Boolean = False) As DataSet
+            Using connection As New SqlConnection(GlobalVariables.DacConnectionString)
+                Using command As New SqlCommand(procedureName, connection)
+                    command.CommandType = CommandType.StoredProcedure : command.CommandTimeout = 120
+                    command.Parameters.Add("@FiscalYear", SqlDbType.Int).Value = Convert.ToInt32(_year.Value)
+                    command.Parameters.Add("@FiscalMonth", SqlDbType.Int).Value = _month.SelectedIndex + 1
+                    If procedureName.EndsWith("SetMonthlyCloseChecklistItem", StringComparison.OrdinalIgnoreCase) Then
+                        command.Parameters.Add("@ChecklistCode", SqlDbType.VarChar, 40).Value = checklistCode
+                        command.Parameters.Add("@Completed", SqlDbType.Bit).Value = completed
+                    End If
+                    Using adapter As New SqlDataAdapter(command)
+                        Dim result As New DataSet() : adapter.Fill(result) : Return result
+                    End Using
+                End Using
+            End Using
+        End Function
+
         Private Sub LoadPosting(executePosting As Boolean)
             Try
                 Cursor = Cursors.WaitCursor
@@ -102,8 +167,9 @@ Namespace PresentationLayer.Views.Forms
                     _execute.Enabled = False : _status.Text = "Posting completed. Run Preview again to verify."
                 Else
                     Dim blockers = GetInt(data, 0, "BlockingErrors") : Dim headers = GetInt(data, 0, "HeadersToPost") : Dim items = GetInt(data, 0, "ItemsToPost")
-                    _execute.Enabled = blockers = 0 AndAlso (headers > 0 OrElse items > 0)
-                    _status.Text = String.Format("Blocking errors: {0}; headers to post: {1}; items to post: {2}", blockers, headers, items)
+                    Dim closeApproved = data.Tables(0).Columns.Contains("MonthlyCloseStatus") AndAlso String.Equals(Convert.ToString(data.Tables(0).Rows(0)("MonthlyCloseStatus")), "Approved", StringComparison.OrdinalIgnoreCase)
+                    _execute.Enabled = closeApproved AndAlso blockers = 0 AndAlso (headers > 0 OrElse items > 0)
+                    _status.Text = String.Format("Errors: {0}; headers: {1}; items: {2}; close status: {3}", blockers, headers, items, If(closeApproved, "Approved", "Not approved"))
                 End If
             Catch ex As Exception
                 _execute.Enabled = False : _status.Text = "Posting request failed." : MessageBox.Show(ex.Message, "Monthly Posting", MessageBoxButtons.OK, MessageBoxIcon.Error)

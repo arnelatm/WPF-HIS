@@ -26,6 +26,7 @@ BEGIN
     DECLARE @ItemsChanged int = 0;
     DECLARE @PreviousMonthUnpostedHeaders int = 0;
     DECLARE @PreviousMonthUnpostedItems int = 0;
+    DECLARE @MonthlyCloseStatus varchar(20) = NULL;
     DECLARE @LockResult int;
     DECLARE @LockResource nvarchar(255) = N'ISPDATA:MonthlyJournalPosting:' + CONVERT(nvarchar(4), @FiscalYear) + N'-' + RIGHT(N'0' + CONVERT(nvarchar(2), @Month), 2);
 
@@ -118,6 +119,12 @@ BEGIN
 
     IF @ExecutePosting = 0
         RETURN;
+
+    SELECT @MonthlyCloseStatus = Status
+    FROM dbo.MonthlyClosePeriod
+    WHERE FiscalYear = @FiscalYear AND FiscalMonth = @Month;
+    IF ISNULL(@MonthlyCloseStatus, 'Open') <> 'Approved'
+        THROW 52330, 'The month must be approved through the monthly close checklist before posting can execute.', 1;
 
     IF @Month > 1 AND (@PreviousMonthUnpostedHeaders > 0 OR @PreviousMonthUnpostedItems > 0)
         THROW 52207, 'The previous month must be fully posted before this month can be executed.', 1;

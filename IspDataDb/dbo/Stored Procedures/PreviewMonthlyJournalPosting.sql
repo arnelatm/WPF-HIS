@@ -18,6 +18,7 @@ BEGIN
         FROM dbo.LastPosting
         WHERE TransactionName = 'Closed Period'
     );
+    DECLARE @MonthlyCloseStatus varchar(20) = ISNULL((SELECT Status FROM dbo.MonthlyClosePeriod WHERE FiscalYear = @FiscalYear AND FiscalMonth = @Month), 'Open');
 
     CREATE TABLE #Headers (
         JournalCode char(2) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
@@ -89,6 +90,7 @@ BEGIN
         @PeriodStart AS PeriodStart,
         DATEADD(day, -1, @PeriodEnd) AS PeriodEnd,
         @ClosedThrough AS PeriodLockedThrough,
+        @MonthlyCloseStatus AS MonthlyCloseStatus,
         @BlockingErrorCount AS BlockingErrors,
         (SELECT COUNT(*) FROM #Headers WHERE ISNULL(HeaderPosted, 0) = 0) AS HeadersToPost,
         (SELECT COUNT(*) FROM #Items WHERE ItemPosted = 0) AS ItemsToPost;
