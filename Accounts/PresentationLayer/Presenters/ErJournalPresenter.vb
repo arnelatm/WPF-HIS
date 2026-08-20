@@ -222,6 +222,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub OnSuccessfulDelete(ByVal idNo As Int32) Handles MyBase.SuccessfulDelete
+            If View.TransactionDate.HasValue AndAlso View.TransactionDate.Value.Date >= New Date(2026, 1, 1) Then Return
             'Remove any employee-receivable open-invoice marker tied to the
             'journal before deleting its detail rows.
             Service.DeleteRecords(Of Int32)(idNo, "ErOpenInvoice", "JournalIdNo")
@@ -231,6 +232,42 @@ Namespace PresentationLayer.Presenters
                 _erJournalItemService.DelUpdateTvp(DtUpdateTable, idNo)
             End If
         End Sub
+
+        Public Overrides Function Save(ByRef viewControl As System.Windows.Forms.Control) As Boolean
+            If AddMode AndAlso View.TransactionDate.HasValue AndAlso View.TransactionDate.Value.Date >= New Date(2026, 1, 1) Then
+                Try
+                    OnBeforeSave()
+                    Dim model As New ErJournalModel()
+                    GlobalVariables.Mapper.Map(View, model)
+                    Dim idNo = New AATM.Accounts.ServiceLayer.ErJournalTransactionService().SaveNew(model)
+                    If idNo <= 0 Then Return False
+                    View.IdNo=idNo : AddMode=False : EditMode=False
+                    UpdateViewData(idNo) : UpdateViewDisplay()
+                    Return True
+                Catch ex As Exception
+                    Messaging.Show(ex.Message,System.Windows.Forms.MessageBoxButtons.OK,System.Windows.Forms.MessageBoxIcon.Error)
+                    Return False
+                End Try
+            End If
+            If EditMode AndAlso View.TransactionDate.HasValue AndAlso View.TransactionDate.Value.Date >= New Date(2026, 1, 1) Then
+                Try
+                    OnBeforeSave()
+                    Dim model As New ErJournalModel()
+                    GlobalVariables.Mapper.Map(View, model)
+                    Dim transactionService As New AATM.Accounts.ServiceLayer.ErJournalTransactionService()
+                    transactionService.UpdateExisting(model)
+                    UpdateViewData(View.IdNo) : UpdateViewDisplay() : Return True
+                Catch ex As Exception
+                    Messaging.Show(ex.Message,System.Windows.Forms.MessageBoxButtons.OK,System.Windows.Forms.MessageBoxIcon.Error) : Return False
+                End Try
+            End If
+            Return MyBase.Save(viewControl)
+        End Function
+
+        Protected Overrides Function DeleteRecordCore(idNo As Int32) As Integer
+            If View.TransactionDate.HasValue AndAlso View.TransactionDate.Value.Date >= New Date(2026, 1, 1) Then Return New AATM.Accounts.ServiceLayer.ErJournalTransactionService().DeleteExisting(idNo)
+            Return MyBase.DeleteRecordCore(idNo)
+        End Function
 
         Public Overrides Function IsOkToDeleteRecord() As Boolean
             If Not MyBase.IsOkToDeleteRecord() Then Return False

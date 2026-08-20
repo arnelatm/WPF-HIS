@@ -2099,6 +2099,11 @@
     <Compile Include="ServiceLayer\ApJournalTransactionService.vb" />
     <Compile Include="ServiceLayer\ArJournalTransactionService.vb" />
     <Compile Include="ServiceLayer\CashReceiptJournalTransactionService.vb" />
+    <Compile Include="ServiceLayer\CashDisbursementJournalTransactionService.vb" />
+    <Compile Include="ServiceLayer\ErJournalTransactionService.vb" />
+    <Compile Include="ServiceLayer\SalesJournalTransactionService.vb" />
+    <Compile Include="ServiceLayer\PettyCashJournalTransactionService.vb" />
+    <Compile Include="ServiceLayer\GeneralJournalTransactionService.vb" />
     <Compile Include="MappingProfileAccounts.vb" />
     <Compile Include="SetSettings.Designer.vb">
       <DependentUpon>SetSettings.vb</DependentUpon>

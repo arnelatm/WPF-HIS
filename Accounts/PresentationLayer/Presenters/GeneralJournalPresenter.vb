@@ -81,6 +81,40 @@ Namespace PresentationLayer.Presenters
             cForm.Show()
         End Sub
 
+        Public Overrides Function Save(ByRef viewControl As System.Windows.Forms.Control) As Boolean
+            If TableBaseName = "GeneralJournal" AndAlso View.TransactionDate.HasValue AndAlso View.TransactionDate.Value.Date >= New Date(2026, 1, 1) Then
+                Try
+                    OnBeforeSave()
+                    Dim model As New GeneralJournalModel()
+                    GlobalVariables.Mapper.Map(View, model)
+                    If AddMode Then
+                        Dim idNo = New AATM.Accounts.ServiceLayer.GeneralJournalTransactionService().SaveNew(model)
+                        If idNo <= 0 Then Return False
+                        View.IdNo=idNo : AddMode=False : EditMode=False
+                        UpdateViewData(idNo) : UpdateViewDisplay()
+                    ElseIf EditMode Then
+                        Dim transactionService As New AATM.Accounts.ServiceLayer.GeneralJournalTransactionService()
+                        transactionService.UpdateExisting(model)
+                        UpdateViewData(View.IdNo) : UpdateViewDisplay()
+                    Else
+                        Return MyBase.Save(viewControl)
+                    End If
+                    Return True
+                Catch ex As Exception
+                    Messaging.Show(ex.Message,System.Windows.Forms.MessageBoxButtons.OK,System.Windows.Forms.MessageBoxIcon.Error)
+                    Return False
+                End Try
+            End If
+            Return MyBase.Save(viewControl)
+        End Function
+
+        Protected Overrides Function DeleteRecordCore(idNo As Int32) As Integer
+            If TableBaseName = "GeneralJournal" AndAlso View.TransactionDate.HasValue AndAlso View.TransactionDate.Value.Date >= New Date(2026, 1, 1) Then
+                Return New AATM.Accounts.ServiceLayer.GeneralJournalTransactionService().DeleteExisting(idNo)
+            End If
+            Return MyBase.DeleteRecordCore(idNo)
+        End Function
+
         Private Sub OnSuccessfulDelete(ByVal idNo As Int32) Handles MyBase.SuccessfulDelete
             If View.JournalItems IsNot Nothing And View.JournalItems.Count() > 0 Then
                 DtUpdateTable.Clear()

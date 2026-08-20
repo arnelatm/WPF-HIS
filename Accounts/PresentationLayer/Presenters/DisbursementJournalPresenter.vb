@@ -237,6 +237,78 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
+        Public Overrides Function Save(ByRef viewControl As System.Windows.Forms.Control) As Boolean
+            If TableName = "PcJournal" AndAlso AddMode AndAlso View.TransactionDate.HasValue AndAlso View.TransactionDate.Value.Date >= New Date(2026, 1, 1) Then
+                Try
+                    OnBeforeSave()
+                    Dim model As New DisbursementJournalModel()
+                    GlobalVariables.Mapper.Map(View, model)
+                    Dim idNo = New AATM.Accounts.ServiceLayer.PettyCashJournalTransactionService().SaveNew(model)
+                    If idNo <= 0 Then Return False
+                    View.IdNo=idNo : AddMode=False : EditMode=False
+                    UpdateViewData(idNo) : UpdateViewDisplay()
+                    Return True
+                Catch ex As Exception
+                    Messaging.Show(ex.Message,System.Windows.Forms.MessageBoxButtons.OK,System.Windows.Forms.MessageBoxIcon.Error)
+                    Return False
+                End Try
+            End If
+            If TableName = "PcJournal" AndAlso EditMode AndAlso View.TransactionDate.HasValue AndAlso View.TransactionDate.Value.Date >= New Date(2026, 1, 1) Then
+                Try
+                    OnBeforeSave()
+                    Dim model As New DisbursementJournalModel()
+                    GlobalVariables.Mapper.Map(View, model)
+                    Dim transactionService As New AATM.Accounts.ServiceLayer.PettyCashJournalTransactionService()
+                    transactionService.UpdateExisting(model)
+                    UpdateViewData(View.IdNo) : UpdateViewDisplay()
+                    Return True
+                Catch ex As Exception
+                    Messaging.Show(ex.Message,System.Windows.Forms.MessageBoxButtons.OK,System.Windows.Forms.MessageBoxIcon.Error)
+                    Return False
+                End Try
+            End If
+            If TableName = "CdJournal" AndAlso AddMode AndAlso View.TransactionDate.HasValue AndAlso View.TransactionDate.Value.Date >= New Date(2026, 1, 1) Then
+                Try
+                    OnBeforeSave()
+                    Dim model As New DisbursementJournalModel()
+                    GlobalVariables.Mapper.Map(View, model)
+                    Dim idNo = New AATM.Accounts.ServiceLayer.CashDisbursementJournalTransactionService().SaveNew(model)
+                    If idNo <= 0 Then Return False
+                    View.IdNo=idNo : AddMode=False : EditMode=False
+                    UpdateViewData(idNo) : UpdateViewDisplay()
+                    Return True
+                Catch ex As Exception
+                    Messaging.Show(ex.Message,System.Windows.Forms.MessageBoxButtons.OK,System.Windows.Forms.MessageBoxIcon.Error)
+                    Return False
+                End Try
+            End If
+            If TableName = "CdJournal" AndAlso EditMode AndAlso View.TransactionDate.HasValue AndAlso View.TransactionDate.Value.Date >= New Date(2026, 1, 1) Then
+                Try
+                    OnBeforeSave()
+                    Dim model As New DisbursementJournalModel()
+                    GlobalVariables.Mapper.Map(View, model)
+                    Dim transactionService As New AATM.Accounts.ServiceLayer.CashDisbursementJournalTransactionService()
+                    transactionService.UpdateExisting(model)
+                    UpdateViewData(View.IdNo) : UpdateViewDisplay()
+                    Return True
+                Catch ex As Exception
+                    Messaging.Show(ex.Message,System.Windows.Forms.MessageBoxButtons.OK,System.Windows.Forms.MessageBoxIcon.Error)
+                    Return False
+                End Try
+            End If
+            Return MyBase.Save(viewControl)
+        End Function
+
+        Protected Overrides Function DeleteRecordCore(idNo As Int32) As Integer
+            If TableName = "PcJournal" AndAlso View.TransactionDate.HasValue AndAlso View.TransactionDate.Value.Date >= New Date(2026, 1, 1) Then
+                Return New AATM.Accounts.ServiceLayer.PettyCashJournalTransactionService().DeleteExisting(idNo)
+            End If
+            If TableName = "CdJournal" AndAlso View.TransactionDate.HasValue AndAlso View.TransactionDate.Value.Date >= New Date(2026, 1, 1) Then
+                Return New AATM.Accounts.ServiceLayer.CashDisbursementJournalTransactionService().DeleteExisting(idNo)
+            End If
+            Return MyBase.DeleteRecordCore(idNo)
+        End Function
+
         'Private Sub OnBeforeEdit() Handles MyBase.BeforeEdit
         '    Dim type As Type = View.GetType
         '    Dim cPcClosed = CallByName(View, "PcClosed", CallType.Get)
@@ -556,6 +628,7 @@ Namespace PresentationLayer.Presenters
 
 
         Private Sub OnSuccessfulDelete(ByVal idNo As Int32) Handles MyBase.SuccessfulDelete
+            If TableName = "CdJournal" AndAlso View.TransactionDate.HasValue AndAlso View.TransactionDate.Value.Date >= New Date(2026, 1, 1) Then Return
             ' ReSharper disable once VBUseMethodAny.1
             If View.DjOiItems IsNot Nothing And View.DjOiItems.Count() > 0 Then
                 DtOiUpdateTable.Clear()

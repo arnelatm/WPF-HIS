@@ -333,6 +333,38 @@ Namespace PresentationLayer.Presenters
             End With
         End Sub
 
+        Public Overrides Function Save(ByRef viewControl As System.Windows.Forms.Control) As Boolean
+            If AddMode AndAlso View.TransactionDate.HasValue AndAlso View.TransactionDate.Value.Date >= New Date(2026, 1, 1) Then
+                Try
+                    OnBeforeSave()
+                    Dim model As New SalesJournalModel()
+                    GlobalVariables.Mapper.Map(View, model)
+                    Dim idNo = New AATM.Accounts.ServiceLayer.SalesJournalTransactionService().SaveNew(model)
+                    If idNo <= 0 Then Return False
+                    View.IdNo=idNo : AddMode=False : EditMode=False : UpdateViewData(idNo) : UpdateViewDisplay() : Return True
+                Catch ex As Exception
+                    Messaging.Show(ex.Message,System.Windows.Forms.MessageBoxButtons.OK,System.Windows.Forms.MessageBoxIcon.Error) : Return False
+                End Try
+            End If
+            If EditMode AndAlso View.TransactionDate.HasValue AndAlso View.TransactionDate.Value.Date >= New Date(2026, 1, 1) Then
+                Try
+                    OnBeforeSave()
+                    Dim model As New SalesJournalModel()
+                    GlobalVariables.Mapper.Map(View, model)
+                    Dim svc As New AATM.Accounts.ServiceLayer.SalesJournalTransactionService()
+                    svc.UpdateExisting(model) : UpdateViewData(View.IdNo) : UpdateViewDisplay() : Return True
+                Catch ex As Exception
+                    Messaging.Show(ex.Message,System.Windows.Forms.MessageBoxButtons.OK,System.Windows.Forms.MessageBoxIcon.Error) : Return False
+                End Try
+            End If
+            Return MyBase.Save(viewControl)
+        End Function
+
+        Protected Overrides Function DeleteRecordCore(idNo As Int32) As Integer
+            If View.TransactionDate.HasValue AndAlso View.TransactionDate.Value.Date >= New Date(2026, 1, 1) Then Return New AATM.Accounts.ServiceLayer.SalesJournalTransactionService().DeleteExisting(idNo)
+            Return MyBase.DeleteRecordCore(idNo)
+        End Function
+
         Public Overrides Function IsOkToEditRecord() As Boolean
             If Not MyBase.IsOkToEditRecord() Then
                 Return False
