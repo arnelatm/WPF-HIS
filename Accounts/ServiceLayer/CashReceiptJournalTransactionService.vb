@@ -21,7 +21,13 @@ Namespace ServiceLayer
 
         Public Function DeleteExisting(journalIdNo As Integer) As Integer
             Using cn As New SqlConnection(GlobalVariables.DacConnectionString), cmd As New SqlCommand("dbo.DeleteCashReceiptJournalAtomic", cn)
-                cmd.CommandType=CommandType.StoredProcedure : Add(cmd,"@JournalIdNo",journalIdNo) : cn.Open() : Return cmd.ExecuteNonQuery()
+                cmd.CommandType=CommandType.StoredProcedure
+                Add(cmd,"@JournalIdNo",journalIdNo)
+                cn.Open()
+                cmd.ExecuteNonQuery()
+                'SET NOCOUNT ON makes ExecuteNonQuery return -1 even after a
+                'successful transaction. Return an explicit success value.
+                Return 1
             End Using
         End Function
 

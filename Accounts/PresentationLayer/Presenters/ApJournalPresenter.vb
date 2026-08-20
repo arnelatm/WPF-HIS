@@ -342,6 +342,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub OnSuccessfulDelete(ByVal idNo As Int32) Handles MyBase.SuccessfulDelete
+            If View.TransactionDate.HasValue AndAlso View.TransactionDate.Value.Date >= New Date(2026, 1, 1) Then Return
             'The AP header is deleted by the base presenter first.  Remove its
             'open-invoice rows by JournalIdNo before removing the detail rows;
             'otherwise ApOpenInvoice records become orphaned.

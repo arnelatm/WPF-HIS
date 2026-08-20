@@ -1,4 +1,4 @@
-CREATE OR ALTER PROCEDURE dbo.SaveCashReceiptJournalAtomic
+CREATE PROCEDURE dbo.SaveCashReceiptJournalAtomic
     @TransactionDate date, @ReferenceNo varchar(15)=NULL, @Amount money,
     @AccountIdNo smallint, @PayorType char(1)=NULL, @PayorIdNo int=NULL,
     @PayorName nvarchar(50)=NULL, @CheckNumber varchar(10)=NULL, @CheckDate date=NULL,

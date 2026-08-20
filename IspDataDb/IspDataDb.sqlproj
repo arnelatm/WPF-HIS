@@ -194,6 +194,9 @@
     <Build Include="dbo\Stored Procedures\UpdateGroupAccessTVP.sql" />
     <Build Include="dbo\Stored Procedures\UpdateGeneralJournalItemTVP.sql" />
     <Build Include="dbo\Stored Procedures\UpdateSalesJournalItemTVP.sql" />
+    <Build Include="dbo\Stored Procedures\SaveCashReceiptJournalAtomic.sql" />
+    <Build Include="dbo\Stored Procedures\UpdateCashReceiptJournalAtomic.sql" />
+    <Build Include="dbo\Stored Procedures\DeleteCashReceiptJournalAtomic.sql" />
     <Build Include="dbo\Stored Procedures\InsertSalesDepositTVP.sql" />
     <Build Include="dbo\Stored Procedures\UpdateSalesDepositTVP.sql" />
     <Build Include="dbo\Stored Procedures\InsertReconciledTVP.sql" />

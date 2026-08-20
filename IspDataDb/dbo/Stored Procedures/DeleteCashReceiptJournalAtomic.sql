@@ -1,4 +1,4 @@
-CREATE OR ALTER PROCEDURE dbo.DeleteCashReceiptJournalAtomic @JournalIdNo int
+CREATE PROCEDURE dbo.DeleteCashReceiptJournalAtomic @JournalIdNo int
 AS BEGIN SET NOCOUNT ON; SET XACT_ABORT ON;
  -- Deletion is idempotent: the UI may retry after a successful delete while
  -- its current record is still displayed.  Treat an already-removed row as

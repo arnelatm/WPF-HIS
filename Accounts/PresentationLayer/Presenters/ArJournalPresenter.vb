@@ -333,6 +333,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub OnSuccessfulDelete(ByVal idNo As Int32) Handles MyBase.SuccessfulDelete
+            If View.TransactionDate.HasValue AndAlso View.TransactionDate.Value.Date >= New Date(2026, 1, 1) Then Return
             'The AR header is deleted by the base presenter first. Remove the
             'related open-invoice markers by JournalIdNo to prevent orphans.
             Service.DeleteRecords(Of Int32)(idNo, "ArOpenInvoice", "JournalIdNo")

@@ -1,4 +1,4 @@
-CREATE OR ALTER PROCEDURE dbo.UpdateCashReceiptJournalAtomic
+CREATE PROCEDURE dbo.UpdateCashReceiptJournalAtomic
  @JournalIdNo int,@TransactionDate date,@ReferenceNo varchar(15)=NULL,@Amount money,@AccountIdNo smallint,@PayorType char(1)=NULL,@PayorIdNo int=NULL,@PayorName nvarchar(50)=NULL,@CheckNumber varchar(10)=NULL,@CheckDate date=NULL,@ORNumber varchar(15)=NULL,@DiscountTaken money=NULL,@DiscountAccountIdNo smallint=NULL,@Applied money=NULL,@UnApplied money=NULL,@VatAmount money=NULL,@VatNumber varchar(15)=NULL,@Notes nvarchar(300)=NULL,@Posted bit=0,@Approved bit=0,@Cancelled bit=0,@Items dbo.JournalItemInsert READONLY,@OiItems dbo.CsrOiItemInsert READONLY
 AS BEGIN SET NOCOUNT ON; SET XACT_ABORT ON;
  IF NOT EXISTS(SELECT 1 FROM dbo.CashReceiptJournal WHERE IdNo=@JournalIdNo) THROW 51120,'Cash receipt was not found.',1;

@@ -945,6 +945,12 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub OnSuccessfulDelete(idNo As Int32) Handles MyBase.SuccessfulDelete
+            'Atomic 2026+ deletes already remove the header, journal details,
+            'and CsrOiItem rows in SQL. Do not run the legacy child TVP cleanup
+            'again, or it reports a false deletion failure.
+            If View.TransactionDate.HasValue AndAlso View.TransactionDate.Value.Date >= New Date(2026, 1, 1) Then
+                Return
+            End If
             ' ReSharper disable once VBUseMethodAny.1
             If View.CsrOiItems IsNot Nothing And View.CsrOiItems.Count() > 0 Then
                 DtOiUpdateTable.Clear()

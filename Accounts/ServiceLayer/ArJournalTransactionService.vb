@@ -19,7 +19,11 @@ Namespace ServiceLayer
 
         Public Function DeleteExisting(idNo As Integer) As Integer
             Using cn As New SqlConnection(GlobalVariables.DacConnectionString), cmd As New SqlCommand("dbo.DeleteArJournalAtomic",cn)
-                cmd.CommandType=CommandType.StoredProcedure: Add(cmd,"@JournalIdNo",idNo): cn.Open(): Return cmd.ExecuteNonQuery()
+                cmd.CommandType=CommandType.StoredProcedure
+                Add(cmd,"@JournalIdNo",idNo)
+                cn.Open()
+                cmd.ExecuteNonQuery()
+                Return 1
             End Using
         End Function
 

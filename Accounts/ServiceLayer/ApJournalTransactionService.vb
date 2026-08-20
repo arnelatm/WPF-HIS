@@ -95,7 +95,10 @@ Namespace ServiceLayer
                     command.CommandType = CommandType.StoredProcedure
                     AddParameter(command, "@JournalIdNo", journalIdNo)
                     connection.Open()
-                    Return command.ExecuteNonQuery()
+                    command.ExecuteNonQuery()
+                    'Atomic procedures use SET NOCOUNT ON; a successful
+                    'ExecuteNonQuery may therefore return -1.
+                    Return 1
                 End Using
             End Using
         End Function
