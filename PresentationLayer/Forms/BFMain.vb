@@ -1655,11 +1655,11 @@ Public Class BfMain
 
     Public Sub ForceLooseFocusOnCurrentControl()
         Dim currentActiveControl As Control = ActiveControl
-        If currentActiveControl IsNot Nothing Then
+        If currentActiveControl IsNot Nothing AndAlso currentActiveControl.Visible AndAlso currentActiveControl.Enabled Then
             SelectNextControl(currentActiveControl, True, True, True, True)
         End If
         Refresh()
-        If currentActiveControl IsNot Nothing Then
+        If currentActiveControl IsNot Nothing AndAlso currentActiveControl.Visible AndAlso currentActiveControl.Enabled AndAlso currentActiveControl.CanFocus Then
             ActiveControl = currentActiveControl
         End If
     End Sub

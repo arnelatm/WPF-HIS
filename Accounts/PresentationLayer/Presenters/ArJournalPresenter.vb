@@ -60,6 +60,49 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
+        Public Overrides Function Save(ByRef viewControl As System.Windows.Forms.Control) As Boolean
+            If AddMode AndAlso View.TransactionDate.HasValue AndAlso View.TransactionDate.Value.Date >= New Date(2026, 1, 1) Then
+                Try
+                    Dim model As New ArJournalModel()
+                    GlobalVariables.Mapper.Map(View, model)
+                    Dim idNo = New AATM.Accounts.ServiceLayer.ArJournalTransactionService().SaveNew(model)
+                    If idNo <= 0 Then Return False
+                    View.IdNo = idNo
+                    AddMode = False
+                    EditMode = False
+                    UpdateViewData(idNo)
+                    UpdateViewDisplay()
+                    Return True
+                Catch ex As Exception
+                    Messaging.Show(ex.Message, System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error)
+                    Return False
+                End Try
+            End If
+            If EditMode AndAlso View.TransactionDate.HasValue AndAlso View.TransactionDate.Value.Date >= New Date(2026, 1, 1) Then
+                Try
+                    Dim model As New ArJournalModel()
+                    GlobalVariables.Mapper.Map(View, model)
+                    Dim transactionService As New AATM.Accounts.ServiceLayer.ArJournalTransactionService()
+                    transactionService.UpdateExisting(model)
+                    UpdateViewData(View.IdNo)
+                    UpdateViewDisplay()
+                    Return True
+                Catch ex As Exception
+                    Messaging.Show(ex.Message, System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error)
+                    Return False
+                End Try
+            End If
+            Return MyBase.Save(viewControl)
+        End Function
+
+        Protected Overrides Function DeleteRecordCore(idNo As Int32) As Integer
+            If View.TransactionDate.HasValue AndAlso View.TransactionDate.Value.Date >= New Date(2026, 1, 1) Then
+                Dim transactionService As New AATM.Accounts.ServiceLayer.ArJournalTransactionService()
+                Return transactionService.DeleteExisting(idNo)
+            End If
+            Return MyBase.DeleteRecordCore(idNo)
+        End Function
+
         Private Sub FillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
             workRow("JournalIdNo") = View.IdNo
             workRow("AccountIdNo") = itemDataView.AccountIdNo
@@ -290,6 +333,9 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub OnSuccessfulDelete(ByVal idNo As Int32) Handles MyBase.SuccessfulDelete
+            'The AR header is deleted by the base presenter first. Remove the
+            'related open-invoice markers by JournalIdNo to prevent orphans.
+            Service.DeleteRecords(Of Int32)(idNo, "ArOpenInvoice", "JournalIdNo")
             ' ReSharper disable once VBUseMethodAny.1
             If View.JournalItems IsNot Nothing And View.JournalItems.Count() > 0 Then
                 DtUpdateTable.Clear()
@@ -380,6 +426,8 @@ Namespace PresentationLayer.Presenters
             Dim retValue As Boolean = True
             If MyBase.IsOkToDeleteRecord Then
                 If ReconciledEntriesExist(View.JournalItems, "AR") Then
+                    retValue = False
+                ElseIf DependentRecordExist() Then
                     retValue = False
                 End If
             End If

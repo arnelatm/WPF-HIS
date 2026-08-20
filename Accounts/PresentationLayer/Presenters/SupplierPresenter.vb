@@ -34,7 +34,10 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Function GetSupplierBalance(idNo As Integer)
-            Return Service.GetFieldValue(Of Decimal)("Sum(Credit-Debit)", "ApStatement_View", "SupplierIdNo = " & idNo.ToString() & " and SpecialAccount = 'AP'")
+            'ApStatement_View is the source of truth for the supplier statement.
+            'It includes all entered (posted and unposted) AP statement rows and
+            'the applicable AP/AS/PD special-account classifications.
+            Return Service.GetFieldValue(Of Decimal)("COALESCE(Sum(Credit-Debit), 0)", "ApStatement_View", "SupplierIdNo = " & idNo.ToString())
         End Function
 
         Private Function FunctionOnSuccessfulUpdate() Handles MyBase.RecordUpdatedSuccessfully

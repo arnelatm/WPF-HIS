@@ -1042,19 +1042,77 @@ Namespace PresentationLayer.Presenters
 
         Private Sub MakePayorIdNoDataSource(payorType As String)
             Dim x As ReceiptTypeSelection = CodeToEnum(Of ReceiptTypeSelection)(payorType)
+            'Some combo configurations raise the event with the localized
+            'display text rather than the enum code.  Normalize that case so
+            'the AR customer lookup is still selected.
+            Dim payorTypeText = If(payorType, String.Empty)
+            If x = ReceiptTypeSelection.NotSpecified AndAlso
+               (String.Equals(payorTypeText, "A", StringComparison.OrdinalIgnoreCase) OrElse
+                payorTypeText.IndexOf("Accounts Receivable", StringComparison.OrdinalIgnoreCase) >= 0) Then
+                x = ReceiptTypeSelection.AccountsReceivable
+            End If
             Select Case x
                 Case ReceiptTypeSelection.AccountsReceivable
-                    MakeVarDataSources({New Object() {"Customer", "PayorDataSource", Nothing, Nothing}})
+                    'The customer list is already loaded by CreateDataSources.
+                    'Use it directly so changing Payor Type immediately binds
+                    'the Payor combo instead of starting a second lookup task.
+                    If View.CustomersByName IsNot Nothing Then
+                        View.PayorDataSource = View.CustomersByName
+                    Else
+                        'Fallback for forms opened before the initial lookup
+                        'task has completed.
+                        View.PayorDataSource = GetDtRecords("Customer", "IdNo, CustomerName As Name", Nothing, "CustomerName")
+                    End If
                 Case ReceiptTypeSelection.Employee
-                    MakeVarDataSources({New Object() {"Employee", "PayorDataSource", Nothing, Nothing}})
+                    View.PayorDataSource = View.EmployeesByName
                 Case ReceiptTypeSelection.Customer
-                    MakeVarDataSources({New Object() {"Customer", "PayorDataSource", Nothing, Nothing}})
+                    View.PayorDataSource = View.CustomersByName
                 Case ReceiptTypeSelection.SupplierRefund
-                    MakeVarDataSources({New Object() {"Supplier", "PayorDataSource", Nothing, Nothing}})
+                    View.PayorDataSource = View.SuppliersByName
                 Case Else
                     View.PayorDataSource = Nothing
             End Select
         End Sub
+
+        Public Overrides Function Save(ByRef viewControl As System.Windows.Forms.Control) As Boolean
+            If AddMode AndAlso View.TransactionDate.HasValue AndAlso View.TransactionDate.Value.Date >= New Date(2026, 1, 1) Then
+                Try
+                    OnBeforeSave()
+                    Dim model As New CashReceiptJournalModel()
+                    GlobalVariables.Mapper.Map(View, model)
+                    Dim idNo = New AATM.Accounts.ServiceLayer.CashReceiptJournalTransactionService().SaveNew(model)
+                    If idNo <= 0 Then Return False
+                    View.IdNo = idNo : AddMode = False : EditMode = False
+                    UpdateViewData(idNo) : UpdateViewDisplay()
+                    Return True
+                Catch ex As Exception
+                    Messaging.Show(ex.Message, System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error)
+                    Return False
+                End Try
+            End If
+            If EditMode AndAlso View.TransactionDate.HasValue AndAlso View.TransactionDate.Value.Date >= New Date(2026, 1, 1) Then
+                Try
+                    OnBeforeSave()
+                    Dim model As New CashReceiptJournalModel()
+                    GlobalVariables.Mapper.Map(View, model)
+                    Dim transactionService As New AATM.Accounts.ServiceLayer.CashReceiptJournalTransactionService()
+                    transactionService.UpdateExisting(model)
+                    UpdateViewData(View.IdNo) : UpdateViewDisplay()
+                    Return True
+                Catch ex As Exception
+                    Messaging.Show(ex.Message, System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error)
+                    Return False
+                End Try
+            End If
+            Return MyBase.Save(viewControl)
+        End Function
+
+        Protected Overrides Function DeleteRecordCore(idNo As Int32) As Integer
+            If View.TransactionDate.HasValue AndAlso View.TransactionDate.Value.Date >= New Date(2026, 1, 1) Then
+                Return New AATM.Accounts.ServiceLayer.CashReceiptJournalTransactionService().DeleteExisting(idNo)
+            End If
+            Return MyBase.DeleteRecordCore(idNo)
+        End Function
 
 
         'Public Function GetCustomerOpenInvoices(dView As List(Of CsrOiItemView)) As List(Of CsrOiItemView)

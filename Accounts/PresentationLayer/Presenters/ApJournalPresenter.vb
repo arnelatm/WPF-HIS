@@ -62,6 +62,52 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
+        'New AP journals from the 2026 enforcement boundary are persisted by one
+        'database transaction.  Existing edits and legacy dates retain the
+        'original path until their equivalent atomic update is migrated.
+        Public Overrides Function Save(ByRef viewControl As System.Windows.Forms.Control) As Boolean
+            If AddMode AndAlso View.TransactionDate.HasValue AndAlso View.TransactionDate.Value.Date >= New Date(2026, 1, 1) Then
+                Try
+                    Dim model As New ApJournalModel()
+                    GlobalVariables.Mapper.Map(View, model)
+                    Dim transactionService As New AATM.Accounts.ServiceLayer.ApJournalTransactionService()
+                    Dim journalId = transactionService.SaveNew(model)
+                    If journalId <= 0 Then Return False
+                    View.IdNo = journalId
+                    AddMode = False
+                    EditMode = False
+                    UpdateViewData(journalId)
+                    UpdateViewDisplay()
+                    Return True
+                Catch ex As Exception
+                    Messaging.Show(ex.Message, System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error)
+                    Return False
+                End Try
+            End If
+            If EditMode AndAlso View.TransactionDate.HasValue AndAlso View.TransactionDate.Value.Date >= New Date(2026, 1, 1) Then
+                Try
+                    Dim model As New ApJournalModel()
+                    GlobalVariables.Mapper.Map(View, model)
+                    Dim transactionService As New AATM.Accounts.ServiceLayer.ApJournalTransactionService()
+                    transactionService.UpdateExisting(model)
+                    UpdateViewData(View.IdNo)
+                    UpdateViewDisplay()
+                    Return True
+                Catch ex As Exception
+                    Messaging.Show(ex.Message, System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error)
+                    Return False
+                End Try
+            End If
+            Return MyBase.Save(viewControl)
+        End Function
+
+        Protected Overrides Function DeleteRecordCore(idNo As Int32) As Integer
+            If View.TransactionDate.HasValue AndAlso View.TransactionDate.Value.Date >= New Date(2026, 1, 1) Then
+                Return New AATM.Accounts.ServiceLayer.ApJournalTransactionService().DeleteExisting(idNo)
+            End If
+            Return MyBase.DeleteRecordCore(idNo)
+        End Function
+
         Private Sub FillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
             workRow("JournalIdNo") = View.IdNo
             workRow("AccountIdNo") = itemDataView.AccountIdNo
@@ -296,6 +342,10 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub OnSuccessfulDelete(ByVal idNo As Int32) Handles MyBase.SuccessfulDelete
+            'The AP header is deleted by the base presenter first.  Remove its
+            'open-invoice rows by JournalIdNo before removing the detail rows;
+            'otherwise ApOpenInvoice records become orphaned.
+            Service.DeleteRecords(Of Int32)(idNo, "ApOpenInvoice", "JournalIdNo")
             ' ReSharper disable once VBUseMethodAny.1
             If View.JournalItems IsNot Nothing And View.JournalItems.Count() > 0 Then
                 DtUpdateTable.Clear()
@@ -404,6 +454,8 @@ Namespace PresentationLayer.Presenters
             If MyBase.IsOkToDeleteRecord Then
                 If ReconciledEntriesExist(View.JournalItems, "AP") Then
                     retValue = False
+                ElseIf DependentRecordExist() Then
+                    retValue = False
                 End If
             End If
             Return retValue
@@ -414,7 +466,9 @@ Namespace PresentationLayer.Presenters
             For Each item In View.JournalItems
                 If IsAccountsPayableAccount(item.AccountIdNo) Then
                     Dim apOpenInvoiceNumber As Int32 = GetApOpenInvoiceNumber(item.IdNo)
-                    If CheckDependentRecords(Of Int32)(apOpenInvoiceNumber, "CdOiItem", "ApOpenInvoiceIdNo") Then
+                    If CheckDependentRecords(Of Int32)(apOpenInvoiceNumber, "CdOiItem", "ApOpenInvoiceIdNo") OrElse
+                       CheckDependentRecords(Of Int32)(apOpenInvoiceNumber, "CkOiItem", "ApOpenInvoiceIdNo") OrElse
+                       CheckDependentRecords(Of Int32)(apOpenInvoiceNumber, "PcOiItem", "ApOpenInvoiceIdNo") Then
                         Return True
                     End If
                 End If

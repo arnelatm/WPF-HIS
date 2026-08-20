@@ -431,7 +431,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
                 If TableBaseName Is Nothing Or TableBaseName = "" Then
                     TableBaseName = TableName
                 End If
-                retValue = Service.DeleteRecord(idNo, TableBaseName)
+                retValue = DeleteRecordCore(idNo)
                 If retValue >= 0 Then
                     If Ea IsNot Nothing Then
                         Ea.PublishEvent(New RecordDeleted(idNo))
@@ -456,6 +456,10 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         End Try
 
         Return retValue
+    End Function
+
+    Protected Overridable Function DeleteRecordCore(idNo As Int32) As Integer
+        Return Service.DeleteRecord(idNo, TableBaseName)
     End Function
 
     Public Overridable Sub Display(idNo As Int32)

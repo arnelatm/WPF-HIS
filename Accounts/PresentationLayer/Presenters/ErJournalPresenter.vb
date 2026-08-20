@@ -222,12 +222,27 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub OnSuccessfulDelete(ByVal idNo As Int32) Handles MyBase.SuccessfulDelete
+            'Remove any employee-receivable open-invoice marker tied to the
+            'journal before deleting its detail rows.
+            Service.DeleteRecords(Of Int32)(idNo, "ErOpenInvoice", "JournalIdNo")
             ' ReSharper disable once VBUseMethodAny.1
             If View.JournalItems IsNot Nothing And View.JournalItems.Count() > 0 Then
                 DtUpdateTable.Clear()
                 _erJournalItemService.DelUpdateTvp(DtUpdateTable, idNo)
             End If
         End Sub
+
+        Public Overrides Function IsOkToDeleteRecord() As Boolean
+            If Not MyBase.IsOkToDeleteRecord() Then Return False
+            If ReconciledEntriesExist(View.JournalItems, "ER") Then Return False
+
+            'Paid or discounted employee receivables must be reversed rather
+            'than deleted. Unpaid markers may be removed with the journal.
+            Dim settledAmount As Decimal = Service.GetFieldValue(Of Decimal)(
+                "Sum(PaidAmount + DiscountTaken)", "ErOpenInvoice",
+                "JournalIdNo = " & View.IdNo.ToString())
+            Return settledAmount = 0D
+        End Function
         Public Sub OnApJournaldgvItemsChangedEventHandler(ByRef eventType As DgvItemsChanged) Implements ISubscriber(Of DgvItemsChanged).OnEventHandler
             With eventType.BindingSource
                 If eventType.Row >= 0 And eventType.Row < eventType.BindingSource.Count() Then
