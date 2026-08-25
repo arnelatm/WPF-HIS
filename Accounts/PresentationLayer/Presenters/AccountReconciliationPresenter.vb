@@ -17,6 +17,8 @@ Namespace PresentationLayer.Presenters
     Public Class AccountReconciliationPresenter(Of TM As New)
         Inherits TransactionsPresenter(Of IAccountReconciliationView, TM)
 
+        Private Const ReconciliationTolerance As Decimal = 0.01D
+
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
         Private _progressDisplayForm As DisplayProgressForm
@@ -43,6 +45,8 @@ Namespace PresentationLayer.Presenters
             AddHandler view.ReconciliationAccountChangedEvent, AddressOf OnReconciliationAccountChangedEvent
             AddHandler view.ReconciliationClearEvent, AddressOf OnReconciliationClearEvent
             AddHandler view.ReconciliationPostingRequestEvent, AddressOf OnReconciliationPostingRequestEvent
+            AddHandler view.ReconciliationReviewCompletionRequestEvent, AddressOf OnReconciliationReviewCompletionRequestEvent
+            AddHandler view.ReconciliationReviewReopenRequestEvent, AddressOf OnReconciliationReviewReopenRequestEvent
             AddHandler view.ReconciliationRefreshRequestEvent, AddressOf OnReconciliationRefreshRequestEvent
             AddHandler view.EndingBankBalanceEntryChangedEvent, AddressOf OnEndingBankBalanceEntryChangedEvent
             AddHandler view.EndingReconciliationDateChangedEvent, AddressOf OnEndingReconciliationDateChangedEvent
@@ -53,6 +57,30 @@ Namespace PresentationLayer.Presenters
             'AddHandler _backgroundworker.ProgressChanged, AddressOf BackgroundWorker_ProgressChanged
             'AddHandler _backgroundworker.RunWorkerCompleted, AddressOf BackgroundWorker_RunWorkerCompleted
         End Sub
+
+        Public Overrides Function IsOkToEditRecord() As Boolean
+            If Not MyBase.IsOkToEditRecord() Then
+                Return False
+            End If
+            If Not String.IsNullOrWhiteSpace(View.Status) AndAlso
+               Not String.Equals(View.Status, "Draft", StringComparison.OrdinalIgnoreCase) Then
+                Messaging.Show(True, "MsgEditingOfReconciliationReviewNotAllowed")
+                Return False
+            End If
+            Return True
+        End Function
+
+        Public Overrides Function IsOkToDeleteRecord() As Boolean
+            If Not MyBase.IsOkToDeleteRecord() Then
+                Return False
+            End If
+            If Not String.IsNullOrWhiteSpace(View.Status) AndAlso
+               Not String.Equals(View.Status, "Draft", StringComparison.OrdinalIgnoreCase) Then
+                Messaging.Show(True, "MsgEditingOfReconciliationReviewNotAllowed")
+                Return False
+            End If
+            Return True
+        End Function
 
         Protected Overrides Sub CreateDataSources()
             CreateSpecialAccountDataSource("AccountIdNo", {EnumToCode(SpecialAccountSelection.Bank),
@@ -108,62 +136,53 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
-        Public Sub PostReconciliation(ByVal idNo As Int32, ByVal bsAccountReconciliationItems As BindingSource)
+        Protected Overrides Function DeleteRecordCore(idNo As Int32) As Integer
+            'Use one database transaction for the parent, detail rows, and
+            'reconciliation markers. The procedure also rejects posted rows,
+            'including calls that bypass this UI.
+            Return New AATM.Accounts.ServiceLayer.AccountReconciliationTransactionService().DeleteExisting(idNo)
+        End Function
+
+        Public Sub PostReconciliation(ByVal idNo As Int32)
             Try
                 If idNo <= 0 Then
-                    Throw New InvalidOperationException("Save the reconciliation before posting it.")
+                    Throw New InvalidOperationException(Messaging.GetMessage(True, "MsgSaveReconBeforeFinalize"))
                 End If
                 If View.Posted Then
-                    Throw New InvalidOperationException("This reconciliation has already been posted.")
+                    Throw New InvalidOperationException(Messaging.GetMessage(True, "MsgReconciliationAlreadyFinalized"))
                 End If
-
-                Using scope As New TransactionScope(TransactionScopeOption.Required, New TimeSpan(0, 1, 0))
-                    Dim dtInsertReconciledTable As New DataTable
-                    dtInsertReconciledTable.Columns.Add("JournalCode", GetType(String))
-                    dtInsertReconciledTable.Columns.Add("JournalItemIdNo", GetType(Int32))
-                    dtInsertReconciledTable.Columns.Add("ReconciliationIdNo", GetType(Int32))
-                    Dim reconciledKeys As New HashSet(Of String)(StringComparer.OrdinalIgnoreCase)
-                    For Each item As AccountReconciliationItemView In bsAccountReconciliationItems
-                        Dim workRow As DataRow
-                        If item.Cleared Then
-                            Dim journalCode = If(item.JournalCode, String.Empty).Trim()
-                            If journalCode = String.Empty OrElse item.JournalItemIdNo <= 0 Then
-                                Throw New InvalidOperationException("A cleared reconciliation item has an invalid journal reference.")
-                            End If
-                            Dim reconciledKey = journalCode & "|" & item.JournalItemIdNo.ToString(CultureInfo.InvariantCulture)
-                            If Not reconciledKeys.Add(reconciledKey) Then
-                                Throw New InvalidOperationException("The reconciliation contains a duplicate cleared transaction.")
-                            End If
-
-                            workRow = dtInsertReconciledTable.NewRow()
-                            workRow("JournalCode") = journalCode
-                            workRow("JournalItemIdNo") = item.JournalItemIdNo
-                            workRow("ReconciliationIdNo") = idNo
-                            dtInsertReconciledTable.Rows.Add(workRow)
-                        End If
-                    Next
-
-                    Dim insertedCount = SaveReconciliation(dtInsertReconciledTable, idNo)
-                    If insertedCount <> dtInsertReconciledTable.Rows.Count Then
-                        Throw New InvalidOperationException(
-                            $"Posting inserted {insertedCount} of {dtInsertReconciledTable.Rows.Count} reconciliation markers.")
-                    End If
-
-                    Dim posted = True
-                    Dim updatedCount = Service.UpdateRecordWithIdNo(Of Boolean)(idNo, "AccountReconciliation", "Posted", posted)
-                    If updatedCount <> 1 Then
-                        Throw New InvalidOperationException("The reconciliation could not be marked as posted.")
-                    End If
-                    scope.Complete()
-                End Using
-                Messaging.Show(True, "MsgRecordSuccessfullyPosted")
+                If Not String.Equals(View.Status, "ReviewCompleted", StringComparison.OrdinalIgnoreCase) Then
+                    Throw New InvalidOperationException(Messaging.GetMessage(True, "MsgCompleteReconciliationReviewBeforeFinalize"))
+                End If
+                Call New AATM.Accounts.ServiceLayer.AccountReconciliationTransactionService().FinalizeExisting(idNo, GlobalVariables.UserName)
+                Messaging.Show(True, "MsgReconciliationSuccessfullyFinalized")
                 View.Posted = True
+                View.Status = "Finalized"
+                View.FinalizedBy = GlobalVariables.UserName
+                View.FinalizedAt = DateTime.Now
             Catch ex As TransactionAbortedException
-                System.Windows.Forms.MessageBox.Show(ex.Message, "Posting Transaction Aborted", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                System.Windows.Forms.MessageBox.Show(ex.Message, Messaging.TranslateCaption("Posting Transaction Aborted"), MessageBoxButtons.OK, MessageBoxIcon.Error)
             Catch oEx As Exception
-                System.Windows.Forms.MessageBox.Show(oEx.Message, "Reconciliation Posting Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                System.Windows.Forms.MessageBox.Show(oEx.Message, Messaging.TranslateCaption("Reconciliation Posting Error"), MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
 
+        End Sub
+
+        Private Sub CompleteReconciliationReview(idNo As Int32)
+            If idNo <= 0 Then Throw New InvalidOperationException(Messaging.GetMessage(True, "MsgSaveReconBeforeReview"))
+            If View.Posted Then Throw New InvalidOperationException(Messaging.GetMessage(True, "MsgFinalizedReconciliationCannotBeReviewed"))
+            Call New AATM.Accounts.ServiceLayer.AccountReconciliationTransactionService().CompleteReview(idNo, GlobalVariables.UserName)
+            View.Status = "ReviewCompleted"
+            View.ReviewedBy = GlobalVariables.UserName
+            View.ReviewedAt = DateTime.Now
+        End Sub
+
+        Private Sub ReopenReconciliationReview(idNo As Int32)
+            If idNo <= 0 Then Throw New InvalidOperationException(Messaging.GetMessage(True, "MsgSaveReconBeforeReopenReview"))
+            Call New AATM.Accounts.ServiceLayer.AccountReconciliationTransactionService().ReopenReview(idNo)
+            View.Status = "Draft"
+            View.ReviewedBy = Nothing
+            View.ReviewedAt = Nothing
         End Sub
 
         Public Overloads Function SaveReconciliation(ByRef dtInsert As DataTable, ByVal accountReconciliationIdNo As Int32)
@@ -444,25 +463,66 @@ Namespace PresentationLayer.Presenters
 
         Private Sub OnReconciliationPostingRequestEvent(sender As Object, bsAccountReconciliationItem As BindingSource)
             If AddMode OrElse EditMode OrElse View.IdNo <= 0 Then
-                Messaging.Show(False, "MsgSaveReconFirstBeforePosting")
+                Messaging.Show(True, "MsgSaveReconBeforeFinalize")
                 Return
             End If
             If View.Posted Then
-                Messaging.Show(False, "MsgReconciliationAlreadyPosted")
+                Messaging.Show(True, "MsgReconciliationAlreadyFinalized")
                 Return
             End If
-            If View.UnreconciledDifference = 0 Then
+            If Not String.Equals(View.Status, "ReviewCompleted", StringComparison.OrdinalIgnoreCase) Then
+                Messaging.Show(True, "MsgCompleteReconciliationReviewBeforeFinalize")
+                Return
+            End If
+            If Math.Abs(View.UnreconciledDifference) <= ReconciliationTolerance Then
                 Dim caption = Messaging.TranslateCaption("Please confirm.")
-                Dim action As String = Messaging.TranslateCaption("post")
+                Dim action As String = Messaging.TranslateCaption("finalize")
                 Dim itemName As String = Messaging.TranslateCaption("account reconciliation transaction")
                 Dim msg = Messaging.GetParametrizedMessage(True, "AskIfContinueAction", {"action", action, "itemName", itemName})
                 If Messaging.Show(msg, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-                    PostReconciliation(View.IdNo, bsAccountReconciliationItem)
+                    PostReconciliation(View.IdNo)
                 End If
             Else
-                'Dim err = Messaging.GetMessage(True, "MsgCannotPostUnreconciledEntry", "Sorry you can't post an un-reconciled entry!", "")
-                Messaging.Show(False, "MsgCannotPostUnreconciledEntry")
+                Messaging.Show(True, "MsgCannotPostUnreconciledEntry")
             End If
+        End Sub
+
+        Private Sub OnReconciliationReviewCompletionRequestEvent(sender As Object)
+            If AddMode OrElse EditMode OrElse View.IdNo <= 0 Then
+                Messaging.Show(True, "MsgSaveReconBeforeReview")
+                Return
+            End If
+            If View.Posted Then
+                Messaging.Show(True, "MsgReconciliationAlreadyFinalized")
+                Return
+            End If
+            If Math.Abs(View.UnreconciledDifference) > ReconciliationTolerance Then
+                Messaging.Show(True, "MsgCannotPostUnreconciledEntry")
+                Return
+            End If
+            Try
+                CompleteReconciliationReview(View.IdNo)
+                Messaging.Show(True, "MsgReconciliationReviewCompleted")
+            Catch ex As Exception
+                System.Windows.Forms.MessageBox.Show(ex.Message, Messaging.TranslateCaption("Reconciliation Review Error"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End Sub
+
+        Private Sub OnReconciliationReviewReopenRequestEvent(sender As Object)
+            If AddMode OrElse EditMode OrElse View.IdNo <= 0 Then
+                Messaging.Show(True, "MsgSaveReconBeforeReopenReview")
+                Return
+            End If
+            If View.Posted Then
+                Messaging.Show(True, "MsgReconciliationAlreadyFinalized")
+                Return
+            End If
+            Try
+                ReopenReconciliationReview(View.IdNo)
+                Messaging.Show(True, "MsgReconciliationReviewReopened")
+            Catch ex As Exception
+                System.Windows.Forms.MessageBox.Show(ex.Message, Messaging.TranslateCaption("Reconciliation Review Error"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
         End Sub
 
         Public Sub OnEndingBankBalanceEntryChangedEvent()

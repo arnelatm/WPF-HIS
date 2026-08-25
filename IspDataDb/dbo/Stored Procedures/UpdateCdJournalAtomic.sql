@@ -4,6 +4,9 @@ AS BEGIN SET NOCOUNT ON; SET XACT_ABORT ON;
  IF NOT EXISTS(SELECT 1 FROM dbo.CdJournal WHERE IdNo=@JournalIdNo) THROW 51220,'Cash disbursement was not found.',1;
  IF EXISTS(SELECT 1 FROM dbo.CdJournal WHERE IdNo=@JournalIdNo AND (Posted=1 OR PcClosed=1)) THROW 51221,'Posted or closed cash disbursements cannot be edited.',1;
  IF EXISTS(SELECT 1 FROM dbo.CdJournalItem i JOIN dbo.Reconciled r ON r.JournalCode='CD' AND r.JournalItemIdNo=i.IdNo WHERE i.JournalIdNo=@JournalIdNo) THROW 51222,'Reconciled cash disbursements cannot be edited.',1;
+ EXEC dbo.AssertJournalNotReconciliationLocked @JournalCode='CD', @JournalIdNo=@JournalIdNo;
+ IF @TransactionDate>='20260101' AND EXISTS(SELECT 1 FROM @Items WHERE Debit<0 OR Credit<0 OR (Debit<>0 AND Credit<>0)) THROW 51224,'Cash disbursement detail lines contain invalid debit/credit values.',1;
+ IF @TransactionDate>='20260101' AND EXISTS(SELECT 1 FROM @Items WHERE AccountIdNo=0 AND (Debit<>0 OR Credit<>0)) THROW 51225,'Cash disbursement detail lines require an account.',1;
  IF @TransactionDate>='20260101' AND (NOT EXISTS(SELECT 1 FROM @Items) OR ABS((SELECT COALESCE(SUM(Debit),0) FROM @Items)-(SELECT COALESCE(SUM(Credit),0) FROM @Items))>.01) THROW 51223,'Cash disbursement details are not balanced.',1;
  BEGIN TRAN; BEGIN TRY
   DELETE FROM dbo.CdOiItem WHERE DjIdNo=@JournalIdNo; DELETE FROM dbo.CdJournalItem WHERE JournalIdNo=@JournalIdNo;

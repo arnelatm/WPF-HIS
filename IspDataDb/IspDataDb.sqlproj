@@ -62,6 +62,7 @@
     <Folder Include="Properties" />
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
+    <Folder Include="dbo\Triggers\" />
     <Folder Include="dbo\Views\" />
     <Folder Include="Security\" />
     <Folder Include="dbo\Functions\" />
@@ -99,6 +100,8 @@
     <Build Include="dbo\Tables\Religion.sql" />
     <Build Include="dbo\Tables\Series.sql" />
     <Build Include="dbo\Tables\ApOpenInvoice.sql" />
+    <Build Include="dbo\Triggers\ApOpenInvoice_DeleteGuard.sql" />
+    <Build Include="dbo\Triggers\ArOpenInvoice_DeleteGuard.sql" />
     <Build Include="dbo\Tables\CashReceiptJournalItem.sql" />
     <Build Include="dbo\Tables\xxxLoginxxx.sql" />
     <Build Include="dbo\Tables\Account.sql" />
@@ -166,6 +169,7 @@
     <Build Include="dbo\Views\GroupAccess_View.sql" />
     <Build Include="dbo\Views\SalesJournalItem_View.sql" />
     <Build Include="dbo\Views\CsrOiItem_View.sql" />
+    <Build Include="dbo\Views\CsrOiItemCustomer_View.sql" />
     <Build Include="Security\Arnel.sql" />
     <Build Include="dbo\Functions\arabic_convert_single.sql" />
     <Build Include="dbo\Functions\convert_handreds.sql" />
@@ -197,6 +201,13 @@
     <Build Include="dbo\Stored Procedures\SaveCashReceiptJournalAtomic.sql" />
     <Build Include="dbo\Stored Procedures\UpdateCashReceiptJournalAtomic.sql" />
     <Build Include="dbo\Stored Procedures\DeleteCashReceiptJournalAtomic.sql" />
+    <Build Include="dbo\Stored Procedures\AssertJournalNotReconciliationLocked.sql" />
+    <Build Include="dbo\Stored Procedures\SaveApJournalAtomic.sql" />
+    <Build Include="dbo\Stored Procedures\UpdateApJournalAtomic.sql" />
+    <Build Include="dbo\Stored Procedures\DeleteApJournalAtomic.sql" />
+    <Build Include="dbo\Stored Procedures\SaveArJournalAtomic.sql" />
+    <Build Include="dbo\Stored Procedures\UpdateArJournalAtomic.sql" />
+    <Build Include="dbo\Stored Procedures\DeleteArJournalAtomic.sql" />
     <Build Include="dbo\Stored Procedures\SaveCdJournalAtomic.sql" />
     <Build Include="dbo\Stored Procedures\UpdateCdJournalAtomic.sql" />
     <Build Include="dbo\Stored Procedures\DeleteCdJournalAtomic.sql" />
@@ -215,6 +226,13 @@
     <Build Include="dbo\Stored Procedures\InsertSalesDepositTVP.sql" />
     <Build Include="dbo\Stored Procedures\UpdateSalesDepositTVP.sql" />
     <Build Include="dbo\Stored Procedures\InsertReconciledTVP.sql" />
+    <Build Include="dbo\Stored Procedures\DeleteAccountReconciliationAtomic.sql" />
+    <Build Include="dbo\Stored Procedures\CompleteAccountReconciliationReview.sql" />
+    <Build Include="dbo\Stored Procedures\ReopenAccountReconciliationReview.sql" />
+    <Build Include="dbo\Stored Procedures\FinalizeAccountReconciliation.sql" />
+    <Build Include="dbo\Stored Procedures\ValidateAccountReconciliation.sql" />
+    <Build Include="dbo\Stored Procedures\PreviewMonthlyJournalPosting.sql" />
+    <Build Include="dbo\Stored Procedures\PostMonthlyJournalEntries.sql" />
     <Build Include="dbo\User Defined Types\CkdOiItemInsert.sql" />
     <Build Include="dbo\User Defined Types\CkdOiItemUpdate.sql" />
     <Build Include="dbo\User Defined Types\CsrOiItemInsert.sql" />
@@ -683,8 +701,13 @@
     <Build Include="dbo\Tables\UserAccess.sql" />
     <Build Include="dbo\Tables\FiscalYearJournalPostingRun.sql" />
     <Build Include="dbo\Tables\FiscalYearJournalPostingChange.sql" />
+    <Build Include="dbo\Tables\MonthlyClosePeriod.sql" />
+    <Build Include="dbo\Tables\MonthlyCloseChecklist.sql" />
     <Build Include="dbo\Stored Procedures\PostFiscalYearJournalEntries.sql" />
     <Build Include="dbo\Stored Procedures\PreviewFiscalYearClose.sql" />
+    <Build Include="dbo\Stored Procedures\InitializeMonthlyCloseChecklist.sql" />
+    <Build Include="dbo\Stored Procedures\SetMonthlyCloseChecklistItem.sql" />
+    <Build Include="dbo\Stored Procedures\ApproveMonthlyClose.sql" />
     <Build Include="dbo\User Defined Types\PayrollDetailInsert.sql" />
     <Build Include="dbo\User Defined Types\PayrollDetailUpdate.sql" />
     <Build Include="dbo\User Defined Types\UserAccessInsert.sql" />

@@ -1,4 +1,4 @@
-CREATE OR ALTER PROCEDURE dbo.SaveApJournalAtomic
+CREATE PROCEDURE dbo.SaveApJournalAtomic
     @SupplierIdNo int,
     @TransactionDate date,
     @ReferenceNo varchar(15) = NULL,
@@ -77,29 +77,31 @@ BEGIN
             SET VatNumber = @VatNumber
             WHERE IdNo = @SupplierIdNo AND (VatNumber IS NULL OR VatNumber = '');
 
-        -- Generate the GL reference inside the same transaction so a failed
-        -- AP save cannot consume a series number or leave a blank reference.
-        DECLARE @seriesName varchar(20) = 'GL' + CONVERT(varchar(4), YEAR(@TransactionDate)) +
-                                          RIGHT('0' + CONVERT(varchar(2), MONTH(@TransactionDate)), 2);
-        DECLARE @prefix varchar(10), @maxLength int, @seriesValue int;
-        SELECT @seriesValue = Value, @prefix = Prefix, @maxLength = MaxLength
-        FROM dbo.Series WITH (UPDLOCK, HOLDLOCK)
-        WHERE SeriesName = @seriesName;
-
-        IF @prefix IS NULL
+        -- Generate a GL reference only when the user did not supply one.
+        IF NULLIF(LTRIM(RTRIM(@ReferenceNo)), '') IS NULL
         BEGIN
-            SET @prefix = RIGHT('0' + CONVERT(varchar(2), MONTH(@TransactionDate)), 2) + '-';
-            SET @maxLength = 3;
-            SET @seriesValue = 0;
-            INSERT dbo.Series (SeriesName, Value, MaxLength, Prefix, Description)
-            VALUES (@seriesName, 0, @maxLength, @prefix, 'GL Series for ' + @seriesName);
-        END;
+            DECLARE @seriesName varchar(20) = 'GL' + CONVERT(varchar(4), YEAR(@TransactionDate)) +
+                                              RIGHT('0' + CONVERT(varchar(2), MONTH(@TransactionDate)), 2);
+            DECLARE @prefix varchar(10), @maxLength int, @seriesValue int;
+            SELECT @seriesValue = Value, @prefix = Prefix, @maxLength = MaxLength
+            FROM dbo.Series WITH (UPDLOCK, HOLDLOCK)
+            WHERE SeriesName = @seriesName;
 
-        SET @seriesValue = @seriesValue + 1;
-        UPDATE dbo.Series SET Value = @seriesValue WHERE SeriesName = @seriesName;
-        UPDATE dbo.ApJournal
-        SET ReferenceNo = @prefix + RIGHT(REPLICATE('0', @maxLength) + CONVERT(varchar(20), @seriesValue), @maxLength)
-        WHERE IdNo = @JournalIdNo;
+            IF @prefix IS NULL
+            BEGIN
+                SET @prefix = RIGHT('0' + CONVERT(varchar(2), MONTH(@TransactionDate)), 2) + '-';
+                SET @maxLength = 3;
+                SET @seriesValue = 0;
+                INSERT dbo.Series (SeriesName, Value, MaxLength, Prefix, Description)
+                VALUES (@seriesName, 0, @maxLength, @prefix, 'GL Series for ' + @seriesName);
+            END;
+
+            SET @seriesValue = @seriesValue + 1;
+            UPDATE dbo.Series SET Value = @seriesValue WHERE SeriesName = @seriesName;
+            UPDATE dbo.ApJournal
+            SET ReferenceNo = @prefix + RIGHT(REPLICATE('0', @maxLength) + CONVERT(varchar(20), @seriesValue), @maxLength)
+            WHERE IdNo = @JournalIdNo;
+        END;
 
         COMMIT TRANSACTION;
     END TRY

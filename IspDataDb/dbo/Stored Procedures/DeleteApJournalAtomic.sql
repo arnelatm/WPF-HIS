@@ -1,4 +1,4 @@
-CREATE OR ALTER PROCEDURE dbo.DeleteApJournalAtomic
+CREATE PROCEDURE dbo.DeleteApJournalAtomic
     @JournalIdNo int
 AS
 BEGIN
@@ -6,13 +6,20 @@ BEGIN
     SET XACT_ABORT ON;
 
     IF NOT EXISTS (SELECT 1 FROM dbo.ApJournal WHERE IdNo = @JournalIdNo)
-        THROW 51030, 'AP journal was not found.', 1;
+        RETURN 1;
+    IF EXISTS (SELECT 1 FROM dbo.ApJournal WHERE IdNo = @JournalIdNo AND Posted = 1)
+        THROW 51034, 'Posted AP journals cannot be deleted.', 1;
     IF EXISTS (SELECT 1 FROM dbo.Reconciled r
                INNER JOIN dbo.ApJournalItem i ON i.IdNo = r.JournalItemIdNo
                WHERE r.JournalCode = 'AP' AND i.JournalIdNo = @JournalIdNo)
         THROW 51031, 'AP journal contains reconciled detail lines and cannot be deleted.', 1;
+    EXEC dbo.AssertJournalNotReconciliationLocked @JournalCode = 'AP', @JournalIdNo = @JournalIdNo;
     IF EXISTS (SELECT 1 FROM dbo.ApOpenInvoice o
-               WHERE o.JournalCode = 'AP' AND o.JournalIdNo = @JournalIdNo
+               WHERE o.JournalCode = 'AP'
+                 AND (o.JournalIdNo = @JournalIdNo
+                   OR EXISTS (SELECT 1 FROM dbo.ApJournalItem i
+                              WHERE i.JournalIdNo = @JournalIdNo
+                                AND i.IdNo = o.JournalItemIdNo))
                  AND (EXISTS (SELECT 1 FROM dbo.CdOiItem d WHERE d.ApOpenInvoiceIdNo=o.IdNo)
                    OR EXISTS (SELECT 1 FROM dbo.CkOiItem k WHERE k.ApOpenInvoiceIdNo=o.IdNo)
                    OR EXISTS (SELECT 1 FROM dbo.PcOiItem p WHERE p.ApOpenInvoiceIdNo=o.IdNo)))
@@ -20,7 +27,13 @@ BEGIN
 
     BEGIN TRANSACTION;
     BEGIN TRY
-        DELETE FROM dbo.ApOpenInvoice WHERE JournalCode='AP' AND JournalIdNo=@JournalIdNo;
+        DELETE o
+        FROM dbo.ApOpenInvoice o
+        WHERE o.JournalCode='AP'
+          AND (o.JournalIdNo=@JournalIdNo
+            OR EXISTS (SELECT 1 FROM dbo.ApJournalItem i
+                       WHERE i.JournalIdNo=@JournalIdNo
+                         AND i.IdNo=o.JournalItemIdNo));
         DELETE FROM dbo.ApJournalItem WHERE JournalIdNo=@JournalIdNo;
         DELETE FROM dbo.ApJournal WHERE IdNo=@JournalIdNo;
         IF @@ROWCOUNT <> 1 THROW 51033, 'AP journal deletion failed.', 1;

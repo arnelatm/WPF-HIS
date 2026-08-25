@@ -27,6 +27,11 @@ Namespace DataLayer.AdoNet
                     "DateCreated," &
                     "IdNo," &
                     "Posted," &
+                    "Status," &
+                    "ReviewedBy," &
+                    "ReviewedAt," &
+                    "FinalizedBy," &
+                    "FinalizedAt," &
                     "ReconciliationDate" &
                     " FROM [AccountReconciliation]" &
                     " WHERE IdNo = @IdNo"
@@ -47,8 +52,14 @@ Namespace DataLayer.AdoNet
                     "Balance = @Balance," &
                     "Posted = @Posted," &
                     "ReconciliationDate = @ReconciliationDate " &
-                    " WHERE IdNo = @IdNo"
-            Return _db.Update(sql, Take(accountReconciliation))
+                    " WHERE IdNo = @IdNo" &
+                    " AND ISNULL(Posted, 0) = 0" &
+                    " AND ISNULL(Status, 'Draft') = 'Draft'"
+            Dim retVal = _db.Update(sql, Take(accountReconciliation))
+            If retVal = 0 Then
+                Throw New InvalidOperationException("Posted or missing account reconciliations cannot be edited.")
+            End If
+            Return retVal
         End Function
 
         Public Function AddRecord(ByRef accountReconciliation As AccountReconciliation) As Integer _
@@ -59,11 +70,13 @@ Namespace DataLayer.AdoNet
                     "AccountIdNo," &
                     "Balance," &
                     "Posted," &
+                    "Status," &
                     "ReconciliationDate" &
                     ") VALUES (" &
                     "@AccountIdNo," &
                     "@Balance," &
                     "@Posted," &
+                    "@Status," &
                     "@ReconciliationDate" &
                     ")"
             Return _db.Insert(sql, Take(accountReconciliation))
@@ -77,6 +90,11 @@ Namespace DataLayer.AdoNet
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .Balance = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Balance")),
             .Posted = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Posted")),
+            .Status = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Status")),
+            .ReviewedBy = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ReviewedBy")),
+            .ReviewedAt = AATM.DataLayer.AdoNet.Extensions.AsDateTime(reader("ReviewedAt")),
+            .FinalizedBy = AATM.DataLayer.AdoNet.Extensions.AsString(reader("FinalizedBy")),
+            .FinalizedAt = AATM.DataLayer.AdoNet.Extensions.AsDateTime(reader("FinalizedAt")),
             .ReconciliationDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("ReconciliationDate"))
             }
 
@@ -87,6 +105,7 @@ Namespace DataLayer.AdoNet
                                     "@IdNo", accountReconciliation.IdNo,
                                     "@Balance", accountReconciliation.Balance,
                                     "@Posted", accountReconciliation.Posted,
+                                    "@Status", If(String.IsNullOrWhiteSpace(accountReconciliation.Status), "Draft", accountReconciliation.Status),
                                     "@ReconciliationDate", accountReconciliation.ReconciliationDate
                                 }
         End Function

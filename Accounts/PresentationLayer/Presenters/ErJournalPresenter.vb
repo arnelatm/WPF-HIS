@@ -243,6 +243,7 @@ Namespace PresentationLayer.Presenters
                     If idNo <= 0 Then Return False
                     View.IdNo=idNo : AddMode=False : EditMode=False
                     UpdateViewData(idNo) : UpdateViewDisplay()
+                    Messaging.Show(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
                     Return True
                 Catch ex As Exception
                     Messaging.Show(ex.Message,System.Windows.Forms.MessageBoxButtons.OK,System.Windows.Forms.MessageBoxIcon.Error)
@@ -256,7 +257,8 @@ Namespace PresentationLayer.Presenters
                     GlobalVariables.Mapper.Map(View, model)
                     Dim transactionService As New AATM.Accounts.ServiceLayer.ErJournalTransactionService()
                     transactionService.UpdateExisting(model)
-                    UpdateViewData(View.IdNo) : UpdateViewDisplay() : Return True
+                    AddMode=False : EditMode=False
+                    UpdateViewData(View.IdNo) : UpdateViewDisplay() : Messaging.Show(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved") : Return True
                 Catch ex As Exception
                     Messaging.Show(ex.Message,System.Windows.Forms.MessageBoxButtons.OK,System.Windows.Forms.MessageBoxIcon.Error) : Return False
                 End Try

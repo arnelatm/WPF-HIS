@@ -2,6 +2,7 @@
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
+Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Views.Forms.Reports
 
@@ -10,7 +11,9 @@ Namespace PresentationLayer.Views.Forms.Reports
 
         Public Event PrintButtonClicked() Implements IApArEmReportView.PrintButtonClicked
         Public Event ReportLoaded() Implements IApArEmReportView.ReportLoaded
+        Public Event LanguageChanged() Implements IApArEmReportView.LanguageChanged
         Protected SortOrderKey As String
+        Private _title As String
 
         Public Sub New(pReportCode As String)
             ' This call is required by the designer.
@@ -18,6 +21,7 @@ Namespace PresentationLayer.Views.Forms.Reports
 
             ' Add any initialization after the InitializeComponent() call.
             ReportCode = pReportCode
+            lblTitle.Translatable = False
             MainTableName = "Account"
             SortOrderKey = "IdNo"
             Dim today = Now()
@@ -69,6 +73,17 @@ Namespace PresentationLayer.Views.Forms.Reports
         Public Property UserHasAccess As Boolean Implements IApArEmReportView.UserHasAccess
 
         Public Property Title As String Implements IApArEmReportView.Title
+            Get
+                Return _title
+            End Get
+            Set(value As String)
+                _title = value
+                Text = value
+                If lblTitle IsNot Nothing Then
+                    lblTitle.Text = value
+                End If
+            End Set
+        End Property
 
         Public Property PersonSelectorLabel As String Implements IApArEmReportView.PersonSelectorLabel
 
@@ -97,6 +112,16 @@ Namespace PresentationLayer.Views.Forms.Reports
             If NoDates Then
                 Height -= 25
             End If
+        End Sub
+
+        Private Sub OnTextDisplayLanguageChanged() Handles MyBase.TextDisplayLanguageChanged
+            RaiseEvent LanguageChanged()
+        End Sub
+
+        Protected Overrides Sub OnAfterLanguageSwitch(context As LanguageSwitchContext)
+            MyBase.OnAfterLanguageSwitch(context)
+            Text = Title
+            lblTitle.Text = Title
         End Sub
 
     End Class

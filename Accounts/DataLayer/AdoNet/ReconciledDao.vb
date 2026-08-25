@@ -41,10 +41,29 @@ Namespace DataLayer.AdoNet
 
         Public Function IsItemReconciled(ByVal journalCode As String, journalItemIdNo As Int32)
             Dim params() As Object = {"@JournalCode", journalCode, "@JournalItemIdNo", journalItemIdNo}
-            If Db.Scalar("Select Count(*) from Reconciled where JournalCode = @journalCode and JournalItemIdNo = @journalItemIdNo", params) > 0 Then
+            Dim sql = "SELECT COUNT(*) " &
+                      "FROM Reconciled AS item " &
+                      "INNER JOIN AccountReconciliation AS reconciliation " &
+                      "ON reconciliation.IdNo = item.ReconciliationIdNo " &
+                      "WHERE item.JournalCode = @JournalCode " &
+                      "AND item.JournalItemIdNo = @JournalItemIdNo " &
+                      "AND (ISNULL(reconciliation.Posted, 0) = 1 OR reconciliation.Status = 'Finalized')"
+            If Db.Scalar(sql, params) > 0 Then
                 Return True
             End If
             Return False
+        End Function
+
+        Public Function IsItemInLockedReconciliation(ByVal journalCode As String, journalItemIdNo As Int32) As Boolean
+            Dim params() As Object = {"@JournalCode", journalCode, "@JournalItemIdNo", journalItemIdNo}
+            Dim sql = "SELECT COUNT(*) " &
+                      "FROM AccountReconciliationItem AS item " &
+                      "INNER JOIN AccountReconciliation AS reconciliation " &
+                      "ON reconciliation.IdNo = item.AccountReconciliationIdNo " &
+                      "WHERE item.JournalCode = @JournalCode " &
+                      "AND item.JournalItemIdNo = @JournalItemIdNo " &
+                      "AND reconciliation.Status IN ('ReviewCompleted', 'Finalized')"
+            Return Db.Scalar(sql, params) > 0
         End Function
 
         'Private Shared ReadOnly Make As Func(Of IDataReader, Reconciled) =

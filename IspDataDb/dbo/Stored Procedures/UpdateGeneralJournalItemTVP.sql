@@ -14,6 +14,15 @@ CREATE PROCEDURE  [dbo].[UpdateGeneralJournalItemTVP]
 AS 
 BEGIN
 
+IF EXISTS (
+    SELECT 1
+    FROM dbo.GeneralJournalItem AS i
+    INNER JOIN dbo.Reconciled AS r
+        ON r.JournalCode = 'GJ' AND r.JournalItemIdNo = i.IdNo
+    WHERE i.JournalIdNo = @GroupIdNo
+)
+    THROW 51540, 'The journal contains a line reserved by an account reconciliation.', 1;
+
 -- Delete non existent records
 DELETE A
 FROM [DBO].GeneralJournalItem A WHERE A.JOURNALIDNO = @GroupIdNo and NOT EXISTS (SELECT * FROM @MParam where IdNo = A.IdNo )

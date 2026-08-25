@@ -13,7 +13,7 @@ CREATE TABLE [dbo].[FiscalYearJournalPostingChange] (
     CONSTRAINT [UQ_FiscalYearJournalPostingChange_Record]
         UNIQUE NONCLUSTERED ([RunId] ASC, [JournalCode] ASC, [RecordType] ASC, [RecordIdNo] ASC),
     CONSTRAINT [CK_FiscalYearJournalPostingChange_RecordType]
-        CHECK ([RecordType] IN ('H', 'I')),
+        CHECK ([RecordType] = 'H' OR [RecordType] = 'I'),
     CONSTRAINT [CK_FiscalYearJournalPostingChange_NewPosted]
         CHECK ([NewPosted] = 1)
 );

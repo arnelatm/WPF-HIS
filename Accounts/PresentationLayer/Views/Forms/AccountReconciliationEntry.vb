@@ -37,6 +37,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Event ReconciliationPostingRequestEvent(sender As Object, bindingSource As BindingSource) Implements IAccountReconciliationView.ReconciliationPostingRequestEvent
 
+        Public Event ReconciliationReviewCompletionRequestEvent(sender As Object) Implements IAccountReconciliationView.ReconciliationReviewCompletionRequestEvent
+
+        Public Event ReconciliationReviewReopenRequestEvent(sender As Object) Implements IAccountReconciliationView.ReconciliationReviewReopenRequestEvent
+
         Public Event ReconciliationRefreshRequestEvent() Implements IAccountReconciliationView.ReconciliationRefreshRequestEvent
 
         Public Event EndingBankBalanceEntryChangedEvent() Implements IAccountReconciliationView.EndingBankBalanceEntryChangedEvent
@@ -50,6 +54,10 @@ Namespace PresentationLayer.Views.Forms
             ' Add any initialization after the InitializeComponent() call.
             FirstControl = dtpReconciliationDate
             _nfi = GlobalVariables.DefaultNumberFormatInfo
+            If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
+                txtReconciliationStatus.Text = GetStatusCaption(_status)
+            End If
+            UpdateReconciliationWorkflowButtons()
             RaiseEvent ReconciliationAccountChangedEvent(Me, bsAccountReconciliationItems)
         End Sub
 
@@ -162,9 +170,43 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 chkPosted.Checked = Value
-                btnPost.Enabled = Not Value
+                UpdateReconciliationWorkflowButtons()
             End Set
         End Property
+
+        Private _status As String = "Draft"
+
+        Public Property Status As String Implements IAccountReconciliationView.Status
+            Get
+                Return _status
+            End Get
+            Set(value As String)
+                _status = If(String.IsNullOrWhiteSpace(value), "Draft", value)
+                If txtReconciliationStatus IsNot Nothing Then
+                    txtReconciliationStatus.Text = GetStatusCaption(_status)
+                End If
+                UpdateReconciliationWorkflowButtons()
+            End Set
+        End Property
+
+        Private Function GetStatusCaption(value As String) As String
+            If System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime Then
+                Return value
+            End If
+            Select Case value
+                Case "ReviewCompleted"
+                    Return Messaging.TranslateCaption("Review Completed")
+                Case "Finalized"
+                    Return Messaging.TranslateCaption("Finalized")
+                Case Else
+                    Return Messaging.TranslateCaption(value)
+            End Select
+        End Function
+
+        Public Property ReviewedBy As String Implements IAccountReconciliationView.ReviewedBy
+        Public Property ReviewedAt As DateTime? Implements IAccountReconciliationView.ReviewedAt
+        Public Property FinalizedBy As String Implements IAccountReconciliationView.FinalizedBy
+        Public Property FinalizedAt As DateTime? Implements IAccountReconciliationView.FinalizedAt
 
         Public Property TotalQtyCreditsCleared As Integer Implements IAccountReconciliationView.TotalQtyCreditsCleared
             Get
@@ -392,6 +434,14 @@ Namespace PresentationLayer.Views.Forms
             RaiseEvent ReconciliationPostingRequestEvent(Me, bsAccountReconciliationItems)
         End Sub
 
+        Private Sub btnCompleteReview_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnCompleteReview.ClickButtonArea
+            RaiseEvent ReconciliationReviewCompletionRequestEvent(Me)
+        End Sub
+
+        Private Sub btnReopenReview_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnReopenReview.ClickButtonArea
+            RaiseEvent ReconciliationReviewReopenRequestEvent(Me)
+        End Sub
+
         Private Sub btnClearAll_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnClearAll.ClickButtonArea
             RaiseEvent ReconciliationClearEvent(sender, True, True, bsAccountReconciliationItems)
         End Sub
@@ -405,15 +455,11 @@ Namespace PresentationLayer.Views.Forms
             If e.EditMode Then
                 btnClearAll.Enabled = True
                 btnUnClearAll.Enabled = True
-                btnPost.Enabled = False
+                UpdateReconciliationWorkflowButtons()
             Else
                 btnClearAll.Enabled = False
                 btnUnClearAll.Enabled = False
-                If chkPosted.Checked Then
-                    btnPost.Enabled = False
-                Else
-                    btnPost.Enabled = True
-                End If
+                UpdateReconciliationWorkflowButtons()
             End If
 
         End Sub
@@ -421,7 +467,7 @@ Namespace PresentationLayer.Views.Forms
         Public Sub OnAcReconAddModeChanged(ByRef e As AddModeChanged) Implements ISubscriber(Of AddModeChanged).OnEventHandler
             'MyBase.OnEventHandlerAddModeChanged(e)
             If e.AddMode Then
-                btnPost.Enabled = False
+                UpdateReconciliationWorkflowButtons()
                 btnClearAll.Enabled = True
                 btnUnClearAll.Enabled = True
                 'dtpReconciliationDate.Enabled = True
@@ -430,15 +476,39 @@ Namespace PresentationLayer.Views.Forms
                 'cboAccountIdNo.DisplayOnly = False
                 'cboAccountIdNo.Enabled = True
             Else
-                btnPost.Enabled = True
+                UpdateReconciliationWorkflowButtons()
                 btnClearAll.Enabled = False
                 btnUnClearAll.Enabled = False
-                If chkPosted.Checked Then
-                    btnPost.Enabled = False
-                Else
-                    btnPost.Enabled = True
-                End If
+                UpdateReconciliationWorkflowButtons()
             End If
+        End Sub
+
+        Private Sub UpdateReconciliationWorkflowButtons()
+            If btnPost Is Nothing OrElse btnCompleteReview Is Nothing OrElse btnReopenReview Is Nothing Then
+                Return
+            End If
+            Dim finalised = Posted OrElse String.Equals(Status, "Finalized", StringComparison.OrdinalIgnoreCase)
+            Dim reviewCompleted = String.Equals(Status, "ReviewCompleted", StringComparison.OrdinalIgnoreCase)
+            Dim recordSaved = IdNo > 0
+            'These captions are assigned each time the workflow state is refreshed.
+            'Use the translation service here instead of hard-coding English so a
+            'state change cannot undo the form's current language.  Keep the
+            'designer path database-free because it has no runtime translator.
+            If System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime Then
+                btnPost.Text = "Finalize"
+                btnCompleteReview.Text = "Complete Review"
+                btnReopenReview.Text = "Reopen Review"
+            Else
+                btnPost.Text = Messaging.TranslateCaption("Finalize")
+                btnCompleteReview.Text = Messaging.TranslateCaption("Complete Review")
+                btnReopenReview.Text = Messaging.TranslateCaption("Reopen Review")
+            End If
+            'btnEdit is disabled while the record is being edited. Workflow
+            'actions are available only after the record has been saved.
+            Dim recordIsSaved = btnEdit.Enabled
+            btnPost.Enabled = recordSaved AndAlso reviewCompleted AndAlso Not finalised AndAlso recordIsSaved
+            btnCompleteReview.Enabled = recordSaved AndAlso Not reviewCompleted AndAlso Not finalised AndAlso recordIsSaved
+            btnReopenReview.Enabled = recordSaved AndAlso reviewCompleted AndAlso Not finalised AndAlso recordIsSaved
         End Sub
 
         'Private Sub BackgroundWorker_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorker.DoWork

@@ -4,6 +4,7 @@ Imports System.Drawing
 Imports System.Linq
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Views.Forms
@@ -114,9 +115,9 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub Execute_Click(sender As Object, e As EventArgs)
             If _lastPreview Is Nothing OrElse _lastPreview.Tables.Count = 0 Then
-                MessageBox.Show("Run Preview before executing posting.", "Monthly Posting", MessageBoxButtons.OK, MessageBoxIcon.Information) : Return
+                Messaging.Show(True, "MsgRunPreviewBeforeExecution", "Run Preview before executing posting.", "Monthly Posting", MessageBoxButtons.OK, MessageBoxIcon.Information) : Return
             End If
-            If MessageBox.Show("Post all valid journals for " & _month.Text & " " & _year.Value.ToString() & "?", "Confirm monthly posting", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = DialogResult.Yes Then LoadPosting(True)
+            If Messaging.Show(True, "MsgConfirmMonthlyPosting", "Post all valid journals for {month} {year}?", "Confirm monthly posting", {"month", _month.Text, "year", _year.Value.ToString()}, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = DialogResult.Yes Then LoadPosting(True)
         End Sub
 
         Private Sub InitializeChecklist_Click(sender As Object, e As EventArgs)
@@ -128,7 +129,7 @@ Namespace PresentationLayer.Views.Forms
             Dim code = Convert.ToString(_checklist.CurrentRow.Cells("ChecklistCode").Value)
             If String.IsNullOrWhiteSpace(code) Then Return
             If String.IsNullOrWhiteSpace(_checklistNotes.Text) Then
-                MessageBox.Show("Enter a note before completing this checklist item.", "Monthly Close Checklist", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Messaging.Show(True, "MsgEnterChecklistNote", "Enter a note before completing this checklist item.", "Monthly Close Checklist", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 _checklistNotes.Focus()
                 Return
             End If
@@ -137,7 +138,7 @@ Namespace PresentationLayer.Views.Forms
                 _checklist.DataSource = data.Tables(data.Tables.Count - 1)
                 _checklistNotes.Clear()
             Catch ex As Exception
-                MessageBox.Show(ex.Message, "Monthly Close Checklist", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Messaging.Show(True, "MsgMonthlyCloseChecklistFailed", "Checklist operation failed: {details}", "Monthly Close Checklist", {"details", ex.Message}, MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
         End Sub
 
@@ -150,10 +151,10 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ApproveMonth_Click(sender As Object, e As EventArgs)
             Try
                 Dim data = ExecuteChecklistProcedure("dbo.ApproveMonthlyClose")
-                MessageBox.Show("Month approved. You may now run Monthly Posting.", "Monthly Close", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Messaging.Show(True, "MsgMonthApproved", "Month approved. You may now run Monthly Posting.", "Monthly Close", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 LoadChecklist()
             Catch ex As Exception
-                MessageBox.Show(ex.Message, "Monthly Close", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Messaging.Show(True, "MsgMonthlyCloseChecklistFailed", "Checklist operation failed: {details}", "Monthly Close", {"details", ex.Message}, MessageBoxButtons.OK, MessageBoxIcon.Warning)
             End Try
         End Sub
 
@@ -163,10 +164,13 @@ Namespace PresentationLayer.Views.Forms
                 If data.Tables.Count > 0 Then
                     _checklist.DataSource = data.Tables(0)
                     _tabs.SelectedIndex = 1
-                    _status.Text = "Checklist loaded: " & data.Tables(0).Rows.Count.ToString() & " items. Select an item and click Complete Item."
+                    Dim checklistStatus = "Checklist loaded: {itemCount} items. Select an item and click Complete Item."
+                    Dim checklistCaption = "Monthly Close Checklist"
+                    Messaging.GetMessage(True, "MsgChecklistLoaded", checklistStatus, checklistCaption)
+                    _status.Text = Messaging.ReplaceValues(checklistStatus, {"itemCount", data.Tables(0).Rows.Count.ToString()})
                 End If
             Catch ex As Exception
-                _status.Text = "Checklist load failed."
+                _status.Text = Messaging.TranslateCaption("Checklist load failed.")
             End Try
         End Sub
 
@@ -197,15 +201,19 @@ Namespace PresentationLayer.Views.Forms
                 Dim data = ExecuteProcedure(executePosting)
                 _lastPreview = data : BindResults(data)
                 If executePosting Then
-                    _execute.Enabled = False : _status.Text = "Posting completed. Run Preview again to verify."
+                    _execute.Enabled = False : _status.Text = Messaging.TranslateCaption("Posting completed. Run Preview again to verify.")
                 Else
                     Dim blockers = GetInt(data, 0, "BlockingErrors") : Dim headers = GetInt(data, 0, "HeadersToPost") : Dim items = GetInt(data, 0, "ItemsToPost")
                     Dim closeApproved = data.Tables(0).Columns.Contains("MonthlyCloseStatus") AndAlso String.Equals(Convert.ToString(data.Tables(0).Rows(0)("MonthlyCloseStatus")), "Approved", StringComparison.OrdinalIgnoreCase)
                     _execute.Enabled = closeApproved AndAlso blockers = 0 AndAlso (headers > 0 OrElse items > 0)
-                    _status.Text = String.Format("Errors: {0}; headers: {1}; items: {2}; close status: {3}", blockers, headers, items, If(closeApproved, "Approved", "Not approved"))
+                    Dim closeStatus = If(closeApproved, Messaging.TranslateCaption("Approved"), Messaging.TranslateCaption("Not approved"))
+                    Dim postingStatus = "Errors: {errors}; headers: {headers}; items: {items}; close status: {closeStatus}"
+                    Dim postingCaption = "Monthly Journal Posting"
+                    Messaging.GetMessage(True, "MsgMonthlyPostingStatus", postingStatus, postingCaption)
+                    _status.Text = Messaging.ReplaceValues(postingStatus, {"errors", blockers.ToString(), "headers", headers.ToString(), "items", items.ToString(), "closeStatus", closeStatus})
                 End If
             Catch ex As Exception
-                _execute.Enabled = False : _status.Text = "Posting request failed." : MessageBox.Show(ex.Message, "Monthly Posting", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                _execute.Enabled = False : _status.Text = Messaging.TranslateCaption("Posting request failed.") : Messaging.Show(True, "MsgMonthlyPostingRequestFailed", "Posting request failed: {details}", "Monthly Posting", {"details", ex.Message}, MessageBoxButtons.OK, MessageBoxIcon.Error)
             Finally
                 Cursor = Cursors.Default
             End Try

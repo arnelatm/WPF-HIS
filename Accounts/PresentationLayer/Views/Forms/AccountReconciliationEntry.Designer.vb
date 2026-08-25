@@ -54,6 +54,8 @@ Namespace PresentationLayer.Views.Forms
         Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
         Me.lblPosted = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.chkPosted = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
+        Me.lblReconciliationStatus = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.txtReconciliationStatus = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtOutstandingCredits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtTotalQtyCreditsCleared = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblCreditsCleared = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -76,6 +78,8 @@ Namespace PresentationLayer.Views.Forms
         Me.txtTotalDebitsNotCleared = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.CFlowLayout7 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.btnPost = New AATM.Libraries.CBaseControlsLibrary.CButton()
+        Me.btnCompleteReview = New AATM.Libraries.CBaseControlsLibrary.CButton()
+        Me.btnReopenReview = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.CFlowLayout6 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.lblEndingBankBalance = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtBalance2 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -150,6 +154,8 @@ Namespace PresentationLayer.Views.Forms
         Me.CFlowLayout1.Controls.Add(Me.cboAccountIdNo)
         Me.CFlowLayout1.Controls.Add(Me.lblPosted)
         Me.CFlowLayout1.Controls.Add(Me.chkPosted)
+        Me.CFlowLayout1.Controls.Add(Me.lblReconciliationStatus)
+        Me.CFlowLayout1.Controls.Add(Me.txtReconciliationStatus)
         resources.ApplyResources(Me.CFlowLayout1, "CFlowLayout1")
         Me.CFlowLayout1.Name = "CFlowLayout1"
         '
@@ -320,6 +326,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboAccountIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.cboAccountIdNo.FindEnabled = false
         resources.ApplyResources(Me.cboAccountIdNo, "cboAccountIdNo")
+        Me.cboAccountIdNo.Size = New System.Drawing.Size(450, 24)
         Me.cboAccountIdNo.ForeColor = System.Drawing.Color.Black
         Me.cboAccountIdNo.HideWhenNotEditingOrAdding = false
         Me.cboAccountIdNo.IgnoreCase = false
@@ -374,6 +381,26 @@ Namespace PresentationLayer.Views.Forms
         Me.chkPosted.TabStop = false
         Me.chkPosted.Translatable = false
         Me.chkPosted.UseVisualStyleBackColor = false
+        '
+        'lblReconciliationStatus
+        '
+        Me.lblReconciliationStatus.AutoSize = True
+        Me.lblReconciliationStatus.BackColor = System.Drawing.Color.Transparent
+        Me.lblReconciliationStatus.DisplayOnly = True
+        Me.lblReconciliationStatus.EditingMode = False
+        Me.lblReconciliationStatus.Name = "lblReconciliationStatus"
+        Me.lblReconciliationStatus.Text = "Status"
+        Me.lblReconciliationStatus.Translatable = True
+        '
+        'txtReconciliationStatus
+        '
+        Me.txtReconciliationStatus.BackColor = System.Drawing.Color.White
+        Me.txtReconciliationStatus.DisplayOnly = True
+        Me.txtReconciliationStatus.EditingMode = False
+        Me.txtReconciliationStatus.Name = "txtReconciliationStatus"
+        Me.txtReconciliationStatus.ReadOnly = True
+        Me.txtReconciliationStatus.Size = New System.Drawing.Size(125, 20)
+        Me.txtReconciliationStatus.Text = "Draft"
         '
         'txtOutstandingCredits
         '
@@ -755,7 +782,9 @@ Namespace PresentationLayer.Views.Forms
         'CFlowLayout7
         '
         Me.CFlowLayout7.BackColor = System.Drawing.Color.Transparent
+        Me.CFlowLayout7.Controls.Add(Me.btnCompleteReview)
         Me.CFlowLayout7.Controls.Add(Me.btnPost)
+        Me.CFlowLayout7.Controls.Add(Me.btnReopenReview)
         resources.ApplyResources(Me.CFlowLayout7, "CFlowLayout7")
         Me.CFlowLayout7.Name = "CFlowLayout7"
         '
@@ -770,6 +799,28 @@ Namespace PresentationLayer.Views.Forms
         Me.btnPost.Name = "btnPost"
         Me.btnPost.OriginalImageName = Nothing
         Me.btnPost.SecurityKey = ""
+        Me.btnPost.AutoSize = False
+        Me.btnPost.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnPost.Size = New System.Drawing.Size(96, 32)
+        Me.btnPost.Text = "Finalize"
+        '
+        'btnCompleteReview
+        '
+        Me.btnCompleteReview.AutoSize = False
+        Me.btnCompleteReview.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnCompleteReview.Name = "btnCompleteReview"
+        Me.btnCompleteReview.SecurityKey = ""
+        Me.btnCompleteReview.Size = New System.Drawing.Size(96, 32)
+        Me.btnCompleteReview.Text = "Complete Review"
+        '
+        'btnReopenReview
+        '
+        Me.btnReopenReview.AutoSize = False
+        Me.btnReopenReview.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnReopenReview.Name = "btnReopenReview"
+        Me.btnReopenReview.SecurityKey = ""
+        Me.btnReopenReview.Size = New System.Drawing.Size(96, 32)
+        Me.btnReopenReview.Text = "Reopen Review"
         '
         'CFlowLayout6
         '
@@ -1334,8 +1385,12 @@ End Sub
         Friend WithEvents dgvAccountIdNo As Windows.Forms.DataGridViewTextBoxColumn
         Friend WithEvents lblPosted As CLabel
         Friend WithEvents chkPosted As CCheckBox
+        Friend WithEvents lblReconciliationStatus As CLabel
+        Friend WithEvents txtReconciliationStatus As CTextBox
         Friend WithEvents CFlowLayout7 As CFlowLayout
         Friend WithEvents btnPost As CButton
+        Friend WithEvents btnCompleteReview As CButton
+        Friend WithEvents btnReopenReview As CButton
         Friend WithEvents CFlowLayout8 As CFlowLayout
         Friend WithEvents btnClearAll As CButton
         Friend WithEvents btnUnClearAll As CButton

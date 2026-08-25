@@ -247,6 +247,7 @@ Namespace PresentationLayer.Presenters
                     If idNo <= 0 Then Return False
                     View.IdNo=idNo : AddMode=False : EditMode=False
                     UpdateViewData(idNo) : UpdateViewDisplay()
+                    Messaging.Show(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
                     Return True
                 Catch ex As Exception
                     Messaging.Show(ex.Message,System.Windows.Forms.MessageBoxButtons.OK,System.Windows.Forms.MessageBoxIcon.Error)
@@ -260,7 +261,9 @@ Namespace PresentationLayer.Presenters
                     GlobalVariables.Mapper.Map(View, model)
                     Dim transactionService As New AATM.Accounts.ServiceLayer.PettyCashJournalTransactionService()
                     transactionService.UpdateExisting(model)
+                    AddMode=False : EditMode=False
                     UpdateViewData(View.IdNo) : UpdateViewDisplay()
+                    Messaging.Show(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
                     Return True
                 Catch ex As Exception
                     Messaging.Show(ex.Message,System.Windows.Forms.MessageBoxButtons.OK,System.Windows.Forms.MessageBoxIcon.Error)
@@ -276,6 +279,7 @@ Namespace PresentationLayer.Presenters
                     If idNo <= 0 Then Return False
                     View.IdNo=idNo : AddMode=False : EditMode=False
                     UpdateViewData(idNo) : UpdateViewDisplay()
+                    Messaging.Show(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
                     Return True
                 Catch ex As Exception
                     Messaging.Show(ex.Message,System.Windows.Forms.MessageBoxButtons.OK,System.Windows.Forms.MessageBoxIcon.Error)
@@ -289,7 +293,9 @@ Namespace PresentationLayer.Presenters
                     GlobalVariables.Mapper.Map(View, model)
                     Dim transactionService As New AATM.Accounts.ServiceLayer.CashDisbursementJournalTransactionService()
                     transactionService.UpdateExisting(model)
+                    AddMode=False : EditMode=False
                     UpdateViewData(View.IdNo) : UpdateViewDisplay()
+                    Messaging.Show(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
                     Return True
                 Catch ex As Exception
                     Messaging.Show(ex.Message,System.Windows.Forms.MessageBoxButtons.OK,System.Windows.Forms.MessageBoxIcon.Error)
@@ -916,6 +922,12 @@ Namespace PresentationLayer.Presenters
         Private Function DeleteAdvancePaymentOpenInvoice(ByRef idNo As Int32) As String
             Dim arOpenInvoiceService As New AccountsService("ApOpenInvoice")
             If Service.CountRecordWithKey(Of Integer)("ApOpenInvoice", "IdNo", idNo) > 0 Then
+                If Service.CountRecordWithKey(Of Integer)("CdOiItem", "ApOpenInvoiceIdNo", idNo) > 0 OrElse
+                   Service.CountRecordWithKey(Of Integer)("CkOiItem", "ApOpenInvoiceIdNo", idNo) > 0 OrElse
+                   Service.CountRecordWithKey(Of Integer)("PcOiItem", "ApOpenInvoiceIdNo", idNo) > 0 Then
+                    'The save is transactional; returning a failure rolls back any child changes.
+                    Return -1
+                End If
                 Return arOpenInvoiceService.DeleteRecord(idNo, "ApOpenInvoice")
             End If
             Return 0

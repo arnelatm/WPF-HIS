@@ -455,6 +455,10 @@ Namespace PresentationLayer.Views.Forms
             _jiFooter.ColumnToSum("dgvDebit") = True
             _jiFooter.ColumnToSum("dgvCredit") = True
             _jiFooter.SetText("DgvAccountIdNo", "Totals ->")
+            'The footer is a child of the grid.  Bring it to the front after it
+            'has been added so the grid's native scroll bar cannot cover it.
+            _jiFooter.Dock = DockStyle.Bottom
+            _jiFooter.BringToFront()
 
             _apFooter = New DgvFooter(DataGridViewDjOiItems) With {
                 .AutoCalc = True
@@ -464,6 +468,8 @@ Namespace PresentationLayer.Views.Forms
             _apFooter.ColumnToSum("dgvBalance") = True
             _apFooter.ColumnToSum("dgvPreviousBalance") = True
             _apFooter.SetText("dgvJournalIdNoAp", "Totals")
+            _apFooter.Dock = DockStyle.Bottom
+            _apFooter.BringToFront()
             BindDjOiItem()
             BindJournalItem()
         End Sub
@@ -492,6 +498,9 @@ Namespace PresentationLayer.Views.Forms
                 End If
             End With
             UpdateTotalsDisplay()
+            If _apFooter IsNot Nothing Then
+                _apFooter.BringToFront()
+            End If
             ResumeLayout()
         End Sub
 
@@ -519,6 +528,9 @@ Namespace PresentationLayer.Views.Forms
                 dgvRevCostCenterIdNo.TreatZeroAsBlank = True
                 dgvRevCostCenterIdNo.DisplayStyleForCurrentCellOnly = True
             End With
+            If _jiFooter IsNot Nothing Then
+                _jiFooter.BringToFront()
+            End If
             ResumeLayout()
         End Sub
 
@@ -939,6 +951,9 @@ Namespace PresentationLayer.Views.Forms
             If DataGridViewJournalItems.DgvFooter IsNot Nothing Then
                 DataGridViewJournalItems.DgvFooter.Refresh()
             End If
+            If _jiFooter IsNot Nothing Then
+                _jiFooter.BringToFront()
+            End If
         End Sub
 
         Private Sub ShowOpenInvoicesDataGrid()
@@ -951,6 +966,9 @@ Namespace PresentationLayer.Views.Forms
             End If
             If DataGridViewDjOiItems.DgvFooter IsNot Nothing Then
                 DataGridViewDjOiItems.DgvFooter.Refresh()
+            End If
+            If _apFooter IsNot Nothing Then
+                _apFooter.BringToFront()
             End If
         End Sub
 

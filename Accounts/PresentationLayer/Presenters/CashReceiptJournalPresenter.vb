@@ -580,6 +580,10 @@ Namespace PresentationLayer.Presenters
         Private Function DeleteAdvanceCollectionOpenInvoice(ByRef idNo As Int32) As String
             Dim arOpenInvoiceService As New AccountsService("ArOpenInvoice")
             If Service.CountRecordWithKey(Of Integer)("ArOpenInvoice", "IdNo", idNo) > 0 Then
+                If Service.CountRecordWithKey(Of Integer)("CsrOiItem", "ArOpenInvoiceIdNo", idNo) > 0 Then
+                    'The save is transactional; returning a failure rolls back any child changes.
+                    Return -1
+                End If
                 Return arOpenInvoiceService.DeleteRecord(idNo, "ArOpenInvoice")
             End If
             Return 0
@@ -1090,6 +1094,7 @@ Namespace PresentationLayer.Presenters
                     If idNo <= 0 Then Return False
                     View.IdNo = idNo : AddMode = False : EditMode = False
                     UpdateViewData(idNo) : UpdateViewDisplay()
+                    Messaging.Show(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
                     Return True
                 Catch ex As Exception
                     Messaging.Show(ex.Message, System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error)
@@ -1103,7 +1108,9 @@ Namespace PresentationLayer.Presenters
                     GlobalVariables.Mapper.Map(View, model)
                     Dim transactionService As New AATM.Accounts.ServiceLayer.CashReceiptJournalTransactionService()
                     transactionService.UpdateExisting(model)
+                    AddMode = False : EditMode = False
                     UpdateViewData(View.IdNo) : UpdateViewDisplay()
+                    Messaging.Show(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
                     Return True
                 Catch ex As Exception
                     Messaging.Show(ex.Message, System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error)
@@ -1169,8 +1176,9 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Overrides Function IsOkToDeleteRecord() As Boolean
-            Dim retValue As Boolean = True
-            If MyBase.IsOkToDeleteRecord Then
+            Dim retValue As Boolean = False
+            If MyBase.IsOkToDeleteRecord() Then
+                retValue = True
                 If ReconciledEntriesExist(View.JournalItems, "CR") Then
                     retValue = False
                 End If

@@ -26,6 +26,11 @@ Namespace BusinessLayer
         Public Property GlSystemBalance As Decimal
         Public Property IdNo As Int32
         Public Property Posted As Boolean
+        Public Property Status As String
+        Public Property ReviewedBy As String
+        Public Property ReviewedAt As DateTime?
+        Public Property FinalizedBy As String
+        Public Property FinalizedAt As DateTime?
         Public Property ReconciliationDate As Date?
         Public Property TotalCreditsCleared As Decimal
         Public Property TotalCreditsNotCleared As Decimal

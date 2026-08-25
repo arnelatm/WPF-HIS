@@ -303,6 +303,10 @@ Namespace PresentationLayer.Presenters
                     Messaging.Show(True, "MsgEditingOfReconciledNotAllowed")
                     result = True
                     Exit For
+                ElseIf reconciledDao.IsItemInLockedReconciliation(journalCode, item.IdNo) Then
+                    Messaging.Show(True, "MsgEditingOfReconciliationReviewNotAllowed")
+                    result = True
+                    Exit For
                 End If
             Next
             Return result

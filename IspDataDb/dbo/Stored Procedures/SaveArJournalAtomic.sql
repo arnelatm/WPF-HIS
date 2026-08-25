@@ -1,4 +1,4 @@
-CREATE OR ALTER PROCEDURE dbo.SaveArJournalAtomic
+CREATE PROCEDURE dbo.SaveArJournalAtomic
     @CustomerIdNo int, @TransactionDate date, @ReferenceNo varchar(15)=NULL,
     @TransactionType char(1)=NULL, @Amount money, @AccountIdNo int,
     @DueDate date=NULL, @SettlementDueDate date=NULL,
@@ -27,11 +27,14 @@ BEGIN
         INSERT dbo.ArOpenInvoice(JournalCode,JournalIdNo,JournalItemIdNo,PaidAmount,DiscountTaken)
         SELECT 'AR',@JournalIdNo,i.IdNo,0,0 FROM dbo.ArJournalItem i INNER JOIN dbo.Account a ON a.IdNo=i.AccountIdNo
         WHERE i.JournalIdNo=@JournalIdNo AND a.SpecialAccount='AR';
-        DECLARE @seriesName varchar(20)='GL'+CONVERT(varchar(4),YEAR(@TransactionDate))+RIGHT('0'+CONVERT(varchar(2),MONTH(@TransactionDate)),2),@prefix varchar(10),@maxLength int,@seriesValue int;
-        SELECT @seriesValue=Value,@prefix=Prefix,@maxLength=MaxLength FROM dbo.Series WITH(UPDLOCK,HOLDLOCK) WHERE SeriesName=@seriesName;
-        IF @prefix IS NULL BEGIN SET @prefix=RIGHT('0'+CONVERT(varchar(2),MONTH(@TransactionDate)),2)+'-'; SET @maxLength=3; SET @seriesValue=0; INSERT dbo.Series(SeriesName,Value,MaxLength,Prefix,Description) VALUES(@seriesName,0,@maxLength,@prefix,'GL Series for '+@seriesName); END;
-        SET @seriesValue=@seriesValue+1; UPDATE dbo.Series SET Value=@seriesValue WHERE SeriesName=@seriesName;
-        UPDATE dbo.ArJournal SET ReferenceNo=@prefix+RIGHT(REPLICATE('0',@maxLength)+CONVERT(varchar(20),@seriesValue),@maxLength) WHERE IdNo=@JournalIdNo;
+        IF NULLIF(LTRIM(RTRIM(@ReferenceNo)), '') IS NULL
+        BEGIN
+            DECLARE @seriesName varchar(20)='GL'+CONVERT(varchar(4),YEAR(@TransactionDate))+RIGHT('0'+CONVERT(varchar(2),MONTH(@TransactionDate)),2),@prefix varchar(10),@maxLength int,@seriesValue int;
+            SELECT @seriesValue=Value,@prefix=Prefix,@maxLength=MaxLength FROM dbo.Series WITH(UPDLOCK,HOLDLOCK) WHERE SeriesName=@seriesName;
+            IF @prefix IS NULL BEGIN SET @prefix=RIGHT('0'+CONVERT(varchar(2),MONTH(@TransactionDate)),2)+'-'; SET @maxLength=3; SET @seriesValue=0; INSERT dbo.Series(SeriesName,Value,MaxLength,Prefix,Description) VALUES(@seriesName,0,@maxLength,@prefix,'GL Series for '+@seriesName); END;
+            SET @seriesValue=@seriesValue+1; UPDATE dbo.Series SET Value=@seriesValue WHERE SeriesName=@seriesName;
+            UPDATE dbo.ArJournal SET ReferenceNo=@prefix+RIGHT(REPLICATE('0',@maxLength)+CONVERT(varchar(20),@seriesValue),@maxLength) WHERE IdNo=@JournalIdNo;
+        END;
         COMMIT TRANSACTION;
     END TRY
     BEGIN CATCH

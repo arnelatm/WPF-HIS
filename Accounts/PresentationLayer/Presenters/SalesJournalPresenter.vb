@@ -341,9 +341,9 @@ Namespace PresentationLayer.Presenters
                     GlobalVariables.Mapper.Map(View, model)
                     Dim idNo = New AATM.Accounts.ServiceLayer.SalesJournalTransactionService().SaveNew(model)
                     If idNo <= 0 Then Return False
-                    View.IdNo=idNo : AddMode=False : EditMode=False : UpdateViewData(idNo) : UpdateViewDisplay() : Return True
+                    View.IdNo = idNo : AddMode = False : EditMode = False : UpdateViewData(idNo) : UpdateViewDisplay() : Messaging.Show(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved") : Return True
                 Catch ex As Exception
-                    Messaging.Show(ex.Message,System.Windows.Forms.MessageBoxButtons.OK,System.Windows.Forms.MessageBoxIcon.Error) : Return False
+                    Messaging.Show(ex.Message, System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error) : Return False
                 End Try
             End If
             If EditMode AndAlso View.TransactionDate.HasValue AndAlso View.TransactionDate.Value.Date >= New Date(2026, 1, 1) Then
@@ -352,9 +352,9 @@ Namespace PresentationLayer.Presenters
                     Dim model As New SalesJournalModel()
                     GlobalVariables.Mapper.Map(View, model)
                     Dim svc As New AATM.Accounts.ServiceLayer.SalesJournalTransactionService()
-                    svc.UpdateExisting(model) : UpdateViewData(View.IdNo) : UpdateViewDisplay() : Return True
+                    svc.UpdateExisting(model) : AddMode = False : EditMode = False : UpdateViewData(View.IdNo) : UpdateViewDisplay() : Messaging.Show(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved") : Return True
                 Catch ex As Exception
-                    Messaging.Show(ex.Message,System.Windows.Forms.MessageBoxButtons.OK,System.Windows.Forms.MessageBoxIcon.Error) : Return False
+                    Messaging.Show(ex.Message, System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error) : Return False
                 End Try
             End If
             Return MyBase.Save(viewControl)

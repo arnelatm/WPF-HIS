@@ -84,8 +84,12 @@
     <!-- Required at runtime by the WinForms resource deserializer.  Keep a
          direct application reference so MSBuild copies it beside Accounts.exe
          (transitive references from Forms are not copied to this output). -->
-    <Reference Include="System.Resources.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+    <Reference Include="System.Resources.Extensions, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Resources.Extensions.8.0.0\lib\net462\System.Resources.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Formats.Nrbf, Version=9.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Formats.Nrbf.9.0.0\lib\net462\System.Formats.Nrbf.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -2104,6 +2108,7 @@
     <Compile Include="ServiceLayer\SalesJournalTransactionService.vb" />
     <Compile Include="ServiceLayer\PettyCashJournalTransactionService.vb" />
     <Compile Include="ServiceLayer\GeneralJournalTransactionService.vb" />
+    <Compile Include="ServiceLayer\AccountReconciliationTransactionService.vb" />
     <Compile Include="MappingProfileAccounts.vb" />
     <Compile Include="SetSettings.Designer.vb">
       <DependentUpon>SetSettings.vb</DependentUpon>
@@ -2886,6 +2891,7 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
+    <None Include="appLive.config" />
     <None Include="app -  ibn-server - Kizen %28local ispadmin2%29.config" />
     <None Include="app - ibn-server.config" />
     <None Include="app - Copy.config" />
@@ -3162,10 +3168,7 @@
     <None Include="Resources\Deduction.png" />
   </ItemGroup>
   <Target Name="CopyResourcesExtensionsToOutput" AfterTargets="Build">
-    <Copy SourceFiles="$(MSBuildThisFileDirectory)..\packages\System.Resources.Extensions.8.0.0\lib\net462\System.Resources.Extensions.dll;
-                               $(MSBuildThisFileDirectory)..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll"
-          DestinationFolder="$(TargetDir)"
-          SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)..\packages\System.Resources.Extensions.8.0.0\lib\net462\System.Resources.Extensions.dll;&#xA;                               $(MSBuildThisFileDirectory)..\packages\System.Formats.Nrbf.9.0.0\lib\net462\System.Formats.Nrbf.dll;&#xA;                               $(MSBuildThisFileDirectory)..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
   </Target>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

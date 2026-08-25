@@ -68,6 +68,7 @@ Namespace PresentationLayer.Presenters
         Public Overrides Function Save(ByRef viewControl As System.Windows.Forms.Control) As Boolean
             If AddMode AndAlso View.TransactionDate.HasValue AndAlso View.TransactionDate.Value.Date >= New Date(2026, 1, 1) Then
                 Try
+                    OnBeforeSave()
                     Dim model As New ApJournalModel()
                     GlobalVariables.Mapper.Map(View, model)
                     Dim transactionService As New AATM.Accounts.ServiceLayer.ApJournalTransactionService()
@@ -78,6 +79,7 @@ Namespace PresentationLayer.Presenters
                     EditMode = False
                     UpdateViewData(journalId)
                     UpdateViewDisplay()
+                    Messaging.Show(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
                     Return True
                 Catch ex As Exception
                     Messaging.Show(ex.Message, System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error)
@@ -86,12 +88,16 @@ Namespace PresentationLayer.Presenters
             End If
             If EditMode AndAlso View.TransactionDate.HasValue AndAlso View.TransactionDate.Value.Date >= New Date(2026, 1, 1) Then
                 Try
+                    OnBeforeSave()
                     Dim model As New ApJournalModel()
                     GlobalVariables.Mapper.Map(View, model)
                     Dim transactionService As New AATM.Accounts.ServiceLayer.ApJournalTransactionService()
                     transactionService.UpdateExisting(model)
+                    AddMode = False
+                    EditMode = False
                     UpdateViewData(View.IdNo)
                     UpdateViewDisplay()
+                    Messaging.Show(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
                     Return True
                 Catch ex As Exception
                     Messaging.Show(ex.Message, System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error)
@@ -186,8 +192,12 @@ Namespace PresentationLayer.Presenters
             If idNo <> 0 Then
                 Dim apOpenInvoiceService As New AccountsService("ApOpenInvoice")
                 If apOpenInvoiceService.CountRecordWithKey(Of Integer)("CdOiItem", "ApOpenInvoiceIdNo", idNo) = 0 And
+                apOpenInvoiceService.CountRecordWithKey(Of Integer)("CkOiItem", "ApOpenInvoiceIdNo", idNo) = 0 And
                 apOpenInvoiceService.CountRecordWithKey(Of Integer)("PcOiItem", "ApOpenInvoiceIdNo", idNo) = 0 Then
                     retVal = apOpenInvoiceService.DeleteRecord(idNo, "ApOpenInvoice")
+                Else
+                    'Do not remove the parent marker while a payment allocation still points to it.
+                    retVal = -1
                 End If
             End If
             Return retVal
@@ -401,7 +411,7 @@ Namespace PresentationLayer.Presenters
 
         Public Function ApPaymentExists(ByVal journalCode As String, ByVal idNo As Integer) As Boolean
             Dim apOpenInvoiceIdNo As Integer
-            apOpenInvoiceIdNo = Service.GetRecordFieldWith2Key(journalCode, idNo, "ArOpenInvoice", "JournalCode",
+            apOpenInvoiceIdNo = Service.GetRecordFieldWith2Key(journalCode, idNo, "ApOpenInvoice", "JournalCode",
                                                                "JournalItemIdNo", "IdNo")
             If Service.CountRecordWithKey(Of Integer)("CdOiItem", "ApOpenInvoiceIdNo", apOpenInvoiceIdNo) > 0 Then
                 Return True
@@ -451,8 +461,9 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Overrides Function IsOkToDeleteRecord() As Boolean
-            Dim retValue As Boolean = True
-            If MyBase.IsOkToDeleteRecord Then
+            Dim retValue As Boolean = False
+            If MyBase.IsOkToDeleteRecord() Then
+                retValue = True
                 If ReconciledEntriesExist(View.JournalItems, "AP") Then
                     retValue = False
                 ElseIf DependentRecordExist() Then

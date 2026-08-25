@@ -14,6 +14,11 @@ Namespace PresentationLayer.Views.Interfaces
         Property OutstandingCredits As Decimal
         Property OutstandingDeposits As Decimal
         Property Posted As Boolean
+        Property Status As String
+        Property ReviewedBy As String
+        Property ReviewedAt As DateTime?
+        Property FinalizedBy As String
+        Property FinalizedAt As DateTime?
         Property ReconciliationDate As Date?
         Property TotalCreditsCleared As Decimal
         Property TotalCreditsNotCleared As Decimal
@@ -30,6 +35,10 @@ Namespace PresentationLayer.Views.Interfaces
         Event ReconciliationClearEvent(sender As Object, all As Boolean, clear As Boolean, bindingSource As BindingSource)
 
         Event ReconciliationPostingRequestEvent(sender As Object, bsAccountReconciliationItem As BindingSource)
+
+        Event ReconciliationReviewCompletionRequestEvent(sender As Object)
+
+        Event ReconciliationReviewReopenRequestEvent(sender As Object)
 
         Event EndingBankBalanceEntryChangedEvent()
 

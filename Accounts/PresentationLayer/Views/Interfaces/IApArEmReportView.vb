@@ -19,6 +19,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property NoDates As Boolean
         Event ReportLoaded()
         Event PrintButtonClicked()
+        Event LanguageChanged()
 
     End Interface
 

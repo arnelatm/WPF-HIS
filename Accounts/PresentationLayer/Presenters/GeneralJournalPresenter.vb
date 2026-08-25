@@ -95,10 +95,12 @@ Namespace PresentationLayer.Presenters
                     ElseIf EditMode Then
                         Dim transactionService As New AATM.Accounts.ServiceLayer.GeneralJournalTransactionService()
                         transactionService.UpdateExisting(model)
+                        AddMode=False : EditMode=False
                         UpdateViewData(View.IdNo) : UpdateViewDisplay()
                     Else
                         Return MyBase.Save(viewControl)
                     End If
+                    Messaging.Show(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
                     Return True
                 Catch ex As Exception
                     Messaging.Show(ex.Message,System.Windows.Forms.MessageBoxButtons.OK,System.Windows.Forms.MessageBoxIcon.Error)
@@ -215,8 +217,9 @@ Namespace PresentationLayer.Presenters
 
 
         Public Overrides Function IsOkToDeleteRecord() As Boolean
-            Dim retValue As Boolean = True
-            If MyBase.IsOkToDeleteRecord Then
+            Dim retValue As Boolean = False
+            If MyBase.IsOkToDeleteRecord() Then
+                retValue = True
                 If ReconciledEntriesExist(View.JournalItems, "GJ") Then
                     retValue = False
                 End If

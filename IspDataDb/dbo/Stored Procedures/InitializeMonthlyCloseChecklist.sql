@@ -1,4 +1,4 @@
-CREATE OR ALTER PROCEDURE [dbo].[InitializeMonthlyCloseChecklist]
+CREATE PROCEDURE [dbo].[InitializeMonthlyCloseChecklist]
     @FiscalYear int,
     @FiscalMonth int
 AS

@@ -15,7 +15,7 @@ CREATE TABLE [dbo].[FiscalYearJournalPostingRun] (
     CONSTRAINT [PK_FiscalYearJournalPostingRun] PRIMARY KEY CLUSTERED ([IdNo] ASC),
     CONSTRAINT [UQ_FiscalYearJournalPostingRun_RunId] UNIQUE NONCLUSTERED ([RunId] ASC),
     CONSTRAINT [CK_FiscalYearJournalPostingRun_Status]
-        CHECK ([Status] IN ('Completed', 'Reversed')),
+        CHECK ([Status] = 'Completed' OR [Status] = 'Reversed'),
     CONSTRAINT [CK_FiscalYearJournalPostingRun_Dates]
         CHECK ([FiscalYearStart] <= [FiscalYearEnd])
 );

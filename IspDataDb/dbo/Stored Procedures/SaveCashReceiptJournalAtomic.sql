@@ -25,11 +25,14 @@ BEGIN
   SELECT AccountIdNo,Credit,Debit,@JournalIdNo,Notes,PayIdNo,RevCostCenterIdNo,Sequence FROM @Items;
   INSERT dbo.CsrOiItem(Amount,ArOpenInvoiceIdNo,CsrIdNo,DiscountTaken,Sequence)
   SELECT Amount,ArOpenInvoiceIdNo,@JournalIdNo,DiscountTaken,Sequence FROM @OiItems;
-  DECLARE @s varchar(20)='GL'+CONVERT(varchar(4),YEAR(@TransactionDate))+RIGHT('0'+CONVERT(varchar(2),MONTH(@TransactionDate)),2), @p varchar(10), @m int, @v int;
-  SELECT @v=Value,@p=Prefix,@m=MaxLength FROM dbo.Series WITH(UPDLOCK,HOLDLOCK) WHERE SeriesName=@s;
-  IF @p IS NULL BEGIN SET @p=RIGHT('0'+CONVERT(varchar(2),MONTH(@TransactionDate)),2)+'-'; SET @m=3; SET @v=0; INSERT dbo.Series(SeriesName,Value,MaxLength,Prefix,Description) VALUES(@s,0,@m,@p,'GL Series for '+@s); END;
-  SET @v=@v+1; UPDATE dbo.Series SET Value=@v WHERE SeriesName=@s;
-  UPDATE dbo.CashReceiptJournal SET ReferenceNo=@p+RIGHT(REPLICATE('0',@m)+CONVERT(varchar(20),@v),@m) WHERE IdNo=@JournalIdNo;
+  IF NULLIF(LTRIM(RTRIM(@ReferenceNo)), '') IS NULL
+  BEGIN
+   DECLARE @s varchar(20)='GL'+CONVERT(varchar(4),YEAR(@TransactionDate))+RIGHT('0'+CONVERT(varchar(2),MONTH(@TransactionDate)),2), @p varchar(10), @m int, @v int;
+   SELECT @v=Value,@p=Prefix,@m=MaxLength FROM dbo.Series WITH(UPDLOCK,HOLDLOCK) WHERE SeriesName=@s;
+   IF @p IS NULL BEGIN SET @p=RIGHT('0'+CONVERT(varchar(2),MONTH(@TransactionDate)),2)+'-'; SET @m=3; SET @v=0; INSERT dbo.Series(SeriesName,Value,MaxLength,Prefix,Description) VALUES(@s,0,@m,@p,'GL Series for '+@s); END;
+   SET @v=@v+1; UPDATE dbo.Series SET Value=@v WHERE SeriesName=@s;
+   UPDATE dbo.CashReceiptJournal SET ReferenceNo=@p+RIGHT(REPLICATE('0',@m)+CONVERT(varchar(20),@v),@m) WHERE IdNo=@JournalIdNo;
+  END;
   COMMIT;
  END TRY
  BEGIN CATCH IF XACT_STATE()<>0 ROLLBACK; SET @JournalIdNo=0; THROW; END CATCH

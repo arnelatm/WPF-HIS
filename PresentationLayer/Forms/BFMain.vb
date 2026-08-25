@@ -967,7 +967,7 @@ Public Class BfMain
         Dim r As Integer
         If CaptionCollection.Contains(cToolStrip.Name + "." + obj.Name + "." + propName) Then
             r = Dv.Find(CaptionCollection.Item(cToolStrip.Name + "." + obj.Name + "." + propName))
-            If r > 0 Then
+            If r >= 0 Then
                 translatedText = Dv(r).Item("translatedCaption")
             Else
                 translatedText = obj.Tag(If(propName = "Text", 0, 1))
@@ -1410,7 +1410,7 @@ Public Class BfMain
                 If subMenu IsNot Nothing Then
                     Dim r As Int16
                     r = Dv.Find(obj.Tag)
-                    If r > 0 Then
+                    If r >= 0 Then
                         obj.Text = Dv(r).Item("translatedCaption")
                     Else
                         obj.Text = obj.Tag

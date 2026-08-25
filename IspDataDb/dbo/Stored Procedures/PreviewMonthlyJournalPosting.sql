@@ -1,4 +1,4 @@
-CREATE OR ALTER PROCEDURE [dbo].[PreviewMonthlyJournalPosting]
+CREATE PROCEDURE [dbo].[PreviewMonthlyJournalPosting]
     @FiscalYear int,
     @Month int
 AS

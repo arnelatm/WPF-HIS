@@ -148,8 +148,8 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemEmployeeLeavesEarnedApproval = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemClosing = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemClosingEntry = New System.Windows.Forms.ToolStripMenuItem()
-            Me.ToolStripMenuItemFiscalYearPosting = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemMonthlyPosting = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemFiscalYearPosting = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPayrollTransaction = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPayrollEntry = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemRecurringPayrollEntry = New System.Windows.Forms.ToolStripMenuItem()
@@ -166,13 +166,13 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemBaladiyaResultEntryIGroup = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemDiagnosticSamples = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemClinicSamples = New System.Windows.Forms.ToolStripMenuItem()
-            Me.ToolStripMenuItemMedicalFitnessReport = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemLabReportStatus = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPharmacy = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemDrugSale = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemDrugAcceptance = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemItemMatcher = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemDosagePrinting = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemMedicalFitnessReportEntry = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemDocManagement = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemInvoiceNoteEditor = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemReports = New System.Windows.Forms.ToolStripMenuItem()
@@ -195,6 +195,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemBSQuarterly = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemBSSemestral = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemBSCustom = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemBSClosingYear = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemIncomeStatement = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemISYearly = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemISMonthly = New System.Windows.Forms.ToolStripMenuItem()
@@ -273,7 +274,6 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-            Me.ToolStripMenuItemBSClosingYear = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.AccountsMenu.SuspendLayout()
@@ -748,7 +748,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemTransactions
             '
-            Me.ToolStripMenuItemTransactions.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPettyCash, Me.ToolStripMenuItemCashDisbursementEntry, Me.ToolStripMenuItemAccountsPayableEntry, Me.ToolStripMenuItemAccountsReceivableEntry, Me.ToolStripMenuItemCashReceiptEntry, Me.ToolStripMenuItemEmployeeReceivable, Me.ToolStripMenuItemGeneralJournalEntry, Me.ToolStripMenuItemSales, Me.ToolStripMenuItemPurchases, Me.ToolStripMenuItemSalesJournalEntry, Me.ToolStripMenuItemInventoryTransactions, Me.ToolStripMenuItemAccountReconciliation, Me.ToolStripMenuItemPostPettyCashAccount, Me.ToolStripMenuItemHR, Me.ToolStripMenuItemClosing, Me.ToolStripMenuItemPayrollTransaction, Me.ToolStripMenuItemShiftSummaryEntry, Me.ToolStripSeparator2, Me.ToolStripMenuItemClosePettyCashFund, Me.ToolStripMenuItemLaboratory, Me.ToolStripMenuItemPharmacy, Me.ToolStripMenuItemDocManagement, Me.ToolStripMenuItemInvoiceNoteEditor})
+            Me.ToolStripMenuItemTransactions.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPettyCash, Me.ToolStripMenuItemCashDisbursementEntry, Me.ToolStripMenuItemAccountsPayableEntry, Me.ToolStripMenuItemAccountsReceivableEntry, Me.ToolStripMenuItemCashReceiptEntry, Me.ToolStripMenuItemEmployeeReceivable, Me.ToolStripMenuItemGeneralJournalEntry, Me.ToolStripMenuItemSales, Me.ToolStripMenuItemPurchases, Me.ToolStripMenuItemSalesJournalEntry, Me.ToolStripMenuItemInventoryTransactions, Me.ToolStripMenuItemAccountReconciliation, Me.ToolStripMenuItemPostPettyCashAccount, Me.ToolStripMenuItemHR, Me.ToolStripMenuItemClosing, Me.ToolStripMenuItemPayrollTransaction, Me.ToolStripMenuItemShiftSummaryEntry, Me.ToolStripSeparator2, Me.ToolStripMenuItemClosePettyCashFund, Me.ToolStripMenuItemLaboratory, Me.ToolStripMenuItemPharmacy, Me.ToolStripMenuItemMedicalFitnessReportEntry, Me.ToolStripMenuItemDocManagement, Me.ToolStripMenuItemInvoiceNoteEditor})
             Me.ToolStripMenuItemTransactions.Name = "ToolStripMenuItemTransactions"
             resources.ApplyResources(Me.ToolStripMenuItemTransactions, "ToolStripMenuItemTransactions")
             '
@@ -906,16 +906,15 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemClosingEntry.Name = "ToolStripMenuItemClosingEntry"
             resources.ApplyResources(Me.ToolStripMenuItemClosingEntry, "ToolStripMenuItemClosingEntry")
             '
+            'ToolStripMenuItemMonthlyPosting
+            '
+            Me.ToolStripMenuItemMonthlyPosting.Name = "ToolStripMenuItemMonthlyPosting"
+            resources.ApplyResources(Me.ToolStripMenuItemMonthlyPosting, "ToolStripMenuItemMonthlyPosting")
+            '
             'ToolStripMenuItemFiscalYearPosting
             '
             Me.ToolStripMenuItemFiscalYearPosting.Name = "ToolStripMenuItemFiscalYearPosting"
             resources.ApplyResources(Me.ToolStripMenuItemFiscalYearPosting, "ToolStripMenuItemFiscalYearPosting")
-            '
-            'ToolStripMenuItemMonthlyPosting
-            '
-            Me.ToolStripMenuItemMonthlyPosting.Name = "ToolStripMenuItemMonthlyPosting"
-            Me.ToolStripMenuItemMonthlyPosting.Text = "Monthly Journal Posting"
-            Me.ToolStripMenuItemMonthlyPosting.Size = New System.Drawing.Size(220, 22)
             '
             'ToolStripMenuItemPayrollTransaction
             '
@@ -950,7 +949,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemLaboratory
             '
-            Me.ToolStripMenuItemLaboratory.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemCbcResultRetrieval, Me.ToolStripMenuItemCbcResultRetrievalSampleId, Me.ToolStripMenuItemIqamaResultEntryKizen, Me.ToolStripMenuItemBaladiyaResultEntryKizen, Me.ToolStripMenuItemDiagnosticSamplesKizen, Me.ToolStripMenuItemIqamaResultEntryIGroup, Me.ToolStripMenuItemBaladiyaResultEntryIGroup, Me.ToolStripMenuItemDiagnosticSamples, Me.ToolStripMenuItemClinicSamples, Me.ToolStripMenuItemMedicalFitnessReport, Me.ToolStripMenuItemLabReportStatus})
+            Me.ToolStripMenuItemLaboratory.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemCbcResultRetrieval, Me.ToolStripMenuItemCbcResultRetrievalSampleId, Me.ToolStripMenuItemIqamaResultEntryKizen, Me.ToolStripMenuItemBaladiyaResultEntryKizen, Me.ToolStripMenuItemDiagnosticSamplesKizen, Me.ToolStripMenuItemIqamaResultEntryIGroup, Me.ToolStripMenuItemBaladiyaResultEntryIGroup, Me.ToolStripMenuItemDiagnosticSamples, Me.ToolStripMenuItemClinicSamples, Me.ToolStripMenuItemLabReportStatus})
             Me.ToolStripMenuItemLaboratory.Name = "ToolStripMenuItemLaboratory"
             resources.ApplyResources(Me.ToolStripMenuItemLaboratory, "ToolStripMenuItemLaboratory")
             '
@@ -999,11 +998,6 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemClinicSamples.Name = "ToolStripMenuItemClinicSamples"
             resources.ApplyResources(Me.ToolStripMenuItemClinicSamples, "ToolStripMenuItemClinicSamples")
             '
-            'ToolStripMenuItemMedicalFitnessReport
-            '
-            Me.ToolStripMenuItemMedicalFitnessReport.Name = "ToolStripMenuItemMedicalFitnessReport"
-            resources.ApplyResources(Me.ToolStripMenuItemMedicalFitnessReport, "ToolStripMenuItemMedicalFitnessReport")
-            '
             'ToolStripMenuItemLabReportStatus
             '
             Me.ToolStripMenuItemLabReportStatus.Name = "ToolStripMenuItemLabReportStatus"
@@ -1034,6 +1028,11 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.ToolStripMenuItemDosagePrinting.Name = "ToolStripMenuItemDosagePrinting"
             resources.ApplyResources(Me.ToolStripMenuItemDosagePrinting, "ToolStripMenuItemDosagePrinting")
+            '
+            'ToolStripMenuItemMedicalFitnessReportEntry
+            '
+            Me.ToolStripMenuItemMedicalFitnessReportEntry.Name = "ToolStripMenuItemMedicalFitnessReportEntry"
+            resources.ApplyResources(Me.ToolStripMenuItemMedicalFitnessReportEntry, "ToolStripMenuItemMedicalFitnessReportEntry")
             '
             'ToolStripMenuItemDocManagement
             '
@@ -1147,6 +1146,11 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.ToolStripMenuItemBSCustom.Name = "ToolStripMenuItemBSCustom"
             resources.ApplyResources(Me.ToolStripMenuItemBSCustom, "ToolStripMenuItemBSCustom")
+            '
+            'ToolStripMenuItemBSClosingYear
+            '
+            Me.ToolStripMenuItemBSClosingYear.Name = "ToolStripMenuItemBSClosingYear"
+            resources.ApplyResources(Me.ToolStripMenuItemBSClosingYear, "ToolStripMenuItemBSClosingYear")
             '
             'ToolStripMenuItemIncomeStatement
             '
@@ -1556,11 +1560,6 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
             '
-            'ToolStripMenuItemBSClosingYear
-            '
-            Me.ToolStripMenuItemBSClosingYear.Name = "ToolStripMenuItemBSClosingYear"
-            resources.ApplyResources(Me.ToolStripMenuItemBSClosingYear, "ToolStripMenuItemBSClosingYear")
-            '
             'MainForm
             '
             Me.AllowDrop = True
@@ -1827,10 +1826,10 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ToolStripMenuItemBaladiyaResultEntryKizen As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemBaladiyaResultEntryIGroup As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemInvoiceNoteEditor As ToolStripMenuItem
-        Friend WithEvents ToolStripMenuItemMedicalFitnessReport As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemLabReportStatus As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemTBClosingYear As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemBSClosingYear As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemMonthlyPosting As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemMedicalFitnessReportEntry As ToolStripMenuItem
     End Class
 End NameSpace

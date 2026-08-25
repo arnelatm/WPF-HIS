@@ -72,6 +72,7 @@ Namespace PresentationLayer.Presenters
                     EditMode = False
                     UpdateViewData(idNo)
                     UpdateViewDisplay()
+                    Messaging.Show(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
                     Return True
                 Catch ex As Exception
                     Messaging.Show(ex.Message, System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error)
@@ -84,8 +85,11 @@ Namespace PresentationLayer.Presenters
                     GlobalVariables.Mapper.Map(View, model)
                     Dim transactionService As New AATM.Accounts.ServiceLayer.ArJournalTransactionService()
                     transactionService.UpdateExisting(model)
+                    AddMode = False
+                    EditMode = False
                     UpdateViewData(View.IdNo)
                     UpdateViewDisplay()
+                    Messaging.Show(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
                     Return True
                 Catch ex As Exception
                     Messaging.Show(ex.Message, System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error)
@@ -179,6 +183,9 @@ Namespace PresentationLayer.Presenters
                 Dim arOpenInvoiceService As New AccountsService("ArOpenInvoice")
                 If arOpenInvoiceService.CountRecordWithKey(Of Integer)("CsrOiItem", "ArOpenInvoiceIdNo", idNo) = 0 Then
                     retVal = arOpenInvoiceService.DeleteRecord(idNo, "ArOpenInvoice")
+                Else
+                    'Do not remove the parent marker while a collection allocation still points to it.
+                    retVal = -1
                 End If
             End If
             Return retVal
@@ -424,8 +431,9 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Overrides Function IsOkToDeleteRecord() As Boolean
-            Dim retValue As Boolean = True
-            If MyBase.IsOkToDeleteRecord Then
+            Dim retValue As Boolean = False
+            If MyBase.IsOkToDeleteRecord() Then
+                retValue = True
                 If ReconciledEntriesExist(View.JournalItems, "AR") Then
                     retValue = False
                 ElseIf DependentRecordExist() Then

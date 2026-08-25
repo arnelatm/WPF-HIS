@@ -28,6 +28,7 @@ Public Class ApArEmReportPresenter(Of TM As New)
         _reportCode = reportCode
         AddHandler view.PrintButtonClicked, AddressOf OnPrintButtonClicked
         AddHandler view.ReportLoaded, AddressOf OnReportLoaded
+        AddHandler view.LanguageChanged, AddressOf OnReportLanguageChanged
         SetupReportSpecs()
 
     End Sub
@@ -49,7 +50,7 @@ Public Class ApArEmReportPresenter(Of TM As New)
                 _tableName = "Supplier"
                 View.NoDates = False
             Case "ArStatement"
-                _reportName = "Statement Of Accounts Receivable"
+                _reportName = "Statement of Accounts Receivable"
                 If View.Language = "ar" Then
                     _reportFileName = "Statement of Accounts Receivable Arabic.Rpt"
                 Else
@@ -159,6 +160,10 @@ Public Class ApArEmReportPresenter(Of TM As New)
             Case "ArStatement"
                 View.PersonSelectorLabel = "Customer Name"
         End Select
+    End Sub
+
+    Private Sub OnReportLanguageChanged()
+        View.Title = Libraries.MessagingLibrary.Messaging.TranslateCaption(_reportName)
     End Sub
 
 

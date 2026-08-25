@@ -1,4 +1,4 @@
-CREATE OR ALTER PROCEDURE [dbo].[PostMonthlyJournalEntries]
+CREATE PROCEDURE [dbo].[PostMonthlyJournalEntries]
     @FiscalYear int,
     @Month int,
     @ExecutePosting bit = 0

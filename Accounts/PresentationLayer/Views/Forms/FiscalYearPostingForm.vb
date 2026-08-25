@@ -4,6 +4,7 @@ Imports System.Linq
 Imports System.Data.SqlClient
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Views.Forms
@@ -34,14 +35,11 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub ExecuteButton_Click(sender As Object, e As EventArgs)
             If _lastPreview Is Nothing OrElse _lastPreview.Tables.Count = 0 Then
-                MessageBox.Show("Run Preview before executing posting.", "Fiscal-Year Posting", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Messaging.Show(True, "MsgRunPreviewBeforeExecution", "Run Preview before executing posting.", "Fiscal-Year Posting", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Return
             End If
 
-            If MessageBox.Show(
-                    "This will mark all currently unposted journal headers and items in fiscal year " & _fiscalYear.Value.ToString() & " as Posted." & Environment.NewLine &
-                    "The operation is audited and cannot be undone by this screen. Continue?",
-                    "Confirm fiscal-year posting", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) <> DialogResult.Yes Then
+            If Messaging.Show(True, "MsgConfirmFiscalYearPosting", "This will mark all currently unposted journal headers and items in fiscal year {year} as Posted. The operation is audited and cannot be undone by this screen. Continue?", "Confirm fiscal-year posting", {"year", _fiscalYear.Value.ToString()}, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) <> DialogResult.Yes Then
                 Return
             End If
 
@@ -58,20 +56,21 @@ Namespace PresentationLayer.Views.Forms
 
                 If executePosting Then
                     _executeButton.Enabled = False
-                    _statusLabel.Text = "Posting completed. Run Preview again to verify the final state."
+                    _statusLabel.Text = Messaging.TranslateCaption("Posting completed. Run Preview again to verify the final state.")
                 Else
                     Dim blockingErrors = GetInt(data, 0, "BlockingErrors")
                     Dim headersToPost = GetInt(data, 0, "HeadersToPost")
                     Dim itemsToPost = GetInt(data, 0, "ItemsToPost")
                     _executeButton.Enabled = blockingErrors = 0 AndAlso (headersToPost > 0 OrElse itemsToPost > 0)
-                    _statusLabel.Text = String.Format(
-                        "Blocking errors: {0}; headers to post: {1}; items to post: {2}",
-                        blockingErrors, headersToPost, itemsToPost)
+                    Dim postingStatus = "Blocking errors: {errors}; headers to post: {headers}; items to post: {items}"
+                    Dim postingCaption = "Fiscal-Year Posting"
+                    Messaging.GetMessage(True, "MsgFiscalPostingStatus", postingStatus, postingCaption)
+                    _statusLabel.Text = Messaging.ReplaceValues(postingStatus, {"errors", blockingErrors.ToString(), "headers", headersToPost.ToString(), "items", itemsToPost.ToString()})
                 End If
             Catch ex As Exception
                 _executeButton.Enabled = False
-                _statusLabel.Text = "Posting request failed."
-                MessageBox.Show(ex.Message, "Fiscal-Year Posting", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                _statusLabel.Text = Messaging.TranslateCaption("Posting request failed.")
+                Messaging.Show(True, "MsgFiscalPostingRequestFailed", "Fiscal-year posting request failed: {details}", "Fiscal-Year Posting", {"details", ex.Message}, MessageBoxButtons.OK, MessageBoxIcon.Error)
             Finally
                 Cursor = Cursors.Default
             End Try
@@ -111,7 +110,7 @@ Namespace PresentationLayer.Views.Forms
                     Select(Function(column) column.ColumnName & "=" & If(summaryRow(column) Is DBNull.Value, "", summaryRow(column).ToString()))
                 _summaryInfo.Text = String.Join("  |  ", summaryValues)
             Else
-                _summaryInfo.Text = "No validation summary was returned."
+                _summaryInfo.Text = Messaging.TranslateCaption("No validation summary was returned.")
             End If
 
             For tableIndex As Integer = 2 To data.Tables.Count - 1

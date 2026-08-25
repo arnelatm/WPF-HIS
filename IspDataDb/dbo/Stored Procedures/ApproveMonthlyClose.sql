@@ -1,4 +1,4 @@
-CREATE OR ALTER PROCEDURE [dbo].[ApproveMonthlyClose]
+CREATE PROCEDURE [dbo].[ApproveMonthlyClose]
     @FiscalYear int,
     @FiscalMonth int,
     @ApprovalNotes nvarchar(500) = NULL,
