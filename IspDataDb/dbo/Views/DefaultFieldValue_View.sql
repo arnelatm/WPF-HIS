@@ -5,7 +5,7 @@ SELECT        dbo.DefaultFieldValue.IdNo, dbo.DefaultFieldValue.SystemViewIdNo, 
                          dbo.DefaultFieldValue.LinkedTable, dbo.DefaultFieldValue.LinkedFieldValue, dbo.DefaultFieldValue.LinkedField, dbo.DefaultFieldValue.DefaultValue, dbo.DefaultFieldValue.DateTimeStamp, dbo.DefaultFieldValue.IdNo AS Expr1, 
                          dbo.DefaultFieldValue.SystemViewIdNo AS Expr2, dbo.DefaultFieldValue.FieldName AS Expr4, dbo.DefaultFieldValue.DataType AS Expr5, dbo.DefaultFieldValue.Length AS Expr6, dbo.DefaultFieldValue.DecimalPart AS Expr7, 
                          dbo.DefaultFieldValue.LinkedTable AS Expr8, dbo.DefaultFieldValue.LinkedFieldValue AS Expr9, dbo.DefaultFieldValue.LinkedField AS Expr10, dbo.DefaultFieldValue.DefaultValue AS Expr11, dbo.SystemView.SystemViewCode, 
-                         dbo.SystemView.SystemViewName collate SQL_Latin1_General_CP1_CI_AS 'SystemViewName', dbo.SystemView.SystemViewNameAra, dbo.SystemView.DefaultValuesEnable
+                         CONVERT(NVARCHAR(50), dbo.SystemView.SystemViewName) COLLATE SQL_Latin1_General_CP1_CI_AS 'SystemViewName', CONVERT(NVARCHAR(50), dbo.SystemView.SystemViewNameAra) AS SystemViewNameAra, dbo.SystemView.DefaultValuesEnable
 FROM            dbo.DefaultFieldValue INNER JOIN
                          dbo.SystemView ON dbo.DefaultFieldValue.SystemViewIdNo = dbo.SystemView.IdNo
 

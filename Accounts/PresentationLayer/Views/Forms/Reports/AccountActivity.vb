@@ -53,10 +53,12 @@ Namespace PresentationLayer.Views.Forms.Reports
                 dtpBeginningDate.Value = dtpEndingDate.Value
                 dtpEndingDate.Value = dDate
             End If
-            If cboStartAccountCode.SelectedValue > cboEndAccountCode.SelectedValue Then
-                cTemp = cboStartAccountCode.SelectedValue
-                cboStartAccountCode.SelectedValue = cboEndAccountCode.SelectedValue
-                cboEndAccountCode.SelectedValue = cTemp
+            Dim beginningAccountCode As String = GetSelectedAccountCode(cboStartAccountCode)
+            Dim endingAccountCode As String = GetSelectedAccountCode(cboEndAccountCode)
+            If String.CompareOrdinal(beginningAccountCode, endingAccountCode) > 0 Then
+                cTemp = beginningAccountCode
+                beginningAccountCode = endingAccountCode
+                endingAccountCode = cTemp
             End If
 
             Refresh()
@@ -86,8 +88,8 @@ Namespace PresentationLayer.Views.Forms.Reports
                                                dtpBeginningDate.Value, "BeginningDate",
                                                dtpEndingDate.Value, "EndingDate",
                                                estName, "EstablishmentName",
-                                               cboStartAccountCode.SelectedValue, "BegAccountCode",
-                                               cboEndAccountCode.SelectedValue, "EndAccountCode"}
+                                               beginningAccountCode, "BegAccountCode",
+                                               endingAccountCode, "EndAccountCode"}
                 RaiseEvent PrintReport(reportFileName, reportArgs, False)
             End If
             CultureInfo.CurrentCulture = curCulture
@@ -108,6 +110,13 @@ Namespace PresentationLayer.Views.Forms.Reports
             cboStartAccountCode.EditingMode = True
             cboEndAccountCode.EditingMode = True
         End Sub
+
+        Private Function GetSelectedAccountCode(accountControl As Libraries.CBaseControlsLibrary.CtCombobox) As String
+            If accountControl.SelectedValue Is Nothing OrElse IsDBNull(accountControl.SelectedValue) Then
+                Return Nothing
+            End If
+            Return Presenter.GetRecordFieldWithKeyG(Of String)(CStr(accountControl.SelectedValue), "Account", "IdNo", "AccountCode")
+        End Function
 
 
         Friend WithEvents CLabel2 As Libraries.CBaseControlsLibrary.CLabel

@@ -2499,7 +2499,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         If dtl.LuFields Is Nothing Then
             dtl.NameFieldOrig = dtl.TableName + "Name"
             dtl.NameField = TranslateNameField(dtl.TableName, dtl.NameFieldOrig)
-            dtl.NameDisplayValue = dtl.NameField + "+'-'+" + dtl.TableName + "Code"
+            dtl.NameDisplayValue = GetLookupNameField(dtl.TableName, dtl.NameField) + "+'-'+" + dtl.TableName + "Code"
             If dtl.ValueMember Is Nothing Then
                 dtl.ValueMember = "IdNo"
             End If
@@ -2515,10 +2515,10 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
             If fieldNames.Count() = 1 Then
                 dtl.NameFieldOrig = fieldNames(0)
                 dtl.NameField = TranslateNameField(dtl.TableName, dtl.NameFieldOrig)
-                dtl.NameDisplayValue = dtl.NameField
+                dtl.NameDisplayValue = GetLookupNameField(dtl.TableName, dtl.NameField)
                 dtl.ValueMember = "Name"
                 dtl.DisplayMember = "Name"
-                dtl.LuFields = dtl.NameField + " as Name"
+                dtl.LuFields = dtl.NameDisplayValue + " as Name"
                 If dtl.SortKey Is Nothing Then
                     dtl.SortKey = fieldNames(0)
                 End If
@@ -2526,12 +2526,12 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
                 ' assumed the first field is the value member and the second field as the display Value
                 dtl.NameFieldOrig = fieldNames(1)
                 dtl.NameField = TranslateNameField(dtl.TableName, dtl.NameFieldOrig)
-                dtl.NameDisplayValue = "Concat(" + dtl.NameField + " COLLATE SQL_Latin1_General_CP1_CI_AS,'-'," + fieldNames(0) + ") COLLATE SQL_Latin1_General_CP1_CI_AS"
+                dtl.NameDisplayValue = "Concat(" + GetLookupNameField(dtl.TableName, dtl.NameField) + " COLLATE SQL_Latin1_General_CP1_CI_AS,'-'," + fieldNames(0) + ") COLLATE SQL_Latin1_General_CP1_CI_AS"
                 If dtl.ValueMember Is Nothing Then
                     dtl.ValueMember = "IdNo"
                 End If
                 If dtl.DisplayMember Is Nothing Then
-                    dtl.NameDisplayValue = "Concat(" + dtl.NameField + " COLLATE SQL_Latin1_General_CP1_CI_AS,'-'," + fieldNames(0) + ") COLLATE SQL_Latin1_General_CP1_CI_AS"
+                    dtl.NameDisplayValue = "Concat(" + GetLookupNameField(dtl.TableName, dtl.NameField) + " COLLATE SQL_Latin1_General_CP1_CI_AS,'-'," + fieldNames(0) + ") COLLATE SQL_Latin1_General_CP1_CI_AS"
                     dtl.DisplayMember = "Name"
                 End If
                 dtl.LuFields = fieldNames(0) + " as IdNo," + dtl.NameDisplayValue + " as Name"
@@ -2540,7 +2540,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
                 End If
             ElseIf fieldNames.Count() = 3 Then
                 dtl.NameField = fieldNames(1).Trim()
-                dtl.NameDisplayValue = "Concat(" + TranslateNameField(dtl.TableName, dtl.NameField) + " COLLATE SQL_Latin1_General_CP1_CI_AS,'-'," + fieldNames(2) + ") COLLATE SQL_Latin1_General_CP1_CI_AS"
+                dtl.NameDisplayValue = "Concat(" + GetLookupNameField(dtl.TableName, TranslateNameField(dtl.TableName, dtl.NameField)) + " COLLATE SQL_Latin1_General_CP1_CI_AS,'-'," + fieldNames(2) + ") COLLATE SQL_Latin1_General_CP1_CI_AS"
                 If dtl.ValueMember Is Nothing Then
                     dtl.ValueMember = "IdNo"
                 End If
@@ -2567,6 +2567,13 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
             End If
         End If
         Return retValue
+    End Function
+
+    Private Function GetLookupNameField(tableName As String, nameField As String) As String
+        If String.Equals(tableName, "Account", StringComparison.OrdinalIgnoreCase) AndAlso String.Equals(nameField, "AccountName", StringComparison.OrdinalIgnoreCase) Then
+            Return "CONVERT(NVARCHAR(50), CASE WHEN NULLIF(LTRIM(RTRIM(AccountName)), '') IS NULL OR AccountName NOT LIKE '%[^? ]%' THEN COALESCE(AccountNameAra, AccountName) ELSE AccountName END)"
+        End If
+        Return "CONVERT(NVARCHAR(4000), " + nameField.Trim() + ")"
     End Function
 
     Public Function CurrentLanguage() As String
