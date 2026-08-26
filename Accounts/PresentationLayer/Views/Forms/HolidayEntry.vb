@@ -8,6 +8,7 @@ Namespace PresentationLayer.Views.Forms
         Implements IHolidayView
 
         Private ReadOnly _nfi As NumberFormatInfo
+        Private _dateCreated As DateTime?
 
         Public Sub New()
             ' This call is required by the designer.
@@ -30,16 +31,14 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DateCreated As DateTime? Implements IHolidayView.DateCreated
             Get
-                If String.IsNullOrEmpty(txtDateCreated.Text) Then
-                    Return Now()
-                End If
-                Return Convert.ToDateTime(txtDateCreated.Text)
+                Return If(_dateCreated.HasValue, _dateCreated.Value, Date.Now())
             End Get
             Set(value As DateTime?)
+                _dateCreated = value
                 If value Is Nothing Then
                     txtDateCreated.Text = Nothing
                 Else
-                    txtDateCreated.Text = String.Format(CultureInfo.CurrentCulture, "{0:g}", value)
+                    txtDateCreated.Text = String.Format(CultureInfo.CurrentCulture, "{0:g}", value.Value)
                 End If
             End Set
         End Property
@@ -91,10 +90,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DateEnd As Date Implements IHolidayView.DateEnd
             Get
-                Return Convert.ToDateTime(dtpDateEnd.Text)
+                Return dtpDateEnd.Value
             End Get
             Set
-                dtpDateEnd.Text = Value.ToShortDateString()
+                dtpDateEnd.Value = Value
             End Set
         End Property
 
@@ -118,10 +117,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DateStart As Date Implements IHolidayView.DateStart
             Get
-                Return Convert.ToDateTime(dtpDateStart.Text)
+                Return dtpDateStart.Value
             End Get
             Set(value As Date)
-                dtpDateStart.Text = value.ToShortDateString()
+                dtpDateStart.Value = value
             End Set
         End Property
 

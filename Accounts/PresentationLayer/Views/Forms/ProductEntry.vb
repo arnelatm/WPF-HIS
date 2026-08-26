@@ -7,6 +7,7 @@ Namespace PresentationLayer.Views.Forms
     Public Class ProductEntry
         Implements IProductView
 
+        Private _dateCreated As DateTime?
         Private _lockBranch As Boolean = False
         Private _productUnits As List(Of ProductUnitView)
 
@@ -20,16 +21,14 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DateCreated As DateTime? Implements IProductView.DateCreated
             Get
-                If String.IsNullOrEmpty(txtDateCreated.Text) Then
-                    Return Now()
-                End If
-                Return Convert.ToDateTime(txtDateCreated.Text)
+                Return If(_dateCreated.HasValue, _dateCreated.Value, Date.Now())
             End Get
             Set(value As DateTime?)
+                _dateCreated = value
                 If value Is Nothing Then
                     txtDateCreated.Text = Nothing
                 Else
-                    txtDateCreated.Text = String.Format(CultureInfo.CurrentCulture, "{0:g}", value)
+                    txtDateCreated.Text = String.Format(CultureInfo.CurrentCulture, "{0:g}", value.Value)
                 End If
 
             End Set

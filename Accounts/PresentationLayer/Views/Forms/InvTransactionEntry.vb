@@ -12,6 +12,7 @@ Namespace PresentationLayer.Views.Forms
         Implements IInvTransactionView
 
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
+        Private _dateCreated As DateTime?
         Private _footer As DgvFooter
         Private _invTransactionDetails As List(Of InvTransactionDetailView)
 
@@ -57,14 +58,11 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DateCreated As DateTime Implements IInvTransactionView.DateCreated
             Get
-                Try
-                    Return Convert.ToDateTime(txtDateCreated.Text)
-                Catch ex As Exception
-                    Return Nothing
-                End Try
+                Return If(_dateCreated.HasValue, _dateCreated.Value, Date.Now())
             End Get
             Set
-                txtDateCreated.Text = Value
+                _dateCreated = Value
+                txtDateCreated.Text = String.Format(CultureInfo.CurrentCulture, "{0:g}", Value)
             End Set
         End Property
 

@@ -11,6 +11,7 @@ Namespace PresentationLayer.Views.Forms
         Implements IDocumentDetailView
 
         Private ReadOnly _nfi As NumberFormatInfo
+        Private _dateCreated As DateTime?
         Private _imageFileName As String
         Public Event AddNewDocumentType() Implements IDocumentDetailView.AddNewDocumentType
         Public Event DocumentTypeChanged() Implements IDocumentDetailView.DocumentTypeChanged
@@ -147,10 +148,11 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DateCreated As Date Implements IDocumentDetailView.DateCreated
             Get
-                Return txtDateCreated.Text
+                Return If(_dateCreated.HasValue, _dateCreated.Value, Date.Now())
             End Get
             Set(value As Date)
-                txtDateCreated.SetValue(value)
+                _dateCreated = value
+                txtDateCreated.Text = String.Format(CultureInfo.CurrentCulture, "{0:g}", value)
             End Set
         End Property
 

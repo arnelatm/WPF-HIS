@@ -9,6 +9,7 @@ Namespace PresentationLayer.Views.Forms
         Implements IEmployeeLeaveView
 
         Private ReadOnly _nfi As NumberFormatInfo
+        Private _dateCreated As DateTime?
         Private _humanResourceUser As Boolean
         Private _approvalHistory As List(Of EmployeeLeaveApprovalHistoryView)
         Private _holidayLeave As Boolean
@@ -48,14 +49,12 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DateCreated As DateTime? Implements IEmployeeLeaveView.DateCreated
             Get
-                Return Convert.ToDateTime(txtDateCreated.Text)
+                Return If(_dateCreated.HasValue, _dateCreated.Value, Date.Now())
             End Get
             Set
-                If Value.HasValue Then
-                    txtDateCreated.Text = Value
-                Else
-                    txtDateCreated.Text = Date.Now().ToString()
-                End If
+                Dim dateToDisplay As DateTime = If(Value.HasValue, Value.Value, Date.Now())
+                _dateCreated = dateToDisplay
+                txtDateCreated.Text = String.Format(CultureInfo.CurrentCulture, "{0:g}", dateToDisplay)
             End Set
         End Property
 

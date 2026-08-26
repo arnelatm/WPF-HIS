@@ -223,6 +223,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub btnPrintCheck_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnPrintCheck.ClickButtonArea
             Dim checkAmountInWords As String
             Dim currencies As New List(Of CurrencyInfo)()
+            Dim amountValue As Decimal = Amount
             Dim curCulture = CultureInfo.CurrentCulture
             CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
             Dim language As String
@@ -231,9 +232,9 @@ Namespace PresentationLayer.Views.Forms
             language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
             currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
             If language = "ar" Then
-                checkAmountInWords = New ToWord(txtAmount.Text, currencies(0)).ConvertToArabic()
+                checkAmountInWords = New ToWord(amountValue, currencies(0)).ConvertToArabic()
             Else
-                checkAmountInWords = New ToWord(txtAmount.Text, currencies(0)).ConvertToEnglish()
+                checkAmountInWords = New ToWord(amountValue, currencies(0)).ConvertToEnglish()
             End If
             Dim paymentTypeEnum = CodeToEnum(Of PaymentTypeSelection)(cboPaymentType.SelectedValue)
             If paymentTypeEnum = PaymentTypeSelection.Others Then
@@ -242,7 +243,7 @@ Namespace PresentationLayer.Views.Forms
                 payee = Strings.Left(cboPayeeIdNo.Text, cboPayeeIdNo.Text.IndexOf("|", StringComparison.Ordinal))
             End If
             reportName = "Check Printing.Rpt"
-            Dim cForm As New ReportForm(reportName, checkAmountInWords, "CheckAmountInWords", payee, "PayeeName", dtpCheckDate.Value, "CheckDate", Convert.ToDecimal(txtAmount.Text), "CheckAmount", txtNotes.Text, "Notes", language, "Language")
+            Dim cForm As New ReportForm(reportName, checkAmountInWords, "CheckAmountInWords", payee, "PayeeName", dtpCheckDate.Value, "CheckDate", amountValue, "CheckAmount", txtNotes.Text, "Notes", language, "Language")
             cForm.Show()
         End Sub
 

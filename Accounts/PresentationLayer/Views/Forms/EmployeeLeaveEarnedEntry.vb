@@ -6,6 +6,7 @@ Public Class EmployeeLeaveEarnedEntry
     Implements IEmployeeLeaveEarnedView
 
     Private ReadOnly _nfi As NumberFormatInfo
+    Private _dateCreated As DateTime?
     Public Event DateValuesChanged() Implements IEmployeeLeaveEarnedView.DateValuesChanged
     Public Event EmployeeIdNoChanged(itemIdNo As Int16) Implements IEmployeeLeaveEarnedView.EmployeeIdNoChanged
     Public Event LeaveIdNoChanged(itemIdNo As Int16) Implements IEmployeeLeaveEarnedView.LeaveIdNoChanged
@@ -75,14 +76,12 @@ Public Class EmployeeLeaveEarnedEntry
 
     Public Property DateCreated As DateTime? Implements IEmployeeLeaveEarnedView.DateCreated
         Get
-            Return Convert.ToDateTime(txtDateCreated.Text)
+            Return If(_dateCreated.HasValue, _dateCreated.Value, Date.Now())
         End Get
         Set
-            If Value.HasValue Then
-                txtDateCreated.Text = Value
-            Else
-                txtDateCreated.Text = Date.Now().ToString()
-            End If
+            Dim dateToDisplay As DateTime = If(Value.HasValue, Value.Value, Date.Now())
+            _dateCreated = dateToDisplay
+            txtDateCreated.Text = String.Format(CultureInfo.CurrentCulture, "{0:g}", dateToDisplay)
         End Set
     End Property
 

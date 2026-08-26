@@ -8,6 +8,7 @@ Namespace PresentationLayer.Views.Forms
         Implements IRecurringPayElementView
 
         Private ReadOnly _nfi As NumberFormatInfo
+        Private _dateCreated As DateTime?
 
         Public Sub New()
             ' This call is required by the designer.
@@ -30,14 +31,12 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DateCreated As DateTime? Implements IRecurringPayElementView.DateCreated
             Get
-                Return Convert.ToDateTime(txtDateCreated.Text)
+                Return _dateCreated
             End Get
             Set
-                If Value.HasValue Then
-                    txtDateCreated.Text = Value
-                Else
-                    txtDateCreated.Text = Date.Now().ToString()
-                End If
+                Dim dateToDisplay As DateTime = If(Value.HasValue, Value.Value, Date.Now())
+                _dateCreated = dateToDisplay
+                txtDateCreated.Text = String.Format(CultureInfo.CurrentCulture, "{0:g}", dateToDisplay)
             End Set
         End Property
 
