@@ -130,6 +130,8 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgReconciliationReviewCompleted", "Pre-post reconciliation review completed.", "Reconciliation Review")
         Messaging.AddMessage("MsgReconciliationReviewReopened", "Reconciliation review reopened.", "Reconciliation Review")
         Messaging.AddMessage("MsgReconciliationSuccessfullyFinalized", "Reconciliation finalized successfully!", "Successful Finalization")
+        Messaging.AddMessage("MsgDuplicateReconciliationForAccountDate", "An account reconciliation already exists for this account and date (reconciliation no. {reconciliationNumber}). Open it or delete it before creating another.", "Duplicate Account Reconciliation")
+        Messaging.AddMessage("MsgPreviousDraftReconciliationExists", "An earlier Draft reconciliation exists for this account. Complete, delete, or abandon it before starting a later reconciliation.", "Open Draft Reconciliation")
         Messaging.AddMessage("MsgEditingNotAllowed", "Sorry Editing of this entry not allowed!", "Error")
         Messaging.AddMessage("MsgNoAccessToSecurity", "Sorry you have no '{securityKey}' access.", "Error")
         Messaging.AddMessage("MsgDependentRecordExists", "Sorry dependent records exists on other tables. Editing or deletion not allowed! {additionalMessage}", "Error")

@@ -9,6 +9,9 @@ Namespace ServiceLayer.ActionService
 
         Function GetAcctReconItems(Of TM)(AccountIdNo As Int16, reconciliationDate As Date, Optional sortOrder As String = Nothing) As List(Of TM)
 
+        Function GetExistingAccountReconciliationIdNo(accountIdNo As Int16, reconciliationDate As Date, excludedIdNo As Int32) As Int32
+        Function GetExistingDraftAccountReconciliationIdNo(accountIdNo As Int16, excludedIdNo As Int32) As Int32
+
         Function GetReconciledRecordsWithIdNo(Of TM)(ByVal reconciled As Boolean, ByVal idNo As Int32, ByVal Optional sortOrder As String = Nothing) As List(Of TM)
 
         'Function RemoveInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal)

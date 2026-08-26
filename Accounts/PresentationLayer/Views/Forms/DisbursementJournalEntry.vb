@@ -10,6 +10,7 @@ Namespace PresentationLayer.Views.Forms
         Implements IDisbursementJournalView
 
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
+        Private _dateCreated As DateTime?
 
         Private _apFooter As DgvFooter
         Private _checkDateDisplaySize As Size
@@ -183,14 +184,12 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DateCreated As DateTime? Implements IDisbursementJournalView.DateCreated
             Get
-                Return txtDateCreated.Text
+                Return _dateCreated
             End Get
             Set
-                If Value.HasValue Then
-                    txtDateCreated.Text = Value
-                Else
-                    txtDateCreated.Text = Date.Now()
-                End If
+                Dim dateToDisplay As DateTime = If(Value.HasValue, Value.Value, Date.Now())
+                _dateCreated = dateToDisplay
+                txtDateCreated.Text = String.Format(CultureInfo.CurrentCulture, "{0:g}", dateToDisplay)
             End Set
         End Property
 

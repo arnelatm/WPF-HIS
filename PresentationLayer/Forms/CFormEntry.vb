@@ -76,11 +76,15 @@ Public Class CFormEntry
     End Sub
 
     Protected Sub ApplyFormLanguageDirection()
-        Dim desiredRightToLeft = If(CultureInfo.CurrentCulture.TextInfo.IsRightToLeft,
+        Dim desiredRightToLeftLayout = CultureInfo.CurrentCulture.TextInfo.IsRightToLeft
+        Dim desiredRightToLeft = If(desiredRightToLeftLayout,
                                     RightToLeft.Yes,
                                     RightToLeft.No)
         If RightToLeft <> desiredRightToLeft Then
             RightToLeft = desiredRightToLeft
+        End If
+        If RightToLeftLayout <> desiredRightToLeftLayout Then
+            RightToLeftLayout = desiredRightToLeftLayout
         End If
     End Sub
 

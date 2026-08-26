@@ -1127,6 +1127,11 @@ Public Class CtDataGridView
     End Sub
 
     Private Sub CtDataGridView_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles MyBase.CellContentClick
+        'Checkboxes are display-only while the grid is outside edit/add mode.
+        'Do not manually toggle the cell in that state; the grid is showing
+        'the persisted value and a click must not change its visual value.
+        If Not EditingMode Then Return
+
         If CurrentCell IsNot Nothing AndAlso TypeOf CurrentCell Is IEntryControl Then
             If TypeOf CurrentCell Is CDgvCheckboxCell Then
                 If e.ColumnIndex < 0 OrElse e.RowIndex < 0 Then Exit Sub

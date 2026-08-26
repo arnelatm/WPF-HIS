@@ -18,6 +18,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Report As New ReportDocument
         Private ReadOnly _nfi As NumberFormatInfo
+        Private _dateCreated As DateTime?
         Private _accountReconciliations As New List(Of AccountReconciliationItemView)
         Private _balance As Decimal
         Private _existingFind As Boolean = False
@@ -84,12 +85,17 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DateCreated As DateTime? Implements IAccountReconciliationView.DateCreated
             Get
-                If String.IsNullOrEmpty(txtDateCreated.Text) Then
-                    Return Now()
+                'Date Added is display-only.  Reading the localized text back
+                'during AutoMapper save causes RTL Arabic/Hijri text to be
+                'parsed with the wrong calendar.  Return the typed value that
+                'was supplied by the model instead.
+                If _dateCreated.HasValue Then
+                    Return _dateCreated.Value
                 End If
-                Return Convert.ToDateTime(txtDateCreated.Text)
+                Return Now()
             End Get
             Set(value As DateTime?)
+                _dateCreated = value
                 If value Is Nothing Then
                     txtDateCreated.Text = Nothing
                 Else
@@ -645,11 +651,6 @@ Namespace PresentationLayer.Views.Forms
         '        If value IsNot Nothing AndAlso value <> DBNull.Value Then e.Value = If(CBool(value), "-", "+")
         '    End If
         'End Sub
-
-        Private Sub BtnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
-            DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = 0
-            DataGridViewReconciliationItems.Focus()
-        End Sub
 
     End Class
 

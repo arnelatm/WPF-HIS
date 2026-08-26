@@ -12,6 +12,7 @@ Namespace PresentationLayer.Views.Forms
         Implements IPurchaseView
 
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
+        Private _dateCreated As DateTime?
         Private _footer As DgvFooter
         Private _purchaseDetails As List(Of PurchaseDetailView)
         Private _purchaseHistory As List(Of PurchaseHistoryView)
@@ -72,18 +73,12 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DateCreated As DateTime? Implements IPurchaseView.DateCreated
             Get
-                Try
-                    Return Convert.ToDateTime(txtDateCreated.Text)
-                Catch ex As Exception
-                    Return Nothing
-                End Try
+                Return _dateCreated
             End Get
             Set
-                If Value.HasValue Then
-                    txtDateCreated.Text = Value
-                Else
-                    txtDateCreated.Text = Date.Now().ToString()
-                End If
+                Dim dateToDisplay As DateTime = If(Value.HasValue, Value.Value, Date.Now())
+                _dateCreated = dateToDisplay
+                txtDateCreated.Text = String.Format(CultureInfo.CurrentCulture, "{0:g}", dateToDisplay)
             End Set
         End Property
 

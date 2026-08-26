@@ -11,6 +11,7 @@ Namespace PresentationLayer.Views.Forms
         Implements IApJournalView
 
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
+        Private _dateCreated As DateTime?
         Private _footer As DgvFooter
         Private _journalItems As List(Of JournalItemView)
 
@@ -77,18 +78,12 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DateCreated As DateTime? Implements IApJournalView.DateCreated
             Get
-                Try
-                    Return Convert.ToDateTime(txtDateCreated.Text)
-                Catch ex As Exception
-                    Return Nothing
-                End Try
+                Return _dateCreated
             End Get
             Set
-                If Value.HasValue Then
-                    txtDateCreated.Text = Value
-                Else
-                    txtDateCreated.Text = Date.Now().ToString()
-                End If
+                Dim dateToDisplay As DateTime = If(Value.HasValue, Value.Value, Date.Now())
+                _dateCreated = dateToDisplay
+                txtDateCreated.Text = String.Format(CultureInfo.CurrentCulture, "{0:g}", dateToDisplay)
             End Set
         End Property
 
@@ -171,14 +166,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property SettlementDiscount As Decimal Implements IApJournalView.SettlementDiscount
             Get
-                If txtSettlementDiscount.Text <> "" Then
-                    Return Convert.ToDecimal(txtSettlementDiscount.Text)
-                Else
-                    Return 0D
-                End If
+                Return Convert.ToDecimal(NumParser(Of Decimal)(txtSettlementDiscount.Text), _nfi)
             End Get
             Set
-                txtSettlementDiscount.Text = Value
+                txtSettlementDiscount.Text = FormatMoney(Value)
             End Set
         End Property
 

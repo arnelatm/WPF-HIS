@@ -1413,42 +1413,58 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     End Sub
 
     Public Sub OnEventHandler(ByRef eventType As SaveDataRequested) Implements ISubscriber(Of SaveDataRequested).OnEventHandler
-        ' Validate record first for errors before saving
-        Dim validated As Boolean = True
-        Dim noChanges As Boolean = False
-        eventType.ValidData = False
-        RaiseEvent BeforeValidate()
-        PreValidate()
-        ClearAllErrorMessages()
-        _dataErrors = ""
-        validated = CheckForDataErrors(eventType)
-        If validated AndAlso (EditMode Or AddMode) Then
-            If Not ChangesMade() Then
-                Messaging.Show(True, "MsgNoChangesMadeNothingToSave", "No changes made, nothing to save!", "Nothing to save")
-                noChanges = True
-            Else
-                If Not IsBizDataValid() Then
-                    validated = False
+        Try
+            ' Validate record first for errors before saving
+            Dim validated As Boolean = True
+            Dim noChanges As Boolean = False
+            eventType.ValidData = False
+            RaiseEvent BeforeValidate()
+            PreValidate()
+            ClearAllErrorMessages()
+            _dataErrors = ""
+            validated = CheckForDataErrors(eventType)
+            If validated AndAlso (EditMode Or AddMode) Then
+                If Not ChangesMade() Then
+                    Messaging.Show(True, "MsgNoChangesMadeNothingToSave", "No changes made, nothing to save!", "Nothing to save")
+                    noChanges = True
+                Else
+                    If Not IsBizDataValid() Then
+                        validated = False
+                    End If
                 End If
             End If
-        End If
-        If noChanges Then
-            GoUndoChanges()
-        Else
-            If validated Then
-                If Save(eventType.ViewControl) Then
-                    eventType.ValidData = True
+            If noChanges Then
+                GoUndoChanges()
+            Else
+                If validated Then
+                    If Save(eventType.ViewControl) Then
+                        eventType.ValidData = True
+                    Else
+                        eventType.ValidData = False
+                    End If
                 Else
+                    Beep()
+                    Messaging.MessageKey = "ValidationErrors"
+                    MessageBox.Show("Record not saved!" & Environment.NewLine & _dataErrors, $"Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     eventType.ValidData = False
                 End If
-            Else
-                Beep()
-                Messaging.MessageKey = "ValidationErrors"
-                MessageBox.Show("Record not saved!" & Environment.NewLine & _dataErrors, $"Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                eventType.ValidData = False
-                'ShowErrors("Record not saved!" & Environment.NewLine & _dataErrors)
             End If
-        End If
+        Catch ex As Exception
+            'The event aggregator intentionally isolates subscriber failures.
+            'Keep a save failure visible and leave the record in edit mode so
+            'the user can correct it instead of silently losing the change.
+            eventType.ValidData = False
+            Dim saveError = ex
+            If ex.InnerException IsNot Nothing Then
+                saveError = ex.InnerException
+            End If
+            Messaging.Show(True,
+                           "MsgSaveRecordFailed",
+                           saveError.Message,
+                           "Saving Error",
+                           MessageBoxButtons.OK,
+                           MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Function CheckForDataErrors(eventType As SaveDataRequested) As Boolean

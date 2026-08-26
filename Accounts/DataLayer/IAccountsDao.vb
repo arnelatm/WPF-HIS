@@ -53,6 +53,13 @@ Namespace DataLayer
 
     End Interface
 
+    Public Interface IDaoAccountReconciliation
+
+        Function GetExistingIdNo(accountIdNo As Int16, reconciliationDate As Date, excludedIdNo As Int32) As Int32
+        Function GetExistingDraftIdNo(accountIdNo As Int16, excludedIdNo As Int32) As Int32
+
+    End Interface
+
     Public Interface IDaoOiItem(Of TM)
 
         Function GetOpenInvoices(idNo As Int32) As List(Of TM)

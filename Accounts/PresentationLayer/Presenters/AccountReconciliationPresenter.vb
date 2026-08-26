@@ -33,14 +33,16 @@ Namespace PresentationLayer.Presenters
             DtInsertTable.Columns.Add("Cleared", GetType(Boolean))
             DtInsertTable.Columns.Add("JournalCode", GetType(String))
             DtInsertTable.Columns.Add("JournalItemIdNo", GetType(Int32))
-            DtInsertTable.Columns.Add("Sequence", GetType(Int16))
+            'The SQL table-valued parameters define Sequence as INT.  Keep the
+            'DataTable schema identical so SqlClient can bind the TVP reliably.
+            DtInsertTable.Columns.Add("Sequence", GetType(Int32))
 
             DtUpdateTable.Columns.Add("AccountReconciliationIdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("Cleared", GetType(Boolean))
             DtUpdateTable.Columns.Add("IdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("JournalCode", GetType(String))
             DtUpdateTable.Columns.Add("JournalItemIdNo", GetType(Int32))
-            DtUpdateTable.Columns.Add("Sequence", GetType(Int16))
+            DtUpdateTable.Columns.Add("Sequence", GetType(Int32))
 
             AddHandler view.ReconciliationAccountChangedEvent, AddressOf OnReconciliationAccountChangedEvent
             AddHandler view.ReconciliationClearEvent, AddressOf OnReconciliationClearEvent
@@ -70,6 +72,22 @@ Namespace PresentationLayer.Presenters
             Return True
         End Function
 
+        Public Overrides Sub SaveOriginalValues()
+            ' Do not map the localized controls back to a model just to enter
+            ' edit mode. In RTL mode, date and numeric controls may display
+            ' culture-specific text that is not safe to parse as a snapshot.
+            ' The persisted model is the correct baseline for change tracking.
+            If TargetIdNo > 0 Then
+                Dim originalRecord As TM = Service.GetRecordByIdNo(Of TM)(TargetIdNo)
+                If originalRecord IsNot Nothing Then
+                    OriginalModel = originalRecord
+                    Return
+                End If
+            End If
+
+            MyBase.SaveOriginalValues()
+        End Sub
+
         Public Overrides Function IsOkToDeleteRecord() As Boolean
             If Not MyBase.IsOkToDeleteRecord() Then
                 Return False
@@ -89,6 +107,45 @@ Namespace PresentationLayer.Presenters
                                                            EnumToCode(SpecialAccountSelection.PettyCashAccount)
                                                           })
         End Sub
+
+        Protected Overrides Function IsBizDataValid() As Boolean
+            If Not MyBase.IsBizDataValid() Then
+                Return False
+            End If
+
+            If Not View.AccountIdNo.HasValue OrElse Not View.ReconciliationDate.HasValue Then
+                Return True
+            End If
+
+            Dim excludedIdNo = If(View.IdNo > 0, View.IdNo, 0)
+            Dim existingIdNo = DirectCast(Service, AccountsService).GetExistingAccountReconciliationIdNo(
+                View.AccountIdNo.Value,
+                View.ReconciliationDate.Value,
+                excludedIdNo)
+
+            If existingIdNo > 0 Then
+                Messaging.Show(True,
+                               "MsgDuplicateReconciliationForAccountDate",
+                               {"reconciliationNumber", existingIdNo.ToString(CultureInfo.InvariantCulture)},
+                               MessageBoxButtons.OK,
+                               MessageBoxIcon.Warning)
+                Return False
+            End If
+
+            Dim existingDraftIdNo = DirectCast(Service, AccountsService).GetExistingDraftAccountReconciliationIdNo(
+                View.AccountIdNo.Value,
+                excludedIdNo)
+
+            If existingDraftIdNo > 0 Then
+                Messaging.Show(True,
+                               "MsgPreviousDraftReconciliationExists",
+                               MessageBoxButtons.OK,
+                               MessageBoxIcon.Warning)
+                Return False
+            End If
+
+            Return True
+        End Function
 
         Public Property MessageBox As Object
 
@@ -241,25 +298,35 @@ Namespace PresentationLayer.Presenters
                 Next
                 progressDisplayForm.Close()
             Else
-                'Dim oldReconciliationItems As List(Of AccountReconciliationItemModel)
-                'oldReconciliationItems = ModelOfPresenter.GetRecordsWithGroupIdNo(Of AccountReconciliationItemModel)(idNo, "TransactionDate")
+                'GetAcctReconItems reads the currently eligible GL rows.  Those
+                'rows deliberately have IdNo = 0 because they are not the
+                'AccountReconciliationItem rows themselves.  Reload the saved
+                'draft detail rows and match them back to the GL rows so that
+                'SaveChildren sends existing rows to the UPDATE TVP instead of
+                'trying to insert duplicates.
+                Dim oldReconciliationItems As List(Of AccountReconciliationItemModel) = Nothing
+                If idNo > 0 Then
+                    oldReconciliationItems = Service.GetRecordsWithGroupIdNo(Of AccountReconciliationItemModel)(idNo, "Sequence")
+                End If
                 progressDisplayForm.Show()
                 progressDisplayForm.DisplayProgress(nCount)
                 Dim caption = Messaging.TranslateCaption("Please wait getting account transactions ...")
                 progressDisplayForm.InitializeDisplay(nCount, caption)
                 For Each acctReconItem In allAcctReconItems
-                    'Dim found As Boolean = False
-                    'For Each item As AccountReconciliationItemModel In oldReconciliationItems
-                    '    If item.JournalCode = acctReconItem.JournalCode And item.JournalItemIdNo = acctReconItem.JournalItemIdNo Then
-                    '        acctReconItem.IdNo = item.IdNo
-                    '        acctReconItem.Cleared = item.Cleared
-                    '        found = True
-                    '        Exit For
-                    '    End If
-                    'Next
-                    curItem = View.AccountReconciliationItems.Find(Function(cc As AccountReconciliationItemView) cc.JournalCode = acctReconItem.JournalCode And cc.JournalItemIdNo = acctReconItem.JournalItemIdNo)
-                    If Not IsNothing(curItem) Then
-                        acctReconItem.Cleared = curItem.Cleared
+                    If oldReconciliationItems IsNot Nothing Then
+                        Dim oldItem = oldReconciliationItems.Find(Function(item As AccountReconciliationItemModel) item.JournalCode = acctReconItem.JournalCode AndAlso item.JournalItemIdNo = acctReconItem.JournalItemIdNo)
+                        If oldItem IsNot Nothing Then
+                            acctReconItem.IdNo = oldItem.IdNo
+                            acctReconItem.AccountReconciliationIdNo = oldItem.AccountReconciliationIdNo
+                            acctReconItem.Cleared = oldItem.Cleared
+                        End If
+                    Else
+                        curItem = View.AccountReconciliationItems.Find(Function(cc As AccountReconciliationItemView) cc.JournalCode = acctReconItem.JournalCode AndAlso cc.JournalItemIdNo = acctReconItem.JournalItemIdNo)
+                        If Not IsNothing(curItem) Then
+                            acctReconItem.IdNo = curItem.IdNo
+                            acctReconItem.AccountReconciliationIdNo = curItem.AccountReconciliationIdNo
+                            acctReconItem.Cleared = curItem.Cleared
+                        End If
                     End If
                     nSeq += 1
                     AddNewItem(acctReconItem, acctReconItems, nSeq)

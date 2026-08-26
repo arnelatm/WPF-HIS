@@ -11,7 +11,7 @@ Namespace DataLayer.AdoNet
 
     Public Class AccountReconciliationDao
         Inherits AccountsDao
-        Implements IDao(Of AccountReconciliation), IDaoChild(Of AccountReconciliationItem), IDaoAccountReconciliationItem(Of AccountReconciliationItem)
+        Implements IDao(Of AccountReconciliation), IDaoChild(Of AccountReconciliationItem), IDaoAccountReconciliationItem(Of AccountReconciliationItem), IDaoAccountReconciliation
 
         Private ReadOnly _db As New Db()
         Protected TableFileName As String = "AccountReconciliationItem_View"
@@ -108,6 +108,47 @@ Namespace DataLayer.AdoNet
                                     "@Status", If(String.IsNullOrWhiteSpace(accountReconciliation.Status), "Draft", accountReconciliation.Status),
                                     "@ReconciliationDate", accountReconciliation.ReconciliationDate
                                 }
+        End Function
+
+        Public Function GetExistingIdNo(accountIdNo As Int16, reconciliationDate As Date, excludedIdNo As Int32) As Int32 _
+            Implements IDaoAccountReconciliation.GetExistingIdNo
+            Dim sql As String =
+                "SELECT TOP (1) IdNo " &
+                "FROM dbo.AccountReconciliation " &
+                "WHERE AccountIdNo = @AccountIdNo " &
+                "AND ReconciliationDate = @ReconciliationDate " &
+                "AND IdNo <> @ExcludedIdNo"
+            Dim params() As Object = {
+                "@AccountIdNo", accountIdNo,
+                "@ReconciliationDate", reconciliationDate,
+                "@ExcludedIdNo", excludedIdNo
+            }
+            Dim value = _db.Scalar(sql, params)
+            If value Is Nothing OrElse Convert.IsDBNull(value) Then
+                Return 0
+            End If
+            Return Convert.ToInt32(value)
+        End Function
+
+        Public Function GetExistingDraftIdNo(accountIdNo As Int16, excludedIdNo As Int32) As Int32 _
+            Implements IDaoAccountReconciliation.GetExistingDraftIdNo
+            Dim sql As String =
+                "SELECT TOP (1) IdNo " &
+                "FROM dbo.AccountReconciliation " &
+                "WHERE AccountIdNo = @AccountIdNo " &
+                "AND ISNULL(Status, 'Draft') = 'Draft' " &
+                "AND ISNULL(Posted, 0) = 0 " &
+                "AND IdNo <> @ExcludedIdNo " &
+                "ORDER BY ReconciliationDate, IdNo"
+            Dim params() As Object = {
+                "@AccountIdNo", accountIdNo,
+                "@ExcludedIdNo", excludedIdNo
+            }
+            Dim value = _db.Scalar(sql, params)
+            If value Is Nothing OrElse Convert.IsDBNull(value) Then
+                Return 0
+            End If
+            Return Convert.ToInt32(value)
         End Function
 
         Public Function GetRecordsWithGroupIdNo(idNo, Optional sortExpression = Nothing) As List(Of AccountReconciliationItem) _

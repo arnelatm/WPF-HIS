@@ -93,6 +93,24 @@ Namespace ServiceLayer.ActionService
             Return model
         End Function
 
+        Public Function GetExistingAccountReconciliationIdNo(accountIdNo As Int16, reconciliationDate As Date, excludedIdNo As Int32) As Int32 _
+            Implements IServiceAccounts.GetExistingAccountReconciliationIdNo
+            Dim reconciliationDao = TryCast(DataDao, IDaoAccountReconciliation)
+            If reconciliationDao Is Nothing Then
+                Throw New InvalidOperationException("The account reconciliation data access object does not support duplicate checking.")
+            End If
+            Return reconciliationDao.GetExistingIdNo(accountIdNo, reconciliationDate, excludedIdNo)
+        End Function
+
+        Public Function GetExistingDraftAccountReconciliationIdNo(accountIdNo As Int16, excludedIdNo As Int32) As Int32 _
+            Implements IServiceAccounts.GetExistingDraftAccountReconciliationIdNo
+            Dim reconciliationDao = TryCast(DataDao, IDaoAccountReconciliation)
+            If reconciliationDao Is Nothing Then
+                Throw New InvalidOperationException("The account reconciliation data access object does not support duplicate checking.")
+            End If
+            Return reconciliationDao.GetExistingDraftIdNo(accountIdNo, excludedIdNo)
+        End Function
+
         Public Function GetOpenInvoices(Of TM)(idNo As Int32) As List(Of TM) _
             Implements IServiceAccounts.GetOpenInvoices
             Dim records = DataDao.GetOpenInvoices(idNo)
