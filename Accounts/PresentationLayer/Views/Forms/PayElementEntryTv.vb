@@ -440,6 +440,12 @@ Namespace PresentationLayer.Views.Forms
             'ResumeLayout()
         End Sub
 
+        Public Sub RefreshLanguageDataSources()
+            UpdateReportGroup()
+            BindPayElementAccounts()
+            BindPayElementItems()
+        End Sub
+
         Private Sub UpdateCalculationTabDisplay()
             'DoubleBuffered = True
             'SuspendLayout()

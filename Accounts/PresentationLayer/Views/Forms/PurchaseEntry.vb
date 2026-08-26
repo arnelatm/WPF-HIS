@@ -424,6 +424,10 @@ Namespace PresentationLayer.Views.Forms
             dgvUnitCost.SetFormat(7, 2)
         End Sub
 
+        Public Sub RefreshLanguageDataSources()
+            SetupDgvColumns()
+        End Sub
+
         Private Sub CboSupplierIdNo_Changed(sender As Object, e As EventArgs) Handles cboSupplierIdNo.Validated, cboSupplierIdNo.SelectionChangeCommitted
             Presenter.UpdateDueDate()
             'Presenter.UpdateEarlySettlementValues()

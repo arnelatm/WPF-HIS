@@ -85,6 +85,10 @@ Namespace PresentationLayer.Presenters
             CreateSpecialAccountDataSource("DiscountAccountIdNo", {EnumToCode(SpecialAccountSelection.AccountsReceivableDiscount)})
         End Sub
 
+        Protected Overrides Sub RefreshLanguageDependentDataSources()
+            MakePayorIdNoDataSource(View.PayorType)
+        End Sub
+
         Public Function GetCustomerAdvancesAccountIdNo()
             Return GetRecordFieldWithKey(EnumToCode(SpecialAccountSelection.CustomerAdvances), "Account", "SpecialAccount", "IdNo")
         End Function

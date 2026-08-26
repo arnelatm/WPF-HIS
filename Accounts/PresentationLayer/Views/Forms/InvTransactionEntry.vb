@@ -283,6 +283,10 @@ Namespace PresentationLayer.Views.Forms
             dgvUnitCost.SetFormat(12, 4)
         End Sub
 
+        Public Sub RefreshLanguageDataSources()
+            SetupDgvColumns()
+        End Sub
+
         Private Overloads Sub Dispose()
             Close()
             '_footer.Dispose()

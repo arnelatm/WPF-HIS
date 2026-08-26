@@ -165,6 +165,10 @@ Namespace PresentationLayer.Views.Forms
             bsProductUnits.ResumeBinding()
         End Sub
 
+        Public Sub RefreshLanguageDataSources()
+            BindProductUnits()
+        End Sub
+
         Private Sub OnFormLoad() Handles MyBase.Load
             RaiseEvent FilterRecords()
         End Sub

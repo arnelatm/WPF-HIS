@@ -113,6 +113,10 @@ Public Class EmployeeLeaveApprovalEntry
         ResumeLayout()
     End Sub
 
+    Public Sub RefreshLanguageDataSources()
+        BindEmployeeLeaveList()
+    End Sub
+
     Private Sub DgvEarning_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEmployeeLeave.CellEndEdit
         ProcessCellEndEdit(DataGridViewEmployeeLeave, bsEmployeeLeave)
         bsEmployeeLeave.ResetBindings(False)

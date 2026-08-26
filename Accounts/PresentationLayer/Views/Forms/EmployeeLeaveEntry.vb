@@ -281,6 +281,10 @@ Namespace PresentationLayer.Views.Forms
             ResumeLayout()
         End Sub
 
+        Public Sub RefreshLanguageDataSources()
+            BindApprovalLeaveHistory()
+        End Sub
+
         Protected Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
             bsEmployeeLeaveApprovalHistory.ResetBindings(False)
             bsEmployeeLeaveApproval.ResetBindings(False)

@@ -166,6 +166,10 @@ Namespace PresentationLayer.Views.Forms
             ResumeLayout()
         End Sub
 
+        Public Sub RefreshLanguageDataSources()
+            BindDistributionSchemeItem()
+        End Sub
+
         Private Sub OnUserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewDistributionSchemeItems.UserDeletedRow
             UpdateTotals()
         End Sub

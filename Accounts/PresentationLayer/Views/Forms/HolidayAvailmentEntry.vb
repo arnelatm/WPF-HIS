@@ -143,6 +143,10 @@ Namespace PresentationLayer.Views.Forms
             ResumeLayout()
         End Sub
 
+        Public Sub RefreshLanguageDataSources()
+            BindApprovalLeaveHistory()
+        End Sub
+
     End Class
 
 End Namespace

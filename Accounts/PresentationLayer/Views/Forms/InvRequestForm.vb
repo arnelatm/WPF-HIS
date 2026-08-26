@@ -84,6 +84,10 @@ Namespace PresentationLayer.Views.Forms
             ResumeLayout()
         End Sub
 
+        Public Sub RefreshLanguageDataSources()
+            BindInvTransactionRequests()
+        End Sub
+
         Public Property InvRequestDetails As List(Of InvRequestDetailView) Implements IInvRequestView.InvRequestDetails
             Get
                 Return _invRequestDetails

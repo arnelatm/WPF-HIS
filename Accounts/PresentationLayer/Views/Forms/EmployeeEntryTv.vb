@@ -817,6 +817,14 @@ Namespace PresentationLayer.Views.Forms
             BindEmployeeLeaveCredits()
         End Sub
 
+        Public Sub RefreshLanguageDataSources()
+            BindEmployeeDeduction()
+            BindEmployeeEarning()
+            BindEmployeePhone()
+            BindEmployeeDocument()
+            BindEmployeeLeaveCredits()
+        End Sub
+
 
         Protected Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
             Try

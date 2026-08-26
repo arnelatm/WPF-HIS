@@ -400,6 +400,10 @@ Namespace PresentationLayer.Views.Forms
             dgvUnitCost.SetFormat(7, 2)
         End Sub
 
+        Public Sub RefreshLanguageDataSources()
+            SetupDgvColumns()
+        End Sub
+
         Private Sub CboCustomerIdNo_Changed(sender As Object, e As EventArgs) Handles cboCustomerIdNo.Validated, cboCustomerIdNo.SelectionChangeCommitted
             Presenter.UpdateDueDate()
             'Presenter.UpdateEarlySettlementValues()

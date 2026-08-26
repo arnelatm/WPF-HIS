@@ -168,6 +168,10 @@ Namespace PresentationLayer.Views.Forms
             End With
         End Sub
 
+        Public Sub RefreshLanguageDataSources()
+            BindDistributionSchemeItem()
+        End Sub
+
 #End Region
 
         'Protected Overrides Sub AddMandatoryFieldCheck()

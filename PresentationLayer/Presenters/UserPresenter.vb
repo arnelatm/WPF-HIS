@@ -1,4 +1,4 @@
-﻿Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Views.Interfaces
 Imports AATM.ServicesLayer.Services
@@ -19,6 +19,17 @@ Public Class UserPresenter(Of TM As New)
     End Sub
 
     Protected Overrides Sub CreateDataSources()
+        ' UserPresenter is also used by LoginEntry and MainForm. Those views
+        ' do not expose the User Entry lookup controls, so there is no User
+        ' Entry data source to rebuild when the UI language changes.
+        Dim fields = MainFieldsDictionary
+        If fields Is Nothing OrElse
+           Not fields.ContainsKey("SecurityGroupIdNo") OrElse
+           Not fields.ContainsKey("EmployeeIdNo") OrElse
+           Not fields.ContainsKey("SecurityLevel") Then
+            Return
+        End If
+
         MakeControlDataSources({New Object() {"SecurityGroup", "SecurityGroupIdNo", Nothing, Nothing},
                              New Object() {"Employee", "EmployeeIdNo", Nothing, Nothing}})
         CreateEnumDataSource(Of SecurityLevelSelection)("SecurityLevel", "IdNo")

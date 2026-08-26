@@ -1409,6 +1409,9 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     Protected Overridable Sub CreateDataSources()
     End Sub
 
+    Protected Overridable Sub RefreshLanguageDependentDataSources()
+    End Sub
+
     Public Overridable Sub EntryFormLoaded()
     End Sub
 
@@ -2017,12 +2020,20 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
 
     Public Sub OnPresenterBase_LanguageChangedEventHandler(ByRef eventType As LanguageChanged) Implements ISubscriber(Of LanguageChanged).OnEventHandler
         Dim type As Type = View.GetType
-        If type.GetProperty("UpdateViewDisplay") IsNot Nothing Then
-            UpdateViewDisplay()
+        If type.GetMethod("UpdateViewDisplay") IsNot Nothing Then
             CreateDataSources()
+            RefreshLanguageDependentDataSources()
+            RefreshLanguageDataSources(type)
+            UpdateViewDisplay()
             'RaiseEvent LanguageChanged()
         End If
         RaiseEvent LanguageChanged()
+    End Sub
+
+    Private Sub RefreshLanguageDataSources(viewType As Type)
+        If viewType.GetMethod("RefreshLanguageDataSources") IsNot Nothing Then
+            Invoker.InvokeFunction(View, "RefreshLanguageDataSources")
+        End If
     End Sub
 
     'Public Sub CreateListDataSource(ByVal sourceTableName As String, ByVal fieldName As String, ByVal listName As String)

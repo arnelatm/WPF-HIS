@@ -129,6 +129,10 @@ Namespace PresentationLayer.Presenters
             CreateSpecialAccountDataSource("DiscountAccountIdNo", {EnumToCode(SpecialAccountSelection.PurchaseDiscount)})
         End Sub
 
+        Protected Overrides Sub RefreshLanguageDependentDataSources()
+            CreatePayeeDataSource(CodeToEnum(Of PaymentTypeSelection)(View.PaymentType))
+        End Sub
+
         Public Sub CdLanguageChanged() Handles MyBase.LanguageChanged
             UpdateJournalCodeDisplay()
         End Sub

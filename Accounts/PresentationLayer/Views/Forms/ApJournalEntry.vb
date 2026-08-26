@@ -274,6 +274,10 @@ Namespace PresentationLayer.Views.Forms
             UpdateTotals()
         End Sub
 
+        Public Sub RefreshLanguageDataSources()
+            BindJournalItem()
+        End Sub
+
         Private Sub ApJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             If GlobalVariables.RightToLeftLayout Then
                 txtJournalCode.Text = Presenter.GetLocalizedPrefix("AP")

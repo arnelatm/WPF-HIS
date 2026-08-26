@@ -250,6 +250,11 @@ Namespace PresentationLayer.Views.Forms
 
         End Sub
 
+        Public Sub RefreshLanguageDataSources()
+            BindPayrollEarnings()
+            BindPayrollDeductions()
+        End Sub
+
         'Private Sub PayrollDetailEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         '    RaiseEvent UpdateDataFilterEvent(PayrollIdNo)
         '    'MyPresenter.DisplayPayrollDetails(dtpStartDate.Value, dtpEndDate.Value, txtPayPeriodName.Text)

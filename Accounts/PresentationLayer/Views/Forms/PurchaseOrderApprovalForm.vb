@@ -80,6 +80,10 @@ Namespace PresentationLayer.Views.Forms
             ResumeLayout()
         End Sub
 
+        Public Sub RefreshLanguageDataSources()
+            BindPurchaseOrderApproval()
+        End Sub
+
         Public Property PurchaseOrderDetails As List(Of PurchaseOrderApprovalDetailView) Implements IPurchaseOrderApprovalView.PurchaseOrderDetails
             Get
                 Return _purchaseOrderDetails

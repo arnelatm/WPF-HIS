@@ -101,6 +101,10 @@ Public Class EmployeeLeaveEarnedApprovalEntry
         ResumeLayout()
     End Sub
 
+    Public Sub RefreshLanguageDataSources()
+        BindEmployeeLeaveList()
+    End Sub
+
     Private Sub CheckBoxValueChanged() Handles DataGridViewEmployeeLeave.CellValueChanged
         With DataGridViewEmployeeLeave
             If TypeOf .CurrentCell Is Libraries.CBaseControlsLibrary.CDgvCheckboxCell Then

@@ -177,6 +177,10 @@ Namespace PresentationLayer.Views.Forms
             UpdateTotals()
         End Sub
 
+        Public Sub RefreshLanguageDataSources()
+            BindJournalItem()
+        End Sub
+
         Private Sub BindJournalItem()
             SuspendLayout()
             Try

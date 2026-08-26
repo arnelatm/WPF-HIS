@@ -43,6 +43,19 @@ Namespace PresentationLayer.Views.Forms
             dgvEmployeeIdNoOt.DisplayStyleForCurrentCellOnly = True
         End Sub
 
+        Public Sub RefreshLanguageDataSources()
+            dgvEmployeeIdNo.DataSource = Employees
+            dgvEmployeeIdNoOt.DataSource = Employees
+            dgvEmployeeIdNo.DisplayMember = "Name"
+            dgvEmployeeIdNoOt.DisplayMember = "Name"
+            dgvEmployeeIdNo.ValueMember = "IdNo"
+            dgvEmployeeIdNoOt.ValueMember = "IdNo"
+            dgvEmployeeIdNo.DisplayOnly = True
+            dgvEmployeeIdNoOt.DisplayOnly = True
+            dgvEmployeeIdNo.DisplayStyleForCurrentCellOnly = True
+            dgvEmployeeIdNoOt.DisplayStyleForCurrentCellOnly = True
+        End Sub
+
 #Region "Fields"
 
         Public Property Employees As Object Implements IPayrollView.Employees
