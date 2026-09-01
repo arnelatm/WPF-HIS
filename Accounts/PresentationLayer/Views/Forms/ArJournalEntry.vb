@@ -313,8 +313,23 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub CboCustomerIdNo_Changed(sender As Object, e As EventArgs) Handles cboCustomerIdNo.Validated, cboCustomerIdNo.SelectionChangeCommitted
+            SelectTypedCustomer()
             Presenter.UpdateDueDate()
             Presenter.UpdateEarlySettlementValues()
+        End Sub
+
+        Private Sub SelectTypedCustomer()
+            If cboCustomerIdNo.SelectedIndex >= 0 OrElse String.IsNullOrWhiteSpace(cboCustomerIdNo.Text) Then
+                Return
+            End If
+
+            'CtComboBox displays a matching suggestion list while the user types.
+            'Commit an exact typed/suggested customer name so the AR journal
+            'stores the matching CustomerIdNo rather than losing the selection.
+            Dim matchIndex = cboCustomerIdNo.FindStringExact(cboCustomerIdNo.Text.Trim())
+            If matchIndex >= 0 Then
+                cboCustomerIdNo.SelectedIndex = matchIndex
+            End If
         End Sub
 
         Private Sub CboCustomerIdNo_Validating(sender As Object, e As CancelEventArgs) Handles cboCustomerIdNo.Validating

@@ -7,14 +7,22 @@ Namespace PresentationLayer.Views.Forms.Reports
     Public Class ReportForm
 
         Public Sub New(ByVal fileName As String, ByVal ParamArray args() As Object)
-            InitializeReport(fileName, Nothing, Nothing, args)
+            InitializeReport(fileName, Nothing, Nothing, Nothing, args)
         End Sub
 
         Private Sub New(ByVal fileName As String,
                         ByVal sortTableName As String,
                         ByVal sortFieldName As String,
                         ByVal args() As Object)
-            InitializeReport(fileName, sortTableName, sortFieldName, args)
+            InitializeReport(fileName, sortTableName, sortFieldName, Nothing, args)
+        End Sub
+
+        Private Sub New(ByVal fileName As String,
+                        ByVal sortTableName As String,
+                        ByVal sortFieldName As String,
+                        ByVal reportData As System.Data.DataSet,
+                        ByVal args() As Object)
+            InitializeReport(fileName, sortTableName, sortFieldName, reportData, args)
         End Sub
 
         Public Shared Function CreateSorted(ByVal fileName As String,
@@ -24,9 +32,18 @@ Namespace PresentationLayer.Views.Forms.Reports
             Return New ReportForm(fileName, sortTableName, sortFieldName, args)
         End Function
 
+        Public Shared Function CreateSorted(ByVal fileName As String,
+                                            ByVal sortTableName As String,
+                                            ByVal sortFieldName As String,
+                                            ByVal reportData As System.Data.DataSet,
+                                            ByVal ParamArray args() As Object) As ReportForm
+            Return New ReportForm(fileName, sortTableName, sortFieldName, reportData, args)
+        End Function
+
         Private Sub InitializeReport(fileName As String,
                                      sortTableName As String,
                                      sortFieldName As String,
+                                     reportData As System.Data.DataSet,
                                      args() As Object)
             ' This call is required by the designer.
             InitializeComponent()
@@ -36,19 +53,34 @@ Namespace PresentationLayer.Views.Forms.Reports
             ReportFileName = fileName
             MainTableName = "Account"
             GetReportProperties()
+            If reportData IsNot Nothing Then
+                ReportDocument.SetDataSource(reportData)
+            End If
             If Not String.IsNullOrWhiteSpace(sortFieldName) Then
-                ApplyAscendingSort(sortTableName, sortFieldName)
+                ' A report backed by an in-memory DataSet has already received
+                ' its complete schema and rows.  VerifyDatabase() can remap
+                ' those tables back to the report's saved database connection,
+                ' which silently drops child rows that are present only in the
+                ' supplied DataSet (for example the LAB rows in a medical
+                ' fitness report).
+                ApplyAscendingSort(sortTableName, sortFieldName, reportData Is Nothing)
             End If
             For i = 0 To args.Length - 1 Step 2
                 Dim value = args(i)
                 ReportDocument.SetParameterValue(args(i + 1).ToString(), ConvertObjectToType(value))
             Next
-            ReportDocument.DataSourceConnections.Clear()
+            If reportData Is Nothing Then
+                ReportDocument.DataSourceConnections.Clear()
+            End If
             ProcessReport()
         End Sub
 
-        Private Sub ApplyAscendingSort(tableName As String, fieldName As String)
-            ReportDocument.VerifyDatabase()
+        Private Sub ApplyAscendingSort(tableName As String,
+                                       fieldName As String,
+                                       verifyDatabase As Boolean)
+            If verifyDatabase Then
+                ReportDocument.VerifyDatabase()
+            End If
 
             Dim dataDefController = ReportDocument.ReportClientDocument.DataDefController
             Dim sortField = FindSortField(dataDefController, tableName, fieldName)

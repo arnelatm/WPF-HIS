@@ -14,6 +14,10 @@ Namespace PresentationLayer.Views
                 If String.Equals(SectionCode, "DETAIL", StringComparison.OrdinalIgnoreCase) Then
                     Return ""
                 End If
+                If String.Equals(SectionCode, "GENERAL", StringComparison.OrdinalIgnoreCase) OrElse
+                   String.Equals(SectionCode, "CLINICAL", StringComparison.OrdinalIgnoreCase) Then
+                    Return "CLINICAL"
+                End If
                 Return SectionCode
             End Get
         End Property
@@ -22,6 +26,8 @@ Namespace PresentationLayer.Views
         Public Property TestNameEnglish As String
         Public Property TestNameArabic As String
         Public Property Sequence As Int32
+        Public Property InputMode As String
+        Public Property IsRequired As Boolean
 
         Public Property DisplayOrder As Int32
             Get

@@ -1,6 +1,7 @@
 ﻿Imports AATM.Accounts.BusinessLayer
 Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.DataLayer.AdoNet
+Imports System.Data
 
 Namespace DataLayer.AdoNet
 
@@ -16,7 +17,7 @@ Namespace DataLayer.AdoNet
 
         Public Function GetSavedReportByInvoiceNo(invoiceNo As Int32) As MedicalFitnessReport
             Dim sql As String =
-                "SELECT IdNo,InvoiceNo,InvoiceDate,FileNo,PatientName,CompanyName,PassportNo,Gender,Age,Nationality,IdentityNo,DoctorName,BloodType," &
+                "SELECT IdNo,InvoiceNo,ReportFormat,MedicalReportFormatIdNo,InvoiceDate,FileNo,PatientName,CompanyName,PassportNo,Gender,Age,Nationality,IdentityNo,DoctorName,BloodType," &
                 "ExamTemperature,ExamBloodPressure,ExamPulse,ExamRespiratorySystem,ExamCardiovascularSystem,ExamNervousSystem," &
                 "ExamAbdomen,ExamWeight,ExamHeight,ExamExtremities,ExamChestXRay,ExamRightEye,ExamLeftEye,ExamRightEar,ExamLeftEar," &
                 "FinalResultStatus,Remarks " &
@@ -28,6 +29,75 @@ Namespace DataLayer.AdoNet
                 report.Details = GetReportDetails(report.IdNo)
             End If
             Return report
+        End Function
+
+        Public Function GetReportPrintDataSet(invoiceNo As Int32) As DataSet
+            Dim dataSet As New DataSet()
+
+            Dim headerTable = _ispDataDb.SqlReadDataTable(
+                "SELECT IdNo,InvoiceNo,ReportFormat,MedicalReportFormatIdNo,InvoiceDate,FileNo,PatientName,Gender,Age,Nationality,IdentityNo,DoctorName,BloodType," &
+                "FinalResultStatus,Remarks,UserID,DateCreated,MachineID,ExamTemperature,ExamBloodPressure,ExamPulse," &
+                "ExamRespiratorySystem,ExamCardiovascularSystem,ExamNervousSystem,ExamAbdomen,ExamWeight,ExamHeight," &
+                "ExamExtremities,ExamChestXRay,ExamRightEye,ExamLeftEye,ExamRightEar,ExamLeftEar,CompanyName,PassportNo " &
+                "FROM dbo.MedicalFitnessReport " &
+                "WHERE InvoiceNo = @InvoiceNo",
+                "@InvoiceNo", invoiceNo)
+            headerTable.TableName = "MedicalFitnessReport"
+            dataSet.Tables.Add(headerTable)
+
+            Dim detailTable = _ispDataDb.SqlReadDataTable(
+                "SELECT d.IdNo,d.MedicalFitnessReportIdNo,d.SectionCode,d.TestCode,d.TestNameEnglish,d.TestNameArabic," &
+                "d.DisplayOrder,d.ResultStatus,d.ResultText,d.Remarks,d.[Sequence],d.LabResult,d.LabReferenceValue," &
+                "d.LabUnit,d.LabAssessment,d.ResultStatusSource " &
+                "FROM dbo.MedicalFitnessReportTestResult d " &
+                "INNER JOIN dbo.MedicalFitnessReport h ON h.IdNo = d.MedicalFitnessReportIdNo " &
+                "WHERE h.InvoiceNo = @InvoiceNo " &
+                "ORDER BY d.[Sequence],d.IdNo",
+                "@InvoiceNo", invoiceNo)
+            detailTable.TableName = "MedicalFitnessReportTestResult"
+            dataSet.Tables.Add(detailTable)
+
+            ' The standard Crystal report uses the exam-template table for the
+            ' unit displayed beside a test name/result.  Keep the table in the
+            ' in-memory dataset with the same name used by the .rpt file.
+            Dim examTemplateTable = _ispDataDb.SqlReadDataTable(
+                "SELECT IdNo,TestCode,TestNameEnglish,TestNameArabic,Unit,DisplayOrder,InputMode," &
+                "IsRequired,Active,DefaultValue,SectionCode " &
+                "FROM dbo.MedicalFitnessReportExamTemplate " &
+                "WHERE Active = 1 " &
+                "ORDER BY DisplayOrder,TestNameEnglish")
+            examTemplateTable.TableName = "MedicalFitnessReportExamTemplate"
+            dataSet.Tables.Add(examTemplateTable)
+
+            ' The medical report must print saved Entry Results and explicit
+            ' Fit/Unfit decisions, not analyzer/Kizen results.  Remove blank
+            ' rows from this print-only DataSet so the behavior remains correct
+            ' even when an older copy of the Crystal report is loaded by a
+            ' client.
+            Dim rowsToRemove As New List(Of DataRow)
+            For Each detailRow As DataRow In detailTable.Rows
+                Dim entryResult = If(detailRow.IsNull("ResultText"), "", Convert.ToString(detailRow("ResultText"))).Trim()
+                Dim resultStatus = If(detailRow.IsNull("ResultStatus"), "", Convert.ToString(detailRow("ResultStatus"))).Trim().ToUpperInvariant()
+                If entryResult = "" AndAlso resultStatus <> "F" AndAlso resultStatus <> "U" Then
+                    rowsToRemove.Add(detailRow)
+                    Continue For
+                End If
+
+                Dim sectionCode = If(detailRow.IsNull("SectionCode"), "", Convert.ToString(detailRow("SectionCode")))
+                If String.Equals(sectionCode, "LAB", StringComparison.OrdinalIgnoreCase) Then
+                    ' Prevent stale Crystal formulas from falling back to
+                    ' Kizen result, unit, or assessment columns.
+                    detailRow("LabResult") = If(entryResult = "", DBNull.Value, entryResult)
+                    detailRow("LabReferenceValue") = DBNull.Value
+                    detailRow("LabUnit") = DBNull.Value
+                    detailRow("LabAssessment") = DBNull.Value
+                End If
+            Next
+            For Each rowToRemove In rowsToRemove
+                detailTable.Rows.Remove(rowToRemove)
+            Next
+
+            Return dataSet
         End Function
 
         Public Function GetKizenInvoice(invoiceNo As Int32) As MedicalFitnessReport
@@ -107,6 +177,27 @@ Namespace DataLayer.AdoNet
                 "WHERE i.ID = @InvoiceNo"
 
             Return _kizenDb.Read(sql, MakeKizenInvoice, "@InvoiceNo", invoiceNo).FirstOrDefault()
+        End Function
+
+        Public Function GetPatientInvoiceSearchResults(searchValue As String) As List(Of MedicalFitnessReportInvoiceSearchResult)
+            If String.IsNullOrWhiteSpace(searchValue) Then
+                Return New List(Of MedicalFitnessReportInvoiceSearchResult)()
+            End If
+
+            Dim sql As String =
+                "SELECT i.ID AS InvoiceNo, i.Date AS InvoiceDate, " &
+                "CONVERT(nvarchar(100), i.CustID) AS FileNo, " &
+                "i.CustName AS PatientName, " &
+                "CONVERT(nvarchar(100), i.CustIdentity) AS IdentityNo " &
+                "FROM dbo.A1_Invoces i " &
+                "WHERE LTRIM(RTRIM(CONVERT(nvarchar(100), i.CustID))) = LTRIM(RTRIM(@SearchValue)) " &
+                "OR LTRIM(RTRIM(CONVERT(nvarchar(100), i.CustIdentity))) = LTRIM(RTRIM(@SearchValue)) " &
+                "ORDER BY i.Date DESC, i.ID DESC"
+
+            Return _kizenDb.Read(
+                sql,
+                MakePatientInvoiceSearchResult,
+                "@SearchValue", searchValue.Trim()).ToList()
         End Function
 
         Public Function GetKizenLabAnalyses(invoiceNo As Int32) As List(Of MedicalFitnessReportLabAnalysis)
@@ -231,6 +322,209 @@ Namespace DataLayer.AdoNet
             Return _ispDataDb.Read(sql, MakeLabTemplate).ToList()
         End Function
 
+        Public Function GetReportFormats(Optional includeInactive As Boolean = False) As List(Of MedicalFitnessReportFormat)
+            Dim sql As String =
+                "SELECT MRIdNo,FormatCode,TitleEnglish,TitleArabic,CrystalReportFileName,Active,DisplayOrder,IsDefault " &
+                "FROM MedicalFitnessReportFormat " &
+                "WHERE @IncludeInactive = 1 OR Active = 1 " &
+                "ORDER BY DisplayOrder,TitleEnglish"
+            Return _ispDataDb.Read(sql, MakeReportFormat,
+                                   "@IncludeInactive", If(includeInactive, 1, 0)).ToList()
+        End Function
+
+        Public Function GetReportFormat(mrIdNo As Int32) As MedicalFitnessReportFormat
+            Dim sql As String =
+                "SELECT MRIdNo,FormatCode,TitleEnglish,TitleArabic,CrystalReportFileName,Active,DisplayOrder,IsDefault " &
+                "FROM MedicalFitnessReportFormat WHERE MRIdNo = @MRIdNo"
+            Return _ispDataDb.Read(sql, MakeReportFormat, "@MRIdNo", mrIdNo).FirstOrDefault()
+        End Function
+
+        Public Function GetReportFormatByCode(formatCode As String) As MedicalFitnessReportFormat
+            Dim sql As String =
+                "SELECT MRIdNo,FormatCode,TitleEnglish,TitleArabic,CrystalReportFileName,Active,DisplayOrder,IsDefault " &
+                "FROM MedicalFitnessReportFormat WHERE FormatCode=@FormatCode"
+            Return _ispDataDb.Read(sql, MakeReportFormat, "@FormatCode", formatCode).FirstOrDefault()
+        End Function
+
+        Public Function GetDefaultReportFormat() As MedicalFitnessReportFormat
+            Dim sql As String =
+                "SELECT TOP (1) MRIdNo,FormatCode,TitleEnglish,TitleArabic,CrystalReportFileName,Active,DisplayOrder,IsDefault " &
+                "FROM MedicalFitnessReportFormat WHERE Active = 1 " &
+                "ORDER BY IsDefault DESC,DisplayOrder,MRIdNo"
+            Return _ispDataDb.Read(sql, MakeReportFormat).FirstOrDefault()
+        End Function
+
+        Public Function GetReportFormatForCompany(companyName As String) As MedicalFitnessReportFormat
+            If String.IsNullOrWhiteSpace(companyName) Then
+                Return Nothing
+            End If
+
+            Dim sql As String =
+                "SELECT TOP (1) f.MRIdNo,f.FormatCode,f.TitleEnglish,f.TitleArabic,f.CrystalReportFileName," &
+                "f.Active,f.DisplayOrder,f.IsDefault " &
+                "FROM MedicalFitnessReportFormatAssignment a " &
+                "INNER JOIN MedicalFitnessReportFormat f ON f.MRIdNo = a.MRIdNo " &
+                "WHERE a.Active = 1 AND f.Active = 1 " &
+                "AND UPPER(LTRIM(RTRIM(a.CompanyName))) = UPPER(LTRIM(RTRIM(@CompanyName)))"
+            Return _ispDataDb.Read(sql, MakeReportFormat, "@CompanyName", companyName).FirstOrDefault()
+        End Function
+
+        Public Function SaveReportFormat(format As MedicalFitnessReportFormat) As Int32
+            If format.MRIdNo = 0 Then
+                Dim sql As String =
+                    "INSERT INTO MedicalFitnessReportFormat " &
+                    "(FormatCode,TitleEnglish,TitleArabic,CrystalReportFileName,Active,DisplayOrder,IsDefault) " &
+                    "VALUES (@FormatCode,@TitleEnglish,@TitleArabic,@CrystalReportFileName,@Active,@DisplayOrder,@IsDefault); " &
+                    "SELECT CONVERT(int,SCOPE_IDENTITY());"
+                format.MRIdNo = Convert.ToInt32(_ispDataDb.Scalar(sql, TakeReportFormat(format)))
+            Else
+                Dim sql As String =
+                    "UPDATE MedicalFitnessReportFormat SET " &
+                    "FormatCode=@FormatCode,TitleEnglish=@TitleEnglish,TitleArabic=@TitleArabic," &
+                    "CrystalReportFileName=@CrystalReportFileName,Active=@Active,DisplayOrder=@DisplayOrder," &
+                    "IsDefault=@IsDefault WHERE MRIdNo=@MRIdNo"
+                Dim parameters = TakeReportFormat(format).ToList()
+                parameters.AddRange({"@MRIdNo", format.MRIdNo})
+                _ispDataDb.Update(sql, parameters.ToArray())
+            End If
+
+            If format.IsDefault Then
+                _ispDataDb.Update(
+                    "UPDATE MedicalFitnessReportFormat SET IsDefault=0 WHERE MRIdNo<>@MRIdNo",
+                    "@MRIdNo", format.MRIdNo)
+            End If
+            Return format.MRIdNo
+        End Function
+
+        Public Function GetExamTemplatesForReportFormat(mrIdNo As Int32) As List(Of MedicalFitnessReportExamTemplate)
+            Dim sql As String =
+                "SELECT t.IdNo,COALESCE(i.SectionCode,t.SectionCode) AS SectionCode,t.TestCode,t.TestNameEnglish," &
+                "t.TestNameArabic,t.Unit,COALESCE(i.DefaultValue,t.DefaultValue) AS DefaultValue," &
+                "COALESCE(i.DisplayOrder,t.DisplayOrder) AS DisplayOrder,COALESCE(i.InputMode,t.InputMode) AS InputMode," &
+                "COALESCE(i.IsRequired,t.IsRequired) AS IsRequired,t.Active " &
+                "FROM MedicalFitnessReportFormatItem i " &
+                "INNER JOIN MedicalFitnessReportExamTemplate t ON t.IdNo=i.ExamTemplateIdNo " &
+                "WHERE i.MRIdNo=@MRIdNo AND i.Active=1 AND t.Active=1 " &
+                "ORDER BY COALESCE(i.SectionCode,t.SectionCode),COALESCE(i.DisplayOrder,t.DisplayOrder),t.TestNameEnglish"
+            Return _ispDataDb.Read(sql, MakeClinicalExamTemplate, "@MRIdNo", mrIdNo).ToList()
+        End Function
+
+        Public Function GetReportFormatItems(mrIdNo As Int32) As List(Of MedicalFitnessReportFormatItem)
+            Dim sql As String =
+                "SELECT ISNULL(i.IdNo,0) AS IdNo,@MRIdNo AS MRIdNo,t.IdNo AS ExamTemplateIdNo,t.SectionCode," &
+                "t.TestCode,t.TestNameEnglish,t.TestNameArabic,t.Unit," &
+                "ISNULL(i.DefaultValue,t.DefaultValue) AS DefaultValue," &
+                "ISNULL(i.DisplayOrder,t.DisplayOrder) AS DisplayOrder," &
+                "ISNULL(i.InputMode,t.InputMode) AS InputMode," &
+                "ISNULL(i.IsRequired,t.IsRequired) AS IsRequired,ISNULL(i.Active,0) AS Active " &
+                "FROM MedicalFitnessReportExamTemplate t " &
+                "LEFT JOIN MedicalFitnessReportFormatItem i ON i.ExamTemplateIdNo=t.IdNo AND i.MRIdNo=@MRIdNo " &
+                "ORDER BY t.SectionCode,t.DisplayOrder,t.TestNameEnglish"
+            Return _ispDataDb.Read(sql, MakeReportFormatItem, "@MRIdNo", mrIdNo).ToList()
+        End Function
+
+        Public Function SaveReportFormatItem(item As MedicalFitnessReportFormatItem) As Int32
+            If item.IdNo = 0 Then
+                Dim sql As String =
+                    "INSERT INTO MedicalFitnessReportFormatItem " &
+                    "(MRIdNo,ExamTemplateIdNo,SectionCode,DisplayOrder,DefaultValue,InputMode,IsRequired,Active) " &
+                    "VALUES (@MRIdNo,@ExamTemplateIdNo,@SectionCode,@DisplayOrder,@DefaultValue,@InputMode,@IsRequired,@Active); " &
+                    "SELECT CONVERT(int,SCOPE_IDENTITY());"
+                item.IdNo = Convert.ToInt32(_ispDataDb.Scalar(sql, TakeReportFormatItem(item)))
+            Else
+                Dim sql As String =
+                    "UPDATE MedicalFitnessReportFormatItem SET SectionCode=@SectionCode,DisplayOrder=@DisplayOrder," &
+                    "DefaultValue=@DefaultValue,InputMode=@InputMode,IsRequired=@IsRequired,Active=@Active " &
+                    "WHERE IdNo=@IdNo"
+                Dim parameters = TakeReportFormatItem(item).ToList()
+                parameters.AddRange({"@IdNo", item.IdNo})
+                _ispDataDb.Update(sql, parameters.ToArray())
+            End If
+            Return item.IdNo
+        End Function
+
+        Public Function GetReportFormatAssignments() As List(Of MedicalFitnessReportFormatAssignment)
+            Dim sql As String =
+                "SELECT a.IdNo,a.CompanyName,a.MRIdNo,f.TitleEnglish AS FormatTitle,a.Active " &
+                "FROM MedicalFitnessReportFormatAssignment a " &
+                "LEFT JOIN MedicalFitnessReportFormat f ON f.MRIdNo=a.MRIdNo " &
+                "ORDER BY a.CompanyName"
+            Return _ispDataDb.Read(sql, MakeReportFormatAssignment).ToList()
+        End Function
+
+        Public Function SaveReportFormatAssignment(assignment As MedicalFitnessReportFormatAssignment) As Int32
+            If assignment.IdNo = 0 Then
+                Dim sql As String =
+                    "INSERT INTO MedicalFitnessReportFormatAssignment (CompanyName,MRIdNo,Active) " &
+                    "VALUES (@CompanyName,@MRIdNo,@Active); SELECT CONVERT(int,SCOPE_IDENTITY());"
+                assignment.IdNo = Convert.ToInt32(_ispDataDb.Scalar(sql, TakeReportFormatAssignment(assignment)))
+            Else
+                Dim sql As String =
+                    "UPDATE MedicalFitnessReportFormatAssignment SET CompanyName=@CompanyName,MRIdNo=@MRIdNo,Active=@Active " &
+                    "WHERE IdNo=@IdNo"
+                Dim parameters = TakeReportFormatAssignment(assignment).ToList()
+                parameters.AddRange({"@IdNo", assignment.IdNo})
+                _ispDataDb.Update(sql, parameters.ToArray())
+            End If
+            Return assignment.IdNo
+        End Function
+
+        Public Function GetClinicalExamTemplates(Optional includeInactive As Boolean = False) As List(Of MedicalFitnessReportExamTemplate)
+            Return GetExamTemplates("CLINICAL", includeInactive)
+        End Function
+
+        Public Function GetXRayExamTemplates(Optional includeInactive As Boolean = False) As List(Of MedicalFitnessReportExamTemplate)
+            Return GetExamTemplates("XRAY", includeInactive)
+        End Function
+
+        Public Function GetExamTemplates(sectionCode As String,
+                                         Optional includeInactive As Boolean = False) As List(Of MedicalFitnessReportExamTemplate)
+            Dim sql As String =
+                "SELECT IdNo,SectionCode,TestCode,TestNameEnglish,TestNameArabic,Unit,DefaultValue,DisplayOrder,InputMode,IsRequired,Active " &
+                "FROM MedicalFitnessReportExamTemplate " &
+                "WHERE SectionCode = @SectionCode AND (@IncludeInactive = 1 OR Active = 1) " &
+                "ORDER BY DisplayOrder, TestNameEnglish"
+
+            Return _ispDataDb.Read(
+                sql,
+                MakeClinicalExamTemplate,
+                "@SectionCode", sectionCode,
+                "@IncludeInactive", If(includeInactive, 1, 0)).ToList()
+        End Function
+
+        Public Function SaveClinicalExamTemplate(template As MedicalFitnessReportExamTemplate) As Int32
+            If template.IdNo = 0 Then
+                Dim sql As String =
+                    "INSERT INTO MedicalFitnessReportExamTemplate " &
+                    "(SectionCode,TestCode,TestNameEnglish,TestNameArabic,Unit,DefaultValue,DisplayOrder,InputMode,IsRequired,Active) " &
+                    "VALUES " &
+                    "(@SectionCode,@TestCode,@TestNameEnglish,@TestNameArabic,@Unit,@DefaultValue,@DisplayOrder,@InputMode,@IsRequired,@Active); " &
+                    "SELECT CONVERT(int, SCOPE_IDENTITY());"
+
+                template.IdNo = Convert.ToInt32(_ispDataDb.Scalar(sql, TakeClinicalExamTemplate(template)))
+            Else
+                Dim sql As String =
+                    "UPDATE MedicalFitnessReportExamTemplate SET " &
+                    "SectionCode = @SectionCode, " &
+                    "TestCode = @TestCode, " &
+                    "TestNameEnglish = @TestNameEnglish, " &
+                    "TestNameArabic = @TestNameArabic, " &
+                    "Unit = @Unit, " &
+                    "DefaultValue = @DefaultValue, " &
+                    "DisplayOrder = @DisplayOrder, " &
+                    "InputMode = @InputMode, " &
+                    "IsRequired = @IsRequired, " &
+                    "Active = @Active " &
+                    "WHERE IdNo = @IdNo"
+
+                Dim parameters = TakeClinicalExamTemplate(template).ToList()
+                parameters.AddRange({"@IdNo", template.IdNo})
+                _ispDataDb.Update(sql, parameters.ToArray())
+            End If
+
+            Return template.IdNo
+        End Function
+
         Public Function SaveReport(report As MedicalFitnessReport) As Int32
             If report.IdNo = 0 Then
                 Dim existingId = _ispDataDb.Scalar(
@@ -265,12 +559,12 @@ Namespace DataLayer.AdoNet
         Private Function InsertReport(report As MedicalFitnessReport) As Int32
             Dim sql As String =
                 "INSERT INTO MedicalFitnessReport " &
-                "(InvoiceNo,InvoiceDate,FileNo,PatientName,CompanyName,PassportNo,Gender,Age,Nationality,IdentityNo,DoctorName,BloodType," &
+                "(InvoiceNo,ReportFormat,MedicalReportFormatIdNo,InvoiceDate,FileNo,PatientName,CompanyName,PassportNo,Gender,Age,Nationality,IdentityNo,DoctorName,BloodType," &
                 "ExamTemperature,ExamBloodPressure,ExamPulse,ExamRespiratorySystem,ExamCardiovascularSystem,ExamNervousSystem," &
                 "ExamAbdomen,ExamWeight,ExamHeight,ExamExtremities,ExamChestXRay,ExamRightEye,ExamLeftEye,ExamRightEar,ExamLeftEar," &
                 "FinalResultStatus,Remarks) " &
                 "VALUES " &
-                "(@InvoiceNo,@InvoiceDate,@FileNo,@PatientName,@CompanyName,@PassportNo,@Gender,@Age,@Nationality,@IdentityNo,@DoctorName,@BloodType," &
+                "(@InvoiceNo,@ReportFormat,@MedicalReportFormatIdNo,@InvoiceDate,@FileNo,@PatientName,@CompanyName,@PassportNo,@Gender,@Age,@Nationality,@IdentityNo,@DoctorName,@BloodType," &
                 "@ExamTemperature,@ExamBloodPressure,@ExamPulse,@ExamRespiratorySystem,@ExamCardiovascularSystem,@ExamNervousSystem," &
                 "@ExamAbdomen,@ExamWeight,@ExamHeight,@ExamExtremities,@ExamChestXRay,@ExamRightEye,@ExamLeftEye,@ExamRightEar,@ExamLeftEar," &
                 "@FinalResultStatus,@Remarks); " &
@@ -283,6 +577,8 @@ Namespace DataLayer.AdoNet
             Dim sql As String =
                 "UPDATE MedicalFitnessReport SET " &
                 "InvoiceNo = @InvoiceNo, " &
+                "ReportFormat = @ReportFormat, " &
+                "MedicalReportFormatIdNo = @MedicalReportFormatIdNo, " &
                 "InvoiceDate = @InvoiceDate, " &
                 "FileNo = @FileNo, " &
                 "PatientName = @PatientName, " &
@@ -357,7 +653,7 @@ Namespace DataLayer.AdoNet
                                      Not String.IsNullOrWhiteSpace(detail.LabResult) OrElse
                                      Not String.IsNullOrWhiteSpace(detail.LabReferenceValue) OrElse
                                      Not String.IsNullOrWhiteSpace(detail.LabUnit)
-                    Return If(hasLabData, "LAB", "GENERAL")
+                    Return If(hasLabData, "LAB", "CLINICAL")
             End Select
         End Function
 
@@ -395,6 +691,8 @@ Namespace DataLayer.AdoNet
         Private Shared Function TakeReport(report As MedicalFitnessReport) As Object()
             Return New Object() {
                 "@InvoiceNo", report.InvoiceNo,
+                "@ReportFormat", If(String.IsNullOrWhiteSpace(report.ReportFormat), "STANDARD", report.ReportFormat),
+                "@MedicalReportFormatIdNo", If(report.MedicalReportFormatIdNo = 0, DBNull.Value, report.MedicalReportFormatIdNo),
                 "@InvoiceDate", DbValue(report.InvoiceDate),
                 "@FileNo", DbValue(report.FileNo),
                 "@PatientName", DbValue(report.PatientName),
@@ -443,10 +741,77 @@ Namespace DataLayer.AdoNet
                 "@Remarks", DbValue(detail.Remarks)}
         End Function
 
+        Private Shared Function TakeReportFormat(format As MedicalFitnessReportFormat) As Object()
+            Return New Object() {
+                "@FormatCode", format.FormatCode,
+                "@TitleEnglish", format.TitleEnglish,
+                "@TitleArabic", DbValue(format.TitleArabic),
+                "@CrystalReportFileName", format.CrystalReportFileName,
+                "@Active", format.Active,
+                "@DisplayOrder", format.DisplayOrder,
+                "@IsDefault", format.IsDefault}
+        End Function
+
+        Private Shared Function TakeReportFormatItem(item As MedicalFitnessReportFormatItem) As Object()
+            Return New Object() {
+                "@MRIdNo", item.MRIdNo,
+                "@ExamTemplateIdNo", item.ExamTemplateIdNo,
+                "@SectionCode", item.SectionCode,
+                "@DisplayOrder", If(item.DisplayOrder <= 0, DBNull.Value, item.DisplayOrder),
+                "@DefaultValue", DbValue(item.DefaultValue),
+                "@InputMode", DbValue(item.InputMode),
+                "@IsRequired", item.IsRequired,
+                "@Active", item.Active}
+        End Function
+
+        Private Shared Function TakeReportFormatAssignment(assignment As MedicalFitnessReportFormatAssignment) As Object()
+            Return New Object() {
+                "@CompanyName", assignment.CompanyName,
+                "@MRIdNo", assignment.MRIdNo,
+                "@Active", assignment.Active}
+        End Function
+
+        Private Shared ReadOnly MakeReportFormat As Func(Of IDataReader, MedicalFitnessReportFormat) =
+            Function(reader) New MedicalFitnessReportFormat() With {
+                .MRIdNo = Extensions.AsInt(Of Int32)(reader("MRIdNo")),
+                .FormatCode = Extensions.AsString(reader("FormatCode")),
+                .TitleEnglish = Extensions.AsString(reader("TitleEnglish")),
+                .TitleArabic = Extensions.AsString(reader("TitleArabic")),
+                .CrystalReportFileName = Extensions.AsString(reader("CrystalReportFileName")),
+                .Active = Convert.ToBoolean(reader("Active")),
+                .DisplayOrder = Extensions.AsInt(Of Int32)(reader("DisplayOrder")),
+                .IsDefault = Convert.ToBoolean(reader("IsDefault"))}
+
+        Private Shared ReadOnly MakeReportFormatItem As Func(Of IDataReader, MedicalFitnessReportFormatItem) =
+            Function(reader) New MedicalFitnessReportFormatItem() With {
+                .IdNo = Extensions.AsInt(Of Int32)(reader("IdNo")),
+                .MRIdNo = Extensions.AsInt(Of Int32)(reader("MRIdNo")),
+                .ExamTemplateIdNo = Extensions.AsInt(Of Int32)(reader("ExamTemplateIdNo")),
+                .SectionCode = Extensions.AsString(reader("SectionCode")),
+                .TestCode = Extensions.AsString(reader("TestCode")),
+                .TestNameEnglish = Extensions.AsString(reader("TestNameEnglish")),
+                .TestNameArabic = Extensions.AsString(reader("TestNameArabic")),
+                .Unit = Extensions.AsString(reader("Unit")),
+                .DefaultValue = Extensions.AsString(reader("DefaultValue")),
+                .DisplayOrder = Extensions.AsInt(Of Int32)(reader("DisplayOrder")),
+                .InputMode = Extensions.AsString(reader("InputMode")),
+                .IsRequired = Convert.ToBoolean(reader("IsRequired")),
+                .Active = Convert.ToBoolean(reader("Active"))}
+
+        Private Shared ReadOnly MakeReportFormatAssignment As Func(Of IDataReader, MedicalFitnessReportFormatAssignment) =
+            Function(reader) New MedicalFitnessReportFormatAssignment() With {
+                .IdNo = Extensions.AsInt(Of Int32)(reader("IdNo")),
+                .CompanyName = Extensions.AsString(reader("CompanyName")),
+                .MRIdNo = Extensions.AsInt(Of Int32)(reader("MRIdNo")),
+                .FormatTitle = Extensions.AsString(reader("FormatTitle")),
+                .Active = Convert.ToBoolean(reader("Active"))}
+
         Private Shared ReadOnly MakeReport As Func(Of IDataReader, MedicalFitnessReport) =
             Function(reader) New MedicalFitnessReport() With {
                 .IdNo = Extensions.AsInt(Of Int32)(reader("IdNo")),
                 .InvoiceNo = Extensions.AsInt(Of Int32)(reader("InvoiceNo")),
+                .ReportFormat = Extensions.AsString(reader("ReportFormat")),
+                .MedicalReportFormatIdNo = Extensions.AsInt(Of Int32)(reader("MedicalReportFormatIdNo")),
                 .InvoiceDate = Extensions.AsNullable(Of DateTime?)(reader("InvoiceDate")),
                 .FileNo = Extensions.AsNullable(Of Int32?)(reader("FileNo")),
                 .PatientName = Extensions.AsString(reader("PatientName")),
@@ -493,6 +858,14 @@ Namespace DataLayer.AdoNet
                 .ExamPulse = Extensions.AsString(reader("ExamPulse")),
                 .ExamWeight = Extensions.AsString(reader("ExamWeight")),
                 .ExamHeight = Extensions.AsString(reader("ExamHeight"))}
+
+        Private Shared ReadOnly MakePatientInvoiceSearchResult As Func(Of IDataReader, MedicalFitnessReportInvoiceSearchResult) =
+            Function(reader) New MedicalFitnessReportInvoiceSearchResult() With {
+                .InvoiceNo = Extensions.AsInt(Of Int32)(reader("InvoiceNo")),
+                .InvoiceDate = Extensions.AsNullable(Of DateTime?)(reader("InvoiceDate")),
+                .FileNo = Extensions.AsString(reader("FileNo")),
+                .PatientName = Extensions.AsString(reader("PatientName")),
+                .IdentityNo = Extensions.AsString(reader("IdentityNo"))}
 
         Private Shared Function GetMedicalFitnessAge(reader As IDataReader) As String
             Dim birthDate = Extensions.AsNullable(Of DateTime?)(reader("BirthDate"))
@@ -553,6 +926,34 @@ Namespace DataLayer.AdoNet
                 .TestNameArabic = Extensions.AsString(reader("TestNameArabic")),
                 .DisplayOrder = Extensions.AsInt(Of Int32)(reader("DisplayOrder")),
                 .Active = Convert.ToBoolean(reader("Active"))}
+
+        Private Shared ReadOnly MakeClinicalExamTemplate As Func(Of IDataReader, MedicalFitnessReportExamTemplate) =
+            Function(reader) New MedicalFitnessReportExamTemplate() With {
+                .IdNo = Extensions.AsInt(Of Int32)(reader("IdNo")),
+                .SectionCode = Extensions.AsString(reader("SectionCode")),
+                .TestCode = Extensions.AsString(reader("TestCode")),
+                .TestNameEnglish = Extensions.AsString(reader("TestNameEnglish")),
+                .TestNameArabic = Extensions.AsString(reader("TestNameArabic")),
+                .Unit = Extensions.AsString(reader("Unit")),
+                .DefaultValue = Extensions.AsString(reader("DefaultValue")),
+                .DisplayOrder = Extensions.AsInt(Of Int32)(reader("DisplayOrder")),
+                .InputMode = Extensions.AsString(reader("InputMode")),
+                .IsRequired = Convert.ToBoolean(reader("IsRequired")),
+                .Active = Convert.ToBoolean(reader("Active"))}
+
+        Private Shared Function TakeClinicalExamTemplate(template As MedicalFitnessReportExamTemplate) As Object()
+            Return New Object() {
+                "@SectionCode", template.SectionCode,
+                "@TestCode", template.TestCode,
+                "@TestNameEnglish", template.TestNameEnglish,
+                "@TestNameArabic", DbValue(template.TestNameArabic),
+                "@Unit", DbValue(template.Unit),
+                "@DefaultValue", DbValue(template.DefaultValue),
+                "@DisplayOrder", template.DisplayOrder,
+                "@InputMode", template.InputMode,
+                "@IsRequired", template.IsRequired,
+                "@Active", template.Active}
+        End Function
 
         Private Shared ReadOnly MakeKizenLabAnalysis As Func(Of IDataReader, MedicalFitnessReportLabAnalysis) =
             Function(reader) New MedicalFitnessReportLabAnalysis() With {

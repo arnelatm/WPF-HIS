@@ -12,6 +12,11 @@ Namespace PresentationLayer.Presenters
     Public Class MedicalFitnessReportPresenter(Of TM As New)
         Inherits CommonPresenter(Of IMedicalFitnessReportView, TM)
 
+        Private Const ClinicalSectionCode As String = "CLINICAL"
+        Private Const XRaySectionCode As String = "XRAY"
+        Private Const LegacyReportFormat As String = "LEGACY"
+        Private Const StandardReportFormat As String = "STANDARD"
+
         Private ReadOnly _dao As New MedicalFitnessReportDao()
 
         Public Sub New()
@@ -24,10 +29,47 @@ Namespace PresentationLayer.Presenters
             SortOrderKey = "IdNo"
             WithTreeView = False
             AddHandler view.RetrieveRequested, AddressOf RetrieveReport
+            AddHandler view.PatientSearchRequested, AddressOf SearchPatientInvoices
             AddHandler view.RefreshLabResultsRequested, AddressOf RefreshLabResults
+            AddHandler view.ReportFormatChangedRequested, AddressOf RefreshReportFormat
             AddHandler view.ViewKizenResultsRequested, AddressOf ViewKizenResults
             AddHandler view.SaveRequested, AddressOf SaveReport
             AddHandler view.DeleteRequested, AddressOf DeleteReport
+        End Sub
+
+        Private Sub SearchPatientInvoices(searchValue As String)
+            If String.IsNullOrWhiteSpace(searchValue) Then
+                MessageBox.Show("Enter the patient's ID number or file number.")
+                Return
+            End If
+
+            Try
+                Dim matches = _dao.GetPatientInvoiceSearchResults(searchValue)
+                If matches.Count = 0 Then
+                    MessageBox.Show("No invoices were found for the entered ID number or file number.")
+                    Return
+                End If
+
+                Dim invoiceNo As Int32
+                If matches.Count = 1 Then
+                    invoiceNo = matches(0).InvoiceNo
+                Else
+                    invoiceNo = View.SelectPatientInvoice(matches)
+                End If
+
+                If invoiceNo = 0 Then
+                    Return
+                End If
+
+                View.InvoiceNo = invoiceNo
+                RetrieveReport()
+            Catch ex As Exception
+                MessageBox.Show(
+                    "Unable to search for the patient's invoices." & Environment.NewLine & ex.Message,
+                    "Medical Report Search",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error)
+            End Try
         End Sub
 
         Private Sub RetrieveReport()
@@ -44,15 +86,23 @@ Namespace PresentationLayer.Presenters
                     ClearView()
                     Return
                 End If
-                report.Details = CreateDefaultDetails(report.InvoiceNo)
-                ApplyNewReportDefaults(report)
+                Dim assignedFormat = _dao.GetReportFormatForCompany(report.CompanyName)
+                If assignedFormat Is Nothing Then
+                    assignedFormat = _dao.GetDefaultReportFormat()
+                End If
+                If assignedFormat IsNot Nothing Then
+                    report.MedicalReportFormatIdNo = assignedFormat.MRIdNo
+                    report.ReportFormat = assignedFormat.FormatCode
+                End If
+                report.Details = CreateDefaultDetails(report)
             Else
                 Dim kizenInvoice = _dao.GetKizenInvoice(report.InvoiceNo)
                 If kizenInvoice IsNot Nothing Then
                     report.CompanyName = kizenInvoice.CompanyName
                     report.Age = kizenInvoice.Age
                 End If
-                report.Details = EnsureStandardDetailRows(report.Details)
+                EnsureReportFormat(report)
+                report.Details = SynchronizeClinicalDetails(report.Details, report)
                 report.Details = SynchronizeLabDetails(report.Details, report.InvoiceNo)
             End If
 
@@ -85,6 +135,18 @@ Namespace PresentationLayer.Presenters
             Dim refreshedRows = SynchronizeLabDetails(currentRows, View.InvoiceNo, True)
             View.TestResults = ToViewRows(refreshedRows)
             MessageBox.Show("Lab results refreshed.")
+        End Sub
+
+        Private Sub RefreshReportFormat()
+            If View.InvoiceNo = 0 OrElse View.MedicalReportFormatIdNo = 0 Then
+                Return
+            End If
+
+            Dim report = ReadView()
+            EnsureReportFormat(report)
+            report.Details = SynchronizeClinicalDetails(report.Details, report)
+            View.ReportFormat = report.ReportFormat
+            View.TestResults = ToViewRows(report.Details)
         End Sub
 
         Private Sub ViewKizenResults()
@@ -160,6 +222,8 @@ Namespace PresentationLayer.Presenters
         Private Sub DisplayReport(report As MedicalFitnessReport)
             View.ReportIdNo = report.IdNo
             View.InvoiceNo = report.InvoiceNo
+            View.MedicalReportFormatIdNo = report.MedicalReportFormatIdNo
+            View.ReportFormat = NormalizeReportFormat(report.ReportFormat)
             View.InvoiceDate = report.InvoiceDate
             View.FileNo = report.FileNo
             View.PatientName = report.PatientName
@@ -192,9 +256,11 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Function ReadView() As MedicalFitnessReport
-            Return New MedicalFitnessReport With {
+            Dim report = New MedicalFitnessReport With {
                 .IdNo = View.ReportIdNo,
                 .InvoiceNo = View.InvoiceNo,
+                .MedicalReportFormatIdNo = View.MedicalReportFormatIdNo,
+                .ReportFormat = NormalizeReportFormat(View.ReportFormat),
                 .InvoiceDate = View.InvoiceDate,
                 .FileNo = View.FileNo,
                 .PatientName = View.PatientName,
@@ -224,10 +290,64 @@ Namespace PresentationLayer.Presenters
                 .FinalResultStatus = View.FinalResultStatus,
                 .Remarks = View.Remarks,
                 .Details = ToBusinessRows(View.TestResults)}
+            ApplyClinicalDetailsToLegacyFields(report)
+            Return report
         End Function
+
+        Private Shared Function NormalizeReportFormat(value As String) As String
+            If String.IsNullOrWhiteSpace(value) Then
+                Return StandardReportFormat
+            End If
+            Return value.Trim().ToUpperInvariant()
+        End Function
+
+        Private Shared Sub ApplyClinicalDetailsToLegacyFields(report As MedicalFitnessReport)
+            For Each row In If(report.Details, New List(Of MedicalFitnessReportTestResult)()).Where(
+                Function(item) String.Equals(item.SectionCode, ClinicalSectionCode, StringComparison.OrdinalIgnoreCase) OrElse
+                              String.Equals(item.SectionCode, XRaySectionCode, StringComparison.OrdinalIgnoreCase))
+                Dim value = If(String.IsNullOrWhiteSpace(row.ResultText),
+                               If(row.ResultStatus = "F", "NAD", If(row.ResultStatus = "U", "ABNORMAL", "")),
+                               row.ResultText)
+
+                Select Case If(row.TestCode, "").Trim().ToUpperInvariant()
+                    Case "TEMPERATURE"
+                        report.ExamTemperature = value
+                    Case "BLOOD_PRESSURE"
+                        report.ExamBloodPressure = value
+                    Case "PULSE"
+                        report.ExamPulse = value
+                    Case "RESPIRATORY_SYSTEM"
+                        report.ExamRespiratorySystem = value
+                    Case "CARDIOVASCULAR_SYSTEM"
+                        report.ExamCardiovascularSystem = value
+                    Case "ABDOMEN_DERMATOLOGICAL"
+                        report.ExamAbdomen = value
+                    Case "NEUROLOGICAL_DISORDER"
+                        report.ExamNervousSystem = value
+                    Case "PHYSICAL_DISABILITY"
+                        report.ExamExtremities = value
+                    Case "WEIGHT"
+                        report.ExamWeight = value
+                    Case "HEIGHT"
+                        report.ExamHeight = value
+                    Case "CHEST_XRAY", "XRAY"
+                        report.ExamChestXRay = value
+                    Case "RIGHT_EYE"
+                        report.ExamRightEye = value
+                    Case "LEFT_EYE"
+                        report.ExamLeftEye = value
+                    Case "RIGHT_EAR"
+                        report.ExamRightEar = value
+                    Case "LEFT_EAR"
+                        report.ExamLeftEar = value
+                End Select
+            Next
+        End Sub
 
         Private Sub ClearView()
             View.ReportIdNo = 0
+            View.MedicalReportFormatIdNo = 0
+            View.ReportFormat = StandardReportFormat
             View.InvoiceDate = Nothing
             View.FileNo = Nothing
             View.PatientName = ""
@@ -259,15 +379,16 @@ Namespace PresentationLayer.Presenters
             View.TestResults = New BindingList(Of MedicalFitnessReportTestResultView)()
         End Sub
 
-        Private Function CreateDefaultDetails(invoiceNo As Int32) As List(Of MedicalFitnessReportTestResult)
+        Private Function CreateDefaultDetails(report As MedicalFitnessReport) As List(Of MedicalFitnessReportTestResult)
             Dim rows As New List(Of MedicalFitnessReportTestResult)
 
-            AddRow(rows, "DETAIL", "ECG", "ECG", "رسم القلب", 110)
-            AddRow(rows, "DETAIL", "AUDIOMETRY", "Audiometry", "قياس السمع", 120)
-            AddRow(rows, "DETAIL", "SPIROMETRY", "Spirometry", "قياس التنفس", 130)
+            EnsureReportFormat(report)
+            For Each template In GetFormatTemplates(report.MedicalReportFormatIdNo)
+                AddExamTemplateRow(rows, template, report)
+            Next
 
             Dim sequence = 200
-            Dim analyses = _dao.GetKizenLabAnalyses(invoiceNo)
+            Dim analyses = _dao.GetKizenLabAnalyses(report.InvoiceNo)
             If analyses.Count > 0 Then
                 For Each analysis In analyses
                     AddLabRow(rows, analysis, sequence)
@@ -288,18 +409,194 @@ Namespace PresentationLayer.Presenters
             Return rows
         End Function
 
-        Private Shared Sub ApplyNewReportDefaults(report As MedicalFitnessReport)
-            report.ExamRespiratorySystem = "NAD"
-            report.ExamCardiovascularSystem = "NAD"
-            report.ExamNervousSystem = "NAD"
-            report.ExamAbdomen = "NAD"
-            report.ExamExtremities = "NAD"
-            report.ExamChestXRay = "NORMAL"
-            report.ExamRightEye = "NAD"
-            report.ExamLeftEye = "NAD"
-            report.ExamRightEar = "NAD"
-            report.ExamLeftEar = "NAD"
+        Private Function SynchronizeClinicalDetails(rows As List(Of MedicalFitnessReportTestResult),
+                                                     report As MedicalFitnessReport) As List(Of MedicalFitnessReportTestResult)
+            Dim sourceRows = If(rows, New List(Of MedicalFitnessReportTestResult)()).ToList()
+            Dim result = sourceRows.
+                Where(Function(row) Not String.Equals(row.SectionCode, "GENERAL", StringComparison.OrdinalIgnoreCase) AndAlso
+                                  Not String.Equals(row.SectionCode, ClinicalSectionCode, StringComparison.OrdinalIgnoreCase) AndAlso
+                                  Not String.Equals(row.SectionCode, XRaySectionCode, StringComparison.OrdinalIgnoreCase) AndAlso
+                                  Not String.Equals(row.SectionCode, "DETAIL", StringComparison.OrdinalIgnoreCase)).
+                ToList()
+
+            EnsureReportFormat(report)
+            Dim templates = GetFormatTemplates(report.MedicalReportFormatIdNo)
+            For Each template In templates
+                Dim existing = result.FirstOrDefault(
+                    Function(row) String.Equals(row.SectionCode, GetTemplateSectionCode(template), StringComparison.OrdinalIgnoreCase) AndAlso
+                        String.Equals(row.TestCode, template.TestCode, StringComparison.OrdinalIgnoreCase))
+
+                If existing Is Nothing Then
+                    existing = sourceRows.FirstOrDefault(
+                        Function(row) (String.Equals(row.SectionCode, ClinicalSectionCode, StringComparison.OrdinalIgnoreCase) OrElse
+                                       String.Equals(row.SectionCode, XRaySectionCode, StringComparison.OrdinalIgnoreCase) OrElse
+                                       String.Equals(row.SectionCode, "DETAIL", StringComparison.OrdinalIgnoreCase)) AndAlso
+                                   String.Equals(row.TestCode, template.TestCode, StringComparison.OrdinalIgnoreCase))
+                    If existing IsNot Nothing Then
+                        result.Add(existing)
+                    End If
+                End If
+
+                If existing Is Nothing Then
+                    AddExamTemplateRow(result, template, report)
+                Else
+                    If existing.Sequence <= 0 Then
+                        existing.Sequence = template.DisplayOrder
+                    End If
+                    If String.IsNullOrWhiteSpace(existing.LabUnit) Then
+                        existing.LabUnit = template.Unit
+                    End If
+                    existing.InputMode = template.InputMode
+                    existing.IsRequired = template.IsRequired
+                    If String.IsNullOrWhiteSpace(existing.ResultText) AndAlso
+                       String.IsNullOrWhiteSpace(existing.ResultStatus) AndAlso
+                       Not String.IsNullOrWhiteSpace(template.DefaultValue) Then
+                        existing.ResultText = template.DefaultValue
+                        existing.ResultStatus = GetLegacyResultStatus(template.DefaultValue)
+                    End If
+                End If
+            Next
+
+            Return result.
+                OrderBy(Function(row) GetSectionSortOrder(row.SectionCode)).
+                ThenBy(Function(row) row.Sequence).
+                ThenBy(Function(row) row.IdNo).
+                ToList()
+        End Function
+
+        Private Function GetFormatTemplates(mrIdNo As Int32) As List(Of MedicalFitnessReportExamTemplate)
+            Dim templates = If(mrIdNo = 0,
+                               New List(Of MedicalFitnessReportExamTemplate)(),
+                               _dao.GetExamTemplatesForReportFormat(mrIdNo))
+            If templates.Count = 0 Then
+                templates = _dao.GetClinicalExamTemplates().
+                    Concat(_dao.GetXRayExamTemplates()).
+                    ToList()
+            End If
+            Return templates
+        End Function
+
+        Private Sub EnsureReportFormat(report As MedicalFitnessReport)
+            Dim format As MedicalFitnessReportFormat = Nothing
+            If report.MedicalReportFormatIdNo <> 0 Then
+                format = _dao.GetReportFormat(report.MedicalReportFormatIdNo)
+            End If
+            If format Is Nothing AndAlso Not String.IsNullOrWhiteSpace(report.ReportFormat) Then
+                format = _dao.GetReportFormatByCode(report.ReportFormat)
+            End If
+            If format Is Nothing Then
+                format = _dao.GetDefaultReportFormat()
+            End If
+            If format IsNot Nothing Then
+                report.MedicalReportFormatIdNo = format.MRIdNo
+                report.ReportFormat = format.FormatCode
+            End If
         End Sub
+
+        Private Shared Function GetSectionSortOrder(sectionCode As String) As Int32
+            Select Case If(sectionCode, "").Trim().ToUpperInvariant()
+                Case ClinicalSectionCode, "GENERAL"
+                    Return 10
+                Case "DETAIL"
+                    Return 20
+                Case XRaySectionCode
+                    Return 30
+                Case "LAB"
+                    Return 40
+                Case Else
+                    Return 50
+            End Select
+        End Function
+
+        Private Shared Sub AddExamTemplateRow(rows As List(Of MedicalFitnessReportTestResult),
+                                              template As MedicalFitnessReportExamTemplate,
+                                              report As MedicalFitnessReport)
+            Dim legacyValue = GetLegacyClinicalValue(report, template.TestCode)
+            If String.IsNullOrWhiteSpace(legacyValue) Then
+                legacyValue = GetClinicalDefaultValue(template)
+            End If
+            rows.Add(New MedicalFitnessReportTestResult With {
+                .SectionCode = GetTemplateSectionCode(template),
+                .TestCode = template.TestCode,
+                .TestNameEnglish = template.TestNameEnglish,
+                .TestNameArabic = template.TestNameArabic,
+                .Sequence = template.DisplayOrder,
+                .InputMode = template.InputMode,
+                .IsRequired = template.IsRequired,
+                .ResultStatus = GetLegacyResultStatus(legacyValue),
+                .ResultText = legacyValue,
+                .LabUnit = template.Unit})
+        End Sub
+
+        Private Shared Function GetTemplateSectionCode(template As MedicalFitnessReportExamTemplate) As String
+            If template IsNot Nothing AndAlso
+               String.Equals(template.SectionCode, XRaySectionCode, StringComparison.OrdinalIgnoreCase) Then
+                Return XRaySectionCode
+            End If
+            Return ClinicalSectionCode
+        End Function
+
+        Private Shared Function GetLegacyClinicalValue(report As MedicalFitnessReport, testCode As String) As String
+            If report Is Nothing Then
+                Return Nothing
+            End If
+
+            Select Case If(testCode, "").Trim().ToUpperInvariant()
+                Case "TEMPERATURE"
+                    Return report.ExamTemperature
+                Case "BLOOD_PRESSURE"
+                    Return report.ExamBloodPressure
+                Case "PULSE"
+                    Return report.ExamPulse
+                Case "RESPIRATORY_SYSTEM"
+                    Return report.ExamRespiratorySystem
+                Case "CARDIOVASCULAR_SYSTEM"
+                    Return report.ExamCardiovascularSystem
+                Case "ABDOMEN_DERMATOLOGICAL"
+                    Return report.ExamAbdomen
+                Case "NEUROLOGICAL_DISORDER"
+                    Return report.ExamNervousSystem
+                Case "PHYSICAL_DISABILITY"
+                    Return report.ExamExtremities
+                Case "WEIGHT"
+                    Return report.ExamWeight
+                Case "HEIGHT"
+                    Return report.ExamHeight
+                Case "CHEST_XRAY", "XRAY"
+                    Return report.ExamChestXRay
+                Case "RIGHT_EYE"
+                    Return report.ExamRightEye
+                Case "LEFT_EYE"
+                    Return report.ExamLeftEye
+                Case "RIGHT_EAR"
+                    Return report.ExamRightEar
+                Case "LEFT_EAR"
+                    Return report.ExamLeftEar
+                Case Else
+                    Return Nothing
+            End Select
+        End Function
+
+        Private Shared Function GetClinicalDefaultValue(template As MedicalFitnessReportExamTemplate) As String
+            If template Is Nothing Then
+                Return Nothing
+            End If
+            ' Use only the value configured in the examination-item master.
+            ' Do not insert legacy NAD/NORMAL fallbacks for items whose
+            ' DefaultValue is blank.
+            Return template.DefaultValue
+        End Function
+
+        Private Shared Function GetLegacyResultStatus(value As String) As String
+            Select Case If(value, "").Trim().ToUpperInvariant()
+                Case "F", "FIT", "NAD", "NORMAL"
+                    Return "F"
+                Case "U", "UNFIT", "ABNORMAL"
+                    Return "U"
+                Case Else
+                    Return Nothing
+            End Select
+        End Function
 
         Private Shared Function EnsureStandardDetailRows(rows As List(Of MedicalFitnessReportTestResult)) As List(Of MedicalFitnessReportTestResult)
             Dim result = If(rows, New List(Of MedicalFitnessReportTestResult)())
@@ -428,7 +725,9 @@ Namespace PresentationLayer.Presenters
                 Return list
             End If
 
-            For Each row In rows.OrderBy(Function(item) item.Sequence).ThenBy(Function(item) item.IdNo)
+            For Each row In rows.OrderBy(Function(item) GetSectionSortOrder(item.SectionCode)).
+                         ThenBy(Function(item) item.Sequence).
+                         ThenBy(Function(item) item.IdNo)
                 list.Add(New MedicalFitnessReportTestResultView With {
                     .IdNo = row.IdNo,
                     .MedicalFitnessReportIdNo = row.MedicalFitnessReportIdNo,
@@ -437,6 +736,8 @@ Namespace PresentationLayer.Presenters
                     .TestNameEnglish = row.TestNameEnglish,
                     .TestNameArabic = row.TestNameArabic,
                     .Sequence = row.Sequence,
+                    .InputMode = row.InputMode,
+                    .IsRequired = row.IsRequired,
                     .ResultStatus = row.ResultStatus,
                     .ResultText = row.ResultText,
                     .LabResult = row.LabResult,
@@ -456,7 +757,9 @@ Namespace PresentationLayer.Presenters
                 Return list
             End If
 
-            For Each row In rows.OrderBy(Function(item) item.Sequence).ThenBy(Function(item) item.IdNo)
+            For Each row In rows.OrderBy(Function(item) GetSectionSortOrder(item.SectionCode)).
+                         ThenBy(Function(item) item.Sequence).
+                         ThenBy(Function(item) item.IdNo)
                 list.Add(New MedicalFitnessReportTestResult With {
                     .IdNo = row.IdNo,
                     .MedicalFitnessReportIdNo = row.MedicalFitnessReportIdNo,
@@ -465,6 +768,8 @@ Namespace PresentationLayer.Presenters
                     .TestNameEnglish = row.TestNameEnglish,
                     .TestNameArabic = row.TestNameArabic,
                     .Sequence = row.Sequence,
+                    .InputMode = row.InputMode,
+                    .IsRequired = row.IsRequired,
                     .ResultStatus = row.ResultStatus,
                     .ResultText = row.ResultText,
                     .LabResult = row.LabResult,

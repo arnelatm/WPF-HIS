@@ -51,6 +51,15 @@ Namespace PresentationLayer.Views.Forms
             ToolStripButtonArabic.Enabled = True
             ToolStripButtonEnglish.Visible = context.IsRightToLeft
             ToolStripButtonEnglish.Enabled = True
+            UpdateMedicalReportsMenuLanguage(context.IsRightToLeft)
+        End Sub
+
+        Private Sub UpdateMedicalReportsMenuLanguage(isArabic As Boolean)
+            ToolStripMenuItemMedicalReports.Text = If(isArabic, "التقارير الطبية", "Medical Reports")
+            ToolStripMenuItemMedicalReportFormats.Text = If(isArabic, "نماذج التقارير", "Report Formats")
+            ToolStripMenuItemMedicalClinicalItems.Text = If(isArabic, "عناصر الفحص السريري", "Clinical Examination Items")
+            ToolStripMenuItemMedicalXRayItems.Text = If(isArabic, "عناصر الأشعة", "XRay Items")
+            ToolStripMenuItemMedicalReportAssignments.Text = If(isArabic, "تخصيص التقارير للشركات", "Company Report Assignments")
         End Sub
 
         Public IdleTimer As New System.Windows.Forms.Timer()
@@ -1234,6 +1243,30 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub ToolStripMenuItemReportMaster_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemReportMaster.Click
             RunForm(Of ReportEntry, ReportPresenter(Of ReportModel))()
+        End Sub
+
+        Private Sub MedicalReportFormatsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemMedicalReportFormats.Click
+            Using form As New MedicalFitnessReportFormatForm()
+                form.ShowDialog(Me)
+            End Using
+        End Sub
+
+        Private Sub MedicalClinicalItemsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemMedicalClinicalItems.Click
+            Using form As New MedicalFitnessExamTemplateForm("CLINICAL")
+                form.ShowDialog(Me)
+            End Using
+        End Sub
+
+        Private Sub MedicalXRayItemsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemMedicalXRayItems.Click
+            Using form As New MedicalFitnessExamTemplateForm("XRAY")
+                form.ShowDialog(Me)
+            End Using
+        End Sub
+
+        Private Sub MedicalReportAssignmentsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemMedicalReportAssignments.Click
+            Using form As New MedicalFitnessReportFormatAssignmentForm()
+                form.ShowDialog(Me)
+            End Using
         End Sub
 
         Private Sub ToolStripMenuItemDoctorsPrescriptions_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDoctorsPrescriptions.Click

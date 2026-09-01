@@ -3,6 +3,8 @@
     Public Class MedicalFitnessReportModel
         Public Property IdNo As Int32
         Public Property InvoiceNo As Int32
+        Public Property MedicalReportFormatIdNo As Int32
+        Public Property ReportFormat As String
         Public Property InvoiceDate As Date?
         Public Property FileNo As Int32?
         Public Property PatientName As String

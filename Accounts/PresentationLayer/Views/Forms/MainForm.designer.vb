@@ -117,6 +117,11 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemInventoryTransactionType = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemSupplierProductLink = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemReportMaster = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemMedicalReports = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemMedicalReportFormats = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemMedicalClinicalItems = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemMedicalXRayItems = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemMedicalReportAssignments = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemTransactions = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPettyCash = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemCashDisbursementEntry = New System.Windows.Forms.ToolStripMenuItem()
@@ -423,7 +428,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemMasters
             '
-            Me.ToolStripMenuItemMasters.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemGeneral, Me.ToolStripMenuItemSecurity, Me.ToolStripMenuItemEmployee, Me.ToolStripMenuItemTranslations, Me.ToolStripMenuItemPayroll, Me.ToolStripMenuItemDoctor, Me.ToolStripMenuItemSupplierVendors, Me.ToolStripMenuItemCustomerClients, Me.ToolStripMenuItemItemCode, Me.ToolStripMenuItemCodeGroup, Me.ToolStripMenuItemIGroup, Me.ToolStripMenuItemPMR, Me.ToolStripMenuItemInventory, Me.ToolStripMenuItemReportMaster})
+            Me.ToolStripMenuItemMasters.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemGeneral, Me.ToolStripMenuItemSecurity, Me.ToolStripMenuItemEmployee, Me.ToolStripMenuItemTranslations, Me.ToolStripMenuItemPayroll, Me.ToolStripMenuItemDoctor, Me.ToolStripMenuItemSupplierVendors, Me.ToolStripMenuItemCustomerClients, Me.ToolStripMenuItemItemCode, Me.ToolStripMenuItemCodeGroup, Me.ToolStripMenuItemIGroup, Me.ToolStripMenuItemPMR, Me.ToolStripMenuItemInventory, Me.ToolStripMenuItemReportMaster, Me.ToolStripMenuItemMedicalReports})
             Me.ToolStripMenuItemMasters.Name = "ToolStripMenuItemMasters"
             resources.ApplyResources(Me.ToolStripMenuItemMasters, "ToolStripMenuItemMasters")
             '
@@ -745,6 +750,32 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.ToolStripMenuItemReportMaster.Name = "ToolStripMenuItemReportMaster"
             resources.ApplyResources(Me.ToolStripMenuItemReportMaster, "ToolStripMenuItemReportMaster")
+            '
+            'ToolStripMenuItemMedicalReports
+            '
+            Me.ToolStripMenuItemMedicalReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemMedicalReportFormats, Me.ToolStripMenuItemMedicalClinicalItems, Me.ToolStripMenuItemMedicalXRayItems, Me.ToolStripMenuItemMedicalReportAssignments})
+            Me.ToolStripMenuItemMedicalReports.Name = "ToolStripMenuItemMedicalReports"
+            Me.ToolStripMenuItemMedicalReports.Text = "Medical Reports"
+            '
+            'ToolStripMenuItemMedicalReportFormats
+            '
+            Me.ToolStripMenuItemMedicalReportFormats.Name = "ToolStripMenuItemMedicalReportFormats"
+            Me.ToolStripMenuItemMedicalReportFormats.Text = "Report Formats"
+            '
+            'ToolStripMenuItemMedicalClinicalItems
+            '
+            Me.ToolStripMenuItemMedicalClinicalItems.Name = "ToolStripMenuItemMedicalClinicalItems"
+            Me.ToolStripMenuItemMedicalClinicalItems.Text = "Clinical Examination Items"
+            '
+            'ToolStripMenuItemMedicalXRayItems
+            '
+            Me.ToolStripMenuItemMedicalXRayItems.Name = "ToolStripMenuItemMedicalXRayItems"
+            Me.ToolStripMenuItemMedicalXRayItems.Text = "XRay Items"
+            '
+            'ToolStripMenuItemMedicalReportAssignments
+            '
+            Me.ToolStripMenuItemMedicalReportAssignments.Name = "ToolStripMenuItemMedicalReportAssignments"
+            Me.ToolStripMenuItemMedicalReportAssignments.Text = "Company Report Assignments"
             '
             'ToolStripMenuItemTransactions
             '
@@ -1790,6 +1821,11 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ToolStripMenuItemClinicReports As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemSterilizationLabels As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemReportMaster As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemMedicalReports As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemMedicalReportFormats As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemMedicalClinicalItems As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemMedicalXRayItems As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemMedicalReportAssignments As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemDoctorsPrescriptions As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemPrescription As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemOldDosageTranslation As ToolStripMenuItem

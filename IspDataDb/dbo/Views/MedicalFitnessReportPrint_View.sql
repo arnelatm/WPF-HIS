@@ -4,6 +4,8 @@ AS
 SELECT
     h.IdNo,
     h.InvoiceNo,
+    h.ReportFormat,
+    h.MedicalReportFormatIdNo,
     h.InvoiceDate,
     h.FileNo,
     h.PatientName,

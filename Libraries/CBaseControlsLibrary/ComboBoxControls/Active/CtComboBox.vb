@@ -291,11 +291,15 @@ Public Class CtComboBox
             End If
         End If
         If SelectedIndex < 0 Then
+            SelectExactTextMatch()
+        End If
+        If SelectedIndex < 0 Then
             If Text = "" Then
                 'allow empty strings
             Else
                 If _suggestBindingList.Count() = 1 Then
                     Text = SuggestListForm.SuggestListBox.Items(0)
+                    SelectExactTextMatch()
                 Else
                     ' invalid selection or text set to empty string
                     Text = Nothing
@@ -356,6 +360,7 @@ Public Class CtComboBox
                 Case Keys.Enter
                     Text = SuggestListForm.SuggestListBox.Text
                     [Select](0, Text.Length)
+                    SelectExactTextMatch()
                     SuggestListForm.Hide()
                     SuggestListForm.Visible = False
                 Case Keys.Escape
@@ -422,6 +427,7 @@ Public Class CtComboBox
             ElseIf _suggestBindingList.Count = 1 AndAlso _suggestBindingList.Single().Length = Text.Trim().Length Then
                 Text = _suggestBindingList.Single()
                 [Select](0, Text.Length)
+                SelectExactTextMatch()
                 HideSuggestionBox()
             End If
         End If
@@ -821,8 +827,23 @@ Public Class CtComboBox
 
     Private Sub SuggestListBoxOnClick()
         Text = SuggestListForm.SuggestListBox.Text
+        SelectExactTextMatch()
         Focus()
     End Sub
+
+    Private Function SelectExactTextMatch() As Boolean
+        If SelectedIndex >= 0 OrElse String.IsNullOrWhiteSpace(Text) Then
+            Return SelectedIndex >= 0
+        End If
+
+        Dim matchIndex = FindStringExact(Text.Trim())
+        If matchIndex < 0 Then
+            Return False
+        End If
+
+        SelectedIndex = matchIndex
+        Return True
+    End Function
 
     Public Function GetNullableValue(Of T)()
         Dim x = GetValue()

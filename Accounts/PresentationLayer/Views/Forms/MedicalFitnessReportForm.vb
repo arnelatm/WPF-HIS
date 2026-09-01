@@ -1,6 +1,11 @@
 ﻿Imports System.ComponentModel
+Imports System.Collections.Generic
 Imports System.Linq
+Imports System.Drawing
+Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Views
+Imports System.Windows.Forms
+Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.GlobalFuncNSub
@@ -20,10 +25,14 @@ Namespace PresentationLayer.Views.Forms
         Private _reportIdNo As Int32
         Private _invoiceDate As Date?
         Private _testResults As New BindingList(Of MedicalFitnessReportTestResultView)
+        Private ReadOnly _dao As New MedicalFitnessReportDao()
         Private ReadOnly _bindingSource As New BindingSource()
+        Private _reportFormats As New List(Of MedicalFitnessReportFormat)
+        Private _loadingReportFormats As Boolean
         Private txtCompanyName As TextBox
         Private txtPassportNo As TextBox
-        Private generalExamGroup As GroupBox
+        Private lblReportFormat As Label
+        Private cboReportFormat As ComboBox
         Private txtExamTemperature As TextBox
         Private txtExamBloodPressure As TextBox
         Private txtExamPulse As TextBox
@@ -39,9 +48,13 @@ Namespace PresentationLayer.Views.Forms
         Private txtExamLeftEye As TextBox
         Private txtExamRightEar As TextBox
         Private txtExamLeftEar As TextBox
+        Private txtPatientSearch As TextBox
+        Private btnSearchPatient As Button
 
         Public Event RetrieveRequested() Implements IMedicalFitnessReportView.RetrieveRequested
+        Public Event PatientSearchRequested(searchValue As String) Implements IMedicalFitnessReportView.PatientSearchRequested
         Public Event RefreshLabResultsRequested() Implements IMedicalFitnessReportView.RefreshLabResultsRequested
+        Public Event ReportFormatChangedRequested() Implements IMedicalFitnessReportView.ReportFormatChangedRequested
         Public Event ViewKizenResultsRequested() Implements IMedicalFitnessReportView.ViewKizenResultsRequested
         Public Event SaveRequested() Implements IMedicalFitnessReportView.SaveRequested
         Public Event DeleteRequested() Implements IMedicalFitnessReportView.DeleteRequested
@@ -51,10 +64,103 @@ Namespace PresentationLayer.Views.Forms
             SingleData = True
             QueryOnly = False
             ConfigureAdditionalPatientFields()
-            ConfigureGeneralExamPanel()
+            ConfigureLegacyExamFields()
             ConfigureGridColumns()
+            ConfigureReportFormatSelector()
+            ConfigurePatientSearch()
+            LoadReportFormats()
             BindGrid()
             ConfigureParentActionButtons()
+        End Sub
+
+        Private Sub ConfigureReportFormatSelector()
+            lblReportFormat = New Label With {
+                .AutoSize = True,
+                .Margin = New Padding(8, 7, 3, 3),
+                .Text = "Report Format"}
+            cboReportFormat = New ComboBox With {
+                .DropDownStyle = ComboBoxStyle.DropDownList,
+                .Margin = New Padding(0, 3, 0, 3),
+                .Width = 155}
+            AddHandler cboReportFormat.SelectionChangeCommitted, AddressOf ReportFormatSelectionChanged
+            invoicePanel.Controls.Add(lblReportFormat)
+            invoicePanel.Controls.Add(cboReportFormat)
+        End Sub
+
+        Private Sub LoadReportFormats(Optional selectedIdNo As Int32 = 0)
+            Try
+                _loadingReportFormats = True
+                _reportFormats = _dao.GetReportFormats()
+                cboReportFormat.DataSource = Nothing
+                cboReportFormat.DisplayMember = "TitleEnglish"
+                cboReportFormat.ValueMember = "MRIdNo"
+                cboReportFormat.DataSource = _reportFormats
+
+                Dim selected = selectedIdNo
+                If selected = 0 Then
+                    Dim defaultFormat = _reportFormats.FirstOrDefault(Function(item) item.IsDefault)
+                    selected = If(defaultFormat Is Nothing, 0, defaultFormat.MRIdNo)
+                End If
+                If selected <> 0 AndAlso Not _reportFormats.Any(Function(item) item.MRIdNo = selected) Then
+                    Dim savedFormat = _dao.GetReportFormat(selected)
+                    If savedFormat IsNot Nothing Then
+                        _reportFormats.Add(savedFormat)
+                        cboReportFormat.DataSource = Nothing
+                        cboReportFormat.DataSource = _reportFormats
+                    End If
+                End If
+                If selected <> 0 Then
+                    cboReportFormat.SelectedValue = selected
+                End If
+            Catch ex As Exception
+                MessageBox.Show("Unable to load medical report formats." & Environment.NewLine & ex.Message,
+                                "Medical Report Formats", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Finally
+                _loadingReportFormats = False
+            End Try
+        End Sub
+
+        Private Sub ReportFormatSelectionChanged(sender As Object, e As EventArgs)
+            If Not _loadingReportFormats Then
+                RaiseEvent ReportFormatChangedRequested()
+            End If
+        End Sub
+
+        Private Sub ConfigurePatientSearch()
+            ' Keep the search controls visible when the invoice toolbar also
+            ' contains the report-format and laboratory buttons.
+            invoicePanel.WrapContents = True
+
+            Dim searchLabel As New Label With {
+                .AutoSize = True,
+                .Margin = New Padding(10, 7, 3, 3),
+                .Text = "Patient ID / File No."}
+            txtPatientSearch = New TextBox With {
+                .Margin = New Padding(0, 3, 3, 3),
+                .Width = 135}
+            btnSearchPatient = New Button With {
+                .AutoSize = True,
+                .Margin = New Padding(0, 3, 0, 3),
+                .Text = "Search Patient",
+                .UseVisualStyleBackColor = True}
+
+            AddHandler btnSearchPatient.Click, AddressOf SearchPatientButtonClicked
+            AddHandler txtPatientSearch.KeyDown, AddressOf PatientSearchKeyDown
+
+            invoicePanel.Controls.Add(searchLabel)
+            invoicePanel.Controls.Add(txtPatientSearch)
+            invoicePanel.Controls.Add(btnSearchPatient)
+        End Sub
+
+        Private Sub SearchPatientButtonClicked(sender As Object, e As EventArgs)
+            RaiseEvent PatientSearchRequested(txtPatientSearch.Text)
+        End Sub
+
+        Private Sub PatientSearchKeyDown(sender As Object, e As KeyEventArgs)
+            If e.KeyCode = Keys.Enter Then
+                e.SuppressKeyPress = True
+                RaiseEvent PatientSearchRequested(txtPatientSearch.Text)
+            End If
         End Sub
 
         Protected Overrides Sub OnShown(e As EventArgs)
@@ -102,72 +208,26 @@ Namespace PresentationLayer.Views.Forms
             headerPanel.Controls.Add(txtPassportNo, 5, 3)
         End Sub
 
-        Private Sub ConfigureGeneralExamPanel()
-            generalExamGroup = New GroupBox With {
-                .Dock = DockStyle.Fill,
-                .Height = 220,
-                .Padding = New Padding(6),
-                .Text = "General Medical Examination / الفحص الطبي العام"}
-
-            Dim examLayout As New TableLayoutPanel With {
-                .ColumnCount = 6,
-                .Dock = DockStyle.Fill,
-                .RowCount = 6}
-            For columnIndex = 0 To 5
-                examLayout.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 16.6667!))
-            Next
-            For rowIndex = 0 To 5
-                examLayout.RowStyles.Add(New RowStyle(SizeType.Percent, 16.6667!))
-            Next
-
-            txtExamTemperature = AddExamEntry(examLayout, "Temp (°C) / درجة الحرارة", 0, 0)
-            txtExamBloodPressure = AddExamEntry(examLayout, "B.P / ضغط الدم", 2, 0)
-            txtExamPulse = AddExamEntry(examLayout, "Pulse / النبض", 4, 0)
-            txtExamRespiratorySystem = AddExamEntry(examLayout, "Resp. System / الجهاز التنفسي", 0, 1)
-            txtExamCardiovascularSystem = AddExamEntry(examLayout, "CVS / فحص القلب", 2, 1)
-            txtExamAbdomen = AddExamEntry(examLayout, "Abdomen / فحص الباطني", 4, 1)
-            txtExamNervousSystem = AddExamEntry(examLayout, "Nervous System / الجهاز العصبي", 0, 2)
-            txtExamExtremities = AddExamEntry(examLayout, "Extremities / فحص الأطراف", 2, 2)
-            txtExamChestXRay = AddExamEntry(examLayout, "Chest X-ray / الأشعة الصدرية", 4, 2)
-            txtExamWeight = AddExamEntry(examLayout, "Weight (kg) / الوزن", 0, 3)
-            txtExamHeight = AddExamEntry(examLayout, "Height (cm) / الطول", 2, 3)
-            txtExamRightEye = AddExamEntry(examLayout, "Right Eye / العين اليمنى", 0, 4)
-            txtExamLeftEye = AddExamEntry(examLayout, "Left Eye / العين اليسرى", 2, 4)
-            txtExamRightEar = AddExamEntry(examLayout, "Right Ear / الأذن اليمنى", 0, 5)
-            txtExamLeftEar = AddExamEntry(examLayout, "Left Ear / الأذن اليسرى", 2, 5)
-
-            generalExamGroup.Controls.Add(examLayout)
-            mainPanel.RowCount = 5
-            mainPanel.RowStyles.Clear()
-            mainPanel.RowStyles.Add(New RowStyle(SizeType.AutoSize))
-            mainPanel.RowStyles.Add(New RowStyle(SizeType.AutoSize))
-            mainPanel.RowStyles.Add(New RowStyle(SizeType.Absolute, 220.0!))
-            mainPanel.RowStyles.Add(New RowStyle(SizeType.Percent, 100.0!))
-            mainPanel.RowStyles.Add(New RowStyle(SizeType.AutoSize))
-            mainPanel.Controls.Add(generalExamGroup, 0, 2)
-            mainPanel.SetRow(dgvResults, 3)
-            mainPanel.SetRow(finalPanel, 4)
+        Private Sub ConfigureLegacyExamFields()
+            ' These fields are not displayed. They preserve the existing
+            ' Crystal report header-field contract while the dynamic grid is
+            ' now the sole data-entry control for clinical and X-Ray items.
+            txtExamTemperature = CreateExamTextBox()
+            txtExamBloodPressure = CreateExamTextBox()
+            txtExamPulse = CreateExamTextBox()
+            txtExamRespiratorySystem = CreateExamTextBox()
+            txtExamCardiovascularSystem = CreateExamTextBox()
+            txtExamAbdomen = CreateExamTextBox()
+            txtExamNervousSystem = CreateExamTextBox()
+            txtExamExtremities = CreateExamTextBox()
+            txtExamChestXRay = CreateExamTextBox()
+            txtExamWeight = CreateExamTextBox()
+            txtExamHeight = CreateExamTextBox()
+            txtExamRightEye = CreateExamTextBox()
+            txtExamLeftEye = CreateExamTextBox()
+            txtExamRightEar = CreateExamTextBox()
+            txtExamLeftEar = CreateExamTextBox()
         End Sub
-
-        Private Shared Function AddExamEntry(layout As TableLayoutPanel,
-                                             labelText As String,
-                                             columnIndex As Int32,
-                                             rowIndex As Int32) As TextBox
-            Dim label = CreateExamLabel(labelText)
-            Dim textBox = CreateExamTextBox()
-            layout.Controls.Add(label, columnIndex, rowIndex)
-            layout.Controls.Add(textBox, columnIndex + 1, rowIndex)
-            Return textBox
-        End Function
-
-        Private Shared Function CreateExamLabel(text As String) As Label
-            Return New Label With {
-                .AutoEllipsis = True,
-                .Dock = DockStyle.Fill,
-                .Margin = New Padding(3, 6, 3, 3),
-                .Text = text,
-                .TextAlign = ContentAlignment.MiddleLeft}
-        End Function
 
         Private Shared Function CreateExamTextBox() As TextBox
             Return New TextBox With {
@@ -192,6 +252,41 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set(value As Integer)
                 txtInvoiceNo.Text = If(value = 0, "", value.ToString())
+            End Set
+        End Property
+
+        Public Property MedicalReportFormatIdNo As Int32 Implements IMedicalFitnessReportView.MedicalReportFormatIdNo
+            Get
+                If cboReportFormat Is Nothing OrElse cboReportFormat.SelectedIndex < 0 Then
+                    Return 0
+                End If
+                Return Convert.ToInt32(cboReportFormat.SelectedValue)
+            End Get
+            Set(value As Int32)
+                If cboReportFormat Is Nothing OrElse value = 0 Then
+                    Return
+                End If
+                cboReportFormat.SelectedValue = value
+            End Set
+        End Property
+
+        Public Property ReportFormat As String Implements IMedicalFitnessReportView.ReportFormat
+            Get
+                Dim format = _reportFormats.FirstOrDefault(Function(item) item.MRIdNo = MedicalReportFormatIdNo)
+                If format IsNot Nothing Then
+                    Return format.FormatCode
+                End If
+                Return "STANDARD"
+            End Get
+            Set(value As String)
+                If cboReportFormat Is Nothing Then
+                    Return
+                End If
+                Dim format = _reportFormats.FirstOrDefault(
+                    Function(item) String.Equals(item.FormatCode, value, StringComparison.OrdinalIgnoreCase))
+                If format IsNot Nothing Then
+                    cboReportFormat.SelectedValue = format.MRIdNo
+                End If
             End Set
         End Property
 
@@ -513,9 +608,10 @@ Namespace PresentationLayer.Views.Forms
                     Continue For
                 End If
 
+                Dim inputMode = If(result.InputMode, "").Trim().ToUpperInvariant()
                 SetEntryCellEnabled(gridRow.Cells(colResultText.Index), True)
-                SetEntryCellEnabled(gridRow.Cells(colFit.Index), True)
-                SetEntryCellEnabled(gridRow.Cells(colUnfit.Index), True)
+                SetEntryCellEnabled(gridRow.Cells(colFit.Index), inputMode = "" OrElse inputMode = "FIT_UNFIT")
+                SetEntryCellEnabled(gridRow.Cells(colUnfit.Index), inputMode = "" OrElse inputMode = "FIT_UNFIT")
             Next
         End Sub
 
@@ -623,6 +719,20 @@ Namespace PresentationLayer.Views.Forms
             RaiseEvent RetrieveRequested()
         End Sub
 
+        Public Function SelectPatientInvoice(results As List(Of MedicalFitnessReportInvoiceSearchResult)) As Int32 Implements IMedicalFitnessReportView.SelectPatientInvoice
+            If results Is Nothing OrElse results.Count = 0 Then
+                Return 0
+            End If
+
+            Using selector As New MedicalFitnessReportInvoiceSearchForm(results)
+                If selector.ShowDialog(Me) = DialogResult.OK Then
+                    Return selector.SelectedInvoiceNo
+                End If
+            End Using
+
+            Return 0
+        End Function
+
         Private Sub btnRefreshLabResults_Click(sender As Object, e As EventArgs) Handles btnRefreshLabResults.Click
             dgvResults.EndEdit()
             _bindingSource.EndEdit()
@@ -660,17 +770,38 @@ Namespace PresentationLayer.Views.Forms
                 Return True
             End If
 
-            Dim medicalReportForm = ReportForm.CreateSorted(
-                "Medical Fitness Report.Rpt",
-                "MedicalFitnessReportPrint_View",
-                "Sequence",
-                InvoiceNo,
-                "InvoiceNo")
+            Dim reportData = New MedicalFitnessReportDao().GetReportPrintDataSet(InvoiceNo)
+            Dim medicalReportForm As ReportForm
+            Dim reportFormat = _dao.GetReportFormat(MedicalReportFormatIdNo)
+            If reportFormat Is Nothing Then
+                MessageBox.Show("Select a valid medical report format before printing.")
+                Return True
+            End If
+
+            If String.Equals(reportFormat.FormatCode, "LEGACY", StringComparison.OrdinalIgnoreCase) Then
+                medicalReportForm = New ReportForm(
+                    reportFormat.CrystalReportFileName,
+                    InvoiceNo,
+                    "InvoiceNo")
+            Else
+                medicalReportForm = ReportForm.CreateSorted(
+                    reportFormat.CrystalReportFileName,
+                    "MedicalFitnessReportPrint_View",
+                    "Sequence",
+                    reportData,
+                    InvoiceNo,
+                    "InvoiceNo")
+            End If
             medicalReportForm.Show()
             Return True
         End Function
 
         Public Function ValidateRequiredEntries(actionName As String) As Boolean Implements IMedicalFitnessReportView.ValidateRequiredEntries
+            If dgvResults IsNot Nothing Then
+                dgvResults.EndEdit()
+                _bindingSource.EndEdit()
+            End If
+
             Dim missing = GetMissingRequiredEntries()
             If missing.Count = 0 Then
                 Return True
@@ -687,18 +818,20 @@ Namespace PresentationLayer.Views.Forms
 
         Private Function GetMissingRequiredEntries() As List(Of String)
             Dim missing As New List(Of String)
-            AddMissingExamination(missing, "Temperature", ExamTemperature)
-            AddMissingExamination(missing, "Blood Pressure", ExamBloodPressure)
-            AddMissingExamination(missing, "Pulse", ExamPulse)
-            AddMissingExamination(missing, "Final Result", FinalResultStatus)
+            ' Examination-item required flags are now fully configurable.
+            ' Do not require legacy Temperature/Blood Pressure/Pulse fields
+            ' when those items are inactive or not mapped to the selected
+            ' report format.
+            For Each row In _testResults.Where(Function(item) item.IsRequired)
+                If String.IsNullOrWhiteSpace(row.ResultText) AndAlso String.IsNullOrWhiteSpace(row.ResultStatus) Then
+                    missing.Add(If(String.IsNullOrWhiteSpace(row.TestNameEnglish), row.TestCode, row.TestNameEnglish))
+                End If
+            Next
+            If String.IsNullOrWhiteSpace(FinalResultStatus) Then
+                missing.Add("Final Result")
+            End If
             Return missing
         End Function
-
-        Private Shared Sub AddMissingExamination(missing As List(Of String), displayName As String, value As String)
-            If String.IsNullOrWhiteSpace(value) Then
-                missing.Add(displayName)
-            End If
-        End Sub
 
         Private Sub txtInvoiceNo_Validated(sender As Object, e As EventArgs) Handles txtInvoiceNo.Validated
             If InvoiceNo <> 0 Then
@@ -732,6 +865,25 @@ Namespace PresentationLayer.Views.Forms
             End If
             dgvResults.Rows(e.RowIndex).Cells(colResultStatusSource.Index).Value = row.ResultStatusSourceDisplay
             dgvResults.InvalidateRow(e.RowIndex)
+        End Sub
+
+        Private Sub dgvResults_CellValidating(sender As Object, e As DataGridViewCellValidatingEventArgs) Handles dgvResults.CellValidating
+            If e.RowIndex < 0 OrElse e.ColumnIndex < 0 OrElse
+               dgvResults.Columns(e.ColumnIndex).DataPropertyName <> "ResultText" Then
+                Return
+            End If
+
+            Dim row = TryCast(dgvResults.Rows(e.RowIndex).DataBoundItem, MedicalFitnessReportTestResultView)
+            If row Is Nothing OrElse Not String.Equals(row.InputMode, "NUMBER", StringComparison.OrdinalIgnoreCase) OrElse
+               String.IsNullOrWhiteSpace(Convert.ToString(e.FormattedValue)) Then
+                Return
+            End If
+
+            Dim number As Decimal
+            If Not Decimal.TryParse(Convert.ToString(e.FormattedValue), number) Then
+                e.Cancel = True
+                MessageBox.Show("Enter a numeric value for " & row.TestNameEnglish & ".")
+            End If
         End Sub
 
         Private Sub dgvResults_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs) Handles dgvResults.DataBindingComplete

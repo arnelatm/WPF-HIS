@@ -781,12 +781,10 @@ Namespace PresentationLayer.Views.Forms
             txtPayorName.Width = _payorOrigWidth
             cboPayorIdNo.Visible = hasLookup
             txtPayorName.Visible = Not hasLookup
-            'Payor lookups must expose the customer/company list.  The
-            'designer defaults this control to Simple (type-ahead) mode,
-            'which has no drop-down button and makes AR companies appear
-            'missing even when the datasource is populated.
-            If hasLookup Then
-                cboPayorIdNo.DropDownStyle = ComboBoxStyle.DropDownList
+            'Payor lookups must expose the customer/company list while still
+            'allowing the user to type and narrow the matching suggestions.
+            If hasLookup AndAlso (Presenter.EditMode OrElse Presenter.AddMode) Then
+                cboPayorIdNo.DropDownStyle = ComboBoxStyle.DropDown
             Else
                 cboPayorIdNo.DropDownStyle = ComboBoxStyle.Simple
             End If

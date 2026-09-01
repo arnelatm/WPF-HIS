@@ -45,6 +45,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{0598D101-4147-476C-98FF-8C78D96B971E}"
 	ProjectSection(SolutionItems) = preProject
 		App.config = App.config
+		docs\ComboBox-Standardization-Plan.md = docs\ComboBox-Standardization-Plan.md
 		C-Sharp to VB Net Translation.txt = C-Sharp to VB Net Translation.txt
 		ComputeClientFormSizeEqually.txt = ComputeClientFormSizeEqually.txt
 		Create JournalPrefix.sql = Create JournalPrefix.sql

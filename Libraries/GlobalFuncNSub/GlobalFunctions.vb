@@ -717,8 +717,15 @@ Public Module GlobalFunctions
                     End If
                     If Math.Abs(num Mod 1) <= (Double.Epsilon * 100) Then
                         ' remove trailing zeroes
-                        numString = Strings.Left(numString, numString.IndexOf(".", StringComparison.Ordinal))
-                        Return Parser(Of T).Parser(numString)
+                        Dim decimalSeparatorIndex = numString.IndexOf(".", StringComparison.Ordinal)
+                        If decimalSeparatorIndex >= 0 Then
+                            numString = Strings.Left(numString, decimalSeparatorIndex)
+                        End If
+                        Try
+                            Return Parser(Of T).Parser(numString)
+                        Catch
+                            Return Parser(Of T).Parser(0)
+                        End Try
                     End If
                 ElseIf typeCode = TypeCode.Decimal Then
                     Return Parser(Of T).Parser(0)
@@ -732,8 +739,15 @@ Public Module GlobalFunctions
                     End If
                     If Math.Abs(num Mod 1) <= (Double.Epsilon * 100) Then
                         ' remove trailing zeroes
-                        numString = Strings.Left(numString, numString.IndexOf(".", StringComparison.Ordinal) - 1)
-                        Return Parser(Of T).Parser(numString)
+                        Dim decimalSeparatorIndex = numString.IndexOf(".", StringComparison.Ordinal)
+                        If decimalSeparatorIndex >= 0 Then
+                            numString = Strings.Left(numString, decimalSeparatorIndex)
+                        End If
+                        Try
+                            Return Parser(Of T).Parser(numString)
+                        Catch
+                            Return Parser(Of T).Parser(0)
+                        End Try
                     End If
                 End If
             End If

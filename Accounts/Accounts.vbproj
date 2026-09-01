@@ -757,6 +757,24 @@
     <Compile Include="PresentationLayer\Views\Forms\MedicalFitnessReportForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\MedicalFitnessReportInvoiceSearchForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\MedicalFitnessExamTemplateForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\MedicalFitnessMaintenanceFormBase.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\MedicalFitnessReportFormatForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\MedicalFitnessReportFormatItemForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\MedicalFitnessReportFormatAssignmentForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\KizenGroupedLabResultsForm.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -2891,6 +2909,8 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
+    <None Include="app - Copy %282%29.config" />
+    <None Include="app.orig.config" />
     <None Include="appLive.config" />
     <None Include="app -  ibn-server - Kizen %28local ispadmin2%29.config" />
     <None Include="app - ibn-server.config" />

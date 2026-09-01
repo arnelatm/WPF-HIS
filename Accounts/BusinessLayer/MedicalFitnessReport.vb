@@ -7,6 +7,8 @@ Namespace BusinessLayer
 
         Public Property IdNo As Int32
         Public Property InvoiceNo As Int32
+        Public Property MedicalReportFormatIdNo As Int32
+        Public Property ReportFormat As String
         Public Property InvoiceDate As Date?
         Public Property FileNo As Int32?
         Public Property PatientName As String
@@ -39,6 +41,17 @@ Namespace BusinessLayer
 
     End Class
 
+    Public Class MedicalFitnessReportInvoiceSearchResult
+        Inherits BusinessObject
+
+        Public Property InvoiceNo As Int32
+        Public Property InvoiceDate As Date?
+        Public Property FileNo As String
+        Public Property PatientName As String
+        Public Property IdentityNo As String
+
+    End Class
+
     Public Class MedicalFitnessReportTestResult
         Inherits BusinessObject
 
@@ -49,6 +62,8 @@ Namespace BusinessLayer
         Public Property TestNameEnglish As String
         Public Property TestNameArabic As String
         Public Property Sequence As Int32
+        Public Property InputMode As String
+        Public Property IsRequired As Boolean
 
         Public Property DisplayOrder As Int32
             Get
@@ -90,6 +105,67 @@ Namespace BusinessLayer
         Public Property ResultValue As String
         Public Property ReferenceValue As String
         Public Property Unit As String
+
+    End Class
+
+    Public Class MedicalFitnessReportExamTemplate
+        Inherits BusinessObject
+
+        Public Property IdNo As Int32
+        Public Property SectionCode As String
+        Public Property TestCode As String
+        Public Property TestNameEnglish As String
+        Public Property TestNameArabic As String
+        Public Property Unit As String
+        Public Property DefaultValue As String
+        Public Property DisplayOrder As Int32
+        Public Property InputMode As String
+        Public Property IsRequired As Boolean
+        Public Property Active As Boolean
+
+    End Class
+
+    Public Class MedicalFitnessReportFormat
+        Inherits BusinessObject
+
+        Public Property MRIdNo As Int32
+        Public Property FormatCode As String
+        Public Property TitleEnglish As String
+        Public Property TitleArabic As String
+        Public Property CrystalReportFileName As String
+        Public Property Active As Boolean
+        Public Property DisplayOrder As Int32
+        Public Property IsDefault As Boolean
+
+    End Class
+
+    Public Class MedicalFitnessReportFormatItem
+        Inherits BusinessObject
+
+        Public Property IdNo As Int32
+        Public Property MRIdNo As Int32
+        Public Property ExamTemplateIdNo As Int32
+        Public Property SectionCode As String
+        Public Property TestCode As String
+        Public Property TestNameEnglish As String
+        Public Property TestNameArabic As String
+        Public Property Unit As String
+        Public Property DefaultValue As String
+        Public Property DisplayOrder As Int32
+        Public Property InputMode As String
+        Public Property IsRequired As Boolean
+        Public Property Active As Boolean
+
+    End Class
+
+    Public Class MedicalFitnessReportFormatAssignment
+        Inherits BusinessObject
+
+        Public Property IdNo As Int32
+        Public Property CompanyName As String
+        Public Property MRIdNo As Int32
+        Public Property FormatTitle As String
+        Public Property Active As Boolean
 
     End Class
 

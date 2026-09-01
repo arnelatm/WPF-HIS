@@ -64,7 +64,7 @@ Namespace PresentationLayer.Presenters.Views.Forms
             cboContactIdNo.DisplayOnly = False
             cboContactIdNo.EditingMode = True
             cboContactIdNo.DropDownHeight = 28
-            cboContactIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+            cboContactIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown
             cboContactIdNo.Editable = True
             cboContactIdNo.EditingMode = True
             'cboContactIdNo.DataSource = ContactDataSource

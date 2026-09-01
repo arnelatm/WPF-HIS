@@ -1,6 +1,8 @@
 CREATE TABLE [dbo].[MedicalFitnessReport] (
     [IdNo]                     INT            IDENTITY (1, 1) NOT NULL,
     [InvoiceNo]                INT            NOT NULL,
+    [ReportFormat]             VARCHAR (50)   CONSTRAINT [DF_MedicalFitnessReport_ReportFormat] DEFAULT ('STANDARD') NOT NULL,
+    [MedicalReportFormatIdNo]  INT            NULL,
     [InvoiceDate]              DATETIME       NULL,
     [FileNo]                   INT            NULL,
     [PatientName]              NVARCHAR (255) NULL,
@@ -32,7 +34,8 @@ CREATE TABLE [dbo].[MedicalFitnessReport] (
     [ExamLeftEar]              NVARCHAR (255) NULL,
     [CompanyName]              NVARCHAR (255) NULL,
     [PassportNo]               NVARCHAR (100) NULL,
-    CONSTRAINT [CK_MedicalFitnessReport_FinalResultStatus] CHECK ([FinalResultStatus] IS NULL OR ([FinalResultStatus]='U' OR [FinalResultStatus]='F'))
+    CONSTRAINT [CK_MedicalFitnessReport_FinalResultStatus] CHECK ([FinalResultStatus] IS NULL OR ([FinalResultStatus]='U' OR [FinalResultStatus]='F')),
+    CONSTRAINT [FK_MedicalFitnessReport_Format] FOREIGN KEY ([MedicalReportFormatIdNo]) REFERENCES [dbo].[MedicalFitnessReportFormat] ([MRIdNo])
 );
 
 
