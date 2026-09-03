@@ -27,6 +27,7 @@ Namespace PresentationLayer.Views.Forms
         Private btnNew As Button
         Private btnSave As Button
         Private btnToggleActive As Button
+        Private btnDeleteTemplate As Button
         Private btnClose As Button
 
         Public Sub New(Optional sectionCode As String = "CLINICAL")
@@ -92,10 +93,12 @@ Namespace PresentationLayer.Views.Forms
             btnNew = New Button With {.AutoSize = True, .Text = "New"}
             btnSave = New Button With {.AutoSize = True, .Text = "Save"}
             btnToggleActive = New Button With {.AutoSize = True, .Text = "Deactivate"}
+            btnDeleteTemplate = New Button With {.AutoSize = True, .Text = "Delete", .Enabled = False}
             btnClose = New Button With {.AutoSize = True, .Text = "Close", .DialogResult = DialogResult.Cancel}
             AddHandler btnNew.Click, AddressOf NewTemplateClick
             AddHandler btnSave.Click, AddressOf SaveTemplateClick
             AddHandler btnToggleActive.Click, AddressOf ToggleActiveClick
+            AddHandler btnDeleteTemplate.Click, AddressOf DeleteTemplateClick
             AddHandler btnClose.Click, AddressOf CloseClick
             Dim actionPanel = New FlowLayoutPanel With {
                 .AutoSize = False,
@@ -106,6 +109,7 @@ Namespace PresentationLayer.Views.Forms
             actionPanel.Controls.Add(btnNew)
             actionPanel.Controls.Add(btnSave)
             actionPanel.Controls.Add(btnToggleActive)
+            actionPanel.Controls.Add(btnDeleteTemplate)
             actionPanel.Controls.Add(btnClose)
 
             dgvTemplates = New DataGridView With {
@@ -243,6 +247,8 @@ Namespace PresentationLayer.Views.Forms
             chkRequired.Checked = template.IsRequired
             chkActive.Checked = template.Active
             btnToggleActive.Text = If(template.Active, "Deactivate", "Activate")
+            btnToggleActive.Enabled = True
+            btnDeleteTemplate.Enabled = True
         End Sub
 
         Private Sub ClearEditor()
@@ -258,9 +264,13 @@ Namespace PresentationLayer.Views.Forms
             chkRequired.Checked = False
             chkActive.Checked = True
             btnToggleActive.Text = "Deactivate"
+            btnToggleActive.Enabled = False
+            btnDeleteTemplate.Enabled = False
         End Sub
 
         Private Sub NewTemplateClick(sender As Object, e As EventArgs)
+            dgvTemplates.ClearSelection()
+            dgvTemplates.CurrentCell = Nothing
             ClearEditor()
             txtTestCode.Focus()
         End Sub
@@ -301,7 +311,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ToggleActiveClick(sender As Object, e As EventArgs)
             Dim template = TryCast(dgvTemplates.CurrentRow?.DataBoundItem, MedicalFitnessReportExamTemplate)
             If template Is Nothing Then
-                MessageBox.Show("Select a clinical examination item first.")
+                MessageBox.Show("Select a " & _sectionName.ToLowerInvariant() & " examination item first.")
                 Return
             End If
 
@@ -312,6 +322,46 @@ Namespace PresentationLayer.Views.Forms
             Catch ex As Exception
                 MessageBox.Show(
                     "Unable to change the item status." & Environment.NewLine & ex.Message,
+                    _sectionName & " Examination Items",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error)
+            End Try
+        End Sub
+
+        Private Sub DeleteTemplateClick(sender As Object, e As EventArgs)
+            Dim template = TryCast(dgvTemplates.CurrentRow?.DataBoundItem, MedicalFitnessReportExamTemplate)
+            If template Is Nothing OrElse template.IdNo <= 0 Then
+                MessageBox.Show("Select a " & _sectionName.ToLowerInvariant() & " examination item first.")
+                Return
+            End If
+
+            Dim itemName = If(String.IsNullOrWhiteSpace(template.TestNameEnglish), template.TestCode, template.TestNameEnglish)
+            Dim confirmation = "Delete the " & _sectionName & " examination item '" & itemName & "' permanently?" &
+                               Environment.NewLine & Environment.NewLine &
+                               "This cannot be undone. If the item is used in a report format, deactivate it instead."
+            If MessageBox.Show(confirmation,
+                               "Delete " & _sectionName & " Examination Item",
+                               MessageBoxButtons.YesNo,
+                               MessageBoxIcon.Warning,
+                               MessageBoxDefaultButton.Button2) <> DialogResult.Yes Then
+                Return
+            End If
+
+            Try
+                If _dao.DeleteExamTemplate(template.IdNo) = 0 Then
+                    MessageBox.Show(
+                        "This item is used by one or more report formats and cannot be deleted. Deactivate it instead.",
+                        _sectionName & " Examination Items",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information)
+                    Return
+                End If
+
+                MessageBox.Show(_sectionName & " examination item deleted.")
+                RefreshTemplates()
+            Catch ex As Exception
+                MessageBox.Show(
+                    "Unable to delete the " & _sectionName & " examination item." & Environment.NewLine & ex.Message,
                     _sectionName & " Examination Items",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error)

@@ -28,6 +28,7 @@ Namespace PresentationLayer.Views.Forms
         Private btnNew As Button
         Private btnSave As Button
         Private btnToggleActive As Button
+        Private btnDeleteTemplate As Button
         Private btnClose As Button
 
         Public Sub New()
@@ -98,11 +99,19 @@ Namespace PresentationLayer.Views.Forms
 
             btnNew = New Button With {.AutoSize = True, .Text = "New"}
             btnSave = New Button With {.AutoSize = True, .Text = "Save"}
-            btnToggleActive = New Button With {.AutoSize = True, .Text = "Deactivate"}
+            btnToggleActive = New Button With {
+                .AutoSize = True,
+                .Enabled = False,
+                .Text = "Deactivate"}
+            btnDeleteTemplate = New Button With {
+                .AutoSize = True,
+                .Enabled = False,
+                .Text = "Delete"}
             btnClose = New Button With {.AutoSize = True, .Text = "Close", .DialogResult = DialogResult.Cancel}
             AddHandler btnNew.Click, AddressOf NewTemplateClick
             AddHandler btnSave.Click, AddressOf SaveTemplateClick
             AddHandler btnToggleActive.Click, AddressOf ToggleActiveClick
+            AddHandler btnDeleteTemplate.Click, AddressOf DeleteTemplateClick
             AddHandler btnClose.Click, AddressOf CloseClick
             Dim actionPanel = New FlowLayoutPanel With {
                 .AutoSize = False,
@@ -113,6 +122,7 @@ Namespace PresentationLayer.Views.Forms
             actionPanel.Controls.Add(btnNew)
             actionPanel.Controls.Add(btnSave)
             actionPanel.Controls.Add(btnToggleActive)
+            actionPanel.Controls.Add(btnDeleteTemplate)
             actionPanel.Controls.Add(btnClose)
 
             dgvTemplates = New DataGridView With {
@@ -262,6 +272,8 @@ Namespace PresentationLayer.Views.Forms
             chkCopyResultToEntry.Checked = template.CopyResultToEntry
             chkActive.Checked = template.Active
             btnToggleActive.Text = If(template.Active, "Deactivate", "Activate")
+            btnToggleActive.Enabled = True
+            btnDeleteTemplate.Enabled = True
         End Sub
 
         Private Sub ClearEditor(Optional preserveSelectedCode As Boolean = False)
@@ -276,9 +288,13 @@ Namespace PresentationLayer.Views.Forms
             chkCopyResultToEntry.Checked = False
             chkActive.Checked = True
             btnToggleActive.Text = "Deactivate"
+            btnToggleActive.Enabled = False
+            btnDeleteTemplate.Enabled = False
         End Sub
 
         Private Sub NewTemplateClick(sender As Object, e As EventArgs)
+            dgvTemplates.ClearSelection()
+            dgvTemplates.CurrentCell = Nothing
             ClearEditor()
             cmbTestCode.Focus()
         End Sub
@@ -305,13 +321,14 @@ Namespace PresentationLayer.Views.Forms
 
             Dim item = TryCast(cmbTestCode.SelectedItem, MedicalFitnessReportKizenLabItem)
             txtKizenName.Text = If(item Is Nothing, "", item.Name)
-            _selectedIdNo = 0
-            txtEnglishOverride.Clear()
-            txtArabicOverride.Clear()
-            numDisplayOrder.Value = Math.Min(numDisplayOrder.Maximum, Math.Max(numDisplayOrder.Minimum, _nextDisplayOrder))
-            chkCopyResultToEntry.Checked = False
-            chkActive.Checked = True
-            btnToggleActive.Text = "Deactivate"
+            If _selectedIdNo = 0 Then
+                txtEnglishOverride.Clear()
+                txtArabicOverride.Clear()
+                numDisplayOrder.Value = Math.Min(numDisplayOrder.Maximum, Math.Max(numDisplayOrder.Minimum, _nextDisplayOrder))
+                chkCopyResultToEntry.Checked = False
+                chkActive.Checked = True
+                btnToggleActive.Text = "Deactivate"
+            End If
         End Sub
 
         Private Sub TemplatesCurrentCellDirtyStateChanged(sender As Object, e As EventArgs)
@@ -367,6 +384,16 @@ Namespace PresentationLayer.Views.Forms
             End If
 
             Try
+                Dim existingTemplate = _dao.GetLabTemplateByCode(code)
+                If existingTemplate IsNot Nothing AndAlso existingTemplate.IdNo <> _selectedIdNo Then
+                    MessageBox.Show(
+                        "This Kizen laboratory test is already configured. Select its grid row to update it, or click New before adding another item.",
+                        "Laboratory Test Items",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information)
+                    Return
+                End If
+
                 Dim template As New MedicalFitnessReportLabTemplate With {
                     .IdNo = _selectedIdNo,
                     .TestCode = code,
@@ -382,6 +409,35 @@ Namespace PresentationLayer.Views.Forms
                 RefreshTemplates(idNo)
             Catch ex As Exception
                 MessageBox.Show("Unable to save the laboratory test item." & Environment.NewLine & ex.Message,
+                                "Laboratory Test Items", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End Sub
+
+        Private Sub DeleteTemplateClick(sender As Object, e As EventArgs)
+            Dim template = TryCast(dgvTemplates.CurrentRow?.DataBoundItem, MedicalFitnessReportLabTemplate)
+            If template Is Nothing OrElse template.IdNo = 0 Then
+                MessageBox.Show("Select a laboratory test item first.")
+                Return
+            End If
+
+            Dim displayName = If(String.IsNullOrWhiteSpace(template.TestNameEnglish), template.TestCode, template.TestNameEnglish)
+            Dim confirmation = MessageBox.Show(
+                "Delete the laboratory test item '" & displayName & "' (" & template.TestCode & ")?" & Environment.NewLine &
+                "This removes the configuration permanently. Existing saved reports are not changed.",
+                "Delete Laboratory Test Item",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning,
+                MessageBoxDefaultButton.Button2)
+            If confirmation <> DialogResult.Yes Then
+                Return
+            End If
+
+            Try
+                _dao.DeleteLabTemplate(template.IdNo)
+                MessageBox.Show("Laboratory test item deleted.")
+                RefreshTemplates()
+            Catch ex As Exception
+                MessageBox.Show("Unable to delete the laboratory test item." & Environment.NewLine & ex.Message,
                                 "Laboratory Test Items", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
         End Sub

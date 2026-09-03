@@ -463,6 +463,16 @@ Namespace DataLayer.AdoNet
             Return template.IdNo
         End Function
 
+        Public Sub DeleteLabTemplate(templateIdNo As Int32)
+            If templateIdNo <= 0 Then
+                Return
+            End If
+
+            _ispDataDb.Update(
+                "DELETE FROM MedicalFitnessReportLabTemplate WHERE IdNo=@IdNo",
+                "@IdNo", templateIdNo)
+        End Sub
+
         Public Function GetReportFormats(Optional includeInactive As Boolean = False) As List(Of MedicalFitnessReportFormat)
             Dim sql As String =
                 "SELECT MRIdNo,FormatCode,TitleEnglish,TitleArabic,CrystalReportFileName,Active,DisplayOrder,IsDefault " &
@@ -664,6 +674,19 @@ Namespace DataLayer.AdoNet
             End If
 
             Return template.IdNo
+        End Function
+
+        Public Function DeleteExamTemplate(templateIdNo As Int32) As Int32
+            If templateIdNo <= 0 Then
+                Return 0
+            End If
+
+            Dim sql As String =
+                "DELETE FROM MedicalFitnessReportExamTemplate " &
+                "WHERE IdNo=@IdNo " &
+                "AND NOT EXISTS (" &
+                "SELECT 1 FROM MedicalFitnessReportFormatItem WHERE ExamTemplateIdNo=@IdNo)"
+            Return _ispDataDb.Update(sql, "@IdNo", templateIdNo)
         End Function
 
         Public Function SaveReport(report As MedicalFitnessReport) As Int32
