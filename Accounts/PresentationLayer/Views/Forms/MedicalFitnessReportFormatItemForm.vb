@@ -16,6 +16,7 @@ Namespace PresentationLayer.Views.Forms
         Private btnClinicalItems As Button
         Private btnXRayItems As Button
         Private btnClose As Button
+        Private _sortQueued As Boolean
 
         Public Sub New(mrIdNo As Int32, formatTitle As String)
             _mrIdNo = mrIdNo
@@ -62,6 +63,7 @@ Namespace PresentationLayer.Views.Forms
             AddGridColumn("Order", "DisplayOrder", 70)
             AddGridColumn("Input Mode", "InputMode", 100)
             AddGridColumn("Required", "IsRequired", 70, False, True)
+            AddHandler dgvItems.CellEndEdit, AddressOf ItemCellEndEdit
 
             MaintenanceContent.Controls.Add(CreateMaintenanceLayout(actionPanel, dgvItems))
             CancelButton = btnClose
@@ -86,10 +88,40 @@ Namespace PresentationLayer.Views.Forms
         Private Sub RefreshItems()
             Try
                 dgvItems.DataSource = _dao.GetReportFormatItems(_mrIdNo)
+                SortItemsInGrid()
             Catch ex As Exception
                 MessageBox.Show("Unable to load report format items." & Environment.NewLine & ex.Message,
                                 "Report Format Items", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
+        End Sub
+
+        Private Sub ItemCellEndEdit(sender As Object, e As DataGridViewCellEventArgs)
+            If e.RowIndex < 0 OrElse e.ColumnIndex < 0 Then Return
+            If Not String.Equals(dgvItems.Columns(e.ColumnIndex).DataPropertyName,
+                                 "DisplayOrder", StringComparison.OrdinalIgnoreCase) Then
+                Return
+            End If
+
+            If _sortQueued OrElse dgvItems.IsDisposed OrElse Not dgvItems.IsHandleCreated Then Return
+            _sortQueued = True
+            dgvItems.BeginInvoke(New MethodInvoker(AddressOf SortItemsAfterEdit))
+        End Sub
+
+        Private Sub SortItemsAfterEdit()
+            _sortQueued = False
+            If dgvItems.IsDisposed Then Return
+            SortItemsInGrid()
+        End Sub
+
+        Private Sub SortItemsInGrid()
+            Dim items = TryCast(dgvItems.DataSource, List(Of MedicalFitnessReportFormatItem))
+            If items Is Nothing Then Return
+
+            dgvItems.DataSource = items.
+                OrderBy(Function(item) item.DisplayOrder).
+                ThenBy(Function(item) item.SectionCode).
+                ThenBy(Function(item) item.TestNameEnglish).
+                ToList()
         End Sub
 
         Private Sub SaveClick(sender As Object, e As EventArgs)

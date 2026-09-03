@@ -31,8 +31,11 @@ Namespace PresentationLayer.Views.Forms
         Private _loadingReportFormats As Boolean
         Private txtCompanyName As TextBox
         Private txtPassportNo As TextBox
+        Private btnManageLabItems As Button
         Private lblReportFormat As Label
         Private cboReportFormat As ComboBox
+        Private lblPaperType As Label
+        Private cboPaperType As ComboBox
         Private txtExamTemperature As TextBox
         Private txtExamBloodPressure As TextBox
         Private txtExamPulse As TextBox
@@ -67,6 +70,7 @@ Namespace PresentationLayer.Views.Forms
             ConfigureLegacyExamFields()
             ConfigureGridColumns()
             ConfigureReportFormatSelector()
+            ConfigureLabItemsManager()
             ConfigurePatientSearch()
             LoadReportFormats()
             BindGrid()
@@ -85,6 +89,44 @@ Namespace PresentationLayer.Views.Forms
             AddHandler cboReportFormat.SelectionChangeCommitted, AddressOf ReportFormatSelectionChanged
             invoicePanel.Controls.Add(lblReportFormat)
             invoicePanel.Controls.Add(cboReportFormat)
+
+            lblPaperType = New Label With {
+                .AutoSize = True,
+                .Margin = New Padding(8, 7, 3, 3),
+                .Text = "Print On"}
+            cboPaperType = New ComboBox With {
+                .DropDownStyle = ComboBoxStyle.DropDownList,
+                .Margin = New Padding(0, 3, 0, 3),
+                .Width = 110}
+            cboPaperType.Items.AddRange(New Object() {"Plain Paper", "Letterhead"})
+            cboPaperType.SelectedIndex = 0
+            invoicePanel.Controls.Add(lblPaperType)
+            invoicePanel.Controls.Add(cboPaperType)
+        End Sub
+
+        Private ReadOnly Property SuppressLogoForPrint As Boolean
+            Get
+                Return cboPaperType IsNot Nothing AndAlso cboPaperType.SelectedIndex = 1
+            End Get
+        End Property
+
+        Private Sub ConfigureLabItemsManager()
+            btnManageLabItems = New Button With {
+                .AutoSize = True,
+                .Margin = New Padding(3, 3, 0, 3),
+                .Text = "Manage Lab Items",
+                .UseVisualStyleBackColor = True}
+            AddHandler btnManageLabItems.Click, AddressOf ManageLabItemsButtonClicked
+            invoicePanel.Controls.Add(btnManageLabItems)
+        End Sub
+
+        Private Sub ManageLabItemsButtonClicked(sender As Object, e As EventArgs)
+            Using form As New MedicalFitnessReportLabTemplateForm()
+                form.ShowDialog(Me)
+            End Using
+            If InvoiceNo <> 0 Then
+                RaiseEvent RefreshLabResultsRequested()
+            End If
         End Sub
 
         Private Sub LoadReportFormats(Optional selectedIdNo As Int32 = 0)
@@ -782,7 +824,9 @@ Namespace PresentationLayer.Views.Forms
                 medicalReportForm = New ReportForm(
                     reportFormat.CrystalReportFileName,
                     InvoiceNo,
-                    "InvoiceNo")
+                    "InvoiceNo",
+                    SuppressLogoForPrint,
+                    "SuppressLogo")
             Else
                 medicalReportForm = ReportForm.CreateSorted(
                     reportFormat.CrystalReportFileName,
@@ -790,7 +834,9 @@ Namespace PresentationLayer.Views.Forms
                     "Sequence",
                     reportData,
                     InvoiceNo,
-                    "InvoiceNo")
+                    "InvoiceNo",
+                    SuppressLogoForPrint,
+                    "SuppressLogo")
             End If
             medicalReportForm.Show()
             Return True

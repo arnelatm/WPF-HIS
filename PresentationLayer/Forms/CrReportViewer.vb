@@ -21,6 +21,11 @@ Public Class CrReportViewer
 
     Public Property ReportFileName As String
 
+    ' Reports populated from an in-memory DataSet must not be refreshed by
+    ' the viewer.  Refreshing makes Crystal query the report's saved database
+    ' source again and can discard child rows supplied by the application.
+    Protected Property UsesSuppliedReportData As Boolean
+
     Protected Sub GetReportProperties(Optional cReportPath As String = "ReportPaths")
         Dim reportPaths As String = ConfigurationManager.AppSettings.Get(cReportPath)
         Dim uid As String = ConfigurationManager.AppSettings.Get("UID")
@@ -66,7 +71,9 @@ Public Class CrReportViewer
             .BringToFront()
             .ReportSource = ReportDocument
             .SetProductLocale(CInt(ceCulture))
-            .Refresh()
+            If Not UsesSuppliedReportData Then
+                .Refresh()
+            End If
         End With
 
         btnQuit.Visible = True

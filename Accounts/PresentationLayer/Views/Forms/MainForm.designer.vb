@@ -121,6 +121,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemMedicalReportFormats = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemMedicalClinicalItems = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemMedicalXRayItems = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemMedicalLabItems = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemMedicalReportAssignments = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemTransactions = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPettyCash = New System.Windows.Forms.ToolStripMenuItem()
@@ -753,7 +754,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemMedicalReports
             '
-            Me.ToolStripMenuItemMedicalReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemMedicalReportFormats, Me.ToolStripMenuItemMedicalClinicalItems, Me.ToolStripMenuItemMedicalXRayItems, Me.ToolStripMenuItemMedicalReportAssignments})
+            Me.ToolStripMenuItemMedicalReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemMedicalReportFormats, Me.ToolStripMenuItemMedicalClinicalItems, Me.ToolStripMenuItemMedicalXRayItems, Me.ToolStripMenuItemMedicalLabItems, Me.ToolStripMenuItemMedicalReportAssignments})
             Me.ToolStripMenuItemMedicalReports.Name = "ToolStripMenuItemMedicalReports"
             Me.ToolStripMenuItemMedicalReports.Text = "Medical Reports"
             '
@@ -771,6 +772,11 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.ToolStripMenuItemMedicalXRayItems.Name = "ToolStripMenuItemMedicalXRayItems"
             Me.ToolStripMenuItemMedicalXRayItems.Text = "XRay Items"
+            '
+            'ToolStripMenuItemMedicalLabItems
+            '
+            Me.ToolStripMenuItemMedicalLabItems.Name = "ToolStripMenuItemMedicalLabItems"
+            Me.ToolStripMenuItemMedicalLabItems.Text = "Laboratory Test Items"
             '
             'ToolStripMenuItemMedicalReportAssignments
             '
@@ -1825,6 +1831,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ToolStripMenuItemMedicalReportFormats As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemMedicalClinicalItems As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemMedicalXRayItems As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemMedicalLabItems As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemMedicalReportAssignments As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemDoctorsPrescriptions As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemPrescription As ToolStripMenuItem

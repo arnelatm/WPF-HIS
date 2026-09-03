@@ -90,10 +90,30 @@ Namespace BusinessLayer
 
         Public Property IdNo As Int32
         Public Property TestCode As String
+        ' The existing TestNameEnglish column stores the Kizen source name.
+        ' This property is a UI/read-model alias and is not a database column.
+        Public Property KizenTestNameEnglish As String
+        Public Property EnglishNameOverride As String
+        Public Property ArabicNameOverride As String
         Public Property TestNameEnglish As String
         Public Property TestNameArabic As String
         Public Property DisplayOrder As Int32
+        Public Property CopyResultToEntry As Boolean
         Public Property Active As Boolean
+
+    End Class
+
+    Public Class MedicalFitnessReportKizenLabItem
+        Inherits BusinessObject
+
+        Public Property Code As String
+        Public Property Name As String
+
+        Public ReadOnly Property DisplayText As String
+            Get
+                Return String.Format("{0} - {1}", Code, Name)
+            End Get
+        End Property
 
     End Class
 

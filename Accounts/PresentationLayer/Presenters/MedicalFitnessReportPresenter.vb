@@ -1,4 +1,5 @@
 ﻿Imports System.ComponentModel
+Imports System.Collections.Generic
 Imports System.Linq
 Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.DataLayer.AdoNet
@@ -77,6 +78,11 @@ Namespace PresentationLayer.Presenters
                 MessageBox.Show("Please enter the invoice number.")
                 Return
             End If
+
+            ' Remove the previous invoice rows before any database work so a
+            ' failed lookup or a slow Kizen read cannot leave stale results in
+            ' the grid.
+            View.TestResults = New BindingList(Of MedicalFitnessReportTestResultView)()
 
             Dim report = _dao.GetSavedReportByInvoiceNo(View.InvoiceNo)
             If report Is Nothing Then
@@ -389,21 +395,18 @@ Namespace PresentationLayer.Presenters
 
             Dim sequence = 200
             Dim analyses = _dao.GetKizenLabAnalyses(report.InvoiceNo)
+            Dim labTemplates = _dao.GetActiveLabTemplates().ToDictionary(
+                Function(item) item.TestCode,
+                StringComparer.OrdinalIgnoreCase)
             If analyses.Count > 0 Then
                 For Each analysis In analyses
-                    AddLabRow(rows, analysis, sequence)
+                    Dim template As MedicalFitnessReportLabTemplate = Nothing
+                    If Not String.IsNullOrWhiteSpace(analysis.TestCode) Then
+                        template = FindLabTemplate(labTemplates, analysis.TestCode)
+                    End If
+                    AddLabRow(rows, analysis, sequence, template)
                     sequence += 10
                 Next
-            Else
-                Dim templates = _dao.GetActiveLabTemplates()
-                If templates.Count = 0 Then
-                    AddRow(rows, "LAB", "RBS", "Random Blood Sugar", "السكر العشوائي", sequence)
-                Else
-                    For Each template In templates
-                        AddRow(rows, "LAB", template.TestCode, template.TestNameEnglish, template.TestNameArabic, sequence)
-                        sequence += 10
-                    Next
-                End If
             End If
 
             Return rows
@@ -627,6 +630,9 @@ Namespace PresentationLayer.Presenters
 
         Private Function SynchronizeLabDetails(rows As List(Of MedicalFitnessReportTestResult), invoiceNo As Int32, Optional removeMissingWhenEmpty As Boolean = False) As List(Of MedicalFitnessReportTestResult)
             Dim analyses = _dao.GetKizenLabAnalyses(invoiceNo)
+            Dim labTemplates = _dao.GetActiveLabTemplates().ToDictionary(
+                Function(item) item.TestCode,
+                StringComparer.OrdinalIgnoreCase)
             If analyses.Count = 0 Then
                 Dim currentRows = If(rows, New List(Of MedicalFitnessReportTestResult)())
                 If Not removeMissingWhenEmpty Then
@@ -649,6 +655,10 @@ Namespace PresentationLayer.Presenters
                                   Math.Max(200, existingRows.Max(Function(row) row.Sequence) + 10))
 
             For Each analysis In analyses
+                Dim configuredTemplate As MedicalFitnessReportLabTemplate = Nothing
+                If Not String.IsNullOrWhiteSpace(analysis.TestCode) Then
+                    configuredTemplate = FindLabTemplate(labTemplates, analysis.TestCode)
+                End If
                 Dim matchingRow = existingRows.FirstOrDefault(
                     Function(row) String.Equals(row.SectionCode, "LAB", StringComparison.OrdinalIgnoreCase) AndAlso
                         (String.Equals(row.TestCode, analysis.TestCode, StringComparison.OrdinalIgnoreCase) OrElse
@@ -663,10 +673,13 @@ Namespace PresentationLayer.Presenters
                     nextSequence += 10
                 End If
 
+                If configuredTemplate IsNot Nothing AndAlso matchingRow.Sequence <= 0 Then
+                    matchingRow.Sequence = Math.Max(200, configuredTemplate.DisplayOrder)
+                End If
+
                 matchingRow.SectionCode = "LAB"
                 matchingRow.TestCode = analysis.TestCode
-                matchingRow.TestNameEnglish = analysis.TestNameEnglish
-                ApplyLabAnalysis(matchingRow, analysis)
+                ApplyLabAnalysis(matchingRow, analysis, configuredTemplate)
                 synchronizedRows.Add(matchingRow)
             Next
 
@@ -685,17 +698,37 @@ Namespace PresentationLayer.Presenters
                 .Sequence = sequence})
         End Sub
 
-        Private Shared Sub AddLabRow(rows As List(Of MedicalFitnessReportTestResult), analysis As MedicalFitnessReportLabAnalysis, sequence As Int32)
+        Private Shared Sub AddLabRow(rows As List(Of MedicalFitnessReportTestResult),
+                                     analysis As MedicalFitnessReportLabAnalysis,
+                                     sequence As Int32,
+                                     configuredTemplate As MedicalFitnessReportLabTemplate)
             Dim row = New MedicalFitnessReportTestResult With {
                 .SectionCode = "LAB",
                 .TestCode = analysis.TestCode,
-                .TestNameEnglish = analysis.TestNameEnglish,
-                .Sequence = sequence}
-            ApplyLabAnalysis(row, analysis)
+                .TestNameEnglish = If(configuredTemplate Is Nothing, analysis.TestNameEnglish, GetLabEnglishName(configuredTemplate)),
+                .TestNameArabic = If(configuredTemplate Is Nothing, Nothing, GetLabArabicName(configuredTemplate)),
+                .Sequence = If(configuredTemplate Is Nothing OrElse configuredTemplate.DisplayOrder < 200,
+                               sequence,
+                               configuredTemplate.DisplayOrder)}
+            ApplyLabAnalysis(row, analysis, configuredTemplate)
             rows.Add(row)
         End Sub
 
-        Private Shared Sub ApplyLabAnalysis(row As MedicalFitnessReportTestResult, analysis As MedicalFitnessReportLabAnalysis)
+        Private Shared Sub ApplyLabAnalysis(row As MedicalFitnessReportTestResult,
+                                            analysis As MedicalFitnessReportLabAnalysis,
+                                            configuredTemplate As MedicalFitnessReportLabTemplate)
+            If configuredTemplate Is Nothing Then
+                row.TestNameEnglish = analysis.TestNameEnglish
+                row.TestNameArabic = Nothing
+            Else
+                row.TestNameEnglish = GetLabEnglishName(configuredTemplate)
+                row.TestNameArabic = GetLabArabicName(configuredTemplate)
+                If configuredTemplate.CopyResultToEntry AndAlso
+                   Not String.IsNullOrWhiteSpace(analysis.ResultValue) Then
+                    row.ResultText = analysis.ResultValue
+                End If
+            End If
+
             row.LabResult = analysis.ResultValue
             row.LabReferenceValue = analysis.ReferenceValue
             row.LabUnit = analysis.Unit
@@ -718,6 +751,58 @@ Namespace PresentationLayer.Presenters
             row.ResultStatus = evaluation.SuggestedStatus
             row.ResultStatusSource = If(String.IsNullOrWhiteSpace(evaluation.SuggestedStatus), Nothing, "A")
         End Sub
+
+        Private Shared Function GetLabEnglishName(template As MedicalFitnessReportLabTemplate) As String
+            If template Is Nothing Then
+                Return ""
+            End If
+            If Not String.IsNullOrWhiteSpace(template.EnglishNameOverride) Then
+                Return template.EnglishNameOverride.Trim()
+            End If
+            If Not String.IsNullOrWhiteSpace(template.TestNameEnglish) Then
+                Return template.TestNameEnglish.Trim()
+            End If
+            Return template.TestCode
+        End Function
+
+        Private Shared Function FindLabTemplate(
+            templates As IDictionary(Of String, MedicalFitnessReportLabTemplate),
+            testCode As String) As MedicalFitnessReportLabTemplate
+            If templates Is Nothing OrElse String.IsNullOrWhiteSpace(testCode) Then
+                Return Nothing
+            End If
+
+            Dim template As MedicalFitnessReportLabTemplate = Nothing
+            If templates.TryGetValue(testCode.Trim(), template) Then
+                Return template
+            End If
+
+            Dim alternateCode As String
+            If testCode.Trim().StartsWith("Item_", StringComparison.OrdinalIgnoreCase) Then
+                alternateCode = testCode.Trim().Substring(5)
+            Else
+                alternateCode = "Item_" & testCode.Trim()
+            End If
+
+            If templates.TryGetValue(alternateCode, template) Then
+                Return template
+            End If
+
+            Return Nothing
+        End Function
+
+        Private Shared Function GetLabArabicName(template As MedicalFitnessReportLabTemplate) As String
+            If template Is Nothing Then
+                Return Nothing
+            End If
+            If Not String.IsNullOrWhiteSpace(template.ArabicNameOverride) Then
+                Return template.ArabicNameOverride.Trim()
+            End If
+            If Not String.IsNullOrWhiteSpace(template.TestNameArabic) Then
+                Return template.TestNameArabic.Trim()
+            End If
+            Return Nothing
+        End Function
 
         Private Shared Function ToViewRows(rows As List(Of MedicalFitnessReportTestResult)) As BindingList(Of MedicalFitnessReportTestResultView)
             Dim list As New BindingList(Of MedicalFitnessReportTestResultView)

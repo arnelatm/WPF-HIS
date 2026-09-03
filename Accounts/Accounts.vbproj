@@ -766,6 +766,9 @@
     <Compile Include="PresentationLayer\Views\Forms\MedicalFitnessMaintenanceFormBase.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\MedicalFitnessReportLabTemplateForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\MedicalFitnessReportFormatForm.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -2911,11 +2914,12 @@
     </None>
     <None Include="app - Copy %282%29.config" />
     <None Include="app.orig.config" />
+    <None Include="app.config" />
     <None Include="appLive.config" />
     <None Include="app -  ibn-server - Kizen %28local ispadmin2%29.config" />
     <None Include="app - ibn-server.config" />
     <None Include="app - Copy.config" />
-    <None Include="app.config" />
+    <None Include="app-LiveData.config" />
     <None Include="app.config.bak" />
     <None Include="app-ispadmin2-backp.config" />
     <None Include="app-kizen.config" />

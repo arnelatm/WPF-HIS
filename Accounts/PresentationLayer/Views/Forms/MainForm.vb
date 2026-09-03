@@ -59,6 +59,7 @@ Namespace PresentationLayer.Views.Forms
             ToolStripMenuItemMedicalReportFormats.Text = If(isArabic, "نماذج التقارير", "Report Formats")
             ToolStripMenuItemMedicalClinicalItems.Text = If(isArabic, "عناصر الفحص السريري", "Clinical Examination Items")
             ToolStripMenuItemMedicalXRayItems.Text = If(isArabic, "عناصر الأشعة", "XRay Items")
+            ToolStripMenuItemMedicalLabItems.Text = If(isArabic, "عناصر الفحوصات المخبرية", "Laboratory Test Items")
             ToolStripMenuItemMedicalReportAssignments.Text = If(isArabic, "تخصيص التقارير للشركات", "Company Report Assignments")
         End Sub
 
@@ -1259,6 +1260,12 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub MedicalXRayItemsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemMedicalXRayItems.Click
             Using form As New MedicalFitnessExamTemplateForm("XRAY")
+                form.ShowDialog(Me)
+            End Using
+        End Sub
+
+        Private Sub MedicalLabItemsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemMedicalLabItems.Click
+            Using form As New MedicalFitnessReportLabTemplateForm()
                 form.ShowDialog(Me)
             End Using
         End Sub

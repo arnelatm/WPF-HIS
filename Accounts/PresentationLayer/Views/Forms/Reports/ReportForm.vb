@@ -1,6 +1,8 @@
 ﻿Imports AATM.Libraries.GlobalFuncNSub
 
 Imports CrystalDecisions.ReportAppServer.DataDefModel
+Imports CrystalDecisions.CrystalReports.Engine
+Imports CrystalDecisions.Shared
 
 Namespace PresentationLayer.Views.Forms.Reports
 
@@ -55,6 +57,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             GetReportProperties()
             If reportData IsNot Nothing Then
                 ReportDocument.SetDataSource(reportData)
+                UsesSuppliedReportData = True
             End If
             If Not String.IsNullOrWhiteSpace(sortFieldName) Then
                 ' A report backed by an in-memory DataSet has already received
@@ -67,13 +70,67 @@ Namespace PresentationLayer.Views.Forms.Reports
             End If
             For i = 0 To args.Length - 1 Step 2
                 Dim value = args(i)
-                ReportDocument.SetParameterValue(args(i + 1).ToString(), ConvertObjectToType(value))
+                SetReportParameterValue(args(i + 1).ToString(), ConvertObjectToType(value))
             Next
             If reportData Is Nothing Then
                 ReportDocument.DataSourceConnections.Clear()
             End If
             ProcessReport()
         End Sub
+
+        Private Sub SetReportParameterValue(name As String, value As Object)
+            Dim resolvedName = ResolveParameterName(name)
+            If resolvedName Is Nothing Then
+                ' SuppressLogo was added after older copies of this report
+                ' were deployed. Keep those reports usable until they are
+                ' updated in Crystal Reports.
+                If String.Equals(name, "SuppressLogo", StringComparison.OrdinalIgnoreCase) Then
+                    Return
+                End If
+
+                Throw New ArgumentException(
+                    "Crystal report parameter '" & name & "' was not found. Available parameters: " &
+                    GetAvailableParameterNames())
+            End If
+
+            ReportDocument.SetParameterValue(resolvedName, value)
+        End Sub
+
+        Private Function ResolveParameterName(name As String) As String
+            If ReportDocument Is Nothing OrElse ReportDocument.DataDefinition Is Nothing Then
+                Return name
+            End If
+
+            For Each parameterField As ParameterFieldDefinition In ReportDocument.DataDefinition.ParameterFields
+                If String.Equals(parameterField.ParameterFieldName, name, StringComparison.OrdinalIgnoreCase) Then
+                    Return parameterField.ParameterFieldName
+                End If
+            Next
+
+            ' One deployed report was configured with this spelling. Accept
+            ' it while the report can be corrected to the proper spelling.
+            If String.Equals(name, "SuppressLogo", StringComparison.OrdinalIgnoreCase) Then
+                For Each parameterField As ParameterFieldDefinition In ReportDocument.DataDefinition.ParameterFields
+                    If String.Equals(parameterField.ParameterFieldName, "SupressLogo", StringComparison.OrdinalIgnoreCase) Then
+                        Return parameterField.ParameterFieldName
+                    End If
+                Next
+            End If
+
+            Return Nothing
+        End Function
+
+        Private Function GetAvailableParameterNames() As String
+            If ReportDocument Is Nothing OrElse ReportDocument.DataDefinition Is Nothing Then
+                Return String.Empty
+            End If
+
+            Dim names As New System.Collections.Generic.List(Of String)
+            For Each parameterField As ParameterFieldDefinition In ReportDocument.DataDefinition.ParameterFields
+                names.Add(parameterField.ParameterFieldName)
+            Next
+            Return String.Join(", ", names)
+        End Function
 
         Private Sub ApplyAscendingSort(tableName As String,
                                        fieldName As String,

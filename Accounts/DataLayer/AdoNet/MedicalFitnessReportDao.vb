@@ -31,6 +31,22 @@ Namespace DataLayer.AdoNet
             Return report
         End Function
 
+        Public Function GetRecordByIdNo(idNo As Int32) As MedicalFitnessReport
+            Dim sql As String =
+                "SELECT IdNo,InvoiceNo,ReportFormat,MedicalReportFormatIdNo,InvoiceDate,FileNo,PatientName,CompanyName,PassportNo,Gender,Age,Nationality,IdentityNo,DoctorName,BloodType," &
+                "ExamTemperature,ExamBloodPressure,ExamPulse,ExamRespiratorySystem,ExamCardiovascularSystem,ExamNervousSystem," &
+                "ExamAbdomen,ExamWeight,ExamHeight,ExamExtremities,ExamChestXRay,ExamRightEye,ExamLeftEye,ExamRightEar,ExamLeftEar," &
+                "FinalResultStatus,Remarks " &
+                "FROM MedicalFitnessReport " &
+                "WHERE IdNo = @IdNo"
+
+            Dim report = _ispDataDb.Read(sql, MakeReport, "@IdNo", idNo).FirstOrDefault()
+            If report IsNot Nothing Then
+                report.Details = GetReportDetails(report.IdNo)
+            End If
+            Return report
+        End Function
+
         Public Function GetReportPrintDataSet(invoiceNo As Int32) As DataSet
             Dim dataSet As New DataSet()
 
@@ -46,11 +62,25 @@ Namespace DataLayer.AdoNet
             dataSet.Tables.Add(headerTable)
 
             Dim detailTable = _ispDataDb.SqlReadDataTable(
-                "SELECT d.IdNo,d.MedicalFitnessReportIdNo,d.SectionCode,d.TestCode,d.TestNameEnglish,d.TestNameArabic," &
-                "d.DisplayOrder,d.ResultStatus,d.ResultText,d.Remarks,d.[Sequence],d.LabResult,d.LabReferenceValue," &
+                "SELECT d.IdNo,d.MedicalFitnessReportIdNo,d.SectionCode,d.TestCode," &
+                "CASE WHEN UPPER(LTRIM(RTRIM(d.SectionCode))) = 'LAB' THEN " &
+                "COALESCE(NULLIF(LTRIM(RTRIM(li.EnglishNameOverride)),N'')," &
+                "NULLIF(LTRIM(RTRIM(li.TestNameEnglish)),N''),d.TestNameEnglish) ELSE d.TestNameEnglish END AS TestNameEnglish," &
+                "CASE WHEN UPPER(LTRIM(RTRIM(d.SectionCode))) = 'LAB' THEN " &
+                "COALESCE(NULLIF(LTRIM(RTRIM(li.ArabicNameOverride)),N''),d.TestNameArabic) ELSE d.TestNameArabic END AS TestNameArabic," &
+                "d.DisplayOrder,d.ResultStatus," &
+                "d.ResultText AS ResultText," &
+                "d.Remarks,d.[Sequence],d.LabResult,d.LabReferenceValue," &
                 "d.LabUnit,d.LabAssessment,d.ResultStatusSource " &
                 "FROM dbo.MedicalFitnessReportTestResult d " &
                 "INNER JOIN dbo.MedicalFitnessReport h ON h.IdNo = d.MedicalFitnessReportIdNo " &
+                "LEFT JOIN dbo.MedicalFitnessReportLabTemplate li ON " &
+                "(UPPER(LTRIM(RTRIM(li.TestCode))) = UPPER(LTRIM(RTRIM(d.TestCode))) OR " &
+                "UPPER(LTRIM(RTRIM(li.TestCode))) = UPPER(CASE " &
+                "WHEN LTRIM(RTRIM(d.TestCode)) LIKE N'Item[_]%' " &
+                "THEN SUBSTRING(LTRIM(RTRIM(d.TestCode)),6,1000) " &
+                "ELSE N'Item_' + LTRIM(RTRIM(d.TestCode)) END)) " &
+                "AND li.Active = 1 " &
                 "WHERE h.InvoiceNo = @InvoiceNo " &
                 "ORDER BY d.[Sequence],d.IdNo",
                 "@InvoiceNo", invoiceNo)
@@ -86,10 +116,11 @@ Namespace DataLayer.AdoNet
                 Dim sectionCode = If(detailRow.IsNull("SectionCode"), "", Convert.ToString(detailRow("SectionCode")))
                 If String.Equals(sectionCode, "LAB", StringComparison.OrdinalIgnoreCase) Then
                     ' Prevent stale Crystal formulas from falling back to
-                    ' Kizen result, unit, or assessment columns.
+                    ' Kizen result, reference value, or assessment columns.
+                    ' LabUnit is display metadata and must remain available
+                    ' when an Entry Result exists (for example, 87 mg/dL).
                     detailRow("LabResult") = If(entryResult = "", DBNull.Value, entryResult)
                     detailRow("LabReferenceValue") = DBNull.Value
-                    detailRow("LabUnit") = DBNull.Value
                     detailRow("LabAssessment") = DBNull.Value
                 End If
             Next
@@ -284,7 +315,11 @@ Namespace DataLayer.AdoNet
                 "RankedRoots AS (" &
                 "SELECT source.*, ROW_NUMBER() OVER (ORDER BY source.VisitAnalysesID DESC, source.ID DESC) AS RootNumber " &
                 "FROM SourceRows source " &
-                "WHERE source.TestCode = @TestCode), " &
+                "WHERE UPPER(source.TestCode) = UPPER(LTRIM(RTRIM(@TestCode))) " &
+                "OR UPPER(source.TestCode) = UPPER(CASE " &
+                "WHEN LTRIM(RTRIM(@TestCode)) LIKE N'Item[_]%' " &
+                "THEN SUBSTRING(LTRIM(RTRIM(@TestCode)), 6, 1000) " &
+                "ELSE N'Item_' + LTRIM(RTRIM(@TestCode)) END)), " &
                 "SelectedRoot AS (" &
                 "SELECT * FROM RankedRoots WHERE RootNumber = 1), " &
                 "ChildRows AS (" &
@@ -313,13 +348,119 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function GetActiveLabTemplates() As List(Of MedicalFitnessReportLabTemplate)
+            Return GetLabTemplates(False)
+        End Function
+
+        Public Function GetLabTemplates(Optional includeInactive As Boolean = False) As List(Of MedicalFitnessReportLabTemplate)
             Dim sql As String =
-                "SELECT IdNo,TestCode,TestNameEnglish,TestNameArabic,DisplayOrder,Active " &
+                "SELECT IdNo,TestCode,TestNameEnglish,TestNameArabic,EnglishNameOverride,ArabicNameOverride," &
+                "COALESCE(NULLIF(LTRIM(RTRIM(EnglishNameOverride)),N'')," &
+                "NULLIF(LTRIM(RTRIM(TestNameEnglish)),N''),TestCode) AS EffectiveTestNameEnglish," &
+                "COALESCE(NULLIF(LTRIM(RTRIM(ArabicNameOverride)),N''),TestNameArabic) AS EffectiveTestNameArabic," &
+                "DisplayOrder,CopyResultToEntry,Active " &
                 "FROM MedicalFitnessReportLabTemplate " &
-                "WHERE Active = 1 " &
+                "WHERE @IncludeInactive = 1 OR Active = 1 " &
                 "ORDER BY DisplayOrder, TestNameEnglish"
 
-            Return _ispDataDb.Read(sql, MakeLabTemplate).ToList()
+            Return _ispDataDb.Read(sql, MakeLabTemplate,
+                                   "@IncludeInactive", If(includeInactive, 1, 0)).ToList()
+        End Function
+
+        Public Function GetLabTemplateByCode(testCode As String) As MedicalFitnessReportLabTemplate
+            If String.IsNullOrWhiteSpace(testCode) Then
+                Return Nothing
+            End If
+
+            Dim sql As String =
+                "SELECT TOP (1) IdNo,TestCode,TestNameEnglish,TestNameArabic,EnglishNameOverride,ArabicNameOverride," &
+                "COALESCE(NULLIF(LTRIM(RTRIM(EnglishNameOverride)),N'')," &
+                "NULLIF(LTRIM(RTRIM(TestNameEnglish)),N''),TestCode) AS EffectiveTestNameEnglish," &
+                "COALESCE(NULLIF(LTRIM(RTRIM(ArabicNameOverride)),N''),TestNameArabic) AS EffectiveTestNameArabic," &
+                "DisplayOrder,CopyResultToEntry,Active " &
+                "FROM MedicalFitnessReportLabTemplate " &
+                "WHERE UPPER(LTRIM(RTRIM(TestCode))) = UPPER(LTRIM(RTRIM(@TestCode)))"
+            Return _ispDataDb.Read(sql, MakeLabTemplate, "@TestCode", testCode.Trim()).FirstOrDefault()
+        End Function
+
+        Public Function GetKizenLabItems() As List(Of MedicalFitnessReportKizenLabItem)
+            Dim sql As String =
+                "SELECT CONVERT(nvarchar(255), LTRIM(RTRIM(w.Code))) AS Code, " &
+                "CONVERT(nvarchar(255), LTRIM(RTRIM(w.Name))) AS Name " &
+                "FROM dbo.A1_Works w " &
+                "WHERE LTRIM(RTRIM(CONVERT(nvarchar(max), w.[Group]))) = @LabGroup " &
+                "AND NULLIF(LTRIM(RTRIM(CONVERT(nvarchar(255), w.Code))), N'') IS NOT NULL " &
+                "AND NULLIF(LTRIM(RTRIM(CONVERT(nvarchar(255), w.Name))), N'') IS NOT NULL " &
+                "ORDER BY w.Name, w.Code"
+
+            Return _kizenDb.Read(
+                sql,
+                MakeKizenLabItem,
+                "@LabGroup", "Laboratory تحاليل المختبر").ToList()
+        End Function
+
+        Public Function GetKizenLabTestName(testCode As String) As String
+            If String.IsNullOrWhiteSpace(testCode) Then
+                Return ""
+            End If
+
+            ' Kizen stores the laboratory item catalog in A1_Works.  Its
+            ' catalog code is normally Lxxx, while result rows commonly use
+            ' Item_Lxxx.  Read the catalog first, then fall back to a result
+            ' row for installations where the catalog row is unavailable.
+            Dim sql As String =
+                "SELECT TOP (1) CONVERT(nvarchar(255), LTRIM(RTRIM(w.Name))) AS TestNameEnglish " &
+                "FROM dbo.A1_Works w " &
+                "WHERE (UPPER(LTRIM(RTRIM(CONVERT(nvarchar(255),w.Code)))) = UPPER(LTRIM(RTRIM(@TestCode))) " &
+                "OR UPPER(LTRIM(RTRIM(CONVERT(nvarchar(255),w.Code)))) = UPPER(CASE " &
+                "WHEN LTRIM(RTRIM(@TestCode)) LIKE N'Item[_]%' " &
+                "THEN SUBSTRING(LTRIM(RTRIM(@TestCode)),6,255) " &
+                "ELSE N'Item_' + LTRIM(RTRIM(@TestCode)) END)) " &
+                "AND NULLIF(LTRIM(RTRIM(CONVERT(nvarchar(255),w.Name))),N'') IS NOT NULL " &
+                "ORDER BY w.ID DESC"
+
+            Dim name = _kizenDb.Read(sql,
+                                     Function(reader) Extensions.AsString(reader("TestNameEnglish")),
+                                     "@TestCode", testCode.Trim()).FirstOrDefault()
+            If Not String.IsNullOrWhiteSpace(name) Then
+                Return name
+            End If
+
+            sql =
+                "SELECT TOP (1) CONVERT(nvarchar(255), LTRIM(RTRIM(r.Name))) AS TestNameEnglish " &
+                "FROM dbo.VisitAnalysesResult r " &
+                "WHERE (UPPER(LTRIM(RTRIM(CONVERT(nvarchar(1000),r.Code)))) = UPPER(LTRIM(RTRIM(@TestCode))) " &
+                "OR UPPER(LTRIM(RTRIM(CONVERT(nvarchar(1000),r.Code)))) = UPPER(CASE " &
+                "WHEN LTRIM(RTRIM(@TestCode)) LIKE N'Item[_]%' " &
+                "THEN LTRIM(RTRIM(@TestCode)) " &
+                "ELSE N'Item_' + LTRIM(RTRIM(@TestCode)) END)) " &
+                "AND NULLIF(LTRIM(RTRIM(CONVERT(nvarchar(255),r.Name))),N'') IS NOT NULL " &
+                "ORDER BY r.ID DESC"
+
+            Return _kizenDb.Read(sql,
+                                 Function(reader) Extensions.AsString(reader("TestNameEnglish")),
+                                 "@TestCode", testCode.Trim()).FirstOrDefault()
+        End Function
+
+        Public Function SaveLabTemplate(template As MedicalFitnessReportLabTemplate) As Int32
+            If template.IdNo = 0 Then
+                Dim sql As String =
+                    "INSERT INTO MedicalFitnessReportLabTemplate " &
+                    "(TestCode,TestNameEnglish,TestNameArabic,EnglishNameOverride,ArabicNameOverride,DisplayOrder,CopyResultToEntry,Active) " &
+                    "VALUES (@TestCode,@TestNameEnglish,@TestNameArabic,@EnglishNameOverride,@ArabicNameOverride,@DisplayOrder,@CopyResultToEntry,@Active); " &
+                    "SELECT CONVERT(int,SCOPE_IDENTITY());"
+                template.IdNo = Convert.ToInt32(_ispDataDb.Scalar(sql, TakeLabTemplate(template)))
+            Else
+                Dim sql As String =
+                    "UPDATE MedicalFitnessReportLabTemplate SET " &
+                    "TestCode=@TestCode,TestNameEnglish=@TestNameEnglish,TestNameArabic=@TestNameArabic," &
+                    "EnglishNameOverride=@EnglishNameOverride,ArabicNameOverride=@ArabicNameOverride," &
+                    "DisplayOrder=@DisplayOrder,CopyResultToEntry=@CopyResultToEntry,Active=@Active " &
+                    "WHERE IdNo=@IdNo"
+                Dim parameters = TakeLabTemplate(template).ToList()
+                parameters.AddRange({"@IdNo", template.IdNo})
+                _ispDataDb.Update(sql, parameters.ToArray())
+            End If
+            Return template.IdNo
         End Function
 
         Public Function GetReportFormats(Optional includeInactive As Boolean = False) As List(Of MedicalFitnessReportFormat)
@@ -419,7 +560,7 @@ Namespace DataLayer.AdoNet
                 "ISNULL(i.IsRequired,t.IsRequired) AS IsRequired,ISNULL(i.Active,0) AS Active " &
                 "FROM MedicalFitnessReportExamTemplate t " &
                 "LEFT JOIN MedicalFitnessReportFormatItem i ON i.ExamTemplateIdNo=t.IdNo AND i.MRIdNo=@MRIdNo " &
-                "ORDER BY t.SectionCode,t.DisplayOrder,t.TestNameEnglish"
+                "ORDER BY COALESCE(i.DisplayOrder,t.DisplayOrder),t.SectionCode,t.TestNameEnglish"
             Return _ispDataDb.Read(sql, MakeReportFormatItem, "@MRIdNo", mrIdNo).ToList()
         End Function
 
@@ -771,6 +912,18 @@ Namespace DataLayer.AdoNet
                 "@Active", assignment.Active}
         End Function
 
+        Private Shared Function TakeLabTemplate(template As MedicalFitnessReportLabTemplate) As Object()
+            Return New Object() {
+                "@TestCode", template.TestCode,
+                "@TestNameEnglish", DbValue(template.TestNameEnglish),
+                "@TestNameArabic", DbValue(template.TestNameArabic),
+                "@EnglishNameOverride", DbValue(template.EnglishNameOverride),
+                "@ArabicNameOverride", DbValue(template.ArabicNameOverride),
+                "@DisplayOrder", template.DisplayOrder,
+                "@CopyResultToEntry", template.CopyResultToEntry,
+                "@Active", template.Active}
+        End Function
+
         Private Shared ReadOnly MakeReportFormat As Func(Of IDataReader, MedicalFitnessReportFormat) =
             Function(reader) New MedicalFitnessReportFormat() With {
                 .MRIdNo = Extensions.AsInt(Of Int32)(reader("MRIdNo")),
@@ -922,9 +1075,13 @@ Namespace DataLayer.AdoNet
             Function(reader) New MedicalFitnessReportLabTemplate() With {
                 .IdNo = Extensions.AsInt(Of Int32)(reader("IdNo")),
                 .TestCode = Extensions.AsString(reader("TestCode")),
-                .TestNameEnglish = Extensions.AsString(reader("TestNameEnglish")),
-                .TestNameArabic = Extensions.AsString(reader("TestNameArabic")),
+                .KizenTestNameEnglish = Extensions.AsString(reader("TestNameEnglish")),
+                .EnglishNameOverride = Extensions.AsString(reader("EnglishNameOverride")),
+                .ArabicNameOverride = Extensions.AsString(reader("ArabicNameOverride")),
+                .TestNameEnglish = Extensions.AsString(reader("EffectiveTestNameEnglish")),
+                .TestNameArabic = Extensions.AsString(reader("EffectiveTestNameArabic")),
                 .DisplayOrder = Extensions.AsInt(Of Int32)(reader("DisplayOrder")),
+                .CopyResultToEntry = Convert.ToBoolean(reader("CopyResultToEntry")),
                 .Active = Convert.ToBoolean(reader("Active"))}
 
         Private Shared ReadOnly MakeClinicalExamTemplate As Func(Of IDataReader, MedicalFitnessReportExamTemplate) =
@@ -962,6 +1119,11 @@ Namespace DataLayer.AdoNet
                 .ResultValue = Extensions.AsString(reader("ResultValue")),
                 .ReferenceValue = Extensions.AsString(reader("ReferenceValue")),
                 .Unit = Extensions.AsString(reader("UnitValue"))}
+
+        Private Shared ReadOnly MakeKizenLabItem As Func(Of IDataReader, MedicalFitnessReportKizenLabItem) =
+            Function(reader) New MedicalFitnessReportKizenLabItem() With {
+                .Code = Extensions.AsString(reader("Code")),
+                .Name = Extensions.AsString(reader("Name"))}
 
         Private Shared ReadOnly MakeKizenGroupedLabResult As Func(Of IDataReader, MedicalFitnessGroupedLabResult) =
             Function(reader) New MedicalFitnessGroupedLabResult() With {
