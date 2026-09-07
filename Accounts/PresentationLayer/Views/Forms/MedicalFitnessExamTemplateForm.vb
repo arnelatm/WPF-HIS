@@ -338,7 +338,7 @@ Namespace PresentationLayer.Views.Forms
             Dim itemName = If(String.IsNullOrWhiteSpace(template.TestNameEnglish), template.TestCode, template.TestNameEnglish)
             Dim confirmation = "Delete the " & _sectionName & " examination item '" & itemName & "' permanently?" &
                                Environment.NewLine & Environment.NewLine &
-                               "This cannot be undone. If the item is used in a report format, deactivate it instead."
+                               "This cannot be undone. If the item is active in a report format, deactivate it first."
             If MessageBox.Show(confirmation,
                                "Delete " & _sectionName & " Examination Item",
                                MessageBoxButtons.YesNo,
@@ -350,7 +350,7 @@ Namespace PresentationLayer.Views.Forms
             Try
                 If _dao.DeleteExamTemplate(template.IdNo) = 0 Then
                     MessageBox.Show(
-                        "This item is used by one or more report formats and cannot be deleted. Deactivate it instead.",
+                        "This item is active in one or more report formats and cannot be deleted. Deactivate it first.",
                         _sectionName & " Examination Items",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information)

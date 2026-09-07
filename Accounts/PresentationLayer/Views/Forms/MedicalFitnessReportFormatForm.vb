@@ -23,6 +23,7 @@ Namespace PresentationLayer.Views.Forms
         Private dgvFormats As DataGridView
         Private btnNew As Button
         Private btnSave As Button
+        Private btnDeleteFormat As Button
         Private btnItems As Button
         Private btnAssignments As Button
         Private btnClose As Button
@@ -65,11 +66,13 @@ Namespace PresentationLayer.Views.Forms
 
             btnNew = New Button With {.AutoSize = True, .Text = "New"}
             btnSave = New Button With {.AutoSize = True, .Text = "Save"}
+            btnDeleteFormat = New Button With {.AutoSize = True, .Enabled = False, .Text = "Delete"}
             btnItems = New Button With {.AutoSize = True, .Text = "Configure Items"}
             btnAssignments = New Button With {.AutoSize = True, .Text = "Assign Companies"}
             btnClose = New Button With {.AutoSize = True, .Text = "Close", .DialogResult = DialogResult.Cancel}
             AddHandler btnNew.Click, AddressOf NewClick
             AddHandler btnSave.Click, AddressOf SaveClick
+            AddHandler btnDeleteFormat.Click, AddressOf DeleteClick
             AddHandler btnItems.Click, AddressOf ItemsClick
             AddHandler btnAssignments.Click, AddressOf AssignmentsClick
             AddHandler btnClose.Click, Sub() Close()
@@ -79,6 +82,7 @@ Namespace PresentationLayer.Views.Forms
                 .Padding = New Padding(8, 8, 8, 4), .WrapContents = False}
             actionPanel.Controls.Add(btnNew)
             actionPanel.Controls.Add(btnSave)
+            actionPanel.Controls.Add(btnDeleteFormat)
             actionPanel.Controls.Add(btnItems)
             actionPanel.Controls.Add(btnAssignments)
             actionPanel.Controls.Add(btnClose)
@@ -90,6 +94,7 @@ Namespace PresentationLayer.Views.Forms
                 .SelectionMode = DataGridViewSelectionMode.FullRowSelect}
             AddGridColumn("Code", "FormatCode", 120)
             AddGridColumn("English Title", "TitleEnglish", 250)
+            AddGridColumn("Arabic Title", "TitleArabic", 250)
             AddGridColumn("Crystal File", "CrystalReportFileName", 240)
             AddGridColumn("Order", "DisplayOrder", 70)
             AddGridColumn("Active", "Active", 70, True)
@@ -172,18 +177,20 @@ Namespace PresentationLayer.Views.Forms
             If format Is Nothing Then ClearEditor() : Return
             _selectedIdNo = format.MRIdNo
             txtCode.Text = If(format.FormatCode, "")
-            txtCode.ReadOnly = True
+            txtCode.ReadOnly = False
             txtTitleEnglish.Text = If(format.TitleEnglish, "")
             txtTitleArabic.Text = If(format.TitleArabic, "")
             txtCrystalFileName.Text = If(format.CrystalReportFileName, "")
             numDisplayOrder.Value = Math.Max(numDisplayOrder.Minimum, Math.Min(numDisplayOrder.Maximum, format.DisplayOrder))
             chkActive.Checked = format.Active
             chkDefault.Checked = format.IsDefault
+            btnDeleteFormat.Enabled = True
         End Sub
 
         Private Sub ClearEditor()
             _selectedIdNo = 0
             txtCode.ReadOnly = False
+            btnDeleteFormat.Enabled = False
             txtCode.Clear()
             txtTitleEnglish.Clear()
             txtTitleArabic.Clear()
@@ -222,6 +229,35 @@ Namespace PresentationLayer.Views.Forms
                 RefreshFormats(idNo)
             Catch ex As Exception
                 MessageBox.Show("Unable to save the report format." & Environment.NewLine & ex.Message,
+                                "Report Formats", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End Sub
+
+        Private Sub DeleteClick(sender As Object, e As EventArgs)
+            Dim format = SelectedFormat()
+            If format Is Nothing OrElse format.MRIdNo = 0 Then
+                MessageBox.Show("Select a report format first.")
+                Return
+            End If
+
+            Dim displayName = If(String.IsNullOrWhiteSpace(format.TitleEnglish), format.FormatCode, format.TitleEnglish)
+            Dim confirmation = MessageBox.Show(
+                "Delete the report format '" & displayName & "' (" & format.FormatCode & ")?" & Environment.NewLine &
+                "This also removes its configured items and company assignments. The deletion is refused if a saved medical report uses this format.",
+                "Delete Report Format",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning,
+                MessageBoxDefaultButton.Button2)
+            If confirmation <> DialogResult.Yes Then
+                Return
+            End If
+
+            Try
+                _dao.DeleteReportFormat(format.MRIdNo)
+                MessageBox.Show("Report format deleted.")
+                RefreshFormats()
+            Catch ex As Exception
+                MessageBox.Show("Unable to delete the report format." & Environment.NewLine & ex.Message,
                                 "Report Formats", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
         End Sub

@@ -169,6 +169,8 @@ Namespace BusinessLayer
         Public Property TestCode As String
         Public Property TestNameEnglish As String
         Public Property TestNameArabic As String
+        Public Property EnglishNameOverride As String
+        Public Property ArabicNameOverride As String
         Public Property Unit As String
         Public Property DefaultValue As String
         Public Property DisplayOrder As Int32

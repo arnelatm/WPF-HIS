@@ -50,7 +50,7 @@ Namespace DataLayer.AdoNet
         Public Function GetReportPrintDataSet(invoiceNo As Int32) As DataSet
             Dim dataSet As New DataSet()
 
-            Dim headerTable = _ispDataDb.SqlReadDataTable(
+            Dim headerTable As DataTable = _ispDataDb.SqlReadDataTable(
                 "SELECT IdNo,InvoiceNo,ReportFormat,MedicalReportFormatIdNo,InvoiceDate,FileNo,PatientName,Gender,Age,Nationality,IdentityNo,DoctorName,BloodType," &
                 "FinalResultStatus,Remarks,UserID,DateCreated,MachineID,ExamTemperature,ExamBloodPressure,ExamPulse," &
                 "ExamRespiratorySystem,ExamCardiovascularSystem,ExamNervousSystem,ExamAbdomen,ExamWeight,ExamHeight," &
@@ -61,19 +61,26 @@ Namespace DataLayer.AdoNet
             headerTable.TableName = "MedicalFitnessReport"
             dataSet.Tables.Add(headerTable)
 
-            Dim detailTable = _ispDataDb.SqlReadDataTable(
+            Dim detailTable As DataTable = _ispDataDb.SqlReadDataTable(
                 "SELECT d.IdNo,d.MedicalFitnessReportIdNo,d.SectionCode,d.TestCode," &
                 "CASE WHEN UPPER(LTRIM(RTRIM(d.SectionCode))) = 'LAB' THEN " &
                 "COALESCE(NULLIF(LTRIM(RTRIM(li.EnglishNameOverride)),N'')," &
-                "NULLIF(LTRIM(RTRIM(li.TestNameEnglish)),N''),d.TestNameEnglish) ELSE d.TestNameEnglish END AS TestNameEnglish," &
+                "NULLIF(LTRIM(RTRIM(li.TestNameEnglish)),N''),d.TestNameEnglish) ELSE " &
+                "COALESCE(NULLIF(LTRIM(RTRIM(fi.EnglishNameOverride)),N''),t.TestNameEnglish,d.TestNameEnglish) END AS TestNameEnglish," &
                 "CASE WHEN UPPER(LTRIM(RTRIM(d.SectionCode))) = 'LAB' THEN " &
-                "COALESCE(NULLIF(LTRIM(RTRIM(li.ArabicNameOverride)),N''),d.TestNameArabic) ELSE d.TestNameArabic END AS TestNameArabic," &
+                "COALESCE(NULLIF(LTRIM(RTRIM(li.ArabicNameOverride)),N''),d.TestNameArabic) ELSE " &
+                "COALESCE(NULLIF(LTRIM(RTRIM(fi.ArabicNameOverride)),N''),t.TestNameArabic,d.TestNameArabic) END AS TestNameArabic," &
                 "d.DisplayOrder,d.ResultStatus," &
                 "d.ResultText AS ResultText," &
                 "d.Remarks,d.[Sequence],d.LabResult,d.LabReferenceValue," &
                 "d.LabUnit,d.LabAssessment,d.ResultStatusSource " &
                 "FROM dbo.MedicalFitnessReportTestResult d " &
                 "INNER JOIN dbo.MedicalFitnessReport h ON h.IdNo = d.MedicalFitnessReportIdNo " &
+                "LEFT JOIN dbo.MedicalFitnessReportFormat f ON f.MRIdNo=h.MedicalReportFormatIdNo " &
+                "OR (ISNULL(h.MedicalReportFormatIdNo,0)=0 AND f.FormatCode=h.ReportFormat) " &
+                "LEFT JOIN dbo.MedicalFitnessReportExamTemplate t ON t.TestCode=d.TestCode " &
+                "AND UPPER(LTRIM(RTRIM(d.SectionCode))) IN ('CLINICAL','XRAY','DETAIL') " &
+                "LEFT JOIN dbo.MedicalFitnessReportFormatItem fi ON fi.MRIdNo=f.MRIdNo AND fi.ExamTemplateIdNo=t.IdNo AND fi.Active=1 " &
                 "LEFT JOIN dbo.MedicalFitnessReportLabTemplate li ON " &
                 "(UPPER(LTRIM(RTRIM(li.TestCode))) = UPPER(LTRIM(RTRIM(d.TestCode))) OR " &
                 "UPPER(LTRIM(RTRIM(li.TestCode))) = UPPER(CASE " &
@@ -90,13 +97,24 @@ Namespace DataLayer.AdoNet
             ' The standard Crystal report uses the exam-template table for the
             ' unit displayed beside a test name/result.  Keep the table in the
             ' in-memory dataset with the same name used by the .rpt file.
-            Dim examTemplateTable = _ispDataDb.SqlReadDataTable(
+            Dim examTemplateTable As DataTable = _ispDataDb.SqlReadDataTable(
                 "SELECT IdNo,TestCode,TestNameEnglish,TestNameArabic,Unit,DisplayOrder,InputMode," &
                 "IsRequired,Active,DefaultValue,SectionCode " &
                 "FROM dbo.MedicalFitnessReportExamTemplate " &
                 "WHERE Active = 1 " &
                 "ORDER BY DisplayOrder,TestNameEnglish")
             examTemplateTable.TableName = "MedicalFitnessReportExamTemplate"
+            ' Some Crystal layouts bind captions to the template table instead
+            ' of the result table. Give both tables the report format's names.
+            For Each templateRow As DataRow In examTemplateTable.Rows
+                Dim detailRow = detailTable.AsEnumerable().FirstOrDefault(
+                    Function(row) Not String.Equals(Convert.ToString(row("SectionCode")), "LAB", StringComparison.OrdinalIgnoreCase) AndAlso
+                        String.Equals(Convert.ToString(row("TestCode")), Convert.ToString(templateRow("TestCode")), StringComparison.OrdinalIgnoreCase))
+                If detailRow IsNot Nothing Then
+                    templateRow("TestNameEnglish") = detailRow("TestNameEnglish")
+                    templateRow("TestNameArabic") = detailRow("TestNameArabic")
+                End If
+            Next
             dataSet.Tables.Add(examTemplateTable)
 
             ' The medical report must print saved Entry Results and explicit
@@ -285,7 +303,10 @@ Namespace DataLayer.AdoNet
                 "WHERE DuplicateNumber = 1 " &
                 "ORDER BY VisitAnalysesID DESC, RequestedPosition, RootID, HierarchyOrder, ID"
 
-            Return _kizenDb.Read(sql, MakeKizenLabAnalysis, "@InvoiceNo", invoiceNo).ToList()
+            ' Keep headers in the query so their detail tests can be expanded first.
+            Return _kizenDb.Read(sql, MakeKizenLabAnalysis, "@InvoiceNo", invoiceNo).
+                Where(Function(analysis) Not If(analysis.TestNameEnglish, "").TrimStart().StartsWith("Medical Report", StringComparison.OrdinalIgnoreCase)).
+                ToList()
         End Function
 
         ''' <summary>
@@ -547,10 +568,44 @@ Namespace DataLayer.AdoNet
             Return format.MRIdNo
         End Function
 
+        Public Function DeleteReportFormat(mrIdNo As Int32) As Int32
+            If mrIdNo <= 0 Then
+                Return 0
+            End If
+
+            Dim sql As String =
+                "SET XACT_ABORT ON; " &
+                "BEGIN TRANSACTION; " &
+                "DECLARE @FormatCode varchar(50); " &
+                "DECLARE @InvoiceNumbers nvarchar(max); " &
+                "SELECT @FormatCode=FormatCode FROM MedicalFitnessReportFormat WHERE MRIdNo=@MRIdNo; " &
+                "IF @FormatCode IS NULL " &
+                "BEGIN COMMIT TRANSACTION; RETURN; END; " &
+                "IF EXISTS (SELECT 1 FROM MedicalFitnessReport " &
+                "WHERE MedicalReportFormatIdNo=@MRIdNo OR ReportFormat=@FormatCode) " &
+                "BEGIN " &
+                "SELECT @InvoiceNumbers=STUFF((SELECT ', ' + CONVERT(varchar(20),r.InvoiceNo) " &
+                "FROM (SELECT DISTINCT InvoiceNo FROM MedicalFitnessReport " &
+                "WHERE MedicalReportFormatIdNo=@MRIdNo OR ReportFormat=@FormatCode) r " &
+                "ORDER BY r.InvoiceNo FOR XML PATH(''), TYPE).value('.', 'nvarchar(max)'),1,2,''); " &
+                "ROLLBACK TRANSACTION; " &
+                "RAISERROR ('Cannot delete this report format because it is used by one or more saved medical reports. Invoice number(s): %s',16,1,@InvoiceNumbers); " &
+                "RETURN; " &
+                "END; " &
+                "DELETE FROM MedicalFitnessReportFormatAssignment WHERE MRIdNo=@MRIdNo; " &
+                "DELETE FROM MedicalFitnessReportFormatItem WHERE MRIdNo=@MRIdNo; " &
+                "DELETE FROM MedicalFitnessReportFormat WHERE MRIdNo=@MRIdNo; " &
+                "COMMIT TRANSACTION;"
+
+            Return _ispDataDb.Update(sql, "@MRIdNo", mrIdNo)
+        End Function
+
         Public Function GetExamTemplatesForReportFormat(mrIdNo As Int32) As List(Of MedicalFitnessReportExamTemplate)
             Dim sql As String =
-                "SELECT t.IdNo,COALESCE(i.SectionCode,t.SectionCode) AS SectionCode,t.TestCode,t.TestNameEnglish," &
-                "t.TestNameArabic,t.Unit,COALESCE(i.DefaultValue,t.DefaultValue) AS DefaultValue," &
+                "SELECT t.IdNo,COALESCE(i.SectionCode,t.SectionCode) AS SectionCode,t.TestCode," &
+                "COALESCE(NULLIF(LTRIM(RTRIM(i.EnglishNameOverride)),N''),t.TestNameEnglish) AS TestNameEnglish," &
+                "COALESCE(NULLIF(LTRIM(RTRIM(i.ArabicNameOverride)),N''),t.TestNameArabic) AS TestNameArabic," &
+                "t.Unit,COALESCE(i.DefaultValue,t.DefaultValue) AS DefaultValue," &
                 "COALESCE(i.DisplayOrder,t.DisplayOrder) AS DisplayOrder,COALESCE(i.InputMode,t.InputMode) AS InputMode," &
                 "COALESCE(i.IsRequired,t.IsRequired) AS IsRequired,t.Active " &
                 "FROM MedicalFitnessReportFormatItem i " &
@@ -564,6 +619,7 @@ Namespace DataLayer.AdoNet
             Dim sql As String =
                 "SELECT ISNULL(i.IdNo,0) AS IdNo,@MRIdNo AS MRIdNo,t.IdNo AS ExamTemplateIdNo,t.SectionCode," &
                 "t.TestCode,t.TestNameEnglish,t.TestNameArabic,t.Unit," &
+                "i.EnglishNameOverride,i.ArabicNameOverride," &
                 "ISNULL(i.DefaultValue,t.DefaultValue) AS DefaultValue," &
                 "ISNULL(i.DisplayOrder,t.DisplayOrder) AS DisplayOrder," &
                 "ISNULL(i.InputMode,t.InputMode) AS InputMode," &
@@ -578,14 +634,17 @@ Namespace DataLayer.AdoNet
             If item.IdNo = 0 Then
                 Dim sql As String =
                     "INSERT INTO MedicalFitnessReportFormatItem " &
-                    "(MRIdNo,ExamTemplateIdNo,SectionCode,DisplayOrder,DefaultValue,InputMode,IsRequired,Active) " &
-                    "VALUES (@MRIdNo,@ExamTemplateIdNo,@SectionCode,@DisplayOrder,@DefaultValue,@InputMode,@IsRequired,@Active); " &
+                    "(MRIdNo,ExamTemplateIdNo,SectionCode,DisplayOrder,DefaultValue,InputMode,IsRequired,Active," &
+                    "EnglishNameOverride,ArabicNameOverride) " &
+                    "VALUES (@MRIdNo,@ExamTemplateIdNo,@SectionCode,@DisplayOrder,@DefaultValue,@InputMode,@IsRequired,@Active," &
+                    "@EnglishNameOverride,@ArabicNameOverride); " &
                     "SELECT CONVERT(int,SCOPE_IDENTITY());"
                 item.IdNo = Convert.ToInt32(_ispDataDb.Scalar(sql, TakeReportFormatItem(item)))
             Else
                 Dim sql As String =
                     "UPDATE MedicalFitnessReportFormatItem SET SectionCode=@SectionCode,DisplayOrder=@DisplayOrder," &
-                    "DefaultValue=@DefaultValue,InputMode=@InputMode,IsRequired=@IsRequired,Active=@Active " &
+                    "DefaultValue=@DefaultValue,InputMode=@InputMode,IsRequired=@IsRequired,Active=@Active," &
+                    "EnglishNameOverride=@EnglishNameOverride,ArabicNameOverride=@ArabicNameOverride " &
                     "WHERE IdNo=@IdNo"
                 Dim parameters = TakeReportFormatItem(item).ToList()
                 parameters.AddRange({"@IdNo", item.IdNo})
@@ -682,10 +741,27 @@ Namespace DataLayer.AdoNet
             End If
 
             Dim sql As String =
-                "DELETE FROM MedicalFitnessReportExamTemplate " &
-                "WHERE IdNo=@IdNo " &
-                "AND NOT EXISTS (" &
-                "SELECT 1 FROM MedicalFitnessReportFormatItem WHERE ExamTemplateIdNo=@IdNo)"
+                "SET XACT_ABORT ON; " &
+                "BEGIN TRANSACTION; " &
+                "DECLARE @InvoiceNumbers nvarchar(max); " &
+                "IF EXISTS (SELECT 1 FROM MedicalFitnessReportFormatItem WHERE ExamTemplateIdNo=@IdNo AND Active=1) " &
+                "BEGIN " &
+                "SELECT @InvoiceNumbers=STUFF((SELECT ', ' + CONVERT(varchar(20),r.InvoiceNo) " &
+                "FROM (SELECT DISTINCT r.InvoiceNo FROM MedicalFitnessReport r " &
+                "INNER JOIN MedicalFitnessReportFormat f ON r.MedicalReportFormatIdNo=f.MRIdNo OR r.ReportFormat=f.FormatCode " &
+                "INNER JOIN MedicalFitnessReportFormatItem i ON i.MRIdNo=f.MRIdNo " &
+                "WHERE i.ExamTemplateIdNo=@IdNo AND i.Active=1) r " &
+                "ORDER BY r.InvoiceNo FOR XML PATH(''), TYPE).value('.', 'nvarchar(max)'),1,2,''); " &
+                "ROLLBACK TRANSACTION; " &
+                "IF @InvoiceNumbers IS NULL " &
+                "RAISERROR ('This item is active in one or more report formats and cannot be deleted. No saved medical reports currently use those formats.',16,1); " &
+                "ELSE " &
+                "RAISERROR ('This item is active in one or more report formats and cannot be deleted. Invoice number(s): %s',16,1,@InvoiceNumbers); " &
+                "RETURN; " &
+                "END; " &
+                "DELETE FROM MedicalFitnessReportFormatItem WHERE ExamTemplateIdNo=@IdNo AND Active=0; " &
+                "DELETE FROM MedicalFitnessReportExamTemplate WHERE IdNo=@IdNo; " &
+                "COMMIT TRANSACTION;"
             Return _ispDataDb.Update(sql, "@IdNo", templateIdNo)
         End Function
 
@@ -921,11 +997,21 @@ Namespace DataLayer.AdoNet
                 "@MRIdNo", item.MRIdNo,
                 "@ExamTemplateIdNo", item.ExamTemplateIdNo,
                 "@SectionCode", item.SectionCode,
+                "@EnglishNameOverride", NameOverrideDbValue(item.EnglishNameOverride),
+                "@ArabicNameOverride", NameOverrideDbValue(item.ArabicNameOverride),
                 "@DisplayOrder", If(item.DisplayOrder <= 0, DBNull.Value, item.DisplayOrder),
                 "@DefaultValue", DbValue(item.DefaultValue),
                 "@InputMode", DbValue(item.InputMode),
                 "@IsRequired", item.IsRequired,
                 "@Active", item.Active}
+        End Function
+
+        Private Shared Function NameOverrideDbValue(value As String) As Object
+            If String.IsNullOrWhiteSpace(value) Then Return DBNull.Value
+            If value.Trim().Length > 255 Then
+                Throw New ArgumentException("Name overrides cannot exceed 255 characters.")
+            End If
+            Return value.Trim()
         End Function
 
         Private Shared Function TakeReportFormatAssignment(assignment As MedicalFitnessReportFormatAssignment) As Object()
@@ -963,6 +1049,8 @@ Namespace DataLayer.AdoNet
                 .IdNo = Extensions.AsInt(Of Int32)(reader("IdNo")),
                 .MRIdNo = Extensions.AsInt(Of Int32)(reader("MRIdNo")),
                 .ExamTemplateIdNo = Extensions.AsInt(Of Int32)(reader("ExamTemplateIdNo")),
+                .EnglishNameOverride = Extensions.AsString(reader("EnglishNameOverride")),
+                .ArabicNameOverride = Extensions.AsString(reader("ArabicNameOverride")),
                 .SectionCode = Extensions.AsString(reader("SectionCode")),
                 .TestCode = Extensions.AsString(reader("TestCode")),
                 .TestNameEnglish = Extensions.AsString(reader("TestNameEnglish")),

@@ -443,6 +443,8 @@ Namespace PresentationLayer.Presenters
                 If existing Is Nothing Then
                     AddExamTemplateRow(result, template, report)
                 Else
+                    existing.TestNameEnglish = template.TestNameEnglish
+                    existing.TestNameArabic = template.TestNameArabic
                     If existing.Sequence <= 0 Then
                         existing.Sequence = template.DisplayOrder
                     End If
@@ -813,6 +815,12 @@ Namespace PresentationLayer.Presenters
             For Each row In rows.OrderBy(Function(item) GetSectionSortOrder(item.SectionCode)).
                          ThenBy(Function(item) item.Sequence).
                          ThenBy(Function(item) item.IdNo)
+                ' Older saved reports may still contain laboratory header rows.
+                If String.Equals(row.SectionCode, "LAB", StringComparison.OrdinalIgnoreCase) AndAlso
+                   If(row.TestNameEnglish, "").TrimStart().StartsWith("Medical Report", StringComparison.OrdinalIgnoreCase) Then
+                    Continue For
+                End If
+
                 list.Add(New MedicalFitnessReportTestResultView With {
                     .IdNo = row.IdNo,
                     .MedicalFitnessReportIdNo = row.MedicalFitnessReportIdNo,

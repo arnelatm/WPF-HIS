@@ -58,6 +58,8 @@ Namespace PresentationLayer.Views.Forms
             AddGridColumn("Test Code", "TestCode", 140, True)
             AddGridColumn("English Name", "TestNameEnglish", 220, True)
             AddGridColumn("Arabic Name", "TestNameArabic", 220, True)
+            AddGridColumn("English Name Override", "EnglishNameOverride", 200)
+            AddGridColumn("Arabic Name Override", "ArabicNameOverride", 200)
             AddGridColumn("Unit", "Unit", 80, True)
             AddGridColumn("Default Value", "DefaultValue", 160)
             AddGridColumn("Order", "DisplayOrder", 70)
@@ -65,7 +67,17 @@ Namespace PresentationLayer.Views.Forms
             AddGridColumn("Required", "IsRequired", 70, False, True)
             AddHandler dgvItems.CellEndEdit, AddressOf ItemCellEndEdit
 
-            MaintenanceContent.Controls.Add(CreateMaintenanceLayout(actionPanel, dgvItems))
+            Dim content = New TableLayoutPanel With {
+                .Dock = DockStyle.Fill, .ColumnCount = 1, .RowCount = 2}
+            content.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 100.0!))
+            content.RowStyles.Add(New RowStyle(SizeType.AutoSize))
+            content.RowStyles.Add(New RowStyle(SizeType.Percent, 100.0!))
+            content.Controls.Add(New Label With {
+                .Name = "lblNameOverrideHelp", .AutoSize = True, .Dock = DockStyle.Fill,
+                .Padding = New Padding(4),
+                .Text = "Name overrides apply only to this report format. Leave an override blank to use the shared item name."}, 0, 0)
+            content.Controls.Add(dgvItems, 0, 1)
+            MaintenanceContent.Controls.Add(CreateMaintenanceLayout(actionPanel, content))
             CancelButton = btnClose
         End Sub
 
@@ -78,6 +90,9 @@ Namespace PresentationLayer.Views.Forms
             column.HeaderText = headerText
             column.Width = width
             column.ReadOnly = readOnlyColumn
+            If propertyName = "EnglishNameOverride" OrElse propertyName = "ArabicNameOverride" Then
+                DirectCast(column, DataGridViewTextBoxColumn).MaxInputLength = 255
+            End If
             dgvItems.Columns.Add(column)
         End Sub
 

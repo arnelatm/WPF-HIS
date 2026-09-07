@@ -671,6 +671,7 @@ Namespace PresentationLayer.Views.Forms
             End If
 
             dgvResults.AutoGenerateColumns = False
+            dgvResults.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
 
             colSequence = New DataGridViewTextBoxColumn With {
                 .DataPropertyName = "Sequence",
@@ -684,11 +685,12 @@ Namespace PresentationLayer.Views.Forms
                 .ReadOnly = True,
                 .FillWeight = 75}
             colTest = New DataGridViewTextBoxColumn With {
-                .DataPropertyName = "TestNameEnglish",
+                .DataPropertyName = "TestNameDisplay",
                 .HeaderText = "Test",
                 .Name = "colTest",
                 .ReadOnly = True,
                 .FillWeight = 140}
+            colTest.DefaultCellStyle.WrapMode = DataGridViewTriState.True
             colLabResult = New DataGridViewTextBoxColumn With {
                 .DataPropertyName = "LabResult",
                 .HeaderText = "Kizen Result",

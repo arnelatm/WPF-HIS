@@ -5,6 +5,8 @@ CREATE TABLE [dbo].[MedicalFitnessReportFormatItem] (
     [SectionCode]           VARCHAR (20)   NOT NULL,
     [DisplayOrder]          INT            NULL,
     [DefaultValue]          NVARCHAR (255) NULL,
+    [EnglishNameOverride] NVARCHAR (255) NULL,
+    [ArabicNameOverride]  NVARCHAR (255) NULL,
     [InputMode]             VARCHAR (20)   NULL,
     [IsRequired]            BIT            NULL,
     [Active]                BIT            CONSTRAINT [DF_MedicalFitnessReportFormatItem_Active] DEFAULT ((1)) NOT NULL,
