@@ -7,7 +7,7 @@ AS BEGIN SET NOCOUNT ON; SET XACT_ABORT ON;
  EXEC dbo.AssertJournalNotReconciliationLocked @JournalCode='PC', @JournalIdNo=@JournalIdNo;
  IF @TransactionDate>='20260101' AND EXISTS(SELECT 1 FROM @Items WHERE Debit<0 OR Credit<0 OR (Debit<>0 AND Credit<>0)) THROW 51254,'Petty cash detail lines contain invalid debit/credit values.',1;
  IF @TransactionDate>='20260101' AND EXISTS(SELECT 1 FROM @Items WHERE AccountIdNo=0 AND (Debit<>0 OR Credit<>0)) THROW 51255,'Petty cash detail lines require an account.',1;
- IF @TransactionDate>='20260101' AND (NOT EXISTS(SELECT 1 FROM @Items) OR ABS((SELECT COALESCE(SUM(Debit),0) FROM @Items)-(SELECT COALESCE(SUM(Credit),0) FROM @Items))>.01) THROW 51253,'Petty cash details are not balanced.',1;
+ IF @TransactionDate>='20260101' AND (NOT EXISTS(SELECT 1 FROM @Items) OR ABS((SELECT COALESCE(SUM(Debit),0) FROM @Items)-(SELECT COALESCE(SUM(Credit),0) FROM @Items)) > 0.00005) THROW 51253,'Petty cash details are not balanced.',1;
  BEGIN TRAN; BEGIN TRY
   DELETE FROM dbo.PcOiItem WHERE DjIdNo=@JournalIdNo; DELETE FROM dbo.PcJournalItem WHERE JournalIdNo=@JournalIdNo;
   UPDATE dbo.PcJournal SET TransactionDate=@TransactionDate,ReferenceNo=@ReferenceNo,Amount=@Amount,AccountIdNo=@AccountIdNo,PaymentType=@PaymentType,PayType=@PayType,PayeeIdNo=@PayeeIdNo,PayeeName=@PayeeName,CheckNumber=@CheckNumber,CheckDate=@CheckDate,ORNumber=@ORNumber,DiscountTaken=@DiscountTaken,DiscountAccountIdNo=@DiscountAccountIdNo,Applied=@Applied,UnApplied=@UnApplied,VatNumber=@VatNumber,VatAmount=@VatAmount,Notes=@Notes,PcClosed=@PcClosed,Approved=@Approved,Posted=@Posted,Cancelled=@Cancelled WHERE IdNo=@JournalIdNo;

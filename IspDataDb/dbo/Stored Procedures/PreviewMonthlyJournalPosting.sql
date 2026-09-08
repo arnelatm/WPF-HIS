@@ -19,6 +19,15 @@ BEGIN
         WHERE TransactionName = 'Closed Period'
     );
     DECLARE @MonthlyCloseStatus varchar(20) = ISNULL((SELECT Status FROM dbo.MonthlyClosePeriod WHERE FiscalYear = @FiscalYear AND FiscalMonth = @Month), 'Open');
+    DECLARE @LastFiscalYearEnd date = (SELECT LastPostingDate FROM dbo.LastPosting WHERE TransactionName = 'LastFiscalYearEnd');
+    DECLARE @LatestPostedPeriodEnd date = (
+        SELECT MAX(FiscalYearEnd)
+        FROM dbo.FiscalYearJournalPostingRun
+        WHERE Status = 'Completed'
+          AND FiscalYearStart = DATEFROMPARTS(YEAR(FiscalYearStart), MONTH(FiscalYearStart), 1)
+          AND FiscalYearEnd = DATEADD(day, -1, DATEADD(month, 1, FiscalYearStart))
+          AND (HeadersChanged > 0 OR ItemsChanged > 0)
+    );
 
     CREATE TABLE #Headers (
         JournalCode char(2) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
@@ -76,11 +85,14 @@ BEGIN
     FROM #Items
     WHERE ISNULL(Cancelled, 0) = 0
     GROUP BY JournalCode, JournalIdNo
-    HAVING ABS(SUM(CONVERT(decimal(19, 4), Debit)) - SUM(CONVERT(decimal(19, 4), Credit))) > 0.005;
+    HAVING ABS(SUM(CONVERT(decimal(19, 4), Debit)) - SUM(CONVERT(decimal(19, 4), Credit))) > 0.00005;
 
     DECLARE @BlockingErrorCount int =
         (SELECT COUNT(*) FROM #Unbalanced) +
         (SELECT COUNT(*) FROM #Items WHERE ISNULL(Cancelled, 0) = 0 AND (AccountIdNo = 0 OR Debit < 0 OR Credit < 0 OR (Debit <> 0 AND Credit <> 0)));
+    DECLARE @HeadersPosted int = (SELECT COUNT(*) FROM #Headers WHERE ISNULL(HeaderPosted, 0) = 1);
+    DECLARE @ItemsPosted int = (SELECT COUNT(*) FROM #Items WHERE ItemPosted = 1);
+    DECLARE @SelectedPeriodEnd date = DATEADD(day, -1, @PeriodEnd);
 
     SELECT
         CONVERT(nvarchar(128), SERVERPROPERTY('ServerName')) AS ServerName,
@@ -88,18 +100,24 @@ BEGIN
         @FiscalYear AS FiscalYear,
         @Month AS FiscalMonth,
         @PeriodStart AS PeriodStart,
-        DATEADD(day, -1, @PeriodEnd) AS PeriodEnd,
+        @SelectedPeriodEnd AS PeriodEnd,
         @ClosedThrough AS PeriodLockedThrough,
+        @LatestPostedPeriodEnd AS LatestPostedPeriodEnd,
         @MonthlyCloseStatus AS MonthlyCloseStatus,
         @BlockingErrorCount AS BlockingErrors,
         (SELECT COUNT(*) FROM #Headers WHERE ISNULL(HeaderPosted, 0) = 0) AS HeadersToPost,
-        (SELECT COUNT(*) FROM #Items WHERE ItemPosted = 0) AS ItemsToPost;
+        @HeadersPosted AS HeadersPosted,
+        (SELECT COUNT(*) FROM #Items WHERE ItemPosted = 0) AS ItemsToPost,
+        @ItemsPosted AS ItemsPosted,
+        CONVERT(bit, CASE WHEN (@LastFiscalYearEnd IS NULL OR @SelectedPeriodEnd > @LastFiscalYearEnd) AND @MonthlyCloseStatus = 'Closed' AND @ClosedThrough = @SelectedPeriodEnd AND @LatestPostedPeriodEnd = @SelectedPeriodEnd AND (@HeadersPosted > 0 OR @ItemsPosted > 0) THEN 1 ELSE 0 END) AS CanUnpost,
+        CONVERT(bit, CASE WHEN (@LastFiscalYearEnd IS NULL OR @SelectedPeriodEnd > @LastFiscalYearEnd) AND @MonthlyCloseStatus = 'Closed' AND @ClosedThrough = @SelectedPeriodEnd AND @HeadersPosted = 0 AND @ItemsPosted = 0 THEN 1 ELSE 0 END) AS CanUnclose;
 
     ;WITH ItemHeaders AS (
         SELECT JournalCode, JournalIdNo FROM #Items GROUP BY JournalCode, JournalIdNo
     ), HeaderSummary AS (
         SELECT h.JournalCode, COUNT(*) AS Headers,
             SUM(CASE WHEN ISNULL(h.HeaderPosted, 0) = 0 THEN 1 ELSE 0 END) AS HeadersToPost,
+            SUM(CASE WHEN ISNULL(h.HeaderPosted, 0) = 1 THEN 1 ELSE 0 END) AS HeadersPosted,
             SUM(CASE WHEN ih.JournalIdNo IS NULL THEN 1 ELSE 0 END) AS EmptyHeaders,
             SUM(CASE WHEN ISNULL(h.Cancelled, 0) = 1 THEN 1 ELSE 0 END) AS CancelledHeaders
         FROM #Headers h LEFT JOIN ItemHeaders ih ON ih.JournalCode = h.JournalCode AND ih.JournalIdNo = h.JournalIdNo
@@ -107,12 +125,13 @@ BEGIN
     ), ItemSummary AS (
         SELECT JournalCode, COUNT(*) AS Items,
             SUM(CASE WHEN ItemPosted = 0 THEN 1 ELSE 0 END) AS ItemsToPost,
+            SUM(CASE WHEN ItemPosted = 1 THEN 1 ELSE 0 END) AS ItemsPosted,
             SUM(CASE WHEN Debit = 0 AND Credit = 0 THEN 1 ELSE 0 END) AS ZeroAmountItems,
             SUM(Debit) AS Debit, SUM(Credit) AS Credit
         FROM #Items GROUP BY JournalCode
     )
-    SELECT h.JournalCode, h.Headers, h.HeadersToPost, h.EmptyHeaders,
-        ISNULL(i.Items, 0) AS Items, ISNULL(i.ItemsToPost, 0) AS ItemsToPost,
+    SELECT h.JournalCode, h.Headers, h.HeadersToPost, h.HeadersPosted, h.EmptyHeaders,
+        ISNULL(i.Items, 0) AS Items, ISNULL(i.ItemsToPost, 0) AS ItemsToPost, ISNULL(i.ItemsPosted, 0) AS ItemsPosted,
         ISNULL(i.ZeroAmountItems, 0) AS ZeroAmountItems, h.CancelledHeaders,
         ISNULL(i.Debit, 0) AS Debit, ISNULL(i.Credit, 0) AS Credit
     FROM HeaderSummary h LEFT JOIN ItemSummary i ON i.JournalCode = h.JournalCode

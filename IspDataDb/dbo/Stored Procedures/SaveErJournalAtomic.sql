@@ -3,7 +3,7 @@ CREATE PROCEDURE dbo.SaveErJournalAtomic
 AS BEGIN SET NOCOUNT ON;SET XACT_ABORT ON;
  IF @TransactionDate>='20260101' AND EXISTS(SELECT 1 FROM @Items WHERE Debit<0 OR Credit<0 OR (Debit<>0 AND Credit<>0)) THROW 51311,'Employee reimbursement detail lines contain invalid debit/credit values.',1;
  IF @TransactionDate>='20260101' AND EXISTS(SELECT 1 FROM @Items WHERE AccountIdNo=0 AND (Debit<>0 OR Credit<>0)) THROW 51312,'Employee reimbursement detail lines require an account.',1;
- IF @TransactionDate>='20260101' AND (NOT EXISTS(SELECT 1 FROM @Items) OR ABS((SELECT COALESCE(SUM(Debit),0) FROM @Items)-(SELECT COALESCE(SUM(Credit),0) FROM @Items))>.01) THROW 51310,'Employee reimbursement details are not balanced.',1;
+ IF @TransactionDate>='20260101' AND (NOT EXISTS(SELECT 1 FROM @Items) OR ABS((SELECT COALESCE(SUM(Debit),0) FROM @Items)-(SELECT COALESCE(SUM(Credit),0) FROM @Items)) > 0.00005) THROW 51310,'Employee reimbursement details are not balanced.',1;
  BEGIN TRAN;BEGIN TRY
   INSERT dbo.ErJournal(EmployeeIdNo,TransactionDate,ReferenceNo,TransactionType,Amount,AccountIdNo,Notes,Approved,Posted,Cancelled) VALUES(@EmployeeIdNo,@TransactionDate,@ReferenceNo,@TransactionType,@Amount,@AccountIdNo,@Notes,@Approved,@Posted,@Cancelled);SET @JournalIdNo=CONVERT(int,SCOPE_IDENTITY());
   INSERT dbo.ErJournalItem(AccountIdNo,Credit,Debit,JournalIdNo,Notes,PayIdNo,RevCostCenterIdNo,Sequence) SELECT AccountIdNo,Credit,Debit,@JournalIdNo,Notes,PayIdNo,RevCostCenterIdNo,Sequence FROM @Items;

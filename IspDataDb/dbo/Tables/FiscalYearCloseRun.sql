@@ -1,0 +1,41 @@
+CREATE TABLE [dbo].[FiscalYearCloseRun] (
+    [IdNo]                         BIGINT           IDENTITY (1, 1) NOT NULL,
+    [RunId]                        UNIQUEIDENTIFIER NOT NULL,
+    [FiscalYear]                   INT              NOT NULL,
+    [FiscalYearStart]              DATE             NOT NULL,
+    [FiscalYearEnd]                DATE             NOT NULL,
+    [OpeningYear]                  INT              NOT NULL,
+    [Status]                       VARCHAR (20)     NOT NULL,
+    [IncomeSummaryAccountIdNo]     SMALLINT         NOT NULL,
+    [RetainedEarningsAccountIdNo]  SMALLINT         NOT NULL,
+    [FiscalResult]                 VARCHAR (10)     NOT NULL,
+    [FiscalResultAmount]           DECIMAL (19, 4)  NOT NULL,
+    [IncomeClosingJournalIdNo]     INT              NOT NULL,
+    [RetainedEarningsJournalIdNo]  INT              NULL,
+    [OpeningRows]                  INT              NOT NULL,
+    [OpeningDebit]                 DECIMAL (19, 4)  NOT NULL,
+    [OpeningCredit]                DECIMAL (19, 4)  NOT NULL,
+    [JanuaryBeginningInventory]    DECIMAL (19, 4)  NOT NULL,
+    [DecemberEndingInventory]      DECIMAL (19, 4)  NOT NULL,
+    [InventoryNetEffect]           DECIMAL (19, 4)  NOT NULL,
+    [LegacyMonthsNormalized]       INT              NOT NULL,
+    [WarningsAcknowledged]         BIT              NOT NULL,
+    [ApprovalNotes]                NVARCHAR (1000)  NOT NULL,
+    [ApplicationUser]              SYSNAME          NOT NULL,
+    [SqlLogin]                     SYSNAME          NOT NULL,
+    [FinalizedAt]                  DATETIME2 (0)    NOT NULL,
+    [ServerName]                   NVARCHAR (128)   NOT NULL,
+    [DatabaseName]                 SYSNAME          NOT NULL,
+    CONSTRAINT [PK_FiscalYearCloseRun] PRIMARY KEY CLUSTERED ([IdNo] ASC),
+    CONSTRAINT [UQ_FiscalYearCloseRun_RunId] UNIQUE NONCLUSTERED ([RunId] ASC),
+    CONSTRAINT [UQ_FiscalYearCloseRun_FiscalYear] UNIQUE NONCLUSTERED ([FiscalYear] ASC),
+    CONSTRAINT [CK_FiscalYearCloseRun_Status] CHECK ([Status] = 'Finalized'),
+    CONSTRAINT [CK_FiscalYearCloseRun_Dates]
+        CHECK ([FiscalYearStart] <= [FiscalYearEnd] AND [OpeningYear] = [FiscalYear] + 1),
+    CONSTRAINT [CK_FiscalYearCloseRun_Result]
+        CHECK ([FiscalResult] IN ('PROFIT', 'LOSS', 'BREAK EVEN')),
+    CONSTRAINT [CK_FiscalYearCloseRun_OpeningBalanced]
+        CHECK (ABS([OpeningDebit] - [OpeningCredit]) <= (0.005)),
+    CONSTRAINT [CK_FiscalYearCloseRun_WarningsAcknowledged]
+        CHECK ([WarningsAcknowledged] = (1))
+);

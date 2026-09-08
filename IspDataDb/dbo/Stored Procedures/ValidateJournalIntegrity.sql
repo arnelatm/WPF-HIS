@@ -72,7 +72,7 @@ BEGIN
         @JournalIdNo, @debit OUTPUT, @credit OUTPUT, @lineCount OUTPUT;
 
     DECLARE @isValid bit = CASE WHEN @Cancelled = 1 OR
-                                      (@lineCount > 0 AND ABS(@debit - @credit) <= 0.01)
+                                      (@lineCount > 0 AND ABS(@debit - @credit) <= 0.00005)
                                 THEN 1 ELSE 0 END;
     SELECT @isValid AS IsValid, CAST(0 AS bit) AS IsLegacy,
            @JournalCode AS JournalCode, @JournalIdNo AS JournalIdNo,
@@ -80,7 +80,7 @@ BEGIN
            @credit AS TotalCredits,
            CASE WHEN @Cancelled = 1 THEN 'Cancelled journal.'
                 WHEN @lineCount = 0 THEN 'Journal must contain at least one detail line.'
-                WHEN ABS(@debit - @credit) > 0.01 THEN 'Total debits and credits are not balanced.'
+                WHEN ABS(@debit - @credit) > 0.00005 THEN 'Total debits and credits are not balanced.'
                 ELSE 'Valid.' END AS ValidationMessage;
 END;
 GO

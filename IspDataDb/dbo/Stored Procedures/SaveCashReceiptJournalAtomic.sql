@@ -14,7 +14,7 @@ BEGIN
      THROW 51110, 'Cash receipt must contain at least one detail line.', 1;
  IF @TransactionDate >= '20260101' AND EXISTS (SELECT 1 FROM @Items WHERE Debit < 0 OR Credit < 0 OR (Debit <> 0 AND Credit <> 0))
      THROW 51111, 'Cash receipt detail lines contain invalid debit/credit values.', 1;
- IF @TransactionDate >= '20260101' AND ABS((SELECT COALESCE(SUM(Debit),0) FROM @Items)-(SELECT COALESCE(SUM(Credit),0) FROM @Items)) > .01
+ IF @TransactionDate >= '20260101' AND ABS((SELECT COALESCE(SUM(Debit),0) FROM @Items)-(SELECT COALESCE(SUM(Credit),0) FROM @Items)) > 0.00005
      THROW 51112, 'Cash receipt debits and credits are not balanced.', 1;
  BEGIN TRAN;
  BEGIN TRY

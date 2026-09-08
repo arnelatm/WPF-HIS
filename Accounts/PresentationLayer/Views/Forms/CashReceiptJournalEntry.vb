@@ -1,4 +1,4 @@
-﻿Imports System.Globalization
+Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
@@ -93,7 +93,7 @@ Namespace PresentationLayer.Views.Forms
                 Return Convert.ToDecimal(NumParser(Of Decimal)(txtAmount.Text), _nfi)
             End Get
             Set
-                txtAmount.Text = FormatMoney(Value)
+                txtAmount.Text = Value.ToString("N4", _nfi)
 
             End Set
         End Property
@@ -103,7 +103,7 @@ Namespace PresentationLayer.Views.Forms
                 Return Convert.ToDecimal(NumParser(Of Decimal)(txtApplied.Text), _nfi)
             End Get
             Set
-                txtApplied.Text = FormatMoney(Value)
+                txtApplied.Text = Value.ToString("N4", _nfi)
             End Set
         End Property
 
@@ -165,7 +165,7 @@ Namespace PresentationLayer.Views.Forms
                 Return Convert.ToDecimal(NumParser(Of Decimal)(txtDiscountTaken.Text), _nfi)
             End Get
             Set
-                txtDiscountTaken.Text = FormatMoney(Value)
+                txtDiscountTaken.Text = Value.ToString("N4", _nfi)
             End Set
         End Property
 
@@ -323,7 +323,7 @@ Namespace PresentationLayer.Views.Forms
                 Return Convert.ToDecimal(NumParser(Of Decimal)(txtUnapplied.Text), _nfi)
             End Get
             Set
-                txtUnapplied.Text = FormatMoney(Value)
+                txtUnapplied.Text = Value.ToString("N4", _nfi)
             End Set
         End Property
 
@@ -332,7 +332,7 @@ Namespace PresentationLayer.Views.Forms
                 Return Convert.ToDecimal(NumParser(Of Decimal)(txtVatAmount.Text), _nfi)
             End Get
             Set
-                txtVatAmount.Text = FormatMoney(Value)
+                txtVatAmount.Text = Value.ToString("N4", _nfi)
             End Set
         End Property
 
@@ -401,6 +401,8 @@ Namespace PresentationLayer.Views.Forms
             }
             _jiFooter.ColumnToSum("dgvDebit") = True
             _jiFooter.ColumnToSum("dgvCredit") = True
+            _jiFooter.DecimalPlaces = 4
+            ConfigureJournalPrecision(DataGridViewJournalItems)
             _jiFooter.SetText("DgvAccountIdNo", "Totals ->")
 
             _arFooter = New DgvFooter(DataGridViewCsrOiItems) With {
@@ -677,8 +679,8 @@ Namespace PresentationLayer.Views.Forms
         Private Sub UpdateJiTotals()
             If _jiFooter IsNot Nothing Then
                 _jiFooter.CalculateTotals()
-                txtTotalDebits.Text = _jiFooter.Value("dgvDebit")
-                txtTotalCredits.Text = _jiFooter.Value("dgvCredit")
+                txtTotalDebits.Text = Decimal.Parse(_jiFooter.Value("dgvDebit").ToString()).ToString("N4", CultureInfo.CurrentCulture)
+                txtTotalCredits.Text = Decimal.Parse(_jiFooter.Value("dgvCredit").ToString()).ToString("N4", CultureInfo.CurrentCulture)
             End If
             Applied = Amount
             UnApplied = 0
@@ -949,6 +951,13 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs)
             Debugger.Break()
+        End Sub
+
+        Private Sub ConfigureJournalPrecision(grid As DataGridView)
+            If grid Is Nothing Then Return
+            For Each columnName In {"dgvDebit", "dgvCredit"}
+                If grid.Columns.Contains(columnName) Then grid.Columns(columnName).DefaultCellStyle.Format = "N4"
+            Next
         End Sub
     End Class
 

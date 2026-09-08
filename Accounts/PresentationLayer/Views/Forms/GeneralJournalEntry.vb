@@ -1,4 +1,4 @@
-﻿Imports System.Globalization
+Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
@@ -247,6 +247,8 @@ Namespace PresentationLayer.Views.Forms
             }
             _footer.ColumnToSum("dgvDebit") = True
             _footer.ColumnToSum("dgvCredit") = True
+            _footer.DecimalPlaces = 4
+            ConfigureJournalPrecision(DataGridViewJournalItems)
             _footer.SetAlignment("dgvDebit", ContentAlignment.MiddleRight)
             _footer.SetAlignment("dgvCredit", ContentAlignment.MiddleRight)
             _footer.SetText("DgvAccountIdNo", "Totals ->")
@@ -284,14 +286,21 @@ Namespace PresentationLayer.Views.Forms
         Private Sub UpdateTotals()
             If _footer IsNot Nothing Then
                 _footer.CalculateTotals()
-                txtTotalDebits.Text = _footer.Value("dgvDebit")
-                txtTotalCredits.Text = _footer.Value("dgvCredit")
+                txtTotalDebits.Text = Decimal.Parse(_footer.Value("dgvDebit").ToString()).ToString("N4", CultureInfo.CurrentCulture)
+                txtTotalCredits.Text = Decimal.Parse(_footer.Value("dgvCredit").ToString()).ToString("N4", CultureInfo.CurrentCulture)
             End If
         End Sub
 
 
 #End Region
 
+
+        Private Sub ConfigureJournalPrecision(grid As DataGridView)
+            If grid Is Nothing Then Return
+            For Each columnName In {"dgvDebit", "dgvCredit"}
+                If grid.Columns.Contains(columnName) Then grid.Columns(columnName).DefaultCellStyle.Format = "N4"
+            Next
+        End Sub
     End Class
 
 End Namespace

@@ -164,7 +164,7 @@ BEGIN
         FROM #Items
         WHERE ISNULL(Cancelled, 0) = 0
         GROUP BY JournalCode, JournalIdNo
-        HAVING ABS(SUM(CONVERT(decimal(19, 4), Debit)) - SUM(CONVERT(decimal(19, 4), Credit))) > 0.005;
+        HAVING ABS(SUM(CONVERT(decimal(19, 4), Debit)) - SUM(CONVERT(decimal(19, 4), Credit))) > 0.00005;
 
         SET @BlockingErrorCount =
             (SELECT COUNT(*) FROM #Unbalanced) +

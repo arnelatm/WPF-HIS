@@ -1,4 +1,4 @@
-﻿Imports System.ComponentModel
+Imports System.ComponentModel
 Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
@@ -54,7 +54,7 @@ Namespace PresentationLayer.Views.Forms
                 Return Convert.ToDecimal(NumParser(Of Decimal)(txtAmount.Text), _nfi)
             End Get
             Set
-                txtAmount.Text = FormatMoney(Value)
+                txtAmount.Text = Value.ToString("N4", _nfi)
             End Set
         End Property
 
@@ -169,7 +169,7 @@ Namespace PresentationLayer.Views.Forms
                 Return Convert.ToDecimal(NumParser(Of Decimal)(txtSettlementDiscount.Text), _nfi)
             End Get
             Set
-                txtSettlementDiscount.Text = FormatMoney(Value)
+                txtSettlementDiscount.Text = Value.ToString("N4", _nfi)
             End Set
         End Property
 
@@ -230,7 +230,7 @@ Namespace PresentationLayer.Views.Forms
                 Return Convert.ToDecimal(NumParser(Of Decimal)(txtVatAmount.Text), _nfi)
             End Get
             Set
-                txtVatAmount.Text = FormatMoney(Value)
+                txtVatAmount.Text = Value.ToString("N4", _nfi)
             End Set
         End Property
 
@@ -289,6 +289,8 @@ Namespace PresentationLayer.Views.Forms
             }
             _footer.ColumnToSum("dgvDebit") = True
             _footer.ColumnToSum("dgvCredit") = True
+            _footer.DecimalPlaces = 4
+            ConfigureJournalPrecision(DataGridViewJournalItems)
             _footer.SetAlignment("dgvDebit", ContentAlignment.MiddleRight)
             _footer.SetAlignment("dgvCredit", ContentAlignment.MiddleRight)
             _footer.SetText("DgvAccountIdNo", "Totals ->")
@@ -412,8 +414,8 @@ Namespace PresentationLayer.Views.Forms
         Private Sub UpdateTotals()
             If _footer IsNot Nothing Then
                 _footer.CalculateTotals()
-                txtTotalDebits.Text = _footer.Value("dgvDebit")
-                txtTotalCredits.Text = _footer.Value("dgvCredit")
+                txtTotalDebits.Text = Decimal.Parse(_footer.Value("dgvDebit").ToString()).ToString("N4", CultureInfo.CurrentCulture)
+                txtTotalCredits.Text = Decimal.Parse(_footer.Value("dgvCredit").ToString()).ToString("N4", CultureInfo.CurrentCulture)
             End If
         End Sub
 
@@ -440,6 +442,13 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub floFullEntryArea_Paint(sender As Object, e As PaintEventArgs) Handles floFullEntryArea.Paint
 
+        End Sub
+
+        Private Sub ConfigureJournalPrecision(grid As DataGridView)
+            If grid Is Nothing Then Return
+            For Each columnName In {"dgvDebit", "dgvCredit"}
+                If grid.Columns.Contains(columnName) Then grid.Columns(columnName).DefaultCellStyle.Format = "N4"
+            Next
         End Sub
     End Class
 

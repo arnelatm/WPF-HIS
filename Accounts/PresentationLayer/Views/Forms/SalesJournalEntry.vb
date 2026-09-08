@@ -1,4 +1,4 @@
-﻿Imports System.Globalization
+Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
@@ -318,6 +318,8 @@ Namespace PresentationLayer.Views.Forms
             }
             _jiFooter.ColumnToSum("dgvDebit") = True
             _jiFooter.ColumnToSum("dgvCredit") = True
+            _jiFooter.DecimalPlaces = 4
+            ConfigureJournalPrecision(DataGridViewJournalItems)
             ' _jiFooter.SetText("DgvAccountIdNo", "Totals ->")
 
             _slFooter = New DgvFooter(DataGridViewSalesDeposits) With {
@@ -359,9 +361,16 @@ Namespace PresentationLayer.Views.Forms
         Private Sub UpdateJiTotals()
             If _jiFooter IsNot Nothing Then
                 _jiFooter.CalculateTotals()
-                txtTotalDebits.Text = _jiFooter.Value("dgvDebit")
-                txtTotalCredits.Text = _jiFooter.Value("dgvCredit")
+                txtTotalDebits.Text = Decimal.Parse(_jiFooter.Value("dgvDebit").ToString()).ToString("N4", CultureInfo.CurrentCulture)
+                txtTotalCredits.Text = Decimal.Parse(_jiFooter.Value("dgvCredit").ToString()).ToString("N4", CultureInfo.CurrentCulture)
             End If
+        End Sub
+
+        Private Sub ConfigureJournalPrecision(grid As DataGridView)
+            If grid Is Nothing Then Return
+            For Each columnName In {"dgvDebit", "dgvCredit"}
+                If grid.Columns.Contains(columnName) Then grid.Columns(columnName).DefaultCellStyle.Format = "N4"
+            Next
         End Sub
 
         Private Sub UpdateSlTotals()

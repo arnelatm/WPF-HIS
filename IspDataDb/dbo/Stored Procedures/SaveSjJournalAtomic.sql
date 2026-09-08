@@ -3,7 +3,7 @@ CREATE PROCEDURE dbo.SaveSjJournalAtomic
 AS BEGIN SET NOCOUNT ON;SET XACT_ABORT ON;
  IF @TransactionDate>='20260101' AND EXISTS(SELECT 1 FROM @Items WHERE Debit<0 OR Credit<0 OR (Debit<>0 AND Credit<>0)) THROW 51411,'Sales journal detail lines contain invalid debit/credit values.',1;
  IF @TransactionDate>='20260101' AND EXISTS(SELECT 1 FROM @Items WHERE AccountIdNo=0 AND (Debit<>0 OR Credit<>0)) THROW 51412,'Sales journal detail lines require an account.',1;
- IF @TransactionDate>='20260101' AND (NOT EXISTS(SELECT 1 FROM @Items) OR ABS((SELECT COALESCE(SUM(Debit),0) FROM @Items)-(SELECT COALESCE(SUM(Credit),0) FROM @Items))>.01) THROW 51410,'Sales journal details are not balanced.',1;
+ IF @TransactionDate>='20260101' AND (NOT EXISTS(SELECT 1 FROM @Items) OR ABS((SELECT COALESCE(SUM(Debit),0) FROM @Items)-(SELECT COALESCE(SUM(Credit),0) FROM @Items)) > 0.00005) THROW 51410,'Sales journal details are not balanced.',1;
  DECLARE @SeriesName varchar(20)='Sales'+CONVERT(varchar(10),@AccountIdNo),@SeriesPrefix varchar(10),@GeneratedReferenceNo varchar(15);
  SELECT @SeriesPrefix=Prefix FROM dbo.Series WHERE SeriesName=@SeriesName;
  IF NULLIF(LTRIM(RTRIM(@SeriesPrefix)),'') IS NULL THROW 51413,'Sales journal series format was not found for the selected account.',1;

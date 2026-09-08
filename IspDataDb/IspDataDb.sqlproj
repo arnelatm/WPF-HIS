@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -232,7 +232,11 @@
     <Build Include="dbo\Stored Procedures\FinalizeAccountReconciliation.sql" />
     <Build Include="dbo\Stored Procedures\ValidateAccountReconciliation.sql" />
     <Build Include="dbo\Stored Procedures\PreviewMonthlyJournalPosting.sql" />
+    <Build Include="dbo\Stored Procedures\GetDefaultMonthlyPostingPeriod.sql" />
+    <Build Include="dbo\Stored Procedures\GetMonthlyCloseReversalHistory.sql" />
     <Build Include="dbo\Stored Procedures\PostMonthlyJournalEntries.sql" />
+    <Build Include="dbo\Stored Procedures\UnpostMonthlyJournalEntries.sql" />
+    <Build Include="dbo\Stored Procedures\UncloseMonthlyPeriod.sql" />
     <Build Include="dbo\User Defined Types\CkdOiItemInsert.sql" />
     <Build Include="dbo\User Defined Types\CkdOiItemUpdate.sql" />
     <Build Include="dbo\User Defined Types\CsrOiItemInsert.sql" />
@@ -705,13 +709,20 @@
     <Build Include="dbo\Tables\UserAccess.sql" />
     <Build Include="dbo\Tables\FiscalYearJournalPostingRun.sql" />
     <Build Include="dbo\Tables\FiscalYearJournalPostingChange.sql" />
+    <Build Include="dbo\Tables\FiscalYearCloseRun.sql" />
     <Build Include="dbo\Tables\MonthlyClosePeriod.sql" />
+    <Build Include="dbo\Tables\MonthlyClosePeriodReversal.sql" />
     <Build Include="dbo\Tables\MonthlyCloseChecklist.sql" />
+    <Build Include="dbo\Tables\MonthlyCloseChecklistReversal.sql" />
     <Build Include="dbo\Stored Procedures\PostFiscalYearJournalEntries.sql" />
     <Build Include="dbo\Stored Procedures\PreviewFiscalYearClose.sql" />
+    <Build Include="dbo\Stored Procedures\FinalizeFiscalYearClose.sql" />
+    <Build Include="dbo\Stored Procedures\GetFiscalYearCloseHistory.sql" />
     <Build Include="dbo\Stored Procedures\InitializeMonthlyCloseChecklist.sql" />
     <Build Include="dbo\Stored Procedures\SetMonthlyCloseChecklistItem.sql" />
+    <Build Include="dbo\Stored Procedures\UncompleteMonthlyCloseChecklistItem.sql" />
     <Build Include="dbo\Stored Procedures\ApproveMonthlyClose.sql" />
+    <Build Include="dbo\Stored Procedures\CloseMonthlyPeriod.sql" />
     <Build Include="dbo\User Defined Types\PayrollDetailInsert.sql" />
     <Build Include="dbo\User Defined Types\PayrollDetailUpdate.sql" />
     <Build Include="dbo\User Defined Types\UserAccessInsert.sql" />

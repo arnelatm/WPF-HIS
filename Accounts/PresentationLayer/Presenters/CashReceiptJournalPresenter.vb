@@ -1,4 +1,5 @@
 ﻿Imports System.Globalization
+Imports System.Collections.Generic
 Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
@@ -315,27 +316,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub AutoApplyAmount()
-            Dim amountToApply = View.Amount
-            'Dim appliedAmount As Decimal = 0D
-            For Each item In View.CsrOiItems
-                If amountToApply = 0D Then
-                    item.Amount = 0D
-                    item.DiscountTaken = 0D
-                    item.Balance = item.PreviousBalance
-                Else
-                    If item.PreviousBalance <= amountToApply Then
-                        amountToApply -= item.PreviousBalance
-                        item.Amount = item.PreviousBalance
-                        item.DiscountTaken = 0D
-                        item.Balance = 0D
-                    Else
-                        item.Amount = amountToApply
-                        item.DiscountTaken = 0D
-                        item.Balance = item.PreviousBalance - amountToApply
-                        amountToApply = 0D
-                    End If
-                End If
-            Next item
+            ApplyAutoApplyAmount(View.CsrOiItems)
         End Sub
 
         'Private Sub OnUserDeletedRow()
@@ -972,36 +953,74 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub OnAutoApplyAmount(bsCsrOiItems As BindingSource)
-            Dim amountToApply = View.Amount
-            'apply the negative values first
-            For Each item In bsCsrOiItems
-                If item.PreviousBalance <= 0 Then
-                    amountToApply += item.PreviousBalance * -1
-                    item.Amount = item.PreviousBalance
-                    item.DiscountTaken = 0D
-                    item.Balance = 0D
-                Else
-                    item.Amount = 0D
-                    item.DiscountTaken = 0D
-                    item.Balance = item.PreviousBalance
+            If bsCsrOiItems Is Nothing Then
+                ApplyAutoApplyAmount(Nothing)
+                Return
+            End If
+
+            Dim items As New List(Of CsrOiItemView)
+            For Each value As Object In bsCsrOiItems
+                Dim item = TryCast(value, CsrOiItemView)
+                If item IsNot Nothing Then
+                    items.Add(item)
                 End If
-            Next item
-            For Each item In bsCsrOiItems
-                If item.Balance > 0D Then
-                    If item.Balance <= amountToApply Then
-                        amountToApply -= item.PreviousBalance
-                        item.Amount = item.PreviousBalance
-                        item.DiscountTaken = 0D
-                        item.Balance = 0D
-                    Else
-                        item.Amount = amountToApply
-                        item.DiscountTaken = 0D
-                        item.Balance = item.PreviousBalance - amountToApply
-                        amountToApply = 0D
-                    End If
-                End If
-            Next item
+            Next
+            ApplyAutoApplyAmount(items)
         End Sub
+
+        Private Sub ApplyAutoApplyAmount(items As IEnumerable(Of CsrOiItemView))
+            If items Is Nothing Then Return
+
+            Dim amountToApply As Decimal = View.Amount
+            Dim negativeItems As New List(Of CsrOiItemView)
+            Dim positiveItems As New List(Of CsrOiItemView)
+
+            For Each item In items
+                If item Is Nothing Then Continue For
+
+                item.Amount = 0D
+                item.DiscountTaken = 0D
+                item.Balance = item.PreviousBalance
+
+                If item.PreviousBalance < 0D Then
+                    negativeItems.Add(item)
+                ElseIf item.PreviousBalance > 0D Then
+                    positiveItems.Add(item)
+                End If
+            Next
+
+            negativeItems.Sort(AddressOf CompareOpenInvoicesByDate)
+            positiveItems.Sort(AddressOf CompareOpenInvoicesByDate)
+
+            'Apply credit balances first. A negative invoice allocation increases
+            'the amount available for the positive invoices.
+            For Each item In negativeItems
+                item.Amount = item.PreviousBalance
+                item.Balance = 0D
+                amountToApply -= item.Amount
+            Next
+
+            If amountToApply <= 0D Then Return
+
+            'Apply positive balances oldest unpaid date first.
+            For Each item In positiveItems
+                If amountToApply <= 0D Then Exit For
+
+                Dim appliedAmount = Math.Min(item.PreviousBalance, amountToApply)
+                item.Amount = appliedAmount
+                item.Balance = item.PreviousBalance - appliedAmount
+                amountToApply -= appliedAmount
+            Next
+        End Sub
+
+        Private Shared Function CompareOpenInvoicesByDate(left As CsrOiItemView, right As CsrOiItemView) As Integer
+            Dim leftDate = If(left.TransactionDate.HasValue, left.TransactionDate.Value, Date.MaxValue)
+            Dim rightDate = If(right.TransactionDate.HasValue, right.TransactionDate.Value, Date.MaxValue)
+            Dim dateComparison = DateTime.Compare(leftDate, rightDate)
+
+            If dateComparison <> 0 Then Return dateComparison
+            Return left.ArOpenInvoiceIdNo.CompareTo(right.ArOpenInvoiceIdNo)
+        End Function
 
         Private Sub OnAddCustomerOpenInvoices()
             If View.PayorIdNo <> 0 Then

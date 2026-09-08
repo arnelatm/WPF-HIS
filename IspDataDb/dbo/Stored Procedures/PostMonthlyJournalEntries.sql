@@ -102,7 +102,7 @@ BEGIN
     INSERT INTO #Unbalanced (JournalCode, JournalIdNo, Debit, Credit)
     SELECT JournalCode, JournalIdNo, SUM(CONVERT(decimal(19,4), Debit)), SUM(CONVERT(decimal(19,4), Credit))
     FROM #Items WHERE ISNULL(Cancelled, 0) = 0 GROUP BY JournalCode, JournalIdNo
-    HAVING ABS(SUM(CONVERT(decimal(19,4), Debit)) - SUM(CONVERT(decimal(19,4), Credit))) > 0.005;
+    HAVING ABS(SUM(CONVERT(decimal(19,4), Debit)) - SUM(CONVERT(decimal(19,4), Credit))) > 0.00005;
 
     SET @BlockingErrorCount = (SELECT COUNT(*) FROM #Unbalanced) +
         (SELECT COUNT(*) FROM #Items WHERE ISNULL(Cancelled, 0) = 0 AND (AccountIdNo = 0 OR Debit < 0 OR Credit < 0 OR (Debit <> 0 AND Credit <> 0)));
@@ -123,8 +123,8 @@ BEGIN
     SELECT @MonthlyCloseStatus = Status
     FROM dbo.MonthlyClosePeriod
     WHERE FiscalYear = @FiscalYear AND FiscalMonth = @Month;
-    IF ISNULL(@MonthlyCloseStatus, 'Open') <> 'Approved'
-        THROW 52330, 'The month must be approved through the monthly close checklist before posting can execute.', 1;
+    IF ISNULL(@MonthlyCloseStatus, 'Open') <> 'Closed'
+        THROW 52330, 'The month must be closed through the monthly close workflow before posting can execute.', 1;
 
     IF @Month > 1 AND (@PreviousMonthUnpostedHeaders > 0 OR @PreviousMonthUnpostedItems > 0)
         THROW 52207, 'The previous month must be fully posted before this month can be executed.', 1;

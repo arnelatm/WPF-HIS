@@ -1,5 +1,6 @@
 ﻿Imports System.ComponentModel
 Imports System.Configuration
+Imports System.Drawing
 Imports System.Globalization
 Imports System.Threading
 Imports AATM.Accounts.PresentationLayer.Models
@@ -70,6 +71,8 @@ Namespace PresentationLayer.Views.Forms
         Private _logStatus As LoginStatus
         Public Event UserLoggedIn(sender As Object, formControls As List(Of Control))
 
+        Private ReadOnly _openInvoiceCorrectionMenuItem As New ToolStripMenuItem()
+
         'Private ReadOnly _presenterObj
 
         ''' <summary>
@@ -78,6 +81,7 @@ Namespace PresentationLayer.Views.Forms
         Public Sub New()
 
             InitializeComponent()
+            InitializeOpenInvoiceCorrectionMenuItem()
 
             If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
                 AddHandler AppDomain.CurrentDomain.UnhandledException, AddressOf UnhandledExceptionHandler
@@ -229,6 +233,10 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub AccountsReceivableEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemAccountsReceivableEntry.Click
             RunForm(Of ArJournalEntry, ArJournalPresenter(Of ArJournalModel))()
+        End Sub
+
+        Private Sub OpenInvoiceCorrectionMenuItem_Click(sender As Object, e As EventArgs)
+            RunForm(Of OpenInvoiceCorrectionForm, OpenInvoiceCorrectionPresenter)()
         End Sub
 
         Private Sub AccountsReceivableToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemARAging.Click
@@ -602,6 +610,14 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
 #End Region
+
+        Private Sub InitializeOpenInvoiceCorrectionMenuItem()
+            _openInvoiceCorrectionMenuItem.Name = "ToolStripMenuItemOpenInvoiceCorrection"
+            _openInvoiceCorrectionMenuItem.Text = "Open Invoice Reconciliation / Offset"
+            _openInvoiceCorrectionMenuItem.Size = New Size(250, 22)
+            AddHandler _openInvoiceCorrectionMenuItem.Click, AddressOf OpenInvoiceCorrectionMenuItem_Click
+            ToolStripMenuItemTransactions.DropDownItems.Insert(5, _openInvoiceCorrectionMenuItem)
+        End Sub
 
         Private Sub AddChildMenuSecurityObjects(dropDownItems As ToolStripItemCollection, pParentMenuName As String, pParentIdNo As Int32)
             Dim parentIdNo As Int32

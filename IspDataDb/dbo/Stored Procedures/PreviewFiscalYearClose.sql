@@ -10,7 +10,7 @@ BEGIN
     IF @FiscalYear NOT BETWEEN 2000 AND 2099
         THROW 52101, 'FiscalYear must be between 2000 and 2099.', 1;
 
-    DECLARE @Tolerance decimal(19, 4) = 0.005;
+    DECLARE @Tolerance decimal(19, 4) = 0.00005;
     DECLARE @FiscalYearStart date = DATEFROMPARTS(@FiscalYear, 1, 1);
     DECLARE @NextFiscalYearStart date = DATEFROMPARTS(@FiscalYear + 1, 1, 1);
     DECLARE @FiscalYearEnd date = DATEADD(day, -1, @NextFiscalYearStart);
@@ -31,12 +31,24 @@ BEGIN
     DECLARE @UnexpectedOpeningRows int;
     DECLARE @InvalidOpeningRows int;
     DECLARE @NextYearActivityLines int;
+    DECLARE @NextYearActivityDebit decimal(19, 4) = 0;
+    DECLARE @NextYearActivityCredit decimal(19, 4) = 0;
+    DECLARE @NextYearActivityDifference decimal(19, 4) = 0;
     DECLARE @PeriodDebit decimal(19, 4);
     DECLARE @PeriodCredit decimal(19, 4);
     DECLARE @OpeningDebit decimal(19, 4);
     DECLARE @OpeningCredit decimal(19, 4);
     DECLARE @IncomeSummaryExistingNet decimal(19, 4);
     DECLARE @ProfitLossNet decimal(19, 4);
+    DECLARE @BeginningInventoryAccountIdNo smallint;
+    DECLARE @EndingInventoryAccountIdNo smallint;
+    DECLARE @BeginningInventoryMatches int;
+    DECLARE @EndingInventoryMatches int;
+    DECLARE @InventoryRollforwardMismatches int = 0;
+    DECLARE @JanuaryBeginningInventory decimal(19, 4) = 0;
+    DECLARE @DecemberEndingInventory decimal(19, 4) = 0;
+    DECLARE @InventoryNetEffect decimal(19, 4) = 0;
+    DECLARE @AccumulatedInventoryNet decimal(19, 4) = 0;
     DECLARE @BlockingErrors int;
     DECLARE @ReviewWarnings int;
 
@@ -76,6 +88,40 @@ BEGIN
         INSERT INTO #ValidationIssue VALUES
             ('BLOCKER', 'FISCAL_YEAR_SEQUENCE_INVALID', 1,
              N'LastFiscalYearEnd must equal the day before the requested fiscal year starts.');
+
+    IF (SELECT COUNT(*) FROM dbo.MonthlyClosePeriod WHERE FiscalYear = @FiscalYear) <> 12
+        INSERT INTO #ValidationIssue VALUES
+            ('BLOCKER', 'MONTHLY_CLOSE_PERIODS_MISSING', NULL,
+             N'All twelve monthly close periods must exist before fiscal finalization.');
+
+    IF EXISTS (SELECT 1 FROM dbo.MonthlyClosePeriod WHERE FiscalYear = @FiscalYear AND Status = 'Open')
+        INSERT INTO #ValidationIssue VALUES
+            ('BLOCKER', 'MONTHLY_CLOSE_PERIOD_OPEN', NULL,
+             N'Every monthly period must be approved and locked before fiscal finalization.');
+
+    IF @FiscalYear = 2025 AND EXISTS (SELECT 1 FROM dbo.MonthlyClosePeriod WHERE FiscalYear = @FiscalYear AND Status = 'Approved')
+        INSERT INTO #ValidationIssue VALUES
+            ('WARNING', 'LEGACY_MONTH_STATUS_NORMALIZATION',
+             (SELECT COUNT(*) FROM dbo.MonthlyClosePeriod WHERE FiscalYear = @FiscalYear AND Status = 'Approved'),
+             N'Legacy 2025 periods are posted and locked but still Approved; finalization will record and normalize them to Closed.');
+    ELSE IF @FiscalYear <> 2025 AND EXISTS (SELECT 1 FROM dbo.MonthlyClosePeriod WHERE FiscalYear = @FiscalYear AND Status <> 'Closed')
+        INSERT INTO #ValidationIssue VALUES
+            ('BLOCKER', 'MONTHLY_CLOSE_STATUS_INVALID', NULL,
+             N'All twelve monthly periods must have Closed status before fiscal finalization.');
+
+    IF EXISTS (
+        SELECT 1
+        FROM (VALUES (1),(2),(3),(4),(5),(6),(7),(8),(9),(10),(11),(12)) AS months(FiscalMonth)
+        OUTER APPLY (
+            SELECT COUNT(*) AS ItemCount, SUM(CASE WHEN Completed = 1 THEN 1 ELSE 0 END) AS CompletedCount
+            FROM dbo.MonthlyCloseChecklist
+            WHERE FiscalYear = @FiscalYear AND FiscalMonth = months.FiscalMonth
+        ) AS checklist
+        WHERE checklist.ItemCount <> 8 OR checklist.CompletedCount <> 8
+    )
+        INSERT INTO #ValidationIssue VALUES
+            ('BLOCKER', 'MONTHLY_CHECKLIST_INCOMPLETE', NULL,
+             N'Every month must contain eight completed close-checklist items.');
 
     IF @IncomeSummaryAccountIdNo IS NULL
     BEGIN
@@ -282,15 +328,16 @@ BEGIN
             ('BLOCKER', 'UNBALANCED_JOURNALS', @UnbalancedJournals,
              N'Every non-cancelled journal must balance independently before fiscal close.');
 
+    -- ClosingJournal is also used for legitimate VAT/tax/inventory adjustments.
+    -- Only a completed FiscalYearCloseRun means the fiscal close was generated.
     SELECT @ExistingClosingJournals = COUNT(*)
-    FROM #Headers
-    WHERE ISNULL(Cancelled, 0) = 0
-      AND ISNULL(ClosingJournal, 0) = 1;
+    FROM dbo.FiscalYearCloseRun
+    WHERE FiscalYear = @FiscalYear;
 
     IF @ExistingClosingJournals > 0
         INSERT INTO #ValidationIssue VALUES
             ('BLOCKER', 'CLOSING_JOURNAL_ALREADY_EXISTS', @ExistingClosingJournals,
-             N'The fiscal year already contains a non-cancelled closing journal.');
+             N'This fiscal year has already been finalized; reverse the fiscal-year close before previewing again.');
 
     SELECT
         @PeriodDebit = ISNULL(SUM(CONVERT(decimal(19, 4), i.Debit)), 0),
@@ -407,6 +454,68 @@ BEGIN
         INSERT INTO #ValidationIssue VALUES
             ('BLOCKER', 'INCOME_SUMMARY_NOT_ZERO', 1,
              N'Income Summary has fiscal-year activity before the proposed closing entry.');
+
+    SELECT @BeginningInventoryMatches = COUNT(*), @BeginningInventoryAccountIdNo = MIN(IdNo)
+    FROM dbo.Account
+    WHERE SpecialAccount = 'BI' AND DetailAccount = 1 AND Active = 1;
+
+    SELECT @EndingInventoryMatches = COUNT(*), @EndingInventoryAccountIdNo = MIN(IdNo)
+    FROM dbo.Account
+    WHERE SpecialAccount = 'EI' AND DetailAccount = 1 AND Active = 1;
+
+    IF @BeginningInventoryMatches <> 1 OR @EndingInventoryMatches <> 1
+        INSERT INTO #ValidationIssue VALUES
+            ('BLOCKER', 'INVENTORY_ACCOUNTS_NOT_RESOLVED', NULL,
+             N'Beginning and ending inventory must each resolve to one active detail account.');
+
+    CREATE TABLE #InventoryRollforward (
+        FiscalMonth int NOT NULL PRIMARY KEY,
+        BeginningInventory decimal(19, 4) NOT NULL,
+        EndingInventory decimal(19, 4) NOT NULL
+    );
+
+    INSERT INTO #InventoryRollforward (FiscalMonth, BeginningInventory, EndingInventory)
+    SELECT months.FiscalMonth,
+        ISNULL(SUM(CASE WHEN i.AccountIdNo = @BeginningInventoryAccountIdNo THEN i.Debit - i.Credit ELSE 0 END), 0),
+        ISNULL(SUM(CASE WHEN i.AccountIdNo = @EndingInventoryAccountIdNo THEN i.Credit - i.Debit ELSE 0 END), 0)
+    FROM (VALUES (1),(2),(3),(4),(5),(6),(7),(8),(9),(10),(11),(12)) AS months(FiscalMonth)
+    LEFT JOIN #Headers AS h
+        ON MONTH(h.TransactionDate) = months.FiscalMonth
+       AND ISNULL(h.Cancelled, 0) = 0
+    LEFT JOIN #Items AS i
+        ON i.JournalCode = h.JournalCode
+       AND i.JournalIdNo = h.JournalIdNo
+       AND i.AccountIdNo IN (@BeginningInventoryAccountIdNo, @EndingInventoryAccountIdNo)
+    GROUP BY months.FiscalMonth;
+
+    SELECT @InventoryRollforwardMismatches = COUNT(*)
+    FROM #InventoryRollforward AS currentMonth
+    INNER JOIN #InventoryRollforward AS nextMonth
+        ON nextMonth.FiscalMonth = currentMonth.FiscalMonth + 1
+    WHERE ABS(currentMonth.EndingInventory - nextMonth.BeginningInventory) > @Tolerance;
+
+    IF EXISTS (SELECT 1 FROM #InventoryRollforward WHERE BeginningInventory < 0 OR EndingInventory < 0)
+        INSERT INTO #ValidationIssue VALUES
+            ('BLOCKER', 'INVENTORY_AMOUNT_INVALID', NULL,
+             N'Monthly beginning and ending inventory balances must be non-negative.');
+
+    IF @InventoryRollforwardMismatches > 0
+        INSERT INTO #ValidationIssue VALUES
+            ('BLOCKER', 'INVENTORY_ROLLFORWARD_MISMATCH', @InventoryRollforwardMismatches,
+             N'Each monthly ending inventory must equal the following month beginning inventory.');
+
+    SELECT @JanuaryBeginningInventory = BeginningInventory FROM #InventoryRollforward WHERE FiscalMonth = 1;
+    SELECT @DecemberEndingInventory = EndingInventory FROM #InventoryRollforward WHERE FiscalMonth = 12;
+    SET @InventoryNetEffect = @JanuaryBeginningInventory - @DecemberEndingInventory;
+    SET @AccumulatedInventoryNet = ISNULL((
+        SELECT SUM(Net) FROM #AccountMovement
+        WHERE AccountIdNo IN (@BeginningInventoryAccountIdNo, @EndingInventoryAccountIdNo)
+    ), 0);
+
+    IF ABS(@InventoryNetEffect - @AccumulatedInventoryNet) > @Tolerance
+        INSERT INTO #ValidationIssue VALUES
+            ('BLOCKER', 'INVENTORY_ANNUAL_RECONCILIATION_FAILED', 1,
+             N'Accumulated inventory postings do not equal January beginning less December ending inventory.');
 
     CREATE TABLE #TemporaryBalance (
         AccountIdNo int NOT NULL PRIMARY KEY,
@@ -606,15 +715,27 @@ BEGIN
         ('WARNING', 'ZAKAH_PROVISION_REVIEW', NULL,
          N'This preview does not calculate Zakah or tax provisions; post any approved provision before executing fiscal close.');
 
-    SELECT @NextYearActivityLines = COUNT(*)
+    SELECT
+        @NextYearActivityLines = COUNT(*),
+        @NextYearActivityDebit = ISNULL(SUM(CONVERT(decimal(19, 4), Debit)), 0),
+        @NextYearActivityCredit = ISNULL(SUM(CONVERT(decimal(19, 4), Credit)), 0)
     FROM dbo.GlLedgers_View
     WHERE TransactionDate >= @NextFiscalYearStart
       AND TransactionDate < DATEADD(year, 1, @NextFiscalYearStart);
+
+    SET @NextYearActivityDifference = @NextYearActivityDebit - @NextYearActivityCredit;
 
     IF @NextYearActivityLines > 0
         INSERT INTO #ValidationIssue VALUES
             ('WARNING', 'NEXT_YEAR_ACTIVITY_EXISTS', @NextYearActivityLines,
              N'Next-year journal activity already exists; the opening snapshot must be installed without changing those journals.');
+
+    IF ABS(@NextYearActivityDifference) > @Tolerance
+        INSERT INTO #ValidationIssue VALUES
+            ('WARNING', 'NEXT_YEAR_ACTIVITY_UNBALANCED', @NextYearActivityLines,
+             N'Next-year journal activity is out of balance by ' +
+             CONVERT(nvarchar(40), ABS(@NextYearActivityDifference)) +
+             N'; correct it before posting the affected month.');
 
     SELECT @BlockingErrors = COUNT(*)
     FROM #ValidationIssue
@@ -652,10 +773,16 @@ BEGIN
             ELSE N'BREAK EVEN'
         END AS FiscalResult,
         ABS(@ProfitLossNet) AS FiscalResultAmount,
+        @JanuaryBeginningInventory AS JanuaryBeginningInventory,
+        @DecemberEndingInventory AS DecemberEndingInventory,
+        @InventoryNetEffect AS InventoryNetEffect,
         (SELECT COUNT(*) FROM #IncomeStatementClose) AS ProposedIncomeCloseLines,
         (SELECT COUNT(*) FROM #RetainedEarningsTransfer) AS ProposedTransferLines,
         (SELECT COUNT(*) FROM #ProposedOpening WHERE ABS(ProposedOpeningNet) > @Tolerance) AS ProposedOpeningRows,
-        @NextYearActivityLines AS NextYearActivityLines;
+        @NextYearActivityLines AS NextYearActivityLines,
+        @NextYearActivityDebit AS NextYearActivityDebit,
+        @NextYearActivityCredit AS NextYearActivityCredit,
+        @NextYearActivityDifference AS NextYearActivityDifference;
 
     SELECT Severity, IssueCode, AffectedRecords, Details
     FROM #ValidationIssue
@@ -759,4 +886,24 @@ BEGIN
           )
       AND ABS(ISNULL(ab.Debit, 0) - ISNULL(ab.Credit, 0) + ISNULL(m.Net, 0)) > @Tolerance
     ORDER BY ReviewCategory, a.AccountCode;
+
+    ;WITH Rollforward AS (
+        SELECT FiscalMonth,
+            BeginningInventory,
+            EndingInventory,
+            LEAD(BeginningInventory) OVER (ORDER BY FiscalMonth) AS NextMonthBeginning
+        FROM #InventoryRollforward
+    )
+    SELECT FiscalMonth,
+        BeginningInventory,
+        EndingInventory,
+        NextMonthBeginning,
+        CASE WHEN FiscalMonth = 12 THEN NULL ELSE EndingInventory - NextMonthBeginning END AS RollforwardDifference,
+        CASE
+            WHEN FiscalMonth = 12 THEN 'YEAR END'
+            WHEN ABS(EndingInventory - NextMonthBeginning) <= @Tolerance THEN 'MATCH'
+            ELSE 'MISMATCH'
+        END AS RollforwardStatus
+    FROM Rollforward
+    ORDER BY FiscalMonth;
 END;

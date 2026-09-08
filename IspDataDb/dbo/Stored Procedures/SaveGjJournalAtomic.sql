@@ -3,7 +3,7 @@ CREATE PROCEDURE dbo.SaveGjJournalAtomic
 AS BEGIN SET NOCOUNT ON; SET XACT_ABORT ON;
  IF @TransactionDate>='20260101' AND EXISTS(SELECT 1 FROM @Items WHERE Debit<0 OR Credit<0 OR (Debit<>0 AND Credit<>0)) THROW 51311,'General journal detail lines contain invalid debit/credit values.',1;
  IF @TransactionDate>='20260101' AND EXISTS(SELECT 1 FROM @Items WHERE AccountIdNo=0 AND (Debit<>0 OR Credit<>0)) THROW 51312,'General journal detail lines require an account.',1;
- IF @TransactionDate>='20260101' AND (NOT EXISTS(SELECT 1 FROM @Items) OR ABS((SELECT COALESCE(SUM(Debit),0) FROM @Items)-(SELECT COALESCE(SUM(Credit),0) FROM @Items))>.01) THROW 51310,'General journal details are not balanced.',1;
+ IF @TransactionDate>='20260101' AND (NOT EXISTS(SELECT 1 FROM @Items) OR ABS((SELECT COALESCE(SUM(Debit),0) FROM @Items)-(SELECT COALESCE(SUM(Credit),0) FROM @Items)) > 0.00005) THROW 51310,'General journal details are not balanced.',1;
  BEGIN TRAN; BEGIN TRY
   INSERT dbo.GeneralJournal(TransactionDate,ReferenceNo,Notes,Approved,Posted,ClosingJournal,Cancelled) VALUES(@TransactionDate,@ReferenceNo,@Notes,@Approved,@Posted,@ClosingJournal,@Cancelled); SET @JournalIdNo=CONVERT(int,SCOPE_IDENTITY());
   INSERT dbo.GeneralJournalItem(AccountIdNo,Credit,Debit,JournalIdNo,Notes,PayIdNo,RevCostCenterIdNo,Sequence) SELECT AccountIdNo,Credit,Debit,@JournalIdNo,Notes,PayIdNo,RevCostCenterIdNo,Sequence FROM @Items;

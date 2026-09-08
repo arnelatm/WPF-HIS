@@ -8,6 +8,8 @@ CREATE TABLE [dbo].[FiscalYearJournalPostingRun] (
     [StartedAt]       DATETIME2 (0)    NOT NULL,
     [CompletedAt]     DATETIME2 (0)    NULL,
     [ExecutedBy]      SYSNAME          NOT NULL,
+    [ReversedAt]      DATETIME2 (0)    NULL,
+    [ReversedBy]      SYSNAME          NULL,
     [ServerName]      NVARCHAR (128)   NOT NULL,
     [DatabaseName]    SYSNAME          NOT NULL,
     [HeadersChanged]  INT              NOT NULL,
@@ -16,6 +18,9 @@ CREATE TABLE [dbo].[FiscalYearJournalPostingRun] (
     CONSTRAINT [UQ_FiscalYearJournalPostingRun_RunId] UNIQUE NONCLUSTERED ([RunId] ASC),
     CONSTRAINT [CK_FiscalYearJournalPostingRun_Status]
         CHECK ([Status] = 'Completed' OR [Status] = 'Reversed'),
+    CONSTRAINT [CK_FiscalYearJournalPostingRun_Reversal]
+        CHECK (([Status] = 'Completed' AND [ReversedAt] IS NULL AND [ReversedBy] IS NULL)
+            OR ([Status] = 'Reversed' AND [ReversedAt] IS NOT NULL AND [ReversedBy] IS NOT NULL)),
     CONSTRAINT [CK_FiscalYearJournalPostingRun_Dates]
         CHECK ([FiscalYearStart] <= [FiscalYearEnd])
 );

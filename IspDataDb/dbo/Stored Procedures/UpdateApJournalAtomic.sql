@@ -48,7 +48,7 @@ BEGIN
         THROW 51023, 'AP detail lines contain invalid debit/credit values.', 1;
     IF @TransactionDate >= '20260101' AND
        ABS((SELECT COALESCE(SUM(Debit),0) FROM @Items) -
-           (SELECT COALESCE(SUM(Credit),0) FROM @Items)) > 0.01
+           (SELECT COALESCE(SUM(Credit),0) FROM @Items)) > 0.00005
         THROW 51024, 'AP journal debits and credits are not balanced.', 1;
 
     BEGIN TRANSACTION;

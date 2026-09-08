@@ -35,7 +35,7 @@ BEGIN
 
     IF @TransactionDate >= '20260101' AND
        ABS((SELECT COALESCE(SUM(Debit),0) FROM @Items) -
-           (SELECT COALESCE(SUM(Credit),0) FROM @Items)) > 0.01
+           (SELECT COALESCE(SUM(Credit),0) FROM @Items)) > 0.00005
         THROW 51013, 'AP journal debits and credits are not balanced.', 1;
 
     BEGIN TRANSACTION;
@@ -62,7 +62,7 @@ BEGIN
 
         IF @TransactionDate >= '20260101' AND
            ABS((SELECT COALESCE(SUM(Debit),0) FROM dbo.ApJournalItem WHERE JournalIdNo = @JournalIdNo) -
-               (SELECT COALESCE(SUM(Credit),0) FROM dbo.ApJournalItem WHERE JournalIdNo = @JournalIdNo)) > 0.01
+               (SELECT COALESCE(SUM(Credit),0) FROM dbo.ApJournalItem WHERE JournalIdNo = @JournalIdNo)) > 0.00005
             THROW 51015, 'AP journal is not balanced after insertion.', 1;
 
         INSERT dbo.ApOpenInvoice (JournalCode, JournalIdNo, JournalItemIdNo, PaidAmount, DiscountTaken)

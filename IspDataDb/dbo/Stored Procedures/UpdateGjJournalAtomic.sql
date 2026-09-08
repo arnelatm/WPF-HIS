@@ -7,7 +7,7 @@ AS BEGIN SET NOCOUNT ON; SET XACT_ABORT ON;
  EXEC dbo.AssertJournalNotReconciliationLocked @JournalCode='GJ', @JournalIdNo=@JournalIdNo;
  IF @TransactionDate>='20260101' AND EXISTS(SELECT 1 FROM @Items WHERE Debit<0 OR Credit<0 OR (Debit<>0 AND Credit<>0)) THROW 51324,'General journal detail lines contain invalid debit/credit values.',1;
  IF @TransactionDate>='20260101' AND EXISTS(SELECT 1 FROM @Items WHERE AccountIdNo=0 AND (Debit<>0 OR Credit<>0)) THROW 51325,'General journal detail lines require an account.',1;
- IF @TransactionDate>='20260101' AND (NOT EXISTS(SELECT 1 FROM @Items) OR ABS((SELECT COALESCE(SUM(Debit),0) FROM @Items)-(SELECT COALESCE(SUM(Credit),0) FROM @Items))>.01) THROW 51323,'General journal details are not balanced.',1;
+ IF @TransactionDate>='20260101' AND (NOT EXISTS(SELECT 1 FROM @Items) OR ABS((SELECT COALESCE(SUM(Debit),0) FROM @Items)-(SELECT COALESCE(SUM(Credit),0) FROM @Items)) > 0.00005) THROW 51323,'General journal details are not balanced.',1;
  BEGIN TRAN; BEGIN TRY
   DELETE FROM dbo.GeneralJournalItem WHERE JournalIdNo=@JournalIdNo;
   UPDATE dbo.GeneralJournal SET TransactionDate=@TransactionDate,ReferenceNo=@ReferenceNo,Notes=@Notes,Approved=@Approved,Posted=@Posted,ClosingJournal=@ClosingJournal,Cancelled=@Cancelled WHERE IdNo=@JournalIdNo;

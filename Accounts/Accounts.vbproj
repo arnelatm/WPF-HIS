@@ -1191,6 +1191,9 @@
     <Compile Include="PresentationLayer\Views\Forms\MainForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\OpenInvoiceCorrectionForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\GeneratePayrollBankCsv.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -1532,6 +1535,7 @@
     <Compile Include="PresentationLayer\Models\AccountModel.vb" />
     <Compile Include="PresentationLayer\Models\CsrOiItemModel.vb" />
     <Compile Include="PresentationLayer\Models\CustomerModel.vb" />
+    <Compile Include="PresentationLayer\Models\OpenInvoiceCorrectionModel.vb" />
     <Compile Include="PresentationLayer\Models\DesignationModel.vb" />
     <Compile Include="PresentationLayer\Models\DistributionSchemeItemModel.vb" />
     <Compile Include="PresentationLayer\Models\DistributionSchemeModel.vb" />
@@ -1561,6 +1565,7 @@
     <Compile Include="PresentationLayer\Presenters\DistributionSchemePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\GeneralJournalItemsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\GeneralJournalPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\OpenInvoiceCorrectionPresenter.vb" />
     <Compile Include="_Quarantine\UnusedCandidates_2026-08-11\MainPresenter.vb" />
     <Compile Include="_Quarantine\UnusedCandidates_2026-08-11\LabReportStatusDetail.vb" />
     <Compile Include="PresentationLayer\Presenters\PettyCashClosingPresenter.vb" />
@@ -2125,6 +2130,7 @@
     <Compile Include="ServiceLayer\ArJournalTransactionService.vb" />
     <Compile Include="ServiceLayer\CashReceiptJournalTransactionService.vb" />
     <Compile Include="ServiceLayer\CashDisbursementJournalTransactionService.vb" />
+    <Compile Include="ServiceLayer\OpenInvoiceCorrectionService.vb" />
     <Compile Include="ServiceLayer\ErJournalTransactionService.vb" />
     <Compile Include="ServiceLayer\SalesJournalTransactionService.vb" />
     <Compile Include="ServiceLayer\PettyCashJournalTransactionService.vb" />
@@ -2913,8 +2919,8 @@
       <Link>.editorconfig</Link>
     </None>
     <None Include="app - Copy %282%29.config" />
-    <None Include="app.orig.config" />
     <None Include="app.config" />
+    <None Include="app.orig.config" />
     <None Include="appLive.config" />
     <None Include="app -  ibn-server - Kizen %28local ispadmin2%29.config" />
     <None Include="app - ibn-server.config" />

@@ -8,7 +8,7 @@ BEGIN
  IF EXISTS(SELECT 1 FROM dbo.Reconciled r INNER JOIN dbo.ArJournalItem i ON i.IdNo=r.JournalItemIdNo WHERE r.JournalCode='AR' AND i.JournalIdNo=@JournalIdNo) THROW 51111,'AR journal contains reconciled detail lines and cannot be edited.',1;
  EXEC dbo.AssertJournalNotReconciliationLocked @JournalCode='AR', @JournalIdNo=@JournalIdNo;
   IF EXISTS(SELECT 1 FROM dbo.ArOpenInvoice o WHERE o.JournalCode='AR' AND (o.JournalIdNo=@JournalIdNo OR EXISTS(SELECT 1 FROM dbo.ArJournalItem i WHERE i.JournalIdNo=@JournalIdNo AND i.IdNo=o.JournalItemIdNo)) AND EXISTS(SELECT 1 FROM dbo.CsrOiItem c WHERE c.ArOpenInvoiceIdNo=o.IdNo)) THROW 51112,'AR journal has CR collections and cannot be edited.',1;
- IF @TransactionDate>='20260101' AND (NOT EXISTS(SELECT 1 FROM @Items) OR ABS((SELECT COALESCE(SUM(Debit),0) FROM @Items)-(SELECT COALESCE(SUM(Credit),0) FROM @Items))>.01) THROW 51113,'AR journal details are not balanced.',1;
+ IF @TransactionDate>='20260101' AND (NOT EXISTS(SELECT 1 FROM @Items) OR ABS((SELECT COALESCE(SUM(Debit),0) FROM @Items)-(SELECT COALESCE(SUM(Credit),0) FROM @Items)) > 0.00005) THROW 51113,'AR journal details are not balanced.',1;
  BEGIN TRANSACTION;
  BEGIN TRY
   UPDATE dbo.ArJournal SET CustomerIdNo=@CustomerIdNo,TransactionDate=@TransactionDate,ReferenceNo=@ReferenceNo,TransactionType=@TransactionType,Amount=@Amount,AccountIdNo=@AccountIdNo,DueDate=@DueDate,SettlementDueDate=@SettlementDueDate,SettlementDiscount=@SettlementDiscount,InvoiceNo=@InvoiceNo,InvoiceDate=@InvoiceDate,Notes=@Notes,VatAmount=@VatAmount,Approved=@Approved,Posted=@Posted WHERE IdNo=@JournalIdNo;

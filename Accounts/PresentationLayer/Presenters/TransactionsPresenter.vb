@@ -37,7 +37,7 @@ Namespace PresentationLayer.Presenters
             Dim retVal As Boolean = True
             If MyBase.IsOkToEditRecord() Then
                 Dim type As Type = View.GetType
-                Static closedTransactionDate As Date = GetRecordFieldWithKeyG(Of Date)("Closed Period", "LastPosting", "TransactionName", "LastPostingDate")
+                Dim closedTransactionDate As Date = GetRecordFieldWithKeyG(Of Date)("Closed Period", "LastPosting", "TransactionName", "LastPostingDate")
                 If type.GetProperty("Posted") IsNot Nothing Then
                     Dim cPosted = CallByName(View, "Posted", CallType.Get)
                     If cPosted Then
@@ -129,7 +129,7 @@ Namespace PresentationLayer.Presenters
         Public Sub OnValidatingDataTransactionEvent(ByRef eventType As ValidatingData) Implements ISubscriber(Of ValidatingData).OnEventHandler
             Dim type As Type = View.GetType
             Dim retVal As Boolean = True
-            Static closedTransactionDate As Date = GetRecordFieldWithKeyG(Of Date)("Closed Period", "LastPosting", "TransactionName", "LastPostingDate")
+            Dim closedTransactionDate As Date = GetRecordFieldWithKeyG(Of Date)("Closed Period", "LastPosting", "TransactionName", "LastPostingDate")
             If type.GetProperty("TransactionDate") IsNot Nothing Then
                 Dim cTransactionDate = CallByName(View, "TransactionDate", CallType.Get)
                 If cTransactionDate <= closedTransactionDate Then
@@ -154,7 +154,7 @@ Namespace PresentationLayer.Presenters
         Public Sub OnTransactionBeforeSave() Handles MyBase.BeforeSave
             If Not CancelSave Then
                 Dim type As Type = View.GetType
-                Static closedTransactionDate As Date = GetRecordFieldWithKeyG(Of Date)("Closed Period", "LastPosting", "TransactionName", "LastPostingDate")
+                Dim closedTransactionDate As Date = GetRecordFieldWithKeyG(Of Date)("Closed Period", "LastPosting", "TransactionName", "LastPostingDate")
                 If type.GetProperty("TransactionDate") IsNot Nothing Then
                     Dim cTransactionDate = CallByName(View, "TransactionDate", CallType.Get)
                     If cTransactionDate <= closedTransactionDate Then

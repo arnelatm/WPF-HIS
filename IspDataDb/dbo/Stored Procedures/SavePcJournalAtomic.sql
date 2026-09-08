@@ -3,7 +3,7 @@ CREATE PROCEDURE dbo.SavePcJournalAtomic
 AS BEGIN SET NOCOUNT ON; SET XACT_ABORT ON;
  IF @TransactionDate>='20260101' AND EXISTS(SELECT 1 FROM @Items WHERE Debit<0 OR Credit<0 OR (Debit<>0 AND Credit<>0)) THROW 51241,'Petty cash detail lines contain invalid debit/credit values.',1;
  IF @TransactionDate>='20260101' AND EXISTS(SELECT 1 FROM @Items WHERE AccountIdNo=0 AND (Debit<>0 OR Credit<>0)) THROW 51242,'Petty cash detail lines require an account.',1;
- IF @TransactionDate>='20260101' AND (NOT EXISTS(SELECT 1 FROM @Items) OR ABS((SELECT COALESCE(SUM(Debit),0) FROM @Items)-(SELECT COALESCE(SUM(Credit),0) FROM @Items))>.01) THROW 51240,'Petty cash details are not balanced.',1;
+ IF @TransactionDate>='20260101' AND (NOT EXISTS(SELECT 1 FROM @Items) OR ABS((SELECT COALESCE(SUM(Debit),0) FROM @Items)-(SELECT COALESCE(SUM(Credit),0) FROM @Items)) > 0.00005) THROW 51240,'Petty cash details are not balanced.',1;
  BEGIN TRAN; BEGIN TRY
   INSERT dbo.PcJournal(TransactionDate,ReferenceNo,Amount,AccountIdNo,PaymentType,PayType,PayeeIdNo,PayeeName,CheckNumber,CheckDate,ORNumber,DiscountTaken,DiscountAccountIdNo,Applied,UnApplied,VatNumber,VatAmount,Notes,PcClosed,Approved,Posted,Cancelled) VALUES(@TransactionDate,@ReferenceNo,@Amount,@AccountIdNo,@PaymentType,@PayType,@PayeeIdNo,@PayeeName,@CheckNumber,@CheckDate,@ORNumber,@DiscountTaken,@DiscountAccountIdNo,@Applied,@UnApplied,@VatNumber,@VatAmount,@Notes,@PcClosed,@Approved,@Posted,@Cancelled);
   SET @JournalIdNo=CONVERT(int,SCOPE_IDENTITY());
