@@ -438,6 +438,44 @@
     <Compile Include="DataLayer\AdoNet\DesignationDao.vb" />
     <Compile Include="DataLayer\AdoNet\DistributionSchemeDao.vb" />
     <Compile Include="DataLayer\AdoNet\DistributionSchemeItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\CashPositionDao.vb" />
+    <Compile Include="DataLayer\ICashPositionDao.vb" />
+    <Compile Include="PresentationLayer\Models\CashPositionModel.vb" />
+    <Compile Include="PresentationLayer\Presenters\CashPositionPresenter.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\ICashPositionView.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\CashPositionText.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\CashPositionTransactionForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\CashPositionForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\GeneralAccountPositionForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\CashPositionForm.resx">
+      <DependentUpon>CashPositionForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\CashPositionForm.ar.resx">
+      <DependentUpon>CashPositionForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="ServiceLayer\CashPositionService.vb" />
+    <Compile Include="DataLayer\ICashFlowDao.vb" />
+    <Compile Include="DataLayer\AdoNet\CashFlowDao.vb" />
+    <Compile Include="PresentationLayer\Models\CashFlowModel.vb" />
+    <Compile Include="PresentationLayer\Presenters\CashFlowPresenter.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\ICashFlowView.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\CashFlowText.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\CashFlowForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\CashFlowReviewForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\CashFlowSetupForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ServiceLayer\CashFlowService.vb" />
     <Compile Include="DataLayer\AdoNet\GlLedgeritemDao.vb" />
     <Compile Include="DataLayer\AdoNet\PurchaseDao.vb" />
     <Compile Include="DataLayer\AdoNet\ReconciledDao.vb" />

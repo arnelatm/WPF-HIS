@@ -7,6 +7,12 @@ of production data. No database connections or changes were made during this rev
 The proposed scope covers actual cash movements first, followed by forecasting.
 This scope is an assumption pending the owner's preference.
 
+Implementation update, 8 September 2026: the owner authorized the first
+[Cash Position screen](Cash-Position-Screen.md), including SAR, posted and unposted
+transactions, and petty-cash fund 113. Classified cash-flow reporting and the
+13-week forecast remain subsequent stages. The December validation and test-copy
+findings are recorded separately in [validation notes](Cash-Flow-Validation-Dec-2025.md).
+
 ## Recommendation
 
 Add a Cash Flow module inside the existing Accounts WinForms application. Reuse
@@ -69,10 +75,13 @@ an established repository export mechanism after confirming which one is active.
    For normal cash asset accounts, `Debit - Credit` is the signed movement. Keep
    source debit/credit and document identity available for drill-down.
 3. Use one normalized posting/cancellation policy for opening balances, movements,
-   and closing balances. Proposed default: posted actuals, with a separately
-   labelled provisional mode if staff need to include unposted entries. Confirm
-   header-versus-detail posting behavior first; flag disagreements rather than
-   silently selecting whichever value includes the transaction.
+   and closing balances. Owner decision on 8 September 2026: include posted and
+   unposted transactions for the initial release, excluding cancelled journals.
+   Label the basis "Posted and unposted" and retain posting status in drill-down.
+   Apply this basis to pre-period movements as well as the report period. Flag
+   header/detail posting disagreements for review; they do not exclude an otherwise
+   eligible transaction in this mode. Unknown cancellation states and orphan or
+   undated records require review and are not silently included.
 4. Calculate opening cash from the validated fiscal balance snapshot plus eligible
    movements from that snapshot up to, but excluding, the report start. Add the
    snapshot once. Never treat beginning-balance rows as receipts. Exclude routine
@@ -100,8 +109,9 @@ Cash-account tags are not sufficient to establish available liquidity. Restricte
 funds, cash equivalents, overdrafts, and clearing accounts require explicit setup
 and accounting policy. The reviewed core journal/account tables do not expose a
 transaction-currency/exchange-rate model sufficient to promise multicurrency cash
-flow. Start with the confirmed ledger currency; SAR is a candidate, not a verified
-production fact.
+flow. Start with SAR: the owner confirmed on 8 September 2026 that all Accounts
+ledger amounts are in Saudi riyals. This confirms the reporting currency, not a
+multicurrency transaction model.
 
 ## Classification rules and examples
 

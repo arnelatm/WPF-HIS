@@ -53,6 +53,9 @@ Namespace PresentationLayer.Views.Forms
             ToolStripButtonEnglish.Visible = context.IsRightToLeft
             ToolStripButtonEnglish.Enabled = True
             UpdateMedicalReportsMenuLanguage(context.IsRightToLeft)
+            _cashPositionMenuItem.Text = CashPositionText.Caption("Title")
+            _cashFlowMenuItem.Text = CashFlowText.GetCaption("Title")
+            _generalAccountPositionMenuItem.Text = If(context.IsRightToLeft, "حركة الحسابات العامة", "General Account Position")
         End Sub
 
         Private Sub UpdateMedicalReportsMenuLanguage(isArabic As Boolean)
@@ -72,6 +75,9 @@ Namespace PresentationLayer.Views.Forms
         Public Event UserLoggedIn(sender As Object, formControls As List(Of Control))
 
         Private ReadOnly _openInvoiceCorrectionMenuItem As New ToolStripMenuItem()
+        Private ReadOnly _cashPositionMenuItem As New ToolStripMenuItem()
+        Private ReadOnly _cashFlowMenuItem As New ToolStripMenuItem()
+        Private ReadOnly _generalAccountPositionMenuItem As New ToolStripMenuItem()
 
         'Private ReadOnly _presenterObj
 
@@ -82,6 +88,9 @@ Namespace PresentationLayer.Views.Forms
 
             InitializeComponent()
             InitializeOpenInvoiceCorrectionMenuItem()
+            InitializeCashPositionMenuItem()
+            InitializeCashFlowMenuItem()
+            InitializeGeneralAccountPositionMenuItem()
 
             If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
                 AddHandler AppDomain.CurrentDomain.UnhandledException, AddressOf UnhandledExceptionHandler
@@ -89,6 +98,7 @@ Namespace PresentationLayer.Views.Forms
                 Dim mySettings = AppSettings.Load()
                 GlobalVariables.TranslationMode = mySettings.TranslationInitializer
                 GlobalVariables.PreferredLanguage = mySettings.PreferredLanguage
+                ApplyNumberFormatSettings(mySettings)
                 _logStatus = LoginStatus.LoggedOut
                 GlobalFunctions.SetCulture(GlobalVariables.AppCultureInfo.ToString())
                 GlobalVariables.AppCultureInfo = CultureInfo.CurrentCulture
@@ -151,6 +161,7 @@ Namespace PresentationLayer.Views.Forms
                             SetObjectSecurityNew(cCtrl)
                         Next
                     End If
+                    ApplyCashPositionMenuAccess()
                     RaiseEvent UserLoggedIn(Me, allControls)
                     DisableLogin()
                 Else
@@ -233,6 +244,12 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub AccountsReceivableEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemAccountsReceivableEntry.Click
             RunForm(Of ArJournalEntry, ArJournalPresenter(Of ArJournalModel))()
+        End Sub
+
+        Private Shared Sub ApplyNumberFormatSettings(settings As AppSettings)
+            If settings Is Nothing Then Return
+            GlobalVariables.DefaultCurrencyFormatInfo.CurrencyDecimalDigits = settings.MonetaryDecimalPlaces
+            GlobalVariables.DefaultNumberFormatInfo.NumberDecimalDigits = settings.QuantityDecimalPlaces
         End Sub
 
         Private Sub OpenInvoiceCorrectionMenuItem_Click(sender As Object, e As EventArgs)
@@ -610,6 +627,49 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
 #End Region
+
+        Private Sub InitializeCashPositionMenuItem()
+            _cashPositionMenuItem.Name = "ToolStripMenuItemCashPosition"
+            _cashPositionMenuItem.Text = CashPositionText.Caption("Title")
+            AddHandler _cashPositionMenuItem.Click,
+                Sub()
+                    If GlobalVariables.IsUserLoggedIn Then
+                        RunForm(Of CashPositionForm, CashPositionPresenter)()
+                    End If
+                End Sub
+            ToolStripMenuItemReports.DropDownItems.Insert(0, _cashPositionMenuItem)
+        End Sub
+
+        Private Sub ApplyCashPositionMenuAccess()
+            'The item is runtime-created, so it has no designer security traversal.
+            'Until a dedicated security object is provisioned, inherit Reports access.
+            _cashPositionMenuItem.Visible = ToolStripMenuItemReports.Visible
+            _cashPositionMenuItem.Enabled = ToolStripMenuItemReports.Enabled
+        End Sub
+
+        Private Sub InitializeCashFlowMenuItem()
+            _cashFlowMenuItem.Name = "ToolStripMenuItemCashFlow"
+            _cashFlowMenuItem.Text = "Statement of Cash Flows"
+            AddHandler _cashFlowMenuItem.Click,
+                Sub()
+                    If GlobalVariables.IsUserLoggedIn Then
+                        RunForm(Of CashFlowForm, CashFlowPresenter)()
+                    End If
+                End Sub
+            ToolStripMenuItemReports.DropDownItems.Insert(1, _cashFlowMenuItem)
+        End Sub
+
+        Private Sub InitializeGeneralAccountPositionMenuItem()
+            _generalAccountPositionMenuItem.Name = "ToolStripMenuItemGeneralAccountPosition"
+            _generalAccountPositionMenuItem.Text = If(CultureInfo.CurrentCulture.TextInfo.IsRightToLeft, "حركة الحسابات العامة", "General Account Position")
+            AddHandler _generalAccountPositionMenuItem.Click,
+                Sub()
+                    If GlobalVariables.IsUserLoggedIn Then
+                        RunForm(Of GeneralAccountPositionForm, CashPositionPresenter)()
+                    End If
+                End Sub
+            ToolStripMenuItemReports.DropDownItems.Insert(2, _generalAccountPositionMenuItem)
+        End Sub
 
         Private Sub InitializeOpenInvoiceCorrectionMenuItem()
             _openInvoiceCorrectionMenuItem.Name = "ToolStripMenuItemOpenInvoiceCorrection"

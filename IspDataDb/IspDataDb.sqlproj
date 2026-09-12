@@ -267,6 +267,9 @@
     <Build Include="dbo\Views\ErOpenInvoice_View.sql" />
     <Build Include="dbo\Views\ErJournalItem_View.sql" />
     <Build Include="dbo\Tables\AccountBalance.sql" />
+    <Build Include="dbo\Tables\CashFlowClassification.sql" />
+    <Build Include="dbo\Tables\CashFlowAccountRule.sql" />
+    <Build Include="dbo\Tables\CashFlowAllocation.sql" />
     <Build Include="dbo\Views\RetainedEarnings_View.sql" />
     <Build Include="dbo\Views\JournalDetails_View.sql" />
     <Build Include="dbo\Views\GeneralLedger_View.sql" />

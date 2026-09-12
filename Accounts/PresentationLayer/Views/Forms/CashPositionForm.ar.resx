@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Account" xml:space="preserve">
+    <value>الحساب</value>
+  </data>
+  <data name="Accounts" xml:space="preserve">
+    <value>حسابات النقد المرشحة - اختر نطاق التقرير</value>
+  </data>
+  <data name="Basis" xml:space="preserve">
+    <value>ر.س | القيود المرحلة وغير المرحلة</value>
+  </data>
+  <data name="BookBalances" xml:space="preserve">
+    <value>أرصدة دفترية بالريال السعودي. تشمل الحركات التحويلات الداخلية وتستبعد القيود الملغاة. راجع الأرصدة المشار إليها.</value>
+  </data>
+  <data name="CashPositionAccountsChanged" xml:space="preserve">
+    <value>تغيرت الحسابات النقدية المحددة. أعد فتح الشاشة وراجع الاختيار.</value>
+  </data>
+  <data name="CashPositionDuplicateSource" xml:space="preserve">
+    <value>توجد أسطر مصدر مكررة. لا يمكن عرض أرصدة موثوقة.</value>
+  </data>
+  <data name="CashPositionInvalidDates" xml:space="preserve">
+    <value>أدخل تاريخ بداية ونهاية صحيحين.</value>
+  </data>
+  <data name="CashPositionLoadFailed" xml:space="preserve">
+    <value>تعذر تحميل الأرصدة النقدية. تحقق من اتصال قاعدة البيانات والبيانات ثم أعد المحاولة.</value>
+  </data>
+  <data name="CashPositionLoginRequired" xml:space="preserve">
+    <value>سجل الدخول قبل عرض الأرصدة النقدية.</value>
+  </data>
+  <data name="CashPositionMissingYear" xml:space="preserve">
+    <value>الأرصدة الافتتاحية لسنة البداية غير موجودة. تحقق منها قبل إعداد التقرير.</value>
+  </data>
+  <data name="CashPositionSelectAccounts" xml:space="preserve">
+    <value>اختر حساب نقد واحداً على الأقل.</value>
+  </data>
+  <data name="CashPositionUnbalancedSnapshot" xml:space="preserve">
+    <value>الأرصدة الافتتاحية للسنة غير متوازنة. تحقق منها قبل إعداد التقرير.</value>
+  </data>
+  <data name="ChooseAndLoad" xml:space="preserve">
+    <value>اختر الحسابات والفترة ثم اعرض الأرصدة.</value>
+  </data>
+  <data name="ClearSelection" xml:space="preserve">
+    <value>إلغاء التحديد</value>
+  </data>
+  <data name="Closing" xml:space="preserve">
+    <value>الختامي (ر.س)</value>
+  </data>
+  <data name="ClosingEntry" xml:space="preserve">
+    <value>قيد إقفال</value>
+  </data>
+  <data name="Credit" xml:space="preserve">
+    <value>الدائن (ر.س)</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>التاريخ</value>
+  </data>
+  <data name="Debit" xml:space="preserve">
+    <value>المدين (ر.س)</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>حركات الحساب المحدد</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>من</value>
+  </data>
+  <data name="HeaderPosted" xml:space="preserve">
+    <value>ترحيل القيد</value>
+  </data>
+  <data name="Inactive" xml:space="preserve">
+    <value>(غير نشط)</value>
+  </data>
+  <data name="ItemId" xml:space="preserve">
+    <value>رقم السطر</value>
+  </data>
+  <data name="ItemPosted" xml:space="preserve">
+    <value>ترحيل السطر</value>
+  </data>
+  <data name="Journal" xml:space="preserve">
+    <value>اليومية</value>
+  </data>
+  <data name="JournalId" xml:space="preserve">
+    <value>رقم القيد</value>
+  </data>
+  <data name="Load" xml:space="preserve">
+    <value>عرض الأرصدة</value>
+  </data>
+  <data name="MissingAccountSnapshot" xml:space="preserve">
+    <value>لا يوجد رصيد افتتاحي؛ افترض صفر</value>
+  </data>
+  <data name="NegativeClosing" xml:space="preserve">
+    <value>رصيد ختامي سالب</value>
+  </data>
+  <data name="NegativeOpening" xml:space="preserve">
+    <value>رصيد افتتاحي سالب</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>لا</value>
+  </data>
+  <data name="Notes" xml:space="preserve">
+    <value>ملاحظات</value>
+  </data>
+  <data name="Opening" xml:space="preserve">
+    <value>الافتتاحي (ر.س)</value>
+  </data>
+  <data name="Reference" xml:space="preserve">
+    <value>المرجع</value>
+  </data>
+  <data name="Review" xml:space="preserve">
+    <value>المراجعة</value>
+  </data>
+  <data name="ReviewClosing" xml:space="preserve">
+    <value>راجع قيود الإقفال</value>
+  </data>
+  <data name="ReviewPosting" xml:space="preserve">
+    <value>راجع حالة الترحيل</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>تحديد الكل</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>الموقف النقدي</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>إلى</value>
+  </data>
+  <data name="Totals" xml:space="preserve">
+    <value>إجمالي المحدد (ر.س): الافتتاحي {0:N2} | المدين {1:N2} | الدائن {2:N2} | الختامي {3:N2}</value>
+  </data>
+  <data name="Unknown" xml:space="preserve">
+    <value>غير معروف</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>نعم</value>
+  </data>
+  <data name="TransactionTitle" xml:space="preserve"><value>تفاصيل القيد</value></data>
+  <data name="Approved" xml:space="preserve"><value>معتمد</value></data>
+  <data name="Cancelled" xml:space="preserve"><value>ملغى</value></data>
+  <data name="Sequence" xml:space="preserve"><value>التسلسل</value></data>
+  <data name="Close" xml:space="preserve"><value>إغلاق</value></data>
+  <data name="TransactionTotals" xml:space="preserve"><value>إجمالي القيد (ريال): مدين {0:N2} | دائن {1:N2} | الفرق {2:N2}</value></data>
+  <data name="CashPositionTransactionUnavailable" xml:space="preserve"><value>لم يعد هذا القيد أو البند النقدي متاحاً. أعد تحميل الأرصدة وحاول مرة أخرى.</value></data>
+  <data name="CashPositionTransactionLoadFailed" xml:space="preserve"><value>تعذر فتح القيد. تحقق من الاتصال بقاعدة البيانات وحاول مرة أخرى.</value></data>
+</root>
