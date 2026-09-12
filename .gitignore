@@ -20,5 +20,6 @@ WPF-HIS-origin-verify/
 WPF-HIS-verify/
 WPF-HIS-verify.backup/
 tmp/
+.tmp/
 output/
 docs/Accounts-System-Handover.md
