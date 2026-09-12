@@ -1,6 +1,7 @@
 ﻿Imports System.ComponentModel
 Imports System.IO
 Imports System.Xml.Serialization
+Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class SetSettings
 
@@ -25,6 +26,8 @@ Public Class SetSettings
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         _appSettings.Save()
+        GlobalVariables.DefaultCurrencyFormatInfo.CurrencyDecimalDigits = _appSettings.MonetaryDecimalPlaces
+        GlobalVariables.DefaultNumberFormatInfo.NumberDecimalDigits = _appSettings.QuantityDecimalPlaces
     End Sub
 End Class
 
@@ -59,6 +62,51 @@ Public Class AppSettings
     End Property
 
     Private _preferredLanguage As String
+
+    Private _monetaryDecimalPlaces As Integer = 4
+
+    <DisplayName("Monetary decimal places"),
+        CategoryAttribute("Number Format"), DefaultValueAttribute(4),
+        TypeConverter(GetType(DecimalPlacesConverter)),
+        DescriptionAttribute("Decimal places used for accounting amounts, money fields, grids, and reports")>
+    Public Property MonetaryDecimalPlaces As Integer
+        Get
+            Return _monetaryDecimalPlaces
+        End Get
+        Set(value As Integer)
+            _monetaryDecimalPlaces = Math.Max(0, Math.Min(6, value))
+        End Set
+    End Property
+
+    Private _quantityDecimalPlaces As Integer = 2
+
+    <DisplayName("Quantity decimal places"),
+        CategoryAttribute("Number Format"), DefaultValueAttribute(2),
+        TypeConverter(GetType(DecimalPlacesConverter)),
+        DescriptionAttribute("Decimal places used for inventory and other quantities")>
+    Public Property QuantityDecimalPlaces As Integer
+        Get
+            Return _quantityDecimalPlaces
+        End Get
+        Set(value As Integer)
+            _quantityDecimalPlaces = Math.Max(0, Math.Min(6, value))
+        End Set
+    End Property
+
+    Private _rateDecimalPlaces As Integer = 2
+
+    <DisplayName("Rate/percentage decimal places"),
+        CategoryAttribute("Number Format"), DefaultValueAttribute(2),
+        TypeConverter(GetType(DecimalPlacesConverter)),
+        DescriptionAttribute("Decimal places used for rates, VAT, percentages, and discounts")>
+    Public Property RateDecimalPlaces As Integer
+        Get
+            Return _rateDecimalPlaces
+        End Get
+        Set(value As Integer)
+            _rateDecimalPlaces = Math.Max(0, Math.Min(6, value))
+        End Set
+    End Property
 
     <TypeConverter(GetType(PreferredLanguage)),
         CategoryAttribute("General Settings"), DefaultValueAttribute(""),
@@ -220,4 +268,18 @@ Public Class LaboratoryResultDirectory : Inherits System.ComponentModel.StringCo
         Return True
     End Function
 
+End Class
+
+Public Class DecimalPlacesConverter : Inherits System.ComponentModel.Int32Converter
+    Public Overrides Function GetStandardValuesSupported(context As ITypeDescriptorContext) As Boolean
+        Return True
+    End Function
+
+    Public Overrides Function GetStandardValuesExclusive(context As ITypeDescriptorContext) As Boolean
+        Return True
+    End Function
+
+    Public Overrides Function GetStandardValues(context As ITypeDescriptorContext) As StandardValuesCollection
+        Return New StandardValuesCollection({0, 1, 2, 3, 4, 5, 6})
+    End Function
 End Class

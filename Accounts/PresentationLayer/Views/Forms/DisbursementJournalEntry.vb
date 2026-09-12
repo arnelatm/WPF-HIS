@@ -115,7 +115,7 @@ Namespace PresentationLayer.Views.Forms
                 Return Convert.ToDecimal(NumParser(Of Decimal)(txtAmount.Text), _nfi)
             End Get
             Set
-                txtAmount.Text = Value.ToString("N4", _nfi)
+                txtAmount.Text = Value.ToString("N" & GlobalVariables.DefaultCurrencyFormatInfo.CurrencyDecimalDigits, _nfi)
 
             End Set
         End Property
@@ -125,7 +125,7 @@ Namespace PresentationLayer.Views.Forms
                 Return Convert.ToDecimal(NumParser(Of Decimal)(txtApplied.Text), _nfi)
             End Get
             Set
-                txtApplied.Text = Value.ToString("N4", _nfi)
+                txtApplied.Text = Value.ToString("N" & GlobalVariables.DefaultCurrencyFormatInfo.CurrencyDecimalDigits, _nfi)
             End Set
         End Property
 
@@ -216,7 +216,7 @@ Namespace PresentationLayer.Views.Forms
                 Return Convert.ToDecimal(NumParser(Of Decimal)(txtDiscountTaken.Text), _nfi)
             End Get
             Set
-                txtDiscountTaken.Text = Value.ToString("N4", _nfi)
+                txtDiscountTaken.Text = Value.ToString("N" & GlobalVariables.DefaultCurrencyFormatInfo.CurrencyDecimalDigits, _nfi)
             End Set
         End Property
 
@@ -366,7 +366,7 @@ Namespace PresentationLayer.Views.Forms
                 Return Convert.ToDecimal(NumParser(Of Decimal)(txtUnapplied.Text), _nfi)
             End Get
             Set
-                txtUnapplied.Text = Value.ToString("N4", _nfi)
+                txtUnapplied.Text = Value.ToString("N" & GlobalVariables.DefaultCurrencyFormatInfo.CurrencyDecimalDigits, _nfi)
             End Set
         End Property
 
@@ -375,7 +375,7 @@ Namespace PresentationLayer.Views.Forms
                 Return Convert.ToDecimal(NumParser(Of Decimal)(txtVatAmount.Text), _nfi)
             End Get
             Set
-                txtVatAmount.Text = Value.ToString("N4", _nfi)
+                txtVatAmount.Text = Value.ToString("N" & GlobalVariables.DefaultCurrencyFormatInfo.CurrencyDecimalDigits, _nfi)
             End Set
         End Property
 
@@ -453,7 +453,7 @@ Namespace PresentationLayer.Views.Forms
             }
             _jiFooter.ColumnToSum("dgvDebit") = True
             _jiFooter.ColumnToSum("dgvCredit") = True
-            _jiFooter.DecimalPlaces = 4
+            _jiFooter.DecimalPlaces = GlobalVariables.DefaultCurrencyFormatInfo.CurrencyDecimalDigits
             ConfigureJournalPrecision(DataGridViewJournalItems)
             _jiFooter.SetText("DgvAccountIdNo", "Totals ->")
             'The footer is a child of the grid.  Bring it to the front after it
@@ -801,8 +801,8 @@ Namespace PresentationLayer.Views.Forms
         Public Sub UpdateJiTotals()
             If _jiFooter IsNot Nothing Then
                 _jiFooter.CalculateTotals()
-                txtTotalDebits.Text = Decimal.Parse(_jiFooter.Value("dgvDebit").ToString()).ToString("N4", CultureInfo.CurrentCulture)
-                txtTotalCredits.Text = Decimal.Parse(_jiFooter.Value("dgvCredit").ToString()).ToString("N4", CultureInfo.CurrentCulture)
+                txtTotalDebits.Text = Decimal.Parse(_jiFooter.Value("dgvDebit").ToString()).ToString("N" & GlobalVariables.DefaultCurrencyFormatInfo.CurrencyDecimalDigits, CultureInfo.CurrentCulture)
+                txtTotalCredits.Text = Decimal.Parse(_jiFooter.Value("dgvCredit").ToString()).ToString("N" & GlobalVariables.DefaultCurrencyFormatInfo.CurrencyDecimalDigits, CultureInfo.CurrentCulture)
             End If
             Applied = Amount
             UnApplied = 0
@@ -812,7 +812,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ConfigureJournalPrecision(grid As DataGridView)
             If grid Is Nothing Then Return
             For Each columnName In {"dgvDebit", "dgvCredit"}
-                If grid.Columns.Contains(columnName) Then grid.Columns(columnName).DefaultCellStyle.Format = "N4"
+                If grid.Columns.Contains(columnName) Then grid.Columns(columnName).DefaultCellStyle.Format = "N" & GlobalVariables.DefaultCurrencyFormatInfo.CurrencyDecimalDigits
             Next
         End Sub
 

@@ -1203,7 +1203,7 @@ Namespace PresentationLayer.Views.Forms
         DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle8.Format = "###,##0.00"
+        DataGridViewCellStyle8.Format = "###,##0.0000"
         Me.dgvDebit.DefaultCellStyle = DataGridViewCellStyle8
         Me.dgvDebit.EditingMode = false
         Me.dgvDebit.EndFindValue = Nothing
@@ -1226,7 +1226,7 @@ Namespace PresentationLayer.Views.Forms
         DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle9.Format = "###,##0.00"
+        DataGridViewCellStyle9.Format = "###,##0.0000"
         Me.dgvCredit.DefaultCellStyle = DataGridViewCellStyle9
         Me.dgvCredit.EditingMode = false
         Me.dgvCredit.EndFindValue = Nothing

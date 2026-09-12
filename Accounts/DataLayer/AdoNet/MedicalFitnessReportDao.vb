@@ -2,6 +2,7 @@
 Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.DataLayer.AdoNet
 Imports System.Data
+Imports System.Data.SqlClient
 
 Namespace DataLayer.AdoNet
 
@@ -766,23 +767,64 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function SaveReport(report As MedicalFitnessReport) As Int32
-            If report.IdNo = 0 Then
-                Dim existingId = _ispDataDb.Scalar(
-                    "SELECT IdNo FROM MedicalFitnessReport WHERE InvoiceNo = @InvoiceNo",
-                    "@InvoiceNo", report.InvoiceNo)
-                If existingId IsNot Nothing AndAlso Not IsDBNull(existingId) Then
-                    report.IdNo = Convert.ToInt32(existingId)
-                End If
-            End If
+            If report Is Nothing Then Throw New ArgumentNullException(NameOf(report))
 
-            If report.IdNo = 0 Then
-                report.IdNo = InsertReport(report)
-            Else
-                UpdateReport(report)
-            End If
+            ' Db.Scalar handles some SQL errors without throwing. Saving these
+            ' rows needs one connection and exceptions that reach the caller,
+            ' otherwise a failed insert can leave a partially replaced report.
+            Using connection As New SqlConnection(_ispDataDb.GetConnectionString())
+                connection.Open()
+                Using command As New SqlCommand("SET XACT_ABORT ON;", connection)
+                    command.ExecuteNonQuery()
+                End Using
+                Using transaction = connection.BeginTransaction()
+                    Try
+                        Dim reportId = report.IdNo
+                        If reportId = 0 Then
+                            Using command = CreateSaveCommand(connection, transaction,
+                                "SELECT IdNo FROM dbo.MedicalFitnessReport WITH (UPDLOCK,HOLDLOCK) WHERE InvoiceNo = @InvoiceNo",
+                                "@InvoiceNo", report.InvoiceNo)
+                                Dim existingId = command.ExecuteScalar()
+                                If existingId IsNot Nothing AndAlso Not IsDBNull(existingId) Then
+                                    reportId = Convert.ToInt32(existingId)
+                                End If
+                            End Using
+                        End If
 
-            ReplaceDetails(report)
-            Return report.IdNo
+                        If reportId = 0 Then
+                            reportId = InsertReport(report, connection, transaction)
+                        Else
+                            UpdateReport(report, reportId, connection, transaction)
+                        End If
+                        ReplaceDetails(report, reportId, connection, transaction)
+                        transaction.Commit()
+
+                        ' Publish generated IDs only after the entire save succeeds.
+                        report.IdNo = reportId
+                        If report.Details IsNot Nothing Then
+                            For Each detail In report.Details
+                                detail.MedicalFitnessReportIdNo = reportId
+                            Next
+                        End If
+                        Return reportId
+                    Catch
+                        Try
+                            transaction.Rollback()
+                        Catch rollbackException As Exception
+                            ' XACT_ABORT or a broken connection may already have
+                            ' rolled back. Preserve the original save exception.
+                        End Try
+                        Throw
+                    End Try
+                End Using
+            End Using
+        End Function
+
+        Private Shared Function CreateSaveCommand(connection As SqlConnection, transaction As SqlTransaction,
+                                                  sql As String, ParamArray parameters() As Object) As SqlCommand
+            Dim command As New SqlCommand(sql, connection, transaction)
+            command.AddParameters(parameters)
+            Return command
         End Function
 
         Public Sub DeleteReport(reportIdNo As Int32)
@@ -796,7 +838,7 @@ Namespace DataLayer.AdoNet
             _ispDataDb.Update(sql, "@IdNo", reportIdNo)
         End Sub
 
-        Private Function InsertReport(report As MedicalFitnessReport) As Int32
+        Private Function InsertReport(report As MedicalFitnessReport, connection As SqlConnection, transaction As SqlTransaction) As Int32
             Dim sql As String =
                 "INSERT INTO MedicalFitnessReport " &
                 "(InvoiceNo,ReportFormat,MedicalReportFormatIdNo,InvoiceDate,FileNo,PatientName,CompanyName,PassportNo,Gender,Age,Nationality,IdentityNo,DoctorName,BloodType," &
@@ -810,10 +852,12 @@ Namespace DataLayer.AdoNet
                 "@FinalResultStatus,@Remarks); " &
                 "SELECT CONVERT(int, SCOPE_IDENTITY());"
 
-            Return Convert.ToInt32(_ispDataDb.Scalar(sql, TakeReport(report)))
+            Using command = CreateSaveCommand(connection, transaction, sql, TakeReport(report))
+                Return Convert.ToInt32(command.ExecuteScalar())
+            End Using
         End Function
 
-        Private Function UpdateReport(report As MedicalFitnessReport) As Int32
+        Private Sub UpdateReport(report As MedicalFitnessReport, reportId As Int32, connection As SqlConnection, transaction As SqlTransaction)
             Dim sql As String =
                 "UPDATE MedicalFitnessReport SET " &
                 "InvoiceNo = @InvoiceNo, " &
@@ -850,18 +894,17 @@ Namespace DataLayer.AdoNet
                 "WHERE IdNo = @IdNo"
 
             Dim params = TakeReport(report).ToList()
-            params.AddRange({"@IdNo", report.IdNo})
-            Return _ispDataDb.Update(sql, params.ToArray())
-        End Function
+            params.AddRange({"@IdNo", reportId})
+            Using command = CreateSaveCommand(connection, transaction, sql, params.ToArray())
+                If command.ExecuteNonQuery() <> 1 Then
+                    Throw New InvalidOperationException("The medical report no longer exists. Retrieve the invoice again before saving.")
+                End If
+            End Using
+        End Sub
 
-        Private Sub ReplaceDetails(report As MedicalFitnessReport)
-            If report.Details Is Nothing Then
-                _ispDataDb.Update("DELETE FROM MedicalFitnessReportTestResult WHERE MedicalFitnessReportIdNo = @IdNo", "@IdNo", report.IdNo)
-                Return
-            End If
-
-            For Each detail In report.Details
-                detail.MedicalFitnessReportIdNo = report.IdNo
+        Private Sub ReplaceDetails(report As MedicalFitnessReport, reportId As Int32, connection As SqlConnection, transaction As SqlTransaction)
+            Dim details = If(report.Details, New List(Of MedicalFitnessReportTestResult)())
+            For Each detail In details
                 detail.SectionCode = GetRequiredSectionCode(detail)
                 If String.IsNullOrWhiteSpace(detail.TestCode) Then
                     Throw New InvalidOperationException("A medical fitness result is missing its test code.")
@@ -873,10 +916,13 @@ Namespace DataLayer.AdoNet
 
             ' Validate and normalize every row before removing the saved details so
             ' invalid input cannot leave a report with all of its rows deleted.
-            _ispDataDb.Update("DELETE FROM MedicalFitnessReportTestResult WHERE MedicalFitnessReportIdNo = @IdNo", "@IdNo", report.IdNo)
+            Using command = CreateSaveCommand(connection, transaction,
+                "DELETE FROM dbo.MedicalFitnessReportTestResult WHERE MedicalFitnessReportIdNo = @IdNo", "@IdNo", reportId)
+                command.ExecuteNonQuery()
+            End Using
 
-            For Each detail In report.Details
-                InsertDetail(detail)
+            For Each detail In details
+                InsertDetail(detail, reportId, connection, transaction)
             Next
         End Sub
 
@@ -897,7 +943,7 @@ Namespace DataLayer.AdoNet
             End Select
         End Function
 
-        Private Function InsertDetail(detail As MedicalFitnessReportTestResult) As Int32
+        Private Function InsertDetail(detail As MedicalFitnessReportTestResult, reportId As Int32, connection As SqlConnection, transaction As SqlTransaction) As Int32
             Dim sql As String =
                 "INSERT INTO MedicalFitnessReportTestResult " &
                 "(MedicalFitnessReportIdNo,SectionCode,TestCode,TestNameEnglish,TestNameArabic,DisplayOrder,ResultStatus,ResultText," &
@@ -907,7 +953,9 @@ Namespace DataLayer.AdoNet
                 "@LabResult,@LabReferenceValue,@LabUnit,@LabAssessment,@ResultStatusSource,@Remarks); " &
                 "SELECT CONVERT(int, SCOPE_IDENTITY());"
 
-            Return Convert.ToInt32(_ispDataDb.Scalar(sql, TakeDetail(detail)))
+            Using command = CreateSaveCommand(connection, transaction, sql, TakeDetail(detail, reportId))
+                Return Convert.ToInt32(command.ExecuteScalar())
+            End Using
         End Function
 
         Private Function GetReportDetails(reportIdNo As Int32) As List(Of MedicalFitnessReportTestResult)
@@ -963,9 +1011,9 @@ Namespace DataLayer.AdoNet
                 "@Remarks", DbValue(report.Remarks)}
         End Function
 
-        Private Shared Function TakeDetail(detail As MedicalFitnessReportTestResult) As Object()
+        Private Shared Function TakeDetail(detail As MedicalFitnessReportTestResult, reportId As Int32) As Object()
             Return New Object() {
-                "@MedicalFitnessReportIdNo", detail.MedicalFitnessReportIdNo,
+                "@MedicalFitnessReportIdNo", reportId,
                 "@SectionCode", detail.SectionCode,
                 "@TestCode", detail.TestCode,
                 "@TestNameEnglish", detail.TestNameEnglish,

@@ -125,10 +125,22 @@ Namespace PresentationLayer.Presenters
                 Return
             End If
 
-            Dim report = ReadView()
-            Dim idNo = _dao.SaveReport(report)
-            View.ReportIdNo = idNo
-            MessageBox.Show("Medical report saved.")
+            Try
+                Dim report = ReadView()
+                Dim idNo = _dao.SaveReport(report)
+                View.ReportIdNo = idNo
+                MessageBox.Show("Medical report saved.")
+            Catch ex As System.Data.SqlClient.SqlException
+                ' Keep SQL values out of the message: truncation errors on newer
+                ' servers can include patient/result text in their description.
+                MessageBox.Show(
+                    "Unable to save the medical report. No changes were saved. Your entries are still on screen." &
+                    Environment.NewLine & "تعذر حفظ التقرير الطبي. لم يتم حفظ التغييرات، ولا تزال البيانات على الشاشة." &
+                    Environment.NewLine & "Database error: " & ex.Number.ToString(),
+                    "Medical Report Save", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Catch ex As InvalidOperationException
+                MessageBox.Show(ex.Message, "Medical Report Save", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
         End Sub
 
         Private Sub RefreshLabResults()
@@ -402,7 +414,7 @@ Namespace PresentationLayer.Presenters
                 For Each analysis In analyses
                     Dim template As MedicalFitnessReportLabTemplate = Nothing
                     If Not String.IsNullOrWhiteSpace(analysis.TestCode) Then
-                        template = FindLabTemplate(labTemplates, analysis.TestCode)
+                        template = FindLabTemplate(labTemplates, analysis.TestCode, analysis.TestNameEnglish)
                     End If
                     AddLabRow(rows, analysis, sequence, template)
                     sequence += 10
@@ -659,7 +671,7 @@ Namespace PresentationLayer.Presenters
             For Each analysis In analyses
                 Dim configuredTemplate As MedicalFitnessReportLabTemplate = Nothing
                 If Not String.IsNullOrWhiteSpace(analysis.TestCode) Then
-                    configuredTemplate = FindLabTemplate(labTemplates, analysis.TestCode)
+                    configuredTemplate = FindLabTemplate(labTemplates, analysis.TestCode, analysis.TestNameEnglish)
                 End If
                 Dim matchingRow = existingRows.FirstOrDefault(
                     Function(row) String.Equals(row.SectionCode, "LAB", StringComparison.OrdinalIgnoreCase) AndAlso
@@ -769,7 +781,8 @@ Namespace PresentationLayer.Presenters
 
         Private Shared Function FindLabTemplate(
             templates As IDictionary(Of String, MedicalFitnessReportLabTemplate),
-            testCode As String) As MedicalFitnessReportLabTemplate
+            testCode As String,
+            Optional testNameEnglish As String = Nothing) As MedicalFitnessReportLabTemplate
             If templates Is Nothing OrElse String.IsNullOrWhiteSpace(testCode) Then
                 Return Nothing
             End If
@@ -788,6 +801,21 @@ Namespace PresentationLayer.Presenters
 
             If templates.TryGetValue(alternateCode, template) Then
                 Return template
+            End If
+
+            ' Kizen child results use hierarchical codes such as
+            ' Item_L658_PropertyGroup__Property_Random Blood Glucose (RBS),
+            ' while the configurable template is keyed by the leaf code (L626).
+            ' The display name is the stable link in this case; the parent code
+            ' must not inherit the parent's CopyResultToEntry setting.
+            If Not String.IsNullOrWhiteSpace(testNameEnglish) Then
+                Dim normalizedName = testNameEnglish.Trim()
+                Dim nameMatch = templates.Values.FirstOrDefault(
+                    Function(item) String.Equals(If(item.TestNameEnglish, "").Trim(), normalizedName,
+                                                  StringComparison.OrdinalIgnoreCase))
+                If nameMatch IsNot Nothing Then
+                    Return nameMatch
+                End If
             End If
 
             Return Nothing

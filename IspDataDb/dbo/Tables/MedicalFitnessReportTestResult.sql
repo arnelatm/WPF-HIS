@@ -2,7 +2,7 @@ CREATE TABLE [dbo].[MedicalFitnessReportTestResult] (
     [IdNo]                     INT            IDENTITY (1, 1) NOT NULL,
     [MedicalFitnessReportIdNo] INT            NOT NULL,
     [SectionCode]              VARCHAR (30)   NOT NULL,
-    [TestCode]                 VARCHAR (50)   NOT NULL,
+    [TestCode]                 NVARCHAR (255) NOT NULL,
     [TestNameEnglish]          NVARCHAR (255) NOT NULL,
     [TestNameArabic]           NVARCHAR (255) NULL,
     [DisplayOrder]             INT            NOT NULL,

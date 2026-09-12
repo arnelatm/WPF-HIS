@@ -318,7 +318,7 @@ Namespace PresentationLayer.Views.Forms
             }
             _jiFooter.ColumnToSum("dgvDebit") = True
             _jiFooter.ColumnToSum("dgvCredit") = True
-            _jiFooter.DecimalPlaces = 4
+            _jiFooter.DecimalPlaces = GlobalVariables.DefaultCurrencyFormatInfo.CurrencyDecimalDigits
             ConfigureJournalPrecision(DataGridViewJournalItems)
             ' _jiFooter.SetText("DgvAccountIdNo", "Totals ->")
 
@@ -361,15 +361,15 @@ Namespace PresentationLayer.Views.Forms
         Private Sub UpdateJiTotals()
             If _jiFooter IsNot Nothing Then
                 _jiFooter.CalculateTotals()
-                txtTotalDebits.Text = Decimal.Parse(_jiFooter.Value("dgvDebit").ToString()).ToString("N4", CultureInfo.CurrentCulture)
-                txtTotalCredits.Text = Decimal.Parse(_jiFooter.Value("dgvCredit").ToString()).ToString("N4", CultureInfo.CurrentCulture)
+                txtTotalDebits.Text = Decimal.Parse(_jiFooter.Value("dgvDebit").ToString()).ToString("N" & GlobalVariables.DefaultCurrencyFormatInfo.CurrencyDecimalDigits, CultureInfo.CurrentCulture)
+                txtTotalCredits.Text = Decimal.Parse(_jiFooter.Value("dgvCredit").ToString()).ToString("N" & GlobalVariables.DefaultCurrencyFormatInfo.CurrencyDecimalDigits, CultureInfo.CurrentCulture)
             End If
         End Sub
 
         Private Sub ConfigureJournalPrecision(grid As DataGridView)
             If grid Is Nothing Then Return
             For Each columnName In {"dgvDebit", "dgvCredit"}
-                If grid.Columns.Contains(columnName) Then grid.Columns(columnName).DefaultCellStyle.Format = "N4"
+                If grid.Columns.Contains(columnName) Then grid.Columns(columnName).DefaultCellStyle.Format = "N" & GlobalVariables.DefaultCurrencyFormatInfo.CurrencyDecimalDigits
             Next
         End Sub
 

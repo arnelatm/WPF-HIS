@@ -1,4 +1,4 @@
-﻿Imports System.Globalization
+Imports System.Globalization
 Imports System.Threading
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
@@ -31,6 +31,10 @@ Namespace PresentationLayer.Views.Forms
         Private _previousEndValueSearch As Decimal?
         Private _previousColumnSearch As Int16
         'Private _progressDisplayForm As Form1
+
+        Private Function FormatReconciliationAmount(value As Decimal) As String
+            Return FormatMoney(value)
+        End Function
 
         Public Event ReconciliationAccountChangedEvent(sender As Object, bindingSource As BindingSource) Implements IAccountReconciliationView.ReconciliationAccountChangedEvent
 
@@ -78,7 +82,7 @@ Namespace PresentationLayer.Views.Forms
                 Return txtBalance.Text.ToDecimalNumber(_nfi)
             End Get
             Set
-                txtBalance.Text = FormatMoney(Value)
+                txtBalance.Text = FormatReconciliationAmount(Value)
                 txtBalance2.Text = txtBalance.Text
             End Set
         End Property
@@ -128,7 +132,7 @@ Namespace PresentationLayer.Views.Forms
                 Return Convert.ToDecimal(NumParser(Of Decimal)(txtTotalCreditsCleared.Text), _nfi)
             End Get
             Set
-                txtTotalCreditsCleared.Text = FormatMoney(Value)
+                txtTotalCreditsCleared.Text = FormatReconciliationAmount(Value)
             End Set
         End Property
 
@@ -137,8 +141,8 @@ Namespace PresentationLayer.Views.Forms
                 Return Convert.ToDecimal(NumParser(Of Decimal)(txtTotalCreditsNotCleared.Text), _nfi)
             End Get
             Set
-                txtTotalCreditsNotCleared.Text = FormatMoney(Value)
-                OutstandingCredits = FormatMoney(Value)
+                txtTotalCreditsNotCleared.Text = FormatReconciliationAmount(Value)
+                OutstandingCredits = Value
             End Set
         End Property
 
@@ -147,7 +151,7 @@ Namespace PresentationLayer.Views.Forms
                 Return Convert.ToDecimal(NumParser(Of Decimal)(txtTotalDebitsCleared.Text), _nfi)
             End Get
             Set
-                txtTotalDebitsCleared.Text = FormatMoney(Value)
+                txtTotalDebitsCleared.Text = FormatReconciliationAmount(Value)
             End Set
         End Property
 
@@ -156,8 +160,8 @@ Namespace PresentationLayer.Views.Forms
                 Return Convert.ToDecimal(NumParser(Of Decimal)(txtTotalDebitsNotCleared.Text), _nfi)
             End Get
             Set
-                txtTotalDebitsNotCleared.Text = FormatMoney(Value)
-                OutstandingDeposits = FormatMoney(Value)
+                txtTotalDebitsNotCleared.Text = FormatReconciliationAmount(Value)
+                OutstandingDeposits = Value
             End Set
         End Property
 
@@ -166,7 +170,7 @@ Namespace PresentationLayer.Views.Forms
                 Return Convert.ToDecimal(NumParser(Of Decimal)(txtGlSystemBalance.Text), _nfi)
             End Get
             Set
-                txtGlSystemBalance.Text = FormatMoney(Value)
+                txtGlSystemBalance.Text = FormatReconciliationAmount(Value)
             End Set
         End Property
 
@@ -268,7 +272,7 @@ Namespace PresentationLayer.Views.Forms
                 Return Convert.ToDecimal(NumParser(Of Decimal)(txtUnreconciledDifference.Text), _nfi)
             End Get
             Set
-                txtUnreconciledDifference.Text = Value
+                txtUnreconciledDifference.Text = FormatReconciliationAmount(Value)
             End Set
         End Property
 
@@ -277,7 +281,7 @@ Namespace PresentationLayer.Views.Forms
                 Return Convert.ToDecimal(NumParser(Of Decimal)(txtOutstandingCredits.Text), _nfi)
             End Get
             Set
-                txtOutstandingCredits.Text = FormatMoney(Value)
+                txtOutstandingCredits.Text = FormatReconciliationAmount(Value)
             End Set
         End Property
 
@@ -286,7 +290,7 @@ Namespace PresentationLayer.Views.Forms
                 Return Convert.ToDecimal(NumParser(Of Decimal)(txtOutstandingDeposits.Text), _nfi)
             End Get
             Set
-                txtOutstandingDeposits.Text = FormatMoney(Value)
+                txtOutstandingDeposits.Text = FormatReconciliationAmount(Value)
             End Set
         End Property
 
@@ -322,6 +326,8 @@ Namespace PresentationLayer.Views.Forms
                 'dgvJournalItemIdNo.DisplayOnly = True
                 dgvReferenceNo.DisplayOnly = True
                 dgvTransactionDate.DisplayOnly = True
+                dgvDebit.DefaultCellStyle.Format = "N" & GlobalVariables.DefaultCurrencyFormatInfo.CurrencyDecimalDigits
+                dgvCredit.DefaultCellStyle.Format = "N" & GlobalVariables.DefaultCurrencyFormatInfo.CurrencyDecimalDigits
                 Dim englishDateTimeFormat As DateTimeFormatInfo = New CultureInfo("en-GB").DateTimeFormat
                 Thread.CurrentThread.CurrentCulture.DateTimeFormat = englishDateTimeFormat
             End With
