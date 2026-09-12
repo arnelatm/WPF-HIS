@@ -12,6 +12,7 @@ Public Module Main
     Const MilliSecondsTimeOut As Integer = 15_000_000 ' approximately 4 hours
 
     Public Sub Main()
+        AATM.Accounts.Security.ProtectedConnectionStringBootstrap.LoadIfPresent()
         Call Application.EnableVisualStyles()
         Application.SetCompatibleTextRenderingDefault(False)
         Dim limf As LeaveIdleMessageFilter = New LeaveIdleMessageFilter()

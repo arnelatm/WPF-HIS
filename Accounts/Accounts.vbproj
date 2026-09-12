@@ -3240,3 +3240,5 @@
   </Target>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
+    <Reference Include="System.Security" />
+    <Compile Include="Security\ProtectedConnectionStringBootstrap.vb" />
