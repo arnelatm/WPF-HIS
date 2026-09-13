@@ -2964,25 +2964,7 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="app - hidden passwords - ibn-server.config" />
     <None Include="app.config" />
-    <None Include="app.config.before-aatm-test" />
-    <None Include="app.orig.config" />
-    <None Include="appLive.config" />
-    <None Include="app -  ibn-server - Kizen %28local ispadmin2%29.config" />
-    <None Include="app - ibn-server.config" />
-    <None Include="app-LiveData.config" />
-    <None Include="app.config.bak" />
-    <None Include="app-ispadmin2-backp.config" />
-    <None Include="app-kizen.config" />
-    <None Include="app-Isp-Server - Copy.config" />
-    <None Include="app-ISP-SERVERNEW.config" />
-    <None Include="app-IBNSINAP.config" />
-    <None Include="app-ISPADMIN2.config" />
-    <None Include="app-Marcelo-Dell.config" />
-    <None Include="app-Isp-Server.config" />
-    <None Include="appx.config" />
-    <None Include="appOrig.config" />
     <None Include="ISPDATADataSet.xsc">
       <DependentUpon>ISPDATADataSet.xsd</DependentUpon>
     </None>
@@ -3067,12 +3049,10 @@
       <LastGenOutput>NewSettings.Designer.vb</LastGenOutput>
     </None>
     <None Include="packages.config" />
-    <None Include="PresentationLayer\Views\app-Ibn-Server.config" />
     <None Include="Reports\BioTime\Daily Employee Punch Audit Report - Crystal Setup.md" />
     <None Include="Reports\BioTime\Employee Absence &amp; Leave Report.rpt" />
     <None Include="Reports\BioTime\Periodic Attendance Report - Crystal Setup.md" />
     <None Include="Reports\IGroup\DosageLabel.rpt" />
-    <None Include="ServiceLayer\app-Ibn-Server.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
