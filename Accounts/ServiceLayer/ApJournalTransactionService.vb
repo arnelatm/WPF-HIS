@@ -66,6 +66,7 @@ Namespace ServiceLayer
                     idParameter.Direction = ParameterDirection.Output
 
                     connection.Open()
+                    AATM.DataLayer.AdoNet.AuditContext.Apply(connection)
                     command.ExecuteNonQuery()
                     Return Convert.ToInt32(idParameter.Value)
                 End Using
@@ -84,6 +85,7 @@ Namespace ServiceLayer
                     itemParameter.SqlDbType = SqlDbType.Structured
                     itemParameter.TypeName = "dbo.JournalItemInsert"
                     connection.Open()
+                    AATM.DataLayer.AdoNet.AuditContext.Apply(connection)
                     command.ExecuteNonQuery()
                 End Using
             End Using
@@ -95,6 +97,7 @@ Namespace ServiceLayer
                     command.CommandType = CommandType.StoredProcedure
                     AddParameter(command, "@JournalIdNo", journalIdNo)
                     connection.Open()
+                    AATM.DataLayer.AdoNet.AuditContext.Apply(connection)
                     command.ExecuteNonQuery()
                     'Atomic procedures use SET NOCOUNT ON; a successful
                     'ExecuteNonQuery may therefore return -1.

@@ -12,12 +12,12 @@ Namespace ServiceLayer
             For Each i In If(m.JournalItems,New List(Of JournalItemModel)):t.Rows.Add(If(i.AccountIdNo.HasValue,CObj(i.AccountIdNo.Value),0),i.Credit,i.Debit,0,If(i.Notes,String.Empty),i.PayIdNo,CObj(i.RevCostCenterIdNo),i.Sequence):Next
             Using cn As New SqlConnection(GlobalVariables.DacConnectionString),cmd As New SqlCommand("dbo.UpdateErJournalAtomic",cn)
                 cmd.CommandType=CommandType.StoredProcedure:Add(cmd,"@JournalIdNo",m.IdNo):Add(cmd,"@EmployeeIdNo",m.EmployeeIdNo.Value):Add(cmd,"@TransactionDate",m.TransactionDate.Value):Add(cmd,"@ReferenceNo",m.ReferenceNo):Add(cmd,"@TransactionType",m.TransactionType):Add(cmd,"@Amount",m.Amount):Add(cmd,"@AccountIdNo",If(m.AccountIdNo.HasValue,CObj(m.AccountIdNo.Value),0)):Add(cmd,"@Notes",m.Notes):Add(cmd,"@Approved",m.Approved):Add(cmd,"@Posted",m.Posted):Add(cmd,"@Cancelled",m.Cancelled)
-                Dim p=cmd.Parameters.AddWithValue("@Items",t):p.SqlDbType=SqlDbType.Structured:p.TypeName="dbo.JournalItemInsert":cn.Open():cmd.ExecuteNonQuery()
+                Dim p=cmd.Parameters.AddWithValue("@Items",t):p.SqlDbType=SqlDbType.Structured:p.TypeName="dbo.JournalItemInsert":cn.Open():AATM.DataLayer.AdoNet.AuditContext.Apply(cn):cmd.ExecuteNonQuery()
             End Using
         End Sub
         Public Function DeleteExisting(idNo As Integer) As Integer
             Using cn As New SqlConnection(GlobalVariables.DacConnectionString),cmd As New SqlCommand("dbo.DeleteErJournalAtomic",cn)
-                cmd.CommandType=CommandType.StoredProcedure:Add(cmd,"@JournalIdNo",idNo):cn.Open():cmd.ExecuteNonQuery():Return 1
+                cmd.CommandType=CommandType.StoredProcedure:Add(cmd,"@JournalIdNo",idNo):cn.Open():AATM.DataLayer.AdoNet.AuditContext.Apply(cn):cmd.ExecuteNonQuery():Return 1
             End Using
         End Function
 
@@ -33,7 +33,7 @@ Namespace ServiceLayer
                 p.TypeName="dbo.JournalItemInsert"
                 Dim id=cmd.Parameters.Add("@JournalIdNo",SqlDbType.Int)
                 id.Direction=ParameterDirection.Output
-                cn.Open():cmd.ExecuteNonQuery():Return Convert.ToInt32(id.Value)
+                cn.Open():AATM.DataLayer.AdoNet.AuditContext.Apply(cn):cmd.ExecuteNonQuery():Return Convert.ToInt32(id.Value)
             End Using
         End Function
         Private Shared Sub Add(c As SqlCommand,n As String,v As Object)

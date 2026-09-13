@@ -1526,6 +1526,7 @@
     <Compile Include="PresentationLayer\Views\Forms\AccountEntryTv.Designer.vb">
       <DependentUpon>AccountEntryTv.vb</DependentUpon>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\AuditHistoryForm.vb" />
     <Compile Include="PresentationLayer\Views\Forms\AccountEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>

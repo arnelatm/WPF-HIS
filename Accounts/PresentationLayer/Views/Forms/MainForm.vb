@@ -78,6 +78,7 @@ Namespace PresentationLayer.Views.Forms
         Private ReadOnly _cashPositionMenuItem As New ToolStripMenuItem()
         Private ReadOnly _cashFlowMenuItem As New ToolStripMenuItem()
         Private ReadOnly _generalAccountPositionMenuItem As New ToolStripMenuItem()
+        Private ReadOnly _auditHistoryMenuItem As New ToolStripMenuItem()
 
         'Private ReadOnly _presenterObj
 
@@ -91,6 +92,7 @@ Namespace PresentationLayer.Views.Forms
             InitializeCashPositionMenuItem()
             InitializeCashFlowMenuItem()
             InitializeGeneralAccountPositionMenuItem()
+            InitializeAuditHistoryMenuItem()
 
             If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
                 AddHandler AppDomain.CurrentDomain.UnhandledException, AddressOf UnhandledExceptionHandler
@@ -162,12 +164,14 @@ Namespace PresentationLayer.Views.Forms
                         Next
                     End If
                     ApplyCashPositionMenuAccess()
+                    ApplyAuditHistoryMenuAccess()
                     RaiseEvent UserLoggedIn(Me, allControls)
                     DisableLogin()
                 Else
                     GlobalVariables.IsUserLoggedIn = False
                     GlobalSubs.HideAndDisableMenuItems(AccountsMenu)
                     EnableLogin()
+                    ApplyAuditHistoryMenuAccess()
                 End If
                 EnableEssentials()
             End Set
@@ -669,6 +673,25 @@ Namespace PresentationLayer.Views.Forms
                     End If
                 End Sub
             ToolStripMenuItemReports.DropDownItems.Insert(2, _generalAccountPositionMenuItem)
+        End Sub
+
+        Private Sub InitializeAuditHistoryMenuItem()
+            _auditHistoryMenuItem.Name = "ToolStripMenuItemAuditHistory"
+            _auditHistoryMenuItem.Text = If(GlobalVariables.RightToLeftLayout, "سجل تحديث البيانات", "Data Update History")
+            AddHandler _auditHistoryMenuItem.Click,
+                Sub()
+                    If GlobalVariables.IsUserLoggedIn Then
+                        Using form As New AuditHistoryForm()
+                            form.ShowDialog(Me)
+                        End Using
+                    End If
+                End Sub
+            ToolStripMenuItemUtilities.DropDownItems.Add(_auditHistoryMenuItem)
+        End Sub
+
+        Private Sub ApplyAuditHistoryMenuAccess()
+            _auditHistoryMenuItem.Visible = GlobalVariables.IsUserLoggedIn AndAlso ToolStripMenuItemUtilities.Visible
+            _auditHistoryMenuItem.Enabled = GlobalVariables.IsUserLoggedIn AndAlso ToolStripMenuItemUtilities.Enabled
         End Sub
 
         Private Sub InitializeOpenInvoiceCorrectionMenuItem()

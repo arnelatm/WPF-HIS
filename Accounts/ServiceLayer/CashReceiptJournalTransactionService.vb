@@ -15,7 +15,7 @@ Namespace ServiceLayer
                 Add(cmd,"@DiscountTaken",model.DiscountTaken) : Add(cmd,"@DiscountAccountIdNo",model.DiscountAccountIdNo) : Add(cmd,"@Applied",model.Applied) : Add(cmd,"@UnApplied",model.UnApplied) : Add(cmd,"@VatAmount",model.VatAmount) : Add(cmd,"@VatNumber",model.VatNumber) : Add(cmd,"@Notes",model.Notes) : Add(cmd,"@Posted",model.Posted) : Add(cmd,"@Approved",model.Approved) : Add(cmd,"@Cancelled",model.Cancelled)
                 Dim p=cmd.Parameters.AddWithValue("@Items",CreateItems(model)) : p.SqlDbType=SqlDbType.Structured : p.TypeName="dbo.JournalItemInsert"
                 p=cmd.Parameters.AddWithValue("@OiItems",CreateOiItems(model)) : p.SqlDbType=SqlDbType.Structured : p.TypeName="dbo.CsrOiItemInsert"
-                cn.Open() : cmd.ExecuteNonQuery()
+                cn.Open() : AATM.DataLayer.AdoNet.AuditContext.Apply(cn) : cmd.ExecuteNonQuery()
             End Using
         End Sub
 
@@ -24,6 +24,7 @@ Namespace ServiceLayer
                 cmd.CommandType=CommandType.StoredProcedure
                 Add(cmd,"@JournalIdNo",journalIdNo)
                 cn.Open()
+                AATM.DataLayer.AdoNet.AuditContext.Apply(cn)
                 cmd.ExecuteNonQuery()
                 'SET NOCOUNT ON makes ExecuteNonQuery return -1 even after a
                 'successful transaction. Return an explicit success value.
@@ -49,7 +50,7 @@ Namespace ServiceLayer
                 Dim p=cmd.Parameters.AddWithValue("@Items",items) : p.SqlDbType=SqlDbType.Structured : p.TypeName="dbo.JournalItemInsert"
                 p=cmd.Parameters.AddWithValue("@OiItems",oi) : p.SqlDbType=SqlDbType.Structured : p.TypeName="dbo.CsrOiItemInsert"
                 Dim id=cmd.Parameters.Add("@JournalIdNo",SqlDbType.Int) : id.Direction=ParameterDirection.Output
-                cn.Open() : cmd.ExecuteNonQuery() : Return Convert.ToInt32(id.Value)
+                cn.Open() : AATM.DataLayer.AdoNet.AuditContext.Apply(cn) : cmd.ExecuteNonQuery() : Return Convert.ToInt32(id.Value)
             End Using
         End Function
         Private Shared Sub Add(c As SqlCommand, n As String, v As Object)

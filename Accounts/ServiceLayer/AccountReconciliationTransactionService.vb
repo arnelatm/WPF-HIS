@@ -19,6 +19,7 @@ Namespace ServiceLayer
                     command.CommandType = CommandType.StoredProcedure
                     command.Parameters.AddWithValue("@ReconciliationIdNo", reconciliationIdNo)
                     connection.Open()
+                    AATM.DataLayer.AdoNet.AuditContext.Apply(connection)
                     command.ExecuteNonQuery()
                     'SET NOCOUNT ON means ExecuteNonQuery may return -1.
                     Return 1
@@ -44,6 +45,7 @@ Namespace ServiceLayer
                     command.CommandType = CommandType.StoredProcedure
                     command.Parameters.AddWithValue("@ReconciliationIdNo", reconciliationIdNo)
                     connection.Open()
+                    AATM.DataLayer.AdoNet.AuditContext.Apply(connection)
                     command.ExecuteNonQuery()
                     Return 1
                 End Using
@@ -65,6 +67,7 @@ Namespace ServiceLayer
                     Dim userParameter = command.Parameters.Add(userParameterName, SqlDbType.NVarChar, 100)
                     userParameter.Value = If(String.IsNullOrWhiteSpace(userName), CObj(DBNull.Value), CObj(userName))
                     connection.Open()
+                    AATM.DataLayer.AdoNet.AuditContext.Apply(connection)
                     command.ExecuteNonQuery()
                     Return 1
                 End Using

@@ -12,7 +12,7 @@ Namespace ServiceLayer
                 Dim p=cmd.Parameters.AddWithValue("@Items",CreateItems(model)) : p.SqlDbType=SqlDbType.Structured : p.TypeName="dbo.JournalItemInsert"
                 p=cmd.Parameters.AddWithValue("@OiItems",CreateOiItems(model)) : p.SqlDbType=SqlDbType.Structured : p.TypeName="dbo.PcOiItemInsert"
                 Dim id=cmd.Parameters.Add("@JournalIdNo",SqlDbType.Int) : id.Direction=ParameterDirection.Output
-                cn.Open() : cmd.ExecuteNonQuery() : Return Convert.ToInt32(id.Value)
+                cn.Open() : AATM.DataLayer.AdoNet.AuditContext.Apply(cn) : cmd.ExecuteNonQuery() : Return Convert.ToInt32(id.Value)
             End Using
         End Function
         Public Sub UpdateExisting(model As DisbursementJournalModel)
@@ -21,12 +21,12 @@ Namespace ServiceLayer
                 cmd.CommandType=CommandType.StoredProcedure : AddModelParameters(cmd,model) : Add(cmd,"@JournalIdNo",model.IdNo)
                 Dim p=cmd.Parameters.AddWithValue("@Items",CreateItems(model)) : p.SqlDbType=SqlDbType.Structured : p.TypeName="dbo.JournalItemInsert"
                 p=cmd.Parameters.AddWithValue("@OiItems",CreateOiItems(model)) : p.SqlDbType=SqlDbType.Structured : p.TypeName="dbo.PcOiItemInsert"
-                cn.Open() : cmd.ExecuteNonQuery()
+                cn.Open() : AATM.DataLayer.AdoNet.AuditContext.Apply(cn) : cmd.ExecuteNonQuery()
             End Using
         End Sub
         Public Function DeleteExisting(idNo As Integer) As Integer
             Using cn As New SqlConnection(GlobalVariables.DacConnectionString), cmd As New SqlCommand("dbo.DeletePcJournalAtomic",cn)
-                cmd.CommandType=CommandType.StoredProcedure : Add(cmd,"@JournalIdNo",idNo) : cn.Open() : cmd.ExecuteNonQuery() : Return 1
+                cmd.CommandType=CommandType.StoredProcedure : Add(cmd,"@JournalIdNo",idNo) : cn.Open() : AATM.DataLayer.AdoNet.AuditContext.Apply(cn) : cmd.ExecuteNonQuery() : Return 1
             End Using
         End Function
         Private Shared Sub AddModelParameters(c As SqlCommand,m As DisbursementJournalModel)

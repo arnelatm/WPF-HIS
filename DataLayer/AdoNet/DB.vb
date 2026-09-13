@@ -1234,6 +1234,7 @@ Namespace AdoNet
                     connection = Factory.CreateConnection()
                     connection.ConnectionString = _connectionString
                     connection.Open()
+                    AuditContext.Apply(connection)
                 Catch ex As Exception
                     '_waitForm.Close()
                     Select Case TryToCatchError(ex)

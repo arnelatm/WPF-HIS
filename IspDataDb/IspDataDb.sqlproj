@@ -102,6 +102,16 @@
     <Build Include="dbo\Tables\ApOpenInvoice.sql" />
     <Build Include="dbo\Triggers\ApOpenInvoice_DeleteGuard.sql" />
     <Build Include="dbo\Triggers\ArOpenInvoice_DeleteGuard.sql" />
+    <Build Include="dbo\Triggers\Account_Audit.sql" />
+    <Build Include="dbo\Triggers\Customer_Audit.sql" />
+    <Build Include="dbo\Triggers\Supplier_Audit.sql" />
+    <Build Include="dbo\Triggers\GeneralJournal_Audit.sql" />
+    <Build Include="dbo\Triggers\ApJournal_Audit.sql" />
+    <Build Include="dbo\Triggers\ArJournal_Audit.sql" />
+    <Build Include="dbo\Triggers\CashReceiptJournal_Audit.sql" />
+    <Build Include="dbo\Triggers\CdJournal_Audit.sql" />
+    <Build Include="dbo\Triggers\SalesJournal_Audit.sql" />
+    <Build Include="dbo\Triggers\ErJournal_Audit.sql" />
     <Build Include="dbo\Tables\CashReceiptJournalItem.sql" />
     <Build Include="dbo\Tables\xxxLoginxxx.sql" />
     <Build Include="dbo\Tables\Account.sql" />
@@ -140,6 +150,8 @@
     <Build Include="dbo\Tables\SalesJournalItem.sql" />
     <Build Include="dbo\Tables\EmployeeDetails.sql" />
     <Build Include="dbo\Tables\ReceiptDetails.sql" />
+    <Build Include="dbo\Tables\AuditEvent.sql" />
+    <Build Include="dbo\Tables\AuditFieldChange.sql" />
     <Build Include="dbo\Views\Account_View.sql" />
     <Build Include="dbo\Views\SalesDeposit_View.sql" />
     <Build Include="dbo\Views\GlLedgers_View.sql" />
@@ -170,6 +182,7 @@
     <Build Include="dbo\Views\SalesJournalItem_View.sql" />
     <Build Include="dbo\Views\CsrOiItem_View.sql" />
     <Build Include="dbo\Views\CsrOiItemCustomer_View.sql" />
+    <Build Include="dbo\Views\AuditHistory_View.sql" />
     <Build Include="Security\Arnel.sql" />
     <Build Include="dbo\Functions\arabic_convert_single.sql" />
     <Build Include="dbo\Functions\convert_handreds.sql" />
@@ -181,6 +194,9 @@
     <Build Include="dbo\Functions\put_zero.sql" />
     <Build Include="dbo\Functions\test_conversion.sql" />
     <Build Include="dbo\Stored Procedures\InsertAccountReconciliationItemTVP.sql" />
+    <Build Include="dbo\Stored Procedures\InsertAuditEvent.sql" />
+    <Build Include="dbo\Stored Procedures\GetAuditHistory.sql" />
+    <Build Include="dbo\Stored Procedures\InsertAuditEventWithSnapshot.sql" />
     <Build Include="dbo\Stored Procedures\UpdateAccountReconciliationItemTVP.sql" />
     <Build Include="dbo\Stored Procedures\InsertApJournalItemTVP.sql" />
     <Build Include="dbo\Stored Procedures\InsertArJournalItemTVP.sql" />

@@ -11,7 +11,7 @@ Namespace ServiceLayer
                 cmd.CommandType=CommandType.StoredProcedure : AddModel(cmd,m)
                 Dim p=cmd.Parameters.AddWithValue("@Items",CreateItems(m)) : p.SqlDbType=SqlDbType.Structured : p.TypeName="dbo.JournalItemInsert"
                 Dim id=cmd.Parameters.Add("@JournalIdNo",SqlDbType.Int) : id.Direction=ParameterDirection.Output
-                cn.Open() : cmd.ExecuteNonQuery() : Return Convert.ToInt32(id.Value)
+                cn.Open() : AATM.DataLayer.AdoNet.AuditContext.Apply(cn) : cmd.ExecuteNonQuery() : Return Convert.ToInt32(id.Value)
             End Using
         End Function
         Public Sub UpdateExisting(m As GeneralJournalModel)
@@ -19,12 +19,12 @@ Namespace ServiceLayer
             Using cn As New SqlConnection(GlobalVariables.DacConnectionString),cmd As New SqlCommand("dbo.UpdateGjJournalAtomic",cn)
                 cmd.CommandType=CommandType.StoredProcedure : AddModel(cmd,m) : Add(cmd,"@JournalIdNo",m.IdNo)
                 Dim p=cmd.Parameters.AddWithValue("@Items",CreateItems(m)) : p.SqlDbType=SqlDbType.Structured : p.TypeName="dbo.JournalItemInsert"
-                cn.Open() : cmd.ExecuteNonQuery()
+                cn.Open() : AATM.DataLayer.AdoNet.AuditContext.Apply(cn) : cmd.ExecuteNonQuery()
             End Using
         End Sub
         Public Function DeleteExisting(idNo As Integer) As Integer
             Using cn As New SqlConnection(GlobalVariables.DacConnectionString),cmd As New SqlCommand("dbo.DeleteGjJournalAtomic",cn)
-                cmd.CommandType=CommandType.StoredProcedure : Add(cmd,"@JournalIdNo",idNo) : cn.Open() : cmd.ExecuteNonQuery() : Return 1
+                cmd.CommandType=CommandType.StoredProcedure : Add(cmd,"@JournalIdNo",idNo) : cn.Open() : AATM.DataLayer.AdoNet.AuditContext.Apply(cn) : cmd.ExecuteNonQuery() : Return 1
             End Using
         End Function
         Private Shared Sub AddModel(c As SqlCommand,m As GeneralJournalModel)

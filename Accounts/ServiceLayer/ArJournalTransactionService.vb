@@ -13,7 +13,7 @@ Namespace ServiceLayer
                 Add(cmd,"@ReferenceNo",Db(model.ReferenceNo)): Add(cmd,"@TransactionType",Db(model.TransactionType)): Add(cmd,"@Amount",model.Amount): Add(cmd,"@AccountIdNo",If(model.AccountIdNo.HasValue,CObj(model.AccountIdNo.Value),CObj(0)))
                 Add(cmd,"@DueDate",Db(model.DueDate)): Add(cmd,"@SettlementDueDate",Db(model.SettlementDueDate)): Add(cmd,"@SettlementDiscount",model.SettlementDiscount): Add(cmd,"@InvoiceNo",model.InvoiceNo): Add(cmd,"@Notes",model.Notes): Add(cmd,"@VatAmount",model.VatAmount): Add(cmd,"@Approved",model.Approved): Add(cmd,"@Posted",model.Posted)
                 Dim tp=cmd.Parameters.AddWithValue("@Items",items): tp.SqlDbType=SqlDbType.Structured: tp.TypeName="dbo.JournalItemInsert"
-                cn.Open(): cmd.ExecuteNonQuery()
+                cn.Open(): AATM.DataLayer.AdoNet.AuditContext.Apply(cn): cmd.ExecuteNonQuery()
             End Using
         End Sub
 
@@ -22,6 +22,7 @@ Namespace ServiceLayer
                 cmd.CommandType=CommandType.StoredProcedure
                 Add(cmd,"@JournalIdNo",idNo)
                 cn.Open()
+                AATM.DataLayer.AdoNet.AuditContext.Apply(cn)
                 cmd.ExecuteNonQuery()
                 Return 1
             End Using
@@ -59,7 +60,7 @@ Namespace ServiceLayer
                 Add(cmd,"@Approved",model.Approved): Add(cmd,"@Posted",model.Posted)
                 Dim tp=cmd.Parameters.AddWithValue("@Items",items): tp.SqlDbType=SqlDbType.Structured: tp.TypeName="dbo.JournalItemInsert"
                 Dim op=cmd.Parameters.Add("@JournalIdNo",SqlDbType.Int): op.Direction=ParameterDirection.Output
-                cn.Open(): cmd.ExecuteNonQuery(): Return Convert.ToInt32(op.Value)
+                cn.Open(): AATM.DataLayer.AdoNet.AuditContext.Apply(cn): cmd.ExecuteNonQuery(): Return Convert.ToInt32(op.Value)
             End Using
         End Function
         Private Shared Function Db(v As Object) As Object

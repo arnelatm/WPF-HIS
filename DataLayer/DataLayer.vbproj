@@ -109,6 +109,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdoNet\BaseDao.vb" />
+    <Compile Include="AdoNet\AuditContext.vb" />
+    <Compile Include="AdoNet\AuditHistoryDao.vb" />
     <Compile Include="AdoNet\DaoFactory.vb" />
     <Compile Include="AdoNet\DataRetriever.vb" />
     <Compile Include="AdoNet\DB.vb" />
