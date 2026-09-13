@@ -80,6 +80,9 @@
   <PropertyGroup>
     <SignManifests>false</SignManifests>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>shell32_303.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <!-- Required at runtime by the WinForms resource deserializer.  Keep a
          direct application reference so MSBuild copies it beside Accounts.exe
@@ -181,6 +184,7 @@
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.Configuration" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Entity.Design" />
@@ -514,6 +518,7 @@
       <DependentUpon>ISPDATADataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Main.vb" />
+    <Compile Include="Security\ProtectedConnectionStringBootstrap.vb" />
     <Compile Include="MainProgram.Designer.vb">
       <DependentUpon>MainProgram.vb</DependentUpon>
     </Compile>
@@ -2956,13 +2961,13 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="app - Copy %282%29.config" />
+    <None Include="app - hidden passwords - ibn-server.config" />
     <None Include="app.config" />
+    <None Include="app.config.before-aatm-test" />
     <None Include="app.orig.config" />
     <None Include="appLive.config" />
     <None Include="app -  ibn-server - Kizen %28local ispadmin2%29.config" />
     <None Include="app - ibn-server.config" />
-    <None Include="app - Copy.config" />
     <None Include="app-LiveData.config" />
     <None Include="app.config.bak" />
     <None Include="app-ispadmin2-backp.config" />
@@ -3232,6 +3237,7 @@
   <ItemGroup>
     <Content Include="Reports\BioTime\Daily Employee Punch Audit Report - Report Registration.sql" />
     <Content Include="Reports\BioTime\Periodic Attendance Report - Report Registration.sql" />
+    <Content Include="shell32_303.ico" />
     <None Include="Resources\Earning.png" />
     <None Include="Resources\Deduction.png" />
   </ItemGroup>
@@ -3240,5 +3246,3 @@
   </Target>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
-    <Reference Include="System.Security" />
-    <Compile Include="Security\ProtectedConnectionStringBootstrap.vb" />
