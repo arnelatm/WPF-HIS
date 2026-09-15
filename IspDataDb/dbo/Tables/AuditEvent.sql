@@ -13,6 +13,11 @@ CREATE TABLE [dbo].[AuditEvent]
     [CorrelationId]     UNIQUEIDENTIFIER NULL,
     [MachineName]       NVARCHAR (128) NULL,
     [ApplicationName]   NVARCHAR (128) NULL,
+    [SqlLoginName]      NVARCHAR (256) CONSTRAINT [DF_AuditEvent_SqlLoginName] DEFAULT (SUSER_SNAME()) NULL,
+    [OriginalLoginName] NVARCHAR (256) CONSTRAINT [DF_AuditEvent_OriginalLoginName] DEFAULT (ORIGINAL_LOGIN()) NULL,
+    [ClientHostName]    NVARCHAR (128) CONSTRAINT [DF_AuditEvent_ClientHostName] DEFAULT (HOST_NAME()) NULL,
+    [ClientApplicationName] NVARCHAR (256) CONSTRAINT [DF_AuditEvent_ClientApplicationName] DEFAULT (APP_NAME()) NULL,
+    [ClientIpAddress]   VARCHAR (48) CONSTRAINT [DF_AuditEvent_ClientIpAddress] DEFAULT (CONVERT(VARCHAR(48), CONNECTIONPROPERTY('client_net_address'))) NULL,
     CONSTRAINT [PK_AuditEvent] PRIMARY KEY CLUSTERED ([AuditEventId] ASC),
     CONSTRAINT [CK_AuditEvent_Action] CHECK ([Action] IN ('Insert', 'Update', 'Delete', 'Post', 'Approve', 'Cancel', 'Close', 'Login', 'Logout', 'Other'))
 );
