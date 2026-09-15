@@ -27,5 +27,11 @@ SET a.Amount = B.Amount,
 	a.Unit = b.Unit
 from EmployeePayElement a INNER JOIN @MParam As b
 on a.IdNo = b.IdNo
+WHERE ISNULL(a.EmployeeIdNo, 0) <> ISNULL(b.EmployeeIdNo, 0)
+   OR ISNULL(a.PayElementIdNo, 0) <> ISNULL(b.PayElementIdNo, 0)
+   OR ISNULL(a.Amount, 0) <> ISNULL(b.Amount, 0)
+   OR ISNULL(a.Rate, 0) <> ISNULL(b.Rate, 0)
+   OR ISNULL(a.[Sequence], 0) <> ISNULL(b.[Sequence], 0)
+   OR ISNULL(a.Unit, '') <> ISNULL(b.Unit, '')
 
 END

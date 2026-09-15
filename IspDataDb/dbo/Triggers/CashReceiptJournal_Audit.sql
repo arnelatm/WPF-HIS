@@ -3,11 +3,13 @@ AFTER INSERT, UPDATE, DELETE AS
 BEGIN
     SET NOCOUNT ON;
     INSERT [dbo].[AuditEvent] ([UserIdNo],[UserNameSnapshot],[Action],[EntityName],[RecordIdNo],[ReferenceNo],[BranchIdNo],[Description],[ApplicationName],[MachineName])
-    SELECT TRY_CONVERT(SMALLINT,SESSION_CONTEXT(N'AuditUserIdNo')),TRY_CONVERT(NVARCHAR(100),SESSION_CONTEXT(N'AuditUserName')),
+    SELECT ac.[UserIdNo],ac.[UserNameSnapshot],
         CASE WHEN i.[IdNo] IS NULL THEN 'Delete' WHEN d.[IdNo] IS NULL THEN 'Insert' WHEN ISNULL(d.[Posted],0)=0 AND ISNULL(i.[Posted],0)=1 THEN 'Post' WHEN ISNULL(d.[Approved],0)=0 AND ISNULL(i.[Approved],0)=1 THEN 'Approve' WHEN ISNULL(d.[Cancelled],0)=0 AND ISNULL(i.[Cancelled],0)=1 THEN 'Cancel' ELSE 'Update' END,
-        'CashReceiptJournal',COALESCE(i.[IdNo],d.[IdNo]),COALESCE(i.[ReferenceNo],d.[ReferenceNo]),TRY_CONVERT(SMALLINT,SESSION_CONTEXT(N'AuditBranchIdNo')),'Cash receipt journal record changed',TRY_CONVERT(NVARCHAR(128),SESSION_CONTEXT(N'AuditApplicationName')),TRY_CONVERT(NVARCHAR(128),SESSION_CONTEXT(N'AuditMachineName'))
-    FROM inserted i FULL OUTER JOIN deleted d ON d.[IdNo]=i.[IdNo];
-    IF (SELECT COUNT(*) FROM inserted) <= 1 AND (SELECT COUNT(*) FROM deleted) <= 1
+        'CashReceiptJournal',COALESCE(i.[IdNo],d.[IdNo]),COALESCE(i.[ReferenceNo],d.[ReferenceNo]),ac.[BranchIdNo],'Cash receipt journal record changed',ac.[ApplicationName],ac.[MachineName]
+    FROM inserted i FULL OUTER JOIN deleted d ON d.[IdNo]=i.[IdNo]
+    CROSS JOIN [dbo].[GetAuditSessionContext]() AS ac;
+    IF (SELECT COUNT(*) FROM inserted) = 1 AND (SELECT COUNT(*) FROM deleted) = 1
+       AND EXISTS (SELECT 1 FROM inserted) AND EXISTS (SELECT 1 FROM deleted)
     BEGIN
         DECLARE @AuditEventId BIGINT = CONVERT(BIGINT, SCOPE_IDENTITY());
         INSERT [dbo].[AuditFieldChange] ([AuditEventId],[FieldName],[OldValue],[NewValue])

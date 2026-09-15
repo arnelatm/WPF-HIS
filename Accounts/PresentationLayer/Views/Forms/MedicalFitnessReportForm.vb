@@ -294,6 +294,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set(value As Integer)
                 txtInvoiceNo.Text = If(value = 0, "", value.ToString())
+                txtInvoiceNo.Modified = False
             End Set
         End Property
 
@@ -882,7 +883,10 @@ Namespace PresentationLayer.Views.Forms
         End Function
 
         Private Sub txtInvoiceNo_Validated(sender As Object, e As EventArgs) Handles txtInvoiceNo.Validated
-            If InvoiceNo <> 0 Then
+            ' Save can cycle focus through this field before reading the form.
+            ' Reload only an edited invoice number, or unsaved entries are lost.
+            If txtInvoiceNo.Modified AndAlso InvoiceNo <> 0 Then
+                txtInvoiceNo.Modified = False
                 RaiseEvent RetrieveRequested()
             End If
         End Sub

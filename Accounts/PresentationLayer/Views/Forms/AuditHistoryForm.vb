@@ -72,6 +72,9 @@ Namespace PresentationLayer.Views.Forms
             _grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect
             _grid.MultiSelect = False
             Controls.Add(_grid)
+            ' Dock Fill must be in front of the top filter panel so it uses
+            ' the remaining area instead of hiding its first rows underneath it.
+            _grid.BringToFront()
         End Sub
 
         Private Sub LoadHistory()

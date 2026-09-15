@@ -33,6 +33,11 @@ SET a.Amount = B.Amount,
 	a.RecurringPayElementIdNo = b.RecurringPayElementIdNo
 from PayrollPayElement a INNER JOIN @MParam1 As b
 on a.IdNo = b.IdNo
+WHERE ISNULL(a.Amount, 0) <> ISNULL(b.Amount, 0)
+   OR ISNULL(a.[Generated], 0) <> ISNULL(b.[Generated], 0)
+   OR ISNULL(a.PayElementIdNo, 0) <> ISNULL(b.PayElementIdNo, 0)
+   OR ISNULL(a.PayrollDetailIdNo, 0) <> ISNULL(b.PayrollDetailIdNo, 0)
+   OR ISNULL(a.RecurringPayElementIdNo, 0) <> ISNULL(b.RecurringPayElementIdNo, 0)
 
 EXEC dbo.InsertPayrollPayElementTVP @MParam2  
 

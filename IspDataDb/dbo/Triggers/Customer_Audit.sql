@@ -7,12 +7,14 @@ BEGIN
 
     INSERT INTO [dbo].[AuditEvent]
     ([UserIdNo], [UserNameSnapshot], [Action], [EntityName], [RecordIdNo], [BranchIdNo], [Description], [ApplicationName], [MachineName])
-    SELECT TRY_CONVERT(SMALLINT, SESSION_CONTEXT(N'AuditUserIdNo')), TRY_CONVERT(NVARCHAR(100), SESSION_CONTEXT(N'AuditUserName')),
+    SELECT ac.[UserIdNo], ac.[UserNameSnapshot],
         CASE WHEN i.[IdNo] IS NULL THEN 'Delete' WHEN d.[IdNo] IS NULL THEN 'Insert' ELSE 'Update' END,
-        'Customer', COALESCE(i.[IdNo], d.[IdNo]), TRY_CONVERT(SMALLINT, SESSION_CONTEXT(N'AuditBranchIdNo')),
-        'Customer record changed', TRY_CONVERT(NVARCHAR(128), SESSION_CONTEXT(N'AuditApplicationName')), TRY_CONVERT(NVARCHAR(128), SESSION_CONTEXT(N'AuditMachineName'))
-    FROM inserted AS i FULL OUTER JOIN deleted AS d ON d.[IdNo] = i.[IdNo];
-    IF (SELECT COUNT(*) FROM inserted) <= 1 AND (SELECT COUNT(*) FROM deleted) <= 1
+        'Customer', COALESCE(i.[IdNo], d.[IdNo]), ac.[BranchIdNo],
+        'Customer record changed', ac.[ApplicationName], ac.[MachineName]
+    FROM inserted AS i FULL OUTER JOIN deleted AS d ON d.[IdNo] = i.[IdNo]
+    CROSS JOIN [dbo].[GetAuditSessionContext]() AS ac;
+    IF (SELECT COUNT(*) FROM inserted) = 1 AND (SELECT COUNT(*) FROM deleted) = 1
+       AND EXISTS (SELECT 1 FROM inserted) AND EXISTS (SELECT 1 FROM deleted)
     BEGIN
         DECLARE @AuditEventId BIGINT = CONVERT(BIGINT, SCOPE_IDENTITY());
         INSERT [dbo].[AuditFieldChange] ([AuditEventId], [FieldName], [OldValue], [NewValue])

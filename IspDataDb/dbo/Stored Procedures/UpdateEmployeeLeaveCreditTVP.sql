@@ -36,5 +36,9 @@ SET a.AccumulatedLeave = B.AccumulatedLeave,
 	a.[Sequence] = B.[Sequence]	
 from EmployeeLeaveCredit a INNER JOIN @MParam As b
 on a.IdNo = b.IdNo
+WHERE EXISTS (SELECT a.AccumulatedLeave, a.Cumulative, a.EmployeeIdNo, a.LeaveAllowed, a.LeaveIdNo,
+                     a.MaxCarryOver, a.MaxLimit, a.NoMaxLimit, a.PaidPercent, a.[Sequence]
+              EXCEPT SELECT b.AccumulatedLeave, b.Cumulative, @GroupIdNo, b.LeaveAllowed, b.LeaveIdNo,
+                     b.MaxCarryOver, b.MaxLimit, b.NoMaxLimit, b.PaidPercent, b.[Sequence])
 
 END

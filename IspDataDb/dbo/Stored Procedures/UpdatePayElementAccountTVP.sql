@@ -29,5 +29,7 @@ SET a.AccountIdNo = B.AccountIdNo,
 	a.Sequence = B.Sequence
 from [dbo].PayElementAccount A INNER JOIN @MParam As B
 	ON A.IDNo = B.IDNo
+WHERE EXISTS (SELECT A.AccountIdNo, A.PayElementIdNo, A.PayGroupIdNo, A.Sequence
+              EXCEPT SELECT B.AccountIdNo, @GroupIdNo, B.PayGroupIdNo, B.Sequence)
 
 END

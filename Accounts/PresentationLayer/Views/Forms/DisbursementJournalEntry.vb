@@ -577,7 +577,8 @@ Namespace PresentationLayer.Views.Forms
             Try
                 SetCheckInfoControlsDisplayed(showCheckInfo)
                 btnAutoApply.Visible = showOpenInvoiceActions AndAlso _editOrAddMode
-                btnViewGL.Visible = showOpenInvoiceActions AndAlso Not _editOrAddMode
+                btnViewGL.Visible = ShouldShowJournalItemsButton()
+                CFlowLayout1.Height = If(btnViewGL.Visible, Math.Max(btnViewGL.Height + 6, 31), 2)
                 DisplayPrintCheckButton(GetDisplayedPayTypeCode())
                 tlpDisbursement.PerformLayout()
             Finally
@@ -642,6 +643,13 @@ Namespace PresentationLayer.Views.Forms
                                  StringComparison.OrdinalIgnoreCase)
         End Function
 
+        Private Function ShouldShowJournalItemsButton() As Boolean
+            Return Not _editOrAddMode AndAlso
+                   String.Equals(GetDisplayedPaymentTypeCode(),
+                                 EnumToCode(PaymentTypeSelection.AccountsPayable),
+                                 StringComparison.OrdinalIgnoreCase)
+        End Function
+
         Private Sub ConditionalControl_VisibleChanged(sender As Object, e As EventArgs) Handles dtpCheckDate.VisibleChanged,
                                                                                               lblCheckDate.VisibleChanged,
                                                                                               lblCheckNumber.VisibleChanged,
@@ -663,7 +671,7 @@ Namespace PresentationLayer.Views.Forms
                                      control Is txtCheckNumber
             If (isCheckInfoControl AndAlso Not ShouldShowCheckInfo()) OrElse
                (control Is btnAutoApply AndAlso (Not ShouldShowOpenInvoiceActions() OrElse Not _editOrAddMode)) OrElse
-               (control Is btnViewGL AndAlso (Not ShouldShowOpenInvoiceActions() OrElse _editOrAddMode)) Then
+               (control Is btnViewGL AndAlso Not ShouldShowJournalItemsButton()) Then
                 UpdateConditionalControlVisibility()
             End If
         End Sub
@@ -895,14 +903,14 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub UpdateViewGLBtnDisplay()
             If DataGridViewJournalItems.Visible Then
-                btnViewGL.Text = Messaging.TranslateCaption("Hide Journal Entry")
+                btnViewGL.Text = Messaging.TranslateCaption("View Applied Invoices")
             Else
-                btnViewGL.Text = Messaging.TranslateCaption("View Journal Entry")
+                btnViewGL.Text = Messaging.TranslateCaption("View Journal Items")
             End If
         End Sub
 
         Private Sub UpdateDataGridDisplay()
-            If OpenInvoiceMode Then
+            If OpenInvoiceMode AndAlso _editOrAddMode Then
                 UpdateOpenInvoiceDisplay()
             Else
                 UpdateJournalItemsDisplay()
@@ -1003,6 +1011,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub AfterSave_Handler() Handles MyBase.AfterSave
             EditingMode = False
             AddingMode = False
+            UpdateDataGridDisplay()
             UpdateActionButtons(False)
         End Sub
 

@@ -112,6 +112,12 @@
     <Build Include="dbo\Triggers\CdJournal_Audit.sql" />
     <Build Include="dbo\Triggers\SalesJournal_Audit.sql" />
     <Build Include="dbo\Triggers\ErJournal_Audit.sql" />
+    <Build Include="dbo\Triggers\Accounting_Audit.sql" />
+    <Build Include="dbo\Triggers\Employee_Audit.sql" />
+    <Build Include="dbo\Triggers\EmployeePayElement_Audit.sql" />
+    <Build Include="dbo\Triggers\EmployeePhone_Audit.sql" />
+		<Build Include="dbo\Triggers\EmployeeDocument_Audit.sql" />
+		<Build Include="dbo\Triggers\EmployeeLeave_Audit.sql" />
     <Build Include="dbo\Tables\CashReceiptJournalItem.sql" />
     <Build Include="dbo\Tables\xxxLoginxxx.sql" />
     <Build Include="dbo\Tables\Account.sql" />
@@ -151,6 +157,7 @@
     <Build Include="dbo\Tables\EmployeeDetails.sql" />
     <Build Include="dbo\Tables\ReceiptDetails.sql" />
     <Build Include="dbo\Tables\AuditEvent.sql" />
+    <Build Include="dbo\Tables\AuditSessionContext.sql" />
     <Build Include="dbo\Tables\AuditFieldChange.sql" />
     <Build Include="dbo\Views\Account_View.sql" />
     <Build Include="dbo\Views\SalesDeposit_View.sql" />
@@ -195,8 +202,10 @@
     <Build Include="dbo\Functions\test_conversion.sql" />
     <Build Include="dbo\Stored Procedures\InsertAccountReconciliationItemTVP.sql" />
     <Build Include="dbo\Stored Procedures\InsertAuditEvent.sql" />
+    <Build Include="dbo\Stored Procedures\SetAuditSessionContext.sql" />
     <Build Include="dbo\Stored Procedures\GetAuditHistory.sql" />
     <Build Include="dbo\Stored Procedures\InsertAuditEventWithSnapshot.sql" />
+    <Build Include="dbo\Functions\GetAuditSessionContext.sql" />
     <Build Include="dbo\Stored Procedures\UpdateAccountReconciliationItemTVP.sql" />
     <Build Include="dbo\Stored Procedures\InsertApJournalItemTVP.sql" />
     <Build Include="dbo\Stored Procedures\InsertArJournalItemTVP.sql" />

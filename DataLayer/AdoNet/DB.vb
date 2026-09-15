@@ -19,6 +19,7 @@ Namespace AdoNet
 
         'Private _exInfo As ExceptionDispatchInfo
         Private _connectionString As String
+        Private _connectionName As String = "ISPDATA"
         Private Shared SecurityConnectionString As String
         Private Shared ReadOnly ProtectedConnectionStrings As New System.Collections.Generic.Dictionary(Of String, String)(StringComparer.OrdinalIgnoreCase)
 
@@ -44,6 +45,7 @@ Namespace AdoNet
             'AddHandler showWaitForm.RunWorkerCompleted, AddressOf showWaitForm_RunWorkerCompletedHandler
 
             If conn Is Nothing Then
+                _connectionName = "ISPDATA"
                 _connectionString = GlobalVariables.DacConnectionString
                 'Dim connectionName As String = "ISPDATA"
                 'ConnectionString = ConfigurationManager.ConnectionStrings(connectionName).ConnectionString
@@ -58,6 +60,7 @@ Namespace AdoNet
                 'End If
                 SecurityConnectionString = GlobalVariables.DacConnectionString
             Else
+                _connectionName = conn
                 'If conn = "TRANSLATIONS" Then
                 '    Debugger.Break()
                 'End If
@@ -93,6 +96,7 @@ Namespace AdoNet
 
         Public Sub SetConnectionString(connectionName As String)
             If connectionName IsNot Nothing Then
+                _connectionName = connectionName
                 If String.Equals(connectionName, "ISPDATA", StringComparison.OrdinalIgnoreCase) Then
                     _connectionString = GlobalVariables.DacConnectionString
                 ElseIf String.Equals(connectionName, "KIZEN", StringComparison.OrdinalIgnoreCase) AndAlso
@@ -1234,7 +1238,9 @@ Namespace AdoNet
                     connection = Factory.CreateConnection()
                     connection.ConnectionString = _connectionString
                     connection.Open()
-                    AuditContext.Apply(connection)
+                    If String.Equals(_connectionName, "ISPDATA", StringComparison.OrdinalIgnoreCase) Then
+                        AuditContext.Apply(connection)
+                    End If
                 Catch ex As Exception
                     '_waitForm.Close()
                     Select Case TryToCatchError(ex)

@@ -33,5 +33,9 @@ SET a.EmployeeIdNo = b.EmployeeIdNo,
 	a.[Sequence] = b.[Sequence]
 from OtWorkHour a INNER JOIN @MParam As b
 on a.IdNo = b.IdNo
+WHERE EXISTS (SELECT a.EmployeeIdNo, a.PayrollIdNo, a.HoursWorked, a.OvertimeHoliday, a.OvertimeRegular,
+                     a.OvertimeSpecial, a.[Sequence]
+              EXCEPT SELECT b.EmployeeIdNo, @GroupIdNo, b.HoursWorked, b.OvertimeHoliday, b.OvertimeRegular,
+                     b.OvertimeSpecial, b.[Sequence])
 
 END

@@ -2,11 +2,11 @@ CREATE VIEW dbo.CdJournalItem_View
 AS
 SELECT        dbo.CdJournalItem.AccountIdNo, dbo.CdJournalItem.Credit, dbo.CdJournalItem.Debit, dbo.CdJournalItem.IdNo, dbo.CdJournalItem.JournalIdNo, dbo.CdJournalItem.Notes, dbo.CdJournalItem.RevCostCenterIdNo, 
                          dbo.CdJournalItem.Sequence, dbo.Account.AccountName, dbo.CdJournalItem.Debit - dbo.CdJournalItem.Credit AS OriginalAmount, dbo.Account.PayeeType, dbo.Account.SpecialAccount, 0 AS OpenInvoiceIdNo, 0 AS PaidAmount, 
-                         dbo.ApOpenInvoice.PaidAmount AS Expr1, dbo.ApOpenInvoice.DiscountTaken, dbo.CdJournalItem.PayIdNo
+                         dbo.ApOpenInvoice_View.PaidAmount AS Expr1, dbo.ApOpenInvoice_View.DiscountTaken, dbo.CdJournalItem.PayIdNo
 FROM            dbo.CdJournal LEFT OUTER JOIN
                          dbo.CdJournalItem ON dbo.CdJournal.IdNo = dbo.CdJournalItem.JournalIdNo LEFT OUTER JOIN
                          dbo.Account ON dbo.CdJournalItem.AccountIdNo = dbo.Account.IdNo LEFT OUTER JOIN
-                         dbo.ApOpenInvoice ON dbo.CdJournalItem.JournalIdNo = dbo.ApOpenInvoice.JournalItemIdNo
+                         dbo.ApOpenInvoice_View ON dbo.CdJournalItem.JournalIdNo = dbo.ApOpenInvoice_View.JournalItemIdNo
 
 GO
 

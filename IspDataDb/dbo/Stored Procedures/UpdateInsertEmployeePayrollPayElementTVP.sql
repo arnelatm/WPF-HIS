@@ -27,6 +27,8 @@ SET a.Amount = B.Amount,
 	a.RecurringPayElementIdNo = b.RecurringPayElementIdNo
 from PayrollPayElement a INNER JOIN @MParam1 As b
 on a.IdNo = b.IdNo
+WHERE EXISTS (SELECT a.Amount, a.[Generated], a.PayElementIdNo, a.PayrollDetailIdNo, a.RecurringPayElementIdNo
+              EXCEPT SELECT b.Amount, b.[Generated], b.PayElementIdNo, b.PayrollDetailIdNo, b.RecurringPayElementIdNo)
 
 INSERT  INTO PayrollPayElement ( Amount, [Generated], PayElementIdNo, PayrollDetailIdNo, RecurringPayElementIdNo )
         SELECT  Amount, [Generated], PayElementIdNo, PayrollDetailIdNo, RecurringPayElementIdNo

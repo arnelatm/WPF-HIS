@@ -13,11 +13,16 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-    DECLARE @ContextUserIdNo SMALLINT = TRY_CONVERT(SMALLINT, SESSION_CONTEXT(N'AuditUserIdNo'));
-    DECLARE @ContextUserName NVARCHAR(100) = TRY_CONVERT(NVARCHAR(100), SESSION_CONTEXT(N'AuditUserName'));
-    DECLARE @ContextBranchIdNo SMALLINT = TRY_CONVERT(SMALLINT, SESSION_CONTEXT(N'AuditBranchIdNo'));
-    DECLARE @ContextMachineName NVARCHAR(128) = TRY_CONVERT(NVARCHAR(128), SESSION_CONTEXT(N'AuditMachineName'));
-    DECLARE @ContextApplicationName NVARCHAR(128) = TRY_CONVERT(NVARCHAR(128), SESSION_CONTEXT(N'AuditApplicationName'));
+    DECLARE @ContextUserIdNo SMALLINT;
+    DECLARE @ContextUserName NVARCHAR(100);
+    DECLARE @ContextBranchIdNo SMALLINT;
+    DECLARE @ContextMachineName NVARCHAR(128);
+    DECLARE @ContextApplicationName NVARCHAR(128);
+
+    SELECT @ContextUserIdNo = [UserIdNo], @ContextUserName = [UserNameSnapshot],
+        @ContextBranchIdNo = [BranchIdNo], @ContextMachineName = [MachineName],
+        @ContextApplicationName = [ApplicationName]
+    FROM [dbo].[GetAuditSessionContext]();
 
     INSERT INTO [dbo].[AuditEvent]
     (

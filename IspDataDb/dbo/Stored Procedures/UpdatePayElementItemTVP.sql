@@ -21,5 +21,7 @@ SET a.FactorType = B.FactorType,
 	a.Sequence = B.Sequence
 from [dbo].PayElementItem A INNER JOIN @MParam As B
 	ON A.IDNo = B.IDNo
+WHERE EXISTS (SELECT A.FactorType, A.FactorValue, A.ParentIdNo, A.PayElementIdNo, A.Sequence
+              EXCEPT SELECT B.FactorType, B.FactorValue, @GroupIdNo, B.PayElementIdNo, B.Sequence)
 
 END

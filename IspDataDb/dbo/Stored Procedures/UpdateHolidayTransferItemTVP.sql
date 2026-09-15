@@ -27,5 +27,7 @@ SET a.EmployeeIdNo = B.EmployeeIdNo,
 	a.HolidayTransferIdNo = @GroupIdNo
 from HolidayTransferItem a INNER JOIN @MParam As b
 on a.IdNo = b.IdNo
+WHERE EXISTS (SELECT a.EmployeeIdNo, a.HolidayTransferIdNo
+              EXCEPT SELECT b.EmployeeIdNo, @GroupIdNo)
 
 END

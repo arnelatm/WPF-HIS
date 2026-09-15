@@ -28,5 +28,9 @@ SET a.EmployerShare = B.EmployerShare,
 	a.[Sequence] = B.[Sequence]
 from PensionRate a INNER JOIN @MParam As b
 on a.IdNo = b.IdNo
+WHERE EXISTS (SELECT a.EmployerShare, a.EmployeeShare, a.HighRange, a.LowRange, a.MaxAmount,
+                     a.PensionSchemeIdNo, a.[Sequence]
+              EXCEPT SELECT b.EmployerShare, b.EmployeeShare, b.HighRange, b.LowRange, b.MaxAmount,
+                     @GroupIdNo, b.[Sequence])
 
 END

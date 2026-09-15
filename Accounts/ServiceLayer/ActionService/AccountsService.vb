@@ -154,7 +154,10 @@ Namespace ServiceLayer.ActionService
         End Function
 
         Public Function GetSupplierOpenInvoices(Of TM)(idNo As Integer) As List(Of TM) Implements IServiceAccounts.GetSupplierOpenInvoices
-            Dim records = DataDao.GetSupplierOpenInvoices(idNo)
+            ' DjOiItemDao exposes the shared IDaoOiItem operation as GetOpenInvoices.
+            ' Calling GetSupplierOpenInvoices here is a late-bound DAO call and fails
+            ' at runtime because that member does not exist on DjOiItemDao.
+            Dim records = DataDao.GetOpenInvoices(idNo)
             Dim model As New List(Of TM)
             GlobalVariables.Mapper.Map(records, model)
             Return model

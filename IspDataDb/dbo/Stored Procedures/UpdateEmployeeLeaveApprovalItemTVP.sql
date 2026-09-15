@@ -31,5 +31,7 @@ Set a.ApprovalNote = b.ApprovalNote,
 	a.Status = b.Status
 from EmployeeLeaveApprovalItem a INNER JOIN @MParam As b
 on a.IdNo = b.IdNo
+WHERE EXISTS (SELECT a.ApprovalNote, a.EmployeeLeaveApprovalIdNo, a.EmployeeLeaveIdNo, a.Status
+              EXCEPT SELECT b.ApprovalNote, b.EmployeeLeaveApprovalIdNo, b.EmployeeLeaveIdNo, b.Status)
 
 END
