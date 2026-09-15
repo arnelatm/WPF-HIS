@@ -16,6 +16,22 @@ BEGIN
      THROW 51111, 'Cash receipt detail lines contain invalid debit/credit values.', 1;
  IF @TransactionDate >= '20260101' AND ABS((SELECT COALESCE(SUM(Debit),0) FROM @Items)-(SELECT COALESCE(SUM(Credit),0) FROM @Items)) > 0.00005
      THROW 51112, 'Cash receipt debits and credits are not balanced.', 1;
+ IF @TransactionDate >= '20260101' AND ABS(COALESCE(@Applied,0)+COALESCE(@UnApplied,0)-COALESCE(@Amount,0)) > 0.00005
+     THROW 51113, 'Cash receipt applied and unapplied amounts do not equal the receipt amount.', 1;
+ IF @TransactionDate >= '20260101' AND @PayorType='A' AND ABS((SELECT COALESCE(SUM(Amount),0) FROM @OiItems)-COALESCE(@Applied,0)) > 0.00005
+     THROW 51114, 'Cash receipt allocations do not equal the applied amount.', 1;
+ IF @TransactionDate >= '20260101' AND EXISTS (SELECT 1 FROM @OiItems WHERE COALESCE(Amount,0)=0 AND COALESCE(DiscountTaken,0)=0)
+     THROW 51115, 'Cash receipt contains a zero-value invoice allocation.', 1;
+ IF @TransactionDate >= '20260101' AND @PayorType='A' AND EXISTS (
+     SELECT 1 FROM @OiItems i LEFT JOIN dbo.ArOpenInvoice_View v ON v.IdNo=i.ArOpenInvoiceIdNo
+     WHERE v.IdNo IS NULL OR v.CustomerIdNo IS NULL OR @PayorIdNo IS NULL OR v.CustomerIdNo<>@PayorIdNo)
+     THROW 51116, 'Cash receipt allocation does not belong to the selected customer.', 1;
+ IF @TransactionDate >= '20260101' AND NULLIF(LTRIM(RTRIM(@ReferenceNo)), '') IS NOT NULL AND EXISTS (
+     SELECT 1 FROM dbo.CashReceiptJournal r
+     WHERE r.TransactionDate=@TransactionDate AND ISNULL(r.ReferenceNo,'')=ISNULL(@ReferenceNo,'')
+       AND r.PayorType=@PayorType AND ISNULL(r.PayorIdNo,0)=ISNULL(@PayorIdNo,0)
+       AND r.Amount=@Amount AND r.Cancelled=0)
+     THROW 51117, 'A matching cash receipt already exists.', 1;
  BEGIN TRAN;
  BEGIN TRY
   INSERT dbo.CashReceiptJournal(TransactionDate,ReferenceNo,Amount,AccountIdNo,PayorType,PayorIdNo,Payorname,CheckNumber,CheckDate,ORNumber,DiscountTaken,DiscountAccountIdNo,Applied,UnApplied,VatAmount,VatNumber,Notes,Posted,Approved,Cancelled)

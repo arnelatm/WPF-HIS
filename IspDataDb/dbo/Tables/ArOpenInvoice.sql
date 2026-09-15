@@ -5,7 +5,8 @@
     [JournalItemIdNo] INT      NOT NULL,
     [DiscountTaken]   MONEY    CONSTRAINT [DF_ArOpenInvoice_DiscountTaken] DEFAULT ((0)) NOT NULL,
     [PaidAmount]      MONEY    CONSTRAINT [DF_ArOpenInvoice_PaidAmount] DEFAULT ((0)) NOT NULL,
-    CONSTRAINT [PK_ArOpenInvoice] PRIMARY KEY CLUSTERED ([IdNo] ASC)
+    CONSTRAINT [PK_ArOpenInvoice] PRIMARY KEY CLUSTERED ([IdNo] ASC),
+    CONSTRAINT [UQ_ArOpenInvoice_Source] UNIQUE ([JournalCode], [JournalIdNo], [JournalItemIdNo])
 );
 
 
