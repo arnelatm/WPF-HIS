@@ -578,8 +578,12 @@ Namespace PresentationLayer.Views.Forms
                 SetCheckInfoControlsDisplayed(showCheckInfo)
                 btnAutoApply.Visible = showOpenInvoiceActions AndAlso _editOrAddMode
                 btnViewGL.Visible = ShouldShowJournalItemsButton()
-                CFlowLayout1.Height = If(btnViewGL.Visible, Math.Max(btnViewGL.Height + 6, 31), 2)
                 DisplayPrintCheckButton(GetDisplayedPayTypeCode())
+                Dim hasVisibleActionButton = btnViewGL.Visible OrElse
+                                             btnAutoApply.Visible OrElse
+                                             btnPrintCheck.Visible OrElse
+                                             btnPrintPcReplenishment.Visible
+                CFlowLayout1.Height = If(hasVisibleActionButton, 31, 2)
                 tlpDisbursement.PerformLayout()
             Finally
                 _updatingConditionalControlVisibility = False

@@ -75,7 +75,19 @@ Namespace Accounts.PresentationLayer.Views.Forms
         Private Sub btnOk_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
             'BeginningDate = dateRange.BeginningDate
             'EndingDate = dateRange.EndingDate
-            RaiseEvent PrintButtonClicked()
+            If Not btnOk.Enabled Then
+                Return
+            End If
+
+            ' Crystal loads and refreshes the report synchronously.  Prevent a
+            ' second click from starting another report load while that work is
+            ' in progress.
+            btnOk.Enabled = False
+            Try
+                RaiseEvent PrintButtonClicked()
+            Finally
+                btnOk.Enabled = True
+            End Try
         End Sub
 
         Private Sub CButton2_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnCancel.ClickButtonArea

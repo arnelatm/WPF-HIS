@@ -12,6 +12,7 @@ Public Class CrViewer
     Public Event OkButtonClicked()
 
     Private ReadOnly _myCeLocale As CeLocale
+    Private _reportDisposed As Boolean
 
     Public Sub New() 'Optional ByVal ceLocal As CeLocale = CeLocale.ceLocaleEnglish)
 
@@ -157,6 +158,21 @@ Public Class CrViewer
 
     Private Sub CButton1_Click(sender As Object, e As EventArgs) Handles btnQuit.Click
         Close()
+    End Sub
+
+    Private Sub CrViewer_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+        If _reportDisposed Then
+            Return
+        End If
+
+        _reportDisposed = True
+        Try
+            CrystalReportViewer1.ReportSource = Nothing
+        Catch
+        End Try
+        If ReportPrinter IsNot Nothing Then
+            ReportPrinter.DisposeReport()
+        End If
     End Sub
 
 End Class

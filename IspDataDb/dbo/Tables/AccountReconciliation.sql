@@ -15,10 +15,6 @@
 );
 
 GO
-CREATE UNIQUE NONCLUSTERED INDEX [UX_AccountReconciliation_AccountDate]
-    ON [dbo].[AccountReconciliation] ([AccountIdNo] ASC, [ReconciliationDate] ASC);
-
-GO
 CREATE UNIQUE NONCLUSTERED INDEX [UX_AccountReconciliation_AccountDraft]
     ON [dbo].[AccountReconciliation] ([AccountIdNo] ASC)
     WHERE [Status] = 'Draft';

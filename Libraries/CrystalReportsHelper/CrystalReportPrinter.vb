@@ -413,6 +413,23 @@ Public Class CrystalReportPrinter
         Return _report
     End Function
 
+    Public Sub DisposeReport()
+        If _report Is Nothing Then
+            Return
+        End If
+
+        Try
+            _report.Close()
+        Catch
+        Finally
+            Try
+                _report.Dispose()
+            Catch
+            End Try
+            _report = Nothing
+        End Try
+    End Sub
+
     Public Function SetPaperOrientation(paperOrientation As Int16) As CrystalDecisions.Shared.PaperOrientation
         Dim po As CrystalDecisions.Shared.PaperOrientation
         If paperOrientation = 1 Then

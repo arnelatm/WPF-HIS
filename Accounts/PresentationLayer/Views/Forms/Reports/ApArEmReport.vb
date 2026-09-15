@@ -90,7 +90,19 @@ Namespace PresentationLayer.Views.Forms.Reports
         Public Property NoDates As Boolean Implements IApArEmReportView.NoDates
 
         Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
-            RaiseEvent PrintButtonClicked()
+            If Not btnOk.Enabled Then
+                Return
+            End If
+
+            ' Crystal loads and refreshes the report synchronously.  Prevent a
+            ' second click from starting another report load while that work is
+            ' in progress.
+            btnOk.Enabled = False
+            Try
+                RaiseEvent PrintButtonClicked()
+            Finally
+                btnOk.Enabled = True
+            End Try
         End Sub
 
         Private Sub CButton2_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnCancel.ClickButtonArea

@@ -2137,13 +2137,16 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
             Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
             Me.CFlowLayout1.Controls.Add(Me.btnViewGL)
+            Me.CFlowLayout1.Controls.Add(Me.btnAutoApply)
+            Me.CFlowLayout1.Controls.Add(Me.btnPrintCheck)
+            Me.CFlowLayout1.Controls.Add(Me.btnPrintPcReplenishment)
             Me.CFlowLayout1.Controls.Add(Me.txtTotalCredits)
             Me.CFlowLayout1.Controls.Add(Me.txtTotalDebits)
             Me.CFlowLayout1.Dock = System.Windows.Forms.DockStyle.Bottom
             Me.CFlowLayout1.Location = New System.Drawing.Point(0, 685)
             Me.CFlowLayout1.Name = "CFlowLayout1"
             Me.CFlowLayout1.PreserveLanguageLayout = False
-            Me.CFlowLayout1.Size = New System.Drawing.Size(1203, 2)
+            Me.CFlowLayout1.Size = New System.Drawing.Size(1203, 31)
             Me.CFlowLayout1.TabIndex = 6
             '
             'txtTotalCredits
@@ -2227,18 +2230,12 @@ Namespace PresentationLayer.Views.Forms
             Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile
             Me.ClientSize = New System.Drawing.Size(1203, 687)
             Me.Controls.Add(Me.CFlowLayout1)
-            Me.Controls.Add(Me.btnPrintPcReplenishment)
-            Me.Controls.Add(Me.btnAutoApply)
             Me.Controls.Add(Me.tlpDisbursement)
-            Me.Controls.Add(Me.btnPrintCheck)
             Me.DefaultFormBackColor = System.Drawing.Color.Transparent
             Me.MinimumSize = New System.Drawing.Size(753, 707)
             Me.Name = "DisbursementJournalEntry"
             Me.Text = "Petty Cash Journal "
-            Me.Controls.SetChildIndex(Me.btnPrintCheck, 0)
             Me.Controls.SetChildIndex(Me.tlpDisbursement, 0)
-            Me.Controls.SetChildIndex(Me.btnAutoApply, 0)
-            Me.Controls.SetChildIndex(Me.btnPrintPcReplenishment, 0)
             Me.Controls.SetChildIndex(Me.CFlowLayout1, 0)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             Me.tlpDisbursement.ResumeLayout(False)

@@ -788,7 +788,6 @@
     <Build Include="Security\db_ddladmin for Arnel.sql" />
     <Build Include="Security\db_owner for Arnel.sql" />
     <Build Include="Security\db_securityadmin for Arnel.sql" />
-    <Build Include="Security\iGroupAdmin.sql" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="Snapshots\IspDataDb_IBN-SERVER_20260816.dacpac">
