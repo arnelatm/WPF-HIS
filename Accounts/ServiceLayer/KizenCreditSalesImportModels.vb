@@ -15,6 +15,9 @@ Namespace ServiceLayer
         Public Property SourceDetailCount As Integer
         Public Property SourceAmount As Decimal
         Public Property SourceVatAmount As Decimal
+        Public Property SkippedNoZatcaSummaryCount As Integer
+        Public Property SkippedIncompleteSummaryCount As Integer
+        Public Property SkippedAlreadyImportedSummaryCount As Integer
         Public ReadOnly Property Companies As List(Of KizenCreditSalesCompany)
         Public Property ReferenceNo As String
 
@@ -31,9 +34,16 @@ Namespace ServiceLayer
         End Sub
 
         Public Property BatchSequence As Integer
+        Public Property InsuranceInvoiceId As Integer
         Public Property CompanyCode As String
         Public Property CompanyName As String
         Public Property ZatcaNumber As String
+        Public Property SupplyPeriodStart As DateTime
+        Public Property SupplyPeriodEnd As DateTime
+        Public Property TransactionDate As DateTime
+        Public Property InvoiceDate As DateTime
+        Public Property SourceInvoiceCount As Integer
+        Public Property SourceDetailCount As Integer
         Public Property CustomerIdNo As Integer
         Public Property AccountIdNo As Integer
         Public Property DueDate As DateTime

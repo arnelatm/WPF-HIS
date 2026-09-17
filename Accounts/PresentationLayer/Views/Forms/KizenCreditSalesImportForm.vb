@@ -62,6 +62,7 @@ Namespace PresentationLayer.Views.Forms
             _grid.Columns.Add(New DataGridViewTextBoxColumn With {.HeaderText = "Company code", .DataPropertyName = "CompanyCode"})
             _grid.Columns.Add(New DataGridViewTextBoxColumn With {.HeaderText = "Company", .DataPropertyName = "CompanyName"})
             _grid.Columns.Add(New DataGridViewTextBoxColumn With {.HeaderText = "Invoice number", .DataPropertyName = "ZatcaNumber"})
+            _grid.Columns.Add(New DataGridViewTextBoxColumn With {.HeaderText = "Supply period", .DataPropertyName = "SupplyPeriod"})
             _grid.Columns.Add(New DataGridViewTextBoxColumn With {.HeaderText = "AR amount", .DataPropertyName = "Amount", .DefaultCellStyle = New DataGridViewCellStyle With {.Format = "N2"}})
             _grid.Columns.Add(New DataGridViewTextBoxColumn With {.HeaderText = "VAT", .DataPropertyName = "VatAmount", .DefaultCellStyle = New DataGridViewCellStyle With {.Format = "N2"}})
             _grid.Columns.Add(New DataGridViewTextBoxColumn With {.HeaderText = "Lines", .DataPropertyName = "ItemCount"})
@@ -70,7 +71,7 @@ Namespace PresentationLayer.Views.Forms
             _status.Height = 52
             _status.Padding = New Padding(8)
             _status.TextAlign = ContentAlignment.MiddleLeft
-            _status.Text = "Preview the selected complete calendar month before posting."
+            _status.Text = "Preview completed Kizen summaries whose supply period ends in the selected month before posting."
 
             Controls.Add(_grid)
             Controls.Add(_status)
@@ -92,13 +93,15 @@ Namespace PresentationLayer.Views.Forms
                     .CompanyCode = c.CompanyCode,
                     .CompanyName = c.CompanyName,
                     .ZatcaNumber = c.ZatcaNumber,
+                    .SupplyPeriod = String.Format("{0:dd/MM/yyyy} - {1:dd/MM/yyyy}", c.SupplyPeriodStart, c.SupplyPeriodEnd),
                     .Amount = c.Amount,
                     .VatAmount = c.VatAmount,
                     .ItemCount = c.Items.Count
                 }).ToList()
                 _post.Enabled = True
-                _status.Text = String.Format("{0:N0} source invoices / {1:N0} detail rows; {2} AR journals; total AR {3:N2}. One GL series reference will be allocated when posted.",
-                                             _batch.SourceInvoiceCount, _batch.SourceDetailCount, _batch.JournalCount, _batch.SourceAmount)
+                _status.Text = String.Format("{0:N0} source invoices / {1:N0} detail rows; {2} AR journals; total AR {3:N2}; skipped: {4} without ZATCA, {5} incomplete, {6} already imported. One GL series reference will be allocated when posted.",
+                                             _batch.SourceInvoiceCount, _batch.SourceDetailCount, _batch.JournalCount, _batch.SourceAmount,
+                                             _batch.SkippedNoZatcaSummaryCount, _batch.SkippedIncompleteSummaryCount, _batch.SkippedAlreadyImportedSummaryCount)
             Catch ex As Exception
                 _batch = Nothing
                 _grid.DataSource = Nothing

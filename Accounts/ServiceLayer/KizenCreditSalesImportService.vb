@@ -10,7 +10,6 @@ Namespace ServiceLayer
     Public Class KizenCreditSalesImportService
         Private Const ArAccountCode As String = "112"
         Private Const OutputVatAccountCode As String = "232"
-        Private Const VatExemptionAccountCode As String = "233"
         Private Const VatableRevenueAccountCode As String = "403"
         Private Const VatExemptRevenueAccountCode As String = "408"
         Private Const SaudiRevenueAccountCode As String = "491"
@@ -18,29 +17,40 @@ Namespace ServiceLayer
         Private Const UnknownCostCenterCode As String = "999"
 
         Private Shared ReadOnly SourceSql As String =
-            "SELECT v.InvoiceNo, v.InvoiceDate, v.CompanyCode, v.CompanyName, v.DrCode, " &
-            "v.AmountBeforeVat, v.NetAmount, v.VatableAmountSA, v.VatableAmountNS, " &
-            "v.VatValue, v.VatExemption, v.VatExemptAmt, invoice.ENumber AS ZatcaNumber " &
-            "FROM dbo.InvoicesCredit_View v " &
-            "OUTER APPLY (" &
-            "SELECT TOP (1) ii.ENumber " &
+            "SELECT ii.ID AS InsuranceInvoiceID, ic.Code AS CompanyCode, ic.LatinName AS CompanyName, " &
+            "ii.ENumber AS ZatcaNumber, CONVERT(date, ii.SupplyPeriodStartDate) AS SupplyPeriodStart, " &
+            "CONVERT(date, ii.SupplyPeriodEndDate) AS SupplyPeriodEnd, " &
+            "CONVERT(date, COALESCE(ii.InvoiceIssueDate, ii.SupplyPeriodEndDate)) AS TransactionDate, " &
+            "CONVERT(date, ii.InvoiceIssueDate) AS InvoiceDate, " &
+            "ii.TotalInsuranceCarryWithoutVAT AS ExpectedAmountBeforeVat, " &
+            "ii.TotalInsuranceCarryFromAmountIncludeVAT AS ExpectedVatableAmount, " &
+            "ii.TotalInsuranceCarryFromAmountNotIncludeVAT AS ExpectedVatExemptAmount, " &
+            "ii.TotalInsuranceVATValue AS ExpectedVatAmount, " &
+            "ii.TotalInsuranceCarryWithVAT AS ExpectedAmount, " &
+            "ii.VatPer AS ExpectedVatRate, " &
+            "v.InvoiceNo, v.InvoiceDetailId, v.DrCode, v.AmountBeforeVat, " &
+            "v.VatableAmountSA, v.VatableAmountNS, v.VatExemptAmt " &
             "FROM dbo.InsuranceInvoice ii " &
             "INNER JOIN dbo.Insurance_Company ic ON ic.ID = ii.InsuranceCompanyID " &
-            "WHERE ic.Code = v.CompanyCode " &
-            "AND ii.SupplyPeriodEndDate >= DATEADD(day, -1, @EndDate) " &
-            "AND ii.SupplyPeriodEndDate < @EndDate " &
-            "ORDER BY ii.ID DESC" &
-            ") invoice " &
-            "WHERE v.InvoiceDate >= @StartDate AND v.InvoiceDate < @EndDate " &
+            "LEFT JOIN dbo.InvoicesCredit_View v ON v.CompanyCode = ic.Code " &
             "AND v.IsInsurance = 1 " &
-            "AND NULLIF(LTRIM(RTRIM(v.CompanyCode)), '') IS NOT NULL " &
-            "ORDER BY v.CompanyCode, v.InvoiceNo"
+            "AND v.InvoiceDate >= CONVERT(date, ii.SupplyPeriodStartDate) " &
+            "AND v.InvoiceDate < DATEADD(day, 1, CONVERT(date, ii.SupplyPeriodEndDate)) " &
+            "WHERE ii.SupplyPeriodEndDate IS NOT NULL " &
+            "AND CONVERT(date, ii.SupplyPeriodEndDate) >= @StartDate " &
+            "AND CONVERT(date, ii.SupplyPeriodEndDate) < @EndDate " &
+            "ORDER BY ii.ID, v.InvoiceNo, v.InvoiceDetailId"
 
         Public Function LoadBatch(sourcePeriodStart As DateTime, sourcePeriodEnd As DateTime) As KizenCreditSalesBatch
             ValidateMonth(sourcePeriodStart, sourcePeriodEnd)
             Dim batch As New KizenCreditSalesBatch(sourcePeriodStart.Date, sourcePeriodEnd.Date)
-            Dim workByCompany As New Dictionary(Of String, CompanyWork)(StringComparer.OrdinalIgnoreCase)
-            Dim invoiceNumbers As New HashSet(Of String)(StringComparer.OrdinalIgnoreCase)
+            Dim importedSummaryIds = LoadImportedInsuranceInvoiceIds()
+            Dim workBySummary As New Dictionary(Of Integer, CompanyWork)()
+            Dim detailOwners As New Dictionary(Of Integer, Integer)()
+            Dim zatcaOwners As New Dictionary(Of String, Integer)(StringComparer.OrdinalIgnoreCase)
+            Dim skippedNoZatcaSummaryIds As New HashSet(Of Integer)()
+            Dim skippedIncompleteSummaryIds As New HashSet(Of Integer)()
+            Dim skippedAlreadyImportedSummaryIds As New HashSet(Of Integer)()
 
             Using cn As New SqlConnection(New Db("KIZEN").GetConnectionString()), cmd As New SqlCommand(SourceSql, cn)
                 cmd.CommandType = CommandType.Text
@@ -50,47 +60,102 @@ Namespace ServiceLayer
                 cn.Open()
                 Using reader = cmd.ExecuteReader()
                     While reader.Read()
-                        batch.SourceDetailCount += 1
-                        Dim invoiceNo = ReadText(reader, "InvoiceNo")
-                        If Not String.IsNullOrWhiteSpace(invoiceNo) Then invoiceNumbers.Add(invoiceNo)
+                        Dim insuranceInvoiceId = ReadInt(reader, "InsuranceInvoiceID")
+                        If importedSummaryIds.Contains(insuranceInvoiceId) Then
+                            skippedAlreadyImportedSummaryIds.Add(insuranceInvoiceId)
+                            Continue While
+                        End If
+
+                        Dim supplyPeriodStart = ReadDate(reader, "SupplyPeriodStart")
+                        Dim supplyPeriodEnd = ReadDate(reader, "SupplyPeriodEnd")
+                        If supplyPeriodStart = DateTime.MinValue OrElse supplyPeriodEnd = DateTime.MinValue OrElse supplyPeriodStart > supplyPeriodEnd Then
+                            Throw New InvalidOperationException(String.Format("Kizen InsuranceInvoice {0} has an invalid supply period.", insuranceInvoiceId))
+                        End If
+                        If supplyPeriodEnd.Date > DateTime.Today Then
+                            skippedIncompleteSummaryIds.Add(insuranceInvoiceId)
+                            Continue While
+                        End If
 
                         Dim companyCode = ReadText(reader, "CompanyCode").Trim()
                         Dim zatcaNumber = ReadText(reader, "ZatcaNumber").Trim()
+                        If String.IsNullOrWhiteSpace(zatcaNumber) Then
+                            skippedNoZatcaSummaryIds.Add(insuranceInvoiceId)
+                            Continue While
+                        End If
+
                         Dim work As CompanyWork = Nothing
-                        If Not workByCompany.TryGetValue(companyCode, work) Then
+                        If Not workBySummary.TryGetValue(insuranceInvoiceId, work) Then
                             work = New CompanyWork With {
+                                .InsuranceInvoiceId = insuranceInvoiceId,
                                 .CompanyCode = companyCode,
                                 .CompanyName = ReadText(reader, "CompanyName"),
-                                .ZatcaNumber = zatcaNumber
+                                .ZatcaNumber = zatcaNumber,
+                                .SupplyPeriodStart = supplyPeriodStart,
+                                .SupplyPeriodEnd = supplyPeriodEnd,
+                                .TransactionDate = ReadDate(reader, "TransactionDate"),
+                                .InvoiceDate = ReadDate(reader, "InvoiceDate"),
+                                .ExpectedAmountBeforeVat = ReadNullableDecimal(reader, "ExpectedAmountBeforeVat"),
+                                .ExpectedVatableAmount = ReadNullableDecimal(reader, "ExpectedVatableAmount"),
+                                .ExpectedVatExemptAmount = ReadNullableDecimal(reader, "ExpectedVatExemptAmount"),
+                                .ExpectedVatAmount = ReadNullableDecimal(reader, "ExpectedVatAmount"),
+                                .ExpectedAmount = ReadNullableDecimal(reader, "ExpectedAmount"),
+                                .ExpectedVatRate = ReadNullableDecimal(reader, "ExpectedVatRate")
                             }
-                            workByCompany.Add(companyCode, work)
-                        End If
+                            If work.TransactionDate = DateTime.MinValue Then work.TransactionDate = supplyPeriodEnd
+                            If work.InvoiceDate = DateTime.MinValue Then work.InvoiceDate = work.TransactionDate
+                            workBySummary.Add(insuranceInvoiceId, work)
 
-                        If Not String.IsNullOrWhiteSpace(zatcaNumber) Then
-                            If Not String.IsNullOrWhiteSpace(work.ZatcaNumber) AndAlso
-                               Not String.Equals(work.ZatcaNumber, zatcaNumber, StringComparison.OrdinalIgnoreCase) Then
-                                Throw New InvalidOperationException(String.Format("Kizen company {0} has more than one ZATCA number in dbo.InsuranceInvoice.ENumber ({1} and {2}).", companyCode, work.ZatcaNumber, zatcaNumber))
+                            Dim existingZatcaOwner As Integer = 0
+                            If zatcaOwners.TryGetValue(zatcaNumber, existingZatcaOwner) AndAlso existingZatcaOwner <> insuranceInvoiceId Then
+                                Throw New InvalidOperationException(String.Format("ZATCA number {0} is assigned to multiple Kizen InsuranceInvoice records ({1} and {2}).", zatcaNumber, existingZatcaOwner, insuranceInvoiceId))
                             End If
-                            work.ZatcaNumber = zatcaNumber
+                            zatcaOwners(zatcaNumber) = insuranceInvoiceId
                         End If
 
-                        work.Amount += ReadDecimal(reader, "NetAmount")
-                        work.VatAmount += ReadDecimal(reader, "VatValue")
+                        Dim detailId = ReadInt(reader, "InvoiceDetailId")
+                        If detailId <= 0 Then Continue While
+                        Dim existingDetailOwner As Integer = 0
+                        If detailOwners.TryGetValue(detailId, existingDetailOwner) Then
+                            Throw New InvalidOperationException(String.Format("A1 invoice detail {0} is assigned to more than one Kizen InsuranceInvoice ({1} and {2}). The source periods overlap and cannot be imported safely.", detailId, existingDetailOwner, insuranceInvoiceId))
+                        End If
+                        detailOwners.Add(detailId, insuranceInvoiceId)
+
+                        batch.SourceDetailCount += 1
+                        Dim invoiceNo = ReadText(reader, "InvoiceNo")
+                        If Not String.IsNullOrWhiteSpace(invoiceNo) Then work.InvoiceNumbers.Add(invoiceNo)
+
+                        work.DetailCount += 1
+                        work.AmountBeforeVat += ReadDecimal(reader, "AmountBeforeVat")
+                        work.VatableAmount += ReadDecimal(reader, "VatableAmountNS")
+                        work.VatExemptAmount += ReadDecimal(reader, "VatableAmountSA")
+                        work.VatExemptAmount += ReadDecimal(reader, "VatExemptAmt")
                         work.Add("NS", ReadText(reader, "DrCode"), ReadDecimal(reader, "VatableAmountNS"))
                         work.Add("SA", ReadText(reader, "DrCode"), ReadDecimal(reader, "VatableAmountSA"))
                         work.Add("EX", ReadText(reader, "DrCode"), ReadDecimal(reader, "VatExemptAmt"))
-                        work.Add("VAT", DefaultCostCenterCode, ReadDecimal(reader, "VatValue"))
-                        work.Add("EXVAT", DefaultCostCenterCode, ReadDecimal(reader, "VatExemption"))
-                        batch.SourceAmount += ReadDecimal(reader, "NetAmount")
-                        batch.SourceVatAmount += ReadDecimal(reader, "VatValue")
                     End While
                 End Using
             End Using
 
-            batch.SourceInvoiceCount = invoiceNumbers.Count
+            batch.SkippedNoZatcaSummaryCount = skippedNoZatcaSummaryIds.Count
+            batch.SkippedIncompleteSummaryCount = skippedIncompleteSummaryIds.Count
+            batch.SkippedAlreadyImportedSummaryCount = skippedAlreadyImportedSummaryIds.Count
+
+            For Each work In workBySummary.Values
+                If work.DetailCount = 0 Then
+                    Throw New InvalidOperationException(String.Format("Kizen InsuranceInvoice {0} ({1}) has a ZATCA number but no matching A1 invoice details in its full supply period.", work.InsuranceInvoiceId, work.ZatcaNumber))
+                End If
+                ValidateSummaryTotals(work)
+                work.Amount = RoundMoney(work.ExpectedAmount.Value)
+                work.VatAmount = RoundMoney(work.ExpectedVatAmount.Value)
+                work.Add("VAT", DefaultCostCenterCode, work.VatAmount)
+                batch.SourceAmount += work.Amount
+                batch.SourceVatAmount += work.VatAmount
+                batch.SourceInvoiceCount += work.InvoiceNumbers.Count
+            Next
+
             batch.SourceAmount = RoundMoney(batch.SourceAmount)
             batch.SourceVatAmount = RoundMoney(batch.SourceVatAmount)
-            If workByCompany.Count = 0 Then Throw New InvalidOperationException("No insured credit sales were found for the selected month.")
+            If workBySummary.Count = 0 Then Throw New InvalidOperationException("No completed, ZATCA-posted insured credit-sales summaries were found for the selected month.")
 
             Dim accountIds = LoadAccountIds()
             Dim customerIds = LoadCustomerIds()
@@ -99,11 +164,11 @@ Namespace ServiceLayer
             Dim unknownCostCenterId = RequireCostCenter(costCenterIds, UnknownCostCenterCode)
 
             Dim batchSequence As Integer = 0
-            For Each work In SortedCompanies(workByCompany)
+            For Each work In SortedCompanies(workBySummary)
                 work.Amount = RoundMoney(work.Amount)
                 work.VatAmount = RoundMoney(work.VatAmount)
                 If work.Amount < 0D Then
-                    Throw New InvalidOperationException(String.Format("Kizen company {0} has a negative net AR amount ({1:N2}). Resolve the source returns before importing.", work.CompanyCode, work.Amount))
+                    Throw New InvalidOperationException(String.Format("Kizen InsuranceInvoice {0} for company {1} has a negative net AR amount ({2:N2}). Resolve the source returns before importing.", work.InsuranceInvoiceId, work.CompanyCode, work.Amount))
                 End If
 
                 Dim customer As KizenCustomerMapping = Nothing
@@ -119,12 +184,19 @@ Namespace ServiceLayer
 
                 Dim company As New KizenCreditSalesCompany With {
                     .BatchSequence = batchSequence + 1,
+                    .InsuranceInvoiceId = work.InsuranceInvoiceId,
                     .CompanyCode = work.CompanyCode,
                     .CompanyName = work.CompanyName,
                     .ZatcaNumber = work.ZatcaNumber,
+                    .SupplyPeriodStart = work.SupplyPeriodStart,
+                    .SupplyPeriodEnd = work.SupplyPeriodEnd,
+                    .TransactionDate = work.TransactionDate,
+                    .InvoiceDate = work.InvoiceDate,
+                    .SourceInvoiceCount = work.InvoiceNumbers.Count,
+                    .SourceDetailCount = work.DetailCount,
                     .CustomerIdNo = customer.CustomerIdNo,
                     .AccountIdNo = accountIds(ArAccountCode),
-                    .DueDate = batch.SourcePeriodEnd.AddDays(customer.PaymentDueDays),
+                    .DueDate = work.TransactionDate.AddDays(customer.PaymentDueDays),
                     .Amount = work.Amount,
                     .VatAmount = work.VatAmount
                 }
@@ -134,12 +206,11 @@ Namespace ServiceLayer
                 For Each bucket In work.Buckets.Values
                     Dim amount = RoundMoney(bucket.Amount)
                     If amount < 0D Then
-                        Throw New InvalidOperationException(String.Format("Kizen company {0} has a negative posting amount for {1} ({2:N2}). Resolve the source returns before importing.", work.CompanyCode, bucket.Category, amount))
+                        Throw New InvalidOperationException(String.Format("Kizen InsuranceInvoice {0} for company {1} has a negative posting amount for {2} ({3:N2}). Resolve the source returns before importing.", work.InsuranceInvoiceId, work.CompanyCode, bucket.Category, amount))
                     End If
                     If amount = 0D Then Continue For
 
-                    Dim costCenterId = If(String.Equals(bucket.Category, "VAT", StringComparison.OrdinalIgnoreCase) OrElse
-                                          String.Equals(bucket.Category, "EXVAT", StringComparison.OrdinalIgnoreCase),
+                    Dim costCenterId = If(String.Equals(bucket.Category, "VAT", StringComparison.OrdinalIgnoreCase),
                                           defaultCostCenterId,
                                           ResolveCostCenter(costCenterIds, bucket.CostCenterCode, unknownCostCenterId, work.CompanyCode))
                     Select Case bucket.Category
@@ -151,15 +222,13 @@ Namespace ServiceLayer
                             AddItem(company, accountIds(VatExemptRevenueAccountCode), 0D, amount, costCenterId, "VAT exempt - " & bucket.CostCenterCode)
                         Case "VAT"
                             AddItem(company, accountIds(OutputVatAccountCode), 0D, amount, defaultCostCenterId, "Output VAT")
-                        Case "EXVAT"
-                            AddItem(company, accountIds(VatExemptionAccountCode), amount, 0D, defaultCostCenterId, "Saudi VAT exemption")
                     End Select
                 Next
 
                 Dim debitTotal = RoundMoney(SumDebit(company.Items))
                 Dim creditTotal = RoundMoney(SumCredit(company.Items))
                 If Math.Abs(debitTotal - creditTotal) > 0.005D Then
-                    Throw New InvalidOperationException(String.Format("Kizen company {0} is out of balance by {1:N2} after two-decimal posting conversion.", work.CompanyCode, debitTotal - creditTotal))
+                    Throw New InvalidOperationException(String.Format("Kizen InsuranceInvoice {0} for company {1} is out of balance by {2:N2} after two-decimal posting conversion.", work.InsuranceInvoiceId, work.CompanyCode, debitTotal - creditTotal))
                 End If
                 If company.Items.Count > 0 AndAlso (debitTotal <> 0D OrElse creditTotal <> 0D) Then batch.Companies.Add(company)
             Next
@@ -220,9 +289,18 @@ Namespace ServiceLayer
             table.Columns.Add("InvoiceNo", GetType(String))
             table.Columns.Add("InvoiceDate", GetType(DateTime))
             table.Columns.Add("Notes", GetType(String))
+            table.Columns.Add("InsuranceInvoiceID", GetType(Integer))
+            table.Columns.Add("CompanyCode", GetType(String))
+            table.Columns.Add("SupplyPeriodStart", GetType(DateTime))
+            table.Columns.Add("SupplyPeriodEnd", GetType(DateTime))
+            table.Columns.Add("SourceInvoiceCount", GetType(Integer))
+            table.Columns.Add("SourceDetailCount", GetType(Integer))
+            table.Columns.Add("TransactionDate", GetType(DateTime))
             For Each company In batch.Companies
                 table.Rows.Add(company.BatchSequence, company.CustomerIdNo, company.AccountIdNo, company.DueDate, company.Amount, company.VatAmount,
-                               company.ZatcaNumber, batch.SourcePeriodEnd, "Credit Sales batch " & batch.SourcePeriodStart.ToString("yyyy-MM") & " - " & company.CompanyCode)
+                               company.ZatcaNumber, company.InvoiceDate, "Credit Sales batch " & batch.SourcePeriodStart.ToString("yyyy-MM") & " - " & company.CompanyCode,
+                               company.InsuranceInvoiceId, company.CompanyCode, company.SupplyPeriodStart, company.SupplyPeriodEnd,
+                               company.SourceInvoiceCount, company.SourceDetailCount, company.TransactionDate)
             Next
             Return table
         End Function
@@ -258,7 +336,7 @@ Namespace ServiceLayer
 
         Private Shared Function LoadAccountIds() As Dictionary(Of String, Integer)
             Dim result As New Dictionary(Of String, Integer)(StringComparer.OrdinalIgnoreCase)
-            Using cn As New SqlConnection(GlobalVariables.DacConnectionString), cmd As New SqlCommand("SELECT IdNo, AccountCode FROM dbo.Account WHERE AccountCode IN ('112','232','233','403','408','491')", cn)
+            Using cn As New SqlConnection(GlobalVariables.DacConnectionString), cmd As New SqlCommand("SELECT IdNo, AccountCode FROM dbo.Account WHERE AccountCode IN ('112','232','403','408','491')", cn)
                 cn.Open()
                 Using reader = cmd.ExecuteReader()
                     While reader.Read()
@@ -266,7 +344,7 @@ Namespace ServiceLayer
                     End While
                 End Using
             End Using
-            For Each code In {ArAccountCode, OutputVatAccountCode, VatExemptionAccountCode, VatableRevenueAccountCode, VatExemptRevenueAccountCode, SaudiRevenueAccountCode}
+            For Each code In {ArAccountCode, OutputVatAccountCode, VatableRevenueAccountCode, VatExemptRevenueAccountCode, SaudiRevenueAccountCode}
                 If Not result.ContainsKey(code) Then Throw New InvalidOperationException("ISPData account mapping is missing for account code " & code & ".")
             Next
             Return result
@@ -317,11 +395,59 @@ Namespace ServiceLayer
             Return result
         End Function
 
-        Private Shared Function SortedCompanies(values As Dictionary(Of String, CompanyWork)) As List(Of CompanyWork)
-            Dim result = New List(Of CompanyWork)(values.Values)
-            result.Sort(Function(left, right) StringComparer.OrdinalIgnoreCase.Compare(left.CompanyCode, right.CompanyCode))
+        Private Shared Function LoadImportedInsuranceInvoiceIds() As HashSet(Of Integer)
+            Dim result As New HashSet(Of Integer)()
+            Using cn As New SqlConnection(GlobalVariables.DacConnectionString), cmd As New SqlCommand("SELECT InsuranceInvoiceID FROM dbo.KizenArImportInvoice", cn)
+                cn.Open()
+                Using reader = cmd.ExecuteReader()
+                    While reader.Read()
+                        result.Add(Convert.ToInt32(reader("InsuranceInvoiceID")))
+                    End While
+                End Using
+            End Using
             Return result
         End Function
+
+        Private Shared Function SortedCompanies(values As Dictionary(Of Integer, CompanyWork)) As List(Of CompanyWork)
+            Dim result = New List(Of CompanyWork)(values.Values)
+            result.Sort(Function(left, right)
+                            Dim comparison = DateTime.Compare(left.TransactionDate, right.TransactionDate)
+                            If comparison <> 0 Then Return comparison
+                            comparison = StringComparer.OrdinalIgnoreCase.Compare(left.CompanyCode, right.CompanyCode)
+                            If comparison <> 0 Then Return comparison
+                            Return left.InsuranceInvoiceId.CompareTo(right.InsuranceInvoiceId)
+                        End Function)
+            Return result
+        End Function
+
+        Private Shared Sub ValidateSummaryTotals(work As CompanyWork)
+            AssertSummaryTotal(work, "TotalInsuranceCarryWithoutVAT", work.ExpectedAmountBeforeVat, work.AmountBeforeVat)
+            AssertSummaryTotal(work, "TotalInsuranceCarryFromAmountIncludeVAT", work.ExpectedVatableAmount, work.VatableAmount)
+            AssertSummaryTotal(work, "TotalInsuranceCarryFromAmountNotIncludeVAT", work.ExpectedVatExemptAmount, work.VatExemptAmount)
+            If Not work.ExpectedVatRate.HasValue Then
+                Throw New InvalidOperationException(String.Format("Kizen InsuranceInvoice {0} ({1}) has no VAT rate.", work.InsuranceInvoiceId, work.ZatcaNumber))
+            End If
+            Dim calculatedVat = RoundMoney(work.VatableAmount * work.ExpectedVatRate.Value / 100D)
+            AssertSummaryTotal(work, "TotalInsuranceVATValue", work.ExpectedVatAmount, calculatedVat)
+            Dim classifiedBase = RoundMoney(work.VatableAmount + work.VatExemptAmount)
+            If Math.Abs(RoundMoney(work.AmountBeforeVat) - classifiedBase) > 0.01D Then
+                Throw New InvalidOperationException(String.Format("Kizen InsuranceInvoice {0} ({1}) classifications total {2:N2}, but the detail base total is {3:N2}.", work.InsuranceInvoiceId, work.ZatcaNumber, classifiedBase, work.AmountBeforeVat))
+            End If
+            If work.ExpectedVatAmount.HasValue Then
+                Dim calculatedAmount = RoundMoney(work.AmountBeforeVat + work.ExpectedVatAmount.Value)
+                AssertSummaryTotal(work, "TotalInsuranceCarryWithVAT", work.ExpectedAmount, calculatedAmount)
+            End If
+        End Sub
+
+        Private Shared Sub AssertSummaryTotal(work As CompanyWork, fieldName As String, expected As Nullable(Of Decimal), actual As Decimal)
+            If Not expected.HasValue Then
+                Throw New InvalidOperationException(String.Format("Kizen InsuranceInvoice {0} ({1}) has no value in {2}.", work.InsuranceInvoiceId, work.ZatcaNumber, fieldName))
+            End If
+            Dim difference = RoundMoney(actual) - RoundMoney(expected.Value)
+            If Math.Abs(difference) > 0.01D Then
+                Throw New InvalidOperationException(String.Format("Kizen InsuranceInvoice {0} ({1}) does not reconcile for {2}: summary {3:N2}, A1 details {4:N2}.", work.InsuranceInvoiceId, work.ZatcaNumber, fieldName, expected.Value, actual))
+            End If
+        End Sub
 
         Private Shared Sub ValidateMonth(sourcePeriodStart As DateTime, sourcePeriodEnd As DateTime)
             If sourcePeriodStart.Day <> 1 OrElse sourcePeriodEnd.Date <> sourcePeriodStart.Date.AddMonths(1).AddDays(-1) Then
@@ -337,6 +463,22 @@ Namespace ServiceLayer
         Private Shared Function ReadDecimal(reader As SqlDataReader, columnName As String) As Decimal
             Dim value = reader(columnName)
             Return If(value Is DBNull.Value, 0D, Convert.ToDecimal(value))
+        End Function
+
+        Private Shared Function ReadNullableDecimal(reader As SqlDataReader, columnName As String) As Nullable(Of Decimal)
+            Dim value = reader(columnName)
+            If value Is DBNull.Value Then Return Nothing
+            Return Convert.ToDecimal(value)
+        End Function
+
+        Private Shared Function ReadInt(reader As SqlDataReader, columnName As String) As Integer
+            Dim value = reader(columnName)
+            Return If(value Is DBNull.Value, 0, Convert.ToInt32(value))
+        End Function
+
+        Private Shared Function ReadDate(reader As SqlDataReader, columnName As String) As DateTime
+            Dim value = reader(columnName)
+            Return If(value Is DBNull.Value, DateTime.MinValue, Convert.ToDateTime(value).Date)
         End Function
 
         Private Shared Function RoundMoney(value As Decimal) As Decimal
@@ -369,11 +511,27 @@ Namespace ServiceLayer
         End Sub
 
         Private Class CompanyWork
+            Public Property InsuranceInvoiceId As Integer
             Public Property CompanyCode As String
             Public Property CompanyName As String
             Public Property ZatcaNumber As String
+            Public Property SupplyPeriodStart As DateTime
+            Public Property SupplyPeriodEnd As DateTime
+            Public Property TransactionDate As DateTime
+            Public Property InvoiceDate As DateTime
+            Public Property ExpectedAmountBeforeVat As Nullable(Of Decimal)
+            Public Property ExpectedVatableAmount As Nullable(Of Decimal)
+            Public Property ExpectedVatExemptAmount As Nullable(Of Decimal)
+            Public Property ExpectedVatAmount As Nullable(Of Decimal)
+            Public Property ExpectedAmount As Nullable(Of Decimal)
+            Public Property ExpectedVatRate As Nullable(Of Decimal)
+            Public Property AmountBeforeVat As Decimal
+            Public Property VatableAmount As Decimal
+            Public Property VatExemptAmount As Decimal
             Public Property Amount As Decimal
             Public Property VatAmount As Decimal
+            Public Property DetailCount As Integer
+            Public ReadOnly Property InvoiceNumbers As New HashSet(Of String)(StringComparer.OrdinalIgnoreCase)
             Public ReadOnly Property Buckets As New Dictionary(Of String, AmountBucket)(StringComparer.OrdinalIgnoreCase)
 
             Public Sub Add(category As String, costCenterCode As String, amount As Decimal)
