@@ -24,8 +24,10 @@ BEGIN
         THROW 51203, 'The Kizen batch contains no customer journals.', 1;
     IF NOT EXISTS (SELECT 1 FROM @Items)
         THROW 51204, 'The Kizen batch contains no journal detail.', 1;
-    IF EXISTS (SELECT 1 FROM @Headers WHERE BatchSequence <= 0 OR Amount < 0 OR VatAmount < 0)
+    IF EXISTS (SELECT 1 FROM @Headers WHERE BatchSequence <= 0 OR InsuranceInvoiceID <= 0 OR Amount < 0 OR VatAmount < 0)
         THROW 51205, 'Kizen journal headers contain invalid values.', 1;
+    IF EXISTS (SELECT InsuranceInvoiceID FROM @Headers GROUP BY InsuranceInvoiceID HAVING COUNT(*) <> 1)
+        THROW 51217, 'Each Kizen InsuranceInvoice must be posted at most once in a batch.', 1;
     IF EXISTS (SELECT 1 FROM @Headers h LEFT JOIN [dbo].[Customer] c ON c.IdNo = h.CustomerIdNo WHERE c.IdNo IS NULL)
         THROW 51213, 'A Kizen insurance company is not mapped to an ISPData customer.', 1;
     IF EXISTS (SELECT 1 FROM @Headers h LEFT JOIN [dbo].[Account] a ON a.IdNo = h.AccountIdNo WHERE a.IdNo IS NULL)
@@ -61,10 +63,11 @@ BEGIN
         IF EXISTS
         (
             SELECT 1
-            FROM [dbo].[KizenArImportRun] WITH (UPDLOCK, HOLDLOCK)
-            WHERE SourcePeriodStart = @SourcePeriodStart AND SourcePeriodEnd = @SourcePeriodEnd
+            FROM @Headers h
+            INNER JOIN [dbo].[KizenArImportInvoice] i WITH (UPDLOCK, HOLDLOCK)
+                ON i.InsuranceInvoiceID = h.InsuranceInvoiceID
         )
-            THROW 51211, 'This Kizen month has already been imported. Review the existing import before retrying.', 1;
+            THROW 51211, 'One or more Kizen InsuranceInvoice records have already been imported. Refresh the preview before retrying.', 1;
 
         SELECT @seriesValue = Value, @prefix = Prefix, @maxLength = MaxLength
         FROM [dbo].[Series] WITH (UPDLOCK, HOLDLOCK)
@@ -87,13 +90,17 @@ BEGIN
         SET @ReferenceNo = @prefix + RIGHT(REPLICATE('0', @maxLength) + CONVERT(VARCHAR (20), @seriesValue), @maxLength);
 
         DECLARE @batchSequence INT, @customerIdNo INT, @accountIdNo INT, @dueDate DATE, @amount MONEY, @vatAmount MONEY,
-                @invoiceNo VARCHAR (15), @invoiceDate DATE, @notes NVARCHAR (300), @journalIdNo INT;
+                @invoiceNo VARCHAR (15), @invoiceDate DATE, @notes NVARCHAR (300), @journalIdNo INT,
+                @insuranceInvoiceID INT, @companyCode NVARCHAR (100), @supplyPeriodStart DATE, @supplyPeriodEnd DATE,
+                @headerSourceInvoiceCount INT, @headerSourceDetailCount INT, @transactionDate DATE;
         DECLARE headerCursor CURSOR LOCAL FAST_FORWARD FOR
-            SELECT BatchSequence, CustomerIdNo, AccountIdNo, DueDate, Amount, VatAmount, InvoiceNo, InvoiceDate, Notes
+            SELECT BatchSequence, CustomerIdNo, AccountIdNo, DueDate, Amount, VatAmount, InvoiceNo, InvoiceDate, Notes,
+                   InsuranceInvoiceID, CompanyCode, SupplyPeriodStart, SupplyPeriodEnd, SourceInvoiceCount, SourceDetailCount, TransactionDate
             FROM @Headers ORDER BY BatchSequence;
 
         OPEN headerCursor;
-        FETCH NEXT FROM headerCursor INTO @batchSequence, @customerIdNo, @accountIdNo, @dueDate, @amount, @vatAmount, @invoiceNo, @invoiceDate, @notes;
+        FETCH NEXT FROM headerCursor INTO @batchSequence, @customerIdNo, @accountIdNo, @dueDate, @amount, @vatAmount, @invoiceNo, @invoiceDate, @notes,
+                                          @insuranceInvoiceID, @companyCode, @supplyPeriodStart, @supplyPeriodEnd, @headerSourceInvoiceCount, @headerSourceDetailCount, @transactionDate;
         WHILE @@FETCH_STATUS = 0
         BEGIN
             INSERT [dbo].[ArJournal]
@@ -104,7 +111,7 @@ BEGIN
             )
             VALUES
             (
-                @customerIdNo, @SourcePeriodEnd, @ReferenceNo, 'I', @amount, @accountIdNo,
+                @customerIdNo, @transactionDate, @ReferenceNo, 'I', @amount, @accountIdNo,
                 @dueDate, NULL, NULL, @invoiceNo, @invoiceDate, @notes, @vatAmount, 0, 0, 0
             );
             SET @journalIdNo = CONVERT(INT, SCOPE_IDENTITY());
@@ -117,7 +124,20 @@ BEGIN
             FROM [dbo].[ArJournalItem] i
             INNER JOIN [dbo].[Account] a ON a.IdNo = i.AccountIdNo
             WHERE i.JournalIdNo = @journalIdNo AND a.SpecialAccount = 'AR';
-            FETCH NEXT FROM headerCursor INTO @batchSequence, @customerIdNo, @accountIdNo, @dueDate, @amount, @vatAmount, @invoiceNo, @invoiceDate, @notes;
+            INSERT [dbo].[KizenArImportInvoice]
+            (
+                InsuranceInvoiceID, JournalIdNo, ReferenceNo, CompanyCode, ZatcaNumber,
+                SupplyPeriodStart, SupplyPeriodEnd, SourceInvoiceCount, SourceDetailCount,
+                SourceAmount, SourceVatAmount, CreatedBy
+            )
+            VALUES
+            (
+                @insuranceInvoiceID, @journalIdNo, @ReferenceNo, @companyCode, @invoiceNo,
+                @supplyPeriodStart, @supplyPeriodEnd, @headerSourceInvoiceCount, @headerSourceDetailCount,
+                @amount, @vatAmount, @CreatedBy
+            );
+            FETCH NEXT FROM headerCursor INTO @batchSequence, @customerIdNo, @accountIdNo, @dueDate, @amount, @vatAmount, @invoiceNo, @invoiceDate, @notes,
+                                              @insuranceInvoiceID, @companyCode, @supplyPeriodStart, @supplyPeriodEnd, @headerSourceInvoiceCount, @headerSourceDetailCount, @transactionDate;
         END;
         CLOSE headerCursor;
         DEALLOCATE headerCursor;

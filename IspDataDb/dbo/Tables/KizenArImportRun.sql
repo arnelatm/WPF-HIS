@@ -9,6 +9,5 @@ CREATE TABLE [dbo].[KizenArImportRun] (
     [SourceAmount]       MONEY          NOT NULL,
     [CreatedBy]          NVARCHAR (128) NULL,
     [DateCreated]        DATETIME       CONSTRAINT [DF_KizenArImportRun_DateCreated] DEFAULT (getdate()) NOT NULL,
-    CONSTRAINT [PK_KizenArImportRun] PRIMARY KEY CLUSTERED ([IdNo] ASC),
-    CONSTRAINT [UQ_KizenArImportRun_Period] UNIQUE ([SourcePeriodStart], [SourcePeriodEnd])
+    CONSTRAINT [PK_KizenArImportRun] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
