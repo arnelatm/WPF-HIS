@@ -99,6 +99,7 @@
     <Build Include="dbo\Tables\Bank.sql" />
     <Build Include="dbo\Tables\Religion.sql" />
     <Build Include="dbo\Tables\Series.sql" />
+    <Build Include="dbo\Tables\KizenArImportRun.sql" />
     <Build Include="dbo\Tables\ApOpenInvoice.sql" />
     <Build Include="dbo\Triggers\ApOpenInvoice_DeleteGuard.sql" />
     <Build Include="dbo\Triggers\ArOpenInvoice_DeleteGuard.sql" />
@@ -231,6 +232,7 @@
     <Build Include="dbo\Stored Procedures\UpdateApJournalAtomic.sql" />
     <Build Include="dbo\Stored Procedures\DeleteApJournalAtomic.sql" />
     <Build Include="dbo\Stored Procedures\SaveArJournalAtomic.sql" />
+    <Build Include="dbo\Stored Procedures\ImportKizenCreditSalesAtomic.sql" />
     <Build Include="dbo\Stored Procedures\UpdateArJournalAtomic.sql" />
     <Build Include="dbo\Stored Procedures\DeleteArJournalAtomic.sql" />
     <Build Include="dbo\Stored Procedures\SaveCdJournalAtomic.sql" />
@@ -273,6 +275,8 @@
     <Build Include="dbo\User Defined Types\EmployeeLoanJournalItemInsert.sql" />
     <Build Include="dbo\User Defined Types\EmployeeLoanJournalItemUpdate.sql" />
     <Build Include="dbo\User Defined Types\JournalItemInsert.sql" />
+    <Build Include="dbo\User Defined Types\KizenArJournalHeaderInsert.sql" />
+    <Build Include="dbo\User Defined Types\KizenArJournalItemInsert.sql" />
     <Build Include="dbo\User Defined Types\JournalItemUpdate.sql" />
     <Build Include="dbo\User Defined Types\AccountReconciliationItemInsert.sql" />
     <Build Include="dbo\User Defined Types\AccountReconciliationItemUpdate.sql" />

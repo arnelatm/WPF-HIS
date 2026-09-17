@@ -250,6 +250,12 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of ArJournalEntry, ArJournalPresenter(Of ArJournalModel))()
         End Sub
 
+        Private Sub KizenCreditSalesImportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemKizenCreditSalesImport.Click
+            Using form As New KizenCreditSalesImportForm()
+                form.ShowDialog(Me)
+            End Using
+        End Sub
+
         Private Shared Sub ApplyNumberFormatSettings(settings As AppSettings)
             If settings Is Nothing Then Return
             GlobalVariables.DefaultCurrencyFormatInfo.CurrencyDecimalDigits = settings.MonetaryDecimalPlaces
