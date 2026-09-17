@@ -66,6 +66,10 @@
 
 ## WinForms and report changes
 
+### Journal scope
+
+- When a task refers to “all journals” or “journal entries,” include GeneralJournal, ApJournal, ArJournal, ErJournal, CashReceiptJournal, CdJournal, SalesJournal, PurchaseJournal, and PcJournal, including their header and detail-entry forms where applicable.
+
 - Old-style VB projects explicitly list source files. When adding a `.vb` file, ensure its `<Compile Include>` is present in the correct `.vbproj`. SDK-style projects are the exception.
 - A WinForms class usually has `.vb`, `.Designer.vb`, and `.resx` files with `DependentUpon` metadata. Preserve partial-class names, inheritance, component disposal, resource keys, and project nesting. Avoid broad reformatting of generated designer or resource files.
 - Prefer changing behavioral code in the non-designer partial class. If a layout/control change requires editing designer code, make the smallest possible edit and verify that the form still opens in the Visual Studio designer.

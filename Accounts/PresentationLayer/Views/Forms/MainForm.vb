@@ -79,6 +79,7 @@ Namespace PresentationLayer.Views.Forms
         Private ReadOnly _cashFlowMenuItem As New ToolStripMenuItem()
         Private ReadOnly _generalAccountPositionMenuItem As New ToolStripMenuItem()
         Private ReadOnly _auditHistoryMenuItem As New ToolStripMenuItem()
+        Private _auditHistoryForm As AuditHistoryForm
 
         'Private ReadOnly _presenterObj
 
@@ -168,6 +169,7 @@ Namespace PresentationLayer.Views.Forms
                     RaiseEvent UserLoggedIn(Me, allControls)
                     DisableLogin()
                 Else
+                    CloseAuditHistory()
                     GlobalVariables.IsUserLoggedIn = False
                     GlobalSubs.HideAndDisableMenuItems(AccountsMenu)
                     EnableLogin()
@@ -687,12 +689,33 @@ Namespace PresentationLayer.Views.Forms
             AddHandler _auditHistoryMenuItem.Click,
                 Sub()
                     If GlobalVariables.IsUserLoggedIn Then
-                        Using form As New AuditHistoryForm()
-                            form.ShowDialog(Me)
-                        End Using
+                        ShowAuditHistory()
                     End If
                 End Sub
             ToolStripMenuItemUtilities.DropDownItems.Add(_auditHistoryMenuItem)
+        End Sub
+
+        Private Sub ShowAuditHistory()
+            If _auditHistoryForm Is Nothing OrElse _auditHistoryForm.IsDisposed Then
+                _auditHistoryForm = New AuditHistoryForm()
+                AddHandler _auditHistoryForm.FormClosed,
+                    Sub(sender As Object, e As FormClosedEventArgs)
+                        _auditHistoryForm = Nothing
+                    End Sub
+                _auditHistoryForm.Show(Me)
+            Else
+                If _auditHistoryForm.WindowState = FormWindowState.Minimized Then
+                    _auditHistoryForm.WindowState = FormWindowState.Normal
+                End If
+                _auditHistoryForm.Activate()
+            End If
+        End Sub
+
+        Private Sub CloseAuditHistory()
+            If _auditHistoryForm IsNot Nothing AndAlso Not _auditHistoryForm.IsDisposed Then
+                _auditHistoryForm.Close()
+            End If
+            _auditHistoryForm = Nothing
         End Sub
 
         Private Sub ApplyAuditHistoryMenuAccess()

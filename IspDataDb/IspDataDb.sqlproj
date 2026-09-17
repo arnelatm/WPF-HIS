@@ -111,9 +111,12 @@
     <Build Include="dbo\Triggers\ArJournal_Audit.sql" />
     <Build Include="dbo\Triggers\CashReceiptJournal_Audit.sql" />
     <Build Include="dbo\Triggers\CdJournal_Audit.sql" />
+    <Build Include="dbo\Triggers\PcJournal_Audit.sql" />
     <Build Include="dbo\Triggers\SalesJournal_Audit.sql" />
     <Build Include="dbo\Triggers\ErJournal_Audit.sql" />
     <Build Include="dbo\Triggers\Accounting_Audit.sql" />
+    <Build Include="dbo\Triggers\Accounting_Control_Audit.sql" />
+    <Build Include="dbo\Stored Procedures\WriteAuditFieldSnapshot.sql" />
     <Build Include="dbo\Triggers\Employee_Audit.sql" />
     <Build Include="dbo\Triggers\EmployeePayElement_Audit.sql" />
     <Build Include="dbo\Triggers\EmployeePhone_Audit.sql" />

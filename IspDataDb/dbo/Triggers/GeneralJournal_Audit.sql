@@ -16,6 +16,10 @@ BEGIN
         SELECT @AuditEventId,v.[FieldName],v.[OldValue],v.[NewValue]
         FROM inserted i FULL OUTER JOIN deleted d ON d.[IdNo]=i.[IdNo]
         CROSS APPLY (VALUES
+            (N'TransactionDate',CONVERT(NVARCHAR(MAX),d.[TransactionDate],23),CONVERT(NVARCHAR(MAX),i.[TransactionDate],23)),
+            (N'ReferenceNo',CONVERT(NVARCHAR(MAX),d.[ReferenceNo]),CONVERT(NVARCHAR(MAX),i.[ReferenceNo])),
+            (N'Notes',CONVERT(NVARCHAR(MAX),d.[Notes]),CONVERT(NVARCHAR(MAX),i.[Notes])),
+            (N'ClosingJournal',CONVERT(NVARCHAR(MAX),d.[ClosingJournal]),CONVERT(NVARCHAR(MAX),i.[ClosingJournal])),
             (N'Posted',CONVERT(NVARCHAR(MAX),d.[Posted]),CONVERT(NVARCHAR(MAX),i.[Posted])),
             (N'Approved',CONVERT(NVARCHAR(MAX),d.[Approved]),CONVERT(NVARCHAR(MAX),i.[Approved])),
             (N'Cancelled',CONVERT(NVARCHAR(MAX),d.[Cancelled]),CONVERT(NVARCHAR(MAX),i.[Cancelled]))) v([FieldName],[OldValue],[NewValue])

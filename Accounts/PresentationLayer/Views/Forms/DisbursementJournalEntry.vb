@@ -140,11 +140,11 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property CdJournalIdNo As Int32? Implements IDisbursementJournalView.CdJournalIdNo
             Get
-                If txtCdJournalIdNo.Text <> "" Then
-                    Return Convert.ToInt16(txtCdJournalIdNo.Text)
-                Else
-                    Return 0
+                Dim journalIdNo As Integer
+                If Integer.TryParse(txtCdJournalIdNo.Text.Trim(), journalIdNo) Then
+                    Return journalIdNo
                 End If
+                Return Nothing
             End Get
             Set
                 txtCdJournalIdNo.Text = Convert.ToString(Value)
@@ -532,6 +532,7 @@ Namespace PresentationLayer.Views.Forms
             If _jiFooter IsNot Nothing Then
                 _jiFooter.BringToFront()
             End If
+            UpdateJiTotals()
             ResumeLayout()
         End Sub
 
@@ -560,7 +561,7 @@ Namespace PresentationLayer.Views.Forms
                 UpdateJournalItemsDisplay()
             End If
             UpdateTotalsDisplay()
-            UpdateActionButtons(True)
+            UpdateActionButtons(EditingMode OrElse AddingMode)
         End Sub
 
         Private Sub CboPayType_ValueChanged(sender As Object, e As EventArgs) Handles cboPayType.SelectionChangeCommitted, cboPayType.SelectedValueChanged, cboPayType.TextChanged
@@ -857,6 +858,7 @@ Namespace PresentationLayer.Views.Forms
                 ShowOpenInvoicesDataGrid()
             Else
                 ShowJournalItemDataGrid()
+                UpdateJiTotals()
             End If
             UpdateViewGLBtnDisplay()
         End Sub
@@ -1015,8 +1017,8 @@ Namespace PresentationLayer.Views.Forms
         Private Sub AfterSave_Handler() Handles MyBase.AfterSave
             EditingMode = False
             AddingMode = False
-            UpdateDataGridDisplay()
             UpdateActionButtons(False)
+            UpdateDataGridDisplay()
         End Sub
 
     End Class

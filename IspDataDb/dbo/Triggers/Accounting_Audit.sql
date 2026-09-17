@@ -14,6 +14,27 @@ BEGIN
     FROM inserted AS i
     FULL OUTER JOIN deleted AS d ON d.[IdNo] = i.[IdNo]
     CROSS JOIN [dbo].[GetAuditSessionContext]() AS ac;
+    IF (SELECT COUNT(*) FROM inserted) = 1 AND (SELECT COUNT(*) FROM deleted) = 1
+    BEGIN
+        DECLARE @AuditEventId BIGINT = CONVERT(BIGINT, SCOPE_IDENTITY());
+        INSERT [dbo].[AuditFieldChange] ([AuditEventId], [FieldName], [OldValue], [NewValue])
+        SELECT @AuditEventId, v.[FieldName], v.[OldValue], v.[NewValue]
+        FROM inserted AS i
+        FULL OUTER JOIN deleted AS d ON d.[IdNo] = i.[IdNo]
+        CROSS APPLY (VALUES
+            (N'BranchID', CONVERT(NVARCHAR(MAX), d.[BranchID]), CONVERT(NVARCHAR(MAX), i.[BranchID])),
+            (N'EmployeeID', CONVERT(NVARCHAR(MAX), d.[EmployeeID]), CONVERT(NVARCHAR(MAX), i.[EmployeeID])),
+            (N'FIrstName', CONVERT(NVARCHAR(MAX), d.[FIrstName]), CONVERT(NVARCHAR(MAX), i.[FIrstName])),
+            (N'FirstNameAra', CONVERT(NVARCHAR(MAX), d.[FirstNameAra]), CONVERT(NVARCHAR(MAX), i.[FirstNameAra])),
+            (N'BirthDate', CONVERT(NVARCHAR(MAX), d.[BirthDate], 23), CONVERT(NVARCHAR(MAX), i.[BirthDate], 23)),
+            (N'DateJoined', CONVERT(NVARCHAR(MAX), d.[DateJoined], 23), CONVERT(NVARCHAR(MAX), i.[DateJoined], 23)),
+            (N'DateReleased', CONVERT(NVARCHAR(MAX), d.[DateReleased], 23), CONVERT(NVARCHAR(MAX), i.[DateReleased], 23)),
+            (N'Gender', CONVERT(NVARCHAR(MAX), d.[Gender]), CONVERT(NVARCHAR(MAX), i.[Gender])),
+            (N'NationalID', CONVERT(NVARCHAR(MAX), d.[NationalID]), CONVERT(NVARCHAR(MAX), i.[NationalID])),
+            (N'ReligionID', CONVERT(NVARCHAR(MAX), d.[ReligionID]), CONVERT(NVARCHAR(MAX), i.[ReligionID])),
+            (N'IQAMANo', CONVERT(NVARCHAR(MAX), d.[IQAMANo]), CONVERT(NVARCHAR(MAX), i.[IQAMANo]))) v([FieldName], [OldValue], [NewValue])
+        WHERE ISNULL(v.[OldValue], N'') COLLATE DATABASE_DEFAULT <> ISNULL(v.[NewValue], N'') COLLATE DATABASE_DEFAULT;
+    END;
 END;
 GO
 
@@ -337,6 +358,26 @@ BEGIN
     FROM inserted AS i
     FULL OUTER JOIN deleted AS d ON d.[IdNo] = i.[IdNo]
     CROSS JOIN [dbo].[GetAuditSessionContext]() AS ac;
+    IF (SELECT COUNT(*) FROM inserted) <= 1 AND (SELECT COUNT(*) FROM deleted) <= 1
+       AND (SELECT COUNT(*) FROM inserted) + (SELECT COUNT(*) FROM deleted) > 0
+    BEGIN
+        DECLARE @AuditEventId BIGINT = CONVERT(BIGINT, SCOPE_IDENTITY());
+        INSERT [dbo].[AuditFieldChange] ([AuditEventId], [FieldName], [OldValue], [NewValue])
+        SELECT @AuditEventId, v.[FieldName], v.[OldValue], v.[NewValue]
+        FROM inserted AS i
+        FULL OUTER JOIN deleted AS d ON d.[IdNo] = i.[IdNo]
+        CROSS APPLY (VALUES
+            (N'Sequence', CONVERT(NVARCHAR(MAX), d.[Sequence]), CONVERT(NVARCHAR(MAX), i.[Sequence])),
+            (N'JournalIdNo', CONVERT(NVARCHAR(MAX), d.[JournalIdNo]), CONVERT(NVARCHAR(MAX), i.[JournalIdNo])),
+            (N'AccountIdNo', CONVERT(NVARCHAR(MAX), d.[AccountIdNo]), CONVERT(NVARCHAR(MAX), i.[AccountIdNo])),
+            (N'Debit', CONVERT(NVARCHAR(MAX), d.[Debit]), CONVERT(NVARCHAR(MAX), i.[Debit])),
+            (N'Credit', CONVERT(NVARCHAR(MAX), d.[Credit]), CONVERT(NVARCHAR(MAX), i.[Credit])),
+            (N'RevCostCenterIdNo', CONVERT(NVARCHAR(MAX), d.[RevCostCenterIdNo]), CONVERT(NVARCHAR(MAX), i.[RevCostCenterIdNo])),
+            (N'PayIdNo', CONVERT(NVARCHAR(MAX), d.[PayIdNo]), CONVERT(NVARCHAR(MAX), i.[PayIdNo])),
+            (N'Notes', CONVERT(NVARCHAR(MAX), d.[Notes]), CONVERT(NVARCHAR(MAX), i.[Notes])),
+            (N'Posted', CONVERT(NVARCHAR(MAX), d.[Posted]), CONVERT(NVARCHAR(MAX), i.[Posted]))) v([FieldName], [OldValue], [NewValue])
+        WHERE ISNULL(v.[OldValue], N'') COLLATE DATABASE_DEFAULT <> ISNULL(v.[NewValue], N'') COLLATE DATABASE_DEFAULT;
+    END;
 END;
 GO
 
@@ -356,6 +397,26 @@ BEGIN
     FROM inserted AS i
     FULL OUTER JOIN deleted AS d ON d.[IdNo] = i.[IdNo]
     CROSS JOIN [dbo].[GetAuditSessionContext]() AS ac;
+    IF (SELECT COUNT(*) FROM inserted) <= 1 AND (SELECT COUNT(*) FROM deleted) <= 1
+       AND (SELECT COUNT(*) FROM inserted) + (SELECT COUNT(*) FROM deleted) > 0
+    BEGIN
+        DECLARE @AuditEventId BIGINT = CONVERT(BIGINT, SCOPE_IDENTITY());
+        INSERT [dbo].[AuditFieldChange] ([AuditEventId], [FieldName], [OldValue], [NewValue])
+        SELECT @AuditEventId, v.[FieldName], v.[OldValue], v.[NewValue]
+        FROM inserted AS i
+        FULL OUTER JOIN deleted AS d ON d.[IdNo] = i.[IdNo]
+        CROSS APPLY (VALUES
+            (N'Sequence', CONVERT(NVARCHAR(MAX), d.[Sequence]), CONVERT(NVARCHAR(MAX), i.[Sequence])),
+            (N'JournalIdNo', CONVERT(NVARCHAR(MAX), d.[JournalIdNo]), CONVERT(NVARCHAR(MAX), i.[JournalIdNo])),
+            (N'AccountIdNo', CONVERT(NVARCHAR(MAX), d.[AccountIdNo]), CONVERT(NVARCHAR(MAX), i.[AccountIdNo])),
+            (N'Debit', CONVERT(NVARCHAR(MAX), d.[Debit]), CONVERT(NVARCHAR(MAX), i.[Debit])),
+            (N'Credit', CONVERT(NVARCHAR(MAX), d.[Credit]), CONVERT(NVARCHAR(MAX), i.[Credit])),
+            (N'RevCostCenterIdNo', CONVERT(NVARCHAR(MAX), d.[RevCostCenterIdNo]), CONVERT(NVARCHAR(MAX), i.[RevCostCenterIdNo])),
+            (N'PayIdNo', CONVERT(NVARCHAR(MAX), d.[PayIdNo]), CONVERT(NVARCHAR(MAX), i.[PayIdNo])),
+            (N'Notes', CONVERT(NVARCHAR(MAX), d.[Notes]), CONVERT(NVARCHAR(MAX), i.[Notes])),
+            (N'Posted', CONVERT(NVARCHAR(MAX), d.[Posted]), CONVERT(NVARCHAR(MAX), i.[Posted]))) v([FieldName], [OldValue], [NewValue])
+        WHERE ISNULL(v.[OldValue], N'') COLLATE DATABASE_DEFAULT <> ISNULL(v.[NewValue], N'') COLLATE DATABASE_DEFAULT;
+    END;
 END;
 GO
 
@@ -375,6 +436,26 @@ BEGIN
     FROM inserted AS i
     FULL OUTER JOIN deleted AS d ON d.[IdNo] = i.[IdNo]
     CROSS JOIN [dbo].[GetAuditSessionContext]() AS ac;
+    IF (SELECT COUNT(*) FROM inserted) <= 1 AND (SELECT COUNT(*) FROM deleted) <= 1
+       AND (SELECT COUNT(*) FROM inserted) + (SELECT COUNT(*) FROM deleted) > 0
+    BEGIN
+        DECLARE @AuditEventId BIGINT = CONVERT(BIGINT, SCOPE_IDENTITY());
+        INSERT [dbo].[AuditFieldChange] ([AuditEventId], [FieldName], [OldValue], [NewValue])
+        SELECT @AuditEventId, v.[FieldName], v.[OldValue], v.[NewValue]
+        FROM inserted AS i
+        FULL OUTER JOIN deleted AS d ON d.[IdNo] = i.[IdNo]
+        CROSS APPLY (VALUES
+            (N'Sequence', CONVERT(NVARCHAR(MAX), d.[Sequence]), CONVERT(NVARCHAR(MAX), i.[Sequence])),
+            (N'JournalIdNo', CONVERT(NVARCHAR(MAX), d.[JournalIdNo]), CONVERT(NVARCHAR(MAX), i.[JournalIdNo])),
+            (N'AccountIdNo', CONVERT(NVARCHAR(MAX), d.[AccountIdNo]), CONVERT(NVARCHAR(MAX), i.[AccountIdNo])),
+            (N'Debit', CONVERT(NVARCHAR(MAX), d.[Debit]), CONVERT(NVARCHAR(MAX), i.[Debit])),
+            (N'Credit', CONVERT(NVARCHAR(MAX), d.[Credit]), CONVERT(NVARCHAR(MAX), i.[Credit])),
+            (N'RevCostCenterIdNo', CONVERT(NVARCHAR(MAX), d.[RevCostCenterIdNo]), CONVERT(NVARCHAR(MAX), i.[RevCostCenterIdNo])),
+            (N'PayIdNo', CONVERT(NVARCHAR(MAX), d.[PayIdNo]), CONVERT(NVARCHAR(MAX), i.[PayIdNo])),
+            (N'Notes', CONVERT(NVARCHAR(MAX), d.[Notes]), CONVERT(NVARCHAR(MAX), i.[Notes])),
+            (N'Posted', CONVERT(NVARCHAR(MAX), d.[Posted]), CONVERT(NVARCHAR(MAX), i.[Posted]))) v([FieldName], [OldValue], [NewValue])
+        WHERE ISNULL(v.[OldValue], N'') COLLATE DATABASE_DEFAULT <> ISNULL(v.[NewValue], N'') COLLATE DATABASE_DEFAULT;
+    END;
 END;
 GO
 
@@ -394,6 +475,26 @@ BEGIN
     FROM inserted AS i
     FULL OUTER JOIN deleted AS d ON d.[IdNo] = i.[IdNo]
     CROSS JOIN [dbo].[GetAuditSessionContext]() AS ac;
+    IF (SELECT COUNT(*) FROM inserted) <= 1 AND (SELECT COUNT(*) FROM deleted) <= 1
+       AND (SELECT COUNT(*) FROM inserted) + (SELECT COUNT(*) FROM deleted) > 0
+    BEGIN
+        DECLARE @AuditEventId BIGINT = CONVERT(BIGINT, SCOPE_IDENTITY());
+        INSERT [dbo].[AuditFieldChange] ([AuditEventId], [FieldName], [OldValue], [NewValue])
+        SELECT @AuditEventId, v.[FieldName], v.[OldValue], v.[NewValue]
+        FROM inserted AS i
+        FULL OUTER JOIN deleted AS d ON d.[IdNo] = i.[IdNo]
+        CROSS APPLY (VALUES
+            (N'Sequence', CONVERT(NVARCHAR(MAX), d.[Sequence]), CONVERT(NVARCHAR(MAX), i.[Sequence])),
+            (N'JournalIdNo', CONVERT(NVARCHAR(MAX), d.[JournalIdNo]), CONVERT(NVARCHAR(MAX), i.[JournalIdNo])),
+            (N'AccountIdNo', CONVERT(NVARCHAR(MAX), d.[AccountIdNo]), CONVERT(NVARCHAR(MAX), i.[AccountIdNo])),
+            (N'Debit', CONVERT(NVARCHAR(MAX), d.[Debit]), CONVERT(NVARCHAR(MAX), i.[Debit])),
+            (N'Credit', CONVERT(NVARCHAR(MAX), d.[Credit]), CONVERT(NVARCHAR(MAX), i.[Credit])),
+            (N'RevCostCenterIdNo', CONVERT(NVARCHAR(MAX), d.[RevCostCenterIdNo]), CONVERT(NVARCHAR(MAX), i.[RevCostCenterIdNo])),
+            (N'PayIdNo', CONVERT(NVARCHAR(MAX), d.[PayIdNo]), CONVERT(NVARCHAR(MAX), i.[PayIdNo])),
+            (N'Notes', CONVERT(NVARCHAR(MAX), d.[Notes]), CONVERT(NVARCHAR(MAX), i.[Notes])),
+            (N'Posted', CONVERT(NVARCHAR(MAX), d.[Posted]), CONVERT(NVARCHAR(MAX), i.[Posted]))) v([FieldName], [OldValue], [NewValue])
+        WHERE ISNULL(v.[OldValue], N'') COLLATE DATABASE_DEFAULT <> ISNULL(v.[NewValue], N'') COLLATE DATABASE_DEFAULT;
+    END;
 END;
 GO
 
@@ -404,8 +505,16 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
+    DECLARE @AuditEvents TABLE
+    (
+        [AuditEventId] BIGINT NOT NULL,
+        [RecordIdNo] INT NOT NULL
+    );
+
     INSERT INTO [dbo].[AuditEvent]
     ([UserIdNo], [UserNameSnapshot], [Action], [EntityName], [RecordIdNo], [BranchIdNo], [Description], [ApplicationName], [MachineName])
+    OUTPUT inserted.[AuditEventId], inserted.[RecordIdNo]
+        INTO @AuditEvents ([AuditEventId], [RecordIdNo])
     SELECT ac.[UserIdNo], ac.[UserNameSnapshot],
         CASE WHEN i.[IdNo] IS NULL THEN 'Delete' WHEN d.[IdNo] IS NULL THEN 'Insert' ELSE 'Update' END,
         'CdJournalItem', CONVERT(INT, COALESCE(i.[IdNo], d.[IdNo])), ac.[BranchIdNo],
@@ -413,6 +522,41 @@ BEGIN
     FROM inserted AS i
     FULL OUTER JOIN deleted AS d ON d.[IdNo] = i.[IdNo]
     CROSS JOIN [dbo].[GetAuditSessionContext]() AS ac;
+
+    INSERT [dbo].[AuditFieldChange] ([AuditEventId], [FieldName], [OldValue], [NewValue])
+    SELECT ae.[AuditEventId], N'Record fields', s.[OldValue], s.[NewValue]
+    FROM inserted AS i
+    FULL OUTER JOIN deleted AS d ON d.[IdNo] = i.[IdNo]
+    INNER JOIN @AuditEvents AS ae ON ae.[RecordIdNo] = CONVERT(INT, COALESCE(i.[IdNo], d.[IdNo]))
+    CROSS APPLY (VALUES
+        (CASE WHEN d.[IdNo] IS NULL THEN NULL ELSE
+            N'{"IdNo":' + CONVERT(NVARCHAR(30), d.[IdNo]) +
+            N',"Sequence":' + CONVERT(NVARCHAR(30), d.[Sequence]) +
+            N',"JournalIdNo":' + CONVERT(NVARCHAR(30), d.[JournalIdNo]) +
+            N',"AccountIdNo":' + CONVERT(NVARCHAR(30), d.[AccountIdNo]) +
+            N',"Debit":' + CONVERT(NVARCHAR(50), d.[Debit]) +
+            N',"Credit":' + CONVERT(NVARCHAR(50), d.[Credit]) +
+            N',"RevCostCenterIdNo":' + CONVERT(NVARCHAR(30), d.[RevCostCenterIdNo]) +
+            N',"PayIdNo":' + CASE WHEN d.[PayIdNo] IS NULL THEN N'null' ELSE CONVERT(NVARCHAR(30), d.[PayIdNo]) END +
+            N',"Notes":' + CASE WHEN d.[Notes] IS NULL THEN N'null' ELSE N'"' +
+                REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(d.[Notes], N'\', N'\\'), N'"', N'\"'), CHAR(13), N'\r'), CHAR(10), N'\n'), CHAR(9), N'\t') + N'"' END +
+            N',"Posted":' + CASE WHEN d.[Posted] = 1 THEN N'true' ELSE N'false' END +
+            N',"OldAccountIdNo":' + CASE WHEN d.[OldAccountIdNo] IS NULL THEN N'null' ELSE CONVERT(NVARCHAR(30), d.[OldAccountIdNo]) END +
+            N',"DateTimeStamp":"' + CONVERT(NVARCHAR(100), CONVERT(VARBINARY(8000), d.[DateTimeStamp]), 1) + N'"}' END,
+         CASE WHEN i.[IdNo] IS NULL THEN NULL ELSE
+            N'{"IdNo":' + CONVERT(NVARCHAR(30), i.[IdNo]) +
+            N',"Sequence":' + CONVERT(NVARCHAR(30), i.[Sequence]) +
+            N',"JournalIdNo":' + CONVERT(NVARCHAR(30), i.[JournalIdNo]) +
+            N',"AccountIdNo":' + CONVERT(NVARCHAR(30), i.[AccountIdNo]) +
+            N',"Debit":' + CONVERT(NVARCHAR(50), i.[Debit]) +
+            N',"Credit":' + CONVERT(NVARCHAR(50), i.[Credit]) +
+            N',"RevCostCenterIdNo":' + CONVERT(NVARCHAR(30), i.[RevCostCenterIdNo]) +
+            N',"PayIdNo":' + CASE WHEN i.[PayIdNo] IS NULL THEN N'null' ELSE CONVERT(NVARCHAR(30), i.[PayIdNo]) END +
+            N',"Notes":' + CASE WHEN i.[Notes] IS NULL THEN N'null' ELSE N'"' +
+                REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(i.[Notes], N'\', N'\\'), N'"', N'\"'), CHAR(13), N'\r'), CHAR(10), N'\n'), CHAR(9), N'\t') + N'"' END +
+            N',"Posted":' + CASE WHEN i.[Posted] = 1 THEN N'true' ELSE N'false' END +
+            N',"OldAccountIdNo":' + CASE WHEN i.[OldAccountIdNo] IS NULL THEN N'null' ELSE CONVERT(NVARCHAR(30), i.[OldAccountIdNo]) END +
+            N',"DateTimeStamp":"' + CONVERT(NVARCHAR(100), CONVERT(VARBINARY(8000), i.[DateTimeStamp]), 1) + N'"}' END)) s([OldValue], [NewValue]);
 END;
 GO
 
@@ -432,6 +576,27 @@ BEGIN
     FROM inserted AS i
     FULL OUTER JOIN deleted AS d ON d.[IdNo] = i.[IdNo]
     CROSS JOIN [dbo].[GetAuditSessionContext]() AS ac;
+    IF (SELECT COUNT(*) FROM inserted) <= 1 AND (SELECT COUNT(*) FROM deleted) <= 1
+       AND (SELECT COUNT(*) FROM inserted) + (SELECT COUNT(*) FROM deleted) > 0
+    BEGIN
+        DECLARE @AuditEventId BIGINT = CONVERT(BIGINT, SCOPE_IDENTITY());
+        INSERT [dbo].[AuditFieldChange] ([AuditEventId], [FieldName], [OldValue], [NewValue])
+        SELECT @AuditEventId, v.[FieldName], v.[OldValue], v.[NewValue]
+        FROM inserted AS i
+        FULL OUTER JOIN deleted AS d ON d.[IdNo] = i.[IdNo]
+        CROSS APPLY (VALUES
+            (N'Sequence', CONVERT(NVARCHAR(MAX), d.[Sequence]), CONVERT(NVARCHAR(MAX), i.[Sequence])),
+            (N'JournalIdNo', CONVERT(NVARCHAR(MAX), d.[JournalIdNo]), CONVERT(NVARCHAR(MAX), i.[JournalIdNo])),
+            (N'AccountIdNo', CONVERT(NVARCHAR(MAX), d.[AccountIdNo]), CONVERT(NVARCHAR(MAX), i.[AccountIdNo])),
+            (N'Debit', CONVERT(NVARCHAR(MAX), d.[Debit]), CONVERT(NVARCHAR(MAX), i.[Debit])),
+            (N'Credit', CONVERT(NVARCHAR(MAX), d.[Credit]), CONVERT(NVARCHAR(MAX), i.[Credit])),
+            (N'RevCostCenterIdNo', CONVERT(NVARCHAR(MAX), d.[RevCostCenterIdNo]), CONVERT(NVARCHAR(MAX), i.[RevCostCenterIdNo])),
+            (N'PayIdNo', CONVERT(NVARCHAR(MAX), d.[PayIdNo]), CONVERT(NVARCHAR(MAX), i.[PayIdNo])),
+            (N'Notes', CONVERT(NVARCHAR(MAX), d.[Notes]), CONVERT(NVARCHAR(MAX), i.[Notes])),
+            (N'OldAccountIdNo', CONVERT(NVARCHAR(MAX), d.[OldAccountIdNo]), CONVERT(NVARCHAR(MAX), i.[OldAccountIdNo])),
+            (N'Posted', CONVERT(NVARCHAR(MAX), d.[Posted]), CONVERT(NVARCHAR(MAX), i.[Posted]))) v([FieldName], [OldValue], [NewValue])
+        WHERE ISNULL(v.[OldValue], N'') COLLATE DATABASE_DEFAULT <> ISNULL(v.[NewValue], N'') COLLATE DATABASE_DEFAULT;
+    END;
 END;
 GO
 
@@ -451,6 +616,26 @@ BEGIN
     FROM inserted AS i
     FULL OUTER JOIN deleted AS d ON d.[IdNo] = i.[IdNo]
     CROSS JOIN [dbo].[GetAuditSessionContext]() AS ac;
+    IF (SELECT COUNT(*) FROM inserted) <= 1 AND (SELECT COUNT(*) FROM deleted) <= 1
+       AND (SELECT COUNT(*) FROM inserted) + (SELECT COUNT(*) FROM deleted) > 0
+    BEGIN
+        DECLARE @AuditEventId BIGINT = CONVERT(BIGINT, SCOPE_IDENTITY());
+        INSERT [dbo].[AuditFieldChange] ([AuditEventId], [FieldName], [OldValue], [NewValue])
+        SELECT @AuditEventId, v.[FieldName], v.[OldValue], v.[NewValue]
+        FROM inserted AS i
+        FULL OUTER JOIN deleted AS d ON d.[IdNo] = i.[IdNo]
+        CROSS APPLY (VALUES
+            (N'Sequence', CONVERT(NVARCHAR(MAX), d.[Sequence]), CONVERT(NVARCHAR(MAX), i.[Sequence])),
+            (N'JournalIdNo', CONVERT(NVARCHAR(MAX), d.[JournalIdNo]), CONVERT(NVARCHAR(MAX), i.[JournalIdNo])),
+            (N'AccountIdNo', CONVERT(NVARCHAR(MAX), d.[AccountIdNo]), CONVERT(NVARCHAR(MAX), i.[AccountIdNo])),
+            (N'Notes', CONVERT(NVARCHAR(MAX), d.[Notes]), CONVERT(NVARCHAR(MAX), i.[Notes])),
+            (N'Debit', CONVERT(NVARCHAR(MAX), d.[Debit]), CONVERT(NVARCHAR(MAX), i.[Debit])),
+            (N'Credit', CONVERT(NVARCHAR(MAX), d.[Credit]), CONVERT(NVARCHAR(MAX), i.[Credit])),
+            (N'RevCostCenterIdNo', CONVERT(NVARCHAR(MAX), d.[RevCostCenterIdNo]), CONVERT(NVARCHAR(MAX), i.[RevCostCenterIdNo])),
+            (N'PayIdNo', CONVERT(NVARCHAR(MAX), d.[PayIdNo]), CONVERT(NVARCHAR(MAX), i.[PayIdNo])),
+            (N'Posted', CONVERT(NVARCHAR(MAX), d.[Posted]), CONVERT(NVARCHAR(MAX), i.[Posted]))) v([FieldName], [OldValue], [NewValue])
+        WHERE ISNULL(v.[OldValue], N'') COLLATE DATABASE_DEFAULT <> ISNULL(v.[NewValue], N'') COLLATE DATABASE_DEFAULT;
+    END;
 END;
 GO
 
@@ -470,6 +655,26 @@ BEGIN
     FROM inserted AS i
     FULL OUTER JOIN deleted AS d ON d.[IdNo] = i.[IdNo]
     CROSS JOIN [dbo].[GetAuditSessionContext]() AS ac;
+    IF (SELECT COUNT(*) FROM inserted) <= 1 AND (SELECT COUNT(*) FROM deleted) <= 1
+       AND (SELECT COUNT(*) FROM inserted) + (SELECT COUNT(*) FROM deleted) > 0
+    BEGIN
+        DECLARE @AuditEventId BIGINT = CONVERT(BIGINT, SCOPE_IDENTITY());
+        INSERT [dbo].[AuditFieldChange] ([AuditEventId], [FieldName], [OldValue], [NewValue])
+        SELECT @AuditEventId, v.[FieldName], v.[OldValue], v.[NewValue]
+        FROM inserted AS i
+        FULL OUTER JOIN deleted AS d ON d.[IdNo] = i.[IdNo]
+        CROSS APPLY (VALUES
+            (N'Sequence', CONVERT(NVARCHAR(MAX), d.[Sequence]), CONVERT(NVARCHAR(MAX), i.[Sequence])),
+            (N'JournalIdNo', CONVERT(NVARCHAR(MAX), d.[JournalIdNo]), CONVERT(NVARCHAR(MAX), i.[JournalIdNo])),
+            (N'AccountIdNo', CONVERT(NVARCHAR(MAX), d.[AccountIdNo]), CONVERT(NVARCHAR(MAX), i.[AccountIdNo])),
+            (N'Debit', CONVERT(NVARCHAR(MAX), d.[Debit]), CONVERT(NVARCHAR(MAX), i.[Debit])),
+            (N'Credit', CONVERT(NVARCHAR(MAX), d.[Credit]), CONVERT(NVARCHAR(MAX), i.[Credit])),
+            (N'RevCostCenterIdNo', CONVERT(NVARCHAR(MAX), d.[RevCostCenterIdNo]), CONVERT(NVARCHAR(MAX), i.[RevCostCenterIdNo])),
+            (N'PayIdNo', CONVERT(NVARCHAR(MAX), d.[PayIdNo]), CONVERT(NVARCHAR(MAX), i.[PayIdNo])),
+            (N'Notes', CONVERT(NVARCHAR(MAX), d.[Notes]), CONVERT(NVARCHAR(MAX), i.[Notes])),
+            (N'Posted', CONVERT(NVARCHAR(MAX), d.[Posted]), CONVERT(NVARCHAR(MAX), i.[Posted]))) v([FieldName], [OldValue], [NewValue])
+        WHERE ISNULL(v.[OldValue], N'') COLLATE DATABASE_DEFAULT <> ISNULL(v.[NewValue], N'') COLLATE DATABASE_DEFAULT;
+    END;
 END;
 GO
 
@@ -1011,16 +1216,8 @@ AFTER INSERT, UPDATE, DELETE
 AS
 BEGIN
     SET NOCOUNT ON;
-
-    INSERT INTO [dbo].[AuditEvent]
-    ([UserIdNo], [UserNameSnapshot], [Action], [EntityName], [RecordIdNo], [BranchIdNo], [Description], [ApplicationName], [MachineName])
-    SELECT ac.[UserIdNo], ac.[UserNameSnapshot],
-        CASE WHEN i.[IdNo] IS NULL THEN 'Delete' WHEN d.[IdNo] IS NULL THEN 'Insert' ELSE 'Update' END,
-        'Series', CONVERT(INT, COALESCE(i.[IdNo], d.[IdNo])), ac.[BranchIdNo],
-        'Series record changed', ac.[ApplicationName], ac.[MachineName]
-    FROM inserted AS i
-    FULL OUTER JOIN deleted AS d ON d.[IdNo] = i.[IdNo]
-    CROSS JOIN [dbo].[GetAuditSessionContext]() AS ac;
+    -- Series is system-maintained numbering metadata and is intentionally not audited.
+    RETURN;
 END;
 GO
 

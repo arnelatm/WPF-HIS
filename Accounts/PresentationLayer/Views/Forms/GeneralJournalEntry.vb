@@ -72,11 +72,9 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property IdNo As Int32 Implements IGeneralJournalView.IdNo
             Get
-                If TxtIdNo.Text <> "" Then
-                    Return Convert.ToInt16(TxtIdNo.Text)
-                Else
-                    Return 0
-                End If
+                Dim parsedIdNo As Integer
+                If Integer.TryParse(TxtIdNo.Text.Trim(), parsedIdNo) Then Return parsedIdNo
+                Return 0
             End Get
             Set
                 TxtIdNo.Text = Convert.ToString(Value)
