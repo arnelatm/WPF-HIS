@@ -23,3 +23,7 @@ tmp/
 .tmp/
 output/
 docs/Accounts-System-Handover.md
+
+# Local deployment and test artifacts
+_temp/
+*Credit Sales Postings.pdf
