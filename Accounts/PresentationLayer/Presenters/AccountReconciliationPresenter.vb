@@ -60,6 +60,14 @@ Namespace PresentationLayer.Presenters
             'AddHandler _backgroundworker.RunWorkerCompleted, AddressOf BackgroundWorker_RunWorkerCompleted
         End Sub
 
+        Public Overrides Sub UpdateViewData(idNo As Int32)
+            MyBase.UpdateViewData(idNo)
+            'The grid is bound to a plain List, which does not notify WinForms
+            'when AutoMapper mutates the existing collection in place.
+            'Reassigning it invokes the view's binding setup after every load.
+            View.AccountReconciliationItems = View.AccountReconciliationItems
+        End Sub
+
         Public Overrides Function IsOkToEditRecord() As Boolean
             If Not MyBase.IsOkToEditRecord() Then
                 Return False
@@ -150,7 +158,7 @@ Namespace PresentationLayer.Presenters
         Public Property MessageBox As Object
 
         Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
-            View.AccountReconciliationItems.Clear()
+            View.AccountReconciliationItems = New List(Of AccountReconciliationItemView)
         End Sub
 
         Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully

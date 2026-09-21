@@ -23,8 +23,9 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>\\Marcelo-dell\d\Publish\</InstallUrl>
-    <ApplicationRevision>3</ApplicationRevision>
+    <InstallUrl>\\ibn-server\isp\COAccounts\</InstallUrl>
+    <MinimumRequiredVersion>1.0.0.6</MinimumRequiredVersion>
+    <ApplicationRevision>6</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -479,7 +480,9 @@
     <Compile Include="PresentationLayer\Views\Forms\CashFlowSetupForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\KizenCreditSalesImportForm.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\KizenCreditSalesImportForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ServiceLayer\KizenCreditSalesImportModels.vb" />
     <Compile Include="ServiceLayer\KizenCreditSalesImportService.vb" />
     <Compile Include="ServiceLayer\CashFlowService.vb" />
@@ -2482,6 +2485,7 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\MainForm.resx">
       <DependentUpon>MainForm.vb</DependentUpon>
       <SubType>Designer</SubType>
+      <LogicalName>AATM.Accounts.PresentationLayer.Views.Forms.MainForm.resources</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\GeneratePayrollBankCsv.resx">
       <DependentUpon>GeneratePayrollBankCsv.vb</DependentUpon>
@@ -2967,6 +2971,8 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
+    <None Include="app - ibn-server.config" />
+    <None Include="app - ispadmin2.ispdata_audittest.config" />
     <None Include="app.config" />
     <None Include="ISPDATADataSet.xsc">
       <DependentUpon>ISPDATADataSet.xsd</DependentUpon>

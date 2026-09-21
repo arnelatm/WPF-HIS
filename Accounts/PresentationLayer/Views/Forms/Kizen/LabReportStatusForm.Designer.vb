@@ -345,7 +345,7 @@
             Me.CLabel4.Name = "CLabel4"
             Me.CLabel4.Size = New System.Drawing.Size(130, 20)
             Me.CLabel4.TabIndex = 19
-            Me.CLabel4.Text = "Invoice Number:"
+            Me.CLabel4.Text = "Sample No:"
             Me.CLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             Me.CLabel4.Translatable = True
             '

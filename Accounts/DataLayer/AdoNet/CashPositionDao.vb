@@ -88,11 +88,10 @@ Namespace DataLayer.AdoNet
                     "h.Posted AS HeaderPosted,i.Posted AS ItemPosted," &
                     If(code = "GJ", "h.ClosingJournal", "CAST(0 AS bit)") & " AS ClosingJournal,i.Debit,i.Credit " &
                     "FROM dbo." & table & " h INNER JOIN dbo." & table & "Item i ON i.JournalIdNo=h.IdNo " &
-                    "WHERE h.Cancelled=0 AND h.TransactionDate>=@YearStart AND h.TransactionDate<@EndExclusive AND " & If(code = "GJ", "(h.ClosingJournal=0 OR @IncludeClosingEntries=1)", "1=1"))
+                    "WHERE h.Cancelled=0 AND h.TransactionDate>=DATEFROMPARTS(@SnapshotYear,1,1) AND h.TransactionDate<@EndExclusive AND " & If(code = "GJ", "(h.ClosingJournal=0 OR @IncludeClosingEntries=1)", "1=1"))
             Next
             Dim parameters As New List(Of Object) From {
-                "@YearStart", New Date(beginningDate.Year, 1, 1), "@EndExclusive", endingDate.AddDays(1),
-                "@SnapshotYear", beginningDate.Year}
+                "@RequestedYear", beginningDate.Year, "@EndExclusive", endingDate.AddDays(1)}
             parameters.Add("@IncludeClosingEntries")
             parameters.Add(If(includeClosingEntries, 1, 0))
             Dim selection As New List(Of String)
@@ -103,13 +102,15 @@ Namespace DataLayer.AdoNet
                 parameters.Add(accountIds(index))
             Next
             Dim accountFilter = If(cashOnly, "a.SpecialAccount IN ('BA','CS','CK','PC') AND ", "")
-            Dim sql = ";WITH Movements AS (" & String.Join(" UNION ALL ", sources) & "), " &
-                "SnapshotStatus AS (SELECT COUNT(*) AS SnapshotRows," &
+            Dim sql = "DECLARE @SnapshotYear int; " &
+                "SELECT @SnapshotYear=MAX([Year]) FROM dbo.AccountBalance WHERE [Year]<=@RequestedYear; " &
+                "WITH Movements AS (" & String.Join(" UNION ALL ", sources) & "), " &
+                "SnapshotStatus AS (SELECT @SnapshotYear AS SnapshotYear,COUNT(*) AS SnapshotRows," &
                 "SUM(CONVERT(decimal(19,4),ISNULL(Debit,0))-CONVERT(decimal(19,4),ISNULL(Credit,0))) AS SnapshotDifference " &
                 "FROM dbo.AccountBalance WHERE [Year]=@SnapshotYear) " &
                 "SELECT a.IdNo,a.AccountCode,a.AccountName,a.AccountNameAra,a.Active," &
                 "ab.IdNo AS SnapshotId,ab.Debit AS SnapshotDebit,ab.Credit AS SnapshotCredit," &
-                "s.SnapshotRows,s.SnapshotDifference,m.JournalCode,m.JournalIdNo,m.ItemIdNo,m.TransactionDate," &
+                "s.SnapshotYear,s.SnapshotRows,s.SnapshotDifference,m.JournalCode,m.JournalIdNo,m.ItemIdNo,m.TransactionDate," &
                 "m.ReferenceNo,m.Notes,m.HeaderPosted,m.ItemPosted,m.ClosingJournal,m.Debit,m.Credit " &
                 "FROM dbo.Account a CROSS JOIN SnapshotStatus s " &
                 "LEFT JOIN dbo.AccountBalance ab ON ab.AccountIdNo=a.IdNo AND ab.[Year]=@SnapshotYear " &

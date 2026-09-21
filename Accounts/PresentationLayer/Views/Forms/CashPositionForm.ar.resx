@@ -147,6 +147,9 @@
   <data name="CashPositionMissingYear" xml:space="preserve">
     <value>الأرصدة الافتتاحية لسنة البداية غير موجودة. تحقق منها قبل إعداد التقرير.</value>
   </data>
+  <data name="UsingPriorSnapshot" xml:space="preserve">
+    <value>يتم استخدام الأرصدة الافتتاحية لعام {0}، مع ترحيل الحركات السابقة إلى بداية فترة التقرير.</value>
+  </data>
   <data name="CashPositionSelectAccounts" xml:space="preserve">
     <value>اختر حساب نقد واحداً على الأقل.</value>
   </data>

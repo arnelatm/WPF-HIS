@@ -483,6 +483,10 @@ Namespace PresentationLayer.Views.Forms
                 _position.Accounts.Sum(Function(a) a.OpeningBalance), _position.Accounts.Sum(Function(a) a.Debit),
                 _position.Accounts.Sum(Function(a) a.Credit), _position.Accounts.Sum(Function(a) a.ClosingBalance))
             _status.Text = Caption("BookBalances")
+            If _position.OpeningSnapshotYear.HasValue AndAlso _position.OpeningSnapshotYear.Value < _position.BeginningDate.Year Then
+                _status.Text = String.Format(CultureInfo.CurrentCulture, Caption("UsingPriorSnapshot"),
+                    _position.OpeningSnapshotYear.Value)
+            End If
         End Sub
 
         Private Sub ShowAccountLines()

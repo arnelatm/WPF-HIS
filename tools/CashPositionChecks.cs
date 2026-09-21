@@ -64,6 +64,7 @@ public static class CashPositionChecks
             "JournalIdNo", "ItemIdNo", "TransactionDate", "ReferenceNo", "Notes", "HeaderPosted",
             "ItemPosted", "ClosingJournal", "Debit", "Credit" };
         foreach (var name in names) table.Columns.Add(name, typeof(object));
+        table.Columns.Add(new DataColumn("SnapshotYear", typeof(object)) { DefaultValue = 2025 });
         // Same item and journal IDs across different journal tables must remain distinct.
         table.Rows.Add((short)104, "104", "Cash", "نقد", true, 1, 100m, 0m, 2, 0m,
             "CR", 7, 9, new DateTime(2025, 11, 30), "A", "", true, true, false, 20m, 0m);
@@ -88,6 +89,7 @@ public static class CashPositionChecks
         var result = service.GetPosition(start, end, ids);
         Check(result.Accounts.Count == 2 && result.Lines.Count == 2, "Scope and source identity");
         var cash = result.Accounts[0];
+        Check(result.OpeningSnapshotYear == 2025, "Selected opening snapshot year is exposed for fallback disclosure");
         Check(cash.OpeningBalance == 120m && cash.Debit == 30m && cash.Credit == 5m && cash.ClosingBalance == 145m,
             "Snapshot once plus pre-period and unposted movements");
         Check(cash.PostingReviewLines == 1, "Mixed header/detail state must remain included and flagged");
@@ -106,6 +108,10 @@ public static class CashPositionChecks
             "CR", 9, 11, new DateTime(2026, 1, 1), "D", "", false, false, false, 50m, 0m);
         result = service.GetPosition(start, new DateTime(2026, 1, 1), ids);
         Check(result.Accounts[0].ClosingBalance == 195m, "Cross-year report must not add a second snapshot");
+        result = service.GetPosition(new DateTime(2026, 1, 1), new DateTime(2026, 1, 1), ids);
+        Check(result.OpeningSnapshotYear == 2025 && result.Accounts[0].OpeningBalance == 145m &&
+              result.Accounts[0].Debit == 50m && result.Accounts[0].ClosingBalance == 195m,
+            "Prior-year snapshot plus all intervening activity produces the same balance");
         Console.WriteLine("PASS: offline calculation and validation checks");
     }
 

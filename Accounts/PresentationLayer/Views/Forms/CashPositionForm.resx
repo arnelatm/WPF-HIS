@@ -153,6 +153,9 @@
   <data name="CashPositionSelectAccounts" xml:space="preserve">
     <value>Select at least one account.</value>
   </data>
+  <data name="UsingPriorSnapshot" xml:space="preserve">
+    <value>Using the {0} opening snapshot; prior activity is rolled forward to the report start.</value>
+  </data>
   <data name="CashPositionUnbalancedSnapshot" xml:space="preserve">
     <value>The fiscal opening snapshot is unbalanced. Verify it before reporting.</value>
   </data>

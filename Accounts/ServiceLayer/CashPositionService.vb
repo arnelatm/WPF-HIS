@@ -85,7 +85,8 @@ Namespace ServiceLayer
             If Math.Abs(Convert.ToDecimal(table.Rows(0)("SnapshotDifference"))) > 0.00005D Then
                 Throw New InvalidOperationException("CashPositionUnbalancedSnapshot")
             End If
-            Dim result As New CashPositionModel With {.BeginningDate = beginningDate, .EndingDate = endingDate}
+            Dim result As New CashPositionModel With {.BeginningDate = beginningDate, .EndingDate = endingDate,
+                .OpeningSnapshotYear = Convert.ToInt32(table.Rows(0)("SnapshotYear"))}
             Dim accounts As New Dictionary(Of Short, CashPositionAccountModel)
             Dim identities As New HashSet(Of String)(StringComparer.Ordinal)
             For Each row As DataRow In table.Rows
@@ -168,7 +169,8 @@ Namespace ServiceLayer
             If Math.Abs(Convert.ToDecimal(table.Rows(0)("SnapshotDifference"))) > 0.00005D Then
                 Throw New InvalidOperationException("CashPositionUnbalancedSnapshot")
             End If
-            Dim result As New CashPositionModel With {.BeginningDate = beginningDate, .EndingDate = endingDate}
+            Dim result As New CashPositionModel With {.BeginningDate = beginningDate, .EndingDate = endingDate,
+                .OpeningSnapshotYear = Convert.ToInt32(table.Rows(0)("SnapshotYear"))}
             Dim accounts As New Dictionary(Of Short, CashPositionAccountModel)
             Dim identities As New HashSet(Of String)(StringComparer.Ordinal)
             For Each row As DataRow In table.Rows

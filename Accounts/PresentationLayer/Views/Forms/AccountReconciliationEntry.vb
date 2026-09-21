@@ -310,6 +310,7 @@ Namespace PresentationLayer.Views.Forms
             SuspendLayout()
             bsAccountReconciliationItems.DataSource = AccountReconciliationItems
             bsAccountReconciliationItems.AllowNew = True
+            bsAccountReconciliationItems.ResetBindings(False)
             With DataGridViewReconciliationItems
                 .Refresh()
                 .AutoGenerateColumns = False

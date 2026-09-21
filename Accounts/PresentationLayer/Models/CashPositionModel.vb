@@ -39,6 +39,7 @@ Namespace PresentationLayer.Models
     Public Class CashPositionModel
         Public Property BeginningDate As Date
         Public Property EndingDate As Date
+        Public Property OpeningSnapshotYear As Integer?
         Public Property Accounts As New List(Of CashPositionAccountModel)
         Public Property Lines As New List(Of CashPositionLineModel)
     End Class
