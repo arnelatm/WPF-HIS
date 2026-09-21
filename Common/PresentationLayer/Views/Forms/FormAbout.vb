@@ -19,7 +19,17 @@ Namespace PresentationLayer.Views.Forms
             ' TODO: Customize the application's assembly information in the "Application" pane of the project
             '    properties dialog (under the "Project" menu).
             LabelProductName.Text = My.Application.Info.ProductName
-            LabelVersion.Text = String.Format("Version {0}", My.Application.Info.Version.ToString)
+            Dim clickOnceVersion As String = "N/A (local run)"
+            If System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed Then
+                clickOnceVersion = System.Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString()
+            End If
+            LabelVersion.MaximumSize = New System.Drawing.Size(0, 0)
+            TableLayoutPanel.RowStyles(1).SizeType = System.Windows.Forms.SizeType.Absolute
+            TableLayoutPanel.RowStyles(1).Height = 36
+            LabelVersion.Text = String.Format("Assembly version: {0}{1}ClickOnce version: {2}",
+                                              My.Application.Info.Version.ToString(),
+                                              System.Environment.NewLine,
+                                              clickOnceVersion)
             LabelCopyright.Text = My.Application.Info.Copyright
             LabelCompanyName.Text = GlobalVariables.GetEstablishmentName()
             TextBoxDescription.Text = My.Application.Info.Description
