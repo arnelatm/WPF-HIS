@@ -28,3 +28,8 @@ docs/Accounts-System-Handover.md
 _temp/
 Publish/
 *Credit Sales Postings.pdf
+
+# Local Accounts environment configurations (use the sanitized .example.config templates)
+Accounts/app - ibn-server.config
+Accounts/app - ispadmin2.ispdata.config
+Accounts/app - ispadmin2.ispdata_audittest.config

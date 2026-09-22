@@ -2977,8 +2977,9 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="app - ibn-server.config" />
-    <None Include="app - ispadmin2.ispdata_audittest.config" />
+    <None Include="app - ibn-server.example.config" />
+    <None Include="app - ispadmin2.ispdata.example.config" />
+    <None Include="app - ispadmin2.ispdata_audittest.example.config" />
     <None Include="app.config" />
     <None Include="ISPDATADataSet.xsc">
       <DependentUpon>ISPDATADataSet.xsd</DependentUpon>
