@@ -14,8 +14,8 @@ CREATE TABLE [dbo].[MedicalFitnessReportFormatItem] (
     CONSTRAINT [UQ_MedicalFitnessReportFormatItem_FormatTemplate] UNIQUE NONCLUSTERED ([MRIdNo] ASC, [ExamTemplateIdNo] ASC),
     CONSTRAINT [FK_MedicalFitnessReportFormatItem_Format] FOREIGN KEY ([MRIdNo]) REFERENCES [dbo].[MedicalFitnessReportFormat] ([MRIdNo]),
     CONSTRAINT [FK_MedicalFitnessReportFormatItem_Template] FOREIGN KEY ([ExamTemplateIdNo]) REFERENCES [dbo].[MedicalFitnessReportExamTemplate] ([IdNo]),
-    CONSTRAINT [CK_MedicalFitnessReportFormatItem_SectionCode] CHECK ([SectionCode] IN ('CLINICAL', 'XRAY')),
-    CONSTRAINT [CK_MedicalFitnessReportFormatItem_InputMode] CHECK ([InputMode] IS NULL OR [InputMode] IN ('FIT_UNFIT', 'TEXT', 'NUMBER'))
+    CONSTRAINT [CK_MedicalFitnessReportFormatItem_SectionCode] CHECK ([SectionCode] = 'XRAY' OR [SectionCode] = 'CLINICAL'),
+    CONSTRAINT [CK_MedicalFitnessReportFormatItem_InputMode] CHECK ([InputMode] IS NULL OR ([InputMode] = 'NUMBER' OR [InputMode] = 'TEXT' OR [InputMode] = 'FIT_UNFIT'))
 );
 
 

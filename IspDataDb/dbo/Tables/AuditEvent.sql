@@ -19,7 +19,7 @@ CREATE TABLE [dbo].[AuditEvent]
     [ClientApplicationName] NVARCHAR (256) CONSTRAINT [DF_AuditEvent_ClientApplicationName] DEFAULT (APP_NAME()) NULL,
     [ClientIpAddress]   VARCHAR (48) CONSTRAINT [DF_AuditEvent_ClientIpAddress] DEFAULT (CONVERT(VARCHAR(48), CONNECTIONPROPERTY('client_net_address'))) NULL,
     CONSTRAINT [PK_AuditEvent] PRIMARY KEY CLUSTERED ([AuditEventId] ASC),
-    CONSTRAINT [CK_AuditEvent_Action] CHECK ([Action] IN ('Insert', 'Update', 'Delete', 'Post', 'Approve', 'Cancel', 'Close', 'Login', 'Logout', 'Other'))
+    CONSTRAINT [CK_AuditEvent_Action] CHECK ([Action] = 'Other' OR [Action] = 'Logout' OR [Action] = 'Login' OR [Action] = 'Close' OR [Action] = 'Cancel' OR [Action] = 'Approve' OR [Action] = 'Post' OR [Action] = 'Delete' OR [Action] = 'Update' OR [Action] = 'Insert')
 );
 
 GO

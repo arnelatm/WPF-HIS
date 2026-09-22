@@ -7,5 +7,5 @@ CREATE TABLE [dbo].[CashFlowClassification] (
     [IsActive]     BIT             CONSTRAINT [DF_CashFlowClassification_IsActive] DEFAULT ((1)) NOT NULL,
     [Notes]        NVARCHAR (500)  NULL,
     CONSTRAINT [PK_CashFlowClassification] PRIMARY KEY CLUSTERED ([Code] ASC),
-    CONSTRAINT [CK_CashFlowClassification_Section] CHECK ([Section] IN ('Operating', 'Investing', 'Financing', 'Excluded', 'Review'))
+    CONSTRAINT [CK_CashFlowClassification_Section] CHECK ([Section] = 'Review' OR [Section] = 'Excluded' OR [Section] = 'Financing' OR [Section] = 'Investing' OR [Section] = 'Operating')
 );

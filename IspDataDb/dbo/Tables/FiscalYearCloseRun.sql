@@ -33,7 +33,7 @@ CREATE TABLE [dbo].[FiscalYearCloseRun] (
     CONSTRAINT [CK_FiscalYearCloseRun_Dates]
         CHECK ([FiscalYearStart] <= [FiscalYearEnd] AND [OpeningYear] = [FiscalYear] + 1),
     CONSTRAINT [CK_FiscalYearCloseRun_Result]
-        CHECK ([FiscalResult] IN ('PROFIT', 'LOSS', 'BREAK EVEN')),
+        CHECK ([FiscalResult] = 'BREAK EVEN' OR [FiscalResult] = 'LOSS' OR [FiscalResult] = 'PROFIT'),
     CONSTRAINT [CK_FiscalYearCloseRun_OpeningBalanced]
         CHECK (ABS([OpeningDebit] - [OpeningCredit]) <= (0.005)),
     CONSTRAINT [CK_FiscalYearCloseRun_WarningsAcknowledged]

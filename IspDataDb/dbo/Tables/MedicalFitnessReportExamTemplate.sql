@@ -12,8 +12,8 @@ CREATE TABLE [dbo].[MedicalFitnessReportExamTemplate] (
     [Active]          BIT            CONSTRAINT [DF_MedicalFitnessReportExamTemplate_Active] DEFAULT ((1)) NOT NULL,
     CONSTRAINT [PK_MedicalFitnessReportExamTemplate] PRIMARY KEY CLUSTERED ([IdNo] ASC),
     CONSTRAINT [UQ_MedicalFitnessReportExamTemplate_TestCode] UNIQUE NONCLUSTERED ([TestCode] ASC),
-    CONSTRAINT [CK_MedicalFitnessReportExamTemplate_SectionCode] CHECK ([SectionCode] IN ('CLINICAL', 'XRAY')),
-    CONSTRAINT [CK_MedicalFitnessReportExamTemplate_InputMode] CHECK ([InputMode] IN ('FIT_UNFIT', 'TEXT', 'NUMBER'))
+    CONSTRAINT [CK_MedicalFitnessReportExamTemplate_SectionCode] CHECK ([SectionCode] = 'XRAY' OR [SectionCode] = 'CLINICAL'),
+    CONSTRAINT [CK_MedicalFitnessReportExamTemplate_InputMode] CHECK ([InputMode] = 'NUMBER' OR [InputMode] = 'TEXT' OR [InputMode] = 'FIT_UNFIT')
 );
 
 

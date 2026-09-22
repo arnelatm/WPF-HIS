@@ -19,7 +19,7 @@ CREATE TABLE [dbo].[CashFlowAllocation] (
     CONSTRAINT [FK_CashFlowAllocation_CashAccount] FOREIGN KEY ([CashAccountIdNo]) REFERENCES [dbo].[Account] ([IdNo]),
     CONSTRAINT [FK_CashFlowAllocation_Classification] FOREIGN KEY ([ClassificationCode]) REFERENCES [dbo].[CashFlowClassification] ([Code]),
     CONSTRAINT [FK_CashFlowAllocation_Category] FOREIGN KEY ([CategoryCode]) REFERENCES [dbo].[CashFlowClassification] ([Code]),
-    CONSTRAINT [CK_CashFlowAllocation_Status] CHECK ([Status] IN ('Review', 'Approved', 'Rejected'))
+    CONSTRAINT [CK_CashFlowAllocation_Status] CHECK ([Status] = 'Rejected' OR [Status] = 'Approved' OR [Status] = 'Review')
 );
 
 GO
