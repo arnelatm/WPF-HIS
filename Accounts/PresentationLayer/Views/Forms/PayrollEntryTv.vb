@@ -8,7 +8,7 @@ Imports AATM.Libraries.MessagingLibrary
 Namespace PresentationLayer.Views.Forms
 
     Public Class PayrollEntryTv
-        Implements IPayrollView
+        Implements IPayrollView, IPayrollJournalView
 
         Private _payrollAttendance As New List(Of AttendanceItemView)
         Private _payrollOvertime As New List(Of OtWorkHourView)
@@ -157,6 +157,8 @@ Namespace PresentationLayer.Views.Forms
         Public Event InitializePayroll(sender As Object) Implements IPayrollView.InitializePayroll
 
         Public Event GenerateCsvFile(payrollIdNo As Int16) Implements IPayrollView.GenerateCsvFile
+
+        Public Event PostPayroll(sender As Object) Implements IPayrollJournalView.PostPayroll
 
         Public Event SelectedPayrollChanged(payrollIdNo As Int16) Implements IPayrollView.SelectedPayrollChanged
 
@@ -332,13 +334,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub CButton3_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles CButton3.ClickButtonArea
-            'RaiseEvent PostPayroll(Me)
-            btnEdit.Enabled = True
-            btnAdd.Enabled = True
-            TurnOffInputs()
-            'Dim x = IdNo
-            'Close()
-            RunSubForm(Of PayrollDetailEntry, PayrollDetailPresenter(Of PayrollDetailModel))(IdNo, ParentForm)
+            RaiseEvent PostPayroll(Me)
         End Sub
     End Class
 

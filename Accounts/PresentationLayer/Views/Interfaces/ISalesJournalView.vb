@@ -23,6 +23,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property SalesDeposits As List(Of SalesDepositView)
         Property JournalItems As List(Of JournalItemView)
         Property AccountsByCode
+        Property PayeeByCode As Object
         Property DepositTypesByCode
         Property RevCostCentersByCode
 

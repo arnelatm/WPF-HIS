@@ -31,6 +31,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property JournalItems As List(Of JournalItemView)
         Property CsrOiItems As List(Of CsrOiItemView)
         Property AccountsByCode As Object
+        Property PayeeByCode As Object
         Property RevCostCentersByCode As Object
         Property EmployeesByName As Object
         Property CustomersByName As Object

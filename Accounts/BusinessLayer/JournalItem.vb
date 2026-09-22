@@ -23,6 +23,12 @@ Namespace BusinessLayer
         Public Property PaidAmount As Decimal
         Public Property PayeeType As String
         Public Property PayIdNo as Int32
+        Public Property ContactIdNo As Int32?
+        Public Property ContactCSEIdNo As Int32?
+        Public Property ContactCSECode As String
+        Public Property ContactCode As String
+        Public Property ContactName As String
+        Public Property ContactNameAra As String
         Public Property RevCostCenterIdNo As Int16
         Public Property Sequence As Int16
         Public Property SpecialAccount As String

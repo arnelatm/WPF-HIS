@@ -2,10 +2,18 @@ CREATE VIEW dbo.PcJournalItem_View
 AS
 SELECT        dbo.PcJournalItem.AccountIdNo, dbo.PcJournalItem.Credit, dbo.PcJournalItem.Debit, dbo.PcJournalItem.IdNo, dbo.PcJournalItem.JournalIdNo, dbo.PcJournalItem.Notes, dbo.PcJournalItem.RevCostCenterIdNo, 
                          dbo.PcJournalItem.Sequence, dbo.Account.AccountName, dbo.PcJournalItem.Debit - dbo.PcJournalItem.Credit AS OriginalAmount, dbo.Account.PayeeType, dbo.Account.SpecialAccount, 0 AS OpenInvoiceIdNo, 0 AS PaidAmount, 
-                         dbo.ApOpenInvoice_View.PaidAmount AS Expr1, dbo.ApOpenInvoice_View.DiscountTaken, dbo.PcJournalItem.PayIdNo
+                         dbo.ApOpenInvoice_View.PaidAmount AS Expr1, dbo.ApOpenInvoice_View.DiscountTaken, dbo.PcJournalItem.PayIdNo,
+                         ContactData.IdNo AS ContactIdNo,
+                         ContactData.CSEIdNo AS ContactCSEIdNo,
+                         ContactData.CSECode AS ContactCSECode,
+                         ContactData.ContactCode,
+                         ContactData.ContactName,
+                         ContactData.ContactNameAra
 FROM            dbo.PcJournalItem LEFT OUTER JOIN
                          dbo.Account ON dbo.PcJournalItem.AccountIdNo = dbo.Account.IdNo LEFT OUTER JOIN
-                         dbo.ApOpenInvoice_View ON dbo.PcJournalItem.JournalIdNo = dbo.ApOpenInvoice_View.JournalItemIdNo AND dbo.ApOpenInvoice_View.JournalCode = 'PC'
+                         dbo.ApOpenInvoice_View ON dbo.PcJournalItem.JournalIdNo = dbo.ApOpenInvoice_View.JournalItemIdNo AND dbo.ApOpenInvoice_View.JournalCode = 'PC' LEFT OUTER JOIN
+                         dbo.Contact_View AS ContactData ON dbo.PcJournalItem.PayIdNo = ContactData.IdNo
+                         AND (dbo.Account.PayeeType IS NULL OR dbo.Account.PayeeType = ContactData.CSECode)
 
 GO
 

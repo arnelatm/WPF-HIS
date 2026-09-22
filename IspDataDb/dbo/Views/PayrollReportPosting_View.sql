@@ -43,7 +43,6 @@ LEFT JOIN dbo.Contact
 on dbo.Employee.IdNo = dbo.Contact.CSEIdNo and dbo.Contact.CSECode='E'
 Left Join dbo.RevCostCenter
 on IsNull(dbo.Employee.RevCostCenterIdNo,IsNull(dbo.PayGroup.RevCostCenterIdNo,0)) = RevCostCenter.IdNo
-where dbo.Employee.SponsorType <> '4'
 Group by dbo.Employee.PayGroupIdNo,PayGroupName,PayElementGroupName,PayGroupName,UsePayGroups,dbo.Contact.IdNo,dbo.RevCostCenter.RevCostCenterName,dbo.RevCostCenter.RevCostCenterCode,
 iif(dbo.PayElement.UsePayGroups=0,dbo.PayElement.AccountIdNo,IsNull(dbo.PayElementAccount.AccountIdNo,dbo.PayELement.AccountIdNo)),
 IsNull(dbo.Employee.RevCostCenterIdNo,IsNull(dbo.PayGroup.RevCostCenterIdNo,0)),

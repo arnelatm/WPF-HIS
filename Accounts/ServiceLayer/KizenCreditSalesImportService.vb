@@ -201,7 +201,9 @@ Namespace ServiceLayer
                     .VatAmount = work.VatAmount
                 }
                 batchSequence = company.BatchSequence
-                AddItem(company, accountIds(ArAccountCode), work.Amount, 0D, defaultCostCenterId, "AR - " & work.CompanyCode)
+                Dim arLineNotes = "Bill for " & batch.SourcePeriodStart.ToString(
+                    "MMMM yyyy", Globalization.CultureInfo.GetCultureInfo("en-US"))
+                AddItem(company, accountIds(ArAccountCode), work.Amount, 0D, defaultCostCenterId, arLineNotes)
 
                 For Each bucket In work.Buckets.Values
                     Dim amount = RoundMoney(bucket.Amount)

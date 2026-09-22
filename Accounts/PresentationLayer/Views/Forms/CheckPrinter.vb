@@ -177,6 +177,7 @@ Namespace PresentationLayer.Views.Forms
         Public Property PcClosed As Boolean Implements IDisbursementJournalView.PcClosed
 
         Public Property AccountsByCode As Object Implements IDisbursementJournalView.AccountsByCode
+        Public Property PayeeByCode As Object Implements IDisbursementJournalView.PayeeByCode
         Public Property EmployeesByName As Object Implements IDisbursementJournalView.EmployeesByName
         Public Property SuppliersByName As Object Implements IDisbursementJournalView.SuppliersByName
         Public Property CustomersByName As Object Implements IDisbursementJournalView.CustomersByName

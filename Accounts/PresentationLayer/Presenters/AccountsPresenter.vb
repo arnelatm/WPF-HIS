@@ -1,4 +1,6 @@
 ﻿Imports System.Windows.Navigation
+Imports System.Data
+Imports System.Collections.Generic
 Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
@@ -49,6 +51,153 @@ Namespace PresentationLayer.Presenters
             Dim accountService As New AccountsService("Account")
             Return accountService.GetRecordByIdNo(Of AccountModel)(idNo)
         End Function
+
+        Public Function JournalItemPayeesAreValid(journalItems As IEnumerable(Of AATM.Accounts.PresentationLayer.Views.Interfaces.IJournalItemView), payeeDataSource As Object) As Boolean
+            If journalItems Is Nothing Then Return True
+
+            Dim payeeRows As DataTable = TryCast(payeeDataSource, DataTable)
+            If payeeRows Is Nothing Then
+                Dim payeeView As DataView = TryCast(payeeDataSource, DataView)
+                If payeeView IsNot Nothing Then payeeRows = payeeView.Table
+            End If
+            If payeeRows Is Nothing Then
+                payeeRows = TryCast(Service.GetDtRecords("Contact_View", "IdNo,CSECode"), DataTable)
+            End If
+
+            Dim contactTypes As New Dictionary(Of Int32, String)
+            If payeeRows IsNot Nothing AndAlso payeeRows.Columns.Contains("IdNo") AndAlso payeeRows.Columns.Contains("CSECode") Then
+                For Each contactRow As DataRow In payeeRows.Rows
+                    If Not contactRow.IsNull("IdNo") Then
+                        contactTypes(Convert.ToInt32(contactRow("IdNo"))) = Convert.ToString(contactRow("CSECode"))
+                    End If
+                Next
+            End If
+
+            Dim rowNumber As Integer = 0
+            For Each item In journalItems
+                rowNumber += 1
+                If item Is Nothing Then Continue For
+                If item.Debit = 0D AndAlso item.Credit = 0D Then Continue For
+
+                Dim lineNumber As Integer = If(item.Sequence > 0, CInt(item.Sequence), rowNumber)
+                Dim requiredType As String = GetJournalItemPayeeType(item)
+
+                If Not String.Equals(requiredType, "C", StringComparison.OrdinalIgnoreCase) AndAlso
+                   Not String.Equals(requiredType, "S", StringComparison.OrdinalIgnoreCase) AndAlso
+                   Not String.Equals(requiredType, "E", StringComparison.OrdinalIgnoreCase) Then Continue For
+
+                If item.PayIdNo <= 0 Then
+                    ShowJournalItemPayeeError(item, lineNumber,
+                                              "MsgPayeeRequiredForAccount",
+                                              "A customer, supplier, or employee must be selected for this account.",
+                                              "Payee Required")
+                    Return False
+                End If
+
+                Dim contactType As String = Nothing
+                If Not contactTypes.TryGetValue(item.PayIdNo, contactType) OrElse
+                   Not String.Equals(contactType, requiredType, StringComparison.OrdinalIgnoreCase) Then
+                    ShowJournalItemPayeeError(item, lineNumber,
+                                              "MsgGeneralJournalPayeeMustMatchAccountType",
+                                              "The selected contact must match the account payee type.",
+                                              "Invalid Payee")
+                    Return False
+                End If
+            Next
+
+            Return True
+        End Function
+
+        Private Sub ShowJournalItemPayeeError(item As AATM.Accounts.PresentationLayer.Views.Interfaces.IJournalItemView,
+                                              lineNumber As Integer,
+                                              messageKey As String,
+                                              defaultMessage As String,
+                                              defaultCaption As String)
+            Dim accountName As String = If(item.AccountName, String.Empty).Trim()
+            If accountName = String.Empty Then
+                accountName = "Account " & If(item.AccountIdNo.HasValue, item.AccountIdNo.Value.ToString(), String.Empty)
+            End If
+
+            Dim lineCaption As String = Messaging.TranslateCaption("Line")
+            If String.IsNullOrWhiteSpace(lineCaption) Then lineCaption = "Line"
+
+            Dim message As String = Messaging.GetMessage(True, messageKey)
+            If String.IsNullOrWhiteSpace(message) Then message = defaultMessage
+            message = String.Format("{0} {1} ({2}): {3}", lineCaption, lineNumber, accountName, message)
+
+            Dim caption As String = Messaging.GetMessageCaption(messageKey)
+            If String.IsNullOrWhiteSpace(caption) Then caption = defaultCaption
+            Messaging.Show(message, caption)
+        End Sub
+
+        Public Function GetJournalItemPayeeType(journalItem As AATM.Accounts.PresentationLayer.Views.Interfaces.IJournalItemView) As String
+            If journalItem Is Nothing Then Return Nothing
+
+            'The ledger classification is authoritative for the AP, AR, and
+            'employee-loan control accounts, even if an account's PayeeType is
+            'configured inconsistently.
+            Select Case If(journalItem.SpecialAccount, String.Empty).Trim().ToUpperInvariant()
+                Case "AP", "AS", "PD"
+                    Return "S"
+                Case "AR", "CA", "RD", "SD"
+                    Return "C"
+                Case "EL"
+                    Return "E"
+            End Select
+
+            If String.Equals(journalItem.PayeeType, "C", StringComparison.OrdinalIgnoreCase) OrElse
+               String.Equals(journalItem.PayeeType, "S", StringComparison.OrdinalIgnoreCase) OrElse
+               String.Equals(journalItem.PayeeType, "E", StringComparison.OrdinalIgnoreCase) Then
+                Return journalItem.PayeeType
+            End If
+
+            Return Nothing
+        End Function
+
+        Public Sub SetJournalItemPayeesForType(journalItems As IEnumerable(Of AATM.Accounts.PresentationLayer.Views.Interfaces.IJournalItemView),
+                                               cseCode As String,
+                                               cseIdNo As Integer?,
+                                               payeeDataSource As Object)
+            If journalItems Is Nothing Then Return
+
+            For Each item In journalItems
+                If item Is Nothing OrElse (item.Debit = 0D AndAlso item.Credit = 0D) Then Continue For
+                If String.Equals(GetJournalItemPayeeType(item), cseCode, StringComparison.OrdinalIgnoreCase) Then
+                    SetJournalItemPayeeIfMissing(item, cseCode, cseIdNo, payeeDataSource)
+                End If
+            Next
+        End Sub
+
+        Public Function GetContactIdNo(cseCode As String, cseIdNo As Integer?, payeeDataSource As Object) As Integer
+            If String.IsNullOrWhiteSpace(cseCode) OrElse Not cseIdNo.HasValue OrElse cseIdNo.Value <= 0 Then Return 0
+
+            Dim payeeRows As DataTable = TryCast(payeeDataSource, DataTable)
+            If payeeRows Is Nothing Then
+                Dim payeeView As DataView = TryCast(payeeDataSource, DataView)
+                If payeeView IsNot Nothing Then payeeRows = payeeView.Table
+            End If
+            If payeeRows Is Nothing OrElse Not payeeRows.Columns.Contains("IdNo") OrElse
+               Not payeeRows.Columns.Contains("CSECode") OrElse Not payeeRows.Columns.Contains("CSEIdNo") Then Return 0
+
+            For Each contactRow As DataRow In payeeRows.Rows
+                If contactRow.IsNull("IdNo") OrElse contactRow.IsNull("CSEIdNo") OrElse contactRow.IsNull("CSECode") Then Continue For
+                If Convert.ToInt32(contactRow("CSEIdNo")) = cseIdNo.Value AndAlso
+                   String.Equals(Convert.ToString(contactRow("CSECode")), cseCode, StringComparison.OrdinalIgnoreCase) Then
+                    Return Convert.ToInt32(contactRow("IdNo"))
+                End If
+            Next
+
+            Return 0
+        End Function
+
+        Public Sub SetJournalItemPayeeIfMissing(journalItem As AATM.Accounts.PresentationLayer.Views.Interfaces.IJournalItemView,
+                                                cseCode As String,
+                                                cseIdNo As Integer?,
+                                                payeeDataSource As Object)
+            If journalItem Is Nothing OrElse journalItem.PayIdNo > 0 Then Return
+            journalItem.PayeeType = cseCode
+            journalItem.PayIdNo = GetContactIdNo(cseCode, cseIdNo, payeeDataSource)
+        End Sub
 
         Public Function AddArOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer
             Dim arOpenInvoiceService As New AccountsService("ArOpenInvoice")

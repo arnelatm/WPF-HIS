@@ -88,6 +88,8 @@ Namespace PresentationLayer.Presenters
             AddHandler view.InitializeAttendance, AddressOf InitializeAttendance
             AddHandler view.InitializeOvertime, AddressOf InitializeOvertime
             AddHandler view.GenerateRegularPayElements, AddressOf GenerateRegularPayElements
+            Dim journalView = TryCast(view, IPayrollJournalView)
+            If journalView IsNot Nothing Then AddHandler journalView.PostPayroll, AddressOf CreatePayrollJournal
             AddHandler view.ClearAllEmployee, AddressOf OnClearAllEmployeeId
             AddHandler view.PayCycleChanged, AddressOf OnPayCycleChanged
 
@@ -1412,125 +1414,76 @@ Namespace PresentationLayer.Presenters
             Next item
         End Sub
 
-        Public Sub PostPayroll()
-            _payrollIdNo = View.IdNo
-            If View.PayrollAttendance.Count() = 0 And View.PayrollOvertime.Count() = 0 Then
-                Messaging.Show(True, "MsgEmptyEmployeeAttendanceOt")
-            Else
-                Dim payelementsModel As New List(Of PayElementModel)
-                payelementsModel = _payElementsService.GetDaoRecords()
-                Dim progressDisplayForm = New CBaseControlsLibrary.DisplayProgressForm
-                Dim counter As Integer = 0
-                _savedPayrollPayElements = _payrollPayElementsService.GetRecordsWithGroupIdNo(Of PayrollPayElementModel)(_payrollIdNo)
-                progressDisplayForm.Show()
-                progressDisplayForm.InitializeDisplay(_savedPayrollPayElements.Count())
-                'Dim payrollDetailIdNo As Int32
-                'Dim payElementIdNo As Int16
-                'For Each payrollPayElement In _savedPayrollPayElements
-                '    payElementIdNo = payrollPayElement.PayElementIdNo
-
-                '    If PayrollDetailModel.IdNo = 0 Then
-                '        payrollDetailIdNo = _payrollDetailsService.AddRecord(PayrollDetailModel)
-                '    Else
-                '        payrollDetailIdNo = PayrollDetailModel.IdNo
-                '    End If
-                '    CreatePayrollPayElements(PayrollDetailModel, regenerate, payrollDetailIdNo)
-                '    counter = counter + 1
-                '    progressDisplayForm.UpdateProgressBar(counter)
-                'Next
-
-                'Dim counter As Integer = 0
-                'Dim progressDisplayForm = New CBaseControlsLibrary.DisplayProgressForm
-                'progressDisplayForm.Show()
-                'progressDisplayForm.InitializeDisplay(_payrollDetailsModel.Count() + 2)
-                'If regenerate Then
-                '    _savedPayrollPayElements = _payrollPayElementsService.GetRecordsWithGroupIdNo(Of PayrollPayElementModel)(_payrollIdNo)
-                '    Dim payrollDetailIdNo As Int32
-                '    For Each payrollDetailModel In _payrollDetailsModel
-                '        If payrollDetailModel.Selected Then
-                '            If payrollDetailModel.IdNo = 0 Then
-                '                payrollDetailIdNo = _payrollDetailsService.AddRecord(payrollDetailModel)
-                '            Else
-                '                payrollDetailIdNo = payrollDetailModel.IdNo
-                '            End If
-                '            CreatePayrollPayElements(payrollDetailModel, regenerate, payrollDetailIdNo)
-                '        End If
-                '        counter = counter + 1
-                '        progressDisplayForm.UpdateProgressBar(counter)
-                '    Next
-                '    For Each item In _savedPayrollPayElements
-                '        'Dim dataRow As DataRow
-                '        Dim payrollAttendance As AttendanceItemView
-                '        payrollAttendance = View.PayrollAttendance.Find(Function(c) c.EmployeeIdNo = item.EmployeeIdNo)
-                '        If payrollAttendance Is Nothing Then
-                '            _payrollPayElements.Add(item)
-                '        Else
-                '            If payrollAttendance.Selected Then
-                '                If item.Generated Then
-                '                    ' ignore these records they have already been regenerated
-                '                Else
-                '                    _payrollPayElements.Add(item)
-                '                End If
-                '            Else
-                '                _payrollPayElements.Add(item)
-                '            End If
-                '        End If
-                '    Next
-                '    For Each item In _payrollPayElements
-                '        Dim dataRow As DataRow
-                '        If item.IdNo = 0 Then
-                '            dataRow = dtGeneralJournalItem.NewRow()
-                '        Else
-                '            dataRow = dtPayrollPayElementUpdateTable.NewRow()
-                '            dataRow("IdNo") = item.IdNo
-                '        End If
-                '        dataRow("Amount") = item.Amount
-                '        dataRow("Generated") = item.Generated
-                '        dataRow("PayElementIdNo") = item.PayElementIdNo
-                '        dataRow("PayrollDetailIdNo") = item.PayrollDetailIdNo
-                '        dataRow("RecurringPayElementIdNo") = item.RecurringPayElementIdNo
-                '        If item.IdNo = 0 Then
-                '            dtGeneralJournalItem.Rows.Add(dataRow)
-                '        Else
-                '            dtPayrollPayElementUpdateTable.Rows.Add(dataRow)
-                '        End If
-                '    Next
-                'Else
-                '    ' payrolldetails already saved and generated
-                '    ' so re-read the saved data because we need their linked idno for the
-                '    ' payrollpayelementdetails
-                '    _payrollDetailsModel = _payrollDetailsService.GetRecordsWithGroupIdNo(Of PayrollDetailModel)(_payrollIdNo)
-                '    For Each payrollDetailModel In _payrollDetailsModel
-                '        CreatePayrollPayElements(payrollDetailModel, regenerate, payrollDetailModel.IdNo)
-                '        counter = counter + 1
-                '        progressDisplayForm.UpdateProgressBar(counter)
-                '    Next
-                '    For Each item In _payrollPayElements
-                '        Dim dataRow As DataRow
-                '        dataRow = dtGeneralJournalItem.NewRow()
-                '        dataRow("Amount") = item.Amount
-                '        dataRow("Generated") = True
-                '        dataRow("PayElementIdNo") = item.PayElementIdNo
-                '        dataRow("PayrollDetailIdNo") = item.PayrollDetailIdNo
-                '        dataRow("RecurringPayElementIdNo") = item.RecurringPayElementIdNo
-                '        dtGeneralJournalItem.Rows.Add(dataRow)
-                '    Next
-                'End If
-                'counter = counter + 1
-                'If regenerate Then
-                '    _payrollPayElementsService.UpdateInsertTvp(dtPayrollPayElementUpdateTable, dtGeneralJournalItem, _payrollIdNo)
-                'Else
-                '    _payrollPayElementsService.InsertTvp(dtGeneralJournalItem)
-                'End If
-                'dtPayrollPayElementUpdateTable.Clear()
-                'dtGeneralJournalItem.Clear()
-                '_payrollPayElements.Clear()
-                'progressDisplayForm.UpdateProgressBar(counter + 1)
-                'progressDisplayForm.Close()
-                ''Messaging.Show(True, "MsgPayrollGenerationCompleted")
-                'Beep()
+        Private Sub CreatePayrollJournal(sender As Object)
+            If AddMode OrElse EditMode OrElse View.IdNo <= 0 OrElse Not View.EndDate.HasValue Then
+                Dim missingPayrollMessage As String = If(CultureInfo.CurrentCulture.TwoLetterISOLanguageName = "ar",
+                                                         "يرجى حفظ مسيرة الرواتب أو إلغاء التعديلات أولاً.",
+                                                         "Save the payroll record or cancel its pending edits before creating the General Journal.")
+                Messaging.Show(missingPayrollMessage, MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
             End If
-            'End If
+
+            If Not HasGeneralJournalMenuAccess() Then
+                Dim accessDeniedMessage As String = If(CultureInfo.CurrentCulture.TwoLetterISOLanguageName = "ar",
+                                                       "ليس لديك صلاحية إنشاء قيود اليومية العامة.",
+                                                       "You do not have permission to create General Journal entries.")
+                Messaging.Show(accessDeniedMessage, MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
+
+            Dim monthName As String = New CultureInfo("en-US").DateTimeFormat.GetMonthName(View.EndDate.Value.Month)
+            Dim notes As String = String.Format("Payroll for {0} {1}", monthName, View.EndDate.Value.Year)
+            Dim isArabic As Boolean = CultureInfo.CurrentCulture.TwoLetterISOLanguageName = "ar"
+            Dim confirmation As String = If(isArabic,
+                                            "سيتم إنشاء مسودة قيد يومية لهذه المسيرة ولن يتم ترحيلها. هل تريد المتابعة؟",
+                                            String.Format("Create a draft General Journal for payroll {0}? It will not be posted.", monthName & " " & View.EndDate.Value.Year))
+            Dim caption As String = If(isArabic, "إنشاء قيد الرواتب", "Create Payroll Journal")
+            Dim messageOptions As MessageBoxOptions = If(isArabic,
+                                                         MessageBoxOptions.RightAlign Or MessageBoxOptions.RtlReading,
+                                                         CType(0, MessageBoxOptions))
+            If MessageBox.Show(confirmation, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2, messageOptions) <> DialogResult.Yes Then
+                Return
+            End If
+
+            Try
+                Dim alreadyExists As Boolean = False
+                Dim journalIdNo As Integer = New AATM.Accounts.ServiceLayer.PayrollJournalTransactionService().CreateForPayroll(View.IdNo, notes, alreadyExists)
+                Dim message As String
+                If isArabic Then
+                    If alreadyExists Then
+                        message = String.Format("تم إنشاء قيد يومية لهذه المسيرة مسبقاً. رقم القيد {0}.", journalIdNo)
+                    Else
+                        message = String.Format("تم إنشاء مسودة قيد اليومية رقم {0}. يرجى مراجعتها وترحيلها من شاشة اليومية العامة.", journalIdNo)
+                    End If
+                ElseIf alreadyExists Then
+                    message = String.Format("A General Journal already exists for this payroll (journal {0}). No duplicate was created.", journalIdNo)
+                Else
+                    message = String.Format("Draft General Journal {0} was created for this payroll. Review and post it from General Journal Entry.", journalIdNo)
+                End If
+                Messaging.Show(message, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Catch ex As Exception
+                Messaging.Show(ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End Sub
+
+        Private Function HasGeneralJournalMenuAccess() As Boolean
+            If UserIsASuperAdmin() Then Return True
+
+            For Each menuSecurityKey As String In {"Menu > AccountsMenu", "Menu > AccountsMenu > Transactions", "Menu > AccountsMenu > Transactions > GeneralJournalEntry"}
+                Dim menuSecurityIdNo As Integer
+                Integer.TryParse(GetControlSecurityIdNo(menuSecurityKey, True), menuSecurityIdNo)
+                If menuSecurityIdNo > 0 Then
+                    Dim menuPermissions = GetUserSecurity(menuSecurityIdNo, GlobalVariables.SecurityGroupIdNo)
+                    If menuPermissions.Count < 2 OrElse Not CBool(menuPermissions(0)) OrElse Not CBool(menuPermissions(1)) Then
+                        Return False
+                    End If
+                End If
+            Next
+            Return True
+        End Function
+
+        Public Sub PostPayroll()
+            CreatePayrollJournal(View)
         End Sub
 
     End Class

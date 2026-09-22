@@ -110,6 +110,7 @@ Namespace PresentationLayer.Presenters
         Protected Overrides Sub CreateDataSources()
             MakeVarDataSources({New Object() {"Account", "AccountsByCode", Nothing, "DetailAccount=1"},
             New Object() {"RevCostCenter", "RevCostCentersByCode", Nothing, Nothing},
+            New Object() {"Contact_View", "PayeeByCode", "IdNo,CSEIdNo,CSECode,ContactCode,ContactName,ContactNameAra", Nothing},
             New Object() {"Employee", "EmployeesByName", Nothing, Nothing},
             New Object() {"Customer", "CustomersByName", Nothing, Nothing},
             New Object() {"Supplier", "SuppliersByName", Nothing, Nothing}})
@@ -205,7 +206,6 @@ Namespace PresentationLayer.Presenters
             If Not CancelSave Then
                 Dim lViewPaymentTypeEnum As PaymentTypeSelection = CodeToEnum(Of PaymentTypeSelection)(View.PaymentType)
                 If lViewPaymentTypeEnum <> PaymentTypeSelection.AccountsPayable Then
-                    CustomObjToDataTables(View.JournalItems, DtInsertTable, DtUpdateTable, AddressOf JournalItemFillData, AddressOf JournalItemFilter)
                     View.UnApplied = 0
                     View.Applied = View.Amount
                     If DtOiInsertTable IsNot Nothing Then
@@ -217,9 +217,29 @@ Namespace PresentationLayer.Presenters
                 Else
                     'View.TotalDebits = 0
                     MakeJournalItem()
-                    CustomObjToDataTables(View.JournalItems, DtInsertTable, DtUpdateTable, AddressOf JournalItemFillData, AddressOf JournalItemFilter)
-                    CustomObjToDataTables(View.DjOiItems, DtOiInsertTable, DtOiUpdateTable, AddressOf DjOiFillData, AddressOf DjOiItemFilter)
                     'View.TotalCredits = View.TotalDebits
+                End If
+
+                Dim defaultPayeeType As String = Nothing
+                Select Case lViewPaymentTypeEnum
+                    Case PaymentTypeSelection.AccountsPayable, PaymentTypeSelection.Supplier
+                        defaultPayeeType = "S"
+                    Case PaymentTypeSelection.Employee
+                        defaultPayeeType = "E"
+                    Case PaymentTypeSelection.CustomerRefund
+                        defaultPayeeType = "C"
+                End Select
+                If defaultPayeeType IsNot Nothing Then
+                    SetJournalItemPayeesForType(View.JournalItems, defaultPayeeType, View.PayeeIdNo, View.PayeeByCode)
+                End If
+                If Not JournalItemPayeesAreValid(View.JournalItems, View.PayeeByCode) Then
+                    CancelSave = True
+                    Return
+                End If
+
+                CustomObjToDataTables(View.JournalItems, DtInsertTable, DtUpdateTable, AddressOf JournalItemFillData, AddressOf JournalItemFilter)
+                If lViewPaymentTypeEnum = PaymentTypeSelection.AccountsPayable Then
+                    CustomObjToDataTables(View.DjOiItems, DtOiInsertTable, DtOiUpdateTable, AddressOf DjOiFillData, AddressOf DjOiItemFilter)
                 End If
 
                 For Each item In View.JournalItems
@@ -244,7 +264,12 @@ Namespace PresentationLayer.Presenters
         Public Overrides Function Save(ByRef viewControl As System.Windows.Forms.Control) As Boolean
             If TableName = "PcJournal" AndAlso AddMode AndAlso View.TransactionDate.HasValue AndAlso View.TransactionDate.Value.Date >= New Date(2026, 1, 1) Then
                 Try
+                    If Not IsBizDataValid() Then Return False
+                    CancelSave = False
+                    OnTransactionBeforeSave()
+                    If CancelSave Then Return False
                     OnBeforeSave()
+                    If CancelSave Then Return False
                     Dim model As New DisbursementJournalModel()
                     GlobalVariables.Mapper.Map(View, model)
                     Dim idNo = New AATM.Accounts.ServiceLayer.PettyCashJournalTransactionService().SaveNew(model)
@@ -260,7 +285,12 @@ Namespace PresentationLayer.Presenters
             End If
             If TableName = "PcJournal" AndAlso EditMode AndAlso View.TransactionDate.HasValue AndAlso View.TransactionDate.Value.Date >= New Date(2026, 1, 1) Then
                 Try
+                    If Not IsBizDataValid() Then Return False
+                    CancelSave = False
+                    OnTransactionBeforeSave()
+                    If CancelSave Then Return False
                     OnBeforeSave()
+                    If CancelSave Then Return False
                     Dim model As New DisbursementJournalModel()
                     GlobalVariables.Mapper.Map(View, model)
                     Dim transactionService As New AATM.Accounts.ServiceLayer.PettyCashJournalTransactionService()
@@ -276,7 +306,12 @@ Namespace PresentationLayer.Presenters
             End If
             If TableName = "CdJournal" AndAlso AddMode AndAlso View.TransactionDate.HasValue AndAlso View.TransactionDate.Value.Date >= New Date(2026, 1, 1) Then
                 Try
+                    If Not IsBizDataValid() Then Return False
+                    CancelSave = False
+                    OnTransactionBeforeSave()
+                    If CancelSave Then Return False
                     OnBeforeSave()
+                    If CancelSave Then Return False
                     Dim model As New DisbursementJournalModel()
                     GlobalVariables.Mapper.Map(View, model)
                     Dim idNo = New AATM.Accounts.ServiceLayer.CashDisbursementJournalTransactionService().SaveNew(model)
@@ -292,7 +327,12 @@ Namespace PresentationLayer.Presenters
             End If
             If TableName = "CdJournal" AndAlso EditMode AndAlso View.TransactionDate.HasValue AndAlso View.TransactionDate.Value.Date >= New Date(2026, 1, 1) Then
                 Try
+                    If Not IsBizDataValid() Then Return False
+                    CancelSave = False
+                    OnTransactionBeforeSave()
+                    If CancelSave Then Return False
                     OnBeforeSave()
+                    If CancelSave Then Return False
                     Dim model As New DisbursementJournalModel()
                     GlobalVariables.Mapper.Map(View, model)
                     Dim transactionService As New AATM.Accounts.ServiceLayer.CashDisbursementJournalTransactionService()
@@ -381,6 +421,18 @@ Namespace PresentationLayer.Presenters
 
         Protected Overrides Function IsBizDataValid() As Boolean
             Dim retValue = False
+            Dim payeeType As String = Nothing
+            Select Case CodeToEnum(Of PaymentTypeSelection)(View.PaymentType)
+                Case PaymentTypeSelection.AccountsPayable, PaymentTypeSelection.Supplier
+                    payeeType = "S"
+                Case PaymentTypeSelection.Employee
+                    payeeType = "E"
+                Case PaymentTypeSelection.CustomerRefund
+                    payeeType = "C"
+            End Select
+            If payeeType IsNot Nothing Then
+                SetJournalItemPayeesForType(View.JournalItems, payeeType, View.PayeeIdNo, View.PayeeByCode)
+            End If
             If MyBase.IsBizDataValid() Then
                 Dim dateToday As DateTime = Now()
                 retValue = True
@@ -413,6 +465,9 @@ Namespace PresentationLayer.Presenters
                             index += 1
                         Next
                     End If
+                End If
+                If retValue AndAlso Not JournalItemPayeesAreValid(View.JournalItems, View.PayeeByCode) Then
+                    retValue = False
                 End If
                 If retValue >= 0 Then
                     For Each item In View.JournalItems
@@ -760,6 +815,8 @@ Namespace PresentationLayer.Presenters
                             Dim nAmount = aAmount(i) + aDiscountTaken(i)
                             ji.Debit = If(nAmount < 0, 0, nAmount)
                             ji.Credit = If(nAmount < 0, nAmount * -1, 0)
+                            ji.PayeeType = "S"
+                            SetJournalItemPayeeIfMissing(ji, "S", View.PayeeIdNo, View.PayeeByCode)
                             aAdded(i) = True
                             Exit For
                         End If
@@ -773,6 +830,8 @@ Namespace PresentationLayer.Presenters
                         If ji.AccountIdNo = View.DiscountAccountIdNo Then
                             ji.Debit = If(View.DiscountTaken < 0, View.DiscountTaken * -1, 0)
                             ji.Credit = If(View.DiscountTaken < 0, 0, View.DiscountTaken)
+                            ji.PayeeType = "S"
+                            SetJournalItemPayeeIfMissing(ji, "S", View.PayeeIdNo, View.PayeeByCode)
                             found = True
                         End If
                     End If
@@ -788,8 +847,10 @@ Namespace PresentationLayer.Presenters
                                 .Credit = If(View.DiscountTaken < 0, 0, View.DiscountTaken),
                                 .Debit = If(View.DiscountTaken < 0, View.DiscountTaken * -1, 0),
                                 .RevCostCenterIdNo = 0,
+                                .PayeeType = "S",
                                 .Notes = ""
                                 }
+                        SetJournalItemPayeeIfMissing(item, "S", View.PayeeIdNo, View.PayeeByCode)
                         View.JournalItems.Add(item)
                     End If
                 End If
@@ -808,8 +869,10 @@ Namespace PresentationLayer.Presenters
                                 .Credit = If(nAmount < 0, nAmount * -1, 0),
                                 .Debit = If(nAmount < 0, 0, nAmount),
                                 .RevCostCenterIdNo = 0,
+                                .PayeeType = "S",
                                 .Notes = ""
                                 }
+                        SetJournalItemPayeeIfMissing(ji, "S", View.PayeeIdNo, View.PayeeByCode)
                         View.JournalItems.Add(ji)
                     End If
                     nCounter += 1
@@ -825,6 +888,8 @@ Namespace PresentationLayer.Presenters
                             ' debit and credit must be zero otherwise that account has already been used above
                             item.Credit = 0
                             item.Debit = View.UnApplied
+                            item.PayeeType = "S"
+                            SetJournalItemPayeeIfMissing(item, "S", View.PayeeIdNo, View.PayeeByCode)
                             unAppliedSwitch = 1
                             Exit For
                         End If
@@ -838,16 +903,32 @@ Namespace PresentationLayer.Presenters
                             .Credit = 0,
                             .Debit = View.UnApplied,
                             .RevCostCenterIdNo = 0,
+                            .PayeeType = "S",
                             .Notes = ""
                             }
+                        SetJournalItemPayeeIfMissing(jiModel, "S", View.PayeeIdNo, View.PayeeByCode)
                         View.JournalItems.Add(jiModel)
                     End If
                 Else
                     ' no advance payment so no advances to Supplier Account
                 End If
+                NormalizeJournalItemSequences()
             Else
                 View.DjOiItems.Clear()
             End If
+        End Sub
+
+        Private Sub NormalizeJournalItemSequences()
+            If View.JournalItems Is Nothing Then Return
+
+            Dim sequence As Integer = 1
+            For Each item In View.JournalItems
+                If item IsNot Nothing AndAlso
+                   (item.Sequence = 1 OrElse item.Debit <> 0 OrElse item.Credit <> 0) Then
+                    item.Sequence = CShort(sequence)
+                    sequence += 1
+                End If
+            Next
         End Sub
 
         Private Function SaveOpenInvoices()
@@ -940,53 +1021,10 @@ Namespace PresentationLayer.Presenters
         Private Function JournalItemDataIsValid() As Boolean
             Dim retValue As Boolean = True
             For Each item In View.JournalItems
-                If CodeToEnum(Of PaymentTypeSelection)(View.PaymentType) <> PaymentTypeSelection.AccountsPayable Then
-                    If (item.AccountIdNo Is Nothing OrElse item.AccountIdNo = 0) AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
-                        MessageBox.Show(String.Format("Error in line {0:N0}. Cannot save entries with blank account id.", item.Sequence.ToString()))
-                        retValue = False
-                        Exit For
-                    End If
-                    If CodeToEnum(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.Employee Then
-                        If CodeToEnum(Of SpecialAccountSelection)(item.SpecialAccount) = SpecialAccountSelection.AccountsPayable Or
-                           CodeToEnum(Of SpecialAccountSelection)(item.SpecialAccount) = SpecialAccountSelection.AccountsReceivable Then
-                            Dim lineNumber = Format(item.Sequence, "0")
-                            Dim entryNames = Messaging.TranslateCaption("Accounts Receivables/Accounts Payables")
-                            Dim caption = "Invalid Entry"
-                            Dim variables As String() = {"lineNumber", lineNumber, "entryNames", entryNames}
-                            Dim message = Messaging.GetMessage(True, "MsgAccountsNotAllowed", "Error on line {lineNumber}. Sorry {entryNames} accounts not allowed for this transaction!", caption)
-                            caption = Messaging.TranslateCaption(caption)
-                            Messaging.Show(message, caption, variables, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                            retValue = False
-                            Exit For
-                        End If
-                    ElseIf CodeToEnum(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.CustomerRefund Then
-                        If CodeToEnum(Of SpecialAccountSelection)(item.SpecialAccount) = SpecialAccountSelection.AccountsPayable Or
-                           CodeToEnum(Of SpecialAccountSelection)(item.SpecialAccount) = SpecialAccountSelection.EmployeeLoan Then
-                            Dim lineNumber = Format(item.Sequence, "0")
-                            Dim entryNames = Messaging.TranslateCaption("Accounts Payables/Employee")
-                            Dim caption = "Invalid Entry"
-                            Dim variables As String() = {"lineNumber", lineNumber, "entryNames", entryNames}
-                            Dim message = Messaging.GetMessage(True, "MsgAccountsNotAllowed")
-                            caption = Messaging.TranslateCaption(caption)
-                            Messaging.Show(message, caption, variables, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                            retValue = False
-                            Exit For
-                        End If
-                    Else
-                        If CodeToEnum(Of SpecialAccountSelection)(item.SpecialAccount) = SpecialAccountSelection.AccountsPayable Or
-                           CodeToEnum(Of SpecialAccountSelection)(item.SpecialAccount) = SpecialAccountSelection.AccountsReceivable Or
-                           CodeToEnum(Of SpecialAccountSelection)(item.SpecialAccount) = SpecialAccountSelection.EmployeeLoan Then
-                            Dim lineNumber = Format(item.Sequence, "0")
-                            Dim entryNames = Messaging.TranslateCaption("Accounts Payables/Accounts Receivables/Employee")
-                            Dim caption = "Invalid Entry"
-                            Dim variables As String() = {"lineNumber", lineNumber, "entryNames", entryNames}
-                            Dim message = Messaging.GetMessage(True, "MsgAccountsNotAllowed")
-                            caption = Messaging.TranslateCaption(caption)
-                            Messaging.Show(message, caption, variables, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                            retValue = False
-                            Exit For
-                        End If
-                    End If
+                If (item.AccountIdNo Is Nothing OrElse item.AccountIdNo = 0) AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
+                    MessageBox.Show(String.Format("Error in line {0:N0}. Cannot save entries with blank account id.", item.Sequence.ToString()))
+                    retValue = False
+                    Exit For
                 End If
             Next
             Return retValue
@@ -1163,7 +1201,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Function JournalItemFilter(ByVal obj As Object) As Boolean
-            If (obj.Debit = 0 AndAlso obj.Credit = 0 AndAlso obj.Sequence <> 1) Then
+            If obj.Debit = 0 AndAlso obj.Credit = 0 Then
                 Return False
             End If
             Return True

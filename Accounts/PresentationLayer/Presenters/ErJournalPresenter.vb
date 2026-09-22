@@ -48,7 +48,8 @@ Namespace PresentationLayer.Presenters
 
         Protected Overrides Sub CreateDataSources()
             MakeVarDataSources({New Object() {"Account", "AccountsByCode", Nothing, "DetailAccount=1"},
-                                 New Object() {"RevCostCenter", "RevCostCentersByCode", Nothing, Nothing}})
+                                 New Object() {"RevCostCenter", "RevCostCentersByCode", Nothing, Nothing},
+                                 New Object() {"Contact_View", "PayeeByCode", "IdNo,CSEIdNo,CSECode,ContactCode,ContactName,ContactNameAra", Nothing}})
             MakeControlDataSources({New Object() {"Employee", "EmployeeIdNo", Nothing, Nothing}})
             CreateEnumDataSource(Of TransactionTypeSelection)("TransactionType")
             CreateSpecialAccountDataSource("AccountIdNo", {EnumToCode(SpecialAccountSelection.EmployeeLoan)})
@@ -71,7 +72,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Function JournalItemFilter(ByVal obj As Object) As Boolean
-            If (obj.AccountIdNo Is Nothing Or obj.AccountIdNo = 0) AndAlso obj.Debit = 0 AndAlso obj.Credit = 0 Then
+            If obj.Debit = 0 AndAlso obj.Credit = 0 Then
                 Return False
             End If
             Return True
@@ -138,15 +139,17 @@ Namespace PresentationLayer.Presenters
 
         Protected Overrides Function IsBizDataValid() As Boolean
             Dim retValue = False
+            SetJournalItemPayeesForType(View.JournalItems, "E", View.EmployeeIdNo, View.PayeeByCode)
             If MyBase.IsBizDataValid() Then
                 Dim cashAccount As String = EnumToCode(SpecialAccountSelection.Bank) + "|" + EnumToCode(SpecialAccountSelection.CheckingAccount) + "|" + EnumToCode(SpecialAccountSelection.Cash) + "|" + EnumToCode(SpecialAccountSelection.PettyCashAccount)
-                Dim invalidAccounts As String = EnumToCode(SpecialAccountSelection.AccountsReceivable) + "|" + EnumToCode(SpecialAccountSelection.AccountsPayable) + "|" +
-                                                EnumToCode(SpecialAccountSelection.AdvancesToSupplier) + "|" + EnumToCode(SpecialAccountSelection.CustomerAdvances) + "|" +
+                Dim invalidAccounts As String = EnumToCode(SpecialAccountSelection.AdvancesToSupplier) + "|" + EnumToCode(SpecialAccountSelection.CustomerAdvances) + "|" +
                                                 EnumToCode(SpecialAccountSelection.AccountsPayableDiscount) + "|" + EnumToCode(SpecialAccountSelection.AccountsReceivableDiscount) + "|"
                 Dim dateToday As DateTime = Now()
                 retValue = True
                 Dim lastPostingDate As DateTime? = Service.GetRecordFieldWithKeyG(Of DateTime?)("ER Journal", "LastPosting", "TransactionName", "LastPostingDate")
                 If IsDateRangeValid("Employee Receivable", View.TransactionDate, lastPostingDate, dateToday) = DialogResult.No Then
+                    retValue = False
+                ElseIf Not JournalItemPayeesAreValid(View.JournalItems, View.PayeeByCode) Then
                     retValue = False
                 Else
                     Dim nTotalEr As Decimal = 0
@@ -236,7 +239,12 @@ Namespace PresentationLayer.Presenters
         Public Overrides Function Save(ByRef viewControl As System.Windows.Forms.Control) As Boolean
             If AddMode AndAlso View.TransactionDate.HasValue AndAlso View.TransactionDate.Value.Date >= New Date(2026, 1, 1) Then
                 Try
+                    If Not IsBizDataValid() Then Return False
+                    CancelSave = False
+                    OnTransactionBeforeSave()
+                    If CancelSave Then Return False
                     OnBeforeSave()
+                    If CancelSave Then Return False
                     Dim model As New ErJournalModel()
                     GlobalVariables.Mapper.Map(View, model)
                     Dim idNo = New AATM.Accounts.ServiceLayer.ErJournalTransactionService().SaveNew(model)
@@ -252,7 +260,12 @@ Namespace PresentationLayer.Presenters
             End If
             If EditMode AndAlso View.TransactionDate.HasValue AndAlso View.TransactionDate.Value.Date >= New Date(2026, 1, 1) Then
                 Try
+                    If Not IsBizDataValid() Then Return False
+                    CancelSave = False
+                    OnTransactionBeforeSave()
+                    If CancelSave Then Return False
                     OnBeforeSave()
+                    If CancelSave Then Return False
                     Dim model As New ErJournalModel()
                     GlobalVariables.Mapper.Map(View, model)
                     Dim transactionService As New AATM.Accounts.ServiceLayer.ErJournalTransactionService()

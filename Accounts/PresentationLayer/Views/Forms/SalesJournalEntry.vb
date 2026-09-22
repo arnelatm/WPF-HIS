@@ -11,6 +11,8 @@ Namespace PresentationLayer.Views.Forms
     Public Class SalesJournalEntry
         Implements ISalesJournalView
 
+        Public Property PayeeByCode As Object Implements ISalesJournalView.PayeeByCode
+
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
 
         Private _slFooter As DgvFooter
@@ -216,6 +218,8 @@ Namespace PresentationLayer.Views.Forms
         Private Sub BindJournalItem()
             SuspendLayout()
             Try
+                bsJournalItems.DataSource = Nothing
+                JournalPayeeColumn.Configure(DataGridViewJournalItems, PayeeByCode)
                 With DataGridViewJournalItems.Columns
                     dgvSequence.DisplayOnly = True
 
@@ -234,13 +238,11 @@ Namespace PresentationLayer.Views.Forms
                         dgvRevCostCenterIdNo.DataSource = RevCostCentersByCode
                     End If
                 End With
-
                 If Not ReferenceEquals(DataGridViewJournalItems.DataSource, bsJournalItems) Then
                     DataGridViewJournalItems.AutoGenerateColumns = False
                     DataGridViewJournalItems.DataSource = bsJournalItems
                 End If
 
-                bsJournalItems.DataSource = Nothing
                 bsJournalItems.DataSource = _journalItems
                 bsJournalItems.AllowNew = True
                 bsJournalItems.ResetBindings(False)

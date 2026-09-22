@@ -34,6 +34,7 @@ Namespace ServiceLayer
                 t.Columns.Add(c,If(c="Notes",GetType(String),If(c="Credit" OrElse c="Debit",GetType(Decimal),GetType(Integer))))
             Next
             For Each i In model.JournalItems
+                If i.Debit = 0D AndAlso i.Credit = 0D Then Continue For
                 t.Rows.Add(If(i.AccountIdNo.HasValue,CObj(i.AccountIdNo.Value),CObj(0)),i.Credit,i.Debit,0,If(i.Notes Is Nothing,String.Empty,i.Notes),CObj(i.PayIdNo),i.RevCostCenterIdNo,i.Sequence)
             Next
             Return t
@@ -47,6 +48,7 @@ Namespace ServiceLayer
                 items.Columns.Add(c, If(c="Notes", GetType(String), If(c="Credit" OrElse c="Debit", GetType(Decimal), GetType(Integer))))
             Next
             For Each item In model.JournalItems
+                If item.Debit = 0D AndAlso item.Credit = 0D Then Continue For
                 items.Rows.Add(If(item.AccountIdNo.HasValue,CObj(item.AccountIdNo.Value),CObj(0)),item.Credit,item.Debit,0,If(item.Notes Is Nothing,String.Empty,item.Notes),CObj(item.PayIdNo),item.RevCostCenterIdNo,item.Sequence)
             Next
             Using cn As New SqlConnection(GlobalVariables.DacConnectionString), cmd As New SqlCommand("dbo.SaveArJournalAtomic",cn)

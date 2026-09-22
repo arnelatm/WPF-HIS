@@ -10,6 +10,8 @@ Namespace PresentationLayer.Views.Forms
     Public Class ApJournalEntry
         Implements IApJournalView
 
+        Public Property PayeeByCode As Object Implements IApJournalView.PayeeByCode
+
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
         Private _dateCreated As DateTime?
         Private _footer As DgvFooter
@@ -299,6 +301,7 @@ Namespace PresentationLayer.Views.Forms
             SuspendLayout()
             bsJournalItems.DataSource = Nothing
             DataGridViewJournalItems.Refresh()
+            JournalPayeeColumn.Configure(DataGridViewJournalItems, PayeeByCode)
             bsJournalItems.DataSource = JournalItems
             bsJournalItems.AllowNew = True
             With DataGridViewJournalItems

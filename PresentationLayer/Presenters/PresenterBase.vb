@@ -2563,8 +2563,14 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
                     dtl.SortKey = dtl.NameField
                 End If
             Else
-                MessageBox.Show("Too much parameters passed!")
-                Debugger.Break()
+                ' When callers provide more than three fields, use the field list as a raw projection.
+                dtl.LuFields = String.Join(",", fieldNames)
+                If dtl.ValueMember Is Nothing Then
+                    dtl.ValueMember = fieldNames(0).Trim()
+                End If
+                If dtl.DisplayMember Is Nothing AndAlso fieldNames.Length > 1 Then
+                    dtl.DisplayMember = fieldNames(1).Trim()
+                End If
             End If
         End If
     End Sub

@@ -12,6 +12,8 @@ Namespace PresentationLayer.Views.Forms
     Public Class ErJournalEntry
         Implements IErJournalView
 
+        Public Property PayeeByCode As Object Implements IErJournalView.PayeeByCode
+
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
 
         Private _footer As DgvFooter
@@ -234,6 +236,7 @@ Namespace PresentationLayer.Views.Forms
             SuspendLayout()
             bsJournalItems.DataSource = Nothing
             DataGridViewJournalItems.Refresh()
+            JournalPayeeColumn.Configure(DataGridViewJournalItems, PayeeByCode)
             bsJournalItems.DataSource = JournalItems
             bsJournalItems.AllowNew = True
             With DataGridViewJournalItems

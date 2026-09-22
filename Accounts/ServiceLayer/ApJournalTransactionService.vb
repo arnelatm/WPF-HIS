@@ -30,8 +30,7 @@ Namespace ServiceLayer
             items.Columns.Add("Sequence", GetType(Integer))
 
             For Each item In model.JournalItems
-                If (item.AccountIdNo.HasValue AndAlso item.AccountIdNo.Value <> 0) OrElse
-                   item.Debit <> 0 OrElse item.Credit <> 0 Then
+                If item.Debit <> 0 OrElse item.Credit <> 0 Then
                     items.Rows.Add(If(item.AccountIdNo.HasValue, CObj(item.AccountIdNo.Value), CObj(0)), item.Credit, item.Debit, 0,
                                    If(item.Notes Is Nothing, String.Empty, item.Notes), DbValue(item.PayIdNo),
                                    item.RevCostCenterIdNo, item.Sequence)
@@ -117,6 +116,7 @@ Namespace ServiceLayer
             items.Columns.Add("RevCostCenterIdNo", GetType(Integer))
             items.Columns.Add("Sequence", GetType(Integer))
             For Each item In model.JournalItems
+                If item.Debit = 0D AndAlso item.Credit = 0D Then Continue For
                 items.Rows.Add(If(item.AccountIdNo.HasValue, CObj(item.AccountIdNo.Value), CObj(0)), item.Credit, item.Debit, 0,
                                 If(item.Notes Is Nothing, String.Empty, item.Notes), DbValue(item.PayIdNo), item.RevCostCenterIdNo, item.Sequence)
             Next

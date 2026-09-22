@@ -3,12 +3,20 @@
 CREATE VIEW [dbo].[ArJournalItem_View]
 AS
 SELECT        a.IdNo, o.JournalCode, a.JournalIdNo, a.AccountIdNo, a.Debit, a.Credit, a.RevCostCenterIdNo, a.Notes, a.Posted, a.DateTimeStamp, c.AccountName, o.IdNo AS OpenInvoiceIdNo, a.Credit - a.Debit AS OriginalAmount, 
-                         col.PaidAmount, col.DiscountTaken, c.SpecialAccount, c.AccountNameAra, c.PayeeType, a.Sequence, a.PayIdNo
+                         col.PaidAmount, col.DiscountTaken, c.SpecialAccount, c.AccountNameAra, c.PayeeType, a.Sequence, a.PayIdNo,
+                         ContactData.IdNo AS ContactIdNo,
+                         ContactData.CSEIdNo AS ContactCSEIdNo,
+                         ContactData.CSECode AS ContactCSECode,
+                         ContactData.ContactCode,
+                         ContactData.ContactName,
+                         ContactData.ContactNameAra
 FROM    dbo.ArJournalItem AS a 
 		LEFT OUTER JOIN dbo.ArJournal b on a.JournalIdNo = b.IdNo 
 		LEFT OUTER JOIN dbo.Account AS c ON a.AccountIdNo = c.IdNo 
 		LEFT OUTER JOIN dbo.ArOpenInvoice AS o ON a.IdNo = o.JournalItemIdNo AND a.JournalIdNo = o.JournalIdNo AND o.JournalCode = 'AR' 
 		LEFT OUTER JOIN dbo.ArCollections_View AS col ON o.IdNo = col.IdNo
+		LEFT OUTER JOIN dbo.Contact_View AS ContactData ON a.PayIdNo = ContactData.IdNo
+			AND (c.PayeeType IS NULL OR c.PayeeType = ContactData.CSECode)
 		where b.Cancelled = 0
 
 GO

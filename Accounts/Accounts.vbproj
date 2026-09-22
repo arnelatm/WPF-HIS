@@ -1196,6 +1196,7 @@
     <Compile Include="PresentationLayer\Views\Forms\GeneralJournalEntry.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\JournalPayeeColumn.vb" />
     <Compile Include="PresentationLayer\Views\Forms\HolidayAvailmentEntry.designer.vb">
       <DependentUpon>HolidayAvailmentEntry.vb</DependentUpon>
     </Compile>
@@ -2191,6 +2192,7 @@
     <Compile Include="ServiceLayer\SalesJournalTransactionService.vb" />
     <Compile Include="ServiceLayer\PettyCashJournalTransactionService.vb" />
     <Compile Include="ServiceLayer\GeneralJournalTransactionService.vb" />
+    <Compile Include="ServiceLayer\PayrollJournalTransactionService.vb" />
     <Compile Include="ServiceLayer\AccountReconciliationTransactionService.vb" />
     <Compile Include="MappingProfileAccounts.vb" />
     <Compile Include="SetSettings.Designer.vb">

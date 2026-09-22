@@ -3,10 +3,18 @@ AS
 SELECT        dbo.ErJournalItem.IdNo, dbo.ArOpenInvoice.JournalCode, dbo.ErJournalItem.JournalIdNo, dbo.ErJournalItem.AccountIdNo, dbo.ErJournalItem.Debit, dbo.ErJournalItem.Credit, dbo.ErJournalItem.RevCostCenterIdNo, 
                          dbo.ErJournalItem.Notes, dbo.ErJournalItem.Posted, dbo.ErJournalItem.DateTimeStamp, dbo.Account.AccountName, dbo.ArOpenInvoice.IdNo AS OpenInvoiceIdNo, 
                          dbo.ErJournalItem.Credit - dbo.ErJournalItem.Debit AS OriginalAmount, dbo.ArOpenInvoice.PaidAmount, dbo.ArOpenInvoice.DiscountTaken, dbo.Account.SpecialAccount, dbo.Account.AccountNameAra, dbo.Account.PayeeType, 
-                         dbo.ErJournalItem.Sequence, dbo.ErJournalItem.PayIdNo
+                         dbo.ErJournalItem.Sequence, dbo.ErJournalItem.PayIdNo,
+                         ContactData.IdNo AS ContactIdNo,
+                         ContactData.CSEIdNo AS ContactCSEIdNo,
+                         ContactData.CSECode AS ContactCSECode,
+                         ContactData.ContactCode,
+                         ContactData.ContactName,
+                         ContactData.ContactNameAra
 FROM            dbo.ErJournalItem LEFT OUTER JOIN
                          dbo.Account ON dbo.ErJournalItem.AccountIdNo = dbo.Account.IdNo LEFT OUTER JOIN
-                         dbo.ArOpenInvoice ON dbo.ErJournalItem.IdNo = dbo.ArOpenInvoice.JournalItemIdNo AND dbo.ArOpenInvoice.JournalCode = 'ER'
+                         dbo.ArOpenInvoice ON dbo.ErJournalItem.IdNo = dbo.ArOpenInvoice.JournalItemIdNo AND dbo.ArOpenInvoice.JournalCode = 'ER' LEFT OUTER JOIN
+                         dbo.Contact_View AS ContactData ON dbo.ErJournalItem.PayIdNo = ContactData.IdNo
+                         AND (dbo.Account.PayeeType IS NULL OR dbo.Account.PayeeType = ContactData.CSECode)
 
 GO
 

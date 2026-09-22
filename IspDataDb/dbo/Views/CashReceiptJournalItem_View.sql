@@ -4,11 +4,19 @@ AS
 SELECT        dbo.CashReceiptJournalItem.IdNo, dbo.CashReceiptJournalItem.Sequence, dbo.CashReceiptJournalItem.JournalIdNo, dbo.CashReceiptJournalItem.AccountIdNo, dbo.CashReceiptJournalItem.Debit, 
                          dbo.CashReceiptJournalItem.Credit, dbo.CashReceiptJournalItem.RevCostCenterIdNo, dbo.CashReceiptJournalItem.Notes, dbo.CashReceiptJournalItem.Posted, dbo.CashReceiptJournalItem.DateTimeStamp, 
                          dbo.Account.AccountName, dbo.ApOpenInvoice_View.JournalCode, dbo.ApOpenInvoice_View.IdNo AS OpenInvoiceIdNo, dbo.CashReceiptJournalItem.Credit - dbo.CashReceiptJournalItem.Debit AS OriginalAmount, 
-                         dbo.ApOpenInvoice_View.PaidAmount, dbo.Account.SpecialAccount, dbo.Account.AccountNameAra, dbo.Account.PayeeType, dbo.ApOpenInvoice_View.DiscountTaken, dbo.CashReceiptJournalItem.PayIdNo
+                         dbo.ApOpenInvoice_View.PaidAmount, dbo.Account.SpecialAccount, dbo.Account.AccountNameAra, dbo.Account.PayeeType, dbo.ApOpenInvoice_View.DiscountTaken, dbo.CashReceiptJournalItem.PayIdNo,
+                         ContactData.IdNo AS ContactIdNo,
+                         ContactData.CSEIdNo AS ContactCSEIdNo,
+                         ContactData.CSECode AS ContactCSECode,
+                         ContactData.ContactCode,
+                         ContactData.ContactName,
+                         ContactData.ContactNameAra
 FROM dbo.CashReceiptJournalItem 
 	 Inner JOIN dbo.CashReceiptJournal on dbo.CashReceiptJournal.IdNo = dbo.CashReceiptJournalItem.JournalIdNo
 	 LEFT OUTER JOIN dbo.ApOpenInvoice_View ON dbo.CashReceiptJournalItem.IdNo = dbo.ApOpenInvoice_View.JournalItemIdNo AND dbo.ApOpenInvoice_View.JournalCode = 'AP' 
 	 LEFT OUTER JOIN dbo.Account ON dbo.CashReceiptJournalItem.AccountIdNo = dbo.Account.IdNo
+	 LEFT OUTER JOIN dbo.Contact_View AS ContactData ON dbo.CashReceiptJournalItem.PayIdNo = ContactData.IdNo
+		 AND (dbo.Account.PayeeType IS NULL OR dbo.Account.PayeeType = ContactData.CSECode)
 	 where dbo.CashReceiptJournal.Cancelled=0
 
 GO

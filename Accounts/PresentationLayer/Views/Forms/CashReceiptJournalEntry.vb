@@ -9,6 +9,8 @@ Namespace PresentationLayer.Views.Forms
     Public Class CashReceiptJournalEntry
         Implements ICashReceiptJournalView
 
+        Public Property PayeeByCode As Object Implements ICashReceiptJournalView.PayeeByCode
+
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
         Private _dateCreated As DateTime?
         Private ReadOnly _payorOrigWidth As Integer
@@ -463,6 +465,7 @@ Namespace PresentationLayer.Views.Forms
             SuspendLayout()
             bsJournalItems.DataSource = Nothing
             DataGridViewJournalItems.Refresh()
+            JournalPayeeColumn.Configure(DataGridViewJournalItems, PayeeByCode)
             bsJournalItems.DataSource = JournalItems
             bsJournalItems.AllowNew = True
             With DataGridViewJournalItems
@@ -698,18 +701,21 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub BtnViewGL_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnViewGL.ClickButtonArea
             If DataGridViewJournalItems.Visible Then
-                btnViewGL.Text = Messaging.TranslateCaption("View Journal Entry")
                 ShowOpenInvoicesDataGrid()
             Else
-                btnViewGL.Text = Messaging.TranslateCaption("Hide Journal Entry")
                 ShowJournalItemDataGrid()
             End If
+            UpdateViewGLBtnDisplay()
         End Sub
 
         Private Sub UpdateDisplay()
             SuspendLayout()
             If OpenInvoiceMode Then
-                ShowOpenInvoicesDataGrid()
+                If Presenter.AddMode OrElse Presenter.EditMode Then
+                    ShowOpenInvoicesDataGrid()
+                Else
+                    ShowJournalItemDataGrid()
+                End If
                 cboDiscountAccountIdNo.Enabled = True
                 btnViewGL.Visible = True
             Else
@@ -721,6 +727,7 @@ Namespace PresentationLayer.Views.Forms
                 UnApplied = 0
                 DiscountTaken = 0
             End If
+            UpdateViewGLBtnDisplay()
             ShowPayor()
             UpdateHeaderLookupDisplay()
             UpdateTotals()
@@ -813,13 +820,17 @@ Namespace PresentationLayer.Views.Forms
         Private Sub OnInputsTurnedOff() Handles MyBase.InputsTurnedOff
             ShowPayor()
             UpdateHeaderLookupDisplay()
-            If OpenInvoiceMode Then
-                btnViewGL.Visible = True
-                btnViewGL.Text = Messaging.TranslateCaption("View Journal Entry")
-            Else
-                btnViewGL.Visible = False
-            End If
+            btnViewGL.Visible = OpenInvoiceMode
+            UpdateViewGLBtnDisplay()
             btnAutoApply.Visible = False
+        End Sub
+
+        Private Sub UpdateViewGLBtnDisplay()
+            If DataGridViewJournalItems.Visible Then
+                btnViewGL.Text = Messaging.TranslateCaption("View Applied Invoices")
+            Else
+                btnViewGL.Text = Messaging.TranslateCaption("View Journal Items")
+            End If
         End Sub
 
         Private Sub FitGridsToJournalItemsPanel()

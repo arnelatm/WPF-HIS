@@ -48,7 +48,8 @@ Namespace PresentationLayer.Presenters
 
         Protected Overrides Sub CreateDataSources()
             MakeVarDataSources({New Object() {"Account", "AccountsByCode", Nothing, "DetailAccount=1"},
-                                    New Object() {"RevCostCenter", "RevCostCentersByCode", Nothing, Nothing}})
+                                    New Object() {"RevCostCenter", "RevCostCentersByCode", Nothing, Nothing},
+                                    New Object() {"Contact_View", "PayeeByCode", "IdNo,CSEIdNo,CSECode,ContactCode,ContactName,ContactNameAra", Nothing}})
             MakeControlDataSources({New Object() {"Customer", "CustomerIdNo", Nothing, Nothing}})
             CreateEnumDataSource(Of TransactionTypeSelection)("TransactionType")
             CreateSpecialAccountDataSource("AccountIdNo", {EnumToCode(SpecialAccountSelection.AccountsReceivable)})
@@ -63,6 +64,10 @@ Namespace PresentationLayer.Presenters
         Public Overrides Function Save(ByRef viewControl As System.Windows.Forms.Control) As Boolean
             If AddMode AndAlso View.TransactionDate.HasValue AndAlso View.TransactionDate.Value.Date >= New Date(2026, 1, 1) Then
                 Try
+                    If Not IsBizDataValid() Then Return False
+                    CancelSave = False
+                    OnTransactionBeforeSave()
+                    If CancelSave Then Return False
                     Dim model As New ArJournalModel()
                     GlobalVariables.Mapper.Map(View, model)
                     Dim idNo = New AATM.Accounts.ServiceLayer.ArJournalTransactionService().SaveNew(model)
@@ -81,6 +86,10 @@ Namespace PresentationLayer.Presenters
             End If
             If EditMode AndAlso View.TransactionDate.HasValue AndAlso View.TransactionDate.Value.Date >= New Date(2026, 1, 1) Then
                 Try
+                    If Not IsBizDataValid() Then Return False
+                    CancelSave = False
+                    OnTransactionBeforeSave()
+                    If CancelSave Then Return False
                     Dim model As New ArJournalModel()
                     GlobalVariables.Mapper.Map(View, model)
                     Dim transactionService As New AATM.Accounts.ServiceLayer.ArJournalTransactionService()
@@ -118,7 +127,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Function JournalItemFilter(ByVal obj As Object) As Boolean
-            If (obj.AccountIdNo Is Nothing Or obj.AccountIdNo = 0) AndAlso obj.Debit = 0 AndAlso obj.Credit = 0 Then
+            If obj.Debit = 0 AndAlso obj.Credit = 0 Then
                 Return False
             End If
             Return True
@@ -256,35 +265,24 @@ Namespace PresentationLayer.Presenters
 
         Protected Overrides Function IsBizDataValid() As Boolean
             Dim retValue = False
+            SetJournalItemPayeesForType(View.JournalItems, "C", View.CustomerIdNo, View.PayeeByCode)
             If MyBase.IsBizDataValid() Then
-                Dim cashAccount As String = EnumToCode(SpecialAccountSelection.Bank) + "|" + EnumToCode(SpecialAccountSelection.Cash) + "|" + EnumToCode(SpecialAccountSelection.PettyCashAccount)
-                Dim invalidAccounts As String = EnumToCode(SpecialAccountSelection.EmployeeLoan) + "|" + EnumToCode(SpecialAccountSelection.AccountsPayable) + "|" +
-                                                EnumToCode(SpecialAccountSelection.AccountsPayableDiscount) + "|" +
+                Dim invalidAccounts As String = EnumToCode(SpecialAccountSelection.AccountsPayableDiscount) + "|" +
                                                 EnumToCode(SpecialAccountSelection.AdvancesToSupplier) + "|"
                 Dim dateToday As DateTime = Now()
                 retValue = True
                 Dim lastPostingDate As DateTime? = Service.GetRecordFieldWithKeyG(Of DateTime?)("AR Journal", "LastPosting", "TransactionName", "LastPostingDate")
                 If IsDateRangeValid("Accounts Receivable", View.TransactionDate, lastPostingDate, dateToday) = DialogResult.No Then
                     retValue = False
+                ElseIf Not JournalItemPayeesAreValid(View.JournalItems, View.PayeeByCode) Then
+                    retValue = False
                 Else
-                    Dim nTotalAr As Decimal = 0
                     For Each item In View.JournalItems
-                        If item.SpecialAccount = EnumToCode(SpecialAccountSelection.AccountsReceivable) Then
-                            If View.TransactionType = "I" Or View.TransactionType = "D" Then
-                                nTotalAr = nTotalAr + item.Debit - item.Credit
-                            Else
-                                nTotalAr = nTotalAr + item.Credit - item.Debit
-                            End If
-                        End If
                         If item.AccountIdNo Is Nothing Or item.AccountIdNo = 0 AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
                             Dim lineNumber As String = item.Sequence.ToString()
                             Messaging.ShowPmMessage(True, "MsgBlankAccountIdNotAllowed", {"lineNumber", lineNumber})
                             retValue = False
                             Exit For
-                        ElseIf item.SpecialAccount IsNot Nothing AndAlso cashAccount.Contains(item.SpecialAccount) Then
-                            Dim lineNumber As String = item.Sequence.ToString()
-                            Messaging.ShowPmMessage(True, "MsgCashAccountsNotAllowed", {"lineNumber", lineNumber})
-                            retValue = False
                         ElseIf item.SpecialAccount IsNot Nothing AndAlso invalidAccounts.Contains(item.SpecialAccount) Then
                             Dim lineNumber = Format(item.Sequence, "0")
                             Dim entryNames = Messaging.TranslateCaption("Accounts Payables/Employee Loans")
@@ -292,10 +290,6 @@ Namespace PresentationLayer.Presenters
                             retValue = False
                         End If
                     Next
-                    If nTotalAr <> View.Amount Then
-                        Messaging.Show(True, "MsgTotalArMismatch")
-                        retValue = False
-                    End If
                 End If
             End If
             Return retValue

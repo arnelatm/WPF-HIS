@@ -9,6 +9,8 @@ Namespace PresentationLayer.Views.Forms
     Public Class DisbursementJournalEntry
         Implements IDisbursementJournalView
 
+        Public Property PayeeByCode As Object Implements IDisbursementJournalView.PayeeByCode
+
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
         Private _dateCreated As DateTime?
 
@@ -509,6 +511,7 @@ Namespace PresentationLayer.Views.Forms
             SuspendLayout()
             bsJournalItems.DataSource = Nothing
             DataGridViewJournalItems.Refresh()
+            JournalPayeeColumn.Configure(DataGridViewJournalItems, PayeeByCode)
             bsJournalItems.DataSource = JournalItems
             bsJournalItems.AllowNew = True
             With DataGridViewJournalItems

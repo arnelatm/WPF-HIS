@@ -177,8 +177,8 @@ Public Class DgvFooter
                 'Columns.CalledByFooter = True
 
                 Columns.Add(childCol)
-                Columns(c.Index).Frozen = c.Frozen
-                Columns(c.Index).FillWeight = c.FillWeight
+                Columns(childCol.Name).Frozen = c.Frozen
+                Columns(childCol.Name).FillWeight = c.FillWeight
 
                 'SyncBaseColumns()
                 If RowCount = 0 Then Rows.Add()
@@ -186,6 +186,23 @@ Public Class DgvFooter
                 If AutoCalc Then
                     ColumnToSum(c.Name) = True
                 End If
+            Next
+
+            'The parent can insert a column before existing columns. Match the footer
+            'order by the parent's DisplayIndex after all corresponding columns exist.
+            For displayIndex As Integer = 0 To parentsdgv.Columns.Count - 1
+                For Each parentColumn As DataGridViewColumn In parentsdgv.Columns
+                    If parentColumn.DisplayIndex <> displayIndex Then Continue For
+
+                    Dim footerColumnName As String = parentColumn.Name & "_footer"
+                    If Columns.Contains(footerColumnName) Then
+                        Dim footerColumn As DataGridViewColumn = Columns(footerColumnName)
+                        If footerColumn.DisplayIndex <> displayIndex Then
+                            footerColumn.DisplayIndex = displayIndex
+                        End If
+                    End If
+                    Exit For
+                Next
             Next
 
             RowHeadersVisible = _parentDgv.RowHeadersVisible
@@ -409,7 +426,9 @@ Public Class DgvFooter
         If _parentDgv.Rows.Count < 1 Then Exit Sub
         If _parentDgv.Columns.Count < 1 Then Exit Sub
         For Each c As DataGridViewColumn In _parentDgv.Columns
-            Columns(c.Index).Width = c.Width
+            Dim footerColumnName As String = c.Name & "_footer"
+            If Not Columns.Contains(footerColumnName) Then Continue For
+            Columns(footerColumnName).Width = c.Width
         Next
     End Sub
 
@@ -469,7 +488,19 @@ Public Class DgvFooter
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub ShiftColumns(ByVal sender As Object, ByVal e As DataGridViewColumnEventArgs) Handles _parentDgv.ColumnDisplayIndexChanged
-        Columns(e.Column.Name & "_footer").DisplayIndex = e.Column.DisplayIndex
+        If Columns.Count = 0 Then Return
+
+        Dim footerColumnName As String = e.Column.Name & "_footer"
+        If Not Columns.Contains(footerColumnName) Then Return
+
+        'During an insertion, parent display indexes can temporarily exceed the
+        'footer's current column count. SetColumns applies the final order once the
+        'new footer column has been created.
+        Dim targetDisplayIndex As Integer = Math.Max(0, Math.Min(e.Column.DisplayIndex, Columns.Count - 1))
+        Dim footerColumn As DataGridViewColumn = Columns(footerColumnName)
+        If footerColumn.DisplayIndex <> targetDisplayIndex Then
+            footerColumn.DisplayIndex = targetDisplayIndex
+        End If
     End Sub
 
     ''' <summary>

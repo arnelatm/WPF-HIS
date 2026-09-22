@@ -31,4 +31,8 @@ Namespace PresentationLayer.Views.Interfaces
         Event PayCycleChanged(sender As Object)
     End Interface
 
+    Public Interface IPayrollJournalView
+        Event PostPayroll(sender As Object)
+    End Interface
+
 End Namespace

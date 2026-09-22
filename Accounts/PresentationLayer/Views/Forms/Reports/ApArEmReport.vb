@@ -126,6 +126,15 @@ Namespace PresentationLayer.Views.Forms.Reports
             End If
         End Sub
 
+        Private Sub ApArEmReport_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
+            ' Crystal report preview can leave the report parameter controls in
+            ' their read-only presentation state when focus returns to this form.
+            ' The person selector must remain editable for another report run.
+            If cboIdNo IsNot Nothing Then
+                cboIdNo.EditingMode = True
+            End If
+        End Sub
+
         Private Sub OnTextDisplayLanguageChanged() Handles MyBase.TextDisplayLanguageChanged
             RaiseEvent LanguageChanged()
         End Sub

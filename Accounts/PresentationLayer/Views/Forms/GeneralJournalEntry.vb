@@ -203,17 +203,11 @@ Namespace PresentationLayer.Views.Forms
                         dgvRevCostCenterIdNo.DataSource = RevCostCentersByCode
                     End If
 
-                    dgvPayIdNo.DisplayMember = "Name"
-                    dgvPayIdNo.ValueMember = "IdNo"
-                    dgvPayIdNo.TreatZeroAsBlank = True
-                    dgvPayIdNo.DisplayStyleForCurrentCellOnly = True
-                    If Not ReferenceEquals(dgvPayIdNo.DataSource, PayeeByCode) Then
-                        dgvPayIdNo.DataSource = PayeeByCode
-                    End If
                 End With
 
                 bsJournalItems.DataSource = Nothing
                 DataGridViewJournalItems.Refresh()
+                JournalPayeeColumn.Configure(DataGridViewJournalItems, PayeeByCode)
                 bsJournalItems.DataSource = JournalItems
                 bsJournalItems.AllowNew = True
 
@@ -255,6 +249,9 @@ Namespace PresentationLayer.Views.Forms
         Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewJournalItems.CellEndEdit
             With DataGridViewJournalItems
                 If .CurrentRow IsNot Nothing Then
+                    If e.ColumnIndex >= 0 AndAlso .Columns(e.ColumnIndex).DataPropertyName = "AccountIdNo" Then
+                        ProcessCellEndEdit(DataGridViewJournalItems, bsJournalItems)
+                    End If
                     Select Case .CurrentCell.OwningColumn.Name.ToLower()
                         Case $"dgvaccountidno"
                         'SendKeys.Send("{TAB}")

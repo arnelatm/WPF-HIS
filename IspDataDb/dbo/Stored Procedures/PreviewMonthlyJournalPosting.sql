@@ -33,21 +33,24 @@ BEGIN
         JournalCode char(2) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
         JournalIdNo int NOT NULL,
         TransactionDate date NOT NULL,
+        ReferenceNo nvarchar(15) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+        Notes nvarchar(300) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+        HeaderApproved bit NULL,
         HeaderPosted bit NULL,
         Cancelled bit NULL,
         PRIMARY KEY (JournalCode, JournalIdNo)
     );
 
-    INSERT INTO #Headers (JournalCode, JournalIdNo, TransactionDate, HeaderPosted, Cancelled)
-    SELECT 'AP', IdNo, TransactionDate, Posted, Cancelled FROM dbo.ApJournal WHERE TransactionDate >= @PeriodStart AND TransactionDate < @PeriodEnd
-    UNION ALL SELECT 'AR', IdNo, TransactionDate, Posted, Cancelled FROM dbo.ArJournal WHERE TransactionDate >= @PeriodStart AND TransactionDate < @PeriodEnd
-    UNION ALL SELECT 'CD', IdNo, TransactionDate, Posted, Cancelled FROM dbo.CdJournal WHERE TransactionDate >= @PeriodStart AND TransactionDate < @PeriodEnd
-    UNION ALL SELECT 'CK', IdNo, TransactionDate, Posted, Cancelled FROM dbo.CkJournal WHERE TransactionDate >= @PeriodStart AND TransactionDate < @PeriodEnd
-    UNION ALL SELECT 'CR', IdNo, TransactionDate, Posted, Cancelled FROM dbo.CashReceiptJournal WHERE TransactionDate >= @PeriodStart AND TransactionDate < @PeriodEnd
-    UNION ALL SELECT 'ER', IdNo, TransactionDate, Posted, Cancelled FROM dbo.ErJournal WHERE TransactionDate >= @PeriodStart AND TransactionDate < @PeriodEnd
-    UNION ALL SELECT 'GJ', IdNo, TransactionDate, Posted, Cancelled FROM dbo.GeneralJournal WHERE TransactionDate >= @PeriodStart AND TransactionDate < @PeriodEnd
-    UNION ALL SELECT 'PC', IdNo, TransactionDate, Posted, Cancelled FROM dbo.PcJournal WHERE TransactionDate >= @PeriodStart AND TransactionDate < @PeriodEnd
-    UNION ALL SELECT 'SJ', IdNo, TransactionDate, Posted, Cancelled FROM dbo.SalesJournal WHERE TransactionDate >= @PeriodStart AND TransactionDate < @PeriodEnd;
+    INSERT INTO #Headers (JournalCode, JournalIdNo, TransactionDate, ReferenceNo, Notes, HeaderApproved, HeaderPosted, Cancelled)
+    SELECT 'AP', IdNo, TransactionDate, CONVERT(nvarchar(15), ReferenceNo) COLLATE SQL_Latin1_General_CP1_CI_AS, CONVERT(nvarchar(300), Notes) COLLATE SQL_Latin1_General_CP1_CI_AS, Approved, Posted, Cancelled FROM dbo.ApJournal WHERE TransactionDate >= @PeriodStart AND TransactionDate < @PeriodEnd
+    UNION ALL SELECT 'AR', IdNo, TransactionDate, CONVERT(nvarchar(15), ReferenceNo) COLLATE SQL_Latin1_General_CP1_CI_AS, CONVERT(nvarchar(300), Notes) COLLATE SQL_Latin1_General_CP1_CI_AS, Approved, Posted, Cancelled FROM dbo.ArJournal WHERE TransactionDate >= @PeriodStart AND TransactionDate < @PeriodEnd
+    UNION ALL SELECT 'CD', IdNo, TransactionDate, CONVERT(nvarchar(15), ReferenceNo) COLLATE SQL_Latin1_General_CP1_CI_AS, CONVERT(nvarchar(300), Notes) COLLATE SQL_Latin1_General_CP1_CI_AS, Approved, Posted, Cancelled FROM dbo.CdJournal WHERE TransactionDate >= @PeriodStart AND TransactionDate < @PeriodEnd
+    UNION ALL SELECT 'CK', IdNo, TransactionDate, CONVERT(nvarchar(15), ReferenceNo) COLLATE SQL_Latin1_General_CP1_CI_AS, CONVERT(nvarchar(300), Notes) COLLATE SQL_Latin1_General_CP1_CI_AS, Approved, Posted, Cancelled FROM dbo.CkJournal WHERE TransactionDate >= @PeriodStart AND TransactionDate < @PeriodEnd
+    UNION ALL SELECT 'CR', IdNo, TransactionDate, CONVERT(nvarchar(15), ReferenceNo) COLLATE SQL_Latin1_General_CP1_CI_AS, CONVERT(nvarchar(300), Notes) COLLATE SQL_Latin1_General_CP1_CI_AS, Approved, Posted, Cancelled FROM dbo.CashReceiptJournal WHERE TransactionDate >= @PeriodStart AND TransactionDate < @PeriodEnd
+    UNION ALL SELECT 'ER', IdNo, TransactionDate, CONVERT(nvarchar(15), ReferenceNo) COLLATE SQL_Latin1_General_CP1_CI_AS, CONVERT(nvarchar(300), Notes) COLLATE SQL_Latin1_General_CP1_CI_AS, Approved, Posted, Cancelled FROM dbo.ErJournal WHERE TransactionDate >= @PeriodStart AND TransactionDate < @PeriodEnd
+    UNION ALL SELECT 'GJ', IdNo, TransactionDate, CONVERT(nvarchar(15), ReferenceNo) COLLATE SQL_Latin1_General_CP1_CI_AS, CONVERT(nvarchar(300), Notes) COLLATE SQL_Latin1_General_CP1_CI_AS, Approved, Posted, Cancelled FROM dbo.GeneralJournal WHERE TransactionDate >= @PeriodStart AND TransactionDate < @PeriodEnd
+    UNION ALL SELECT 'PC', IdNo, TransactionDate, CONVERT(nvarchar(15), ReferenceNo) COLLATE SQL_Latin1_General_CP1_CI_AS, CONVERT(nvarchar(300), Notes) COLLATE SQL_Latin1_General_CP1_CI_AS, Approved, Posted, Cancelled FROM dbo.PcJournal WHERE TransactionDate >= @PeriodStart AND TransactionDate < @PeriodEnd
+    UNION ALL SELECT 'SJ', IdNo, TransactionDate, CONVERT(nvarchar(15), ReferenceNo) COLLATE SQL_Latin1_General_CP1_CI_AS, CONVERT(nvarchar(300), Notes) COLLATE SQL_Latin1_General_CP1_CI_AS, Approved, Posted, Cancelled FROM dbo.SalesJournal WHERE TransactionDate >= @PeriodStart AND TransactionDate < @PeriodEnd;
 
     CREATE TABLE #Items (
         JournalCode char(2) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
@@ -144,4 +147,24 @@ BEGIN
     FROM #Items
     WHERE ISNULL(Cancelled, 0) = 0 AND (AccountIdNo = 0 OR Debit < 0 OR Credit < 0 OR (Debit <> 0 AND Credit <> 0))
     ORDER BY JournalCode, JournalIdNo, ItemIdNo;
+
+    ;WITH EntrySummary AS (
+        SELECT JournalCode, JournalIdNo, COUNT(ItemIdNo) AS LineCount,
+            SUM(CASE WHEN ItemPosted = 0 THEN 1 ELSE 0 END) AS ItemLinesToPost,
+            SUM(CASE WHEN ItemPosted = 0 AND ISNULL(Cancelled, 0) = 0 THEN CONVERT(decimal(19, 4), Debit) ELSE CONVERT(decimal(19, 4), 0) END) AS DebitToPost,
+            SUM(CASE WHEN ItemPosted = 0 AND ISNULL(Cancelled, 0) = 0 THEN CONVERT(decimal(19, 4), Credit) ELSE CONVERT(decimal(19, 4), 0) END) AS CreditToPost
+        FROM #Items
+        GROUP BY JournalCode, JournalIdNo
+    )
+    SELECT h.JournalCode, h.JournalIdNo, h.TransactionDate, h.ReferenceNo, h.Notes,
+        CONVERT(bit, CASE WHEN ISNULL(h.HeaderPosted, 0) = 0 THEN 1 ELSE 0 END) AS HeaderToPost,
+        h.HeaderApproved AS Approved, h.Cancelled,
+        ISNULL(s.LineCount, 0) AS Lines,
+        ISNULL(s.ItemLinesToPost, 0) AS ItemLinesToPost,
+        ISNULL(s.DebitToPost, 0) AS DebitToPost,
+        ISNULL(s.CreditToPost, 0) AS CreditToPost
+    FROM #Headers h
+    LEFT JOIN EntrySummary s ON s.JournalCode = h.JournalCode AND s.JournalIdNo = h.JournalIdNo
+    WHERE ISNULL(h.HeaderPosted, 0) = 0 OR ISNULL(s.ItemLinesToPost, 0) > 0
+    ORDER BY h.JournalCode, h.TransactionDate, h.JournalIdNo;
 END;

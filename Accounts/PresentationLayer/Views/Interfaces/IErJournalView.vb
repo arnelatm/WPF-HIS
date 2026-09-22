@@ -22,6 +22,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property JournalItems As List(Of JournalItemView)
         Property RevCostCentersByCode
         Property AccountsByCode
+        Property PayeeByCode As Object
 
     End Interface
 

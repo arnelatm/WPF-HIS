@@ -49,6 +49,8 @@ Namespace PresentationLayer.Presenters
 
         Public Overloads Function Save(ByRef dtInsert As DataTable, ByRef dtUpdate As DataTable,
                                        journalIdNo As Int32)
+            RemoveZeroAmountItems(dtInsert)
+            RemoveZeroAmountItems(dtUpdate)
             Dim insertReturnValue
             Dim updateReturnValue
             Dim retVal
@@ -65,6 +67,15 @@ Namespace PresentationLayer.Presenters
             End If
             Return retVal
         End Function
+
+        Private Shared Sub RemoveZeroAmountItems(items As DataTable)
+            If items Is Nothing OrElse Not items.Columns.Contains("Debit") OrElse Not items.Columns.Contains("Credit") Then Return
+            For rowIndex As Integer = items.Rows.Count - 1 To 0 Step -1
+                Dim debit As Decimal = If(items.Rows(rowIndex).IsNull("Debit"), 0D, Convert.ToDecimal(items.Rows(rowIndex)("Debit")))
+                Dim credit As Decimal = If(items.Rows(rowIndex).IsNull("Credit"), 0D, Convert.ToDecimal(items.Rows(rowIndex)("Credit")))
+                If debit = 0D AndAlso credit = 0D Then items.Rows.RemoveAt(rowIndex)
+            Next
+        End Sub
 
     End Class
 

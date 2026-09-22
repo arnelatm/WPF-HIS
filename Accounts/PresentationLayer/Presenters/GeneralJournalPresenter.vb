@@ -1,16 +1,20 @@
 ﻿Imports System.Globalization
 Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
+Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
+Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
+Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Presenters
 
     Public Class GeneralJournalPresenter(Of TM As New)
         Inherits TransactionsPresenter(Of IGeneralJournalView, TM)
+        Implements ISubscriber(Of DgvItemsChanged)
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
@@ -54,7 +58,19 @@ Namespace PresentationLayer.Presenters
         Protected Overrides Sub CreateDataSources()
             MakeVarDataSources({New Object() {"Account", "AccountsByCode", Nothing, "DetailAccount=1"},
             New Object() {"RevCostCenter", "RevCostCentersByCode", Nothing, Nothing},
-            New Object() {"Payee_View", "PayeeByCode", "PayeeIdNo,PayeeName,PayeeCode", Nothing, Nothing}})
+            New Object() {"Contact_View", "PayeeByCode", "IdNo,CSEIdNo,CSECode,ContactCode,ContactName,ContactNameAra", Nothing, Nothing}})
+        End Sub
+
+        Public Sub OnGeneralJournalItemsChangedEventHandler(ByRef eventType As DgvItemsChanged) Implements ISubscriber(Of DgvItemsChanged).OnEventHandler
+            If eventType Is Nothing OrElse eventType.BindingSource Is Nothing Then Return
+            If eventType.PropertyName <> "AccountIdNo" Then Return
+            If eventType.Row < 0 OrElse eventType.Row >= eventType.BindingSource.Count Then Return
+
+            Dim journalItem As JournalItemView = TryCast(eventType.BindingSource.Current, JournalItemView)
+            If journalItem Is Nothing Then Return
+
+            MakePayTypeAndSpecialAccount(journalItem, journalItem.AccountIdNo)
+            eventType.BindingSource.ResetItem(eventType.Row)
         End Sub
 
         Public Overrides Sub GoPrintRecord()
@@ -84,7 +100,12 @@ Namespace PresentationLayer.Presenters
         Public Overrides Function Save(ByRef viewControl As System.Windows.Forms.Control) As Boolean
             If TableBaseName = "GeneralJournal" AndAlso View.TransactionDate.HasValue AndAlso View.TransactionDate.Value.Date >= New Date(2026, 1, 1) Then
                 Try
+                    If Not IsBizDataValid() Then Return False
+                    CancelSave = False
+                    OnTransactionBeforeSave()
+                    If CancelSave Then Return False
                     OnBeforeSave()
+                    If CancelSave Then Return False
                     Dim model As New GeneralJournalModel()
                     GlobalVariables.Mapper.Map(View, model)
                     If AddMode Then
@@ -141,7 +162,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Function JournalItemFilter(ByVal obj As Object) As Boolean
-            If (obj.AccountIdNo Is Nothing Or obj.AccountIdNo = 0) AndAlso obj.Debit = 0 AndAlso obj.Credit = 0 Then
+            If obj.Debit = 0 AndAlso obj.Credit = 0 Then
                 Return False
             End If
             Return True
@@ -160,10 +181,8 @@ Namespace PresentationLayer.Presenters
         Protected Overrides Function IsBizDataValid() As Boolean
             Dim retValue As Boolean = False
             If MyBase.IsBizDataValid() Then
-                Dim invalidAccounts As String = EnumToCode(SpecialAccountSelection.AccountsPayable) + "|" + EnumToCode(SpecialAccountSelection.AccountsReceivable) + "|" +
-                                                EnumToCode(SpecialAccountSelection.AdvancesToSupplier) + "|" + EnumToCode(SpecialAccountSelection.CustomerAdvances) + "|" +
-                                                EnumToCode(SpecialAccountSelection.AccountsPayableDiscount) + "|" + EnumToCode(SpecialAccountSelection.AccountsReceivableDiscount) + "|" +
-                                                EnumToCode(SpecialAccountSelection.EmployeeLoan)
+                Dim invalidAccounts As String = EnumToCode(SpecialAccountSelection.AdvancesToSupplier) + "|" + EnumToCode(SpecialAccountSelection.CustomerAdvances) + "|" +
+                                                EnumToCode(SpecialAccountSelection.AccountsPayableDiscount) + "|" + EnumToCode(SpecialAccountSelection.AccountsReceivableDiscount)
                 Dim specialAccount As String
                 Dim account As AccountModel
                 Dim dateToday As DateTime = Now()
@@ -176,11 +195,14 @@ Namespace PresentationLayer.Presenters
                     retValue = False
                 Else
                     For Each item In View.JournalItems
+                        account = Nothing
                         If item.AccountIdNo Is Nothing OrElse item.AccountIdNo = 0 Then
                             specialAccount = Nothing
                         Else
                             account = GetAccount(item.AccountIdNo)
                             specialAccount = account.SpecialAccount
+                            item.SpecialAccount = account.SpecialAccount
+                            item.PayeeType = account.PayeeType
                         End If
                         If item.AccountIdNo Is Nothing Or item.AccountIdNo = 0 AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
                             MessageBox.Show(String.Format("Error in line {0:N0}. Cannot save entries with blank account id.", item.Sequence.ToString()))
@@ -194,6 +216,9 @@ Namespace PresentationLayer.Presenters
                             retValue = False
                         End If
                     Next
+                    If retValue AndAlso Not JournalItemPayeesAreValid(View.JournalItems, View.PayeeByCode) Then
+                        retValue = False
+                    End If
                 End If
             End If
             Return retValue

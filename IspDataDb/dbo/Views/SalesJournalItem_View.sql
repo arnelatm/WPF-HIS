@@ -2,9 +2,17 @@ CREATE VIEW dbo.SalesJournalItem_View
 AS
 SELECT        dbo.SalesJournalItem.IdNo, dbo.SalesJournalItem.Sequence, dbo.SalesJournalItem.JournalIdNo, dbo.SalesJournalItem.AccountIdNo, dbo.SalesJournalItem.Debit, dbo.SalesJournalItem.Credit, 
                          dbo.SalesJournalItem.RevCostCenterIdNo, dbo.Account.AccountName, dbo.SalesJournalItem.Debit - dbo.SalesJournalItem.Credit AS OriginalAmount, dbo.Account.PayeeType, dbo.Account.SpecialAccount, 
-                         dbo.SalesJournalItem.Notes, 0 AS OpenInvoiceIdNo, 0 AS PaidAmount, 0 AS DiscountTaken, dbo.SalesJournalItem.PayIdNo
+                         dbo.SalesJournalItem.Notes, 0 AS OpenInvoiceIdNo, 0 AS PaidAmount, 0 AS DiscountTaken, dbo.SalesJournalItem.PayIdNo,
+                         ContactData.IdNo AS ContactIdNo,
+                         ContactData.CSEIdNo AS ContactCSEIdNo,
+                         ContactData.CSECode AS ContactCSECode,
+                         ContactData.ContactCode,
+                         ContactData.ContactName,
+                         ContactData.ContactNameAra
 FROM            dbo.SalesJournalItem INNER JOIN
-                         dbo.Account ON dbo.SalesJournalItem.AccountIdNo = dbo.Account.IdNo
+                         dbo.Account ON dbo.SalesJournalItem.AccountIdNo = dbo.Account.IdNo LEFT OUTER JOIN
+                         dbo.Contact_View AS ContactData ON dbo.SalesJournalItem.PayIdNo = ContactData.IdNo
+                         AND (dbo.Account.PayeeType IS NULL OR dbo.Account.PayeeType = ContactData.CSECode)
 
 GO
 

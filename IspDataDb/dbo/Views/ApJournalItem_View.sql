@@ -4,11 +4,19 @@ AS
 SELECT        dbo.ApJournalItem.IdNo, dbo.ApJournalItem.Sequence, dbo.ApJournalItem.JournalIdNo, dbo.ApJournalItem.AccountIdNo, dbo.ApJournalItem.Debit, dbo.ApJournalItem.Credit, dbo.ApJournalItem.RevCostCenterIdNo, 
                          dbo.ApJournalItem.Notes, dbo.ApJournalItem.Posted, dbo.ApJournalItem.DateTimeStamp, dbo.Account.AccountName, dbo.ApOpenInvoice_View.JournalCode, dbo.ApOpenInvoice_View.IdNo AS OpenInvoiceIdNo, 
                          dbo.ApJournalItem.Credit - dbo.ApJournalItem.Debit AS OriginalAmount, dbo.ApOpenInvoice_View.PaidAmount, dbo.ApOpenInvoice_View.DiscountTaken, dbo.Account.SpecialAccount, dbo.Account.AccountNameAra, dbo.Account.PayeeType, 
-                         dbo.ApJournalItem.PayIdNo
+                         dbo.ApJournalItem.PayIdNo,
+                         ContactData.IdNo AS ContactIdNo,
+                         ContactData.CSEIdNo AS ContactCSEIdNo,
+                         ContactData.CSECode AS ContactCSECode,
+                         ContactData.ContactCode,
+                         ContactData.ContactName,
+                         ContactData.ContactNameAra
 FROM            dbo.ApJournalItem 
 	LEFT OUTER JOIN dbo.ApJournal on dbo.ApJournalItem.JournalIdNo=dbo.ApJournal.IdNo 
 	LEFT OUTER JOIN dbo.Account ON dbo.ApJournalItem.AccountIdNo = dbo.Account.IdNo 
 	LEFT OUTER JOIN dbo.ApOpenInvoice_View ON dbo.ApJournalItem.IdNo = dbo.ApOpenInvoice_View.JournalItemIdNo AND dbo.ApOpenInvoice_View.JournalCode = 'AP'
+	LEFT OUTER JOIN dbo.Contact_View AS ContactData ON dbo.ApJournalItem.PayIdNo = ContactData.IdNo
+		AND (dbo.Account.PayeeType IS NULL OR dbo.Account.PayeeType = ContactData.CSECode)
 	where dbo.ApJournal.Cancelled=0
 
 GO

@@ -14,12 +14,14 @@ Public Class CtComboBoxEditingControl
     Private dataGridView As DataGridView
     Private rowIndex As Integer
     Private _valueChanged As Boolean
+    Private _preparedForEdit As Boolean
 
     Public Property EditingControlDataGridView As DataGridView Implements IDataGridViewEditingControl.EditingControlDataGridView
         Get
             Return dataGridView
         End Get
         Set(value As DataGridView)
+            _preparedForEdit = False
             dataGridView = value
         End Set
     End Property
@@ -29,7 +31,9 @@ Public Class CtComboBoxEditingControl
             Return GetEditingControlFormattedValue(DataGridViewDataErrorContexts.Formatting)
         End Get
         Set(ByVal value As Object)
+            _preparedForEdit = False
             Dim text As String = TryCast(value, String)
+            If String.IsNullOrEmpty(text) Then SelectedIndex = -1
             MyBase.Text = text
             'If Not Equals(text, Nothing) Then
             '    MyBase.Text = text
@@ -217,17 +221,36 @@ Public Class CtComboBoxEditingControl
     '   selectAll:
     '     true to select all of the cell's content; otherwise, false.
     Public Sub PrepareEditingControlForEdit(ByVal selectAll As Boolean) Implements IDataGridViewEditingControl.PrepareEditingControlForEdit
-        If selectAll Then
-            MyBase.SelectAll()
-        End If
+        _preparedForEdit = False
         BackColor = GlobalVariables.DefaultFormControlEditingBackgroundColor
         ForeColor = GlobalVariables.DefaultFormControlEditingForegroundColor
         Me.EditingMode = True
+
+        'Binding a reused editor can select its first item even for an empty cell.
+        If dataGridView IsNot Nothing AndAlso dataGridView.CurrentCell IsNot Nothing AndAlso
+           String.IsNullOrEmpty(TryCast(dataGridView.CurrentCell.FormattedValue, String)) Then
+            SelectedIndex = -1
+            Text = String.Empty
+        End If
+
+        If selectAll Then
+            MyBase.SelectAll()
+        End If
+        _preparedForEdit = True
     End Sub
 
     Private Sub NotifyDataGridViewOfValueChange()
+        If Not _preparedForEdit OrElse dataGridView Is Nothing OrElse
+           dataGridView.EditingControl IsNot Me OrElse Not dataGridView.IsCurrentCellInEditMode Then Return
+
         _valueChanged = True
         dataGridView.NotifyCurrentCellDirty(dirty:=True)
+    End Sub
+
+    Protected Overrides Sub OnTextChanged(e As EventArgs)
+        MyBase.OnTextChanged(e)
+        'Deleting text is an edit even when no list item is selected.
+        NotifyDataGridViewOfValueChange()
     End Sub
 
     '
@@ -236,9 +259,7 @@ Public Class CtComboBoxEditingControl
     '     An System.EventArgs that contains the event data.
     Protected Overrides Sub OnSelectedIndexChanged(ByVal e As EventArgs)
         'MyBase.OnSelectedIndexChanged(e)
-        If SelectedIndex <> -1 Then
-            NotifyDataGridViewOfValueChange()
-        End If
+        NotifyDataGridViewOfValueChange()
     End Sub
 
 End Class

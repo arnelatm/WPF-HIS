@@ -76,7 +76,8 @@ Namespace PresentationLayer.Presenters
         Protected Overrides Sub CreateDataSources()
             MakeVarDataSources({New Object() {"Account", "AccountsByCode", Nothing, "DetailAccount=1"},
                                 New Object() {"DepositType", "DepositTypesByCode", Nothing, Nothing},
-                                New Object() {"RevCostCenter", "RevCostCentersByCode", Nothing, Nothing}})
+                                New Object() {"RevCostCenter", "RevCostCentersByCode", Nothing, Nothing},
+                                New Object() {"Contact_View", "PayeeByCode", "IdNo,CSEIdNo,CSECode,ContactCode,ContactName,ContactNameAra", Nothing}})
             CreateSpecialAccountDataSource("AccountIdNo", {EnumToCode(SpecialAccountSelection.Sales)})
         End Sub
 
@@ -114,6 +115,10 @@ Namespace PresentationLayer.Presenters
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If Not CancelSave Then
                 MakeJournalItems()
+                If Not JournalItemPayeesAreValid(View.JournalItems, View.PayeeByCode) Then
+                    CancelSave = True
+                    Return
+                End If
                 SetAsideJournalItems()
                 Dim nRowCount As Integer
                 nRowCount = 1
@@ -175,6 +180,8 @@ Namespace PresentationLayer.Presenters
                 Dim lastPostingDate As DateTime? = Service.GetRecordFieldWithKeyG(Of DateTime?)("Sales Journal", "LastPosting", "TransactionName", "LastPostingDate")
                 If IsDateRangeValid("Sales Journal", View.TransactionDate, lastPostingDate, dateToday) = DialogResult.No Then
                     retValue = False
+                ElseIf Not JournalItemPayeesAreValid(View.JournalItems, View.PayeeByCode) Then
+                    retValue = False
                 End If
             End If
             Return retValue
@@ -211,6 +218,7 @@ Namespace PresentationLayer.Presenters
                 counter += 1
                 If counter <= oldJournalItems.Count() Then
                     View.JournalItems.Item(counter - 1).AccountIdNo = pAccountIdNo
+                    MakePayTypeAndSpecialAccount(View.JournalItems.Item(counter - 1), pAccountIdNo)
                     View.JournalItems.Item(counter - 1).Debit = If(debitAmount - creditAmount < 0, 0, debitAmount - creditAmount)
                     View.JournalItems.Item(counter - 1).Credit = If(creditAmount - debitAmount > 0, creditAmount - debitAmount, 0)
                     View.JournalItems.Item(counter - 1).Sequence = counter
@@ -225,6 +233,7 @@ Namespace PresentationLayer.Presenters
                             .Notes = Trim(note + IIf(note = noteAra, "", "-" + noteAra)),
                             .Sequence = counter
                             }
+                    MakePayTypeAndSpecialAccount(ji, pAccountIdNo)
                     View.JournalItems.Add(ji)
                 End If
             End If
@@ -336,7 +345,12 @@ Namespace PresentationLayer.Presenters
         Public Overrides Function Save(ByRef viewControl As System.Windows.Forms.Control) As Boolean
             If AddMode AndAlso View.TransactionDate.HasValue AndAlso View.TransactionDate.Value.Date >= New Date(2026, 1, 1) Then
                 Try
+                    If Not IsBizDataValid() Then Return False
+                    CancelSave = False
+                    OnTransactionBeforeSave()
+                    If CancelSave Then Return False
                     OnBeforeSave()
+                    If CancelSave Then Return False
                     Dim model As New SalesJournalModel()
                     GlobalVariables.Mapper.Map(View, model)
                     Dim idNo = New AATM.Accounts.ServiceLayer.SalesJournalTransactionService().SaveNew(model)
@@ -348,7 +362,12 @@ Namespace PresentationLayer.Presenters
             End If
             If EditMode AndAlso View.TransactionDate.HasValue AndAlso View.TransactionDate.Value.Date >= New Date(2026, 1, 1) Then
                 Try
+                    If Not IsBizDataValid() Then Return False
+                    CancelSave = False
+                    OnTransactionBeforeSave()
+                    If CancelSave Then Return False
                     OnBeforeSave()
+                    If CancelSave Then Return False
                     Dim model As New SalesJournalModel()
                     GlobalVariables.Mapper.Map(View, model)
                     Dim svc As New AATM.Accounts.ServiceLayer.SalesJournalTransactionService()

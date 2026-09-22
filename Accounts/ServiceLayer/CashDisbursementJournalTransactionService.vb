@@ -34,7 +34,11 @@ Namespace ServiceLayer
         End Function
         Private Shared Function CreateItems(m As DisbursementJournalModel) As DataTable
             Dim t As New DataTable():For Each n In {"AccountIdNo","Credit","Debit","JournalIDNo","Notes","PayIdNo","RevCostCenterIdNo","Sequence"}:t.Columns.Add(n,If(n="Notes",GetType(String),If(n="Credit" OrElse n="Debit",GetType(Decimal),GetType(Integer)))):Next
-            For Each i In If(m.JournalItems,New List(Of JournalItemModel)):t.Rows.Add(If(i.AccountIdNo.HasValue,CObj(i.AccountIdNo.Value),0),i.Credit,i.Debit,0,If(i.Notes,String.Empty),i.PayIdNo,CObj(i.RevCostCenterIdNo),i.Sequence):Next:Return t
+            For Each i In If(m.JournalItems,New List(Of JournalItemModel))
+                If i.Debit = 0D AndAlso i.Credit = 0D Then Continue For
+                t.Rows.Add(If(i.AccountIdNo.HasValue,CObj(i.AccountIdNo.Value),0),i.Credit,i.Debit,0,If(i.Notes,String.Empty),i.PayIdNo,CObj(i.RevCostCenterIdNo),i.Sequence)
+            Next
+            Return t
         End Function
         Private Shared Function CreateOiItems(m As DisbursementJournalModel) As DataTable
             Dim t As New DataTable():For Each n In {"Amount","ApOpenInvoiceIdNo","DiscountTaken","DjIdNo","Sequence"}:t.Columns.Add(n,If(n="Amount" OrElse n="DiscountTaken",GetType(Decimal),GetType(Integer))):Next

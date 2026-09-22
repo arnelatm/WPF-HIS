@@ -96,6 +96,7 @@
     <Build Include="dbo\Tables\BankAccount.sql" />
     <Build Include="dbo\Tables\GeneralJournalItem.sql" />
     <Build Include="dbo\Tables\GeneralJournal.sql" />
+    <Build Include="dbo\Tables\PayrollGeneralJournal.sql" />
     <Build Include="dbo\Tables\Bank.sql" />
     <Build Include="dbo\Tables\Religion.sql" />
     <Build Include="dbo\Tables\Series.sql" />
@@ -173,6 +174,9 @@
     <Build Include="dbo\Views\ArJournalItem_View.sql" />
     <Build Include="dbo\Views\SecurityObject_View.sql" />
     <Build Include="dbo\Views\GeneralJournalItem_View.sql" />
+    <Build Include="dbo\Views\JournalItemPayeeLedger_View.sql" />
+    <Build Include="dbo\Views\ApAging_View.sql" />
+    <Build Include="dbo\Views\ArAging_View.sql" />
     <Build Include="dbo\Views\ArOpenInvoice_View.sql" />
     <Build Include="dbo\Views\TranslatedCaption_View.sql" />
     <Build Include="dbo\Views\ARDetails_View.sql" />
@@ -251,6 +255,7 @@
     <Build Include="dbo\Stored Procedures\UpdatePcJournalAtomic.sql" />
     <Build Include="dbo\Stored Procedures\DeletePcJournalAtomic.sql" />
     <Build Include="dbo\Stored Procedures\SaveGjJournalAtomic.sql" />
+    <Build Include="dbo\Stored Procedures\CreatePayrollGeneralJournalAtomic.sql" />
     <Build Include="dbo\Stored Procedures\UpdateGjJournalAtomic.sql" />
     <Build Include="dbo\Stored Procedures\DeleteGjJournalAtomic.sql" />
     <Build Include="dbo\Stored Procedures\DeleteSjJournalAtomic.sql" />
@@ -796,6 +801,9 @@
     <Build Include="Security\db_ddladmin for Arnel.sql" />
     <Build Include="Security\db_owner for Arnel.sql" />
     <Build Include="Security\db_securityadmin for Arnel.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="PostDeployment.sql" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="Snapshots\IspDataDb_IBN-SERVER_20260816.dacpac">

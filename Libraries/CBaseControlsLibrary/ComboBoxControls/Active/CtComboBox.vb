@@ -49,6 +49,8 @@ Public Class CtComboBox
     <Description("Set to True to specify that this control is always editable.")>
     Public Property AlwaysEditable As Boolean = False
     Private _lastValue As Object = Nothing
+    Private _normalizingClear As Boolean
+    Private _synchronizingSelectionText As Boolean
 
     <Bindable(True)>
     <Category("Custom Properties")>
@@ -329,6 +331,13 @@ Public Class CtComboBox
         EndUpdate()
     End Sub
 
+    Protected Overrides Sub OnValidating(e As CancelEventArgs)
+        If EditingMode AndAlso Editable AndAlso Not DisplayOnly AndAlso Text.Length = 0 Then
+            ClearSelectionForValidation()
+        End If
+        MyBase.OnValidating(e)
+    End Sub
+
     Protected Overrides Sub OnGotFocus(e As EventArgs)
         BeginUpdate()
         MyBase.OnGotFocus(e)
@@ -339,36 +348,37 @@ Public Class CtComboBox
     Protected Overloads Overrides Sub OnPreviewKeyDown(e As PreviewKeyDownEventArgs)
         Dim sw As Int16 = 0
         BeginUpdate()
-        If Not SuggestListForm.Visible Then
-            MyBase.OnPreviewKeyDown(e)
-            sw = 1
-        End If
-        If sw = 0 Then
-            Select Case e.KeyCode
-                Case Keys.Down
-                    If SuggestListForm.SuggestListBox.SelectedIndex < _suggestBindingList.Count - 1 Then
-                        ' ReSharper disable once ReturnValueOfPureMethodIsNotUsed
-                        Math.Max(Interlocked.Increment(SuggestListForm.SuggestListBox.SelectedIndex), SuggestListForm.SuggestListBox.SelectedIndex - 1)
-                    End If
-                    Return
-                Case Keys.Up
-                    If SuggestListForm.SuggestListBox.SelectedIndex > 0 Then
+        Try
+            If Not SuggestListForm.Visible Then
+                MyBase.OnPreviewKeyDown(e)
+                sw = 1
+            End If
+            If sw = 0 Then
+                Select Case e.KeyCode
+                    Case Keys.Down
+                        If SuggestListForm.SuggestListBox.SelectedIndex < _suggestBindingList.Count - 1 Then
+                            ' ReSharper disable once ReturnValueOfPureMethodIsNotUsed
+                            Math.Max(Interlocked.Increment(SuggestListForm.SuggestListBox.SelectedIndex), SuggestListForm.SuggestListBox.SelectedIndex - 1)
+                        End If
+                        Return
+                    Case Keys.Up
+                        If SuggestListForm.SuggestListBox.SelectedIndex > 0 Then
 #Disable Warning ReturnValueOfPureMethodIsNotUsed
-                        Math.Max(Interlocked.Decrement(SuggestListForm.SuggestListBox.SelectedIndex), SuggestListForm.SuggestListBox.SelectedIndex + 1)
+                            Math.Max(Interlocked.Decrement(SuggestListForm.SuggestListBox.SelectedIndex), SuggestListForm.SuggestListBox.SelectedIndex + 1)
 #Enable Warning ReturnValueOfPureMethodIsNotUsed
-                    End If
-                Case Keys.Enter
-                    Text = SuggestListForm.SuggestListBox.Text
-                    [Select](0, Text.Length)
-                    SelectExactTextMatch()
-                    SuggestListForm.Hide()
-                    SuggestListForm.Visible = False
-                Case Keys.Escape
-                    HideSuggestionBox()
-            End Select
-            MyBase.OnPreviewKeyDown(e)
-        End If
-        EndUpdate()
+                        End If
+                    Case Keys.Enter
+                        SelectSuggestion(SuggestListForm.SuggestListBox.Text)
+                        SuggestListForm.Hide()
+                        SuggestListForm.Visible = False
+                    Case Keys.Escape
+                        HideSuggestionBox()
+                End Select
+                MyBase.OnPreviewKeyDown(e)
+            End If
+        Finally
+            EndUpdate()
+        End Try
     End Sub
 
     Private Sub HideDropDown(hide As Boolean)
@@ -407,31 +417,51 @@ Public Class CtComboBox
 
     Protected Overrides Sub OnTextChanged(ByVal e As EventArgs)
         BeginUpdate()
-        MyBase.OnTextChanged(e)
-        If Not Focused Then Return
-        If Text.Length >= SuggestCharCount Then
-            _suggestBindingList.Clear()
-            _suggestBindingList.RaiseListChangedEvents = False
-            PropertySelectorCompiled(Items).Where(_filterRuleCompiled).OrderBy(_suggestListOrderRuleCompiled).ToList().ForEach(AddressOf _suggestBindingList.Add)
-            _suggestBindingList.RaiseListChangedEvents = True
-            _suggestBindingList.ResetBindings()
-            Dim showForm As Boolean
-            showForm = _suggestBindingList.Any()
-            If showForm Then
-                SetListBoxFormLocation(SuggestListForm)
-                SuggestListForm.Visible = True
-            End If
-            If _suggestBindingList.Count = 0 And LimitToList Then
-                Beep()
-                SendKeys.SendWait("{BACKSPACE}")
-            ElseIf _suggestBindingList.Count = 1 AndAlso _suggestBindingList.Single().Length = Text.Trim().Length Then
-                Text = _suggestBindingList.Single()
-                [Select](0, Text.Length)
-                SelectExactTextMatch()
+        Try
+            MyBase.OnTextChanged(e)
+            If _normalizingClear OrElse _synchronizingSelectionText OrElse Not Focused Then Return
+
+            If Text.Length = 0 Then
                 HideSuggestionBox()
+                Return
             End If
-        End If
-        EndUpdate()
+
+            If Text.Length >= SuggestCharCount Then
+                _suggestBindingList.Clear()
+                _suggestBindingList.RaiseListChangedEvents = False
+                PropertySelectorCompiled(Items).Where(_filterRuleCompiled).OrderBy(_suggestListOrderRuleCompiled).ToList().ForEach(AddressOf _suggestBindingList.Add)
+                _suggestBindingList.RaiseListChangedEvents = True
+                _suggestBindingList.ResetBindings()
+                Dim showForm As Boolean
+                showForm = _suggestBindingList.Any()
+                If showForm Then
+                    SetListBoxFormLocation(SuggestListForm)
+                    SuggestListForm.Visible = True
+                End If
+                If _suggestBindingList.Count = 0 And LimitToList Then
+                    Beep()
+                    SendKeys.SendWait("{BACKSPACE}")
+                ElseIf _suggestBindingList.Count = 1 AndAlso _suggestBindingList.Single().Length = Text.Trim().Length Then
+                    Text = _suggestBindingList.Single()
+                    [Select](0, Text.Length)
+                    SelectExactTextMatch()
+                    HideSuggestionBox()
+                End If
+            End If
+        Finally
+            EndUpdate()
+        End Try
+    End Sub
+
+    Private Sub ClearSelectionForValidation()
+        _normalizingClear = True
+        Try
+            HideSuggestionBox()
+            SelectedIndex = -1
+            Text = String.Empty
+        Finally
+            _normalizingClear = False
+        End Try
     End Sub
 
     Private Sub ctComboBox_MouseUp(sender As Object, e As MouseEventArgs) Handles Me.MouseUp
@@ -449,27 +479,21 @@ Public Class CtComboBox
         ContextHandler(sender, e)
     End Sub
 
-    Private Overloads Sub OnBindingContextChanged(sender As Object, e As EventArgs) Handles MyBase.BindingContextChanged
-        Dim nCol As Int32 = 1
+    Private Overloads Sub OnBindingContextChanged(sender As Object, e As EventArgs) Handles MyBase.BindingContextChanged, MyBase.DataSourceChanged, MyBase.DisplayMemberChanged
         If DataSource IsNot Nothing Then
-            'If TypeOf DataSource IsNot DataView Then
-            '    Debugger.Break()
-            'End If
             Dim data = TryCast(DataSource, DataTable)
             If data Is Nothing Then
-                Return
+                Dim dataView = TryCast(DataSource, DataView)
+                If dataView IsNot Nothing Then data = dataView.Table
             End If
-            Dim dataView As DataView = data.DefaultView
-            Dim colCount As Int16 = 0
-            colCount = dataView.Table.Columns.Count
-            If colCount = 1 Then
-                nCol = 0
-            Else
-                nCol = 1
+            If data Is Nothing OrElse data.Columns.Count = 0 Then Return
+
+            Dim displayColumn As String = DisplayMember
+            If String.IsNullOrWhiteSpace(displayColumn) OrElse Not data.Columns.Contains(displayColumn) Then
+                displayColumn = data.Columns(Math.Min(1, data.Columns.Count - 1)).ColumnName
             End If
-            'nCol = Math.Max(data.Columns.Count - 1, 0)
-            'PropertySelectorCompiled = Function(collection) collection.Cast(Of DataRowView)().[Select](Function(p) p.Row.ItemArray(nCol).ToString())
-            PropertySelectorCompiled = Function(collection) collection.Cast(Of DataRowView)().[Select](Function(p) p.Row.Item(nCol).ToString())
+
+            PropertySelectorCompiled = Function(collection) collection.Cast(Of DataRowView)().[Select](Function(p) Convert.ToString(p.Row.Item(displayColumn)))
         End If
 
     End Sub
@@ -826,13 +850,30 @@ Public Class CtComboBox
     End Sub
 
     Private Sub SuggestListBoxOnClick()
-        Text = SuggestListForm.SuggestListBox.Text
-        SelectExactTextMatch()
+        SelectSuggestion(SuggestListForm.SuggestListBox.Text)
         Focus()
     End Sub
 
+    Private Function SelectSuggestion(suggestedText As String) As Boolean
+        If String.IsNullOrWhiteSpace(suggestedText) Then
+            Return False
+        End If
+
+        For itemIndex As Integer = 0 To Items.Count - 1
+            Dim displayText = GetItemText(Items(itemIndex))
+            If String.Equals(displayText, suggestedText, StringComparison.CurrentCultureIgnoreCase) Then
+                SelectedIndex = itemIndex
+                SynchronizeSelectionText(displayText)
+                HideSuggestionBox()
+                Return True
+            End If
+        Next
+
+        Return False
+    End Function
+
     Private Function SelectExactTextMatch() As Boolean
-        If SelectedIndex >= 0 OrElse String.IsNullOrWhiteSpace(Text) Then
+        If String.IsNullOrWhiteSpace(Text) Then
             Return SelectedIndex >= 0
         End If
 
@@ -841,9 +882,36 @@ Public Class CtComboBox
             Return False
         End If
 
-        SelectedIndex = matchIndex
+        ' A ComboBox can retain its previous SelectedIndex while its editable
+        ' text is being replaced. Always synchronize the selected row with the
+        ' displayed text so choosing a suggestion cannot leave a stale value
+        ' behind the newly typed name.
+        If SelectedIndex <> matchIndex Then
+            SelectedIndex = matchIndex
+        End If
+
+        If SelectedIndex <> matchIndex Then
+            Return False
+        End If
+
+        SynchronizeSelectionText(GetItemText(Items(matchIndex)))
+
+        HideSuggestionBox()
         Return True
     End Function
+
+    Private Sub SynchronizeSelectionText(displayText As String)
+        If String.Equals(Text, displayText, StringComparison.Ordinal) Then
+            Return
+        End If
+
+        _synchronizingSelectionText = True
+        Try
+            Text = displayText
+        Finally
+            _synchronizingSelectionText = False
+        End Try
+    End Sub
 
     Public Function GetNullableValue(Of T)()
         Dim x = GetValue()

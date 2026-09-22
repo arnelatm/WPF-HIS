@@ -25,6 +25,7 @@ Namespace PresentationLayer.Views.Forms
         Private ReadOnly _uncloseMonth As New Button()
         Private ReadOnly _status As New Label()
         Private ReadOnly _summary As New DataGridView()
+        Private ReadOnly _entries As New DataGridView()
         Private ReadOnly _checklist As New DataGridView()
         Private ReadOnly _reversalHistory As New DataGridView()
         Private ReadOnly _checklistNotesLabel As New Label()
@@ -108,6 +109,25 @@ Namespace PresentationLayer.Views.Forms
             ConfigureGrid(_summary)
             summaryPage.Controls.Add(_summary)
             _tabs.TabPages.Add(summaryPage)
+            Dim entriesPage As New TabPage("Entries to post") With {.BackColor = Color.White}
+            ConfigureGrid(_entries)
+            _entries.AutoGenerateColumns = False
+            _entries.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+            _entries.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+            _entries.Columns.Add(New DataGridViewTextBoxColumn With {.HeaderText = "Journal", .DataPropertyName = "JournalCode", .FillWeight = 45})
+            _entries.Columns.Add(New DataGridViewTextBoxColumn With {.HeaderText = "ID", .DataPropertyName = "JournalIdNo", .FillWeight = 45})
+            _entries.Columns.Add(New DataGridViewTextBoxColumn With {.HeaderText = "Date", .DataPropertyName = "TransactionDate", .DefaultCellStyle = New DataGridViewCellStyle With {.Format = "dd/MM/yyyy"}, .FillWeight = 70})
+            _entries.Columns.Add(New DataGridViewTextBoxColumn With {.HeaderText = "Reference", .DataPropertyName = "ReferenceNo", .FillWeight = 75})
+            _entries.Columns.Add(New DataGridViewTextBoxColumn With {.HeaderText = "Description", .DataPropertyName = "Notes", .FillWeight = 150})
+            _entries.Columns.Add(New DataGridViewCheckBoxColumn With {.HeaderText = "Header to post", .DataPropertyName = "HeaderToPost", .FillWeight = 65})
+            _entries.Columns.Add(New DataGridViewCheckBoxColumn With {.HeaderText = "Approved", .DataPropertyName = "Approved", .FillWeight = 55})
+            _entries.Columns.Add(New DataGridViewCheckBoxColumn With {.HeaderText = "Cancelled", .DataPropertyName = "Cancelled", .FillWeight = 55})
+            _entries.Columns.Add(New DataGridViewTextBoxColumn With {.HeaderText = "Lines", .DataPropertyName = "Lines", .FillWeight = 45})
+            _entries.Columns.Add(New DataGridViewTextBoxColumn With {.HeaderText = "Lines to post", .DataPropertyName = "ItemLinesToPost", .FillWeight = 65})
+            _entries.Columns.Add(New DataGridViewTextBoxColumn With {.HeaderText = "Debit to post", .DataPropertyName = "DebitToPost", .DefaultCellStyle = New DataGridViewCellStyle With {.Format = "N4"}, .FillWeight = 80})
+            _entries.Columns.Add(New DataGridViewTextBoxColumn With {.HeaderText = "Credit to post", .DataPropertyName = "CreditToPost", .DefaultCellStyle = New DataGridViewCellStyle With {.Format = "N4"}, .FillWeight = 80})
+            entriesPage.Controls.Add(_entries)
+            _tabs.TabPages.Add(entriesPage)
             Dim checklistPage As New TabPage("Close checklist") With {.BackColor = Color.White}
             ConfigureGrid(_checklist)
             AddHandler _checklist.SelectionChanged, AddressOf Checklist_SelectionChanged
@@ -140,6 +160,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub Preview_Click(sender As Object, e As EventArgs)
             LoadPosting(False)
+            If _lastPreview IsNot Nothing AndAlso _lastPreview.Tables.Count > 4 Then _tabs.SelectedIndex = 1
         End Sub
 
         Private Sub Execute_Click(sender As Object, e As EventArgs)
@@ -156,6 +177,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub PeriodSelectionChanged(sender As Object, e As EventArgs)
             _lastPreview = Nothing
             _summary.DataSource = Nothing
+            _entries.DataSource = Nothing
             _details.Clear()
             _execute.Enabled = False
             _unpostMonth.Enabled = False
@@ -369,7 +391,13 @@ Namespace PresentationLayer.Views.Forms
         Private Sub LoadPosting(executePosting As Boolean)
             Try
                 Cursor = Cursors.WaitCursor
-                If Not executePosting Then _lastPreview = Nothing
+                If Not executePosting Then
+                    _lastPreview = Nothing
+                    _summary.DataSource = Nothing
+                    _entries.DataSource = Nothing
+                    _details.Clear()
+                    _execute.Enabled = False
+                End If
                 Dim data = ExecuteProcedure(executePosting)
                 _lastPreview = data : BindResults(data)
                 If executePosting Then
@@ -419,9 +447,10 @@ Namespace PresentationLayer.Views.Forms
         End Function
 
         Private Sub BindResults(data As DataSet)
-            _summary.DataSource = Nothing : _details.Clear()
+            _summary.DataSource = Nothing : _entries.DataSource = Nothing : _details.Clear()
             If data Is Nothing OrElse data.Tables.Count = 0 Then Return
             _summary.DataSource = data.Tables(If(data.Tables.Count > 1, 1, 0))
+            If data.Tables.Count > 4 Then _entries.DataSource = data.Tables(4)
             If data.Tables.Count < 4 Then Return
 
             AppendValidationDetails("Unbalanced journal batches", data.Tables(2))

@@ -55,6 +55,12 @@ Namespace DataLayer.AdoNet
                     "PaidAmount," &
                     "PayeeType," &
                     "PayIdNo," &
+                    "ContactIdNo," &
+                    "ContactCSEIdNo," &
+                    "ContactCSECode," &
+                    "ContactCode," &
+                    "ContactName," &
+                    "ContactNameAra," &
                     "RevCostCenterIdNo," &
                     "Sequence," &
                     "SpecialAccount" &
@@ -91,6 +97,12 @@ Namespace DataLayer.AdoNet
             .PaidAmount = Extensions.AsDecimal(reader("PaidAmount")),
             .PayeeType = Extensions.AsString(reader("PayeeType")),
             .PayIdNo = Extensions.AsInt(Of Int32)(reader("PayIdNo")),
+            .ContactIdNo = Extensions.AsNullable(Of Int32?)(reader("ContactIdNo")),
+            .ContactCSEIdNo = Extensions.AsNullable(Of Int32?)(reader("ContactCSEIdNo")),
+            .ContactCSECode = Extensions.AsString(reader("ContactCSECode")),
+            .ContactCode = Extensions.AsString(reader("ContactCode")),
+            .ContactName = Extensions.AsString(reader("ContactName")),
+            .ContactNameAra = Extensions.AsString(reader("ContactNameAra")),
             .RevCostCenterIdNo = Extensions.AsInt(Of Integer)(reader("RevCostCenterIdNo")),
             .Sequence = Extensions.AsInt(Of Int16)(reader("sequence")),
             .SpecialAccount = Extensions.AsString(reader("SpecialAccount"))

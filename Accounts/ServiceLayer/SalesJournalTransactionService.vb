@@ -17,7 +17,12 @@ Namespace ServiceLayer
    Using cn As New SqlConnection(GlobalVariables.DacConnectionString),cmd As New SqlCommand("dbo.DeleteSjJournalAtomic",cn):cmd.CommandType=CommandType.StoredProcedure:Add(cmd,"@JournalIdNo",idNo):cn.Open():AATM.DataLayer.AdoNet.AuditContext.Apply(cn):cmd.ExecuteNonQuery():Return 1:End Using
   End Function
   Private Shared Sub AddTvps(c As SqlCommand,m As SalesJournalModel)
-   Dim t As New DataTable():For Each n In {"AccountIdNo","Credit","Debit","JournalIDNo","Notes","PayIdNo","RevCostCenterIdNo","Sequence"}:t.Columns.Add(n,If(n="Notes",GetType(String),If(n="Credit" OrElse n="Debit",GetType(Decimal),GetType(Integer)))):Next:For Each i In If(m.JournalItems,New List(Of JournalItemModel)):t.Rows.Add(If(i.AccountIdNo.HasValue,CObj(i.AccountIdNo.Value),0),i.Credit,i.Debit,0,If(i.Notes,String.Empty),i.PayIdNo,CObj(i.RevCostCenterIdNo),i.Sequence):Next:Dim p=c.Parameters.AddWithValue("@Items",t):p.SqlDbType=SqlDbType.Structured:p.TypeName="dbo.JournalItemInsert"
+   Dim t As New DataTable():For Each n In {"AccountIdNo","Credit","Debit","JournalIDNo","Notes","PayIdNo","RevCostCenterIdNo","Sequence"}:t.Columns.Add(n,If(n="Notes",GetType(String),If(n="Credit" OrElse n="Debit",GetType(Decimal),GetType(Integer)))):Next
+   For Each i In If(m.JournalItems,New List(Of JournalItemModel))
+    If i.Debit = 0D AndAlso i.Credit = 0D Then Continue For
+    t.Rows.Add(If(i.AccountIdNo.HasValue,CObj(i.AccountIdNo.Value),0),i.Credit,i.Debit,0,If(i.Notes,String.Empty),i.PayIdNo,CObj(i.RevCostCenterIdNo),i.Sequence)
+   Next
+   Dim p=c.Parameters.AddWithValue("@Items",t):p.SqlDbType=SqlDbType.Structured:p.TypeName="dbo.JournalItemInsert"
    Dim d As New DataTable():For Each n In {"DepositTypeIdNo","DepositAmount","SaleAmount","SalesJournalIdNo","Sequence","VatAmount"}:d.Columns.Add(n,If(n="DepositAmount" OrElse n="SaleAmount" OrElse n="VatAmount",GetType(Decimal),GetType(Integer))):Next:For Each x In If(m.SalesDeposits,New List(Of SalesDepositModel)):d.Rows.Add(x.DepositTypeIdNo,x.DepositAmount,x.SaleAmount,0,x.Sequence,x.VatAmount):Next:p=c.Parameters.AddWithValue("@Deposits",d):p.SqlDbType=SqlDbType.Structured:p.TypeName="dbo.SalesDepositInsert"
   End Sub
   Private Shared Sub Add(c As SqlCommand,n As String,v As Object)

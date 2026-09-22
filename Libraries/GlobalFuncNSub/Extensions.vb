@@ -220,7 +220,6 @@ Public Module Extensions
     Private Const RDW_INVALIDATE As UInteger = &H1UI
     Private Const RDW_ERASE As UInteger = &H4UI
     Private Const RDW_ALLCHILDREN As UInteger = &H80UI
-    Private Const RDW_UPDATENOW As UInteger = &H100UI
     Private Const RDW_FRAME As UInteger = &H400UI
 
     ' Extension methods for Control
@@ -295,7 +294,7 @@ Public Module Extensions
         RedrawWindow(target.Handle,
                      IntPtr.Zero,
                      IntPtr.Zero,
-                     RDW_INVALIDATE Or RDW_ERASE Or RDW_ALLCHILDREN Or RDW_UPDATENOW Or RDW_FRAME)
+                     RDW_INVALIDATE Or RDW_ERASE Or RDW_ALLCHILDREN Or RDW_FRAME)
     End Sub
 
     <Extension()>

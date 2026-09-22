@@ -13,6 +13,8 @@ Namespace PresentationLayer.Views.Forms
     Public Class PcClosingEntry
         Implements IDisbursementJournalView, ISubscriber(Of BeforeAssignment)
 
+        Public Property PayeeByCode As Object Implements IDisbursementJournalView.PayeeByCode
+
         Public TxtTotalCredits As Decimal
         Public TxtTotalDebits As Decimal
 
@@ -487,6 +489,7 @@ Namespace PresentationLayer.Views.Forms
             SuspendLayout()
             bsJournalItems.DataSource = Nothing
             DataGridViewJournalItems.Refresh()
+            JournalPayeeColumn.Configure(DataGridViewJournalItems, PayeeByCode)
             bsJournalItems.DataSource = JournalItems
             bsJournalItems.AllowNew = True
             With DataGridViewJournalItems
