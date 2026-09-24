@@ -20,13 +20,6 @@ Namespace PresentationLayer.Views
         Public Property TestName As String Implements IClinicLabSampleDetailView.TestName
 
         Public Property RegistrationNo As String Implements IClinicLabSampleDetailView.RegistrationNo
-            Get
-                Throw New NotImplementedException()
-            End Get
-            Set(value As String)
-                Throw New NotImplementedException()
-            End Set
-        End Property
     End Class
 
 End Namespace

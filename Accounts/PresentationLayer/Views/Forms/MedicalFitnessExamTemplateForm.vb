@@ -24,8 +24,8 @@ Namespace PresentationLayer.Views.Forms
         Private chkRequired As CheckBox
         Private chkActive As CheckBox
         Private dgvTemplates As DataGridView
-        Private btnNew As Button
-        Private btnSave As Button
+        Private btnNewTemplate As Button
+        Private btnSaveTemplate As Button
         Private btnToggleActive As Button
         Private btnDeleteTemplate As Button
         Private btnClose As Button
@@ -90,13 +90,13 @@ Namespace PresentationLayer.Views.Forms
             editor.Controls.Add(chkRequired, 6, 1)
             editor.Controls.Add(chkActive, 7, 1)
 
-            btnNew = New Button With {.AutoSize = True, .Text = "New"}
-            btnSave = New Button With {.AutoSize = True, .Text = "Save"}
+            btnNewTemplate = New Button With {.AutoSize = True, .Text = "New"}
+            btnSaveTemplate = New Button With {.AutoSize = True, .Text = "Save"}
             btnToggleActive = New Button With {.AutoSize = True, .Text = "Deactivate"}
             btnDeleteTemplate = New Button With {.AutoSize = True, .Text = "Delete", .Enabled = False}
             btnClose = New Button With {.AutoSize = True, .Text = "Close", .DialogResult = DialogResult.Cancel}
-            AddHandler btnNew.Click, AddressOf NewTemplateClick
-            AddHandler btnSave.Click, AddressOf SaveTemplateClick
+            AddHandler btnNewTemplate.Click, AddressOf NewTemplateClick
+            AddHandler btnSaveTemplate.Click, AddressOf SaveTemplateClick
             AddHandler btnToggleActive.Click, AddressOf ToggleActiveClick
             AddHandler btnDeleteTemplate.Click, AddressOf DeleteTemplateClick
             AddHandler btnClose.Click, AddressOf CloseClick
@@ -106,8 +106,8 @@ Namespace PresentationLayer.Views.Forms
                 .Height = 42,
                 .Padding = New Padding(8, 8, 8, 4),
                 .WrapContents = False}
-            actionPanel.Controls.Add(btnNew)
-            actionPanel.Controls.Add(btnSave)
+            actionPanel.Controls.Add(btnNewTemplate)
+            actionPanel.Controls.Add(btnSaveTemplate)
             actionPanel.Controls.Add(btnToggleActive)
             actionPanel.Controls.Add(btnDeleteTemplate)
             actionPanel.Controls.Add(btnClose)
@@ -142,7 +142,7 @@ Namespace PresentationLayer.Views.Forms
             split.Panel2.Controls.Add(dgvTemplates)
             MaintenanceContent.Controls.Add(CreateMaintenanceLayout(actionPanel, split))
 
-            AcceptButton = btnSave
+            AcceptButton = btnSaveTemplate
             CancelButton = btnClose
         End Sub
 

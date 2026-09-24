@@ -21,8 +21,8 @@ Namespace PresentationLayer.Views.Forms
         Private chkActive As CheckBox
         Private chkDefault As CheckBox
         Private dgvFormats As DataGridView
-        Private btnNew As Button
-        Private btnSave As Button
+        Private btnNewFormat As Button
+        Private btnSaveFormat As Button
         Private btnDeleteFormat As Button
         Private btnItems As Button
         Private btnAssignments As Button
@@ -64,14 +64,14 @@ Namespace PresentationLayer.Views.Forms
             editor.Controls.Add(chkActive, 2, 1)
             editor.Controls.Add(chkDefault, 4, 1)
 
-            btnNew = New Button With {.AutoSize = True, .Text = "New"}
-            btnSave = New Button With {.AutoSize = True, .Text = "Save"}
+            btnNewFormat = New Button With {.AutoSize = True, .Text = "New"}
+            btnSaveFormat = New Button With {.AutoSize = True, .Text = "Save"}
             btnDeleteFormat = New Button With {.AutoSize = True, .Enabled = False, .Text = "Delete"}
             btnItems = New Button With {.AutoSize = True, .Text = "Configure Items"}
             btnAssignments = New Button With {.AutoSize = True, .Text = "Assign Companies"}
             btnClose = New Button With {.AutoSize = True, .Text = "Close", .DialogResult = DialogResult.Cancel}
-            AddHandler btnNew.Click, AddressOf NewClick
-            AddHandler btnSave.Click, AddressOf SaveClick
+            AddHandler btnNewFormat.Click, AddressOf NewClick
+            AddHandler btnSaveFormat.Click, AddressOf SaveClick
             AddHandler btnDeleteFormat.Click, AddressOf DeleteClick
             AddHandler btnItems.Click, AddressOf ItemsClick
             AddHandler btnAssignments.Click, AddressOf AssignmentsClick
@@ -80,8 +80,8 @@ Namespace PresentationLayer.Views.Forms
             Dim actionPanel = New FlowLayoutPanel With {
                 .AutoSize = False, .Dock = DockStyle.Top, .Height = 42,
                 .Padding = New Padding(8, 8, 8, 4), .WrapContents = False}
-            actionPanel.Controls.Add(btnNew)
-            actionPanel.Controls.Add(btnSave)
+            actionPanel.Controls.Add(btnNewFormat)
+            actionPanel.Controls.Add(btnSaveFormat)
             actionPanel.Controls.Add(btnDeleteFormat)
             actionPanel.Controls.Add(btnItems)
             actionPanel.Controls.Add(btnAssignments)
@@ -108,7 +108,7 @@ Namespace PresentationLayer.Views.Forms
             split.Panel1.Controls.Add(editor)
             split.Panel2.Controls.Add(dgvFormats)
             MaintenanceContent.Controls.Add(CreateMaintenanceLayout(actionPanel, split))
-            AcceptButton = btnSave
+            AcceptButton = btnSaveFormat
             CancelButton = btnClose
         End Sub
 

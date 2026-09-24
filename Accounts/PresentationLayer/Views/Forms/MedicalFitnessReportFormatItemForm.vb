@@ -12,7 +12,7 @@ Namespace PresentationLayer.Views.Forms
         Private ReadOnly _mrIdNo As Int32
         Private ReadOnly _formatTitle As String
         Private dgvItems As DataGridView
-        Private btnSave As Button
+        Private btnSaveItems As Button
         Private btnClinicalItems As Button
         Private btnXRayItems As Button
         Private btnClose As Button
@@ -31,11 +31,11 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub BuildControls()
-            btnSave = New Button With {.AutoSize = True, .Text = "Save Items"}
+            btnSaveItems = New Button With {.AutoSize = True, .Text = "Save Items"}
             btnClinicalItems = New Button With {.AutoSize = True, .Text = "Manage Clinical Items"}
             btnXRayItems = New Button With {.AutoSize = True, .Text = "Manage XRay Items"}
             btnClose = New Button With {.AutoSize = True, .Text = "Close", .DialogResult = DialogResult.Cancel}
-            AddHandler btnSave.Click, AddressOf SaveClick
+            AddHandler btnSaveItems.Click, AddressOf SaveClick
             AddHandler btnClinicalItems.Click, AddressOf ClinicalItemsClick
             AddHandler btnXRayItems.Click, AddressOf XRayItemsClick
             AddHandler btnClose.Click, Sub() Close()
@@ -43,7 +43,7 @@ Namespace PresentationLayer.Views.Forms
             Dim actionPanel = New FlowLayoutPanel With {
                 .AutoSize = False, .Dock = DockStyle.Top, .Height = 42,
                 .Padding = New Padding(8, 8, 8, 4), .WrapContents = False}
-            actionPanel.Controls.Add(btnSave)
+            actionPanel.Controls.Add(btnSaveItems)
             actionPanel.Controls.Add(btnClinicalItems)
             actionPanel.Controls.Add(btnXRayItems)
             actionPanel.Controls.Add(btnClose)

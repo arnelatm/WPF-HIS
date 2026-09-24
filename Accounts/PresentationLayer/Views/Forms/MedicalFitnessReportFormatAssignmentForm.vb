@@ -17,8 +17,8 @@ Namespace PresentationLayer.Views.Forms
         Private cboFormat As ComboBox
         Private chkActive As CheckBox
         Private dgvAssignments As DataGridView
-        Private btnNew As Button
-        Private btnSave As Button
+        Private btnNewAssignment As Button
+        Private btnSaveAssignment As Button
         Private btnToggleActive As Button
         Private btnClose As Button
 
@@ -51,20 +51,20 @@ Namespace PresentationLayer.Views.Forms
                                                 .Text = "Report Format", .TextAlign = ContentAlignment.MiddleLeft}, 2, 0)
             editor.Controls.Add(cboFormat, 3, 0)
 
-            btnNew = New Button With {.AutoSize = True, .Text = "New"}
-            btnSave = New Button With {.AutoSize = True, .Text = "Save"}
+            btnNewAssignment = New Button With {.AutoSize = True, .Text = "New"}
+            btnSaveAssignment = New Button With {.AutoSize = True, .Text = "Save"}
             btnToggleActive = New Button With {.AutoSize = True, .Text = "Deactivate"}
             btnClose = New Button With {.AutoSize = True, .Text = "Close", .DialogResult = DialogResult.Cancel}
-            AddHandler btnNew.Click, AddressOf NewClick
-            AddHandler btnSave.Click, AddressOf SaveClick
+            AddHandler btnNewAssignment.Click, AddressOf NewClick
+            AddHandler btnSaveAssignment.Click, AddressOf SaveClick
             AddHandler btnToggleActive.Click, AddressOf ToggleActiveClick
             AddHandler btnClose.Click, Sub() Close()
 
             Dim actionPanel = New FlowLayoutPanel With {
                 .AutoSize = False, .Dock = DockStyle.Top, .Height = 42,
                 .Padding = New Padding(8, 8, 8, 4), .WrapContents = False}
-            actionPanel.Controls.Add(btnNew)
-            actionPanel.Controls.Add(btnSave)
+            actionPanel.Controls.Add(btnNewAssignment)
+            actionPanel.Controls.Add(btnSaveAssignment)
             actionPanel.Controls.Add(btnToggleActive)
             actionPanel.Controls.Add(btnClose)
 
@@ -85,7 +85,7 @@ Namespace PresentationLayer.Views.Forms
             split.Panel1.Controls.Add(editor)
             split.Panel2.Controls.Add(dgvAssignments)
             MaintenanceContent.Controls.Add(CreateMaintenanceLayout(actionPanel, split))
-            AcceptButton = btnSave
+            AcceptButton = btnSaveAssignment
             CancelButton = btnClose
         End Sub
 
