@@ -118,7 +118,7 @@ Namespace PresentationLayer.Views.Forms
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {
-                {"AccountIdNo", cboBankChargesVatAccountIdNo},
+                {"AccountIdNo", cboAccountIdNo},
                 {"BankChargesAccountIdNo", cboBankChargesAccountIdNo},
                 {"BankChargesVatAccountIdNo", cboBankChargesVatAccountIdNo},
                 {"DepositTypeCode", txtDepositTypeCode},
