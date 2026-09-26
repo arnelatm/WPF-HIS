@@ -23,6 +23,12 @@ Namespace PresentationLayer.Presenters
             MakeControlDataSources({New Object() {"PayGroup", "ParentIdNo", Nothing, Nothing}})
         End Sub
 
+        Private Sub RefreshParentDataSourceAfterAdd() Handles MyBase.AfterSave
+            If AddMode Then
+                MakeControlDataSources({New Object() {"PayGroup", "ParentIdNo", Nothing, Nothing}})
+            End If
+        End Sub
+
         Protected Overrides Function IsBizDataValid() As Boolean
             Dim retValue = False
             If MyBase.IsBizDataValid() Then

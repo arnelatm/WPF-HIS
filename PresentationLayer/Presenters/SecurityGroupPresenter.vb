@@ -49,6 +49,12 @@ Public Class SecurityGroupPresenter(Of TM As New)
         control.Refresh()
     End Sub
 
+    Private Sub RefreshParentDataSourceAfterAdd() Handles MyBase.AfterSave
+        If AddMode Then
+            MakeControlDataSources({New Object() {"SecurityGroup", "ParentIdNo", Nothing, Nothing}})
+        End If
+    End Sub
+
     Private Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
         Dim gaModel = Service.GetRecordsWithGroupIdNo(Of GroupAccessModel)(0, "SecurityObjectName")
         Dim gaView = New List(Of GroupAccessView)

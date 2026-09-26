@@ -24,6 +24,12 @@ Namespace PresentationLayer.Presenters
             CreateEnumDataSource(Of RevCostTypeSelection)("RcType")
         End Sub
 
+        Private Sub RefreshParentDataSourceAfterAdd() Handles MyBase.AfterSave
+            If AddMode Then
+                MakeControlDataSources({New Object() {"RevCostCenter", "ParentIdNo", Nothing, Nothing}})
+            End If
+        End Sub
+
     End Class
 
 End Namespace

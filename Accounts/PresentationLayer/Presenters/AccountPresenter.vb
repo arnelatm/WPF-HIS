@@ -32,6 +32,12 @@ Namespace PresentationLayer.Presenters
             CreateEnumDataSource(Of SpecialAccountSelection)("SpecialAccount")
         End Sub
 
+        Private Sub RefreshParentDataSourceAfterAdd() Handles MyBase.AfterSave
+            If AddMode Then
+                MakeControlDataSources({New Object() {"Account", "ParentIdNo", Nothing, Nothing}})
+            End If
+        End Sub
+
         Public Function EditableAccountGroup(ByVal idNo As Int32?, ByVal parentIdNo As Int32?) As Boolean
             If AccountHasChildren(idNo) Then
                 Return False

@@ -23,6 +23,12 @@ Namespace PresentationLayer.Presenters
             MakeControlDataSources({New Object() {"RevenueGroup", "ParentIdNo"}})
         End Sub
 
+        Private Sub RefreshParentDataSourceAfterAdd() Handles MyBase.AfterSave
+            If AddMode Then
+                MakeControlDataSources({New Object() {"RevenueGroup", "ParentIdNo"}})
+            End If
+        End Sub
+
         Public Function GetLastSortKey(ByVal searchValue As String) As String
             Return Service.GetLastSortKey(searchValue, TableName)
         End Function

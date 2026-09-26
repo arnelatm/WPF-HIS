@@ -22,6 +22,12 @@ Public Class SecurityObjectPresenter(Of TM As New)
                              New Object() {"SecurityObject", "ParentIdNo", Nothing, Nothing}})
     End Sub
 
+    Private Sub RefreshParentDataSourceAfterAdd() Handles MyBase.AfterSave
+        If AddMode Then
+            MakeControlDataSources({New Object() {"SecurityObject", "ParentIdNo", Nothing, Nothing}})
+        End If
+    End Sub
+
     Protected Overrides Function IsBizDataValid() As Boolean
         Dim retValue = False
         If MyBase.IsBizDataValid() Then

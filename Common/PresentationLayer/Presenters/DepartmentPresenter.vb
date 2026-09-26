@@ -29,6 +29,12 @@ Namespace PresentationLayer.Presenters
                                     New Object() {"RevCostCenter", "RevCostCenterIdNo"}})
         End Sub
 
+        Private Sub RefreshParentDataSourceAfterAdd() Handles MyBase.AfterSave
+            If AddMode Then
+                MakeControlDataSources({New Object() {"Department", "ParentIdNo"}})
+            End If
+        End Sub
+
         Public Function GetAccountNameOfChild(idNoToSearch As Integer) As String
             Return Service.GetRecordFieldWithKey(idNoToSearch, "Department", "ParentIdNo", "DepartmentName")
         End Function
