@@ -42,7 +42,11 @@ Namespace ServiceLayer
         End Function
         Private Shared Function CreateOiItems(m As DisbursementJournalModel) As DataTable
             Dim t As New DataTable():For Each n In {"Amount","ApOpenInvoiceIdNo","DiscountTaken","DjIdNo","Sequence"}:t.Columns.Add(n,If(n="Amount" OrElse n="DiscountTaken",GetType(Decimal),GetType(Integer))):Next
-            For Each i In If(m.DjOiItems,New List(Of DjOiItemModel)):t.Rows.Add(i.Amount,i.ApOpenInvoiceIdNo,i.DiscountTaken,0,i.Sequence):Next:Return t
+            For Each i In If(m.DjOiItems,New List(Of DjOiItemModel))
+                If i.Amount = 0D AndAlso i.DiscountTaken = 0D Then Continue For
+                t.Rows.Add(i.Amount,i.ApOpenInvoiceIdNo,i.DiscountTaken,0,i.Sequence)
+            Next
+            Return t
         End Function
         Private Shared Sub Add(c As SqlCommand,n As String,v As Object)
             c.Parameters.AddWithValue(n,If(v Is Nothing,DBNull.Value,v))

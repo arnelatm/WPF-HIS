@@ -40,9 +40,7 @@ Namespace ServiceLayer
                 If i.Debit = 0D AndAlso i.Credit = 0D Then Continue For
                 items.Rows.Add(If(i.AccountIdNo.HasValue,CObj(i.AccountIdNo.Value),0),i.Credit,i.Debit,0,If(i.Notes, String.Empty),i.PayIdNo,CObj(i.RevCostCenterIdNo),i.Sequence)
             Next
-            Dim oi = New DataTable()
-            For Each c In {New With {.N="Amount",.T=GetType(Decimal)},New With {.N="ArOpenInvoiceIdNo",.T=GetType(Integer)},New With {.N="CsrIdNo",.T=GetType(Integer)},New With {.N="DiscountTaken",.T=GetType(Decimal)},New With {.N="Sequence",.T=GetType(Integer)}} : oi.Columns.Add(c.N,c.T) : Next
-            For Each i In If(model.CsrOiItems, New List(Of CsrOiItemModel)) : oi.Rows.Add(i.Amount,i.ArOpenInvoiceIdNo,0,i.DiscountTaken,i.Sequence) : Next
+            Dim oi = CreateOiItems(model)
             Using cn As New SqlConnection(GlobalVariables.DacConnectionString), cmd As New SqlCommand("dbo.SaveCashReceiptJournalAtomic",cn)
                 cmd.CommandType=CommandType.StoredProcedure
                 Add(cmd,"@TransactionDate",model.TransactionDate.Value) : Add(cmd,"@ReferenceNo",model.ReferenceNo) : Add(cmd,"@Amount",model.Amount) : Add(cmd,"@AccountIdNo",If(model.AccountIdNo.HasValue,CObj(model.AccountIdNo.Value),0))
@@ -71,7 +69,10 @@ Namespace ServiceLayer
         Private Shared Function CreateOiItems(model As CashReceiptJournalModel) As DataTable
             Dim t As New DataTable()
             For Each c In {New With {.N="Amount",.T=GetType(Decimal)},New With {.N="ArOpenInvoiceIdNo",.T=GetType(Integer)},New With {.N="CsrIdNo",.T=GetType(Integer)},New With {.N="DiscountTaken",.T=GetType(Decimal)},New With {.N="Sequence",.T=GetType(Integer)}} : t.Columns.Add(c.N,c.T) : Next
-            For Each i In If(model.CsrOiItems, New List(Of CsrOiItemModel)) : t.Rows.Add(i.Amount,i.ArOpenInvoiceIdNo,0,i.DiscountTaken,i.Sequence) : Next
+            For Each i In If(model.CsrOiItems, New List(Of CsrOiItemModel))
+                If i.Amount = 0D AndAlso i.DiscountTaken = 0D Then Continue For
+                t.Rows.Add(i.Amount,i.ArOpenInvoiceIdNo,0,i.DiscountTaken,i.Sequence)
+            Next
             Return t
         End Function
     End Class
