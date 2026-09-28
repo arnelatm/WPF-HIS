@@ -29,6 +29,18 @@ Namespace PresentationLayer.Presenters
                                     New Object() {"RevCostCenter", "RevCostCenterIdNo"}})
         End Sub
 
+        Protected Overrides Function DependentRecordExist(Optional ByVal warn As Boolean = True) As Boolean
+            Dim hasDependents =
+                Service.CountRecordWithKey(Of Int16)("Employee", "DepartmentIdNo", View.IdNo) > 0 OrElse
+                Service.CountRecordWithKey(Of Int16)("Department", "ParentIdNo", View.IdNo) > 0
+
+            If hasDependents AndAlso warn Then
+                Messaging.Show(True, "MsgDependentRecordExists", {"additionalMessage", ""})
+            End If
+
+            Return hasDependents
+        End Function
+
         Private Sub RefreshParentDataSourceAfterAdd() Handles MyBase.AfterSave
             If AddMode Then
                 MakeControlDataSources({New Object() {"Department", "ParentIdNo"}})
