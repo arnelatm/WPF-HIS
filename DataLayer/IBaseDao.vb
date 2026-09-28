@@ -14,6 +14,8 @@ Public Interface IBaseDao
 
     Function CountRecordWithKey(Of TS1)(tableName As String, searchFieldName As String, searchValue As TS1) As Integer
 
+    Function HasDependentRecords(tableName As String, idNo As Integer) As Boolean
+
     Function DeleteRecord(idNo As Int32, tableName As String) As Int32
 
     Function DeleteRecord(Of T)(keyFieldValue As T, tableName As String, keyFieldName As String) As Int32

@@ -123,6 +123,10 @@ Namespace Services
             Return DataDao.GetRecordCount(tableName, filter)
         End Function
 
+        Public Function HasDependentRecords(tableName As String, idNo As Integer) As Boolean Implements IService.HasDependentRecords
+            Return BaseDao.HasDependentRecords(tableName, idNo)
+        End Function
+
         Public Function GetRecordCount(Of TS1)(tableName As String, fieldName1 As String, fieldValue1 As TS1, Optional Filter As String = Nothing) As Integer Implements IService.GetRecordCount
             Return DataDao.GetRecordCount(Of TS1)(tableName, fieldName1, fieldValue1, Filter)
         End Function

@@ -81,6 +81,29 @@ Namespace AdoNet
             Return GetDb().Scalar(sql, params)
         End Function
 
+        Public Function HasDependentRecords(tableName As String, idNo As Integer) As Boolean Implements IBaseDao.HasDependentRecords
+            Dim sql As String =
+                "DECLARE @IdNoText NVARCHAR(128) = CONVERT(NVARCHAR(128), @RecordId); DECLARE @Checks NVARCHAR(MAX); " &
+                "SELECT @Checks = STUFF((" &
+                " SELECT N' UNION ALL SELECT 1 FROM ' + QUOTENAME(s.name) + N'.' + QUOTENAME(t.name) + " &
+                "        N' WHERE CONVERT(NVARCHAR(128), ' + QUOTENAME(c.name) + N') = @IdNoText' " &
+                " FROM sys.tables AS t " &
+                " INNER JOIN sys.schemas AS s ON s.schema_id = t.schema_id " &
+                " INNER JOIN sys.columns AS c ON c.object_id = t.object_id " &
+                " WHERE (c.name = @ReferenceColumn AND t.name <> @TableName) " &
+                "    OR (t.name = @TableName AND c.name = N'ParentIdNo') " &
+                " FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)'), 1, 11, N''); " &
+                "IF @Checks IS NULL " &
+                "    SELECT CAST(0 AS INT); " &
+                "ELSE " &
+                "BEGIN " &
+                "    SET @Checks = N'SELECT CASE WHEN EXISTS (' + @Checks + N') THEN 1 ELSE 0 END'; " &
+                "    EXEC sys.sp_executesql @Checks, N'@IdNoText NVARCHAR(128)', @IdNoText = @IdNoText; " &
+                "END"
+            Dim parameters() As Object = {"@TableName", tableName, "@ReferenceColumn", tableName & "IdNo", "@RecordId", idNo}
+            Return Convert.ToInt32(GetDb().Scalar(sql, parameters)) > 0
+        End Function
+
         Public Function DeleteRecord(Of T)(keyFieldValue As T, tableName As String, keyFieldName As String) As Integer Implements IBaseDao.DeleteRecord
             Dim params() As Object = {"keyFieldValue", keyFieldValue, "keyFieldName", keyFieldName}
             'Dim cTableName = GetPhysicalTableName(tableName)

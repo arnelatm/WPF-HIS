@@ -850,8 +850,29 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
             retValue = False
         ElseIf DependentRecordExist() Then
             retValue = False
+        ElseIf MasterRecordHasDependentRows() Then
+            retValue = False
         End If
         Return retValue
+    End Function
+
+    Private Function MasterRecordHasDependentRows() As Boolean
+        Dim tableName As String = TableBaseName
+        If String.IsNullOrWhiteSpace(tableName) Then tableName = TableName
+        If String.IsNullOrWhiteSpace(tableName) Then Return False
+        If tableName.EndsWith("_View", StringComparison.OrdinalIgnoreCase) Then
+            tableName = tableName.Substring(0, tableName.Length - 5)
+        End If
+
+        Select Case tableName
+            Case "Account", "AppSetting", "Bank", "Branch", "Category", "CodeGroup", "Country", "Customer", "Deduction", "Department", "DepositType", "Designation", "DistributionScheme", "Doctor", "Document", "DocumentDetail", "Dosage", "Earning", "Employee", "Holiday", "InvTransType", "ItemCode", "JournalPrefix", "Leave", "MedicalFitnessReport", "PayCycle", "PayElement", "PayGroup", "PayrollDeductAccount", "PayrollEarnAccount", "PensionProvider", "PensionRate", "PensionScheme", "PhoneType", "Printer", "PrintJob", "PrintSetup", "Product", "ProfitCenter", "Religion", "Report", "ReportGroup", "RevCostCenter", "RevenueGroup", "SecurityGroup", "Supplier", "Unit", "Warehouse"
+                If Service.HasDependentRecords(tableName, Convert.ToInt32(Invoker.GetProperty(View, IdFieldName))) Then
+                    Messaging.Show(True, "MsgDependentRecordExists", {"additionalMessage", ""})
+                    Return True
+                End If
+        End Select
+
+        Return False
     End Function
 
     Protected Overridable Function ChildRecordExist(Optional ByVal warn As Boolean = True) As Boolean
