@@ -846,11 +846,11 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
 
     Public Overridable Function IsOkToDeleteRecord() As Boolean
         Dim retValue As Boolean = True
-        If ChildRecordExist() Then
+        If MasterRecordHasDependentRows() Then
+            retValue = False
+        ElseIf ChildRecordExist() Then
             retValue = False
         ElseIf DependentRecordExist() Then
-            retValue = False
-        ElseIf MasterRecordHasDependentRows() Then
             retValue = False
         End If
         Return retValue
@@ -866,14 +866,50 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
 
         Select Case tableName
             Case "Account", "AppSetting", "Bank", "Branch", "Category", "CodeGroup", "Country", "Customer", "Deduction", "Department", "DepositType", "Designation", "DistributionScheme", "Doctor", "Document", "DocumentDetail", "Dosage", "Earning", "Employee", "Holiday", "InvTransType", "ItemCode", "JournalPrefix", "Leave", "MedicalFitnessReport", "PayCycle", "PayElement", "PayGroup", "PayrollDeductAccount", "PayrollEarnAccount", "PensionProvider", "PensionRate", "PensionScheme", "PhoneType", "Printer", "PrintJob", "PrintSetup", "Product", "ProfitCenter", "Religion", "Report", "ReportGroup", "RevCostCenter", "RevenueGroup", "SecurityGroup", "Supplier", "Unit", "Warehouse"
-                If Service.HasDependentRecords(tableName, Convert.ToInt32(Invoker.GetProperty(View, IdFieldName))) Then
-                    Messaging.Show(True, "MsgDependentRecordExists", {"additionalMessage", ""})
-                    Return True
-                End If
+                Return ShowDependentRecordReferences(tableName, Convert.ToInt32(Invoker.GetProperty(View, IdFieldName)))
         End Select
 
         Return False
     End Function
+
+    Protected Function ShowDependentRecordReferences(tableName As String, idNo As Integer) As Boolean
+        Dim references = Service.GetDependentRecordReferences(tableName, idNo)
+        If references.Rows.Count = 0 Then Return False
+
+        Dim details As New List(Of String)
+        Dim currentTableName As String = Nothing
+        Dim sampleRecordNumbers As New List(Of String)
+        Dim matchingRecordCount As Long = 0
+
+        For Each reference As DataRow In references.Rows
+            Dim referencedTableName = Convert.ToString(reference("TableName"))
+            If currentTableName IsNot Nothing AndAlso referencedTableName <> currentTableName Then
+                AddDependentReferenceSummary(details, currentTableName, sampleRecordNumbers, matchingRecordCount)
+                sampleRecordNumbers = New List(Of String)
+            End If
+
+            currentTableName = referencedTableName
+            matchingRecordCount = Convert.ToInt64(reference("RecordCount"))
+            Dim recordNumber = Convert.ToString(reference("RecordNumber"))
+            If Not sampleRecordNumbers.Contains(recordNumber) Then sampleRecordNumbers.Add(recordNumber)
+        Next
+
+        If currentTableName IsNot Nothing Then
+            AddDependentReferenceSummary(details, currentTableName, sampleRecordNumbers, matchingRecordCount)
+        End If
+
+        Messaging.Show(True, "MsgDependentRecordExists", {"additionalMessage", String.Join(Environment.NewLine, details)})
+        Return True
+    End Function
+
+    Private Shared Sub AddDependentReferenceSummary(details As List(Of String), tableName As String, recordNumbers As List(Of String), matchingRecordCount As Long)
+        Dim recordNumberCaption = Messaging.TranslateCaption("IdNo")
+        Dim line = tableName & " - " & recordNumberCaption & ": " & String.Join(", ", recordNumbers)
+        If matchingRecordCount > recordNumbers.Count Then
+            line &= " (" & recordNumbers.Count.ToString() & " samples of " & matchingRecordCount.ToString() & ")"
+        End If
+        details.Add(line)
+    End Sub
 
     Protected Overridable Function ChildRecordExist(Optional ByVal warn As Boolean = True) As Boolean
         Return False

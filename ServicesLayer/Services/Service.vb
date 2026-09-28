@@ -127,6 +127,10 @@ Namespace Services
             Return BaseDao.HasDependentRecords(tableName, idNo)
         End Function
 
+        Public Function GetDependentRecordReferences(tableName As String, idNo As Integer) As DataTable Implements IService.GetDependentRecordReferences
+            Return BaseDao.GetDependentRecordReferences(tableName, idNo)
+        End Function
+
         Public Function GetRecordCount(Of TS1)(tableName As String, fieldName1 As String, fieldValue1 As TS1, Optional Filter As String = Nothing) As Integer Implements IService.GetRecordCount
             Return DataDao.GetRecordCount(Of TS1)(tableName, fieldName1, fieldValue1, Filter)
         End Function

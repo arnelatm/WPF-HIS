@@ -3,6 +3,40 @@ Imports AATM.Accounts.PresentationLayer.Views.Forms
 
 Public Module Main
 
+    Private Sub ReportStartupFailure(ex As Exception)
+        Dim logPath As String = Nothing
+
+        Try
+            Dim logDirectory = System.IO.Path.Combine(
+                System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData),
+                "AATM",
+                "Logs")
+            System.IO.Directory.CreateDirectory(logDirectory)
+            logPath = System.IO.Path.Combine(logDirectory, "AccountsStartup.log")
+
+            Using writer As New System.IO.StreamWriter(logPath, True)
+                writer.WriteLine("Date/Time: " & DateTime.Now.ToString("o"))
+                writer.WriteLine(ex.ToString())
+                writer.WriteLine(New String("="c, 80))
+            End Using
+        Catch
+            logPath = Nothing
+        End Try
+
+        Dim message = "Clinic Information System could not start." & Environment.NewLine &
+                      Environment.NewLine & ex.Message
+        If Not String.IsNullOrEmpty(logPath) Then
+            message &= Environment.NewLine & Environment.NewLine &
+                       "Details were written to:" & Environment.NewLine & logPath
+        End If
+
+        System.Windows.Forms.MessageBox.Show(
+            message,
+            "Clinic Information System",
+            System.Windows.Forms.MessageBoxButtons.OK,
+            System.Windows.Forms.MessageBoxIcon.Error)
+    End Sub
+
     ''' <summary>
     ''' The main entry point for the application.
     ''' </summary>
@@ -21,7 +55,11 @@ Public Module Main
         IdleTimer.Interval = MilliSecondsTimeOut
         AddHandler IdleTimer.Tick, AddressOf TimeDone
         IdleTimer.Start()
-        Call Application.Run(MainForm)
+        Try
+            Application.Run(MainForm)
+        Catch ex As Exception
+            ReportStartupFailure(ex)
+        End Try
         RemoveHandler Application.Idle, New EventHandler(AddressOf Application_Idle)
     End Sub
 

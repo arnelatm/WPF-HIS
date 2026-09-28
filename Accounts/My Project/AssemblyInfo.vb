@@ -7,10 +7,10 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("Accounts")>
+<Assembly: AssemblyTitle("Clinic Information System")>
 <Assembly: AssemblyDescription("")>
 <Assembly: AssemblyCompany("AATM Software")>
-<Assembly: AssemblyProduct("Accounts")>
+<Assembly: AssemblyProduct("Clinic Information System")>
 <Assembly: AssemblyCopyright("Copyright ©  2026")>
 <Assembly: AssemblyTrademark("")>
 

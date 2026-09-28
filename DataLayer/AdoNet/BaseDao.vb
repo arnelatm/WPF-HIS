@@ -82,26 +82,37 @@ Namespace AdoNet
         End Function
 
         Public Function HasDependentRecords(tableName As String, idNo As Integer) As Boolean Implements IBaseDao.HasDependentRecords
+            Return GetDependentRecordReferences(tableName, idNo).Rows.Count > 0
+        End Function
+
+        Public Function GetDependentRecordReferences(tableName As String, idNo As Integer) As DataTable Implements IBaseDao.GetDependentRecordReferences
             Dim sql As String =
                 "DECLARE @IdNoText NVARCHAR(128) = CONVERT(NVARCHAR(128), @RecordId); DECLARE @Checks NVARCHAR(MAX); " &
                 "SELECT @Checks = STUFF((" &
-                " SELECT N' UNION ALL SELECT 1 FROM ' + QUOTENAME(s.name) + N'.' + QUOTENAME(t.name) + " &
+                " SELECT N' UNION ALL SELECT N''' + REPLACE(s.name + N'.' + t.name, N'''', N'''''') + N''' AS TableName, ' + " &
+                "        CASE WHEN EXISTS (SELECT 1 FROM sys.columns AS keyColumn WHERE keyColumn.object_id = t.object_id AND keyColumn.name = N'IdNo') " &
+                "             THEN N'CONVERT(NVARCHAR(128), [IdNo])' " &
+                "             ELSE N'N''(IdNo unavailable)''' END + N' AS RecordNumber FROM ' + QUOTENAME(s.name) + N'.' + QUOTENAME(t.name) + " &
                 "        N' WHERE CONVERT(NVARCHAR(128), ' + QUOTENAME(c.name) + N') = @IdNoText' " &
                 " FROM sys.tables AS t " &
                 " INNER JOIN sys.schemas AS s ON s.schema_id = t.schema_id " &
                 " INNER JOIN sys.columns AS c ON c.object_id = t.object_id " &
                 " WHERE (c.name = @ReferenceColumn AND t.name <> @TableName) " &
                 "    OR (t.name = @TableName AND c.name = N'ParentIdNo') " &
+                " ORDER BY s.name, t.name " &
                 " FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)'), 1, 11, N''); " &
                 "IF @Checks IS NULL " &
-                "    SELECT CAST(0 AS INT); " &
+                "    SELECT CAST(NULL AS NVARCHAR(256)) AS TableName, CAST(NULL AS NVARCHAR(128)) AS RecordNumber, CAST(0 AS BIGINT) AS RecordCount WHERE 1 = 0; " &
                 "ELSE " &
                 "BEGIN " &
-                "    SET @Checks = N'SELECT CASE WHEN EXISTS (' + @Checks + N') THEN 1 ELSE 0 END'; " &
+                "    SET @Checks = N'SELECT TableName, RecordNumber, RecordCount FROM (' + " &
+                "        N'SELECT TableName, RecordNumber, COUNT_BIG(*) OVER (PARTITION BY TableName) AS RecordCount, ' + " &
+                "        N'ROW_NUMBER() OVER (PARTITION BY TableName ORDER BY RecordNumber) AS SampleNumber FROM (' + @Checks + N') AS Matches' + " &
+                "        N') AS NumberedMatches WHERE SampleNumber <= 5 ORDER BY TableName, SampleNumber'; " &
                 "    EXEC sys.sp_executesql @Checks, N'@IdNoText NVARCHAR(128)', @IdNoText = @IdNoText; " &
                 "END"
             Dim parameters() As Object = {"@TableName", tableName, "@ReferenceColumn", tableName & "IdNo", "@RecordId", idNo}
-            Return Convert.ToInt32(GetDb().Scalar(sql, parameters)) > 0
+            Return GetDb().ExecuteReader(sql, parameters)
         End Function
 
         Public Function DeleteRecord(Of T)(keyFieldValue As T, tableName As String, keyFieldName As String) As Integer Implements IBaseDao.DeleteRecord

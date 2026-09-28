@@ -13,7 +13,7 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <Deterministic>false</Deterministic>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>D:\AATM\Publish\</PublishUrl>
+    <PublishUrl>D:\AATM\Publish\Accounts_1_0_0_7_staging\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Unc</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -24,11 +24,11 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>\\ibn-server\isp\COAccounts\</InstallUrl>
-    <ProductName>Accounting System</ProductName>
-    <PublisherName>Arnel Antonio T. Marcelo</PublisherName>
+    <ProductName>Clinic Information System</ProductName>
+    <PublisherName>AATM Software</PublisherName>
     <SuiteName>Information System</SuiteName>
     <MinimumRequiredVersion>1.0.0.6</MinimumRequiredVersion>
-    <ApplicationRevision>7</ApplicationRevision>
+    <ApplicationRevision>8</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -74,7 +74,7 @@
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>83D567CB13D78FDC6F832BC96D01A0832E238E21</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>1A175C7C0E61C34D09B6827C5E3D8738C562A831</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>Accounts_TemporaryKey.pfx</ManifestKeyFile>
@@ -83,7 +83,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>false</SignManifests>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>shell32_303.ico</ApplicationIcon>
@@ -2977,6 +2977,7 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
+    <None Include="app - Copy.config" />
     <None Include="app - ibn-server.example.config" />
     <None Include="app - ispadmin2.ispdata.example.config" />
     <None Include="app - ispadmin2.ispdata_audittest.example.config" />

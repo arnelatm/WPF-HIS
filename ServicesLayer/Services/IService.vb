@@ -13,6 +13,7 @@ Namespace Services
         Function CountRecordWith3Key(Of TS1, TS2, TS3)(tableName As String, searchFieldName1 As String, searchFieldName2 As String, searchFieldName3 As String, searchValue1 As TS1, searchValue2 As TS2, searchValue3 As TS3) As Integer
         Function CountRecordWithKey(Of TS1)(tableName As String, searchFieldName As String, searchValue As TS1) As Integer
         Function HasDependentRecords(tableName As String, idNo As Integer) As Boolean
+        Function GetDependentRecordReferences(tableName As String, idNo As Integer) As DataTable
         Function DeleteRecord(idNo As Int32, tableName As String) As Integer
         Function DeleteRecord(Of T)(keyFieldValue As T, tableName As String, keyFieldName As String) As Integer
         Function DeleteRecords(Of T)(keyFieldValue As T, tableName As String, keyFieldName As String) As Integer

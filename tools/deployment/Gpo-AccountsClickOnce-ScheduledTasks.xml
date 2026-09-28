@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScheduledTasks clsid="{CC63F200-7309-4ba0-B154-A71CD118DBCC}">
+  <TaskV2 clsid="{D8896631-B747-47A7-84A6-C155337F3BC8}" name="AATM Accounts ClickOnce Bootstrap" image="1" changed="2026-09-27 10:34:54" uid="{9FE5FA1F-DFF3-4581-9E6F-759FF247FBD3}" userContext="0" removePolicy="1">
+    <Properties action="R" name="AATM Accounts ClickOnce Bootstrap" runAs="%LogonDomain%\%LogonUser%" logonType="InteractiveToken">
+      <Task version="1.2">
+        <RegistrationInfo>
+          <Author>IBN-SINA\Administrator</Author>
+          <Description>Launch the signed AATM Accounts ClickOnce bootstrap 30 seconds after user logon.</Description>
+        </RegistrationInfo>
+        <Triggers>
+          <LogonTrigger>
+            <Enabled>true</Enabled>
+            <Delay>PT30S</Delay>
+          </LogonTrigger>
+        </Triggers>
+        <Principals>
+          <Principal id="Author">
+            <UserId>%LogonDomain%\%LogonUser%</UserId>
+            <LogonType>InteractiveToken</LogonType>
+            <RunLevel>LeastPrivilege</RunLevel>
+          </Principal>
+        </Principals>
+        <Settings>
+          <MultipleInstancesPolicy>IgnoreNew</MultipleInstancesPolicy>
+          <DisallowStartIfOnBatteries>false</DisallowStartIfOnBatteries>
+          <StopIfGoingOnBatteries>false</StopIfGoingOnBatteries>
+          <AllowHardTerminate>true</AllowHardTerminate>
+          <StartWhenAvailable>true</StartWhenAvailable>
+          <RunOnlyIfNetworkAvailable>true</RunOnlyIfNetworkAvailable>
+          <IdleSettings>
+            <Duration>PT10M</Duration>
+            <WaitTimeout>PT1H</WaitTimeout>
+            <StopOnIdleEnd>true</StopOnIdleEnd>
+            <RestartOnIdle>false</RestartOnIdle>
+          </IdleSettings>
+          <AllowStartOnDemand>true</AllowStartOnDemand>
+          <Enabled>true</Enabled>
+          <Hidden>true</Hidden>
+          <RunOnlyIfIdle>false</RunOnlyIfIdle>
+          <WakeToRun>false</WakeToRun>
+          <ExecutionTimeLimit>PT5M</ExecutionTimeLimit>
+          <Priority>7</Priority>
+        </Settings>
+        <Actions Context="Author">
+          <Exec>
+            <Command>%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe</Command>
+            <Arguments>-NoLogo -NoProfile -NonInteractive -WindowStyle Hidden -ExecutionPolicy AllSigned -File "\\ibn-sina.local\NETLOGON\AATM\Install-AccountsClickOnce.ps1"</Arguments>
+          </Exec>
+        </Actions>
+      </Task>
+    </Properties>
+  </TaskV2>
+</ScheduledTasks>

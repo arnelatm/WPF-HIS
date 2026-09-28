@@ -9,12 +9,13 @@ RETURN
 (
     SELECT CustomerIdNo,
            SUM(Debit - Credit) AS Amount,
-           TransactionType
+           CASE WHEN JournalCode = 'CR' THEN 'R' ELSE TransactionType END AS TransactionType
     FROM dbo.ArStatement_View
     WHERE SpecialAccount IN ('AR', 'CA', 'SD')
       AND TransactionDate >= @BeginningDate
       AND TransactionDate <= @EndingDate
-    GROUP BY CustomerIdNo, TransactionType
+    GROUP BY CustomerIdNo,
+             CASE WHEN JournalCode = 'CR' THEN 'R' ELSE TransactionType END
 
     UNION
 

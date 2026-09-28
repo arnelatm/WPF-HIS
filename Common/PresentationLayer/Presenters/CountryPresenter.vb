@@ -22,21 +22,29 @@ Namespace PresentationLayer.Presenters
 
         Protected Overrides Function DependentRecordExist(Optional ByVal warn As Boolean = True) As Boolean
             Dim countryCode = View.CountryCode
-            Dim hasDependents =
-                Service.CountRecordWithKey(Of String)("Customer", "CountryCode", countryCode) > 0 OrElse
-                Service.CountRecordWithKey(Of String)("Employee", "CountryCode", countryCode) > 0 OrElse
-                Service.CountRecordWithKey(Of String)("Employee", "NationalityCode", countryCode) > 0 OrElse
-                Service.CountRecordWithKey(Of String)("EmployeeNew", "CountryCode", countryCode) > 0 OrElse
-                Service.CountRecordWithKey(Of String)("EmployeeNew", "NationalityCode", countryCode) > 0 OrElse
-                Service.CountRecordWithKey(Of String)("PensionProvider", "CountryCode", countryCode) > 0 OrElse
-                Service.CountRecordWithKey(Of String)("Supplier", "CountryCode", countryCode) > 0
+            Dim references As New List(Of String)
+            AddCountryReference(references, countryCode, "Customer", "CountryCode")
+            AddCountryReference(references, countryCode, "Employee", "CountryCode")
+            AddCountryReference(references, countryCode, "Employee", "NationalityCode")
+            AddCountryReference(references, countryCode, "EmployeeNew", "CountryCode")
+            AddCountryReference(references, countryCode, "EmployeeNew", "NationalityCode")
+            AddCountryReference(references, countryCode, "PensionProvider", "CountryCode")
+            AddCountryReference(references, countryCode, "Supplier", "CountryCode")
 
-            If hasDependents AndAlso warn Then
-                Messaging.Show(True, "MsgDependentRecordExists", {"additionalMessage", ""})
+            If references.Count > 0 AndAlso warn Then
+                Messaging.Show(True, "MsgDependentRecordExists", {"additionalMessage", String.Join(Environment.NewLine, references)})
             End If
 
-            Return hasDependents
+            Return references.Count > 0
         End Function
+
+        Private Sub AddCountryReference(references As List(Of String), countryCode As String, tableName As String, fieldName As String)
+            Dim recordId = Service.GetRecordFieldWithKeyG(Of Integer, String)(countryCode, tableName, fieldName, "IdNo")
+            If recordId > 0 Then
+                Dim tableCaption = Messaging.TranslateCaption(tableName)
+                references.Add(Messaging.GetParametrizedMessage(True, "MsgSeeTableEntry", {"tableName", tableCaption, "idNumber", recordId.ToString()}))
+            End If
+        End Sub
 
     End Class
 

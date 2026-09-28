@@ -64,7 +64,7 @@ try {
     $arguments = @(
         $projectPath,
         '/m',
-        '/t:Publish',
+        '/t:Clean;Publish',
         '/nologo',
         '/v:minimal',
         '/clp:ErrorsOnly;Summary',
