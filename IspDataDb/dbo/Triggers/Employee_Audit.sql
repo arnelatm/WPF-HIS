@@ -20,7 +20,7 @@ BEGIN
                    i.[BirthDate], i.[BloodType], i.[CountryCode], i.[DepartmentIdNo], i.[DesignationIdNo],
                    i.[District], i.[DutyHours], i.[Email], i.[EmployeeCode], i.[EmployeeName], i.[EmployeeNameAra],
                    i.[Gender], i.[HiredDate], i.[Iban], i.[MaritalStatus], i.[NationalIdNo], i.[NationalityCode],
-                   i.[Notes], i.[OpeningBalance], i.[PayCycleIdNo], i.[PayGroupIdNo], i.[PaymentMethod],
+                   i.[Notes], i.[OpeningBalance], i.[PayCycleIdNo], i.[PayGroupIdNo], i.[RevCostCenterIdNo], i.[PaymentMethod],
                    i.[Phone1], i.[Phone2], i.[PoBox], i.[ProvinceState], i.[ReleasedDate], i.[ReligionIdNo],
                    i.[SponsorType], i.[Street], i.[Supervisor], i.[SupervisorIdNo], i.[Title], i.[TownCity],
                    i.[ZipCode], i.[Picture]
@@ -29,7 +29,7 @@ BEGIN
                    d.[BirthDate], d.[BloodType], d.[CountryCode], d.[DepartmentIdNo], d.[DesignationIdNo],
                    d.[District], d.[DutyHours], d.[Email], d.[EmployeeCode], d.[EmployeeName], d.[EmployeeNameAra],
                    d.[Gender], d.[HiredDate], d.[Iban], d.[MaritalStatus], d.[NationalIdNo], d.[NationalityCode],
-                   d.[Notes], d.[OpeningBalance], d.[PayCycleIdNo], d.[PayGroupIdNo], d.[PaymentMethod],
+                   d.[Notes], d.[OpeningBalance], d.[PayCycleIdNo], d.[PayGroupIdNo], d.[RevCostCenterIdNo], d.[PaymentMethod],
                    d.[Phone1], d.[Phone2], d.[PoBox], d.[ProvinceState], d.[ReleasedDate], d.[ReligionIdNo],
                    d.[SponsorType], d.[Street], d.[Supervisor], d.[SupervisorIdNo], d.[Title], d.[TownCity],
                    d.[ZipCode], d.[Picture]
@@ -79,4 +79,3 @@ BEGIN
     END;
 END;
 GO
-

@@ -26,6 +26,8 @@ Namespace PresentationLayer.Views.Forms
 
             ' This call is required by the designer.
             InitializeComponent()
+            'This grid is a summary; clicking it opens the phone-entry tab.
+            DataGridViewPhoneDisplay.DisplayOnly = True
             '_presenter = presenter
             ' Add any initialization after the InitializeComponent() call.
 
@@ -325,6 +327,15 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 cboPayGroupIdNo.SetValue(Value)
+            End Set
+        End Property
+
+        Public Property RevCostCenterIdNo As Int16? Implements IEmployeeView.RevCostCenterIdNo
+            Get
+                Return cacRevCostCenterIdNo.GetNullableValue(Of Int16)
+            End Get
+            Set
+                cacRevCostCenterIdNo.SetValue(Value)
             End Set
         End Property
 
@@ -647,6 +658,7 @@ Namespace PresentationLayer.Views.Forms
          {"ProvinceState", txtProvinceState},
          {"ReleasedDate", dtpReleasedDate},
          {"ReligionIdNo", cacReligionIdNo},
+         {"RevCostCenterIdNo", cacRevCostCenterIdNo},
          {"SponsorType", cboSponsorType},
          {"Street", txtStreet},
          {"Supervisor", chkSupervisor},

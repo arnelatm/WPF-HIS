@@ -24,7 +24,7 @@ SELECT  dbo.PayrollDetail.PayrollIdNo,dbo.PayrollDetail.EmployeeIdNo, Sum(IIf(db
 		dbo.PayrollPayElement.PayElementIdNo, dbo.Employee.EmployeeName, dbo.Employee.PayGroupIdNo,dbo.PayElementGroup.PayELementGroupName,dbo.PayGroup.PayGroupName,
 		dbo.PayElement.PayElementName,dbo.PayrollDetail.BankTransfer,
 		IIf(dbo.PayElement.UsePayGroups=0,dbo.PayElement.AccountIdNo,IsNull(dbo.PayElementAccount.AccountIdNo,dbo.PayELement.AccountIdNo)) as PostAccountIdNo,UsePayGroups,
-		IsNull(dbo.Employee.RevCostCenterIdNo,IsNull(dbo.PayGroup.RevCostCenterIdNo,0)) as RevCostCenterIdNo,
+		Coalesce(dbo.Employee.RevCostCenterIdNo,dbo.Department.RevCostCenterIdNo,dbo.PayGroup.RevCostCenterIdNo,0) as RevCostCenterIdNo,
 	    dbo.Contact.IdNo as ContactIdNo,dbo.RevCostCenter.RevCostCenterName,dbo.RevCostCenter.RevCostCenterCode
 		FROM dbo.PayrollDetail 
 Left JOIN dbo.PayrollPayElement 
@@ -33,6 +33,8 @@ LEFT JOIN dbo.PayElement
 ON dbo.PayElement.IdNo = dbo.PayrollPayElement.PayElementIdNo
 LEFT JOIN dbo.Employee
 ON dbo.PayrollDetail.EmployeeIdNo = dbo.Employee.IdNo
+LEFT JOIN dbo.Department
+ON dbo.Employee.DepartmentIdNo = dbo.Department.IdNo
 LEFT JOIN dbo.PayElementGroup
 ON dbo.PayElement.ReportGroupIdNo = dbo.PayElementGroup.IdNo
 LEFT JOIN dbo.PayGroup
@@ -42,10 +44,10 @@ on dbo.PayElement.IdNo = dbo.PayElementAccount.PayElementIdNo and dbo.PayElement
 LEFT JOIN dbo.Contact
 on dbo.Employee.IdNo = dbo.Contact.CSEIdNo and dbo.Contact.CSECode='E'
 Left Join dbo.RevCostCenter
-on IsNull(dbo.Employee.RevCostCenterIdNo,IsNull(dbo.PayGroup.RevCostCenterIdNo,0)) = RevCostCenter.IdNo
+on Coalesce(dbo.Employee.RevCostCenterIdNo,dbo.Department.RevCostCenterIdNo,dbo.PayGroup.RevCostCenterIdNo,0) = RevCostCenter.IdNo
 Group by dbo.Employee.PayGroupIdNo,PayGroupName,PayElementGroupName,PayGroupName,UsePayGroups,dbo.Contact.IdNo,dbo.RevCostCenter.RevCostCenterName,dbo.RevCostCenter.RevCostCenterCode,
 iif(dbo.PayElement.UsePayGroups=0,dbo.PayElement.AccountIdNo,IsNull(dbo.PayElementAccount.AccountIdNo,dbo.PayELement.AccountIdNo)),
-IsNull(dbo.Employee.RevCostCenterIdNo,IsNull(dbo.PayGroup.RevCostCenterIdNo,0)),
+Coalesce(dbo.Employee.RevCostCenterIdNo,dbo.Department.RevCostCenterIdNo,dbo.PayGroup.RevCostCenterIdNo,0),
 PayElementName,dbo.PayrollPayElement.PayElementIdNo,payrollIdNo,EmployeeIdNo,EmployeeName,ReportGroupIdNo,BankTransfer
 
 GO

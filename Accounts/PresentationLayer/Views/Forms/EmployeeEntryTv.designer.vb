@@ -163,6 +163,8 @@
             Me.lblPaymentMethod = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboPaymentMethod = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.cboPayGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.lblRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cacRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.cacBankIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.tbpEarnings = New AATM.Libraries.CBaseControlsLibrary.CTabPage()
             Me.DataGridViewEarnings = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
@@ -1913,17 +1915,17 @@
             Me.TableLayoutPanel3.ColumnCount = 2
             Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 146.0!))
             Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-            Me.TableLayoutPanel3.Controls.Add(Me.txtActualDutyHours, 1, 9)
-            Me.TableLayoutPanel3.Controls.Add(Me.lblActualDutyHours, 0, 9)
-            Me.TableLayoutPanel3.Controls.Add(Me.txtDutyHours, 1, 8)
-            Me.TableLayoutPanel3.Controls.Add(Me.lblDutyHours, 0, 8)
-            Me.TableLayoutPanel3.Controls.Add(Me.txtBalance, 1, 7)
-            Me.TableLayoutPanel3.Controls.Add(Me.lblBalance, 0, 7)
-            Me.TableLayoutPanel3.Controls.Add(Me.txtOpeningBalance, 1, 6)
-            Me.TableLayoutPanel3.Controls.Add(Me.lblOpeningBalance, 0, 6)
-            Me.TableLayoutPanel3.Controls.Add(Me.cboPayCycleIdNo, 1, 5)
-            Me.TableLayoutPanel3.Controls.Add(Me.lblPayCycleIdNo, 0, 5)
-            Me.TableLayoutPanel3.Controls.Add(Me.txtIban, 1, 4)
+            Me.TableLayoutPanel3.Controls.Add(Me.txtActualDutyHours, 1, 10)
+            Me.TableLayoutPanel3.Controls.Add(Me.lblActualDutyHours, 0, 10)
+            Me.TableLayoutPanel3.Controls.Add(Me.txtDutyHours, 1, 9)
+            Me.TableLayoutPanel3.Controls.Add(Me.lblDutyHours, 0, 9)
+            Me.TableLayoutPanel3.Controls.Add(Me.txtBalance, 1, 8)
+            Me.TableLayoutPanel3.Controls.Add(Me.lblBalance, 0, 8)
+            Me.TableLayoutPanel3.Controls.Add(Me.txtOpeningBalance, 1, 7)
+            Me.TableLayoutPanel3.Controls.Add(Me.lblOpeningBalance, 0, 7)
+            Me.TableLayoutPanel3.Controls.Add(Me.cboPayCycleIdNo, 1, 6)
+            Me.TableLayoutPanel3.Controls.Add(Me.lblPayCycleIdNo, 0, 6)
+            Me.TableLayoutPanel3.Controls.Add(Me.txtIban, 1, 5)
             Me.TableLayoutPanel3.Controls.Add(Me.lblPayGroupIdNo, 0, 3)
             Me.TableLayoutPanel3.Controls.Add(Me.txtBankAccountNo, 1, 2)
             Me.TableLayoutPanel3.Controls.Add(Me.lblBankAccountNo, 0, 2)
@@ -1931,12 +1933,14 @@
             Me.TableLayoutPanel3.Controls.Add(Me.lblPaymentMethod, 0, 0)
             Me.TableLayoutPanel3.Controls.Add(Me.cboPaymentMethod, 1, 0)
             Me.TableLayoutPanel3.Controls.Add(Me.cboPayGroupIdNo, 1, 3)
-            Me.TableLayoutPanel3.Controls.Add(Me.lblIban, 0, 4)
+            Me.TableLayoutPanel3.Controls.Add(Me.lblRevCostCenterIdNo, 0, 4)
+            Me.TableLayoutPanel3.Controls.Add(Me.cacRevCostCenterIdNo, 1, 4)
+            Me.TableLayoutPanel3.Controls.Add(Me.lblIban, 0, 5)
             Me.TableLayoutPanel3.Controls.Add(Me.cacBankIdNo, 1, 1)
             Me.TableLayoutPanel3.Location = New System.Drawing.Point(2, 2)
             Me.TableLayoutPanel3.Margin = New System.Windows.Forms.Padding(2)
             Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
-            Me.TableLayoutPanel3.RowCount = 10
+            Me.TableLayoutPanel3.RowCount = 11
             Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
             Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
             Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
@@ -1947,7 +1951,8 @@
             Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
             Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
             Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
-            Me.TableLayoutPanel3.Size = New System.Drawing.Size(662, 245)
+            Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
+            Me.TableLayoutPanel3.Size = New System.Drawing.Size(662, 269)
             Me.TableLayoutPanel3.TabIndex = 10
             '
             'txtActualDutyHours
@@ -1967,7 +1972,7 @@
             Me.txtActualDutyHours.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtActualDutyHours.ForeColor = System.Drawing.Color.Black
             Me.txtActualDutyHours.LinkedLabel = Me.lblActualDutyHours
-            Me.txtActualDutyHours.Location = New System.Drawing.Point(147, 217)
+            Me.txtActualDutyHours.Location = New System.Drawing.Point(147, 241)
             Me.txtActualDutyHours.Margin = New System.Windows.Forms.Padding(1)
             Me.txtActualDutyHours.MaximumValue = Nothing
             Me.txtActualDutyHours.MinimumValue = Nothing
@@ -1978,7 +1983,7 @@
             Me.txtActualDutyHours.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtActualDutyHours.SecurityKey = "EmployeePayInfo"
             Me.txtActualDutyHours.Size = New System.Drawing.Size(93, 23)
-            Me.txtActualDutyHours.TabIndex = 9
+            Me.txtActualDutyHours.TabIndex = 10
             Me.txtActualDutyHours.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             Me.txtActualDutyHours.Translatable = False
             Me.txtActualDutyHours.ValueIsNumeric = True
@@ -1990,12 +1995,12 @@
             Me.lblActualDutyHours.EditingMode = False
             Me.lblActualDutyHours.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblActualDutyHours.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblActualDutyHours.Location = New System.Drawing.Point(1, 217)
+            Me.lblActualDutyHours.Location = New System.Drawing.Point(1, 241)
             Me.lblActualDutyHours.Margin = New System.Windows.Forms.Padding(1)
             Me.lblActualDutyHours.Name = "lblActualDutyHours"
             Me.lblActualDutyHours.SecurityKey = "EmployeePayInfo"
             Me.lblActualDutyHours.Size = New System.Drawing.Size(144, 23)
-            Me.lblActualDutyHours.TabIndex = 9
+            Me.lblActualDutyHours.TabIndex = 10
             Me.lblActualDutyHours.Text = "Actual Duty Hours"
             Me.lblActualDutyHours.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             Me.lblActualDutyHours.Translatable = True
@@ -2017,7 +2022,7 @@
             Me.txtDutyHours.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtDutyHours.ForeColor = System.Drawing.Color.Black
             Me.txtDutyHours.LinkedLabel = Me.lblDutyHours
-            Me.txtDutyHours.Location = New System.Drawing.Point(147, 193)
+            Me.txtDutyHours.Location = New System.Drawing.Point(147, 217)
             Me.txtDutyHours.Margin = New System.Windows.Forms.Padding(1)
             Me.txtDutyHours.MaximumValue = Nothing
             Me.txtDutyHours.MinimumValue = Nothing
@@ -2028,7 +2033,7 @@
             Me.txtDutyHours.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtDutyHours.SecurityKey = "EmployeePayInfo"
             Me.txtDutyHours.Size = New System.Drawing.Size(93, 23)
-            Me.txtDutyHours.TabIndex = 8
+            Me.txtDutyHours.TabIndex = 9
             Me.txtDutyHours.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             Me.txtDutyHours.Translatable = False
             Me.txtDutyHours.ValueIsNumeric = True
@@ -2040,12 +2045,12 @@
             Me.lblDutyHours.EditingMode = False
             Me.lblDutyHours.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblDutyHours.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblDutyHours.Location = New System.Drawing.Point(1, 193)
+            Me.lblDutyHours.Location = New System.Drawing.Point(1, 217)
             Me.lblDutyHours.Margin = New System.Windows.Forms.Padding(1)
             Me.lblDutyHours.Name = "lblDutyHours"
             Me.lblDutyHours.SecurityKey = "EmployeePayInfo"
             Me.lblDutyHours.Size = New System.Drawing.Size(144, 19)
-            Me.lblDutyHours.TabIndex = 8
+            Me.lblDutyHours.TabIndex = 9
             Me.lblDutyHours.Text = "Paid Duty Hours"
             Me.lblDutyHours.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             Me.lblDutyHours.Translatable = True
@@ -2068,7 +2073,7 @@
             Me.txtBalance.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtBalance.ForeColor = System.Drawing.Color.Black
             Me.txtBalance.LinkedLabel = Me.lblBalance
-            Me.txtBalance.Location = New System.Drawing.Point(147, 169)
+            Me.txtBalance.Location = New System.Drawing.Point(147, 193)
             Me.txtBalance.Margin = New System.Windows.Forms.Padding(1)
             Me.txtBalance.MaximumValue = Nothing
             Me.txtBalance.MinimumValue = Nothing
@@ -2079,7 +2084,7 @@
             Me.txtBalance.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtBalance.SecurityKey = "EmployeePayInfo"
             Me.txtBalance.Size = New System.Drawing.Size(93, 23)
-            Me.txtBalance.TabIndex = 7
+            Me.txtBalance.TabIndex = 8
             Me.txtBalance.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             Me.txtBalance.Translatable = False
             Me.txtBalance.ValueIsNumeric = True
@@ -2091,12 +2096,12 @@
             Me.lblBalance.EditingMode = False
             Me.lblBalance.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblBalance.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblBalance.Location = New System.Drawing.Point(1, 169)
+            Me.lblBalance.Location = New System.Drawing.Point(1, 193)
             Me.lblBalance.Margin = New System.Windows.Forms.Padding(1)
             Me.lblBalance.Name = "lblBalance"
             Me.lblBalance.SecurityKey = "EmployeePayInfo"
             Me.lblBalance.Size = New System.Drawing.Size(144, 19)
-            Me.lblBalance.TabIndex = 4
+            Me.lblBalance.TabIndex = 5
             Me.lblBalance.Text = "Cash Advance Balance"
             Me.lblBalance.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             Me.lblBalance.Translatable = True
@@ -2119,7 +2124,7 @@
             Me.txtOpeningBalance.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtOpeningBalance.ForeColor = System.Drawing.Color.Black
             Me.txtOpeningBalance.LinkedLabel = Me.lblOpeningBalance
-            Me.txtOpeningBalance.Location = New System.Drawing.Point(147, 145)
+            Me.txtOpeningBalance.Location = New System.Drawing.Point(147, 169)
             Me.txtOpeningBalance.Margin = New System.Windows.Forms.Padding(1)
             Me.txtOpeningBalance.MaximumValue = Nothing
             Me.txtOpeningBalance.MinimumValue = Nothing
@@ -2130,7 +2135,7 @@
             Me.txtOpeningBalance.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtOpeningBalance.SecurityKey = "EmployeePayInfo"
             Me.txtOpeningBalance.Size = New System.Drawing.Size(93, 23)
-            Me.txtOpeningBalance.TabIndex = 6
+            Me.txtOpeningBalance.TabIndex = 7
             Me.txtOpeningBalance.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             Me.txtOpeningBalance.Translatable = False
             Me.txtOpeningBalance.ValueIsNumeric = True
@@ -2142,12 +2147,12 @@
             Me.lblOpeningBalance.EditingMode = False
             Me.lblOpeningBalance.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblOpeningBalance.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblOpeningBalance.Location = New System.Drawing.Point(1, 145)
+            Me.lblOpeningBalance.Location = New System.Drawing.Point(1, 169)
             Me.lblOpeningBalance.Margin = New System.Windows.Forms.Padding(1)
             Me.lblOpeningBalance.Name = "lblOpeningBalance"
             Me.lblOpeningBalance.SecurityKey = "EmployeePayInfo"
             Me.lblOpeningBalance.Size = New System.Drawing.Size(144, 19)
-            Me.lblOpeningBalance.TabIndex = 3
+            Me.lblOpeningBalance.TabIndex = 4
             Me.lblOpeningBalance.Text = "Open. Bal. (Cash Adv.)"
             Me.lblOpeningBalance.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             Me.lblOpeningBalance.Translatable = True
@@ -2178,7 +2183,7 @@
             Me.cboPayCycleIdNo.IgnoreCase = False
             Me.cboPayCycleIdNo.LimitToList = False
             Me.cboPayCycleIdNo.LinkedLabel = Me.lblPayCycleIdNo
-            Me.cboPayCycleIdNo.Location = New System.Drawing.Point(146, 121)
+            Me.cboPayCycleIdNo.Location = New System.Drawing.Point(146, 145)
             Me.cboPayCycleIdNo.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
             Me.cboPayCycleIdNo.MaxDropDownItems = 1
             Me.cboPayCycleIdNo.Name = "cboPayCycleIdNo"
@@ -2193,7 +2198,7 @@
             Me.cboPayCycleIdNo.SuggestBoxHeight = 200
             Me.cboPayCycleIdNo.SuggestCharCount = 0
             Me.cboPayCycleIdNo.SuggestListOrderRule = Nothing
-            Me.cboPayCycleIdNo.TabIndex = 5
+            Me.cboPayCycleIdNo.TabIndex = 6
             Me.cboPayCycleIdNo.TextToSearch = Nothing
             Me.cboPayCycleIdNo.Translatable = False
             Me.cboPayCycleIdNo.ValueIsMandatory = False
@@ -2208,12 +2213,12 @@
             Me.lblPayCycleIdNo.EditingMode = False
             Me.lblPayCycleIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblPayCycleIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblPayCycleIdNo.Location = New System.Drawing.Point(1, 121)
+            Me.lblPayCycleIdNo.Location = New System.Drawing.Point(1, 145)
             Me.lblPayCycleIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.lblPayCycleIdNo.Name = "lblPayCycleIdNo"
             Me.lblPayCycleIdNo.SecurityKey = "EmployeePayInfo"
             Me.lblPayCycleIdNo.Size = New System.Drawing.Size(144, 19)
-            Me.lblPayCycleIdNo.TabIndex = 6
+            Me.lblPayCycleIdNo.TabIndex = 7
             Me.lblPayCycleIdNo.Text = "Pay Cycle"
             Me.lblPayCycleIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             Me.lblPayCycleIdNo.Translatable = True
@@ -2235,7 +2240,7 @@
             Me.txtIban.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtIban.ForeColor = System.Drawing.Color.Black
             Me.txtIban.LinkedLabel = Me.lblIban
-            Me.txtIban.Location = New System.Drawing.Point(147, 97)
+            Me.txtIban.Location = New System.Drawing.Point(147, 121)
             Me.txtIban.Margin = New System.Windows.Forms.Padding(1)
             Me.txtIban.MaximumValue = Nothing
             Me.txtIban.MinimumValue = Nothing
@@ -2246,7 +2251,7 @@
             Me.txtIban.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtIban.SecurityKey = "EmployeePayInfo"
             Me.txtIban.Size = New System.Drawing.Size(200, 23)
-            Me.txtIban.TabIndex = 4
+            Me.txtIban.TabIndex = 5
             Me.txtIban.Translatable = False
             '
             'lblIban
@@ -2256,12 +2261,12 @@
             Me.lblIban.EditingMode = False
             Me.lblIban.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblIban.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblIban.Location = New System.Drawing.Point(1, 97)
+            Me.lblIban.Location = New System.Drawing.Point(1, 121)
             Me.lblIban.Margin = New System.Windows.Forms.Padding(1)
             Me.lblIban.Name = "lblIban"
             Me.lblIban.SecurityKey = "EmployeePayInfo"
             Me.lblIban.Size = New System.Drawing.Size(144, 19)
-            Me.lblIban.TabIndex = 5
+            Me.lblIban.TabIndex = 6
             Me.lblIban.Text = "IBAN Number"
             Me.lblIban.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             Me.lblIban.Translatable = True
@@ -2465,6 +2470,72 @@
             Me.cboPayGroupIdNo.ValueIsNullable = True
             Me.cboPayGroupIdNo.ValueIsNumeric = False
             Me.cboPayGroupIdNo.ValueMember = "IdNo"
+            '
+            'lblRevCostCenterIdNo
+            '
+            Me.lblRevCostCenterIdNo.BackColor = System.Drawing.Color.Transparent
+            Me.lblRevCostCenterIdNo.DisplayOnly = True
+            Me.lblRevCostCenterIdNo.EditingMode = False
+            Me.lblRevCostCenterIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblRevCostCenterIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblRevCostCenterIdNo.Location = New System.Drawing.Point(1, 97)
+            Me.lblRevCostCenterIdNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblRevCostCenterIdNo.Name = "lblRevCostCenterIdNo"
+            Me.lblRevCostCenterIdNo.SecurityKey = "EmployeePayInfo"
+            Me.lblRevCostCenterIdNo.Size = New System.Drawing.Size(144, 23)
+            Me.lblRevCostCenterIdNo.TabIndex = 4
+            Me.lblRevCostCenterIdNo.Text = "Revenue/Cost Center"
+            Me.lblRevCostCenterIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblRevCostCenterIdNo.Translatable = True
+            '
+            'cacRevCostCenterIdNo
+            '
+            Me.cacRevCostCenterIdNo.BackColor = System.Drawing.Color.White
+            Me.cacRevCostCenterIdNo.BegFindValue = Nothing
+            Me.cacRevCostCenterIdNo.ChangingSearchValueOnly = False
+            Me.cacRevCostCenterIdNo.CurrentSearchTerm = ""
+            Me.cacRevCostCenterIdNo.DataValue = Nothing
+            Me.cacRevCostCenterIdNo.DefaultValue = Nothing
+            Me.cacRevCostCenterIdNo.DisplayMember = "RevCostCenterName"
+            Me.cacRevCostCenterIdNo.DropDownHeight = 21
+            Me.cacRevCostCenterIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
+            Me.cacRevCostCenterIdNo.Editable = True
+            Me.cacRevCostCenterIdNo.EditingMode = False
+            Me.cacRevCostCenterIdNo.EndFindValue = Nothing
+            Me.cacRevCostCenterIdNo.FieldDescription = Nothing
+            Me.cacRevCostCenterIdNo.FieldName = Nothing
+            Me.cacRevCostCenterIdNo.FilterRule = Nothing
+            Me.cacRevCostCenterIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cacRevCostCenterIdNo.FindEnabled = False
+            Me.cacRevCostCenterIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.cacRevCostCenterIdNo.ForeColor = System.Drawing.Color.Black
+            Me.cacRevCostCenterIdNo.FormattingEnabled = True
+            Me.cacRevCostCenterIdNo.HideWhenNotEditingOrAdding = False
+            Me.cacRevCostCenterIdNo.IgnoreCase = False
+            Me.cacRevCostCenterIdNo.LimitToList = False
+            Me.cacRevCostCenterIdNo.LinkedLabel = Me.lblRevCostCenterIdNo
+            Me.cacRevCostCenterIdNo.Location = New System.Drawing.Point(146, 97)
+            Me.cacRevCostCenterIdNo.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
+            Me.cacRevCostCenterIdNo.MaxDropDownItems = 1
+            Me.cacRevCostCenterIdNo.Name = "cacRevCostCenterIdNo"
+            Me.cacRevCostCenterIdNo.OldValue = 0
+            Me.cacRevCostCenterIdNo.OriginalDataSource = Nothing
+            Me.cacRevCostCenterIdNo.OriginalList = Nothing
+            Me.cacRevCostCenterIdNo.OverrideDropDownStyleList = False
+            Me.cacRevCostCenterIdNo.PreviousSearchTerm = Nothing
+            Me.cacRevCostCenterIdNo.PropertySelector = Nothing
+            Me.cacRevCostCenterIdNo.SecurityKey = "EmployeePayInfo"
+            Me.cacRevCostCenterIdNo.Size = New System.Drawing.Size(402, 22)
+            Me.cacRevCostCenterIdNo.SuggestBoxHeight = 200
+            Me.cacRevCostCenterIdNo.SuggestCharCount = 0
+            Me.cacRevCostCenterIdNo.SuggestListOrderRule = Nothing
+            Me.cacRevCostCenterIdNo.TabIndex = 4
+            Me.cacRevCostCenterIdNo.TextToSearch = Nothing
+            Me.cacRevCostCenterIdNo.Translatable = False
+            Me.cacRevCostCenterIdNo.ValueIsMandatory = False
+            Me.cacRevCostCenterIdNo.ValueIsNullable = True
+            Me.cacRevCostCenterIdNo.ValueIsNumeric = False
+            Me.cacRevCostCenterIdNo.ValueMember = "IdNo"
             '
             'cacBankIdNo
             '
@@ -4282,6 +4353,8 @@
         Friend WithEvents lblBankIdNo As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents cboPaymentMethod As Libraries.CBaseControlsLibrary.CtComboBox
         Friend WithEvents cboPayGroupIdNo As Libraries.CBaseControlsLibrary.CtComboBox
+        Friend WithEvents lblRevCostCenterIdNo As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents cacRevCostCenterIdNo As Libraries.CBaseControlsLibrary.CtComboBox
         Friend WithEvents tbpEarnings As Libraries.CBaseControlsLibrary.CTabPage
         Friend WithEvents DataGridViewEarnings As Libraries.CBaseControlsLibrary.CtDataGridView
         Friend WithEvents dgvSequenceEarning As Libraries.CBaseControlsLibrary.CDgvTextColumn

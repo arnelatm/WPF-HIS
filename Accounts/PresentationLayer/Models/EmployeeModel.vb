@@ -45,6 +45,7 @@ Namespace PresentationLayer.Models
         Public Property ProvinceState As String
         Public Property ReleasedDate As Date?
         Public Property ReligionIdNo As Int16?
+        Public Property RevCostCenterIdNo As Int16?
         Public Property SponsorType As String
         Public Property Street As String
         Public Property Supervisor As Boolean

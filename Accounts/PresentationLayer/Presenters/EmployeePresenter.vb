@@ -150,6 +150,7 @@ Namespace PresentationLayer.Presenters
                              New Object() {"Religion", "ReligionIdNo"},
                              New Object() {"PayCycle", "PayCycleIdNo"},
                              New Object() {"PayGroup", "PayGroupIdNo"},
+                             New Object() {"RevCostCenter", "RevCostCenterIdNo"},
                              New Object() {"List", "Title", "IdNo,ListName"},
                              New Object() {"Employee", "SupervisorIdNo", Nothing, "Supervisor=1"}})
             MakeVarDataSources({New Object() {"PayElement", "DeductionsByName", Nothing, "PayElementKind = '" + EnumToCode(PayElementKindSelection.Deduction) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'"},
