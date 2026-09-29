@@ -5,6 +5,7 @@ param(
     [string]$Version,
 
     [switch]$RequiredUpdate,
+    [switch]$OptionalUpdate,
 
     [ValidatePattern('^[0-9A-Fa-f]{40}$')]
     [string]$CertificateThumbprint = '1A175C7C0E61C34D09B6827C5E3D8738C562A831'
@@ -16,6 +17,10 @@ $ErrorActionPreference = 'Stop'
 . (Join-Path $PSScriptRoot 'AccountsClickOnce.Common.ps1')
 
 $releaseVersion = [version]::Parse($Version)
+if ($RequiredUpdate -and $OptionalUpdate) {
+    throw 'Choose either -RequiredUpdate or -OptionalUpdate, not both.'
+}
+$requireUpdateForRelease = -not $OptionalUpdate
 $repoRoot = Get-AccountsRepositoryRoot
 $accountsDirectory = Join-Path $repoRoot 'Accounts'
 $activeConfiguration = Join-Path $accountsDirectory 'app.config'
@@ -86,7 +91,7 @@ try {
         '/p:SignManifests=true',
         "/p:ManifestCertificateThumbprint=$CertificateThumbprint"
     )
-    if ($RequiredUpdate) {
+    if ($requireUpdateForRelease) {
         $arguments += '/p:UpdateRequired=true'
         $arguments += "/p:MinimumRequiredVersion=$Version"
     }
@@ -97,7 +102,7 @@ try {
         throw "Accounts ClickOnce publish failed with exit code $LASTEXITCODE."
     }
 
-    $package = Get-AccountsClickOncePackage -Root $stagingDirectory -Version $Version -RequiredUpdate:$RequiredUpdate
+    $package = Get-AccountsClickOncePackage -Root $stagingDirectory -Version $Version -RequiredUpdate:$requireUpdateForRelease
     $applicationManifest = Join-Path $package.VersionDirectory 'Accounts.exe.manifest'
     Assert-AccountsClickOnceManifestSignature `
         -Path $package.ManifestPath `

@@ -1,5 +1,6 @@
 ﻿Imports System.ComponentModel
 Imports System.Configuration
+Imports System.Deployment.Application
 Imports System.Drawing
 Imports System.Globalization
 Imports System.Data.SqlClient
@@ -84,6 +85,9 @@ Namespace PresentationLayer.Views.Forms
         Private _auditHistoryForm As AuditHistoryForm
         Private ReadOnly _applicationStatusStrip As New StatusStrip()
         Private ReadOnly _applicationStatusLabel As New ToolStripStatusLabel()
+        Private ReadOnly _databaseHealthTimer As New System.Windows.Forms.Timer() With {.Interval = 120000}
+        Private _databaseConnectionState As String = "Checking"
+        Private _databaseHealthCheckInProgress As Boolean
 
         'Private ReadOnly _presenterObj
 
@@ -124,7 +128,12 @@ Namespace PresentationLayer.Views.Forms
                 Dim dataService = DirectCast(Presenter.Service, AATM.ServicesLayer.Services.IService)
                 Dim establishment = EstablishmentInformationProvider.Load(dataService)
                 GlobalVariables.SetEstablishmentNames(establishment.EnglishName, establishment.ArabicName)
+                _databaseConnectionState = "Connected"
+                UpdateApplicationStatus()
+                _databaseHealthTimer.Start()
             Catch ex As Exception
+                _databaseConnectionState = "Disconnected"
+                UpdateApplicationStatus()
                 Throw New ConfigurationErrorsException(
                     "Unable to initialize establishment information from dbo.Establishment (IdNo = 1). " &
                     "Verify that the record exists and that EstablishmentName and EstablishmentNameAra are populated.",
@@ -265,7 +274,39 @@ Namespace PresentationLayer.Views.Forms
             _applicationStatusStrip.Items.Add(_applicationStatusLabel)
             _applicationStatusStrip.Dock = DockStyle.Bottom
             Controls.Add(_applicationStatusStrip)
+            AddHandler _databaseHealthTimer.Tick, AddressOf DatabaseHealthTimer_Tick
+            AddHandler Me.FormClosed, AddressOf MainForm_FormClosed
             UpdateApplicationStatus()
+        End Sub
+
+        Private Async Sub DatabaseHealthTimer_Tick(sender As Object, e As EventArgs)
+            If _databaseHealthCheckInProgress Then Return
+            _databaseHealthCheckInProgress = True
+            _databaseConnectionState = "Checking"
+            UpdateApplicationStatus()
+
+            Try
+                Dim connectionSettings As New SqlConnectionStringBuilder(GlobalVariables.DacConnectionString)
+                connectionSettings.ConnectTimeout = 3
+                Using connection As New SqlConnection(connectionSettings.ConnectionString)
+                    Await connection.OpenAsync()
+                    Using command As New SqlCommand("SELECT 1", connection)
+                        command.CommandTimeout = 3
+                        Await command.ExecuteScalarAsync()
+                    End Using
+                End Using
+                _databaseConnectionState = "Connected"
+            Catch
+                _databaseConnectionState = "Disconnected"
+            Finally
+                _databaseHealthCheckInProgress = False
+                UpdateApplicationStatus()
+            End Try
+        End Sub
+
+        Private Sub MainForm_FormClosed(sender As Object, e As FormClosedEventArgs)
+            _databaseHealthTimer.Stop()
+            _databaseHealthTimer.Dispose()
         End Sub
 
         Private Sub UpdateApplicationStatus(Optional statusMessage As String = Nothing)
@@ -286,11 +327,18 @@ Namespace PresentationLayer.Views.Forms
 
             Dim isArabic = CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft
             Dim databaseText = If(isArabic, "الخادم.قاعدة البيانات: ", "Server.Database: ") & serverName & "." & databaseName
+            Dim connectionStatus = If(isArabic,
+                If(_databaseConnectionState = "Connected", "متصل", If(_databaseConnectionState = "Checking", "جارٍ التحقق", "غير متصل")),
+                If(_databaseConnectionState = "Connected", "Connected", If(_databaseConnectionState = "Checking", "Checking", "Disconnected")))
+            Dim applicationVersion = If(ApplicationDeployment.IsNetworkDeployed,
+                                        ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString(),
+                                        Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString())
+            Dim versionLabel = If(isArabic, "الإصدار ", "Version ") & applicationVersion
             Dim defaultStatus = If(isArabic,
                 If(_logStatus = LoginStatus.LoggedIn, "جاهز", "تم تسجيل الخروج"),
                 If(_logStatus = LoginStatus.LoggedIn, "Ready", "Signed out"))
             Dim currentStatus = If(statusMessage, defaultStatus)
-            _applicationStatusLabel.Text = currentStatus & " | " & databaseText
+            _applicationStatusLabel.Text = currentStatus & " | " & connectionStatus & " | " & databaseText & " | " & versionLabel
         End Sub
 
         Private Sub KizenCreditSalesImportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemKizenCreditSalesImport.Click

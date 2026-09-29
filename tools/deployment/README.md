@@ -8,16 +8,16 @@ They do not publish a DACPAC, modify database data, or deploy external Crystal R
 
 ## Publish and validate locally
 
-The simplest method is to double-click `Publish-Accounts.cmd`, enter the four-part version, and choose whether the release is mandatory.
+The simplest method is to double-click `Publish-Accounts.cmd`, enter the four-part version, and keep the default mandatory update unless the release is intentionally optional.
 
-Before publishing, review `git status --short` and the diffs for the application and referenced projects. ClickOnce packages the current working-tree build, including tracked edits, so confirm that each included change belongs in the release. Read the version from the live `Accounts.application` manifest and choose a higher four-part version. The latest verified release was `1.0.0.15`; use that only as a reference, not as a substitute for checking the live manifest.
+Before publishing, review `git status --short` and the diffs for the application and referenced projects. ClickOnce packages the current working-tree build, including tracked edits, so confirm that each included change belongs in the release. Read the version from the live `Accounts.application` manifest and choose a higher four-part version. Do not rely on a hard-coded "latest version" in this guide; deployment version advances independently of this document. The examples use `1.0.0.24`, following the live `1.0.0.23` release; replace it with the next version for your live manifest.
 
 Manifest signing requires the approved code-signing certificate with its private key in the release user's `Cert:\CurrentUser\My` store. The scripts use thumbprint `1A175C7C0E61C34D09B6827C5E3D8738C562A831`; do not copy the private key or password to the share. Run publishing and deployment from an authorized release session that can access this certificate and `\\IBN-SERVER\ISP\COAccounts`.
 
 The equivalent PowerShell command from the repository root is:
 
 ```powershell
-powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File .\tools\deployment\Publish-AccountsClickOnce.ps1 -Version 1.0.0.16
+powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File .\tools\deployment\Publish-AccountsClickOnce.ps1 -Version 1.0.0.24
 ```
 
 The script:
@@ -30,11 +30,13 @@ The script:
 
 The publish script runs `Clean` before `Publish`. Keep this ordering: an incremental Release build can otherwise reuse an older `Accounts.exe.config.deploy` and package a test-server connection even while the live profile is temporarily active. The staged config is validated before the script succeeds. Review connection targets without printing credentials; they must point to `IBN-SERVER.ISPDATA`.
 
-Add `-RequiredUpdate` when clients must not be allowed to skip the version:
+Production packages require the new version by default. Use `-OptionalUpdate` only when clients may stay on the previous version:
 
 ```powershell
-powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File .\tools\deployment\Publish-AccountsClickOnce.ps1 -Version 1.0.0.16 -RequiredUpdate
+powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File .\tools\deployment\Publish-AccountsClickOnce.ps1 -Version 1.0.0.24 -OptionalUpdate
 ```
+
+The interactive publisher uses the same policy: pressing Enter at the optional-update prompt makes the release mandatory. Existing workstations receive the required version at the next ClickOnce update check.
 
 The staging directory must not already exist. This prevents an old and new publication from being mixed accidentally.
 
@@ -43,7 +45,7 @@ The staging directory must not already exist. This prevents an old and new publi
 Review the staged package, then run:
 
 ```powershell
-powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File .\tools\deployment\Deploy-AccountsClickOnce.ps1 -Version 1.0.0.16
+powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File .\tools\deployment\Deploy-AccountsClickOnce.ps1 -Version 1.0.0.24
 ```
 
 The deployment script:
@@ -51,7 +53,7 @@ The deployment script:
 - only accepts `\\IBN-SERVER\ISP\COAccounts` as the production destination;
 - refuses an equal or older version;
 - displays the source, destination, current version, new version, and backup path;
-- requires the exact confirmation `DEPLOY 1.0.0.16`;
+- requires the exact confirmation `DEPLOY 1.0.0.24`;
 - backs up the current `COAccounts` folder;
 - copies and hashes the new version payload;
 - replaces `setup.exe`;
@@ -61,12 +63,12 @@ The deployment script:
 Preview the production actions without copying anything:
 
 ```powershell
-powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File .\tools\deployment\Deploy-AccountsClickOnce.ps1 -Version 1.0.0.16 -WhatIf
+powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File .\tools\deployment\Deploy-AccountsClickOnce.ps1 -Version 1.0.0.24 -WhatIf
 ```
 
 ## Double-click launchers
 
-`Publish-Accounts.cmd` prompts for the version and whether the update is mandatory. `Deploy-Accounts.cmd` prompts for the staged version. Both invoke the corresponding PowerShell script with an execution-policy override scoped to that process. The PowerShell scripts remain the source of the validation and deployment logic.
+`Publish-Accounts.cmd` prompts for the version and whether the update should be optional. `Deploy-Accounts.cmd` prompts for the staged version. Both invoke the corresponding PowerShell script with an execution-policy override scoped to that process. The PowerShell scripts remain the source of the validation and deployment logic.
 
 ## Separate release items
 
@@ -193,8 +195,8 @@ On a non-production pilot workstation:
 1. Run `gpupdate /force`, then restart the workstation so the computer certificate policy is applied.
 2. Confirm the certificate exists in both `Local Computer\Trusted Root Certification Authorities` and `Local Computer\Trusted Publishers` with the expected thumbprint.
 3. Sign in as a targeted ordinary user and confirm the installer shortcut or logon task appears.
-4. Install Clinic Information System and verify its ClickOnce shortcut opens version `1.0.0.14` or later.
-5. On a pilot workstation with the prior release installed, sign in after publishing the new release and confirm the logon bootstrap updates it to the live version. Confirm the shortcut then opens that version.
+4. Install Clinic Information System and verify the main window shows the connected database target and running version in its status bar.
+5. On a pilot workstation with the prior release installed, sign in after publishing the new release and confirm the mandatory ClickOnce update installs the live version. Confirm the status bar shows the new version and a connected database target.
 6. Sign in as a second targeted user on the same workstation and confirm that user receives a separate ClickOnce installation.
 7. Confirm a non-targeted user or workstation does not receive the shortcut or task.
 8. Review the bootstrap log and the ClickOnce installation prompt before expanding or changing the GPO scope.

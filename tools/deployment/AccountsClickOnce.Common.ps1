@@ -22,6 +22,34 @@ function Get-AccountsMsBuildPath {
     throw 'MSBuild.exe was not found. Install Visual Studio 2022 with the .NET desktop workload.'
 }
 
+function Get-AccountsMagePath {
+    $command = Get-Command mage.exe -ErrorAction SilentlyContinue
+    if ($null -ne $command) {
+        return $command.Source
+    }
+
+    $sdkRoots = @(
+        (Join-Path ${env:ProgramFiles(x86)} 'Microsoft SDKs\Windows'),
+        (Join-Path $env:ProgramFiles 'Microsoft SDKs\Windows')
+    ) | Where-Object { Test-Path -LiteralPath $_ -PathType Container }
+
+    foreach ($sdkRoot in $sdkRoots) {
+        foreach ($sdkVersion in Get-ChildItem -LiteralPath $sdkRoot -Directory -ErrorAction SilentlyContinue |
+                Sort-Object { [version]([regex]::Match($_.Name, '\d+(?:\.\d+)+').Value) } -Descending) {
+            $toolsDirectory = Join-Path $sdkVersion.FullName 'bin'
+            foreach ($toolsVersion in Get-ChildItem -LiteralPath $toolsDirectory -Directory -Filter 'NETFX * Tools' -ErrorAction SilentlyContinue |
+                    Sort-Object { [version]([regex]::Match($_.Name, '\d+(?:\.\d+)+').Value) } -Descending) {
+                $candidate = Join-Path $toolsVersion.FullName 'mage.exe'
+                if (Test-Path -LiteralPath $candidate -PathType Leaf) {
+                    return $candidate
+                }
+            }
+        }
+    }
+
+    throw 'mage.exe was not found. Install the .NET Framework SDK manifest tools.'
+}
+
 function Get-AccountsVersionToken {
     param(
         [Parameter(Mandatory = $true)]
@@ -157,12 +185,8 @@ function Assert-AccountsClickOnceManifestSignature {
         throw "ClickOnce manifest was not signed by certificate $expectedThumbprint`: $Path"
     }
 
-    $mageCommand = Get-Command mage.exe -ErrorAction SilentlyContinue
-    if ($null -eq $mageCommand) {
-        throw 'mage.exe was not found. Install the .NET Framework SDK manifest tools.'
-    }
-
-    $verificationOutput = & $mageCommand.Source -Verify $Path 2>&1
+    $magePath = Get-AccountsMagePath
+    $verificationOutput = & $magePath -Verify $Path 2>&1
     if ($LASTEXITCODE -ne 0) {
         throw "mage.exe rejected the ClickOnce manifest '$Path': $($verificationOutput -join ' ')"
     }
