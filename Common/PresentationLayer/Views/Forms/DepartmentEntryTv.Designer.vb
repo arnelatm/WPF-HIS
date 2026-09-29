@@ -23,54 +23,49 @@ Namespace PresentationLayer.Views.Forms
         'Do not modify it using the code editor.
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DepartmentEntryTv))
-        Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblDepartmentCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtDepartmentCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblDepartmentName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtDepartmentName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblDepartmentNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtDepartmentNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
-        Me.lblParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cacParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
-        Me.lblRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cacRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
-        Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.txtSortKey = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.SplitContainer1.Panel1.SuspendLayout
-        Me.SplitContainer1.Panel2.SuspendLayout
-        Me.SplitContainer1.SuspendLayout
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.CFlowLayout1.SuspendLayout
-        Me.SuspendLayout
-        '
-        'SplitContainer1
-        '
-        '
-        'SplitContainer1.Panel2
-        '
-        Me.SplitContainer1.Panel2.Controls.Add(Me.CFlowLayout1)
-        resources.ApplyResources(Me.SplitContainer1, "SplitContainer1")
-        '
-        'FormTreeView
-        '
-        Me.FormTreeView.LineColor = System.Drawing.Color.Black
-        resources.ApplyResources(Me.FormTreeView, "FormTreeView")
-        '
-        'ImageListTreeView
-        '
-        Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"),System.Windows.Forms.ImageListStreamer)
-        Me.ImageListTreeView.Images.SetKeyName(0, "openbriefcase.png")
-        Me.ImageListTreeView.Images.SetKeyName(1, "TreeNode.ico")
+            Me.components = New System.ComponentModel.Container()
+            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DepartmentEntryTv))
+            Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblDepartmentCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtDepartmentCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblDepartmentName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtDepartmentName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblDepartmentNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtDepartmentNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
+            Me.lblParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cacParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.lblRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cacRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.SplitContainer1.Panel1.SuspendLayout()
+            Me.SplitContainer1.Panel2.SuspendLayout()
+            Me.SplitContainer1.SuspendLayout()
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.CFlowLayout1.SuspendLayout()
+            Me.SuspendLayout()
             '
-            'TranslatorDAC
+            'SplitContainer1
             '
-            Me.TranslatorDAC.Cs = ""
+            resources.ApplyResources(Me.SplitContainer1, "SplitContainer1")
+            '
+            'SplitContainer1.Panel2
+            '
+            Me.SplitContainer1.Panel2.Controls.Add(Me.CFlowLayout1)
+            '
+            'FormTreeView
+            '
+            Me.FormTreeView.LineColor = System.Drawing.Color.Black
+            resources.ApplyResources(Me.FormTreeView, "FormTreeView")
+            '
+            'ImageListTreeView
+            '
+            Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"), System.Windows.Forms.ImageListStreamer)
+            Me.ImageListTreeView.Images.SetKeyName(0, "openbriefcase.png")
+            Me.ImageListTreeView.Images.SetKeyName(1, "TreeNode.ico")
             '
             'CFlowLayout1
             '
@@ -89,9 +84,9 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout1.Controls.Add(Me.cacRevCostCenterIdNo)
             Me.CFlowLayout1.Controls.Add(Me.lblNotes)
             Me.CFlowLayout1.Controls.Add(Me.txtNotes)
-            Me.CFlowLayout1.Controls.Add(Me.txtSortKey)
             resources.ApplyResources(Me.CFlowLayout1, "CFlowLayout1")
             Me.CFlowLayout1.Name = "CFlowLayout1"
+            Me.CFlowLayout1.PreserveLanguageLayout = False
             '
             'lblIdNo
             '
@@ -386,49 +381,21 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.Translatable = False
             Me.txtNotes.ValueIsMandatory = True
             '
-            'txtSortKey
+            'DepartmentEntryTv
             '
-            Me.txtSortKey.BackColor = System.Drawing.Color.White
-            Me.txtSortKey.BegFindValue = Nothing
-            Me.txtSortKey.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtSortKey.ComputedValue = False
-            Me.txtSortKey.CustomFormat = Nothing
-            Me.txtSortKey.DataBoundControl = True
-            Me.txtSortKey.EditingMode = True
-            resources.ApplyResources(Me.txtSortKey, "txtSortKey")
-            Me.txtSortKey.EndFindValue = Nothing
-            Me.txtSortKey.FieldDescription = Nothing
-            Me.txtSortKey.FieldName = Nothing
-            Me.txtSortKey.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtSortKey.FindEnabled = False
-            Me.txtSortKey.ForeColor = System.Drawing.Color.Black
-            Me.txtSortKey.LinkedLabel = Nothing
-            Me.txtSortKey.MaximumValue = Nothing
-            Me.txtSortKey.MinimumValue = Nothing
-            Me.txtSortKey.Name = "txtSortKey"
-            Me.txtSortKey.OldValue = Nothing
-            Me.txtSortKey.OverrideMaxLength = 0
-            Me.txtSortKey.ReadOnly = True
-            Me.txtSortKey.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtSortKey.TabStop = false
-        Me.txtSortKey.Translatable = false
-        Me.txtSortKey.ValueIsMandatory = true
-        '
-        'DepartmentEntryTv
-        '
-        resources.ApplyResources(Me, "$this")
-        Me.Name = "DepartmentEntryTv"
-        Me.SplitContainer1.Panel1.ResumeLayout(false)
-        Me.SplitContainer1.Panel2.ResumeLayout(false)
-        CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).EndInit
-        Me.SplitContainer1.ResumeLayout(false)
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
-        Me.CFlowLayout1.ResumeLayout(false)
-        Me.CFlowLayout1.PerformLayout
-        Me.ResumeLayout(false)
-        Me.PerformLayout
+            resources.ApplyResources(Me, "$this")
+            Me.Name = "DepartmentEntryTv"
+            Me.SplitContainer1.Panel1.ResumeLayout(False)
+            Me.SplitContainer1.Panel2.ResumeLayout(False)
+            CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.SplitContainer1.ResumeLayout(False)
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.CFlowLayout1.ResumeLayout(False)
+            Me.CFlowLayout1.PerformLayout()
+            Me.ResumeLayout(False)
+            Me.PerformLayout()
 
-End Sub
+        End Sub
 
         Friend WithEvents CFlowLayout1 As CFlowLayout
         Friend WithEvents lblIdNo As CLabel
@@ -445,6 +412,5 @@ End Sub
         Friend WithEvents lblParentIdNo As CLabel
         Friend WithEvents cacParentIdNo As CtComboBox
         Friend WithEvents cacRevCostCenterIdNo As CtComboBox
-        Friend WithEvents txtSortKey As CTextBox
     End Class
 End Namespace

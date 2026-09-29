@@ -81,13 +81,6 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
         Public Property SortKey As String Implements IDepartmentView.SortKey
-            Get
-                Return txtSortKey.GetValue(Of String)
-            End Get
-            Set
-                txtSortKey.SetValue(Value)
-            End Set
-        End Property
 
 #End Region
 

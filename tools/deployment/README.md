@@ -172,7 +172,9 @@ Program:   %SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe
 Arguments: -NoLogo -NoProfile -NonInteractive -WindowStyle Hidden -ExecutionPolicy AllSigned -File "\\ibn-sina.local\NETLOGON\AATM\Install-AccountsClickOnce.ps1"
 ```
 
-Do not enable `Run in logged-on user's security context` on the preference item's Common tab; specify the user on the task's General tab. The bootstrap exits immediately when it finds the approved installed ClickOnce shortcut; otherwise, it verifies the live version, publisher certificate, manifest, and `setup.exe` before launching the installer.
+Do not enable `Run in logged-on user's security context` on the preference item's Common tab; specify the user on the task's General tab. The bootstrap verifies the live version, publisher certificate, manifest, and `setup.exe`, then compares the installed `Clinic Information System` version from the current user's uninstall registration with the live manifest. It exits only when the approved shortcut exists and that installed version matches the live version. If the shortcut exists but its version is behind or cannot be read, it launches `setup.exe` to repair or update the per-user ClickOnce installation. It refuses to launch an older live package over a newer installed version.
+
+After changing `Install-AccountsClickOnce.ps1`, re-sign it with the approved code-signing certificate before copying it to NETLOGON. The production logon task uses `AllSigned`, so an edited script with its old signature is not deployable.
 
 The production user GPO is `AATM - Accounts ClickOnce Install`. It is linked to `Domain-Users/Standard-Users` and `Domain-Users/Privileged-Users`, and security-filtered to `Domain Users`. Its scheduled-task preference source is `Gpo-AccountsClickOnce-ScheduledTasks.xml`. The task is named `AATM Accounts ClickOnce Bootstrap`, runs as the logged-on user with `InteractiveToken`, is hidden, and starts 30 seconds after logon. `Remove this item when it is no longer applied` is enabled so the task is removed when the user leaves policy scope. The previous RunOnce policy setting was removed after the task was verified on `MARKETING-PC` as `IBN-SINA\ali` and on `ARDEPT` as `IBN-SINA\yousef`.
 
@@ -192,8 +194,9 @@ On a non-production pilot workstation:
 2. Confirm the certificate exists in both `Local Computer\Trusted Root Certification Authorities` and `Local Computer\Trusted Publishers` with the expected thumbprint.
 3. Sign in as a targeted ordinary user and confirm the installer shortcut or logon task appears.
 4. Install Clinic Information System and verify its ClickOnce shortcut opens version `1.0.0.14` or later.
-5. Sign in as a second targeted user on the same workstation and confirm that user receives a separate ClickOnce installation.
-6. Confirm a non-targeted user or workstation does not receive the shortcut or task.
-7. Review the bootstrap log and the ClickOnce installation prompt before expanding or changing the GPO scope.
+5. On a pilot workstation with the prior release installed, sign in after publishing the new release and confirm the logon bootstrap updates it to the live version. Confirm the shortcut then opens that version.
+6. Sign in as a second targeted user on the same workstation and confirm that user receives a separate ClickOnce installation.
+7. Confirm a non-targeted user or workstation does not receive the shortcut or task.
+8. Review the bootstrap log and the ClickOnce installation prompt before expanding or changing the GPO scope.
 
 Removing the GPO stops future shortcut/task delivery but does not uninstall existing per-user ClickOnce installations. Uninstall those from each affected user's Windows Apps/Programs interface only when removal is explicitly required.

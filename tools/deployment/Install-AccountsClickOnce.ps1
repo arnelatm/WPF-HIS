@@ -89,6 +89,7 @@ try {
         [Environment]::GetFolderPath('Desktop'),
         [Environment]::GetFolderPath('Programs')
     ) | Select-Object -Unique
+    $approvedShortcut = $null
     foreach ($shortcutRoot in $shortcutRoots) {
         if (-not (Test-Path -LiteralPath $shortcutRoot -PathType Container)) {
             continue
@@ -104,13 +105,62 @@ try {
             $referenceText = Get-Content -LiteralPath $applicationReference.FullName -Raw -ErrorAction SilentlyContinue
             if ($referenceText -match [regex]::Escape($expectedPublicKeyToken) -and
                 $referenceText -match '(?i)Accounts\.application') {
-                Write-AccountsBootstrapLog "Approved signed ClickOnce application is already installed: $($applicationReference.FullName)"
-                exit 0
+                $approvedShortcut = $applicationReference.FullName
+                break
+            }
+        }
+        if ($null -ne $approvedShortcut) {
+            break
+        }
+    }
+
+    $installedVersion = $null
+    $uninstallRegistryPath = 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall'
+    if (Test-Path -LiteralPath $uninstallRegistryPath) {
+        foreach ($uninstallKey in Get-ChildItem -LiteralPath $uninstallRegistryPath -ErrorAction SilentlyContinue) {
+            $installedApplication = Get-ItemProperty -LiteralPath $uninstallKey.PSPath -ErrorAction SilentlyContinue
+            if (-not [string]::Equals(
+                    [string]$installedApplication.DisplayName,
+                    'Clinic Information System',
+                    [StringComparison]::OrdinalIgnoreCase) -or
+                -not [string]::Equals(
+                    [string]$installedApplication.Publisher,
+                    'AATM Software',
+                    [StringComparison]::OrdinalIgnoreCase)) {
+                continue
+            }
+
+            $candidateVersion = [version]::MinValue
+            if ([version]::TryParse([string]$installedApplication.DisplayVersion, [ref]$candidateVersion) -and
+                ($null -eq $installedVersion -or $candidateVersion -gt $installedVersion)) {
+                $installedVersion = $candidateVersion
             }
         }
     }
 
-    Write-AccountsBootstrapLog "Launching signed Accounts ClickOnce installation from $setupPath"
+    if ($null -ne $approvedShortcut -and $null -ne $installedVersion) {
+        if ($installedVersion -eq $liveVersion) {
+            Write-AccountsBootstrapLog "Approved ClickOnce installation is current at version ${installedVersion}: $approvedShortcut"
+            exit 0
+        }
+        if ($installedVersion -gt $liveVersion) {
+            Write-AccountsBootstrapLog (
+                "Installed version $installedVersion is newer than live version $liveVersion; refusing to downgrade. Shortcut=$approvedShortcut")
+            exit 0
+        }
+
+        Write-AccountsBootstrapLog (
+            "Installed version $installedVersion is behind live version $liveVersion; launching ClickOnce update from $setupPath")
+    }
+    elseif ($null -ne $approvedShortcut) {
+        Write-AccountsBootstrapLog (
+            "Found an approved shortcut but could not read its installed version; launching ClickOnce repair from $setupPath. Shortcut=$approvedShortcut")
+    }
+    else {
+        Write-AccountsBootstrapLog "No approved ClickOnce shortcut was found; launching installation from $setupPath"
+    }
+
+    Write-AccountsBootstrapLog "Launching signed Accounts ClickOnce installer from $setupPath"
     Start-Process -FilePath $setupPath
     exit 0
 }
@@ -122,8 +172,8 @@ catch {
 # SIG # Begin signature block
 # MIIHWgYJKoZIhvcNAQcCoIIHSzCCB0cCAQExDzANBglghkgBZQMEAgEFADB5Bgor
 # BgEEAYI3AgEEoGswaTA0BgorBgEEAYI3AgEeMCYCAwEAAAQQH8w7YFlLCE63JNLG
-# KX7zUQIBAAIBAAIBAAIBAAIBADAxMA0GCWCGSAFlAwQCAQUABCAq0vW7ssP3kcwD
-# TbOesVqp0Xtscywgo4nVZV9q2/q/vKCCBDgwggQ0MIICnKADAgECAhAt4bV0Br4H
+# KX7zUQIBAAIBAAIBAAIBAAIBADAxMA0GCWCGSAFlAwQCAQUABCDsQ7enoFbJpf4V
+# UJwL1qsiWWRuy+s0npytf3B0UQt6t6CCBDgwggQ0MIICnKADAgECAhAt4bV0Br4H
 # pEC7wNHH03P+MA0GCSqGSIb3DQEBCwUAMDIxDTALBgNVBAoMBEFBVE0xITAfBgNV
 # BAMMGEFBVE0gU29mdHdhcmUgUHVibGlzaGluZzAeFw0yNjA5MjQwOTAxMDRaFw0z
 # MTA5MjQwOTExMDNaMDIxDTALBgNVBAoMBEFBVE0xITAfBgNVBAMMGEFBVE0gU29m
@@ -150,14 +200,14 @@ catch {
 # U29mdHdhcmUgUHVibGlzaGluZwIQLeG1dAa+B6RAu8DRx9Nz/jANBglghkgBZQME
 # AgEFAKCBhDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3DQEJAzEM
 # BgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEVMC8GCSqG
-# SIb3DQEJBDEiBCDGOlYV3YPSz4qvMfXTcMxj2t75854vaGHtHu3lBG45DzANBgkq
-# hkiG9w0BAQEFAASCAYAGa5JzhXYavB7IHH4tquUsa7lh30KhQDGqaEndT/a4ybW3
-# oMtqBBPqe8GnP+d6taENxObcVWs7R3sks40d2tjF+tlggJWbKgsPkCd1IDob0K7a
-# mCfVAq+P7mu1qX5BEjzGIGA5PPZNjM1w9KaU03o+AHggl5q8n606t3Ezhdv83cC9
-# nNm6twfrdmvJRHaIlr4M5RrUyBmzPM4n4tryCFQsRJLUI9aUqb++1n71cwBga6tI
-# Kg3IaqnoJcYOdRjgReraXc/0VLvOUj+Iel26YxI6RjReyn4HN9/eAYz+pgCt3/gn
-# M0dtrT4iaJiiX7LHyRS8BV89p8qJFHApaXFzCeIvb0zc3t+jj4AlMJ09r/Qbgvrz
-# 0Twu+hbLaQsfEW+eBtn3RZ5CFd8PwQQ+KSfxCc0u8NP7XlKCvq2SWFpNozUtSQVz
-# re1vsl/AruQnSJo4OZ7HsmCGjW7hq/pwml5Tiz5GxJ3dvzsf9EhC3WW56ZQpTy/Q
-# L22GVmRscbgImzwzkHc=
+# SIb3DQEJBDEiBCAa/Ftd2R4VLwYkYsWDP0HZP1xNkAoH/6nP9T46vRkuMTANBgkq
+# hkiG9w0BAQEFAASCAYAdV5MT+vXfEaAs5GOKJJNbYZGQydeJN+FRIaXkmofgvX+Y
+# +6520HMpmGV1F5h8tZqbeLMWoLEgprV3BoXci9ii1JwcrQy8jB8CSzoMB1TvNSNF
+# JzuSy05q6E4BM2k4kEEeoLb2bnZLAj4pZjFXzRusoXVTnaqhDi9FFT3DN6llfmrw
+# Dg38yE9IJba04fg9Gk8etbNwspwFkVnFwLOQdQKGDWMQOhFvT1Nb5qtxkis4Kz9A
+# AugRITsi2hD+Ga3JSAFE2Rd0DI+udciTrHXYbRWeCmjLTcmYG1qaYdb0MvGIEMhE
+# c8soiNp6Y7k9YB+U4Cbwn24nIEluxT2Nsbldi5sT8w/+aSKHT5iWLbiQZpWfsecC
+# /NhJna3RFEnZaQy9vHB0Ou98mWFgQz7Sb8RkNr8GNMV+URpWSX8zcQ0SilmnrNav
+# lwOqtoOnSYN6WFtx2S0eX5ecUPGBtK3S3GlHvM+AYT5tjtA2/1IRMES0I9qaInB/
+# R1pFOsYGvlpXBCJYqRk=
 # SIG # End signature block

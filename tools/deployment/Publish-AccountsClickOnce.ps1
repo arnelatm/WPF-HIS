@@ -87,6 +87,7 @@ try {
         "/p:ManifestCertificateThumbprint=$CertificateThumbprint"
     )
     if ($RequiredUpdate) {
+        $arguments += '/p:UpdateRequired=true'
         $arguments += "/p:MinimumRequiredVersion=$Version"
     }
 
