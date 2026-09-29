@@ -2,6 +2,7 @@
 Imports System.Configuration
 Imports System.Drawing
 Imports System.Globalization
+Imports System.Data.SqlClient
 Imports System.Threading
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
@@ -65,6 +66,7 @@ Namespace PresentationLayer.Views.Forms
             ToolStripMenuItemMedicalXRayItems.Text = If(isArabic, "عناصر الأشعة", "XRay Items")
             ToolStripMenuItemMedicalLabItems.Text = If(isArabic, "عناصر الفحوصات المخبرية", "Laboratory Test Items")
             ToolStripMenuItemMedicalReportAssignments.Text = If(isArabic, "تخصيص التقارير للشركات", "Company Report Assignments")
+            UpdateApplicationStatus()
         End Sub
 
         Public IdleTimer As New System.Windows.Forms.Timer()
@@ -80,6 +82,8 @@ Namespace PresentationLayer.Views.Forms
         Private ReadOnly _generalAccountPositionMenuItem As New ToolStripMenuItem()
         Private ReadOnly _auditHistoryMenuItem As New ToolStripMenuItem()
         Private _auditHistoryForm As AuditHistoryForm
+        Private ReadOnly _applicationStatusStrip As New StatusStrip()
+        Private ReadOnly _applicationStatusLabel As New ToolStripStatusLabel()
 
         'Private ReadOnly _presenterObj
 
@@ -89,6 +93,7 @@ Namespace PresentationLayer.Views.Forms
         Public Sub New()
 
             InitializeComponent()
+            InitializeApplicationStatusStrip()
             InitializeOpenInvoiceCorrectionMenuItem()
             InitializeCashPositionMenuItem()
             InitializeCashFlowMenuItem()
@@ -106,6 +111,7 @@ Namespace PresentationLayer.Views.Forms
                 GlobalFunctions.SetCulture(GlobalVariables.AppCultureInfo.ToString())
                 GlobalVariables.AppCultureInfo = CultureInfo.CurrentCulture
                 GlobalVariables.AppCurrentCultureInfo = CultureInfo.CurrentCulture
+                UpdateApplicationStatus()
                 SetLanguageChangeButtons()
                 SetupMapper()
                 Presenter = New UserPresenter(Of UserModel)(Me)
@@ -147,6 +153,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 _logStatus = Value
+                UpdateApplicationStatus()
                 If _logStatus = LoginStatus.LoggedIn Then
                     Dim allControls As New List(Of Control)
                     allControls = FindControlRecursive(allControls, Me)
@@ -250,6 +257,40 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub AccountsReceivableEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemAccountsReceivableEntry.Click
             RunForm(Of ArJournalEntry, ArJournalPresenter(Of ArJournalModel))()
+        End Sub
+
+        Private Sub InitializeApplicationStatusStrip()
+            _applicationStatusLabel.Spring = True
+            _applicationStatusLabel.TextAlign = ContentAlignment.MiddleLeft
+            _applicationStatusStrip.Items.Add(_applicationStatusLabel)
+            _applicationStatusStrip.Dock = DockStyle.Bottom
+            Controls.Add(_applicationStatusStrip)
+            UpdateApplicationStatus()
+        End Sub
+
+        Private Sub UpdateApplicationStatus(Optional statusMessage As String = Nothing)
+            Dim serverName = "Unavailable"
+            Dim databaseName = "Unavailable"
+            Try
+                If Not String.IsNullOrWhiteSpace(GlobalVariables.DacConnectionString) Then
+                    Dim connectionSettings As New SqlConnectionStringBuilder(GlobalVariables.DacConnectionString)
+                    serverName = connectionSettings.DataSource
+                    databaseName = connectionSettings.InitialCatalog
+                    If String.IsNullOrWhiteSpace(serverName) Then serverName = "Unspecified"
+                    If String.IsNullOrWhiteSpace(databaseName) Then databaseName = "Unspecified"
+                End If
+            Catch
+                serverName = "Unavailable"
+                databaseName = "Unavailable"
+            End Try
+
+            Dim isArabic = CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft
+            Dim databaseText = If(isArabic, "الخادم.قاعدة البيانات: ", "Server.Database: ") & serverName & "." & databaseName
+            Dim defaultStatus = If(isArabic,
+                If(_logStatus = LoginStatus.LoggedIn, "جاهز", "تم تسجيل الخروج"),
+                If(_logStatus = LoginStatus.LoggedIn, "Ready", "Signed out"))
+            Dim currentStatus = If(statusMessage, defaultStatus)
+            _applicationStatusLabel.Text = currentStatus & " | " & databaseText
         End Sub
 
         Private Sub KizenCreditSalesImportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemKizenCreditSalesImport.Click

@@ -42,11 +42,9 @@ Public Module Main
     ''' </summary>
     ''' 
     Public IdleTimer As New System.Windows.Forms.Timer()
-    Public WaitTimer As New System.Windows.Forms.Timer()
     Const MilliSecondsTimeOut As Integer = 15_000_000 ' approximately 4 hours
 
     Public Sub Main()
-        AATM.Accounts.Security.ProtectedConnectionStringBootstrap.LoadIfPresent()
         Call Application.EnableVisualStyles()
         Application.SetCompatibleTextRenderingDefault(False)
         Dim limf As LeaveIdleMessageFilter = New LeaveIdleMessageFilter()
@@ -56,6 +54,7 @@ Public Module Main
         AddHandler IdleTimer.Tick, AddressOf TimeDone
         IdleTimer.Start()
         Try
+            AATM.Accounts.Security.ProtectedConnectionStringBootstrap.LoadIfPresent()
             Application.Run(MainForm)
         Catch ex As Exception
             ReportStartupFailure(ex)
@@ -67,41 +66,21 @@ Public Module Main
         If Not IdleTimer.Enabled Then IdleTimer.Start()
     End Sub
 
-    Dim logOff As Boolean = False
-
     Private Sub TimeDone(ByVal sender As Object, ByVal e As EventArgs)
-
         IdleTimer.[Stop]()
-        logOff = True
-        Dim limf2 As LeaveIdleMessageFilter = New LeaveIdleMessageFilter()
-        Application.AddMessageFilter(limf2)
-        AddHandler Application.Idle, New EventHandler(AddressOf Application_Idle)
-        WaitTimer.Interval = 120_000 ' two minutes
-        AddHandler WaitTimer.Tick, AddressOf WaitTimeDone
-        WaitTimer.Start()
-
-        Dim x As DialogResult = AATM.Libraries.MessagingLibrary.Messaging.Show(True, "AskAutoLogOff",
-                                           MessageBoxButtons.YesNo,
+        Dim prompt = "The session has been idle. Select Yes to sign out now, or No/Cancel to continue working." &
+                     Environment.NewLine &
+                     "انتهت مهلة الجلسة. اختر نعم لتسجيل الخروج أو لا/إلغاء لمتابعة العمل."
+        Dim x As DialogResult = AATM.Libraries.MessagingLibrary.Messaging.Show(prompt, "Idle Session / الجلسة غير نشطة",
+                                           MessageBoxButtons.YesNoCancel,
                                            MessageBoxIcon.Warning,
                                            MessageBoxDefaultButton.Button2)
 
         If x = DialogResult.Yes Then
-            logOff = True
+            MainForm.Close()
         Else
-            logOff = False
-            'WaitTimer.Stop()
+            IdleTimer.Start()
         End If
-        If logOff Then
-            MainForm.Close()
-        End If
-    End Sub
-
-
-    Private Sub WaitTimeDone(ByVal sender As Object, ByVal e As EventArgs)
-        If logOff Then
-            MainForm.Close()
-        End If
-        WaitTimer.[Stop]()
     End Sub
 
 End Module
@@ -137,7 +116,7 @@ Public Class LeaveIdleMessageFilter
     Public Function PreFilterMessage(ByRef m As Message) As Boolean Implements IMessageFilter.PreFilterMessage
         If m.Msg = WM_MOUSEMOVE Then Return False
         If Not IdleTimer.Enabled Then Return False
-        If Array.BinarySearch(Messages, m.Msg) >= 0 Then Main.IdleTimer.[Stop]()
+        If Array.IndexOf(Messages, m.Msg) >= 0 Then Main.IdleTimer.[Stop]()
         Return False
     End Function
 
