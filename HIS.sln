@@ -44,9 +44,10 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Common", "Common\Common.vbp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{0598D101-4147-476C-98FF-8C78D96B971E}"
 	ProjectSection(SolutionItems) = preProject
+		Documents\Accounts-User-Provisioning.md = Documents\Accounts-User-Provisioning.md
 		App.config = App.config
-		docs\ComboBox-Standardization-Plan.md = docs\ComboBox-Standardization-Plan.md
 		C-Sharp to VB Net Translation.txt = C-Sharp to VB Net Translation.txt
+		docs\ComboBox-Standardization-Plan.md = docs\ComboBox-Standardization-Plan.md
 		ComputeClientFormSizeEqually.txt = ComputeClientFormSizeEqually.txt
 		Create JournalPrefix.sql = Create JournalPrefix.sql
 		CreateBaseSecurityObject.sql = CreateBaseSecurityObject.sql
@@ -240,40 +241,22 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Inventory Report", "Invento
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Accounts", "Accounts", "{4799C1DD-2CC8-4C8D-BB72-4A583E379DFA}"
-	ProjectSection(SolutionItems) = preProject
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ISP", "ISP", "{76360FEE-5350-4B1E-80DC-344F996590C2}"
-	ProjectSection(SolutionItems) = preProject
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mine", "Mine", "{549000D0-E128-4B80-AEDA-C6AF4FCC2989}"
-	ProjectSection(SolutionItems) = preProject
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Posting", "Posting", "{97BC084A-8046-4C51-94FB-D9B89535C87C}"
-	ProjectSection(SolutionItems) = preProject
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RevenuePosting", "RevenuePosting", "{8C611AC8-B043-492B-AD3D-4D8B7EE334D7}"
-	ProjectSection(SolutionItems) = preProject
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SamplePrintingLab", "SamplePrintingLab", "{491C1CC5-C518-4078-A3EE-9A781C4D4989}"
-	ProjectSection(SolutionItems) = preProject
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Vat", "Vat", "{C90D3B3E-01F4-401D-8649-0563028668C7}"
-	ProjectSection(SolutionItems) = preProject
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Vat New", "Vat New", "{2CC5D6D4-CEA0-4991-8859-559BDF3FC1C4}"
-	ProjectSection(SolutionItems) = preProject
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Final", "Final", "{B721D695-0745-49EA-9FED-FF713FBE7792}"
-	ProjectSection(SolutionItems) = preProject
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ToDos", "ToDos", "{E4F0E91F-DE65-4117-B6A5-99AFD8AF8DC3}"
 	ProjectSection(SolutionItems) = preProject

@@ -40,7 +40,6 @@ Public Class Dac
         'Dim serverType As String = ConfigurationManager.AppSettings.Get("ServerType") ' SQL only
         'Dim database As String = ConfigurationManager.AppSettings.Get("DatabaseTranslator") ' SQL only
         'Dim uid As String = ConfigurationManager.AppSettings.Get("UIDTranslator") ' SQL, MDB
-        'Dim pwd As String = ConfigurationManager.AppSettings.Get("PWDTranslator") ' SQL, MDB
         'Dim fileName As String = ConfigurationManager.AppSettings.Get("FileNameTranslator") ' DBF, MDB
         'Dim computerName = System.Windows.Forms.SystemInformation.ComputerName
         'If server Is Nothing Then
@@ -58,7 +57,6 @@ Public Class Dac
             DacServerType = GlobalVariables.DacServerType
             DacDatabase = GlobalVariables.DacDatabase
             DacUid = GlobalVariables.DacUid
-            DacPassword = GlobalVariables.DacPassword
             DacFileName = GlobalVariables.DacFileName
         End If
 
@@ -380,12 +378,7 @@ Public Class Dac
     Function BuildConnString()
         Select Case DacAccessType
             Case "SQL"
-                If DacServerType = "server" Then
-                    BuildConnString = "Data Source=" + DacServer + ";Initial Catalog=" + DacDatabase + ";Persist Security Info=True; User ID=" +
-                                      DacUid + ";Password=" + DacPassword
-                Else
-                    BuildConnString = "Data Source=" + DacServer + ";Initial Catalog=" + DacDatabase + ";Integrated Security=True;Connection Timeout=5"
-                End If
+                BuildConnString = GlobalVariables.DacConnectionString
             Case Else
                 BuildConnString = ""
         End Select

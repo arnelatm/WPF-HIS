@@ -1,4 +1,4 @@
-﻿Imports System.Configuration
+Imports System.Configuration
 Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Libraries.GlobalFuncNSub
@@ -39,8 +39,6 @@ Namespace PresentationLayer.Views.Forms.Reports
 
         Private Sub GetIgroupReportProperties()
             Dim reportPaths As String = ConfigurationManager.AppSettings.Get($"ReportPathsIGroup")
-            Dim uid As String = ConfigurationManager.AppSettings.Get("UID")
-            Dim pwd As String = ConfigurationManager.AppSettings.Get("PWD")
             Dim server As String = ConfigurationManager.AppSettings.Get("ServerTranslator")
             Dim database As String = ConfigurationManager.AppSettings.Get("DATABASEIGroup")
 
@@ -48,7 +46,7 @@ Namespace PresentationLayer.Views.Forms.Reports
 
             If ReportDocument.DataSourceConnections.Count > 0 Then
 
-                ReportDocument.DataSourceConnections(0).SetConnection(server, database, uid, pwd)
+                ReportDocument.DataSourceConnections(0).SetConnection(server, database, True)
 
             End If
 

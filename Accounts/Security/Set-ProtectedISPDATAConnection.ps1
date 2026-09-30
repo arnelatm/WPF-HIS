@@ -1,5 +1,5 @@
 param(
-    [ValidateSet('ISPDATA', 'KIZEN', 'BIOTIME', 'IGROUPCLINIC')]
+    [ValidateSet('ISPDATA', 'KIZEN')]
     [string]$ConnectionName = 'ISPDATA',
     [string]$Path
 )

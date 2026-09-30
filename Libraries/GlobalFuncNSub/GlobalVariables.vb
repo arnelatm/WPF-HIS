@@ -9,7 +9,6 @@ Public Class GlobalVariables
     Private Shared _dacAccessType As String
     Private Shared _dacDatabase As String
     Private Shared _dacFileName As String
-    Private Shared _dacPassword As String
     Private Shared _dacConnectionString As String
     Private Shared _dacServer As String
     Private Shared _dacServerType As String
@@ -379,16 +378,6 @@ Public Class GlobalVariables
         End Get
         Set(value As String)
             _dacUid = value
-        End Set
-    End Property
-
-    Public Shared Property DacPassword As String
-        Get
-            _dacPassword = GetRequiredAppSetting("PWDTranslator") ' SQL, MDB
-            Return _dacPassword
-        End Get
-        Set(value As String)
-            _dacPassword = value
         End Set
     End Property
 

@@ -1,4 +1,4 @@
-﻿Imports System.Configuration
+Imports System.Configuration
 Imports System.Data.Common
 Imports System.Data.SqlClient
 Imports System.Runtime.CompilerServices
@@ -69,12 +69,6 @@ Namespace AdoNet
                 ElseIf String.Equals(conn, "KIZEN", StringComparison.OrdinalIgnoreCase) AndAlso
                        Not String.IsNullOrWhiteSpace(GetProtectedConnectionString("KIZEN")) Then
                     _connectionString = GetProtectedConnectionString("KIZEN")
-                ElseIf String.Equals(conn, "BIOTIME", StringComparison.OrdinalIgnoreCase) AndAlso
-                       Not String.IsNullOrWhiteSpace(GetProtectedConnectionString("BIOTIME")) Then
-                    _connectionString = GetProtectedConnectionString("BIOTIME")
-                ElseIf String.Equals(conn, "IGROUPCLINIC", StringComparison.OrdinalIgnoreCase) AndAlso
-                       Not String.IsNullOrWhiteSpace(GetProtectedConnectionString("IGROUPCLINIC")) Then
-                    _connectionString = GetProtectedConnectionString("IGROUPCLINIC")
                 Else
                     _connectionString = ConfigurationManager.ConnectionStrings(conn).ConnectionString
                 End If
@@ -102,12 +96,6 @@ Namespace AdoNet
                 ElseIf String.Equals(connectionName, "KIZEN", StringComparison.OrdinalIgnoreCase) AndAlso
                        Not String.IsNullOrWhiteSpace(GetProtectedConnectionString("KIZEN")) Then
                     _connectionString = GetProtectedConnectionString("KIZEN")
-                ElseIf String.Equals(connectionName, "BIOTIME", StringComparison.OrdinalIgnoreCase) AndAlso
-                       Not String.IsNullOrWhiteSpace(GetProtectedConnectionString("BIOTIME")) Then
-                    _connectionString = GetProtectedConnectionString("BIOTIME")
-                ElseIf String.Equals(connectionName, "IGROUPCLINIC", StringComparison.OrdinalIgnoreCase) AndAlso
-                       Not String.IsNullOrWhiteSpace(GetProtectedConnectionString("IGROUPCLINIC")) Then
-                    _connectionString = GetProtectedConnectionString("IGROUPCLINIC")
                 Else
                     _connectionString = ConfigurationManager.ConnectionStrings(connectionName).ConnectionString
                 End If

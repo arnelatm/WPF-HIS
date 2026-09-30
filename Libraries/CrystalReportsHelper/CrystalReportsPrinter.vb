@@ -1,4 +1,4 @@
-﻿Imports System.Configuration
+Imports System.Configuration
 Imports System.Drawing.Printing
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
@@ -63,7 +63,11 @@ Public Class CrystalReportsPrinter
         End Select
         _report.Load(_reportPath & pReportFileName)
         If _report.DataSourceConnections.Count > 0 Then
-            _report.DataSourceConnections(0).SetConnection(_server, _database, _uid, _pwd)
+            If String.Equals(DataBaseConnectionName, "IGROUPCLINIC", StringComparison.OrdinalIgnoreCase) Then
+                _report.DataSourceConnections(0).SetConnection(_server, _database, True)
+            Else
+                _report.DataSourceConnections(0).SetConnection(_server, _database, _uid, _pwd)
+            End If
         End If
     End Sub
 
@@ -77,8 +81,8 @@ Public Class CrystalReportsPrinter
 
     Private Sub UseIGroupConnection()
         _reportPath = ConfigurationManager.AppSettings.Get("ReportPathsIGroup")
-        _uid = ConfigurationManager.AppSettings.Get("UID")
-        _pwd = ConfigurationManager.AppSettings.Get("PWD")
+        _uid = Nothing
+        _pwd = Nothing
         _server = ConfigurationManager.AppSettings.Get("ServerTranslator")
         _database = ConfigurationManager.AppSettings.Get("DatabaseIGroup")
     End Sub

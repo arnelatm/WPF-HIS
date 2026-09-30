@@ -15,8 +15,6 @@ Namespace Security
         Private Const ProtectedPathSetting As String = "ProtectedISPDATAFile"
         Private Const DefaultProtectedPath As String = "%ProgramData%\AATM\Accounts\ISPDATA.connection"
         Private Const DefaultKizenPath As String = "%ProgramData%\AATM\Accounts\KIZEN.connection"
-        Private Const DefaultBioTimePath As String = "%ProgramData%\AATM\Accounts\BIOTIME.connection"
-        Private Const DefaultIGroupClinicPath As String = "%ProgramData%\AATM\Accounts\IGROUPCLINIC.connection"
 
         Private Sub New()
         End Sub
@@ -24,16 +22,11 @@ Namespace Security
         Public Shared Sub LoadIfPresent()
             LoadConnectionIfPresent("ISPDATA", ConfigurationManager.AppSettings(ProtectedPathSetting), DefaultProtectedPath)
             LoadConnectionIfPresent("KIZEN", Nothing, DefaultKizenPath)
-            LoadConnectionIfPresent("BIOTIME", Nothing, DefaultBioTimePath)
-            LoadConnectionIfPresent("IGROUPCLINIC", Nothing, DefaultIGroupClinicPath)
         End Sub
 
         Private Shared Sub LoadConnectionIfPresent(connectionName As String, configuredPath As String, defaultPath As String)
             Dim path = If(String.IsNullOrWhiteSpace(configuredPath), DefaultProtectedPath, configuredPath)
             If String.Equals(connectionName, "KIZEN", StringComparison.OrdinalIgnoreCase) AndAlso String.IsNullOrWhiteSpace(configuredPath) Then
-                path = defaultPath
-            End If
-            If String.Equals(connectionName, "BIOTIME", StringComparison.OrdinalIgnoreCase) AndAlso String.IsNullOrWhiteSpace(configuredPath) Then
                 path = defaultPath
             End If
             path = Environment.ExpandEnvironmentVariables(path)

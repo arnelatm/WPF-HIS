@@ -1,4 +1,4 @@
-﻿
+
 
 
 
@@ -59,10 +59,12 @@
  FROM  dbo.IBLabResult AS a 
  right outer JOIN kizenClinic.dbo.A1_Invoces b
  on a.Trans_key = b.Id
- left join kizenClinic.dbo.MedicalEmpExamination h
- ON h.PatID = b.CustID
  left JOIN kizenClinic.dbo.A1_OrderWorks c
  on b.Id = c.OrderId
+ left join kizenClinic.dbo.MedicalEmpExamination h
+ ON h.PatID = b.CustID
+ AND h.DateTime >= CONVERT(date, c.Date)
+ AND h.DateTime < DATEADD(day, 1, CONVERT(date, c.Date))
  left JOIN kizenClinic.dbo.JC_TOL_NumberingLog d
  on h.Id = d.SourceId
  left JOIN kizenClinic.dbo.Customers e
