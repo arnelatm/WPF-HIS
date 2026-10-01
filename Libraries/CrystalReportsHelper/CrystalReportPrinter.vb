@@ -14,11 +14,8 @@ Public Class CrystalReportPrinter
     Private _report As ReportDocument
 
     Private _reportPath As String
-    Private _uid As String
-    Private _pwd As String
     Private _server As String
     Private _database As String
-    Private _useIntegratedSecurity As Boolean
 
     Public Sub New()
     End Sub
@@ -115,45 +112,29 @@ Public Class CrystalReportPrinter
     End Sub
 
     Private Sub ApplyReportConnection()
-        If _useIntegratedSecurity Then
-            _report.DataSourceConnections(0).SetConnection(_server, _database, True)
-        Else
-            _report.DataSourceConnections(0).SetConnection(_server, _database, _uid, _pwd)
-        End If
+        _report.DataSourceConnections(0).SetConnection(_server, _database, True)
     End Sub
 
     Private Sub UseDefaultConnection()
-        _useIntegratedSecurity = False
         _reportPath = ConfigurationManager.AppSettings.Get("ReportPaths")
-        _uid = ConfigurationManager.AppSettings.Get("UID")
-        _pwd = ConfigurationManager.AppSettings.Get("PWD")
         _server = ConfigurationManager.AppSettings.Get("ServerTranslator")
         _database = ConfigurationManager.AppSettings.Get("Database")
     End Sub
 
     Private Sub UseIGroupConnection()
-        _useIntegratedSecurity = True
         _reportPath = ConfigurationManager.AppSettings.Get("ReportPathsIGroup")
-        _uid = Nothing
-        _pwd = Nothing
         _server = ConfigurationManager.AppSettings.Get("ServerTranslator")
         _database = ConfigurationManager.AppSettings.Get("DatabaseIGroup")
     End Sub
 
     Private Sub UseKizenConnection()
-        _useIntegratedSecurity = True
         _reportPath = ConfigurationManager.AppSettings.Get("ReportPathsKizen")
-        _uid = Nothing
-        _pwd = Nothing
         _server = ConfigurationManager.AppSettings.Get("ServerTranslatorKizen")
         _database = ConfigurationManager.AppSettings.Get("DatabaseKizen")
     End Sub
 
     Private Sub UseBioTimeConnection()
-        _useIntegratedSecurity = True
         _reportPath = ConfigurationManager.AppSettings.Get("ReportPathsBioTime")
-        _uid = Nothing
-        _pwd = Nothing
         _server = ConfigurationManager.AppSettings.Get("ServerTranslatorBioTime")
         _database = ConfigurationManager.AppSettings.Get("DatabaseBioTime")
     End Sub

@@ -55,6 +55,8 @@ Namespace Accounts.PresentationLayer.Views.Forms
             InitializeComponent()
 
             ' Add any initialization after the InitializeComponent() call.
+            lblContactIdNo.Visible = False
+            cboContactIdNo.Visible = False
             MainTableName = "Report"
             SortOrderKey = "IdNo"
             NoContact = True
@@ -66,6 +68,8 @@ Namespace Accounts.PresentationLayer.Views.Forms
             InitializeComponent()
 
             ' Add any initialization after the InitializeComponent() call.
+            lblContactIdNo.Visible = False
+            cboContactIdNo.Visible = False
             _reportModel = reportModel
             MainTableName = "Report"
             SortOrderKey = "IdNo"

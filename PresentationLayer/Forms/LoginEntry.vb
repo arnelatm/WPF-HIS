@@ -1,4 +1,6 @@
 ﻿Imports System.ComponentModel
+Imports System.Data.SqlClient
+Imports System.Drawing
 Imports System.Windows.Forms
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
@@ -11,7 +13,8 @@ Public Class LoginEntry
     Implements IUserView
 
     Private ReadOnly _cancelLogin As Boolean
-
+    Private ReadOnly _floCurrentHeight As Integer
+    Private ReadOnly _formHeight As Integer
     'Private ReadOnly _loginPresenter As MyPresenter
 
     Private _cancelClose As Boolean
@@ -26,6 +29,8 @@ Public Class LoginEntry
 
         ' This call is required by the designer.
         InitializeComponent()
+        _floCurrentHeight = floPasswordEntry.Height
+        _formHeight = Me.Height
         MainTableName = "User"
         If changePassword Then
             _changingPassword = True
@@ -47,10 +52,14 @@ Public Class LoginEntry
         If changePassword Then
             UserName = GlobalVariables.UserName
             Password = ""
+            floPasswordEntry.Height = _floCurrentHeight
+            Me.Height = _formHeight
         Else
             UserName = My.Settings.UserName
             Password = My.Settings.Oterkis
             BranchIdNo = My.Settings.BranchIdNo
+            floPasswordEntry.Height = _floCurrentHeight - 46
+            Me.Height = _formHeight - 46
         End If
 
         _rememberPassword = My.Settings.RememberPassword
@@ -70,24 +79,63 @@ Public Class LoginEntry
             textNewPassword.DisplayOnly = False
             textConfirmation.DisplayOnly = False
             btn_Login.Text = Messaging.TranslateCaption("Save")
-            textNewPassword.Text = "" 'Space(20)
-            textConfirmation.Text = "" 'Space(20)
-            textBoxPassword.Text = "" 'Space(20)
+            textNewPassword.Text = ""
+            textConfirmation.Text = ""
+            textBoxPassword.Text = ""
             textNewPassword.Editable = True
             textConfirmation.Editable = True
             txtUserName.DisplayOnly = True
             Refresh()
-            ' Presenter.EnableEdit()
-            Height = 448
-            floPasswordEntry.Height = 413
         Else
             txtUserName.DisplayOnly = False
-            Height = 402
-            floPasswordEntry.Height = 413 - 46
         End If
 
         ApplyPasswordModeVisibility()
+        ConfigureConnectionInfoLabel()
 
+    End Sub
+
+    Private Sub ConfigureConnectionInfoLabel()
+        lblInfoSystem.AutoEllipsis = True
+        lblInfoSystem.BackColor = Color.FromArgb(224, 245, 232)
+        lblInfoSystem.BorderStyle = BorderStyle.None
+        lblInfoSystem.Font = New Font("Microsoft Sans Serif", 8.25!, FontStyle.Regular)
+        lblInfoSystem.ForeColor = Color.FromArgb(32, 82, 62)
+        lblInfoSystem.Padding = New Padding(8, 0, 8, 0)
+        lblInfoSystem.TextAlign = ContentAlignment.MiddleCenter
+        'lblInfoSystem.Dock = DockStyle.Fill
+        lblInfoSystem.Height = 22
+        'TableLayoutPanel1.Controls.Add(lblInfoSystem, 0, 6)
+        'TableLayoutPanel1.SetColumnSpan(lblInfoSystem, 3)
+        'TableLayoutPanel1.RowStyles(6).SizeType = SizeType.Absolute
+        'TableLayoutPanel1.RowStyles(6).Height = 22
+        'TableLayoutPanel1.Height += 22
+        'floPasswordEntry.Height += 22
+        'Height += 22
+        UpdateConnectionInfoLabel()
+    End Sub
+
+
+    Private Sub UpdateConnectionInfoLabel()
+        Dim serverName = "Unavailable"
+        Dim databaseName = "Unavailable"
+        Try
+            If Not String.IsNullOrWhiteSpace(GlobalVariables.DacConnectionString) Then
+                Dim settings As New SqlConnectionStringBuilder(GlobalVariables.DacConnectionString)
+                serverName = If(String.IsNullOrWhiteSpace(settings.DataSource), "Unspecified", settings.DataSource)
+                databaseName = If(String.IsNullOrWhiteSpace(settings.InitialCatalog), "Unspecified", settings.InitialCatalog)
+            End If
+        Catch
+            serverName = "Unavailable"
+            databaseName = "Unavailable"
+        End Try
+
+        Dim entryAssembly = Reflection.Assembly.GetEntryAssembly()
+        Dim applicationVersion = If(entryAssembly Is Nothing,
+                                    Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString(),
+                                    entryAssembly.GetName().Version.ToString())
+        lblInfoSystem.Text = $"Server.Database: {serverName}.{databaseName} | Version {applicationVersion}"
+        'lblInfoSystem.ForeColor = Color.FromArgb(32, 82, 62)
     End Sub
 
     Private Sub ApplyPasswordModeVisibility()
@@ -245,27 +293,6 @@ Public Class LoginEntry
             Close()
         End If
     End Sub
-
-
-    'Private Sub Button1_Click(sender As Object, e As EventArgs)
-    '    If txtConfirmation.Visible Then
-    '        If txtConfirmation.Visible = txtNewPassword.Visible AndAlso txtConfirmation.Text.Length >= 6 Then
-    '            SaveNewPassword()
-    '            txtConfirmation.Visible = False
-    '            txtNewPassword.Visible = False
-    '            lblConfirmation.Visible = False
-    '            lblNewPassword.Visible = False
-    '            Height = 360
-    '        End If
-    '    Else
-    '        txtConfirmation.Visible = True
-    '        txtNewPassword.Visible = True
-    '        lblConfirmation.Visible = True
-    '        lblNewPassword.Visible = True
-    '        Height = 417
-    '    End If
-    '    _changingPassword = True
-    'End Sub
 
     Private Function SaveNewPassword()
         Return Presenter.SavePassword(textNewPassword.Text)

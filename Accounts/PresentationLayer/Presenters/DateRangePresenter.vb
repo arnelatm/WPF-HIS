@@ -21,6 +21,9 @@ Public Class DateRangePresenter(Of TM As New)
 
     Public Sub New(view As IDateRangeView, reportModel As ReportModel)
         MyBase.New(view)
+        ' DateRangeForm is the date-only prompt. Reports that need a contact
+        ' selector use ContactDateRangeForm and ContactDateRangePresenter.
+        view.NoContact = True
         TableName = "Report"
         WithTreeView = False
         Service = New CommonService("Report")

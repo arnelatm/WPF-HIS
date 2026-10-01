@@ -39,6 +39,7 @@ Partial Class LoginEntry
         Me.textBoxPassword = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.textConfirmation = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblConfirmation = New System.Windows.Forms.Label()
+        Me.lblInfoSystem = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btn_Login = New System.Windows.Forms.Button()
@@ -48,10 +49,6 @@ Partial Class LoginEntry
         Me.TableLayoutPanel1.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'TranslatorDAC
-        '
-        Me.TranslatorDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
         '
         'AppDataDAC
         '
@@ -70,6 +67,7 @@ Partial Class LoginEntry
         '
         'Label4
         '
+        Me.Label4.BackColor = System.Drawing.Color.Transparent
         Me.TableLayoutPanel1.SetColumnSpan(Me.Label4, 2)
         Me.Label4.DisplayOnly = True
         Me.Label4.EditingMode = False
@@ -156,6 +154,7 @@ Partial Class LoginEntry
         '
         'CLabel2
         '
+        Me.CLabel2.BackColor = System.Drawing.Color.Transparent
         Me.TableLayoutPanel1.SetColumnSpan(Me.CLabel2, 2)
         Me.CLabel2.DisplayOnly = True
         Me.CLabel2.EditingMode = False
@@ -163,7 +162,7 @@ Partial Class LoginEntry
         Me.CLabel2.Location = New System.Drawing.Point(16, 119)
         Me.CLabel2.Margin = New System.Windows.Forms.Padding(1)
         Me.CLabel2.Name = "CLabel2"
-        Me.CLabel2.Size = New System.Drawing.Size(249, 23)
+        Me.CLabel2.Size = New System.Drawing.Size(249, 22)
         Me.CLabel2.TabIndex = 24
         Me.CLabel2.Text = "Save User Name and Password"
         Me.CLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -190,7 +189,8 @@ Partial Class LoginEntry
         Me.floPasswordEntry.Controls.Add(Me.TableLayoutPanel1)
         Me.floPasswordEntry.Location = New System.Drawing.Point(12, 177)
         Me.floPasswordEntry.Name = "floPasswordEntry"
-        Me.floPasswordEntry.Size = New System.Drawing.Size(413, 153)
+        Me.floPasswordEntry.PreserveLanguageLayout = False
+        Me.floPasswordEntry.Size = New System.Drawing.Size(413, 181)
         Me.floPasswordEntry.TabIndex = 0
         '
         'TableLayoutPanel1
@@ -211,6 +211,7 @@ Partial Class LoginEntry
         Me.TableLayoutPanel1.Controls.Add(Me.Label4, 0, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.CLabel2, 1, 5)
         Me.TableLayoutPanel1.Controls.Add(Me.txtUserName, 2, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.lblInfoSystem, 0, 6)
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(3, 3)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 7
@@ -220,9 +221,9 @@ Partial Class LoginEntry
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(403, 145)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(403, 169)
         Me.TableLayoutPanel1.TabIndex = 33
         '
         'cboBranchIdNo
@@ -234,6 +235,7 @@ Partial Class LoginEntry
         Me.cboBranchIdNo.DataValue = Nothing
         Me.cboBranchIdNo.DefaultValue = Nothing
         Me.cboBranchIdNo.DisplayMember = "Name"
+        Me.cboBranchIdNo.Editable = True
         Me.cboBranchIdNo.EditingMode = True
         Me.cboBranchIdNo.EndFindValue = Nothing
         Me.cboBranchIdNo.FieldDescription = Nothing
@@ -260,6 +262,7 @@ Partial Class LoginEntry
         Me.cboBranchIdNo.PropertySelector = Nothing
         Me.cboBranchIdNo.Size = New System.Drawing.Size(277, 24)
         Me.cboBranchIdNo.SuggestBoxHeight = 200
+        Me.cboBranchIdNo.SuggestCharCount = 0
         Me.cboBranchIdNo.SuggestListOrderRule = Nothing
         Me.cboBranchIdNo.TabIndex = 36
         Me.cboBranchIdNo.TextToSearch = Nothing
@@ -271,6 +274,7 @@ Partial Class LoginEntry
         '
         'CLabel1
         '
+        Me.CLabel1.BackColor = System.Drawing.Color.Transparent
         Me.TableLayoutPanel1.SetColumnSpan(Me.CLabel1, 2)
         Me.CLabel1.DisplayOnly = True
         Me.CLabel1.EditingMode = False
@@ -396,6 +400,22 @@ Partial Class LoginEntry
         Me.lblConfirmation.Text = "Confirm Password:"
         Me.lblConfirmation.Visible = False
         '
+        'lblInfoSystem
+        '
+        Me.lblInfoSystem.BackColor = System.Drawing.Color.Transparent
+        Me.TableLayoutPanel1.SetColumnSpan(Me.lblInfoSystem, 3)
+        Me.lblInfoSystem.DisplayOnly = True
+        Me.lblInfoSystem.EditingMode = False
+        Me.lblInfoSystem.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+        Me.lblInfoSystem.Location = New System.Drawing.Point(1, 143)
+        Me.lblInfoSystem.Margin = New System.Windows.Forms.Padding(1)
+        Me.lblInfoSystem.Name = "lblInfoSystem"
+        Me.lblInfoSystem.Size = New System.Drawing.Size(401, 22)
+        Me.lblInfoSystem.TabIndex = 34
+        Me.lblInfoSystem.Text = "DatabaseNVersion"
+        Me.lblInfoSystem.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblInfoSystem.Translatable = True
+        '
         'TableLayoutPanel2
         '
         Me.TableLayoutPanel2.BackColor = System.Drawing.Color.Transparent
@@ -405,7 +425,7 @@ Partial Class LoginEntry
         Me.TableLayoutPanel2.Controls.Add(Me.btnCancel, 0, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.btn_Login, 1, 0)
         Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.TableLayoutPanel2.Location = New System.Drawing.Point(0, 337)
+        Me.TableLayoutPanel2.Location = New System.Drawing.Point(0, 367)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 1
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
@@ -453,10 +473,11 @@ Partial Class LoginEntry
         '
         'LoginEntry
         '
-        Me.ClientSize = New System.Drawing.Size(432, 374)
+        Me.ClientSize = New System.Drawing.Size(432, 404)
         Me.Controls.Add(Me.TableLayoutPanel2)
         Me.Controls.Add(Me.floPasswordEntry)
         Me.Controls.Add(Me.PictureBox1)
+        Me.DoubleBuffered = True
         Me.Name = "LoginEntry"
         Me.Text = "Login Form"
         CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
@@ -486,4 +507,5 @@ Partial Class LoginEntry
     Friend WithEvents btn_Login As Button
     Friend WithEvents CLabel1 As CLabel
     Friend WithEvents cboBranchIdNo As CtComboBox
+    Friend WithEvents lblInfoSystem As CLabel
 End Class

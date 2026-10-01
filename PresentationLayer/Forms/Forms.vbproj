@@ -55,6 +55,7 @@
     </StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="System.Deployment" />
     <Reference Include="System.Resources.Extensions">
       <HintPath>..\..\packages\System.Resources.Extensions.8.0.0\lib\net462\System.Resources.Extensions.dll</HintPath>
     </Reference>

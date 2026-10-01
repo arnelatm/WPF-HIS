@@ -28,8 +28,6 @@ Public Class CrReportViewer
 
     Protected Sub GetReportProperties(Optional cReportPath As String = "ReportPaths")
         Dim reportPaths As String = ConfigurationManager.AppSettings.Get(cReportPath)
-        Dim uid As String = ConfigurationManager.AppSettings.Get("UID")
-        Dim pwd As String = ConfigurationManager.AppSettings.Get("PWD")
         Dim server As String = ConfigurationManager.AppSettings.Get("ServerTranslator")
         Dim database As String = ConfigurationManager.AppSettings.Get("DATABASE")
 
@@ -51,7 +49,7 @@ Public Class CrReportViewer
 
         If ReportDocument.DataSourceConnections.Count > 0 Then
 
-            ReportDocument.DataSourceConnections(0).SetConnection(server, database, uid, pwd)
+            ReportDocument.DataSourceConnections(0).SetConnection(server, database, True)
 
         End If
 

@@ -12,8 +12,6 @@ Public Class CrystalReportsPrinter
     Private ReadOnly _report As New ReportDocument
 
     Private _reportPath As String
-    Private _uid As String
-    Private _pwd As String
     Private _server As String
     Private _database As String
 
@@ -63,26 +61,18 @@ Public Class CrystalReportsPrinter
         End Select
         _report.Load(_reportPath & pReportFileName)
         If _report.DataSourceConnections.Count > 0 Then
-            If String.Equals(DataBaseConnectionName, "IGROUPCLINIC", StringComparison.OrdinalIgnoreCase) Then
-                _report.DataSourceConnections(0).SetConnection(_server, _database, True)
-            Else
-                _report.DataSourceConnections(0).SetConnection(_server, _database, _uid, _pwd)
-            End If
+            _report.DataSourceConnections(0).SetConnection(_server, _database, True)
         End If
     End Sub
 
     Private Sub UseDefaultConnection()
         _reportPath = ConfigurationManager.AppSettings.Get("ReportPaths")
-        _uid = ConfigurationManager.AppSettings.Get("UID")
-        _pwd = ConfigurationManager.AppSettings.Get("PWD")
         _server = ConfigurationManager.AppSettings.Get("ServerTranslator")
         _database = ConfigurationManager.AppSettings.Get("Database")
     End Sub
 
     Private Sub UseIGroupConnection()
         _reportPath = ConfigurationManager.AppSettings.Get("ReportPathsIGroup")
-        _uid = Nothing
-        _pwd = Nothing
         _server = ConfigurationManager.AppSettings.Get("ServerTranslator")
         _database = ConfigurationManager.AppSettings.Get("DatabaseIGroup")
     End Sub
