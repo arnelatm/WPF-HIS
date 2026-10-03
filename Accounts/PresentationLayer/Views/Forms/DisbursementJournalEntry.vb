@@ -798,6 +798,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub UpdateTotalsDisplay()
+            RefreshJournalTotals()
             If OpenInvoiceMode Then
                 UpdateOiTotals()
             Else
@@ -815,14 +816,33 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Public Sub UpdateJiTotals()
-            If _jiFooter IsNot Nothing Then
-                _jiFooter.CalculateTotals()
-                txtTotalDebits.Text = Decimal.Parse(_jiFooter.Value("dgvDebit").ToString()).ToString("N" & GlobalVariables.DefaultCurrencyFormatInfo.CurrencyDecimalDigits, CultureInfo.CurrentCulture)
-                txtTotalCredits.Text = Decimal.Parse(_jiFooter.Value("dgvCredit").ToString()).ToString("N" & GlobalVariables.DefaultCurrencyFormatInfo.CurrencyDecimalDigits, CultureInfo.CurrentCulture)
-            End If
+            RefreshJournalTotals()
             Applied = Amount
             UnApplied = 0
             DataGridViewJournalItems.Refresh()
+        End Sub
+
+        Private Sub RefreshJournalTotals()
+            If _jiFooter Is Nothing Then Return
+            Dim debit As Decimal = 0D
+            Dim credit As Decimal = 0D
+            If JournalItems IsNot Nothing Then
+                For Each item In JournalItems
+                    debit += item.Debit
+                    credit += item.Credit
+                Next
+            End If
+            Dim format = "N" & GlobalVariables.DefaultCurrencyFormatInfo.CurrencyDecimalDigits
+            txtTotalDebits.Text = debit.ToString(format, CultureInfo.CurrentCulture)
+            txtTotalCredits.Text = credit.ToString(format, CultureInfo.CurrentCulture)
+            If _jiFooter IsNot Nothing Then
+                _jiFooter.SetText("dgvDebit", txtTotalDebits.Text)
+                _jiFooter.SetText("dgvCredit", txtTotalCredits.Text)
+            End If
+        End Sub
+
+        Private Sub JournalItems_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs) Handles DataGridViewJournalItems.DataBindingComplete
+            RefreshJournalTotals()
         End Sub
 
         Private Sub ConfigureJournalPrecision(grid As DataGridView)

@@ -621,6 +621,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub OnFirstLineUpdateNeeded()
+            If IsInvoiceOffset() Then Return
             If EditMode Or AddMode Then
                 If View.JournalItems IsNot Nothing Then
                     If View.JournalItems.Count() = 0 Then
@@ -747,7 +748,28 @@ Namespace PresentationLayer.Presenters
 
 
 
+        Private Function IsInvoiceOffset() As Boolean
+            Return View.PaymentType = "A" AndAlso View.DjOiItems IsNot Nothing AndAlso
+                ServiceLayer.OpenInvoiceCorrectionService.IsInvoiceOffset(View.Amount,
+                    View.DjOiItems.Select(Function(item) item.Amount),
+                    View.DjOiItems.Select(Function(item) item.DiscountTaken))
+        End Function
+
         Private Sub MakeJournalItem()
+            If IsInvoiceOffset() Then
+                Dim allocations = View.DjOiItems.Select(Function(item) New OpenInvoiceCorrectionItem With {
+                    .AccountIdNo = item.AccountIdNo, .ProposedAmount = item.Amount
+                })
+                View.JournalItems = GlobalVariables.Mapper.Map(Of List(Of JournalItemView))(
+                    ServiceLayer.OpenInvoiceCorrectionService.CreateApJournalItems(allocations))
+                For Each item In View.JournalItems
+                    item.JournalIdNo = View.IdNo
+                    item.PayeeType = "S"
+                    MakePayTypeAndSpecialAccount(item, item.AccountIdNo)
+                    SetJournalItemPayeeIfMissing(item, "S", View.PayeeIdNo, View.PayeeByCode)
+                Next
+                Return
+            End If
             If CodeToEnum(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
                 Dim aAccountIdNo As Int16() = {}
                 Dim aAmount() As Decimal = {}

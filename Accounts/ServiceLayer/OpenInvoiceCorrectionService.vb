@@ -189,7 +189,7 @@ Namespace ServiceLayer
                 .Approved = False,
                 .Cancelled = False,
                 .CsrOiItems = CreateArOiItems(items),
-                .JournalItems = CreateArJournalItems(items, contact.ControlAccountIdNo)
+                .JournalItems = CreateArJournalItems(items)
             }
             Return New CashReceiptJournalTransactionService().SaveNew(model)
         End Function
@@ -213,14 +213,14 @@ Namespace ServiceLayer
                 .Approved = False,
                 .Cancelled = False,
                 .DjOiItems = CreateApOiItems(items),
-                .JournalItems = CreateApJournalItems(items, contact.ControlAccountIdNo)
+                .JournalItems = CreateApJournalItems(items)
             }
             Return New CashDisbursementJournalTransactionService().SaveNew(model)
         End Function
 
         Private Shared Function CreateArOiItems(items As IEnumerable(Of OpenInvoiceCorrectionItem)) As List(Of CsrOiItemModel)
             Dim result As New List(Of CsrOiItemModel)
-            Dim sequence As Int16 = 0
+            Dim sequence As Int16 = 1
             For Each item As OpenInvoiceCorrectionItem In items.Where(Function(sourceItem) Math.Abs(sourceItem.ProposedAmount) > AmountTolerance)
                 result.Add(New CsrOiItemModel With {
                                .Amount = Decimal.Round(item.ProposedAmount, 2),
@@ -241,7 +241,7 @@ Namespace ServiceLayer
 
         Private Shared Function CreateApOiItems(items As IEnumerable(Of OpenInvoiceCorrectionItem)) As List(Of DjOiItemModel)
             Dim result As New List(Of DjOiItemModel)
-            Dim sequence As Int16 = 0
+            Dim sequence As Int16 = 1
             For Each item As OpenInvoiceCorrectionItem In items.Where(Function(sourceItem) Math.Abs(sourceItem.ProposedAmount) > AmountTolerance)
                 result.Add(New DjOiItemModel With {
                                .Amount = Decimal.Round(item.ProposedAmount, 2),
@@ -254,30 +254,42 @@ Namespace ServiceLayer
             Return result
         End Function
 
-        Private Shared Function CreateArJournalItems(items As IEnumerable(Of OpenInvoiceCorrectionItem), controlAccountIdNo As Int16?) As List(Of JournalItemModel)
-            Return CreateJournalItems(items, controlAccountIdNo, False)
+        Public Shared Function IsInvoiceOffset(amount As Decimal, allocations As IEnumerable(Of Decimal), discounts As IEnumerable(Of Decimal)) As Boolean
+            If amount <> 0D OrElse allocations Is Nothing OrElse discounts Is Nothing Then Return False
+            Dim amounts = allocations.ToList()
+            Return amounts.Any(Function(value) value > AmountTolerance) AndAlso
+                   amounts.Any(Function(value) value < -AmountTolerance) AndAlso
+                   Math.Abs(amounts.Sum()) <= AmountTolerance AndAlso
+                   Not discounts.Any(Function(value) value <> 0D)
         End Function
 
-        Private Shared Function CreateApJournalItems(items As IEnumerable(Of OpenInvoiceCorrectionItem), controlAccountIdNo As Int16?) As List(Of JournalItemModel)
-            Return CreateJournalItems(items, controlAccountIdNo, True)
+        Public Shared Function CreateArJournalItems(items As IEnumerable(Of OpenInvoiceCorrectionItem)) As List(Of JournalItemModel)
+            Return CreateJournalItems(items, False)
+        End Function
+
+        Public Shared Function CreateApJournalItems(items As IEnumerable(Of OpenInvoiceCorrectionItem)) As List(Of JournalItemModel)
+            Return CreateJournalItems(items, True)
         End Function
 
         Private Shared Function CreateJournalItems(items As IEnumerable(Of OpenInvoiceCorrectionItem),
-                                                   controlAccountIdNo As Int16?,
                                                    isAccountsPayable As Boolean) As List(Of JournalItemModel)
-            Dim totalsByAccount As New Dictionary(Of Int16, Decimal)
-            For Each item As OpenInvoiceCorrectionItem In items.Where(Function(sourceItem) Math.Abs(sourceItem.ProposedAmount) > AmountTolerance)
+            Dim selectedItems = items.Where(Function(item) Math.Abs(item.ProposedAmount) > AmountTolerance).ToList()
+            For Each item As OpenInvoiceCorrectionItem In selectedItems
                 If Not item.AccountIdNo.HasValue OrElse item.AccountIdNo.Value = 0 Then
                     Throw New InvalidOperationException("Every corrected open invoice must have an account.")
                 End If
-                If Not totalsByAccount.ContainsKey(item.AccountIdNo.Value) Then totalsByAccount.Add(item.AccountIdNo.Value, 0D)
-                totalsByAccount(item.AccountIdNo.Value) += item.ProposedAmount
             Next
 
+            'Keep the two sides of an offset even when they use the same account.
+            'Netting by account would erase the correction's debit and credit lines.
+            Dim totalsByAccount = selectedItems.GroupBy(Function(item) New With {
+                Key .AccountIdNo = item.AccountIdNo.Value,
+                Key .IsPositive = item.ProposedAmount > 0D
+            }).OrderBy(Function(group) group.Key.AccountIdNo).ThenBy(Function(group) group.Key.IsPositive)
             Dim journalItems As New List(Of JournalItemModel)
-            Dim sequence As Int16 = 0
-            For Each accountTotal In totalsByAccount.OrderBy(Function(pair) pair.Key)
-                Dim total = Decimal.Round(accountTotal.Value, 2)
+            Dim sequence As Int16 = 1
+            For Each accountTotal In totalsByAccount
+                Dim total = Decimal.Round(accountTotal.Sum(Function(item) item.ProposedAmount), 2)
                 If Math.Abs(total) <= AmountTolerance Then Continue For
 
                 Dim debit As Decimal = 0D
@@ -295,7 +307,7 @@ Namespace ServiceLayer
                 End If
 
                 journalItems.Add(New JournalItemModel With {
-                                     .AccountIdNo = accountTotal.Key,
+                                     .AccountIdNo = accountTotal.Key.AccountIdNo,
                                      .Debit = debit,
                                      .Credit = credit,
                                      .Notes = "Open invoice offset correction",
@@ -305,16 +317,7 @@ Namespace ServiceLayer
             Next
 
             If journalItems.Count = 0 Then
-                If Not controlAccountIdNo.HasValue OrElse controlAccountIdNo.Value = 0 Then
-                    Throw New InvalidOperationException("The selected contact has no AR/AP control account.")
-                End If
-                journalItems.Add(New JournalItemModel With {
-                                     .AccountIdNo = controlAccountIdNo.Value,
-                                     .Debit = 0D,
-                                     .Credit = 0D,
-                                     .Notes = "Open invoice offset correction",
-                                     .Sequence = 0
-                                 })
+                Throw New InvalidOperationException("The correction must contain non-zero invoice allocations.")
             End If
 
             Dim totalDebits = journalItems.Sum(Function(item) item.Debit)

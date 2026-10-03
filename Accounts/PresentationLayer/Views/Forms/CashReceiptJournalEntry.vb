@@ -386,6 +386,19 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Protected Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
+            'Older offset corrections can contain a single sequence-zero placeholder.
+            'Number their displayed lines from one without updating the saved record.
+            If PayorType = "A" AndAlso CsrOiItems IsNot Nothing AndAlso JournalItems IsNot Nothing AndAlso
+                ServiceLayer.OpenInvoiceCorrectionService.IsInvoiceOffset(Amount,
+                    CsrOiItems.Select(Function(item) item.Amount),
+                    CsrOiItems.Select(Function(item) item.DiscountTaken)) Then
+                Dim sequence As Int16 = 1
+                For Each item In JournalItems
+                    item.Sequence = sequence
+                    sequence += 1
+                Next
+                bsJournalItems.ResetBindings(False)
+            End If
             UpdateDisplay()
         End Sub
 
@@ -487,6 +500,7 @@ Namespace PresentationLayer.Views.Forms
                 dgvRevCostCenterIdNo.DisplayStyleForCurrentCellOnly = True
             End With
             FitGridsToJournalItemsPanel()
+            RefreshJournalTotals()
             ResumeLayout()
         End Sub
 
@@ -662,6 +676,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub UpdateTotals()
+            RefreshJournalTotals()
             If OpenInvoiceMode Then
                 UpdateOiTotals()
             Else
@@ -679,14 +694,34 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub UpdateJiTotals()
-            If _jiFooter IsNot Nothing Then
-                _jiFooter.CalculateTotals()
-                txtTotalDebits.Text = Decimal.Parse(_jiFooter.Value("dgvDebit").ToString()).ToString("N" & GlobalVariables.DefaultCurrencyFormatInfo.CurrencyDecimalDigits, CultureInfo.CurrentCulture)
-                txtTotalCredits.Text = Decimal.Parse(_jiFooter.Value("dgvCredit").ToString()).ToString("N" & GlobalVariables.DefaultCurrencyFormatInfo.CurrencyDecimalDigits, CultureInfo.CurrentCulture)
-            End If
+            RefreshJournalTotals()
             Applied = Amount
             UnApplied = 0
             DataGridViewJournalItems.Refresh()
+        End Sub
+
+        Private Sub RefreshJournalTotals()
+            If _jiFooter Is Nothing Then Return
+            'Use the current record, including when its grid is hidden or rebinding.
+            Dim debit As Decimal = 0D
+            Dim credit As Decimal = 0D
+            If JournalItems IsNot Nothing Then
+                For Each item In JournalItems
+                    debit += item.Debit
+                    credit += item.Credit
+                Next
+            End If
+            Dim format = "N" & GlobalVariables.DefaultCurrencyFormatInfo.CurrencyDecimalDigits
+            txtTotalDebits.Text = debit.ToString(format, CultureInfo.CurrentCulture)
+            txtTotalCredits.Text = credit.ToString(format, CultureInfo.CurrentCulture)
+            If _jiFooter IsNot Nothing Then
+                _jiFooter.SetText("dgvDebit", txtTotalDebits.Text)
+                _jiFooter.SetText("dgvCredit", txtTotalCredits.Text)
+            End If
+        End Sub
+
+        Private Sub JournalItems_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs) Handles DataGridViewJournalItems.DataBindingComplete
+            RefreshJournalTotals()
         End Sub
 
         Private Sub UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) Handles DataGridViewJournalItems.UserDeletingRow
@@ -731,13 +766,7 @@ Namespace PresentationLayer.Views.Forms
             ShowPayor()
             UpdateHeaderLookupDisplay()
             UpdateTotals()
-            If Presenter.EditMode Or Presenter.AddMode Then
-                If OpenInvoiceMode Then
-                    btnAutoApply.Visible = True
-                Else
-                    btnAutoApply.Visible = False
-                End If
-            End If
+            btnAutoApply.Visible = OpenInvoiceMode AndAlso (Presenter.EditMode OrElse Presenter.AddMode)
             ResumeLayout()
         End Sub
 
@@ -921,11 +950,6 @@ Namespace PresentationLayer.Views.Forms
             RaiseEvent AddCustomerOpenInvoices()
             bsCsrOiItems.ResetBindings(False)
             UpdateDisplay()
-            If OpenInvoiceMode Then
-                btnAutoApply.Visible = True
-            Else
-                btnAutoApply.Visible = False
-            End If
         End Sub
 
         Private Sub ShowJournalItemDataGrid()

@@ -211,6 +211,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub UpdateFirstLine()
+            If IsInvoiceOffset() Then Return
             If EditMode Or AddMode Then
                 If View.JournalItems.Count() = 0 Then
                     View.JournalItems = New List(Of JournalItemView) From {
@@ -358,7 +359,28 @@ Namespace PresentationLayer.Presenters
         '    UpdateVatAmount(View.JournalItems)
         'End Sub
 
+        Private Function IsInvoiceOffset() As Boolean
+            Return View.PayorType = "A" AndAlso View.CsrOiItems IsNot Nothing AndAlso
+                ServiceLayer.OpenInvoiceCorrectionService.IsInvoiceOffset(View.Amount,
+                    View.CsrOiItems.Select(Function(item) item.Amount),
+                    View.CsrOiItems.Select(Function(item) item.DiscountTaken))
+        End Function
+
         Private Sub MakeJournalItem()
+            If IsInvoiceOffset() Then
+                Dim allocations = View.CsrOiItems.Select(Function(item) New OpenInvoiceCorrectionItem With {
+                    .AccountIdNo = item.AccountIdNo, .ProposedAmount = item.Amount
+                })
+                View.JournalItems = GlobalVariables.Mapper.Map(Of List(Of JournalItemView))(
+                    ServiceLayer.OpenInvoiceCorrectionService.CreateArJournalItems(allocations))
+                For Each item In View.JournalItems
+                    item.JournalIdNo = View.IdNo
+                    item.PayeeType = "C"
+                    MakePayTypeAndSpecialAccount(item, item.AccountIdNo)
+                    SetJournalItemPayeeIfMissing(item, "C", View.PayorIdNo, View.PayeeByCode)
+                Next
+                Return
+            End If
             If CodeToEnum(Of ReceiptTypeSelection)(View.PayorType) = ReceiptTypeSelection.AccountsReceivable Then
                 Dim aAccountIdNo As Int16() = {}
                 Dim aAmount() As Decimal = {}
@@ -900,6 +922,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub OnFirstLineUpdateNeeded()
+            If IsInvoiceOffset() Then Return
             If EditMode Or AddMode Then
                 If View.JournalItems IsNot Nothing Then
                     If View.JournalItems.Count() = 0 Then
