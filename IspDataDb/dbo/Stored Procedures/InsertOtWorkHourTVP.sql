@@ -7,4 +7,3 @@ CREATE PROC [dbo].[InsertOtWorkHourTVP]
 AS 
 INSERT  INTO OtWorkHour (EmployeeIdNo,HoursWorked,OvertimeHoliday,OvertimeRegular,OvertimeSpecial,PayrollIdNo,[Sequence])
         SELECT  EmployeeIdNo,  HoursWorked, OvertimeHoliday, OvertimeRegular, OvertimeSpecial, PayrollIdNo, [Sequence] FROM @MParam
-SET IDENTITY_INSERT DBO.OtWorkHour ON;

@@ -147,6 +147,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If Not CancelSave Then
+                JournalItemSequencing.Normalize(View.JournalItems)
                 CustomObjToDataTables(View.JournalItems, DtInsertTable, DtUpdateTable, AddressOf FillData, AddressOf JournalItemFilter)
             End If
         End Sub

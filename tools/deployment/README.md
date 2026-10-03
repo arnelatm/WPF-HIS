@@ -26,7 +26,7 @@ The script:
 - temporarily activates the live profile;
 - publishes `Accounts.vbproj` in Release to a version-specific staging directory, such as `Publish\Accounts_1_0_0_16_staging`;
 - verifies the version, update provider, desktop shortcut, pre-start update check, payload, and live ISPDATA targets; and
-- restores the original `Accounts\app.config`, including when publishing fails.
+- restores the original `Accounts\app.config` and the local `bin\Release\Accounts.exe.config`, including when publishing fails. This prevents a subsequent Visual Studio Release run from retaining the production connection settings used during publishing.
 
 The publish script runs `Clean` before `Publish`. Keep this ordering: an incremental Release build can otherwise reuse an older `Accounts.exe.config.deploy` and package a test-server connection even while the live profile is temporarily active. The staged config is validated before the script succeeds. Review connection targets without printing credentials; they must point to `IBN-SERVER.ISPDATA`.
 
@@ -202,3 +202,31 @@ On a non-production pilot workstation:
 8. Review the bootstrap log and the ClickOnce installation prompt before expanding or changing the GPO scope.
 
 Removing the GPO stops future shortcut/task delivery but does not uninstall existing per-user ClickOnce installations. Uninstall those from each affected user's Windows Apps/Programs interface only when removal is explicitly required.
+
+## Redirect existing legacy network shortcuts to ClickOnce
+
+The standalone launcher replaces `\\IBN-SERVER\ISP\Accounts\Accounts.exe` at the same path. Existing shortcuts then activate `\\IBN-SERVER\ISP\COAccounts\Accounts.application`. ClickOnce handles installation, updates and publisher verification. Users without an installation may see its normal installation prompt. The launcher requires the application's .NET Framework runtime and does not run `setup.exe` or the old application.
+
+From the repository root, build and sign the launcher with the approved certificate:
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\tools\deployment\Build-AccountsLegacyLauncher.ps1
+```
+
+Preview the replacement without changing shared files:
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\tools\deployment\Deploy-AccountsLegacyLauncher.ps1 -WhatIf
+```
+
+Have all users close the legacy shared application. Then deploy and enter `REPLACE LEGACY ACCOUNTS` when prompted:
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\tools\deployment\Deploy-AccountsLegacyLauncher.ps1 -UsersClosedLegacyApp
+```
+
+Only the legacy EXE and its `.exe.config` are replaced. Reports and other supporting files remain available. The script verifies the signed candidate, checks the approved deployment manifest without launching the application, and backs up the old files to `Publish\LegacyLauncherBackups\<timestamp>`. The local backup permits access only to the deploying user, Administrators and SYSTEM; it must not be copied into a share accessible to ordinary users. Copy hashes and existing target file permissions are checked/preserved. A deployment failure triggers restoration of the original files.
+
+For a later manual rollback, close all instances and copy the backed-up `Accounts.exe` and `Accounts.exe.config` over the two network files. If no configuration file was present in the backup, remove only the launcher's new network `.exe.config`. Retain the saved `.acl.txt` files for restoring original permissions if they were subsequently changed. Do not expose or print the backed-up configuration because it may contain credentials.
+
+After deployment, click an existing legacy shortcut on a pilot workstation and confirm the ClickOnce login appears with the expected version and database target. This replacement does not stop already-running processes or copies of the old executable stored elsewhere. Keep users' write access disabled on both application shares so they cannot replace the launcher or published files.

@@ -41,6 +41,7 @@ Namespace DataLayer.AdoNet
             If data IsNot Nothing Then
                 Dim jiDao = New JournalItemDao({"ArJournalItem_View", "dbo.UpdateArJournalItemTVP", "dbo.InsertArJournalItemTVP"})
                 data.JournalItems = jiDao.GetRecordsWithGroupIdNo(idNo, "Sequence")
+                JournalItemSequencing.Normalize(data.JournalItems, data.AccountIdNo)
                 For Each item In data.JournalItems
                     data.TotalDebits += item.Debit
                     data.TotalCredits += item.Credit

@@ -216,6 +216,7 @@ Namespace PresentationLayer.Presenters
                     End If
                 Else
                     'View.TotalDebits = 0
+                    JournalItemSequencing.Normalize(View.JournalItems, View.AccountIdNo)
                     MakeJournalItem()
                     'View.TotalCredits = View.TotalDebits
                 End If
@@ -237,6 +238,7 @@ Namespace PresentationLayer.Presenters
                     Return
                 End If
 
+                JournalItemSequencing.Normalize(View.JournalItems, View.AccountIdNo)
                 CustomObjToDataTables(View.JournalItems, DtInsertTable, DtUpdateTable, AddressOf JournalItemFillData, AddressOf JournalItemFilter)
                 If lViewPaymentTypeEnum = PaymentTypeSelection.AccountsPayable Then
                     CustomObjToDataTables(View.DjOiItems, DtOiInsertTable, DtOiUpdateTable, AddressOf DjOiFillData, AddressOf DjOiItemFilter)

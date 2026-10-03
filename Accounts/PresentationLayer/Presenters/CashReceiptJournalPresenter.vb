@@ -144,6 +144,7 @@ Namespace PresentationLayer.Presenters
                         DtOiUpdateTable.Clear()
                     End If
                 Else
+                    JournalItemSequencing.Normalize(View.JournalItems, View.AccountIdNo)
                     MakeJournalItem()
                 End If
                 Dim defaultPayeeType As String = Nothing
@@ -162,6 +163,7 @@ Namespace PresentationLayer.Presenters
                     CancelSave = True
                     Return
                 End If
+                JournalItemSequencing.Normalize(View.JournalItems, View.AccountIdNo)
                 CustomObjToDataTables(View.JournalItems, DtInsertTable, DtUpdateTable, AddressOf JournalItemFillData,
                                  AddressOf JournalItemFilter)
                 If CodeToEnum(Of ReceiptTypeSelection)(View.PayorType) = ReceiptTypeSelection.AccountsReceivable Then

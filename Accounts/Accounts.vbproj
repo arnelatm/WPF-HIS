@@ -2183,6 +2183,7 @@
     <Compile Include="ServiceLayer\ActionService\AccountsModule.vb" />
     <Compile Include="ServiceLayer\ActionService\IServiceAccounts.vb" />
     <Compile Include="ServiceLayer\ActionService\AccountsService.vb" />
+    <Compile Include="JournalItemSequencing.vb" />
     <Compile Include="ServiceLayer\ApJournalTransactionService.vb" />
     <Compile Include="ServiceLayer\ArJournalTransactionService.vb" />
     <Compile Include="ServiceLayer\CashReceiptJournalTransactionService.vb" />

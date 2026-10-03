@@ -115,6 +115,7 @@ Namespace PresentationLayer.Presenters
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If Not CancelSave Then
                 MakeJournalItems()
+                JournalItemSequencing.Normalize(View.JournalItems, View.AccountIdNo)
                 If Not JournalItemPayeesAreValid(View.JournalItems, View.PayeeByCode) Then
                     CancelSave = True
                     Return

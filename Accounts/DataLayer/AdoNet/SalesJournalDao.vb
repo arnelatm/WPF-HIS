@@ -38,6 +38,7 @@ Namespace DataLayer.AdoNet
                 Dim ji = jiDao.GetRecordsWithGroupIdNo(data.IdNo, "sequence")
                 Dim sd = sdDao.GetRecordsWithGroupIdNo(data.IdNo, "sequence")
                 data.JournalItems = ji
+                JournalItemSequencing.Normalize(data.JournalItems, data.AccountIdNo)
                 data.SalesDeposits = sd
                 'For Each item In data.SalesDeposits
                 '    item.ComputedBankCharge = item.SaleAmount *

@@ -122,8 +122,12 @@ try {
 finally {
     if (Test-Path -LiteralPath $configurationBackup -PathType Leaf) {
         Copy-Item -LiteralPath $configurationBackup -Destination $activeConfiguration -Force
+        $releaseRuntimeConfiguration = Join-Path $accountsDirectory 'bin\Release\Accounts.exe.config'
+        if (Test-Path -LiteralPath $releaseRuntimeConfiguration -PathType Leaf) {
+            Copy-Item -LiteralPath $activeConfiguration -Destination $releaseRuntimeConfiguration -Force
+        }
         Remove-Item -LiteralPath $configurationBackup -Force
-        Write-Host 'Restored Accounts\app.config.'
+        Write-Host 'Restored Accounts\app.config and the local Release runtime configuration.'
     }
 }
 

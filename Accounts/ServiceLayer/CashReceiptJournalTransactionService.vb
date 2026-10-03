@@ -36,6 +36,7 @@ Namespace ServiceLayer
             If model Is Nothing OrElse Not model.TransactionDate.HasValue Then Throw New InvalidOperationException("Cash receipt transaction date is required.")
             Dim items = New DataTable()
             For Each c In {New With {.N="AccountIdNo",.T=GetType(Integer)},New With {.N="Credit",.T=GetType(Decimal)},New With {.N="Debit",.T=GetType(Decimal)},New With {.N="JournalIDNo",.T=GetType(Integer)},New With {.N="Notes",.T=GetType(String)},New With {.N="PayIdNo",.T=GetType(Integer)},New With {.N="RevCostCenterIdNo",.T=GetType(Integer)},New With {.N="Sequence",.T=GetType(Integer)}} : items.Columns.Add(c.N,c.T) : Next
+            JournalItemSequencing.Normalize(model.JournalItems, model.AccountIdNo)
             For Each i In If(model.JournalItems, New List(Of JournalItemModel))
                 If i.Debit = 0D AndAlso i.Credit = 0D Then Continue For
                 items.Rows.Add(If(i.AccountIdNo.HasValue,CObj(i.AccountIdNo.Value),0),i.Credit,i.Debit,0,If(i.Notes, String.Empty),i.PayIdNo,CObj(i.RevCostCenterIdNo),i.Sequence)
@@ -59,6 +60,7 @@ Namespace ServiceLayer
         Private Shared Function CreateItems(model As CashReceiptJournalModel) As DataTable
             Dim t As New DataTable()
             For Each c In {New With {.N="AccountIdNo",.T=GetType(Integer)},New With {.N="Credit",.T=GetType(Decimal)},New With {.N="Debit",.T=GetType(Decimal)},New With {.N="JournalIDNo",.T=GetType(Integer)},New With {.N="Notes",.T=GetType(String)},New With {.N="PayIdNo",.T=GetType(Integer)},New With {.N="RevCostCenterIdNo",.T=GetType(Integer)},New With {.N="Sequence",.T=GetType(Integer)}} : t.Columns.Add(c.N,c.T) : Next
+            JournalItemSequencing.Normalize(model.JournalItems, model.AccountIdNo)
             For Each i In If(model.JournalItems, New List(Of JournalItemModel))
                 If i.Debit = 0D AndAlso i.Credit = 0D Then Continue For
                 t.Rows.Add(If(i.AccountIdNo.HasValue,CObj(i.AccountIdNo.Value),0),i.Credit,i.Debit,0,If(i.Notes,String.Empty),i.PayIdNo,CObj(i.RevCostCenterIdNo),i.Sequence)

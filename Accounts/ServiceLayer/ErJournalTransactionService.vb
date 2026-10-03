@@ -9,6 +9,7 @@ Namespace ServiceLayer
             If m Is Nothing OrElse m.IdNo<=0 OrElse Not m.TransactionDate.HasValue OrElse Not m.EmployeeIdNo.HasValue Then Throw New InvalidOperationException("Employee reimbursement ID and employee are required.")
             Dim t As New DataTable()
             For Each n In {"AccountIdNo","Credit","Debit","JournalIDNo","Notes","PayIdNo","RevCostCenterIdNo","Sequence"}:t.Columns.Add(n,If(n="Notes",GetType(String),If(n="Credit" OrElse n="Debit",GetType(Decimal),GetType(Integer)))):Next
+            JournalItemSequencing.Normalize(m.JournalItems, m.AccountIdNo)
             For Each i In If(m.JournalItems,New List(Of JournalItemModel))
                 If i.Debit = 0D AndAlso i.Credit = 0D Then Continue For
                 t.Rows.Add(If(i.AccountIdNo.HasValue,CObj(i.AccountIdNo.Value),0),i.Credit,i.Debit,0,If(i.Notes,String.Empty),i.PayIdNo,CObj(i.RevCostCenterIdNo),i.Sequence)
@@ -28,6 +29,7 @@ Namespace ServiceLayer
             If m Is Nothing OrElse Not m.TransactionDate.HasValue OrElse Not m.EmployeeIdNo.HasValue Then Throw New InvalidOperationException("Employee and transaction date are required.")
             Dim t As New DataTable()
             For Each n In {"AccountIdNo","Credit","Debit","JournalIDNo","Notes","PayIdNo","RevCostCenterIdNo","Sequence"}:t.Columns.Add(n,If(n="Notes",GetType(String),If(n="Credit" OrElse n="Debit",GetType(Decimal),GetType(Integer)))):Next
+            JournalItemSequencing.Normalize(m.JournalItems, m.AccountIdNo)
             For Each i In If(m.JournalItems,New List(Of JournalItemModel))
                 If i.Debit = 0D AndAlso i.Credit = 0D Then Continue For
                 t.Rows.Add(If(i.AccountIdNo.HasValue,CObj(i.AccountIdNo.Value),0),i.Credit,i.Debit,0,If(i.Notes,String.Empty),i.PayIdNo,CObj(i.RevCostCenterIdNo),i.Sequence)

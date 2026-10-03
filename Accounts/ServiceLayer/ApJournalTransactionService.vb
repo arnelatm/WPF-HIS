@@ -29,6 +29,7 @@ Namespace ServiceLayer
             items.Columns.Add("RevCostCenterIdNo", GetType(Integer))
             items.Columns.Add("Sequence", GetType(Integer))
 
+            JournalItemSequencing.Normalize(model.JournalItems, model.AccountIdNo)
             For Each item In model.JournalItems
                 If item.Debit <> 0 OrElse item.Credit <> 0 Then
                     items.Rows.Add(If(item.AccountIdNo.HasValue, CObj(item.AccountIdNo.Value), CObj(0)), item.Credit, item.Debit, 0,
@@ -115,6 +116,7 @@ Namespace ServiceLayer
             items.Columns.Add("PayIdNo", GetType(Integer))
             items.Columns.Add("RevCostCenterIdNo", GetType(Integer))
             items.Columns.Add("Sequence", GetType(Integer))
+            JournalItemSequencing.Normalize(model.JournalItems, model.AccountIdNo)
             For Each item In model.JournalItems
                 If item.Debit = 0D AndAlso item.Credit = 0D Then Continue For
                 items.Rows.Add(If(item.AccountIdNo.HasValue, CObj(item.AccountIdNo.Value), CObj(0)), item.Credit, item.Debit, 0,

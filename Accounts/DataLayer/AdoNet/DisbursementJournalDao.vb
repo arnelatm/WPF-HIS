@@ -97,6 +97,7 @@ Namespace DataLayer.AdoNet
                 Dim ji = jiDao.GetRecordsWithGroupIdNo(data.IdNo, "sequence")
                 Dim oi = oiDao.GetRecordsWithGroupIdNo(data.IdNo, "sequence")
                 data.JournalItems = ji
+                JournalItemSequencing.Normalize(data.JournalItems, data.AccountIdNo)
                 data.DjOiItems = oi
             End If
             Return data
