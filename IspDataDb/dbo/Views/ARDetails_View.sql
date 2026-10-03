@@ -30,7 +30,7 @@ With FirstRecord(FirstRecordDate) as (Select LastPostingDate from LastPosting wh
       ,[RevCostCenterIdNo]
       ,a.[Notes] COLLATE Arabic_CI_AS AS 'Notes'
       ,a.[Posted]
-	  ,[CustomerIdNo]
+	  ,dbo.FnResolveOpenInvoiceParty(a.PayIdNo, 'C', b.CustomerIdNo) AS CustomerIdNo
 	  ,[InvoiceNo] COLLATE Arabic_CI_AS AS 'InvoiceNo'
 	  ,[TransactionDate]
       ,[ReferenceNo] COLLATE Arabic_CI_AS AS 'ReferenceNo'

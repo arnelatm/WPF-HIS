@@ -3,8 +3,11 @@ AS
 SELECT 'AP' AS JournalCode, i.IdNo, i.Sequence, i.JournalIdNo, i.AccountIdNo,
        i.Debit, i.Credit, i.RevCostCenterIdNo,
        CONVERT(NVARCHAR(300), i.Notes) COLLATE Arabic_CI_AS AS Notes, i.Posted,
-       COALESCE(linePayee.PayeeCSEIdNo,
-           CASE WHEN payeeType.ExpectedPayeeType = 'S' THEN h.SupplierIdNo END) AS PayeeCSEIdNo,
+       CASE WHEN a.SpecialAccount = 'AP'
+            THEN dbo.FnResolveOpenInvoiceParty(i.PayIdNo, 'S', h.SupplierIdNo)
+            ELSE COALESCE(linePayee.PayeeCSEIdNo,
+                CASE WHEN payeeType.ExpectedPayeeType = 'S' THEN h.SupplierIdNo END)
+       END AS PayeeCSEIdNo,
        CONVERT(NVARCHAR(50), h.InvoiceNo) COLLATE Arabic_CI_AS AS InvoiceNo,
        h.TransactionDate,
        CONVERT(NVARCHAR(50), h.ReferenceNo) COLLATE Arabic_CI_AS AS ReferenceNo,
@@ -14,7 +17,9 @@ SELECT 'AP' AS JournalCode, i.IdNo, i.Sequence, i.JournalIdNo, i.AccountIdNo,
 FROM dbo.ApJournalItem AS i
 INNER JOIN dbo.ApJournal AS h ON h.IdNo = i.JournalIdNo
 INNER JOIN dbo.Account AS a ON a.IdNo = i.AccountIdNo
-CROSS APPLY (VALUES (CASE WHEN a.PayeeType IN ('C', 'S', 'E') THEN a.PayeeType
+CROSS APPLY (VALUES (CASE WHEN a.SpecialAccount = 'AP' THEN 'S'
+                          WHEN a.SpecialAccount = 'AR' THEN 'C'
+                          WHEN a.PayeeType IN ('C', 'S', 'E') THEN a.PayeeType
                           WHEN a.SpecialAccount IN ('AP', 'AS', 'PD') THEN 'S'
                           WHEN a.SpecialAccount IN ('AR', 'CA', 'SD') THEN 'C'
                           WHEN a.SpecialAccount = 'EL' THEN 'E' END)) AS payeeType(ExpectedPayeeType)
@@ -38,8 +43,11 @@ UNION ALL
 SELECT 'AR', i.IdNo, i.Sequence, i.JournalIdNo, i.AccountIdNo,
        i.Debit, i.Credit, i.RevCostCenterIdNo,
        CONVERT(NVARCHAR(300), i.Notes) COLLATE Arabic_CI_AS, i.Posted,
-       COALESCE(linePayee.PayeeCSEIdNo,
-           CASE WHEN payeeType.ExpectedPayeeType = 'C' THEN h.CustomerIdNo END),
+       CASE WHEN a.SpecialAccount = 'AR'
+            THEN dbo.FnResolveOpenInvoiceParty(i.PayIdNo, 'C', h.CustomerIdNo)
+            ELSE COALESCE(linePayee.PayeeCSEIdNo,
+                CASE WHEN payeeType.ExpectedPayeeType = 'C' THEN h.CustomerIdNo END)
+       END,
        CONVERT(NVARCHAR(50), h.InvoiceNo) COLLATE Arabic_CI_AS,
        h.TransactionDate,
        CONVERT(NVARCHAR(50), h.ReferenceNo) COLLATE Arabic_CI_AS,
@@ -49,7 +57,9 @@ SELECT 'AR', i.IdNo, i.Sequence, i.JournalIdNo, i.AccountIdNo,
 FROM dbo.ArJournalItem AS i
 INNER JOIN dbo.ArJournal AS h ON h.IdNo = i.JournalIdNo
 INNER JOIN dbo.Account AS a ON a.IdNo = i.AccountIdNo
-CROSS APPLY (VALUES (CASE WHEN a.PayeeType IN ('C', 'S', 'E') THEN a.PayeeType
+CROSS APPLY (VALUES (CASE WHEN a.SpecialAccount = 'AP' THEN 'S'
+                          WHEN a.SpecialAccount = 'AR' THEN 'C'
+                          WHEN a.PayeeType IN ('C', 'S', 'E') THEN a.PayeeType
                           WHEN a.SpecialAccount IN ('AP', 'AS', 'PD') THEN 'S'
                           WHEN a.SpecialAccount IN ('AR', 'CA', 'SD') THEN 'C'
                           WHEN a.SpecialAccount = 'EL' THEN 'E' END)) AS payeeType(ExpectedPayeeType)

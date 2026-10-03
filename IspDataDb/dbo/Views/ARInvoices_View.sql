@@ -23,7 +23,7 @@ CREATE VIEW [dbo].[ARInvoices_View]
       ,a.[JournalIdNo]
       ,a.[AccountIdNo]
       ,a.[Debit]-a.[Credit] as 'Amount'
-	  ,b.[CustomerIdNo]
+	  ,dbo.FnResolveOpenInvoiceParty(a.PayIdNo, 'C', b.CustomerIdNo) AS CustomerIdNo
 	  ,b.[InvoiceNo] COLLATE Arabic_CI_AS AS 'InvoiceNo'
 	  ,b.[TransactionDate]
       ,b.[ReferenceNo] COLLATE Arabic_CI_AS AS 'ReferenceNo'

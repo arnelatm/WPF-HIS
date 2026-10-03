@@ -15,6 +15,15 @@ BEGIN
         THROW 51101, 'AR detail lines contain invalid debit/credit values.', 1;
     IF @TransactionDate >= '20260101' AND ABS((SELECT COALESCE(SUM(Debit),0) FROM @Items)-(SELECT COALESCE(SUM(Credit),0) FROM @Items)) > 0.00005
         THROW 51102, 'AR journal debits and credits are not balanced.', 1;
+    IF EXISTS (
+        SELECT 1 FROM @Items i
+        INNER JOIN dbo.Account a ON a.IdNo = i.AccountIdNo
+        WHERE a.SpecialAccount = 'AR'
+          AND (i.Debit <> 0 OR i.Credit <> 0)
+          AND (ISNULL(i.PayIdNo, 0) <= 0
+            OR dbo.FnResolveOpenInvoiceParty(i.PayIdNo, 'C', @CustomerIdNo) IS NULL))
+        THROW 51104, 'AR detail lines require a valid customer contact.', 1;
+
     BEGIN TRANSACTION;
     BEGIN TRY
         INSERT dbo.ArJournal(CustomerIdNo,TransactionDate,ReferenceNo,TransactionType,Amount,AccountIdNo,DueDate,SettlementDueDate,SettlementDiscount,InvoiceNo,InvoiceDate,Notes,VatAmount,Approved,Posted,Cancelled)

@@ -51,6 +51,15 @@ BEGIN
            (SELECT COALESCE(SUM(Credit),0) FROM @Items)) > 0.00005
         THROW 51024, 'AP journal debits and credits are not balanced.', 1;
 
+    IF EXISTS (
+        SELECT 1 FROM @Items i
+        INNER JOIN dbo.Account a ON a.IdNo = i.AccountIdNo
+        WHERE a.SpecialAccount = 'AP'
+          AND (i.Debit <> 0 OR i.Credit <> 0)
+          AND (ISNULL(i.PayIdNo, 0) <= 0
+            OR dbo.FnResolveOpenInvoiceParty(i.PayIdNo, 'S', @SupplierIdNo) IS NULL))
+        THROW 51027, 'AP detail lines require a valid supplier contact.', 1;
+
     BEGIN TRANSACTION;
     BEGIN TRY
         UPDATE dbo.ApJournal SET SupplierIdNo=@SupplierIdNo, TransactionDate=@TransactionDate,
