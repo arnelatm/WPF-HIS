@@ -37,6 +37,7 @@ Namespace PresentationLayer.Views.Forms
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
+            btnAutoApply.Visible = False
             ' Add any initialization after the InitializeComponent() call.
             _txtAccountIdNoDisplay = CreateLookupDisplayTextBox(cboAccountIdNo)
             _txtDiscountAccountIdNoDisplay = CreateLookupDisplayTextBox(cboDiscountAccountIdNo)
@@ -979,9 +980,17 @@ Namespace PresentationLayer.Views.Forms
             UpdateOiTotals()
         End Sub
 
-        'Private Sub CashReceiptJournalEntry_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
-        '    SetPayorDataSource(PayorType)
-        'End Sub
+        Protected Overrides Sub OnShown(e As EventArgs)
+            MyBase.OnShown(e)
+            btnAutoApply.Visible = OpenInvoiceMode AndAlso (Presenter.EditMode OrElse Presenter.AddMode)
+        End Sub
+
+        Private Sub BtnAutoApply_VisibleChanged(sender As Object, e As EventArgs) Handles btnAutoApply.VisibleChanged
+            If FormShown AndAlso btnAutoApply.Visible AndAlso
+                (Not OpenInvoiceMode OrElse Not (Presenter.EditMode OrElse Presenter.AddMode)) Then
+                btnAutoApply.Visible = False
+            End If
+        End Sub
 
         Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs)
             Debugger.Break()
