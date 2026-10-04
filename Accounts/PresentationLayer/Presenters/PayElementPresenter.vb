@@ -40,8 +40,8 @@ Namespace PresentationLayer.Presenters
             CreateEnumDataSource(Of PayElementTypeSelection)("PayElementType")
             MakeControlDataSources({New Object() {"PayElement", "BasePaymentIdNo", Nothing, Nothing},
                                     New Object() {"Account", "AccountIdNo", Nothing, "DetailAccount=1", "AccountName"}})
-            CreateEnumData(Of FactorTypeSelection)("FactorTypeByCode")
-            CreateEnumData(Of CalculationTypeSelection)("CalculationTypeByCode")
+            CreateEnumData(Of FactorTypeSelection)(View.FactorTypeByCode)
+            CreateEnumData(Of CalculationTypeSelection)(View.CalculationTypeByCode)
             MakeVarDataSources({New Object() {"PayElementGroup", "EarnReportGroupsByCode", Nothing, "PayElementKind = '" & GlobalFunctions.EnumToCode(PayElementKindSelection.Earning) & "'"},
                                 New Object() {"PayElementGroup", "DedReportGroupsByCode", Nothing, "PayElementKind = '" & GlobalFunctions.EnumToCode(PayElementKindSelection.Deduction) & "'"},
                                 New Object() {"PayElement", "PayElementsByCode", Nothing, Nothing},
@@ -78,6 +78,33 @@ Namespace PresentationLayer.Presenters
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If Not CancelSave Then
+                If View.Summary AndAlso View.PayElementItems IsNot Nothing Then
+                    For Each item In View.PayElementItems
+                        If item.PayElementIdNo = 0 Then
+                            If item.FactorValue <> 0 OrElse Not String.IsNullOrWhiteSpace(item.FactorType) Then
+                                Messaging.ShowPmMessage(True, "MsgRequiredField", {"fieldName", Messaging.TranslateCaption("Pay Element")})
+                                CancelSave = True
+                                Return
+                            End If
+                            Continue For
+                        End If
+                        If item.PayElementIdNo = View.IdNo Then
+                            MessageBox.Show(Messaging.TranslateCaption("A summary cannot include itself."), Messaging.TranslateCaption("Summary Detail"), MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                            CancelSave = True
+                            Return
+                        End If
+                        If item.FactorValue = 0 Then
+                            Messaging.ShowPmMessage(True, "MsgRequiredField", {"fieldName", Messaging.TranslateCaption("Factor Value")})
+                            CancelSave = True
+                            Return
+                        End If
+                        If String.IsNullOrWhiteSpace(item.FactorType) Then
+                            Messaging.ShowPmMessage(True, "MsgRequiredField", {"fieldName", Messaging.TranslateCaption("Factor Type")})
+                            CancelSave = True
+                            Return
+                        End If
+                    Next
+                End If
                 CustomObjToDataTables(View.PayElementAccounts, DtInsertTable, DtUpdateTable, AddressOf FillData, AddressOf PayElementAccountFilter)
                 CustomObjToDataTables(View.PayElementItems, DtEarnInsertTable, DtEarnUpdateTable, AddressOf FillEsData, AddressOf EarnSummaryFilter)
             End If
