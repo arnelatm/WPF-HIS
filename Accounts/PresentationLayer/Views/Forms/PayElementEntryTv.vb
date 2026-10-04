@@ -344,6 +344,8 @@ Namespace PresentationLayer.Views.Forms
             Else
                 cboReportGroupIdNo.DataSource = EarnReportGroupsByCode
             End If
+            cboReportGroupIdNo.DisplayMember = "Name"
+            cboReportGroupIdNo.ValueMember = "IdNo"
         End Sub
 
         Private Sub BindPayElementAccounts()
