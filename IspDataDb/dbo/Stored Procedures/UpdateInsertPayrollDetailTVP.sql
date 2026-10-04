@@ -21,7 +21,6 @@ on a.IdNo = b.IdNo
 INSERT  INTO [DBO].PayrollDetail (BankTransfer, EmployeeIdNo, PayrollIdNo )
         SELECT  BankTransfer, EmployeeIdNo, PayrollIdNo
         FROM    @MParam2
-SET IDENTITY_INSERT DBO.PayrollDetail ON;
 
 END
 

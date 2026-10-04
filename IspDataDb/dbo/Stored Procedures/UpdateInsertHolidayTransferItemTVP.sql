@@ -24,6 +24,5 @@ WHERE EXISTS (SELECT a.EmployeeIdNo, a.HolidayTransferIdNo
 INSERT  INTO [DBO].HolidayTransferItem (EmployeeIdNo, HolidayTransferIdNo )
         SELECT  EmployeeIdNo, HolidayTransferIdNo
         FROM    @MParam2
-SET IDENTITY_INSERT DBO.HolidayTransferItem ON;
 
 END

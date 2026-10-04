@@ -34,5 +34,4 @@ INSERT  INTO PayrollPayElement ( Amount, [Generated], PayElementIdNo, PayrollDet
         SELECT  Amount, [Generated], PayElementIdNo, PayrollDetailIdNo, RecurringPayElementIdNo
         FROM    @MParam2
 
-SET IDENTITY_INSERT DBO.PayrollPayElement ON;
 END
