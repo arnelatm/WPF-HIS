@@ -1,0 +1,4 @@
+﻿GRANT EXECUTE
+    ON SCHEMA::[dbo] TO [IBN-SINA\AATM-Accounts-Users];
+GO
+GRANT EXECUTE TO [AATM_Accounts_Prod];

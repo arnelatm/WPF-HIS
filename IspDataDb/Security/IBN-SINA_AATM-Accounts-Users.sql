@@ -1,0 +1,1 @@
+﻿CREATE USER [IBN-SINA\AATM-Accounts-Users] FOR LOGIN [IBN-SINA\AATM-Accounts-Users];

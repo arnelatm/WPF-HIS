@@ -122,8 +122,8 @@
     <Build Include="dbo\Triggers\Employee_Audit.sql" />
     <Build Include="dbo\Triggers\EmployeePayElement_Audit.sql" />
     <Build Include="dbo\Triggers\EmployeePhone_Audit.sql" />
-		<Build Include="dbo\Triggers\EmployeeDocument_Audit.sql" />
-		<Build Include="dbo\Triggers\EmployeeLeave_Audit.sql" />
+    <Build Include="dbo\Triggers\EmployeeDocument_Audit.sql" />
+    <Build Include="dbo\Triggers\EmployeeLeave_Audit.sql" />
     <Build Include="dbo\Tables\CashReceiptJournalItem.sql" />
     <Build Include="dbo\Tables\xxxLoginxxx.sql" />
     <Build Include="dbo\Tables\Account.sql" />
@@ -802,6 +802,14 @@
     <Build Include="Security\db_ddladmin for Arnel.sql" />
     <Build Include="Security\db_owner for Arnel.sql" />
     <Build Include="Security\db_securityadmin for Arnel.sql" />
+    <Build Include="Security\iGroupAdmin_1.sql" />
+    <Build Include="Security\IBN-SINA_AATM-Accounts-Users.sql" />
+    <Build Include="Security\AATM_Accounts_Prod.sql" />
+    <Build Include="Security\RoleMemberships_1.sql" />
+    <Build Include="Security\RoleMemberships_2.sql" />
+    <Build Include="Security\RoleMemberships_3.sql" />
+    <Build Include="Security\RoleMemberships_4.sql" />
+    <Build Include="Security\Permissions.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="PostDeployment.sql" />
@@ -812,11 +820,25 @@
       <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
       <DatabaseVariableLiteralValue>ISPDATA</DatabaseVariableLiteralValue>
     </ArtifactReference>
+    <ArtifactReference Include="$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\120\SqlSchemas\master.dacpac">
+      <HintPath>$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\120\SqlSchemas\master.dacpac</HintPath>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+      <DatabaseVariableLiteralValue>master</DatabaseVariableLiteralValue>
+    </ArtifactReference>
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Snapshots\IspDataDb_20201008_12-47-31.dacpac" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IspDataServerReferences\IspDataServerReferences.sqlproj">
+      <Name>IspDataServerReferences</Name>
+      <Project>{17d4dfb8-26e5-426e-8b44-2b20bbe7d3d3}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+      <DatabaseVariableLiteralValue>master</DatabaseVariableLiteralValue>
+    </ProjectReference>
   </ItemGroup>
 </Project>
