@@ -218,6 +218,7 @@ Namespace PresentationLayer.Presenters
                     'View.TotalDebits = 0
                     JournalItemSequencing.Normalize(View.JournalItems, View.AccountIdNo)
                     MakeJournalItem()
+                    If CancelSave Then Return
                     'View.TotalCredits = View.TotalDebits
                 End If
 
@@ -771,6 +772,8 @@ Namespace PresentationLayer.Presenters
                 Return
             End If
             If CodeToEnum(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
+                Dim paymentNote = LocalizedPostingNote("Payment", "سداد")
+                Dim discountNote = LocalizedPostingNote("Discount Taken", "خصم مكتسب")
                 Dim aAccountIdNo As Int16() = {}
                 Dim aAmount() As Decimal = {}
                 Dim aAdded() As Boolean = {}
@@ -782,6 +785,12 @@ Namespace PresentationLayer.Presenters
                     Dim nAccountIdNo As Int16?
                     nAccountIdNo = item.AccountIdNo
                     If item.Amount <> 0 Or item.DiscountTaken <> 0 Then
+                        If Not nAccountIdNo.HasValue OrElse nAccountIdNo.Value = 0 Then
+                            Messaging.Show(True, "MsgBlankAccountIdNotAllowed",
+                                           "An applied invoice must have an AP account.", "Invalid Payment")
+                            CancelSave = True
+                            Return
+                        End If
                         nIndex = Array.IndexOf(aAccountIdNo, nAccountIdNo)
                         If nIndex < 0 Then
                             ReDim Preserve aAccountIdNo(nSize)
@@ -798,6 +807,13 @@ Namespace PresentationLayer.Presenters
                         End If
                     End If
                 Next
+                If Math.Abs(aAmount.Sum() - View.Applied) > 0.00005D OrElse
+                   Math.Abs(aDiscountTaken.Sum() - View.DiscountTaken) > 0.00005D Then
+                    Messaging.Show(True, "MsgInvoiceAllocationTotalsDoNotMatch",
+                                   "Invoice payments and discounts must match the disbursement totals.", "Invalid Payment")
+                    CancelSave = True
+                    Return
+                End If
                 Dim nCounter As Integer = 0
                 ' apply the payment to the disbursement account (the first entry) and zero out the rest of the existing
                 ' journal item entries if there are existing journal entries.
@@ -809,7 +825,7 @@ Namespace PresentationLayer.Presenters
                         item.Credit = If(View.Amount < 0, 0, View.Amount)
                         item.Debit = If(View.Amount < 0, View.Amount * -1, 0)
                         item.RevCostCenterIdNo = 0
-                        item.Notes = ""
+                        item.Notes = paymentNote
                     Else
                         item.Credit = 0
                         item.Debit = 0
@@ -827,18 +843,19 @@ Namespace PresentationLayer.Presenters
                             .Credit = If(View.Amount < 0, 0, View.Amount),
                             .Debit = If(View.Amount < 0, View.Amount * -1, 0),
                             .RevCostCenterIdNo = 0,
-                            .Notes = ""
+                            .Notes = paymentNote
                             }
                     View.JournalItems.Add(item)
                 End If
                 ' apply now the invoice payment summarized above for each existing AP account
                 For i = 0 To aAccountIdNo.Count() - 1
                     For Each ji In View.JournalItems
-                        ' if account matches then add the payment and discount
-                        If ji.AccountIdNo = aAccountIdNo(i) Then
-                            Dim nAmount = aAmount(i) + aDiscountTaken(i)
+                        ' Keep the payment separate from the discount on the same AP account.
+                        If aAmount(i) <> 0D AndAlso ji.Sequence <> 1 AndAlso ji.AccountIdNo = aAccountIdNo(i) Then
+                            Dim nAmount = aAmount(i)
                             ji.Debit = If(nAmount < 0, 0, nAmount)
                             ji.Credit = If(nAmount < 0, nAmount * -1, 0)
+                            ji.Notes = paymentNote
                             ji.PayeeType = "S"
                             SetJournalItemPayeeIfMissing(ji, "S", View.PayeeIdNo, View.PayeeByCode)
                             aAdded(i) = True
@@ -846,17 +863,19 @@ Namespace PresentationLayer.Presenters
                         End If
                     Next
                 Next
-                ' find if the discount taken account exist in the old entries, if found save the discountTaken account
+                ' Reuse the existing discount account row without changing an AP payment row.
                 Dim found As Boolean = False
                 For Each ji In View.JournalItems
                     ' ignore the first line entry (this is for the disbursement account)
                     If ji.Sequence <> 1 Then
-                        If ji.AccountIdNo = View.DiscountAccountIdNo Then
+                        If ji.AccountIdNo = View.DiscountAccountIdNo AndAlso ji.Debit = 0D AndAlso ji.Credit = 0D Then
                             ji.Debit = If(View.DiscountTaken < 0, View.DiscountTaken * -1, 0)
                             ji.Credit = If(View.DiscountTaken < 0, 0, View.DiscountTaken)
+                            ji.Notes = discountNote
                             ji.PayeeType = "S"
                             SetJournalItemPayeeIfMissing(ji, "S", View.PayeeIdNo, View.PayeeByCode)
                             found = True
+                            Exit For
                         End If
                     End If
                 Next
@@ -872,7 +891,7 @@ Namespace PresentationLayer.Presenters
                                 .Debit = If(View.DiscountTaken < 0, View.DiscountTaken * -1, 0),
                                 .RevCostCenterIdNo = 0,
                                 .PayeeType = "S",
-                                .Notes = ""
+                                .Notes = discountNote
                                 }
                         SetJournalItemPayeeIfMissing(item, "S", View.PayeeIdNo, View.PayeeByCode)
                         View.JournalItems.Add(item)
@@ -881,11 +900,11 @@ Namespace PresentationLayer.Presenters
                 ' find and add AP entries not yet added
                 nCounter = 0
                 For Each item In aAdded
-                    If Not item Then
+                    If Not item AndAlso aAmount(nCounter) <> 0D Then
                         ' if the account is not yet added create a AP journal entry for
                         ' the account
                         Dim nAmount As Decimal
-                        nAmount = aAmount(nCounter) + aDiscountTaken(nCounter)
+                        nAmount = aAmount(nCounter)
                         Dim ji As New JournalItemView With {
                                 .JournalIdNo = View.IdNo,
                                 .Sequence = 0,
@@ -894,12 +913,32 @@ Namespace PresentationLayer.Presenters
                                 .Debit = If(nAmount < 0, 0, nAmount),
                                 .RevCostCenterIdNo = 0,
                                 .PayeeType = "S",
-                                .Notes = ""
+                                .Notes = paymentNote
                                 }
                         SetJournalItemPayeeIfMissing(ji, "S", View.PayeeIdNo, View.PayeeByCode)
                         View.JournalItems.Add(ji)
                     End If
                     nCounter += 1
+                Next
+                For i = 0 To aAccountIdNo.Count() - 1
+                    If aDiscountTaken(i) = 0D Then Continue For
+                    Dim accountIdNo = aAccountIdNo(i)
+                    Dim discountAmount = aDiscountTaken(i)
+                    Dim discountItem = View.JournalItems.FirstOrDefault(Function(ji) ji.Sequence <> 1 AndAlso
+                        ji.AccountIdNo = accountIdNo AndAlso ji.Debit = 0D AndAlso ji.Credit = 0D)
+                    If discountItem Is Nothing Then
+                        discountItem = New JournalItemView With {
+                            .JournalIdNo = View.IdNo,
+                            .AccountIdNo = accountIdNo,
+                            .RevCostCenterIdNo = 0
+                        }
+                        View.JournalItems.Add(discountItem)
+                    End If
+                    discountItem.Debit = If(discountAmount > 0D, discountAmount, 0D)
+                    discountItem.Credit = If(discountAmount < 0D, -discountAmount, 0D)
+                    discountItem.Notes = discountNote
+                    discountItem.PayeeType = "S"
+                    SetJournalItemPayeeIfMissing(discountItem, "S", View.PayeeIdNo, View.PayeeByCode)
                 Next
                 If View.UnApplied > 0 Then
                     ' if invoice not yet fully applied, then save the
@@ -936,11 +975,26 @@ Namespace PresentationLayer.Presenters
                 Else
                     ' no advance payment so no advances to Supplier Account
                 End If
+                View.JournalItems.RemoveAll(Function(item) item.Sequence <> 1 AndAlso
+                    item.Debit = 0D AndAlso item.Credit = 0D)
                 NormalizeJournalItemSequences()
+                If Math.Abs(View.JournalItems.Sum(Function(item) item.Debit - item.Credit)) > 0.00005D Then
+                    Messaging.Show(True, "MsgJournalItemsNotBalanced",
+                                   "Disbursement journal items must be balanced.", "Invalid Payment")
+                    CancelSave = True
+                End If
             Else
                 View.DjOiItems.Clear()
             End If
         End Sub
+
+        Private Shared Function LocalizedPostingNote(english As String, arabic As String) As String
+            If Not GlobalVariables.RightToLeftLayout Then Return english
+            Dim translated = Messaging.TranslateCaption(english)
+            If String.IsNullOrWhiteSpace(translated) OrElse
+               String.Equals(translated, english, StringComparison.OrdinalIgnoreCase) Then Return arabic
+            Return translated
+        End Function
 
         Private Sub NormalizeJournalItemSequences()
             If View.JournalItems Is Nothing Then Return
