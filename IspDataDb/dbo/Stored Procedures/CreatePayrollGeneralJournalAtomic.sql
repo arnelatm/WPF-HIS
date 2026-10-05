@@ -74,6 +74,86 @@ BEGIN
         IF @AccruedAccountIdNo IS NULL
             THROW 51807, 'Active detail account 213 (Accrued Salaries & Wages) was not found.', 1;
 
+        -- Check the source rows before the reporting view groups them. Use the same
+        -- pay-group account and default-account fallback as the posting view.
+        CREATE TABLE #PostingSetupIssues (
+            EmployeeIdNo INT NULL,
+            EmployeeName NVARCHAR(100) NOT NULL,
+            PayElementName NVARCHAR(100) NOT NULL,
+            Issue NVARCHAR(100) NOT NULL
+        );
+
+        INSERT INTO #PostingSetupIssues (EmployeeIdNo, EmployeeName, PayElementName, Issue)
+        SELECT DISTINCT pd.EmployeeIdNo,
+            COALESCE(NULLIF(e.EmployeeName, ''), N'Employee #' + COALESCE(CONVERT(NVARCHAR(20), pd.EmployeeIdNo), N'?')),
+            COALESCE(NULLIF(pe.PayElementName, ''), N'Pay element #' + COALESCE(CONVERT(NVARCHAR(20), ppe.PayElementIdNo), N'?')),
+            problem.Issue
+        FROM dbo.PayrollDetail AS pd
+        LEFT JOIN dbo.Employee AS e ON e.IdNo = pd.EmployeeIdNo
+        LEFT JOIN dbo.PayrollPayElement AS ppe ON ppe.PayrollDetailIdNo = pd.IdNo AND ISNULL(ppe.Amount, 0) <> 0
+        LEFT JOIN dbo.PayElement AS pe ON pe.IdNo = ppe.PayElementIdNo
+        LEFT JOIN dbo.Department AS d ON d.IdNo = e.DepartmentIdNo
+        LEFT JOIN dbo.PayGroup AS pg ON pg.IdNo = e.PayGroupIdNo
+        LEFT JOIN dbo.RevCostCenter AS rc
+            ON rc.IdNo = COALESCE(NULLIF(e.RevCostCenterIdNo, 0), NULLIF(pg.RevCostCenterIdNo, 0), NULLIF(d.RevCostCenterIdNo, 0), 0)
+        OUTER APPLY (
+            SELECT COUNT(*) AS MappingCount, MAX(pea.AccountIdNo) AS AccountIdNo
+            FROM dbo.PayElementAccount AS pea
+            WHERE pea.PayElementIdNo = pe.IdNo AND pea.PayGroupIdNo = e.PayGroupIdNo
+        ) AS mapping
+        OUTER APPLY (
+            SELECT COUNT(*) AS ContactCount
+            FROM dbo.Contact AS c
+            WHERE c.CSEIdNo = e.IdNo AND c.CSECode = 'E'
+        ) AS contactMapping
+        CROSS APPLY (
+            SELECT CASE WHEN pe.UsePayGroups = 1
+                        THEN ISNULL(mapping.AccountIdNo, pe.AccountIdNo)
+                        ELSE pe.AccountIdNo END AS AccountIdNo
+        ) AS posting
+        LEFT JOIN dbo.Account AS a
+            ON a.IdNo = posting.AccountIdNo
+        CROSS APPLY (VALUES
+            (N'employee record missing', CASE WHEN e.IdNo IS NULL THEN 1 ELSE 0 END),
+            (N'pay element missing', CASE WHEN ppe.IdNo IS NOT NULL AND pe.IdNo IS NULL THEN 1 ELSE 0 END),
+            (N'pay element kind missing', CASE WHEN pe.IdNo IS NOT NULL AND (pe.PayElementKind IS NULL OR pe.PayElementKind NOT IN ('E', 'D')) THEN 1 ELSE 0 END),
+            (N'pay group missing', CASE WHEN pe.UsePayGroups = 1 AND pg.IdNo IS NULL THEN 1 ELSE 0 END),
+            (N'multiple pay-group account mappings', CASE WHEN pe.UsePayGroups = 1 AND mapping.MappingCount > 1 THEN 1 ELSE 0 END),
+            (N'posting account missing from pay group and default setup', CASE WHEN pe.IdNo IS NOT NULL AND (posting.AccountIdNo IS NULL OR posting.AccountIdNo = 0) THEN 1 ELSE 0 END),
+            (N'posting account inactive or not a detail account', CASE WHEN pe.IdNo IS NOT NULL AND a.IdNo IS NOT NULL AND (ISNULL(a.Active, 1) = 0 OR ISNULL(a.DetailAccount, 0) = 0) THEN 1 ELSE 0 END),
+            (N'posting account not found', CASE WHEN pe.IdNo IS NOT NULL AND a.IdNo IS NULL AND posting.AccountIdNo > 0 THEN 1 ELSE 0 END),
+            (N'posting account restricted in General Journal', CASE WHEN a.SpecialAccount IN ('AP', 'AR', 'AS', 'CA', 'PD', 'RD') THEN 1 ELSE 0 END),
+            (N'revenue cost center missing or invalid', CASE WHEN e.IdNo IS NOT NULL AND (rc.IdNo IS NULL OR rc.IdNo = 0) THEN 1 ELSE 0 END),
+            (N'employee Contact mapping missing', CASE WHEN e.IdNo IS NOT NULL AND contactMapping.ContactCount = 0 THEN 1 ELSE 0 END),
+            (N'multiple employee Contact mappings', CASE WHEN contactMapping.ContactCount > 1 THEN 1 ELSE 0 END)
+        ) AS problem(Issue, IsInvalid)
+        WHERE pd.PayrollIdNo = @PayrollIdNo
+          AND ppe.IdNo IS NOT NULL
+          AND problem.IsInvalid = 1;
+
+        IF EXISTS (SELECT 1 FROM #PostingSetupIssues)
+        BEGIN
+            DECLARE @IssueCount INT = (SELECT COUNT(DISTINCT ISNULL(EmployeeIdNo, -1)) FROM #PostingSetupIssues);
+            DECLARE @TotalIssues INT = (SELECT COUNT(*) FROM #PostingSetupIssues);
+            DECLARE @IssueDetails NVARCHAR(MAX);
+            DECLARE @IssueMessage NVARCHAR(2048);
+
+            SELECT @IssueDetails = STUFF((
+                SELECT CHAR(13) + CHAR(10) + N'- ' + LEFT(x.EmployeeName, 60)
+                    + N' / ' + LEFT(x.PayElementName, 45) + N': ' + LEFT(x.Issue, 70)
+                FROM (SELECT TOP (10) EmployeeName, PayElementName, Issue
+                      FROM #PostingSetupIssues
+                      ORDER BY EmployeeName, PayElementName, Issue) AS x
+                FOR XML PATH(''), TYPE
+            ).value('.', 'NVARCHAR(MAX)'), 1, 2, N'');
+
+            SET @IssueMessage = N'Payroll posting setup is incomplete for '
+                + CONVERT(NVARCHAR(20), @IssueCount) + N' employee(s).'
+                + CHAR(13) + CHAR(10) + @IssueDetails
+                + CASE WHEN @TotalIssues > 10 THEN CHAR(13) + CHAR(10) + N'Additional issues omitted (' + CONVERT(NVARCHAR(20), @TotalIssues - 10) + N' more).' ELSE N'' END;
+            THROW 51817, @IssueMessage, 1;
+        END;
+
         CREATE TABLE #PayrollLines (
             PostAccountIdNo SMALLINT NULL,
             Credit MONEY NOT NULL,

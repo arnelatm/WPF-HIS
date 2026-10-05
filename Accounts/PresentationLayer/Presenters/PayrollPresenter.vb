@@ -1461,8 +1461,10 @@ Namespace PresentationLayer.Presenters
                     message = String.Format("Draft General Journal {0} was created for this payroll. Review and post it from General Journal Entry.", journalIdNo)
                 End If
                 Messaging.Show(message, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Catch ex As System.Data.SqlClient.SqlException When ex.Number = 51817
+                MessagingForm.Show(ex.Message, caption, MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Catch ex As Exception
-                Messaging.Show(ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessagingForm.Show(ex.Message, caption, MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
         End Sub
 
