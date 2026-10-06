@@ -77,14 +77,6 @@ Public Class CCheckBox
     ' Draw the check box in the current state.
     Protected Overrides Sub OnPaint(ByVal e As PaintEventArgs)
         MyBase.OnPaint(e)
-        If DisplayOnly OrElse Not EditingMode Then
-            _state = IIf(Checked, VisualStyles.CheckBoxState.CheckedDisabled, VisualStyles.CheckBoxState.UncheckedDisabled)
-        Else
-            _state = IIf(Checked, VisualStyles.CheckBoxState.CheckedNormal, VisualStyles.CheckBoxState.UncheckedNormal)
-        End If
-
-        Dim pt As Point = New Point(0, 0)
-        Dim rect As Rectangle = New Rectangle(pt, New Size(13, 13))
         'Dim cForeColor As Color
 
         'If Focused Then
@@ -116,29 +108,6 @@ Public Class CCheckBox
         'End If
         'Dim cBrush = New SolidBrush(cForeColor)
         'e.Graphics.FillRectangle(cBrush, rect)
-
-        If Checked Then
-            Dim cCol As Color
-            If _editingMode And Not DisplayOnly Then
-                If Focused Then
-                    cCol = GlobalVariables.DefaultFormControlEditingForegroundColor
-                Else
-                    cCol = GlobalVariables.DefaultFormControlForegroundColor
-                End If
-            Else
-                If Focused Then
-                    cCol = GlobalVariables.DefaultFormControlForegroundColor
-                Else
-                    cCol = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                End If
-            End If
-            Using brush As SolidBrush = New SolidBrush(cCol)
-                Dim emSize = CInt(Height / 13 * 9)
-                Using wing As Font = New Font("Wingdings", emSize)
-                    e.Graphics.DrawString("ü", wing, brush, 0, 0)
-                End Using
-            End Using
-        End If
 
         'e.Graphics.DrawRectangle(Pens.Gray, rect)
         'Dim fRect As Rectangle = ClientRectangle
@@ -214,7 +183,8 @@ Public Class CCheckBox
             Return _autoSize
         End Get
         Set(value As Boolean)
-            _autoSize = False
+            _autoSize = value
+            MyBase.AutoSize = value
         End Set
     End Property
 
@@ -258,12 +228,22 @@ Public Class CCheckBox
             Return _noLabel
         End Get
         Set(value As Boolean)
-            If value Then
-                Text = " "
-            End If
             _noLabel = value
+            If value Then
+                AutoSize = False
+                Text = " "
+            ElseIf Not String.IsNullOrWhiteSpace(Text) Then
+                AutoSize = True
+            End If
         End Set
     End Property
+
+    Protected Overrides Sub OnTextChanged(e As EventArgs)
+        MyBase.OnTextChanged(e)
+        If Not NoLabel AndAlso Not String.IsNullOrWhiteSpace(Text) Then
+            AutoSize = True
+        End If
+    End Sub
 
     Public Property EditingMode As Boolean Implements IEntryControl.EditingMode
         Get

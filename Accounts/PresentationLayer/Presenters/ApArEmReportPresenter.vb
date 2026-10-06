@@ -113,7 +113,8 @@ Public Class ApArEmReportPresenter(Of TM As New)
                         View.PersonSelectorControl.Text, "DisplayName",
                         reportTitle, "ReportTitle",
                         estName, "EstablishmentName",
-                        View.Language, "Language"}
+                        View.Language, "Language",
+                        View.IncludeUnposted, "IncludeUnposted"}
                 Case "ArStatement"
                     reportArgs.ReportParameters = {beginningDate.Value, "BeginningDate",
                         endingDate.Value, "EndingDate",
@@ -121,7 +122,8 @@ Public Class ApArEmReportPresenter(Of TM As New)
                         View.PersonSelectorControl.Text, "DisplayName",
                         reportTitle, "ReportTitle",
                         estName, "EstablishmentName",
-                        View.Language, "Language"}
+                        View.Language, "Language",
+                        View.IncludeUnposted, "IncludeUnposted"}
                 Case "ErStatement"
                     reportArgs.ReportParameters = {beginningDate.Value, "BeginningDate",
                         endingDate.Value, "EndingDate",
@@ -129,7 +131,8 @@ Public Class ApArEmReportPresenter(Of TM As New)
                         View.PersonSelectorControl.Text, "DisplayName",
                         reportTitle, "ReportTitle",
                         estName, "EstablishmentName",
-                        View.Language, "Language"}
+                        View.Language, "Language",
+                        View.IncludeUnposted, "IncludeUnposted"}
                 Case "EmployeeInfo"
                     reportArgs.ReportParameters = {View.IdNo, "EmployeeIdNo"}
                 Case "LeaveStatement"

@@ -28,6 +28,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             dtpBeginningDate.Value = GlobalFunctions.GregorianDateSerial(today.Year, 1, 1)
             dtpEndingDate.Value = GlobalFunctions.GregorianDateSerial(today.Year, today.Month, today.Day)
             PersonSelectorControl = cboIdNo
+            chkIncludeUnposted.Checked = True
         End Sub
 
         Public Property MainTableName As String
@@ -89,6 +90,12 @@ Namespace PresentationLayer.Views.Forms.Reports
 
         Public Property NoDates As Boolean Implements IApArEmReportView.NoDates
 
+        Public ReadOnly Property IncludeUnposted As Boolean Implements IApArEmReportView.IncludeUnposted
+            Get
+                Return chkIncludeUnposted IsNot Nothing AndAlso chkIncludeUnposted.Checked
+            End Get
+        End Property
+
         Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
             If Not btnOk.Enabled Then
                 Return
@@ -121,6 +128,9 @@ Namespace PresentationLayer.Views.Forms.Reports
             dtpEndingDate.Visible = Not NoDates
             lblBeginningDate.Visible = Not NoDates
             lblEndingDate.Visible = Not NoDates
+            Dim showPostingFilter As Boolean = Array.IndexOf({"ApStatement", "ArStatement", "ErStatement"}, ReportCode) >= 0
+            CLabel2.Visible = showPostingFilter
+            chkIncludeUnposted.Visible = showPostingFilter
             If NoDates Then
                 Height -= 25
             End If

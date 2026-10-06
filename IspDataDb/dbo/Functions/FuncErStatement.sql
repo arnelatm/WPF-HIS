@@ -2,7 +2,8 @@ CREATE FUNCTION [dbo].[FuncErStatement]
 (
     @EmployeeIdNo INT,
     @BeginningDate DATE,
-    @EndingDate DATE
+    @EndingDate DATE,
+    @IncludeUnposted BIT
 )
 RETURNS TABLE
 AS
@@ -16,6 +17,7 @@ RETURN
       AND EmployeeIdNo = @EmployeeIdNo
       AND TransactionDate >= @BeginningDate
       AND TransactionDate <= @EndingDate
+      AND (TransactionType = 'B' OR @IncludeUnposted = 1 OR ISNULL(Posted, 0) = 1)
 
     UNION
 
@@ -29,5 +31,6 @@ RETURN
     FROM (SELECT ISNULL(SUM(Debit - Credit), 0) AS Amount
           FROM dbo.ErStatement_View
           WHERE EmployeeIdNo = @EmployeeIdNo
-            AND TransactionDate < @BeginningDate) AS balance
+            AND TransactionDate < @BeginningDate
+            AND (TransactionType = 'B' OR @IncludeUnposted = 1 OR ISNULL(Posted, 0) = 1)) AS balance
 );

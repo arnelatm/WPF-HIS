@@ -17,6 +17,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property PersonSelectorControl As Control
         Property PersonSelectorLabel As String
         Property NoDates As Boolean
+        ReadOnly Property IncludeUnposted As Boolean
         Event ReportLoaded()
         Event PrintButtonClicked()
         Event LanguageChanged()
