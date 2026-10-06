@@ -2,7 +2,8 @@ CREATE FUNCTION [dbo].[FuncApStatement]
 (
     @SupplierIdNo INT,
     @BeginningDate DATE,
-    @EndingDate DATE
+    @EndingDate DATE,
+    @IncludeUnposted BIT
 )
 RETURNS TABLE
 AS
@@ -10,23 +11,13 @@ RETURN
 (
     SELECT 0 AS Discount, JournalCode, JournalIdNo,
            Credit - Debit AS Amount, Notes, SupplierIdNo,
-           InvoiceNo, TransactionDate, ReferenceNo, TransactionType, MainNote
+           InvoiceNo, TransactionDate, ReferenceNo, TransactionType, MainNote, Posted
     FROM dbo.ApStatement_View
-    WHERE SpecialAccount IN ('AP', 'AS', 'PD')
+    WHERE SpecialAccount IN ('AP', 'AS')
       AND SupplierIdNo = @SupplierIdNo
       AND TransactionDate >= @BeginningDate
       AND TransactionDate <= @EndingDate
-
-    UNION ALL
-
-    SELECT 1, JournalCode, JournalIdNo,
-           Debit - Credit, Notes, SupplierIdNo,
-           InvoiceNo, TransactionDate, ReferenceNo, TransactionType, MainNote
-    FROM dbo.ApStatement_View
-    WHERE SpecialAccount = 'PD'
-      AND SupplierIdNo = @SupplierIdNo
-      AND TransactionDate >= @BeginningDate
-      AND TransactionDate <= @EndingDate
+      AND (TransactionType = 'B' OR @IncludeUnposted = 1 OR ISNULL(Posted, 0) = 1)
 
     UNION ALL
 
@@ -35,7 +26,8 @@ RETURN
                    FROM dbo.ApStatement_View
                    WHERE SupplierIdNo = @SupplierIdNo
                      AND TransactionDate < @BeginningDate
-                     AND SpecialAccount = 'AP'), 0),
+                     AND SpecialAccount = 'AP'
+                     AND (TransactionType = 'B' OR @IncludeUnposted = 1 OR ISNULL(Posted, 0) = 1)), 0),
            'Beginning Balance', @SupplierIdNo, '', DATEADD(DAY, -1, @BeginningDate),
-           '', 'B', 'Beginning Balance'
+           '', 'B', 'Beginning Balance', CAST(1 AS BIT)
 );
