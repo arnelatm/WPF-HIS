@@ -22,6 +22,13 @@ BEGIN
           AND FiscalMonth = @FiscalMonth - 1
           AND ChecklistCode = @ChecklistCode
           AND Completed = 1
+    ) AND NOT (
+        @FiscalYear = 2025 AND @FiscalMonth = 11
+        AND EXISTS (
+            SELECT 1 FROM dbo.MonthlyClosePeriod
+            WHERE FiscalYear = 2025 AND FiscalMonth = 10
+              AND Status = 'Closed' AND HistoricalBaseline = 1
+        )
     )
         THROW 52315, 'The corresponding checklist item in the previous month must be completed first.', 1;
     UPDATE dbo.MonthlyCloseChecklist SET Completed = @Completed, CompletedBy = CASE WHEN @Completed = 1 THEN @ApplicationUser ELSE NULL END, CompletedAt = CASE WHEN @Completed = 1 THEN SYSDATETIME() ELSE NULL END, Notes = @Notes

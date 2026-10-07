@@ -7,6 +7,7 @@ CREATE TABLE [dbo].[MonthlyClosePeriod] (
     [ClosedBy]          SYSNAME      NULL,
     [ClosedAt]          DATETIME2 (0) NULL,
     [ApprovalNotes]     NVARCHAR (1000) NULL,
+    [HistoricalBaseline] BIT NOT NULL CONSTRAINT [DF_MonthlyClosePeriod_HistoricalBaseline] DEFAULT (0),
     CONSTRAINT [PK_MonthlyClosePeriod] PRIMARY KEY ([FiscalYear], [FiscalMonth]),
     CONSTRAINT [CK_MonthlyClosePeriod_Month] CHECK ([FiscalMonth] >= (1) AND [FiscalMonth] <= (12)),
     CONSTRAINT [CK_MonthlyClosePeriod_Status] CHECK ([Status] = 'Closed' OR [Status] = 'Approved' OR [Status] = 'Open')

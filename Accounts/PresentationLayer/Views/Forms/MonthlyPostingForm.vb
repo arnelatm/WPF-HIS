@@ -6,6 +6,7 @@ Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Forms
+Imports AATM.ServicesLayer.Services
 
 Namespace PresentationLayer.Views.Forms
     Public Class MonthlyPostingForm
@@ -27,17 +28,26 @@ Namespace PresentationLayer.Views.Forms
         Private ReadOnly _summary As New DataGridView()
         Private ReadOnly _entries As New DataGridView()
         Private ReadOnly _checklist As New DataGridView()
+        Private ReadOnly _periodSummary As New Label()
+        Private ReadOnly _historicalNotice As New Label()
         Private ReadOnly _reversalHistory As New DataGridView()
+        Private ReadOnly _checklistNotesPanel As New Panel()
         Private ReadOnly _checklistNotesLabel As New Label()
         Private ReadOnly _checklistNotes As New TextBox()
         Private ReadOnly _tabs As New TabControl()
         Private ReadOnly _details As New TextBox()
+        Private ReadOnly _securityService As New Service()
         Private _lastPreview As DataSet
         Private _monthlyCloseStatus As String = "Open"
+        Private _isHistoricalBaseline As Boolean
+        Private _canApproveMonthlyPosting As Boolean
+        Private _monthlyApprovedBy As String
+        Private _monthlyApprovedAt As Date?
 
         Public Sub New()
             InitializeComponent()
             SetDefaultPeriod()
+            _canApproveMonthlyPosting = CanApproveMonthlyPosting()
             AddHandler _year.ValueChanged, AddressOf PeriodSelectionChanged
             AddHandler _month.SelectedIndexChanged, AddressOf PeriodSelectionChanged
             _execute.Enabled = False
@@ -91,7 +101,7 @@ Namespace PresentationLayer.Views.Forms
             _initializeChecklist.Text = "Load Checklist" : _initializeChecklist.Width = 105 : _initializeChecklist.Margin = New Padding(4) : AddHandler _initializeChecklist.Click, AddressOf InitializeChecklist_Click : closeCommands.Controls.Add(_initializeChecklist)
             _completeChecklist.Text = "Complete Item" : _completeChecklist.Width = 105 : _completeChecklist.Margin = New Padding(4) : AddHandler _completeChecklist.Click, AddressOf CompleteChecklist_Click : closeCommands.Controls.Add(_completeChecklist)
             _uncompleteChecklist.Text = "Uncomplete Item" : _uncompleteChecklist.Width = 115 : _uncompleteChecklist.Margin = New Padding(4) : AddHandler _uncompleteChecklist.Click, AddressOf UncompleteChecklist_Click : closeCommands.Controls.Add(_uncompleteChecklist)
-            _approveMonth.Text = "Approve Month" : _approveMonth.Width = 105 : _approveMonth.Margin = New Padding(4) : AddHandler _approveMonth.Click, AddressOf ApproveMonth_Click : closeCommands.Controls.Add(_approveMonth)
+            _approveMonth.Text = "Approve Monthly Posting" : _approveMonth.Width = 170 : _approveMonth.Margin = New Padding(4) : AddHandler _approveMonth.Click, AddressOf ApproveMonth_Click : closeCommands.Controls.Add(_approveMonth)
             _closeMonth.Text = "Close Month" : _closeMonth.Width = 105 : _closeMonth.Margin = New Padding(4) : AddHandler _closeMonth.Click, AddressOf CloseMonth_Click : closeCommands.Controls.Add(_closeMonth)
             _status.Text = "Preview is required before execution." : _status.AutoSize = True : _status.Margin = New Padding(12, 8, 4, 0) : closeCommands.Controls.Add(_status)
             Dim reversalCommands As New FlowLayoutPanel With {.Dock = DockStyle.Fill, .Padding = New Padding(8, 2, 8, 6), .WrapContents = False}
@@ -120,7 +130,6 @@ Namespace PresentationLayer.Views.Forms
             _entries.Columns.Add(New DataGridViewTextBoxColumn With {.HeaderText = "Reference", .DataPropertyName = "ReferenceNo", .FillWeight = 75})
             _entries.Columns.Add(New DataGridViewTextBoxColumn With {.HeaderText = "Description", .DataPropertyName = "Notes", .FillWeight = 150})
             _entries.Columns.Add(New DataGridViewCheckBoxColumn With {.HeaderText = "Header to post", .DataPropertyName = "HeaderToPost", .FillWeight = 65})
-            _entries.Columns.Add(New DataGridViewCheckBoxColumn With {.HeaderText = "Approved", .DataPropertyName = "Approved", .FillWeight = 55})
             _entries.Columns.Add(New DataGridViewCheckBoxColumn With {.HeaderText = "Cancelled", .DataPropertyName = "Cancelled", .FillWeight = 55})
             _entries.Columns.Add(New DataGridViewTextBoxColumn With {.HeaderText = "Lines", .DataPropertyName = "Lines", .FillWeight = 45})
             _entries.Columns.Add(New DataGridViewTextBoxColumn With {.HeaderText = "Lines to post", .DataPropertyName = "ItemLinesToPost", .FillWeight = 65})
@@ -131,12 +140,20 @@ Namespace PresentationLayer.Views.Forms
             Dim checklistPage As New TabPage("Close checklist") With {.BackColor = Color.White}
             ConfigureGrid(_checklist)
             AddHandler _checklist.SelectionChanged, AddressOf Checklist_SelectionChanged
+            AddHandler _checklist.CellClick, AddressOf Checklist_CellClick
             checklistPage.Controls.Add(_checklist)
-            _checklistNotesLabel.Text = "Notes for selected checklist item:"
-            _checklistNotesLabel.Dock = DockStyle.Bottom : _checklistNotesLabel.Height = 20 : _checklistNotesLabel.BackColor = Color.White : _checklistNotesLabel.ForeColor = Color.Black
-            _checklistNotes.Multiline = True : _checklistNotes.ScrollBars = ScrollBars.Vertical : _checklistNotes.Dock = DockStyle.Bottom : _checklistNotes.Height = 48 : _checklistNotes.BackColor = Color.White : _checklistNotes.ForeColor = Color.Black
-            checklistPage.Controls.Add(_checklistNotes)
-            checklistPage.Controls.Add(_checklistNotesLabel)
+            _historicalNotice.Text = "Historical baseline: this month was accepted as closed. Checklist completion was not recorded."
+            _historicalNotice.Dock = DockStyle.Fill : _historicalNotice.TextAlign = ContentAlignment.MiddleCenter : _historicalNotice.Visible = False
+            checklistPage.Controls.Add(_historicalNotice)
+            _periodSummary.Dock = DockStyle.Top : _periodSummary.Height = 60 : _periodSummary.BackColor = Color.LightCyan : _periodSummary.ForeColor = Color.Black : _periodSummary.TextAlign = ContentAlignment.MiddleLeft
+            checklistPage.Controls.Add(_periodSummary)
+            _checklistNotesPanel.Dock = DockStyle.Bottom : _checklistNotesPanel.Height = 96 : _checklistNotesPanel.BackColor = Color.LightYellow : _checklistNotesPanel.BorderStyle = BorderStyle.FixedSingle
+            _checklistNotesLabel.Text = "Required note for selected item — type what was checked here, then click Complete Item:"
+            _checklistNotesLabel.Dock = DockStyle.Top : _checklistNotesLabel.Height = 23 : _checklistNotesLabel.BackColor = Color.Khaki : _checklistNotesLabel.ForeColor = Color.Black : _checklistNotesLabel.TextAlign = ContentAlignment.MiddleLeft
+            _checklistNotes.Multiline = True : _checklistNotes.ScrollBars = ScrollBars.Vertical : _checklistNotes.Dock = DockStyle.Fill : _checklistNotes.BackColor = Color.LightYellow : _checklistNotes.ForeColor = Color.Black : _checklistNotes.BorderStyle = BorderStyle.FixedSingle
+            _checklistNotesPanel.Controls.Add(_checklistNotes)
+            _checklistNotesPanel.Controls.Add(_checklistNotesLabel)
+            checklistPage.Controls.Add(_checklistNotesPanel)
             _tabs.TabPages.Add(checklistPage)
             Dim reversalHistoryPage As New TabPage("Reversal history") With {.BackColor = Color.White}
             ConfigureGrid(_reversalHistory)
@@ -236,7 +253,15 @@ Namespace PresentationLayer.Views.Forms
             UpdateChecklistItemButtons()
         End Sub
 
+        Private Sub Checklist_CellClick(sender As Object, e As DataGridViewCellEventArgs)
+            If e.RowIndex >= 0 AndAlso Not _isHistoricalBaseline Then _checklistNotes.Focus()
+        End Sub
+
         Private Sub ApproveMonth_Click(sender As Object, e As EventArgs)
+            If Not CanApproveMonthlyPosting() Then
+                Messaging.Show(True, "MsgMonthlyPostingApprovalNotAllowed", "You do not have permission to approve monthly posting.", "Monthly Posting", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
             Try
                 Dim data = ExecuteChecklistProcedure("dbo.ApproveMonthlyClose")
                 Messaging.Show(True, "MsgMonthApproved", "Month approved. Run Preview, then close the month before executing Monthly Posting.", "Monthly Close", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -305,13 +330,28 @@ Namespace PresentationLayer.Views.Forms
                 Dim data = ExecuteChecklistProcedure("dbo.InitializeMonthlyCloseChecklist")
                 If data.Tables.Count > 0 Then
                     _checklist.DataSource = data.Tables(0)
+                    If _checklist.Columns.Contains("Status") Then _checklist.Columns("Status").HeaderText = "Month close"
+                    If _checklist.Columns.Contains("HistoricalBaseline") Then _checklist.Columns("HistoricalBaseline").Visible = False
+                    If _checklist.Columns.Contains("ApprovedBy") Then _checklist.Columns("ApprovedBy").Visible = False
+                    If _checklist.Columns.Contains("ApprovedAt") Then _checklist.Columns("ApprovedAt").Visible = False
                     UpdateMonthlyCloseButtons(data.Tables(0))
+                    _checklist.Visible = Not _isHistoricalBaseline
+                    _historicalNotice.Visible = _isHistoricalBaseline
+                    _checklistNotesPanel.Visible = Not _isHistoricalBaseline
+                    Try
+                        UpdatePeriodSummary(ExecuteProcedure(False))
+                    Catch
+                        _periodSummary.Text = Messaging.TranslateCaption("Journal posting status unavailable. Month close: ") & Messaging.TranslateCaption(_monthlyCloseStatus)
+                    End Try
                     LoadReversalHistory()
-                    _tabs.SelectedIndex = 1
-                    Dim checklistStatus = "Checklist loaded: {itemCount} items. Select an item and click Complete Item."
-                    Dim checklistCaption = "Monthly Close Checklist"
-                    Messaging.GetMessage(True, "MsgChecklistLoaded", checklistStatus, checklistCaption)
-                    _status.Text = Messaging.ReplaceValues(checklistStatus, {"itemCount", data.Tables(0).Rows.Count.ToString()})
+                    _tabs.SelectedIndex = 2
+                    If _isHistoricalBaseline Then
+                        _status.Text = Messaging.TranslateCaption("Historical baseline: month closed; checklist completion was not recorded.")
+                    Else
+                        Dim checklistStatus = "Select an item, type a note below, then click Complete Item."
+                        Messaging.GetMessage(True, "MsgChecklistLoaded", checklistStatus, "Monthly Close Checklist")
+                        _status.Text = checklistStatus
+                    End If
                 End If
             Catch ex As Exception
                 _status.Text = Messaging.TranslateCaption("Checklist load failed.")
@@ -335,10 +375,15 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub UpdateMonthlyCloseButtons(periodData As DataTable)
             _monthlyCloseStatus = "Open"
+            _monthlyApprovedBy = Nothing
+            _monthlyApprovedAt = Nothing
             If periodData IsNot Nothing AndAlso periodData.Rows.Count > 0 AndAlso periodData.Columns.Contains("Status") Then _monthlyCloseStatus = Convert.ToString(periodData.Rows(0)("Status"))
+            If periodData IsNot Nothing AndAlso periodData.Rows.Count > 0 AndAlso periodData.Columns.Contains("ApprovedBy") AndAlso periodData.Rows(0)("ApprovedBy") IsNot DBNull.Value Then _monthlyApprovedBy = Convert.ToString(periodData.Rows(0)("ApprovedBy"))
+            If periodData IsNot Nothing AndAlso periodData.Rows.Count > 0 AndAlso periodData.Columns.Contains("ApprovedAt") AndAlso periodData.Rows(0)("ApprovedAt") IsNot DBNull.Value Then _monthlyApprovedAt = Convert.ToDateTime(periodData.Rows(0)("ApprovedAt"))
+            _isHistoricalBaseline = periodData IsNot Nothing AndAlso periodData.Rows.Count > 0 AndAlso periodData.Columns.Contains("HistoricalBaseline") AndAlso periodData.Rows(0)("HistoricalBaseline") IsNot DBNull.Value AndAlso Convert.ToBoolean(periodData.Rows(0)("HistoricalBaseline"))
             UpdateChecklistItemButtons()
-            _approveMonth.Enabled = String.Equals(_monthlyCloseStatus, "Open", StringComparison.OrdinalIgnoreCase)
-            _closeMonth.Enabled = String.Equals(_monthlyCloseStatus, "Approved", StringComparison.OrdinalIgnoreCase) AndAlso PreviewHasNoBlockingErrors()
+            _approveMonth.Enabled = _canApproveMonthlyPosting AndAlso Not _isHistoricalBaseline AndAlso String.Equals(_monthlyCloseStatus, "Open", StringComparison.OrdinalIgnoreCase)
+            _closeMonth.Enabled = Not _isHistoricalBaseline AndAlso String.Equals(_monthlyCloseStatus, "Approved", StringComparison.OrdinalIgnoreCase) AndAlso PreviewHasNoBlockingErrors()
             _unpostMonth.Enabled = PreviewAllows("CanUnpost")
             _uncloseMonth.Enabled = PreviewAllows("CanUnclose")
         End Sub
@@ -349,9 +394,31 @@ Namespace PresentationLayer.Views.Forms
                 Dim value = _checklist.CurrentRow.Cells("Completed").Value
                 rowIsCompleted = value IsNot Nothing AndAlso value IsNot DBNull.Value AndAlso Convert.ToBoolean(value)
             End If
-            _completeChecklist.Enabled = String.Equals(_monthlyCloseStatus, "Open", StringComparison.OrdinalIgnoreCase) AndAlso Not rowIsCompleted
-            _uncompleteChecklist.Enabled = (String.Equals(_monthlyCloseStatus, "Open", StringComparison.OrdinalIgnoreCase) OrElse String.Equals(_monthlyCloseStatus, "Approved", StringComparison.OrdinalIgnoreCase)) AndAlso rowIsCompleted
+            _completeChecklist.Enabled = Not _isHistoricalBaseline AndAlso String.Equals(_monthlyCloseStatus, "Open", StringComparison.OrdinalIgnoreCase) AndAlso Not rowIsCompleted
+            _uncompleteChecklist.Enabled = Not _isHistoricalBaseline AndAlso (String.Equals(_monthlyCloseStatus, "Open", StringComparison.OrdinalIgnoreCase) OrElse String.Equals(_monthlyCloseStatus, "Approved", StringComparison.OrdinalIgnoreCase)) AndAlso rowIsCompleted
         End Sub
+
+        Private Sub UpdatePeriodSummary(data As DataSet)
+            If data Is Nothing OrElse data.Tables.Count = 0 OrElse data.Tables(0).Rows.Count = 0 Then Return
+            Dim postedHeaders = GetInt(data, 0, "HeadersPosted")
+            Dim postedItems = GetInt(data, 0, "ItemsPosted")
+            Dim totalHeaders = postedHeaders + GetInt(data, 0, "HeadersToPost")
+            Dim totalItems = postedItems + GetInt(data, 0, "ItemsToPost")
+            Dim postingStatus = If(totalHeaders + totalItems = 0, "No journals", If(postedHeaders = totalHeaders AndAlso postedItems = totalItems, "Fully posted", If(postedHeaders + postedItems = 0, "Unposted", "Partly posted")))
+            Dim closeStatus = _monthlyCloseStatus & If(_isHistoricalBaseline, " (historical baseline)", "")
+            Dim approvalStatus = If(_isHistoricalBaseline, "Historical baseline; approver not recorded", If(_monthlyApprovedAt.HasValue, "Approved by " & _monthlyApprovedBy & " on " & _monthlyApprovedAt.Value.ToString("dd/MM/yyyy HH:mm"), "Pending"))
+            _periodSummary.Text = String.Format("  Journal posting: {0} ({1}/{2} headers, {3}/{4} items).{5}  Month close: {6}.{5}  Monthly approval: {7}.", postingStatus, postedHeaders, totalHeaders, postedItems, totalItems, Environment.NewLine, closeStatus, approvalStatus)
+        End Sub
+
+        Private Function CanApproveMonthlyPosting() As Boolean
+            If Not GlobalVariables.IsUserLoggedIn Then Return False
+            Try
+                Dim access = _securityService.GetUserSecurityForKey("ApproveMonthlyPosting", GlobalVariables.SecurityGroupIdNo)
+                Return access IsNot Nothing AndAlso access.Count > 1 AndAlso Convert.ToBoolean(access(0)) AndAlso Convert.ToBoolean(access(1))
+            Catch
+                Return False
+            End Try
+        End Function
 
         Private Function PreviewHasNoBlockingErrors() As Boolean
             Return _lastPreview IsNot Nothing AndAlso _lastPreview.Tables.Count > 0 AndAlso _lastPreview.Tables(0).Rows.Count > 0 AndAlso GetInt(_lastPreview, 0, "BlockingErrors") = 0
@@ -404,6 +471,7 @@ Namespace PresentationLayer.Views.Forms
                     _execute.Enabled = False : _unpostMonth.Enabled = False : _uncloseMonth.Enabled = False : _status.Text = Messaging.TranslateCaption("Posting completed. Run Preview again to verify.")
                 Else
                     Dim blockers = GetInt(data, 0, "BlockingErrors") : Dim headers = GetInt(data, 0, "HeadersToPost") : Dim items = GetInt(data, 0, "ItemsToPost")
+                    UpdatePeriodSummary(data)
                     Dim headersPosted = GetInt(data, 0, "HeadersPosted") : Dim itemsPosted = GetInt(data, 0, "ItemsPosted")
                     Dim monthlyCloseStatus = If(data.Tables(0).Columns.Contains("MonthlyCloseStatus"), Convert.ToString(data.Tables(0).Rows(0)("MonthlyCloseStatus")), "Open")
                     Dim periodEnd = New Date(Convert.ToInt32(_year.Value), _month.SelectedIndex + 1, 1).AddMonths(1).AddDays(-1)

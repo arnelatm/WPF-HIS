@@ -107,7 +107,9 @@ BEGIN
                 FROM dbo.MonthlyCloseChecklist
                 WHERE FiscalYear = @FiscalYear AND FiscalMonth = months.FiscalMonth
             ) AS checklist
-            WHERE checklist.ItemCount <> 8 OR checklist.CompletedCount <> 8
+            LEFT JOIN dbo.MonthlyClosePeriod p ON p.FiscalYear = @FiscalYear AND p.FiscalMonth = months.FiscalMonth
+            WHERE NOT (@FiscalYear = 2025 AND months.FiscalMonth <= 10 AND ISNULL(p.HistoricalBaseline, 0) = 1 AND p.Status = 'Closed')
+              AND (checklist.ItemCount <> 8 OR checklist.CompletedCount <> 8)
         )
             THROW 52413, 'Every monthly close checklist must contain eight completed items.', 1;
 

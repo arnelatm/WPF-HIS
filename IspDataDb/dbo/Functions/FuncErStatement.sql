@@ -24,7 +24,7 @@ RETURN
     SELECT 'BB', 0, 1, 0, 0,
            CASE WHEN balance.Amount > 0 THEN balance.Amount ELSE 0 END,
            CASE WHEN balance.Amount < 0 THEN balance.Amount ELSE 0 END,
-           0, 'Beginning Balance', 0, @EmployeeIdNo, 'Beg.Bal.',
+           0, 'Beginning Balance', 1, @EmployeeIdNo, 'Beg.Bal.',
            DATEADD(DAY, -1, @BeginningDate), 'Beg.Bal.',
            CASE WHEN balance.Amount >= 0 THEN 'D' ELSE 'C' END,
            'EL', 'Beginning Balance'

@@ -26,7 +26,7 @@ RETURN
                    FROM dbo.ApStatement_View
                    WHERE SupplierIdNo = @SupplierIdNo
                      AND TransactionDate < @BeginningDate
-                     AND SpecialAccount = 'AP'
+                     AND SpecialAccount IN ('AP', 'AS')
                      AND (TransactionType = 'B' OR @IncludeUnposted = 1 OR ISNULL(Posted, 0) = 1)), 0),
            'Beginning Balance', @SupplierIdNo, '', DATEADD(DAY, -1, @BeginningDate),
            '', 'B', 'Beginning Balance', CAST(1 AS BIT)

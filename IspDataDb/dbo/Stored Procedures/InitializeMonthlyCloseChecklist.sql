@@ -14,9 +14,11 @@ BEGIN
     INSERT INTO dbo.MonthlyCloseChecklist (FiscalYear, FiscalMonth, ChecklistCode)
     SELECT @FiscalYear, @FiscalMonth, v.ChecklistCode
     FROM (VALUES ('AR_RECONCILED'), ('AP_RECONCILED'), ('BANK_RECONCILED'), ('INVENTORY_RECONCILED'), ('VAT_RECONCILED'), ('PAYROLL_REVIEWED'), ('ADJUSTMENTS_APPROVED'), ('TRIAL_BALANCE_REVIEWED')) v(ChecklistCode)
-    WHERE NOT EXISTS (SELECT 1 FROM dbo.MonthlyCloseChecklist c WHERE c.FiscalYear = @FiscalYear AND c.FiscalMonth = @FiscalMonth AND c.ChecklistCode = v.ChecklistCode);
+    WHERE NOT EXISTS (SELECT 1 FROM dbo.MonthlyClosePeriod p WHERE p.FiscalYear = @FiscalYear AND p.FiscalMonth = @FiscalMonth AND p.HistoricalBaseline = 1)
+      AND NOT EXISTS (SELECT 1 FROM dbo.MonthlyCloseChecklist c WHERE c.FiscalYear = @FiscalYear AND c.FiscalMonth = @FiscalMonth AND c.ChecklistCode = v.ChecklistCode);
 
-    SELECT p.FiscalYear, p.FiscalMonth, p.Status, c.ChecklistCode, c.Completed, c.CompletedBy, c.CompletedAt, c.Notes
-    FROM dbo.MonthlyClosePeriod p INNER JOIN dbo.MonthlyCloseChecklist c ON c.FiscalYear = p.FiscalYear AND c.FiscalMonth = p.FiscalMonth
+    SELECT p.FiscalYear, p.FiscalMonth, p.Status, p.HistoricalBaseline, p.ApprovedBy, p.ApprovedAt,
+           c.ChecklistCode, c.Completed, c.CompletedBy, c.CompletedAt, c.Notes
+    FROM dbo.MonthlyClosePeriod p LEFT JOIN dbo.MonthlyCloseChecklist c ON c.FiscalYear = p.FiscalYear AND c.FiscalMonth = p.FiscalMonth
     WHERE p.FiscalYear = @FiscalYear AND p.FiscalMonth = @FiscalMonth ORDER BY c.ChecklistCode;
 END;

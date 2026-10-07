@@ -117,6 +117,7 @@
     <Build Include="dbo\Triggers\SalesJournal_Audit.sql" />
     <Build Include="dbo\Triggers\ErJournal_Audit.sql" />
     <Build Include="dbo\Triggers\Accounting_Audit.sql" />
+    <Build Include="dbo\Triggers\JournalItemContactGuard.sql" />
     <Build Include="dbo\Triggers\Accounting_Control_Audit.sql" />
     <Build Include="dbo\Stored Procedures\WriteAuditFieldSnapshot.sql" />
     <Build Include="dbo\Triggers\Employee_Audit.sql" />
@@ -175,6 +176,7 @@
     <Build Include="dbo\Views\SecurityObject_View.sql" />
     <Build Include="dbo\Views\GeneralJournalItem_View.sql" />
     <Build Include="dbo\Functions\FnResolveOpenInvoiceParty.sql" />
+    <Build Include="dbo\Functions\FnJournalItemContactIsValid.sql" />
     <Build Include="dbo\Views\JournalItemPayeeLedger_View.sql" />
     <Build Include="dbo\Views\ApAging_View.sql" />
     <Build Include="dbo\Views\ArAging_View.sql" />
