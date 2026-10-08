@@ -32,6 +32,8 @@ BEGIN
        AND r.PayorType=@PayorType AND ISNULL(r.PayorIdNo,0)=ISNULL(@PayorIdNo,0)
        AND r.Amount=@Amount AND r.Cancelled=0)
      THROW 51117, 'A matching cash receipt already exists.', 1;
+ IF EXISTS(SELECT 1 FROM @Items i JOIN dbo.Account a ON a.IdNo=i.AccountIdNo WHERE a.SpecialAccount='AR' AND i.Debit>0 AND dbo.FnResolveOpenInvoiceParty(i.PayIdNo,'C',CASE WHEN @PayorType IN ('A','C') THEN @PayorIdNo END) IS NULL) THROW 51118,'An AR cash receipt line requires a customer contact.',1;
+ IF EXISTS(SELECT 1 FROM @Items i JOIN dbo.Account a ON a.IdNo=i.AccountIdNo WHERE a.SpecialAccount='AP' AND i.Credit>0 AND dbo.FnResolveOpenInvoiceParty(i.PayIdNo,'S',CASE WHEN @PayorType='R' THEN @PayorIdNo END) IS NULL) THROW 51119,'An AP cash receipt line requires a supplier contact.',1;
  BEGIN TRAN;
  BEGIN TRY
   INSERT dbo.CashReceiptJournal(TransactionDate,ReferenceNo,Amount,AccountIdNo,PayorType,PayorIdNo,Payorname,CheckNumber,CheckDate,ORNumber,DiscountTaken,DiscountAccountIdNo,Applied,UnApplied,VatAmount,VatNumber,Notes,Posted,Approved,Cancelled)
@@ -39,6 +41,8 @@ BEGIN
   SET @JournalIdNo=CONVERT(int,SCOPE_IDENTITY());
   INSERT dbo.CashReceiptJournalItem(AccountIdNo,Credit,Debit,JournalIdNo,Notes,PayIdNo,RevCostCenterIdNo,Sequence)
   SELECT AccountIdNo,Credit,Debit,@JournalIdNo,Notes,PayIdNo,RevCostCenterIdNo,Sequence FROM @Items;
+  INSERT dbo.ArOpenInvoice(JournalCode,JournalIdNo,JournalItemIdNo) SELECT 'CR',@JournalIdNo,i.IdNo FROM dbo.CashReceiptJournalItem i JOIN dbo.Account a ON a.IdNo=i.AccountIdNo WHERE i.JournalIdNo=@JournalIdNo AND @Cancelled=0 AND ((a.SpecialAccount='AR' AND i.Debit>0) OR (@PayorType='A' AND COALESCE(@UnApplied,0)>0 AND a.SpecialAccount='CA' AND i.Credit>0));
+  INSERT dbo.ApOpenInvoice(JournalCode,JournalIdNo,JournalItemIdNo) SELECT 'CR',@JournalIdNo,i.IdNo FROM dbo.CashReceiptJournalItem i JOIN dbo.Account a ON a.IdNo=i.AccountIdNo WHERE i.JournalIdNo=@JournalIdNo AND @Cancelled=0 AND a.SpecialAccount='AP' AND i.Credit>0;
   INSERT dbo.CsrOiItem(Amount,ArOpenInvoiceIdNo,CsrIdNo,DiscountTaken,Sequence)
   SELECT Amount,ArOpenInvoiceIdNo,@JournalIdNo,DiscountTaken,Sequence FROM @OiItems;
   IF NULLIF(LTRIM(RTRIM(@ReferenceNo)), '') IS NULL

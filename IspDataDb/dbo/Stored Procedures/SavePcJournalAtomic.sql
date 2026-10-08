@@ -4,10 +4,14 @@ AS BEGIN SET NOCOUNT ON; SET XACT_ABORT ON;
  IF @TransactionDate>='20260101' AND EXISTS(SELECT 1 FROM @Items WHERE Debit<0 OR Credit<0 OR (Debit<>0 AND Credit<>0)) THROW 51241,'Petty cash detail lines contain invalid debit/credit values.',1;
  IF @TransactionDate>='20260101' AND EXISTS(SELECT 1 FROM @Items WHERE AccountIdNo=0 AND (Debit<>0 OR Credit<>0)) THROW 51242,'Petty cash detail lines require an account.',1;
  IF @TransactionDate>='20260101' AND (NOT EXISTS(SELECT 1 FROM @Items) OR ABS((SELECT COALESCE(SUM(Debit),0) FROM @Items)-(SELECT COALESCE(SUM(Credit),0) FROM @Items)) > 0.00005) THROW 51240,'Petty cash details are not balanced.',1;
+ IF EXISTS(SELECT 1 FROM @Items i JOIN dbo.Account a ON a.IdNo=i.AccountIdNo WHERE a.SpecialAccount='AR' AND i.Debit>0 AND dbo.FnResolveOpenInvoiceParty(i.PayIdNo,'C',CASE WHEN @PaymentType='R' THEN @PayeeIdNo END) IS NULL) THROW 51244,'An AR petty cash line requires a customer contact.',1;
+ IF EXISTS(SELECT 1 FROM @Items i JOIN dbo.Account a ON a.IdNo=i.AccountIdNo WHERE a.SpecialAccount='AP' AND i.Credit>0 AND dbo.FnResolveOpenInvoiceParty(i.PayIdNo,'S',CASE WHEN @PaymentType IN ('A','S') THEN @PayeeIdNo END) IS NULL) THROW 51245,'An AP petty cash line requires a supplier contact.',1;
  BEGIN TRAN; BEGIN TRY
   INSERT dbo.PcJournal(TransactionDate,ReferenceNo,Amount,AccountIdNo,PaymentType,PayType,PayeeIdNo,PayeeName,CheckNumber,CheckDate,ORNumber,DiscountTaken,DiscountAccountIdNo,Applied,UnApplied,VatNumber,VatAmount,Notes,PcClosed,Approved,Posted,Cancelled) VALUES(@TransactionDate,@ReferenceNo,@Amount,@AccountIdNo,@PaymentType,@PayType,@PayeeIdNo,@PayeeName,@CheckNumber,@CheckDate,@ORNumber,@DiscountTaken,@DiscountAccountIdNo,@Applied,@UnApplied,@VatNumber,@VatAmount,@Notes,@PcClosed,@Approved,@Posted,@Cancelled);
   SET @JournalIdNo=CONVERT(int,SCOPE_IDENTITY());
   INSERT dbo.PcJournalItem(AccountIdNo,Credit,Debit,JournalIdNo,Notes,PayIdNo,RevCostCenterIdNo,Sequence) SELECT AccountIdNo,Credit,Debit,@JournalIdNo,Notes,PayIdNo,RevCostCenterIdNo,Sequence FROM @Items;
+  INSERT dbo.ArOpenInvoice(JournalCode,JournalIdNo,JournalItemIdNo) SELECT 'PC',@JournalIdNo,i.IdNo FROM dbo.PcJournalItem i JOIN dbo.Account a ON a.IdNo=i.AccountIdNo WHERE i.JournalIdNo=@JournalIdNo AND @Cancelled=0 AND a.SpecialAccount='AR' AND i.Debit>0;
+  INSERT dbo.ApOpenInvoice(JournalCode,JournalIdNo,JournalItemIdNo) SELECT 'PC',@JournalIdNo,i.IdNo FROM dbo.PcJournalItem i JOIN dbo.Account a ON a.IdNo=i.AccountIdNo WHERE i.JournalIdNo=@JournalIdNo AND @Cancelled=0 AND ((a.SpecialAccount='AP' AND i.Credit>0) OR (@PaymentType='A' AND COALESCE(@UnApplied,0)>0 AND a.SpecialAccount='AS' AND i.Debit>0));
   INSERT dbo.PcOiItem(Amount,ApOpenInvoiceIdNo,DiscountTaken,DjIdNo,Sequence) SELECT Amount,ApOpenInvoiceIdNo,DiscountTaken,@JournalIdNo,Sequence FROM @OiItems;
   IF NULLIF(LTRIM(RTRIM(@ReferenceNo)), '') IS NULL
   BEGIN

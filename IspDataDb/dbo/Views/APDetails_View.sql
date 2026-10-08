@@ -60,8 +60,8 @@ UNION
 	  ,[RevCostCenterIdNo]
       ,ai.[Notes]
 	  ,ai.[Posted]
-	  ,[PayeeIdNo]
-	  ,[ORNumber]
+	  ,dbo.FnResolveOpenInvoiceParty(ai.PayIdNo, 'S', CASE WHEN b.PaymentType IN ('A','S') THEN b.PayeeIdNo END)
+	  ,COALESCE(NULLIF(LTRIM(RTRIM(b.ORNumber)), ''), b.ReferenceNo)
 	  ,[TransactionDate]
       ,[ReferenceNo]
 	  ,'P'
@@ -71,7 +71,7 @@ UNION
   FROM [CdJournalItem] ai
   LEFT OUTER JOIN dbo.CdJournal b
   on ai.JournalIdNo = b.IDNo
-  WHERE PaymentType='A' and b.Cancelled = 0
+  WHERE b.Cancelled = 0 AND (b.PaymentType='A' OR EXISTS (SELECT 1 FROM dbo.ApOpenInvoice o WHERE o.JournalCode='CD' AND o.JournalIdNo=ai.JournalIdNo AND o.JournalItemIdNo=ai.IdNo))
 )
 UNION
 (SELECT 'PC'
@@ -84,8 +84,8 @@ UNION
 	  ,ai.[RevCostCenterIdNo]
       ,ai.[Notes]
 	  ,ai.[Posted]
-	  ,b.[PayeeIdNo]
-	  ,b.[ORNumber]
+	  ,dbo.FnResolveOpenInvoiceParty(ai.PayIdNo, 'S', CASE WHEN b.PaymentType IN ('A','S') THEN b.PayeeIdNo END)
+	  ,COALESCE(NULLIF(LTRIM(RTRIM(b.ORNumber)), ''), b.ReferenceNo)
 	  ,b.[TransactionDate]
       ,b.[ReferenceNo]
 	  ,'P'
@@ -95,7 +95,7 @@ UNION
   FROM [PcJournalItem] as ai
   LEFT OUTER JOIN PcJournal as b
   on ai.JournalIdNo = b.IDNo
-  WHERE PaymentType='A' and b.Cancelled = 0
+  WHERE b.Cancelled = 0 AND (b.PaymentType='A' OR EXISTS (SELECT 1 FROM dbo.ApOpenInvoice o WHERE o.JournalCode='PC' AND o.JournalIdNo=ai.JournalIdNo AND o.JournalItemIdNo=ai.IdNo))
 )
 UNION
 (SELECT 'CR'
@@ -108,8 +108,8 @@ UNION
 	  ,[RevCostCenterIdNo]
       ,Concat(LTrim(ai.[Notes]),IIf(CheckNumber='','',' Chk#'+[CheckNumber]))
 	  ,ai.[Posted]
-	  ,[PayorIdNo]
-	  ,[ORNumber]
+	  ,dbo.FnResolveOpenInvoiceParty(ai.PayIdNo, 'S', CASE WHEN b.PayorType='R' THEN b.PayorIdNo END)
+	  ,COALESCE(NULLIF(LTRIM(RTRIM(b.ORNumber)), ''), b.ReferenceNo)
 	  ,[TransactionDate]
       ,[ReferenceNo]
 	  ,'R'
@@ -119,8 +119,44 @@ UNION
   FROM [CashReceiptJournalItem] as ai
   LEFT OUTER JOIN dbo.CashReceiptJournal as b
   on ai.JournalIdNo = b.IDNo
-  WHERE PayorType='R' and b.Cancelled = 0
+  WHERE b.Cancelled = 0 AND (b.PayorType='R' OR EXISTS (SELECT 1 FROM dbo.ApOpenInvoice o WHERE o.JournalCode='CR' AND o.JournalIdNo=ai.JournalIdNo AND o.JournalItemIdNo=ai.IdNo))
 )
+UNION
+(SELECT 'GJ', i.IdNo, i.Sequence, i.JournalIdNo, i.AccountIdNo, i.Debit, i.Credit,
+        i.RevCostCenterIdNo, i.Notes COLLATE Arabic_CI_AS, i.Posted,
+        dbo.FnResolveOpenInvoiceParty(i.PayIdNo, 'S', NULL),
+        h.ReferenceNo COLLATE Arabic_CI_AS, h.TransactionDate,
+        h.ReferenceNo COLLATE Arabic_CI_AS, 'I', h.Notes COLLATE Arabic_CI_AS,
+        0, h.TransactionDate
+ FROM dbo.GeneralJournalItem AS i
+ INNER JOIN dbo.GeneralJournal AS h ON h.IdNo = i.JournalIdNo
+ WHERE h.Cancelled = 0 AND h.ClosingJournal = 0
+   AND EXISTS (SELECT 1 FROM dbo.ApOpenInvoice AS o WHERE o.JournalCode = 'GJ'
+               AND o.JournalIdNo = i.JournalIdNo AND o.JournalItemIdNo = i.IdNo))
+UNION
+(SELECT 'ER', i.IdNo, i.Sequence, i.JournalIdNo, i.AccountIdNo, i.Debit, i.Credit,
+        i.RevCostCenterIdNo, i.Notes COLLATE Arabic_CI_AS, i.Posted,
+        dbo.FnResolveOpenInvoiceParty(i.PayIdNo, 'S', NULL),
+        h.ReferenceNo COLLATE Arabic_CI_AS, h.TransactionDate,
+        h.ReferenceNo COLLATE Arabic_CI_AS, 'I', h.Notes COLLATE Arabic_CI_AS,
+        0, h.TransactionDate
+ FROM dbo.ErJournalItem AS i
+ INNER JOIN dbo.ErJournal AS h ON h.IdNo = i.JournalIdNo
+ WHERE h.Cancelled = 0
+   AND EXISTS (SELECT 1 FROM dbo.ApOpenInvoice AS o WHERE o.JournalCode = 'ER'
+               AND o.JournalIdNo = i.JournalIdNo AND o.JournalItemIdNo = i.IdNo))
+UNION
+(SELECT 'SJ', i.IdNo, i.Sequence, i.JournalIdNo, i.AccountIdNo, i.Debit, i.Credit,
+        i.RevCostCenterIdNo, i.Notes COLLATE Arabic_CI_AS, i.Posted,
+        dbo.FnResolveOpenInvoiceParty(i.PayIdNo, 'S', NULL),
+        h.ReferenceNo COLLATE Arabic_CI_AS, h.TransactionDate,
+        h.ReferenceNo COLLATE Arabic_CI_AS, 'I', h.Notes COLLATE Arabic_CI_AS,
+        0, h.TransactionDate
+ FROM dbo.SalesJournalItem AS i
+ INNER JOIN dbo.SalesJournal AS h ON h.IdNo = i.JournalIdNo
+ WHERE h.Cancelled = 0
+   AND EXISTS (SELECT 1 FROM dbo.ApOpenInvoice AS o WHERE o.JournalCode = 'SJ'
+               AND o.JournalIdNo = i.JournalIdNo AND o.JournalItemIdNo = i.IdNo))
 UNION
 (SELECT 'BB' 
 	  ,IdNo
