@@ -1,4 +1,4 @@
-﻿Imports System.ComponentModel
+Imports System.ComponentModel
 Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Views.Forms
@@ -129,6 +129,8 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemAccountsPayableEntry = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemAccountsReceivableEntry = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemKizenCreditSalesImport = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemKizenRevenueJournalImport = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemKizenPharmacyJournalImport = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemCashReceiptEntry = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemEmployeeReceivable = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemGeneralJournalEntry = New System.Windows.Forms.ToolStripMenuItem()
@@ -786,7 +788,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemTransactions
             '
-            Me.ToolStripMenuItemTransactions.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPettyCash, Me.ToolStripMenuItemCashDisbursementEntry, Me.ToolStripMenuItemAccountsPayableEntry, Me.ToolStripMenuItemAccountsReceivableEntry, Me.ToolStripMenuItemKizenCreditSalesImport, Me.ToolStripMenuItemCashReceiptEntry, Me.ToolStripMenuItemEmployeeReceivable, Me.ToolStripMenuItemGeneralJournalEntry, Me.ToolStripMenuItemSales, Me.ToolStripMenuItemPurchases, Me.ToolStripMenuItemSalesJournalEntry, Me.ToolStripMenuItemInventoryTransactions, Me.ToolStripMenuItemAccountReconciliation, Me.ToolStripMenuItemPostPettyCashAccount, Me.ToolStripMenuItemHR, Me.ToolStripMenuItemClosing, Me.ToolStripMenuItemPayrollTransaction, Me.ToolStripMenuItemShiftSummaryEntry, Me.ToolStripSeparator2, Me.ToolStripMenuItemClosePettyCashFund, Me.ToolStripMenuItemLaboratory, Me.ToolStripMenuItemPharmacy, Me.ToolStripMenuItemMedicalFitnessReportEntry, Me.ToolStripMenuItemDocManagement, Me.ToolStripMenuItemInvoiceNoteEditor})
+            Me.ToolStripMenuItemTransactions.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPettyCash, Me.ToolStripMenuItemCashDisbursementEntry, Me.ToolStripMenuItemAccountsPayableEntry, Me.ToolStripMenuItemAccountsReceivableEntry, Me.ToolStripMenuItemCashReceiptEntry, Me.ToolStripMenuItemEmployeeReceivable, Me.ToolStripMenuItemGeneralJournalEntry, Me.ToolStripMenuItemSales, Me.ToolStripMenuItemPurchases, Me.ToolStripMenuItemSalesJournalEntry, Me.ToolStripMenuItemInventoryTransactions, Me.ToolStripMenuItemAccountReconciliation, Me.ToolStripMenuItemPostPettyCashAccount, Me.ToolStripMenuItemHR, Me.ToolStripMenuItemClosing, Me.ToolStripMenuItemPayrollTransaction, Me.ToolStripMenuItemShiftSummaryEntry, Me.ToolStripSeparator2, Me.ToolStripMenuItemClosePettyCashFund, Me.ToolStripMenuItemLaboratory, Me.ToolStripMenuItemPharmacy, Me.ToolStripMenuItemMedicalFitnessReportEntry, Me.ToolStripMenuItemDocManagement, Me.ToolStripMenuItemInvoiceNoteEditor})
             Me.ToolStripMenuItemTransactions.Name = "ToolStripMenuItemTransactions"
             resources.ApplyResources(Me.ToolStripMenuItemTransactions, "ToolStripMenuItemTransactions")
             '
@@ -815,6 +817,16 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemKizenCreditSalesImport.Name = "ToolStripMenuItemKizenCreditSalesImport"
             Me.ToolStripMenuItemKizenCreditSalesImport.Text = "Import Kizen Credit Sales to AR"
             '
+            'ToolStripMenuItemKizenRevenueJournalImport
+            '
+            Me.ToolStripMenuItemKizenRevenueJournalImport.Name = "ToolStripMenuItemKizenRevenueJournalImport"
+            Me.ToolStripMenuItemKizenRevenueJournalImport.Text = "Import Kizen Cash Revenue to General Journal"
+            '
+            'ToolStripMenuItemKizenPharmacyJournalImport
+            '
+            Me.ToolStripMenuItemKizenPharmacyJournalImport.Name = "ToolStripMenuItemKizenPharmacyJournalImport"
+            Me.ToolStripMenuItemKizenPharmacyJournalImport.Text = "Import Kizen Pharmacy Cash Sales to General Journal"
+            '
             'ToolStripMenuItemCashReceiptEntry
             '
             Me.ToolStripMenuItemCashReceiptEntry.Name = "ToolStripMenuItemCashReceiptEntry"
@@ -832,7 +844,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemSales
             '
-            Me.ToolStripMenuItemSales.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemSalesEntry, Me.ToolStripMenuItemSalesReturn})
+            Me.ToolStripMenuItemSales.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemSalesEntry, Me.ToolStripMenuItemSalesReturn, Me.ToolStripMenuItemKizenRevenueJournalImport, Me.ToolStripMenuItemKizenPharmacyJournalImport, Me.ToolStripMenuItemKizenCreditSalesImport})
             Me.ToolStripMenuItemSales.Name = "ToolStripMenuItemSales"
             resources.ApplyResources(Me.ToolStripMenuItemSales, "ToolStripMenuItemSales")
             '
@@ -1715,6 +1727,8 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ToolStripMenuItemAccountsPayableEntry As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemAccountsReceivableEntry As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemKizenCreditSalesImport As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemKizenRevenueJournalImport As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemKizenPharmacyJournalImport As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemItems As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemCaptionsBatchEdit As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemSalesJournalEntry As ToolStripMenuItem

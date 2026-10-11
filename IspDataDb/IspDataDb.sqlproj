@@ -82,6 +82,8 @@
     <Build Include="dbo\Tables\currencies.sql" />
     <Build Include="dbo\Tables\OriginalCaptions.sql" />
     <Build Include="dbo\Tables\AccountReconciliationItem.sql" />
+    <Build Include="dbo\Tables\KizenRevenueJournalImport.sql" />
+    <Build Include="dbo\Tables\KizenPharmacyJournalImport.sql" />
     <Build Include="dbo\Tables\TranslatedCaption.sql" />
     <Build Include="dbo\Tables\TranslatedMessages.sql" />
     <Build Include="dbo\Tables\DistributionScheme.sql" />
@@ -244,6 +246,8 @@
     <Build Include="dbo\Stored Procedures\DeleteApJournalAtomic.sql" />
     <Build Include="dbo\Stored Procedures\SaveArJournalAtomic.sql" />
     <Build Include="dbo\Stored Procedures\ImportKizenCreditSalesAtomic.sql" />
+    <Build Include="dbo\Stored Procedures\ImportKizenRevenueJournalAtomic.sql" />
+    <Build Include="dbo\Stored Procedures\ImportKizenPharmacyJournalAtomic.sql" />
     <Build Include="dbo\Stored Procedures\UpdateArJournalAtomic.sql" />
     <Build Include="dbo\Stored Procedures\DeleteArJournalAtomic.sql" />
     <Build Include="dbo\Stored Procedures\SaveCdJournalAtomic.sql" />
@@ -289,6 +293,7 @@
     <Build Include="dbo\User Defined Types\JournalItemInsert.sql" />
     <Build Include="dbo\User Defined Types\KizenArJournalHeaderInsert.sql" />
     <Build Include="dbo\User Defined Types\KizenArJournalItemInsert.sql" />
+    <Build Include="dbo\User Defined Types\KizenRevenueJournalItemInsert.sql" />
     <Build Include="dbo\User Defined Types\JournalItemUpdate.sql" />
     <Build Include="dbo\User Defined Types\AccountReconciliationItemInsert.sql" />
     <Build Include="dbo\User Defined Types\AccountReconciliationItemUpdate.sql" />

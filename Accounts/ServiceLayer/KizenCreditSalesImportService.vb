@@ -13,11 +13,14 @@ Namespace ServiceLayer
         Private Const VatableRevenueAccountCode As String = "403"
         Private Const VatExemptRevenueAccountCode As String = "408"
         Private Const SaudiRevenueAccountCode As String = "491"
+        Private Const PharmacyVatableRevenueAccountCode As String = "428"
+        Private Const PharmacyZeroRatedRevenueAccountCode As String = "409"
+        Private Const PharmacyCostCenterCode As String = "500"
         Private Const DefaultCostCenterCode As String = "000"
         Private Const UnknownCostCenterCode As String = "999"
 
         Private Shared ReadOnly SourceSql As String =
-            "SELECT ii.ID AS InsuranceInvoiceID, ic.Code AS CompanyCode, ic.LatinName AS CompanyName, " &
+            "SELECT ii.ID AS InsuranceInvoiceID, ic.Code AS CompanyCode, ic.LatinName AS CompanyName, ic.Name AS CompanyNameAra, ic.VATNumber AS CompanyVatNumber, ic.CommercialRegistrationNumber AS CompanyCrNumber, " &
             "ii.ENumber AS ZatcaNumber, CONVERT(date, ii.SupplyPeriodStartDate) AS SupplyPeriodStart, " &
             "CONVERT(date, ii.SupplyPeriodEndDate) AS SupplyPeriodEnd, " &
             "CONVERT(date, COALESCE(ii.InvoiceIssueDate, ii.SupplyPeriodEndDate)) AS TransactionDate, " &
@@ -28,7 +31,7 @@ Namespace ServiceLayer
             "ii.TotalInsuranceVATValue AS ExpectedVatAmount, " &
             "ii.TotalInsuranceCarryWithVAT AS ExpectedAmount, " &
             "ii.VatPer AS ExpectedVatRate, " &
-            "v.InvoiceNo, v.InvoiceDetailId, v.DrCode, v.AmountBeforeVat, " &
+            "v.InvoiceNo, v.InvoiceDetailId, v.DrCode, v.Clinic, v.AmountBeforeVat, " &
             "v.VatableAmountSA, v.VatableAmountNS, v.VatExemptAmt " &
             "FROM dbo.InsuranceInvoice ii " &
             "INNER JOIN dbo.Insurance_Company ic ON ic.ID = ii.InsuranceCompanyID " &
@@ -77,6 +80,7 @@ Namespace ServiceLayer
                         End If
 
                         Dim companyCode = ReadText(reader, "CompanyCode").Trim()
+                        If String.IsNullOrWhiteSpace(companyCode) Then Throw New InvalidOperationException(String.Format("Kizen InsuranceInvoice {0} has no company code and cannot be mapped or created as an ISPData customer.", insuranceInvoiceId))
                         Dim zatcaNumber = ReadText(reader, "ZatcaNumber").Trim()
                         If String.IsNullOrWhiteSpace(zatcaNumber) Then
                             skippedNoZatcaSummaryIds.Add(insuranceInvoiceId)
@@ -88,7 +92,10 @@ Namespace ServiceLayer
                             work = New CompanyWork With {
                                 .InsuranceInvoiceId = insuranceInvoiceId,
                                 .CompanyCode = companyCode,
-                                .CompanyName = ReadText(reader, "CompanyName"),
+                                .CompanyName = If(String.IsNullOrWhiteSpace(ReadText(reader, "CompanyName")), ReadText(reader, "CompanyNameAra"), ReadText(reader, "CompanyName")).Trim(),
+                                .CompanyNameAra = If(String.IsNullOrWhiteSpace(ReadText(reader, "CompanyNameAra")), ReadText(reader, "CompanyName"), ReadText(reader, "CompanyNameAra")).Trim(),
+                                .CompanyVatNumber = ReadText(reader, "CompanyVatNumber").Trim(),
+                                .CompanyCrNumber = ReadText(reader, "CompanyCrNumber").Trim(),
                                 .ZatcaNumber = zatcaNumber,
                                 .SupplyPeriodStart = supplyPeriodStart,
                                 .SupplyPeriodEnd = supplyPeriodEnd,
@@ -129,9 +136,17 @@ Namespace ServiceLayer
                         work.VatableAmount += ReadDecimal(reader, "VatableAmountNS")
                         work.VatExemptAmount += ReadDecimal(reader, "VatableAmountSA")
                         work.VatExemptAmount += ReadDecimal(reader, "VatExemptAmt")
-                        work.Add("NS", ReadText(reader, "DrCode"), ReadDecimal(reader, "VatableAmountNS"))
-                        work.Add("SA", ReadText(reader, "DrCode"), ReadDecimal(reader, "VatableAmountSA"))
-                        work.Add("EX", ReadText(reader, "DrCode"), ReadDecimal(reader, "VatExemptAmt"))
+                        Dim clinic = ReadText(reader, "Clinic")
+                        Dim isPharmacy = clinic.IndexOf("Pharmacy", StringComparison.OrdinalIgnoreCase) >= 0 OrElse
+                                         clinic.IndexOf("الصيدلية", StringComparison.OrdinalIgnoreCase) >= 0
+                        If isPharmacy Then
+                            work.Add("PHNS", PharmacyCostCenterCode, ReadDecimal(reader, "VatableAmountNS"))
+                            work.Add("PHZERO", PharmacyCostCenterCode, ReadDecimal(reader, "VatableAmountSA") + ReadDecimal(reader, "VatExemptAmt"))
+                        Else
+                            work.Add("NS", ReadText(reader, "DrCode"), ReadDecimal(reader, "VatableAmountNS"))
+                            work.Add("SA", ReadText(reader, "DrCode"), ReadDecimal(reader, "VatableAmountSA"))
+                            work.Add("EX", ReadText(reader, "DrCode"), ReadDecimal(reader, "VatExemptAmt"))
+                        End If
                     End While
                 End Using
             End Using
@@ -157,10 +172,17 @@ Namespace ServiceLayer
             batch.SourceVatAmount = RoundMoney(batch.SourceVatAmount)
             If workBySummary.Count = 0 Then Throw New InvalidOperationException("No completed, ZATCA-posted insured credit-sales summaries were found for the selected month.")
 
-            Dim accountIds = LoadAccountIds()
+            Dim requiredPharmacyCodes As New HashSet(Of String)(StringComparer.OrdinalIgnoreCase)
+            For Each work In workBySummary.Values
+                For Each bucket In work.Buckets.Values
+                    If RoundMoney(bucket.Amount) = 0D Then Continue For
+                    If bucket.Category = "PHNS" Then requiredPharmacyCodes.Add(PharmacyVatableRevenueAccountCode)
+                    If bucket.Category = "PHZERO" Then requiredPharmacyCodes.Add(PharmacyZeroRatedRevenueAccountCode)
+                Next
+            Next
+            Dim accountIds = LoadAccountIds(requiredPharmacyCodes)
             Dim customerIds = LoadCustomerIds()
             Dim costCenterIds = LoadCostCenterIds()
-            Dim defaultCostCenterId = RequireCostCenter(costCenterIds, DefaultCostCenterCode)
             Dim unknownCostCenterId = RequireCostCenter(costCenterIds, UnknownCostCenterCode)
 
             Dim batchSequence As Integer = 0
@@ -173,8 +195,9 @@ Namespace ServiceLayer
 
                 Dim customer As KizenCustomerMapping = Nothing
                 If Not customerIds.TryGetValue(Normalize(work.CompanyCode), customer) Then
-                    Throw New InvalidOperationException(String.Format("Kizen company code {0} ({1}) is not mapped to an ISPData customer.", work.CompanyCode, work.CompanyName))
+                    customer = New KizenCustomerMapping With {.CustomerIdNo = 0, .PaymentDueDays = 0}
                 End If
+                If customer.CustomerIdNo = 0 Then ValidateNewCustomer(work)
                 If String.IsNullOrWhiteSpace(work.ZatcaNumber) Then
                     Throw New InvalidOperationException(String.Format("Kizen insurance invoice for company {0} ({1}) has no ZATCA number in dbo.InsuranceInvoice.ENumber for the selected supply period.", work.CompanyCode, work.CompanyName))
                 End If
@@ -187,6 +210,10 @@ Namespace ServiceLayer
                     .InsuranceInvoiceId = work.InsuranceInvoiceId,
                     .CompanyCode = work.CompanyCode,
                     .CompanyName = work.CompanyName,
+                    .CompanyNameAra = work.CompanyNameAra,
+                    .CompanyVatNumber = work.CompanyVatNumber,
+                    .CompanyCrNumber = work.CompanyCrNumber,
+                    .WillCreateCustomer = customer.CustomerIdNo = 0,
                     .ZatcaNumber = work.ZatcaNumber,
                     .SupplyPeriodStart = work.SupplyPeriodStart,
                     .SupplyPeriodEnd = work.SupplyPeriodEnd,
@@ -203,7 +230,7 @@ Namespace ServiceLayer
                 batchSequence = company.BatchSequence
                 Dim arLineNotes = "Bill for " & batch.SourcePeriodStart.ToString(
                     "MMMM yyyy", Globalization.CultureInfo.GetCultureInfo("en-US"))
-                AddItem(company, accountIds(ArAccountCode), work.Amount, 0D, defaultCostCenterId, arLineNotes)
+                AddItem(company, accountIds(ArAccountCode), work.Amount, 0D, 0, arLineNotes)
 
                 For Each bucket In work.Buckets.Values
                     Dim amount = RoundMoney(bucket.Amount)
@@ -213,7 +240,7 @@ Namespace ServiceLayer
                     If amount = 0D Then Continue For
 
                     Dim costCenterId = If(String.Equals(bucket.Category, "VAT", StringComparison.OrdinalIgnoreCase),
-                                          defaultCostCenterId,
+                                          0,
                                           ResolveCostCenter(costCenterIds, bucket.CostCenterCode, unknownCostCenterId, work.CompanyCode))
                     Select Case bucket.Category
                         Case "NS"
@@ -222,8 +249,12 @@ Namespace ServiceLayer
                             AddItem(company, accountIds(SaudiRevenueAccountCode), 0D, amount, costCenterId, "VATable Saudi - " & bucket.CostCenterCode)
                         Case "EX"
                             AddItem(company, accountIds(VatExemptRevenueAccountCode), 0D, amount, costCenterId, "VAT exempt - " & bucket.CostCenterCode)
+                        Case "PHNS"
+                            AddItem(company, accountIds(PharmacyVatableRevenueAccountCode), 0D, amount, costCenterId, "Pharmacy VATable - " & PharmacyCostCenterCode)
+                        Case "PHZERO"
+                            AddItem(company, accountIds(PharmacyZeroRatedRevenueAccountCode), 0D, amount, costCenterId, "Pharmacy zero-rated - " & PharmacyCostCenterCode)
                         Case "VAT"
-                            AddItem(company, accountIds(OutputVatAccountCode), 0D, amount, defaultCostCenterId, "Output VAT")
+                            AddItem(company, accountIds(OutputVatAccountCode), 0D, amount, 0, "Output VAT")
                     End Select
                 Next
 
@@ -266,6 +297,8 @@ Namespace ServiceLayer
                 Dim referenceParameter = cmd.Parameters.Add("@ReferenceNo", SqlDbType.VarChar, 15)
                 referenceParameter.Direction = ParameterDirection.Output
                 Dim journalCountParameter = cmd.Parameters.Add("@JournalCount", SqlDbType.Int)
+                Dim createdCustomerParameter = cmd.Parameters.Add("@CreatedCustomerCount", SqlDbType.Int)
+                createdCustomerParameter.Direction = ParameterDirection.Output
                 journalCountParameter.Direction = ParameterDirection.Output
                 cn.Open()
                 AATM.DataLayer.AdoNet.AuditContext.Apply(cn)
@@ -273,6 +306,7 @@ Namespace ServiceLayer
                 Return New KizenCreditSalesImportResult With {
                     .ReferenceNo = Convert.ToString(referenceParameter.Value),
                     .JournalCount = Convert.ToInt32(journalCountParameter.Value),
+                    .CreatedCustomerCount = Convert.ToInt32(createdCustomerParameter.Value),
                     .SourceInvoiceCount = batch.SourceInvoiceCount,
                     .SourceDetailCount = batch.SourceDetailCount,
                     .SourceAmount = batch.SourceAmount
@@ -293,6 +327,10 @@ Namespace ServiceLayer
             table.Columns.Add("Notes", GetType(String))
             table.Columns.Add("InsuranceInvoiceID", GetType(Integer))
             table.Columns.Add("CompanyCode", GetType(String))
+            table.Columns.Add("CompanyName", GetType(String))
+            table.Columns.Add("CompanyNameAra", GetType(String))
+            table.Columns.Add("CompanyVatNumber", GetType(String))
+            table.Columns.Add("CompanyCrNumber", GetType(String))
             table.Columns.Add("SupplyPeriodStart", GetType(DateTime))
             table.Columns.Add("SupplyPeriodEnd", GetType(DateTime))
             table.Columns.Add("SourceInvoiceCount", GetType(Integer))
@@ -301,7 +339,7 @@ Namespace ServiceLayer
             For Each company In batch.Companies
                 table.Rows.Add(company.BatchSequence, company.CustomerIdNo, company.AccountIdNo, company.DueDate, company.Amount, company.VatAmount,
                                company.ZatcaNumber, company.InvoiceDate, "Credit Sales batch " & batch.SourcePeriodStart.ToString("yyyy-MM") & " - " & company.CompanyCode,
-                               company.InsuranceInvoiceId, company.CompanyCode, company.SupplyPeriodStart, company.SupplyPeriodEnd,
+                               company.InsuranceInvoiceId, company.CompanyCode, company.CompanyName, company.CompanyNameAra, company.CompanyVatNumber, company.CompanyCrNumber, company.SupplyPeriodStart, company.SupplyPeriodEnd,
                                company.SourceInvoiceCount, company.SourceDetailCount, company.TransactionDate)
             Next
             Return table
@@ -336,9 +374,17 @@ Namespace ServiceLayer
             })
         End Sub
 
-        Private Shared Function LoadAccountIds() As Dictionary(Of String, Integer)
+        Private Shared Sub ValidateNewCustomer(work As CompanyWork)
+            If work.CompanyCode.Length > 50 Then Throw New InvalidOperationException(String.Format("Kizen company code {0} exceeds the 50-character ISPData customer-code limit. Shorten it or map it manually.", work.CompanyCode))
+            If String.IsNullOrWhiteSpace(work.CompanyName) OrElse work.CompanyName.Length > 50 Then Throw New InvalidOperationException(String.Format("Kizen company {0} needs a Latin name of 1 to 50 characters before it can be created in ISPData.", work.CompanyCode))
+            If String.IsNullOrWhiteSpace(work.CompanyNameAra) OrElse work.CompanyNameAra.Length > 50 Then Throw New InvalidOperationException(String.Format("Kizen company {0} needs a native-language name of 1 to 50 characters before it can be created in ISPData.", work.CompanyCode))
+            If work.CompanyVatNumber.Length > 15 Then Throw New InvalidOperationException(String.Format("Kizen company {0} has a VAT number longer than the 15-character ISPData field.", work.CompanyCode))
+            If work.CompanyCrNumber.Length > 20 Then Throw New InvalidOperationException(String.Format("Kizen company {0} has a commercial registration number longer than the 20-character ISPData field.", work.CompanyCode))
+        End Sub
+
+        Private Shared Function LoadAccountIds(requiredPharmacyCodes As IEnumerable(Of String)) As Dictionary(Of String, Integer)
             Dim result As New Dictionary(Of String, Integer)(StringComparer.OrdinalIgnoreCase)
-            Using cn As New SqlConnection(GlobalVariables.DacConnectionString), cmd As New SqlCommand("SELECT IdNo, AccountCode FROM dbo.Account WHERE AccountCode IN ('112','232','403','408','491')", cn)
+            Using cn As New SqlConnection(GlobalVariables.DacConnectionString), cmd As New SqlCommand("SELECT IdNo, AccountCode FROM dbo.Account WHERE AccountCode IN ('112','232','403','408','491','428','409') AND (AccountCode NOT IN ('428','409') OR Active = 1)", cn)
                 cn.Open()
                 Using reader = cmd.ExecuteReader()
                     While reader.Read()
@@ -346,8 +392,8 @@ Namespace ServiceLayer
                     End While
                 End Using
             End Using
-            For Each code In {ArAccountCode, OutputVatAccountCode, VatableRevenueAccountCode, VatExemptRevenueAccountCode, SaudiRevenueAccountCode}
-                If Not result.ContainsKey(code) Then Throw New InvalidOperationException("ISPData account mapping is missing for account code " & code & ".")
+            For Each code In New String() {ArAccountCode, OutputVatAccountCode, VatableRevenueAccountCode, VatExemptRevenueAccountCode, SaudiRevenueAccountCode}.Concat(requiredPharmacyCodes)
+                If Not result.ContainsKey(code) Then Throw New InvalidOperationException("ISPData account mapping is missing or inactive for account code " & code & ".")
             Next
             Return result
         End Function
@@ -516,6 +562,9 @@ Namespace ServiceLayer
             Public Property InsuranceInvoiceId As Integer
             Public Property CompanyCode As String
             Public Property CompanyName As String
+            Public Property CompanyNameAra As String
+            Public Property CompanyVatNumber As String
+            Public Property CompanyCrNumber As String
             Public Property ZatcaNumber As String
             Public Property SupplyPeriodStart As DateTime
             Public Property SupplyPeriodEnd As DateTime

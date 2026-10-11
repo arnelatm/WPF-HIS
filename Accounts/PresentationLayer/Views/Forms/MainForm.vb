@@ -1,4 +1,4 @@
-﻿Imports System.ComponentModel
+Imports System.ComponentModel
 Imports System.Configuration
 Imports System.Deployment.Application
 Imports System.Drawing
@@ -343,6 +343,18 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub KizenCreditSalesImportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemKizenCreditSalesImport.Click
             Using form As New KizenCreditSalesImportForm()
+                form.ShowDialog(Me)
+            End Using
+        End Sub
+
+        Private Sub KizenRevenueJournalImportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemKizenRevenueJournalImport.Click
+            Using form As New KizenRevenueJournalImportForm()
+                form.ShowDialog(Me)
+            End Using
+        End Sub
+
+        Private Sub KizenPharmacyJournalImportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemKizenPharmacyJournalImport.Click
+            Using form As New KizenPharmacyJournalImportForm()
                 form.ShowDialog(Me)
             End Using
         End Sub

@@ -61,6 +61,7 @@ Namespace PresentationLayer.Views.Forms
             _grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
             _grid.Columns.Add(New DataGridViewTextBoxColumn With {.HeaderText = "Company code", .DataPropertyName = "CompanyCode"})
             _grid.Columns.Add(New DataGridViewTextBoxColumn With {.HeaderText = "Company", .DataPropertyName = "CompanyName"})
+            _grid.Columns.Add(New DataGridViewTextBoxColumn With {.HeaderText = "ISPData customer", .DataPropertyName = "CustomerStatus"})
             _grid.Columns.Add(New DataGridViewTextBoxColumn With {.HeaderText = "Invoice number", .DataPropertyName = "ZatcaNumber"})
             _grid.Columns.Add(New DataGridViewTextBoxColumn With {.HeaderText = "Supply period", .DataPropertyName = "SupplyPeriod"})
             _grid.Columns.Add(New DataGridViewTextBoxColumn With {.HeaderText = "AR amount", .DataPropertyName = "Amount", .DefaultCellStyle = New DataGridViewCellStyle With {.Format = "N2"}})
@@ -92,16 +93,18 @@ Namespace PresentationLayer.Views.Forms
                 _grid.DataSource = _batch.Companies.Select(Function(c) New With {
                     .CompanyCode = c.CompanyCode,
                     .CompanyName = c.CompanyName,
+                    .CustomerStatus = If(c.WillCreateCustomer, "Will create", "Mapped"),
                     .ZatcaNumber = c.ZatcaNumber,
                     .SupplyPeriod = String.Format("{0:dd/MM/yyyy} - {1:dd/MM/yyyy}", c.SupplyPeriodStart, c.SupplyPeriodEnd),
                     .Amount = c.Amount,
                     .VatAmount = c.VatAmount,
                     .ItemCount = c.Items.Count
                 }).ToList()
+                Dim newCustomerCount = _batch.Companies.Where(Function(c) c.WillCreateCustomer).Select(Function(c) c.CompanyCode.Trim()).Distinct(StringComparer.OrdinalIgnoreCase).Count()
                 _post.Enabled = True
-                _status.Text = String.Format("{0:N0} source invoices / {1:N0} detail rows; {2} AR journals; total AR {3:N2}; skipped: {4} without ZATCA, {5} incomplete, {6} already imported. One GL series reference will be allocated when posted.",
+                _status.Text = String.Format("{0:N0} source invoices / {1:N0} detail rows; {2} AR journals; total AR {3:N2}; skipped: {4} without ZATCA, {5} incomplete, {6} already imported; {7} new customers will be created when posted. One GL series reference will be allocated when posted.",
                                              _batch.SourceInvoiceCount, _batch.SourceDetailCount, _batch.JournalCount, _batch.SourceAmount,
-                                             _batch.SkippedNoZatcaSummaryCount, _batch.SkippedIncompleteSummaryCount, _batch.SkippedAlreadyImportedSummaryCount)
+                                             _batch.SkippedNoZatcaSummaryCount, _batch.SkippedIncompleteSummaryCount, _batch.SkippedAlreadyImportedSummaryCount, newCustomerCount)
             Catch ex As Exception
                 _batch = Nothing
                 _grid.DataSource = Nothing
@@ -114,12 +117,13 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub PostClick(sender As Object, e As EventArgs)
             If _batch Is Nothing Then Return
-            If MessageBox.Show(Me, String.Format("Post {0} AR journals for {1:N2} from Kizen? The operation is atomic and uses one next GL series reference.", _batch.JournalCount, _batch.SourceAmount), Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) <> DialogResult.Yes Then Return
+            Dim newCustomerCount = _batch.Companies.Where(Function(c) c.WillCreateCustomer).Select(Function(c) c.CompanyCode.Trim()).Distinct(StringComparer.OrdinalIgnoreCase).Count()
+            If MessageBox.Show(Me, String.Format("Post {0} AR journals for {1:N2} from Kizen and create {2} missing ISPData customers as active accounts with open status and zero payment days?", _batch.JournalCount, _batch.SourceAmount, newCustomerCount), Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) <> DialogResult.Yes Then Return
             Try
                 Cursor = Cursors.WaitCursor
                 Dim result = _service.Import(_batch)
                 _post.Enabled = False
-                _status.Text = String.Format("Posted {0} AR journals with reference {1}. Source invoices: {2:N0}; AR total: {3:N2}.", result.JournalCount, result.ReferenceNo, result.SourceInvoiceCount, result.SourceAmount)
+                _status.Text = String.Format("Posted {0} AR journals with reference {1}; created {2} ISPData customers. Source invoices: {3:N0}; AR total: {4:N2}.", result.JournalCount, result.ReferenceNo, result.CreatedCustomerCount, result.SourceInvoiceCount, result.SourceAmount)
                 MessageBox.Show(Me, _status.Text, Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Catch ex As Exception
                 MessageBox.Show(Me, ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Error)

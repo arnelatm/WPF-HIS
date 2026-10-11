@@ -37,6 +37,10 @@ Namespace ServiceLayer
         Public Property InsuranceInvoiceId As Integer
         Public Property CompanyCode As String
         Public Property CompanyName As String
+        Public Property CompanyNameAra As String
+        Public Property CompanyVatNumber As String
+        Public Property CompanyCrNumber As String
+        Public Property WillCreateCustomer As Boolean
         Public Property ZatcaNumber As String
         Public Property SupplyPeriodStart As DateTime
         Public Property SupplyPeriodEnd As DateTime
@@ -64,6 +68,7 @@ Namespace ServiceLayer
     Public Class KizenCreditSalesImportResult
         Public Property ReferenceNo As String
         Public Property JournalCount As Integer
+        Public Property CreatedCustomerCount As Integer
         Public Property SourceInvoiceCount As Integer
         Public Property SourceDetailCount As Integer
         Public Property SourceAmount As Decimal
