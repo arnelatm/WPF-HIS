@@ -1531,6 +1531,9 @@
     <Compile Include="PresentationLayer\Views\Forms\PayrollEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\PayrollJournalPreviewForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\PensionProviderEntryTv.designer.vb">
       <DependentUpon>PensionProviderEntryTv.vb</DependentUpon>
     </Compile>

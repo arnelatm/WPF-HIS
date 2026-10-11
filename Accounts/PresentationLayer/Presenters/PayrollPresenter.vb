@@ -1,6 +1,7 @@
 ﻿Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Accounts.PresentationLayer.Views.Forms
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Presenters
@@ -1422,7 +1423,6 @@ Namespace PresentationLayer.Presenters
                 Messaging.Show(missingPayrollMessage, MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Return
             End If
-
             If Not HasGeneralJournalMenuAccess() Then
                 Dim accessDeniedMessage As String = If(CultureInfo.CurrentCulture.TwoLetterISOLanguageName = "ar",
                                                        "ليس لديك صلاحية إنشاء قيود اليومية العامة.",
@@ -1434,33 +1434,25 @@ Namespace PresentationLayer.Presenters
             Dim monthName As String = New CultureInfo("en-US").DateTimeFormat.GetMonthName(View.EndDate.Value.Month)
             Dim notes As String = String.Format("Payroll for {0} {1}", monthName, View.EndDate.Value.Year)
             Dim isArabic As Boolean = CultureInfo.CurrentCulture.TwoLetterISOLanguageName = "ar"
-            Dim confirmation As String = If(isArabic,
-                                            "سيتم إنشاء مسودة قيد يومية لهذه المسيرة ولن يتم ترحيلها. هل تريد المتابعة؟",
-                                            String.Format("Create a draft General Journal for payroll {0}? It will not be posted.", monthName & " " & View.EndDate.Value.Year))
             Dim caption As String = If(isArabic, "إنشاء قيد الرواتب", "Create Payroll Journal")
-            Dim messageOptions As MessageBoxOptions = If(isArabic,
-                                                         MessageBoxOptions.RightAlign Or MessageBoxOptions.RtlReading,
-                                                         CType(0, MessageBoxOptions))
-            If MessageBox.Show(confirmation, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2, messageOptions) <> DialogResult.Yes Then
-                Return
-            End If
 
             Try
-                Dim alreadyExists As Boolean = False
-                Dim journalIdNo As Integer = New AATM.Accounts.ServiceLayer.PayrollJournalTransactionService().CreateForPayroll(View.IdNo, notes, alreadyExists)
-                Dim message As String
-                If isArabic Then
-                    If alreadyExists Then
-                        message = String.Format("تم إنشاء قيد يومية لهذه المسيرة مسبقاً. رقم القيد {0}.", journalIdNo)
-                    Else
-                        message = String.Format("تم إنشاء مسودة قيد اليومية رقم {0}. يرجى مراجعتها وترحيلها من شاشة اليومية العامة.", journalIdNo)
-                    End If
-                ElseIf alreadyExists Then
-                    message = String.Format("A General Journal already exists for this payroll (journal {0}). No duplicate was created.", journalIdNo)
-                Else
-                    message = String.Format("Draft General Journal {0} was created for this payroll. Review and post it from General Journal Entry.", journalIdNo)
+                Dim transactionService As New AATM.Accounts.ServiceLayer.PayrollJournalTransactionService()
+                Dim previewAlreadyExists As Boolean = False
+                Dim existingJournalIdNo As Integer = 0
+                Dim previewLines = transactionService.PreviewForPayroll(View.IdNo, notes, existingJournalIdNo, previewAlreadyExists)
+                If previewAlreadyExists Then
+                    ShowPayrollJournalResult(True, existingJournalIdNo, isArabic)
+                    Return
                 End If
-                Messaging.Show(message, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+                Using previewForm As New PayrollJournalPreviewForm(notes, previewLines, isArabic)
+                    If previewForm.ShowDialog() <> DialogResult.OK Then Return
+                End Using
+
+                Dim alreadyExists As Boolean = False
+                Dim journalIdNo As Integer = transactionService.CreateForPayroll(View.IdNo, notes, alreadyExists)
+                ShowPayrollJournalResult(alreadyExists, journalIdNo, isArabic)
             Catch ex As System.Data.SqlClient.SqlException When ex.Number = 51817
                 MessagingForm.Show(ex.Message, caption, MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Catch ex As Exception
@@ -1468,6 +1460,21 @@ Namespace PresentationLayer.Presenters
             End Try
         End Sub
 
+        Private Sub ShowPayrollJournalResult(alreadyExists As Boolean, journalIdNo As Integer, isArabic As Boolean)
+            Dim message As String
+            If isArabic Then
+                If alreadyExists Then
+                    message = String.Format("تم إنشاء قيد يومية لهذه المسيرة مسبقاً. رقم القيد {0}.", journalIdNo)
+                Else
+                    message = String.Format("تم إنشاء مسودة قيد اليومية رقم {0}. يرجى مراجعتها وترحيلها من شاشة اليومية العامة.", journalIdNo)
+                End If
+            ElseIf alreadyExists Then
+                message = String.Format("A General Journal already exists for this payroll (journal {0}). No duplicate was created.", journalIdNo)
+            Else
+                message = String.Format("Draft General Journal {0} was created for this payroll. Review and post it from General Journal Entry.", journalIdNo)
+            End If
+            Messaging.Show(message, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End Sub
         Private Function HasGeneralJournalMenuAccess() As Boolean
             If UserIsASuperAdmin() Then Return True
 

@@ -2,7 +2,8 @@ CREATE PROCEDURE [dbo].[CreatePayrollGeneralJournalAtomic]
     @PayrollIdNo SMALLINT,
     @Notes NVARCHAR(300),
     @JournalIdNo INT OUTPUT,
-    @AlreadyExists BIT OUTPUT
+    @AlreadyExists BIT OUTPUT,
+    @PreviewOnly BIT = 0
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -314,6 +315,22 @@ BEGIN
         IF ABS((SELECT ISNULL(SUM(Debit), 0) FROM #Items) - (SELECT ISNULL(SUM(Credit), 0) FROM #Items)) > 0.00005
             THROW 51813, 'Payroll General Journal details are not balanced.', 1;
 
+        IF @PreviewOnly = 1
+        BEGIN
+            SELECT i.Sequence, a.AccountCode, a.AccountName,
+                   COALESCE(e.EmployeeName, N'') AS EmployeeName,
+                   COALESCE(rc.RevCostCenterCode, '') AS RevCostCenterCode,
+                   COALESCE(rc.RevCostCenterName, N'') AS RevCostCenterName,
+                   i.Debit, i.Credit
+            FROM #Items AS i
+            INNER JOIN dbo.Account AS a ON a.IdNo = i.AccountIdNo
+            LEFT JOIN dbo.Contact AS c ON c.IdNo = i.PayIdNo AND c.CSECode = 'E'
+            LEFT JOIN dbo.Employee AS e ON e.IdNo = c.CSEIdNo
+            LEFT JOIN dbo.RevCostCenter AS rc ON rc.IdNo = i.RevCostCenterIdNo
+            ORDER BY i.Sequence;
+            COMMIT TRANSACTION;
+            RETURN;
+        END;
         INSERT INTO dbo.GeneralJournal (TransactionDate, ReferenceNo, Notes, Approved, Posted, ClosingJournal, Cancelled)
         VALUES (@TransactionDate, NULL, @Notes, 0, 0, 0, 0);
 
