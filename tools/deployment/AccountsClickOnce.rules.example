@@ -1,0 +1,8 @@
+# INACTIVE template. Replace both absolute paths for the release workstation.
+# Review Invoke-AccountsClickOnce.ps1 AND its helper scripts before trusting it.
+# Install a reviewed copy under the active Codex user rules directory; restart Codex.
+prefix_rule(
+    pattern = ["<ABSOLUTE_POWERSHELL_EXE>", "-NoLogo", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "<ABSOLUTE_REPOSITORY_ROOT>\\tools\\deployment\\Invoke-AccountsClickOnce.ps1"],
+    decision = "allow",
+    justification = "Accounts ClickOnce release entry point; fixed destination, validated versions, staged build and guarded deployment",
+)

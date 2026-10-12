@@ -1,4 +1,4 @@
-CREATE FUNCTION [dbo].[FuncArStatement]
+﻿CREATE FUNCTION [dbo].[FuncArStatement]
 (
     @CustomerIdNo INT,
     @BeginningDate DATE,
@@ -11,7 +11,7 @@ RETURN
 (
     SELECT 0 AS Discount, JournalCode, JournalIdNo,
            Debit - Credit AS Amount, Notes, CustomerIdNo,
-           InvoiceNo, TransactionDate, ReferenceNo, TransactionType, MainNote
+           InvoiceNo, TransactionDate, ReferenceNo, TransactionType, MainNote,Posted
     FROM dbo.ArStatement_View
     WHERE SpecialAccount IN ('AR', 'CA')
       AND CustomerIdNo = @CustomerIdNo
@@ -28,5 +28,5 @@ RETURN
                      AND TransactionDate < @BeginningDate
                      AND (TransactionType = 'B' OR @IncludeUnposted = 1 OR ISNULL(Posted, 0) = 1)), 0),
            'Beginning Balance', @CustomerIdNo, '', DATEADD(DAY, -1, @BeginningDate),
-           '', 'B', 'Beginning Balance'
+           '', 'B', 'Beginning Balance', CAST(1 AS BIT)
 );

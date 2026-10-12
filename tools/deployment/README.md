@@ -6,6 +6,71 @@ The user-facing ClickOnce product name is `Clinic Information System`, published
 
 They do not publish a DACPAC, modify database data, or deploy external Crystal Reports.
 
+## Stable Codex release command
+
+Use `Invoke-AccountsClickOnce.ps1` for Codex release work. The version is data passed
+after the stable script filename. Do not generate per-version scripts or inline
+PowerShell copy/build commands. From a Visual Studio Developer PowerShell session:
+
+```powershell
+powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File .\tools\deployment\Invoke-AccountsClickOnce.ps1 -Action Stage -Version 1.0.0.36
+powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File .\tools\deployment\Invoke-AccountsClickOnce.ps1 -Action Validate -Version 1.0.0.36
+powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File .\tools\deployment\Invoke-AccountsClickOnce.ps1 -Action Preview -Version 1.0.0.36
+powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File .\tools\deployment\Invoke-AccountsClickOnce.ps1 -Action Deploy -Version 1.0.0.36
+```
+
+These are examples, not an instruction to deploy that version. Stage invokes the
+existing Clean/Publish script and never copies to the share. `-OptionalUpdate` is
+accepted only for Stage. Validate checks the staged configuration, deployment
+metadata and both manifest signatures with the approved certificate and mage.
+Preview invokes deployment with `-WhatIf`, including read-only live version checks.
+Deploy retains the exact `DEPLOY <version>` typed confirmation; use an interactive
+terminal. Execution approval and intentional release confirmation are separate.
+There is no automatic version increment or combined build-and-deploy action.
+
+The deployment destination remains `\\ibn-server\isp\COAccounts`. Deployment checks
+signatures again, rejects existing/older versions, verifies the backup and copied
+payload using SHA256, checks for a changed live manifest before promotion, promotes
+the deployment manifest last and restores root files on a failed promotion.
+Run only one release operation at a time; the live-manifest checks are not a
+distributed lock. Review the package and application changes before Deploy.
+
+### Narrow execution approval
+
+The inspected workstation rules contained full `powershell.exe -Command` strings
+with version-specific paths and versions (including 1.0.0.35). A different version
+changes that single command argument, so the old rule does not match. The existing
+scripts already had stable names; ad hoc inline invocations defeated that benefit.
+
+`AccountsClickOnce.rules.example` is an inactive, portable rule template. Substitute
+the actual absolute PowerShell executable and repository paths, using doubled
+backslashes in the rule strings. Invoke the command with those same absolute paths
+and the exact flag order shown above. The prefix ends at the `.ps1` filename, before
+`-Action` and `-Version`, so future versions match without allowing arbitrary
+PowerShell scripts, `-Command`, or MSBuild invocations. Do not authorize only
+`powershell.exe`, `-ExecutionPolicy Bypass`, or a relative script path. The Bypass
+flag affects only this PowerShell process, not Codex approval settings.
+
+Test a candidate before installing it (this evaluates policy without executing the
+supplied command):
+
+```powershell
+codex.cmd execpolicy check --pretty --rules <candidate.rules> -- <absolute-powershell.exe> -NoLogo -NoProfile -ExecutionPolicy Bypass -File <absolute-Invoke-AccountsClickOnce.ps1> -Action Validate -Version 1.0.0.36
+```
+
+Check multiple versions/actions and ensure a different script and `-Command` have
+no allow match. A reviewed rule can be installed as a separate `.rules` file in the
+active user rules directory, normally `~/.codex/rules/`, followed by a Codex restart.
+Alternatively, persist the same exact script prefix when Codex offers an execution
+approval. Keep the normal sandbox and approval policy. Stricter prompt/forbidden
+rules and managed policy still take precedence; local rule support depends on the
+client. This repository does not install or activate the rule automatically.
+
+A prefix rule trusts the script's future contents and its helper/build dependencies;
+it does not pin their hashes. Review changes to these files before reusing the rule.
+Changing the repository location, executable spelling or flag order requires a rule
+update. See [official Codex rules documentation](https://learn.chatgpt.com/docs/agent-configuration/rules).
+
 ## Publish and validate locally
 
 The simplest method is to double-click `Publish-Accounts.cmd`, enter the four-part version, and keep the default mandatory update unless the release is intentionally optional.

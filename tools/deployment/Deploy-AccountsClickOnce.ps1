@@ -20,6 +20,9 @@ if (-not [string]::Equals($destination.TrimEnd('\'), $expectedDestination, [Stri
 }
 
 $package = Get-AccountsClickOncePackage -Root $stagingDirectory -Version $Version
+$certificateThumbprint = '1A175C7C0E61C34D09B6827C5E3D8738C562A831'
+Assert-AccountsClickOnceManifestSignature -Path $package.ManifestPath -CertificateThumbprint $certificateThumbprint
+Assert-AccountsClickOnceManifestSignature -Path (Join-Path $package.VersionDirectory 'Accounts.exe.manifest') -CertificateThumbprint $certificateThumbprint
 if (-not (Test-Path -LiteralPath $destination -PathType Container)) {
     throw "Production ClickOnce directory was not found: $destination"
 }
@@ -44,6 +47,7 @@ if ($releaseVersion -le $liveVersion) {
     throw "Requested version $Version must be greater than live version $liveVersion."
 }
 $currentLivePackage = Get-AccountsClickOncePackage -Root $destination -Version $liveVersion.ToString()
+$originalLiveManifestHash = (Get-FileHash -LiteralPath $liveManifest -Algorithm SHA256).Hash
 
 $destinationVersionDirectory = Join-Path $destination ("Application Files\Accounts_{0}" -f (Get-AccountsVersionToken -Version $Version))
 if (Test-Path -LiteralPath $destinationVersionDirectory) {
@@ -81,38 +85,40 @@ if (-not [string]::Equals($confirmation, ("DEPLOY {0}" -f $Version), [StringComp
 
 $backupCreated = $false
 $rootFilesMutationStarted = $false
+# One decision covers the ordered transaction; declining a backup must not allow promotion.
+if (-not $PSCmdlet.ShouldProcess($destination, "Back up and deploy Accounts $Version")) {
+    return
+}
 try {
-    if ($PSCmdlet.ShouldProcess($backupDirectory, 'Create production deployment backup')) {
-        Copy-Item -LiteralPath $destination -Destination $backupDirectory -Recurse
-        $backupManifest = Join-Path $backupDirectory 'Accounts.application'
-        if (-not (Test-Path -LiteralPath $backupManifest -PathType Leaf)) {
-            throw "Deployment backup verification failed: $backupDirectory"
-        }
-        $backupPackage = Get-AccountsClickOncePackage -Root $backupDirectory -Version $liveVersion.ToString()
-        Assert-AccountsFileMatches -Source $currentLivePackage.ManifestPath -Destination $backupPackage.ManifestPath
-        Assert-AccountsFileMatches -Source $currentLivePackage.SetupPath -Destination $backupPackage.SetupPath
-        Assert-AccountsPayloadMatches -SourceDirectory $currentLivePackage.VersionDirectory -DestinationDirectory $backupPackage.VersionDirectory
-        $backupCreated = $true
+    if ((Get-FileHash -LiteralPath $liveManifest -Algorithm SHA256).Hash -ne $originalLiveManifestHash) {
+        throw 'The live deployment changed during review. Preview the release again.'
     }
+    Copy-Item -LiteralPath $destination -Destination $backupDirectory -Recurse
+    $backupManifest = Join-Path $backupDirectory 'Accounts.application'
+    if (-not (Test-Path -LiteralPath $backupManifest -PathType Leaf)) {
+        throw "Deployment backup verification failed: $backupDirectory"
+    }
+    $backupPackage = Get-AccountsClickOncePackage -Root $backupDirectory -Version $liveVersion.ToString()
+    Assert-AccountsFileMatches -Source $currentLivePackage.ManifestPath -Destination $backupPackage.ManifestPath
+    Assert-AccountsFileMatches -Source $currentLivePackage.SetupPath -Destination $backupPackage.SetupPath
+    Assert-AccountsPayloadMatches -SourceDirectory $currentLivePackage.VersionDirectory -DestinationDirectory $backupPackage.VersionDirectory
+    $backupCreated = $true
 
-    if ($PSCmdlet.ShouldProcess($destinationVersionDirectory, 'Copy version payload')) {
-        $destinationApplicationFiles = Join-Path $destination 'Application Files'
-        Copy-Item -LiteralPath $package.VersionDirectory -Destination $destinationApplicationFiles -Recurse
-        Assert-AccountsPayloadMatches -SourceDirectory $package.VersionDirectory -DestinationDirectory $destinationVersionDirectory
-    }
+    $destinationApplicationFiles = Join-Path $destination 'Application Files'
+    Copy-Item -LiteralPath $package.VersionDirectory -Destination $destinationApplicationFiles -Recurse
+    Assert-AccountsPayloadMatches -SourceDirectory $package.VersionDirectory -DestinationDirectory $destinationVersionDirectory
 
     $destinationSetup = Join-Path $destination 'setup.exe'
-    if ($PSCmdlet.ShouldProcess($destinationSetup, 'Replace setup.exe')) {
-        $rootFilesMutationStarted = $true
-        Copy-Item -LiteralPath $package.SetupPath -Destination $destinationSetup -Force
-        Assert-AccountsFileMatches -Source $package.SetupPath -Destination $destinationSetup
+    if ((Get-FileHash -LiteralPath $liveManifest -Algorithm SHA256).Hash -ne $originalLiveManifestHash) {
+        throw 'The live deployment changed during copying. Refusing promotion.'
     }
+    $rootFilesMutationStarted = $true
+    Copy-Item -LiteralPath $package.SetupPath -Destination $destinationSetup -Force
+    Assert-AccountsFileMatches -Source $package.SetupPath -Destination $destinationSetup
 
-    if ($PSCmdlet.ShouldProcess($liveManifest, 'Promote Accounts.application last')) {
-        $rootFilesMutationStarted = $true
-        Copy-Item -LiteralPath $package.ManifestPath -Destination $liveManifest -Force
-        Assert-AccountsFileMatches -Source $package.ManifestPath -Destination $liveManifest
-    }
+    $rootFilesMutationStarted = $true
+    Copy-Item -LiteralPath $package.ManifestPath -Destination $liveManifest -Force
+    Assert-AccountsFileMatches -Source $package.ManifestPath -Destination $liveManifest
 
     $livePackage = Get-AccountsClickOncePackage -Root $destination -Version $Version
     Assert-AccountsPayloadMatches -SourceDirectory $package.VersionDirectory -DestinationDirectory $livePackage.VersionDirectory
