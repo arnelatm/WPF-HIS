@@ -209,6 +209,9 @@ Namespace PresentationLayer.Views.Forms
         Public Property Active As Boolean Implements IUserView.Active
 
         Public Sub ResetMenuSecurity(ByRef cCtrl As Control)
+            ' Status bars are display controls, not secured menus or toolbars.
+            If TypeOf cCtrl Is StatusStrip Then Return
+
             Static sw = 0
             Static mainParentIdNo As Int32
             If sw = 0 Then
@@ -1263,6 +1266,9 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Public Sub UpdateMenuSecurity(ByRef cCtrl As Control)
+            ' Status bars are display controls, not secured menus or toolbars.
+            If TypeOf cCtrl Is StatusStrip Then Return
+
             Static sw = 0
             Static mainParentIdNo As Int32
             If sw = 0 Then
