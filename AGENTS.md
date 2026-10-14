@@ -10,6 +10,12 @@
 - Do not delete or exclude apparently unused code as incidental cleanup. Some files under `Accounts\_Quarantine` and `Common\_Quarantine` remain deliberately included in their projects because runtime, reflection, configuration, or database-driven use has not been ruled out. The top-level `_Quarantine` manifests document isolated legacy projects.
 - Preserve unrelated working-tree changes and untracked files. Never commit or push unless the user explicitly requests it.
 
+## Autonomous development
+
+- Complete authorized development work end-to-end: inspect the relevant code, make focused edits, run local builds, debug task-related failures, and validate the result without repeatedly asking for confirmation for ordinary development steps.
+- Ask questions only when material ambiguity affects the outcome or a protected/high-impact action requires authorization. Reuse authorization already given for the same scope and environment; continue independent authorized work while clarification is pending.
+- Autonomy does not override sandbox permissions, security controls, or the database, deployment, and other side-effect safeguards below. When a required action is restricted, report the blocker instead of bypassing the restriction.
+
 ## Technology and toolchain
 
 - The production application is predominantly VB.NET Windows Forms. Small C# helper libraries and SQL Server database projects are also present.
@@ -79,6 +85,7 @@
 
 ## SQL Server/database-project rules
 
+- When SQL development is requested, editing SQL source files in the owning project and building that SQL project locally without publishing are ordinary authorized development tasks. This does not authorize database execution: data-changing SQL, DACPAC publication, stored procedures against live databases, and production schema changes require explicit user authorization and verification of the target server, database, and environment. The stricter execution, backup, and restored-test-database safeguards below still apply.
 - `IspDataDb\IspDataDb.sqlproj` is the main `ISPDATA` schema project used by Accounts. It contains tables, views, functions, user-defined table types, and stored procedures under `IspDataDb\dbo\...` and targets the SQL120 provider.
 - Other schemas are separate concerns: `IGroupClinicDb`/`IGroupDb`, `KizenDb`, `BioTime.Reporting.Database`, `BioTime.Reporting.ViewsOnly*`, and `BiotimeIbnServer` have their own projects and provider levels. `HIS.sln` includes only a subset of all database projects in the repository. Put a change in the project that owns the target database; do not copy it into every similar database automatically.
 - `IspDataDb` has a checked-in DACPAC snapshot reference. Do not refresh, replace, or remove snapshots as incidental work; snapshot churn can change schema resolution broadly.
@@ -91,6 +98,9 @@
 
 ## Coding and change discipline
 
+- Reuse the closest active implementation pattern and established helpers after verifying project inclusion; use targeted `rg`/`rg --files` searches within relevant projects before broad repository scans.
+- Group related edits into coherent changes, retain useful findings from earlier reads, and inspect files again only when changes or unresolved questions make it necessary.
+- Run focused builds before full-solution builds as described below. Restore packages only when dependencies changed or diagnostics indicate missing packages; avoid unnecessary restores and unrelated refactoring.
 - Match the style of the file being changed. This is legacy VB with `Option Explicit On`, `Option Infer On`, and project-level `Option Strict Off`; do not perform a repo-wide strictness, syntax, naming, namespace, or formatting conversion during a focused change.
 - Use PascalCase for public types/members and follow the surrounding private-field convention (`_name`, `Db`, or another established local form). Preserve existing VB line continuations and `Handles` clauses.
 - `.editorconfig` and `.gitattributes` require CRLF for Visual Studio source, project, config, SQL, and resource files. Crystal reports and other binaries must remain binary.
@@ -125,6 +135,9 @@
   msbuild IspDataDb\IspDataDb.sqlproj /p:Configuration=Debug
   ```
 
+- Diagnose failed builds and scripts using their diagnostics and the task diff. Fix errors introduced by the task within its authorized scope, then retry the relevant build or validation after a meaningful correction. Do not rerun data-changing or deployment scripts as ordinary validation; their separate authorization and environment safeguards still apply.
+- Distinguish task-introduced failures from pre-existing code errors and environment/toolchain problems using available baseline evidence; label uncertain origins honestly. Preserve unrelated work and report pre-existing failures instead of silently expanding the task.
+- Stop repeated attempts when a genuine blocker persists and no new evidence or corrective action justifies another retry. Continue useful unblocked work and report the blocker, attempted remedies, and what is needed to proceed. Never bypass sandbox permissions or security restrictions to recover from an error.
 - Do not use `dotnet build` as the primary validation for `HIS.sln`; old-style .NET Framework VB projects, Crystal components, and SSDT projects need full MSBuild/Visual Studio tooling.
 - There is no automated test project in `HIS.sln`. The only test-like project found is a standalone TimePicker test form. Do not report a change as fully tested based only on compilation.
 - After a code change, perform the narrowest relevant manual smoke test against a non-production database: open the form, load/find a record, exercise add/edit/delete as applicable, confirm validation and permissions, and check both English and Arabic/RTL behavior when relevant. Accounting transaction changes also require balanced details and posted/approved/closed/reconciled scenarios. Report changes require preview/print verification with the expected parameter set.
@@ -136,8 +149,18 @@
 - `Accounts.vbproj` already contains legacy machine-specific ClickOnce `PublishUrl` and network `InstallUrl` values. They are deployment settings, not normal build prerequisites. Do not rewrite them for the current PC or invoke Publish unless deployment is explicitly requested.
 - The active runtime configuration is `Accounts\app.config`; many `app-*.config` site/machine variants also exist and may contain live credentials. Do not guess which variant belongs on a PC, overwrite `app.config`, or commit a workstation's settings without explicit direction from the user.
 - Keep `.vs\`, `bin\`, `obj\`, `packages\`, `*.user`, logs, output, and temporary verification directories out of changes. Some historical `.sqlproj.user` files are already tracked; do not update them just because Visual Studio did.
-- Before work, inspect `git status --short`. After work, inspect it again and review `git diff --check`, `git diff -- AGENTS.md` or the task's exact paths, and `git diff --name-only`. Account for every changed path and never discard user-owned changes.
+- Before work, inspect `git status --short` and record pre-existing changes. After work, inspect it again, run `git diff --check`, and review `git diff --name-only` plus the diffs for every actual file modified by the task (for example, `git diff -- <modified-paths>`). Review staged diffs with `git diff --cached -- <modified-paths>` when applicable and inspect new untracked task files directly. Reviewing only `AGENTS.md` is sufficient only when it is the sole task-modified file. Account for every changed path, distinguish task changes from pre-existing changes, and never discard user-owned changes.
 - A successful build does not authorize running the application against the configured database, publishing ClickOnce output, deploying a DACPAC, updating security records, refreshing snapshots, or printing to configured devices. Confirm the environment and obtain explicit authorization for those side effects.
+
+## Task completion report
+
+Provide a concise final report covering:
+
+- Changes made and the affected files or behavior.
+- Actual build and test results, including failures and checks not run with their reasons; do not imply that compilation proves runtime behavior.
+- SQL/database source modifications, whether any SQL was executed or a database changed, and the verified target environment when execution was authorized; explicitly state when none occurred.
+- Deployment status, explicitly stating when nothing was deployed.
+- Remaining issues, blockers, and required manual testing, including relevant accounting-state, reporting, and bilingual/RTL checks.
 
 ## Checklist for a new Accounts feature
 
