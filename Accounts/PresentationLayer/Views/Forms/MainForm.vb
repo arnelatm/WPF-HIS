@@ -55,6 +55,7 @@ Namespace PresentationLayer.Views.Forms
             ToolStripButtonEnglish.Visible = context.IsRightToLeft
             ToolStripButtonEnglish.Enabled = True
             UpdateMedicalReportsMenuLanguage(context.IsRightToLeft)
+            _tableViewerMenuItem.Text = If(context.IsRightToLeft, "عارض الجداول", "Table Viewer")
             _cashPositionMenuItem.Text = CashPositionText.Caption("Title")
             _cashFlowMenuItem.Text = CashFlowText.GetCaption("Title")
             _generalAccountPositionMenuItem.Text = If(context.IsRightToLeft, "حركة الحسابات العامة", "General Account Position")
@@ -82,6 +83,8 @@ Namespace PresentationLayer.Views.Forms
         Private ReadOnly _cashFlowMenuItem As New ToolStripMenuItem()
         Private ReadOnly _generalAccountPositionMenuItem As New ToolStripMenuItem()
         Private ReadOnly _auditHistoryMenuItem As New ToolStripMenuItem()
+        Private ReadOnly _tableViewerMenuItem As New ToolStripMenuItem()
+        Private _tableViewerForm As TableViewerForm
         Private _auditHistoryForm As AuditHistoryForm
         Private ReadOnly _applicationStatusStrip As New StatusStrip()
         Private ReadOnly _applicationStatusLabel As New ToolStripStatusLabel()
@@ -103,6 +106,7 @@ Namespace PresentationLayer.Views.Forms
             InitializeCashFlowMenuItem()
             InitializeGeneralAccountPositionMenuItem()
             InitializeAuditHistoryMenuItem()
+            InitializeTableViewerMenuItem()
 
             If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
                 AddHandler AppDomain.CurrentDomain.UnhandledException, AddressOf UnhandledExceptionHandler
@@ -182,14 +186,17 @@ Namespace PresentationLayer.Views.Forms
                     End If
                     ApplyCashPositionMenuAccess()
                     ApplyAuditHistoryMenuAccess()
+                    ApplyTableViewerMenuAccess()
                     RaiseEvent UserLoggedIn(Me, allControls)
                     DisableLogin()
                 Else
                     CloseAuditHistory()
+                    If _tableViewerForm IsNot Nothing AndAlso Not _tableViewerForm.IsDisposed Then _tableViewerForm.Close()
                     GlobalVariables.IsUserLoggedIn = False
                     GlobalSubs.HideAndDisableMenuItems(AccountsMenu)
                     EnableLogin()
                     ApplyAuditHistoryMenuAccess()
+                    ApplyTableViewerMenuAccess()
                 End If
                 EnableEssentials()
             End Set
@@ -822,6 +829,31 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ApplyAuditHistoryMenuAccess()
             _auditHistoryMenuItem.Visible = GlobalVariables.IsUserLoggedIn AndAlso ToolStripMenuItemUtilities.Visible
             _auditHistoryMenuItem.Enabled = GlobalVariables.IsUserLoggedIn AndAlso ToolStripMenuItemUtilities.Enabled
+        End Sub
+
+        Private Sub InitializeTableViewerMenuItem()
+            _tableViewerMenuItem.Name = "ToolStripMenuItemTableViewer"
+            _tableViewerMenuItem.Text = If(GlobalVariables.RightToLeftLayout, "عارض الجداول", "Table Viewer")
+            _tableViewerMenuItem.Visible = False
+            _tableViewerMenuItem.Enabled = False
+            AddHandler _tableViewerMenuItem.Click,
+                Sub()
+                    If Not AATM.Accounts.ServiceLayer.TableViewerService.CanView() Then Return
+                    If _tableViewerForm Is Nothing OrElse _tableViewerForm.IsDisposed Then
+                        _tableViewerForm = New TableViewerForm()
+                        _tableViewerForm.Show(Me)
+                    Else
+                        If _tableViewerForm.WindowState = FormWindowState.Minimized Then _tableViewerForm.WindowState = FormWindowState.Normal
+                        _tableViewerForm.Activate()
+                    End If
+                End Sub
+            ToolStripMenuItemUtilities.DropDownItems.Add(_tableViewerMenuItem)
+        End Sub
+
+        Private Sub ApplyTableViewerMenuAccess()
+            Dim allowed = AATM.Accounts.ServiceLayer.TableViewerService.CanView()
+            _tableViewerMenuItem.Visible = allowed AndAlso ToolStripMenuItemUtilities.Visible
+            _tableViewerMenuItem.Enabled = allowed AndAlso ToolStripMenuItemUtilities.Enabled
         End Sub
 
         Private Sub InitializeOpenInvoiceCorrectionMenuItem()

@@ -1254,6 +1254,11 @@
     <Compile Include="PresentationLayer\Views\Forms\MainForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\TableViewerForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ServiceLayer\TableViewerService.vb" />
+    <Compile Include="DataLayer\AdoNet\TableViewerDao.vb" />
     <Compile Include="PresentationLayer\Views\Forms\OpenInvoiceCorrectionForm.vb">
       <SubType>Form</SubType>
     </Compile>
