@@ -24,6 +24,23 @@ Public Class LoginEntry
 
     ' The Presenter
     Private _loginOk As Boolean
+    Private _authenticationInProgress As Boolean
+
+    Public ReadOnly Property CanCloseForIdleTimeout As Boolean
+        Get
+            Return Not _changingPassword AndAlso Not _authenticationInProgress AndAlso Not _loginOk
+        End Get
+    End Property
+
+    Public Function CloseForIdleTimeout() As Boolean
+        If Not CanCloseForIdleTimeout Then Return False
+        ' A previous failed login must not cancel an idle shutdown.
+        _cancelClose = False
+        DialogResult = DialogResult.Cancel
+        Close()
+        ' Modal Close requests completion; ShowDialog hides the form as its loop unwinds.
+        Return DialogResult = DialogResult.Cancel
+    End Function
 
     Public Sub New(changePassword As Boolean)
 
@@ -197,6 +214,7 @@ Public Class LoginEntry
     '''     Performs login and upon success closes dialog.
     ''' </summary>
     Private Sub Btn_Login_Click(sender As Object, e As EventArgs) Handles btn_Login.Click
+        _authenticationInProgress = True
         Try
             _oterkis = textBoxPassword.Text
             If Presenter.Login(UserName, Password) Then
@@ -219,6 +237,8 @@ Public Class LoginEntry
             _cancelClose = True
         Catch ex As Exception
             Throw ex
+        Finally
+            _authenticationInProgress = False
         End Try
     End Sub
 

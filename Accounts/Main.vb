@@ -42,6 +42,14 @@ Public Module Main
     ''' </summary>
     ''' 
     Public IdleTimer As New System.Windows.Forms.Timer()
+    Private _handlingIdleTimeout As Boolean
+    Private _idleShutdownRequested As Boolean
+
+    Public ReadOnly Property IdleShutdownRequested As Boolean
+        Get
+            Return _idleShutdownRequested
+        End Get
+    End Property
     Const MilliSecondsTimeOut As Integer = 15_000_000 ' approximately 4 hours
 
     Public Sub Main()
@@ -63,25 +71,122 @@ Public Module Main
     End Sub
 
     Private Sub Application_Idle(ByVal sender As Object, ByVal e As EventArgs)
-        If Not IdleTimer.Enabled Then IdleTimer.Start()
+        If Not _handlingIdleTimeout AndAlso Not _idleShutdownRequested AndAlso Not IdleTimer.Enabled Then IdleTimer.Start()
     End Sub
 
     Private Sub TimeDone(ByVal sender As Object, ByVal e As EventArgs)
+        If _handlingIdleTimeout OrElse _idleShutdownRequested Then Return
+        _handlingIdleTimeout = True
         IdleTimer.[Stop]()
-        Dim prompt = "The session has been idle. Select Yes to sign out now, or No/Cancel to continue working." &
-                     Environment.NewLine &
-                     "انتهت مهلة الجلسة. اختر نعم لتسجيل الخروج أو لا/إلغاء لمتابعة العمل."
-        Dim x As DialogResult = AATM.Libraries.MessagingLibrary.Messaging.Show(prompt, "Idle Session / الجلسة غير نشطة",
-                                           MessageBoxButtons.YesNoCancel,
-                                           MessageBoxIcon.Warning,
-                                           MessageBoxDefaultButton.Button2)
+        Dim mainWindow As Form = MainForm
+        Try
+            Dim idleLogin As AATM.PresentationLayer.Forms.LoginEntry = Nothing
+            If CanCloseAfterIdleTimeout(idleLogin) Then
+                If idleLogin Is Nothing Then
+                    mainWindow.Close()
+                Else
+                    _idleShutdownRequested = True
+                    If idleLogin.CloseForIdleTimeout() Then
+                        ' Let ShowDialog unwind before closing its owner, including startup login.
+                        mainWindow.BeginInvoke(New MethodInvoker(
+                            Sub()
+                                Try
+                                    mainWindow.Close()
+                                Finally
+                                    If Not mainWindow.IsDisposed Then
+                                        _idleShutdownRequested = False
+                                        If mainWindow.Visible Then IdleTimer.Start()
+                                    End If
+                                End Try
+                            End Sub))
+                    Else
+                        _idleShutdownRequested = False
+                    End If
+                End If
+                Return
+            End If
 
-        If x = DialogResult.Yes Then
-            MainForm.Close()
-        Else
-            IdleTimer.Start()
-        End If
+            Dim prompt = "The session has been idle. Select Yes to close Accounts now, or No/Cancel to continue working." &
+                         Environment.NewLine &
+                         "انتهت مهلة الجلسة. اختر نعم لإغلاق برنامج الحسابات أو لا/إلغاء لمتابعة العمل."
+            Dim promptOwner As Form = Form.ActiveForm
+            If promptOwner Is Nothing Then promptOwner = mainWindow
+            Dim x As DialogResult = AATM.Libraries.MessagingLibrary.MessagingForm.Show(promptOwner, prompt, "Idle Session / الجلسة غير نشطة",
+                                               MessageBoxButtons.YesNoCancel,
+                                               MessageBoxIcon.Warning,
+                                               MessageBoxDefaultButton.Button2)
+
+            If x = DialogResult.Yes Then
+                mainWindow.Close()
+            End If
+        Finally
+            _handlingIdleTimeout = False
+            If Not _idleShutdownRequested AndAlso Not mainWindow.IsDisposed AndAlso mainWindow.Visible Then IdleTimer.Start()
+        End Try
     End Sub
+
+    Private Function CanCloseAfterIdleTimeout(ByRef idleLogin As AATM.PresentationLayer.Forms.LoginEntry) As Boolean
+        Try
+            idleLogin = Nothing
+            For Each openForm As Form In Application.OpenForms
+                Dim login = TryCast(openForm, AATM.PresentationLayer.Forms.LoginEntry)
+                If login IsNot Nothing Then
+                    If idleLogin IsNot Nothing OrElse Not login.CanCloseForIdleTimeout Then Return False
+                    idleLogin = login
+                End If
+            Next
+
+            For Each openForm As Form In Application.OpenForms
+                Dim loginOwnerDisabled = openForm Is MainForm AndAlso idleLogin IsNot Nothing AndAlso idleLogin.Owner Is openForm
+                If (openForm.Modal AndAlso openForm IsNot idleLogin) OrElse
+                   (Not openForm.Enabled AndAlso Not loginOwnerDisabled) OrElse openForm.UseWaitCursor OrElse
+                   openForm.Cursor = Cursors.WaitCursor Then Return False
+                If HasActiveWorker(openForm) Then Return False
+
+                If openForm Is idleLogin Then Continue For
+                If openForm Is MainForm Then Continue For
+                Dim entryForm = TryCast(openForm, AATM.PresentationLayer.Forms.BfMain)
+                If entryForm Is Nothing OrElse entryForm.CancelClose OrElse entryForm.Presenter Is Nothing Then Return False
+
+                ' Add/edit mode is pending work even before the first field changes.
+                ' Unknown presenter contracts must keep the confirmation prompt.
+                Dim presenter = entryForm.Presenter
+                Dim addMode = presenter.GetType().GetProperty("AddMode")
+                Dim editMode = presenter.GetType().GetProperty("EditMode")
+                If addMode Is Nothing OrElse editMode Is Nothing Then Return False
+                If CBool(addMode.GetValue(presenter, Nothing)) OrElse
+                   CBool(editMode.GetValue(presenter, Nothing)) Then Return False
+                If HasActiveWorker(presenter) Then Return False
+            Next
+            Return True
+        Catch
+            ' Never discard work when a screen's state cannot be determined.
+            Return False
+        End Try
+    End Function
+
+    Private Function HasActiveWorker(owner As Object) As Boolean
+        Dim ownerType = owner.GetType()
+        While ownerType IsNot Nothing
+            For Each field In ownerType.GetFields(System.Reflection.BindingFlags.Instance Or
+                                                  System.Reflection.BindingFlags.Public Or
+                                                  System.Reflection.BindingFlags.NonPublic Or
+                                                  System.Reflection.BindingFlags.DeclaredOnly)
+                If field.FieldType.Name.StartsWith("BackgroundWorker", StringComparison.Ordinal) Then
+                    Dim worker = field.GetValue(owner)
+                    If worker IsNot Nothing Then
+                        Dim busy = worker.GetType().GetProperty("IsBusy")
+                        If busy Is Nothing OrElse CBool(busy.GetValue(worker, Nothing)) Then Return True
+                    End If
+                ElseIf GetType(System.Threading.Tasks.Task).IsAssignableFrom(field.FieldType) Then
+                    Dim task = TryCast(field.GetValue(owner), System.Threading.Tasks.Task)
+                    If task IsNot Nothing AndAlso Not task.IsCompleted Then Return True
+                End If
+            Next
+            ownerType = ownerType.BaseType
+        End While
+        Return False
+    End Function
 
 End Module
 

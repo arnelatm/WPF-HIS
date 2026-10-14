@@ -948,6 +948,7 @@ Namespace PresentationLayer.Views.Forms
             End If
             ToolStripButtonLogin.Enabled = True
             ToolStripButtonLogin.PerformClick()
+            If Main.IdleShutdownRequested Then Return
             ToolStripButtonExit.Enabled = True
             If Presenter.UsePayGroups() Then
                 ToolStripMenuItemPayGroups.Visible = True
@@ -974,7 +975,9 @@ Namespace PresentationLayer.Views.Forms
             'RunForm(Of UserEntryTv, UserPresenter(Of UserModel))()
             Using form As New LoginEntry(False)
                 Try
-                    If form.ShowDialog(Me) = DialogResult.OK Then
+                    Dim loginResult = form.ShowDialog(Me)
+                    If Main.IdleShutdownRequested Then Return
+                    If loginResult = DialogResult.OK Then
                         If form.LoginOk Then
                             LogStatus = LoginStatus.LoggedIn
                         Else
