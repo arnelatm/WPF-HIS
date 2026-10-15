@@ -33,3 +33,5 @@ Publish/
 Accounts/app - ibn-server.config
 Accounts/app - ispadmin2.ispdata.config
 Accounts/app - ispadmin2.ispdata_audittest.config
+/AGENTS.md.backup
+/output.txt
