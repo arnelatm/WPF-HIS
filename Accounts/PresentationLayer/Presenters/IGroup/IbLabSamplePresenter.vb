@@ -266,7 +266,7 @@ Namespace PresentationLayer.Presenters
                 Dim reportParameters As New Object
                 Dim dateString As String
                 Dim tempDate As DateTime = View.TransactionDate.Value
-                Dim ibType As String = IIf(_testType = "Iqama", "1", "2")
+                Dim ibType As String = If(_testType = "FoodDelivery", "4", If(_testType = "Iqama", "1", "2"))
                 dateString = tempDate.ToString("yyyy/MM/dd")
                 Dim reportTitle As String = AATM.Libraries.MessagingLibrary.Messaging.TranslateCaption("Diagnostic Test Samples Taken Report for ") + dateString
                 reportArgs.ReportParameters = {dateString, "TransactionDate",

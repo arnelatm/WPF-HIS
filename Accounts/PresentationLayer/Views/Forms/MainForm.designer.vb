@@ -169,6 +169,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemCbcResultRetrieval = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemCbcResultRetrievalSampleId = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemIqamaResultEntryKizen = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemFoodDeliveryResultEntryKizen = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemBaladiyaResultEntryKizen = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemDiagnosticSamplesKizen = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemIqamaResultEntryIGroup = New System.Windows.Forms.ToolStripMenuItem()
@@ -1004,7 +1005,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemLaboratory
             '
-            Me.ToolStripMenuItemLaboratory.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemCbcResultRetrieval, Me.ToolStripMenuItemCbcResultRetrievalSampleId, Me.ToolStripMenuItemIqamaResultEntryKizen, Me.ToolStripMenuItemBaladiyaResultEntryKizen, Me.ToolStripMenuItemDiagnosticSamplesKizen, Me.ToolStripMenuItemIqamaResultEntryIGroup, Me.ToolStripMenuItemBaladiyaResultEntryIGroup, Me.ToolStripMenuItemDiagnosticSamples, Me.ToolStripMenuItemClinicSamples, Me.ToolStripMenuItemLabReportStatus})
+            Me.ToolStripMenuItemLaboratory.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemCbcResultRetrieval, Me.ToolStripMenuItemCbcResultRetrievalSampleId, Me.ToolStripMenuItemIqamaResultEntryKizen, Me.ToolStripMenuItemBaladiyaResultEntryKizen, Me.ToolStripMenuItemFoodDeliveryResultEntryKizen, Me.ToolStripMenuItemDiagnosticSamplesKizen, Me.ToolStripMenuItemIqamaResultEntryIGroup, Me.ToolStripMenuItemBaladiyaResultEntryIGroup, Me.ToolStripMenuItemDiagnosticSamples, Me.ToolStripMenuItemClinicSamples, Me.ToolStripMenuItemLabReportStatus})
             Me.ToolStripMenuItemLaboratory.Name = "ToolStripMenuItemLaboratory"
             resources.ApplyResources(Me.ToolStripMenuItemLaboratory, "ToolStripMenuItemLaboratory")
             '
@@ -1027,6 +1028,11 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.ToolStripMenuItemBaladiyaResultEntryKizen.Name = "ToolStripMenuItemBaladiyaResultEntryKizen"
             resources.ApplyResources(Me.ToolStripMenuItemBaladiyaResultEntryKizen, "ToolStripMenuItemBaladiyaResultEntryKizen")
+            '
+            'ToolStripMenuItemFoodDeliveryResultEntryKizen
+            '
+            Me.ToolStripMenuItemFoodDeliveryResultEntryKizen.Name = "ToolStripMenuItemFoodDeliveryResultEntryKizen"
+            resources.ApplyResources(Me.ToolStripMenuItemFoodDeliveryResultEntryKizen, "ToolStripMenuItemFoodDeliveryResultEntryKizen")
             '
             'ToolStripMenuItemDiagnosticSamplesKizen
             '
@@ -1887,6 +1893,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ToolStripMenuItemCbcResultRetrievalSampleId As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemIqamaResultEntryKizen As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemDiagnosticSamplesKizen As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemFoodDeliveryResultEntryKizen As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemBaladiyaResultEntryKizen As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemBaladiyaResultEntryIGroup As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemInvoiceNoteEditor As ToolStripMenuItem

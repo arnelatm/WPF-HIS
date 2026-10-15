@@ -1,0 +1,25 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//ISPDATA Backup Review//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:11b0ea51-15e3-49ef-b7aa-bcfec4e22768@ispdata-backup-review
+DTSTAMP:20261015T000000Z
+DTSTART:20261029T060000Z
+DTEND:20261029T061500Z
+SUMMARY:Review ISPDATA backup retention on IBN-SERVER
+DESCRIPTION:After the morning full backup finishes\, ask Codex to verify cu
+ rrent ISPDATA full and transaction-log backups on IBN-SERVER. Run daily\,
+  monthly and log cleanup audits in audit-only mode. Confirm a complete 14-d
+ ay recovery chain using available files\, headers\, LSN coverage and check
+ sum verification. Review exact deletion candidates before approving automa
+ tic cleanup. Do not change the recovery model or shrink the log. Reference
+ : D:\\AATM\\DeploymentScripts\\ISPDATA-Backups\\README.md.
+BEGIN:VALARM
+TRIGGER:PT0M
+ACTION:DISPLAY
+DESCRIPTION:Time to review ISPDATA backup retention and cleanup audits.
+END:VALARM
+END:VEVENT
+END:VCALENDAR

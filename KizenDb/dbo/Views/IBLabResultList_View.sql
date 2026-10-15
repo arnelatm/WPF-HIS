@@ -80,3 +80,43 @@
 	WHEN (c.WorkID = N'T5' AND d.NumberingSettingId=3 AND h.HideMedicalSector=1) THEN 'IqamaTestRenewal'
 	ELSE 'Nothing'
   END ) <> 'Nothing'
+
+-- Food Delivery certificates use JC_ED_Document, as in the Food Delivery list report.
+UNION ALL
+SELECT r.IdNo,
+       CAST(s.InvoiceNumber AS numeric(10, 0)) AS Trans_Key,
+       r.PassportNumber,
+       IIF(r.IdNo IS NULL, 0, r.Clinical) AS Clinical,
+       IIF(r.IdNo IS NULL, 0, r.Xray) AS Xray,
+       IIF(r.IdNo IS NULL, 0, r.TBSputum) AS TBSputum,
+       IIF(r.IdNo IS NULL, 0, r.HIVEliza) AS HIVEliza,
+       IIF(r.IdNo IS NULL, 0, r.HCVEliza) AS HCVEliza,
+       IIF(r.IdNo IS NULL, 0, r.HBSAgEliza) AS HBSAgEliza,
+       IIF(r.IdNo IS NULL, 0, r.Malaria) AS Malaria,
+       IIF(r.IdNo IS NULL, 0, r.VDRL) AS VDRL,
+       IIF(r.IdNo IS NULL, 0, r.Widal) AS Widal,
+       IIF(r.IdNo IS NULL, 0, r.Pregnancy) AS Pregnancy,
+       IIF(r.IdNo IS NULL, 0, r.BilharziasisUrine) AS BilharziasisUrine,
+       IIF(r.IdNo IS NULL, 0, r.BilharziasisStool) AS BilharziasisStool,
+       IIF(r.IdNo IS NULL, 0, r.Shigella) AS Shigella,
+       IIF(r.IdNo IS NULL, 0, r.Cholera) AS Cholera,
+       s.PatientName,
+       CAST(NULL AS int) AS MedExpIdNo,
+       CAST(NULL AS int) AS InvoiceItemIdNo,
+       s.LabNumber AS LabNo,
+       s.DateTime,
+       s.Nationality AS CountryNameEng,
+       s.Nationality AS CountryIota,
+       CAST(s.DateTime AS date) AS TransactionDate,
+       c.CustJob AS Profession,
+       s.InvoiceNumber AS InvoiceNo,
+       s.FileNumber,
+       s.IdentityNumber AS Border_Iqama,
+       'FoodDelivery' AS TestType,
+       LEFT(c.CustGender, 1) AS Sex,
+       '4' AS TransType,
+       '4' AS IbType
+FROM dbo.AgentsAndDriverTests_View AS s
+LEFT JOIN dbo.Customers AS c ON c.CustId = s.FileNumber
+LEFT JOIN dbo.IBLabResult AS r ON r.Trans_Key = s.InvoiceNumber
+WHERE s.TestType = 'FoodDelivery'

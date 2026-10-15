@@ -8293,4 +8293,7 @@
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>AATM.PresentationLayer.Forms.BfMain, Forms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
+  <data name="ToolStripMenuItemFoodDeliveryResultEntryKizen.Text" xml:space="preserve">
+    <value>Food Delivery Result Entry (Kizen)</value>
+  </data>
 </root>

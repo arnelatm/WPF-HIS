@@ -32,12 +32,61 @@ Namespace PresentationLayer.Views.Forms
             DisplaySetup()
             _connectionName = parameter(0)
             _testType = parameter(1)
+            Dim resultTitle As String = Nothing
+            Select Case _testType
+                Case "Iqama"
+                    resultTitle = "Iqama Result Entry"
+                Case "Baladiya"
+                    resultTitle = "Baladiya Result Entry"
+                Case "FoodDelivery"
+                    resultTitle = "Food Delivery Result Entry"
+            End Select
+            If resultTitle IsNot Nothing Then
+                Dim sourceName As String = If(_connectionName = "IGroupClinic", "IGroup", _connectionName)
+                Text = AATM.Libraries.MessagingLibrary.Messaging.TranslateCaption(resultTitle & " (" & sourceName & ")")
+            End If
             BindIbLabResultDisplay()
             'bsIbLabResultDetails.ResetBindings(False)
         End Sub
 
         Private Sub DisplaySetup()
             dtpTransactionDate.Value = Today()
+            ConfigureResultGridLayout()
+        End Sub
+
+        Private Sub ConfigureResultGridLayout()
+            With DataGridViewIbLabResultDetails
+                .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+                .ColumnHeadersDefaultCellStyle.WrapMode = DataGridViewTriState.True
+                .ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+                For Each column As DataGridViewColumn In .Columns
+                    ' Frozen identifier columns cannot inherit Fill sizing in WinForms.
+                    column.AutoSizeMode = If(column.Frozen,
+                                             DataGridViewAutoSizeColumnMode.DisplayedCells,
+                                             DataGridViewAutoSizeColumnMode.NotSet)
+                    Select Case column.Name
+                        Case "dgvPatientName"
+                            column.FillWeight = 180
+                        Case "dgvNationality", "dgvIqamaNo"
+                            column.FillWeight = 110
+                        Case "dgvLabNo", "dgvProfession", "dgvPassportNumber"
+                            column.FillWeight = 85
+                        Case "Sequence", "dgvGender"
+                            column.FillWeight = 35
+                        Case Else
+                            column.FillWeight = 60
+                    End Select
+
+                    ' Keep each header word readable; small windows can scroll horizontally.
+                    Dim headerFont = If(column.HeaderCell.Style.Font, If(.ColumnHeadersDefaultCellStyle.Font, .Font))
+                    Dim minimumWidth As Integer = 30
+                    For Each word As String In column.HeaderText.Split({" "c, "/"c, "-"c}, StringSplitOptions.RemoveEmptyEntries)
+                        minimumWidth = Math.Max(minimumWidth, TextRenderer.MeasureText(word, headerFont).Width + 8)
+                    Next
+                    If column.SortMode <> DataGridViewColumnSortMode.NotSortable Then minimumWidth += 18
+                    column.MinimumWidth = minimumWidth
+                Next
+            End With
         End Sub
 
         Public Property TransactionDate As Date? Implements IIbLabResultView.TransactionDate

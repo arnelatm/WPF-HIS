@@ -1688,6 +1688,10 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of IbLabResultForm, IbLabResultPresenter(Of IbLabResultModel), Object)({"Kizen", "Baladiya"})
         End Sub
 
+        Private Sub ToolStripMenuItemFoodDeliveryResultEntryKizen_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemFoodDeliveryResultEntryKizen.Click
+            RunForm(Of IbLabResultForm, IbLabResultPresenter(Of IbLabResultModel), Object)({"Kizen", "FoodDelivery"})
+        End Sub
+
         Private Sub ToolStripMenuItemReports_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemReports.Click
 
         End Sub

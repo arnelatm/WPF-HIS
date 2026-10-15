@@ -110,10 +110,10 @@ Namespace DataLayer.AdoNet
             Dim data As New IbLabResult
             Dim transactionDateString As String = transactionDate.ToString("yyyy/MM/dd")
             data.TransactionDate = transactionDate
-            Dim params() As Object = {"@TransactionDate", transactionDateString, "@IBType", IIf(parameter(1) = "Iqama", "1", "2")}
+            Dim params() As Object = {"@TransactionDate", transactionDateString, "@IBType", If(parameter(1) = "FoodDelivery", "4", If(parameter(1) = "Iqama", "1", "2"))}
             If parameter(1) = "Iqama" Then
                 sql = $"SELECT Row_Number() Over (Order by LabNo) as 'Sequence',IdNo,Trans_Key,Sex,TransactionDate,LabNo,PatientName,CountryNameEng,PassportNumber,Profession,Border_Iqama,InvoiceNo,Clinical,XRay,TBSputum,HIVEliza,HCVEliza,HBSAgEliza,Malaria,VDRL,WIdal,Pregnancy,BilharziasisUrine,BilharziasisStool,SHigella,Cholera from IbLabResultList_View where TransactionDate = @TransactionDate and LTrim(IbType) = @IbType order by LabNo"
-            ElseIf parameter(1) = "Baladiya" Then
+            ElseIf parameter(1) = "Baladiya" OrElse parameter(1) = "FoodDelivery" Then
                 sql = $"SELECT Row_Number() Over (Order by LabNo) as 'Sequence',IdNo,Trans_Key,Sex,TransactionDate,LabNo,PatientName,CountryNameEng,PassportNumber,Profession,Border_Iqama,InvoiceNo,Clinical,XRay,TBSputum,HIVEliza,HCVEliza,HBSAgEliza,Malaria,VDRL,WIdal,Pregnancy,BilharziasisUrine,BilharziasisStool,SHigella,Cholera from IbLabResultList_View where TransactionDate = @TransactionDate and LTrim(IBType) = @IbTYpe order by LabNo"
             Else
                 sql = $"SELECT Row_Number() Over (Order by LabNo) as 'Sequence',IdNo,Trans_Key,Sex,TransactionDate,LabNo,PatientName,CountryNameEng,PassportNumber,Profession,Border_Iqama,InvoiceNo,Clinical,XRay,TBSputum,HIVEliza,HCVEliza,HBSAgEliza,Malaria,VDRL,WIdal,Pregnancy,BilharziasisUrine,BilharziasisStool,SHigella,Cholera from IbLabResultList_View where TransactionDate = @TransactionDate order by LabNo"
