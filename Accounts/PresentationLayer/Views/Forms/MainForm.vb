@@ -55,6 +55,7 @@ Namespace PresentationLayer.Views.Forms
             ToolStripButtonEnglish.Visible = context.IsRightToLeft
             ToolStripButtonEnglish.Enabled = True
             UpdateMedicalReportsMenuLanguage(context.IsRightToLeft)
+            ToolStripMenuItemContactViewer.Text = If(context.IsRightToLeft, "عارض جهات الاتصال", "Contact Viewer")
             _tableViewerMenuItem.Text = If(context.IsRightToLeft, "عارض الجداول", "Table Viewer")
             _cashPositionMenuItem.Text = CashPositionText.Caption("Title")
             _cashFlowMenuItem.Text = CashFlowText.GetCaption("Title")
@@ -209,8 +210,10 @@ Namespace PresentationLayer.Views.Forms
         Public Property Active As Boolean Implements IUserView.Active
 
         Public Sub ResetMenuSecurity(ByRef cCtrl As Control)
-            ' Status bars are display controls, not secured menus or toolbars.
-            If TypeOf cCtrl Is StatusStrip Then Return
+            ' Only named menus and toolbars define security objects. WinForms can
+            ' create unnamed strips, and the status bar is a display-only control.
+            If Not TypeOf cCtrl Is ToolStrip OrElse TypeOf cCtrl Is StatusStrip Then Return
+            If String.IsNullOrWhiteSpace(cCtrl.Name) Then Return
 
             Static sw = 0
             Static mainParentIdNo As Int32
@@ -452,6 +455,10 @@ Namespace PresentationLayer.Views.Forms
         Private Sub CreateAllMessagesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCreateAllMessages.Click
             Dim x = New OneTimeRun
             OneTimeRun.CreateAllMessages()
+        End Sub
+
+        Private Sub ContactViewerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemContactViewer.Click
+            RunForm(Of ContactViewer, ContactPresenter(Of ContactModel))()
         End Sub
 
         Private Sub CustomerClientsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCustomerClients.Click
@@ -1266,8 +1273,10 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Public Sub UpdateMenuSecurity(ByRef cCtrl As Control)
-            ' Status bars are display controls, not secured menus or toolbars.
-            If TypeOf cCtrl Is StatusStrip Then Return
+            ' Only named menus and toolbars define security objects. WinForms can
+            ' create unnamed strips, and the status bar is a display-only control.
+            If Not TypeOf cCtrl Is ToolStrip OrElse TypeOf cCtrl Is StatusStrip Then Return
+            If String.IsNullOrWhiteSpace(cCtrl.Name) Then Return
 
             Static sw = 0
             Static mainParentIdNo As Int32
@@ -1299,35 +1308,30 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub UpdateChildMenuSecurityObjects(dropDownItems As ToolStripItemCollection, pParentMenuName As String, pParentIdNo As Int32)
             Dim parentIdNo As Int32
-            For Each dropDownItem As Object In dropDownItems
+            For Each dropDownItem As ToolStripItem In dropDownItems
                 If TypeOf dropDownItem Is ToolStripMenuItem Then
-                    Dim parentMenuName = pParentMenuName
-                    If dropDownItem.Name.SubString(0, 17) <> "ToolStripMenuItem" Then
-                        Debugger.Break()
-                        MessageBox.Show($"Invalid ToolStripMenuItem Name <" + dropDownItem.Name.SubString(0, 17) + ">!")
-                    End If
-                    parentIdNo = UpdateSecurityObject(Of ToolStripMenuItem)(dropDownItem, parentMenuName, pParentIdNo, 17)
-                    If dropDownItem.HasDropDown Then
-                        UpdateChildMenuSecurityObjects(dropDownItem.DropDownItems, pParentMenuName, parentIdNo)
+                    parentIdNo = UpdateSecurityObject(dropDownItem, pParentIdNo, "ToolStripMenuItem")
+                    Dim menuItem = DirectCast(dropDownItem, ToolStripMenuItem)
+                    If menuItem.HasDropDown Then
+                        UpdateChildMenuSecurityObjects(menuItem.DropDownItems, pParentMenuName, parentIdNo)
                     End If
                 ElseIf TypeOf dropDownItem Is ToolStripButton Then
-                    If dropDownItem.Name.Length > 15 AndAlso dropDownItem.Name.SubString(0, 15) <> "ToolStripButton" Then
-                        Debugger.Break()
-                        MessageBox.Show($"Invalid ToolStripButton Name <" + dropDownItem.Name.SubString(0, 15) + ">!")
-                    End If
-                    UpdateSecurityObject(Of ToolStripButton)(dropDownItem, pParentMenuName, pParentIdNo, 15)
+                    UpdateSecurityObject(dropDownItem, pParentIdNo, "ToolStripButton")
                 End If
             Next
         End Sub
 
-        Private Function UpdateSecurityObject(Of T)(ByRef obj As T, ByRef subMenuName As String, ByVal parentIdNo As Int32, loc As Int16) As Int32
-            Dim toolStripMenuItem As T = obj
-            Dim objName = Invoker.GetProperty(obj, "Name")
-            Dim securityObject As New SecurityObject With {.SecurityObjectName = objName.SubString(loc),
+        Private Function UpdateSecurityObject(item As ToolStripItem, parentIdNo As Int32, prefix As String) As Int32
+            Dim objName = item.Name
+            If String.IsNullOrWhiteSpace(objName) OrElse
+                    Not objName.StartsWith(prefix, StringComparison.Ordinal) OrElse
+                    String.IsNullOrWhiteSpace(objName.Substring(prefix.Length)) Then
+                Throw New InvalidOperationException("Invalid menu security object name: " & objName)
+            End If
+            Dim securityObject As New SecurityObject With {.SecurityObjectName = objName.Substring(prefix.Length),
                     .SystemViewIdNo = VSystemViewIdNo,
                     .ParentIdNo = parentIdNo}
-            parentIdNo = Presenter.UpdateSecurityObject(securityObject)
-            Return parentIdNo
+            Return Presenter.UpdateSecurityObject(securityObject)
         End Function
 
         Private Sub ToolStripMenuItemEmployeeIDPrinting_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeIDPrinting.Click

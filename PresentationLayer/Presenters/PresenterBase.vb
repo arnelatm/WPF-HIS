@@ -616,7 +616,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Return retVal
     End Function
 
-    Public Function GetRecordDateTimeStamp(idNo As Int32) As Object
+    Public Overridable Function GetRecordDateTimeStamp(idNo As Int32) As Object
         Return Service.GetRecordDateTimeStamp(idNo, TableName)
     End Function
 

@@ -37,6 +37,8 @@ Public Class MappingProfileAccounts
         CreateMap(Of CashReceiptJournalModel, ICashReceiptJournalView)().ReverseMap()
         CreateMap(Of CsrOiItem, CsrOiItemModel)().ReverseMap()
         CreateMap(Of CsrOiItemModel, CsrOiItemView)().ReverseMap()
+        CreateMap(Of Contact, ContactModel)().ReverseMap()
+        CreateMap(Of ContactModel, IContactView)().ReverseMap()
         CreateMap(Of Customer, CustomerModel)().ReverseMap()
         CreateMap(Of CustomerModel, ICustomerView)().ReverseMap()
         'CreateMap(Of Deduction, DeductionModel)().ReverseMap()

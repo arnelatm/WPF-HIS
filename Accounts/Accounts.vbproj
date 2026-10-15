@@ -337,6 +337,14 @@
     <Compile Include="BusinessLayer\Commands\EditCommand.vb" />
     <Compile Include="BusinessLayer\Commands\IToolBarCommand.vb" />
     <Compile Include="BusinessLayer\CsrOiItem.vb" />
+    <Compile Include="BusinessLayer\Contact.vb" />
+    <Compile Include="DataLayer\AdoNet\ContactDao.vb" />
+    <Compile Include="PresentationLayer\Models\ContactModel.vb" />
+    <Compile Include="PresentationLayer\Presenters\ContactPresenter.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IContactView.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\ContactViewer.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="BusinessLayer\Customer.vb" />
     <Compile Include="BusinessLayer\Designation.vb" />
     <Compile Include="BusinessLayer\DistributionScheme.vb" />

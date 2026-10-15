@@ -99,6 +99,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemPensionSchemes = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemDoctor = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemSupplierVendors = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemContactViewer = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemCustomerClients = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemItemCode = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemCodeGroup = New System.Windows.Forms.ToolStripMenuItem()
@@ -433,7 +434,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemMasters
             '
-            Me.ToolStripMenuItemMasters.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemGeneral, Me.ToolStripMenuItemSecurity, Me.ToolStripMenuItemEmployee, Me.ToolStripMenuItemTranslations, Me.ToolStripMenuItemPayroll, Me.ToolStripMenuItemDoctor, Me.ToolStripMenuItemSupplierVendors, Me.ToolStripMenuItemCustomerClients, Me.ToolStripMenuItemItemCode, Me.ToolStripMenuItemCodeGroup, Me.ToolStripMenuItemIGroup, Me.ToolStripMenuItemPMR, Me.ToolStripMenuItemInventory, Me.ToolStripMenuItemReportMaster, Me.ToolStripMenuItemMedicalReports})
+            Me.ToolStripMenuItemMasters.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemGeneral, Me.ToolStripMenuItemSecurity, Me.ToolStripMenuItemEmployee, Me.ToolStripMenuItemTranslations, Me.ToolStripMenuItemPayroll, Me.ToolStripMenuItemDoctor, Me.ToolStripMenuItemSupplierVendors, Me.ToolStripMenuItemCustomerClients, Me.ToolStripMenuItemContactViewer, Me.ToolStripMenuItemItemCode, Me.ToolStripMenuItemCodeGroup, Me.ToolStripMenuItemIGroup, Me.ToolStripMenuItemPMR, Me.ToolStripMenuItemInventory, Me.ToolStripMenuItemReportMaster, Me.ToolStripMenuItemMedicalReports})
             Me.ToolStripMenuItemMasters.Name = "ToolStripMenuItemMasters"
             resources.ApplyResources(Me.ToolStripMenuItemMasters, "ToolStripMenuItemMasters")
             '
@@ -665,6 +666,8 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemCustomerClients
             '
+            Me.ToolStripMenuItemContactViewer.Name = "ToolStripMenuItemContactViewer"
+            Me.ToolStripMenuItemContactViewer.Text = "Contact Viewer"
             Me.ToolStripMenuItemCustomerClients.Name = "ToolStripMenuItemCustomerClients"
             resources.ApplyResources(Me.ToolStripMenuItemCustomerClients, "ToolStripMenuItemCustomerClients")
             '
@@ -1709,6 +1712,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ToolStripMenuItemRevCostCenters As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemChartOfAccounts As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemSupplierVendors As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemContactViewer As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemCustomerClients As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemGeneralJournalEntry As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemCashDisbursementEntry As ToolStripMenuItem
