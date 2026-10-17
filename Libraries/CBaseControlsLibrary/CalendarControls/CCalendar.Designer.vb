@@ -23,7 +23,7 @@ Partial Class CCalendar
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CCalendar))
-        Me.cboMonths = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
+        Me.cboMonths = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
         Me.YearsEdit = New System.Windows.Forms.NumericUpDown()
         Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.btnPrevMonth = New System.Windows.Forms.Button()
@@ -44,32 +44,30 @@ Partial Class CCalendar
         Me.LineShape3 = New Microsoft.VisualBasic.PowerPacks.LineShape()
         Me.LineShape2 = New Microsoft.VisualBasic.PowerPacks.LineShape()
         Me.LineShape1 = New Microsoft.VisualBasic.PowerPacks.LineShape()
-        Me.cboCalendars = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
+        Me.cboCalendars = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
         CType(Me.YearsEdit,System.ComponentModel.ISupportInitialize).BeginInit
         Me.CFlowLayout1.SuspendLayout
         Me.SuspendLayout
         '
         'cboMonths
         '
-        Me.cboMonths.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.cboMonths.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.cboMonths.AlwaysEditable = True
+        Me.cboMonths.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None
+        Me.cboMonths.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None
         Me.cboMonths.BackColor = System.Drawing.Color.White
         Me.cboMonths.DefaultValue = Nothing
         Me.cboMonths.DisplayOnly = false
-        Me.cboMonths.EditingMode = false
+        Me.cboMonths.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboMonths.EditingMode = True
         resources.ApplyResources(Me.cboMonths, "cboMonths")
         Me.cboMonths.ForeColor = System.Drawing.Color.Black
         Me.cboMonths.FormattingEnabled = true
         Me.cboMonths.HideWhenNotEditingOrAdding = false
         Me.cboMonths.LinkedLabel = Nothing
-        Me.cboMonths.MaximumValue = Nothing
-        Me.cboMonths.MinimumValue = Nothing
         Me.cboMonths.Name = "cboMonths"
         Me.cboMonths.OldValue = 0
         Me.cboMonths.OriginalDataSource = Nothing
-        Me.cboMonths.OriginalDropDownStyle = 1
         Me.cboMonths.OriginalList = Nothing
-        Me.cboMonths.ReadOnlyCombo = False
         Me.cboMonths.ValueIsMandatory = False
         Me.cboMonths.ValueIsNullable = False
         Me.cboMonths.ValueIsNumeric = False
@@ -203,25 +201,23 @@ Partial Class CCalendar
         '
         'cboCalendars
         '
-        Me.cboCalendars.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.cboCalendars.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.cboCalendars.AlwaysEditable = True
+        Me.cboCalendars.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None
+        Me.cboCalendars.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None
         Me.cboCalendars.BackColor = System.Drawing.Color.White
         Me.cboCalendars.DefaultValue = Nothing
         Me.cboCalendars.DisplayOnly = False
-        Me.cboCalendars.EditingMode = False
+        Me.cboCalendars.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboCalendars.EditingMode = True
         resources.ApplyResources(Me.cboCalendars, "cboCalendars")
         Me.cboCalendars.ForeColor = System.Drawing.Color.Black
         Me.cboCalendars.FormattingEnabled = True
         Me.cboCalendars.HideWhenNotEditingOrAdding = False
         Me.cboCalendars.LinkedLabel = Nothing
-        Me.cboCalendars.MaximumValue = Nothing
-        Me.cboCalendars.MinimumValue = Nothing
         Me.cboCalendars.Name = "cboCalendars"
         Me.cboCalendars.OldValue = 0
         Me.cboCalendars.OriginalDataSource = Nothing
-        Me.cboCalendars.OriginalDropDownStyle = 1
         Me.cboCalendars.OriginalList = Nothing
-        Me.cboCalendars.ReadOnlyCombo = false
         Me.cboCalendars.ValueIsMandatory = false
         Me.cboCalendars.ValueIsNullable = false
         Me.cboCalendars.ValueIsNumeric = false
@@ -255,7 +251,7 @@ Partial Class CCalendar
 
     End Sub
 
-    Friend WithEvents cboMonths As CComboBox
+    Friend WithEvents cboMonths As CtComboBox
     Private WithEvents YearsEdit As Windows.Forms.NumericUpDown
     Friend WithEvents CFlowLayout1 As CFlowLayout
     Private WithEvents btnPrevMonth As Windows.Forms.Button
@@ -271,7 +267,7 @@ Partial Class CCalendar
     Private WithEvents lblSaturday As Windows.Forms.Label
     Private WithEvents lblSunday As Windows.Forms.Label
     Private WithEvents lblToday As Windows.Forms.Label
-    Friend WithEvents cboCalendars As CComboBox
+    Friend WithEvents cboCalendars As CtComboBox
     Private WithEvents ShapeContainer1 As PowerPacks.ShapeContainer
     Private WithEvents LineShape4 As PowerPacks.LineShape
     Private WithEvents LineShape3 As PowerPacks.LineShape

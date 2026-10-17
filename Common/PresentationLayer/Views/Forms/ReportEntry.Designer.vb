@@ -43,13 +43,13 @@ Namespace PresentationLayer.Views.Forms
             Me.lblReportTitleAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtReportTitleAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
             Me.lblDatabaseName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboDatabaseName = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
+            Me.cboDatabaseName = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.lblReportFileName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtReportFileName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblPrintJobIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboPrintJobIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.lblQueryForm = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboQueryForm = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
+            Me.cboQueryForm = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.lblQueryFormParameters = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtQueryFormParameters = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblQueryParameters = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -378,9 +378,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboQueryForm.Name = "cboQueryForm"
             Me.cboQueryForm.OldValue = 0
             Me.cboQueryForm.OriginalDataSource = Nothing
-            Me.cboQueryForm.OriginalDropDownStyle = 2
             Me.cboQueryForm.OriginalList = Nothing
-            Me.cboQueryForm.ReadOnlyCombo = False
             Me.cboQueryForm.Size = New System.Drawing.Size(403, 26)
             Me.cboQueryForm.TabIndex = 11
             Me.cboQueryForm.Translatable = False
@@ -750,7 +748,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'chkActive
             '
-            Me.chkActive.Appearance = System.Windows.Forms.Appearance.Button
+            Me.chkActive.Appearance = System.Windows.Forms.Appearance.Normal
             Me.chkActive.AutoCheck = False
             Me.chkActive.BackColor = System.Drawing.Color.White
             Me.chkActive.BegFindValue = Nothing
@@ -978,9 +976,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDatabaseName.Name = "cboDatabaseName"
             Me.cboDatabaseName.OldValue = 0
             Me.cboDatabaseName.OriginalDataSource = Nothing
-            Me.cboDatabaseName.OriginalDropDownStyle = 2
             Me.cboDatabaseName.OriginalList = Nothing
-            Me.cboDatabaseName.ReadOnlyCombo = False
             Me.cboDatabaseName.Size = New System.Drawing.Size(403, 26)
             Me.cboDatabaseName.TabIndex = 9
             Me.cboDatabaseName.Translatable = False
@@ -1052,7 +1048,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'chkRepeatPromptAfterClose
             '
-            Me.chkRepeatPromptAfterClose.Appearance = System.Windows.Forms.Appearance.Button
+            Me.chkRepeatPromptAfterClose.Appearance = System.Windows.Forms.Appearance.Normal
             Me.chkRepeatPromptAfterClose.AutoCheck = False
             Me.chkRepeatPromptAfterClose.BackColor = System.Drawing.Color.White
             Me.chkRepeatPromptAfterClose.BegFindValue = Nothing
@@ -1115,7 +1111,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblPrintJobIdNo As CLabel
         Friend WithEvents cboPrintJobIdNo As CtComboBox
         Friend WithEvents lblQueryForm As CLabel
-        Friend WithEvents cboQueryForm As CComboBox
+        Friend WithEvents cboQueryForm As CtComboBox
         Friend WithEvents lblQueryFormParameters As CLabel
         Friend WithEvents txtQueryFormParameters As CTextBox
         Friend WithEvents lblReportTitle As CLabel
@@ -1137,7 +1133,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblReportOrder As CLabel
         Friend WithEvents txtReportOrder As CTextBox
         Friend WithEvents lblDatabaseName As CLabel
-        Friend WithEvents cboDatabaseName As CComboBox
+        Friend WithEvents cboDatabaseName As CtComboBox
         Friend WithEvents lblPromptParameterNames As CLabel
         Friend WithEvents txtPromptParameterNames As CTextBox
         Friend WithEvents lblRepeatPromptAfterClose As CLabel

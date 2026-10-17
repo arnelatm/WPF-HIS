@@ -175,7 +175,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             '
             'chkIncludeZeroBalances
             '
-            Me.chkIncludeZeroBalances.Appearance = System.Windows.Forms.Appearance.Button
+            Me.chkIncludeZeroBalances.Appearance = System.Windows.Forms.Appearance.Normal
             Me.chkIncludeZeroBalances.BackColor = System.Drawing.Color.White
             Me.chkIncludeZeroBalances.BegFindValue = Nothing
             Me.chkIncludeZeroBalances.CheckAlign = System.Drawing.ContentAlignment.MiddleRight

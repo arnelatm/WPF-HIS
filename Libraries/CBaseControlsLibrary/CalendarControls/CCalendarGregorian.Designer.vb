@@ -23,7 +23,7 @@ Partial Class CCalendarGregorian
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CCalendarGregorian))
-        Me.cboMonths = New CComboBox()
+        Me.cboMonths = New CtComboBox()
         Me.YearsEdit = New System.Windows.Forms.NumericUpDown()
         Me.CFlowLayout1 = New CFlowLayout()
         Me.btnPrevMonth = New System.Windows.Forms.Button()
@@ -50,20 +50,21 @@ Partial Class CCalendarGregorian
         '
         'cboMonths
         '
-        Me.cboMonths.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.cboMonths.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.cboMonths.AlwaysEditable = True
+        Me.cboMonths.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None
+        Me.cboMonths.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None
         Me.cboMonths.BackColor = System.Drawing.SystemColors.ControlLight
         Me.cboMonths.DefaultValue = Nothing
         Me.cboMonths.FormattingEnabled = True
         Me.cboMonths.HideWhenNotEditingOrAdding = False
         resources.ApplyResources(Me.cboMonths, "cboMonths")
         Me.cboMonths.Name = "cboMonths"
-        Me.cboMonths.OriginalDropDownStyle = 1
-        Me.cboMonths.ReadOnlyCombo = False
         Me.cboMonths.ValueIsMandatory = False
         Me.cboMonths.ValueIsNullable = False
         Me.cboMonths.ValueIsNumeric = False
         Me.cboMonths.DisplayOnly = False
+        Me.cboMonths.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboMonths.EditingMode = True
         '
         'YearsEdit
         '
@@ -212,7 +213,7 @@ Partial Class CCalendarGregorian
 
     End Sub
 
-    Friend WithEvents cboMonths As CComboBox
+    Friend WithEvents cboMonths As CtComboBox
     Private WithEvents YearsEdit As Windows.Forms.NumericUpDown
     Friend WithEvents CFlowLayout1 As CFlowLayout
     Private WithEvents btnPrevMonth As Windows.Forms.Button

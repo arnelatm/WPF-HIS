@@ -192,7 +192,7 @@ Public Class TxtComboBox
         End Set
     End Property
 
-    Public Property TcbComboBox As CComboBox
+    Public Property TcbComboBox As CtComboBox
         Get
             Return cboComboBox
         End Get
@@ -341,7 +341,6 @@ Public Class TxtComboBox
             cboComboBox.Visible = True
             ForeColor = GlobalVariables.DefaultFormControlForegroundColor
             BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-            cboComboBox.SelectedText = Nothing
             cboComboBox.Visible = True
             txtReadOnly.SendToBack()
             cboComboBox.Visible = True

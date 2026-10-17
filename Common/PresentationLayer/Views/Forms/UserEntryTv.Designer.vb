@@ -444,7 +444,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'chkActive
             '
-            Me.chkActive.Appearance = System.Windows.Forms.Appearance.Button
+            Me.chkActive.Appearance = System.Windows.Forms.Appearance.Normal
             Me.chkActive.AutoCheck = False
             Me.chkActive.BackColor = System.Drawing.Color.White
             Me.chkActive.BegFindValue = Nothing

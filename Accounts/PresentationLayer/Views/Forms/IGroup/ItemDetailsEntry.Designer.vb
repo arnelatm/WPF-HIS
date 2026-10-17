@@ -973,7 +973,7 @@
         'chkPrescriptionDrug
         '
         Me.chkPrescriptionDrug.AlwaysEditable = false
-        Me.chkPrescriptionDrug.Appearance = System.Windows.Forms.Appearance.Button
+        Me.chkPrescriptionDrug.Appearance = System.Windows.Forms.Appearance.Normal
         Me.chkPrescriptionDrug.AutoCheck = false
         Me.chkPrescriptionDrug.BackColor = System.Drawing.Color.White
         Me.chkPrescriptionDrug.BegFindValue = Nothing

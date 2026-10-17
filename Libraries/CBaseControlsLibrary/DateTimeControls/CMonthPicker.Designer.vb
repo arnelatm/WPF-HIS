@@ -28,7 +28,7 @@ Partial Class CMonthPicker
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CMonthPicker))
         Me.floMonthPicker = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.btnPrevMonth = New System.Windows.Forms.Button()
-        Me.cboMonths = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
+        Me.cboMonths = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
         Me.spnYear = New System.Windows.Forms.NumericUpDown()
         Me.btnNextMonth = New System.Windows.Forms.Button()
         Me.floMonthPicker.SuspendLayout
@@ -60,8 +60,9 @@ Partial Class CMonthPicker
         '
         'cboMonths
         '
-        Me.cboMonths.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.cboMonths.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.cboMonths.AlwaysEditable = True
+        Me.cboMonths.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None
+        Me.cboMonths.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None
         Me.cboMonths.BackColor = System.Drawing.Color.White
         Me.cboMonths.DefaultValue = Nothing
         Me.cboMonths.FlatStyle = System.Windows.Forms.FlatStyle.Popup
@@ -74,16 +75,15 @@ Partial Class CMonthPicker
         Me.cboMonths.Margin = New System.Windows.Forms.Padding(1)
         Me.cboMonths.Name = "cboMonths"
         Me.cboMonths.OriginalDataSource = Nothing
-        Me.cboMonths.OriginalDropDownStyle = 1
         Me.cboMonths.OriginalList = Nothing
-        Me.cboMonths.ReadOnlyCombo = false
-        Me.cboMonths.EditingMode = false
         Me.cboMonths.Size = New System.Drawing.Size(107, 22)
         Me.cboMonths.TabIndex = 1
         Me.cboMonths.ValueIsMandatory = false
         Me.cboMonths.ValueIsNullable = false
         Me.cboMonths.ValueIsNumeric = false
         Me.cboMonths.DisplayOnly = false
+        Me.cboMonths.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboMonths.EditingMode = True
         '
         'spnYear
         '
@@ -125,7 +125,7 @@ Partial Class CMonthPicker
 
     End Sub
     Private WithEvents btnNextMonth As Windows.Forms.Button
-    Friend WithEvents cboMonths As CComboBox
+    Friend WithEvents cboMonths As CtComboBox
     Private WithEvents btnPrevMonth As Windows.Forms.Button
     Friend WithEvents floMonthPicker As CFlowLayout
     Private WithEvents spnYear As Windows.Forms.NumericUpDown

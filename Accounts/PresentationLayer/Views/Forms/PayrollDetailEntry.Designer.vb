@@ -955,7 +955,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'chkBankTransfer
             '
-            Me.chkBankTransfer.Appearance = System.Windows.Forms.Appearance.Button
+            Me.chkBankTransfer.Appearance = System.Windows.Forms.Appearance.Normal
             Me.chkBankTransfer.AutoCheck = False
             Me.chkBankTransfer.BackColor = System.Drawing.Color.White
             Me.chkBankTransfer.BegFindValue = Nothing

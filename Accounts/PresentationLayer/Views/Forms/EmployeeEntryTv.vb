@@ -44,6 +44,18 @@ Namespace PresentationLayer.Views.Forms
         Public Property EarningsByName As DataTable Implements IEmployeeView.EarningsByName
         Public Property Unit As DataTable Implements IEmployeeView.Unit
 
+        Public Overrides Sub TurnOnInputs()
+            MyBase.TurnOnInputs()
+            chkActive.EditingMode = True
+            chkSupervisor.EditingMode = True
+        End Sub
+
+        Public Overrides Sub TurnOffInputs()
+            MyBase.TurnOffInputs()
+            chkActive.EditingMode = False
+            chkSupervisor.EditingMode = False
+        End Sub
+
         Public Property Active As Boolean Implements IEmployeeView.Active
             Get
                 Return chkActive.Checked

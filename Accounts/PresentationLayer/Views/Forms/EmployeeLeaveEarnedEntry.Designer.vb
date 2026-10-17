@@ -546,7 +546,7 @@ Partial Class EmployeeLeaveEarnedEntry
         '
         'chkApproved
         '
-        Me.chkApproved.Appearance = System.Windows.Forms.Appearance.Button
+        Me.chkApproved.Appearance = System.Windows.Forms.Appearance.Normal
         Me.chkApproved.AutoCheck = False
         Me.chkApproved.BackColor = System.Drawing.Color.White
         Me.chkApproved.BegFindValue = Nothing
@@ -596,7 +596,7 @@ Partial Class EmployeeLeaveEarnedEntry
         '
         'chkDisapproved
         '
-        Me.chkDisapproved.Appearance = System.Windows.Forms.Appearance.Button
+        Me.chkDisapproved.Appearance = System.Windows.Forms.Appearance.Normal
         Me.chkDisapproved.AutoCheck = False
         Me.chkDisapproved.BackColor = System.Drawing.Color.White
         Me.chkDisapproved.BegFindValue = Nothing

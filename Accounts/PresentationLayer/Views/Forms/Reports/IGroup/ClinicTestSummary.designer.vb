@@ -30,7 +30,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.dtpBeginningDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboReportSelector = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
+            Me.cboReportSelector = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
@@ -164,9 +164,10 @@ Namespace PresentationLayer.Views.Forms.Reports
             'cboReportSelector
             '
             Me.cboReportSelector.AlwaysEditable = True
-            Me.cboReportSelector.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+            Me.cboReportSelector.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None
             Me.cboReportSelector.DefaultValue = Nothing
             Me.cboReportSelector.DisplayOnly = False
+            Me.cboReportSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
             Me.cboReportSelector.EditingMode = True
             Me.cboReportSelector.FlatStyle = System.Windows.Forms.FlatStyle.Popup
             Me.cboReportSelector.Font = New System.Drawing.Font("Arial", 10.0!)
@@ -177,14 +178,10 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.cboReportSelector.LinkedLabel = Nothing
             Me.cboReportSelector.Location = New System.Drawing.Point(11, 96)
             Me.cboReportSelector.Margin = New System.Windows.Forms.Padding(1)
-            Me.cboReportSelector.MaximumValue = Nothing
-            Me.cboReportSelector.MinimumValue = Nothing
             Me.cboReportSelector.Name = "cboReportSelector"
             Me.cboReportSelector.OldValue = 0
             Me.cboReportSelector.OriginalDataSource = Nothing
-            Me.cboReportSelector.OriginalDropDownStyle = 1
             Me.cboReportSelector.OriginalList = Nothing
-            Me.cboReportSelector.ReadOnlyCombo = False
             Me.cboReportSelector.Size = New System.Drawing.Size(285, 27)
             Me.cboReportSelector.TabIndex = 27
             Me.cboReportSelector.Translatable = False
@@ -275,6 +272,6 @@ Namespace PresentationLayer.Views.Forms.Reports
         Friend WithEvents btnOk As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents btnCancel As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents CLabel3 As CLabel
-        Friend WithEvents cboReportSelector As CComboBox
+        Friend WithEvents cboReportSelector As CtComboBox
     End Class
 End NameSpace

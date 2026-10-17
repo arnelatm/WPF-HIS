@@ -44,6 +44,20 @@ Public Class CCheckBox
         Text = ""
     End Sub
 
+    ' Always show a check mark, including when legacy designer settings are pasted.
+    <Browsable(False)>
+    <EditorBrowsable(EditorBrowsableState.Never)>
+    <DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
+    <DefaultValue(GetType(System.Windows.Forms.Appearance), "Normal")>
+    Public Shadows Property Appearance As System.Windows.Forms.Appearance
+        Get
+            Return MyBase.Appearance
+        End Get
+        Set(value As System.Windows.Forms.Appearance)
+            MyBase.Appearance = System.Windows.Forms.Appearance.Normal
+        End Set
+    End Property
+
     <Category("Custom Properties")>
     <DefaultValue(False)>
     <Description("Set to True to specify that this control is always editable.")>
@@ -214,6 +228,7 @@ Public Class CCheckBox
                     ForeColor = GlobalVariables.DefaultFormControlForegroundColor
                     BackColor = GlobalVariables.DefaultFormControlBackgroundColor
                 End If
+                UpdateDisplayOnlyControl()
             End If
         End Set
     End Property

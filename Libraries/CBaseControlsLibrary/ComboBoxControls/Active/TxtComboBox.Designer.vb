@@ -25,15 +25,15 @@ Partial Class TxtComboBox
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Me.cboComboBox = New CComboBox()
+        Me.cboComboBox = New CtComboBox()
         Me.TxtTextBox = New CTextBox()
         Me.txtReadOnly = New CTextBox()
         Me.SuspendLayout
         '
         'cboComboBox
         '
-        Me.cboComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.cboComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.cboComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None
+        Me.cboComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None
         Me.cboComboBox.BackColor = System.Drawing.Color.White
         Me.cboComboBox.DefaultValue = Nothing
         Me.cboComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup
@@ -45,8 +45,6 @@ Partial Class TxtComboBox
         Me.cboComboBox.Location = New System.Drawing.Point(0, 0)
         Me.cboComboBox.Margin = New System.Windows.Forms.Padding(1)
         Me.cboComboBox.Name = "cboComboBox"
-        Me.cboComboBox.OriginalDropDownStyle = 1
-        Me.cboComboBox.ReadOnlyCombo = false
         Me.cboComboBox.EditingMode = false
         Me.cboComboBox.Size = New System.Drawing.Size(220, 24)
         Me.cboComboBox.TabIndex = 3
@@ -106,7 +104,7 @@ Partial Class TxtComboBox
 
     End Sub
 
-    Friend WithEvents cboComboBox As CComboBox
+    Friend WithEvents cboComboBox As CtComboBox
     Friend WithEvents TxtTextBox As CTextBox
     Friend WithEvents txtReadOnly As CTextBox
 End Class

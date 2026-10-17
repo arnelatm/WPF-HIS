@@ -406,7 +406,7 @@
             '
             'chkCumulative
             '
-            Me.chkCumulative.Appearance = System.Windows.Forms.Appearance.Button
+            Me.chkCumulative.Appearance = System.Windows.Forms.Appearance.Normal
             Me.chkCumulative.BackColor = System.Drawing.Color.White
             Me.chkCumulative.BegFindValue = Nothing
             Me.chkCumulative.DisplayOnly = False
@@ -599,7 +599,7 @@
             '
             'chkEarnable
             '
-            Me.chkEarnable.Appearance = System.Windows.Forms.Appearance.Button
+            Me.chkEarnable.Appearance = System.Windows.Forms.Appearance.Normal
             Me.chkEarnable.BackColor = System.Drawing.Color.White
             Me.chkEarnable.BegFindValue = Nothing
             Me.chkEarnable.DisplayOnly = False

@@ -21,7 +21,7 @@ Public Class CtComboBox
     Private _suggestListOrderRule As Expression(Of Func(Of String, String))
     Private _suggestListOrderRuleCompiled As Func(Of String, String)
     Private ReadOnly _defaultDropDownHeight As Int16
-    Private ReadOnly _defaultDropdownStyle As ComboBoxStyle
+    Private _defaultDropdownStyle As ComboBoxStyle = ComboBoxStyle.DropDown
     Private ReadOnly _defaultMaxDropDownItems As Int16
     Private ReadOnly _suggestBindingList As BindingList(Of String) = New BindingList(Of String)()
     Private Shared ReadOnly KeysToHandle As Keys() = {Keys.Down, Keys.Up, Keys.Enter, Keys.Escape}
@@ -47,7 +47,16 @@ Public Class CtComboBox
     <Category("Custom Properties")>
     <DefaultValue(False)>
     <Description("Set to True to specify that this control is always editable.")>
-    Public Property AlwaysEditable As Boolean = False
+    Public Property AlwaysEditable As Boolean
+        Get
+            Return _alwaysEditable
+        End Get
+        Set(value As Boolean)
+            _alwaysEditable = value
+            EditingMode = _editingMode
+        End Set
+    End Property
+    Private _alwaysEditable As Boolean
     Private _lastValue As Object = Nothing
     Private _normalizingClear As Boolean
     Private _synchronizingSelectionText As Boolean
@@ -71,6 +80,22 @@ Public Class CtComboBox
     <Description("Set to True to specify that this control value is hidden (used for secured controls)")>
     Public Property Hidden As Boolean = False
 
+    ' Keep the configured input style when temporarily displaying a read-only value.
+    <DefaultValue(GetType(ComboBoxStyle), "DropDown")>
+    Public Shadows Property DropDownStyle As ComboBoxStyle
+        Get
+            If DesignMode Then Return _defaultDropdownStyle
+            Return MyBase.DropDownStyle
+        End Get
+        Set(value As ComboBoxStyle)
+            ' Existing designers serialize Simple for view mode; it is not the input style.
+            If value <> ComboBoxStyle.Simple Then
+                _defaultDropdownStyle = value
+            End If
+            MyBase.DropDownStyle = value
+        End Set
+    End Property
+
     Public Property EditingMode As Boolean Implements IEntryControl.EditingMode
         Get
             Return _editingMode
@@ -79,7 +104,7 @@ Public Class CtComboBox
             If DisplayOnly Then
                 _editingMode = False
             Else
-                _editingMode = value
+                _editingMode = value OrElse AlwaysEditable
             End If
             UpdateDisplayOnlyControl()
         End Set
@@ -89,7 +114,7 @@ Public Class CtComboBox
     Public Sub UpdateDisplayOnlyControl()
         If _editingMode AndAlso Editable AndAlso Not DisplayOnly Then
             DropDownHeight = _defaultDropDownHeight
-            DropDownStyle = _defaultDropdownStyle
+            MyBase.DropDownStyle = _defaultDropdownStyle
             MaxDropDownItems = _defaultMaxDropDownItems
             If Hidden Then
                 ForeColor = Color.Black
@@ -99,7 +124,7 @@ Public Class CtComboBox
                 BackColor = GlobalVariables.DefaultFormControlBackgroundColor
             End If
         Else
-            DropDownStyle = ComboBoxStyle.Simple
+            MyBase.DropDownStyle = ComboBoxStyle.Simple
             DropDownHeight = Height
             MaxDropDownItems = 1
             IntegralHeight = True
@@ -384,7 +409,7 @@ Public Class CtComboBox
     Private Sub HideDropDown(hide As Boolean)
         BeginUpdate()
         If hide Then
-            DropDownStyle = ComboBoxStyle.Simple
+            MyBase.DropDownStyle = ComboBoxStyle.Simple
             MaxDropDownItems = 1
             If Hidden Then
                 ForeColor = Color.Black
@@ -399,7 +424,7 @@ Public Class CtComboBox
             DropDownHeight = Height
         Else
             MaxDropDownItems = _defaultMaxDropDownItems
-            DropDownStyle = _defaultDropdownStyle
+            MyBase.DropDownStyle = _defaultDropdownStyle
             If Hidden Then
                 ForeColor = Color.Black
                 BackColor = Color.Black
@@ -420,6 +445,7 @@ Public Class CtComboBox
         Try
             MyBase.OnTextChanged(e)
             If _normalizingClear OrElse _synchronizingSelectionText OrElse Not Focused Then Return
+            If DropDownStyle = ComboBoxStyle.DropDownList Then Return
 
             If Text.Length = 0 Then
                 HideSuggestionBox()
@@ -534,7 +560,7 @@ Public Class CtComboBox
         Text = ""
         _filterRuleCompiled = Function(s) s.ToLower().Contains(Text.Trim().ToLower())
         _suggestListOrderRuleCompiled = Function(s) s
-        PropertySelectorCompiled = Function(collection) collection.Cast(Of String)()
+        PropertySelectorCompiled = Function(collection) collection.Cast(Of Object)().Select(Function(item) GetItemText(item))
         SetStyle(ControlStyles.EnableNotifyMessage, True)
         SuggestListForm.SuggestListBox.DataSource = _suggestBindingList
         SuggestListForm.SuggestListBox.ForeColor = Color.Green
