@@ -1,11 +1,20 @@
 ﻿Imports AATM.Common.PresentationLayer.Views.Interface
 Imports AATM.Common.ServiceLayer
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Presenters
 
     Public Class OriginalCaptionsPresenter(Of TM As New)
         Inherits CommonPresenter(Of IOriginalCaptionsView, TM)
+
+        Private Sub OnCaptionSaved() Handles MyBase.AfterSave
+            ControlCaptionTranslations.Invalidate()
+        End Sub
+
+        Private Sub OnCaptionDeleted(retVal As Integer) Handles MyBase.AfterDelete
+            If retVal > 0 Then ControlCaptionTranslations.Invalidate()
+        End Sub
 
         Public Sub New(view As IOriginalCaptionsView)
             MyBase.New(view)

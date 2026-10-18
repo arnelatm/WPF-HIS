@@ -1,6 +1,7 @@
 ﻿Imports System.Drawing
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.MessagingLibrary
 
 Public Class TranslationTableManager
 
@@ -162,6 +163,7 @@ Public Class TranslationTableManager
                     LoadColumn("translated")
                 End If
         End Select
+        ControlCaptionTranslations.Invalidate()
         LoadColumn("Original")
         LoadColumn("Translation")
         SetFocusToRowWithText(originalValue, DataGrid1)
@@ -344,6 +346,7 @@ Public Class TranslationTableManager
             Result = TranslatorDAC.ExecCmd(Cmd)
         End If
 
+        ControlCaptionTranslations.Invalidate()
         LoadColumn("Original")
         LoadColumn("Translation")
 
@@ -379,6 +382,8 @@ Public Class TranslationTableManager
                   + captionIdNo.ToString() + ", '" + translatedValue.Trim() + "'," + cmbLanguage.SelectedValue.ToString() + " )"
             Result = TranslatorDAC.ExecCmd(Cmd)
         End If
+
+        ControlCaptionTranslations.Invalidate()
 
         ' If the original entry doesn't already exist, add it now
         'Cmd = "SELECT count(*) From OriginalCaptions where Caption = '" _

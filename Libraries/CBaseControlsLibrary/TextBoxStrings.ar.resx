@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="Find on this field" xml:space="preserve"><value>البحث في هذا الحقل</value></data>
+  <data name="Cut Selected Text" xml:space="preserve"><value>قص النص المحدد</value></data>
+  <data name="Copy Selected Text" xml:space="preserve"><value>نسخ النص المحدد</value></data>
+  <data name="Paste Text" xml:space="preserve"><value>لصق النص</value></data>
+  <data name="Undo Last Action" xml:space="preserve"><value>التراجع عن آخر إجراء</value></data>
+  <data name="Delete Selected Text" xml:space="preserve"><value>حذف النص المحدد</value></data>
+  <data name="Select All Text" xml:space="preserve"><value>تحديد النص بالكامل</value></data>
+</root>

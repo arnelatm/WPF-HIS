@@ -93,20 +93,16 @@ Public Class LoginEntry
             textConfirmation.Visible = True
             lblNewPassword.Visible = True
             lblConfirmation.Visible = True
-            textNewPassword.DisplayOnly = False
-            textConfirmation.DisplayOnly = False
             btn_Login.Text = Messaging.TranslateCaption("Save")
             textNewPassword.Text = ""
             textConfirmation.Text = ""
             textBoxPassword.Text = ""
             textNewPassword.Editable = True
             textConfirmation.Editable = True
-            txtUserName.DisplayOnly = True
             Refresh()
-        Else
-            txtUserName.DisplayOnly = False
         End If
 
+        ApplyLoginInputState()
         ApplyPasswordModeVisibility()
         ConfigureConnectionInfoLabel()
 
@@ -162,6 +158,17 @@ Public Class LoginEntry
         lblConfirmation.Visible = _changingPassword
         textNewPassword.TabStop = _changingPassword
         textConfirmation.TabStop = _changingPassword
+    End Sub
+
+    Private Sub ApplyLoginInputState()
+        ' Login does not use the entry-screen Add/Edit workflow. Set the mode
+        ' explicitly instead of overriding ReadOnly while EditingMode is False.
+        txtUserName.EditingMode = True
+        txtUserName.DisplayOnly = _changingPassword
+        For Each passwordField As CTextBox In New CTextBox() {textBoxPassword, textNewPassword, textConfirmation}
+            passwordField.EditingMode = True
+            passwordField.DisplayOnly = False
+        Next
     End Sub
 
     Public Property MainTableName As String = "User"
@@ -288,19 +295,7 @@ Public Class LoginEntry
     End Sub
 
     Private Sub FormLogin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If _changingPassword Then
-            _txtUserName.ReadOnly = True
-            _txtUserName.DisplayOnly = True
-        Else
-            _txtUserName.ReadOnly = False
-            _txtUserName.DisplayOnly = False
-        End If
-        _textBoxPassword.ReadOnly = False
-        _textConfirmation.ReadOnly = False
-        _textNewPassword.ReadOnly = False
-        _textBoxPassword.DisplayOnly = False
-        _textNewPassword.DisplayOnly = False
-        _textConfirmation.DisplayOnly = False
+        ApplyLoginInputState()
         ApplyPasswordModeVisibility()
     End Sub
 

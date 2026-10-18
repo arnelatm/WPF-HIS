@@ -635,6 +635,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ComboBoxStrings.resx" />
     <EmbeddedResource Include="ComboBoxStrings.ar.resx" />
+    <EmbeddedResource Include="TextBoxStrings.resx" />
+    <EmbeddedResource Include="TextBoxStrings.ar.resx" />
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>

@@ -11,6 +11,14 @@ Namespace PresentationLayer.Presenters
 
         Private Property Dac
 
+        Private Sub OnCaptionSaved() Handles MyBase.AfterSave
+            ControlCaptionTranslations.Invalidate()
+        End Sub
+
+        Private Sub OnCaptionDeleted(retVal As Integer) Handles MyBase.AfterDelete
+            If retVal > 0 Then ControlCaptionTranslations.Invalidate()
+        End Sub
+
         Public Sub New(view As ITranslatedCaptionView)
             MyBase.New(view)
             Service = New CommonService("TranslatedCaption")

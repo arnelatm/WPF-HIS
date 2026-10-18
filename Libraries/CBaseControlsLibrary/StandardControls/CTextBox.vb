@@ -1,6 +1,7 @@
 ﻿Imports System.ComponentModel
 Imports System.Drawing
 Imports System.Globalization
+Imports System.Resources
 Imports System.Windows.Forms
 Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.BaseControlsLibrary
@@ -514,14 +515,15 @@ Public Class CTextBox
 #Region "Declarations#"
 
     ' Text Menu Captions
-    Private Shared ReadOnly _textFind = MessagingLibrary.Messaging.TranslateCaption("Find on this field")
+    Private Const _textFind As String = "Find on this field"
 
-    Private Shared ReadOnly _textCut = MessagingLibrary.Messaging.TranslateCaption("Cut Selected Text")
-    Private Shared ReadOnly _textCopy = MessagingLibrary.Messaging.TranslateCaption("Copy Selected Text")
-    Private Shared ReadOnly _textPaste = MessagingLibrary.Messaging.TranslateCaption("Paste Text")
-    Private Shared ReadOnly _textUndo = MessagingLibrary.Messaging.TranslateCaption("Undo Last Action")
-    Private Shared ReadOnly _textDelete = MessagingLibrary.Messaging.TranslateCaption("Delete Selected Text")
-    Private Shared ReadOnly _textSelectAll = MessagingLibrary.Messaging.TranslateCaption("Select All Text")
+    Private Const _textCut As String = "Cut Selected Text"
+    Private Const _textCopy As String = "Copy Selected Text"
+    Private Const _textPaste As String = "Paste Text"
+    Private Const _textUndo As String = "Undo Last Action"
+    Private Const _textDelete As String = "Delete Selected Text"
+    Private Const _textSelectAll As String = "Select All Text"
+    Private Shared ReadOnly MenuCaptionResources As New ResourceManager("AATM.Libraries.CBaseControlsLibrary.TextBoxStrings", GetType(CTextBox).Assembly)
 
 #End Region
 
@@ -546,8 +548,7 @@ Public Class CTextBox
             ' The designer keeps the inherited Nothing default. Runtime access
             ' creates the owned menu once, including access for shortcut handling.
             If Not _customContextMenuAssigned AndAlso Not _disposingTextBox AndAlso
-                Not Disposing AndAlso Not IsDisposed AndAlso Not DesignMode AndAlso
-                LicenseManager.UsageMode <> LicenseUsageMode.Designtime Then
+                Not Disposing AndAlso Not IsDisposed AndAlso Not IsTextBoxDesignTime() Then
                 EnsureDefaultContextMenu()
             End If
             Return MyBase.ContextMenuStrip
@@ -581,8 +582,44 @@ Public Class CTextBox
     End Sub
 
     Private Shared Function CreateMenuItem(caption As String, shortcut As Keys, handler As EventHandler) As ToolStripMenuItem
-        Return New ToolStripMenuItem(caption, Nothing, handler) With {.ShortcutKeys = shortcut}
+        Dim fallback = GetBuiltInCaption(caption, CultureInfo.CurrentUICulture)
+        Return New ToolStripMenuItem(fallback, Nothing, handler) With {.ShortcutKeys = shortcut, .Tag = caption}
     End Function
+
+    Private Shared Function GetBuiltInCaption(caption As String, culture As CultureInfo) As String
+        Try
+            Return If(MenuCaptionResources.GetString(caption, culture), caption)
+        Catch ex As MissingManifestResourceException
+            Return caption
+        Catch ex As MissingSatelliteAssemblyException
+            Return caption
+        End Try
+    End Function
+
+    Private Function IsTextBoxDesignTime() As Boolean
+        If LicenseManager.UsageMode = LicenseUsageMode.Designtime Then Return True
+        Dim control As Control = Me
+        While control IsNot Nothing
+            If control.Site IsNot Nothing AndAlso control.Site.DesignMode Then Return True
+            control = control.Parent
+        End While
+        Return False
+    End Function
+
+    Private Sub UpdateMenuCaptions()
+        Dim culture = CultureInfo.CurrentUICulture
+        Dim fallbacks As New Dictionary(Of String, String)(StringComparer.OrdinalIgnoreCase)
+        For Each item As ToolStripItem In _contextMenuStrip1.Items
+            Dim caption = TryCast(item.Tag, String)
+            If caption IsNot Nothing Then fallbacks(caption) = GetBuiltInCaption(caption, culture)
+        Next
+        Dim captions = MessagingLibrary.ControlCaptionTranslations.GetCaptions(fallbacks, culture, IsTextBoxDesignTime())
+        _contextMenuStrip1.RightToLeft = If(culture.TextInfo.IsRightToLeft, RightToLeft.Yes, RightToLeft.No)
+        For Each item As ToolStripItem In _contextMenuStrip1.Items
+            Dim caption = TryCast(item.Tag, String)
+            If caption IsNot Nothing Then item.Text = captions(caption)
+        Next
+    End Sub
 
     Private ReadOnly Property CanEditText As Boolean
         Get
@@ -607,6 +644,7 @@ Public Class CTextBox
     Protected Sub ContextHandler(sender As Object, e As EventArgs)
         If _customContextMenuAssigned OrElse _disposingTextBox OrElse IsDisposed Then Return
         EnsureDefaultContextMenu()
+        UpdateMenuCaptions()
         Try
             _clipboardContainsText = Clipboard.ContainsText()
         Catch ex As System.Runtime.InteropServices.ExternalException
@@ -704,14 +742,17 @@ Public Class CTextBox
         End If
     End Sub
 
-    Private Sub CTextBox_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            If Not AcceptsReturn Then
-                SendKeys.Send("{TAB}")
-                e.Handled = True
-                e.SuppressKeyPress = True
-            End If
-        End If
+    Protected Overrides Sub OnKeyDown(e As KeyEventArgs)
+        ' Existing handlers (including composite editors) get first use of the key.
+        MyBase.OnKeyDown(e)
+        If e.Handled OrElse e.SuppressKeyPress OrElse e.KeyData <> Keys.Enter OrElse
+            AcceptsReturn OrElse TypeOf Me Is IDataGridViewEditingControl Then Return
+        Dim form = FindForm()
+        ' Let normal dialog processing keep ownership of a form's default button.
+        If form Is Nothing OrElse form.AcceptButton IsNot Nothing Then Return
+        form.SelectNextControl(Me, True, True, True, True)
+        e.Handled = True
+        e.SuppressKeyPress = True
     End Sub
 
     Public Function ValueChanged()

@@ -59,7 +59,8 @@ Public Class TxtComboBox
             .SelectionLength = 0
         End With
 
-        'Add any initialization after the InitializeComponent() call.
+        ' Synchronize the internal editors with the parent's default edit mode.
+        UpdateDisplayOnlyControl()
     End Sub
 
     <Bindable(True)>
@@ -311,6 +312,7 @@ Public Class TxtComboBox
             'EditingMode = value
             cboComboBox.DisplayOnly = value
             TxtTextBox.DisplayOnly = value
+            UpdateDisplayOnlyControl()
         End Set
     End Property
 
