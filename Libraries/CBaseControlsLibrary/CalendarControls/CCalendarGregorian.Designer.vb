@@ -23,7 +23,7 @@ Partial Class CCalendarGregorian
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CCalendarGregorian))
-        Me.cboMonths = New CtComboBox()
+        Me.cboMonths = New CComboBox()
         Me.YearsEdit = New System.Windows.Forms.NumericUpDown()
         Me.CFlowLayout1 = New CFlowLayout()
         Me.btnPrevMonth = New System.Windows.Forms.Button()
@@ -213,7 +213,7 @@ Partial Class CCalendarGregorian
 
     End Sub
 
-    Friend WithEvents cboMonths As CtComboBox
+    Friend WithEvents cboMonths As CComboBox
     Private WithEvents YearsEdit As Windows.Forms.NumericUpDown
     Friend WithEvents CFlowLayout1 As CFlowLayout
     Private WithEvents btnPrevMonth As Windows.Forms.Button

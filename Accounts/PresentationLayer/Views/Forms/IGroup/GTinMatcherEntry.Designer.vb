@@ -64,21 +64,21 @@
             Me.lblRegistrationCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtRegistrationNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblDosageForm = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboDosageForm = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboDosageForm = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtStrengthValue = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblUnitOfStrength = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboUnitOfStrength = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboUnitOfStrength = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.lblVolume = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtVolume = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblUnitOfVolume = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboUnitOfVolume = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboUnitOfVolume = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.lblPackageType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboPackageType = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboPackageType = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.cboPackageSize = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtPackageSize = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboRouteOfAdministration = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboRouteOfAdministration = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.BnDrugs = New System.Windows.Forms.BindingNavigator(Me.components)
             Me.BindingNavigatorMoveFirstItem = New System.Windows.Forms.ToolStripButton()
@@ -2163,21 +2163,21 @@
         Friend WithEvents lblName As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents TxtItemDetailsName As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblGenericName As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboRouteOfAdministration As Libraries.CBaseControlsLibrary.CtComboBox
+        Friend WithEvents cboRouteOfAdministration As Libraries.CBaseControlsLibrary.CComboBox
         Friend WithEvents lblRegistrationCode As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtRegistrationNo As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblDosageForm As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboDosageForm As Libraries.CBaseControlsLibrary.CtComboBox
+        Friend WithEvents cboDosageForm As Libraries.CBaseControlsLibrary.CComboBox
         Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtStrengthValue As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblUnitOfStrength As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboUnitOfStrength As Libraries.CBaseControlsLibrary.CtComboBox
+        Friend WithEvents cboUnitOfStrength As Libraries.CBaseControlsLibrary.CComboBox
         Friend WithEvents lblVolume As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtVolume As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblUnitOfVolume As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboUnitOfVolume As Libraries.CBaseControlsLibrary.CtComboBox
+        Friend WithEvents cboUnitOfVolume As Libraries.CBaseControlsLibrary.CComboBox
         Friend WithEvents lblPackageType As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboPackageType As Libraries.CBaseControlsLibrary.CtComboBox
+        Friend WithEvents cboPackageType As Libraries.CBaseControlsLibrary.CComboBox
         Friend WithEvents cboPackageSize As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtPackageSize As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents CLabel3 As Libraries.CBaseControlsLibrary.CLabel

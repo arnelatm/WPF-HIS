@@ -899,8 +899,8 @@ Namespace PresentationLayer.Views.Forms
             MyBase.UpdateViewDisplay(editMode, addMode, recordPositionNumber, targetIdNo, recordCount)
             UpdateActionButtons(editMode Or addMode)
             'For Each control In Controls
-            '    If TypeOf control Is CtComboBox Then
-            '        Dim x As CtComboBox = control
+            '    If TypeOf control Is CComboBox Then
+            '        Dim x As CComboBox = control
             '        x.SelectionLength = 0
             '        x.SelectionStart = 0
             '    End If
@@ -917,8 +917,8 @@ Namespace PresentationLayer.Views.Forms
         Public Sub OnInputsTurnedOn() Handles MyBase.InputsTurnedOn
             UpdateActionButtons(True)
             'For Each control In Controls
-            '    If TypeOf control Is CtComboBox Then
-            '        Dim x As CtComboBox = control
+            '    If TypeOf control Is CComboBox Then
+            '        Dim x As CComboBox = control
             '        x.SelectionLength = 0
             '        x.SelectionStart = 0
             '    End If

@@ -66,7 +66,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtTotalDeductions = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.txtNetPay = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel11 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.lblBankTransfer = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkBankTransfer = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1035,7 +1035,7 @@ End Sub
         Friend WithEvents dtpEndDate As CCustomDateTimePicker
         Friend WithEvents txtEmployeeCode As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents txtIdNo As Libraries.CBaseControlsLibrary.CTextBox
-        Friend WithEvents cboEmployeeIdNo As Libraries.CBaseControlsLibrary.CtCombobox
+        Friend WithEvents cboEmployeeIdNo As Libraries.CBaseControlsLibrary.CComboBox
         Friend WithEvents DataGridViewEarnings As Libraries.CBaseControlsLibrary.CtDataGridView
         Friend WithEvents bsEarnings As BindingSource
         Friend WithEvents bsDeductions As BindingSource

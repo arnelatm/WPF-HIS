@@ -269,7 +269,7 @@ Namespace PresentationLayer.Views.Forms
                                      Distinct(StringComparer.OrdinalIgnoreCase))
         End Function
 
-        Private Shared Sub AddComboValueIfMissing(comboBox As CtComboBox, value As String)
+        Private Shared Sub AddComboValueIfMissing(comboBox As CComboBox, value As String)
             If value = "" OrElse comboBox.Items.Cast(Of Object)().Any(
                 Function(item) String.Equals(Convert.ToString(item), value, StringComparison.OrdinalIgnoreCase)) Then
                 Return

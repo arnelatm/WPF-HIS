@@ -58,7 +58,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblCheckNumber = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblDiscountAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboPayorType = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboPayorType = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.lblInvoiceDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -67,8 +67,8 @@ Namespace PresentationLayer.Views.Forms
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtJournalCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.dtpTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
-            Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
-            Me.cboDiscountAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
+            Me.cboDiscountAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.txtAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtVatNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -76,7 +76,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtCheckNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.floPayor = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.cboPayorIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboPayorIdNo = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.txtPayorName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.floHeader2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblApplied = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -1721,7 +1721,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblUnapplied As CLabel
         Friend WithEvents txtUnapplied As CTextBox
         Friend WithEvents lblDiscountAccountIdNo As CLabel
-        Friend WithEvents cboDiscountAccountIdNo As CtCombobox
+        Friend WithEvents cboDiscountAccountIdNo As CComboBox
         Friend WithEvents floHeader2 As CFlowLayout
         Friend WithEvents txtApplied As CTextBox
         Friend WithEvents bsCsrOiItems As Windows.Forms.BindingSource
@@ -1739,8 +1739,8 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents txtTotalCredits As CTextBox
         Friend WithEvents txtTotalDebits As CTextBox
         Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
-        Friend WithEvents cboPayorType As CtCombobox
-        Friend WithEvents cboAccountIdNo As CtCombobox
+        Friend WithEvents cboPayorType As CComboBox
+        Friend WithEvents cboAccountIdNo As CComboBox
         Friend WithEvents txtORNumber As CTextBox
         Friend WithEvents dtpTransactionDate As CCustomDateTimePicker
         Friend WithEvents txtAmount As CTextBox
@@ -1775,6 +1775,6 @@ Namespace PresentationLayer.Views.Forms
         Friend dgvBalance As CdgvMoneyColumn
         Friend WithEvents AccountIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents cboPayorIdNo As CtCombobox
+        Friend WithEvents cboPayorIdNo As CComboBox
     End Class
 End Namespace

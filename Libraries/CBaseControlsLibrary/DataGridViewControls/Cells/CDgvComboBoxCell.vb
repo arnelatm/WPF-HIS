@@ -90,6 +90,27 @@ Public Class CDgvComboBoxCell
         Return copy
     End Function
 
+    Public Overrides Function ParseFormattedValue(formattedValue As Object,
+                                                 cellStyle As DataGridViewCellStyle,
+                                                 formattedValueTypeConverter As TypeConverter,
+                                                 valueTypeConverter As TypeConverter) As Object
+        If DataGridView IsNot Nothing AndAlso DataGridView.CurrentCell Is Me Then
+            Dim editor = TryCast(DataGridView.EditingControl, CtComboBoxEditingControl)
+            If editor IsNot Nothing AndAlso String.Equals(Convert.ToString(formattedValue), editor.Text, StringComparison.CurrentCulture) Then
+                If editor.TryCommitLookupInput() Then formattedValue = editor.Text
+            End If
+            If editor IsNot Nothing AndAlso editor.SelectedIndex >= 0 AndAlso
+                String.Equals(Convert.ToString(formattedValue), editor.Text, StringComparison.CurrentCulture) AndAlso
+                String.Equals(editor.Text, editor.GetItemText(editor.SelectedItem), StringComparison.CurrentCulture) Then
+                ' The base parser searches by display text and picks the first
+                ' duplicate. The active editor already knows the selected ID.
+                If editor.DataSource Is Nothing Then Return editor.SelectedItem
+                If Not String.IsNullOrEmpty(editor.ValueMember) Then Return editor.SelectedValue
+            End If
+        End If
+        Return MyBase.ParseFormattedValue(formattedValue, cellStyle, formattedValueTypeConverter, valueTypeConverter)
+    End Function
+
     Private Shared Function IsZeroValue(value As Object) As Boolean
         If value Is Nothing OrElse value Is DBNull.Value Then Return False
 

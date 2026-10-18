@@ -326,7 +326,7 @@ Namespace PresentationLayer.Views.Forms
                 Return
             End If
 
-            'CtComboBox displays a matching suggestion list while the user types.
+            'CComboBox displays a matching suggestion list while the user types.
             'Commit an exact typed/suggested customer name so the AR journal
             'stores the matching CustomerIdNo rather than losing the selection.
             Dim matchIndex = cboCustomerIdNo.FindStringExact(cboCustomerIdNo.Text.Trim())

@@ -35,7 +35,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblReportNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtReportNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
             Me.lblReportGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboReportGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboReportGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.lblReportOrder = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtReportOrder = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblReportTitle = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -43,13 +43,13 @@ Namespace PresentationLayer.Views.Forms
             Me.lblReportTitleAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtReportTitleAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
             Me.lblDatabaseName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboDatabaseName = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboDatabaseName = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.lblReportFileName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtReportFileName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblPrintJobIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboPrintJobIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboPrintJobIdNo = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.lblQueryForm = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboQueryForm = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboQueryForm = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.lblQueryFormParameters = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtQueryFormParameters = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblQueryParameters = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -1109,9 +1109,9 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblReportNameAra As CLabel
         Friend WithEvents txtReportNameAra As CTextBoxArabic
         Friend WithEvents lblPrintJobIdNo As CLabel
-        Friend WithEvents cboPrintJobIdNo As CtComboBox
+        Friend WithEvents cboPrintJobIdNo As CComboBox
         Friend WithEvents lblQueryForm As CLabel
-        Friend WithEvents cboQueryForm As CtComboBox
+        Friend WithEvents cboQueryForm As CComboBox
         Friend WithEvents lblQueryFormParameters As CLabel
         Friend WithEvents txtQueryFormParameters As CTextBox
         Friend WithEvents lblReportTitle As CLabel
@@ -1128,12 +1128,12 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents txtDateCreated As CTextBox
         Friend WithEvents lblActive As CLabel
         Friend WithEvents chkActive As CCheckBox
-        Friend WithEvents cboReportGroupIdNo As CtComboBox
+        Friend WithEvents cboReportGroupIdNo As CComboBox
         Friend WithEvents lblReportGroupIdNo As CLabel
         Friend WithEvents lblReportOrder As CLabel
         Friend WithEvents txtReportOrder As CTextBox
         Friend WithEvents lblDatabaseName As CLabel
-        Friend WithEvents cboDatabaseName As CtComboBox
+        Friend WithEvents cboDatabaseName As CComboBox
         Friend WithEvents lblPromptParameterNames As CLabel
         Friend WithEvents txtPromptParameterNames As CTextBox
         Friend WithEvents lblRepeatPromptAfterClose As CLabel

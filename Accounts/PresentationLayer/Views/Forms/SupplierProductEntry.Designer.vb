@@ -31,9 +31,9 @@ Namespace PresentationLayer.Views.Forms
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblProductIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboProductIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboProductIdNo = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.lblSupplierIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboSupplierIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboSupplierIdNo = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.lblSupplierProductName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtSupplierProductName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblSupplierProductNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -343,13 +343,13 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblSupplierProductCode As CLabel
         Friend WithEvents txtSupplierProductCode As CTextBox
         Friend WithEvents lblSupplierIdNo As CLabel
-        Friend WithEvents cboProductIdNo As CtComboBox
+        Friend WithEvents cboProductIdNo As CComboBox
         Friend WithEvents lblSupplierProductName As CLabel
         Friend WithEvents txtSupplierProductName As CTextBox
         Friend WithEvents lblSupplierProductNameAra As CLabel
         Friend WithEvents txtSupplierProductNameAra As CTextBoxArabic
         Friend WithEvents lblProductIdNo As CLabel
-        Friend WithEvents cboSupplierIdNo As CtComboBox
+        Friend WithEvents cboSupplierIdNo As CComboBox
         Friend WithEvents dgvUnitIdNo As CDgvComboBoxColumn
         Friend WithEvents dgvUnitQty As DataGridViewTextBoxColumn
         Friend WithEvents BaseQtyDataGridViewTextBoxColumn As DataGridViewTextBoxColumn

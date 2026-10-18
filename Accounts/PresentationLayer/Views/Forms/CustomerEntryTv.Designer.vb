@@ -90,15 +90,15 @@ Namespace PresentationLayer.Views.Forms
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.txtVatNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.cacCountryCode = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
-            Me.cacBankIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
-            Me.cacRevAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
-            Me.cacArAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
-            Me.cacPaymentMethod = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cacCountryCode = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
+            Me.cacBankIdNo = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
+            Me.cacRevAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
+            Me.cacArAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
+            Me.cacPaymentMethod = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacDiscountSchemeIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cacDiscountSchemeIdNo = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.dtpDateAccountOpen = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
-            Me.cacAccountStatus = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cacAccountStatus = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.lblActive = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkActive = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -1673,13 +1673,13 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents CLabel1 As CLabel
         Friend WithEvents lblActive As CLabel
         Friend WithEvents dtpDateAccountOpen As CCustomDateTimePicker
-        Friend WithEvents cacCountryCode As CtComboBox
-        Friend WithEvents cacBankIdNo As CtComboBox
-        Friend WithEvents cacRevAccountIdNo As CtComboBox
-        Friend WithEvents cacArAccountIdNo As CtComboBox
-        Friend WithEvents cacPaymentMethod As CtComboBox
-        Friend WithEvents cacDiscountSchemeIdNo As CtComboBox
-        Friend WithEvents cacAccountStatus As CtComboBox
+        Friend WithEvents cacCountryCode As CComboBox
+        Friend WithEvents cacBankIdNo As CComboBox
+        Friend WithEvents cacRevAccountIdNo As CComboBox
+        Friend WithEvents cacArAccountIdNo As CComboBox
+        Friend WithEvents cacPaymentMethod As CComboBox
+        Friend WithEvents cacDiscountSchemeIdNo As CComboBox
+        Friend WithEvents cacAccountStatus As CComboBox
         Friend WithEvents CLabel3 As CLabel
         Friend WithEvents txtBalance As CTextBox
         Friend WithEvents chkActive As CCheckBox

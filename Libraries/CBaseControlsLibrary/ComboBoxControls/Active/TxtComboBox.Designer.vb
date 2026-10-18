@@ -25,7 +25,7 @@ Partial Class TxtComboBox
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Me.cboComboBox = New CtComboBox()
+        Me.cboComboBox = New CComboBox()
         Me.TxtTextBox = New CTextBox()
         Me.txtReadOnly = New CTextBox()
         Me.SuspendLayout
@@ -104,7 +104,7 @@ Partial Class TxtComboBox
 
     End Sub
 
-    Friend WithEvents cboComboBox As CtComboBox
+    Friend WithEvents cboComboBox As CComboBox
     Friend WithEvents TxtTextBox As CTextBox
     Friend WithEvents txtReadOnly As CTextBox
 End Class

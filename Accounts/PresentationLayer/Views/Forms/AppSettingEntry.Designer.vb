@@ -25,12 +25,12 @@
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
             Me.btnLockGroup = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.lblAppSettingGroupSelector = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboAppSettingGroupSelector = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboAppSettingGroupSelector = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboSelector2IdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboSelector2IdNo = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.lblSelector2IdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboSelector1IdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboSelector1IdNo = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.lblSelector1IdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtAppSettingGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -384,11 +384,11 @@
         Friend WithEvents TxtIdNo As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblIdNo As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblSelector1IdNo As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboSelector2IdNo As Libraries.CBaseControlsLibrary.CtComboBox
+        Friend WithEvents cboSelector2IdNo As Libraries.CBaseControlsLibrary.CComboBox
         Friend WithEvents lblSelector2IdNo As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboSelector1IdNo As Libraries.CBaseControlsLibrary.CtComboBox
+        Friend WithEvents cboSelector1IdNo As Libraries.CBaseControlsLibrary.CComboBox
         Friend WithEvents lblAppSettingGroupSelector As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboAppSettingGroupSelector As Libraries.CBaseControlsLibrary.CtComboBox
+        Friend WithEvents cboAppSettingGroupSelector As Libraries.CBaseControlsLibrary.CComboBox
         Friend WithEvents btnLockGroup As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents txtAppSettingGroupIdNo As Libraries.CBaseControlsLibrary.CTextBox
     End Class

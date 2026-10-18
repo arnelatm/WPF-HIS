@@ -23,7 +23,7 @@ Partial Class CCalendar
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CCalendar))
-        Me.cboMonths = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+        Me.cboMonths = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
         Me.YearsEdit = New System.Windows.Forms.NumericUpDown()
         Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.btnPrevMonth = New System.Windows.Forms.Button()
@@ -44,7 +44,7 @@ Partial Class CCalendar
         Me.LineShape3 = New Microsoft.VisualBasic.PowerPacks.LineShape()
         Me.LineShape2 = New Microsoft.VisualBasic.PowerPacks.LineShape()
         Me.LineShape1 = New Microsoft.VisualBasic.PowerPacks.LineShape()
-        Me.cboCalendars = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+        Me.cboCalendars = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
         CType(Me.YearsEdit,System.ComponentModel.ISupportInitialize).BeginInit
         Me.CFlowLayout1.SuspendLayout
         Me.SuspendLayout
@@ -251,7 +251,7 @@ Partial Class CCalendar
 
     End Sub
 
-    Friend WithEvents cboMonths As CtComboBox
+    Friend WithEvents cboMonths As CComboBox
     Private WithEvents YearsEdit As Windows.Forms.NumericUpDown
     Friend WithEvents CFlowLayout1 As CFlowLayout
     Private WithEvents btnPrevMonth As Windows.Forms.Button
@@ -267,7 +267,7 @@ Partial Class CCalendar
     Private WithEvents lblSaturday As Windows.Forms.Label
     Private WithEvents lblSunday As Windows.Forms.Label
     Private WithEvents lblToday As Windows.Forms.Label
-    Friend WithEvents cboCalendars As CtComboBox
+    Friend WithEvents cboCalendars As CComboBox
     Private WithEvents ShapeContainer1 As PowerPacks.ShapeContainer
     Private WithEvents LineShape4 As PowerPacks.LineShape
     Private WithEvents LineShape3 As PowerPacks.LineShape

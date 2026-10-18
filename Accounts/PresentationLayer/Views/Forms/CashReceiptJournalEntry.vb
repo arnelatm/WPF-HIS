@@ -771,7 +771,7 @@ Namespace PresentationLayer.Views.Forms
             ResumeLayout()
         End Sub
 
-        Private Function CreateLookupDisplayTextBox(combo As CtComboBox) As TextBox
+        Private Function CreateLookupDisplayTextBox(combo As CComboBox) As TextBox
             Dim displayTextBox = New TextBox With {
                 .Anchor = combo.Anchor,
                 .BackColor = combo.BackColor,
@@ -800,7 +800,7 @@ Namespace PresentationLayer.Views.Forms
             UpdateLookupDisplay(cboDiscountAccountIdNo, _txtDiscountAccountIdNoDisplay, _currentDiscountAccountIdNo, showLookup)
         End Sub
 
-        Private Sub UpdateLookupDisplay(combo As CtComboBox, displayTextBox As TextBox, value As Int16?, showLookup As Boolean)
+        Private Sub UpdateLookupDisplay(combo As CComboBox, displayTextBox As TextBox, value As Int16?, showLookup As Boolean)
             combo.Visible = showLookup
             displayTextBox.Visible = Not showLookup
             If Not showLookup Then
@@ -908,7 +908,7 @@ Namespace PresentationLayer.Views.Forms
             Return _currentAccountIdNo
         End Function
 
-        Private Sub SetLookupDisplayText(displayTextBox As TextBox, combo As CtComboBox, value As Int16?)
+        Private Sub SetLookupDisplayText(displayTextBox As TextBox, combo As CComboBox, value As Int16?)
             If displayTextBox Is Nothing Then
                 Return
             End If
@@ -916,7 +916,7 @@ Namespace PresentationLayer.Views.Forms
             displayTextBox.Text = GetLookupDisplayText(combo, value)
         End Sub
 
-        Private Function GetLookupDisplayText(combo As CtComboBox, value As Int16?) As String
+        Private Function GetLookupDisplayText(combo As CComboBox, value As Int16?) As String
             If Not value.HasValue Then
                 Return ""
             End If

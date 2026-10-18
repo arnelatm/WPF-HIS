@@ -50,7 +50,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtFileNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
             Me.btnScanQrCode = New AATM.Libraries.CBaseControlsLibrary.CButton()
-            Me.cboItemIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboItemIdNo = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.txtItemName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtGTin = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -58,16 +58,16 @@ Namespace PresentationLayer.Views.Forms
             Me.lblBarCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblGtin = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtGenericName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.cboPatientType = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
-            Me.cboDurationUnit = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
-            Me.cboDoseUnit = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboPatientType = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
+            Me.cboDurationUnit = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
+            Me.cboDoseUnit = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.txtDosageNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.btnFindPatient = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.lblItemName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtItemCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboGender = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
-            Me.cboAgeYmd = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.cboGender = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
+            Me.cboAgeYmd = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.btnClear = New AATM.Libraries.CBaseControlsLibrary.CButton()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
@@ -1341,12 +1341,12 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblDoseUnit As CLabel
         Friend WithEvents lblGender As CLabel
         Friend WithEvents txtDosageNameAra As CTextBox
-        Friend WithEvents cboDoseUnit As CtComboBox
-        Friend WithEvents cboDurationUnit As CtComboBox
-        Friend WithEvents cboGender As CtCombobox
-        Friend WithEvents cboAgeYmd As CtCombobox
+        Friend WithEvents cboDoseUnit As CComboBox
+        Friend WithEvents cboDurationUnit As CComboBox
+        Friend WithEvents cboGender As CComboBox
+        Friend WithEvents cboAgeYmd As CComboBox
         Friend WithEvents btnFindPatient As CButton
-        Friend WithEvents cboPatientType As CtComboBox
+        Friend WithEvents cboPatientType As CComboBox
         Friend WithEvents lblItemName As CLabel
         Friend WithEvents CLabel2 As CLabel
         Friend WithEvents txtItemCode As CTextBox
@@ -1357,7 +1357,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents txtGTin As CTextBox
         Friend WithEvents CLabel3 As CLabel
         Friend WithEvents txtItemName As CTextBox
-        Friend WithEvents cboItemIdNo As CtComboBox
+        Friend WithEvents cboItemIdNo As CComboBox
         Friend WithEvents btnScanQrCode As CButton
         Friend WithEvents btnClear As CButton
     End Class

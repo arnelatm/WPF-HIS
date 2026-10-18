@@ -45,8 +45,8 @@
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
-            Me.cboDoctorName = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
-            Me.cboServiceRequestForm = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboDoctorName = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
+            Me.cboServiceRequestForm = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.txtDoctorCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.TokenDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.StatusDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
@@ -597,11 +597,11 @@
         Friend WithEvents InvTypeDataGridViewTextBoxColumn As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents dgvTime As DataGridViewTextBoxColumn
         Friend WithEvents dgvTransKey As DataGridViewTextBoxColumn
-        Friend WithEvents cboDoctorName As Libraries.CBaseControlsLibrary.CtComboBox
+        Friend WithEvents cboDoctorName As Libraries.CBaseControlsLibrary.CComboBox
         Friend WithEvents txtDoctorCode As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents btnBlankOrPrePrintedForm As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents lblBlankOrPrePrintedForm As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboServiceRequestForm As Libraries.CBaseControlsLibrary.CtComboBox
+        Friend WithEvents cboServiceRequestForm As Libraries.CBaseControlsLibrary.CComboBox
         Friend WithEvents btnSetAsDefault As Libraries.CBaseControlsLibrary.CButton
     End Class
 End Namespace

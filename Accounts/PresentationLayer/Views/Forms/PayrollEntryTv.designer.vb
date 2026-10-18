@@ -57,7 +57,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblEndDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtPayrollCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblPayrollCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboPayCycleIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboPayCycleIdNo = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.lblPayCycleIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.tbcPayroll = New AATM.Libraries.CBaseControlsLibrary.CTabControl()
@@ -1178,7 +1178,7 @@ End Sub
         Friend WithEvents _MBParentWithChildrenChangedDisallowed As LocalizableMessageBox
         Friend WithEvents _MSGMandatoryFields As LocalizableMessage
         Friend WithEvents lblPayrollName As CLabel
-        Friend WithEvents cboPayCycleIdNo As CtCombobox
+        Friend WithEvents cboPayCycleIdNo As CComboBox
         Friend WithEvents dtpStartDate As CCustomDateTimePicker
         Friend WithEvents dtpEndDate As CCustomDateTimePicker
         Friend WithEvents lblPayrollNameAra As CLabel

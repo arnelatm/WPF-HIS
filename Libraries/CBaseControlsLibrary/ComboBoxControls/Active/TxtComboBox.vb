@@ -192,7 +192,7 @@ Public Class TxtComboBox
         End Set
     End Property
 
-    Public Property TcbComboBox As CtComboBox
+    Public Property TcbComboBox As CComboBox
         Get
             Return cboComboBox
         End Get

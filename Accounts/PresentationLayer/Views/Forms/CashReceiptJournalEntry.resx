@@ -484,7 +484,7 @@
     <value>cboPayorType</value>
   </data>
   <data name="&gt;&gt;cboPayorType.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboPayorType.Parent" xml:space="preserve">
     <value>TableLayoutPanel1</value>
@@ -790,7 +790,7 @@
     <value>cboAccountIdNo</value>
   </data>
   <data name="&gt;&gt;cboAccountIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboAccountIdNo.Parent" xml:space="preserve">
     <value>TableLayoutPanel1</value>
@@ -823,7 +823,7 @@
     <value>cboDiscountAccountIdNo</value>
   </data>
   <data name="&gt;&gt;cboDiscountAccountIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboDiscountAccountIdNo.Parent" xml:space="preserve">
     <value>TableLayoutPanel1</value>
@@ -1063,7 +1063,7 @@
     <value>cboPayorIdNo</value>
   </data>
   <data name="&gt;&gt;cboPayorIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboPayorIdNo.Parent" xml:space="preserve">
     <value>floPayor</value>

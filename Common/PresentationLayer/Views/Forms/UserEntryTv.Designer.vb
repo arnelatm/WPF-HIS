@@ -33,13 +33,13 @@ Namespace PresentationLayer.Views.Forms
             Me.lblUserName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.TxtUserName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cacEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacSecurityLevel = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cacSecurityLevel = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.lblPassword = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.TxtPassword = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblSecurityGroupID = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacSecurityGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cacSecurityGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.lblActive = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkActive = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -502,11 +502,11 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblPassword As CLabel
         Friend WithEvents TxtPassword As CTextBox
         Friend WithEvents lblSecurityGroupID As CLabel
-        Friend WithEvents cacSecurityGroupIdNo As CtComboBox
+        Friend WithEvents cacSecurityGroupIdNo As CComboBox
         Friend WithEvents CLabel1 As CLabel
-        Friend WithEvents cacSecurityLevel As CtComboBox
+        Friend WithEvents cacSecurityLevel As CComboBox
         Friend WithEvents lblEmployeeIdNo As CLabel
-        Friend WithEvents cacEmployeeIdNo As CtComboBox
+        Friend WithEvents cacEmployeeIdNo As CComboBox
         Friend WithEvents lblActive As CLabel
         Friend WithEvents chkActive As CCheckBox
     End Class

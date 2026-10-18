@@ -35,9 +35,9 @@ Namespace PresentationLayer.Views.Forms
             Me.lblDepartmentNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtDepartmentNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
             Me.lblParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cacParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.lblRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cacRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -410,7 +410,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents txtNotes As CTextBox
         Friend WithEvents lblRevCostCenterIdNo As CLabel
         Friend WithEvents lblParentIdNo As CLabel
-        Friend WithEvents cacParentIdNo As CtComboBox
-        Friend WithEvents cacRevCostCenterIdNo As CtComboBox
+        Friend WithEvents cacParentIdNo As CComboBox
+        Friend WithEvents cacRevCostCenterIdNo As CComboBox
     End Class
 End Namespace

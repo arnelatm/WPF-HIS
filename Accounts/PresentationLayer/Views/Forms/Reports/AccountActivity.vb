@@ -111,7 +111,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             cboEndAccountCode.EditingMode = True
         End Sub
 
-        Private Function GetSelectedAccountCode(accountControl As Libraries.CBaseControlsLibrary.CtCombobox) As String
+        Private Function GetSelectedAccountCode(accountControl As Libraries.CBaseControlsLibrary.CComboBox) As String
             If accountControl.SelectedValue Is Nothing OrElse IsDBNull(accountControl.SelectedValue) Then
                 Return Nothing
             End If
@@ -121,8 +121,8 @@ Namespace PresentationLayer.Views.Forms.Reports
 
         Friend WithEvents CLabel2 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents CLabel3 As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboStartAccountCode As Libraries.CBaseControlsLibrary.CtCombobox
-        Friend WithEvents cboEndAccountCode As Libraries.CBaseControlsLibrary.CtCombobox
+        Friend WithEvents cboStartAccountCode As Libraries.CBaseControlsLibrary.CComboBox
+        Friend WithEvents cboEndAccountCode As Libraries.CBaseControlsLibrary.CComboBox
     End Class
 
 End Namespace

@@ -1,319 +1,222 @@
 ﻿Imports System.ComponentModel
 Imports System.Drawing
+Imports System.Linq.Expressions
 Imports System.Windows.Forms
+Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.BaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 
-Public Class CComboBox
+Partial Public Class CComboBox
     Inherits BCombobox
-    Implements IEntryControl, ILinkedLabel
+    Implements IEntryControl, ILinkedLabel, IFindableControl
 
-    Private _defaultValue As Object
-    Private _isNumeric As Boolean
-    Private _isMandatory As Boolean
-    Private _displayOnly As Boolean
+#Region "Custom Properties"
+
     Private _translatable As Boolean = False
+    Private _editingMode As Boolean = False
+    Private _filterRule As Expression(Of Func(Of String, String, Boolean))
+    Private _filterRuleCompiled As Func(Of String, String, Boolean)
+    Private _propertySelector As Expression(Of Func(Of ObjectCollection, IEnumerable(Of String)))
+    Private _suggestListOrderRule As Expression(Of Func(Of String, String))
+    Private _suggestListOrderRuleCompiled As Func(Of String, String)
+    Private ReadOnly _defaultDropDownHeight As Int16
+    Private _defaultDropdownStyle As ComboBoxStyle = ComboBoxStyle.DropDown
+    Private ReadOnly _defaultMaxDropDownItems As Int16
+    Private ReadOnly _suggestBindingList As New BindingList(Of LookupSuggestion)()
+    Private WithEvents _contextMenuStrip1 As New ContextMenuStrip
+    Protected PropertySelectorCompiled As Func(Of ObjectCollection, IEnumerable(Of String))
+    Public DataSourceProgrammaticChange As Boolean = False
 
-    'Private MyErrorProvider As New ErrorProviderExtended
-    Private ReadOnly _textToSearch As String
+    Private Property _editMode As Boolean
+    Public Property ChangingSearchValueOnly As Boolean = False
 
-    Private _searchPlace As Char
-    Private _isNullable As Boolean
-    Private _oldValue As Integer
-    Private WithEvents ContextMenuStrip1 As New ContextMenuStrip
-    Private _originalDropDownStyle As Integer
-    Private _hideWhenNotEditingOrAdding As Boolean = False
-    Private _editingMode As Boolean = True
-    Private _bypassTextChange As Boolean = False
-    Public DatasourceProgrammaticChange As Boolean = False
-    Private _currentSearchTerm As String = ""
-    Private _changingSearchValueOnly As Boolean = False
+    Public Shared Property Copy As String = "Copy Selected Text"
 
-    Public Sub New()
-        MyBase.New()
-        Dim myFont As New Font("Arial", 10.0!, FontStyle.Regular)
-        ContextMenuStrip = ContextMenuStrip1
-        OriginalDropDownStyle = DropDownStyle
-        Margin = New Padding(1)
-        FlatStyle -= Border3DStyle.RaisedOuter
-        Font = myFont
+    Public Property CurrentSearchTerm As String = ""
 
-        DropDownStyle = ComboBoxStyle.DropDown
-        AutoCompleteMode = AutoCompleteMode.Suggest
+    Public Shared Property Cut As String = "Cut Selected Text"
 
-    End Sub
+    Public Property DefaultValue As Object
+
+    Public Shared Property Delete As String = "Delete Selected Text"
+    Public ComboBoxValueChanged As Boolean = False
 
     <Category("Custom Properties")>
     <DefaultValue(False)>
     <Description("Set to True to specify that this control is always editable.")>
-    Public Property AlwaysEditable As Boolean = False
-
-    <Bindable(True)>
-    <Category("Properties")>
-    <DefaultValue(GetType(Boolean))>
-    <Description("Set to True to specify that this control will only accept numeric values.")>
-    <Browsable(True)>
-    Public Property ValueIsNumeric As Boolean
+    Public Property AlwaysEditable As Boolean
         Get
-            Return _isNumeric
-        End Get
-        Set
-            _isNumeric = Value
-        End Set
-    End Property
-
-    <Bindable(True)>
-    <Category("Properties")>
-    <DefaultValue(GetType(Boolean))>
-    <Description("Set to True to specify that this control is mandatory.")>
-    <Browsable(True)>
-    Public Property DisplayOnly As Boolean
-        Get
-            Return _displayOnly
+            Return _alwaysEditable
         End Get
         Set(value As Boolean)
-            _displayOnly = value
-            EditingMode = value
+            _alwaysEditable = value
+            EditingMode = _editingMode
+        End Set
+    End Property
+    Private _alwaysEditable As Boolean
+    Private _lastValue As Object = Nothing
+    Private _normalizingClear As Boolean
+    Private _synchronizingSelectionText As Boolean
+
+    <Bindable(True)>
+    <Category("Custom Properties")>
+    <DefaultValue(False)>
+    <Description("Set to True to specify that this control is for DisplayOnly.")>
+    <Browsable(True)>
+    Public Property DisplayOnly As Boolean
+
+
+    <Category("Custom Properties")>
+    <DefaultValue(False)>
+    <Description("Set to True to specify that this control can be edited.")>
+    Public Property Editable As Boolean = True
+
+
+    <Category("Custom Properties")>
+    <DefaultValue(False)>
+    <Description("Set to True to specify that this control value is hidden (used for secured controls)")>
+    Public Property Hidden As Boolean = False
+
+    ' Keep the configured input style when temporarily displaying a read-only value.
+    <DefaultValue(GetType(ComboBoxStyle), "DropDown")>
+    Public Shadows Property DropDownStyle As ComboBoxStyle
+        Get
+            If DesignMode Then Return _defaultDropdownStyle
+            Return MyBase.DropDownStyle
+        End Get
+        Set(value As ComboBoxStyle)
+            ' Existing designers serialize Simple for view mode; it is not the input style.
+            If value <> ComboBoxStyle.Simple Then
+                _defaultDropdownStyle = value
+            End If
+            MyBase.DropDownStyle = value
+        End Set
+    End Property
+
+    Public Property EditingMode As Boolean Implements IEntryControl.EditingMode
+        Get
+            Return _editingMode
+        End Get
+        Set(value As Boolean)
+            If DisplayOnly Then
+                _editingMode = False
+            Else
+                _editingMode = value OrElse AlwaysEditable
+            End If
+            UpdateDisplayOnlyControl()
+        End Set
+    End Property
+
+
+    Public Sub UpdateDisplayOnlyControl()
+        If Not CanEditLookup Then HideSuggestionBox()
+        If _editingMode AndAlso Editable AndAlso Not DisplayOnly Then
+            DropDownHeight = _defaultDropDownHeight
+            MyBase.DropDownStyle = _defaultDropdownStyle
+            MaxDropDownItems = _defaultMaxDropDownItems
+            If Hidden Then
+                ForeColor = Color.Black
+                BackColor = Color.Black
+            Else
+                ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+            End If
+        Else
+            MyBase.DropDownStyle = ComboBoxStyle.Simple
+            DropDownHeight = Height
+            MaxDropDownItems = 1
+            IntegralHeight = True
+            ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+            BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            'Else
+            '    DropDownStyle = ComboBoxStyle.Simple
+            '    DropDownHeight = Height
+            '    MaxDropDownItems = 1
+            '    IntegralHeight = True
+            '    ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+            '    BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+        End If
+
+    End Sub
+
+    Public Property FilterRule As Expression(Of Func(Of String, String, Boolean))
+        Get
+            Return _filterRule
+        End Get
+        Set(ByVal value As Expression(Of Func(Of String, String, Boolean)))
+            Dim compiled = If(value Is Nothing, Nothing, value.Compile())
+            _filterRule = value
+            _filterRuleCompiled = compiled
+            RefreshLookupCache()
         End Set
     End Property
 
     <Bindable(True)>
-    <Category("Properties")>
-    <DefaultValue(GetType(Boolean))>
-    <Description("Set to True to specify that this control is mandatory.")>
-    <Browsable(True)>
-    Public Property ValueIsMandatory As Boolean
-        Get
-            Return _isMandatory
-        End Get
-        Set
-            _isMandatory = Value
-        End Set
-    End Property
-
-    '<Bindable(True)>
-    '<Category("Properties")>
-    '<DefaultValue(GetType(Boolean))>
-    '<Description("Set to True to specify that this control has a fixed Datasource value.")>
-    '<Browsable(True)>
-    'Public Property FixedDataSource As Boolean = True
-
     <Category("Custom Properties")>
     <DefaultValue(False)>
-    <Description("Set to the lowest allowed value for this control")>
+    <Description("Set to True to specify that this will only suggestappend when more than this specified number of characters is typed in.")>
     <Browsable(True)>
-    Public Property MinimumValue As Decimal? = Nothing
-
-    <Category("Custom Properties")>
-    <DefaultValue(False)>
-    <Description("Set to the highest allowed value for this control")>
-    <Browsable(True)>
-    Public Property MaximumValue As Decimal? = Nothing
+    Public Property SuggestCharCount As Integer
 
     <Bindable(True)>
     <Category("Properties")>
     <DefaultValue(GetType(Boolean))>
     <Description("Set to True to make this control visible only when in editing or adding mode")>
     <Browsable(True)>
-    Public Property HideWhenNotEditingOrAdding As Boolean
+    Public Property HideWhenNotEditingOrAdding As Boolean = False
+
+    Public Property OldValue As Integer
+
+    Public Property OriginalDataSource As Object
+
+    Public Property OriginalList As Object() = Nothing
+
+    <Bindable(True)>
+    <Category("Properties")>
+    <DefaultValue(GetType(Boolean))>
+    <Description("Override DropDownList style with custom built feature.")>
+    <Browsable(True)>
+    Public Property OverrideDropDownStyleList As Boolean
+
+    'Public Property BorderColor As Color
+    Public Property PreviousSearchTerm As String
+
+    ' A custom selector must preserve source order and return one string per item.
+    Public Property PropertySelector As Expression(Of Func(Of ObjectCollection, IEnumerable(Of String)))
         Get
-            Return _hideWhenNotEditingOrAdding
+            Return _propertySelector
         End Get
-        Set
-            _hideWhenNotEditingOrAdding = Value
+        Set(ByVal value As Expression(Of Func(Of ObjectCollection, IEnumerable(Of String))))
+            _propertySelector = value
+            ConfigureLookupProjection()
+            RefreshLookupCache()
         End Set
     End Property
 
-    Public Property ValueIsNullable As Boolean
+    Public Property SuggestBoxHeight As Integer
         Get
-            Return _isNullable
-        End Get
-        Set
-            _isNullable = Value
-        End Set
-    End Property
-
-    Public Property DefaultValue As Object
-        Get
-            Return _defaultValue
-        End Get
-        Set
-            _defaultValue = Value
-        End Set
-    End Property
-
-    Public Property OldValue() As Integer
-        Get
-            Return _oldValue
+            Return _suggestBoxHeight
         End Get
         Set(ByVal value As Integer)
-            _oldValue = value
+            If value <= 0 Then Return
+            _suggestBoxHeight = value
+            RepositionSuggestionPopup()
         End Set
     End Property
 
-    Public Property OriginalDropDownStyle As Integer
+    Public Property SuggestListOrderRule As Expression(Of Func(Of String, String))
         Get
-            Return _originalDropDownStyle
+            Return _suggestListOrderRule
         End Get
-        Set
-            _originalDropDownStyle = Value
+        Set(ByVal value As Expression(Of Func(Of String, String)))
+            Dim compiled = If(value Is Nothing, Function(s As String) s, value.Compile())
+            _suggestListOrderRule = value
+            _suggestListOrderRuleCompiled = compiled
+            RefreshLookupCache()
         End Set
     End Property
 
-    Public Sub OnKeyDownPressed(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            e.Handled = True
-            SendKeys.SendWait("{TAB}")
-        End If
-    End Sub
-
-    <Category("Custom Properties")>
-    <Description("Select the label to which this control is linked.")>
-    <Browsable(True)>
-    Public Property LinkedLabel As CLabel Implements ILinkedLabel.LinkedLabel
-
-    Public Sub EnterHandler(sender As Object, e As EventArgs) Handles MyBase.Enter
-        If Not AlwaysEditable Then
-            If EditingMode Then
-                ForeColor = GlobalVariables.DefaultFormControlEditingForegroundColor
-                BackColor = GlobalVariables.DefaultFormControlEditingBackgroundColor
-            Else
-                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-            End If
-        End If
-    End Sub
-
-    Public Sub LeaveHandler(sender As Object, e As EventArgs) Handles MyBase.Leave
-        If Not AlwaysEditable Then
-            If EditingMode Then
-                ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-            Else
-                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-            End If
-        End If
-    End Sub
-
-    'Public Sub CComboBox_Validating(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles Me.Validating
-    '    Dim ErrorMsg As String
-    '    'If Me.ValueIsNumeric Then
-    '    '    If Not IsNumeric(Me.Text) Then
-    '    '        If Me.ValueIsNullable And Me.Text.Trim() = "" Then
-    '    '            Me.Text = ""
-    '    '            '' nothing to do
-    '    '            ' blank values allowed for nullable fields
-    '    '        Else
-    '    '            e.Cancel = True
-    '    '            ErrorMsg = "Sorry, only numeric values allowed for this field! The value <" + Me.Text + "> is Not allowed. Reverting to previous value."
-    '    '            MessageBox.Show(ErrorMsg)
-    '    '            'Me.Undo()
-    '    '            'MyErrorProvider.ShowErrorMessage(ErrorMsg)
-    '    '        End If
-    '    '    End If
-    '    'End If
-    'End Sub
-
-#Region "Constant Declarations#"
-
-    ' Text Menu Captions
-    Const TextFind = "Find on this field"
-
-    Const TextUndo = "Undo Last Cut/Paste/Delete"
-    Const TextCut = "Cut Selected Text"
-    Const TextCopy = "Copy Selected Text"
-    Const TextDelete = "Delete Selected Text"
-    Const TextSelectAll = "Select All Text"
-
-#End Region
-
-    Private Sub TextBox1_MouseUp(sender As Object, e As MouseEventArgs) Handles Me.MouseUp
-        HandleMouseUp(sender, e)
-    End Sub
-
-    Private Sub HandleMouseUp(control As Object, e As MouseEventArgs)
-
-        ' Checking the Mouse right Button
-        If e.Button = MouseButtons.Right Then
-            control.ContextMenuStrip.Show(control, New Point(e.X, e.Y))
-        End If
-    End Sub
-
-    Private Sub HandlePopup(sender As Object, e As EventArgs) Handles ContextMenuStrip1.Opening
-        ContextHandler(sender, e)
-    End Sub
-
-    Protected Sub ContextHandler(sender As Object, e As EventArgs)
-
-        Const separator = "-"
-
-        ContextMenuStrip1.Items.Clear()
-
-        Dim menuItemFind As New ToolStripMenuItem With {
-                .Text = TextFind
-                }
-        ContextMenuStrip1.Items.Add(menuItemFind)
-        menuItemFind.ShortcutKeys = Keys.Control Or Keys.F
-        menuItemFind.ShortcutKeyDisplayString = "Ctrl-F"
-        AddHandler menuItemFind.Click, AddressOf MenuItemFind_Click
-
-        ContextMenuStrip1.Items.Add(separator)
-
-        Dim menuItemSelectAll As New ToolStripMenuItem With {
-                .Text = TextSelectAll
-                }
-        ContextMenuStrip1.Items.Add(menuItemSelectAll)
-        menuItemSelectAll.ShortcutKeys = Keys.Control Or Keys.A
-        menuItemSelectAll.ShortcutKeyDisplayString = "Ctrl-A"
-        'menuItemSelectAll.Enabled = (IIf(SampleTextBox.SelectionLength = SampleTextBox.Text.Length Or SampleTextBox.SelectionLength = SampleTextBox.Text.Trim.Length, False, True))
-        AddHandler menuItemSelectAll.Click, AddressOf MenuItemSelectAll_Click
-
-        ContextMenuStrip1.Items.Add(separator)
-    End Sub
-
-    Private Sub MenuItemFind_Click()
-        'Dim MyForm = Me.FindForm()
-        'Dim SearchForm = New CFindForm(1, Me)
-        ''SearchForm.Show()
-        'SearchForm.ShowDialog()
-        '_textToSearch = SearchForm.TextToSearch
-        '_searchPlace = SearchForm.GetSearchPlace
-        'SearchForm.Dispose()
-        'If _textToSearch <> "" Then
-
-        '    CallByName(MyForm, "FindField", CallType.Method, Me)
-
-        'End If
-    End Sub
-
-    Public Function GetTextToSearch() As String
-        Return _textToSearch
-    End Function
-
-    Public Function GetSearchAnywhere() As Char
-        Return _searchPlace
-    End Function
-
-    Private Sub MenuItemSelectAll_Click()
-        SelectAll()
-    End Sub
-
-    Private Const WmPaint As Integer = &HF
-    Private _readOnlyCombo As Boolean
-
-    Public Property ReadOnlyCombo As Boolean
-        Get
-            Return _readOnlyCombo
-        End Get
-        Set
-            If Not AlwaysEditable Then
-                ' If the value isn't changing, then do nothing
-                If Value = _readOnlyCombo Then Exit Property
-                _readOnlyCombo = Value
-            End If
-        End Set
-    End Property
+    Public Property TextToSearch As String
 
     Public Property Translatable As Boolean Implements IEntryControl.Translatable
         Get
@@ -324,175 +227,687 @@ Public Class CComboBox
         End Set
     End Property
 
-    'Public Sub MakeEditable(editableControl As Boolean) Implements IEntryControl.MakeEditable
-    '    DisplayOnly = Not editableControl
-    'End Sub
+    <Bindable(True)>
+    <Category("Properties")>
+    <DefaultValue(GetType(Boolean))>
+    <Description("Set to True to specify that this control is mandatory.")>
+    <Browsable(True)>
+    Public Property ValueIsMandatory As Boolean
 
-    'Public Sub MakeVisible(visibleControl As Boolean) Implements IEntryControl.MakeVisible
-    '    Visible = visibleControl
-    'End Sub
+    Public Property ValueIsNullable As Boolean
 
-    Public Property EditingMode As Boolean Implements IEntryControl.EditingMode
-        Get
-            Return _editingMode
-        End Get
-        Set(value As Boolean)
-            If Not AlwaysEditable Then
-                _editingMode = value
-                UpdateDisplayOnlyControl()
-            End If
-        End Set
-    End Property
+    <Bindable(True)>
+    <Category("Properties")>
+    <DefaultValue(GetType(Boolean))>
+    <Description("Set to True to specify that this control will only accept numeric values.")>
+    <Browsable(True)>
+    Public Property ValueIsNumeric As Boolean
 
-    Public Sub UpdateDisplayOnlyControl()
-        If _editingMode And Not DisplayOnly Then
-            ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-            BackColor = GlobalVariables.DefaultFormControlForegroundColor
-        Else
-            ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-            BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-        End If
-    End Sub
+    Public Shared Property WmPaint1 As Integer = &HF
 
-    Private _previousSearchterm As String
-    Private _originalList As Object() = Nothing
-    Private _originalDataSource As Object
+    <Bindable(True)>
+    <Category("Properties")>
+    <DefaultValue(GetType(Boolean))>
+    <Description("Set to True to specify that this control will only accept values on list.")>
+    <Browsable(True)>
+    Public Property LimitToList As Boolean = False
 
-    Public Property OriginalList As Object()
-        Get
-            Return _originalList
-        End Get
-        Set(value As Object())
-            _originalList = value
-        End Set
-    End Property
-
-    Public Property OriginalDataSource As Object
-        Get
-            Return _originalDataSource
-        End Get
-        Set(value As Object)
-            _originalDataSource = value
-        End Set
-    End Property
-
-    Private Overloads Sub OnTextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles Me.TextChanged
-        If Not DatasourceProgrammaticChange Then
-            If Not String.IsNullOrEmpty(Text) OrElse Not Visible OrElse Not Enabled Then
-                Return
-            End If
-            If Not sender.Items.Count() = 0 Then
-                ResetCompletionList()
-            End If
-        End If
-    End Sub
-
-    Private _sel As Object
-
-    Private Overloads Sub OnSelectionChangeCommitted(ByVal sender As Object, ByVal e As EventArgs) Handles Me.SelectionChangeCommitted
-        If SelectedItem Is Nothing Then
-            Return
-        End If
-        _sel = SelectedItem
-        ResetCompletionList()
-        SelectedItem = _sel
-    End Sub
-
-    Private Overloads Sub OnKeyPress(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles Me.KeyPress
-        If e.KeyChar = vbCr OrElse e.KeyChar = vbLf Then
+    Public Sub OnKeyDownPressed(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
+        If DisplayOnly Or Not EditingMode Then
+            e.SuppressKeyPress = True
+        ElseIf HandleLookupKey(e.KeyData) Then
             e.Handled = True
-
-            If SelectedIndex = -1 AndAlso Items.Count > 0 AndAlso Items(0).ToString().ToLowerInvariant().StartsWith(Text.ToLowerInvariant()) Then
-                Text = Items(0).ToString()
-            End If
-
-            DroppedDown = False
-            Return
+            e.SuppressKeyPress = True
         End If
-
-        BeginInvoke(New Action(AddressOf ReevaluateCompletionList))
     End Sub
 
-    Private Sub ResetCompletionList()
-        _previousSearchterm = Nothing
-        Try
-            'SuspendLayout()
-            'If _originalList Is Nothing OrElse _originalList.Count = 0 Then
-            '    '_originalDataSource = DataSource
-            '    _originalList = Items.Cast(Of Object)().ToArray()
-            'End If
+#End Region
 
-            'If Items.Count = _originalList.Length Then
-            '    Return
-            'End If
-            DatasourceProgrammaticChange = True
-            If OriginalDataSource Is Nothing Then
-                OriginalDataSource = DataSource
+#Region "Declarations#"
+
+    ' Text Menu Captions
+    Private Shared ReadOnly _textFind = MessagingLibrary.Messaging.TranslateCaption("Find on this field")
+
+    Private Shared ReadOnly _textCut = MessagingLibrary.Messaging.TranslateCaption("Cut Selected Text")
+    Private Shared ReadOnly _textCopy = MessagingLibrary.Messaging.TranslateCaption("Copy Selected Text")
+    Private Shared ReadOnly _textPaste = MessagingLibrary.Messaging.TranslateCaption("Paste Text")
+    Private Shared ReadOnly _textUndo = MessagingLibrary.Messaging.TranslateCaption("Undo Last Action")
+    Private Shared ReadOnly _textDelete = MessagingLibrary.Messaging.TranslateCaption("Delete Selected Text")
+    Private Shared ReadOnly _textSelectAll = MessagingLibrary.Messaging.TranslateCaption("Select All Text")
+
+#End Region
+
+#Region "Event Handlers"
+
+    Private _previousIndex As Integer
+
+    Public Sub EnterHandler(sender As Object, e As EventArgs) Handles MyBase.Enter
+        BeginLookupEdit()
+        If Hidden Then
+            ForeColor = Color.Black
+            BackColor = Color.Black
+        Else
+            If DisplayOnly Then
+                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            ElseIf EditingMode AndAlso Editable Then
+                ForeColor = GlobalVariables.DefaultFormControlEditingForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlEditingBackgroundColor
             Else
-                DataSource = OriginalDataSource
+                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             End If
-            DatasourceProgrammaticChange = False
+        End If
+    End Sub
+
+    Public Sub LeaveHandler(sender As Object, e As EventArgs) Handles MyBase.Leave
+        If Hidden Then
+            ForeColor = Color.Black
+            BackColor = Color.Black
+        Else
+            If DisplayOnly Or (Not Editable) Or (Not EditingMode) Then
+                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            ElseIf EditingMode Then
+                ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+            Else
+                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            End If
+        End If
+        If Not SuggestionHasFocus Then HideSuggestionBox()
+    End Sub
+
+    Protected Overrides Sub OnDropDown(e As EventArgs)
+        HideSuggestionBox()
+        'SetVisibleCore(True)
+        If DisplayOnly Then
+            _previousIndex = SelectedIndex
+        End If
+    End Sub
+
+    Protected Overrides Sub OnLocationChanged(ByVal e As EventArgs)
+        MyBase.OnLocationChanged(e)
+        If _suggestListForm IsNot Nothing Then SetListBoxFormLocation(_suggestListForm)
+    End Sub
+
+    Protected Overloads Overrides Sub OnLostFocus(e As EventArgs)
+        If Not SuggestionHasFocus Then HideSuggestionBox()
+        MyBase.OnLostFocus(e)
+    End Sub
+
+    Protected Overrides Sub OnValidating(e As CancelEventArgs)
+        If CanEditLookup AndAlso Not SuggestionHasFocus AndAlso Not TryAcceptLookupText(False) Then e.Cancel = True
+        MyBase.OnValidating(e)
+    End Sub
+
+    Protected Overrides Sub OnGotFocus(e As EventArgs)
+        BeginUpdate()
+        MyBase.OnGotFocus(e)
+        _lastValue = SelectedValue
+        BeginLookupEdit()
+        EndUpdate()
+    End Sub
+
+    Protected Overloads Overrides Sub OnPreviewKeyDown(e As PreviewKeyDownEventArgs)
+        ' Preview only classifies keys. Processing them here as well as in
+        ' ProcessCmdKey caused Enter and arrow keys to run more than once.
+        MyBase.OnPreviewKeyDown(e)
+    End Sub
+
+    Private Sub HideDropDown(hide As Boolean)
+        BeginUpdate()
+        If hide Then
+            MyBase.DropDownStyle = ComboBoxStyle.Simple
+            MaxDropDownItems = 1
+            If Hidden Then
+                ForeColor = Color.Black
+                BackColor = Color.Black
+            ElseIf DisplayOnly Then
+                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            Else
+                ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+            End If
+            DropDownHeight = Height
+        Else
+            MaxDropDownItems = _defaultMaxDropDownItems
+            MyBase.DropDownStyle = _defaultDropdownStyle
+            If Hidden Then
+                ForeColor = Color.Black
+                BackColor = Color.Black
+            ElseIf DisplayOnly Then
+                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            Else
+                ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+            End If
+            DropDownHeight = _defaultDropDownHeight
+        End If
+        EndUpdate()
+    End Sub
+
+    Protected Overrides Sub OnTextChanged(ByVal e As EventArgs)
+        MyBase.OnTextChanged(e)
+        If _normalizingClear OrElse _synchronizingSelectionText OrElse _processingUserTextUpdate Then Return
+        If String.Equals(Text, _lastUserQuery, StringComparison.Ordinal) Then Return
+        HideSuggestionBox()
+        If CanEditLookup AndAlso SelectedIndex >= 0 AndAlso
+            String.Equals(Text, GetItemText(SelectedItem), StringComparison.CurrentCulture) Then BeginLookupEdit()
+    End Sub
+
+    Protected Overrides Sub OnTextUpdate(e As EventArgs)
+        _processingUserTextUpdate = True
+        Try
+            MyBase.OnTextUpdate(e)
+            RequestSuggestionSearch()
         Finally
-            'ResumeLayout(True)
+            _processingUserTextUpdate = False
         End Try
     End Sub
 
-    'Private Sub cComboBox_DataSourceChanged(sender As Object, e As EventArgs) Handles Me.DataSourceChanged
-    '    If Not _changingSearchValueOnly then
-    '        originalDataSource = DataSource
-    '        originalList = Nothing
-    '    end if
-    'End Sub
-
-    'Private Sub cComboBox_BindingContextChanged(sender As Object, e As EventArgs) Handles Me.BindingContextChanged
-    '    If DataSource Is Nothing Then
-    '        originalList = Nothing
-    '        originalDataSource = Nothing
-    '    Else
-    '        If Not _changingSearchValueOnly then
-    '            originalDataSource = DataSource
-    '            originalList = Items.Cast(Of Object)().ToArray()
-    '        End if
-    '    End If
-    'End Sub
-
-    Private Sub ReevaluateCompletionList()
-        _currentSearchTerm = Text.ToLowerInvariant()
-        If _currentSearchTerm = _previousSearchterm Then
-            Return
-        End If
-        _previousSearchterm = _currentSearchTerm
+    Private Sub ClearSelectionForValidation()
+        _normalizingClear = True
         Try
-            'SuspendLayout()
-            Dim newList As Object()
-            If _originalList Is Nothing Then
-                _originalList = Items.Cast(Of Object)().ToArray()
-            End If
-            If String.IsNullOrEmpty(_currentSearchTerm) Then
-                If Items.Count = _originalList.Length Then
-                    Return
+            HideSuggestionBox()
+            SelectedIndex = -1
+            Text = String.Empty
+        Finally
+            _normalizingClear = False
+        End Try
+    End Sub
+
+    Private Sub ctComboBox_MouseUp(sender As Object, e As MouseEventArgs) Handles Me.MouseUp
+        HandleMouseUp(sender, e)
+    End Sub
+
+    Private Sub HandleMouseUp(control As Object, e As MouseEventArgs)
+        ' Checking the Mouse right Button
+        If e.Button = MouseButtons.Right Then
+            control.ContextMenuStrip.Show(control, New Point(e.X, e.Y))
+        End If
+    End Sub
+
+    Private Sub HandlePopup(sender As Object, e As EventArgs) Handles _contextMenuStrip1.Opening
+        ContextHandler(sender, e)
+    End Sub
+
+    Private Overloads Sub OnBindingContextChanged(sender As Object, e As EventArgs) Handles MyBase.BindingContextChanged, MyBase.DataSourceChanged, MyBase.DisplayMemberChanged, MyBase.ValueMemberChanged
+        If _disposingLookup Then Return
+        ConfigureLookupProjection()
+        ObserveLookupList()
+        RefreshLookupCache()
+    End Sub
+
+    'Private Sub SurroundingSub()
+    '    Dim data As IEnumerable(Of SomeType) =
+    '   Dim table As DataTable = New DataTable()
+
+    '   Using reader = ObjectReader.Create(data, "Id", "Name", "Description")
+    '   table.Load(reader)
+    '    End Using
+
+    'End Sub
+    Private Shadows Sub OnParentChanged(ByVal sender As Object, ByVal e As EventArgs)
+        If _suggestListForm IsNot Nothing Then SetListBoxFormLocation(_suggestListForm)
+    End Sub
+
+#End Region
+
+#Region "Methods"
+
+    Public Sub New()
+        MyBase.New()
+        Dim myFont As New Font("Sans Serif", 10.0!, FontStyle.Regular)
+        DoubleBuffered = True
+        ContextMenuStrip = _contextMenuStrip1
+        Margin = New Padding(1, 1, 1, 1)
+        FlatStyle = FlatStyle.Standard
+        Font = myFont
+        BorderColor = Color.DimGray
+        ValueMember = "IdNo"
+        DisplayMember = "Name"
+        _defaultMaxDropDownItems = MaxDropDownItems
+        _defaultDropdownStyle = DropDownStyle
+        _defaultDropDownHeight = DropDownHeight
+
+        Text = ""
+        _suggestListOrderRuleCompiled = Function(s) s
+        ConfigureLookupProjection()
+        SetStyle(ControlStyles.EnableNotifyMessage, True)
+        EditingMode = False
+        AddHandler ParentChanged, AddressOf OnParentChanged
+    End Sub
+
+    Public Function GetValue(Of T)() As T
+        If SelectedIndex = -1 Then
+            Return Nothing
+        Else
+            Dim x As T
+            x = CType(SelectedValue, T)
+            Return x
+        End If
+    End Function
+
+    Public Function GetValue()
+        If SelectedItem IsNot Nothing Then
+            Return DirectCast(SelectedItem, System.Data.DataRowView).Row(ValueMember)
+        Else
+            Return Nothing
+        End If
+    End Function
+
+    Public Sub SetValue(value)
+        If value Is DBNull.Value OrElse value Is Nothing Then
+            SelectedIndex = -1
+        Else
+            Select Case DisplayMember
+                Case "IdNo", "Code", "Name"
+                    ValueSearch(value)
+                Case Else
+                    SelectedValue = value
+            End Select
+        End If
+    End Sub
+
+    Public Property DataValue
+
+    Private Sub ValueSearch(value As Object)
+        If DataSource IsNot Nothing Then
+            SelectedValue = value
+        Else
+            SelectedIndex = -1
+        End If
+    End Sub
+
+
+    Private Sub IdNoSearch(value As Object)
+        Dim returnValue As Int32
+        Dim found As Boolean = False
+        Dim i = 0
+        If DataSource IsNot Nothing Then
+            For Each item As DataRow In DataSource.Rows()
+                If item(ValueMember) = value Then
+                    'If Visible Then
+                    SelectedValue = value
+                    'Else
+                    '    SelectedItem = DataSource(i)
+                    'End If
+                    found = True
+                    Exit For
                 End If
-                newList = _originalList
-            Else
-                newList = _originalList.Where(Function(x) x.ToString().ToLowerInvariant().Contains(_currentSearchTerm)).ToArray()
+                i += 1
+            Next
+            If Not found Then
+                SelectedIndex = -1
+                returnValue = Nothing
+                If value IsNot Nothing Then
+                    Text = value
+                End If
             End If
-            _changingSearchValueOnly = True
-            DataSource = Nothing
-            Try
-                DataSource = newList
-            Catch ex As Exception
-                'newList = NewList
-            End Try
-            _changingSearchValueOnly = True
+        Else
+            SelectedIndex = -1
+        End If
+    End Sub
+
+    Private Sub CodeSearch(value As Object)
+        Dim found As Boolean = False
+        Dim i = 0
+        If DataSource IsNot Nothing Then
+            For Each item In DataSource
+                If item.Code = value Then
+                    SelectedItem = DataSource(i)
+                    found = True
+                    Exit For
+                End If
+                i += 1
+            Next
+            If Not found Then
+                If value IsNot Nothing Then
+                    Text = value
+                End If
+                SelectedIndex = -1
+            End If
+        Else
+            SelectedIndex = -1
+        End If
+    End Sub
+
+    Private Sub NameSearch(value As Object)
+        Dim found As Boolean = False
+        Dim i = 0
+        If DataSource IsNot Nothing Then
+            For Each item In DataSource
+                If item.Name = value Then
+                    SelectedItem = DataSource(i)
+                    found = True
+                    Exit For
+                End If
+                i += 1
+            Next
+            If Not found Then
+                If value IsNot Nothing Then
+                    Text = value
+                End If
+                SelectedIndex = -1
+            End If
+        Else
+            SelectedIndex = -1
+        End If
+    End Sub
+
+    Protected Sub ContextHandler(sender As Object, e As EventArgs)
+
+        Const separator = "-"
+
+        _contextMenuStrip1.Items.Clear()
+
+        Dim menuItemFind As New ToolStripMenuItem With {
+                .Text = _textFind
+                }
+        _contextMenuStrip1.Items.Add(menuItemFind)
+        menuItemFind.ShortcutKeys = Keys.Control Or Keys.F
+        menuItemFind.ShortcutKeyDisplayString = $"Ctrl-F"
+        AddHandler menuItemFind.Click, AddressOf MenuItemFind_Click
+
+        Dim menuItemUndo As New ToolStripMenuItem With {
+                .Text = _textUndo
+                }
+        _contextMenuStrip1.Items.Add(menuItemUndo)
+        menuItemUndo.ShortcutKeys = Keys.Control Or Keys.Z
+        menuItemUndo.ShortcutKeyDisplayString = $"Ctrl-Z"
+        AddHandler menuItemUndo.Click, AddressOf MenuItemUndo_Click
+
+        _contextMenuStrip1.Items.Add(separator)
+
+        Dim menuItemCut As New ToolStripMenuItem With {
+                .Text = _textCut
+                }
+        _contextMenuStrip1.Items.Add(menuItemCut)
+        menuItemCut.Enabled = (SelectionLength <> 0)
+        menuItemCut.ShortcutKeys = Keys.Control Or Keys.X
+        menuItemCut.ShortcutKeyDisplayString = $"Ctrl-X"
+        AddHandler menuItemCut.Click, AddressOf MenuItemCut_Click
+
+        Dim menuItemCopy As New ToolStripMenuItem With {
+                .Text = _textCopy
+                }
+        _contextMenuStrip1.Items.Add(menuItemCopy)
+        menuItemCopy.ShortcutKeys = Keys.Control Or Keys.C
+        menuItemCopy.ShortcutKeyDisplayString = $"Ctrl-C"
+        menuItemCopy.Enabled = (SelectionLength <> 0)
+        AddHandler menuItemCopy.Click, AddressOf MenuItemCopy_Click
+
+        Dim menuItemPaste As New ToolStripMenuItem With {
+                .Text = _textPaste
+                }
+        _contextMenuStrip1.Items.Add(menuItemPaste)
+        menuItemPaste.ShortcutKeys = Keys.Control Or Keys.V
+        menuItemPaste.ShortcutKeyDisplayString = $"Ctrl-V"
+        menuItemPaste.Enabled = (My.Computer.Clipboard.GetText() <> "")
+        AddHandler menuItemPaste.Click, AddressOf MenuItemPaste_Click
+
+        Dim menuItemDelete As New ToolStripMenuItem With {
+                .Text = _textDelete
+                }
+        _contextMenuStrip1.Items.Add(menuItemDelete)
+        menuItemDelete.ShortcutKeys = Keys.Delete
+        menuItemDelete.ShortcutKeyDisplayString = $"Delete"
+        menuItemDelete.Enabled = (SelectionLength <> 0)
+        AddHandler menuItemDelete.Click, AddressOf MenuItemDelete_Click
+
+        _contextMenuStrip1.Items.Add(separator)
+
+        Dim menuItemSelectAll As New ToolStripMenuItem With {
+                .Text = _textSelectAll
+                }
+        _contextMenuStrip1.Items.Add(menuItemSelectAll)
+        menuItemSelectAll.ShortcutKeys = Keys.Control Or Keys.A
+        menuItemSelectAll.ShortcutKeyDisplayString = $"Ctrl-A"
+        menuItemSelectAll.Enabled = (Not (SelectionLength = Text.Length Or SelectionLength = Text.Trim.Length))
+        AddHandler menuItemSelectAll.Click, AddressOf MenuItemSelectAll_Click
+
+        _contextMenuStrip1.Items.Add(separator)
+
+        'End If
+    End Sub
+
+    Private Sub MenuItemCut_Click()
+        If EditingMode Then
+            Clipboard.SetText(SelectedText)
+            SelectedIndex = -1
+        Else
+            MessagingLibrary.Messaging.Show(True, "MsgOperationNotAvailableInViewMode")
+        End If
+    End Sub
+
+    Private Sub MenuItemDelete_Click()
+        If EditingMode Then
+            SelectedIndex = -1
+        Else
+            MessagingLibrary.Messaging.Show(True, "MsgOperationNotAvailableInViewMode")
+        End If
+    End Sub
+
+    Private Sub MenuItemCopy_Click()
+        Clipboard.SetText(SelectedText)
+    End Sub
+
+    Private Sub MenuItemPaste_Click()
+        If EditingMode Then
+            Text = Clipboard.GetText()
+        Else
+            MessagingLibrary.Messaging.Show(True, "MsgOperationNotAvailableInViewMode")
+        End If
+    End Sub
+
+    Private Sub MenuItemUndo_Click()
+        If EditingMode Then
+            SendKeys.Send("^Z")
+        Else
+            MessagingLibrary.Messaging.Show(True, "MsgOperationNotAvailableInViewMode")
+        End If
+    End Sub
+
+    Protected Overloads Overrides Function ProcessCmdKey(ByRef msg As Message, keyData As Keys) As Boolean
+        If HandleLookupKey(keyData) Then Return True
+        Return MyBase.ProcessCmdKey(msg, keyData)
+    End Function
+
+    'Private Sub ctCombobox_Leave(sender As Object, e As EventArgs) Handles Me.Leave
+    '    If SelectedIndex < 0 Then
+    '        If Text = "" Then
+    '            'allow empty strings
+    '        Else
+    '            If _suggestBindingList.Count() = 1 Then
+    '                Text = SuggestListForm.SuggestListBox.Items(0)
+    '            Else
+    '                ' invalid selection or text set to empty string
+    '                Text = Nothing
+    '            End If
+    '        End If
+    '    End If
+    '    SelectionLength = 0
+    '    SelectionStart = 0
+    'End Sub
+
+    Private Sub HideSuggestionBox()
+        CancelSuggestionSearch()
+        If _suggestListForm IsNot Nothing AndAlso Not _suggestListForm.IsDisposed Then _suggestListForm.Hide()
+    End Sub
+
+    Private Sub MenuItemFind_Click()
+        Dim myForm = FindForm()
+        Dim searchForm As CFindForm
+        searchForm = New CFindForm(Me)
+        FieldName = Name.Substring(3)
+        If LinkedLabel IsNot Nothing AndAlso LinkedLabel.Text <> "" Then
+            searchForm.SetFieldDescription(LinkedLabel.Text)
+        Else
+            searchForm.SetFieldDescription(FieldName)
+        End If
+        Dim x = CallByName(myForm, "GetFieldType", CallType.Method, {FieldName})
+        FindDataType = GetObjectDataType(x)
+        searchForm.ShowDialog()
+        Invoker.InvokeFunction(myForm, "FindFieldNew", {Me})
+    End Sub
+
+    Private Sub MenuItemSelectAll_Click()
+        SelectAll()
+    End Sub
+
+    Private Shadows Sub OnDropDownClosed(sender As Object, e As EventArgs) Handles Me.DropDownClosed
+        If DisplayOnly Then
+            SelectedIndex = _previousIndex
+            AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgCannotEditReadOnly")
+        End If
+    End Sub
+
+    Private Sub SetListBoxFormLocation(suggestLbForm As CListBoxForm)
+        PositionSuggestionPopup(suggestLbForm)
+    End Sub
+
+    Private Sub SuggestListBoxOnClick()
+        If Not CanEditLookup Then
+            HideSuggestionBox()
+            Return
+        End If
+        If _suggestListForm Is Nothing Then Return
+        If CommitSuggestion(TryCast(_suggestListForm.SuggestListBox.SelectedItem, LookupSuggestion)) Then BeginLookupEdit()
+        Focus()
+    End Sub
+
+    Private Function SelectSuggestion(suggestedText As String) As Boolean
+        If String.IsNullOrWhiteSpace(suggestedText) Then
+            Return False
+        End If
+
+        Dim matches = EnsureLookupCache().Where(Function(item) String.Equals(item.DisplayText, suggestedText, StringComparison.CurrentCultureIgnoreCase)).ToList()
+        ' Preserve an existing ID when validating an ambiguous display name.
+        Dim selected = matches.FirstOrDefault(Function(item) item.SourceIndex = SelectedIndex)
+        If selected IsNot Nothing Then Return CommitSuggestion(selected)
+        If matches.Count = 1 Then Return CommitSuggestion(matches(0))
+        Return False
+    End Function
+
+    Private Function SelectExactTextMatch() As Boolean
+        If String.IsNullOrWhiteSpace(Text) Then
+            Return SelectedIndex >= 0
+        End If
+
+        Return SelectSuggestion(Text.Trim())
+    End Function
+
+    Private Sub SynchronizeSelectionText(displayText As String)
+        If String.Equals(Text, displayText, StringComparison.Ordinal) Then
+            Return
+        End If
+
+        Dim synchronizing = _synchronizingSelectionText
+        _synchronizingSelectionText = True
+        Try
+            Text = displayText
         Finally
-            If _currentSearchTerm.Length >= 1 AndAlso Not DroppedDown Then
-                DroppedDown = True
-                Cursor.Current = Cursors.[Default]
-                Text = _currentSearchTerm
-                [Select](_currentSearchTerm.Length, 0)
-            End If
-            'ResumeLayout(True)
+            _synchronizingSelectionText = synchronizing
         End Try
+    End Sub
+
+    Public Function GetNullableValue(Of T)()
+        Dim x = GetValue()
+        If x Is Nothing Then
+            Return Nothing
+        Else
+            Return CType(x, T)
+        End If
+    End Function
+
+#End Region
+
+#Region "FindableControl"
+
+    Public Property FindEnabled As Boolean Implements IFindableControl.FindEnabled
+
+    Public Property BegFindValue As Object Implements IFindableControl.BegFindValue
+
+    Public Property EndFindValue As Object Implements IFindableControl.EndFindValue
+
+    Private Property SearchPlace As IFindableControl.SearchPlaceEnum Implements IFindableControl.SearchPlace
+        Get
+            Return IFindableControl.SearchPlaceEnum.ExactValue
+        End Get
+        Set(value As IFindableControl.SearchPlaceEnum)
+
+        End Set
+    End Property
+
+    Public Property FieldName As String Implements IFindableControl.FieldName
+
+    Private ReadOnly Property FindDataSource As Object Implements IFindableControl.FindDataSource
+        Get
+            Return DataSource
+        End Get
+    End Property
+
+    Private ReadOnly Property FindDisplayMember As String Implements IFindableControl.FindDisplayMember
+        Get
+            Return DisplayMember
+        End Get
+    End Property
+
+    Public Property IgnoreCase As Boolean Implements IFindableControl.IgnoreCase
+
+    Public ReadOnly Property SearchMode As IFindableControl.SearchModeEnum Implements IFindableControl.SearchMode
+        Get
+            Return IFindableControl.SearchModeEnum.ComboBox
+        End Get
+    End Property
+
+    Private ReadOnly Property IFindableControl_ValueMember As String Implements IFindableControl.FindValueMember
+        Get
+            Return ValueMember
+        End Get
+    End Property
+
+#End Region
+
+    <Browsable(True)>
+    <Category("Appearance")>
+    <DefaultValue(GetType(Color), "DimGray")>
+    Public Property BorderColor As Color
+
+    Public Property FindDataType As IFindableControl.DataTypeEnum Implements IFindableControl.FindDataType
+
+    Public Property FieldDescription As String Implements IFindableControl.FieldDescription
+
+    '<Category("Custom Properties")>
+    '<Description("Select the label to which this control is linked.")>
+    '<Browsable(True)>
+    Public Property LinkedLabel As CLabel Implements ILinkedLabel.LinkedLabel
+
+    Public Sub RevertValue()
+        ' revert to previous value
+        SelectedValue = _lastValue
+    End Sub
+
+    Public Function ValueChanged()
+        If SelectedValue = _lastValue Then
+            Return False
+        End If
+        Return True
+    End Function
+
+    Private Const WmMousewheel As Integer = &H20A
+
+    <DebuggerStepThrough>
+    Protected Overrides Sub WndProc(ByRef m As Message)
+        If EditingMode And Not DisplayOnly Then
+            MyBase.WndProc(m)
+        Else
+            If Not m.Msg = WmMousewheel Then MyBase.WndProc(m)
+        End If
     End Sub
 
     Public Function GetControlDescription(Optional defaultDescription As String = Nothing) Implements ILinkedLabel.GetControlDescription
@@ -505,11 +920,52 @@ Public Class CComboBox
         Return description
     End Function
 
-    'Public Sub MakeViewable(ViewableControl As Boolean) Implements IEntryControl.MakeViewable
-    '    ' not applicable
-    'End Sub
-
-    'Public Sub MakeSelectable(selectableControl As Boolean) Implements IEntryControl.MakeSelectable
-    '    Enabled = selectableControl
-    'End Sub
 End Class
+
+'Public Class CSuggestListForm
+'    Inherits CListBoxForm
+
+'End Class
+
+'Sample Use
+'
+'Imports System
+'Imports System.Linq
+'Imports System.Windows.Forms
+
+'Public Class Form1
+
+'    Public Sub New()
+
+'        ' This call is required by the designer.
+'        InitializeComponent()
+
+'        ' Add any initialization after the InitializeComponent() call.
+
+'    End Sub
+
+'    Private Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+' ReSharper disable once CommentTypo
+'        sugComboBox.DataSource = {"Janean Mcgaha", "Tama Gaitan", "Jacque Tinnin", "Elvira Woolfolk", "Fransisca Owens", "Minnie Ardoin", "Renay Bentler", "Joye Boyter", "Jaime Flannery", "Maryland Arai", "Walton Edelstein", "Nereida Storrs", "Theron Zinn", "Katharyn Estrella", "Alline Dubin", "Edra Bhatti", "Willa Jeppson", "Chelsea Revel", "Sonya Lowy", "Danelle Kapoor"}
+'        sugComboBox.SelectedIndex = -1
+
+'        'trySomeThings()
+
+'    End Sub
+
+'    Private Sub TrySomeThings()
+'        sugComboBox.DataSource = sugComboBox.Items.Cast(Of String)().[Select](Function(i) New Person With {
+'            .Name = i
+'        }).ToList()
+'        sugComboBox.DisplayMember = "Name"
+'        sugComboBox.PropertySelector = Function(collection) collection.Cast(Of Person)().[Select](Function(p) p.Name)
+'        sugComboBox.FilterRule = Function(item, text) item.StartsWith(text.Trim(), StringComparison.CurrentCultureIgnoreCase)
+'        sugComboBox.SuggestListOrderRule = Function(s) s.Split(" "c)(1)
+'    End Sub
+'End Class
+
+'Class Person
+'    Public Property Name As String
+'    Public Property DateOfBirth As DateTime
+'    Public Property Height As Integer
+'End Class

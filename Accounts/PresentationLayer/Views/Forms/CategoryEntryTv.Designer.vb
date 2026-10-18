@@ -39,13 +39,13 @@ Namespace PresentationLayer.Views.Forms
             Me.lblBranchIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtBranchIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblPurchaseAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboPurchaseAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboPurchaseAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.lblSaleAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboSaleAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboSaleAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.lblVatPurchaseAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboVatPurchaseAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboVatPurchaseAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.lblVatSaleAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboVatSaleAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboVatSaleAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.lblVatPercentage = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkNeedsExpiryDate = New AATM.Libraries.CBaseControlsLibrary.CCheckBoxNew()
@@ -634,16 +634,16 @@ End Sub
         Friend WithEvents lblNameAra As CLabel
         Friend WithEvents lblNotes As CLabel
         Friend WithEvents lblPurchaseAccountIdNo As CLabel
-        Friend WithEvents cboPurchaseAccountIdNo As CtComboBox
+        Friend WithEvents cboPurchaseAccountIdNo As CComboBox
         Friend WithEvents lblSaleAccountIdNo As CLabel
-        Friend WithEvents cboSaleAccountIdNo As CtComboBox
+        Friend WithEvents cboSaleAccountIdNo As CComboBox
         Friend WithEvents lblVatPurchaseAccountIdNo As CLabel
-        Friend WithEvents cboVatPurchaseAccountIdNo As CtComboBox
+        Friend WithEvents cboVatPurchaseAccountIdNo As CComboBox
         Friend WithEvents lblVatPercentage As CLabel
         Friend WithEvents txtVatPercentage As CTextBox
         Friend WithEvents lblPercentMark As CLabel
         Friend WithEvents lblVatSaleAccountIdNo As CLabel
-        Friend WithEvents cboVatSaleAccountIdNo As CtComboBox
+        Friend WithEvents cboVatSaleAccountIdNo As CComboBox
         Friend WithEvents lblBranchIdNo As CLabel
         Friend WithEvents txtBranchIdNo As CTextBox
         Friend WithEvents CLabel1 As CLabel

@@ -8,7 +8,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Imports System.Runtime.InteropServices
 
 Public Class CtComboBoxEditingControl
-    Inherits CtComboBox
+    Inherits CComboBox
     Implements IDataGridViewEditingControl
 
     Private dataGridView As DataGridView
@@ -183,10 +183,7 @@ Public Class CtComboBoxEditingControl
     '     true if the specified key is a regular input key that should be handled by the
     '     editing control; otherwise, false.
     Public Function EditingControlWantsInputKey(ByVal keyData As Keys, ByVal dataGridViewWantsInputKey As Boolean) As Boolean Implements IDataGridViewEditingControl.EditingControlWantsInputKey
-        If (keyData And Keys.KeyCode) = Keys.Down OrElse (keyData And Keys.KeyCode) = Keys.Up OrElse DroppedDown AndAlso (keyData And Keys.KeyCode) = Keys.Escape OrElse (keyData And Keys.KeyCode) = Keys.Return Then
-            Return True
-        End If
-        Return Not dataGridViewWantsInputKey
+        Return LookupWantsInputKey(keyData, dataGridViewWantsInputKey)
         'Select Case keyData And Keys.KeyCode
 
         '    Case Keys.Return, Keys.Escape
@@ -231,11 +228,15 @@ Public Class CtComboBoxEditingControl
            String.IsNullOrEmpty(TryCast(dataGridView.CurrentCell.FormattedValue, String)) Then
             SelectedIndex = -1
             Text = String.Empty
+        ElseIf dataGridView IsNot Nothing AndAlso dataGridView.CurrentCell IsNot Nothing Then
+            ' Formatting alone cannot distinguish duplicate display names.
+            InitializeLookupSelection(dataGridView.CurrentCell.Value)
         End If
 
         If selectAll Then
             MyBase.SelectAll()
         End If
+        BeginLookupEdit()
         _preparedForEdit = True
     End Sub
 

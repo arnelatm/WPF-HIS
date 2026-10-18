@@ -617,7 +617,7 @@ Public Class CtDataGridView
         If TypeOf e.Control Is CtComboBoxEditingControl Then
             'Me.EditingMode = True
             Me.SuspendDrawingNew()
-            'declare variable(cb) as a CtCombobox
+            'declare variable(cb) as a CComboBox
             Dim cb As CtComboBoxEditingControl
             cb = e.Control
             'set the dropdown style of a combobox

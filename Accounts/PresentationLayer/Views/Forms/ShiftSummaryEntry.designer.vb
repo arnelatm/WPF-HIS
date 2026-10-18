@@ -31,7 +31,7 @@ Namespace PresentationLayer.Views.Forms
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblUserIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboUserIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboUserIdNo = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.lblStartDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpDateStart = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -398,7 +398,7 @@ End Sub
         Friend WithEvents lblIdNo As CLabel
         Public WithEvents TxtIdNo As CTextBox
         Friend WithEvents lblUserIdNo As CLabel
-        Public WithEvents cboUserIdNo As CtCombobox
+        Public WithEvents cboUserIdNo As CComboBox
         Friend WithEvents lblStartDate As CLabel
         Public WithEvents dtpDateStart As CCustomDateTimePicker
         Friend WithEvents lblDateCreated As CLabel

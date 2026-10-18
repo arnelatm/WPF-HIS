@@ -51,7 +51,7 @@ Namespace PresentationLayer.Views.Forms
         Me.lblDateAdded = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+        Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
         Me.lblPosted = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.chkPosted = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
         Me.lblReconciliationStatus = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -1349,7 +1349,7 @@ End Sub
         Friend WithEvents CFlowLayout1 As CFlowLayout
         Friend WithEvents CFlowLayout3 As CFlowLayout
         Friend WithEvents CFlowLayout4 As CFlowLayout
-        Friend WithEvents cboAccountIdNo As CtCombobox
+        Friend WithEvents cboAccountIdNo As CComboBox
         Friend WithEvents lblEndingBankBalance As CLabel
         Friend WithEvents lblCreditsCleared As CLabel
         Friend WithEvents txtTotalCreditsCleared As CTextBox

@@ -27,7 +27,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblEndingDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblBeginningDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboIdNo = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.dtpEndingDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.dtpBeginningDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
@@ -358,7 +358,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Friend WithEvents lblIdNo As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblEndingDate As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblBeginningDate As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboIdNo As Libraries.CBaseControlsLibrary.CtCombobox
+        Friend WithEvents cboIdNo As Libraries.CBaseControlsLibrary.CComboBox
         Friend WithEvents dtpEndingDate As CCustomDateTimePicker
         Friend WithEvents dtpBeginningDate As CCustomDateTimePicker
         Friend WithEvents CFlowLayout1 As Libraries.CBaseControlsLibrary.CFlowLayout

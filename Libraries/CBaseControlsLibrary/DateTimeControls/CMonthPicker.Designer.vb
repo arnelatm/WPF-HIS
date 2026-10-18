@@ -28,7 +28,7 @@ Partial Class CMonthPicker
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CMonthPicker))
         Me.floMonthPicker = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.btnPrevMonth = New System.Windows.Forms.Button()
-        Me.cboMonths = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+        Me.cboMonths = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
         Me.spnYear = New System.Windows.Forms.NumericUpDown()
         Me.btnNextMonth = New System.Windows.Forms.Button()
         Me.floMonthPicker.SuspendLayout
@@ -125,7 +125,7 @@ Partial Class CMonthPicker
 
     End Sub
     Private WithEvents btnNextMonth As Windows.Forms.Button
-    Friend WithEvents cboMonths As CtComboBox
+    Friend WithEvents cboMonths As CComboBox
     Private WithEvents btnPrevMonth As Windows.Forms.Button
     Friend WithEvents floMonthPicker As CFlowLayout
     Private WithEvents spnYear As Windows.Forms.NumericUpDown

@@ -439,10 +439,10 @@ Public Class CFormBase
     End Sub
 
     Public Shared Sub UnselectTextOnCtComboboxes(allCtrl As List(Of Control))
-        ' i don't want text to be selected on comboboxes this sub will make sure to unselect the text for CtCombobox's
+        ' i don't want text to be selected on comboboxes this sub will make sure to unselect the text for CComboBox's
         For Each ctrl In allCtrl
-            If TypeOf ctrl Is CtComboBox Then
-                DirectCast(ctrl, CtComboBox).SelectionLength = 0
+            If TypeOf ctrl Is CComboBox Then
+                DirectCast(ctrl, CComboBox).SelectionLength = 0
             End If
         Next
     End Sub

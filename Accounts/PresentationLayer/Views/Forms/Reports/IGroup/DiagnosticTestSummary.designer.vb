@@ -30,7 +30,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.dtpBeginningDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboReportSelector = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+        Me.cboReportSelector = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
         Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
@@ -272,6 +272,6 @@ Namespace PresentationLayer.Views.Forms.Reports
         Friend WithEvents btnOk As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents btnCancel As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents CLabel3 As CLabel
-        Friend WithEvents cboReportSelector As CtComboBox
+        Friend WithEvents cboReportSelector As CComboBox
     End Class
 End NameSpace

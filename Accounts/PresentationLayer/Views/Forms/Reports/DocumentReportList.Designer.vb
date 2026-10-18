@@ -26,7 +26,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblSupplierCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboDocumentType = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboDocumentType = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.chkAllDocuments = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
@@ -210,7 +210,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Friend WithEvents btnOk As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents btnCancel As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents lblSupplierCode As CLabel
-        Friend WithEvents cboDocumentType As CtComboBox
+        Friend WithEvents cboDocumentType As CComboBox
         Friend WithEvents chkAllDocuments As UcCheckBox
     End Class
 End Namespace

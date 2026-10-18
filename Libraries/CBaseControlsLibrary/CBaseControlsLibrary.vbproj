@@ -168,7 +168,16 @@
     <Compile Include="DataGridViewControls\CtDataGridView.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ComboBoxControls\Active\CtComboBox.vb">
+    <Compile Include="ComboBoxControls\Active\CComboBox.Suggestions.vb">
+      <DependentUpon>CComboBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ComboBoxControls\Active\CComboBox.Interaction.vb">
+      <DependentUpon>CComboBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ComboBoxControls\Active\CComboBox.LookupCache.vb">
+      <DependentUpon>CComboBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ComboBoxControls\Active\CComboBox.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="ComboBoxControls\ObsoleteCompiled\CdComboBox.vb">
@@ -242,9 +251,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="StandardControls\CCheckBox.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="ComboBoxControls\Active\CComboBox.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="DateTimeControls\CDateTimePicker.vb">
@@ -564,9 +570,6 @@
     <EmbeddedResource Include="CalendarControls\CCalendarGregorian.resx">
       <DependentUpon>CCalendarGregorian.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ComboBoxControls\Active\CComboBox.resx">
-      <DependentUpon>CComboBox.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="DateTimeControls\CCustomDateTimePicker.resx">
       <DependentUpon>CCustomDateTimePicker.vb</DependentUpon>
     </EmbeddedResource>
@@ -630,6 +633,8 @@
     <EmbeddedResource Include="DateTimeControls\gTimePickerCntrl.resx">
       <DependentUpon>gTimePickerCntrl.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ComboBoxStrings.resx" />
+    <EmbeddedResource Include="ComboBoxStrings.ar.resx" />
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>

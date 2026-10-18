@@ -53,7 +53,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -64,9 +64,9 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.btnSelectAll = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboPayType = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.cboPayType = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.CLabel4 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboPcAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.cboPcAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.txtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.dgvPcClosed = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
             Me.dgvTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -1121,7 +1121,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblTransactionDate As CLabel
         Friend WithEvents dtpTransactionDate As CCustomDateTimePicker
         Friend WithEvents lblAccountIdNo As CLabel
-        Friend WithEvents cboAccountIdNo As CtCombobox
+        Friend WithEvents cboAccountIdNo As CComboBox
         Friend WithEvents CLabel2 As CLabel
         Friend WithEvents txtNotes As CTextBox
         Friend WithEvents txtReferenceNo As CTextBox
@@ -1135,9 +1135,9 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents btnUnselectAll As CButton
         Friend WithEvents btnSelectAll As CButton
         Friend WithEvents CLabel3 As CLabel
-        Friend WithEvents cboPayType As CtCombobox
+        Friend WithEvents cboPayType As CComboBox
         Friend WithEvents CLabel4 As CLabel
-        Friend WithEvents cboPcAccountIdNo As CtCombobox
+        Friend WithEvents cboPcAccountIdNo As CComboBox
         Friend WithEvents txtIdNo As CTextBox
         Friend WithEvents dgvPcClosed As CDgvCheckBoxColumn
         Friend WithEvents dgvTransactionDate As CDgvTextColumn

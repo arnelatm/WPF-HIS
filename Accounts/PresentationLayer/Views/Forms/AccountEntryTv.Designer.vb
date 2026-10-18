@@ -37,13 +37,13 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.cboParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.lblLevelNumber = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtLevelNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblAccountGroup = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboAccountGroup = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.cboAccountGroup = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.lblSpecialAccount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboSpecialAccount = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.cboSpecialAccount = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkDetailAccount = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.lblWithReconciliation = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -51,9 +51,9 @@ Namespace PresentationLayer.Views.Forms
             Me.lblActive = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkActive = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.lblNormalBalance = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboNormalBalance = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.cboNormalBalance = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.lblPayeeType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboPayeeType = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.cboPayeeType = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtSortKey = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             LocalizableContent1 = New AATM.Libraries.LocalizationUtilities.LocalizableContent()
@@ -730,11 +730,11 @@ End Sub
         Friend WithEvents lblActive As CLabel
         Friend WithEvents CLabel1 As CLabel
         Friend WithEvents chkDetailAccount As CCheckBox
-        Friend WithEvents cboNormalBalance As CtCombobox
-        Friend WithEvents cboPayeeType As CtCombobox
-        Friend WithEvents cboAccountGroup As CtCombobox
-        Friend WithEvents cboParentIdNo As CtCombobox
+        Friend WithEvents cboNormalBalance As CComboBox
+        Friend WithEvents cboPayeeType As CComboBox
+        Friend WithEvents cboAccountGroup As CComboBox
+        Friend WithEvents cboParentIdNo As CComboBox
         Friend WithEvents lblSpecialAccount As CLabel
-        Friend WithEvents cboSpecialAccount As CtCombobox
+        Friend WithEvents cboSpecialAccount As CComboBox
     End Class
 End NameSpace
