@@ -170,12 +170,15 @@
     </Compile>
     <Compile Include="ComboBoxControls\Active\CComboBox.Suggestions.vb">
       <DependentUpon>CComboBox.vb</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="ComboBoxControls\Active\CComboBox.Interaction.vb">
       <DependentUpon>CComboBox.vb</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="ComboBoxControls\Active\CComboBox.LookupCache.vb">
       <DependentUpon>CComboBox.vb</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="ComboBoxControls\Active\CComboBox.vb">
       <SubType>Component</SubType>
