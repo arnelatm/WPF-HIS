@@ -10,6 +10,9 @@ Namespace PresentationLayer.Views.Forms
         Public Sub New()
             ' This call is required by the designer.
             InitializeComponent()
+            ' TranslatedCaption is loaded from a joined table, while the generic
+            ' Find action queries OriginalCaptions directly.
+            txtTranslatedCaption.FindEnabled = False
             FirstControl = txtCaption
             ' Add any initialization after the InitializeComponent() call.
             If UserIsASuperAdmin() Then

@@ -543,6 +543,18 @@ Public Class CTextBox
         ContextHandler(sender, e)
     End Sub
 
+    Protected Overrides Sub WndProc(ByRef m As Message)
+        Const WM_CONTEXTMENU As Integer = &H7B
+        If m.Msg = WM_CONTEXTMENU AndAlso Not _customContextMenuAssigned AndAlso
+            Not _disposingTextBox AndAlso Not Disposing AndAlso Not IsDisposed AndAlso
+            Not IsTextBoxDesignTime() Then
+            ' Ensure the lazy default menu is attached before WinForms processes
+            ' the native right-click/keyboard context-menu request.
+            EnsureDefaultContextMenu()
+        End If
+        MyBase.WndProc(m)
+    End Sub
+
     Public Overrides Property ContextMenuStrip As ContextMenuStrip
         Get
             ' The designer keeps the inherited Nothing default. Runtime access
@@ -614,12 +626,21 @@ Public Class CTextBox
             If caption IsNot Nothing Then fallbacks(caption) = GetBuiltInCaption(caption, culture)
         Next
         Dim captions = MessagingLibrary.ControlCaptionTranslations.GetCaptions(fallbacks, culture, IsTextBoxDesignTime())
-        _contextMenuStrip1.RightToLeft = If(culture.TextInfo.IsRightToLeft, RightToLeft.Yes, RightToLeft.No)
+        _contextMenuStrip1.RightToLeft = GetMenuRightToLeft(culture)
         For Each item As ToolStripItem In _contextMenuStrip1.Items
             Dim caption = TryCast(item.Tag, String)
             If caption IsNot Nothing Then item.Text = captions(caption)
         Next
     End Sub
+
+    Private Function GetMenuRightToLeft(culture As CultureInfo) As RightToLeft
+        Dim ownerForm = FindForm()
+        If ownerForm IsNot Nothing Then
+            If ownerForm.RightToLeft = RightToLeft.Yes Then Return RightToLeft.Yes
+            If ownerForm.RightToLeft = RightToLeft.No Then Return RightToLeft.No
+        End If
+        Return If(culture.TextInfo.IsRightToLeft, RightToLeft.Yes, RightToLeft.No)
+    End Function
 
     Private ReadOnly Property CanEditText As Boolean
         Get
