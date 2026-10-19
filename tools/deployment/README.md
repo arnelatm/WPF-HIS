@@ -117,13 +117,16 @@ The deployment script:
 
 - only accepts `\\IBN-SERVER\ISP\COAccounts` as the production destination;
 - refuses an equal or older version;
-- displays the source, destination, current version, new version, and backup path;
+- displays the source, destination, current version, new version, backup path, and estimated rollback size;
 - requires the exact confirmation `DEPLOY 1.0.0.24`;
-- backs up the current `COAccounts` folder;
-- copies and hashes the new version payload;
+- backs up the live deployment manifest, `setup.exe`, and active version payload, rather than copying historical ClickOnce versions;
+- uses `robocopy /MT:16` for version directories and verifies the copied payload with SHA256;
 - replaces `setup.exe`;
 - promotes `Accounts.application` last; and
-- verifies the live package and configuration.
+- verifies the live package and configuration; and
+- restores the previous root files and removes an incomplete new version directory if promotion fails.
+
+Rollback backups are retained in sibling `COAccounts_Backup_*` directories. The deploy script does not automatically delete old backups. Apply a reviewed retention policy to these directories; do not delete old `Application Files\Accounts_*` versions from the live ClickOnce share without checking client update and rollback requirements.
 
 Preview the production actions without copying anything:
 

@@ -61,6 +61,9 @@ function Assert-AccountsFileMatches {
             Set-Content -LiteralPath (Join-Path $root 'setup.exe') -Value $pair[1]
             Set-Content -LiteralPath (Join-Path $payload 'payload.deploy') -Value $pair[1]
         }
+        $oldPayload = Join-Path $localLive 'Application Files\Accounts_1_0_0_0'
+        $null = New-Item -ItemType Directory -Path $oldPayload -Force
+        Set-Content -LiteralPath (Join-Path $oldPayload 'retained-old-version.deploy') -Value 'old'
         $before = (Get-FileHash -LiteralPath (Join-Path $localLive 'Accounts.application')).Hash
         $beforeSetup = (Get-FileHash -LiteralPath (Join-Path $localLive 'setup.exe')).Hash
         $env:AATM_CLICKONCE_TEST_CASE = $case
@@ -80,6 +83,10 @@ function Assert-AccountsFileMatches {
                 (Get-FileHash -LiteralPath (Join-Path $localLive 'setup.exe')).Hash -ne $beforeSetup) {
                 throw "$case changed live root fixture files"
             }
+        }
+        if ($case -eq 'rollback' -and
+            (Test-Path -LiteralPath (Join-Path $localLive 'Application Files\Accounts_1_0_0_2'))) {
+            throw 'rollback left an incomplete new payload directory'
         }
         if ($case -in @('preview', 'signature', 'older', 'invalid') -and
             (Test-Path -LiteralPath (Join-Path $localLive 'Application Files\Accounts_1_0_0_2'))) {
@@ -103,6 +110,10 @@ function Assert-AccountsFileMatches {
             if ($backups.Count -ne 1 -or
                 (Get-FileHash -LiteralPath (Join-Path $backups[0].FullName 'Accounts.application')).Hash -ne $before) {
                 throw 'Expected verified original backup'
+            }
+            if (-not (Test-Path -LiteralPath (Join-Path $backups[0].FullName 'Application Files\Accounts_1_0_0_1\payload.deploy')) -or
+                (Test-Path -LiteralPath (Join-Path $backups[0].FullName 'Application Files\Accounts_1_0_0_0'))) {
+                throw 'Rollback backup did not contain only the active ClickOnce version'
             }
         }
         Write-Host "PASS: $case"

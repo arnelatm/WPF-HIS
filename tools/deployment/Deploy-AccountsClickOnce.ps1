@@ -56,6 +56,13 @@ if (Test-Path -LiteralPath $destinationVersionDirectory) {
 
 $backupName = 'COAccounts_Backup_{0}_{1}' -f (Get-Date -Format 'yyyyMMdd_HHmmss'), $liveVersion
 $backupDirectory = Join-Path (Split-Path -Parent $destination) $backupName
+$backupVersionDirectory = Join-Path $backupDirectory ("Application Files\Accounts_{0}" -f (Get-AccountsVersionToken -Version $liveVersion.ToString()))
+$backupBytes = @($currentLivePackage.ManifestPath, $currentLivePackage.SetupPath) |
+    ForEach-Object { (Get-Item -LiteralPath $_).Length } |
+    Measure-Object -Sum |
+    Select-Object -ExpandProperty Sum
+$backupBytes += (Get-ChildItem -LiteralPath $currentLivePackage.VersionDirectory -Recurse -File |
+    Measure-Object -Property Length -Sum).Sum
 if (Test-Path -LiteralPath $backupDirectory) {
     throw "Deployment backup directory already exists: $backupDirectory"
 }
@@ -67,12 +74,13 @@ Write-Host "New version:          $Version"
 Write-Host "Source:               $stagingDirectory"
 Write-Host "Destination:          $destination"
 Write-Host "Backup:               $backupDirectory"
+Write-Host "Rollback backup size:  $([math]::Round($backupBytes / 1MB, 1)) MB (live manifest, setup.exe, and active version payload)"
 Write-Host "Payload files:         $($package.PayloadFileCount)"
 Write-Host "Required update:       $($package.IsRequiredUpdate)"
 
 if ($WhatIfPreference) {
-    $null = $PSCmdlet.ShouldProcess($backupDirectory, 'Create production deployment backup')
-    $null = $PSCmdlet.ShouldProcess($destinationVersionDirectory, 'Copy and verify version payload')
+    $null = $PSCmdlet.ShouldProcess($backupDirectory, 'Create verified rollback backup of the active ClickOnce version')
+    $null = $PSCmdlet.ShouldProcess($destinationVersionDirectory, 'Copy and hash-verify version payload with robocopy /MT:16')
     $null = $PSCmdlet.ShouldProcess((Join-Path $destination 'setup.exe'), 'Replace setup.exe')
     $null = $PSCmdlet.ShouldProcess($liveManifest, 'Promote Accounts.application last')
     return
@@ -85,6 +93,7 @@ if (-not [string]::Equals($confirmation, ("DEPLOY {0}" -f $Version), [StringComp
 
 $backupCreated = $false
 $rootFilesMutationStarted = $false
+$destinationVersionCopyStarted = $false
 # One decision covers the ordered transaction; declining a backup must not allow promotion.
 if (-not $PSCmdlet.ShouldProcess($destination, "Back up and deploy Accounts $Version")) {
     return
@@ -93,7 +102,10 @@ try {
     if ((Get-FileHash -LiteralPath $liveManifest -Algorithm SHA256).Hash -ne $originalLiveManifestHash) {
         throw 'The live deployment changed during review. Preview the release again.'
     }
-    Copy-Item -LiteralPath $destination -Destination $backupDirectory -Recurse
+    $null = New-Item -ItemType Directory -Path (Join-Path $backupDirectory 'Application Files') -Force
+    Copy-Item -LiteralPath $currentLivePackage.ManifestPath -Destination $backupDirectory
+    Copy-Item -LiteralPath $currentLivePackage.SetupPath -Destination $backupDirectory
+    Copy-AccountsDirectoryFast -Source $currentLivePackage.VersionDirectory -Destination $backupVersionDirectory
     $backupManifest = Join-Path $backupDirectory 'Accounts.application'
     if (-not (Test-Path -LiteralPath $backupManifest -PathType Leaf)) {
         throw "Deployment backup verification failed: $backupDirectory"
@@ -104,8 +116,8 @@ try {
     Assert-AccountsPayloadMatches -SourceDirectory $currentLivePackage.VersionDirectory -DestinationDirectory $backupPackage.VersionDirectory
     $backupCreated = $true
 
-    $destinationApplicationFiles = Join-Path $destination 'Application Files'
-    Copy-Item -LiteralPath $package.VersionDirectory -Destination $destinationApplicationFiles -Recurse
+    $destinationVersionCopyStarted = $true
+    Copy-AccountsDirectoryFast -Source $package.VersionDirectory -Destination $destinationVersionDirectory
     Assert-AccountsPayloadMatches -SourceDirectory $package.VersionDirectory -DestinationDirectory $destinationVersionDirectory
 
     $destinationSetup = Join-Path $destination 'setup.exe'
@@ -132,6 +144,10 @@ catch {
         Write-Warning 'Deployment verification failed. Restoring the previous root manifest and setup file.'
         Copy-Item -LiteralPath (Join-Path $backupDirectory 'setup.exe') -Destination (Join-Path $destination 'setup.exe') -Force
         Copy-Item -LiteralPath (Join-Path $backupDirectory 'Accounts.application') -Destination $liveManifest -Force
+    }
+    if ($destinationVersionCopyStarted -and (Test-Path -LiteralPath $destinationVersionDirectory -PathType Container)) {
+        Write-Warning "Removing incomplete version payload: $destinationVersionDirectory"
+        Remove-Item -LiteralPath $destinationVersionDirectory -Recurse -Force
     }
     throw
 }

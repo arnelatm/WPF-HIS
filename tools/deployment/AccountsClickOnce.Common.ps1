@@ -324,6 +324,49 @@ function Assert-AccountsPayloadMatches {
     }
 }
 
+function Copy-AccountsDirectoryFast {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Source,
+
+        [Parameter(Mandatory = $true)]
+        [string]$Destination
+    )
+
+    if (-not (Test-Path -LiteralPath $Source -PathType Container)) {
+        throw "Copy source directory was not found: $Source"
+    }
+    if (Test-Path -LiteralPath $Destination) {
+        throw "Copy destination already exists: $Destination"
+    }
+
+    $robocopy = Get-Command robocopy.exe -ErrorAction SilentlyContinue
+    if ($null -eq $robocopy) {
+        throw 'robocopy.exe was not found. Run the deployment from Windows.'
+    }
+
+    $arguments = @(
+        $Source,
+        $Destination,
+        '/E',
+        '/COPY:DAT',
+        '/DCOPY:DAT',
+        '/MT:16',
+        '/R:1',
+        '/W:2',
+        '/NFL',
+        '/NDL',
+        '/NP',
+        '/NJH',
+        '/NJS'
+    )
+    $null = & $robocopy.Source @arguments 2>&1
+    $exitCode = $LASTEXITCODE
+    if ($exitCode -ge 8) {
+        throw "robocopy failed with exit code $exitCode while copying '$Source' to '$Destination'."
+    }
+}
+
 function Assert-AccountsFileMatches {
     param(
         [Parameter(Mandatory = $true)]
