@@ -19,6 +19,16 @@ Public Class CDgvDecimalColumn
         DefaultCellStyle.Format = StrDup(length - nDecimalPlaces - 2, "#") + "0." + StrDup(nDecimalPlaces, "0")
     End Sub
 
+    Public Overrides Function Clone() As Object
+        Dim copy = DirectCast(MyBase.Clone(), CDgvDecimalColumn)
+        ' Preserve the inherited style/read-only state without running property setters.
+        copy._displayOnly = _displayOnly
+        copy._editingMode = _editingMode
+        copy._translatable = _translatable
+        copy.DecimalPlaces = DecimalPlaces
+        Return copy
+    End Function
+
     <Category("Custom Properties")>
     <DefaultValue(False)>
     <DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)>

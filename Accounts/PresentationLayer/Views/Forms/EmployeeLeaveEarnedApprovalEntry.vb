@@ -143,4 +143,10 @@ Public Class EmployeeLeaveEarnedApprovalEntry
         btnAdd.PerformClick()
     End Sub
 
+    Private Sub ApplyMissingNumericColumnFormats(sender As Object, e As EventArgs) Handles MyBase.Shown
+        ' Apply only missing display formats; preserve field values and existing formats.
+        Global.AATM.Libraries.CBaseControlsLibrary.NumericGridFormatting.SetFormatIfMissing(DaysEarned, "F0")
+    End Sub
+
+
 End Class

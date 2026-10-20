@@ -17,6 +17,23 @@ Public Class CdgvMoneyColumn
         DefaultCellStyle.Format = "###,##0.00"
     End Sub
 
+    Public Overrides Function Clone() As Object
+        Dim copy = DirectCast(MyBase.Clone(), CdgvMoneyColumn)
+        ' Preserve the inherited style/read-only state without running property setters.
+        copy._displayOnly = _displayOnly
+        copy._editingMode = _editingMode
+        copy._translatable = _translatable
+        copy.FindDataType = FindDataType
+        copy.FindEnabled = FindEnabled
+        copy.BegFindValue = BegFindValue
+        copy.EndFindValue = EndFindValue
+        copy.SearchPlace = SearchPlace
+        copy.FieldName = FieldName
+        copy.FieldDescription = FieldDescription
+        copy.IgnoreCase = IgnoreCase
+        Return copy
+    End Function
+
     <Category("Custom Properties")>
     <DefaultValue(False)>
     <DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)>

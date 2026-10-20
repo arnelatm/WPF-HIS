@@ -31,13 +31,14 @@ Public Class CDgvTextBoxCell
     <Browsable(True)>
     Public Property ValueIsNumeric As Boolean = False
 
-    'Public Overrides Function Clone() As Object
-    '    Dim copy As CDgvTextBoxCell = TryCast(MyBase.Clone(), CDgvTextBoxCell)
-    '    copy.DisplayOnly = DisplayOnly
-    '    copy.Translatable = Translatable
-    '    copy.EditingMode = EditingMode
-    '    Return copy
-    'End Function
+    Public Overrides Function Clone() As Object
+        Dim copy = DirectCast(MyBase.Clone(), CDgvTextBoxCell)
+        copy.DisplayOnly = DisplayOnly
+        copy.ValueIsNumeric = ValueIsNumeric
+        copy._editingMode = _editingMode
+        copy._translatable = _translatable
+        Return copy
+    End Function
 
     Public Property EditingMode As Boolean Implements IEntryControl.EditingMode
         Get

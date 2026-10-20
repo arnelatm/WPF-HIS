@@ -16,6 +16,29 @@ Public Class CDgvDecimalCell
     <Browsable(True)>
     Public Property DisplayOnly As Boolean = False
 
+    Protected Overrides Function GetFormattedValue(value As Object,
+                                                   rowIndex As Integer,
+                                                   ByRef cellStyle As DataGridViewCellStyle,
+                                                   valueTypeConverter As TypeConverter,
+                                                   formattedValueTypeConverter As TypeConverter,
+                                                   context As DataGridViewDataErrorContexts) As Object
+        If TypeOf value Is Decimal AndAlso String.IsNullOrEmpty(cellStyle.Format) Then
+            ' Normalize scale-only differences without guessing precision or changing the value.
+            Dim displayStyle = cellStyle.Clone()
+            displayStyle.Format = NumericGridFormatting.UnspecifiedDecimalFormat
+            Return MyBase.GetFormattedValue(value, rowIndex, displayStyle, valueTypeConverter, formattedValueTypeConverter, context)
+        End If
+        Return MyBase.GetFormattedValue(value, rowIndex, cellStyle, valueTypeConverter, formattedValueTypeConverter, context)
+    End Function
+
+    Public Overrides Function Clone() As Object
+        Dim copy = DirectCast(MyBase.Clone(), CDgvDecimalCell)
+        copy.DisplayOnly = DisplayOnly
+        copy._editingMode = _editingMode
+        copy._translatable = _translatable
+        Return copy
+    End Function
+
     Public Property EditingMode As Boolean Implements IEntryControl.EditingMode
         Get
             Return _editingMode
@@ -34,7 +57,7 @@ Public Class CDgvDecimalCell
         Else
             [ReadOnly] = False
             Style.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-            Style.BackColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+            Style.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             [ReadOnly] = True
         End If
     End Sub

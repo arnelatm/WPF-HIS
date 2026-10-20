@@ -237,6 +237,11 @@ Public Class CMaskedTextBox
 
         Const separator = "-"
 
+        If ContextMenuStrip1 Is Nothing OrElse ContextMenuStrip1.IsDisposed Then Return
+        ' Clear removes items without disposing their resources or event handlers.
+        For Each item As ToolStripItem In ContextMenuStrip1.Items.Cast(Of ToolStripItem)().ToArray()
+            item.Dispose()
+        Next
         ContextMenuStrip1.Items.Clear()
 
         Dim menuItemFind As New ToolStripMenuItem With {
@@ -253,7 +258,7 @@ Public Class CMaskedTextBox
         ContextMenuStrip1.Items.Add(menuItemUndo)
         menuItemUndo.ShortcutKeys = Keys.Control Or Keys.Z
         menuItemUndo.ShortcutKeyDisplayString = "Ctrl-Z"
-        'menuItemUndo.Enabled = (IIf(SampleTextBox.CanUndo, True, False))
+        menuItemUndo.Enabled = CanEditText AndAlso CanUndo
         AddHandler menuItemUndo.Click, AddressOf MenuItemUndo_Click
 
         ContextMenuStrip1.Items.Add(separator)
@@ -262,7 +267,7 @@ Public Class CMaskedTextBox
                 .Text = _textCut
                 }
         ContextMenuStrip1.Items.Add(menuItemCut)
-        ' menuItemCut.Enabled = (IIf(SampleTextBox.SelectionLength = 0, False, True))
+        menuItemCut.Enabled = CanEditText AndAlso SelectionLength > 0
         menuItemCut.ShortcutKeys = Keys.Control Or Keys.X
         menuItemCut.ShortcutKeyDisplayString = "Ctrl-X"
         AddHandler menuItemCut.Click, AddressOf MenuItemCut_Click
@@ -282,7 +287,7 @@ Public Class CMaskedTextBox
         ContextMenuStrip1.Items.Add(menuItemPaste)
         menuItemPaste.ShortcutKeys = Keys.Control Or Keys.V
         menuItemPaste.ShortcutKeyDisplayString = "Ctrl-V"
-        'menuItemPaste.Enabled = (IIf(My.Computer.Clipboard.GetText() = "", False, True))
+        menuItemPaste.Enabled = CanEditText
         AddHandler menuItemPaste.Click, AddressOf MenuItemPaste_Click
 
         Dim menuItemDelete As New ToolStripMenuItem With {
@@ -291,6 +296,7 @@ Public Class CMaskedTextBox
         ContextMenuStrip1.Items.Add(menuItemDelete)
         menuItemDelete.ShortcutKeys = Keys.Delete
         menuItemDelete.ShortcutKeyDisplayString = "Delete"
+        menuItemDelete.Enabled = CanEditText AndAlso SelectionLength > 0
         AddHandler menuItemDelete.Click, AddressOf MenuItemDelete_Click
 
         ContextMenuStrip1.Items.Add(separator)
@@ -306,6 +312,18 @@ Public Class CMaskedTextBox
         ContextMenuStrip1.Items.Add(separator)
 
         'End If
+    End Sub
+
+    Protected Overrides Sub Dispose(disposing As Boolean)
+        Try
+            If disposing AndAlso ContextMenuStrip1 IsNot Nothing Then
+                ' Dispose only the menu created by this control, not a caller's replacement.
+                ContextMenuStrip1.Dispose()
+                ContextMenuStrip1 = Nothing
+            End If
+        Finally
+            MyBase.Dispose(disposing)
+        End Try
     End Sub
 
     <Category("Custom Properties")>
@@ -348,8 +366,14 @@ Public Class CMaskedTextBox
         Invoker.InvokeFunction(myForm, "FindFieldNew", {Me})
     End Sub
 
+    Private ReadOnly Property CanEditText As Boolean
+        Get
+            Return Enabled AndAlso Not [ReadOnly] AndAlso Not DisplayOnly AndAlso (EditingMode OrElse AlwaysEditable)
+        End Get
+    End Property
+
     Private Sub MenuItemCut_Click()
-        Cut()
+        If CanEditText Then Cut()
     End Sub
 
     Private Sub MenuItemCopy_Click()
@@ -357,7 +381,7 @@ Public Class CMaskedTextBox
     End Sub
 
     Private Sub MenuItemPaste_Click()
-        Paste()
+        If CanEditText Then Paste()
     End Sub
 
     Private Sub MenuItemSelectAll_Click()
@@ -365,15 +389,13 @@ Public Class CMaskedTextBox
     End Sub
 
     Private Sub MenuItemUndo_Click()
-        Undo()
+        If CanEditText AndAlso CanUndo Then Undo()
     End Sub
 
     Private Sub MenuItemDelete_Click()
-        Dim clipBoardText As String
-        clipBoardText = Clipboard.GetText()
-        Cut()
-        If clipBoardText <> "" Then
-            Clipboard.SetText(clipBoardText)
+        If CanEditText AndAlso SelectionLength > 0 Then
+            ' MaskedTextBox applies the deletion through its mask without using the clipboard.
+            SelectedText = String.Empty
         End If
     End Sub
 

@@ -16,6 +16,14 @@ Public Class CDgvMoneyCell
     <Browsable(True)>
     Public Property DisplayOnly As Boolean = False
 
+    Public Overrides Function Clone() As Object
+        Dim copy = DirectCast(MyBase.Clone(), CDgvMoneyCell)
+        copy.DisplayOnly = DisplayOnly
+        copy._editingMode = _editingMode
+        copy._translatable = _translatable
+        Return copy
+    End Function
+
     Public Property EditingMode As Boolean Implements IEntryControl.EditingMode
         Get
             Return _editingMode
@@ -27,7 +35,7 @@ Public Class CDgvMoneyCell
     End Property
 
     Public Sub UpdateDisplayOnlyControl()
-        If Value And Not DisplayOnly Then
+        If _editingMode AndAlso Not DisplayOnly Then
             Style.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
             Style.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
             [ReadOnly] = False

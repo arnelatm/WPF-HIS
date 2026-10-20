@@ -640,6 +640,13 @@ Namespace PresentationLayer.Views.Forms
             cboInvTransTypeIdNo.DisplayOnly = False
         End Sub
 
+        Private Sub ApplyMissingNumericColumnFormats(sender As Object, e As EventArgs) Handles MyBase.Shown
+            ' Apply only missing display formats; preserve field values and existing formats.
+            Global.AATM.Libraries.CBaseControlsLibrary.NumericGridFormatting.SetFormatIfMissing(dgvQuantity, "F4")
+            Global.AATM.Libraries.CBaseControlsLibrary.NumericGridFormatting.SetFormatIfMissing(dgvUnitCost, "F4")
+        End Sub
+
+
     End Class
 
 End Namespace

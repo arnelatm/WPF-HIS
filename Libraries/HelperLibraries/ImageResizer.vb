@@ -20,24 +20,29 @@ Public Class ImageResizer
         Using ms As MemoryStream = New MemoryStream()
             Using fs As FileStream = New FileStream(_sourcePath, FileMode.Open)
                 Dim bmp As Bitmap = CType(Image.FromStream(fs), Bitmap)
-                SaveTemporary(bmp, ms, 100)
-                Dim prevSize As Double = ms.Length
-                While ms.Length < 0.9 * _allowedFileSizeInByte OrElse ms.Length > _allowedFileSizeInByte
-                    Dim scale As Double = Math.Sqrt(CDbl(_allowedFileSizeInByte) / CDbl(ms.Length))
-                    ms.SetLength(0)
-                    bmp = ScaleImage(bmp, scale)
+                Try
                     SaveTemporary(bmp, ms, 100)
-                    If Math.Abs(prevSize - ms.Length) < 10 Then
-                        If (ms.Length / prevSize) > 1.5 Then
-                            MessageBox.Show("File too large please limit file size to " + _allowedFileSizeInByte.ToString())
-                            retValue = False
+                    Dim prevSize As Double = ms.Length
+                    While ms.Length < 0.9 * _allowedFileSizeInByte OrElse ms.Length > _allowedFileSizeInByte
+                        Dim scale As Double = Math.Sqrt(CDbl(_allowedFileSizeInByte) / CDbl(ms.Length))
+                        ms.SetLength(0)
+                        Dim previousBitmap = bmp
+                        bmp = ScaleImage(previousBitmap, scale)
+                        previousBitmap.Dispose()
+                        SaveTemporary(bmp, ms, 100)
+                        If Math.Abs(prevSize - ms.Length) < 10 Then
+                            If (ms.Length / prevSize) > 1.5 Then
+                                MessageBox.Show("File too large please limit file size to " + _allowedFileSizeInByte.ToString())
+                                retValue = False
+                            End If
+                            Exit While
                         End If
-                        Exit While
-                    End If
-                    prevSize = ms.Length
-                End While
-                If bmp IsNot Nothing Then bmp.Dispose()
-                SaveImageToFile(ms)
+                        prevSize = ms.Length
+                    End While
+                    SaveImageToFile(ms)
+                Finally
+                    If bmp IsNot Nothing Then bmp.Dispose()
+                End Try
             End Using
         End Using
         Return retValue
@@ -51,32 +56,38 @@ Public Class ImageResizer
     End Sub
 
     Private Sub SaveTemporary(ByVal bmp As Bitmap, ByVal ms As MemoryStream, ByVal quality As Integer)
-        Dim qualityParam As EncoderParameter = New EncoderParameter(Encoder.Quality, quality)
         Dim codec = GetImageCodecInfo()
-        Dim encoderParams = New EncoderParameters(1)
-        encoderParams.Param(0) = qualityParam
-        If codec IsNot Nothing Then
-            bmp.Save(ms, codec, encoderParams)
-        Else
-            bmp.Save(ms, GetImageFormat())
-        End If
+        Using encoderParams As New EncoderParameters(1)
+            ' EncoderParameters owns and disposes its contained EncoderParameter.
+            encoderParams.Param(0) = New EncoderParameter(Encoder.Quality, quality)
+            If codec IsNot Nothing Then
+                bmp.Save(ms, codec, encoderParams)
+            Else
+                bmp.Save(ms, GetImageFormat())
+            End If
+        End Using
     End Sub
 
     Public Function ScaleImage(ByVal image As Bitmap, ByVal scale As Double) As Bitmap
         Dim newWidth As Integer = CInt((image.Width * scale))
         Dim newHeight As Integer = CInt((image.Height * scale))
         Dim result As Bitmap = New Bitmap(newWidth, newHeight, PixelFormat.Format24bppRgb)
-        result.SetResolution(image.HorizontalResolution, image.VerticalResolution)
+        Try
+            result.SetResolution(image.HorizontalResolution, image.VerticalResolution)
 
-        Using g As Graphics = Graphics.FromImage(result)
-            g.InterpolationMode = InterpolationMode.HighQualityBicubic
-            g.CompositingQuality = CompositingQuality.HighQuality
-            g.SmoothingMode = SmoothingMode.HighQuality
-            g.PixelOffsetMode = PixelOffsetMode.HighQuality
-            g.DrawImage(image, 0, 0, result.Width, result.Height)
-        End Using
+            Using g As Graphics = Graphics.FromImage(result)
+                g.InterpolationMode = InterpolationMode.HighQualityBicubic
+                g.CompositingQuality = CompositingQuality.HighQuality
+                g.SmoothingMode = SmoothingMode.HighQuality
+                g.PixelOffsetMode = PixelOffsetMode.HighQuality
+                g.DrawImage(image, 0, 0, result.Width, result.Height)
+            End Using
 
-        Return result
+            Return result
+        Catch
+            result.Dispose()
+            Throw
+        End Try
     End Function
 
     Private Function GetImageCodecInfo() As ImageCodecInfo

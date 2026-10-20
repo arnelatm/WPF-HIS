@@ -17,10 +17,19 @@ Public Class CDgvTextColumn
     End Sub
 
     Public Overrides Function Clone() As Object
-        Dim copy As CDgvTextColumn = TryCast(MyBase.Clone(), CDgvTextColumn)
-        copy.DisplayOnly = DisplayOnly
-        copy.EditingMode = EditingMode
-        copy.Translatable = Translatable
+        Dim copy = DirectCast(MyBase.Clone(), CDgvTextColumn)
+        ' Keep the inherited style/read-only state without invoking editing setters.
+        copy._displayOnly = _displayOnly
+        copy._editingMode = _editingMode
+        copy._translatable = _translatable
+        copy.FindDataType = FindDataType
+        copy.FindEnabled = FindEnabled
+        copy.BegFindValue = BegFindValue
+        copy.EndFindValue = EndFindValue
+        copy.SearchPlace = SearchPlace
+        copy.FieldName = FieldName
+        copy.FieldDescription = FieldDescription
+        copy.IgnoreCase = IgnoreCase
         Return copy
     End Function
 

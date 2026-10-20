@@ -1598,30 +1598,29 @@ Public Class BfMain
     End Function
 
     Protected Sub ProcessCellEndEdit(dataGridView As DataGridView, bindingSource As BindingSource)
-        Dim firstDisplayedRow = dataGridView.FirstDisplayedScrollingRowIndex
-        If bindingSource.Current IsNot Nothing Then
+        If dataGridView Is Nothing OrElse bindingSource Is Nothing OrElse
+            dataGridView.IsDisposed OrElse dataGridView.Disposing Then Return
+
+        ' Binding resets can leave a current item without a selected grid cell.
+        Dim currentCell = dataGridView.CurrentCell
+        Dim currentRow = dataGridView.CurrentRow
+        If bindingSource.Current IsNot Nothing AndAlso currentCell IsNot Nothing AndAlso
+            currentRow IsNot Nothing AndAlso currentCell.OwningColumn IsNot Nothing Then
             Ea.PublishEvent(New DgvItemsChanged(bindingSource,
-                                                dataGridView.CurrentRow.Index,
-                                                dataGridView.CurrentCell.OwningColumn.DataPropertyName,
-                                                dataGridView.CurrentCell.OwningColumn.Name,
-                                                dataGridView.CurrentCell.Value))
+                                                currentRow.Index,
+                                                currentCell.OwningColumn.DataPropertyName,
+                                                currentCell.OwningColumn.Name,
+                                                currentCell.Value))
         End If
         bindingSource.ResetBindings(False)
     End Sub
 
     Protected Sub ProcessCellValidating(dataGridView As DataGridView, bindingSource As BindingSource)
-        Dim firstDisplayedRow = dataGridView.FirstDisplayedScrollingRowIndex
-        Ea.PublishEvent(New DgvItemsChanged(bindingSource,
-                                                dataGridView.CurrentRow.Index,
-                                                dataGridView.CurrentCell.OwningColumn.DataPropertyName,
-                                                dataGridView.CurrentCell.OwningColumn.Name,
-                                                dataGridView.CurrentCell.Value))
-        bindingSource.ResetBindings(False)
+        ProcessCellEndEdit(dataGridView, bindingSource)
     End Sub
 
     Public Sub RunSubForm(Of TF, TP)(data As Object, subFormParent As Form)
         Dim childForm = Activator.CreateInstance(GetType(TF), data)
-        Activator.CreateInstance(GetType(TP), {childForm})
         Dim pType As Type = GetType(TP)
         childForm.Presenter = Activator.CreateInstance(pType, {childForm})
         childForm.Show()
@@ -1638,7 +1637,6 @@ Public Class BfMain
 
     Public Sub RunSubForm(Of TF, TP)(subFormParent As Form)
         Dim childForm = Activator.CreateInstance(GetType(TF))
-        Activator.CreateInstance(GetType(TP), {childForm})
         Dim pType As Type = GetType(TP)
         childForm.Presenter = Activator.CreateInstance(pType, {childForm})
         childForm.Show()

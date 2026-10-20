@@ -336,6 +336,19 @@ Namespace PresentationLayer.Views.Forms
         Private Sub CButton3_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles CButton3.ClickButtonArea
             RaiseEvent PostPayroll(Me)
         End Sub
+
+        Private Sub ApplyMissingNumericColumnFormats(sender As Object, e As EventArgs) Handles MyBase.Shown
+            ' Apply only missing display formats; preserve field values and existing formats.
+            Global.AATM.Libraries.CBaseControlsLibrary.NumericGridFormatting.SetFormatIfMissing(OvertimeHolidayDataGridViewTextBoxColumn, "F4")
+            Global.AATM.Libraries.CBaseControlsLibrary.NumericGridFormatting.SetFormatIfMissing(OvertimeRegularDataGridViewTextBoxColumn, "F4")
+            Global.AATM.Libraries.CBaseControlsLibrary.NumericGridFormatting.SetFormatIfMissing(OvertimeSpecialDataGridViewTextBoxColumn, "F4")
+            Global.AATM.Libraries.CBaseControlsLibrary.NumericGridFormatting.SetFormatIfMissing(dgvDaysAbsentWithPay, "F4")
+            Global.AATM.Libraries.CBaseControlsLibrary.NumericGridFormatting.SetFormatIfMissing(dgvDaysAbsentWoPay, "F4")
+            Global.AATM.Libraries.CBaseControlsLibrary.NumericGridFormatting.SetFormatIfMissing(dgvDaysOff, "F4")
+            Global.AATM.Libraries.CBaseControlsLibrary.NumericGridFormatting.SetFormatIfMissing(dgvDaysTotal, "F4")
+            Global.AATM.Libraries.CBaseControlsLibrary.NumericGridFormatting.SetFormatIfMissing(dgvDaysVacationLeave, "F4")
+        End Sub
+
     End Class
 
 End Namespace

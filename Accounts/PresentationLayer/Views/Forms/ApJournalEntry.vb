@@ -451,6 +451,14 @@ Namespace PresentationLayer.Views.Forms
                 If grid.Columns.Contains(columnName) Then grid.Columns(columnName).DefaultCellStyle.Format = "N" & GlobalVariables.DefaultCurrencyFormatInfo.CurrencyDecimalDigits
             Next
         End Sub
+
+        Private Sub ApplyMissingNumericColumnFormats(sender As Object, e As EventArgs) Handles MyBase.Shown
+            ' Apply only missing display formats; preserve field values and existing formats.
+            Global.AATM.Libraries.CBaseControlsLibrary.NumericGridFormatting.SetFormatIfMissing(OriginalAmountDataGridViewTextBoxColumn, "N" & Global.AATM.Libraries.GlobalFuncNSub.GlobalVariables.DefaultCurrencyFormatInfo.CurrencyDecimalDigits)
+            Global.AATM.Libraries.CBaseControlsLibrary.NumericGridFormatting.SetFormatIfMissing(dgvDiscountTaken, "N" & Global.AATM.Libraries.GlobalFuncNSub.GlobalVariables.DefaultCurrencyFormatInfo.CurrencyDecimalDigits)
+            Global.AATM.Libraries.CBaseControlsLibrary.NumericGridFormatting.SetFormatIfMissing(dgvPaidAmount, "N" & Global.AATM.Libraries.GlobalFuncNSub.GlobalVariables.DefaultCurrencyFormatInfo.CurrencyDecimalDigits)
+        End Sub
+
     End Class
 
 End Namespace

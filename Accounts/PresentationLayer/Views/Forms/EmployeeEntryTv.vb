@@ -550,6 +550,7 @@ Namespace PresentationLayer.Views.Forms
                 dgvEarningIdNo.DisplayMember = "Name"
                 dgvEarningIdNo.ValueMember = "IdNo"
                 dgvEarningIdNo.DisplayStyleForCurrentCellOnly = True
+                dgvEarningRate.DefaultCellStyle.Format = "0.0000"
                 dgvEarningUnit.DataSource = Unit
                 dgvEarningUnit.ValueMember = "Code"
                 dgvEarningUnit.DisplayMember = "Name"
@@ -863,6 +864,16 @@ Namespace PresentationLayer.Views.Forms
             End Try
 
         End Sub
+
+        Private Sub ApplyMissingNumericColumnFormats(sender As Object, e As EventArgs) Handles MyBase.Shown
+            ' Apply only missing display formats; preserve field values and existing formats.
+            Global.AATM.Libraries.CBaseControlsLibrary.NumericGridFormatting.SetFormatIfMissing(dgvAccumulatedLeave, "F2")
+            Global.AATM.Libraries.CBaseControlsLibrary.NumericGridFormatting.SetFormatIfMissing(dgvLeaveAllowed, "F2")
+            Global.AATM.Libraries.CBaseControlsLibrary.NumericGridFormatting.SetFormatIfMissing(dgvMaxCarryOver, "F2")
+            Global.AATM.Libraries.CBaseControlsLibrary.NumericGridFormatting.SetFormatIfMissing(dgvMaxLimit, "F2")
+            Global.AATM.Libraries.CBaseControlsLibrary.NumericGridFormatting.SetFormatIfMissing(dgvPaidPercent, "F2")
+        End Sub
+
 
 
     End Class

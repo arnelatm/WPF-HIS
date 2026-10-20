@@ -532,6 +532,7 @@
     <Compile Include="Core\ValidationControl.vb" />
     <Compile Include="Core\ValidationControlCollection.vb" />
     <Compile Include="DataGridViewControls\VirtualDataGridView.vb" />
+    <Compile Include="DataGridViewControls\NumericGridFormatting.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="StandardControls\ATabPage.resx">

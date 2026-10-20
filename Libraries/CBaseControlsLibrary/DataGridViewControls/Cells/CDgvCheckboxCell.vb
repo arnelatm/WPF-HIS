@@ -37,6 +37,7 @@ Public Class CDgvCheckboxCell
 
     Public Overrides Function Clone() As Object
         Dim copy As CDgvCheckboxCell = TryCast(MyBase.Clone(), CDgvCheckboxCell)
+        copy.AlwaysEditable = AlwaysEditable
         copy.DisplayOnly = DisplayOnly
         copy.EditingMode = EditingMode
         copy.Translatable = Translatable

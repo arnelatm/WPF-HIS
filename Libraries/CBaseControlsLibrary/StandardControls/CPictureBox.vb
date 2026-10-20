@@ -1,6 +1,7 @@
 Imports System.ComponentModel
 Imports System.Drawing
 Imports System.IO
+Imports System.Runtime.InteropServices
 Imports System.Windows.Forms
 
 Public Class CPictureBox
@@ -42,11 +43,9 @@ Public Class CPictureBox
                     Image = Nothing
                 Else
                     Image = _previousImage
+                    _previousImage = Nothing
                 End If
             ElseIf e.Button = MouseButtons.Left Then
-                'Dim fd As OpenFileDialog = New OpenFileDialog()
-                Dim strFileName As String = Nothing
-                Dim oldImage = Image
                 Using fd As OpenFileDialog = New OpenFileDialog()
                     fd.Title = $"Open File Dialog"
                     fd.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.MyPictures)
@@ -54,23 +53,14 @@ Public Class CPictureBox
                     fd.FilterIndex = 1
                     fd.RestoreDirectory = True
                     If fd.ShowDialog() = DialogResult.OK Then
-                        strFileName = fd.FileName
-                        Me.Image = Drawing.Image.FromFile(strFileName)
-                        Dim fileInfo As New FileInfo(strFileName)
-                        Dim length As Long = fileInfo.Length
-                        If MaxImageSize > 0 Then
-                            If fileInfo.Length > MaxImageSize Then
-                                Image.Dispose()
-                                Image = Nothing
-                                Dim fileExtension = fileInfo.Extension
-                                Dim path As String = GlobalFuncNSub.GetTempFileName(fileExtension)
-                                Dim resizer As ImageResizer = New ImageResizer(MaxImageSize, strFileName, path)
-                                If Not resizer.ScaleImage() Then
-                                    MessageBox.Show("Cannot scale image to " & MaxImageSize.ToString() & $" bytes size. Either select a smaller file size or resize the image manually to less than or equal to " & MaxImageSize.ToString() & " bytes.")
-                                End If
-                                Image = Drawing.Image.FromFile(path)
-                            End If
-                        End If
+                        Try
+                            ReplaceImageFromFile(fd.FileName)
+                        Catch ex As Exception When TypeOf ex Is IOException OrElse
+                            TypeOf ex Is UnauthorizedAccessException OrElse TypeOf ex Is ArgumentException OrElse
+                            TypeOf ex Is ExternalException OrElse TypeOf ex Is OutOfMemoryException OrElse
+                            TypeOf ex Is InvalidOperationException
+                            MessageBox.Show(MessagingLibrary.Messaging.TranslateCaption("Unable to load the selected image. Please select a valid image within the allowed size."))
+                        End Try
                     End If
                 End Using
             End If
@@ -78,6 +68,61 @@ Public Class CPictureBox
     End Sub
 
     Private _previousImage As Image
+    Private _ownedImage As Image
+
+    Private Sub ReplaceImageFromFile(fileName As String)
+        Dim replacement = LoadSelectedImage(fileName)
+        Try
+            Image = replacement
+        Catch
+            replacement.Dispose()
+            Throw
+        End Try
+
+        ' Images assigned by a form or shared resource remain owned by that caller.
+        Dim oldOwnedImage = _ownedImage
+        _ownedImage = replacement
+        _previousImage = Nothing
+        If oldOwnedImage IsNot Nothing Then oldOwnedImage.Dispose()
+    End Sub
+
+    Private Function LoadSelectedImage(fileName As String) As Image
+        Dim temporaryPath As String = Nothing
+        Try
+            Dim imagePath = fileName
+            If MaxImageSize > 0 AndAlso New FileInfo(fileName).Length > MaxImageSize Then
+                temporaryPath = GlobalFuncNSub.GetTempFileName(Path.GetExtension(fileName))
+                Dim resizer As New ImageResizer(MaxImageSize, fileName, temporaryPath)
+                If Not resizer.ScaleImage() OrElse New FileInfo(temporaryPath).Length > MaxImageSize Then
+                    Throw New InvalidOperationException("The image could not be resized within the allowed size.")
+                End If
+                imagePath = temporaryPath
+            End If
+
+            ' Copy the decoded pixels so the source and temporary files are not locked.
+            Using sourceImage = Drawing.Image.FromFile(imagePath)
+                Return New Bitmap(sourceImage)
+            End Using
+        Finally
+            If temporaryPath IsNot Nothing Then
+                Try
+                    File.Delete(temporaryPath)
+                Catch ex As IOException
+                    Debug.WriteLine("Unable to remove the temporary resized image.")
+                Catch ex As UnauthorizedAccessException
+                    Debug.WriteLine("Unable to remove the temporary resized image.")
+                End Try
+            End If
+        End Try
+    End Function
+
+    Private Sub CPictureBox_Disposed(sender As Object, e As EventArgs) Handles MyBase.Disposed
+        _previousImage = Nothing
+        If _ownedImage IsNot Nothing Then
+            _ownedImage.Dispose()
+            _ownedImage = Nothing
+        End If
+    End Sub
 
     'Private Sub imgPicture_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles MyBase.MouseDoubleClick, MyBase.MouseDown
     '    If Not DisplayOnly AndAlso EditingMode Then

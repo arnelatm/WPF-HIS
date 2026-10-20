@@ -193,6 +193,14 @@ Namespace PresentationLayer.Views.Forms
             'UpdateTotals()
         End Sub
 
+        Private Sub ApplyMissingNumericColumnFormats(sender As Object, e As EventArgs) Handles MyBase.Shown
+            ' Apply only missing display formats; preserve field values and existing formats.
+            Global.AATM.Libraries.CBaseControlsLibrary.NumericGridFormatting.SetFormatIfMissing(dgvQtyApproved, "F4")
+            Global.AATM.Libraries.CBaseControlsLibrary.NumericGridFormatting.SetFormatIfMissing(dgvQtyOnHand, "F4")
+            Global.AATM.Libraries.CBaseControlsLibrary.NumericGridFormatting.SetFormatIfMissing(dgvQtySupplied, "F4")
+        End Sub
+
+
     End Class
 
 End Namespace
