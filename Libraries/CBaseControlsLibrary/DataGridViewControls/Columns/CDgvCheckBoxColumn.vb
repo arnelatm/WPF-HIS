@@ -18,6 +18,24 @@ Public Class CDgvCheckBoxColumn
         FlatStyle = FlatStyle.Standard
     End Sub
 
+    Public Overrides Function Clone() As Object
+        Dim copy As CDgvCheckBoxColumn = DirectCast(MyBase.Clone(), CDgvCheckBoxColumn)
+        copy._displayOnly = _displayOnly
+        copy._editingMode = _editingMode
+        copy._translatable = _translatable
+        copy.AlwaysEditable = AlwaysEditable
+        copy.FindDataType = FindDataType
+        copy.FindEnabled = FindEnabled
+        copy.BegFindValue = BegFindValue
+        copy.EndFindValue = EndFindValue
+        copy.SearchPlace = SearchPlace
+        copy.FieldName = FieldName
+        copy.FieldDescription = FieldDescription
+        copy.IgnoreCase = IgnoreCase
+        copy.SecurityKey = SecurityKey
+        Return copy
+    End Function
+
     Public Overrides Property CellTemplate() As DataGridViewCell
         Get
             Return MyBase.CellTemplate

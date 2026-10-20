@@ -18,9 +18,9 @@ Public Class CDgvDtpColumn
 
     Public Overrides Function Clone() As Object
         Dim copy As CDgvDtpColumn = TryCast(MyBase.Clone(), CDgvDtpColumn)
-        copy.DisplayOnly = DisplayOnly
-        copy.EditingMode = EditingMode
-        copy.Translatable = Translatable
+        copy._displayOnly = _displayOnly
+        copy._editingMode = _editingMode
+        copy._translatable = _translatable
         Return copy
     End Function
 
@@ -31,9 +31,7 @@ Public Class CDgvDtpColumn
         Set(ByVal value As DataGridViewCell)
 
             ' Ensure that the cell used for the template is a CDgvDtpCell.
-            If (value IsNot Nothing) AndAlso
-                Not value.GetType().IsAssignableFrom(GetType(CDgvDtpCell)) _
-                Then
+            If value IsNot Nothing AndAlso Not TypeOf value Is CDgvDtpCell Then
                 Throw New InvalidCastException("Must be a CDgvDtpCell")
             End If
             MyBase.CellTemplate = value

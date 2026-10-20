@@ -15,17 +15,21 @@
             If IsNothing(pControl) Then
                 Return Nothing
             End If
-            If GetIndex(pControl.Name) < 0 Then
+            Dim index As Integer = GetIndex(pControl.Name)
+            If index < 0 Then
                 Return New ValidationControl
             End If
-            Return (List(GetIndex(pControl.Name)))
+            Return List(index)
         End Get
         Set
-            If IsNothing(pControl) OrElse GetIndex(pControl.Name) < 0 Then
-                List(GetIndex(pControl.Name)) = Nothing
-            Else
-                List(GetIndex(pControl.Name)) = Value
+            If IsNothing(pControl) Then
+                Throw New ArgumentNullException(NameOf(pControl))
             End If
+            Dim index As Integer = GetIndex(pControl.Name)
+            If index < 0 Then
+                Throw New ArgumentException("The control is not registered in this validation collection.", NameOf(pControl))
+            End If
+            List(index) = Value
         End Set
     End Property
 

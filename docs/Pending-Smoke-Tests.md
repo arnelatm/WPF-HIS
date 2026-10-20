@@ -6,6 +6,7 @@ Pending suites:
 
 - [SMOKE-NUMERIC-001: numeric grid display](#smoke-numeric-001-system-wide-numeric-grid-display)
 - [SMOKE-BASE-002: control and base-form fixes](#smoke-base-002-control-and-base-form-fixes)
+- [SMOKE-BASE-003: checkbox/date columns and validation collection](#smoke-base-003-checkboxdate-columns-and-validation-collection)
 
 This is the repository checklist for deferred manual testing. It can be resumed
 while other system updates continue. Pending items are not recorded as passed.
@@ -209,3 +210,49 @@ Next unchecked fix/screen: ____________________
 This suite is not authorization to commit, deploy, execute SQL, or change database
 records. Continue other development as needed and test the latest relevant build
 when returning to this checklist.
+
+
+## SMOKE-BASE-003: checkbox/date columns and validation collection
+
+**Status: pending; recorded for later manual testing on 2026-10-20.**
+
+To resume, say: **"Resume SMOKE-BASE-003 from docs/Pending-Smoke-Tests.md."**
+Use a confirmed non-production database. Cancel edits unless saving test data is
+explicitly authorized. Run the relevant checks in English and Arabic/RTL.
+
+### Deferred application checks
+
+1. Open Employee Maintenance, find an existing employee, and enter edit mode.
+   On Leave Credits, check the Cumulative and No Max Limit checkboxes. Confirm
+   their appearance and editable/read-only behavior match the form's mode and
+   existing permissions. Cancel, reload, and confirm the original values remain.
+2. On Documents, inspect Issue Date and Expiry Date. Enter a valid test date,
+   leave the cell, and confirm its displayed format and colors. Cancel and reload.
+   Verify the date cells remain read-only in view mode and that keyboard navigation
+   and the date editor still work in edit mode.
+3. If the Prescription form is available in this installation, check Print Label
+   and Label Printed behavior. Confirm the established AlwaysEditable behavior
+   and permissions still apply. Do not print or invoke external label devices.
+4. On an entry form with a known required field, start a new record, leave that
+   field empty, and attempt validation. Confirm the expected error appears and
+   prevents saving. Correct the value, confirm the error clears, then cancel.
+5. Record the build/version, form names, language, database environment, results,
+   and any screenshots. Keep this suite pending until these checks are completed.
+
+### Implementation checks already performed
+
+- The three changed source files are included in CBaseControlsLibrary.vbproj.
+- 206 database-free assertions passed for checkbox-column settings, find/security
+  metadata, independent cloned styles/templates, date-column styles/read-only
+  state, accepted date-cell subclasses, rejected incompatible templates, and
+  validation collection replacement/getter/error behavior. Clone checks cover
+  both LTR and RTL settings.
+- CBaseControlsLibrary Debug and the isolated Accounts Debug build passed.
+  Accounts reported nine existing Crystal Reports interop warnings and no errors.
+- 64 earlier clone checks and 98 earlier control regression checks passed.
+- Null and unregistered control replacements now throw explicit argument errors
+  without changing the validation collection. Registered replacements and the
+  existing getter fallback are preserved. This does not change validation rules.
+- No application was started and no database was accessed by these checks.
+- These fixes have not been deployed. ClickOnce 1.0.0.43 contains the preceding
+  batch, not these changes.
