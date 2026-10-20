@@ -127,6 +127,8 @@ Public Class ErrorProviderExtended
     Public Sub SetErrorEvents()
         Dim i As Integer
         For i = 0 To Controls.Count - 1
+            ' Repeated setup must leave only one subscription for this provider.
+            RemoveHandler CType(Controls(i).ControlObj, Control).Validating, AddressOf Validation_Event
             AddHandler CType(Controls(i).ControlObj, Control).Validating, AddressOf Validation_Event
         Next
     End Sub

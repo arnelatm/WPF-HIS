@@ -688,7 +688,8 @@ Public Class CFormEntry
         End If
     End Sub
 
-    Private Sub CFormEntry_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+    ' Final cleanup must wait until closing has been accepted by every handler.
+    Private Sub CFormEntry_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
         CloseForm()
     End Sub
 

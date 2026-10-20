@@ -7,6 +7,8 @@ Pending suites:
 - [SMOKE-NUMERIC-001: numeric grid display](#smoke-numeric-001-system-wide-numeric-grid-display)
 - [SMOKE-BASE-002: control and base-form fixes](#smoke-base-002-control-and-base-form-fixes)
 - [SMOKE-BASE-003: checkbox/date columns and validation collection](#smoke-base-003-checkboxdate-columns-and-validation-collection)
+- [SMOKE-BASE-004: repeated validation-event setup](#smoke-base-004-repeated-validation-event-setup)
+- [SMOKE-BASE-005: accepted and canceled form closing](#smoke-base-005-accepted-and-canceled-form-closing)
 
 This is the repository checklist for deferred manual testing. It can be resumed
 while other system updates continue. Pending items are not recorded as passed.
@@ -254,5 +256,107 @@ explicitly authorized. Run the relevant checks in English and Arabic/RTL.
   without changing the validation collection. Registered replacements and the
   existing getter fallback are preserved. This does not change validation rules.
 - No application was started and no database was accessed by these checks.
-- These fixes have not been deployed. ClickOnce 1.0.0.43 contains the preceding
-  batch, not these changes.
+- Deployment history: these three fixes were deployed in ClickOnce 1.0.0.44.
+  Their manual smoke tests remain pending.
+
+
+## SMOKE-BASE-004: repeated validation-event setup
+
+**Status: pending; recorded for later manual testing on 2026-10-20.**
+
+To resume, say: **"Resume SMOKE-BASE-004 from docs/Pending-Smoke-Tests.md."**
+Use a confirmed non-production database and cancel edits. Repeat relevant checks
+in English and Arabic/RTL. Do not deploy or save production records for this test.
+
+### Scope and implementation evidence
+
+- ErrorProviderExtended.SetErrorEvents now removes its matching Validating handler
+  before adding it. Repeated setup and duplicate control entries leave one handler
+  per provider/control. Validation_Event and validation rules were not changed.
+- No direct application call to SetErrorEvents was found in the searched shared
+  libraries, presentation, Accounts, and Common VB source. The defect was reproduced
+  in isolation; a routine form check alone cannot prove repeated setup was exercised.
+- The pre-fix compiled assembly reproduced two subscriptions after two setup calls.
+- 41 focused checks passed for repeated setup (including 20 further calls), duplicate
+  entries, newly added controls, unregistered controls, independent providers,
+  unrelated event handlers, cancellation preservation, disabled validation, empty
+  input errors, valid-input error clearing, and an empty collection. Checks used
+  WinForms controls in LTR and RTL without application startup or database access.
+- The preceding 206 checkbox/date/validation collection regression assertions passed.
+- CBaseControlsLibrary Debug and the isolated Accounts Debug builds passed. Accounts
+  reported nine existing Crystal interop warnings and one transient parallel-output
+  copy warning; the copy retry succeeded. No build errors remained.
+- This fix has not been deployed. It is not in ClickOnce 1.0.0.44. The subsequent
+  form-closing fix is recorded in SMOKE-BASE-005.
+
+### Deferred manual checks
+
+1. On an entry form with a known required field, enter add/edit mode, leave that
+   field empty, and invoke normal validation. Confirm the expected message/icon
+   appears and the existing save restrictions still apply.
+2. Correct the field and validate again. Confirm the error clears as before.
+   Cancel, reopen the form, and repeat to check ordinary form lifecycle behavior.
+3. Record the form, language, environment, build/commit, and actual results.
+4. If an actual SetErrorEvents caller is identified later, additionally exercise
+   its initialization/reinitialization path. In a debugger, confirm one
+   Validation_Event invocation per field event after repeated setup. Until then,
+   treat this as an isolated subscription fix with supporting form regression checks.
+
+
+## SMOKE-BASE-005: accepted and canceled form closing
+
+**Status: pending; recorded for later manual testing on 2026-10-20.**
+
+To resume, say: **"Resume SMOKE-BASE-005 from docs/Pending-Smoke-Tests.md."**
+Use a confirmed non-production database. Do not save test transactions or invoke
+production shutdown, posting, printing, or database operations for these checks.
+Repeat relevant checks in English and Arabic/RTL.
+
+### Scope and checks already performed
+
+- CFormEntry and CFormBase are included in the active Forms project. Their existing
+  final cleanup now runs on FormClosed rather than FormClosing. The cleanup body,
+  Quit notification, CancelClose decision, and presenter behavior are unchanged.
+  This does not add an unsaved-changes prompt where one does not already exist.
+- The pre-fix compiled assembly reproduced disposal during canceled closing in
+  20 isolated cases across both bases and LTR/RTL settings.
+- 128 checks passed using instantiated base-form subclasses, with application
+  Load/Shown handlers suppressed to prevent database/workflow initialization.
+  Checks cover preserved input and usable controls after cancellation, legacy
+  CancelClose, delayed disposal until FormClosed, and owned-control disposal.
+- Actual hidden-form Close calls verified cancellation by a later event subscriber
+  and subsequent accepted closing. Modal dialogs verified a canceled first attempt,
+  an accepted second attempt, preserved DialogResult.OK, and disposal. Actual MDI
+  parent/child close checks verified cancellation and accepted disposal of both.
+- Event-dispatch checks covered UserClosing, MdiFormClosing, ApplicationExitCall,
+  WindowsShutDown, and FormOwnerClosing reasons. Real application exit and operating
+  system shutdown were not performed; those reason checks were simulated.
+- The earlier #4 validation-event suite passed again (41 checks).
+- The focused Forms Debug build and isolated Accounts Debug build passed. Accounts
+  reported nine existing Crystal interop warnings and no errors.
+- No Accounts application workflow or database was started. This fix has not been
+  deployed; it is not in ClickOnce 1.0.0.44.
+
+### Deferred application checks
+
+1. Open Employee Maintenance, load a record, enter edit mode, and change a harmless
+   field without saving. If the existing workflow provides a canceled-close/keep-
+   editing choice, exercise it using X and Alt+F4. Confirm the form stays open,
+   entered values remain, and controls/navigation still work. If no such choice
+   exists, record that cancellation is not exposed on that screen; do not assume
+   this fix introduces it or intentionally discard valuable edits.
+2. Cancel test edits, close normally with no pending changes, and reopen the form.
+   Repeat for a tree-entry screen and a screen inheriting CFormBase. Confirm normal
+   closing completes and reopening does not report disposed-control errors.
+3. On the test installation, check relevant journal header/detail screens:
+   GeneralJournal, ApJournal, ArJournal, ErJournal, CashReceiptJournal, CdJournal,
+   SalesJournal, PurchaseJournal, and PcJournal. Exercise existing cancellation
+   paths where available, then discard test edits and close/reopen. Existing posted,
+   approved, closed-period, and reconciled protections must remain unchanged; no
+   transaction state or accounting data should be changed for this test.
+4. Exercise an existing modal entry dialog if available. Confirm its accepted and
+   canceled results still reach its caller correctly. Close an MDI parent with a
+   child open and verify existing child cancellation is respected where provided.
+5. With no valuable edits pending, close the test application normally and restart.
+   Record forms, languages, build/commit, database environment, actual results,
+   and any cancellation paths that could not be exercised.
