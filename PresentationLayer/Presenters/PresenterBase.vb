@@ -196,11 +196,19 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
 
     Protected Property MainFieldsDictionary As Dictionary(Of String, Object)
         Get
-            'Return CallByName(View, "MainFieldsDictionary", CallType.Get)
+            If View Is Nothing Then
+                Return _mainFieldsDictionary
+            End If
             Return Invoker.GetField(View, "MainFieldsDictionary")
         End Get
         Set(value As Dictionary(Of String, Object))
-            _mainFieldsDictionary = value
+            If View Is Nothing Then
+                _mainFieldsDictionary = value
+            Else
+                View.GetType().InvokeMember("MainFieldsDictionary",
+                                            BindingFlags.Public Or BindingFlags.Instance Or BindingFlags.SetField,
+                                            Nothing, View, {value})
+            End If
         End Set
     End Property
 
@@ -223,10 +231,19 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
 
     Public Property Ea As EventAggregator
         Get
+            If View Is Nothing Then
+                Return _ea
+            End If
             Return CallByName(View, "Ea", CallType.Get)
         End Get
         Set(value As EventAggregator)
-            _ea = value
+            If View Is Nothing Then
+                _ea = value
+            Else
+                View.GetType().InvokeMember("Ea",
+                                            BindingFlags.Public Or BindingFlags.Instance Or BindingFlags.SetField Or BindingFlags.SetProperty,
+                                            Nothing, View, {value})
+            End If
         End Set
     End Property
 

@@ -214,7 +214,6 @@ Public Class CFormEntry
         If Not HideNavigatorButtons Then
             tsbCurrentRecord.Text = recordPositionNumber.ToString()
             tsbTotalRecords.Text = recordCount.ToString()
-            Application.DoEvents()
             UpdateNavigationButtonDisplay(editMode, addMode, recordPositionNumber, recordCount)
         End If
         If addMode Or editMode Then
@@ -619,6 +618,8 @@ Public Class CFormEntry
             Ea.PublishEvent(saveData)
         End If
         If saveData.ValidData Then
+            EditingMode = False
+            AddingMode = False
             RaiseEvent AfterSave()
             If QuitOnSave Then
                 Close()
@@ -628,8 +629,6 @@ Public Class CFormEntry
                 End If
             End If
         End If
-        EditingMode = False
-        AddingMode = False
     End Sub
 
     Protected Overridable Sub PublishClickedButton(buttonClicked As ButtonClicked)
