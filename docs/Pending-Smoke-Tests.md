@@ -11,6 +11,9 @@ Pending suites:
 - [SMOKE-BASE-005: accepted and canceled form closing](#smoke-base-005-accepted-and-canceled-form-closing)
 - [SMOKE-BASE-006: binding diagnostics and error-provider ownership](#smoke-base-006-binding-diagnostics-and-error-provider-ownership)
 - [SMOKE-BASE-007: form-close cleanup and neutral language fallback](#smoke-base-007-form-close-cleanup-and-neutral-language-fallback)
+- [SMOKE-BASE-008: validation control descriptions](#smoke-base-008-validation-control-descriptions)
+- [SMOKE-BASE-009: RTL sort-key translation](#smoke-base-009-rtl-sort-key-translation)
+- [SMOKE-BASE-010: shared double-buffering helper](#smoke-base-010-shared-double-buffering-helper)
 
 This is the repository checklist for deferred manual testing. It can be resumed
 while other system updates continue. Pending items are not recorded as passed.
@@ -469,3 +472,135 @@ or perform an operating-system shutdown for these tests.
 5. Record build/commit, forms, language, environment, and results. Compare repeated
    open/close responsiveness and memory behavior under comparable workloads if
    assessing performance; no benchmark improvement has yet been claimed.
+
+
+## SMOKE-BASE-008: validation control descriptions
+
+**Status: pending; recorded for later manual testing on 2026-10-21.**
+
+To resume, say: **"Resume SMOKE-BASE-008 from docs/Pending-Smoke-Tests.md."**
+Use a confirmed non-production database and cancel test edits. Repeat relevant
+checks in English and Arabic/RTL. Do not save production records for this test.
+
+### Scope and checks already performed
+
+- The active Presenters project includes PresenterBase.vb. ControlDescription now
+  removes the conventional three-character prefix with Substring(3) when the name
+  is long enough, preserves short names, and returns the control type name for
+  an unnamed control. A missing control throws ArgumentNullException("control").
+- The public method's return signature and linked-label description path remain
+  unchanged. No validation rules, permissions, values, sorting, or database code
+  were modified. Deriving a name does not add a translated/polished caption; the
+  existing linked label remains the preferred description source.
+- The pre-fix compiled assembly reproduced FormatException for txtAmount in LTR
+  and RTL settings. The fixed build passed 62 assertions for prefix removal,
+  short/empty names, linked English/Arabic/missing descriptions, null input,
+  linked-provider call count, and unchanged control names and text values.
+- Checks used an uninitialized test presenter to avoid constructor workflows;
+  no Accounts application startup or database access occurred.
+- Presenters Debug and the isolated Accounts Debug builds passed. Accounts reported
+  nine existing Crystal interop warnings and four transient parallel-output copy
+  warnings; retries succeeded and no build errors remained.
+- Manual testing remains pending. The isolated checks above do not establish
+  application-level validation coverage.
+
+### Deferred application checks
+
+1. On a test entry screen, exercise normal required-field or numeric validation
+   for a control with a linked label. Confirm the existing English/Arabic field
+   description still appears and clears after correction. Cancel edits.
+2. With developer assistance, identify a validation path that calls this helper
+   for a control without ILinkedLabel. Confirm a name such as txtAmount produces
+   Amount rather than a conversion exception. Do not infer fallback coverage from
+   testing only the custom controls that use linked labels.
+3. Record build/commit, forms/controls, language, environment, and actual results.
+
+
+## SMOKE-BASE-009: RTL sort-key translation
+
+**Status: pending; recorded for later manual testing on 2026-10-21.**
+
+To resume, say: **"Resume SMOKE-BASE-009 from docs/Pending-Smoke-Tests.md."**
+Use a confirmed non-production database, cancel test edits, and check English
+and Arabic/RTL. Do not save transactions or change production sort metadata.
+
+### Scope and checks already performed
+
+- The active PresenterBase now translates only the supplied single-field sort key.
+  GetTranslatedSortOrderKey delegates to GetTranslatedField, removing the duplicate
+  parsing that could substitute the presenter's stored SortOrderKey.
+- Trailing ASC and DESC are recognized with ordinal case-insensitive comparisons;
+  the requested suffix spelling/direction is retained. In RTL, the field gains
+  Ara only when the model exposes that property. English/designer mode, missing
+  Arabic properties, already translated fields, and null/blank keys are preserved.
+  Short keys no longer cause negative substring positions.
+- This remains a single-field translator. Compound expressions, bracketed fields,
+  unsupported DES tokens, and trailing-whitespace expressions are not newly parsed.
+  No SQL/database object files were changed and no SQL was executed.
+- The pre-fix assembly reproduced three cases: a supplied Name key replaced by
+  AlternateAra ASC from the stored key, Name DESC failing to use NameAra, and a
+  short key throwing ArgumentOutOfRangeException.
+- 660 isolated assertions passed across both helpers, LTR/RTL/designer mode,
+  ascending/descending and mixed-case directions, differing stored keys (including
+  short/empty/null), missing Arabic properties, already translated fields, short
+  fields, null/blank keys, and preserved compound/unsupported expressions. The
+  stored presenter key is not mutated. Presenter construction and DB access were
+  bypassed; these checks did not exercise real database ordering/navigation.
+- The preceding control-description change was preserved and its 62 checks passed.
+- Presenters Debug and the isolated Accounts Debug builds passed. Accounts reported
+  nine existing Crystal interop warnings and one transient parallel-output copy
+  warning; its retry succeeded and no build errors remained.
+- Manual testing remains pending. Other pending suites remain independent.
+
+### Deferred application checks
+
+1. On an existing entry/tree screen in English, load/find records and use first,
+   previous, next, and last navigation. Confirm ordering and displayed positions
+   remain correct. Repeat in Arabic/RTL using records with distinct Arabic names.
+2. On the test installation, exercise a lookup that supplies its own sort key,
+   such as a Deposit Type lookup using AccountsPresenter.GetDepositTypeModel.
+   Confirm it follows the lookup field rather than the main form's default field.
+3. With developer assistance, exercise a supported single-field sort in ASC and
+   DESC on a model with an Ara property. Confirm RTL uses that property's ordering
+   and English uses the original field. Check record position/find behavior too.
+4. Check an ID/numeric field or another field without an Arabic counterpart. Its
+   requested field/direction must remain intact. Confirm normal empty/default-sort
+   callers still load correctly, including caption/message lists where available.
+5. Record build/commit, forms, supplied/stored sort keys, language, environment,
+   and actual results. Cancel edits; do not alter accounting states for this test.
+
+
+## SMOKE-BASE-010: shared double-buffering helper
+
+**Status: pending; recorded for later manual testing on 2026-10-21.**
+
+To resume, say: **"Resume SMOKE-BASE-010 from docs/Pending-Smoke-Tests.md."**
+Use a confirmed non-production database and repeat relevant checks in English and
+Arabic/RTL. Do not print or save transactions for these repaint/layout checks.
+
+### Scope and checks already performed
+
+- BFMain.EnableDoubleBuff now caches the Control.DoubleBuffered property metadata
+  in a private shared read-only field, following the existing CFormEntryTv pattern.
+  It checks the control and metadata for Nothing before enabling the property.
+  Existing callers and the separate tree-form implementation are unchanged.
+- 25 isolated smoke assertions passed for Panel, TableLayoutPanel, and
+  FlowLayoutPanel in LTR/RTL, including enabling the property, repeated calls,
+  no changes to name/text/bounds/direction, and a missing control. No application
+  forms were shown and no database was accessed.
+- Forms Debug and the isolated Accounts Debug build passed. Accounts reported nine
+  existing Crystal interop warnings and no errors.
+- This removes repeated reflection work; no measurable speed or flicker reduction
+  is claimed. Double buffering is still enabled only where existing callers use it.
+- The preceding control-description and RTL sorting changes were preserved.
+  Manual testing remains pending independently for all three changes.
+
+### Deferred application checks
+
+1. Open Check Printer, Disbursement Journal Entry, and PC Closing Entry in the test
+   installation. Resize the windows and move between existing fields/tabs. Confirm
+   layout and repainting remain normal. Do not print or change accounting states.
+2. Repeat in Arabic/RTL, checking that direction, captions, and control positions
+   remain correct. Close and reopen the screens, canceling test edits.
+3. Record build/commit, forms, language, environment, and actual results. Treat a
+   speed/flicker claim as unverified unless compared under the same workload.

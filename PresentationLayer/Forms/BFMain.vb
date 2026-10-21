@@ -13,6 +13,9 @@ Imports AATM.PresentationLayer.Views
 Public Class BfMain
     Implements IView
 
+    Private Shared ReadOnly DoubleBufferedProperty As Reflection.PropertyInfo =
+        GetType(Control).GetProperty("DoubleBuffered", Reflection.BindingFlags.NonPublic Or Reflection.BindingFlags.Instance)
+
     Dim _originalText As String
 
     '    Dim _menuLevel As String = " "
@@ -1560,8 +1563,9 @@ Public Class BfMain
     'End Sub
 
     Public Shared Sub EnableDoubleBuff(ByVal cont As Control)
-        Dim demoProp As Reflection.PropertyInfo = GetType(Control).GetProperty("DoubleBuffered", Reflection.BindingFlags.NonPublic Or Reflection.BindingFlags.Instance)
-        demoProp.SetValue(cont, True, Nothing)
+        If cont IsNot Nothing AndAlso DoubleBufferedProperty IsNot Nothing Then
+            DoubleBufferedProperty.SetValue(cont, True, Nothing)
+        End If
     End Sub
 
     Public Property HideNavigatorButtons As Boolean

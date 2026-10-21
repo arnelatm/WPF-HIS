@@ -1133,44 +1133,27 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     End Function
 
     Protected Function GetTranslatedField(Of TX)(dataSortOrder As String, ByRef dModel As TX) As String
-        Dim translatedSortOrder As String = dataSortOrder
-        If LicenseManager.UsageMode <> LicenseUsageMode.Designtime Then
-            If GlobalVariables.RightToLeftLayout Then
-                Dim stringLength = dataSortOrder.Length
-                Dim suffix = ""
-                Dim nameOfField As String = dataSortOrder
-                If stringLength > 4 And
-                   (dataSortOrder.Substring(stringLength - 4).ToLower() = " asc" OrElse
-                    dataSortOrder.Substring(stringLength - 4).ToLower() = " des") Then
-                    suffix = dataSortOrder.Substring(stringLength - 4)
-                    nameOfField = dataSortOrder.Substring(0, stringLength - 4)
-                End If
-                If PropertyExists(dModel, nameOfField + "ara") Then
-                    nameOfField += "Ara"
-                    translatedSortOrder = nameOfField + suffix
-                End If
-            End If
+        If String.IsNullOrWhiteSpace(dataSortOrder) OrElse
+           LicenseManager.UsageMode = LicenseUsageMode.Designtime OrElse
+           Not GlobalVariables.RightToLeftLayout Then
+            Return dataSortOrder
         End If
-        Return translatedSortOrder
+
+        Dim suffixLength As Integer = 0
+        If dataSortOrder.EndsWith(" ASC", StringComparison.OrdinalIgnoreCase) Then
+            suffixLength = 4
+        ElseIf dataSortOrder.EndsWith(" DESC", StringComparison.OrdinalIgnoreCase) Then
+            suffixLength = 5
+        End If
+        Dim nameOfField As String = dataSortOrder.Substring(0, dataSortOrder.Length - suffixLength)
+        If PropertyExists(dModel, nameOfField + "Ara") Then
+            Return nameOfField + "Ara" + dataSortOrder.Substring(dataSortOrder.Length - suffixLength)
+        End If
+        Return dataSortOrder
     End Function
 
     Protected Function GetTranslatedSortOrderKey(Of TX)(sortKey As String, ByRef dModel As TX) As String
-        If LicenseManager.UsageMode <> LicenseUsageMode.Designtime Then
-            If GlobalVariables.RightToLeftLayout Then
-                Dim stringLength = SortOrderKey.Length
-                Dim suffix = ""
-                Dim nameOfField As String = sortKey
-                If stringLength > 4 And
-                   (SortOrderKey.Substring(stringLength - 4).ToLower() = " asc" OrElse
-                    SortOrderKey.Substring(stringLength - 4).ToLower() = " des") Then
-                    suffix = SortOrderKey.Substring(stringLength - 4)
-                    nameOfField = SortOrderKey.Substring(0, stringLength - 4)
-                End If
-                nameOfField = GetTranslatedField(Of TX)(nameOfField, dModel)
-                sortKey = nameOfField + suffix
-            End If
-        End If
-        Return sortKey
+        Return GetTranslatedField(Of TX)(sortKey, dModel)
     End Function
 
     Protected Overridable Function IsBizDataValid() As Boolean
@@ -2023,13 +2006,20 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     End Function
 
     Public Function ControlDescription(control As Control)
-        Dim description As String
-        If TypeOf control Is ILinkedLabel Then
-            description = DirectCast(control, ILinkedLabel).GetControlDescription()
-        Else
-            description = control.Name.Substring(control.Name, 3)
+        If control Is Nothing Then
+            Throw New ArgumentNullException(NameOf(control))
         End If
-        Return description
+        If TypeOf control Is ILinkedLabel Then
+            Return DirectCast(control, ILinkedLabel).GetControlDescription()
+        End If
+        Dim controlName As String = control.Name
+        If String.IsNullOrEmpty(controlName) Then
+            Return control.GetType().Name
+        End If
+        If controlName.Length > 3 Then
+            Return controlName.Substring(3)
+        End If
+        Return controlName
     End Function
 
     'Public Sub ShowWaitForm_DoWorkHandler(sender As Object, e As DoWorkEventArgs(Of String))
