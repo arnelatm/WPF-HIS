@@ -43,10 +43,6 @@ Public Class CFormBase
 
     Delegate Sub SafeCallDelegate(ByRef controlObject As Control, textString As String)
 
-    Private Declare Function SetProcessWorkingSetSize Lib "kernel32.dll" (hProcess As IntPtr,
-                                                                         dwMinimumWorkingSetSize As Int32,
-                                                                          dwMaximumWorkingSetSize As Int32) As Int32
-
     <Bindable(True)>
     <Category("Properties")>
     <DefaultValue(GetType(Boolean))>
@@ -403,11 +399,6 @@ Public Class CFormBase
     Private Sub CloseForm()
         If GlobalVariables.AppCurrentCultureInfo.Name <> TextDisplayLanguage Then
             TextDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name
-        End If
-        GC.Collect()
-        GC.WaitForPendingFinalizers()
-        If (Environment.OSVersion.Platform = PlatformID.Win32NT) Then
-            SetProcessWorkingSetSize(Process.GetCurrentProcess().Handle, -1, -1)
         End If
         Dispose()
     End Sub

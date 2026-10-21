@@ -1,6 +1,6 @@
 # Pending smoke tests
 
-Last updated: 2026-10-20.
+Last updated: 2026-10-21.
 
 Pending suites:
 
@@ -9,6 +9,8 @@ Pending suites:
 - [SMOKE-BASE-003: checkbox/date columns and validation collection](#smoke-base-003-checkboxdate-columns-and-validation-collection)
 - [SMOKE-BASE-004: repeated validation-event setup](#smoke-base-004-repeated-validation-event-setup)
 - [SMOKE-BASE-005: accepted and canceled form closing](#smoke-base-005-accepted-and-canceled-form-closing)
+- [SMOKE-BASE-006: binding diagnostics and error-provider ownership](#smoke-base-006-binding-diagnostics-and-error-provider-ownership)
+- [SMOKE-BASE-007: form-close cleanup and neutral language fallback](#smoke-base-007-form-close-cleanup-and-neutral-language-fallback)
 
 This is the repository checklist for deferred manual testing. It can be resumed
 while other system updates continue. Pending items are not recorded as passed.
@@ -360,3 +362,110 @@ Repeat relevant checks in English and Arabic/RTL.
 5. With no valuable edits pending, close the test application normally and restart.
    Record forms, languages, build/commit, database environment, actual results,
    and any cancellation paths that could not be exercised.
+
+
+## SMOKE-BASE-006: binding diagnostics and error-provider ownership
+
+**Status: pending; recorded for later manual testing on 2026-10-21.**
+
+To resume, say: **"Resume SMOKE-BASE-006 from docs/Pending-Smoke-Tests.md."**
+Use a confirmed non-production database and cancel test edits. Repeat relevant
+checks in English and Arabic/RTL. Do not deliberately break a database connection
+or save invalid production records to provoke an exception.
+
+### Scope and checks already performed
+
+- CFormEntry now captures the first deferred-binding failure with
+  ExceptionDispatchInfo and rethrows it after attempting the remaining bindings.
+  Original exception identity and failing-method stack frames are preserved.
+  Binding order, first-error selection, and clearing of pending callbacks remain
+  unchanged. This improves diagnostics rather than normal-path performance.
+- Both BFMain constructors register the provider they create with the existing
+  component container. The original public field and presenter access are retained;
+  the designer-generated Dispose method already disposes that container.
+- 44 focused binding assertions passed across success, first failure, second
+  failure, multiple failures, original stack frames, exception identity, queue
+  clearing, no repeat execution, and LTR/RTL settings. The pre-fix assembly
+  reproduced loss of the original failing-method frame.
+- 86 provider assertions passed across both BFMain constructors and CFormEntry,
+  CFormBase, and CFormEntryTv, in LTR/RTL settings. These covered container ownership,
+  provider identity, existing error display/clearing, disposal, repeated form
+  disposal, and replacing the public provider field with a borrowed provider.
+  The original owned component is still cleaned up; the borrowed component is
+  left to its owner. The pre-fix assembly reproduced missing ownership/disposal.
+- 128 earlier form-closing checks and 41 validation-event checks passed again.
+- The focused Forms Debug build and isolated Accounts Debug build passed. Accounts
+  reported nine existing Crystal interop warnings and no errors.
+- Checks used isolated forms/controls with application initialization suppressed;
+  no Accounts workflow or database was started. Synthetic modal/MDI windows were
+  used by the closing regression harness.
+- These changes have not been deployed. They are not part of ClickOnce 1.0.0.45.
+  Manual suites above remain pending independently.
+
+### Deferred application checks
+
+1. Open Employee Maintenance, load/find a record, and navigate among its detail
+   tabs. Confirm grid and lookup binding still displays expected values. Repeat
+   on a tree-entry screen. Cancel any edits.
+2. On a form with a known required field, invoke its normal validation with that
+   field empty. Confirm the usual error appears. Correct the field and confirm
+   the error clears, then cancel and close without saving.
+3. Reopen, validate, and close those forms several times. Confirm no disposed-
+   provider/control errors appear. Exercise existing canceled-close behavior where
+   available, confirming the still-open form can continue displaying errors.
+4. As a developer-only diagnostic check, if a genuine binding error is reproduced
+   on the test installation, verify the original binding method appears in the
+   exception stack. Do not manufacture a live-data failure just for this check.
+5. Record build/commit, forms, language, database environment, and actual results.
+
+
+## SMOKE-BASE-007: form-close cleanup and neutral language fallback
+
+**Status: pending; recorded for later manual testing on 2026-10-21.**
+
+To resume, say: **"Resume SMOKE-BASE-007 from docs/Pending-Smoke-Tests.md."**
+Use a confirmed non-production database, cancel test edits, and repeat relevant
+checks in English and Arabic/RTL. Do not change production connection settings
+or perform an operating-system shutdown for these tests.
+
+### Scope and checks already performed
+
+- CFormEntry and CFormBase retain FormClosed cleanup, culture restoration, and
+  Dispose, but no longer force GC.Collect, wait for pending finalizers, or trim
+  the entire process working set. The now-unused private native declarations
+  were removed. This is not a measured speedup or proof of stable long-term memory.
+- BFMain's two fallback methods share a base-language extractor. Regional/script
+  codes retain the part before the first hyphen; neutral codes use the whole
+  value. Missing/blank input returns no fallback (ID 0/message Nothing) without
+  accessing TranslatorDAC. An empty prefix such as -SA also returns no fallback.
+- Existing translation query text, lookup order, and language-code casing were
+  preserved. There are no database object/script changes and no SQL was executed.
+- 114 focused assertions passed for neutral, regional, script, case-preserving,
+  and missing-input cases in LTR/RTL settings. The pre-fix assembly reproduced
+  neutral-code exceptions in both lookup methods (12 cases). Lookup execution
+  used the DAC's design-time bypass; no database results were tested.
+- 128 form-closing, 86 provider-ownership, and 44 binding-diagnostic assertions
+  passed again. These include disposal on accepted close, cancellation, modal
+  results, and MDI parent/child behavior in isolated forms.
+- The focused Forms Debug build and isolated Accounts Debug build passed. Accounts
+  reported nine existing Crystal interop warnings and no errors.
+- The preceding SMOKE-BASE-006 changes were preserved. Neither suite's new changes
+  have been deployed; they are not in ClickOnce 1.0.0.45.
+
+### Deferred application checks
+
+1. Open, close, and reopen Employee Maintenance, a tree-entry screen, and an entry
+   screen using CFormBase several times. Confirm normal closing completes and
+   canceled closing, where available, preserves the form. Check for unexpected
+   pauses; do not treat a different Task Manager memory figure alone as a defect.
+2. Check an existing modal dialog and MDI child close path. Confirm expected
+   dialog results and parent/child closing behavior. Discard test edits.
+3. Check normal en-PH and ar-SA display, switching languages through the existing
+   supported UI. Confirm captions, menu items, and RTL layout remain correct.
+4. As a developer-assisted test on the test installation, invoke fallback with
+   neutral en/ar and the corresponding regional code where translation data exists.
+   Confirm the same base-language lookup is used and no substring exception occurs.
+   Do not rewrite live application settings just to expose a neutral culture.
+5. Record build/commit, forms, language, environment, and results. Compare repeated
+   open/close responsiveness and memory behavior under comparable workloads if
+   assessing performance; no benchmark improvement has yet been claimed.

@@ -1,6 +1,7 @@
 ﻿Imports System.ComponentModel
 Imports System.Drawing
 Imports System.Globalization
+Imports System.Runtime.ExceptionServices
 Imports System.Threading
 Imports System.Windows.Forms
 Imports AATM.Libraries
@@ -89,10 +90,6 @@ Public Class CFormEntry
     End Sub
 
     Delegate Sub SafeCallDelegate(ByRef controlObject As Control, textString As String)
-
-    Private Declare Function SetProcessWorkingSetSize Lib "kernel32.dll" (hProcess As IntPtr,
-                                                                         dwMinimumWorkingSetSize As Int32,
-                                                                          dwMaximumWorkingSetSize As Int32) As Int32
 
     <Bindable(True)>
     <Category("Properties")>
@@ -266,18 +263,18 @@ Public Class CFormEntry
 
         Dim pendingBindings = _deferredViewDataBindings.ToArray()
         _deferredViewDataBindings.Clear()
-        Dim firstBindingException As Exception = Nothing
+        Dim firstBindingException As ExceptionDispatchInfo = Nothing
         For Each bindingAction In pendingBindings
             Try
                 bindingAction()
             Catch ex As Exception
                 If firstBindingException Is Nothing Then
-                    firstBindingException = ex
+                    firstBindingException = ExceptionDispatchInfo.Capture(ex)
                 End If
             End Try
         Next
         If firstBindingException IsNot Nothing Then
-            Throw firstBindingException
+            firstBindingException.Throw()
         End If
     End Sub
 
@@ -793,11 +790,6 @@ Public Class CFormEntry
     Private Sub CloseForm()
         If GlobalVariables.AppCurrentCultureInfo.Name <> TextDisplayLanguage Then
             TextDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name
-        End If
-        GC.Collect()
-        GC.WaitForPendingFinalizers()
-        If (Environment.OSVersion.Platform = PlatformID.Win32NT) Then
-            SetProcessWorkingSetSize(Process.GetCurrentProcess().Handle, -1, -1)
         End If
         Dispose()
     End Sub

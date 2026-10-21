@@ -97,6 +97,7 @@ Public Class BfMain
 
         ' This call is required by the designer.
         InitializeComponent()
+        components.Add(MyErrorProvider)
         Ea = New EventAggregator
         If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
             TextDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name
@@ -109,6 +110,7 @@ Public Class BfMain
         MyBase.New()
         ' This call is required by the designer.
         InitializeComponent()
+        components.Add(MyErrorProvider)
         If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
             TranslatorDAC = transDac
             AppDataDAC = appDac
@@ -533,10 +535,21 @@ Public Class BfMain
         ResumeLayout()
     End Sub
 
+    Private Shared Function GetLanguageBaseCode(desiredLanguage As String) As String
+        If String.IsNullOrWhiteSpace(desiredLanguage) Then
+            Return Nothing
+        End If
+        Dim separatorIndex = desiredLanguage.IndexOf("-", StringComparison.Ordinal)
+        Return If(separatorIndex < 0, desiredLanguage, desiredLanguage.Substring(0, separatorIndex))
+    End Function
+
     Protected Function GetFallBackLanguageIdNo(ByVal desiredLanguage As String) As Int16
         Dim cmd As String
         Dim fallBackLanguageIdNo As Int16
-        Dim languageBaseCode = Strings.Left(desiredLanguage, desiredLanguage.IndexOf("-", StringComparison.Ordinal))
+        Dim languageBaseCode = GetLanguageBaseCode(desiredLanguage)
+        If String.IsNullOrEmpty(languageBaseCode) Then
+            Return 0
+        End If
         cmd = "SELECT TOP 1 LanguageIdNo,COUNT(LanguageIdNo) AS value_occurrence FROM TranslatedCaption_View where RTrim(LanguageCode2) = '" + languageBaseCode + "' " +
               "GROUP BY LanguageIdNo ORDER BY value_occurrence DESC"
         fallBackLanguageIdNo = TranslatorDAC.ExecScalar(Of Int16)(cmd)
@@ -545,7 +558,10 @@ Public Class BfMain
 
     Protected Function GetFallBackMessage(ByVal message As String, ByVal desiredLanguage As String) As String
         Dim cmd As String
-        Dim languageBaseCode = Strings.Left(desiredLanguage, desiredLanguage.IndexOf("-", StringComparison.Ordinal))
+        Dim languageBaseCode = GetLanguageBaseCode(desiredLanguage)
+        If String.IsNullOrEmpty(languageBaseCode) Then
+            Return Nothing
+        End If
         cmd = "SELECT TranslatedCaption from TranslatedMessages_View where Caption = '" + RTrim(message) + "' and RTrim(LanguageCode2) = '" + languageBaseCode + "' "
         Return TranslatorDAC.ExecScalar(Of String)(cmd)
     End Function
