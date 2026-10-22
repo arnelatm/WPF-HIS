@@ -293,12 +293,17 @@ Public Class CTextBox
 
     ' Use this when the caller needs to distinguish invalid input from zero.
     ' A blank nullable value succeeds with Nothing; a blank non-nullable value fails.
-    Public Function TryGetValue(Of T)(ByRef value As T) As Boolean
+    Public Overloads Function TryGetValue(Of T)(ByRef value As T) As Boolean
         value = Nothing
         Dim result As Object = Nothing
         If Not TryCalculateValue(GetType(T), result) Then Return False
         If result IsNot Nothing Then value = DirectCast(result, T)
         Return True
+    End Function
+
+    Public Overloads Function TryGetValue(requestedType As Type, ByRef value As Object) As Boolean
+        If requestedType Is Nothing Then Throw New ArgumentNullException(NameOf(requestedType))
+        Return TryCalculateValue(requestedType, value)
     End Function
 
     Public Function CalculateValue(objDataType)

@@ -1571,68 +1571,71 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         End If
         Dim originalValue As String = GetOriginalValue(cCtrl.EnglishControl)
         Dim englishText As String = GetPropertyValue(cCtrl.EnglishControl, "Text")
-        If cCtrl.AutoFill And String.IsNullOrEmpty(cCtrl.Text) OrElse cCtrl.Text.Trim() = originalValue Then
+        If cCtrl.AutoFill AndAlso
+           (String.IsNullOrEmpty(cCtrl.Text) OrElse cCtrl.Text.Trim() = originalValue) Then
             cCtrl.Text = englishText
         End If
     End Sub
 
     Public Function IsNumberValid(ByRef viewControl As Control, ByRef obj As CTextBox)
-        Dim returnValue As Boolean = True
         Dim objName = Strings.Mid(obj.Name, 4)
         Dim targetValue = obj.Text
         Dim y As PropertyInfo = viewControl.GetType().GetProperty(objName, BindingFlags.Public Or BindingFlags.Instance Or BindingFlags.IgnoreCase)
-        If y IsNot Nothing Then
-            Dim x As Type = y.PropertyType
-            Dim u As Type = Nullable.GetUnderlyingType(x)
-            If targetValue Is Nothing OrElse targetValue.Equals(DBNull.Value) OrElse String.IsNullOrWhiteSpace(targetValue) Then
-                Return True
-            Else
-                Dim controlName As String = ControlDescription(obj)
-                Dim num As Double
-                If Not IsNumeric(targetValue) Then
-                    FormatError(obj, Messaging.GetParametrizedMessage(True, "MsgInvalidNumericValue", {"controlName", controlName, "text", obj.Text}))
-                    returnValue = False
-                Else
-                    Dim nMinValue As Double
-                    Dim nMaxValue As Double
-                    Dim typeCode As TypeCode = Type.GetTypeCode(x)
-                    Dim underlyingTypeCode As TypeCode = Type.GetTypeCode(u)
-                    If u Is Nothing Then
-                        nMinValue = GetMinMaxValue(typeCode, nMaxValue)
-                    Else
-                        typeCode = Type.GetTypeCode(u)
-                        nMinValue = GetMinMaxValue(underlyingTypeCode, nMaxValue)
-                    End If
-                    num = Val(targetValue)
-                    If num < nMinValue OrElse num > nMaxValue Then
-                        Dim err As String = Messaging.GetParametrizedMessage(True, "MsgNumericOverflow", {"number", obj.Text, "controlName", controlName, "lowNumber", nMinValue.ToString(), "highNumber", nMaxValue.ToString()})
-                        returnValue = False
-                    End If
-                    Dim isInteger As Boolean = False
-                    If u Is Nothing Then
-                        If NumTypeIsInteger(typeCode) Then
-                            isInteger = True
-                        End If
-                    Else
-                        If NumTypeIsInteger(underlyingTypeCode) Then
-                            isInteger = True
-                        End If
-                    End If
-                    If isInteger Then
-                        If Not Math.Abs(num Mod 1) <= (Double.Epsilon * 100) Then
-                            FormatError(obj, Messaging.GetParametrizedMessage(True, "MsgInvalidInteger", {"number", obj.Text, "controlName", controlName}))
-                            returnValue = False
-                        End If
-                    End If
-                    If num < obj.MinimumValue OrElse num > obj.MaximumValue Then
-                        FormatError(obj, Messaging.GetParametrizedMessage(True, "MsgNumericOverflow", {"number", obj.Text, "controlName", controlName, "lowNumber", obj.MinimumValue, "highNumber", obj.MaximumValue}))
-                        returnValue = False
-                    End If
-                End If
+        If y Is Nothing OrElse String.IsNullOrWhiteSpace(targetValue) Then Return True
 
+        Dim targetType As Type = If(Nullable.GetUnderlyingType(y.PropertyType), y.PropertyType)
+        Dim parseType As Type = targetType
+        Select Case targetType
+            Case GetType(Byte), GetType(SByte), GetType(Short), GetType(UShort),
+                 GetType(Integer), GetType(UInteger), GetType(Long), GetType(ULong),
+                 GetType(Decimal), GetType(Single), GetType(Double)
+            Case Else
+                ' Preserve numeric validation for fields exposed through nonnumeric properties.
+                parseType = GetType(Double)
+        End Select
+        Dim controlName As String = ControlDescription(obj)
+        Dim parsedValue As Object = Nothing
+        If Not obj.TryGetValue(parseType, parsedValue) Then
+            Dim decimalValue As Decimal
+            Dim isInteger = NumTypeIsInteger(Type.GetTypeCode(parseType)) OrElse parseType Is GetType(SByte)
+            If isInteger AndAlso Decimal.TryParse(targetValue, NumberStyles.Number, CultureInfo.CurrentCulture, decimalValue) AndAlso
+               Decimal.Truncate(decimalValue) <> decimalValue Then
+                FormatError(obj, Messaging.GetParametrizedMessage(True, "MsgInvalidInteger", {"number", obj.Text, "controlName", controlName}))
+            Else
+                FormatError(obj, Messaging.GetParametrizedMessage(True, "MsgInvalidNumericValue", {"controlName", controlName, "text", obj.Text}))
             End If
+            Return False
         End If
-        Return returnValue
+
+        Dim outsideControlRange As Boolean
+        If parseType Is GetType(Single) OrElse parseType Is GetType(Double) Then
+            Dim number As Double = Convert.ToDouble(parsedValue, CultureInfo.CurrentCulture)
+            If Double.IsNaN(number) OrElse Double.IsInfinity(number) Then
+                FormatError(obj, Messaging.GetParametrizedMessage(True, "MsgInvalidNumericValue", {"controlName", controlName, "text", obj.Text}))
+                Return False
+            End If
+            Dim minimumValue As Double? = Nothing
+            Dim maximumValue As Double? = Nothing
+            If obj.MinimumValue.HasValue Then
+                minimumValue = If(parseType Is GetType(Single), CDbl(CSng(obj.MinimumValue.Value)), CDbl(obj.MinimumValue.Value))
+            End If
+            If obj.MaximumValue.HasValue Then
+                maximumValue = If(parseType Is GetType(Single), CDbl(CSng(obj.MaximumValue.Value)), CDbl(obj.MaximumValue.Value))
+            End If
+            outsideControlRange = (minimumValue.HasValue AndAlso number < minimumValue.Value) OrElse
+                                  (maximumValue.HasValue AndAlso number > maximumValue.Value)
+        Else
+            Dim number As Decimal = Convert.ToDecimal(parsedValue, CultureInfo.CurrentCulture)
+            outsideControlRange = (obj.MinimumValue.HasValue AndAlso number < obj.MinimumValue.Value) OrElse
+                                  (obj.MaximumValue.HasValue AndAlso number > obj.MaximumValue.Value)
+        End If
+        If outsideControlRange Then
+            Dim minimumText = If(obj.MinimumValue.HasValue, obj.MinimumValue.Value.ToString(CultureInfo.CurrentCulture), "")
+            Dim maximumText = If(obj.MaximumValue.HasValue, obj.MaximumValue.Value.ToString(CultureInfo.CurrentCulture), "")
+            FormatError(obj, Messaging.GetParametrizedMessage(True, "MsgNumericOverflow", {"number", obj.Text, "controlName", controlName, "lowNumber", minimumText, "highNumber", maximumText}))
+            Return False
+        End If
+        Return True
     End Function
 
     Private Function ValueIsUnique(cCtrl As Control) As Boolean

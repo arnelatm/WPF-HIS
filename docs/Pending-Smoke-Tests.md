@@ -1,6 +1,6 @@
 # Pending smoke tests
 
-Last updated: 2026-10-21.
+Last updated: 2026-10-22.
 
 Pending suites:
 
@@ -14,6 +14,10 @@ Pending suites:
 - [SMOKE-BASE-008: validation control descriptions](#smoke-base-008-validation-control-descriptions)
 - [SMOKE-BASE-009: RTL sort-key translation](#smoke-base-009-rtl-sort-key-translation)
 - [SMOKE-BASE-010: shared double-buffering helper](#smoke-base-010-shared-double-buffering-helper)
+- [SMOKE-BASE-011: culture-independent validation-name matching](#smoke-base-011-culture-independent-validation-name-matching)
+- [SMOKE-BASE-012: Arabic autofill and numeric validation](#smoke-base-012-arabic-autofill-and-numeric-validation)
+- [SMOKE-BASE-013: Pay Element Entry display updates](#smoke-base-013-pay-element-entry-display-updates)
+- [SMOKE-BASE-014: Pay Element focus and quantity handler](#smoke-base-014-pay-element-focus-and-quantity-handler)
 
 This is the repository checklist for deferred manual testing. It can be resumed
 while other system updates continue. Pending items are not recorded as passed.
@@ -604,3 +608,244 @@ Arabic/RTL. Do not print or save transactions for these repaint/layout checks.
    remain correct. Close and reopen the screens, canceling test edits.
 3. Record build/commit, forms, language, environment, and actual results. Treat a
    speed/flicker claim as unverified unless compared under the same workload.
+
+
+## SMOKE-BASE-011: culture-independent validation-name matching
+
+**Status: pending; recorded for later manual testing on 2026-10-22.**
+
+To resume, say: **"Resume SMOKE-BASE-011 from docs/Pending-Smoke-Tests.md."**
+Use a confirmed non-production database and cancel test edits. Check English and
+Arabic/RTL. Do not change production workstation culture settings for this test.
+
+### Scope and checks already performed
+
+- ValidationControlCollection.GetIndex now compares names with String.Equals and
+  OrdinalIgnoreCase rather than uppercasing both names using the current culture.
+  It retains sequential first-match lookup and avoids uppercase-string allocations.
+  Numeric value parsing, captions, validation rules, and Arabic autofill were not
+  changed. This is identifier comparison, not language-aware display sorting.
+- The pre-fix assembly matched Id/id in en-US and ar-SA but failed in tr-TR.
+- 42 isolated assertions passed across en-US, ar-SA, and tr-TR for ASCII case
+  matching, Arabic identifiers, missing/null names, distinct dotted/dotless-I
+  identifiers, object-indexer get/set, first-match duplicate behavior, removal,
+  and unchanged control names. No application or database was started.
+- The existing 41 validation-event checks passed again, including error display,
+  clearing, disabled validation, unrelated handlers, and independent providers.
+- CBaseControlsLibrary Debug and the isolated Accounts Debug build passed. Accounts
+  reported nine existing Crystal interop warnings and no errors.
+- Included in the base-validation and Pay Element fixes Git batch. It has not
+  been deployed and is not in ClickOnce 1.0.0.47. Manual suites remain pending.
+
+### Deferred application checks
+
+1. On a test entry form with required/numeric validation, leave a known required
+   field empty and invoke normal validation. Confirm the expected field error
+   appears, then correct the value and confirm it clears. Cancel edits.
+2. Repeat in English and Arabic/RTL. Confirm existing captions, validation rules,
+   control values, and save restrictions remain as before.
+3. If a Turkish-culture workstation is actually supported, perform the same test
+   there or in an isolated test process. Do not change a live workstation's culture
+   just to exercise this case. Record forms, build/commit, culture, environment,
+   and actual results.
+
+
+## SMOKE-BASE-012: Arabic autofill and numeric validation
+
+**Status: pending; recorded for later manual testing on 2026-10-22.**
+
+To resume, say: **"Resume SMOKE-BASE-012 from docs/Pending-Smoke-Tests.md."**
+Use a confirmed non-production database and cancel edits. Test English and
+Arabic/RTL without changing production data, connection settings, or accounting
+states. Do not infer manual validation coverage from successful compilation.
+
+### Scope and checks already performed
+
+- PresenterBase.UpdateArabicControl now requires AutoFill=True for both existing
+  replacement cases (empty Arabic field or one matching the original English).
+  AutoFill=False preserves the field; distinct manually translated text remains
+  unchanged when autofill is enabled. English source controls are not modified.
+- CTextBox has a runtime-Type TryGetValue overload delegating to its existing
+  TryCalculateValue parser. The generic API, parsing policies, and legacy GetValue
+  fallback remain intact. Both changed source files are in their active projects.
+- PresenterBase.IsNumberValid uses the typed parsing result, not IsNumeric/Val.
+  Integer/decimal type limits are enforced by existing TryParse routines; their
+  control-bound comparisons use Decimal without Double rounding. Single/Double
+  checks use their corresponding representation and reject NaN/infinity. Numeric
+  fields exposed through nonnumeric properties retain floating-point validation.
+- Parsing follows CultureInfo.CurrentCulture, matching the existing textbox getter:
+  NumberStyles.Number for integers/Decimal and Float+AllowThousands for Single/Double.
+  Inputs previously accepted only by IsNumeric but rejected by the actual getter
+  are now rejected (for example exponent syntax in an integer field). No currency,
+  hexadecimal, or additional input syntax was introduced. Blank input still passes
+  this helper; separate required-field rules remain responsible for mandatory data.
+- Fractional integer input uses MsgInvalidInteger; failed typed conversions/type
+  overflow use MsgInvalidNumericValue; configured control-range violations use
+  MsgNumericOverflow. A missing min/max bound is handled safely when formatting
+  an error. Message keys were tested; rendered/translations require manual testing.
+- 196 focused assertions passed for enabled/disabled autofill, preservation of
+  manual text, grouped values, signed/unsigned type limits, nullable fields,
+  fractional integers, exact Decimal bounds beyond Double precision, Single/Double
+  limits and exponent syntax, finite values, one-sided bounds, blank/invalid input,
+  numeric-string properties, generic/runtime parser compatibility, and en-US,
+  ar-SA, de-DE, and tr-TR numeric cultures. The pre-fix build reproduced the autofill
+  overwrite and acceptance of 1,000 with a maximum of 100.
+- The earlier 42 culture-independent lookup and 41 validation-event checks passed
+  again. Tests bypassed presenter construction and ran the DAC in design-time mode;
+  no database connection/command was initialized and no SQL was executed.
+- CBaseControlsLibrary/Presenters Debug and the isolated Accounts Debug build passed;
+  Accounts reported nine existing Crystal interop warnings and no errors.
+- The preceding SMOKE-BASE-011 change was preserved. Included in the base-validation
+  and Pay Element fixes Git batch; not deployed or in ClickOnce 1.0.0.47.
+
+### Deferred application checks
+
+1. On caption/message translation forms where AutoFill=False, use test records whose
+   translation equals the original English text. Change the English value, invoke
+   the normal validation path, and confirm the translation is preserved. Cancel.
+2. On an entry form with enabled Arabic autofill, check empty, unchanged-English-copy,
+   and distinct Arabic-text cases. Only the existing enabled replacement cases
+   should copy English. Cancel all edits and repeat under English and Arabic/RTL.
+3. On appropriate numeric fields, exercise grouping and decimal separators supported
+   by the active input culture. For a known maximum of 100, input equivalent to 1,000
+   must fail, while 100 succeeds. Check minimum/maximum boundaries and error text.
+4. Check integer fields reject nonzero fractional parts/type overflow, decimal fields
+   retain expected precision, nullable blanks keep their normal behavior, and
+   required fields still reject missing values through existing mandatory rules.
+5. Check fields with only one configured bound and confirm a readable validation
+   message appears. Correct rejected values and confirm existing error clearing and
+   normal validation/save behavior. Do not save accounting test records unless that
+   test environment and operation are separately authorized.
+6. Record build/commit, forms/fields, input culture, language, environment, and results.
+   No journal posting, approval, closed-period, or reconciliation rules were changed.
+
+## SMOKE-BASE-013: Pay Element Entry display updates
+
+Status: PENDING manual testing. Recorded 2026-10-22.
+
+To resume, say: **"Resume SMOKE-BASE-013 from docs/Pending-Smoke-Tests.md."**
+Use a confirmed non-production database and cancel edits. Repeat in English and
+Arabic/RTL. Included in the base-validation and Pay Element fixes Git batch;
+not deployed or included in ClickOnce 1.0.0.47.
+
+### Implemented and checked
+
+- PayElementEntryTv keeps both child grids connected to their BindingSources.
+  Binding no longer clears a populated source first or forces three Refresh calls
+  per grid. Same-reference lists use ResetBindings(False), preserving notification
+  after additions/removals to the existing plain List collections. Replacement,
+  empty, and null lists retain their binding behavior; Items retains AllowNew=True.
+- Calculation-panel updates suspend layout on the flow/table containers and resume
+  both through Finally. Updates no longer hide/show the parents unconditionally,
+  and the Unit control moves only when its table position needs to change.
+  Calculation and Summary value-assignment rules were preserved.
+- Isolated fixture comparison passed 144 assertions on the changed build and 103
+  baseline assertions. Forty final-state scenarios matched the previous build
+  (five calculation codes, two quantity codes, Summary on/off, LTR/RTL). The checks
+  compared field visibility, text, and Unit position and verified selections were
+  preserved. Repeated updates caused zero parent visibility transitions versus
+  eight across the two baseline fixtures. Each grid binder issued zero explicit
+  Refresh calls versus three before; same-list mutations remained visible.
+- Accounts Debug build passed with nine existing Crystal interop warnings and no
+  errors. Tests bypassed the form/service constructors and used in-memory data;
+  no database was accessed. This does not establish live-screen flicker elimination,
+  full language translation, designer layout, or interactive editing behavior.
+
+### Deferred application checks
+
+1. Open Pay Element Entry, navigate between earning/deduction records, including
+   records with populated and empty posting-account and Summary detail grids.
+   Confirm rows, account/pay-group/pay-element/factor dropdown captions, and numeric
+   formatting remain correct, without transient blank grids or binding errors.
+2. Enter edit/add mode and exercise supported calculation types and quantity types.
+   Confirm Rate, Default Quantity, Factor, Base Payment, and Unit visibility and
+   Unit position follow existing rules. Repeat selecting the same option and
+   switching tabs; watch for flashing, displaced controls, or lost selections.
+3. Exercise Summary and Use Pay Groups on disposable edits. Check expected panel
+   visibility and child-grid editing/add-row behavior; cancel and reload. Check
+   normal permissions and validation. Do not save or run payroll without separately
+   authorized test operations.
+4. Repeat in English and Arabic/RTL, including language refresh if supported.
+   Confirm lookup captions and selected IDs remain correct. Record screen size,
+   language, build/commit, test environment, and observed flicker before/after.
+
+### Remaining findings checked, not changed in this batch
+
+1. Lookup columns are still configured on every child-list bind. UpdateReportGroup
+   still clears its DataSource before selecting earning/deduction groups, including
+   calls from Load, language refresh, and kind changes. Next candidate: configure
+   stable column metadata once, replace lookup sources only when necessary, and
+   preserve selection; ensure actual language/list refreshes still propagate.
+2. Multiple event paths update visuals (calculation selection/validation, tab entry,
+   InputsTurnedOn, and Summary). This is potential duplicate work; source inspection
+   alone does not prove each user interaction invokes all of them. Consolidating
+   visual refreshes must preserve existing value-assignment and mapping order.
+3. FirstControl is assigned before InitializeComponent creates txtPayElementCode,
+   so that assignment receives Nothing. Move it after initialization in a separate
+   focused correction and verify initial/edit-mode keyboard focus.
+4. The quantity handler tests cboCalculationType.Focused, passes its SelectedIndex,
+   and can reset that calculation dropdown; its helper also compares PayElementType
+   against a CalculationType enum code. These are likely copy/paste issues, but the
+   permitted calculation/quantity combinations need review before changing rules.
+   This handler retains a separate hide/show path outside the corrected display
+   method, so some flicker may remain.
+5. Summary's property setter assigns Computed, while CheckedChanged assigns OnDemand;
+   both assign Factor calculation. The setter/event paths can therefore disagree.
+   Confirm the intended Summary pay-element type before unifying the rule.
+
+No SQL source, database contents, payroll calculations, or deployment settings
+were changed. Existing unrelated working-tree changes were preserved.
+
+
+## SMOKE-BASE-014: Pay Element focus and quantity handler
+
+Status: PENDING manual testing. Recorded 2026-10-22.
+
+To resume, say: **"Resume SMOKE-BASE-014 from docs/Pending-Smoke-Tests.md."**
+Use a confirmed non-production database, cancel edits, and check English/Arabic RTL.
+
+### Implemented and checked
+
+- Addresses remaining findings 3 and 4 recorded in SMOKE-BASE-013. FirstControl is
+  now assigned after InitializeComponent creates txtPayElementCode. Source order
+  was checked; live initial/add/edit focus remains a manual test.
+- The quantity handler now checks quantity-dropdown focus, validates the selected
+  quantity code, and clears that dropdown's SelectedIndex when disallowed. It no
+  longer checks/resets the calculation dropdown or forces a separate hide/show
+  cycle. Allowed selections use the existing batched calculation-panel update.
+- The helper retains the previous effective Regular-pay-element restriction on
+  NotNeeded and Variable quantity choices. The former comparison used the unrelated
+  CalculationType.FixedRate code, which also equals R; it now uses
+  PayElementTypeSelection.Regular explicitly. It does not introduce a FixedRate-calculation restriction.
+  Programmatic assignments without quantity focus remain outside this event path.
+- 248 isolated assertions passed, covering all 12 quantity codes across four
+  pay-element types with reordered rows, quantity/calculation focus guards,
+  preservation of allowed selections/calculation type, the prior grid cases,
+  and 40 matching display-state scenarios including RTL direction. Repeated parent
+  visibility transitions remained zero. Tests bypassed form/service constructors
+  and used in-memory data; no database was accessed or application launched.
+- Accounts Debug build passed with nine existing Crystal interop warnings and no
+  errors. No designer files were changed. Interactive warning-dialog rendering and
+  dismissal were not automated; the invalid-selection path requires manual testing.
+
+### Deferred application checks
+
+1. Open Pay Element Entry and enter add/edit mode. Confirm Pay Element Code receives
+   focus where enabled and normal tab navigation remains correct. Cancel edits.
+2. For Regular elements with the quantity dropdown visible, choose NotNeeded and
+   Variable. Confirm the existing warning appears and, after dismissal, only the
+   quantity selection is cleared; Calculation Type remains unchanged. Choose a
+   permitted quantity and verify it stays selected. Cancel edits.
+3. For Computed/OnDemand elements, check Factor with NotNeeded versus a needed
+   quantity. Confirm Unit/Default Quantity visibility and placement follow the
+   selected calculation; changing quantity must not reset Calculation Type.
+4. Change quantity, tab to Calculation Type, leave/re-enter the tab, and repeat.
+   Confirm there are no unexpected messages, lost selections, or panel flashes.
+   Repeat in English/Arabic RTL and check field names in the validation message.
+5. Record build/commit, environment, permitted combinations, and actual results.
+   Summary's Computed-versus-OnDemand conflict remains unresolved and unchanged;
+   lookup-reset and repeated-event optimization findings remain separate work.
+
+No SQL source or database changes, no payroll execution, and no deployment occurred.
+Included in the base-validation and Pay Element fixes Git batch. Manual checks
+remain pending; no deployment was requested with the Git push.

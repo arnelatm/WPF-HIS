@@ -36,7 +36,7 @@
     Function GetIndex(controlName As String) As Integer
         Dim i As Integer
         For i = 0 To Count - 1
-            If Item(i).ControlObj.name.toupper = controlName.ToUpper Then
+            If String.Equals(CStr(Item(i).ControlObj.Name), controlName, StringComparison.OrdinalIgnoreCase) Then
                 Return i
             End If
         Next
