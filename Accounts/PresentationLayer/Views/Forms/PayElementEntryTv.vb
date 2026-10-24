@@ -142,10 +142,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 chkSummary.Checked = Value
-                If Value Then
-                    PayElementType = EnumToCode(PayElementTypeSelection.Computed)
-                    CalculationType = EnumToCode(CalculationTypeSelection.Factor)
-                End If
+                ApplySummaryDefaults()
             End Set
         End Property
 
@@ -602,6 +599,13 @@ Namespace PresentationLayer.Views.Forms
             UpdatePostingTabDisplay()
         End Sub
 
+        Private Sub ApplySummaryDefaults()
+            If chkSummary.Checked Then
+                PayElementType = EnumToCode(PayElementTypeSelection.Computed)
+                CalculationType = EnumToCode(CalculationTypeSelection.Factor)
+            End If
+        End Sub
+
         Private Sub chkSummary_CheckedChanged(sender As Object, e As EventArgs) Handles chkSummary.CheckedChanged
             If chkSummary.Checked Then
                 cboPayElementType.Visible = False
@@ -609,8 +613,7 @@ Namespace PresentationLayer.Views.Forms
                 tlpCalculation.Visible = False
                 floCalculation.Visible = False
                 DataGridViewPayElementItems.Visible = True
-                PayElementType = EnumToCode(PayElementTypeSelection.OnDemand)
-                CalculationType = EnumToCode(CalculationTypeSelection.Factor)
+                ApplySummaryDefaults()
             Else
                 cboPayElementType.Visible = True
                 tlpPostingAccounts.Visible = True
@@ -625,10 +628,9 @@ Namespace PresentationLayer.Views.Forms
             UpdateCalculationTabDisplay()
         End Sub
 
-        'Private Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
-        '    UpdateCalculationTabDisplay()
-        '    UpdatePostingTabDisplay()
-        'End Sub
+        Private Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
+            ApplySummaryDefaults()
+        End Sub
 
         Protected Sub PayElement_AfterSelect(sender As Object, e As TreeViewEventArgs) Handles FormTreeView.AfterSelect
             Dim n As TreeNode = FormTreeView.SelectedNode

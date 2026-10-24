@@ -34,10 +34,13 @@ Public Class BfMain
     Private _originalFormCaption As String
     Private ReadOnly _originalTabCaptions As New Dictionary(Of TabPage, String)
     Private ReadOnly _originalDataGridViewColumnCaptions As New Dictionary(Of DataGridViewColumn, String)
+    Private _captionLanguageApplied As Boolean
     Private _languageInitialized As Boolean
     Private _languageSwitchInProgress As Boolean
     Private _captionTranslationService As IFormCaptionTranslationService = New DefaultFormCaptionTranslationService()
     Private _languageLayoutService As IFormLanguageLayoutService = New DefaultFormLanguageLayoutService()
+    Private _fastLayoutSource As List(Of Control)
+    Private _fastLayoutControls As List(Of Control)
 
     'Private _myPresenter As UserPresenter
     Protected CaptionCollection As New Collection
@@ -478,9 +481,22 @@ Public Class BfMain
         If mirrorLayoutNow AndAlso RightToLeftLayout <> desiredRightToLeftLayout Then
             RightToLeftLayout = desiredRightToLeftLayout
         End If
-        LayOutControls(allCtrl)
+        Dim fastControls As List(Of Control) = Nothing
         If Not mirrorLayoutNow Then
-            ApplyFastLanguageLayout(allCtrl)
+            fastControls = New List(Of Control)
+        End If
+        ApplyControlLayout(allCtrl, fastControls)
+        If Not mirrorLayoutNow Then
+            Dim previousSource = _fastLayoutSource
+            Dim previousControls = _fastLayoutControls
+            Try
+                _fastLayoutSource = allCtrl
+                _fastLayoutControls = fastControls
+                ApplyFastLanguageLayout(allCtrl)
+            Finally
+                _fastLayoutSource = previousSource
+                _fastLayoutControls = previousControls
+            End Try
         End If
         BackgroundImage = myImage
     End Sub
@@ -488,7 +504,9 @@ Public Class BfMain
     Protected Overridable Sub ApplyFastLanguageLayout(ByRef allCtrl As List(Of Control))
         Dim rightToLeftLayout = GlobalVariables.RightToLeftLayout
         Dim targetRightToLeft As RightToLeft = If(rightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
-        For Each cCtrl In allCtrl
+        Dim layoutControls = If(Object.ReferenceEquals(allCtrl, _fastLayoutSource) AndAlso
+                                _fastLayoutControls IsNot Nothing, _fastLayoutControls, allCtrl)
+        For Each cCtrl In layoutControls
             If TypeOf cCtrl Is CFlowLayout Then
                 DirectCast(cCtrl, CFlowLayout).ApplyLanguageLayout(targetRightToLeft)
             ElseIf TypeOf cCtrl Is ToolStrip Then
@@ -576,10 +594,16 @@ Public Class BfMain
             Else
                 Dim targetLanguageIdNo As Short = GetCachedTargetLanguageIdNo(desiredLanguage, allowFallBack)
                 If targetLanguageIdNo = 0 Then
-                    UseOriginalCaptions(allCtrl)
+                    If _captionLanguageApplied OrElse GlobalVariables.TranslationMode OrElse
+                       NeedToTranslateText(desiredLanguage) Then
+                        UseOriginalCaptions(allCtrl)
+                    End If
                 Else
+                    ' Restore originals on a later switch even if translation fails partway.
+                    _captionLanguageApplied = True
                     TranslateToLanguageIdNo(allCtrl, targetLanguageIdNo)
                 End If
+                _captionLanguageApplied = True
             End If
         Catch ex As Exception
 
@@ -587,6 +611,10 @@ Public Class BfMain
     End Sub
 
     Private Function GetCachedTargetLanguageIdNo(desiredLanguage As String, allowFallBack As Boolean) As Short
+        If Not GlobalVariables.TranslationMode AndAlso Not NeedToTranslateText(desiredLanguage) Then
+            Return 0
+        End If
+
         If GlobalVariables.TranslationMode Then
             Return GetTargetLanguageIdNo(desiredLanguage, allowFallBack)
         End If
@@ -700,8 +728,18 @@ Public Class BfMain
     End Sub
 
     Protected Sub LayOutControls(ByRef allCtrl As List(Of Control))
+        ApplyControlLayout(allCtrl, Nothing)
+    End Sub
+
+    Private Sub ApplyControlLayout(ByRef allCtrl As List(Of Control), fastControls As List(Of Control))
         Dim mirrorLayoutNow = MirrorLanguageLayoutNow
         For Each cCtrl As Control In allCtrl
+            If fastControls IsNot Nothing AndAlso
+               (TypeOf cCtrl Is CFlowLayout OrElse TypeOf cCtrl Is ToolStrip OrElse
+                TypeOf cCtrl Is TreeView OrElse TypeOf cCtrl Is DataGridView OrElse
+                TypeOf cCtrl Is TableLayoutPanel) Then
+                fastControls.Add(cCtrl)
+            End If
             If TypeOf cCtrl Is SplitContainer Then
                 SetSplitContainerRightToLeft(DirectCast(cCtrl, SplitContainer), GlobalVariables.RightToLeftLayout)
             ElseIf TypeOf cCtrl Is ToolStrip Then

@@ -1,6 +1,6 @@
 # Pending smoke tests
 
-Last updated: 2026-10-22.
+Last updated: 2026-10-24.
 
 Pending suites:
 
@@ -18,6 +18,16 @@ Pending suites:
 - [SMOKE-BASE-012: Arabic autofill and numeric validation](#smoke-base-012-arabic-autofill-and-numeric-validation)
 - [SMOKE-BASE-013: Pay Element Entry display updates](#smoke-base-013-pay-element-entry-display-updates)
 - [SMOKE-BASE-014: Pay Element focus and quantity handler](#smoke-base-014-pay-element-focus-and-quantity-handler)
+- [SMOKE-BASE-015: Summary means Computed](#smoke-base-015-summary-means-computed)
+- [SMOKE-BASE-016: English form display shortcuts](#smoke-base-016-english-form-display-shortcuts)
+- [SMOKE-BASE-017: Tree selection preserves record identity](#smoke-base-017-tree-selection-preserves-record-identity)
+- [SMOKE-BASE-018: Scoped fast-layout control list](#smoke-base-018-scoped-fast-layout-control-list)
+- [SMOKE-BASE-019: Lookup reuse during language refresh](#smoke-base-019-lookup-reuse-during-language-refresh)
+
+Git batch 2026-10-24: suites SMOKE-BASE-015 through SMOKE-BASE-019 accompany
+the Summary, language-display, tree-selection, layout, and lookup fixes in this
+commit. Earlier uncommitted/unpushed statements below describe their implementation
+time. Manual testing remains pending; this Git batch does not deploy ClickOnce.
 
 This is the repository checklist for deferred manual testing. It can be resumed
 while other system updates continue. Pending items are not recorded as passed.
@@ -849,3 +859,277 @@ Use a confirmed non-production database, cancel edits, and check English/Arabic 
 No SQL source or database changes, no payroll execution, and no deployment occurred.
 Included in the base-validation and Pay Element fixes Git batch. Manual checks
 remain pending; no deployment was requested with the Git push.
+
+
+## SMOKE-BASE-015: Summary means Computed
+
+Status: PENDING manual testing. Recorded 2026-10-24.
+
+To resume, say: **"Resume SMOKE-BASE-015 from docs/Pending-Smoke-Tests.md."**
+Use a confirmed non-production database. Check English and Arabic/RTL.
+
+### Rule and implementation
+
+- User confirmed: Summary always means Computed. This resolves the type conflict
+  previously recorded in SMOKE-BASE-013 and SMOKE-BASE-014.
+- PayElementEntryTv uses ApplySummaryDefaults from both the Summary property setter
+  and checkbox handler: checked Summary assigns Computed (C) and Factor (F).
+  The setter still applies the rule when True is assigned repeatedly without a
+  CheckedChanged event. Unchecked Summary does not rewrite ordinary element values.
+- AfterUpdateView reapplies the rule after record mapping, so saved type/calculation
+  assignments later in the mapping cannot leave a summary with inconsistent values.
+  Existing Summary panel visibility behavior is retained. No mapper/DAO/schema or
+  payroll calculation algorithm was changed. Existing database rows are not migrated;
+  loading normalizes the form, and persistence still requires an ordinary save.
+- Isolated checks use in-memory controls, bypass form/service constructors, and
+  cover manual/property/repeated assignments, four starting types, post-mapping
+  normalization, visibility, non-summary preservation, and LTR/RTL direction.
+  Full application mapping/save, translated captions, and payroll amounts remain
+  manual checks; no application/database or payroll execution was started.
+- 64 focused assertions passed. Accounts Debug build passed with nine existing
+  Crystal interop warnings and no errors. Compilation is not a full application test.
+- This fix is not committed, pushed, or deployed. Earlier manual suites remain pending.
+
+### Deferred application checks
+
+1. On a disposable test record, check Summary. Confirm Summary details appear and
+   calculation/posting/type controls retain their expected visibility. Confirm the
+   resulting view values are Computed and Factor using the debugger if hidden.
+2. Load Summary records, including a test fixture previously stored as OnDemand,
+   and confirm the final view after mapping is Computed/Factor. Navigate away and
+   back; repeat entering edit mode. Cancel edits unless a test save is authorized.
+3. On an authorized disposable test save, save/reload and verify Summary=True,
+   PayElementType=C, CalculationType=F, and unchanged child details/factors.
+   Do not mass-update production rows as part of this test.
+4. Uncheck Summary and confirm current values are retained for normal editing.
+   Load non-summary records of different types and verify their saved type and
+   calculation remain intact. Check permissions/validation; cancel edits.
+5. Repeat in English/Arabic RTL. In a separately authorized payroll test, compare
+   totals for a summary used as a base payment, including nested summaries where
+   applicable. No change to the payroll algorithm is expected. Record build/commit,
+   environment, records, and actual results.
+
+No SQL source was modified or SQL executed, no database rows were changed, and
+nothing was deployed. Unrelated outputs/ content was preserved.
+
+
+## SMOKE-BASE-016: English form display shortcuts
+
+Status: PENDING manual testing. Recorded 2026-10-24.
+
+To resume, say: **"Resume SMOKE-BASE-016 from docs/Pending-Smoke-Tests.md."**
+Use a confirmed non-production environment. Cancel edits and check English/Arabic RTL.
+
+### Implemented and checked
+
+- BFMain.GetCachedTargetLanguageIdNo returns original-language ID zero before cache
+  or database resolution when translation is unnecessary in normal operation.
+  Original en-PH always qualifies; other en/en-* targets qualify when the existing
+  UseOriginalAppTextLanguageForEnglish setting is enabled. Translation-initializer
+  mode deliberately keeps its existing resolution and caption-maintenance path.
+- GlobalFunctions.NeedToTranslateText now consistently checks the effective target
+  (including explicit targets), ignores culture-code casing/outer whitespace, and
+  recognizes neutral en and regional en-* English. English current language no
+  longer suppresses an explicitly requested Arabic translation. The English option
+  remains respected; no workstation configuration was changed.
+- BFMain skips original-caption restoration only on the first original-English
+  caption application in normal mode. Original-caption capture, layout, rendering,
+  security, culture formatting, and language-switch hooks remain active. Subsequent
+  English applications restore original captions, including return from Arabic.
+  Non-English fallback and translation-initializer mode retain restoration behavior.
+  A translated attempt marks caption state before applying captions, so a later
+  English switch also restores originals after a partial translation failure.
+- 60 isolated assertions passed for English option on/off, neutral/regional/case/
+  whitespace targets, explicit Arabic/English overrides, no-DAC English ID lookup
+  with empty cache, initial restoration skip, subsequent restoration, in-memory
+  Arabic translation and English restoration of title/label/grid header/tab text,
+  and opt-out behavior. Tests temporarily set the option in the test process only;
+  no config file, database, application data, or workstation setting was modified.
+- GlobalFuncNSub and Forms built as part of the Accounts Debug graph. Accounts build
+  passed with nine existing Crystal interop warnings and no errors. Live form-open
+  timing, complete translation-mode workflow, security, and rendered Arabic layout
+  are not established by these isolated checks or compilation.
+
+### Deferred application checks
+
+1. With the existing English-original option enabled and translation-initializer
+   mode off, open Pay Element Entry, Employee Entry, and a representative journal
+   against the confirmed test environment. Confirm titles, labels, grid headers,
+   tabs, toolbar text/images, permissions, and dynamic English captions are correct.
+   Compare first/open-again timings under the same workload; do not assume a measured
+   speed increase from the source changes alone.
+2. Switch English to Arabic and back on the same form. Confirm translated captions
+   appear and original English title/labels/tabs/headers/toolbar/images return.
+   Check RTL layout, selected lookup values, numeric/date formatting, and cancel edits.
+3. If supported in an isolated test setup, test English-original option disabled
+   and translation-initializer mode enabled separately. Their existing translation/
+   maintenance behavior should remain. Do not enable translation-initializer mode
+   against production just for testing; it can maintain translation database rows.
+4. Exercise an existing explicit-Arabic caption request while UI language is English.
+   Confirm it receives Arabic. Check ordinary English captions remain original text.
+5. Record build/commit, environment, culture, options, forms, timings, and results.
+   Journal posting/approval/closed-period/reconciliation protections were not changed;
+   no accounting writes or payroll generation are needed for these display checks.
+
+No SQL source, database contents, or deployment settings changed; no SQL was run.
+No application was launched against a configured database. Nothing was deployed.
+Changes are uncommitted/unpushed. The earlier Summary fix and unrelated outputs/
+content were preserved.
+
+
+## SMOKE-BASE-017: Tree selection preserves record identity
+
+Status: PENDING live reproduction. Recorded 2026-10-24.
+
+To resume, say: **"Resume SMOKE-BASE-017 from docs/Pending-Smoke-Tests.md."**
+Use a confirmed non-production environment and cancel edits. Test English and Arabic RTL.
+
+### Reported symptom, cause, and correction
+
+- In RTL Pay Element Entry, selecting node 9 showed record 51 and returned the tree
+  selection to that record. The shared Presenter handler converted node ID to sorted
+  position, then used RecordPositionNumber's setter to resolve the position back to
+  an ID. BaseDao's position query counts names <= the selected name; equal names
+  can share a position and NULL sort values also do not provide a reliable identity.
+  The user's actual database values were not inspected, so the exact equality/NULL
+  condition behind that screenshot still requires live verification.
+- Presenter.BfTvEntry_AfterSelect now uses e.Node, keeps position as display metadata,
+  and loads TargetIdNo directly from that node's Tag. It does not reverse-resolve a
+  clicked record's identity through an ambiguous sort position. Node text/direction
+  are not parsed for identity. Existing mouse/keyboard action filtering, root behavior,
+  change-record events, and edit/add BeforeSelect guard remain in place.
+- This applies to active tree forms inheriting this Presenter chain, including Pay
+  Element Entry. It does not change PresenterOld, DAO SQL, tree ordering, or generic
+  numeric First/Previous/Next/Last navigation. Deterministic rank/order for duplicate
+  or NULL names remains a separate follow-up; navigator position can still be
+  ambiguous even though the clicked node now supplies the correct record ID.
+- An isolated fake service deliberately returned position 45 and reverse ID 51.
+  The old assembly reproduced ID 9 loading 51; the corrected assembly loaded the
+  clicked ID and made no reverse-position lookup. Baseline and changed builds each
+  passed 108 assertions across mouse/keyboard, LTR/RTL, IDs 9/51/2, duplicate names,
+  programmatic-selection filtering, root behavior, load counts, and change events.
+  Tests bypassed presenter constructors and overrode data/view updates; no database
+  was accessed and the production application was not launched.
+- Accounts Debug build passed with nine existing Crystal interop warnings and one
+  transient copy-lock retry that recovered. Live mapping, record data, and permission
+  behavior remain unverified by compilation/isolated tests.
+
+### Deferred application checks
+
+1. Reproduce the screenshot in RTL: select Pay Element node 9, then 51, then 9 again.
+   Confirm displayed record ID, code, name, and tree highlight match the clicked node.
+   Repeat via keyboard and English mode, including duplicate/blank translated names.
+2. Switch English/Arabic, repeat selections, and navigate a second tree entry form.
+   Confirm field values, child details, and selected node remain synchronized.
+3. Enter add/edit mode and attempt to select another tree node; verify existing
+   navigation restrictions remain. Cancel edits and repeat normal selection.
+4. Check First/Previous/Next/Last separately, especially records sharing translated
+   names or missing them. Record any wrong rank/skipped record for the separate
+   deterministic-navigator follow-up; this correction only removes ID round-tripping
+   for tree selection. Do not save a record whose displayed ID was not verified.
+5. Record build/commit, environment, selected IDs, language, and actual results.
+
+No SQL source or database changes were made; nothing was deployed, committed, or
+pushed. Earlier pending Summary/English optimizations and unrelated outputs/ remain.
+
+
+## SMOKE-BASE-018: Scoped fast-layout control list
+
+Status: PENDING manual testing. Recorded 2026-10-24.
+
+To resume, say: **"Resume SMOKE-BASE-018 from docs/Pending-Smoke-Tests.md."**
+Use a confirmed non-production environment; cancel edits and check English/Arabic RTL.
+
+### Implemented and checked
+
+- Detailed review found that language switching already collects one control list
+  for its operation. This change avoids a redundant full-list scan in the fast
+  layout path rather than caching a form's control tree across loads or callbacks.
+- BFMain's existing general layout pass collects the five families needed by fast
+  layout (CFlowLayout, ToolStrip, TreeView and subclasses, DataGridView, TableLayoutPanel).
+  The base fast-layout pass reuses that short list. Other controls still receive
+  their original general-layout processing, including numeric alignment and images.
+- The overridable ApplyFastLanguageLayout method still receives the full original
+  list and is called once in the same position. The existing protected LayOutControls
+  entry point is retained. Direct calls and calls with a different list fall back
+  to processing the supplied full list. Fixed/full layout policies retain behavior.
+- The short list is scoped to one layout call; previous state is restored through
+  Finally, including exceptions. Each operation builds candidates afresh, so controls
+  added or removed between operations do not leave a stale lasting cache.
+- The old build passed 74 fixture assertions; the changed build passed 91 including
+  16 identical final-state comparisons across four layout policies, English/Arabic
+  direction, and initial/shown states. Checks covered dynamic controls added/removed
+  between operations, full-list delivery to overrides, once-per-operation hooks,
+  and cleanup/recovery after a deliberately thrown override exception.
+- Across the fixture's six fast-layout operations, second-pass control visits fell
+  from 1,272 to 30 (five relevant controls each). Candidate classification happens
+  inside the existing general pass. This is a scoped fixture count, not a measured
+  percentage improvement in application startup time.
+- Accounts Debug graph built successfully with nine existing Crystal interop warnings
+  and transient copy-lock retries that recovered. Tests created only isolated controls
+  in design-time mode; no production application, services, database, or SQL execution.
+
+### Deferred application checks
+
+1. Open Pay Element Entry and another tree form in English and Arabic RTL. Check
+   flow/table layout, tree direction, grid direction, toolbar, numeric alignment,
+   button images, initial display, and tab changes. Cancel edits.
+2. Switch English/Arabic repeatedly after opening. Verify translation/restoration
+   and direction remain correct and dynamic/conditional controls still appear.
+3. Check Security Group Entry and Disbursement Journal Entry specifically: their
+   existing fast-layout overrides must keep security-grid layout and conditional
+   cheque/open-invoice controls correct. Do not post/save accounting test records.
+4. Compare first and repeated form-open timings under the same environment/workload.
+   Record build/commit, forms, language, control state, environment, and results.
+   Manual startup-speed claims remain pending until measured.
+
+No SQL source/database/deployment changes. Nothing committed, pushed, or deployed.
+Earlier pending Summary/English/tree-selection fixes and unrelated outputs/ remain.
+The duplicate/NULL-name numeric navigator issue remains a separate follow-up.
+
+## SMOKE-BASE-019: Lookup reuse during language refresh
+
+Status: PENDING manual testing. Recorded 2026-10-24.
+
+To resume, say: **"Resume SMOKE-BASE-019 from docs/Pending-Smoke-Tests.md."**
+Use a confirmed non-production environment; cancel edits and check English/Arabic RTL.
+
+### Implemented and checked
+
+- PresenterBase shares identical lookup tasks within one language-refresh operation
+  through the existing plural control/variable data-source helpers. Each consumer
+  receives its own DataTable copy, keeping mutable data and selection state separate.
+- Keys include service, table, resolved fields, filter, sort key, and direction.
+  Different queries remain separate. The scope is discarded in Finally, including
+  failure paths; the next refresh fetches fresh data. Ordinary source loading keeps
+  its existing independent queries. Existing language hooks run in their original order.
+- Language-dependent lookups still reload. Singular MakeVarDataSource, metadata
+  lookups, enum sources, and custom queries outside these helpers are not deduplicated.
+  Benefit depends on identical requests actually occurring within a refresh.
+- Isolated fake-DAO checks: baseline 32 assertions passed; changed build 42 assertions
+  passed. Four identical fixture requests made four reads before and one afterward.
+  Checks covered independent tables and selections, fresh result markers across
+  English/Arabic/English refreshes, hooks, exception cleanup/retry, ordinary loading,
+  and separation by service, table, fields, filter (including null versus empty),
+  sort key, and direction. This is not a measured application startup improvement.
+- Accounts Debug build passed with nine existing Crystal interop warnings and two
+  recovered copy-lock retries. The test harness needed explicit dependency loading;
+  its freshness marker was made explicit because worker-thread culture inheritance
+  differed from the initial fixture assumption. No application or database was opened.
+
+### Deferred application checks
+
+1. Open Pay Element Entry and Employee Entry. Switch English/Arabic/English and
+   verify lookup captions, selected record IDs, child details, and numeric displays.
+2. Where multiple controls use the same lookup, change one selection and confirm
+   other controls keep their own selections. Cancel edits.
+3. Check Cash Receipt and Disbursement/Petty Cash payor/payee type-dependent lists.
+   Confirm their existing language callbacks and filtering still work. Do not post
+   or save accounting test records merely to test lookup display.
+4. After an authorized master-data change in the test environment, refresh language
+   again and confirm the new data appears. Confirm permissions and cancel behavior.
+5. Record environment, build/commit, forms, languages, selected IDs, and timings.
+   Actual form speed and preservation of pre-refresh selections remain manual checks.
+
+No SQL source/database changes. Nothing committed, pushed, or deployed.
+Earlier pending changes and unrelated outputs/ remain preserved.

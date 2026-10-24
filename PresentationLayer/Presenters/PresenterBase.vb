@@ -61,6 +61,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     Private _ea As EventAggregator
     Private _dataErrors As String = ""
     Public Service As Object
+    Private _languageLookupTasks As Dictionary(Of Tuple(Of Object, String, String, String, String, Boolean), Task(Of DataTable))
 
     Public Event AfterDelete(retVal As Integer)
 
@@ -2088,11 +2089,16 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     Public Sub OnPresenterBase_LanguageChangedEventHandler(ByRef eventType As LanguageChanged) Implements ISubscriber(Of LanguageChanged).OnEventHandler
         Dim type As Type = View.GetType
         If type.GetMethod("UpdateViewDisplay") IsNot Nothing Then
-            CreateDataSources()
-            RefreshLanguageDependentDataSources()
-            RefreshLanguageDataSources(type)
-            UpdateViewDisplay()
-            'RaiseEvent LanguageChanged()
+            Dim previousTasks = _languageLookupTasks
+            _languageLookupTasks = New Dictionary(Of Tuple(Of Object, String, String, String, String, Boolean), Task(Of DataTable))
+            Try
+                CreateDataSources()
+                RefreshLanguageDependentDataSources()
+                RefreshLanguageDataSources(type)
+                UpdateViewDisplay()
+            Finally
+                _languageLookupTasks = previousTasks
+            End Try
         End If
         RaiseEvent LanguageChanged()
     End Sub
@@ -2261,7 +2267,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
             If TypeOf dataLookupSpec.PropertyName Is String Then
                 dataLookupSpec.PropertyControl = GetFieldControlName(dataLookupSpec.PropertyName)
             End If
-            Invoker.SetControlProperty(dataLookupSpec.PropertyControl, "DataSource", dataLookupSpec.LookUpTask.Result)
+            Invoker.SetControlProperty(dataLookupSpec.PropertyControl, "DataSource", GetLookupResult(dataLookupSpec))
             Invoker.SetControlProperty(dataLookupSpec.PropertyControl, "DisplayMember", dataLookupSpec.DisplayMember)
             Invoker.SetControlProperty(dataLookupSpec.PropertyControl, "ValueMember", dataLookupSpec.ValueMember)
         Next
@@ -2271,7 +2277,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Dim dataLookupSpecs As List(Of DataLookupSpecs)
         dataLookupSpecs = CreateDataLookups(dataSourceNames)
         For Each dataLookupSpec As DataLookupSpecs In dataLookupSpecs
-            Invoker.SetProperty(Me.View, dataLookupSpec.PropertyName, dataLookupSpec.LookUpTask.Result)
+            Invoker.SetProperty(Me.View, dataLookupSpec.PropertyName, GetLookupResult(dataLookupSpec))
             'Invoker.SetProperty(dataLookupSpec.PropertyControl, "DisplayMember", dataLookupSpec.DisplayMember)
             'Invoker.SetProperty(dataLookupSpec.PropertyControl, "ValueMember", dataLookupSpec.ValueMember)
         Next
@@ -2568,7 +2574,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
             dtl.DisplayMember = item(DisplayMember)
         End If
         ComposeLookupProperties(dtl)
-        dtl.LookUpTask = Task(Of DataTable).Factory.StartNew(Function() LookupDataTableCreator(dtl))
+        dtl.LookUpTask = GetLookupTask(dtl)
         Return dtl
     End Function
 
@@ -2667,6 +2673,27 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Return CultureInfo.CurrentCulture.ToString()
     End Function
 
+
+    Private Function GetLookupTask(dtl As DataLookupSpecs) As Task(Of DataTable)
+        If _languageLookupTasks Is Nothing Then
+            Return Task(Of DataTable).Factory.StartNew(Function() LookupDataTableCreator(dtl))
+        End If
+
+        Dim key = Tuple.Create(Service, dtl.TableName, dtl.LuFields, dtl.Filter, dtl.SortKey, dtl.Ascending)
+        Dim lookupTask As Task(Of DataTable) = Nothing
+        If Not _languageLookupTasks.TryGetValue(key, lookupTask) Then
+            lookupTask = Task(Of DataTable).Factory.StartNew(Function() LookupDataTableCreator(dtl))
+            _languageLookupTasks.Add(key, lookupTask)
+        End If
+        Return lookupTask
+    End Function
+
+    Private Function GetLookupResult(dtl As DataLookupSpecs) As DataTable
+        Dim data = dtl.LookUpTask.Result
+        If _languageLookupTasks Is Nothing OrElse data Is Nothing Then Return data
+        ' Keep independently bound controls from sharing a table/currency manager.
+        Return data.Copy()
+    End Function
 
     Private Function LookupDataTableCreator(dtl As DataLookupSpecs) As DataTable
         Dim cd As New DataCreator(Service)

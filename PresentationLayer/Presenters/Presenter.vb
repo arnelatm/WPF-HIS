@@ -329,16 +329,19 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
                 ' first record will be the one to be shown.
                 Exit Sub
         End Select
+        Dim selectedNode = e.Node
         Dim nTag As Integer
         FormTreeView.ImageIndex = 1
-        If FormTreeView.SelectedNode.Tag Is Nothing Then
+        If selectedNode.Tag Is Nothing Then
             RecordPositionNumber = 1
         Else
-            nTag = FormTreeView.SelectedNode.Tag
-            RecordPositionNumber = GetSortedRecordPosition(nTag)
+            nTag = selectedNode.Tag
+            ' A sorted position is not a unique identity when names compare equal.
+            SetRecordPositionNumberWithoutNavigation(GetSortedRecordPosition(nTag))
+            TargetIdNo = nTag
         End If
-        If Not FormTreeView.SelectedNode.IsVisible Then
-            FormTreeView.SelectedNode.EnsureVisible()
+        If Not selectedNode.IsVisible Then
+            selectedNode.EnsureVisible()
         End If
         RaiseEvent AfterChangeRecord()
     End Sub

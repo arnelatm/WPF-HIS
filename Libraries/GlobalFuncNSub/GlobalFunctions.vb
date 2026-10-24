@@ -651,11 +651,11 @@ Public Module GlobalFunctions
         Else
             targetCulture = pTargetCulture
         End If
-        If targetCulture = GlobalVariables.OriginalAppTextLanguage Or (Strings.Left(textDisplayLanguage, 2) = "en" And GlobalVariables.UseOriginalAppTextLanguageForEnglish) Then
-            Return False
-        Else
-            Return True
-        End If
+        targetCulture = If(targetCulture, String.Empty).Trim()
+        Dim isEnglish = String.Equals(targetCulture, "en", StringComparison.OrdinalIgnoreCase) OrElse
+                        targetCulture.StartsWith("en-", StringComparison.OrdinalIgnoreCase)
+        Return Not (String.Equals(targetCulture, GlobalVariables.OriginalAppTextLanguage, StringComparison.OrdinalIgnoreCase) OrElse
+                    (isEnglish AndAlso GlobalVariables.UseOriginalAppTextLanguageForEnglish))
     End Function
 
     ''' <summary>
